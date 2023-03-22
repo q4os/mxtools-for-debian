@@ -1,2 +1,2 @@
 # mxtools-for-debian
-MX Tools for Debian
+MX tools for Debian is an open source project, that aims to bring MX tools for Debian users.

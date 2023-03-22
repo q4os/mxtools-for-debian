@@ -27,3 +27,5 @@ for SRCDIR1 in * ; do
   cd $MX_BUILD_DIR/$SRCDIR1/
   dpkg-buildpackage -rfakeroot -uc -b 2>&1 | tee $MX_BUILD_DIR/.logs/${SRCDIR1}.log
 done
+mkdir -p $MX_BUILD_DIR/.builtout/
+mv $MX_BUILD_DIR/*.deb $MX_BUILD_DIR/.builtout/
