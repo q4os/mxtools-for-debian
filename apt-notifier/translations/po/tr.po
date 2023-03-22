@@ -1,0 +1,313 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the apt-notifier package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+# Translators:
+# Caner Başaran <basaran.caner@gmail.com>, 2022
+# Butterfly <gokhanlnx@gmail.com>, 2022
+# mahmut özcan <faradundamarti@yandex.com>, 2022
+# e0360fc3c0afcd70e5aed1cfc885bac6, 2022
+# mahmut özcan <mahmutozcan@protonmail.com>, 2022
+# Dolphin Oracle <dolphinoracle@gmail.com>, 2022
+# 
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: apt-notifier\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-01-28 02:38+0100\n"
+"PO-Revision-Date: 2017-05-11 01:14+0000\n"
+"Last-Translator: Dolphin Oracle <dolphinoracle@gmail.com>, 2022\n"
+"Language-Team: Turkish (https://www.transifex.com/anticapitalista/teams/10162/tr/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: tr\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+msgid "$count new updates available"
+msgstr "$adet yeni güncelleme var"
+
+msgid "0 updates available"
+msgstr "0 güncelleme var"
+
+msgid "1 new update available"
+msgstr "1 yeni güncelleme var"
+
+msgid "About"
+msgstr "Hakkında"
+
+msgid "About MX Updater"
+msgstr "MX Güncelleyici Hakkında"
+
+msgid "Auto-update"
+msgstr "Otomatik güncelleme"
+
+msgid "Auto-update dpkg log(s)"
+msgstr "Otomatik güncelleme dpkg günlüğü(leri)"
+
+msgid "Auto-update log(s)"
+msgstr "Otomatik güncelleme günlüğü(leri)"
+
+msgid "Automatically answer 'yes' to all prompts during full/basic upgrade"
+msgstr ""
+"Tam / temel yükseltme sırasında tüm komutlara otomatik olarak 'evet' yanıtı "
+"verin"
+
+msgid "Automatically answer 'yes' to all prompts during upgrade"
+msgstr "Yükseltme sırasında bütün sorulara otomatik olarak 'evet' yanıtı ver"
+
+msgid "Cancel"
+msgstr "İptal"
+
+msgid "Changelog"
+msgstr "Değişim günlüğü"
+
+msgid "Check for Updates"
+msgstr "Güncellemeler için kontrol et"
+
+msgid "Close"
+msgstr "Kapat"
+
+msgid "For a less detailed view see 'Auto-update dpkg log(s)' or 'History'."
+msgstr ""
+"Daha az ayrıntılı görünüm için 'dpkg günlüklerini otomatik güncelleme' veya "
+"'Geçmiş'e bakın."
+
+msgid "Hide until updates available"
+msgstr "Kullanılabilir güncellemelere kadar gizle"
+
+msgid "History"
+msgstr "Geçmiş"
+
+msgid "Icons"
+msgstr "Simgeler"
+
+msgid "Left-click behaviour   (when updates are available)"
+msgstr "Sol tık davranışı   (güncellemeler bulunduğunda)"
+
+msgid "License"
+msgstr "Ruhsat"
+
+msgid "MX Auto-update  --  unattended-upgrades dpkg log viewer"
+msgstr ""
+"MX Otomatik Güncelleme - katılımsız-yükseltme dpkg günlüğü görüntüleyici"
+
+msgid "MX Auto-update  --  unattended-upgrades log viewer"
+msgstr "MX Otomatik Güncelleme - katılımsız-yükseltme günlüğü görüntüleyici"
+
+msgid "MX Package Installer"
+msgstr "MX Paket Kurucusu"
+
+#. The autostart desktop entry name will be shown within the list of autostart
+#. entries.
+#. The desktop entry name will be displayed within the menu.
+msgid "MX Updater"
+msgstr "MX Güncelleyici"
+
+msgid "MX Updater Help"
+msgstr "MX Güncelleyici Yardımı"
+
+msgid "MX Updater preferences"
+msgstr "MX Güncelleyici tercihleri"
+
+msgid "MX Updater--View and Upgrade, previewing: basic upgrade"
+msgstr "MX Güncelleyici--Görünüm ve Yükseltme, önizleme: temel yükseltme"
+
+msgid "MX Updater--View and Upgrade, previewing: full upgrade"
+msgstr "MX Güncelleyici--Görünüm ve Yükseltme, önizleme: tam yükseltme"
+
+msgid "No logs found."
+msgstr "Kayıt bulunamadı."
+
+msgid "No unattended-upgrades dpkg log(s) found."
+msgstr "Katılımsız-yükseltme dpkg günlüğü(leri) bulunamadı."
+
+msgid "No updates available"
+msgstr "Güncelleme yok"
+
+msgid "Other options"
+msgstr "Diğer seçenekler"
+
+msgid "Preferences"
+msgstr "Tercihler"
+
+msgid "Press 'h' for help, 'q' to quit"
+msgstr "Yardım için 'h' ye, çıkmak için 'q' ya basın"
+
+msgid "Quit"
+msgstr "Vazgeç"
+
+msgid "Reload"
+msgstr "Yeniden yükle"
+
+msgid ""
+"Reload the package information to become informed about new, removed or "
+"upgraded software packages. (apt-get update)"
+msgstr ""
+"Yeni, kaldırılmış veya yükseltilmiş yazılım paketleri hakkında bilgi almak "
+"için paket bilgilerini yeniden yükleyin. (apt-get update)"
+
+msgid "Restart MX Updater"
+msgstr "MX Güncelleyiciyi yeniden başlatın"
+
+msgid "Running apt-get autoremove, if you are unsure type 'n'."
+msgstr "apt-get autoremove kullanarak, emin değilseniz 'n' yazın."
+
+msgid ""
+"Switches the type of Upgrade that will be performed, alternating back and "
+"forth between 'full upgrade' and 'basic upgrade'."
+msgstr ""
+"\"Tam yükseltme\" ile \"temel yükseltme\" arasında ileri ve geri dönüşümlü "
+"olarak gerçekleştirilecek yükseltme türünü değiştirir."
+
+msgid "Synaptic Help"
+msgstr "Synaptic Yardımı"
+
+msgid "Tray applet to notify of system and application updates"
+msgstr "Sistem ve uygulama güncellemelerini bildirmek için tepsi uygulaması"
+
+msgid "Unattended-upgrades"
+msgstr "yapılmamış yükseltmeler"
+
+msgid "Unneeded packages are installed that can be removed."
+msgstr "Kurulu gereksiz paketler kaldırılabilir."
+
+msgid "Updates"
+msgstr "Güncellemeler"
+
+msgid "Upgrade mode"
+msgstr "Yükseltme kipi"
+
+msgid "Upgrade using Synaptic"
+msgstr "Synaptic kullanarak yükselt"
+
+msgid "Using basic upgrade (not recommended)"
+msgstr "Temel yükseltme kullanarak (önerilmez)"
+
+msgid "Using full upgrade"
+msgstr "Tam yükseltme kullanarak"
+
+msgid "View and Upgrade"
+msgstr "Göster ve Yükselt"
+
+msgid "You have $count new updates available"
+msgstr "$adet yeni güncellemeniz var"
+
+msgid "You have 1 new update available"
+msgstr "1 yeni güncellemeniz var"
+
+#. TRANSLATORS: Fill in all plural forms. The parenthesized expression '{num}'
+#. is replaced by the actual number of updates available at runtime.
+#. For the singular form, you can replace '{num}' with 'one'.
+#. Example with 2 plural forms:
+#. msgstr[0] -> singular form: use 'one new update' or '{num} new update'.
+#. msgstr[1] -> plural form: use '{num} new updates'.
+#, python-brace-format
+msgid "You have {num} new update available"
+msgid_plural "You have {num} new updates available"
+msgstr[0] "{num} yeni güncellemeniz var"
+msgstr[1] "{num} yeni güncellemeniz var"
+
+msgid "automatically close terminal window when full/basic upgrade complete"
+msgstr ""
+"tam/temel yükseltme tamamlandığında otomatik olarak uçbirim penceresini "
+"kapatır"
+
+msgid "automatically close terminal window when upgrade complete"
+msgstr "Yükseltme tamamlandığında uçbirim penceresini otomatik olarak kapat"
+
+msgid "basic upgrade"
+msgstr "temel yükseltme"
+
+msgid "basic upgrade complete (or was canceled)"
+msgstr "temel yükseltme tamamlandı (veya iptal edildi)"
+
+msgid "check for autoremovable packages after full/basic upgrade"
+msgstr "tam/temel yükseltme sonrası otomatik kaldırılabilir paketleri denetle"
+
+msgid "classic"
+msgstr "klasik"
+
+msgid "full upgrade"
+msgstr "tam yükseltme"
+
+msgid "full upgrade   (recommended)"
+msgstr "tam yükseltme  (önerilir)"
+
+msgid "full upgrade complete (or was canceled)"
+msgstr "tam yükseltme tamamlandı (veya iptal edildi)"
+
+msgid "opens MX Updater 'View and Upgrade' window"
+msgstr "MX Güncelleyici 'Görünüm ve Yükseltme' penceresini açar"
+
+msgid "opens Synaptic"
+msgstr "Synaptic açıyor"
+
+msgid "press any key to close"
+msgstr "kapatmak için herhangi bir tuşa basın"
+
+msgid "press any key to stop automatic closing"
+msgstr "otomatik kapatmayı durdurmak için herhangi bir tuşa basın "
+
+msgid "pulse"
+msgstr "sinyal"
+
+msgid "start MX Updater at login"
+msgstr "girişte MX Updater'ı başlat"
+
+msgid "switch to basic upgrade"
+msgstr "temel yükseltmeye geç"
+
+msgid "switch to full upgrade"
+msgstr "tam yükseltmeye geç"
+
+msgid "this terminal window can now be closed"
+msgstr "bu uçbirim penceresi şimdi kapatılabilir"
+
+msgid "update automatically   (will not add new or remove existing packages)"
+msgstr ""
+"güncelleme otomatik olarak   (yeni eklemeyecek veya mevcut paketleri "
+"kaldırmayacak)"
+
+msgid "upgrade"
+msgstr "yükselt"
+
+msgid "use desktop notifications"
+msgstr "masaüstü bildirimlerini kullanın"
+
+msgid "use transparent interior for no-updates wireframe"
+msgstr "güncelleme yokken içi saydam biçim kullan"
+
+msgid "wireframe"
+msgstr "tel kafes"
+
+#. TRANSLATORS: Fill in all plural forms. The parenthesized expression '{num}'
+#. is replaced by the actual number of updates available at runtime.
+#. For the singular form, you can replace '{num}' with 'one'.
+#. Example with 2 plural forms:
+#. msgstr[0] -> singular form: use 'one new update' or '{num} new update'.
+#. msgstr[1] -> plural form: use '{num} new updates'.
+#, python-brace-format
+msgid "{num} new update available"
+msgid_plural "{num} new updates available"
+msgstr[0] "{num} yeni güncelleme var"
+msgstr[1] "{num} yeni güncelleme var"
+
+#. TRANSLATORS:
+#. This autostart desktop entry comment will be shown within 'Session and
+#. Startup' (Autostart).
+msgid "An applet to show updates"
+msgstr "Güncellemeleri gösteren bir uygulama"
+
+#. TRANSLATORS:
+#. This desktop entry comment will be shown within the menu.
+msgid "Re-enable MX Updater icon even if no updates available"
+msgstr "Güncelleme olmasa bile MX Updater simgesini yeniden etkinleştirin"
+
+msgid "Enable Auto-update"
+msgstr "Otomatik güncellemeyi etkinleştir"
+
+msgid "Disable Auto-update"
+msgstr "Otomatik güncellemeyi devre dışı bırak"

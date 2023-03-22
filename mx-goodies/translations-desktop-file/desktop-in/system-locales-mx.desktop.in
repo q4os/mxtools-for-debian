@@ -1,0 +1,14 @@
+[Desktop Entry]
+Encoding=UTF-8
+# The desktop entry name will be displayed within the menu.
+Name=System Locales
+# # The desktop entry comment will be shown within the menu.
+Comment=Default locale for the system environment
+Exec=su-to-root -X -c system-locales-mx
+Type=Application
+Icon=preferences-desktop-locale
+Path=
+Terminal=false
+NoDisplay=false
+StartupNotify=false
+Categories=XFCE;GTK;Settings;DesktopSettings;X-XFCE-SettingsDialog;X-XFCE-HardwareSettings;MX-Setup

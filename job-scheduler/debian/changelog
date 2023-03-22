@@ -1,0 +1,76 @@
+job-scheduler (0.22.10.01+deb11u13) stable; urgency=medium
+
+  * MX Tools release
+
+ -- Dolphin Oracle <administrator@localdomain>  Wed, 22 Mar 2023 10:43:50 +0100
+
+job-scheduler (0.22.10.01) mx; urgency=medium
+
+  * update translations 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 26 Oct 2022 19:55:12 -0400
+
+job-scheduler (0.22.8.2) mx; urgency=medium
+
+  * Fix: launching documents from Help (fixes a problem in Plasma)
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 22 Aug 2022 21:32:10 -0400
+
+job-scheduler (0.22.8.1) mx; urgency=medium
+
+  * Fix: launching Firefox from Help
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 17 Aug 2022 21:33:28 -0400
+
+job-scheduler (0.22.8) mx; urgency=medium
+
+  * fix typo in install file (locale location)
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 15 Aug 2022 18:53:25 -0400
+
+job-scheduler (0.22.7) mx; urgency=medium
+
+  * translation refresh 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 23 Jul 2022 11:13:35 -0400
+
+job-scheduler (0.22.6) mx; urgency=medium
+
+  * Added launcher for running job-scheduler as root
+  * Remove implicit "menu" dependency
+  * Minor performace improvements
+
+ -- Adrian <adrian@mxlinux.org>  Sat, 18 Jun 2022 02:03:37 -0400
+
+job-scheduler (0.21.7) mx; urgency=medium
+
+  * Update job-scheduler icon
+
+ -- Adrian <adrian@mxlinux.org>  Sun, 25 Jul 2021 11:22:37 -0400
+
+job-scheduler (0.21.4.01) mx; urgency=medium
+
+  * add QCloseEvent declaration (buster and up) 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 18 Apr 2021 19:43:12 -0400
+
+job-scheduler (0.21.2.02) mx; urgency=medium
+
+  * restart with root or regular user
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 10 Feb 2021 01:23:24 -0500
+
+job-scheduler (0.21.2.01) mx; urgency=medium
+
+  * removed "Update" button and update the command list automatically
+  * changed icon order
+  * minor renaming of labels
+  * minor GUI changes
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 04 Feb 2021 15:58:15 -0500
+
+job-scheduler (0.21.2) mx; urgency=medium
+
+  * Initial release 
+
+ -- Adrian <adrian@mxlinux.org>  Tue, 02 Feb 2021 10:53:04 -0500

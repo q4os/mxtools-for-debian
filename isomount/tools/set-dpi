@@ -1,0 +1,23 @@
+#!/bin/bash
+
+dpi=$1
+
+file=${2:-~/Xdefaults}
+
+
+main() {
+
+    test -e "$file" || fatal "Could not find file: $file"
+    test -r "$file" || fatal "Could not read file: $file"
+
+    sed -i -r "s/^(\s*Xft.dpi:\s+).*/\1$dpi/" "$file"
+
+    xrdb -merge "$file"
+}
+
+fatal() {
+    echo "$*" >&2
+    exit 2
+}
+
+main

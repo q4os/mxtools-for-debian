@@ -1,0 +1,31 @@
+Source: disk-manager
+Section: admin
+Priority: optional
+Maintainer: Dolphin Oracle <dolphinoracle@gmail.com>
+Build-Depends: debhelper-compat (= 13),
+               dh-python,
+               python3-setuptools,
+               python3-all,
+               python3-gi,
+               libglib2.0-dev,
+               menu,
+               gettext,
+               intltool,
+               autotools-dev 
+Standards-Version: 4.5.1
+Homepage: https://github.com/MX-Linux/disk-manager
+Rules-Requires-Root: no
+
+Package: disk-manager
+Architecture: all
+Depends: ${python3:Depends}, ${misc:Depends},
+         python3-gi,
+         python3-notify2,
+         menu,
+         dmsetup,
+         ntfs-3g
+Description: simple graphical filesystem configurator
+ Disk Manager is a simple filesystem configurator that allows you to:
+  * Automatically detect new partitions at startup.
+  * Fully manage configuration of filesystem mount options.
+  * Enable/disable write support for NTFS (needs ntfs-3g installed).

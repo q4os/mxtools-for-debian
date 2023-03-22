@@ -1,0 +1,55 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# Translators:
+# anticapitalista <anticapitalista@riseup.net>, 2013,2016-2017
+# anticapitalista <anticapitalista@riseup.net>, 2011
+msgid ""
+msgstr ""
+"Project-Id-Version: antix-development\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-10-27 02:09+0300\n"
+"PO-Revision-Date: 2017-11-13 16:22+0000\n"
+"Last-Translator: anticapitalista <anticapitalista@riseup.net>\n"
+"Language-Team: Greek (http://www.transifex.com/anticapitalista/antix-development/language/el/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: el\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: block-advert.sh:24
+#, sh-format
+msgid ""
+"The <b>$title</b> tool adds stuff to your /etc/hosts file, so \\nthat many "
+"advertising servers and websites will not be able to connect \\nto this "
+"PC.\\n\\nYou can choose one service or combine multiple services for more "
+"advert protection.\\nBlocking ad servers protects your privacy, saves you "
+"bandwidth, greatly \\nimproves web-browsing speed and makes the internet "
+"much less annoying in general.\\n\\nDo you want to proceed?"
+msgstr "Το εργαλείο <b>$title</b> προσθέτει πράγματα στο αρχείο /etc/hosts file, \nέτσι ώστε πολλές διακομιστές διαφημίσεων και ιστοσελίδες δεν θα είναι σε θέση να συνδεθείτε με αυτόν τον υπολογιστή.\n\nΜπορείτε να επιλέξετε μια υπηρεσία ή συνδυάζουν πολλαπλές υπηρεσίες για περισσότερα αγγελία προστασίας.\nΕμποδίζοντας τις διακομιστές διαφημίσεων προστατεύει την ιδιωτικότητα σας, σας εξοικονομεί εύρος ζώνης, βελτιώνει σημαντικά η ταχύτητα και κάνει το Διαδίκτυο πολύ λιγότερο ενοχλητικό.\n\nΘέλετε να συνεχίσετε?"
+
+#: block-advert.sh:81
+msgid "Restoring original /etc/hosts."
+msgstr "Επαναφορά αρχικό /etc/hosts."
+
+#: block-advert.sh:117
+#, sh-format
+msgid "Loading  adlist from $domain"
+msgstr "Φόρτωση adlist από $domain"
+
+#: block-advert.sh:161
+msgid ""
+"Success - your settings have been changed.\\n\\nYour hosts file has been "
+"updated.\\nRestart your browser to see the changes."
+msgstr "Επιτυχία - Οι ρυθμίσεις σας έχουν αλλάξει\\n\\nΤο αρχείο hosts έχει ενημερωθεί.\\nΓια να δείτε τις αλλαγές, επανεκκινήστε περιήγησης "
+
+#: block-advert.sh:182
+msgid "Choose your preferred ad blocking service(s)"
+msgstr "Επιλέξτε την προτιμώμενη υπηρεσία(ες) ad blocking."
+
+#: block-advert.sh:225
+msgid "No item selected"
+msgstr "Δεν έχει επιλεγεί το στοιχείο"

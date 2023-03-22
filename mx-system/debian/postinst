@@ -1,0 +1,83 @@
+#!/bin/sh -e
+
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-remove" ] ; then
+    set +e
+
+    #test for live system, exit if found  (check used below)
+    LIVE_CHECK=$(df -T / |tail -n1 |awk '{print $2}')
+
+    #add a symlink to mx-version called antix-version, because some apps look for info from antix-version
+    if [ -e /etc/mx-version ]; then
+        if [ ! -e /etc/antix-version ]; then
+        ln -frs /etc/mx-version /etc/antix-version
+        fi
+        if [ "$(readlink /etc/antix-version)" = "/etc/mx-version" ]; then
+        ln -frs /etc/mx-version /etc/antix-version
+        fi
+    fi
+
+    #add a sources.list if one doesn't exist
+    if [ ! -e /etc/apt/sources.list ]; then
+        touch /etc/apt/sources.list
+        echo "#this file is empty by default.  Sources are under /etc/apt/souces.list.d" >/etc/apt/sources.list
+    fi
+
+    #make /etc/machine-id from /var/lib/dbus/machine-id if not present
+    if [ ! -e /etc/machine-id ]; then
+        if [ -e /var/lib/dbus/machine-id ]; then
+            cp /var/lib/dbus/machine-id /etc/machine-id
+        fi
+    fi
+
+#update mx-version to latest for MX19, beta, and RC and later
+    if [ -e /etc/mx-version ]; then
+
+    sed -i s/'patito feo'/'Wildflower'/ /etc/mx-version
+    sed -i s/"MX-19".*"_"/"MX-21_"/ /etc/mx-version
+    #handle update from beta and rc users
+    sed -i s/_beta.*_/_/ /etc/mx-version
+    sed -i s/_RC.*_/_/ /etc/mx-version
+    sed -i s/_rc.*_/_/ /etc/mx-version
+    sed -i s/MX-21_/MX-21.1_/ /etc/mx-version
+    #21 to 21.1
+    sed -i s/MX-21_/MX-21.1_/ /etc/mx-version
+    #21.1 to 21.2
+    sed -i s/MX-21.1_/MX-21.2_/ /etc/mx-version
+    #21.2 to 21.2.1
+    sed -i s/MX-21.2_/MX-21.2.1_/ /etc/mx-version
+    fi
+    
+    ##add vmd to /etc/initramfs-tools/modules if its not already there
+    VMD_CHECK=$(sed '/\<vmd\>/!d' /etc/initramfs-tools/modules)
+    if [ ! -n "$VMD_CHECK" ]; then
+        echo "adding vmd modules to /etc/initramfs-tools/modules"
+        echo "vmd" >> /etc/initramfs-tools/modules
+    fi
+
+    #reconfigure debconf with DEBIAN_FRONTEND to Gnome for graphical dpkg use when X available
+    #use debconf-kde-helper with KDE
+    #will default back to dialog if X not available
+    #on default MX KDE iso, check for debconf-kde-helper
+    if [ ! -e /etc/mxsystem_frontend.chk ]; then
+        if dpkg -l | grep -q debconf-kde-helper; then
+            echo 'debconf debconf/frontend select Kde'   | debconf-set-selections
+        fi
+        touch /etc/mxsystem_frontend.chk
+    fi
+
+     #add legacy libsane folders
+
+    if [ ! -e /lib/sane ]; then
+        mkdir -p /usr/lib/sane
+    fi
+
+    if [ "$(dpkg --print-architecture)" = "amd64" ]; then
+        if [ ! -e /usr/lib64/sane ]; then
+        mkdir -p /usr/lib64/sane
+        fi
+    fi
+
+    set -e
+fi
+
+#DEBHELPER#

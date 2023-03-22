@@ -1,0 +1,12 @@
+[Desktop Entry]
+Comment=MX KDE Dark Defaults
+Name=MX-Dark
+X-KDE-PluginInfo-Author=dolphinoracle
+X-KDE-PluginInfo-Category=Plasma Look And Feel
+X-KDE-PluginInfo-Email=dolphinoracle@gmail.com
+X-KDE-PluginInfo-EnabledByDefault=true
+X-KDE-PluginInfo-License=LGPL 2.1+
+X-KDE-PluginInfo-Name=org.mxlinux.mxdark.desktop
+X-KDE-PluginInfo-Version=0.1
+X-KDE-PluginInfo-Website=https://mxlinux.org
+X-KDE-ServiceTypes=Plasma/LookAndFeel

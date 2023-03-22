@@ -1,0 +1,16 @@
+#!/bin/sh -e
+
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-remove" ] ; then
+    
+    #don't do anything if update-rc.d is not present
+    if [ -x /usr/sbin/update-rc.d ]; then
+       
+		# mount efivars if needed
+        if [ -x /etc/init.d/efimount ]; then
+           update-rc.d efimount defaults || :
+           /etc/init.d/efimount          || :
+        fi
+	fi
+fi
+
+#DEBHELPER#

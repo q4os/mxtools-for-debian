@@ -1,0 +1,27 @@
+2015 May 27
+ - Don't intend to keep updating this CHANGELOG, see debian/changelog for
+   changes.
+
+2013 May 25
+ - Adjusted keyserver list to minimize timeouts from a formerly fast server.
+ - Removed the segment which filtered out of the unsigned
+   MEPIS Community Repositories as the ones for MEPIS 12 are signed.
+
+2009 Aug 4
+ - Added a configuration file - /etc/checkaptgpg.conf
+   - CRONJOB_ENABLED - If this is not set to yes, then the default 
+       weekly cronjob will not run.
+   - KEYSERVER - specifies the keyserver to use to download GPG keys 
+       from.
+ - Added two command line options:
+   --wait-at-end : causes the program to sleep for 10 seconds at the end 
+       before terminating. It is intended to be used when called from 
+       the menu system.
+   --cronjob : tells the program that it is being run from a cronjob. It 
+       will parse the contents of /etc/checkaptgpg.conf and only 
+       continue to run if CRONJOB_ENABLED=yes.
+
+2009 Aug 3
+ - Added colourisation when using BASH. DASH seems to be incapable of 
+   supporting colour. BASH is detected by looking for the $BASH 
+   environment variable.

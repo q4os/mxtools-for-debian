@@ -1,0 +1,925 @@
+#!/bin/bash
+
+ME=${0##*/}
+
+ZDIR=/usr/share/zoneinfo
+SDIR=/etc/apt/sources.list.d
+
+MIRROR_PREFIXES="au1 au2 at be bg br ca ch cn cz de dk ec es fr gb ge gr hk hu id in it jp ke kz la lt my nl ny nz ph pk pl ru se sg si sk th tr tw ua ut uy vn za"
+HOST_PREFIXES="$MIRROR_PREFIXES old_us"
+HOST_TYPES="AX MX"
+US_HOST_LIST="la ut ny"
+
+au1_AX_HOST=http://mirror.datamossa.io/mxlinux/antix
+au1_MX_HOST=http://mirror.datamossa.io/mxlinux/mx
+au1_LOCATION="Melbourne"
+
+au2_AX_HOST=http://mirror.datamossa.io/mxlinux/antix
+au2_MX_HOST=http://mirror.datamossa.io/mxlinux/mx
+au2_LOCATION="Tasmania"
+
+at_AX_HOST=http://mirror.easyname.ch/mxlinux-packages/antix
+at_MX_HOST=http://mirror.easyname.ch/mxlinux-packages/mx
+at_LOCATION="Vienna"
+
+be_AX_HOST=http://mirror.tiguinet.net/mx/packages/antix
+be_MX_HOST=http://mirror.tiguinet.net/mx/packages/mx
+be_LOCATION="Brussels"
+
+bg_AX_HOST=https://mirrors.netix.net/mx/MX-Packages/antix
+bg_MX_HOST=https://mirrors.netix.net/mx/MX-Packages/mx
+bg_LOCATION="Sofia"
+
+br_AX_HOST=http://mirror.ufam.edu.br/mx/antix
+br_MX_HOST=http://mirror.ufam.edu.br/mx/mx
+br_LOCATION="Manaus"
+
+ca_AX_HOST=http://mirror.its.dal.ca/mxlinux/antix
+ca_MX_HOST=http://mirror.its.dal.ca/mxlinux/mx
+ca_LOCATION="Halifax"
+
+ch_AX_HOST=http://mirror.easyname.ch/mxlinux-packages/antix
+ch_MX_HOST=http://mirror.easyname.ch/mxlinux-packages/mx
+ch_LOCATION="Zurich"
+
+cn_AX_HOST=https://mirrors.tuna.tsinghua.edu.cn/mxlinux/antix
+cn_MX_HOST=https://mirrors.tuna.tsinghua.edu.cn/mxlinux/mx
+cn_LOCATION="Beijing"
+
+cz_AX_HOST=http://mirror.karneval.cz/pub/linux/mxlinux-packages/antix
+cz_MX_HOST=http://mirror.karneval.cz/pub/linux/mxlinux-packages/mxlinux/mx
+cz_LOCATION="Prague"
+
+de_AX_HOST=http://ftp.halifax.rwth-aachen.de/mxlinux/packages/antix
+de_MX_HOST=http://ftp.halifax.rwth-aachen.de/mxlinux/packages/mx
+de_LOCATION="Germany"
+
+dk_AX_HOST=http://mirrors.dotsrc.org/mx-packages/antix
+dk_MX_HOST=http://mirrors.dotsrc.org/mx-packages/mx
+dk_LOCATION="Denmark"
+
+ec_AX_HOST=http://mirror.cedia.org.ec/mx-workspace/antix
+ec_MX_HOST=http://mirror.cedia.org.ec/mx-workspace/mx
+ec_LOCATION="Ecuador"
+
+es_AX_HOST=http://ftp.cica.es/mirrors/Linux/MX-Packages/antix
+es_MX_HOST=http://ftp.cica.es/mirrors/Linux/MX-Packages/mx
+es_LOCATION="Spain"
+
+fr_AX_HOST=http://ftp.lip6.fr/pub/linux/distributions/mxlinux/packages/antix
+fr_MX_HOST=http://ftp.lip6.fr/pub/linux/distributions/mxlinux/packages/mx
+fr_LOCATION="France"
+
+gb_AX_HOST=http://mxlinux.mirrors.uk2.net/packages/antix
+gb_MX_HOST=http://mxlinux.mirrors.uk2.net/packages/mx
+gb_LOCATION="United Kingdom"
+
+ge_AX_HOST=https://mxlinux.grena.ge/mxlinux/antix
+ge_MX_HOST=https://mxlinux.grena.ge/mxlinux/mx
+ge_LOCATION="Georgia" 
+
+gr_AX_HOST=http://ftp.cc.uoc.gr/mirrors/linux/mx/antix
+gr_MX_HOST=http://ftp.cc.uoc.gr/mirrors/linux/mx/mx
+gr_LOCATION="Greece"
+
+hk_AX_HOST=https://mirror-hk.koddos.net/mxlinux/antix
+hk_MX_HOST=https://mirror-hk.koddos.net/mxlinux/mx
+hk_LOCATION="Hong Kong"
+
+hu_AX_HOST=https://quantum-mirror.hu/mirrors/pub/mx-linux/packages/antix
+hu_MX_HOST=https://quantum-mirror.hu/mirrors/pub/mx-linux/packages/mx
+hu_LOCATION="Hungary"
+
+id_AX_HOST=http://kartolo.sby.datautama.net.id/mx-packages/antix
+id_MX_HOST=http://kartolo.sby.datautama.net.id/mx-packages/mx
+id_LOCATION="Indonesia"
+
+in_AX_HOST=http://mx-pkg.mirror.net.in/MX-Linux/antix
+in_MX_HOST=http://mx-pkg.mirror.net.in/MX-Linux/mx
+in_LOCATION="India"
+
+it_AX_HOST=http://it.mxrepo.com/antix
+it_MX_HOST=http://it.mxrepo.com/mx
+it_LOCATION="Italy"
+
+jp_AX_HOST=https://ftp.yz.yamagata-u.ac.jp/pub/Linux/MX-Linux-Packages/antix
+jp_MX_HOST=https://ftp.yz.yamagata-u.ac.jp/pub/Linux/MX-Linux-Packages/mx
+jp_LOCATION="Japan"
+
+ke_AX_HOST=https://mirror.liquidtelecom.com/mxlinux/packages/antix
+ke_MX_HOST=https://mirror.liquidtelecom.com/mxlinux/packages/mx
+ke_LOCATION="Kenya"
+
+kz_AX_HOST=https://mirror.ps.kz/mx/packages/antix
+kz_MX_HOST=https://mirror.ps.kz/mx/packages/mx
+kz_LOCATION="Kazakhstan"
+
+la_AX_HOST=http://la.mxrepo.com/antix
+la_MX_HOST=http://la.mxrepo.com/mx
+la_LOCATION="Los Angeles, USA"
+
+lt_AX_HOST=http://mirror.vpsnet.com/workspace/antix
+lt_MX_HOST=http://mirror.vpsnet.com/workspace/mx
+lt_LOCATION="Lithuania"
+
+my_AX_HOST=https://mirror.jingk.ai/mxlinux/mx-packages
+my_MX_HOST=https://mirror.jingk.ai/mxlinux/mx-packages
+my_LOCATION="Malaysia"
+
+nl_AX_HOST=http://nl.mxrepo.com/antix
+nl_MX_HOST=http://nl.mxrepo.com/mx
+nl_LOCATION="The Netherlands"
+
+ny_AX_HOST=http://mirrors.rit.edu/mxlinux/mx-packages/antix
+ny_MX_HOST=http://mirrors.rit.edu/mxlinux/mx-packages/mx
+ny_LOCATION="United States, Rochester NY"
+
+nz_AX_HOST=http://mx.debian.nz/antix
+nz_MX_HOST=http://mx.debian.nz/mx
+nz_LOCATION="New Zealand"
+
+#nz_AX_HOST=http://mirror.datamossa.io/mxlinux/antix
+#nz_MX_HOST=http://mirror.datamossa.io/mxlinux/mx
+#nz_LOCATION="New Zealand"
+
+ph_AX_HOST=http://mirror.rise.ph/mxlinux-pkg/antix
+ph_MX_HOST=http://mirror.rise.ph/mxlinux-pkg/mx
+ph_LOCATION="Phillipines"
+
+pk_AX_HOST=http://mx-pkg.mirror.net.in/MX-Linux/antix
+pk_MX_HOST=http://mx-pkg.mirror.net.in/MX-Linux/mx
+pk_LOCATION="Pakistan"
+
+pl_AX_HOST=http://ftp.icm.edu.pl/pub/Linux/dist/antix-workspace/antix
+pl_MX_HOST=http://ftp.icm.edu.pl/pub/Linux/dist/antix-workspace/mx
+pl_LOCATION="Poland"
+
+ru_AX_HOST=http://mirror.truenetwork.ru/mxlinux/antix
+ru_MX_HOST=http://mirror.truenetwork.ru/mxlinux/mx
+ru_LOCATION="Russia"
+
+se_AX_HOST=http://ftp.acc.umu.se/mirror/mxlinux.org/packages/antix
+se_MX_HOST=http://ftp.acc.umu.se/mirror/mxlinux.org/packages/mx
+se_LOCATION="Sweden"
+
+sg_AX_HOST=https://mirror.jingk.ai/mxlinux/mx-packages/antix
+sg_MX_HOST=https://mirror.jingk.ai/mxlinux/mx-packages/mx
+sg_LOCATION="Singapore"
+
+si_AX_HOST=https://ftp.arnes.si/mirrors/mxlinux/packages/antix
+si_MX_HOST=https://ftp.arnes.si/mirrors/mxlinux/packages/mx
+si_LOCATION="Slovenia"
+
+sk_AX_HOST=http://tux.rainside.sk/mxlinux/antix
+sk_MX_HOST=http://tux.rainside.sk/mxlinux/mx
+sk_LOCATION="Slovakia"
+
+th_AX_HOST=https://mirror.kku.ac.th/mx-packages/antix
+th_MX_HOST=https://mirror.kku.ac.th/mx-packages/mx
+th_LOCATION="Thailand"
+
+tr_AX_HOST=http://ftp.linux.org.tr/mx/repo/antix
+tr_MX_HOST=http://ftp.linux.org.tr/mx/repo/mx
+tr_LOCATION="Turkey"
+
+tw_AX_HOST=https://mxlinux.cs.nycu.edu.tw/mx-workspace/antix
+tw_MX_HOST=https://mxlinux.cs.nycu.edu.tw/mx-workspace/mx
+tw_LOCATION="Taiwan"
+
+ua_AX_HOST=https://fastmirror.pp.ua/mxlinux/antix
+ua_MX_HOST=https://fastmirror.pp.ua/mxlinux/mx
+ua_LOCATION="Ukraine"
+
+ut_AX_HOST=http://la.mxrepo.com/antix
+ut_MX_HOST=http://mxrepo.com/mx
+ut_LOCATION="Utah, USA"
+
+uy_AX_HOST=https://espejito.fder.edu.uy/mxlinux/packages/antix
+uy_MX_HOST=https://espejito.fder.edu.uy/mxlinux/packages/mx
+uy_LOCATION="Uruguay"
+
+vn_AX_HOST=https://mirror.kku.ac.th/mx-packages/antix
+vn_MX_HOST=https://mirror.kku.ac.th/mx-packages/mx
+vn_LOCATION="Vietnam"
+
+za_AX_HOST=https://ftp.saix.net/pub/linux/distributions/mxlinux/antix
+za_MX_HOST=https://ftp.saix.net/pub/linux/distributions/mxlinux/mx
+za_LOCATION="South_Africa"
+
+old_us_AX_HOST=http://repo.antixlinux.com
+old_us_MX_HOST=http://main.mepis-deb.org/mx
+
+usage() {
+    local ret=${1:-0}
+    cat<<Usage
+Usage: $me [options] <timezone|country-code|"default">
+
+Update the mirrors in the *.list files under $SDIR/
+with the closest mirrors based on timezone city or two-letter
+country code.  If "default" is given then use the timezone
+in the /etc/timezone file.
+
+Options:
+    -c --codes          Only display codes for the servers that would
+                        be used for the given timezone
+    -d --dir=<dir>      Use <dir> instead of $SDIR
+    -h --help           Show this help
+    -H --hosts          Only show the hosts that would be used for the
+                        given timezone
+    -i --ignore=<list>  Comma delimited list of MX/antiX mirrors to ignore
+                        Codes: $MIRROR_PREFIXES
+    -L --list           List all the mirror locations
+    -p --pretend        Don't do anything just show what would be done
+    -r --random         When a US city is closest, use any US mirror at random
+    -q --quiet          Print less
+    -v --verbose        Print more
+Usage
+
+    exit $ret
+}
+
+main() {
+    local param val short_stack="cdhHiLpqrv"
+    while [ $# -gt 0 -a -n "$1" -a -z "${1##-*}" ]; do
+        param=${1#-}
+        shift
+
+        case $param in
+            [$short_stack][$short_stack]*)
+                if [ -z "${param//[$short_stack]/}" ]; then
+                    set -- $(echo $param | sed -r 's/([a-zA-Z])/ -\1 /g') "$@"
+                    continue
+                fi;;
+        esac
+
+        case $param in
+          -dir|-ignore|[di]) [ $# -lt 1 ] && fatal "Expected a parameter after: -$param"
+                    val=$1
+                    [ -n "$val" -a -z "${val##-*}" ] \
+                        && fatal "Suspicious parameter after -$param: $val"
+
+                    shift           ;;
+              *=*)  val=${param#*=} ;;
+                *)  val="???"       ;;
+        esac
+
+        case $param in
+          -ignore|i) IGNORE=$val                       ;;
+      -ignore=*|i=*) IGNORE=$val                       ;;
+           -codes|c) CODES_ONLY=true                   ;;
+         -dir=*|d=*) SDIR=$val                         ;;
+             -dir|d) SDIR=$val                         ;;
+            -help|h) usage                             ;;
+           -hosts|H) HOSTS_ONLY=true                   ;;
+            -list|L) LIST_MIRRORS=true                 ;;
+         -pretend|p) PRETEND=true                      ;;
+           -quiet|q) QUIET=true                        ;;
+          -random|r) RANDOMIZE=true                    ;;
+         -verbose|v) VERBOSE=true                      ;;
+                  *) fatal "Unknown argument: -$param" ;;
+        esac
+    done
+
+    if [ "$LIST_MIRRORS" ]; then
+        if [ "$VERBOSE" ]; then
+            list_mirrors
+        else
+            list_mirror_codes
+        fi
+        exit 0
+    fi
+
+    [ $# -lt 1 ] && usage
+    [ $# -gt 1 ] && fatal "Only expected one command line argument"
+
+    local tz=$1
+
+    case $tz in
+        */UTC) not_setting $tz ;;
+    esac
+
+    local tz_file=/etc/timezone
+    if [ "$tz" = "default" ]; then
+        test -r $tz_file || fatal "Could not find file $tz_file"
+        read tz 2>/dev/null <$tz_file
+        vsay "Current timezone: $tz"
+    fi
+
+    [ ${#tz} -lt 1 ] && fatal "Timezone or country code too short: $tz"
+
+    case $tz in
+        [a-zA-Z][a-zA-Z]) country_code_to_timezone $tz
+                          tz=$NEW_TZ ;;
+    esac
+
+    local deb_code mx_order
+    get_codes $tz
+
+    vsay "deb mirror: $deb_code"
+    [ ${#deb_code} -eq 0 ] && fatal "No country code found for timezone: $tz"
+    [ ${#mx_order} -eq 0 ] && fatal "No MX/antiX mirrors found for timezone: $tz"
+
+    [ "$CODES_ONLY" ] && echo -e "MX/aX code: $mx_order\n  Deb code: $deb_code"
+
+    if [ ${#IGNORE} -gt 0 ]; then
+        bl_regex=${IGNORE//,/|}
+        # Remove blacklisted codes and leading commas
+        mx_order=$(echo $mx_order         | sed -r -e "s/\<($bl_regex)\>//g" -e "s/^,+//" )
+        US_HOST_LIST=$(echo $US_HOST_LIST | sed -r -e "s/\<($bl_regex)\>//g" -e "s/^,+//" )
+    fi
+
+    # Remove the first comma and everything after it
+    local mx_code=${mx_order%%,*}
+
+    if [ "$RANDOMIZE" ]; then
+        case $mx_code in 
+            la|ut) mx_code=$(random_element $US_HOST_LIST) ;;
+        esac
+    fi
+
+    if [ "$HOSTS_ONLY" ]; then
+        local type host
+        for type in $HOST_TYPES; do
+            eval host=\$${mx_code}_${type}_HOST
+            echo " $type: $host"
+        done
+        echo "deb: ftp.$deb_code.debian.org/debian"
+    fi
+
+    [ -n "$CODES_ONLY" -o -n "$HOSTS_ONLY" ] && exit 0
+
+
+    # Only update if the mirror is different from the one we want
+    SED_EXPR="-e /ftp\.$deb_code\.debian\.org/!s=(http://ftp\.)[a-z][a-z](\.debian.org/debian/)=\1$deb_code\2="
+    SED_EXPR_P="${SED_EXPR}p"
+
+    assign_exprs $mx_code
+
+    [ -d "$SDIR" ] || fatal "'$SDIR' is not a directory"
+
+    local file fcnt=0
+    for file in $(find $SDIR -maxdepth 1 -name "*.list"); do
+
+        # Use diff to see if there would be any change to the file
+        local diff=$(sed -r $SED_EXPR $file | diff -q $file -)
+        [ "$diff" ] || continue
+
+        fcnt=$((fnct + 1))
+        if [ "$PRETEND" -o "$VERBOSE" ]; then
+            echo "File: $(basename $file)"
+            sed -n -r $SED_EXPR_P $file
+        fi
+
+        [ "$PRETEND" ] && continue
+
+        [ -z "$VERBOSE" ] && qsay "File: $(basename $file)"
+        sed -i -r $SED_EXPR $file
+    done
+}
+
+# Add "-e $REGEX" and add "-e ${REGEX}p" to SED_EXPR and SED_EXPR_P.
+# Totally data-driven.  Add more mirror sets and/or more mirrors by merely
+# adding (and adding to) variables.  Relies on no spaces or tabs in the
+# hostnames.  If this is violated then we could migrate to Bash lists.
+
+assign_exprs() {
+    local prefix=$1  type host
+    for type in $HOST_TYPES; do
+        eval host=\$${prefix}_${type}_HOST
+        local oprefix ohost_list= ohost
+        for oprefix in $HOST_PREFIXES; do
+            [ "$oprefix" = "$prefix" ] && continue
+            eval ohost=\$${oprefix}_${type}_HOST
+            ohost_list=$ohost_list${ohost_list:+|}$ohost
+        done
+        ohost_list=$(echo $ohost_list | sed 's/\./\\\./g')
+        local sed="s=($ohost_list)/=$host/="
+        #echo SED_$type=$sed
+        SED_EXPR="$SED_EXPR -e $sed"
+        SED_EXPR_P="$SED_EXPR_P -e ${sed}p"
+    done
+}
+# Output one of the input arguments at random
+random_element() {
+    local cnt=$#
+    local rand=$(($RANDOM % cnt))
+    shift $rand
+    echo $1
+}
+
+
+find_zonetab_file() {
+    local z dir=${1:-$ZDIR}
+
+    ZONE_TAB=
+    for z in zone.tab zone1970.tab; do
+        test -r $dir/$z || continue
+        ZONE_TAB=$dir/$z
+        return 0
+    done
+    return 1
+}
+
+country_code_to_timezone() {
+    local ccode=$1
+
+    case $ccode in
+        uk) ccode=gb ;;
+    esac
+
+    find_zonetab_file || fatal "Could not find zone.tab file"
+
+    NEW_TZ=$(ccode_to_tz $ccode)
+    [ -z "$NEW_TZ" ] && fatal "Could not find a timezone for country: $ccode"
+    vsay "Found timezone: $NEW_TZ for country code: $ccode"
+}
+
+ccode_to_tz() {
+    local code=$1
+    cut -s -f1,3 $ZONE_TAB | grep -i "^$code\s" | head -n1 | cut -f2
+}
+
+error() {
+    echo "$ME Error: $*" >&2
+}
+
+fatal() {
+    echo "$ME Fatal Error: $*" >&2
+    exit 5
+}
+
+not_setting() {
+    local tz=$1
+    printf "Not setting repository mirrors based on %s timezone\n"  "$tz"
+    exit 0
+}
+
+vsay() {
+    [ "$VERBOSE" ] || return
+    echo "$*"
+}
+
+qsay() {
+    [ "$QUIET" ] && return
+    echo "$*"
+}
+
+list_mirrors() {
+    local pre ax_host mp_host mx_host location
+    for pre in  $MIRROR_PREFIXES; do
+        eval ax_host=\$${pre}_AX_HOST
+        eval mp_host=\$${pre}_MP_HOST
+        eval mx_host=\$${pre}_MX_HOST
+        eval location=\$${pre}_LOCATION
+
+        cat << List_Mirrors
+    Code: $pre
+Location: $location
+   antiX: $ax_host
+   Mepis: $mp_host
+      MX: $mx_host
+
+List_Mirrors
+    done
+}
+
+list_mirror_codes() {
+    local pre location
+    for pre in  $MIRROR_PREFIXES; do
+        eval location=\$${pre}_LOCATION
+        printf "%2s: %s\n" "$pre" "$location"
+    done
+}
+
+get_codes() {
+    local tz=$1
+    case $tz in
+                       Africa/Dakar) deb_code=pt ; mx_order=es,it,fr,ch,gb,be,si,nl,gr,at,cz,sk,hu,bg,de,dk,br,tr,pl,ca,se,lt,ua,ke,ny,ru,ge,za,uy,ec,ut,pk,kz,la,in,th,my,vn,sg,cn,hk,tw,id,jp,ph,au2,au1,nz ;;
+                      Africa/Banjul) deb_code=pt ; mx_order=es,it,fr,ch,gb,be,si,nl,gr,at,cz,sk,bg,hu,de,br,dk,tr,pl,ca,lt,se,ua,ke,ny,za,ru,ge,uy,ec,pk,ut,kz,la,in,th,my,vn,sg,cn,hk,id,tw,jp,ph,au2,au1,nz ;;
+                  Africa/Nouakchott) deb_code=pt ; mx_order=es,it,fr,ch,gb,be,si,nl,gr,at,cz,sk,hu,bg,de,dk,tr,pl,ca,se,lt,ua,br,ru,ny,ke,ge,za,uy,ec,pk,ut,kz,la,in,th,my,cn,vn,hk,sg,tw,jp,id,ph,au2,au1,nz ;;
+                      Africa/Bissau) deb_code=pt ; mx_order=es,it,fr,ch,gb,be,si,gr,nl,at,sk,bg,cz,hu,br,de,tr,dk,pl,ca,ke,lt,ua,se,za,ny,ge,ru,uy,ec,pk,ut,kz,la,in,th,my,sg,vn,hk,cn,id,tw,jp,ph,au2,au1,nz ;;
+                     Africa/Conakry) deb_code=br ; mx_order=es,it,fr,ch,gb,gr,be,si,nl,br,bg,at,sk,cz,hu,de,tr,dk,ke,pl,za,lt,ua,se,ca,uy,ge,ru,ny,ec,pk,kz,ut,la,in,th,my,sg,vn,hk,id,cn,tw,jp,ph,au2,au1,nz ;;
+                    Africa/Freetown) deb_code=br ; mx_order=es,it,fr,ch,gr,gb,si,be,br,nl,bg,at,sk,cz,hu,de,tr,ke,dk,pl,za,ua,lt,se,ca,uy,ge,ru,ny,ec,pk,kz,ut,in,la,th,my,sg,vn,hk,id,cn,tw,ph,jp,au2,au1,nz ;;
+                    Africa/El_Aaiun) deb_code=pt ; mx_order=es,fr,it,gb,ch,be,nl,si,at,cz,sk,de,hu,gr,bg,dk,pl,tr,se,lt,ua,ca,ru,ge,ny,ke,br,za,ec,pk,kz,uy,ut,la,in,th,cn,hk,my,vn,tw,jp,sg,id,ph,au2,au1,nz ;;
+                    Africa/Monrovia) deb_code=br ; mx_order=es,it,fr,gr,ch,si,br,gb,be,bg,ke,nl,at,sk,hu,cz,tr,za,de,dk,pl,ua,lt,se,uy,ca,ge,ru,ny,ec,pk,kz,ut,in,la,th,my,sg,vn,id,hk,cn,tw,ph,jp,au2,au1,nz ;;
+                      Africa/Bamako) deb_code=pt ; mx_order=es,it,fr,ch,gr,si,be,gb,bg,at,nl,sk,hu,cz,tr,de,dk,pl,ke,ua,lt,se,br,za,ge,ru,ca,ny,uy,pk,ec,kz,ut,in,la,th,my,sg,vn,hk,cn,id,tw,ph,jp,au2,au1,nz ;;
+                  Africa/Casablanca) deb_code=pt ; mx_order=es,fr,it,ch,gb,be,nl,si,at,cz,sk,de,hu,gr,bg,dk,pl,tr,se,lt,ua,ru,ge,ca,ny,ke,kz,pk,br,za,ut,ec,uy,in,la,th,cn,hk,vn,my,tw,jp,sg,ph,id,au1,au2,nz ;;
+                       Africa/Ceuta) deb_code=pt ; mx_order=es,fr,it,ch,gb,be,si,nl,at,cz,sk,de,hu,bg,gr,dk,pl,tr,se,lt,ua,ru,ge,ca,ny,ke,kz,pk,za,br,ut,ec,in,uy,la,th,cn,hk,vn,tw,my,jp,sg,ph,id,au1,au2,nz ;;
+                     Africa/Abidjan) deb_code=br ; mx_order=es,it,gr,ke,ch,fr,si,za,bg,be,tr,gb,at,sk,hu,cz,nl,de,br,pl,dk,ua,lt,ge,se,ru,uy,ca,pk,ny,ec,kz,in,ut,th,my,la,sg,vn,id,hk,cn,tw,ph,jp,au2,au1,nz ;;
+                 Africa/Ouagadougou) deb_code=pt ; mx_order=es,it,gr,ch,si,fr,bg,be,at,tr,sk,hu,gb,ke,cz,nl,de,pl,dk,ua,lt,za,se,ge,ru,br,ca,pk,ny,uy,kz,ec,in,ut,th,my,sg,la,vn,hk,id,cn,tw,ph,jp,au2,au1,nz ;;
+                       Africa/Accra) deb_code=pt ; mx_order=es,ke,it,gr,za,bg,ch,si,fr,tr,at,hu,sk,be,gb,cz,nl,de,pl,dk,ua,lt,br,ge,se,ru,uy,pk,ca,ny,kz,ec,in,ut,th,my,sg,vn,id,la,hk,cn,tw,ph,jp,au2,au1,nz ;;
+                        Africa/Lome) deb_code=pt ; mx_order=es,ke,it,gr,bg,za,si,ch,fr,tr,at,hu,sk,be,gb,cz,nl,de,pl,dk,ua,lt,ge,se,br,ru,pk,uy,ca,ny,kz,ec,in,th,ut,my,sg,vn,id,hk,la,cn,tw,ph,jp,au2,au1,nz ;;
+                      Africa/Niamey) deb_code=pt ; mx_order=es,it,gr,si,ch,bg,fr,tr,at,hu,sk,ke,be,gb,cz,nl,de,pl,dk,ua,lt,ge,za,se,ru,br,pk,ca,kz,ny,uy,in,ec,ut,th,my,sg,vn,hk,id,la,cn,tw,ph,jp,au2,au1,nz ;;
+                       Africa/Porto) deb_code=pt ; mx_order=es,ke,it,gr,bg,za,si,ch,tr,fr,hu,at,sk,be,cz,gb,nl,de,pl,dk,ua,ge,lt,se,br,ru,pk,ca,uy,kz,ny,ec,in,th,my,ut,sg,vn,id,hk,cn,la,tw,ph,jp,au2,au1,nz ;;
+                     Africa/Algiers) deb_code=es ; mx_order=es,it,ch,fr,si,be,gb,at,sk,nl,cz,hu,gr,bg,de,dk,pl,tr,lt,ua,se,ru,ge,ke,ca,kz,pk,ny,za,in,br,ut,ec,th,uy,la,cn,hk,vn,my,tw,jp,sg,ph,id,au1,au2,nz ;;
+                       Africa/Lagos) deb_code=pt ; mx_order=ke,es,it,gr,bg,za,si,ch,tr,fr,hu,at,sk,be,cz,gb,nl,de,pl,ua,dk,ge,lt,se,ru,br,pk,ca,uy,kz,ny,in,ec,th,my,ut,sg,vn,id,hk,cn,la,tw,ph,jp,au2,au1,nz ;;
+                    Africa/Sao_Tome) deb_code=pt ; mx_order=ke,za,gr,es,it,bg,tr,si,ch,hu,fr,at,sk,cz,be,gb,nl,de,pl,ge,ua,dk,lt,br,se,ru,pk,uy,kz,ca,in,ny,ec,th,my,sg,vn,id,ut,hk,cn,tw,ph,la,jp,au2,au1,nz ;;
+                      Africa/Malabo) deb_code=gr ; mx_order=ke,za,gr,it,es,bg,tr,si,ch,hu,at,sk,fr,cz,be,gb,nl,de,pl,ge,ua,dk,lt,se,ru,br,pk,uy,kz,ca,in,ny,ec,th,my,sg,vn,id,hk,ut,cn,tw,ph,la,jp,au2,au1,nz ;;
+                  Africa/Libreville) deb_code=gr ; mx_order=ke,za,gr,it,es,bg,tr,si,ch,hu,at,sk,fr,cz,be,gb,ge,nl,de,pl,ua,dk,lt,br,se,ru,pk,uy,kz,ca,in,ny,ec,th,my,sg,vn,id,hk,ut,cn,tw,ph,la,jp,au2,au1,nz ;;
+                      Africa/Douala) deb_code=gr ; mx_order=ke,za,gr,it,es,bg,tr,si,ch,hu,at,sk,fr,cz,be,gb,nl,de,ge,pl,ua,dk,lt,se,ru,pk,br,kz,uy,ca,in,ny,ec,th,my,sg,vn,id,hk,ut,cn,tw,ph,la,jp,au2,au1,nz ;;
+                       Africa/Tunis) deb_code=it ; mx_order=it,si,gr,ch,es,bg,at,hu,sk,fr,cz,be,tr,de,nl,gb,pl,dk,ua,lt,se,ru,ge,ke,pk,kz,ca,ny,za,in,br,th,ut,cn,hk,vn,my,tw,ec,sg,uy,jp,la,ph,id,au1,au2,nz ;;
+                     Africa/Tripoli) deb_code=it ; mx_order=it,gr,bg,si,tr,ch,es,hu,at,sk,cz,fr,be,de,pl,nl,gb,ua,dk,lt,ge,se,ru,ke,pk,kz,ca,za,in,ny,br,th,hk,my,cn,vn,ut,sg,tw,ec,uy,jp,id,ph,la,au1,au2,nz ;;
+                      Africa/Luanda) deb_code=br ; mx_order=za,ke,gr,it,es,tr,bg,si,ch,hu,at,sk,ge,fr,cz,br,be,ua,de,gb,pl,nl,pk,lt,dk,ru,se,uy,kz,in,ca,my,th,sg,ec,id,ny,vn,hk,ph,cn,tw,au2,au1,ut,jp,nz,la ;;
+                    Africa/Ndjamena) deb_code=gr ; mx_order=ke,gr,it,bg,tr,es,si,hu,ch,sk,at,fr,cz,ge,be,ua,za,de,pl,nl,gb,lt,dk,ru,se,pk,kz,br,in,ca,ny,uy,th,my,sg,vn,id,hk,ec,cn,tw,ph,ut,jp,la,au1,au2,nz ;;
+                 Africa/Brazzaville) deb_code=gr ; mx_order=ke,za,gr,it,tr,bg,es,si,hu,ch,sk,at,ge,fr,cz,be,ua,de,pl,gb,nl,pk,lt,dk,br,ru,se,uy,kz,in,ca,th,my,sg,id,vn,ny,ec,hk,cn,ph,tw,ut,au2,au1,jp,la,nz ;;
+                    Africa/Kinshasa) deb_code=gr ; mx_order=ke,za,gr,it,tr,bg,es,si,hu,ch,sk,at,ge,fr,cz,be,ua,de,pl,gb,nl,pk,lt,dk,br,ru,se,uy,kz,in,ca,th,my,sg,id,vn,ny,ec,hk,cn,ph,tw,ut,au2,au1,jp,la,nz ;;
+                    Africa/Windhoek) deb_code=br ; mx_order=za,ke,br,gr,it,uy,tr,bg,es,pk,si,ge,hu,ch,sk,at,fr,cz,ua,be,pl,de,gb,nl,lt,dk,ru,se,in,kz,my,id,sg,th,vn,ec,ca,au2,au1,hk,ny,ph,tw,cn,nz,ut,jp,la ;;
+                      Africa/Bangui) deb_code=gr ; mx_order=ke,za,gr,it,tr,bg,es,si,hu,ch,sk,at,ge,cz,fr,ua,be,pl,de,nl,gb,lt,pk,dk,ru,se,kz,br,in,uy,ca,th,my,sg,vn,id,ny,hk,ec,cn,tw,ph,ut,jp,au2,au1,la,nz ;;
+                    Africa/Gaborone) deb_code=br ; mx_order=za,ke,gr,pk,br,tr,bg,it,ge,uy,es,si,hu,sk,at,ch,ua,cz,fr,pl,in,be,de,my,nl,lt,gb,id,sg,ru,dk,th,kz,se,vn,au2,au1,hk,ph,ec,tw,ca,cn,nz,ny,jp,ut,la ;;
+                  Africa/Lubumbashi) deb_code=gr ; mx_order=ke,za,gr,tr,pk,bg,it,ge,si,es,hu,sk,at,ch,ua,cz,pl,fr,de,be,lt,nl,gb,ru,dk,in,br,kz,se,my,th,sg,uy,id,vn,hk,ph,tw,ca,cn,au2,au1,ny,ec,jp,nz,ut,la ;;
+                      Africa/Maseru) deb_code=br ; mx_order=za,ke,br,pk,gr,uy,tr,bg,it,ge,es,si,hu,id,my,sk,at,in,ch,sg,ua,cz,fr,pl,th,be,de,lt,nl,gb,ru,kz,dk,vn,se,au2,au1,hk,ph,nz,ec,tw,cn,ca,ny,jp,ut,la ;;
+                Africa/Johannesburg) deb_code=br ; mx_order=za,ke,pk,gr,br,tr,bg,it,ge,uy,es,si,hu,sk,at,ch,in,ua,my,id,cz,sg,fr,pl,be,de,lt,th,nl,gb,ru,kz,dk,vn,se,au2,au1,hk,ph,tw,ec,nz,cn,ca,ny,jp,ut,la ;;
+                      Africa/Lusaka) deb_code=gr ; mx_order=za,ke,gr,pk,tr,bg,ge,it,si,es,hu,sk,at,ch,ua,cz,pl,fr,de,be,lt,in,br,nl,gb,ru,dk,kz,my,se,sg,uy,th,id,vn,hk,ph,tw,au2,au1,cn,ca,ec,ny,nz,jp,ut,la ;;
+                   Africa/Bujumbura) deb_code=gr ; mx_order=ke,za,gr,tr,bg,pk,ge,it,si,hu,sk,at,es,ua,ch,cz,pl,fr,de,lt,be,ru,nl,gb,dk,kz,in,se,my,th,sg,br,id,vn,uy,hk,ph,tw,cn,ca,ny,au1,au2,jp,ec,nz,ut,la ;;
+                      Africa/Kigali) deb_code=gr ; mx_order=ke,za,gr,tr,pk,bg,ge,it,si,hu,sk,at,es,ua,ch,cz,pl,fr,de,lt,be,ru,nl,gb,dk,kz,in,se,th,my,sg,id,vn,br,hk,uy,ph,tw,cn,ca,ny,jp,au1,au2,ec,nz,ut,la ;;
+                      Africa/Harare) deb_code=gr ; mx_order=za,ke,pk,gr,tr,ge,bg,it,si,hu,es,sk,at,ua,ch,in,cz,pl,fr,de,br,be,lt,my,ru,nl,kz,sg,gb,id,dk,th,se,uy,vn,hk,ph,au2,au1,tw,cn,ca,nz,ec,ny,jp,ut,la ;;
+                     Africa/Mbabane) deb_code=gr ; mx_order=za,ke,pk,gr,tr,ge,bg,br,it,uy,in,es,si,my,id,hu,sg,sk,at,ch,ua,cz,th,pl,fr,de,be,lt,kz,vn,nl,ru,gb,dk,se,au2,au1,hk,ph,tw,nz,cn,ec,ca,ny,jp,ut,la ;;
+                       Africa/Cairo) deb_code=gr ; mx_order=gr,tr,bg,ge,it,hu,ua,si,sk,at,pl,cz,ch,lt,ru,de,dk,be,fr,nl,es,se,gb,ke,pk,kz,in,za,th,my,vn,ca,hk,sg,cn,tw,id,ny,ph,jp,br,ut,uy,ec,la,au1,au2,nz ;;
+                        Africa/Juba) deb_code=gr ; mx_order=ke,za,gr,tr,bg,ge,pk,it,hu,si,sk,at,ua,ch,es,cz,pl,de,lt,fr,ru,be,nl,dk,gb,kz,se,in,th,my,sg,vn,id,br,hk,cn,tw,ph,ca,uy,ny,jp,ec,au1,au2,nz,ut,la ;;
+                     Africa/Kampala) deb_code=gr ; mx_order=ke,za,gr,tr,pk,ge,bg,it,si,hu,sk,at,ua,ch,es,cz,pl,de,lt,fr,ru,be,nl,dk,gb,kz,in,se,th,my,sg,id,vn,br,hk,ph,uy,tw,cn,ca,ny,jp,au1,au2,ec,nz,ut,la ;;
+                    Africa/Khartoum) deb_code=gr ; mx_order=ke,gr,tr,ge,bg,it,hu,pk,si,ua,sk,at,ch,cz,pl,lt,es,de,ru,fr,za,be,dk,nl,gb,se,kz,in,th,my,sg,vn,id,hk,cn,tw,ca,ph,br,ny,jp,uy,ec,ut,au1,au2,la,nz ;;
+                      Africa/Maputo) deb_code=gr ; mx_order=za,ke,pk,gr,tr,ge,bg,it,br,in,my,id,si,sg,es,hu,uy,sk,at,ua,ch,th,cz,pl,fr,de,kz,be,lt,vn,ru,nl,gb,dk,se,au2,au1,hk,ph,tw,cn,nz,ec,ca,jp,ny,ut,la ;;
+                    Africa/Blantyre) deb_code=gr ; mx_order=za,ke,pk,gr,tr,ge,bg,it,si,in,hu,sk,at,ua,es,ch,cz,my,pl,sg,kz,fr,de,lt,id,th,ru,be,nl,dk,gb,vn,se,br,uy,hk,ph,tw,cn,au2,au1,nz,ca,jp,ec,ny,ut,la ;;
+                     Africa/Nairobi) deb_code=gr ; mx_order=ke,za,pk,gr,tr,ge,bg,it,hu,si,ua,sk,at,ch,cz,pl,es,in,lt,ru,de,kz,fr,be,nl,dk,gb,se,th,my,sg,id,vn,hk,br,ph,tw,cn,uy,ca,jp,au1,au2,ny,nz,ec,ut,la ;;
+                 Africa/Addis_Ababa) deb_code=am ; mx_order=ke,pk,gr,ge,tr,bg,za,it,hu,ua,si,sk,at,pl,cz,ch,ru,lt,kz,de,es,in,fr,be,dk,nl,se,gb,th,my,sg,vn,id,hk,cn,tw,ph,br,ca,jp,uy,ny,au1,au2,nz,ec,ut,la ;;
+                      Africa/Asmara) deb_code=am ; mx_order=ke,gr,ge,tr,pk,bg,it,ua,hu,si,sk,at,pl,cz,ru,lt,ch,de,za,kz,es,fr,be,dk,nl,se,in,gb,th,my,sg,vn,id,hk,cn,tw,ph,ca,jp,br,ny,uy,au1,au2,ut,ec,nz,la ;;
+               Africa/Dar_es_Salaam) deb_code=gr ; mx_order=ke,za,pk,gr,ge,tr,bg,it,in,hu,si,ua,sk,at,kz,ch,cz,pl,es,ru,lt,de,my,fr,th,be,sg,nl,dk,id,gb,se,vn,hk,br,ph,tw,cn,uy,au1,au2,jp,ca,nz,ny,ec,ut,la ;;
+                    Africa/Djibouti) deb_code=am ; mx_order=ke,pk,ge,gr,tr,bg,za,ua,it,hu,si,sk,kz,at,ru,in,pl,lt,cz,ch,de,es,dk,fr,be,nl,se,gb,th,my,sg,vn,id,hk,cn,tw,ph,jp,ca,br,ny,uy,au1,au2,nz,ut,ec,la ;;
+                   Africa/Mogadishu) deb_code=am ; mx_order=ke,pk,za,ge,gr,tr,bg,in,it,kz,ua,hu,si,sk,at,ru,pl,cz,lt,ch,th,my,de,es,sg,fr,be,dk,nl,se,vn,id,gb,hk,ph,tw,cn,jp,br,au1,au2,uy,ca,nz,ny,ec,ut,la ;;
+                       America/Adak) deb_code=us ; mx_order=jp,la,cn,ut,tw,hk,ph,ny,kz,ca,se,ru,lt,dk,vn,pl,th,ua,de,in,nl,gb,be,cz,sk,at,fr,hu,ge,ch,si,my,sg,nz,bg,tr,pk,it,id,es,gr,au1,ec,au2,ke,br,uy,za ;;
+                       America/Nome) deb_code=us ; mx_order=la,ut,jp,ny,cn,ca,se,ru,dk,tw,lt,kz,nl,de,pl,gb,ua,be,cz,hk,fr,at,sk,hu,ch,si,ph,ge,bg,tr,it,es,in,gr,th,vn,pk,my,sg,ec,id,nz,au1,au2,ke,br,uy,za ;;
+                  America/Anchorage) deb_code=us ; mx_order=la,ut,ny,ca,jp,se,dk,cn,ru,lt,nl,gb,de,be,pl,tw,fr,cz,ua,kz,at,ch,sk,hu,si,hk,es,it,bg,ge,ph,tr,gr,ec,in,vn,th,pk,my,sg,nz,id,au1,au2,br,ke,uy,za ;;
+                    America/Yakutat) deb_code=us ; mx_order=la,ut,ny,ca,jp,se,dk,gb,nl,ru,lt,de,be,pl,fr,cn,cz,ua,ch,at,sk,hu,si,tw,kz,es,it,ec,bg,hk,tr,ge,gr,ph,in,vn,th,pk,my,sg,nz,id,br,au1,uy,au2,ke,za ;;
+                     America/Dawson) deb_code=ca ; mx_order=ut,la,ny,ca,jp,se,dk,gb,nl,ru,lt,de,be,pl,fr,cz,ua,ch,at,cn,sk,hu,si,kz,es,tw,it,bg,ge,tr,hk,gr,ec,ph,in,pk,th,vn,my,sg,nz,id,br,ke,au1,uy,au2,za ;;
+                      America/Sitka) deb_code=us ; mx_order=la,ut,ny,ca,jp,se,dk,gb,nl,ru,be,lt,de,fr,pl,cz,cn,ch,ua,at,sk,hu,si,ec,es,tw,kz,it,bg,tr,ge,hk,gr,ph,in,vn,th,pk,nz,my,sg,br,id,uy,au1,au2,ke,za ;;
+                 America/Whitehorse) deb_code=ca ; mx_order=ut,la,ny,ca,jp,se,dk,gb,nl,ru,lt,be,de,fr,pl,cz,ch,ua,at,sk,cn,hu,si,es,kz,it,tw,bg,ec,tr,ge,gr,hk,ph,in,pk,th,vn,my,sg,nz,id,br,uy,au1,ke,au2,za ;;
+                     America/Juneau) deb_code=us ; mx_order=la,ut,ny,ca,jp,se,dk,gb,nl,be,ru,lt,de,fr,pl,cz,ch,ua,cn,at,sk,hu,si,es,ec,kz,tw,it,bg,tr,ge,hk,gr,ph,in,pk,th,vn,nz,my,sg,br,id,uy,au1,au2,ke,za ;;
+                     America/Inuvik) deb_code=ca ; mx_order=ut,la,ny,ca,se,dk,gb,nl,ru,lt,jp,de,be,pl,fr,cz,ua,ch,at,sk,hu,si,es,kz,cn,it,bg,tr,ge,tw,gr,hk,ec,ph,in,pk,th,vn,my,sg,id,nz,br,ke,uy,au1,au2,za ;;
+                 America/Metlakatla) deb_code=us ; mx_order=la,ut,ny,ca,jp,se,dk,gb,nl,be,de,lt,ru,fr,pl,cz,ec,ch,at,sk,ua,cn,hu,si,es,it,tw,kz,bg,tr,ge,gr,hk,ph,in,vn,pk,th,nz,br,my,sg,uy,id,au1,au2,ke,za ;;
+                  America/Vancouver) deb_code=ca ; mx_order=la,ut,ny,ca,ec,se,jp,gb,dk,nl,be,fr,de,lt,ru,pl,cz,ch,es,at,sk,si,ua,hu,it,cn,bg,kz,tw,tr,gr,ge,hk,ph,br,uy,in,pk,vn,nz,th,my,sg,au1,id,au2,ke,za ;;
+                America/Fort_Nelson) deb_code=ca ; mx_order=ut,la,ny,ca,se,dk,gb,nl,be,de,fr,lt,jp,ru,pl,cz,ch,at,sk,ua,es,ec,si,hu,it,bg,cn,kz,tr,ge,gr,tw,hk,ph,in,pk,th,vn,br,uy,my,sg,nz,id,ke,au1,au2,za ;;
+               America/Dawson_Creek) deb_code=ca ; mx_order=ut,la,ny,ca,se,dk,gb,nl,be,de,fr,lt,ru,pl,cz,jp,ch,at,sk,es,ua,si,hu,ec,it,bg,tr,cn,kz,ge,gr,tw,hk,ph,in,pk,th,vn,br,uy,my,sg,nz,id,ke,au1,au2,za ;;
+                America/Los_Angeles) deb_code=us ; mx_order=la,ut,ny,ca,ec,gb,jp,se,nl,dk,be,fr,de,es,ch,cz,lt,pl,ru,at,sk,br,si,uy,hu,ua,it,cn,bg,tw,tr,gr,kz,ge,nz,hk,ph,au1,au2,in,vn,th,pk,sg,my,id,ke,za ;;
+                    America/Tijuana) deb_code=mx ; mx_order=la,ut,ny,ca,ec,gb,se,nl,jp,dk,be,fr,de,es,ch,cz,lt,br,pl,uy,at,ru,sk,si,hu,ua,it,cn,bg,tr,tw,gr,kz,nz,ge,hk,ph,au1,au2,in,vn,th,pk,sg,my,id,ke,za ;;
+                    America/Creston) deb_code=ca ; mx_order=ut,la,ny,ca,ec,se,gb,nl,dk,be,fr,de,lt,jp,cz,ch,pl,es,ru,at,sk,si,hu,ua,it,bg,tr,cn,gr,kz,ge,tw,br,hk,ph,uy,in,pk,th,vn,nz,my,sg,au1,id,au2,ke,za ;;
+                      America/Boise) deb_code=us ; mx_order=la,ut,ny,ca,ec,gb,se,nl,dk,be,fr,de,jp,es,lt,ch,cz,pl,ru,at,sk,si,hu,ua,it,bg,cn,tr,gr,br,kz,ge,tw,uy,hk,ph,nz,in,pk,vn,th,au1,au2,my,sg,id,ke,za ;;
+                America/Yellowknife) deb_code=ca ; mx_order=ut,la,ny,ca,se,gb,dk,nl,be,de,fr,lt,ru,pl,cz,ch,at,sk,es,ua,si,hu,jp,it,ec,bg,tr,kz,gr,ge,cn,tw,hk,ph,pk,in,th,vn,br,uy,my,sg,ke,nz,id,au1,au2,za ;;
+                   America/Edmonton) deb_code=ca ; mx_order=ut,la,ny,ca,se,gb,ec,nl,dk,be,fr,de,lt,cz,pl,ch,ru,es,at,sk,si,jp,hu,ua,it,bg,tr,gr,kz,cn,ge,tw,hk,br,ph,uy,in,pk,th,vn,nz,my,sg,ke,id,au1,au2,za ;;
+                    America/Phoenix) deb_code=us ; mx_order=la,ut,ny,ca,ec,gb,nl,se,be,fr,dk,es,de,ch,cz,jp,br,lt,pl,uy,at,sk,si,ru,hu,it,ua,bg,tr,gr,cn,ge,tw,kz,nz,hk,ph,au2,au1,in,pk,vn,th,my,sg,id,ke,za ;;
+                 America/Hermosillo) deb_code=mx ; mx_order=la,ut,ny,ca,ec,gb,br,nl,uy,be,fr,se,dk,es,de,ch,cz,jp,lt,pl,at,sk,si,ru,hu,it,ua,bg,tr,gr,cn,ge,tw,kz,nz,hk,ph,au2,au1,in,pk,vn,th,sg,my,ke,id,za ;;
+              America/Swift_Current) deb_code=ca ; mx_order=ut,la,ny,ca,ec,gb,se,nl,dk,be,fr,de,es,ch,cz,lt,pl,ru,at,sk,si,hu,ua,it,jp,bg,tr,gr,ge,kz,cn,br,tw,uy,hk,ph,pk,in,th,vn,nz,my,sg,ke,id,au1,au2,za ;;
+                   America/Mazatlan) deb_code=mx ; mx_order=la,ut,ny,ec,ca,br,uy,gb,nl,fr,be,es,dk,se,de,ch,cz,pl,lt,at,si,sk,it,hu,jp,ru,ua,bg,gr,tr,cn,nz,ge,tw,kz,au2,au1,hk,ph,pk,in,vn,th,ke,za,sg,my,id ;;
+                  America/Chihuahua) deb_code=mx ; mx_order=ut,la,ny,ca,ec,br,gb,uy,nl,fr,be,es,se,dk,de,ch,cz,pl,lt,at,si,sk,hu,it,ru,jp,ua,bg,gr,tr,ge,cn,kz,tw,nz,hk,ph,au2,au1,pk,in,vn,th,ke,my,sg,za,id ;;
+             America/Bahia_Banderas) deb_code=mx ; mx_order=la,ut,ny,ec,ca,uy,br,gb,nl,es,fr,be,dk,se,de,ch,cz,pl,at,si,lt,sk,it,hu,jp,ru,ua,bg,gr,tr,nz,cn,ge,tw,kz,au2,au1,hk,ph,pk,in,vn,za,th,ke,sg,my,id ;;
+              America/Cambridge_Bay) deb_code=ca ; mx_order=ut,ca,ny,la,se,dk,gb,nl,be,de,fr,lt,ru,pl,cz,ch,at,sk,ua,si,hu,es,it,bg,tr,jp,gr,ge,kz,ec,cn,tw,hk,pk,in,ph,th,vn,br,my,sg,ke,uy,id,nz,za,au1,au2 ;;
+                     America/Denver) deb_code=us ; mx_order=ut,la,ny,ca,ec,gb,nl,se,be,fr,dk,es,de,ch,cz,lt,pl,at,sk,si,ru,hu,it,ua,br,jp,bg,uy,tr,gr,ge,kz,cn,tw,hk,ph,pk,nz,in,th,vn,au1,au2,ke,my,sg,id,za ;;
+                     America/Regina) deb_code=ca ; mx_order=ut,la,ny,ca,ec,gb,se,nl,dk,be,fr,de,es,ch,cz,lt,pl,at,sk,ru,si,hu,ua,it,bg,jp,tr,gr,ge,kz,cn,br,tw,uy,hk,ph,pk,in,th,vn,nz,ke,my,sg,id,au1,au2,za ;;
+                    America/Ojinaga) deb_code=mx ; mx_order=ut,la,ny,ca,ec,gb,br,nl,fr,be,uy,es,se,dk,de,ch,cz,pl,lt,at,si,sk,hu,it,ru,ua,jp,bg,gr,tr,ge,cn,kz,tw,nz,hk,ph,au2,au1,pk,in,vn,th,ke,za,my,sg,id ;;
+        America/North_Dakota/Beulah) deb_code=us ; mx_order=ut,la,ny,ca,ec,gb,nl,se,be,dk,fr,de,es,ch,cz,lt,pl,at,sk,si,ru,hu,it,ua,bg,jp,tr,gr,br,ge,kz,uy,cn,tw,hk,pk,ph,in,th,vn,nz,ke,my,sg,au1,id,au2,za ;;
+     America/North_Dakota/New_Salem) deb_code=us ; mx_order=ut,la,ny,ca,ec,gb,nl,se,be,dk,fr,de,es,ch,cz,lt,pl,at,sk,si,ru,hu,it,ua,bg,jp,tr,gr,br,ge,kz,uy,cn,tw,hk,pk,ph,in,th,vn,nz,ke,my,sg,au1,au2,id,za ;;
+        America/North_Dakota/Center) deb_code=us ; mx_order=ut,la,ny,ca,ec,gb,nl,se,be,dk,fr,de,es,ch,cz,lt,pl,at,sk,si,ru,hu,it,ua,bg,tr,jp,gr,br,ge,kz,uy,cn,tw,hk,pk,ph,in,th,vn,nz,ke,my,sg,au1,id,au2,za ;;
+                  America/Monterrey) deb_code=mx ; mx_order=ut,la,ny,ec,ca,br,uy,gb,nl,es,fr,be,dk,se,ch,de,cz,pl,at,si,lt,sk,it,hu,ru,ua,bg,jp,gr,tr,ge,cn,kz,nz,tw,hk,au2,ph,au1,pk,in,ke,za,vn,th,my,sg,id ;;
+                America/Mexico_City) deb_code=mx ; mx_order=ut,la,ec,ny,ca,br,uy,gb,es,fr,nl,be,dk,se,ch,de,cz,si,at,pl,sk,it,lt,hu,ru,ua,bg,gr,jp,tr,ge,nz,cn,kz,au2,tw,au1,hk,ph,za,ke,pk,in,vn,th,sg,my,id ;;
+                  America/Matamoros) deb_code=mx ; mx_order=ut,la,ny,ec,ca,br,uy,gb,es,nl,fr,be,dk,se,ch,de,cz,at,si,pl,sk,lt,it,hu,ru,ua,bg,gr,tr,jp,ge,kz,cn,tw,nz,hk,au2,ph,au1,pk,ke,za,in,vn,th,my,sg,id ;;
+                   America/Winnipeg) deb_code=ca ; mx_order=ut,ny,la,ca,ec,gb,nl,se,be,dk,fr,de,es,ch,cz,lt,pl,at,sk,si,ru,hu,it,ua,bg,tr,gr,jp,ge,br,kz,uy,cn,tw,hk,pk,ph,in,th,vn,ke,nz,my,sg,za,id,au1,au2 ;;
+                   America/Resolute) deb_code=ca ; mx_order=ca,ut,ny,se,dk,la,gb,nl,be,de,lt,fr,ru,pl,cz,ch,at,sk,ua,hu,si,es,it,bg,tr,gr,ge,kz,jp,cn,ec,tw,pk,hk,in,ph,th,vn,ke,my,br,sg,id,uy,nz,za,au1,au2 ;;
+                America/Rainy_River) deb_code=ca ; mx_order=ut,ny,ca,la,ec,gb,nl,be,se,fr,dk,es,de,ch,cz,lt,pl,at,sk,si,hu,ru,it,ua,bg,tr,gr,ge,jp,br,kz,uy,cn,tw,hk,pk,in,ph,ke,th,vn,nz,my,sg,za,id,au1,au2 ;;
+               America/Rankin_Inlet) deb_code=ca ; mx_order=ut,ca,ny,la,gb,se,nl,dk,be,fr,de,lt,cz,ch,pl,es,ru,at,sk,si,hu,ua,it,bg,ec,tr,gr,ge,jp,kz,cn,tw,pk,hk,br,in,ph,uy,th,vn,ke,my,sg,id,nz,za,au1,au2 ;;
+                   America/Atikokan) deb_code=ca ; mx_order=ut,ny,ca,la,ec,gb,nl,be,fr,se,dk,es,de,ch,cz,pl,lt,at,sk,si,hu,ru,it,ua,bg,tr,gr,ge,br,jp,kz,uy,cn,tw,pk,hk,in,ph,ke,th,vn,nz,my,za,sg,id,au1,au2 ;;
+                  America/Guatemala) deb_code=sv ; mx_order=ec,ut,ny,la,ca,br,uy,es,gb,fr,nl,be,dk,ch,de,se,cz,si,it,at,sk,pl,hu,lt,bg,ua,ru,gr,tr,ge,jp,nz,kz,za,au2,cn,ke,au1,tw,pk,hk,ph,in,vn,th,my,sg,id ;;
+                     America/Merida) deb_code=mx ; mx_order=ut,ny,ec,la,ca,br,uy,gb,es,fr,nl,be,dk,ch,se,de,cz,si,at,it,sk,pl,lt,hu,ua,ru,bg,gr,tr,ge,jp,kz,cn,za,nz,ke,tw,au2,pk,au1,hk,ph,in,th,vn,my,sg,id ;;
+                America/Thunder_Bay) deb_code=ca ; mx_order=ny,ut,ca,la,ec,gb,nl,be,fr,se,dk,es,de,ch,cz,pl,lt,at,sk,si,hu,it,ru,ua,bg,tr,gr,br,ge,jp,kz,uy,cn,tw,pk,hk,in,ph,ke,th,vn,za,my,nz,sg,id,au1,au2 ;;
+                America/El_Salvador) deb_code=sv ; mx_order=ec,ut,ny,la,ca,br,uy,es,gb,fr,nl,be,ch,dk,de,se,cz,si,it,at,sk,pl,hu,lt,bg,ua,ru,gr,tr,ge,jp,za,nz,kz,au2,ke,cn,au1,tw,pk,hk,ph,in,th,vn,my,sg,id ;;
+                    America/Nipigon) deb_code=ca ; mx_order=ny,ut,ca,la,ec,gb,nl,be,fr,se,dk,es,de,ch,cz,pl,lt,at,sk,si,hu,it,ru,ua,bg,tr,gr,ge,br,jp,kz,uy,cn,tw,pk,hk,in,ph,ke,th,vn,za,my,sg,nz,id,au1,au2 ;;
+                     America/Belize) deb_code=mx ; mx_order=ec,ny,ut,la,ca,br,uy,es,gb,fr,nl,be,dk,ch,de,se,cz,si,it,at,sk,pl,hu,lt,bg,ua,ru,gr,tr,ge,jp,kz,za,nz,ke,cn,au2,tw,au1,pk,hk,ph,in,th,vn,my,sg,id ;;
+                    America/Chicago) deb_code=us ; mx_order=ny,ut,ca,la,ec,gb,nl,fr,be,es,dk,se,de,ch,cz,pl,at,lt,si,sk,it,hu,ru,ua,br,bg,gr,tr,uy,ge,jp,kz,cn,tw,pk,hk,ke,in,ph,th,za,vn,nz,my,sg,au2,au1,id ;;
+                  America/Menominee) deb_code=us ; mx_order=ny,ut,ca,la,ec,gb,nl,be,fr,dk,es,se,de,ch,cz,pl,lt,at,si,sk,hu,it,ru,ua,bg,gr,tr,br,ge,uy,jp,kz,cn,tw,pk,hk,in,ke,ph,th,vn,za,nz,my,sg,id,au1,au2 ;;
+          America/Indiana/Vincennes) deb_code=us ; mx_order=ny,ut,ca,la,ec,gb,nl,fr,be,es,dk,se,de,ch,cz,at,pl,si,sk,lt,it,hu,br,ru,ua,bg,uy,gr,tr,ge,jp,kz,cn,tw,pk,hk,ke,in,ph,za,th,nz,vn,my,au2,sg,au1,id ;;
+         America/Indiana/Petersburg) deb_code=us ; mx_order=ny,ut,ca,la,ec,gb,nl,fr,be,es,dk,se,ch,de,cz,at,pl,si,sk,lt,it,hu,br,ru,ua,bg,uy,gr,tr,ge,jp,kz,cn,tw,pk,hk,ke,in,ph,za,th,nz,vn,my,au2,sg,au1,id ;;
+                America/Tegucigalpa) deb_code=sv ; mx_order=ec,ny,ut,la,ca,br,uy,es,gb,fr,nl,be,ch,dk,de,se,cz,it,si,at,sk,pl,hu,lt,bg,ua,ru,gr,tr,ge,jp,za,kz,nz,ke,au2,cn,au1,tw,pk,hk,ph,in,th,vn,my,sg,id ;;
+                     America/Cancun) deb_code=mx ; mx_order=ny,ut,ec,ca,la,br,uy,es,gb,fr,nl,be,dk,ch,se,de,cz,si,it,at,sk,pl,hu,lt,bg,ua,ru,gr,tr,ge,jp,kz,za,ke,cn,nz,tw,pk,au2,hk,au1,ph,in,th,vn,my,sg,id ;;
+          America/Indiana/Tell_City) deb_code=us ; mx_order=ny,ut,ca,la,ec,gb,nl,fr,es,be,dk,se,ch,de,cz,at,si,pl,sk,lt,br,it,hu,ru,ua,uy,bg,gr,tr,ge,jp,kz,cn,tw,pk,ke,hk,in,ph,za,th,nz,vn,my,au2,au1,sg,id ;;
+               America/Indiana/Knox) deb_code=us ; mx_order=ny,ut,ca,la,ec,gb,nl,fr,be,es,dk,se,de,ch,cz,pl,at,si,lt,sk,it,hu,ru,ua,br,bg,gr,tr,uy,ge,jp,kz,cn,tw,pk,hk,ke,in,ph,za,th,vn,nz,my,sg,au2,au1,id ;;
+            America/Indiana/Winamac) deb_code=us ; mx_order=ny,ut,ca,la,ec,gb,nl,fr,be,es,dk,se,de,ch,cz,pl,at,si,lt,sk,it,hu,ru,ua,br,bg,gr,tr,uy,ge,jp,kz,cn,tw,pk,hk,ke,in,ph,za,th,vn,nz,my,sg,au2,au1,id ;;
+            America/Indiana/Marengo) deb_code=us ; mx_order=ny,ut,ca,la,ec,gb,nl,fr,es,be,dk,se,ch,de,cz,at,pl,si,sk,lt,it,hu,br,ru,ua,bg,uy,gr,tr,ge,jp,kz,cn,tw,pk,ke,hk,in,ph,za,th,nz,vn,my,sg,au2,au1,id ;;
+                    America/Managua) deb_code=sv ; mx_order=ec,ny,ut,la,ca,br,uy,es,gb,fr,nl,be,ch,dk,de,se,cz,it,si,at,sk,pl,hu,lt,bg,ua,gr,ru,tr,ge,jp,za,ke,kz,nz,au2,au1,cn,tw,pk,hk,ph,in,th,vn,my,sg,id ;;
+       America/Indiana/Indianapolis) deb_code=us ; mx_order=ny,ut,ca,la,ec,gb,nl,fr,be,es,dk,se,de,ch,cz,at,pl,si,sk,lt,it,hu,br,ru,ua,bg,uy,gr,tr,ge,jp,kz,cn,tw,pk,ke,hk,in,ph,za,th,vn,nz,my,sg,au2,au1,id ;;
+        America/Kentucky/Louisville) deb_code=us ; mx_order=ny,ut,ca,la,ec,gb,nl,fr,es,be,dk,se,ch,de,cz,at,si,pl,sk,lt,it,hu,br,ru,ua,bg,uy,gr,tr,ge,jp,kz,cn,tw,pk,ke,hk,in,ph,za,th,vn,nz,my,sg,au2,au1,id ;;
+              America/Indiana/Vevay) deb_code=us ; mx_order=ny,ut,ca,la,ec,gb,nl,fr,es,be,dk,se,ch,de,cz,at,si,pl,sk,lt,it,hu,br,ru,ua,bg,uy,gr,tr,ge,jp,kz,cn,pk,tw,ke,hk,in,ph,za,th,vn,nz,my,sg,au2,au1,id ;;
+        America/Kentucky/Monticello) deb_code=us ; mx_order=ny,ut,ca,la,ec,gb,es,nl,fr,be,dk,se,ch,de,cz,br,at,si,pl,sk,lt,it,hu,ru,uy,ua,bg,gr,tr,ge,jp,kz,cn,pk,tw,ke,hk,in,za,ph,th,nz,vn,my,au2,au1,sg,id ;;
+                 America/Costa_Rica) deb_code=sv ; mx_order=ec,ny,ut,ca,la,br,uy,es,gb,fr,be,nl,ch,dk,de,se,cz,it,si,at,sk,pl,hu,lt,bg,ua,gr,ru,tr,ge,za,jp,ke,nz,kz,au2,au1,cn,pk,tw,hk,ph,in,th,vn,my,sg,id ;;
+                    America/Detroit) deb_code=us ; mx_order=ny,ca,ut,la,ec,gb,nl,fr,be,es,dk,se,de,ch,cz,at,pl,si,sk,lt,it,hu,ru,ua,bg,br,gr,tr,uy,ge,kz,jp,cn,pk,tw,ke,hk,in,ph,za,th,vn,nz,my,sg,id,au2,au1 ;;
+                     America/Havana) deb_code=mx ; mx_order=ny,ut,ec,ca,la,br,uy,es,gb,fr,nl,be,ch,dk,de,se,cz,si,it,at,sk,pl,hu,lt,bg,ua,ru,gr,tr,ge,jp,kz,ke,za,cn,pk,tw,nz,hk,in,au2,ph,au1,th,vn,my,sg,id ;;
+                     America/Cayman) deb_code=mx ; mx_order=ec,ny,ut,ca,la,br,uy,es,gb,fr,nl,be,ch,dk,de,se,cz,it,si,at,sk,pl,hu,lt,bg,ua,ru,gr,tr,ge,jp,kz,za,ke,cn,pk,nz,tw,au2,hk,au1,in,ph,th,vn,my,sg,id ;;
+                  America/Guayaquil) deb_code=br ; mx_order=ec,br,uy,ny,ut,ca,la,es,gb,fr,be,nl,ch,it,dk,de,cz,si,at,se,sk,hu,pl,lt,bg,gr,ua,za,tr,ru,ke,ge,au2,nz,au1,jp,kz,pk,cn,tw,hk,ph,in,th,vn,id,sg,my ;;
+                     America/Panama) deb_code=sv ; mx_order=ec,ny,ut,ca,la,br,uy,es,gb,fr,be,nl,ch,dk,de,it,cz,si,se,at,sk,hu,pl,lt,bg,gr,ua,ru,tr,ge,za,ke,jp,kz,au2,nz,au1,pk,cn,tw,hk,in,ph,th,vn,my,sg,id ;;
+                    America/Toronto) deb_code=ca ; mx_order=ny,ca,ut,la,ec,gb,nl,fr,be,es,dk,se,ch,de,cz,at,si,pl,sk,lt,it,hu,ru,ua,bg,gr,br,tr,uy,ge,kz,jp,cn,pk,tw,ke,in,hk,ph,za,th,vn,my,nz,sg,id,au2,au1 ;;
+                     America/Nassau) deb_code=mx ; mx_order=ny,ca,ut,ec,la,br,es,gb,uy,fr,nl,be,ch,dk,de,se,cz,si,it,at,sk,pl,hu,lt,bg,ua,ru,gr,tr,ge,kz,jp,ke,za,pk,cn,tw,in,hk,nz,ph,au2,th,au1,vn,my,sg,id ;;
+                       America/Lima) deb_code=br ; mx_order=ec,uy,br,ny,ut,ca,la,es,gb,fr,be,nl,ch,it,za,dk,si,de,cz,at,sk,se,hu,pl,gr,bg,lt,tr,ua,au2,ke,ru,au1,nz,ge,jp,kz,pk,cn,tw,id,ph,in,hk,sg,my,vn,th ;;
+                    America/Jamaica) deb_code=mx ; mx_order=ec,ny,ca,ut,la,br,uy,es,gb,fr,be,nl,ch,dk,de,cz,se,it,si,at,sk,pl,hu,lt,bg,ua,gr,ru,tr,ge,za,ke,kz,jp,pk,cn,nz,tw,au2,in,hk,au1,ph,th,vn,my,sg,id ;;
+                     America/Bogota) deb_code=br ; mx_order=ec,ny,br,ca,uy,ut,la,es,gb,fr,be,nl,ch,dk,it,de,cz,si,at,se,sk,hu,pl,lt,bg,gr,ua,tr,ru,za,ge,ke,kz,au2,jp,nz,au1,pk,cn,tw,in,hk,ph,th,vn,my,sg,id ;;
+                   America/New_York) deb_code=us ; mx_order=ny,ca,ut,la,ec,gb,es,fr,nl,be,dk,ch,se,de,cz,si,at,sk,pl,it,lt,hu,ua,ru,bg,br,gr,tr,uy,ge,kz,jp,pk,ke,cn,tw,in,za,hk,ph,th,vn,my,sg,nz,id,au2,au1 ;;
+                       America/Port) deb_code=mx ; mx_order=ec,ny,ca,ut,la,br,uy,es,gb,fr,be,nl,ch,dk,de,cz,it,se,si,at,sk,hu,pl,lt,bg,gr,ua,ru,tr,ge,za,ke,kz,jp,pk,cn,tw,in,nz,au2,hk,au1,ph,th,vn,my,sg,id ;;
+                 America/Grand_Turk) deb_code=mx ; mx_order=ny,ca,ec,ut,la,br,uy,es,gb,fr,be,nl,ch,dk,de,cz,it,se,si,at,sk,pl,hu,lt,bg,gr,ua,ru,tr,ge,ke,za,kz,jp,pk,cn,in,tw,hk,nz,au2,ph,th,au1,vn,my,sg,id ;;
+               America/Punta_Arenas) deb_code=cl ; mx_order=uy,br,ec,za,au2,au1,nz,ny,la,ut,ca,ke,es,it,fr,gb,ch,id,be,gr,nl,si,bg,at,cz,sk,hu,de,tr,sg,dk,my,pl,se,lt,ua,ge,vn,pk,th,ru,ph,in,hk,tw,jp,kz,cn ;;
+                   America/Santiago) deb_code=cl ; mx_order=uy,br,ec,ny,ca,ut,la,za,es,au2,au1,ke,fr,gb,be,it,nz,ch,nl,si,cz,at,de,gr,sk,dk,hu,bg,pl,tr,se,lt,ua,ru,ge,id,pk,sg,my,kz,jp,vn,in,ph,th,tw,hk,cn ;;
+                      America/Aruba) deb_code=br ; mx_order=ec,ny,ca,ut,br,uy,la,es,gb,fr,be,nl,ch,dk,it,de,cz,si,at,se,sk,hu,pl,lt,bg,gr,ua,tr,ru,ge,za,ke,kz,pk,jp,cn,au2,nz,in,au1,tw,hk,ph,th,vn,my,sg,id ;;
+              America/Santo_Domingo) deb_code=mx ; mx_order=ny,ec,ca,ut,la,br,uy,es,gb,fr,be,nl,ch,dk,de,it,cz,si,se,at,sk,hu,pl,lt,bg,gr,ua,tr,ru,ge,za,ke,kz,jp,pk,cn,in,tw,hk,nz,au2,au1,ph,th,vn,my,sg,id ;;
+                   America/Eirunepe) deb_code=br ; mx_order=ec,br,uy,ny,ca,ut,la,es,gb,fr,be,nl,ch,it,si,de,dk,cz,at,sk,hu,za,se,pl,gr,bg,lt,tr,ua,ru,ke,ge,au2,au1,nz,kz,pk,jp,in,cn,tw,hk,id,ph,th,my,sg,vn ;;
+     America/Argentina/Rio_Gallegos) deb_code=cl ; mx_order=uy,br,ec,za,au2,au1,ny,nz,la,ca,ut,ke,es,it,fr,gb,ch,be,gr,nl,si,id,bg,at,cz,sk,hu,de,tr,dk,pl,sg,se,my,lt,ua,ge,pk,ru,vn,th,ph,in,hk,tw,jp,kz,cn ;;
+                    America/Curacao) deb_code=br ; mx_order=ec,ny,ca,ut,br,uy,la,es,gb,fr,be,nl,ch,dk,it,de,cz,si,at,se,sk,hu,pl,lt,bg,gr,ua,tr,ru,ge,za,ke,kz,pk,jp,cn,au2,nz,in,au1,tw,hk,ph,th,vn,my,sg,id ;;
+          America/Argentina/Mendoza) deb_code=cl ; mx_order=uy,br,ec,ny,ca,ut,za,la,es,au2,ke,fr,gb,au1,be,it,ch,nl,si,nz,cz,at,gr,de,sk,dk,hu,bg,pl,tr,se,lt,ua,ru,ge,pk,id,sg,my,kz,jp,in,vn,th,ph,tw,hk,cn ;;
+                      America/Thule) deb_code=ca ; mx_order=ca,se,dk,gb,nl,ny,be,de,lt,fr,pl,ut,cz,ru,ch,at,sk,ua,hu,si,es,it,la,bg,tr,gr,ge,kz,jp,cn,pk,tw,ec,in,hk,ph,th,vn,ke,my,br,sg,id,uy,za,nz,au1,au2 ;;
+         America/Argentina/San_Juan) deb_code=cl ; mx_order=uy,br,ec,ny,ca,ut,la,za,es,au2,fr,ke,gb,be,it,ch,au1,nl,si,cz,nz,at,de,gr,sk,dk,hu,bg,pl,tr,se,lt,ua,ru,ge,pk,id,sg,kz,my,jp,in,vn,th,ph,tw,hk,cn ;;
+                    America/Iqaluit) deb_code=ca ; mx_order=ca,ny,ut,gb,nl,se,dk,be,fr,de,la,ch,cz,es,lt,pl,at,sk,si,hu,ru,it,ua,bg,tr,gr,ge,ec,kz,jp,cn,pk,br,tw,in,hk,ke,uy,ph,th,vn,my,sg,za,id,nz,au1,au2 ;;
+          America/Argentina/Ushuaia) deb_code=cl ; mx_order=uy,br,ec,za,au2,au1,nz,ny,ke,la,ca,ut,es,it,fr,id,gb,ch,gr,be,si,nl,bg,at,sk,cz,hu,tr,de,sg,my,dk,pl,se,ua,lt,ge,pk,vn,th,ph,ru,in,hk,tw,jp,kz,cn ;;
+                 America/Kralendijk) deb_code=br ; mx_order=ec,ny,ca,br,ut,uy,la,es,gb,fr,be,nl,ch,dk,it,de,cz,si,at,se,sk,hu,pl,lt,bg,gr,ua,tr,ru,ge,za,ke,kz,pk,jp,cn,au2,in,nz,au1,tw,hk,th,ph,vn,my,sg,id ;;
+                     America/La_Paz) deb_code=br ; mx_order=ec,uy,br,ny,ca,ut,la,es,za,gb,fr,be,nl,ch,it,si,cz,de,dk,at,sk,hu,gr,bg,se,pl,ke,lt,tr,ua,ru,au2,ge,au1,nz,pk,kz,jp,in,id,sg,cn,my,tw,th,ph,vn,hk ;;
+                 America/Rio_Branco) deb_code=br ; mx_order=ec,br,uy,ny,ca,ut,la,es,gb,fr,be,nl,ch,it,za,si,de,cz,dk,at,sk,hu,se,gr,pl,bg,lt,tr,ua,ke,ru,ge,au2,au1,nz,kz,pk,jp,in,cn,tw,id,my,hk,th,sg,ph,vn ;;
+                    America/Caracas) deb_code=br ; mx_order=ec,ny,ca,br,ut,uy,la,es,gb,fr,be,nl,ch,it,dk,de,cz,si,at,sk,se,hu,pl,lt,bg,gr,ua,tr,ru,ge,za,ke,kz,pk,jp,au2,cn,in,nz,au1,tw,hk,th,ph,vn,my,sg,id ;;
+         America/Argentina/La_Rioja) deb_code=cl ; mx_order=uy,br,ec,ny,ca,ut,la,za,es,fr,gb,ke,be,it,ch,au2,nl,si,cz,at,de,au1,gr,sk,dk,hu,bg,pl,nz,se,tr,lt,ua,ru,ge,pk,id,kz,sg,my,in,jp,th,vn,ph,tw,hk,cn ;;
+         America/Argentina/San_Luis) deb_code=cl ; mx_order=uy,br,ec,ny,ca,za,ut,la,es,au2,ke,fr,gb,au1,it,be,ch,nl,si,nz,gr,cz,at,de,sk,hu,dk,bg,pl,tr,se,lt,ua,ru,ge,pk,id,sg,my,kz,in,vn,th,jp,ph,hk,tw,cn ;;
+                America/Puerto_Rico) deb_code=br ; mx_order=ny,ec,ca,ut,br,la,uy,es,gb,fr,be,nl,ch,dk,de,it,cz,si,se,at,sk,hu,pl,lt,bg,gr,ua,tr,ru,ge,za,ke,kz,pk,jp,cn,in,tw,hk,au2,nz,th,ph,au1,vn,my,sg,id ;;
+        America/Argentina/Catamarca) deb_code=cl ; mx_order=uy,br,ec,ny,ca,ut,la,za,es,fr,gb,be,ke,it,ch,nl,au2,si,cz,at,de,gr,sk,dk,hu,bg,au1,pl,se,tr,lt,nz,ua,ru,ge,pk,id,kz,sg,my,in,jp,th,vn,ph,tw,cn,hk ;;
+                America/Pangnirtung) deb_code=ca ; mx_order=ca,ny,ut,gb,se,nl,dk,be,fr,de,ch,cz,lt,pl,es,at,sk,la,si,ru,hu,ua,it,bg,tr,gr,ge,kz,ec,jp,pk,cn,tw,in,br,hk,ke,ph,th,uy,vn,my,sg,za,id,nz,au1,au2 ;;
+            America/Argentina/Salta) deb_code=cl ; mx_order=uy,br,ec,ny,ca,ut,la,za,es,fr,gb,be,it,ch,nl,ke,si,cz,de,at,sk,dk,gr,hu,bg,au2,pl,se,tr,lt,au1,ua,nz,ru,ge,pk,kz,id,sg,my,in,jp,th,vn,ph,cn,tw,hk ;;
+            America/Argentina/Jujuy) deb_code=cl ; mx_order=uy,br,ec,ny,ca,ut,la,za,es,fr,gb,be,it,ch,nl,ke,si,cz,de,at,sk,dk,gr,hu,bg,pl,au2,se,tr,lt,ua,au1,ru,nz,ge,pk,kz,id,sg,my,in,jp,th,vn,ph,cn,tw,hk ;;
+          America/Argentina/Tucuman) deb_code=cl ; mx_order=uy,br,ec,ny,ca,ut,la,za,es,fr,gb,be,it,ch,nl,ke,si,cz,at,de,sk,gr,au2,dk,hu,bg,pl,se,tr,au1,lt,ua,nz,ru,ge,pk,kz,id,sg,my,in,jp,th,vn,ph,cn,tw,hk ;;
+                  America/St_Thomas) deb_code=br ; mx_order=ny,ec,ca,ut,br,la,uy,es,gb,fr,be,nl,ch,dk,de,it,cz,si,at,se,sk,hu,pl,lt,bg,gr,ua,tr,ru,ge,za,ke,kz,pk,jp,cn,in,tw,hk,au2,nz,th,ph,au1,vn,my,sg,id ;;
+                    America/Moncton) deb_code=ca ; mx_order=ca,ny,ut,gb,la,fr,es,nl,be,dk,ch,se,de,ec,cz,si,at,sk,pl,it,lt,hu,ua,ru,bg,gr,tr,br,ge,uy,kz,jp,pk,ke,cn,in,tw,za,hk,th,ph,vn,my,sg,id,nz,au1,au2 ;;
+                    America/Tortola) deb_code=br ; mx_order=ny,ec,ca,ut,br,la,uy,es,gb,fr,be,nl,ch,dk,de,it,cz,si,at,se,sk,hu,pl,lt,bg,gr,ua,tr,ru,ge,za,ke,kz,pk,jp,cn,in,tw,hk,au2,nz,th,ph,au1,vn,my,sg,id ;;
+          America/Argentina/Cordoba) deb_code=cl ; mx_order=uy,br,ec,ny,ca,za,ut,la,es,ke,fr,gb,au2,it,be,ch,nl,si,au1,cz,gr,at,de,sk,hu,dk,bg,pl,nz,tr,se,lt,ua,ru,ge,pk,id,kz,sg,my,in,th,vn,jp,ph,hk,tw,cn ;;
+                America/Porto_Velho) deb_code=br ; mx_order=ec,br,uy,ny,ca,ut,la,es,gb,fr,be,nl,ch,it,za,si,de,cz,dk,at,sk,hu,gr,se,bg,pl,lt,tr,ua,ke,ru,ge,au2,au1,nz,pk,kz,jp,in,cn,id,tw,th,my,sg,hk,vn,ph ;;
+                    America/Halifax) deb_code=ca ; mx_order=ca,ny,ut,gb,la,es,fr,nl,be,dk,ch,ec,se,de,cz,si,at,sk,it,pl,lt,hu,ua,bg,ru,gr,tr,br,ge,uy,kz,pk,jp,ke,cn,in,za,tw,hk,th,ph,vn,my,sg,id,nz,au2,au1 ;;
+                    America/Marigot) deb_code=br ; mx_order=ny,ec,ca,ut,br,la,uy,es,gb,fr,be,nl,ch,dk,it,de,cz,si,at,se,sk,hu,pl,lt,bg,gr,ua,tr,ru,ge,za,ke,kz,pk,jp,cn,in,tw,hk,th,au2,nz,ph,au1,vn,my,sg,id ;;
+                   America/Anguilla) deb_code=br ; mx_order=ny,ec,ca,ut,br,la,uy,es,gb,fr,be,nl,ch,dk,it,de,cz,si,at,se,sk,hu,pl,lt,bg,gr,ua,tr,ru,ge,za,ke,kz,pk,jp,cn,in,tw,hk,th,au2,nz,ph,au1,vn,my,sg,id ;;
+              America/Lower_Princes) deb_code=br ; mx_order=ny,ec,ca,ut,br,la,uy,es,gb,fr,be,nl,ch,dk,it,de,cz,si,at,se,sk,hu,pl,lt,bg,gr,ua,tr,ru,ge,za,ke,kz,pk,jp,cn,in,tw,hk,th,au2,nz,ph,au1,vn,my,sg,id ;;
+              America/St_Barthelemy) deb_code=br ; mx_order=ny,ec,ca,ut,br,la,uy,es,gb,fr,be,nl,ch,dk,it,de,cz,si,at,sk,se,hu,pl,lt,bg,gr,ua,tr,ru,ge,za,ke,kz,pk,jp,in,cn,tw,hk,au2,th,nz,ph,au1,vn,my,sg,id ;;
+                   America/St_Kitts) deb_code=br ; mx_order=ny,ec,ca,ut,br,uy,la,es,gb,fr,be,nl,ch,dk,it,de,cz,si,at,sk,se,hu,pl,lt,bg,gr,ua,tr,ru,ge,za,ke,kz,pk,jp,in,cn,tw,hk,au2,th,nz,ph,au1,vn,my,sg,id ;;
+                 America/Montserrat) deb_code=br ; mx_order=ec,ny,ca,br,ut,uy,la,es,gb,fr,be,nl,ch,it,dk,de,cz,si,at,sk,se,hu,pl,lt,bg,gr,ua,tr,ru,ge,za,ke,kz,pk,jp,in,cn,tw,hk,au2,th,nz,au1,ph,vn,my,sg,id ;;
+                    America/Antigua) deb_code=br ; mx_order=ny,ec,ca,br,ut,uy,la,es,gb,fr,be,nl,ch,it,dk,de,cz,si,at,sk,se,hu,pl,lt,bg,gr,ua,tr,ru,ge,za,ke,kz,pk,jp,in,cn,tw,hk,th,au2,nz,ph,au1,vn,my,sg,id ;;
+                    America/Grenada) deb_code=br ; mx_order=ec,ny,ca,br,uy,ut,la,es,gb,fr,be,nl,ch,it,dk,de,si,cz,at,sk,se,hu,pl,bg,lt,gr,ua,tr,ru,ge,za,ke,kz,pk,jp,in,cn,au2,tw,nz,au1,hk,th,ph,vn,my,sg,id ;;
+                 America/Guadeloupe) deb_code=br ; mx_order=ec,ny,ca,br,ut,uy,la,es,gb,fr,be,nl,ch,it,dk,de,cz,si,at,sk,se,hu,pl,lt,bg,gr,ua,tr,ru,ge,za,ke,kz,pk,jp,in,cn,tw,hk,au2,th,nz,au1,ph,vn,my,sg,id ;;
+              America/Port_of_Spain) deb_code=br ; mx_order=ec,ny,ca,br,uy,ut,la,es,gb,fr,be,nl,ch,it,dk,de,si,cz,at,sk,se,hu,pl,bg,lt,gr,ua,tr,ru,za,ge,ke,kz,pk,jp,in,cn,au2,nz,au1,tw,hk,th,ph,vn,my,sg,id ;;
+                   America/Dominica) deb_code=br ; mx_order=ec,ny,ca,br,ut,uy,la,es,gb,fr,be,nl,ch,it,dk,de,cz,si,at,sk,se,hu,pl,lt,bg,gr,ua,tr,ru,ge,za,ke,kz,pk,jp,in,cn,tw,hk,au2,nz,th,au1,ph,vn,my,sg,id ;;
+                 America/St_Vincent) deb_code=br ; mx_order=ec,ny,ca,br,ut,uy,la,es,gb,fr,be,nl,ch,it,dk,de,si,cz,at,sk,se,hu,pl,bg,lt,gr,ua,tr,ru,ge,za,ke,kz,pk,jp,in,cn,au2,tw,hk,nz,au1,th,ph,vn,my,sg,id ;;
+                 America/Martinique) deb_code=br ; mx_order=ec,ny,ca,br,ut,uy,la,es,gb,fr,be,nl,ch,it,dk,de,si,cz,at,sk,se,hu,pl,bg,lt,gr,ua,tr,ru,ge,za,ke,kz,pk,jp,in,cn,tw,au2,hk,nz,th,au1,ph,vn,my,sg,id ;;
+                   America/St_Lucia) deb_code=br ; mx_order=ec,ny,ca,br,ut,uy,la,es,gb,fr,be,nl,ch,it,dk,de,si,cz,at,sk,se,hu,pl,bg,lt,gr,ua,tr,ru,ge,za,ke,kz,pk,jp,in,cn,tw,au2,hk,nz,th,au1,ph,vn,my,sg,id ;;
+                  America/Boa_Vista) deb_code=br ; mx_order=ec,br,uy,ny,ca,ut,la,es,gb,fr,be,nl,ch,it,si,de,dk,cz,at,sk,hu,se,pl,bg,gr,lt,tr,ua,za,ru,ke,ge,kz,pk,au2,jp,au1,nz,in,cn,tw,hk,th,my,vn,ph,sg,id ;;
+                  America/Goose_Bay) deb_code=ca ; mx_order=ca,ny,ut,gb,nl,fr,be,es,dk,se,de,ch,cz,la,at,pl,si,sk,lt,it,hu,ru,ua,bg,gr,ec,tr,ge,kz,br,uy,jp,pk,ke,cn,in,tw,hk,za,th,ph,vn,my,sg,id,nz,au1,au2 ;;
+                     America/Manaus) deb_code=br ; mx_order=ec,br,uy,ny,ca,ut,la,es,gb,fr,be,nl,ch,it,si,de,cz,dk,at,sk,hu,se,gr,za,pl,bg,lt,tr,ua,ke,ru,ge,kz,pk,au2,au1,nz,jp,in,cn,th,tw,hk,my,sg,id,vn,ph ;;
+                  America/Glace_Bay) deb_code=ca ; mx_order=ca,ny,ut,gb,es,fr,nl,be,dk,ch,la,de,se,cz,si,at,sk,it,pl,ec,lt,hu,ua,bg,ru,gr,tr,ge,br,uy,kz,pk,ke,jp,cn,in,za,tw,hk,th,ph,vn,my,sg,id,nz,au1,au2 ;;
+                   America/Barbados) deb_code=br ; mx_order=ec,ny,ca,br,ut,uy,es,la,gb,fr,be,nl,ch,it,dk,de,si,cz,at,sk,se,hu,pl,bg,lt,gr,ua,tr,ru,ge,za,ke,kz,pk,jp,in,cn,tw,au2,hk,nz,th,au1,vn,ph,my,sg,id ;;
+     America/Argentina/Buenos_Aires) deb_code=cl ; mx_order=uy,br,ec,za,ny,ca,ut,la,es,ke,fr,au2,gb,it,ch,be,nl,si,gr,au1,at,cz,sk,de,bg,hu,dk,tr,pl,nz,se,lt,ua,ge,ru,pk,id,sg,my,kz,in,th,vn,ph,jp,hk,tw,cn ;;
+                     America/Guyana) deb_code=br ; mx_order=ec,br,ny,ca,uy,ut,es,la,gb,fr,be,nl,ch,it,si,de,dk,cz,at,sk,hu,se,pl,bg,gr,lt,tr,ua,ru,za,ke,ge,kz,pk,jp,in,au2,cn,au1,nz,tw,hk,th,vn,my,ph,sg,id ;;
+                   America/Asuncion) deb_code=br ; mx_order=uy,br,ec,ny,ca,za,ut,es,la,fr,gb,it,ke,be,ch,nl,si,cz,gr,at,de,sk,hu,dk,bg,pl,tr,se,lt,ua,au2,ru,au1,ge,nz,pk,kz,id,in,sg,my,th,vn,jp,ph,hk,cn,tw ;;
+                      America/Blanc) deb_code=ca ; mx_order=ca,ny,ut,gb,nl,fr,be,es,dk,se,ch,de,cz,at,si,pl,sk,la,lt,it,hu,ua,ru,bg,gr,ec,tr,ge,br,kz,uy,pk,jp,ke,cn,in,tw,hk,za,th,ph,vn,my,sg,id,nz,au1,au2 ;;
+                   America/Miquelon) deb_code=ca ; mx_order=ca,ny,ut,gb,es,fr,nl,be,dk,ch,de,se,cz,si,at,sk,la,it,pl,hu,lt,ec,ua,bg,ru,gr,tr,ge,br,kz,uy,pk,ke,jp,cn,in,za,tw,hk,th,ph,vn,my,sg,id,nz,au1,au2 ;;
+                 America/Montevideo) deb_code=cl ; mx_order=uy,br,ec,za,ny,ca,ut,es,la,ke,fr,it,gb,au2,ch,be,nl,si,gr,at,cz,sk,au1,bg,de,hu,dk,tr,pl,se,nz,lt,ua,ge,ru,pk,id,sg,my,kz,in,th,vn,ph,hk,jp,tw,cn ;;
+                     America/Cuiaba) deb_code=br ; mx_order=br,uy,ec,ny,ca,ut,es,la,za,fr,gb,be,it,ch,nl,si,cz,de,at,sk,dk,gr,hu,ke,bg,pl,se,tr,lt,ua,ru,ge,au2,au1,pk,nz,kz,in,id,my,sg,jp,th,vn,cn,hk,tw,ph ;;
+                 America/Paramaribo) deb_code=br ; mx_order=ec,br,ny,ca,uy,ut,es,gb,fr,la,be,nl,ch,it,si,de,cz,dk,at,sk,hu,se,pl,gr,bg,lt,tr,ua,za,ru,ke,ge,kz,pk,in,jp,au2,cn,au1,nz,th,tw,hk,my,vn,sg,ph,id ;;
+                   America/Santarem) deb_code=br ; mx_order=br,ec,uy,ny,ca,ut,es,la,fr,gb,be,nl,ch,it,si,cz,de,at,dk,sk,hu,gr,za,bg,pl,se,lt,tr,ua,ke,ru,ge,pk,kz,au2,au1,in,nz,jp,cn,th,my,tw,hk,sg,id,vn,ph ;;
+               America/Campo_Grande) deb_code=br ; mx_order=br,uy,ec,ny,ca,za,ut,es,la,fr,gb,it,be,ch,nl,ke,si,cz,at,gr,de,sk,hu,dk,bg,pl,tr,se,lt,ua,ru,ge,au2,au1,nz,pk,kz,in,id,my,sg,th,vn,jp,cn,hk,ph,tw ;;
+                   America/St_Johns) deb_code=ca ; mx_order=ca,ny,gb,es,fr,nl,be,ut,dk,ch,de,se,cz,si,at,sk,it,pl,hu,lt,la,bg,ua,ru,gr,ec,tr,ge,br,kz,uy,pk,ke,jp,cn,in,za,tw,hk,th,ph,vn,my,sg,id,nz,au1,au2 ;;
+                    America/Cayenne) deb_code=br ; mx_order=ec,br,uy,ny,ca,es,ut,gb,fr,be,nl,ch,la,it,si,cz,de,dk,at,sk,hu,gr,se,pl,bg,lt,tr,ua,za,ru,ke,ge,kz,pk,in,au2,jp,au1,cn,nz,th,tw,hk,my,vn,sg,id,ph ;;
+                    America/Godthab) deb_code=ca ; mx_order=ca,ny,gb,nl,se,be,dk,fr,de,ch,cz,es,pl,lt,at,sk,ut,si,hu,ru,it,ua,bg,tr,la,gr,ge,kz,ec,pk,jp,cn,br,in,ke,tw,hk,uy,th,ph,vn,za,my,sg,id,nz,au1,au2 ;;
+                      America/Belem) deb_code=br ; mx_order=br,ec,uy,ca,ny,es,ut,fr,gb,be,ch,it,nl,si,cz,de,la,at,sk,dk,hu,gr,za,bg,pl,se,tr,lt,ua,ke,ru,ge,pk,kz,in,au2,au1,nz,jp,th,cn,my,sg,hk,vn,id,tw,ph ;;
+                  America/Araguaina) deb_code=br ; mx_order=br,uy,ec,ny,ca,es,ut,fr,gb,be,it,ch,nl,za,si,la,cz,at,de,sk,dk,gr,hu,bg,pl,se,ke,tr,lt,ua,ru,ge,pk,kz,au2,au1,in,nz,th,my,jp,sg,id,cn,vn,hk,tw,ph ;;
+                  America/Sao_Paulo) deb_code=br ; mx_order=br,uy,ec,za,ny,ca,es,ke,ut,fr,it,gb,ch,be,nl,si,la,gr,at,cz,sk,de,bg,hu,dk,tr,pl,se,lt,ua,ru,ge,au2,au1,pk,nz,kz,in,id,my,sg,th,vn,hk,ph,cn,jp,tw ;;
+                      America/Bahia) deb_code=br ; mx_order=br,uy,ec,ca,es,ny,za,fr,it,gb,ch,be,nl,ke,si,gr,at,cz,sk,de,bg,hu,dk,ut,tr,pl,se,lt,ua,la,ru,ge,pk,kz,au2,in,au1,nz,my,th,id,sg,vn,hk,cn,tw,jp,ph ;;
+                  America/Fortaleza) deb_code=br ; mx_order=br,uy,ec,ca,es,ny,fr,gb,it,be,ch,nl,za,si,cz,at,gr,sk,de,hu,bg,dk,ut,pl,ke,tr,se,lt,ua,la,ru,ge,pk,kz,in,au2,th,au1,my,sg,id,vn,cn,hk,nz,jp,tw,ph ;;
+                     America/Maceio) deb_code=br ; mx_order=br,uy,ec,es,ca,ny,za,fr,it,gb,ch,be,nl,si,ke,gr,at,cz,sk,de,bg,hu,dk,tr,pl,ut,se,lt,ua,ru,ge,la,pk,kz,in,au2,au1,th,my,sg,id,vn,nz,hk,cn,tw,jp,ph ;;
+                     America/Recife) deb_code=br ; mx_order=br,uy,ec,es,ca,ny,za,fr,it,gb,ch,be,nl,si,gr,ke,at,cz,sk,de,bg,hu,dk,tr,pl,se,lt,ut,ua,ru,ge,la,pk,kz,in,au2,au1,th,my,sg,id,vn,nz,hk,cn,tw,jp,ph ;;
+                    America/Noronha) deb_code=br ; mx_order=br,uy,ec,es,ca,ny,fr,it,gb,za,ch,be,nl,si,gr,at,cz,sk,de,hu,bg,ke,dk,tr,pl,se,lt,ua,ut,ru,ge,la,pk,kz,in,th,my,au2,sg,id,vn,au1,hk,cn,tw,jp,nz,ph ;;
+               America/Scoresbysund) deb_code=ca ; mx_order=se,dk,gb,nl,be,de,fr,lt,cz,pl,ch,at,sk,ru,si,hu,ua,es,ca,it,bg,tr,ny,gr,ge,ut,kz,la,pk,jp,cn,in,ke,tw,ec,hk,th,ph,vn,br,my,sg,za,uy,id,nz,au1,au2 ;;
+               America/Danmarkshavn) deb_code=ca ; mx_order=se,dk,nl,gb,de,lt,be,pl,ru,fr,cz,ch,at,sk,ua,hu,si,es,ca,it,bg,tr,gr,ny,ge,kz,ut,la,pk,jp,cn,in,tw,hk,th,ke,ec,ph,vn,my,sg,br,id,za,uy,nz,au1,au2 ;;
+                 Antarctica/Rothera) deb_code=au ; mx_order=uy,br,ec,au2,za,au1,nz,ke,id,ny,la,ut,ca,sg,my,es,vn,it,gr,th,ph,fr,ch,bg,si,gb,pk,be,tr,nl,at,sk,hu,cz,in,de,hk,ge,dk,pl,tw,ua,lt,se,cn,jp,ru,kz ;;
+                  Antarctica/Palmer) deb_code=au ; mx_order=uy,br,ec,za,au2,au1,nz,ke,ny,la,ut,ca,id,es,sg,my,it,gr,fr,ch,vn,gb,si,bg,be,tr,th,nl,at,sk,hu,pk,cz,ph,de,dk,pl,in,ge,ua,lt,hk,se,tw,ru,cn,jp,kz ;;
+                   Antarctica/Troll) deb_code=au ; mx_order=uy,za,br,au2,au1,ke,nz,ec,id,sg,my,vn,th,pk,in,gr,ph,es,it,tr,bg,ge,hk,si,ch,hu,fr,at,sk,cz,be,tw,gb,ua,ny,nl,de,pl,ca,kz,lt,dk,cn,ru,la,se,ut,jp ;;
+                   Antarctica/Syowa) deb_code=au ; mx_order=za,au2,uy,au1,br,ke,nz,id,sg,my,vn,th,pk,in,ec,ph,hk,gr,tr,tw,ge,bg,it,es,kz,cn,si,hu,sk,at,ch,ua,cz,fr,pl,be,de,gb,lt,nl,ru,dk,jp,se,ca,ny,la,ut ;;
+                  Antarctica/Mawson) deb_code=au ; mx_order=za,au2,au1,nz,id,uy,ke,sg,br,my,vn,th,in,ph,pk,hk,tw,ec,cn,gr,ge,kz,tr,bg,it,jp,es,si,hu,ua,sk,at,ch,cz,pl,ru,fr,lt,de,be,nl,gb,dk,se,ca,ny,la,ut ;;
+                   Antarctica/Davis) deb_code=au ; mx_order=au2,au1,za,nz,id,uy,sg,ke,my,br,vn,th,ph,in,pk,hk,tw,cn,ec,kz,ge,gr,jp,tr,bg,it,hu,si,ua,es,sk,at,ch,ru,cz,pl,lt,fr,de,be,nl,gb,dk,se,la,ny,ca,ut ;;
+                  Antarctica/Vostok) deb_code=au ; mx_order=au2,au1,nz,za,uy,id,br,sg,my,ke,vn,th,ph,ec,hk,in,tw,pk,cn,jp,kz,ge,gr,tr,bg,it,la,es,si,hu,ua,sk,at,ch,cz,ut,pl,ru,fr,lt,de,be,ny,nl,gb,dk,ca,se ;;
+                   Antarctica/Casey) deb_code=au ; mx_order=au2,au1,nz,id,za,sg,my,vn,uy,th,ph,ke,hk,br,in,tw,pk,cn,jp,ec,kz,ge,gr,tr,bg,it,ua,hu,ru,si,sk,at,es,pl,lt,ch,cz,la,de,fr,be,dk,nl,se,gb,ut,ny,ca ;;
+          Antarctica/DumontDUrville) deb_code=au ; mx_order=au2,au1,nz,id,sg,za,my,uy,vn,ph,th,br,hk,tw,ke,in,cn,jp,pk,ec,kz,la,ge,gr,tr,ut,bg,ua,it,ru,hu,si,sk,at,es,pl,lt,ny,cz,ch,de,fr,be,dk,se,nl,ca,gb ;;
+               Antarctica/Macquarie) deb_code=au ; mx_order=au2,au1,nz,id,sg,my,ph,vn,th,hk,tw,uy,za,jp,cn,in,br,ec,ke,pk,la,kz,ut,ge,ny,tr,gr,ru,bg,ua,ca,lt,hu,it,pl,sk,at,si,cz,se,de,ch,dk,es,be,fr,nl,gb ;;
+                 Antarctica/McMurdo) deb_code=au ; mx_order=au2,au1,nz,uy,za,br,id,sg,my,ec,vn,ph,ke,th,hk,tw,in,cn,jp,pk,la,ut,kz,ny,ge,gr,tr,ca,bg,it,es,si,hu,ua,sk,at,ch,fr,cz,pl,ru,be,de,lt,gb,nl,dk,se ;;
+                Arctic/Longyearbyen) deb_code=is ; mx_order=se,dk,ru,lt,de,pl,nl,gb,be,cz,ua,at,sk,fr,hu,ch,si,bg,it,tr,ge,es,gr,kz,ca,ny,ut,pk,jp,cn,in,la,tw,hk,th,ph,vn,ke,my,sg,ec,id,za,br,uy,nz,au1,au2 ;;
+                       Asia/Nicosia) deb_code=am ; mx_order=tr,gr,bg,ge,ua,hu,it,sk,si,at,pl,lt,cz,ru,ch,de,dk,be,se,fr,nl,gb,es,pk,kz,ke,in,za,th,hk,vn,ca,my,cn,sg,tw,ny,ph,id,jp,br,ut,la,uy,ec,au1,nz,au2 ;;
+                     Asia/Famagusta) deb_code=am ; mx_order=tr,gr,ge,bg,ua,hu,it,sk,si,at,pl,lt,cz,ru,ch,de,dk,se,be,fr,nl,gb,es,pk,kz,ke,in,za,th,vn,hk,my,ca,cn,sg,tw,ny,id,ph,jp,br,ut,la,uy,ec,au1,nz,au2 ;;
+                          Asia/Gaza) deb_code=am ; mx_order=tr,gr,ge,bg,ua,hu,it,sk,si,at,pl,cz,lt,ru,ch,de,dk,be,pk,fr,se,nl,es,gb,ke,kz,in,za,th,my,vn,hk,sg,cn,ca,tw,id,ph,ny,jp,br,ut,uy,la,ec,au1,au2,nz ;;
+                        Asia/Hebron) deb_code=am ; mx_order=tr,gr,ge,bg,ua,hu,it,sk,si,at,pl,lt,ru,cz,ch,de,dk,pk,be,fr,se,nl,es,ke,gb,kz,in,za,th,my,vn,hk,sg,cn,ca,tw,id,ph,jp,ny,br,ut,uy,la,ec,au1,au2,nz ;;
+                     Asia/Jerusalem) deb_code=am ; mx_order=tr,gr,ge,bg,ua,hu,it,sk,si,at,pl,lt,ru,cz,ch,de,dk,pk,be,se,fr,nl,es,gb,ke,kz,in,za,th,my,vn,hk,sg,cn,ca,tw,id,ph,jp,ny,br,ut,uy,la,ec,au1,au2,nz ;;
+                        Asia/Beirut) deb_code=am ; mx_order=tr,gr,ge,bg,ua,hu,it,sk,si,at,pl,ru,lt,cz,ch,de,dk,se,be,fr,nl,pk,gb,es,kz,ke,in,za,th,my,vn,hk,cn,sg,ca,tw,id,ph,jp,ny,br,ut,la,uy,ec,au1,nz,au2 ;;
+                         Asia/Amman) deb_code=am ; mx_order=tr,gr,ge,bg,ua,hu,it,sk,si,at,pl,ru,lt,cz,ch,de,pk,dk,be,se,fr,nl,es,gb,ke,kz,in,za,th,my,vn,hk,sg,cn,tw,ca,id,ph,jp,ny,br,ut,uy,la,ec,au1,au2,nz ;;
+                      Asia/Damascus) deb_code=am ; mx_order=tr,ge,gr,bg,ua,hu,sk,it,si,at,pl,ru,lt,cz,de,ch,dk,pk,se,be,fr,nl,gb,es,kz,ke,in,za,th,my,vn,hk,cn,sg,tw,ca,id,ph,jp,ny,br,ut,la,uy,ec,au1,nz,au2 ;;
+                       Asia/Baghdad) deb_code=am ; mx_order=ge,tr,gr,bg,ua,pk,ru,hu,lt,sk,pl,at,si,it,kz,cz,de,ch,se,dk,be,nl,fr,ke,gb,es,in,th,vn,my,za,hk,cn,sg,tw,id,ph,jp,ca,ny,ut,br,la,uy,au1,ec,nz,au2 ;;
+                       Asia/Yerevan) deb_code=am ; mx_order=ge,tr,ua,bg,ru,gr,lt,hu,pl,sk,at,si,cz,it,kz,de,pk,se,dk,ch,nl,be,fr,gb,es,in,ke,th,hk,cn,vn,my,tw,sg,za,ph,jp,id,ca,ny,ut,la,br,ec,uy,au1,nz,au2 ;;
+                       Asia/Tbilisi) deb_code=am ; mx_order=ge,tr,ua,ru,bg,gr,lt,hu,pl,sk,at,si,cz,kz,de,it,se,dk,pk,ch,nl,be,fr,gb,es,in,ke,th,hk,cn,vn,my,tw,sg,za,ph,jp,ca,id,ny,ut,la,br,ec,uy,au1,nz,au2 ;;
+                          Asia/Aden) deb_code=am ; mx_order=ke,pk,ge,gr,tr,bg,ua,it,kz,hu,za,in,si,sk,at,ru,pl,lt,cz,ch,de,dk,be,fr,es,se,nl,gb,th,my,sg,vn,id,hk,cn,tw,ph,jp,ca,br,ny,au1,uy,au2,nz,ut,ec,la ;;
+                        Asia/Riyadh) deb_code=am ; mx_order=ge,pk,tr,gr,bg,ke,ua,kz,hu,ru,it,sk,si,at,pl,lt,cz,de,ch,in,dk,se,be,nl,fr,es,gb,th,za,my,vn,sg,hk,cn,id,tw,ph,jp,ca,ny,br,ut,au1,uy,au2,nz,la,ec ;;
+                        Asia/Kuwait) deb_code=am ; mx_order=ge,pk,tr,gr,bg,ua,kz,ru,hu,lt,sk,pl,at,si,it,ke,cz,de,ch,se,dk,in,be,nl,fr,gb,es,th,my,vn,za,hk,sg,cn,tw,id,ph,jp,ca,ny,br,ut,au1,la,nz,au2,uy,ec ;;
+                          Asia/Baku) deb_code=am ; mx_order=ge,tr,ua,ru,bg,kz,gr,pk,lt,pl,hu,sk,at,si,cz,se,de,it,dk,ch,nl,be,fr,gb,in,es,ke,th,hk,cn,vn,my,tw,sg,ph,jp,za,id,ca,ny,ut,la,br,au1,nz,ec,au2,uy ;;
+                         Asia/Aqtau) deb_code=am ; mx_order=ge,ru,ua,tr,lt,kz,bg,pl,gr,hu,sk,at,pk,se,cz,si,de,dk,it,ch,nl,be,fr,gb,in,es,ke,th,cn,hk,vn,tw,my,sg,jp,ph,id,za,ca,ny,ut,la,br,nz,au1,ec,au2,uy ;;
+                       Asia/Bahrain) deb_code=am ; mx_order=pk,ge,tr,gr,kz,bg,ua,ke,ru,hu,lt,sk,pl,at,in,it,si,cz,de,ch,se,dk,be,nl,fr,gb,es,th,my,vn,za,sg,hk,cn,tw,id,ph,jp,ca,ny,br,au1,ut,nz,au2,uy,la,ec ;;
+                          Asia/Oral) deb_code=ru ; mx_order=ru,ge,ua,lt,tr,pl,kz,se,bg,hu,sk,at,cz,de,dk,gr,si,ch,it,nl,be,pk,fr,gb,es,in,ke,cn,th,hk,tw,vn,jp,my,ph,sg,ca,id,ny,za,ut,la,br,ec,nz,au1,au2,uy ;;
+                        Asia/Tehran) deb_code=am ; mx_order=ge,pk,tr,kz,ua,ru,gr,bg,lt,hu,pl,sk,at,si,cz,it,de,se,dk,ch,in,nl,be,fr,ke,gb,es,th,hk,vn,my,cn,sg,tw,ph,za,id,jp,ca,ny,ut,br,la,au1,nz,au2,uy,ec ;;
+                         Asia/Qatar) deb_code=am ; mx_order=pk,ge,tr,gr,kz,bg,ua,ke,ru,hu,in,lt,sk,pl,at,it,si,cz,de,ch,se,dk,be,nl,fr,gb,th,es,my,vn,sg,za,hk,cn,id,tw,ph,jp,ca,ny,br,au1,au2,nz,ut,uy,la,ec ;;
+                        Asia/Atyrau) deb_code=am ; mx_order=ge,ru,ua,tr,kz,lt,pl,bg,hu,gr,sk,se,at,cz,de,si,dk,pk,it,ch,nl,be,fr,gb,in,es,ke,th,cn,hk,tw,vn,my,jp,sg,ph,id,ca,za,ny,ut,la,br,nz,ec,au1,au2,uy ;;
+                         Asia/Dubai) deb_code=am ; mx_order=pk,ge,kz,tr,gr,in,bg,ua,ke,ru,hu,lt,pl,sk,at,si,it,cz,de,se,ch,dk,th,be,nl,fr,gb,my,es,vn,sg,hk,za,cn,id,tw,ph,jp,ca,ny,au1,nz,au2,br,ut,la,uy,ec ;;
+                        Asia/Aqtobe) deb_code=ru ; mx_order=ge,ru,kz,ua,lt,tr,pl,se,bg,hu,sk,at,pk,gr,dk,cz,de,si,ch,it,nl,be,fr,gb,in,es,cn,th,hk,ke,tw,vn,jp,my,ph,sg,id,ca,ny,za,ut,la,nz,br,au1,ec,au2,uy ;;
+                      Asia/Ashgabat) deb_code=am ; mx_order=ge,kz,pk,ru,tr,ua,bg,gr,lt,pl,in,hu,sk,at,si,se,cz,de,it,dk,ch,nl,be,fr,gb,ke,th,es,hk,vn,cn,my,tw,sg,ph,id,jp,za,ca,ny,ut,la,au1,nz,au2,br,ec,uy ;;
+                        Asia/Muscat) deb_code=am ; mx_order=pk,ge,kz,in,tr,ke,gr,ua,bg,ru,hu,lt,pl,th,sk,at,si,it,cz,de,se,ch,my,dk,vn,sg,be,nl,fr,hk,gb,es,id,cn,tw,za,ph,jp,ca,au1,ny,nz,au2,br,ut,la,uy,ec ;;
+                 Asia/Yekaterinburg) deb_code=ru ; mx_order=ru,kz,ge,ua,lt,se,pl,tr,dk,hu,de,sk,bg,at,cz,si,gr,nl,pk,ch,be,it,gb,fr,in,es,cn,hk,th,tw,jp,vn,ke,ph,my,sg,ca,id,ny,ut,za,la,nz,ec,au1,br,au2,uy ;;
+                     Asia/Qyzylorda) deb_code=ru ; mx_order=kz,ge,pk,ru,ua,tr,lt,in,pl,bg,se,hu,gr,sk,at,cz,de,dk,si,it,ch,nl,be,fr,gb,th,cn,hk,tw,vn,es,my,ke,sg,jp,ph,id,za,ca,ny,ut,la,nz,au1,au2,br,ec,uy ;;
+                     Asia/Samarkand) deb_code=cn ; mx_order=kz,pk,ge,ru,in,ua,tr,lt,bg,gr,pl,hu,sk,se,at,cz,si,de,dk,th,it,ch,nl,hk,be,cn,vn,fr,gb,tw,my,ke,sg,es,ph,jp,id,za,ca,ny,ut,nz,au1,la,au2,br,ec,uy ;;
+                       Asia/Karachi) deb_code=am ; mx_order=pk,in,kz,ge,th,tr,ru,ua,gr,ke,my,vn,bg,sg,lt,hk,hu,pl,sk,at,si,cz,cn,it,se,tw,de,id,dk,ch,ph,nl,be,fr,gb,es,jp,za,au1,ca,nz,au2,ny,ut,br,la,uy,ec ;;
+                      Asia/Dushanbe) deb_code=cn ; mx_order=kz,pk,ge,in,ru,ua,tr,lt,bg,gr,pl,hu,th,se,sk,at,cz,si,de,dk,hk,it,cn,vn,ch,nl,be,tw,my,fr,gb,sg,ke,ph,es,jp,id,za,ca,ny,ut,nz,au1,la,au2,br,ec,uy ;;
+                         Asia/Kabul) deb_code=cn ; mx_order=pk,kz,in,ge,ru,ua,tr,th,lt,bg,gr,pl,hu,sk,hk,at,se,vn,cz,si,de,my,cn,dk,it,tw,sg,ch,ke,nl,be,fr,ph,gb,id,es,jp,za,ca,ny,au1,nz,au2,ut,la,br,uy,ec ;;
+                      Asia/Tashkent) deb_code=cn ; mx_order=kz,pk,ge,in,ru,ua,tr,lt,bg,pl,gr,hu,se,sk,at,cz,th,de,dk,si,it,hk,cn,ch,nl,be,vn,tw,fr,gb,my,sg,ke,ph,es,jp,id,za,ca,ny,ut,nz,la,au1,au2,br,ec,uy ;;
+                          Asia/Omsk) deb_code=ru ; mx_order=kz,ru,ge,ua,lt,se,pl,pk,tr,dk,hu,bg,in,de,sk,at,cz,si,gr,nl,ch,be,cn,it,gb,fr,hk,tw,th,jp,es,vn,ph,my,sg,ke,id,ca,ny,ut,za,la,nz,au1,au2,ec,br,uy ;;
+                       Asia/Bishkek) deb_code=cn ; mx_order=kz,pk,ge,in,ru,ua,tr,lt,pl,th,bg,se,hu,cn,gr,hk,sk,at,cz,dk,de,si,tw,vn,it,ch,my,nl,be,ph,sg,fr,gb,jp,ke,es,id,za,ca,ny,ut,nz,au1,la,au2,br,ec,uy ;;
+                        Asia/Almaty) deb_code=ru ; mx_order=kz,pk,in,ge,ru,ua,lt,tr,th,cn,hk,pl,bg,se,hu,gr,tw,sk,at,vn,dk,cz,de,si,my,it,ch,nl,ph,be,jp,sg,fr,gb,id,ke,es,za,ca,ny,ut,nz,au1,la,au2,br,ec,uy ;;
+                       Asia/Colombo) deb_code=sg ; mx_order=in,pk,th,my,sg,vn,id,kz,hk,ph,ke,tw,cn,ge,tr,ru,gr,za,ua,bg,jp,lt,hu,pl,sk,at,si,it,cz,se,de,dk,ch,au1,be,nl,fr,gb,au2,nz,es,ca,br,ny,uy,ut,la,ec ;;
+                   Asia/Novosibirsk) deb_code=ru ; mx_order=kz,ru,ge,ua,lt,pk,in,se,pl,cn,tr,dk,hu,de,sk,bg,cz,at,hk,tw,si,gr,jp,th,nl,ch,be,it,gb,fr,vn,ph,my,es,sg,id,ke,ca,ny,ut,la,za,nz,au1,au2,ec,br,uy ;;
+                       Asia/Barnaul) deb_code=ru ; mx_order=kz,ru,ge,in,pk,ua,lt,cn,se,pl,tr,hk,dk,tw,hu,bg,de,sk,at,cz,th,jp,gr,si,nl,ch,be,vn,it,gb,fr,ph,my,sg,es,id,ke,ca,ny,ut,la,za,nz,au1,au2,ec,br,uy ;;
+                         Asia/Tomsk) deb_code=ru ; mx_order=kz,ru,ge,ua,lt,in,se,pk,cn,pl,dk,tr,hu,de,hk,sk,cz,bg,at,tw,jp,si,gr,nl,th,be,ch,gb,it,fr,vn,ph,my,es,sg,id,ke,ca,ny,ut,la,za,nz,au1,au2,ec,br,uy ;;
+                     Asia/Kathmandu) deb_code=cn ; mx_order=in,pk,kz,th,vn,hk,my,cn,sg,tw,ph,ge,id,ru,jp,ua,tr,lt,bg,gr,pl,hu,ke,se,sk,at,cz,si,de,dk,it,ch,nl,be,fr,gb,es,za,nz,au1,au2,ca,ny,ut,la,br,uy,ec ;;
+                  Asia/Novokuznetsk) deb_code=ru ; mx_order=kz,ru,ge,in,pk,cn,ua,lt,se,hk,tw,pl,tr,jp,th,dk,hu,de,bg,sk,cz,at,si,gr,vn,nl,ph,ch,be,it,gb,fr,my,sg,es,id,ke,ca,ny,ut,la,za,nz,au1,au2,ec,br,uy ;;
+                        Asia/Urumqi) deb_code=cn ; mx_order=kz,in,pk,cn,hk,ge,th,tw,ru,vn,ua,jp,lt,ph,my,tr,se,pl,sg,bg,hu,sk,dk,gr,at,de,cz,si,id,nl,ch,it,be,gb,fr,ke,es,ca,za,nz,ny,au1,ut,la,au2,ec,br,uy ;;
+                       Asia/Kolkata) deb_code=cn ; mx_order=in,th,pk,vn,kz,my,hk,sg,tw,cn,ph,id,ge,jp,ru,ua,tr,ke,lt,bg,gr,pl,hu,se,sk,at,cz,si,de,dk,it,ch,nl,be,fr,gb,za,es,nz,au1,au2,ca,ny,ut,la,br,uy,ec ;;
+                       Asia/Thimphu) deb_code=cn ; mx_order=in,th,kz,pk,hk,vn,my,cn,tw,sg,ph,id,ge,jp,ru,ua,tr,lt,bg,gr,pl,hu,se,ke,sk,at,cz,de,dk,si,it,ch,nl,be,fr,gb,es,za,nz,au1,au2,ca,ny,ut,la,br,uy,ec ;;
+                         Asia/Dhaka) deb_code=cn ; mx_order=in,th,vn,pk,hk,kz,my,sg,tw,cn,ph,id,ge,jp,ru,ua,tr,lt,ke,bg,gr,pl,hu,se,sk,at,cz,si,de,dk,it,ch,nl,be,fr,gb,es,za,nz,au1,au2,ca,ny,ut,la,br,uy,ec ;;
+                          Asia/Hovd) deb_code=cn ; mx_order=kz,in,cn,pk,hk,tw,ru,ge,th,jp,ua,vn,lt,ph,se,pl,tr,my,bg,dk,hu,sk,de,sg,at,cz,gr,si,nl,ch,be,it,gb,id,fr,es,ke,ca,ny,ut,nz,za,la,au1,au2,ec,br,uy ;;
+                   Asia/Krasnoyarsk) deb_code=ru ; mx_order=kz,ru,cn,in,ge,ua,pk,lt,tw,hk,jp,se,pl,dk,th,tr,de,hu,sk,cz,at,bg,vn,ph,si,nl,gr,be,ch,gb,it,fr,my,sg,es,id,ke,ca,ny,ut,la,nz,za,au1,au2,ec,br,uy ;;
+                        Asia/Yangon) deb_code=sg ; mx_order=th,in,vn,my,sg,hk,ph,id,tw,cn,pk,kz,jp,ge,ru,ke,ua,tr,lt,gr,bg,pl,hu,se,nz,sk,au1,at,cz,si,de,dk,it,au2,ch,nl,be,za,fr,gb,es,ca,la,ut,ny,br,uy,ec ;;
+                       Asia/Bangkok) deb_code=sg ; mx_order=th,vn,my,sg,in,hk,ph,id,tw,cn,pk,kz,jp,ge,ru,ke,nz,au1,ua,tr,lt,au2,bg,gr,pl,hu,se,sk,at,cz,si,de,dk,it,za,ch,nl,be,fr,gb,es,la,ca,ut,ny,br,uy,ec ;;
+                  Asia/Kuala_Lumpur) deb_code=sg ; mx_order=my,sg,vn,th,id,ph,hk,in,tw,cn,pk,kz,jp,au1,nz,au2,ge,ke,ru,tr,ua,za,gr,bg,lt,pl,hu,sk,se,at,si,cz,de,dk,it,ch,nl,be,fr,gb,es,la,ca,ut,ny,uy,br,ec ;;
+                     Asia/Vientiane) deb_code=hk ; mx_order=th,vn,hk,in,my,sg,ph,tw,cn,id,pk,kz,jp,ge,ru,ua,tr,nz,ke,au1,lt,bg,gr,pl,se,hu,au2,sk,at,cz,dk,de,si,it,ch,nl,be,fr,gb,za,es,la,ca,ut,ny,br,uy,ec ;;
+                     Asia/Singapore) deb_code=sg ; mx_order=sg,my,id,vn,th,ph,hk,in,tw,cn,pk,jp,kz,au1,nz,au2,ge,ke,ru,za,tr,ua,gr,bg,lt,pl,hu,se,sk,at,si,cz,de,dk,it,ch,nl,be,fr,gb,es,la,ut,ca,ny,uy,br,ec ;;
+                       Asia/Irkutsk) deb_code=ru ; mx_order=kz,cn,jp,tw,hk,in,ru,th,pk,ph,ge,vn,ua,lt,se,pl,my,dk,tr,sg,de,hu,sk,cz,bg,at,si,nl,gr,be,ch,id,gb,it,fr,es,ke,ca,ut,la,ny,nz,au1,au2,za,ec,br,uy ;;
+                    Asia/Phnom_Penh) deb_code=sg ; mx_order=vn,th,my,sg,hk,ph,id,in,tw,cn,pk,jp,kz,ge,nz,au1,au2,ru,ke,ua,tr,lt,bg,gr,pl,se,hu,sk,at,cz,de,dk,si,za,it,ch,nl,be,fr,gb,es,la,ut,ca,ny,br,uy,ec ;;
+                   Asia/Ho_Chi_Minh) deb_code=sg ; mx_order=vn,th,my,sg,hk,ph,id,tw,in,cn,jp,pk,kz,nz,au1,ge,au2,ru,ke,ua,tr,lt,bg,gr,pl,se,hu,sk,at,cz,de,dk,si,za,it,ch,nl,be,fr,gb,es,la,ut,ca,ny,br,uy,ec ;;
+                       Asia/Jakarta) deb_code=sg ; mx_order=id,sg,my,vn,th,ph,hk,in,tw,cn,au1,nz,pk,au2,jp,kz,ke,ge,za,ru,tr,ua,gr,bg,lt,pl,hu,sk,se,at,si,cz,de,it,dk,ch,nl,be,fr,gb,es,la,uy,ut,br,ca,ny,ec ;;
+                   Asia/Ulaanbaatar) deb_code=ru ; mx_order=cn,kz,tw,hk,jp,in,th,ph,vn,pk,ru,ge,my,sg,ua,lt,se,pl,id,tr,dk,hu,de,bg,sk,cz,at,gr,si,nl,be,ch,gb,it,fr,es,ke,nz,ca,ut,la,au1,ny,au2,za,ec,br,uy ;;
+                     Asia/Pontianak) deb_code=sg ; mx_order=sg,id,my,vn,th,ph,hk,tw,in,cn,jp,pk,au1,nz,kz,au2,ge,ke,ru,za,ua,tr,lt,gr,bg,pl,hu,se,sk,at,cz,si,de,dk,it,ch,nl,be,fr,gb,es,la,ut,ca,ny,uy,br,ec ;;
+                       Asia/Kuching) deb_code=sg ; mx_order=sg,id,my,vn,th,ph,hk,tw,in,cn,jp,pk,nz,au1,kz,au2,ge,ke,ru,ua,tr,za,lt,gr,bg,pl,hu,se,sk,at,cz,si,de,dk,it,ch,nl,be,fr,gb,es,la,ut,ca,ny,uy,br,ec ;;
+                         Asia/Chita) deb_code=ru ; mx_order=cn,jp,kz,tw,hk,in,ph,th,vn,ru,pk,ge,ua,lt,se,my,sg,pl,dk,tr,de,hu,cz,sk,at,bg,id,nl,si,gr,be,ch,gb,fr,it,es,ut,ke,la,ca,nz,ny,au1,au2,za,ec,br,uy ;;
+                         Asia/Macau) deb_code=hk ; mx_order=hk,tw,ph,cn,vn,th,my,sg,in,jp,id,kz,pk,ge,nz,ru,au1,ua,lt,au2,tr,se,pl,bg,gr,hu,sk,dk,at,ke,de,cz,si,it,nl,ch,be,gb,fr,es,za,la,ut,ca,ny,ec,br,uy ;;
+                     Asia/Hong_Kong) deb_code=hk ; mx_order=hk,tw,ph,cn,vn,th,my,sg,in,jp,id,kz,pk,ge,nz,ru,au1,ua,lt,au2,tr,se,pl,bg,hu,gr,sk,dk,at,de,ke,cz,si,it,nl,ch,be,gb,fr,es,za,la,ut,ca,ny,ec,br,uy ;;
+                    Asia/Choibalsan) deb_code=ru ; mx_order=cn,jp,tw,hk,kz,in,ph,th,vn,pk,ru,my,sg,ge,ua,lt,se,id,pl,dk,tr,de,hu,sk,cz,bg,at,si,nl,gr,be,ch,gb,fr,it,es,ke,nz,la,ut,ca,au1,ny,au2,za,ec,br,uy ;;
+                        Asia/Brunei) deb_code=sg ; mx_order=vn,sg,ph,my,id,th,hk,tw,cn,in,jp,nz,pk,au1,kz,au2,ge,ke,ru,ua,tr,lt,bg,gr,pl,za,se,hu,sk,at,cz,dk,de,si,it,ch,nl,be,fr,gb,es,la,ut,ca,ny,uy,br,ec ;;
+                      Asia/Makassar) deb_code=sg ; mx_order=id,sg,ph,my,vn,th,hk,tw,cn,nz,au1,in,jp,au2,pk,kz,ge,ke,za,ru,ua,tr,lt,gr,bg,pl,se,hu,sk,at,cz,dk,de,si,it,ch,nl,be,fr,gb,es,la,ut,uy,ca,ny,br,ec ;;
+                        Asia/Manila) deb_code=hk ; mx_order=ph,hk,tw,vn,cn,th,sg,my,id,jp,in,kz,pk,nz,au1,au2,ge,ru,ua,lt,tr,se,pl,ke,bg,gr,hu,sk,dk,at,de,cz,si,it,nl,ch,be,gb,fr,za,es,la,ut,ca,ny,ec,uy,br ;;
+                      Asia/Shanghai) deb_code=cn ; mx_order=cn,tw,hk,jp,ph,vn,th,in,my,sg,kz,id,pk,ge,ru,nz,ua,lt,se,pl,au1,tr,dk,bg,hu,de,sk,at,cz,gr,au2,si,nl,ch,be,it,gb,fr,ke,es,la,ut,ca,za,ny,ec,br,uy ;;
+                        Asia/Taipei) deb_code=tw ; mx_order=tw,cn,hk,ph,jp,vn,th,my,sg,in,id,kz,pk,nz,ge,au1,ru,ua,au2,lt,se,tr,pl,bg,dk,hu,sk,de,gr,at,cz,si,nl,ke,ch,be,it,gb,fr,es,la,ut,za,ca,ny,ec,br,uy ;;
+                          Asia/Dili) deb_code=sg ; mx_order=id,ph,sg,my,vn,nz,hk,th,tw,au1,au2,cn,jp,in,pk,kz,ke,ge,za,ru,ua,tr,lt,gr,bg,pl,se,hu,sk,at,dk,cz,de,si,it,ch,nl,be,la,fr,gb,es,ut,uy,ca,ny,br,ec ;;
+                     Asia/Pyongyang) deb_code=kr ; mx_order=cn,jp,tw,hk,ph,vn,th,in,kz,my,sg,id,pk,ru,ge,ua,lt,se,pl,dk,tr,nz,de,hu,sk,bg,cz,at,si,gr,nl,be,ch,gb,au1,fr,it,au2,la,es,ut,ke,ca,ny,za,ec,br,uy ;;
+                         Asia/Seoul) deb_code=kr ; mx_order=cn,jp,tw,hk,ph,vn,th,in,kz,my,sg,id,pk,ru,ge,ua,lt,se,nz,pl,tr,dk,de,hu,sk,bg,cz,at,au1,si,gr,nl,be,ch,gb,it,fr,au2,la,es,ut,ke,ca,ny,za,ec,br,uy ;;
+                       Asia/Yakutsk) deb_code=ru ; mx_order=jp,cn,kz,tw,hk,ru,se,ph,in,lt,ua,ge,pl,dk,th,vn,de,pk,cz,hu,sk,at,nl,tr,be,gb,bg,si,ch,fr,my,sg,gr,it,ut,la,id,es,ca,ny,nz,ke,au1,au2,ec,za,br,uy ;;
+                   Asia/Vladivostok) deb_code=ru ; mx_order=jp,cn,tw,hk,ph,vn,kz,th,in,my,sg,id,pk,ru,ge,se,lt,ua,pl,dk,de,tr,hu,cz,sk,at,bg,nz,nl,si,be,gr,gb,ch,fr,it,la,au1,ut,au2,es,ca,ny,ke,za,ec,br,uy ;;
+                      Asia/Khandyga) deb_code=ru ; mx_order=jp,cn,tw,kz,hk,ru,ph,se,in,lt,ua,dk,pl,ge,th,vn,de,cz,pk,nl,sk,hu,at,be,gb,tr,si,bg,ch,fr,my,sg,gr,it,la,ut,id,es,ca,ny,nz,ke,au1,au2,ec,za,br,uy ;;
+                         Asia/Tokyo) deb_code=jp ; mx_order=jp,cn,tw,hk,ph,vn,th,in,my,sg,kz,id,pk,nz,ru,ge,au1,se,lt,ua,pl,au2,dk,la,de,tr,hu,cz,sk,at,bg,nl,ut,si,be,gr,gb,ch,fr,it,es,ca,ny,ke,za,ec,br,uy ;;
+                      Asia/Jayapura) deb_code=tw ; mx_order=ph,nz,tw,id,au1,hk,vn,sg,jp,cn,my,au2,th,in,kz,pk,ge,ru,la,ke,ua,lt,tr,se,za,pl,ut,bg,hu,dk,gr,sk,de,at,cz,si,nl,ch,it,be,gb,fr,es,ny,ca,ec,uy,br ;;
+                      Asia/Sakhalin) deb_code=ru ; mx_order=jp,cn,tw,hk,ph,kz,vn,th,in,my,sg,ru,id,pk,se,ge,lt,ua,pl,dk,la,de,cz,hu,sk,at,nz,tr,nl,ut,bg,be,si,gb,ch,fr,gr,it,au1,ca,ny,es,au2,ke,ec,za,br,uy ;;
+                           Asia/Ust) deb_code=ru ; mx_order=jp,cn,tw,kz,hk,ru,se,lt,ph,ua,dk,in,pl,ge,de,th,cz,nl,vn,sk,hu,at,be,gb,pk,si,tr,ch,fr,la,bg,ut,it,gr,my,ca,sg,ny,es,id,nz,ke,au1,au2,ec,za,br,uy ;;
+                       Asia/Magadan) deb_code=ru ; mx_order=jp,cn,tw,hk,kz,ph,ru,se,in,lt,th,vn,ua,dk,pl,la,ge,de,ut,cz,nl,pk,sk,hu,at,be,gb,my,sg,si,tr,ch,fr,bg,ca,it,gr,ny,id,es,nz,au1,au2,ke,ec,za,br,uy ;;
+                 Asia/Srednekolymsk) deb_code=ru ; mx_order=jp,cn,kz,tw,ru,se,hk,lt,dk,ua,pl,de,ph,nl,la,ut,cz,ge,gb,be,in,sk,at,hu,fr,ch,si,th,tr,bg,vn,ca,pk,ny,it,gr,es,my,sg,id,nz,ke,au1,ec,au2,za,br,uy ;;
+                     Asia/Kamchatka) deb_code=ru ; mx_order=jp,cn,tw,hk,ph,kz,vn,la,th,in,ru,ut,se,lt,ua,dk,my,sg,pl,ge,de,pk,nl,cz,id,sk,at,hu,gb,be,ny,ca,si,fr,tr,ch,bg,nz,it,gr,es,au1,au2,ke,ec,za,br,uy ;;
+                        Asia/Anadyr) deb_code=ru ; mx_order=jp,cn,la,ut,tw,se,kz,ru,hk,lt,dk,ca,ny,pl,ua,de,ph,nl,gb,cz,be,sk,at,hu,fr,ge,ch,si,in,bg,tr,th,vn,it,es,gr,pk,my,sg,id,nz,ec,au1,au2,ke,br,uy,za ;;
+                   Atlantic/Bermuda) deb_code=pt ; mx_order=ny,ca,ut,ec,la,es,gb,fr,be,nl,ch,dk,de,br,cz,se,it,si,at,sk,pl,hu,lt,uy,bg,ua,gr,ru,tr,ge,kz,ke,za,pk,jp,cn,in,tw,hk,th,ph,vn,my,sg,nz,id,au2,au1 ;;
+                   Atlantic/Stanley) deb_code=pt ; mx_order=uy,br,ec,za,au2,au1,ke,ny,ca,nz,ut,la,es,it,fr,gr,gb,ch,be,si,nl,bg,at,sk,cz,hu,tr,de,id,dk,pl,ua,lt,se,sg,ge,my,pk,ru,vn,th,in,ph,kz,hk,tw,cn,jp ;;
+             Atlantic/South_Georgia) deb_code=pt ; mx_order=uy,br,za,ec,ke,au2,au1,nz,es,ny,ca,it,gr,fr,ch,si,bg,gb,be,tr,ut,at,nl,sk,hu,id,cz,la,de,pl,dk,pk,sg,ge,ua,my,lt,se,ru,th,vn,in,kz,ph,hk,tw,cn,jp ;;
+                    Atlantic/Azores) deb_code=pt ; mx_order=es,gb,fr,be,nl,ch,it,ca,si,de,cz,dk,at,sk,hu,se,pl,bg,ny,lt,gr,ua,tr,ru,ge,ut,ec,br,ke,la,kz,pk,uy,za,in,cn,jp,th,hk,tw,vn,my,sg,ph,id,nz,au1,au2 ;;
+                Atlantic/Cape_Verde) deb_code=pt ; mx_order=es,fr,it,gb,ch,be,nl,br,si,ca,at,cz,sk,gr,de,hu,bg,dk,ny,pl,tr,se,lt,ua,ec,uy,ke,ru,ge,za,ut,pk,la,kz,in,th,my,cn,vn,hk,sg,jp,tw,id,ph,au2,au1,nz ;;
+                 Atlantic/Reykjavik) deb_code=is ; mx_order=gb,nl,dk,se,be,fr,de,ch,cz,pl,lt,at,es,sk,si,hu,ru,it,ua,ca,bg,tr,gr,ny,ge,ut,kz,la,pk,ke,in,ec,jp,cn,tw,hk,br,th,vn,ph,za,my,uy,sg,id,nz,au1,au2 ;;
+                   Atlantic/Madeira) deb_code=pt ; mx_order=es,fr,gb,be,ch,it,nl,si,cz,at,de,sk,dk,hu,bg,gr,pl,se,lt,tr,ca,ua,ru,ny,ge,ke,br,ec,ut,kz,pk,za,uy,la,in,th,cn,hk,jp,tw,vn,my,sg,ph,id,au2,au1,nz ;;
+                    Atlantic/Canary) deb_code=pt ; mx_order=es,fr,gb,it,ch,be,nl,si,cz,at,sk,de,hu,gr,dk,bg,pl,tr,se,lt,ua,ca,ru,ny,ge,ke,br,za,ec,ut,pk,kz,uy,la,in,th,cn,hk,vn,my,jp,tw,sg,ph,id,au2,au1,nz ;;
+                     Atlantic/Faroe) deb_code=is ; mx_order=gb,nl,dk,se,be,de,fr,cz,ch,pl,lt,at,sk,si,hu,es,ua,ru,it,bg,tr,gr,ge,ca,ny,kz,ut,pk,la,ke,in,cn,jp,tw,hk,ec,th,br,vn,za,ph,my,sg,uy,id,nz,au1,au2 ;;
+                 Atlantic/St_Helena) deb_code=pt ; mx_order=za,br,ke,uy,es,it,gr,bg,ch,si,fr,tr,at,hu,be,sk,gb,cz,nl,de,pl,dk,ua,ge,ec,lt,se,ru,ca,pk,ny,kz,in,ut,my,th,sg,id,vn,au2,la,au1,hk,ph,cn,tw,nz,jp ;;
+                    Australia/Perth) deb_code=au ; mx_order=au1,id,au2,nz,sg,my,vn,ph,th,hk,tw,in,cn,jp,pk,za,ke,kz,ge,tr,ru,gr,ua,bg,uy,lt,hu,pl,sk,at,si,it,se,cz,de,br,dk,ch,nl,be,fr,gb,es,la,ec,ut,ca,ny ;;
+                    Australia/Eucla) deb_code=au ; mx_order=au1,au2,nz,id,sg,my,ph,vn,th,hk,tw,cn,in,jp,pk,za,kz,ke,ge,uy,ru,tr,ua,gr,bg,lt,pl,la,br,hu,sk,se,at,si,cz,it,de,dk,ch,nl,be,fr,ut,ec,gb,es,ny,ca ;;
+                   Australia/Darwin) deb_code=au ; mx_order=id,nz,au1,ph,sg,my,vn,au2,hk,tw,th,cn,jp,in,pk,kz,ke,ge,za,ru,ua,tr,lt,gr,bg,pl,se,hu,la,sk,at,dk,cz,de,si,it,ch,nl,be,fr,gb,ut,es,uy,br,ny,ca,ec ;;
+                 Australia/Adelaide) deb_code=au ; mx_order=au1,au2,nz,id,sg,my,ph,vn,th,hk,tw,cn,jp,in,pk,za,kz,ke,uy,ge,la,br,ru,tr,ua,gr,ec,bg,ut,lt,pl,hu,se,sk,at,si,cz,de,it,dk,ch,nl,be,fr,gb,es,ny,ca ;;
+              Australia/Broken_Hill) deb_code=au ; mx_order=au1,nz,au2,id,sg,ph,my,vn,hk,tw,th,cn,jp,in,pk,za,kz,ke,uy,ge,la,ru,br,tr,ua,ut,ec,gr,lt,bg,pl,se,hu,sk,at,cz,si,dk,de,it,ch,nl,be,fr,gb,es,ny,ca ;;
+                   Australia/Currie) deb_code=au ; mx_order=au1,au2,nz,id,sg,my,ph,vn,th,hk,tw,cn,jp,in,za,pk,ke,kz,uy,br,la,ge,ec,ut,ru,tr,ua,gr,bg,lt,pl,hu,se,sk,at,si,cz,it,de,dk,ch,nl,be,fr,ny,gb,es,ca ;;
+                Australia/Melbourne) deb_code=au ; mx_order=au1,au2,nz,id,sg,ph,my,vn,th,hk,tw,cn,jp,in,za,pk,kz,ke,uy,la,br,ge,ec,ut,ru,tr,ua,gr,bg,lt,pl,hu,se,sk,at,si,cz,de,it,dk,ch,nl,be,ny,fr,gb,es,ca ;;
+                   Australia/Hobart) deb_code=au ; mx_order=au2,au1,nz,id,sg,my,ph,vn,th,hk,tw,cn,jp,in,za,pk,uy,ke,kz,br,la,ec,ge,ut,ru,tr,ua,gr,bg,lt,pl,hu,se,sk,at,si,it,cz,de,dk,ny,ch,nl,be,fr,gb,ca,es ;;
+                 Australia/Lindeman) deb_code=au ; mx_order=nz,au1,au2,id,ph,sg,vn,my,tw,hk,jp,cn,th,in,pk,kz,la,za,ke,ge,ut,ru,uy,ua,lt,tr,ec,se,pl,bg,gr,hu,dk,sk,at,de,cz,br,si,it,nl,ny,ch,be,gb,fr,ca,es ;;
+                   Australia/Sydney) deb_code=au ; mx_order=nz,au1,au2,id,ph,sg,my,vn,tw,hk,th,jp,cn,in,pk,za,kz,uy,la,ke,ec,ut,br,ge,ru,ua,tr,lt,gr,bg,pl,se,hu,sk,at,ny,dk,cz,de,si,it,ch,nl,be,ca,fr,gb,es ;;
+                 Australia/Brisbane) deb_code=au ; mx_order=nz,au1,au2,id,ph,sg,my,vn,tw,hk,jp,th,cn,in,pk,kz,la,za,uy,ke,ut,ge,ec,br,ru,ua,tr,lt,se,pl,gr,bg,hu,ny,dk,sk,at,de,cz,si,it,nl,ch,ca,be,gb,fr,es ;;
+                Australia/Lord_Howe) deb_code=au ; mx_order=nz,au1,au2,id,ph,sg,my,vn,tw,hk,jp,th,cn,in,la,pk,kz,za,uy,ut,ec,ke,br,ge,ru,ny,ua,tr,lt,se,pl,gr,bg,ca,hu,dk,sk,at,de,cz,si,it,nl,ch,be,gb,fr,es ;;
+                      Europe/Lisbon) deb_code=pt ; mx_order=es,fr,gb,be,ch,it,nl,si,cz,at,de,sk,dk,hu,bg,pl,gr,se,lt,tr,ua,ru,ca,ge,ny,ke,kz,pk,ut,br,za,ec,in,la,uy,th,cn,hk,jp,tw,vn,my,sg,ph,id,au1,nz,au2 ;;
+                      Europe/Dublin) deb_code=uk ; mx_order=gb,nl,be,fr,dk,ch,de,cz,es,se,at,si,sk,pl,it,hu,lt,bg,ua,ru,gr,tr,ge,ca,ny,kz,pk,ut,ke,la,in,ec,br,cn,za,jp,hk,th,tw,vn,uy,my,ph,sg,id,nz,au1,au2 ;;
+                   Europe/Gibraltar) deb_code=pt ; mx_order=es,fr,it,ch,gb,be,nl,si,cz,at,sk,de,hu,dk,bg,gr,pl,tr,se,lt,ua,ru,ge,ca,ny,ke,kz,pk,za,br,ut,ec,in,uy,la,th,cn,hk,vn,tw,jp,my,sg,ph,id,au1,au2,nz ;;
+                 Europe/Isle_of_Man) deb_code=uk ; mx_order=gb,nl,be,fr,dk,ch,de,cz,se,es,at,si,sk,pl,hu,it,lt,ua,bg,ru,gr,tr,ge,ca,ny,kz,pk,ut,ke,in,la,cn,ec,za,jp,br,hk,th,tw,vn,my,ph,uy,sg,id,nz,au1,au2 ;;
+                      Europe/Madrid) deb_code=es ; mx_order=es,fr,ch,gb,be,it,nl,si,cz,at,de,sk,hu,dk,bg,pl,gr,se,lt,tr,ua,ru,ge,ca,ny,ke,kz,pk,za,ut,br,in,ec,la,uy,th,cn,hk,tw,jp,vn,my,sg,ph,id,au1,nz,au2 ;;
+                    Europe/Guernsey) deb_code=uk ; mx_order=gb,fr,be,nl,ch,es,de,cz,dk,si,at,it,sk,hu,pl,se,lt,bg,ua,gr,tr,ru,ge,ca,ny,kz,pk,ke,ut,in,la,za,br,ec,cn,th,jp,hk,tw,vn,uy,my,ph,sg,id,nz,au1,au2 ;;
+                      Europe/Jersey) deb_code=uk ; mx_order=gb,fr,be,nl,ch,es,de,cz,dk,si,at,it,sk,hu,pl,se,lt,bg,ua,gr,tr,ru,ge,ca,ny,kz,pk,ke,ut,in,la,za,br,ec,cn,th,jp,hk,tw,vn,my,uy,ph,sg,id,nz,au1,au2 ;;
+                      Europe/London) deb_code=uk ; mx_order=gb,be,nl,fr,ch,de,dk,cz,si,at,es,sk,se,it,pl,hu,lt,bg,ua,gr,tr,ru,ge,ca,kz,ny,pk,ke,ut,in,la,za,cn,br,ec,th,jp,hk,tw,vn,my,ph,sg,uy,id,nz,au1,au2 ;;
+                     Europe/Andorra) deb_code=es ; mx_order=es,fr,ch,it,be,gb,si,nl,cz,at,sk,de,hu,dk,bg,pl,gr,lt,se,tr,ua,ru,ge,ca,kz,ke,ny,pk,za,in,ut,br,ec,la,th,cn,hk,tw,uy,jp,vn,my,sg,ph,id,au1,nz,au2 ;;
+                       Europe/Paris) deb_code=fr ; mx_order=fr,be,gb,nl,ch,de,cz,si,es,dk,at,sk,it,hu,pl,se,lt,bg,ua,gr,tr,ru,ge,ca,kz,ny,pk,ke,ut,in,za,la,cn,br,th,ec,hk,jp,tw,vn,my,sg,ph,uy,id,nz,au1,au2 ;;
+                    Europe/Brussels) deb_code=be ; mx_order=be,nl,fr,gb,ch,de,cz,dk,si,at,sk,hu,it,pl,es,se,lt,bg,ua,gr,tr,ru,ge,ca,kz,ny,pk,ke,in,ut,za,cn,la,th,hk,jp,br,tw,ec,vn,my,ph,sg,uy,id,nz,au1,au2 ;;
+                   Europe/Amsterdam) deb_code=nl ; mx_order=nl,be,gb,fr,de,ch,dk,cz,at,si,sk,pl,se,hu,it,lt,es,bg,ua,ru,gr,tr,ge,ca,kz,ny,pk,ke,in,ut,cn,la,za,th,hk,jp,tw,br,ec,vn,my,ph,sg,uy,id,nz,au1,au2 ;;
+                  Europe/Luxembourg) deb_code=be ; mx_order=be,ch,fr,nl,gb,cz,de,si,at,dk,sk,hu,it,pl,es,se,lt,bg,ua,gr,tr,ru,ge,ca,kz,pk,ny,ke,in,ut,za,cn,th,la,hk,jp,tw,br,vn,ec,my,sg,ph,uy,id,nz,au1,au2 ;;
+                      Europe/Monaco) deb_code=ch ; mx_order=ch,it,si,fr,be,at,cz,sk,es,nl,hu,gb,de,bg,dk,pl,gr,tr,lt,se,ua,ru,ge,kz,ca,ke,pk,ny,in,za,ut,br,th,cn,hk,la,tw,ec,vn,jp,my,sg,ph,uy,id,au1,nz,au2 ;;
+                      Europe/Zurich) deb_code=ch ; mx_order=ch,be,si,fr,cz,at,nl,sk,de,it,gb,hu,dk,pl,es,bg,lt,se,gr,ua,tr,ru,ge,kz,ca,pk,ke,ny,in,ut,za,cn,th,hk,la,tw,br,jp,vn,my,ec,sg,ph,id,uy,nz,au1,au2 ;;
+                    Europe/Busingen) deb_code=de ; mx_order=ch,be,si,fr,cz,at,nl,de,sk,it,gb,hu,dk,pl,es,bg,lt,se,ua,gr,tr,ru,ge,kz,ca,pk,ke,ny,in,ut,za,cn,th,hk,la,tw,br,jp,vn,my,ec,sg,ph,id,uy,nz,au1,au2 ;;
+                       Europe/Vaduz) deb_code=ch ; mx_order=ch,si,cz,at,be,fr,sk,de,it,nl,hu,gb,dk,pl,bg,es,lt,se,gr,ua,tr,ru,ge,kz,ca,pk,ke,ny,in,za,ut,cn,th,hk,tw,la,jp,br,vn,my,ec,sg,ph,id,uy,nz,au1,au2 ;;
+                        Europe/Oslo) deb_code=no ; mx_order=se,dk,de,nl,pl,lt,be,cz,gb,at,fr,sk,ch,hu,si,ua,ru,it,bg,es,tr,gr,ge,kz,ca,pk,ny,ke,in,ut,cn,jp,la,hk,th,tw,vn,za,ph,my,sg,ec,br,id,uy,nz,au1,au2 ;;
+                     Europe/Vatican) deb_code=it ; mx_order=it,si,ch,at,sk,hu,bg,cz,gr,fr,be,de,nl,es,pl,tr,gb,dk,ua,lt,se,ru,ge,kz,ke,pk,ca,ny,in,za,th,ut,cn,hk,br,vn,tw,my,jp,sg,la,ec,ph,id,uy,au1,nz,au2 ;;
+                  Europe/San_Marino) deb_code=it ; mx_order=it,si,ch,at,sk,hu,cz,bg,fr,de,be,nl,gr,pl,gb,dk,es,tr,lt,ua,se,ru,ge,kz,pk,ke,ca,ny,in,za,ut,th,cn,hk,tw,vn,br,my,jp,sg,la,ec,ph,id,uy,au1,nz,au2 ;;
+                        Europe/Rome) deb_code=it ; mx_order=it,si,ch,at,sk,hu,bg,cz,gr,fr,be,de,nl,es,pl,tr,gb,dk,ua,lt,se,ru,ge,kz,ke,pk,ca,ny,in,za,th,ut,cn,hk,br,vn,tw,my,jp,sg,la,ec,ph,id,uy,au1,nz,au2 ;;
+                  Europe/Copenhagen) deb_code=dk ; mx_order=dk,de,se,cz,nl,pl,be,lt,at,sk,gb,ch,hu,fr,si,ua,it,ru,bg,tr,es,gr,ge,kz,ca,pk,ny,ke,in,ut,cn,th,hk,jp,tw,la,za,vn,my,ph,sg,ec,br,id,uy,nz,au1,au2 ;;
+                      Europe/Berlin) deb_code=de ; mx_order=de,cz,dk,at,pl,sk,nl,be,ch,hu,si,se,lt,fr,gb,it,ua,bg,ru,tr,gr,es,ge,kz,pk,ca,ke,ny,in,ut,cn,th,hk,za,jp,tw,vn,la,my,ph,sg,br,ec,id,uy,nz,au1,au2 ;;
+                      Europe/Prague) deb_code=cz ; mx_order=cz,at,de,sk,si,hu,pl,ch,dk,be,nl,lt,fr,it,gb,se,bg,ua,tr,gr,ru,es,ge,kz,pk,ca,ke,ny,in,ut,cn,za,th,hk,tw,jp,vn,my,la,sg,ph,br,ec,id,uy,nz,au1,au2 ;;
+                       Europe/Malta) deb_code=it ; mx_order=it,gr,bg,si,hu,tr,ch,at,sk,cz,es,fr,be,de,pl,nl,ua,gb,dk,lt,se,ge,ru,ke,pk,kz,ca,za,in,ny,th,br,cn,hk,vn,my,ut,tw,sg,jp,ec,ph,id,uy,la,au1,au2,nz ;;
+                   Europe/Ljubljana) deb_code=si ; mx_order=si,at,sk,hu,cz,ch,it,de,bg,pl,be,fr,nl,dk,gr,gb,lt,ua,tr,se,es,ru,ge,kz,pk,ke,ca,ny,in,za,th,cn,ut,hk,tw,vn,jp,my,br,sg,la,ph,ec,id,uy,nz,au1,au2 ;;
+                      Europe/Zagreb) deb_code=hr ; mx_order=si,at,sk,hu,it,cz,ch,bg,de,pl,be,fr,gr,nl,dk,tr,lt,ua,gb,se,es,ru,ge,kz,pk,ke,ca,ny,in,za,th,cn,ut,hk,tw,vn,jp,my,sg,br,la,ph,id,ec,uy,au1,nz,au2 ;;
+                      Europe/Vienna) deb_code=at ; mx_order=at,sk,hu,cz,si,de,pl,ch,it,bg,dk,be,lt,nl,fr,ua,gb,se,tr,gr,ru,es,ge,kz,pk,ke,ca,ny,in,za,th,cn,ut,hk,tw,jp,vn,my,sg,la,ph,br,id,ec,uy,nz,au1,au2 ;;
+                  Europe/Bratislava) deb_code=sk ; mx_order=sk,at,hu,cz,si,pl,de,ch,bg,it,dk,lt,be,ua,nl,fr,tr,se,gr,gb,ru,es,ge,kz,pk,ke,ca,in,ny,za,th,cn,hk,ut,tw,vn,jp,my,sg,ph,la,br,id,ec,uy,nz,au1,au2 ;;
+                   Europe/Stockholm) deb_code=se ; mx_order=se,dk,lt,pl,de,cz,nl,ru,at,sk,ua,be,hu,gb,ch,si,fr,bg,it,tr,gr,es,ge,kz,pk,ca,ny,in,ke,cn,ut,jp,hk,th,tw,la,vn,my,ph,za,sg,id,ec,br,uy,nz,au1,au2 ;;
+                    Europe/Sarajevo) deb_code=hr ; mx_order=si,bg,hu,sk,it,at,cz,gr,ch,tr,pl,de,ua,lt,be,fr,dk,nl,gb,se,es,ru,ge,kz,pk,ke,ca,in,ny,za,th,cn,hk,vn,tw,ut,my,jp,sg,ph,br,la,id,ec,uy,au1,nz,au2 ;;
+                    Europe/Budapest) deb_code=hu ; mx_order=hu,sk,at,si,cz,pl,bg,de,ch,it,ua,lt,dk,tr,gr,be,nl,fr,se,gb,ru,es,ge,kz,pk,ke,ca,in,ny,za,th,cn,hk,tw,ut,vn,jp,my,sg,ph,la,br,id,ec,uy,nz,au1,au2 ;;
+                   Europe/Podgorica) deb_code=bg ; mx_order=bg,hu,si,it,gr,sk,at,tr,cz,ch,pl,de,ua,lt,be,fr,dk,nl,gb,se,es,ru,ge,kz,pk,ke,ca,in,ny,za,th,cn,hk,vn,tw,my,ut,sg,jp,ph,br,id,la,ec,uy,au1,nz,au2 ;;
+                      Europe/Tirane) deb_code=bg ; mx_order=bg,gr,it,hu,si,tr,sk,at,cz,ch,pl,ua,de,lt,be,fr,dk,nl,gb,es,se,ru,ge,kz,pk,ke,ca,in,ny,za,th,cn,hk,vn,my,tw,ut,sg,jp,br,ph,id,la,ec,uy,au1,nz,au2 ;;
+                   Europe/Mariehamn) deb_code=se ; mx_order=se,dk,lt,pl,de,cz,ru,nl,ua,sk,at,hu,be,gb,si,ch,fr,bg,it,tr,gr,ge,es,kz,pk,ca,ny,in,ke,cn,ut,jp,hk,th,tw,vn,la,ph,my,sg,za,id,ec,br,uy,nz,au1,au2 ;;
+                    Europe/Belgrade) deb_code=hu ; mx_order=hu,bg,sk,si,at,it,cz,tr,gr,pl,ch,ua,de,lt,dk,be,nl,fr,se,gb,ru,ge,es,kz,pk,ke,ca,in,ny,za,th,cn,hk,vn,tw,my,ut,jp,sg,ph,br,id,la,ec,uy,au1,nz,au2 ;;
+                 Europe/Kaliningrad) deb_code=ru ; mx_order=pl,lt,dk,de,se,cz,sk,at,hu,ua,si,nl,ru,ch,be,bg,gb,fr,it,tr,gr,ge,es,kz,pk,ca,ke,in,ny,cn,th,hk,ut,tw,jp,vn,za,my,ph,la,sg,id,br,ec,uy,nz,au1,au2 ;;
+                      Europe/Warsaw) deb_code=pl ; mx_order=pl,lt,cz,de,sk,hu,at,dk,ua,se,si,ch,bg,nl,ru,be,it,tr,fr,gb,gr,ge,es,kz,pk,ca,ke,in,ny,cn,th,hk,tw,ut,jp,za,vn,my,sg,ph,la,id,br,ec,uy,nz,au1,au2 ;;
+                      Europe/Skopje) deb_code=bg ; mx_order=bg,gr,tr,hu,si,it,sk,at,cz,pl,ua,ch,de,lt,be,dk,fr,nl,ge,ru,gb,se,es,kz,pk,ke,in,ca,ny,za,th,cn,hk,vn,my,tw,sg,jp,ut,ph,br,id,la,ec,uy,au1,nz,au2 ;;
+                    Europe/Uzhgorod) deb_code=hu ; mx_order=hu,sk,pl,at,cz,ua,si,bg,lt,de,tr,dk,ch,it,gr,se,ru,be,nl,fr,gb,ge,es,kz,pk,ke,ca,in,ny,th,cn,za,hk,tw,vn,jp,ut,my,sg,ph,la,id,br,ec,uy,nz,au1,au2 ;;
+                       Europe/Sofia) deb_code=bg ; mx_order=bg,tr,gr,hu,sk,si,at,it,ua,cz,pl,ch,de,lt,dk,be,ge,fr,nl,ru,se,gb,es,kz,pk,ke,in,ca,ny,za,th,cn,hk,vn,tw,my,sg,jp,ut,ph,id,br,la,ec,uy,au1,nz,au2 ;;
+                      Europe/Athens) deb_code=gr ; mx_order=gr,bg,tr,it,hu,si,sk,at,ua,cz,pl,ch,de,ge,lt,be,fr,dk,nl,ru,es,gb,se,pk,kz,ke,in,ca,za,ny,th,cn,hk,vn,my,tw,sg,jp,ph,id,ut,br,la,ec,uy,au1,nz,au2 ;;
+                        Europe/Riga) deb_code=lt ; mx_order=lt,se,pl,dk,ua,ru,de,cz,sk,at,hu,nl,si,be,ch,bg,gb,fr,tr,it,gr,ge,es,kz,pk,ca,in,ke,ny,cn,th,hk,jp,tw,ut,vn,my,ph,za,sg,la,id,ec,br,uy,nz,au1,au2 ;;
+                     Europe/Tallinn) deb_code=ee ; mx_order=se,lt,pl,dk,ru,de,ua,cz,sk,at,hu,nl,be,si,ch,gb,fr,bg,tr,it,gr,ge,es,kz,pk,ca,in,ny,ke,cn,hk,jp,th,tw,ut,vn,my,ph,la,sg,za,id,ec,br,uy,nz,au1,au2 ;;
+                    Europe/Helsinki) deb_code=fi ; mx_order=se,lt,dk,pl,ru,de,ua,cz,sk,at,hu,nl,be,si,ch,gb,fr,bg,tr,it,ge,gr,es,kz,pk,ca,in,ny,ke,cn,jp,hk,th,tw,ut,vn,ph,my,la,sg,za,id,ec,br,uy,nz,au1,au2 ;;
+                     Europe/Vilnius) deb_code=lt ; mx_order=lt,pl,ua,se,ru,dk,de,cz,hu,sk,at,si,bg,nl,ch,be,tr,fr,it,gb,gr,ge,es,kz,pk,ca,ke,in,ny,cn,th,hk,tw,jp,vn,ut,my,za,ph,sg,la,id,br,ec,uy,nz,au1,au2 ;;
+                   Europe/Bucharest) deb_code=ro ; mx_order=bg,tr,hu,ua,gr,sk,at,si,pl,cz,lt,it,de,ch,ru,ge,dk,se,be,nl,fr,gb,es,kz,pk,ke,in,ca,ny,th,za,cn,hk,vn,tw,my,jp,sg,ph,ut,id,br,la,ec,uy,au1,nz,au2 ;;
+                       Europe/Minsk) deb_code=by ; mx_order=lt,ua,pl,ru,se,hu,sk,de,cz,at,dk,si,bg,tr,ch,nl,be,it,gr,fr,ge,gb,es,kz,pk,in,ke,ca,ny,cn,th,hk,tw,jp,vn,my,ut,za,ph,sg,la,id,br,ec,uy,nz,au1,au2 ;;
+                    Europe/Chisinau) deb_code=md ; mx_order=ua,bg,tr,hu,pl,lt,sk,at,si,cz,ru,gr,de,ge,it,dk,se,ch,nl,be,fr,gb,es,kz,pk,ke,in,ca,th,ny,cn,hk,za,tw,vn,my,jp,sg,ph,ut,id,la,br,ec,uy,nz,au1,au2 ;;
+                    Europe/Istanbul) deb_code=tr ; mx_order=tr,bg,gr,hu,ua,sk,at,si,ge,it,pl,cz,lt,de,ru,ch,dk,be,se,nl,fr,gb,es,kz,pk,ke,in,ca,za,th,cn,hk,ny,vn,my,tw,sg,jp,ph,id,ut,br,la,ec,uy,au1,nz,au2 ;;
+                        Europe/Kiev) deb_code=md ; mx_order=ua,lt,pl,ru,hu,sk,bg,tr,at,cz,de,se,si,dk,ge,gr,ch,it,nl,be,fr,gb,es,kz,pk,ke,in,ca,th,cn,ny,hk,tw,vn,jp,my,za,sg,ph,ut,id,la,br,ec,uy,nz,au1,au2 ;;
+                  Europe/Simferopol) deb_code=ru ; mx_order=tr,ua,bg,ge,gr,hu,ru,lt,pl,sk,at,si,cz,de,it,dk,se,ch,be,nl,fr,gb,es,kz,pk,ke,in,th,ca,cn,hk,vn,tw,za,my,ny,sg,jp,ph,id,ut,la,br,ec,uy,au1,nz,au2 ;;
+                  Europe/Zaporozhye) deb_code=ru ; mx_order=ua,tr,ru,ge,lt,bg,pl,hu,sk,at,gr,cz,si,de,se,dk,it,ch,nl,be,fr,gb,es,kz,pk,ke,in,th,ca,cn,hk,tw,vn,my,ny,jp,za,sg,ph,id,ut,la,br,ec,uy,nz,au1,au2 ;;
+                      Europe/Moscow) deb_code=ru ; mx_order=ru,ua,lt,pl,se,hu,dk,sk,de,ge,cz,at,tr,bg,si,nl,ch,gr,be,it,gb,fr,kz,es,pk,in,ke,ca,cn,th,hk,tw,jp,ny,vn,my,ph,sg,ut,za,id,la,br,ec,uy,nz,au1,au2 ;;
+                   Europe/Volgograd) deb_code=ru ; mx_order=ge,ru,ua,lt,tr,pl,bg,hu,sk,at,gr,se,cz,de,si,dk,kz,it,ch,nl,be,fr,gb,pk,es,in,ke,th,cn,hk,tw,vn,my,jp,ca,sg,ph,ny,za,id,ut,la,br,ec,uy,nz,au1,au2 ;;
+                     Europe/Saratov) deb_code=ru ; mx_order=ru,ge,ua,lt,pl,tr,se,bg,hu,sk,at,cz,de,dk,gr,si,kz,ch,it,nl,be,fr,gb,pk,es,in,ke,cn,th,hk,tw,vn,jp,ca,my,sg,ph,ny,id,za,ut,la,br,ec,nz,au1,uy,au2 ;;
+                   Europe/Astrakhan) deb_code=ru ; mx_order=ge,ru,ua,tr,lt,bg,pl,hu,gr,kz,sk,at,se,cz,si,de,dk,it,pk,ch,nl,be,fr,gb,es,in,ke,th,cn,hk,vn,tw,my,sg,jp,ph,ca,id,za,ny,ut,la,br,ec,nz,au1,uy,au2 ;;
+                   Europe/Ulyanovsk) deb_code=ru ; mx_order=ru,ua,ge,lt,pl,se,tr,hu,bg,sk,dk,at,de,cz,kz,si,gr,nl,ch,be,it,fr,gb,pk,es,in,cn,ke,th,hk,tw,jp,vn,ca,my,ph,sg,ny,id,za,ut,la,br,ec,nz,au1,uy,au2 ;;
+                       Europe/Kirov) deb_code=ru ; mx_order=ru,ua,lt,se,pl,ge,dk,hu,de,sk,tr,cz,at,kz,bg,si,nl,ch,gr,be,it,gb,fr,pk,es,in,cn,hk,th,tw,ke,jp,ca,vn,ph,my,ny,sg,id,ut,za,la,ec,br,nz,au1,uy,au2 ;;
+                      Europe/Samara) deb_code=ru ; mx_order=ru,ge,ua,lt,pl,se,tr,kz,hu,bg,sk,at,dk,de,cz,si,gr,ch,nl,it,be,fr,gb,pk,es,in,cn,ke,th,hk,tw,vn,jp,my,ca,ph,sg,ny,id,za,ut,la,br,ec,nz,au1,uy,au2 ;;
+                      Indian/Comoro) deb_code=am ; mx_order=ke,za,pk,gr,ge,tr,in,bg,my,it,sg,th,kz,hu,ua,id,si,sk,at,ch,pl,cz,vn,ru,es,lt,de,fr,be,dk,nl,gb,se,hk,ph,tw,br,cn,uy,au1,au2,jp,nz,ca,ny,ec,ut,la ;;
+                     Indian/Mayotte) deb_code=am ; mx_order=ke,za,pk,ge,gr,in,tr,my,bg,sg,th,id,it,kz,ua,hu,si,vn,sk,at,pl,cz,ch,ru,lt,es,de,fr,be,dk,nl,gb,se,hk,ph,tw,cn,br,au1,au2,uy,nz,jp,ca,ny,ec,ut,la ;;
+                Indian/Antananarivo) deb_code=sg ; mx_order=za,ke,pk,in,my,sg,id,ge,gr,th,tr,bg,vn,kz,it,ua,hu,si,sk,at,pl,ru,ch,cz,es,lt,de,hk,fr,be,dk,ph,nl,gb,se,tw,au1,au2,br,cn,uy,nz,jp,ca,ec,ny,ut,la ;;
+                     Indian/Reunion) deb_code=sg ; mx_order=za,ke,pk,my,id,sg,in,th,vn,ge,gr,tr,kz,bg,hk,ph,it,ua,hu,si,sk,at,au1,ru,au2,pl,tw,lt,cz,ch,de,es,cn,fr,be,dk,nl,se,gb,nz,br,uy,jp,ca,ec,ny,ut,la ;;
+                        Indian/Mahe) deb_code=am ; mx_order=ke,pk,za,in,my,ge,th,sg,id,kz,gr,tr,vn,bg,ua,it,hu,ru,si,sk,at,hk,pl,lt,cz,ch,de,ph,dk,es,se,be,fr,tw,nl,cn,gb,au1,jp,au2,nz,br,uy,ca,ny,ec,ut,la ;;
+                   Indian/Mauritius) deb_code=sg ; mx_order=za,ke,pk,my,id,sg,in,th,vn,ge,kz,gr,tr,hk,bg,ph,ua,it,hu,au1,au2,si,tw,sk,ru,at,pl,lt,cz,cn,ch,de,es,fr,dk,be,se,nl,nz,gb,br,jp,uy,ca,ec,ny,ut,la ;;
+                   Indian/Kerguelen) deb_code=au ; mx_order=za,au2,id,au1,ke,sg,my,nz,vn,th,in,pk,ph,hk,uy,tw,br,cn,kz,ge,gr,tr,bg,it,jp,ua,hu,si,sk,at,ru,pl,cz,ch,lt,es,de,fr,be,dk,nl,se,gb,ec,ca,ny,la,ut ;;
+                      Indian/Chagos) deb_code=sg ; mx_order=my,pk,sg,in,id,th,ke,vn,za,hk,kz,ph,ge,tw,cn,tr,gr,bg,ua,ru,au1,hu,lt,it,sk,pl,at,si,au2,cz,jp,de,ch,nz,se,dk,be,nl,fr,es,gb,br,uy,ca,ny,ut,ec,la ;;
+                    Indian/Maldives) deb_code=sg ; mx_order=pk,in,my,th,sg,vn,id,ke,kz,hk,ge,ph,tw,cn,za,tr,gr,ua,bg,ru,hu,lt,pl,sk,at,it,si,cz,jp,de,se,ch,dk,be,nl,fr,gb,es,au1,au2,nz,ca,br,uy,ny,ut,la,ec ;;
+                       Indian/Cocos) deb_code=sg ; mx_order=id,sg,my,vn,th,in,ph,hk,tw,pk,cn,au1,au2,nz,kz,ke,jp,za,ge,tr,ru,gr,ua,bg,lt,hu,pl,sk,at,si,it,cz,se,de,dk,ch,nl,be,fr,gb,es,uy,br,la,ca,ut,ny,ec ;;
+                   Indian/Christmas) deb_code=sg ; mx_order=id,sg,my,vn,th,ph,hk,in,tw,cn,au1,nz,au2,pk,jp,kz,ke,za,ge,ru,tr,ua,gr,bg,lt,pl,hu,sk,at,se,si,cz,it,de,dk,ch,nl,be,fr,gb,es,uy,la,br,ut,ca,ny,ec ;;
+                     Pacific/Midway) deb_code=us ; mx_order=jp,la,cn,tw,ph,ut,hk,nz,vn,au1,th,au2,sg,my,id,ny,kz,in,ca,ru,se,lt,dk,ec,ua,pl,pk,de,nl,ge,gb,cz,be,sk,at,hu,fr,ch,si,tr,bg,it,es,gr,uy,br,ke,za ;;
+                    Pacific/Chatham) deb_code=nz ; mx_order=au2,nz,au1,id,ph,sg,uy,my,vn,jp,tw,hk,ec,cn,la,th,br,ut,za,in,ny,pk,ke,kz,ca,ge,ru,ua,tr,se,lt,gr,pl,bg,dk,hu,de,sk,at,cz,nl,gb,si,be,it,es,fr,ch ;;
+                     Pacific/Wallis) deb_code=nc ; mx_order=nz,au1,au2,jp,ph,tw,la,cn,id,hk,vn,sg,my,ut,th,ec,in,uy,ny,kz,ca,br,pk,ru,se,za,ge,lt,ua,dk,pl,de,nl,gb,cz,be,sk,at,hu,fr,ke,tr,ch,si,bg,gr,it,es ;;
+                  Pacific/Tongatapu) deb_code=nc ; mx_order=nz,au2,au1,jp,ph,id,tw,la,cn,hk,sg,vn,my,ut,th,ec,uy,in,ny,br,kz,ca,pk,za,ru,se,ge,ke,lt,ua,dk,pl,de,nl,gb,cz,be,sk,hu,at,tr,fr,ch,bg,si,gr,it,es ;;
+                       Pacific/Apia) deb_code=nc ; mx_order=nz,au1,au2,jp,la,ph,tw,cn,id,hk,ut,vn,sg,my,ec,th,uy,ny,in,ca,br,kz,pk,ru,se,za,lt,dk,ge,ua,pl,de,nl,gb,be,cz,fr,sk,at,hu,ch,si,tr,bg,ke,es,it,gr ;;
+                    Pacific/Fakaofo) deb_code=nc ; mx_order=nz,au1,au2,jp,la,ph,tw,cn,ut,hk,id,vn,sg,my,th,ec,ny,in,uy,ca,kz,br,pk,ru,se,lt,dk,ge,ua,pl,de,nl,gb,be,cz,za,fr,sk,at,hu,ch,si,tr,bg,es,it,gr,ke ;;
+                  Pacific/Enderbury) deb_code=us ; mx_order=nz,au1,au2,jp,la,ph,tw,cn,ut,hk,id,vn,sg,my,th,ec,ny,in,ca,kz,uy,br,pk,ru,se,lt,dk,ua,pl,ge,de,nl,gb,be,cz,fr,sk,at,hu,ch,si,tr,bg,es,it,gr,za,ke ;;
+                  Pacific/Pago_Pago) deb_code=nc ; mx_order=nz,au2,au1,jp,la,ph,tw,cn,ut,id,hk,vn,sg,my,ec,th,uy,ny,in,ca,br,kz,pk,ru,se,za,lt,dk,ge,ua,pl,nl,de,gb,be,cz,fr,sk,at,hu,ch,si,tr,ke,bg,es,it,gr ;;
+                       Pacific/Niue) deb_code=nz ; mx_order=nz,au2,au1,la,jp,ph,tw,id,cn,ut,hk,sg,vn,ec,my,th,uy,ny,in,br,ca,kz,pk,za,ru,se,lt,ge,dk,ua,pl,nl,de,gb,ke,be,cz,fr,sk,at,hu,ch,si,tr,bg,es,it,gr ;;
+                  Pacific/Rarotonga) deb_code=nz ; mx_order=nz,au2,au1,la,ut,ec,jp,ph,uy,tw,id,cn,hk,sg,vn,my,ny,br,th,ca,in,kz,za,pk,se,ru,dk,gb,lt,nl,be,de,fr,pl,ua,cz,ge,es,ch,ke,at,sk,hu,si,it,bg,tr,gr ;;
+                   Pacific/Honolulu) deb_code=us ; mx_order=la,ut,jp,nz,ny,cn,tw,ph,ca,ec,au1,hk,au2,vn,th,id,sg,kz,my,se,ru,in,dk,lt,gb,nl,de,be,pl,fr,ua,cz,ch,at,sk,uy,hu,si,es,ge,bg,it,br,pk,tr,gr,ke,za ;;
+                 Pacific/Kiritimati) deb_code=us ; mx_order=la,nz,ut,au1,au2,jp,ec,tw,ph,cn,ny,hk,ca,vn,id,sg,uy,my,th,br,in,kz,se,ru,dk,gb,lt,nl,de,be,pl,fr,ua,cz,ch,pk,at,sk,hu,si,es,ge,it,bg,tr,gr,za,ke ;;
+                     Pacific/Tahiti) deb_code=nz ; mx_order=nz,au2,la,au1,ec,ut,uy,jp,ny,ph,br,tw,cn,ca,id,hk,vn,sg,my,th,in,kz,za,se,gb,dk,nl,be,fr,ru,de,lt,es,pl,cz,ch,pk,at,ua,sk,si,hu,it,ge,bg,tr,gr,ke ;;
+                  Pacific/Marquesas) deb_code=cl ; mx_order=la,ut,ec,nz,au2,au1,ny,uy,ca,jp,br,ph,tw,cn,hk,id,vn,sg,my,th,gb,se,nl,dk,be,fr,es,de,in,lt,ch,cz,ru,kz,pl,at,sk,si,hu,ua,it,za,bg,tr,ge,gr,pk,ke ;;
+                    Pacific/Gambier) deb_code=cl ; mx_order=ec,la,nz,au2,uy,ut,au1,br,ny,ca,jp,ph,tw,cn,id,hk,sg,vn,my,th,za,gb,es,nl,fr,be,se,dk,in,ch,de,cz,lt,pl,at,si,sk,it,ru,kz,hu,ua,bg,ke,gr,tr,pk,ge ;;
+                   Pacific/Pitcairn) deb_code=cl ; mx_order=ec,la,uy,nz,au2,ut,au1,br,ny,ca,jp,ph,tw,id,cn,hk,sg,za,vn,my,th,es,gb,fr,nl,be,dk,se,ch,de,cz,si,it,at,in,pl,lt,sk,hu,ru,ua,ke,kz,bg,gr,tr,ge,pk ;;
+                     Pacific/Easter) deb_code=cl ; mx_order=ec,uy,br,la,ut,ny,au2,ca,nz,au1,za,es,jp,gb,fr,be,nl,ch,dk,it,de,ph,cz,se,si,id,at,sk,tw,hu,pl,cn,ke,lt,bg,gr,sg,hk,ua,my,vn,ru,tr,th,ge,kz,in,pk ;;
+                  Pacific/Galapagos) deb_code=cl ; mx_order=ec,ut,ny,la,uy,br,ca,es,gb,fr,be,nl,ch,dk,de,it,cz,se,si,at,sk,pl,hu,lt,bg,gr,ua,ru,tr,au2,nz,za,au1,ge,jp,ke,kz,cn,tw,pk,ph,hk,in,vn,id,th,sg,my ;;
+                      Pacific/Palau) deb_code=nc ; mx_order=ph,tw,hk,cn,vn,jp,id,sg,my,th,nz,au1,in,au2,kz,pk,ge,ru,ua,lt,se,tr,ke,pl,la,bg,hu,dk,gr,sk,de,at,cz,si,nl,ch,za,be,it,ut,gb,fr,es,ny,ca,ec,uy,br ;;
+                       Pacific/Guam) deb_code=nc ; mx_order=jp,ph,tw,cn,hk,vn,nz,sg,id,th,my,au1,in,au2,kz,pk,ru,ge,la,ua,lt,se,ut,pl,tr,dk,de,hu,bg,sk,cz,at,gr,si,nl,be,ke,ch,gb,it,fr,ny,ca,es,za,ec,uy,br ;;
+                     Pacific/Saipan) deb_code=nc ; mx_order=jp,ph,tw,cn,hk,vn,nz,sg,th,id,my,au1,in,au2,kz,pk,la,ru,ge,ua,lt,se,ut,pl,tr,dk,de,hu,bg,sk,cz,at,gr,nl,si,be,ch,gb,fr,ke,it,ny,ca,es,za,ec,uy,br ;;
+               Pacific/Port_Moresby) deb_code=nc ; mx_order=nz,au1,au2,ph,id,tw,sg,vn,hk,jp,my,cn,th,in,kz,pk,la,ge,ru,ut,ke,za,ua,lt,se,tr,pl,bg,dk,hu,gr,sk,de,at,cz,si,nl,ch,be,it,gb,uy,fr,ny,ec,ca,es,br ;;
+                      Pacific/Chuuk) deb_code=nc ; mx_order=jp,ph,tw,nz,cn,hk,vn,au1,id,sg,au2,my,th,in,kz,pk,la,ut,ru,ge,ua,lt,se,pl,dk,tr,de,hu,bg,sk,cz,at,gr,nl,si,ke,be,ch,gb,ny,fr,it,ca,za,es,ec,uy,br ;;
+               Pacific/Bougainville) deb_code=nc ; mx_order=nz,au1,au2,ph,jp,tw,id,hk,cn,vn,sg,my,th,in,kz,la,pk,ut,ge,ru,ua,lt,se,ke,za,pl,tr,dk,ny,de,bg,hu,ec,sk,cz,at,gr,si,nl,ca,be,uy,ch,gb,it,fr,es,br ;;
+                    Pacific/Pohnpei) deb_code=nc ; mx_order=jp,nz,ph,tw,cn,hk,au1,au2,vn,id,sg,my,th,in,kz,la,pk,ut,ru,ge,se,lt,ua,pl,dk,ny,tr,de,hu,cz,sk,at,bg,ca,nl,si,be,gr,gb,ch,fr,ke,ec,it,za,es,uy,br ;;
+                Pacific/Guadalcanal) deb_code=nc ; mx_order=nz,au1,au2,ph,jp,tw,id,cn,hk,vn,sg,my,th,in,la,kz,pk,ut,ge,ru,ec,za,ua,lt,se,ke,ny,uy,pl,tr,dk,ca,de,hu,bg,sk,cz,at,gr,nl,si,be,gb,ch,fr,it,br,es ;;
+                     Pacific/Kosrae) deb_code=nc ; mx_order=nz,jp,ph,tw,au1,cn,au2,hk,vn,id,sg,my,th,in,la,kz,ut,pk,ru,ge,se,lt,ny,ua,pl,dk,ca,de,tr,ec,cz,hu,sk,at,nl,bg,be,si,gb,gr,ch,fr,it,ke,za,es,uy,br ;;
+                     Pacific/Noumea) deb_code=nc ; mx_order=nz,au1,au2,ph,id,jp,tw,sg,vn,hk,my,cn,th,in,la,ut,kz,pk,uy,ec,za,br,ke,ny,ge,ru,ca,ua,lt,se,tr,pl,dk,bg,de,hu,sk,cz,gr,at,nl,si,be,gb,ch,fr,it,es ;;
+                       Pacific/Wake) deb_code=us ; mx_order=jp,tw,cn,ph,nz,hk,vn,au1,th,sg,id,au2,my,la,in,kz,ut,pk,ru,se,ny,ge,lt,ua,ca,dk,pl,de,cz,nl,hu,sk,at,tr,gb,be,bg,si,ch,fr,gr,ec,it,es,ke,uy,za,br ;;
+                      Pacific/Nauru) deb_code=nc ; mx_order=nz,au1,jp,au2,ph,tw,cn,hk,id,vn,sg,my,th,la,in,ut,kz,pk,ru,ny,ge,ec,se,lt,ca,ua,pl,dk,de,tr,cz,hu,sk,at,nl,bg,uy,be,gb,si,ch,gr,fr,ke,za,it,es,br ;;
+                  Pacific/Kwajalein) deb_code=nc ; mx_order=jp,nz,ph,tw,cn,au1,hk,au2,vn,id,sg,th,my,la,in,ut,kz,pk,ru,ny,ge,se,lt,ca,ua,dk,pl,ec,de,cz,nl,hu,sk,tr,at,be,gb,bg,si,ch,fr,gr,it,es,ke,uy,za,br ;;
+                    Pacific/Norfolk) deb_code=nc ; mx_order=nz,au1,au2,id,ph,sg,jp,tw,my,vn,hk,cn,th,in,la,uy,ut,ec,kz,pk,za,br,ke,ny,ge,ru,ca,ua,lt,se,tr,pl,dk,bg,gr,hu,de,sk,at,cz,si,nl,be,ch,gb,it,fr,es ;;
+                      Pacific/Efate) deb_code=nc ; mx_order=nz,au1,au2,ph,jp,id,tw,hk,cn,sg,vn,my,th,la,in,ut,kz,pk,ec,uy,za,ny,ge,ru,br,ke,ca,se,ua,lt,pl,dk,tr,de,hu,bg,cz,sk,at,nl,gr,si,be,gb,ch,fr,it,es ;;
+                     Pacific/Majuro) deb_code=nc ; mx_order=nz,jp,ph,tw,au1,cn,au2,hk,vn,id,sg,my,th,la,in,ut,kz,pk,ny,ru,ca,ec,se,ge,lt,ua,dk,pl,de,cz,nl,hu,sk,at,tr,gb,be,bg,si,fr,ch,gr,it,uy,es,ke,za,br ;;
+                     Pacific/Tarawa) deb_code=nc ; mx_order=nz,jp,au1,au2,ph,tw,cn,hk,vn,id,sg,my,la,th,ut,in,kz,pk,ny,ec,ca,ru,se,ge,lt,ua,dk,pl,uy,de,cz,nl,hu,sk,at,tr,gb,be,bg,si,fr,ch,gr,it,br,ke,za,es ;;
+                   Pacific/Auckland) deb_code=nz ; mx_order=nz,au2,au1,id,ph,sg,my,jp,vn,tw,hk,cn,th,la,uy,in,ec,ut,br,za,pk,kz,ke,ny,ca,ge,ru,ua,lt,se,tr,pl,gr,bg,dk,hu,de,sk,at,cz,si,nl,be,gb,ch,it,fr,es ;;
+                       Pacific/Fiji) deb_code=nc ; mx_order=nz,au1,au2,jp,ph,tw,id,cn,hk,sg,vn,my,la,th,ut,in,ec,uy,kz,ny,pk,br,ca,za,ru,ge,se,ke,lt,ua,dk,pl,de,tr,nl,cz,hu,sk,at,gb,be,bg,si,fr,ch,gr,it,es ;;
+                   Pacific/Funafuti) deb_code=nc ; mx_order=nz,au1,au2,jp,ph,tw,cn,hk,id,la,vn,sg,my,th,ut,in,ec,kz,ny,uy,pk,ca,ru,br,se,ge,lt,ua,dk,pl,de,za,nl,cz,gb,sk,hu,be,at,tr,fr,bg,si,ch,ke,gr,it,es ;;
+
+    esac
+}
+
+main "$@"

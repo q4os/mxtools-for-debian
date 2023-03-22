@@ -1,0 +1,129 @@
+--- conky-manager-2.7+dfsg1.orig/src/Main.vala
++++ conky-manager-2.7+dfsg1/src/Main.vala
+@@ -584,15 +584,23 @@ public class Main : GLib.Object {
+ 	public void refresh_conkyrc_status() {
+ 		Gee.ArrayList<string> active_list = new Gee.ArrayList<string>();
+ 
+-		string cmd = "conky -c "; //without double-quotes
+-		string txt = execute_command_sync_get_output ("ps w -C conky");
+-		//use 'ps ew -C conky' for all users
+-
+-		foreach(string line in txt.split("\n")){
+-			if (line.index_of(cmd) != -1){
+-				string conf = line.substring(line.index_of(cmd) + 8).strip();
+-				active_list.add(conf);
++		string get_cmd_cwd = "sed -nrz '/^PWD=/s///p' /proc/%s/environ";
++		string get_cmd_conkyrc = "sed -nrz '/^--config=/s///p; /^(-c|--config)/{n;p;}' /proc/%s/cmdline";
++		string uname = Environment.get_user_name();
++		string pids = execute_command_sync_get_output("pgrep -u %s -x conky".printf(uname));
++		foreach(string pid in pids.split("\n")){
++			if (pid == null || pid.length == 0){ continue; }
++			string cmd_conkyrc = execute_command_sync_get_output(get_cmd_conkyrc.printf(pid)).chomp();
++			if (cmd_conkyrc == null || cmd_conkyrc.length == 0){ continue; }
++			if (cmd_conkyrc.index_of("/") != 0){
++				string cmd_cwd = execute_command_sync_get_output(get_cmd_cwd.printf(pid)).chomp();
++				cmd_conkyrc = cmd_cwd + "/" + cmd_conkyrc;
+ 			}
++			string realpath = execute_command_sync_get_output("realpath '%s'".printf(cmd_conkyrc)).chomp();
++			if (FileUtils.test(realpath, GLib.FileTest.EXISTS)){
++				cmd_conkyrc = realpath;
++			}
++			active_list.add(cmd_conkyrc);
+ 		}
+ 
+ 		foreach(ConkyRC rc in conkyrc_list){
+@@ -651,7 +659,7 @@ public class Main : GLib.Object {
+ 		string txt_start_conky = "";
+ 		txt_start_conky += "if [ x\"${DESKTOP_SESSION##*/}\" = x\"%s\" ]; then \n".printf(desktop_session);
+ 		txt_start_conky += "   sleep %ds\n".printf(startup_delay);
+-		txt_start_conky += "   killall conky\n";
++		txt_start_conky += "   killall -u $(id -nu) conky\n";
+ 		foreach(ConkyRC conf in conkyrc_list){
+ 			if (conf.enabled){
+ 				txt_start_conky += "   cd \"" + conf.dir.replace(home, "$HOME")  + "\"\n";
+@@ -914,14 +922,27 @@ public class ConkyRC : ConkyConfigItem {
+ 		}
+ 	}
+ 
+-	public bool is_running(){
+-		string cmd = "conky -c " + path; //without double-quotes
+-		string txt = execute_command_sync_get_output ("ps w -C conky");
+-		//use 'ps ew -C conky' for all users
+-
++	public bool is_running() {
+ 		bool active = false;
+-		foreach(string line in txt.split("\n")){
+-			if (line.index_of(cmd) != -1){
++
++		string get_cmd_cwd = "sed -nrz '/^PWD=/s///p' /proc/%s/environ";
++		string get_cmd_conkyrc = "sed -nrz '/^--config=/s///p; /^(-c|--config)/{n;p;}' /proc/%s/cmdline";
++
++		string uname = Environment.get_user_name();
++		string pids = execute_command_sync_get_output("pgrep -u %s -x conky".printf(uname));
++		foreach(string pid in pids.split("\n")){
++			if (pid == null || pid.length == 0){ continue; }
++			string cmd_conkyrc = execute_command_sync_get_output(get_cmd_conkyrc.printf(pid)).chomp();
++			if (cmd_conkyrc == null || cmd_conkyrc.length == 0){ continue; }
++			if (cmd_conkyrc.index_of("/") != 0){
++				string cmd_cwd = execute_command_sync_get_output(get_cmd_cwd.printf(pid)).chomp();
++				cmd_conkyrc = cmd_cwd + "/" + cmd_conkyrc;
++			}
++			string realpath = execute_command_sync_get_output("realpath '%s'".printf(cmd_conkyrc)).chomp();
++			if (FileUtils.test(realpath, GLib.FileTest.EXISTS)){
++				cmd_conkyrc = realpath;
++			}
++			if (cmd_conkyrc == path){
+ 				active = true;
+ 				break;
+ 			}
+@@ -956,19 +977,29 @@ public class ConkyRC : ConkyConfigItem {
+ 		return true;
+ 	}
+ 
+-	public override void stop(){
++	public override void stop() {
+ 
+ 		//Note: There may be more than one running instance of the same config
+ 		//We need to kill all instances
+ 
+-		string cmd = "conky -c " + path; //without double-quotes
+-		string txt = execute_command_sync_get_output ("ps w -C conky");
+-		//use 'ps ew -C conky' for all users
+-
+-		string pid = "";
+-		foreach(string line in txt.split("\n")){
+-			if (line.index_of(cmd) != -1){
+-				pid = line.strip().split(" ")[0];
++		string get_cmd_cwd = "sed -nrz '/^PWD=/s///p' /proc/%s/environ";
++		string get_cmd_conkyrc = "sed -nrz '/^--config=/s///p; /^(-c|--config)/{n;p;}' /proc/%s/cmdline";
++		string uname = Environment.get_user_name();
++		string pids = execute_command_sync_get_output("pgrep -u %s -x conky".printf(uname));
++		foreach(string pid in pids.split("\n")){
++			if (pid == null || pid.length == 0){ continue; }
++			string cmd_conkyrc = execute_command_sync_get_output(get_cmd_conkyrc.printf(pid)).chomp();
++			if (cmd_conkyrc == null || cmd_conkyrc.length == 0){ continue; }
++			if (cmd_conkyrc.index_of("/") != 0){
++				string cmd_cwd = execute_command_sync_get_output(get_cmd_cwd.printf(pid)).chomp();
++				cmd_conkyrc = cmd_cwd + "/" + cmd_conkyrc;
++			}
++			string realpath = execute_command_sync_get_output("realpath '%s'".printf(cmd_conkyrc)).chomp();
++			if (FileUtils.test(realpath, GLib.FileTest.EXISTS)){
++				cmd_conkyrc = realpath;
++			}
++
++			if (cmd_conkyrc == path){
+ 				Posix.kill ((Pid) int.parse(pid), 15);
+ 				log_debug(_("Stopped") + ": [PID=" + pid + "] " + path);
+ 			}
+--- conky-manager-2.7+dfsg1.orig/src/Utility.vala
++++ conky-manager-2.7+dfsg1/src/Utility.vala
+@@ -429,7 +429,8 @@ namespace TeeJee.ProcessManagement{
+     public static void init_tmp(){
+ 		string std_out, std_err;
+ 		
+-		TEMP_DIR = Environment.get_tmp_dir() + "/" + AppShortName;
++		string user_name = Environment.get_user_name();
++		TEMP_DIR = Environment.get_tmp_dir() + "/" + AppShortName + "-" + user_name;
+ 		create_dir(TEMP_DIR);
+ 		
+ 		execute_command_script_sync("echo 'ok'",out std_out,out std_err);

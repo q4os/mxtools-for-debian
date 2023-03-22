@@ -1,0 +1,67 @@
+#!/usr/bin/python3
+
+import json
+import sys
+sys.path.append("/usr/lib/apt-notifier/modules")
+
+from aptnotifier_config import AptNotifierConfig
+
+me=sys.argv[0].split('/')[-1]
+
+def usage():
+    text=f"""
+{me} - apt-notifier helper script to list apt-notifier config items
+
+Usage:    {me} <option>
+
+Options:
+
+    -d|--dump     Display configuration settings as a key="value" list
+    
+    -s|--shell    Show configiration items as a bash-associativ array
+    
+    -p|--python   Print items as a python dictionary
+
+    """
+    print(text, file = sys.stderr)
+    sys.exit(1) 
+
+if len(sys.argv) != 2:
+    usage()
+if sys.argv[1] in ['-s', '--shell', '-p', '--python','-d', '--dump']:
+    opt = sys.argv[1]
+else:
+    usage()
+
+def run_config():
+    global opt
+    conf = AptNotifierConfig()
+
+    if opt in ['-s', '--shell']:
+        res = conf.config
+        for k,v in res.items():
+            if v == True:
+                res[k] = 'true'
+            elif v == False:
+                res[k] = 'false'
+        print("(")
+        list(map(lambda x: print(f'["{x[0]}"]="{x[1]}"'), sorted(list(res.items()))))
+        print(")")
+    elif opt in ['-p', '--python']:
+        import pprint
+        pprint.pprint(conf.config)
+    elif opt in ['-d', '--dump']:
+        res = conf.config
+        for k,v in res.items():
+            if v == True:
+                res[k] = 'true'
+            elif v == False:
+                res[k] = 'false'
+        list(map(lambda x: print(f'{x[0]}="{x[1]}"'), sorted(list(res.items()))))
+
+def main():
+
+    run_config()
+    
+if __name__ == '__main__':
+    main()

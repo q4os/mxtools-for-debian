@@ -1,0 +1,13 @@
+locale/* 		usr/share/locale
+lib/*                   usr/local/lib
+make-fstab              sbin
+autologin               sbin
+make-xorg-conf          sbin
+antixers                etc/sudoers.d
+sbin/*                  usr/sbin
+desktop_tool.py         usr/local/bin
+excludes/*              usr/local/share/excludes 
+boot-menus/*            usr/local/share/boot-menus             
+pc-speaker.conf         etc/modprobe.d 
+umount-media 		usr/local/bin 
+mount-media 		usr/local/bin

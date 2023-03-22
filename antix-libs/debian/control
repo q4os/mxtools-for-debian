@@ -1,0 +1,11 @@
+Source: antix-libs
+Section: system
+Priority: required
+Maintainer: anticapitalista <anticapitalista@riseup.net>
+Build-Depends: debhelper (>= 9.20120115)
+Standards-Version: 3.9.8
+Homepage: https://gitlab.com/antiX-Linux/antix-libs
+
+Package: antix-libs
+Architecture: all
+Description: libs for running antiX.

@@ -1,0 +1,395 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# Panwar108 <caspian7pena@gmail.com>, 2020-2021
+msgid ""
+msgstr ""
+"Project-Id-Version: antix-development\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-03-20 18:46+0200\n"
+"PO-Revision-Date: 2021-05-24 18:03+0000\n"
+"Last-Translator: Panwar108 <caspian7pena@gmail.com>\n"
+"Language-Team: Hindi (http://www.transifex.com/anticapitalista/antix-development/language/hi/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: hi\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: cli-installer.sh:29
+#, sh-format
+msgid "CL installer for $DISTRO"
+msgstr "$DISTRO हेतु कमांड लाइन इंस्टॉलर "
+
+#: cli-installer.sh:30
+msgid "Version 5.2.1 20/03/2020"
+msgstr "संस्करण 5.2.1 20/03/2020"
+
+#: cli-installer.sh:37
+msgid "Requirements for minimum installation:"
+msgstr "संक्षिप्त इंस्टॉल हेतु आवश्यकताएँ :"
+
+#: cli-installer.sh:40
+msgid "antiX-full: hard-disk 4.0GB  RAM 64MB"
+msgstr "एंटी-एक्स पूर्ण : हार्ड-डिस्क 4.0 जीबी  RAM 64 एमबी"
+
+#: cli-installer.sh:42
+msgid "antiX-base: hard-disk 3.0GB  RAM 48MB"
+msgstr "एंटी-एक्स बेस : हार्ड-डिस्क 3.0 जीबी RAM 48 एमबी"
+
+#: cli-installer.sh:44
+msgid "antiX-core: hard-disk 1.0GB  RAM 48MB"
+msgstr "एंटी-एक्स कोर : हार्ड-डिस्क 1.0 जीबी RAM 48 एमबी"
+
+#: cli-installer.sh:46
+msgid "antiX-net:  hard-disk 0.7GB  RAM 48MB"
+msgstr "एंटी-एक्स नेट : हार्ड-डिस्क 0.7 जीबी RAM 48 एमबी"
+
+#: cli-installer.sh:48
+msgid "Make sure you are connected to "
+msgstr "सुनिश्चित करें कि आप कनेक्ट हैं"
+
+#: cli-installer.sh:50
+msgid "the net BEFORE running this installer"
+msgstr "इंटरनेट से यह इंस्टॉलर आरंभ करने पूर्व"
+
+#: cli-installer.sh:52
+msgid "NOTE: This installer will NOT work for UEFI boot"
+msgstr "ध्यान दें : यह इंस्टॉलर UEFI बूट हेतु पूर्णतया असंगत है"
+
+#: cli-installer.sh:54
+msgid ""
+"This installer does NOT offer the option for using a separate boot partition"
+msgstr "इस इंस्टॉलर हेतु पृथक बूट विभाजन का विकल्प उपलब्ध नहीं है"
+
+#: cli-installer.sh:56
+msgid "This installer does NOT offer encryption"
+msgstr "इस इंस्टॉलर हेतु एन्क्रिप्शन का विकल्प उपलब्ध नहीं है"
+
+#: cli-installer.sh:58
+msgid "This installer does NOT offer installation to NVMe devices"
+msgstr "इस इंस्टॉलर हेतु एनवीएमई उपकरण पर इंस्टॉल का विकल्प उपलब्ध नहीं है"
+
+#: cli-installer.sh:60
+msgid "If you want the above mentioned features, use our gui installer"
+msgstr "यदि आप ऊपर लिखी सुविधाएँ उपयोग करना चाहते हैं तो ग्राफिकल अंतरफलक इंस्टॉलर का उपयोग करें"
+
+#: cli-installer.sh:62
+msgid "Ctrl c will abort this script"
+msgstr "Ctrl+C से यह स्क्रिप्ट बंद हो जाएगी"
+
+#: cli-installer.sh:68
+msgid "Usage: cli-installer [drive]"
+msgstr "उपयोग : cli-installer [ड्राइव]"
+
+#: cli-installer.sh:69
+#, sh-format
+msgid "Where drive is the name of the drive $DISTRO is to be installed on."
+msgstr "ड्राइव नाम उस ड्राइव का नाम जिस पर $DISTRO इंस्टॉल होगा"
+
+#: cli-installer.sh:70
+msgid "   For example: cli-installer sdb"
+msgstr "उदाहरण : cli-installer sdb"
+
+#: cli-installer.sh:71
+msgid "The default is correct if the computer has only one drive."
+msgstr "कंप्यूटर में केवल एक ड्राइव होने की स्थिति में डिफ़ॉल्ट सेटिंग ही उपयुक्त है।"
+
+#: cli-installer.sh:75
+msgid "Pre-installation tips:"
+msgstr "इंस्टॉल-पूर्व सहायक निर्देश :"
+
+#: cli-installer.sh:78
+msgid "Set language at the boot screen by pressing F2"
+msgstr "F2 कुंजी दबाकर बूट स्क्रीन पर प्रदर्शित भाषा सेट करें"
+
+#: cli-installer.sh:79
+msgid "or by adding the line lang=xx where xx is your language code."
+msgstr "या यह पंक्ति lang=xx जोड़ें; xx के स्थान पर इच्छित भाषा कोड दर्ज करें।"
+
+#: cli-installer.sh:80
+msgid "eg lang=gr for Greek."
+msgstr "उदाहरण यूनानी हेतु lang=gr।"
+
+#: cli-installer.sh:82
+msgid "Set timezone at the boot screen by pressing F3"
+msgstr "F3 कुंजी दबाकर बूट स्क्रीन पर प्रदर्शित समय क्षेत्र सेट करें"
+
+#: cli-installer.sh:84
+msgid "Use kbd=dvorak for dvorak keyboard before installing"
+msgstr "Dvorak कुंजीपटल हेतु इंस्टॉल से पहले यह पंक्ति kbd=dvorak उपयोग करें"
+
+#: cli-installer.sh:87
+msgid ""
+"Press F1 at the boot screen for Help and list of cheatcodes for live use."
+msgstr "लाइव उपयोग हेतु F1 कुंजी दबाकर बूट स्क्रीन पर सहायता व उपयोगी कमांड की सूची प्रदर्शित करें।"
+
+#: cli-installer.sh:94
+msgid "/home partition (hda1, sda2, etc): "
+msgstr "/home विभाजन (hda1, sda2, आदि):"
+
+#: cli-installer.sh:97
+#, sh-format
+msgid "$hdrv invalid. Retry:"
+msgstr "$hdrv अमान्य है। पुनः प्रयास :"
+
+#: cli-installer.sh:107
+msgid "Root partition (hda1, sda2, etc): "
+msgstr "रूट विभाजन (hda1, sda2, आदि):"
+
+#: cli-installer.sh:136
+#, sh-format
+msgid "$rdrv invalid. Retry"
+msgstr "$rdrv अमान्य है। पुनः प्रयास"
+
+#: cli-installer.sh:151
+msgid "Available file systems for $1 are:"
+msgstr "$1 हेतु उपलब्ध फाइल सिस्टम हैं :"
+
+#: cli-installer.sh:165
+msgid "Enter your choice 1-8: "
+msgstr "इच्छित विकल्प संख्या 1-8 दर्ज करें :"
+
+#: cli-installer.sh:170
+msgid "You have chosen $fs for $1"
+msgstr "आप द्वारा $1 हेतु $fs का चयन किया गया"
+
+#: cli-installer.sh:172
+msgid "Downloading necessary files for formatting partitions"
+msgstr "विभाजन फॉर्मेट करने हेतु आवश्यक फाइलों का डाउनलोड जारी"
+
+#: cli-installer.sh:184
+msgid "Ignore any 'barrier' lines"
+msgstr "'अवरोध' पंक्तियाँ अनदेखी करें :"
+
+#: cli-installer.sh:185
+#, sh-format
+msgid "$fs invalid. Retry:"
+msgstr "$fs अमान्य है। पुनः प्रयास :"
+
+#: cli-installer.sh:198
+msgid "Passwords are not identical. Retry:"
+msgstr "कूटशब्द एकसमान नहीं हैं। पुनः प्रयास :"
+
+#: cli-installer.sh:218
+msgid "Invalid; retry:"
+msgstr "अमान्य; पुनः प्रयास;"
+
+#: cli-installer.sh:235
+msgid "Press Enter to exit this script."
+msgstr "यह स्क्रिप्ट बंद करने हेतु ENTER दबाएँ।"
+
+#: cli-installer.sh:244
+msgid "Please run this script as root."
+msgstr "यह स्क्रिप्ट रुट के रूप में निष्पादित करें।"
+
+#: cli-installer.sh:260
+msgid "====Disk and partition Information===="
+msgstr "====डिस्क व विभाजन सूचना===="
+
+#: cli-installer.sh:265
+msgid "Do you want to repartition the disk (y/N)"
+msgstr "क्या आप डिस्क का पुनः विभाजन करना चाहते हैं (y/N)"
+
+#: cli-installer.sh:279
+#, sh-format
+msgid ""
+"The installer will now destroy the data on $rdrv  Do you want to continue "
+"(No will abort the installation) (n/Y)"
+msgstr "अब इंस्टॉलर द्वारा $rdrv पर मौजूद सारा डेटा नष्ट होगा। क्या आप जारी रखना चाहते हैं (नहीं को चुनने से इंस्टॉल प्रक्रिया निरस्त होगी) (n/Y)"
+
+#: cli-installer.sh:286
+#, sh-format
+msgid "Deleting the contents of the $rdrv partition."
+msgstr "$rdrv विभाजन की सामग्री हटाना जारी।"
+
+#: cli-installer.sh:287 cli-installer.sh:386 cli-installer.sh:411
+msgid "This may take some time. Please wait...."
+msgstr "इसमें कुछ समय लग सकता है। कृपया, प्रतीक्षा करें..."
+
+#: cli-installer.sh:293 cli-installer.sh:331
+msgid "Done."
+msgstr "पूर्ण।"
+
+#: cli-installer.sh:297
+msgid "Do you want to use a separate '/home' partition (y/N)"
+msgstr "क्या आप पृथक '/home' विभाजन उपयोग करना चाहते हैं (y/N)"
+
+#: cli-installer.sh:306
+#, sh-format
+msgid ""
+"Is $hdrv a new '/home' partition (No will not destroy any data on $hdrv ) "
+"(y/N)"
+msgstr "क्या $hdrv एक नवीन '/home' विभाजन है (नहीं को चुनने से $hdrv का कोई डेटा नष्ट नहीं होगा) (y/N)"
+
+#: cli-installer.sh:312
+#, sh-format
+msgid "Set file system for $hdrv  (y/N)"
+msgstr "$hdrv हेतु फाइल सिस्टम सेट करें (y/N)"
+
+#: cli-installer.sh:319
+#, sh-format
+msgid ""
+"The installer will now destroy the data on $hdrv  Do you want to continue "
+"(No will abort the install) (n/Y)"
+msgstr "अब इंस्टॉलर द्वारा $hdrv पर मौजूद सारा डेटा नष्ट होगा। क्या आप जारी रखना चाहते हैं (नहीं को चुनने से इंस्टॉल प्रक्रिया निरस्त होगी) (n/Y)"
+
+#: cli-installer.sh:326
+#, sh-format
+msgid "Deleting the contents of the $hdrv partition."
+msgstr "$hdrv विभाजन की सामग्री हटाना जारी।"
+
+#: cli-installer.sh:343
+msgid "Are you running antiX-net (y/N)"
+msgstr "क्या आप एंटी-एक्स नेट उपयोग कर रहे हैं (y/N)"
+
+#: cli-installer.sh:348
+msgid ""
+"Downloading grub-pc, locales, keyboard-configuration, console-setup, "
+"console-data, lsb-release, sysv-rc-conf"
+msgstr "grub-pc, locales, keyboard-configuration, console-setup, console-data, lsb-release, sysv-rc-conf डाउनलोड करना जारी"
+
+#: cli-installer.sh:352
+msgid ""
+"Do you want to install elogind and dbus-x11. RECOMMENDED if installing a "
+"desktop environment. (y/N)"
+msgstr "क्या आप elogind व dbus-x11 इंस्टॉल करना चाहते हैं? डेस्कटॉप वातावरण इंस्टॉल करने की स्थिति में यह अनुशंसित है। (y/N)"
+
+#: cli-installer.sh:357
+msgid "Downloading elogind, libpam-elogind, dbus-x11"
+msgstr "elogind, libpam-elogind, dbus-x11 डाउनलोड करना जारी"
+
+#: cli-installer.sh:364
+msgid "Do you want to install some packages via cli-aptiX (y/N)"
+msgstr "क्या आप cli-aptiX द्वारा कुछ पैकेज इंस्टॉल करना चाहते हैं (y/N)"
+
+#: cli-installer.sh:369
+msgid "Use cli-aptiX to install various applications and/or kernels"
+msgstr "विभिन्न अनुप्रयोग व/या कर्नेल इंस्टॉल करने हेतु cli-aptiX उपयोग करें"
+
+#: cli-installer.sh:378
+#, sh-format
+msgid "antiX will now be copied to $rdrv."
+msgstr "अब एंटी-एक्स $rdrv पर कॉपी होगा।"
+
+#: cli-installer.sh:380
+msgid "Do you want to continue (No will abort the install) (n/Y)"
+msgstr "क्या आप जारी रखना चाहते हैं (नहीं को चुनने से इंस्टॉल प्रक्रिया निरस्त होगी) (n/Y)"
+
+#: cli-installer.sh:407
+msgid "File copy done"
+msgstr "फाइल कॉपी करना पूर्ण"
+
+#: cli-installer.sh:409
+msgid "Install GRUB on MBR (Y/n) No will install to root partition"
+msgstr "GRUB पर MBR इंस्टॉल करें (Y/n) नहीं को चुनने से रूट विभाजन पर इंस्टॉल होगा"
+
+#: cli-installer.sh:434
+#, sh-format
+msgid "GRUB installed on ($grub)"
+msgstr "($grub) पर GRUB इंस्टॉल किया गया"
+
+#: cli-installer.sh:438
+msgid "Computer name (default is 'antix1')? "
+msgstr "कंप्यूटर नाम (डिफ़ॉल्ट 'antix1' है)?"
+
+#: cli-installer.sh:446
+msgid "Time to set up localisation"
+msgstr "स्थानिकी हेतु समय सेट करना"
+
+#: cli-installer.sh:448
+msgid "System locale is set to ..."
+msgstr "सिस्टम स्थानिकी इस पर सेट है..."
+
+#: cli-installer.sh:451
+msgid "Do you want to set up system localisation (y/N)"
+msgstr "क्या आप सिस्टम स्थानिकी सेट करना चाहते हैं (y/N)"
+
+#: cli-installer.sh:458
+msgid "Time to set keyboard layout"
+msgstr "कुंजीपटल अभिन्यास सेट करना"
+
+#: cli-installer.sh:460
+msgid "System keyboard is set to ..."
+msgstr "सिस्टम कुंजीपटल इस पर सेट है ..."
+
+#: cli-installer.sh:463
+msgid "Do you want to set up keyboard (y/N)"
+msgstr "क्या आप कुंजीपटल सेट करना चाहते हैं (y/N)"
+
+#: cli-installer.sh:470
+msgid "Time to set console layout"
+msgstr "कंसोल अभिन्यास सेट करना"
+
+#: cli-installer.sh:472
+msgid "System console is set to ..."
+msgstr "सिस्टम कंसोल इस पर सेट है ..."
+
+#: cli-installer.sh:475
+msgid "Do you want to set up console layout (y/N)"
+msgstr "क्या आप कंसोल अभिन्यास सेट करना चाहते हैं (y/N)"
+
+#: cli-installer.sh:482
+msgid "Time to set timezone"
+msgstr "समय क्षेत्र सेट करना"
+
+#: cli-installer.sh:484
+msgid "System timezone is set to ..."
+msgstr "सिस्टम समय क्षेत्र इस पर सेट है ..."
+
+#: cli-installer.sh:487
+msgid "Do you want to set up system timezone (y/N)"
+msgstr "क्या आप सिस्टम समय क्षेत्र सेट करना चाहते हैं (y/N)"
+
+#: cli-installer.sh:494
+msgid "Choose which services to run"
+msgstr "निष्पादन हेतु सेवा चयन"
+
+#: cli-installer.sh:496
+msgid "Do you want to enable/disable startup services (y/N)"
+msgstr "क्या आप आरंभिकरण सेवाएँ सक्रिय/निष्क्रिय करना चाहते हैं (y/N)"
+
+#: cli-installer.sh:505
+msgid "Is this a remastered/snapshot install (y/N)"
+msgstr "क्या यह रीमास्टर/स्नैपशॉट इंस्टॉल है (y/N)"
+
+#: cli-installer.sh:518
+#, sh-format
+msgid "Installation of $DISTRO finished!"
+msgstr "$DISTRO का इंस्टॉल पूर्ण!"
+
+#: cli-installer.sh:520 cli-installer.sh:590
+msgid "Reboot computer without CD to start program. ('reboot')"
+msgstr "प्रोग्राम आरंभ करने हेतु कंप्यूटर को सीडी के बिना पुनः आरंभ करें। (पुनः आरंभ)"
+
+#: cli-installer.sh:526
+msgid "Setting up user and root/admin accounts"
+msgstr "उपयोक्ता व रूट/प्रशासक अकाउंट सेट करना जारी"
+
+#: cli-installer.sh:531
+msgid "Type in your default user name: "
+msgstr "अपना डिफ़ॉल्ट उयपोक्ता नाम दर्ज करें :"
+
+#: cli-installer.sh:535
+#, sh-format
+msgid "Note: $hdrv must contain a folder named '$name'."
+msgstr "ध्यान दें : $hdrv में '$name' नामक फोल्डर होना आवश्यक है।"
+
+#: cli-installer.sh:540
+msgid "Type your Password for root: "
+msgstr "रूट हेतु कूटशब्द दर्ज करें :"
+
+#: cli-installer.sh:547
+#, sh-format
+msgid "Set autologin for $name: (y/N)"
+msgstr "$name हेतु स्वतः लॉगिन सेट करें : (y/N)"
+
+#: cli-installer.sh:556
+msgid "Cleaning up"
+msgstr "अनावश्यक वस्तुएँ हट रही हैं"
+
+#: cli-installer.sh:588
+msgid "Installation of antiX finished!"
+msgstr "एंटी-एक्स का इंस्टॉल पूर्ण!"

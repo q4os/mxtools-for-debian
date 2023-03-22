@@ -1,0 +1,156 @@
+Changelog:
+
+v1.4.4
+
+- added detectection for local servicemenu-folder inside install-script (thanks to bitcrazy)
+- fixed bug in root-uninstallation
+- fixed corupted translation files (thanks to rakekniven)
+- fixed non-XDG-Standard desktop-files (thaks to sarhugo)
+- fixed bug that doesn't istalled "extrac_7zip_pw_to_folder" as root (thanks to superandrzej)
+- added catalan translation (thanks to lesergi)
+
+--------------------------------
+
+v1.4.3
+
+- added russian translation (thanks to peabody for the translation!)
+
+--------------------------------
+v1.4.2
+
+- added danish translation (thanks to cb400f for the translation!)
+
+--------------------------------
+v1.4.1
+
+- added uninstall-script (uninstall/uninstall.sh)
+
+--------------------------------
+v1.4
+
+- added support for compressing multiple files to one archive (by choosing more than one file/folder a dialog appears and asks for a nome of the archive - NOTE: If you choose bz2 or gz and you selected more than one file, a tar.bz2 or tar.gz archive will be created)
+- renamed INSTALL.sh to install.sh
+
+-------------------------------
+v1.3
+
+Massive reconstruction of all scripts
+- files will now be identified by filetypes, not fileextensions anymore
+- added overwrite prevention -> looks if file/folder exists and asks to overwrite or not
+- simplified dialog structure -> only one dialogs-folder instead of one for every language (thanks to atilla;-))
+- updated installation-script -> no language selection anymore for installation, because your system language will be detected automatically
+
+------------------------------------
+v1.2.1
+
+- added turkish translation (thanks to atilla for the translation!)
+--------
+- updated INSTALL.sh (should finally fix all installation problems - thanks to lazyboy and google01103 for reporting bugs :-)
+
+---------------------------------
+v1.2
+
+- added extraction support for ace, iso, rpm, deb, cpio, cpio.gz, lzh and lha
+- fixed bug in installation script which denied systemwide installation if the downloaded folder exists inside a path with space characters (thanks to lazyboy for reporting this bug!)
+- simplified source-folder structure
+
+---------------------------------
+v1.1.2
+
+- added polish translation (thanks to hash87 for the translation!)
+
+--------------------------------
+v1.1.1
+
+- added czech translation (thanks to cubaguest for the translation!)
+
+--------------------------------
+v1.1
+
+- far better support for filenames/foldernames with space characters (Thanks to eusonig!)
+- code cleaning (faster and lighter now)
+
+--------------------------------
+v1.0.2
+
+- updated install-script (caused installation problems by using systemwide installation on different distributions - now you have to choose the full path to the system's servicemenu-folder)
+
+--------------------------------
+v1.0.1
+
+- added portuguese (brazilian) translation (thanks to elchevive for the translation!)
+
+---------------------------------
+v1.0 FINAL
+
+- added extraction support for filenames/foldernames with space characters
+- improved the installation-script (now it's easier, more flexible and let's you install also systemwide)
+
+---------------------------------
+v1.0 RC2
+
+- added compression support for filenames/foldernames with space characters
+- updated Install and remove spript by setting variable localprefix (thanks to mherbert for this hint!)
+
+-----------------------------------
+v1.0 RC1
+
+- cleaned up scripts and servicemenus to get lesser files which can be maintained easier
+- added french translation (Thanks to PhilippeP for the translation!)
+- corrected italian translation
+----
+- added chinese simplified translation (Thanks to nihui for the translation!)
+
+---------------------------------
+v0.9.10
+
+- added compression to tgz
+- added italian translation (Thanks to arandamandi for the translation!)
+
+---------------------------------
+v0.9.9.1
+
+- added extraction to... and extraction to subfolder for bz2 and gz
+- fixed bug that tar.bz2-files could only extract here
+
+---------------------------------
+v0.9.9
+
+- added extraction to subfolder
+
+---------------------------------
+v0.9.8.1
+
+- added spanish version (Thanks to finrold for the translation!)
+
+---------------------------------
+v0.9.8
+
+- added tar.bz2 compression support
+- added dialogbox when finishing compression and extraction
+- made versions in english and german
+- split compression servicemenu in 2 seperate ones for using bz2 and gz only for files not folders
+
+----------
+v0.9.7
+
+- added tar.7z compression support
+
+----------------------------------
+v0.9.6
+
+- added 7zip support
+
+----------------------------------
+v0.9.5
+
+- added extract-to option to tar, tar.gz, rar and zip
+- updated compression-to-tar.gz script
+- cleaned up servicemenus (default text language is now everwhere english)
+
+----------------------------------
+v0.9.1
+
+- updated compression-to-rar script
+
+----------------------------------

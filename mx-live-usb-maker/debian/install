@@ -1,0 +1,8 @@
+mx-live-usb-maker		usr/bin
+mx-live-usb-maker.desktop	usr/share/applications
+mx-live-usb-maker.png		usr/share/icons/hicolor/256x256/apps
+authors.txt			usr/share/doc/mx-live-usb-maker
+help/*				usr/share/doc/mx-live-usb-maker
+translations/*.qm		usr/share/mx-live-usb-maker/locale
+scripts/mxlum-launcher		usr/bin
+scripts/org.mxlinux.pkexec.mxlum-launcher.policy	usr/share/polkit-1/actions

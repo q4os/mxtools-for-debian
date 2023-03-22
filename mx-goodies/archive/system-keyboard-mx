@@ -1,0 +1,100 @@
+#!/bin/bash
+
+# system-keyboard-mx
+#
+# Configure system keyboard
+
+export TEXTDOMAINDIR=/usr/share/locale/ 
+export TEXTDOMAIN="mx-goodies"
+#
+# some msg-strings to be translated
+#
+CANCELED="$(gettext 'canceled')"
+   TITLE="$(gettext 'System Keyboard Configuration')"
+
+# some msg-strings we have translations already
+#
+CHKROOT="gettext su-to-root 'This command needs %s privileges to be executed.\n'"
+CHKROOT="$(eval $CHKROOT)"
+
+# check root
+#
+if test "$(id -u)" != 0; then
+  printf "$CHKROOT" root
+  exit 1
+fi
+
+case $XDG_CURRENT_DESKTOP in
+  KDE)  FRONTEND=kde;;
+  *)    FRONTEND=gnome;;
+esac
+
+# window defaults
+#
+  ICON=notification-keyboard-brightness
+ WIDTH=900
+HEIGHT=400
+
+# locale info's
+#
+sys_lang() {
+   local sys_lang
+   sys_lang="$(grep -o -E '^LANG=[^#[:space:]]+'  /etc/default/locale 2>/dev/null |  tail -1 2>/dev/null)"
+   sys_lang="${sys_lang#LANG=}"
+   echo "$sys_lang"
+}
+      
+# locale sanity checks
+#
+PROC_LANG="C"
+USER_LANG="$LANG"
+SYS_LANG="$(sys_lang)"
+
+if [ x"$USER_LANG" != "x" ] && \
+   LANG=C locale -a | sed s/utf8/UTF-8/ | grep -q "${USER_LANG/utf8/UTF-8}"; then 
+   PROC_LANG="$USER_LANG"
+elif [ x"$SYS_LANG" != "x" ] && \
+   LANG=C locale -a | sed s/utf8/UTF-8/ | grep -q "${SYS_LANG/utf8/UTF-8}"; then 
+   PROC_LANG="$SYS_LANG"
+elif LANG=C locale -a | sed s/utf8/UTF-8/ | grep -q "C.UTF-8"; then 
+   PROC_LANG="C.UTF-8"
+fi
+
+# configure system keyboard
+#
+( env LANG="$PROC_LANG" dpkg-reconfigure -f$FRONTEND keyboard-configuration 2>/dev/null
+   RET=$?
+   if [ $RET != 0 ]; then
+       echo " "
+       echo '"'"$TITLE"'"'" ${CANCELED}: exit [$RET]"
+       echo " "
+       exit $RET
+   else  
+       echo " "
+       echo "${TITLE}:"
+      sed -n -E '/^XKB/{s/^XKB//;p;}' 2>/dev/null /etc/default/keyboard
+   fi
+   ) | ( \
+
+   read LINE
+   # capture debconf "sh: printf: I/O error" after cancel
+   [  "${LINE% }" = "sh: printf: I/O error" ] && LINE=""  
+   echo "$LINE" ; echo "$LINE" ; 
+
+   cat - 
+   ) | ( read; \
+   yad \
+      --text-info \
+      --title="$TITLE" \
+      --window-icon=$ICON \
+      --width=$WIDTH \
+      --height=$HEIGHT \
+      --margins=9 \
+      --borders=7 \
+      --center \
+      --on-top \
+      --tail \
+      --button="gtk-close:1"
+   )
+
+exit

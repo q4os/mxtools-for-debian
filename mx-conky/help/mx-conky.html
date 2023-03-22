@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>HELP: MX Conky</title>
+</head>
+<body>
+<h1>HELP: MX Conky</h1>
+<h2 id="Background"><a id="Background" name="Background"></a>Background</h2>
+
+<p>MX Conky is a tool whose goal is to render the use and customization of <a href="https://en.wikipedia.org/wiki/Conky_(software)">conky</a> scripts available to a wider and non-technical audience. It consists of a gui program and an associated data file of conkies (legacy versions) that have been tested and edited for use in MX Linux. The default conkies can be viewed in <a href="https://mxlinux.org/conky-images">the Conky Images gallery</a>.</p>
+
+<p><a class="external text" href="https://github.com/brndnmtthws/conky/wiki/What-Is-Conky%3F" rel="nofollow">Conky</a> is an extremely versatile system monitoring utility that can display on your desktop a wide variety of information. Many creative conky scripts exist that have expanded its original scope to include music, email, weather, updates, etc. Its range has been further extended with the use of <a href="https://en.wikipedia.org/wiki/Lua_(programming_language)">Lua</a>, a lightweight and powerful programming language.</p>
+
+<p>Many users find conkies difficult to customize. They come from many different sources, they follow no consistent configuration layout (in legacy format), many of them no longer work for one reason or another, and the text itself is difficult to understand. The situation was made much easier by <a href="http://www.teejeetech.in/p/conky-manager.html">Conky Manager</a> (see below). MX Conky was created in an effort to supplement Conky Manager and provide an easy starting point for users lacking prior experience.</p>
+
+<h2 id="Installation"><a id="Installation" name="Installation"></a>Installation</h2>
+
+<p>MX Conky and its data pack are installed by default from MX-17 onward; users on earlier versions of MX Linux can install it from the repos. Its installation brings Conky Manager along as a dependency.</p>
+
+<h2 id="Use"><a id="Use" name="Use"></a>Use</h2>
+
+<p><strong>NB</strong>: <strong>do <u>not</u> follow traditional directions</strong> <strong>about putting conkies in your /home folder (as ~/.conkyrc) and enabling conky to autostart. </strong>MX Conky is designed to be used in conjunction with Conky Manager, which is a much better method to deal with them.</p>
+
+<h3><strong>Step 1</strong></h3>
+
+<p>&nbsp;Conky Manager should be used to set a whole group of configurations.</p>
+
+	<ul>
+		<li>Change the basic location (top right, bottom left, etc.)</li>
+		<li>Change the transparency setting</li>
+		<li>Browse through the available conkies while seeing thumbnails of them</li>
+		<li>Select autostart (runs a Conky Manager script)</li>
+		<li>Test new conkies (downloaded from the web, for example)</li>
+		<li>Etc.</li>
+	</ul>
+
+<p>See <a href="https://mxlinux.org/wiki/help-files/help-conky-manager">HELP &#8212; Conky Manager</a> for more.</p>
+
+<h3><strong>Step 2</strong></h3>
+
+<p><strong>NB: changes are instantly recorded in the script. At the end of the session, you will be given the opportunity to save the original that you started with and, if you say yes, a file will be placed in the same folder with a time stamp that you can rename as desired. </strong></p>
+
+<p>Once you have used Conky Manager to carry out basic functions, you are ready to tweak a conky using MX Conky. When you launch it, one of two things will happen:</p>
+
+	<ol>
+		<li>If a conky is already running, MX Conky will open ready to edit it.</li>
+		<li>If no conky is running, MX Conky will display the available conkies in the default location (~/.conky/); navigate to the one you want and launch it by clicking OK.</li>
+	</ol>
+
+<img src="MXConky.png" alt="MX Conky" />
+
+<p>Fields from top to bottom:</p>
+
+	<ul>
+		<li>Launch.
+			<ul>
+				<li>The bar across the top shows the name of the conky that is currently ready for editing. You can also click on it at any point to select another conky to work with.</li>
+				<li>The Run/Stop toggle allows you to stop a conky or, after selecting a new one, to run it to watch your changes.</li>
+				<li>Edit brings up the conky script itself.</li>
+				<li>Undo returns you to the last saved script version.</li>
+			</ul>
+		</li>
+		<li>Drag.
+			<ul>
+				<li>By far the easiest way of making fine adjustments to a basic position selected with Conky Manager is simply to drag it using the Alt key and the left mouse click.</li>
+				<li>You can also resize the conky&#8217;s own window by using the Alt key and the <u>right</u> mouse click. You can see that window if you use Comky Manager to change the transparency to &#8220;opaque.&#8221;</li>
+				<li>These changes are valid only for the session while the conky is running. When the conky is restarted, the script itself will be followed; permanent change requires that the script itself be changed.
+					<ul>
+						<li>For fine location of the entire conky window, use Conky Manager to alter the horizontal and vertical &#8220;gap&#8221; values; to change the location of individual parts of the conky, the &#8220;offset&#8221; and &#8220;voffset&#8221; fields of the TEXT section must be changed&#8211;you will usually need to experiment a bit to get it right.</li>
+						<li>Permanent window size can be adjusted using Conky Manager &gt; Size; again, some experimentation is usually required.</li>
+					</ul>
+				</li>
+			</ul>
+		</li>
+		<li>Desktop. You can have your conky on all desktops or just on Desktop 1. If placed on any other desktop at first, it will revert to Desktop 1 at next login, wake from suspend or reboot.</li>
+		<li>Formats. Here you can easily change month and day names. Time format can be manipulated with Conky Manager.</li>
+		<li>Colors. The conkies in the MX Conky data file have been modified to provide a standard method for easy manipulation.</li>
+	</ul>
+
+<h2 id="Example"><a id="Examples" name="Examples"></a>Example</h2>
+
+<p>Let&#8217;s use MX Conky to alter the color of the default conkies, taking <strong>MX-Cowan_less</strong> as our example. Here is the original:</p>
+
+<img src="CowanPurple.jpg" alt="Cowan Purple" />
+
+<p>Launch MX Conky, navigate to that conky and open it, and click on Run so you can see it while you work. Here is the Color field you will see at the bottom of the MX Conky screen:</p>
+
+<img src="CowanColors.png" alt="colors" />
+
+<p>Now let&#8217;s change the purple to, say, dark orange. Click the little change box with three dots to the right of the purple &#8220;Color2&#8221; and use one of three ways to change it:</p>
+
+	<ul>
+		<li>Click in the &#8220;Color name&#8221; box and delete everything in it, including the hash symbol; then type in &#8220;dark orange&#8221; (without the quotes)</li>
+		<li>Use the color wheel to select a dark orange color you like, following the tool tip you see when you hover the cursor over it</li>
+		<li>Click on the little eyedropper and use it to select an orange color from anywhere on your screen (the Firefox icon, for example)</li>
+	</ul>
+
+<p>The result will be an instant change to the conky something like this:</p>
+
+<img src="CowanOrange_0.jpg" alt="Orange Conky" />
+
+<p>Notice that it took less than one minute to make the change!</p>
+
+<h2 id="Tips-and-tricks"><a id="Tips and tricks" name="Tips and tricks"></a>Tips and tricks</h2>
+
+	<ul>
+		<li>If you want to separate elements with different colors that are currently using the same color, find where it is in the text part of the script and insert a new MX color name that is not already being used (e.g., {color5}). Be sure to return to the color before it by adding the preceding color name (e.g., {color4}) at the end of the element.</li>
+		<li>If you notice problems with brightness and shadows around a conky when using Compton, try this:
+			<ul>
+				<li>Look for the line <em>own_window_type</em> and change the word that comes after it to &#8220;desktop&#8221;; if the line is not there, add it</li>
+				<li>If present, try setting <em>own_window_argb_visual</em> to &#8220;yes&#8221;</li>
+			</ul>
+		</li>
+		<li>If using <em>Alt + Left click</em> to move a conky does not seem to work, check that the the script has this line: &#8220;own_window_type <strong>normal</strong>&#8220;; if another word appears there instead of &#8220;normal,&#8221; try changing it to see if that helps. Some scripts may be rendered non-functional by such a change, so proceed carefully.</li>
+		<li>Some of the conkies look pretty good against their own background instead of being &#8220;pseudo-transparent.&#8221; To try that, use Conky Manager to set the background to &#8220;opaque&#8221; or manually change the line <em>own_window_transparent yes</em> to <em>own_window_transparent no. </em>You can adjust the size of an opaque window with <em>Alt + Right click</em>.</li>
+		<li>The font used in a particular conky may not support your language, and you will see junk instead of the correct word. This is particularly true for languages that are not based on the Latin alphabet.
+			<ul>
+				<li>For Greek and Cyrillic, open the script and try changing (Search &gt; Replace) the font to one of the Roboto ones such as <strong>Roboto-Light</strong></li>
+				<li>For Chinese and other <a href="https://en.wikipedia.org/wiki/East_Asian_languages">East Asian</a> languages, try <strong>wqy-microhei</strong></li>
+			</ul>
+		</li>
+		<li>If the time is not correct&#8211;or if changing the font did not correct a problem with the time text&#8211;change if present the line &#8220;override_utf8_locale no&#8221; to <strong>override_utf8_locale yes</strong></li>
+		<li>To change to 24hr time, in most cases you can use Conky Manager &gt; Gear icon &gt; Time. A few conkies are set to a time format that can not be changed (the default Gotham, for example). In such cases, click the pencil icon to open up the script itself, and click Search &gt; Replace to change <strong><em>%l</em></strong> (lower-case L) to <em><strong>%H</strong></em>
+			<ul>
+				<li>If trying to locate the conky on one of multiple screens, you can use the conky object&nbsp;<a href="https://en.wikipedia.org/wiki/Xinerama">xinerama</a>_head. For example, to get it to the top left of screen 1 (use <strong>DIsplay</strong> to find the correct number):
+<pre><em>alignment top_left
+​xinerama_head = 1</em>
+</pre>
+</li>
+			</ul>
+		</li>
+		<li>When using a conky with a network function, you will probably need to change the interface name&#8211;especially given the change that came with Debian Stretch. You can do that most easily with Conky Manager settings &gt; Network; alternatively, edit the conky script by using the Search &gt; Replace screen, changing what is in the script (eth0, for instance). To find out those names, run this command as regular user in a terminal (F4):</li>
+	</ul>
+
+<pre class="wp-block-preformatted rteindent2"><em>cd /sys/class/net &amp;&amp; ls --ignore=lo</em></pre>
+
+<p><a id="Technical details" name="Technical details"></a><strong>Technical details</strong></p>
+
+	<ul>
+		<li>The data package that is included with MX Conky (mx-conky-data) is installed into /usr/share/mx-conky-data/themes/. MX Conky loads its contents into ~/.conky/ on first launch if it&#8217;s not already there.</li>
+		<li>Selection of conkies to be included is based primarily on simplicity and aesthetics.</li>
+		<li>Every conky included by default with MX-Conky is accompanied by a source file indicating the original creator and a thumbnail image.</li>
+		<li>Conkies included use the old syntax. Those using conky versions later than 1.9.1 are presently not included. Conkies with old syntax can be converted to the new one in the following manner:
+			<ul>		
+				<li>Install lua5.2</li>
+				<li>Download convert.lua</li>
+				<li>Run command</li>
+			</ul>
+<li>Install lua5.2</li>
+<li>Download <a href="https://github.com/brndnmtthws/conky/blob/master/extras/convert.lua">convert.lua</a></li>
+<li>Run command</li>
+</ul>
+       
+
+<pre class="wp-block-preformatted rteindent2"><em>lua ./convert.lua </em>old_conkyrc new_conkyrc</pre>
+		</li>
+
+		<li>The included conkies are based on the work of various artistic creators. They have been updated for function (e.g., switching to new network interface names), restructured to work with MX Conky and edited for simplicity.</li>
+		<li>To add a new conky so it will work with MX Conky:
+			<ul>
+				<li>First use Conky Manager to see if it will show at all on MX Linux. (If not, try changing the transparency to pseudo-transparent.)</li>
+				<li>Open up the script, and collect all the different instances of <strong>color name/code </strong>inside braces (e.g., {color forestgreen} or {color 228B22})</li>
+				<li>Create a <em>color declaration</em> above the word TEXT somewhere by making a list like this (compare one of the MX conkies if unsure):
+					<ul>
+						<li>color0 forestgreen</li>
+						<li>color1 EAEAEA</li>
+						<li>etc.</li>
+					</ul>
+				</li>
+				<li>Use Edit &gt; Replace to substitute all the instances of a name or code with its list name (e.g., so all &#8220;forestgreen&#8221; will be replaced by &#8220;color0&#8221;</li>
+				<li>Save and exit</li>
+				<li>Now you will be able to change all occurences of a certain color following the MX Conky procedure outlined above.</li>
+				<li>If your new conky works with MX Conky and meets the selection criteria, please submit it on the Forum to be considered for inclusion.</li>
+			</ul>
+		</li>
+	</ul>
+
+
+<h2 id="Resources"><a id="Resources" name="Resources"></a>Resources</h2>
+
+<ul><li><a class="postlink" href="http://conky.sourceforge.net/config_settings.html">http://conky.sourceforge.net/config_settings.html</a></li><li><a href="https://github.com/brndnmtthws/conky/wiki/">https://github.com/brndnmtthws/conky/wiki/</a></li><li><a class="postlink" href="http://conky.sourceforge.net/variables.html">http://conky.sourceforge.net/variables.html</a></li><li><a href="https://mxlinux.org/wiki/other/time-formats-scripts">Time Format in Scripts</a></li><li><a class="postlink" href="http://conky.sourceforge.net/docs.html">http://conky.sourceforge.net/docs.html</a></li><li><a href="https://plus.google.com/s/%23conky/posts">https://plus.google.com/s/%23conky/posts</a></li><li><a class="postlink" href="https://ubuntuforums.org/showthread.php?t=281865">https://ubuntuforums.org/showthread.php?t=281865</a></li><li><a href="https://bbs.archlinux.org/viewtopic.php?id=39906">https://bbs.archlinux.org/viewtopic.php?id=39906</a></li><li><a class="postlink" href="https://conky-artists-group.deviantart.com/gallery/24132854/Featured">https://conky-artists-group.deviantart. &#8230; 4/Featured</a></li><li><a class="postlink" href="https://plus.google.com/u/0/communities/104794997718869399105">https://plus.google.com/u/0/communities &#8230; 8869399105</a></li><li><a class="postlink" href="http://www.mediafire.com/file/ibvla9ikrdph48e/Deluxe+Pack_3.7z">http://www.mediafire.com/file/ibvla9ikr &#8230; +Pack_3.7z</a> &lt;&lt; extra conky pack for CM</li></ul>
+
+
+<p>License: <a href="https://mxlinux.org/wiki/licenses/license-mx-conky">here</a>.</p>
+
+
+
+<p><strong>Development history: </strong>Jerry3904 and Adrian</p>
+
+
+
+<h6><strong>v. 20180225</strong></h6>
+</body>
+</html>

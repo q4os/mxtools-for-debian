@@ -1,0 +1,293 @@
+mx-repo-list (22.9+deb11u13) stable; urgency=medium
+
+  * MX Tools release
+
+ -- Adrian <administrator@localdomain>  Wed, 22 Mar 2023 10:43:54 +0100
+
+mx-repo-list (22.9) mx; urgency=medium
+
+  * Update repo list
+
+ -- Adrian <adrian@mxlinux.org>  Sun, 11 Sep 2022 18:00:41 -0400
+
+mx-repo-list (22.8) mx; urgency=medium
+
+  * Remove metapeer repo
+  * Update NYCU url 
+
+ -- Adrian <adrian@mxlinux.org>  Sun, 07 Aug 2022 10:08:30 -0400
+
+mx-repo-list (22.5.01) mx; urgency=medium
+
+  * New Mirror: Kyiv, Ukraine
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 19 May 2022 11:52:57 -0400
+
+mx-repo-list (22.5) mx; urgency=medium
+
+  * New Mirror: Berkeley, CA, USA
+
+ -- Adrian <adrian@mxlinux.org>  Sun, 01 May 2022 10:41:29 -0400
+
+mx-repo-list (22.4.01) mx; urgency=medium
+
+  * New Mirror: Portugal, Lisbon
+
+ -- Adrian <adrian@mxlinux.org>  Sat, 30 Apr 2022 10:11:36 -0400
+
+mx-repo-list (22.4) mx; urgency=medium
+
+  * Update location info
+
+ -- Adrian <adrian@mxlinux.org>  Tue, 19 Apr 2022 16:57:20 -0400
+
+mx-repo-list (22.3) mx; urgency=medium
+
+  * Add Tehran repo.
+
+ -- Adrian <adrian@mxlinux.org>  Tue, 29 Mar 2022 23:33:26 -0400
+
+mx-repo-list (21.12.02) mx; urgency=medium
+
+  * Remove Anycast Evowise repo; doesn't seem to work
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 31 Dec 2021 01:26:05 -0500
+
+mx-repo-list (21.12.01) mx; urgency=medium
+
+  * New Mirror: China, Alibaba Cloud
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 17 Dec 2021 15:57:19 -0500
+
+mx-repo-list (21.12) mx; urgency=medium
+
+  * New mirror: Singapore
+
+ -- Adrian <adrian@mxlinux.org>  Sun, 05 Dec 2021 10:22:43 -0500
+
+mx-repo-list (21.7) mx; urgency=medium
+
+  * Update 23media -> 23m
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 29 Jul 2021 10:24:10 -0400
+
+mx-repo-list (21.5.02) mx; urgency=medium
+
+  * new mirror: UK
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 17 May 2021 15:25:15 -0400
+
+mx-repo-list (21.5.01) mx; urgency=medium
+
+  * fix location
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 12 May 2021 09:10:15 -0400
+
+mx-repo-list (21.5) mx; urgency=medium
+
+  * new mirror: South Korea, Seo-gu
+
+ -- Adrian <adrian@mxlinux.org>  Tue, 11 May 2021 07:33:47 -0400
+
+mx-repo-list (21.2) mx; urgency=medium
+
+  * new mirror: Bulgaria, Sofia
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 25 Feb 2021 10:43:22 -0500
+
+mx-repo-list (20.11) mx; urgency=medium
+
+  * new mirror: Sweden, Kinna 
+
+ -- Adrian <adrian@mxlinux.org>  Sun, 01 Nov 2020 16:06:21 -0500
+
+mx-repo-list (20.10.01) mx; urgency=medium
+
+  * bring back new zealand
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 14 Oct 2020 19:45:08 -0400
+
+mx-repo-list (20.9.01) mx; urgency=medium
+
+  * update New Caladonia 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Tue, 29 Sep 2020 20:52:57 -0400
+
+mx-repo-list (20.9) mx; urgency=medium
+
+  * repo list updates (disable some, renable some) 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 28 Sep 2020 21:41:28 -0400
+
+mx-repo-list (20.6) mx; urgency=medium
+
+  * fixed UK repo
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 24 Jun 2020 22:48:47 -0400
+
+mx-repo-list (20.5) mx; urgency=medium
+
+  * revised offerred mirrors (removed those that haven't updated in a long time)
+
+
+ -- Adrian <adrian@mxlinux.org>  Sat, 30 May 2020 13:40:03 -0400
+
+mx-repo-list (20.3) mx; urgency=medium
+
+  * update Belgium mirror
+
+ -- Adrian <adrian@mxlinux.org>  Sun, 22 Mar 2020 15:03:35 -0400
+
+mx-repo-list (20.2) mx; urgency=medium
+
+  * new mirror: Montreal
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 13 Feb 2020 11:15:43 -0500
+
+mx-repo-list (19.6) mx; urgency=medium
+
+  * new mirrors: Sweden, China
+
+ -- Adrian <adrian@mxlinux.org>  Sat, 15 Jun 2019 17:55:31 -0400
+
+mx-repo-list (19.4.1) mx; urgency=medium
+
+  * add Paraguay, remove Mexico mirror
+
+ -- Adrian <adrian@mxlinux.org>  Sat, 20 Apr 2019 09:45:03 -0400
+
+mx-repo-list (19.4) nx; urgency=medium
+
+  * new mirror: Frankfurt
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 05 Apr 2019 12:00:01 -0400
+
+mx-repo-list (19.3.2) mx; urgency=medium
+
+  * new mirrors: France, Hungary, Poland, Philippines
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 22 Mar 2019 18:18:42 -0400
+
+mx-repo-list (19.3.1) mx; urgency=medium
+
+  * new mirrors: France, Indonesia, Israel, Poland, Uganda
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 13 Mar 2019 00:14:51 -0400
+
+mx-repo-list (19.3) mx; urgency=medium
+
+  * new mirrors: Argentina, Belarus, Indonesia, Italy, Los Angeles, New Caledonia, Uzbekistan, South Korea
+
+ -- Adrian <adrian@mxlinux.org>  Sun, 03 Mar 2019 08:36:42 -0500
+
+mx-repo-list (19.2.2) mx; urgency=medium
+
+  * new mirror: France
+  * commented out Evowise mirror that had a number of problems
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 11 Feb 2019 09:55:46 -0500
+
+mx-repo-list (19.2.1) mx; urgency=medium
+
+  * new mirrors: Germany, India, Spain
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 08 Feb 2019 12:52:58 -0500
+
+mx-repo-list (19.2) mx; urgency=medium
+
+  * new mirrors: Azerbaijan, Canada, Colombia, Italy, Japan, Poland, Portugal, Switzerland, Taiwan, US
+
+ -- Adrian <adrian@mxlinux.org>  Sat, 02 Feb 2019 08:33:10 -0500
+
+mx-repo-list (19.1.5) mx; urgency=medium
+
+  * new mirrors: Ukraine, Louxemburg, Austria, Germany, Greece, Namibia, USA Madison, Chile
+  * fix Kenya url
+
+ -- Adrian <adrian@mxlinux.org>  Sat, 19 Jan 2019 18:24:26 -0500
+
+mx-repo-list (19.1.4) mx; urgency=medium
+
+  * new mirror: Canada
+  * fix Malaysia link
+
+ -- Adrian <adrian@mxlinux.org>  Sun, 13 Jan 2019 12:55:32 -0500
+
+mx-repo-list (19.1.3) mx; urgency=medium
+
+  * new mirrors: Manchester, Seoul, Mexico, Korea
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 11 Jan 2019 12:02:09 -0500
+
+mx-repo-list (19.1.2) mx; urgency=medium
+
+  * new mirrors: Wordwide Anycast, Latvia, Spain, US, France, Romania, Greece, New Zealand
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 09 Jan 2019 10:23:55 -0500
+
+mx-repo-list (19.1.1) mx; urgency=medium
+
+  * new mirrors: Portugal, US, Germany
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 04 Jan 2019 11:24:57 -0500
+
+mx-repo-list (19.1) mx; urgency=medium
+
+  * new mirror: Chile, Czech Republic
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 02 Jan 2019 01:43:47 -0500
+
+mx-repo-list (18.12.8) mx; urgency=medium
+
+  * new mirror: Serbia, Brazil
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 28 Dec 2018 09:05:18 -0500
+
+mx-repo-list (18.12.7) mx; urgency=medium
+
+  * new mirror: Moscow, Russia
+  * new mirror: Yamagata, Japan
+
+ -- Adrian <adrian@mxlinux.org>  Tue, 25 Dec 2018 10:49:55 -0500
+
+mx-repo-list (18.12.6) mx; urgency=medium
+
+  * new mirror: Pakistan
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 24 Dec 2018 00:25:01 -0500
+
+mx-repo-list (18.12.5) mx; urgency=medium
+
+  * update mirror list
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 21 Dec 2018 14:32:17 -0500
+
+mx-repo-list (18.12.4) mx; urgency=medium
+
+  * new mirrors: Spain, Georgia, India
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 20 Dec 2018 08:30:48 -0500
+
+mx-repo-list (18.12.3) mx; urgency=medium
+
+  * new mirrors: Princeton, Bulgaria
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 17 Dec 2018 08:37:56 -0500
+
+mx-repo-list (18.12.2) mx; urgency=medium
+
+  * new mirrors: India, Slovakia
+
+ -- Adrian <adrian@mxlinux.org>  Sun, 16 Dec 2018 09:40:23 -0500
+
+mx-repo-list (18.12.1) mx; urgency=medium
+
+  * new mirror in China
+
+ -- Adrian <adrian@mxlinux.org>  Sat, 15 Dec 2018 23:12:50 -0500
+
+mx-repo-list (18.12) mx; urgency=medium
+
+  * initial setup
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 13 Dec 2018 12:25:21 -0500

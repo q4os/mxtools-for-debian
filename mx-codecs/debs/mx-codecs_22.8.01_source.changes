@@ -1,0 +1,40 @@
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA512
+
+Format: 1.8
+Date: Mon, 22 Aug 2022 19:09:58 -0400
+Source: mx-codecs
+Architecture: source
+Version: 22.8.01
+Distribution: mx
+Urgency: medium
+Maintainer: Adrian <adrian@mxlinux.org>
+Changed-By: Adrian <adrian@mxlinux.org>
+Changes:
+ mx-codecs (22.8.01) mx; urgency=medium
+ .
+   * Fix: launching documents from Help (fixes a problem in Plasma)
+Checksums-Sha1:
+ e4e1663d7f0b72b1df82ddddfffa59ee9fa8b5a7 1163 mx-codecs_22.8.01.dsc
+ 52d0e4bda923a0179b3b5a117261e28e940f3622 65724 mx-codecs_22.8.01.tar.xz
+ 79aadf832a1d5596a99d340289f9ffc56f8ea9ca 10734 mx-codecs_22.8.01_amd64.buildinfo
+Checksums-Sha256:
+ 449e29c46afdfaa560368571a29d276dcd289768d8296e16bc154d281e347c52 1163 mx-codecs_22.8.01.dsc
+ c79034d5029849dcab22c1261c8627d6134a9b49033b35f630ba1c0c57ada79b 65724 mx-codecs_22.8.01.tar.xz
+ 56af2b8a9a884a8bff28f3aaeb4ab582b3cffcd0e1554eaedac59f651d9a82d0 10734 mx-codecs_22.8.01_amd64.buildinfo
+Files:
+ da7271d20818360f3aee9eb5073e7ee3 1163 system optional mx-codecs_22.8.01.dsc
+ cdb73c362c45d2dfe91f1b13a8e08c2c 65724 system optional mx-codecs_22.8.01.tar.xz
+ 44130f9416a5825206bbb76da6b2c61a 10734 system optional mx-codecs_22.8.01_amd64.buildinfo
+
+-----BEGIN PGP SIGNATURE-----
+
+iQFHBAEBCgAxFiEE8ndToY6S45N+YzXncJOMeAZ57pgFAmMEDWATHGFkcmlhbkBt
+eGxpbnV4Lm9yZwAKCRBwk4x4BnnumMQWB/9P5pYwpsSgXhQPBgIb/W8ZRE+GIitu
+JAhpfSdkfHEFPGXxkB34puuIQGOm6QTZ+J0Q5zVo9Opg7pPn+BX8xQX6QLUQ2eL4
+hy7EcqU2N4vZFXsKjRNEE8gyNMcycEHaPlSE6PvDmZWR3UVpQHmN3opYZU3RfgSP
++YKslWDSe/H24/iAuwHDDvvTea3SmWdvxXN+1xIEeMAKgqnYMvm14QmtBYjx5ndp
+qj28eujaV+alPHb2+QTYIsj9PBNt6KOVBGVa/YPPGl3F3S9TLvgE2BIA7uh87rxT
+TbkI2dITdrrg/jpC5Zz9QElDHT08XjVIgDmrgvaaatLW0bJy6a6Txhy+
+=BlXZ
+-----END PGP SIGNATURE-----

@@ -1,0 +1,4 @@
+sed -i s/MX-17.1_/MX-18_/ /etc/mx-version
+    sed -i s/Horizon/Continuum/ /etc/mx-version
+    sed -i s/Horizon/Continuum/ /etc/lsb-release
+    sed -i s/17/18/ /etc/lsb-release

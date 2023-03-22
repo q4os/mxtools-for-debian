@@ -1,0 +1,56 @@
+#ifndef DATETIMEFORMATTING_H
+#define DATETIMEFORMATTING_H
+
+#include <QList>
+#include <QString>
+
+static QStringList DateTimeFormatWords = {
+	"%%",
+	"%a",
+	"%A",
+	"%b",
+	"%B",
+	"%c",
+	"%C",
+	"%d",
+	"%D",
+	"%e",
+	"%F",
+	"%g",
+	"%G",
+	"%h",
+	"%H",
+	"%I",
+	"%j",
+	"%k",
+	"%l",
+	"%m",
+	"%M",
+	"%n",
+	"%N",
+	"%p",
+	"%P",
+	"%q",
+	"%r",
+	"%R",
+	"%s",
+	"%S",
+	"%t",
+	"%T",
+	"%u",
+	"%U",
+	"%V",
+	"%w",
+	"%W",
+	"%x",
+	"%X",
+	"%y",
+	"%Y",
+	"%z",
+	"%:z",
+	"%::z",
+	"%:::z",
+	"%Z",
+};
+
+#endif // DATETIMEFORMATTING_H

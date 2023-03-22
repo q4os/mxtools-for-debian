@@ -1,0 +1,20 @@
+Source: mx-repo-manager
+Section: admin
+Priority: optional
+Maintainer: Adrian <adrian@mxlinux.org>
+Build-Depends: debhelper (>=10), qtbase5-dev, qttools5-dev-tools
+Standards-Version: 3.9.8
+Vcs-Git: git://github.com/AdrianTM/mx-repo-manager
+
+Package: mx-repo-manager
+Architecture: any
+Depends: apt-transport-https,
+         flags-common,
+         mx-repo-list,
+         mx-viewer | xdg-utils,
+         netselect-apt,
+         unzip,
+         ${misc:Depends},
+         ${shlibs:Depends}
+Description: MX Repo Manager
+ MX Repo Manager is a tool used for choosing the default APT repository for MX Linux

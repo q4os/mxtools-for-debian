@@ -1,0 +1,8 @@
+#!/bin/sh
+#if [ -e /live/boot-dev ]; then
+#exit 0
+#else
+PATH=$PATH:/usr/local/bin
+img="$(grep ^background /etc/lightdm/lightdm-gtk-greeter.conf | cut -f2 -d:)"
+(feh --bg-scale $img)&
+#fi

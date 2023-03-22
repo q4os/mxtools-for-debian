@@ -1,0 +1,41 @@
+#!/bin/sh -e
+
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-remove" ] ; then
+    	
+	## update icon file for luckybackup, if installed
+    if [ -e "/usr/share/icons/hicolor/scalable/apps/luckybackup.svg" ]; then
+		rm /usr/share/icons/hicolor/scalable/apps/luckybackup.svg
+	fi
+	
+	# update icons for ndisgtk
+	if [ -e "/usr/share/icons/hicolor/48x48/apps/ndisgtk.png" ]; then
+		rm /usr/share/icons/hicolor/48x48/apps/ndisgtk.png
+	fi
+	if [ -e "/usr/share/icons/hicolor/48x48/apps/ndisgtk.svg" ]; then
+		rm /usr/share/icons/hicolor/48x48/apps/ndisgtk.svg
+	fi
+	if [ -e "/usr/share/icons/hicolor/scalable/apps/ndisgtk.svg" ]; then
+		rm /usr/share/icons/hicolor/scalable/apps/ndisgtk.svg
+	fi
+
+fi
+
+case "$1" in
+  install|upgrade) dpkg-divert --quiet                                               \
+                               --add                                                 \
+                               --package mx-system              \
+                               --rename                                              \
+                               --divert /usr/share/applications/conky.desktop.dpkg-dist \
+                               /usr/share/applications/conky.desktop || :
+
+                   dpkg-divert --quiet --package mx-system --rename \
+                      --divert /usr/lib/linux-boot-probes/mounted/40grub2.dpkg-dist \
+                      --add    /usr/lib/linux-boot-probes/mounted/40grub2 || :
+
+                   ;;
+
+                *) :
+                   ;;
+esac 
+
+#DEBHELPER#

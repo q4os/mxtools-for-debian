@@ -1,0 +1,12 @@
+Source: advert-block-antix
+Section: system
+Priority: optional
+Maintainer: anticapitalista <anticapitalista@riseup.net>
+Build-Depends: debhelper (>= 9.20120115)
+Standards-Version: 3.9.8
+Homepage: https://gitlab.com/antiX-Linux/advert-block-antix
+
+Package: advert-block-antix
+Architecture: all
+Depends: wget
+Description: Script and Desktop launcher for advert block, website add blocker for antiX. 

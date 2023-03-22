@@ -1,0 +1,181 @@
+mx-network-assistant (22.10.01+deb11u13) stable; urgency=medium
+
+  * MX Tools release
+
+ -- Dolphin Oracle <administrator@localdomain>  Wed, 22 Mar 2023 10:43:53 +0100
+
+mx-network-assistant (22.10.01) mx; urgency=medium
+
+  * update translations 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 26 Oct 2022 20:03:41 -0400
+
+mx-network-assistant (22.8.01) mx; urgency=medium
+
+  * Fix: launching documents from Help (fixes a problem in Plasma)
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 22 Aug 2022 19:03:57 -0400
+
+mx-network-assistant (22.8) mx; urgency=medium
+
+  * Fix: launching Firefox from Help 
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 17 Aug 2022 21:55:37 -0400
+
+mx-network-assistant (22.7) mx; urgency=medium
+
+  * translation refresh 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 23 Jul 2022 11:31:14 -0400
+
+mx-network-assistant (22.6) mx; urgency=medium
+
+  * Preserve user theme when launching program as root
+  * Make sure HOME and XDG_RUNTIME_DIR are correct when launching as root
+  * Set a minimum size for the window
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 15 Jun 2022 14:36:37 -0400
+
+mx-network-assistant (22.4.02) mx; urgency=medium
+
+  * Disable buttons while the interface is taken up/down
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 13 Apr 2022 16:27:14 -0400
+
+mx-network-assistant (22.4.01) mx; urgency=medium
+
+  * List network devices using 'lshw' program (should list more devices than 'lsusb' and 'lspci').
+  * Add Enable/Disable buttons for selected device.
+  * Display the enabled status of the device.
+  * Display device info in columns.
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 13 Apr 2022 00:50:15 -0400
+
+mx-network-assistant (22.4) mx; urgency=medium
+
+  * Remove Windows Drivers window since ndiswrapper is no longer available
+  * Fix text copy action
+
+ -- Adrian <adrian@mxlinux.org>  Sun, 10 Apr 2022 18:03:13 -0400
+
+mx-network-assistant (20.8) mx; urgency=medium
+
+  * fixes IP address and interface detection
+  * update language and icons
+
+ -- Adrian <adrian@mxlinux.org>  Sat, 01 Aug 2020 10:50:09 -0400
+
+mx-network-assistant (19.9.01) mx; urgency=medium
+
+  * updated translations
+
+ -- Adrian <adrian@mxlinux.org>  Sun, 29 Sep 2019 14:45:04 -0400
+
+mx-network-assistant (19.9) mx; urgency=medium
+
+  * remove libcmd dependency
+
+ -- Adrian <adrian@mxlinux.org>  Tue, 10 Sep 2019 18:09:05 -0400
+
+mx-network-assistant (19.8.1) mx; urgency=medium
+
+  * fix: offline help
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 22 Aug 2019 16:46:49 -0400
+
+mx-network-assistant (19.8) mx; urgency=medium
+
+  * added offline help file
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 21 Aug 2019 14:20:37 -0400
+
+mx-network-assistant (19.7.1) mx; urgency=medium
+
+  * new icon
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 08 Jul 2019 13:42:52 -0400
+
+mx-network-assistant (19.7) mx; urgency=medium
+
+  * fix window buttons for Buster
+
+ -- Adrian <adrian@mxlinux.org>  Sun, 07 Jul 2019 13:57:11 -0400
+
+mx-network-assistant (19.4.1) mx; urgency=medium
+
+  * updated translations
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 24 Apr 2019 15:08:30 -0400
+
+mx-network-assistant (19.4) mx; urgency=medium
+
+  * updated translations
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 05 Apr 2019 11:43:33 -0400
+
+mx-network-assistant (19.1) mx; urgency=medium
+
+  * updated translations
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 23 Jan 2019 16:17:16 -0500
+
+mx-network-assistant (18.11) mx; urgency=medium
+
+  * updated translations
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 30 Nov 2018 13:55:29 -0500
+
+mx-network-assistant (18.10) mx; urgency=medium
+
+  * updated translations
+
+ -- Adrian <adrian@mxlinux.org>  Sun, 14 Oct 2018 19:12:03 -0400
+
+mx-network-assistant (18.8) mx; urgency=medium
+
+  * fix icons other themes
+
+ -- Adrian <adrian@mxlinux.org>  Sat, 11 Aug 2018 16:55:17 -0400
+
+mx-network-assistant (18.6.1) mx; urgency=medium
+
+  * added changelog button
+  * fixed getVersion()
+
+ -- Adrian <adrian@mxlinux.org>  Sun, 24 Jun 2018 22:11:23 -0400
+
+mx-network-assistant (18.6) mx; urgency=medium
+
+  * new translations
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 18 Jun 2018 15:21:02 -0400
+
+mx-network-assistant (18.3) mx; urgency=medium
+
+  * new translations
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 02 Mar 2018 10:44:19 -0500
+
+mx-network-assistant (18.2) mx; urgency=medium
+
+  * new translations
+
+ -- Adrian <adrian@mxlinux.org>  Sat, 10 Feb 2018 02:13:39 -0500
+
+mx-network-assistant (17.12) mx; urgency=medium
+
+  * new translations
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 04 Dec 2017 14:39:27 -0500
+
+mx-network-assistant (17.10) mx; urgency=medium
+
+  * changed icon
+
+ -- Adrian <adrian@mxlinux.org>  Sun, 15 Oct 2017 09:40:48 -0400
+
+mx-network-assistant (17.8) mx; urgency=medium
+
+  * re-write of mx-broadcom-manager
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 14 Aug 2017 10:02:28 -0400

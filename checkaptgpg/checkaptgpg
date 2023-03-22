@@ -1,0 +1,144 @@
+#!/bin/bash
+
+# rewrite of checkaptgpg
+# fehlix Oct 2020
+# 12.10.2020 - fixed expired key handling
+
+# check bash
+if [ x"$BASH" = x ]; then
+   exec bash -c "$0 $1"
+fi
+
+# check root
+if [ $(id -u) -ne 0 ]; then
+   exec sudo "$0" "$@"
+   echo -e $"\n\t You need to be root!\n"
+   exit 1
+fi
+
+# check parameter
+[ x"$1" == x"--wait-at-end" ] && WAITATEND="1" || WAITATEND="0"
+# colors
+    RED='\e[1;31m'
+   BLUE='\e[1;34m'
+  GREEN='\e[0;32m'
+    END='\e[0m'
+
+# apt's trusted keyrings
+declare -a APT_KEYRINGS DETACHED_SIGS SIGNED_RELEASES
+shopt -s nullglob;
+APT_KEYRINGS_LIST=( /etc/apt/trusted[.]gpg{,.d/*{.gpg,.asc}} )
+# detached Release signatures
+DETACHED_SIGS=( /var/lib/apt/lists/{,partial/}*Release.gpg )
+# inline signed Release
+shopt -u nullglob
+readarray -t SIGNED_RELEASES < <(grep -IFlsx  /var/lib/apt/lists/{,partial/}*Release -e '-----BEGIN PGP SIGNED MESSAGE-----' )
+# keyring options for gpg
+APT_KEYRINGS="${APT_KEYRINGS_LIST[@]///etc/--keyring /etc}"
+
+# prepare gpg import key
+TMP_GPG_HOME=$(mktemp -d /tmp/temp-apt-gpg-home.XXXXXXXXX)
+chmod 700 $TMP_GPG_HOME
+TMP_KEYRING=$TMP_GPG_HOME/tempkeyring.kbx
+TMP_PUBKEY=$TMP_GPG_HOME/tmp_pub_key.gpg
+
+# prepare tidy up
+tidy_up() { rm -r /tmp/temp-apt-gpg-home.* 2>/dev/null; }
+trap tidy_up EXIT
+
+GPG_OPTS="--homedir=$TMP_GPG_HOME --keyid-format 0xlong --no-default-keyring"
+EXPORT_OPTIONS="--export-options export-clean,export-minimal"
+IMPORT_OPTIONS="--import-options import-clean,import-minimal"
+KEYSERVER_OPTIONS="--keyserver-options import-clean,import-minimal"
+KEYSERVER=(
+        hkp://keyserver.ubuntu.com:80
+        hkp://pool.sks-keyservers.net
+        hkp://pgp.mit.edu
+        #hkp://subkeys.pgp.net
+        #hkp://eu.pool.sks-keyservers.net
+        #hkp://keys.gnupg.net
+        #hkp://keyservers.org
+        #hkp://keyserver.linux.it
+        )
+
+for SIG in "${SIGNED_RELEASES[@]}" "${DETACHED_SIGS[@]}"; do
+   if [ x"${SIG##*.gpg}" = x ]; then
+        if [ -f "${SIG%.gpg}" ]; then
+            REL="${SIG%.gpg}"
+        elif  [ -f "${SIG%.gpg}.FAILED" ];  then
+            REL="${SIG%.gpg}.FAILED"
+        else
+            continue
+        fi
+   else
+        REL=""
+   fi
+   CHK=$(basename -s .gpg "$SIG")
+   echo
+   echo "Checking ${CHK}"
+
+   CHECK=$(LANG=C gpg $GPG_OPTS ${APT_KEYRINGS[@]} --verify $SIG $REL 2>&1)
+   RET=$?
+   if [ $RET = 0 ] && grep -v expired <<<$CHECK | grep -sq "Good signature"; then
+        printf "$GREEN%s$END\n" "    Good GPG signature found."
+   else
+        # key expired or not available
+        declare -a KEYS
+        readarray -t KEYS < <( grep -oE '[[:xdigit:]]{16}\b' <<<$CHECK | sort -u)
+        #
+        KEYS_FOUND=""
+        for keyserver in ${KEYSERVER[*]}; do
+            [ -f $TMP_KEYRING ] && rm $TMP_KEYRING
+            [ -f $TMP_PUBKEY  ] && rm $TMP_PUBKEY
+            if gpg $GPG_OPTS --keyring=$TMP_KEYRING $KEYSERVER_OPTIONS --keyserver $keyserver  --recv-key ${KEYS[@]/#/0x} 1>/dev/null 2>&1; then
+                KEYS_FOUND="true"
+                gpg $GPG_OPTS --keyring=$TMP_KEYRING --output $TMP_PUBKEY $EXPORT_OPTIONS --export ;  # 1>/dev/null 2>&1
+                if [ -f /etc/apt/trusted.gpg ]; then
+                   gpg $GPG_OPTS ${APT_KEYRINGS[@]} $IMPORT_OPTIONS --import $TMP_PUBKEY
+                else
+                   cp $TMP_PUBKEY /etc/apt/trusted.gpg
+                   APT_KEYRINGS+=( --keyring /etc/apt/trusted.gpg )
+                   gpg $GPG_OPTS ${APT_KEYRINGS[@]} $IMPORT_OPTIONS --import $TMP_PUBKEY
+                   #gpg $GPG_OPTS ${APT_KEYRINGS[@]} --list-keys
+                fi
+                break
+            fi
+        done
+        if [ "$KEYS_FOUND" != "true" ]; then
+            printf "\n$BLUE%s$END\n" "*** Keys not found on keyserver: ${KEYS[*]/#/0x}"
+            echo
+        fi
+   fi
+
+done
+
+echo
+
+if [ "$WAITATEND" = "1" ]; then
+    echo
+    HelpOrQuit=""
+    read -sn 1 -t 999999999 -p "Press 'H' for online help, press any other key to close this window." HelpOrQuit
+    sleep .1
+
+    case $(cut -f1 -d_ <<<$LANG) in
+      fr) HelpUrl="https://mxlinux.org/wiki/help-files/help-contr%C3%B4le-de-apt-gpg" ;;
+       *) HelpUrl="https://mxlinux.org/wiki/help-files/help-mx-check-apt-gpg" ;;
+    esac
+
+
+    if [ "$HelpOrQuit" = "h" ] || [ "$HelpOrQuit" = "H" ]
+      then
+        echo
+        echo
+        echo "Please wait while the link '"$HelpUrl"' opens ..."
+        echo
+        if [ -e /usr/bin/mx-viewer ]; then helpViewer="mx-viewer"; else helpViewer="xdg-open"; fi
+        runuser -s /bin/bash -l $(logname) -c  'env XAUTHORITY=/$HOME/.Xauthority DISPLAY=:0 '"$helpViewer $HelpUrl 2>/dev/null 1>&2  &" 2>/dev/null  1>&2
+        sleep 2
+        read -sn 1 -p "Press any key to close this window." -t 999999999
+        sleep .1
+    fi
+echo
+fi
+
+exit

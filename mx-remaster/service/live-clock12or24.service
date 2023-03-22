@@ -1,0 +1,12 @@
+[Unit]
+Description=adjust Xfce clocks utilities
+After=local-fs.target
+ConditionPathExists=/live/linux
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/clock12or24
+ExecStop=/bin/true
+
+[Install]
+WantedBy=multi-user.target

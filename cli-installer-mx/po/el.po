@@ -1,0 +1,397 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# anticapitalista <anticapitalista@riseup.net>, 2019-2020
+# anticapitalista <anticapitalista@riseup.net>, 2016-2017
+# anticapitalista <anticapitalista@riseup.net>, 2011
+msgid ""
+msgstr ""
+"Project-Id-Version: antix-development\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-03-20 18:46+0200\n"
+"PO-Revision-Date: 2020-03-20 16:50+0000\n"
+"Last-Translator: anticapitalista <anticapitalista@riseup.net>\n"
+"Language-Team: Greek (http://www.transifex.com/anticapitalista/antix-development/language/el/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: el\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: cli-installer.sh:29
+#, sh-format
+msgid "CL installer for $DISTRO"
+msgstr "Εγκαταστάτης από Γραμμή Εντολών για το $DISTRO"
+
+#: cli-installer.sh:30
+msgid "Version 5.2.1 20/03/2020"
+msgstr "Έκδοση 5.2.1 20/03/2020"
+
+#: cli-installer.sh:37
+msgid "Requirements for minimum installation:"
+msgstr "Απαιτήσεις για την ελάχιστη εγκατάσταση:"
+
+#: cli-installer.sh:40
+msgid "antiX-full: hard-disk 4.0GB  RAM 64MB"
+msgstr "antiX-πλήρες: σκληρό δίσκο 4.0GB RAM 64MB"
+
+#: cli-installer.sh:42
+msgid "antiX-base: hard-disk 3.0GB  RAM 48MB"
+msgstr "antiX-base: σκληρό δίσκο 3.0GB RAM 48MB"
+
+#: cli-installer.sh:44
+msgid "antiX-core: hard-disk 1.0GB  RAM 48MB"
+msgstr "antiX-core: σκληρό δίσκο 1.0GB RAM 48MB"
+
+#: cli-installer.sh:46
+msgid "antiX-net:  hard-disk 0.7GB  RAM 48MB"
+msgstr "antiX-net: σκληρό δίσκο 0.7GB RAM 48MB"
+
+#: cli-installer.sh:48
+msgid "Make sure you are connected to "
+msgstr "Βεβαιωθείτε ότι είστε συνδεδεμένοι "
+
+#: cli-installer.sh:50
+msgid "the net BEFORE running this installer"
+msgstr "στο δίκτυο ΠΡΙΝ να εκτελέσετε αυτό το πρόγραμμα εγκατάστασης"
+
+#: cli-installer.sh:52
+msgid "NOTE: This installer will NOT work for UEFI boot"
+msgstr "ΣΗΜΕΙΩΣΗ: Αυτό το πρόγραμμα εγκατάστασης δεν θα λειτουργήσει για εκκίνηση UEFI"
+
+#: cli-installer.sh:54
+msgid ""
+"This installer does NOT offer the option for using a separate boot partition"
+msgstr "Αυτό το πρόγραμμα εγκατάστασης ΔΕΝ προσφέρει τη δυνατότητα χρήσης ξεχωριστής κατάτμησης εκκίνησης"
+
+#: cli-installer.sh:56
+msgid "This installer does NOT offer encryption"
+msgstr "Αυτό το πρόγραμμα εγκατάστασης ΔΕΝ προσφέρει κρυπτογράφηση"
+
+#: cli-installer.sh:58
+msgid "This installer does NOT offer installation to NVMe devices"
+msgstr "Αυτό το πρόγραμμα εγκατάστασης δεν προσφέρει εγκατάσταση σε συσκευές NVMe"
+
+#: cli-installer.sh:60
+msgid "If you want the above mentioned features, use our gui installer"
+msgstr "Αν θέλετε τα παραπάνω χαρακτηριστικά, χρησιμοποιήστε το πρόγραμμα εγκατάστασης GUI"
+
+#: cli-installer.sh:62
+msgid "Ctrl c will abort this script"
+msgstr "Το Ctrl c θα ακυρώσει την εγκατάσταση"
+
+#: cli-installer.sh:68
+msgid "Usage: cli-installer [drive]"
+msgstr "Χρήση: cli-installer [drive]"
+
+#: cli-installer.sh:69
+#, sh-format
+msgid "Where drive is the name of the drive $DISTRO is to be installed on."
+msgstr "Όπου 'drive' είναι το όνομα του drive όπου θα εγκατασταθεί το $DISTRO."
+
+#: cli-installer.sh:70
+msgid "   For example: cli-installer sdb"
+msgstr "Για παράδειγμα: cli-installer sdb"
+
+#: cli-installer.sh:71
+msgid "The default is correct if the computer has only one drive."
+msgstr "Η προεπιλογή είναι σωστή εάν ο υπολογιστής έχει μόνο ένα σκληρό δίσκο."
+
+#: cli-installer.sh:75
+msgid "Pre-installation tips:"
+msgstr "Προ-εγκατάσταση συμβουλές:"
+
+#: cli-installer.sh:78
+msgid "Set language at the boot screen by pressing F2"
+msgstr "Ορισμός γλώσσας στην οθόνη εκκίνησης πατώντας το πλήκτρο F2"
+
+#: cli-installer.sh:79
+msgid "or by adding the line lang=xx where xx is your language code."
+msgstr "ή με την προσθήκη της γραμμής lang=xx όπου xx είναι ο κωδικός της γλώσσας."
+
+#: cli-installer.sh:80
+msgid "eg lang=gr for Greek."
+msgstr "π.χ. lang=gr για τα Ελληνικά."
+
+#: cli-installer.sh:82
+msgid "Set timezone at the boot screen by pressing F3"
+msgstr "Ορίστε τη ζώνη ώρας στην οθόνη εκκίνησης πατώντας το πλήκτρο F3"
+
+#: cli-installer.sh:84
+msgid "Use kbd=dvorak for dvorak keyboard before installing"
+msgstr "Χρησιμοποιήστε το kbd=dvorak για πληκτρολόγιο dvorak πριν την εγκατάσταση"
+
+#: cli-installer.sh:87
+msgid ""
+"Press F1 at the boot screen for Help and list of cheatcodes for live use."
+msgstr "Πατήστε F1 στην οθόνη εκκίνησης για βοήθεια και μια λίστα από παραμέτρους για ζωντανή χρήση."
+
+#: cli-installer.sh:94
+msgid "/home partition (hda1, sda2, etc): "
+msgstr "/home (hda1, sda2, κλπ):"
+
+#: cli-installer.sh:97
+#, sh-format
+msgid "$hdrv invalid. Retry:"
+msgstr "$hdrv άκυρη. Επανάληψη:"
+
+#: cli-installer.sh:107
+msgid "Root partition (hda1, sda2, etc): "
+msgstr "κατάτμηση του Root (hda1, sda2, κλπ):"
+
+#: cli-installer.sh:136
+#, sh-format
+msgid "$rdrv invalid. Retry"
+msgstr "$rdrv άκυρη. Επανάληψη"
+
+#: cli-installer.sh:151
+msgid "Available file systems for $1 are:"
+msgstr "Διαθέσιμα συστήματα αρχείων για $1 είναι:"
+
+#: cli-installer.sh:165
+msgid "Enter your choice 1-8: "
+msgstr "Εισάγετε την επιλογή σας 1-8:"
+
+#: cli-installer.sh:170
+msgid "You have chosen $fs for $1"
+msgstr "Έχετε επιλέξει $fs για $1"
+
+#: cli-installer.sh:172
+msgid "Downloading necessary files for formatting partitions"
+msgstr "Λήψη απαραίτητων αρχείων για μορφοποίηση διαμερισμάτων"
+
+#: cli-installer.sh:184
+msgid "Ignore any 'barrier' lines"
+msgstr "Αγνοήστε οποιοδήποτε «φράγμα» γραμμές"
+
+#: cli-installer.sh:185
+#, sh-format
+msgid "$fs invalid. Retry:"
+msgstr "$fs άκυρη. Επανάληψη:"
+
+#: cli-installer.sh:198
+msgid "Passwords are not identical. Retry:"
+msgstr "Οι κωδικοί πρόσβασης δεν είναι ίδιοι. Επανάληψη:"
+
+#: cli-installer.sh:218
+msgid "Invalid; retry:"
+msgstr "Άκυρα; Ξανά:"
+
+#: cli-installer.sh:235
+msgid "Press Enter to exit this script."
+msgstr "Πατήστε το πλήκτρο Enter για να βγείτε."
+
+#: cli-installer.sh:244
+msgid "Please run this script as root."
+msgstr "Παρακαλούμε να εκτελέσετε αυτό ως root."
+
+#: cli-installer.sh:260
+msgid "====Disk and partition Information===="
+msgstr "====Πληροφορίες δίσκου και διαμερίσματος===="
+
+#: cli-installer.sh:265
+msgid "Do you want to repartition the disk (y/N)"
+msgstr "Θέλετε να επαναδιαμερίσετε τον δίσκο (y=ναι/N=Οχι)"
+
+#: cli-installer.sh:279
+#, sh-format
+msgid ""
+"The installer will now destroy the data on $rdrv  Do you want to continue "
+"(No will abort the installation) (n/Y)"
+msgstr "Ο εγκαταστάτης θα καταστρέψει τώρα τα δεδομένα σε $rdrv  Θέλετε να συνεχίσετε (Όχι θα ακυρώσει την εγκατάσταση) (όχι/Ναι)"
+
+#: cli-installer.sh:286
+#, sh-format
+msgid "Deleting the contents of the $rdrv partition."
+msgstr "Η διαγραφή των περιεχομένων του $rdrv."
+
+#: cli-installer.sh:287 cli-installer.sh:386 cli-installer.sh:411
+msgid "This may take some time. Please wait...."
+msgstr "Αυτό μπορεί να πάρει κάποιο χρόνο. Παρακαλώ περιμένετε ...."
+
+#: cli-installer.sh:293 cli-installer.sh:331
+msgid "Done."
+msgstr "Ολοκληρώθηκε."
+
+#: cli-installer.sh:297
+msgid "Do you want to use a separate '/home' partition (y/N)"
+msgstr "Χρησιμοποιείστε μία χωριστή κατάτμηση χρήστη '/home' (ναι/Όχι)"
+
+#: cli-installer.sh:306
+#, sh-format
+msgid ""
+"Is $hdrv a new '/home' partition (No will not destroy any data on $hdrv ) "
+"(y/N)"
+msgstr "Είναι το $hdrv είναι μία νέα κατάτμηση '/home' (Όχι δεν θα καταστρέψει τα δεδομένα στο $hdrv )  (ναι/Όχι)"
+
+#: cli-installer.sh:312
+#, sh-format
+msgid "Set file system for $hdrv  (y/N)"
+msgstr "Ρυθμίστε το σύστημα αρχείων για $hdrv (y=ναι/N=Οχι)"
+
+#: cli-installer.sh:319
+#, sh-format
+msgid ""
+"The installer will now destroy the data on $hdrv  Do you want to continue "
+"(No will abort the install) (n/Y)"
+msgstr "Ο εγκαταστάτης θα καταστρέψει τώρα τα δεδομένα σε $hdrv  Θέλετε να συνεχίσετε (Όχι θα ακυρώσει την εγκατάσταση) (όχι/Ναι)"
+
+#: cli-installer.sh:326
+#, sh-format
+msgid "Deleting the contents of the $hdrv partition."
+msgstr "Η διαγραφή των περιεχομένων του $hdrv."
+
+#: cli-installer.sh:343
+msgid "Are you running antiX-net (y/N)"
+msgstr "Χρησιμοποιείτε το antiX-net (y=ναι/N=Οχι)"
+
+#: cli-installer.sh:348
+msgid ""
+"Downloading grub-pc, locales, keyboard-configuration, console-setup, "
+"console-data, lsb-release, sysv-rc-conf"
+msgstr "Ώρα για λήψη των grub-pc, locales, keyboard-configuration, console-setup, console-data, lsb-release, sysv-rc-conf"
+
+#: cli-installer.sh:352
+msgid ""
+"Do you want to install elogind and dbus-x11. RECOMMENDED if installing a "
+"desktop environment. (y/N)"
+msgstr "Θέλετε να εγκαταστήσετε το elogind και το dbus-x11. ΣΥΝΙΣΤΑΤΑΙ εάν εγκαταστήσετε ένα περιβάλλον επιφάνειας εργασίας. (ναι/Όχι)"
+
+#: cli-installer.sh:357
+msgid "Downloading elogind, libpam-elogind, dbus-x11"
+msgstr "Ώρα για λήψη των elogind, libpam-elogind, dbus-x11"
+
+#: cli-installer.sh:364
+msgid "Do you want to install some packages via cli-aptiX (y/N)"
+msgstr "Θέλετε να εγκαταστήσετε ορισμένα πακέτα μέσω του cli-aptiX (ναι/Όχι)"
+
+#: cli-installer.sh:369
+msgid "Use cli-aptiX to install various applications and/or kernels"
+msgstr "Χρησιμοποιήστε το cli-aptiX για να εγκαταστήσετε διάφορες εφαρμογές ή/και πυρήνες"
+
+#: cli-installer.sh:378
+#, sh-format
+msgid "antiX will now be copied to $rdrv."
+msgstr "antiX Θα αντιγραφεί τώρα σε $rdrv."
+
+#: cli-installer.sh:380
+msgid "Do you want to continue (No will abort the install) (n/Y)"
+msgstr "Θέλετε να συνεχίσετε (Όχι θα ακυρώσει την εγκατάσταση) (όχι/Ναι)"
+
+#: cli-installer.sh:407
+msgid "File copy done"
+msgstr "Η αντιγραφή αρχείων ολοκληρώθηκε"
+
+#: cli-installer.sh:409
+msgid "Install GRUB on MBR (Y/n) No will install to root partition"
+msgstr "Εγκαταστήστε το GRUB στο MBR (Ναι/οχι) το ΟΧΙ θα εγκαταστήσει στην κατάτμηση root"
+
+#: cli-installer.sh:434
+#, sh-format
+msgid "GRUB installed on ($grub)"
+msgstr "Το GRUB εγκαταστάθηκε σε ($grub)"
+
+#: cli-installer.sh:438
+msgid "Computer name (default is 'antix1')? "
+msgstr "Όνομα υπολογιστή (η προεπιλογή είναι 'antiX1')"
+
+#: cli-installer.sh:446
+msgid "Time to set up localisation"
+msgstr "Ώρα να συσταθεί εντοπισμού"
+
+#: cli-installer.sh:448
+msgid "System locale is set to ..."
+msgstr "Η Τοπική ρύθμιση συστήματος έχει οριστεί σε ..."
+
+#: cli-installer.sh:451
+msgid "Do you want to set up system localisation (y/N)"
+msgstr "Θέλετε να δημιουργηθεί σύστημα εντοπισμού (y=ναι/N=Οχι)"
+
+#: cli-installer.sh:458
+msgid "Time to set keyboard layout"
+msgstr "Ρύθμιση Γλώσσας"
+
+#: cli-installer.sh:460
+msgid "System keyboard is set to ..."
+msgstr "Το Πληκτρολόγιο του συστήματος έχει οριστεί σε ..."
+
+#: cli-installer.sh:463
+msgid "Do you want to set up keyboard (y/N)"
+msgstr "Θέλετε να ρυθμίσετε το πληκτρολόγιο (y=ναι/N=Οχι)"
+
+#: cli-installer.sh:470
+msgid "Time to set console layout"
+msgstr "Ώρα να ορίσετε τη διάταξη της κονσόλας"
+
+#: cli-installer.sh:472
+msgid "System console is set to ..."
+msgstr "Η Κονσόλα του συστήματος έχει οριστεί σε ..."
+
+#: cli-installer.sh:475
+msgid "Do you want to set up console layout (y/N)"
+msgstr "Θέλετε να συσταθεί διάταξη κονσόλα (y=ναι/N=Οχι)"
+
+#: cli-installer.sh:482
+msgid "Time to set timezone"
+msgstr "Ώρα να ρυθμίσετε τη ζώνη ώρας"
+
+#: cli-installer.sh:484
+msgid "System timezone is set to ..."
+msgstr "Ζώνη ώρας του συστήματος έχει οριστεί σε ..."
+
+#: cli-installer.sh:487
+msgid "Do you want to set up system timezone (y/N)"
+msgstr "Θέλετε να ρυθμίσετε τη ζώνη ώρας του συστήματος (y=ναι/N=Οχι)"
+
+#: cli-installer.sh:494
+msgid "Choose which services to run"
+msgstr "Επιλέξτε ποιες υπηρεσίες να τρέξει"
+
+#: cli-installer.sh:496
+msgid "Do you want to enable/disable startup services (y/N)"
+msgstr "Θέλετε να ενεργοποιήσετε / απενεργοποιήσετε τις υπηρεσίες εκκίνησης (y=ναι/N=Οχι)"
+
+#: cli-installer.sh:505
+msgid "Is this a remastered/snapshot install (y/N)"
+msgstr "Είναι αυτό ένα remastered/snapshot εγκατάσταση (y=ναι/N=Οχι)"
+
+#: cli-installer.sh:518
+#, sh-format
+msgid "Installation of $DISTRO finished!"
+msgstr "Η εγκατάσταση του $DISTRO τελείωσε!"
+
+#: cli-installer.sh:520 cli-installer.sh:590
+msgid "Reboot computer without CD to start program. ('reboot')"
+msgstr "Επανεκκινήστε τον υπολογιστή χωρίς το CD για να ξεκινήσει το πρόγραμμα. ('reboot')"
+
+#: cli-installer.sh:526
+msgid "Setting up user and root/admin accounts"
+msgstr "Ρύθμιση  λογαριασμούς χρήστης και διαχειριστής"
+
+#: cli-installer.sh:531
+msgid "Type in your default user name: "
+msgstr "Πληκτρολογήστε το προεπιλεγμένο όνομα χρήστη σας: "
+
+#: cli-installer.sh:535
+#, sh-format
+msgid "Note: $hdrv must contain a folder named '$name'."
+msgstr "Σημείωση: $hdrv πρέπει να περιέχει ένα φάκελο με το όνομα '$name'."
+
+#: cli-installer.sh:540
+msgid "Type your Password for root: "
+msgstr "Κωδικός πρόσβασης root: "
+
+#: cli-installer.sh:547
+#, sh-format
+msgid "Set autologin for $name: (y/N)"
+msgstr "Ορισμός autologin για $name: (ναι/Οχι)"
+
+#: cli-installer.sh:556
+msgid "Cleaning up"
+msgstr "Καθαρισμός"
+
+#: cli-installer.sh:588
+msgid "Installation of antiX finished!"
+msgstr "Η εγκατάσταση του antiX τελείωσε!"

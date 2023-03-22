@@ -1,0 +1,505 @@
+ddm-mx (22.12.01mx21+deb11u13) stable; urgency=medium
+
+  * MX Tools release
+
+ -- Dolphin Oracle <administrator@localdomain>  Wed, 22 Mar 2023 10:43:48 +0100
+
+ddm-mx (22.12.01mx21) mx; urgency=medium
+
+  * update translations 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 02 Dec 2022 21:54:25 -0500
+
+ddm-mx (22.10.04mx21) mx; urgency=medium
+
+  * fix bumblebee alternate text display
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 23 Oct 2022 10:53:18 -0400
+
+ddm-mx (22.10.03mx21) mx; urgency=medium
+
+  * fix a bad status return in optimus detection question
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 19 Oct 2022 20:33:08 -0400
+
+ddm-mx (22.10.02mx21) mx; urgency=medium
+
+  * fix missing strings left over from gettext migration
+  * fix optimus confirmation question
+  * install nvidia-detect if x86_64 system and its not already installed
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 12 Oct 2022 21:53:25 -0400
+
+ddm-mx (22.10.01mx21) mx; urgency=medium
+
+  * update polkit rule so DISPLAY is accessible under pkexec 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 01 Oct 2022 22:33:56 -0400
+
+ddm-mx (22.08.03mx21) mx; urgency=medium
+
+  * cleanup debian folder
+  * add tesla-470 support
+  * update PIDS
+  * update help 
+  * allow nvidia-detect to be removed if installed (purge command)
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 24 Aug 2022 20:08:09 -0400
+
+ddm-mx (22.08.02mx21) mx; urgency=medium
+
+  * add command parameters to log 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 17 Aug 2022 20:43:25 -0400
+
+ddm-mx (22.08.01mx21) mx; urgency=medium
+
+  * add fr_BE 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 15 Aug 2022 19:04:27 -0400
+
+ddm-mx (22.07.01mx21) mx; urgency=medium
+
+  * translation refresh
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 23 Jul 2022 11:09:43 -0400
+
+ddm-mx (22.06.01mx21) mx; urgency=medium
+
+  * use pkexec instead of su-to-root
+  * alternate antiX desktop file provided
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Tue, 14 Jun 2022 19:58:43 -0400
+
+ddm-mx (22.04.01mx21) mx; urgency=medium
+
+  * add kernel version info to header 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 17 Apr 2022 13:38:01 -0400
+
+ddm-mx (21.10.02mx21) mx; urgency=medium
+
+  * don't filter non-mx distros (antiX) 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 27 Oct 2021 18:11:06 -0400
+
+ddm-mx (21.10.01mx21) mx; urgency=medium
+
+  * add 340 support on MX 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 24 Oct 2021 15:15:59 -0400
+
+ddm-mx (21.09.03mx21) mx; urgency=medium
+
+  * update translations 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 25 Sep 2021 23:32:14 -0400
+
+ddm-mx (21.09.02mx21) mx; urgency=medium
+
+  * update application locations
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 18 Sep 2021 19:58:52 -0400
+
+ddm-mx (21.09.01mx21) mx; urgency=medium
+
+  * use gui authenticator 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 06 Sep 2021 23:24:31 -0400
+
+ddm-mx (21.08.04mx21) mx; urgency=medium
+
+  * update detection message for legacy parts
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 26 Aug 2021 19:43:52 -0400
+
+ddm-mx (21.08.03mx21) mx; urgency=medium
+
+  * expand unsupported legacy detection
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 23 Aug 2021 23:17:39 -0400
+
+ddm-mx (21.08.02mx21) mx; urgency=medium
+
+  * rework primus libs 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 08 Aug 2021 14:31:02 -0400
+
+ddm-mx (21.08.01mx21) mx; urgency=medium
+
+  * remove virtualgl
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 08 Aug 2021 14:17:33 -0400
+
+ddm-mx (21.07.01mx21) mx; urgency=medium
+
+  *  update for bullseye drivers
+  *  update for PIDS for backup detect scheme
+  *  update detection 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 25 Jul 2021 19:57:06 -0400
+
+ddm-mx (21.02.02mx19) mx; urgency=medium
+
+  * update translations
+  * change location of nvidia-run-mx wrapper script
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 26 Feb 2021 20:56:20 -0500
+
+ddm-mx (21.02.01) mx; urgency=medium
+
+  * allow for PRIMUS driver installs (farius)
+  * reorder script into logical blocks
+  * nvidia-run-mx wrapper script
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 07 Feb 2021 19:19:08 -0500
+
+ddm-mx (20.05.01) mx; urgency=medium
+
+  * remove firmware-linux-nonfree from install list 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Tue, 26 May 2020 21:01:20 -0400
+
+ddm-mx (20.03.01) mx; urgency=medium
+
+  * update control file 
+  * drop primus on MX (keep on antiX)
+  
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 11 Mar 2020 22:51:22 -0400
+
+ddm-mx (19.11.03) mx; urgency=medium
+
+  * install recommended packages 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 05 Dec 2019 20:37:35 -0500
+
+ddm-mx (19.11.02) mx; urgency=medium
+
+  * fix disabling of apt 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 09 Nov 2019 14:02:59 -0500
+
+ddm-mx (19.11.01) mx; urgency=medium
+
+  * add and remove symlinks for libglx0 for 340xx install and purge routines
+  * fix checks for what driver was installed 
+  * allow non-nvidia users to install with -f forcedriver switch
+  * remove root check if just getting usage help
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 07 Nov 2019 19:13:11 -0500
+
+ddm-mx (19.10.06) mx; urgency=medium
+
+  *  added purge message, save to home
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 03 Nov 2019 18:58:32 -0500
+
+ddm-mx (19.10.05) mx; urgency=medium
+
+  * add warning if nvidia-legacy-340xx-driver is found in conjunction with bumbleebee-nvidia 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 20 Oct 2019 13:12:31 -0400
+
+ddm-mx (19.10.04) mx; urgency=medium
+
+  * revised nvidia-detect-mx again (fehlix) 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 19 Oct 2019 11:52:39 -0400
+
+ddm-mx (19.10.03) mx; urgency=medium
+
+  * update nvidia-detec-mx function 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 18 Oct 2019 19:08:23 -0400
+
+ddm-mx (19.10.02) mx; urgency=medium
+
+  * add additional output
+  * always ask which_driver when using non-main repos 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 16 Oct 2019 19:51:57 -0400
+
+ddm-mx (19.10.01) mx; urgency=medium
+
+  * fix some bugs in test repo routine 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 03 Oct 2019 22:06:22 -0400
+
+ddm-mx (19.09.03) mx; urgency=medium
+
+  * translation refresh 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 28 Sep 2019 14:56:01 -0400
+
+ddm-mx (19.09.02) mx; urgency=medium
+
+  * expanded test output
+  * added -f force driver switch 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 20 Sep 2019 22:42:49 -0400
+
+ddm-mx (19.09.01) mx; urgency=medium
+
+  * add experimental support for bumble-bee with nvidia-legacy-390xx-driver 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 14 Sep 2019 19:18:39 -0400
+
+ddm-mx (19.08.03) mx; urgency=medium
+
+  * do not install nvidia-perisistenced 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 30 Aug 2019 17:18:24 -0400
+
+ddm-mx (19.08.02) mx; urgency=medium
+
+  * translation refresh (old giza) 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Tue, 27 Aug 2019 21:25:02 -0400
+
+ddm-mx (19.08.01) mx; urgency=medium
+
+  * fix some typos 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 26 Aug 2019 19:33:22 -0400
+
+ddm-mx (19.07.02) mx; urgency=medium
+
+  * revise test repo function, fix type 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 05 Jul 2019 01:11:45 -0400
+
+ddm-mx (19.07.01) mx; urgency=medium
+
+  * added support for mx testrepo permissions
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 04 Jul 2019 23:55:22 -0400
+
+ddm-mx (19.05.02) mx; urgency=medium
+
+  * modified apt-get update routine 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 10 May 2019 21:38:02 -0400
+
+ddm-mx (19.05.01) mx; urgency=medium
+
+  *  first buster version
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 09 May 2019 22:06:25 -0400
+
+ddm-mx (19.04.03) mx; urgency=medium
+
+  * update translations 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 28 Apr 2019 15:33:01 -0400
+
+ddm-mx (19.04.02) mx; urgency=medium
+
+  * add mx test repo support 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 20 Apr 2019 21:06:46 -0400
+
+ddm-mx (19.04.01) mx; urgency=medium
+
+  * translation refresh 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 05 Apr 2019 17:50:24 -0400
+
+ddm-mx (19.01.01) mx; urgency=medium
+
+  * update translations 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 23 Jan 2019 18:44:28 -0500
+
+ddm-mx (18.12.01) mx; urgency=medium
+
+  * added virtualgl and virtualgl-libs:i386 to bumblebee installer 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 20 Dec 2018 21:24:57 -0500
+
+ddm-mx (18.11.01) mx; urgency=medium
+
+  * language refresh 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 30 Nov 2018 19:29:27 -0500
+
+ddm-mx (18.10.01) mx; urgency=medium
+
+  * update translations 
+
+ -- dolphin <dolphinoracle@gmail.com>  Sun, 14 Oct 2018 19:29:16 -0400
+
+ddm-mx (18.09.01) mx; urgency=medium
+
+  * added nvenc (libnvidia-encode1) to nvidia-driver install 
+
+ -- dolphin <dolphinoracle@gmail.com>  Wed, 19 Sep 2018 21:33:31 -0400
+
+ddm-mx (18.08.01) mx; urgency=medium
+
+  * remove automatic "yes" on purge function
+
+ -- dolphin_oracle <dolphinoracle@gmail.com>  Thu, 30 Aug 2018 21:15:16 -0400
+
+ddm-mx (18.06.01) mx; urgency=medium
+
+  * update locales 
+
+ -- dolphin_oracle <dolphinoracle@gmail.com>  Mon, 25 Jun 2018 21:09:43 -0400
+
+ddm-mx (18.03.01) mx; urgency=medium
+
+  * updated translations
+
+ -- dolphin_oracle <dolphinoracle@gmail.com>  Fri, 02 Mar 2018 18:24:01 -0500
+
+ddm-mx (18.02.01) mx; urgency=medium
+
+  * updated translations 
+
+ -- dolphin_oracle <dolphinoracle@gmail.com>  Tue, 13 Feb 2018 18:58:19 -0500
+
+ddm-mx (18.01.02) mx; urgency=medium
+
+  * change to installed libs 
+
+ -- dolphin_oracle <dolphinoracle@gmail.com>  Sat, 27 Jan 2018 18:37:25 -0500
+
+ddm-mx (18.01.01) mx; urgency=medium
+
+  * modified backports install routine to eliminate nvidia-xconfig 
+
+ -- dolphin_oracle <dolphinoracle@gmail.com>  Tue, 09 Jan 2018 21:57:52 -0500
+
+ddm-mx (17.12.01) mx; urgency=medium
+
+  * updated translations
+
+ -- dolphin_oracle <dolphinoracle@gmail.com>  Tue, 12 Dec 2017 18:22:29 -0500
+
+ddm-mx (17.12) mx; urgency=medium
+
+  * modified exit dialogs (thanks BJ) 
+
+ -- dolphin_oracle <dolphinoracle@gmail.com>  Mon, 04 Dec 2017 19:43:24 -0500
+
+ddm-mx (17.10.01) mx; urgency=medium
+
+  * fixed some translations trings
+
+ -- dolphin_oracle <dolphinoracle@gmail.com>  Sat, 04 Nov 2017 10:16:54 -0400
+
+ddm-mx (17.10.01) mx; urgency=medium
+
+  * modified xorg.conf creation, added to -t
+
+ -- dolphin_oracle <dolphinoracle@gmail.com>  Sat, 28 Oct 2017 07:16:22 -0400
+ 
+ddm-mx (17.07.03) mx; urgency=medium
+
+  * uniq checks per kmathern
+
+ -- dolphin_oracle <dolphinoracle@gmail.com>  Tue, 12 Sep 2017 21:31:22 -0400
+
+ddm-mx (17.07.02) mx; urgency=medium
+
+  * modified xorg.conf creation, cleaned up repo enabling
+
+ -- dolphin_oracle <dolphinoracle@gmail.com>  Sun, 16 Jul 2017 15:04:22 -0400
+
+ddm-mx (17.07.01) mx; urgency=medium
+
+  * added stretch repos
+
+ -- dolphin_oracle <dolphinoracle@gmail.com>  Sun, 16 Jul 2017 09:25:22 -0400
+
+ddm-mx (17.07mx16) mx; urgency=medium
+
+  * added backports repo use for more up-to-date drivers
+
+ -- dolphin_oracle <dolphin@gmail.com>  Sun, 16 Jul 2017 08:35:22 -0400
+
+ddm-mx (17.06mx16) mx; urgency=medium
+
+  * updated translations
+
+ -- dolphin_oracle <dolphin@gmail.com>  Fri, 02 Jun 2017 21:16:22 -0400
+
+ddm-mx (17.05mx16) mx; urgency=medium
+
+  * uh oh message for unsupported legacy parts (kmathern)
+
+ -- dolphin_oracle <dolphinoracle@gmail.com>  Sat, 13 May 2017 21:04:00 -0400
+
+ddm-mx (17.03mx16) mx; urgency=medium
+
+  * change optimus/bumblebee detection
+
+ -- dolphin_oracle <dolphinoracle@gmail.com>  Tue, 14 Mar 2016 11:59:00 -0400
+
+ddm-mx (17.02.02mx16) mx; urgency=medium
+
+  * fixed permission problem
+
+ -- dolphin_oracle <dolphinoracle@gmail.com>  Mon, 13 Dec 2016 04:01:00 -0400
+
+ddm-mx (17.02.01mx16) mx; urgency=medium
+
+  * added sources refresh
+
+ -- dolphin_oracle <dolphinoracle@gmail.com>  Sun, 12 Dec 2016 08:01:00 -0400
+
+ddm-mx (16.12.03mx16) mx; urgency=medium
+
+  * fixed nvidia reinstall function
+
+ -- dolphin_oracle <dolphinoracle@gmail.com>  Sun, 11 Dec 2016 15:35:00 -0400
+
+ddm-mx (16.12.02mx16) mx; urgency=medium
+
+  * added "reinstall" function
+
+ -- dolphin_oracle <dolphinoracle@gmail.com>  Sun, 11 Dec 2016 09:35:00 -0400
+
+ddm-mx (16.12.01mx16) mx; urgency=medium
+
+  * translations
+
+ -- dolphin_oracle <dolphinoracle@gmail.com>  Mon, 05 Dec 2016 22:20:00 -0400
+
+ddm-mx (16.12mx16) mx; urgency=medium
+
+  * translations
+
+ -- dolphin_oracle <dolphinoracle@gmail.com>  Fri, 02 Dec 2016 07:05:00 -0400
+
+ddm-mx (16.11mx16+4) mx; urgency=medium
+
+  * new icons
+
+ -- dolphin_oracle <dolphinoracle@gmail.com>  Mon, 28 Nov 2016 10:45:00 -0400
+
+ddm-mx (16.11mx16+3) mx; urgency=medium
+
+  * changes per Old Giza
+
+ -- dolphin_oracle <dolphinoracle@gmail.com>  Mon, 28 Nov 2016 09:10:00 -0400
+
+ddm-mx (16.11mx16+2) mx; urgency=medium
+
+  * revised source detection for nvidia
+  * added desktop menu entries
+  * removed bm files
+
+ -- dolphin_oracle <dolphinoracle@gmail.com>  Sun, 27 Nov 2016 17:10:00 -0400
+
+ddm-mx (16.11mx16+1) mx; urgency=medium
+
+  * added source detection (possible) for nvidia
+
+ -- dolphin_oracle <dolphinoracle@gmail.com>  Sat, 26 Nov 2016 19:10:00 -0400
+
+ddm-mx (16.11mx16) mx; urgency=medium
+
+  * initial build for mx16
+
+ -- dolphin_oracle <dolphinoracle@gmail.com>  Sat, 26 Nov 2016 19:10:00 -0400

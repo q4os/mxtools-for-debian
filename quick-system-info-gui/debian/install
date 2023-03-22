@@ -1,0 +1,5 @@
+quick-system-info-gui			usr/bin
+*.desktop		usr/share/applications
+translations/*.qm		usr/share/quick-system-info-gui/locale
+icons/*					usr/share/icons/hicolor/48x48/apps
+help/*					usr/share/doc/quick-system-info-gui/

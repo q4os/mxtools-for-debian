@@ -1,0 +1,17 @@
+Source: mx-boot-options
+Section: admin
+Priority: optional
+Maintainer: Adrian <adrian@mxlinux.org>
+Build-Depends: debhelper (>=10), 
+	qtbase5-dev,
+	qttools5-dev-tools
+Standards-Version: 3.9.8
+
+Package: mx-boot-options
+Architecture: any
+Depends: xdg-utils | mx-viewer,
+         ${misc:Depends},
+         ${shlibs:Depends}
+Recommends: efibootmgr
+Description: mx-boot-options
+ Program for selecting common start-up choices

@@ -1,0 +1,76 @@
+#!/bin/bash
+
+# Burn ISO images from the command line.
+# see "man burniso"
+
+# wodim parameters
+DRIVEROPTS=""
+SPEED="8"
+FS="14M"
+OPTIONS="-dao -eject -v"
+
+set -e
+shopt -s nullglob
+shopt -s nocaseglob
+
+# Print out an error message and exit.
+error () {
+	echo >&2 "Error: ${*}"
+	exit 1
+}
+
+# Look for writeable devices.
+devices=$(awk '
+/^drive name/ {
+	sub(/^.*:[[:space:]]*/, "")
+	num_dev = split($0, devices)
+}
+/(write CD)|(write DVD)/ {
+	sub(/^.*:[[:space:]]*/, "")
+	split($0, entries)
+	for (i = 1; i <= num_dev; ++i)
+		if (entries[i] == 1)
+			printf("/dev/%s\n", devices[i])
+}' /proc/sys/dev/cdrom/info | uniq)
+
+case $(echo ${devices} | wc -w) in
+	0)	error "No suitable device found!"
+		;;
+	1)	device=$devices
+		;;
+	*)	select device in $devices; do
+			break
+		done
+		;;
+esac
+
+# Check write permission for device.
+if [ ! -w "${device}" ]; then
+	error "No write permission for ${device}!".
+fi
+
+printf "Using device %s.\n" "${device}"
+
+if [ -z "$(echo *.iso)" ]; then
+	error "No ISO images in current directory!"
+fi
+
+printf "Choose an ISO to burn: \n"
+select iso in *.iso; do
+	break
+done
+
+# Check if ISO exists.
+if ! [ -f "${iso}" ]; then
+	error "No ISO in currect directory!"
+fi
+printf "File %s chosen.\n" "${iso}"
+
+# Look for MD5 checksum and validate if available.
+if [ -f "${iso}.md5" ]; then
+	echo "MD5 checksum found. Verifying ISO..."
+	if ! md5sum -c "${iso}.md5"; then
+		error "Invalid MD5 checksum!"
+	fi
+fi
+exec wodim ${OPTIONS} "dev=${device}" "driveropts=${DRIVEROPTS}" "fs=${FS}" "speed=${SPEED}" "${iso}"

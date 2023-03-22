@@ -1,0 +1,79 @@
+mx-samba-config (22.10+deb11u13) stable; urgency=medium
+
+  * MX Tools release
+
+ -- Dolphin Oracle <administrator@localdomain>  Wed, 22 Mar 2023 10:43:55 +0100
+
+mx-samba-config (22.10) mx; urgency=medium
+
+  * translation refresh
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 26 Oct 2022 20:06:39 -0400
+
+mx-samba-config (22.8) mx; urgency=medium
+
+  * Fix adding user
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 10 Aug 2022 21:23:46 -0400
+
+mx-samba-config (22.7) mx; urgency=medium
+
+  * translation refresh 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 23 Jul 2022 12:29:43 -0400
+
+mx-samba-config (22.4) mx; urgency=medium
+
+  * update postinstall, don't setup group if already exists
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 01 Apr 2022 22:37:53 -0400
+
+mx-samba-config (22.3) mx; urgency=medium
+
+  * adjust postinstall 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 27 Mar 2022 14:36:23 -0400
+
+mx-samba-config (22.1.01) mx; urgency=medium
+
+  * 'Everyone' in the command should not be translated
+
+ -- Adrian <adrian@mxlinux.org>  Sun, 30 Jan 2022 18:51:14 -0500
+
+mx-samba-config (22.1) mx; urgency=medium
+
+  * First official release with translations
+
+ -- Adrian <adrian@mxlinux.org>  Sat, 29 Jan 2022 14:22:36 -0500
+
+mx-samba-config (0.21.12.04) mx; urgency=medium
+
+  * Fix: adding samba share if guest_ok=n
+  * Display error message in case it fails to add share
+  * Some performances fixes, noticeable mostly on Raspberry Pi
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 31 Dec 2021 16:06:22 -0500
+
+mx-samba-config (0.21.12.03) mx; urgency=medium
+
+  * Add busy indicator when starting/stopping/enabling Samba
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 30 Dec 2021 18:27:46 -0500
+
+mx-samba-config (0.21.12.02) mx; urgency=medium
+
+  * Check if user is part of smabashare group (needed for MX-19 and RPi versions)
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 30 Dec 2021 12:00:13 -0500
+
+mx-samba-config (0.21.12.01) mx; urgency=medium
+
+  * Version bump. Changes listed in github repo
+
+ -- Adrian <adrian@mxlinux.org>  Sun, 26 Dec 2021 21:06:18 -0500
+
+mx-samba-config (0.21.12) mx; urgency=medium
+
+  * Initial build
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 16 Dec 2021 19:14:52 -0500

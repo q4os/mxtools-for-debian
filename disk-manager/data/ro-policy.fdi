@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?> <!-- -*- SGML -*- -->
+
+<deviceinfo version="0.2">
+
+<!-- file created by ntfs-config -->
+<!-- make sure that we respect ntfs-config policy by setting ntfs-3g as ntfs -->
+
+    <device>
+        <match key="volume.fstype" string="ntfs-3g">
+		    <match key="@block.storage_device:storage.hotpluggable" bool="true">
+			    <merge key="volume.fstype" type="string">ntfs</merge>
+	        </match>
+	    </match>
+        <match key="volume.fstype" string="ntfs">
+    	    <merge key="volume.policy.mount_filesystem" type="string">ntfs</merge>
+        </match>
+    </device>
+
+</deviceinfo>

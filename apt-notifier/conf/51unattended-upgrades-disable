@@ -1,0 +1,4 @@
+// disable unattended upgrade 
+APT::Periodic::Unattended-Upgrade "0";
+// but keep uddate-package lists enabled
+APT::Periodic::Update-Package-Lists "1";

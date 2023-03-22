@@ -1,0 +1,357 @@
+#!/bin/bash
+
+#==============================================================================
+# dd-live-usb
+# A fast, safe, convenient tool to make "dd" live-usb.
+#
+# (C) 2016 -- 2019 Paul Banham <antiX@operamail.com>
+# License: GPLv3 or later
+#==============================================================================
+
+     VERSION="1.10.02"
+ VERSION_DATE="Wed 23 Oct 2019 09:32:25 PM MDT"
+
+  GRAPHICAL_MENUS="true"
+
+       ME=${0##*/}
+    MY_DIR=$(dirname "$(readlink -f $0)")
+MY_LIB_DIR=$(readlink -f "$MY_DIR/../cli-shell-utils")
+   LIB_DIR="/usr/local/lib/cli-shell-utils"
+ SHELL_LIB="cli-shell-utils.bash"
+  LIB_PATH="$MY_LIB_DIR:$LIB_DIR"
+
+export TEXTDOMAIN="cli-shell-utils"
+domain_dir="$MY_DIR/../cli-shell-utils/locale"
+test -d "$domain_dir" && export TEXTDOMAINDIR=$domain_dir
+
+         ERR_FILE="/dev/null"
+     THE_ERR_FILE="/var/log/$ME.error"
+
+    PROGRESS_TYPE="bar"
+
+    YAD_PROG="yad --progress --auto-close --width 800 --title=$ME --on-top --center"
+    YAD_PROG="$YAD_PROG --text-align=center --text Progress"
+
+  SIZE_MARGIN="1"
+    ALL_FORCE="flock,usb"
+
+usage() {
+    local ret=${1:-0}
+
+cat<<Usage
+Usage: $ME [<options>]
+
+A save and convenient way to make a "dd" live-usb from a .iso file.
+Will prompt you for the file and for the device to write to if they
+are not given on the command line.
+
+Options:
+  -C --color=<xxx>       Set color scheme to off|low|low2|bw|dark|high
+                         (default is high)
+  -F  --force=usb        Disable safety check that ensures we only write to usb
+                         and removable devices
+  -f  --from=<file>      The iso file to copy
+  -h  --help             Show this usage
+  -P  --progress=<type>  Type of progress indicator: bar|percent|none
+                         (the default is bar)
+  -t  --to=<device>      The device to write to
+  -v  --version          Show the version number and date
+Usage
+    exit $ret
+}
+#------------------------------------------------------------------------------
+# Callback routine to evalute some command line args before the root user test.
+#------------------------------------------------------------------------------
+eval_early_argument() {
+    local val=${1#*=}
+    case $1 in
+              -force|F) FORCE="$FORCE,$val"  ;;
+              -force=*) FORCE="$FORCE,$val"  ;;
+               -help|h) usage                ;;
+            -version|v) show_version         ;;
+    esac
+}
+
+#------------------------------------------------------------------------------
+# Callback routine to evaluate arguments after the root user check.  We also
+# need to include the early args to avoid unknown argument errors.
+#------------------------------------------------------------------------------
+eval_argument() {
+    local arg=$1  val=$2
+    case $arg in
+             -color|C)  COLOR_SCHEME=$val                ;;
+             -color=*)  COLOR_SCHEME=$val                ;;
+              -from|f)  FROM=$val                        ;;
+              -from=*)  FROM=$val                        ;;
+          -progress=*)  PROGRESS_TYPE=$val               ;;
+          -progress|P)  PROGRESS_TYPE=$val               ;;
+                -to|t)  TARGET=$val                      ;;
+                -to=*)  TARGET=$val                      ;;
+                    *)  fatal "Unknown parameter %s" "-$arg"  ;;
+    esac
+}
+
+#------------------------------------------------------------------------------
+# Callback routine to see if an argument requires a value to follow it.
+#------------------------------------------------------------------------------
+takes_param() {
+    case $1 in
+          -color|C) return 0 ;;
+        -percent|P) return 0 ;;
+           -from|f) return 0 ;;
+             -to|t) return 0 ;;
+    esac
+    return 1
+}
+
+#==============================================================================
+# The main routine.  Called from the very bottom of this script.
+#==============================================================================
+main() {
+    local SHIFT  SHORT_STACK="CFfhPtv"
+    local FROM  TARGET  START_T=0  PROGRESS_SCALE=1000
+
+    set_colors
+
+    local orig_args="$*"
+
+    # Let non-root users get usage.  Need to get --ignore-config early.
+    read_early_params "$@"
+    need_root
+    read_params "$@"
+
+    set_colors $COLOR_SCHEME
+
+    shift $SHIFT
+    fatal_n0 $# "Extra command line arguments: %s" "$*"
+
+    case $PROGRESS_TYPE in
+        percent) prog_prog="percent_progress"   ;;
+           none) prog_prog=":"                  ;;
+            bar) prog_prog="text_progress_bar"  ;;
+            yad) prog_prog=$YAD_PROG
+                 PROGRESS_SCALE=100             ;;
+        *) fatal "Unknown --progress value %s" "$(pqw "$PROGRESS_TYPE")"
+    esac
+
+    ERR_FILE=$THE_ERR_FILE
+    trap clean_up EXIT
+    do_flock
+
+    rm -f $ERR_FILE
+
+    shout_title $"Starting %s" "$ME"
+    set_window_title "$ME"
+
+    #--- Find live boot device if we are running live
+
+    local we_are_live live_dev
+    if its_alive; then
+        we_are_live=true
+        live_dev=$(get_live_dev)
+        if [ -n "$live_dev" ]; then
+            shout "Found live media device %s" "$(pqb /dev/$(get_drive $live_dev))"
+        else
+            "$live_dev" "The live media is not mounted"
+        fi
+    fi
+
+    # Check cmdline target *before* the first menu
+    if [ ${#TARGET} -eq 0 ]; then
+        select_target_device TARGET "$live_dev"
+    else
+        TARGET=${TARGET#/dev/}
+        check_target "$TARGET" "$live_dev"
+    fi
+
+    local target_dev=/dev/${TARGET#/dev/}
+    # These are mostly for a manually entered target
+    test -e $target_dev || fatal "Target device %s does not exist" $target_dev
+    test -b $target_dev || fatal "Target device %s is not a block device" $target_dev
+
+    # Require that an entire disk device be specified (could relax?)
+    local dev_type=$(lsblk -no TYPE --nodeps $target_dev)
+    [ "$dev_type" = 'disk' ] || fatal "Device %s is not a disk device" $target_dev
+
+    # fatal "The device %s does not seem to be usb or removable."
+    # FIXME: move this to the lib?
+    force usb || is_usb_or_removable $target_dev || yes_NO_fatal "usb" \
+        "Do you want to use it anyway (dangerous)?" \
+        "Use %s to always ignore this warning"      \
+        "The device %s does not seem to be usb or removeable."  "$target_dev"
+
+    # Make sure the target is not in use
+    umount_all $TARGET
+
+    msg $"Will use target device %s" "$(pq $TARGET)"
+
+    if [ ${#FROM} -eq 0 ]; then
+        cli_get_filename FROM $"Please enter the name of the iso file" "$ISO_FILE_DIR"
+    fi
+
+    FROM=$(readlink -f "$FROM")
+    check_is_file "$FROM"
+
+    local from_size=$(du_size "$FROM")
+    local targ_size=$(parted --script /dev/$TARGET unit MiB print 2>/dev/null | sed -rn "s/^Disk.*: ([0-9]+)MiB$/\1/p")
+
+    local needed_size=$((from_size + SIZE_MARGIN))
+
+    local fmt="%25s $(pq %s)"  fmt2="%25s $(nq %8s) MiB"
+    msg "$fmt" "iso file"         "$FROM"
+    msg "$fmt" "target device"    "$TARGET"
+    msg
+    msg "$fmt2" "iso file size"      "$from_size"
+    msg "$fmt2" "target device size" "$targ_size"
+
+    [ $targ_size -lt $needed_size ] && fatal "The target device is too small"
+
+    shout_subtitle "Ready to make a 'dd' live-usb on device %s" "$(pq $TARGET)"
+
+    YES_no $"Shall we begin?" || exit
+    START_T=$(date +%s)
+
+    clear_partition /dev/$TARGET
+
+    dd_live_usb "$FROM" /dev/$TARGET $prog_prog
+
+    exit_done
+}
+
+#------------------------------------------------------------------------------
+# Simple checks to see if we have an actual file.
+#------------------------------------------------------------------------------
+check_is_file() {
+    local file=$1
+    test -e "$file" || fatal "File %s does not exist" "$(pqw "$file")"
+    test -f "$file" || fatal "File %s is not a regular file" "$(pqw "$file")"
+}
+
+#------------------------------------------------------------------------------
+# Simple menu of usb devices minus the running live-usb device
+#------------------------------------------------------------------------------
+select_target_device() {
+    local var=$1  live_dev=$2  from_dev=${3#clone=}
+
+    local menu=$(cli_drive_menu "$live_dev" "$from_dev")
+    local dev cnt=$(count_lines "$menu")
+    case $cnt in
+        0) fatal $"No available target usb devices were found" ;;
+        1) dev=$(echo "$menu" | cut -d"$P_IFS" -f1 | head -n1)
+            Msg $"Only one target usb device was found %s" "$(echo $(echo "$menu" | cut -d"$P_IFS" -f2))"
+           eval $var=\$dev
+           return ;;
+    esac
+    my_select $var $"Please select the target usb device" "$menu"
+}
+
+#------------------------------------------------------------------------------
+# Make sure --target device is valid.
+#------------------------------------------------------------------------------
+check_target() {
+    local target=$1  live_dev=$2
+
+    # Make sure our target is a real device
+    local target_dev=$(expand_device $target)
+
+    [ ${#target_dev} -gt 0 ] || fatal "Could not find device %s" "$target"
+    [ ${#live_dev}   -gt 0 ] || return
+    local live_drive=$(get_drive ${live_dev##*/} )
+    local targ_drive=$(get_drive ${target##*/}   )
+    [ "$live_drive" = "$targ_drive" ] && fatal "Target '%s' cannot be on the live device '%s'" "$target" "$live_drive"
+}
+
+#------------------------------------------------------------------------------
+# Clear out previous partition tables.
+#------------------------------------------------------------------------------
+clear_partition() {
+    local dev=$1
+    local total=$(parted --script $dev unit KiB print 2>/dev/null | sed -rn "s/^Disk.*: ([0-9]+)kiB$/\1/ip")
+
+    # Clear out previous primary partition table
+    cmd_dd if=/dev/zero of=$dev bs=1K count=17
+
+    # Clear out sneaky iso-hybrid partition table
+    cmd_dd if=/dev/zero of=$dev bs=1K count=17 seek=32
+
+    [ -n "$total" ] || return
+    local offset=$((total - 17))
+
+    # Clear out secondary gpt partition table
+    cmd_dd conv=notrunc if=/dev/zero of=$dev bs=1K count=17 seek=$offset
+
+    # Tell kernel the partition table has changed
+    cmd partprobe $dev
+}
+
+
+#------------------------------------------------------------------------------
+# Tell user we are done and then exit
+#------------------------------------------------------------------------------
+exit_done() {
+    say_done
+    my_exit
+}
+
+#------------------------------------------------------------------------------
+# Tell user that we're done
+#------------------------------------------------------------------------------
+say_done() {
+    msg "$(bq ">>") %s" $"done"
+}
+
+#------------------------------------------------------------------------------
+# A catch-all for things to be done right before exiting
+#------------------------------------------------------------------------------
+my_exit() {
+    local ret=${1:-0}
+
+    show_elapsed
+    exit $ret
+}
+
+#------------------------------------------------------------------------------
+# This routine is trapped on the EXIT signal.  So we always do this stuff.
+# It should *not* be interactive.
+#------------------------------------------------------------------------------
+clean_up() {
+    lib_clean_up
+    # Kill the children
+    pkill -P $$
+    unflock
+}
+
+#------------------------------------------------------------------------------
+# Load the lib either from a neighboring repo or from the standard location.
+#------------------------------------------------------------------------------
+load_lib() {
+    local file=$1  path=$2
+    unset FOUND_LIB
+
+    local dir lib found IFS=:
+    for dir in $path; do
+        lib=$dir/$file
+        test -r $lib || continue
+        if ! . $lib; then
+            printf "Error when loading library %s\n" "$lib" >&2
+            printf "This is a fatal error\n" >&2
+            exit 15
+        fi
+        FOUND_LIB=$lib
+        return 0
+    done
+
+    printf "Could not find library '%s' on path '%s'\n" "$file" "$path" >&2
+    printf "This is a fatal error\n" >&2
+    exit 17
+}
+
+
+#===== Start Here =============================================================
+
+load_lib "$SHELL_LIB" "$LIB_PATH"
+
+set_colors
+
+main "$@"
+

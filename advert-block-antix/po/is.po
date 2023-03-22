@@ -1,0 +1,54 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# Translators:
+# Sveinn í Felli <sv1@fellsnet.is>, 2019
+msgid ""
+msgstr ""
+"Project-Id-Version: antix-development\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-10-27 02:09+0300\n"
+"PO-Revision-Date: 2019-01-30 16:15+0000\n"
+"Last-Translator: Sveinn í Felli <sv1@fellsnet.is>\n"
+"Language-Team: Icelandic (http://www.transifex.com/anticapitalista/antix-development/language/is/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: is\n"
+"Plural-Forms: nplurals=2; plural=(n % 10 != 1 || n % 100 == 11);\n"
+
+#: block-advert.sh:24
+#, sh-format
+msgid ""
+"The <b>$title</b> tool adds stuff to your /etc/hosts file, so \\nthat many "
+"advertising servers and websites will not be able to connect \\nto this "
+"PC.\\n\\nYou can choose one service or combine multiple services for more "
+"advert protection.\\nBlocking ad servers protects your privacy, saves you "
+"bandwidth, greatly \\nimproves web-browsing speed and makes the internet "
+"much less annoying in general.\\n\\nDo you want to proceed?"
+msgstr "<b>$title</b> verkfærið bætir línum í /etc/hosts skrána, svo að \\ntmargir auglýsingamiðlarar og vefsvæði geta ekki lengur tengt sig\\nvið þessa tölvu.\\n\\nÞú getur valið eina þjónustu eða sameinað margar til að fá enn meiri varnir gegn auglýsingaóværu.\\nAð loka á auglýsingamiðlara verndar persónuupplýsingar, sparar bandbreidd, bætir \\numtalsvert hraða við vafur á netinu og gerir netið yfirhöfuð þægilegra í notkun.\\n\\nViltu halda áfram?"
+
+#: block-advert.sh:81
+msgid "Restoring original /etc/hosts."
+msgstr "Endurheimti upprunalegt /etc/hosts."
+
+#: block-advert.sh:117
+#, sh-format
+msgid "Loading  adlist from $domain"
+msgstr "Hleð inn adlist-skrá frá $domain"
+
+#: block-advert.sh:161
+msgid ""
+"Success - your settings have been changed.\\n\\nYour hosts file has been "
+"updated.\\nRestart your browser to see the changes."
+msgstr "Tókst - stillingarnar þínar voru uppfærðar.\\n\\nHosts-skráin þín var uppfærð.\\nEndurræstu vafrann þinn til að sjá breytingarnar."
+
+#: block-advert.sh:182
+msgid "Choose your preferred ad blocking service(s)"
+msgstr "Veldu hvaða þjónustu(r) þú óskar þér til að loka á auglýsingar"
+
+#: block-advert.sh:225
+msgid "No item selected"
+msgstr "Ekkert atriði valið"

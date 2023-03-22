@@ -1,0 +1,236 @@
+ dpkg-buildpackage -us -uc -ui -B
+dpkg-buildpackage: info: source package mx-system-sounds
+dpkg-buildpackage: info: source version 22.11.01
+dpkg-buildpackage: info: source distribution mx
+dpkg-buildpackage: info: source changed by Dolphin Oracle <dolphinoracle@gmail.com>
+ dpkg-source --before-build .
+dpkg-buildpackage: info: host architecture armhf
+ fakeroot debian/rules clean
+dh clean --no-automatic-dbgsym --parallel 
+   debian/rules override_dh_auto_clean
+make[1]: Entering directory '/home/dolphin/build/armhf'
+dh_auto_clean
+rm -f src/translations/*.qm
+make[1]: Leaving directory '/home/dolphin/build/armhf'
+   dh_autoreconf_clean -O--no-automatic-dbgsym -O--parallel
+   dh_clean -O--no-automatic-dbgsym -O--parallel
+ debian/rules build-arch
+dh build-arch --no-automatic-dbgsym --parallel 
+   dh_update_autotools_config -a -O--no-automatic-dbgsym -O--parallel
+   dh_autoreconf -a -O--no-automatic-dbgsym -O--parallel
+   dh_auto_configure -a -O--no-automatic-dbgsym -O--parallel
+	qmake -makefile "QMAKE_CFLAGS_RELEASE=-g -O2 -fdebug-prefix-map=/home/dolphin/build/armhf=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2" "QMAKE_CFLAGS_DEBUG=-g -O2 -fdebug-prefix-map=/home/dolphin/build/armhf=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2" "QMAKE_CXXFLAGS_RELEASE=-g -O2 -fdebug-prefix-map=/home/dolphin/build/armhf=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2" "QMAKE_CXXFLAGS_DEBUG=-g -O2 -fdebug-prefix-map=/home/dolphin/build/armhf=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2" QMAKE_LFLAGS_RELEASE=-Wl,-z,relro QMAKE_LFLAGS_DEBUG=-Wl,-z,relro QMAKE_STRIP=: PREFIX=/usr
+Info: creating stash file /home/dolphin/build/armhf/.qmake.stash
+   debian/rules override_dh_auto_build
+make[1]: Entering directory '/home/dolphin/build/armhf'
+lrelease mx-system-sounds.pro
+Updating '/home/dolphin/build/armhf/translations/mx-system-sounds_am.qm'...
+    Generated 35 translation(s) (35 finished and 0 unfinished)
+    Ignored 4 untranslated source text(s)
+Updating '/home/dolphin/build/armhf/translations/mx-system-sounds_ar.qm'...
+    Generated 15 translation(s) (15 finished and 0 unfinished)
+    Ignored 24 untranslated source text(s)
+Updating '/home/dolphin/build/armhf/translations/mx-system-sounds_bg.qm'...
+    Generated 14 translation(s) (14 finished and 0 unfinished)
+    Ignored 25 untranslated source text(s)
+Updating '/home/dolphin/build/armhf/translations/mx-system-sounds_ca.qm'...
+    Generated 39 translation(s) (39 finished and 0 unfinished)
+Updating '/home/dolphin/build/armhf/translations/mx-system-sounds_cs.qm'...
+    Generated 39 translation(s) (39 finished and 0 unfinished)
+Updating '/home/dolphin/build/armhf/translations/mx-system-sounds_da.qm'...
+    Generated 39 translation(s) (39 finished and 0 unfinished)
+Updating '/home/dolphin/build/armhf/translations/mx-system-sounds_de.qm'...
+    Generated 39 translation(s) (39 finished and 0 unfinished)
+Updating '/home/dolphin/build/armhf/translations/mx-system-sounds_el.qm'...
+    Generated 39 translation(s) (39 finished and 0 unfinished)
+Updating '/home/dolphin/build/armhf/translations/mx-system-sounds_en.qm'...
+    Generated 0 translation(s) (0 finished and 0 unfinished)
+    Ignored 39 untranslated source text(s)
+Updating '/home/dolphin/build/armhf/translations/mx-system-sounds_es.qm'...
+    Generated 39 translation(s) (39 finished and 0 unfinished)
+Updating '/home/dolphin/build/armhf/translations/mx-system-sounds_et.qm'...
+    Generated 3 translation(s) (3 finished and 0 unfinished)
+    Ignored 36 untranslated source text(s)
+Updating '/home/dolphin/build/armhf/translations/mx-system-sounds_eu.qm'...
+    Generated 2 translation(s) (2 finished and 0 unfinished)
+    Ignored 37 untranslated source text(s)
+Updating '/home/dolphin/build/armhf/translations/mx-system-sounds_fa.qm'...
+    Generated 18 translation(s) (18 finished and 0 unfinished)
+    Ignored 21 untranslated source text(s)
+Updating '/home/dolphin/build/armhf/translations/mx-system-sounds_fi.qm'...
+    Generated 39 translation(s) (39 finished and 0 unfinished)
+Updating '/home/dolphin/build/armhf/translations/mx-system-sounds_fr.qm'...
+    Generated 39 translation(s) (39 finished and 0 unfinished)
+Updating '/home/dolphin/build/armhf/translations/mx-system-sounds_fr_BE.qm'...
+    Generated 38 translation(s) (38 finished and 0 unfinished)
+    Ignored 1 untranslated source text(s)
+Updating '/home/dolphin/build/armhf/translations/mx-system-sounds_he_IL.qm'...
+    Generated 38 translation(s) (38 finished and 0 unfinished)
+    Ignored 1 untranslated source text(s)
+Updating '/home/dolphin/build/armhf/translations/mx-system-sounds_hi.qm'...
+    Generated 38 translation(s) (38 finished and 0 unfinished)
+    Ignored 1 untranslated source text(s)
+Updating '/home/dolphin/build/armhf/translations/mx-system-sounds_hr.qm'...
+    Generated 19 translation(s) (19 finished and 0 unfinished)
+    Ignored 20 untranslated source text(s)
+Updating '/home/dolphin/build/armhf/translations/mx-system-sounds_hu.qm'...
+    Generated 16 translation(s) (16 finished and 0 unfinished)
+    Ignored 23 untranslated source text(s)
+Updating '/home/dolphin/build/armhf/translations/mx-system-sounds_id.qm'...
+    Generated 16 translation(s) (16 finished and 0 unfinished)
+    Ignored 23 untranslated source text(s)
+Updating '/home/dolphin/build/armhf/translations/mx-system-sounds_is.qm'...
+    Generated 18 translation(s) (18 finished and 0 unfinished)
+    Ignored 21 untranslated source text(s)
+Updating '/home/dolphin/build/armhf/translations/mx-system-sounds_it.qm'...
+    Generated 39 translation(s) (39 finished and 0 unfinished)
+Updating '/home/dolphin/build/armhf/translations/mx-system-sounds_ja.qm'...
+    Generated 39 translation(s) (39 finished and 0 unfinished)
+Updating '/home/dolphin/build/armhf/translations/mx-system-sounds_kk.qm'...
+    Generated 15 translation(s) (15 finished and 0 unfinished)
+    Ignored 24 untranslated source text(s)
+Updating '/home/dolphin/build/armhf/translations/mx-system-sounds_ko.qm'...
+    Generated 3 translation(s) (3 finished and 0 unfinished)
+    Ignored 36 untranslated source text(s)
+Updating '/home/dolphin/build/armhf/translations/mx-system-sounds_lt.qm'...
+    Generated 39 translation(s) (39 finished and 0 unfinished)
+Updating '/home/dolphin/build/armhf/translations/mx-system-sounds_mk.qm'...
+    Generated 2 translation(s) (2 finished and 0 unfinished)
+    Ignored 37 untranslated source text(s)
+Updating '/home/dolphin/build/armhf/translations/mx-system-sounds_mr.qm'...
+    Generated 13 translation(s) (13 finished and 0 unfinished)
+    Ignored 26 untranslated source text(s)
+Updating '/home/dolphin/build/armhf/translations/mx-system-sounds_nb.qm'...
+    Generated 38 translation(s) (38 finished and 0 unfinished)
+    Ignored 1 untranslated source text(s)
+Updating '/home/dolphin/build/armhf/translations/mx-system-sounds_nl.qm'...
+    Generated 39 translation(s) (39 finished and 0 unfinished)
+Updating '/home/dolphin/build/armhf/translations/mx-system-sounds_pl.qm'...
+    Generated 39 translation(s) (39 finished and 0 unfinished)
+Updating '/home/dolphin/build/armhf/translations/mx-system-sounds_pt.qm'...
+    Generated 39 translation(s) (39 finished and 0 unfinished)
+Updating '/home/dolphin/build/armhf/translations/mx-system-sounds_pt_BR.qm'...
+    Generated 39 translation(s) (39 finished and 0 unfinished)
+Updating '/home/dolphin/build/armhf/translations/mx-system-sounds_ro.qm'...
+    Generated 16 translation(s) (16 finished and 0 unfinished)
+    Ignored 23 untranslated source text(s)
+Updating '/home/dolphin/build/armhf/translations/mx-system-sounds_ru.qm'...
+    Generated 39 translation(s) (39 finished and 0 unfinished)
+Updating '/home/dolphin/build/armhf/translations/mx-system-sounds_sk.qm'...
+    Generated 39 translation(s) (39 finished and 0 unfinished)
+Updating '/home/dolphin/build/armhf/translations/mx-system-sounds_sl.qm'...
+    Generated 39 translation(s) (39 finished and 0 unfinished)
+Updating '/home/dolphin/build/armhf/translations/mx-system-sounds_sq.qm'...
+    Generated 37 translation(s) (37 finished and 0 unfinished)
+    Ignored 2 untranslated source text(s)
+Updating '/home/dolphin/build/armhf/translations/mx-system-sounds_sr.qm'...
+    Generated 4 translation(s) (4 finished and 0 unfinished)
+    Ignored 35 untranslated source text(s)
+Updating '/home/dolphin/build/armhf/translations/mx-system-sounds_sv.qm'...
+    Generated 39 translation(s) (39 finished and 0 unfinished)
+Updating '/home/dolphin/build/armhf/translations/mx-system-sounds_tr.qm'...
+    Generated 39 translation(s) (39 finished and 0 unfinished)
+Updating '/home/dolphin/build/armhf/translations/mx-system-sounds_uk.qm'...
+    Generated 19 translation(s) (19 finished and 0 unfinished)
+    Ignored 20 untranslated source text(s)
+Updating '/home/dolphin/build/armhf/translations/mx-system-sounds_zh_CN.qm'...
+    Generated 38 translation(s) (38 finished and 0 unfinished)
+    Ignored 1 untranslated source text(s)
+Updating '/home/dolphin/build/armhf/translations/mx-system-sounds_zh_TW.qm'...
+    Generated 39 translation(s) (39 finished and 0 unfinished)
+dh_auto_build -- QMAKE=qmake-qt5 LRELEASE=lrelease-qt5 QMAKE_OPTS="DEFINES+=NO_DEBUG_ON_CONSOLE"
+	make -j4 QMAKE=qmake-qt5 LRELEASE=lrelease-qt5 QMAKE_OPTS=DEFINES\+=NO_DEBUG_ON_CONSOLE
+make[2]: Entering directory '/home/dolphin/build/armhf'
+/usr/lib/qt5/bin/uic mainwindow.ui -o ui_mainwindow.h
+g++ -c -pipe -g -O2 -fdebug-prefix-map=/home/dolphin/build/armhf=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -std=gnu++1z -Wall -W -D_REENTRANT -fPIC -DQT_DEPRECATED_WARNINGS -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -I. -isystem /usr/include/arm-linux-gnueabihf/qt5 -isystem /usr/include/arm-linux-gnueabihf/qt5/QtWidgets -isystem /usr/include/arm-linux-gnueabihf/qt5/QtGui -isystem /usr/include/arm-linux-gnueabihf/qt5/QtCore -I. -I. -I/usr/lib/arm-linux-gnueabihf/qt5/mkspecs/linux-g++ -o main.o main.cpp
+g++ -c -pipe -g -O2 -fdebug-prefix-map=/home/dolphin/build/armhf=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -std=gnu++1z -Wall -W -D_REENTRANT -fPIC -DQT_DEPRECATED_WARNINGS -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -I. -isystem /usr/include/arm-linux-gnueabihf/qt5 -isystem /usr/include/arm-linux-gnueabihf/qt5/QtWidgets -isystem /usr/include/arm-linux-gnueabihf/qt5/QtGui -isystem /usr/include/arm-linux-gnueabihf/qt5/QtCore -I. -I. -I/usr/lib/arm-linux-gnueabihf/qt5/mkspecs/linux-g++ -o about.o about.cpp
+/usr/lib/qt5/bin/rcc -name images images.qrc -o qrc_images.cpp
+g++ -pipe -g -O2 -fdebug-prefix-map=/home/dolphin/build/armhf=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -std=gnu++1z -Wall -W -dM -E -o moc_predefs.h /usr/lib/arm-linux-gnueabihf/qt5/mkspecs/features/data/dummy.cpp
+g++ -c -pipe -g -O2 -fdebug-prefix-map=/home/dolphin/build/armhf=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -std=gnu++1z -Wall -W -D_REENTRANT -fPIC -DQT_DEPRECATED_WARNINGS -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -I. -isystem /usr/include/arm-linux-gnueabihf/qt5 -isystem /usr/include/arm-linux-gnueabihf/qt5/QtWidgets -isystem /usr/include/arm-linux-gnueabihf/qt5/QtGui -isystem /usr/include/arm-linux-gnueabihf/qt5/QtCore -I. -I. -I/usr/lib/arm-linux-gnueabihf/qt5/mkspecs/linux-g++ -o mainwindow.o mainwindow.cpp
+g++ -c -pipe -g -O2 -fdebug-prefix-map=/home/dolphin/build/armhf=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -std=gnu++1z -Wall -W -D_REENTRANT -fPIC -DQT_DEPRECATED_WARNINGS -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -I. -isystem /usr/include/arm-linux-gnueabihf/qt5 -isystem /usr/include/arm-linux-gnueabihf/qt5/QtWidgets -isystem /usr/include/arm-linux-gnueabihf/qt5/QtGui -isystem /usr/include/arm-linux-gnueabihf/qt5/QtCore -I. -I. -I/usr/lib/arm-linux-gnueabihf/qt5/mkspecs/linux-g++ -o qrc_images.o qrc_images.cpp
+/usr/lib/qt5/bin/moc -DQT_DEPRECATED_WARNINGS -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB --include /home/dolphin/build/armhf/moc_predefs.h -I/usr/lib/arm-linux-gnueabihf/qt5/mkspecs/linux-g++ -I/home/dolphin/build/armhf -I/usr/include/arm-linux-gnueabihf/qt5 -I/usr/include/arm-linux-gnueabihf/qt5/QtWidgets -I/usr/include/arm-linux-gnueabihf/qt5/QtGui -I/usr/include/arm-linux-gnueabihf/qt5/QtCore -I/usr/include/c++/8 -I/usr/include/arm-linux-gnueabihf/c++/8 -I/usr/include/c++/8/backward -I/usr/lib/gcc/arm-linux-gnueabihf/8/include -I/usr/local/include -I/usr/lib/gcc/arm-linux-gnueabihf/8/include-fixed -I/usr/include/arm-linux-gnueabihf -I/usr/include mainwindow.h -o moc_mainwindow.cpp
+g++ -c -pipe -g -O2 -fdebug-prefix-map=/home/dolphin/build/armhf=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -std=gnu++1z -Wall -W -D_REENTRANT -fPIC -DQT_DEPRECATED_WARNINGS -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -I. -isystem /usr/include/arm-linux-gnueabihf/qt5 -isystem /usr/include/arm-linux-gnueabihf/qt5/QtWidgets -isystem /usr/include/arm-linux-gnueabihf/qt5/QtGui -isystem /usr/include/arm-linux-gnueabihf/qt5/QtCore -I. -I. -I/usr/lib/arm-linux-gnueabihf/qt5/mkspecs/linux-g++ -o moc_mainwindow.o moc_mainwindow.cpp
+mainwindow.cpp: In member function ‘void MainWindow::on_buttonApply_clicked()’:
+mainwindow.cpp:194:15: warning: ignoring return value of ‘int system(const char*)’, declared with attribute warn_unused_result [-Wunused-result]
+         system("xfconf-query -c xsettings -p /Net/EnableEventSounds -s true");
+         ~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+mainwindow.cpp:196:15: warning: ignoring return value of ‘int system(const char*)’, declared with attribute warn_unused_result [-Wunused-result]
+         system("xfconf-query -c xsettings -p /Net/EnableEventSounds -s false");
+         ~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+mainwindow.cpp:203:19: warning: ignoring return value of ‘int system(const char*)’, declared with attribute warn_unused_result [-Wunused-result]
+             system("xfconf-query -c xsettings -p /Net/EnableInputFeedbackSounds -s true");
+             ~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+mainwindow.cpp:205:19: warning: ignoring return value of ‘int system(const char*)’, declared with attribute warn_unused_result [-Wunused-result]
+             system("xfconf-query -c xsettings -p /Net/EnableInputFeedbackSounds -s false");
+             ~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+mainwindow.cpp:207:15: warning: ignoring return value of ‘int system(const char*)’, declared with attribute warn_unused_result [-Wunused-result]
+         system("xfconf-query -c xsettings -p /Net/EnableInputFeedbackSounds -s false");
+         ~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+mainwindow.cpp: In member function ‘void MainWindow::on_button_play_login_clicked()’:
+mainwindow.cpp:350:11: warning: ignoring return value of ‘int system(const char*)’, declared with attribute warn_unused_result [-Wunused-result]
+     system(cmd.toUtf8());
+     ~~~~~~^~~~~~~~~~~~~~
+mainwindow.cpp: In member function ‘void MainWindow::on_button_play_logout_clicked()’:
+mainwindow.cpp:360:11: warning: ignoring return value of ‘int system(const char*)’, declared with attribute warn_unused_result [-Wunused-result]
+     system(cmd.toUtf8());
+     ~~~~~~^~~~~~~~~~~~~~
+g++ -Wl,-z,relro -o mx-system-sounds main.o about.o mainwindow.o qrc_images.o moc_mainwindow.o   -lQt5Widgets -lQt5Gui -lQt5Core -lGLESv2 -lpthread -latomic 
+make[2]: Leaving directory '/home/dolphin/build/armhf'
+make[1]: Leaving directory '/home/dolphin/build/armhf'
+   dh_auto_test -a -O--no-automatic-dbgsym -O--parallel
+   create-stamp debian/debhelper-build-stamp
+ fakeroot debian/rules binary-arch
+dh binary-arch --no-automatic-dbgsym --parallel 
+   dh_testroot -a -O--no-automatic-dbgsym -O--parallel
+   dh_prep -a -O--no-automatic-dbgsym -O--parallel
+   debian/rules override_dh_auto_install
+make[1]: Entering directory '/home/dolphin/build/armhf'
+dh_auto_install -- QMAKE=qmake-qt5 LRELEASE=lrelease-qt5 QMAKE_OPTS="DEFINES+=NO_DEBUG_ON_CONSOLE"
+make[1]: Leaving directory '/home/dolphin/build/armhf'
+   dh_install -a -O--no-automatic-dbgsym -O--parallel
+   dh_installdocs -a -O--no-automatic-dbgsym -O--parallel
+   dh_installchangelogs -a -O--no-automatic-dbgsym -O--parallel
+   dh_systemd_enable -a -O--no-automatic-dbgsym -O--parallel
+   dh_installinit -a -O--no-automatic-dbgsym -O--parallel
+   dh_systemd_start -a -O--no-automatic-dbgsym -O--parallel
+   dh_icons -a -O--no-automatic-dbgsym -O--parallel
+   dh_perl -a -O--no-automatic-dbgsym -O--parallel
+   dh_link -a -O--no-automatic-dbgsym -O--parallel
+   dh_strip_nondeterminism -a -O--no-automatic-dbgsym -O--parallel
+   dh_compress -a -O--no-automatic-dbgsym -O--parallel
+   dh_fixperms -a -O--no-automatic-dbgsym -O--parallel
+   dh_missing -a -O--no-automatic-dbgsym -O--parallel
+   dh_strip -a -O--no-automatic-dbgsym -O--parallel
+   dh_makeshlibs -a -O--no-automatic-dbgsym -O--parallel
+   debian/rules override_dh_shlibdeps
+make[1]: Entering directory '/home/dolphin/build/armhf'
+dh_shlibdeps --dpkg-shlibdeps-params=--ignore-missing-info
+dpkg-shlibdeps: warning: debian/mx-system-sounds/usr/bin/mx-system-sounds contains an unresolvable reference to symbol __aeabi_atexit@CXXABI_ARM_1.3.3: it's probably a plugin
+dpkg-shlibdeps: warning: package could avoid a useless dependency if debian/mx-system-sounds/usr/bin/mx-system-sounds was not linked against libGLESv2.so.2 (it uses none of the library's symbols)
+dpkg-shlibdeps: warning: package could avoid a useless dependency if debian/mx-system-sounds/usr/bin/mx-system-sounds was not linked against libatomic.so.1 (it uses none of the library's symbols)
+make[1]: Leaving directory '/home/dolphin/build/armhf'
+   dh_installdeb -a -O--no-automatic-dbgsym -O--parallel
+   dh_gencontrol -a -O--no-automatic-dbgsym -O--parallel
+   dh_md5sums -a -O--no-automatic-dbgsym -O--parallel
+   dh_builddeb -a -O--no-automatic-dbgsym -O--parallel
+dpkg-deb: building package 'mx-system-sounds' in '../mx-system-sounds_22.11.01_armhf.deb'.
+ dpkg-genbuildinfo --build=any
+ dpkg-genchanges --build=any >../mx-system-sounds_22.11.01_armhf.changes
+dpkg-genchanges: info: binary-only arch-specific upload (source code and arch-indep packages not included)
+ dpkg-source --after-build .
+dpkg-buildpackage: info: binary-only upload (no source included)
+Now running lintian mx-system-sounds_22.11.01_armhf.changes ...
+E: mx-system-sounds changes: bad-distribution-in-changes-file mx
+W: mx-system-sounds: hardening-no-pie usr/bin/mx-system-sounds
+E: mx-system-sounds: debian-changelog-file-contains-invalid-email-address dolphin@littlebyte
+E: mx-system-sounds: debian-changelog-file-contains-invalid-email-address dolphinoracle@gmail
+E: mx-system-sounds: debian-changelog-file-contains-invalid-email-address dolphin@littlebyte
+E: mx-system-sounds: copyright-should-refer-to-common-license-file-for-gpl
+E: mx-system-sounds: description-is-pkg-name MX System Sounds
+W: mx-system-sounds: binary-without-manpage usr/bin/logoutsound-mx
+W: mx-system-sounds: binary-without-manpage usr/bin/mx-system-sounds
+W: mx-system-sounds: binary-without-manpage usr/bin/startupsound-mx
+W: mx-system-sounds: desktop-entry-invalid-category MX-Setup usr/share/applications/mx-system-sounds.desktop
+Finished running lintian.
+Now signing dsc file...
+debsign: Can't find or can't read dsc file mx-system-sounds_22.11.01.dsc!

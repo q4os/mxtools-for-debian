@@ -1,0 +1,19 @@
+Source: mx-tweak
+Section: admin
+Priority: optional
+Maintainer: dolphinoracle <dolphinoracle@gmail.com>
+Build-Depends: debhelper (>=10), qtbase5-dev, qttools5-dev-tools
+Standards-Version: 3.9.5
+Vcs-Git: git://github.com/mxlinux/mx-tweak.git
+
+Package: mx-tweak
+Architecture: any
+Depends: ${misc:Depends},
+        ${shlibs:Depends},
+        mx-viewer | xdg-utils,
+        mx-tweak-data
+Recommends: compton,
+        compton-conf,
+        gtk3-nocsd
+Description: MX Tweak
+ MX Tweak is a tool for quick tweaks to the Xfce environment supplied with MX Linux

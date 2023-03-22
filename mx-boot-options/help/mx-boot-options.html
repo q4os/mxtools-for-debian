@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>HELP: MX Boot options</title>
+</head>
+<body>
+<h1>HELP: MX Boot options</h1>
+<img src="BootOptions.png" alt="Boot options"  />
+
+<h2 id="Introduction"><a id="Introduction" name="Introduction"></a>Introduction</h2>
+
+<p>This MX Tool is designed to make common user start-up choices faster and easier. It is not intended to cover advanced boot options, for which the user should consult<a href="https://mxlinux.org/wiki/system/boot-parameters"> this Wiki page</a> instead.</p>
+
+<h2 id="Options"><a id="Options" name="Options"></a>Options</h2>
+
+<p><u>Menu timeout</u>: how long the <a href="https://opensource.com/article/17/3/introduction-grub2-configuration-linux">GRUB</a> screen remains visible until the boot process begins. If you put a zero in, the GRUB screen will simply not show at all (technically, it sets GRUB_TIMEOUT=0 in <em>/etc/default/grub</em>).  If you put in a -1, no timeout event will even occur.</p>
+
+<p><u>Boot To</u>:&nbsp; Select the grub boot menu entry that will be used as default on next boot.</p>
+
+<p><u>Enable saving last boot choice</u>:&nbsp; Instruct grub to use whatever you last&nbsp;selected from the grub boot menu as the new default</p>
+
+<p><u>Use flat menus</u>:&nbsp; Instructs grub to create a grub menu with the subcategories merged into the top level grub&nbsp;menu.</p>
+
+<p><u>Kernel Parameters</u>:&nbsp; Shows the parameters being passed to the kernel during the boot process.
+
+<p><u>Manage UEFI Boot Options</u>:&nbsp; Edit, modify, add or delete the boot priority list.</p>
+
+
+<h2 id="Background"><a id="Background" name="Background"></a>Background</h2>
+
+<p>Using the choices here, the user can select a background wallpaper for the standard GRUB display (technically, sets GRUB_BACKGROUND=/path/filename<em>)</em>.</p>
+
+	<ul>
+		<li>PNG files will be more satisfactory than JPG because it allows more colors,</li>
+		<li>Image should be non-indexed, RGB (GIMP can do this).</li>
+		<li>A size of 800&#215;450 tends to work well.</li>
+	</ul>
+
+<p>Complete GRUB themes are also available from the pull-down menu&nbsp;that offer a more polished look.</p>
+
+<h2 id="Splash"><a id="Splash" name="Splash"></a>Splash</h2>
+
+<p>It is possible to see a graphical display while the system boots making use of the application Plymouth, originally developed by <a href="https://getfedora.org/">Fedora</a>.</p>
+
+<p><u>Enable</u>:&nbsp; Enable Plymouth.&nbsp; Plymouth will be installed if necessary.</p>
+
+<p><u>Theme</u>:&nbsp; Select a theme for Plymouth to use.</p>
+
+<p><u>Preview</u>:&nbsp; Display the Plymouth theme selected.&nbsp; The splash will be displayed for approximately 5 seconds then return to the mx-boot-options gui.&nbsp; The preview button may not work upon first install of Plymouth but should work OK after a reboot of the machine.</p>
+
+
+<h2 id="Messages"><a id="Messages" name="Messages"></a>Messages</h2>
+
+<p><u>Very Detailed</u>:&nbsp; Removes the &#8220;quiet&#8221; boot parameter, showing many normally hidden scrolling boot text messages.</p>
+
+<p><u>Detailed:</u>&nbsp; The normal default boot message setup, with &#8220;quiet&#8221; enabled in the boot parameters.&nbsp; This basically shows warnings and init messages, but not kernel messages.</p>
+
+<p><u>Limited</u>:&nbsp; Hides all but error boot messages.</p>
+
+<p><u>Display Log<em>:</em></u><em>&nbsp;&nbsp;</em>Displays the boot log appropriate for the current boot conditions.</p>
+
+<p>MX Boot Options currently only works on the grub configuration installed with MX Linux.&nbsp; It is possible, from&nbsp; live-Media, to use MX Boot Options to configure the grub configurations on other &#8220;installed&#8221; partitions.<a id="Tips and tricks" name="Tips and tricks"></a></p>
+
+
+<h2 id="Tips-and-tricks"><a name="Tips and tricks"></a>Tips and tricks</h2>
+
+	<ul>
+		<li>MX Boot Options currently only works on the grub configuration installed with MX Linux.&nbsp; It is possible, from&nbsp; live-Media, to use MX Boot Options to configure the grub configurations on other &#8220;installed&#8221; partitions.</li>
+		<li>If you use a splash, you can press Esc at any point to return to the boot messages.</li>
+		<li>For <u>advanced</u> boot options that involve cheat codes (kernel parameters), consult <a href="https://mxlinux.org/wiki/system/boot-parameters">this WIki page</a>.</li>
+	</ul>
+
+<h2 id="Links"><a id="Links" name="Links"></a>Links</h2>
+
+	<ul>
+		<li><a href="https://www.freedesktop.org/wiki/Software/Plymouth/">Freedesktop page</a></li>
+		<li><a href="http://brej.org/blog/?p=174">Plymouth theming guide</a></li>
+		<li><a href="https://www.gnome-look.org/browse/cat/108/ord/latest/">Gnome-look.org</a></li>
+	</ul>
+
+
+<hr class="wp-block-separator"/>
+
+<h6><strong>v. 20180809</strong></h6>
+		
+</body>
+</html>

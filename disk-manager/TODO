@@ -1,0 +1,183 @@
+=========================================================================
+This is disk-manager TODO list, everybody is welcome to help on each task
+=========================================================================
+
+You can also request a feature on :
+https://blueprints.launchpad.net/disk-manager/
+
+
+Plan for 1.2 :
+==============
+
+Introduction :
+--------------
+
+In 1.2, we will concentrate on volume Management, proposed feature are :
+- Full Crypto management
+- Full Formatting management
+- Improved Mount option management
+- Improved guy to be able to see on which disk belongs each volumes
+
+What are the problems? :
+------------------------
+
+* Problem : 
+  FstabHandler is designed around Fstab, this make volume management, 
+  and management of device mounted on multiple path not really easy.
+* Proposed Solution :
+  Replace FstabHandler by something design around a Disk class (or something like that)
+  that will regroup all volumes :
+
+
+* Problem : 
+  To know if their is some new device, we store all detected device in a configuration file,
+  but to be able to access it as non root user, we store this file in user home. With this
+  design, we do some ugly stuff, like updating an user configuration file by root user...
+* Proposed Solution :
+  - Get ride of the automatically detect new device feature
+  - Make real separation of the frontend and the backend, run the backend as root, but keep
+    the frontend as simple user. This kind of stuff might be difficult until we have dbus auth
+
+
+* Problem : 
+  We want to keep the ntfs r/w feature, but this should not be integrated like that, 
+  as it is a really special feature.
+* Proposed Solution :
+  - Get ride of it, we already support multiple driver, and so changing driver is as easy as 
+    editing an entry
+  - Move it to a plugin
+
+
+* Problem :
+  The GUI is currently quite ugly. The general tab is not absolutly needed, There is now
+  no absolute need of a "configure new device button"...
+* Proposed solution :
+  Refactoring plan :
+  - Don't use tab, keep only the advance configuration view
+  - Remove InfoDialog, and integrate info in the main window. Hide/unhide it with a button
+    (hide by default)
+  - Proposed different views :
+    + Tree View (disk/volume hierarchy) / Plane (Only Volume)
+    + All Volume / Configured Volume / New Volume
+    + Show removable device / Hide removable device
+  - Move Options in a Preference Dialog
+  - Only active few columns on first start to make it user friendly. Other colums
+    will be activate/unactive in the Preference Dialog 
+  - Show total size used / total size free in the status bar
+
+
+* Problem :
+  To be compatible with old system, we currently rely on various common tools. This works
+  well for now, but it's might be interesting to make use of some "new" technologies :
+* Proposed Solution :
+  - Create an Hal backend, and make it default if it works ok
+  - use inotify to alert on fstab/mtab update
+
+
+* Problem :
+  There is right now no simple way to manage options.
+* Proposed solution :
+  Refactor EditDialog to be able to easily manage common options in an abststract way. Early plan :
+  - Regroup exec, users, users, dev, group, owner, uid=, gid=, umask=... options into a security category
+  - Add a GtkHScale to the check at boot option to be able to change time between 2 checks
+  - Regroup check=, iocharset=, utf8, nls=, locale=, into a locale category
+  - Regroup async, atime, diratime, data=(ext3),...
+  - Advance tab that allow to edit all other options
+  
+
+Class Hierarchy :
+-----------------
+
+    DObject
+    |-DMatch
+    |-DDatabase
+    | |-DTab
+    | | |-Mtab
+    | | |-Fstab
+    | |-DeviceDatabase
+    | |-LvmGroup
+    | |-RaidArray
+    | |-Disk
+    | |-DriverDatabase
+    |-Volume
+    | |-FsVolume (DDatabase)
+    | |-CryptoVolume
+    | |-RaidVolume
+    | |-OtherVolume
+    | |-FreeVolume
+    |-Fs
+    |-Watch
+    |-PathManager
+    
+Small description :
+-------------------
+
+Base class :
+- DObejct is a base class which allow the management of properties.
+- DDatabase is a base class for all database (class that contains multiple DObject)
+  It define multiple search methods in conjunction with DMatch
+- DMatch allow to define complex match relationship. It can then be process in a DDatabase
+- DTab is a base class for the management of fstab/mtab type file
+
+Device class :
+- DeviceDatabase is a DDatabase that regroup all devices. It is a collection of Drive, 
+  Volume, Fs, LvmVolumeGroup & RaidVolumeArray
+- LvmGroup is a DDatabase that regroup all Volume of a lvm volume group
+- RaidArray is a DDatabase that regroup all Volume of a raid array
+- Disk represent disk that contains multiple partitions. It is a collection of Volume
+- Volume represent a partition
+- FsVolume represent a partition that contains a filesystem. It is a collection of Fs,
+  that's why it is also a DDatabase.
+- Fs represent a filesystem. An FsVolume may contains multiple Fs in case it is mounted
+  on multiple path
+- RaidVolume represent a partition use in lvm or raid
+- OtherVolume represent all others partitons
+- FreeVolume represent a partition which is free
+
+Tab class :
+- Mtab regroup the mounted Fs. It is responsible for updationg the is_mounted property
+  of all Fs.
+- Fstab regroup the configured Fs. It is responsible for updating the is_configured
+  property of all Fs.
+
+Other class :
+- Watch define method to watch files change and/or fct changes, and emit signals.
+- PathManager manage mount points of Fs. It define methods to check, make and delete path
+- DriverDatabase : detect available drivers for a type of fs.
+
+Small Design :
+--------------
+
+       |-FsVolume
+       | |-Fs
+Drive -|-FsVolume
+       | |-Fs
+       |-OtherVolume
+       |-FreeVolume
+       |-RaidVolume
+
+Drive -|-FsVolume
+       | |-Fs
+       |-CryptoVolume
+         |-FsVolume
+           |-Fs
+       |-RaidVolume
+       
+LvmVolumeGroup -|-FsVolume
+                | |-Fs
+                |-FsVolume
+                | |-Fs
+                
+RaidVolumeArray -|-FsVolume
+                 | |-Fs
+                 |-FsVolume
+                 | |-Fs
+                 |-FsVolume
+                 | |-Fs
+
+Methods, Properties :
+---------------------
+
+Not yet decided...
+
+

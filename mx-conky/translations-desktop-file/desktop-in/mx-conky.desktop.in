@@ -1,0 +1,12 @@
+[Desktop Entry]
+Encoding=UTF-8
+# The desktop entry name will be displayed within the menu.
+Name=MX Conky
+# # The desktop entry comment will be shown within the menu.
+Comment=Change details of desktop system monitor
+Exec=mx-conky
+Terminal=false
+Type=Application
+Icon=mx-conky
+Categories=GNOME;GTK;System;MX-Setup
+NoDisplay=false

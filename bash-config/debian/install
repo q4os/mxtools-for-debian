@@ -1,0 +1,4 @@
+bash-config	 		 usr/bin
+*.desktop 					usr/share/applications
+help/*					usr/share/doc/bash-config/help
+translations/*		usr/share/bash-config/locale

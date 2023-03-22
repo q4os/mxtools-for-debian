@@ -1,0 +1,199 @@
+mx-datetime (22.10.01+deb11u13) stable; urgency=medium
+
+  * MX Tools release
+
+ -- Dolphin Oracle <administrator@localdomain>  Wed, 22 Mar 2023 10:43:52 +0100
+
+mx-datetime (22.10.01) mx; urgency=medium
+
+  * update translations 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 26 Oct 2022 19:59:19 -0400
+
+mx-datetime (22.8.01) mx; urgency=medium
+
+  * Fix: launching documents from Help (fixes a problem in Plasma) 
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 22 Aug 2022 21:42:18 -0400
+
+mx-datetime (22.8) mx; urgency=medium
+
+  * Fix: launching Firefox from Help
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 17 Aug 2022 21:50:22 -0400
+
+mx-datetime (22.7) mx; urgency=medium
+
+  * translation referesh 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 23 Jul 2022 11:24:38 -0400
+
+mx-datetime (22.6.01) mx; urgency=medium
+
+  * Improve time adjustment: use -S step option for dtpdig and use as steplimit of 500ms for time slewing
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 17 Jun 2022 12:48:05 -0400
+
+mx-datetime (22.6) mx; urgency=medium
+
+  * Preserve user theme when launching program as root
+  * Make sure HOME and XDG_RUNTIME_DIR are correct when launching as root
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 15 Jun 2022 17:28:58 -0400
+
+mx-datetime (21.11) mx; urgency=medium
+
+  * translation refresh
+
+ -- fehlix <fehlix@mxlinux.org>  Fri, 12 Nov 2021 12:02:09 -0500
+
+mx-datetime (21.9) mx; urgency=medium
+
+  * Fixed: wrong NTP configuration file updated for ntpsec.
+  * Use ntpdig if it exists.
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 02 Sep 2021 08:43:13 -0400
+
+mx-datetime (21.7.1) mx; urgency=medium
+
+  * Improvement: sync from one pool at a time
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 30 Jul 2021 13:21:54 -0400
+
+mx-datetime (21.7) mx; urgency=medium
+
+  * Fix: read ntpsec/ntp.conf file if available`
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 29 Jul 2021 16:07:00 -0400
+
+mx-datetime (21.3) mx; urgency=medium
+
+  * add ntpsec-ntpdate alternative dependency
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 11 Mar 2021 20:59:00 -0500
+
+mx-datetime (21.1.01) mx; urgency=medium
+
+  * add ntpdate dependency
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 14 Jan 2021 14:47:55 -0500
+
+mx-datetime (21.1) mx; urgency=medium
+
+  * various fixes
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 14 Jan 2021 08:33:48 -0500
+
+mx-datetime (19.10.01) mx; urgency=medium
+
+  * new icon 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 12 Oct 2019 20:03:40 -0400
+
+mx-datetime (19.9.3) mx; urgency=medium
+
+  * Update translations
+
+ -- Adrian <adrian@mxlinux.org>  Sun, 29 Sep 2019 14:00:58 -0400
+
+mx-datetime (19.9.2) mx; urgency=medium
+
+  * Updated translations
+
+ -- Adrian <adrian@mxlinux.org>  Tue, 24 Sep 2019 09:18:59 -0400
+
+mx-datetime (19.9.1) mx; urgency=medium
+  
+  * Added Help file
+  * No selecting buttons on the Hardware Clock and Network tabs by default.
+  * Added Drift Update check box.
+
+ -- Adrian <adrian@mxlinux.org>  Sun, 15 Sep 2019 17:18:45 -0400
+
+mx-datetime (19.9) mx; urgency=medium
+
+  * Finished remaining translated strings.
+  * Fixed time transfer (Hardware to System) command.
+  * GUI feedback improvements.
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 11 Sep 2019 11:40:56 -0400
+
+mx-datetime (0.19.9.07) mx; urgency=medium
+
+  * Embed timer object into MXDateTime class instead of using a pointer.
+  * Calendar and clock control bug fixes.
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 09 Sep 2019 13:03:01 -0400
+
+mx-datetime (0.19.9.06) mx; urgency=medium
+
+  *  UI changes
+  *  convert to multiple inheritance arch
+  *  fix keyboard selection reset
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 07 Sep 2019 12:23:08 -0400
+
+mx-datetime (0.19.9.05) mx; urgency=medium
+
+  * Fixed resource leaks and improved drift calculation.
+  * Curtail the jump at the start. 
+  * Bypass execution of init system and NTP code on non-root startup.
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 06 Sep 2019 08:42:47 -0400
+
+mx-datetime (0.19.9.04) mx; urgency=medium
+
+  * Don't bother reading NTP settings if not root.
+  * Moved escaping out of a translated string. Removed an unused variable.
+  * Fixed: incorrectly displayed "Date & Time" in the tab.
+  * Fix string quoting
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 05 Sep 2019 23:10:23 -0400
+
+mx-datetime (0.19.9.03) mx; urgency=medium
+
+  * Trim some padding when run in non-root mode.
+  * Changed name "Date and Time" to "Date & Time"
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 05 Sep 2019 15:02:24 -0400
+
+mx-datetime (0.19.9.02) mx; urgency=medium
+
+  * Hardware Clock no longer read at startup or reload.
+  * Hide the buttons at the bottom in non-root mode.
+  * Fixed: apparently missing time zones on systemd.
+  * Improved detection of the init system.
+  * Fixed truncated tool tip string.
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 05 Sep 2019 12:34:46 -0400
+
+mx-datetime (0.19.9.01) mx; urgency=medium
+
+  * Changed tab order.
+  * Fixed: half the world was seemingly missing from the time zone list. 
+  * Also potentially improved GUI startup feedback.
+  * Icon update.
+  * Icon darker clock face.
+  * Icon update. Also cleaned the SVG file a bit.
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 04 Sep 2019 12:50:54 -0400
+
+mx-datetime (0.19.9) mx; urgency=medium
+
+  * Operate with reduced functionality if not running as root. Fixed setClockLock() deadlock condition.
+  * GUI control size adjustments.
+  * Split time zone combo box into two. Also some GUI tweaks along the way.
+  * NTP Server table columns reordered. Validate before syncing or saving.
+  * The NTP GUI now works.
+  * Revamped the NTP GUI.
+  * GUI rework. Separated RTC and NTP tabs. Replaced references to RTC with Hardware Clock.
+  * Set the calendar font so it doesn't look fat.
+  * Icon update.
+
+ -- Adrian <adrian@mxlinux.org>  Tue, 03 Sep 2019 14:57:14 -0400
+
+mx-datetime (0.19.8) mx; urgency=medium
+
+  * initial release
+
+ -- Adrian <adrian@mxlinux.org>  Sat, 31 Aug 2019 01:46:35 -0400

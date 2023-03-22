@@ -1,0 +1,25 @@
+Format: 1.8
+Date: Mon, 15 Aug 2022 19:06:27 -0400
+Source: formatusb
+Binary: formatusb
+Architecture: armhf
+Version: 22.08.01
+Distribution: mx
+Urgency: medium
+Maintainer: Dolphin Oracle <dolphinoracle@gmail.com>
+Changed-By: Dolphin Oracle <dolphinoracle@gmail.com>
+Description:
+ formatusb  - format usb devices
+Changes:
+ formatusb (22.08.01) mx; urgency=medium
+ .
+   * add fr_BE
+Checksums-Sha1:
+ 7d2dd03428fbb5cd2748c41f21416b41e33fbceb 9860 formatusb_22.08.01_armhf.buildinfo
+ 5753c92aebf9f2cedd7fe859db92b845649c7de2 75500 formatusb_22.08.01_armhf.deb
+Checksums-Sha256:
+ 7a42474ea8aef41ef92425f37ffa1b74f793607230f37c91e60d5063264cb4ae 9860 formatusb_22.08.01_armhf.buildinfo
+ 951c3c17dfe62245e0b6f7c1eb3dacf6ec4a2c26bf50e2c20c83b084c79a35cc 75500 formatusb_22.08.01_armhf.deb
+Files:
+ c33346310844f46c2308aa1abf42fb5c 9860 admin optional formatusb_22.08.01_armhf.buildinfo
+ 5d435874610d9653210c03c7309998b3 75500 admin optional formatusb_22.08.01_armhf.deb

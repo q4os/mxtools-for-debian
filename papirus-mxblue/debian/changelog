@@ -1,0 +1,23 @@
+papirus-mxblue (21.08.01+deb11u13) stable; urgency=medium
+
+  * MX Tools release
+
+ -- Dolphin Oracle <administrator@localdomain>  Wed, 22 Mar 2023 10:43:57 +0100
+
+papirus-mxblue (21.08.01) mx; urgency=medium
+
+  * modifiy index.theme files to drop inherit on numix-circle 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 21 Aug 2021 15:15:37 -0400
+
+papirus-mxblue (21.07.02) mx; urgency=medium
+
+  * modify icon index files 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 17 Jul 2021 22:49:53 -0400
+
+papirus-mxblue (21.07.01) mx; urgency=medium
+
+  * Initial release. 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 17 Jul 2021 09:40:02 -0400

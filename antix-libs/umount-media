@@ -1,0 +1,43 @@
+#!/bin/bash
+
+ME=${0##*/}
+TOP=/media
+MAX_CNT=20
+SLEEP=0.2
+
+main() {
+    local top=$TOP
+    test -d $top || fatal "$top is not a directory"
+    local cnt=0
+    while [ $cnt -lt $MAX_CNT ]; do
+        cnt=$((cnt + 1))
+        umount_all $top && exit 0
+        sleep $SLEEP
+    done
+
+    echo "$ME FAILED!"
+    df -hT | egrep "(^Filesystem |$top/)" 
+    exit 3
+}
+
+umount_all() {
+    local d full not_done top=${1%/}
+    for d in $(ls $top/); do
+        full=$top/$d
+        test -d $full || continue
+        mountpoint -q $full || continue
+        sudo umount --recursive $full &>/dev/null
+        mountpoint -q $full && not_done=true
+    done
+    [ -z "$not_done" ]
+    return $?
+}
+
+
+fatal() {
+    echo "$ME fatal error: $*" >&2
+    exit 3
+}
+
+main
+

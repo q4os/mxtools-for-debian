@@ -1,0 +1,10 @@
+Inside apt-notifer we now use ngettext to correctly translate the 
+plural forms. Please add the xgettext mode -cTAG/--add-comments=TAG with 
+TAG as "TRANSLATORS:".
+
+An example is included in the make-pot.sh script. The -cTAG option 
+ensures that comments which are available in the Python scripts are 
+available in transifex, so that the translator can use the comments to 
+fill in all plural forms for their respective languages. The 
+apt-notifier.pot file is created by running make-pot.sh from this 
+directory.

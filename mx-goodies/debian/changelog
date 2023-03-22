@@ -1,0 +1,403 @@
+mx-goodies (23.01.04mx21+deb11u13) stable; urgency=medium
+
+  * MX Tools release
+
+ -- Dolphin Oracle <administrator@localdomain>  Wed, 22 Mar 2023 10:43:53 +0100
+
+mx-goodies (23.01.04mx21) mx; urgency=medium
+
+  * correct Py-Loader.desktop 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Tue, 10 Jan 2023 19:31:54 -0500
+
+mx-goodies (23.01.03mx21) mx; urgency=medium
+
+  * take care of DESKTOP files with spaces
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 08 Jan 2023 17:16:17 -0500
+
+mx-goodies (23.01.02mx21) mx; urgency=medium
+
+  * do sed on minstall.desktop before checksum
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 08 Jan 2023 14:26:21 -0500
+
+mx-goodies (23.01.01mx21) mx; urgency=medium
+
+  * update xdg-user-dirs-update to mark default desktop files executable by xfce  
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 08 Jan 2023 12:22:48 -0500
+
+mx-goodies (22.08.03mx21) mx; urgency=medium
+
+  * don't copy to clipboard if running the gui 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 08 Aug 2022 21:22:04 -0400
+
+mx-goodies (22.08.02mx21) mx; urgency=medium
+
+  * add -g gui switch
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 07 Aug 2022 13:26:20 -0400
+
+mx-goodies (22.08.01) mx; urgency=medium
+
+  * add kernel-source-version string to quick-system-info
+
+ -- fehlix <fehlix@mxlinux.org>  Thu, 04 Aug 2022 09:27:21 -0400
+
+mx-goodies (22.03.01) mx; urgency=medium
+
+  * add secure boot state, boot mode to quick-system-info
+
+ -- fehlix <fehlix@mxlinux.org>  Sat, 12 Mar 2022 13:31:23 +0000
+
+mx-goodies (21.10.02) mx; urgency=medium
+
+  * add wrapper to suppress QCommandLineParser warnings in debconf-kde-helper
+
+ -- fehlix <fehlix@mxlinux.org>  Sun, 24 Oct 2021 19:53:27 +0000
+
+mx-goodies (21.10.01) mx; urgency=medium
+
+  * fix update standard folders to current language
+
+ -- fehlix <fehlix@mxlinux.org>  Thu, 07 Oct 2021 00:22:12 +0000
+
+mx-goodies (21.07.02) mx; urgency=medium
+
+  * fix minstall.desktop file so it displays on plasma desktop
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 25 Jul 2021 20:13:29 -0400
+
+mx-goodies (21.07.01) mx; urgency=medium
+
+  * put gazelle.lnk on idesktop if exists (fluxbox spin) 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 18 Jul 2021 20:53:50 -0400
+
+mx-goodies (21.04.02) mx; urgency=medium
+
+  * adjust postinstall efimount for PREEMPT_RT realtime kernel
+
+ -- fehlix <fehlix@mxlinux.org>  Fri, 09 Apr 2021 13:49:37 -0400
+
+mx-goodies (21.04.01mx21) mx; urgency=medium
+
+  * efimout script for bullseye 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 03 Apr 2021 19:04:01 -0400
+
+mx-goodies (21.02.03+5mx21) mx; urgency=medium
+
+  * correct typo in xdg-user-dirs-update diversion 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 13 Mar 2021 22:04:45 -0500
+
+mx-goodies (21.02.03+4mx21) mx; urgency=medium
+
+  * fix permissions issue 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 11 Mar 2021 23:32:55 -0500
+
+mx-goodies (21.02.03+3mx21) mx; urgency=medium
+
+  * make sure desktop files copied to Desktop are executable
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 11 Mar 2021 23:24:47 -0500
+
+mx-goodies (21.02.03+2mx21) mx; urgency=medium
+
+  * small fixes in qsi and system-locale-mx 
+
+ -- fehlix <fehlix@mxlinux.org>  Thu, 11 Mar 2021 18:44:05 -0400
+
+mx-goodies (21.02.03+1mx21) mx; urgency=medium
+
+  * new xdg-user-dirs-update diversion 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 01 Mar 2021 18:33:46 -0500
+
+mx-goodies (21.02.03) mx; urgency=medium
+
+  * fix typo in qsi
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 27 Feb 2021 16:59:36 -0500
+
+mx-goodies (21.02.02) mx; urgency=medium
+
+  * revise QSI text
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 26 Feb 2021 21:00:54 -0500
+
+mx-goodies (21.02.01) mx; urgency=medium
+
+  * remove system-keyboard-mx 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Tue, 02 Feb 2021 23:12:49 -0500
+
+mx-goodies (21.01.01) mx; urgency=medium
+
+  * remove yad script thing 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 17 Jan 2021 18:44:34 -0500
+
+mx-goodies (20.10.01) mx; urgency=medium
+
+  * fixed a typo in quick-system-info of displayed snapshot creation date
+  * fixed in system-locale-mx unicode display, e.g. for Norwegian (Bokmål)
+
+ -- fehlix <fehlix@mxlinux.org>  Thu, 08 Oct 2020 16:14:44 -0400
+
+mx-goodies (20.08.25) mx; urgency=medium
+
+  * adjust hostname filter in quick-system-info
+  * add uuid filter in quick-system-info
+  * show system-locales-mx and system-keyboard-mx not only in Xfce
+
+ -- fehlix <fehlix@mxlinux.org>  Tue, 25 Aug 2020 12:27:46 +0200
+
+mx-goodies (20.08.12) mx; urgency=medium
+
+  * adjust hostname filter in quick-system-info
+
+ -- fehlix <fehlix@mxlinux.org>  Wed, 12 Aug 2020 18:51:58 +0200
+
+mx-goodies (20.08.04) mx; urgency=medium
+
+  [ fehlix ]
+  * add hostname filter to quick-system-info
+
+ -- fehlix <fehlix@mxlinux.org>  Tue, 04 Aug 2020 21:32:30 +0200
+
+mx-goodies (20.07.08) mx; urgency=medium
+
+  [ fehlix ]
+  * replace xsel by xclip for quick-system-info
+  * add primary X selection within quick-system-info
+
+ -- dolphin oracle <dolphinoracle@gmail.com>  Wed, 08 Jul 2020 18:28:12 +0200
+
+mx-goodies (20.04.01) mx; urgency=medium
+
+  * add toggle-mx 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 12 Apr 2020 11:26:20 -0400
+
+mx-goodies (20.03.02) mx; urgency=medium
+
+  * update control file 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 30 Mar 2020 22:41:03 -0400
+
+mx-goodies (20.03.01) mx; urgency=medium
+
+  * update quick-system-info to show new snapshot_created date info 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 12 Mar 2020 20:46:40 -0400
+
+mx-goodies (20.02.01) mx; urgency=medium
+
+  * system-locale-mx update (fehlix) 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 21 Feb 2020 20:22:50 -0500
+
+mx-goodies (19.10.01) mx; urgency=medium
+
+  * modification to quick-system-info-mx to report certain live boot video settings
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Tue, 01 Oct 2019 20:33:17 -0400
+
+mx-goodies (19.09.01) mx; urgency=medium
+
+  * translation refresh (old giza)
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 28 Sep 2019 15:00:51 -0400
+
+mx-goodies (19.08.03) mx; urgency=medium
+
+  * translation refresh (old giza) 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Tue, 27 Aug 2019 21:29:16 -0400
+
+mx-goodies (19.08.02) mx; urgency=medium
+
+  * revised text strings (Old Giza) 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 25 Aug 2019 15:32:59 -0400
+
+mx-goodies (19.08.01) mx; urgency=medium
+
+  * update quick system info 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 23 Aug 2019 21:52:37 -0400
+
+mx-goodies (19.07.01) mx; urgency=medium
+
+  * update icons
+  * remove brightness-init since buster initscripts have one
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 08 Jul 2019 20:39:55 -0400
+
+mx-goodies (19.04.02) mx; urgency=medium
+
+  * update zram script per bug report 84 (bugs.mxlinux.org) 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 08 May 2019 20:11:26 -0400
+
+mx-goodies (19.04.01) mx; urgency=medium
+
+  * translation bump 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 05 Apr 2019 18:28:37 -0400
+
+mx-goodies (19.01.01) mx; urgency=medium
+
+  * update translations 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 23 Jan 2019 18:48:17 -0500
+
+mx-goodies (18.12.01) mx; urgency=medium
+
+  * update icon 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 21 Dec 2018 16:59:38 -0500
+
+mx-goodies (18.11.06) mx; urgency=medium
+
+  * added xfce4-notifyd startup fix 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 02 Dec 2018 12:27:34 -0500
+
+mx-goodies (18.11.05) mx; urgency=medium
+
+  * translation refresh
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 30 Nov 2018 19:32:07 -0500
+
+mx-goodies (18.11.04) mx; urgency=medium
+
+  * revised inxi code (fehlix) 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 25 Nov 2018 12:09:50 -0500
+
+mx-goodies (18.11.03) mx; urgency=medium
+
+  * modifed desktop entry for system-keyboard-mx (fehlix) 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 22 Nov 2018 20:54:24 -0500
+
+mx-goodies (18.11.02) mx; urgency=medium
+
+  * revised keyboard and locales routines 
+
+ -- dolphin <dolphinoracle@gmail.com>  Wed, 21 Nov 2018 20:28:35 -0500
+
+mx-goodies (18.11.01) mx; urgency=medium
+
+  * added system-locales-mx and system-keyboard-mx (fehlix) 
+
+ -- dolphin <dolphin@littlebyte>  Sun, 18 Nov 2018 09:52:22 -0500
+
+mx-goodies (18.10.01) mx; urgency=medium
+
+  * updated translations 
+
+ -- dolphin <dolphin@littlebyte>  Sun, 14 Oct 2018 19:41:12 -0400
+
+mx-goodies (0.3.3) mx; urgency=medium
+
+  * updated locales 
+  * added repositories to quick-system-info
+
+ -- dolphinoracle <dolphinoracle@gmail.com>  Mon, 25 Jun 2018 21:15:09 -0400
+
+mx-goodies (0.3.1) mx; urgency=medium
+
+  * trying to squash some output errors in new inxi 
+
+ -- dolphinoracle <dolphin@mx>  Thu, 22 Mar 2018 22:21:11 -0400
+
+mx-goodies (0.2.7) mx; urgency=medium
+
+  * updated translations
+
+ -- dolphinoracle <dolphin@littlebyte>  Fri, 02 Mar 2018 18:28:19 -0500
+
+mx-goodies (0.2.5) mx; urgency=medium
+
+  * updated translations 
+
+ -- dolphinoracle <dolphin@littlebyte>  Tue, 13 Feb 2018 18:49:42 -0500
+
+mx-goodies (0.2.4) mx; urgency=medium
+
+  * add brightness-settings-cache to excludes lists (mx-snapshot and live-remaster-exclude)
+  * those changes will be overridden by changes to mx-snapshot and antix-libs
+
+ -- dolphinoracle <dolphinoracle@gmail.com>  Wed, 10 Jan 2018 21:07:33 -0500
+ 
+mx-goodies (0.2.3) mx; urgency=medium
+
+  * translations 
+  * brightness-init added
+
+ -- dolphinoracle <dolphinoracle@gmail.com>  Sun, 07 Jan 2018 21:44:28 -0500
+
+mx-goodies (0.2.2) mx; urgency=medium
+
+  * adding clipboard to quick-system-info tool 
+
+ -- dolphinoracle <dolphinoracle@gmail.com>  Fri, 29 Dec 2017 20:36:23 -0500
+
+mx-goodies (0.2.1) mx; urgency=medium
+
+  * added Quick inxi desktop file 
+
+ -- dolphinoracle <dolphinoracle@gmail.com>  Mon, 04 Dec 2017 18:35:45 -0500
+
+mx-goodies (0.2.0) mx; urgency=medium
+
+  * added /etc/sysctl.d/99-mx_allow_non_root_dmesg.conf
+
+ -- dolphinoracle <dolphinoracle@gmail.com>  Mon, 09 Oct 2017 18:40:59 +0300
+
+mx-goodies (0.1.5) mx; urgency=medium
+
+  * Added java.desktop and Py-Loader.desktop
+
+ -- anticapitalista <antix@operamail.com>  Fri, 21 Oct 2016 15:15:59 +0300
+
+mx-goodies (0.1.4) mx; urgency=medium
+
+  * BroadcomStartup updated
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Fri, 29 Jul 2016 10:19:09 -0400
+
+mx-goodies (0.1.3) mx; urgency=low 
+ 
+  * Changed permissions of yad script to chmod a-x
+
+ -- anticapitalista <antiX@operamail.com>  Wed, 23 Dec 2015 21:07:00 +0200
+
+
+mx-goodies (0.1.2) mx; urgency=low 
+ 
+  * Added yad script to hide annoying messages
+
+ -- anticapitalista <antiX@operamail.com>  Tue, 22 Dec 2015 22:56:00 +0200
+
+
+mx-goodies (0.1.1) mx; urgency=low 
+ 
+  * Added guess-hwclock script
+
+ -- anticapitalista <antiX@operamail.com>  Fri, 04 Dec 2015 14:31:00 +0200
+
+
+mx-goodies (0.1.0) unstable; urgency=low 
+ 
+  * Initial Release.
+
+ -- anticapitalista <antiX@operamail.com>  Fri, 23 Oct 2015 18:22:00 +0200
+

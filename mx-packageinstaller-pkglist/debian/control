@@ -1,0 +1,48 @@
+Source: mx-packageinstaller-pkglist
+Section: admin
+Priority: optional
+Maintainer: Dolphin Oracle <dolphinoracle@gmail.com>
+Build-Depends: debhelper (>=12),
+Standards-Version: 3.9.5
+Vcs-Git: git://github.com/MX-Linux/mx-packageinstaller-pkglist
+
+Package: mx-packageinstaller-pkglist
+Architecture: all
+Depends: mx-packageinstaller (>=21.3.02)
+Description: Part of MX program for installing additional packages.
+ MX-packageinstaller is a program used for installing additional packages. 
+ MX-packageinstaller-pkglist contains the list of packages and installation instructions.
+
+
+Package: lo-backports-helper
+Architecture: all
+Conflicts: lo-main-helper
+Depends:  libreoffice-firefox-compat
+Provides: lo-backports-helper
+Section: misc
+Priority: optional
+Multi-Arch: foreign
+Description: libreoffice dummy helper package
+ A helper package for MX Package installer.
+ 
+ 
+Package: lo-main-helper
+Architecture: all
+Conflicts: lo-backports-helper
+Depends: libreoffice-firefox-compat
+Provides: lo-main-helper
+Section: misc
+Priority: optional
+Multi-Arch: foreign
+Description: libreoffice dummy helper package
+ A helper package for MX Package Installer.
+ 
+Package: calibre-helper
+Architecture: all
+Conflicts: calibre
+Provides: calibre-helper
+Section: misc
+Priority: optional
+Multi-Arch: foreign
+Description: calibre dummy helper package
+ A helper package for MX Package Installer.

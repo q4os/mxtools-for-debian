@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE policyconfig PUBLIC
+  "-//freedesktop//DTD PolicyKit Policy Configuration 1.0//EN"
+  "http://www.freedesktop.org/standards/PolicyKit/1/policyconfig.dtd">
+<!-- 
+	/usr/share/polkit-1/actions/org.mxlinux.mx-pkexec.policy
+!-->
+ <policyconfig>
+  <vendor>MX Linux</vendor>
+  <vendor_url>https://mxlinux.org</vendor_url>
+  <action id="org.mxlinux.mx-pkexec">
+    <description>Run MX Linux application</description>
+    <message gettext-domain="mx-tools">Authentication is required to run this application</message>
+    <icon_name>mx-tools</icon_name>
+    <defaults>
+      <allow_any>auth_admin</allow_any>
+      <allow_inactive>auth_admin</allow_inactive>
+      <allow_active>auth_admin</allow_active>
+    </defaults>
+    <annotate key="org.freedesktop.policykit.exec.path">/usr/bin/mx-pkexec</annotate>
+    <annotate key="org.freedesktop.policykit.exec.argv1">--qtenv</annotate>
+    <annotate key="org.freedesktop.policykit.exec.allow_gui">true</annotate>
+  </action>
+</policyconfig>

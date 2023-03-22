@@ -1,0 +1,5 @@
+bin/*                   	usr/local/bin
+chroot-rescue-scan.desktop usr/share/applications
+locale/* 			usr/share/locale
+rescuetime-mx.svg			usr/share/icons/hicolor/scalable/apps
+rescuetime-mx.svg	usr/share/themes/icons/48x48/apps

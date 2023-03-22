@@ -1,0 +1,21 @@
+#!/bin/bash
+
+dir=$1
+
+test -d $dir || fatal "Could not find dir: $dir"
+
+fmt="%-8s  %-8s  %-8s %-8s\n"
+#printf "$fmt" DPI  Rows  Height  Width
+
+for img in $(ls $dir | grep "\.png$"); do
+    img=${img#*@}
+    img=${img%.png}
+    img=${img#@}
+    dpi=${img%%-*}
+    img=${img#*-r}
+    rows=${img%%-*}
+    img=${img#*-}
+    width=${img%%x*}
+    height=${img#*x}
+    printf "$fmt" "$dpi" "$rows" "$height" "$width"
+done

@@ -1,0 +1,16 @@
+#!/bin/bash
+
+#DEBHELPER#
+
+# prerm script for apt-notifier
+
+set -e
+
+case "$1" in
+  purge|remove)  
+          rm -r /usr/lib/apt-notifier/modules/__pycache__  2>/dev/null  || :      
+          ;;
+          *)  :
+          ;;  
+esac
+exit 0

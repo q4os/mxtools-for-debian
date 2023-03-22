@@ -1,0 +1,27 @@
+#!/bin/sh
+
+set -e
+
+case "$1" in
+    configure)
+      set +e
+      if [ -n "$2" ] ; then
+        echo "Looks like an upgrade, exiting postinst now ...."
+        exit 0
+      fi
+      sudo cp /usr/share/mx-tweak/55-tweak-override.conf /etc/polkit-1/localauthority.conf.d/
+      set -e
+    ;;
+
+    abort-upgrade|abort-remove|abort-deconfigure)
+    ;;
+
+    *)
+        echo "postinst called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+#DEBHELPER#
+
+exit 0

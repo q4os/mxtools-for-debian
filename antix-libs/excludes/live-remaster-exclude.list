@@ -1,0 +1,62 @@
+#--------------------------------------------------------------------
+# live-remaster-exclude.list
+#
+# Files to be excluded when a live-remaster is created.
+# The original list is available in live-remaster-exclude.orig.
+#--------------------------------------------------------------------
+dev/*
+dev/.[^.]*
+etc/defaultdomain
+etc/fstab.*
+etc/ioctl.save
+etc/mtab
+etc/live/live-dir
+etc/live/protect/remaster
+etc/live/version/rootfs.ver
+etc/mtab
+etc/udev/rules.d/*-persistent-net.rules
+etc/X11/xorg-bus-id
+home/*/.Xauthority
+home/*/.xsession-errors
+home/lost+found
+live
+lost+found
+media/*
+media/.[^.]*
+mnt/*
+root/.bash_history
+root/.dbus
+root/.gconf
+root/.gnome2
+run/*
+run/.[^.]*
+tmp/*
+tmp/.[^.]*
+swapfile
+# usr/lib/python*/*.pyo
+# usr/lib/python*/*/*.pyo
+# usr/lib/python*/*/*/*.pyo
+var/cache/apt-show-versions/*
+var/cache/apt/*.bin
+var/cache/apt/archives/*.deb
+var/cache/brightness-settings-cache/*
+var/cache/debconf/*-old
+var/cache/lightdm
+#var/cache/man/*
+var/cache/samba/browse.dat
+var/lib/apt/lists/*
+var/lib/dbus/machine-id
+var/lib/dhcp/*
+var/lib/dpkg/*-old
+var/lib/lightdm/.Xauthority
+var/lib/lightdm/.cache
+var/lib/nfs/rpc_pipefs/*
+var/lib/sudo/*
+var/lib/udisks/*
+var/lib/urandom/*
+var/log/!(samba)
+var/log/samba/*
+var/mail/*
+var/spool/mail/*
+var/tmp/*
+var/tmp/.[^.]*

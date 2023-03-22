@@ -1,0 +1,486 @@
+#!/bin/bash
+
+ME=${0##*/}
+
+GRUB_DIR=/usr/lib/grub
+MNTPNT=/mnt/$ME
+EFI_DIR=/boot/efi
+NAME="mx-efi"
+
+usage() {
+    local ret=${1:-0}
+
+    cat <<Usage
+Usage:  $ME [options] <root-partition>
+
+Install grub2 bootloader for booting via UEFI.  You need to specify the root
+partition.  You can optionally specify an ESP partition or a drive to find
+the ESP partition.  The default is to use the first ESP partition on the same
+drive as the root partition.
+
+Options
+    -a --arch=<arch>    The architecture of the UEFI: x86_64 or i386
+    -b --bits={32|64}   Convenient way to specify the architecture
+    -c --clean          Unmount everything (see --noclean)
+    -e --esp=<device>   The ESP partition or the drive with the ESP partition
+                        (Defaults to the drive the root partition is on)
+    -f --force          Ignore all warning signs and forge ahead
+                        (best combined with --pretend)
+    -g -grub-dir=<dir>  Directory to find grub files (default: $GRUB_DIR)
+    -h --help           Show this usage
+    -i --info           Just show info about how this system was booted
+    -m --mount          Stop after mounting the partitions
+    -n --name=<name>    The name of directory under /efi for booting
+                        (default $NAME)
+    -N --noclean        Leave everything mounted
+    -p --pretend        Don't run any commands, just show them
+    -q --quiet          Print less
+    -v --verbose        Show commands before running them
+Usage
+
+    exit $ret
+}
+
+takes_param() {
+    case $1 in
+        -arch|-bits|-esp|-grub-dir|-name|[abegn]) return 0 ;;
+    esac
+    return 1
+}
+
+eval_argument() {
+    local arg=$1 val=$2
+        case $arg in
+                -arch|a) arch=$val              ;;
+            -arch=*|a=*) arch=$val              ;;
+                -bits|b) bits=$val              ;;
+            -bits=*|b=*) bits=$val              ;;
+               -clean|c) do_clean=true          ;;
+                 -esp|e) esp_part=${val#/dev/}  ;;
+             -esp=*|e=*) esp_part=${val#/dev/}  ;;
+               -force|f) FORCE=true             ;;
+           --grub-dir|g) GRUB_DIR=$val          ;;
+       --grub-dir=*|g=*) GRUB_DIR=$val          ;;
+                -help|h) usage                  ;;
+                -info|i) do_info; exit 0        ;;
+               -mount|m) ONLY_MOUNT=true        ;;
+                -name|n) NAME=$val              ;;
+            -name=*|n=*) NAME=$val              ;;
+             -noclean|N) NO_CLEAN=true          ;;
+             -pretend|p) PRETEND=true           ;;
+               -quiet|q) QUIET=true             ;;
+             -verbose|v) VERBOSE=true           ;;
+
+             *) fatal "Unknown parameter %s" $(eq -$arg)
+    esac
+}
+
+main() {
+
+    [ $# -eq 0 ] && usage
+
+    local SHORT_STACK="abcefghimnNpqv"
+    local arch bits esp_part root_part mounted do_clean PRETEND VERBOSE
+
+    # Allow options before and after the command
+    read_params "$@"
+    shift $SHIFT
+
+    [ $# -gt 0 ] || fatal "Expected a partition device"
+
+    local root_part=${1#/dev/}
+    shift
+
+    # Allow options before and after the command
+    read_params "$@"
+    shift $SHIFT
+
+    if [ "$do_clean" ]; then
+        clean_up
+        exit 0
+    fi
+
+    [ $# -gt 0 ]                    && fatal "Expected only one partition device. Got: %s" "$(pq $root_part $*)"
+    [ $UID -ne 0 -a -z "$PRETEND" ] && fatal "This progam must be run as root (or in pretend mode)"
+
+    local root_dev=/dev/$root_part
+
+    check_dev $root_dev "Root partition"
+    is_linux $root_dev || fatal "Root partition %s does not appear to be a Linux partition" $(eq $root_dev)
+
+    test -d /sys/firmware/efi || fatal "You must boot via EFI to install EFI bootloader (sorry)"
+
+    #---- get and verify the arch
+    [ ${#bits} -gt 0 -a ${#arch} -gt 0 ] && fatal "Can't specify both --bits and --arch"
+
+    local efi_bits_file=/sys/firmware/efi/fw_platform_size
+    if test -r $efi_bits_file; then
+        read efi_bits 2>/dev/null <$efi_bits_file
+        qsay "%s-bit EFI detected" $efi_bits
+        #[ ${#bits} -gt 0 -o ${#arch} -gt 0 ] && fatal "Can't specify --bits or --arch when bits are automatically detected"
+        : ${bits:=$efi_bits}
+    fi
+
+    case $bits in
+        "")              ;;
+        32) arch=i386    ;;
+        64) arch=x86_64  ;;
+
+         *) fatal "Expected --bits=32 or --bits=64" ;;
+    esac
+
+    if [ ${#arch} -eq 0 ]; then
+        local mach=$(uname -m)
+        case $mach in
+            x86_64) arch=$mach ;;
+              i686) arch=i386   ;;
+                 *) fatal "Unexpected uname -m value: %s" "$(eq $mach)" ;;
+        esac
+    fi
+
+    #---- Find the ESP partition to use
+    : ${esp_part:=$(get_drive $root_part)}
+    check_dev $esp_part "ESP partition/drive"
+    local esp_drive=$(get_drive $esp_part)
+    if [ "$esp_drive" = "$esp_part" ]; then
+        esp_part=$(find_esp $esp_drive)
+        [ ${#esp_part} -eq 0 ] && fatal "No ESP partition found on drive %s" "$(eq $esp_drive)"
+    else
+        check_esp $esp_part
+    fi
+
+    #---- Check the mountpoint ...
+    is_mounted $MNTPNT && fail "Directory $MNTPNT is already a mountpoint"
+    [ "$ONLY_MOUNT" ] || trap clean_up EXIT
+
+    pretend mkdir -p $MNTPNT
+    pretend mount $root_dev $MNTPNT
+
+    pretend mount --bind /sys  $MNTPNT/sys
+    pretend mount --bind /proc $MNTPNT/proc
+    pretend mount --bind /dev  $MNTPNT/dev
+
+    local full_efi_dir=$MNTPNT$EFI_DIR
+
+    pretend mkdir -p $full_efi_dir
+    pretend mount /dev/$esp_part $full_efi_dir
+
+    if [ "$ONLY_MOUNT" ]; then
+        qsay "Stopped after mounting.  Use --clean to umount."
+        exit 0
+    fi
+
+    local xtra_tgz=/live/boot-dev/antiX/xtra.tgz
+    local did_extract=$MNTPNT/root/did-extract-xtra
+    local deb_file=/root/grub-efi-ia32-bin_2.02~beta2-22+deb8u1_amd64.deb
+    if [ -r $xtra_tgz -a ! -e $did_extract ]; then
+        qsay "Extracting $(basename $xtra_tgz) to installed system"
+        pretend tar xzf $xtra_tgz --directory=$MNTPNT
+        test -r $MNTPNT$deb_file && pretend chroot $MNTPNT /usr/bin/dpkg -i $deb_file
+        touch $did_extract
+    fi
+
+
+    local arch_dir=$GRUB_DIR/$arch-efi
+    test -d $MNTPNT$arch_dir || fatal "Could not find directory %s" "$(eq $arch_dir)"
+
+    pretend chroot $MNTPNT /usr/sbin/grub-install --target=$arch-efi --efi-directory=$EFI_DIR --boot-directory=$EFI_DIR --bootloader-id="$NAME" 2>&1
+    pretend chroot $MNTPNT /usr/sbin/grub-mkconfig -o /boot/efi/grub/grub.cfg 2>&1
+
+    clean_up
+    trap "" EXIT
+    exit 0
+}
+
+do_kludges() {
+    local arch=$1 esp_mp=$2
+    local bg_image=/usr/local/share/backgrounds/MX15/grub/Squam_Lake-grub.png
+    if test -r $bg_image; then
+        qsay "Copy $(basename $bg_image) to ESP partition"
+        pretend cp $bg_image $esp_mp/boot/grub/
+    fi
+
+    [ "$arch" = i386 ] || return
+
+    local grub_targ=$esp_mp/boot/grub
+    local grub_sorc=$esp_mp/grub
+
+    if [ -d $grub_sorc -a ! -d $grub_targ ]; then
+        qsay "Copy /grub to /boot/grub on ESP partition"
+        pretend mkdir $(dirname $grub_targ)
+        pretend cp -r $grub_sorc $(dirname $grub_targ)
+    fi
+
+    local efi_live_file=/live/boot-dev/efi/boot/bootia32.efi
+    local efi_targ_file=$esp_mp/efi/$NAME/grubia32.efi
+
+    if [ -r $efi_live_file -a -e $efi_targ_file ]; then
+        qsay "Copy $(basename $efi_file) from Live to /efi/$NAME/$efi_targ_file"
+        pretend cp $efi_targ_file $efi_targ_file.orig
+        pretend cp $efi_live_file $efi_targ_file
+    fi
+
+    # Maybe we only need this one file?!
+    local i386_grub_targ=$esp_mp/boot/grub/i386-efi/grub.cfg
+    local i386_grub_live=/live/boot-dev/boot/grub/i386-efi/grub.cfg
+
+    if [ -e "$i386_grub_live" -a ! -e "$i386_grub_targ" ]; then
+        qsay "Copy i386-efi/grub.cfg to ESP partition"
+        pretend cp $i386_grub_live $i386_grub_targ
+    fi
+
+    return
+
+    # local grub_live_mods=/live/boot-dev/boot/grub/i386-efi
+    # local grub_targ_mods=$esp_mp/boot/grub/i386-efi
+    # if [ ! -e $grub_targ_mods.sav ]; then
+    #     qsay "Copy grub modules from Live to ESP"
+    #     pretend mv $grub_targ_mods $grub_targ_mods.sav
+    #     pretend cp -r $grub_live_mods $(dirname grub_targ_mods)
+    # fi
+}
+
+do_info() {
+    local fmt="$cyan%20s:$white %s$nc\n"
+    printf "$fmt" "kernel version" "$(uname -r)"
+
+    local arch=$(uname -m)
+    case $arch in
+        x86_64) arch="64-bit" ;;
+          i686) arch="32-bit" ;;
+    esac
+
+    printf "$fmt" "kernel architecture" "$arch"
+
+    if test -d /sys/firmware/efi; then
+        local efi_bits_file=/sys/firmware/efi/fw_platform_size
+        if test -r $efi_bits_file; then
+            read efi_bits 2>/dev/null <$efi_bits_file
+            case $efi_bits in
+                32)  printf "$fmt" "booted via" "32-bit UEFI"    ;;
+                64)  printf "$fmt" "booted via" "64-bit UEFI"    ;;
+                64)  printf "$fmt" "booted via" "$efi_bits UEFI" ;;
+            esac
+        else
+            printf "$fmt" "booted via" "UEFI (${err_co}unknown arch$nc)"
+        fi
+    else
+        printf "$fmt" "booted via" "legacy"
+    fi
+}
+
+clean_up() {
+    [ "$NO_CLEAN" ] && return
+    qsay "cleaning up"
+    is_mounted $MNTPNT && pretend umount -R $MNTPNT
+    return 0
+}
+
+is_mounted() {
+    local file=$1
+    cut -d" " -f2 /proc/mounts | grep -q "^$(readlink -f $file)$"
+    return $?
+}
+
+check_dev() {
+    local dev=/dev/${1#/dev/}  label=$2
+    test -e $dev || fatal "$label %s does not exist"        "$(eq $dev)"
+    test -b $dev || fatal "$label %s is not a block device" "$(eq $dev)"
+}
+
+check_esp() {
+    local dev=/dev/${1#/dev/}
+    check_dev $dev "ESP partition"
+    local expr="(c12a7328-f81f-11d2-ba4b-00a0c93ec93b|0xef)$"
+    lsblk --nodeps --noheadings --list --output name,parttype $dev | egrep -q "$expr" \
+        || fatal "%s is not an ESP partition" "$(eq $dev)"
+}
+
+find_esp() {
+    local dev=/dev/${1#/dev/}
+
+    local drive=$(get_drive $dev)
+    [ ${#drive} -gt 0 ] || fatal "No root device name found"
+    test -b /dev/$drive || fatal "Root device %s not found" "$(eq /dev/$drive)"
+
+    local expr="(c12a7328-f81f-11d2-ba4b-00a0c93ec93b|0xef)$"
+    lsblk -nlo name,parttype /dev/$drive | egrep "$expr" | head -n1 | awk '{print $1}'
+}
+
+is_linux() {
+    local drive=${1#/dev/}
+
+    [ ${#drive} -gt 0 ]       || fatal "No device given to is_linux"
+    [ -z "${drive%%*[0-9]}" ] || fatal "is-linux only works on partitions"
+
+    local dev=/dev/$drive
+
+    check_dev $dev "Root partition"
+
+    local FSTYPE PARTTYPE
+    eval $(lsblk -Pno fstype,parttype $dev)
+
+    # See: http://sourceforge.net/p/gptfdisk/code/ci/master/tree/parttypes.cc
+    case $PARTTYPE in
+
+        # Linux data
+        0x83|0fc63daf-8483-4772-8e79-3d69d8477de4) success ;;
+        # Linux swap
+        0x82|0657fd6d-a4ab-43c4-84e5-0933c84b4f4f) success ;;
+             # Linux /home
+             933ac7e1-2eb4-4f13-b844-0e14e2aef915) success ;;
+             # Linux /root x86
+             44479540-f297-41b2-9af7-d131d5f0458a) success ;;
+             # Linux /root x86-64
+             4f68bce3-e8cd-4db1-96e7-fbcaf984b709) success ;;
+          # No part-type or Windows data
+          ""|ebd0a0a2-b9e5-4433-87c0-68b6b72699c7)         ;;
+                                                *) failure ;;
+    esac
+
+    case $FSTYPE in
+        btrfs|ext2|ext3|ext4|jfs|nilfs2) success ;;
+               reiser4|reiserfs|ufs|xfs) success ;;
+                                      *) failure ;;
+    esac
+}
+
+success() { return 0; }
+failure() { return 1; }
+
+
+get_drive() {
+    local drive part=${1##*/}
+    case $part in
+        mmcblk*) echo ${part%p[0-9]}                        ;;
+              *) drive=${part%[0-9]}  ; echo ${drive%[0-9]} ;;
+    esac
+}
+
+fatal() {
+    local fmt=$1
+    shift
+    printf "$warn_co$ME fatal error:$err_co $fmt$nc\n" "$@" >&2
+     [ "$FORCE" ] || exit 2
+}
+
+vsay() {
+    [ "$VERBOSE" -o "$PRETEND" ] && echo "$*"
+}
+
+pretend() {
+    if [ "$PRETEND" ]; then
+        echo "pretend: $@"
+    elif [ "$VERBOSE" ]; then
+        echo "$cyan$@$nc"
+    fi
+
+    [ "$PRETEND" ] && return
+
+    "$@" && return
+
+    local cmnd=$1
+    if [ "$cmnd" = chroot ]; then
+        fatal "Command %s failed inside %s chroot" "$(eq $3)" "$(eq $2)"
+    else
+        fatal "Command %s failed" "$(eq $cmnd)"
+    fi
+}
+
+#-------------------------------------------------------------------------------
+# Send "$@".  Expects
+#
+#   SHORT_STACK               variable, list of single chars that stack
+#   fatal(msg)                routine,  fatal("error message")
+#   takes_param(arg)          routine,  true if arg takes a value
+#   eval_argument(arg, [val]) routine,  do whatever you want with $arg and $val
+#
+# Sets "global" variable SHIFT to the number of arguments that have been read.
+#-------------------------------------------------------------------------------
+read_params() {
+    # Most of this code is boiler-plate for parsing cmdline args
+    SHIFT=0
+    # These are the single-char options that can stack
+
+    local arg val
+
+    # Loop through the cmdline args
+    while [ $# -gt 0 -a ${#1} -gt 0 -a -z "${1##-*}" ]; do
+        arg=${1#-}
+        shift
+        SHIFT=$((SHIFT + 1))
+
+        # Expand stacked single-char arguments
+        case $arg in
+            [$SHORT_STACK][$SHORT_STACK]*)
+                if echo "$arg" | grep -q "^[$SHORT_STACK]\+$"; then
+                    local old_cnt=$#
+                    set -- $(echo $arg | sed -r 's/([a-zA-Z])/ -\1 /g') "$@"
+                    SHIFT=$((SHIFT - $# + old_cnt))
+                    continue
+                fi;;
+        esac
+
+        # Deal with all options that take a parameter
+        if takes_param "$arg"; then
+            [ $# -lt 1 ] && fatal "Expected a parameter after: -$arg"
+            val=$1
+            [ -n "$val" -a -z "${val##-*}" ] \
+                && fatal "Suspicious argument after -$arg: $val"
+            SHIFT=$((SHIFT + 1))
+            shift
+        else
+            case $arg in
+                *=*)  val=${arg#*=} ;;
+                  *)  val="???"     ;;
+            esac
+        fi
+
+        eval_argument "$arg" "$val"
+    done
+}
+
+set_color() {
+    local  e=$(printf "\e")
+      black="$e[0;30m";     blue="$e[0;34m";      green="$e[0;32m";
+       cyan="$e[0;36m";      red="$e[0;31m";     purple="$e[0;35m";
+      brown="$e[0;33m";  lt_gray="$e[0;37m";    dk_gray="$e[1;30m";
+    lt_blue="$e[1;34m"; lt_green="$e[1;32m";    lt_cyan="$e[1;36m";
+     lt_red="$e[1;31m";  magenta="$e[1;35m";     yellow="$e[1;33m";
+      white="$e[1;37m";  rev_red="$e[0;7;31m";       nc="$e[0m";
+        rev="$e[7m";  under_line="$e[4m";          bold="$e[1m";
+
+      say_co=$lt_cyan
+    title_co=$lt_cyan
+      ask_co=$lt_green
+     warn_co=$yellow
+      err_co=$red
+}
+
+qsay() {
+    local fmt=$1
+    shift
+    printf "$cyan$fmt$nc\n" "$@"
+}
+
+eq() { echo "$warn_co$*$err_co" ;}
+
+set_color
+
+# Evaluate redirects RIGHT TO LEFT:
+#
+#  stdout  1 -------.         .----- sed, tee ---> screen
+#                    \       /
+#  stderr  2 ---.     `---- / -------------------> screen
+#                \         /
+#         17      `-------'
+#
+# Note: the two key programs put their normal output on stderr so this is pointless
+#
+# main "$@" 17>&1 1>&2 2>&17 | while read line; do printf "%s\n" "$line" \
+#    | sed -e "/^$/d" -e "s/^/${warn_co}Error: $err_co/" -e "s/$/$nc/" \
+#    | tee -a $log_file; done
+
+main "$@"
+
+exit 0

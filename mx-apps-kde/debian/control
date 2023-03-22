@@ -1,0 +1,56 @@
+Source: mx-apps-kde
+Section: system
+Priority: optional
+Maintainer: Dolphin Oracle <dolphinoracle@gmail.com>
+Build-Depends: debhelper (>=10)
+Standards-Version: 3.9.8
+
+Package: mx-apps-kde
+Architecture: all
+Depends:
+ bash-config,
+ cleanup-notifier-mx, 
+ disk-manager,
+ mx-bootrepair,
+ mx-boot-options,
+ mx-conky,
+ mx-codecs,
+ mx-datetime,
+ mx-docs,
+ mx-network-assistant,
+ mx-packageinstaller,
+ mx-remaster,
+ mx-remastercc,
+ mx-repo-manager,
+ mx-select-sound,
+ mx-samba-config,
+ mx-snapshot,
+ mx-tools,
+ mx-tweak,
+ mx-user,
+ mx-welcome,
+ mx-live-usb-maker,
+ live-kernel-updater,
+ live-usb-maker,
+ ddm-mx,
+ conky-toggle-mx,
+ formatusb,
+ mx-cleanup,
+ quick-system-info-gui,
+ system-keyboard-qt,
+ mx-system-kde
+Breaks: docs-mx,
+ install-meta-mx,
+ installer-mx,
+ remaster-mx,
+ switchuser-mx,
+ user-management-mx
+Replaces: docs-mx,
+ install-meta-mx,
+ installer-mx,
+ remaster-mx,
+ switchuser-mx,
+ user-management-mx
+Description: metapackage for MX applets
+ This metapackage depends on all the MX applets suitable for kde, and helps ease upgrades to new
+ releases of MX Linux. 

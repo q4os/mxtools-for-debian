@@ -1,0 +1,70 @@
+plasma-look-and-feel-theme-mx (23.01.01+deb11u13) stable; urgency=medium
+
+  * MX Tools release
+
+ -- Dolphin Oracle <administrator@localdomain>  Wed, 22 Mar 2023 10:43:58 +0100
+
+plasma-look-and-feel-theme-mx (23.01.01) mx; urgency=medium
+
+  * update previews 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 05 Jan 2023 06:42:41 -0500
+
+plasma-look-and-feel-theme-mx (21.09.03) mx; urgency=medium
+
+  * update window manager theme 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 05 Sep 2021 19:51:20 -0400
+
+plasma-look-and-feel-theme-mx (21.09.02) mx; urgency=medium
+
+  * update color scheme names 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 04 Sep 2021 19:03:13 -0400
+
+plasma-look-and-feel-theme-mx (21.09.01) mx; urgency=medium
+
+  * update themes
+  * add dark color variant 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 02 Sep 2021 21:22:51 -0400
+
+plasma-look-and-feel-theme-mx (21.07.01) mx; urgency=medium
+
+  * update icon theme 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 25 Jul 2021 20:25:21 -0400
+
+plasma-look-and-feel-theme-mx (20.07.05) mx; urgency=medium
+
+  * revised theme
+  * papirus icon
+  * integrated QuarksSplashDark splash theme
+  * now relies on new default panel and default wallpaper setup 
+
+ -- dolphin oracle <dolphin@littlebyte>  Thu, 30 Jul 2020 22:07:23 -0400
+
+plasma-look-and-feel-theme-mx (20.07.04) mx; urgency=medium
+
+  [ fehlix ]
+  * panel max/min width
+
+ -- dolphin oracle <dolphin@littlebyte>  Tue, 14 Jul 2020 20:32:23 -0400
+
+plasma-look-and-feel-theme-mx (20.07.03) mx; urgency=medium
+
+  * adjustments to panel form factor 
+
+ -- dolphin oracle <dolphin@littlebyte>  Tue, 14 Jul 2020 20:32:23 -0400
+
+plasma-look-and-feel-theme-mx (20.07.02) mx; urgency=medium
+
+  * adjust panel size 
+
+ -- dolphin oracle <dolphin@littlebyte>  Tue, 14 Jul 2020 18:36:02 -0400
+
+plasma-look-and-feel-theme-mx (20.07.01) mx; urgency=medium
+
+  * Initial release.
+
+ -- dolphin oracle <dolphinoracle@gmail.com>  Mon, 13 Jul 2020 22:08:41 -0400

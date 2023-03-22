@@ -1,0 +1,769 @@
+#!/bin/bash
+
+#------------------------------------------------------------------------------
+#   People come and go
+#   And forget to close the door
+#   And leave their stains and cigarette butts trampled on the floor
+#   And when they do ...
+#   remaster me, remaster me
+#------------------------------------------------------------------------------
+
+# GETTEXT_KEYWORD="gt"
+# GETTEXT_KEYWORD="pfgt"
+# GETTEXT_KEYWORD="ctitle"
+# GETTEXT_KEYWORD="remaster_error"
+# GETTEXT_KEYWORD="error_box_pf"
+
+# GETTEXT_KEYWORD="fmt_size"
+# GETTEXT_KEYWORD="fmt_any"
+
+: ${USB_DIRTY_BYTES:=20000000}  # Need this small size for the progress bar to work
+unset ORIG_DIRTY_BYTES ORIG_DIRTY_RATIO
+
+# Note: 262144 = 0x40000
+OTHER_OPTS="-b 262144"
+
+DEF_TZ="America/New_York"
+
+# Only needed for the location of the protect files
+source /usr/local/lib/antiX/antiX-get-param.sh
+
+source /usr/local/lib/antiX/antiX-common.sh  "$@"
+
+TITLE="antiX Live Remaster"
+BLURB="$(gt "Create a new compressed file system saving all of the changes you have made to the system.")"
+BLURB="\n$(echo "$BLURB" | fold -s -w 74 | sed 's/^/    /')"
+
+SAFETY_MARGIN=20
+
+EXTRA_USAGE="
+\n[b]$(gt "Extra options for"):[/] [p]$ME[/]
+    -p|--pretend        $(gt "Make a smaller linuxfs.new.  NOT deleted when done.")
+    -t|--title=<[p]title[/]>  $(pfgt "Use %s instead of prompting user for title." "<[p]title[/]>")
+    --general           $(gt "Make a general-purpose remaster.")
+    --personal          $(gt "Make a personalized remaster.")
+"
+
+OPTIONS="
+    p,pretend||PRETEND
+    t,title|o|TITLE
+    general||GENERAL
+    personal||PERSONAL
+"
+
+prep_main() {
+    add_options  "$OPTIONS"
+    read_options "$@"
+    extra_args    0
+
+    SYS_TYPE="LiveUSB/HD"
+    read_conf || read_conf_error "linuxfs"
+
+    BIND_ROOT="/live/.bind-root"
+
+    show_cli_title
+
+    need_root
+    start_logging live-remaster
+    save_log_file
+
+    if [ "$SET_GUI" ]; then
+        which $GUI_TERM &>/dev/null \
+            || error_box_pf "The %s program needs %s to be installed." $ME $GUI_TERM
+    fi
+    trap clean_up EXIT
+    create_lock
+}
+
+main() {
+
+    check_boot_uuid || error_box_pf "Error when checking for %s device"  'live-usb'
+
+    #--- Mount device holding linuxfs if needed
+    mount_if_needed $BOOT_DEV $BOOT_MP
+    make_readwrite $BOOT_MP 2 || error_box_pf "The live file system is read-only.  Cannot remaster."
+
+    _General_="$(gt "General")"
+    _Personal_="$(gt "Personal")"
+
+    if [ "$SET_PERSONAL" ]; then
+        SET_GENERAL=
+    elif [ -z "$SET_GENERAL" ]; then
+        combo_box remaster-type "$_General_!$_Personal_" -a                           \
+            "$TITLE" ""                                                               \
+            "$(pfgt "%s uses your personal settings."  "[b]$_Personal_[/]")"          \
+            "$(pfgt "%s does not." "[b]$_General_[/]")"
+
+        [ "$UI_RESULT" = "$_General_" ] && SET_GENERAL=true
+    fi
+
+    local general_excludes home_opt="empty=/home"
+
+    if [ "$SET_GENERAL" ]; then
+        general_excludes=$(_excludes general-remaster-exclude.list)
+
+    fi
+
+    yes_no_box "" \
+        "$(pfgt "Do you want to save files under %s in the new remaster?" "[f]/home[/]")" \
+        "" \
+            && home_opt=bind=/home
+
+    bg_info_box -o "$PULSATE"                           \
+        ""                                              \
+        "$(gt "Checking for existing files and")"       \
+        "$(gt "Checking if there is enough room ...")"  \
+        ""
+
+    local i2L_opts="--bind-root=$BIND_ROOT --from=/ start $home_opt"
+    [ "$SET_GENERAL" ] && i2L_opts="$i2L_opts general"
+
+    installed-to-live status >> $LOG_FILE
+
+    FORCE_CLEAN=--Force
+    trap local_clean_up EXIT
+    vmsg "installed-to-live $i2L_opts"
+    installed-to-live $i2L_opts || error_box_pf "The %s program was unable to start" installed-to-live
+    FORCE_CLEAN=
+
+    [ "$SET_PRETEND" ] && pretend_excludes="boot bin lib media usr"
+
+    # Expicitly add $(basename $BIND_ROOT) so users don't have to see it
+    # Allow extended globs in the exclude specifications
+    shopt -s extglob
+    excludes="$(remaster_excludes $BIND_ROOT $(basename $BIND_ROOT) $pretend_excludes $home_exclude $general_excludes)"
+    exclude_size="$(du_size $excludes)"
+    shopt -u extglob
+
+    local boot_total=$(all_space  $BOOT_MP)
+    local boot_avail=$(free_space $BOOT_MP)
+
+    local sq_old_size=$(du_size $(readlink -f $SQFILE_FULL))
+    local fs_old_size=$(du_size $SQFS_MP)
+    local fs_new_size=$(du_size $BIND_ROOT)
+
+    local fs_new_size=$(( $fs_new_size - $exclude_size ))
+    local old_rat1000=$((1000 * sq_old_size / fs_old_size))
+
+    local old_comp=$(sqfs_comp_type $(readlink -f $SQFILE_FULL))
+    vmsg "Previous compression type: $old_comp"
+    local lz4_factor gz_factor xz_factor
+    case $old_comp in
+        xz) lz4_factor=167
+            gz_factor=121
+            xz_factor=100
+            if [ $old_rat1000 -gt 345 ]; then
+                qmsg 'Strange, we detected xz compression but the ratio was $old_rat1000/1000 > .345'
+            fi ;;
+
+      gzip) lz4_factor=138
+            gz_factor=100
+            xz_factor=83
+            if [ $old_rat1000 -lt 345 ]; then
+                qmsg 'Strange, we detected gzip compression but the ratio was $old_rat1000/1000 < .345'
+            fi;;
+
+       lz4) lz4_factor=100
+            gz_factor=72
+            xz_factor=60
+            ;;
+
+        # This is a little lame
+        *)  lz4_factor=$((52 * $fs_old_size / $sq_old_size))
+             gz_factor=$((37 * $fs_old_size / $sq_old_size))
+             xz_factor=$((31 * $fs_old_size / $sq_old_size)) ;;
+    esac
+
+    sq_new_size_est=$(( $fs_new_size * $sq_old_size / $fs_old_size))
+    gz_new_size_est=$((sq_new_size_est  *  gz_factor / 100))
+    xz_new_size_est=$((sq_new_size_est  *  xz_factor / 100))
+    lz4_new_size_est=$((sq_new_size_est * lz4_factor / 100))
+
+    safe_estimate_gz=$(($gz_new_size_est + $SAFETY_MARGIN))
+    safe_estimate_xz=$(($xz_new_size_est + $SAFETY_MARGIN))
+    safe_estimate_lz4=$(($lz4_new_size_est + $SAFETY_MARGIN))
+
+    boot_remain_gz=$(($boot_avail - $gz_new_size_est))
+    boot_remain_xz=$(($boot_avail - $xz_new_size_est))
+    boot_remain_lz4=$(($boot_avail - $lz4_new_size_est))
+
+    exclude_size_est=$(( $exclude_size * $sq_old_size / $fs_old_size))
+    main_text=(
+        "$(fmt_size "current linuxfs size" $sq_old_size) ($old_comp)"
+        "$(fmt_size "excluded files est."  $exclude_size_est)"
+        "$(fmt_size "estimated new size"   $lz4_new_size_est) (lz4)"
+        "$(fmt_size "estimated new size"   $gz_new_size_est) (gzip)"
+        "$(fmt_size "estimated new size"   $xz_new_size_est) (xz)"
+        ""
+        "boot device: [f]$BOOT_DEV[/f]"
+        " mounted at: [f]$BOOT_MP[/f]"
+        "  directory: [f]$SQFILE_DIR[/]"
+        ""
+        "$(fmt_size "boot device total" $boot_total)"
+        "$(fmt_size "boot device free"  $boot_avail)"
+        "$(fmt_size "est. remaining"    $boot_remain_lz4) (lz4)"
+        "$(fmt_size "est. remaining"    $boot_remain_gz) (gzip)"
+        "$(fmt_size "est. remaining"    $boot_remain_xz) (xz)"
+    )
+
+    for t in "${main_text[@]}"; do
+        vmsg "$t"
+    done
+
+    leftovers="$SQFILE_NAME.old rootfs.old rootfs.bad $SQFILE_NAME.new $SQFILE_NAME.bad $SQFILE_NAME.tmp"
+
+    BAD_FILES=""
+    for file in $leftovers; do
+        [ -e "$SQFILE_DIR/$file" ] && BAD_FILES="$BAD_FILES $file"
+    done
+
+    kill_bg_info_box
+
+    [ $boot_avail -lt $safe_estimate_xz ] && \
+        error_box_pf "Have: %s MiB available.  Need: %s." "[n]$boot_avail[/]" "[n]$safe_estimate_xz[/]"
+
+    while [ "$BAD_FILES" ]; do
+        yes_no_box                                                        \
+            "$(gt "Leftover files found")"                                \
+            ""                                                            \
+            "$(gt "The following file(s) already exist")"                 \
+            "$(pfgt "in the %s directory:" "[f]$SQFILE_DIR[/]")"          \
+            ""                                                            \
+            "[f]$BAD_FILES[/]"                                            \
+            ""                                                            \
+            "$(gt "They may be left over from a previous remastering.")"  \
+            "$(gt "Do you want to fix this problem now?")"                \
+            "$(gt "(the alternative is to quit now)")"                    \
+            || vexit "at user request"
+
+        for file in $BAD_FILES; do
+            save_or_delete $SQFILE_DIR $file
+        done
+
+        BAD_FILES=""
+        for file in $leftovers; do
+            [ -e "$SQFILE_DIR/$file" ] && BAD_FILES="$BAD_FILES $file"
+        done
+    done
+
+    noisy_yes_no_box                                    \
+        "$(gt "Ready to create a new linuxfs file")"    \
+        "[fixed]"                                       \
+        "${main_text[@]}"                               \
+        "[/]"                                           \
+        "$(gt "Shall we begin?")"                       \
+        || vexit "At user's request"
+
+    if which alsactl &>/dev/null; then
+        vpf "Storing volume settings"
+        HOME=/root alsactl --ignore store
+    fi
+
+    # Make sure the running kernel supports the compression type
+    COMP_TYPE=gzip
+    local   lz4_option="lz4 $(gt "(compresses MUCH faster, boots faster)")"
+    local  gzip_option="gzip $(gt "(compresses faster, boots faster)")"
+    local    xz_option="xz $(gt "(compresses better)")"
+
+    local  lz4_lab="$(pfgt "%s is not supported by this kernel" "[b]lz4[/b]")"
+    local gzip_lab="$(pfgt "%s will take less time" "[b]gzip[/b]")"
+    local   xz_lab="$(pfgt "%s is not supported by this kernel" "[b]xz[/b]")"
+
+    local have_lz4=true  have_xz=true  k_config=/boot/config-$(uname -r)
+    if test -r $k_config; then
+        grep -q "^CONFIG_SQUASHFS_LZ4=y" $k_config || have_lz4=
+        grep -q "^CONFIG_SQUASHFS_XZ=y"  $k_config || have_xz=
+    fi
+
+    local option_list=$gzip_option
+
+    if [ $boot_avail -lt $safe_estimate_lz4 ]; then
+        have_lz4=
+        lz4_lab="$(pfgt "There is not enough space to use %s compression" "[b]lz4[/b]")"
+    fi
+
+    if [ "$have_lz4" ]; then
+        option_list="$lz4_option!$option_list"
+        lz4_lab="$(pfgt "%s will take MUCH less time" "[b]lz4[/b]")"
+        COMP_TYPE=lz4
+    fi
+
+    if [ "$have_xz" ]; then
+        option_list="$option_list!$xz_option"
+        xz_lab="$(pfgt "%s will result in a smaller file" "[b]xz[/b]")"
+    fi
+
+    if [ $boot_avail -ge $safe_estimate_gz ]; then
+        if [ -z "$have_lz4$have_xz" ]; then
+            info_box -c "$(pfgt "This kernel only supports %s compression" "[b]gzip[/b]")"
+            COMP_TYPE=gzip
+        else
+            combo_box compression-type "$option_list"                   \
+                "$TITLE" ""                                             \
+                "$(gt "Please choose the type of compression to use")"  \
+                    "$lz4_lab" \
+                    "$gzip_lab" \
+                    "$xz_lab"
+
+            #UI_RESULT=xz
+            case $UI_RESULT in
+                gzip*) COMP_TYPE="gzip" ;;
+                  xz*) COMP_TYPE="xz"   ;;
+                 lz4*) COMP_TYPE="lz4"  ;;
+            esac
+        fi
+    elif [ $boot_avail -ge $safe_estimate_zx ]; then
+        info_box -c "Must use %s compression due to size constraints" "[b]xz[/b]"
+        COMP_TYPE="xz"
+    else
+        error_box_pf "There is not enough space to do a live-remaster"
+    fi
+
+    OTHER_OPTS="$OTHER_OPTS -comp $COMP_TYPE"
+
+    num_cpu=$(grep -c "^processor\s" /proc/cpuinfo)
+    lim_cpu=$((num_cpu / 2))
+    cpu_ratio="$num_cpu/$num_cpu"
+
+    if [ $num_cpu -gt 1 ] && mksquashfs --help 2>&1 | grep -q -- -processors; then
+        if ! yes_no_box "" \
+            "$(gt "Do you want remaster to use all of the CPUs?")" \
+            "" \
+            "$(gt "This will make the remaster process run as fast as possible.")" \
+            "$(gt "But there is more of a chance your computer will overheat.")"; then
+
+            OTHER_OPTS="$OTHER_OPTS -processors $lim_cpu"
+            cpu_ratio="$lim_cpu/$num_cpu"
+        fi
+    fi
+
+    if [ -z "$SET_TITLE" ]; then
+        get_text title ""                                                \
+            "$(gt "Remaster Version Identification")"                    \
+            ""                                                           \
+            "$(gt "Please enter an (optional) title for this remaster")" \
+            ""
+
+        OPT_TITLE="$UI_RESULT"
+    fi
+    # Make a new version id for the new squashfs to be created
+    local vid_file=${AUFS_VID_FILE#$AUFS_MP}
+    local full_vid_file=$TEMP_DIR/template/$vid_file
+    mkdir -p $(dirname $full_vid_file)
+    cat >> $full_vid_file << Version_Info_End
+$(version_id)
+
+title: $OPT_TITLE
+creation date: $(date +"%e %B %Y %T %Z")
+kernel: $(uname -sr)
+machine: $(uname -m)
+Version_Info_End
+
+    av_file=$AUFS_MP/etc/antix-version
+    [ -r "$av_file" ] && echo "inxi version: $(cat $av_file)" >> $full_vid_file
+
+    installed-to-live add=$TEMP_DIR/template read-only || error_box_pf "The %s program failed to work" installed-to-live
+
+    installed-to-live --verbose status >> $LOG_FILE
+
+    # we create tmp_file and only move it to new_file if everything checks
+    new_file=$SQFILE_FULL.new
+    tmp_file=$SQFILE_FULL.tmp
+
+    # The return code from mksquashfs is stored in ret_file by run-mksquashfs
+    ret_file=$SQFILE_DIR/mksquashfs.ret
+    rm -f $ret_file
+
+    FROM=$BIND_ROOT
+
+    exclude_file=$CONF_DIR/remaster.exclude
+    #lifo_string TO_DELETE $exclude_file
+
+    remaster_excludes "" $(basename $BIND_ROOT) $pretend_excludes $general_excludes | sort -u > $exclude_file
+
+    local cur_tz=$(cat /etc/timezone 2>/dev/null)
+    if [ -L /etc/localtime -a -n "$SET_GENERAL" -a "$cur_tz" != "$DEF_TZ" ]; then
+        echo etc/localtime >> $exclude_file
+    fi
+
+    #--- create the tmp/new squashfs file
+    MKSQ_OPTS="$MKSQ_OPTS $FROM $tmp_file $OTHER_OPTS -wildcards -ef $exclude_file"
+    #MKSQ_OPTS="$FROM $tmp_file"
+    MKSQ_COMMAND="/usr/local/bin/run-mksquashfs $ret_file $MKSQ_OPTS"
+
+    vmsg "mksquashfs $MKSQ_OPTS"
+
+    set_dirty_bytes
+
+    #-jbb restore_live  ???
+
+    #------------------------------------------------------------------------------
+    #
+    #  We launch run-mksquashfs from inside a x-terminal-emulator run in the bg.  We also
+    #  launch a yad dialog in the bg.  We monitor them both in the loop below.  If
+    #  the x-terminal-emulator exits we simply kill the yad dialog.  If the yad dialog exits we
+    #  first launch another yad dialog asking for confirmation.  If confirmed we
+    #  kill the x-terminal-emulator, otherwise we relaunch the original yad dialog.
+    #
+    #------------------------------------------------------------------------------
+
+    T0=$(get_time)
+    if [ "$SET_GUI" ]; then
+        #($GUI_TERM $TERM_TITLE_OPT "$(gt "Remastering -- DO NOT CLOSE")" $TERM_OPTS $MKSQ_COMMAND &>/dev/null)&
+        ($GUI_TERM $TERM_OPTS $MKSQ_COMMAND &>/dev/null)&
+        local term_pid=$!  mksq_pid i
+
+        # Try to get the PID for 3 seconds and then bailout
+        for i in $(seq 1 30); do
+            mksq_pid=$(pgrep run-mksquashfs)
+            [ -n "$mksq_pid" ] && break
+            sleep 0.1
+        done
+        vmsg "pgrep interations: $i"
+        [ -z "$mksq_pid" ] && error_box_pf "Problem starting mksquashfs.  Could not get PID."
+
+        #pgrep -l -P  $mksq_pid; echo
+
+        gui_wait
+
+        while true; do
+
+            if ! [ -d "/proc/$mksq_pid" ]; then
+                finish_remaster
+                [ -n "$GUI_PID" ] && kill -9 $GUI_PID &> /dev/null
+                break
+
+            elif ! [ -d "/proc/$GUI_PID"  ]; then
+                # Stop everything
+                pkill --signal STOP mksquashfs
+
+                yes_no_box -c "$(ctitle "Remaster in Progress")" "$(gt "Do you REALLY want to stop midway?")"
+                local ret=$?
+
+                # Restart everything
+                pkill --signal CONT mksquashfs
+
+                if [ $ret -eq 0 ]; then
+                    pkill mksquashfs
+                    send_sig TERM $mksq_pid
+                    send_sig TERM $term_pid
+
+                    # Kill off our children
+                    pkill -P $$
+
+                    rm -f $tmp_file
+                    sync
+                    sleep 0.1
+
+                    local_clean_up && trap EXIT
+
+                    exit
+                fi
+
+                if ! [ -d "/proc/$mksq_pid" ]; then
+                    GUI_PID=
+                    finish_remaster
+                    break
+                fi
+
+                gui_wait
+            fi
+
+            sleep 0.1
+        done
+
+    else
+    	$MKSQ_COMMAND
+        finish_remaster
+    fi
+
+    info_box -c                                             \
+        "$(gt "Created new compressed filesystem file:")"   \
+        "[f]$new_file[/]"                                   \
+        "[fixed]"                                           \
+        "${main_text[@]}"                                   \
+        "[/]"                                               \
+        "$(gt "The new file should be used automatically the next time you boot.")"            \
+        ""                                                                                     \
+        "$(gt "If there is a problem with the new system:")"                                   \
+        "$(pfgt "Use the %s  boot option to return to the current system."  "[b]rollback[/]")" \
+        "" ""
+
+    #    "[f]$new_file[/]"                                                                      \
+    #    "$(pfgt "size: %s Meg" "[n]$sq_new_size[/]")"                                          \
+    #    "$(pfgt "elapsed time: %s" "[n]$elapsed[/]")"                                          \
+    #    "$(pfgt "processors: %s" "[n]$cpu_ratio[/]")"                                          \
+    #    ""                                                                                     \
+    #    "$(gt "The new file should be used automatically the next time you boot.")"            \
+    #    ""                                                                                     \
+    #    "$(gt "If there is a problem with the new system:")"                                   \
+    #    "$(pfgt "Use the %s  boot option to return to the current system."  "[b]rollback[/]")" \
+    #    "" ""                                                                                  \
+
+    if [ -e $LIVE_DIR/config/persist-save.conf \
+        -o -e $LIVE_DIR/config/persist-root ] && 
+        which persist-makefs &>/dev/null      ; then
+
+	    opts=
+	    [ "$SET_QUIET"  ] && opts=--quit
+	    [ "$SET_NO_LOG" ] && opts="$opts --nolog"
+	    [ "$SET_GUI"    ] || opts="$opts --cli"
+	
+	    if yes_no_box \
+	       "$(gt "Root persistence is enabled")"                \
+	       ""                                                   \
+	       "$(pfgt "Do you want to make a new %s file now?" "[f]rootfs.new[/]")" \
+	       "" ""; then
+	       persist-makefs --rootfs $opts
+	    fi
+    fi
+    LUKS_CLOSE="$CLOSE_LUKS"
+    clean_up
+    exit 0
+    
+}
+
+send_sig() {
+    local pid sig=${1:-TERM} ; shift
+    for pid; do
+        pkill --signal $sig $pid
+        disown $pid     &>/dev/null
+        kill -$sig $pid &>/dev/null
+    done
+}
+
+gui_wait() {
+    local text=(                                    \
+        "$(ctitle "Remaster in progress")"          \
+    ""                                              \
+    "$(gt "please be patient")"                     \
+    "$(gt "(even after it says it is 100% done)")"  \
+    "" )
+
+    # Must call yad directly to get correct PID
+    (/usr/bin/yad $YAD_STD_OPTS                       \
+        --title="$(gt "antiX Remaster in Progress")"  \
+         --width="300"                                \
+         --text="$(center_strings "${text[@]}")"      \
+        --progress --pulsate                          \
+        --button="gtk-cancel:1" 2>/dev/null) &
+    GUI_PID=$!
+    disown $GUI_PID
+}
+
+# Rely on local variables propogating (lazy)
+# This routine should prevent the 3-second dead time before last screen in gui mode
+finish_remaster() {
+    elapsed=$(elapsed $T0)
+
+    restore_dirty_bytes_and_ratio
+
+    qmsg "mksquashfs took $elapsed"
+    qmsg "Please wait for the file system to sync ..."
+    local t1=$(get_hundredths)
+    sync
+    local t2=$(get_hundredths)
+    qmsg "sync took $(to_mins_secs $t1 $t2)"
+
+    [ -f $ret_file ] || remaster_error "Remastering Terminated Early"
+
+    ret_value=$(cat $ret_file)
+    rm -f $ret_file
+
+    [ "$ret_value" = "0" ] || remaster_error "Remastering Failed" "(with an exit code of %s)" "[n]$ret_val[/]"
+
+    [ -f "$tmp_file" ] || error_box_pf "New linuxfs file was not created!"
+
+    sq_new_size=$(du_size $tmp_file)
+
+    mount_squashfs_temp $tmp_file || remaster_error "Could not mount new file as %s!" "("squashfs")"
+
+    mv $tmp_file $new_file
+
+    local state_dir=$(dirname $new_file)/state
+    rm -rf $state_dir.new
+    test -d $state_dir && cp -a $state_dir $state_dir.new
+
+    qmsg 'Making md5 sum ...'
+
+    local md5_file=$SQFILE_FULL.md5.new
+    cat $new_file | md5sum > $md5_file
+    sed -i "s/ .*/  $SQFILE_NAME/" $md5_file
+
+    local_clean_up && trap EXIT
+
+    main_text=(
+        "$(fmt_size "linuxfs size"  $sq_new_size)"
+        "$(fmt_any  "elapsed time"  "$elapsed")"
+        "$(fmt_any  "processors"    $cpu_ratio)"
+        "$(fmt_any  "compression"   $COMP_TYPE)"
+    )
+
+    for t in "${main_text[@]}"; do
+        vmsg "$t"
+    done
+}
+
+remaster_error() {
+    local fmt="$(gettext "$1")" && shift
+    local msg="$(printf "$fmt" "$@")"
+
+    [ "$GUI_PID" ] && kill -9 $GUI_PID &> /dev/null
+    no_yes_box -c                                       \
+        "[e]$(gt "Error")[/]"                           \
+    ""                                                  \
+    "[e]$err_msg[/]"                                    \
+    "$msg"                                              \
+    ""                                                  \
+    "$(gt "Do you want to save the incomplete file?")"  \
+    "([f]$SQFILE_NAME.tmp[/])"                          \
+    || rm -f $tmp_file
+    exit 2
+}
+
+local_clean_up() {
+    # FIXME?
+    echo "local clean up"
+
+    restore_dirty_bytes_and_ratio
+
+    installed-to-live $FORCE_CLEAN cleanup
+    clean_up
+    return 0
+}
+
+is_xz_squashfs() {
+    local file=$1
+    dd if="$file" bs=1 count=200 2>/dev/null | strings | grep -q 7zXZ
+    return $?
+}
+
+sqfs_comp_type() {
+    local file=$1
+    comp_num=$(echo $(dd if="$file" bs=1 skip=20 count=2 status=none | od -An -tdI))
+    #echo "comp_num: >$comp_num<" >&2
+    case $comp_num in
+        1) echo gzip    ;;
+        2) echo lzma    ;;
+        3) echo lzo     ;;
+        4) echo xz      ;;
+        5) echo lz4     ;;
+        *) echo unknown ;;
+    esac
+}
+
+#  From: https://superuser.com/questions/919025/what-was-the-squashfs-compression-method
+#  ╔═══╦════════════════════╦════════════════════╗
+#  ║ # ║ Compression Method ║ Compatible Version ║
+#  ╠═══╬════════════════════╬════════════════════╣
+#  ║ 1 ║ gzip               ║ 1.0 and newer      ║
+#  ║ 2 ║ lzma               ║ 4.1 and newer      ║
+#  ║ 3 ║ lzo                ║ 4.1 and newer      ║
+#  ║ 4 ║ xz                 ║ 4.2 and newer      ║
+#  ║ 5 ║ lz4                ║ 4.3 and newer      ║
+#  ╚═══╩════════════════════╩════════════════════╝
+
+to_mins_secs() {
+    local dt=$1
+    [ "$2" ] && dt=$(($2 - dt))
+    if [[ $dt -lt 6000 ]]; then
+        printf "%03d" $dt | sed -r 's/(..)$/.\1/'
+        printf " secs"
+        return
+    fi
+    local mins=$((dt / 6000))
+    local hunds=$((dt - 6000 * mins))
+    local secs=$(printf "%04d" "$hunds" | sed -r 's/(..)$/.\1/')
+    printf "%d:%s  mins:secs" "$mins" "$secs"
+}
+
+get_hundredths() { cut -d" " -f22 /proc/self/stat; }
+
+#------------------------------------------------------------------------------
+# This makes the transfers a bit faster and makes the progress bars work.
+#------------------------------------------------------------------------------
+set_dirty_bytes() {
+    local bytes=${1:-$USB_DIRTY_BYTES}
+    ORIG_DIRTY_RATIO=$(sysctl -n vm.dirty_ratio)
+    ORIG_DIRTY_BYTES=$(sysctl -n vm.dirty_bytes)
+    sysctl vm.dirty_bytes=$bytes >> $LOG_FILE
+}
+
+#------------------------------------------------------------------------------
+# Restore to the original values
+#------------------------------------------------------------------------------
+restore_dirty_bytes_and_ratio() {
+    [ "${ORIG_DIRTY_BYTES:-0}" -ne 0 ] && sysctl vm.dirty_bytes=$ORIG_DIRTY_BYTES >> $LOG_FILE
+    [ "${ORIG_DIRTY_RATIO:-0}" -ne 0 ] && sysctl vm.dirty_ratio=$ORIG_DIRTY_RATIO >> $LOG_FILE
+    unset ORIG_DIRTY_BYTES ORIG_DIRTY_RATIO
+}
+
+#------------------------------------------------------------------------------
+#
+#------------------------------------------------------------------------------
+check_boot_uuid() {
+    local uuid_dev=$(blkid -U "$BOOT_UUID" -c /dev/null)
+    if [ -n "$uuid_dev" ]; then
+        BOOT_DEV="$uuid_dev"
+        return 0
+    fi
+
+    if [ "$ENCRYPTED" ]; then
+        local crypt_dev=$(blkid -U "$CRYPT_UUID" -c /dev/null)
+        [ -z "$crypt_dev" ] && error_box \
+            "$(pf $"The encrypted partition with UUID %s was not found" "[n]$CRYPT_UUID[/]")" \
+            $"Please plug in the live-usb device and try again"
+
+        local crypt_name=$ME
+        if [ -z "$SET_GUI" ]; then
+            echo "Encrypted live-usb detected"
+            echo "You will be asked to enter the passphrase below"
+            cryptsetup open --type luks $crypt_dev $crypt_name || error_box \
+                "$(pf $"Failed to open the encrypted partition")"
+        else
+            local try max_try=3 fail
+            for try in $(seq 1 $max_try); do
+                get_password "" ""                                        \
+                $"Encrypted live-usb detected"                            \
+                ""                                                        \
+                $"Be sure to set the keyboard layout to English"          \
+                ""                                                        \
+                "$(pf $"This is try %s out of $s" $try $max_try)"         \
+                ""                                                        \
+                $"Please enter the passphrase" \
+                ""
+
+                fail=
+
+                printf "$UI_RESULT" |  cryptsetup open --type luks $crypt_dev $crypt_name -d - && break
+
+                fail=true
+
+                warn_box $"That passphrase did not match"    \
+                         ""                                  \
+                         $"Please try again"
+            done
+
+            [ "$fail" ] && error_box \
+                "$(pf $"Passphrase failed to match after %s attempts" $max_try)"
+        fi
+
+        CLOSE_LUKS="$crypt_name"
+        BOOT_DEV=/dev/mapper/$crypt_name
+
+        return 0
+    fi
+
+    [ -z "$uuid_dev" ] &&  error_box \
+        "$(pf $"The persistence device with UUID %s was not found" "[n]$PERSIST_UUID[/]")" \
+        "$(pf $"Please plug in the persistence device and try again")"
+
+    vpf "Using device %s with UUID %s" "[n]$uuid_dev[/]" "[n]$PERSIST_UUID[/]"
+    PERSIST_DEV=$uuid_dev
+}
+
+
+
+prep_main "$@"
+
+main

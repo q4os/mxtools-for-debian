@@ -1,0 +1,16 @@
+<RCC>
+    <qresource prefix="/">
+        <file>images/filesave.png</file>
+        <file>images/filenew.png</file>
+        <file>images/reload.png</file>
+        <file>images/exit.png</file>
+        <file>images/editcut.png</file>
+        <file>images/editcopy.png</file>
+        <file>images/editpaste.png</file>
+        <file>images/editdelete.png</file>
+        <file>images/edit_small.png</file>
+        <file>images/undo_small.png</file>
+        <file>images/view_text.png</file>
+        <file>images/job-scheduler.svg</file>
+    </qresource>
+</RCC>

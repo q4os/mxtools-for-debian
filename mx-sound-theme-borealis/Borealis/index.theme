@@ -1,0 +1,6 @@
+[Sound Theme]
+Name=Borealis
+Directories=stereo
+
+[stereo]
+OutputProfile=stereo

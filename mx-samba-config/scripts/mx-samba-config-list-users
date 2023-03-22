@@ -1,0 +1,6 @@
+#!/bin/bash
+
+#list users for mx-samba-config
+
+/usr/bin/pdbedit --list
+

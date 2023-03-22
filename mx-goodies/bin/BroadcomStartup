@@ -1,0 +1,178 @@
+#!/bin/bash
+
+version="BroadcomStartup-1.4 (Jun. 28, 2016)"
+
+# Check that user is root.
+[ $(id -u) -eq 0 ] || { echo -e $"\n\t You need to be root!\n" ; exit 1 ; }
+
+show_help () {
+	printf "$help_text"
+	exit 0
+}
+
+show_version () {
+	printf "\n$version\n\n"
+	exit 0
+}
+
+help_text="
+	Usage: `basename $0 | cut -f1 -d_`
+
+	The `basename $0 | cut -f1 -d_` script removes the b43, b43legacy and b44 blacklist entries
+	for Broadcom devices known not to work with the broadcom-sta wl module.
+
+	With the exception of the --help and --version options, the `basename $0 | cut -f1 -d_`
+	script takes no arguments.
+
+
+	valid options:
+
+		-h, --help	show this help text
+
+		-v, --version	display the version information
+
+"
+
+while [[ $1 == -* ]]; do
+	case "$1" in
+
+		-h|--help)
+			show_help ;;
+
+		-v|--version)
+                        show_version ;;
+
+		*)
+			printf "\t invalid option: $1 \n\n"
+			printf "\t Try:  $0 -h for full help. \n\n"
+			exit 1 ;;
+    esac
+done
+
+b43Unblacklist()
+{
+if [ -f /etc/modprobe.d/broadcom-sta-dkms.conf ]; then
+  sed -i 's/blacklist b43$/#blacklist b43/;s/blacklist bcma/#blacklist bcma/;s/blacklist ssb/#blacklist ssb/' /etc/modprobe.d/broadcom-sta-dkms.conf
+  sed -i -e "\$ablacklist wl" /etc/modprobe.d/broadcom-sta-dkms.conf
+
+  [ -x /etc/init.d/network-manager ] && service network-manager stop
+  modprobe -r wl cfg80211
+  modprobe b43
+  [ -x /etc/init.d/network-manager ] && service network-manager start
+  sleep 2  #(small delay and the networks show up)
+  pkill wpa_supplicant
+
+fi
+}
+
+b43legacyUnblacklist()
+{
+if [ -f /etc/modprobe.d/broadcom-sta-dkms.conf ]; then
+  sed -i 's/blacklist b43legacy$/#blacklist b43legacy/;s/blacklist ssb/#blacklist ssb/' /etc/modprobe.d/broadcom-sta-dkms.conf
+  sed -i -e "\$ablacklist wl" /etc/modprobe.d/broadcom-sta-dkms.conf
+
+  [ -x /etc/init.d/network-manager ] && service network-manager stop
+  modprobe -r wl cfg80211
+  modprobe b43legacy
+  [ -x /etc/init.d/network-manager ] && service network-manager start
+  sleep 2  #(small delay and the networks show up)
+  pkill wpa_supplicant
+
+fi
+}
+ 
+b44Unblacklist()
+{
+if [ -f /etc/modprobe.d/broadcom-sta-dkms.conf ]; then
+  sed -i 's/blacklist b44$/#blacklist b44/;s/blacklist ssb/#blacklist ssb/' /etc/modprobe.d/broadcom-sta-dkms.conf
+  sed -i -e "\$ablacklist wl" /etc/modprobe.d/broadcom-sta-dkms.conf
+
+  [ -x /etc/init.d/network-manager ] && service network-manager stop
+
+  modprobe b44
+  [ -x /etc/init.d/network-manager ] && service network-manager start
+  sleep 2  #(small delay and the networks show up)
+  pkill wpa_supplicant
+
+fi
+}
+
+if [ -e /etc/bcm-ckd ]; then
+  :
+
+else
+
+  touch /etc/bcm-ckd
+
+  #test to see if a broadcom wireless internet device is present
+  lspci -n | grep -E -q '^[^[:space:]]+\.0[[:space:]]+(0280)+(:)+[[:space:]]+(14e4)'
+  if [ "$?" -eq 0 ]; then
+    case $(lspci -n | grep -E '^[^[:space:]]+\.0[[:space:]]+(0280)+(:)+[[:space:]]+(14e4)' | grep -Eio '[a-f0-9]{4}:[a-f0-9]{4}' | grep -Eio [a-f0-9]{4}$ | tr '[A-Z]' '[a-z]') in
+
+      4307|4318|4319|4321|4322|4350|43a9|43aa|a8d6|a8db) b43Unblacklist
+                                                         ;;
+
+                                         4311|4312|4328) b43Unblacklist
+                                                         ;;
+
+                                         4301|4306|4325) b43legacyUnblacklist
+                                                         ;;
+
+                                                   4320) #test to see if BCM4306/2 or BCM4306/3
+
+                                                         #assuming that the first line of the lspci -vnn report for a BCM4306/2 device ends with "(rev 02)", can someone verify?
+                                                         lspci -vnn -d 14e4:4320 | head -n1 | cut -f2- -d] | cut -c3- | grep -q BCM4306.*"(rev 02)$"
+                                                         if [ "$?" -eq 0 ]; then
+                                                           b43legacyUnblacklist
+                                                         fi
+
+                                                         #assuming that the first line of the lspci -vnn report for a BCM4306/3 device ends with "(rev 03)", can someone verify?
+                                                         lspci -vnn -d 14e4:4320 | head -n1 | cut -f2- -d] | cut -c3- | grep -q BCM4306.*"(rev 03)$"
+                                                         if [ "$?" -eq 0 ]; then
+                                                           b43Unblacklist
+                                                         fi
+                                                         ;;
+
+                                                   4324) #test to see if BCM4306 or BCM4306/6
+
+                                                         #assuming that the first line of the lspci -vnn report for a BCM4306 device ends with "[14e4:4324]", can someone verify?
+                                                         lspci -vnn -d 14e4:4324 | head -n1 | cut -f2- -d] | cut -c3- | grep -q BCM4306.*"\[14e4:4324\]$"
+                                                         if [ "$?" -eq 0 ]; then
+                                                           b43legacyUnblacklist
+                                                         fi
+
+                                                         #assuming that the first line of the lspci -vnn report for a BCM4306/6 device ends with "(rev 06)", can someone verify?
+                                                         lspci -vnn -d 14e4:4324 | head -n1 | cut -f2- -d] | cut -c3- | grep -q BCM4306.*"(rev 06)$"
+                                                         if [ "$?" -eq 0 ]; then
+                                                           b43Unblacklist
+                                                         fi
+                                                         ;;
+
+                                                      *) #misc type of broadcom device that we don't know what to do with, so do nothing
+                                                         :
+                                                         ;;
+    esac
+  else
+    #broadcom wireless device not found, so do nothing
+    :
+  fi
+
+
+  #test to see if a broadcom wired internet device is present
+  lspci -n | grep -E -q '^[^[:space:]]+\.0[[:space:]]+(0200)+(:)+[[:space:]]+(14e4)'
+  if [ "$?" -eq 0 ]; then
+    case $(lspci -n | grep -E '^[^[:space:]]+\.0[[:space:]]+(0200)+(:)+[[:space:]]+(14e4)' | grep -Eio '[a-f0-9]{4}:[a-f0-9]{4}' | grep -Eio [a-f0-9]{4}$ | tr '[A-Z]' '[a-z]') in
+
+                                         170c|4401|4402) b44Unblacklist
+                                                         ;;
+
+                                                      *) #misc type of broadcom wired internet device that we don't know what to do with, so do nothing
+                                                         :
+                                                         ;;
+    esac
+  else
+    #broadcom wired internet device not found, so do nothing
+    :
+  fi
+
+fi

@@ -1,0 +1,318 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the apt-notifier package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+# Translators:
+# James Bowlin <BitJam@gmail.com>, 2022
+# anticapitalista <anticapitalista@riseup.net>, 2022
+# Tamas Szarvas <szarvy@gmail.com>, 2022
+# Pál András Ciocan (Andris) <csokan.andras87@protonmail.ch>, 2022
+# Feri, 2022
+# 
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: apt-notifier\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-01-28 02:38+0100\n"
+"PO-Revision-Date: 2017-05-11 01:14+0000\n"
+"Last-Translator: Feri, 2022\n"
+"Language-Team: Hungarian (https://www.transifex.com/anticapitalista/teams/10162/hu/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: hu\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "$count new updates available"
+msgstr "$count frissítés érhető el"
+
+msgid "0 updates available"
+msgstr "0 frissítés érhető el"
+
+msgid "1 new update available"
+msgstr "1 frissítés érhető el"
+
+msgid "About"
+msgstr "Névjegy"
+
+msgid "About MX Updater"
+msgstr "MX frissítéskezelő névjegye"
+
+msgid "Auto-update"
+msgstr "Automatikus-frissítés"
+
+msgid "Auto-update dpkg log(s)"
+msgstr "Automatikus-frissítés dpkg napló(k)"
+
+msgid "Auto-update log(s)"
+msgstr "Automatikus-frissítés napló(k)"
+
+msgid "Automatically answer 'yes' to all prompts during full/basic upgrade"
+msgstr "Automatikus 'Igen' válasz minden kérdésre a teljes/alap frissítésnél"
+
+msgid "Automatically answer 'yes' to all prompts during upgrade"
+msgstr "Automatikus 'Igen' válasz minden kérdésre a frissítésnél"
+
+msgid "Cancel"
+msgstr "Mégsem"
+
+msgid "Changelog"
+msgstr "Változások listája"
+
+msgid "Check for Updates"
+msgstr "Frissítések keresése"
+
+msgid "Close"
+msgstr "Bezárás"
+
+msgid "For a less detailed view see 'Auto-update dpkg log(s)' or 'History'."
+msgstr ""
+"Kevésbé részletes nézethez lásd az 'Automatikus-frissítés dpkg napló(k)' "
+"vagy 'Történet' résznél."
+
+msgid "Hide until updates available"
+msgstr "Elrejtés, amíg lesz elérhető frissítés"
+
+msgid "History"
+msgstr "Frissítési előzmények"
+
+msgid "Icons"
+msgstr "Ikonok"
+
+msgid "Left-click behaviour   (when updates are available)"
+msgstr "Bal egérgomb kattintás (amikor frissítések érhetőek el)"
+
+msgid "License"
+msgstr "Licenc"
+
+msgid "MX Auto-update  --  unattended-upgrades dpkg log viewer"
+msgstr ""
+"MX Automatikus-frissítéskezelő -- felügyeletlen-frissítések dpkg napló "
+"megjelenítő"
+
+msgid "MX Auto-update  --  unattended-upgrades log viewer"
+msgstr ""
+"MX Automatikus-frissítéskezelő -- felügyeletlen-frissítések napló "
+"megjelenítő"
+
+msgid "MX Package Installer"
+msgstr "MX csomagtelepítő"
+
+#. The autostart desktop entry name will be shown within the list of autostart
+#. entries.
+#. The desktop entry name will be displayed within the menu.
+msgid "MX Updater"
+msgstr "MX frissítéskezelő"
+
+msgid "MX Updater Help"
+msgstr "MX frissítéskezelő súgó"
+
+msgid "MX Updater preferences"
+msgstr "MX frissítéskezelő beállításai"
+
+msgid "MX Updater--View and Upgrade, previewing: basic upgrade"
+msgstr ""
+"MX frissítéskezelő--Megtekintés és frissítés, előnézet: alap frissítés"
+
+msgid "MX Updater--View and Upgrade, previewing: full upgrade"
+msgstr ""
+"MX frissítéskezelő--Megtekintés és frissítés, előnézet: teljes frissítés"
+
+msgid "No logs found."
+msgstr "Naplók nem találhatók."
+
+msgid "No unattended-upgrades dpkg log(s) found."
+msgstr "Felügyeletlen-frissítés dpkg napló(k) nem található(k)."
+
+msgid "No updates available"
+msgstr "Nincs elérhető frissítés"
+
+msgid "Other options"
+msgstr "Egyéb beállítások"
+
+msgid "Preferences"
+msgstr "Beállítások"
+
+msgid "Press 'h' for help, 'q' to quit"
+msgstr "Nyomjon 'h'-t a segítséghez, 'q'-t a kilépéshez"
+
+msgid "Quit"
+msgstr "Kilépés"
+
+msgid "Reload"
+msgstr "Újratöltés"
+
+msgid ""
+"Reload the package information to become informed about new, removed or "
+"upgraded software packages. (apt-get update)"
+msgstr ""
+"Csomaginformációk újratöltése, új, eltávolított vagy frissített csomagok "
+"kereséséhez. (apt-get update)"
+
+msgid "Restart MX Updater"
+msgstr "MX Frissítéskezelő újraindítása"
+
+msgid "Running apt-get autoremove, if you are unsure type 'n'."
+msgstr ""
+"apt-get autroremove futtatása, ha nem biztos benne, nyomja meg az 'n'-t."
+
+msgid ""
+"Switches the type of Upgrade that will be performed, alternating back and "
+"forth between 'full upgrade' and 'basic upgrade'."
+msgstr ""
+"A végrehajtandó frissítés típusát választja ki, a 'teljes frissítés' és az "
+"'alap frissítés' között váltogatva."
+
+msgid "Synaptic Help"
+msgstr "Synaptic súgó"
+
+msgid "Tray applet to notify of system and application updates"
+msgstr "Rendszer és alkalmazás frissítésekről értesítő tálca alkalmazás"
+
+msgid "Unattended-upgrades"
+msgstr "Felügyeletlen-frissítések"
+
+msgid "Unneeded packages are installed that can be removed."
+msgstr "Szükségtelen telepített csomagok eltávolíthatók."
+
+msgid "Updates"
+msgstr "Frissítések"
+
+msgid "Upgrade mode"
+msgstr "Frissítési mód"
+
+msgid "Upgrade using Synaptic"
+msgstr "Frissítés Synaptic használatával"
+
+msgid "Using basic upgrade (not recommended)"
+msgstr "Alap frissítés használata (nem ajánlott)"
+
+msgid "Using full upgrade"
+msgstr "Teljes frissítés használata"
+
+msgid "View and Upgrade"
+msgstr "Megtekintés és frissítés"
+
+msgid "You have $count new updates available"
+msgstr "$count új frissítés érhető el"
+
+msgid "You have 1 new update available"
+msgstr "1 új frissítés érhető el"
+
+#. TRANSLATORS: Fill in all plural forms. The parenthesized expression '{num}'
+#. is replaced by the actual number of updates available at runtime.
+#. For the singular form, you can replace '{num}' with 'one'.
+#. Example with 2 plural forms:
+#. msgstr[0] -> singular form: use 'one new update' or '{num} new update'.
+#. msgstr[1] -> plural form: use '{num} new updates'.
+#, python-brace-format
+msgid "You have {num} new update available"
+msgid_plural "You have {num} new updates available"
+msgstr[0] "{num} új frissítés érhető el"
+msgstr[1] "{num} új frissítés érhető el"
+
+msgid "automatically close terminal window when full/basic upgrade complete"
+msgstr ""
+"terminál ablak automatikus bezárása a teljes/alap frissítés végeztével"
+
+msgid "automatically close terminal window when upgrade complete"
+msgstr "terminál ablak automatikus bezárása a frissítés végeztével"
+
+msgid "basic upgrade"
+msgstr "alap frissítés"
+
+msgid "basic upgrade complete (or was canceled)"
+msgstr "alap frissítés kész (vagy megszakítva)"
+
+msgid "check for autoremovable packages after full/basic upgrade"
+msgstr ""
+"automatikusan eltávolítható csomagok keresése teljes/alap frissítés után"
+
+msgid "classic"
+msgstr "klasszikus"
+
+msgid "full upgrade"
+msgstr "teljes frissítés"
+
+msgid "full upgrade   (recommended)"
+msgstr "teljes frissítés (ajánlott)"
+
+msgid "full upgrade complete (or was canceled)"
+msgstr "teljes frissítés kész (vagy megszakítva)"
+
+msgid "opens MX Updater 'View and Upgrade' window"
+msgstr "MX frissítéskezelő 'Megtekintés és frissítés' ablakának megnyitása"
+
+msgid "opens Synaptic"
+msgstr "Synaptic megnyitása"
+
+msgid "press any key to close"
+msgstr "nyomjon meg egy billentyűt a bezáráshoz"
+
+msgid "press any key to stop automatic closing"
+msgstr "nyomjon meg egy billentyűt az automatikus bezárás megakadályozásához"
+
+msgid "pulse"
+msgstr "pulse"
+
+msgid "start MX Updater at login"
+msgstr "MX Frissítéskezelő indítása bejelentkezéskor"
+
+msgid "switch to basic upgrade"
+msgstr "váltás alap frissítésre"
+
+msgid "switch to full upgrade"
+msgstr "váltás teljes frissítésre"
+
+msgid "this terminal window can now be closed"
+msgstr "ez a terminálablak már bezárható"
+
+msgid "update automatically   (will not add new or remove existing packages)"
+msgstr ""
+"automatikus frissítés (nem fog új csomagot hozzáadni vagy meglévőt "
+"eltávolítani)"
+
+msgid "upgrade"
+msgstr "frissítés"
+
+msgid "use desktop notifications"
+msgstr "asztali értesítések használata"
+
+msgid "use transparent interior for no-updates wireframe"
+msgstr "átlátszó belső használata a nincs-frissítés drótvázhoz"
+
+msgid "wireframe"
+msgstr "drótváz"
+
+#. TRANSLATORS: Fill in all plural forms. The parenthesized expression '{num}'
+#. is replaced by the actual number of updates available at runtime.
+#. For the singular form, you can replace '{num}' with 'one'.
+#. Example with 2 plural forms:
+#. msgstr[0] -> singular form: use 'one new update' or '{num} new update'.
+#. msgstr[1] -> plural form: use '{num} new updates'.
+#, python-brace-format
+msgid "{num} new update available"
+msgid_plural "{num} new updates available"
+msgstr[0] "{num} új frissítés érhető el"
+msgstr[1] "{num} új frissítés érhető el"
+
+#. TRANSLATORS:
+#. This autostart desktop entry comment will be shown within 'Session and
+#. Startup' (Autostart).
+msgid "An applet to show updates"
+msgstr "Tálca alkalmazás frissítések megjelenítésére"
+
+#. TRANSLATORS:
+#. This desktop entry comment will be shown within the menu.
+msgid "Re-enable MX Updater icon even if no updates available"
+msgstr ""
+"Újból bekapcsolja az MX frissítéskezelő ikont, még akkor is, ha jelenleg "
+"nincs elérhető frissítés"
+
+msgid "Enable Auto-update"
+msgstr "Automatikus-frissítés engedélyezése"
+
+msgid "Disable Auto-update"
+msgstr "Automatikus-frissítés kikapcsolása"

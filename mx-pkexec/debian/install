@@ -1,0 +1,6 @@
+LICENSE				usr/share/doc/mx-pkexec
+mx-pkexec				usr/bin
+org.mxlinux.pkexec.mx-pkexec.policy usr/share/polkit-1/actions
+su-to-rootrc    etc
+wrapper/* usr/local/bin
+bash-completion/* usr/share/bash-completion/completions

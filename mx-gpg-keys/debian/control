@@ -1,0 +1,12 @@
+Source: mx-gpg-keys
+Section: admin
+Priority: optional
+Maintainer: dolphin oracle (dolphin) <dolphinoracle@gmail.com>
+Build-Depends: debhelper (>=11),
+Standards-Version: 3.9.5
+Vcs-Git: git://github.com/MX-Linux/mx-gpg-keys
+
+Package: mx-gpg-keys
+Architecture: all
+Description: public gpg keys for iso verification and alert messages
+ public gpg keys for iso verification and alert messages

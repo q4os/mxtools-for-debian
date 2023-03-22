@@ -1,0 +1,13 @@
+Source: desktop-defaults-mx-applications
+Section: system
+Priority: optional
+Maintainer: dolphinoracle <dolphinoracle@gmail.com>
+Build-Depends: debhelper (>= 9.20120115)
+Standards-Version: 3.9.4
+Homepage: http://antix.mepis.org
+
+Package: desktop-defaults-mx-applications
+Architecture: all
+Breaks:  desktop-defaults-xfce-mx17 (<< 0.7.17.9)
+Replaces: desktop-defaults-xfce-mx17 (<< 0.7.17.9)
+Description: desktop applications defaults for MX Linux

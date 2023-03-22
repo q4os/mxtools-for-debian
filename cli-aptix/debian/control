@@ -1,0 +1,12 @@
+Source: cli-aptix
+Section: system
+Priority: optional
+Maintainer: anticapitalista <anticapitalista@riseup.net>
+Build-Depends: debhelper (>= 9.20120115)
+Standards-Version: 3.9.8
+Homepage: https://gitlab.com/antiX-Linux/cli-aptiX
+
+Package: cli-aptix
+Architecture: all
+Description: cli apt installer tool.
+

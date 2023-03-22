@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=MX Viewer
+Comment=Basic document viewer and browser
+Exec=mx-viewer %U
+Icon=mx-viewer
+NoDisplay=false
+Categories=Qt;Network;Utilities;
+Type=Application
+

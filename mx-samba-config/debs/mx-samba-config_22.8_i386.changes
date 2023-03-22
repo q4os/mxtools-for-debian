@@ -1,0 +1,25 @@
+Format: 1.8
+Date: Wed, 10 Aug 2022 21:23:46 -0400
+Source: mx-samba-config
+Binary: mx-samba-config
+Architecture: i386
+Version: 22.8
+Distribution: mx
+Urgency: medium
+Maintainer: Adrian <adrian@mxlinux.org>
+Changed-By: Adrian <adrian@mxlinux.org>
+Description:
+ mx-samba-config - GUI for managing Samba shares and users
+Changes:
+ mx-samba-config (22.8) mx; urgency=medium
+ .
+   * Fix adding user
+Checksums-Sha1:
+ fe432c818933b8df27ee9b25c5b3c12e99313994 10054 mx-samba-config_22.8_i386.buildinfo
+ c63994c433bfb83174683c4e3df5363ea18002c1 78304 mx-samba-config_22.8_i386.deb
+Checksums-Sha256:
+ 8cd24d0ea612b7c9e8bd16653e899528b333f34028c2d39869d74362dd9a0b98 10054 mx-samba-config_22.8_i386.buildinfo
+ 69f98b6f2bb1313257e9e771754c37397d55e10d3c8191d4830e47fb74ca07c4 78304 mx-samba-config_22.8_i386.deb
+Files:
+ c6e93f5ea6fadb66744c940a767b6f7f 10054 admin optional mx-samba-config_22.8_i386.buildinfo
+ 878f0b34e1f0e065cb18398b96d0342c 78304 admin optional mx-samba-config_22.8_i386.deb

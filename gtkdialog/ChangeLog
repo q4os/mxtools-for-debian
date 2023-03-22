@@ -1,0 +1,1100 @@
+Please see NEWS for a summary of changes since the last release suitable
+for announcements.
+
+* Sun Jan 6 2013 Thunor <thunorsif@hotmail.com>
+- Version 0.8.3 released (r502)
+- Finished the Pfeme example application.
+
+* Mon Dec 10 2012 Thunor <thunorsif@hotmail.com>
+- Corrected to backticks and tested with dash all of the examples.
+  Those that require bash also use bash where necessary within actions.
+
+* Sun Dec 9 2012 Thunor <thunorsif@hotmail.com>
+- Corrected to backticks and tested with dash all examples up to
+  playmusic (so far show_and_hide progressbar with dash is unstable!).
+
+* Sat Dec 8 2012 Thunor <thunorsif@hotmail.com>
+- Corrected to backticks and tested with dash all examples up to
+  miscellaneous.
+
+* Thu Dec 6 2012 Thunor <thunorsif@hotmail.com>
+- Corrected to backticks and tested with dash all examples up to
+  menuitemseparator.
+
+* Thu Dec 6 2012 Thunor <thunorsif@hotmail.com>
+- Corrected to backticks and tested with dash all examples up to frame.
+- Added support for break i.e. don't process any more actions.
+- Added examples/miscellaneous/break.
+- Updated the reference docs.
+- Added the GtkMenuShell to the widget visibility list which I missed.
+  This is the pop-up rectangle that contains the menuitems.
+
+* Wed Dec 5 2012 Thunor <thunorsif@hotmail.com>
+- Applied any existing use-markup="true" tag attributes to text widgets
+  on widget creation to prevent visible resizing when being shown.
+- Started to change all "$(...)" to "`...`" within the examples.
+
+* Sat Dec 1 2012 Thunor <thunorsif@hotmail.com>
+- Added examples/miscellaneous/conditional_actions.
+
+* Thu Nov 29 2012 Thunor <thunorsif@hotmail.com>
+- Fixed bashisms within examples where possible, changed /bin/sh to
+  /bin/bash where it wasn't.
+- Fixed examples/edit/edit_attributes having duplicate variable names.
+- Fixed examples/progressbar/progressbar_closewindow not closing.
+- Fixed progressbar examples echoing data after pipe had closed.
+
+* Wed Nov 28 2012 Thunor <thunorsif@hotmail.com>
+- Changed <action type="function"> to <action function="type"> because
+  that's what it should be which is especially obvious now that we have
+  signal="type" and condition="type"; type="function" is now deprecated.
+- Updated some examples to use the new <action function="type">.
+- Removed "if " from conditions since we only need the conditions now.
+- Updated the reference docs.
+
+* Tue Nov 27 2012 Thunor <thunorsif@hotmail.com>
+- Changed "if function(argument)" and "if ! function(argument)" to
+  "if function_is_true(argument)" and "if function_is_false(argument)"
+  because the not symbol will be interpreted as notting. Not only is it
+  now clearer, it was easier to implement and it could be expanded upon.
+
+* Mon Nov 26 2012 Thunor <thunorsif@hotmail.com>
+- Moved the action conditions into their own tag attribute belonging to
+  the action directive e.g. <action condition="if file(filename)">...
+- Added support for:
+  condition="if active(varname)",
+  condition="if sensitive(varname)",
+  condition="if visible(varname)" and it's trivial to add more.
+
+* Sun Nov 25 2012 Thunor <thunorsif@hotmail.com>
+- Updated the newly added code for parsing filenames and commands from
+  the start of actions to be as robust as I can possibly make it.
+
+* Sat Nov 24 2012 Thunor <thunorsif@hotmail.com>
+- Added support for:
+  <action>if file(filename) function:parameter</action>,
+  <action>if ! file(filename) function:parameter</action>,
+  <action>if command(shell command) function:parameter</action> and
+  <action>if ! command(shell command) function:parameter</action>.
+- The existing if true and if false conditions for toggle widgets were
+  being unneccessarily restricted to the default signals but now the
+  prefixes of all <action signal="type"> directives are evaluated.
+  
+* Fri Nov 23 2012 Thunor <thunorsif@hotmail.com>
+- Reinstated the GTK_WIN_POS_CENTER_ALWAYS --center command-line option
+  because GTK_WIN_POS_CENTER causes Simple Network Setup (which resizes)
+  to be off centre and it could cause other applications to do the same.
+  It's better to ignore it and use <window window-position="1"> anyway.
+- Routed the six remaining button signal callbacks through the executor.
+
+* Wed Nov 21 2012 Thunor <thunorsif@hotmail.com>
+- Changed the --center command-line option to equal GTK_WIN_POS_CENTER
+  rather than the incorrect over-the-top GTK_WIN_POS_CENTER_ALWAYS.
+- Added the realize signal to the wiki and widget reference.
+
+* Sat Nov 17 2012 Thunor <thunorsif@hotmail.com>
+- It's now possible to prevent the exporting of declared variables by
+  using <variable export="false">VARNAME</variable>.
+
+* Fri Nov 16 2012 Thunor <thunorsif@hotmail.com>
+- Solved the hidden widgets leaving artifacts at start-up problem.
+
+* Sun Nov 11 2012 Thunor <thunorsif@hotmail.com>
+- Changed the mandatory input file directive requirement for the pixmap
+  widget and removed the Mandatory column from the wiki/reference.
+
+* Sat Nov 10 2012 Thunor <thunorsif@hotmail.com>
+- Fixed refreshing text widget with markup not showing markup.
+- Fixed edit widget's text != NULL assertion Gtk-CRITICAL warning.
+
+* Thu Nov 8 2012 Thunor <thunorsif@hotmail.com>
+- Modified the table widget's output data format: now all of the columns
+  are output.
+- Updated the pfeme, pfontview and playmusic example applications.
+
+* Wed Nov 7 2012 Thunor <thunorsif@hotmail.com>
+- Modified the tree widget's output data format: now all of the columns
+  are output in the raw state "icon-name | stock-id | data0 | data1 ..."
+  whether or not icon-name or stock-id were supplied.
+
+* Thu Nov 1 2012 Thunor <thunorsif@hotmail.com>
+- Connected-up the button-press/release-event signals to the
+  comboboxentry widget's child entry widget.
+
+* Tue Oct 16 2012 Thunor <thunorsif@hotmail.com>
+- Added an example application Pfeme.
+
+* Fri Oct 12 2012 Thunor <thunorsif@hotmail.com>
+- Added an example application Pfontview.
+
+* Fri Sep 21 2012 Thunor <thunorsif@hotmail.com>
+- Version 0.8.2 released (r455)
+
+* Fri Sep 21 2012 Thunor <thunorsif@hotmail.com>
+- Added an inotify alternative to the GIO file monitor which is very
+  fast but unfortunately there's a 128 file descriptor limit so I've
+  disabled it in configure.in.
+- Fixed examples/miscellaneous/stock_icon_test: newlines in item.
+- Updated the documentation.
+
+* Thu Sep 20 2012 Thunor <thunorsif@hotmail.com>
+- Removed rate-limit from docs as it means "the rate limit to which the
+  monitor will report consecutive change events to the same file" and
+  not the initial response time as I mistakenly thought. The initial
+  response time doesn't appear to be configurable.
+- Tweaked configure.in.
+- Added examples/pixmap/pixmap_auto_refresh.
+- Added examples/pixmap/pixmap_file_monitor.
+- Updated the README.
+
+* Wed Sep 19 2012 Thunor <thunorsif@hotmail.com>
+- Added BUILD_DETAILS to the help string.
+- Updated the copyright notices.
+- Added support for the auto-refresh tag attribute to all widgets that
+  currently support file monitors. Auto refreshing can be faster for
+  applications that contain 100s of pixmaps or buttons (games) as it
+  connects directly to the widget's refresh function and doesn't fire a
+  signal through gtkdialog's signal handling system.
+
+* Tue Sep 18 2012 Thunor <thunorsif@hotmail.com>
+- Added file-monitor functionality to the notebook widget.
+- Refactored the progressbar widget.
+- Fixed the progressbar signal handling: it now has a default signal
+  "time-out" and it now supports <action signal="type">...</action>.
+- Added file-monitor functionality to the radiobutton widget.
+- Added file-monitor functionality to the spinbutton widget.
+- Added file-monitor functionality to the statusbar widget.
+- Added file-monitor functionality to the table widget.
+- Added file-monitor functionality to the terminal widget.
+- Added file-monitor functionality to the text widget.
+- Added file-monitor functionality to the timer widget.
+- Added file-monitor functionality to the tree widget.
+- Added file-monitor functionality to the window widget.
+
+* Mon Sep 17 2012 Thunor <thunorsif@hotmail.com>
+- Refactored the h/vscale widgets.
+- Added file-monitor functionality to the h/vscale widgets.
+- Refactored the h/vseparator widgets (they're one line each :) ).
+- Added file-monitor functionality to the list widget.
+- Refactored the menu, menuitem and menuitemseparator widgets.
+- Added file-monitor functionality to the menu and menuitem widgets.
+- Modified the file monitor to cope with multiple input files.
+
+* Sun Sep 16 2012 Thunor <thunorsif@hotmail.com>
+- Added file-monitor functionality to the [toggle]button widget.
+- Added file-monitor functionality to the checkbox widget.
+- Added file-monitor functionality to the colorbutton widget.
+- Refactored the combobox widget.
+- Added file-monitor functionality to the comboboxentry/text widgets.
+- Refactored the edit widget.
+- Added file-monitor functionality to the edit widget.
+- Refactored the entry widget.
+- Added file-monitor functionality to the entry widget.
+- Added file-monitor functionality to the expander widget.
+- Added file-monitor functionality to the fontbutton widget.
+- Added file-monitor functionality to the frame widget although this
+  widget doesn't accept tag attributes which I may be able to solve.
+
+* Sat Sep 15 2012 Thunor <thunorsif@hotmail.com>
+- Added support for auto-refreshing of images from files on
+  G_FILE_MONITOR_EVENT_CHANGED to the pixmap widget.
+- Changed "auto-refresh" to "file-monitor" to make it more generic as
+  I'd like to extend this functionality to other widgets.
+- Changed the way file monitoring works: instead of auto-refreshing an
+  image it now solely generates a custom "file-changed" signal and it's
+  now up to the application developer to do what he wants with that.
+- Renamed all internally used items of data attached to widgets to "_*".
+- Tweaked the string stripping code in the tree widget: now it'll only
+  remove [CR]LFs, will strip icon names, won't strip anything else.
+
+* Fri Sep 14 2012 Thunor <thunorsif@hotmail.com>
+- Added the "column-sort-function" tag attribute to the tree widget to
+  support natural sorting algorithms on columns of type string.
+- Stopped widget_tree_input_by_command/items stripping space from the
+  input data: if space was input then it was the app. dev's choice.
+- Added the "auto-sort", "sort-column" and "sort-type" tag attributes
+  to the tree widget to manage auto-sorting after filling.
+- Re-engineered the statusbar last message retrieval code.
+
+* Thu Sep 13 2012 Thunor <thunorsif@hotmail.com>
+- New widget: <expander>.
+- Added examples/expander/expander.
+
+* Wed Sep 12 2012 Thunor <thunorsif@hotmail.com>
+- Added the "column-type" tag attribute to the tree widget to support
+  setting int64, uint64, double and string data types.
+- Added the "selected-row" tag attribute to the tree widget to enable
+  selecting a default row on initialisation and refresh.
+- Removed the tree widget's default indentation in column 0.
+- Added the "column-header-active" and "column-visible" tag attributes
+  to the tree widget enabling column-header locking and column hiding.
+- Tidied-up the tree widget's signal handling and added support for the
+  selection object's "changed" signal.
+
+* Mon Sep 10 2012 Thunor <thunorsif@hotmail.com>
+- Updated examples/list/*.
+- Updated the list widget's save function as it wasn't saving all items.
+- Rewrote the widget hiding and showing functions to hide/show all of
+  the components of widgets in viewports and scrolled windows.
+
+* Sun Sep 9 2012 Thunor <thunorsif@hotmail.com>
+- Refactored the list widget although I don't recommend using it as you
+  can't auto-select a row in browse mode and multiple mode doesn't work.
+  At least its code is all in one file now which tidies things up a bit.
+
+* Sat Sep 8 2012 Thunor <thunorsif@hotmail.com>
+- Fixed launching from a timer causing the timer to stop functioning:
+  because launching doesn't return I've put in place a check and if a
+  timer executes the launch then it is cancelled with a warning message.
+  It's easily resolved: simply make the timer activate a checkbox which
+  launches outside of the timer callback.
+- Fixed timer callbacks not being destroyed along with their widgets.
+- Fixed examples/miscellaneous/presentwindow because it was launching
+  directly from within a timer when only indirectly is now possible.
+
+* Fri Sep 7 2012 Thunor <thunorsif@hotmail.com>
+- Added examples/eventbox/eventbox.
+
+* Thu Sep 6 2012 Thunor <thunorsif@hotmail.com>
+- Added support for the "shadow-type" tag attribute to widgets that
+  are placed inside a viewport as the default is GTK_SHADOW_IN.
+- Added the "theme-icon-size" tag attribute to the button widget.
+- Added the "stock-icon-size" tag attribute to the button widget.
+- Added the "theme-icon-size" tag attribute to the pixmap widget.
+- Added the "stock-icon-size" tag attribute to the pixmap widget.
+- New widget: <eventbox>.
+
+* Wed Sep 5 2012 Thunor <thunorsif@hotmail.com>
+- Updated examples/table/table.
+- Moved the table widget's selected-row check to after signal connection
+  as it wasn't firing on initial refresh.
+- Fixed leading zero issue with strnatcmp.
+- Added the "freeze-thaw" tag attribute to the table widget to stop
+  rendering when adding data and to resume rendering when finished.
+- Added save action function support to the tree widget.
+- Added support for the tag attributes "h/vscrollbar-policy" to all
+  scrolled window widgets (edit, h/vbox, list, table, terminal, tree).
+
+* Tue Sep 4 2012 Thunor <thunorsif@hotmail.com>
+- Added support for column sorting to the table widget.
+- Added the "column-header-active" and "column-visible" tag attributes
+  to the table widget enabling column-header locking and column hiding.
+- Modified token_store_attr() to convert tag attribute names passed
+  in from the XML separated with underscores to hyphenated strings.
+
+* Sat Sep 1 2012 Thunor <thunorsif@hotmail.com>
+- Added the "selected-row" tag attribute to the table widget to enable
+  selecting a default row on initialisation and refresh (the firing of
+  signals can be prevented with "block-function-signals").
+- Added multiple selection mode to the table widget and updated the
+  envvar export functions and removeselected action to cope with it.
+- Fixed linecutter: the parts array needed to be initialised to null.
+- Disabled the exporting of the entire contents of a few widgets on a
+  signal for performance reasons; these are/were the *_ALL variables.
+- Stopped variables_export_all() from exporting autonamed variables as
+  it's pointless and would affect performance; this must be a bug.
+- Added support for the save action function to the table widget.
+
+* Fri Aug 31 2012 Thunor <thunorsif@hotmail.com>
+- Fixed the table widget's signal and action handling issues.
+- Added "exported-column" support to the table widget.
+- Added initial "selection-mode" support to the table widget but not yet
+  multiple selection mode.
+
+* Thu Aug 30 2012 Thunor <thunorsif@hotmail.com>
+- Fixed an issue with hiding/showing widgets that are automatically
+  wrapped inside a scrolled window or viewport inside a scrolled window
+  not hiding/showing those additional components.
+- Refactored the table widget.
+- Added tag attribute and input file support to the table widget.
+
+* Wed Aug 29 2012 Thunor <thunorsif@hotmail.com>
+- Added listing of the built-in extra libraries to argument --version.
+- Fixed working_directory not being initialised to NULL in terminal.
+- Reduced minimum libvte requirements to 0.23.5 (thanks vovchik).
+- Added scrolled window to the terminal so now it resizes properly.
+- Modified the terminal so that when the user types exit or it is
+  killed, its variable -- which contained the pid -- is reset to zero
+  and the terminal stays in that state until the application developer
+  decides to reset it and re-execute the command with the clear action.
+
+* Tue Aug 28 2012 Thunor <thunorsif@hotmail.com>
+- Added support for presentwindow.
+- Added examples/miscellaneous/presentwindow.
+- Added some code to action_launchwindow() to check that a program isn't
+  already being parsed as this process is not reetrant and it caused the
+  parser to quit with a nonsensical message; now it warns and continues.
+- Updated the wiki and the reference docs.
+
+* Mon Aug 27 2012 Thunor <thunorsif@hotmail.com>
+- Updated the terminal widget: its variable now contains its pid.
+- Updated examples/terminal/terminal to output the pid with the signals.
+- Added support for clear to the terminal widget.
+- Updated the terminal widget: argv0 now defaults to /bin/sh so a
+  terminal widget could simply be <terminal></terminal>.
+- Added examples/miscellaneous/grabfocus.
+
+* Sun Aug 26 2012 Thunor <thunorsif@hotmail.com>
+- Updated the terminal widget so that when the user types exit or it is
+  killed, the terminal resets and the command is forked again. This will
+  happen before the application receives the child-exited signal.
+
+* Sat Aug 25 2012 Thunor <thunorsif@hotmail.com>
+- Added support for grabfocus to compatible widgets.
+- Added examples/terminal/terminal.
+- Updated the wiki and the reference docs.
+
+* Fri Aug 24 2012 Thunor <thunorsif@hotmail.com>
+- New widget: <terminal> -- requires libvte but is not mandatory.
+
+* Thu Aug 23 2012 Thunor <thunorsif@hotmail.com>
+- Added examples/miscellaneous/conditional_widget_refreshing.
+- Modified ST_TAG_ATTR in the lexer to accommodate "0-9".
+
+* Tue Aug 21 2012 Thunor <thunorsif@hotmail.com>
+- Added examples/c_embedded/example01 and Makefile by sklimkin.
+
+* Mon Aug 20 2012 Thunor <thunorsif@hotmail.com>
+- Added support for button horizontal image with label alignment: by
+  default the alignment is centred but it can be optionally uniform.
+- Added examples/button/button_image_horizontal_alignment.
+- Added a default window title bar project icon gtkdialog.png.
+- Windows will now default to using icon-name="gtkdialog".
+
+* Sun Aug 19 2012 Thunor <thunorsif@hotmail.com>
+- Added window tags to a substantial number of old examples because they
+  really should be there despite the parser accepting them without and
+  it'll stop newcomers experiencing problems writing apps that launch.
+
+* Sat Aug 18 2012 Thunor <thunorsif@hotmail.com>
+- Added support for activate to compatible widgets.
+- Added examples/miscellaneous/activate.
+
+* Fri Aug 17 2012 Thunor <thunorsif@hotmail.com>
+- New widget: <fontbutton>.
+- Added examples/fontbutton/fontbutton.
+- Updated the wiki and the reference docs.
+
+* Tue Aug 14 2012 Thunor <thunorsif@hotmail.com>
+- Added examples/miscellaneous/show_and_hide.
+
+* Sun Aug 12 2012 Thunor <thunorsif@hotmail.com>
+- Fixed a bug that caused applications that included a menu to fail to
+  close via the window manager (title bar) and in fact closewindow too.
+- Fixed a bug that caused a parser error when using multiple launched
+  windows: the envvar that contained the program was being overwritten.
+
+* Thu Aug 9 2012 Thunor <thunorsif@hotmail.com>
+- Refactored the menubar widget and updated it in the parser so that it
+  now supports the recently added hide and show action functions.
+
+* Wed Aug 8 2012 Thunor <thunorsif@hotmail.com>
+- Refactored the frame widget and added support for <input>,
+  <input file>, enable, disable, show, hide, refresh, save and clear.
+- Added support for show and hide to all widgets except those that
+  require refactoring and updating in the parser to support directives.
+- Refactored the hbox widget and updated it in the parser so that it
+  now supports the recently added hide and show action functions.
+- Refactored the vbox widget and updated it in the parser so that it
+  now supports the recently added hide and show action functions.
+
+* Tue Aug 7 2012 Thunor <thunorsif@hotmail.com>
+- Added examples/miscellaneous/press_and_release_events.
+- Added show and hide action functions.
+- Dropped MAXWIDGETS back to 256 since it's per container, not project.
+
+* Mon Aug 6 2012 Thunor <thunorsif@hotmail.com>
+- Added KEY_VAL, KEY_SYM (both are listed in gdk/gdkkeysyms.h), KEY_UNI
+  (the Unicode character if applicable), KEY_MOD (GdkModifierType) and
+  KEY_RAW (hardware) envvars on key_press_event and key_release_event.
+- Added PTR_X and PTR_Y (widget relative), PTR_MOD (GdkModifierType),
+  PTR_BTN (equivalent to the existing BUTTON), PTR_X_ROOT and PTR_Y_ROOT
+  (screen relative) envvars on button_press_event/button_release_event.
+- Fixed examples/miscellaneous/signals - DIALOG changed to DIALOG_MAIN.
+
+* Sun Aug 5 2012 Thunor <thunorsif@hotmail.com>
+- Added support for the envvar GTKDIALOG_PIXMAP_PATH to find_pixmap().
+
+* Sat Aug 4 2012 Thunor <thunorsif@hotmail.com>
+- Refactored the window widget and added support for <input>,
+  <input file>, refresh, save and clear ("title" is the item of data
+  that is being manipulated).
+- Added the "image-name" custom tag attribute for the window widget
+  to set the title bar icon from a full path and filename.
+
+* Thu Aug 2 2012 Thunor <thunorsif@hotmail.com>
+- Checked through and tidied-up the launch and closewindow functions.
+- Added a check when launch-ing that the window contains the required
+  matching variable directive with a warning being displayed if missing.
+- Added examples/miscellaneous/launch_and_closewindow.
+- Added <input>, <input file> and refresh support to the timer widget.
+
+* Mon Jul 30 2012 Thunor <thunorsif@hotmail.com>
+- Refactored the radiobutton widget and added support for <input>,
+  <input file> and refresh.
+- Added clear function support to the radiobutton widget to make it
+  consistent with the checkbox widget and support for save.
+- Refactored the checkbox widget and added support for <input file> and
+  save.
+
+* Tue Jul 24 2012 Thunor <thunorsif@hotmail.com>
+- Applied jamesbond's fix for the incorrectly ordered widgets on the
+  Raspberry Pi (ARM).
+
+* Thu Nov 22 2011 Thunor <thunorsif@hotmail.com>
+- Added an example application PlayMusic.
+
+* Thu Oct 6 2011 Thunor <thunorsif@hotmail.com>
+- Added the option to dump the examples as suggested by Dougal.
+
+* Sun Oct 2 2011 Thunor <thunorsif@hotmail.com>
+- Fixed a bug that was causing slowness at start-up when loading the
+  XML-like GUI description from an environment variable; loading from
+  a file or stdin though are fine.
+
+* Mon Sep 26 2011 Thunor <thunorsif@hotmail.com>
+- Version 0.8.0 released (r306)
+- Updated the documentation.
+
+* Sun Sep 25 2011 Thunor <thunorsif@hotmail.com>
+- Exported the wiki to doc/reference (script included).
+
+* Fri Sep 23 2011 Thunor <thunorsif@hotmail.com>
+- Added examples/miscellaneous/expand_and_fill.
+- Increased MAXWIDGETS from the tiny 256 (21MB virt) to 529 (25MB virt).
+  1024 would've been nice but virtual memory jumps to 34MB. The array
+  really should be dynamically allocated but it's a job for another day.
+
+* Thu Sep 22 2011 Thunor <thunorsif@hotmail.com>
+- Added command line option --space-expand to set the widget packing
+  expand state at the project level.
+- Added command line option --space-fill to set the widget packing
+  fill state at the project level.
+- Added the "space-expand" custom tag attribute for the h/vbox widgets
+  to set the widget packing expand state at the container level.
+- Added the "space-fill" custom tag attribute for the h/vbox widgets
+  to set the widget packing fill state at the container level.
+- Added the "space-expand" custom tag attribute for all other widgets
+  to set the widget packing expand state at the widget level.
+- Added the "space-fill" custom tag attribute for all other widgets
+  to set the widget packing fill state at the widget level.
+- By default the original quirky widget packing method is used.
+  Project level --space-expand/fill override the original method.
+  Container level "space-expand/fill" override the project level method
+  and the original method.
+  Widget level "space-expand/fill" override the container level method,
+  the project level method and the original method.
+
+* Wed Sep 21 2011 Thunor <thunorsif@hotmail.com>
+- Fixed the longstanding issue with expand and fill being FALSE when
+  packing widgets into boxes. A message said that the original author
+  couldn't get it to work, but I can't see anything wrong with it.
+
+* Tue Sep 20 2011 Thunor <thunorsif@hotmail.com>
+- New widget: <colorbutton>.
+- Added examples/colorbutton/colorbutton_advanced.
+
+* Sat Sep 17 2011 Thunor <thunorsif@hotmail.com>
+- Added widget_text.c/h and added clear, fileselect and envvar support.
+- Added examples/text/text_advanced and updated the other examples.
+
+* Thu Sep 15 2011 Thunor <thunorsif@hotmail.com>
+- Tidied-up all of the tree widget examples.
+
+* Wed Sep 14 2011 Thunor <thunorsif@hotmail.com>
+- Added examples/tree/tree_item_advanced.
+- Added examples/tree/tree_input_advanced.
+- Added examples/tree/tree_input_file_advanced.
+
+* Tue Sep 13 2011 Thunor <thunorsif@hotmail.com>
+- Fixed the tree widget's problematic pixmap rendering when including
+  rows from multiple sources with different icon settings.
+- Fixed (or completed) the tree widget's default icon feature.
+
+* Mon Sep 12 2011 Thunor <thunorsif@hotmail.com>
+- Added widget_tree.c/h.
+
+* Thu Sep 8 2011 Thunor <thunorsif@hotmail.com>
+- Fixed a bug in _variables_export that was making the list widget hang.
+- Found a bug in fill_list_by_items that doesn't show the newly reloaded
+  items on a refresh. Unfortunately this is the type of bug that some
+  existing appications might've been designed around so I'm leaving it.
+- Added examples/list/list_advanced.
+
+* Wed Sep 7 2011 Thunor <thunorsif@hotmail.com>
+- Fixed a bug in fill_clist_by_items whereby the item string was being
+  corrupted by the linecutter function and wouldn't refresh. Item
+  directive memory requires duplicating first prior to being chopped-up.
+- Added examples/table/table_advanced.
+
+* Tue Sep 6 2011 Thunor <thunorsif@hotmail.com>
+- Added examples/edit/edit_advanced.
+
+* Mon Sep 5 2011 Thunor <thunorsif@hotmail.com>
+- Tweaked and shrunk the recently added checkbox_advanced example.
+- Added examples/radiobutton/radiobutton_advanced.
+
+* Sun Sep 4 2011 Thunor <thunorsif@hotmail.com>
+- Updated Makefile.am for the new examples.
+
+* Sat Sep 3 2011 Thunor <thunorsif@hotmail.com>
+- Created new menu, menubar and menuitemseparator examples so that now
+  all of the menu related examples are unique.
+
+* Fri Sep 2 2011 Thunor <thunorsif@hotmail.com>
+- Added examples/button/COPYING-elementary-icons.
+- Added examples/button/button_image_position.
+- Added examples/button/button_image_toggle.
+- Added examples/button/no.svg.
+- Added examples/button/yes.svg.
+- Added examples/comboboxentry/comboboxentry_advanced.
+- Added examples/comboboxtext/comboboxtext_advanced.
+- Added examples/entry/entry_advanced.
+- Added examples/hbox/hbox_scrollable.
+- Added examples/hscale/hscale_advanced.
+- Added examples/hseparator/hseparator_advanced.
+- Added examples/menu/menu_advanced.
+- Added examples/menubar/menubar_advanced.
+- Added examples/menuitem/menuitem_advanced.
+- Added examples/miscellaneous/fileselect_advanced.
+- Renamed examples/miscellaneous/fileselect to fileselect_deprecated.
+- Added examples/miscellaneous/icon_names.txt.
+- Added examples/miscellaneous/stock_icon_test.
+- Added examples/miscellaneous/theme_icon_support.
+- Added examples/notebook/notebook_advanced.
+- Added examples/spinbutton/spinbutton_advanced.
+- Added examples/statusbar/statusbar_advanced.
+- Added examples/timer/timer_advanced.
+- Added examples/togglebutton/COPYING-elementary-icons.
+- Added examples/togglebutton/false.svg.
+- Added examples/togglebutton/togglebutton_advanced.
+- Added examples/togglebutton/true.svg.
+- Added examples/tree/tree_selection_mode.
+- Added examples/vbox/vbox_scrollable.
+- Added examples/vscale/vscale_advanced.
+- Added examples/vseparator/vseparator_advanced.
+- Removed the bashism "function " from a few existing examples.
+- Replaced a couple of <visible> with <sensitive> in examples.
+- Added examples/menuitemseparator/menuitemseparator_advanced.
+
+* Thu Sep 1 2011 Thunor <thunorsif@hotmail.com>
+- Reorganised the examples folder into subfolders.
+- Updated Makefile.am and configure.in.
+- Renamed the incorrectly named editor examples to edit.
+
+* Tue Aug 30 2011 Thunor <thunorsif@hotmail.com>
+- Fixed the tree widget's <input file> directive.
+- Fixed examples 09.01-tree_attributes, 09.01-tree_items and
+  09.02-tree_default_pixmaps and added list.txt.
+
+* Mon Aug 29 2011 Thunor <thunorsif@hotmail.com>
+- New widget: <statusbar>.
+- Modified save_menuitem_to_file to save "true" or "false" to make it
+  consistent with the togglebutton widget.
+
+* Thu Aug 25 2011 Thunor <thunorsif@hotmail.com>
+- Overhauled the fileselect action function which includes file filters.
+- Added a list_t_free() function to free list_t structs if required.
+
+* Tue Aug 23 2011 Thunor <thunorsif@hotmail.com>
+- Modified icon from theme code so that a gtk-missing-image is shown
+  when an image isn't found, similar to the image from file code.
+- Tweaked the button image loading code to better accommodate the
+  togglebutton's <input> directive.
+- Added support for the save action function to the togglebutton widget.
+
+* Mon Aug 22 2011 Thunor <thunorsif@hotmail.com>
+- New widget: <togglebutton>.
+- Purged almost all of the code marked redundant.
+- Added widget_template.c/h which I've been using for a while now.
+
+* Sun Aug 21 2011 Thunor <thunorsif@hotmail.com>
+- Fixed invisible-char in 02.01-entry_attributes as it is a guint not a
+  gchar (it worked before because the guint code was bugged).
+- Updated a few examples by replacing deprecated directives.
+
+* Sat Aug 20 2011 Thunor <thunorsif@hotmail.com>
+- Added signals.c/h.
+
+* Fri Aug 19 2011 Thunor <thunorsif@hotmail.com>
+- Started to implement the togglebutton widget (create works so far).
+- Fixed a bug when freeing accel_groups: it needed to be set to NULL.
+
+* Thu Aug 18 2011 Thunor <thunorsif@hotmail.com>
+- Added widget_button.c/h.
+- Added "use-underline" support to buttons with a label directive.
+
+* Wed Aug 17 2011 Thunor <thunorsif@hotmail.com>
+- Added "tab-prefix", "tab-suffix" and "tab-base-index" custom tag
+  attributes to the notebook widget to control automated page labelling.
+  I've also added "tab-labels" to replace the existing "labels".
+
+* Tue Aug 16 2011 Thunor <thunorsif@hotmail.com>
+- Re-engineered a few functions within attributes.c that needed to be
+  reentrant but weren't. The pointer being used to record the currently
+  referenced element in an AttributeSet (a GList) was being stored within
+  the AttributeSet when it should have been stored within the calling
+  function. For example, clicking a button on a notebook page would emit
+  a signal and an action would change the page, then GTK+ would hide the
+  page including button which would emit signals for the button which
+  would then iterate through the same actions causing the pointer to be
+  updated amd corrupting the original loop. Yeah, it took some finding.
+- Reviewed and extended the <notebook> widget: Now the page number is
+  stored within the variable and it can be refreshed from a command or
+  file making it possible to use another widget to change the page.
+
+* Fri Aug 12 2011 Thunor <thunorsif@hotmail.com>
+- Added GTK_CHECK_VERSION for gtk_widget_get_sensitive which'll use the
+  deprecated GTK_WIDGET_SENSITIVE if older than 2.18.0.
+- Deprecated the <visible>disabled</visible> directive in favour
+  of <sensitive>false/no/0</sensitive> which is what it actually is.
+- Fixed the hardcoded "gtkdialog" binary name in main.
+
+* Thu Aug 11 2011 Thunor <thunorsif@hotmail.com>
+- New widget: <timer> with a custom "tick" signal.
+
+* Wed Aug 10 2011 Thunor <thunorsif@hotmail.com>
+- Connected-up the primary and secondary icon-press/release signals for
+  the new spinbutton widget -- it's effectively an entry widget + scale,
+  therefore all the GtkEntry properties apply too.
+- Connected-up the changed signal for the new spinbutton widget.
+
+* Tue Aug 9 2011 Thunor <thunorsif@hotmail.com>
+- Modified token_store_with_argument_attr to convert signal names passed
+  in from the XML separated with underscores to hyphenated strings
+  (GTK+ doesn't distinguish between the two, so now we don't).
+- New widget: <spinbutton>.
+- Added default messages for unimplemented directives for widgets that
+  I've so far refactored or recently added.
+
+* Mon Aug 8 2011 Thunor <thunorsif@hotmail.com>
+- Fixed an existing bug in try_set_property, the function that passes
+  the tag attributes that are GTK+ widget properties to GTK+ to be set.
+  The part that should have been converting a char to a guint was
+  converting a char to a [UTF8] char which resulted in all guint GTK+
+  widget properties being bugged; therefore "border_width" now works.
+- Deprecated the "margin" custom tag attribute and removed from docs.
+- Started to implement the spinbutton widget.
+
+* Sun Aug 7 2011 Thunor <thunorsif@hotmail.com>
+- Fixed a bug I added to the pixmap widget that caused a segfault.
+- Updated the menuitem widget to support custom tag attributes of
+  "stock[-id]", "icon[-name]" and "image-name" plus underscores. This
+  is consistent with the extended names accepted by the tree widget.
+- Updated the menuitem widget to support using the height or width
+  directives to override the default theme icon size of 16.
+
+* Sat Aug 6 2011 Thunor <thunorsif@hotmail.com>
+- Added theme icon support to the pixmap widget: the height or width
+  directives can be used to specify the "size" else it defaults to 32.
+- Tweaked the new widget template somewhat.
+- Renamed main.c to gtkdialog.c and main.h to gtkdialog.h.
+- Updated the button widget to support using the height or width
+  directives to override the default theme icon size of 20.
+
+* Fri Aug 5 2011 Thunor <thunorsif@hotmail.com>
+- Updated the old TODO although I'm using the issue tracker myself.
+- Added widget_pixmap.c/h, the start of my refactoring intentions.
+- Fixed examples 09.00-tree, 09.12-tree_one_column including list.sh.
+- Added widget_comboboxtext.c/h.
+
+* Mon Aug 1 2011 Thunor <thunorsif@hotmail.com>
+- The overhaul of the menu system is now complete. New checkbox,
+  radiobutton and image from file menuitem widgets added and refresh and
+  save action functions implemented.
+
+* Sun Jul 31 2011 Thunor <thunorsif@hotmail.com>
+- Discovered that the menuitems aren't realized until the menu is opened
+  which means that using gtk_widget_get_realized is pointless. I've now
+  replaced that within the refresh functions with an item of widget data
+  named "initialised" which marks the widgets at start-up. I believe
+  this is also going to be an issue with the notebook widget so the
+  on_any_widget_realized method of setting tag attributes is going to
+  require changing else properties won't be set until widgets get shown
+  and an action function could have changed them in that time.
+- Re-engineered the "block-function-signals" code so that I don't have
+  to micro-manage signal handler IDs. Instead I set a global flag which
+  blocks execute_action from executing any action functions. The check
+  for "block-function-signals" is now done not within specific widget
+  functions but at a higher level so theoretically all widgets now
+  support blocking signals from action functions.
+
+* Sat Jul 30 2011 Thunor <thunorsif@hotmail.com>
+- Reviewed the examples, fixed a few more, commented within 17 of them.
+
+* Fri Jul 29 2011 Thunor <thunorsif@hotmail.com>
+- Fixed exported_column being 1 based within the examples
+  09.02-tree_actions, 09.10-tree_icon_stocks and 09.11-tree_icon_names.
+- Fixed all the shebangs (bashim) within the examples and used
+  GTKDIALOG=gtkdialog so that they can all be easily changed with sed.
+- Fixed 05.01-progress_bar_closewindow: closewindow issue.
+- Fixed 05.02-progress_bar_test: closewindow issue.
+- Fixed 06.00-pixmap: missing image.
+- Fixed various other examples and identified the non-working ones.
+
+* Thu Jul 28 2011 Thunor <thunorsif@hotmail.com>
+- Set the default checkbox menuitem signal to "toggled".
+- Added checkbox menuitem support for conditional function execution.
+- Added the radiobutton menuitem widget (grouped by any non radiobutton
+  menuitem widget), set the default signal to "toggled" and added support
+  for conditional function execution.
+
+* Wed Jul 27 2011 Thunor <thunorsif@hotmail.com>
+- The menu widget is in fact a menuitem widget with a submenu, so it's
+  created the same way as any other menuitem which means it can now have
+  an icon and the "activate" signal works on selection.
+- Submenus now work by nesting menu widgets (menu == menuitem+submenu).
+- Deprecated "icon" and "stock" and replaced with "imgicon" and
+  "imgstock" and added "imgfile" which supports scaled images from files.
+- Renamed "imgicon", "imgstock" and "imgfile" to "image-icon",
+  "image-stock" and "image-file".
+- Added the checkbox menuitem and checkbox="state" custom tag attribute.
+
+* Mon Jul 25 2011 Thunor <thunorsif@hotmail.com>
+- Added <visible> directive support to the menu widget.
+
+* Sun Jul 24 2011 Thunor <thunorsif@hotmail.com>
+- Added tag attribute support to the menu widget which means it's now
+  possible to set label="_File" use-underline="true".
+- Added the "margin" custom tag attribute to the window widget to
+  control the border-width as it was previously hardcoded to 5. This
+  now makes it possible to pull the menubar up into the corners.
+- Added the "margin" custom tag attribute to the hbox and vbox widgets.
+
+* Sat Jul 23 2011 Thunor <thunorsif@hotmail.com>
+- Tidied-up the create_menuitem function (preparatory work in readiness
+  for extending the menuitems) and now the GTK properties "use-stock"
+  and "label" work together as expected.
+
+* Wed Jul 20 2011 Thunor <thunorsif@hotmail.com>
+- Added support for menuitem accelerators via the "accel-key" and
+  "accel-mods" custom tag attributes and both values can be entered as
+  either decimal or hexadecimal integers (when you see gdk/gdkkeysyms.h
+  you'll know why ;) ). gdk/gdktypes.h holds the modifier values.
+
+* Mon Jul 18 2011 Thunor <thunorsif@hotmail.com>
+- Overhauled the entry widget:
+- Fixed the exclusive default signal i.e. it wasn't possible to have a
+  default action and another action specifying the same signal.
+- Removed the odd manual emission of the default "changed" signal when
+  using the fileselect function i.e. inserting text.
+- Fixed widget_entry_refresh which wasn't distinguishing between <input>
+  and <input file> directives (file loading wasn't implemented anyway)
+  and then attempted to execute the <input file> if declared.
+- Added support for the save function (now a full action function set).
+- Added support for the custom tag attribute "block-function-signals".
+- Added support for the "activate" signal emitted from pressing Enter.
+- Added support for the "icon-press" and "icon-release" signals,
+  actually prefixed with "primary-" or "secondary-" to distinguish
+  between them.
+
+* Sun Jul 17 2011 Thunor <thunorsif@hotmail.com>
+- Added a custom tag attribute called "block-function-signals" that's
+  currently being used in the h/vscale code, but it can be applied to
+  other widgets if required. It blocks signal emissions when functions
+  are being performed (refresh etc.) so that application developers can
+  isolate signals originating from user widget manipulation.
+
+* Sat Jul 16 2011 Thunor <thunorsif@hotmail.com>
+- Updated the long forgotten about widget_get_type_from_pointer() which
+  was in widgets.c and used exclusively by glade_support.c. I came across
+  it whilst searching and found it to be only accounting for 20% of the
+  widgets and I don't know what impact this would have had if any since
+  only one application is using Glade. I've moved it to glade_support.c.
+
+* Thu Jul 14 2011 Thunor <thunorsif@hotmail.com>
+- Deprecated the badly named menu item <separator> widget and added an
+  equivalent <menuitemseparator> (I'm reviewing the menu system).
+
+* Wed Jul 13 2011 Thunor <thunorsif@hotmail.com>
+- New widget: <hscale>.
+- New widget: <vscale>.
+- Connected up the GtkScale's "value_changed" signal in glade_support.c.
+
+* Fri Jul 8 2011 Thunor <thunorsif@hotmail.com>
+- Overhauled the copyright and license notices atop most source files.
+  Quite a few were missing, some were only snippets of the license and
+  some weren't attributed to anyone. Where applicable I've included
+  myself in the copyright notices since I've introduced a fair amount of
+  code now. Everything is now consistently (C) 2003-2007 László Pere
+  which correctly covers the period of all of his work.
+- Started adding the new hscale and vscale widgets.
+
+* Thu Jul 7 2011 Thunor <thunorsif@hotmail.com>
+- New widget: <comboboxentry></comboboxentry>, full action function set.
+- Modified the behaviour of the comboboxentry widget's default directive
+  so that text that isn't matched to any list items becomes the default
+  entry text instead; very useful with has-focus="true".
+
+* Wed Jul 6 2011 Thunor <thunorsif@hotmail.com>
+- Modified the button and pixmap widgets' refresh functions so that
+  images are only refreshed when the widgets have been realized.
+- Fixed the gtkdialog_lexer.l errors I found as reported in issue 11.
+
+* Tue Jul 5 2011 Thunor <thunorsif@hotmail.com>
+- Added image positioning support to buttons with images and labels.
+
+* Mon Jul 4 2011 Thunor <thunorsif@hotmail.com>
+- Connected up the GtkComboBox's "changed" signal in glade_support.c.
+
+* Sat Jul 2 2011 Thunor <thunorsif@hotmail.com>
+- Added a 2.20.0 GTK+ version check for gtk_widget_get_realized and on
+  false will use the deprecated GTK_WIDGET_REALIZED macro.
+- Added code to widget_signal_executor to automate managing the default
+  signal for widget types.
+- Added comboboxtext default signal support for action and action type
+  directives.
+
+* Fri Jul 1 2011 Thunor <thunorsif@hotmail.com>
+- New widget: <comboboxtext></comboboxtext>, full action function set.
+
+* Thu Jun 30 2011 Thunor <thunorsif@hotmail.com>
+- Fixed three bugs in glade_support.c that were checking that command
+  wasn't NULL when they should've been checking full_command instead
+  (likely an initial mistake and then copied and pasted).
+  
+* Sat Jun 25 2011 Thunor <thunorsif@hotmail.com>
+- Added width and height tag attribute support for the scrollable hbox
+  and vbox to control the viewport dimensions.
+- "selection_mode" will now accept 3, 2, 1, or 0 as well as multiple,
+  browse, single and none. This makes it consistent with the existing
+  selection-mode GtkCList (<table>) property.
+- New widget: <hseparator tagattr></hseparator>.
+- New widget: <vseparator tagattr></vseparator>.
+  
+* Fri Jun 24 2011 Thunor <thunorsif@hotmail.com>
+- Added hbox and vbox widget scrolling capability via the "scrollable"
+  custom attribute. If scrollable="true/yes/1" then the box is placed
+  inside a GtkScrolledWindow by the existing put_in_the_scrolled_window
+  function.
+
+* Thu Jun 23 2011 Thunor <thunorsif@hotmail.com>
+- Simplified the search for the "selection_mode" custom attribute in
+  create_tree as I found a function that finds them and returns their
+  values. Also, since there exists a GTK "selection-mode" property for
+  other unrelated widgets I don't now distinguish between a "_" and "-".
+
+* Tue Jun 21 2011 Thunor <thunorsif@hotmail.com>
+- Function remove_selected_variable has been updated to accommodate the
+  extended range of tree widget selection modes.
+
+* Mon Jun 20 2011 Thunor <thunorsif@hotmail.com>
+- Function widget_get_text_value has been updated to accommodate the
+  extended range of tree widget selection modes.
+
+* Sat Jun 18 2011 Thunor <thunorsif@hotmail.com>
+- Changed ECOMM to ENDCOMM as it conflicts with errno.h.
+- Removed the old files created by Automake.
+- Removed a couple more auto-generated files.
+
+* Fri Jun 17 2011 Thunor <thunorsif@hotmail.com>
+- Added config.guess and config.sub.
+- Applied the Moose / Debian 03_stdin PRG_STDIN patch.
+- Applied the Patriot closewindow patch.
+- Changed signal to gtkdialog_signal in glade_support.c.
+- Changed the 90.00 examples to use /usr/local/bin.
+- Applied the Debian 01_bashism dot rather than source patch.
+- Added my pixmap/button-widget image refresh and scaling code.
+- Removed unnecessary code from find_pixmap (locate etc.).
+- Applied the Debian 02_documentation_paths /usr/local/bin/ patch.
+- Added missing conversion type characters from tag_attributes.c:102.
+- Added missing declaration in widgets.h:24.
+- Added missing __func__ in variables.c:393.
+- Added missing (char*) casts in variables.c:758 and 760.
+- Added missing GTK_TREE_VIEW casts in automaton.c:1564 and 1586.
+- Added missing (GDestroyNotify) cast in widgets.c:1259.
+- Added missing (gchar*) cast in main.c:408.
+- Fixed several 'ignoring return value' warnings.
+
+* Mon Apr 9 2007 Laszlo Pere <pipas@linux.pte.hu> 0.7.20
+- default policy changed ror crolled windows.
+- The segfault handling the --geometry option is fixed.
+- Better handling of the command line options.
+
+* Sun Feb 25 2007 Laszlo Pere <pipas@linux.pte.hu> 0.7.19
+- The "exported_column" attribute for trees is fixed. Column 0 means the first
+  text column (after the icon column if any). Check file 09.12-tree_one_column
+  for example.
+
+* Sun Feb 18 2007 Laszlo Pere <pipas@linux.pte.hu> 0.7.18
+- Better icon handling in tree views. See the following example programs:
+  o 09.01-tree_items
+  o 09.02-tree_default_pixmaps
+  o 09.03-tree_icon_columns
+
+* Tue Jan 11 2007 Laszlo Pere <pipas@linux.pte.hu> 0.7.14
+- Compile error fixed by Jean-Philippe Guillemin.
+
+* Wed Jan 10 2007 Laszlo Pere <pipas@linux.pte.hu> 0.7.13
+- Handling of input for the tree widgets (see example 09.00-tree).
+
+* Tue Jan 02 2007 Laszlo Pere <pipas@linux.pte.hu> 0.7.12
+- The mouse button is exported for the button-press-event and
+  button-release-event handlers. See 09.02-tree_actions for example.
+
+* Wed Nov 29 2006 Laszlo Pere <pipas@linux.pte.hu> 0.7.11
+- The widget properties are set only when the widget is realized. This
+  modification has been made because some properties can be set only if there
+  is a parent window. (See 16.02.widget_properties_default for example)
+
+* Mon Nov 27 2006 Laszlo Pere <pipas@linux.pte.hu> 0.7.10
+- GtkWidget signal actions for the following signal names:
+  "button-press-event"
+  "button-release-event"
+  "configure-event"
+  "enter-notify-event"
+  "leave-notify-event"
+  "focus-in-event"
+  "focus-out-event"
+  "key-press-event"
+  "key-release-event"
+  "hide"
+  "show"
+  "map-event"
+  "unmap-event"
+  See example file 16.01.widget_signals.
+
+* Mon Nov 15 2006 Laszlo Pere <pipas@linux.pte.hu> 0.7.9
+- Bugfix: Window delete-event handler exits only if that was the last window.
+- Bugfix: Closewindow action exits if that was the last window.
+- Menu items with named icons. See 14.01-menubar_icons for example.
+
+* Tue Nov 7 2006 Laszlo Pere <pipas@linux.pte.hu> 0.7.8
+- Some code clean up with the progress bars and parent windows.
+
+* Mon Nov 6 2006 Laszlo Pere <pipas@linux.pte.hu> 0.7.7
+- Bugfix: RPM spec file is fixed by Steven Howe.
+- Bugfix: <table> actions fixed by Jean-Philippe Guillemin.
+
+* Sat Nov 4 2006 Laszlo Pere <pipas@linux.pte.hu> 0.7.6
+- Bugfix: Glade example files was missing from the source package.
+- Progress bar now accept text from the input to render new label.
+
+* Tue Oct 31 2006 Laszlo Pere <pipas@linux.pte.hu> 0.7.5
+- Bugfix: "closewindow: xxx not found" error is fixed.
+- Bugfix: "launch" action is fixed.
+- Most of the compile time warnings are eliminated.
+- Actions have two forms now. The simple form is an XML attribute like this:
+  <action type="exit">VALUE</action>
+  the secondary form is a command prefix:
+  <action>Exit:VALUE</action>
+  This form can be used when creating the GUI with Glade, where the callback
+  function name is used by the GtkDialog as a command to execute. 
+  The older
+  <action clear>VARIABLE</action> 
+  form is no longer recognized.
+- Bugfix: Label from file buffer overrun fixed.
+- Bugfix: Frame without label caused a segfault. Now fixed.
+- Bugfix: Compiling problem when no Glade library found is fixed.
+- Bugfix: Closewindow action for progress_bars fixed 
+  (see the 05.01-progress_bar_closewindow example program)
+
+* Thu Oct 26 2006 Laszlo Pere <pipas@linux.pte.hu> 0.7.4
+- A better glade support. See glade files in the examples directory. 
+- Launch/Closewindow bug is fixed by Jean-Philippe Guillemin.
+
+* Wed Oct 25 2006 Laszlo Pere <pipas@linux.pte.hu> 0.7.3
+- <input></input> for labels. See '00.02-text_input' for example.
+- Syntax error with one character unescaped strings fixed.
+- Attributes can be used to set window icon names. See '15.01.window_attributes'
+  for example.
+- New widget: <progressbar></progressbar>, see 05.00-progress_bar for example.
+
+* Mon Jun 12 2006 Laszlo Pere <pipas@linux.pte.hu> 0.7.2
+- The gtklauncher binary is removed. Use '-e' option of gtkdialog instead.
+
+* Sun Jun 11 2006 Laszlo Pere <pipas@linux.pte.hu> 0.7.1
+- A new option (-e) for handling event driven programs.
+- Support for some widget properties (see examples *_attributes).
+- Support for some signals (see examples *_signals).
+- Proper handling of option --no-warning.
+- New option to center the dialogs on the screen (thanks to Gene Hilton).
+- Setting the window title is changed. Use expressions like this:
+  <window>
+     <hbox>...</hbox>
+     <label>Window Title</label>
+  </window>
+  Sorry about the postfix notation.
+- Another version is to use the general attribute setting:
+  <window title="Window Title">
+    <hbox>...</hbox>
+  </window>
+- Much better support for the <tree> widget. See examples for more info.
+- <editor> handles <default> text.
+- The type="fileselect" action creates a file_chooser if compiled with GTK+
+  2.4.0 or newer version.
+- File select dialog title can be set by the target widget (see example file
+  "16-fileselect")
+- The behaviour of the file selection dialog can be described by the
+  target widget (see example file "16-fileselect").
+- New example scheme. It is systematic, trying to substitute the missing
+  documentation.
+- The <editor> text exported and printed now.
+- Better handling of strings and quotes.
+
+* Thu Mar 9 2006 Laszlo Pere <pipas@linux.pte.hu> 0.6.0
+- Same as the 0.58.6 which seems to be fairly stable.
+
+* Wed Jul 27 2005 Laszlo Pere <pipas@linux.pte.hu> 0.59.6
+- Crash on ia64 bug fixed thanks to David Mosberger and Fabio Tranchitella.
+  
+* Sun Jan 2 2005 Laszlo Pere <pipas@linux.pte.hu> 0.59.5
+- It is possible now to insert multiple columns into the tables using 
+- shell commands (e.g. echo "one|two").
+- Actions for table widgets are working perfectly now.
+
+* Sat Jan 1 2005 Laszlo Pere <pipas@linux.pte.hu> 0.59.4
+- Compile problem on RH9 (GTK 2.2.1) fixed 
+- Some widgets have problems with the older GTK library
+
+* Thu Dec 9 2004 Laszlo Pere <pipas@linux.pte.hu> 0.59.3
+- List widget value export fixed
+
+* Mon Dec 6 2004 Laszlo Pere <pipas@linux.pte.hu> 0.59.2
+- <input file stock="name"></input> for buttons and pixmaps
+- closewindow had a bug which is fixed now
+- New widget: <chooser></chooser> for file selection
+- New widget: <notebook></notebook> is a grouping widget
+- <input></input> is working on checkboxes also.
+
+* Thu Nov 25 2004 Laszlo Pere <pipas@linux.pte.hu> 0.59.0
+- New version numbers: this is the unstable version (59 is odd).
+- It is possible now to preset radiobuttons with the <default> tag.
+- The syntax of --program option is chaged. See --help.
+
+* Wed Nov 24 2004 Laszlo Pere <pipas@linux.pte.hu> 0.58.12
+- Environment variable name after the --program option now optional,
+the default is: MAIN_WINDOW
+- The -geometry option is working as it should be (see "man X")
+- Menu can have a command witf type (eg. <command type="insert">)
+- The tree widget is much more better now
+
+* Sun Nov 21 2004 Laszlo Pere <pipas@linux.pte.hu> 0.58.11
+- A new widget: <gvim>, which is not working correctly.
+- A new widget: <tree>, barely functional.
+
+* Sat Nov 20 2004 Laszlo Pere <pipas@linux.pte.hu> 0.58.10
+- New widget: menubar with menu and menuitems inside.
+- The label widget can get text from an input file.
+- The program will not print the default named widgets from now.
+- Better error messages for unknown tags.
+- New action: <action copy>FROM, TO</action>
+- List widgets have a variable called XXX_ALL.
+- Icon search path is: 
+-   (1) the working directory, 
+-   (2) /usr/share/icons/Bluecurve/16x16/stock/, 
+-   (3) Anywhere if the locate finds it 
+
+* Fri Nov 19 2004 Laszlo Pere <pipas@linux.pte.hu> 0.58.9
+- stringman.c: A bug with the multi-column tables fixed.
+- The button now can contain label beside a pixmap.
+
+* Fri Jun 4 2004 Laszlo Pere <pipas@linux.pte.hu> 0.58.5
+- Texinfo documentation (mostly empty :-)
+- Bash completion scripts as examples.
+
+* Thu Apr 22 2004 Laszlo Pere <pipas@linux.pte.hu> 0.58.6
+- The <edit> widget can accept <output file> attribute.
+- There is a new action for saving a widget's content into file.  See gtk_edit for example.
+- The sizes of widgets are corrected. Some widgets can grow---list, table, edit, frame, etc.---but some can't---buttons, entries, etc.
+- The entry widgets can take actions which called when a key pressed after the entry is updated.

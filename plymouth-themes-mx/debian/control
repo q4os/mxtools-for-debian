@@ -1,0 +1,11 @@
+Source: plymouth-themes-mx
+Section: admin
+Priority: extra
+Maintainer: dolphin oracle <dolphinoracle@gmail.com>
+Build-Depends: debhelper (>= 8.0.0)
+Standards-Version: 3.9.3
+
+Package: plymouth-themes-mx
+Architecture: all
+Depends: ${misc:Depends}, plymouth-themes
+Description: Extra plymouth themes packaged by MX team

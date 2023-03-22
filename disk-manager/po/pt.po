@@ -1,0 +1,481 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+# Translators:
+# Geoff Gigg <geoffgigg@hotmail.com>, 2022
+# José Vieira <jvieira33@sapo.pt>, 2022
+# Hugo Carvalho <hugokarvalho@hotmail.com>, 2022
+# marcelo cripe <marcelocripe@gmail.com>, 2022
+# 
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-01-16 00:46+0100\n"
+"PO-Revision-Date: 2022-01-21 17:21+0000\n"
+"Last-Translator: marcelo cripe <marcelocripe@gmail.com>, 2022\n"
+"Language-Team: Portuguese (https://www.transifex.com/anticapitalista/teams/10162/pt/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: pt\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: ../disk-manager.in:66
+msgid "Insufficient rights"
+msgstr "Permissões insuficientes"
+
+#: ../disk-manager.in:67
+msgid "You need administrative rights to start this application."
+msgstr ""
+"São necessárias permissões de administração para iniciar esta aplicação"
+
+#: ../data/disk-manager.glade.h:1
+msgid "<b>Driver</b>"
+msgstr "<b>Controlador</b>"
+
+#: ../data/disk-manager.glade.h:2
+msgid "This driver seems to not be available for this type."
+msgstr "Parece que este controlador não estar disponível para este tipo."
+
+#: ../data/disk-manager.glade.h:3
+msgid "<b>Mount point</b>"
+msgstr "<b>Ponto de montagem</b>"
+
+#: ../data/disk-manager.glade.h:4
+msgid "<b>Options</b>"
+msgstr "<b>Opções</b>"
+
+#: ../data/disk-manager.glade.h:5
+msgid "Check device every 30 boots"
+msgstr "Inspeccionar o dispositivo a cada 30 arranques"
+
+#: ../data/disk-manager.glade.h:6
+msgid "<big><b>Configuration file:</b></big>"
+msgstr "<big><b>Ficheiro de configuração:</b></big>"
+
+#: ../data/disk-manager.glade.h:7
+msgid "<b>Vendor:</b>"
+msgstr "<b>Produtor:</b>"
+
+#: ../data/disk-manager.glade.h:8
+msgid "<b>Model:</b>"
+msgstr "<b>Modelo:</b>"
+
+#: ../data/disk-manager.glade.h:9
+msgid "<b>Serial:</b>"
+msgstr "<b>Serial:</b>"
+
+#: ../data/disk-manager.glade.h:10
+msgid "<b>bus:</b>"
+msgstr "<b>bus:</b>"
+
+#: ../data/disk-manager.glade.h:11 ../DiskManager/Dialogs.py:372
+#: ../DiskManager/Dialogs.py:373 ../DiskManager/Dialogs.py:374
+msgid "Not available"
+msgstr "Não disponível"
+
+#: ../data/disk-manager.glade.h:12
+msgid "Drive"
+msgstr "Unidade"
+
+#: ../data/disk-manager.glade.h:13
+msgid "<b>Device:</b>"
+msgstr "<b>Dispositivo:</b>"
+
+#: ../data/disk-manager.glade.h:14
+msgid "<b>Type:</b>"
+msgstr "<b>Tipo:</b>"
+
+#: ../data/disk-manager.glade.h:15
+msgid "<b>Label:</b>"
+msgstr "<b>Rótulo:</b>"
+
+#: ../data/disk-manager.glade.h:16
+msgid "<b>Mount point:</b>"
+msgstr "<b>Ponto de montagem:</b>"
+
+#: ../data/disk-manager.glade.h:17
+msgid "<b>Options:</b>"
+msgstr "<b>Opções:</b>"
+
+#: ../data/disk-manager.glade.h:18
+msgid "Volume"
+msgstr "Volume"
+
+#: ../data/disk-manager.glade.h:19
+msgid "<b>Total size:</b>"
+msgstr "<b>Tamanho total:</b>"
+
+#: ../data/disk-manager.glade.h:20
+msgid "<b>Free space:</b>"
+msgstr "<b>Espaço livre:</b>"
+
+#: ../data/disk-manager.glade.h:21
+msgid "<b>Available space:</b>"
+msgstr "<b>Espaço disponível:</b>"
+
+#: ../data/disk-manager.glade.h:22
+msgid "<b>Used space:</b>"
+msgstr "<b>Espaço usado:</b>"
+
+#: ../data/disk-manager.glade.h:23
+msgid "Size"
+msgstr "Tamanho"
+
+#: ../data/disk-manager.glade.h:24
+msgid ""
+"Applying changes.\n"
+"Please wait until the process finishes."
+msgstr ""
+"A aplicar as alterações.\n"
+"Aguardar até que o processo seja concluído."
+
+#: ../data/disk-manager.desktop.in.in.h:1 ../DiskManager/Dialogs.py:489
+#: ../DiskManager/DiskManager.py:78
+msgid "Disk Manager"
+msgstr "Gestor de Discos"
+
+#: ../data/disk-manager.desktop.in.in.h:2
+msgid "Manage filesystem configuration"
+msgstr "Gerir a configuração do sistema de ficcheiros"
+
+#: ../DiskManager/Dialogs.py:127 ../DiskManager/Fstab/Mounter.py:206
+#, python-format
+msgid "No driver is available for this type of filesystem : '%s'"
+msgstr ""
+"Não há nenhum controlador disponível para este tipo de sistema de ficheiros:"
+" '%s'"
+
+#: ../DiskManager/Dialogs.py:162
+msgid "Select a directory"
+msgstr "Seleccionar um diretório"
+
+#: ../DiskManager/Dialogs.py:231
+msgid "Wrong mount point"
+msgstr "Ponto de montagem incorrecto"
+
+#: ../DiskManager/Dialogs.py:232
+#, python-format
+msgid ""
+"<i>%s</i> is currently in use.\n"
+"You should try another one."
+msgstr ""
+"<i>%s</i> presentemente em uso.\n"
+"Recomendado tentar outro."
+
+#: ../DiskManager/Dialogs.py:243
+msgid "Options formatting error"
+msgstr "Erro nas opções de formatação"
+
+#: ../DiskManager/Dialogs.py:244
+#, python-format
+msgid ""
+"<i>%s</i> is not formatted correctly.\n"
+"Options should be separated by comma (,)"
+msgstr ""
+"<i>%s</i> não está formatado correctamente.\n"
+"As opções devem ser separadas por vírgula (,)"
+
+#: ../DiskManager/Dialogs.py:427
+msgid ""
+"Removing unknown devices from\n"
+"the configuration file?"
+msgstr ""
+"Remover os dispositivos desconhecidos\n"
+"do ficheiro de configuração?"
+
+#: ../DiskManager/Dialogs.py:428
+msgid ""
+"I can not find any existing block devices\n"
+"corresponding to the following devices:"
+msgstr ""
+"Não foi possível encontrar quaisquer dispositivos de blocos\n"
+"correspondentes aos seguintes dispositivos:"
+
+#: ../DiskManager/Dialogs.py:430
+msgid ""
+"It is advisable to remove them in order to avoid failed mount\n"
+"at start-up. Select the ones you want to remove."
+msgstr ""
+"É aconselhável removê-los para evitar falhas de montagem\n"
+"no processo de iniciação. Seleccionar os dispositivos a remover."
+
+#: ../DiskManager/Dialogs.py:433
+msgid "Remove selected"
+msgstr "Remover seleccionados"
+
+#: ../DiskManager/Dialogs.py:433
+msgid "Don't show me this warning in the future."
+msgstr "Não voltar a mostrar este aviso."
+
+#: ../DiskManager/Dialogs.py:468
+msgid "Duplicate entry detected"
+msgstr "Detectada entrada duplicada"
+
+#: ../DiskManager/Dialogs.py:469
+msgid ""
+"The following entries of your configuration file use the same mount point:"
+msgstr ""
+"As seguintes entradas do ficheiro de configuração usam o mesmo ponto de "
+"montagem:"
+
+#: ../DiskManager/Dialogs.py:470
+msgid ""
+"Two different devices can not share the same mount point.\n"
+"You should select the one you want, and the others will be commented.\n"
+"They will be kept in the configuration file, but will be disabled."
+msgstr ""
+"Dois dispositivos diferentes não podem usar o mesmo ponto de montagem.\n"
+"Deve ser seleccionado o pretendido e os outros serão comentados.\n"
+"Serão mantidos no ficheiro de configuração, mas serão desactivados."
+
+#: ../DiskManager/Dialogs.py:473
+msgid "Keep selected"
+msgstr "Manter o seleccionado"
+
+#: ../DiskManager/Dialogs.py:506
+msgid "Easily manage your filesystem configuration"
+msgstr "Forma simples de gerir a configuração do sistema de ficheiros"
+
+#: ../DiskManager/Dialogs.py:510
+msgid "translator-credits"
+msgstr "Créditos de tradução"
+
+#: ../DiskManager/DiskManager.py:132
+msgid "Enable"
+msgstr "Activar"
+
+#: ../DiskManager/DiskManager.py:138
+msgid "Device"
+msgstr "Dispositivo"
+
+#: ../DiskManager/DiskManager.py:151
+msgid "Mount point"
+msgstr "Ponto de montagem"
+
+#: ../DiskManager/DiskManager.py:158
+msgid "Type"
+msgstr "Tipo"
+
+#: ../DiskManager/DiskManager.py:165
+msgid "Total"
+msgstr "Total"
+
+#: ../DiskManager/DiskManager.py:172
+msgid "Free"
+msgstr "Livre"
+
+#: ../DiskManager/DiskManager.py:179
+msgid "Used"
+msgstr "Usado"
+
+#: ../DiskManager/DiskManager.py:292
+msgid "Editing system partition?"
+msgstr "Editar partição do sistema?"
+
+#: ../DiskManager/DiskManager.py:294
+#, python-format
+msgid ""
+"%s is an important system partition.\n"
+"Be really careful when editing it, or you may have\n"
+"serious problems. Do you want to continue?"
+msgstr ""
+"%s é uma importante partição de sistema.\n"
+"A sua edição requer muito cuidado, pois poderá\n"
+"causar sérios problemas. Continuar?"
+
+#: ../DiskManager/DiskManager.py:399
+msgid "Unmount"
+msgstr "Desmontar"
+
+#: ../DiskManager/DiskManager.py:402
+msgid "Mount"
+msgstr "Montagem"
+
+#: ../DiskManager/DiskManager.py:407
+msgid "Reverting to an older version?"
+msgstr "Retornar para uma versão anterior?"
+
+#: ../DiskManager/DiskManager.py:408
+msgid "This will apply the following changes:"
+msgstr "Esta acção aplicará as seguintes alterações:"
+
+#: ../DiskManager/DiskManager.py:408
+msgid "Do you want to continue?"
+msgstr "Continuar?"
+
+#: ../DiskManager/Utility.py:45
+msgid "KB"
+msgstr "KB"
+
+#: ../DiskManager/Utility.py:45
+msgid "MB"
+msgstr "MB"
+
+#: ../DiskManager/Utility.py:45
+msgid "GB"
+msgstr "GB"
+
+#: ../DiskManager/Utility.py:45
+msgid "TB"
+msgstr "TB"
+
+#: ../DiskManager/Fstab/FstabHandler.py:435
+msgid "Unmounting disabled devices?"
+msgstr "Desmontar dispositivos desactivados?"
+
+#: ../DiskManager/Fstab/FstabHandler.py:436
+msgid "You disabled the following devices:"
+msgstr "Foram desactivados os seguintes dispositivos:"
+
+#: ../DiskManager/Fstab/FstabHandler.py:436
+msgid "Do you want to unmount them?"
+msgstr "Deseja desmontá-los?"
+
+#: ../DiskManager/Fstab/FstabHandler.py:438
+msgid "Unmount selected"
+msgstr "Desmontar os seleccionados"
+
+#: ../DiskManager/Fstab/FstabHandler.py:447
+msgid "Reboot required"
+msgstr "Requer reinício"
+
+#: ../DiskManager/Fstab/FstabHandler.py:448
+msgid ""
+"In order to apply all your changes,\n"
+"you'll need to reboot your computer."
+msgstr ""
+"Para aplicar todas as alterações\n"
+"é necessário reiniciar o computador."
+
+#: ../DiskManager/Fstab/Mounter.py:56
+msgid "Mounting partition"
+msgstr "A montar partição"
+
+#: ../DiskManager/Fstab/Mounter.py:58
+msgid "Unmounting partition"
+msgstr "A desmontar partição"
+
+#: ../DiskManager/Fstab/Mounter.py:60
+msgid "Applying changes"
+msgstr "A aplicar as alterações"
+
+#: ../DiskManager/Fstab/Mounter.py:66
+#, python-format
+msgid "Unmounting %s"
+msgstr "A desmontar %s"
+
+#: ../DiskManager/Fstab/Mounter.py:80
+#, python-format
+msgid "Mounting %s"
+msgstr "A montar %s"
+
+#: ../DiskManager/Fstab/Mounter.py:115
+msgid "Unmounting failed"
+msgstr "A desmontagem falhou."
+
+#: ../DiskManager/Fstab/Mounter.py:116
+#, python-format
+msgid "Unmounting <i>%s</i> failed because of the following error:"
+msgstr "Desmontar <i>%s</i> falhou devido ao seguinte erro:"
+
+#. TRANSLATORS:
+#. Keep the English term 'lazy' for the 'lazy' unmount option
+#: ../DiskManager/Fstab/Mounter.py:122
+msgid "You can also use the 'lazy' options to detach the filesystem now."
+msgstr ""
+"Também pode ser usada a opção \"lazy\" para separar agora o sistema de "
+"ficheiros."
+
+#: ../DiskManager/Fstab/Mounter.py:127
+#, python-format
+msgid ""
+"Unmounting <i>%s</i> failed, because\n"
+"it is currently used by the following applications:"
+msgstr ""
+"Desmontar <i>%s</i> falhou porque\n"
+"está em uso pelas seguintes aplicações:"
+
+#: ../DiskManager/Fstab/Mounter.py:129
+msgid "Close all applications that use it and retry to unmount."
+msgstr ""
+"Fechar todas as aplicações em que esteja em uso e tentar desmontar "
+"novamente."
+
+#: ../DiskManager/Fstab/Mounter.py:132
+msgid "The filesystem might be temporarily busy. Wait few seconds and retry."
+msgstr ""
+"O sistema de ficheiros pode estar temporariamente ocupado. Aguardar alguns "
+"segundos e voltar a tentar."
+
+#. TRANSLATORS:
+#. Keep the English term 'lazy' for the 'lazy' unmount option
+#: ../DiskManager/Fstab/Mounter.py:137
+msgid "Unmount with the 'lazy' option"
+msgstr "Desmontar com a opção \"lazy\""
+
+#: ../DiskManager/Fstab/Mounter.py:138
+msgid "Retry unmount"
+msgstr "Voltar a tentar desmontar"
+
+#. TRANSLATORS:
+#. Keep the English term 'lazy' for the 'lazy' unmount option
+#: ../DiskManager/Fstab/Mounter.py:143
+msgid "Even with the lazy option, unmounting failed."
+msgstr "Mesmo com a opção \"lazy\", a desmontagem falhou."
+
+#: ../DiskManager/Fstab/Mounter.py:155
+msgid "Mounting failed"
+msgstr "Falha na montagem"
+
+#: ../DiskManager/Fstab/Mounter.py:156
+#, python-format
+msgid "Mounting <i>%s</i> failed because of the following error:"
+msgstr "Montar <i>%s</i> falhou devido ao seguinte erro:"
+
+#: ../DiskManager/Fstab/Mounter.py:159
+msgid "Retry mount"
+msgstr "Voltar a tentar montar"
+
+#: ../DiskManager/Fstab/Mounter.py:190
+msgid "You can try one of the following actions:"
+msgstr "Pode ser tentada uma das seguintes acções:"
+
+#: ../DiskManager/Fstab/Mounter.py:193
+#, python-format
+msgid "It seems that option '%s' is not allowed."
+msgstr "Parece que a opção '%s' não é permitida."
+
+#: ../DiskManager/Fstab/Mounter.py:195
+msgid "Return options to defaults"
+msgstr "Reverter as opções para as predefinições"
+
+#: ../DiskManager/Fstab/Mounter.py:197
+#, python-format
+msgid "Don't use the '%s' option"
+msgstr "Não usar a opção '%s'"
+
+#: ../DiskManager/Fstab/Mounter.py:199
+#, python-format
+msgid "It seems that fs type '%s' is not valid."
+msgstr "Parece que tipo de sistema de ficheiros '%s' não é válido."
+
+#: ../DiskManager/Fstab/Mounter.py:203
+#, python-format
+msgid "Using driver '%s' (%s)"
+msgstr "A usar o controlador '%s' (%s)"
+
+#. TRANSLATORS:
+#. Keep the English term 'force' for the 'force' unmount option
+#: ../DiskManager/Fstab/Mounter.py:211
+msgid ""
+"You can try to use the 'force' option. Be aware that this could be risky."
+msgstr "Pode ser tentado o uso da opção 'force'. Mas pode ser arriscado."
+
+#: ../DiskManager/Fstab/Mounter.py:212
+msgid "Use the 'force' option"
+msgstr "Usar a opção 'force'"

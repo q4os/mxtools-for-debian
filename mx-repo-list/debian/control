@@ -1,0 +1,13 @@
+Source: mx-repo-list
+Section: admin
+Priority: optional
+Maintainer: Adrian <adrian@mxlinux.org>
+Build-Depends: debhelper (>=10)
+Standards-Version: 3.9.8
+Vcs-Git: git://github.com/MX-Linux/mx-repo-list
+
+Package: mx-repo-list
+Architecture: all
+Description: Part of MX program for managing repos.
+ MX Repo Manager is a tool used for choosing the default APT repository for MX Linux
+ MX Repo List contains the list of MX repos/mirrors used by the Repo Manager program.

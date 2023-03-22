@@ -1,0 +1,12 @@
+#!/usr/bin/make -f
+
+%:
+	dh $@
+
+override_dh_auto_install:
+	for lang in $$(ls translations_script/mo/) ; \
+	do mypath=debian/mx-idevice-mounter/usr/share/locale/$${lang}/LC_MESSAGES/ ; \
+	mkdir -p $${mypath} ; \
+	cp translations_script/mo/$$lang/*.mo $${mypath} ; \
+	done
+	dh_auto_install

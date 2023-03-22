@@ -1,0 +1,12 @@
+Source: isomount
+Section: system
+Priority: optional
+Maintainer: anticapitalista <antiX@operamail.com>
+Build-Depends: debhelper (>= 9.20120115)
+Standards-Version: 3.9.8
+Homepage: https://github.com/antiX-Linux/isomount
+
+Package: isomount
+Architecture: all
+Depends: mount
+Description: Easily mount and unmount iso files and squashfs files.    

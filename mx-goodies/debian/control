@@ -1,0 +1,22 @@
+Source: mx-goodies
+Section: system
+Priority: optional
+Maintainer: Dolphin Oracle <dolphinoracle@gmail.com>
+Build-Depends: debhelper (>= 9.20120115)
+Standards-Version: 3.9.6
+Homepage: http://antix.mepis.org
+
+Package: mx-goodies
+Architecture: all
+Depends: perl, xclip
+Conflicts: antix-goodies, antix-goodies-core 
+Replaces: antix-goodies, antix-goodies-core 
+Description: Various useful scripts for MX.
+ Includes:
+  * burniso (write an ISO image from cli)
+  * fancy-prompts (nine different colorful and interesting prompts)
+  * ps_initrd.sh (initrd packing/unpacking tool)
+  * zram (script to set up zram)
+  * ps_mem.py (RAM usage script)
+  * fstrim-mx (auto set up fstrim of SSE drives as a weekly cron job)
+  

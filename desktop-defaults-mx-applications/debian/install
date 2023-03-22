@@ -1,0 +1,2 @@
+skel/.[a-zA-Z]* 		etc/skel
+root/.[a-zA-Z]*            	root

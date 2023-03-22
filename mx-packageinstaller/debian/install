@@ -1,0 +1,9 @@
+help/*				usr/share/doc/mx-packageinstaller
+icons/mx-packageinstaller.png	usr/share/icons/hicolor/256x256/apps
+mx-packageinstaller		usr/bin
+mx-packageinstaller.desktop	usr/share/applications
+scripts/mxpi-launcher		usr/bin
+scripts/org.mxlinux.pkexec.mxpi-launcher.policy usr/share/polkit-1/actions
+translations/*.qm		usr/share/mx-packageinstaller/locale
+mx-packageinstaller-pkexec	usr/bin
+org.mxlinux.pkexec.mx-packageinstaller-pkexec.policy usr/share/polkit-1/actions

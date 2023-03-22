@@ -1,0 +1,6 @@
+pm_*_enabled.lst	usr/share/mx-packageinstaller-pkglist
+pm_*_disabled.lst	usr/share/mx-packageinstaller-pkglist
+*.pm		usr/share/mx-packageinstaller-pkglist
+*.sh    	usr/share/mx-packageinstaller-pkglist
+*.dict		usr/share/mx-packageinstaller-pkglist
+bin/*		usr/bin

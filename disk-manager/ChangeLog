@@ -1,0 +1,1926 @@
+------------------------------------------------------------
+version:  21.10.01
+committer:  Dolphin Oracle <dolphinoracle@gmail.com>
+branch:  development
+timestamp:  2021-11-07
+message:  
+   * update from original source to gtk3 (Nite Coder)
+------------------------------------------------------------
+revno: 154
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: DiskManager
+timestamp: Mon 2011-05-02 21:33:36 +0200
+message:
+  * Dialogs.py, FstabData.py: #381717 Tries to remove floppy drive: 
+    Black list floppy disk for sanity check.
+  * disk-manager.in: #771666 can't use disk-manager on fedora 14: 
+    Fix python path hack.
+  * Utility.py: Fix get_user for browser functionality.
+  * configure.ac: release version 1.1
+------------------------------------------------------------
+revno: 153
+committer: flomertens@gmail.com
+branch nick: DiskManager
+timestamp: Thu 2011-01-20 20:33:34 +0100
+message:
+   Post release update
+------------------------------------------------------------
+revno: 152
+committer: flomertens@gmail.com
+branch nick: DiskManager
+timestamp: Thu 2011-01-20 20:32:05 +0100
+message:
+  * update NEWS
+------------------------------------------------------------
+revno: 151
+committer: flomertens@gmail.com
+branch nick: DiskManager
+timestamp: Mon 2011-01-10 23:50:39 +0100
+message:
+  * really check for pygtk
+------------------------------------------------------------
+revno: 150
+committer: flomertens@gmail.com
+branch nick: DiskManager
+timestamp: Mon 2011-01-10 23:49:58 +0100
+message:
+  * update translations
+  * fix make distcheck
+------------------------------------------------------------
+revno: 149
+committer: flomertens@gmail.com
+branch nick: DiskManager
+timestamp: Mon 2011-01-10 23:49:24 +0100
+message:
+  * fix make distcheck
+  * reduce space
+------------------------------------------------------------
+revno: 148
+committer: flomertens@gmail.com
+branch nick: DiskManager
+timestamp: Mon 2011-01-10 23:48:40 +0100
+message:
+  * In new distribution, udevinfo is udevadm info
+------------------------------------------------------------
+revno: 147
+committer: flomertens@gmail.com
+branch nick: Disk Manager
+timestamp: Sun 2011-01-09 21:45:42 +0100
+message:
+   bin -> sbin
+------------------------------------------------------------
+revno: 146
+committer: flomertens@gmail.com
+branch nick: Disk Manager
+timestamp: Sun 2011-01-09 21:32:06 +0100
+message:
+  Big update with a lot of weird feature removed in order to prevent bugs.
+------------------------------------------------------------
+revno: 145
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Mon 2007-07-16 21:58:47 +0200
+message:
+  * Fix disk-manager man
+------------------------------------------------------------
+revno: 144
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Mon 2007-07-16 17:26:02 +0200
+message:
+  changes in python-fstab :
+  Those changes affect only system with old udev and no vol_id,
+  so in fact really few system.
+  * ToolsBackend : 
+  - Fix parsing of label with special charachter using blkid
+  - Fix matching of FS_TYPE with blkid. In the same time, get
+  ride of all 'except :' that hidden that bug, and use proper
+  exception handler.
+------------------------------------------------------------
+revno: 143
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Mon 2007-07-16 12:14:29 +0200
+message:
+  changes in python-fstab :
+  * FstabData : better default for ntfs-fuse
+  * Mounter : handle NTFSUNCLEAN mount error also for ntfs-fuse
+  
+  changes in disk-manager :
+  * po : 
+  - new translations : da, de, el, it, nb, pl, zh_CN thanks to : 
+  Joe Hansen, sjolle, Ioannis Koniaris, Milo Casagrande,
+  Morten Mytting Wang, tymmej, rainofchaos.
+  - translation update : en_GB, es, pt_BR, sv thanks to :
+  Nicholas WASTELL, Ezhgnu, Stênio Ferraz, Daniel Nylander
+------------------------------------------------------------
+revno: 142
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Sun 2007-07-15 19:19:27 +0200
+message:
+  changes in python-fstab :
+  * Fstab : use norme path
+  
+  changes in disk-manager :
+  * AddWizard : allow all path in /media/
+  * disk-manager.8, disk-manager-root.8 : add manual
+------------------------------------------------------------
+revno: 141
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Fri 2007-07-13 12:51:08 +0200
+message:
+  forgot to remove some debug stuff...
+------------------------------------------------------------
+revno: 140
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Fri 2007-07-13 12:42:03 +0200
+message:
+  changes in python-fstab :
+  * DiskInfo :
+  - Set FS_LABEL_SAFE on system that don't provide it.
+  - New attribute : DEV_NUM (device number of the device)
+  - Add DEV_NUM as required attr (and so MINOR & MAJOR)
+  * DiskInfo, Fstab :
+  - Refacor the way we match fstab entry :
+  Use new DiskInfo method search_device that get dev_num of the
+  device (if node) and search entry in reverse database.
+  reverse database now conatain only DEV_NUM, LABEL & UUID
+  (in the form %attr=%value to avoid race).
+  * ToolsBackend :
+  - Execute stuff in a separate method (avoid duplcate code)
+  - Improve debug output
+  - use .+ instead of \S+ for matching attribte's value. This
+  fix label was truncated with special charachter.
+  - Set slaves not only for dm-, but each time /slaves is not empty.
+  - Execute vol_id each time we get a DEVICE, and overwrite
+  info, even if we get ones from udevinfo, vol_id is moore reliable
+  - Fix typo in second volid attempt (LABEL -> FS_LABEL)
+  - Call blid only if don't get an FS_USAGE, and don't overwrite info.
+  * Fstab : cleanup
+  * FstabData, FstabUtility : store special_char in FstabData
+  * FstabHandler : cleanup
+  * Mounter : 
+  - refactor the way we get bad_opt
+  - don't offer to not use bad_opt if there is no other opt
+  
+  changes in disk-manager :
+  * Utility : fix typo in epiphany
+  * DiskManager : cleanup
+  * Dialogs, disk-manager.glade : show an error message of
+  there is no driver for device type
+------------------------------------------------------------
+revno: 139
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Thu 2007-07-05 14:52:08 +0200
+message:
+  changes in disk-manager :
+  * Dialogs : no big changes.
+------------------------------------------------------------
+revno: 138
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Thu 2007-07-05 01:36:28 +0200
+message:
+  changes in python-fstab :
+  * Mounter : finish works about the get_drivers change
+  * DiskInfo : don't require FS_DRIVERS
+  * ToolsBackend, Fstabconfig : vol_id pre udev v 60 was
+  called udev_volume_id and add a different syntax.
+  
+  changes in python-fstab :
+  * Dialogs : finish works about the get_drivers change
+------------------------------------------------------------
+revno: 137
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Wed 2007-07-04 23:02:11 +0200
+message:
+  changes in python-fstab :
+  * DiskInfo, Fstab, FstabData : improve get_drivers to take
+  in considaration secondary driver (like ext2 for ext3...).
+  Get ride of get_driver_info and make get_drivers be able to
+  product the same behaviour.
+  * Mounter : we absolutly need disk
+  
+  changes in disk-manager :
+  * Dialogs : use new get_drivers behaviour to not think that
+  driver don't exist if it is a secondary one.
+------------------------------------------------------------
+revno: 136
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Tue 2007-07-03 20:58:47 +0200
+message:
+  changes in python-fstab :
+  * Fstab, FstabUtility : move encode, decode & escape_special
+  from Fstab to FstabUtility
+  * Fstab : Don't fail if we can't create/delete a directory, 
+  but log an error.
+  
+  changes in disk-manager :
+  * disk-manager.glade : use gtk-dialog-info instead of
+  gtk-info, not compatible with gtk 2.6
+------------------------------------------------------------
+revno: 135
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Tue 2007-07-03 00:12:45 +0200
+message:
+  changes in python-fstab :
+  * Fstab, FstabData : change get_is_system policy to better
+  reflect what it should do.
+  * Dialogs : fix fsk wasn't set correclty
+  
+  changes in disk-manager :
+  * DiskManager : make sure that what don't divise by zero
+------------------------------------------------------------
+revno: 134
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Mon 2007-07-02 00:19:16 +0200
+message:
+  changes in python-fstab :
+  * Fstab : Fix parsing of comments in minimal mode
+  * FstabHandler, FstabUtility : remove sanity check code
+  * Mounter : little refactorisation of handle_mount_error
+  
+  changes in disk-manager :
+  * DiskManager, Dialogs, Config : perform sanity check at startup.
+  This are the same test than what did python-fstab, but we can know
+  store in the conf file device unknow device that the user want
+  to keep, so we don't bother him each time he start the app about that.
+  * Utility : try first to use exo-open for xfce
+------------------------------------------------------------
+revno: 133
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Thu 2007-06-28 01:05:13 +0200
+message:
+  changes in python-fstab :
+  * DiskInfo :
+  - add doc for get_drivers & get_driver_info
+  - cleanup
+  * ToolsBackend : don't set the IGNORE key for slaves of dm.
+  backend should not use this key. Instead make sure that FS_USAGE
+  is not filesystem, otherwise set it to "other" (comment explain why)
+  * FstabHandler : in handle_mount_error :
+  - if output is empty, it is certainly a BADTYPE or a NODRIVER
+  - propose all available drivers on BADOPT (but not the current one)
+------------------------------------------------------------
+revno: 132
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Wed 2007-06-27 15:47:04 +0200
+message:
+  changes in python-fstab :
+  * DiskInfo :
+  - New _driver_db that you can query with a new get_drivers method
+  This surclass the get_ntfs_drivers method
+  - some cleanup
+  * FstabData : list all know special drivers (like ntfs-3g or ntfs-fuse)
+  so we can have a good description of them. Default is "Unknow driver"
+  * Fstab, FstabData : replace default of defaults option to __default__
+  
+  changes in disk-manager :
+  * Dialogs :
+  - if driver currently set is not in db, propose all drivers
+  - warn if driver is not in db
+  - make check ate boot unsensitive if there is no fsck for this driver
+  * Utility : don't use "GNOME_KEYRING_SOCKET" to detect GNOME,
+  it can be used in elsewhere, in XFCE for exemple.
+------------------------------------------------------------
+revno: 131
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Wed 2007-06-27 00:13:20 +0200
+message:
+  * Set default icon the earlier possbible
+------------------------------------------------------------
+revno: 130
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Tue 2007-06-26 23:51:46 +0200
+message:
+  changes in python-fstab :
+  * Fstab : cleanup
+  * FstabHandler : 
+  - cleanup, improve debugging...
+  - add a new method : get_changes_current_to_original
+  - change get_changes_current_* to only return log
+  * Mounter : cleanup
+  * EventHandler : 
+  - don't use thread for the emit method. It's no more needed
+  
+  changes in disk-manager :
+  * disk-manager.in, AddWizard, DiskManager : set default icon in
+  start-up script.
+  * Dialogs : cleanup
+  * DiskManager : Ask before calling undo
+  * Utility :
+  - refactor get_desktop to not only check for env key, but also
+  for process. We now check KDE, GNOME & XFCE. Since this method
+  is no more base on Paul Boddie code, copyright is no more needed
+  - refactor open_url, to improve the way we select browser.
+  We know use a dict of prefered browser for each desktop & 
+  each type of url (file & http).
+------------------------------------------------------------
+revno: 129
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Mon 2007-06-25 23:41:05 +0200
+message:
+  changes in python-fstab :
+  * FstabDialogs :
+  - don't wrap text_down_label if down & top are in use.
+  - increase added row to 2, but decraise max row of textview to 8
+  * FstabUtility : in get_used_file : don't use full lsof,
+  this way we don't list network stuff. Also increase max
+  char of command to max allowed (+c 0)
+------------------------------------------------------------
+revno: 128
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Mon 2007-06-25 13:11:44 +0200
+message:
+  * Dialogs : In HistoryDialog : forgot to make translatable
+  one string.
+------------------------------------------------------------
+revno: 127
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Mon 2007-06-25 12:40:44 +0200
+message:
+  changes in python-fstab :
+  * FstabHandler :
+  - In the mount methode, do a simple_apply if we changed the
+  path because it was in use.
+  - In _apply, get ride of the counter stuff. Doing a simple_apply
+  if we detected some changed path should be enough
+  
+  changes in disk-manager :
+  * Some more translatable string fix
+------------------------------------------------------------
+revno: 126
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Mon 2007-06-25 02:14:15 +0200
+message:
+  changes in python-fstab :
+  * Fstab : in Entry :
+  - use dict copy method instead of using Entry one in __eq__
+  - refactor copy method to use self.__class__ instead of the
+  crapy copy module. This improve a lot performance.
+------------------------------------------------------------
+revno: 125
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Sun 2007-06-24 21:23:01 +0200
+message:
+  changes in python-fstab :
+  * Mounter : fix a translatable string
+  
+  changes in disk-manager :
+  * Update fr translation
+------------------------------------------------------------
+revno: 124
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Sun 2007-06-24 19:59:28 +0200
+message:
+  changes in python-fstab :
+  * FstabHandler : check duplicate for all unmounted device in _apply
+------------------------------------------------------------
+revno: 123
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Sun 2007-06-24 19:11:11 +0200
+message:
+  changes in python-fstab :
+  * FstabHandler : in _build_object : when getting options
+  from MTAB, replace 'rw' by 'defaults' to be consistant with
+  our default options
+------------------------------------------------------------
+revno: 122
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Sun 2007-06-24 18:23:55 +0200
+message:
+  changes in python-fstab :
+  * FstabHandler : in _rebuild_object : also add entry mounted
+  mounted on mount point that are not in new
+  
+  changes in disk-manager :
+  * AddWizard : fix parent of the warning dialog
+  * disk-manager.glade : set wrap mode too True for all
+  label of dialog_template
+------------------------------------------------------------
+revno: 121
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Sun 2007-06-24 14:05:59 +0200
+message:
+  * Update README : rosetta is now open
+------------------------------------------------------------
+revno: 120
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Sun 2007-06-24 12:44:27 +0200
+message:
+  * Update translation from rosetta
+  * DiskManager : allow to enable system partition
+------------------------------------------------------------
+revno: 119
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Sun 2007-06-24 00:46:23 +0200
+message:
+  changes in python-fstab :
+  * FstabHandler :
+  little refactorisation of _build_object to be able to get
+  options & type of device mounted but not in fstab. Basicly,
+  we get those from MTAB, but for "fuse" & "fuseblk", we try
+  to get those from the cmd line which mounted the volume
+  * FstabUtility :
+  introduce get_fuse_options that try to get type & options of
+  a device mounted with fuse
+  * Mounter :
+  - Don't allow to unmount system partition with the lazy option
+  - If we fail to unmount a mount point which as been removed from
+  self.disk, readd it
+  
+  changes in disk-manager :
+  * Fix README
+  * Dialogs : in EditDialog : don't allow to change path of
+  system partition
+------------------------------------------------------------
+revno: 118
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Fri 2007-06-22 14:46:34 +0200
+message:
+  changes in python-fstab :
+  * Mounter : reduce time between mount & umount to nearly
+  nothing. It seams safe enough.
+  
+  changes in disk-manager :
+  * Dialogs : In HistoryDialog : update textview after reverting to 
+  an other version.
+  * disk-manager : add a --version option
+------------------------------------------------------------
+revno: 117
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Fri 2007-06-22 04:32:43 +0200
+message:
+  changes in python-fstab :
+  * Fstab : be sure that FSTAB_NAME is a path before even considering
+  using it.
+  * Mounter : reiserfs don't seams to log the same message in
+  syslog on bad option. This change should add this support.
+------------------------------------------------------------
+revno: 116
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Thu 2007-06-21 12:32:16 +0200
+message:
+  changes in python-fstab :
+  * Fstab : just some debug putput added
+------------------------------------------------------------
+revno: 115
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Thu 2007-06-21 12:16:44 +0200
+message:
+  changes in python-fstab :
+  * Fstab : ignore FSTAB_NAME when we compare for equality 2
+  entries. This way we don't save Fstab when the only change is
+  an FSTAB_NAME
+  * Fstab : correctly log the resolved DEV
+  * FstabUtility : in change-tracker : we no more need to check
+  if the log is empty or not
+  * FstabHandler : in savelog, use lastsave_has_changed to
+  know if fstab as changed since lastsave
+------------------------------------------------------------
+revno: 114
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Thu 2007-06-21 11:22:13 +0200
+message:
+  changes in python-fstab :
+  * Fstab, DiskInfo, ToolsBackend : don't try to maintain a list
+  of symlink, it's impossible that we get them all. Instead,
+  try to resolve this symlink at Fstab creation to know if it refer
+  to a known device. 
+  * Fstab : in Entry.write : if FSTAB_NAME is a symlink to DEVICE, 
+  use it when type is DEVICE
+  * Fstab : in MntFile.write : make sure that (UUID, LABEL) symlink
+  exists before using them
+------------------------------------------------------------
+revno: 113
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Tue 2007-06-19 02:11:43 +0200
+message:
+  changes in python-fstab :
+  * Mounter : fix typo in handle_mount_error treated all ntfs-3g
+  related error as NTFSUNCLEAN error (and so wrongly proposed the
+  force option)
+  
+  changes in disk-manager :
+  * Install a 24×24 icone
+------------------------------------------------------------
+revno: 112
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Sat 2007-06-16 13:02:11 +0200
+message:
+  * Get consolhelper path during configuration, 
+  and use it in pam Makefile, instead of hardcoding it.
+  Set it to /usr/bin/consolhelper if consolhelper wasn't found
+  but with-force-pam=yes
+------------------------------------------------------------
+revno: 111
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Sat 2007-06-16 12:27:58 +0200
+message:
+  * Update README
+  * Update en_GB translation thanks to Nicholas WASTELL
+------------------------------------------------------------
+revno: 110
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Sat 2007-06-16 00:57:47 +0200
+message:
+  * Dialogs : fix 'empty log' dialog in HistoryDialog
+------------------------------------------------------------
+revno: 109
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Sat 2007-06-16 00:36:42 +0200
+message:
+  changes in python-fstab :
+  * Fix documentation
+  * DiskInfo : remove list option of the search method. Not really useful
+  * FstabUtility : In change-tracker : make sure that log is empty
+  when there is no changes
+  
+  changes in DiskManager :
+  * Fix Documentation
+  * AddWizard : apply ntfs policy only when needed
+  * DiskManager : fix system partition warning
+  * disk-manager/disk-manager-root : little tweaks to make sure that
+  python path is set correclty when prefix=/usr/local
+------------------------------------------------------------
+revno: 108
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Mon 2007-06-11 17:31:12 +0200
+message:
+  changes in python-fstab :
+  * FstabHandler :
+  - refactor _build_fstab to be able to build from an fstab oject
+  - fix _build_object & _rebuild_object
+  * EventHandler : use _build_object on mtab update detected
+------------------------------------------------------------
+revno: 107
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Fri 2007-06-08 03:39:33 +0200
+message:
+  changes in python-fstab :
+  * EventHandler : fix external_fstab_changed to use _rebuild_object
+  instead of _create_object
+  * Fstab :
+  - use list of options in addopt & removeopt
+  - in addopt, don't add a coma when their where no value before
+  - add setopt method that initialize FSTAB_OPTION to the options
+  provided in argument
+  * FstabHandler :
+  - _own_copy -> _copy
+  - add set_previous_mode that set mode to previous one.
+  - fix _copy to make sure that we create copy of each entry
+------------------------------------------------------------
+revno: 106
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Fri 2007-06-08 01:58:56 +0200
+message:
+  changes in python-fstab :
+  * Fstab :
+  small check_path refactoring to improve check of duplicate
+  device. This require to give the entry we want to edit, and
+  not only the device.
+  * FstabUtility : don't try to improve dmesg output, it didn't 
+  really do a great job, and since now we propose action for
+  common mount failure, we can give it brut.
+  * Mounte : Fix localization of some string.
+  * FstabHandler : 
+  - _create_object -> _build_object
+  - new method _rebuild_object, that rebuld the object from
+  a new fstab. Difference with _build_object is that global
+  entry are keep and not recreated.
+  - use _rebuild_object in undo and revert_to
+  - refactor _own_copy & restore_copy to not lost global change
+  
+  changes in disk-manager :
+  * Dialogs : in EditDialog :
+  - changing driver wasn't revert on cancel. 
+  We now use 'virtual' mode to fix that.
+------------------------------------------------------------
+revno: 105
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Thu 2007-06-07 13:12:23 +0200
+message:
+  changes in python-fstab:
+  * Fstab : change method name has_option -> hasopt to follow
+  other option related method names
+  * FstabUtility : in change_tracker :
+  - more work in the duplicate device management.
+  options and type changes should be handle correctlty now
+  - improve log description
+  * FstabHandler :
+  - remove duplicate when we unconfigure unmounted entry
+  - don't move duplicate from disabled to to_umount since now
+  change_tracker should handle that correctly
+  * Mounter : 
+  - check that we have the bad option before proposing to remove it
+  - check that we don't have the force option before proposing to add it
+  - usual gui tweak : make transition more smooth
+  
+  changes in disk-manager :
+  * Utility : in open_url :
+  - also set LOGNAME to user, so firefox can find remote session
+  * Dialog : in history_dialog :
+  - in the commit view, use bold for title. More easy than i would
+  expect. The all TextViewTag framework is a bit scary at first
+------------------------------------------------------------
+revno: 104
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Wed 2007-06-06 14:25:55 +0200
+message:
+  changes in python-fstab :
+  * Fix some documentation
+  * Mounter : parse last dmesg log only if needed
+  * Fstab : fix addopt & removeopt to really allow multiple options
+------------------------------------------------------------
+revno: 103
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Wed 2007-06-06 03:44:38 +0200
+message:
+  changes in python-fstab :
+  * Fstab :
+  - Set FSTAB_TYPE to FS_TYPE if FS_DRIVER is empty
+  - add new method defaultopt() that return the default optionfor the entry
+  - add an option in the umount methode, to use the lazy option
+  - In search methode, set default key to only "FSTAB_PATH" and
+  remove not really usefull list option. This was intended first
+  to track last not duplicate safe code. It is also more logic.
+  * FstabHandler :
+  - add a new method, get_duplicate that return duplicate entry of
+  the device or None of device is use only one time
+  - add simple_apply method which intend to replace 
+  MntFile apply method for an FstabHandler object
+  * FstabUtility :
+  - fix last not duplicate safe code in change_tracker
+  * FstabDialogs :
+  - Improve DialogBuilder
+  - replace dialog fct by a single one which take in first
+  parameter the type of the dialog you want
+  * Mounter :
+  - refactor error handling to be able to do actions to 
+  fix the problem. For now, we handle those actions :
+  + Propose the lazy option on umount buzy
+  + Propose to remove bad option or revert them to default
+  on Unknow option detected
+  + Propose to use default FSTYPE driver on type unknow
+  + Propose to use the force option on NTFS unclean with ntfs-3g
+  
+  change in disk-manager :
+  * AddWizard : fix last not duplicate safe code
+------------------------------------------------------------
+revno: 102
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Mon 2007-06-04 23:48:33 +0200
+message:
+  changes in python-fstab :
+  * Fstab :
+  - umount mount point and not dev to support duplicate
+  - refactor check_path to make it a little faster.
+  - refactot device_is_mounted, to return the list of
+  path, device is mounted to.
+  * FstabHandler :
+  - A lot of works done to support duplicate entry :
+  - replace _link_fstab by _create_object that add new device
+  to an fstab object. That make dynamic recreation of 
+  FstabHandler object more reliable in case of duplicate entry.
+  - use it in _restore_copy, undo and revert_to
+  - remove duplicate when they are unmounted and no more in fstab
+  - fix get_changes_* to really to what it should do
+  - reapply change if global *or* local change are not fully apply - emit new "internal_change_cancel" event when mount or umount fail
+  - emit new "internal_change_cancel" event when mount or umount fail
+  * EventHandler :
+  - use _create_object on fstab extarnal change
+  - add event "on_internal_change_cancel" to desinhibit watch
+  when finaly there is no internal change to apply
+  * FstabUtility :
+  - refactor change_tracker to support duplicate entry.
+  - change check_duplicate to only check duplicate path
+  since now we support duplicate device
+  * Mounter :
+  - big refacoring to make it more flexible and support duplicate.
+  - begin separation of the GTK part. Still need some works. 
+  This will not be done for 1.0 anyway.
+  - change api to a more sane on -> (mount = , umount =)
+  - don't suppot remount. If you want to remount a partition,
+  you should add it to umount explicitly.
+  This was needed for duplicate entry.
+  * FstabDialog :
+  - create dialog with a modular DialogBuilder dialog, that
+  can create dialog with a treeview or a textview and/or a 
+  check buttons area, depending of the data you give him.
+  This make creation of new dialog with a simple 3 line fct
+  - while i was on it, i changed the way we set the size to 
+  depend on the font.
+  
+  change in disk-manager :
+  * DiskManager :
+  Make it support duplicate device
+  * Dialogs/HistoryDialog :
+  Show changes between selected versionn and current one
+  in main window, and when asking if we apply or not
+------------------------------------------------------------
+revno: 101
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Sun 2007-06-03 01:40:02 +0200
+message:
+  changes in python-fstab :
+  * FstabTest, FstabHandlerTest : begin work on unittest
+  * Fstab, DiskInfo : avoid the use of regular expression when
+  possible
+  * Fstab : don't use LABEL in fstab if there is multiple device
+  with the same label
+  * Mounter : finish string improvement
+  changes in disk-manager :
+  * avoid the use of regular expression when possible
+------------------------------------------------------------
+revno: 100
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Sat 2007-06-02 17:25:42 +0200
+message:
+  changes in python-fstab :
+  * Fstab :
+  - rename safe to escape_special, and add more specials charachters
+  that we need to escape before using them in commands
+  - Add an clean_all_path & make_all_path methods
+  - Add an option to list_created_path to clean it
+  * FstabDialogs : 
+  - change dials behaviour (see String fix).
+  - tweak size request of error_dial_message
+  * FstabHandler :
+  - Use new Fstab method to clean, create paths
+  * FstabUtility : in get_used_file, use grep -F and escape
+  specail characher from path
+  * Mounter : use xml.sax.saxutils to escape markup char in label.
+  We don't need anymore to use the "can't show" string.
+  changes in all :
+  * String fix : 
+  - warning_dial question_dial & error_dial_message now use
+  a single string instead of 2 for the core message. This make
+  stuff more localizable. Thank to Abel Cheung for the advice.
+  - Some more " :" -> ":" fix
+  - Use GB, MO... as default size in size_renderer.
+  and translate it. Thanks to Nicholas WASTELL for the advice
+  changes in the disk-manager :
+  * AddWizard : use xml.sax.saxutils to escape markup char in label.
+  * Dialogs : use xml.sax.saxutils to escape markup char in label.
+  * DiskManager :
+  - use xml.sax.saxutils to escape markup char in label.
+  - on ntfs-toggle, don't update all the guy, but only the
+  ntfs button. I'm still not really with that, but better than
+  before.
+------------------------------------------------------------
+revno: 99
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Sat 2007-06-02 01:48:37 +0200
+message:
+  * DiskManager : update main after ntfs toggle
+------------------------------------------------------------
+revno: 98
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Sat 2007-06-02 00:28:20 +0200
+message:
+  * configure.in : set blkid & dmsetup path. Decrease intltool
+  requirement. Improve python requirement.
+  * disk-manager-root : detect desktop to make sure that we
+  use gksu on gnome, and kdesu on kde. Store user XAUTHORITY key
+  to use it in open_url.
+  * Config : update default size
+  * Dialogs : in EditDialog, revert to current path if we
+  delete it. Don't use re to check if the path begin by "/"
+  * DiskManager : 
+  - Use 24 as icons size in the treeview
+  - Add local icon path to icon search path
+  - Create hal fdi directory on startup if it don't exist
+  - Use idle_add to update main instead of gtk.gdk.thread* fcts
+  - Set Enable column to be reorderable
+  - Set Device column to be expendable
+  - Update column size
+  - Apply gtk events while hidding main gui on shutdown
+  - Some guy tweaks to imporve compatibily with pygtk 2.6
+  * Utility : In open_url :
+  - Use gnome-open on gnome for both http & file
+  - Update http & file browser : add dolphin, rox, epiphany,
+  mozilla, remove sensible-browser
+  - Use USER, XAUTHORITY, HOME from real user
+  - Revert modified env key after launching the browser
+  In python-fstab :
+  * Move config.py to Fstabconfig.py to avoid conflict with
+  config.py from apps
+  * DiskInfo : don't require UUID. blkid don't give it for ntfs
+  and old system (udev < 60) rely on it
+  * ToolsBackend : add compatibility with old dmsetup
+  * Fstab :
+  - refactor make_path. No fundamental change
+  - in mount & umount : show cmd on debug, escape special
+  character from path in the cmd.
+  - in list_created_path : return an empty list when file is empty
+  - refactor clean_path & check_path to work better together
+  * FstabData : use umask=0222 for ntfs
+  * EventHandler :
+  - refactor the way we inhibit watch before internal_change so
+  we don't need lock anymore
+  - update time between 2 watch to 0.5 to be less CPU hungry
+  - wait that emit_thread end before exiting emit
+  * FstabHandler : refactor the way we create/delete path to make
+  it more simple and reliable (but also less faster) : we check
+  now on _apply that all path in fstab are created, and delete
+  all path created here that are not in fstab. Delete also
+  path on umount when not in fstab, and on failled mount when
+  not in fstab
+  * FstabUtility : Use commands module for lsof & dmseg. This is a try
+  to fix a strange bug, which might be a subprocess bug, that
+  i encounter in debian sarge (python 2.4.1). Process wouldn't
+  exit even if lsof ended.
+  * Mounter : don't use threading to update guy, but use the
+  traditionnal method. This fix compatibility with pygtk < 2.10
+  which leaded to a deadlock. Use common tweaks to make sure that
+  the guy is update regulary.
+------------------------------------------------------------
+revno: 97
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Sat 2007-05-26 00:22:35 +0200
+message:
+  * Little fix in debug string. No other changes
+------------------------------------------------------------
+revno: 96
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Sat 2007-05-26 00:13:08 +0200
+message:
+  * po : add en-gb translation thanks to Nicholas WASTELL
+  * All : fix a lot of strings thanks to Nicholas WASTELL
+  * AddWizard : don't allow stuff like ***/media/***
+  * Fstab : be paranoic in __setitem__ since copy.copy could
+    do weaird stuff and cause race.
+  * Fstab : raise an error in __getitem__ and remove, when type
+    is not supported
+  * Mounter : don't show mount point with &.
+    when unmounting and there is no used files, retry 3 times
+------------------------------------------------------------
+revno: 95
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Fri 2007-05-25 00:50:51 +0200
+message:
+  * AddWizard : set default ntfs driver during init
+  * Fstab/Fstab : fix bug : default driver wasn't et correctly
+  * Mounter : decrease time betwwen mount/unmount, and 
+    retry after 1s after a first fail unmount
+------------------------------------------------------------
+revno: 94
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Thu 2007-05-24 22:28:51 +0200
+message:
+  * FstabHandler, EventHandler : to replace the DiskManager watch
+  that didn't worked any more since the introduction of FstabHandler,
+  we have know a complete event notifier infrastructure.
+  EventHandler integrate a watch that look for fstab, mtab
+  and size update, and an event notifier that application
+  can connect to via a simple connect() method. Look at the 
+  connect doc of FstabHandler for more informations.
+  * DiskManager : update to take last change in considaration.
+  Now we don't need any more to update the guy on each actions, 
+  we just connect update_main to "any_changed" event
+  * FstabDialogs : Try to set size more cleverly.
+  * Fstab : ignore comment on minimal mode
+  * FstabHandler, FstabUtility : move check_duplicate and 
+  check_unknow to Utility and update check_duplicate : we know
+  delete exact duplicate, but ask user on duplicate device.
+  * On all : For consitancy, use umount and not unmount on
+  variables.
+  * Some little guy tweaks
+------------------------------------------------------------
+revno: 93
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Tue 2007-05-22 13:26:22 +0200
+message:
+  * Removing Fstab bckup, this has nothing to do here
+  * Update ChangeLog and NEWS
+------------------------------------------------------------
+revno: 92
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Tue 2007-05-22 13:11:20 +0200
+message:
+  * Fix headers
+  * Fstab/DiskInfo : complete documentation
+  * Fstab/DiskInfo : Close /proc/partitions after getting devices
+  * Fstab/DiskInfo : if no backend, try to import the default one
+  * Fstab/Fstab : fix list_created_path didn't delete path with
+    space from the list of created path
+  * Fstab/FstabHandler : also look at FSTAB for changes, 
+  reduce time between tw check to 1s, update FSTAB and MTAB mtime
+  when we know that we change it
+  * DiskManager : decrease time between 2 change lookup to 1s
+  * Update TODO (add inotify support)
+------------------------------------------------------------
+revno: 91
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Tue 2007-05-22 00:01:04 +0200
+message:
+  * Fstab/DiskInfo Fstab/ToolsBackend : several improvements to
+  make it more extensible :
+  - sepearate get_devices to get_device_info, which can
+    be both surclass by backends
+  - create get_common_device_info for info that we need and
+    that shouldn't be the jobs of backends.
+  - get drivers from get_(FS_TYPE)_drivers and store them
+    in FS_DRIVERS
+  * DiskManager/Dialogs : update for last change
+  * Fstab/FstabHandler/DiskManager : Fix regression. Since now
+  all devices are stored in FstabHandler, we should update it
+  on MTAB change, and no more DiskManager. Introduce a
+  temporary notify_event, which is set to True when there is
+  a changement. But i'd like to see if there isn't more elegant
+  solution to send event.
+------------------------------------------------------------
+revno: 90
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Mon 2007-05-21 18:27:56 +0200
+message:
+  From ntfs-config :
+   * Fstab/Fstab, Fstab.FstabHandler : start rewriting 
+   documentation. I think i'm done with those 2.
+   * Fstab/Fstab : import config, and load DiskInfo also
+   in EntyBase, so we can use Entry & EntryBase without MntFile
+   * Fstab/FstabHanler : introduce FstabHandler mode. Currently
+   there is three mode : real, virtual, real, that can be set
+   at creation, or dynamicly. This replace start_virtual_mode.
+   See FstabHandler doc for more info.
+   * Fstab/FstabHanler : set a lot of object as internal, so
+   we only show usefull stuff
+   * Fstab/FstabHanler : return None, when we can't get property
+   * Fstab/FstabHanler : don't mount/umount already mounted/unmounted
+   device
+   * Fstab/FstabHanler : since now Mounter return a tuple of
+   2 values, return only the max of the 2 here
+   * Fstab/FstabHanler : Improve the way we get device we don't want to unmount
+   * Fstab/FstabHanler : start _initlog after savelog
+   * Fstab/FstabHanler : introduce differents method to manage
+   log : move listlog to get_listlog, add get_logcommit, 
+   get_logfile, get_changes_current_to, get_changes_current_from
+  Change here :
+   * AddWaizard : use virtual mode
+   * Dialogs : Adapt History dialog after last Fstab changes
+   * Dialogs : quit History dialog on delete-event
+   * DiskManager : use delay mode to set ntfs internal policy
+   * Utilty : reset USER to what it was before temporly setting
+     it to user
+   * config : don't import os
+   * configure.in : bump version to 1.0-RC2. Like for ntfs-config,
+  this doesn't means that i want to release now
+------------------------------------------------------------
+revno: 89
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Sat 2007-05-19 23:28:02 +0200
+message:
+  * Fstab/Mounter : split the return code in 2 to return
+    separate mount and unmount exit code.
+  * Fstab/Mounter : increase time between unmount & mount
+    to 0.3
+  * Fstab/FstabHandler : Require reboot when mounting fail
+    because of the unmount part.
+  * data/pam/Makefile.am : make $(bindir) before creating
+    consolhelper link (LP #115161)
+  * Config : return the new conf on set_default
+  * Utility : Try to improve user detectecion and fix bug
+    when no real user found, and trying to use USER instead
+------------------------------------------------------------
+revno: 88
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Sat 2007-05-19 14:31:10 +0200
+message:
+  * Fstab/FstabHandler : relink fstab after an undo
+  * Fstab/Mounter : make mounter package independent
+  * DsikManager : update main after reverting to an old version
+------------------------------------------------------------
+revno: 87
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Sat 2007-05-19 13:59:26 +0200
+message:
+  * AddWizard : enable device that are mounted
+  * DiskManager : fix typo in when editing system partition
+  * Fstab/Fstab : don't log checkpath, it makes too much noise
+  * disk-manager-root : path to warning_dial had changed
+------------------------------------------------------------
+revno: 86
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Sat 2007-05-19 02:01:51 +0200
+message:
+  * Some little tweaks
+  * Bump version to 1.0-RC1
+  * Update README, TODO, debian/ for release
+------------------------------------------------------------
+revno: 85
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Fri 2007-05-18 23:07:24 +0200
+message:
+  * Create a new high level fstab handler class, and convert
+  disk-manager to it.
+  * This change affect lot's of part of the program and
+  allow some new feature, too much to tell here.
+------------------------------------------------------------
+revno: 84
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Mon 2007-05-14 13:25:00 +0200
+message:
+  * Disable pointer grabbing
+  * Lot's of speed improvements tweaks in update_main()
+  * Construct Mounter only one time in DiskManager, instead
+    of calling it multiple time, this have an impressive 
+    effect on speed
+  * Some other tweaks around speed
+------------------------------------------------------------
+revno: 83
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Sun 2007-05-13 17:58:03 +0200
+message:
+  * In AddWizard : send good device name to check_path
+  * don't name tooltips
+------------------------------------------------------------
+revno: 82
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Sat 2007-05-12 12:34:07 +0200
+message:
+  * Fix nasty bug in Mounterwhen showing error dialog on unmount
+    (really rare case)
+  * Don't show only on gnome & xfce
+  * Why in the hell did i use parent for FstabChangeTracker ?
+  * Ok, so now we are ready for BETA3. So let's go
+------------------------------------------------------------
+revno: 81
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Fri 2007-05-11 17:45:11 +0200
+message:
+  * Bump version to 1.0-BETA3
+  * Make wrong fstab naming warning message more useful
+  * Warn user when we can't find username
+------------------------------------------------------------
+revno: 80
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Fri 2007-05-11 16:27:11 +0200
+message:
+  * Finaly revert all and just set external policy at startup
+------------------------------------------------------------
+revno: 79
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Fri 2007-05-11 16:19:30 +0200
+message:
+  * Partialy revert last change : Only set ntfs-3g to default 
+   when external ntfs policy use it
+------------------------------------------------------------
+revno: 78
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Fri 2007-05-11 16:14:14 +0200
+message:
+  * Config : 
+    - Change notify default yes -> True
+    - Save config in the user home
+  * DiskManager : 
+    - Grab pointer when applying change
+    - Set ntfs-3g to default if we use it
+    - Only call update_main when notify change
+    - On start browser, set path after applying change 
+  * Methods : 
+    - In configure, allow path with < or >
+    - In probe, use new Config
+  * EditDialog : Add shortcut in the FileChooser
+  * Fstab : 
+    - s/os.path.exists/os.path.isdir
+    - improve clean path to clean obsolete path when
+      device is unmounted
+    - also make path on apply. This make stuff a bit slower
+      but is more safe.
+  * Utility : add a get_user fct to get current user information
+  * disk-manager : use new Config()
+  * Some other stuff
+------------------------------------------------------------
+revno: 77
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Fri 2007-05-11 01:48:20 +0200
+message:
+  * Create a Config class
+  * Improve DiskInfo to be able to get different backend and
+    move current backend in ToolsBackend
+  * Save size and selected column
+  * Add an fstab_naming option to force uuid/dev naming in fstab
+  * when calling mount or browser, use 'path' insted of path,
+    so we can mount stuff like /media/* ...
+  * Update TODO and README
+  * Update frensh translation
+  * Probably lot's of other stuff  
+------------------------------------------------------------
+revno: 76
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Wed 2007-05-09 23:13:12 +0200
+message:
+  * Various performance tweak :
+   - Creat a get_extra in DiskInfo to get extra stuff, and
+     move get_ntfs_driver to DiskInfo
+   - DiskInfo : in __getitem__, use try instead of self.search
+     to test if it's ok
+   - MntFile : reduce call of DiskInfo, add a mimimal option
+     to load a MntFile only with EntryBase
+   - Various other tweak
+  * Entry : Create path only on mount. And remove it on unmount if
+    not in use with a new clean_path fct.
+  * Entry : add an is_system() method to know if the partition
+    is a system partition. Reduce code in DiskManager
+  * Mounter : split mounter code to make it better maintainable
+  * Various GUI tweak
+------------------------------------------------------------
+revno: 75
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Mon 2007-05-07 13:44:58 +0200
+message:
+  * Update frensh translation
+  * NTFS : only change driver when needed
+  * Be parano when mounting : make sure that the path is created
+------------------------------------------------------------
+revno: 74
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Sun 2007-05-06 10:40:40 +0200
+message:
+  * Hopfully Last string update, we are now in string freeze
+  * Add swedish translation thanks to Daniel Nylander
+  * Update frensh transation
+------------------------------------------------------------
+revno: 73
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Sun 2007-05-06 10:00:06 +0200
+message:
+  * Add total available size and a tooltip about
+  the difference between availabale and free size
+------------------------------------------------------------
+revno: 72
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Sun 2007-05-06 09:25:05 +0200
+message:
+  * Show total/free/used size in gerenral tab
+  * Add an option to configure, to force the use or
+  not of pam authentification
+  * Update TODO
+------------------------------------------------------------
+revno: 71
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Fri 2007-05-04 10:39:11 +0200
+message:
+  * Don't translate desktop.in
+------------------------------------------------------------
+revno: 70
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Fri 2007-05-04 01:33:03 +0200
+message:
+  * Finaly revert changes in the installation of the autostart
+  file. We install it in $(DESTDIR)/etc/xdg/autostart and that's
+  all. It will not work in an other place anyway.
+  Update debian/ as well.
+  * On notification, execute disk-manager-root with spawn and not
+  exec, and exit after process ended. This avoid an
+  incomprehensible bug with conseolehelper that didn't want
+  to exit the process.
+  * Update README to warn user about wrong python path
+  * Update TODO
+  * I think we are now really ready to release. So let's go...
+------------------------------------------------------------
+revno: 69
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Thu 2007-05-03 17:07:04 +0200
+message:
+  * Update debian/ to install the autostart file in the
+  right place
+------------------------------------------------------------
+revno: 68
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Thu 2007-05-03 16:51:59 +0200
+message:
+  * Update debian/ for release
+------------------------------------------------------------
+revno: 67
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Thu 2007-05-03 16:47:26 +0200
+message:
+  * Fix some strings
+  * Complete fr translation
+  * Update TODO, README for release
+  * Bump version to 1.0-BETA2
+------------------------------------------------------------
+revno: 66
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Thu 2007-05-03 14:59:50 +0200
+message:
+  * ignore some files, and add some
+------------------------------------------------------------
+revno: 65
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Thu 2007-05-03 14:56:28 +0200
+message:
+  * get_ntfs_driver : return an empty list if no driver found
+  should fix LP #111539
+  * Set change_lookup thread as a a daemon, so it can exit
+  normally when we quit the main thread
+  * Introduce disk-manager-root. If user is not root, check for
+  a graphical authentification program (for now gksu & kdesu)
+  and start disk-manager with it. Change *.desktop files
+  to use it.
+  * Lot's of change in the buid process. The more important is
+  that we check now for consolehelper (part of the auth process
+  use in fedora/redhat) and if yes, install necessary files to
+  use it.
+  * decrease python & pygtk requirements
+------------------------------------------------------------
+revno: 64
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Wed 2007-05-02 01:55:45 +0200
+message:
+  * Decrease python & pygtk requirement
+  * don't force installation of the autostart file in /etc
+  (fix LP:110548)
+------------------------------------------------------------
+revno: 63
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Wed 2007-05-02 01:21:47 +0200
+message:
+  * Move dialog class in Dialogs.py (AddWizard, EditPartition, 
+  HistoryDialog and InfoDialog)
+  * Update guy when we detect modification of /etc/mtab and
+  change in the free space of mounted device
+  * This required to change mounter (to work better with threading)
+  which is now a class Mounter, with a mount method. dialog is
+  now update while gtk.main() is running. In that way,
+  we can use gtk critical section to update the guy when
+  change are detected
+  * FstabChangeTracker : Set to remount device added that are
+  mounted but on a different path
+  * Update TODO
+------------------------------------------------------------
+revno: 62
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Tue 2007-05-01 15:05:25 +0200
+message:
+  * Raise special exception error when we fail to find
+  item in Fstab or DiskInfo database
+  * Some fix to last commit
+  * Load database dynamicly in DiskInfo instead of loading
+  it from outside
+------------------------------------------------------------
+revno: 61
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Tue 2007-05-01 13:05:48 +0200
+message:
+  * Use Popen to start browser
+  * If udevinfo don't give us DEVICE and not a mapped device,
+  try /dev/ + DEV
+  * Set REMOVABLE for mapped device in a better way
+------------------------------------------------------------
+revno: 60
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Mon 2007-04-30 23:51:42 +0200
+message:
+  * Hum, stupid me...
+------------------------------------------------------------
+revno: 59
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Mon 2007-04-30 23:33:10 +0200
+message:
+  * only save config at startup, and don't call apply_change
+  in that way, we can keep original fstab if we quit
+  immediatly
+  * in the same idea, dont apply change if we dont remove
+  unknow device
+------------------------------------------------------------
+revno: 58
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Mon 2007-04-30 23:04:47 +0200
+message:
+  * Update README, TODO and debian/ for release
+------------------------------------------------------------
+revno: 57
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Mon 2007-04-30 22:30:47 +0200
+message:
+  * DiskInfo : More check when searching symlink
+  * use os.spawn instead of os.system to start browser
+  * EditDialog : Don't remove tmp device on cancel, this
+  will be done anyway on close
+------------------------------------------------------------
+revno: 56
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Mon 2007-04-30 19:48:01 +0200
+message:
+  * Improve debug output. It make it really big, but it's
+  might be usefull
+  * Check if vol_id is not in /lib/udev
+  * Improve question dial when removing device
+------------------------------------------------------------
+revno: 55
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Mon 2007-04-30 19:08:41 +0200
+message:
+  * Improvement in DiskInfo :
+  - If udevinfo don't give enough information, try to
+  get more from vol_id (if run as root) or from blkid.
+  - If we found a mapped device and udevinfo can give
+  use it's device name, try to get it from dmsetup
+  - Complete UUID, LABEL and SYMLINK information when needed
+  - use upper case for all keys
+  - load database only when load_database is called.
+  this way, we don't load it, if we only want the help
+  * Introduce a debug option to get debig of DiskInfo
+  * Introduce a query-database option, to get information
+  about DEVICE from the database
+------------------------------------------------------------
+revno: 54
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Mon 2007-04-30 03:44:29 +0200
+message:
+  * Try to adapt the size of warning_dial_list to the 
+  lenght of the entry
+  * Change udevinfo option to be more compatible
+  * return full output of dmesg, if not in the form [...]...
+  * don't set path of lsof, dmesg and udevinfo. This is a
+  temporary solution
+------------------------------------------------------------
+revno: 53
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Mon 2007-04-30 01:21:23 +0200
+message:
+  * Bump Version for 1.0-BETA
+------------------------------------------------------------
+revno: 52
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Mon 2007-04-30 01:12:29 +0200
+message:
+  * Only keep comment when on the type : #[device_name] ...
+  and move them to the end of the file
+------------------------------------------------------------
+revno: 51
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Mon 2007-04-30 00:52:24 +0200
+message:
+  * only require reboot on unmount failure
+  * Add tooltips in the edit dialog
+  * Fix some strings, and remove junk string
+  * Update frensh translation
+------------------------------------------------------------
+revno: 50
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Sun 2007-04-29 23:33:32 +0200
+message:
+  * change default option for ntfs utf8 -> nls=utf8
+  * Print the output of dmesg|tail in the mount error dialog
+------------------------------------------------------------
+revno: 49
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Sun 2007-04-29 23:02:31 +0200
+message:
+  * Log removing of unknow device
+  * Don't remove commented entry (should be of lenght 6)
+  * Remove unnecessary translation from glade file
+  * Remove tip in the FileChooserDialog
+------------------------------------------------------------
+revno: 48
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Sun 2007-04-29 21:12:50 +0200
+message:
+  * Yet a lot of changes. I should commit more often.
+------------------------------------------------------------
+revno: 47
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Sun 2007-04-29 01:20:17 +0200
+message:
+  * Hum, forgot to commit some files
+------------------------------------------------------------
+revno: 46
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Sun 2007-04-29 01:19:40 +0200
+message:
+  * A lot lot of changes, too much to tell.
+  In the big lines :
+  - Improved layout for the advance configuration.
+  We now show both configured and not configured device.
+  - Get device info from udevinfo instead of blkid.
+  This allow us to get a lot more info, and to be
+  able to manage mapped device (raid, lvm, crypt...)
+  - We show total/free/used size for each device
+------------------------------------------------------------
+revno: 45
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Tue 2007-04-24 00:42:15 +0200
+message:
+  * I should have test previous change on more os... Preserve 
+  environnement with su, to work on ubuntu.
+------------------------------------------------------------
+revno: 44
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Tue 2007-04-24 00:23:03 +0200
+message:
+  * Use su instead of sudo to launch the browser
+------------------------------------------------------------
+revno: 43
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Mon 2007-04-23 15:55:36 +0200
+message:
+  * Set auto toggle non activatable for system partition
+  * Get user from "USERNAME" and not from "SUDO_USER"
+  * Update README
+------------------------------------------------------------
+revno: 42
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Mon 2007-04-23 15:20:26 +0200
+message:
+  * Hum, i forgot that hal 0.5.9 was out
+------------------------------------------------------------
+revno: 41
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Mon 2007-04-23 15:15:40 +0200
+message:
+  * Update TODO
+  * Update README (actually create it)
+------------------------------------------------------------
+revno: 40
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Mon 2007-04-23 13:15:06 +0200
+message:
+  * Disable notification if we can't show it
+  * Print error in stderr
+  * Set sensitivity of the advance conf buttons in update_main
+  * Update debian/
+------------------------------------------------------------
+revno: 39
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Mon 2007-04-23 12:02:01 +0200
+message:
+  * Update TODO
+  * Update debian/
+  * Fix update icon on uninstall
+------------------------------------------------------------
+revno: 38
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Mon 2007-04-23 11:50:30 +0200
+message:
+  * If /dev/disk/by-* method fail, try to get device name from
+  blkid.
+  * In MntFile.write : If label is None, really fallback to "name".
+  While setting generic, only search UUID= in the "name" key*
+------------------------------------------------------------
+revno: 37
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Sun 2007-04-22 13:28:30 +0200
+message:
+  * Ignore POTFILES
+  * decrease sleep before and after progress bar
+  * bump verion to 0.5
+------------------------------------------------------------
+revno: 36
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Sat 2007-04-21 18:45:23 +0200
+message:
+  * Start the notifictation when the notification area is ready
+------------------------------------------------------------
+revno: 35
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Wed 2007-04-18 01:58:14 +0200
+message:
+  * Finaly, i figuring it out what was this damn icons problem,
+  when i changed prefix, cache icons in the old prefix was
+  style present. Update the icon cache on uninstall to
+  avoid this kind of stupid things.
+  * Fix little typo in Notification
+  * Install 22×22 instead of the 48×48. I'd like to use it
+  for the tray icon.
+------------------------------------------------------------
+revno: 34
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Tue 2007-04-17 16:30:11 +0200
+message:
+  * Forget little thing...
+------------------------------------------------------------
+revno: 33
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Tue 2007-04-17 16:24:27 +0200
+message:
+  * Don't call apply_changes before starting FstabChangesTracker
+  * Apply ntfs-3g external policy when no ntfs driver is found
+  * don't configure iso9600 & udf
+  * when installing disk-manager on fedora, i found that the
+  icons wasn't always found. Let's see if the 48×48 icon fix
+  that issue
+------------------------------------------------------------
+revno: 32
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Tue 2007-04-17 14:09:06 +0200
+message:
+  * New notification interface :
+  - disable notification if python-notify is disable, but stil
+  show the icon
+  - fall back to egg.trayicon if pygtk is < 2.10
+  - fall back to egg.trayicon if python-notify don't support
+  attach_to_status_icon
+  * AddDialog : fix cancel didn't clean created path
+  * Add a menu to the tray icon, with an item to 
+  configure all device automaticly
+  * More work on debian/
+  * Ignore some more stuff
+------------------------------------------------------------
+revno: 31
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Tue 2007-04-17 01:03:17 +0200
+message:
+  * Change the build system to plain autotools
+  * Change as well rules in debian/
+  * A lot of others things
+------------------------------------------------------------
+revno: 30
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Mon 2007-04-16 19:57:36 +0200
+message:
+  * Make path of deleted entry obsolete in FstabChangeTracker
+------------------------------------------------------------
+revno: 29
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Mon 2007-04-16 19:07:40 +0200
+message:
+  * More on del_only_created_path. Now we can recursivly
+  create and delete directory
+  * Remove * More on del_only_created_path. Now we can recursivly
+  create and delete directory
+  * Remove .create_by... when empty
+  * Fix progression bar
+------------------------------------------------------------
+revno: 28
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Mon 2007-04-16 17:28:17 +0200
+message:
+  * Move reboot require warning to apply_change, so we don't
+  get it when we do simple mount/unmount action
+  * rework the del_only_created_path procedure : now we
+  list all created path in /media/.created_by_python-fstab
+  instead of creating a file for each path
+------------------------------------------------------------
+revno: 27
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Mon 2007-04-16 15:04:02 +0200
+message:
+  * Rework mounter, to integrate a warning when all the
+  changes couldn't be apply
+------------------------------------------------------------
+revno: 26
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Mon 2007-04-16 13:19:41 +0200
+message:
+  * Rework the cleanning path process, now we only delete path
+  created by the app
+------------------------------------------------------------
+revno: 25
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Sun 2007-04-15 23:46:32 +0200
+message:
+  * Bump version for 0.4
+------------------------------------------------------------
+revno: 24
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Sun 2007-04-15 23:45:11 +0200
+message:
+  • AddWizard : revert to < enter...> when we delete all.
+  • AddDialog : show type of the device when we add a device
+  • AddEditDialog : cancel didn't always work
+  • AddEditDialog : on browser clicked, don't remove old dir,
+  this was a really bad idea
+  • AddDialog : when we cancel, delete the old dir. 
+  The best would be to know if we created or not this dir, 
+  but there is no infrastructure for that yet. 
+  I'll probably change that in Fstab soon.
+  • Some more tweak on the progress bar, but it's not yet 
+  totaly smooth for mounting/unmounting one device
+  • HistoryDialog : Make commit view and see config not 
+  editable
+------------------------------------------------------------
+revno: 23
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Sat 2007-04-14 00:58:18 +0200
+message:
+  * Create icons of different sizes. We'll not use them
+  right now, since i need to do some stuff before it
+  totaly works out of the box.
+  * Bump version to 0.3
+------------------------------------------------------------
+revno: 22
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Fri 2007-04-13 22:55:32 +0200
+message:
+  * chack_path : Don't fail when the path is actually in use
+  by the same device.
+  * Don't remount when changing mount point to the mount
+  path actually in use
+------------------------------------------------------------
+revno: 21
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Fri 2007-04-13 21:50:03 +0200
+message:
+  * Try to unmount path when unmounting device name fail
+  due to badly formated mtab (uuid stuff)
+  * Mounter -> MounterProgress
+  * Move no guy stuff of Mounter to mounter
+  * Fix progression bar
+  * Wait 5 sec before showing the notification so 
+  it don't show before notification area is in place.
+------------------------------------------------------------
+revno: 20
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Fri 2007-04-13 17:46:57 +0200
+message:
+  * New option : enable/disable check at boot
+  * Add corresponding stuff in FstabChangeTracker
+  * Update TODO
+------------------------------------------------------------
+revno: 19
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Fri 2007-04-13 16:51:59 +0200
+message:
+  * Change string for <Click...>
+  * Change translation as well
+  * Removing one more unnecessary translation string
+  * More stuff
+------------------------------------------------------------
+revno: 18
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Fri 2007-04-13 16:42:00 +0200
+message:
+  * Add some comment and doc
+  * unindent EditDevice class (don't know why it was like that!)
+  * Fix format of the warning dialog
+  * In AddWizard, fix check for <Click...>, when translated
+------------------------------------------------------------
+revno: 17
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Fri 2007-04-13 16:08:58 +0200
+message:
+  * Make datadir a global constant
+  * Fix bad position of Unmount Fail window
+  * Don't quite Historic when we clean it
+------------------------------------------------------------
+revno: 16
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Fri 2007-04-13 15:35:53 +0200
+message:
+  * EditPartition, HistoryDialog and AddWizard :
+  Make class be real class, and do the real job in their
+  respective function that call them.
+  * In the same philosophy, replace the configuration function
+  by a configuration_wizard function that do all the jobs.
+  * Move the log bits into it's on class, so we can log stuff 
+  from configuration_wizard.
+  * Remove more unnecessary stuff for translation
+  * Probably a lot of other little change that i forgot
+------------------------------------------------------------
+revno: 15
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Fri 2007-04-13 01:33:30 +0200
+message:
+  * Commit befor some big changes...
+  * More fix in translation
+  * Don't translate unnecessary stuff
+  * Fix little bug in use ntfs-3g when no ntfs
+------------------------------------------------------------
+revno: 14
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Thu 2007-04-12 14:36:49 +0200
+message:
+  * More translation issues fix
+------------------------------------------------------------
+revno: 13
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Thu 2007-04-12 14:08:30 +0200
+message:
+  * Fix translations issues
+  * Added frensh translation for testing
+------------------------------------------------------------
+revno: 12
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Thu 2007-04-12 12:35:57 +0200
+message:
+  * Added i18n
+  * More string fix
+------------------------------------------------------------
+revno: 11
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Thu 2007-04-12 02:34:15 +0200
+message:
+  * Change Changelog to ChangeLog
+  * Little changes in debian/
+------------------------------------------------------------
+revno: 10
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Thu 2007-04-12 00:10:07 +0200
+message:
+  * Add legal documentation
+  * Add TODO list
+  * Add ChangeLog (for now a copy of bzr log)
+  * Improve debian/
+------------------------------------------------------------
+revno: 9
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Wed 2007-04-11 23:36:59 +0200
+message:
+  * Fix window_mounting_progress lenght
+  * Remove last remanent "print"
+------------------------------------------------------------
+revno: 8
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Wed 2007-04-11 23:28:02 +0200
+message:
+  * Fix strings
+  * Make messages more helpful
+  * Remove regression tests
+------------------------------------------------------------
+revno: 7
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Wed 2007-04-11 22:54:32 +0200
+message:
+  * Remove junk files from debian/
+  * Handle unmount and clean old path in apply_change
+  * Clean old path when we change it on "add device"
+  * Warn the user when he don't have enough privileges
+  * Add a 192×192 png in data/
+------------------------------------------------------------
+revno: 6
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Wed 2007-04-11 18:23:36 +0200
+message:
+  * Add debian/ directory
+------------------------------------------------------------
+revno: 5
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Wed 2007-04-11 17:17:20 +0200
+message:
+  * Fix historic vertical scrolling
+  * Remove NTFS external policy broken link
+------------------------------------------------------------
+revno: 4
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Wed 2007-04-11 16:57:35 +0200
+message:
+  * Move icon to /usr/share/pixmaps
+  * Fix icons display
+------------------------------------------------------------
+revno: 3
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Wed 2007-04-11 15:31:22 +0200
+message:
+  * Add a setup.py
+  * Move files to the right place
+  * Remove oldimage
+------------------------------------------------------------
+revno: 2
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Wed 2007-04-11 13:48:05 +0200
+message:
+  * Creating a .svg image
+  * Moving all .png in oldimage/
+  * Use .svg by default
+  * Fix datadir. This will need to be change again
+  * Removing last unusefull comment in DiskManager 
+------------------------------------------------------------
+revno: 1
+committer: Mertens Florent <flomertens@gmail.com>
+branch nick: trunk
+timestamp: Wed 2007-04-11 12:57:38 +0200
+message:
+  Initial import

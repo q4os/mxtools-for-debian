@@ -1,0 +1,8 @@
+[main]
+host = https://www.transifex.com
+
+[antix-development.mx-conky]
+file_filter = ./mx-conky_<lang>.ts
+source_file = mx-conky_en.ts
+source_lang = en
+type = ts

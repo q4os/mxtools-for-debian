@@ -1,0 +1,28 @@
+mx-sound-theme-borealis (17.6mx16+deb11u13) stable; urgency=medium
+
+  * MX Tools release
+
+ -- dolphinoracle <administrator@localdomain>  Wed, 22 Mar 2023 10:43:55 +0100
+
+mx-sound-theme-borealis (17.6mx16) mx; urgency=medium
+
+  * corrected bad symlinks
+
+ -- dolphinoracle <dolphinoracle@gmail.com>  Mon, 05 Jun 2017 16:12:41 -0400
+
+mx-sound-theme-borealis (17.4.1mx16) mx; urgency=low
+
+  * added some sound links
+  * menu-click.ogg
+  * menu-popup.ogg
+  * message.ogg
+  * window-attention.ogg
+
+ -- dolphinoracle <dolphinoracle@gmail.com>  Fri, 21 Apr 2017 22:16:32 -0400
+
+mx-sound-theme-borealis (16.4.1mx15) mx; urgency=low
+
+  * new sound theme package, separate from mx-system-sounds
+
+ -- dolphinoracle <dolphinoracle@gmail.com>  Sat, 26 Mar 2016 14:40:32 -0400
+

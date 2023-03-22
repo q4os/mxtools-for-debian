@@ -1,0 +1,220 @@
+Description: add desktop session to startup scripts
+ .
+ conky-manager (2.7+dfsg1-3mx19+1) mx; urgency=medium
+ .
+   * add desktop session for startup script
+Author: fehlix <fehlix@mxlinux.org>
+
+---
+The information above should follow the Patch Tagging Guidelines, please
+checkout http://dep.debian.net/deps/dep3/ to learn about the format. Here
+are templates for supplementary fields that you might want to add:
+
+Origin: <vendor|upstream|other>, <url of original patch>
+Bug: <url in upstream bugtracker>
+Bug-Debian: https://bugs.debian.org/<bugnumber>
+Bug-Ubuntu: https://launchpad.net/bugs/<bugnumber>
+Forwarded: <no|not-needed|url proving that it has been forwarded>
+Reviewed-By: <name and email of someone who approved the patch>
+Last-Update: 2020-04-20
+
+--- conky-manager-2.7+dfsg1.orig/conky-manager2.pot
++++ conky-manager-2.7+dfsg1/conky-manager2.pot
+@@ -8,7 +8,7 @@ msgid ""
+ msgstr ""
+ "Project-Id-Version: conky-manager2 2.0\n"
+ "Report-Msgid-Bugs-To: teejee2008@gmail.com\n"
+-"POT-Creation-Date: 2019-02-20 18:29-0500\n"
++"POT-Creation-Date: 2020-04-20 21:15+0200\n"
+ "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+ "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+ "Language-Team: LANGUAGE <LL@li.org>\n"
+@@ -132,7 +132,7 @@ msgstr ""
+ msgid "Current Wallpaper"
+ msgstr ""
+ 
+-#: Main.vala:1928
++#: Main.vala:1973
+ msgid "Current wallpaper source path"
+ msgstr ""
+ 
+@@ -221,7 +221,7 @@ msgstr ""
+ msgid "Failed to import themes"
+ msgstr ""
+ 
+-#: Utility.vala:1293
++#: Utility.vala:1309
+ msgid "Failed to set ownership"
+ msgstr ""
+ 
+@@ -365,11 +365,11 @@ msgstr ""
+ msgid "Missing Dependencies"
+ msgstr ""
+ 
+-#: Utility.vala:1023
++#: Utility.vala:1039
+ msgid "Missing Icon"
+ msgstr ""
+ 
+-#: MainWindow.vala:1079
++#: MainWindow.vala:1080
+ msgid "N/A"
+ msgstr ""
+ 
+@@ -478,7 +478,7 @@ msgstr ""
+ msgid "Save running widgets and current desktop wallpaper as new theme"
+ msgstr ""
+ 
+-#: Main.vala:975
++#: Main.vala:1020
+ msgid "Saved"
+ msgstr ""
+ 
+@@ -490,7 +490,7 @@ msgstr ""
+ msgid "Search for new themes"
+ msgstr ""
+ 
+-#: MainWindow.vala:1091
++#: MainWindow.vala:1092
+ msgid "Searching directories..."
+ msgstr ""
+ 
+@@ -563,7 +563,7 @@ msgstr ""
+ msgid "Start/Restart Widget"
+ msgstr ""
+ 
+-#: Main.vala:886
++#: Main.vala:923
+ msgid "Started"
+ msgstr ""
+ 
+@@ -587,7 +587,7 @@ msgstr ""
+ msgid "Stop all running widgets"
+ msgstr ""
+ 
+-#: Main.vala:912 Utility.vala:751
++#: Main.vala:949 Utility.vala:767
+ msgid "Stopped"
+ msgstr ""
+ 
+@@ -681,7 +681,7 @@ msgid ""
+ "Press ENTER to start and stop."
+ msgstr ""
+ 
+-#: MainWindow.vala:1025
++#: MainWindow.vala:1026
+ msgid "Utility for managing Conky configuration files"
+ msgstr ""
+ 
+@@ -697,7 +697,7 @@ msgstr ""
+ msgid "Wallpaper"
+ msgstr ""
+ 
+-#: Main.vala:1932 Main.vala:1940
++#: Main.vala:1977 Main.vala:1985
+ msgid "Wallpaper saved"
+ msgstr ""
+ 
+--- conky-manager-2.7+dfsg1.orig/src/Main.vala
++++ conky-manager-2.7+dfsg1/src/Main.vala
+@@ -624,30 +624,65 @@ public class Main : GLib.Object {
+ 
+ 	public void update_startup_script(){
+ 		string startupScript = data_dir + "/conky-startup.sh";
+-
++		string home = Environment.get_home_dir ();
++		unowned string desktop_session = Environment.get_variable ("DESKTOP_SESSION");
+ 		bool atleast_one_widget_enabled = false;
+ 
+-		string txt = "";
+-		txt += "sleep %ds\n".printf(startup_delay);
+-		txt += "killall conky\n";
++		string txt_start_conky = "";
++		txt_start_conky += "if [ \"$DESKTOP_SESSION\" = \"%s\" ]; then \n".printf(desktop_session);
++		txt_start_conky += "   sleep %ds\n".printf(startup_delay);
++		txt_start_conky += "   killall conky\n";
+ 		foreach(ConkyRC conf in conkyrc_list){
+ 			if (conf.enabled){
+-				txt += "cd \"" + conf.dir + "\"\n";
+-				txt += "conky -c \"" + conf.path + "\" &\n";
++				txt_start_conky += "   cd \"" + conf.dir.replace(home, "$HOME")  + "\"\n";
++				txt_start_conky += "   conky -c \"" + conf.path.replace(home, "$HOME") + "\" &\n";
+ 				atleast_one_widget_enabled = true;
+ 			}
+ 		}
++		txt_start_conky += "   exit 0\n";
++		txt_start_conky += "fi\n";
++		
++		string txt_no_conky = "";
++		txt_no_conky += "if [ \"$DESKTOP_SESSION\" = \"%s\" ]; then \n".printf(desktop_session);
++		txt_no_conky += "   # No widgets enabled!\n";
++		txt_no_conky += "   exit 0\n";
++		txt_no_conky += "fi\n";
++		
++		
++		string std_out = "";
++		string std_err = "";
++		
++		string cmd1 = "grep  -sq -E '^[[:space:]]*if[[:space:]]+\\[[[:space:]]+\"?\\$\\{?DESKTOP_SESSION\\}?\"?' \"%s\" || rm  \"%s\"".printf (startupScript, startupScript);
++		string cmd2 = "sed -i -r '/^[[:space:]]*if[[:space:]]+\\[[[:space:]]+\"?\\$\\{?DESKTOP_SESSION\\}?\"?[[:space:]]*==?[[:space:]]*\"%s\"[[:space:]]+\\]/,/^[[:space:]]*fi/d' \"%s\"".printf (desktop_session, startupScript);
+ 
+ 		if (file_exists(startupScript)){
+-			file_delete(startupScript);
+-		}
++			try{
++				execute_command_script_sync(cmd1, out std_out, out std_err);
++			}
++			catch (Error e) {
++				log_error (e.message);
++			}
++		}	
++
++		if (file_exists(startupScript)){
++			try{
++				execute_command_script_sync(cmd2, out std_out, out std_err);
++			}
++			catch (Error e) {
++				log_error (e.message);
++			}
++		} else {
++			write_file(startupScript, "#!/bin/sh\n\n"); // write shebang 
++		}	
+ 
+ 		if (atleast_one_widget_enabled){
+-			write_file(startupScript, txt);
++			append_file(startupScript, txt_start_conky);
+ 		}
+ 		else{
+-			write_file(startupScript, "# No widgets enabled!\n\nexit 0"); //write empty script
++			append_file(startupScript, txt_no_conky); 
+ 		}
++		
++		execute_command_sync ("chmod +x \"%s\"".printf (startupScript));
+ 	}
+ 
+ 	public bool check_startup(){
+--- conky-manager-2.7+dfsg1.orig/src/Utility.vala
++++ conky-manager-2.7+dfsg1/src/Utility.vala
+@@ -262,6 +262,22 @@ namespace TeeJee.FileSystem{
+ 	    return null;
+ 	}
+ 	
++	public bool append_file (string file_path, string contents){
++		
++		/* Append text to file */
++		File file = File.new_for_path (file_path);
++		try{
++			FileOutputStream file_stream = file.append_to (FileCreateFlags.NONE);
++			file_stream.write (contents.data);
++			return true;
++		}
++		catch (Error e) {
++	        log_error (e.message);
++	        return false;
++	    } 
++	}
++
++	
+ 	public bool write_file (string file_path, string contents){
+ 		
+ 		/* Write text to file */

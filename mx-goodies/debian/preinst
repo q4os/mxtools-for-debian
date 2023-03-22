@@ -1,0 +1,36 @@
+#!/bin/bash
+
+#DEBHELPER#
+
+# preinst script for cryptsetup-modified-functions
+
+#set -e
+
+case "$1" in
+  install|upgrade) dpkg-divert --quiet                                         \
+                               --add                                           \
+                               --package mx-goodies                            \
+                               --rename                                        \
+                               --divert /usr/bin/xdg-user-dirs-update.real     \
+                               /usr/bin/xdg-user-dirs-update
+
+                   dpkg-divert --quiet                                         \
+                               --add                                           \
+                               --package mx-goodies                            \
+                               --rename                                        \
+                               --divert /usr/bin/xdg-user-dirs-gtk-update.real \
+                               /usr/bin/xdg-user-dirs-gtk-update
+
+                   dpkg-divert --quiet                                         \
+                               --add                                           \
+                               --package mx-goodies                            \
+                               --rename                                        \
+                               --divert /usr/bin/debconf-kde-helper.real       \
+                               /usr/bin/debconf-kde-helper
+                   ;;
+
+                *) :
+                   ;;
+esac
+
+exit 0

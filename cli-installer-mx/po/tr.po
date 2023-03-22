@@ -1,0 +1,399 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# Ali İlteriş Keskin <aliilteriskeskin@gmail.com>, 2020
+# Caner Başaran <basaran.caner@gmail.com>, 2014
+# e0360fc3c0afcd70e5aed1cfc885bac6, 2019
+# mahmut özcan <mahmutozcan@protonmail.com>, 2018
+# mahmut özcan <mahmutozcan@protonmail.com>, 2020
+msgid ""
+msgstr ""
+"Project-Id-Version: antix-development\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-03-20 18:46+0200\n"
+"PO-Revision-Date: 2020-11-27 10:10+0000\n"
+"Last-Translator: mahmut özcan <mahmutozcan@protonmail.com>\n"
+"Language-Team: Turkish (http://www.transifex.com/anticapitalista/antix-development/language/tr/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: tr\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: cli-installer.sh:29
+#, sh-format
+msgid "CL installer for $DISTRO"
+msgstr "$DISTRO için CL yükleyici"
+
+#: cli-installer.sh:30
+msgid "Version 5.2.1 20/03/2020"
+msgstr "Sürüm 5.2.1 20/03/2020"
+
+#: cli-installer.sh:37
+msgid "Requirements for minimum installation:"
+msgstr "En küçük kurulum için gereksinimler:"
+
+#: cli-installer.sh:40
+msgid "antiX-full: hard-disk 4.0GB  RAM 64MB"
+msgstr "antiX-tam: sabit disk 4.0GB RAM 64MB"
+
+#: cli-installer.sh:42
+msgid "antiX-base: hard-disk 3.0GB  RAM 48MB"
+msgstr "antiX-temel: sabit disk 3.0GB RAM 48MB"
+
+#: cli-installer.sh:44
+msgid "antiX-core: hard-disk 1.0GB  RAM 48MB"
+msgstr "antix-çekirdek: sabit disk 1.0GB RAM 48MB"
+
+#: cli-installer.sh:46
+msgid "antiX-net:  hard-disk 0.7GB  RAM 48MB"
+msgstr "antiX-net:  sabit disk 0.7GB  RAM 48MB"
+
+#: cli-installer.sh:48
+msgid "Make sure you are connected to "
+msgstr "Bağlı olduğunuzdan emin olun"
+
+#: cli-installer.sh:50
+msgid "the net BEFORE running this installer"
+msgstr "Bu yükleyiciyi çalıştırmadan önce internete"
+
+#: cli-installer.sh:52
+msgid "NOTE: This installer will NOT work for UEFI boot"
+msgstr "NOTE: Bu yükleyici UEFI önyüklemesinde çalışmaz"
+
+#: cli-installer.sh:54
+msgid ""
+"This installer does NOT offer the option for using a separate boot partition"
+msgstr "Bu yükleyici ayrı bir önyükleme bölümü kullanma seçeneği SUNMUYOR"
+
+#: cli-installer.sh:56
+msgid "This installer does NOT offer encryption"
+msgstr "Bu yükleyici şifreleme SUNMUYOR"
+
+#: cli-installer.sh:58
+msgid "This installer does NOT offer installation to NVMe devices"
+msgstr "Bu yükleyici NVMe aygıtlarına kurulum SAĞLAMIYOR"
+
+#: cli-installer.sh:60
+msgid "If you want the above mentioned features, use our gui installer"
+msgstr "Yukarıda sözedilen özellikleri istiyorsanız, grafik arayüzlü yükleyicimizi kullanın"
+
+#: cli-installer.sh:62
+msgid "Ctrl c will abort this script"
+msgstr "Ctrl c bu betiği durduracak"
+
+#: cli-installer.sh:68
+msgid "Usage: cli-installer [drive]"
+msgstr "Kullanım: cli-kurucu [drive]"
+
+#: cli-installer.sh:69
+#, sh-format
+msgid "Where drive is the name of the drive $DISTRO is to be installed on."
+msgstr "Burada sürücü, $ DISTRO sürücüsünün kurulacağı yerin adıdır."
+
+#: cli-installer.sh:70
+msgid "   For example: cli-installer sdb"
+msgstr "Örnek: cli-installer sdb"
+
+#: cli-installer.sh:71
+msgid "The default is correct if the computer has only one drive."
+msgstr "Bilgisayarda yalnızca bir sürücü varsa öntanımlı olan doğrudur."
+
+#: cli-installer.sh:75
+msgid "Pre-installation tips:"
+msgstr "Kurulum öncesi ipuçları:"
+
+#: cli-installer.sh:78
+msgid "Set language at the boot screen by pressing F2"
+msgstr "Önyükleme ekranında F2 'ye basarak dili ayarla"
+
+#: cli-installer.sh:79
+msgid "or by adding the line lang=xx where xx is your language code."
+msgstr "ya da satıra lang=xx ekle, xx olacak yere dil kodunu ekle"
+
+#: cli-installer.sh:80
+msgid "eg lang=gr for Greek."
+msgstr "örneğin Yunanca için lang=gr"
+
+#: cli-installer.sh:82
+msgid "Set timezone at the boot screen by pressing F3"
+msgstr "Önyükleme ekranında F3 'e basarak saat dilimi ayarla"
+
+#: cli-installer.sh:84
+msgid "Use kbd=dvorak for dvorak keyboard before installing"
+msgstr "Yüklemeden önce dvorak klavye için kbd = dvorak kullanın"
+
+#: cli-installer.sh:87
+msgid ""
+"Press F1 at the boot screen for Help and list of cheatcodes for live use."
+msgstr "Önyükleme ekranında Yardım ve canlı kullanım için hile kodlarının listesi için F1 'e basın."
+
+#: cli-installer.sh:94
+msgid "/home partition (hda1, sda2, etc): "
+msgstr "/home bölümü (hda1, sda2, vs.): "
+
+#: cli-installer.sh:97
+#, sh-format
+msgid "$hdrv invalid. Retry:"
+msgstr "$hdrv geçersiz. Yeniden Deneyin:"
+
+#: cli-installer.sh:107
+msgid "Root partition (hda1, sda2, etc): "
+msgstr "Root bölümü (hda1, sda2, vs.): "
+
+#: cli-installer.sh:136
+#, sh-format
+msgid "$rdrv invalid. Retry"
+msgstr "$rdrv geçersiz. Yeniden Deneyin"
+
+#: cli-installer.sh:151
+msgid "Available file systems for $1 are:"
+msgstr "$1 için kullanılabilir dosya sistemleri:"
+
+#: cli-installer.sh:165
+msgid "Enter your choice 1-8: "
+msgstr "1-8 arası seçiminizi girin:"
+
+#: cli-installer.sh:170
+msgid "You have chosen $fs for $1"
+msgstr "$1 için $fs seçtiniz"
+
+#: cli-installer.sh:172
+msgid "Downloading necessary files for formatting partitions"
+msgstr "Bölümleri biçimlendirmek için gerekli dosyalar indiriliyor "
+
+#: cli-installer.sh:184
+msgid "Ignore any 'barrier' lines"
+msgstr "Herhangi bir 'engel' çizgisini yoksay"
+
+#: cli-installer.sh:185
+#, sh-format
+msgid "$fs invalid. Retry:"
+msgstr " $fs geçersiz. tekrar deneyin:"
+
+#: cli-installer.sh:198
+msgid "Passwords are not identical. Retry:"
+msgstr "Parolalar aynı değil. Tekrar girin:"
+
+#: cli-installer.sh:218
+msgid "Invalid; retry:"
+msgstr "Geçersiz; tekrar deneyin:"
+
+#: cli-installer.sh:235
+msgid "Press Enter to exit this script."
+msgstr "Bu betikten çıkmak için entere bas"
+
+#: cli-installer.sh:244
+msgid "Please run this script as root."
+msgstr "Lütfen bu betiği root olarak çalıştırın."
+
+#: cli-installer.sh:260
+msgid "====Disk and partition Information===="
+msgstr "====Disk ve bölümleme Bilgisi===="
+
+#: cli-installer.sh:265
+msgid "Do you want to repartition the disk (y/N)"
+msgstr "Diski yeniden bölümlendirmek mi istiyorsunuz (y/N)"
+
+#: cli-installer.sh:279
+#, sh-format
+msgid ""
+"The installer will now destroy the data on $rdrv  Do you want to continue "
+"(No will abort the installation) (n/Y)"
+msgstr "Bu yükleyici $rdrv üzerindeki tüm verileri yok edecek. Devam etmek istiyor musunuz (Hayır derseniz kurulum iptal edilecek) (n/Y)"
+
+#: cli-installer.sh:286
+#, sh-format
+msgid "Deleting the contents of the $rdrv partition."
+msgstr "$rdrv bölümünün içeriği siliniyor"
+
+#: cli-installer.sh:287 cli-installer.sh:386 cli-installer.sh:411
+msgid "This may take some time. Please wait...."
+msgstr "Bu biraz zaman alabilir. Lütfen bekleyin ..."
+
+#: cli-installer.sh:293 cli-installer.sh:331
+msgid "Done."
+msgstr "Bitti."
+
+#: cli-installer.sh:297
+msgid "Do you want to use a separate '/home' partition (y/N)"
+msgstr "'/home' bölümünü ayrı olarak kullanmak ister misiniz (y/N)"
+
+#: cli-installer.sh:306
+#, sh-format
+msgid ""
+"Is $hdrv a new '/home' partition (No will not destroy any data on $hdrv ) "
+"(y/N)"
+msgstr "$hdrv yeni bir '/home' bölümüdür (Hayır derseniz $hdrv üzerindeki hiçbir veriyi yok etmeyecek) (y/N)"
+
+#: cli-installer.sh:312
+#, sh-format
+msgid "Set file system for $hdrv  (y/N)"
+msgstr "$hdrv için dosya sistemini ayarla (y/N)"
+
+#: cli-installer.sh:319
+#, sh-format
+msgid ""
+"The installer will now destroy the data on $hdrv  Do you want to continue "
+"(No will abort the install) (n/Y)"
+msgstr "Bu yükleyici $hdrv üzerindeki veriyi yok edecek Devam etmek istiyor musunuz (Hayır derseniz kurulum iptal edilecek) (n/Y)"
+
+#: cli-installer.sh:326
+#, sh-format
+msgid "Deleting the contents of the $hdrv partition."
+msgstr "$hdrv bölümünün içeriği siliniyor."
+
+#: cli-installer.sh:343
+msgid "Are you running antiX-net (y/N)"
+msgstr "Antix-net'i çalıştırıyor musunuz (y/N)"
+
+#: cli-installer.sh:348
+msgid ""
+"Downloading grub-pc, locales, keyboard-configuration, console-setup, "
+"console-data, lsb-release, sysv-rc-conf"
+msgstr "grub-pc, locales, keyboard-configuration, console-setup, console-data, lsb-release, sysv-rc-conf indiriliyor"
+
+#: cli-installer.sh:352
+msgid ""
+"Do you want to install elogind and dbus-x11. RECOMMENDED if installing a "
+"desktop environment. (y/N)"
+msgstr "dbus-x11 ve elogind yüklemek istiyor musunuz? Bir masaüstü ortamı kuruyorsanız ÖNERİLİR. (E/H)"
+
+#: cli-installer.sh:357
+msgid "Downloading elogind, libpam-elogind, dbus-x11"
+msgstr "Elogind, libpam-elogind, dbus-x11 indiriliyor"
+
+#: cli-installer.sh:364
+msgid "Do you want to install some packages via cli-aptiX (y/N)"
+msgstr "Bazı paketlerin cli-aptiX üzerinden yüklenmesini istiyor musunuz (y/N)"
+
+#: cli-installer.sh:369
+msgid "Use cli-aptiX to install various applications and/or kernels"
+msgstr "Çeşitli uygulamaları ve/veya çekirdekleri yüklemek için cli-aptiX kullanın"
+
+#: cli-installer.sh:378
+#, sh-format
+msgid "antiX will now be copied to $rdrv."
+msgstr "antiX şimdi $rdrv'ye kopyalanacak."
+
+#: cli-installer.sh:380
+msgid "Do you want to continue (No will abort the install) (n/Y)"
+msgstr "Devam etmek istiyor musunuz (Hayır derseniz kurulum iptal edilecek) (n/Y)"
+
+#: cli-installer.sh:407
+msgid "File copy done"
+msgstr "Dosya kopyalama tamamlandı"
+
+#: cli-installer.sh:409
+msgid "Install GRUB on MBR (Y/n) No will install to root partition"
+msgstr "MBR üzerine GRUB Kur (Y/n).Hayır derseniz kök bölüme yüklenecek"
+
+#: cli-installer.sh:434
+#, sh-format
+msgid "GRUB installed on ($grub)"
+msgstr "GRUB ($grub) 'a kuruldu"
+
+#: cli-installer.sh:438
+msgid "Computer name (default is 'antix1')? "
+msgstr "Bilgisayar adı ( öntanımlı olan 'antix1)?"
+
+#: cli-installer.sh:446
+msgid "Time to set up localisation"
+msgstr "Yerelleştimeyi ayarlama zamanı"
+
+#: cli-installer.sh:448
+msgid "System locale is set to ..."
+msgstr "Sistem yereli ayarlanıyor ..."
+
+#: cli-installer.sh:451
+msgid "Do you want to set up system localisation (y/N)"
+msgstr "Sistem yerelini ayarlamak istiyor musunuz (y/N)"
+
+#: cli-installer.sh:458
+msgid "Time to set keyboard layout"
+msgstr "Klavye düzenini ayarlama zamanı"
+
+#: cli-installer.sh:460
+msgid "System keyboard is set to ..."
+msgstr "Sistem klavyesi şöyle ayarlandı:"
+
+#: cli-installer.sh:463
+msgid "Do you want to set up keyboard (y/N)"
+msgstr "Klavyeyi ayarlamak istiyor musunuz (y/N)"
+
+#: cli-installer.sh:470
+msgid "Time to set console layout"
+msgstr "Uçbirim düzenini ayarlama zamanı"
+
+#: cli-installer.sh:472
+msgid "System console is set to ..."
+msgstr "Sistem uçbirimi şu biçimde ayarlandı:"
+
+#: cli-installer.sh:475
+msgid "Do you want to set up console layout (y/N)"
+msgstr "Uçbirim düzenini ayarlamak istiyor musunuz (y/N)"
+
+#: cli-installer.sh:482
+msgid "Time to set timezone"
+msgstr "Zaman dilimini ayarlama zamanı"
+
+#: cli-installer.sh:484
+msgid "System timezone is set to ..."
+msgstr "Sistem zaman dilimi şöyle ayarlandı:"
+
+#: cli-installer.sh:487
+msgid "Do you want to set up system timezone (y/N)"
+msgstr "Sistem zaman dilimini ayarlamak istiyor musunuz (y/N)"
+
+#: cli-installer.sh:494
+msgid "Choose which services to run"
+msgstr "Hangi hizmetleri çalıştıracağınızı seçin"
+
+#: cli-installer.sh:496
+msgid "Do you want to enable/disable startup services (y/N)"
+msgstr "Başlangıç hizmetlerini etkinleştirmek/devre dışı bırakmak istiyor musunuz (y/N)"
+
+#: cli-installer.sh:505
+msgid "Is this a remastered/snapshot install (y/N)"
+msgstr "Bu yeniden düzenlenmiş/bellek kopyası yüklemesi mi (y/N)"
+
+#: cli-installer.sh:518
+#, sh-format
+msgid "Installation of $DISTRO finished!"
+msgstr "$DISTRO kurulumu tamamlandı!"
+
+#: cli-installer.sh:520 cli-installer.sh:590
+msgid "Reboot computer without CD to start program. ('reboot')"
+msgstr "Programı başlatmak için CD 'yi çıkarıp Bilgisayarı Yeniden Başlatın. ('reboot')"
+
+#: cli-installer.sh:526
+msgid "Setting up user and root/admin accounts"
+msgstr "Kullanıcı ve kök/yönetici hesaplarını ayarlama"
+
+#: cli-installer.sh:531
+msgid "Type in your default user name: "
+msgstr "Öntanımlı kullanıcı adınızı yazın:"
+
+#: cli-installer.sh:535
+#, sh-format
+msgid "Note: $hdrv must contain a folder named '$name'."
+msgstr "Not: $hdrv '$name' adlı bir dizin içermelidir."
+
+#: cli-installer.sh:540
+msgid "Type your Password for root: "
+msgstr "Kök parolanızı yazın:"
+
+#: cli-installer.sh:547
+#, sh-format
+msgid "Set autologin for $name: (y/N)"
+msgstr "$name otomatik giriş olarak ayarlansın: (y/N)"
+
+#: cli-installer.sh:556
+msgid "Cleaning up"
+msgstr "Temizleniyor"
+
+#: cli-installer.sh:588
+msgid "Installation of antiX finished!"
+msgstr "antiX kurulumu tamamlandı!"

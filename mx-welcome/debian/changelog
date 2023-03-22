@@ -1,0 +1,523 @@
+mx-welcome (22.10+deb11u13) stable; urgency=medium
+
+  * MX Tools release
+
+ -- Dolphin Oracle <administrator@localdomain>  Wed, 22 Mar 2023 10:43:57 +0100
+
+mx-welcome (22.10) mx; urgency=medium
+
+  * translations 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 26 Oct 2022 20:11:16 -0400
+
+mx-welcome (22.08.02) mx; urgency=medium
+
+  * fix bug in fluxbox detection
+  * fix alternate mx-welcome.conf location
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 24 Aug 2022 18:57:10 -0400
+
+mx-welcome (22.08.01) mx; urgency=medium
+
+  * call gui instead of qsi cli mode 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 21 Aug 2022 21:25:19 -0400
+
+mx-welcome (22.08) mx; urgency=medium
+
+  * Remove mx-viewer dependency
+
+ -- Adrian <adrian@mxlinux.org>  Tue, 02 Aug 2022 21:50:45 -0400
+
+mx-welcome (22.07.01) mx; urgency=medium
+
+  * translation refresh 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 23 Jul 2022 12:35:45 -0400
+
+mx-welcome (22.02.02) mx; urgency=medium
+
+  * allow customization of live user login info text 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 28 Feb 2022 19:18:48 -0500
+
+mx-welcome (22.02.01) mx; urgency=medium
+
+  * add more customization with /etc/mx-welcome/mx-welcome.conf 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 25 Feb 2022 20:36:21 -0500
+
+mx-welcome (22.01.02) mx; urgency=medium
+
+  * add checking for a /etc/mx-welcome/mx-welcome.comf
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Tue, 11 Jan 2022 19:36:41 -0500
+
+mx-welcome (22.01.01) mx; urgency=medium
+
+  * use data from mx-welcome.conf if /etc/lsb-release is missing. 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 10 Jan 2022 21:12:47 -0500
+
+mx-welcome (21.10.05mx21) mx; urgency=medium
+
+  * Put installer icon in the center
+
+ -- Adrian <adrian@mxlinux.org>  Tue, 19 Oct 2021 13:58:20 -0400
+
+mx-welcome (21.10.04mx21) mx; urgency=medium
+
+  * Remove Codecs
+  * Rearrange icons
+
+ -- Adrian <adrian@mxlinux.org>  Tue, 19 Oct 2021 12:18:59 -0400
+
+mx-welcome (21.10.03mx21) mx; urgency=medium
+
+  * relocate installer and tour buttons (off center) 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 18 Oct 2021 06:53:28 -0400
+
+mx-welcome (21.10.02mx21) mx; urgency=medium
+
+  * add button for tour app (visible when mx-tour is installed)
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 16 Oct 2021 18:19:30 -0400
+
+mx-welcome (21.10.01mx21) mx; urgency=medium
+
+  * adjust style sheet for inactive tab 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 08 Oct 2021 21:19:09 -0400
+
+mx-welcome (21.09mx21) mx; urgency=medium
+
+  * Add comment to display in Whisker menu
+  * Update program description
+
+ -- Adrian <adrian@mxlinux.org>  Sat, 25 Sep 2021 08:52:30 -0400
+
+mx-welcome (21.08.01mx21) mx; urgency=medium
+
+  * add switch for fluxbox detection 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 08 Aug 2021 16:06:53 -0400
+
+mx-welcome (21.08mx21) mx; urgency=medium
+
+  * Move .conf file to ~/.conf/MX-Linux
+
+ -- Adrian <adrian@mxlinux.org>  Sun, 01 Aug 2021 03:19:18 -0400
+
+mx-welcome (21.05.02mx21) mx; urgency=medium
+
+  * new build with dialog size changes (ak-47)
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 09 May 2021 15:04:53 -0400
+
+mx-welcome (21.05.01mx21) mx; urgency=medium
+
+  * add mx fluxbox info 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 07 May 2021 16:54:57 -0400
+
+mx-welcome (21.04.03mx21) mx; urgency=medium
+
+  * adjust tab color & sizes 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 19 Apr 2021 21:12:21 -0400
+
+mx-welcome (21.04.02mx21) mx; urgency=medium
+
+  * revised about, 
+  * refresh short system report on tab switch 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 17 Apr 2021 08:20:17 -0400
+
+mx-welcome (21.04.01mx21) mx; urgency=medium
+
+  * add about
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 04 Apr 2021 19:41:25 -0400
+
+mx-welcome (21.03.01mx21) mx; urgency=medium
+
+  * installer button 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Tue, 02 Mar 2021 19:54:10 -0500
+
+mx-welcome (20.07.01) mx; urgency=medium
+
+  * use xdg-open instead of exo-open 
+
+ -- Dolphin Oracle <dolphin@littlebyte>  Sun, 26 Jul 2020 09:01:04 -0400
+
+mx-welcome (19.10.01) mx; urgency=medium
+
+  * update FAQ button 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 12 Oct 2019 10:05:06 -0400
+
+mx-welcome (19.9.02) mx; urgency=medium
+
+  * preserve "AutoStartup" checkbox option
+  * translation refresh
+
+ -- Adrian <adrian@mxlinux.org>  Sun, 29 Sep 2019 22:00:47 -0400
+
+mx-welcome (19.9.01) mx; urgency=medium
+
+  * translation refresh 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 28 Sep 2019 15:04:27 -0400
+
+mx-welcome (19.8.02) mx; urgency=medium
+
+  * translation refresh 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Tue, 27 Aug 2019 21:33:24 -0400
+
+mx-welcome (19.8.01) mx; urgency=medium
+
+  * local FAQ launch 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 14 Aug 2019 22:01:20 -0400
+
+mx-welcome (19.7.1) mx; urgency=medium
+
+  * new icon
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 08 Jul 2019 14:53:04 -0400
+
+mx-welcome (19.7) mx; urgency=medium
+
+  * fix windows buttons for Buster
+
+ -- Adrian <adrian@mxlinux.org>  Sun, 07 Jul 2019 14:30:24 -0400
+
+mx-welcome (19.6) mx; urgency=medium
+
+  * added mx-welcome-data-depend
+  * now reads icon and distro name/version from mx-welcome.conf data file 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 01 Jun 2019 14:25:04 -0400
+
+mx-welcome (19.4) mx; urgency=medium
+
+  * updated translations
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 05 Apr 2019 12:02:33 -0400
+
+mx-welcome (19.1) mx; urgency=medium
+
+  * updated translations
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 23 Jan 2019 16:53:55 -0500
+
+mx-welcome (18.12.07) mx; urgency=medium
+
+  * displays login info on window
+
+ -- Adrian <adrian@mxlinux.org>  Sun, 09 Dec 2018 12:46:25 -0500
+
+mx-welcome (18.12.06) mx; urgency=medium
+
+  * updates to background launching of settings apps 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 07 Dec 2018 18:08:32 -0500
+
+mx-welcome (18.12.05) mx; urgency=medium
+
+  * mx 18 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 03 Dec 2018 19:34:32 -0500
+
+mx-welcome (18.11) mx; urgency=medium
+
+  * updated translations
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 30 Nov 2018 15:17:49 -0500
+
+mx-welcome (18.11) mx; urgency=medium
+
+  * mx-18 
+
+ -- dolphin <dolphin@littlebyte>  Sun, 18 Nov 2018 10:17:34 -0500
+
+mx-welcome (18.10) mx; urgency=medium
+
+  * new translations
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 12 Oct 2018 11:16:08 -0400
+
+mx-welcome (18.8) mx; urgency=medium
+
+  * fix icon
+
+ -- Adrian <adrian@mxlinux.org>  Sat, 11 Aug 2018 23:40:18 -0400
+
+mx-welcome (18.6.1) mx; urgency=medium
+
+  * new changelog button
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 28 Jun 2018 18:21:16 -0400
+
+mx-welcome (18.6) mx; urgency=medium
+
+  * new translations
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 18 Jun 2018 18:29:22 -0400
+
+mx-welcome (18.02.01) mx; urgency=medium
+
+  *  updated text and translations
+
+ -- dolphin oracle <dolphinoracle@gmail.com>  Tue, 20 Feb 2018 20:29:32 -0500
+
+mx-welcome (17.12.01) mx; urgency=medium
+
+  * translations updates
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 11 Dec 2017 23:21:57 -0500
+
+mx-welcome (17.12) mx; urgency=medium
+
+  * new translations
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 04 Dec 2017 15:20:48 -0500
+
+mx-welcome (17.11.03) mx; urgency=medium
+
+  * adjustments to default buttons 
+
+ -- Dolphin <dolphin@littlebyte>  Thu, 30 Nov 2017 19:46:11 -0500
+
+mx-welcome (17.11.02) mx; urgency=medium
+
+  * adjustment to help-about icon (paul)
+
+ -- Dolphin <dolphin@littlebyte>  Tue, 28 Nov 2017 17:57:09 -0500
+
+mx-welcome (17.11.01) mx; urgency=medium
+
+  * adjustment to "default buttons" (paul)
+
+ -- Dolphin <dolphinoracle@gmail.com>  Mon, 20 Nov 2017 18:50:18 -0500
+ 
+mx-welcome (17.11) mx; urgency=medium
+
+  * icon change (paul)
+
+ -- Dolphin <dolphinoracle@gmail.com>  Thu, 16 Oct 2017 16:35:34 -0500
+
+mx-welcome (17.10.05) mx; urgency=medium
+
+  * adjustments to login info box
+
+ -- Dolphin <dolphinoracle@gmail.com>  Sat, 21 Oct 2017 15:23:49 -0500
+ 
+ mx-welcome (17.10.04) mx; urgency=medium
+
+  * adjustments to for default button (paul)
+
+ -- Dolphin <dolphinoracle@gmail.com>  Fri, 13 Oct 2017 20:30:49 -0500
+
+mx-welcome (17.10.03) mx; urgency=medium
+
+  * new icons (paul)
+  * fix mx-manual launch (paul)
+
+ -- Dolphin <dolphinoracle@gmail.com>  Mon, 09 Oct 2017 18:52:49 -0500
+
+mx-welcome (17.10.01) mx; urgency=medium
+
+  * new horizon placeholder name
+
+ -- Dolphin <dolphinoracle@gmail.com>  Mon, 02 Oct 2017 21:05:49 -0500
+
+mx-welcome (17.07.01) mx; urgency=medium
+
+  * placeholder name
+
+ -- Dolphin <dolphinoracle@gmail.com>  Wed, 06 Sep 2017 16:14:49 -0500
+
+mx-welcome (17.07) mx; urgency=medium
+
+  * updates for stretch
+
+ -- Dolphin <dolphinoracle@gmail.com>  Sun, 23 Jul 2017 21:27:49 -0500
+
+mx-welcome (17.6mx16) mx; urgency=medium
+
+  * updated translations
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 02 Jun 2017 16:41:15 -0400
+
+mx-welcome (17.5mx16) mx; urgency=medium
+
+  * updated icons
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 10 May 2017 16:21:21 -0400
+
+mx-welcome (17.4mx16) mx; urgency=medium
+
+  * new translations 
+
+ -- Adrian <adrian@mxlinux.org>  Sun, 02 Apr 2017 13:28:04 -0400
+
+mx-welcome (16.11mx16+3) mx; urgency=medium
+
+  * new translations
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 30 Nov 2016 13:03:51 -0500
+
+mx-welcome (16.11mx16+2) mx; urgency=medium
+
+  * window icon for panel 
+
+ -- Dolphin <dolphinoracle@gmail.com>  Sat, 19 Nov 2016 15:15:49 -0500
+
+mx-welcome (16.11mx16+1) mx; urgency=medium
+
+  * minor startup delay added to autostart  
+
+ -- Adrian <adrian@mxlinux.org>  Sat, 19 Nov 2016 10:20:49 -0500
+
+mx-welcome (16.11mx16) mx; urgency=medium
+
+  * new translations 
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 16 Nov 2016 14:03:49 -0500
+
+mx-welcome (16.10mx16+7) mx; urgency=medium
+
+  * changed video url
+
+ -- dolphinoracle <dolphinoracle@gmail.com>  Fri, 28 Oct 2016 15:25:41 -0400
+
+mx-welcome (16.10mx16+6) mx; urgency=medium
+
+  * translations
+
+ -- dolphinoracle <dolphinoracle@gmail.com>  Fri, 28 Oct 2016 12:48:41 -0400
+
+mx-welcome (16.10mx16+5) mx; urgency=medium
+
+  * fixed depends in control file
+
+ -- dolphinoracle <dolphinoracle@gmail.com>  Thu, 20 Oct 2016 12:14:41 -0400
+
+mx-welcome (16.10mx16+4) mx; urgency=medium
+
+  * fixed depends in control file
+
+ -- dolphinoracle <dolphinoracle@gmail.com>  Tue, 18 Oct 2016 22:40:41 -0400
+
+mx-welcome (16.10mx16+3) mx; urgency=medium
+
+  * hide UI when clicking on buttons
+
+ -- Adrian <adrian@mxlinux.org>  Tue, 18 Oct 2016 16:09:20 -0400
+
+mx-welcome (16.10mx16+2) mx; urgency=medium
+
+  * fixed live detection
+
+ -- dolphinoracle <dolphinoracle@gmail.com>  Sun, 16 Oct 2016 20:03:41 -0400
+
+mx-welcome (16.10mx16+1) mx; urgency=medium
+
+  * initial mx16 release.
+  * changed panel-orientation to mx-defaultlook
+
+ -- dolphinoracle <dolphinoracle@gmail.com>  Mon, 10 Oct 2016 22:03:41 -0400
+
+mx-welcome (16.9mx15) mx; urgency=medium
+
+  * new options
+
+ -- dolphinoracle <dolphinoracle@gmail.com>  Wed, 28 Sep 2016 08:41:53 -0400
+
+mx-welcome (16.5mx15) mx; urgency=medium
+
+  * new desktop file
+
+ -- dolphinoracle <dolphinoracle@gmail.com>  Mon, 23 May 2016 13:27:00 -0400
+
+mx-welcome (15.12mx15) mx; urgency=medium
+
+  * hide GUI when displaying help/license
+
+ -- Adrian <adrian@mxlinux.org>  Tue, 22 Dec 2015 18:23:12 -0500
+
+mx-welcome (15.11.1mx15) mx; urgency=medium
+
+  * changed icon location
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 30 Nov 2015 10:08:32 -0500
+
+mx-welcome (15.11mx15) mx; urgency=medium
+
+  * open videos in browser
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 11 Nov 2015 18:01:28 -0500
+
+mx-welcome (15.10.7mx15) mx; urgency=medium
+
+  * new translations
+
+ -- Adrian <adrian@mxlinux.org>  Sat, 31 Oct 2015 19:36:17 -0400
+
+mx-welcome (15.10.6mx15) mx; urgency=medium
+
+  * use mx-viewer to display pages
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 29 Oct 2015 09:08:19 -0400
+
+mx-welcome (15.10.5mx15) mx; urgency=medium
+
+  * replaced icons
+
+ -- Adrian <adrian@mxlinux.org>  Tue, 27 Oct 2015 11:17:19 -0400
+
+mx-welcome (15.10.4mx15) mx; urgency=medium
+
+  * live login info displayed only when running live
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 23 Oct 2015 12:39:50 -0400
+
+mx-welcome (15.10.3mx15) mx; urgency=medium
+
+  * added find live login/password
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 22 Oct 2015 17:08:31 -0400
+
+mx-welcome (15.10.2mx15) mx; urgency=medium
+
+  * use onboard manual
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 14 Oct 2015 14:16:11 -0400
+
+mx-welcome (15.10.1mx15) mx; urgency=medium
+
+  * hide checkbox if running live
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 12 Oct 2015 08:47:21 -0400
+
+mx-welcome (15.10mx15) mx; urgency=medium
+
+  * text formating
+
+ -- Adrian <adrian@mxlinux.org>  Sun, 11 Oct 2015 15:18:50 -0400
+
+mx-welcome (0.15.10.1mx15) mx; urgency=medium
+
+  * fixed windows size and icon
+
+ -- Adrian <adrian@mxlinux.org>  Sun, 11 Oct 2015 10:39:17 -0400
+
+mx-welcome (0.15.10mx15) mx; urgency=medium
+
+  * initial release 
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 02 Oct 2015 10:00:04 -0400

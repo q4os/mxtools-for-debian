@@ -1,0 +1,11 @@
+[Unit]
+Description=save system clock if not running live
+Before=umount.target
+
+[Service]
+ExecStart=/etc/init.d/hwclock.sh start
+ExecStop=/etc/init.d/hwclock.sh stop
+RemainAfterExit=yes
+
+[Install]
+WantedBy=sysinit.target

@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Cleanup Notifier
+Comment=Check available space at /boot
+Icon=mx-cleanup
+Exec=sh -c 'sleep 15; exec cleanup-notifier-mx'
+Categories=GTK;Utility;
+NoDisplay=true

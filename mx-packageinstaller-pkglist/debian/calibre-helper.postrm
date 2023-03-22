@@ -1,0 +1,13 @@
+#!/bin/bash
+
+set -e
+
+case $1 in
+    purge|remove)
+        if [ -x /usr/bin/calibre-uninstall ]; then
+           echo "y" | /usr/bin/calibre-uninstall || true
+        fi
+        ;;
+esac
+
+exit 0

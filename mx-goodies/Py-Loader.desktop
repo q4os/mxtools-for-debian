@@ -1,0 +1,9 @@
+[Desktop Entry]
+Encoding=UTF-8
+Type=Application
+Name=Py-Loader
+Icon= /usr/share/pixmaps/python.xpm
+Categories=Application;
+Exec=python3 %f
+Terminal=false
+NoDisplay=True

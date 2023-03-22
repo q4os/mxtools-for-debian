@@ -1,0 +1,9 @@
+#!/bin/bash
+
+if [ "$#" -eq 0 ];
+  then
+    zgrep -EH ' install | upgrade | purge | remove ' /var/log/dpkg* | cut -f2- -d: | sort -r | sed 's/ remove / remove  /;s/ purge / purge   /' | grep "^"     | more -d
+  else
+    zgrep -EH ' install | upgrade | purge | remove ' /var/log/dpkg* | cut -f2- -d: | sort -r | sed 's/ remove / remove  /;s/ purge / purge   /' | grep "$@" | more -d
+fi
+

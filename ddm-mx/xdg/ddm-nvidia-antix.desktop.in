@@ -1,0 +1,11 @@
+[Desktop Entry]
+# The desktop entry name will be displayed within the menu.
+Name=Nvidia driver installer
+# TRANSLATORS:
+# The desktop entry comment will be shown within the menu.
+Comment=Install proprietary nvidia driver from repo
+Icon=nvidia-ddm-mx
+Type=Application
+Terminal=true 
+Exec=su-to-root -X -c "/usr/bin/ddm-mx -i nvidia"
+Categories=ConsoleOnly;System;MX-Setup;

@@ -1,0 +1,471 @@
+mx-user (22.12+deb11u13) stable; urgency=medium
+
+  * MX Tools release
+
+ -- Adrian <administrator@localdomain>  Wed, 22 Mar 2023 10:43:56 +0100
+
+mx-user (22.12) mx; urgency=medium
+
+  * List the groups to delete in a list with checkboxes instead of a dropdown menu
+  * Add checkbox option to allow user to create a user-level group (GUI > 1000)
+  * Minor resizing improvements for the interface
+  * Translation updates
+
+ -- Adrian <adrian@mxlinux.org>  Sat, 31 Dec 2022 17:24:37 -0500
+
+mx-user (22.10) mx; urgency=medium
+
+  * translations
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 26 Oct 2022 20:10:32 -0400
+
+mx-user (22.8.01) mx; urgency=medium
+
+  * Fix: launching documents from Help (fixes a problem in Plasma)
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 22 Aug 2022 18:59:55 -0400
+
+mx-user (22.8) mx; urgency=medium
+
+  * Fix: launching Firefox from Help
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 17 Aug 2022 22:03:46 -0400
+
+mx-user (22.7) mx; urgency=medium
+
+  * translation refresh 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 23 Jul 2022 12:35:01 -0400
+
+mx-user (22.6.01) mx; urgency=medium
+
+  * Fix policy file
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 16 Jun 2022 00:14:09 -0400
+
+mx-user (22.6) mx; urgency=medium
+
+  * Preserve user theme when launching program as root
+  * Make sure HOME and XDG_RUNTIME_DIR are correct when launching as root
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 15 Jun 2022 17:04:58 -0400
+
+mx-user (22.2) mx; urgency=medium
+
+  * GUI improvement: in Options tab make it more obvious that the option has been applied
+  * Display autologin status for the selected user
+  * Hide autologin group if cannot detect desktop manager
+  * Minor GUI fix: size of boxes
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 03 Feb 2022 11:02:17 -0500
+
+mx-user (21.12) mx; urgency=medium
+
+  * Disable tab switching while copying
+  * Prompt for exit confirmation while copying 
+  * Restore/save window geometry at start/exit
+  * Minor GUI fixes
+
+ -- Adrian <adrian@mxlinux.org>  Tue, 28 Dec 2021 01:14:50 -0500
+
+mx-user (21.5) mx; urgency=medium
+
+  * Relax unnecessary upper-case ban on user names.
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 28 May 2021 09:19:27 -0400
+
+mx-user (21.2.01) mx; urgency=medium
+
+  * rebuild for Stretch
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 11 Feb 2021 09:35:16 -0500
+
+mx-user (21.2) mx; urgency=medium
+
+  * remove apt-mx dependency
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 10 Feb 2021 16:37:44 -0500
+
+mx-user (20.12.01) mx; urgency=medium
+
+  * adjust autologin user handling for lightdm
+
+ -- fehlix <fehlix@mxlinux.org>  Sun, 20 Dec 2020 20:05:02 -0400
+
+mx-user (20.12) mx; urgency=medium
+
+  * change autologin name when renaming user
+
+ -- Adrian <adrian@mxlinux.org>  Sun, 06 Dec 2020 13:35:44 -0500
+
+mx-user (20.7) mx; urgency=medium
+
+  * add autologin option for KDE
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 22 Jul 2020 22:27:23 -0400
+
+mx-user (19.10.01) mx; urgency=medium
+
+  * translation updates
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 10 Oct 2019 00:32:01 -0400
+
+mx-user (19.10) mx; urgency=medium
+
+  * sorted groups
+  * removed libcmd dependency
+  * fix: resetting group membership
+  * added confirmation message for resetting group/Mozilla settings
+
+ -- Adrian <adrian@mxlinux.org>  Tue, 01 Oct 2019 17:06:08 -0400
+
+mx-user (19.8) mx; urgency=medium
+
+  * added offline help file
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 21 Aug 2019 16:34:10 -0400
+
+mx-user (19.7.1) mx; urgency=medium
+
+  * new icon
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 08 Jul 2019 14:44:29 -0400
+
+mx-user (19.7) mx; urgency=medium
+
+  * fix windows buttons for Buster
+
+ -- Adrian <adrian@mxlinux.org>  Sun, 07 Jul 2019 14:23:55 -0400
+
+mx-user (19.4) mx; urgency=medium
+
+  * updated translations
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 05 Apr 2019 12:01:33 -0400
+
+mx-user (19.3.1) mx; urgency=medium
+
+  * update translations
+
+ -- Adrian <adrian@mxlinux.org>  Sun, 10 Mar 2019 13:34:52 -0400
+
+mx-user (19.3) mx; urgency=medium
+
+  * rename user feature
+  * bug fix: search for full word when checking for existent user/group
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 01 Mar 2019 15:15:12 -0500
+
+mx-user (19.2) mx; urgency=medium
+
+  * removed restore APT sources checkbox, function moved to mx-repo-manager
+
+ -- Adrian <adrian@mxlinux.org>  Sun, 10 Feb 2019 10:02:12 -0500
+
+mx-user (19.1) mx; urgency=medium
+
+  * updated translations
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 23 Jan 2019 16:48:16 -0500
+
+mx-user (18.11.1) mx; urgency=medium
+
+  * updated translations
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 30 Nov 2018 15:06:52 -0500
+
+mx-user (18.11) mx; urgency=medium
+
+  * color clue if the passwords are matching
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 02 Nov 2018 15:58:51 -0400
+
+mx-user (18.10) mx; urgency=medium
+
+  * updated translations
+
+ -- Adrian <adrian@mxlinux.org>  Sun, 14 Oct 2018 20:35:12 -0400
+
+mx-user (18.8) mx; urgency=medium
+
+  * fix icon other themes
+
+ -- Adrian <adrian@mxlinux.org>  Sat, 11 Aug 2018 23:18:23 -0400
+
+mx-user (18.6.2) mx; urgency=medium
+
+  * add changelog button
+  * fix: message boxes showing alwas on top of window
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 28 Jun 2018 17:51:33 -0400
+
+mx-user (18.6.1) mx; urgency=medium
+
+  * new translations
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 18 Jun 2018 18:10:18 -0400
+
+mx-user (18.6) mx; urgency=medium
+
+  * remove cleanup tab 
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 11 Jun 2018 15:31:56 -0400
+
+mx-user (18.3) mx; urgency=medium
+
+  * new translations
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 02 Mar 2018 12:05:42 -0500
+
+mx-user (18.2) mx; urgency=medium
+
+  * new translations
+
+ -- Adrian <adrian@mxlinux.org>  Sat, 10 Feb 2018 02:34:41 -0500
+
+mx-user (17.12) mx; urgency=medium
+
+  * new translations
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 04 Dec 2017 15:18:03 -0500
+
+mx-user (17.11+1) mx; urgency=medium
+
+  * fix LANG detection
+
+ -- Adrian <adrian@mxlinux.org>  Sat, 11 Nov 2017 18:53:55 -0500
+
+mx-user (17.11) mx; urgency=medium
+
+  * added FR help
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 10 Nov 2017 09:45:37 -0500
+
+mx-user (17.10) mx; urgency=medium
+
+  * fix logo
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 16 Oct 2017 09:47:39 -0400
+
+mx-user (17.7) mx; urgency=medium
+
+  * small fixes for MX17
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 31 Jul 2017 15:47:02 -0400
+
+mx-user (17.6mx16) mx; urgency=medium
+
+  * new translations
+  * removed panel orientation code
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 02 Jun 2017 16:42:28 -0400
+
+mx-user (17.5mx16+1) mx; urgency=medium
+
+  * new translations
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 25 May 2017 11:24:20 -0400
+
+mx-user (17.5mx16) mx; urgency=medium
+
+  * update icons
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 10 May 2017 16:04:38 -0400
+
+mx-user (17.4mx16) mx; urgency=medium
+
+  * added option to copy home content to a folder
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 05 Apr 2017 11:27:24 -0400
+
+mx-user (17.3mx16) mx; urgency=medium
+
+  * new translations
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 06 Mar 2017 16:08:03 -0500
+
+mx-user (17.2mx16) mx; urgency=medium
+
+  * added change password feature
+
+ -- Adrian <adrian@mxlinux.org>  Sun, 26 Feb 2017 12:02:21 -0500
+
+mx-user (17.1mx16) mx; urgency=medium
+
+  * restore APT lists for MX-15 and MX-16
+
+ -- Adrian <adrian@mxlinux.org>  Tue, 10 Jan 2017 18:55:23 -0500
+
+mx-user (16.11mx16+1) mx; urgency=medium
+
+  * fetch MX-16 source lists
+  * new FR translations 
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 30 Nov 2016 09:55:52 -0500
+
+mx-user (16.11mx16) mx; urgency=medium
+
+  * new translations
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 16 Nov 2016 13:55:18 -0500
+
+mx-user (16.10mx16) mx; urgency=medium
+
+  * changed URLs
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 10 Oct 2016 14:46:48 -0400
+
+mx-user (16.5mx15) mx; urgency=medium
+
+  * new desktop file
+
+ -- dolphinoracle <dolphinoracle@gmail.com>  Mon, 23 May 2016 07:11:13 -0400
+
+mx-user (15.12.1mx15) mx; urgency=medium
+
+  * hide GUI when displaying help/license
+
+ -- Adrian <adrian@mxlinux.org>  Tue, 22 Dec 2015 19:01:39 -0500
+
+mx-user (15.12mx15) mx; urgency=medium
+
+  * fixed restarting xfce4-panel, new translations
+
+ -- Adrian <adrian@mxlinux.org>  Tue, 01 Dec 2015 08:26:10 -0500
+
+mx-user (15.10.4mx15) mx; urgency=medium
+
+  * new translations
+
+ -- Adrian <adrian@mxlinux.org>  Sat, 31 Oct 2015 19:35:58 -0400
+
+mx-user (15.10.3mx15) mx; urgency=medium
+
+  * localize repo after restore
+
+ -- Adrian <adrian@mxlinux.org>  Tue, 27 Oct 2015 17:42:09 -0400
+
+mx-user (15.10.2mx15) mx; urgency=medium
+
+  * added panel layout change
+
+ -- Adrian <adrian@mxlinux.org>  Sun, 18 Oct 2015 16:55:39 -0400
+
+mx-user (15.10.1mx15) mx; urgency=medium
+
+  * restore Xfce defaut settings
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 08 Oct 2015 15:52:30 -0400
+
+mx-user (15.10mx15) mx; urgency=medium
+
+  * fixed delete user bug
+
+ -- Adrian <adrian@mxlinux.org>  Sat, 03 Oct 2015 11:34:32 -0400
+
+mx-user (15.7.4mx15) mx; urgency=medium
+
+  * new translations
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 27 Jul 2015 11:24:51 -0400
+
+mx-user (15.7.3mx15) mx; urgency=medium
+
+  * fixed license
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 09 Jul 2015 21:12:48 -0400
+
+mx-user (15.7.2mx15) mx; urgency=medium
+
+  * removed Qupzilla
+
+ -- Adrian <adrian@mxlinux.org>  Tue, 07 Jul 2015 10:48:38 -0400
+
+mx-user (15.7.1mx15) mx; urgency=medium
+
+  * added autologin fix, removed mirror localization for now
+
+ -- Adrian <adrian@mxlinux.org>  Tue, 07 Jul 2015 08:57:41 -0400
+
+mx-user (15.7mx15) mx; urgency=medium
+
+  * update to qt5, updated to mx-15 sources
+
+ -- Adrian <adrian@mxlinux.org>  Tue, 30 Jun 2015 14:21:15 -0400
+
+mx-user (15.6mx14) mx; urgency=medium
+
+  * changed documentation URL
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 03 Jun 2015 13:14:19 -0400
+
+mx-user (15.5mx14) mx; urgency=medium
+
+  * added clean up tab
+
+ -- Adrian <adrian@mxlinux.org>  Tue, 19 May 2015 13:16:00 -0400
+
+mx-user (15.4mx14) mx; urgency=medium
+
+  * added translation
+
+ -- Adrian <adrian@mxlinux.org>  Tue, 21 Apr 2015 14:16:32 -0400
+
+mx-user (15.3mx14) mx; urgency=medium
+
+  * changed manual URL
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 20 Mar 2015 16:17:50 -0400
+
+mx-user (15.2) mx; urgency=medium
+
+  * changed manual URL, added mx-viewer dependency
+
+ -- Adrian <adrian@mxlinux.org>  Sun, 15 Feb 2015 10:55:58 -0500
+
+mx-user (14.2+1) mx; urgency=low
+
+  * added APT sources restore function, changed version format
+
+ -- Adrian <adrian@mxlinux.org>  Sat, 11 Oct 2014 16:32:25 -0400
+
+mx-user (0.14.1mx141+5) mx; urgency=low
+
+  * added APT sources restore function
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 28 Jul 2014 21:41:44 -0400
+
+mx-user (0.14.1mx141+4) mx; urgency=low
+
+  * added button translation
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 25 Jun 2014 10:35:47 -0400
+
+mx-user (0.14.1mx141+3) mx; urgency=low
+
+  * Updated languages
+
+ -- Adrian <adrian@mxlinux.org>  Tue, 17 Jun 2014 13:45:19 -0400
+
+mx-user (0.14.1mx141+2) mx; urgency=low
+
+  * Update for MX 14.1 
+  * Added Mozilla config copying and cleanup.  
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 16 Jun 2014 14:32:37 -0400
+
+mx-user (0.13.98+git20140221-mx140+1) mx; urgency=low
+
+  * Change application name to MX User Manager.
+  * Add desktop file
+  * Enhance debian/install.
+  * Add dependencies for adduser and rsync.
+  * src.pro: change "muser" to "mx-user" for translation files.  
+
+ -- Steven Pusser (Stevo) <maintainer@mepiscommunity.org>  Fri, 21 Feb 2014 21:05:17 -0800
+
+mx-user (0.13.98-mx140+1) mx; urgency=low
+
+  * Initial release. 
+
+ -- Steven Pusser (Stevo) <maintainer@mepiscommunity.org>  Sun, 16 Feb 2014 12:03:25 -0800

@@ -1,0 +1,8 @@
+[main]
+host = https://www.transifex.com
+
+[antix-development.system-keyboard-qt]
+file_filter = ./system-keyboard-qt_<lang>.ts
+source_file = system-keyboard-qt_en.ts
+source_lang = en
+type = ts

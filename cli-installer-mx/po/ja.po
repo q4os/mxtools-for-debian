@@ -1,0 +1,396 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# ふうせん Fu-sen. | BALLOON a.k.a. Fu-sen., 2014
+# Green, 2020
+msgid ""
+msgstr ""
+"Project-Id-Version: antix-development\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-03-20 18:46+0200\n"
+"PO-Revision-Date: 2020-04-04 11:42+0000\n"
+"Last-Translator: Green\n"
+"Language-Team: Japanese (http://www.transifex.com/anticapitalista/antix-development/language/ja/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: ja\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: cli-installer.sh:29
+#, sh-format
+msgid "CL installer for $DISTRO"
+msgstr "$DISTRO 用の CL インストーラー"
+
+#: cli-installer.sh:30
+msgid "Version 5.2.1 20/03/2020"
+msgstr "バージョン 5.2.1 20/03/2020"
+
+#: cli-installer.sh:37
+msgid "Requirements for minimum installation:"
+msgstr "最低限のシステム要件:"
+
+#: cli-installer.sh:40
+msgid "antiX-full: hard-disk 4.0GB  RAM 64MB"
+msgstr "antiX-full: ハードディスク 4.0GB  RAM 64MB"
+
+#: cli-installer.sh:42
+msgid "antiX-base: hard-disk 3.0GB  RAM 48MB"
+msgstr "antiX-base: ハードディスク 3.0GB  RAM 48MB"
+
+#: cli-installer.sh:44
+msgid "antiX-core: hard-disk 1.0GB  RAM 48MB"
+msgstr "antiX-core: ハードディスク 1.0GB  RAM 48MB"
+
+#: cli-installer.sh:46
+msgid "antiX-net:  hard-disk 0.7GB  RAM 48MB"
+msgstr "antiX-net:  ハードディスク 0.7GB  RAM 48MB"
+
+#: cli-installer.sh:48
+msgid "Make sure you are connected to "
+msgstr "に接続されていることを確認してください。"
+
+#: cli-installer.sh:50
+msgid "the net BEFORE running this installer"
+msgstr "このインストーラーを実行している net BEFORE"
+
+#: cli-installer.sh:52
+msgid "NOTE: This installer will NOT work for UEFI boot"
+msgstr "注意: このインストーラは UEFI ブートでは動作しません。"
+
+#: cli-installer.sh:54
+msgid ""
+"This installer does NOT offer the option for using a separate boot partition"
+msgstr "このインストーラは、別のブートパーティションを使用するオプションを提供しません。"
+
+#: cli-installer.sh:56
+msgid "This installer does NOT offer encryption"
+msgstr "このインストーラは暗号化を提供しません"
+
+#: cli-installer.sh:58
+msgid "This installer does NOT offer installation to NVMe devices"
+msgstr "このインストーラは、NVMe デバイスへのインストールを提供しません"
+
+#: cli-installer.sh:60
+msgid "If you want the above mentioned features, use our gui installer"
+msgstr "上記の機能を使いたい場合は、私たちの GUI インストーラを使用してください。"
+
+#: cli-installer.sh:62
+msgid "Ctrl c will abort this script"
+msgstr "Ctrl c でこのスクリプトを中止します"
+
+#: cli-installer.sh:68
+msgid "Usage: cli-installer [drive]"
+msgstr "使用方法: cli-installer [ドライブ名]"
+
+#: cli-installer.sh:69
+#, sh-format
+msgid "Where drive is the name of the drive $DISTRO is to be installed on."
+msgstr "drive は、$DISTRO というドライブ名がインストールされる場所です。"
+
+#: cli-installer.sh:70
+msgid "   For example: cli-installer sdb"
+msgstr " 例： cli-installer sdb"
+
+#: cli-installer.sh:71
+msgid "The default is correct if the computer has only one drive."
+msgstr "コンピュータにドライブが1つしかない場合は、デフォルトが正しいです。"
+
+#: cli-installer.sh:75
+msgid "Pre-installation tips:"
+msgstr "インストール前のヒント"
+
+#: cli-installer.sh:78
+msgid "Set language at the boot screen by pressing F2"
+msgstr "F2を押して起動画面で言語を設定"
+
+#: cli-installer.sh:79
+msgid "or by adding the line lang=xx where xx is your language code."
+msgstr "または lang=xx という行を追加することで、xx はあなたの言語コードになります。"
+
+#: cli-installer.sh:80
+msgid "eg lang=gr for Greek."
+msgstr "例：ギリシャ語は lang=gr です。"
+
+#: cli-installer.sh:82
+msgid "Set timezone at the boot screen by pressing F3"
+msgstr "F3 を押して起動画面でタイムゾーンを設定"
+
+#: cli-installer.sh:84
+msgid "Use kbd=dvorak for dvorak keyboard before installing"
+msgstr "インストールする前に dvorak キーボードに kbd=dvorak を使用してください"
+
+#: cli-installer.sh:87
+msgid ""
+"Press F1 at the boot screen for Help and list of cheatcodes for live use."
+msgstr "F1を押すと、起動画面でヘルプとライブで使用するチートコードのリストが表示されます。"
+
+#: cli-installer.sh:94
+msgid "/home partition (hda1, sda2, etc): "
+msgstr "/home パーティション (hda1, sda2 など)："
+
+#: cli-installer.sh:97
+#, sh-format
+msgid "$hdrv invalid. Retry:"
+msgstr "$hdrv が無効です。再試行してください："
+
+#: cli-installer.sh:107
+msgid "Root partition (hda1, sda2, etc): "
+msgstr "Root パーティション (hda1, sda2, など): "
+
+#: cli-installer.sh:136
+#, sh-format
+msgid "$rdrv invalid. Retry"
+msgstr "$rdrv は無効です。再試行してください"
+
+#: cli-installer.sh:151
+msgid "Available file systems for $1 are:"
+msgstr "$1 で利用可能なファイルシステム:"
+
+#: cli-installer.sh:165
+msgid "Enter your choice 1-8: "
+msgstr "1 ～ 8 の中から選択して入力します: "
+
+#: cli-installer.sh:170
+msgid "You have chosen $fs for $1"
+msgstr "あなたは $1 のために $fs を選択しました"
+
+#: cli-installer.sh:172
+msgid "Downloading necessary files for formatting partitions"
+msgstr "パーティションのフォーマットに必要なファイルをダウンロード中"
+
+#: cli-installer.sh:184
+msgid "Ignore any 'barrier' lines"
+msgstr "「バリア」のラインを無視"
+
+#: cli-installer.sh:185
+#, sh-format
+msgid "$fs invalid. Retry:"
+msgstr "$fs は無効です。再入力:"
+
+#: cli-installer.sh:198
+msgid "Passwords are not identical. Retry:"
+msgstr "パスワードが一致しません。再試行してください。"
+
+#: cli-installer.sh:218
+msgid "Invalid; retry:"
+msgstr "無効なので再試行："
+
+#: cli-installer.sh:235
+msgid "Press Enter to exit this script."
+msgstr "Enterキーを押すと、このスクリプトを終了します。"
+
+#: cli-installer.sh:244
+msgid "Please run this script as root."
+msgstr "このスクリプトは root 権限で実行してください"
+
+#: cli-installer.sh:260
+msgid "====Disk and partition Information===="
+msgstr "====ディスクとパーティションの情報===="
+
+#: cli-installer.sh:265
+msgid "Do you want to repartition the disk (y/N)"
+msgstr "ディスクの再パーティションを行いたいですか？ (y/N)"
+
+#: cli-installer.sh:279
+#, sh-format
+msgid ""
+"The installer will now destroy the data on $rdrv  Do you want to continue "
+"(No will abort the installation) (n/Y)"
+msgstr "インストーラは $rdrv のデータを破棄します。作業を続行したいですか？ (No でインストールを中止します) (n/Y)"
+
+#: cli-installer.sh:286
+#, sh-format
+msgid "Deleting the contents of the $rdrv partition."
+msgstr "$rdrv パーティションの内容を削除中"
+
+#: cli-installer.sh:287 cli-installer.sh:386 cli-installer.sh:411
+msgid "This may take some time. Please wait...."
+msgstr "処理に時間がかかります。お待ちください...."
+
+#: cli-installer.sh:293 cli-installer.sh:331
+msgid "Done."
+msgstr "終了。"
+
+#: cli-installer.sh:297
+msgid "Do you want to use a separate '/home' partition (y/N)"
+msgstr "別の '/home' パーティションを利用したいですか？ (y/N)"
+
+#: cli-installer.sh:306
+#, sh-format
+msgid ""
+"Is $hdrv a new '/home' partition (No will not destroy any data on $hdrv ) "
+"(y/N)"
+msgstr "$hdrv は新規の '/home' パーティションですか？ (No で $hdrv 上のデータは何も破壊されません) (y/N)"
+
+#: cli-installer.sh:312
+#, sh-format
+msgid "Set file system for $hdrv  (y/N)"
+msgstr "$hdrv のファイルシステムを設定 (y/N)"
+
+#: cli-installer.sh:319
+#, sh-format
+msgid ""
+"The installer will now destroy the data on $hdrv  Do you want to continue "
+"(No will abort the install) (n/Y)"
+msgstr "インストーラは $hdrv 上のデータを破棄します。続行したいですか？ (No でインストールを中止します) (n/Y)"
+
+#: cli-installer.sh:326
+#, sh-format
+msgid "Deleting the contents of the $hdrv partition."
+msgstr "$hdrv パーティションの内容を消去中"
+
+#: cli-installer.sh:343
+msgid "Are you running antiX-net (y/N)"
+msgstr "antiX-net を作動させていますか？ (y/N)"
+
+#: cli-installer.sh:348
+msgid ""
+"Downloading grub-pc, locales, keyboard-configuration, console-setup, "
+"console-data, lsb-release, sysv-rc-conf"
+msgstr "grub-pc, locales, keyboard-configuration, console-setup, console-data, lsb-release, sysv-rc-conf をダウンロード中"
+
+#: cli-installer.sh:352
+msgid ""
+"Do you want to install elogind and dbus-x11. RECOMMENDED if installing a "
+"desktop environment. (y/N)"
+msgstr "elogind と dbus-x11 をインストールしますか？デスクトップ環境をインストールする場合は推奨します。 (y/N)"
+
+#: cli-installer.sh:357
+msgid "Downloading elogind, libpam-elogind, dbus-x11"
+msgstr "elogind, libpam-elogind, dbus-x11 をダウンロード中"
+
+#: cli-installer.sh:364
+msgid "Do you want to install some packages via cli-aptiX (y/N)"
+msgstr "cli-aptiX 経由でパッケージをインストールしますか？ (y/N)"
+
+#: cli-installer.sh:369
+msgid "Use cli-aptiX to install various applications and/or kernels"
+msgstr "cli-aptiX を使って様々なアプリケーションやカーネルをインストール"
+
+#: cli-installer.sh:378
+#, sh-format
+msgid "antiX will now be copied to $rdrv."
+msgstr "antiX は今から $rdrv へコピーされます。"
+
+#: cli-installer.sh:380
+msgid "Do you want to continue (No will abort the install) (n/Y)"
+msgstr "続行しますか？ (No でインストールを中止します) (n/Y)"
+
+#: cli-installer.sh:407
+msgid "File copy done"
+msgstr "ファイルのコピー終了"
+
+#: cli-installer.sh:409
+msgid "Install GRUB on MBR (Y/n) No will install to root partition"
+msgstr "GRUB を MBR へインストールします (Y/n) No で root パーティションへインストールします。"
+
+#: cli-installer.sh:434
+#, sh-format
+msgid "GRUB installed on ($grub)"
+msgstr "GRUB は ($grub) へインストールされました"
+
+#: cli-installer.sh:438
+msgid "Computer name (default is 'antix1')? "
+msgstr "コンピューターの名前 (既定は antix1 ) は？ "
+
+#: cli-installer.sh:446
+msgid "Time to set up localisation"
+msgstr "地域と言語の設定"
+
+#: cli-installer.sh:448
+msgid "System locale is set to ..."
+msgstr "設定したシステムの地域と言語 ..."
+
+#: cli-installer.sh:451
+msgid "Do you want to set up system localisation (y/N)"
+msgstr "システムの地域と言語の設定を行いますか？ (y/N)"
+
+#: cli-installer.sh:458
+msgid "Time to set keyboard layout"
+msgstr "キーボードのレイアウト設定"
+
+#: cli-installer.sh:460
+msgid "System keyboard is set to ..."
+msgstr "設定するシステムのキーボード ..."
+
+#: cli-installer.sh:463
+msgid "Do you want to set up keyboard (y/N)"
+msgstr "キーボードの設定を行いますか？ (y/N)"
+
+#: cli-installer.sh:470
+msgid "Time to set console layout"
+msgstr "コンソールのレイアウト設定"
+
+#: cli-installer.sh:472
+msgid "System console is set to ..."
+msgstr "設定されるシステムコンソール ..."
+
+#: cli-installer.sh:475
+msgid "Do you want to set up console layout (y/N)"
+msgstr "コンソールのレイアウトを設定しますか？ (y/N)"
+
+#: cli-installer.sh:482
+msgid "Time to set timezone"
+msgstr "タイムゾーンの設定"
+
+#: cli-installer.sh:484
+msgid "System timezone is set to ..."
+msgstr "設定されるシステムのタイムゾーン ..."
+
+#: cli-installer.sh:487
+msgid "Do you want to set up system timezone (y/N)"
+msgstr "システムのタイムゾーンを設定しますか？ (y/N)"
+
+#: cli-installer.sh:494
+msgid "Choose which services to run"
+msgstr "稼働させるサービスを選択"
+
+#: cli-installer.sh:496
+msgid "Do you want to enable/disable startup services (y/N)"
+msgstr "起動時のサービスの有効・無効を設定しますか？ (y/N)"
+
+#: cli-installer.sh:505
+msgid "Is this a remastered/snapshot install (y/N)"
+msgstr "これは、リマスター/スナップショットのインストールですか？ (y/N)"
+
+#: cli-installer.sh:518
+#, sh-format
+msgid "Installation of $DISTRO finished!"
+msgstr "$DISTRO のインストール終了！"
+
+#: cli-installer.sh:520 cli-installer.sh:590
+msgid "Reboot computer without CD to start program. ('reboot')"
+msgstr "プログラムを起動するには、CDを取り出してから再起動してください。. ('reboot')"
+
+#: cli-installer.sh:526
+msgid "Setting up user and root/admin accounts"
+msgstr "ユーザーと root/admin アカウントの設定中"
+
+#: cli-installer.sh:531
+msgid "Type in your default user name: "
+msgstr "既定のユーザー名を入力します: "
+
+#: cli-installer.sh:535
+#, sh-format
+msgid "Note: $hdrv must contain a folder named '$name'."
+msgstr "注意: $hdrv には '$name' という名前のフォルダが含まれていなければなりません。"
+
+#: cli-installer.sh:540
+msgid "Type your Password for root: "
+msgstr "root のパスワードを入力 : "
+
+#: cli-installer.sh:547
+#, sh-format
+msgid "Set autologin for $name: (y/N)"
+msgstr "$name の自動ログインを設定: (y/N)"
+
+#: cli-installer.sh:556
+msgid "Cleaning up"
+msgstr "クリーニング中"
+
+#: cli-installer.sh:588
+msgid "Installation of antiX finished!"
+msgstr "antiX のインストール完了！"

@@ -1,0 +1,17 @@
+Source: mx-system-kde
+Section: system
+Priority: optional
+Maintainer: dolphinoracle <dolphinoracle@gmail.com>
+Build-Depends: debhelper (>=9)
+Standards-Version: 3.9.8
+
+Package: mx-system-kde
+Depends:  libkf5baloowidgets-bin
+Architecture: all
+Description: metapackage for packages needed for system functions on KDE-plasma
+ This metapackage depends on packages needed for certain systems to work with
+ full functionality. Unlike Debian, MX Linux does not install recommended
+ packages by default, so this package makes sure they are installed.
+ .
+ MX-System-kde also installs or changes certain system configuration specific to 
+ KDE Plasma files.

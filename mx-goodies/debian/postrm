@@ -1,0 +1,36 @@
+#!/bin/bash
+
+#DEBHELPER#
+
+# postrm script for cryptsetup-modified-functions
+
+#set -e
+
+case "$1" in
+  purge|remove) dpkg-divert --quiet                                     \
+                            --remove                                    \
+                            --package mx-goodies                        \
+                            --rename                                    \
+                            --divert /usr/bin/xdg-user-dirs-update.real \
+                             /usr/bin/xdg-user-dirs-update
+
+                dpkg-divert --quiet                                         \
+                            --remove                                        \
+                            --package mx-goodies                            \
+                            --rename                                        \
+                            --divert /usr/bin/xdg-user-dirs-gtk-update.real \
+                             /usr/bin/xdg-user-dirs-gtk-update
+
+                dpkg-divert --quiet                                         \
+                            --remove                                        \
+                            --package mx-goodies                            \
+                            --rename                                        \
+                            --divert /usr/bin/debconf-kde-helper.real       \
+                            /usr/bin/debconf-kde-helper
+                ;;
+
+             *) :
+                ;;
+esac
+
+exit 0

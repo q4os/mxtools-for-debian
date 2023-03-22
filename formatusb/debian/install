@@ -1,0 +1,11 @@
+authors.txt		usr/share/doc/formatusb
+formatusb		usr/bin
+formatusb.desktop	usr/share/applications
+help/*			usr/share/doc/formatusb/help
+license.html		usr/share/doc/formatusb
+lib/*				usr/lib/formatusb
+polkit-actions/*	usr/share/polkit-1/actions
+translations/*.qm	usr/share/formatusb/locale
+formatusb.png   usr/share/pixmaps
+formatusb.png 	usr/share/icons/hicolor/48x48/apps
+formatusb.svg		usr/share/icons/hicolor/scalable/apps

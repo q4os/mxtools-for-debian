@@ -1,0 +1,252 @@
+#-------------------------------------------------------------------------------
+# Audio
+#-------------------------------------------------------------------------------
+asunder 	graphical audio CD ripper and encoder
+audacious 		lightweight winamp/xmms like audio player
+audacity 		multi-track audio editor
+pithos 		native Pandora Radio client
+pulseaudio 	PulseAudio sound server
+qmmp 		winamp/xmms mediaplayer written in qt	
+xmms 		multimedia player modelled on winamp
+
+#-------------------------------------------------------------------------------
+# Browser-Net
+#-------------------------------------------------------------------------------
+chromium 		Chromium browser
+dillo 		small and fast web browser
+falkon 		Falkon lightweight browser
+filezilla 		full-featured FTP client with an easy-to-use GUI
+firefox-esr 	Firefox Extended Support Release (ESR)
+firefox 		Firefox
+palemoon 		Palemoon lightweight browser
+qbittorrent 	QT feature rich but lightweight client similar to uTorrent
+seamonkey 		Seamonkey Internet Suite
+waterfox-classic-kpe 	alternative mozilla-based browser
+
+#-------------------------------------------------------------------------------
+# Deb packaging tools
+#-------------------------------------------------------------------------------
+pbuilder
+debian-builder
+debhelper
+libparse-debcontrol-perl
+devscripts
+dh-make
+fakeroot
+build-essential
+dpkg-dev
+
+#-------------------------------------------------------------------------------
+# Desktop Environment
+#-------------------------------------------------------------------------------
+cinnamon-desktop-environment 	Full Cinnamon desktop
+cinnamon 		Basic Cinnamon desktop
+budgie-desktop 	Full Budgie desktop
+gnome-core 	Very minimal install of Gnome desktop
+gnome 		Gnome desktop
+kde-plasma-desktop minimal install of KDE5
+kde-full 		KDE5 Plasma desktop
+kde-standard 	standard install of KDE5
+lxde 		basic install of LXDE
+lxqt 		LXQT desktop
+mate 		MATE desktop
+xfce4 		Basic Xfce desktop
+
+#-------------------------------------------------------------------------------
+# Email
+#-------------------------------------------------------------------------------
+claws-mail 	Claws Mail lightweight email client
+thunderbird 	Thunderbird email client 
+
+#-------------------------------------------------------------------------------
+# File Manager
+#-------------------------------------------------------------------------------
+caja 		default MATE file manager
+dolphin 		default KDE file manager
+nemo 		default Cinnamon file manager
+nautilus 		default Gnome file manager
+pcmanfm 		fast and lightweight file manager
+rox-filer 	fast and powerful and light graphical file manager
+spacefm 	multi-panel tabbed file and desktop manager
+thunar 		default Xfce file manager
+
+#-------------------------------------------------------------------------------
+# Fonts
+#-------------------------------------------------------------------------------
+culmus 	TrueType and Type1 Hebrew Fonts for X11
+fonts-alee 	Hangul TrueType fonts
+fonts-baekmuk 	Baekmuk series Korean fonts
+fonts-beng 	Bengali and Assamese fonts
+fonts-cantarell 	sans serif font family designed for on-screen readability
+fonts-comfortaa 	stylish, modern true type font
+fonts-crosextra-caladea 	Serif font metric-compatible with the Cambria font
+fonts-crosextra-carlito 	Sans-serif font metric-compatible with Calibri font
+fonts-dejavu 	metapackage to pull in fonts-dejavu-core and fonts-dejavu-extra
+fonts-deva 	metapackage to install all Devanagari fonts
+fonts-farsiweb 	free TrueType fonts for Persian language
+fonts-freefarsi 	FreeFarsi TrueType Persian fonts
+fonts-freefont-ttf 	Freefont Serif, Sans and Mono Truetype fonts
+fonts-gfs-neohellenic 	modern Greek font family with matching Latin
+fonts-inconsolata 	monospace font for pretty code listings and for the terminal
+fonts-liberation 	Fonts with the same metrics as Times, Arial and Courier
+fonts-noto 	metapackage to pull in all Noto fonts
+fonts-opensymbol 	OpenSymbol TrueType font
+fonts-roboto 	metapackage to pull in Roboto fonts
+fonts-sil-abyssinica 	smart Unicode font for Ethiopian and Erythrean scripts
+fonts-ubuntu 	sans-serif font set from Ubuntu
+fonts-vlgothic 	Japanese TrueType font from Vine Linux
+fonts-wqy-microhei 	Sans-serif style CJK font derived from Droid
+
+#-------------------------------------------------------------------------------
+# Games
+#-------------------------------------------------------------------------------
+frozen-bubble 	cool game where you pop out the bubbles!
+gamine 		Interactive game for young children
+gcompris 		Educational games for small children
+gnome-games 	Simple Desktop Card and Puzzle Games
+steam 		Valve's Steam digital software delivery system
+supertux 		Classic 2D jump 'n run sidescroller with Tux
+supertuxkart 	3D kart racing game
+
+#-------------------------------------------------------------------------------
+# Graphics
+#-------------------------------------------------------------------------------
+blender 		free and open source 3D animation suite
+gimp 		advanced picture editor - installs GIMP only
+gscan2pdf 		GUI to produce PDFs or DjVus from scanned documents
+imagemagick 	software suite to create, edit, and compose bitmap images
+inkscape 		vector-based drawing program
+scribus 		desktop page layout program
+shotwell 		digital photo organizer
+
+#-------------------------------------------------------------------------------
+# Login Manager
+#-------------------------------------------------------------------------------
+gdm 		GNOME display manager
+lightdm 		Cross-desktop display manager
+lxdm 		LXDE display manager
+sddm 		recommended for Plasma and LXQt.
+slim 		simple lightweight display manager
+xdm 		X display manager with support for XDMCP, host chooser
+
+#-------------------------------------------------------------------------------
+# Non-Free
+#-------------------------------------------------------------------------------
+adobe-flashplugin 	Official Adobe Flash
+
+#-------------------------------------------------------------------------------
+# Office
+#-------------------------------------------------------------------------------
+abiword 		lightweight word processor
+calibre 		e-book library management application
+evince 		simple document (PostScript, PDF) viewer
+gnucash 		personal and small-business financial-accounting software
+gnumeric 		lightweight spreadsheet
+libreoffice 	multiplatform and multilingual office suite
+qpdfview 	tabbed document viewer
+simple-scan 	simple scanning utility
+
+#-------------------------------------------------------------------------------
+# Printing
+#-------------------------------------------------------------------------------
+cups
+hplip-gui
+
+#-------------------------------------------------------------------------------
+# Remote Access/Messaging
+#-------------------------------------------------------------------------------
+1-to-1-assistance-antix Remote access help app from antiX
+1-to-1-voice-antix voice chat between two pcs via encrypted mumble
+connectshares-antix mount shares offered by a remote system
+droopy 	Simple way to share files via web server
+finch 		text-console-based, modular instant messaging client
+pan 		gnome Usenet newsreader
+pidgin 		easy to use and free chat client
+ssh-conduit-antix 	Remote resouces via an ssh encypted connection
+x11vnc 		VNC server for X window environments
+
+#-------------------------------------------------------------------------------
+# Screencast
+#-------------------------------------------------------------------------------
+gtk-recordmydesktop lightweight desktop session recorder
+simplescreenrecorder Qt-based screencast recorder
+
+#-------------------------------------------------------------------------------
+# Themes and Icons
+#-------------------------------------------------------------------------------
+adapta-gtk-theme 	
+arc-theme
+arc-evopro2-theme-antix
+clearlooks-phenix-theme
+evolvere-icon-theme 
+faba-icon-theme
+faba-colors-icon-theme 	
+moka-icon-theme
+numix-gtk-theme
+numix-square-antix
+obsidian-icon-theme
+obsidian-2-gtk-theme
+papirus-antix
+
+#-------------------------------------------------------------------------------
+# Utility
+#-------------------------------------------------------------------------------
+advert-block-antix Block adservers with a modified Hosts file
+clonezilla 	clone and restore disks and partitions
+diffuse 	lightweight, but fully featured tool to diff and merge files
+git 		GIT Repo tools
+keepassx 		KeePassX is a free/open-source password manager/safe
+meld 		graphical tool to diff and merge files
+
+#-------------------------------------------------------------------------------
+# Video
+#-------------------------------------------------------------------------------
+handbrake 		versatile DVD ripper and video transcoder (GTK+ GUI)
+kdenlive 		KDE video editor
+kodi 		Kodi Media Center
+openshot 		non-linear video editor
+smplayer 		Complete front-end for MPlayer and mpv
+smtube 	YouTube videos browser
+streamlight-antix 	Stream or download Youtube videos in any app or browser
+winff 		graphical video and audio batch converter 
+
+#-------------------------------------------------------------------------------
+# Window Manager
+#-------------------------------------------------------------------------------
+fvwm 
+fvwm-crystal 	More featured version of FVWM		
+fluxbox
+herbstluftwm
+icewm
+jwm
+openbox
+
+#-------------------------------------------------------------------------------
+# Xorg graphical environment
+#-------------------------------------------------------------------------------
+xorg 			Metapackage provides the components for running the X Window System
+xserver-xorg-legacy 	setuid root Xorg server wrapper
+
+#-------------------------------------------------------------------------------
+# antiX 
+#-------------------------------------------------------------------------------
+antix-user 		antiX User Manager - for easy administration of user accounts
+artwork19-antix 	Default wallpapers, grub, slim background for antiX-19
+bootrepair-antix 	Simple Boot Repair rool
+codecs-antix 		Simple install of restricted codecs
+control-centre-antix 	All-in-one control centre for antiX
+formatusb 		Format USB devices
+iso-snapshot-antix 	Create a live iso snapshot of your running system
+live-usb-maker-gui-antix Create a full-featured live-usb
+packageinstaller 	Simple package installer
+repo-manager 		GUI for setting antiX and Debian repos
+
+#-------------------------------------------------------------------------------
+# Other
+#-------------------------------------------------------------------------------
+blueman 	Graphical bluetooth manager
+opendict 		computer dictionary for several dictionary formats
+openjdk-11-jre 	OpenJDK Java runtime, using Hotspot JIT
+qtcreator 	integrated development environment (IDE) for Qt
+texlive 		TeX Live: A decent selection of the TeX Live packages
+wine 		Windows API implementation - standard suite

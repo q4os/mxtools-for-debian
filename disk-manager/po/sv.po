@@ -1,0 +1,475 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+# Translators:
+# Roy Avrett <avrett@cs.fsu.edu>, 2022
+# Henry Oquist <henryoquist@nomalm.se>, 2022
+# 
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-01-16 00:46+0100\n"
+"PO-Revision-Date: 2022-01-21 17:21+0000\n"
+"Last-Translator: Henry Oquist <henryoquist@nomalm.se>, 2022\n"
+"Language-Team: Swedish (https://www.transifex.com/anticapitalista/teams/10162/sv/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: sv\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: ../disk-manager.in:66
+msgid "Insufficient rights"
+msgstr "Otillräcklig behörighet"
+
+#: ../disk-manager.in:67
+msgid "You need administrative rights to start this application."
+msgstr ""
+"Du behöver administrativa rättigheter för att starta det här programmet."
+
+#: ../data/disk-manager.glade.h:1
+msgid "<b>Driver</b>"
+msgstr "<b>Drivrutin</b>"
+
+#: ../data/disk-manager.glade.h:2
+msgid "This driver seems to not be available for this type."
+msgstr "Denna drivrutin verkar inte finnas för denna typ."
+
+#: ../data/disk-manager.glade.h:3
+msgid "<b>Mount point</b>"
+msgstr "<b>Monteringspunkt</b>"
+
+#: ../data/disk-manager.glade.h:4
+msgid "<b>Options</b>"
+msgstr "<b>Flaggor</b>"
+
+#: ../data/disk-manager.glade.h:5
+msgid "Check device every 30 boots"
+msgstr "Kontrollera enheten var 30:e uppstart"
+
+#: ../data/disk-manager.glade.h:6
+msgid "<big><b>Configuration file:</b></big>"
+msgstr "<big><b>Konfigurationsfil:</b></big>"
+
+#: ../data/disk-manager.glade.h:7
+msgid "<b>Vendor:</b>"
+msgstr "<b>Tillverkare:</b>"
+
+#: ../data/disk-manager.glade.h:8
+msgid "<b>Model:</b>"
+msgstr "<b>Modell:</b>"
+
+#: ../data/disk-manager.glade.h:9
+msgid "<b>Serial:</b>"
+msgstr "<b>Serienr:</b>"
+
+#: ../data/disk-manager.glade.h:10
+msgid "<b>bus:</b>"
+msgstr "<b>Buss:</b>"
+
+#: ../data/disk-manager.glade.h:11 ../DiskManager/Dialogs.py:372
+#: ../DiskManager/Dialogs.py:373 ../DiskManager/Dialogs.py:374
+msgid "Not available"
+msgstr "Inte tillgänglig"
+
+#: ../data/disk-manager.glade.h:12
+msgid "Drive"
+msgstr "Enhet"
+
+#: ../data/disk-manager.glade.h:13
+msgid "<b>Device:</b>"
+msgstr "<b>Enhet:</b>"
+
+#: ../data/disk-manager.glade.h:14
+msgid "<b>Type:</b>"
+msgstr "<b>Typ:</b>"
+
+#: ../data/disk-manager.glade.h:15
+msgid "<b>Label:</b>"
+msgstr "<b>Etikett:</b>"
+
+#: ../data/disk-manager.glade.h:16
+msgid "<b>Mount point:</b>"
+msgstr "<b>Monteringspunkt:</b>"
+
+#: ../data/disk-manager.glade.h:17
+msgid "<b>Options:</b>"
+msgstr "<b>Flaggor:</b>"
+
+#: ../data/disk-manager.glade.h:18
+msgid "Volume"
+msgstr "Volym"
+
+#: ../data/disk-manager.glade.h:19
+msgid "<b>Total size:</b>"
+msgstr "<b>Total storlek:</b>"
+
+#: ../data/disk-manager.glade.h:20
+msgid "<b>Free space:</b>"
+msgstr "<b>Ledigt utrymme:</b>"
+
+#: ../data/disk-manager.glade.h:21
+msgid "<b>Available space:</b>"
+msgstr "<b>Tillgänglig utrymme:</b>"
+
+#: ../data/disk-manager.glade.h:22
+msgid "<b>Used space:</b>"
+msgstr "<b>Använt utrymme:</b>"
+
+#: ../data/disk-manager.glade.h:23
+msgid "Size"
+msgstr "Storlek"
+
+#: ../data/disk-manager.glade.h:24
+msgid ""
+"Applying changes.\n"
+"Please wait until the process finishes."
+msgstr ""
+"Verkställer ändringar.\n"
+"Vänta tills processen är färdig."
+
+#: ../data/disk-manager.desktop.in.in.h:1 ../DiskManager/Dialogs.py:489
+#: ../DiskManager/DiskManager.py:78
+msgid "Disk Manager"
+msgstr "Diskhanterare"
+
+#: ../data/disk-manager.desktop.in.in.h:2
+msgid "Manage filesystem configuration"
+msgstr "Hantera filsystemskonfiguration"
+
+#: ../DiskManager/Dialogs.py:127 ../DiskManager/Fstab/Mounter.py:206
+#, python-format
+msgid "No driver is available for this type of filesystem : '%s'"
+msgstr "Ingen drivrutin finns för denna sorts filsystem : '%s'"
+
+#: ../DiskManager/Dialogs.py:162
+msgid "Select a directory"
+msgstr "Välj en katalog"
+
+#: ../DiskManager/Dialogs.py:231
+msgid "Wrong mount point"
+msgstr "Felaktig monteringspunkt"
+
+#: ../DiskManager/Dialogs.py:232
+#, python-format
+msgid ""
+"<i>%s</i> is currently in use.\n"
+"You should try another one."
+msgstr ""
+"<i>%s</i> används redan.\n"
+"Du bör prova en annan."
+
+#: ../DiskManager/Dialogs.py:243
+msgid "Options formatting error"
+msgstr "Formateringsfel för flaggor"
+
+#: ../DiskManager/Dialogs.py:244
+#, python-format
+msgid ""
+"<i>%s</i> is not formatted correctly.\n"
+"Options should be separated by comma (,)"
+msgstr ""
+"<i>%s</i>är inte korrekt formaterad.\n"
+"Alternativ ska vara separerade av komma (,)"
+
+#: ../DiskManager/Dialogs.py:427
+msgid ""
+"Removing unknown devices from\n"
+"the configuration file?"
+msgstr ""
+"Ta bort okända enheter från\n"
+"konfigurationsfilen?"
+
+#: ../DiskManager/Dialogs.py:428
+msgid ""
+"I can not find any existing block devices\n"
+"corresponding to the following devices:"
+msgstr ""
+"Jag kan inte hitta några befintliga blockenheter\n"
+"som motsvarar följande enheter:"
+
+#: ../DiskManager/Dialogs.py:430
+msgid ""
+"It is advisable to remove them in order to avoid failed mount\n"
+"at start-up. Select the ones you want to remove."
+msgstr ""
+"Det rekommenderas att ta bort dem för att undvika att monteringen\n"
+"misslyckas vid uppstart. Markera de som du vill ta bort."
+
+#: ../DiskManager/Dialogs.py:433
+msgid "Remove selected"
+msgstr "Ta bort markerade"
+
+#: ../DiskManager/Dialogs.py:433
+msgid "Don't show me this warning in the future."
+msgstr "Visa inte denna varning i framtiden."
+
+#: ../DiskManager/Dialogs.py:468
+msgid "Duplicate entry detected"
+msgstr "Dublettpost hittades"
+
+#: ../DiskManager/Dialogs.py:469
+msgid ""
+"The following entries of your configuration file use the same mount point:"
+msgstr ""
+"Följande poster i din konfigurationsfil använder samma monteringspunkt:"
+
+#: ../DiskManager/Dialogs.py:470
+msgid ""
+"Two different devices can not share the same mount point.\n"
+"You should select the one you want, and the others will be commented.\n"
+"They will be kept in the configuration file, but will be disabled."
+msgstr ""
+"Två olika enheter kan inte dela samma monteringspunkt.\n"
+"Du bör välja den som du vill ha kvar och de andra kommer att kommenteras\n"
+"bort. De kommer att behållas i konfigurationsfilen, men är inaktiverade."
+
+#: ../DiskManager/Dialogs.py:473
+msgid "Keep selected"
+msgstr "Behåll markerade"
+
+#: ../DiskManager/Dialogs.py:506
+msgid "Easily manage your filesystem configuration"
+msgstr "Hantera lätt ditt filsystems konfiguration"
+
+#: ../DiskManager/Dialogs.py:510
+msgid "translator-credits"
+msgstr "Daniel Nylander <po@danielnylander.se>"
+
+#: ../DiskManager/DiskManager.py:132
+msgid "Enable"
+msgstr "Aktivera"
+
+#: ../DiskManager/DiskManager.py:138
+msgid "Device"
+msgstr "Enhet"
+
+#: ../DiskManager/DiskManager.py:151
+msgid "Mount point"
+msgstr "Monteringspunkt"
+
+#: ../DiskManager/DiskManager.py:158
+msgid "Type"
+msgstr "Typ"
+
+#: ../DiskManager/DiskManager.py:165
+msgid "Total"
+msgstr "Totalt"
+
+#: ../DiskManager/DiskManager.py:172
+msgid "Free"
+msgstr "Ledigt"
+
+#: ../DiskManager/DiskManager.py:179
+msgid "Used"
+msgstr "Använt"
+
+#: ../DiskManager/DiskManager.py:292
+msgid "Editing system partition?"
+msgstr "Redigera systempartition?"
+
+#: ../DiskManager/DiskManager.py:294
+#, python-format
+msgid ""
+"%s is an important system partition.\n"
+"Be really careful when editing it, or you may have\n"
+"serious problems. Do you want to continue?"
+msgstr ""
+"%s är en partition som är viktig för systemet.\n"
+"Var mycket försiktig när du redigerar den annars kan du\n"
+"få allvarliga problem. Vill du fortsätta?"
+
+#: ../DiskManager/DiskManager.py:399
+msgid "Unmount"
+msgstr "Avmontera"
+
+#: ../DiskManager/DiskManager.py:402
+msgid "Mount"
+msgstr "Montera"
+
+#: ../DiskManager/DiskManager.py:407
+msgid "Reverting to an older version?"
+msgstr "Återgå till en äldre version?"
+
+#: ../DiskManager/DiskManager.py:408
+msgid "This will apply the following changes:"
+msgstr "Det här kommer att verkställa följande ändringar:"
+
+#: ../DiskManager/DiskManager.py:408
+msgid "Do you want to continue?"
+msgstr "Vill du fortsätta?"
+
+#: ../DiskManager/Utility.py:45
+msgid "KB"
+msgstr "KB"
+
+#: ../DiskManager/Utility.py:45
+msgid "MB"
+msgstr "MB"
+
+#: ../DiskManager/Utility.py:45
+msgid "GB"
+msgstr "GB"
+
+#: ../DiskManager/Utility.py:45
+msgid "TB"
+msgstr "TB"
+
+#: ../DiskManager/Fstab/FstabHandler.py:435
+msgid "Unmounting disabled devices?"
+msgstr "Avmontera inaktiverade enheter?"
+
+#: ../DiskManager/Fstab/FstabHandler.py:436
+msgid "You disabled the following devices:"
+msgstr "Du inaktiverade följande enheter:"
+
+#: ../DiskManager/Fstab/FstabHandler.py:436
+msgid "Do you want to unmount them?"
+msgstr "Vill du avmontera dem?"
+
+#: ../DiskManager/Fstab/FstabHandler.py:438
+msgid "Unmount selected"
+msgstr "Avmontera markerade"
+
+#: ../DiskManager/Fstab/FstabHandler.py:447
+msgid "Reboot required"
+msgstr "Omstart behövs"
+
+#: ../DiskManager/Fstab/FstabHandler.py:448
+msgid ""
+"In order to apply all your changes,\n"
+"you'll need to reboot your computer."
+msgstr ""
+"Du behöver starta om din dator för\n"
+"att dina ändringar ska färdigställas."
+
+#: ../DiskManager/Fstab/Mounter.py:56
+msgid "Mounting partition"
+msgstr "Monterar partition"
+
+#: ../DiskManager/Fstab/Mounter.py:58
+msgid "Unmounting partition"
+msgstr "Avmonterar partition"
+
+#: ../DiskManager/Fstab/Mounter.py:60
+msgid "Applying changes"
+msgstr "Verkställer ändringar"
+
+#: ../DiskManager/Fstab/Mounter.py:66
+#, python-format
+msgid "Unmounting %s"
+msgstr "Avmonterar %s"
+
+#: ../DiskManager/Fstab/Mounter.py:80
+#, python-format
+msgid "Mounting %s"
+msgstr "Monterar %s"
+
+#: ../DiskManager/Fstab/Mounter.py:115
+msgid "Unmounting failed"
+msgstr "Avmonteringen misslyckades"
+
+#: ../DiskManager/Fstab/Mounter.py:116
+#, python-format
+msgid "Unmounting <i>%s</i> failed because of the following error:"
+msgstr "Avmonteringen av <i>%s</i> misslyckades på grund av följande fel:"
+
+#. TRANSLATORS:
+#. Keep the English term 'lazy' for the 'lazy' unmount option
+#: ../DiskManager/Fstab/Mounter.py:122
+msgid "You can also use the 'lazy' options to detach the filesystem now."
+msgstr "Du kan även använda flaggan \"lazy\" för att koppla loss filsystemet nu."
+
+#: ../DiskManager/Fstab/Mounter.py:127
+#, python-format
+msgid ""
+"Unmounting <i>%s</i> failed, because\n"
+"it is currently used by the following applications:"
+msgstr ""
+"Avmonteringen av <i>%s</i> misslyckades\n"
+"på grund av att den används av följande program:"
+
+#: ../DiskManager/Fstab/Mounter.py:129
+msgid "Close all applications that use it and retry to unmount."
+msgstr ""
+"Stäng alla program som kan använda den och försök att avmontera den igen."
+
+#: ../DiskManager/Fstab/Mounter.py:132
+msgid "The filesystem might be temporarily busy. Wait few seconds and retry."
+msgstr ""
+"Filsystemet kan vara upptaget för tillfället. Vänta ett par sekunder och "
+"försök igen."
+
+#. TRANSLATORS:
+#. Keep the English term 'lazy' for the 'lazy' unmount option
+#: ../DiskManager/Fstab/Mounter.py:137
+msgid "Unmount with the 'lazy' option"
+msgstr "Avmontera med flaggan \"lazy\""
+
+#: ../DiskManager/Fstab/Mounter.py:138
+msgid "Retry unmount"
+msgstr "Försök igen att avmontera"
+
+#. TRANSLATORS:
+#. Keep the English term 'lazy' for the 'lazy' unmount option
+#: ../DiskManager/Fstab/Mounter.py:143
+msgid "Even with the lazy option, unmounting failed."
+msgstr "Avmonteringen misslyckades även med flaggan \"lazy\""
+
+#: ../DiskManager/Fstab/Mounter.py:155
+msgid "Mounting failed"
+msgstr "Monteringen misslyckades"
+
+#: ../DiskManager/Fstab/Mounter.py:156
+#, python-format
+msgid "Mounting <i>%s</i> failed because of the following error:"
+msgstr "Monteringen av <i>%s</i> misslyckades på grund av följande fel:"
+
+#: ../DiskManager/Fstab/Mounter.py:159
+msgid "Retry mount"
+msgstr "Försök igen att montera"
+
+#: ../DiskManager/Fstab/Mounter.py:190
+msgid "You can try one of the following actions:"
+msgstr "Du kan försöka en av följande åtgärder:"
+
+#: ../DiskManager/Fstab/Mounter.py:193
+#, python-format
+msgid "It seems that option '%s' is not allowed."
+msgstr "Det verkar som om alternativet '%s' inte är tillåtet."
+
+#: ../DiskManager/Fstab/Mounter.py:195
+msgid "Return options to defaults"
+msgstr "Återställ till standardvärden"
+
+#: ../DiskManager/Fstab/Mounter.py:197
+#, python-format
+msgid "Don't use the '%s' option"
+msgstr "Använd inte flaggan \"%s\""
+
+#: ../DiskManager/Fstab/Mounter.py:199
+#, python-format
+msgid "It seems that fs type '%s' is not valid."
+msgstr "Det verkar som om filsystemstypen '%s'inte är giltig."
+
+#: ../DiskManager/Fstab/Mounter.py:203
+#, python-format
+msgid "Using driver '%s' (%s)"
+msgstr "Använder drivrutin '%s' (%s)"
+
+#. TRANSLATORS:
+#. Keep the English term 'force' for the 'force' unmount option
+#: ../DiskManager/Fstab/Mounter.py:211
+msgid ""
+"You can try to use the 'force' option. Be aware that this could be risky."
+msgstr ""
+"Du kan försöka använda alternativet 'force'. Ha i åtanke att det kan vara "
+"riskabelt."
+
+#: ../DiskManager/Fstab/Mounter.py:212
+msgid "Use the 'force' option"
+msgstr "Använd flaggan \"force\""

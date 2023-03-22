@@ -1,0 +1,13 @@
+Source: mx-tweak-data
+Section: admin
+Priority: optional
+Maintainer: Dolphin Oracle <dolphinoracle@gmail.com>
+Build-Depends: debhelper (>=7.0.50~),
+Standards-Version: 3.9.5
+Vcs-Git: git://github.com/MX-Linux/mx-tweak-data
+
+Package: mx-tweak-data
+Recommends: mx-greybird-themes, arc-theme, faenza-cupertino-icons, numix-gtk-theme, numix-icon-theme
+Architecture: all
+Description: Part of MX program for installing additional packages.
+ provides .tweak files for mx-tweak

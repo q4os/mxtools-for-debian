@@ -1,0 +1,22 @@
+// Settings shown below are from the /usr/lib/apt/apt.systemd.daily script.
+// All settings except 'APT::Periodic::CleanInterval' are also found in the
+// Debian Jessie /etc/cron.daily/apt script.
+
+// APT::Archives::MaxAge "0";
+// APT::Archives::MaxSize "0";
+// APT::Archives::MinAge "2";
+   APT::Periodic::AutocleanInterval "7";
+// APT::Periodic::BackupArchiveInterval "0";
+// APT::Periodic::BackupLevel "3";
+// APT::Periodic::CleanInterval "0";
+   APT::Periodic::Download-Upgradeable-Packages "0";
+// APT::Periodic::Download-Upgradeable-Packages-Debdelta "1";
+   APT::Periodic::Enable "1";
+// APT::Periodic::MaxAge "0";
+// APT::Periodic::MaxSize "0";
+// APT::Periodic::MinAge "2";
+   APT::Periodic::Unattended-Upgrade "0";
+   APT::Periodic::Update-Package-Lists "1";
+   APT::Periodic::Verbose "3";
+// Dir::Cache::Archives "archives/";
+// Dir::Cache::Backup "backup/";

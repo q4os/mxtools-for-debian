@@ -1,0 +1,48 @@
+[Desktop Entry]
+Type=Service
+Actions=compress_BZIP;compress_GZIP;
+Encoding=UTF-8
+Version=1.4
+ServiceTypes=KonqPopupMenu/Plugin,all/allfiles
+X-KDE-Priority=TopLevel
+X-KDE-Submenu=KEC: Compress
+X-KDE-Submenu[de]=KEC: Komprimieren
+X-KDE-Submenu[es]=KEC: Comprimir
+X-KDE-Submenu[it]=KEC: Compressione
+X-KDE-Submenu[fr]=KEC: Compresser
+X-KDE-Submenu[zh_CN]=KEC: 压缩
+X-KDE-Submenu[pl]=KEC: Spakuj
+X-KDE-Submenu[pt_BR]=KEC: Comprimir
+X-KDE-Submenu[cs]=KEC: Komprimovat
+X-KDE-Submenu[tr]=KEC: Sıkıştır
+X-KDE-Submenu[da]=KEC: Komprimér
+
+[Desktop Action compress_BZIP]
+Exec=compress_BZIP.sh %U
+Icon=application-x-archive
+Name=KEC: Compress to bz2
+Name[de]=KEC: Komprimieren in bz2
+Name[es]=KEC: Comprimir como bz2
+Name[it]=KEC: Comprimi in bz2
+Name[fr]=KEC: Compresser en bz2
+Name[zh_CN]=KEC: 压缩为 bz2
+Name[pl]=KEC: Spakuj jako bz2
+Name[pt_BR]=KEC: Comprimir como bz2
+Name[cs]=KEC: Komprimovat do bz2
+Name[tr]=KEC:  bz2 olarak sıkıştır
+Name[da]=KEC:  Komprimér til bz2
+
+[Desktop Action compress_GZIP]
+Exec=compress_GZIP.sh %U
+Icon=application-x-archive
+Name=KEC: Compress to gz
+Name[de]=KEC: Komprimieren in gz
+Name[es]=KEC: Comprimir como gz
+Name[it]=KEC: Comprimi in gz
+Name[fr]=KEC: Compresser en gz
+Name[zh_CN]=KEC: 压缩为 gz
+Name[pl]=KEC: Spakuj jako gz
+Name[pt_BR]=KEC: Comprimir como gz
+Name[cs]=KEC: Komprimovat do gz
+Name[tr]=KEC:  gz olarak sıkıştır
+Name[da]=KEC:  Komprimér til gz

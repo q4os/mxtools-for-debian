@@ -1,0 +1,68 @@
+#!/bin/bash
+
+# xfce4-notifyd-fix.sh
+# set pre-populate some defaults applications for xfce4-notifyd
+# start xfce4-notifyd if not running
+
+function start_notifyd() {
+	local P=/usr/lib/x86_64-linux-gnu/xfce4/notifyd; 
+	local D=xfce4-notifyd
+	pgrep -a -u $UID -f $P/$D 2>/dev/null 1>/dev/null || ( nohup $P/$D  2>/dev/null 1>/dev/null  & )
+	}
+#
+function main() {
+
+	# declare variables
+	#
+	declare -a TYPES=()
+	declare -a PROPS=()
+	declare -A MERGE=()
+    declare -a CURRENT=()
+	
+   # set defaults	
+	declare -a DEFAULTS=(
+      # virgin defaults
+      "nm-applet"
+      "notify-send"
+      "Xfce4-notifyd settings"
+   
+      # extended defaults	
+      "Thunar"
+      "thunar-volman"
+      "Volume Icon"
+      "xfce4-power-manager"
+      "xfce4-sensors-plugin"
+   )
+
+   # get current	
+   
+   while read C
+   do
+       CURRENT+=( "$C" )
+   done < <( LANG=C xfconf-query -c xfce4-notifyd -p /applications/known_applications 2>/dev/null \
+           | sed -E '1{/^Value is an array with/d}; /^$/d;' )
+
+
+   # merge defaults with current
+   for A in "${DEFAULTS[@]}" "${CURRENT[@]}"  ; do
+       MERGE[$A]="--type string"
+   done
+   # set types for merged properties 
+   for P in "${!MERGE[@]}"  ; do
+       TYPES+=( "--type" "string" ) 
+       PROPS+=( "--set" "$P" ) 
+   done
+   
+   # merge properties
+   xfconf-query \
+      -c xfce4-notifyd \
+      -p /applications/known_applications -a -n \
+       "${TYPES[@]}" \
+       "${PROPS[@]}"
+}
+
+start_notifyd;
+
+main;
+
+exit $?

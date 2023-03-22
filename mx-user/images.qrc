@@ -1,0 +1,12 @@
+<RCC>
+    <qresource prefix="/">
+        <file>icons/logo.png</file>
+        <file>icons/dialog-ok.svg</file>
+        <file>icons/contact-new.png</file>
+        <file>icons/edit-clear.png</file>
+        <file>icons/edit-copy.png</file>
+        <file>icons/mx-user.png</file>
+        <file>icons/mx-user_one.png</file>
+        <file>icons/package_development.png</file>
+    </qresource>
+</RCC>

@@ -1,0 +1,15 @@
+Source: mx-remaster
+Section: system
+Priority: required
+Maintainer: Adrian <adrian@mxlinux.org>
+Build-Depends: debhelper (>= 9.20120115)
+Standards-Version: 3.9.4
+Homepage: http://mepis.org
+
+Package: mx-remaster
+Depends: antix-libs, whois, perl-base
+Recommends:  localize-repo
+Breaks: remaster-mx
+Replaces: remaster-mx
+Architecture: all
+Description: Tools for live persistence and remastering.

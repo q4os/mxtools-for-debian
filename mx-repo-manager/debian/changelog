@@ -1,0 +1,543 @@
+mx-repo-manager (22.10+deb11u13) stable; urgency=medium
+
+  * MX Tools release
+
+ -- Dolphin Oracle <administrator@localdomain>  Wed, 22 Mar 2023 10:43:55 +0100
+
+mx-repo-manager (22.10) mx; urgency=medium
+
+  * update translations
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 26 Oct 2022 20:05:50 -0400
+
+mx-repo-manager (22.8.01) mx; urgency=medium
+
+  * Fix: launching documents from Help (fixes a problem in Plasma)
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 22 Aug 2022 19:02:17 -0400
+
+mx-repo-manager (22.8) mx; urgency=medium
+
+  * Fix: launching Firefox from Help 
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 17 Aug 2022 22:00:15 -0400
+
+mx-repo-manager (22.7) mx; urgency=medium
+
+  * translation refresh 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 23 Jul 2022 11:33:46 -0400
+
+mx-repo-manager (22.6) mx; urgency=medium
+
+  * Preserve user theme when launching program as root
+  * Make sure HOME and XDG_RUNTIME_DIR are correct when launching as root
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 15 Jun 2022 16:08:11 -0400
+
+mx-repo-manager (21.8) mx; urgency=medium
+
+  * Fix: find fastest Debian repo
+  * Write .conf file in ~/.conf/MX-Linux
+  * Update for MX-21 sources
+
+ -- Adrian <adrian@mxlinux.org>  Sun, 01 Aug 2021 00:23:42 -0400
+
+mx-repo-manager (21.7) mx; urgency=medium
+
+  * Download only header when checking the Debian repo
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 15 Jul 2021 14:38:43 -0400
+
+mx-repo-manager (21.3.01) mx; urgency=medium
+
+  * fix: can enable/disable repos that contain special characters (square brackets for example)
+
+ -- Adrian <adrian@mxlinux.org>  Sat, 27 Mar 2021 22:59:15 -0400
+
+mx-repo-manager (21.3) mx; urgency=medium
+
+  * change Debian version detection 
+
+ -- Adrian <adrian@mxlinux.org>  Sun, 14 Mar 2021 12:09:34 -0400
+
+mx-repo-manager (21.1) mx; urgency=medium
+
+  * remove wget dependency, use Qt network tools
+  * fix: geometry save 
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 04 Jan 2021 13:11:44 -0500
+
+mx-repo-manager (20.12.01) mx; urgency=medium
+
+  * geometry save and restore 
+  * additonal check of version 
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 30 Dec 2020 13:34:20 -0500
+
+mx-repo-manager (20.12) mx; urgency=medium
+
+  * for 64-bit OS check if user wants to restore AHS repo
+
+ -- Adrian <adrian@mxlinux.org>  Tue, 01 Dec 2020 14:53:11 -0500
+
+mx-repo-manager (20.11.01) mx; urgency=medium
+
+  * load flags from /usr/share/flags-common
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 27 Nov 2020 20:12:47 -0500
+
+mx-repo-manager (20.11) mx; urgency=medium
+
+  * replaced dependency
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 27 Nov 2020 17:25:29 -0500
+
+mx-repo-manager (20.2) mx; urgency=medium
+
+  * prepare program for removing antiX sources
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 05 Feb 2020 19:03:49 -0500
+
+mx-repo-manager (19.10.02) mx; urgency=medium
+
+  * Add stanza in getDebianVersion subroutine for buster
+
+ -- Timothy E. Harris <maintainer@mxrepo.com>  Fri, 01 Nov 2019 15:10:48 -0400
+
+mx-repo-manager (19.10.01) mx; urgency=medium
+
+  * fix detecting fastest Debian repo
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 25 Oct 2019 01:09:28 -0400
+
+mx-repo-manager (19.10) mx; urgency=medium
+
+  * filter out empty source files
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 18 Oct 2019 01:39:06 -0400
+
+mx-repo-manager (19.9) mx; urgency=medium
+
+  * added cancel button for progress bar
+  * removed libcmd dependency
+
+ -- Adrian <adrian@mxlinux.org>  Sun, 29 Sep 2019 18:25:58 -0400
+
+mx-repo-manager (19.8.1) mx; urgency=medium
+
+  * added offline help file
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 21 Aug 2019 15:13:00 -0400
+
+mx-repo-manager (19.8) mx; urgency=medium
+
+  * fix for Buster
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 12 Aug 2019 11:51:37 -0400
+
+mx-repo-manager (19.7) mx; urgency=medium
+
+  * new icon
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 08 Jul 2019 14:03:18 -0400
+
+mx-repo-manager (19.5) mx; urgency=medium
+
+  * set vertical dimension to 700px
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 08 May 2019 20:08:27 -0400
+
+mx-repo-manager (19.2.1) mx; urgency=medium
+
+  * updated translations
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 21 Feb 2019 10:38:22 -0500
+
+mx-repo-manager (19.2) mx; urgency=medium
+
+  * added restore APT sources option in third tab
+  * added warning when selecting MX Test repo
+
+ -- Adrian <adrian@mxlinux.org>  Sun, 10 Feb 2019 09:51:09 -0500
+
+mx-repo-manager (19.1.1) mx; urgency=medium
+
+  * new translations
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 23 Jan 2019 16:28:17 -0500
+
+mx-repo-manager (19.1) mx; urgency=medium
+
+  * display world flag for Anycast (will work with updated fskbetting package)
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 16 Jan 2019 12:58:56 -0500
+
+mx-repo-manager (18.12.14) mx; urgency=medium
+
+  * updated translations
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 28 Dec 2018 11:34:57 -0500
+
+mx-repo-manager (18.12.13) mx; urgency=medium
+
+  * added search field 
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 13 Dec 2018 19:26:49 -0500
+
+mx-repo-manager (18.12.12) mx; urgency=medium
+
+  * split repos.list file to mx-repo-list package
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 13 Dec 2018 12:19:29 -0500
+
+mx-repo-manager (18.12.11) mx; urgency=medium
+
+  * new mirror: Bulgaria, Lithuania
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 13 Dec 2018 10:31:02 -0500
+
+mx-repo-manager (18.12.10) mx; urgency=medium
+
+  * new mirror: Germany, Hamburg
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 12 Dec 2018 17:19:19 -0500
+
+mx-repo-manager (18.12.9) mx; urgency=medium
+
+  * new mirror: Turkey
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 12 Dec 2018 10:02:37 -0500
+
+mx-repo-manager (18.12.8) mx; urgency=medium
+
+  * new mirror: Australia, Austria, Switzerland, Uruguay, France
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 10 Dec 2018 22:28:48 -0500
+
+mx-repo-manager (18.12.7) mx; urgency=medium
+
+  * new mirror: Czech Republic
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 10 Dec 2018 11:24:24 -0500
+
+mx-repo-manager (18.12.6) mx; urgency=medium
+
+  * new repo: Malaysia
+
+ -- Adrian <adrian@mxlinux.org>  Sat, 08 Dec 2018 03:04:23 -0500
+
+mx-repo-manager (18.12.5) mx; urgency=medium
+
+  * fix KZ mirrors
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 07 Dec 2018 09:33:36 -0500
+
+mx-repo-manager (18.12.4) mx; urgency=medium
+
+  * replaced iso.mxrepo with la.mxrepo
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 06 Dec 2018 22:33:46 -0500
+
+mx-repo-manager (18.12.3) mx; urgency=medium
+
+  * new mirrors: Belgium, Germany, Phillipines, Spain
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 06 Dec 2018 17:34:38 -0500
+
+mx-repo-manager (18.12.2) mx; urgency=medium
+
+  * new mirrors: Austria, Atlanta GA
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 06 Dec 2018 09:28:54 -0500
+
+mx-repo-manager (18.12.1) mx; urgency=medium
+
+  * new mirrors: Brazil, France, Indonesia
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 05 Dec 2018 09:55:01 -0500
+
+mx-repo-manager (18.12) mx; urgency=medium
+
+  * new mirror: Hungary
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 03 Dec 2018 03:46:41 -0500
+
+mx-repo-manager (18.11.8) mx; urgency=medium
+
+  * new mirror: Thailand, added commented out Vietnam, not yet populated
+
+ -- Adrian <adrian@mxlinux.org>  Sat, 01 Dec 2018 11:46:14 -0500
+
+mx-repo-manager (18.11.7) mx; urgency=medium
+
+  * new mirror: Brazil
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 30 Nov 2018 11:56:37 -0500
+
+mx-repo-manager (18.11.6) mx; urgency=medium
+
+  * new mirror: Spain, Singapore, Maryland
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 29 Nov 2018 10:39:30 -0500
+
+mx-repo-manager (18.11.5) mx; urgency=medium
+
+  * new mirror: HK and California
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 28 Nov 2018 14:06:43 -0500
+
+mx-repo-manager (18.11.4) mx; urgency=medium
+
+  * new mirror: Uruguay
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 28 Nov 2018 09:29:38 -0500
+
+mx-repo-manager (18.11.3) mx; urgency=medium
+
+  * new mirror: Japan, Tsukuba
+
+ -- Adrian <adrian@mxlinux.org>  Tue, 27 Nov 2018 21:06:26 -0500
+
+mx-repo-manager (18.11.2) mx; urgency=medium
+
+  * new mirrors: Canada, Japan, Kazakhstan, Kenya, South Africa, Ukraine, England
+
+ -- Adrian <adrian@mxlinux.org>  Tue, 27 Nov 2018 15:10:17 -0500
+
+mx-repo-manager (18.11.1) mx; urgency=medium
+
+  * new mirror: Beijing
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 16 Nov 2018 12:25:48 -0500
+
+mx-repo-manager (18.11) mx; urgency=medium
+
+  * new mirrors: China, Hong Kong
+
+ -- Adrian <adrian@mxlinux.org>  Tue, 13 Nov 2018 13:55:16 -0500
+
+mx-repo-manager (18.10) mx; urgency=medium
+
+  * updated translations
+
+ -- Adrian <adrian@mxlinux.org>  Sun, 14 Oct 2018 19:51:36 -0400
+
+mx-repo-manager (18.9) mx; urgency=medium
+
+  * fix fastest repo selection
+  * fix parsing repo names
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 19 Sep 2018 17:53:09 -0400
+
+mx-repo-manager (18.8) mx; urgency=medium
+
+  * fix icon other themes
+
+ -- Adrian <adrian@mxlinux.org>  Sat, 11 Aug 2018 22:49:57 -0400
+
+mx-repo-manager (18.6.2) mx; urgency=medium
+
+  * added Denmark repo
+  * added changelog button
+
+ -- Adrian <adrian@mxlinux.org>  Tue, 26 Jun 2018 18:22:05 -0400
+
+mx-repo-manager (18.6.1) mx; urgency=medium
+
+  * remove daveserver
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 22 Jun 2018 09:52:37 -0400
+
+mx-repo-manager (18.6) mx; urgency=medium
+
+  * new translations
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 18 Jun 2018 17:12:27 -0400
+
+mx-repo-manager (18.4.1) mx; urgency=medium
+
+  * add new repos
+
+ -- Adrian <adrian@mxlinux.org>  Tue, 17 Apr 2018 23:56:50 -0400
+
+mx-repo-manager (18.4) mx; urgency=medium
+
+  * add German and Netherlands mirrors
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 04 Apr 2018 09:43:08 -0400
+
+mx-repo-manager (18.3+1) mx; urgency=medium
+
+  * RU mirror
+
+ -- Adrian <adrian@mxlinux.org>  Sun, 25 Mar 2018 23:24:40 -0400
+
+mx-repo-manager (18.3) mx; urgency=medium
+
+  * new translations
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 02 Mar 2018 11:00:08 -0500
+
+mx-repo-manager (17.12) mx; urgency=medium
+
+  * new translations
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 04 Dec 2017 14:57:37 -0500
+
+mx-repo-manager (17.11+1) mx; urgency=medium
+
+  * fix LANG detection
+
+ -- Adrian <adrian@mxlinux.org>  Sat, 11 Nov 2017 18:44:56 -0500
+
+mx-repo-manager (17.11) mx; urgency=medium
+
+  * add FR help link
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 10 Nov 2017 10:54:47 -0500
+
+mx-repo-manager (17.7.2) mx; urgency=medium
+
+  * bug fix for Stretch
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 21 Jul 2017 08:09:50 -0400
+
+mx-repo-manager (17.7.1) mx; urgency=medium
+
+  * minor changes in preparation for Stretch based MX17
+
+ -- Adrian <adrian@mxlinux.org>  Sun, 16 Jul 2017 21:06:14 -0400
+
+mx-repo-manager (17.7mx16) mx; urgency=medium
+
+  * added Sweden mirror
+
+ -- Adrian <adrian@mxlinux.org>  Sat, 15 Jul 2017 10:07:46 -0400
+
+mx-repo-manager (17.6mx16+1) mx; urgency=medium
+
+  * small fix for Stretch
+
+ -- Adrian <adrian@mxlinux.org>  Sun, 18 Jun 2017 11:18:56 -0400
+
+mx-repo-manager (17.6mx16) mx; urgency=medium
+
+  * updated translations
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 02 Jun 2017 15:01:48 -0400
+
+mx-repo-manager (17.5mx16+2) mx; urgency=medium
+
+  * Added Italian mirror
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 24 May 2017 09:57:55 -0400
+
+mx-repo-manager (17.5mx16+1) mx; urgency=medium
+
+  * removed German mirror
+
+ -- Adrian <adrian@mxlinux.org>  Tue, 16 May 2017 19:36:17 -0400
+
+mx-repo-manager (17.5mx16) mx; urgency=medium
+
+  * update icons
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 10 May 2017 14:18:16 -0400
+
+mx-repo-manager (17.3mx16+1) mx; urgency=medium
+
+  * save .list backups in a separate folder
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 30 Mar 2017 09:34:20 -0400
+
+mx-repo-manager (17.3mx16) mx; urgency=medium
+
+  * select fastest repos
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 22 Mar 2017 16:47:13 -0400
+
+mx-repo-manager (17.1mx16+1) mx; urgency=medium
+
+  * added se repo, renamed fr, de repos
+
+ -- Adrian <adrian@mxlinux.org>  Sun, 29 Jan 2017 18:28:27 -0500
+
+mx-repo-manager (17.1mx16) mx; urgency=medium
+
+  * added fr and de repos 
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 02 Jan 2017 20:33:56 -0500
+
+mx-repo-manager (16.11mx16+3) mx; urgency=medium
+
+  * process mx16.list file too
+
+ -- Adrian <adrian@mxlinux.org>  Sun, 04 Dec 2016 17:52:47 -0500
+
+mx-repo-manager (16.11mx16+2) mx; urgency=medium
+
+  * FR translation
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 30 Nov 2016 12:40:44 -0500
+
+mx-repo-manager (16.11mx16+1) mx; urgency=medium
+
+  * new translations
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 16 Nov 2016 13:32:25 -0500
+
+mx-repo-manager (16.11mx16) mx; urgency=medium
+
+  * fixes for mx16
+
+ -- Adrian <adrian@mxlinux.org>  Sun, 13 Nov 2016 17:11:46 -0500
+
+mx-repo-manager (16.10mx16) mx; urgency=medium
+
+  * Changed URLs
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 10 Oct 2016 13:57:51 -0400
+
+mx-repo-manager (16.5mx15) mx; urgency=medium
+
+  * new desktop file
+
+ -- dolphinoracle <dolphinoracle@gmail.com>  Mon, 29 Feb 2016 11:04:43 -0500
+
+mx-repo-manager (16.2mx15+5) mx; urgency=medium
+
+  * icon fix
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 29 Feb 2016 11:04:43 -0500
+
+mx-repo-manager (16.2mx15+3) mx; urgency=medium
+
+  * enable/disable repos
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 22 Feb 2016 11:38:05 -0500
+
+mx-repo-manager (16.2mx15+2) mx; urgency=medium
+
+  * added NZ repo
+
+ -- Adrian <adrian@mxlinux.org>  Sun, 21 Feb 2016 12:34:22 -0500
+
+mx-repo-manager (16.2mx15+1) mx; urgency=medium
+
+  * new translations
+
+ -- Adrian <adrian@mxlinux.org>  Sat, 20 Feb 2016 14:06:08 -0500
+
+mx-repo-manager (16.2mx15) mx; urgency=medium
+
+  * added flags for repos
+
+ -- Adrian <adrian@mxlinux.org>  Sat, 13 Feb 2016 20:16:14 -0500
+
+mx-repo-manager (0.16.2mx15) mx; urgency=medium
+
+  * initial release
+
+ -- Adrian <adrian@mxlinux.org>  Sun, 07 Feb 2016 10:55:39 -0500
+

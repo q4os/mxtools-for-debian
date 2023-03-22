@@ -1,0 +1,8 @@
+[Plymouth Theme]
+Name=Dandelion-mx
+Description=Dandelion parachutes floating around 
+ModuleName=script
+
+[script]
+ImageDir=/usr/share/plymouth/themes/dandelion-mx
+ScriptFile=/usr/share/plymouth/themes/dandelion-mx/dandelion.script

@@ -1,0 +1,196 @@
+desktop-defaults-mx-applications (21.07.01mx21+deb11u13) stable; urgency=medium
+
+  * MX Tools release
+
+ -- Dolphin Oracle <administrator@localdomain>  Wed, 22 Mar 2023 10:43:49 +0100
+
+desktop-defaults-mx-applications (21.07.01mx21) mx; urgency=medium
+
+  * update geany defaults 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 05 Jul 2021 15:44:11 -0400
+
+desktop-defaults-mx-applications (21.02.01mx21) mx; urgency=medium
+
+  * initial bullseye build 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 11 Feb 2021 13:05:30 -0500
+
+desktop-defaults-mx-applications (19.06.01) mx; urgency=medium
+
+  * remove old LO config 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 10 Jun 2019 19:59:20 -0400
+
+desktop-defaults-mx-applications (18.11.02) mx; urgency=medium
+
+  * modified geany presets (fehlix) 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 22 Nov 2018 20:49:37 -0500
+
+desktop-defaults-mx-applications (18.11.01) mx; urgency=medium
+
+  * added geany presets 
+
+ -- dolphin <dolphinoracle@gmail.com>  Mon, 19 Nov 2018 22:16:30 -0500
+
+desktop-defaults-mx-applications (18.9.01) mx; urgency=medium
+
+  * split into xfce package and common package 
+
+ -- dolphin <dolphin@littlebyte>  Tue, 18 Sep 2018 06:48:30 -0400
+
+desktop-defaults-xfce-mx17 (0.7.17.8) mx; urgency=medium
+
+  * revised wallpaper 
+
+ -- dolphin oracle <dolphin@littlebyte>  Thu, 08 Mar 2018 18:11:54 -0500
+
+desktop-defaults-xfce-mx17 (0.7.17.6) mx; urgency=medium
+
+  * updates for mx17.1 to whiskermenu (added mxpi) 
+
+ -- dolphin oracle <dolphin@littlebyte>  Tue, 27 Feb 2018 17:03:10 -0500
+
+desktop-defaults-xfce-mx17 (0.7.17.5) mx; urgency=medium
+
+  *  added additional translations
+
+ -- dolphin oracle <dolphin@littlebyte>  Wed, 14 Feb 2018 20:20:25 -0500
+
+desktop-defaults-xfce-mx17 (0.7.17.4.9) mx; urgency=medium
+
+  * added check for update-rc.d 
+
+ -- dolphin oracle <dolphin@littlebyte>  Sat, 10 Feb 2018 21:06:11 -0500
+
+desktop-defaults-xfce-mx17 (0.7.17.4.8) mx; urgency=medium
+
+  * revised install script to check for directories before copying.
+
+ -- dolphin oracle <dolphin@littlebyte>  Sat, 10 Feb 2018 18:25:13 -0500
+
+desktop-defaults-xfce-mx17 (0.7.17.4.7) mxD; urgency=medium
+
+  * added kfd.conf blacklist for amdkfd module 
+
+ -- dolphin oracle <dolphin@littlebyte>  Wed, 07 Feb 2018 19:23:25 -0500
+
+desktop-defaults-xfce-mx17 (0.7.17.4.6) mx; urgency=medium
+
+  * fix irrelevant warning message in script
+
+ -- dolphin oracle <dolphin@littlebyte>  Sat, 03 Feb 2018 11:14:45 -0500
+
+desktop-defaults-xfce-mx17 (0.7.17.4.5) mx; urgency=medium
+
+  * more modifications to uca.xml updater script   
+
+ -- dolphin oracle <dolphin@littlebyte>  Sat, 03 Feb 2018 10:33:38 -0500
+
+desktop-defaults-xfce-mx17 (0.7.17.4.4) mx; urgency=medium
+
+  * more modifications
+
+ -- dolphin oracle <dolphinoracle@gmail.com>  Fri, 02 Feb 2018 20:25:41 -0500
+
+desktop-defaults-xfce-mx17 (0.7.17.4.3) mx; urgency=medium
+
+  * changed "as root" functions in thunar custom actions 
+  * updated translations methology
+
+ -- dolphin oracle <dolphin@littlebyte>  Sun, 28 Jan 2018 14:30:46 -0500
+
+desktop-defaults-xfce-mx17 (0.7.17.4.2) mx; urgency=medium
+
+  * adjust Alt+F1 help function
+
+
+ -- dolphin oracle <dolphin@littlebyte>  Wed, 13 Dec 2017 18:55:23 -0500
+
+desktop-defaults-xfce-mx17 (0.7.17.4.1) mx; urgency=medium
+
+  * revised for RC1
+  * added nomacs to screenshooter settings
+  * revised theme for notifications 
+
+ -- dolphin oracle <dolphinoracle@gmail.com>  Sat, 09 Dec 2017 13:16:15 -0500
+
+desktop-defaults-xfce-mx17 (0.7.17.4.0) mx; urgency=medium
+
+  * rc/final 
+
+ -- dolphin oracle <dolphin@littlebyte>  Wed, 29 Nov 2017 19:27:10 -0500
+
+desktop-defaults-xfce-mx17 (0.7.17.3.1) mx; urgency=medium
+
+  * b3
+
+ -- dolphin oracle <dolphinoracle@gmail.com>  Tue, 21 Nov 2017 20:45:53 -0400
+
+desktop-defaults-xfce-mx17 (0.7.17.1.2) mx; urgency=medium
+
+  * b2
+
+ -- dolphin oracle <dolphinoracle@gmail.com>  Mon, 06 Nov 2017 18:50:12 -0400
+ 
+desktop-defaults-xfce-mx17 (0.7.17.1.1) mx; urgency=medium
+
+  * b1
+
+ -- dolphin oracle <dolphinoracle@gmail.com>  Sat, 28 Oct 2017 19:14:07 -0400
+ 
+desktop-defaults-xfce-mx17 (0.7.17.1.0) mx; urgency=medium
+
+  * a5
+
+ -- dolphin oracle <dolphinoracle@gmail.com>  Sun, 15 Oct 2017 19:55:35 -0400
+
+desktop-defaults-xfce-mx17 (0.7.17.0.9) mx; urgency=medium
+
+  * fix for keyboard shortcuts file
+
+ -- dolphin oracle <dolphinoracle@gmail.com>  Fri, 06 Oct 2017 20:05:35 -0400
+
+desktop-defaults-xfce-mx17 (0.7.17.0.8) mx; urgency=medium
+
+  * fix for keyboard shortcuts file
+
+ -- dolphin oracle <dolphinoracle@gmail.com>  Tue, 03 Oct 2017 21:15:35 -0400
+
+desktop-defaults-xfce-mx17 (0.7.17.0.7) mx; urgency=medium
+
+  * adjustments for alpha 3
+
+ -- dolphin oracle <dolphinoracle@gmail.com>  Sun, 01 Oct 2017 14:24:35 -0400
+
+desktop-defaults-xfce-mx17 (0.7.17.0.6) mx; urgency=medium
+
+  * adjustments for new help file pdf
+
+ -- dolphin oracle <dolphinoracle@gmail.com>  Mon, 18 Sep 2017 19:40:35 -0400
+
+desktop-defaults-xfce-mx17 (0.7.17.0.5) mx; urgency=medium
+
+  * small adjustments for alpha 2
+
+ -- dolphin oracle <dolphinoracle@gmail.com>  Mon, 18 Sep 2017 19:40:35 -0400
+
+desktop-defaults-xfce-mx17 (0.7.17.0.4) mx; urgency=medium
+
+  * fix to preinst script (kmathern)
+
+ -- dolphin oracle <dolphinoracle@gmail.com>  Sat, 09 Sep 2017 13:12:35 -0400
+
+desktop-defaults-xfce-mx17 (0.7.17.0.3) mx; urgency=medium
+
+  * added /etc/environment variable for Qt apps
+
+ -- dolphin oracle <dolphinoracle@gmail.com>  Sat, 02 Sep 2017 13:12:35 -0400
+
+desktop-defaults-xfce-mx17 (0.7.17.0.2) mx; urgency=medium
+
+  * mx17
+
+ -- dolphin oracle <dolphinoracle@gmail.com>  Tue, 08 Aug 2017 21:12:35 -0400
+

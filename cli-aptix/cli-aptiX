@@ -1,0 +1,2379 @@
+#!/bin/bash
+
+#==============================================================================
+# cli-aptiX
+#
+# A cli wrapper around apt-get and apt-cache to provide some of the
+# functionality of Synaptic on the command line.
+#
+# Thanks to fehlix for bug fixes and improvements!!
+#
+# (C) 2017 - 2019 Paul Banham <antiX@operamail.com>
+# License: GPLv3 or later
+#==============================================================================
+
+VERSION="1.02.01"
+VERSION_DATE="Tue 05 Nov 2019 08:54:44 PM MST"
+
+        ME=${0##*/}
+    MY_DIR=$(dirname "$(readlink -f $0)")
+MY_LIB_DIR=$(readlink -f "$MY_DIR/../cli-shell-utils")
+   LIB_DIR="/usr/local/lib/cli-shell-utils"
+
+GRAPHICAL_MENUS=true
+export TEXTDOMAIN="cli-aptiX"
+
+# "aptiX" is the short name of this program
+export LESS="-Ps"$"Press 'q' to return to aptiX"
+
+  LIB_PATH="$MY_LIB_DIR:$LIB_DIR"
+      PATH="$MY_LIB_DIR/bin:$LIB_DIR/bin:$PATH"
+ SHELL_LIB="cli-shell-utils.bash"
+
+    LIST_DIR=/var/lib/apt/lists
+  SOURCE_DIR=/etc/apt/sources.list.d
+
+  SUGGESTED_DIR=/usr/local/share/$ME/suggested
+
+  SUGGEST_TYPES="cli gui"
+ # The category of command line programs
+ SUGGEST_TITLES=cli:$"Command Line"\\n
+ # The catatory of GUI (graphics user interface) programs
+ SUGGEST_TITLES=${SUGGEST_TITLES}gui:$"GUI"\\n
+
+   THE_LOG_FILE=/var/log/$ME.log
+
+AUTO_UPDATE_INTERVAL="5"  # Days
+
+    WORK_DIR=/tmp/$ME
+
+           LOCK_FILE=/run/lock/$ME.lock
+    FOUND_MATCH_FILE=$WORK_DIR/found-match
+         SEARCH_FILE=$WORK_DIR/SEARCH-RESULTS
+             DB_FILE=$WORK_DIR/all.list
+      INSTALLED_FILE=$WORK_DIR/installed.list
+    SUGGESTED_DB_DIR=$WORK_DIR/suggested
+
+MARK_CNT=0
+
+#: ${EDITOR:=nano}
+
+#------------------------------------------------------------------------------
+#
+#------------------------------------------------------------------------------
+usage() {
+    local ret=${1:-0}
+
+cat<<Usage
+Usage: $ME [options]
+
+Search for, mark, and install Debian-based packages.
+
+Options:
+    -C --color=<xxx>   Set color scheme to off|low|low2|bw|dark|high
+    -G --graphic-ui    Use the new graphics user interface (default)
+    -h --help          Show this usage
+    -N --numeric-ui    Use the legacy numerical user interface
+       --pause         Pause before exiting
+    -v --version       Show version information
+Usage
+    exit $ret
+}
+
+#------------------------------------------------------------------------------
+# Callback routine for reading command line params
+#------------------------------------------------------------------------------
+eval_early_argument() {
+    local val=${1#*=}
+    case $1 in
+               -pause) PAUSE="$PAUSE${PAUSE:+,}exit" ;;
+              -help|h) usage                         ;;
+           -version|v) show_version                  ;;
+    esac
+}
+
+#------------------------------------------------------------------------------
+# Callback routine for reading command line params
+#------------------------------------------------------------------------------
+eval_argument() {
+    local arg=$1  val=$2
+    case $arg in
+   -graphic-ui|G) GRAPHICAL_MENUS=true              ;;
+        -color|C)  COLOR_SCHEME=$val                ;;
+        -color=*)  COLOR_SCHEME=$val                ;;
+   -numeric-ui|N) GRAPHICAL_MENUS=                  ;;
+          -pause)                                   ;;
+
+          *)  fatal "Unknown parameter %s" "-$arg"  ;;
+     esac
+}
+
+#------------------------------------------------------------------------------
+# Callback routine for reading command line params
+#------------------------------------------------------------------------------
+takes_param() {
+    case $1 in
+       -color|C) return 0 ;;
+    esac
+    return 1
+}
+
+#------------------------------------------------------------------------------
+# The main program.  Should add command line options for color, simple/expert
+# and so on.   Could that be a submenu???
+#------------------------------------------------------------------------------
+main() {
+    local SHORT_STACK="CGhNv"
+
+    # Keyboard keys: up-arrow, down-arrow, page-up, page-down
+    local UP_ARROW=$"up-arrow"  DOWN_ARROW=$"down-arrow" PAGE_UP=$"page-up" PAGE_DOWN=$"page-down"
+
+    read_early_params "$@"
+
+    testing || run_me_as_root "$@"
+
+    read_all_cmdline_mingled "$@"
+    set_colors $COLOR_SCHEME
+
+    #local MANPAGER=
+
+    # For now (at least) add menus to the log file
+    VERBOSE_SELECT=true
+
+    # Used in my_select() to return instead of exit on 'q'
+    :
+    # First letter is lowercase
+    BACK_TO_MAIN=$"go back to the main menu"
+
+    local UPGRADE_CNT
+
+    case $(uname -m) in
+          i686) ARCH='i386'  ;;
+        x86_64) ARCH='amd64' ;;
+    esac
+
+    testing && start_testing_mode
+
+    trap my_exit EXIT
+
+    testing || do_flock
+    #shout $"Starting %s" "$ME"
+    start_log "$THE_LOG_FILE" "$*"
+
+    find_man_page
+
+    mkdir -p $WORK_DIR || fatal "Could not create directory %s" "$WORK_DIR"
+    testing || mount_work_dir
+
+    #msg "Checking to see if an %s is needed ..." "$(pq apt-get update)"
+
+    # Don't run check_for_updates or generate_database_files automatically
+    local JUST_UPDATE=true
+
+    # FIXME!!
+    run_outer check_list_files || exit
+
+    check_for_upgrades
+    generate_database_files
+
+    # Ok, you can run check_for_updates or generate_database_file automatically now
+    JUST_UPDATE=
+
+    #shout_title "$MAIN_MENU"
+    #do_search
+
+    set_window_title
+    while true; do
+        do_main_menu
+    done
+}
+
+#------------------------------------------------------------------------------
+# NOTE: do_[....]_menu() is for presenting the menu and dealing with the choice
+# made by the user.  This one is for the main menu (duh).
+#------------------------------------------------------------------------------
+do_main_menu() {
+
+    msg
+    shout_title $"antiX Command Line Package Installer"
+
+    suggest_warning cli
+    suggest_warning gui
+    upgrade_warning
+
+    local title=$"Main Menu"
+    local ans
+
+    local arch  raw_arch=$(uname -m)
+    testing && raw_arch=i686
+    case $raw_arch in
+         x86_64) arch='amd64'    ;;
+           i686) arch='[456]86'  ;;
+              *) internal_error 'finding machine arch' "$raw_arch"
+    esac
+
+    run_outer my_select 'ans' "$title" "$(main_menu $arch)"
+
+    local val=${ans#*-}
+    case $ans in
+              search) do_search                 ;;
+            search-*) do_search         "$val"  ;;
+              update) do_update                 ;;
+             upgrade) do_upgrade_menu           ;;
+                edit) do_source_menu            ;;
+         suggested-*) do_suggested      "$val"  ;;
+         view-marked) do_view_marked            ;;
+                quit) exit                      ;;
+
+        *)  warn "The '%s' feature isn't implemented yet" "$(pqw $ans)"
+            press_enter ;;
+    esac
+}
+#------------------------------------------------------------------------------
+# Get last update time
+#------------------------------------------------------------------------------
+last_update() {
+    local stamp_file="/var/lib/apt/periodic/update-success-stamp"
+    [ -e $stamp_file ] || return
+    printf "(%s %s)" $"last update" "$(date -d @$(stat -c %Z $stamp_file))"
+}
+
+#------------------------------------------------------------------------------
+# Note: xxxx_menu() is to to generate the text of the menu to be sent to the
+# my_select() routine.  This one is for the main menu.
+#------------------------------------------------------------------------------
+main_menu() {
+    local upgrade_lab  arch=$1
+
+    : ${UPGRADE_CNT:=$(count_upgrades)}
+
+    menu_printf search    $"Search for packages to mark or install"
+    add_suggest_entry     cli
+    add_suggest_entry     gui
+
+    menu_printf "search-linux-image-*antix*$arch"  $"Search for antiX kernels"
+    menu_printf "search-linux-image-*$arch"        $"Search for all kernels"
+
+    #menu_printf kernels   $"Search for kernels or antiX kernels"
+    menu_printf update    $"Update package index"" $(last_update)"
+    menu_printf edit      $"Edit the repo source files"
+    add_upgrade_entry
+    add_mark_entry
+    menu_printf quit      $"Quit"
+}
+
+#------------------------------------------------------------------------------
+# Gently warn if the suggestions are all already installed
+#------------------------------------------------------------------------------
+suggest_warning() {
+    local type=$1 title=$(suggest_title $1)
+    local file=$SUGGESTED_DB_DIR/$type.list
+    test -r $file || return
+    local tot=$(egrep --count "^[MIa-z0-9]" $file)
+    local cnt=$(egrep -v "^M?I" $file | egrep --count "^[MIa-z0-9]")
+    [ $cnt -gt 0 ] && return
+    [ $tot -eq 0 ] && return
+    # all <25> suggested <GUI> packages have been installed
+    msg $"All %s suggested %s packages have been installed" "$tot" "$title"
+}
+
+#------------------------------------------------------------------------------
+# Gently warn if there are no pending upgrades
+#------------------------------------------------------------------------------
+upgrade_warning() {
+    [ $UPGRADE_CNT -gt 0 ] && return
+    msg "(%s)" $"no pending upgrades"
+}
+
+#------------------------------------------------------------------------------
+# Add the suggestions entry if there are any left to install
+#------------------------------------------------------------------------------
+add_suggest_entry() {
+    local type=$1  title=$(suggest_title $1)
+    local file=$SUGGESTED_DIR/$type.list
+    test -r $file || return
+    local cnt=$(egrep "^[MIa-z0-9]" $file | egrep --count -v "^M?I")
+    [ $cnt -gt 0 ] || return
+    # View a list of <32> suggested <Command Line> packages
+    menu_printf suggested-$type $"View a list of %s suggested %s packages" "$(nq $cnt)" "$title"
+}
+
+#------------------------------------------------------------------------------
+# Convert type to title
+#------------------------------------------------------------------------------
+suggest_title() {
+    local type=$1
+    echo -e "$SUGGEST_TITLES" | grep "^$type:" | cut -d: -f2
+}
+
+#------------------------------------------------------------------------------
+# Add the suggestions entry if there are any left to install
+#------------------------------------------------------------------------------
+old_add_suggest_entry() {
+    local file=$SUGGESTED_FILE
+    test -r $file || return
+    local cnt=$(egrep "^[MIa-z0-9]" $file | egrep --count -v "^M?I")
+    [ $cnt -gt 0 ] || return
+    menu_printf suggested "View a list of %s suggested uninstalled packages" "$(nq $cnt)"
+}
+
+#------------------------------------------------------------------------------
+# Add an "upgrade" entry if it is appropriate
+#------------------------------------------------------------------------------
+add_upgrade_entry() {
+    local cnt=${1:-$UPGRADE_CNT}
+    [ $cnt -gt 0 ] || return
+    menu_printf_plural  upgrade $cnt $"View or perform %s upgrade now" $"View or perform %s upgrades now"
+}
+
+#------------------------------------------------------------------------------
+# Menu elements for doing ao system upgrade
+#------------------------------------------------------------------------------
+upgrade_menu() {
+    local cnt=${1:-$UPGRADE_CNT}
+
+    menu_printf_plural upgrade $cnt $"Upgrade %s package now" $"Upgrade %s packages now"
+    menu_printf        view    $"View a list of packages to be upgraded"
+    menu_printf        ignore  $"Ignore these upgrades for now"
+    menu_printf        update  $"Update package index"" $(last_update)"
+
+}
+
+#------------------------------------------------------------------------------
+# Add a entry linking to mark menu if appropriate
+#------------------------------------------------------------------------------
+add_mark_entry() {
+    local old_cnt=$MARK_CNT
+    MARK_CNT=$(grep --count "^M" $DB_FILE)
+    local cnt=$MARK_CNT
+    [ $cnt -ne $old_cnt ] && warn "Mark count adjusted from %s to %s" $old_cnt $cnt
+
+    [ $cnt -gt 0 ] || return
+
+    menu_printf_plural view-marked "$cnt" $"View or install %s marked package"  $"View or install %s marked packages"
+}
+
+#------------------------------------------------------------------------------
+# This is the main event.  I'm trying to make it as easy to use as possible.
+# Can still be improved.  That is why it is not so neat and tidy.  The loops
+# allow for easy flow control with 'return', 'continue', and 'break' I can
+# easily go to 3 different places (usually: main, new search, repeat same
+# search).
+#------------------------------------------------------------------------------
+do_source_menu() {
+
+    shout_subtitle $"Edit Source Menu"
+
+    while true; do
+        local ans  title=$"Please select a source file to edit"
+        my_select ans "$title" "$(source_menu)"
+        case $ans in
+            quit) break ;;
+        esac
+        local file=$ans
+        if ! test -e "$file"; then
+            warn $"Could not find file %s to edit" "$(pqw $file)"
+            continue
+        fi
+        nano "$file"
+    done
+    echo
+    check_list_files || exit
+}
+
+#------------------------------------------------------------------------------
+# Create a menu for editing source files
+#------------------------------------------------------------------------------
+source_menu() {
+
+    local file
+    for file in $SOURCE_DIR/*.list; do
+        test -e "$file" || continue
+        menu_printf "$file" "$(basename "$file")"
+    done
+    # First letter is uppercase
+    menu_printf quit $"Go back to the main menu"
+}
+
+#------------------------------------------------------------------------------
+# Display a package name and description in a nice way and indicate if the
+# package is installed and/or marked
+#------------------------------------------------------------------------------
+show_package() {
+    local match=$(echo "$1" | tr -s ' ')  width=$(screen_width)  attrib
+    local num=$2
+
+    local max_width=$((width - 5))
+    [ -z "$match" ] && return
+    if [ -z "${match##M*}" ]; then
+        attrib="$attrib${attrib:+ }(${mark_co}marked$nc_co)"
+        match=${match#M}
+    fi
+    if [ -z "${match##I*}" ]; then
+        attrib="$attrib${attrib:+ }(${inst_co}installed$nc_co)"
+        match=${match#I}
+    fi
+    match=${match# }
+    local msg=$(echo "${match:0:$max_width}" | sed -r "s/(\*+)/$bold_co\1$hi_co/")
+
+    arrow_msg_n "$num" "$hi_co%s" "$msg"
+    [ "$attrib" ] && echo "$attrib"
+}
+
+#------------------------------------------------------------------------------
+# This is the core routine of this program.  I try to make good use of the
+# limited flow control in Shell, "break", "continue", "return" which is why
+# this routine has too many nested loops and not enough modularized calls
+# to smaller functions.
+#------------------------------------------------------------------------------
+do_search() {
+    local start_search=$1
+
+    local ans
+    # This loop is for doing new searches.  Maybe there is a better way in
+    # order to avoid so much nesting
+
+    # LOOP: new search
+    while true; do
+        shout
+        shout_subtitle $"Search for packages"
+
+        local all_str
+        if [ -n "$start_search" ]; then
+
+            msg "Searching for %s" "$(pq "$start_search")"
+            echo
+
+            all_str=$start_search
+            # Convert '*' and '?' to their regular expression equivalents
+            # First protect "." in the original string
+            all_str=${all_str//./\\.}
+            all_str=${all_str//\?/.}
+            all_str=${all_str//\*/.*}
+
+            start_search=
+        else
+            get_glob_string all_str
+        fi
+
+        case $all_str in
+            [qQ]) return ;;
+        esac
+
+        [ -z "$all_str" ] && return
+
+
+        # This loop is to repeat viewing of the same search results.  In here
+        # a 'break' gets you to a new search and a 'continue' will reshow the
+        # same results
+
+        # LOOP: repeat same search
+        while true; do
+
+            local desc_str=${all_str#^}
+            desc_str=${desc_str%$}
+            local name_str="^([MI]+ )?[^ ]*$desc_str"
+            local lead_str="^([MI]+ )?$desc_str"
+            local exact_str="$lead_str "
+
+            local exact_cnt=   lead_cnt=    name_cnt=    desc_cnt=
+            local exact_match= lead_match=  name_match=  desc_match=
+
+            start_timer
+
+            local TOTAL_MATCHES=0  FOUND_MATCH=
+            # An "exact name match" means the search term matches the entire package name
+            count_matches  exact $"exact name match"           $"exact name matches"
+            # A "leading name match"the search term matches  the beginning of the package name
+            count_matches  lead  $"leading name match"         $"leading name matches"
+            # An "any name match" the search term matches any part of the package name
+            count_matches  name  $"any name match"             $"any name matches"
+            # A "name or description match"  matches any part of the package name or description
+            count_matches  desc  $"name or description match"  $"name or description matches"
+
+            echo
+            # searches <took 0.25 seconds>
+            msg_elapsed_t $"searches"
+            echo
+
+            if [ $TOTAL_MATCHES -eq 0 ]; then
+                warn $"No matches were found"
+                YES_no $"Do you want to try a different search?" && break
+                return
+            fi
+
+            # LOOP: package info
+            while true; do
+
+                # Need to use a file because the commands below are in a subshell
+                rm -f $FOUND_MATCH_FILE
+                local result_menu=$(
+                    # As in "exact match", search term matches these packages exactly
+                    add_to_result_menu exact $"exact"
+                    # As in "leading match", search term matches the beginning of these packages
+                    add_to_result_menu lead  $"leading"
+                    # As in "any match' search term matches somewhere in the package name
+                    add_to_result_menu name  $"any name"
+                    # As in "name or description match" search term matches somewhere in the name or description
+                    add_to_result_menu desc  $"description"
+                    menu_printf  'search'    $"Do a different search"
+                )
+
+
+                local found_match= act2=
+                read found_match 2>/dev/null <$FOUND_MATCH_FILE
+
+                local menu_result the_string
+                shout $"Search Result Menu"
+                local result_title=$"Please select an action"
+                my_select 'menu_result' "$result_title" "$result_menu"
+                [ -z "$menu_result" ] && continue
+
+                local action=${menu_result#*-}
+                local search_type=${menu_result%%-*}
+
+                case $action in
+                      view) ;;
+                      info)      package_info "$found_match" ; continue ;;
+                      mark)      mark_package "$found_match"            ;;
+                    unmark)    unmark_package "$found_match"            ;;
+                   install)   install_package "$found_match" ; return   ;; # Should we really return?
+                 uninstall) uninstall_package "$found_match" ; return   ;;
+
+                    search) act2=break  ;;
+                      quit) return      ;;
+                         *) internal_error 'search result menu' "$action" ;;
+                esac
+                break
+            done
+
+            case $act2 in
+                break) break ;;
+            esac
+
+            if [ "$action" != 'view' ]; then
+                my_select ans $"What next?" "$(search_again_menu)"
+                case $ans in
+                     view-marked) do_view_marked ; return ;;
+                          search) break                   ;;
+                          review) continue                ;;
+                            quit) return                  ;;
+                    *) internal_error 'search again menu' "$ans" ;;
+                esac
+            fi
+
+            eval the_string=\$${search_type}_str
+
+            local args=
+            [ "$search_type" = 'desc' ] && args="--color=always"
+            perform_search "$the_string" $args > $SEARCH_FILE
+
+            local cnt=$(cat $SEARCH_FILE | wc -l)
+
+            local height=$(screen_height)
+            if [ $cnt -lt $((height - 5)) ]; then
+                cat $SEARCH_FILE | number_results | less -EXRS
+            else
+                #local blanks=$((height - 5))
+                local blanks=5
+                (local i; for i in $(seq 1 $blanks); do echo; done)  > $SEARCH_FILE.nl
+                cat $SEARCH_FILE | number_results                   >> $SEARCH_FILE.nl
+
+                msg $"%s packages were found" "$(nq $cnt)"
+                msg
+                questn $"In the next step you will be shown a list of packages that you can scroll"
+                # Use <up-arrow>, <down-arrow>, <page-up>, and <page-down> to scroll list
+                questn $"Use %s, %s, %s, and %s to scroll the list" \
+                    "<$(pqq $UP_ARROW)>" "<$(pqq $DOWN_ARROW)>" "<$(pqq $PAGE_UP)>" "<$(pqq $PAGE_DOWN)>"
+
+                questn $"Position the package you want near the bottom and then press %s to continue" \
+                    "'$(pqq q)'"
+                msg
+                #echo
+                # Press <enter> to see the list
+
+                local enter="$(pqq $"Enter")"
+
+                questn $"Press %s to see the list"       "<$enter>"
+                questn $"Use %s to go to the main menu"  "'$(pqq q)'"
+                # Use 'r' to repeat the same search
+                questn $"Use %s to repeat same search"   "'$(pqq r)'"
+                # Use 's' to do a new search
+                questn $"Use %s to do new search"        "'$(pqq s)'"
+                quest "> "
+
+                read -n1 ans
+                case $ans in
+                    [qQ]*) return    ;;
+                    [sS]*) break     ;;
+                    [rR]*) continue  ;;
+                esac
+
+                # Never start with blank lines under the last line
+                local offset=$((blanks + 1))
+                [ $((offset + height)) -gt $((blanks + cnt + 2)) ] && offset=$((cnt + blanks - height + 2))
+
+                less -RXS +$offset --shift=.20 $SEARCH_FILE.nl
+
+            fi
+
+            # This loop is to repeat the 'number' input if needed.
+            # The action variable helps us to figure out what to do in the surrounding loop
+            local action  enter=$(pqq "Enter")
+
+            # LOOP: enter a number
+            while true; do
+
+                questn $"Press %s to skip picking a package" "<$enter>"
+                questn $"Or enter the number of each package you want to mark or install"
+                # Use '-' to indicate a range of numbers
+                questn $"Use %s to indicate a range of numbers" "$(pqq -)"
+                # [Use] 'q<enter>' to go the main menu, 'r<enter>' see the results again, 's<enter>' to do a new search
+                questn $"Use %s to go to main menu"       "$(pqq q)<$enter>"
+                questn $"Use %s to see the results again" "$(pqq r)<$enter>"
+                questn $"Use %s to do a new search"       "$(pqq s)<$enter>"
+                quest "> "
+
+                local input=
+                read input
+
+                case $input in
+                       "") break    ;;
+                    [qQ]*) return   ;;
+                    [rR]*) action=continue ; break ;;
+                    [sS]*) action=break    ; break ;;
+                esac
+
+                # Test for chars other than space, digits and comma
+                if ! is_num_range "$input"; then
+                    warn $"Invalid input.  Please try again"
+                    continue
+                fi
+
+                local num= bad= good= good_cnt=0
+                for num in $(num_range "$input" 1 $cnt); do
+                    if [ $num -lt 0 -o $num -gt $cnt ]; then
+                        bad=$bad${bad:+ }$num
+                    else
+                        good=$good${good:+ }$num
+                        good_cnt=$((good_cnt + 1))
+                    fi
+                done
+
+                if [ -n "$bad" ]; then
+                    warn $"The following numbers were out of range %s" "$bad"
+                fi
+
+                [ -n "$good" ] && break
+
+                warn $"No valid numbers were given.  Please try again"
+            done
+
+            case $action in
+                continue) continue ;;
+                   break) break    ;;
+            esac
+
+            local full_package=  pack_list=
+
+            msg $"Selected packages"
+
+            for num in $good; do
+                full_package=$(nl $SEARCH_FILE | sed -n -r "s/^\s*$num\s+//p")
+                if [ -z "$full_package" ]; then
+                    warn $"Could not find package number %s" "$num"
+                    continue
+                fi
+                show_package "$full_package" $num
+                pack_list=$pack_list${pack_list:+ }$(package_name "$full_package")
+            done
+
+            #multi_mark_or_install_menu $pack_list
+            # LOOP: package info
+
+            while true; do
+                action=
+                local menu=$(
+                    multi_mark_or_install_menu $pack_list
+                    mark_all_menu        $SEARCH_FILE
+                    menu_printf repeat   $"Repeat the same search"
+                    menu_printf search   $"Search again"
+                    menu_printf quit     $"Go back to main menu"
+                )
+
+                my_select 'ans' $"Please select an action" "$menu"
+
+                case $ans in
+                      info)      package_info "$full_package" ; continue   ;;
+                      mark)      mark_package "$full_package"              ;;
+                    *-mark)         mark_list "${ans%-mark}"               ;;
+                 *-install)      install_list "${ans%-install}"            ;;
+                    unmark)    unmark_package "$full_package"              ;;
+                   install)   install_package "$full_package" ; return     ;;
+                 uninstall) uninstall_package "$full_package" ; return     ;;
+                  mark-all)     mark_all_file $SEARCH_FILE                 ;;
+                unmark-all)   unmark_all_file $SEARCH_FILE                 ;;
+                    repeat) action=continue                                ;;
+                    search) action=break                                   ;;
+                      quit) return                                         ;;
+                         *) internal_error '2nd search result menu' "$ans" ;;
+                esac
+                break
+
+            done
+
+            case $action in
+                continue) continue ;;
+                   break) break    ;;
+            esac
+
+            my_select 'ans' $"Now what?" "$(search_again_menu)"
+
+            case $ans in
+            view-marked) do_view_marked ; return        ;;
+                 search) break                          ;;
+                 review) continue                       ;;
+                   quit) return                         ;;
+                      *) internal_error 'install menu' "$ans" ;;
+            esac
+        done
+    done
+}
+
+#------------------------------------------------------------------------------
+# Used twice within do_search().  This is the menu you see after you've marked
+# or unmarked a package.
+#------------------------------------------------------------------------------
+search_again_menu() {
+    menu_printf search  $"Do a new search"
+    menu_printf review  $"See search results again"
+    add_mark_entry
+    menu_printf quit    $"Return to main menu"
+}
+
+#------------------------------------------------------------------------------
+# Add parens and colorize each line to make it more clear what is marked and
+# what installed and what is both.
+#------------------------------------------------------------------------------
+color_results() {
+    # The first 2nd & 3rd expressions are for "undoing" grep highlighting
+
+    sed -r  -e "/^M/ s/(\x1B\[m\x1B\[K)/\1$mark_co/g" \
+            -e "/^I/ s/(\x1B\[m\x1B\[K)/\1$inst_co/g" \
+            -e "s/^(MI)(.*)/$inst_co$mark_co(MI)\2$nc_co/" \
+            -e "s/^(M)(.*)/$mark_co(\1)\2$nc_co/"  \
+            -e "s/^(I)(.*)/$inst_co(\1)\2$nc_co/"
+}
+
+
+#------------------------------------------------------------------------------
+# Add numbers and colorize a list of packages
+#------------------------------------------------------------------------------
+number_suggestions() {
+    color_suggestions | my_nl | color_numbers | color_headers
+}
+
+#------------------------------------------------------------------------------
+# Colorize the suggestions list.  This is similar to but not identical to
+# color_results()
+#------------------------------------------------------------------------------
+color_suggestions() {
+    # The first 2nd & 3rd expressions are for "undoing" grep highlighting
+
+    sed -r  -e "s/(\*+)/$bold_co\1\x1B[m\x1B[K/" \
+            -e "/^M/ s/(\x1B\[m\x1B\[K)/\1$mark_co/g" \
+            -e "/^I/ s/(\x1B\[m\x1B\[K)/\1$inst_co/g" \
+            -e "s/^([MI] [^ ]+)    /\1/" \
+            -e "s/^(MI [^ ]+)     /\1/" \
+            -e "s/^(MI)(.*)/$inst_co$mark_co(MI)\2$nc_co/" \
+            -e "s/^(M)(.*)/$mark_co(\1)\2$nc_co/"  \
+            -e "s/^(I)(.*)/$inst_co(\1)\2$nc_co/"
+}
+
+color_numbers() {
+    sed -r "s/^(\s*[0-9]+)\s/$m_co\1$quest_co)$nc_co /"
+}
+
+#------------------------------------------------------------------------------
+# We want to do this *after* my_nl() so my_nl() can easily ignore lines that
+# start with "#".
+#------------------------------------------------------------------------------
+color_headers() {
+    sed -r -e "s/^(#-+)/$bold_co\1$nc_co/" \
+           -e "s/^(# )(.*)/$bold_co\1$quest_co\2$nc_co/"
+}
+
+#------------------------------------------------------------------------------
+# Use the "nl" program to prefix each line with a number and then use sed to
+# colorize the the numbers
+#------------------------------------------------------------------------------
+number_results() {
+        color_results | nl | sed -r "s/^(\s*[0-9]+)\s/$m_co\1$quest_co)$nc_co /"
+}
+
+#------------------------------------------------------------------------------
+# Present a menu for how to deal with a selected package that is already
+# installed.
+#------------------------------------------------------------------------------
+uninstall_package() {
+    local ans  full=$1  pack=$(package_name "$1")
+
+    shout_subtitle $"Remove or Purge Menu"
+
+    local ans
+    show_package "$full"
+    my_select ans $"Please choose an action for this package" "$(uninstall_menu)"
+    case $ans in
+            remove) apt_get_cmd remove  $pack ;;
+             purge) apt_get_cmd purge   $pack ;;
+           install) apt_get_cmd install $pack ;;
+         reinstall) apt_get_cmd --reinstall install $pack ;;
+              quit) return  ;;
+              *) internal_error 'uninstall menu' "$ans" ;;
+    esac
+    update_package_status
+}
+
+#------------------------------------------------------------------------------
+# Choices for dealing with an installed package
+#------------------------------------------------------------------------------
+uninstall_menu() {
+    menu_printf remove    $"Un-install package [remove package but not its config files]"
+    menu_printf purge     $"Purge package [remove package AND its config files]"
+    menu_printf reinstall $"Reinstall package [even if it is up to date]"
+    menu_printf install   $"Install package [only if it is not up to date]"
+}
+
+#------------------------------------------------------------------------------
+# A "simple" wrapper around "apt-get".
+#------------------------------------------------------------------------------
+apt_get_cmd() {
+    local label=${1#--}  cmd="apt-get $*"
+    local fold_width=$(($(screen_width) - 5))
+    printf "=> %s\n" "$cmd" | fold -w $fold_width -s | tee -a $LOG_FILE
+
+    testing && return 0
+
+    start_timer
+    $cmd 2>&1                       #| tee -a $LOG_FILE
+    local ret=${PIPESTATUS[0]}
+    msg_elapsed_t "$label"
+
+    [ $ret -eq 0 ] && return 0
+    warn $"The %s command failed" "$(pqw apt-get)"
+    return 1
+}
+
+#------------------------------------------------------------------------------
+# This gets the search string and converts glob "*" and "?" into regexes.  This
+# conversion may not be a good idea.
+#------------------------------------------------------------------------------
+get_glob_string() {
+    # The Enter key
+    local var_nam=$1  enter=$(pqq $"Enter")
+    local line1=$"Please enter the term you want to search for"
+    local line2=$(printf $"Standard globbing wildcards %s and %s work" "'$(pqq '*')'" "'$(pqq '?')'")
+    local line3=$(printf $"Use an empty string or %s to return to main menu" "$(pqq q)<$enter>")
+
+    title=$(printf "%s\n%s\n\n%s\n" "$line1" "$line2" "$line3")
+
+    local input prompt=$(quest "> ")
+    quest "$title"
+    echo -en "\n$prompt"
+    read -r input
+
+    # Convert '*' and '?' to their regular expression equivalents
+    # First protect "." in the original string
+    input=${input//./\\.}
+    input=${input//\?/.}
+    input=${input//\*/.*}
+
+    eval $var_nam=\$input
+}
+
+#------------------------------------------------------------------------------
+# Count and display the number of matches for various search criteria.
+#------------------------------------------------------------------------------
+count_matches() {
+    local prefix=$1  lab1=$2  lab2=$3  found="Found"
+    eval local str=\$${prefix}_str
+
+    local cnt=$(perform_search "$str" | wc -l)
+
+    eval ${prefix}_cnt=\$cnt
+
+    local fmt="  %s $num_co%5s$m_co %s"
+    TOTAL_MATCHES=$((TOTAL_MATCHES + $cnt))
+    if [ $cnt -eq 1 ]; then
+        local match=$(perform_search "$str")
+        # FIXME: count lines and warn/error on -ne 1
+        # Also make sure length is not zero
+        eval ${prefix}_match=\$match
+
+        msg "$fmt"  "$found"  "$cnt"  "$lab1"
+        if [ -z "$FOUND_MATCH" ]; then
+            FOUND_MATCH=true
+            show_package "$match"
+        fi
+    else
+        msg "$fmt" "$found" "$cnt" "$lab2"
+    fi
+}
+
+#------------------------------------------------------------------------------
+# Count the number of ***'ed packages
+#------------------------------------------------------------------------------
+count_star_matches() {
+    local prefix=$1  lab1=$2  lab2=$3  stars=$4  found=$"Found"
+    eval local str=\$${prefix}_str
+
+    local cnt=$(star_search "$str" --count)
+
+    eval ${prefix}_cnt=\$cnt
+
+    local fmt="  %s $num_co%5s$m_co %s"
+    TOTAL_MATCHES=$((TOTAL_MATCHES + $cnt))
+    local lab=$lab2
+    [ $cnt -eq 1 ] && lab=$lab1
+
+    return
+
+    if [ $# -lt 4 ]; then
+        msg "  %s $num_co%3s$m_co %s" "$found" "$cnt" "$lab"
+    else
+        msg "  %s $num_co%3s$m_co %s %s" "$found" "$cnt" "$(starq "$stars")" "$lab"
+    fi
+}
+
+starq() { printf "%5s" "$1" | sed -r "s/(\*+)/$bold_co\1$m_co/" ; }
+
+
+#------------------------------------------------------------------------------
+# Uses information from in count_matches() to create menu entries for each
+# type of search result.  If there are no matches, do nothing, the first time
+# there is only one match then offer to install/uninstall or mark/unmark that
+# package.  If there is more than one match then offer to let the user view
+# those matches.
+#------------------------------------------------------------------------------
+add_to_result_menu() {
+    local prefix=$1  lab=$2
+    local cnt match
+    eval cnt=\$${prefix}_cnt
+    case $cnt in
+        0)  return ;;
+        1)  test -e $FOUND_MATCH_FILE && return
+
+            eval match=\$${prefix}_match
+            local package=$(package_name "$match")
+            echo "$match" > $FOUND_MATCH_FILE
+
+            mark_or_install_menu "$prefix-" "$match"
+
+            ;;
+
+            # View <25> <exact|leading|any name|description> results
+        *)  menu_printf "$prefix-view" $"View %s %s results" "$(nq $cnt)"  "$lab"  ;;
+    esac
+}
+
+#------------------------------------------------------------------------------
+# Add a entry for showing only the ***+ packages
+#------------------------------------------------------------------------------
+add_to_star_menu() {
+    local prefix=$1  view=$2  lab=$3  stars=$4
+    local cnt match
+    eval cnt=\$${prefix}_cnt
+    if [ $# -lt 4 ]; then
+        menu_printf "$prefix-view" "%s $num_co%3s$m_co %s" "$view" "$cnt"  "$lab"
+    else
+        menu_printf "$prefix-view" "%s $num_co%3s$m_co %s %s" "$view" "$cnt" "$(starq "$stars")"  "$lab"
+    fi
+}
+
+#------------------------------------------------------------------------------
+# This generates two menu entries for marking/unmarking a package and for
+# isntalling/uninstalling it.
+#------------------------------------------------------------------------------
+mark_or_install_menu() {
+    local prefix=$1  match=$2
+    [ -z "$match" ] && return
+
+    local package=$(package_name "$match")
+    local pq_pack=$(pq $package)
+
+    menu_printf "${prefix}info" $"Show more information about package %s" "$pq_pack"
+
+    if is_installed "$match"; then
+        menu_printf "${prefix}uninstall" $"Uninstall package %s" "$pq_pack"
+        return
+    fi
+
+    if is_marked "$match"; then
+        menu_printf "${prefix}unmark"   $"Unmark package %s"  "$pq_pack"
+    else
+        menu_printf "${prefix}mark"     $"Mark package %s"    "$pq_pack"
+    fi
+
+    menu_printf "${prefix}install"      $"Install package %s"   "$pq_pack"
+}
+
+#------------------------------------------------------------------------------
+#
+#------------------------------------------------------------------------------
+multi_mark_or_install_menu() {
+
+    if [ $# -eq 1 ]; then
+        mark_or_install_menu "" "$1"
+        return
+    fi
+
+    local list="$*"  db=$DB_FILE
+    local regex=${list// /|}
+
+    local mark_cnt=$(egrep --count "^($regex) " $db)
+    local to_mark=$(echo $(egrep "^($regex) " $db | sed "s/ .*//"))
+
+    case $mark_cnt in
+        0) ;;
+        1) menu_printf "$to_mark-mark" $"Mark selected, uninstalled package %s" "$(pq $to_mark)" ;;
+        *) menu_printf "$to_mark-mark" $"Mark %s selected, uninstalled packages" "$(nq $mark_cnt)" ;;
+    esac
+
+    local install_cnt=$(egrep --count "^(M )?($regex) " $db)
+    local to_install=$(echo $(egrep "^(M )?($regex) " $db | sed -e "s/^M //" -e "s/ .*//"))
+
+     case $install_cnt in
+        0) ;;
+        1) menu_printf "$to_install-install" $"install selected uninstalled package %s" "$(pq $to_install)" ;;
+        *) menu_printf "$to_install-install" $"install %s selected uninstalled packages" "$(nq $install_cnt)" ;;
+    esac
+}
+
+#------------------------------------------------------------------------------
+# Works on a STRING.  Sees if that string starts with "M"
+#------------------------------------------------------------------------------
+is_marked() {
+    local match=$1
+    [ -z "${match##M*}" ]
+    return $?
+}
+
+#------------------------------------------------------------------------------
+# Works on a STRING.  Sees if that string starts with" MI" or "I"
+#------------------------------------------------------------------------------
+is_installed() {
+    local match=$1
+    [ -z "${match##I*}" -o -z "${match##MI*}" ]
+    return $?
+}
+
+#------------------------------------------------------------------------------
+# Does the actual search.  If additional arguments are given after the first
+# then they are passed to grep.  This is currently used for coloring the
+# matches found in a description search.
+#------------------------------------------------------------------------------
+perform_search() {
+    local str=$1 iflag=i ; shift
+
+    # Any uppercase letter causes case sensitive search
+    [ -z "${str##*[A-Z]*}" ] && iflag=
+    GREP_COLORS="mt=$grep_co" grep "$@" -Eh$iflag "$str" $DB_FILE
+    #GREP_COLORS="mt=7" grep "$@" -Eh$iflag "$str" $DB_FILE
+    #GREP_COLORS="mt=1;37" grep "$@" -Eh$iflag "$str" $DB_FILE
+}
+
+#------------------------------------------------------------------------------
+# Search
+#------------------------------------------------------------------------------
+star_search() {
+    local str=$1  file=$SUGGESTED_FILE ; shift
+    egrep "$@" "$str" "$file"
+}
+
+#------------------------------------------------------------------------------
+#List all packages that a given set of packages depend on.
+#------------------------------------------------------------------------------
+list_depends() {
+    apt-cache depends $* | sed -n -r "s/^\s*(Pre)?Depends:\s*//p" | grep -v "^<" | sort -u
+
+    # add the headers as a dependency when installing a kernel
+    local pack
+    for pack in $*; do
+        case $pack in
+            linux-image-*) echo linux-headers-${pack#linux-image-} ;;
+        esac
+    done
+}
+
+#------------------------------------------------------------------------------
+# Strip off the leading (M)arked and (I)installed flags and the trailing
+# description to get the package name and nothing else.
+#------------------------------------------------------------------------------
+package_name() {
+    echo "$1" | sed -r -e "s/^[MI]+ //" -e "s/ .*//"
+}
+
+#==============================================================================
+# Check to see if all (most) list files exist as expected
+#==============================================================================
+
+#------------------------------------------------------------------------------
+# See if we need to run an "apt-get update".  The conversion from src file
+# entries to .list file names was created heuristically so there may be bugs
+# for cases I haven't explored.
+#------------------------------------------------------------------------------
+check_list_files() {
+    src_dir=${1:-$SOURCE_DIR}  list_dir=${2:-$LIST_DIR}
+
+    # LOOP: until list files check out
+    while true; do
+
+        local LIST_ERR_CNT=0  LIST_FOUND_CNT=0  LIST_OLDEST_T=999999999999
+
+        local type url repo other root ext
+
+        msg $"Checking source files ..."
+        while read type url repo other; do
+            [ -n "$type" ] || continue
+            case $repo in
+                *updates) continue ;;
+                *) ;;
+            esac
+            root=${url#*://}
+            root=${root//\//_}
+
+            #echo "$type $root $repo $other"
+            root=${root%_}_dists_$repo
+
+            local full=$list_dir/$root
+
+            if [ "$type" = "deb" ]; then
+                ext="_binary-${ARCH}_Packages"
+                find_list_file ${full}_InRelease \
+                    || find_list_file ${full}_Release \
+                    || list_error "${root}_Release or ${root}_InRelease"
+
+                for part in $other; do
+                    test_list_file ${full}_$part$ext
+                done
+
+            elif [ "$type" = "deb-src" ]; then
+                ext="_source_Sources"
+                for part in $other; do
+                    test_list_file ${full}_$part$ext
+                done
+            fi
+
+        done << Read_Sources
+$(grep -h "^\s*\(deb\|deb-src\)\>" $src_dir/*.list | sed "s/\[[^\s]*\]//")
+Read_Sources
+
+        local now_t=$(date +%s)
+        local max_interval=$((AUTO_UPDATE_INTERVAL * 60 * 60 * 24))
+        local interval=$(($(date +%s) - LIST_OLDEST_T))
+        local days=$((interval / 60 / 60 / 24))
+
+        (
+            echo
+            printf  "      Found list files: %s\n"  "$LIST_FOUND_CNT"
+            printf  "    Missing list files: %s\n"  "$LIST_ERR_CNT"
+            #printf  " Oldest list file time: %s\n"  "$LIST_OLDEST_T"
+            #printf  "  Seconds since update: %s\n"  "$interval"
+            #printf  "     Days since update: %s\n"  "$days"
+            echo
+        ) >> $LOG_FILE
+
+        local apt_get=$(pq apt-get update)
+        local run_now=$(printf $"Run %s now?" "$apt_get")
+
+        if [ $LIST_FOUND_CNT -eq 0 ]; then
+            Msg $"No list files were found"
+            # An <apt-get update> is required in order to continue
+            Msg $"An %s is required in order to continue" "$apt_get"
+            # FIXME BACK_TO_MAIN
+            YES_no "$run_now" || return 1
+
+        elif [ $LIST_ERR_CNT -gt 0 ]; then
+            Msg $"It appears that at least one list file is missing"
+            # You should probably run <apt-get update> now
+            Msg $"You should probably run %s now" "$apt_get"
+            YES_no "$run_now" || return 0
+
+    #--    elif [ $interval -gt $max_interval ]; then
+    #--        Msg "At least one list file is at least %s day(s) old" "$days"
+    #--        Msg "You should probably run %s now" "$apt_get"
+    #--        YES_no "$run_now" || return
+        else
+            return 0
+        fi
+
+        do_update
+    done
+}
+
+#------------------------------------------------------------------------------
+# In addition to finding the file, we also record its modded time and bumped
+# the oldest modded time.  But this seems to be utterly pointless since the
+# dates on the .list files are wildly inaccurate (for these purposes).
+#------------------------------------------------------------------------------
+find_list_file() {
+    local file=$1
+
+    test -e $file || return 1
+    local modded=$(stat -c %Y $file)
+    LIST_FOUND_CNT=$((LIST_FOUND_CNT + 1))
+    [ $LIST_OLDEST_T -gt $modded ] && LIST_OLDEST_T=$modded
+    return 0
+}
+
+#------------------------------------------------------------------------------
+# Find the file or record an error
+#------------------------------------------------------------------------------
+test_list_file() {
+    #echo "  $(basename $1)"
+    find_list_file $1 || list_error $(basename $1)
+}
+
+#------------------------------------------------------------------------------
+# Print out an error message and add to the count of errors
+#------------------------------------------------------------------------------
+list_error() {
+    local name=$1
+    LIST_ERR_CNT=$((LIST_ERR_CNT + 1))
+    echo "Missing list file(s): $name" >> $LOG_FILE
+}
+
+#=== End of List File Stuff ===================================================
+
+#------------------------------------------------------------------------------
+# Do an "apt-get update" and then trigger a check for upgrades and finally
+# regenerate our own database files
+#------------------------------------------------------------------------------
+do_update() {
+    # Doing <apt-get update>
+    msg $"Doing %s" "$(pq apt-get update)"
+
+    apt_get_cmd update
+    local ret=$?
+
+    if [ $ret -ne 0 ]; then
+        warn $"There was a problem running %s" "$(pqw apt-get update)"
+        yes_NO $"Do you want to continue anyway" || return 1
+    fi
+    UPGRADE_CNT=
+
+    [ "$JUST_UPDATE" ] && return
+
+    check_for_upgrades
+    generate_database_files
+}
+
+#------------------------------------------------------------------------------
+# Use a small Perl script (for hashing) to create a list of all packages with
+# the installed packages marked with a leading "I".  We also make a marked
+# version of the list of suggested files.
+#------------------------------------------------------------------------------
+generate_database_files() {
+    msg $"Creating database ..."
+    start_timer
+    local db=${1:-$DB_FILE}   installed=${2:-$INSTALLED_FILE}
+    list_installed > $installed
+    list_all | mark-installed-debs $installed > $db
+
+    DB_FILE_LIST=$db
+
+    mkdir -p $SUGGESTED_DB_DIR
+    local type
+    for type in $SUGGEST_TYPES; do
+        local from=$SUGGESTED_DIR/$type.list
+        local to=$SUGGESTED_DB_DIR/$type.list
+        test -r $from || continue
+        cat $from | mark-installed-debs $installed > $to
+        DB_FILE_LIST="$DB_FILE_LIST $to"
+    done
+
+    # data base generation <took 12 seconds>
+    msg_elapsed_t $"database generation"
+}
+
+#------------------------------------------------------------------------------
+# Update the installed status of a single package.
+#------------------------------------------------------------------------------
+update_package_status() {
+    local pack=$1
+    if really_is_installed $pack; then
+        mark_as_installed $pack
+    else
+        mark_as_uninstalled $pack
+    fi
+}
+
+#------------------------------------------------------------------------------
+# Get "ground truth" on whether a package really is installed or not (instead
+# of relying on how it was marked in a file.
+#------------------------------------------------------------------------------
+really_is_installed() {
+    local status  pack=$1
+    testing && return 0
+    status=$(dpkg-query -f '${db:Status-Status}' --show "$pack" 2>/dev/null) \
+        || return 1
+    [ "$status" = 'installed' ]
+    return $?
+}
+
+#------------------------------------------------------------------------------
+# Mark a package installed
+#------------------------------------------------------------------------------
+mark_as_installed() {
+    local pack=$1  files=$DB_FILE_LIST
+    sed -i -r -e "s/^($pack )/I \1/"  -e "s/^M ($pack )/MI \1/" $files
+}
+
+#------------------------------------------------------------------------------
+# Mark a package uninstalled
+#------------------------------------------------------------------------------
+mark_as_uninstalled() {
+    local pack=$1  files=$DB_FILE_LIST
+    sed -i -r -e "s/^I ($pack )/\1/" -e "s/^MI ($pack )/M \1/" $files
+}
+
+#------------------------------------------------------------------------------
+# Mark a package unmarked and installed, for use in install_marked()
+#------------------------------------------------------------------------------
+unmark_and_mark_installed() {
+    local pack ilist files=$DB_FILE_LIST
+
+    start_timer
+    msg $"Updating database ..."
+
+    # Build a regular expression so we only have to edit each file once
+    for pack; do
+        really_is_installed $pack && ilist=$ilist${ilist:+|}$pack
+    done
+
+    #echo "ilist: $ilist"
+    sed -i -r -e "s/^M?I? ?(($ilist) )/I \1/" $files
+    MARK_CNT=$(grep --count "^M" $db)
+
+    # database update <took 4 seconds>
+    msg_elapsed_t $"database update"
+}
+
+#------------------------------------------------------------------------------
+# Mark a package and all uninstalled dependencies   NOT USED
+#------------------------------------------------------------------------------
+mark_package_and_deps() {
+    local pack=$(package_name "$1")  db=$DB_FILE files=$DB_FILE_LIST
+    _mark_package "$pack"
+
+    #testing && return
+
+    # ignore <...> depends for now
+    local all_deps=$(list_depends "$pack")
+    msg $"Found %s dependencies" "$(nq $(echo $all_deps | wc -w))"
+    local regex=$(echo $all_deps | tr ' ' '|')
+    #echo "regex: $regex"
+    local cnt=$(egrep --count "^($regex) " $db)
+    arrow_msg $"Marking %s uninstalled dependencies" "$(nq $cnt)"
+    echo $(egrep "^($regex) " $db | sed "s/ .*//")
+    sed -i -r "s/^($regex) /M \1 /" $files
+    MARK_CNT=$((MARK_CNT + cnt))
+}
+
+#------------------------------------------------------------------------------
+# Mark a package and report dependencies
+#------------------------------------------------------------------------------
+mark_package() {
+    local pack=$(package_name "$1")  db=$DB_FILE files=$DB_FILE_LIST
+    _mark_package "$pack"
+
+    #testing && return
+
+    local all_deps=$(list_depends "$pack")
+    msg $"found %s dependencies" "$(nq $(echo $all_deps | wc -w))"
+    local regex=$(echo $all_deps | tr ' ' '|')
+    #echo "regex: $regex"
+    local cnt=$(egrep --count "^($regex) " $db)
+    msg $"found %s unmet dependencies" "$(nq $cnt)"
+    local unmet_deps=$(egrep "^($regex) " $db | sed "s/ .*//")
+
+    local fold_width=$(($(screen_width) - 5))
+    log_it_q echo $unmet_deps | fold -w $fold_width -s
+
+    local size=$(package_size $pack $unmet_deps)
+    msg $"This package and unmet dependencies will add %s Meg" "$(nq $size)"
+}
+
+
+#------------------------------------------------------------------------------
+# Mark a single package if it is not already marked
+#------------------------------------------------------------------------------
+_mark_package() {
+    local pack=$1  db=${2:-$DB_FILE}
+
+    # Don't mark an already marked package
+    egrep -q "^(I )?$pack " $db || return
+
+    arrow_msg $"Marking package %s" "$(pq $pack)"
+    sed -i -r -e "s/^(I $pack )/M\1/" -e "s/^($pack )/M \1/" $db
+    MARK_CNT=$((MARK_CNT + 1))
+}
+
+#------------------------------------------------------------------------------
+# Umark a single package if it is marked
+#------------------------------------------------------------------------------
+unmark_package() {
+    local pack=$(package_name "$1")  db=${2:-$DB_FILE}
+    grep -q "^MI? $pack " $db && return
+
+    arrow_msg $"Unmark package %s" "$(pq $pack)"
+    sed -i -r -e "s/^M(I $pack )/\1/" -e "s/^M ($pack )/\1/" $db
+    MARK_CNT=$((MARK_CNT - 1))
+}
+
+
+#------------------------------------------------------------------------------
+# Unmark all packages
+#------------------------------------------------------------------------------
+unmark_all() {
+    local db=$DB_FILE  files=$DB_FILE_LIST
+    local cnt=$(grep --count "^M" $db)
+
+    sed -i -r "s/^M ?//" $files
+    arrow_msg "$(printf_plural $cnt $"Unmarked %s package" $"Unmarked %s packages")"
+
+    MARK_CNT=0
+}
+
+#------------------------------------------------------------------------------
+# Provide information about a package
+#------------------------------------------------------------------------------
+package_info() {
+    local full=$1  pack=$(package_name "$1") db=$DB_FILE
+
+    #shout_subtitle "Package Info"
+
+    show_package "$full"
+
+    local all_deps=$(list_depends "$pack")
+    local all_cnt=$(echo $all_deps | wc -w)
+    msg $"found %s dependencies" "$(nq $all_cnt)"
+
+    local regex=$(echo $all_deps | tr ' ' '|')
+
+    # want only un-installed packages
+    local unmet_deps
+    if [ $all_cnt -gt 0 ]; then
+        unmet_deps=$(egrep "^(M )?($regex) " $db | sed -r -e "s/^MI? //" -e "s/ .*//")
+        local real_cnt=$(echo "$unmet_deps" | wc -l)
+        msg $"found %s unmet dependencies" "$(nq $real_cnt)"
+    fi
+
+    local unmet_deps=$(egrep "^($regex) " $db | sed "s/ .*//")
+
+    local fold_width=$(($(screen_width) - 5))
+    log_it_q echo $unmet_deps | fold -w $fold_width -s
+
+    local size=$(package_size $pack $unmet_deps)
+    msg $"This package and unmet dependencies will add %s Meg" "$(nq $size)"
+
+    if testing; then
+        press_enter
+        return
+    fi
+
+    apt-cache show $pack | show_deb_info
+
+    yes_NO $"Do you want to see more detailed information?" || return
+
+    apt-cache show $pack | sed -r "s/^([A-Za-z0-9-]+):/$m_co\1:$nc_co/" | less -SR
+
+    #press_enter
+}
+
+#------------------------------------------------------------------------------
+# Display text between "Description-en:" and the next "Whatever:"
+#------------------------------------------------------------------------------
+show_deb_info() {
+    while read line; do
+        case $line in
+            Description-en:*) ;;
+            *) continue;
+        esac
+        echo "$cyan${line#Description-en: }$nc_co"
+        break
+    done
+
+    while read line; do
+        echo "$line" | egrep -q "^[A-Za-z0-9-]+:" && break
+        echo "${line#.}"
+    done
+}
+#------------------------------------------------------------------------------
+# Install a single package
+#------------------------------------------------------------------------------
+install_package() {
+    local full=$1  pack=$(package_name "$1")  db=${2:-$DB_FILE}
+
+    shout_subtitle $"Install package %s" "$pack"
+
+    show_package "$full"
+
+    local all_deps=$(list_depends "$pack")
+    local all_cnt=$(echo $all_deps | wc -w)
+    msg $"found %s dependencies" "$(nq $all_cnt)"
+
+    local regex=$(echo $all_deps | tr ' ' '|')
+
+    # want only un-installed packages
+    local unmet_deps
+    if [ $all_cnt -gt 0 ]; then
+        unmet_deps=$(egrep "^(M )?($regex) " $db | sed -r -e "s/^MI? //" -e "s/ .*//")
+        local real_cnt=$(echo "$unmet_deps" | wc -l)
+        msg $"found %s unmet dependencies that will also get installed" "$(nq $real_cnt)"
+    fi
+
+    local unmet_deps=$(egrep "^($regex) " $db | sed "s/ .*//")
+
+    local fold_width=$(($(screen_width) - 5))
+    log_it_q echo $unmet_deps | fold -w $fold_width -s
+
+    local size=$(package_size $pack $unmet_deps)
+    msg $"This package and unmet dependencies will add %s Meg" "$(nq $size)"
+    YES_no $"Do you want to install this package now?" || return
+
+    msg $"Installing %s" "$(pq $pack)"
+    apt_get_cmd install "$pack $(echo $unmet_deps)"
+
+    unmark_and_mark_installed $pack $unmet_deps
+    press_enter
+}
+
+#------------------------------------------------------------------------------
+# Install all files marked in the main database that are NOT yet installed.
+#------------------------------------------------------------------------------
+install_marked() {
+    local file=${1:-$DB_FILE}  db=${1:-$DB_FILE}
+
+    local packs=$(grep "^M " $file | sed -e "s/^M //" -e "s/ .*//")
+    local cnt=$(echo $packs | wc -w)
+    msg $"Found %s un-installed marked packages" "$(nq $cnt)"
+
+    if [ $cnt -le 0 ]; then
+        warn $"Nothing to install"
+        return
+    fi
+    install_list "$(echo $packs)"
+}
+
+#------------------------------------------------------------------------------
+# Install all packages from a list
+#------------------------------------------------------------------------------
+install_list() {
+    local packs=$1  db=$DB_FILE
+
+    local pack_cnt=$(echo "$packs" | wc -w)
+    msg_plural "$pack_cnt"  $"Install %s package" $"Install %s packages"
+
+    local fold_width=$(($(screen_width) - 5))
+    echo $packs | fold -s -w $fold_width
+
+    local all_deps=$(list_depends $packs)
+    local all_cnt=$(echo $all_deps | wc -w)
+    msg $"found %s dependencies" "$(nq $all_cnt)"
+
+    local regex=$(echo $all_deps | tr ' ' '|')
+
+    # want only un-installed packages
+    local unmet_deps
+    if [ $all_cnt -gt 0 ]; then
+        unmet_deps=$(egrep "^(M )?($regex) " $db | sed -r -e "s/^MI? //" -e "s/ .*//")
+        local real_cnt=$(echo "$unmet_deps" | wc -l)
+        msg $"found %s unmet dependencies that will also get installed" "$(nq $real_cnt)"
+        log_it_q echo $unmet_deps | fold -w $fold_width -s
+    fi
+
+    local size=$(package_size $packs $unmet_deps)
+    msg $"The packages and unmet dependencies will add %s Meg" "$(nq $size)"
+
+    case $((pack_cnt + real_cnt)) in
+        1) YES_no $"Install this package?"  || return ;;
+        *) YES_no $"Install these packages?" || return ;;
+    esac
+    apt_get_cmd install $(echo $packs)
+
+    unmark_and_mark_installed $(echo $packs $unmet_depends)
+    press_enter
+}
+
+#------------------------------------------------------------------------------
+# Size of all marked packages in a file
+#------------------------------------------------------------------------------
+marked_size() {
+    local file=${1:-$DB_FILE}  db=${1:-$DB_FILE}
+
+    local packs=$(grep "^M " $file | sed -e "s/^M //" -e "s/ .*//")
+    if testing; then
+        echo 1777
+    else
+        apt-cache show $(echo $packs) | grep -i "^installed-size:" \
+            | awk '{tot = tot + $2} END{printf "%4.2f\n", (tot / 1024)}'
+    fi
+}
+
+#------------------------------------------------------------------------------
+# The installed size of one or more packages
+#------------------------------------------------------------------------------
+package_size() {
+    if testing; then
+        echo 1777
+        return
+    fi
+    apt-cache show $* | grep -i "^installed-size:" \
+        | awk '{tot = tot + $2} END{printf "%4.2f\n", (tot / 1024)}'
+}
+
+#------------------------------------------------------------------------------
+# This menu gives options inside of do_view_marked().
+#------------------------------------------------------------------------------
+mark_menu() {
+    [ $MARK_CNT -gt 0 ] || return
+    local cnt=$MARK_CNT
+    menu_printf_plural install-marked "$cnt" $"Install %s marked package"  $"Install all %s marked packages"
+    menu_printf_plural    view-marked "$cnt" $"View %s marked package"     $"View all %s marked packages"
+    menu_printf_plural     unmark-all "$cnt" $"Unmark %s marked package"   $"Unmark all %s marked packages"
+}
+
+#------------------------------------------------------------------------------
+# Optional view, install, and unmark, the marked files.
+#------------------------------------------------------------------------------
+do_view_marked() {
+    local db=${1:-$DB_FILE}  local mark_co=
+
+    shout_subtitle $"View or Install Marked Packages"
+
+    local enter="$(pqq $"Enter")"
+
+    while true; do
+
+        grep "^M" $db > $SEARCH_FILE
+        local cnt=$(cat $SEARCH_FILE | wc -l)
+        if [ $cnt -ne $MARK_CNT ]; then
+            warn "Mark count adjusted from %s to %s" $MARK_CNT $cnt
+            MARK_CNT=$cnt
+        fi
+
+        if [ $cnt -le 0 ]; then
+            warn $"No marked packages were found"
+            return
+        fi
+
+        local menu=$(
+            mark_menu
+            menu_printf quit $"Go back to main menu"
+        )
+
+        local marked_size=$(marked_size)
+        msg $"Marked packages will add %s Meg" "$(nq $marked_size)"
+
+        local ans
+        my_select ans $"Please select an action" "$menu"
+
+        case $ans in
+             view-marked)                         ;;
+          install-marked) install_marked ; return ;;
+              unmark-all) unmark_all     ; return ;;
+                    quit) return                  ;;
+                    *) internal_error 'view mark menu' "$ans"
+        esac
+
+        local height=$(screen_height)
+        if [ $cnt -lt $((height - 5)) ]; then
+            cat $SEARCH_FILE | color_results | less -EXRS
+            press_enter
+        else
+            local blanks=5
+            (local i; for i in $(seq 1 $blanks); do echo; done)  > $SEARCH_FILE.nl
+            cat $SEARCH_FILE | color_results                    >> $SEARCH_FILE.nl
+
+            msg $"%s packages were found" $cnt
+            msg
+            questn $"In the next step you will been shown a list of packages that you can scroll"
+
+            questn $"Use %s, %s, %s, and %s to scroll the list" \
+                "<$(pqq $UP_ARROW)>" "<$(pqq $DOWN_ARROW)>" "<$(pqq $PAGE_UP)>" "<$(pqq $PAGE_DOWN)>"
+
+            questn $"Position the package you want near the bottom and then press %s to continue" "'$(pqq q)'"
+            msg
+            questn $"Press %s to see the list"     "<$enter>"
+            questn $"Use %s to go the main menu"   "$(pqq q)<$enter>"
+            questn $"Use %s to do another search"  "$(pqq s)<$enter>"
+
+
+            read ans
+            case $ans in
+                [qQ]*) return ;;
+                [sS]*) break  ;;
+            esac
+
+            # Never start with blank lines under the last line
+            local offset=$((blanks + 1))
+            [ $((offset + height)) -gt $((blanks + cnt + 2)) ] && offset=$((cnt + blanks - height + 2))
+
+            less -RXS +$offset --shift=.20 $SEARCH_FILE.nl
+        fi
+    done
+}
+
+#------------------------------------------------------------------------------
+# Show a list of suggested packages and allow user to mark and/or install them
+#
+#------------------------------------------------------------------------------
+do_suggested() {
+    local type=$1  title=$(suggest_title $1)  db=$DB_FILE
+    local SUGGESTED_FILE=$SUGGESTED_DB_DIR/$type.list
+
+    local mark_cnt=0
+    local ans
+    while true; do
+        # Suggested <Command Line> packages
+        shout_subtitle $"Suggested %s Packages" "$title"
+
+        local   all_str="^[MIa-z0-9]"
+        local  five_str="^[MIa-z0-9].*\*{5}"
+        local  four_str="^[MIa-z0-9].*\*{4}"
+        local three_str="^[MIa-z0-9].*\*{3}"
+        local   two_str="^[MIa-z0-9].*\*{2}"
+        local   one_str="^[MIa-z0-9].*\*{1}"
+        local  zero_str="^[MIa-z0-9][^\*]+$"
+
+        local all_cnt=    five_cnt=    four_cnt=    three_cnt=    two_cnt=    one_cnt=
+        local all_match=  five_match=  four_match=  three_match=  two_match=  one_match=
+
+        local TOTAL_MATCHES=0  FOUND_MATCH=
+        #
+        count_star_matches   all   "total suggestion" "total suggestions"
+        count_star_matches  five   "star package"     "star packages"  "*****"
+        count_star_matches  four   "star package"     "star packages"  "****+"
+        count_star_matches three   "star package"     "star packages"  "***+"
+        #count_star_matches   two  "package"     "star packages  "**+""
+        #count_star_matches   one  "package"     "star packages" "*+"
+        count_star_matches   zero  "zero star package" "no star packages" ""
+
+        if [ $TOTAL_MATCHES -eq 0 ]; then
+            warn $"No suggestions were found!"
+            # error message if things are reall not working
+            warn $"Check for the file %s" $SUGGESTED_FILE
+            return
+        fi
+
+        # View <16> <***> star packages
+        local view=$"View"
+
+        # View all <40> suggested packages
+        local view_all=$"View all"
+
+       # Need to use a file because the commands below are in a subshell
+
+        rm -f $FOUND_MATCH_FILE
+        local star_menu=$(
+            [ $mark_cnt -gt 0 ] && add_mark_entry
+            # View all <25> suggested packages
+            add_to_star_menu all    "$view_all" $"suggested packages"
+            # View <16> <***> star packages
+            add_to_star_menu five   "$view"     $"star packages"      "*****"
+            add_to_star_menu four   "$view"     $"star packages"      "****+"
+            add_to_star_menu three  "$view"     $"star packages"      "***+"
+            # View <32> zero star packages
+            add_to_star_menu zero   "$view"     $"zero star packages" ""
+
+            menu_printf             skip        $"Skip to the next step (don't view packages)"
+            menu_printf             quit        $"Go back to main menu"
+        )
+
+        local ans
+        my_select ans $"Please select which packages to view" "$star_menu"
+
+        local action=${ans#*-}
+        local search_type=${ans%%-*}
+
+        local skip=  regex=
+        case $ans in
+         view-marked) do_view_marked ; return         ;;
+            all-view) regex="^"                       ;;
+              *-view) eval regex=\$${search_type}_str ;;
+                skip) skip=true                       ;;
+                quit) return                          ;;
+                   *) internal_error 'star menu 1' "$ans" ;;
+        esac
+
+        if [ "$action" = 'view' ]; then
+            #star_search "$regex" -e "^#" -e "^$" -e > $SEARCH_FILE
+            star_search "$regex" > $SEARCH_FILE
+            local pack_cnt=$(egrep --count "^[MI0-9a-z]" $SEARCH_FILE)
+            local line_cnt=$(cat $SEARCH_FILE | wc -l)
+            local height=$(screen_height)
+        fi
+
+        if [ "$skip" ]; then
+            :
+
+        elif [ $line_cnt -lt $((height - 5)) ]; then
+            echo
+            cat $SEARCH_FILE | number_suggestions | less -EXRS
+        else
+            local blanks=5
+            (local i; for i in $(seq 1 $blanks); do echo; done)  > $SEARCH_FILE.nl
+            cat $SEARCH_FILE | number_suggestions               >> $SEARCH_FILE.nl
+
+            local enter="$(pqq $"Enter")"
+            local ucnt=$(egrep --count "^(M |[a-z0-9])" $SEARCH_FILE)
+
+            msg $"%s packages were found (%s uninstalled)" "$(nq $pack_cnt)" "$(nq $ucnt)"
+
+            msg
+            questn $"In the next step you will been shown a list of packages that you can scroll"
+
+            # Use <up-arrow>, <down-arrow>, <page-up>, and <page-down> to scroll list
+            questn $"Use %s, %s, %s, and %s to scroll the list" \
+                "<$(pqq $UP_ARROW)>" "<$(pqq $DOWN_ARROW)>" "<$(pqq $PAGE_UP)>" "<$(pqq $PAGE_DOWN)>"
+
+            questn $"Position the package you want near the bottom and then press %s to continue" "'$(pqq q)'"
+            msg
+            questn $"Press %s to see the list, %s to go the main menu, %s to search again" \
+                "<$enter>" "$(pqq q)" "$(pqq r)"
+
+            local xxx
+            read -n1 ans
+            #read xxx -t .01
+            case $ans in
+                [qQ]*) return   ;;
+                [rR]*) continue ;;
+            esac
+
+            # Never start with blank lines under the last line
+            local offset=$((blanks + 1))
+            [ $((offset + height)) -gt $((blanks + line_cnt + 2)) ] && offset=$((line_cnt + blanks - height + 2))
+
+            less -RXS +$offset --shift=.20 $SEARCH_FILE.nl
+        fi
+
+        local action=  enter=$(pqq $"Enter")
+
+        # LOOP: enter a number
+        while true; do
+            [ "$skip" ] && break
+            questn $"Press %s to skip picking a package" "<$enter>"
+            questn $"Or enter the number of each package you want to mark or install"
+            questn $"Use %s to indicate a range of numbers" "$(pqq -)"
+            questn $"Use %s to go to main menu"        "$(pqq q)<$enter>"
+            questn $"Use %s to see the results again"  "$(pqq r)<$enter>"
+            quest "> "
+
+            local input=
+            read input
+
+            case $input in
+                   "") break    ;;
+                [qQ]*) return   ;;
+                [rR]*) action=continue ; break ;;
+            esac
+
+            # Test for chars other than space, digits and comma
+            if ! is_num_range "$input"; then
+                warn $"Invalid input.  Please try again"
+                continue
+            fi
+
+            local num= bad= good= good_cnt=0
+            for num in $(num_range "$input" 1 $pack_cnt); do
+                if [ $num -lt 0 -o $num -gt $pack_cnt ]; then
+                    bad=$bad${bad:+ }$num
+                else
+                    good=$good${good:+ }$num
+                    good_cnt=$((good_cnt + 1))
+                fi
+            done
+
+            [ -n "$bad" ] && warn $"The following numbers were out of range %s" "$bad"
+
+            [ -n "$good" ] && break
+
+            warn $"No valid numbers were given.  Please try again"
+        done
+
+        case $action in
+            continue) continue ;;
+               break) break    ;;
+        esac
+
+        local full_package=  pack_list=
+
+        msg $"Selected packages"
+
+        for num in $good; do
+            full_package=$(cat $SEARCH_FILE |  my_nl | sed -n -r "s/^\s*$num\s+//p")
+            if [ -z "$full_package" ]; then
+                warn $"Could not find package number %s" "$num"
+                continue
+            fi
+            show_package "$full_package" $num
+            pack_list=$pack_list${pack_list:+ }$(package_name "$full_package")
+        done
+
+        local action=
+        # LOOP: package info
+        while true; do
+
+            local menu=$(
+                multi_mark_or_install_menu $pack_list
+                mark_all_menu        $SEARCH_FILE
+                install_all_menu     $SEARCH_FILE
+                menu_printf suggest  $"See suggestions again"
+                menu_printf quit     $"Go back to main menu"
+            )
+
+            my_select ans $"Please select an action" "$menu"
+
+            case $ans in
+                      info)        package_info "$full_package" ; continue ;;
+                      mark)        mark_package "$full_package"            ;;
+                    unmark)      unmark_package "$full_package"            ;;
+                   install)     install_package "$full_package"            ;;
+                    *-mark)           mark_list "${ans%-mark}"             ;;
+                 *-install)        install_list "${ans%-install}"          ;;
+                 uninstall)   uninstall_package "$full_package"            ;;
+                  mark-all)       mark_all_file $SEARCH_FILE               ;;
+                unmark-all)     unmark_all_file $SEARCH_FILE               ;;
+            install-marked)     install_marked  $SEARCH_FILE               ;;
+                   suggest) action=continue                                ;;
+                      quit) return                                         ;;
+                        *) internal_error 'bottom suggestion menu' "$ans" ;;
+            esac
+
+            mark_cnt=$(grep --count "^M" $SUGGESTED_FILE)
+
+            break
+        done
+
+        case $action in
+            continue) continue;;
+        esac
+    done
+}
+
+#------------------------------------------------------------------------------
+# Mark all unmarked, uninstalled packages that are listed in a file
+#------------------------------------------------------------------------------
+mark_all_file_and_deps() {
+    local file=$1  db=$DB_FILE  files=$DB_FILE_LIST
+    local packs=$(egrep "^[a-z0-9]" $file | sed -e "s/I //" -e "s/ .*//")
+    local regex=$(echo $packs | tr ' ' '|')
+    #echo $regex
+    #sed -r -i -e "s/^I ($regex) /MI \1 /" -e "s/^($regex) /M \1 /" $files
+    sed -r -i "s/^($regex) /M \1 /" $files
+    local cnt=$(echo $packs | wc -w)
+    arrow_msg "Marked %s previously unmarked packages" "$(nq $cnt)"
+    MARK_CNT=$((MARK_CNT + cnt))
+
+    local all_deps=$(list_depends $(echo $packs))
+
+    msg "found %s dependencies" "$(nq $(echo $all_deps | wc -w))"
+    regex=$(echo $all_deps | tr ' ' '|')
+    local unmet_deps=$(egrep "^($regex) " $db | sed "s/ .*//")
+    cnt=$(echo "$unmet_deps" | wc -l)
+    arrow_msg "Marked %s unmet dependencies" "$(nq $cnt)"
+    sed -i -r "s/^($regex) /M \1 /" $files
+    #echo "real marked: $(grep --count "^M" $db)"
+    MARK_CNT=$((MARK_CNT + cnt))
+}
+
+#------------------------------------------------------------------------------
+# Mark all uninstalled packages listed in a file.  Report on deps
+#------------------------------------------------------------------------------
+mark_all_file() {
+    local file=$1  db=$DB_FILE  files=$DB_FILE_LIST
+    local packs=$(egrep "^[a-z0-9]" $file | sed -e "s/I //" -e "s/ .*//")
+    mark_list "$packs"
+}
+
+#------------------------------------------------------------------------------
+# Mark list, mark all packages in a list
+#------------------------------------------------------------------------------
+mark_list() {
+    local packs=$1  db=$DB_FILE  files=$DB_FILE_LIST
+    local regex=$(echo $packs | tr ' ' '|')
+    #echo $regex
+    #sed -r -i -e "s/^I ($regex) /MI \1 /" -e "s/^($regex) /M \1 /" $files
+    sed -r -i "s/^($regex) /M \1 /" $files
+    local cnt=$(echo $packs | wc -w)
+    arrow_msg $"Marked %s previously unmarked packages" "$(nq $cnt)"
+    MARK_CNT=$((MARK_CNT + cnt))
+
+    local all_deps=$(list_depends $(echo $packs))
+
+    msg $"found %s dependencies" "$(nq $(echo $all_deps | wc -w))"
+    regex=$(echo $all_deps | tr ' ' '|')
+    local unmet_deps=$(egrep "^($regex) " $db | sed "s/ .*//")
+    cnt=$(echo "$unmet_deps" | wc -l)
+    msg $"found %s unmet dependencies" "$(nq $cnt)"
+
+    local fold_width=$(($(screen_width) - 5))
+    log_it_q echo $unmet_deps | fold -w $fold_width -s
+
+    local size=$(package_size $packs $unmet_deps)
+    msg $"The packages and unmet dependencies will add %s Meg" "$(nq $size)"
+}
+
+#------------------------------------------------------------------------------
+# Unmark all packages listed inside of a file
+#------------------------------------------------------------------------------
+unmark_all_file() {
+    local file=$1  files=$DB_FILE_LIST
+    local packs=$(egrep "^MI? [a-z0-9]" $file | sed -r -e "s/MI? //" -e "s/ .*//")
+    local regex=$(echo $packs | tr ' ' '|')
+    #echo $regex
+    sed -r -i -e "s/^M ($regex) /\1 /" -e "s/^MI ($regex) /I \1 /"  $files
+
+    local cnt=$(echo $packs | wc -w)
+    arrow_msg $"Unmarked all %s previously marked packages" "$(nq $cnt)"
+
+    local mcnt=$(grep --count "^M" $DB_FILE)
+    [ $mcnt -gt 0 ] && msg_plural $mcnt $"%s package is still marked" $"%s packages are still marked"
+
+    MARK_CNT=$((MARK_CNT - cnt))
+}
+
+#------------------------------------------------------------------------------
+# menu for marking or unmarking all packages within a file.  Used in both
+# do_suggested() and do_search()
+#------------------------------------------------------------------------------
+mark_all_menu() {
+    local file=$1
+    test -r $file || return
+
+    #local    total=$(egrep --count "^[IMa-z0-9]" $file)
+    local can_mark=$(egrep --count "^[a-z0-9]"   $file)
+    local   marked=$(egrep --count "^M"          $file)
+
+    [ $can_mark -gt 0 ] \
+        && menu_printf_plural   mark-all $can_mark $"Mark %s unmarked, uninstalled package" $"Mark %s unmarked, uninstalled packages"
+
+    [ $marked -gt 0 ]\
+        && menu_printf_plural unmark-all $marked   $"Unmark %s marked package" $"Unmark %s marked packages"
+
+    #[ $marked -gt 0 ] \
+    #    && menu_printf_plural install-marked "$marked" "Install %s marked package"  "Install all %s marked packages"
+}
+
+#------------------------------------------------------------------------------
+#
+#------------------------------------------------------------------------------
+install_all_menu() {
+    local file=$1
+    test -r $file || return
+
+    local    total=$(egrep --count "^[IMa-z0-9]" $file)
+    local can_mark=$(egrep --count "^[a-z0-9]"   $file)
+    local   marked=$(egrep --count "^M"          $file)
+
+    [ $marked -gt 0 ] \
+        && menu_printf_plural install-marked "$marked" $"Install %s marked package"  $"Install all %s marked packages"
+}
+#------------------------------------------------------------------------------
+# Used for number only packages inside of the suggestion file.  We only number
+# a line if it starts with a char other than "#".  This looseness allows us
+# to run on colorized output (as long as the headers aren't colored).
+#------------------------------------------------------------------------------
+my_nl() {
+    local cnt=1  line  blank_cnt=0
+
+    while read line; do
+
+        # Limit consectutive blank lines
+        if [ -z "$line" ]; then
+            blank_cnt=$((blank_cnt + 1))
+            [ $blank_cnt -le 1 ] && echo
+            continue
+        fi
+        blank_cnt=0
+
+        # Only number packages
+        if [ -n "$line" -a -z "${line##[^#]*}" ]; then
+            #printf "$m_co%5s$quest_co)$nc_co %s\n" "$cnt" "$line"
+            printf "%3s %s\n" "$cnt" "$line"
+            cnt=$((cnt + 1))
+        else
+            printf "%s\n" "$line"
+        fi
+    done
+}
+
+#------------------------------------------------------------------------------
+# Filter out invalid packages but pass through non-package lines
+#------------------------------------------------------------------------------
+only_valid_packages() {
+    local line
+    while read line; do
+        if [ -z "$line" -o -n "${line##[a-z0-9]*}" ]; then
+            echo "$line"
+            continue
+        fi
+
+        local pack=${line%% *}
+        if package_exists "$pack"; then
+            echo "$line"
+        else
+            printf "Missing suggested package %s\n" "$pack" >> $LOG_FILE
+        fi
+    done
+}
+
+
+#------------------------------------------------------------------------------
+#
+#------------------------------------------------------------------------------
+package_exists() {
+    local pack=$1
+    local desc=$(apt-cache search "^$pack$")
+    [ -n "$desc" ]
+    return $?
+}
+
+#------------------------------------------------------------------------------
+# List all packages.  Used to generate our database file.
+#------------------------------------------------------------------------------
+list_all() {  apt-cache search . | sort; }
+
+#------------------------------------------------------------------------------
+# List only installed packages.  Also used to generate our database file.
+#------------------------------------------------------------------------------
+list_installed() { dpkg-query --show | sort | cut -f1; }
+
+#------------------------------------------------------------------------------
+# Count the number of packages that can/will be upgraded
+#------------------------------------------------------------------------------
+count_upgrades() { LANG=C apt list --upgradable 2>/dev/null | grep -v "^Listing" | wc -l; }
+
+#------------------------------------------------------------------------------
+# Check to for system upgrades
+#------------------------------------------------------------------------------
+check_for_upgrades() {
+    msg $"Checking for package upgrades ..."
+    UPGRADE_CNT=$(count_upgrades)
+    if [ $UPGRADE_CNT -eq 0 ]; then
+        #msg "nothing to upgrade"
+        return
+    fi
+    msg $"There are %s packages that can be upgraded" "$(nq $UPGRADE_CNT)"
+    do_upgrade_menu 3
+}
+
+#------------------------------------------------------------------------------
+# Allow user to perform a system upgrade if they want
+#------------------------------------------------------------------------------
+do_upgrade_menu() {
+    local default_entry=$1
+
+    : ${UPGRADE_CNT:=$(count_upgrades)}
+    if [ $UPGRADE_CNT -eq 0 ]; then
+        warn $"There are no packages to upgrade"
+        return
+    fi
+
+    shout_subtitle $"System Upgrade Menu"
+
+    while true; do
+        local ans
+        my_select ans $"Please select an action" "$(upgrade_menu $UPGRADE_CNT)" "" $default_entry
+        case $ans in
+             ignore) return              ;;
+               quit) return              ;;
+             update) do_update  ; return ;;
+            upgrade) do_upgrade ; return ;;
+               view) view_upgrades       ;;
+                  *) internal_error 'upgrade_menu' "$ans" ;;
+        esac
+    done
+}
+
+#------------------------------------------------------------------------------
+# Simply list all packages that would be upgraded
+#------------------------------------------------------------------------------
+view_upgrades() {
+    # FIXME: Use UPGRADE_CNT to optimize how we use "less".
+    apt list --upgradable 2>/dev/null | less
+}
+
+#------------------------------------------------------------------------------
+# Do the upgrade and then regenerate our database
+#------------------------------------------------------------------------------
+do_upgrade() {
+    apt_get_cmd dist-upgrade
+
+    UPGRADE_CNT=$(count_upgrades)
+
+    [ "$JUST_UPDATE" ] && return
+    generate_database_files
+}
+
+#------------------------------------------------------------------------------
+# Set BACK_TO_MAIN as an empty local variable.  This affects how we deal with
+# the user pressing 'q' when we are waiting for input.
+#------------------------------------------------------------------------------
+run_outer() { local BACK_TO_MAIN= ; "$@" ; }
+
+#------------------------------------------------------------------------------
+# Return the height / width of the screen in chars.
+#------------------------------------------------------------------------------
+screen_height() { stty size | cut -d" " -f1; }
+screen_width()  { stty size | cut -d" " -f2; }
+
+#------------------------------------------------------------------------------
+# Convenience routine to say if we are testing or not
+#------------------------------------------------------------------------------
+testing() { [ -n "$TEST" ]; return $?; }
+
+#------------------------------------------------------------------------------
+# Print a bold ==> arrow before the message
+#------------------------------------------------------------------------------
+arrow_msg() {
+    local fmt=$1 ; shift
+    msg "$(bq "==>") $fmt" "$@"
+}
+
+#------------------------------------------------------------------------------
+# Add a number to the arrow (to indicate the selection number)
+#------------------------------------------------------------------------------
+arrow_msg_n() {
+    local num=$1  fmt=$2 ; shift 2
+    local arrow="==>"
+    [ -n "$num" ] && arrow=$(printf "$num_co%2s$bold_co>" $num)
+    msg "$(bq "$arrow") $fmt" "$@"
+}
+
+#------------------------------------------------------------------------------
+# Load the lib either from a neighboring repo or from the standard location.
+#------------------------------------------------------------------------------
+load_lib() {
+    local file=$1  path=$2
+    unset FOUND_LIB
+
+    local dir lib found IFS=:
+    for dir in $path; do
+        lib=$dir/$file
+        test -r $lib || continue
+        if ! . $lib; then
+            printf "Error when loading library %s\n" "$lib" >&2
+            printf "This is a fatal error\n" >&2
+            exit 15
+        fi
+        FOUND_LIB=$lib
+        return 0
+    done
+
+    printf "Could not find library '%s' on path '%s'\n" "$file" "$path" >&2
+    printf "This is a fatal error\n" >&2
+    exit 17
+}
+
+#------------------------------------------------------------------------------
+# Mount the work directory as tmpfs.  This should make our searches slightly
+# faster.
+#------------------------------------------------------------------------------
+mount_work_dir() {
+    local dir=${1:_$WORK_DIR}
+
+    if is_mountpoint $WORK_DIR; then
+        warn "The directory %s is already a mount point"
+        return
+    fi
+    mount -t tmpfs tmpfs $WORK_DIR || fatal "Could not mount tmpfs at %s" $dir
+}
+
+#------------------------------------------------------------------------------
+# Unmount the work directory
+#------------------------------------------------------------------------------
+umount_work_dir() {
+    local dir=${1:-$WORK_DIR}
+    sync
+    is_mountpoint "$dir" || return 0
+
+    local try
+    for try in $(seq 1 30); do
+        umount --recursive "$dir"  2>/dev/null
+        is_mountpoint "$dir" || return 0
+        sleep .1
+    done
+    rmdir "$dir"
+}
+
+#------------------------------------------------------------------------------
+# For testing on non-Debian based systems
+#------------------------------------------------------------------------------
+start_testing_mode() {
+
+    TEST_DIR=Private/apt
+    SOURCE_DIR=$TEST_DIR/sources.d
+    LIST_DIR=$TEST_DIR/lists
+
+    THE_LOG_FILE=$ME.log
+    LOG_FILE=$ME.log
+    #PRETEND_MODE=true
+
+  SUGGESTED_DIR=share/suggested
+
+    ARCH="i386"
+
+    #- perform_search() {
+    #-     local str=$1
+
+    #-     grep -Eh "$str" $TEST_DIR/full.list
+    #- }
+
+    list_installed() {
+        cat $TEST_DIR/installed.list
+    }
+
+    list_all() {
+        cat $TEST_DIR/full.list
+    }
+
+    list_depends() {
+        local regex=$(echo "$*" | tr ' ' '|')
+        egrep "^($regex):" $TEST_DIR/all.depend | cut -d" " --complement -f1 | tr ' ' '\n' | sort -u
+
+        # add the headers as a dependency when installing a kernel
+        local pack
+        for pack in $*; do
+            case $pack in
+                linux-image-*) echo linux-headers-${pack#linux-image-} ;;
+            esac
+        done
+
+    }
+
+    package_exists() {
+        local pack=$1
+        [ -n "${pack##p*}" ]
+        return $?
+    }
+}
+
+
+my_exit() {
+    local ret=${1:-0}
+    testing || umount_work_dir
+    testing || unflock
+    pause exit $"Exit"
+    clear_window_title
+    exit $ret
+}
+
+#===== Start Here =============================================================
+
+load_lib "$SHELL_LIB" "$LIB_PATH"
+
+set_colors
+
+main "$@"

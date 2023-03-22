@@ -1,0 +1,99 @@
+#! @PYTHON@ @PYOPTIONS@
+# -*- python -*-
+# -*- coding: UTF-8 -*-
+#
+#  disk-manager : GTK Disk Manager
+#  Copyright (C) 2007 Mertens Florent <flomertens@gmail.com>
+#  Updated 2021 for MX Linux Project by team member Nite Coder
+#  Maintenance of project assumed by MX Linux with permission from original author.
+#
+#  This program is free software; you can redistribute it and/or modify
+#  it under the terms of the GNU General Public License as published by
+#  the Free Software Foundation; either version 2 of the License, or
+#  (at your option) any later version.
+#
+#  This program is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#  GNU General Public License for more details.
+#
+#  You should have received a copy of the GNU General Public License
+#  along with this program; if not, write to the Free Software
+#  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+#
+
+import os
+import sys
+import logging
+import gettext
+from optparse import OptionParser
+#from gettext import gettext as _
+import gettext
+gettext.install('disk-manager', '/usr/share/locale')
+
+# Hack to make sure that path is set correctly when installation is in /usr/local
+if "/usr/local" in sys.argv[0] :
+    for path in sys.path[:] :
+        if "/usr/" in path :
+            local_path = path.replace("/usr", "/usr/local")
+            if not local_path in sys.path :
+                sys.path.append(path.replace("/usr", "/usr/local"))
+
+sys.path.append("/usr/lib/python3.9/site-packages")
+                
+print(sys.path)
+
+from DiskManager.DiskManager import *
+from DiskManager.Config import Config
+
+def main(args, opts) :
+    
+    if opts.version :
+        print(PACKAGE,VERSION)
+        return
+
+    if opts.query :
+        if not os.getuid() == 0 :
+            logging.warning("Query database without root privilege.")
+            logging.warning("Result might be incomplete.\n")
+        info = get_diskinfo_backend()()
+        print(info.export(opts.query.strip()))
+        return
+        
+    # gtk.window_set_default_icon_name("disk-manager")
+
+    if not os.getuid() == 0 :
+        dialog("warning", _("Insufficient rights"), \
+            _("You need administrative rights to start this application."))
+        return
+
+    app = DiskManager()
+    app.run()
+
+def get_opt_args() :
+
+    parser = OptionParser()
+    parser.add_option ("-v", "--version", help="show version of the application and exit.", \
+                        action="store_true", dest="version", default=False)
+    parser.add_option ("-q", "--query-database", type="string", 
+                       dest="query", default="", metavar="DEVICE",
+                       help="query database for DEVICE.\nSet DEVICE to all to print full database.")
+    parser.add_option ("-d", "--debug", action="store_true",
+                       dest="debug", default=False,
+                       help="print debugging information.")
+
+    return parser.parse_args()
+
+if __name__ == '__main__' :
+
+    #gettext.bindtextdomain("disk-manager",localedir)
+    #gettext.textdomain("disk-manager")
+    (opts, args) = get_opt_args()
+    if opts.debug :
+        level = logging.DEBUG
+    else :
+        level = logging.INFO
+    logging.basicConfig(level=level, format='%(levelname)s : %(message)s')
+    main(args, opts)
+    logging.shutdown()
+

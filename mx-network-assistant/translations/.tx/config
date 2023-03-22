@@ -1,0 +1,8 @@
+[main]
+host = https://www.transifex.com
+
+[antix-development.mx-network-assistant]
+file_filter = ./mx-network-assistant_<lang>.ts
+source_file = mx-network-assistant_en.ts
+source_lang = en
+type = ts

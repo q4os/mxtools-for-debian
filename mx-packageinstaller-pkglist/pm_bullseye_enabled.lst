@@ -1,0 +1,374 @@
+# 1to1assistance.pm
+# 1to1voice.pm
+abiword.pm
+# advert_block_antix.pm
+# afrikaan_firefox.pm
+Afrikaans_LO.pm
+airvpn.pm
+# albanian_firefox.pm
+albanian_thunderbird.pm
+Amharic_LO.pm
+anydesk.pm
+apparmor.pm
+# arabic_firefox.pm
+Arabic_LO.pm
+arabic_thunderbird.pm
+Assamese_LO.pm
+Asturian_LO.pm
+atom.pm
+audacious.pm
+audacity.pm
+# basque_firefox.pm
+Basque_LO.pm
+basque_thunderbird.pm
+# Belarusian_Firefox.pm
+Belarusian_LO.pm
+Belarusian_Thunderbird.pm
+Bengali_LO.pm
+blender.pm
+blueman.pm
+Bosnian_LO.pm
+brave.pm
+Breton_LO.pm
+budgie-desktop.pm
+# Bulgarian_Firefox.pm
+Bulgarian_LO.pm
+Bulgarian_Thunderbird.pm
+cairo.pm
+calibre-latest.pm
+calibre.pm
+# Catalan_Firefox.pm
+Catalan_LO.pm
+catalan.pm
+Catalan_thunderbird.pm
+# chinese_cn_firefox.pm
+chinese_cn_LO.pm
+Chinese_CN_Thunderbird.pm
+Chinese_fonts.pm
+Chinese_Input_fcitx.pm
+Chinese_Input.pm
+Chinese_TW_LO.pm
+Chinese_TW_Thunderbird.pm
+chromium.pm
+claws_mail.pm
+clonezilla.pm
+croation_additional.pm
+# croation_firefox.pm
+croation_LO.pm
+croation.pm
+croation_thunderbird.pm
+# czech_firefox.pm
+czech_LO.pm
+czech.pm
+czech_thunderbird.pm
+# danish_firefox.pm
+Danish_LO.pm
+danish_thunderbird.pm
+deadbeef.pm
+deb_package_tools.pm
+deluge.pm
+discord.pm
+dolphin.pm
+dropbox.pm
+dropbox-thunar-addin.pm
+# dutch_firefox.pm
+dutch_LO.pm
+dutch.pm
+dutch_thunderbird.pm
+Dzongkha_LO.pm
+# english_gb_firefox.pm
+english_gb_LO.pm
+english_gb_thunderbird.pm
+English_southafrican_LO.pm
+english_US_LO.pm
+Esperanto_LO.pm
+# estonian_firefox.pm
+Estonian_LO.pm
+estonian_thunderbird.pm
+evince.pm
+evolution.pm
+expressvpn.pm
+falkon.pm
+# farsi_firefox.pm
+Farsi_LO.pm
+filezilla.pm
+finch.pm
+# finnish_firefox.pm
+Finnish_LO.pm
+finnish_thunderbird.pm
+firefox-esr.pm
+# firefox.pm
+font-manager.pm
+freeoffice2018.pm
+# french_firefox.pm
+french_LO.pm
+french.pm
+french_thunderbird.pm
+Gaelic_LO.pm
+Galician_LO.pm
+geany.pm
+Georgian_LO.pm
+# german_firefox.pm
+german_LO.pm
+german.pm
+german_Thunderbird.pm
+gftp.pm
+gimp_basic.pm
+gimp_full.pm
+git_repo_tools.pm
+gnomegames_armhf.pm
+gnomegames.pm
+gnome.pm
+gnucash.pm
+gnumeric.pm
+google_chrome.pm
+google_earth_32.pm
+google_earth_64.pm
+# greek_firefox.pm
+greek_LO.pm
+greek.pm
+greek_thunderbird.pm
+grub-customizer.pm
+# grub_themes_mx.pm
+gscan2pdf.pm
+gthumb.pm
+Guarani_LO.pm
+Gujarati_LO.pm
+handbrake.pm
+Hebrew_LO.pm
+Hindi_Fonts.pm
+Hindi_LO.pm
+HP_printing.pm
+# hungarian_firefox.pm
+hungarian_Libreoffice.pm
+hungarian.pm
+hungarian_Thunderbird.pm
+# icelandic_firefox.pm
+Icelandic_LO.pm
+icelandic_Thunderbird.pm
+icewm.pm
+imagemagick.pm
+Indic_LO.pm
+Indonesian_LO.pm
+inkscape.pm
+# italian_firefox.pm
+italian_LO.pm
+italian.pm
+italian_Thunderbird.pm
+# japanese_firefox.pm
+japanese_fonts.pm
+japanese_input_fcitx.pm
+japanese_input.pm
+japanese_LO.pm
+japanese_thunderbird.pm
+java.pm
+Kannada_LO.pm
+Kazakh_LO.pm
+kde5_standard.pm
+kdenlive.pm
+kdiff.pm
+keepassx.pm
+# kernel_antix-4.9_64bit.pm
+# kernel_antix-4.9_nopae_32.pm
+# kernel_antix-4.9_pae_32.pm
+# kernel_antix-5.X_64bit.pm
+# kernel_antix-5.X_pae_32.pm
+kernel_debian_32_pae.pm
+kernel_debian_32.pm
+kernel_debian_64.pm
+Khmer_LO.pm
+Kinarwanda_LO.pm
+kmail.pm
+kodi.pm
+kompare.pm
+# korean_firefox.pm
+korean_input_fcitx.pm
+korean_LO.pm
+korean_thunderbird.pm
+krita.pm
+ksnip.pm
+Kurmanji_LO.pm
+# Latvian_firefox.pm
+Latvian_LO.pm
+lazpaint.pm
+# libreoffice_backports.pm
+libreoffice.pm
+# Lithuanian_firefox.pm
+Lithuanian_LO.pm
+Lithuanian_Thunderbird.pm
+localwebserver.pm
+lutris.pm
+lxde.pm
+Macedonian_LO.pm
+Malayalam_LO.pm
+Marathi_LO.pm
+master-pdf-editor-4.pm
+master-pdf-editor.pm
+mate.pm
+megasync.pm
+meld.pm
+mirage.pm
+moc.pm
+moka-faba-icon-themes.pm
+Mongolian_LO.pm
+MPD.pm
+mplayer.pm
+MS_Teams.pm
+MS_vscode.pm
+mullvadvpn.pm
+# mx15-artwork.pm
+# mx16-artwork.pm
+# mx17-artwork.pm
+# mx18-artwork.pm
+# mx19-artwork.pm
+# mxfluxbox.pm
+# mx-icons-start.pm
+Ndebele_LO.pm
+nemo.pm
+Nepalese_LO.pm
+newsbeuter.pm
+nordvpn.pm
+Northern_sotho_LO.pm
+# Norwegian_firefox.pm
+Norwegian_LO.pm
+Norwegian_nynorsk_LO.pm
+Norwegian.pm
+Norwegian_Thunderbird.pm
+numix-circle-icon-theme.pm
+obsidian-2-gtk-theme.pm
+obsidian-icon-theme.pm
+OBS-studio.pm
+Occitan_LO.pm
+Odia_LO.pm
+odrive.pm
+okular.pm
+onlyoffice-desktopeditors.pm
+openshot.pm
+opera_32.pm
+opera_64.pm
+Oromo_LO.pm
+# palemoon.pm
+pan.pm
+pcmanfm.pm
+piavpn.pm
+pidgin.pm
+pithos.pm
+plank.pm
+playonlinux.pm
+plex.pm
+# polish_firefox.pm
+polish_LO.pm
+polish.pm
+polish_Thunderbird.pm
+# portugese_br_firefox.pm
+portugese_br_LO.pm
+portugese_br.pm
+portugese_br_thunderbird.pm
+# portugese_pt_firefox.pm
+portugese_pt_LO.pm
+portugese_pt.pm
+portugese_pt_Thunderbird.pm
+preschool.pm
+primary.pm
+Punjabi_LO.pm
+qbittorrent.pm
+qmmp_armhf.pm
+qmmp.pm
+qt5_dev_env.pm
+qt5-docs.pm
+redshift.pm
+# romanian_firefox.pm
+romanian_LO.pm
+romanian.pm
+romanian_thunderbird.pm
+rox-filer.pm
+rtorrent.pm
+# russian_firefox.pm
+russian_fonts.pm
+russian_LO.pm
+russian.pm
+russian_Thunderbird.pm
+Scottish_gaelic_LO.pm
+scratch.pm
+scribus.pm
+secondary.pm
+Security_Tor.pm
+# serbian_firefox.pm
+Serbian_LO.pm
+serbian_thunderbird.pm
+shotwell.pm
+signal-desktop.pm
+simplescreenrecorder.pm
+Sinhala_LO.pm
+skype.pm
+# Slovak_Firefox.pm
+Slovak_LO.pm
+Slovak_thunderbird.pm
+# Slovenian_Firefox.pm
+Slovenian_LO.pm
+Slovenian_Thunderbird.pm
+smplayer.pm
+smtube.pm
+South_African_LO.pm
+Southern_sotho_LO.pm
+spacefm.pm
+spainish.pm
+# Spanish_Firefox.pm
+Spanish_LO.pm
+Spanish_thunderbird.pm
+spotify_64.pm
+# ssh-conduit.pm
+steam.pm
+# sunflower.pm
+supertuxkart.pm
+supertux.pm
+Swazi_LO.pm
+# swedish_firefox.pm
+swedish_LO.pm
+swedish.pm
+swedish_thunderbird.pm
+synapse.pm
+synaptic.pm
+syncthing.pm
+Tajik_LO.pm
+Tamil_LO.pm
+teamviewer.pm
+# telgram-desktop.pm
+Telugu_LO.pm
+# Thai_Firefox.pm
+Thai_LO.pm
+thunderbird.pm
+Tsonga_LO.pm
+Tswana_LO.pm
+# Turkish_Firefox.pm
+Turkish_LO.pm
+Turkish_thunderbird.pm
+Uighur_LO.pm
+# Ukrainian_firefox.pm
+Ukrainian_fonts.pm
+ukrainian_LO.pm
+Ukrainian.pm
+ukrainian_thunderbird.pm
+Uzbek_LO.pm
+Venda_LO.pm
+Vietnamese_input_fcitx.pm
+Vietnamese_input.pm
+Vietnamese_LO.pm
+# Virtualbox.pm
+vivaldi.pm
+# waterfox-g3.pm
+Welsh_LO.pm
+Wine.pm
+winff.pm
+x11vnc.pm
+xfce4-screenshooter.pm
+Xhosa_LO.pm
+# xmms.pm
+xnview-32.pm
+xnview-64.pm
+xscreensaver-extras.pm
+xscreensaver-opengl.pm
+xscreensaver.pm
+zoom32.pm
+zoom64.pm
+Zulu_LO.pm

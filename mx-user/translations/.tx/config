@@ -1,0 +1,8 @@
+[main]
+host = https://www.transifex.com
+
+[antix-development.mx-user]
+file_filter = ./mx-user_<lang>.ts
+source_file = mx-user_en.ts
+source_lang = en
+type = ts

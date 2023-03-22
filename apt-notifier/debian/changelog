@@ -1,0 +1,1476 @@
+apt-notifier (22.12.01mx21+deb11u13) stable; urgency=medium
+
+  * MX Tools release
+
+ -- fehlix <administrator@localdomain>  Wed, 22 Mar 2023 10:43:47 +0100
+
+apt-notifier (22.12.01mx21) mx; urgency=medium
+
+  * translation refresh
+
+ -- fehlix <fehlix@mxlinux.org>  Thu, 29 Dec 2022 15:29:52 -0500
+
+apt-notifier (22.09.01mx21) mx; urgency=medium
+
+  * add less-prompt for dpkg config diff pager
+
+ -- fehlix <fehlix@mxlinux.org>  Thu, 15 Sep 2022 18:35:52 -0400
+
+apt-notifier (22.08.01mx21) mx; urgency=medium
+
+  * add mnotify-none-pulse-white.png icon
+  * adjust user's apt-notifier.conf with addded icon
+  * translation refresh
+
+ -- fehlix <fehlix@mxlinux.org>  Mon, 15 Aug 2022 15:44:53 -0400
+
+apt-notifier (22.07.03mx21) mx; urgency=medium
+
+  * fix checking mx-packageinstaller is available
+  * translation refresh
+
+ -- fehlix <fehlix@mxlinux.org>  Mon, 25 Jul 2022 18:01:04 -0400
+
+apt-notifier (22.07.02mx21) mx; urgency=medium
+
+  * add icon-set defaults to user config items with example section
+  * re-enable "hide until updates available" feature after reboot/logout
+  * reduce number of monitored files to trigger update check
+  * use mxpi-launcher to start mx-packageinstaller
+
+ -- fehlix <fehlix@mxlinux.org>  Sun, 17 Jul 2022 18:58:09 -0400
+
+apt-notifier (22.07.01mx21) mx; urgency=medium
+
+  * enhance sanity check of config items
+  * remove double notification after Esc
+  * speedup counting of upgradable packages
+  * support alternative icon sets in config items
+  * allow use of nala with default disabled autoremove 
+
+ -- fehlix <fehlix@mxlinux.org>  Fri, 08 Jul 2022 17:02:59 -0400
+
+apt-notifier (22.06.01mx21) mx; urgency=medium
+
+  * create timeout defaults in ~/.config/MX-Linux/apt-notifier.conf
+  * enhance sanity check of config items
+
+ -- fehlix <fehlix@mxlinux.org>  Tue, 28 Jun 2022 13:17:39 -0400
+
+apt-notifier (22.05.04mx21) mx; urgency=medium
+
+  * addjust control file
+
+ -- fehlix <fehlix@mxlinux.org>  Sun, 15 May 2022 20:15:31 -0400
+
+apt-notifier (22.05.03mx21) mx; urgency=medium
+
+  * add dependency python3-notify2, python3-distutils
+
+ -- fehlix <fehlix@mxlinux.org>  Sun, 15 May 2022 18:17:28 -0400
+
+apt-notifier (22.05.02mx21) mx; urgency=medium
+
+  * add /boot-space check run to left-click, synaptic and mxpi 
+
+ -- fehlix <fehlix@mxlinux.org>  Thu, 05 May 2022 19:34:27 -0400
+
+apt-notifier (22.05.01mx21) mx; urgency=medium
+
+  * add check of free space at /boot with cleanup-notifier-mx 
+
+ -- fehlix <fehlix@mxlinux.org>  Tue, 03 May 2022 19:42:09 -0400
+
+apt-notifier (22.01.01mx21) mx; urgency=medium
+
+  * adjust icons and translations build
+  * adjust lock check, min./max. update check interval
+  * adjust gettext translation class and fallback handling
+  * rework desktop entry and policy translations handling
+
+ -- fehlix <fehlix@mxlinux.org>  Thu, 27 Jan 2022 17:09:15 -0400
+
+apt-notifier (21.09.01mx21+1) mx; urgency=medium
+
+  * fresh builds 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 20 Sep 2021 20:49:40 -0400
+
+apt-notifier (21.09.01mx21) mx; urgency=medium
+
+  * adjust escape-ok in View and Upgrade dialog
+
+ -- fehlix <fehlix@mxlinux.org>  Thu, 09 Sep 2021 23:11:10 +0000
+
+apt-notifier (21.08.01mx21) mx; urgency=medium
+
+  * fix execution permission of apt-notifier.py 
+
+ -- fehlix <fehlix@mxlinux.org>  Wed, 25 Aug 2021 21:01:09 +0000
+
+apt-notifier (21.07.01mx21) mx; urgency=medium
+
+  * adjust upgrade_auto_close_timeout config
+  * add user config as ~/.config/{dist}/apt-notifier.conf
+
+ -- fehlix <fehlix@mxlinux.org>  Mon, 19 Jul 2021 12:06:18 -0400
+
+apt-notifier (21.03.06mx21) mx; urgency=medium
+
+  * translations refresh 
+
+ -- fehlix <fehlix@mxlinux.org>  Wed, 12 May 2021 15:07:57 +0200
+
+apt-notifier (21.03.05mx21) mx; urgency=medium
+
+  * set terminal window size to 4/5 for screen width smaller than 1440
+  * re-added lslocks with sudo
+
+ -- fehlix <fehlix@mxlinux.org>  Sat, 27 Mar 2021 07:00:19 -0400
+
+apt-notifier (21.03.04mx21) mx; urgency=medium
+
+  * use lslocks with pkexec instead of lsof with sudo
+  * added ngettext to corectly translate plural forms
+  * added translator comments for transifex
+
+ -- fehlix <fehlix@mxlinux.org>  Fri, 19 Mar 2021 11:54:45 -0400
+
+apt-notifier (21.03.03mx21) mx; urgency=medium
+
+  * added build version info
+
+ -- fehlix <fehlix@mxlinux.org>  Tue, 16 Mar 2021 19:21:56 -0400
+
+apt-notifier (21.03.02b3) mx; urgency=medium
+
+  * apt history taskbar icon fix
+
+ -- fehlix <fehlix@mxlinux.org>  Wed, 10 Mar 2021 19:48:38 -0400
+
+apt-notifier (21.03.02b1) mx; urgency=medium
+
+  * fix displayed window-icons in taskbar to show apt-notifier icon
+  * added status of unattended upgrades in tray icon tooltip
+
+ -- fehlix <fehlix@mxlinux.org>  Tue, 09 Mar 2021 15:20:42 -0400
+
+apt-notifier (21.03.01a4) mx; urgency=medium
+
+  * retain Qt-env, XDG_RUNTIME_DIR check, based on new mx-pkexec 
+
+ -- fehlix <fehlix@mxlinux.org>  Fri, 05 Mar 2021 17:32:12 -0400
+
+apt-notifier (21.03.01a3) mx; urgency=medium
+
+  * forced check if manually checked by user
+
+ -- fehlix <fehlix@mxlinux.org>  Wed, 03 Mar 2021 12:37:43 -0400
+
+apt-notifier (21.03.01a2) mx; urgency=medium
+
+  * forced check if package cache has changed
+
+ -- fehlix <fehlix@mxlinux.org>  Wed, 03 Mar 2021 06:01:01 -0400
+
+apt-notifier (21.03.01a1) mx; urgency=medium
+
+  * restructured and reworked for antiX and MX
+
+ -- fehlix <fehlix@mxlinux.org>  Sun, 01 Mar 2021 21:03:01 -0400
+
+apt-notifier (20.12.01mx19) mx; urgency=medium
+
+  * update to python3
+  * add auto-fix of fluxbox startup to use python3
+  * add python3-notify2 as an alternative to QT's notifier
+  * autodetect use of python3-notify2 for Xfce 4.16
+  * add option to force QTs or python's notifier by adding a line
+    in ~/.config/apt-notifierrc UseNotifier=QTnotifier or =Python
+  * customize the unattended log viewer to run as user and not root
+  * modify unattended upgrade log viewer to use yad
+  * customize updater reload "Check for updates" to account for 
+    withheld packages by apt-mark, synaptic or muon
+  * adjust handling of closing the about popup
+  * minimize the use of the shell (sh or bash)
+
+ -- fehlix <fehlix@mxlinux.org>  Sun, 27 Dec 2020 19:49:23 -0400
+
+apt-notifier (20.11.01mx19+1) mx; urgency=medium
+
+  * adjust wireframe icon size
+
+ -- fehlix <fehlix@mxlinux.org>  Mon, 02 Nov 2020 10:11:54 -0400
+
+apt-notifier (20.10.01mx19+1) mx; urgency=medium
+
+  * adjust hold-back package handling
+
+ -- fehlix <fehlix@mxlinux.org>  Wed, 21 Oct 2020 17:53:48 -0400
+
+apt-notifier (20.09.04mx19+2) mx; urgency=medium
+
+  * consider withheld packages in the number of available updates.
+
+ -- fehlix <fehlix@mxlinux.org>  Fri, 04 Sep 2020 15:32:07 +0200
+
+apt-notifier (20.09.04mx19+1) mx; urgency=medium
+
+  * fix bug 311 - root access vulnerability
+
+ -- fehlix <fehlix@mxlinux.org>  Fri, 04 Sep 2020 00:29:03 +0200
+
+apt-notifier (20.08.06mx19~3) mx; urgency=medium
+
+  * adjust to avoid apt-notifier zombie in process table
+
+ -- fehlix <fehlix@mxlinux.org>  Sat, 22 Aug 2020 22:21:28 +0200
+
+apt-notifier (20.08.06mx19~2) mx; urgency=medium
+
+  * adjust about-popup to close properly
+  * change cancel button to close-button
+
+ -- fehlix <fehlix@mxlinux.org>  Thu, 12 Aug 2020 14:39:02 +0200
+
+apt-notifier (20.08.06mx19~1) mx; urgency=medium
+
+  * fix to stop plasma writing zero-terminated systray config entries
+
+ -- fehlix <fehlix@mxlinux.org>  Thu, 06 Aug 2020 16:05:01 +0200
+
+apt-notifier (20.07.06mx19~12) mx; urgency=medium
+
+  * restart systray icon after upgrading apt-notifier
+  * pkexec-wrapper adjustment
+  * code adjustments in displayAbout()
+
+ -- fehlix <fehlix@mxlinux.org>  Fri, 31 Jul 2020 20:43:02 +0200
+
+apt-notifier (20.07.06mx19~11) mx; urgency=medium
+
+  * make wireframe-dark-transparent as default icon set
+
+ -- fehlix <fehlix@mxlinux.org>  Wed, 29 Jul 2020 01:08:12 +0200
+
+apt-notifier (20.07.06mx19~10) mx; urgency=medium
+
+  * add preference selection of light, dark and transparent icons
+
+ -- fehlix <fehlix@mxlinux.org>  Tue, 28 Jul 2020 21:12:05 +0200
+
+apt-notifier (20.07.06mx19~9) mx; urgency=medium
+
+  [ fehlix ]
+  * change mnotify-none-wireframe icon (black with white frame)
+
+ -- fehlix <fehlix@mxlinux.org>  Sun, 26 Jul 2020 23:12:21 +0200
+
+apt-notifier (20.07.06mx19~8) mx; urgency=medium
+
+  [ fehlix ]
+  * add prefrence "start MX Updater at login"
+
+ -- fehlix <fehlix@mxlinux.org>  Sun, 26 Jul 2020 15:10:12 +0200
+
+apt-notifier (20.07.06mx19~7) mx; urgency=medium
+
+  [ fehlix ]
+  * disable right-click popup with left-click actions
+
+ -- fehlix <fehlix@mxlinux.org>  Sun, 26 Jul 2020 02:18:26 +0200
+
+apt-notifier (20.07.06mx19~6) mx; urgency=medium
+
+  [ fehlix ]
+  * show in pref window the installed mnotify-icons,
+    but not the icons from papirus icon theme
+
+ -- fehlix <fehlix@mxlinux.org>  Sat, 25 Jul 2020 00:39:40 +0200
+
+apt-notifier (20.07.06mx19~5) mx; urgency=medium
+
+  [ fehlix ]
+  * icon-adjustment: mnotify-[none,some]-wireframe and mx-updater
+  * pkexec-wrapper adjustments
+
+ -- fehlix <fehlix@mxlinux.org>  Fri, 24 Jul 2020 18:15:34 +0200
+
+apt-notifier (20.07.06mx19~4) mx; urgency=medium
+
+  [ fehlix ]
+  * further window icon adjustments
+
+ -- fehlix <fehlix@mxlinux.org>  Wed, 22 Jul 2020 00:52:43 +0212
+
+apt-notifier (20.07.06mx19~3) mx; urgency=medium
+
+  [ fehlix ]
+  * adjust konsole placement in plasmashell
+  * remove xfconf-query detection of papirus icon theme
+  * fix About window icon
+
+ -- fehlix <fehlix@mxlinux.org>  Wed, 22 Jul 2020 00:25:32 +0200
+
+apt-notifier (20.07.06mx19~2) mx; urgency=medium
+
+  [ fehlix ]
+  * adjust plasmashell-check
+
+ -- fehlix <fehlix@mxlinux.org>  Tue, 21 Jul 2020 22:31:42 +0200
+
+apt-notifier (20.07.06mx19~2) mx; urgency=medium
+
+  [ fehlix ]
+  * add dbus call to move icon from/to hidden section of systray
+  * remove "sleep 5" when running in plasmashell konsole
+
+ -- fehlix <fehlix@mxlinux.org>  Tue, 21 Jul 2020 13:11:51 +0200
+
+apt-notifier (20.07.05mx19) mx; urgency=medium
+
+  * fix window-icon for prefrence window
+  * call packagemanager without blocking right-click menu
+  * call muon through mx-pkexec(su-to-root) to avoid kdesu crash
+
+ -- fehlix <fehlix@mxlinux.org>  Thu, 09 Jul 2020 22:24:33 +0200
+
+apt-notifier (20.07.04mx19) mx; urgency=medium
+
+  [ fehlix ]
+  * fix menu icon to mx-updater
+
+ -- fehlix <fehlix@mxlinux.org>  Fri, 03 Jul 2020 21:20:07 +0200
+
+apt-notifier (20.07.03mx19) mx; urgency=medium
+
+  * Non-maintainer upload.
+  * patches to use muon or synaptic (fehlix)
+
+ -- Dolpin Oracle <dolphinoracle@gmail.com>  Fri, 03 Jul 2020 11:23:36 -0400
+
+apt-notifier (20.04.15mx19+1) mx; urgency=medium
+
+  * During upgrade, add empty /etc/apt/sources.list if one doesn't already exist.
+  * Fix Synaptic pins exclusion.
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Wed, 15 Apr 2020 14:43:24 -0400
+
+apt-notifier (20.04.07mx19+1) mx; urgency=medium
+
+  * ja_JP translations removed.
+  * Unused/disabled code in apt_get_update removed.
+  * Check updates without using temporary file(s).
+  * Also watch /etc/apt/apt.conf* and synaptic prefs.
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Tue, 07 Apr 2020 15:29:32 -0400
+
+apt-notifier (20.03.14mx19+1) mx; urgency=medium
+
+  * "MX Updater not turning green" fix, needed due to the Synaptic
+    /var/lib/synaptic/preferences file nolonger being an empty file when all
+    pinning has been removed.
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Sat, 14 Mar 2020 16:54:53 -0400
+
+apt-notifier (20.03.01mx19+1) mx; urgency=medium
+
+  * Add /var/lib/apt and /var/lib/dpkg to files and folders that being watched.
+  * Force a check for updates once every 5 minutes even if no changes have been
+    seen in the watched files and directories.
+  * Detect package management activity with lsof.
+  * Add a /etc/sudoers.d/lsof-mx file to allow using lsof without a password.
+  * Include repos with a 1,2 & 4 digit pin-priorities in the Unattended
+    Upgrades Origins patterns. Previously it only included repos with 3 digit
+    pin-priorities (500, 100, etc).
+  * Only simulate both apt-get dist-upgrade and apt-get upgrade when
+    Unattended Upgrades are enabled, otherwise only simulate the selected
+    upgrade type (dist-upgrade, or upgrade).
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Sun, 01 Mar 2020 20:37:02 -0500
+
+apt-notifier (20.02.22mx19+1) mx; urgency=medium
+
+  * fix/show mx-updater window decoration icon when using non Papirus icon themes
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Sat, 22 Feb 2020 11:15:45 -0500
+
+apt-notifier (20.02.17mx19+4) mx; urgency=medium
+
+  * add a 'Type=Application' line to the .local desktop files if there isn't one
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Tue, 18 Feb 2020 18:05:04 -0500
+
+apt-notifier (20.02.17mx19+3) mx; urgency=medium
+
+  * fehlix's .desktop file suggested changes
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Tue, 18 Feb 2020 14:06:22 -0500
+
+apt-notifier (20.02.17mx19+2) mx; urgency=medium
+
+  * Add a fallback symlink mnotify-some-wireframe.png > mx-updater.png
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Tue, 18 Feb 2020 12:37:31 -0500
+
+apt-notifier (20.02.17mx19+1) mx; urgency=medium
+
+  * More fixes for papirus mx-updater icon
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Mon, 17 Feb 2020 10:14:37 -0500
+
+apt-notifier (20.02.13mx19+1) mx; urgency=medium
+
+  * More deartifact changes
+  * Use papirus mx-updater icon when available
+  * Run python script in pdb mode
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Thu, 13 Feb 2020 08:44:02 -0500
+
+apt-notifier (19.10.17mx19+1) mx; urgency=medium
+
+  * Try to deartifact xfce systray icons
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Thu, 17 Oct 2019 15:33:06 -0400
+
+apt-notifier (19.10.08mx19+1) mx; urgency=medium
+
+  *  Suppress balloon notification when fullscreen apps are running
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Tue, 08 Oct 2019 15:38:56 -0400
+
+apt-notifier (19.09.28mx19+1) mx; urgency=medium
+
+  * Translations updated, Marathi (mr) added.
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Sat, 28 Sep 2019 15:44:32 -0400
+
+apt-notifier (19.09.14mx19+1) mx; urgency=medium
+
+  * fix no rightclick menu problem with SystemD
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Sat, 14 Sep 2019 08:00:48 -0400
+
+apt-notifier (19.09.02mx19+1) mx; urgency=medium
+
+  * mx-updater-reload changes
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Mon, 02 Sep 2019 12:16:46 -0400
+
+apt-notifier (19.08.31mx19+1) mx; urgency=medium
+
+  * pkexec-wrapper & pkexec-wrapper.sh fixes
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Sat, 31 Aug 2019 12:49:44 -0400
+
+apt-notifier (19.08.30mx19+3) UNRELEASED; urgency=medium
+
+  * add .sh scripts to debian/install file
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Fri, 30 Aug 2019 15:17:44 -0400
+
+apt-notifier (19.08.30mx19+2) UNRELEASED; urgency=medium
+
+  * Add multi-monitor fixes for full/basic upgrade terminals
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Fri, 30 Aug 2019 14:45:47 -0400
+
+apt-notifier (19.08.30mx19+1) UNRELEASED; urgency=medium
+
+  * About yad Changelog viewer, title and icon fixed
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Fri, 30 Aug 2019 09:16:40 -0400
+
+apt-notifier (19.08.29mx19+2) UNRELEASED; urgency=medium
+
+  * another About fix
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Thu, 29 Aug 2019 14:35:45 -0400
+
+apt-notifier (19.08.29mx19+1) UNRELEASED; urgency=medium
+
+  * yad multi-monitor fixes
+  * About fix
+  * add xdotool as a depend
+  * change depend for konsole to xfce4-terminal
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Thu, 29 Aug 2019 13:23:31 -0400
+
+apt-notifier (19.08.28mx19+3) UNRELEASED; urgency=medium
+
+  * update pkexec wrapper scripts
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Wed, 28 Aug 2019 20:56:55 -0400
+
+apt-notifier (19.08.28mx19+2) UNRELEASED; urgency=medium
+
+  * fehlix's changes 19.08.28
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Wed, 28 Aug 2019 19:28:20 -0400
+
+apt-notifier (19.08.28mx19+1) mx; urgency=medium
+
+  * pkexec security fixes for passwordless reload and
+    auto-update log viewing
+
+  * multi-display fixes for reload and auto-update terminals
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Wed, 28 Aug 2019 18:08:17 -0400
+
+apt-notifier (19.08.11mx19+2) mx; urgency=medium
+
+  * fixed mx-updater_unattended_upgrades_log_view script
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Sun, 11 Aug 2019 18:42:40 -0400
+
+apt-notifier (19.08.11mx19+1) mx; urgency=medium
+
+  * MX-19 support added
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Sun, 11 Aug 2019 09:19:11 -0400
+
+apt-notifier (19.05.08mx17+1) mx; urgency=medium
+
+  * Dynamically resize terminal windows to 2/3 of screen's Width and Height.
+  * View unattended-upgrade logs in terminal instead of yad.
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Wed, 08 May 2019 22:14:16 -0400
+
+apt-notifier (19.04.05mx17+1) mx; urgency=medium
+
+  * Translations updated. (Thankyou Old Giza!)
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Fri, 05 Apr 2019 10:53:40 -0400
+
+apt-notifier (19.03.01mx17+1) mx; urgency=medium
+
+  * Additional pkxexec related changes
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Fri, 01 Mar 2019 21:08:00 -0500
+
+apt-notifier (19.01.31mx17+1) mx; urgency=medium
+
+  * Change to pkexec for actions requiring authentication
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Thu, 31 Jan 2019 22:29:20 -0500
+
+apt-notifier (19.01.23mx17+1) mx; urgency=medium
+
+  * Translations updated.
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Wed, 23 Jan 2019 19:09:40 -0500
+
+apt-notifier (18.12.17mx17+1) mx; urgency=medium
+
+  * Fix gsku dialog for Reload (apt-get update) actions
+  * Changes to fix 'grep: write error: Broken pipe' error
+  * Autoremove option removed from Preferences dialog
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Mon, 17 Dec 2018 19:41:26 -0500
+
+apt-notifier (18.11.30mx17+1) mx; urgency=medium
+
+  * Translations updated.
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Fri, 30 Nov 2018 19:23:26 -0500
+
+apt-notifier (18.11.18mx17+1) mx; urgency=medium
+
+  * MX-18 icon default selection added
+  * Files & directories watch nicely
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Sun, 18 Nov 2018 11:19:20 -0500
+
+apt-notifier (18.10.14mx17+1) mx; urgency=medium
+
+  * Translations updated. (Thankyou Old Giza!)
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Sun, 14 Oct 2018 20:53:30 -0400
+
+apt-notifier (18.08.10mx17+1) mx; urgency=medium
+
+  * Use gksu for all desktops/window_managers.
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Fri, 10 Aug 2018 10:33:48 -0400
+
+apt-notifier (18.06.25mx17+1) mx; urgency=medium
+
+  * Hide 'Reading database ...' progress lines when viewing unattended-upgrades
+    dpkg log(s).
+  * Add changelog button to 'About' dialog.
+  * Add short delay to autostart .desktop files.
+  * Add short delay(s) and redundant kill(s) of any currently running
+    apt-notifiers prior to launching a new instance.
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Mon, 25 Jun 2018 14:01:53 -0400
+
+apt-notifier (18.05.18mx17+2) mx; urgency=medium
+
+  * Change update-Origins-Pattern script permissions to executable.
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Fri, 18 May 2018 09:30:03 -0400
+
+apt-notifier (18.05.18mx17+1) mx; urgency=medium
+
+  * Translations updated.
+  * Fixed update-Origins-Pattern script, google-chrome-* updates weren't being
+    installed because a comma was missing in the origins pattern.
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Fri, 18 May 2018 09:06:33 -0400
+
+apt-notifier (18.05.07mx17+1) mx; urgency=medium
+
+  * Added options to view unattended-upgrades logs.
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Mon, 07 May 2018 09:35:53 -0400
+
+apt-notifier (18.04.21mx17+1) mx; urgency=medium
+
+  * 'About' dialog translations added.
+  * Added anacron dependency.
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Sat, 21 Apr 2018 10:12:14 -0400
+
+apt-notifier (18.04.15mx17+1) mx; urgency=medium
+
+  * 'About' dialog rightclick action added.
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Sun, 15 Apr 2018 13:38:40 -0400
+
+apt-notifier (18.04.06mx17+1) mx; urgency=medium
+
+  * Converted to pyQt5. Thanks to "cliuser" from github for the contribution.
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Fri, 06 Apr 2018 09:01:16 -0400
+
+apt-notifier (18.04.04mx17+1) mx; urgency=medium
+
+  * remove the upgrade <=> dist-upgrade toggle from the 'View and Upgrade'
+    dialog and try to make it clear that dist-upgrade is the recommended
+    upgrade mode for MX.
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Wed, 04 Apr 2018 11:03:45 -0400
+
+apt-notifier (18.03.20mx17+1) mx; urgency=medium
+
+  * remove /etc/cron.d/mx-Unattended-Origins-Pattern-update cronjob
+  * run Unattended-Origins-Pattern update before unattended-upgrades
+    via the /etc/cron.daily/2-apt-compat cronjob
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Tue, 20 Mar 2018 12:26:32 -0400
+
+apt-notifier (18.03.07mx17+1) mx; urgency=medium
+
+  * update-Origins-Pattern script changes to fix 'v=all'
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Wed, 07 Mar 2018 13:10:50 -0500
+
+apt-notifier (18.03.03mx17+4) mx; urgency=medium
+
+  * -d option added to update-Origins-Pattern script
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Sat, 03 Mar 2018 12:57:26 -0500
+
+apt-notifier (18.03.03mx17+3) mx; urgency=medium
+
+  * add "b" (build) keyword to commas that aren't backslashed
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Sat, 03 Mar 2018 11:17:17 -0500
+
+apt-notifier (18.03.03mx17+2) mx; urgency=medium
+
+  * enable Unattended-Upgrade::MinimalSteps
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Sat, 03 Mar 2018 10:18:28 -0500
+
+apt-notifier (18.03.03mx17+1) mx; urgency=medium
+
+  * disable unattended-upgrades from Debian releases other than MX's base
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Sat, 03 Mar 2018 08:42:54 -0500
+
+apt-notifier (18.03.02mx17+1) mx; urgency=medium
+
+  * disable unattended-upgrades from Debian testing & sid, dmo, and mx testrepo
+  * backslash commas not used as keyword separators
+  * if exists, rename /etc/cron.daily/apt~ back to /etc/cron.daily/apt
+  * ship 51unattended-upgrades-mx without a Origins-Pattern
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Fri, 02 Mar 2018 18:17:34 -0500
+
+apt-notifier (18.03.01mx17+1) mx; urgency=medium
+
+  * script changes to remove b=amd64, b=i386, site=* from Origins-Pattern
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Thu, 01 Mar 2018 19:07:28 -0500
+
+apt-notifier (18.02.28mx17+1) mx; urgency=medium
+
+  * In Prefs changed 'Upgrade Behaviour  (also affects ...' to 'Upgrade mode'
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Wed, 28 Feb 2018 09:21:53 -0500
+
+apt-notifier (18.02.27mx17+1) mx; urgency=medium
+
+  * maintainer script updates
+  * added update-Origins-Pattern script
+  * mx-Unattended-Origins-Pattern-update cronjob added
+  * vertical separators reomved in Preferences dialog
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Tue, 27 Feb 2018 19:32:42 -0500
+
+apt-notifier (18.02.23mx17+1) mx; urgency=medium
+
+  * full/basic upgrade changes
+  * suppress notification when unattended upgrades enabled
+  * preinst script added to remove obsolete autostart-xdg desktop files
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Fri, 23 Feb 2018 20:14:56 -0500
+
+apt-notifier (18.02.18mx17+1) mx; urgency=medium
+
+  * changes to allow unattended upgrades
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Sun, 18 Feb 2018 23:09:16 -0500
+
+apt-notifier (17.12.14mx17+2) mx; urgency=medium
+
+  * more synaptic help changes
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Thu, 14 Dec 2017 17:48:24 -0500
+
+apt-notifier (17.12.14mx17+1) mx; urgency=medium
+
+  * synaptic help changes
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Thu, 14 Dec 2017 04:56:33 -0500
+
+apt-notifier (17.12.13mx17+1) mx; urgency=medium
+
+  * add french help
+  * translation updates
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Wed, 13 Dec 2017 08:12:12 -0500
+
+apt-notifier (17.12.07mx17+3) mx; urgency=medium
+
+  * fixed typos
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Mon, 11 Dec 2017 11:44:05 -0500
+
+apt-notifier (17.12.07mx17+2) mx; urgency=medium
+
+  * Remove /etc/xdg/autostart/apt-notifier-autostart-xdg.desktop if present
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Fri, 08 Dec 2017 10:10:38 -0500
+
+apt-notifier (17.12.07mx17+1) mx; urgency=medium
+
+  * App renamed to MX Updater, packagename remains as apt-notifier for now
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Thu, 07 Dec 2017 20:02:47 -0500
+
+apt-notifier (17.10.09mx17+1) mx; urgency=medium
+
+  * Suppress notification when all upgrades from backports.
+  * Check for updates when update-stamp missing but lock file exists.
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Mon, 09 Oct 2017 20:26:54 -0400
+
+apt-notifier (17.09.02mx17+1) mx; urgency=medium
+
+  * MX-17 support added
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Sat, 02 Sep 2017 17:02:16 -0400
+
+apt-notifier (17.05.01mx16+4) mx; urgency=medium
+
+  * revised and new translations
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Wed, 31 May 2017 13:18:59 -0400
+
+apt-notifier (17.05.01mx16+3) mx; urgency=medium
+
+  * also use mx16 icons for 16.1
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Fri, 19 May 2017 22:02:51 -0400
+
+apt-notifier (17.05.01mx16+2) mx; urgency=medium
+
+  * .po & .mo changes reverted
+  * apt-notifier.py updated, to allow single quoting in pref. translations
+  * Icon and classic translateable strings added
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Sun, 14 May 2017 18:41:12 -0400
+
+apt-notifier (17.05.01mx16+1) mx; urgency=medium
+
+  * fix .po's
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Sat, 13 May 2017 22:48:21 -0400
+
+apt-notifier (17.05.01mx16) mx; urgency=medium
+
+  * apt-notifier.py script and translation changes to allow use of transifex
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Sat, 13 May 2017 22:30:38 -0400
+
+apt-notifier (17.05mx16) mx; urgency=medium
+
+  * dolphin_oracle changes:
+  *
+  * undid 16.12 rollback to re-enable icon selection in Preferences dialog
+  * removed "(apt-get update)" from 'Check for Updates' context menu entry
+  * new icons on larger canvas, then resized to 32x32
+  * apt-notifier.py code tweaks
+
+  * kmathern changes:
+  *
+  * removed "Apt Notifier" wording from Quit and Preferences context menu entries
+  * Swap context menu's Quit and Preference entries so 'Quit' is last menu item
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Sun, 07 May 2017 17:11:15 -0400
+
+apt-notifier (16.12mcr120+1) mepis; urgency=medium
+
+  * Rebuild for MX14 -- w/classic icons
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Tue, 20 Dec 2016 14:14:45 -0500
+
+apt-notifier (16.12mx15+1) mx; urgency=medium
+
+  * Rebuild for MX15 -- w/classic icons
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Tue, 20 Dec 2016 14:12:15 -0500
+
+apt-notifier (16.12mx16+1) mx; urgency=medium
+
+  * Rollback to just mx16 icons and remove icon selection dialog
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Tue, 20 Dec 2016 13:43:08 -0500
+
+apt-notifier (16.11mcr120+1) mepis; urgency=medium
+
+  * Rebuild for Mepis 12 & MX-14
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Mon, 28 Nov 2016 15:29:10 -0500
+
+apt-notifier (16.11mx15+1) mx; urgency=medium
+
+  * Rebuild for MX-15
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Mon, 28 Nov 2016 15:26:26 -0500
+
+apt-notifier (16.11mx16+1) mx; urgency=medium
+
+  * Stop using kdesu '-n' option
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Mon, 28 Nov 2016 15:20:43 -0500
+
+apt-notifier (16.11mx16) mx; urgency=medium
+
+  * include both classic and mx16 icons in package
+  * IconLook config setting added
+  * preferences dialog updated to allow icon changes
+  * change to Adrian's version numbering
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Wed, 23 Nov 2016 18:01:32 -0500
+
+apt-notifier (1.3.4mx160+1) mepis; urgency=medium
+
+  * new icons, mx16
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Thu, 20 Oct 2016 16:00:33 -0400
+
+apt-notifier (1.3.4mcr120+1) mepis; urgency=medium
+
+  * Rebuild for Mepis 12 & MX-14
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Sat, 30 Jul 2016 18:25:33 -0400
+
+apt-notifier (1.3.4mx150+1) mx; urgency=medium
+
+  * clean up gksu message
+  * add cron.daily job to do live update sooner
+  * disable epoch fix
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Sat, 30 Jul 2016 18:17:33 -0400
+
+apt-notifier (1.3.3mcr120+1) mepis; urgency=medium
+
+  * Rebuild for Mepis 12 & MX-14
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Thu, 16 Jun 2016 16:27:19 -0400
+
+apt-notifier (1.3.3mx150+1) mx; urgency=medium
+
+  * preferences dialog improvements
+  * tooltip added to 'switch to apt-get ...' button
+  * using a better way to create "$TMP"/upgrades file
+  * added fix to display epochs in 'View and Upgrade' preview window
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Thu, 16 Jun 2016 16:21:11 -0400
+
+apt-notifier (1.3.2mcr120+1) mepis; urgency=medium
+
+  * Rebuild for Mepis 12 & MX-14
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Fri, 10 Jun 2016 10:09:04 -0400
+
+apt-notifier (1.3.2mx150+1) mx; urgency=medium
+
+  * remove MX-Utilities category from .desktop file
+  * add tooltip to Reload button
+  * better whitespace test
+  * unhide-Icon script, only delete the 'DontShowIcon blah blah' line if it's present
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Fri, 10 Jun 2016 10:00:30 -0400
+
+apt-notifier (1.3.1mcr120+1) mepis; urgency=medium
+
+  * Rebuild for Mepis 12 & MX-14
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Mon, 06 Jun 2016 19:59:39 -0400
+
+apt-notifier (1.3.1mx150+1) mx; urgency=medium
+
+  * 'apt-get update' button renamed to 'Reload'
+  * /usr/bin/apt-notifier - only modify apt-notifierrc if
+    whitespace lines/blank lines are present
+  * mx-apt-notifier-menu.desktop - add MX-Utilities category
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Mon, 06 Jun 2016 19:49:21 -0400
+
+apt-notifier (1.3.0mcr120+2) mepis; urgency=medium
+
+  * Rebuild for Mepis 12 & MX-14
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Mon, 23 May 2016 14:09:46 -0400
+
+apt-notifier (1.3.0mx150+2) mx; urgency=medium
+
+  * only update apt-notifierrc when checkbox items have been changed
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Mon, 23 May 2016 13:57:41 -0400
+
+apt-notifier (1.3.0mcr120+1) mepis; urgency=medium
+
+  * Rebuild for Mepis 12 & MX-14
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Sun, 22 May 2016 20:56:07 -0400
+
+apt-notifier (1.3.0mx150+1) mx; urgency=medium
+
+  * 'View and Upgrade' apt-get update button added
+  * kdesu and konsole fixes
+  * only sed edit apt-notifierrc when whitespace and/or blank lines are present
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Sun, 22 May 2016 20:43:06 -0400
+
+apt-notifier (1.2.0mcr120+2) mepis; urgency=medium
+
+  * Rebuild for Mepis 12 & MX-14
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Sat, 07 May 2016 17:58:28 -0400
+
+apt-notifier (1.2.0mx150+2) mx; urgency=medium
+
+  * added autoremove translations
+  * have Apt History use a separate apt-history script
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Sat, 07 May 2016 17:52:39 -0400
+
+apt-notifier (1.2.0mx150+1) mx; urgency=medium
+
+  * added option - check for autoremoves after upgrades
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Sun, 01 May 2016 19:53:05 -0400
+
+apt-notifier (1.1.5mcr120+5) mepis; urgency=medium
+
+  * Rebuild for Mepis 12 & MX-14
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Thu, 04 Feb 2016 19:29:36 -0500
+
+apt-notifier (1.1.5mx150+5) mx; urgency=medium
+
+  * synaptic pinning fixes
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Thu, 04 Feb 2016 19:24:01 -0500
+
+apt-notifier (1.1.5mcr120+4) mepis; urgency=medium
+
+  * Rebuild for Mepis 12 & MX-14
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Mon, 25 Jan 2016 21:11:30 -0500
+
+apt-notifier (1.1.5mx150+4) mx; urgency=medium
+
+  * add Check for Updates rightclick action
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Mon, 25 Jan 2016 20:37:58 -0500
+
+apt-notifier (1.1.5mcr120+3) mepis; urgency=medium
+
+  * Rebuild for Mepis 12 & MX-14
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Fri, 20 Nov 2015 12:30:05 -0500
+
+apt-notifier (1.1.5mx150+3) mx; urgency=medium
+
+  * Exit Apt History with 'Close' instead of 'Cancel'
+  * RC menu changes
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Fri, 20 Nov 2015 12:02:11 -0500
+
+apt-notifier (1.1.5mcr120+2) mepis; urgency=medium
+
+  * Rebuild for Mepis 12 & MX-14
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Sun, 15 Nov 2015 13:05:08 -0500
+
+apt-notifier (1.1.5mx150+2) mx; urgency=medium
+
+  * fix width calculation (lop off decimal portion)
+  * change leftclick default to 'View and Upgrade'
+  * change UpgradeType default to 'dist-upgrade'
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Fri, 13 Nov 2015 13:34:11 -0500
+
+apt-notifier (1.1.5mx150+1) mx; urgency=medium
+
+  * add Apt History rightclick action
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Wed, 11 Nov 2015 11:08:19 -0500
+
+apt-notifier (1.1.4mcr120+9) mepis; urgency=low
+
+  * update apt-notifier help link
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Wed, 03 Jun 2015 18:37:08 -0400
+
+apt-notifier (1.1.4-0mx150+1) mx; urgency=medium
+
+  * Repackaged for MX 15..
+
+ -- Mike Purtell <mandbx@sbcglobal.net>  Sat, 30 May 2015 20:38:49 -0700
+
+apt-notifier (1.1.4mcr120+8) mepis; urgency=low
+
+  * Don't show Synaptic pinned packages that include an epoch in their version
+    number, in the 'View and Upgrade' preview window.
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Mon, 25 May 2015 10:10:10 -0400
+
+apt-notifier (1.1.4mcr120+7) mepis; urgency=low
+
+  * Start a singleshot timer (50 msec.) after closing Synaptic or the 'View and
+    Upgrade' window. While the singleshot timer is running, don't process clicks
+    to start Synaptic, or to open the 'View and Upgrade' window. This flushes out
+    stored/errant clicks that occurred while Synaptic or the 'View and Upgrade'
+    window were open.
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Thu, 21 May 2015 08:39:33 -0400
+
+apt-notifier (1.1.4mcr120+6) mepis; urgency=low
+
+  * Added Polish translations
+  * Corrected typos
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Mon, 20 Apr 2015 22:50:56 -0400
+
+apt-notifier (1.1.4mcr120+5) mepis; urgency=low
+
+  * Display help in mx-viewer if it's installed
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Wed, 25 Mar 2015 08:43:36 -0400
+
+apt-notifier (1.1.4mcr120+4) mepis; urgency=low
+
+  * update apt-notifier help link
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Fri, 20 Mar 2015 19:21:41 -0400
+
+apt-notifier (1.1.4mcr120+3) mepis; urgency=low
+
+  * Rebuild for MEPIS 12 CR:
+
+    Kent Mathern <maintainer@mepiscommunity.org>
+
+  * translations added to apt-notifier-autostart-xdg.desktop
+  * translations added to apt-notifier-autostart.desktop
+  * modify commands that open gksu and kdesu dialogs
+  * update apt-notifier & synaptic help links
+
+
+ -- Steven Pusser (Stevo) <maintainer@mepiscommunity.org>  Sat, 21 Feb 2015 18:39:35 -0800
+
+
+apt-notifier (1.1.4mcr120+2) mepis; urgency=low
+
+  * Greek localizations updated.
+
+ -- Steven Pusser (Stevo) <maintainer@mepiscommunity.org>  Thu, 27 Nov 2014 19:28:42 -0800
+
+apt-notifier (1.1.4mcr120+1) mepis; urgency=low
+
+  * Rebuild for MEPIS 12 CR:
+    - bump version because of numerous changes and to upgrade over MX version.
+
+ -- Steven Pusser (Stevo) <maintainer@mepiscommunity.org>  Sat, 22 Nov 2014 12:37:12 -0800
+
+apt-notifier (1.1.3mcr120+2) mepis; urgency=low
+
+  * - apt-notifier.py changes -
+  * Added Catalan and Italian translations
+  * Remove "MX" branding if using MEPIS
+  * Add "MX" to terminal window title if using MX
+  * Added commands to close temporary files
+  * sleep 5 now immediately follows konsole calls
+  * remove the sleep 5 after the DoUpgrade call
+  * Set translation strings in set_translations function
+  *
+  * - apt-notifier (the startup script) -
+  * remove any previously created /tmp/tmp****** files
+  *
+  * - .desktop file changes -
+  * added Catalan, Dutch and Italian comments
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Sat, 22 Nov 2014 11:18:38 -0500
+
+apt-notifier (1.1.3mcr120+1) mepis; urgency=medium
+
+  * Fix for KDE in apt-notifier.py, restore to MEPIS CR.
+
+ -- Steven Pusser (Stevo) <maintainer@mepiscommunity.org>  Sat, 15 Nov 2014 18:43:14 -0800
+
+apt-notifier (1.1.3mx140+1) mx; urgency=low
+
+  * New release, packaged for MX 14 repository.
+
+    ( Kent Mathern <maintainer@mepiscommunity.org> )
+  * apt-notifier.py changes to support translations
+  * mx-apt-notifier-menu.desktop de,el,es,fr,sv translations added
+  * apt-notifier-menu.desktop de,el,es,fr,sv translations added
+
+ -- Steven Pusser (Stevo) <maintainer@mepiscommunity.org>  Sat, 15 Nov 2014 10:23:20 -0800
+
+apt-notifier (1.1.2mcr120+4) mepis; urgency=low
+
+  * Fix for unexpected hide-unhide behavior.
+
+ -- Steven Pusser (Stevo) <maintainer@mepiscommunity.org>  Thu, 25 Sep 2014 19:28:32 -0700
+
+apt-notifier (1.1.2mcr120+3) mepis; urgency=low
+
+  * debian/control: add minimum dependency for yad of (>= 0.26)
+  * Some fixes in apt-notifier.py.
+
+ -- Steven Pusser (Stevo) <maintainer@mepiscommunity.org>  Sat, 13 Sep 2014 20:20:48 -0700
+
+apt-notifier (1.1.2mcr120+2) mepis; urgency=low
+
+  * Fix M11 bug, change line 137 of apt-notifier.py to refer
+    to "~/.config/apt-notifierrc"
+
+ -- Steven Pusser (Stevo) <maintainer@mepiscommunity.org>  Wed, 10 Sep 2014 17:50:02 -0700
+
+apt-notifier (1.1.2mcr120+1) mepis; urgency=low
+
+  * Build for MEPIS 12 community repository.
+
+ -- Steven Pusser (Stevo) <maintainer@mepiscommunity.org>  Wed, 10 Sep 2014 13:24:24 -0700
+
+apt-notifier (1.1.2mcr120+0) mepis; urgency=low
+
+  * View and Upgrade, added option to open with left click
+  * View and Upgrade, moved 'Cancel' button to the right
+  * View and Upgrade, new 'remove Synaptic pinned ...' method
+  * View and Upgrade, new 'correct upgrades count' method
+  * added Apt Notifier Preferences dialog
+  * debian/control add gtkdialog dependency
+  * debian/links file added, creates link for mnotify-some.png
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Mon, 08 Sep 2014 12:04:52 -0400
+
+apt-notifier (1.1.01mcr120+1) mepis; urgency=low
+
+  * Some changes to the main script make it dependent on yad, drop alternates to
+    yad.
+
+ -- Steven Pusser (Stevo) <maintainer@mepiscommunity.org>  Tue, 15 Jul 2014 08:08:12 -0700
+
+apt-notifier (1.1.0mcr120+1) mepis; urgency=low
+
+  * Respect apt and Synaptic pinning in what updates are available.
+
+ -- Steven Pusser (Stevo) <maintainer@mepiscommunity.org>  Sun, 06 Apr 2014 09:20:03 -0700
+
+apt-notifier (1.0.9mcr120+1) mepis; urgency=low
+
+  * Adds MX-branded desktop file for non-KDE desktops, original apt-notifier only
+    appears in KDE menu now.
+
+ -- Steven Pusser (Stevo) <maintainer@mepiscommunity.org>  Sat, 15 Mar 2014 19:07:50 -0700
+
+apt-notifier (1.0.8mcr120+1) mepis; urgency=low
+
+  * Fixes to make compatible with earlier MEPIS releases.
+  * "upgrades" file in ~ now gets deleted.
+  * Terminal window now stays open after upgrade completes, and displays
+    "complete" message.
+
+ -- Steven Pusser (Stevo) <maintainer@mepiscommunity.org>  Sun, 09 Mar 2014 11:37:03 -0700
+
+apt-notifier (1.0.7mcr120+2) mepis; urgency=low
+
+  * Rebuild for MEPIS 12 community repository.
+
+ -- Steven Pusser (Stevo) <maintainer@mepiscommunity.org>  Thu, 06 Mar 2014 07:40:45 -0800
+
+apt-notifier (1.0.7mcr120+1) mepis; urgency=low
+
+  * change Show Upgrades right click action to View and Upgrade
+  * change package description
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Thu, 06 Mar 2014 00:04:57 -0500
+
+apt-notifier (1.0.7mcr120+0) mepis; urgency=low
+
+  * Show Upgrades - added yad/zenity/xmessage windows
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Wed, 05 Mar 2014 17:57:45 -0500
+
+apt-notifier (1.0.6mcr120+1) mepis; urgency=low
+
+  [ Kent Mathern ]
+  * added Show Upgrades right-click action
+  * added Apt-Notifier Help right-click action
+  * added UpgradeType config setting
+
+  [ Steven Pusser (Stevo) ]
+  * Remove python as a dependency; python-qt4 already brings that in.
+  * Rebuild for MEPIS 12 community repository.
+
+ -- Steven Pusser (Stevo) <maintainer@mepiscommunity.org>  Wed, 05 Mar 2014 06:37:31 -0800
+
+apt-notifier (1.0.5mcr120+1) mepis; urgency=low
+
+  * Switch to native package format, change versioning to reflect that.
+
+ -- Steven Pusser (Stevo) <maintainer@mepiscommunity.org>  Tue, 04 Mar 2014 21:27:57 -0800
+
+apt-notifier (1.0-4mcr120~2) mepis; urgency=medium
+
+  * added /etc/xdg/autostart/apt-notifier-autostart-xdg.desktop autostart file
+  *  for xfce4 and other non-kde desktops
+  * change users settings file .kde/share/config/apt-notifierrc
+  *  to .config/apt-notifierrc
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Fri, 20 Dec 2013 14:00:06 -0500
+
+apt-notifier (1.0-4mcr120~1) mepis; urgency=low
+
+  * Repackaged for Mepis 12.0
+  * debian/control remove depends for kde-base-runtime and libqt4-core
+  * apt-notifier.py script changes
+  * debian/dirs comment out line #1 so 15periodic-update won't be installed
+  * debian/install comment out line #1 so 15periodic-update won't be installed
+  * added debian/preinst to add a 15periodic-update file if one doesn't exist
+  * added debian/postrm to remove 15periodic-update file if not installed by mepis-config
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Sun, 12 May 2013 13:53:55 -0400
+
+apt-notifier (1.0-3mlrepo2) mepis; urgency=low
+
+  * Repackaged For Mepis 8.5
+
+ -- Paul Brooks <maintainer@mepiscommunity.org>  Wed, 02 Jun 2010 22:31:47 +1200
+
+apt-notifier (1.0-3mlrepo1) mepis; urgency=low
+
+  * Incorporated changes Davo requested.
+  *
+  * a) Added Singleshot timer added in python script
+  *    to get Popup message lined up over icon.
+  *
+  * b) Deleted "X-KDE-autostart-after=panel" and
+  *    "X-DBUS-StartupType=Unique" lines from the
+  *    apt-notifier-autostart.desktop file. They
+  *    don't belong in a KDE4 .desktop file.
+  *
+  * c) Added lines near bottom of python script
+  *    "if AptNotify.isSessionRestored():"
+  *    "    sys.exit(1)"
+  *    to prevent start up of multiple notifiers
+  *
+  * d) In /usr/bin/apt-notifier-unhide-Icon script
+  *    disabled the code that kills any running
+  *    notifiers because its now handled in the python
+  *    script by item c.
+  *
+  * e) In python script
+  *
+  *    replaced "/usr/lib/kde4/libexec/kdesu"
+  *    with "/usr/bin/su-to-root -X -c"
+  *
+  *    replaced "konsole -e apt-get upgrade"
+  *    with "x-terminal-emulator -e apt-get upgrade"
+  *
+  *    These changes are to make the notifier more
+  *    generic some possibly it can be used with antix.
+  *
+  *
+  * My own changes.
+  *
+  * a) Pulled the apt-notifier-check-Updates script
+  *    back into the python script.
+  *
+  * b) Added a "-e 'freed.'" line in the check_updates
+  *    section to catch the case where upgrades free up
+  *    space rather than take more space. Without this
+  *    change the number of upgrades shown is one greater
+  *    than what it actually is.
+  *
+  * c) Deleted the X-KDE-* and X-DBUS-* lines from the
+  *    apt-notifier-menu.desktop file. Seems to
+  *    work without them.
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Tue, 01 Jun 2010 09:30:38 -0400
+
+apt-notifier (1.0-2mlrepo2) mepis; urgency=low
+
+  * Repackaged For Mepis 8.5
+
+ -- Paul Brooks <maintainer@mepiscommunity.org>  Sun, 23 May 2010 21:41:38 +1200
+
+apt-notifier (1.0-2mlrepo1) mepis; urgency=low
+
+  * Prefix apt-get upgrade command with LC_ALL=en_US
+  * to make notifier work with non-english locales
+  *
+  * The apt-get command now uses the --trivial-only
+  * option instead of the -s option. This eliminates
+  * the "Inst" and "Conf" lines from the command's
+  * output and speeds it up some.
+  *
+  * Added the -V option to the apt-get upgrade
+  * command. The code to isolate the package names
+  * is simpler with the -V option.
+  *
+  * Formatted the apt-notifier-check-Updates script
+  * with line breaks "\" to hopefully make it
+  * easier to understand.
+  *
+  * Removed disabled code sections
+  *
+  * Added synaptic as a dependency
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Sat, 22 May 2010 18:03:39 -0400
+
+apt-notifier (1.0-1mlrepo1) mepis; urgency=low
+
+  * Reversioned to 1.0 signifying initial stable release
+  * Repackaged for MEPISCR repo
+
+ -- Paul Brooks <maintainer@mepiscommunity.org>  Tue, 18 May 2010 20:35:22 +1200
+
+apt-notifier (0.1-1mlcontrib10) mepis; urgency=low
+
+  * Gave up trying to fix gdebi-kde install hang
+    but kept the postinst as postinst-
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Sat, 08 May 2010 19:06:52 -0400
+
+apt-notifier (0.1-1mlcontrib9) mepis; urgency=low
+
+  * Add test for the /var/lib/synaptic/preferences file
+  * in the apt-notifier-check-Updates script
+
+  * Try to fix gdebi-kde install hang
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Fri, 07 May 2010 19:53:47 -0400
+
+apt-notifier (0.1-1mlcontrib8) mepis; urgency=low
+
+  * Revised the apt-notifier-check-Updates script to
+  * determine updates available excluding synpatic pins
+  * without using temporary files. The mktemp method
+  * using two temp files is still in the script but is
+  * commented out.
+  *
+  * Removed the "-y" from the "apt-get install -y"
+  * command for the "Upgrade all packages" action
+  * in apt-notifier.py
+  *
+  * added debian/apt-notifier.postinst script
+  *
+  * added debian/apt-notifier.prerm script
+  *
+  * Added more dependencies to the debian/control
+  * file to hopefully reflect what they really are.
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Fri, 09 May 2010 18:40:52 -0400
+
+apt-notifier (0.1-1mlcontrib7) mepis; urgency=low
+
+  * Enabled the experimental method that exclude synaptic pins
+  * from the updates available count.
+  * Revised the apt-notifier-check-Updates script, it now
+  * uses mktemp to create the temporary files.
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Wed, 05 May 2010 18:57:37 -0400
+
+apt-notifier (0.1-1mlcontrib6) mepis; urgency=low
+
+  * Adrian's changes to apt-notifier.py to add an
+  * 'apt-get upgrade -y' right click action.
+  *
+  * Adrian's changes to simplify apt-notifier-unhide-Icon
+  * script and avoid using a temporary file
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Sun, 02 May 2010 11:34:51 -0400
+
+apt-notifier (0.1-1mlcontrib5) mepis; urgency=low
+
+  *
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Sat, 01 May 2010 14:29:11 -0400
+
+apt-notifier (0.1-1mlcontrib4) mepis; urgency=low
+
+  * Added auto-unhide option - notifier icon can be hidden when no updates
+  * and will reappear when updates become available.
+  * Popup message added - appears when updates become available.
+  * Experimental method of getting update count added, it uses
+  * the apt-notifier-check-Updates script to returns the number
+  * of updates excluding Synaptic pinned packages.
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Fri, 30 Apr 2010 18:05:28 -0400
+
+apt-notifier (0.1-1mlcontrib3) mepis; urgency=low
+
+  * modified apt-notifier.py script to pick up more updates
+  * added /usr/share/autostart/apt-notifier.autostart.desktop file
+  * renamed /usr/share/applications/apt-notifier.desktop apt-notifier.menu.desktop
+  * modified apt-notifier script to only start notifier if no other instances running
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Wed, 28 Apr 2010 09:01:09 -0400
+
+apt-notifier (0.1-1mlcontrib2) mepis; urgency=low
+
+  * changed .desktop line 12 from X-DBUS-StartupType=Unique to =None
+  *
+  * modified script so it won't overwrite the ~/.kde/share/config/apt-notifierrc file
+  * if it already exists
+  *
+  * deleted quit icon
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Mon, 26 Apr 2010 16:03:25 -0400
+
+apt-notifier (0.1-1mlcontrib1) mepis; urgency=low
+
+  *
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Sat, 24 Apr 2010 17:49:05 -0400
+

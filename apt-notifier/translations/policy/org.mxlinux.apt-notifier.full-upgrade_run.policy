@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE policyconfig PUBLIC
+  "-//freedesktop//DTD PolicyKit Policy Configuration 1.0//EN"
+  "http://www.freedesktop.org/standards/PolicyKit/1/policyconfig.dtd">
+<!-- 
+	/usr/share/polkit-1/actions/org.mxlinux.apt-notifier.full-upgrade_run.policy
+!-->
+ <policyconfig>
+  <vendor>MX Linux</vendor>
+  <vendor_url>https://mxlinux.org</vendor_url>
+  <action id="org.mxlinux.apt-notifier.full-upgrade_run">
+    <description>Run MX Linux application</description>
+    <message>full upgrade</message>
+    <message xml:lang="am">ሙሉ ማሻሻያ</message>
+    <message xml:lang="ar">full upgrade</message>
+    <message xml:lang="bg">full upgrade</message>
+    <message xml:lang="ca">actualització completa</message>
+    <message xml:lang="cs">full upgrade</message>
+    <message xml:lang="da">fuld opgradering</message>
+    <message xml:lang="de">vollständige Aktualisierung</message>
+    <message xml:lang="el">πλήρη αναβάθμιση</message>
+    <message xml:lang="es">actualización completa</message>
+    <message xml:lang="et">full upgrade</message>
+    <message xml:lang="eu">full upgrade</message>
+    <message xml:lang="fa">full upgrade</message>
+    <message xml:lang="fi">täydellinen päivitys</message>
+    <message xml:lang="fr">Mise à jour complète</message>
+    <message xml:lang="he_IL">full upgrade</message>
+    <message xml:lang="hi">पूर्ण अपग्रेड</message>
+    <message xml:lang="hr">potpuna nadogradnja</message>
+    <message xml:lang="hu">full upgrade</message>
+    <message xml:lang="id">full upgrade</message>
+    <message xml:lang="is">full upgrade</message>
+    <message xml:lang="it">Aggiornamento completo</message>
+    <message xml:lang="ja_JP">full upgrade</message>
+    <message xml:lang="ja">full upgrade</message>
+    <message xml:lang="kk">full upgrade</message>
+    <message xml:lang="ko">full upgrade</message>
+    <message xml:lang="lt">pilnas naujinimas</message>
+    <message xml:lang="mk">full upgrade</message>
+    <message xml:lang="nb">full upgrade</message>
+    <message xml:lang="nl">volle opwaardering</message>
+    <message xml:lang="pl">pełna aktualizacja</message>
+    <message xml:lang="pt_BR">atualizar o sistema</message>
+    <message xml:lang="pt">actualizar o sistema</message>
+    <message xml:lang="ro">full upgrade</message>
+    <message xml:lang="ru">полное обновление</message>
+    <message xml:lang="sk">full upgrade</message>
+    <message xml:lang="sl">celotna nadgradnja</message>
+    <message xml:lang="sq">full upgrade</message>
+    <message xml:lang="sr">full upgrade</message>
+    <message xml:lang="sv">full uppgradering</message>
+    <message xml:lang="tr">tam yükseltme</message>
+    <message xml:lang="uk">full upgrade</message>
+    <message xml:lang="zh_CN">full upgrade</message>
+    <message xml:lang="zh_TW">完整升級</message>
+    <icon_name>apt-notifier</icon_name>
+    <defaults>
+      <allow_any>no</allow_any>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>auth_admin</allow_active>
+    </defaults>
+    <annotate key="org.freedesktop.policykit.exec.path">/usr/lib/apt-notifier/bin/updater_full-upgrade_run</annotate>
+    <annotate key="org.freedesktop.policykit.exec.allow_gui">true</annotate>
+  </action>
+</policyconfig>
+

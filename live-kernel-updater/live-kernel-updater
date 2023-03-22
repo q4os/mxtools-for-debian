@@ -1,0 +1,1194 @@
+#!/bin/bash
+
+#==============================================================================
+# live-kernel-updater
+# A robust program to change kernels on antiX/MX live systems
+#
+# (C) 2016 -- 2017 Paul Banham <antiX@operamail.com>
+# License: GPLv3 or later
+#==============================================================================
+
+      VERSION="2.30.04"
+ VERSION_DATE="Wed 23 Oct 2019 09:39:52 PM MDT"
+
+        ME=${0##*/}
+    MY_DIR=$(dirname "$(readlink -f $0)")
+MY_LIB_DIR=$(readlink -f "$MY_DIR/../cli-shell-utils")
+   LIB_DIR="/usr/local/lib/cli-shell-utils"
+
+export TEXTDOMAIN="cli-shell-utils"
+domain_dir="$MY_DIR/../cli-shell-utils/locale"
+test -d "$domain_dir" && export TEXTDOMAINDIR=$domain_dir
+
+#== BEGIN_CONFIG
+         MAX_FILES="20"
+           LIVE_MP="/live/boot-dev"
+          LIVE_DIR="antiX"
+          BOOT_DIR="boot"
+
+   VM_VERSION_PROG="vmlinuz-version"
+      LINUXFS_NAME="linuxfs"
+      VMLINUZ_NAME="vmlinuz"
+    VMLINUZ_2_NAME="vmlinuz1"
+       INITRD_NAME="initrd.gz"
+ TEMPLATE_INITRD_1="/usr/lib/iso-template/template-initrd.gz"
+ TEMPLATE_INITRD_2="/usr/lib/iso-template/initrd.gz"
+
+  MIN_LINUXFS_SIZE="100M"
+
+          # for kernel and initrd.gz files
+          KOLD_EXT=".kold"
+          KBAD_EXT=".kbad"
+          IOLD_EXT=".iold"
+          IBAD_EXT=".ibad"
+           MD5_EXT=".md5"
+
+          # For linuxfs file (right after a remaster)
+           NEW_EXT=".new"
+
+         SHELL_LIB="cli-shell-utils.bash"
+
+         LUKS_NAME="live-kernel-updater"
+       CRYPT_FNAME="crypt"
+
+      COLOR_SCHEME="high"
+   GRAPHICAL_MENUS="true"
+#== END_CONFIG
+
+        WORK_DIR="/run/$ME"
+            FIFO="/run/$ME/fifo"
+    THE_LOG_FILE="/var/log/$ME.log"
+    THE_ERR_FILE="/var/log/$ME.error"
+        LOG_FILE="/dev/null"
+        ERR_FILE="/dev/null"
+     CONFIG_FILE="/etc/$ME/$ME.conf"
+
+        ALL_CMDS="rollback all unpack copy-modules copy-programs repack install defrag"
+       ALL_FORCE="all,flock,clear,compress,usb,umount"
+       ALL_PAUSE="all,fifo,mount,unpack,copy,repack,clean,exit"
+
+        LIB_PATH="$MY_LIB_DIR:$LIB_DIR"
+            PATH="$MY_LIB_DIR/bin:$LIB_DIR/bin:$PATH"
+
+
+#------------------------------------------------------------------------------
+# Show usage and exit
+#------------------------------------------------------------------------------
+usage() {
+    local ret=${1:-0}
+
+cat<<Usage
+Usage: $ME [options] [command]
+
+Update the kernel on a running antiX/MX live-usb or on an antiX/MX live-usb
+that is plugged into another system.  The new kernel must already be installed.
+You will be prompted for information that is needed but was not given in the
+command line arguments.
+
+Commands:
+   all         All commands below
+   unpack      Unpack the old initrd
+   copy        Copy kernel modules into initrd
+   repack      Repack the new initrd
+   install     Copy new initrd and vmlinuz to the live boot directory
+
+Options:
+  -a --auto             Non-interactive.  Always assume the safe answer
+  -C --color=<xxx>      Set color scheme to off|low|low1|bw|dark|high
+  -d --device=<device>  live-usb device to update the kernel on
+                        (use "live" to force updating a running live system)
+  -F --force=XXXX       Force the options specfied:
+                             flock:  ignore missing flock program
+                               usb:  Allow non-usb devices (dangerous!)
+                             clear:  remove previous initrd directory
+  -G --graphic-ui       Use the new graphics user interface (default)
+  -h --help             Show this usage
+  -i --initrd           Only update the initrd using the file:
+                            $TEMPLATE_INITRD_1
+                        If that file is not found, use:
+                            $TEMPLATE_INITRD_2
+     --initrd=<file>    Only update the initrd using file <file>
+                        leading / then treated as full path to alternate initrd
+  -I --ignore-config    Ignore the configuration file
+  -k --kernel=<kernel>  The version (uname -r) of the new kernel
+  -K --keep-old         Keep the old module directory in the initrd
+  -m --modules=<list>   Only add listed modules to the existing initrd
+  -N --numeric-ui       Use the legacy numerical user interface
+     --pause            Wait for user input before exiting
+  -p --pretend          Don't actually install the new kernel or initrd.gz
+  -q --quiet            Print less
+  -R --reset-config     Write fresh config file with default options
+  -v --version          Show version information
+  -V --verbose          Print more, show output of commands
+  -VV --very-verbose    Also show the commands
+  -W --write-config     Write/update config file preserving current options
+
+Notes:
+  - short options stack. Example: -pq instead of --pretend --quiet
+  - options can be intermingled with commands and parameters
+  - config file: $CONFIG_FILE
+  - the config file will be sourced if it exists
+  - it will be created if it doesn't exist
+Usage
+    exit $ret
+}
+
+#------------------------------------------------------------------------------
+# Callback routine to evaluate arguments after the root user check.  We also
+# need to include the early args to avoid unknown argument errors.
+#------------------------------------------------------------------------------
+eval_argument() {
+    local arg=$1 val=$2
+    case $arg in
+              -auto|a)  AUTO_MODE=true                  ;;
+             -color|C)  COLOR_SCHEME=$val               ;;
+             -color=*)  COLOR_SCHEME=$val               ;;
+            -device|d)  DEVICE=$val                     ;;
+            -device=*)  DEVICE=$val                     ;;
+             -force|F)  FORCE="$FORCE${FORCE:+,}$val"   ;;
+             -force=*)  FORCE="$FORCE${FORCE:+,}$val"   ;;
+#               -fifo)  FIFO_MODE=true                  ;;
+       --graphic-ui|G)  GRAPHICAL_MENUS=true            ;;
+              -help|h)  usage                           ;;
+            -initrd|i)  CMD_INITRD=$TEMPLATE_INITRD     ;;
+            -initrd=*)  CMD_INITRD=${arg#*=}            ;;
+            -kernel|k)  NEW_KERNEL=$val                 ;;
+            -kernel=*)  NEW_KERNEL=$val                 ;;
+          -keep-old|K)  KEEP_OLD=true                   ;;
+           -modules|m)  MODS="$MODS${MODS:+,}$val"      ;;
+           -modules=*)  MODS="$MODS${MODS:+,}$val"      ;;
+       --numeric-ui|N)  GRAPHICAL_MENUS=                ;;
+           -pretend|p)  PRETEND_MODE=true ;             ;;
+               -pause)  PAUSE="$PAUSE${PAUSE:+,}exit"   ;;
+             -pause=*)  PAUSE="$PAUSE${PAUSE:+,}$val"   ;;
+             -quiet|q)  QUIET=true                      ;;
+           -verbose|V)  VERBOSITY=$((VERBOSITY + 1))    ;;
+        -very-verbose)  VERBOSITY=$((VERBOSITY + 2))    ;;
+
+       # These are read early.  They are not unknown
+     -ignore-config|I)                                  ;;
+      -reset-config|R)                                  ;;
+      -write-config|W)                                  ;;
+
+               *)  fatal "Unknown parameter %s" "-$arg" ;;
+    esac
+}
+
+#------------------------------------------------------------------------------
+# Callback routine to evalute some command line args before the root user test.
+#------------------------------------------------------------------------------
+eval_early_argument() {
+    case $1 in
+      -ignore-config|I) IGNORE_CONFIG=true    ;;
+       -reset-config|R) RESET_CONFIG=true     ;;
+       -write-config|W) WRITE_CONFIG=true     ;;
+               -help|h) usage                 ;;
+            -version|v) show_version          ;;
+    esac
+}
+
+#------------------------------------------------------------------------------
+# Callback routine for command line arguments that don't start with "-"
+#------------------------------------------------------------------------------
+assign_parameter() {
+    local cnt=$1 param=$2
+   case $cnt in
+        *) CMDS="$CMDS${CMD:+ }$param" ;;
+    esac
+}
+
+#------------------------------------------------------------------------------
+# Callback routine to see if an argument requires a value to follow it.
+#------------------------------------------------------------------------------
+takes_param() {
+    case $1 in
+           -color|C) return 0 ;;
+          -device|d) return 0 ;;
+           -force|F) return 0 ;;
+          -kernel|k) return 0 ;;
+         -modules|m) return 0 ;;
+    esac
+    return 1
+}
+
+#------------------------------------------------------------------------------
+# The main routine.  Called from the very bottom of this script.
+#------------------------------------------------------------------------------
+main() {
+    local SHIFT SHORT_STACK="aCdDFGhiIkKmNpqRvVW"
+    local BE_VERBOSE VERY_VERBOSE VERBOSITY=0
+    local orig_args="$*"
+
+    # Bashism: put the original arguments into an array to deal w/ spaces
+    declare -a ORIG_ARGS=("$@")
+
+    # Let non-root users get usage.  Need to get --ignore-config early.
+    read_early_params "$@"
+
+    need_root
+
+    EXIT_NUM=100
+
+    read_reset_config_file "$CONFIG_FILE"
+
+    # Needs to be before we read cmdline
+    TEMPLATE_INITRD=$TEMPLATE_INITRD_1
+    test -f "$TEMPLATE_INITRD" || TEMPLATE_INITRD=$TEMPLATE_INITRD_2
+
+    read_all_cmdline_mingled "$@"
+    set_colors $COLOR_SCHEME
+    check_cmds  CMDS  "$ALL_CMDS"
+    check_force FORCE "$ALL_FORCE"
+    check_pause PAUSE "$ALL_PAUSE"
+
+    case $VERBOSITY in
+        0) ;;
+        1) BE_VERBOSE=true                     ;;
+        *) BE_VERBOSE=true ; VERY_VERBOSE=true ;;
+    esac
+
+    local new_initrd
+    if [ ${#CMD_INITRD} -gt 0 ]; then
+        test -f "$CMD_INITRD" || fatal "The initrd file %s was not found" "$CMD_INITRD"
+        new_initrd=true
+    fi
+
+    local template_initrd=${CMD_INITRD:=$TEMPLATE_INITRD}
+
+    need_prog $VM_VERSION_PROG copy-initrd-modules
+
+    [ "$WRITE_CONFIG" ] && write_config "$CONFIG_FILE" && exit 0
+
+    trap clean_up EXIT
+
+    do_flock
+
+    : ${CMDS:=all}
+
+    # starting <program name>
+    shout_title $"Starting %s" "$ME"
+    set_window_title "$ME"
+
+    start_log "$THE_LOG_FILE" "$orig_args"
+    ERR_FILE=$THE_ERR_FILE
+    test -f $ERR_FILE && rm -f $ERR_FILE
+
+    type -t find_man_page &>/dev/null && find_man_page
+
+    shout_pretend
+
+    USB_DIR=$WORK_DIR/usb
+    SQFS_DIR=$WORK_DIR/linux
+    BIOS_DIR=$WORK_DIR/bios
+
+    local root_dir=$SQFS_DIR
+
+    mkdir -p $WORK_DIR || fatal 120 "Could not make a work directory under /run"
+    mount -t tmpfs tmpfs $WORK_DIR || fatal 121 "Could not mount tmpfs at %s" $WORK_DIR
+
+    local we_are_live  live_dev  bios_uuid  bios_dev
+    if its_alive_usb; then
+        we_are_live=true
+
+        # This reads initrd.out file
+        read_initrd_config
+
+        bios_uuid=$INITRD_BIOS_UUID
+        [ -n "$bios_uuid" ] && bios_dev=$(blkid -U "$bios_uuid")
+
+        live_dev=$(get_live_dev)
+        warn_z "$live_dev" $"The live media is not mounted"
+        msg $"Current running kernel is %s" "$(pq $(uname -r))"
+    fi
+
+    #==============================================================================
+    # The First Menu
+    #==============================================================================
+    [ ${#DEVICE} -eq 0 ] && select_live_usb_device DEVICE "$live_dev" "$bios_dev"
+
+    # Are we going to update a running live system or an plugged in live-usb?
+    local usb_dev live_mp
+
+    #----- RUNNING LIVE -------------------------------------------------------
+    if update_live; then
+        fatal_z "$we_are_live" $"This is not a live-usb system"
+        live_mp=$LIVE_MP
+        msg $"Will use running live system"
+
+        IS_ENCRYPTED=$INITRD_ENCRYPTED
+
+        if encrypted ; then
+            mount_if_needed "$bios_dev" $BIOS_DIR
+            shout "Encryption detected"
+            msg "Made sure %s was mounted at %s" "$(pq $bios_dev)" "$(pq $BIOS_DIR)"
+
+            # Avoid updating the initrd.  Can fix later by borrowing code from lum to
+            # add crypt programs to the initrd ***** sigh *****
+            template_initrd=
+        fi
+
+    #----- LIVE-USB -----------------------------------------------------------
+    else
+
+        fatal_z "$DEVICE" "Must specify a device if not running live"
+        usb_dev=$(expand_device $DEVICE)
+        fatal_z "$usb_dev" $"Could not find device %s" "$DEVICE"
+
+        force usb || is_usb_or_removable $usb_dev \
+            || fatal usb $"The device %s does not appear to be a usb device" "$usb_dev"
+
+        local dev_type=$(lsblk -no TYPE --nodeps $usb_dev)
+
+        # Allow user to specify disk device instead of partition
+        if [ "$dev_type" = "disk"  ]; then
+            local part_dev=$(get_partition $usb_dev 1)
+            dev_type=$(lsblk -no TYPE --nodeps $part_dev)
+            if [ "$dev_type" = "part" ]; then
+                usb_dev=$part_dev
+            else
+                fatal $"Can't find first partition on device %s" $usb_dev
+            fi
+        fi
+        [ "$dev_type" = "part" ] || fatal $"Device %s is not a disk partition" $usb_dev
+
+        local usb_drive=$(get_drive $usb_dev)
+        umount_all $usb_drive
+
+        my_mount $usb_dev $USB_DIR
+        msg $"Will use live-usb device %s" "$(pq $usb_dev)"
+        live_mp=$USB_DIR
+
+        local crypt_file=$live_mp/$LIVE_DIR/$CRYPT_FNAME
+        if test -e $crypt_file; then
+            shout "Encrypted live-usb detected"
+            local main_uuid=$(cat $crypt_file 2>/dev/null)
+
+            my_mkdir $BIOS_DIR
+            always_cmd mount --move $live_mp $BIOS_DIR || fatal "Could not move mount to %s" $(basename $BIOS_DIR)
+
+            fatal_z "$main_uuid" "Could not find uuid of encrypted partition"
+
+            local main_dev=$(blkid -U "$main_uuid")
+            echo "main uuid: $main_uuid  main dev: $main_dev" >> $LOG_FILE
+
+            fatal_z "$main_dev" "Could not find encrypted partition with uuid %s" "$boot_uuid"
+
+            shout "When asked, please enter the password for this encrypted live-usb"
+            LUKS_DEV=/dev/mapper/$LUKS_NAME
+
+            always_cmd cryptsetup open --type=luks $main_dev $LUKS_NAME \
+                || fatal "Was unable to open the encrypted partition"
+
+            always_cmd mount $LUKS_DEV $live_mp || fatal "Was unable to mount the encrypted device"
+
+            IS_ENCRYPTED=true
+            template_initrd=
+        fi
+
+    fi
+
+    is_mountpoint "$live_mp" || fatal "Expected %s to be a mountpoint" "$live_mp"
+
+    show_distro_version "$live_mp"
+
+    # local full_live_dir=$live_mp/${LIVE_DIR#/}
+    local full_live_dir rel_live_dir
+
+    find_live_boot_dir rel_live_dir "$live_mp" "$LINUXFS_NAME" \
+        || fatal $"No %s file found in any directory in %s" "$LINUXFS_NAME" "$live_mp"
+
+    local full_live_dir=$live_mp/${rel_live_dir#/}
+
+    check_writable "$full_live_dir" "live boot"
+
+    # Find the linuxfs file (where we get new kernels and modules from)
+    # Use the remastered linuxfs.new if it is available.
+    local ext file linuxfs_name
+    for ext in "$NEW_EXT" ""; do
+        file=$full_live_dir/$LINUXFS_NAME$ext
+        test -r $file || continue
+        linuxfs_name=$file
+        break
+    done
+
+    # Could not find '<linuxfs.new>' or '<linuxfs>' on the live-usb
+    fatal_z "$linuxfs_name" $"Could not find %s or %s on the live-usb" \
+        $(pqh "$LINUXFS_NAME$NEW_EXT") $(pqh "$LINUXFS_NAME")
+
+    local linuxfs_base=$(basename "$linuxfs_name")
+    local live_remaster
+    if [ -z "${linuxfs_name%%*$NEW_EXT}" ]; then
+        live_remaster=true
+        # Found <type> file <file-name> in directory <dir-name>
+        msg $"Found %s file %s in directory %s" "$(pq live-remaster)" "$(pq $linuxfs_base)" "$(pq $rel_live_dir)"
+    else
+        msg $"Found %s file %s in directory %s" "$(pq linuxfs)" "$(pq $linuxfs_base)" "$(pq $rel_live_dir)"
+    fi
+
+    local sq_compress=$(unsquashfs -s "$linuxfs_name" | awk '/^Compression/ {print $2}')
+    # Squashfs file <filename> uses <type> compression"
+    msg $"Squashfs file %s uses %s compression" "$(pq $linuxfs_base)" "$(pq $sq_compress)"
+
+    my_mount "$linuxfs_name" "$root_dir" -t squashfs -o loop,ro
+    local full_boot_dir="$root_dir/${BOOT_DIR#/}"
+
+    pause mount
+
+    # NOTE: *after* mounting the linuxfs file we switch to the BIOS_DIR directory (sneaky)
+    # if we are working on an encrypted live-usb
+    encrypted && live_mp=$BIOS_DIR
+    full_live_dir=$live_mp/${rel_live_dir#/}
+
+    local full_initrd targ_initrd="$full_live_dir/$INITRD_NAME"
+    if [ "$new_initrd" ]; then
+        full_initrd=$CMD_INITRD
+    elif [ ${#INITRD_NAME} -eq 0 ]; then
+        fatal "An empty initrd name was given"
+    else
+        full_initrd=$targ_initrd
+    fi
+
+    test -e "$full_initrd" || fatal $"Could not find initrd file %s" "$full_initrd"
+
+    # default live kernels: vmlinuz and vmlinuz1
+    local both_vm=$VMLINUZ_NAME
+    [ -n "$VMLINUZ_2_NAME" ] && both_vm="$both_vm|$VMLINUZ_2_NAME"
+
+    local live_all boot_all
+    get_all_kernel live_all "$full_live_dir"                          # all in live dir
+    get_all_kernel boot_all "$full_boot_dir"                          # all in boot dir
+    #get_all_kernel boot_mod "$full_boot_dir" --mod-dir="$root_dir"   # boot dir with module dir
+
+    # Filter out kernels that can't handle the squashfs compression
+    filter_on_compression boot_all "$full_boot_dir" "$sq_compress"
+
+    local live_vm=$(find_kernel_fname "$both_vm" "$live_all")         # live with default vmlinuz names
+    local vm_cnt=$(count_lines "$live_vm")
+    local live_old=$(find_kernel_fname "($both_vm)$KOLD_EXT" "$live_all" )
+
+    # Exclude vmlinuz vmlinuz1, vmlinuz.kold, and vmlinuz1.kold from new kernel list
+    local live_both=$(echo -e "$live_vm\n$live_old")
+    local live_versions=$(get_kernel_version "$live_both" | tr "\n" "|")
+    live_versions=${live_versions%|}
+
+    local boot_new=$(find_kernel_version "$live_versions" "$boot_all" -v)
+    local new_cnt=$(count_lines "$boot_new")
+    local live_old_cnt=$(count_lines "$live_old")
+    local action_cnt=$((new_cnt + live_old_cnt))
+
+    # [a table of what was found will follow]
+    msg $"Found:"
+    # singular and plural: 1 total live kernel
+    msg_kernel "$live_all"  $"total live kernel"       $"total live kernels"
+    # singular and plural
+    msg_kernel "$live_vm"   $"default live kernel"     $"default live kernels"
+    # singular and plural
+    msg_kernel "$live_old"  $"old live kernel"         $"old live kernels"
+    msg
+    # singular and plural
+    msg_kernel "$boot_all"  $"total installed kernel"  $"total installed kernels"
+    # singular and plural
+    msg_kernel "$boot_new"  $"new installed kernel"    $"new installed kernels"
+
+    show_kernel_3 $"Live kernels:" "$live_all" | strip_color >> $LOG_FILE
+    show_kernel_3 $"Boot kernels:" "$boot_all" | strip_color >> $LOG_FILE
+
+    case $new_cnt in
+        0) ;;
+        1) log_it show_kernel_2 $"Only one new installed kernel was found:" "$boot_new" ;;
+        *) log_it show_kernel_2 $"New installed kernels:" "$boot_new" ;;
+    esac
+
+    if [ $new_cnt -gt $MAX_FILES ]; then
+        warn $"There are %s new kernels.  Only showing the most recent %s." "$new_cnt" "$MAX_FILES"
+        boot_new=$(echo "$boot_new" | grep . | head -n $MAX_FILES)
+    fi
+
+    fatal_k0 "$boot_all" $"No kernels were found in the boot directory"
+    fatal_k0 "$live_all" $"No kernels were found in the live boot directory"
+
+    # Let's see if they should do a remaster first
+    local boot_all_cnt=$(count_lines "$boot_all")
+    local live_boot_cnt=0
+    # Only count /boot kernels if we are working on a live system
+    update_live && live_boot_cnt=$(count_kernels /boot)
+
+    # They should almost always remaster if they've installed a kernel
+    if [ $live_boot_cnt -gt $boot_all_cnt ]; then
+        shout $"You should do a remaster before doing a kernel update"
+        do_remaster "${ORIG_ARGS[@]}"
+    fi
+
+    if [ $action_cnt -eq 0 -a ${#MODS} -eq 0 ]; then
+
+        # Maybe they just need to do a remaster first
+        local boot_all_cnt=$(count_lines "$boot_all")
+        local live_boot_cnt=0
+        # Only count /boot kernels if we are working on a live system
+        [ "$DEVICE" = "live" ] && live_boot_cnt=$(count_lines "$($VM_VERSION_PROG -nsr /boot)")
+
+        # Aha, they just need to remaster first
+        if [ $live_boot_cnt -gt $boot_all_cnt ]; then
+            shout_subtitle $"You MUST do a remaster before doing a kernel update"
+            do_remaster "${ORIG_ARGS[@]}"
+            exit
+
+        elif test -f "$template_initrd" ; then
+            shout
+            shout $"No new kernels were found"
+            shout $"Can only update the initrd file"
+            shout $"You must install a kernel and then remaster before doing a kernel update"
+        else
+            error $"No new kernels were found and there's no template initrd file"
+            fatal $"You must install a kernel and then remaster before doing a kernel update"
+        fi
+    fi
+
+    #==============================================================================
+    # The Second Menu (if needed, no --initrd  and no --modules)
+    #==============================================================================
+    local action_target
+    if [ ${#MODS} -gt 0 ]; then
+        action_target="modules@$MODS"
+    elif [ "$new_initrd" ];then
+        action_target=initrd@$CMD_INITRD
+    else
+        select_update_rollback_action action_target "$live_vm" "$live_old" "$new_cnt" "$template_initrd"
+    fi
+
+    local action=${action_target%@*}
+    local target_fname=${action_target#*@}
+
+    local new_kernel new_version new_fname stat_list action_name blurb
+    local initrd_only add_modules
+    local current_versions=$(get_kernel_version "$live_both")
+
+    #----- Update Action -------------------------------------------------------------------------
+    if [ "$action" = "update" ]; then
+        action_name=$"live kernel update"
+
+        target=$(find_kernel_fname "$target_fname" "$live_vm")
+        local target_version=$(get_kernel_version "$target")
+        local target_date=$(get_kernel_date "$target")
+
+        #==========================================================================
+        # The Third Menu (only if needed)
+        #==========================================================================
+        select_new_kernel new_kernel "$NEW_KERNEL" "$boot_new"
+
+        new_fname=$(get_kernel_fname "$new_kernel")
+        new_version=$(get_kernel_version "$new_kernel")
+        new_date=$(get_kernel_date "$new_kernel")
+        test -d $root_dir/lib/modules/$new_version \
+            || fatal "Missing modules directory for kernel %s" "$new_version"
+
+        # Current kernel and New/Old kernel specs
+        blurb=$(kernel_stats \
+            $"Current" "$target_version" "$target_date" "$target_fname" "$target_fname$KOLD_EXT" \
+            $"New"     "$new_version"    "$new_date"    $"(new)"        "$target_fname")
+
+    #---- Rollback Action ---------------------------------------------------------
+    elif [ "$action" = "rollback" ]; then
+        action_name=$"live kernel rollback"
+        target=$(find_kernel_fname "$target_fname" "$live_vm")
+        local target_version=$(get_kernel_version "$target")
+        local target_date=$(get_kernel_date "$target")
+
+        new_kernel=$(find_kernel_fname "$target_fname$KOLD_EXT" "$live_old")
+        new_fname=$(get_kernel_fname "$new_kernel")
+        new_version=$(get_kernel_version "$new_kernel")
+        new_date=$(get_kernel_date "$new_kernel")
+
+        test -d $root_dir/lib/modules/$new_version \
+            || fatal "Missing modules directory for kernel %s" "$new_fname"
+
+        blurb=$(kernel_stats \
+            $"Current" "$target_version" "$target_date" "$target_fname"          "$target_fname$KBAD_EXT" \
+            $"Old"     "$new_version"    "$new_date"    "$target_fname$KOLD_EXT" "$target_fname")
+
+    #---- Update Initrd Action ----------------------------------------------------
+    elif [ "$action" = "initrd" ]; then
+        action_name=$"live initrd update"
+        initrd_only=true
+        local blurb_fmt="$m_co%s: %s"
+        # Update initrd using file <filename> [NOTE: no "%s" here!]
+        blurb=$(printf "$blurb_fmt" $"Update initrd using file" "$(pq "$target_fname")")
+
+    elif [ "$action" = "modules" ]; then
+        action_name=$"live modules update"
+        initrd_only=true
+        add_modules=true
+        local blurb_fmt="$m_co%s: %s"
+        # Update initrd using file <filename> [NOTE: no "%s" here!]
+        blurb=$(printf "$blurb_fmt" $"Add initrd modules" "$(pq "$target_fname")")
+
+    elif [ "$action" = 'quit' ]; then
+        exit
+
+    else
+        internal_error "update/rollback menu" "$action"
+    fi
+
+    msg
+    # Ready to make the following <live kernel update>
+    shout_subtitle $"Ready to make the following %s" "$action_name"
+    log_it echo "$blurb"
+
+    YES_no_pretend || my_exit
+
+    if [ "$action" = "rollback" ]; then
+        do_rollback  "$full_live_dir" "$target_fname" "$INITRD_NAME"
+        my_done "$action_name"
+    fi
+
+    local initrd_dir=$WORK_DIR/initrd
+    local tmp_initrd_file="$WORK_DIR/$(basename $INITRD_NAME).tmp"
+    local compression_file="$WORK_DIR/compression"
+    local cpio_files="$WORK_DIR/cpio.{in,out}"
+
+    if [ ${#CMDS} -le 0 ]; then
+        echo -e "No command(s) given.  Try 'all'."
+        exit 0
+    fi
+
+    # NEED: $new_version  $new_fname $targ_fname
+    #--------------------------------------------------------------------------
+    #----- REAL WORK STARTS HERE ----------------------------------------------
+    #--------------------------------------------------------------------------
+    if need unpack; then
+
+        if force clear; then
+            cmd rm -rf "$initrd_dir/../initrd"
+            cmd rm -f "$tmp_initrd_file" $compression_file $cpio_files
+        else
+            test -d "$initrd_dir" && yes_NO_fatal "clear" \
+                "Do you want to delete it now"            \
+                "Use --force=clear to always delete it"   \
+                "Will not over-write an existing initrd directory."
+        fi
+        unpack-initrd --from "$full_initrd" --dir "$initrd_dir"  --quiet
+    fi
+
+    pause unpack
+
+    copy_initrd_release "$root_dir" "$initrd_dir" "$initrd_only"
+
+    if need copy-modules; then
+        if [ ${#MODS} -gt 0 ]; then
+            : # Don't delete any exiting modules
+            local mod_file=$WORK_DIR/modules.list
+            echo "$MODS" | sed -r "s/[ ,]+/\n/g" > $mod_file
+            copy_modules "$root_dir" "$initrd_dir" "$current_versions" "$mod_file"
+
+        elif [ "$initrd_only" ]; then
+            delete_all_modules $initrd_dir
+            copy_modules  "$root_dir"  "$initrd_dir"  "$current_versions"
+            need copy-programs && copy_programs "$root_dir"  "$initrd_dir"
+        else
+            [ "$KEEP_OLD" ] || remove_old_mods $initrd_dir $target_version
+            copy_modules "$root_dir" "$initrd_dir" "$new_version"
+        fi
+    fi
+
+    pause copy
+
+    need repack && unpack-initrd --dir "$initrd_dir" --from "$tmp_initrd_file" --repack  --quiet
+    pause repack
+
+    if need install; then
+        if [ "$initrd_only" ]; then
+            do_install "$tmp_initrd_file" "$targ_initrd"  "$IOLD_EXT"
+        else
+            do_install "$tmp_initrd_file" "$targ_initrd"
+            do_install "$full_boot_dir/$new_fname" "$full_live_dir/$target_fname"
+
+            need defrag && do_defrag "$full_live_dir"
+        fi
+    fi
+    pause install
+
+    my_done "$action_name"
+}
+
+#==============================================================================
+# END OF MAIN
+#==============================================================================
+
+#==============================================================================
+# Menu Routines
+#==============================================================================
+
+#------------------------------------------------------------------------------
+# This is the first menu.  It is used to select the current live system or a
+# plugged in usb or removable device.
+#------------------------------------------------------------------------------
+select_live_usb_device() {
+    local var=$1  live_dev=$2  bios_dev=$3
+    local menu=$(cli_drive_menu "$live_dev" "$bios_dev")
+
+    if [ "$live_dev" ]; then
+        local title=$(printf $"The current Live System on %s" "$(pq $live_dev)")
+        menu=$(printf "live$P_IFS$m_co%s$nc_co\n%s" "$title" "$menu")
+    fi
+
+    fatal_0 $(count_lines "$menu") "usb" $"The system is not a live-usb and no usb drives were detected"
+
+    my_select "$var" $"Please select the system to update" "$menu"
+}
+
+#------------------------------------------------------------------------------
+# This is the second menu.  It selects which action to take: update or rollback
+# and which vmlinuz file (vmlinuz or vmlinuz1) to perform it on.
+#------------------------------------------------------------------------------
+select_update_rollback_action() {
+    local var=$1
+
+    local menu=$(make_update_menu "$@")
+
+    #echo "$menu"
+    local cnt=$(count_lines "$menu")
+    [ $cnt -lt 1 ] && fatal $"No update or rollback actions are available"
+
+    my_select $var $"Please select an action to perform" "$menu"
+}
+
+#------------------------------------------------------------------------------
+# Make the main menu for changing kernel or rolling back
+#------------------------------------------------------------------------------
+make_update_menu() {
+    local var=$1  live_vm=$2  old_vm=$3  new_cnt=$4  initrd=$5  orig_ifs=$IFS
+
+    local IFS=$K_IFS
+
+    # FIXME: go through twice to get widths?
+    local fmt="%s$bold_co %s$m_co %s %s ($date_co%s$nc_co)"
+    local live_k  action  action_name
+
+    local version fname date
+    if [ $new_cnt -gt 0 ]; then
+        action=update; action_name=$"Update"
+        while read version fname date; do
+            [ ${#version} -eq 0 ] && continue
+            menu_printf "$action@$fname" "$fmt" "$action_name" "$fname" $"from" "$(vq $version)" "$date"
+        done <<Live_VM
+$(echo "$live_vm")
+Live_VM
+    fi
+
+    action="rollback" ; action_name=$"Rollback"
+    fmt="%s$bold_co %s$m_co %s %s ($date_co%s$nc_co)"
+    while read version fname date; do
+        [ ${#version} -eq 0 ] && continue
+        fname=${fname%$KOLD_EXT}
+        menu_printf "$action@$fname" "$fmt" "$action_name" "$fname" $"to" "$(vq $version)" "$date"
+    done <<Old_VM
+$(echo "$old_vm")
+Old_VM
+
+    [ ${#initrd} -gt 0 ] && test -f "$initrd" \
+        && menu_printf "initrd@$initrd" $"Update initrd using file %s" "$(pq "$initrd")"
+
+    menu_printf 'quit' $"Quit"
+    IFS=$orig_ifs
+}
+
+
+#------------------------------------------------------------------------------
+# This is the third menu.  It lets the user select the new kernel that will
+# be used when they do an update.  If there is only one new kernel then that
+# kernel is selected and there is no menu.
+#------------------------------------------------------------------------------
+select_new_kernel() {
+    local var=$1  cmd_version=$2  list=$3  cnt=$(count_lines "$3")
+
+    fatal_0 $cnt $"Did not find any new kernels in the boot directory"
+
+    if [ ${#cmd_version} -gt 0 ]; then
+        local cmd_kernel=$(find_kernel_version "$cmd_version" "$list")
+        local cmd_cnt=$(count_lines "$cmd_kernel")
+        case $cmd_cnt in
+            0) fatal "No new kernels match the requested version %s" "$cmd_version" ;;
+
+            1) msg $"Found one kernel matching the requested version %s" "$(pq $cmd_version)"
+               eval "$var=\$list"
+               return ;;
+
+            *) fatal "Found multiple kernels matching the requested version %s" "$cmd_version" ;;
+        esac
+    fi
+
+    case $cnt in
+        1)  msg $"Found one new kernel %s" "$(pq $(get_kernel_version $list))"
+            eval "$var=\$list"
+            return ;;
+    esac
+
+    select_kernel_2 $"Please select the new kernel from this list" $var "$list"
+}
+
+#==============================================================================
+# The Routines that do the "real" work.
+#==============================================================================
+
+#------------------------------------------------------------------------------
+# Copy the initrd-release file (if needed)
+#------------------------------------------------------------------------------
+copy_initrd_release() {
+    local from=$1  to=$2  always=$3
+    local from_release=$from/etc/initrd-release
+    local to_release=$to/etc/initrd-release
+
+    [ "$always" -o ! -e "$to_release" ] || return
+    test -e "$from_release"             || return
+    always_cmd cp "$from_release" "$to_release"
+}
+
+#------------------------------------------------------------------------------
+# Remove all kernel modules from the initrd
+#------------------------------------------------------------------------------
+delete_all_modules() {
+    local to=$1
+    local mod_dir="$to/lib/modules"
+    test -e "$mod_dir" && always_cmd rm -r "$mod_dir"
+}
+
+#------------------------------------------------------------------------------
+# Remove modules directory for the old kernel
+#------------------------------------------------------------------------------
+remove_old_mods() {
+    local root=$1  kernel=$2
+    local dir=$root/lib/modules/$kernel
+
+    if test -d "$dir"; then
+        always_cmd rm -r "$dir"
+    else
+        warn "Module directory for old kernel %s not found" "$kernel"
+    fi
+}
+
+#------------------------------------------------------------------------------
+# Copy in modules directory for the new kernel
+#------------------------------------------------------------------------------
+copy_modules() {
+    local from=$1  to=$2  versions=$3  mod_file=$4
+
+    local options="--count --quiet --from=$from --to=$to"
+    [ ${#mod_file} -gt 0 ] && options="$options --verbose"
+
+    local version success
+    for version in $versions; do
+        msg "  -> %s %s" $"kernel" "$(pq $version)"
+        if always_cmd copy-initrd-modules $options --encrypt --kernel="$version" $mod_file; then
+            success=true
+            continue
+        fi
+        warn $"Copy initrd modules failed for kernel %s" "$version"
+    done
+
+    [ "$success" ] && return
+    fatal $"No modules were copied to the initrd"
+}
+
+#------------------------------------------------------------------------------
+# Copy programs and libs from linuxfs into the initrd directory
+# Should only be needed when we use a template initrd.gz
+#------------------------------------------------------------------------------
+copy_programs() {
+    local from=$1  to=$2  prog=${3:-copy-initrd-programs}
+    need_prog $prog
+    cmd $prog --from="$from" --to="$to" --encrypt --clean
+    cmd $prog --from="$from" --to="$to"
+}
+
+#------------------------------------------------------------------------------
+# Installs a file from "$from" to "$to".  Makes a backup of the original and
+# also makes an md5sum of the new file.
+#------------------------------------------------------------------------------
+do_install() {
+    local from=$1  dest=$2 old_ext=${3:-$KOLD_EXT}
+    test -f "$from" || fatal "Installation file %s does not exist" "$from"
+
+    # install <filename>
+    msg $"install %s" "$(pq $(basename $dest))"
+    #msg "install %s --> %s" "$from" "$dest"
+
+    if test -e "$dest"; then
+        if [ -n "${dest%%*$old_ext}" ]; then
+            local backup="$dest$old_ext"
+            # msg "backing up %s to %s" "$(pq $(basename "$dest"))" "$(pq $(basename "$backup"))"
+            cmd mv "$dest" "$backup"
+        else
+            warn $"Overwriting backup"
+        fi
+    else
+        warn $"Target file %s does not exist" "$dest"
+    fi
+
+    cmd cp "$from" "$dest"
+
+    local md5_file=$dest$MD5_EXT
+    #test -e $md5_file && cmd mv $md5_file $dest$old_ext$MD5_EXT
+    local md5_sum=$(cd $(dirname $dest) && md5sum $(basename $dest))
+    cmd write_file "$md5_file" "$md5_sum"
+}
+
+#------------------------------------------------------------------------------
+# Perform the rollback action by moving
+#       X      -->  X.kbad
+#       X.kold -->  X
+# Then make new md5 files.
+#------------------------------------------------------------------------------
+do_rollback() {
+    local dir=$1  vmlinuz=$2  initrd=$3
+
+    local the_initrd="$dir/$initrd"
+    local old_initrd="$the_initrd$KOLD_EXT"
+    local bad_initrd="$the_initrd$KBAD_EXT"
+
+    local the_vmlinuz="$dir/$vmlinuz"
+    local old_vmlinuz="$the_vmlinuz$KOLD_EXT"
+    local bad_vmlinuz="$the_vmlinuz$KBAD_EXT"
+
+
+    test -e "$old_vmlinuz" || fatal $"Could not find old %s file to roll back" "$vmlinuz$K_OLD"
+    test -e "$old_initrd"  || fatal $"Could not find old %s file to roll back" "$initrd$K_OLD"
+
+    # Roll back <file-1> to <file-2>
+    msg $"Roll back %s to %s" "$(pq $(basename "$old_initrd"))" "$(pq $initrd)"
+    cmd mv "$the_initrd" "$bad_initrd"
+    cmd mv "$old_initrd" "$the_initrd"
+
+    msg $"Roll back %s to %s" "$(pq $(basename "$old_vmlinuz"))" "$(pq $vmlinuz)"
+    cmd mv "$the_vmlinuz" "$bad_vmlinuz"
+    cmd mv "$old_vmlinuz" "$the_vmlinuz"
+
+    local dest md5_file md5_sum
+    for dest in "$the_initrd" "$the_vmlinuz"; do
+        md5_file=$dest$MD5_EXT
+        #test -e $md5_file && cmd mv $md5_file $dest$KOLD_EXT$MD5_EXT
+        md5_sum=$(cd $(dirname $dest) && md5sum $(basename $dest))
+        cmd write_file "$md5_file" "$md5_sum"
+    done
+}
+
+#------------------------------------------------------------------------------
+# Currently not used.  Filter out kernels that don't have a module directory.
+#------------------------------------------------------------------------------
+find_valid_kernel() {
+    local var=$1  list=$2  dir=$2  out
+
+    local line version
+    while read line; do
+        [ ${#line} -eq 0 ] && continue
+        version=$(get_kernel_version "$line")
+        if -d "$dir/lib/modules/$version"; then
+            out="$out$line\n"
+        else
+            warn "No module directory found for kernel %s" "$version"
+        fi
+    done<<List
+$(echo -n "$list")
+List
+    out=$(echo -e "$out")
+    eval $var=\$out
+}
+
+#------------------------------------------------------------------------------
+# Format some simple counts of kernels in lists.  It allows us to use plural
+# or singular forms that can be easily translated.
+#------------------------------------------------------------------------------
+msg_kernel() {
+    local list=$1 lab1=$2 lab2=$3
+    local cnt=$(count_lines "$list")
+
+    if [ $cnt -ne 1 ]; then
+        msg "  %2s %s %s" $(nq $cnt) "$lab2"
+    else
+        local version=$(get_kernel_version "$list")
+        msg "  %2s %-24s (%s)" $(nq $cnt) "$lab1" "$(vq $version)"
+        return
+    fi
+}
+
+#------------------------------------------------------------------------------
+# Say a few extra things to the user before we exit
+#------------------------------------------------------------------------------
+my_done() {
+    local action=$1
+    echo
+    if [ "$PRETEND_MODE" ]; then
+        # "pretend mode" goes through the steps withoute altering your system
+        local in_pretend=$"in pretend mode"
+        Shout "%s %s %s (%s)." "$ME" "$(pqb $action)" $"done" "$(pqb "$in_pretend")"
+    else
+        Shout "%s %s %s." "$ME" "$(pqb $action)" $"done"
+    fi
+    my_exit 0
+}
+
+#------------------------------------------------------------------------------
+# Rule out kernels that cannot handle the squashfs compression method
+#------------------------------------------------------------------------------
+filter_on_compression() {
+    local var=$1  dir=$2  compress=$3
+    case $compress in gzip) return ;; esac
+    eval "local val=\$$var"
+    local version changed
+    for version in $(get_kernel_version "$val"); do
+        local config=$dir/config-$version
+        local short_config=${config#$SQFS_DIR}
+        if ! test -e "$config"; then
+            warn "Could not find file %s" "$(pqh $short_config)"
+            continue
+        fi
+        if ! test -r "$config"; then
+            warn "Could not read file %s" "$(pqh $short_config)"
+            continue
+        fi
+        if ! grep -iq "^CONFIG_SQUASHFS_$compress=y" "$config"; then
+            warn "Kernel %s cannot handle %s squashfs compression" "$(pqh $version)" "$(pqh $compress)"
+            val=$(echo "$val" | grep -v "^$version$K_IFS")
+            changed=true
+        fi
+    done
+    [ "$changed" ] || return
+    eval $var=\$val
+}
+
+#------------------------------------------------------------------------------
+# Convenience routine
+#------------------------------------------------------------------------------
+update_live() { [ "$DEVICE" = 'live' ] ; return $? ; }
+
+#------------------------------------------------------------------------------
+# Count the number of kernels in a directory
+#------------------------------------------------------------------------------
+count_kernels() {
+    local dir=$1
+    count_lines "$($VM_VERSION_PROG -nsr /boot)"
+}
+
+
+#------------------------------------------------------------------------------
+#
+#------------------------------------------------------------------------------
+do_remaster() {
+    YES_no $"Would you like to do a remaster now?" || return
+    live-remaster --cli
+    shout $"Ready to restart %s" "$ME"
+    press_enter
+    clean_up
+    exec $0 "$@"
+}
+
+#------------------------------------------------------------------------------
+# Do a few things before cleaning up.
+#------------------------------------------------------------------------------
+my_exit() {
+    local ret=${1:-0}
+
+    pause exit $"Exit"
+
+    #Msg "=> cleaning up"
+    exit $ret
+}
+
+#------------------------------------------------------------------------------
+# Trapped on exit.  Umount (order is vital!) remove the work_dir and remove
+# the lock file.
+#------------------------------------------------------------------------------
+clean_up() {
+    lib_clean_up
+    mp_cleanup $SQFS_DIR $USB_DIR $BIOS_DIR $WORK_DIR
+    test -d $WORK_DIR && rmdir $WORK_DIR
+    luks_close $LUKS_NAME
+    unflock
+}
+
+#------------------------------------------------------------------------------
+# Write a configuration file based on the current settings
+#------------------------------------------------------------------------------
+write_config() {
+    local file=${1:-$CONFIG_FILE}
+    local dir=$(dirname "$file")
+    mkdir -p "$dir" || fatal "Could not make config file directory %s" "$dir"
+    msg "Writing config file %s" "$(pq "$file")"
+
+    cat<<Config_File >"$file"
+$(config_header "$file" "$ME" "$VERSION" "$VERSION_DATE")
+
+#          MAX_FILES="$MAX_FILES"
+#            LIVE_MP="$LIVE_MP"
+#           LIVE_DIR="$LIVE_DIR"
+#           BOOT_DIR="$BOOT_DIR"
+
+#    VM_VERSION_PROG="$VM_VERSION_PROG"
+#       LINUXFS_NAME="$LINUXFS_NAME"
+#       VMLINUZ_NAME="$VMLINUZ_NAME"
+#     VMLINUZ_2_NAME="$VMLINUZ_2_NAME"
+#        INITRD_NAME="$INITRD_NAME"
+#  TEMPLATE_INITRD_1="$TEMPLATE_INITRD_1"
+#  TEMPLATE_INITRD_2="$TEMPLATE_INITRD_2"
+
+#   MIN_LINUXFS_SIZE="$MIN_LINUXFS_SIZE"
+
+          # for kernel and initrd.gz files
+#           KOLD_EXT="$KOLD_EXT"
+#           KBAD_EXT="$KBAD_EXT"
+#           IOLD_EXT="$IOLD_EXT"
+#           IBAD_EXT="$IBAD_EXT"
+#            MD5_EXT="$MD5_EXT"
+
+          # For linuxfs file (right after a remaster)
+#            NEW_EXT="$NEW_EXT"
+
+#          SHELL_LIB="$SHELL_LIB"
+
+#          LUKS_NAME="$LUKS_NAME"
+#        CRYPT_FNAME="$CRYPT_FNAME"
+
+#       COLOR_SCHEME="$COLOR_SCHEME"
+#    GRAPHICAL_MENUS="$GRAPHICAL_MENUS"
+$(config_footer)
+Config_File
+
+    return 0
+}
+
+#------------------------------------------------------------------------------
+# Returns true if we are working on a live encrypted live-usb
+#------------------------------------------------------------------------------
+encrypted() { [ "$IS_ENCRYPTED" ] ; return $? ;}
+
+#------------------------------------------------------------------------------
+# Load the lib either from a neighboring repo or from the standard location.
+#------------------------------------------------------------------------------
+load_lib() {
+    local file=$1  path=$2
+    unset FOUND_LIB
+
+    local dir lib found IFS=:
+    for dir in $path; do
+        lib=$dir/$file
+        test -r $lib || continue
+        if ! . $lib; then
+            printf "Error when loading library %s\n" "$lib" >&2
+            printf "This is a fatal error\n" >&2
+            exit 15
+        fi
+        FOUND_LIB=$lib
+        return 0
+    done
+
+    printf "Could not find library %s on path %s\n" "$file" "$path" >&2
+    printf "This is a fatal error\n" >&2
+    exit 17
+}
+
+#===== Start Here =============================================================
+load_lib "$SHELL_LIB" "$LIB_PATH"
+
+set_colors
+
+main "$@"
+

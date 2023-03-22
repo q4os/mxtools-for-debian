@@ -1,0 +1,994 @@
+#!/bin/bash
+
+# GETTEXT_KEYWORD="gt"
+# GETTEXT_KEYWORD="pfgt"
+# GETTEXT_KEYWORD="ctitle"
+# GETTEXT_KEYWORD="fmt_size"
+# GETTEXT_KEYWORD="error_box_pf"
+
+source /usr/local/lib/antiX/antiX-common.sh  "$@"
+
+SAFETY_MARGIN=10
+
+   MKFS_FREE_MARGIN=20
+  rootfs_SIZE_PARAM="min_size=250 mid_size=100 max_size=8192  factor=50"
+  homefs_SIZE_PARAM="min_size=10  mid_size=100 max_size=10240 factor=25"
+        MKFS_SIZES="5 10 50 100 150 200 250 300 400 500 750 1024 1536 2048 2560 3072 4096
+                    5120 6144 8192 10240 12288 14336 16384 18432 20480 25600 30720 35840 40960
+                    46080  51200 61440 71680 81920 102400 128000 153600 179200 204800 256000
+                    307200 358400 409600 460800 512000"
+
+   MAX_ROOTFS_SIZE="40960"  # 40 GiB
+   MIN_ROOTFS_SIZE="100"
+
+
+# Files listed on the main screen
+ACTIVE_FILES="rootfs rootfs.bak homefs homefs.new homefs.old rootfs.old linuxfs.old"
+
+# Files we will delete even if good
+OLDEN_FILES="rootfs.tmp rootfs.bak homefs.old rootfs.old linuxfs.old"
+
+# Files we will only delete after e2fsck fails
+LIVE_FILES="rootfs homefs homefs.new"
+
+CONF_FILE=$LIVE_DIR/config/initrd.out
+[ -r $CONF_FILE ] || CONF_FILE=$LIVE_DIR/config/linuxrc.out
+
+TITLE="$(gt "antiX Create or Resize Persistence")"
+BLURB="$(gt "Create or resize the files need for root and/or home persistence.")"
+
+EXTRA_USAGE=$(cat <<End_Extra_Usage
+\n[b]$ME specific options:[/]
+    -d|--dev=<[p]device[/]>  $(pfgt "Use <%s> as the persistence device" "[p]device[/]")
+    -e|--explore $(pfgt "Go directly to the explore menu")
+    -r|--rootfs  $(pfgt "Go directly to the making a %s file" "[p]rootfs.new[/]")
+
+End_Extra_Usage
+)
+
+     CHANGE_DEV="Device: $(gt "Change Persistence Device")"
+    CHANGE_PATH="Path: $(gt "Change Peristence Path")"
+    MAKE_ROOTFS="Root: $(gt "Create Root Persistence")"
+  RESIZE_ROOTFS="Root: $(gt "Resize Root Persistence")"
+MAKE_ROOTFS_NEW="New: $(gt "Make rootfs.new file for remastering")"
+    MAKE_HOMEFS="Home: $(gt "Create Home Persistence")"
+  RESIZE_HOMEFS="Home: $(gt "Resize Home Persistence")"
+#   HELP_CHOICE="?: $(gt "Show some help")"
+           QUIT="Quit: $(gt "Quit this program")"
+  UPDATE_CHOICE="Update: $(gt "Update information")"
+     FIX_CHOICE="Fix: $(gt "Fix or delete broken and outdated files")"
+
+         FIX_IT="$(gt "Fix")"
+      DELETE_IT="$(gt "Delete")"
+        EXPLORE="$(gt "Explore")"
+
+   EXPLORE_MENU="$(gt "Exploration Menu")"
+      EXPLORING="$(gt "Exploring")"
+    EXPLORE_DEV="$(gt "Persistence Device")"
+    EXPLORE_DIR="$(gt "Persistence Directory")"
+   EXPLORE_FILE="$(gt "Persistence file: %s")"
+ STOP_EXPLORING="$(gt "Stop Exploring")"
+
+    STOP_FIXING="$(gt "Stop Fixing and deleting")"
+ FIX_FILES_MENU="$(gt "Fix and Delete Files Menu")"
+
+ DOES_NOT_EXIST="$(gt "does not exist")"
+         BROKEN="$(gt "Broken!")"
+
+  FTYPE_CHOICES=(
+            "ext2: $(gt "Simple, stable, no journaling")"
+            "ext3: $(gt "Adds journaling.")"
+            "ext4: $(gt "Journaling, checksums, fast fsck")"
+        )
+
+OPTIONS="
+d,dev,device|o|DEV
+     f,fast||FAST
+  p,pretend||PRETEND
+  e,explore||EXPLORE
+   r,rootfs||ROOTFS
+"
+
+prep_main() {
+    add_options "$OPTIONS"
+    read_options "$@"
+
+    SYS_TYPE="LiveCD/USB/HD"
+    read_conf $CONF_FILE || read_conf_error rootfs $CONF_FILE
+
+    show_cli_title
+    need_root
+    start_logging
+    trap clean_up EXIT
+    create_lock
+}
+
+main() {
+    # return after errors in mount_if_needed()
+    nonfatal_mount_errors
+
+    P_PATH=$PERSIST_PATH
+    : ${P_PATH:=$SQFILE_PATH}
+    : ${P_PATH:=$DISTRO}
+
+    # Let command line override
+    DEV=$OPT_DEV
+
+    # First try to find the persist device (if any)
+    while [ -z "$DEV" -a -n "$PERSIST_UUID" ]; do
+        DEV=$(blkid -U "$PERSIST_UUID")
+        [ "$DEV" ] && break
+        no_yes_box \
+            "$(pfgt "The persistence device with UUID %s was not found" "[n]$PERSIST_UUID[/]")" \
+            "$(pfgt "Please plug in the persistence device if you want to use it.")" \
+            ""                                                                      \
+            "$(gt "Do you want to try again?")" || break
+    done
+
+    # If there is no persist device then use the boot device
+    [ -n "$BOOT_UUID" ] && : ${DEV:=$(blkid -U $BOOT_UUID)}
+
+    if ! [ -b "$DEV" ]; then
+        okay_box  "$TITLE" "" \
+            "$(pfgt "Default device %s is either missing or invalid" "[f]$DEV[/]")" "" \
+            "$(gt   "Please select a new device for the persistence files")"  ""
+
+        change_device
+
+    elif ! mount_device $DEV; then
+
+        change_device
+
+    fi
+
+    vmsg "Device: [n]$DEV[/],   Mountpoint: [f]$DEV_MP[/]"
+
+    if is_readonly_mp $DEV_MP; then
+        okay_box     "$TITLE" ""                                                   \
+            "$(pf    "Read-only device found")"                                    \
+            "$(pfgt  "The boot/persist device %s is read-only." "[f]$DEV[/]")" ""  \
+            "$(gt    "Please select a new device for the persistence files")"  ""
+
+        change_device
+    fi
+
+    if [ "$SET_ROOTFS" ]; then
+
+        gather_device_info
+        vmsg "Make rootfs.new"
+        make_filefs rootfs.new "$(gt "Create rootfs.new (for remastering)")"
+        exit
+
+    elif [ "$SET_EXPLORE" ]; then
+        gather_device_info
+        vmsg "Explore menu"
+        explore_menu
+        exit
+    fi
+
+    LIVE_FS_TYPE=$(df -T $DEV | awk '{print $2}')
+
+    while true; do
+
+        unset INFO_HASH USED_SPACE
+        declare -A INFO_HASH USED_SPACE
+
+        gather_device_info
+        gather_file_info
+
+        CHOICE=""
+
+        # Only present Make X if X does not already exist
+        # Only present Resize X if X exists and is not broken
+
+        if [ -e "$FULL_PATH/rootfs" ]; then
+
+            case " $BROKEN_FS " in
+            " rootfs ")
+                ;;
+            *)
+                CHOICE="$CHOICE!$RESIZE_ROOTFS"
+                ;;
+            esac
+        else
+            CHOICE="$CHOICE!$MAKE_ROOTFS"
+        fi
+
+        CHOICE="$CHOICE!$MAKE_ROOTFS_NEW"
+
+        if [ -e "$FULL_PATH/homefs" ]; then
+            case " $BROKEN_FS " in
+            " homefs ")
+                ;;
+            *)
+                CHOICE="$CHOICE!$RESIZE_HOMEFS"
+                ;;
+            esac
+        else
+            CHOICE="$CHOICE!$MAKE_HOMEFS"
+        fi
+
+        for t in "${DEVICE_TEXT[@]}" "${FILE_TEXT[@]}" ; do
+            vmsg "$t"
+        done
+
+
+        [ "$BROKEN_FS" -o "$STALE_FILES" ] && CHOICE="$CHOICE!$FIX_CHOICE"
+
+        CHOICE="$CHOICE!$CHANGE_DEV!$CHANGE_PATH!$EXPLORE_MENU!$UPDATE_CHOICE!$QUIT"
+
+        combo_box action "$CHOICE" -a  "$TITLE"  \
+            "${DEVICE_TEXT[@]}"                  \
+            "${FILE_TEXT[@]}"  ""
+
+        case $UI_RESULT in
+
+            $MAKE_ROOTFS)
+                vmsg "Make rootfs"
+                make_filefs rootfs "$(gt "Create Root persistence")"
+                ;;
+
+            $RESIZE_ROOTFS)
+                rootfs="$FULL_PATH/rootfs"
+                if [ "$(get_mountpoint $rootfs)" ]; then
+                    okay_box -c "[e]Warning[/]" "" \
+                        "$(gt "Can't resize %s while it is already mounted." "[f]rootfs[/]")" ""
+
+                    continue
+                fi
+                vmsg "Resize rootfs"
+                make_filefs rootfs.tmp "$(gt "Resize Root persistence")" || continue
+
+                # if ! [ "$MADE_FS" = "rootfs.tmp" ]; then
+                #     noisy_yes_no_box "$TITLE" "" \
+                #         "$(gt "The resize rootfs has failed.")" \
+                #         "$(pfgt "Shall I delete the %s file?" "[f]rootfs.tmp[/]")" \
+                #         && rm -f $rootfs.tmp
+                #     continue
+                # fi
+                copy_filefs "$rootfs" "$rootfs.tmp" "${USED_SPACE[rootfs]}" || continue
+                mv -f $rootfs $rootfs.bak
+                mv -f $rootfs.tmp $rootfs
+                ;;
+
+            $MAKE_ROOTFS_NEW)
+                vmsg "Make rootfs.new"
+                make_filefs rootfs.new "$(gt "Create %s (for remastering)" rootfs.new)"
+                ;;
+
+            $MAKE_HOMEFS)
+                vmsg "Make homefs"
+                make_filefs "homefs" "$(gt "Create Home persistence")"
+                ;;
+
+            $RESIZE_HOMEFS)
+                vmsg "Resize homefs"
+                homefs="$FULL_PATH/homefs"
+                make_filefs "homefs.new" "$(gt "Resize Home persistence")" || continue
+
+                copy_filefs "$homefs" "$homefs.new" "${USED_SPACE[homefs]}"
+                ;;
+
+            $CHANGE_DEV)
+                vmsg "Change device"
+                change_device
+                ;;
+
+            $CHANGE_PATH)
+                vmsg "Change path"
+                change_path
+                ;;
+
+            $EXPLORE_MENU)
+                vmsg "Explore menu"
+                explore_menu
+                ;;
+            $FIX_CHOICE)
+                fix_files_menu
+                ;;
+            $QUIT)
+                #exit
+                noisy_yes_no_box "$TITLE" "$(gt "Really Quit?")" && exit
+                ;;
+        esac
+
+    done
+}
+
+makefs() {
+    local file=$1  type=$2  size=$3  dir=$(dirname "$file")
+    local base_file=${file##*/}
+    base_file=${base_file%%.*}
+    local fs_label=""
+    case $type in
+        ext*) fs_label="-L $base_file" ;;
+    esac
+
+    mkdir -p "$dir"                                                              || return 1
+    test -d "$dir"                                                               || return 1
+    local fs_type=(fs_type "$dir")
+    case $fs_type in
+        ext4|btrfs) fallocate --length ${size}M "$file"                 &>>$LOG_FILE || return 2 ;;
+                 *) dd if=/dev/zero of="$file" bs=1M count=0 seek=$size &>>$LOG_FILE || return 2 ;;
+    esac
+
+    sync
+    time_cmd_quiet mkfs.$type -F $fs_label $file                                     || return 3
+}
+
+default_makefs_size() {
+    local avail=$1  size=$3  params
+    eval params=\$$2
+    eval local $params
+    [ "$avail" -lt $mid_size ] && factor=1
+    [ "$size" ] || size=$((mid_size + factor * ( avail - mid_size ) / 100))
+    [ $size -gt $max_size ] && size=$max_size
+    [ $size -gt $avail    ] && size=$avail
+    [ $size -lt $min_size ] && return 1
+    echo $size
+    return 0
+}
+
+select_ftype() {
+    local choice ftype
+    for ftype in "${FTYPE_CHOICES[@]}"; do
+        choice="$choice!$ftype"
+    done
+    combo_box "$(gt "File System Type")" "$choice" "" ""
+    FTYPE="$(echo $UI_RESULT | cut -d: -f1)"
+}
+
+#------------------------------------------------------------------------------
+#
+#------------------------------------------------------------------------------
+make_filefs() {
+    local file=$1  ptype=$2
+    local min_size=250 max_size=$MAX_SIZE
+    local full="$FULL_PATH/$file"
+    if [ -f "$full" ]; then
+        yes_no_box "$TITLE" ""                                       \
+            "$(pfgt "The file %s already exists" "[f]$file[/]")" ""  \
+            "$(gt "Do you want to over-write it?")" ""               \
+            || return 0
+    fi
+
+    local text="$ptype\n\n$(gt "Please select size of the new file system")"
+
+    if ! initrd_size_menu "$text" "$file" "$FULL_PATH"; then
+    #if ! select_size -min "$min_size" -Max "$max_size" "" "$text"; then
+        warn_box "$TITLE" "" "$(pfgt "Not enough space on device")" ""
+        return
+    fi
+    [ "$UI_RESULT" = 'quit' ] && return
+    local size=$UI_RESULT
+
+    #select_ftype
+    FTYPE=ext4
+    vmsg "filesystem type: $FTYPE"
+    local last_line
+
+    case $DEV_FS in
+        vfat) last_line=$(pfgt "Warning: this can take several minutes per Gig on a %s file system" "[b]$DEV_FS[/b]") ;;
+           *) last_line=$(gt "Please wait") ;;
+    esac
+
+    make_path_if_needed "$DEV_MP" "$P_PATH"
+
+    bg_info_box -o "$PULSATE"                                 \
+        ""                                                    \
+        "$(pfgt "Creating file %s" [f]$file[/])"              \
+        "$(pfgt "Size: %s. Filesystem: %s" "$(label_meg $size)" "$FTYPE")"     \
+        ""                                                    \
+        "$last_line"                                          \
+        ""
+
+    makefs "$full" $FTYPE $size;
+    local ret=$?
+
+    kill_bg_info_box
+    case $ret in
+        0) ;;
+        1) warn_box "" "$(pfgt "Was unable to create directory for file %s"         "[f]$file[/]")"  ;;
+        2) warn_box "" "$(pfgt "Was unable to create file %s"                       "[f]$file[/]")"  ;;
+        3) warn_box "" "$(pfgt "Was unable to make %s filesystem on file %s" $FTYPE "[f]$file[/]")"  ;;
+        *) warn_box "" "$(pfgt "Unknown error creating file %s"                     "[f]$file[/]")"  ;;
+    esac
+
+    if [ $ret -ne 0 ]; then
+        rm -f $full
+        return 2
+    fi
+
+    if [ ! -f $full ]; then
+        warn_box "" "$(pfgt "The file %s is missing" "[f]$file[/]")"
+        return 3
+    fi
+
+    e2fsck -n $full
+    local ret=$?
+
+    case $ret in
+        0) okay_box "$TITLE" "" "$(pfgt "Success! File %s was created." "[f]$file[/]")" ;;
+    [123]) okay_box "$TITLE" "" "$(pfgt "Success! File %s was created and its filesystem was fixed." "[f]$file[/]")" ;;
+        *) warn_box "" "$(pfgt "The filesystem on %s is broken and wasn't fixed" "[f]$file[/]")"
+           rm -f $full
+           return 4
+    esac
+
+    MADE_FS=$file
+    return 0
+}
+
+_make_filefs() {
+    local full=$1  size=$2  type=$3  opts=$4
+    local name=$(basename $full)
+
+    noisy_yes_no_box "$TITLE" "" \
+        "$(pfgt "About to create %s file" "[f]$name[/]")" ""   \
+        "$(pf "%16s: %s" "`gt size`"      "[n]$(label_meg $size)[/]")"  \
+        "$(pf "%16s: %s" "`gt type`"      "[b]$type[/]")"      \
+        "$(pf "%16s: %s" "`gt device`"    "[f]$DEV[/]")" ""    \
+        "$(gt "Shall we proceed?")"                            \
+        || return 1
+
+    bg_info_box -o "$PULSATE"                           \
+        "$TITLE"                                        \
+        ""                                              \
+        "$(pfgt "Creating %s file" "[f]$name[/]")"      \
+        ""
+
+    dd if=/dev/zero of=$full bs=1M count=0 seek=$size status=none
+    mkfs -q -t $type $opts -F $full
+
+    kill_bg_info_box
+}
+
+copy_filefs() {
+    local from=$1  dest=$2  size=$3
+
+    vmsg "copy_filefs(\"$1\", \"$2\", \"$3\")"
+
+    from_dir=$(make_temp_dir copy-from)
+    dest_dir=$(make_temp_dir copy-dest)
+    if ! mount_if_needed -o loop "$from" "$from_dir"; then
+        rmdir $from_dir $dest_dir
+        return 1
+    fi
+    if ! mount_if_needed -o loop "$dest" "$dest_dir"; then
+        my_umount $from_dir
+        rmdir $from_dir $dest_dir
+        return 2
+    fi
+
+    bg_info_box -o "$PULSATE" "$TITLE" ""                                        \
+        "$(pfgt "Please be patient while %s are copied ..." "[n]$(label_meg $size)[/]")" \
+
+    cp -a $from_dir/* $dest_dir
+    #rsync --progress -a --delete "$from_dir" "$dest_dir"
+    my_umount $from_dir
+    my_umount $dest_dir
+    rmdir $from_dir $dest_dir
+    kill_bg_info_box
+    return 0
+}
+
+change_device() {
+    while true; do
+
+        unmount_device || error_box "$(pfgt "Was unable to unmount %s at %s" "[f]$DEV[/]" "[f]$DEV_MP[/]")"
+
+        select_device -a "$TITLE" "" \
+            "$(gt "Please select a new persistence device")" ""\
+            "$(pfgt "Current device is: %s" "[f]$DEV[/]")" ""
+
+        DEV=$UI_RESULT
+
+        mount_device $DEV  # Assigns to $DEV_MP
+
+        vmsg "Device: [n]$DEV[/],   Mountpoint: [f]$DEV_MP[/]"
+
+        is_readwrite_mp $DEV_MP && break
+
+        okay_box "$TITLE" \
+            "$(pfgt "The selected device %s is read-only" "[f]$DEV[/]")" "" \
+            "$(pfgt "Please select a different device")" ""
+    done
+}
+
+change_path() {
+    [ "$DISTRO" ]      || DISTRO="antiX"
+    [ "$FULL_DISTRO" ] || FULL_DISTRO="antiX-12"
+    local choice="$DISTRO!$FULL_DISTRO"
+
+    local cnt=0
+    for dir in $(ls $DEV_MP); do
+        [ -d "$DEV_MP/$dir" ] || continue
+        echo $dir | egrep -q "!" && continue
+        echo $dir | egrep -q "^($DISTRO|$FULL_DISTRO|lost.found|boot|...)$" && continue
+
+        choice="$choice!$dir"
+        cnt=$(( $cnt + 1 ))
+        [ "$cnt" -ge 20 ] && break
+    done
+    local custom=">>> $(gt "new") <<<"
+    choice="$choice!$custom"
+
+    combo_box "Path" "$choice" "$TITLE" "" \
+        "$(gt "Please choose a new persistence directory")" "" \
+        "$(pfgt "The current choice is %s" "[f]$P_PATH[/]")" ""
+
+    if [ "$UI_RESULT" != "$custom" ]; then
+        P_PATH=$UI_RESULT
+        return 0
+    fi
+
+    get_text "$TITLE" "" \
+        "$(gt "Please select a new persistence directory")" "" \
+        "$(pfgt "The current one is %s" "[f]$P_PATH[/]")" ""
+
+    P_PATH="$(echo "$UI_RESULT" | sed 's/!//g')"
+}
+
+make_path_if_needed() {
+    local mp=$1  path=$2  full_path="$1/$2"
+    [ -d "$full_path" ] && return 0
+
+    if [ -e "$full_path" ]; then
+        warn_box "$TITLE" ""                                                                \
+            "$(pfgt "Expected a directory at %s but found a file." "[f]$full_path[/]")"  "" \
+            "$(gf "Shall I try to erase it?")"                                           "" \
+            "$(gt "The only other option is to quit.")"                                  "" \
+            || error_box "$($pfgt "Not erasing %s at user's request." "[f]$full_path[/]")"
+
+        vmsg "rm -f [f]$full_path[/]"
+        rm -f $full_path
+        [ -e "$full_path" ] && error_box "$(pfgt "Unable to erase file %s" "[f]$full_path[/]")"
+    fi
+
+    vmsg "mkdir [f]$full_path[/]"
+    # FIXME: ask before making directory?
+    mkdir $full_path
+    [ -d "$full_path" ] || error_box "$(pfgt "Unable to make directory %s" "[f]$full_path[/]")"
+
+}
+
+fix_or_delete() {
+    local ui_result=$1
+    local file=$(echo $ui_result | awk '{print $NF}')
+    local type=$(echo $ui_result | cut -d: -f1)
+    local full=$FULL_PATH/$file
+
+    vmsg "fix_or_delete: type=$type file=$file"
+
+    if [ "$type" = "$FIX_IT" ]; then
+        e2fsck -p $full
+        local ret=$?
+        case "$ret" in
+             0)
+                info_box "$(pfgt "There were no errors to correct in %s." "[f]$file[/]")"
+                ;;
+            1|2)
+                info_box "$(pfgt "File system in %s should be fixed." "[f]$file[/]")"
+                ;;
+            4)
+                info_box"$(pfgt "File system in %s left uncorrected." "[f]$file[/]")" "" \
+                    "$(gt "You may be able to fix this manually with the command:")" "" \
+                    "[fixed]e2sfck $full[/]" ""
+                ;;
+            *)
+                yes_no_box "$(pfgt "Failed to fix %s" "[f]$file[/]")" "" \
+                    "$(pfgt "Shall I delete the file: %s?" "[f]$full[/]")" "" \
+                    || return
+
+                rm -f $full
+                ;;
+        esac
+
+    elif [ "$type" = "$DELETE_IT" ]; then
+        noisy_yes_no_box "$TITLE" "" "$(pfgt "Delete file %s?" "[f]$file[/]")" "" || return
+        rm -f $full
+    else
+        warn_box "Internal error in fix_or_delete($ui_result)"
+        return
+    fi
+
+}
+
+fix_files_menu() {
+    local choice file
+
+    while true; do
+        if ! [ "$BROKEN_FS" -o "$STALE_FILES" ]; then
+            info_box ""                         \
+            "$(gt "No more files left to fix or delete")" ""
+
+            return
+
+        fi
+
+        unset choice
+        for file in $BROKEN_FS; do
+            [ -e "$FULL_PATH/$file" ] || continue
+            choice="$choice!$FIX_IT: $file"
+        done
+
+        for file in $STALE_FILES; do
+            [ -e "$FULL_PATH/$file" ] || continue
+            choice="$choice!$DELETE_IT: $file"
+        done
+
+        if ! [ "$choice" ]; then
+            info_box "$FIX_CHOICE" ""                              \
+            "$(gt "Strange.  No more files left to fix or delete")" ""
+
+            return
+        fi
+
+        choice="$choice!$STOP_FIXING!$QUIT"
+        combo_box "$FIX_FILES_MENU" "$choice" "" \
+            "${FILE_TEXT[@]}"  ""
+
+        case "$UI_RESULT" in
+
+       "$STOP_FIXING")
+            return
+            ;;
+        "$QUIT")
+            noisy_yes_no_box "$TITLE" ""  "$(gt "Really Quit?")" && exit
+            ;;
+        *)
+            fix_or_delete "$UI_RESULT"
+
+            unset INFO_HASH USED_SPACE
+            declare -A INFO_HASH USED_SPACE
+            gather_file_info
+            ;;
+        esac
+
+    done
+}
+
+explore_menu() {
+    while true; do
+        local choice=$EXPLORE_DEV
+        if [ -d "$FULL_PATH" ]; then
+            choice="$choice!$EXPLORE_DIR"
+            for file in $GOOD_FS; do
+                choice="$choice!$(pf "$EXPLORE_FILE" "$file")"
+            done
+        else
+            echo "FIXME:"
+        fi
+
+        choice="$choice!$STOP_EXPLORING!$QUIT"
+
+        vmsg "choice=$choice"
+        combo_box "$EXPLORE_MENU" "$choice" "" \
+            "${MAIN_TEXT[@]}" "" "$(ctitle "Exploration Menu")" ""
+
+        case "$UI_RESULT" in
+        "$EXPLORE_DEV")
+            explore_dir "$DEV_MP" "$EXPLORING device=[p]$DEV[/]"
+            ;;
+        "$EXPLORE_DIR")
+            explore_dir "$FULL_PATH" "$EXPLORING [f]/$P_PATH[/] on [p]$DEV[/]"
+            ;;
+        "$STOP_EXPLORING")
+            return
+            ;;
+        "$QUIT")
+            noisy_yes_no_box "$TITLE" "$(gt "Really Quit?")" && exit
+            ;;
+        *)
+            file=$(echo $UI_RESULT | awk '{print $NF}')
+            vmsg "Exploring file: [f]$file[/]"
+            explore_filefs $file
+            ;;
+        esac
+    done
+}
+
+explore_filefs() {
+    local file=$1  full="$FULL_PATH/$1"
+
+    if ! [ -e "$full" ]; then
+        warn_box "$TITLE" "" \
+            "$(pfgt "Strange.  Could not find file %s" "[f]$full[/]")" "" \
+            "$(gt "Cannot explore what we cannot find.")" ""
+
+        return
+    fi
+
+    local dir=$(make_temp_dir $file)
+    if ! mount_if_needed -o loop $full $dir; then
+        rmdir $dir
+        return
+    fi
+
+    explore_dir $dir "$EXPLORING [f]/$P_PATH/$file[/] on [p]$DEV[/]"
+    my_umount $dir
+    rmdir $dir
+}
+
+mk_filefs_info() {
+    local file=$1  full=$2
+    local info="$(pf "[f]%12s[/]" "$file")"
+
+    if ! [ -e "$full" ]; then
+        INFO_HASH[$file]="$info: [p]$DOES_NOT_EXIST[/]"
+        return
+    fi
+
+    info="$info: [b]$(date -r $full '+%T %D')[/]"
+    info="$info : $(pf "[n]%8s[/]" "$(label_meg $(du_size $full))" $(gt "total"))"
+
+    USED_SPACE[$file]="0"
+    # if [ "$OPT_FAST" ]; then
+    #     INFO_HASH[$file]="$info"
+    #     return
+    # fi
+
+    local do_umount
+    local mp=$(get_mountpoint $full)
+    # printf "file: %-12s full: %-20s mp: %s\n" "$file" "$full" "$mp"
+    if ! [ "$mp" ]; then
+        mp=$(make_temp_dir $file)
+        if ! mount -o loop,ro $full $mp &>/dev/null; then
+            BROKEN_FS="$BROKEN_FS $file"
+            INFO_HASH[$file]="$info : [e]$BROKEN[/]"
+            rmdir $mp
+            return
+        fi
+        do_umount="true"
+    fi
+
+    GOOD_FS="$GOOD_FS $file"
+    info="$info : [p]$(fs_type $mp)[/]"
+    info="$info : [n]$(label_meg $(used_space $mp))[/]"
+    local percent="$(pf "%3s" `fs_percent $mp`)"
+    INFO_HASH[$file]="$info ([n]$percent[/]) $(gt "Used")"
+    USED_SPACE[$file]=$(used_space $mp)
+
+    [ "$do_umount" ] || return
+
+    my_umount $mp || error_box "Could not umount $file at $mp"
+    rmdir $mp
+}
+
+mount_device() {
+    local dev=$1
+
+    DEV_MP=$(get_mountpoint $dev)
+    if [ "$DEV_MP" ]; then
+        unset UNMOUNT_DEV
+    else
+        DEV_MP=$(make_temp_dir mount-point)
+        UNMOUNT_DEV="true"
+        mount_if_needed $dev $DEV_MP || return 1
+    fi
+    return 0
+}
+
+unmount_device() {
+    [ "$UNMOUNT_DEV" ] || return 0
+    my_umount $DEV_MP || return 1
+    rmdir $DEV_MP
+    return 0
+}
+
+gather_device_info() {
+    FULL_PATH="$DEV_MP/$P_PATH"
+
+    DEV_FS=$(df -T $DEV | tail -n1 | awk '{print $2'})
+
+    FS_TOTAL=$(all_space  $DEV_MP)
+    FS_AVAIL=$(free_space $DEV_MP)
+    SAFE_AVAIL=$(( $FS_AVAIL - $SAFETY_MARGIN ))
+
+    TOTAL_RAM=$(ram_total)
+    SAFE_RAM=$(($TOTAL_RAM + $SAFETY_MARGIN))
+
+    MAX_SIZE=$(min_of $SAFE_RAM $SAFE_AVAIL)
+
+    [ "$DEV_FS" = vfat -a $MAX_SIZE -gt 4095 ] && MAX_SIZE=4095
+
+    DEVICE_TEXT=(                                                    \
+        "[fixed]"                                                    \
+        "$(fmt_size "total space on device"  $FS_TOTAL)"             \
+        "$(fmt_size "available space"        $FS_AVAIL)"             \
+        "$(fmt_size "total RAM"              $TOTAL_RAM)"            \
+        ""                                                           \
+        "$(pf "%20s: %s" "$(gt "persist device")"  "[f]$DEV[/f]")"    \
+        "$(pf "%20s: %s" "$(gt "persist path")"    "[f]/$P_PATH[/]")" \
+        "[/]"                                                        \
+        )
+}
+
+gather_file_info() {
+
+    unset BROKEN_FS GOOD_FS MADE_FS STALE_FILES
+
+    FILE_TEXT=("[fixed]")
+
+    # echo "FULL_PATH: $FULL_PATH"
+    for file in $ACTIVE_FILES; do
+        mk_filefs_info $file $FULL_PATH/$file
+        push_array FILE_TEXT "${INFO_HASH[$file]}"
+        echo $file | grep -q rootfs || continue
+
+        file_size=$(du_size $FULL_PATH/$file)
+
+        [ "$file_size" -ge "$SAFE_RAM" ] && \
+            push_array FILE_TEXT "$(pfgt "(The %s file is already as large as all RAM)" "[f]$file[/]")"
+    done
+    push_array FILE_TEXT "[/]"
+
+    for file in $OLDEN_FILES; do
+        [ -e "$FULL_PATH/$file" ] || continue
+        STALE_FILES="$STALE_FILES $file"
+    done
+
+}
+
+#==============================================================================
+# Copy code from live initrd  (yuck)
+#==============================================================================
+
+initrd_size_menu() {
+    local text=$1  base=${2%%.*}  dir=$3
+    local fs_type=$(fs_type "$dir")
+        case $part_fstype in
+        vfat) is_vfat=true ;;
+    esac
+
+    # Set the maximum size for this meun
+    local max_size=$SAFE_AVAIL  min_size=0
+    [ -n "$is_vfat" -a "$max_size" -gt 4095 ] && max_size=4095
+    if [ "$base" = rootfs ]; then
+        [ "$max_size" -gt "$MAX_ROOTFS_SIZE" ] && max_size=$MAX_ROOTFS_SIZE
+        min_size=$MIN_ROOTFS_SIZE
+    fi
+
+    text="$text\n$(pf "Available space %s" "$(label_meg $max_size)")"
+
+    local size sizes
+    for size in $MKFS_SIZES; do
+        [ $size -gt $max_size ] && break
+        [ $size -lt $min_size ] && continue
+        sizes="$sizes $size"
+    done
+    # Error out if we don't have enough room
+    [ -z "$sizes" ] && return -1
+
+    # Include all available space as last entry in menu if it is appropriate
+    local max=$(echo "$sizes" | sed 's/.* //')
+    [ $max -lt $max_size ] && sizes="$sizes $max_size"
+
+    if [ -n "$SET_GUI" ]; then
+        local menu data
+        for size in $sizes; do
+            local label=$(label_meg $size)
+            menu="$menu${menu:+!}$label"
+            data="$data$label:$size\n"
+        done
+        combo_box "size" "$menu" "$text"
+
+        # Get the exact size back, not an approximation
+        UI_RESULT=$(echo -e "$data" | grep "^$UI_RESULT:" | cut -d: -f2)
+    else
+        #echo -e "$text"
+        cli_size_menu UI_RESULT "$text" "" $sizes
+    fi
+}
+
+#------------------------------------------------------------------------------
+# Let user select from a wide range of sizes from live initrd
+#------------------------------------------------------------------------------
+cli_size_menu() {
+    local var=$1 title=$2  max_s=${3:-12} ; shift 3
+
+    # create a variable for each row
+    local i
+    for i in $(seq 1 $max_s); do
+        eval local s_$i
+    done
+
+    # Fill the rows with  "cnt) label"
+    local cnt=0  scnt=0  size  data label  s
+    for size in $* quit ; do
+        cnt=$((cnt + 1))
+        scnt=$((scnt + 1))
+
+        case $size in
+                quit) label=$(bq $(qt "quit"))  ;;
+            *[^0-9]*) label=$(bq "$size")       ;;
+                   *) label=$(label_meg $size)  ;;
+        esac
+
+        data="$data$cnt:$size\n"
+        eval s=\$s_$scnt
+        s="$s$(printf "%3s) %-12s" "$cnt" "$label")"
+        eval s_$scnt=\$s
+        [ $scnt -ge $max_s ] && scnt=0
+    done
+    [ $cnt -lt $max_s ] && max_s=$cnt
+
+    local display
+    for cnt in $(seq 1 $max_s); do
+        eval s=\$s_$cnt
+        display="$display$s\n"
+    done
+
+    display=$(echo -e "$display" | sed -r -e "s/( [0-9]+)(\))/ $green\1$white\2$cyan/g" -e "s/$/$nc_co/")
+
+    my_select_2 "$text" UI_RESULT "" "$data" "$display"
+}
+
+#------------------------------------------------------------------------------
+# from live initrd
+#------------------------------------------------------------------------------
+my_select_2() {
+    local title=$1  var=$2  default=$3  data=$4  display=$5
+    local def_prompt=$(printf "Press <%s> for the default selection" "$(cq "enter")")
+
+    local val input err_msg
+    while [ -z "$val" ]; do
+
+        echo -e "$hi_co$title$nc_co"
+        #printf "$display\n" | sed -r -e "s/(^|\t)( ?[0-9]+)(\))/\t$green\2$white\3$cyan/g" -e "s/$/$nc_co/"
+        #printf "$display" | sed -r -e "s/(^|\t| )( ?[0-9]+)(\))/\t$green\2$white\3$cyan/g" -e "s/$/$nc_co/"
+        printf "$display\n" | sed "s/$/$nc_co/"
+        [ "$err_msg" ] && printf "$err_co%s$nc_co\n" "$err_msg"
+        [ "$default" ] && printf "$m_co%s$nc_co\n" "$def_prompt"
+        echo -n "$green>$nc_co "
+
+        read input
+        err_msg=
+        [ -z "$input" -a -n "$default" ] && input=$default
+
+        if ! echo "$input" | grep -q "^[0-9]\+$"; then
+            err_msg="You must enter a number"
+            [ "$default" ] && err_msg="You must enter a number or press <enter>"
+            continue
+        fi
+
+        val=$(echo -e "$data" | sed -n "s/^$input://p" | cut -d: -f1)
+
+        if [ -z "$val" ]; then
+            err_msg=$(printf "The number <%s> is out of range" "$(pqe $input)")
+            continue
+        fi
+
+        eval $var=\$val
+        break
+    done
+}
+
+#------------------------------------------------------------------------------
+# from live initrd
+#------------------------------------------------------------------------------
+set_colors() {
+    local noco=$1  loco=$2
+
+    [ "$noco" ] && return
+
+    local e=$(printf "\e")
+     black="$e[0;30m";    blue="$e[0;34m";    green="$e[0;32m";    cyan="$e[0;36m";
+       red="$e[0;31m";  purple="$e[0;35m";    brown="$e[0;33m"; lt_gray="$e[0;37m";
+   dk_gray="$e[1;30m"; lt_blue="$e[1;34m"; lt_green="$e[1;32m"; lt_cyan="$e[1;36m";
+    lt_red="$e[1;31m"; magenta="$e[1;35m";   yellow="$e[1;33m";   white="$e[1;37m";
+     nc_co="$e[0m";
+
+    cheat_co=$white;      err_co=$red;       hi_co=$white;
+      cmd_co=$white;     from_co=$lt_green;  mp_co=$magenta;   num_co=$magenta;
+      dev_co=$magenta;   head_co=$yellow;     m_co=$lt_cyan;    ok_co=$lt_green;
+       to_co=$lt_green;  warn_co=$yellow;  bold_co=$yellow;
+}
+
+bq()     { echo "$*"                        ;}
+cq()     { echo "$*"                        ;}
+#bq()     { echo "$yellow$*$m_co"          ;}
+
+set_colors
+prep_main "$@"
+main

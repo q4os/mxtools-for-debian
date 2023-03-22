@@ -1,0 +1,22 @@
+#mx-tweak theme file
+
+Name=MX Light Thick Borders
+
+#panel_settings
+
+background-color=none
+background-image=none
+background-style=0
+
+#xsettings
+xsettings_gtk_theme=mx-comfort
+xsettings_icon_theme=Papirus-mxblue-darkpanes
+
+#xfwm4
+xfwm4_window_decorations=mx-comfort-thick-border
+
+#preview screenshot
+screenshot=mx-light.jpg
+
+
+

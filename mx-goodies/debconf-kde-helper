@@ -1,0 +1,8 @@
+#!/bin/sh
+
+# a wrapper to suppress QCommandLineParser warnings like those here:
+#    QCommandLineParser: already having an option named "h"
+#    QCommandLineParser: already having an option named "help-all"
+#    QCommandLineParser: already having an option named "v"
+
+[ -x /usr/bin/debconf-kde-helper.real ] && /usr/bin/debconf-kde-helper.real "$@" 2>/dev/null

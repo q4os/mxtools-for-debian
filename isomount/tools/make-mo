@@ -1,0 +1,37 @@
+#!/bin/bash
+
+NAMES="isomount"
+to_dir="locale"
+
+main() {
+    for name in $NAMES; do
+        from_dir="../translations/antix-development.$name"
+        printf "%25s:" "$name"
+
+        local from_file
+        for from_file in $from_dir/*.po; do
+            egrep -q 'msgstr "[^"]+"' $from_file || continue
+            local lang=$(basename $from_file .po)
+            local to_file=$to_dir/$lang/LC_MESSAGES/$name.mo
+            should_copy $from_file $to_file || continue
+            echo -n " $lang"
+            mkdir -p $(dirname $to_file)
+            msgfmt -o $to_file $from_file
+        done
+        echo
+
+    done
+}
+
+should_copy() {
+    local sorc=$1  targ=$2
+
+    [ "$FORCE" ] && return 0
+    [ -f $targ ] || return 0
+    local targ_time=$(stat -c %Y $targ)
+    local sorc_time=$(stat -c %Y $sorc)
+    [ $targ_time -lt $sorc_time ] && return 0
+    return 1
+}
+
+main "$@"

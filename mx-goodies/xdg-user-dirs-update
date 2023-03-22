@@ -1,0 +1,77 @@
+#!/bin/bash
+
+main(){
+#first pass the real xdg-user-dirs-update command
+
+/usr/bin/xdg-user-dirs-update.real "$@"
+
+sleep 0.5
+
+##populate Desktop Folder if it exist
+
+configfolder="$HOME/.config/MX-Linux"
+targetfolder="$(xdg-user-dir DESKTOP)"
+xdg_checkfile="xdg_check"
+liveapplist="minstall.desktop"
+
+applist="FAQ.desktop \ 
+Help.desktop"
+
+#check to see if we need to do anything else
+
+if [ -e "$configfolder/$xdg_checkfile" ]; then
+	exit 0
+fi
+
+#check for live
+
+if false ; then
+	#special case, check for Installer.desktop
+	if [ ! -e "$HOME/Desktop/Installer.desktop" ]; then 
+		copystuff "$liveapplist"
+	fi
+	#special case, check for installer link for idesktop
+	if [ -d "$HOME/.idesktop" ]; then
+		if [ ! -e "$HOME/.idesktop/gazelle.lnk" ]; then
+			cp /usr/local/share/live-files/files/etc/skel/.idesktop/gazelle.lnk "$HOME/.idesktop" 
+		fi
+	fi
+fi
+
+#copy everything else
+# copystuff "$applist"
+
+#mark so we don't do it again
+
+if [ ! -d "$configfolder" ]; then
+	mkdir -p "$configfolder"
+fi
+
+touch "$configfolder/$xdg_checkfile"
+}
+
+copystuff(){
+if [ -d "$targetfolder" ]; then
+	for i in $1; do
+		if [ ! -e "$targetfolder/$i" ]; then
+			if [ -e "/usr/share/applications/$i" ]; then
+				cp "/usr/share/applications/$i" "$targetfolder" 
+				chmod a+x "$targetfolder/$i"
+				#special case; make sure NoDisplay is not in minstall.desktop file
+				if [ "$i" = "minstall.desktop" ]; then
+					sed -i '/NoDisplay*/d' "$targetfolder/minstall.desktop"
+				fi
+				#make executable from Xfce desktop. safe as long as gio exists on system
+				if [ -x /usr/bin/gio ]; then
+    				cd "$targetfolder"
+    				gio set -t string $i metadata::xfce-exe-checksum "$(sha256sum $i | awk '{print $1}')"
+				fi
+				
+			fi
+		fi
+	done
+fi
+}
+
+main "$@"
+exit 0

@@ -1,0 +1,55 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# Translators:
+# Eduard Selma <selma@tinet.cat>, 2017
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2011
+msgid ""
+msgstr ""
+"Project-Id-Version: antix-development\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-10-27 02:09+0300\n"
+"PO-Revision-Date: 2017-11-13 16:22+0000\n"
+"Last-Translator: Eduard Selma <selma@tinet.cat>\n"
+"Language-Team: Catalan (http://www.transifex.com/anticapitalista/antix-development/language/ca/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: ca\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: block-advert.sh:24
+#, sh-format
+msgid ""
+"The <b>$title</b> tool adds stuff to your /etc/hosts file, so \\nthat many "
+"advertising servers and websites will not be able to connect \\nto this "
+"PC.\\n\\nYou can choose one service or combine multiple services for more "
+"advert protection.\\nBlocking ad servers protects your privacy, saves you "
+"bandwidth, greatly \\nimproves web-browsing speed and makes the internet "
+"much less annoying in general.\\n\\nDo you want to proceed?"
+msgstr "L'eina <b>$title</b> afegeix entrades al vostre fitxer /etc/hosts,\\n per tal que molts servidors d'anuncis i llocs web no puguin\\nconnectar-se al vostre PC.\\n\\nPodeu triar un servei o combinar-ne diversos per tenir més protecció.\\nBloquejar els servidors d'anuncis protegeix la vostra privacitat, us estalvia ample de \\nbanda, millora la velocitat de navegació i fa internet més atractiu.\\n\\nVoleu continuar?"
+
+#: block-advert.sh:81
+msgid "Restoring original /etc/hosts."
+msgstr "Restaurant el /etc/hosts original."
+
+#: block-advert.sh:117
+#, sh-format
+msgid "Loading  adlist from $domain"
+msgstr "Carregant adlist des de $domain"
+
+#: block-advert.sh:161
+msgid ""
+"Success - your settings have been changed.\\n\\nYour hosts file has been "
+"updated.\\nRestart your browser to see the changes."
+msgstr "Èxit - S'ha canviat el vostre arranjament. \\n \\nEl vostre fitxer de hosts s'ha actualitzat.\\nTorneu a arrencar el vostre navegador per a veure els canvis."
+
+#: block-advert.sh:182
+msgid "Choose your preferred ad blocking service(s)"
+msgstr "Trieu els vostres serveis de bloqueig d'anuncis"
+
+#: block-advert.sh:225
+msgid "No item selected"
+msgstr "Cap element seleccionat"

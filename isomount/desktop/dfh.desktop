@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=dfh
+Comment=Show normal mountpoints
+Icon=preferences-desktop
+Exec=/usr/local/bin/dfh
+Type=Application
+Categories=System;
+NoDisplay=True

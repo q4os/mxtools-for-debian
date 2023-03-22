@@ -1,0 +1,252 @@
+mx-boot-options (22.10.02+deb11u13) stable; urgency=medium
+
+  * MX Tools release
+
+ -- Adrian <administrator@localdomain>  Wed, 22 Mar 2023 10:43:51 +0100
+
+mx-boot-options (22.10.02) mx; urgency=medium
+
+  * Allow skipping selecting directory for chroot when running Live (useful for managing Uefi boot options)
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 27 Oct 2022 22:58:53 -0400
+
+mx-boot-options (22.10.01) mx; urgency=medium
+
+  * update translations 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 26 Oct 2022 19:56:18 -0400
+
+mx-boot-options (22.9.01) mx; urgency=medium
+
+  * Fix: toggling flatmenu. Make sure it can read "true" last entry wins
+
+ -- fehlix <fehlix@mxlinux.org>  Thu, 15 Sep 2022 20:04:45 -0400
+
+mx-boot-options (22.9) mx; urgency=medium
+
+  * Fix: toggling flatmenu. Make sure it can read both "y" and "yes"
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 15 Sep 2022 19:37:17 -0400
+
+mx-boot-options (22.8.01) mx; urgency=medium
+
+  * Fix: launching documents from Help (fixes a problem in Plasma)
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 22 Aug 2022 21:02:26 -0400
+
+mx-boot-options (22.8) mx; urgency=medium
+
+  * Fix: launching Firefox from Help
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 17 Aug 2022 21:36:22 -0400
+
+mx-boot-options (22.7.01) mx; urgency=medium
+
+  * translation refresh
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 23 Jul 2022 11:15:08 -0400
+
+mx-boot-options (22.7) mx; urgency=medium
+
+  * Adjust pkexec/sudo environment parameter
+  * Fix EFI System Partition detection on dos/mbr partition table
+  * Remove not needed --qtenv annotation pkexec policy
+
+ -- fehlix <fehlix@mxlinux.org>  Mon, 04 Jul 2022 19:18:59 -0400
+
+mx-boot-options (22.6.02) mx; urgency=medium
+
+  * Fix: When creating UEFI entry use correct partition number rather than default #1
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 30 Jun 2022 22:08:19 -0400
+
+mx-boot-options (22.6.01) mx; urgency=medium
+
+  * Add UEFI boot manager
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 27 Jun 2022 03:07:23 -0400
+
+mx-boot-options (22.6) mx; urgency=medium
+
+  * Preserve user theme when launching program as root
+  * Make sure HOME and XDG_RUNTIME_DIR are correct when launching as root
+  * Advance animation when previewing plymouth theme
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 13 Jun 2022 13:50:52 -0400
+
+mx-boot-options (22.2) mx; urgency=medium
+
+  * New build
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 10 Feb 2022 08:59:27 -0500
+
+mx-boot-options (21.1.02) mx; urgency=medium
+
+  * adjust chroot
+
+ -- fehlix <fehlix@mxlinux.org>  Thu, 10 Feb 2022 07:36:02 -0500
+
+mx-boot-options (21.1.01) mx; urgency=medium
+
+  * bug fix: detection grub present 
+
+ -- Adrian <adrian@mxlinux.org>  Sun, 10 Jan 2021 12:16:12 -0500
+
+mx-boot-options (21.1) mx; urgency=medium
+
+  * show grub options only if grub is installed
+
+ -- Adrian <adrian@mxlinux.org>  Sat, 09 Jan 2021 15:22:06 -0500
+
+mx-boot-options (20.6) mx; urgency=medium
+
+  * fix potential KDE issue with buttons passing & accelerator to text
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 17 Jun 2020 00:38:10 -0400
+
+mx-boot-options (19.9) mx; urgency=medium
+
+  * new translations
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 27 Sep 2019 14:21:20 -0400
+
+mx-boot-options (19.8.1) mx; urgency=medium
+
+  * new translations
+  * removed libcmd dependency
+
+ -- Adrian <adrian@mxlinux.org>  Sat, 31 Aug 2019 19:18:22 -0400
+
+mx-boot-options (19.8) mx; urgency=medium
+
+  * added offline help file
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 21 Aug 2019 13:17:50 -0400
+
+mx-boot-options (19.7.1) mx; urgency=medium
+
+  * updated icon
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 08 Jul 2019 10:50:00 -0400
+
+mx-boot-options (19.7) mx; urgency=medium
+
+  * fix windows buttons for Buster
+
+ -- Adrian <adrian@mxlinux.org>  Sun, 07 Jul 2019 13:18:49 -0400
+
+mx-boot-options (19.5.1) mx; urgency=medium
+
+  * add support for paravirtualized (Xen) drives and partitions
+
+ -- Adrian <adrian@mxlinux.org>  Sat, 18 May 2019 22:04:40 -0400
+
+mx-boot-options (19.5) mx; urgency=medium
+
+  * bug fix: enabling grub line doesn't kill /etc/debian/grub
+  * create backup /etc/debian/grub.bak and bak.0 that doesn't get overwritten
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 13 May 2019 23:35:59 -0400
+
+mx-boot-options (19.4.1) mx; urgency=medium
+
+  * fix default grub when using submenus
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 08 Apr 2019 09:53:27 -0400
+
+mx-boot-options (19.4) mx; urgency=medium
+
+  * updated translations
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 05 Apr 2019 11:19:01 -0400
+
+mx-boot-options (19.1.1) mx; urgency=medium
+
+  * updated translations
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 23 Jan 2019 09:33:45 -0500
+
+mx-boot-options (19.1) mx; urgency=medium
+
+  * save default grub entry when using submenus
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 09 Jan 2019 01:21:54 -0500
+
+mx-boot-options (18.12.3) mx; urgency=medium
+
+  * fix reading kernel options
+
+ -- Adrian <adrian@mxlinux.org>  Sat, 15 Dec 2018 18:03:32 -0500
+
+mx-boot-options (18.12.2) mx; urgency=medium
+
+  * fix reading kernel options
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 13 Dec 2018 10:50:37 -0500
+
+mx-boot-options (18.12.1) mx; urgency=medium
+
+  * updated translations
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 10 Dec 2018 08:51:30 -0500
+
+mx-boot-options (18.12) mx; urgency=medium
+
+  * add GRUB theme selection
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 06 Dec 2018 13:06:24 -0500
+
+mx-boot-options (18.11) mx; urgency=medium
+
+  * updated translations
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 30 Nov 2018 11:33:44 -0500
+
+mx-boot-options (18.10) mx; urgency=medium
+
+  * updated translations
+
+ -- Adrian <adrian@mxlinux.org>  Sun, 14 Oct 2018 18:15:57 -0400
+
+mx-boot-options (18.8.1) mx; urgency=medium
+
+  * read GRUB_DEFAULT ignoring quotes or single quotes
+
+ -- Adrian <adrian@mxlinux.org>  Tue, 28 Aug 2018 16:11:38 -0400
+
+mx-boot-options (18.8) mx; urgency=medium
+
+  * add translations
+  * unset saved entry in grubenv
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 13 Aug 2018 21:36:36 -0400
+
+mx-boot-options (0.18.8.3) mx; urgency=medium
+
+  * add timeout 5 sec for memtest to avoid locking bootloader
+
+ -- Adrian <adrian@mxlinux.org>  Sun, 12 Aug 2018 12:53:46 -0400
+
+mx-boot-options (0.18.8.2) mx; urgency=medium
+
+  * fix icon other themes
+
+ -- Adrian <adrian@mxlinux.org>  Sat, 11 Aug 2018 15:25:15 -0400
+
+mx-boot-options (0.18.8.1) mx; urgency=medium
+
+  * don't apply changes automatically when enabling splash
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 06 Aug 2018 08:53:22 -0400
+
+mx-boot-options (0.18.8) mx; urgency=medium
+
+  * install plymouth-themes-mx when selecting boot splash
+
+ -- Adrian <adrian@mxlinux.org>  Sun, 05 Aug 2018 14:00:01 -0400
+
+mx-boot-options (0.18.7) mx; urgency=medium
+
+  * initial release
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 26 Jul 2018 12:43:48 -0400

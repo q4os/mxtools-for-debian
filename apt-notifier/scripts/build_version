@@ -1,0 +1,15 @@
+#/bin/bash
+
+# package build helper script to adjust version number 
+
+if ! [ -f debian/changelog ]; then
+	exit 0
+fi
+
+#BUILD_VERSION=$(sed -n -r '1{s/^[^(]+[(]//; s/[)].*//; p}' debian/changelog)
+BUILD_VERSION=$(dpkg-parsechangelog -S Version)
+echo "BUILD_VERSION=$BUILD_VERSION" 
+
+sed -i -r "1,/^BUILD_VERSION/s/BUILD_VERSION.*/BUILD_VERSION=\x27$BUILD_VERSION\x27/" lib/modules/apt*.py
+
+exit 0

@@ -1,0 +1,18 @@
+<!DOCTYPE Menu PUBLIC "-//freedesktop//DTD Menu 1.0//EN"
+          "http://www.freedesktop.org/standards/menu-spec/menu-1.0.dtd">
+          <Menu>
+            <Name>Applications</Name>
+            <Menu>
+              <Name>mx-tools</Name>
+              <Directory>mx-tools.directory</Directory>
+              <Include>
+                <Category>MX-Software</Category>
+		<Category>MX-Maintenance</Category>
+		<Category>MX-Setup</Category>
+		<Category>MX-Live</Category>
+		<Category>MX-Utilities</Category>
+		<Category>X-antiX</Category>		
+        <Filename>mx-tools.desktop</Filename>
+              </Include>
+            </Menu>
+          </Menu>

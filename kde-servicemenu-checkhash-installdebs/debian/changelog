@@ -1,0 +1,57 @@
+kde-servicemenu-checkhash-installdebs (1.3mx21+deb11u13) stable; urgency=medium
+
+  * MX Tools release
+
+ -- Steven Pusser <administrator@localdomain>  Wed, 22 Mar 2023 10:43:50 +0100
+
+kde-servicemenu-checkhash-installdebs (1.3mx21) mx; urgency=medium
+
+  * Rebuild for MX 21.
+
+ -- Steven Pusser <stevep@mxlinux.org>  Wed, 08 Sep 2021 13:10:59 -0700
+
+kde-servicemenu-checkhash-installdebs (1.3mx19+1) mx; urgency=medium
+
+  [ Steven Pusser ]
+  * Rebuild for the MX repo.
+
+  [ fehlix ]
+  * Fix to allow multifile selection
+
+ -- Steven Pusser <stevep@mxlinux.org>  Fri, 19 Jun 2020 19:02:30 -0700
+
+ kde-servicemenu-checkhash-installdebs (1.2mx19+1) mx; urgency=medium
+
+  [ Steven Pusser ]
+  * Rebuild for the MX repo.
+
+  [ fehlix ]
+  * Fix spaces in path, add SHA512, use translations "press any key to close"
+    from mx-goodies.
+
+ -- Steven Pusser <stevep@mxlinux.org>  Tue, 16 Jun 2020 21:46:24 -0700
+
+kde-servicemenu-checkhash-installdebs (1.1mx19+1) mx; urgency=medium
+
+  * Add Konqueror as alternative dependency.
+
+ -- Steven Pusser <stevep@mxlinux.org>  Fri, 26 Jul 2019 11:31:37 -0700
+
+kde-servicemenu-checkhash-installdebs (1.1mx19) mx; urgency=medium
+
+  * Rebuild for MX 19.
+
+ -- Steven Pusser <stevep@mxlinux.org>  Thu, 25 Jul 2019 18:01:43 -0700
+
+kde-servicemenu-checkhash-installdebs (1.1mx17) mx; urgency=medium
+
+  * Add "Press any key to close" message.
+  * Use sudo for install debs action.
+
+ -- Steven Pusser <stevep@mxlinux.org>  Wed, 20 Dec 2017 18:57:31 -0800
+
+kde-servicemenu-checkhash-installdebs (1.0mx17) mx; urgency=medium
+
+  * Initial packaging.
+
+ -- Steven Pusser <stevep@mxlinux.org>  Wed, 20 Dec 2017 14:09:45 -0800

@@ -1,0 +1,26 @@
+# Set mesa override variable when intel driver is in use
+# /etc/X11/Xsession.d/57mesa-override
+#
+
+
+# do nothing on mesa version 22 and up)
+
+      FILE="/etc/X11/xorg.conf.d/20-intel.conf"
+      if [ -e "$FILE" ]; then
+            mesaversion=$(LANG=C dpkg-query -s libglx-mesa0 | grep "Version" | cut -d":" -f 2|cut -d"." -f1)
+            mesaversion=${mesaversion#[[:space]]}
+            if [ "$mesaversion" -lt "22" ]; then
+                  export MESA_LOADER_DRIVER_OVERRIDE=i965
+            fi
+      fi
+      FILE="/etc/X11/xorg.conf.d/xorg.conf"
+      if [ -e "$FILE" ]; then
+            TEST=$(grep Driver "$FILE" | grep intel)
+            if [ -z "$TEST" ]; then
+                  mesaversion=$(LANG=C dpkg-query -s libglx-mesa0 | grep "Version" | cut -d":" -f 2|cut -d"." -f1)
+                  mesaversion=${mesaversion#[[:space]]}
+                  if [ "$mesaversion" -lt "22" ]; then
+                        export MESA_LOADER_DRIVER_OVERRIDE=i965
+                  fi
+            fi
+      fi

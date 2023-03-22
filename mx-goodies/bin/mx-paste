@@ -1,0 +1,16 @@
+#!/bin/bash
+#
+# just makes an mx-wrapper
+#
+# uses wgetpaste from http://wgetpaste.zlin.dk/
+# free to use found in gentoo
+#
+export INFO_COMMAND="inxi "
+export INFO_ARGS="-v "
+export DEFAULT_NICK="MX user"
+export DEFAULT_SERVICE="dpaste"
+
+/usr/local/bin/wgetpaste "$@"
+
+
+

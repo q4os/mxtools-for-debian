@@ -1,0 +1,54 @@
+Disk Manager - Simple filesystem manager :
+==========================================
+ 
+ Disk Manager allow you to manage easily your partitions.
+ Current features of the project are :
+  - Automatic detection of new partitions at startup.
+  - Full management of file system configuration.
+  - Enable/disable write support for NTFS (need ntfs-3g installed).
+
+Installation :
+==============
+
+If you didn't found binary for your distribution,
+you can install this software with a classical :
+
+./configure
+make
+make install (as root)
+
+
+Requirements :
+==============
+
+- python3 
+- python-gi
+- udev (>= 60 strongly recommended, but might works with lower udev)
+- dmsetup (optional, for crypt, lvm and raid device)
+- e2fsprogs for blkid (optional, absolutely needed for old udev (< 60))
+
+
+Special requirements :
+======================
+
++ NTFS read/write support :
+ - ntfs-3g driver (http://www.ntfs-3g.org)
+
+Bug report :
+============
+
+You can file an issue here on github.
+
+If disk-manager failed to detect devices, or detect wrong devices, 
+it's might be useful to attach to your bug report the full database
+of disk-manager ran in debug mode (preferably as root) :
+
+# disk-manager --debug --query-database=all
+
+also with a copy of your /etc/fstab
+
+
+Translation :
+=============
+info to follow
+

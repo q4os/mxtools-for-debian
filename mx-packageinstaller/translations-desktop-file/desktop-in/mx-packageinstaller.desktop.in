@@ -1,0 +1,10 @@
+[Desktop Entry]
+# The desktop entry name will be displayed within the menu.
+Name=MX Package Installer
+# # The desktop entry comment will be shown within the menu.
+Comment=Simple Software Application Package Installer
+Exec=mxpi-launcher
+Icon=mx-packageinstaller
+NoDisplay=false
+Categories=System;MX-Software;
+Type=Application

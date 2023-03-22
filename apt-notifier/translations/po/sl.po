@@ -1,0 +1,313 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the apt-notifier package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+# Translators:
+# Mario <al.manja@gmx.com>, 2022
+# Arnold Marko <arnold.marko@gmail.com>, 2022
+# Dolphin Oracle <dolphinoracle@gmail.com>, 2022
+# 
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: apt-notifier\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-01-28 02:38+0100\n"
+"PO-Revision-Date: 2017-05-11 01:14+0000\n"
+"Last-Translator: Dolphin Oracle <dolphinoracle@gmail.com>, 2022\n"
+"Language-Team: Slovenian (https://www.transifex.com/anticapitalista/teams/10162/sl/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: sl\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3);\n"
+
+msgid "$count new updates available"
+msgstr "$countposodobitev je na voljo"
+
+msgid "0 updates available"
+msgstr "Nobena posodobitev ni na voljo"
+
+msgid "1 new update available"
+msgstr "Ena posodobitev je na voljo"
+
+msgid "About"
+msgstr "O programu"
+
+msgid "About MX Updater"
+msgstr "O MX posodobitvi"
+
+msgid "Auto-update"
+msgstr "Samodejna posodobitev"
+
+msgid "Auto-update dpkg log(s)"
+msgstr "Samodejna posodobitev dpkg dnevnikov"
+
+msgid "Auto-update log(s)"
+msgstr "Samodejna posodobitev dnevnikov"
+
+msgid "Automatically answer 'yes' to all prompts during full/basic upgrade"
+msgstr ""
+"Samodejno odgovori z 'yes' na vsa vprašanja med celotno/osnovno nadgradnjo"
+
+msgid "Automatically answer 'yes' to all prompts during upgrade"
+msgstr "Samodejno odgovori z 'yes' na vsa vprašanja med nadgradnjo"
+
+msgid "Cancel"
+msgstr "Prekliči"
+
+msgid "Changelog"
+msgstr "Dnevnik sprememb"
+
+msgid "Check for Updates"
+msgstr "Preveri za posodobitve"
+
+msgid "Close"
+msgstr "Zapri"
+
+msgid "For a less detailed view see 'Auto-update dpkg log(s)' or 'History'."
+msgstr ""
+"Za manj podroben prikaz si oglejte 'Dnevnik samodejne nadgradnje' ali "
+"'Zgodovina'."
+
+msgid "Hide until updates available"
+msgstr "Skrij, dokler ne obstajajo nove posodobitve"
+
+msgid "History"
+msgstr "Zgodovina"
+
+msgid "Icons"
+msgstr "Ikone"
+
+msgid "Left-click behaviour   (when updates are available)"
+msgstr "Obnašanje ob levem kliku (ko so posodobitve na voljo)"
+
+msgid "License"
+msgstr "Licenca"
+
+msgid "MX Auto-update  --  unattended-upgrades dpkg log viewer"
+msgstr ""
+"MX samodejna posodobitev - prikazovalnik dpkg dnevnika za nenadzorovane "
+"nadgradnje"
+
+msgid "MX Auto-update  --  unattended-upgrades log viewer"
+msgstr "MX samodejna posodobitev - ogled dnevnika za nenadzorovane nadgradnje"
+
+msgid "MX Package Installer"
+msgstr "MX Namestitev paketov"
+
+#. The autostart desktop entry name will be shown within the list of autostart
+#. entries.
+#. The desktop entry name will be displayed within the menu.
+msgid "MX Updater"
+msgstr "MX posodobitev"
+
+msgid "MX Updater Help"
+msgstr "MX nadgradnja pomoč"
+
+msgid "MX Updater preferences"
+msgstr "Nastavitve za MX posodobitev"
+
+msgid "MX Updater--View and Upgrade, previewing: basic upgrade"
+msgstr "MX Posodobitev--Oglej in nadgradi, predogled: osnovna nadgradnja"
+
+msgid "MX Updater--View and Upgrade, previewing: full upgrade"
+msgstr "MX Posodobitev--Oglej in nadgradi, predogled: celotna nadgradnja"
+
+msgid "No logs found."
+msgstr "Noben dnevnik ni bil najden."
+
+msgid "No unattended-upgrades dpkg log(s) found."
+msgstr "Dnevnik nenadzorovanih nadgradenj ni bil najden"
+
+msgid "No updates available"
+msgstr "Ni posodobitev"
+
+msgid "Other options"
+msgstr "Druge možnosti"
+
+msgid "Preferences"
+msgstr "Možnosti"
+
+msgid "Press 'h' for help, 'q' to quit"
+msgstr "Pritisnite 'h' za pomoč ali 'q' za izhod"
+
+msgid "Quit"
+msgstr "Končaj"
+
+msgid "Reload"
+msgstr "Ponovno naloži"
+
+msgid ""
+"Reload the package information to become informed about new, removed or "
+"upgraded software packages. (apt-get update)"
+msgstr ""
+"Ponovno naloži podatke o paketih in tako osveži podatke o novih, "
+"odstranjenih ali nadgrajenih programskih paketih. (apt-get update)"
+
+msgid "Restart MX Updater"
+msgstr "Ponovni zagon MX posodobitev"
+
+msgid "Running apt-get autoremove, if you are unsure type 'n'."
+msgstr "Izvajam apt-get autoremove. Će ste v dvomih, odgovorite z 'n'"
+
+msgid ""
+"Switches the type of Upgrade that will be performed, alternating back and "
+"forth between 'full upgrade' and 'basic upgrade'."
+msgstr ""
+"Preklaplja med načinom nadgradnje, ki se bo izvedla tj. med 'celotno "
+"nadgradnjo' in 'osnovno nadgradnjo'."
+
+msgid "Synaptic Help"
+msgstr "Synaptic pomoč"
+
+msgid "Tray applet to notify of system and application updates"
+msgstr "Aplet v sistemski vrstici, ki opozarja na posodobitve"
+
+msgid "Unattended-upgrades"
+msgstr "Nenadzorovano posodabljanje"
+
+msgid "Unneeded packages are installed that can be removed."
+msgstr "Nameščeni so nepotrebni paketi, ki jih lahko odstranite."
+
+msgid "Updates"
+msgstr "Posodobitve"
+
+msgid "Upgrade mode"
+msgstr "Način nadgradnje"
+
+msgid "Upgrade using Synaptic"
+msgstr "Nadgradnja z uporabo Synaptic"
+
+msgid "Using basic upgrade (not recommended)"
+msgstr "Izvedba osnovne posodobitve (odsvetujemo)"
+
+msgid "Using full upgrade"
+msgstr "Izvedba celotne posodobitve"
+
+msgid "View and Upgrade"
+msgstr "Preglej in nadgradi"
+
+msgid "You have $count new updates available"
+msgstr "Na voljo imate $count posodobitve"
+
+msgid "You have 1 new update available"
+msgstr "Na voljo imate eno posodobitev"
+
+#. TRANSLATORS: Fill in all plural forms. The parenthesized expression '{num}'
+#. is replaced by the actual number of updates available at runtime.
+#. For the singular form, you can replace '{num}' with 'one'.
+#. Example with 2 plural forms:
+#. msgstr[0] -> singular form: use 'one new update' or '{num} new update'.
+#. msgstr[1] -> plural form: use '{num} new updates'.
+#, python-brace-format
+msgid "You have {num} new update available"
+msgid_plural "You have {num} new updates available"
+msgstr[0] "Na voljo je [num] nova posodobitev"
+msgstr[1] "Na voljo sta [num] novi posodobitvi"
+msgstr[2] "Na voljo so [num] nove posodobitve"
+msgstr[3] "Na voljo je [num] novih posodobitev"
+
+msgid "automatically close terminal window when full/basic upgrade complete"
+msgstr "samodejno zapri okno terminala po končani celotni/osnovni nadgradnji"
+
+msgid "automatically close terminal window when upgrade complete"
+msgstr "po končani nadgradnji samodejno zapri okno terminala"
+
+msgid "basic upgrade"
+msgstr "osnovna nadgradnja"
+
+msgid "basic upgrade complete (or was canceled)"
+msgstr "osnovna nadgradnja je končana (če ni bila preklicana)"
+
+msgid "check for autoremovable packages after full/basic upgrade"
+msgstr ""
+"po končani celotni/osnovni nadgradnji preveri, katere pakete je mogoče "
+"samodejno odstraniti"
+
+msgid "classic"
+msgstr "klasična"
+
+msgid "full upgrade"
+msgstr "Celotna nadgradnja"
+
+msgid "full upgrade   (recommended)"
+msgstr "celotna posodobitev (priporočeno)"
+
+msgid "full upgrade complete (or was canceled)"
+msgstr "celotna nadgradnja je končana (če ni bila preklicana)"
+
+msgid "opens MX Updater 'View and Upgrade' window"
+msgstr "odpre okno MX posodobitev 'Ogled in nadgraditev'"
+
+msgid "opens Synaptic"
+msgstr "odpre Synaptic"
+
+msgid "press any key to close"
+msgstr "pritisnite poljubno tipko za izhod"
+
+msgid "press any key to stop automatic closing"
+msgstr "pritisnite poljubno tipko, da zaustavitve samodejno zapiranje"
+
+msgid "pulse"
+msgstr "pulz"
+
+msgid "start MX Updater at login"
+msgstr "po prijavi zaženi MX posodobitev"
+
+msgid "switch to basic upgrade"
+msgstr "preklop na osnovno nadgradnjo"
+
+msgid "switch to full upgrade"
+msgstr "preklop na celotno nadgradnjo"
+
+msgid "this terminal window can now be closed"
+msgstr "to okno terminala lahko sedaj zaprete"
+
+msgid "update automatically   (will not add new or remove existing packages)"
+msgstr ""
+"Samodejna posodobitev (ne bodo dodani novi ali odstranjeni obstoječi paketi)"
+
+msgid "upgrade"
+msgstr "nadgradnja"
+
+msgid "use desktop notifications"
+msgstr "uporabi namizna obvestila"
+
+msgid "use transparent interior for no-updates wireframe"
+msgstr "uporabi prozorno notranjost za okvirje brez posodobitev"
+
+msgid "wireframe"
+msgstr "obris"
+
+#. TRANSLATORS: Fill in all plural forms. The parenthesized expression '{num}'
+#. is replaced by the actual number of updates available at runtime.
+#. For the singular form, you can replace '{num}' with 'one'.
+#. Example with 2 plural forms:
+#. msgstr[0] -> singular form: use 'one new update' or '{num} new update'.
+#. msgstr[1] -> plural form: use '{num} new updates'.
+#, python-brace-format
+msgid "{num} new update available"
+msgid_plural "{num} new updates available"
+msgstr[0] "[num] posodobitev je na voljo"
+msgstr[1] "[num] posodobitvi sta na voljo"
+msgstr[2] "[num] posodobitve so na voljo"
+msgstr[3] "[num] posodobitev je na voljo"
+
+#. TRANSLATORS:
+#. This autostart desktop entry comment will be shown within 'Session and
+#. Startup' (Autostart).
+msgid "An applet to show updates"
+msgstr "Aplet za prikaz posodobitev"
+
+#. TRANSLATORS:
+#. This desktop entry comment will be shown within the menu.
+msgid "Re-enable MX Updater icon even if no updates available"
+msgstr "Reaktiviraj ikono za MX posodobitev, četudi ni na voljo posodobitev"
+
+msgid "Enable Auto-update"
+msgstr "Omogoči samodejno posodabljanje"
+
+msgid "Disable Auto-update"
+msgstr "Onemogoči samodejno posodabljanje"

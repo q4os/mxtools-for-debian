@@ -1,0 +1,13 @@
+Source: mx-idevice-mounter
+Maintainer: Timothy E. Harris <maintainer@mxrepo.com>
+Section: python
+Priority: optional
+Build-Depends: debhelper, dh-python, python3-setuptools, python3, python3-pyqt5
+Standards-Version: 4.1.0
+
+Package: mx-idevice-mounter
+Architecture: all
+Depends: python3, python3-pyqt5, mx-iphone, python3-distutils, wmctrl
+Description: GUI to Mount and Unmount iPhones and iPads
+ mx-idevice-mounter is a simpler way to use the idevice/ifuse set of utilities to
+ manage iPhone/iPad filesystems.

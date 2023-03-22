@@ -1,0 +1,15 @@
+Source: cli-installer-mx
+Section: system
+Priority: optional
+Maintainer: dolphinoracle <dolphinoracle@gmail.com>
+Build-Depends: debhelper (>= 9.20120115)
+Standards-Version: 3.9.8
+Homepage: https://gitlab.com/antiX-Linux/cli-installer-antix
+
+Package: cli-installer-mx
+Architecture: all 
+Replaces: cli-installer-core-antix, cli-installer-base-antix, cli-installer-full-antix, cli-installer-antix
+Depends: bash, rsync, partition-info
+Description: Script to install mx to hard drive via cli.
+
+

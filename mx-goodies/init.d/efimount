@@ -1,0 +1,61 @@
+#! /bin/sh
+# this script supplied by mx-goodies package
+
+### BEGIN INIT INFO
+# Provides:          efivars
+# Required-Start:    
+# Required-Stop:     
+# Should-Start:
+# Default-Start:     S
+# Default-Stop:
+# Short-Description: Mount efivarfs
+# Description:       Provide missing efivarfs at /sys/firmware/efivars.
+#
+### END INIT INFO
+
+# Author: dolphin oracle & fehlix for mx linux
+
+PATH=/sbin:/bin:/usr/bin
+
+. /lib/init/vars.sh
+. /lib/lsb/init-functions
+
+do_start () {
+    [ -x /sys/firmware/efi   ] || return   # not an EFI system
+    [ -d /run/systemd/system ] && return   # don't run in systemd
+    grep -sq ^efivarfs /proc/self/mounts && return  # nothing todo
+    # check efifarfs already mounted by kernel
+    if ls /sys/firmware/efi/efivars/* 1>/dev/null 2>&1 || \
+       ls /sys/firmware/efi/vars/* 1>/dev/null 2>&1; then
+       return
+    fi
+    [ -x /sys/firmware/efi/efivars ] || return  # no efivars folder
+
+    [ "$VERBOSE" != no ] && log_action_begin_msg "Mounting efivarfs to /sys/firmware/efi/efivars"
+    mount -t efivarfs  efivarfs /sys/firmware/efi/efivars
+    RET=$?
+    [ "$VERBOSE" != no ] && log_action_end_msg $RET
+    exit $RET
+}
+
+case "$1" in
+  start|"")
+    do_start
+    ;;
+  restart|reload|force-reload)
+    echo "Error: argument '$1' not supported" >&2
+    exit 3
+    ;;
+  stop)
+    # No-op
+    ;;
+  status)
+    exit 0
+    ;;
+  *)
+    echo "Usage: efivars [start]" >&2
+    exit 3
+    ;;
+esac
+
+:

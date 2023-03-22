@@ -1,0 +1,20 @@
+#!/bin/bash
+
+UPDATER_APTPREF=/usr/lib/apt-notifier/shlib/updater_aptpref
+
+AptPref_Opts=""
+if [ -f "$UPDATER_APTPREF" ]; then
+      . "$UPDATER_APTPREF"
+fi
+
+# UpgradeType:  dist-upgrade or upgrade
+UpgradeCounts=""
+DistUpgradeCounts=""
+UpgradeType=$(grep -m1 ^UpgradeType /home/"$(logname)"/.config/apt-notifierrc 2>/dev/null | cut -f2 -d= )
+
+if [ "$UpgradeType" != "upgrade" ]; then
+       UpgradeType="dist-upgrade"
+fi
+
+apt-get $AptPref_Opts -o Debug::NoLocking=true --trivial-only -V $UpgradeType 2>/dev/null
+

@@ -1,0 +1,21 @@
+#!/bin/bash
+
+#DEBHELPER#
+
+# preinst script for apt-notifier
+
+set -e
+
+case "$1" in
+  install|upgrade)
+    rm -f /etc/xdg/autostart/apt-notifier-autostart-xdg.desktop      || :
+    rm -f /etc/xdg/autostart/mx-apt-notifier-autostart-xdg.desktop   || :
+    rm -f /etc/xdg/autostart/mx-updater-autostart-xdg.desktop        || :
+    rm -f /etc/xdg/autostart/mx-updater-autostart.desktop            || :
+    rm -f /usr/share/applications/mx-updater.desktop                 || :
+    rm -f /etc/cron.d/mx-Unattended-Origins-Pattern-update           || :
+    rm -r /usr/lib/apt-notifier/modules/__pycache__    2>/dev/null   || :      
+    rm -f /etc/apt/apt.conf.d/51unattended-upgrades-mx 2>/dev/null   || :      
+  ;;  
+esac
+exit 0

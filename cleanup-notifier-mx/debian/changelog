@@ -1,0 +1,18 @@
+cleanup-notifier-mx (22.05.02mx+deb11u13) stable; urgency=medium
+
+  * MX Tools release
+
+ -- fehlix <administrator@localdomain>  Wed, 22 Mar 2023 10:43:47 +0100
+
+cleanup-notifier-mx (22.05.02mx) mx; urgency=medium
+
+  * Adjust last runtime-check by dbus session-id
+
+ -- fehlix <fehlix@mxlinux.org>  Thu, 05 May 2022 19:55:07 -0400
+ 
+cleanup-notifier-mx (22.05.01mx) mx; urgency=medium
+
+  * Initial build.
+
+ -- fehlix <fehlix@mxlinux.org>  Sun, 01 May 2022 15:52:09 -0400
+ 

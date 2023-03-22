@@ -1,0 +1,11 @@
+Source: conky-toggle-mx
+Section: system
+Priority: optional
+Maintainer: dolphin oracle <dolphinoracle@gmail.com>
+Build-Depends: debhelper (>=7.0)
+Standards-Version: 3.9.5
+
+Package: conky-toggle-mx
+Architecture: all
+Depends:
+Description: simple toggle switch for conky-manager

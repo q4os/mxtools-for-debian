@@ -1,0 +1,47 @@
+Description: Add conky-manager2 icon based on papirus icons, thanks to asqwerth.
+
+--- conky-manager-2.7+dfsg1.orig/src/makefile
++++ conky-manager-2.7+dfsg1/src/makefile
+@@ -26,7 +26,10 @@ install:
+ 	mkdir -p $(DESTDIR)$(sharedir)/${app_name}
+ 	mkdir -p $(DESTDIR)$(sharedir)/pixmaps
+ 	mkdir -p $(DESTDIR)$(sharedir)/appdata
+-	
++	mkdir -p $(DESTDIR)$(sharedir)/icons/hicolor/48x48/apps
++	mkdir -p $(DESTDIR)$(sharedir)/icons/hicolor/64x64/apps
++
++ 	
+ 	#binary
+ 	install -m 0755 ${app_name} "$(DESTDIR)$(bindir)"
+ 	install -m 0755 ${app_name}-uninstall "$(DESTDIR)$(bindir)"
+@@ -35,10 +38,12 @@ install:
+ 	install -m 0755 ${app_name}.desktop "$(DESTDIR)$(launcherdir)"
+ 	
+ 	#app icon
+-	install -m 0755 share/pixmaps/${app_name}.png "$(DESTDIR)$(sharedir)/pixmaps"
++	install -m 0644 share/pixmaps/${app_name}.png "$(DESTDIR)$(sharedir)/pixmaps"
++	install -m 0644 share/${app_name}/images/${app_name}-generic48.svg "$(DESTDIR)$(sharedir)/icons/hicolor/48x48/apps/${app_name}.svg"
++	install -m 0644 share/${app_name}/images/${app_name}-generic64.svg "$(DESTDIR)$(sharedir)/icons/hicolor/64x64/apps/${app_name}.svg"
+ 	
+ 	#appdata.xml
+-	install -m 0755 ${app_name}.appdata.xml "$(DESTDIR)$(sharedir)/appdata"
++	install -m 0644 ${app_name}.appdata.xml "$(DESTDIR)$(sharedir)/appdata"
+ 	
+ 	#shared files
+ 	cp -dpr --no-preserve=ownership -t "$(DESTDIR)$(sharedir)/${app_name}" ./share/${app_name}/*
+@@ -70,6 +75,8 @@ uninstall:
+ 	
+ 	#app icon
+ 	rm -f "$(DESTDIR)$(sharedir)/pixmaps/${app_name}.png"
++	rm -f "$(DESTDIR)$(sharedir)/icons/hicolor/48x48/apps/${app_name}.svg"
++	rm -f "$(DESTDIR)$(sharedir)/icons/hicolor/64x64/apps/${app_name}.svg"
+ 
+ 	#appdata.xml
+ 	rm -f "$(DESTDIR)$(sharedir)/appdata/${app_name}.appdata.xml"
+@@ -77,5 +84,5 @@ uninstall:
+ 	#shared files
+ 	rm -rf "$(DESTDIR)$(sharedir)/${app_name}"
+ 
+-    #translations
++	#translations
+ 	rm -f $(DESTDIR)$(localedir)/*/LC_MESSAGES/${app_name}.mo

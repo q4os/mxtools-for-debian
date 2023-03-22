@@ -1,0 +1,474 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+# Translators:
+# sonny nunag <sonnynunag@yahoo.com>, 2022
+# 
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-11-19 20:40-0500\n"
+"PO-Revision-Date: 2016-11-29 14:08+0000\n"
+"Last-Translator: sonny nunag <sonnynunag@yahoo.com>, 2022\n"
+"Language-Team: Filipino (Philippines) (https://www.transifex.com/anticapitalista/teams/10162/fil_PH/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: fil_PH\n"
+"Plural-Forms: nplurals=2; plural=(n == 1 || n==2 || n==3) || (n % 10 != 4 || n % 10 != 6 || n % 10 != 9);\n"
+
+#: ../ddm-mx:38
+#, sh-format
+msgid "Unknown error"
+msgstr "Di matukoy na error"
+
+#: ../ddm-mx:39
+#, sh-format
+msgid "Option-"
+msgstr "Pagpipilian"
+
+#: ../ddm-mx:40
+#, sh-format
+msgid "requires an argument."
+msgstr "nangangailangan ng argument."
+
+#: ../ddm-mx:41
+#, sh-format
+msgid "Run as root"
+msgstr "Paandarin bilang root"
+
+#: ../ddm-mx:42
+#, sh-format
+msgid "Install drivers for: "
+msgstr "i-install ang drivers sa para sa:"
+
+#: ../ddm-mx:48
+msgid "Nvidia driver installer"
+msgstr ""
+
+#: ../ddm-mx:49
+msgid "Install proprietary nvidia driver from repo"
+msgstr ""
+
+#. Invalid option: start GUI
+#. launch_gui $@
+#. Unknown error: start GUI
+#. launch_gui $@
+#: ../ddm-mx:109 ../ddm-mx:119
+#, sh-format
+msgid "Invalid option"
+msgstr "Maling pagpipilian"
+
+#. ##file locking
+#: ../ddm-mx:137
+#, sh-format
+msgid "creating lock ..."
+msgstr "gumagawa ng lock..."
+
+#: ../ddm-mx:171
+#, sh-format
+msgid "Purge drivers for: "
+msgstr "Linisin ang drivers para sa:"
+
+#: ../ddm-mx:172 ../ddm-mx:194
+#, sh-format
+msgid "Start at (m/d/y):"
+msgstr "Magsimula sa  (m/d/y):"
+
+#: ../ddm-mx:180
+#, sh-format
+msgid "ERROR: Unknown argument: $DRV"
+msgstr "ERROR: Di matukoy na argument: $DRV"
+
+#: ../ddm-mx:213 ../ddm-mx:913
+#, sh-format
+msgid "ERROR: Unknown argument: "
+msgstr "ERROR: Di matukoy na argument: "
+
+#: ../ddm-mx:229
+#, sh-format
+msgid "Device Driver Manager Help:"
+msgstr "Gabay sa Manager ng Device Driver"
+
+#: ../ddm-mx:231
+msgid "The following options are allowed:"
+msgstr "Ang mga sumusunod na pagpipilian ay hindi pinapayagan:"
+
+#: ../ddm-mx:233
+msgid "Offer debian-backports alternative"
+msgstr ""
+
+#: ../ddm-mx:235
+msgid "Install given driver."
+msgstr ""
+
+#: ../ddm-mx:236
+msgid "drivers: nvidia, open, fixbumblebee"
+msgstr ""
+
+#: ../ddm-mx:238
+msgid "Purge given driver."
+msgstr ""
+
+#: ../ddm-mx:239
+msgid "driver: nvidia"
+msgstr ""
+
+#: ../ddm-mx:241
+msgid "force specific nvidia driver package."
+msgstr ""
+
+#: ../ddm-mx:246
+msgid "For development testing only!  simulate installs"
+msgstr ""
+
+#: ../ddm-mx:247
+msgid "This will install drivers for pre-defined hardware."
+msgstr ""
+
+#: ../ddm-mx:248
+msgid "Use with -i."
+msgstr ""
+
+#: ../ddm-mx:308
+#, sh-format
+msgid ""
+"Unsupported configuration.  bumblebee only works with 390xx drivers and up."
+msgstr ""
+
+#: ../ddm-mx:340
+#, sh-format
+msgid "Need driver: "
+msgstr "Kailangan ng driver:"
+
+#: ../ddm-mx:344
+#, sh-format
+msgid "NVIDIA packages to install are "
+msgstr ""
+
+#: ../ddm-mx:346 ../ddm-mx:658
+#, sh-format
+msgid "Continue?"
+msgstr "Magpapatuloy?"
+
+#: ../ddm-mx:367
+#, sh-format
+msgid "Nvidia command "
+msgstr "Nvidia command "
+
+#: ../ddm-mx:391
+#, sh-format
+msgid "ERROR: Could not configure Bumblebee for user: "
+msgstr "ERROR: Hindi maaring baguhin ang Bumblebee para sa gumagamit: "
+
+#: ../ddm-mx:395
+#, sh-format
+msgid "test enabled, not creating xorg.conf file"
+msgstr "nakasindi ang test, hindi gagawa ng file na xorg.conf"
+
+#: ../ddm-mx:399
+#, sh-format
+msgid "creating /etc/X11/xorg.conf file"
+msgstr "gumagawa ng file na /etc/X11/xorg.conf"
+
+#: ../ddm-mx:408
+#, sh-format
+msgid "Finished"
+msgstr "Tapos na"
+
+#: ../ddm-mx:425
+#, sh-format
+msgid "Proprietary drivers removed"
+msgstr "Natanggal na ang mga drivers na may nagmamay-ari"
+
+#: ../ddm-mx:438
+#, sh-format
+msgid "Open command "
+msgstr "Open command "
+
+#: ../ddm-mx:442
+#, sh-format
+msgid "Open drivers installed"
+msgstr "naka-install ang mga Open drivers"
+
+#: ../ddm-mx:456 ../ddm-mx:462
+#, sh-format
+msgid "Resetting sources"
+msgstr "Muling sinisimula ang sources"
+
+#: ../ddm-mx:473
+#, sh-format
+msgid "Press <Enter> to exit"
+msgstr "Pinduting ang <Enter> para lumabas"
+
+#. enabling debian-backports
+#: ../ddm-mx:487
+#, sh-format
+msgid "Enabling backports repo"
+msgstr "Pinapahintulutan ang repo ng backports"
+
+#: ../ddm-mx:488 ../ddm-mx:504
+#, sh-format
+msgid "Running apt-get update..."
+msgstr "Tumatakbo ang  apt-get update..."
+
+#: ../ddm-mx:493 ../ddm-mx:509 ../ddm-mx:988
+#, sh-format
+msgid "Installing latest nvidia-detect package"
+msgstr "Pinahihintulutan ang pinakahuling  package na nvidia-detect"
+
+#. enabling mx_test_repo
+#: ../ddm-mx:503
+#, sh-format
+msgid "Enabling MX Test repo"
+msgstr "Pinapahintulutan ang pagsubok ng Repo MX"
+
+#: ../ddm-mx:518
+#, sh-format
+msgid "Would you like to check debian-backports for a later version?"
+msgstr ""
+"Gusto mo bang siyasatin ang debian-backports para sa pinakahuling bersyon?"
+
+#: ../ddm-mx:520
+#, sh-format
+msgid "Yes or No?"
+msgstr "Oo o Hindi?"
+
+#: ../ddm-mx:522
+#, sh-format
+msgid "Yes"
+msgstr "Oo"
+
+#: ../ddm-mx:523
+#, sh-format
+msgid "No"
+msgstr "Hindi"
+
+#: ../ddm-mx:525 ../ddm-mx:570 ../ddm-mx:608 ../ddm-mx:952
+#, sh-format
+msgid "Enter Number of selection"
+msgstr "Magpasok ng Numero o pagpipilian"
+
+#: ../ddm-mx:529 ../ddm-mx:533 ../ddm-mx:546 ../ddm-mx:550 ../ddm-mx:574
+#: ../ddm-mx:587 ../ddm-mx:612 ../ddm-mx:625
+#, sh-format
+msgid "Ok"
+msgstr "Ayos"
+
+#: ../ddm-mx:536 ../ddm-mx:553 ../ddm-mx:592 ../ddm-mx:632 ../ddm-mx:958
+#, sh-format
+msgid "invalid option."
+msgstr "mali ang pinagpipilian"
+
+#. NVIDIA_XCONFIG=""
+#: ../ddm-mx:536 ../ddm-mx:553 ../ddm-mx:590 ../ddm-mx:592 ../ddm-mx:630
+#: ../ddm-mx:632 ../ddm-mx:957 ../ddm-mx:958
+#, sh-format
+msgid "exiting"
+msgstr "lumalabas"
+
+#: ../ddm-mx:542 ../ddm-mx:543
+#, sh-format
+msgid "Would you like to check MX Test Repo for a later version?"
+msgstr ""
+"Gusto mo bang siyasatin ang MX Test Repo para sa pinakahuling bersyon?"
+
+#: ../ddm-mx:560 ../ddm-mx:598
+#, sh-format
+msgid "Which driver do you wish to install"
+msgstr "Aling driver ang gusto mong i-install"
+
+#: ../ddm-mx:562
+#, sh-format
+msgid "Main repos or debian-backports?"
+msgstr "Main repo o debian-backports?"
+
+#: ../ddm-mx:564 ../ddm-mx:602
+#, sh-format
+msgid "Main"
+msgstr "Main"
+
+#: ../ddm-mx:568 ../ddm-mx:606
+#, sh-format
+msgid "Exit"
+msgstr "Lumabas"
+
+#: ../ddm-mx:583 ../ddm-mx:621
+#, sh-format
+msgid "Reset nvidia-detect"
+msgstr ""
+
+#: ../ddm-mx:600
+#, sh-format
+msgid "Main repos or MX Test"
+msgstr "Main repo o MX Test"
+
+#: ../ddm-mx:604
+#, sh-format
+msgid "MX Test"
+msgstr ""
+
+#: ../ddm-mx:648
+#, sh-format
+msgid "Candidate is: "
+msgstr "Ang Candidate ay: "
+
+#: ../ddm-mx:649 ../ddm-mx:925 ../ddm-mx:934
+#, sh-format
+msgid "Installed is: "
+msgstr "Ang naka-installed ay: "
+
+#: ../ddm-mx:657
+#, sh-format
+msgid "Refreshing Sources with apt-get update"
+msgstr "Nagsasagawa ng refreshing ng Sources sa pamamagitan ng apt-get update"
+
+#: ../ddm-mx:664
+#, sh-format
+msgid "There was a problem with the apt-get update.  See $LOG for details"
+msgstr ""
+"Nagkaroon ng  problema sa apt-get update.  Tingnan ang $LOG mas sa iba pang "
+"kaalaman"
+
+#: ../ddm-mx:674
+#, sh-format
+msgid "To restore open source drivers use:  "
+msgstr ""
+
+#: ../ddm-mx:691
+#, sh-format
+msgid "To restore open source drivers later use:  "
+msgstr ""
+
+#: ../ddm-mx:703
+#, sh-format
+msgid "For recovery help see "
+msgstr ""
+
+#: ../ddm-mx:706
+#, sh-format
+msgid "Information written to "
+msgstr ""
+
+#: ../ddm-mx:742
+#, sh-format
+msgid "Possible previous install from source or smxi/sgfxi detected."
+msgstr ""
+"Nasiyasat na maaring may nainstall ng mula sa ibang pinagmulan ang "
+"smxi/sgfxi"
+
+#: ../ddm-mx:743
+#, sh-format
+msgid "Version detected: "
+msgstr "Nasiyasat na Bersyon: "
+
+#: ../ddm-mx:744
+#, sh-format
+msgid "Latest possible with this script : "
+msgstr "Maaring ang pinakahuli sa script na ito: "
+
+#: ../ddm-mx:745
+#, sh-format
+msgid ""
+"Please remove with  <sudo nvidia-install --uninstall> and reboot if you wish"
+" to proceed"
+msgstr ""
+"Tanggalin sa pamamagitan ng  <sudo nvidia-install --uninstall> at "
+"magsimulang mula para makapagtatuloy"
+
+#: ../ddm-mx:760
+#, sh-format
+msgid "nvidia-optimus detected"
+msgstr "natuklasan ang nvidia-optimus"
+
+#: ../ddm-mx:763
+#, sh-format
+msgid "Is this a NVIDIA/INTEL Optimus system?"
+msgstr "Ang sistema ba na ito ay NVIDIA/INTEL Optimus?"
+
+#: ../ddm-mx:800
+#, sh-format
+msgid "You can use the new PRIMUS driver built in to the nvidia drivers."
+msgstr ""
+
+#: ../ddm-mx:801
+#, sh-format
+msgid ""
+"Use \"nvidia-run-mx\" followed by your application command to use the nvidia"
+" graphics"
+msgstr ""
+
+#: ../ddm-mx:803
+#, sh-format
+msgid ""
+"If you want to force the older bumblebee optimus drivers,\\n quit and "
+"restart with sudo ddm-mx -i nvidia -f bumblebee-nvidia"
+msgstr ""
+
+#: ../ddm-mx:807 ../ddm-mx:813
+#, sh-format
+msgid "You need to use the bumblebee-nvidia driver."
+msgstr ""
+
+#: ../ddm-mx:826
+#, sh-format
+msgid "nvidia driver not available, check your repo sources"
+msgstr "ang nvidia driver ay hindi matagpuan, siyasatin ang  sources ng repo"
+
+#: ../ddm-mx:831
+#, sh-format
+msgid ""
+"Uh oh. Your card is only supported by older legacy drivers which are not in "
+"any current Debian suite."
+msgstr ""
+"Teka. Ang iyong card ay tinatanggap lamang sa mga lumang driver na legacy na"
+" hindi uubra sa kasalukuyang Debian suite."
+
+#: ../ddm-mx:923 ../ddm-mx:932
+#, sh-format
+msgid "Main repo candidate is:  "
+msgstr "Ang candidate ng main repo ay:  "
+
+#: ../ddm-mx:924
+#, sh-format
+msgid "Debian backports candidate is:  "
+msgstr "Ang candidate ng backports ng Debian ay:"
+
+#: ../ddm-mx:933
+#, sh-format
+msgid "MX Test repo candidate is:  "
+msgstr "Ang candidate ng MX Test repo ay:  "
+
+#: ../ddm-mx:944
+#, sh-format
+msgid "nvidia driver already installed"
+msgstr "ang nvidia driver already installed"
+
+#: ../ddm-mx:946
+#, sh-format
+msgid "Reinstall or quit?"
+msgstr "Gusto mo bang mag-reinstall o umalis?"
+
+#: ../ddm-mx:949
+#, sh-format
+msgid "Reinstall"
+msgstr "Mag-reinstall"
+
+#: ../ddm-mx:950
+#, sh-format
+msgid "quit"
+msgstr "lumabas"
+
+#: ../ddm-mx:956
+#, sh-format
+msgid "reinstalling"
+msgstr "nagre-reinstall"
+
+#: ../ddm-mx:979
+#, sh-format
+msgid "No nvidia card found - exiting"
+msgstr "Wlang matagpuang nvidia card - palabas na"

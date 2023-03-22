@@ -1,0 +1,59 @@
+localize-repo-mx (22.09.01+deb11u13) stable; urgency=medium
+
+  * MX Tools release
+
+ -- Dolphin Oracle <administrator@localdomain>  Wed, 22 Mar 2023 10:43:51 +0100
+
+localize-repo-mx (22.09.01) mx; urgency=medium
+
+  * update default mirrors 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 10 Sep 2022 22:44:09 -0400
+
+localize-repo-mx (22.02.01) mx; urgency=medium
+
+  * update repos 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 04 Feb 2022 22:52:19 -0500
+
+localize-repo-mx (20.10.01) mx; urgency=medium
+
+  * bring back nz repo 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 14 Oct 2020 19:41:29 -0400
+
+localize-repo-mx (20.09.02) mx; urgency=medium
+
+  * corrected typo
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Tue, 29 Sep 2020 20:51:19 -0400
+
+localize-repo-mx (20.09.01) mx; urgency=medium
+
+  *  remove non-working repos, replace with others
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 28 Sep 2020 21:04:21 -0400
+
+localize-repo-mx (20.05.01) mx; urgency=medium
+
+  * replace mirrors that are gone with new ones that are good 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 27 May 2020 22:09:12 -0400
+
+localize-repo-mx (19.10.02) mx; urgency=medium
+
+  * change default nz repo to melbourne 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 23 Nov 2019 16:57:37 -0500
+
+localize-repo-mx (19.10.01) mx; urgency=medium
+
+  * update antiX default repo 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 03 Oct 2019 21:27:02 -0400
+
+localize-repo-mx (19.02.01) mx; urgency=medium
+
+  * seperate localize-repo from apt-mx
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 03 Feb 2019 20:37:29 -0500

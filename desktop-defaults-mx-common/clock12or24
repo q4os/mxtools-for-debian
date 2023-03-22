@@ -1,0 +1,81 @@
+#!/bin/bash
+
+#change orage clock preference to 12 hour in case of USA, Canada, Australia, New Zealand, Albania, Eygpt, Greece
+
+#this function changes the two xfce4-orageclock-plugin-1.rc files (in /home/demo/.config/xfce4/panel/ and /etc/skel/.config/xfce4/panel/
+#from what should be a default %H:%M international 24 hour standard
+
+#Pull locale info from F2 Live Boot Menu Setup
+
+LNG=$(cat /etc/default/locale|grep LANG)
+
+#Function that polls the various config files for %H (24 hour) and then changes to %I (12 Hour)
+
+changeto12hour()
+{
+#the first 4 are for the datetime clock plugin
+if [ -e "/home/demo/.config/xfce4/panel/datetime-1.rc" ]; then
+	sed -i -r s/%H/%l/ /home/demo/.config/xfce4/panel/datetime-1.rc 
+fi
+if [ -e "/etc/skel/.config/xfce4/panel/datetime-1.rc" ]; then
+	sed -i -r s/%H/%l/ /etc/skel/.config/xfce4/panel/datetime-1.rc 
+fi
+#these are the orage clock plugin settings
+if [ -e "/home/demo/.config/xfce4/panel/xfce4-orageclock-plugin-1.rc" ]; then
+	sed -i -r s/data0=%H/data0=%l/ /home/demo/.config/xfce4/panel/xfce4-orageclock-plugin-1.rc 
+fi
+if [ -e "/etc/skel/.config/xfce4/panel/xfce4-orageclock-plugin-1.rc" ]; then
+	sed -i -r s/data0=%H/data0=%l/ /etc/skel/.config/xfce4/panel/xfce4-orageclock-plugin-1.rc
+fi
+#these are the plasma clock settings
+if [ -e "/usr/bin/kwriteconfig5" ]; then
+	CONTAINMENT=$(grep -B 3 digitalclock /home/demo/.config/plasma-org.kde.plasma.desktop-appletsrc|grep Contain|cut -d[ -f3 | cut -d] -f1)
+	APPLET=$(grep -B 3 digitalclock /home/demo/.config/plasma-org.kde.plasma.desktop-appletsrc|grep Contain|cut -d[ -f5 | cut -d] -f1)
+	kwriteconfig5 --file /home/demo/.config/plasma-org.kde.plasma.desktop-appletsrc --group Containments --group $CONTAINMENT --group Applets --group $APPLET --group Configuration --group Appearance --key use24hFormat 0
+	CONTAINMENT=$(grep -B 3 digitalclock /etc/skel/.config/plasma-org.kde.plasma.desktop-appletsrc|grep Contain|cut -d[ -f3 | cut -d] -f1)
+	APPLET=$(grep -B 3 digitalclock /etc/skel/.config/plasma-org.kde.plasma.desktop-appletsrc|grep Contain|cut -d[ -f5 | cut -d] -f1)
+	kwriteconfig5 --file /etc/skel/.config/plasma-org.kde.plasma.desktop-appletsrc --group Containments --group $CONTAINMENT --group Applets --group $APPLET --group Configuration --group Appearance --key use24hFormat 0
+fi
+
+#these are tint2 panel
+
+if [ -e "/etc/skel/.config/tint2/tint2rc" ]; then
+	sed -i -r s/%H/%l/ /etc/skel/.config/tint2/tint2rc
+        sed -i -r s/%H/%l/ /home/demo/.config/tint2/tint2rc
+fi
+
+#these next 4 lines are for the xfce4-clock plugin
+#sed -i -r s/%H/%l/ /home/demo/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-panel.xml
+#sed -i -r s/%H/%l/ /etc/skel/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-panel.xml
+#sed -i -r s/%H/%l/ /usr/local/share/appdata/panels/horizontal/xfce4-panel.xml
+#sed -i -r s/%H/%l/ /usr/local/share/appdata/panels/vertical/xfce4-panel.xml
+
+}
+
+#look for a check file and if present exit, otherwise create check file and then parse language
+
+if [ -e /etc/clock-ckd ]; then
+  :
+
+else
+
+  touch /etc/clock-ckd
+
+#the case statement parses the default locale file in /etc/default/locale for USA, Albania, Eygpt, Greece.  Others can be added
+
+case $LNG in
+
+	LANG=en_US.UTF-8|LANG=en_AU.UTF-8|LANG=en_CA.UTF-8|LANG=en_NZ.UTF-8|LANG=ar_EG.UTF-8|LANG=el_GR.UTF-8|LANG=sq_AL.UTF-8) changeto12hour
+	;;
+	*)if [ -e "/usr/bin/kwriteconfig5" ]; then
+		CONTAINMENT=$(grep -B 3 digitalclock /home/demo/.config/plasma-org.kde.plasma.desktop-appletsrc|grep Contain|cut -d[ -f3 | cut -d] -f1)
+		APPLET=$(grep -B 3 digitalclock /home/demo/.config/plasma-org.kde.plasma.desktop-appletsrc|grep Contain|cut -d[ -f5 | cut -d] -f1)
+		kwriteconfig5 --file /home/demo/.config/plasma-org.kde.plasma.desktop-appletsrc --group Containments --group $CONTAINMENT --group Applets --group $APPLET --group Configuration --group Appearance --key use24hFormat 2
+		CONTAINMENT=$(grep -B 3 digitalclock /etc/skel/.config/plasma-org.kde.plasma.desktop-appletsrc|grep Contain|cut -d[ -f3 | cut -d] -f1)
+		APPLET=$(grep -B 3 digitalclock /etc/skel/.config/plasma-org.kde.plasma.desktop-appletsrc|grep Contain|cut -d[ -f5 | cut -d] -f1)
+		kwriteconfig5 --file /etc/skel/.config/plasma-org.kde.plasma.desktop-appletsrc --group Containments --group $CONTAINMENT --group Applets --group $APPLET --group Configuration --group Appearance --key use24hFormat 2
+		fi
+	;;
+
+esac
+fi

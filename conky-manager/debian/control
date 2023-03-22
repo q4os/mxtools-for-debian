@@ -1,0 +1,39 @@
+Source: conky-manager
+Section: utils
+Priority: optional
+Maintainer: Steven Pusser <stevep@mxlinux.org>
+Build-Depends: debhelper (>= 10),
+                autotools-dev,
+                valac (>= 0.26) | valac-0.26,
+                libgtk-3-dev,
+                libgee-0.8-dev,
+                libjson-glib-dev
+Standards-Version: 3.9.3
+Homepage: http://teejeetech.blogspot.in/
+#Vcs-Git: git://git.debian.org/collab-maint/hello.git
+#Vcs-Browser: http://git.debian.org/?p=collab-maint/hello.git;a=summary
+
+Package: conky-manager
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends},
+# realpath,
+ conky | conky-legacy | conky-all | conky-legacy-all,
+ p7zip-full,
+ rsync,
+ imagemagick
+Breaks: conky-manager2
+Conflicts: conky-manager2
+Replaces: conky-manager2
+Description: GUI for managing Conky configuration files
+ Conky Manager is a graphical front-end for managing Conky config files. It
+ provides options to start/stop, browse and edit Conky themes installed on the
+ system. Themes can be installed from 7z theme packs or manually. The package 
+ ships with a thene pack in /usr/share/conky-manager/themepacks/. Most of the
+ themes are from DeviantArt and the Eye Candy Linux community on Google+.
+ .
+  Features
+ .
+    Start/Stop, Browse and Edit Conky themes
+    Run Conky on system startup
+    Options to change location, transparency and size of Conky widget window
+    Options to change time and network interface

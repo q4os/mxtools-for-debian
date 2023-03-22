@@ -1,0 +1,54 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# Translators:
+# José Vieira <jvieira33@sapo.pt>, 2016-2017,2019
+msgid ""
+msgstr ""
+"Project-Id-Version: antix-development\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-10-27 02:09+0300\n"
+"PO-Revision-Date: 2019-12-12 22:34+0000\n"
+"Last-Translator: José Vieira <jvieira33@sapo.pt>\n"
+"Language-Team: Portuguese (http://www.transifex.com/anticapitalista/antix-development/language/pt/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: pt\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: block-advert.sh:24
+#, sh-format
+msgid ""
+"The <b>$title</b> tool adds stuff to your /etc/hosts file, so \\nthat many "
+"advertising servers and websites will not be able to connect \\nto this "
+"PC.\\n\\nYou can choose one service or combine multiple services for more "
+"advert protection.\\nBlocking ad servers protects your privacy, saves you "
+"bandwidth, greatly \\nimproves web-browsing speed and makes the internet "
+"much less annoying in general.\\n\\nDo you want to proceed?"
+msgstr "A ferramenta <b>$title</b> adiciona informação ao ficheiro /etc/hosts, \\npelo que muitos servidores e sítios web não irão ser capazes de se \\nligarem a este computador.\\n\\nPode ser escolhido um serviço ou, para maior protecção contra publicidade, \\ncombinados vários serviços.\\nBloquear servidores que enviam publicidade proteje a privacidade \\ndo utilizador, reduz o uso da banda larga, melhora substancialmente \\na velocidade de navegação e torna a Internet muito menos incomodativa \\nem geral. \\n\\nContinuar?"
+
+#: block-advert.sh:81
+msgid "Restoring original /etc/hosts."
+msgstr "A restaurar o ficheiro /etc/hosts original."
+
+#: block-advert.sh:117
+#, sh-format
+msgid "Loading  adlist from $domain"
+msgstr "A carregar lista de anúncios de $domain"
+
+#: block-advert.sh:161
+msgid ""
+"Success - your settings have been changed.\\n\\nYour hosts file has been "
+"updated.\\nRestart your browser to see the changes."
+msgstr "Êxito - as definições foram alteradas.\\n\\nO ficheiro de hospedeiros (hosts) foi actualizado.\\nReiniciar o navegador para ver as alterações."
+
+#: block-advert.sh:182
+msgid "Choose your preferred ad blocking service(s)"
+msgstr "Escolher o(s) serviço(s) de bloqueio de anúncios preferido(s)"
+
+#: block-advert.sh:225
+msgid "No item selected"
+msgstr "Nenhum item seleccionado"

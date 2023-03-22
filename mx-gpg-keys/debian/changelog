@@ -1,0 +1,54 @@
+mx-gpg-keys (22.11.11+deb11u13) stable; urgency=medium
+
+  * MX Tools release
+
+ -- Timothy E. Harris <administrator@localdomain>  Wed, 22 Mar 2023 10:43:53 +0100
+
+mx-gpg-keys (22.11.11) mx; urgency=medium
+
+  * Updated Adrian's subkey & Stevo's key
+
+ -- Timothy E. Harris <maintainer@mxrepo.com>  Fri, 11 Nov 2022 10:38:09 -0500
+
+mx-gpg-keys (22.09.05) mx; urgency=medium
+
+  * Updated Adrian's key.
+
+ -- Timothy E. Harris <maintainer@mxrepo.com>  Mon, 05 Sep 2022 11:30:31 -0400
+
+mx-gpg-keys (21.09.04) mx; urgency=medium
+
+  * Updated Adrian's key.
+
+ -- Timothy E. Harris <maintainer@mxrepo.com>  Sat, 04 Sep 2021 22:50:10 -0400
+
+mx-gpg-keys (19.09.01) mx; urgency=medium
+
+  * updated adrian's key 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 22 Sep 2019 15:27:02 -0400
+
+mx-gpg-keys (19.08.05) mx; urgency=medium
+
+  * revised, removed home folder storage
+  * moved comparison keyring to usr/share/mx-gpg-keys/mx-gpg-keyring  
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 22 Sep 2019 15:26:46 -0400
+
+mx-gpg-keys (19.08.03) mx; urgency=medium
+
+  * add trusted gpg storage
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 15 Aug 2019 20:16:29 -0400
+
+mx-gpg-keys (19.08.02) mx; urgency=medium
+
+  * switch to import  
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 15 Aug 2019 06:22:04 -0400
+
+mx-gpg-keys (19.08.01) mx; urgency=medium
+
+  * Initial release
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 14 Aug 2019 21:07:52 -0400

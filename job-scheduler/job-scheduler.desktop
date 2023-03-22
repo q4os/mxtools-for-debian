@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=Job Scheduler
+Comment=Job scheduling utility which uses crontab as the backend
+Exec=job-scheduler
+Icon=job-scheduler
+Categories=System;MX-Maintenance
+Type=Application

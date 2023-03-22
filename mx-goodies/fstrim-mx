@@ -1,0 +1,6 @@
+#!/bin/bash
+#this script is applied to SSE drives for sustained long-term performance and wear-leveling
+
+LOG=/var/log/trim.log
+echo "*** $(date -R) ***" >> $LOG
+fstrim --all --verbose >> $LOG

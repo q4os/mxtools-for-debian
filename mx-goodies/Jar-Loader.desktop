@@ -1,0 +1,13 @@
+[Desktop Entry]
+Name=Jar-Loader
+Comment=Java
+GenericName=Java
+Keywords=java
+Icon=java
+Exec=java -jar %f
+Terminal=false
+X-MultipleArgs=false
+Type=Application
+MimeType=application/x-java-archive
+StartupNotify=true
+NoDisplay=True

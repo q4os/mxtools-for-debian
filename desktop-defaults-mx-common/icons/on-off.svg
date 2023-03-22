@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://web.resource.org/cc/"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="212.59843"
+   height="212.59842"
+   id="svg18832"
+   sodipodi:version="0.32"
+   inkscape:version="0.45.1"
+   version="1.0"
+   sodipodi:docbase="/home/andre/data/projekte_privat/wiesenschluempfe/bilder/icons"
+   sodipodi:docname="printer_mini_icon_2.svg"
+   inkscape:output_extension="org.inkscape.output.svg.inkscape">
+  <defs
+     id="defs3" />
+  <sodipodi:namedview
+     inkscape:document-units="mm"
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.98994949"
+     inkscape:cx="116.8274"
+     inkscape:cy="160.64295"
+     inkscape:current-layer="layer1"
+     inkscape:window-width="858"
+     inkscape:window-height="580"
+     inkscape:window-x="0"
+     inkscape:window-y="183"
+     showgrid="true"
+     inkscape:object-bbox="true"
+     inkscape:object-points="true"
+     inkscape:object-nodes="true"
+     objecttolerance="10000"
+     inkscape:grid-points="true"
+     gridtolerance="10000"
+     inkscape:guide-points="true"
+     guidetolerance="10000" />
+  <metadata
+     id="metadata4">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-241.42857,-409.02265)">
+    <path
+       style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0.98030055px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 295.01568,409.02265 L 294.57818,444.45572 L 418.59392,444.45572 L 418.59392,586.188 L 294.57818,586.188 L 294.57818,621.62107 L 454.027,621.62107 L 454.027,409.02265 L 295.01568,409.02265 z "
+       id="path15809"
+       sodipodi:nodetypes="ccccccccc"
+       inkscape:export-filename="/home/andre/data/projekte_privat/wiesenschluempfe/bilder/logout_mini_icon.png"
+       inkscape:export-xdpi="52.360001"
+       inkscape:export-ydpi="52.360001" />
+    <path
+       style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dashoffset:0;stroke-opacity:1"
+       d="M 400.87739,533.0384 L 312.29471,533.03839 L 347.72778,568.47146 L 294.57817,568.47145 L 241.42857,515.32186 L 294.57817,462.17225 L 347.72778,462.17225 L 312.29471,497.60532 L 400.87739,497.60532 L 400.87739,533.0384 z "
+       id="path15815"
+       inkscape:export-filename="/home/andre/data/projekte_privat/wiesenschluempfe/bilder/logout_mini_icon.png"
+       inkscape:export-xdpi="52.360001"
+       inkscape:export-ydpi="52.360001"
+       sodipodi:nodetypes="cccccccccc" />
+  </g>
+</svg>

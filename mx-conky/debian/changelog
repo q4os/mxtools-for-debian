@@ -1,0 +1,247 @@
+mx-conky (22.12.02+deb11u13) stable; urgency=medium
+
+  * MX Tools release
+
+ -- fehlix <administrator@localdomain>  Wed, 22 Mar 2023 10:43:52 +0100
+
+mx-conky (22.12.02) mx; urgency=medium
+
+  * Fix handling of spaces in conkyrc path
+
+ -- fehlix <fehlix@mxlinux.org>  Tue, 06 Dec 2022 10:15:30 -0500
+
+mx-conky (22.12.01) mx; urgency=medium
+
+  * Fix detection of running conky for current user only
+  * Get realpath of detected conkyrc
+
+ -- fehlix <fehlix@mxlinux.org>  Mon, 05 Dec 2022 19:20:33 -0500
+
+mx-conky (22.10.01) mx; urgency=medium
+
+  * update translations 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 26 Oct 2022 19:58:28 -0400
+
+mx-conky (21.7.011) mx; urgency=medium
+
+  * translation refresh
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 23 Jul 2022 11:23:40 -0400
+
+mx-conky (21.7) mx; urgency=medium
+
+  * Fix mx-conky.conf location
+
+ -- Adrian <adrian@mxlinux.org>  Tue, 20 Jul 2021 16:19:28 -0400
+
+mx-conky (20.5) mx; urgency=medium
+
+  * remove %u/%U from editor string
+
+ -- Adrian <adrian@mxlinux.org>  Sun, 30 May 2021 10:42:42 -0400
+
+mx-conky (20.4) mx; urgency=medium
+
+  * new build for Buster/Stretch
+
+ -- Adrian <adrian@mxlinux.org>  Sat, 11 Apr 2020 15:30:41 -0400
+
+mx-conky (20.03.2) mx; urgency=medium
+
+  * removed ja_JP translations
+
+ -- fehlix <fehlix@mxlinux.org>  Thu, 11 Apr 2020 10:53:31 +0200
+
+mx-conky (20.03.1) mx; urgency=medium
+
+  * add lua-format compatibility, minor fixes
+
+ -- fehlix <fehlix@mxlinux.org>  Thu, 02 Apr 2020 00:53:31 +0200
+
+mx-conky (19.12) mx; urgency=medium
+
+  * remove "no file was selected" message
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 06 Dec 2019 15:49:29 -0500
+
+mx-conky (19.9.01) mx; urgency=medium
+
+  * new translations
+
+ -- Adrian <adrian@mxlinux.org>  Sun, 29 Sep 2019 14:00:03 -0400
+
+mx-conky (19.9) mx; urgency=medium
+
+  * remove libcmd dependency
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 09 Sep 2019 22:54:11 -0400
+
+mx-conky (19.8.1) mx; urgency=medium
+
+  * added offline help file
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 21 Aug 2019 13:46:29 -0400
+
+mx-conky (19.8) mx; urgency=medium
+
+  * fix icon
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 12 Aug 2019 09:37:43 -0400
+
+mx-conky (19.7.1) mx; urgency=medium
+
+  * new icon
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 26 Jul 2019 14:37:14 -0400
+
+mx-conky (19.7) mx; urgency=medium
+
+  * fix windows buttons for Buster
+
+ -- Adrian <adrian@mxlinux.org>  Sun, 07 Jul 2019 13:37:47 -0400
+
+mx-conky (19.4) mx; urgency=medium
+
+  * updated translations
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 05 Apr 2019 11:30:12 -0400
+
+mx-conky (19.2.1) mx; urgency=medium
+
+  * make finding file editor more robust
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 04 Feb 2019 16:56:04 -0500
+
+mx-conky (19.2) mx; urgency=medium
+
+  * fix: open file
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 04 Feb 2019 11:46:08 -0500
+
+mx-conky (19.1) mx; urgency=medium
+
+  * updated translations
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 23 Jan 2019 09:47:41 -0500
+
+mx-conky (18.12.1) mx; urgency=medium
+
+  * open file with "Open With..." or by passing an argument at command line
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 27 Dec 2018 12:41:40 -0500
+
+mx-conky (18.12) mx; urgency=medium
+
+  * add scroll bar
+  * save window geometry
+
+ -- Adrian <adrian@mxlinux.org>  Sun, 23 Dec 2018 12:57:51 -0500
+
+mx-conky (18.11) mx; urgency=medium
+
+  * updated translations
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 30 Nov 2018 12:14:12 -0500
+
+mx-conky (18.10) mx; urgency=medium
+
+  * updated translations
+
+ -- Adrian <adrian@mxlinux.org>  Sun, 14 Oct 2018 18:40:03 -0400
+
+mx-conky (18.9) mx; urgency=medium
+
+  * change editor to xdg-open
+
+ -- Adrian <adrian@mxlinux.org>  Sat, 15 Sep 2018 13:17:21 -0400
+
+mx-conky (18.8) mx; urgency=medium
+
+  * fix icon other themes
+
+ -- Adrian <adrian@mxlinux.org>  Sat, 11 Aug 2018 16:13:56 -0400
+
+mx-conky (18.6.1) mx; urgency=medium
+
+  * added changelog button
+  * use libcmd
+
+ -- Adrian <adrian@mxlinux.org>  Sun, 24 Jun 2018 21:08:02 -0400
+
+mx-conky (18.6) mx; urgency=medium
+
+  * new translations
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 18 Jun 2018 14:22:03 -0400
+
+mx-conky (18.3) mx; urgency=medium
+
+  * new translations
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 02 Mar 2018 10:32:36 -0500
+
+mx-conky (18.2) mx; urgency=medium
+
+  * new translations
+
+ -- Adrian <adrian@mxlinux.org>  Sat, 10 Feb 2018 01:43:47 -0500
+
+mx-conky (17.12+1) mx; urgency=medium
+
+  * update translations
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 11 Dec 2017 23:16:33 -0500
+
+mx-conky (17.12) mx; urgency=medium
+
+  * new translations
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 04 Dec 2017 14:33:40 -0500
+
+mx-conky (17.11) mx; urgency=medium
+
+  * added translations
+
+ -- Adrian <adrian@mxlinux.org>  Tue, 28 Nov 2017 17:49:27 -0500
+
+mx-conky (0.17.11+4) mx; urgency=medium
+
+  * hide GUI while editing file
+  * added links in mesage box
+  * fix version update to config file
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 20 Nov 2017 14:03:58 -0500
+
+mx-conky (0.17.11+3) mx; urgency=medium
+
+  * fix alignment
+  * remove dots from backup file
+
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 16 Nov 2017 10:05:46 -0500
+
+mx-conky (0.17.11+2) mx; urgency=medium
+
+  * fix alignment
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 15 Nov 2017 11:04:24 -0500
+
+mx-conky (0.17.11+1) mx; urgency=medium
+
+  * version bump
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 15 Nov 2017 09:52:16 -0500
+
+mx-conky (0.17.11) mx; urgency=medium
+
+  * GUI changes
+  * message data update
+
+ -- Adrian <adrian@mxlinux.org>  Tue, 14 Nov 2017 10:16:09 -0500
+
+mx-conky (0.17.10) mx; urgency=medium
+
+  * Initial build
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 30 Oct 2017 14:28:37 -0400

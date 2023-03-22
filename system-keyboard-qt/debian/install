@@ -1,0 +1,6 @@
+system-keyboard-qt	 		 usr/bin
+system-keyboard-qt.desktop	 usr/share/applications
+system-keyboard-qt.svg usr/share/icons/hicolor/scalable/apps
+translations/*.qm 	 usr/share/system-keyboard-qt/locale
+#icense.html            usr/share/doc/system-keyboard-qt
+help/*					usr/share/doc/system-keyboard-qt/help

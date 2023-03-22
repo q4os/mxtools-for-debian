@@ -1,0 +1,8 @@
+[main]
+host = https://www.transifex.com
+
+[antix-development.mx-system-sounds]
+file_filter = ./mx-system-sounds_<lang>.ts
+source_file = mx-system-sounds_en.ts
+source_lang = en
+type = ts

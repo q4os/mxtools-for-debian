@@ -1,0 +1,31 @@
+Format: 1.8
+Date: Mon, 15 Aug 2022 19:06:27 -0400
+Source: formatusb
+Binary: formatusb
+Architecture: source amd64
+Version: 22.08.01
+Distribution: mx
+Urgency: medium
+Maintainer: Dolphin Oracle <dolphinoracle@gmail.com>
+Changed-By: Dolphin Oracle <dolphinoracle@gmail.com>
+Description:
+ formatusb  - format usb devices
+Changes:
+ formatusb (22.08.01) mx; urgency=medium
+ .
+   * add fr_BE
+Checksums-Sha1:
+ d21453decd5a17a72db5db578bbe3b055b3c9599 569 formatusb_22.08.01.dsc
+ dfed589298f36015938db6d4e2c20efd7e2545b7 75772 formatusb_22.08.01.tar.xz
+ 1a7c8143b8daf6b3eae01822ca0a2f5fd1293312 10476 formatusb_22.08.01_amd64.buildinfo
+ 257e9833cc4e0bbf22aeb404bde030a819d9b9f9 78408 formatusb_22.08.01_amd64.deb
+Checksums-Sha256:
+ a7c4bcd4f2f487499b65174ed038d301696002eda31ef76417de5d41ed1133a2 569 formatusb_22.08.01.dsc
+ 0af6b248f9c5fee8c896ab1a20e393a493e0e8aac4e282f409de2ff71ad472bf 75772 formatusb_22.08.01.tar.xz
+ 53361d114023e5947b450efd21fe7c684e101eee8df371b8f3b62ad7666b86c7 10476 formatusb_22.08.01_amd64.buildinfo
+ ed4e114ffdcf9173b9b80bc9b0d128674be3f7d2ef615d67b0ff78de9796d53b 78408 formatusb_22.08.01_amd64.deb
+Files:
+ 68d81c417faa075ecd257a68945106c7 569 admin optional formatusb_22.08.01.dsc
+ de804bff8d79dd5afa8d26761457d238 75772 admin optional formatusb_22.08.01.tar.xz
+ ea1e69bd3e0baa96aaf0e2b6d69d459c 10476 admin optional formatusb_22.08.01_amd64.buildinfo
+ d86c667ab6d22ee835de1f43be5dc9aa 78408 admin optional formatusb_22.08.01_amd64.deb

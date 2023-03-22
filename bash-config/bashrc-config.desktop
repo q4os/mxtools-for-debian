@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.1
+Name=Bash Config
+Comment=bashrc aliases and prompt theming
+Exec=bash-config
+Terminal=false
+Type=Application
+Icon=preferences-system
+Categories=GNOME;GTK;System;X-MX-Setup;

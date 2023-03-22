@@ -1,0 +1,24 @@
+mx-debian-firmware (20.10.11mx21+deb11u13) stable; urgency=medium
+
+  * MX Tools release
+
+ -- Steven Pusser <administrator@localdomain>  Wed, 22 Mar 2023 10:43:52 +0100
+
+mx-debian-firmware (20.10.11mx21) mx; urgency=medium
+
+  * Build for MX 21, now that linux-firmware is going to AHS.
+  * Update d/copyright to 2022.
+
+ -- Steven Pusser <stevep@mxlinux.org>  Wed, 29 Jun 2022 12:55:00 -0700
+
+mx-debian-firmware (20.10.11mx19) mx; urgency=medium
+
+  * Conflict with and replace linux-firmware.
+
+ -- Steven Pusser <stevep@mxlinux.org>  Sun, 11 Oct 2020 16:41:45 -0700
+
+mx-debian-firmware (20.07.20mx19) mx; urgency=medium
+
+  * Create package/
+
+ -- Steven Pusser <stevep@mxlinux.org>  Mon, 20 Jul 2020 08:02:08 -0700

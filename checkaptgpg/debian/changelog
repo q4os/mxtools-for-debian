@@ -1,0 +1,395 @@
+checkaptgpg (20.10.12+deb11u13) stable; urgency=medium
+
+  * MX Tools release
+
+ -- fehlix <administrator@localdomain>  Wed, 22 Mar 2023 10:43:47 +0100
+
+checkaptgpg (20.10.12) mx; urgency=medium
+
+  * adjust expired key handling, adjust keyserver list
+
+ -- fehlix <fehlix@mxlinux.org>  Mon, 12 Oct 2020 17:32:25 -0400
+
+checkaptgpg (20.10.01) mx; urgency=medium
+
+  * rewrite: fix filename issues and avoid bogus mass signature issues 
+
+ -- fehlix <fehlix@mxlinux.org>  Thu, 01 Oct 2020 14:08:40 -0400
+
+checkaptgpg (19.10.08mx19+1) mx; urgency=medium
+
+  * August and September translation updates.
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Tue, 08 Oct 2019 15:28:08 -0400
+
+checkaptgpg (19.07.21mx19+1) mx; urgency=medium
+
+  * Icon change for MX-19.
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Sun, 21 Jul 2019 09:29:20 -0400
+
+checkaptgpg (19.04.05mx17+1) mx; urgency=medium
+
+  * April translations update.
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Fri, 05 Apr 2019 14:52:06 -0400
+
+checkaptgpg (19.01.23mx17+1) mx; urgency=medium
+
+  * Translations updated.
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Wed, 23 Jan 2019 19:20:37 -0500
+
+checkaptgpg (18.02.28mx17+1) mx; urgency=medium
+
+  * Changed .desktop lines name to 'Fix GPG keys'
+  * renamed existing checkaptgpg.desktop to mx-checkaptgpg-kde.desktop 
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Wed, 28 Feb 2018 13:34:03 -0500
+
+checkaptgpg (17.12.12mcr120+1) mepis; urgency=medium
+
+  * Repackaged for Mepis 12 / MX-14
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Tue, 12 Dec 2017 10:27:04 -0500
+
+checkaptgpg (17.12.12mx15+1) mx; urgency=medium
+
+  * Repackaged for MX-15 / MX-16
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Tue, 12 Dec 2017 10:23:44 -0500
+
+checkaptgpg (17.12.12mx17+1) mx; urgency=medium
+
+  * Add french help
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Tue, 12 Dec 2017 10:20:20 -0500
+
+checkaptgpg (17.09mcr120+2) mepis; urgency=medium
+
+  * Repackaged for Mepis 12 / MX-14 
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Fri, 01 Sep 2017 12:52:54 -0400
+
+checkaptgpg (17.09mx15+2) mx; urgency=medium
+
+  * Repackaged for MX-15 / MX-16
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Fri, 01 Sep 2017 12:51:31 -0400
+
+checkaptgpg (17.09mx17+2) mx; urgency=medium
+
+  * fix to prevent apt-key 'output should not be parsed' warning 
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Fri, 01 Sep 2017 12:47:11 -0400
+
+checkaptgpg (17.09mcr120+1) mepis; urgency=medium
+
+  * Repackaged for Mepis 12 / MX-14  
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Fri, 01 Sep 2017 11:01:53 -0400
+
+checkaptgpg (17.09mx15+1) mx; urgency=medium
+
+  * Repackaged for MX-15 / MX-16
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Fri, 01 Sep 2017 10:58:58 -0400
+
+checkaptgpg (17.09mx17+1) mx; urgency=medium
+
+  * Updated for MX-17
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Fri, 01 Sep 2017 10:47:39 -0400
+
+checkaptgpg (17.03mcr110+1) mepis; urgency=medium
+
+  * Repackaged for Mepis 11
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Tue, 21 Mar 2017 08:47:06 -0400
+
+checkaptgpg (17.03mcr120+1) mepis; urgency=medium
+
+  * Repackaged for Mepis 12 / MX-14
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Tue, 21 Mar 2017 08:43:30 -0400
+
+checkaptgpg (17.03mx15+1) mx; urgency=medium
+
+  * Help url updated
+  * Change to Adrian's version numbering
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Tue, 21 Mar 2017 08:29:07 -0400
+
+checkaptgpg (0.3.1mx150+4) mx; urgency=medium
+
+  * Repackaged for MX-15
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Tue, 07 Jun 2016 10:07:23 -0400
+
+checkaptgpg (0.3.1mcr120+4) mepis; urgency=medium
+
+  * Repackaged for Mepis 12 / MX-14
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Tue, 07 Jun 2016 10:03:12 -0400
+
+checkaptgpg (0.3.1mcr110+4) mepis; urgency=medium
+
+  * zipfiles removed from Mepis 11 tar.xz source tarball
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Tue, 07 Jun 2016 09:43:41 -0400
+
+checkaptgpg (0.3.1mx150+3) mx; urgency=medium
+
+  * Repackaged for MX-15
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Tue, 07 Jun 2016 08:14:16 -0400
+
+checkaptgpg (0.3.1mcr120+3) mepis; urgency=medium
+
+  * Repackaged for Mepis 12 / MX-14
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Tue, 07 Jun 2016 08:08:13 -0400
+
+checkaptgpg (0.3.1mcr110+3) mx; urgency=medium
+
+  * new desktop file (mx-15)
+
+ -- dolphinoracle <dolphinoracle@gmail.com>  Mon, 23 May 2016 07:20:33 -0400
+
+checkaptgpg (0.3.1mcr110+2) mepis; urgency=medium
+
+  * Repackaged for Mepis 11.
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Fri, 29 Apr 2016 12:38:12 -0400
+
+checkaptgpg (0.3.1mcr120+2) mepis; urgency=medium
+
+  * Repackaged for Mepis 12 / MX-14.
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Fri, 29 Apr 2016 12:37:05 -0400
+
+checkaptgpg (0.3.1mx150+2) mx; urgency=medium
+
+  * Removed debian/cron.d
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Fri, 29 Apr 2016 12:26:04 -0400
+
+checkaptgpg (0.3.1mcr110+1) mepis; urgency=medium
+
+  * Repackaged for Mepis 11.
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Fri, 29 Apr 2016 12:01:22 -0400
+
+checkaptgpg (0.3.1mcr120+1) mepis; urgency=medium
+
+  * Repackaged for Mepis 12 / MX-14.
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Fri, 29 Apr 2016 11:52:56 -0400
+
+checkaptgpg (0.3.1mx150+1) mx; urgency=medium
+
+  * Update oracle vbox .asc file link
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Fri, 29 Apr 2016 11:46:24 -0400
+
+checkaptgpg (0.3mcr110+2) mepis; urgency=medium
+
+  * Repackaged for Mepis 11.
+
+ -- Mike Purtell <mandbx@sbcglobal.net>  Thu, 04 Jun 2015 20:16:24 -0700
+
+checkaptgpg (0.3mcr120+2) mepis; urgency=medium
+
+  * Repackaged for Mepis 12.
+
+ -- Mike Purtell <mandbx@sbcglobal.net>  Thu, 04 Jun 2015 20:14:04 -0700
+
+checkaptgpg (0.3mx150+2) mx; urgency=medium
+
+  * Repackaged for MX 15.
+  - Added new help link.
+
+ -- Mike Purtell <mandbx@sbcglobal.net>  Thu, 04 Jun 2015 19:01:29 -0700
+
+checkaptgpg (0.3-0mcr120+1) mepis; urgency=medium
+
+  * Repackaged for Mepis 12.
+
+ -- Mike Purtell <mandbx@sbcglobal.net>  Mon, 01 Jun 2015 17:22:18 -0700
+
+checkaptgpg (0.3-0mcr110+1) mepis; urgency=medium
+
+  * Repackaged for Mepis 11.
+
+ -- Mike Purtell <mandbx@sbcglobal.net>  Mon, 01 Jun 2015 17:19:43 -0700
+
+checkaptgpg (0.3-0mcr120+1) mepis; urgency=medium
+
+  * Repackaged for Mepis 12.
+
+ -- Mike Purtell <mandbx@sbcglobal.net>  Mon, 01 Jun 2015 17:18:45 -0700
+
+checkaptgpg (0.3-0mx150+1) mx; urgency=medium
+
+  * Repackaged for MX 15.
+
+ -- Mike Purtell <mandbx@sbcglobal.net>  Mon, 01 Jun 2015 17:06:18 -0700
+
+checkaptgpg (0.3) mx; urgency=medium
+
+  * New upstream release. 
+  * Support InRelease files (MX-15 & Debian Jessie). 
+  * Sections of previously disabled code removed.
+  * check_exceptions function recoded to use case command.
+  * The --cronjob command line option removed.
+  * The /etc/checkaptgpg.conf configuration file nolonger supported.
+  * Test added to only allow running script as root.
+  * Don't check gpg signatures of Mepis 7, 8, 8.5, 11 CR repos. 
+  * New way of assigning GPGKEY, old way didn't work for most non-English locales
+  * mx-checkaptgpg.desktop, launch script with su-to-root instead of pkexec.
+  * checkaptgpg.desktop (KDE), launch script with su -c instead of pkexec.
+  * Removed policykit-1 dependency, added menu dependency.   
+  * Online help link updated
+ 
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Wed, 03 Jun 2015 19:31:55 -0400
+
+checkaptgpg (0.2.2mcr120+7) mepis; urgency=low
+
+  * Added Polish translations
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Mon, 20 Apr 2015 23:02:17 -0400
+
+checkaptgpg (0.2.2mcr120+6) mepis; urgency=low
+
+  * Display help in mx-viewer if it's installed
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Wed, 25 Mar 2015 09:30:43 -0400
+
+checkaptgpg (0.2.2mcr120+5) mepis; urgency=low
+
+  * Update online help link
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Fri, 20 Mar 2015 19:27:05 -0400
+
+checkaptgpg (0.2.2mcr120+4) mepis; urgency=low
+
+  * Online help link updated
+  * no longer install /etc/checkaptgpg.conf
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Tue, 24 Feb 2015 20:23:41 -0500
+
+checkaptgpg (0.2.2mcr120+3) mepis; urgency=low
+
+  * Add name and comments to MX desktop file.
+
+ -- Steven Pusser (Stevo) <maintainer@mepiscommunity.org>  Sun, 23 Mar 2014 11:03:47 -0700
+
+checkaptgpg (0.2.2mcr120+2) mepis; urgency=low
+
+  * Add some alternate browser depends.
+
+ -- Steven Pusser (Stevo) <maintainer@mepiscommunity.org>  Sun, 16 Mar 2014 16:12:26 -0700
+
+checkaptgpg (0.2.2mcr120+1) mepis; urgency=low
+
+  * Online help added, add a www browser to Depends.
+
+ -- Steven Pusser (Stevo) <maintainer@mepiscommunity.org>  Sun, 16 Mar 2014 10:14:07 -0700
+
+checkaptgpg (0.2.1mcr110+1) mepis; urgency=low
+
+  * Rebuild for MEPIS 11 community repository.
+
+ -- Steven Pusser (Stevo) <maintainer@mepiscommunity.org>  Sat, 15 Mar 2014 19:30:11 -0700
+
+checkaptgpg (0.2.1mcr120+1) mepis; urgency=low
+
+  * Adds MX-branded desktop file to only appear in non-KDE menus, and the original
+    will only appear on KDE menus.
+
+ -- Steven Pusser (Stevo) <maintainer@mepiscommunity.org>  Sat, 15 Mar 2014 19:26:38 -0700
+
+checkaptgpg (0.2mcr120+1) mepis; urgency=low
+
+  * New upstream release adding support for MEPIS 12 CR
+
+ -- Timothy E. Harris <maintainer@mepiscommunity.org>  Sun, 26 May 2013 10:51:59 -0400
+
+checkaptgpg (0.1mcr110+5) mepis; urgency=low
+
+  * Add GenericName= and attendant translations to desktop file.
+
+ -- Steve Pusser <maintainer@mepiscommunity.org>  Thu, 28 Apr 2011 19:39:52 -0700
+
+checkaptgpg (0.1mcr110+4) mepis; urgency=low
+
+  * Remove debian/dirs file
+  * Add Comment:  line to .desktop file
+
+ -- Steve Pusser <maintainer@mepiscommunity.org>  Fri, 22 Apr 2011 13:07:34 -0700
+
+checkaptgpg (0.1mcr110+3) mepis; urgency=low
+  * checkaptgpg script:
+     -lines 61-62, 72-81, 97 changes to also use Release files from /var/lib/apt/lists/partial
+       folder. This picks up some keys that were being missed.
+     -lines 63-65 added code to not test 'mepiscr' repos.
+       This prevents a "No GPG Release signature found." message for those repos
+     -lines 124-131 disabled original code that downloaded and installed a key from KEYSERVER
+       specified either in CONFFILE (/etc/checkaptgpg.conf) or from within the script
+     -lines 133-153 attempt to download and install a key from KEYSERVER using a list of
+       keyservers. Stops on first successfull attempt or until all keyservers have been tried.
+   * debian/dirs 
+      -added leading slash '/' for etc and usr/bin
+      -added /usr, /usr/share, /usr/share/applications, /usr/share/pixmaps    
+
+ -- kent <kent@mepis1>  Fri, 22 Apr 2011 13:05:14 -0400
+
+checkaptgpg (0.1mcr110+2) mepis; urgency=low
+
+  * checkaptgpg script:
+  *  line 110 disabled KEYSERVER=hkp://wwwkeys.eu.pgp.net
+  *  line 111 added KEYSERVER=keys.gnupg.net
+  *  line 135, removed 'read -e'command  which causes error in M11
+      and combined prompt and read into single command using 'read -p'
+  * checkaptgpg-root.desktop deleted - not needed, single menu entry works fine 
+  * debian/install added leading slash '/' to install paths
+  * debian/manpage.1.ex deleted
+  * debian/menu deleted - not needed, checkaptgpg.desktop provides a menu entry
+
+ -- kent <kent@mepis1>  Tue, 12 Apr 2011 10:49:28 -0400
+
+checkaptgpg (0.1mcr110+1) mepis; urgency=low
+
+  * Revise versioning to fit a native package.
+  * Use tiny debhelper rules file, drop cdbs build-depend.
+  * Edit long description to lines less than 80 characters wide. 
+
+ -- Steve Pusser <maintainer@mepiscommunity.org>  Mon, 11 Apr 2011 20:35:40 -0700
+
+checkaptgpg (0.1-2mlrepo2) mepis; urgency=low
+
+  * Repackage for MEPIS 8.5 community repo
+  * debian/control:
+     - bump standards to 3.8.0, no changes necessary
+     - remove ${shlibs:Depends}, ${misc:Depends} as Depends for checkaptgpg,
+       not necessary for a script
+  * Rebuild as mlrepo native package
+  * Add png icon
+
+ -- Steve Pusser <maintainer@mepiscommunity.org>  Mon, 08 Nov 2010 20:13:43 -0800
+
+checkaptgpg (0.1-2mlrepo1) mepis; urgency=low
+
+  * Modified script so it can be run as regular user, it will ask for root password 
+  * while running the script if keys need to be added
+  * deleted menu entry for starting as root
+ -- kent <kent@mepis1>  Sun, 11 Apr 2010 07:32:59 -0400
+
+checkaptgpg (0.1-1mlrepo1) mepis; urgency=low
+
+  * Added cronjob and --cronjob switch
+  * Added --wait-at-end switch
+  * Modify debian/menu to fix the command for running as root.
+  * Initial Release.
+
+ -- James Carr <maintainer@mepiscommunity.org>  Tue, 04 Aug 2009 22:20:18 +0100

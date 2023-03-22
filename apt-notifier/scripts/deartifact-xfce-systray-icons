@@ -1,0 +1,43 @@
+#!/bin/bash
+
+toggle_frame_or_square_icon_setting()
+{
+for i in $(xfconf-query -l -c xfce4-panel | grep show-frame -m1 | cut -f1-3 -d/)
+  do if [ x$(xfconf-query -c xfce4-panel -p $i/square-icons 2>/dev/null) = x'false' ]
+       then 
+         declare -A B=([true]=false [false]=true)
+         xp()
+         { xfconf-query -c xfce4-panel -p "${@}" ;}
+         
+         SF=$(xp /plugins  --list | grep -m1 /show-frame 2>/dev/null) || exit 0
+         
+         xp $SF -n -t bool -s ${B[$(xp $SF)]}
+         xp $SF -n -t bool -s ${B[$(xp $SF)]}
+       else
+         declare -A B=([true]=false [false]=true)
+         xp()
+         { xfconf-query -c xfce4-panel -p "${@}" ;}
+         SF=$(xp /plugins  --list | grep -m1 /square-icons 2>/dev/null) || exit 0
+         xp $SF -n -t bool -s ${B[$(xp $SF)]}
+         xp $SF -n -t bool -s ${B[$(xp $SF)]}
+     fi
+  done
+}
+   
+xprop -root | grep XFCE_DESKTOP -q
+if [ "$?" -eq 0 ]
+  then
+    # If running Xfce
+    # wait n seconds (or 0 seconds if no passed arguments)
+    sleep "$1" 2>/dev/null
+
+    # then toggle the show-frame or square-icons setting
+    # on  then back off (if currently off)
+    # off then back on  (if currently on)
+    toggle_frame_or_square_icon_setting
+  else
+    :
+fi
+
+exit
+

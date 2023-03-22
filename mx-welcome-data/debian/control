@@ -1,0 +1,12 @@
+Source: mx-welcome-data
+Section: admin
+Priority: optional
+Maintainer: dolphinoracle <dolphinoracle@gmail.com>
+Build-Depends: debhelper (>=7.0.50~),
+Standards-Version: 3.9.5
+Vcs-Git: git://github.com/MX-Linux/mx-welcome-data
+
+Package: mx-welcome-data
+Recommends: 
+Architecture: all
+Description: configuration information for mx-welcome

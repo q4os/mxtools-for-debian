@@ -1,0 +1,21 @@
+#!/bin/sh
+
+set -e
+
+case "$1" in
+  install|upgrade)
+    if [ -e /usr/local/bin/conkytoggle.sh ]; then
+    rm /usr/local/bin/conkytoggle.sh
+    fi
+    if [ -e /usr/share/applications/conky-toggle.desktop ]; then
+    rm /usr/share/applications/conky-toggle.desktop 
+    fi
+  ;;
+  *)
+    :
+  ;;
+esac
+
+#DEBHELPER#
+
+exit 0

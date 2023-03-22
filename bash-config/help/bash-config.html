@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>HELP: Bash Config</title>
+</head>
+<body>
+<h1>HELP: Bash Config</h1>
+<p>Bash Config allows the user to make changes to the aliases and terminal prompt theming in the user's bashrc file.</p>
+
+<p>NOTE: changes only affect the drop-down terminal (by default F4) after exiting it by clicking the little "x" box in the lower right-hand corner to close the tab, or by typing "exit" at the terminal prompt.</p>
+
+<h2>Alias</h2>
+
+<p>Allows the user to make changes, additions, and removals of aliases contain in the user's bashrc file.  The aliases will go into effect on the next terminal launch.  Click the respective button to add or remove aliases.</p>
+
+
+<img src="1.jpg" alt="Bash Config Alias tab" />
+
+<h2>Prompt</h2>
+
+<img src="2.jpg" alt="Bash Config Prompt tab" />
+
+<p>On this tab the user may make various adjustments to their terminal prompt by selecting the "Fancy Prompts" option.  The options dialog will then appear.  There are many options.  In particular, The date and time customizations may be confusing.  I list of time and dates codes is below.  See the "date" man pages for more information (man date)</p>
+
+<p>The user may revert back to whatever prompt was previously the default prompt by selecting "Default"</p>
+
+<h3>Tips and Tricks</h3>
+
+	<ul>
+		<li>All changes are stored in external files. Changes may be reverted totally be removing those files.</li> 
+		<li>Prompt changes are in ~/.config/bash-config folder.</li>
+		<li>alias changes are in ~/.bash_aliases</li>
+		<li>If you would like a 1 line prompt, choose fancy and either std or color.  You can add extra lines to a prompt in the prompt field with an escaped \n (in other works, \\n)</li>
+		<li>Spaces are accepted in the customization fields, if you want a little padding between the custom prompt and the start of command text in the terminal.</li>
+	</ul>
+	
+<h3>Prompts</h3>
+
+<p> </p>
+
+<img src="Color.jpg"/>
+
+<p>Color</p>
+
+<img src="Curl.jpg"/>
+
+<p>Curl</p>
+
+<img src="Date.jpg"/>
+
+<p>Date</p>
+
+<img src="Default.jpg"/>
+
+<p>Default</p>
+
+<img src="Dir.jpg"/>
+
+<p>Dir</p>
+
+<img src="Fancy.jpg"/>
+
+<p>Fancy</p>
+
+<img src="Gentoo.jpg"/>
+
+<p>Gentoo</p>
+
+<img src="Med.jpg"/>
+
+<p>Med</p>
+
+<img src="Narrow.jpg"/>
+
+<p>Narrow</p>
+
+<img src="Std.jpg"/>
+
+<p>Std</p>
+
+<img src="Tiny.jpg"/>
+
+<p>Tiny</p>
+
+<img src="Wide.jpg"/>
+
+<p>Wide</p>
+
+<img src="Zee.jpg"/>
+
+<p>Zee</p>
+	
+<h3>Date & Time format codes.  Interpreted sequences are:</h3>
+		<ul>
+		<li>%%     a literal % </li>
+
+      <li>%a     locale's abbreviated weekday name (e.g., Sun)</li>
+
+       <li>%A     locale's full weekday name (e.g., Sunday)</li>
+
+       <li>%b     locale's abbreviated month name (e.g., Jan)</li>
+
+       <li>%B     locale's full month name (e.g., January)</li>
+
+       <li>%c     locale's date and time (e.g., Thu Mar  3 23:05:25 2005)</li>
+
+       <li>%C     century; like %Y, except omit last two digits (e.g., 20)</li>
+
+       <li>%d     day of month (e.g., 01)</li>
+
+       <li>%D     date; same as %m/%d/%y</li>
+
+       <li>%e     day of month, space padded; same as %_d</li>
+
+       <li>%F     full date; same as %Y-%m-%d</li>
+
+       <li>%g     last two digits of year of ISO week number (see %G)</li>
+
+       <li>%G     year of ISO week number (see %V); normally useful only with %V</li>
+
+       <li>%h     same as %b</li>
+
+       <li>%H     hour (00..23)</li>
+
+       <li>%I     hour (01..12)</li>
+
+       <li>%j     day of year (001..366)</li>
+
+       <li>%k     hour, space padded ( 0..23); same as %_H</li>
+       
+       <li>%l     hour, space padded ( 1..12); same as %_I</li>
+
+       <li>%m     month (01..12)</li>
+
+       <li>%M     minute (00..59)</li>
+
+      <li>%n     a newline</li>
+
+       <li>%N     nanoseconds (000000000..999999999)</li>
+
+       <li>%p     locale's equivalent of either AM or PM; blank if not known</li>
+
+       <li>%P     like %p, but lower case</li>
+
+       <li>%q     quarter of year (1..4)</li>
+
+       <li>%r     locale's 12-hour clock time (e.g., 11:11:04 PM)</li>
+
+       <li>%R     24-hour hour and minute; same as %H:%M</li>
+       
+       <li>%s     seconds since 1970-01-01 00:00:00 UTC</li>
+
+       <li>%S     second (00..60)</li>
+
+       <li>%t     a tab</li>
+
+       <li>%T     time; same as %H:%M:%S</li>
+
+       <li>%u     day of week (1..7); 1 is Monday</li>
+
+       <li>%U     week number of year, with Sunday as first day of week (00..53)</li>
+
+       <li>%V     ISO week number, with Monday as first day of week (01..53)</li>
+
+       <li>%w     day of week (0..6); 0 is Sunday</li>
+
+       <li>%W     week number of year, with Monday as first day of week (00..53)</li>
+
+       <li>%x     locale's date representation (e.g., 12/31/99)</li>
+
+       <li>%X     locale's time representation (e.g., 23:13:48)</li>
+
+       <li>%y     last two digits of year (00..99)</li>
+
+       <li>%Y     year</li>
+
+       <li>%z     +hhmm numeric time zone (e.g., -0400)</li>
+
+       <li>%:z    +hh:mm numeric time zone (e.g., -04:00)</li>
+
+       <li>%::z   +hh:mm:ss numeric time zone (e.g., -04:00:00)</li>
+
+       <li>%:::z  numeric time zone with : to necessary precision (e.g., -04, +05:30)</li>
+
+       <li>%Z     alphabetic time zone abbreviation (e.g., EDT)</li>
+</ul>
+
+<p>Development history: Nite Coder, for MX Linux project</p>
+
+</body>
+</html>

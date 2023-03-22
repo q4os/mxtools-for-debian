@@ -1,0 +1,48 @@
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: disk-manager
+Upstream-Author: Mertens Florent <flomertens@gmail.com>
+Original-Source-Location: http://flomertens.free.fr/disk-manager/download/source/
+Source: https://github.com/MX-Linux/disk-manager
+
+Files: DiskManager/SimpleGladeApp.py
+ DiskManager/Fstab/SimpleGladeApp.py
+Copyright: © 2004, Sandino Flores Moreno
+License: LGPL-2.1+
+ This library is free software; you can redistribute it and/or
+ modify it under the terms of the GNU Lesser General Public
+ License as published by the Free Software Foundation; either
+ version 2.1 of the License, or (at your option) any later version.
+
+Files: po/en_GB.po
+Copyright: © 2007, Nicholas Wastell <hameau79-trans@yahoo.fr>
+License: GPL-2+
+
+Files: po/sv.po
+Copyright: © 2007, Free Software Foundation, Inc.
+License: GPL-2+
+
+Files: po/*.po
+Copyright: © 2007, Rosetta Contributors and Canonical Ltd.
+License: GPL-2+
+
+Files: debian/disk-manager.xpm
+Copyright: © 2007, Mertens Florent <flomertens@gmail.com>
+License: GPL-2+
+X-Comment: converted from upstream's png with convert(1), from the
+ ImageMagick suite.
+
+Files: debian/*
+Copyright: © 2008, David Paleino <d.paleino@gmail.com>
+License: GPL-2+
+ This program is free software; you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation; either version 2 of the License, or
+ (at your option) any later version.
+
+Files: *
+Copyright: © 2007, Mertens Florent <flomertens@gmail.com>
+License: GPL-2+
+
+On Debian systems, the complete text of the licenses can be found in:
+GPL  - `/usr/share/common-licenses/GPL-2'
+LGPL - `/usr/share/common-licenses/LGPL-2.1'

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>HELP: MX Repo Manager</title>
+</head>
+<body>
+<h1>HELP: MX Repo Manager</h1>
+<img src="Repo_Manager1.png" alt="" />
+
+<p>This tool greatly simplifies the process of changing the package repositories  that are use for updating/upgrading and installation. For a general background on repositories, consult Section 5.2 of the relevant Users Manual.</p>
+
+<p>The sources are set during installation depending on the selected timezone and language, and will generally work well. But there are many instances where a user might wish to change those selections.</p>
+
+	<ul>
+		<li>the automatic assignment at installation may be wrong in some cases</li>
+		<li> the user may change residency</li>
+		<li> a new mirror may become available that is much closer, faster or more reliable</li>
+		<li> an existing mirror may change its URL</li>
+		<li> the mirror being used may go offline</li>
+	</ul>
+
+<h3>Tab: MX repos</h3>
+
+<p>When Repo Manager opens, the screen displays the available repos stored in /usr/share/mx-repo-manager/repos.txt.</p>
+
+<p>The repository currently active is indicated with a black radio button. When an alternative mirror is marked and Apply is clicked, a dialog box pops up to confirm the selection. Keep in mind that the selection will begin functioning the next time the package sources are updated. This can be done manually by the user in a root terminal or in Synaptic; apt-notifier also updates on a set schedule.</p>
+
+<p>Beneath the list of repos is a button: &#8220;Select fastest MX repo for me.&#8221; Calling Debian&#8217;s netselect-apt, the Tool will test the MX mirrors and select the fastest, then write that to the appropriate sections of /etc/apt/sources.list.d./Note that &#8220;the fastest repo&#8221; may well vary by time of day or net traffic..</p>
+
+<h3>Tab: Debian repos</h3>
+
+<p>Same procedure as for the MX repos.</p>
+
+<p>Beneath the list of repos is a button: &#8220;Select fastest Debian repo for me.&#8221; The Tool tests the worldwide Debian Stable mirrors in use by the MX Linux version being used, which may take some time. Then it selects the fastest and writes that to the appropriate sections of /etc/apt/sources.list.d/. Note that &#8220;the fastest repo&#8221; may well vary by time of day or net traffic. If there are problems with the net, you may see an error message: &#8220;Could not detect fastest repo;&#8221; once the net problems have been resolved, the message will no longer appear.</p>
+
+<h3>Tab: Individual sources</h3>
+
+<p>The various repos are organized into a number of lists that can be found in /etc/apt/sources.lists.d . On this tab you can conveniently enable/disable individual repos with a single click. This can be very handy in some instances where you want to enable a repo to make a single installation/upgrade, but then disable it again to avoid any conflicts or problems. An example may help understand this option:</p>
+
+	<ul>
+		<li>Debian Multimedia &#8212; occasionally used to install codecs or applications, but can interfere with standard repos if left enabled</li>
+	</ul>
+
+<p>Development history: Adrian</p>
+
+<p>License: <a href="https://mxlinux.org/wiki/help-files/mxlinux.org/wiki/licenses/license-mx-repo-manager">here</a></p>
+
+</body>
+</html>

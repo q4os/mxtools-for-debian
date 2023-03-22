@@ -1,0 +1,25 @@
+Format: 1.8
+Date: Mon, 22 Aug 2022 19:03:57 -0400
+Source: mx-network-assistant
+Binary: mx-network-assistant
+Architecture: i386
+Version: 22.8.01
+Distribution: mx
+Urgency: medium
+Maintainer: Adrian <adrian@mxlinux.org>
+Changed-By: Adrian <adrian@mxlinux.org>
+Description:
+ mx-network-assistant - MX program for network troubleshooting and configuration
+Changes:
+ mx-network-assistant (22.8.01) mx; urgency=medium
+ .
+   * Fix: launching documents from Help (fixes a problem in Plasma)
+Checksums-Sha1:
+ 6afe5bb2ba7583842c355406f98d741ac2bbfee5 10102 mx-network-assistant_22.8.01_i386.buildinfo
+ 040959d07bfe926bac46b4de1e14a22e64eea252 206544 mx-network-assistant_22.8.01_i386.deb
+Checksums-Sha256:
+ 84eb61293e48ed53a06837f04bb2c6bfa7f7ba9cfc01a08ecdd032c407188fc5 10102 mx-network-assistant_22.8.01_i386.buildinfo
+ 06365343fd45dd8d0b1b82a58111802d78d167f7a060a4e4363191053fd70fd2 206544 mx-network-assistant_22.8.01_i386.deb
+Files:
+ e72e3fc736c191a7134ec73b43a9a5b6 10102 admin optional mx-network-assistant_22.8.01_i386.buildinfo
+ 30bf7a75e15166cbcb0211739591b938 206544 admin optional mx-network-assistant_22.8.01_i386.deb

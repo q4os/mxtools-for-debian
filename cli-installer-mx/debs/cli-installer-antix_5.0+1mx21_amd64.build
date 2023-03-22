@@ -1,0 +1,54 @@
+ dpkg-buildpackage -us -uc -ui
+dpkg-buildpackage: info: source package cli-installer-antix
+dpkg-buildpackage: info: source version 5.0+1mx21
+dpkg-buildpackage: info: source distribution mx
+dpkg-buildpackage: info: source changed by Dolphin Oracle <dolphinoracle@gmail.com>
+ dpkg-source --before-build .
+dpkg-buildpackage: info: host architecture amd64
+dpkg-source: warning: unknown information field 'Priortity' in input data in package's section of control info file
+ fakeroot debian/rules clean
+dh clean
+dh: warning: Compatibility levels before 10 are deprecated (level 9 in use)
+   dh_clean
+dh_clean: warning: Compatibility levels before 10 are deprecated (level 9 in use)
+ dpkg-source -b .
+dpkg-source: warning: unknown information field 'Priortity' in input data in package's section of control info file
+dpkg-source: info: using source format '3.0 (native)'
+dpkg-source: info: building cli-installer-antix in cli-installer-antix_5.0+1mx21.tar.xz
+dpkg-source: info: building cli-installer-antix in cli-installer-antix_5.0+1mx21.dsc
+ debian/rules build
+dh build
+dh: warning: Compatibility levels before 10 are deprecated (level 9 in use)
+   dh_update_autotools_config
+ fakeroot debian/rules binary
+dh binary
+dh: warning: Compatibility levels before 10 are deprecated (level 9 in use)
+   dh_testroot
+   dh_prep
+   dh_install
+dh_install: warning: Compatibility levels before 10 are deprecated (level 9 in use)
+   dh_installdocs
+dh_installdocs: warning: Compatibility levels before 10 are deprecated (level 9 in use)
+   dh_installchangelogs
+   dh_perl
+   dh_link
+   dh_strip_nondeterminism
+   dh_compress
+dh_compress: warning: Compatibility levels before 10 are deprecated (level 9 in use)
+   dh_fixperms
+   dh_missing
+dh_missing: warning: Compatibility levels before 10 are deprecated (level 9 in use)
+   dh_installdeb
+dh_installdeb: warning: Compatibility levels before 10 are deprecated (level 9 in use)
+   dh_gencontrol
+dpkg-gencontrol: warning: unknown information field 'Priortity' in input data in package's section of control info file
+   dh_md5sums
+   dh_builddeb
+dpkg-deb: building package 'cli-installer-antix' in '../cli-installer-antix_5.0+1mx21_all.deb'.
+ dpkg-genbuildinfo
+ dpkg-genchanges  >../cli-installer-antix_5.0+1mx21_amd64.changes
+dpkg-genchanges: warning: unknown information field 'Priortity' in input data in package's section of control info file
+dpkg-genchanges: info: including full source code in upload
+ dpkg-source --after-build .
+dpkg-source: warning: unknown information field 'Priortity' in input data in package's section of control info file
+dpkg-buildpackage: info: full upload; Debian-native package (full source is included)

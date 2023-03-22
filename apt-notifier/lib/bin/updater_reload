@@ -1,0 +1,78 @@
+#!/bin/bash
+
+# script to refresh pakages lists by running apt-get update
+# with adding count lines of available and held back upgrades
+# part of apt-notifier package
+
+# define a function to make xgettext ignore translations used here
+mygettext() { gettext "$@"; }
+
+# check privileges
+if [ $(id -u) != 0 ]; then
+    MSG='This command needs %s privileges to be executed.\n'
+    printf "$(mygettext -d su-to-root "$MSG")" 'root'
+    exit 1
+fi
+
+unset APT_NOTIFIER_CONFIG_ITEMS
+declare -A APT_NOTIFIER_CONFIG_ITEMS
+UPDATER_CONFIG="/usr/lib/apt-notifier/bin/updater_config"
+if [ -x "${UPDATER_CONFIG}" ]; then
+    eval "APT_NOTIFIER_CONFIG_ITEMS=$(${UPDATER_CONFIG} --shell)"
+fi
+
+
+# use nala if desired and available
+: ${APT_NOTIFIER_USE_NALA:=false}
+export APT_NOTIFIER_USE_NALA
+if [ x"${APT_NOTIFIER_CONFIG_ITEMS[use_nala]}" = x"true" ]; then
+    APT_NOTIFIER_USE_NALA=true
+    if ! which nala >/dev/null; then
+        APT_NOTIFIER_USE_NALA=false
+    fi
+fi
+
+
+if [ x"$APT_NOTIFIER_USE_NALA" = x"true" ]; then
+        UPDATER_APTPREF=/usr/lib/apt-notifier/shlib/updater_aptpref
+        AptPref_Opts=""
+        if [ -f "$UPDATER_APTPREF" ]; then
+                  . "$UPDATER_APTPREF"
+        fi
+        echo "nala update"
+        nala update $AptPref_Opts
+else
+        echo "apt-get update"
+        apt-get update
+fi
+working="...$(mygettext -d apt ' [Working]')..."
+printf "${working}"
+
+UPDATER_COUNTS=$(/usr/lib/apt-notifier/bin/updater_count)
+
+printf $'\r'"$(printf '%*s' ${#working})"
+echo
+echo "$UPDATER_COUNTS"
+echo
+
+# auto close timeout
+AUTO_CLOSE_TIMEOUT="${APT_NOTIFIER_CONFIG_ITEMS[reload_auto_close_timeout]}"
+#: ${AUTO_CLOSE_TIMEOUT:=6}
+
+default_timeout=6
+if [ -z "${AUTO_CLOSE_TIMEOUT}" ]; then
+    AUTO_CLOSE_TIMEOUT=$default_timeout
+fi
+if [ -n "${AUTO_CLOSE_TIMEOUT//[0-9]/}" ]; then
+    AUTO_CLOSE_TIMEOUT=$default_timeout
+fi
+
+UPDATER_SHLIB=/usr/lib/apt-notifier/shlib/updater_shlib
+if [ -f "$UPDATER_SHLIB" ]; then
+      . "$UPDATER_SHLIB"
+  press_any_key_stop_auto_close && exit
+  press_any_key_to_close && exit
+fi
+
+
+exit

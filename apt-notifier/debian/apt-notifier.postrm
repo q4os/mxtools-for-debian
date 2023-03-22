@@ -1,0 +1,18 @@
+#!/bin/bash
+
+#DEBHELPER#
+
+# postrm script for apt-notifier
+
+set -e
+
+case "$1" in
+  purge|remove)  
+        rm -f /etc/apt/apt.conf.d/02periodic                      || :      
+        rm -f /etc/apt/apt.conf.d/51unattended-upgrades-mx        || :  
+        rm -f /etc/cron.d/mx-Unattended-Origins-Pattern-update    || :
+        rm -f /etc/xdg/autostart/mx-updater-autostart-xdg.desktop || :
+        rm -f /etc/xdg/autostart/mx-updater-autostart.desktop     || :
+        ;;
+    esac
+exit 0

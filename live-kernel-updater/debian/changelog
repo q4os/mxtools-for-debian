@@ -1,0 +1,195 @@
+live-kernel-updater (0.2.18mx19+1+deb11u13) stable; urgency=medium
+
+  * MX Tools release
+
+ -- Timothy E. Harris <administrator@localdomain>  Wed, 22 Mar 2023 10:43:51 +0100
+
+live-kernel-updater (0.2.18mx19+1) mx; urgency=medium
+
+  * Move to MX repo
+
+ -- Timothy E. Harris <maintainer@mxrepo.com>  Wed, 05 Feb 2020 22:06:35 -0500
+
+live-kernel-updater (0.2.18) unstable; urgency=medium
+
+  * Bump version to 2.30.04 (fix lsblk)
+
+ -- anticapitalista <antix@operamail.com>  Fri, 25 Oct 2019 17:02:57 +0300
+
+live-kernel-updater (0.2.17) unstable; urgency=medium
+
+  * updated default icon to use papirustheme
+
+ -- anticapitalista <antix@operamail.com>  Sat, 07 Sep 2019 14:22:22 +0100
+
+live-kernel-updater (0.2.16) unstable; urgency=medium
+
+  * added MX-Live category back to the desktop file
+
+ -- anticapitalista <antix@operamail.com>  Sat, 20 Jul 2019 18:28:33 +0100
+
+live-kernel-updater (0.2.15) unstable; urgency=medium
+
+  * buster release
+
+ -- anticapitalista <antix@operamail.com>  Fri, 05 Jul 2019 21:05:47 +0300
+
+live-kernel-updater (0.2.14) unstable; urgency=medium
+
+  * Bump version to 2.30.03
+
+ -- anticapitalista <antix@operamail.com>  Thu, 09 May 2019 15:18:47 +0300
+
+live-kernel-updater (0.2.13) unstable; urgency=medium
+
+  * latest upstream changes
+
+ -- anticapitalista <antix@operamail.com>  Thu, 21 Mar 2019 16:41:09 +0200
+
+live-kernel-updater (0.2.12) unstable; urgency=medium
+
+  * use x-terminal-emulator in desktop file
+
+ -- anticapitalista <antix@operamail.com>  Sat, 16 Mar 2019 17:50:05 +0200
+
+live-kernel-updater (0.2.11) unstable; urgency=medium
+
+  * updated pl
+
+ -- anticapitalista <antix@operamail.com>  Sun, 03 Mar 2019 20:11:58 +0200
+
+live-kernel-updater (0.2.10) unstable; urgency=medium
+
+  * edits to desktop file
+
+ -- anticapitalista <antix@operamail.com>  Thu, 28 Feb 2019 19:55:11 +0200
+
+live-kernel-updater (0.2.9) unstable; urgency=medium
+
+  * added icon
+
+ -- anticapitalista <antix@operamail.com>  Mon, 18 Feb 2019 16:51:48 +0200
+
+live-kernel-updater (0.2.8) unstable; urgency=medium
+
+  * added more languages to desktop file
+
+ -- anticapitalista <antix@operamail.com>  Fri, 25 Jan 2019 17:50:40 +0200
+
+live-kernel-updater (0.2.7) unstable; urgency=medium
+
+  * data for the menu is displayed as well as the menu bugfix
+
+ -- anticapitalista <antix@operamail.com>  Mon, 15 Jan 2018 18:54:07 +0200
+
+live-kernel-updater (0.2.6) unstable; urgency=medium
+
+  * Bump version
+
+ -- anticapitalista <antix@operamail.com>  Tue, 03 Oct 2017 01:02:34 +0300
+
+live-kernel-updater (0.2.5) unstable; urgency=medium
+
+  * bump version
+
+ -- anticapitalista <antix@operamail.com>  Mon, 28 Aug 2017 10:51:57 +0100
+
+live-kernel-updater (0.2.4) unstable; urgency=medium
+
+  * Bump version 
+
+ -- anticapitalista <antix@operamail.com>  Sat, 12 Aug 2017 10:52:57 +0100
+
+live-kernel-updater (0.2.3) unstable; urgency=medium
+
+  * Bump version
+
+ -- anticapitalista <antix@operamail.com>  Mon, 31 Jul 2017 20:22:10 +0100
+
+live-kernel-updater (0.2.2) unstable; urgency=medium
+
+  * Switch to graphics user interface by default
+
+ -- anticapitalista <antix@operamail.com>  Sat, 15 Jul 2017 11:50:56 +0100
+
+live-kernel-updater (0.2.1) unstable; urgency=medium
+
+  * Bump version
+
+ -- anticapitalista <antix@operamail.com>  Sat, 20 May 2017 21:53:31 +0300
+
+live-kernel-updater (0.2.0) unstable; urgency=medium
+
+  * Add support for encrypted live usb
+
+ -- anticapitalista <antix@operamail.com>  Mon, 01 May 2017 12:25:20 +0300
+
+live-kernel-updater (0.1.10) unstable; urgency=medium
+
+  * version bumped
+
+ -- anticapitalista <antix@operamail.com>  Fri, 02 Dec 2016 12:14:30 +0200
+
+live-kernel-updater (0.1.9) unstable; urgency=medium
+
+  * Add copyright notice and license file
+
+ -- anticapitalista <antix@operamail.com>  Thu, 24 Nov 2016 13:27:29 +0200
+
+live-kernel-updater (0.1.8) unstable; urgency=medium
+
+  * Added Catalan translation to desktop file
+
+ -- anticapitalista <antix@operamail.com>  Thu, 24 Nov 2016 13:26:59 +0200
+
+live-kernel-updater (0.1.7) unstable; urgency=medium
+
+  * Rename error file to lku.error (no trailing "s")
+
+ -- anticapitalista <antix@operamail.com>  Sat, 12 Nov 2016 13:54:19 +0200
+
+live-kernel-updater (0.1.6) unstable; urgency=medium
+
+  * Update usage in readme
+  * Add TEMPLATE_INITRD_2 for antiX + MX support
+
+ -- anticapitalista <antix@operamail.com>  Mon, 07 Nov 2016 12:26:13 +0200
+
+live-kernel-updater (0.1.5) unstable; urgency=medium
+
+  * Remove empty strings in .desktop file
+
+ -- anticapitalista <antix@operamail.com>  Sat, 29 Oct 2016 14:03:58 +0300
+
+live-kernel-updater (0.1.4) unstable; urgency=medium
+
+  * Add "dark" color theme
+
+ -- anticapitalista <antix@operamail.com>  Thu, 13 Oct 2016 12:25:03 +0300
+
+live-kernel-updater (0.1.3) unstable; urgency=medium
+
+  * Fix translation comments 
+  * Use -C for color scheme. Update usage.
+
+ -- anticapitalista <antix@operamail.com>  Mon, 10 Oct 2016 12:04:25 +0300
+
+live-kernel-updater (0.1.2) unstable; urgency=medium
+
+  * Send my_done() $action_name, not $action  
+
+ -- anticapitalista <antix@operamail.com>  Sat, 08 Oct 2016 10:55:23 +0300
+
+live-kernel-updater (0.1.1) unstable; urgency=medium
+
+  * updated man page
+  * Always copy initrd-release from linuxfs to initrd if it is missing  
+
+ -- anticapitalista <antix@operamail.com>  Fri, 07 Oct 2016 13:33:42 +0300
+
+live-kernel-updater (0.1.0) unstable; urgency=low 
+ 
+  * Initial Release.
+
+ -- anticapitalista <antiX@operamail.com>  Wed, 05 Oct 2016 17:07:00 +0200
+

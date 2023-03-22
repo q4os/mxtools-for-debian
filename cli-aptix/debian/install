@@ -1,0 +1,6 @@
+cli-aptiX 			usr/local/bin
+cli-aptiX.1.gz 		usr/share/man/man1
+suggested/* 		usr/local/share/cli-aptiX/suggested
+cli-aptiX.desktop 	usr/share/applications/antix
+locale/* 			usr/share/locale
+apt.conf.d/* 		etc/apt/apt.conf.d

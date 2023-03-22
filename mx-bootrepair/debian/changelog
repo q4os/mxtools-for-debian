@@ -1,0 +1,449 @@
+mx-bootrepair (22.83+deb11u13) stable; urgency=medium
+
+  * MX Tools release
+
+ -- Adrian <administrator@localdomain>  Wed, 22 Mar 2023 10:43:51 +0100
+
+mx-bootrepair (22.83) mx; urgency=medium
+
+  * Use root.fsm instead of chrootfs for luks name
+
+ -- Adrian <adrian@mxlinux.org>  Tue, 13 Dec 2022 20:53:51 -0500
+
+mx-bootrepair (22.82) mx; urgency=medium
+
+  * update translations 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 26 Oct 2022 19:57:13 -0400
+
+mx-bootrepair (22.81) mx; urgency=medium
+
+  * Fix: launching documents from Help (fixes a problem in Plasma) 
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 22 Aug 2022 19:13:01 -0400
+
+mx-bootrepair (22.80) mx; urgency=medium
+
+  * Fix: launching Firefox from Help
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 17 Aug 2022 21:40:03 -0400
+
+mx-bootrepair (22.76.03) mx; urgency=medium
+
+  * translation refresh
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 23 Jul 2022 11:15:56 -0400
+
+mx-bootrepair (22.76.02) mx; urgency=medium
+
+  * Remove not needed --qtenv annotation pkexec policy
+  * Adjust pkexec/sudo environment parameter
+  * Fix EFI System Partition detection on dos/mbr partition table
+
+ -- fehlix <fehlix@mxlinux.org>  Mon, 04 Jul 2022 17:35:09 -0400
+
+mx-bootrepair (22.76.01) mx; urgency=medium
+
+  * Fix: add alternative for LUKS detection
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 15 Jun 2022 22:28:55 -0400
+
+mx-bootrepair (22.6) mx; urgency=medium
+
+  * Preserve user theme when launching program as root
+  * Make sure HOME and XDG_RUNTIME_DIR are correct when launching as root
+
+ -- Adrian <adrian@mxlinux.org>  Tue, 14 Jun 2022 01:00:46 -0400
+
+mx-bootrepair (22.3.04) mx; urgency=medium
+
+  * adjust mount/umount for chroot
+  * add detection of invalid entries in fstab
+  * fix device selection
+  * add fallback efi to grub-install
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 10 Mar 2022 21:58:08 -0500
+
+mx-bootrepair (21.3.03) mx; urgency=medium
+
+  * adjust /dev/udev in chroot to make update-grub work
+
+ -- fehlix <fehlix@mxlinux.org>  Sat, 20 Mar 2021 18:17:45 -0400
+
+mx-bootrepair (21.3.02) mx; urgency=medium
+
+  * fix: NVRAM access of grub-install within chroot
+
+ -- fehlix <fehlix@mxlinux.org>  Tue, 16 Mar 2021 10:12:45 -0400
+
+mx-bootrepair (21.3.01) mx; urgency=medium
+
+  * fix: operator precedence
+  * fix: device name if not UUID
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 15 Mar 2021 22:54:38 -0400
+
+mx-bootrepair (21.3) mx; urgency=medium
+
+  * mount efivars before installing GRUB
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 15 Mar 2021 09:42:16 -0400
+
+mx-bootrepair (19.10.05) mx; urgency=medium
+
+  * translation update
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 31 Oct 2019 00:34:47 -0400
+
+mx-bootrepair (19.10.04) mx; urgency=medium
+
+  * fix help link
+
+ -- Adrian <adrian@mxlinux.org>  Tue, 29 Oct 2019 14:11:11 -0400
+
+mx-bootrepair (19.10.03) mx; urgency=medium
+
+  * fix localization
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 28 Oct 2019 17:34:29 -0400
+
+mx-bootrepair (19.10.02) mx; urgency=medium
+
+  * mount /boot/efi if on different partition when reparing grub.cfg
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 21 Oct 2019 15:12:03 -0400
+
+mx-bootrepair (19.10.01) mx; urgency=medium
+
+  * fix window icon
+  * change wording for location when fixing grub.cfg
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 21 Oct 2019 12:36:07 -0400
+
+mx-bootrepair (19.10) mx; urgency=medium
+
+  * new feature: works on luks encrypted partitions
+  * fix: works when /boot not on root 
+  * fix: works when targetting running root system
+
+ -- Adrian <adrian@mxlinux.org>  Sat, 19 Oct 2019 19:30:22 -0400
+
+mx-bootrepair (19.9.01) mx; urgency=medium
+
+  * new translations
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 27 Sep 2019 15:13:30 -0400
+
+mx-bootrepair (19.9) mx; urgency=medium
+
+  * new translations
+
+ -- Adrian <adrian@mxlinux.org>  Sun, 01 Sep 2019 00:47:42 -0400
+
+mx-bootrepair (19.8) mx; urgency=medium
+
+  * added offline help file
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 21 Aug 2019 13:31:04 -0400
+
+mx-bootrepair (19.7.1) mx; urgency=medium
+
+  * update icon
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 08 Jul 2019 11:12:09 -0400
+
+mx-bootrepair (19.7) mx; urgency=medium
+
+  * fix window buttons for Buster
+
+ -- Adrian <adrian@mxlinux.org>  Sun, 07 Jul 2019 13:22:49 -0400
+
+mx-bootrepair (19.5) mx; urgency=medium
+
+  * list paravirtualized (Xen) drives and partition
+
+ -- Adrian <adrian@mxlinux.org>  Sat, 18 May 2019 21:49:25 -0400
+
+mx-bootrepair (19.4) mx; urgency=medium
+
+  * updated translations
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 05 Apr 2019 11:22:23 -0400
+
+mx-bootrepair (19.2) mx; urgency=medium
+
+  * updated translations
+
+ -- Adrian <adrian@mxlinux.org>  Sun, 17 Feb 2019 22:27:20 -0500
+
+mx-bootrepair (19.1) mx; urgency=medium
+
+  * fix nvme partition selection
+
+ -- Adrian <adrian@mxlinux.org>  Sun, 27 Jan 2019 10:57:04 -0500
+
+mx-bootrepair (18.12) mx; urgency=medium
+
+  * update translations
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 28 Dec 2018 11:34:18 -0500
+
+mx-bootrepair (18.11) mx; urgency=medium
+
+  * updated translations
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 30 Nov 2018 11:39:20 -0500
+
+mx-bootrepair (18.10) mx; urgency=medium
+
+  * updated translations
+
+ -- Adrian <adrian@mxlinux.org>  Sun, 14 Oct 2018 18:25:57 -0400
+
+mx-bootrepair (18.8.1) mx; urgency=medium
+
+  * fix icons for other themes
+
+ -- Adrian <adrian@mxlinux.org>  Sat, 11 Aug 2018 15:58:52 -0400
+
+mx-bootrepair (18.8) mx; urgency=medium
+
+  * it should handle now nvme and mmcblk devices
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 01 Aug 2018 15:27:02 -0400
+
+mx-bootrepair (18.6.2) mx; urgency=medium
+
+  * fix bug: message box in wrong place
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 28 Jun 2018 18:00:13 -0400
+
+mx-bootrepair (18.6.1) mx; urgency=medium
+
+  * add changelog button
+  * fix displaying program version for non-EN locale
+
+ -- Adrian <adrian@mxlinux.org>  Sat, 23 Jun 2018 17:32:03 -0400
+
+mx-bootrepair (18.6) mx; urgency=medium
+
+  * new translations
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 18 Jun 2018 12:28:23 -0400
+
+mx-bootrepair (18.3) mx; urgency=medium
+
+  * new translations
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 02 Mar 2018 09:16:48 -0500
+
+mx-bootrepair (18.1) mx; urgency=medium
+
+  * new translations
+
+ -- Adrian <adrian@mxlinux.org>  Sat, 10 Feb 2018 01:33:57 -0500
+
+mx-bootrepair (17.12+1) mx; urgency=medium
+
+  * Spanish translation update
+  * Fix Franch help link
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 11 Dec 2017 22:29:38 -0500
+
+mx-bootrepair (17.12) mx; urgency=medium
+
+  * new translations
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 04 Dec 2017 14:26:35 -0500
+
+mx-bootrepair (17.11+2) mx; urgency=medium
+
+  * display Help and GUI at the same time
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 30 Nov 2017 13:19:49 -0500
+
+mx-bootrepair (17.11+1) mx; urgency=medium
+
+  * fix FR detection
+
+ -- Adrian <adrian@mxlinux.org>  Sat, 11 Nov 2017 18:27:12 -0500
+
+mx-bootrepair (17.11) mx; urgency=medium
+
+  * add FR help link
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 10 Nov 2017 12:00:07 -0500
+
+mx-bootrepair (17.10) mx; urgency=medium
+
+  * new icon
+
+ -- Adrian <adrian@mxlinux.org>  Sun, 15 Oct 2017 12:28:35 -0400
+
+mx-bootrepair (17.8+2) mx; urgency=medium
+
+  * new translations
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 23 Aug 2017 08:34:28 -0400
+
+mx-bootrepair (17.8+1) mx; urgency=medium
+
+  * new translations
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 10 Aug 2017 23:00:12 -0400
+
+mx-bootrepair (17.8mx16) mx; urgency=medium
+
+  * added ESP installation support
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 10 Aug 2017 01:12:45 -0400
+
+mx-bootrepair (17.6mx16) mx; urgency=medium
+
+  * updated translations
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 02 Jun 2017 13:04:15 -0400
+
+mx-bootrepair (17.5mx16) mx; urgency=medium
+
+  * button icons follow theme choice
+
+ -- Adrian <adrian@mxlinux.org>  Tue, 09 May 2017 14:58:45 -0400
+
+mx-bootrepair (17.3mx16) mx; urgency=medium
+
+  * new translations
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 30 Mar 2017 09:41:39 -0400
+
+mx-bootrepair (16.11mx16+1) mx; urgency=medium
+
+  * FR translations
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 30 Nov 2016 10:31:08 -0500
+
+mx-bootrepair (16.11mx16) mx; urgency=medium
+
+  * new translations
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 16 Nov 2016 11:37:32 -0500
+
+mx-bootrepair (16.10mx16) mx; urgency=medium
+
+  * changed URLs
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 10 Oct 2016 10:30:14 -0400
+
+mx-bootrepair (16.6mx15) mx; urgency=medium
+
+  * minor fix
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 06 Jun 2016 17:44:22 -0400
+
+mx-bootrepair (16.5mx15) mx; urgency=medium
+
+  * new desktop file
+
+ -- dolphinoracle <dolphinoracle@gmail.com>  Sun, 22 May 2016 21:21:35 -0400
+
+mx-bootrepair (15.12mx15) mx; urgency=medium
+
+  * added --target=i386-pc
+
+ -- Adrian <adrian@mxlinux.org>  Tue, 22 Dec 2015 17:35:55 -0500
+
+mx-bootrepair (15.11mx15) mx; urgency=medium
+
+  * new translations
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 30 Nov 2015 09:28:23 -0500
+
+mx-bootrepair (15.10mx15) mx; urgency=medium
+
+  * new translations
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 23 Oct 2015 15:58:37 -0400
+
+mx-bootrepair (15.7.1mx15) mx; urgency=medium
+
+  * new URL for documentation
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 09 Jul 2015 17:38:38 -0400
+
+mx-bootrepair (15.7mx15) mx; urgency=medium
+
+  * changed to qt5
+
+ -- Adrian <adrian@mxlinux.org>  Tue, 30 Jun 2015 12:15:47 -0400
+
+mx-bootrepair (15.6mx14) mx; urgency=medium
+
+  * changed documentation URL
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 03 Jun 2015 11:13:39 -0400
+
+mx-bootrepair (15.4mx14) mx; urgency=medium
+
+  * added Polish translation
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 20 Apr 2015 19:55:41 -0400
+
+mx-bootrepair (15.3mx14) mx; urgency=medium
+
+  * changed help URL
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 20 Mar 2015 16:48:47 -0400
+
+mx-bootrepair (15.2) mx; urgency=medium
+
+  * added new help URL
+
+ -- Adrian <adrian@mxlinux.org>  Sun, 15 Feb 2015 10:24:40 -0500
+
+mx-bootrepair (15.1) mx; urgency=medium
+
+  * added Japanese and Catalan to .desktop
+
+ -- Adrian <adrian@mxlinux.org>  Tue, 27 Jan 2015 11:14:11 -0500
+
+mx-bootrepair (14.3+1) mx; urgency=low
+
+  * retranslated stings, ready for point release
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 06 Nov 2014 00:43:31 -0500
+
+mx-bootrepair (14.2+1) mx; urgency=low
+
+  * fixed dependency typo, chaged version format
+
+ -- Adrian <adrian@mxlinux.org>  Tue, 30 Sep 2014 19:25:25 -0400
+
+mx-bootrepair (0.14.1mx141+3) mx; urgency=low
+
+  * minor changes
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 25 Jun 2014 10:10:58 -0400
+
+mx-bootrepair (0.14.1mx141+2) mx; urgency=low
+
+  * update languages
+
+ -- Adrian <adrian@mxlinux.org>  Tue, 17 Jun 2014 13:40:20 -0400
+
+mx-bootrepair (0.3mx140+2) mx; urgency=low
+
+  * update grub.cfg another partitions
+
+ -- Adrian <adrian@mx1>  Sat, 19 Apr 2014 11:26:16 -0400
+
+mx-bootrepair (0.2mx140+1) mx; urgency=low
+
+  * added MBR/PBR save and restore options
+
+ -- Adrian <adrian@mx1>  Thu, 10 Apr 2014 15:05:42 -0400
+
+mx-bootrepair (0.1mx140+1) mx; urgency=low
+
+  * Initial release. 
+
+ -- Steven Pusser [stevep@mxlinux.org]  Fri, 04 Apr 2014 21:40:04 -0700

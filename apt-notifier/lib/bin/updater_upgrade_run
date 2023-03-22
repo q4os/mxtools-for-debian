@@ -1,0 +1,81 @@
+#!/bin/bash
+
+# load updater_config settings
+unset APT_NOTIFIER_CONFIG_ITEMS
+declare -A APT_NOTIFIER_CONFIG_ITEMS
+UPDATER_CONFIG="/usr/lib/apt-notifier/bin/updater_config"
+if [ -x "${UPDATER_CONFIG}" ]; then
+    eval "APT_NOTIFIER_CONFIG_ITEMS=$(${UPDATER_CONFIG} --shell)"
+fi
+
+upgrade_in_root_terminal="${APT_NOTIFIER_CONFIG_ITEMS[upgrade_in_root_terminal]}"
+
+check_authenticator() {
+    local authenticator 
+    
+    # check users polkit agent is running
+    if pgrep   -u $(id -u) -x  '(lx)?polkit.*' >/dev/null && \
+       which pkexec > /dev/null; then
+       authenticator=pkexec
+    elif test -x /usr/bin/gksu; then
+       authenticator=/usr/bin/gksu
+    else
+       # fallback to sudo
+       authenticator=sudo
+    fi
+    echo "$authenticator"
+}
+
+# fallback to normal userterminal in case we need sudo
+if [ "$upgrade_in_root_terminal" = "true" ] && \
+   [ "$(check_authenticator)" = "sudo" ]; then
+    upgrade_in_root_terminal="false"
+fi
+
+
+APT_NOTIFIERRC="/home/$(logname)/.config/apt-notifierrc"
+UpgradeType=$(grep -oP '^UpgradeType=\K.*' "$APT_NOTIFIERRC" 2>/dev/null)
+
+if [ "$(id -u)"  != "0" ]; then
+    #normal user
+    if [ "$upgrade_in_root_terminal" = "true" ]; then
+        if [ "$UpgradeType" = "upgrade" ];   then
+            RUN="/usr/lib/apt-notifier/actions/updater_basic-upgrade_action run"
+        else
+            RUN="/usr/lib/apt-notifier/actions/updater_full-upgrade_action run"
+        fi
+        $RUN
+        exit $?
+    fi  
+fi
+
+# load updater shell-libs settings
+UPDATER_SHLIB=/usr/lib/apt-notifier/shlib/updater_shlib
+if [ -f "$UPDATER_SHLIB" ]; then
+      . "$UPDATER_SHLIB"
+fi
+
+ICON="${APT_NOTIFIER_CONFIG_ITEMS[window_icon]}"
+ICON_KDE="${APT_NOTIFIER_CONFIG_ITEMS[window_icon_KDE]}"
+DOMAIN="${APT_NOTIFIER_CONFIG_ITEMS[domain]}"
+UPDATER=$(translate "MX Updater")
+
+export TEXTDOMAIN=apt-notifier
+if [ "$UpgradeType" = "upgrade" ];   then
+    MSG="apt-get upgrade"
+    UPGRADE=$(gettext "basic upgrade")
+    RUN=/usr/lib/apt-notifier/actions/updater_basic-upgrade_action
+else
+    MSG="apt-get full-upgrade"
+    UPGRADE=$(gettext "full upgrade")
+    RUN=/usr/lib/apt-notifier/actions/updater_full-upgrade_action
+fi
+
+#MSG="$TITLE"
+MSG="$UPGRADE"
+
+TITLE="${UPDATER}: $UPGRADE"
+
+updater_show  "$MSG" "$RUN" "$TITLE" "$ICON" "$ICON_KDE"
+
+exit

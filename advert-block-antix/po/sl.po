@@ -1,0 +1,54 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# Translators:
+# Arnold Marko <arnold.marko@gmail.com>, 2019
+msgid ""
+msgstr ""
+"Project-Id-Version: antix-development\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-10-27 02:09+0300\n"
+"PO-Revision-Date: 2021-01-18 23:12+0000\n"
+"Last-Translator: Arnold Marko <arnold.marko@gmail.com>\n"
+"Language-Team: Slovenian (http://www.transifex.com/anticapitalista/antix-development/language/sl/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: sl\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3);\n"
+
+#: block-advert.sh:24
+#, sh-format
+msgid ""
+"The <b>$title</b> tool adds stuff to your /etc/hosts file, so \\nthat many "
+"advertising servers and websites will not be able to connect \\nto this "
+"PC.\\n\\nYou can choose one service or combine multiple services for more "
+"advert protection.\\nBlocking ad servers protects your privacy, saves you "
+"bandwidth, greatly \\nimproves web-browsing speed and makes the internet "
+"much less annoying in general.\\n\\nDo you want to proceed?"
+msgstr "Orodje <b>$title</b> doda stvari v vašo /etc/hosts datoteko,\ntako da se mnogo oglaševalskih strežnikov in spletnih strani ne bo moglo\npovezati s gtem računalnikom.\n\nLahko izberete eno storitev ali kombinirate več storitev za več zaščite pred oglaševanjem.\nBlokiranje oglaševalskih strežnikov sčiti vašo zasebnost, manjša pretok podatkov,\nzelo poveča hitrost brskanja in naredi splet veliko manj zoprn.\n\nAli želite nadaljevati?"
+
+#: block-advert.sh:81
+msgid "Restoring original /etc/hosts."
+msgstr "Obnova originalnega /etc/hosts."
+
+#: block-advert.sh:117
+#, sh-format
+msgid "Loading  adlist from $domain"
+msgstr "Nalaganje adlist iz $domain"
+
+#: block-advert.sh:161
+msgid ""
+"Success - your settings have been changed.\\n\\nYour hosts file has been "
+"updated.\\nRestart your browser to see the changes."
+msgstr "Sprememba nastavitev je uspela.\n\nVaše gostiteljska datoteka je bila posodobljena.\nPonovno zaženite spletni brskalnik, da bodo spremembe vidne."
+
+#: block-advert.sh:182
+msgid "Choose your preferred ad blocking service(s)"
+msgstr "Izberite želene storitve (storitev) za blokiranja oglasov"
+
+#: block-advert.sh:225
+msgid "No item selected"
+msgstr "Nič ni izbrano"

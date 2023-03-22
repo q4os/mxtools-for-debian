@@ -1,0 +1,56 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# Translators:
+# ふうせん Fu-sen. | BALLOON a.k.a. Fu-sen., 2014
+# ふうせん Fu-sen. | BALLOON a.k.a. Fu-sen., 2017
+# Green, 2020
+msgid ""
+msgstr ""
+"Project-Id-Version: antix-development\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-10-27 02:09+0300\n"
+"PO-Revision-Date: 2020-03-22 15:52+0000\n"
+"Last-Translator: Green\n"
+"Language-Team: Japanese (http://www.transifex.com/anticapitalista/antix-development/language/ja/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: ja\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: block-advert.sh:24
+#, sh-format
+msgid ""
+"The <b>$title</b> tool adds stuff to your /etc/hosts file, so \\nthat many "
+"advertising servers and websites will not be able to connect \\nto this "
+"PC.\\n\\nYou can choose one service or combine multiple services for more "
+"advert protection.\\nBlocking ad servers protects your privacy, saves you "
+"bandwidth, greatly \\nimproves web-browsing speed and makes the internet "
+"much less annoying in general.\\n\\nDo you want to proceed?"
+msgstr "<b>$title</b>ツールは、/ etc / hosts にあるファイルに内容を追加するため、多くの広告サーバーおよびウェブサイトがこのPCに接続できません。広告規制を強化するために、1つのサービスを選択するか、複数のサービスを組み合わせることができます。 広告サーバーをブロックすることでプライバシーが保護され、帯域幅が節約されます。またウェブブラウザの閲覧速度が大幅に向上するので、総じてインターネットの煩わしさが軽減されます。続行しますか？"
+
+#: block-advert.sh:81
+msgid "Restoring original /etc/hosts."
+msgstr "元の /etc/hosts ファイルを復元します。"
+
+#: block-advert.sh:117
+#, sh-format
+msgid "Loading  adlist from $domain"
+msgstr "$domainから広告リストを読み込んでいます"
+
+#: block-advert.sh:161
+msgid ""
+"Success - your settings have been changed.\\n\\nYour hosts file has been "
+"updated.\\nRestart your browser to see the changes."
+msgstr "成功です、設定を変更しました。 hosts ファイルが更新されました。変更を確認するには、ブラウザを再起動してください。"
+
+#: block-advert.sh:182
+msgid "Choose your preferred ad blocking service(s)"
+msgstr "希望する広告ブロックサービスを選択してください"
+
+#: block-advert.sh:225
+msgid "No item selected"
+msgstr "選択項目なし"

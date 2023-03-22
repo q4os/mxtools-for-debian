@@ -1,0 +1,162 @@
+mx-viewer (22.6.01+deb11u13) stable; urgency=medium
+
+  * MX Tools release
+
+ -- Adrian <administrator@localdomain>  Wed, 22 Mar 2023 10:43:56 +0100
+
+mx-viewer (22.6.01) mx; urgency=medium
+
+  * Save history between sessions
+  * Added option to clear history, or individual item
+  * Add option to rename bookmarks
+  * Fix bug saving bookmarks
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 10 Jun 2022 08:25:21 -0400
+
+mx-viewer (22.6) mx; urgency=medium
+
+  * Make it look and work more like a browser. Added:
+  * 	- address bar by default
+  *	- downlod capability and a basic download manager
+  *	- menu
+  * 	- favorites (basic function to add, move, remove and save and reload)
+  *	- full-size mode
+  *	- zoom in/out buttons
+  *	- home button: configurable in ~/.config/MX-Linux/mx-viewer.conf Home="url"
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 02 Jun 2022 00:11:26 -0400
+
+mx-viewer (22.5.01) mx; urgency=medium
+
+  * Improve search behavior: 
+  *     - focus search by default
+  *     - Shift-F3 searches backwards
+  *     - Esc clears the search field, second Esc focuses the document
+  * Fix reload shortcut
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 26 May 2022 02:10:44 -0400
+
+mx-viewer (22.5) mx; urgency=medium
+
+  * Use webenginewidgets instead of webkitwidgets
+  * Save .conf file in ~/.conf/MX-Linux
+
+ -- Adrian <adrian@mxlinux.org>  Tue, 24 May 2022 22:37:53 -0400
+
+mx-viewer (20.12.01) mx; urgency=medium
+
+  * add open/browse option, help dialog 
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 28 Dec 2020 02:33:29 -0500
+
+mx-viewer (20.12) mx; urgency=medium
+
+  * added command line options to enable/disable javascript, 3rd party cookies, spatial navigation, etc
+  * default to duckduckgo instead of google
+  * fix: remember window size
+
+ -- Adrian <adrian@mxlinux.org>  Sun, 27 Dec 2020 03:14:41 -0500
+
+mx-viewer (19.10.01) mx; urgency=medium
+
+  * security improvements
+
+ -- Adrian <adrian@mxlinux.org>  Sun, 13 Oct 2019 23:05:10 -0400
+
+mx-viewer (19.10) mx; urgency=medium
+
+  * update color scheme handling 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 12 Oct 2019 13:16:47 -0400
+
+mx-viewer (19.9) mx; urgency=medium
+
+  * minor change: show program name when displaying version
+
+ -- Adrian <adrian@mxlinux.org>  Sun, 29 Sep 2019 15:11:19 -0400
+
+mx-viewer (19.8) mx; urgency=medium
+
+  * save window geometry
+
+ -- Adrian <adrian@mxlinux.org>  Sat, 24 Aug 2019 03:59:08 -0400
+
+mx-viewer (18.8) mx; urgency=medium
+
+  * fix icon other themes
+
+ -- Adrian <adrian@mxlinux.org>  Sat, 11 Aug 2018 23:28:47 -0400
+
+mx-viewer (18.3) mx; urgency=medium
+
+  * dropping rights if ran as root
+
+ -- Adrian <adrian@mxlinux.org>  Tue, 13 Mar 2018 19:15:36 -0400
+
+mx-viewer (17.1mx16) mx; urgency=medium
+
+  * add search to toolbar, display toolbar permanently
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 13 Jan 2017 13:03:38 -0500
+
+mx-viewer (16.10mx16) mx; urgency=medium
+
+  * changed URLs
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 10 Oct 2016 14:59:38 -0400
+
+mx-viewer (15.12.1mx15) mx; urgency=medium
+
+  * version bump
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 23 Dec 2015 09:02:16 -0500
+
+mx-viewer (15.12mx15) mx; urgency=medium
+
+  * moved icon location
+
+ -- Adrian <adrian@mxlinux.org>  Tue, 01 Dec 2015 08:56:57 -0500
+
+mx-viewer (15.7.1mx15) mx; urgency=medium
+
+  * added build-deps, fixed license
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 09 Jul 2015 18:52:14 -0400
+
+mx-viewer (15.7mx15) mx; urgency=medium
+
+  * update to qt5 
+
+ -- Adrian <adrian@mxlinux.org>  Tue, 30 Jun 2015 14:15:45 -0400
+
+mx-viewer (15.4.1mx14) mx; urgency=medium
+
+  * Provides: x-www-browser.
+  * Add qtchooser and qt4-default as build-depends to avoid any Qt 5
+    and Qt 3 qmake issues on other platforms.
+
+ -- Steven Pusser [stevep@mxlinux.org]  Sat, 06 Jun 2015 19:05:48 -0700
+
+mx-viewer (15.4mx14) mx; urgency=medium
+
+  * added zoom in +, zoom out -, restore size 0
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 01 Apr 2015 17:23:57 -0400
+
+mx-viewer (15.3mx14) mx; urgency=medium
+
+  * added progress bar
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 13 Mar 2015 12:16:37 -0400
+
+mx-viewer (15.2) mx; urgency=medium
+
+  * added search feature.
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 16 Feb 2015 10:08:03 -0500
+
+mx-viewer (0.14.2mx142+1) mx; urgency=low
+
+  * Initial packaging.
+
+ -- Adrian <adrian@mxlinux.org>  Sun, 27 Jul 2014 16:13:13 -0400

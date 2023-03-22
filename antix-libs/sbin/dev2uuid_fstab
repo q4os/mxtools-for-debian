@@ -1,0 +1,22 @@
+#!/bin/bash
+# This script will change all entries of the form /dev/sd* in /etc/fstab to their appropriate UUID names
+# You must have root privelages to run this script (use sudo)
+if [ `id -u` -ne 0 ]; then                              # Checks to see if script is run as root
+  echo "This script must be run as root" >&2            # If it isn't, exit with error
+  exit 1
+fi
+
+cp /etc/fstab /etc/fstab.backup
+# Stores all /dev entries from fstab into a file
+# ignore /dev/sr0 entries
+sed -nr -e '\|^/dev/sr[0-9]|d' -e 's|^/dev/([a-z][a-z0-9]+[0-9])[[:space:]]+.*|\1|p' </etc/fstab >/tmp/devices
+while read LINE; do                                     # For each line in /tmp/devices
+  # Sets the UUID name for that device
+  UUID=`ls -l /dev/disk/by-uuid | sed -n -e "/$LINE\$/! d" -e 's/^.* \([^ ]*\) -> .*$/\1/p'` 
+  [ "x$UUID" = "x" ] && continue                        # ignore entries with "no uuid's", e.g nofail's 
+  sed -i "s|^/dev/${LINE}|UUID=${UUID}|" /etc/fstab     # Changes the entry in fstab to UUID form
+done </tmp/devices
+cat /etc/fstab                                          # Outputs the new fstab file
+
+rm /tmp/devices
+echo "DONE!"

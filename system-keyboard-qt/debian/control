@@ -1,0 +1,13 @@
+Source: system-keyboard-qt
+Section: admin
+Priority: optional
+Maintainer: dolphinoracle <dolphinoracle@gmail.com>
+Build-Depends:  qttools5-dev-tools, debhelper (>=7.0.50~)
+Standards-Version: 3.9.5
+Vcs-Git: git://github.com/mxlinux/system-keyboard-qt.git
+
+Package: system-keyboard-qt
+Architecture: any
+Depends: ${misc:Depends}, ${shlibs:Depends}, mx-viewer | antix-viewer| xdg-utils, flags-common
+Description: System-keyboard-qt
+ A Qt frontend for setxbmap and /etc/default/keyboard

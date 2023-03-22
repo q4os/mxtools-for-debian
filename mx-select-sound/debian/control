@@ -1,0 +1,15 @@
+Source: mx-select-sound
+Section: admin
+Priority: optional
+Maintainer: Adrian <adrian@mxlinux.org>
+Build-Depends: debhelper (>=10), qtbase5-dev, qttools5-dev-tools
+Standards-Version: 3.9.8
+Vcs-Git: git://github.com/AdrianTM/mx-select-sound
+
+Package: mx-select-sound
+Architecture: any
+Depends: mx-viewer | xdg-utils,
+        ${misc:Depends},
+        ${shlibs:Depends}
+Description: MX Select Sound
+ MX Select Sound is a tool used for selecting the default sound card

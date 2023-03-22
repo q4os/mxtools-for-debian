@@ -1,0 +1,11 @@
+<RCC>
+    <qresource prefix="/icons"/>
+    <qresource prefix="/">
+        <file>icons/emblem-favorite.png</file>
+        <file>icons/go-home.svg</file>
+        <file>icons/zoom-in.svg</file>
+        <file>icons/zoom-out.svg</file>
+        <file>icons/system-search.png</file>
+        <file>icons/open-menu.png</file>
+    </qresource>
+</RCC>

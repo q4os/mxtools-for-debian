@@ -1,0 +1,94 @@
+#!/bin/bash
+
+
+DEFAULT_DPI=120
+
+   DPIs="90 120 150 250"
+    ISO="/data/iso/antiX/antiX-17.1_x64-full.iso"
+    DIR="Private/shots"
+IMG_CNT=0
+
+ME=${0##*/}
+
+NEEDS="tools/set-dpi bin/isomount bin/isoumount bin/show-isomount"
+
+main() {
+    sanity_test $NEEDS
+
+    mkdir -p "$DIR" || fatal "Could not mkdir($DIR)"
+    rows=1
+
+    bin/isoumount all -qQ || fatal "Cound not isoumount"
+    bin/isomount $ISO -Qq || fatal "Could not isomount"
+    bin/squmount -Qq      || fatal "Could not squmount"
+
+    trap on_exit EXIT
+    dpi_shots $rows
+
+    rows=10
+
+    bin/isoumount all -qQ
+    for i in $(seq 1 5); do
+        bin/isomount $ISO -Qq
+    done
+    dpi_shots $rows
+
+    rows=20
+    for i in $(seq 1 5); do
+        bin/isomount $ISO -Qq
+    done
+    dpi_shots $rows
+
+    tools/set-dpi $DEFAULT_DPI
+}
+
+dpi_shots() {
+    local rows=$1
+
+    for dpi in $DPIs; do
+        tools/set-dpi $dpi
+        bin/show-isomount -gD 2>/dev/null
+        file="%F_%T@$dpi-r$rows"
+
+        echo "Prepare to outline the entire Yad table @$dpi, rows: $rows"
+        echo "Press <Enter> when ready"
+        read xxxx
+
+        echo "Outline Yad table now"
+        scrot -s $file'-$wx$h.png' -e "mv \$f $DIR"
+        IMG_CNT=$((IMG_CNT + 1))
+        echo "You can close the OLD window if you want"
+        echo
+    done
+}
+
+sanity_test() {
+    which scrot &>/dev/null || fatal "This script requires the scrot program"
+
+    local prog  failed
+    for prog in $*; do
+        test -e $prog && continue
+        warn "Need local program: $prog"
+        failed=true
+    done
+    [ "$failed" ] && fatal "One or more needed programs are missing"
+
+}
+
+on_exit() {
+    tools/set-dpi "$DEFAULT_DPI"
+    printf "\n%s: %s images were put in directory %s\n" "$ME" "$IMG_CNT" "$DIR"
+}
+
+warn() {
+    local fmt=$1 ; shift
+    printf "$ME: $fmt\n" "$@" >&2
+}
+
+fatal() {
+    local fmt=$1 ; shift
+    printf "$ME: $fmt\n" "$@" >&2
+    exit 2
+}
+
+main "$@"

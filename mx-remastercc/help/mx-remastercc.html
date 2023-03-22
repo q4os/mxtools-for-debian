@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>HELP: MX Remaster</title>
+</head>
+
+<body>
+	<h1>	HELP: MX Remaster	</h1>
+<p>WARNING: these tools are for use in a Live session only!</p>
+
+
+
+<h2>Remaster</h2>
+
+
+
+<h3>Requirements</h3>
+
+
+
+<p>Typically you will be using a LiveUSB as your target system for your customized version of MX Linux. (If you are using a LiveHD then you will need to create a LiveUSB or a LiveCD from the LiveHD in order to install elsewhere.)</p>
+
+
+
+<p>There are three simple and straightforward system requirements that are needed to perform live remastering:</p>
+
+
+
+<ul><li>The boot device must be writable</li><li> The boot device must have enough free space to create a new linuxfs file</li><li> The development system must have been created using a &#8220;frugal install&#8221;, not a fromiso install. In other words, the development system must be booted using a linuxfs file that is on a writable device that has enough free space to create a new linuxfs file.</li></ul>
+
+
+
+<p>Although optional, persistent home or a persistent root can be useful if you are doing remastering. For details, see Persistence, below.</p>
+
+
+
+<h3>Step by step</h3>
+
+
+
+<p>After you have made all the changes you want in a Live session of MX Linux, click Start menu &gt; System &gt; RemasterCC and enter the root password. The persistence/remaster tool opens with 4 buttons.</p>
+
+
+
+<ul><li>Set up live persistence (Optional). If you made your bootable usb with unetbootin or similar tool, you can use this option to create a new persistence file which will let the user save changes made to the file system for future boots. This option isn’t strictly needed if you just want to make a remaster, but its nice for saving changes between remasters.</li><li> Configure live persistence (Optional). This will set how the liveUSB will save the persistence file. Although there is an automatic option, is does not currently work. The semi-automatic option is the default, whereby changes will be saved at logout. There is also a manual save option. Again, this is not strictly speaking required for the remaster to work.</li><li> Save root persistence (Optional). This is how you save your file system changes to the persistence file in the event you elected a manual save option. This will also work if you just want to save changes immediately rather than waiting for logout in semi-automatic mode.</li><li> Remaster. The remaster system will walk you through rolling up your file system changes, either made during the session or from your persistence files if available, into a new linuxfs file on the liveUSB. Your changes will now be part of the default linuxfs filesystem and will appear even if you do not choose the persistence options at boot.</li></ul>
+
+
+
+<p>Work your way carefully through the remaster list, from top to bottom, following the directions that lead you through the process.</p>
+
+
+
+<h2>Persistence</h2>
+
+
+
+<p>Persistence is a hybrid between a LiveMedium and a full install; it allows you to retain any files you install or add during a live session.</p>
+
+
+
+<figure class="wp-block-embed-youtube wp-block-embed is-type-video is-provider-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+<iframe width="900" height="506" src="https://www.youtube.com/embed/RC4SmhsG3K0?feature=oembed" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div><figcaption>MX-15 liveUSB with Persistence </figcaption></figure>
+
+
+
+<h3>Step-by-step</h3>
+
+
+
+<p>The persistence files (rootfs and homefs) are straightforward to create once you know the trick. You just need to decide how large you want to make the file and what file system to use. If you have a lot of free space on the device (many GB) then a size of 1 GB is a good choice although you can get by with much less. We suggest using the ext3 file system, but you can also use ext2 or ext4.</p>
+
+
+
+<p>WARNING: live persistence isn&#8217;t really meant for large upgrades since you will run out of RAM quickly. Alternatives:</p>
+
+
+
+<ul><li>Carry out the upgrade in stages, using small (e.g., 200MB) amounts each time</li><li> Wait for the next monthly snapshot, and reinstall. Make sure to copy any non-system folders off the stick beforehand</li></ul>
+
+
+
+<p>There are many options available, so here is one good method to get you started that only uses the top button.</p>
+
+
+
+<ol><li>Make a LiveUSB (Section 2.2.3)</li><li> Click Start menu &gt; MX Tools &gt; Persistence/Remaster. The same tool that is used for remastering pops up, since the beginning steps are identical.</li><li> Click on the top button Set up Live Persistence.</li><li> Create persistence files (only needed if UNetbootin was used to make the LiveUSB).</li><li> Reboot and select Root Persistence from main bootloader menu.</li><li> Enter new passwords.</li><li> Now whenever you log out, you will be prompted to save the changes you have made during your session, and they will be retained (persist) for the next session.</li></ol>
+
+
+
+<h3>Notes</h3>
+
+
+
+<p>Step 1: If you are already running an installed version of MX-14, use the antix2usb application by clicking Start menu &gt; MX Tools &gt; Create Live USB. This is the easiest way to go since you simply check the boxes in the lower right corner to create the persistence files.</p>
+
+
+
+<p>Step 3: If unsure about what choices to make, use the action pull-down menu and select first Root: Create Root Persistence (recommended: ext2 and 1 GB). When that has finished, then select Home: Create Home Persistence (recommended ext4 and enough memory for what you intend to use it for). For home persistence, the homefs persistence file is mounted at /home. Any changes made to files under /home are (nearly) instantly stored on homefs file system. It is good if you want to save settings (such as bookmarks or changes to your desktop) but it does not save changes made to the system such as installing packages.</p>
+
+
+
+<p>Step 4: You will be prompted for a new root and user password; this is needed because the LiveUSB passwords are public knowledge.</p>
+
+
+
+<p>The tool: details</p>
+
+
+
+<p>The easiest method to set up persistence is to just use the first button, as described above. The tool has, however, two optional buttons (bolded below) that can be used for persistence.</p>
+
+
+
+<ul><li>Set up live persistence. If you made your bootable usb with unetbootin or similar tool, you can use this option to create a new persistence file which will let the user save changes made to the file system for future boots.</li><li> Configure live persistence. This will set how the liveUSB will save the persistence file. Although there is an automatic option, is does not currently work. The semi-automatic option is the default, whereby changes will be saved at logout. There is also a manual save option. Again, this is not strictly speaking required for the remaster to work.</li><li> Save root persistence. This is how you save your file system changes to the persistence file in the event you elected a manual save option. This will also work if you just want to save changes immediately rather than waiting for logout in semi-automatic mode.</li><li> Remaster. Not being used.</li></ul>
+
+
+
+<h3>Dynamic and static root persistence</h3>
+
+
+
+<ul><li>Dynamic root persistence saves file system changes in RAM (just like a normal LiveCD/USB). The persist-save program must be run to copy these changes to the rootfs file so the can be remembered across reboots. Use persist-config to have the program run automatically on shutdown/reboot.</li><li> Static root persistence saves file system changes directly in the rootfs file. It does not use any RAM so the only size limit is the size of the rootfs file. This makes it good for doing an &#8220;apt-get upgrade&#8221; or for installing a bunch of packages. It is usually best to follow up with a Live remaster to consolidate the file system changes into the compressed squashfs file.</li><li> On many systems, static root persistence can be annoyingly slow. You are free to switch between static and dynamic root persistence each time you boot.</li></ul>
+
+
+
+<p>Development history: BitJam (antiX), Adrian GUI</p>
+
+
+
+<p>License: <a href="https://mxlinux.org/wiki/licenses/license-mx-remaster">here</a>.</p>
+
+
+
+<p>v. 20150321</p>
+		</div>
+				</div>
+</body>
+</html>

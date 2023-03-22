@@ -1,0 +1,59 @@
+Description: conky lua-format detection for preview generations
+ conky lua-format detection for preview generations
+ .
+ .
+ conky-manager (2.7+dfsg1-2mx19+1) mx; urgency=medium
+ .
+   * add lua-format detection for image preview generation
+   * reduce wait_interval on lua_load
+Author: fehlix <fehlix@mxlinux.org>
+
+--- conky-manager-2.7+dfsg1.orig/src/Main.vala
++++ conky-manager-2.7+dfsg1/src/Main.vala
+@@ -830,6 +830,7 @@ public class ConkyRC : ConkyConfigItem {
+ 	public bool one_ten_config = false;
+ 
+ 	private Regex rex_conky_win;
++	private Regex rex_conky_text;
+ 	private MatchInfo match;
+ 
+ 	private string err_line;
+@@ -847,6 +848,7 @@ public class ConkyRC : ConkyConfigItem {
+ 
+ 		try{
+ 			rex_conky_win = new Regex("""\(0x([0-9a-zA-Z]*)\)""");
++			rex_conky_text = new Regex("""^[[:space:]]*conky[.]text[[:space:]]*=[[:space:]]""");
+ 		}
+ 		catch (Error e) {
+ 			log_error (e.message);
+@@ -921,6 +923,14 @@ public class ConkyRC : ConkyConfigItem {
+ 	public void read_file(){
+ 		log_debug("Read config file from disk");
+ 		this.text = TeeJee.FileSystem.read_file(this.path);
++		this.one_ten_config = false;
++
++		foreach(string line in text.split("\n")){
++			if (rex_conky_text.match (line, 0, out match)){
++				this.one_ten_config = true;
++				break;
++			}
++		}
+ 	}
+ 
+ 	public void save_file(){
+@@ -951,12 +961,12 @@ public class ConkyRC : ConkyConfigItem {
+ 		read_file();
+ 		wait_interval = 3;
+ 		foreach(string line in text.split("\n")){
+-			if (line.contains("lua_load") && !(line.strip().has_prefix("#"))){
+-				wait_interval = 10;
++			if (line.contains("lua_load") && !(line.strip().has_prefix("#")) && !(line.strip().has_prefix("--"))){
++				wait_interval = 4;
+ 				break;
+ 			}
+ 		}
+-
++		
+ 		try {
+ 			thread_is_running = true;
+ 			Thread.create<void> (generate_preview_thread, true);

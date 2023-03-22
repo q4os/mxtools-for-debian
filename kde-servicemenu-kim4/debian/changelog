@@ -1,0 +1,104 @@
+kde-servicemenu-kim4 (0.9.5-1mx21+1+deb11u13) stable; urgency=medium
+
+  * MX Tools release
+
+ -- Steven Pusser <administrator@localdomain>  Wed, 22 Mar 2023 10:43:50 +0100
+
+kde-servicemenu-kim4 (0.9.5-1mx21+1) mx; urgency=medium
+
+  * Rebuild for MX 21.
+  * Bump to debhelper compat 10.
+
+ -- Steven Pusser <stevep@mxlinux.org>  Wed, 08 Sep 2021 13:12:36 -0700
+
+kde-servicemenu-kim4 (0.9.5-1~mx19+1) mx; urgency=medium
+
+  * Rebuild for MX 19.
+
+ -- Steven Pusser <stevep@mxlinux.org>  Thu, 25 Jul 2019 18:12:06 -0700
+
+kde-servicemenu-kim4 (0.9.5-1mx17+1) mx; urgency=medium
+
+  * Rebuild for MX Linux.
+  * Use tiny rules file.
+  * Add debian/install file.
+  * Bump to debhelper compat 9.
+  * Switch to 3.0 source format.
+  * debian/install: use KDE 5 support.
+
+ -- Steven Pusser <stevep@mxlinux.org>  Sat, 16 Dec 2017 10:47:56 -0800
+
+kde-service-menu-kim4 (0.9.5-1kxstudio1) lucid; urgency=medium
+
+  * Repack
+
+ -- falkTX <falktx@gmail.com>  Wed, 02 Apr 2014 21:21:50 +0100
+
+kde-service-menu-kim4 (0.9.5-0ubuntu1~precise1) precise; urgency=low
+
+  * Precise build
+
+ -- falkTX <falktx@gmail.com>  Fri, 23 Dec 2011 23:38:01 +0000
+
+kde-service-menu-kim4 (0.9.5-0ubuntu1~oneiric1) oneiric; urgency=low
+
+  * Oneiric build
+
+ -- falkTX <falktx@gmail.com>  Fri, 23 Dec 2011 23:37:56 +0000
+
+kde-service-menu-kim4 (0.9.5-0ubuntu1~natty1) natty; urgency=low
+
+  * Natty build
+
+ -- falkTX <falktx@gmail.com>  Fri, 23 Dec 2011 23:37:51 +0000
+
+kde-service-menu-kim4 (0.9.5-0ubuntu1~maverick1) maverick; urgency=low
+
+  * Maverick build
+
+ -- falkTX <falktx@gmail.com>  Fri, 23 Dec 2011 23:37:46 +0000
+
+kde-service-menu-kim4 (0.9.5-0ubuntu1~lucid1) lucid; urgency=low
+
+  * ReUpload to Team PPA
+
+ -- falkTX <falktx@gmail.com>  Thu, 28 Apr 2011 15:57:20 +0100
+
+kde-service-menu-kim4 (0.9.5-0~ppa1) lucid; urgency=low
+
+  * Upload to Lucid
+
+ -- falkTX <falktx@gmail.com>  Thu, 18 Feb 2010 18:50:06 +0000
+
+kde-service-menu-kim4 (0.9.5~lucid~ppa1) lucid; urgency=low
+
+  * Rename servicemenu-* to kde-service-menu-* to match kubuntu naming policy
+    + add Conflicts/Replaces servicemenu-
+
+ -- Rog131 <samrog131@hotmail.com>  Mon, 15 Feb 2010 23:02:31 +0200
+
+servicemenu-kim4 (0.9.5~lucid~ppa1) lucid; urgency=low
+
+  * Lucid release
+
+ -- Rog131 <samrog131@hotmail.com>  Sun, 14 Feb 2010 11:55:20 +0200
+
+servicemenu-kim4 (0.9.5~karmic~ppa1) karmic; urgency=low
+
+  * Karmic release
+    + added Conflicts/Replaces: konq-kim
+
+ -- Rog131 <samrog131@hotmail.com>  Thu, 19 Nov 2009 23:58:48 +0200
+
+servicemenu-kim4 (0.9.5~jaunty~ppa2) jaunty; urgency=low
+
+  * Changing Architecture: any to Architecture: all
+
+ -- Rog131 <samrog131@hotmail.com>  Tue, 14 Jul 2009 02:11:50 +0300
+
+servicemenu-kim4 (0.9.5~jaunty~ppa1) jaunty; urgency=low
+
+  * Initial release
+    + patched desktop files to use KDE4 icons
+
+ -- Rog131 <samrog131@hotmail.com>  Tue, 14 Jul 2009 01:50:17 +0300

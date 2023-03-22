@@ -1,0 +1,4 @@
+// enable unattended upgrade 
+APT::Periodic::Unattended-Upgrade "1";
+// enable update-package lists
+APT::Periodic::Update-Package-Lists "1";

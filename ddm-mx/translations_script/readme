@@ -1,0 +1,15 @@
+
+to update translations from transifex, use run ./get_translations from this folder
+
+to update mo files, use ./update-po-mo.sh mo  to redo mo files
+
+to update pot file for new strings, use ./update-po-mo-.sh pot
+
+to make desktop files with localized name and comments, use 
+make desktop
+
+use 
+
+make clean 
+
+to follow up.

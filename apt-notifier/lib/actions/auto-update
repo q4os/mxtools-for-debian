@@ -1,0 +1,199 @@
+#!/bin/sh
+
+# auto-update
+#
+# apt-notifier helper script to en-/disable unattended upgrade
+# 
+# User authentication is requested 
+#    - using gksu if installed and found at /usr/bin/gksu
+#    - else using pkexec
+#
+# Usage:
+# Incarnation as
+#        auto-update off|disable  # to disable unattended upgrade
+#        auto-update  on|enable   # to enable unattended upgrade
+#
+# Incarnation symlinked as
+#
+#        auto-update-disable      # to disable unattended upgrade
+#        auto-update-enable       # to enable  unattended upgrade
+# 
+# To work with pkexec a fixed script location is required
+# which is currently for symlinked auto-update-disable
+# and auto-update-enable at
+# /usr/lib/apt-notifier/actions/auto-update-disable
+# and
+# /usr/lib/apt-notifier/actions/auto-update-enable
+# and noted within the corresponding pol-kit policy files.
+
+usage() {
+    cat<<USAGE
+
+apt-notifier helper scripts
+    
+        auto-update, auto-update-disable, auto-update-enable
+    
+Usage:  auto-update <options>
+        auto-update-disable
+        auto-update-enable
+
+Options:
+         off|disable            Disable unattended upgrade
+          on|enable             Enable unattended upgrade
+
+         auto-update-disable    Disable unattended upgrade
+         auto-update-enable     Enable unattended upgrade
+
+USAGE
+
+exit 1
+}
+
+ME="${0}"
+ACTION=""
+
+case "${ME}" in
+    *disable)
+            ACTION=disable
+            ;;
+    *enable )
+            ACTION=enable
+            ;;
+esac
+
+if [ -z "$ACTION" ]; then
+    case "$1" in
+        off|disable) ACTION=disable
+                     RUN="${ME}-$ACTION"
+                     ;;
+          on|enable) ACTION=enable
+                     RUN="${ME}-$ACTION"
+                     ;;
+    esac
+fi
+
+[ -z "$ACTION" ] && usage
+
+RUN="$ME"
+uu_state='false'
+eval $(apt-config shell uu_state 'APT::Periodic::Unattended-Upgrade/b')
+
+if [ "$ACTION" = "toggle" ]; then
+    case $uu_state in
+        false) ACTION="enable"
+               RUN=${ME%-toggle}-$ACTION
+               ;;
+        true ) ACTION="disable"
+               RUN=${ME%-toggle}-$ACTION
+               ;;
+    esac
+fi
+
+if [ "${RUN#./}" != "$RUN" ]; then
+    RUN="$PWD/${RUN#./}"
+fi
+  
+
+if [ "$ACTION" = "disable" ] && [ "$uu_state" = 'false' ]; then
+    echo "Unattended update already disabled - nothing to do"
+    exit 0
+fi
+
+if [ "$ACTION" = "enable" ] && [ "$uu_state" = 'true' ]; then
+    echo "Unattended update already enabled - nothing to do"
+    exit 0
+fi
+
+check_authenticator() {
+    local authenticator 
+    
+    # check users polkit agent is running
+    if pgrep   -u $(id -u) -x  '(lx)?polkit.*' >/dev/null && \
+       which pkexec > /dev/null; then
+       authenticator=pkexec
+    elif test -x /usr/bin/gksu; then
+       authenticator=/usr/bin/gksu
+    else
+       # fallback to sudo
+       authenticator=sudo
+    fi
+    echo "$authenticator"
+}
+
+if [ $(id -u) != 0 ]; then
+    # normal user
+    case $(check_authenticator) in
+        *pkexec)
+            EXEC=/usr/bin/pkexec
+            ;;
+        *gksu)
+            sudo -k
+            EXEC=/usr/bin/gksu
+            ;;
+        *sudo)
+            sudo -k
+            EXEC=sudo
+            x-terminal-emulator -e sh -c "sudo $RUN"
+            exit
+            ;;
+    esac
+    echo $EXEC "$RUN"
+    $EXEC "$RUN"
+else
+    # as root
+    case "${ME}" in
+        *disable)
+                ACTION=disable
+                UU_STATE='false'
+                UU_FLAG=0
+                ;;
+        *enable )
+                ACTION=enable
+                UU_STATE='true'
+                UU_FLAG=1
+                ;;
+    esac
+
+    rm /etc/apt/apt.conf.d/51unattended-upgrades-disable* 2>/dev/null
+    rm /etc/apt/apt.conf.d/51unattended-upgrades-enable*  2>/dev/null
+    if [ -f /usr/share/apt-notifier/51unattended-upgrades-$ACTION ]; then
+         cp /usr/share/apt-notifier/51unattended-upgrades-$ACTION \
+            /etc/apt/apt.conf.d/51unattended-upgrades-$ACTION
+    else
+        echo 'APT::Periodic::Unattended-Upgrade "'"$UU_FLAG"'";' > \
+             /etc/apt/apt.conf.d/51unattended-upgrades-$ACTION
+    fi
+
+    # update-Origins-Pattern now
+    case "$ACTION" in
+        enable )
+                update-Origins-Pattern -d
+                ;;
+    esac
+    
+    # check and fallback 
+    Unattended_Upgrade='false'
+    eval $(apt-config shell Unattended_Upgrade  APT::Periodic::Unattended-Upgrade/b)
+
+    if [ "$Unattended_Upgrade" != "$UU_STATE" ]; then
+        IGNORE_FILES=$(echo $(apt-config dump \
+                     | grep -ioP 'Dir::Ignore-Files-Silently(::)? \K.*' \
+                     | sed 's/["\$;]//g') | sed 's/ /|/g')
+        GREP_FILES=' | grep -vE "('"$IGNORE_FILES"')$"'
+        GREP_PATTERN='^[[:space:]]*APT::Periodic::Unattended-Upgrade[[:space:]]'
+        FILES=$(eval grep -l "$GREP_PATTERN" /etc/apt/apt.conf /etc/apt/apt.conf.d/* $GREP_FILES 2>/dev/null)
+        sed -i -r '/(^[[:space:]]*APT::Periodic::Unattended-Upgrade)[[:space:]]+.*/s//\1 "'"$UU_FLAG"'";/' $FILES 2>/dev/null
+    fi
+    
+    Unattended_Upgrade='false'
+    eval $(apt-config shell Unattended_Upgrade  APT::Periodic::Unattended-Upgrade/b)
+    if [ "$Unattended_Upgrade" = "$UU_STATE" ]; then
+        echo "Unattended upgrade ${ACTION}d"
+        exit 0
+    else
+        echo "Warn: Cannot $ACTION unattended upgrade" 1>&2
+        exit 1
+    fi
+
+fi
+exit 0

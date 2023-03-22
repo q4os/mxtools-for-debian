@@ -1,0 +1,41 @@
+.TH DISK-MANAGER "8" "July 2007" "disk-manager 1.0-RC5" "disk-manager"
+.SH NAME
+disk-manager \- Filesystem configuration management
+.SH SYNOPSIS
+.B disk-manager
+[\fIoptions\fR]
+.SH DESCRIPTION
+disk-manager is a simple Disk Manager program that allow you to :
+.br
+- Automatically detect partitions at startup.
+.br
+- Manage file system configuration.
+.br
+- Enable/disable write support for NTFS (need ntfs-3g installed).
+.SH OPTIONS
+.TP
+\fB\-h\fR, \fB\-\-help\fR
+show this help message and exit
+.TP
+\fB\-v\fR, \fB\-\-version\fR
+show version of the application and exit.
+.TP
+\fB\-c\fR, \fB\-\-check\fR
+notify the user for new partitions.
+.TP
+\fB\-a\fR, \fB\-\-add\fR
+configure new detected partitions.
+.TP
+\fB\-b\fR, \fB\-\-auto\fR
+configure new detected partitions automatically.
+.TP
+\fB\-q\fR DEVICE, \fB\-\-query\-database\fR=\fIDEVICE\fR
+query database for DEVICE. Set DEVICE to all to print
+full database.
+.TP
+\fB\-d\fR, \fB\-\-debug\fR
+print debugging information.
+.SH SEE ALSO
+To get more support, you can visit disk-manager homepage :
+.br
+.BR http://flomertens.free.fr/disk-manager

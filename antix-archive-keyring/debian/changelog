@@ -1,0 +1,17 @@
+antix-archive-keyring (20019.3.14+deb11u13) stable; urgency=medium
+
+  * MX Tools release
+
+ -- anticapitalista <administrator@localdomain>  Wed, 22 Mar 2023 10:43:46 +0100
+
+antix-archive-keyring (20019.3.14) unstable; urgency=medium
+
+  * updated keyring to expire in 2024
+
+ -- anticapitalista <antix@operamail.com>  Wed, 10 Feb 2021 15:29:53 +0200
+
+antix-archive-keyring (20019.3.13) unstable; urgency=medium
+
+  * initial upload
+
+ -- anticapitalista <antix@operamail.com>  Wed, 13 Mar 2019 14:08:04 +0200

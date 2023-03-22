@@ -1,0 +1,102 @@
+mx-welcome-data (23.01.01mx21+deb11u13) stable; urgency=medium
+
+  * MX Tools release
+
+ -- Dolphin Oracle <administrator@localdomain>  Wed, 22 Mar 2023 10:43:57 +0100
+
+mx-welcome-data (23.01.01mx21) mx; urgency=medium
+
+  * update header graphic
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 05 Jan 2023 21:38:32 -0500
+
+mx-welcome-data (22.02.02mx21) mx; urgency=medium
+
+  * allow custom live user info 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 28 Feb 2022 19:17:23 -0500
+
+mx-welcome-data (22.02.01mx21) mx; urgency=medium
+
+  * extra customization options  
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 25 Feb 2022 20:34:42 -0500
+
+mx-welcome-data (21.10.02mx21) mx; urgency=medium
+
+  * swamprabbit's icon 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Tue, 19 Oct 2021 17:56:54 -0400
+
+mx-welcome-data (21.10.01mx21) mx; urgency=medium
+
+  * mx-tour
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 16 Oct 2021 17:05:49 -0400
+
+mx-welcome-data (21.09.02mx21) mx; urgency=medium
+
+  * new header graphic 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 09 Sep 2021 22:06:21 -0400
+
+mx-welcome-data (21.04.02mx21) mx; urgency=medium
+
+  * new header graphic
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 17 Apr 2021 08:19:17 -0400
+
+mx-welcome-data (21.04.01mx21) mx; urgency=medium
+
+  * add header graphics
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 03 Apr 2021 23:14:20 -0400
+
+mx-welcome-data (21.03.02mx21) mx; urgency=medium
+
+  * wildflower
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Tue, 23 Mar 2021 19:52:41 -0400
+
+mx-welcome-data (21.03.01mx21) mx; urgency=medium
+
+  * installer icon 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Tue, 02 Mar 2021 19:53:21 -0500
+
+mx-welcome-data (21.02.01mx21) mx; urgency=medium
+
+  * initial bullseye package 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 11 Feb 2021 13:00:14 -0500
+
+mx-welcome-data (20.10.01) mx; urgency=medium
+
+  * 19.3 strings
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 10 Oct 2020 14:13:51 -0400
+
+mx-welcome-data (20.05.01) mx; urgency=medium
+
+  * 19.2 strings
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 10 May 2020 20:10:56 -0400
+
+mx-welcome-data (20.03.01) mx; urgency=medium
+
+  * update control file 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 30 Mar 2020 23:04:52 -0400
+
+mx-welcome-data (20.01.01) mx; urgency=medium
+
+  * mx 19.1 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 23 Jan 2020 19:14:31 -0500
+
+mx-welcome-data (19.06.01) mx; urgency=medium
+
+  * initial build
+  * separte configuration package
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 01 Jun 2019 13:25:09 -0400

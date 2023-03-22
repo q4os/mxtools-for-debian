@@ -1,0 +1,55 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# Translators:
+# anticapitalista <anticapitalista@riseup.net>, 2012
+# MX Linux Polska <mxlinuxpl@gmail.com>, 2019
+msgid ""
+msgstr ""
+"Project-Id-Version: antix-development\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-10-27 02:09+0300\n"
+"PO-Revision-Date: 2019-02-20 08:36+0000\n"
+"Last-Translator: MX Linux Polska <mxlinuxpl@gmail.com>\n"
+"Language-Team: Polish (http://www.transifex.com/anticapitalista/antix-development/language/pl/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: pl\n"
+"Plural-Forms: nplurals=4; plural=(n==1 ? 0 : (n%10>=2 && n%10<=4) && (n%100<12 || n%100>14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && n%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
+
+#: block-advert.sh:24
+#, sh-format
+msgid ""
+"The <b>$title</b> tool adds stuff to your /etc/hosts file, so \\nthat many "
+"advertising servers and websites will not be able to connect \\nto this "
+"PC.\\n\\nYou can choose one service or combine multiple services for more "
+"advert protection.\\nBlocking ad servers protects your privacy, saves you "
+"bandwidth, greatly \\nimproves web-browsing speed and makes the internet "
+"much less annoying in general.\\n\\nDo you want to proceed?"
+msgstr "Narzędzie <b>$title</b> dodaje informacje do pliku /etc/hosts, tak więc \\nwiele serwerów reklamowych i stron nie będzie mogło połączyć się\\nz tym komputerem.\\n\\nMożesz wybrać jedną usługę lub połączyć ze sobą wiele usług dla większej ochrony przed reklamami.\\nBlokowanie serwerów reklamowych chroni twoją prywatność, oszczędza transfer, znacznie \\npoprawia prędkość przeglądania stron internetowych i ogólnie poprawia jakość korzystania z sieci.\\n\\nCzy chcesz kontynuować?"
+
+#: block-advert.sh:81
+msgid "Restoring original /etc/hosts."
+msgstr "Przywracanie oryginalnego /etc/hosts"
+
+#: block-advert.sh:117
+#, sh-format
+msgid "Loading  adlist from $domain"
+msgstr "Ładowanie adlist z $domain"
+
+#: block-advert.sh:161
+msgid ""
+"Success - your settings have been changed.\\n\\nYour hosts file has been "
+"updated.\\nRestart your browser to see the changes."
+msgstr "Sukces - twoje ustawienia zostały zmienione.\\n\\nTwój plik hosts został zaktualizowany.\\nUruchom ponownie przeglądarkę, aby zobaczyć zmiany."
+
+#: block-advert.sh:182
+msgid "Choose your preferred ad blocking service(s)"
+msgstr "Wybierz preferowane usługi blokowania reklam"
+
+#: block-advert.sh:225
+msgid "No item selected"
+msgstr "Nie wybrano elementu"

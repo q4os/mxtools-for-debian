@@ -1,0 +1,13 @@
+[Desktop Entry]
+Type=Application
+# The desktop entry name will be displayed within the menu.
+Name=MX Updater
+# TRANSLATORS:
+# The desktop entry comment will be shown within the menu.
+Comment=Re-enable MX Updater icon even if no updates available
+Exec=/usr/bin/apt-notifier-unhide-Icon
+Icon=apt-notifier
+Terminal=false
+StartupNotify=false
+Categories=System;Qt;KDE;Utility;X-KDE-Utilities-Desktop;
+StartupWMClass=apt-notifier

@@ -1,0 +1,282 @@
+#!/usr/bin/python3
+# -*- coding: utf-8 -*-
+
+"""
+iDevice mounter for MX 
+
+This program scans, mounts and unmounts iPhones and iPads.
+
+Author: Timothy E. Harris <maintainer@mxrepo.com>
+Last edited: July 2019
+License GPL-2+
+"""
+
+import sys, time, os, re
+import subprocess
+import gettext
+
+gettext.bindtextdomain('mx-idevice-mounter', '/usr/share/locale')
+gettext.textdomain('mx-idevice-mounter')
+_ = gettext.gettext
+gettext.install('mx-idevice-mounter')
+
+from PyQt5.QtWidgets import QMainWindow, QApplication, QLabel, QPushButton, QWidget, QMessageBox, QSizePolicy
+from PyQt5.QtGui import QIcon, QPixmap
+from PyQt5.QtCore import QCoreApplication
+from distutils import spawn
+
+
+class Idevmanager(QMainWindow):
+    
+    def __init__(self):
+        super().__init__()
+        
+        self.initUI()
+        self.getDeviceinfo()    
+
+    def getDeviceinfo(self):
+        self.uid = str(os.getuid())
+        p = subprocess.check_output(['/usr/bin/ideviceinfo -s -k DeviceName; exit 0'], shell=True)
+        self.devicename = p.decode('utf-8').rstrip()
+        if self.devicename == 'No device found, is it plugged in?':
+           self.deviceid = ''
+           self.mountb.setEnabled(False)
+           self.umountb.setEnabled(False)
+        else:
+           p = subprocess.check_output(['/usr/bin/ideviceinfo -s -k UniqueDeviceID; exit 0'], shell=True)
+           self.deviceid = p.decode('utf-8').rstrip()
+           self.mypath = "/run/user/" + self.uid + "/" + self.deviceid + "/" + self.devicename
+           if self.isMount():
+              self.mountb.setEnabled(False)
+              self.umountb.setEnabled(True)
+           else:
+              self.mountb.setEnabled(True)
+              self.umountb.setEnabled(False)              
+        self.label2.setText(self.devicename)
+        self.label4.setText(self.deviceid)
+
+    def mountDevice(self):
+        if self.deviceid == '':
+           self.mountb.setEnabled(False)
+        else:
+           self.mypath = "/run/user/" + self.uid + "/" +self.deviceid + "/" + self.devicename
+           p = subprocess.call(["/bin/mkdir", "-p", self.mypath])
+           p = subprocess.call(["/usr/bin/ifuse", "-u", self.deviceid, self.mypath])
+
+        if self.isMount():
+           p = subprocess.Popen(["/usr/bin/thunar" , self.mypath])
+           self.umountb.setEnabled(True)
+           self.mountb.setEnabled(False)
+           self.hide()
+           self.waitforThunar()
+           self.show()
+        else:
+           self.umountb.setEnabled(False)
+           self.mountb.setEnabled(True)
+
+    def umountDevice(self):
+        self.mypath = "/run/user/" + self.uid + "/" +self.deviceid + "/" + self.devicename
+        if self.isMount():
+           p = subprocess.call(["/bin/fusermount", "-u", self.mypath])
+           p = subprocess.call(["/bin/rmdir", self.mypath])
+           p = subprocess.call(["/bin/rmdir","/run/user/" + self.uid + "/" + self.deviceid ])
+        self.umountb.setEnabled(False)
+        self.mountb.setEnabled(True)
+
+    def isMount(self):
+        cmd = 'mount | grep "' + self.mypath + '"'
+        p = subprocess.call([cmd], shell=True)
+        if p == 0:
+           return True
+        else:
+           return False
+
+    def waitforThunar(self):
+        time.sleep( 1 )  # wait for Thunar window to open
+        p = subprocess.check_output(['/usr/bin/wmctrl -l | /bin/grep "' + self.devicename + '"'], shell=True)
+#          Get list of xWindows containing the iDevice name in their titlebar
+        self.windowlist = p.decode('utf-8').rstrip()
+        self.windowid = re.findall('^0x[0-9a-f]{8}', self.windowlist, re.MULTILINE)[-1]
+#          Choose the most recently opened of those xWindows
+        p = subprocess.call(['/usr/bin/xprop -spy -id "' + self.windowid + '">/dev/null'], shell=True)
+#          And monitor it until it's closed
+        return True
+        
+    def displayAbout(self):
+        p = subprocess.check_output(["dpkg-query -f '${Version}' -W mx-idevice-mounter 2>/dev/null || echo ''" ], shell=True)
+        myversion = p.decode('utf-8').rstrip()
+        t1 = _("MX iDevice Mounter")
+        t2 = _("Version:")
+        t3 = _("GUI program for mounting & unmounting <br> iPhones and Ipads in MX Linux")
+        t4 = _( "Copyright (c) MX Linux")       
+        aboutBox = QMessageBox()
+        aboutBox.setText("<p align=center><b><h2>" + t1 + "</h2></b></p><p align=center>" + t2 + " " + myversion + "</p><p align=center><h3>" +
+                   t3 + "</h3></p><p align=center><a href=http://mxlinux.org>http://mxlinux.org</a> \
+                   <br></p><p align=center>" + t4 + "<br /><br /></p>")
+
+        aboutTitle          = _('About MX iDevice Mounter')
+        changelogTitle      = _('MX iDevice Mounter Changelog')
+        changelogButtonText = _('Changelog')
+        closeButtonText     = _('Close')
+        licenseButtonText   = _('License')
+        license             = "/usr/share/doc/mx-idevice-mounter/license.html"
+        licenseViewerTitle  = _('MX iDevice Mounter license')
+        
+        aboutBox.setWindowTitle(aboutTitle)
+        changelogButton = aboutBox.addButton((changelogButtonText), QMessageBox.ActionRole)
+        licenseButton   = aboutBox.addButton((licenseButtonText)  , QMessageBox.ActionRole)
+        closeButton     = aboutBox.addButton((closeButtonText)    , QMessageBox.RejectRole)
+        aboutBox.setDefaultButton(closeButton)
+        aboutBox.setEscapeButton(closeButton)
+
+        reply = aboutBox.exec_()
+        
+        if aboutBox.clickedButton() == licenseButton:
+                p=subprocess.call(["/usr/bin/mx-viewer", license, licenseViewerTitle])
+
+        if aboutBox.clickedButton() == changelogButton:
+            icon = "/usr/share/pixmaps/idevice.svg"
+            command_string = ''
+            command_string += 'icon="'  + icon           + '";'
+            command_string += 'title="' + changelogTitle + '";'
+            command_string += 'close="' + closeButtonText + '";'
+            command_string += '''
+                read width height < <(xdotool getdisplaygeometry); 
+                width=$(($width*3/4)); 
+                height=$(($height*2/3)); 
+                zcat /usr/share/doc/mx-idevice-mounter/changelog.gz 2>&1 | 
+                yad --width=$width
+                  --height=$height
+                  --center
+                  --button="$close"
+                  --window-icon="$icon"
+                  --title="$title"
+                  --fontname=mono
+                  --margins=7
+                  --borders=5
+                  --text-info
+                '''
+            command = " ".join(command_string.split())
+            command = "bash -c '%s'" % command
+            p=subprocess.call([command], shell=True)
+        
+    def displayHelp(self):
+        lang=os.getenv('LANG')
+        if lang.startswith('fr'):
+           helpurl="https://mxlinux.org/wiki/help-files/help-montage-de-idevice"
+           helpheader="Montage de iDevice Aide"
+        else:   
+           helpurl="https://mxlinux.org/wiki/help-files/help-mx-idevice-mounter"
+           helpheader="MX iDevice Mounter Help"
+        p=subprocess.call(["/usr/bin/mx-viewer", helpurl , helpheader])
+
+    def initUI(self):
+        if os.getenv("XDG_CURRENT_DESKTOP") == "XFCE":
+            p = subprocess.check_output(['xfconf-query -c xsettings -l -pv /Net/ThemeName | awk \'{if (toupper($2) ~ /DARK/) print "1"; else print"0"}\''], shell=True)
+            mytheme = p.decode('utf-8').rstrip()
+        else:
+            mytheme = "0"
+            
+        self.setGeometry(100, 300, 700, 400)
+        self.setWindowTitle('Mount iDevice')
+        if QIcon.hasThemeIcon("idevice"):
+           self.setWindowIcon(QIcon.fromTheme("idevice"))
+        else:
+           self.setWindowIcon(QIcon("/usr/share/pixmaps/idevice.svg"))
+ 
+        if mytheme == "0":
+           self.setStyleSheet("color: black")
+        else:
+           self.setStyleSheet("color: Lightgrey")
+        abouticon = QIcon.fromTheme('help-about')
+        helpicon = QIcon.fromTheme('help-contents')
+        closeicon = QIcon.fromTheme('window-close')
+        umounticon = QIcon.fromTheme('application-x-apple-diskimage')
+        mounticon = QIcon.fromTheme('folder-apple')
+        scanicon = QIcon.fromTheme('drive-harddisk-usb-symbolic')
+
+        self.mountb = QPushButton(_('Mount'), self)
+        self.mountb.move(560, 130)
+        self.mountb.resize(120, 42)
+        self.mountb.setIcon(mounticon)
+        self.mountb.clicked.connect(self.mountDevice)
+
+        rescanb = QPushButton(_('Rescan'), self)
+        rescanb.move(560, 50)
+        rescanb.resize(120, 42)
+        rescanb.setIcon(scanicon)
+        rescanb.clicked.connect(self.getDeviceinfo)
+
+        self.umountb = QPushButton(_('Unmount'), self)
+        self.umountb.move(560, 210)
+        self.umountb.resize(120, 42)
+        self.umountb.setIcon(umounticon)
+        self.umountb.clicked.connect(self.umountDevice)
+
+        self.closeb = QPushButton(_('Close'), self)
+        self.closeb.move(560, 350)
+        self.closeb.resize(120, 30)
+        self.closeb.setIcon(closeicon)
+        self.closeb.clicked.connect(QCoreApplication.instance().quit)
+
+        self.aboutb = QPushButton(_('About'), self)
+        self.aboutb.move(10, 350)
+        self.aboutb.resize(120, 30)
+        self.aboutb.setIcon(abouticon)
+        self.aboutb.clicked.connect(self.displayAbout)
+
+        self.helpb = QPushButton(_('Help'), self)
+        self.helpb.move(150, 350)
+        self.helpb.resize(120, 30)
+        self.helpb.setIcon(helpicon)
+        self.helpb.clicked.connect(self.displayHelp)
+
+        self.header = QLabel('', self)
+        self.header.setGeometry(10, 10, 530, 110)
+        tl1 = _("If your device is not found, make sure it is unlocked.")
+        tl2 = _('If you get a  "Trust This Computer?"  popup on your device when you plug it in, answer "Trust", then Rescan.')
+        self.header.setText(tl1 + "\n" + tl2)
+        self.header.setWordWrap(True)
+        
+        self.header2 = QLabel('', self)
+        self.header2.setGeometry(10, 90, 530, 120)
+        self.header2.setText(_('If the information below describes your Apple device press the "Mount" button to access its files.'))
+        self.header2.setWordWrap(True)
+        
+        self.label1 = QLabel("iName:", self)
+        self.label1.setGeometry(10, 190, 50, 25)
+
+        self.label2 = QLabel('', self)
+        self.label2.setGeometry(70, 190, 340, 25)
+        if mytheme == "0":
+          self.label2.setStyleSheet("background-color: lightyellow; border-style: outset; border-width: 2px; border-color: black")
+        else:
+          self.label2.setStyleSheet("background-color: #303030; border-style: outset; border-width: 2px; border-color: grey")
+        self.label3 = QLabel("UUID:", self)
+        self.label3.setGeometry(10, 220, 60, 25)
+         
+        self.label4 = QLabel('', self)
+        self.label4.setGeometry(70, 220, 340, 25)
+        if mytheme =="0":
+          self.label4.setStyleSheet("background-color: lightyellow; border-style: outset; border-width: 2px; border-color: black")
+        else:
+          self.label4.setStyleSheet("background-color: #303030; border-style: outset; border-width: 2px; border-color: grey")
+        self.footer = QLabel('', self)
+        self.footer.setGeometry(10, 250, 530, 100)
+        self.footer.setText(_('Use the Unmount button before you remove your device.  If you have already unplugged it, plug your device back in, Rescan, and Unmount.'))
+        self.footer.setWordWrap(True)
+        
+        self.mxlogo = QLabel(self)
+        pixmap = QPixmap('/usr/share/mx-tweak/icons/logo.png')
+        pixmap2 = pixmap.scaledToWidth(32)
+        self.mxlogo.setPixmap(pixmap2)
+        self.mxlogo.setGeometry(325, 350, 32, 32)
+
+        self.show()
+
+if __name__ == '__main__':
+    
+    app = QApplication(sys.argv)
+
+    ex = Idevmanager()
+    sys.exit(app.exec_())

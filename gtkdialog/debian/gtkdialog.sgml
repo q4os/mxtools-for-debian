@@ -1,0 +1,141 @@
+<!doctype refentry PUBLIC "-//Davenport//DTD DocBook V3.0//EN" [
+
+  <!-- Fill in your name for FIRSTNAME and SURNAME. -->
+  <!ENTITY dhfirstname "<firstname>Fabio</firstname>">
+  <!ENTITY dhsurname   "<surname>Tranchitella</surname>">
+  <!-- Please adjust the date whenever revising the manpage. -->
+  <!ENTITY dhdate      "<date>May 22, 2004</date>">
+  <!-- SECTION should be 1-8, maybe w/ subsection other parameters are
+       allowed: see man(7), man(1). -->
+  <!ENTITY dhsection   "<manvolnum>1</manvolnum>">
+  <!ENTITY dhemail     "<email>kobold@kobold.it</email>">
+  <!ENTITY dhusername  "Fabio Tranchitella">
+  <!ENTITY dhucpackage "<refentrytitle>gtkdialog</refentrytitle>">
+  <!ENTITY dhpackage   "gtkdialog">
+
+  <!ENTITY debian      "<productname>Debian GNU/Linux</productname>">
+  <!ENTITY gnu         "<acronym>GNU</acronym>">
+]>
+
+<refentry>
+	<docinfo>
+		<address>&dhemail;</address>
+		<author>&dhfirstname; &dhsurname;</author>
+		<copyright>
+			<year>2004</year>
+			<holder>&dhusername;</holder>
+		</copyright>
+		&dhdate;
+	</docinfo>
+
+	<refmeta>
+		&dhucpackage;
+		&dhsection;
+	</refmeta>
+
+	<refnamediv>
+		<refname>&dhpackage;</refname>
+		<refpurpose>GUI-creation command-line utility based on GTK+ library</refpurpose>
+	</refnamediv>
+
+
+  <refsynopsisdiv>
+    <cmdsynopsis>
+      <command>&dhpackage;</command>
+      <arg>options</arg>
+    </cmdsynopsis>
+  </refsynopsisdiv>
+
+
+	<refsect1>
+		<title>DESCRIPTION</title>
+		
+		<para><command>&dhpackage;</command> is a GUI-creation utility
+	    based on GTK+ libreries that can be used with an arbitrary interpreter.</para>
+
+		<para>Using &dhpackage; you can describe a graphical user
+		interface in a simple XML-like language, and use it with any interpreter that
+		supports either files, standard I/O, or environment variables.</para>
+
+		<para>For more information on the syntax of &dhpackage; programs, please see 
+		the examples provided in /usr/share/doc/&dhpackage;/examples or run 
+		<command>info &dhpackage;</command>.</para>
+
+    	<para>This manual page was written for the &debian; distribution
+        because the original program does not have a manual page.</para>
+	</refsect1>
+
+  <refsect1>
+    <title>OPTIONS</title>
+    <variablelist>
+      <varlistentry>
+        <term><option>-h, --help</option></term>
+        <listitem><para>Print usage information and exit.</para></listitem>
+      </varlistentry>
+      <varlistentry>
+        <term><option>-v, --version</option></term>
+        <listitem><para>Print version information and exit.</para></listitem>
+      </varlistentry>
+      <varlistentry>
+        <term><option>-p, --program [VARNAME]</option></term>
+        <listitem><para>Read the program from the environment variable VARNAME.</para></listitem>
+      </varlistentry>
+      <varlistentry>
+        <term><option>-s, --stdin</option></term>
+        <listitem><para>Read the program from the standard input.</para></listitem>
+      </varlistentry>
+      <varlistentry>
+        <term><option>-f [filename]</option></term>
+        <listitem><para>Read the program from a file.</para></listitem>
+      </varlistentry>
+      <varlistentry>
+        <term><option>-i [filename]</option></term>
+        <listitem><para>Include file as bash script.</para></listitem>
+      </varlistentry>
+      <varlistentry>
+        <term><option>-d, --debug</option></term>
+        <listitem><para>Run in debug mode.</para></listitem>
+      </varlistentry>
+    </variablelist>
+  </refsect1>
+
+
+
+	<refsect1>
+		<title>AUTHOR</title>
+
+		<para>This manual page was written by &dhusername; &lt;&dhemail;&gt; for
+      the &debian; system (but may be used by others).</para>
+
+		<para>Permission is granted to copy, distribute and/or modify
+      this document under the terms of the <acronym>GNU</acronym> Free
+      Documentation License, Version 1.1 or any later version
+      published by the Free Software Foundation; with no Invariant
+      Sections, no Front-Cover Texts and no Back-Cover Texts.  A copy
+      of the license can be found under
+      <filename>/usr/share/common-licenses/FDL</filename>.</para>
+	</refsect1>
+
+  <refsect1>
+    <title>SEE ALSO</title>
+    <para>gtklauncher (1)</para>
+  </refsect1>
+
+</refentry>
+
+<!-- Keep this comment at the end of the file
+Local variables:
+mode: sgml
+sgml-omittag:t
+sgml-shorttag:t
+sgml-minimize-attributes:nil
+sgml-always-quote-attributes:t
+sgml-indent-step:2
+sgml-indent-data:t
+sgml-parent-document:nil
+sgml-default-dtd-file:nil
+sgml-exposed-tags:nil
+sgml-local-catalogs:nil
+sgml-local-ecat-files:nil
+End:
+-->

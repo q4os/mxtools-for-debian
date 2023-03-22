@@ -1,0 +1,176 @@
+#!/bin/bash
+
+##wrapper script for inxi to do quick "inxi -F" and copy report to clipboard
+##part of mx-goodies package
+## changes to optimze inxi run
+
+#requires xclip package
+
+#check running in bash
+if test -z "$BASH_VERSION"; then
+   exec "$0"
+fi
+
+##locale stuff
+
+TEXTDOMAINDIR=/usr/share/locale/
+export TEXTDOMAIN="mx-goodies"
+
+NOTFND=$(gettext 'Required inxi app not found')
+COPIED=$(gettext 'Report copied to system clipboard')
+FORMATTED=$(gettext 'Report is already formatted for forum.')
+PASTE=$(gettext 'Paste directly into forum post.')
+ANYKEY=$(gettext 'Press any key to close')
+DONOTSHOW=$(gettext 'Do not show this message in future')
+GUI="false"
+
+BOLD="<b>"
+BOLDclosed="</b>"
+
+# kernel version strings
+UNAMER=$(uname -r)
+UNAMEV=$(uname -v | grep -oP '.*[[:space:]]\K[0-9]+[.][0-9]+[.][0-9]+[-][0-9]+[^[:space:]]*')
+
+#setup
+
+main(){
+	
+    #check inxi
+
+    command -v inxi  >/dev/null || quit_error "$NOTFND"
+    
+while getopts ":g" opt; do
+    case $opt in
+         g) GUI="true"
+           ;;
+         *)
+           # Unknown error: start GUI
+           #launch_gui $@
+           echo $"Invalid option" | tee -a $LOG
+           exit 0
+           ;;
+    esac
+done
+
+    run_report
+
+    quit
+
+}
+
+run_report(){
+
+    local snapshot_created=""
+    if [ -e "/etc/snapshot_created" ]; then
+        snapshot_created="Snapshot created on: "$(cat /etc/snapshot_created)
+    fi
+    local inxi_color="$(( echo VIRT_TERM_COLOR_SCHEME=10;
+                          grep -sh '^VIRT_TERM_COLOR_SCHEME=' /etc/inxi.conf ~/.config/inxi.conf) | \
+                          sed 's/^VIRT_TERM_COLOR_SCHEME=//' | tail -1)"
+    local ansi='\x1b\[[0-9;]+[mK]'
+    local host_filter="^(.+Host:(${ansi}|[[:space:]])+)([[:alnum:].-]+)"
+    local uuid_filter="[[:xdigit:]]{8}-([[:xdigit:]]{4}-){3}[[:xdigit:]]{12}"
+    local video_tweaks=/live/config/video-tweaks
+	if [ "$GUI" == "true" ]; then
+		inxi_color="0"
+	fi
+    REPORT=$(
+    echo ""
+    echo "[code]"
+    [ -n "$snapshot_created" ] && echo $snapshot_created
+    inxi -Fxxxrza -c$inxi_color | \
+    sed -r -e "/Host:/{s/${host_filter}(.*)/\1<filter>\4/}
+               /Kernel:/s/$UNAMER/$UNAMER${UNAMEV:+ \[$UNAMEV\]}/
+               s/${uuid_filter}/<filter>/g
+               s/(Shell[^:]*):[^:]*default:/\1:/
+               t qsi
+               s/(Shell[^q]+)quick-system-in\b/\1bash/
+               :qsi
+               s/quick-system-in\b/quick-system-info-mx/"
+    local BM=$(test -d /sys/firmware/efi && echo "UEFI" || echo "BIOS (legacy, CSM, MBR)")
+    echo "Boot Mode: $BM"
+    local SB=$((mokutil --sb-state || bootctl --no-variables status) 2>/dev/null | sed -nr 's/^\s*Secure\s?Boot:?/SecureBoot/p')
+    [[ -n "$SB" &&  -z "${SB//*enabled*/}" ]] && echo "$SB"
+    [ -r $video_tweaks ] && echo 'Video Tweaks:' && cat $video_tweaks 2>/dev/null
+    echo "[/code]"
+    echo ""
+    ) 
+    if [ "$GUI" == "true" ]; then
+		echo "$REPORT"
+		exit 0
+	fi
+    echo "$REPORT" |tee >(
+    (
+    sed -r 's/\x1b\[([0-9]{1,2}(;[0-9]{1,2})?)?m//g';
+    ) | \
+    
+    xclip -selection clipboard 2>/dev/null )
+    xclip -o -selection clipboard | xclip -i -selection primary
+    echo "$COPIED"
+    echo "$FORMATTED"
+    echo "$PASTE"
+
+}
+
+#quit(){
+    #echo
+    #read -n 1 -s -r -p "$ANYKEY"
+    #exit 0
+#}
+
+quit(){
+
+if [ -x /usr/bin/yad ]; then
+    ##begin message box
+
+    if [ ! -e "$HOME/.config/MX-Linux/qsi.chk" ]; then
+        selections=$(yad --form \
+        --title="Quick System Info" \
+        --class="Quick System Info" \
+        --center \
+        --window-icon=mx-qsi \
+        --fixed --button='OK!gtk-ok:0'  \
+        --width=350 \
+        --height=100 \
+        --align=center \
+        --selectable-labels --focus-field=0 \
+        --field="\0":LBL ""\
+        --field="$BOLD$COPIED$BOLDclosed":LBL ""\
+        --field=" ":LBL ""\
+        --field="$BOLD$FORMATTED$BOLDclosed":LBL ""\
+        --field=" ":LBL ""\
+        --field="$BOLD$PASTE$BOLDclosed":LBL ""\
+        --field=" ":LBL ""\
+        --field="$DONOTSHOW":CHK "false" 2>/dev/null)
+
+        RET=$?
+
+        selections=${selections##"|||||||"}
+        selections=${selections%%"|"}
+        #echo $selections
+
+        if [ $RET = 0 ] && [ "$selections" = "TRUE" ]; then
+            if [ ! -d "$HOME/.config/MX-Linux/" ]; then
+                mkdir -p "$HOME/.config/MX-Linux/"
+            fi
+            touch "$HOME/.config/MX-Linux/qsi.chk"
+        fi
+    fi
+
+    ##end message box
+fi
+
+    echo
+    read -n 1 -s -r -p "$ANYKEY"
+    exit 0
+}
+
+
+quit_error(){
+    local msg
+    msg=$1
+    echo "$msg"
+    exit 1
+}
+
+main "$@"

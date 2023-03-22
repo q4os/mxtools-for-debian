@@ -1,0 +1,4 @@
+# sudoers file.
+ 
+%users ALL=(root) NOPASSWD: /usr/bin/lslocks
+

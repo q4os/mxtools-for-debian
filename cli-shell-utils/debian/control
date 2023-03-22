@@ -1,0 +1,13 @@
+Source: cli-shell-utils
+Section: system
+Priority: required
+Maintainer: anticapitalista <anticapitalista@riseup.net>
+Build-Depends: debhelper (>= 9.20120115)
+Standards-Version: 3.9.8
+Homepage: https://gitlab.com/antiX-Linux/cli-shell-utils
+
+Package: cli-shell-utils
+Architecture: all
+Depends: fuseiso
+Description: Integrated utilities for CLI programs (that can be called from GUIs) for antiX and MX Linux.
+

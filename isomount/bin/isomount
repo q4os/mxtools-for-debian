@@ -1,0 +1,1785 @@
+#!/bin/bash
+
+VERSION="00.30.05"
+VERSION_DATE="Wed 23 Oct 2019 09:43:53 PM MDT"
+
+MY_NAME=${0##*/}
+ME=${ACTION:=$MY_NAME}
+ORIG_CMDLINE="$ME $*"
+
+PATH=$PATH:/sbin/usr/sbin
+
+ MAX_DIRS=40
+
+  MNT_DIR="/mnt/iso"
+ ISO_NAME="iso"
+  SQ_NAME="sq"
+ USB_NAME="usb"
+
+ SQ_FILES="/antiX/linuxfs.new antiX/linuxfs casper/filesystem.squashfs live/filesystem.squashfs"
+ MIN_SQ_SIZE="100M"
+ MAX_SQ_DEPTH=4
+
+ PERSIST_FILES="antiX/rootfs antiX/homefs"
+
+: ${HEADER_TYPE:=norm}
+
+# This prevents gtk2 themes from interfering with Pango colors
+export GTK2_RC_FILES=/usr/share/themes/Default/gtk-2.0-key/gtkrc
+
+YAD="/usr/bin/yad"
+#   YAD_IMAGE="/usr/local/lib/antiX/antiX-logo.png"
+YAD_STD_OPTS="--center --width=900 --height=600 --button=gtk-ok:0"
+YAD_ERR_OPTS="--center --width=800 --height=300 --button=gtk-ok:0"
+
+if [ -n "$YAD_IMAGE" -a -r "$YAD_IMAGE" ]; then
+    YAD_STD_OPTS="$YAD_STD_OPTS --image=$YAD_IMAGE"
+    YAD_ERR_OPTS="$YAD_ERR_OPTS --image=$YAD_IMAGE"
+fi
+
+#==============================================================================
+# Empirical constants for scaling the size of yad windows...
+# ...with DPI, width and height of the text block and width
+# and height of a table including the header labels.
+#------------------------------------------------------------------------------
+# _HT_ for height and _WD_ for width.
+#
+# _TEXT_ is for the block of text and _DATA_ is for the table
+#
+# Most/all values are in hundreths of a pixel at 96 DPI.
+# Most scale with DPI but a few don't.
+#
+# _PAD = extra space @ 96 DPI
+# _PPC = pixels per character @ 96 DPI
+# _OFF = extra space that does *not* scale with DPI
+#
+#_PPR  = Pixels Per Rows, does *not* scale with DPI
+#
+# WD_LAB_PAD is extra padding on each header label.  Scales with DPI
+#==============================================================================
+
+#---- Text height and width ---------------------------------------------------
+YAD_HT_TEXT_PPC=1600
+YAD_HT_TEXT_PAD=0
+YAD_WD_TEXT_PPC=640
+YAD_WD_TEXT_PAD=5000
+
+#---- Table height and width --------------------------------------------------
+YAD_HT_DATA_OFF=11800
+YAD_HT_DATA_PAD=2000
+YAD_HT_DATA_PPC=1800
+YAD_HT_DATA_PPR=600
+
+### --- via Octave!
+# YAD_HT_DATA_OFF=1087
+# YAD_HT_DATA_PAD=1532
+# YAD_HT_DATA_PPC=1494
+# YAD_HT_DATA_PPR=905
+
+
+ YAD_WD_LAB_PAD=200     # padding to table labels in pixels
+YAD_WD_DATA_PPC=640     #
+YAD_WD_DATA_PAD=6000    #
+
+#---- Button height  ------------------------------------------------------
+  YAD_HT_BUTTON=3920
+
+
+GUI_BOLD_FMT='<span color="#0000C0" font_weight="bold" size="larger">%s</span>'
+GUI_BOLD_FMT='<span color="#0000C0" font_weight="bold">%s</span>'
+
+MAIN_NAME=$(basename "$(readlink -f "$0")")
+MOUNT_POINTS=$"mount-points"
+
+MIN_DEV_WIDTH=12
+
+EXCLUDE_FS_TYPES="tmpfs devtmpfs rootfs proc devpts sysfs mqueue securityfs debugfs
+                  configfs cgroup2 fusectl pstore cgroup binfmt_misc hugetlbfs"
+
+
+#------------------------------------------------------------------------------
+# Only use the "sudo" command (where needed) if we are not root.
+#------------------------------------------------------------------------------
+SUDO="sudo"
+[ $UID -eq 0 ] && SUDO=
+
+#------------------------------------------------------------------------------
+# Usage text for the isomount command.
+#------------------------------------------------------------------------------
+iso_mount_usage() {
+    local fname=$MNT_DIR/${ISO_NAME}1
+    cat <<Usage
+${bold_co}Usage:${m_co} $ME [options] iso-file-1 [iso-file-2 ...]${nc_co}
+    Mount the iso files specified at directories like $fname.  For
+    antiX and MX iso files then also mount the squashfs file:
+$(echo $SQ_FILES | tr -s " " "\n" | sed "s/^/      /")
+Usage
+    opt_usage
+}
+
+#------------------------------------------------------------------------------
+# Display sqmount usage.
+#------------------------------------------------------------------------------
+sq_mount_usage() {
+    local fname=$MNT_DIR/${SQ_NAME}1
+    cat <<Usage
+${bold_co}Usage:${m_co} $ME [options] squashfs-1 [squashfs-2 ...]${nc_co}
+    Mount the squashfs file(s) specified at a directory like $fname/
+Usage
+    opt_usage
+}
+
+#------------------------------------------------------------------------------
+# display isoumount usage.
+#------------------------------------------------------------------------------
+iso_umount_usage() {
+    local fname=$MNT_DIR/${ISO_NAME}N
+    cat <<Usage
+${bold_co}Usage:${m_co} $ME [options] [$fname|'all'|N]${nc_co}
+    Umount the most recently mounted iso file.  If a mountpoint is
+    given then unmount that mountpoint instead.
+
+    If 'all' is given then unmount all of our mounts.  If a number is given
+    then unmount that number of iso mounts.
+Usage
+    opt_usage
+}
+
+#------------------------------------------------------------------------------
+# Display squmount usage.
+#------------------------------------------------------------------------------
+sq_umount_usage() {
+    local fname=$MNT_DIR/${SQ_NAME}N
+    cat <<Usage
+${bold_co}Usage:${m_co} $ME [options] [$fname|'all'|N]${nc_co}
+    Umount the most recently mounted squashfs file.  If a mountpoint is
+    given then unmount that mountpoint instead.  In both cases we also
+    delete the mountpoint directory and the $fname@<name> file.
+
+    If 'all' is given then unmount all of our mounts.  If a number is given
+    then umount that number of squashfs mounts.
+Usage
+    opt_usage
+}
+
+#------------------------------------------------------------------------------
+# Display clean-isomount usage.
+#------------------------------------------------------------------------------
+clean_usage() {
+    cat <<Usage
+${bold_co}Usage:${m_co} $ME [options]${nc_co}
+    Clean up leftover mountpoint directories and @ files.
+Usage
+    opt_usage
+}
+
+#------------------------------------------------------------------------------
+# Display show-isomount usage.
+#------------------------------------------------------------------------------
+show_mounts_usage() {
+    cat <<Usage
+${bold_co}Usage:${m_co} $ME [options]${nc_co}
+    Show the currently mounted iso and squashfs files
+Usage
+    opt_usage
+}
+
+#------------------------------------------------------------------------------
+#
+#
+#------------------------------------------------------------------------------
+opt_usage() {
+    [ "$DONT_SHOW_OPTS" ] && return
+    cat <<Usage
+
+${bold_co}Options:$nc_co
+    $m_co-c --color=<xxx>  $nc_co set color scheme to: off|low|low2|bw|dark|high
+    $m_co-g --gui          $nc_co show output in a yad window
+    $m_co-h --help         $nc_co show this usage
+    $m_co-H --header=<type>  $nc_co change header look: norm, rev1, rev2, rev3S
+                                             (n,      r1,   r2,   r3)
+
+    $m_co-q --quiet        $nc_co only show mountpoints
+    $m_co-Q --Quiet        $nc_co don't show mountpoint(s)
+    $m_co-s --silent       $nc_co don't print error message
+    $m_co-v --version      $nc_co show version number and exit
+    $m_co-V --verbose      $nc_co be more verbose
+Usage
+}
+
+#------------------------------------------------------------------------------
+#
+#
+#------------------------------------------------------------------------------
+dfh_usage() {
+
+    cat << Usage
+${bold_co}Usage: ${m_co}$ME [options]${nc_co}
+
+List "interesting" mounted file systems for humans.  Display in color and
+show the back-files for loop devices.
+
+${bold_co}Options:$nc_co
+    $m_co-c --color=<xxx>    $nc_co set color scheme to: off|low|low2|bw|dark|high
+    $m_co-D --dupes          $nc_co show duplicates (bind mounts, etc)
+    $m_co-g --gui            $nc_co show output in a yad window
+    $m_co-h --help           $nc_co show this usage
+    $m_co-H --header=<type>  $nc_co change header look: norm, rev1, rev2, rev3
+                                             (n,      r1,   r2,   r3)
+
+    $m_co-v --version        $nc_co show version number and exit
+
+    $m_co-x, --exclude=<xxx> $nc_co list of used,avail,percent columns to exclude
+    $m_co-X, --Exclude=<xxx> $nc_co list of more file system types to exclude
+                              (comma delimited)
+Usage
+    exit 0
+}
+
+#------------------------------------------------------------------------------
+#
+#
+#------------------------------------------------------------------------------
+dfh_watch_usage() {
+
+    cat << Usage
+${bold_co}Usage: ${m_co}$ME [options]${nc_co}
+
+Repeatedly run the dfh command.
+
+${bold_co}Options:$nc_co
+    $m_co-c --color=<xxx>    $nc_co set color scheme to: off|low|low2|bw|dark|high
+    $m_co-d --delay=<xxx>    $nc_co delay in fractional seconds
+
+    $m_co-h --help           $nc_co show this usage
+    $m_co-H --header=<type>  $nc_co change header look: norm, rev1, rev2, rev3
+                                             (n,      r1,   r2,   r3)
+
+    $m_co-t --top            $nc_co display at the top of the screen instead of the bottom
+    $m_co-v --version        $nc_co show version number and exit
+
+    $m_co-x, --exclude=<xxx> $nc_co list of [used,avail,percent] columns to exclude
+    $m_co-X, --Exclude=<xxx> $nc_co list of more file system types to exclude
+                              (comma delimited)
+Usage
+    exit 0
+}
+
+
+#------------------------------------------------------------------------------
+#
+#
+#------------------------------------------------------------------------------
+usage() {
+    if [ -n "$NO_YAD" ]; then
+        _usage | grep -v -- --gui
+        echo
+        printf "GUI mode disable because the %s program is missing" "$YAD"
+        echo
+    else
+        _usage
+    fi
+    exit 0
+}
+
+_usage() {
+
+    show_version
+    printf '\n'
+
+    if [ "$1" == 'all' ]; then
+        DONT_SHOW_OPTS=true
+        iso_mount_usage    ; echo
+        sq_mount_usage     ; echo
+        iso_umount_usage   ; echo
+        sq_umount_usage    ; echo
+        clean_usage        ; echo
+        show_mounts_usage  ; echo
+        dfh_usage          ; echo
+        dfh_watch_usage    ; echo
+        DONT_SHOW_OPTS=
+        opt_usage
+        exit 0
+    fi
+
+    case $ME in
+                  dfh) dfh_usage           ;;
+            dfh-watch) dfh_watch_usage     ;;
+             isomount) iso_mount_usage     ;;
+              sqmount) sq_mount_usage      ;;
+            isoumount) iso_umount_usage    ;;
+             squmount) sq_umount_usage     ;;
+       clean-isomount) clean_usage         ;;
+        show-isomount) show_mounts_usage   ;;
+                    *) fatal $"Unknown program name %s" $ME ;;
+    esac
+
+    exit 0
+}
+
+#------------------------------------------------------------------------------
+#
+#
+#------------------------------------------------------------------------------
+takes_param() {
+    case $1 in
+            -color|c) return 0 ;;
+           -header|H) return 0 ;;
+          -exclude|x) return 0 ;;
+          -Exclude|X) return 0 ;;
+    esac
+
+    case $ME in dfh-watch)
+        case $1 in -delay|d) return 0 ;; esac ;;
+    esac
+
+    return 1
+}
+
+#------------------------------------------------------------------------------
+#
+#
+#------------------------------------------------------------------------------
+assign_parameter() {
+    local cnt=$1 param=$2
+    CMD_CMDS="$CMD_CMDS${CMD_CMDS:+\n}$param"
+}
+
+#------------------------------------------------------------------------------
+#
+#
+#------------------------------------------------------------------------------
+eval_argument() {
+    local arg=$1  val=$2
+
+    case $ME in
+                 dfh) case $arg in
+                        -Exclude|X)  USER_EXCLUDES="$USER_EXCLUDES ${val//,/ }" ; return ;;
+                        -exclude|x)    MY_EXCLUDES="$MY_EXCLUDES ${val//,/ }"   ; return ;;
+                          -dupes|D)    ALLOW_DUPES=true                         ; return ;;
+                      esac ;;
+
+           dfh-watch) case $arg in
+                     -color|c)  COLOR_SCHEME=$val   ;;
+                     -color=*)  COLOR_SCHEME=$val   ;;
+                     -delay|d)  WATCH_DELAY=$val    ;;
+                     -delay=*)  WATCH_DELAY=$val    ;;
+                   -Exclude|X)  USER_EXCLUDES="$USER_EXCLUDES ${val//,/ }"  ;;
+                   -exclude|x)    MY_EXCLUDES="$MY_EXCLUDES ${val//,/ }"    ;;
+                      -help|h)  DO_HELP=true        ;;
+                    -header|H)  HEADER_TYPE=$val    ;;
+                    -header=*)  HEADER_TYPE=$val    ;;
+                       -top|t)  DO_DFH_TOP=true     ;;
+                   -version|v)  SHOW_VERSION=true   ;;
+                            *)  fatal $"Unknown parameter %s" "-$arg"  ;;
+                 esac
+                 return ;;
+        esac
+
+    case $arg in
+         -color|c)  COLOR_SCHEME=$val   ;;
+         -color=*)  COLOR_SCHEME=$val   ;;
+         -debug|D)  DO_DEBUG=true       ;;
+           -gui|g)  GUI_MODE=true       ;;
+          -help|h)  DO_HELP=true        ;;
+        -header|H)  HEADER_TYPE=$val    ;;
+        -header=*)  HEADER_TYPE=$val    ;;
+
+         -quiet|q)  ONLY_MPS=true       ;;
+         -Quiet|Q)  NO_MPS=true         ;;
+        -silent|s)  BE_SILENT=true      ;;
+       -version|v)  SHOW_VERSION=true   ;;
+       -verbose|V)  BE_VERBOSE=true     ;;
+                *)  fatal $"Unknown parameter %s" "-$arg"  ;;
+    esac
+}
+
+#------------------------------------------------------------------------------
+#
+#
+#------------------------------------------------------------------------------
+main() {
+    local SHIFT  SHIFT_2  SHORT_STACK="cDdegHhQqstVvXx"
+    local NO_MPS  ONLY_MPS  BE_SILENT BE_VERBOSE  PARAM_CNT
+    local GUI_TEXT SCREEN_WIDTH SCREEN_HEIGHT  NO_SCREEN
+    local RESTORE_CURSOR NO_YAD
+
+    test -x $YAD || NO_YAD=true
+    NO_YAD=true
+
+    SCREEN_HEIGHT=$(stty size | cut -d" " -f1)
+    SCREEN_WIDTH=$(stty size | cut -d" " -f2)
+    [ -z "$SCREEN_WIDTH"  -o "$SCREEN_WIDTH" = 0 ] && NO_SCREEN=true
+
+    set_colors
+    read_all_cmdline_mingled "$@"
+    shift $SHIFT_2
+
+    [ "$NO_SCREEN" ] && GUI_MODE=true
+
+    if [ -n "$GUI_MODE" -a -n "$NO_YAD" ]; then
+        GUI_MODE=
+        fatal "GUI mode is not available without the %s program" "$YAD"
+    fi
+
+    if [ "$GUI_MODE" ]; then
+        set_colors gui
+    else
+        set_colors $COLOR_SCHEME
+    fi
+
+    local max_param=0  min_param=0 base=$ME
+    case $base in
+          isomount|sqmount)  max_param=$MAX_DIRS  ; min_param=1 ;;
+        isoumount|squmount)  max_param=1                 ;;
+                  usbmount)  max_param=1   ; min_param=1 ;;
+                 usbumount)  max_param=1                 ;;
+    esac
+
+    case $base in
+        dfh|dfh-watch)   ;;
+             isomount)   ;;
+              sqmount)   ;;
+            isoumount)   ;;
+             squmount)   ;;
+             usbmount)   ;;
+            usbumount)   ;;
+       clean-isomount)   ;;
+        show-isomount)   ;;
+                    *) fatal $"Unknown program name %s" $ME ;;
+    esac
+
+    case $HEADER_TYPE in
+        norm|rev[123]|n|r[123]) ;;
+                    *) fatal $"Unknown header type: %s" "$HEADER_TYPE"
+    esac
+
+    [ "$DO_HELP" ]      && usage "$CMD_CMDS"
+    [ "$SHOW_VERSION" ] && show_version 'exit'
+
+    [ "$BE_VERBOSE" ] && show_version
+    [ $PARAM_CNT -lt $min_param ] && usage
+    [ $PARAM_CNT -gt $max_param ] && fatal $"Too many command line parameters"
+    case $base in
+                  dfh)  do_dfh                              ;;
+            dfh-watch)  do_dfh_watch                        ;;
+             isomount)  do_iso_mount  "$CMD_CMDS"           ;;
+              sqmount)  do_sq_mount   "$CMD_CMDS"           ;;
+            isoumount)  do_iso_umount "$CMD_CMDS"           ;;
+             squmount)  do_sq_umount  "$CMD_CMDS"           ;;
+             usbmount)  do_usb_mount  "$CMD_CMDS"           ;;
+            usbumount)  do_usb_umount "$CMD_CMDS"           ;;
+       clean-isomount)  clean_mounts                        ;;
+        show-isomount)  show_mounts ; exit 0                ;;
+                    *)  fatal $"Unknown program name %s" $ME ;;
+    esac
+
+    [ -z "$NO_MPS" ] && show_mounts
+    exit 0
+}
+
+#------------------------------------------------------------------------------
+#
+#
+#------------------------------------------------------------------------------
+do_iso_mount() {
+    local data=$1  file
+    while read file; do
+        [ -z "$file" ] && continue
+        any_mount "$ISO_NAME" "$file" -o loop,user,ro,exec -t iso9660
+    done <<Do_Iso_Mount
+$(echo -e "$data")
+Do_Iso_Mount
+}
+
+#------------------------------------------------------------------------------
+#
+#
+#------------------------------------------------------------------------------
+do_sq_mount() {
+    local data=$1  file
+    while read file; do
+        [ -z "$file" ] && continue
+        any_mount "$SQ_NAME" "$file" -o loop,user,ro,exec -t squashfs
+    done <<Do_Sq_Mount
+$(echo -e "$data")
+Do_Sq_Mount
+}
+
+#------------------------------------------------------------------------------
+#
+#------------------------------------------------------------------------------
+do_usb_mount() {
+    name=$USB_NAME dev=$(expand_device "$1")
+
+    test -e "$dev" || fatal $"Device %s does not exit" "$dev"
+    test -b "$dev" || fatal $"%s is not a block device" "$dev"
+
+    local type=$(lsblk --noheadings --nodeps -o TYPE "$dev")
+
+    case part in
+        part|disk);;
+        *) fatal $"Unrecognized device type %s" "$type"
+    esac
+    if ! mountpoint -q "$MNT_DIR"; then
+        $SUDO mkdir -p "$MNT_DIR"
+        $SUDO mount -t tmpfs -o size=1m tmpfs "$MNT_DIR"
+        mountpoint -q "$MNT_DIR" || fatal $"Could not mount %s as %s"  "$MNT_DIR" 'tmpfs'
+    fi
+
+    for n in $(seq 1 $MAX_DIRS); do
+        where=$MNT_DIR/$name$n
+        test -d "$where" || break
+    done
+
+    test -d "$where" && fatal $"Directory %s and below are already taken" "$where"
+    $SUDO mkdir -p "$where"
+    test -d "$where" || fatal $"Failed to create directorey  %s" "$where"
+
+    $SUDO mount -t tmpfs -o size=1m tmpfs "$where"
+
+    if [ "$part" = 'part' ]; then
+        mount_partition "$where" "$dev" "$dev"
+    fi
+
+    local i part
+    for i in $(seq 1 5); do
+        part=$(get_partition "$dev" $i)
+        test -b "$part" || break
+        mount_partition "$where" "$part" "$dev-$i"
+    done
+}
+
+#------------------------------------------------------------------------------
+#
+#------------------------------------------------------------------------------
+mount_partition() {
+    local top=$1  dev=$2  name=${3##*/}
+    local dir=$top/$name
+    $SUDO mkdir -p "$dir" || fatal $"Could not make directory %s" "$dir"
+    $SUDO mount "$dev" "$dir"
+    mountpoint -q "$dir" || fatal $"Failed to mount device %s" "$dev"
+
+    mount_sq_under "$dir"
+
+    local p_file
+     for file in $PERSIST_FILES; do
+        p_file=$dir/$file
+        test  -e "$p_file" || continue
+        local where="$dir-$(basename $p_file)"
+        mkdir -p "$where"
+        $SUDO mount "$p_file" "$where"  -o loop,user,exec
+    done
+}
+
+#------------------------------------------------------------------------------
+#
+#------------------------------------------------------------------------------
+do_usb_umount() {
+    local name=$USB_NAME  where=$1
+
+    if [ -n "$where" ]; then
+        mountpoint -q "$where" || fatal $"%s is not a mountpoint" "$where"
+        name=${where##*/}
+        name=${name%%[0-9]*}
+        case $name in
+            $USB_NAME) ;;
+            *) fatal $"Unrecognized name %s" "$name" ;;
+        esac
+
+    else
+        local n
+        for n in $(seq $MAX_DIRS -1 1); do
+            where=$MNT_DIR/$name$n
+            mountpoint -q "$where" && break
+        done
+        mountpoint -q "$where" || fatal $"No %s mountpoints found" "$name"
+    fi
+
+    umount_under "$where"
+    do_umount "$where"
+}
+
+#------------------------------------------------------------------------------
+#
+#
+#------------------------------------------------------------------------------
+do_iso_umount() {
+    local name=$ISO_NAME  where=$1
+    any_umount "$name" $where
+}
+
+#------------------------------------------------------------------------------
+#
+#
+#------------------------------------------------------------------------------
+do_sq_umount() {
+    local name=$SQ_NAME  where=$1
+    any_umount "$name" $where
+}
+
+#------------------------------------------------------------------------------
+#
+#
+#------------------------------------------------------------------------------
+any_mount() {
+    verbose 'any_mount(%s)' "$bold_co$*$quest_co"
+
+   clean_mounts
+
+    local name=$1  what=$2    where  n; shift 2
+    [ -z "$what" ]  && fatal $"Need to say what we should %s"   "$ME"
+
+    test -e "$what" || fatal $"Cannot find file: %s"            "$what"
+    test -f "$what" || fatal $"%s does not appear to be a file" "$what"
+
+    if ! mountpoint -q "$MNT_DIR"; then
+        $SUDO mkdir -p "$MNT_DIR"
+        $SUDO mount -t tmpfs -o size=1m tmpfs "$MNT_DIR"
+        mountpoint -q "$MNT_DIR" || fatal $"Could not mount %s as %s"  "$MNT_DIR" 'tmpfs'
+    fi
+    for n in $(seq 1 $MAX_DIRS); do
+        where=$MNT_DIR/$name$n
+        mountpoint -q "$where" || break
+    done
+    mountpoint -q  "$where" && fatal $"Mount point %s and below are already taken" "$where"
+
+    local mp=${where##*/}
+
+    $SUDO mkdir -p "$where" || fatal $"Could not create the directory %s" "$where"
+    $SUDO mount "$@" "$what" "$where"
+
+    if ! mountpoint -q "$where"; then
+        $SUDO rmdir "$where"
+        fatal $"Was unable to mount %s" "$* $what $where"
+    fi
+
+    say $"Mounted %s at %s" "$hi_co$what$m_co" "$hi_co$where$m_co"
+
+    [ "$name" == "$ISO_NAME" ] || return
+
+    mount_sq_under $where
+}
+
+#------------------------------------------------------------------------------
+# Mount specific squashfs file or largest squashfs file under give directory
+#------------------------------------------------------------------------------
+mount_sq_under() {
+    local dir=$1
+    local file sq_file
+    for file in $SQ_FILES; do
+        sq_file=$where/$file
+        test  -e "$sq_file" || continue
+        do_sq_mount "$sq_file"
+        return
+    done
+
+    while read sq_file; do
+        test -e "$sq_file" || continue
+        file -b "$sq_file" | grep -qi "^Squashfs" || continue
+        do_sq_mount "$sq_file"
+        return
+    done<<Sqfs_Files
+$(find $where -maxdepth $MAX_SQ_DEPTH -size +$MIN_SQ_SIZE -printf "%k %h/%f\n" | sort -nr | sed "s/^[^ ]* //")
+Sqfs_Files
+}
+
+#------------------------------------------------------------------------------
+#
+#
+#------------------------------------------------------------------------------
+any_umount() {
+    verbose 'any_umount(%s)' "$bold_co$*$quest_co"
+
+    clean_mounts
+
+    local name=$1  where=$2
+    if [ "$where" == 'all' ]; then
+        local mp i is_done
+        for i in $(seq 1 3); do
+            is_done=true
+            for mp in $(df -a | sed 's/.* //' | grep "^$MNT_DIR/" | tac); do
+                mountpoint -q $mp || continue
+                $SUDO umount $mp
+
+                if mountpoint -q $mp; then
+                    is_done=
+                else
+                    $SUDO rmdir   "$mp"
+                    say_unmounted "$mp"
+                fi
+            done
+            [ "$is_done" ] && break
+        done
+        return
+
+    elif [[ $where =~ ^[0-9]+$ ]]; then
+        local i cnt=$where
+        for i in $(seq 1 $cnt); do
+            any_umount "$name"
+        done
+        return
+
+    elif [ -n "$where" ]; then
+        mountpoint -q "$where" || fatal $"%s is not a mountpoint" "$where"
+        name=${where##*/}
+        name=${name%%[0-9]*}
+        case $name in
+            $ISO_NAME|$SQ_NAME) ;;
+            *) fatal $"Unrecognized name %s" "$name" ;;
+        esac
+
+    else
+        local n
+        for n in $(seq $MAX_DIRS -1 1); do
+            where=$MNT_DIR/$name$n
+            mountpoint -q "$where" && break
+        done
+        mountpoint -q "$where" || fatal $"No %s mountpoints found" "$name"
+    fi
+
+    umount_under "$where"
+    do_umount "$where"
+}
+
+#------------------------------------------------------------------------------
+#
+#
+#------------------------------------------------------------------------------
+do_umount() {
+    verbose 'do_umount(%s)' "$bold_co$*$quest_co"
+    local where=$1
+    local what=$(mp_to_file $where)
+	$SUDO umount --recursive  "$where"
+	mountpoint -q "$where" && fatal $"Failed to umount %s" "$where"
+	$SUDO rmdir   "$where" || fatal $"Failed to remove %s directory" "$where"
+
+    say_unmounted "$where" "$what"
+}
+
+#------------------------------------------------------------------------------
+#
+#------------------------------------------------------------------------------
+umount_under() {
+    local top=$1  dir  failed  cnt=0
+    while read dir; do
+        test -d "$dir" || continue
+        #is_mountpoint "$dir" || continue
+        $SUDO umount --recursive "$dir"
+        if ! mountpoint -q "$dir"; then
+            say_unmounted "$dir"
+            continue
+        fi
+        failed="$failed $dir"
+        cnt=$((cnt + 1))
+    done<<Umount_All
+$(mount | grep "^$top/[^ ]" | awk '{print $3}' | tac)
+Umount_All
+
+    case $cnt in
+        0) return 0 ;;
+        1) fatal "One directory is still mounted: %s" "$failed" ;;
+        *) fatal "These directories are still mounted: %s" "$failed" ;;
+    esac
+}
+
+
+#------------------------------------------------------------------------------
+#
+#
+#------------------------------------------------------------------------------
+do_dfh_watch() {
+    local data  last_data
+    trap restore_cursor EXIT
+    hide_cursor
+
+    while true; do
+        [ -n "$data" ] && sleep ${WATCH_DELAY:-1}
+        local data=$(do_dfh)
+        [ "$data" = "$last_data" ] && continue
+        local lines=$(count_lines "$data")
+        local extra=$((SCREEN_HEIGHT - lines))
+        clear
+        [ $extra -gt 1 -a -z "$DO_DFH_TOP" ] && printf "%${extra}s" '' | tr ' ' '\n'
+        last_data=$data
+        echo -n "$data"
+    done
+}
+
+#------------------------------------------------------------------------------
+#
+#
+#------------------------------------------------------------------------------
+do_dfh() {
+    local exclude_list=$(echo $EXCLUDE_FS_TYPES $USER_EXCLUDES | sed -r "s/\s+/ -x /g")
+    local data=$(df -ahT -x $exclude_list | tail -n+2 | dedupe_dev)
+
+    local DPI=$(get_dpi)
+
+    local lab_dev="File/Device"
+    local lab_type="Type"
+    local lab_size="Size"
+    local lab_used="Used"
+    local lab_avail="Avail"
+    local lab_cent="Use%"
+    local lab_mp="Mounted on"
+
+    calc_my_excludes "$MY_EXCLUDES"
+
+    local w_dev=$(losetup --list --noheadings -O back-file |  awk '{print length}' | sort -r  | head -n1)
+    [ ${w_dev:-0} -lt ${#lab_dev} ] && w_dev=${#lab_dev}
+
+    # Find max width of all the fields
+    local dev type size used avail cent mp
+    local  w_type=$(label_size "$lab_type") w_size=$(label_size "$label_size")   w_mp=$(label_size "$lab_mp")
+    local  w_used=$(label_size "$lab_used"  $EXCLUDE_USED)
+    local w_avail=$(label_size "$lab_avail" $EXCLUDE_AVAIL)
+    local  w_cent=$(label_size "$lab_cent"  $EXCLUDE_CENT)
+
+    local w_labs=$((w_dev + w_type + w_size + w_used + w_avail + w_cent + w_mp))
+
+    while read dev type size used avail cent mp; do
+        [ ${#dev}  -gt 0         ] || continue
+
+        [ "$dev" = '/dev/root' ] && dev=$(readlink -f $dev)
+        local file=$(loop_to_file $dev)
+        [ -n "$file" ] && dev=$file
+
+        [ $w_dev   -lt ${#dev}   ] && w_dev=${#dev}
+        [ $w_type  -lt ${#type}  ] && w_type=${#type}
+        [ $w_size  -lt ${#size}  ] && w_size=${#size}
+        [ $w_mp    -lt ${#mp}    ] && w_mp=${#mp}
+        [ -z "$EXCLUDE_USED"  -a $w_used  -lt ${#used}  ] && w_used=${#used}
+        [ -z "$EXCLUDE_AVAIL" -a $w_avail -lt ${#avail} ] && w_avail=${#avail}
+        [ -z "$EXCLUDE_CENT"  -a $w_cent  -lt ${#cent}  ] && w_cent=${#cent}
+    done <<Dfh_Loop1
+$(echo "$data")
+Dfh_Loop1
+
+    local w_all=$((w_dev + w_type + w_size + w_used + w_avail + w_cent + w_mp + NUM_SEP * 2))
+
+    [ "$GUI_MODE" ] && do_dfh_gui "$data" "$w_all"
+
+    local truncate=$((w_all - SCREEN_WIDTH))
+
+    if [ $truncate -gt 0 ]; then
+        w_dev=$((w_dev - truncate))
+        [ $w_dev -lt $MIN_DEV_WIDTH ] && fatal "The screen appears to be way too narrow!"
+    fi
+
+    local h_co=$m_co$rev_co
+    case $HEADER_TYPE in norm|n) h_co=$m_co  ;; esac
+
+    local hfmt  hfmt_u  hfmt_a  hfmt_c  hfmt_m  my_h_co  my_nc_co
+
+    case $HEADER_TYPE in
+        rev2|r2) my_h_co=$h_co ; my_nc_co=$nc_co ;;
+    esac
+
+    hfmt="$h_co%-${w_dev}s$my_nc_co  $my_h_co%-${w_type}s$my_nc_co  $my_h_co%${w_size}s$my_nc_co  "
+    hfmt_u="$my_h_co%${w_used}s$my_nc_co  "
+    hfmt_a="$my_h_co%${w_avail}s$my_nc_co  "
+    hfmt_c="$my_h_co%${w_cent}s$my_nc_co  "
+    hfmt_m="$my_h_co%-${w_mp}s$nc_co"
+
+    case $HEADER_TYPE in
+        rev3|r3)
+            printf   "$h_co%s  "   "$(rpad $w_dev   "$lab_dev$nc_co")"
+            printf   "$h_co%s  "   "$(rpad $w_type  "$lab_type$nc_co")"
+            printf   "$h_co%s  "   "$(lpad $w_size  "$lab_size$nc_co")"
+            print_if "$EXCLUDE_USED"    "$h_co%s  "   "$(lpad $w_used  "$lab_used$nc_co")"
+            print_if "$EXCLUDE_AVAIL"   "$h_co%s  "   "$(lpad $w_avail "$lab_avail$nc_co")"
+            print_if "$EXCLUDE_CENT"    "$h_co%s  "   "$(rpad $w_cent  "$lab_cent$nc_co")"
+            printf "$h_co%s\n"   "$lab_mp$nc_co"  ;;
+        *)
+            printf "$hfmt" "$lab_dev"  "$lab_type" "$lab_size"
+            print_if "$EXCLUDE_USED"   "$hfmt_u"   "$lab_used"
+            print_if "$EXCLUDE_AVAIL"  "$hfmt_a"   "$lab_avail"
+            print_if "$EXCLUDE_CENT"   "$hfmt_c"   "$lab_cent"
+            printf   "$hfmt_m\n" "$lab_mp"
+    esac
+
+    local fmt="$hi_co%-${w_dev}s  $type_co%-${w_type}s  $num_co%${w_size}s$nc_co  "
+
+    while read dev type size used avail cent mp; do
+        [ ${#dev} -gt 0   ] || continue
+        local type_co=$warn_co
+
+        [ "$dev" = '/dev/root' ] && dev=$(readlink -f $dev)
+
+        if echo "$dev" | grep -q "^/dev/loop[0-9]" ; then
+            used=-
+            avail=-
+            cent=-
+            local file=$(loop_to_file $dev)
+            [ -n "$file" ] && dev=$file
+
+            case $type in
+                  iso9660) type_co=$purple    ;;
+                 squashfs) type_co=$quest_co ;;
+                     udf)  type_co=$quit_co  ;;
+            esac
+        fi
+        dev=$(my_truncate "$w_dev" "$dev")
+
+        printf "$fmt" "$dev"  "$type" "$size"
+        print_if "$EXCLUDE_USED"   "%${w_used}s  "   "$used"
+        print_if "$EXCLUDE_AVAIL"  "%${w_avail}s  "  "$avail"
+        print_if "$EXCLUDE_CENT"   "%${w_cent}s  "   "$cent"
+        printf  "$hi_co%-s$nc_co\n"                   "$mp"
+    done <<Dfh_Loop2
+$(echo "$data")
+Dfh_Loop2
+
+    exit 0
+}
+
+#------------------------------------------------------------------------------
+#
+#
+#------------------------------------------------------------------------------
+do_dfh_gui() {
+    local data=$1  w_all=$2  title  yad_w  yad_h  text
+
+    debug1 "dpi-0" "$DPI"
+    [ "$DO_DEBUG" ] && text=$(printf "%s\n" "dpi: $DPI, rows: $(echo "$data" | wc -l), version: $VERSION ($(my_date))")
+
+    yad_w=$(scale_yad_width  "$text" "$data" $w_all)
+    yad_h=$(scale_yad_height "$text" "$data")
+
+    debug1 "width" "$yad_w"
+    debug1 "height" "$yad_h"
+
+    title=$ME
+    [ "$DO_DEBUG" ] && title="$ME @ $DPI rows $(echo -n "$data" | wc -l)"
+
+    dfh_device_info "$data" | my_yad $YAD_STD_OPTS \
+        --title  "$title"     \
+        --text   "$text"      \
+        --width  "$yad_w"     \
+        --height "$yad_h"     \
+        --list                \
+        --column="$lab_dev"   \
+        --column="$lab_type"  \
+        --column="$lab_size"  \
+        --column="$lab_used"  \
+        --column="$lab_avail" \
+        --column="$lab_cent"  \
+        --column="$lab_mp"
+        #2>/dev/null
+
+    exit 0
+}
+
+dedupe_dev() {
+    local dev_list dev rest
+    while read dev rest; do
+        [ -z "$dev" ] &&  continue
+        [ "$dev" = '/dev/root' ] && dev=$(readlink -f $dev)
+        [ -n "$dev_list" ] && eval "case \$dev in $dev_list) continue;; esac"
+        [ "$ALLOW_DUPES" ] || dev_list="$dev_list${dev_list:+|}$dev"
+        echo "$dev $rest"
+    done
+}
+#------------------------------------------------------------------------------
+# This makes creating the dfh table really easy.  See comment for device_info.
+#------------------------------------------------------------------------------
+dfh_device_info() {
+    local data="$1" file
+
+    while read dev type size used avail cent mp; do
+        [ ${#dev} -gt 0   ] || continue
+
+        [ "$dev" = '/dev/root' ] && dev=$(readlink -f $dev)
+        file=$(loop_to_file $dev)
+        [ -n "$file" ] && dev=$file
+
+        my_echo -en "$dev\n$type\n$size\n$used\n$avail\n$cent\n$mp\n"
+    done <<Device_Info
+$(echo "$data")
+Device_Info
+}
+
+#------------------------------------------------------------------------------
+#
+#
+#------------------------------------------------------------------------------
+calc_my_excludes() {
+    local params=${1//,/ } param
+    NUM_SEP=6
+    for  param in $params; do
+        case $param in
+             used|u) EXCLUDE_USED=true ; NUM_SEP=$((NUM_SEP - 1)) ;;
+            avail|a) EXCLUDE_AVAIL=true; NUM_SEP=$((NUM_SEP - 1)) ;;
+          percent|p) EXCLUDE_CENT=true ; NUM_SEP=$((NUM_SEP - 1)) ;;
+              all|A) calc_my_excludes "u,a,p" ; return            ;;
+        esac
+    done
+}
+
+#------------------------------------------------------------------------------
+#
+#
+#------------------------------------------------------------------------------
+print_if() {
+    local exclude=$1 ; shift
+    [ "$exclude" ] && return
+    printf "$@"
+}
+#------------------------------------------------------------------------------
+#
+#
+#------------------------------------------------------------------------------
+say_unmounted() {
+    local where=$1 what=${2:-$(mp_to_file "$1")}
+
+    if [ -n "$what" ]; then
+        say $"Unmounted %s (%s)" "$hi_co$where$m_co" "$hi_co$what$m_co"
+    else
+        say $"Unmounted %s" "$hi_co$where$m_co"
+    fi
+}
+
+#------------------------------------------------------------------------------
+# Print out the printf format and args to stderr and then exit with a error
+# exit code.  Disabled in silent-mode.   In gui-mode we pop up a little
+# yad box with the message in addition to printing it out.
+#------------------------------------------------------------------------------
+fatal() {
+    local fmt=$1 ; shift
+    if [ -z "$BE_SILENT" ]; then
+        [ "$GUI_MODE" ] && error_box "$(printf "$fmt%s" "$@" '\n')"
+        printf "$ME: $warn_co$fmt$nc_co\n" "$@" >&2
+    fi
+    exit 2
+}
+
+#------------------------------------------------------------------------------
+# Used for standard messages to the screen. Disabled in quiet-mode.  If we
+# are in gui-mode then we append the text to GUI_TEXT for later display.
+#------------------------------------------------------------------------------
+say() {
+    local fmt=$1 ; shift
+
+    [ "$ONLY_MPS" ] && return
+    [ "$GUI_MODE" ] && GUI_TEXT="$GUI_TEXT$(printf "$fmt%s"  "$@" '\n')"
+    printf "$ME: $m_co$fmt$nc_co\n" "$@"
+}
+
+#------------------------------------------------------------------------------
+# If we are in debug-mode the print out the passed in printf format and args.
+#------------------------------------------------------------------------------
+debug() {
+    local fmt=$1 ; shift
+    [ "$DO_DEBUG" ] || return
+    printf "D: $fmt\n" "$@" >&2
+}
+
+#------------------------------------------------------------------------------
+# Used for printing out one variable name and value when we are in debug-mode.
+# This way things line up in nice columns.
+#------------------------------------------------------------------------------
+debug1() {
+    [ "$DO_DEBUG" ] || return
+    printf "D: %10s: %5s\n" "$@" >&2
+}
+
+#------------------------------------------------------------------------------
+# The passed printf format and parameters are printed only if we are in
+# verbose-mode and not in gui-mode.
+#------------------------------------------------------------------------------
+verbose() {
+    [ -z "$BE_VERBOSE" -o -n "$GUI_MODE" ] && return
+    local fmt=$1 ; shift
+    printf "$ME: $quest_co$fmt$nc_co\n" "$@"
+}
+
+#------------------------------------------------------------------------------
+# Show the mount points we have created together with the file that is mounted
+# and type and size. We go through the list of mount points twice.  The first
+# time we get the maximum width so everything lines up nice and neat.
+#
+# I should truncate the file names if we don't fit the screen and I should
+# add colors.
+#------------------------------------------------------------------------------
+show_mounts() {
+
+    local exclude_list=$(echo $EXCLUDE_FS_TYPES $USER_EXCLUDES | sed -r "s/\s+/ -x /g")
+    local data=$(df -ahT -x $exclude_list \
+        | grep -E " $MNT_DIR/($ISO_NAME|$SQ_NAME|$USB_NAME)[0-9]" \
+        | grep -v "^tmpfs")
+
+    local iso_mps=$(printN "%1 %2" "$MAIN_NAME" "$MOUNT_POINTS")
+
+    local DPI=$(get_dpi)
+
+    local lab_type="Type"
+    local lab_file="File"
+    local lab_size="Size"
+    local lab_mp="Mounted at"
+
+    local dev type size used avail percent mp file
+
+    local h_co=$head_co$rev_co
+    case $HEADER_TYPE in norm|n) h_co=$head_co  ;; esac
+
+    local w_type=${#lab_type}  w_size=${#lab_size}  w_mp=${#lab_mp} w_file=${#lab_file}
+
+    local  w_type=$(label_size "$lab_type")    w_size=$(label_size "$label_size")
+    local w_file=$(label_size  "$lab_file")      w_mp=$(label_size "$lab_mp")
+
+    local w_labs=$((w_type + w_size + w_mp + w_file))
+    while read dev type size used avail percent mp; do
+        [ ${#dev} -gt 0 ] || continue
+
+        [ "$dev" = '/dev/root' ] && dev=$(readlink -f $dev)
+        local file=$(loop_to_file $dev)
+        [ $w_file -lt ${#file} ] && w_file=${#file}
+        [ $w_type -lt ${#type} ] && w_type=${#type}
+        [ $w_size -lt ${#size} ] && w_size=${#size}
+        [ $w_mp -lt ${#mp} ] && w_mp=${#mp}
+    done <<Show_Mounts
+$(echo "$data")
+Show_Mounts
+
+    local w_all=$((w_file + w_type + w_size  + w_mp))
+    [ $w_all -lt $w_labs ] && w_all=$w_labs
+    [ "$GUI_MODE" ] && show_mounts_gui "$data" "$w_all"
+
+    if [ -z "$data" ]; then
+        say '[%s]' "$h_co$(printf $"There are no %s" "$iso_mps")$nc_co$m_co"
+        return
+    fi
+
+    local clip_mp
+    if [ $SCREEN_WIDTH -lt $w_all ]; then
+        clip_mp=true
+        lab_mp="MntPnt"
+        w_mp=$((w_mp - ${#MNT_DIR} -1))
+        [ $w_mp -lt ${#w_lab} ] && w_mp=${w_mp}
+    fi
+    local truncate=$((w_file + w_type + w_size + w_mp - SCREEN_WIDTH + 6))
+    if [ $truncate -gt 0 ]; then
+        w_file=$((w_file - truncate))
+        [ $w_file -lt ${#lab_file} ] && fatal $"The screen appears to be way too narrow!"
+    fi
+
+    printf '\n'
+    printf '%s\n' "$iso_mps"
+
+    local  hfmt hfmt1 hfmt1
+
+    hfmt1="$h_co%-${w_file}s  %-${w_type}s  %${w_size}s  %-${w_mp}s$nc_co\n"
+    hfmt2="$h_co%-${w_file}s$nc_co  $h_co%-${w_type}s$nc_co  $h_co%${w_size}s$nc_co  $h_co%-${w_mp}s$nc_co\n"
+
+    hfmt=$hfmt1
+    case $HEADER_TYPE in
+          rev2|r2) hfmt=$hfmt2 ;;
+    esac
+
+    case $HEADER_TYPE in
+        rev3|r3)
+            printf "$h_co%s  "   "$(rpad $w_file  "$lab_file$nc_co"  )"
+            printf "$h_co%s  "   "$(rpad $w_type  "$lab_type$nc_co"  )"
+            printf "$h_co%s  "   "$(lpad $w_size  "$lab_size$nc_co"  )"
+            printf "$h_co%s\n"   "$lab_mp$nc_co"  ;;
+        *)
+            printf "$hfmt" "$lab_file"  "$lab_type" "$lab_size" "$lab_mp" ;;
+    esac
+
+    local fmt="$dev_co%-${w_file}s  $warn_co%-${w_type}s  $num_co%${w_size}s  $m_co%-${w_mp}s$nc_co\n"
+
+    while read dev type size used avail percent mp; do
+        [ ${#dev} -gt 0   ] || continue
+        [ "$dev" = '/dev/root' ] && dev=$(readlink -f $dev)
+        file=$(loop_to_file $dev)
+        [ "$clip_mp" ] && mp=${mp#$MNT_DIR/}
+        file=$(my_truncate "$w_file" "$file")
+        printf "$fmt" "${file:-$dev}" "$type" "$size" "$mp"
+    done <<Show_Mounts
+$(echo "$data")
+Show_Mounts
+}
+
+#------------------------------------------------------------------------------
+# This creates a yad window containing the GUI_TEXT and the data for the
+# mount-point table that is generated elsewhere.  We also allow an optional
+# w_all which will override us trying to calculate the width of the table.
+#------------------------------------------------------------------------------
+show_mounts_gui() {
+    local data=$1  w_all=$2  text yad_w  yad_h
+
+    local title=$ME
+    if [ "$DO_DEBUG" ]; then
+        title="$ME @ $DPI, rows $(echo -n "$data" | wc -l)"
+        text="dpi: $DPI, rows: $(echo -n "$data" | wc -l), version: $VERSION ($(my_date))\n$text"
+    fi
+    [ "$BE_VERBOSE" ] && text=$(printf '(%s)\n%s' "$ORIG_CMDLINE" "$text")
+
+    debug1 "dpi-0" "$DPI"
+    local bold_actions=$(gui_bold $"Actions")
+    local bold_iso_mps=$(gui_bold "$iso_mps")
+    #-jbb data=
+    if [ -z "$data$DO_DEBUG" ];  then
+        local  bold_no_mps=$(gui_bold "$(printf $"There are no %s" "$iso_mps")")
+
+        if [ -z "$GUI_TEXT" ]; then
+            text=$(printf '\n%s' "$bold_no_mps")
+        else
+            text=$(printf '%s\n%s\n%s' "$bold_actions" "$GUI_TEXT" "$bold_no_mps")
+        fi
+
+        text=$(echo "$text" | sed -e 's/^/  /' -e 's/\\n/\n  /g')
+        yad_w=$(scale_yad_width   "$text" "$data" $w_all)
+        yad_h=$(scale_yad_height  "$text" "$data")
+
+        my_yad $YAD_ERR_OPTS   \
+            --title  "$ME"     \
+            --text   "$text"   \
+            --width  "$yad_w"  \
+            --height "$yad_h"
+        exit 0
+    fi
+
+    if [ -z "$GUI_TEXT" ]; then
+        text=$(printf '%s' "$bold_iso_mps")
+
+    else
+        text=$(printf '%s\n%s\n%s'  "$bold_actions"  "$GUI_TEXT" "$bold_iso_mps")
+    fi
+
+    [ "$DO_DEBUG" ] && text="dpi: $DPI   rows: $(echo "$data" | wc -l)\n$text"
+    [ "$BE_VERBOSE" ] && text=$(printf '(%s)\n%s' "$ORIG_CMDLINE" "$text")
+
+    text=$(echo "$text" | sed -e 's/^/  /' -e 's/\\n/\n  /g')
+
+    debug1 "lines" "$(echo "$data$text" | wc -l)"
+
+    yad_w=$(scale_yad_width   "$text" "$data" $w_all)
+    yad_h=$(scale_yad_height  "$text" "$data")
+
+    debug1 "width" "$yad_w"
+    debug1 "height" "$yad_h"
+
+    device_info "$data" | my_yad $YAD_STD_OPTS \
+        --title "$title"     \
+        --text "$text"       \
+        --width "$yad_w"     \
+        --height "$yad_h"    \
+        --list               \
+        --column="$lab_file" \
+        --column="$lab_type" \
+        --column="$lab_size" \
+        --column="$lab_mp"
+        #2>/dev/null
+
+    exit 0
+}
+
+#------------------------------------------------------------------------------
+# This makes creating a table in yad pretty easy.  Since we don't read the
+# filename directly, we should be ok with spaces there.  Spaces in the other
+# fields would break things but I don't think there ever are any.
+#------------------------------------------------------------------------------
+device_info() {
+    local data=$1
+
+    local dev type size used avail percent mp file
+    while read dev type size used avail percent mp; do
+        [ ${#dev} -gt 0   ] || continue
+        [ "$dev" = '/dev/root' ] && dev=$(readlink -f $dev)
+        file=$(loop_to_file $dev)
+        my_echo -en "$file\n$type\n$size\n$mp\n"
+    done <<Device_Info
+$(echo "$data")
+Device_Info
+}
+
+#------------------------------------------------------------------------------
+# Get the combined maximum width of columns.
+#------------------------------------------------------------------------------
+data_width() {
+    local data=$1
+    local w_type=${#lab_type}  w_size=${#lab_size}  w_mp=${#lab_mp} w_file=${#lab_file}
+    local dev type size used avail cent mp file
+    while read dev type size used avail cent mp; do
+        [ ${#dev} -gt 0 ] || continue
+        [ "$dev" = '/dev/root' ] && dev=$(readlink -f $dev)
+        file=$(loop_to_file $dev)
+        [ $w_file -lt ${#file} ] && w_file=${#file}
+        [ $w_type -lt ${#type} ] && w_type=${#type}
+        [ $w_size -lt ${#size} ] && w_size=${#size}
+        [ $w_mp -lt ${#mp} ]     && w_mp=${#mp}
+    done <<Show_Mounts
+$(echo "$data")
+Show_Mounts
+
+    printf "%s" $((w_file + w_type + w_size + w_mp + 4))
+}
+
+#------------------------------------------------------------------------------
+# Call yad with the passed options.  If there is a screen available then
+# launch in the background. Otherwise launch in the forground so we don't
+# make gksu upset and any text won't be seen anyway so there is no harm
+# waiting for yad.
+#------------------------------------------------------------------------------
+my_yad() {
+    if [ "$NO_SCREEN" ]; then
+        $YAD "$@"
+    else
+        $YAD "$@" &
+    fi
+}
+
+#------------------------------------------------------------------------------
+#  Surround the given text with the Pango markup we use for bold text in yad.
+#------------------------------------------------------------------------------
+gui_bold() { printf "$GUI_BOLD_FMT" "$*" ;}
+
+#------------------------------------------------------------------------------
+# Create a small yad box with an error message and then exit with an error
+# exit status.
+# We try to avoid saying "ERROR!!!" because those can be real annoying and
+# make people feel like they've done wrong.
+#------------------------------------------------------------------------------
+error_box() {
+    local text=$(printf '\n\n%s\n\n' "$*")
+    my_yad $YAD_ERR_OPTS --title "$ME" --text "$text"
+    exit 2
+}
+
+#------------------------------------------------------------------------------
+# Get the loopback back-file associated with the given mountpoint
+#------------------------------------------------------------------------------
+mp_to_file() {
+    local where=$1
+    local loop=$(df -a | grep -E "^([^ ]+ +){5}$where$" | sed 's/ .*//')
+    [ -z "$loop" ] && return
+    loop_to_file "$loop"
+}
+
+#------------------------------------------------------------------------------
+# Get the filename associated with the given loopback device
+#------------------------------------------------------------------------------
+loop_to_file() {
+    local dev=$1
+    losetup -nl -O name,back-file | grep "^$dev " | sed -r 's/^[^ ]+ +//'
+}
+
+#------------------------------------------------------------------------------
+# Find all loop back-files under the given mountpoint (where) using losetup.
+# Then find all the mountpoints associated with those loops using df.
+#------------------------------------------------------------------------------
+files_to_loops_to_mps() {
+    local where=$1
+    for loop_dev in $(losetup -ln -O name,back-file | grep -E "^[^[:space:]]+ +$where/" | sed 's/ .*//'); do
+        df -a | grep "^$loop_dev " | awk '{print $6 }'
+    done
+}
+
+#------------------------------------------------------------------------------
+#  If str is longer than max, truncate beginning of str three spaces less than
+#  max and prepend "..." to indicate truncation has happened
+#------------------------------------------------------------------------------
+my_truncate() {
+    local max=$1  str=$2  len=${#2}
+    if [ $len -le $max ]; then
+        printf '%s\n' "$str"
+        return
+    fi
+
+    local offset=$(( len - max + 3))
+    printf '...%s\n' "${str:$offset:$len}"
+}
+
+#------------------------------------------------------------------------------
+#  Get the string length by stripping out ANSI escapes and the padding the
+#  string on the left.
+#------------------------------------------------------------------------------
+lpad() {
+    local width=$1  str=$2
+    local len=$(echo $str | sed -r 's/\x1B\[[0-9;]+[mKC]//g' | wc -m)
+    if [ $len -ge $width ]; then
+        printf '%s' "$str"
+        return
+    fi
+
+    printf "%$((width - len + 1))s%s" '' "$str"
+}
+
+#------------------------------------------------------------------------------
+#  Get the string length by stripping out ANSI escapes and the padding the
+#  string on the right.
+#------------------------------------------------------------------------------
+rpad() {
+    local width=$1  str=$2
+    local len=$(echo $str | sed -r 's/\x1B\[[0-9;]+[mKC]//g' | wc -m)
+    if [ $len -ge $width ]; then
+        printf '%s' "$str"
+        return
+    fi
+
+    printf "%s%$((width - len + 1))s" "$str" ''
+}
+
+#------------------------------------------------------------------------------
+# Remove all stale mount-point directories.  This is currently called by
+# commands that are going to need root anyway.  It's pretty fast now so
+# printing out the results takes longer.
+#------------------------------------------------------------------------------
+clean_mounts() {
+    local where
+
+    for where in $(ls -d $MNT_DIR/$ISO_NAME[0-9]* $MNT_DIR/$SQ_NAME[0-9]* 2>/dev/null); do
+        mountpoint -q "$where" && continue
+        $SUDO rmdir "$where"
+        test -d "$where" && continue
+        say $"Removed directory: %s" "$hi_co$where$m_co"
+    done
+
+    return
+
+    for name in $ISO_NAME $SQ_NAME; do
+        for n in $(seq 1 $MAX_DIRS); do
+            what=$MNT_DIR/$name$n
+            mountpoint -q "$what" && continue
+            test -d "$what" && $SUDO rmdir "$what"
+            mp=${what##*/}
+        done
+    done
+}
+
+#------------------------------------------------------------------------------
+# A little routine to allow use of %1 %2 ... in printf-like format strings
+# so translators have control over the order.
+#------------------------------------------------------------------------------
+printN() {
+    local param num=1  fmt=$1 ; shift
+    for param; do
+        fmt=${fmt//%$num/$param}
+        num=$((num + 1))
+    done
+    printf "$fmt"
+}
+
+#------------------------------------------------------------------------------
+# Modified (for gui) BOILER PLATE to set the color scheme.  Currently all the
+# ANSI escapes are turned off in GUI-mode.  Someday I may add Pango markup but
+# I don't have a great way of switching between Pango and ANSI.  It might be
+# very easy by using an exec():
+#
+#       set_color gui
+#       gui_str=$(eval $str)
+#       set_color high
+#       cli_str=$(eval $str)
+#------------------------------------------------------------------------------
+set_colors() {
+    local scheme=${1:-high}
+
+    local e=$(printf '\e')
+
+    case $scheme in
+        gui) rev_co=        ; nc_co=        ;;
+          *) rev_co="$e[7m" ; nc_co="$e[0m" ;;
+    esac
+
+    if [ "$scheme" = 'off' -o "$scheme" == 'gui'  ]; then
+
+         black=  ;    blue=  ;    green=  ;    cyan=  ;
+           red=  ;  purple=  ;    brown=  ; lt_gray=  ;
+       dk_gray=  ; lt_blue=  ; lt_green=  ; lt_cyan=  ;
+        lt_red=  ; magenta=  ;   yellow=  ;   white=  ;
+         brown=  ;
+
+         inst_co=            ;  mark_co=           ;     grep_co=
+         bold_co=            ;    fs_co=           ;      num_co=            ;
+         date_co=            ;  head_co=           ;    quest_co=            ;
+          dev_co=            ;    hi_co=           ;     quit_co=            ;
+          err_co=            ;   lab_co=           ;  version_co=            ;
+        fname_co=            ;     m_co=           ;     warn_co=            ;
+         return
+     fi
+
+         black="$e[0;30m"   ;    blue="$e[0;34m"     ;    green="$e[0;32m"   ;    cyan="$e[0;36m"   ;
+           red="$e[0;31m"   ;  purple="$e[0;35m"     ;    brown="$e[0;33m"   ; lt_gray="$e[0;37m"   ;
+       dk_gray="$e[1;30m"   ; lt_blue="$e[1;34m"     ; lt_green="$e[1;32m"   ; lt_cyan="$e[1;36m"   ;
+        lt_red="$e[1;31m"   ; magenta="$e[1;35m"     ;   yellow="$e[1;33m"   ;   white="$e[1;37m"   ;
+         nc_co="$e[0m"      ;   brown="$e[0;33m"     ;   rev_co="$e[7m"      ;    gray="$e[37m"     ;
+
+    case $scheme in
+        high)
+         inst_co=$lt_cyan    ;  mark_co=$rev_co    ;     grep_co="1;35"
+         bold_co=$yellow     ;    fs_co=$lt_blue   ;      num_co=$magenta    ;
+         date_co=$lt_cyan    ;  head_co=$white     ;    quest_co=$lt_green   ;
+          dev_co=$white      ;    hi_co=$white     ;     quit_co=$yellow     ;
+          err_co=$red        ;   lab_co=$lt_cyan   ;  version_co=$white      ;
+        fname_co=$white      ;     m_co=$lt_cyan   ;     warn_co=$yellow     ; ;;
+
+        dark)
+         inst_co=$cyan       ;  mark_co=$rev_co    ;     grep_co="1;34"
+         bold_co=$brown      ;    fs_co=$lt_blue   ;      num_co=$brown   ;
+         date_co=$cyan       ;  head_co=$gray      ;   quest_co=$green    ;
+          dev_co=$gray       ;    hi_co=$nc_co     ;    quit_co=$brown    ;
+          err_co=$red        ;   lab_co=$cyan      ;  version_co=$gray    ;
+        fname_co=$gray       ;     m_co=$cyan      ;     warn_co=$brown   ; ;;
+
+        low)
+         inst_co=$cyan       ;  mark_co=$rev_co    ;     grep_co="1;34"
+         bold_co=$white      ;    fs_co=$gray      ;      num_co=$white      ;
+         date_co=$gray       ;  head_co=$white     ;    quest_co=$lt_green   ;
+          dev_co=$white      ;    hi_co=$white     ;     quit_co=$lt_green   ;
+          err_co=$red        ;   lab_co=$gray      ;  version_co=$white      ;
+        fname_co=$white      ;     m_co=$gray      ;     warn_co=$yellow     ; ;;
+
+        low2)
+         inst_co=$cyan       ;  mark_co=$rev_co    ;     grep_co="1"
+         bold_co=$white      ;    fs_co=$gray      ;      num_co=$white      ;
+         date_co=$gray       ;  head_co=$white     ;    quest_co=$green      ;
+          dev_co=$white      ;    hi_co=$white     ;     quit_co=$green      ;
+          err_co=$red        ;   lab_co=$gray      ;  version_co=$white      ;
+        fname_co=$white      ;     m_co=$gray      ;     warn_co=$yellow     ; ;;
+
+        bw)
+         inst_co=$white      ;  mark_co=$rev_co    ;     grep_co="1;37"
+         bold_co=$white      ;    fs_co=$gray      ;      num_co=$white      ;
+         date_co=$gray       ;  head_co=$white     ;    quest_co=$white      ;
+          dev_co=$white      ;    hi_co=$white     ;     quit_co=$white      ;
+          err_co=$white      ;   lab_co=$lt_gray   ;  version_co=$lt_gray    ;
+        fname_co=$white      ;     m_co=$gray      ;     warn_co=$white      ; ;;
+
+        *)
+            fatal $"Unknown color scheme: %s" "$scheme"
+    esac
+}
+
+#------------------------------------------------------------------------------
+# BOILER PLATE to read command line parameters
+#------------------------------------------------------------------------------
+read_all_cmdline_mingled() {
+
+    : ${PARAM_CNT:=0}
+    SHIFT_2=0
+
+    while [ $# -gt 0 ]; do
+        read_params "$@"
+        shift $SHIFT
+        SHIFT_2=$((SHIFT_2 + SHIFT))
+        [ -n "$END_CMDLINE" ] && return
+        while [ $# -gt 0 -a ${#1} -gt 0 -a -n "${1##-*}" ]; do
+            PARAM_CNT=$((PARAM_CNT + 1))
+            assign_parameter $PARAM_CNT "$1"
+            shift
+            SHIFT_2=$((SHIFT_2 + 1))
+        done
+    done
+}
+
+#------------------------------------------------------------------------------
+# BOILER PLATE to read command line parameters.
+#------------------------------------------------------------------------------
+read_params() {
+    # Most of this code is boiler-plate for parsing cmdline args
+    SHIFT=0
+    # These are the single-char options that can stack
+
+    local arg val
+
+    # Loop through the cmdline args
+    while [ $# -gt 0 -a ${#1} -gt 0 -a -z "${1##-*}" ]; do
+        arg=${1#-} ; shift
+        SHIFT=$((SHIFT + 1))
+
+        # Expand stacked single-char arguments
+        case $arg in
+            [$SHORT_STACK][$SHORT_STACK]*)
+                if echo "$arg" | grep -q "^[$SHORT_STACK]\+$"; then
+                    local old_cnt=$#
+                    set -- $(echo $arg | sed -r 's/([a-zA-Z])/ -\1 /g') "$@"
+                    SHIFT=$((SHIFT - $# + old_cnt))
+                    continue
+                fi;;
+        esac
+
+        # Deal with all options that take a parameter
+        if takes_param "$arg"; then
+            [ $# -lt 1 ] && fatal $"Expected a parameter after: %s" "-$arg"
+            val=$1
+            [ -n "$val" -a -z "${val##-*}" ] \
+                && fatal $"Suspicious argument after %s: %s" "-$arg" "$val"
+            SHIFT=$((SHIFT + 1))
+            shift
+        else
+            case $arg in
+                *=*)  val=${arg#*=} ;;
+                  *)  val="???"     ;;
+            esac
+        fi
+
+        eval_argument "$arg" "$val"
+        [ "$END_CMDLINE" ] && return
+    done
+}
+
+#------------------------------------------------------------------------------
+# Allow users to use abbreviations like sdd1 or /sdd1 or dev/sdd1
+#------------------------------------------------------------------------------
+expand_device() {
+    case $1 in
+        /dev/*)  [ -b "$1"      ] && echo "$1"      ;;
+         dev/*)  [ -b "/$1"     ] && echo "/$1"     ;;
+            /*)  [ -b "/dev$1"  ] && echo "/dev$1"  ;;
+             *)  [ -b "/dev/$1" ] && echo "/dev/$1" ;;
+    esac
+}
+
+
+#------------------------------------------------------------------------------
+# echo the canonical name for the Nth partition on a drive.
+#------------------------------------------------------------------------------
+get_partition() {
+    local dev=$1  num=$2
+
+    case $dev in
+       *mmcblk*) echo  ${dev}p$num  ;;
+              *) echo  ${dev}$num   ;;
+    esac
+}
+
+#------------------------------------------------------------------------------
+# Show the version number and date.
+#------------------------------------------------------------------------------
+show_version() {
+    local fmt="$hi_co%s$nc_co %s$num_co %s$nc_co ($date_co%s$nc_co)\n"
+    printf "$fmt" "$ME" $"version" "$VERSION"  "$VERSION_DATE"
+
+    [ $# -gt 0 ]  && exit 0
+}
+
+#------------------------------------------------------------------------------
+# Find the dpi valued being used by Xorg server.  We try two ways.  The 2nd
+# could be more compact but that breaks my syntax highlighting
+#------------------------------------------------------------------------------
+get_dpi() {
+    local dpi
+
+    [ -z "$GUI_MODE" ] && return
+    dpi=$(xrdb -query | grep '^[[:space:]]*Xft.dpi:' | awk '{print $2 }' | head -n1)
+    [ -z "$dpi" ] && dpi=$(xdpyinfo | grep '^[[:space:]]*resolution:' | tail -n1 | awk '{print $2}' | sed 's/x.*//')
+    printf "%s" "$dpi"
+}
+
+#------------------------------------------------------------------------------
+# Compute a good yad --width value based on the text (t_) and data (d_)
+# contents and an optional d_width which override computing the width from
+# the contents of $data.
+#------------------------------------------------------------------------------
+scale_yad_width() {
+    local text=$(echo -e "$1" | sed 's/<[^>]*>//g')  data=$2  d_chars=$3
+    local t_width=0  d_width=0
+    if [ -n "$text" ]; then
+        local t_chars=$(max_line_len "$text")
+        local t_width=$(((YAD_WD_TEXT_PAD + YAD_WD_TEXT_PPC * t_chars) * DPI / 96 / 100))
+    fi
+
+    if [ -n "$data$d_chars" ]; then
+        #local d_chars=$(max_line_len "$data")
+        : ${d_chars:=$(data_width "$data")}
+        local d_width=$(((YAD_WD_DATA_PAD + YAD_WD_DATA_PPC * d_chars) * DPI / 96 / 100))
+    fi
+
+    if [ $t_width -gt $d_width ]; then
+        printf "%s" "$t_width"
+    else
+        printf "%s" "$d_width"
+    fi
+}
+
+#------------------------------------------------------------------------------
+# Compute a good yad --height value based on the text (t_) and data (d_)
+# contents.
+#------------------------------------------------------------------------------
+scale_yad_height() {
+    local text=$1  data=$2  t_height=0  d_height=0
+    local t_lines t_height d_rows d_height
+
+    if [ -n "$text" ]; then
+        t_lines=$(count_lines "$text")
+    else
+        t_lines=1
+    fi
+
+    t_height=$(((YAD_HT_TEXT_PAD + (YAD_HT_TEXT_PPC * t_lines)) * DPI  / 96 / 100))
+
+    if [ -n "$data" ]; then
+        d_rows=$(( $(count_lines "$data") + 2))
+        d_height=$(((YAD_HT_DATA_OFF + (YAD_HT_DATA_PAD + YAD_HT_DATA_PPC * d_rows)) * DPI  / 96 ))
+        d_height=$(((d_height +  + YAD_HT_DATA_PPR * d_rows) / 100 ))
+    fi
+
+    local b_height=$(($YAD_HT_BUTTON * DPI / 96 / 100))
+    printf "%s" $((t_height + d_height + b_height))
+}
+
+#------------------------------------------------------------------------------
+# It is more convenient to call this as a function rather than echo and
+# pipe inside the calling routine
+#------------------------------------------------------------------------------
+count_lines() { echo "$1" | wc -l ;}
+
+#------------------------------------------------------------------------------
+# Use awk to find the longest line
+#------------------------------------------------------------------------------
+max_line_len() {
+    local data=$1
+    printf "%s" "$data" | awk '{print length}' | sort -nr | head -n1
+}
+
+#------------------------------------------------------------------------------
+# Get size of label and add an offset since that is built in.
+#------------------------------------------------------------------------------
+label_size() {
+    local len=${#1}  exclude=$2
+    if [ "$exclude" ]; then
+        printf 0
+    elif [ "$GUI_MODE" ]; then
+        printf "%s"  $((len + YAD_WD_LAB_PAD * DPI /96 / 100))
+    else
+        printf $len
+    fi
+}
+
+#------------------------------------------------------------------------------
+# This silly function allows me to reserve "^\s*echo" for debugging.
+#------------------------------------------------------------------------------
+my_echo() { echo "$@"; }
+
+#------------------------------------------------------------------------------
+#
+#
+#------------------------------------------------------------------------------
+my_date() { date +"%F %T" ;}
+
+#------------------------------------------------------------------------------
+# Hide cursor and prepare restore_cursor() to work just once
+#------------------------------------------------------------------------------
+hide_cursor() {
+    RESTORE_CURSOR="\e[?25h"
+
+    # Disable cursor
+    printf "\e[?25l"
+}
+
+#------------------------------------------------------------------------------
+# Only works once after hide_cursor() runs.  This allows me to call it in the
+# normal flow and at clean up.
+#------------------------------------------------------------------------------
+restore_cursor() {
+    printf "$RESTORE_CURSOR"
+    RESTORE_CURSOR=
+}
+
+
+#==============================================================================
+main "$@"
+#==============================================================================
+

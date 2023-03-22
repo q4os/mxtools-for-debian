@@ -1,0 +1,65 @@
+mx-apps-kde (23.01.01+deb11u13) stable; urgency=medium
+
+  * MX Tools release
+
+ -- Dolphin Oracle <administrator@localdomain>  Wed, 22 Mar 2023 10:43:51 +0100
+
+mx-apps-kde (23.01.01) mx; urgency=medium
+
+  * remove mx-menu-editor for postinstall script
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 07 Jan 2023 14:00:24 -0500
+
+mx-apps-kde (22.08.02) mx; urgency=medium
+
+  * Remmove mx-viewer dependency
+
+ -- Adrian <adrian@mxlinux.org>  Sun, 21 Aug 2022 02:12:42 -0400
+
+mx-apps-kde (22.08.01mx21) mx; urgency=medium
+
+  * add quick-system-info-gui
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Tue, 09 Aug 2022 19:25:58 -0400
+
+mx-apps-kde (22.05.01mx21) mx; urgency=medium
+
+  * add cleanup-notifier-mx
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 04 May 2022 21:22:04 -0400
+
+mx-apps-kde (22.01mx21) mx; urgency=medium
+
+  * add mx-samba-config and disk-manager 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 29 Jan 2022 16:15:07 -0500
+
+mx-apps-kde (21.03mx21) mx; urgency=medium
+
+  * initial bullseye build 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 11 Feb 2021 13:27:43 -0500
+
+mx-apps-kde (21.02) mx; urgency=medium
+
+  * add system-keyboard-qt 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Tue, 02 Feb 2021 23:10:28 -0500
+
+mx-apps-kde (20.09) mx; urgency=medium
+
+  * add mx-system-kde 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Tue, 15 Sep 2020 21:28:21 -0400
+
+mx-apps-kde (20.06) mx; urgency=medium
+
+  * remove mx-menu-editor 
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 11 Jun 2020 22:37:14 -0400
+
+mx-apps-kde (20.04.01) mx; urgency=medium
+
+  * initial build 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Tue, 06 Apr 2020 19:59:31 -0400

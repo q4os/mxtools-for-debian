@@ -1,0 +1,308 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the apt-notifier package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+# Translators:
+# scootergrisen, 2022
+# Dolphin Oracle <dolphinoracle@gmail.com>, 2022
+# 
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: apt-notifier\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-01-28 02:38+0100\n"
+"PO-Revision-Date: 2017-05-11 01:14+0000\n"
+"Last-Translator: Dolphin Oracle <dolphinoracle@gmail.com>, 2022\n"
+"Language-Team: Danish (https://www.transifex.com/anticapitalista/teams/10162/da/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: da\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "$count new updates available"
+msgstr "$count nye opdateringer tilgængelige"
+
+msgid "0 updates available"
+msgstr "0 opdateringer tilgængelig"
+
+msgid "1 new update available"
+msgstr "1 ny opdatering tilgængelige"
+
+msgid "About"
+msgstr "Om"
+
+msgid "About MX Updater"
+msgstr "Om MX Opdatering"
+
+msgid "Auto-update"
+msgstr "Automatisk opdatering"
+
+msgid "Auto-update dpkg log(s)"
+msgstr "Automatisk opdatering dpkg-log(ge)"
+
+msgid "Auto-update log(s)"
+msgstr "Automatisk opdatering-log(ge)"
+
+msgid "Automatically answer 'yes' to all prompts during full/basic upgrade"
+msgstr ""
+"Svar automatisk 'ja' til alle spørgsmål under fuld/grundlæggende opgradering"
+
+msgid "Automatically answer 'yes' to all prompts during upgrade"
+msgstr "Svar automatisk 'ja' til alle spørgsmål under opgradering"
+
+msgid "Cancel"
+msgstr "Annuller"
+
+msgid "Changelog"
+msgstr "Ændringslog"
+
+msgid "Check for Updates"
+msgstr "Søg efter opdateringer"
+
+msgid "Close"
+msgstr "Luk"
+
+msgid "For a less detailed view see 'Auto-update dpkg log(s)' or 'History'."
+msgstr ""
+"Se 'Automatisk opdatering dpkg-log(ge)' eller 'Historik' for en mindre "
+"detaljeret visning."
+
+msgid "Hide until updates available"
+msgstr "Skjul indtil der findes opdateringer"
+
+msgid "History"
+msgstr "Historik"
+
+msgid "Icons"
+msgstr "Ikoner"
+
+msgid "Left-click behaviour   (when updates are available)"
+msgstr "Opførsel for venstreklik (når der findes opdateringer)"
+
+msgid "License"
+msgstr "Licens"
+
+msgid "MX Auto-update  --  unattended-upgrades dpkg log viewer"
+msgstr "MX Automatisk opdatering  --  unattended-upgrades dpkg-logfremviser"
+
+msgid "MX Auto-update  --  unattended-upgrades log viewer"
+msgstr "MX Automatisk opdatering  --  unattended-upgrades-logfremviser"
+
+msgid "MX Package Installer"
+msgstr "MX Pakkeinstallationsprogram"
+
+#. The autostart desktop entry name will be shown within the list of autostart
+#. entries.
+#. The desktop entry name will be displayed within the menu.
+msgid "MX Updater"
+msgstr "MX Opdatering"
+
+msgid "MX Updater Help"
+msgstr "MX Opdatering-hjælp"
+
+msgid "MX Updater preferences"
+msgstr "Præferencer for MX Opdatering"
+
+msgid "MX Updater--View and Upgrade, previewing: basic upgrade"
+msgstr ""
+"MX Opdatering--Vis og opdater, forhåndsvisning: grundlæggende opgradering"
+
+msgid "MX Updater--View and Upgrade, previewing: full upgrade"
+msgstr "MX Opdatering--Vis og opdater, forhåndsvisning: fuld opgradering"
+
+msgid "No logs found."
+msgstr "Ingen logge fundet."
+
+msgid "No unattended-upgrades dpkg log(s) found."
+msgstr "Igen unattended-upgrades dpkg-log(ge) fundet."
+
+msgid "No updates available"
+msgstr ""
+
+msgid "Other options"
+msgstr "Andre valgmuligheder"
+
+msgid "Preferences"
+msgstr "Præferencer"
+
+msgid "Press 'h' for help, 'q' to quit"
+msgstr "Tryk på 'h' for hjælp, 'q' for afslut"
+
+msgid "Quit"
+msgstr "Afslut"
+
+msgid "Reload"
+msgstr "Genindlæs"
+
+msgid ""
+"Reload the package information to become informed about new, removed or "
+"upgraded software packages. (apt-get update)"
+msgstr ""
+"Genindlæs pakkeinformationen for information om nye, fjernet og opgraderede "
+"softwarepakker. (apt-get update)"
+
+msgid "Restart MX Updater"
+msgstr ""
+
+msgid "Running apt-get autoremove, if you are unsure type 'n'."
+msgstr "Kører apt-get autoremove, tryk 'n' hvis du er i tvivl."
+
+msgid ""
+"Switches the type of Upgrade that will be performed, alternating back and "
+"forth between 'full upgrade' and 'basic upgrade'."
+msgstr ""
+"Skifter den opgraderingstype der skal udføres, skifter frem og tilbage "
+"mellem 'fuld opgradering' og 'grundlæggende opgradering'."
+
+msgid "Synaptic Help"
+msgstr "Synaptic-hjælp"
+
+msgid "Tray applet to notify of system and application updates"
+msgstr "Bakkeapplet til at underrette om system- og programopdateringer"
+
+msgid "Unattended-upgrades"
+msgstr ""
+
+msgid "Unneeded packages are installed that can be removed."
+msgstr "Unødvendige pakker som er installeres men som kan fjernes."
+
+msgid "Updates"
+msgstr "Opdateringer"
+
+msgid "Upgrade mode"
+msgstr "Opgraderingstilstand"
+
+msgid "Upgrade using Synaptic"
+msgstr "Opgrader med Synaptic"
+
+msgid "Using basic upgrade (not recommended)"
+msgstr "Bruger grundlæggende opgradering (anbefales ikke)"
+
+msgid "Using full upgrade"
+msgstr "Bruger fuld opgradering"
+
+msgid "View and Upgrade"
+msgstr "Vis og opgrader"
+
+msgid "You have $count new updates available"
+msgstr "Du har $count nye opdateringer tilgængelige"
+
+msgid "You have 1 new update available"
+msgstr "Du har 1 ny opdatering tilgængelig"
+
+#. TRANSLATORS: Fill in all plural forms. The parenthesized expression '{num}'
+#. is replaced by the actual number of updates available at runtime.
+#. For the singular form, you can replace '{num}' with 'one'.
+#. Example with 2 plural forms:
+#. msgstr[0] -> singular form: use 'one new update' or '{num} new update'.
+#. msgstr[1] -> plural form: use '{num} new updates'.
+#, python-brace-format
+msgid "You have {num} new update available"
+msgid_plural "You have {num} new updates available"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "automatically close terminal window when full/basic upgrade complete"
+msgstr ""
+"luk automatisk terminalvinduet når fuld/grundlæggende opgraderingen er "
+"gennemført"
+
+msgid "automatically close terminal window when upgrade complete"
+msgstr "luk automatisk terminalvinduet når opgraderingen er gennemført"
+
+msgid "basic upgrade"
+msgstr "grundlæggende opgradering"
+
+msgid "basic upgrade complete (or was canceled)"
+msgstr "grundlæggende opgradering fuldført (eller annulleret)"
+
+msgid "check for autoremovable packages after full/basic upgrade"
+msgstr "søg efter autoremovable-pakker efter fuld/grundlæggende opgradering"
+
+msgid "classic"
+msgstr "klassisk"
+
+msgid "full upgrade"
+msgstr "fuld opgradering"
+
+msgid "full upgrade   (recommended)"
+msgstr "fuld opgradering (anbefales)"
+
+msgid "full upgrade complete (or was canceled)"
+msgstr "fuld opgradering fuldført (eller annulleret)"
+
+msgid "opens MX Updater 'View and Upgrade' window"
+msgstr "åbner MX Opdatering 'Vis og opgrader'-vindue"
+
+msgid "opens Synaptic"
+msgstr "åbner Synaptic"
+
+msgid "press any key to close"
+msgstr "tryk på en tast for at lukke"
+
+msgid "press any key to stop automatic closing"
+msgstr ""
+
+msgid "pulse"
+msgstr "puls"
+
+msgid "start MX Updater at login"
+msgstr ""
+
+msgid "switch to basic upgrade"
+msgstr "skift til grundlæggende opgradering"
+
+msgid "switch to full upgrade"
+msgstr "skift til fuld opgradering"
+
+msgid "this terminal window can now be closed"
+msgstr "terminalvinduet kan nu lukkes"
+
+msgid "update automatically   (will not add new or remove existing packages)"
+msgstr "opdater automatisk (tilføjer ikke nye eller eksisterende pakker)"
+
+msgid "upgrade"
+msgstr "opgrader"
+
+msgid "use desktop notifications"
+msgstr ""
+
+msgid "use transparent interior for no-updates wireframe"
+msgstr ""
+
+msgid "wireframe"
+msgstr "trådramme"
+
+#. TRANSLATORS: Fill in all plural forms. The parenthesized expression '{num}'
+#. is replaced by the actual number of updates available at runtime.
+#. For the singular form, you can replace '{num}' with 'one'.
+#. Example with 2 plural forms:
+#. msgstr[0] -> singular form: use 'one new update' or '{num} new update'.
+#. msgstr[1] -> plural form: use '{num} new updates'.
+#, python-brace-format
+msgid "{num} new update available"
+msgid_plural "{num} new updates available"
+msgstr[0] ""
+msgstr[1] ""
+
+#. TRANSLATORS:
+#. This autostart desktop entry comment will be shown within 'Session and
+#. Startup' (Autostart).
+msgid "An applet to show updates"
+msgstr "En applet til at vise opdateringer"
+
+#. TRANSLATORS:
+#. This desktop entry comment will be shown within the menu.
+msgid "Re-enable MX Updater icon even if no updates available"
+msgstr ""
+"Genaktivér MX Opdatering-ikonet, selv hvis der ikke findes nogen "
+"opdateringer"
+
+msgid "Enable Auto-update"
+msgstr "Aktivér automatisk opdatering"
+
+msgid "Disable Auto-update"
+msgstr "Deaktivér automatisk opdatering"

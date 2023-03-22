@@ -1,0 +1,66 @@
+plymouth-themes-mx (21.09.01+deb11u13) stable; urgency=medium
+
+  * MX Tools release
+
+ -- Dolphin Oracle <administrator@localdomain>  Wed, 22 Mar 2023 10:43:58 +0100
+
+plymouth-themes-mx (21.09.01) mx; urgency=medium
+
+  * add mx21 defualt (elegant-linen-grey) 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 26 Sep 2021 15:01:42 -0400
+
+plymouth-themes-mx (21.02.01) mx; urgency=medium
+
+  * add futureprototype-mx (mx version of futureprototype)
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 07 Feb 2021 12:35:19 -0500
+
+plymouth-themes-mx (19.07.01) mx; urgency=medium
+
+  * update for buster 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 21 Jul 2019 19:17:30 -0400
+
+plymouth-themes-mx (18.12.03) mx; urgency=medium
+
+  * updated progress bars 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 23 Dec 2018 21:05:14 -0500
+
+plymouth-themes-mx (18.12.02) mx; urgency=medium
+
+  * added linen themes 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Tue, 18 Dec 2018 17:40:51 -0500
+
+plymouth-themes-mx (18.12.01) mx; urgency=medium
+
+  * added gradient theme 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 09 Dec 2018 20:47:14 -0500
+
+plymouth-themes-mx (18.11.02) mx; urgency=medium
+
+  * added ribbon theme
+
+ -- dolphin <dolphin@littlebyte>  Sat, 17 Nov 2018 18:30:25 -0500
+
+plymouth-themes-mx (18.11.01) mx; urgency=medium
+
+  * updated themes, elegant-blue, elegant-wine 
+
+ -- dolphin <dolphin@littlebyte>  Sat, 17 Nov 2018 17:42:46 -0500
+
+plymouth-themes-mx (18.8.02) mx; urgency=medium
+
+  * change name of package 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 05 Aug 2018 13:10:02 -0400
+
+plymouth-themes-extra-mx (18.8.01) mx; urgency=medium
+
+  * initial releasee
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 01 Aug 2018 20:08:02 -0500
+

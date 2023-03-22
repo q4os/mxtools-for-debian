@@ -1,0 +1,12 @@
+Source: papirus-mxblue
+Section: gnome
+Priority: optional
+Maintainer: Dolphin Oracle<dolphinoracle@gmail.com>
+Build-Depends: debhelper (>= 10)
+Standards-Version: 3.9.8
+
+Package: papirus-mxblue
+Section: gnome
+Architecture: all
+Depends: ${misc:Depends}, papirus-icon-theme
+Description: papirus blue folders with tabs for MX

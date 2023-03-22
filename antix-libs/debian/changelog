@@ -1,0 +1,858 @@
+antix-libs (0.8.14+4mx+deb11u13) stable; urgency=medium
+
+  * MX Tools release
+
+ -- Dolphin Oracle <administrator@localdomain>  Wed, 22 Mar 2023 10:43:47 +0100
+
+antix-libs (0.8.14+4mx) mx; urgency=medium
+
+  * antiX-common.sh: allow persist-makefs to select mmcblk-, nvme- and vd- persistence devices
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Tue, 10 Jan 2023 19:04:26 -0500
+
+antix-libs (0.8.14+3mx) mx; urgency=medium
+
+  * add gtk theme override 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 04 Jan 2023 22:47:50 -0500
+
+antix-libs (0.8.14+2mx) mx; urgency=medium
+
+  * keep sudo only in one tty at a time 
+  * cleanup tty variables
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 14 Aug 2022 11:27:12 -0400
+
+antix-libs (0.8.14) unstable; urgency=medium
+
+  * added .xsession-errors to live-remaster-exclude.list and persist-save-exclude.list
+
+ -- anticapitalista <antix@operamail.com>  Sun, 07 Aug 2022 13:12:11 +0300
+
+antix-libs (0.8.13) unstable; urgency=medium
+
+  * edits to antixers - use sudo intead of users
+  * get rid of "--no-yad" option
+  * change check_for_yad function within antiX-common.sh to handle the case where yad is not installed
+  * thanks to fehlix and dolphin_oracle for the above 
+
+ -- anticapitalista <antix@operamail.com>  Sun, 24 Jul 2022 17:19:58 +0300
+
+antix-libs (0.8.12) unstable; urgency=medium
+
+  * updated sq, ru
+
+ -- anticapitalista <antix@operamail.com>  Mon, 20 Jun 2022 15:07:28 +0300
+
+antix-libs (0.8.11) unstable; urgency=medium
+
+  * added distribution.ini to remove original which wrongly added telemetry
+  * apologies for this
+
+ -- anticapitalista <antix@operamail.com>  Mon, 27 Dec 2021 12:16:57 +0200
+
+antix-libs (0.8.10) unstable; urgency=medium
+
+  * update translations
+
+ -- anticapitalista <antix@operamail.com>  Wed, 13 Oct 2021 15:04:24 +0300
+
+antix-libs (0.8.9) unstable; urgency=medium
+
+  * added zzz desktop to antiX-common.sh
+
+ -- anticapitalista <antix@operamail.com>  Fri, 16 Jul 2021 21:13:32 +0300
+
+antix-libs (0.8.7+2mx) mx; urgency=medium
+
+  * adjust antixers file
+  * adjust antiX-common.sh to remove a hanging root terminal 
+  * tighten up antixers file
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 24 Jul 2022 19:11:53 -0400
+
+antix-libs (0.8.7+1) mx; urgency=medium
+
+  * build with antix-common.sh fixes
+
+ -- dolphionracle <dolphinoracle@gmail.com>  Mon, 28 Jun 2021 20:49:10 +0200
+
+antix-libs (0.8.7) unstable; urgency=medium
+
+  * give correct path /sbin/cryptsetup not /usr/sbin/cryptsetup
+
+ -- anticapitalista <antix@operamail.com>  Tue, 02 Feb 2021 14:13:06 +0200
+
+antix-libs (0.8.6mx19+1) unstable; urgency=medium
+
+  * give full path to cryptsetup line 946 antiX-common.sh
+
+ -- anticapitalista <antix@operamail.com>  Tue, 26 Jan 2021 12:10:49 +0200
+
+antix-libs (0.8.5) unstable; urgency=medium
+
+  * make-fstab edit 
+
+ -- anticapitalista <antix@operamail.com>  Fri, 18 Dec 2020 17:01:55 +0200
+
+antix-libs (0.8.4) unstable; urgency=medium
+
+  * Added gl_ES and improved sl, pt_BR
+
+ -- anticapitalista <antix@operamail.com>  Fri, 27 Nov 2020 20:24:30 +0200
+
+antix-libs (0.8.3mx19+1) mx; urgency=medium
+
+  * improved hi, nb, pt and pt_BR
+
+ -- anticapitalista <antix@operamail.com>  Thu, 08 Oct 2020 13:33:03 +0300
+
+antix-libs (0.8.2) unstable; urgency=medium
+
+  * remove ansi escapes before writing the the log file
+
+ -- anticapitalista <antix@operamail.com>  Wed, 03 Jun 2020 22:43:57 +0300
+
+antix-libs (0.8.1mx19+1) mx; urgency=medium
+
+  * adjust antixers sudoers file
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 26 Mar 2020 18:48:12 +0200
+ 
+antix-libs (0.8.1) unstable; urgency=medium
+
+  * Make sure we close encrypted devices if we opened them
+
+ -- anticapitalista <antix@operamail.com>  Mon, 09 Mar 2020 16:09:25 +0200
+
+antix-libs (0.8.0) unstable; urgency=medium
+
+  * python3 compatibility
+
+ -- anticapitalista <antix@operamail.com>  Sun, 01 Dec 2019 17:24:32 +0200
+
+antix-libs (0.7.3) unstable; urgency=medium
+
+  * root persistence fails with toram + encryption manual fix
+
+ -- anticapitalista <antix@operamail.com>  Sun, 03 Nov 2019 15:13:08 +0200
+
+antix-libs (0.7.2) unstable; urgency=medium
+
+  * corrct make-xorg.conf for video-card chages 
+
+ -- anticapitalista <antix@operamail.com>  Mon, 14 Oct 2019 17:52:55 +0300
+
+antix-libs (0.7.1) unstable; urgency=medium
+
+  * improved tr
+
+ -- anticapitalista <antix@operamail.com>  Sat, 12 Oct 2019 15:15:49 +0300
+
+antix-libs (0.7.0) unstable; urgency=medium
+
+  * many improvements to make-xorg-conf 
+  * added select-graphics-card script
+  * etc/X11/xorg-bus-id added to remaster excludes lists
+
+ -- anticapitalista <antix@operamail.com>  Fri, 04 Oct 2019 13:17:03 +0300
+
+antix-libs (0.6.21) unstable; urgency=medium
+
+  * updated tr translation
+
+ -- anticapitalista <antix@operamail.com>  Sun, 29 Sep 2019 17:09:30 +0300
+
+antix-libs (0.6.20) unstable; urgency=medium
+
+  * comment out var/cache/man/* in live-remaster-exclude.list
+
+ -- anticapitalista <antix@operamail.com>  Sun, 16 Jun 2019 20:46:06 +0300
+
+antix-libs (0.6.19) unstable; urgency=medium
+
+  *  /etc/network/interfaces removed from general-remaster-excludes.list
+
+ -- anticapitalista <antix@operamail.com>  Mon, 10 Jun 2019 18:01:39 +0300
+
+antix-libs (0.6.18) unstable; urgency=medium
+
+  * add swap-file
+
+ -- anticapitalista <antix@operamail.com>  Wed, 22 May 2019 13:37:18 +0300
+
+antix-libs (0.6.17) unstable; urgency=medium
+
+  * Handle non-numeric input to label_meg by echoing it in lib/antiX-gui-cli.sh
+  
+ -- anticapitalista <antix@operamail.com>  Wed, 01 May 2019 19:48:02 +0300
+
+antix-libs (0.6.16) unstable; urgency=medium
+
+  * Set HOME to /root if we are root 
+  * Do a better job of printing out sizes, MiB, GiB, etc
+
+ -- anticapitalista <antix@operamail.com>  Fri, 26 Apr 2019 18:01:31 +0300
+
+antix-libs (0.6.15) unstable; urgency=medium
+
+  * back to fixed size
+
+ -- anticapitalista <antix@operamail.com>  Mon, 22 Apr 2019 18:48:45 +0300
+
+antix-libs (0.6.14) unstable; urgency=medium
+
+  * Defaults!/usr/local/bin/menu_manager.sh env_keep += "HOME" change
+
+ -- anticapitalista <antix@operamail.com>  Sat, 06 Apr 2019 21:52:15 +0300
+
+antix-libs (0.6.13) unstable; urgency=medium
+
+  * complete pl
+
+ -- anticapitalista <antix@operamail.com>  Sun, 03 Mar 2019 18:22:39 +0200
+
+antix-libs (0.6.12) unstable; urgency=medium
+
+  * added pl
+
+ -- anticapitalista <antix@operamail.com>  Wed, 20 Feb 2019 18:07:06 +0200
+
+antix-libs (0.6.11) unstable; urgency=medium
+
+  * added da and tr
+
+ -- anticapitalista <antix@operamail.com>  Fri, 25 Jan 2019 15:10:52 +0200
+
+antix-libs (0.6.10) unstable; urgency=medium
+
+  * improved translations
+
+ -- anticapitalista <antix@operamail.com>  Sun, 23 Sep 2018 16:12:35 +0300
+
+antix-libs (0.6.9) unstable; urgency=medium
+
+  * changes to textdomain for antiX-get-param.sh (fehlix)
+
+ -- anticapitalista <antix@operamail.com>  Wed, 13 Jun 2018 15:38:19 +0300
+
+antix-libs (0.6.8) unstable; urgency=medium
+
+  * added no-overwrite option to make-fstab
+
+ -- anticapitalista <antix@operamail.com>  Thu, 03 May 2018 15:30:21 +0300
+
+antix-libs (0.6.7) unstable; urgency=medium
+
+  * Full Portuguese
+
+ -- anticapitalista <antix@operamail.com>  Fri, 16 Mar 2018 18:20:42 +0200
+
+antix-libs (0.6.6) unstable; urgency=medium
+
+  * Improved and new translations
+
+ -- anticapitalista <antix@operamail.com>  Fri, 02 Mar 2018 16:54:12 +0200
+
+antix-libs (0.6.5) unstable; urgency=medium
+
+  * var/cache/brightness-settings-cache/* added to live-remaster-exclude.list
+
+ -- anticapitalista <antix@operamail.com>  Fri, 12 Jan 2018 13:56:32 +0200
+
+antix-libs (0.6.4) unstable; urgency=medium
+
+  * Updated Italian
+
+ -- anticapitalista <antix@operamail.com>  Tue, 28 Nov 2017 20:59:55 +0200
+
+antix-libs (0.6.3) unstable; urgency=medium
+
+  * Included blacklist pcspkr in pc-speaker.conf
+
+ -- anticapitalista <antix@operamail.com>  Wed, 15 Nov 2017 21:02:15 +0200
+
+antix-libs (0.6.2) unstable; urgency=medium
+
+  * Fix too tall yad by adding --fixed to antiX-style-default.sh
+
+ -- anticapitalista <antix@operamail.com>  Thu, 26 Oct 2017 15:54:55 +0300
+
+antix-libs (0.6.1) unstable; urgency=medium
+
+  * make-fstab version bump
+  * changes in make-fstab
+  * added etc/live/persist-config.conf to general-remaster-exclude.list
+
+ -- anticapitalista <antix@operamail.com>  Fri, 13 Oct 2017 12:35:12 +0300
+
+antix-libs (0.6.0) unstable; urgency=medium
+
+  * this should be final version on antiX-17
+  * make-fstab - added chnages to fix ntfs breakage for frugal install
+
+ -- anticapitalista <antix@operamail.com>  Thu, 05 Oct 2017 13:00:20 +0300
+
+antix-libs (0.5.28) unstable; urgency=medium
+
+  * Further edits to make-fstab
+
+ -- anticapitalista <antix@operamail.com>  Fri, 29 Sep 2017 14:07:38 +0300
+
+antix-libs (0.5.27) unstable; urgency=medium
+
+  * don't create /media or /mnt/live entries when --install
+  * move dynamic mountpoints to /mnt/live/
+
+ -- anticapitalista <antix@operamail.com>  Wed, 27 Sep 2017 16:47:59 +0300
+
+antix-libs (0.5.26) unstable; urgency=medium
+
+  * Many changes to make-xorg
+  * Add options for setting depth and enabling composite
+  * The "safe" and "default" modes specify the vesa driver and nothing else
+  * The command line args are now put in the xorg.conf file
+  * warning message to screen, add a warning in the xorg.conf file and set the driver to vesa
+
+ -- anticapitalista <antix@operamail.com>  Sat, 26 Aug 2017 10:40:11 +0100
+
+antix-libs (0.5.25) unstable; urgency=medium
+
+  * Removed /etc/network/interfaces and /etc/network/interfaces.d/* out of excludes files 
+
+ -- anticapitalista <antix@operamail.com>  Mon, 24 Jul 2017 20:36:17 +0100
+
+antix-libs (0.5.24) unstable; urgency=medium
+
+  * Edited excludes files about saved copy of files
+
+ -- anticapitalista <antix@operamail.com>  Sun, 02 Jul 2017 21:26:46 +0300
+
+antix-libs (0.5.23) unstable; urgency=medium
+
+  * Removed geometry call for x-terminal-emulator in antiX-common.sh 
+
+ -- anticapitalista <antix@operamail.com>  Thu, 27 Apr 2017 00:31:52 +0300
+
+antix-libs (0.5.22) unstable; urgency=low
+
+  * Updated Czech, French and Portuguese translations
+
+ -- anticapitalista <antix@operamail.com>  Sat, 01 Apr 2017 19:57:43 +0300
+
+antix-libs (0.5.21) unstable; urgency=medium
+
+  * Removed antiX-excludes.sh script
+
+ -- anticapitalista <antix@operamail.com>  Tue, 07 Feb 2017 18:12:23 +0200
+
+antix-libs (0.5.20) unstable; urgency=medium
+
+  * Remove rox from antixers file as requested
+
+ -- anticapitalista <antix@operamail.com>  Fri, 06 Jan 2017 14:35:56 +0200
+
+antix-libs (0.5.19) unstable; urgency=medium
+
+  * Updated Kazakh
+
+ -- anticapitalista <antix@operamail.com>  Thu, 24 Nov 2016 13:30:36 +0200
+
+antix-libs (0.5.18) unstable; urgency=medium
+
+  * Added Kazakh
+
+ -- anticapitalista <antix@operamail.com>  Thu, 17 Nov 2016 11:55:44 +0200
+
+antix-libs (0.5.17) unstable; urgency=medium
+
+  * Added kazakh
+  * Improved French and Portuguese (Brazil) translations
+
+ -- anticapitalista <antix@operamail.com>  Fri, 11 Nov 2016 13:16:39 +0200
+
+antix-libs (0.5.16) unstable; urgency=medium
+
+  * Many localisation updates 
+
+ -- anticapitalista <antix@operamail.com>  Thu, 27 Oct 2016 14:08:15 +0300
+
+antix-libs (0.5.15) unstable; urgency=medium
+
+  * added lazytime for ext4 partitions to make-fstab script 
+
+ -- anticapitalista <antix@operamail.com>  Wed, 29 Jun 2016 12:27:41 +0300
+
+antix-libs (0.5.14) unstable; urgency=medium
+
+  * Add major dev number of 103 for partitions > 15 to make-fstab
+
+ -- anticapitalista <antix@operamail.com>  Sat, 04 Jun 2016 23:55:10 +0300
+
+antix-libs (0.5.13) unstable; urgency=medium
+
+  * Updated translations
+
+ -- anticapitalista <antix@operamail.com>  Mon, 30 May 2016 14:53:08 +0300
+
+antix-libs (0.5.12) unstable; urgency=medium
+
+  * new make-fstab file
+
+ -- anticapitalista <antix@operamail.com>  Thu, 26 May 2016 18:19:50 +0300
+
+antix-libs (0.5.11) unstable; urgency=medium
+
+  * Add mmcblk devices to fstab (as well as sd and sr) 
+
+ -- anticapitalista <antix@operamail.com>  Sun, 22 May 2016 18:04:37 +0300
+
+antix-libs (0.5.10) unstable; urgency=medium
+
+  *  support for "uxa" and "sna" cheats
+
+ -- anticapitalista <antix@operamail.com>  Tue, 03 May 2016 13:54:50 +0300
+
+antix-libs (0.5.9) unstable; urgency=medium
+
+  * Added antixsources.sh to antixers sudoers file 
+
+ -- anticapitalista <antix@operamail.com>  Fri, 29 Apr 2016 13:09:30 +0300
+
+antix-libs (0.5.8) unstable; urgency=medium
+
+  * More make-fstab fixes
+
+ -- anticapitalista <antix@operamail.com>  Mon, 04 Apr 2016 14:20:33 +0300
+
+antix-libs (0.5.7+nmu2) unstable; urgency=medium
+
+  * Make-fstab changes to add extfat 
+
+ -- anticapitalista <antix@operamail.com>  Fri, 01 Apr 2016 13:44:34 +0300
+
+antix-libs (0.5.7+nmu1) unstable; urgency=medium
+
+  * added changes to use usbstorage 
+
+ -- anticapitalista <antix@operamail.com>  Thu, 24 Mar 2016 15:31:26 +0200
+
+antix-libs (0.5.7) unstable; urgency=low
+
+  * Added the following to persist-save-exclude.list
+    /home/*/.cache/mozilla/*
+    /home/*/.macromedia/*
+    /home/*/.adobe/*
+
+ -- anticapitalista <antiX@operamail.com> Mon, 29 Feb 2016 13:32:00 +0200 
+
+
+antix-libs (0.5.6) unstable; urgency=low
+
+  * automatically set a colour depth value of 16 bit in xorg.conf when xvesa is being used
+
+ -- anticapitalista <antiX@operamail.com> Fri, 08 Jan 2016 13:24:00 +0200 
+
+
+antix-libs (0.5.5) unstable; urgency=low
+
+  * antiX-gui-cli.sh fix to stop double yad pop up
+
+ -- anticapitalista <antiX@operamail.com> Wed, 23 Dec 2015 22:37:00 +0200 
+
+
+antix-libs (0.5.4) unstable; urgency=low
+
+  * Fixed typo in live-remaster-exclude.list
+
+ -- anticapitalista <antiX@operamail.com> Tue, 15 Dec 2015 12:48:00 +0200
+
+
+antix-libs (0.5.3) unstable; urgency=low
+
+  * Updated Italian
+
+ -- anticapitalista <antiX@operamail.com> Mon, 29 Jun 2015 13:58:00 +0200
+
+
+antix-libs (0.5.2) unstable; urgency=low
+
+  * Removed all old references to make-xinit
+
+ -- anticapitalista <antiX@operamail.com> Sat, 20 Jun 2015 00:59:00 +0200
+
+
+antix-libs (0.5.1) unstable; urgency=low
+
+  * Add more files to general-remaster-excludes
+  * Add echo to cli get_text because I removed "\n" from string
+
+ -- anticapitalista <antiX@operamail.com> Wed, 10 Jun 2015 11:43:00 +0200
+
+
+antix-libs (0.5.0) unstable; urgency=low
+
+  * Remove all persistent rules and fix /tmp/
+  * Add timeout_box() function to antiX-gui-cli.sh
+
+ -- anticapitalista <antiX@operamail.com> Sun, 07 Jun 2015 22:13:00 +0200
+
+
+antix-libs (0.4.9) unstable; urgency=low
+
+  * Simplify good_fb_res() in make-xorg-conf
+
+ -- anticapitalista <antiX@operamail.com> Sun, 19 Apr 2015 15:53:00 +0200
+
+
+antix-libs (0.4.8) unstable; urgency=low
+
+  * Updated make-fstab to fix F4 mount options.
+  * Include ps-speaker.conf file for modprobe.
+
+ -- anticapitalista <antiX@operamail.com> Wed, 01 Apr 2015 16:49:00 +0200
+
+
+antix-libs (0.4.7) unstable; urgency=low
+
+  * Updated make-xorg-conf
+  * Updated make-fstab fo fix swap false bug
+
+ -- anticapitalista <antiX@operamail.com> Sat, 28 Mar 2015 21:54:00 +0200
+
+
+antix-libs (0.4.6) unstable; urgency=low
+
+  * Added make-xorg-conf and symlink.
+  * Updated make-fstab
+  * Added boot-menus
+
+ -- anticapitalista <antiX@operamail.com> Wed, 11 Mar 2015 20:08:00 +0200
+
+antix-libs (0.4.6) unstable; urgency=low  
+   
+  * Removed debugging code from make-fstab
+  * Added error logging and colorization to make-xlat-files script 
+  * Removed /usr/share/antiX/init-xlat/
+  * Removed /usr/share/antiX/lib/
+  * Removed /usr/share/antiX/init-lang/
+  * Brought various changes upstream (BitJam) up to date.
+
+ -- anticapitalista <antiX@operamail.com> Mon, 16 Feb 2015 13:30:00 +0200 
+
+
+antix-libs (0.4.5) unstable; urgency=low  
+   
+  * Fixed wrong labelling of partitions with no labels
+
+ -- anticapitalista <antiX@operamail.com> Thu, 08 Jan 2015 03:10:00 +0200 
+
+
+antix-libs (0.4.4) unstable; urgency=low  
+   
+  * Changed how we parse "blkid -o udev $DEVICE" output 
+  * Remove the lockfile even when using the flock command. 
+
+ -- anticapitalista <antiX@operamail.com> Wed, 07 Jan 2015 14:37:00 +0200 
+
+
+antix-libs (0.4.3) unstable; urgency=low  
+ 
+  * Updated translations in init-xlat
+
+ -- anticapitalista <antiX@operamail.com> Mon, 24 Nov 2014 13:59:00 +0200 
+
+
+antix-libs (0.4.2) unstable; urgency=low  
+ 
+  * Minor edits
+
+ -- anticapitalista <antiX@operamail.com> Sat, 15 Nov 2014 21:29:00 +0200 
+
+
+antix-libs (0.4.1) unstable; urgency=low  
+ 
+  * make-fstab bug fixes and set up for systemd.
+  * alterations to splash.
+  * bugfixes to antiX-common.sh and antiX-gui-cli.sh.
+  * live-init.xlat changes. 
+
+ -- anticapitalista <antiX@operamail.com> Tue, 11 Nov 2014 00:39:00 +0200 
+
+
+antix-libs (0.4.0) unstable; urgency=low  
+ 
+  * Replacing antiX* for live* in live scripts.
+
+ -- anticapitalista <antiX@operamail.com> Sat, 17 May 2014 16:50:00 +0200 
+
+
+antix-libs (0.3.9.1) unstable; urgency=low  
+ 
+  * More options in make-fstab.
+
+ -- anticapitalista <antiX@operamail.com> Mon, 31 Mar 2014 23:00:00 +0200 
+
+
+antix-libs (0.3.9.0) unstable; urgency=low  
+ 
+  * Fix list of devices in antiX-common.sh.
+
+ -- anticapitalista <antiX@operamail.com> Fri, 07 Mar 2014 18:40:00 +0200 
+
+
+antix-libs (0.3.8.9) unstable; urgency=low  
+ 
+  * make-fstab includes swap only option.
+  * included autologin file.
+
+ -- anticapitalista <antiX@operamail.com> Sun, 09 Feb 2014 16:50:00 +0200 
+
+antix-libs (0.3.8.8) unstable; urgency=low  
+ 
+  * Fixed typo for btrfs in make-fstab.
+  * Replaced hard coded roxterm with x-terminal-emulator in antix-common.sh
+
+ -- anticapitalista <antiX@operamail.com> Thur, 02 Jan 2014 23:30:00 +0200 
+
+
+antix-libs (0.3.8.7) unstable; urgency=low  
+ 
+  * Fixed bug in antixers in /etc/sudoers.d.
+
+ -- anticapitalista <antiX@operamail.com> Thu, 07 November 2013 12:05:00 +0200 
+
+
+antix-libs (0.3.8.6) unstable; urgency=low  
+ 
+  * Edited and renamed update-grub-antiX to update-grub-antix.
+
+ -- anticapitalista <antiX@operamail.com> Wed, 30 Oct 2013 22:55:00 +0200 
+
+
+antix-libs (0.3.8.5) unstable; urgency=low  
+ 
+  * Packaged using dpkg-buildpackage. 
+  * xz compressed deb.
+
+ -- anticapitalista <antiX@operamail.com> Fri, 19 Oct 2013 15:50:00 +0200 
+
+
+antix-libs (0.3.8.4) unstable; urgency=low 
+ 
+  * Bug fix edits to make-fstab.
+
+ -- anticapitalista <antiX@operamail.com> Wed, 19 May 2013 01:20:00 +0200
+
+
+antix-libs (0.3.8.3) unstable; urgency=low 
+ 
+  * Changed ownership to root;root.
+
+ -- anticapitalista <antiX@operamail.com> Wed, 05 May 2013 23:25:00 +0200
+
+
+antix-libs (0.3.8.2) unstable; urgency=low 
+ 
+  * Updated make-xinitrc to remove white spaces.
+
+ -- anticapitalista <antiX@operamail.com> Wed, 29 May 2013 13:15:00 +0200
+
+
+antix-libs (0.3.8.1) unstable; urgency=low 
+ 
+  * Included /usr/local/bin/update-default-desktop to antixers sudoers file.
+
+ -- anticapitalista <antiX@operamail.com> Sun, 26 May 2013 11:10:00 +0200
+
+
+antix-libs (0.3.8) unstable; urgency=low 
+ 
+  * Updated antiX-init-utils.sh, antiX-gui-cli.sh for generic build.
+
+ -- anticapitalista <antiX@operamail.com> Tue, 14 May 2013 21:55:00 +0200
+
+
+antix-libs (0.3.7.7) unstable; urgency=low 
+ 
+  * Added connectshares to sudoers antixers file.
+
+ -- anticapitalista <antiX@operamail.com> Mon, 22 Apr 2013 14:45:00 +0200
+
+
+antix-libs (0.3.7.6) unstable; urgency=low 
+ 
+  * New make-xinitrc for new desktop.
+
+ -- anticapitalista <antiX@operamail.com> Tues, 13 Apr 2013 20:00:00 +0200
+
+
+antix-libs (0.3.7.5) unstable; urgency=low 
+ 
+  * Added minstall to antixers sudo.
+
+ -- anticapitalista <antiX@operamail.com> Tus, 09 Apr 2013 16:25:00 +0200
+
+
+antix-libs (0.3.7.4) unstable; urgency=low 
+ 
+  * Added desktop_tool.py.
+
+ -- anticapitalista <antiX@operamail.com> Mon, 25 March 2013 16:55:00 +0200
+
+
+antix-libs (0.3.7.3) unstable; urgency=low 
+ 
+  * Added newer make-xinitrc.
+
+ -- anticapitalista <antiX@operamail.com> Thur, 19 March 2013 00:55:00 +0200
+
+
+antix-libs (0.3.7.2) unstable; urgency=low 
+ 
+  * Added make-xinitrc.
+  * Added antixers sudoers.
+
+ -- anticapitalista <antiX@operamail.com> Thur, 07 March 2013 16:55:00 +0200
+
+
+antix-libs (0.3.7.1) unstable; urgency=low 
+ 
+  * Edits to make-fstab.
+
+ -- anticapitalista <antiX@operamail.com> Thur, 14 February 2013 16:45:00 +0200
+
+
+antix-libs (0.3.7) unstable; urgency=low 
+ 
+  * More localisations.
+
+ -- anticapitalista <antiX@operamail.com> Sun, 27 January 2013 21:20:00 +0200
+
+
+antix-libs (0.3.6) unstable; urgency=low 
+ 
+  * Added btrfs to make-fstab script.
+  * Localisation improvements.
+
+ -- anticapitalista <antiX@operamail.com> Fri, 25 January 2013 23:55:00 +0200
+
+
+antix-libs (0.3.4) unstable; urgency=low 
+ 
+  * Changes for newer initrd.gz.
+
+ -- anticapitalista <antiX@operamail.com> Mon, 05 November 2012 22:15:00 +0200
+
+
+antix-libs (0.3.3) unstable; urgency=low 
+ 
+  * Include buildfstab and scanpartitions.
+
+ -- anticapitalista <antiX@operamail.com> Thu, 01 November 2012 22:05:00 +0200
+
+
+antix-libs (0.3.2.2) unstable; urgency=low 
+ 
+  * Include make-fstab from live-init scripts.
+
+ -- anticapitalista <antiX@operamail.com> Tue, 30 October 2012 19:50:00 +0200
+
+
+antix-libs (0.3.2.1) unstable; urgency=low 
+ 
+  * Bugfix in naming deb.
+
+ -- anticapitalista <antiX@operamail.com> Sat, 27 October 2012 23:35:00 +0200
+
+
+antix-libs (0.3.2) unstable; urgency=low 
+ 
+  * Removed gksu dependency.
+
+ -- anticapitalista <antiX@operamail.com> Sat, 27 October 2012 17:35:00 +0200
+
+
+antix-libs (0.3.1) unstable; urgency=low 
+ 
+  * New method.
+
+ -- anticapitalista <antiX@operamail.com> Sat, 20 October 2012 18:30:00 +0200
+
+
+antix-libs (0.3.0) unstable; urgency=low 
+ 
+  * ktsuss replaces gksu.
+
+ -- anticapitalista <antiX@operamail.com> Sun, 23 September 2012 18:30:00 +0200
+
+
+antix-libs (0.2.4.5) unstable; urgency=low 
+ 
+  * Fixed ownership bugs.
+
+ -- anticapitalista <antiX@operamail.com> Sun, 26 August 2012 14:30:00 +0200
+
+
+antix-libs (0.2.4.4) unstable; urgency=low 
+ 
+  * Added copyright notice.
+
+ -- anticapitalista <antiX@operamail.com> Mon, 16 July 2012 15:30:00 +0200
+
+
+antix-libs (0.2.4.3) unstable; urgency=low 
+ 
+  * Fixed typo error for rox pinboard.
+
+ -- anticapitalista <antiX@operamail.com>  Fri, 27 April 2012 12:25:00 +0200
+
+
+antix-libs (0.2.4.2) unstable; urgency=low 
+ 
+  * Added localisation.
+
+ -- anticapitalista <antiX@operamail.com>  Wed, 25 April 2012 18:25:00 +0200
+
+
+antix-libs (0.2.4.1) unstable; urgency=low 
+ 
+  * antiX-M11 title changed to antiX-12 in /usr/sbin/update-grub-antiX.
+
+ -- anticapitalista <antiX@operamail.com>  Sun, 08 April 2012 19:25:00 +0200
+
+
+antix-libs (0.2.4) unstable; urgency=low 
+ 
+  * New antiX /usr/local/lib scripts.
+
+ -- anticapitalista <antiX@operamail.com>  Sun, 01 April 2012 17:25:00 +0200
+
+
+antix-libs (0.2.3) unstable; urgency=low 
+ 
+  * Various changes to scripts.
+
+ -- anticapitalista <antiX@operamail.com>  Sun, 11 March 2012 17:25:00 +0200
+
+
+antix-libs (0.2.2) unstable; urgency=low 
+ 
+  * Included /usr/sbin scripts from antix-installer. Needed for antixsnapshot.
+
+ -- anticapitalista <antiX@operamail.com>  Tues, 06 March 2012 14:25:00 +0200
+
+
+antix-libs (0.2.1) unstable; urgency=low 
+ 
+  * Internationalisation.
+
+ -- anticapitalista <antiX@operamail.com>  Mon, 02 January 2012 15:30:00 +0200
+
+
+antix-libs (0.1.0) unstable; urgency=low 
+ 
+  * Initial Release.
+
+ -- anticapitalista <antiX@operamail.com>  Sun, 20 November 2011 15:30:00 +0200
+

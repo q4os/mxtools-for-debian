@@ -1,0 +1,4 @@
+icons/* usr/share/mx-welcome/icons
+*.conf usr/share/mx-welcome
+images/* usr/share/mx-welcome
+

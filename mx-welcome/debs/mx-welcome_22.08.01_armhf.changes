@@ -1,0 +1,25 @@
+Format: 1.8
+Date: Sun, 21 Aug 2022 21:25:19 -0400
+Source: mx-welcome
+Binary: mx-welcome
+Architecture: armhf
+Version: 22.08.01
+Distribution: mx
+Urgency: medium
+Maintainer: Adrian <adrian@mxlinux.org>
+Changed-By: Dolphin Oracle <dolphinoracle@gmail.com>
+Description:
+ mx-welcome - MX Welcome
+Changes:
+ mx-welcome (22.08.01) mx; urgency=medium
+ .
+   * call gui instead of qsi cli mode
+Checksums-Sha1:
+ 7fb565e40a75e2edbf93578488aede17acb41978 9865 mx-welcome_22.08.01_armhf.buildinfo
+ 3b1130ec1ede77f236bc89f77b29d2c1c78fbbd6 64708 mx-welcome_22.08.01_armhf.deb
+Checksums-Sha256:
+ 35229309af219cab724e8ef100401970de1894e480e167309825fb1796fe9d9a 9865 mx-welcome_22.08.01_armhf.buildinfo
+ 23a011ef178d5309e3b08007afb7022b0ed0abfe602e4b4e58a8555b2ebe6c51 64708 mx-welcome_22.08.01_armhf.deb
+Files:
+ 148a405ec7169c3986e7f1dd53860c66 9865 admin optional mx-welcome_22.08.01_armhf.buildinfo
+ 181101015c2b803683f2fc788bdce0ce 64708 admin optional mx-welcome_22.08.01_armhf.deb

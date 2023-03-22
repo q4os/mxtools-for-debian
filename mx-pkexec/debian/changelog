@@ -1,0 +1,86 @@
+mx-pkexec (21.03.02+deb11u13) stable; urgency=medium
+
+  * MX Tools release
+
+ -- fehlix <administrator@localdomain>  Wed, 22 Mar 2023 10:43:54 +0100
+
+mx-pkexec (21.03.02) mx; urgency=medium
+
+  * fix working directory
+
+ -- fehlix <fehlix@mxlinux.org>  Sat, 06 Mar 2021 18:37:21 -0400
+
+mx-pkexec (21.03.01) mx; urgency=medium
+
+  * retain environement variables from users proc table
+  * su-to-rootrc adjustment
+
+ -- fehlix <fehlix@mxlinux.org>  Fri, 05 Mar 2021 18:25:54 -0400
+
+mx-pkexec (20.06.02) UNRELEASED; urgency=medium
+
+  * more environment variables, wayland values, XDG_CURRENT_DESKTOP
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 14 Jun 2020 14:21:48 -0400
+
+mx-pkexec (20.06.01) mx; urgency=medium
+
+  * pass more environment variables 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 10 Jun 2020 19:16:55 -0400
+
+mx-pkexec (20.03.02) mx; urgency=medium
+
+  * update control file 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 30 Mar 2020 22:52:45 -0400
+
+mx-pkexec (20.03.01) mx; urgency=medium
+
+  * environment changes, incorporate locale 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 27 Mar 2020 19:01:38 -0400
+
+mx-pkexec (20.02.02) mx; urgency=medium
+
+  * quoted path fix (fehlix) 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 13 Feb 2020 21:40:02 -0500
+
+mx-pkexec (20.02.01) mx; urgency=medium
+
+  * including working directory in environment 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 13 Feb 2020 18:50:07 -0500
+
+mx-pkexec (20.01.01) mx; urgency=medium
+
+  * bash completion support (fehlix)
+  * strip unsupported parameters from gksu commands (fehlix)
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 31 Jan 2020 19:26:53 -0500
+
+mx-pkexec (19.07.01) mx; urgency=medium
+
+  * update for user level lang settings 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 31 Jul 2019 20:00:38 -0400
+
+mx-pkexec (19.06.01) mx; urgency=medium
+
+  * add symlink to gksu
+  * add provides for gksu 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 30 Jun 2019 12:51:09 -0400
+
+mx-pkexec (18.11.01) mx; urgency=medium
+
+  * update to handle more arguements (fehlix) 
+
+ -- dolphin <dolphin@littlebyte>  Sun, 18 Nov 2018 09:38:34 -0500
+
+mx-pkexec (18.10.01) mx; urgency=medium
+
+  * Initial release. (fehlix)
+
+ -- dolphin_oracle <dolphinoracle@gmail.com>  Tue, 09 Oct 2018 17:45:36 -0400

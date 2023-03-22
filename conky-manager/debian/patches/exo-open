@@ -1,0 +1,79 @@
+Description: try first exo-open and next xdg-open
+
+--- conky-manager-2.7+dfsg1.orig/src/Utility.vala
++++ conky-manager-2.7+dfsg1/src/Utility.vala
+@@ -1172,14 +1172,29 @@ namespace TeeJee.System{
+ 		
+ 		string path;
+ 		
+-		if (xdg_open_try_first){
+-			//try using xdg-open
+-			path = get_cmd_path ("xdg-open");
+-			if ((path != null)&&(path != "")){
+-				return execute_command_script_async ("xdg-open \"" + dir_path + "\"");
+-			}
++		//try using exo-open
++		path = get_cmd_path ("exo-open");
++		if ((path != null)&&(path != "")){
++		    xdg_open_try_first = false; 
++			return execute_command_script_async ("exo-open \"" + dir_path + "\"");
++		}
++		//try using xdg-open
++		path = get_cmd_path ("xdg-open");
++		if ((path != null)&&(path != "")){
++		    xdg_open_try_first = true; 
++			return execute_command_script_async ("xdg-open \"" + dir_path + "\"");
+ 		}
+ 		
++		path = get_cmd_path ("caja");
++		if ((path != null)&&(path != "")){
++			return execute_command_script_async ("caja \"" + dir_path + "\"");
++		}
++
++		path = get_cmd_path ("dolphin");
++		if ((path != null)&&(path != "")){
++			return execute_command_script_async ("dolphin \"" + dir_path + "\"");
++		}
++
+ 		path = get_cmd_path ("nemo");
+ 		if ((path != null)&&(path != "")){
+ 			return execute_command_script_async ("nemo \"" + dir_path + "\"");
+@@ -1222,11 +1237,18 @@ namespace TeeJee.System{
+ 		
+ 		string path;
+ 		
++		//try using exo-open
+ 		path = get_cmd_path ("exo-open");
+ 		if ((path != null)&&(path != "")){
+ 			return execute_command_script_async ("exo-open \"" + txt + "\"");
+ 		}
+ 
++		//try using xdg-open
++		path = get_cmd_path ("xdg-open");
++		if ((path != null)&&(path != "")){
++			return execute_command_script_async ("xdg-open \"" + txt + "\"");
++		}
++		
+ 		path = get_cmd_path ("gedit");
+ 		if ((path != null)&&(path != "")){
+ 			return execute_command_script_async ("gedit --new-document \"" + txt + "\"");
+@@ -1241,11 +1263,19 @@ namespace TeeJee.System{
+ 		
+ 		string path;
+ 		
++		//try using exo-open
+ 		path = get_cmd_path ("exo-open");
+ 		if ((path != null)&&(path != "")){
+ 			return execute_command_script_async ("exo-open \"" + url + "\"");
+ 		}
+ 
++		//try using xdg-open
++		path = get_cmd_path ("xdg-open");
++		if ((path != null)&&(path != "")){
++			return execute_command_script_async ("xdg-open \"" + url + "\"");
++		}
++		
++
+ 		path = get_cmd_path ("firefox");
+ 		if ((path != null)&&(path != "")){
+ 			return execute_command_script_async ("firefox \"" + url + "\"");

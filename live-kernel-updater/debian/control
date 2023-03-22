@@ -1,0 +1,14 @@
+Source: live-kernel-updater
+Section: system
+Priority: required
+Maintainer: anticapitalista <antiX@operamail.com>
+Build-Depends: debhelper (>= 9.20120115)
+Standards-Version: 3.9.8
+Homepage: https://gitlab.com/antiX-Linux/live-kernel-updater
+
+Package: live-kernel-updater
+Architecture: all
+Depends: cli-shell-utils 
+Description: This is a command line program that updates the kernel on a antiX or MX
+ live-usb. It can update a running live-usb or a live-usb that is plugged
+ into a host system.        

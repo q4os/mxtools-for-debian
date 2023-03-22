@@ -1,0 +1,19 @@
+Source: mx-viewer
+Section: system
+Priority: optional
+Maintainer: Adrian <adrian@mxlinux.org>
+Build-Depends: debhelper (>=10),
+               qtwebengine5-dev,
+               qtbase5-dev,
+               qttools5-dev-tools
+Standards-Version: 3.9.8
+Homepage: https://github.com/AdrianTM/mx-viewer
+
+Package: mx-viewer
+Architecture: any
+Depends: ${misc:Depends}, ${shlibs:Depends}
+Provides: x-www-browser
+Description: Displays a URL in a window
+ MX Viewer displays a URL in a new window. It's an utility program used for
+ displaying help information by various MX Linux utilities. It can also be used
+ as a very basic internet browser.

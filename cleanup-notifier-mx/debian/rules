@@ -1,0 +1,19 @@
+#!/usr/bin/make -f
+
+export DH_ALWAYS_EXCLUDE=CVS:.svn:GIT:.git:debs
+export DH_VERBOSE=1
+
+PKGNAME    := $(shell dpkg-parsechangelog -SSource)
+PKGVERSION := $(shell dpkg-parsechangelog -SVersion)
+
+override_dh_auto_clean:
+	dh_auto_clean
+	rm meson.build 2>/dev/null || :
+	rm debs/* 2>/dev/null      || :
+
+override_dh_auto_configure:
+	sed 's/@PROJECT_NAME@/$(PKGNAME)/g; s/@PROJECT_VERSION@/$(PKGVERSION)/g' meson.build.in > meson.build
+	dh_auto_configure
+%:
+	dh $@  --builddirectory=../mesonbuild
+

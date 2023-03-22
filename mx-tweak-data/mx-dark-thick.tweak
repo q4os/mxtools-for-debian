@@ -1,0 +1,24 @@
+#mx-tweak theme file
+
+Name=MX Dark Thick Borders
+
+#panel_settings
+
+background-color=none
+background-image=none
+background-style=0
+
+#xsettings
+xsettings_gtk_theme=mx-comfort-dark
+xsettings_icon_theme=Papirus-mxbluedark
+
+#xfwm4
+xfwm4_window_decorations=Arc-dark-thick-border
+
+#preview screenshot
+screenshot=mx-dark.jpg
+
+
+
+
+

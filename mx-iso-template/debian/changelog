@@ -1,0 +1,519 @@
+mx-iso-template (23.01.02mx21+deb11u13) stable; urgency=medium
+
+  * MX Tools release
+
+ -- Dolphin Oracle <administrator@localdomain>  Wed, 22 Mar 2023 10:43:53 +0100
+
+mx-iso-template (23.01.02mx21) mx; urgency=medium
+
+  * remove initrd-release 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 04 Jan 2023 19:50:04 -0500
+
+mx-iso-template (23.01.01mx21) mx; urgency=medium
+  
+  [fehlix]
+  * additional kernel boot parameter checking, filter tokens
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Tue, 03 Jan 2023 22:36:41 -0500
+
+mx-iso-template (22.12.04mx21) mx; urgency=medium
+
+  [fehlix]
+  * update latest upstream live-initrd
+  * gfxsave and non-live-paramters (not to save) built-in kernel paramters
+  * also added for a fs-label, when live-creating rootfs/homefs 
+  * live-grub with latest 2.06 for bullseye
+  * live-grub scripts with script adjustments
+  * latest live-grub translations from transifex
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Tue, 27 Dec 2022 21:07:34 -0500
+
+mx-iso-template (22.12.03mx21) mx; urgency=medium
+
+  * fix keyboard options, update initrd 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 19 Dec 2022 23:32:39 -0500
+
+mx-iso-template (22.12.02mx21) mx; urgency=medium
+
+  * bug fixes and typo fixes from antiX forum member
+  * see gitlab commit for link to forum post
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 18 Dec 2022 11:18:59 -0500
+
+mx-iso-template (22.12.01mx21+1) mx; urgency=medium
+
+  * testing changes
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 17 Dec 2022 15:09:37 -0500
+
+mx-iso-template (22.12.01mx21) mx; urgency=medium
+
+  * rebuild 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Tue, 29 Nov 2022 06:46:44 -0500
+
+mx-iso-template (22.11.mx21) mx; urgency=medium
+
+  * Add compressed kernel-modules handling
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 28 Nov 2022 18:28:27 -0500
+
+mx-iso-template (22.10.mx21) mx; urgency=medium
+
+  * Generalize for shells located in /usr/bin/.*sh not only /bin/.*sh
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 31 Oct 2022 22:14:58 -0400
+
+mx-iso-template (22.03.01mx21) mx; urgency=medium
+
+  * adjust some strings (fehlix) 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 26 Mar 2022 09:36:41 -0400
+
+mx-iso-template (21.09.04mx21) mx; urgency=medium
+
+  * update live help 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 26 Sep 2021 15:20:14 -0400
+
+mx-iso-template (21.09.03mx21) mx; urgency=medium
+
+  * update grub boot menus
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 25 Sep 2021 18:55:49 -0400
+
+mx-iso-template (21.09.02mx21) mx; urgency=medium
+
+  * update live system 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 20 Sep 2021 21:08:30 -0400
+
+mx-iso-template (21.09.01mx21) mx; urgency=medium
+
+  * update boot and initrd templates 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 03 Sep 2021 19:20:47 -0400
+
+mx-iso-template (21.08.03mx21) mx; urgency=medium
+
+  * update boot templates 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 25 Aug 2021 18:35:36 -0400
+
+mx-iso-template (21.08.02mx21) mx; urgency=medium
+
+  * update initrd (nvme, mmc fixes)
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 15 Aug 2021 20:20:30 -0400
+
+mx-iso-template (21.08.01mx21) mx; urgency=medium
+
+  * update lib removals
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 09 Aug 2021 22:52:19 -0400
+
+mx-iso-template (21.07.02mx21) mx; urgency=medium
+
+  * update latest live boot templates 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 17 Jul 2021 20:59:09 -0400
+
+mx-iso-template (21.07.01mx21) mx; urgency=medium
+
+  * boot config localization changes 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 07 Jul 2021 19:27:14 -0400
+
+mx-iso-template (21.06.01mx21) mx; urgency=medium
+
+  * update to latest initrd and boot folders
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 28 Jun 2021 20:28:43 -0400
+
+mx-iso-template (21.04.01mx21) mx; urgency=medium
+
+  * update initrd-release file 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 03 Apr 2021 20:18:53 -0400
+
+mx-iso-template (21.03.02mx21) mx; urgency=medium
+
+  * fix regression on resolvconf 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 14 Mar 2021 12:59:59 -0400
+
+mx-iso-template (21.03.01mx21) mx; urgency=medium
+
+  * update initrd 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 04 Mar 2021 18:28:34 -0500
+
+mx-iso-template (21.02.03+1mx21) mx; urgency=medium
+
+  * changes for bullseye 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 20 Feb 2021 18:13:20 -0500
+
+mx-iso-template (21.02.03) mx; urgency=medium
+
+  * adjust indents spacing in grub.cfg 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 20 Feb 2021 15:48:04 -0500
+
+mx-iso-template (21.02.02) mx; urgency=medium
+
+  * change efi submenu
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 20 Feb 2021 14:37:37 -0500
+
+mx-iso-template (21.02.01) mx; urgency=medium
+
+  * change efi boot menu text
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 20 Feb 2021 12:52:18 -0500
+
+mx-iso-template (20.12.03) mx; urgency=medium
+
+  * fix if statement in localize_repo 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 28 Dec 2020 19:03:30 -0500
+
+mx-iso-template (20.12.02) mx; urgency=medium
+
+  * check for localize-repo before running it. 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 28 Dec 2020 16:22:33 -0500
+
+mx-iso-template (20.12.01) mx; urgency=medium
+
+  * add microcode loading (bitjam)
+  * revise valid_user check (d.o.)
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 26 Dec 2020 18:30:16 -0500
+
+mx-iso-template (20.10.06) mx; urgency=medium
+
+  * fix for failsafe and uefi boots 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Tue, 17 Nov 2020 19:26:16 -0500
+
+mx-iso-template (20.10.05) mx; urgency=medium
+
+  * update efi.img with complete set of efi stubs 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 26 Oct 2020 19:00:06 -0400
+
+mx-iso-template (20.10.04) mx; urgency=medium
+
+  * add splasht to default params 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Tue, 13 Oct 2020 22:25:58 -0400
+
+mx-iso-template (20.10.03) mx; urgency=medium
+
+  * revise gfxpayload 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Tue, 13 Oct 2020 21:58:18 -0400
+
+mx-iso-template (20.10.02) mx; urgency=medium
+
+  * update live translations of gfx boot 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 11 Oct 2020 09:32:52 -0400
+
+mx-iso-template (20.10.01) mx; urgency=medium
+
+  * update live system translations 
+  * minor code changes
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 10 Oct 2020 18:30:31 -0400
+
+mx-iso-template (20.09.01) mx; urgency=medium
+
+  * remove alt_shift switch from defaults 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 12 Sep 2020 21:57:41 -0400
+
+mx-iso-template (20.02.01) mx; urgency=medium
+
+  * update efi.img
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 29 Feb 2020 20:51:08 -0500
+
+mx-iso-template (19.12.01) mx; urgency=medium
+
+  * add .disk folder and info file 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 13 Dec 2019 18:18:17 -0500
+
+mx-iso-template (19.11.02) mx; urgency=medium
+
+  * update live-umount and persist-autosave 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 30 Nov 2019 12:03:29 -0500
+
+mx-iso-template (19.11.01) mx; urgency=medium
+
+  * update live-umount in iso-template 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 21 Nov 2019 20:40:31 -0500
+
+mx-iso-template (19.10.03) mx; urgency=medium
+
+  * fix bad build of bootloader configs
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 19 Oct 2019 16:24:17 -0400
+
+mx-iso-template (19.10.02) mx; urgency=medium
+
+  * update to luks fix
+  * other upstream changes 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 18 Oct 2019 19:52:01 -0400
+
+mx-iso-template (19.10.01) mx; urgency=medium
+
+  * update to latest antiX upstream 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 12 Oct 2019 12:36:03 -0400
+
+mx-iso-template (19.06.03) mx; urgency=medium
+
+  * try-mount patch applied 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 23 Aug 2019 21:34:33 -0400
+
+mx-iso-template (19.06.02) mx; urgency=medium
+
+  * update to latest initrd and gfxboot from antix  (bitjam)
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 30 Jun 2019 21:47:28 -0400
+
+mx-iso-template (19.06.01) mx; urgency=medium
+
+  * buster initial build (for testing) 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 01 Jun 2019 16:27:52 -0400
+
+mx-iso-template (19.02.01) mx; urgency=medium
+
+  * additional uefi grub fixes 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 06 Feb 2019 19:47:46 -0500
+
+mx-iso-template (19.1.01) mx; urgency=medium
+
+  * update for uefi grub boots 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 27 Jan 2019 10:05:52 -0500
+
+mx-iso-template (18.12.01) mx; urgency=medium
+
+  * minor edit to grub text 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 24 Dec 2018 11:05:00 -0500
+
+mx-iso-template (18.11.01) mx; urgency=medium
+
+  * remove lightdm-disable from init 
+
+ -- dolphin <dolphin@littlebyte>  Thu, 15 Nov 2018 19:08:14 -0500
+
+mx-iso-template (18.10.01) mx; urgency=medium
+
+  * remove beta language from theme files 
+
+ -- dolphin <dolphin@littlebyte>  Tue, 16 Oct 2018 18:52:23 -0400
+
+mx-iso-template (18.05.01mx17) mx; urgency=medium
+
+  * minor change to grub text for UEFI boots 
+
+ -- dolphin <dolphin@mx>  Wed, 30 May 2018 19:45:19 -0400
+
+mx-iso-template (18.03.01mx17) mx; urgency=medium
+
+  * fix for live-usb-storage mount on ntfs systems included (upstream antix) 
+
+ -- dolphin <dolphin@mx>  Sat, 31 Mar 2018 15:12:27 -0400
+
+mx-iso-template (18.01.01mx17) mx; urgency=medium
+
+  * fix bug in grub.cfg
+
+ -- dolphin <dolphinoracle@gmail.com>  Sun, 14 Jan 2018 18:10:51 -0500
+
+mx-iso-template (17.12.02mx17) mx; urgency=medium
+
+  * mx17 mark2 
+
+ -- dolphin <dolphinoracle@gmail.com>  Tue, 05 Dec 2017 21:15:33 -0500
+
+mx-iso-template (17.12mx17) mx; urgency=medium
+
+  * added translations to initrd  
+
+ -- dolphin <dolphinoracle@gmail.com>  Sun, 03 Dec 2017 21:17:23 -0500
+
+mx-iso-template (17.11.04mx17) mx; urgency=medium
+
+  * update to new default bootloader graphics
+  
+ -- dolphin <dolphinoracle@gmail.com>  Wed, 22 Nov 2017 11:30:53 -0400
+
+mx-iso-template (17.11.03mx17) mx; urgency=medium
+
+  * beta 2
+  
+ -- dolphin <dolphinoracle@gmail.com>  Wed, 15 Nov 2017 19:34:47 -0400
+
+mx-iso-template (17.11.02mx17) mx; urgency=medium
+
+  * revised snapshot template
+  
+ -- dolphin <dolphinoracle@gmail.com>  Fri, 10 Nov 2017 18:46:17 -0400
+
+mx-iso-template (17.11.01mx17) mx; urgency=medium
+
+  * fixing b1 template
+  
+ -- dolphin <dolphinoracle@gmail.com>  Tue, 07 Nov 2017 17:07:08 -0400
+
+mx-iso-template (17.11mx17) mx; urgency=medium
+
+  * template for beta 1
+
+ -- dolphin <dolphinoracle@gmail.com>  Sun, 05 Nov 2017 09:20:53 -0400
+
+mx-iso-template (17.10mx17+1) mx; urgency=medium
+
+  * generalize template
+
+ -- Adrian <adrian@mxlinux.org>  Sat, 30 Sep 2017 10:29:46 -0400
+
+mx-iso-template (17.10mx17) mx; urgency=medium
+
+  * Template for MX17
+
+ -- Adrian <adrian@mxlinux.org>  Sat, 30 Sep 2017 00:00:34 -0400
+
+mx-iso-template (16.17.4) mx; urgency=medium
+
+  * change gfxboot font so non-English F key entries show 
+
+ -- anticapitalista <antix@operamail.com>  Fri, 09 Dec 2016 21:13:26 +0200
+
+mx-iso-template (16.17.3) mx; urgency=medium
+
+  * new build
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 09 Dec 2016 12:23:33 -0500
+
+iso-template (16.17.2) mx; urgency=medium
+
+  * Restore the version file to match the .c32 files we're using in iso-template 
+
+ -- anticapitalista <antix@operamail.com>  Wed, 07 Dec 2016 20:07:25 +0200
+
+iso-template (16.17.1) mx; urgency=medium
+
+  * Rebuild for the repository, increment version to have it upgrade.
+  * Drop mx16 from version.
+  * debian/control:
+    - Update my Maintainer string.
+    - Drop unused Depends: variables.
+    - Rename package as mx-iso-template.
+    - make iso-template a transitional package.
+    - Update descriptions.
+
+ -- Steven Pusser <stevep@mxlinux.org>  Mon, 05 Dec 2016 10:48:49 -0800
+
+iso-template (16.17mx16) mx; urgency=medium
+
+  * Add getch-64 to get space-evaders working on 64-bit again
+  * Bump init version
+  * Updated all translations
+  * Include attempted Intel fixes
+
+ -- anticapitalista <antix@operamail.com>  Fri, 02 Dec 2016 12:03:09 +0200
+
+iso-template (16.16mx16) mx; urgency=medium
+
+  * added the console font for Kazakh
+  * updated tz and lang menus to match gfxboot menus
+  * Tried to fix a bug in loading fonts
+
+ -- anticapitalista <antix@operamail.com>  Thu, 24 Nov 2016 13:41:38 +0200
+
+iso-template (16.15mx16) mx; urgency=medium
+
+  * Added Kazakh support
+  * Fix introduced bug in grub.cfg wrong path to theme
+
+ -- anticapitalista <antix@operamail.com>  Thu, 17 Nov 2016 12:04:39 +0200
+
+iso-template (16.14mx16) mx; urgency=medium
+
+  * Using latest changes to initrd.gz and iso-template 
+
+ -- anticapitalista <antix@operamail.com>  Fri, 11 Nov 2016 14:12:09 +0200
+
+iso-template (16.13mx16) mx; urgency=medium
+
+  * isolinux.cfg and syslinux.cfg files - added non-pae and custopn in menu" 
+
+ -- anticapitalista <antix@operamail.com>  Thu, 03 Nov 2016 20:22:14 +0200
+
+iso-template (16.12mx16) mx; urgency=medium
+
+  * added initrd changes need for MX-16
+  * added iso-template changes needed for MX-16
+  * kept old MX-15 folder in boot/grub/themes 
+
+ -- anticapitalista <antix@operamail.com>  Thu, 03 Nov 2016 19:07:42 +0200
+
+iso-template (16.11mx16) mx; urgency=medium
+
+  * rebuilt with mx15 files
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 03 Nov 2016 10:47:46 -0400
+
+iso-template (16.8mx15) mx; urgency=medium
+
+  * disable mtpd service by default
+
+ -- Adrian <adrian@mxlinux.org>  Sat, 13 Aug 2016 10:05:32 -0400
+
+iso-template (16.6mx15+1) mx; urgency=medium
+
+  * bug fix
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 15 Jun 2016 15:29:21 -0400
+
+iso-template (16.6mx15) mx; urgency=medium
+
+  * new template-initrd.gz and iso-template
+
+ -- Adrian <adrian@mxlinux.org>  Tue, 14 Jun 2016 15:12:18 -0400
+
+iso-template (16.1mx15) mx; urgency=medium
+
+  * new template-initrd.gz
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 07 Jan 2016 12:08:13 -0500
+
+iso-template (15.12.1mx15) mx; urgency=medium
+
+  * initrd.gz RC1 bugfixes
+
+ -- anticapitalista <antiX@operamail.com>  Mon, 21 Dec 2015 16:10:32 +0200
+
+
+iso-template (15.12mx15) mx; urgency=medium
+
+  * initial package
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 18 Dec 2015 14:52:32 -0500
+

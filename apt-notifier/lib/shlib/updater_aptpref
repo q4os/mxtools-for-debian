@@ -1,0 +1,67 @@
+#!/bin/bash
+
+# updater_aptpref
+#
+# helper script to prepare apt preference handling
+# for synaptic pinned packages
+#
+# part of apt-notifier package
+#
+# this bash scripted is meant to be "sourced"
+# at /usr/lib/apt-notifier/lib/updater_aptpref
+
+# prepare pinned package handling
+AptPref_Opts=""
+AptPreferences=""
+PinnedPreferences=""
+SynapticPreferences=/var/lib/synaptic/preferences
+
+# make sure we have /sbin in PATH
+[ -z "${PATH##*:/sbin:*}" ] || PATH="$PATH:/sbin:/usr/sbin"
+
+# check we have packages pinned by Synaptic
+if [ -r ${SynapticPreferences} ]          && \
+   which synaptic >/dev/null              && \
+   grep -sq "^Package" ${SynapticPreferences}; then
+   PinnedPreferences=${SynapticPreferences}
+fi
+
+if [ -n "$PinnedPreferences" ]; then
+    # ok we have some Synaptic-pinned packages
+    # get apt's preferences file from apt-config
+    AptPreferences=/etc/apt/preferences
+    eval $(apt-config shell AptPreferences Dir::Etc::preferences/f)
+
+    # check apt's main preferences file exists and has any settings
+    if [ -r ${AptPreferences} ] && \
+       grep -sqE '^[[:space:]]*[^#[:space:]]+' ${AptPreferences}; then
+       # some settings found in apt's main preferences
+       # ok we merge both into one temporary preferences file
+       # placed into a temporary directory
+       # ckeck we have a standard xdg-runtime-dir
+       # owned by the user and read/writable
+       : ${EUID:=$(id -u)}
+       _TD=/run/user/${EUID}
+       if [ -d $_TD ] && [ -O $_TD ] && [ -r $_TD ] && [ -w $_TD ]; then
+           tmpdir_apt_pref=$_TD
+           unset _TD
+       elif [ -d /dev/shm ] && [ -r /dev/shm ] && [ -w /dev/shm ]; then
+           tmpdir_apt_pref=/dev/shm
+       else
+           tmpdir_apt_pref=/tmp
+       fi
+       tmp_apt_pref=$(mktemp -p $tmpdir_apt_pref -t apt_pref.${EUID}.XXXXXXXXXXXX)
+       chmod 644 $tmp_apt_pref
+       # prepare tidy up on exit
+       trap "rm -f $tmp_apt_pref" EXIT
+       cat ${AptPreferences}    >  ${tmp_apt_pref}
+       echo ""                  >> ${tmp_apt_pref}
+       cat ${PinnedPreferences} >> ${tmp_apt_pref}
+       AptPref_Opts=" -o Dir::Etc::preferences=${tmp_apt_pref}"
+    else
+       # no settings found in apt's main preferences
+       # so we use synaptic's preferences file directly
+       AptPref_Opts=" -o Dir::Etc::preferences=${PinnedPreferences}"
+    fi
+fi
+

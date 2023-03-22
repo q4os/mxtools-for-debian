@@ -1,0 +1,572 @@
+mx-tools (22.10.01+deb11u13) stable; urgency=medium
+
+  * MX Tools release
+
+ -- Dolphin Oracle <administrator@localdomain>  Wed, 22 Mar 2023 10:43:56 +0100
+
+mx-tools (22.10.01) mx; urgency=medium
+
+  * fix string source files 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 28 Oct 2022 15:49:53 -0400
+
+mx-tools (22.10) mx; urgency=medium
+
+  * translation refresh 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 26 Oct 2022 20:08:01 -0400
+
+mx-tools (22.8) mx; urgency=medium
+
+  * Remove mx-viewer dependency
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 03 Aug 2022 01:13:40 -0400
+
+mx-tools (22.7) mx; urgency=medium
+
+  * translation refresh 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 23 Jul 2022 12:31:21 -0400
+
+mx-tools (22.6) mx; urgency=medium
+
+  * Fix: launching apps in terminal
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 30 Jun 2022 19:20:17 -0400
+
+mx-tools (21.11) mx; urgency=medium
+
+  * Fix localization of displayed tool names and comments
+
+ -- fehlix <fehlix@mxlinux.org>  Tue, 02 Nov 2021 17:43:19 -0400
+
+mx-tools (21.8.02) mx; urgency=medium
+
+  * Smoother resize; don't readd the buttons if no need to expand
+  * Allow setting icon size in mx-tools.conf, e.g., icon_size=40
+  * Add vertical stretch (it looks bad without stretch when searching). 
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 27 Aug 2021 21:23:03 -0400
+
+mx-tools (21.8.01) mx; urgency=medium
+
+  * Rearrange buttons when window is resized
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 02 Aug 2021 10:43:39 -0400
+
+mx-tools (21.8) mx; urgency=medium
+
+  * Remove "MX-" only from the begining of names 
+
+ -- Adrian <adrian@mxlinux.org>  Sun, 01 Aug 2021 16:36:06 -0400
+
+mx-tools (21.7) mx; urgency=medium
+
+  * Faster and more complete icon search
+  * Put .conf file in ~/.config/MX-Linux folder
+
+ -- Adrian <adrian@mxlinux.org>  Tue, 20 Jul 2021 15:51:26 -0400
+
+mx-tools (21.02.01) mx; urgency=medium
+
+  * fix fluxbox detection
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 15 Feb 2021 17:50:39 -0500
+
+mx-tools (21.02) mx; urgency=medium
+
+  * add fluxbox filter 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 13 Feb 2021 19:45:39 -0500
+
+mx-tools (20.12) mx; urgency=medium
+
+  * added larger size icon
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 11 Dec 2020 18:10:03 -0500
+
+mx-tools (20.11) mx; urgency=medium
+
+  * faster launch
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 23 Nov 2020 18:48:55 -0500
+
+mx-tools (20.08) mx; urgency=medium
+
+  * adjust hide individual tools from the menu
+  * adjust version number to 20.08
+
+ -- fehlix <fehlix@mxlinux.org>  Sat, 08 Aug 2020 00:17:03 +0200
+mx-tools (19.10) mx; urgency=medium
+
+  * adjust size
+
+ -- Adrian <adrian@mxlinux.org>  Sat, 05 Oct 2019 10:19:30 -0400
+mx-tools (19.10) mx; urgency=medium
+
+  * adjust size
+
+ -- Adrian <adrian@mxlinux.org>  Sat, 05 Oct 2019 10:19:30 -0400
+
+mx-tools (19.9.02) mx; urgency=medium
+
+  * udpated translations
+
+ -- Adrian <adrian@mxlinux.org>  Sun, 29 Sep 2019 21:09:27 -0400
+
+mx-tools (19.9.01) mx; urgency=medium
+
+  * improve hide function 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 14 Sep 2019 20:44:44 -0400
+
+mx-tools (19.9) mx; urgency=medium
+
+  * Escape ampersands so they appear correctly.
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 05 Sep 2019 23:24:49 -0400
+
+mx-tools (19.8.2) mx; urgency=medium
+
+  * modify mx-tools to not require root password
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 26 Aug 2019 19:55:29 -0400
+
+mx-tools (19.8.1) mx; urgency=medium
+
+  * allow restoring window size if started maximized
+
+ -- Adrian <adrian@mxlinux.org>  Sat, 24 Aug 2019 03:20:36 -0400
+
+mx-tools (19.8) mx; urgency=medium
+
+  * fix location settings
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 22 Aug 2019 16:07:35 -0400
+
+mx-tools (19.7) mx; urgency=medium
+
+  * fix window buttons for Buster
+
+ -- Adrian <adrian@mxlinux.org>  Sun, 07 Jul 2019 14:21:36 -0400
+
+mx-tools (19.4) mx; urgency=medium
+
+  * updated translations
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 05 Apr 2019 11:59:15 -0400
+
+mx-tools (19.1) mx; urgency=medium
+
+  * updated translations
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 23 Jan 2019 16:45:10 -0500
+
+mx-tools (18.11) mx; urgency=medium
+
+  * updated translations
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 30 Nov 2018 15:00:15 -0500
+
+mx-tools (18.10) mx; urgency=medium
+
+  * updated translations
+
+ -- Adrian <adrian@mxlinux.org>  Sun, 14 Oct 2018 20:27:05 -0400
+
+mx-tools (18.8) mx; urgency=medium
+
+  * fix icon for other themes
+
+ -- Adrian <adrian@mxlinux.org>  Sat, 11 Aug 2018 15:10:52 -0400
+
+mx-tools (18.7+1) mx; urgency=medium
+
+  * exclude items that are not supposed to be displayed either in Live or Installed environment
+
+ -- Adrian <adrian@mxlinux.org>  Sun, 29 Jul 2018 23:50:29 -0400
+
+mx-tools (18.7) mx; urgency=medium
+
+  * minor fix
+
+ -- Adrian <adrian@mxlinux.org>  Sat, 28 Jul 2018 01:22:51 -0400
+
+mx-tools (18.6.1) mx; urgency=medium
+
+  * added changelog button
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 28 Jun 2018 17:12:00 -0400
+
+mx-tools (18.6) mx; urgency=medium
+
+  * new translations
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 18 Jun 2018 17:53:58 -0400
+
+mx-tools (18.3) mx; urgency=medium
+
+  * new translations
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 02 Mar 2018 12:02:14 -0500
+
+mx-tools (18.2) mx; urgency=medium
+
+  * new translations
+
+ -- Adrian <adrian@mxlinux.org>  Sat, 10 Feb 2018 02:28:18 -0500
+
+mx-tools (18.01) mx; urgency=medium
+
+  * no window resize when searching
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 29 Jan 2018 18:03:00 -0500
+
+mx-tools (17.12) mx; urgency=medium
+
+  * new translations
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 04 Dec 2017 15:14:42 -0500
+
+mx-tools (17.11) mx; urgency=medium
+
+  * open mx-manual if present
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 17 Nov 2017 08:43:32 -0500
+
+mx-tools (17.10+3) mx; urgency=medium
+
+  * remove mx-flash and mx-findshares recommends
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 16 Oct 2017 14:03:47 -0400
+
+mx-tools (17.10+2) mx; urgency=medium
+
+  * larger icons
+
+ -- Adrian <adrian@mxlinux.org>  Sat, 14 Oct 2017 15:10:28 -0400
+
+mx-tools (17.10+1) mx; urgency=medium
+
+  * changed icon
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 13 Oct 2017 23:53:18 -0400
+
+mx-tools (17.10) mx; urgency=medium
+
+  * don't display empty categories
+
+ -- Adrian <adrian@mxlinux.org>  Sun, 01 Oct 2017 17:00:28 -0400
+
+mx-tools (17.9) mx; urgency=medium
+
+  * new icon
+  * save location and size of app at exit
+
+ -- Adrian <adrian@mxlinux.org>  Sat, 30 Sep 2017 12:26:15 -0400
+
+mx-tools (17.6mx16) mx; urgency=medium
+
+  * updated translations
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 02 Jun 2017 16:39:03 -0400
+
+mx-tools (17.5mx16) mx; urgency=medium
+
+  * update icons
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 10 May 2017 15:55:58 -0400
+
+mx-tools (17.4mx16+1) mx; urgency=medium
+
+  * fix displaying names in different languages
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 17 Apr 2017 11:11:49 -0400
+
+mx-tools (17.4mx16) mx; urgency=medium
+
+  * new translations
+
+ -- Adrian <adrian@mxlinux.org>  Tue, 04 Apr 2017 19:55:04 -0400
+
+mx-tools (17.3mx16) mx; urgency=medium
+
+  * hide Xfce-only items when not running in Xfce
+
+ -- Adrian <adrian@mxlinux.org>  Sun, 12 Mar 2017 15:45:45 -0400
+
+mx-tools (16.11mx16+4) mx; urgency=medium
+
+  * new translations 
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 30 Nov 2016 12:55:42 -0500
+
+mx-tools (16.11mx16+3) mx; urgency=medium
+
+  * modified window width calculation
+
+ -- dolphinoracle <dolphinoracle@gmail.com>  Wed, 16 Nov 2016 13:49:42 -0500
+
+mx-tools (16.11mx16+2) mx; urgency=medium
+
+  * new translations
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 16 Nov 2016 13:49:42 -0500
+
+mx-tools (16.11mx16+1) mx; urgency=medium
+
+  * remove live-kernel-update when not running in a live environment
+
+ -- Adrian <adrian@mxlinux.org>  Sun, 06 Nov 2016 18:10:20 -0500
+
+mx-tools (16.11mx16) mx; urgency=medium
+
+  * adjust windows width
+
+ -- Adrian <adrian@mxlinux.org>  Tue, 01 Nov 2016 09:51:52 -0400
+
+mx-tools (16.10mx16+5) mx; urgency=medium
+
+  * bug fix
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 27 Oct 2016 10:51:31 -0400
+
+mx-tools (16.10mx16+4) mx; urgency=medium
+
+  * don't show mx-remaster unless running live
+
+ -- dolphinoracle <dolphinoracle@gmail.com>  Wed, 26 Oct 2016 12:30:17 -0400
+
+mx-tools (16.10mx16+3) mx; urgency=medium
+
+  * look follows the desktop theme
+
+ -- Adrian <adrian@mxlinux.org>  Tue, 25 Oct 2016 10:50:35 -0400
+
+mx-tools (16.10mx16+2) mx; urgency=medium
+
+  * removed depend on mx-docs per anti's request
+
+ -- dolphinoracle <dolphinoracle@gmail.com>  Sun, 16 Oct 2016 12:30:17 -0400
+
+mx-tools (16.10mx16+1) mx; urgency=medium
+
+  * added parsing of Terminal= line for cli apps
+
+ -- dolphinoracle <dolphinoracle@gmail.com>  Sat, 15 Oct 2016 19:30:17 -0400
+
+mx-tools (16.10mx16) mx; urgency=medium
+
+  * changed URLs
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 10 Oct 2016 14:30:17 -0400
+
+mx-tools (16.8mx15) mx; urgency=medium
+
+  * removed postinstall command
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 04 Aug 2016 12:52:13 -0400
+
+mx-tools (16.6mx15+2) mx; urgency=medium
+
+  * added search
+
+ -- Adrian <adrian@mxlinux.org>  Sat, 11 Jun 2016 11:03:38 -0400
+
+mx-tools (16.6mx15+1) mx; urgency=medium
+
+  * minor visual change
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 08 Jun 2016 10:19:59 -0400
+
+mx-tools (16.6mx15) mx; urgency=medium
+
+  * code re-write to add buttons for MX tools automatically
+
+ -- Adrian <adrian@mxlinux.org>  Sun, 05 Jun 2016 15:28:20 -0400
+
+mx-tools (16.5mx15+1) mx; urgency=medium
+
+  * new translations
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 06 May 2016 10:15:02 -0400
+
+mx-tools (16.5mx15) mx; urgency=medium
+
+  * minor changes: renamed button, adjusted hide tools in the menu
+
+ -- Adrian <adrian@mxlinux.org>  Tue, 03 May 2016 08:45:46 -0400
+
+mx-tools (16.2mx15+1) mx; urgency=medium
+
+  * new translations
+
+ -- Adrian <adrian@mxlinux.org>  Sat, 20 Feb 2016 09:43:38 -0500
+
+mx-tools (16.2mx15) mx; urgency=medium
+
+  * replaced Switch User with Repo Manager
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 08 Feb 2016 10:39:38 -0500
+
+mx-tools (15.12.1mx15) mx; urgency=medium
+
+  * hide GUI when displaying help/license
+
+ -- Adrian <adrian@mxlinux.org>  Tue, 22 Dec 2015 18:38:12 -0500
+
+mx-tools (15.12mx15) mx; urgency=medium
+
+  * new translations, change location icons
+
+ -- Adrian <adrian@mxlinux.org>  Tue, 01 Dec 2015 10:53:08 -0500
+
+mx-tools (15.11.6mx15) mx; urgency=medium
+
+  * replaced antiX2usb with unetbootin
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 20 Nov 2015 11:44:54 -0500
+
+mx-tools (15.11.5mx15) mx; urgency=medium
+
+  * edit categories in .debian file
+
+ -- Adrian <adrian@mxlinux.org>  Sat, 14 Nov 2015 07:52:57 -0500
+
+mx-tools (15.11.4mx15) mx; urgency=medium
+
+  * fix icon location
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 13 Nov 2015 22:30:22 -0500
+
+mx-tools (15.11.3mx15) mx; urgency=medium
+
+  * added 48x48 icon
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 13 Nov 2015 12:38:49 -0500
+
+mx-tools (15.11.2mx15) mx; urgency=medium
+
+  * changed icon location
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 12 Nov 2015 17:46:14 -0500
+
+mx-tools (15.11.1mx15) mx; urgency=medium
+
+  * added panel orientation option
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 11 Nov 2015 19:13:29 -0500
+
+mx-tools (15.11mx15) mx; urgency=medium
+
+  * layout fix
+
+ -- Adrian <adrian@mxlinux.org>  Tue, 10 Nov 2015 16:15:10 -0500
+
+mx-tools (15.10.1mx15) mx; urgency=medium
+
+  * added new translations
+
+ -- Adrian <adrian@mxlinux.org>  Sat, 24 Oct 2015 19:57:14 -0400
+
+mx-tools (15.10mx15) mx; urgency=medium
+
+  * added new tools
+
+ -- Adrian <adrian@mxlinux.org>  Sun, 18 Oct 2015 15:23:29 -0400
+
+mx-tools (15.7.2mx15) mx; urgency=medium
+
+  * load help from local storage
+
+ -- Adrian <adrian@mxlinux.org>  Tue, 14 Jul 2015 20:15:26 -0400
+
+mx-tools (15.7.1mx15) mx; urgency=medium
+
+  * added build-deps, license
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 09 Jul 2015 20:46:19 -0400
+
+mx-tools (15.7mx15) mx; urgency=medium
+
+  * chaged to qt5
+
+ -- Adrian <adrian@mxlinux.org>  Tue, 30 Jun 2015 11:05:47 -0400
+
+mx-tools (15.6.2mx14) mx; urgency=medium
+
+  * new translations
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 15 Jun 2015 08:22:11 -0400
+
+mx-tools (15.6.1mx14) mx; urgency=medium
+
+  * added Broadcom Manager button
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 10 Jun 2015 14:32:04 -0400
+
+mx-tools (15.6mx14) mx; urgency=medium
+
+  * added mx-menu-editor, re-added unhide apt notifier
+
+ -- Adrian <adrian@mxlinux.org>  Tue, 09 Jun 2015 13:54:50 -0400
+
+mx-tools (15.4.1mx14) mx; urgency=medium
+
+  * added translation
+
+ -- Adrian <adrian@mxlinux.org>  Tue, 21 Apr 2015 14:14:57 -0400
+
+mx-tools (15.4mx14) mx; urgency=medium
+
+  * Sound Card button instead of Hide Apt-Notifier, added Help button
+
+ -- Adrian <adrian@mxlinux.org>  Sat, 11 Apr 2015 11:02:18 -0400
+
+mx-tools (15.3mx14) mx; urgency=medium
+
+  * small fixes
+
+ -- Adrian <adrian@mxlinux.org>  Sat, 21 Mar 2015 16:25:15 -0400
+
+mx-tools (14.3.8) mx; urgency=medium
+
+  * added mx-snapshot (if mx-snapshot is present launch that instead of the old tool)
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 15 Jan 2015 11:10:38 -0500
+
+mx-tools (14.3.7) mx; urgency=low
+
+  * added Russian translation
+
+ -- Adrian <adrian@mxlinux.org>  Sun, 14 Dec 2014 11:44:24 -0500
+
+mx-tools (14.3.6) mx; urgency=low
+
+  * design change, added antiX tools
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 04 Dec 2014 12:48:32 -0500
+
+mx-tools (14.3+4) mx; urgency=low
+
+  * final refinements to the hide/show icons script
+
+ -- Adrian <adrian@mxlinux.org>  Sat, 29 Nov 2014 09:24:26 -0500
+
+mx-tools (14.3+3) mx; urgency=low
+
+  * option to hide tool icons from the menu
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 26 Nov 2014 18:47:58 -0500
+
+mx-tools (14.3+2) mx; urgency=low
+
+  * repackages with new location for .desktop
+
+ -- Adrian <adrian@mxlinux.org>  Tue, 25 Nov 2014 18:24:14 -0500
+
+mx-tools (14.3) mx; urgency=low
+
+  * Initial release
+
+ -- Adrian <adrian@mxlinux.org>  Tue, 18 Nov 2014 22:53:38 -0500

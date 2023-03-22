@@ -1,0 +1,154 @@
+KDE Sound theme "Borealis"
+Version 0.9a (11/11/2004)
+
+by Ivica Ico Bukvic (SlipStreamScapes)
+ico at fuse net
+http://meowing.ccm.uc.edu/~ico/
+http://kde-look.org/content/show.php?content=12584
+
+
+OVERVIEW
+========
+The goal of this sound theme is to provide "better feel" through use of the subtle aural notifications. The test I always have in my mind while designing the desktop sounds is to imagine having half-dozen (or more) computer stations in the same office or studio and consider whether their simultaneous use (and resulting desktop sounds) would pose as distraction on users and their productivity. Therefore, in order to minimize the "distraction factor" this theme associates many of the common desktop events with brief, mostly non-pitched, but nonetheless pleasing sound sources (a.k.a. effects).
+
+All of the sounds included have been composed (if applicable), recorded, and mastered by me (although a few of them bear resemblance to other OS's sounds). Some of them are leftovers from my previous compositional and production endeavors, while others are entirely new creations.
+
+All sounds are designed and mixed at CD-quality (stereo, 16-bit, 44.1KHz). Ogg version is distributed as 192Kbit stereo files.
+
+
+LICENSE
+=======
+The sound package is provided under the Artistic License with minor additions to it. See below for more info. That being said, if someone wants to merge it with the vanilla KDE project I am completely fine with that and if that will require a license change I would be willing to make appropriate changes to the license.
+
+The only additional clause to this license is as follows:
+
+You may not use these sounds in any non GPL-ed or LGPL-ed software/OS for profit-making purposes. In other words, you may freely distribute it and use it for personal needs however you wish (even in Windows or MacOS), but any commercial endeavors are allowed only if they are associated solely with the GPL-ed and LGPL-ed software which also includes software that exists as both GPL/LGPL and commercial version, i.e. Trolltech's Qt.
+
+
+FEATURES
+========
+*Includes sounds for:
+  *KDE WM
+  *KDE System Notifications
+  *Kdevelop
+  *Kopete
+  *KDE Sysguard
+  *KMail
+  *Konsole
+  *Proxy configuration 
+  *K3b (missing 1 sound)
+*4 startup sounds
+*2 exit sounds
+*Automated installer and uninstaller
+
+
+INSTALL
+=======
+Borealis now comes with an automated install shellscript making the install a simple 2-step process:
+
+1) Untar the package:
+tar -jxvf Borealis_sound_theme-VERSION.tar.bz2
+
+2) Install the theme:
+cd Borealis/
+su -p
+(IMPORTANT! You must do 'su' with the '-p' flag in order to preserve your home dir variable while running as superuser)
+sh install.sh
+
+At this point simply follow the on-screen instructions and in a couple moments it should be all ready to go.
+
+Optionally, you may also want to disable animation of minimizing/restoring windows as the theme sounds associated with these actions in my opinion work better when the animation is disabled. You can adjust this setting in the KControl -> LookNFeel -> Window Behavior -> Moving tab -> Animate minimize and Restore option.
+
+
+UNINSTALL
+=========
+To uninstall Borealis theme simply use the uninstall.sh script included in the tarball:
+
+sh uninstall.sh
+
+
+FAQ
+===
+Q: Is it possible to improve the timing of the various desktop sound events (i.e. minimize/maximize/restore window)?
+A: The sounds provided in this theme have been edited to have no silence preceding them, therefore they should play immediately when triggered. However there are other factors that may affect the latency between the triggering of the sound events and their playback, such as the latency setting in the Arts Sound Server and/or using external sound player rather than the built-in arts sound playback tool. Please make sure to adjust your Arts Sound Server latency in the KControl center.
+
+Q: The closing sound does not play in its entirety. How can I fix this?
+A: My best guess is that this is a bug in KDE desktop. However, I did find a sort of a workaround for it. When one uses a daemon-based app which is started at login (using ~/.kde/Autostart/ scripts) it apparently allows for the sound to play in its entirety before logging the user out. I've tested this namely using the 3ddesktop virtual desktop switching program which is now incorporated in the 'superkaramba' visual theme also titled "Borealis" that has been designed to complement the sound theme. It includes verbose installer with additional instructions regarding this issue and is available at:
+
+http://www.kde-look.org/content/show.php?content=13876
+
+
+CHANGELOG
+=========
+11/14/2004 -- ver.0.9a
+*Couple improvements to the install and uninstall scripts (thanks to Kirk Strauser for the heads-up!)
+
+09/01/2004 -- ver.0.9
+*Reuploaded old startup sounds (version 0.8 had by mistake ones that were of lesser quality)
+*Fixed bug where ownership of the config files was not properly set during install and uninstall
+*Fixed permissions to the config file
+*Added config file for the K3b
+*Fixed config scripts for the ogg theme
+*Added K3b to the install and uninstall script
+*Added K3b sound when the burning of the CD is completed
+*Updated FAQ
+
+07/06/2004 -- ver.0.8
+*Remastered old 3 startup sounds and added a new, completely revamped startup sound Startup1_4.wav as well as an alternative Exit1_2.wav sound
+*Improved install script
+*Added uninstall script
+*Changed default startup and exit sounds
+
+06/27/2004 -- ver.0.6
+*Re-normalized startup sounds due to some mangling that resulted from using hard limiting
+*New shorter variant of the startup sound
+*Updated FAQ with some important fixes (see FAQ for more info)
+*Final version of the theme logo
+
+05/25/2004 -- ver.0.5
+*New sounds for Kmail, Kopete, Kdevelop, Ksysguard, exit session & minimize window
+*Finalized 3 versions of the startup sound
+*New automated install script included
+*Changed soundfile names to better reflect their function.
+*Rearranged sounds for some events
+*Remastered sounds for better balance
+*Removed addon packages.
+*PLEASE NOTE that Kopete sounds (and some others) are still work-in-progress...
+
+05/17/2004 -- ver.0.3b
+*Alternate startup sounds are now separated from the main package in order to minimize downloading times
+
+05/17/2004 -- ver.0.3a
+*Fixed corrupt tarballs -- apologies to all who wasted downloading corrupt files. New tarballs have been created, tested, and are now available
+*Added individual downloads of ogg previews of 2 (out of 7) variations of the startup file on the kde-look.org website
+
+05/17/2004 -- ver.0.3
+*7 newly remastered versions of the Startup sound -- please help me pick out the best one :-) (the default one, Startup1_1.wav is similar to the old Startup sound, while the rest are split into two types: with (4) and without the bass line (3). The differences between variations are relatively subtle but nonetheless noticable)
+*New exit sound
+*New splash image
+*Improved install instructions
+
+05/13/2004 -- ver.0.2
+*Improved start-up sound
+*Startup.wav and click4.wav are now included in the tarball (DOH!)
+*Much easier install
+
+05/12/2004 -- ver.0.1 Initial Release
+
+
+TODO
+====
+*Finish sounds for K3b
+*Other (I would be happy to make sounds for your applications as well if you let me know what sounds your application needs :-)
+
+
+WISHLIST
+========
+(particularly important for KDE developers if they are listening)
+*How can the filling and/or emptying of the trash can be associated with a sound?
+*How to make sure that KDE does not exit before the end-sound is done without employing weird hacks?
+
+
+Your votes, comments, and suggestions are most welcome and appreciated. Thanks!
+
+Enjoy!

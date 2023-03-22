@@ -1,0 +1,15 @@
+
+Attribution:
+
+Conky Manager 2 icon modified from conky-manager.svg icon created by developers of Papirus Icon Theme.
+
+Changes: added a "2" to the icon
+
+Licence for original and modified icons: GPL 3.0
+https://github.com/PapirusDevelopmentTeam/papirus-icon-theme/blob/master/LICENSE
+
+Original icon found here:
+https://github.com/PapirusDevelopmentTeam/papirus-icon-theme/tree/master/Papirus/64x64/apps
+
+
+

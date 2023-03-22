@@ -1,0 +1,29 @@
+#!/bin/bash
+
+# Test to see if the apt-notifierrc file has the "DontShowIcon blah blah" line in it
+grep  -q ^\\[DontShowIcon ~/.config/apt-notifierrc
+
+if [ "$?" = "0" ]
+  then
+    #It does, so delete the "DontShowIcon blah blah" line to make the icon visible.
+    sed -i '/^\[DontShowIcon/d' ~/.config/apt-notifierrc
+  else 
+    #It doesn't, so do nothing.
+    :
+fi
+
+# Kill running apt-notifier.py(s) while still in unhide script
+# started from /usr/bin - not used in the current version
+if pgrep -f 'python[23]? .*/usr/bin/apt-notifier.py' >/dev/null; then
+   pkill -f 'python[23]? .*/usr/bin/apt-notifier.py' >/dev/null 2>/dev/null
+   sleep 0.2
+fi
+
+# started from /usr/lib/apt-notifier/modules/apt-notifier.py
+if pgrep -f 'python3 .*/usr/lib/apt-notifier/modules/apt-notifier.py' >/dev/null; then
+   pkill -f 'python3 .*/usr/lib/apt-notifier/modules/apt-notifier.py' >/dev/null 2>/dev/null
+   sleep 0.2
+fi
+
+# start the notifier from the startup script
+/usr/bin/apt-notifier 

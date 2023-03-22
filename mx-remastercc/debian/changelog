@@ -1,0 +1,215 @@
+mx-remastercc (23.1+deb11u13) stable; urgency=medium
+
+  * MX Tools release
+
+ -- Adrian <administrator@localdomain>  Wed, 22 Mar 2023 10:43:54 +0100
+
+mx-remastercc (23.1) mx; urgency=medium
+
+  * Translation refresh
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 05 Jan 2023 19:09:31 -0500
+
+mx-remastercc (22.10.01) mx; urgency=medium
+
+  * fix source files 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 28 Oct 2022 15:55:50 -0400
+
+mx-remastercc (22.10) mx; urgency=medium
+
+  * translation refresh
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 26 Oct 2022 20:05:10 -0400
+
+mx-remastercc (22.7) mx; urgency=medium
+
+  * translation refresh 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 23 Jul 2022 11:33:03 -0400
+
+mx-remastercc (22.6) mx; urgency=medium
+
+  * use pkexec instead of su-to-root
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Tue, 14 Jun 2022 20:39:41 -0400
+
+mx-remastercc (22.4) mx; urgency=medium
+
+  * set gtk-theme Adwaita for live-remaster and persist tools
+
+ -- fehlix <fehlix@mxlinux.org>  Sun, 03 Apr 2022 15:59:54 -0400
+
+mx-remastercc (19.9) mx; urgency=medium
+
+  * updated translations
+
+ -- Adrian <adrian@mxlinux.org>  Sun, 29 Sep 2019 17:19:15 -0400
+
+mx-remastercc (19.8) mx; urgency=medium
+
+  * added offline help file
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 21 Aug 2019 14:17:13 -0400
+
+mx-remastercc (19.4) mx; urgency=medium
+
+  * updated translations
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 05 Apr 2019 11:48:23 -0400
+
+mx-remastercc (19.1) mx; urgency=medium
+
+  * updated translations
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 23 Jan 2019 16:25:13 -0500
+
+mx-remastercc (18.11) mx; urgency=medium
+
+  * updated translations
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 30 Nov 2018 14:05:17 -0500
+
+mx-remastercc (18.10) mx; urgency=medium
+
+  * updated translations
+
+ -- Adrian <adrian@mxlinux.org>  Sun, 14 Oct 2018 19:38:50 -0400
+
+mx-remastercc (18.8.1) mx; urgency=medium
+
+  * additional icon fixes
+
+ -- Adrian <adrian@mxlinux.org>  Sat, 11 Aug 2018 17:20:09 -0400
+
+mx-remastercc (18.8) mx; urgency=medium
+
+  * fix icon for other themes
+
+ -- Adrian <adrian@mxlinux.org>  Sat, 04 Aug 2018 22:39:00 -0400
+
+mx-remastercc (18.6.3) mx; urgency=medium
+
+  * added changelog button
+
+ -- Adrian <adrian@mxlinux.org>  Tue, 26 Jun 2018 17:54:03 -0400
+
+mx-remastercc (18.6.2) mx; urgency=medium
+
+  * new translations
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 18 Jun 2018 15:37:51 -0400
+
+mx-remastercc (18.6.1) mx; urgency=medium
+
+  * new build 
+
+ -- Adrian <adrian@mxlinux.org>  Tue, 12 Jun 2018 22:49:57 -0400
+
+mx-remastercc (18.6) mx; urgency=medium
+
+  * change remaster-live to live-remaster to fix localizations 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Tue, 12 Jun 2018 20:35:16 -0400
+
+mx-remastercc (18.3+1) mx; urgency=medium
+
+  * fix help
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 07 Mar 2018 10:38:56 -0500
+
+mx-remastercc (18.3) mx; urgency=medium
+
+  * new translations
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 02 Mar 2018 10:53:08 -0500
+
+mx-remastercc (18.2) mx; urgency=medium
+
+  * new translations
+
+ -- Adrian <adrian@mxlinux.org>  Sat, 10 Feb 2018 02:17:08 -0500
+
+mx-remastercc (17.12) mx; urgency=medium
+
+  * new translations
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 04 Dec 2017 14:49:32 -0500
+
+mx-remastercc (17.11+1) mx; urgency=medium
+
+  * fix LANG detection
+
+ -- Adrian <adrian@mxlinux.org>  Sat, 11 Nov 2017 18:41:47 -0500
+
+mx-remastercc (17.11) mx; urgency=medium
+
+  * added FR help
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 10 Nov 2017 11:41:14 -0500
+
+mx-remastercc (17.6mx16) mx; urgency=medium
+
+  * updated translations
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 02 Jun 2017 14:57:31 -0400
+
+mx-remastercc (17.5mx16) mx; urgency=medium
+
+  * update icons
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 10 May 2017 14:12:21 -0400
+
+mx-remastercc (16.11mx16+1) mx; urgency=medium
+
+  * new translations
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 30 Nov 2016 12:17:43 -0500
+
+mx-remastercc (16.11mx16) mx; urgency=medium
+
+  * new translations
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 16 Nov 2016 13:30:44 -0500
+
+mx-remastercc (16.10mx16) mx; urgency=medium
+
+  * changed URLs
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 10 Oct 2016 13:53:33 -0400
+
+mx-remastercc (16.6mx15) mx; urgency=medium
+
+  * new .desktop file
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 10 Jun 2016 18:32:57 -0400
+
+mx-remastercc (15.12.1mx15) mx; urgency=medium
+
+  * hide GUI when displaying help/license
+
+ -- Adrian <adrian@mxlinux.org>  Tue, 22 Dec 2015 18:31:14 -0500
+
+mx-remastercc (15.12mx15) mx; urgency=medium
+
+  * new translations
+
+ -- Adrian <adrian@mxlinux.org>  Tue, 01 Dec 2015 21:01:35 -0500
+
+mx-remastercc (15.10.1mx15) mx; urgency=medium
+
+  * new translations
+
+ -- Adrian <adrian@mxlinux.org>  Sat, 24 Oct 2015 19:08:23 -0400
+
+mx-remastercc (15.10mx15) mx; urgency=medium
+
+  * updated license
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 21 Oct 2015 09:54:42 -0400
+
+mx-remastercc (0.15.10mx15) mx; urgency=medium
+
+  * initial release
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 14 Oct 2015 14:51:35 -0400

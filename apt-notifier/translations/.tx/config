@@ -1,0 +1,11 @@
+[main]
+host = https://www.transifex.com
+
+[o:anticapitalista:p:antix-development:r:apt-notifier]
+
+file_filter = po/<lang>.po
+minimum_perc = 0
+source_file = apt-notifier.pot
+source_lang = en
+type = PO
+

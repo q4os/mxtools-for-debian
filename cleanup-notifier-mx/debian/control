@@ -1,0 +1,19 @@
+Source: cleanup-notifier-mx
+Section: x11
+Priority: optional
+Maintainer: fehlix <fehlix@mxlinux.org>
+Build-Depends:
+ debhelper-compat (= 12),
+ dh-python,
+ gnome-pkg-tools (>= 0.21),
+ meson (>= 0.52.0),
+Standards-Version: 3.9.6
+
+Package: cleanup-notifier-mx
+Architecture: all
+Pre-Depends: ${misc:Pre-Depends}
+Depends:
+ python3,
+ python3-notify2,
+ ${misc:Depends}
+Description: Check available space at /boot partition.

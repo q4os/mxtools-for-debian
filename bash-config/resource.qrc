@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/mx"/>
+    <qresource prefix="/">
+        <file>logo.png</file>
+        <file>infinity.svg</file>
+    </qresource>
+</RCC>

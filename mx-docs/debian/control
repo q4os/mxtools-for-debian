@@ -1,0 +1,15 @@
+Source: mx-docs
+Section: doc
+Priority: optional
+Maintainer: Dolphin Oracle <dolphinoracle@gmail.com>
+Build-Depends: debhelper (>= 9)
+Standards-Version: 3.9.6
+Homepage: http://antix.mepis.org
+
+Package: mx-docs
+Section: doc
+Architecture: all
+Conflicts: docs-mx, desktop-defaults-xfce-mx, mx-desktop-defaults
+Replaces: docs-mx 
+Description: user manual for MX 
+ This is the PDF user manual included with MX 

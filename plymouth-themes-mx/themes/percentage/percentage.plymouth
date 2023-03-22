@@ -1,0 +1,13 @@
+[Plymouth Theme]
+Name=percentage by lisabonne citadel
+Description=percentage plymouth theme
+ModuleName=two-step
+
+[two-step]
+ImageDir=/usr/share/plymouth/themes/percentage
+HorizontalAlignment=.5
+VerticalAlignment=.5
+Transition=none
+TransitionDuration=0.0
+BackgroundStartColor=0x000000
+BackgroundEndColor=0x000000

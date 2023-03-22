@@ -1,0 +1,8 @@
+[main]
+host = https://www.transifex.com
+
+[antix-development.mx-bootrepair-desktop]
+file_filter = po/mx-bootrepair-desktop_<lang>.po
+source_file = mx-bootrepair-desktop.pot
+source_lang = en
+type = po

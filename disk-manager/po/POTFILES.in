@@ -1,0 +1,11 @@
+[encoding: UTF-8]
+disk-manager.in
+data/disk-manager.glade
+data/disk-manager.desktop.in.in
+DiskManager/Dialogs.py
+DiskManager/DiskManager.py
+DiskManager/Utility.py
+DiskManager/Fstab/FstabDialogs.py
+DiskManager/Fstab/FstabHandler.py
+DiskManager/Fstab/FstabUtility.py
+DiskManager/Fstab/Mounter.py

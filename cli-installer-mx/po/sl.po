@@ -1,0 +1,395 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# Arnold Marko <arnold.marko@gmail.com>, 2019-2021
+msgid ""
+msgstr ""
+"Project-Id-Version: antix-development\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-03-20 18:46+0200\n"
+"PO-Revision-Date: 2021-09-03 07:41+0000\n"
+"Last-Translator: Arnold Marko <arnold.marko@gmail.com>\n"
+"Language-Team: Slovenian (http://www.transifex.com/anticapitalista/antix-development/language/sl/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: sl\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3);\n"
+
+#: cli-installer.sh:29
+#, sh-format
+msgid "CL installer for $DISTRO"
+msgstr "Namestitev iz ukazne vrstice za $DISTRO"
+
+#: cli-installer.sh:30
+msgid "Version 5.2.1 20/03/2020"
+msgstr "Različica 5.2.1 20/03/2020"
+
+#: cli-installer.sh:37
+msgid "Requirements for minimum installation:"
+msgstr "Zahteve za minimalno namestitev:"
+
+#: cli-installer.sh:40
+msgid "antiX-full: hard-disk 4.0GB  RAM 64MB"
+msgstr "antiX-full: disk 4.0GB  RAM 64MB"
+
+#: cli-installer.sh:42
+msgid "antiX-base: hard-disk 3.0GB  RAM 48MB"
+msgstr "antiX-base: disk 3.0GB  RAM 48MB"
+
+#: cli-installer.sh:44
+msgid "antiX-core: hard-disk 1.0GB  RAM 48MB"
+msgstr "antiX-core: disk 1.0GB  RAM 48MB"
+
+#: cli-installer.sh:46
+msgid "antiX-net:  hard-disk 0.7GB  RAM 48MB"
+msgstr "antiX-net:  disk 0.7GB  RAM 48MB"
+
+#: cli-installer.sh:48
+msgid "Make sure you are connected to "
+msgstr "Prepričajte se, da ste priključeni "
+
+#: cli-installer.sh:50
+msgid "the net BEFORE running this installer"
+msgstr "na splet, še preden zaženete to namestitev"
+
+#: cli-installer.sh:52
+msgid "NOTE: This installer will NOT work for UEFI boot"
+msgstr "OPOMOBA: Ta namestitveni program NE BO deloval za UEFI zagon"
+
+#: cli-installer.sh:54
+msgid ""
+"This installer does NOT offer the option for using a separate boot partition"
+msgstr "Ta namestitveni program NE ponuja možnosti uporabe ločenega zagonskega razdelka"
+
+#: cli-installer.sh:56
+msgid "This installer does NOT offer encryption"
+msgstr "Ta namestitveni program NE omogoča šifriranja"
+
+#: cli-installer.sh:58
+msgid "This installer does NOT offer installation to NVMe devices"
+msgstr "Ta namestitveni program NE omogoča namestitve na NVMe naprave"
+
+#: cli-installer.sh:60
+msgid "If you want the above mentioned features, use our gui installer"
+msgstr "Če želite zgoraj omenjene možnosti, uporabite namestitveni program z grafičnim vmesnikom"
+
+#: cli-installer.sh:62
+msgid "Ctrl c will abort this script"
+msgstr "Ctrl c bo prekinil ta skript"
+
+#: cli-installer.sh:68
+msgid "Usage: cli-installer [drive]"
+msgstr "Uporaba: cli-installer [pogon]"
+
+#: cli-installer.sh:69
+#, sh-format
+msgid "Where drive is the name of the drive $DISTRO is to be installed on."
+msgstr "Kjer je pogon ime pogona na katerag naj se namesti $DISTRO."
+
+#: cli-installer.sh:70
+msgid "   For example: cli-installer sdb"
+msgstr "Na primer: cli-installer sdb"
+
+#: cli-installer.sh:71
+msgid "The default is correct if the computer has only one drive."
+msgstr "Privzeta nastavitev je pravilna, če ima računalnik le en podatkovni pogon."
+
+#: cli-installer.sh:75
+msgid "Pre-installation tips:"
+msgstr "Nasveti pred namestitvijo:"
+
+#: cli-installer.sh:78
+msgid "Set language at the boot screen by pressing F2"
+msgstr "Določite jezik na zagonskem zaslonu s pritiskom na F2"
+
+#: cli-installer.sh:79
+msgid "or by adding the line lang=xx where xx is your language code."
+msgstr "ali tako, da dodate vrstico lang=xx, pri čemer je xx koda vašega jezika."
+
+#: cli-installer.sh:80
+msgid "eg lang=gr for Greek."
+msgstr "npr. lang=gr za grščino."
+
+#: cli-installer.sh:82
+msgid "Set timezone at the boot screen by pressing F3"
+msgstr "Določite časovni pas na zagonskem zaslonu s pritiskom na F3"
+
+#: cli-installer.sh:84
+msgid "Use kbd=dvorak for dvorak keyboard before installing"
+msgstr "Uporabite kbd=dvorak za rabo dvorakove pred namestitvijo"
+
+#: cli-installer.sh:87
+msgid ""
+"Press F1 at the boot screen for Help and list of cheatcodes for live use."
+msgstr "Na zagonskem zaslonu pritisnite F1 za pomoč in seznam posebnih kod."
+
+#: cli-installer.sh:94
+msgid "/home partition (hda1, sda2, etc): "
+msgstr "/home razdelek (hda1, sda2, itd.): "
+
+#: cli-installer.sh:97
+#, sh-format
+msgid "$hdrv invalid. Retry:"
+msgstr "$hdrv napaka. Poskusi ponovno:"
+
+#: cli-installer.sh:107
+msgid "Root partition (hda1, sda2, etc): "
+msgstr "Korenski razdelek (hda1, sda2, itd):"
+
+#: cli-installer.sh:136
+#, sh-format
+msgid "$rdrv invalid. Retry"
+msgstr "$drv napaka. Poskusi ponovno:"
+
+#: cli-installer.sh:151
+msgid "Available file systems for $1 are:"
+msgstr "Za $1 so na voljo datotečni sistemi: "
+
+#: cli-installer.sh:165
+msgid "Enter your choice 1-8: "
+msgstr "Vnesite izbor 1-8:"
+
+#: cli-installer.sh:170
+msgid "You have chosen $fs for $1"
+msgstr "Za $1 ste izbrali $fs"
+
+#: cli-installer.sh:172
+msgid "Downloading necessary files for formatting partitions"
+msgstr "Prenos potrebnih datotek za formatiranje razdelkov"
+
+#: cli-installer.sh:184
+msgid "Ignore any 'barrier' lines"
+msgstr "Ignoriraj vse vrstice, ki so 'prepreka'"
+
+#: cli-installer.sh:185
+#, sh-format
+msgid "$fs invalid. Retry:"
+msgstr "$fs napaka. Poskusi ponovno:"
+
+#: cli-installer.sh:198
+msgid "Passwords are not identical. Retry:"
+msgstr "Gesli se ne ujemata. Poskusite ponovno:"
+
+#: cli-installer.sh:218
+msgid "Invalid; retry:"
+msgstr "Napaka; poskusite ponovno:"
+
+#: cli-installer.sh:235
+msgid "Press Enter to exit this script."
+msgstr "Pritisnite tipko enter za izhod iz tega skripta."
+
+#: cli-installer.sh:244
+msgid "Please run this script as root."
+msgstr "Ta skript zaženite korensko"
+
+#: cli-installer.sh:260
+msgid "====Disk and partition Information===="
+msgstr "====Informacije o diskih in razdelkih===="
+
+#: cli-installer.sh:265
+msgid "Do you want to repartition the disk (y/N)"
+msgstr "Ali bi radi preoblikovali razdelek diska? (y/N)"
+
+#: cli-installer.sh:279
+#, sh-format
+msgid ""
+"The installer will now destroy the data on $rdrv  Do you want to continue "
+"(No will abort the installation) (n/Y)"
+msgstr "Namestitveni program bo sedaj uničil podatke na $rdrv. Ali bi radi nadaljevali ('Ne' bo prekinil namestitev) (n/Y)"
+
+#: cli-installer.sh:286
+#, sh-format
+msgid "Deleting the contents of the $rdrv partition."
+msgstr "Brisanje vsebine razdelka $rdrv."
+
+#: cli-installer.sh:287 cli-installer.sh:386 cli-installer.sh:411
+msgid "This may take some time. Please wait...."
+msgstr "To lahko traja nekaj časa. Prosimo počakajte..."
+
+#: cli-installer.sh:293 cli-installer.sh:331
+msgid "Done."
+msgstr "Končano."
+
+#: cli-installer.sh:297
+msgid "Do you want to use a separate '/home' partition (y/N)"
+msgstr "Ali bi radi uporabili ločen razdelek '/home' (y/N)"
+
+#: cli-installer.sh:306
+#, sh-format
+msgid ""
+"Is $hdrv a new '/home' partition (No will not destroy any data on $hdrv ) "
+"(y/N)"
+msgstr "Ali je $hdrv nov '/home' razdelek ('Ne' ne bo uničil podatkov na $hdrv) (y/N)"
+
+#: cli-installer.sh:312
+#, sh-format
+msgid "Set file system for $hdrv  (y/N)"
+msgstr "Določi datotečni sistem za $hdrv? (y/N)"
+
+#: cli-installer.sh:319
+#, sh-format
+msgid ""
+"The installer will now destroy the data on $hdrv  Do you want to continue "
+"(No will abort the install) (n/Y)"
+msgstr "Namestitveni program bo sedaj uničil podatke na $hdrv. Ali žečite nadaljevati ('Ne' bo prekinil namestitev) (n/Y)"
+
+#: cli-installer.sh:326
+#, sh-format
+msgid "Deleting the contents of the $hdrv partition."
+msgstr "Brisanje vsebin na razdelku $hdrv."
+
+#: cli-installer.sh:343
+msgid "Are you running antiX-net (y/N)"
+msgstr "Ali imate zagnan antiX-net (y/N)"
+
+#: cli-installer.sh:348
+msgid ""
+"Downloading grub-pc, locales, keyboard-configuration, console-setup, "
+"console-data, lsb-release, sysv-rc-conf"
+msgstr "Prenašam grub-pc, locales, keyboard-configuration, console-setup, console-data, lsb-release, sysv-rc-conf"
+
+#: cli-installer.sh:352
+msgid ""
+"Do you want to install elogind and dbus-x11. RECOMMENDED if installing a "
+"desktop environment. (y/N)"
+msgstr "Želite namestitit elogind in dbus-x11. PRIPOROČENO ob namestitvi namiznega okolja. (y/N)"
+
+#: cli-installer.sh:357
+msgid "Downloading elogind, libpam-elogind, dbus-x11"
+msgstr "Prenašam elogind, libpam-elogind, dbus-x11"
+
+#: cli-installer.sh:364
+msgid "Do you want to install some packages via cli-aptiX (y/N)"
+msgstr "Ali bi radi namestili kakšne pakete preko cli-aptiX (y/N)"
+
+#: cli-installer.sh:369
+msgid "Use cli-aptiX to install various applications and/or kernels"
+msgstr "Uporabite cli-aptiX za namestitev različnih programov in/ali jeder"
+
+#: cli-installer.sh:378
+#, sh-format
+msgid "antiX will now be copied to $rdrv."
+msgstr "antiX bo sedaj skoprian na $rdrv"
+
+#: cli-installer.sh:380
+msgid "Do you want to continue (No will abort the install) (n/Y)"
+msgstr "Ali bi radi nadaljevali ('Ne' bo prekinil namestitev) (n/Y)"
+
+#: cli-installer.sh:407
+msgid "File copy done"
+msgstr "Kopiranje datoteke je končano"
+
+#: cli-installer.sh:409
+msgid "Install GRUB on MBR (Y/n) No will install to root partition"
+msgstr "Namestim GRUB na MBR (Y/n)? 'Ne' pomeni namestitev na korenski razdelek"
+
+#: cli-installer.sh:434
+#, sh-format
+msgid "GRUB installed on ($grub)"
+msgstr "GRUB je nameščen na ($grub)"
+
+#: cli-installer.sh:438
+msgid "Computer name (default is 'antix1')? "
+msgstr "Ime računalnika (privzeto je 'antix1')?"
+
+#: cli-installer.sh:446
+msgid "Time to set up localisation"
+msgstr "Čas za določitev lokalnih nastavitev"
+
+#: cli-installer.sh:448
+msgid "System locale is set to ..."
+msgstr "Lokalne nastavitve so nastavljene na ..."
+
+#: cli-installer.sh:451
+msgid "Do you want to set up system localisation (y/N)"
+msgstr "Ali želite določiti lokalne nastavitve sistema (y/N)"
+
+#: cli-installer.sh:458
+msgid "Time to set keyboard layout"
+msgstr "Čas je za določitev razporeda tipk"
+
+#: cli-installer.sh:460
+msgid "System keyboard is set to ..."
+msgstr "Sistemska tipkovnica je nastavljena na ..."
+
+#: cli-installer.sh:463
+msgid "Do you want to set up keyboard (y/N)"
+msgstr "Ali želite nastaviti tipkovnico (y/N)?"
+
+#: cli-installer.sh:470
+msgid "Time to set console layout"
+msgstr "Čas je za nastavitev izgleda konzole"
+
+#: cli-installer.sh:472
+msgid "System console is set to ..."
+msgstr "Sistemska konzola je nastavljena na ..."
+
+#: cli-installer.sh:475
+msgid "Do you want to set up console layout (y/N)"
+msgstr "Ali želite nastaviti izgled konzole? (y/N)"
+
+#: cli-installer.sh:482
+msgid "Time to set timezone"
+msgstr "Čas je za določitev časovnega pasu"
+
+#: cli-installer.sh:484
+msgid "System timezone is set to ..."
+msgstr "Sistemski časovni pas je nastavljen na ..."
+
+#: cli-installer.sh:487
+msgid "Do you want to set up system timezone (y/N)"
+msgstr "Ali želite nastaviti časovni pas? (y/N)"
+
+#: cli-installer.sh:494
+msgid "Choose which services to run"
+msgstr "Izberite storitve, ki naj se zaženejo"
+
+#: cli-installer.sh:496
+msgid "Do you want to enable/disable startup services (y/N)"
+msgstr "Ali bi radi vključili/izključili storitve ob zagonu? (y/N)"
+
+#: cli-installer.sh:505
+msgid "Is this a remastered/snapshot install (y/N)"
+msgstr "Ali gre za predelano namestitev oz. namestitev s posnetka? (y/N)"
+
+#: cli-installer.sh:518
+#, sh-format
+msgid "Installation of $DISTRO finished!"
+msgstr "Namestitev $DISTRO je končana!"
+
+#: cli-installer.sh:520 cli-installer.sh:590
+msgid "Reboot computer without CD to start program. ('reboot')"
+msgstr "Za zagon programa ponovno zaženite računalnik brez CDja. ('ponovni zagon')"
+
+#: cli-installer.sh:526
+msgid "Setting up user and root/admin accounts"
+msgstr "Ustvarjanje uporabniških in korenskih/skrbniških računov"
+
+#: cli-installer.sh:531
+msgid "Type in your default user name: "
+msgstr "Vnesite privzeto uporabniško ime:"
+
+#: cli-installer.sh:535
+#, sh-format
+msgid "Note: $hdrv must contain a folder named '$name'."
+msgstr "Opomba: $hdrv mora vsebovati mapo z imenom '$name'."
+
+#: cli-installer.sh:540
+msgid "Type your Password for root: "
+msgstr "Vnesite korensko geslo:"
+
+#: cli-installer.sh:547
+#, sh-format
+msgid "Set autologin for $name: (y/N)"
+msgstr "Nastavim samodejno prijavo za $name? (y/N)"
+
+#: cli-installer.sh:556
+msgid "Cleaning up"
+msgstr "Čiščenje"
+
+#: cli-installer.sh:588
+msgid "Installation of antiX finished!"
+msgstr "Namestitev antiX je končana!"

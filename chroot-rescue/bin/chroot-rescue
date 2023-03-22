@@ -1,0 +1,870 @@
+#!/bin/bash
+#==============================================================================
+# (C) 2019 Paul Banham <antiX@operamail.com>
+# License: GPLv3 or later
+#
+# Thanks to fehlix for help, ideas and, testing!
+#==============================================================================
+
+      VERSION="1.07"
+ VERSION_DATE="Wed Dec 23 01:19:37 PM MST 2020"
+
+ME=${0##*/}
+
+TRY_CMDS="/bin/bash /bin/sh"
+TO_UMOUNT=
+TO_RMDIR=
+TO_RM=
+CHROOT_DIR=
+SET_WINDOW_TITLE=
+
+SUB_DIRS="sys proc dev run tmp"
+
+MY_ENV="HOME=/root"
+
+WORK_DIR=/tmp/$ME
+
+# On host
+HOST_DIR="/tmp/$ME"
+LOCK_FILE="/run/lock/$ME"
+MY_RESOLV_DIR=$HOST_DIR/resolvconf
+MY_HOSTNAME_FILE=$HOST_DIR/hostname
+
+# On target
+CNT_FNAME="$WORK_DIR-count"
+BASH_RC="$WORK_DIR-bashrc"
+XAUTH_FILE="$WORK_DIR-Xauthority"
+
+WAS_LOCKED=
+CNT_FILE=
+
+export TEXTDOMAIN="$ME"
+
+#------------------------------------------------------------------------------
+# Show usage message and exit
+#------------------------------------------------------------------------------
+usage() {
+    cat<<Usage
+Usage: $ME [options] <directory>  [[--] <command> [<args>]]
+Bind mount sys/, proc/, dev/, etc file systems and under <directory>.
+Mount tmp/ as tmpfs and then chroot into that directory using
+a given command or /bin/bash or /bin/sh as defaults.
+
+If <command> is given we try to find that command under the directory
+and run it in the chroot.  Otherwise we look for /bin/bash and then
+/bin/sh and run the first one that is found.  If we find /bin/bash
+this way then we create a bashrc script that gets run in order to
+set the Bash prompt.
+
+Options:
+  -a  --add-prompt=<str> Add <str> to top of the Bash prompt
+  -h --help              Show this help
+  -n --no-x              Don't allow Xwindows applications to launch
+  -N --no-net            Don't try set up networking (it still may work)
+     --pause             Pause before normal exit
+  -p --pretend           Don't actually execute commands
+  -P --prompt=<str>      Use this string as the prompt
+  -q --quiet             Only print error messages
+  -t --title=<str>       Set the window title while in the chroot
+  -T --tmpfs=<x,y,z>     Comma separated list of directories to mount tmpfs
+  -u --umount            Umount all subdirectories of the given directory
+  -V --verbose           Show commands that get executed
+  -v --version           Show version and exit
+
+Usage
+
+    exit 0
+}
+
+#------------------------------------------------------------------------------
+# callback routine for evaluating command line args
+#------------------------------------------------------------------------------
+eval_argument() {
+    local arg=$1 val=$2
+    case $arg in
+        -add-prompt|a) ADD_PROMPT=$val                 ;;
+        -add-prompt=*) ADD_PROMPT=$val                 ;;
+              -help|h) usage                           ;;
+              -no-x|n) DISPLAY=                        ;;
+            -no-net|N) NO_NETWORK=true                 ;;
+               -pause) PAUSE_EXIT=true                 ;;
+           -pretend|p) PRETEND=true                    ;;
+            -prompt|P) NEW_PROMPT=$val                 ;;
+            -prompt=*) NEW_PROMPT=$val                 ;;
+             -quiet|q) QUIET=true                      ;;
+             -title|t) WINDOW_TITLE=$val               ;;
+             -title=*) WINDOW_TITLE=$val               ;;
+             -tmpfs|T) TMP_FS=$val                     ;;
+             -tmpfs=*) TMP_FS=$val                     ;;
+            -umount|u) UMOUNT_ALL=true                 ;;
+           -verbose|V) VERBOSE=true                    ;;
+           -version|v) show_version ; exit 0           ;;
+                    *) fatal $"Unknown parameter %s" "-$arg" ;;
+    esac
+}
+
+#------------------------------------------------------------------------------
+# callback routine for saying which cli args take a parameter
+#------------------------------------------------------------------------------
+takes_param() {
+    case $1 in
+     -add-prompt|a) return 0 ;;
+         -prompt|P) return 0 ;;
+          -title|t) return 0 ;;
+          -tmpfs|T) return 0 ;;
+    esac
+    return 1
+}
+
+#------------------------------------------------------------------------------
+# The main show
+#------------------------------------------------------------------------------
+main() {
+    [ $# -eq 0 ] && usage
+    local SHIFT SHORT_STACK="hnNpPtTuVv" got_cmd
+    local TMP_FS
+
+    read_params "$@"
+    run_me_as_root "$@"
+    HOME=/root
+
+    shift $SHIFT
+    [ $# -eq 0 ] && fatal $"Expected a directory or device name"
+
+    local dir=${1%/} ; shift
+    CHROOT_DIR=$dir
+
+    : ${ADD_PROMPT:=(\\[$cyan\\]$dir\\[$nc_co\\]) \\[$green\\]\\d \\t \\[$magenta\\]\\w\\[$nc_co\\]}
+
+    HOME=/root
+
+    local cmd
+    if [ $# -gt 0 ]; then
+        got_cmd=true
+        cmd=$1
+        shift
+    fi
+    if [ "$UMOUNT_ALL" ]; then
+        umount_all "$dir"
+        exit 0
+    fi
+
+    trap clean_up EXIT
+
+    # If given a block device instead of a directory, try to mount it
+    if test -b "$dir"; then
+        try_mount "$dir" "$MY_MNT_PNT"
+        dir=$MY_MNT_PNT
+    fi
+
+    # We need this in add_resolvconf() as well as the main event
+    SET_ARCH=linux32
+    ls "$dir"/lib64/ld-linux-x86-64.so* &>/dev/null && SET_ARCH=linux64
+
+    test -d "$dir" || fatal $"%s is not a directory" "$(wq $dir)"
+
+    #--- Figure out which cmd to use -----------------------------------------
+    # We will search the PATH if needed if a command is given on cmdline
+    #-------------------------------------------------------------------------
+    if [ -n "$cmd" ] ; then
+
+        # If the cmd does not start with a "/" ...
+        if [ -n "${cmd##/*}" ]; then
+            local pdir found
+            for pdir in ${PATH//:/ }; do
+                test -x "$dir$pdir/$cmd" || continue
+                cmd="$pdir/$cmd"
+                found=true
+                break
+            done
+            # Could not find command <name> under <directory>
+            [ -z "$found" ] && fatal $"Could not find command %s under %s" "$(wq $cmd)" "$(wq $dir)"
+        fi
+    else
+        local try_cmd
+        for try_cmd in $TRY_CMDS; do
+            test -x "$dir/$try_cmd" || continue
+            cmd=$try_cmd
+            break
+        done
+        [ -z "$cmd" ] && fatal $"Could not find commands %s" "$(wq $TRY_CMDS)"
+
+    fi
+
+    # Slightly redundant
+    local full_cmd="$dir/$cmd"
+    test -e "$full_cmd"  || fatal $"Could not find command %s" "$(wq $full_cmd)"
+    test -x "$full_cmd"  || fatal $"%s is not an executable"   "$(wq $full_cmd)"
+
+    CNT_FILE="$dir/$CNT_FNAME"
+    start_lock "$LOCK_FILE" "$CNT_FILE"
+
+    TO_RMDIR="$HOST_DIR"
+    cmd mkdir -p "$HOST_DIR"
+
+    local rc_args
+    if [ -z "$WAS_LOCKED" ]; then
+        #--- make directories ---------------------------------------------------
+
+        local s subdir
+        for s in $SUB_DIRS; do
+            subdir="$dir/$s"
+            test -d "$subdir" && continue
+            cmd mkdir "$subdir" || warn_fatal $"Could not make directory %s" "$(wq $subdir)"
+            test -d "$subdir" && TO_RMDIR="$subdir\n$TO_RMDIR"
+        done
+
+        #--- mount things --------------------------------------------------------
+        local targ
+        for s in $SUB_DIRS; do
+            targ="$dir/$s"
+            is_mountpoint "$targ" && continue
+            test -d "$targ"       || continue
+
+            case $s in
+                run) cmd mount -t tmpfs -o size=100m,nodev,mode=755 tmpfs "$targ" ;;
+                #run) cmd mount --rbind /$s "$targ"                                ;;
+                tmp) cmd mount -t tmpfs -o size=20%,nodev,mode=1777 tmpfs "$targ" ;;
+            sys|dev) cmd mount --rbind --make-rslave /$s "$targ"                  ;;
+                  *) cmd mount --rbind /$s "$targ"                                ;;
+            esac
+            is_mountpoint "$targ" && TO_UMOUNT="$targ\n$TO_UMOUNT"
+        done
+
+         # Bind mount /run/udev to get lsblk working correctly in the target
+        local udev_dir=/run/udev
+        if test -d $udev_dir; then
+            targ="$dir$udev_dir"
+            mkdir -p "$targ"
+            cmd mount --rbind $udev_dir "$targ"
+        fi
+
+        [ -z "$NO_NETWORK" ] && add_resolvconf "$dir"
+
+        # we are the first ones in so set the count to one
+        set_count_file "$CNT_FILE"
+
+        # mount /boot if it is in /etc/fstab (with UUID)
+        mount_fstab_dirs "$dir" /boot /boot/efi
+
+        # Copy the XAUTHORITY file into the chroot
+        copy_in_xauthority "$dir" && MY_ENV="$MY_ENV XAUTHORITY=$XAUTH_FILE"
+    fi
+
+    # Mount more directories as tmpfs
+    for s in ${TMP_FS//,/ }; do
+        targ="$dir/${s#/}"
+        if test -d "$targ"; then
+            if is_mountpoint "$targ"; then
+                warn "%s is already a mountpoint.  Will not mount tmpfs." "$(pq $targ)"
+            else
+                mount -t tmpfs -o size=20% tmpfs "$targ"
+            fi
+        else
+            warn "%s is not a subdirectory under %s" "$(pq $s)" "$(pq $dir)"
+        fi
+    done
+
+
+    # add a bashrc file to change the prompt if we are running bash by default
+    if [ $# -eq 0 -a "$cmd" = "/bin/bash" -a -z "$got_cmd" ]; then
+        create_bashrc "$dir" "$ADD_PROMPT" "$NEW_PROMPT"
+        rc_args="--rcfile $BASH_RC"
+    fi
+
+    # --- do the chroot --------------------------------------------------------
+
+    # "chroot" is the name of a command
+    [ -z "$WINDOW_TITLE" ] && WINDOW_TITLE=$(printf $"Chroot into %s" "$dir")
+    set_window_title "$WINDOW_TITLE"
+
+    # "chroot" is the name of a command
+    qsay $"Chrooting to %s with command %s" "$(pq $dir)" "$(pq $cmd $*)"
+
+    # "chroot" is the name of a command
+    qsay $"Use %s command or %s to exit the chroot"  "$(cq exit)" "$(cq "<ctrl>-d")"
+
+    # Time how long we are in the chroot to distinguish Between chroot failing and the
+    # last command run in the chroot failing.
+    local t1=$(get_time)
+    cmd env $MY_ENV $SET_ARCH chroot "$dir" "$cmd" $rc_args "$@"
+    local ret=$?
+    local delta_t=$(( $(get_time) - t1))
+
+    # "chroot" is the name of a command
+    [ $ret -eq 1 -a $delta_t -lt 50 ] && fatal $"Could not chroot to %s" "$(wq $dir)"
+
+    # Clean up is done in clean_up(), trapping exit
+
+    pause_exit
+    exit 0
+}
+
+#------------------------------------------------------------------------------
+# Create a bashrc file under $CHROOT/tmp/ that will be sourced when the bash
+# shell starts.  This allows is to set the prompt in the chroot.
+#------------------------------------------------------------------------------
+create_bashrc() {
+    local dir="$1"  add_ps1=$2  ps1=$3
+    test -d "$dir" || return 1
+    local file=$dir$BASH_RC
+
+    local fs_type=$(df -T "$(dirname "$file")" | tail -n1 | awk '{print $1}')
+    [ "$fs_type" = 'tmpfs' ] || return 1
+
+    if [ -z "$ps1" ]; then
+        ps1="\[${lt_blue}\]chroot\[${lt_green}\]>\[$nc_co\] "
+        [ -n "$add_ps1" ] && ps1="\\n$add_ps1\\n$ps1"
+    fi
+    cat <<Bashrc > "$file"
+test -r ~/.bashrc && source ~/.bashrc
+alias ls="ls --color=auto -F"
+alias ll="ls --color=auto -lhF"
+alias la="ls --color=auto -FA"
+
+alias halt="exit;"
+alias shutdown="exit;"
+alias poweroff="exit;"
+alias reboot="exit;"
+
+PS1="$ps1"
+
+Bashrc
+
+    # If there is only one kernel then we may was well specify it
+    local kernel=$(ls $dir/lib/modules/)
+    [ "$(echo "$kernel" | wc -l)" = 1 ] || return 0
+    cat<<Mod_Probe >> "$file"
+alias modprobe="modprobe -S $kernel"
+Mod_Probe
+
+    return 0
+}
+
+#------------------------------------------------------------------------------
+# Try to mount a block device
+#------------------------------------------------------------------------------
+try_mount() {
+    local dev=$1  dir=$2
+    is_mountpoint "$dir" && fatal $"Directory %s is already a mountpoint" "$dir"
+    if ! test -d "$dir"; then
+        TO_RMDIR="$dir\n$TO_RMDIR"
+        mkdir -p "$dir"
+    fi
+    test -d "$dir" || fatal $"Could not create directory %s" "$dir"
+    mount "$dev" "$dir"
+    is_mountpoint "$dir" || fatal $"Unable to mount %s at %s" "$dev" "$dir"
+    TO_UMOUNT="$dir\n$TO_UMOUNT"
+}
+
+#------------------------------------------------------------------------------
+# We won't get fooled again!  (by symlinks)
+#------------------------------------------------------------------------------
+is_mountpoint() {
+    local file=$1
+    cut -d" " -f2 /proc/mounts | grep -q "^$(readlink -f $file 2>/dev/null)$"
+    return $?
+}
+
+#------------------------------------------------------------------------------
+# If the cnt_file exits then we are not the first ones in so increment the
+# count and skip mounting things.  We start a lock here but if we are the
+# first ones in the we end the lock after we create the cnt_file
+#------------------------------------------------------------------------------
+start_lock() {
+    local lock_file=$1  cnt_file=$2
+
+    which flock &>/dev/null || return
+
+    exec 8>"$lock_file"
+    flock -x 8
+
+    # return if we are the first ones in
+    test -e "$cnt_file" || return
+
+    # Otherwise we don't have to mount anything
+    WAS_LOCKED=true
+
+    # Increment the count
+    local cnt=$(head -n1 "$cnt_file" 2>/dev/null)
+    : ${cnt:=0}
+    echo $((cnt + 1)) > "$cnt_file"
+
+    # release lock
+    exec 8>&-
+}
+
+#------------------------------------------------------------------------------
+# This runs after we mount tmpfs at /run in the chroot.
+# Set the count file to 1.
+#------------------------------------------------------------------------------
+set_count_file() {
+    local cnt_file=$1
+
+    test -d "$(dirname "$cnt_file")" && echo 1 > "$cnt_file"
+    #echo "cnt_file $cnt_file"
+    #ls "$(dirname "$cn_file")"
+
+    # release lock
+    exec 8>&-
+}
+
+#------------------------------------------------------------------------------
+# Decrement count in $file. Only the last one out shuts things down
+#------------------------------------------------------------------------------
+stop_lock() {
+
+    local lock_file=$1  cnt_file=$2
+
+    which flock &>/dev/null   || return 0
+    test -e "$cnt_file"       || return 0
+
+    exec 8>"$lock_file"
+    flock -x 8
+    local cnt=$(head -n1 "$cnt_file" 2>/dev/null)
+    : ${cnt:=0}
+
+    cnt=$((cnt - 1))
+
+    echo $cnt > "$cnt_file"
+    exec 8>&-
+
+    [ "$cnt" -eq 0 ]
+    return $?
+}
+
+#------------------------------------------------------------------------------
+#
+#------------------------------------------------------------------------------
+copy_in_xauthority() {
+    local dir=$1
+    [ -n "$DISPLAY" -a -n "$XAUTHORITY" -a -e "$dir/tmp" ] || return 1
+    [ "$(fs_type "$dir/tmp")" = tmpfs ] || return 1
+
+    local xauth_file=$(readlink -f "$XAUTHORITY")
+    test -f "$xauth_file" || return 1
+    cp "$xauth_file" "$dir/$XAUTH_FILE"
+    return $?
+}
+
+#------------------------------------------------------------------------------
+# Return file system type of a directory
+#------------------------------------------------------------------------------
+fs_type() {
+    dir=$1
+    test -d "$dir" || return
+    df -T "$dir" | tail -n1 | awk '{print $2}'
+}
+
+#------------------------------------------------------------------------------
+# Mount directories from fstab in the target system
+#------------------------------------------------------------------------------
+mount_fstab_dirs() {
+    local dir=$1  fstab_dir ; shift
+
+    local fstab=$dir/etc/fstab
+    test -r "$fstab" || return
+
+    for fstab_dir; do
+        local full_dir=$dir$fstab_dir
+        test -d "$full_dir"       || continue
+
+        is_mountpoint "$full_dir" && continue
+        #vsay "fstab dir %s"  "$(pq $fstab_dir)"
+
+        local buuid=$(sed -n -r "s|^UUID=([^ \s]+)\s+$fstab_dir\s.*|\1|p" "$fstab")
+        [ -z "$buuid" ]           &&  continue
+        #vsay "uuid %s"  "$(pq $buuid)"
+
+        cmd mount --uuid "$buuid" "$full_dir"
+        is_mountpoint "$full_dir" || continue
+        TO_UMOUNT="$full_dir\n$TO_UMOUNT"
+    done
+}
+
+#------------------------------------------------------------------------------
+# Let the chroot use my resolv.conf if able to
+# This is still highly flawed and easily fooled
+#------------------------------------------------------------------------------
+add_resolvconf() {
+    local dir=$1  resolv_conf=/etc/resolv.conf
+    local resolv_name=$(basename $resolv_conf)
+    local host_resolv=$(realpath -m $resolv_conf)
+
+    if ! test -r "$host_resolv"; then
+        warn $"Could not find host %s file!" "$(pq $resolv_name)"
+        return 1
+    fi
+
+    vsay $"host %s found at %s" "$resolv_name" "$(pq $host_resolv)"
+
+    # Follow all symlinks if there are any
+    local dest=$($SET_ARCH chroot "$dir" readlink -m "$resolv_conf")
+    vsay $"target %s points to %s" "$resolv_name" "$(pq $dest)"
+
+    local full=$dir/${dest#/}
+    local dest_name=$(basename "$dest")
+    local full_dir=$(dirname "$full")
+
+    # If it is a real file then bind mount to it and we're done
+    if test -f "$full"; then
+        cmd mount --bind "$host_resolv" "$full"
+        TO_UMOUNT="$chroot_resolv\n$TO_UMOUNT"
+        return 0
+    fi
+
+    case $dest in
+        # for /run and /tmp just create the directory and copy file
+        /run/*|/tmp/*)
+            cmd mkdir -p "$full_dir"
+            cmd cp $host_resolv "$full_dir/"$dest_name"" ;;
+
+        # For others, try to bind mount the directory
+        /*/*)
+            local bind_dir=$MY_RESOLV_DIR
+            cmd mkdir -p "$bind_dir"
+            TO_RMDIR="$bind_dir\n$TO_RMDIR"
+
+            cmd cp "$host_resolv" "$bind_dir/$dest_name"
+            TO_RM="$bind_dir/$dest_name\n$TO_RM"
+
+            cmd mkdir -p "$full_dir"
+            cmd mount --bind $bind_dir $full_dir
+            TO_UMOUNT="$full_dir\n$TO_UMOUNT" ;;
+
+        *)
+            warn $"do not know how to handle symlink to %s" "$(pq $dest)"
+            return 1 ;;
+    esac
+
+    return 0
+}
+
+#------------------------------------------------------------------------------
+# Unmount the things we mounted and remove the directories we created
+#------------------------------------------------------------------------------
+clean_up()  {
+
+    # Only clean up if we are the last ones out
+    stop_lock "$LOCK_FILE" "$CNT_FILE" || return
+
+    cmd rm "$LOCK_FILE"
+
+    # Try to kill all processes created in the chroot
+    local procs=$(dir_procs "$CHROOT_DIR")
+    if [ -n "$procs" ]; then
+        if [ -z "$QUIET" ]; then
+            echo $"Killing these processes"
+            ps u $procs
+        fi
+        cmd kill $procs
+        local i
+        for i in $(seq 1 5); do
+            procs=$(dir_procs "$CHROOT_DIR")
+            [ -z "$procs" ] && break
+        done
+        procs=$(dir_procs "$CHROOT_DIR")
+        [ -n "$procs" ] && cmd kill -9 $procs
+    fi
+
+    # Unmount everything under the chroot
+    if umount --help | grep -q -- --recursive; then
+        umount_all $CHROOT_DIR
+
+    # Or do it the old manual way
+    else
+        local targ
+        while read targ; do
+            [ -z "$targ" ] && continue
+            is_mountpoint "$targ" || continue
+            cmd umount --recursive "$targ"
+        done<<Umount
+$(echo -e "$TO_UMOUNT")
+Umount
+    fi
+
+    # Remove created files
+    while read targ; do
+        [ -z "$targ" ] && continue
+        cmd rm -f "$targ"
+    done<<Rm_File
+$(echo -e "$TO_RM")
+Rm_File
+
+    # Finally remove any directories we created
+    while read targ; do
+        [ -z "$targ" ] && continue
+        cmd rmdir "$targ"
+    done<<Rmdir
+$(echo -e "$TO_RMDIR")
+Rmdir
+
+    clear_window_title
+}
+
+#------------------------------------------------------------------------------
+# List all processes using files in directories *under* the given directory
+#------------------------------------------------------------------------------
+dir_procs() {
+    local dir=$1
+    test -d "$dir" || return
+    echo $(lsof "$dir" 2>/dev/null | grep "$dir/[^/]\+/" | awk '{print $2}' | sort -u | grep "^[0-9]")
+}
+
+#------------------------------------------------------------------------------
+# Unomount everything *under* a given directory (note the dot)
+#------------------------------------------------------------------------------
+umount_all() {
+    local top=$1  dir  failed cnt=0
+    while read dir; do
+        test -d "$dir" || test -f "$dir" || continue
+
+        # Umount /sys and /dev all in one go
+        case $dir in
+            $top/sys/[a-z]*) continue ;;
+            $top/dev/[a-z]*) continue ;;
+        esac
+        is_mountpoint "$dir" || continue
+        cmd umount --recursive "$dir"
+        is_mountpoint "$dir" || continue
+        failed="$failed $dir"
+        cnt=$((cnt + 1))
+    done<<Umount_All
+$(mount | awk '{print $3}' | grep $top/. | tac)
+Umount_All
+
+    case $cnt in
+        0) return 0 ;;
+        1) fatal $"One directory is still mounted %s" "$failed" ;;
+        *) fatal $"These directories are still mounted %s" "$failed" ;;
+    esac
+}
+
+#------------------------------------------------------------------------------
+# Display the command if VERBOSE or PRETEND.  Run the command if not PRETEND.
+#------------------------------------------------------------------------------
+cmd() {
+    [ "$VERBOSE$PRETEND" ] && echo "$*"
+    [ "$PRETEND" ] && return 0
+    "$@"
+}
+
+#------------------------------------------------------------------------------
+# Only show output of command in --verbose mode
+#------------------------------------------------------------------------------
+vcmd() {
+    [ "$VERBOSE$PRETEND" ] && echo "$*"
+    [ "$PRETEND" ] && return 0
+    if [ "$VERBOSE" ]; then
+        "$@"
+    else
+        "$@" &>/dev/null
+    fi
+}
+
+#------------------------------------------------------------------------------
+# The normal mountpoint command can fail on symlinks and in other situations.
+# This is intended to be more robust. (sorry Jerry and Gaer Boy!)
+#------------------------------------------------------------------------------
+is_mountpoint() {
+    local file=$1
+    cut -d" " -f2 /proc/mounts | grep -q "^$(readlink -f $file 2>/dev/null)$"
+    return $?
+}
+
+#------------------------------------------------------------------------------
+# Display the message unless we are in QUIET mode
+#------------------------------------------------------------------------------
+qsay() {
+    [ "$QUIET" ] && return
+    say "$@"
+}
+
+vsay() {
+    [ "$VERBOSE" ] || return
+    say "$@"
+}
+
+#------------------------------------------------------------------------------
+# Always display the message
+#------------------------------------------------------------------------------
+say() {
+    local fmt=$1
+    shift
+    printf "$m_co$fmt$nc_co\n" "$@"
+}
+
+#------------------------------------------------------------------------------
+# display error message and exit
+#------------------------------------------------------------------------------
+fatal() {
+    local fmt=$1 ; shift
+    printf "$ME$err_co Error:$warn_co $fmt$nc_co\n" "$@" >&2
+    pause_exit
+    exit 3
+}
+
+#------------------------------------------------------------------------------
+# Show version information and then exit
+#------------------------------------------------------------------------------
+show_version() {
+    local fmt="%s version %s (%s)\n"
+    printf "$fmt" "$ME"        "$VERSION"      "$VERSION_DATE"
+}
+
+#------------------------------------------------------------------------------
+# display warning
+#------------------------------------------------------------------------------
+warn()  {
+    [ "$QUIET" ] && return
+    local fmt=$1 ; shift
+    printf "$ME$warn_co warning:$m_co $fmt$nc_co\n" "$@" >&2
+}
+
+#------------------------------------------------------------------------------
+# Warn or error out if STRICT.  Currently STRICT is never set.
+#------------------------------------------------------------------------------
+warn_fatal() {
+    [ "$STRICT" ] && fatal "$@"
+    warn "$@"
+}
+
+#-------------------------------------------------------------------------------
+# Send "$@".  Expects
+#
+#   SHORT_STACK               variable, list of single chars that stack
+#   fatal(msg)                routine,  fatal("error message")
+#   takes_param(arg)          routine,  true if arg takes a value
+#   eval_argument(arg, [val]) routine,  do whatever you want with $arg and $val
+#
+# Sets "global" variable SHIFT to the number of arguments that have been read.
+#-------------------------------------------------------------------------------
+read_params() {
+    # Most of this code is boiler-plate for parsing cmdline args
+    SHIFT=0
+    # These are the single-char options that can stack
+
+    local arg val
+
+    # Loop through the cmdline args
+    while [ $# -gt 0 -a ${#1} -gt 0 -a -z "${1##-*}" ]; do
+        arg=${1#-}
+        shift
+        SHIFT=$((SHIFT + 1))
+
+        # Expand stacked single-char arguments
+        case $arg in
+            [$SHORT_STACK][$SHORT_STACK]*)
+                if echo "$arg" | grep -q "^[$SHORT_STACK]\+$"; then
+                    local old_cnt=$#
+                    set -- $(echo $arg | sed -r 's/([a-zA-Z])/ -\1 /g') "$@"
+                    SHIFT=$((SHIFT - $# + old_cnt))
+                    continue
+                fi;;
+        esac
+
+        # Deal with all options that take a parameter
+        if takes_param "$arg"; then
+            [ $# -lt 1 ] && fatal $"Expected a parameter after %s" "-$arg"
+            val=$1
+            [ -n "$val" -a -z "${val##-*}" ] \
+                && fatal $"Suspicious argument after %s" "-$arg: $val"
+            SHIFT=$((SHIFT + 1))
+            shift
+        else
+            case $arg in
+                *=*)  val=${arg#*=} ;;
+                  *)  val="???"     ;;
+            esac
+        fi
+
+        eval_argument "$arg" "$val"
+    done
+}
+
+#------------------------------------------------------------------------------
+# set the window title bar (if there is one)
+#------------------------------------------------------------------------------
+set_window_title() {
+    local fmt=${1:-$ME} ; shift
+    printf "\e]0;$fmt \a" "$@"
+    SET_WINDOW_TITLE=true
+}
+
+#------------------------------------------------------------------------------
+# clear the window title bar (if there is one)
+#------------------------------------------------------------------------------
+clear_window_title() {
+    [ "%SET_WINDOW_TITLE" ] && printf "\e]0; \a"
+}
+
+#------------------------------------------------------------------------------
+# Pause before exiting if --pause was given
+#------------------------------------------------------------------------------
+pause_exit() {
+    [ "$PAUSE_EXIT" ] || return 0
+    say $"Please press %s to exit" "$(pq "<Enter>")"
+    local ans
+    read ans
+}
+
+#------------------------------------------------------------------------------
+# Issue a simple fatal error if we are not running as root
+#------------------------------------------------------------------------------
+need_root() {
+    [ $(id -u) -eq 0 ] || fatal 099 $"This script must be run as root"
+}
+
+#------------------------------------------------------------------------------
+# run ME as root (thanks fehlix!)
+#------------------------------------------------------------------------------
+run_me_as_root() {
+    [ $(id -u) -eq 0 ] && return
+    sudo -nv &>/dev/null || warn $"This script must be run as root"
+    exec sudo -p $"Please enter your user password: " "$0" "$@" || need_root
+}
+
+#------------------------------------------------------------------------------
+# Return time since kernel booted in 100ths of a second
+#------------------------------------------------------------------------------
+get_time() { cut -d" " -f22 /proc/self/stat; }
+
+#------------------------------------------------------------------------------
+# Only used in conjunction with cmd() which does not handle io-redirect well.
+# Using write_file() allows both PRETEND_MODE and BE_VERBOSE to work.
+#------------------------------------------------------------------------------
+write_file() {
+    local file=$1 ; shift
+    mkdir -p "$(dirname "$file")"
+    echo "$*" > "$file"
+}
+
+#------------------------------------------------------------------------------
+# Convenience routines to color substrings.
+#------------------------------------------------------------------------------
+pq()  { echo "$hi_co$*$m_co"      ;}
+cq()  { echo "$lt_green$*$m_co"   ;}
+wq()  { echo "$m_co$*$warn_co"    ;}
+
+#------------------------------------------------------------------------------
+# Give ANSI escape colors convenient names
+#------------------------------------------------------------------------------
+set_colors() {
+   local e=$(printf "\e")
+
+         black="$e[0;30m" ;    blue="$e[0;34m" ;    green="$e[0;32m" ;    cyan="$e[0;36m" ;
+           red="$e[0;31m" ;  purple="$e[0;35m" ;    brown="$e[0;33m" ; lt_gray="$e[0;37m" ;
+       dk_gray="$e[1;30m" ; lt_blue="$e[1;34m" ; lt_green="$e[1;32m" ; lt_cyan="$e[1;36m" ;
+        lt_red="$e[1;31m" ; magenta="$e[1;35m" ;   yellow="$e[1;33m" ;   white="$e[1;37m" ;
+         nc_co="$e[0m"    ;   brown="$e[0;33m" ;
+
+           m_co=$cyan
+          hi_co=$white
+          err_co=$red
+         bold_co=$yellow
+         warn_co=$yellow
+}
+
+set_colors
+
+main "$@"

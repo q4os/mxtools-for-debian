@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<title>HELP: MX Date &amp; Time</title>
+</head>
+<body>
+	<h1>HELP: MX Date &amp; Time</h1>
+	<p>This application provides access to common settings and tools to make managing the system date and time easy.</p>
+
+	<h2>Date &amp; Time</h2>
+	<p>The settings on this tab control the date, time and zone of the system clock.</p>
+	<p><img src="datetime.png" alt="Date &amp; Time"/></p>
+	<p>When selecting a different time zone, the calendar and clock controls will reflect the change.
+		The system clock will not be altered until <strong>Apply</strong> is pressed.</p>
+
+	<h2>Hardware Clock</h2>
+	<p>The hardware clock, also known as a realtime clock (RTC), keeps track of the time when the system is off.
+		When the system is booted, the time is read from the Hardware Clock.</p>
+	<p><img src="hardware.png" alt="Hardware Clock"/></p>
+	<p>The <strong>Time zone for the Hardware Clock</strong> determines whether the hardware clock is set according to <strong>UTC</strong> or the <strong>Local</strong> time zone.
+		UTC is recommended, unless the system is also used with an operating system that requires the hardware clock time set to the local time zone.</p>
+	<p>The buttons in the <strong>Time transfer</strong> section copy the system clock time across to the hardware clock, and vice versa.</p>
+	<p>If <strong>Update the drift</strong> is selected when copying from <strong>System Clock to Hardware Clock</strong>, the drift factor for the hardware clock is updated.
+		It is automatically unselected once the operation is complete, and should not be selected again for at least 4 hours from the last drift update.</p>
+	<p>The <strong>Hardware Clock tools</strong> can be used to tune and maintain the hardware clock:</p>
+	<ul>
+		<li>The <strong>Read the Hardware Clock</strong> tool queries the hardware clock for information on how it is currently set up.</li>
+		<li>The <strong>Drift Adjust</strong> tool applies systematic drift corrections to the hardware clock, if the drift factor is known.</li>
+	</ul>
+	<p>The output from these tools will be placed in the text box under the buttons.</p>
+	<h3>Changing the time zone for the Hardware Clock</h3>
+	<p>The recommended method for correctly changing the time zone for the hardware clock, is to press <strong>Apply</strong> immediately after selecting the time zone (<strong>UTC</strong> or <strong>Local</strong>).
+		Check the contents of the text box in <strong>Hardware Clock tools</strong> to ensure everything is correct.
+		If the time is different, the hardware clock may have been adjusted for the change in time zone.</p>
+	<p>If the new time is incorrect, set the system clock to the correct time. You can use <strong>Update Now</strong> in the <strong>Network Time</strong> tab for this.
+		Once the system clock is set correctly, press <strong>System Clock to Hardware Clock</strong>.</p>
+	<h3>Drift factor calculation</h3>
+	<p>For a useful drift factor to be calculated, first go to <strong>Network Time</strong> and update the system clock using NTP.
+		Then with <strong>Update the drift</strong> selected, press <strong>System Clock to Hardware Clock</strong>.
+		Perform these steps again after at least 4 hours. The longer the time between drift calculations, the more precise the drift factor will be.</p>
+
+	<h2>Network Time</h2>
+	<p>The system clock can be maintained with the help of other systems that communicate using the Network Time Protocol (NTP).
+		The settings on this tab control how the NTP client service behaves.</p>
+	<p><img src="network.png" alt="Network Time"/></p>
+	<p>When <strong>Automatically update the System Clock with NTP servers</strong> is selected, the NTP servers that are on the list will be periodically checked and, if necessary, the system time will be adjusted.
+		The <strong>Update Now</strong> button can be used to manually adjust the system clock in line with the NTP servers on the list.</p>
+	<p>The NTP list contains a list of servers that are used for updating the time. The <strong>Type</strong> is one of the following:</p>
+	<dl>
+		<dt>Pool</dt>
+		<dd>A persistent association with a number of remote servers. Multiple <strong>Pool</strong> items are required for this to work.</dd>
+		<dt>Server</dt>
+		<dd>A persistent association with the specified remote server or local radio clock.</dd>
+		<dt>Peer</dt>
+		<dd>A pesistent symmetric-active mode association with the specified remote peer. Unlike <strong>Server</strong> and <strong>Pool</strong> the remote peer can also be synchronized to the local clock.</dd>
+	</dl>
+	<p>The <strong>Address</strong> must be a valid IP address (IPv4 or IPv6) or a domain.
+		The item is only used if there is a tick in the box next to its address, otherwise it is ignored.</p>
+	<p>The <strong>Options</strong> can specify additional flags and options for the server.</p>
+	<p>To apply the settings, <strong>/etc/ntp.conf</strong> is parsed and altered.
+		This application does not cover the entire scope of this file, so for more advanced configurations, edit this file manually.</p>
+</body>
+</html>

@@ -1,0 +1,19 @@
+Source: partition-info
+Section: utils
+Priority: extra
+Maintainer: anticapitalista <antix@operamail.com>
+Build-Depends: debhelper (>= 9)
+Standards-Version: 3.9.8
+
+Package: partition-info
+Architecture: all
+Depends: ${misc:Depends}, bsdmainutils, coreutils, gawk, gdisk, grep, sed, util-linux
+Description: Tool to list GPT and msdos partition info in similar format
+ A tool (partition-info) to list information about the selected
+ device's partitions. Lists the following information about
+ the partitions: NAME, SIZE, FSTYPE(name), FSTYPE(code), LABEL
+ .
+ The partition-info script was created to list information 
+ about GPT and msdos drive partitions. Output is formatted
+ the same for both types unlike fdisk which formats it's 
+ output slightly different for each type.   

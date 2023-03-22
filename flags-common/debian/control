@@ -1,0 +1,10 @@
+Source: flags-common
+Section: xfce
+Priority: extra
+Maintainer: dolphin oracle <dolphinoracle@gmail.com>
+Build-Depends: debhelper (>= 8.0.0)
+Standards-Version: 3.9.3
+
+Package: flags-common
+Architecture: all
+Description: package of national flags

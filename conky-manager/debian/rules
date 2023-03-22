@@ -1,0 +1,26 @@
+#!/usr/bin/make -f
+# -*- makefile -*-
+
+%:
+	dh $@
+
+override_dh_auto_clean:
+	rm -f src/share/pixmaps/conky-manager2.png
+	rm -f src/share/conky-manager2/images/conky-manager2.png
+	rm -f src/share/conky-manager2/images/conky-manager2-generic48.svg
+	rm -f src/share/conky-manager2/images/conky-manager2-generic64.svg
+	cp debian/icons/conky-manager2128.png src/share/pixmaps/conky-manager2.png
+	cp debian/icons/conky-manager2128.png src/share/conky-manager2/images/conky-manager2.png
+
+	dh_auto_clean
+
+override_dh_auto_build:
+	cp debian/icons/conky-manager2-generic64.png src/share/pixmaps/conky-manager2.png
+	cp debian/icons/conky-manager2-generic64.png src/share/conky-manager2/images/conky-manager2.png
+	cp debian/icons/conky-manager2-generic48.svg src/share/conky-manager2/images/conky-manager2-generic48.svg
+	cp debian/icons/conky-manager2-generic64.svg src/share/conky-manager2/images/conky-manager2-generic64.svg
+	
+	dh_auto_build
+
+override_dh_strip:
+	dh_strip --no-automatic-dbgsym

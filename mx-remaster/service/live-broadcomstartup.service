@@ -1,0 +1,12 @@
+[Unit]
+Description=check broadcom parts and adjust
+After=local-fs.target
+ConditionPathExists=/live/linux
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/BroadcomStartup
+ExecStop=/bin/true
+
+[Install]
+WantedBy=multi-user.target

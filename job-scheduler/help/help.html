@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>HELP: Job Scheduler</title>
+</head>
+<body>
+<p></p>
+<h1>HELP: Job Scheduler</h1>
+<p>Job Scheduler (job-scheduler) is a gui frontend to the crontab task scheduling system, 
+<br>a long standing linux standard, providing some convienence features such as help with 
+<br>cron time code formatting and setting of environment variables.</p>
+
+<h2>Command Tab</h2>
+
+<img src="main.jpg" alt="Opening tab" />
+
+<p>The opening tab for job-scheduler shows the current task profiles in the left pane 
+<br>and a job editor in the right pane.  The currently selected job from the left is displayed
+<br>in the right pane.</p>
+
+<p>Clicking the "New Item" button in the toolbar will start a new entry for editing.  
+<br>The user can manually enter a cron job here.  The "Reload" button in the toolbar 
+<br>will reload the last saved job list.</p>
+
+<img src="additem.jpg" alt="Command tab" />
+
+<p>The schedule for the task appears at the bottom of the Command Pane, showing 
+<br>actual time the task will be launched.  This list changes as the user formats 
+<br>the cron time format string either directly or via the Edit button.</p>
+
+<p>No changes to the cron job schedule will take place until the "Save" button is executed.</p>
+
+<p>Selecting the "Time Settings Editor" button in the Command pane will open the 
+<br>Time Settings Editor to help the user with time formatting.  It is possible 
+<br>to select multiple time buttons, each affecting a different area of the 
+<br>cron time format string, which the user can see change in real time</p>
+
+<p>The buttons are actual numbers on the clock face.  So "5" under Minutes is 5 minutes 
+<br>after the hour.   2 under Hours is 2:00 in the morning.  The cron time format string
+<br>will be generated as you select numbers.
+</p>
+
+<img src="timesettings.jpg" alt="Time Settings Editor" />
+
+<h2>Variables Tab</h2>
+
+<p>The Variables tab of the right pane allows the user to set up certain 
+<br>environment variables the the task may require.  By default, PATH, SHELL, and HOME
+<br>are already set.</p>
+
+<img src="environmentvariables.jpg" alt="Environment Varialbes" />
+
+<h2>Job List Tab</h2>
+
+<p>The Job List tab shows all currently scheduled jobs and when they will run.  
+<br>The user may filter the list via the "Max Item" and "Max Date" boxes at the 
+<br>bottom of the tab.  Changing values and pressing "Update" will change the list</p>
+
+<img src="currentusercronjobs.jpg" alt="Current Cron Jobs" />
+
+
+<h3>Tips and Tricks</h3>
+
+	<ul>
+		<li>Job Scheduler shows jobs on a per-user basis</li>
+		<li>If you want to edit a root level task, launch the app as root (sudo, gksu, mx-pkexec, etc...)</li>
+		<li>Jobs scheduled via methods other than crontab may not show in Job Scheduler</li>
+	</ul>
+
+
+
+
+<p>License: GPL3</p>
+
+</body>
+</html>

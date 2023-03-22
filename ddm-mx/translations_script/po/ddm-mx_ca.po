@@ -1,0 +1,480 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+# Translators:
+# marcmetallextrem <marcmetallextrem@gmail.com>, 2016
+# anticapitalista <anticapitalista@riseup.net>, 2017
+# James Bowlin <BitJam@gmail.com>, 2022
+# Eduard Selma <selma@tinet.cat>, 2022
+# 
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-11-19 20:40-0500\n"
+"PO-Revision-Date: 2016-11-29 14:08+0000\n"
+"Last-Translator: Eduard Selma <selma@tinet.cat>, 2022\n"
+"Language-Team: Catalan (https://www.transifex.com/anticapitalista/teams/10162/ca/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: ca\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: ../ddm-mx:38
+#, sh-format
+msgid "Unknown error"
+msgstr "Error desconegut"
+
+#: ../ddm-mx:39
+#, sh-format
+msgid "Option-"
+msgstr "Opció-"
+
+#: ../ddm-mx:40
+#, sh-format
+msgid "requires an argument."
+msgstr "cal un argument."
+
+#: ../ddm-mx:41
+#, sh-format
+msgid "Run as root"
+msgstr "Executa com a usuari principal"
+
+#: ../ddm-mx:42
+#, sh-format
+msgid "Install drivers for: "
+msgstr "Instal·la controladors per: "
+
+#: ../ddm-mx:48
+msgid "Nvidia driver installer"
+msgstr "Instal·lador de controlador Nvidia"
+
+#: ../ddm-mx:49
+msgid "Install proprietary nvidia driver from repo"
+msgstr "Instal·la el controlador propietari de Nvidia del repositori"
+
+#. Invalid option: start GUI
+#. launch_gui $@
+#. Unknown error: start GUI
+#. launch_gui $@
+#: ../ddm-mx:109 ../ddm-mx:119
+#, sh-format
+msgid "Invalid option"
+msgstr "Opció no vàlida"
+
+#. ##file locking
+#: ../ddm-mx:137
+#, sh-format
+msgid "creating lock ..."
+msgstr "creant bloqueig ..."
+
+#: ../ddm-mx:171
+#, sh-format
+msgid "Purge drivers for: "
+msgstr "Purga els controladors per: "
+
+#: ../ddm-mx:172 ../ddm-mx:194
+#, sh-format
+msgid "Start at (m/d/y):"
+msgstr "Comença a (m/d/a) "
+
+#: ../ddm-mx:180
+#, sh-format
+msgid "ERROR: Unknown argument: $DRV"
+msgstr "ERROR: Argument desconegut $DRV "
+
+#: ../ddm-mx:213 ../ddm-mx:913
+#, sh-format
+msgid "ERROR: Unknown argument: "
+msgstr "ERROR: argument desconegut: "
+
+#: ../ddm-mx:229
+#, sh-format
+msgid "Device Driver Manager Help:"
+msgstr "Ajuda del Device Driver Manager"
+
+#: ../ddm-mx:231
+msgid "The following options are allowed:"
+msgstr "Es permeten les opcions següents: "
+
+#: ../ddm-mx:233
+msgid "Offer debian-backports alternative"
+msgstr "Ofereix l'alternativa de Debian-backports"
+
+#: ../ddm-mx:235
+msgid "Install given driver."
+msgstr "Instal·la el controlador donat."
+
+#: ../ddm-mx:236
+msgid "drivers: nvidia, open, fixbumblebee"
+msgstr "controladors: nvidia, open, fixbumblebee"
+
+#: ../ddm-mx:238
+msgid "Purge given driver."
+msgstr "Purga el controlador donat."
+
+#: ../ddm-mx:239
+msgid "driver: nvidia"
+msgstr "controlador: nvidia"
+
+#: ../ddm-mx:241
+msgid "force specific nvidia driver package."
+msgstr "força el paquet específic de controlador nvidia."
+
+#: ../ddm-mx:246
+msgid "For development testing only!  simulate installs"
+msgstr "Només per prova de desenvolupament! Simula la instal·lació"
+
+#: ../ddm-mx:247
+msgid "This will install drivers for pre-defined hardware."
+msgstr "Això instal·larà els controladors per al maquinari predefinit."
+
+#: ../ddm-mx:248
+msgid "Use with -i."
+msgstr "Useu amb -i."
+
+#: ../ddm-mx:308
+#, sh-format
+msgid ""
+"Unsupported configuration.  bumblebee only works with 390xx drivers and up."
+msgstr ""
+"Configuració no suportada. Bumblebee només funciona amb controladors 390xx o"
+" superiors."
+
+#: ../ddm-mx:340
+#, sh-format
+msgid "Need driver: "
+msgstr "Cal el controlador: "
+
+#: ../ddm-mx:344
+#, sh-format
+msgid "NVIDIA packages to install are "
+msgstr "Els paquets NVIDIA a instal·lar són "
+
+#: ../ddm-mx:346 ../ddm-mx:658
+#, sh-format
+msgid "Continue?"
+msgstr "Continuo? "
+
+#: ../ddm-mx:367
+#, sh-format
+msgid "Nvidia command "
+msgstr "Ordre nVidia "
+
+#: ../ddm-mx:391
+#, sh-format
+msgid "ERROR: Could not configure Bumblebee for user: "
+msgstr "ERROR: No es pot configurar Bumblebee per l'usuari: "
+
+#: ../ddm-mx:395
+#, sh-format
+msgid "test enabled, not creating xorg.conf file"
+msgstr "activat el mode test, no es crearà el fitxer xorg.conf"
+
+#: ../ddm-mx:399
+#, sh-format
+msgid "creating /etc/X11/xorg.conf file"
+msgstr "creant el fitxer de configuració /etc/X11/xorg.conf "
+
+#: ../ddm-mx:408
+#, sh-format
+msgid "Finished"
+msgstr "Finalitzat"
+
+#: ../ddm-mx:425
+#, sh-format
+msgid "Proprietary drivers removed"
+msgstr "Eliminats els controladors propietaris "
+
+#: ../ddm-mx:438
+#, sh-format
+msgid "Open command "
+msgstr "Ordre obert"
+
+#: ../ddm-mx:442
+#, sh-format
+msgid "Open drivers installed"
+msgstr "Instal·lats els controladors lliures "
+
+#: ../ddm-mx:456 ../ddm-mx:462
+#, sh-format
+msgid "Resetting sources"
+msgstr "Reinicialitza les fonts"
+
+#: ../ddm-mx:473
+#, sh-format
+msgid "Press <Enter> to exit"
+msgstr "Premeu [Retorn] per sortir "
+
+#. enabling debian-backports
+#: ../ddm-mx:487
+#, sh-format
+msgid "Enabling backports repo"
+msgstr "Activant el dipòsit Backports "
+
+#: ../ddm-mx:488 ../ddm-mx:504
+#, sh-format
+msgid "Running apt-get update..."
+msgstr "Executant apt-get update..."
+
+#: ../ddm-mx:493 ../ddm-mx:509 ../ddm-mx:988
+#, sh-format
+msgid "Installing latest nvidia-detect package"
+msgstr "Instal·lant el darrer paquet nvidia-detect "
+
+#. enabling mx_test_repo
+#: ../ddm-mx:503
+#, sh-format
+msgid "Enabling MX Test repo"
+msgstr "Activant MX Test repo"
+
+#: ../ddm-mx:518
+#, sh-format
+msgid "Would you like to check debian-backports for a later version?"
+msgstr "Voleu provar si a debian-backports hi ha una versió més actual?"
+
+#: ../ddm-mx:520
+#, sh-format
+msgid "Yes or No?"
+msgstr "Si o No?"
+
+#: ../ddm-mx:522
+#, sh-format
+msgid "Yes"
+msgstr "Sí "
+
+#: ../ddm-mx:523
+#, sh-format
+msgid "No"
+msgstr "No "
+
+#: ../ddm-mx:525 ../ddm-mx:570 ../ddm-mx:608 ../ddm-mx:952
+#, sh-format
+msgid "Enter Number of selection"
+msgstr "Entreu el número de la selecció"
+
+#: ../ddm-mx:529 ../ddm-mx:533 ../ddm-mx:546 ../ddm-mx:550 ../ddm-mx:574
+#: ../ddm-mx:587 ../ddm-mx:612 ../ddm-mx:625
+#, sh-format
+msgid "Ok"
+msgstr "D'acord"
+
+#: ../ddm-mx:536 ../ddm-mx:553 ../ddm-mx:592 ../ddm-mx:632 ../ddm-mx:958
+#, sh-format
+msgid "invalid option."
+msgstr "opció no vàlida. "
+
+#. NVIDIA_XCONFIG=""
+#: ../ddm-mx:536 ../ddm-mx:553 ../ddm-mx:590 ../ddm-mx:592 ../ddm-mx:630
+#: ../ddm-mx:632 ../ddm-mx:957 ../ddm-mx:958
+#, sh-format
+msgid "exiting"
+msgstr "sortint "
+
+#: ../ddm-mx:542 ../ddm-mx:543
+#, sh-format
+msgid "Would you like to check MX Test Repo for a later version?"
+msgstr "Voldríeu provar MX Test Repo per a una versió posterior?"
+
+#: ../ddm-mx:560 ../ddm-mx:598
+#, sh-format
+msgid "Which driver do you wish to install"
+msgstr "Quin controlador voleu instal·lar? "
+
+#: ../ddm-mx:562
+#, sh-format
+msgid "Main repos or debian-backports?"
+msgstr "Dipòsit principal o debian-backports?"
+
+#: ../ddm-mx:564 ../ddm-mx:602
+#, sh-format
+msgid "Main"
+msgstr "Principal "
+
+#: ../ddm-mx:568 ../ddm-mx:606
+#, sh-format
+msgid "Exit"
+msgstr "Surt"
+
+#: ../ddm-mx:583 ../ddm-mx:621
+#, sh-format
+msgid "Reset nvidia-detect"
+msgstr "Reinicia nvidia-detect"
+
+#: ../ddm-mx:600
+#, sh-format
+msgid "Main repos or MX Test"
+msgstr "Dipòsits oficials o MX Test Repo"
+
+#: ../ddm-mx:604
+#, sh-format
+msgid "MX Test"
+msgstr "MX Test"
+
+#: ../ddm-mx:648
+#, sh-format
+msgid "Candidate is: "
+msgstr "El candidat és: "
+
+#: ../ddm-mx:649 ../ddm-mx:925 ../ddm-mx:934
+#, sh-format
+msgid "Installed is: "
+msgstr "L'instal·lat és: "
+
+#: ../ddm-mx:657
+#, sh-format
+msgid "Refreshing Sources with apt-get update"
+msgstr "Refrescant les fonts amb apt-get update"
+
+#: ../ddm-mx:664
+#, sh-format
+msgid "There was a problem with the apt-get update.  See $LOG for details"
+msgstr "Hi ha hagut un problema amb apt-get update. Vegeu $LOG per detalls."
+
+#: ../ddm-mx:674
+#, sh-format
+msgid "To restore open source drivers use:  "
+msgstr "Per restituir els controladors lliures useu:"
+
+#: ../ddm-mx:691
+#, sh-format
+msgid "To restore open source drivers later use:  "
+msgstr "Per restituir els controladors lliures més tard useu:"
+
+#: ../ddm-mx:703
+#, sh-format
+msgid "For recovery help see "
+msgstr "Per ajuda a la recuperació vegeu"
+
+#: ../ddm-mx:706
+#, sh-format
+msgid "Information written to "
+msgstr "Informació escrita a "
+
+#: ../ddm-mx:742
+#, sh-format
+msgid "Possible previous install from source or smxi/sgfxi detected."
+msgstr ""
+"S'ha detectat una possible instal·lació a partir de la font o smxi/sgfxi."
+
+#: ../ddm-mx:743
+#, sh-format
+msgid "Version detected: "
+msgstr "Versió detectada: "
+
+#: ../ddm-mx:744
+#, sh-format
+msgid "Latest possible with this script : "
+msgstr "Més recent possible amb aquest script: "
+
+#: ../ddm-mx:745
+#, sh-format
+msgid ""
+"Please remove with  <sudo nvidia-install --uninstall> and reboot if you wish"
+" to proceed"
+msgstr ""
+"Si us plau, elimineu-la amb  <sudo nvidia-install --uninstall> i torneu a "
+"arrencar si voleu continuar"
+
+#: ../ddm-mx:760
+#, sh-format
+msgid "nvidia-optimus detected"
+msgstr "detectat nvidia-optimus "
+
+#: ../ddm-mx:763
+#, sh-format
+msgid "Is this a NVIDIA/INTEL Optimus system?"
+msgstr "És un sistema NVIDIA/INTEL Optimus?"
+
+#: ../ddm-mx:800
+#, sh-format
+msgid "You can use the new PRIMUS driver built in to the nvidia drivers."
+msgstr ""
+"Podeu usar el nou controlador PRIMUS encastat als controladors  nvidia."
+
+#: ../ddm-mx:801
+#, sh-format
+msgid ""
+"Use \"nvidia-run-mx\" followed by your application command to use the nvidia"
+" graphics"
+msgstr ""
+"Useu \"nvidia-run-mx\" seguit de l'ordre de la vostra aplicació per usar els"
+" gràfics nvidia"
+
+#: ../ddm-mx:803
+#, sh-format
+msgid ""
+"If you want to force the older bumblebee optimus drivers,\\n quit and "
+"restart with sudo ddm-mx -i nvidia -f bumblebee-nvidia"
+msgstr ""
+"Si voleu forçar els controladors bumblebee antics,\\n sortiu i reinicieu amb"
+" sudo ddm-mx -i nvidia -f bumblebee-nvidia"
+
+#: ../ddm-mx:807 ../ddm-mx:813
+#, sh-format
+msgid "You need to use the bumblebee-nvidia driver."
+msgstr "Cal que useu el controlador bumblebee-nvidia."
+
+#: ../ddm-mx:826
+#, sh-format
+msgid "nvidia driver not available, check your repo sources"
+msgstr ""
+"No puc obtenir el controlador nvidia. Reviseu els dipòsits de programari"
+
+#: ../ddm-mx:831
+#, sh-format
+msgid ""
+"Uh oh. Your card is only supported by older legacy drivers which are not in "
+"any current Debian suite."
+msgstr ""
+"Ho sento, la vostra tarja només té suport de controladors antics que ja no "
+"són en cap distribució Debian actual."
+
+#: ../ddm-mx:923 ../ddm-mx:932
+#, sh-format
+msgid "Main repo candidate is:  "
+msgstr "El candidat del dipòsit principal és: "
+
+#: ../ddm-mx:924
+#, sh-format
+msgid "Debian backports candidate is:  "
+msgstr "El candidat de Debian backports és: "
+
+#: ../ddm-mx:933
+#, sh-format
+msgid "MX Test repo candidate is:  "
+msgstr "El candidat de MX Test repo és: "
+
+#: ../ddm-mx:944
+#, sh-format
+msgid "nvidia driver already installed"
+msgstr "Controlador nvidia ja instal·lat"
+
+#: ../ddm-mx:946
+#, sh-format
+msgid "Reinstall or quit?"
+msgstr "Reinstal·la o surt?"
+
+#: ../ddm-mx:949
+#, sh-format
+msgid "Reinstall"
+msgstr "Reinstal·la"
+
+#: ../ddm-mx:950
+#, sh-format
+msgid "quit"
+msgstr "surt"
+
+#: ../ddm-mx:956
+#, sh-format
+msgid "reinstalling"
+msgstr "reinstal·lant "
+
+#: ../ddm-mx:979
+#, sh-format
+msgid "No nvidia card found - exiting"
+msgstr "No he trobat cap tarja nvidia - sortint "

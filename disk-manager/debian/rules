@@ -1,0 +1,16 @@
+#!/usr/bin/make -f
+# -*- makefile -*-
+
+# Uncomment this to turn on verbose mode.
+#export DH_VERBOSE=1
+
+PACKAGEVERSION = $(shell head -1 debian/changelog | cut -d\( -f2 | cut -d\) -f1)
+
+export PYBUILD_NAME=disk-manager
+
+%:
+	dh $@ \
+		--with python3
+
+override_dh_update_autotools_config:
+	sed -i -r "/^AC_INIT/s/^([^[]+[[])([^]]+)(.+)/\1$(PACKAGEVERSION)\3/" configure.ac   

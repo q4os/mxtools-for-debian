@@ -1,0 +1,14 @@
+Source: rootactions-servicemenu
+Section: kde
+Priority: optional
+Maintainer: Steven Pusser <stevep@mxlinux.org>
+XSBC-Original-Maintainer: Leszek Lesner <leszek@zevenos.com>
+Build-Depends: debhelper (>= 10)
+Standards-Version: 3.9.5
+
+Package: kde-servicemenu-rootactions
+Architecture: all
+Depends: ark, dolphin | konqueror, perl, policykit-1
+Recommends: kate
+Description: root actions service menu for Dolphin
+ Allows you execute certain commands as root inside Dolphin.

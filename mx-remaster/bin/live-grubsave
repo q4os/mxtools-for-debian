@@ -1,0 +1,560 @@
+#!/usr/bin/bash
+
+# need bash
+[ -z "$BASH_VERSION" ] && exec "$0" "$@"
+
+ME="$0"
+VERSION="221228-01"
+
+# PATH sanity
+PATH=/usr/local/bin:/usr/bin:/usr/sbin
+export PATH
+
+#----------------------------------------------------------------------
+usage() {
+#----------------------------------------------------------------------
+cat <<USAGE
+Usage: ${ME##*/} [options] [addtional boot parameter]
+Save live boot parameter into grubenv.cfg
+
+Options:
+    -h|--help         Show this help. More details with »--list«
+
+    -l|--list         Display list of recognised boot parameter
+
+    -m|--mount        Keep grub-device mounted even if toram was used
+
+    -p|--print        Print current grubenv.cfg
+
+    -r|--reset        Remove saved boot parameter
+
+    -s|--simulate     Do not save, but show what would be saved
+
+    -v|--version      Show version
+
+USAGE
+exit 1
+}
+
+#----------------------------------------------------------------------
+check_parameter() {
+#----------------------------------------------------------------------
+    CLP=()
+    local p c
+    for c in "$@" ""; do
+        case $p in
+            -h|--help) usage
+            ;;
+            -l|--list) list_tables; exit
+            ;;
+            -m|--mount) KEEP_MOUNTED=true; p=
+            ;;
+            -p|--print) PRINT_CURRENT=true
+            ;;
+            -r|--reset) RESET=true
+            ;;
+            -s|--simulate) SIMULATE=true; p=
+            ;;
+            -v|--version) show_version
+            ;;
+            -*) echo "[WARN] unknown parameter: $p"; usage
+            ;;
+        esac
+        [[ -n $p ]] && CLP+=("$p")
+        p=$c
+    done
+}
+
+#----------------------------------------------------------------------
+# global tables
+#----------------------------------------------------------------------
+export KEEP_MOUNTED=""
+export PRINT_CURRENT=""
+export RESET=""
+export SIMULATE=""
+
+
+unset CLP FLG IGN PAR PER TAG CFG
+
+declare -a CLP  # list of command line parameter and options
+declare -A FLG  # hash of to be saved flag-parameter
+declare -A IGN  # hash of to be ignored parameter
+declare -A PAR  # hash of to be saved parameter (with par=value)
+declare -A PER  # hash of to be saved persistence parameter
+declare -A TAG  # hash of grubenv tag fields
+declare -A CFG  # hash of built-in kernel boot parameter
+
+#----------------------------------------------------------------------
+list_tables() {
+#----------------------------------------------------------------------
+    echo "Persistence parameter"
+    printf '\t%-20s%s\n' "${per[@]}"
+    echo "Boot parameter as key=value pair"
+    printf '\t%-20s%s\n' $(printf ' %s=' "${par[@]}")
+    echo 'Boot parameter as »flag«'
+    printf '\t%-20s%s\n' "${flg[@]}"
+    echo "Tag fields saved in grubenv.cfg"
+    printf '\t%-20s%s\n' "${tag[@]}"
+    echo "Parameter ignored - not to be saved"
+    printf '\t%-20s%s\n' "${ign[@]}"
+    if (( ${#CFG[@]} != 0 )); then
+        echo "Kernel built-in boot parameter - not to be saved"
+        printf '\t%-20s\n' "${CFG[@]}"
+    fi
+    echo
+    echo "Additional boot-parameter found are saved into the »extra« field."
+    echo "Found »flag« parameter with a »=value« are added also into »extra« field."
+    echo "Remove a boot parameter, tag- or extra-field with an empty value, e.g."
+    echo "»extra=« will remove all parameter from the extra-field."
+    echo "Two special cases:"
+    echo 'To remove boot parameter »splasht=« use »splasht=" "«  or »splasht=off«.'
+    echo "To force frugal device selection menu to be shown use »fdev=ask« or »fdev=select«"
+    echo "Note: When using »fdev=select« manually added to the boot parameter within"
+    echo "GRUB menu at boot-time, »fdev=select« will not be saved by live-grubsave."
+}
+#----------------------------------------------------------------------
+fill_tables() {
+#----------------------------------------------------------------------
+    par=(  # boot parameter to be saved as par=value pair
+        lang
+        kbd kbvar kbopt
+        tz
+        from
+        hwclock
+        blab  blabel bootlabel
+        bdev  bootdev
+        bdir  bootdir
+        buuid bootuuid btry
+        fdev  flab fuuid fdir ftry
+        pdev  persistdev
+        plab  plabel persistlabel
+        puuid persistuuid
+        pdir  persistdir ptry
+        live_swap
+        automount fstab
+        desktop desktheme fontsize
+        kernel
+        norepo
+        splasht
+        toram
+        )
+    flg=(  # boot parameter as »flag«
+        disable_theme
+        disable_background
+        dostore nostore
+        norepo
+        savestate nosavestate
+        splasht
+        toram
+        )
+    per=(  # boot persistence parameter
+        persist_all
+        persist_root
+        persist_static
+        p_static_root
+        persist_home
+        frugal_persist
+        frugal_root
+        frugal_static
+        f_static_root
+        frugal_home
+        frugal_only
+    )
+    ign=(  # boot parameter ignored - not to be saved
+        BOOT_IMAGE
+        bootsave
+        checkmd5
+        gfxsave grubsave
+        menu menus
+        noremaster
+        nosplash
+        password private pw
+        rollback
+        quiet
+        s S 1 2 3 4 5 6
+        bp ubp
+    )
+    tag=(  # tag fields used within grubenv
+        extra
+        savestate
+        store
+        persistence
+    )
+
+    local c p
+    for p in "${flg[@]}"; do FLG["$p"]="$p"; done
+    for p in "${ign[@]}"; do IGN["$p"]="$p"; done
+    for p in "${par[@]}"; do PAR["$p"]="$p"; done
+    for p in "${per[@]}"; do PER["$p"]="$p"; done
+    for p in "${tag[@]}"; do TAG["$p"]="$p"; done
+
+    local cfg=$(grep ^CONFIG_CMDLINE= /boot/config-$(uname -r) 2>/dev/null | tail -1 | cut -d '"' -f2)
+    for p in $cfg; do CFG["$p"]="$p";  done
+
+}
+
+#----------------------------------------------------------------------
+live_grubsave() {
+#----------------------------------------------------------------------
+    local config_dir=/live/config
+    local config=$config_dir/initrd.out
+
+    [ -e $config                  ] || return # not a live system
+    [ -e $config_dir/remasterable ] || return # not remasterable
+
+    #local PROC_CMDLINE=$(cat /proc/cmdline)
+    #local KERNEL_CONFIG_CMDLINE
+    #grep -q '^CONFIG_CMDLINE=' /boot/config-$(uname -r) \
+    #     && eval KERNEL_$(grep '^CONFIG_CMDLINE=' /boot/config-$(uname -r))
+    #local proc_cmdline=${PROC_CMDLINE#${KERNEL_CONFIG_CMDLINE}}
+
+    local proc_cmdline=$(cat /proc/cmdline)
+
+    local pcl p q
+    local -a BPR  # list of boot parameter
+    local -A CNT  # hash of parameter counter
+    local -A GRP  # hash of found parameter
+    local -a XTR  # list of found extra parameter
+    local -A trim # hash of trimmed parameter
+
+    # replace BOOT_IMAGE=/.../vmlinuz with kernel=vmlinuz
+    local par=$( (echo $proc_cmdline; cat $config_dir/cmdline* 2>/dev/null) |
+                 tr $'\n' ' ' |
+                 sed -r 's:\bBOOT_IMAGE=.*/(vmlinuz[0-9]*):kernel=\1:'
+                 )
+    # prepare boot parameter with double quotes
+    q=${par//=\\\"/=\'\"}" ";  q=${q//=\"/=\'\"};
+    q=${q//\\\" /\"\'  }    ;  q=${q//\" /\"\'  };
+    eval BPR=( $(echo "${q}") )
+
+    local c p v  # => c := p=v
+    for c in "${BPR[@]}" "$@"; do
+        [[ -z $c ]] && continue
+
+        p=${c%%=*}; v=${c#$p}; v=${v#=}
+        [[ -z $p ]] && continue
+        [[ -n ${IGN["$p"]} ]] && continue
+        [[ -n ${IGN["$c"]} ]] && continue
+        [[ -n ${CFG["$c"]} ]] && continue
+
+        if [[ -n ${TAG[$p]} ]]; then
+           [[ $p == extra ]] && XTR=()
+           [[ $c != savestate ]] && {
+              GRP[$p]=$v
+              continue
+           }
+        fi
+        # empty »splasht=""« to be saved
+        if [[ $p == splasht ]]; then
+            # "splasht" or "splasht="  to be saved
+            if [ "$c" = "splasht" ] || [ "$c" = "splasht=" ]; then
+                GRP[splasht]="$c"
+                continue
+            fi
+            # splasht=off or =" " not saved
+            if [[ $v == off ]] || [[ "${v:0:1}${v// /}" == " " ]]; then
+                GRP[splasht]=""
+                continue
+            fi
+        fi
+
+        # "flag"-parameter
+        if [[ -n ${FLG["${c}"]} ]]; then
+            case "${c}" in
+                    dostore|nostore) p=store ;;
+              savestate|nosavestate) p=savestate ;;
+           esac
+           GRP[$p]="$c"
+           continue
+        fi
+
+        # persistence parameter
+        if [[ -n ${PER[$p]} ]]; then
+            [[ -z $v ]] && GRP[persistence]="${p}"
+            continue
+        fi
+
+        # empty parameter (par=)
+        if [[ -n ${PAR[$p]} ]] || [[ -n ${FLG[$p]} ]]; then
+           if [[  -z ${v} ]]; then
+              trim[$p]=x
+              GRP[$p]=""
+              continue
+           fi
+        fi
+
+        # boot parameter
+        if [[ -n ${PAR[$p]} ]]; then
+           GRP[$p]=${v}
+           continue
+        fi
+        ((CNT[$p]+=1))
+
+        # extra plus to be added to extra parameter
+        if [[ $p == extra+ ]]; then
+            XTR+=("$v")
+            continue
+        fi
+
+        # extra parameter
+        XTR+=("$c")
+        # reduce timeout for fdev=ask with ftry=0
+        #[[ $c == fdev=ask ]] && XTR+=("ftry=0")
+
+    done
+    # check ftry with fdev
+    #declare -p GRP
+    if [[ ${trim["fdev"]} == x ]]; then
+        [[ ${GRP["ftry"]} == 0 ]] && GRP[ftry]=""
+    fi
+    if [[ ${GRP[fdev]} == ask ]] && [[ -z ${GRP[ftry]}  ]]; then
+        GRP[ftry]=0
+    fi
+
+    if [[ ${GRP[fdev]} == select ]]; then
+        GRP[fdev]=""
+        [[ ${GRP[ftry]} == 0 ]] &&  GRP[ftry]=""
+    fi
+
+    local -A trim # reset hash of trimmed parameter
+    # trim extra - remove empty value par=
+    local -a slm
+    if (( ${#XTR[*]} > 0 )); then
+        local i
+        for i in $(eval echo {$((${#XTR[@]}-1))..0} ); do
+            c=${XTR[i]}
+            p=${c%%=*}
+            # trim ftry with fdev
+            [[ $c = fdev= ]] && trim[ftry]=x
+            [[ ${trim["$p"]} == x ]] && continue
+
+            [[ ${c#$p} == = ]] && {
+                trim["$p"]=x
+                continue
+            }
+            slm=("$c" "${slm[@]}" )
+        done
+    fi
+
+    # slim extra - remove doublicats
+    local -A seen # hash of seen extra paramter
+    local -a SLM  # list of slimmed extra paramter
+    local a
+    for a in "${slm[@]}"; do
+        [ "${seen["$a"]}" == "x" ] && continue
+        seen["$a"]="x"
+        SLM+=("$a")
+    done
+
+    (( ${#SLM[*]} > 0 )) && GRP[extra]="${SLM[*]} ${GRP[extra]}"
+    #(( ${#slm[*]} > 0 )) && GRP[extra]="${slm[*]} ${GRP[extra]}"
+
+    local is_mp=true
+    local grub_mp_was_mounted=false
+    local have_grub_mp=false
+
+    local BIOS_DEV  BIOS_FSTYPE BIOS_MP BIOS_UUID
+    local BOOT_DEV  BOOT_FSTYPE BOOT_MP BOOT_UUID
+    local GRUB_DEV  GRUB_FSTYPE GRUB_MP GRUB_UUID
+
+    eval "$(grep -E '^(BIOS|BOOT)_(DEV|FSTYPE|MP|UUID)=' $config)"
+
+    #------------------------------------------------------------------
+    # checking BIOS_MP
+    #------------------------------------------------------------------
+    : ${BIOS_MP:=/live/bios-dev}
+    if ! $have_grub_mp && [[ -d $BIOS_MP ]]; then
+        if mountpoint -q $BIOS_MP; then
+            GRUB_MP=$BIOS_MP
+            GRUB_DEV=$BIOS_DEV
+            grub_mp_was_mounted=true
+            have_grub_mp=true
+        fi
+    fi
+
+    if ! $have_grub_mp; then
+        if [[ -z $BIOS_DEV ]]; then
+            if [[ -n $BIOS_UUID ]]; then
+                   BIOS_DEV=$(readlink -e /dev/disk/by-uuid/$BIOS_UUID)
+            fi
+        fi
+
+        if [[ -n $BIOS_DEV ]]; then
+            grub_mp=$(lsblk -no MOUNTPOINT $BIOS_DEV)
+            if [[ -n $grub_mp ]]; then
+                GRUB_MP=$grub_mp
+                grub_mp_was_mounted=true
+                have_grub_mp=true
+                GRUB_DEV=$BIOS_DEV
+            else
+                BIOS_DEV_FS_TYPE=$(blkid -o value -s TYPE $BIOS_DEV)
+                if [[ -n $BIOS_DEV_FS_TYPE ]]; then
+                    [[ -d $BIOS_MP ]] || mkdir -p $BIOS_MP
+                    mount -t $BIOS_DEV_FS_TYPE $BIOS_DEV $BIOS_MP
+                    if mountpoint -q $BIOS_MP; then
+                        GRUB_MP=$BIOS_MP
+                        GRUB_DEV=$BIOS_DEV
+                        grub_mp_was_mounted=false
+                        have_grub_mp=true
+                    fi
+                fi
+            fi
+        fi
+    fi
+
+    #------------------------------------------------------------------
+    # checking BOOT_MP
+    #------------------------------------------------------------------
+    : ${BOOT_MP:=/live/boot-dev}
+    if ! $have_grub_mp && [[ -d $BOOT_MP ]]; then
+        if mountpoint -q $BOOT_MP; then
+            GRUB_MP=$BOOT_MP
+            GRUB_DEV=$BOOT_DEV
+            grub_mp_was_mounted=true
+            have_grub_mp=true
+        fi
+    fi
+
+    if ! $have_grub_mp; then
+        if [[ -z $BOOT_DEV ]]; then
+            if [[ -n $BOOT_UUID ]]; then
+                   BOOT_DEV=$(readlink -e /dev/disk/by-uuid/$BOOT_UUID)
+            fi
+        fi
+
+        if [[ -n $BOOT_DEV ]]; then
+            grub_mp=$(lsblk -no MOUNTPOINT $BOOT_DEV)
+            if [[ -n $grub_mp ]]; then
+                GRUB_MP=$grub_mp
+                grub_mp_was_mounted=true
+                have_grub_mp=true
+                GRUB_DEV=$BOOT_DEV
+            else
+                BOOT_DEV_FS_TYPE=$(blkid -o value -s TYPE $BOOT_DEV)
+                if [[ -n $BOOT_DEV_FS_TYPE ]]; then
+                    [[ -d $BOOT_MP ]] || mkdir -p $BOOT_MP
+                    mount -t $BOOT_DEV_FS_TYPE $BOOT_DEV $BOOT_MP
+                    if mountpoint -q $BOOT_MP; then
+                        GRUB_MP=$BOOT_MP
+                        grub_mp_was_mounted=false
+                        have_grub_mp=true
+                        GRUB_DEV=$BOOT_DEV
+                    fi
+                fi
+            fi
+        fi
+    fi
+
+    if ! $have_grub_mp; then
+        # nowhere to save grubenv
+        return
+    fi
+
+    local grub_config="/boot/grub/config"
+    local grub_env="/boot/grub/grubenv.cfg"
+
+    if [ ! -d $GRUB_MP$grub_config ]; then # not a live config
+        return
+    fi
+
+    grub_env="${GRUB_MP}${grub_env}"
+    echo "${GRUB_DEV:+[$GRUB_DEV] @ }$grub_env"
+    if [[ $PRINT_CURRENT ]]; then
+       if [[ -f $grub_env ]] ; then
+          cat $grub_env
+       fi
+    else
+
+    local grub_head=""
+
+    read -d $'\f' grub_head <<EOF
+#GRUB parameter saved on live system by live-grubsave (version "$VERSION")
+#saved on: $(date)
+#${GRUB_DEV:+[$GRUB_DEV] @ }$grub_env
+EOF
+
+	    if [ "$RESET" = "true" ] && touch ${grub_env} 2>/dev/null; then
+	        echo "$grub_head"   | teecat ${grub_env}
+	    elif (( ${#GRP[@]} > 0 )) && touch ${grub_env} 2>/dev/null; then
+	        echo "$grub_head"   | teecat ${grub_env}
+	        #echo "#${grub_env}" | teecat -a ${grub_env}
+	        for p in $( printf "%s\n" ${!GRP[@]} | sort ); do
+	            [[ -z ${GRP[$p]} ]] && continue
+	            # extra last
+	            [[ $p == extra ]] && continue
+
+	            if [[ $p == splasht ]]; then
+	                #(( CNT[$p] == 1 )) && continue
+	                if [[ ${GRP[$p]} == "splasht=" ]]; then
+	                    echo $p='""' | teecat -a ${grub_env}
+	                else
+	                    echo $p='"'"${GRP[$p]}"'"' | teecat -a ${grub_env}
+	                fi
+	                continue
+	            fi
+	            [[ -z ${GRP[$p]} ]] && continue
+	            echo $p='"'"${GRP[$p]}"'"' | teecat -a ${grub_env}
+
+	        done
+	        p=extra
+	        extra=${GRP[$p]}
+	        extra="${extra% }"
+	        if [ -n "$extra" ]; then
+	            if [ -z "${extra//*\"*/}" ]; then
+	                echo $p="'${extra//\'/\"}'" | teecat -a ${grub_env}
+	            else
+	                echo $p='"'"${extra}"'"' | teecat -a ${grub_env}
+	            fi
+	        fi
+	    fi
+	    sync; sync
+    fi
+
+    if [[ ! $KEEP_MOUNTED ]]; then
+        if $have_grub_mp && ! $grub_mp_was_mounted; then
+            mountpoint -q $GRUB_MP && umount $GRUB_MP
+        fi
+    fi
+}
+
+#----------------------------------------------------------------------
+run_me_as_root() {
+#----------------------------------------------------------------------
+    [ $(id -u) -eq 0 ] || exec sudo "$ME" "$@"
+}
+
+#----------------------------------------------------------------------
+teecat() {
+#----------------------------------------------------------------------
+    if [[ $SIMULATE ]]; then
+       cat
+    else
+       tee "$@"
+    fi
+}
+
+#----------------------------------------------------------------------
+show_version() {
+#----------------------------------------------------------------------
+    echo "Version: $VERSION"
+    exit
+}
+
+#----------------------------------------------------------------------
+main() {
+#----------------------------------------------------------------------
+
+    fill_tables
+
+    check_parameter "$@"
+
+    run_me_as_root "$@"
+
+    set -- "${CLP[@]}"
+
+    live_grubsave "$@"
+
+}
+
+main "$@"
+exit $?

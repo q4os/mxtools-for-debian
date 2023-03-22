@@ -1,0 +1,11 @@
+Source: plasma-look-and-feel-theme-mx
+Section: system
+Priority: extra
+Maintainer: dolphin oracle <dolphinoracle@gmail.com>
+Build-Depends: debhelper (>= 8.0.0)
+Standards-Version: 3.9.3
+
+Package: plasma-look-and-feel-theme-mx
+Architecture: all
+Depends: ${misc:Depends}
+Description: misc plasma look & feel theme for mx linux

@@ -1,0 +1,11 @@
+### BACKGROUND ###
+
+Size: 48PX
+Background Color: #262626
+1PX Border color: #000000
+
+### ICON ###
+
+color #e6e6e6
+
+

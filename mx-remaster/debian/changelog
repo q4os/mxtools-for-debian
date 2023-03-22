@@ -1,0 +1,504 @@
+mx-remaster (23.01.03mx21+deb11u13) stable; urgency=medium
+
+  * MX Tools release
+
+ -- Dolphin Oracle <administrator@localdomain>  Wed, 22 Mar 2023 10:43:54 +0100
+
+mx-remaster (23.01.03mx21) mx; urgency=medium
+
+  * on user reset, respect Default shell set in /etc/adduser.conf
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 11 Jan 2023 19:23:14 -0500
+
+mx-remaster (23.01.02mx21) mx; urgency=medium
+
+  [fehlix]
+  * additional shell checks in installed to live
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Tue, 03 Jan 2023 22:33:56 -0500
+
+mx-remaster (23.01.01mx21) mx; urgency=medium
+
+  * update "installed-to-live" to deal with adduser 3.130 changes 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 01 Jan 2023 14:35:01 -0500
+
+mx-remaster (22.12.01mx21) mx; urgency=medium
+
+  [fehlix]
+  * live-grubsave adjustment for some paramter and also ignore builit-in kernel parameter
+  * perists-makefs to als label rootfs/homefs properly
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Tue, 27 Dec 2022 21:06:00 -0500
+
+mx-remaster (22.11.01mx21) mx; urgency=medium
+
+  [fehlix]
+  * update installed-to-live to deal with more than two users
+
+  [dolphin]
+  * update control file depends to include perl-base
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 06 Nov 2022 20:15:37 -0500
+
+mx-remaster (22.05.01mx21) mx; urgency=medium
+
+  * edit error text on "shutdown" or "reboot" command for --shutdown
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 14 May 2022 18:43:50 -0400
+
+mx-remaster (22.04.01mx21) mx; urgency=medium
+
+  * remove slim.conf (mx)
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 02 Apr 2022 10:19:08 -0400
+
+mx-remaster (22.03.03mx21) mx; urgency=medium
+
+  * systemd support for those that remove systemd-shim (rough) 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 19 Mar 2022 17:06:37 -0400
+
+mx-remaster (22.03.02mx21) mx; urgency=medium
+
+  * update run-mksquashfs to source live/config/initrd.out
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 12 Mar 2022 21:48:10 -0500
+
+mx-remaster (22.03.01mx21) mx; urgency=medium
+
+  * add uncompressed file size info 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 12 Mar 2022 21:18:02 -0500
+
+mx-remaster (21.10.02mx21) mx; urgency=medium
+
+  * update live-grubsave
+  * generate machine-id with /etc/rc.local
+
+ -- fehlix <fehlix@mxlinux.org>  Mon, 11 Oct 2021 13:22:47 +0000
+
+mx-remaster (21.10.01mx21) mx; urgency=medium
+
+  * remove default keyboard  
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 07 Oct 2021 23:19:56 -0400
+
+mx-remaster (21.09.01mx21) mx; urgency=medium
+
+  * move some default files around
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 23 Sep 2021 23:06:15 -0400
+
+mx-remaster (21.08.01mx21) mx; urgency=medium
+
+  * update live-grubsave features (fehlix) 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 25 Aug 2021 18:43:34 -0400
+
+mx-remaster (21.07.01mx21) mx; urgency=medium
+
+  * update live-grubsave (fehlix)
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 17 Jul 2021 21:40:34 -0400
+
+mx-remaster (21.06.01mx21) mx; urgency=medium
+
+  * update to latest init scripts, live-grubsave 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 28 Jun 2021 20:30:43 -0400
+
+mx-remaster (21.04.03mx21) mx; urgency=medium
+
+  * rt kernel changes 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 10 Apr 2021 16:24:06 -0400
+
+mx-remaster (21.04.02mx21) mx; urgency=medium
+
+  * update live uefi files again 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 08 Apr 2021 18:22:43 -0400
+
+mx-remaster (21.04.01mx21) mx; urgency=medium
+
+  * updating live uefi files
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 02 Apr 2021 20:19:09 -0400
+
+mx-remaster (21.03.01mx21) mx; urgency=medium
+
+  * move live files out of script into package 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 13 Mar 2021 12:37:39 -0500
+
+mx-remaster (20.12.01) mx; urgency=medium
+
+  * add "whois" as a depend, localize-repo as a recommend 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 28 Dec 2020 16:08:07 -0500
+
+mx-remaster (20.11.01) mx; urgency=medium
+
+  * pick up installer idesk link file
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 27 Nov 2020 14:17:07 -0500
+
+mx-remaster (20.08.01) mx; urgency=medium
+
+  * add sddm.conf to default live files list
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 19 Aug 2020 21:24:59 -0400
+
+mx-remaster (20.05.01) mx; urgency=medium
+
+  * update 20_memtest86+ file (troublemaker) 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 13 May 2020 20:59:35 -0400
+
+mx-remaster (20.02.01) mx; urgency=medium
+
+  * update 20_memtest86+ file again
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 06 Feb 2020 19:08:07 -0500
+
+mx-remaster (20.01.01) mx; urgency=medium
+
+  * update 20_memetest86+ file
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 05 Jan 2020 21:20:19 -0500
+
+mx-remaster (19.11.04) mx; urgency=medium
+
+  * update grub files 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 24 Nov 2019 12:33:54 -0500
+
+mx-remaster (19.11.03) mx; urgency=medium
+
+  * new init-scripts 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 21 Nov 2019 18:19:57 -0500
+
+mx-remaster (19.11.02+1) mx; urgency=medium
+
+  *  persist-config (again)
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 18 Nov 2019 20:41:37 -0500
+
+mx-remaster (19.11.02) mx; urgency=medium
+
+  * persist-save encryption fixes (fehlix antix-upstream)
+  * persist-config fix (part of security fixes) (fehlix bitjam-upstream) 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Tue, 12 Nov 2019 19:45:37 -0500
+
+mx-remaster (19.11.01) mx; urgency=medium
+
+  * update persist-config to limit accepted commands (BitJam)
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 10 Nov 2019 16:06:13 -0500
+
+mx-remaster (19.07.06) mx; urgency=medium
+
+  * revised rc.local 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 22 Jul 2019 21:43:03 -0400
+
+mx-remaster (19.07.05) mx; urgency=medium
+
+  * remove xfce4-session-logout bypass 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 22 Jul 2019 21:03:54 -0400
+
+mx-remaster (19.07.04) mx; urgency=medium
+
+  * remove depend on mx-antix-libs (buster)
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 20 Jul 2019 19:16:59 -0400
+
+mx-remaster (19.06.02) mx; urgency=medium
+
+  *  update from antiX upstream - save state files survive remaster
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 15 Jul 2019 21:25:21 -0400
+
+mx-remaster (19.06.01) mx; urgency=medium
+
+  * update installed-to-live (antiX upstream) 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 30 Jun 2019 16:56:09 -0400
+
+mx-remaster (19.04.01) mx; urgency=medium
+
+  * update (antiX-buster) 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 27 Apr 2019 23:04:11 -0400
+
+mx-remaster (19.02.01) mx; urgency=medium
+
+  * revised installed-to-live 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Tue, 12 Feb 2019 20:35:39 -0500
+
+mx-remaster (18.12.01) mx; urgency=medium
+
+  * memtest fix 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 15 Dec 2018 10:15:16 -0500
+
+mx-remaster (18.11.02) mx; urgency=medium
+
+  * update grub config files (30_firmware and others) 
+
+ -- dolphin <dolphin@littlebyte>  Wed, 14 Nov 2018 21:18:01 -0500
+
+mx-remaster (0.1.9.5) mx; urgency=medium
+
+  * revised rc.local with /sys live restore calls
+  * catchup with antiX 17.1
+
+ -- Dolphin <dolphinoracle@gmail.com>  Tue, 27 Mar 2018 22:31:17 -0500
+
+mx-remaster (0.1.9.4) mx; urgency=medium
+
+  * revised rc.local to matchup with new thunar custom actions methodology 
+
+ -- Dolphin <dolphinoracle@gmail.com>  Sat, 03 Feb 2018 15:28:58 -0500
+
+mx-remaster (0.1.9.3) mx; urgency=medium
+
+  * update to latest antiX remaster scripts (fix for crash-hang on some systems)
+
+ -- Dolphin <dolphinoracle@gmail.com>  Tue, 14 Nov 2017 21:07:34 -0400
+
+mx-remaster (0.1.9.2) mx; urgency=medium
+
+  * update to latest antiX remaster scripts (localtime now a symlink again)
+
+ -- Dolphin <dolphinoracle@gmail.com>  Thu, 02 Nov 2017 19:47:12 -0400
+
+mx-remaster (0.1.9.1) mx; urgency=medium
+
+  * update to latest antiX remaster scripts
+
+ -- Dolphin <dolphinoracle@gmail.com>  Wed, 25 Oct 2017 21:28:10 -0400
+ 
+mx-remaster (0.1.9.0) mx; urgency=medium
+
+  * update to latest antiX remaster scripts
+  * modified rc.local to match build-iso
+
+ -- Dolphin <dolphinoracle@gmail.com>  Fri, 13 Oct 2017 19:26:13 -0400
+
+mx-remaster (0.1.8.4) mx; urgency=medium
+
+  * Updated installed-to-live script
+
+ -- Adrian <adrian@mxlinux.org>  Sun, 09 Jul 2017 15:52:13 -0400
+
+mx-remaster (0.1.8.3) mx; urgency=medium
+
+  * Fix removing files from installed enviroment when using 'general' option 
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 23 Jun 2017 18:00:22 -0400
+
+mx-remaster (0.1.8.2) mx; urgency=medium
+
+  * Added files to initrd and grub folders 
+
+ -- anticapitalista <antix@operamail.com>  Fri, 09 Dec 2016 23:24:34 +0200
+
+mx-remaster (0.1.8.1) mx; urgency=medium
+
+  * Package for repository.
+  * Bump version and drop the "mx15X" versioning.
+
+ -- Steven Pusser <stevep@mxlinux.org>  Fri, 02 Dec 2016 10:42:24 -0800
+
+mx-remaster (0.1.8mx152) mx; urgency=medium
+
+  * Improved Catalan, French and Japanese
+
+ -- anticapitalista <antix@operamail.com>  Fri, 02 Dec 2016 12:25:05 +0200
+
+mx-remaster (0.1.8mx151) unstable; urgency=medium
+
+  * Improved Kazakh translation
+
+ -- anticapitalista <antix@operamail.com>  Thu, 24 Nov 2016 13:32:58 +0200
+
+mx-remaster (0.1.8mx150) mx; urgency=medium
+
+  * Added Kazakh
+
+ -- anticapitalista <antix@operamail.com>  Thu, 17 Nov 2016 11:57:54 +0200
+
+mx-remaster (0.1.7mx150+nmu1) mx; urgency=medium
+
+  * French/Brazilian translations
+
+ -- anticapitalista <antix@operamail.com>  Fri, 11 Nov 2016 13:24:14 +0200
+
+mx-remaster (0.1.7mx150) mx; urgency=medium
+
+  * added /etc/grub.d/* files
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 07 Nov 2016 16:47:28 -0500
+
+mx-remaster (0.1.6mx150+nmu2) mx; urgency=medium
+
+  * Updated localisation
+  * Fix excludes bug caused by overlayfs upper/ directory
+
+ -- anticapitalista <antix@operamail.com>  Thu, 27 Oct 2016 13:45:08 +0300
+
+mx-remaster (0.1.6mx150+nmu1) mx; urgency=medium
+
+  * Further changes to installed-to-live script, removed /etc/initrd-release
+
+ -- anticapitalista <antix@operamail.com>  Sun, 23 Oct 2016 12:07:23 +0300
+
+mx-remaster (0.1.6mx150) mx; urgency=medium
+
+  * updated installed-to-live script
+
+ -- Adrian <adrian@mxlinux.org>  Tue, 18 Oct 2016 08:43:34 -0400
+
+mx-remaster (0.1.4mx15+1) mx; urgency=medium
+
+  * new desktop file 
+
+ -- dolphinoracle <dolphinoracle@gmail.com>  Mon, 23 May 2016 12:56:39 -0400
+
+mx-remaster (0.1.4mx15) mx; urgency=medium
+
+  * removed all alsa-set-default-card.mo files 
+
+ -- anticapitalista <antix@operamail.com>  Sun, 10 Apr 2016 00:13:57 +0300
+
+mx-remaster (0.1.5mx150+10) mx; urgency=medium
+
+  * live-remaster changes to stop double yad pop up"
+
+ -- anticapitalista <antiX@operamail.com>  Wed, 23 Dec 2015 21:28:00 +0200
+
+
+mx-remaster (0.1.5mx150+9) mx; urgency=medium
+
+  * Error out early in persist-save if there's no dyanamic root persistence
+  * RC1 bugfixes 
+
+ -- anticapitalista <antiX@operamail.com>  Mon, 21 Dec 2015 17:07:00 +0200
+
+
+mx-remaster (0.1.5mx150+8) mx; urgency=medium
+
+  * removed antibashlibs.mo files form locales
+
+ -- anticapitalista <antiX@operamail.com>  Fri, 18 Dec 2015 10:48:00 +0200
+
+
+mx-remaster (0.1.5mx150+7) mx; urgency=medium
+
+  * updated locales
+
+ -- anticapitalista <antiX@operamail.com>  Thu, 17 Dec 2015 00:16:00 +0200
+
+
+mx-remaster (0.1.5mx150+6) mx; urgency=medium
+
+  * Changed rc.local to fdb+ cheat
+  * Add overlayfs support to persist-save 
+  * changed default bind root to /.bind-root
+  * fixed the is_mounted() function by using readlink -f
+  * adding a 0.1 second delay between tries.
+  * added a new "adjtime" command
+
+ -- anticapitalista <antiX@operamail.com>  Wed, 16 Dec 2015 10:28:00 +0200
+
+
+mx-remaster (0.1.5mx150+5) mx; urgency=medium
+
+  * installed-to-live fixes distribution live iso failure
+
+ -- anticapitalista <antiX@operamail.com>  Fri, 04 Dec 2015 14:47:00 +0200
+
+
+mx-remaster (0.1.5mx150+4) mx; urgency=medium
+
+  * Bugfix of installed-to-live script
+
+ -- anticapitalista <antiX@operamail.com>  Mon, 16 Nov 2015 15:59:00 +0200
+
+
+mx-remaster (0.1.5mx150+3) mx; urgency=medium
+
+  * Rebuild for MX-15.
+
+ -- Steven Pusser (Stevo) <maintainer@mepiscommunity.org>  Fri, 06 Nov 2015 13:22:33 -0800
+
+
+mx-remaster (0.1.5mx150+2) mx; urgency=low
+
+  * Removed halt and reboot symlinks
+  * Fixed xfce4-session-logout formatting
+  * Included correct translations
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Thu, 15 Oct 2015 15:11:36 -0400
+
+
+mx-remaster (0.1.5mx150+1) mx; urgency=low
+
+  * update to antiX versions
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Fri, 02 Oct 2015 18:06:36 -0400
+
+
+mx-remaster (0.1.4mx140+3) mx; urgency=low
+
+  * update help link
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Fri, 20 Mar 2015 19:36:36 -0400
+
+mx-remaster (0.1.4mx140+2) mx; urgency=low
+
+  * RemasterCC.desktop, remove Icon path 
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Tue, 17 Mar 2015 10:17:59 -0400
+
+mx-remaster (0.1.4mx140+1) mx; urgency=low
+
+  * renamed to mx-remaster
+  * Help button and MX logo added
+
+ -- Kent Mathern <maintainer@mepiscommunity.org>  Sat, 07 Mar 2015 10:50:33 -0500
+
+remaster-mx (0.1.3) unstable; urgency=low 
+ 
+  * Updated .desktop files to include ca,de,el,es,fr,it,ja,sv.
+  * Bug-fix persist-save (alsactl store)
+
+ -- anticapitalista <antiX@operamail.com>  Tues, 18 Nov 2014 21:02:00 +0200
+
+
+remaster-mx (0.1.2) unstable; urgency=low 
+ 
+  * Added more feedback to persist-config.
+
+ -- anticapitalista <antiX@operamail.com>  Fri, 07 Mar 2014 18:45:00 +0200
+
+
+remaster-mx (0.1.1) unstable; urgency=low 
+ 
+  * Added persist-config to remastercc.sh.
+
+ -- anticapitalista <antiX@operamail.com>  Sun, 09 February 2014 16:40:00 +0200
+
+
+remaster-mx (0.1.0) unstable; urgency=low 
+ 
+  * Initial Release.
+
+ -- anticapitalista <antiX@operamail.com>  Sun, 02 February 2014 14:30:00 +0200
+

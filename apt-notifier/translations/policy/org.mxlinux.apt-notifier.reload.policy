@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE policyconfig PUBLIC
+  "-//freedesktop//DTD PolicyKit Policy Configuration 1.0//EN"
+  "http://www.freedesktop.org/standards/PolicyKit/1/policyconfig.dtd">
+<!-- 
+	/usr/share/polkit-1/actions/org.mxlinux.apt-notifier.reload.policy
+!-->
+ <policyconfig>
+  <vendor>MX Linux</vendor>
+  <vendor_url>https://mxlinux.org</vendor_url>
+  <action id="org.mxlinux.apt-notifier.reload">
+    <description>Run MX Linux application</description>
+    <message>Reload</message>
+    <message xml:lang="am">ዳግም መጫኛ:</message>
+    <message xml:lang="ar">Reload</message>
+    <message xml:lang="bg">Reload</message>
+    <message xml:lang="ca">Refresca</message>
+    <message xml:lang="cs">Načíst znovu</message>
+    <message xml:lang="da">Genindlæs</message>
+    <message xml:lang="de">Neu laden</message>
+    <message xml:lang="el">Ανανέωση</message>
+    <message xml:lang="es">Recargar</message>
+    <message xml:lang="et">Reload</message>
+    <message xml:lang="eu">Reload</message>
+    <message xml:lang="fa">Reload</message>
+    <message xml:lang="fi">Päivitä</message>
+    <message xml:lang="fr">Recharger</message>
+    <message xml:lang="he_IL">Reload</message>
+    <message xml:lang="hi">पुनः लोड करें</message>
+    <message xml:lang="hr">Ponovno učitaj</message>
+    <message xml:lang="hu">Újratöltés</message>
+    <message xml:lang="id">Reload</message>
+    <message xml:lang="is">Reload</message>
+    <message xml:lang="it">Ricarica</message>
+    <message xml:lang="ja_JP">Reload</message>
+    <message xml:lang="ja">再読込</message>
+    <message xml:lang="kk">Reload</message>
+    <message xml:lang="ko">Reload</message>
+    <message xml:lang="lt">Įkelti iš naujo</message>
+    <message xml:lang="mk">Reload</message>
+    <message xml:lang="nb">Reload</message>
+    <message xml:lang="nl">Herladen</message>
+    <message xml:lang="pl">Odśwież</message>
+    <message xml:lang="pt_BR">Recarregar</message>
+    <message xml:lang="pt">Recarregar</message>
+    <message xml:lang="ro">Reload</message>
+    <message xml:lang="ru">Перезагрузить</message>
+    <message xml:lang="sk">Obnoviť</message>
+    <message xml:lang="sl">Ponovno naloži</message>
+    <message xml:lang="sq">Reload</message>
+    <message xml:lang="sr">Reload</message>
+    <message xml:lang="sv">Läs om</message>
+    <message xml:lang="tr">Yeniden yükle</message>
+    <message xml:lang="uk">Reload</message>
+    <message xml:lang="zh_CN">Reload</message>
+    <message xml:lang="zh_TW">Reload</message>
+    <icon_name>apt-notifier</icon_name>
+    <defaults>
+      <allow_any>yes</allow_any>
+      <allow_inactive>yes</allow_inactive>
+      <allow_active>yes</allow_active>
+    </defaults>
+    <annotate key="org.freedesktop.policykit.exec.path">/usr/lib/apt-notifier/actions/updater_reload_action</annotate>
+    <annotate key="org.freedesktop.policykit.exec.allow_gui">true</annotate>
+  </action>
+</policyconfig>

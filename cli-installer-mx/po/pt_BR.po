@@ -1,0 +1,406 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# anticapitalista <anticapitalista@riseup.net>, 2012,2015,2017,2019
+# anticapitalista <anticapitalista@riseup.net>, 2017
+# anticapitalista <anticapitalista@riseup.net>, 2012
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2009
+# Guilherme Peev dos Santos <guilherme.peev@gmail.com>, 2018
+# Igor Moreira Lopes <igor.moreira.lopes22@gmail.com>, 2020
+# José Vieira <jvieira33@sapo.pt>, 2018,2020
+# marcelo cripe <marcelocripe@gmail.com>, 2020
+# 4b61b50f1d27a10dffa9133609e84002, 2020
+# ric, 2017
+# secipolla <secipolla@gmail.com>, 2012
+# secipolla <secipolla@gmail.com>, 2012
+msgid ""
+msgstr ""
+"Project-Id-Version: antix-development\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-03-20 18:46+0200\n"
+"PO-Revision-Date: 2020-11-09 14:13+0000\n"
+"Last-Translator: marcelo cripe <marcelocripe@gmail.com>\n"
+"Language-Team: Portuguese (Brazil) (http://www.transifex.com/anticapitalista/antix-development/language/pt_BR/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: pt_BR\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: cli-installer.sh:29
+#, sh-format
+msgid "CL installer for $DISTRO"
+msgstr "Instalador de Interface de Linha de Comando - CLI para $DISTRO"
+
+#: cli-installer.sh:30
+msgid "Version 5.2.1 20/03/2020"
+msgstr "Versão 5.2.1 20/03/2020"
+
+#: cli-installer.sh:37
+msgid "Requirements for minimum installation:"
+msgstr "Requisitos mínimos de sistema para a instalação:"
+
+#: cli-installer.sh:40
+msgid "antiX-full: hard-disk 4.0GB  RAM 64MB"
+msgstr "antiX-full: espaço no disco rígido de 4,0 GB e 64 MB de memória RAM"
+
+#: cli-installer.sh:42
+msgid "antiX-base: hard-disk 3.0GB  RAM 48MB"
+msgstr "antiX-base: espaço no disco rígido de 3,0 GB e 48 MB de memória RAM"
+
+#: cli-installer.sh:44
+msgid "antiX-core: hard-disk 1.0GB  RAM 48MB"
+msgstr "antiX-core: espaço no disco rígido de 1,0 GB e 48 MB de memória RAM"
+
+#: cli-installer.sh:46
+msgid "antiX-net:  hard-disk 0.7GB  RAM 48MB"
+msgstr "antiX-net: espaço no disco rígido de 0,7 GB e 48 MB de memória RAM"
+
+#: cli-installer.sh:48
+msgid "Make sure you are connected to "
+msgstr "Verifique se você está conectado a"
+
+#: cli-installer.sh:50
+msgid "the net BEFORE running this installer"
+msgstr "à Internet ANTES de iniciar este instalador"
+
+#: cli-installer.sh:52
+msgid "NOTE: This installer will NOT work for UEFI boot"
+msgstr "NOTA: Este instalador NÃO irá funcionar para inicialização (boot) UEFI"
+
+#: cli-installer.sh:54
+msgid ""
+"This installer does NOT offer the option for using a separate boot partition"
+msgstr "Este instalador NÃO oferece a opção para utilizar uma partição de inicialização [boot] separada"
+
+#: cli-installer.sh:56
+msgid "This installer does NOT offer encryption"
+msgstr "Este instalador NÃO oferece criptografia/encriptação"
+
+#: cli-installer.sh:58
+msgid "This installer does NOT offer installation to NVMe devices"
+msgstr "Este instalador NÃO oferece instalação para dispositivos NVMe"
+
+#: cli-installer.sh:60
+msgid "If you want the above mentioned features, use our gui installer"
+msgstr "Para acesso às funcionalidades mencionadas acima, usar o instalador gráfico"
+
+#: cli-installer.sh:62
+msgid "Ctrl c will abort this script"
+msgstr "Ctrl+c irá abortar esta instrução (script)"
+
+#: cli-installer.sh:68
+msgid "Usage: cli-installer [drive]"
+msgstr "Utilização: cli-installer [disco]"
+
+#: cli-installer.sh:69
+#, sh-format
+msgid "Where drive is the name of the drive $DISTRO is to be installed on."
+msgstr "Onde [disco] representa o nome do disco/partição em que será intalado o $DISTRO"
+
+#: cli-installer.sh:70
+msgid "   For example: cli-installer sdb"
+msgstr "    Por exemplo: cli-installer sdb"
+
+#: cli-installer.sh:71
+msgid "The default is correct if the computer has only one drive."
+msgstr "O padrão está correto se o computador possuir apenas uma unidade de disco."
+
+#: cli-installer.sh:75
+msgid "Pre-installation tips:"
+msgstr "Dicas para a pré-instalação:"
+
+#: cli-installer.sh:78
+msgid "Set language at the boot screen by pressing F2"
+msgstr "Definir o idioma na tela de inicialização (boot) pressionando F2"
+
+#: cli-installer.sh:79
+msgid "or by adding the line lang=xx where xx is your language code."
+msgstr "ou adicionando a linha lang=xx, onde xx é o código do idioma escolhido."
+
+#: cli-installer.sh:80
+msgid "eg lang=gr for Greek."
+msgstr "por exemplo, lang=pt-br para Português do Brasil."
+
+#: cli-installer.sh:82
+msgid "Set timezone at the boot screen by pressing F3"
+msgstr "Definir o fuso horário na tela de inicialização (boot) pressionando F3."
+
+#: cli-installer.sh:84
+msgid "Use kbd=dvorak for dvorak keyboard before installing"
+msgstr "Antes de instalar, usar kbd=dvorak se o teclado for dvorak"
+
+#: cli-installer.sh:87
+msgid ""
+"Press F1 at the boot screen for Help and list of cheatcodes for live use."
+msgstr "Pressione F1 na tela de inicialização (boot) para obter Ajuda e uma lista de códigos para uso em instalação externa."
+
+#: cli-installer.sh:94
+msgid "/home partition (hda1, sda2, etc): "
+msgstr "partição /home (hda1, sda2, etc): "
+
+#: cli-installer.sh:97
+#, sh-format
+msgid "$hdrv invalid. Retry:"
+msgstr "$hdrv inválido. Tente novamente:"
+
+#: cli-installer.sh:107
+msgid "Root partition (hda1, sda2, etc): "
+msgstr "Partição root (hda1, sda2, etc): "
+
+#: cli-installer.sh:136
+#, sh-format
+msgid "$rdrv invalid. Retry"
+msgstr "$rdrv inválido. Tente novamente:"
+
+#: cli-installer.sh:151
+msgid "Available file systems for $1 are:"
+msgstr "Os sistemas de arquivos disponíveis para $1 são:"
+
+#: cli-installer.sh:165
+msgid "Enter your choice 1-8: "
+msgstr "Escolha uma opção de 1 a 8: "
+
+#: cli-installer.sh:170
+msgid "You have chosen $fs for $1"
+msgstr "Você escolheu $fs para $1"
+
+#: cli-installer.sh:172
+msgid "Downloading necessary files for formatting partitions"
+msgstr "Baixando os arquivos necessários para formatar partições"
+
+#: cli-installer.sh:184
+msgid "Ignore any 'barrier' lines"
+msgstr "Ignorar quaisquer linhas 'barreira'"
+
+#: cli-installer.sh:185
+#, sh-format
+msgid "$fs invalid. Retry:"
+msgstr "$fs inválido. Tente novamente:"
+
+#: cli-installer.sh:198
+msgid "Passwords are not identical. Retry:"
+msgstr "As senhas não coincidem. Tente novamente:"
+
+#: cli-installer.sh:218
+msgid "Invalid; retry:"
+msgstr "Inválido; tente novamente:"
+
+#: cli-installer.sh:235
+msgid "Press Enter to exit this script."
+msgstr "Pressione (Enter) para sair desta instrução (script)."
+
+#: cli-installer.sh:244
+msgid "Please run this script as root."
+msgstr "Por favor, execute esta instrução (script) como root."
+
+#: cli-installer.sh:260
+msgid "====Disk and partition Information===="
+msgstr "====Informações de discos e de partições===="
+
+#: cli-installer.sh:265
+msgid "Do you want to repartition the disk (y/N)"
+msgstr "Você quer particionar o disco novamente? (s/N)"
+
+#: cli-installer.sh:279
+#, sh-format
+msgid ""
+"The installer will now destroy the data on $rdrv  Do you want to continue "
+"(No will abort the installation) (n/Y)"
+msgstr "O instalador irá destruir os dados em $rdrv . Você deseja continuar ('Não' abortará a instalação) (n/S)"
+
+#: cli-installer.sh:286
+#, sh-format
+msgid "Deleting the contents of the $rdrv partition."
+msgstr "Apagando o conteúdo da partição $rdrv"
+
+#: cli-installer.sh:287 cli-installer.sh:386 cli-installer.sh:411
+msgid "This may take some time. Please wait...."
+msgstr "Esta ação pode demorar. Por favor, espere...."
+
+#: cli-installer.sh:293 cli-installer.sh:331
+msgid "Done."
+msgstr "Concluído."
+
+#: cli-installer.sh:297
+msgid "Do you want to use a separate '/home' partition (y/N)"
+msgstr "Você quer usar uma partição '/home' separada (s/N)"
+
+#: cli-installer.sh:306
+#, sh-format
+msgid ""
+"Is $hdrv a new '/home' partition (No will not destroy any data on $hdrv ) "
+"(y/N)"
+msgstr "$hdrv é uma nova partição '/home' ('Não', não irá destruir nenhum dado em $hdrv ) (s/N)"
+
+#: cli-installer.sh:312
+#, sh-format
+msgid "Set file system for $hdrv  (y/N)"
+msgstr "Definir o sistema de arquivos para $ hdrv (s/N)"
+
+#: cli-installer.sh:319
+#, sh-format
+msgid ""
+"The installer will now destroy the data on $hdrv  Do you want to continue "
+"(No will abort the install) (n/Y)"
+msgstr "O instalador irá destruir os dados em $hdrv. Você deseja continuar ('Não' irá abortar a instalação) (n/S)"
+
+#: cli-installer.sh:326
+#, sh-format
+msgid "Deleting the contents of the $hdrv partition."
+msgstr "Apagando o conteúdo da partição $hdrv."
+
+#: cli-installer.sh:343
+msgid "Are you running antiX-net (y/N)"
+msgstr "O sistema em execução é o antiX-net (s/N)"
+
+#: cli-installer.sh:348
+msgid ""
+"Downloading grub-pc, locales, keyboard-configuration, console-setup, "
+"console-data, lsb-release, sysv-rc-conf"
+msgstr "Baixando grub-pc, locales, keyboard-configuration, console-setup, console-data, lsb-release, sysv-rc-conf"
+
+#: cli-installer.sh:352
+msgid ""
+"Do you want to install elogind and dbus-x11. RECOMMENDED if installing a "
+"desktop environment. (y/N)"
+msgstr "Você quer instalar o elogind e o dbus-x11? RECOMENDADO se estiver instalando uma área de trabalho. (s/N)"
+
+#: cli-installer.sh:357
+msgid "Downloading elogind, libpam-elogind, dbus-x11"
+msgstr "Baixando elogind, libpam-elogind, dbus-x11"
+
+#: cli-installer.sh:364
+msgid "Do you want to install some packages via cli-aptiX (y/N)"
+msgstr "Você quer instalar alguns pacotes via cli-aptiX (s/N)"
+
+#: cli-installer.sh:369
+msgid "Use cli-aptiX to install various applications and/or kernels"
+msgstr "Use o cli-aptiX para instalar vários aplicativos e/ou núcleos (kernels)"
+
+#: cli-installer.sh:378
+#, sh-format
+msgid "antiX will now be copied to $rdrv."
+msgstr "O antiX agora será copiado para $rdrv."
+
+#: cli-installer.sh:380
+msgid "Do you want to continue (No will abort the install) (n/Y)"
+msgstr "Você quer continuar ('Não' abortará a instalação) (n/S)"
+
+#: cli-installer.sh:407
+msgid "File copy done"
+msgstr "Cópia do arquivo concluída."
+
+#: cli-installer.sh:409
+msgid "Install GRUB on MBR (Y/n) No will install to root partition"
+msgstr "Instalar o GRUB no MBR ('Não' fará com que o GRUB seja instalado na partição raiz/root) (S/n)"
+
+#: cli-installer.sh:434
+#, sh-format
+msgid "GRUB installed on ($grub)"
+msgstr "instalado o GRUB em ($grub)"
+
+#: cli-installer.sh:438
+msgid "Computer name (default is 'antix1')? "
+msgstr "Nome do computador (o padrão é 'antiX1')?"
+
+#: cli-installer.sh:446
+msgid "Time to set up localisation"
+msgstr "Configurar a localização"
+
+#: cli-installer.sh:448
+msgid "System locale is set to ..."
+msgstr "A localização do sistema está definida para ..."
+
+#: cli-installer.sh:451
+msgid "Do you want to set up system localisation (y/N)"
+msgstr "Você quer configurar a localização do sistema (s/N)"
+
+#: cli-installer.sh:458
+msgid "Time to set keyboard layout"
+msgstr "Definir o esquema/leiaute do teclado"
+
+#: cli-installer.sh:460
+msgid "System keyboard is set to ..."
+msgstr "O teclado do sistema está definido para ..."
+
+#: cli-installer.sh:463
+msgid "Do you want to set up keyboard (y/N)"
+msgstr "Você quer configurar o teclado (s/N)"
+
+#: cli-installer.sh:470
+msgid "Time to set console layout"
+msgstr "Definir o esquema/leiaute do console (terminal)"
+
+#: cli-installer.sh:472
+msgid "System console is set to ..."
+msgstr "O console do sistema está definido para ..."
+
+#: cli-installer.sh:475
+msgid "Do you want to set up console layout (y/N)"
+msgstr "Você quer configurar o esquema/leiaute do console (s/N)"
+
+#: cli-installer.sh:482
+msgid "Time to set timezone"
+msgstr "Definir o fuso horário"
+
+#: cli-installer.sh:484
+msgid "System timezone is set to ..."
+msgstr "O fuso horário do sistema está definido para ..."
+
+#: cli-installer.sh:487
+msgid "Do you want to set up system timezone (y/N)"
+msgstr "Você quer configurar o fuso horário do sistema (s/N)"
+
+#: cli-installer.sh:494
+msgid "Choose which services to run"
+msgstr "Escolha quais serviços executar"
+
+#: cli-installer.sh:496
+msgid "Do you want to enable/disable startup services (y/N)"
+msgstr "Você quer ativar/desativar os serviços de inicialização (s/N)"
+
+#: cli-installer.sh:505
+msgid "Is this a remastered/snapshot install (y/N)"
+msgstr "Esta é uma instalação remasterizada/imagem de disco (snapshot) (s/N)"
+
+#: cli-installer.sh:518
+#, sh-format
+msgid "Installation of $DISTRO finished!"
+msgstr "Instalação do $DISTRO finalizada!"
+
+#: cli-installer.sh:520 cli-installer.sh:590
+msgid "Reboot computer without CD to start program. ('reboot')"
+msgstr "Reinicie o computador sem o dispositivo de instalação para iniciar o programa. ('reiniciar')"
+
+#: cli-installer.sh:526
+msgid "Setting up user and root/admin accounts"
+msgstr "Configurando contas de usuário e de root (administrador)."
+
+#: cli-installer.sh:531
+msgid "Type in your default user name: "
+msgstr "Insira o nome do usuário padrão:"
+
+#: cli-installer.sh:535
+#, sh-format
+msgid "Note: $hdrv must contain a folder named '$name'."
+msgstr "Nota: $hdrv tem que conter uma pasta chamada '$name'."
+
+#: cli-installer.sh:540
+msgid "Type your Password for root: "
+msgstr "Insira a Senha para root (administrador):"
+
+#: cli-installer.sh:547
+#, sh-format
+msgid "Set autologin for $name: (y/N)"
+msgstr "Definir entrada automática/iniciar a sessão sem autenticar para $name: (s/N)"
+
+#: cli-installer.sh:556
+msgid "Cleaning up"
+msgstr "Limpando"
+
+#: cli-installer.sh:588
+msgid "Installation of antiX finished!"
+msgstr "Instalação do antiX finalizada!"

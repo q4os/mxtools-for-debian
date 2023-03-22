@@ -1,0 +1,7 @@
+# Default behaviour of shutdown -h / halt. Set to "halt" or "poweroff".
+HALT=poweroff
+
+# Bring networking down right before halting/rebooting system. You
+# should only need this to handle issues with Wake-on-LAN or network
+# filesystems.  Set to "yes" or "no".
+NETDOWN=yes

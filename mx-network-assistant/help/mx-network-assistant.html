@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>HELP: MX Network Assistant</title>
+</head>
+<body>
+<h1>HELP: MX Network Assistant</h1>
+<h2>General</h2>
+
+<h3>Status tab</h3>
+
+<p>This tab shows the results of scanning the network hardware on your system. You will use that information to determine which driver(s) you need using the <a rel="noreferrer noopener" aria-label="Linux Wireless (opens in a new tab)" href="http://linuxwireless.org/" target="_blank">Linux Wireless</a> site.</p>
+
+<img src="10-1.jpg" alt="network assistant" />
+
+<h3>Linux drivers tab</h3>
+
+<p>Here you can see the linux drivers that are loaded, as well as the ones that are blacklisted.</p>
+
+<img src="11.jpg" alt="Linux drivers" />
+
+	<ul>
+		<li>Highlight a driver, and use the buttons to change its state as needed.</li>
+		<li> If the driver doesn’t work well and/or you prefer to use another driver, a Windows driver for example, you’ll need to blacklist the driver currently being used to stop it from loading at boot time. Select the driver you want to blacklist and press &#8220;Blacklist Driver&#8221; button to blacklist it. At the next reboot the driver will not be loaded automatically anymore.</li>
+		<li> If you want to use a driver that is listed here, but is not loaded automatically at the boot time you might need to install it, select the driver and press &#8220;Install Driver&#8221; to install it.</li>
+	</ul>
+
+<h3>Windows drivers tab</h3>
+
+<img src="12.jpg" alt="Windows drivers" />
+
+	<ul>
+			<li>If any Windows drivers are pre-loaded on your system, they will show up here. Highlight a driver, and use the buttons to change its state as needed.</li>
+			<li> In order to use Windows drivers you need <a href="https://en.wikipedia.org/wiki/NDISwrapper" target="_blank" rel="noreferrer noopener" aria-label="NDISwrapper (opens in a new tab)">NDISwrapper</a>. If it is not already installed, please press the Install NDISwrapper button.</li>
+			<li> NDISwrapper is an open source software driver &#8220;wrapper&#8221; that enables Linux to use the Microsoft Windows drivers for wireless network devices. In general, Windows-XP drivers work much better than other versions. Make sure there is no competing Linux driver.</li>
+		</ul>
+
+<h3>Net diagnostics tab</h3>
+
+<p>On this final tab you can test the network, by using <a rel="noreferrer noopener" aria-label="Ping (opens in a new tab)" href="https://en.wikipedia.org/wiki/Ping_%28networking_utility%29" target="_blank">Ping</a> to determine connection speed to a specific target, and <a rel="noreferrer noopener" aria-label="Traceroute (opens in a new tab)" href="https://en.wikipedia.org/wiki/Traceroute" target="_blank">Traceroute</a> to examine where any problems might lie. To get an idea how it works, put any common URL (google.com, yahoo.com, etc.) in the Target URL box and click Start.</p>
+
+<img src="13.jpg" alt="net diagnostics" />
+
+	<ul>
+		<li>Ping is used to send small <a href="http://en.wikipedia.org/wiki/Internet_Control_Message_Protocol" target="_blank" rel="noreferrer noopener" aria-label="icmp (opens in a new tab)">icmp</a> packets to another network host by name or web address as a basic test for connectivity. If you can ping by IP but not hostname, it usually indicates a problem with your <a rel="noreferrer noopener" aria-label="name resolution (opens in a new tab)" href="https://en.wikipedia.org/wiki/Domain_Name_System" target="_blank">name resolution</a>. For details, consult the man page.</li>
+		<li> Traceroute is a program that shows you the route over the network between two systems, listing all the intermediate routers a connection must pass through to get to its destination. It can help you determine why your connections to a given server might be poor, and can often help you figure out where exactly the problem is. It also shows you how systems are connected to each other, letting you see how your ISP connects to the Internet as well as how the target system is connected. More on the use of this utility available<a rel="noreferrer noopener" aria-label=" her (opens in a new tab)" href="http://www.exit109.com/~jeremy/news/providers/traceroute.html" target="_blank"> her</a>e.</li>
+		<li> MX Linux also includes by default an application calle<a rel="noreferrer noopener" aria-label="d m (opens in a new tab)" href="http://packages.debian.org/stable/mtr" target="_blank">d mtr </a>that combines traceroute and ping and presents the output in a very readable GUI. Details on the use of this utility (along with traceroute<a rel="noreferrer noopener" aria-label=") he (opens in a new tab)" href="https://www.digitalocean.com/community/tutorials/how-to-use-traceroute-and-mtr-to-diagnose-network-issues" target="_blank">) he</a>re.</li>
+	</ul>
+
+<p>Development history: Marco (Mepis), Adrian</p>
+
+<p>License: <a href="https://mxlinux.org/wiki/licenses/license-mx-broadcom-manager">here</a>.</p>
+
+<p>v. 20170814</p>
+</body>
+</html>

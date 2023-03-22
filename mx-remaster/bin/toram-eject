@@ -1,0 +1,63 @@
+#!/bin/bash
+#
+# Read the boot device from the config file.  If it is removeable
+# and not mounted then we give the user a simple GUI to eject it.
+
+# GETTEXT_KEYWORD="gt"
+# GETTEXT_KEYWORD="pfgt"
+# GETTEXT_KEYWORD="vexit"
+
+source /usr/local/lib/antiX/antiX-common.sh "$@"
+
+trap clean_up EXIT
+
+BLURB="$(pfgt "Eject LiveCD/DVD via a simple GUI if %s is enabled." "[p]toram[/]")"
+
+TITLE="$(gt "Automatic toram Eject")"
+
+read_options "$@"
+extra_args   0
+
+read_conf -q
+
+vmsg "BOOT_DEV=$BOOT_DEV";
+[ "$BOOT_DEV" ] || error_box "$(gt "no BOOT_DEV given!")"
+
+flag_file=$LIVE_DIR/config/toram-eject
+test -e $flag_file || vexit "No $flag_file config file"
+rm -f $flag_file
+
+# Only eject removable media
+case "$BOOT_DEV" in
+    /dev/sr[0-9]*) ;;
+                *) vexit "boot device: %s is not removable." "[f]$BOOT_DEV[/]" ;;
+esac
+
+#grep -q "^$BOOT_DEV " /proc/mounts && umount $BOOT_DEV
+
+grep -q "^$BOOT_DEV " /proc/mounts \
+    && vexit "boot device: %s is still mounted!" "[f]$BOOT_DEV[/]"
+
+#show_cli_title
+
+yes_no_box -c                                                \
+    "$TITLE"                                                 \
+    ""                                                       \
+    "$(pfgt "The %s boot option succeeded." "[b]toram[/]")"  \
+    "$(gt "The boot media is no longer needed.")"            \
+    ""                                                       \
+    "$(gt "Do you want the LiveCD/DVD ejected?")"            \
+    || vexit "did not eject as per user request."
+
+eject $BOOT_DEV || error_box "$(pfgt "Could not eject %s" "[f]$BOOT_DEV[/]")"
+
+yes_no_box -c                                    \
+    "$TITLE"                                     \
+    ""                                           \
+    "$(gt "Feel free to remove the CD or DVD.")" \
+    ""                                           \
+    "$(gt "Do you want the drive closed now?")"  \
+    || vexit "did not closing drive as per user request."
+
+eject -t $BOOT_DEV || error_box "$(pfgt "Could not close %s" "[f]$BOOT_DEV[/]")"
+

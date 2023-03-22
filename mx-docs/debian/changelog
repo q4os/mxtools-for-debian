@@ -1,0 +1,627 @@
+mx-docs (20220313mx21+3+deb11u13) stable; urgency=medium
+
+  * MX Tools release
+
+ -- Dolphin Oracle <administrator@localdomain>  Wed, 22 Mar 2023 10:43:52 +0100
+
+mx-docs (20220313mx21+3) mx; urgency=medium
+
+  * add ja faq 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 26 Oct 2022 20:00:32 -0400
+
+mx-docs (20220313mx21+1) mx; urgency=medium
+
+  * updated pdfs, added Greek and Japanese
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Tue, 15 Mar 2022 11:11:16 -0400
+
+mx-docs (20220313mx21) mx; urgency=medium
+
+  * update installer graphic in english version
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 13 Mar 2022 11:24:33 -0400
+
+mx-docs (20210925mx21) mx; urgency=medium
+
+  * mx21 updates
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Tue, 28 Sep 2021 19:17:31 -0400
+
+mx-docs (20200817mx21+2) mx; urgency=medium
+
+  * new german manual (revised)
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 29 Mar 2021 20:58:52 -0400
+
+mx-docs (20200817mx21+1) mx; urgency=medium
+
+  * new german translation
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 28 Mar 2021 16:57:44 -0400
+
+mx-docs (20200817mx21) mx; urgency=medium
+
+  * remove help and faq from /etc/skel
+  * will still show up on bullseye 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 01 Mar 2021 18:47:27 -0500
+
+mx-docs (20200817mx19) mx; urgency=medium
+
+  * Non-maintainer upload.
+  * Spanish translation of latest Manual added
+
+ -- j b <jb@X1Cmx>  Mon, 17 Aug 2020 10:39:31 -0400
+
+mx-docs (20200801mx19) mx; urgency=medium
+
+  * updated main manual with KDE-plasma stuff 
+
+ -- Dolphin Oracle <dolphin@littlebyte>  Sun, 02 Aug 2020 11:20:57 -0400
+
+mx-docs (20200211mx19+2) mx; urgency=medium
+
+  * adding thai translation 
+
+ -- Dolphin Oracle <dolphin@littlebyte>  Wed, 15 Jul 2020 23:13:51 -0400
+
+mx-docs (20200211mx19+1) mx; urgency=medium
+
+  * update control file
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 30 Mar 2020 22:38:15 -0400
+
+mx-docs (20200211mx19) mx; urgency=medium
+
+  * update for mx19.1
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Tue, 11 Feb 2020 20:50:32 -0500
+
+mx-docs (20191104mx19) mx; urgency=medium
+
+  * manual update (missing from 20191103mx19) 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 04 Nov 2019 19:13:47 -0500
+
+mx-docs (20191103mx19) mx; urgency=medium
+
+  * new translations faq
+  * manual updates 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 03 Nov 2019 18:46:11 -0500
+
+mx-docs (20191021mx19) mx; urgency=medium
+
+  * new translations (id, pt, fr, sk)
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 21 Oct 2019 10:32:49 -0400
+
+mx-docs (20191019mx19) mx; urgency=medium
+
+  * added FAQ tranlsations  (es, pl, se)  
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 19 Oct 2019 20:45:37 -0400
+
+mx-docs (20191013mx19) mx; urgency=medium
+
+  * added Greek translations 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 13 Oct 2019 09:15:58 -0400
+
+mx-docs (20191012mx19) mx; urgency=medium
+
+  * updated FAQs for multi languages 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 12 Oct 2019 10:02:51 -0400
+
+mx-docs (20191009mx19) mx; urgency=medium
+
+  * updated FAQ 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 09 Oct 2019 21:17:29 -0400
+
+mx-docs (20190922mx19+1) mx; urgency=medium
+
+  * translations refrest 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 28 Sep 2019 17:17:43 -0400
+
+mx-docs (20190922mx19) mx; urgency=medium
+
+  * update FAQ  
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 22 Sep 2019 15:41:48 -0400
+
+mx-docs (20190904mx19) mx; urgency=medium
+
+  * mx19 beta2 manual
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 05 Sep 2019 16:47:39 -0400
+
+mx-docs (20190821mx19) mx; urgency=medium
+
+  * buster manual
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 21 Aug 2019 21:48:42 -0400
+
+mx-docs (20190819mx19) mx; urgency=medium
+
+  * update FAQ 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 19 Aug 2019 19:04:38 -0400
+
+mx-docs (20190814mx19) mx; urgency=medium
+
+  * added faq 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 14 Aug 2019 21:52:52 -0400
+
+mx-docs (20190614mx18.3+1) mx; urgency=medium
+
+  * updated translations for pl and de
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 14 Jul 2019 13:30:37 -0400
+
+mx-docs (20190614mx18.3) mx; urgency=medium
+
+  * updated manual 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 22 Jun 2019 22:10:16 -0400
+
+mx-docs (20190523mx18.3) mx; urgency=medium
+
+  * add desktop icon
+  * updated manual
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 24 May 2019 19:24:14 -0400
+
+mx-docs (20190519mx18.3) mx; urgency=medium
+
+  * update installer section
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 19 May 2019 12:48:40 -0400
+
+mx-docs (20190310mx18.2) mx; urgency=medium
+
+  * desktop file translations
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 05 Apr 2019 17:58:31 -0400
+
+mx-docs (20190310mx18) mx; urgency=medium
+
+  * revised manual for mx 18
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 11 Mar 2019 18:37:31 -0400
+
+mx-docs (20190208mx18) mx; urgency=medium
+
+  * updated manual
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 08 Feb 2019 19:32:36 -0500
+
+mx-docs (20190123mx18) mx; urgency=medium
+
+  * update translations 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 23 Jan 2019 18:47:05 -0500
+
+mx-docs (20181211mx18) mx; urgency=medium
+
+  * update manual mx18 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Tue, 11 Dec 2018 18:54:15 -0500
+
+mx-docs (20180819mx17) mx; urgency=medium
+
+  * adding italian manual (mx17) 
+
+ -- Dolphin <dolphinoracle@gmail.com>  Sun, 19 Aug 2018 22:53:49 -0400
+
+mx-docs (20180305mx17) mx; urgency=medium
+
+  * updated manual 
+
+ -- Dolphin <dolphinoracle@gmail.com>  Mon, 05 Mar 2018 19:02:29 -0500
+
+mx-docs (20180128mx17) mx; urgency=medium
+
+  * added french and german translations 
+
+ -- Dolphin <dolphinoracle@gmail.com>  Sun, 28 Jan 2018 14:38:12 -0500
+
+mx-docs (20171207mx17) mx; urgency=medium
+
+  * ready for RC 
+
+ -- Dolphin <dolphinoracle@gmail.com>  Thu, 07 Dec 2017 06:50:17 -0500
+
+mx-docs (20171119mx17) mx; urgency=medium
+
+  * updated manuals
+
+ -- Dolphin <dolphinoracle@gmail.com>  Sun, 19 Nov 2017 14:29:17 -0700
+
+mx-docs (20171118mx17) mx; urgency=medium
+
+  * New release, fixes spacing problem.
+
+ -- Steven Pusser <stevep@mxlinux.org>  Sat, 18 Nov 2017 10:35:26 -0800
+
+mx-docs (20171117mx17+1) mx; urgency=medium
+
+  * Build for the MX 17 repo; no changes.
+
+ -- Steven Pusser <stevep@mxlinux.org>  Fri, 17 Nov 2017 10:17:06 -0800
+
+mx-docs (20171111mx17) mx; urgency=medium
+
+  * added switch for multiple language manuals.
+
+ -- Dolphin <dolphinoracle@gmail.com>  Sat, 11 Nov 2017 10:08:43 -0700
+ 
+mx-docs (20171003mx17) mx; urgency=medium
+
+  * Add mx-manual script.
+
+ -- Steven Pusser <stevep@mxlinux.org>  Tue, 03 Oct 2017 17:42:01 -0700
+
+mx-docs (20170928mx17) mx; urgency=medium
+
+  * Convert to using the PDF version.
+
+ -- Steven Pusser <stevep@mxlinux.org>  Thu, 28 Sep 2017 13:13:24 -0700
+
+mx-docs (20170601) mx; urgency=medium
+
+  * New in-progress revised edition.
+
+ -- Steven Pusser <stevep@mxlinux.org>  Thu, 01 Jun 2017 15:09:12 -0700
+
+mx-docs (20170521) mx; urgency=medium
+
+  * Beginning updates for MX 16.1
+
+ -- Steven Pusser <stevep@mxlinux.org>  Sun, 21 May 2017 15:21:30 -0700
+
+mx-docs (20170111) mx; urgency=medium
+
+  * New upstream release.  
+  * debian/copyright: extend copyrights to 2017.
+
+ -- Steven Pusser <stevep@mxlinux.org>  Tue, 10 Jan 2017 11:38:15 -0800
+
+mx-docs (20161214) mx; urgency=medium
+
+  * Optimize all image files with trimage to reduce package size.
+
+ -- Steven Pusser <stevep@mxlinux.org>  Wed, 14 Dec 2016 20:42:50 -0800
+
+mx-docs (20161211) mx; urgency=medium
+
+  * Final (?) version for MX 16 gold release.
+  * debian/copyright: change version to MX 16 and add 2016 to copyright.
+  * debian/control:
+    - add extended description.
+    - change incorrect "documentation" in Section: to "doc".
+    - update my name and email in the maintainer field.
+  * Add debian/lintian-overrides.
+
+ -- Steven Pusser <stevep@mxlinux.org>  Sun, 11 Dec 2016 19:10:06 -0800
+
+mx-docs (20161202) mx; urgency=medium
+
+  * New release.
+
+ -- Steven Pusser <stevep@mxlinux.org>  Fri, 02 Dec 2016 11:11:39 -0800
+
+mx-docs (20161116) mx; urgency=medium
+
+  * New preliminary release.
+
+ -- Steven Pusser <stevep@mxlinux.org>  Wed, 16 Nov 2016 13:08:56 -0800
+
+mx-docs (20161108) mx; urgency=medium
+
+  * New preliminary release.
+  * debian/control: remove version for the conflict with
+    desktop-defaults-xfce-mx.
+
+ -- Steven Pusser <stevep@mxlinux.org>  Wed, 09 Nov 2016 10:58:43 -0800
+
+mx-docs (20161024) mx; urgency=medium
+
+  * Drop all dependencies.
+  * Install Help.desktop file.
+  * Conflict with desktop-defaults-xfce-mx (<< 0.1.5), mx-desktop-defaults.
+
+ -- Steven Pusser <stevep@mxlinux.org>  Mon, 24 Oct 2016 19:08:56 -0700
+
+mx-docs (20161022) mx; urgency=medium
+
+  * Add alternative depends for desktop-defaults-xfce-mx16 and
+    desktop-defaults-mx.
+
+ -- Steven Pusser <stevep@mxlinux.org>  Sun, 23 Oct 2016 14:20:25 -0700
+
+mx-docs (20161020) mx; urgency=medium
+
+  * Beginning updates for MX 16.
+
+ -- Steven Pusser (Stevo) <maintainer@mepiscommunity.org>  Thu, 20 Oct 2016 13:28:32 -0700
+
+mx-docs (20160701) mx; urgency=medium
+
+  * New upstream release:
+    - New sections on some MX Tools, Static DNS, few others.
+    - Many new and revised images.
+    - Bunch of corrections.
+    - PDF link below Titles.
+
+ -- Steven Pusser (Stevo) <maintainer@mepiscommunity.org>  Tue, 05 Jul 2016 16:30:11 -0700
+
+mx-docs (20160405) mx; urgency=medium
+
+  * New section on our mirrors (5.2.5).
+  * New paragraph 4.7.1 on "Running a root application".
+  * Rewritten 2.2.2 to include signed ISOs.
+  * Expansion of VPN in 3.4 with link to Wiki.
+  * Addition of gdevilspie to 3.8.2.
+  * Addition on installed cheatcodes in 2.4.2.
+  * Addition to section on font configuration.
+  * New section on Storage 3.1.6.
+  * Minor change to Wine discussion 6.1.1 (with expanded Wiki entry).
+  * Addition to Skype troubleshooting 4.1.3.
+
+ -- Steven Pusser (Stevo) <maintainer@mepiscommunity.org>  Tue, 05 Apr 2016 14:38:40 -0700
+
+mx-docs (20160209) mx; urgency=medium
+
+  * New updated version.
+  * Change versioning to match internal version. 
+
+ -- Steven Pusser (Stevo) <maintainer@mepiscommunity.org>  Wed, 10 Feb 2016 10:33:21 -0800
+
+mx-docs (16.01.07) mx; urgency=medium
+
+  * New updated version.
+
+ -- Steven Pusser (Stevo) <maintainer@mepiscommunity.org>  Thu, 07 Jan 2016 15:21:25 -0800
+
+mx-docs (15.12.22) mx; urgency=medium
+
+  * Final release.
+
+ -- Steven Pusser (Stevo) <maintainer@mepiscommunity.org>  Wed, 23 Dec 2015 10:27:25 -0800
+
+mx-docs (15.12.17) mx; urgency=medium
+
+  * New release for RC 1.
+
+ -- Steven Pusser (Stevo) <maintainer@mepiscommunity.org>  Thu, 17 Dec 2015 13:57:14 -0800
+
+mx-docs (15.11.24) mx; urgency=medium
+
+  * New revised version for MX 15.
+
+ -- Steven Pusser (Stevo) <maintainer@mepiscommunity.org>  Tue, 24 Nov 2015 17:49:03 -0800
+
+mx-docs (15.11.03.1) mx; urgency=medium
+
+  * Fix missing file.
+
+ -- Steven Pusser (Stevo) <maintainer@mepiscommunity.org>  Tue, 03 Nov 2015 16:46:10 -0800
+
+mx-docs (15.11.03) mx; urgency=medium
+
+  * New revised version for MX 15.
+
+ -- Steven Pusser (Stevo) <maintainer@mepiscommunity.org>  Tue, 03 Nov 2015 14:46:10 -0800
+
+mx-docs (15.10.22) mx; urgency=medium
+
+  * New revised version for MX 15.
+
+ -- Steven Pusser (Stevo) <maintainer@mepiscommunity.org>  Fri, 23 Oct 2015 11:57:10 -0700
+
+mx-docs (14.4.10) mx; urgency=medium
+
+  * New release:
+
+    -image preference for Task Manager over Htop
+    -addition of aptitude section and image
+    -addition of capslock indicator
+    -cross refs to Wiki
+    -translation protection for Feedback and MX app titles in headings
+    -addition of Japanese and Portuguese to translation languages (based on top 10 download countries)
+    -multiple minor changes
+
+ -- Steven Pusser (Stevo) <maintainer@mepiscommunity.org>  Tue, 07 Jul 2015 17:06:09 -0700
+
+mx-docs (14.4.09) mx; urgency=medium
+
+  * New release.
+
+ -- Steven Pusser (Stevo) <maintainer@mepiscommunity.org>  Tue, 09 Jun 2015 16:24:48 -0700
+
+mx-docs (14.4.08) mx; urgency=medium
+
+  * Added expanded explanation of Google Earth installation in 4.10.5.
+  * Added new Netflix video in 4.2.2, reordering passage to accomodate.
+  * Added Monthly Update to 2.2.1 and reworked section substantially
+    to accomodate.
+  * Inserted the F4 > Terminal trick as an example in 2.4.2.
+  * Number of smaller corrections.
+
+ -- Steven Pusser (Stevo) <maintainer@mepiscommunity.org>  Thu, 14 May 2015 15:13:29 -0700
+
+mx-docs (14.4.07) mx; urgency=medium
+
+  * Revised MX Tools, linked with section, help and license for Sound Card.
+  * Addition of SMART warning image and discussion to Installation section.
+  * Revised KDE on MX section based on input from Community members,
+    with supplemental notes linked.
+  * Multiple minor corrections.
+
+ -- Steven Pusser (Stevo) <maintainer@mepiscommunity.org>  Mon, 20 Apr 2015 13:30:41 -0700
+
+mx-docs (14.4.06) mx; urgency=medium
+
+  * Fix mepis.list entry.
+
+ -- Steven Pusser (Stevo) <maintainer@mepiscommunity.org>  Sun, 05 Apr 2015 19:49:22 -0700
+
+mx-docs (14.4.05) mx; urgency=medium
+
+  * Fix styling issue.
+
+ -- Steven Pusser (Stevo) <maintainer@mepiscommunity.org>  Tue, 31 Mar 2015 08:22:25 -0700
+
+mx-docs (14.4.04) mx; urgency=medium
+
+  * Updated.
+
+ -- Steven Pusser (Stevo) <maintainer@mepiscommunity.org>  Sat, 28 Mar 2015 19:28:02 -0700
+
+mx-docs (14.4.03) mx; urgency=medium
+
+  * Add graphics.
+
+ -- Steven Pusser (Stevo) <maintainer@mepiscommunity.org>  Sun, 22 Mar 2015 19:55:14 -0700
+
+mx-docs (14.4.02) mx; urgency=medium
+
+  * Final release.
+
+ -- Steven Pusser (Stevo) <maintainer@mepiscommunity.org>  Thu, 19 Mar 2015 19:55:14 -0700
+
+mx-docs (14.4.01) mx; urgency=medium
+
+  * Rename MX15_Manual_20150316.html to mxum.html.
+
+ -- Steven Pusser (Stevo) <maintainer@mepiscommunity.org>  Mon, 16 Mar 2015 13:53:02 -0700
+
+mx-docs (14.4) mx; urgency=medium
+
+  * Revised version for MX 14.4 release.
+
+ -- Steven Pusser (Stevo) <maintainer@mepiscommunity.org>  Fri, 13 Mar 2015 15:54:22 -0700
+
+mx-docs (14.3) mx; urgency=low
+
+  * final release for 14.3.
+
+ -- Steven Pusser (Stevo) <maintainer@mepiscommunity.org>  Tue, 02 Dec 2014 09:21:18 -0800
+
+mx-docs (14.3~rc3) mx; urgency=low
+
+  * updated translations.
+  * bump version to match MX release.
+
+ -- Steven Pusser (Stevo) <maintainer@mepiscommunity.org>  Tue, 02 Dec 2014 08:21:48 -0800
+
+mx-docs (0.2.5.2) mx; urgency=medium
+
+  * Use Conflicts: instead of Breaks:
+  * Disable docs-mx dummy package.
+
+ -- Steven Pusser (Stevo) <maintainer@mepiscommunity.org>  Thu, 27 Nov 2014 18:55:30 -0800
+
+mx-docs (0.2.5.1) mx; urgency=low
+
+  * Add dummy docs-mx package to ease transition to mx-docs.
+
+ -- Steven Pusser (Stevo) <maintainer@mepiscommunity.org>  Sun, 16 Nov 2014 13:10:08 -0800
+
+mx-docs (0.2.5mx140+1) mx; urgency=low
+
+  * Repackage for MX 14 repository:
+    - rename package to mx-docs.
+
+ -- Steven Pusser (Stevo) <maintainer@mepiscommunity.org>  Sat, 15 Nov 2014 11:14:23 -0800
+
+docs-mx (0.2.5) unstable; urgency=low
+ 
+  * New additions to cater for MX-14.3
+
+ -- anticapitalista <antiX@operamail.com>  Wed, 12 Nov 2014 16:34:00 +0200
+
+
+docs-mx (0.2.4) unstable; urgency=low
+ 
+  * New changes to about.html, advanced_bootloader.html, advanced.html, conky.html, index.html,
+  * localizations.html, mxapps.html, mx-packageinstaller_license.html, network.html, persistence.html,
+  * remaster.html, samba.html, smxi.html, synaptic.html.
+
+ -- anticapitalista <antiX@operamail.com>  Sat, 28 June 2014 15:10:00 +0200
+
+docs-mx (0.2.3) unstable; urgency=low
+ 
+  * Prepared for 14.1.1 release.
+  * Edited docs.
+
+ -- anticapitalista <antiX@operamail.com>  Tue, 17 Jun 2014 00:50:00 +0200
+
+
+docs-mx (0.2.2) unstable; urgency=low
+ 
+  * Prepared for 14.1 release.
+  * New docs related to frugal.
+
+ -- anticapitalista <antiX@operamail.com>  Sat, 14 Jun 2014 20:00:00 +0200
+
+
+docs-mx (0.2.1) unstable; urgency=low
+ 
+  * Various edits to docs.
+
+ -- anticapitalista <antiX@operamail.com>  Wed, 19 Mar 2014 12:05:00 +0200
+
+
+docs-mx (0.2.0) unstable; urgency=low
+ 
+  * Ready for release.
+
+ -- anticapitalista <antiX@operamail.com>  Fri, 07 Mar 2014 18:55:00 +0200
+
+
+docs-mx (0.1.5) unstable; urgency=low
+ 
+  * Edits to mx-apps.html, licenses
+
+ -- anticapitalista <antiX@operamail.com>  Mon, 03 Mar 2014 14:45:00 +0200
+
+
+docs-mx (0.1.4) unstable; urgency=low
+ 
+  * Correction edits to index.html and browser.html.
+
+ -- anticapitalista <antiX@operamail.com>  Wed, 26 Feb 2014 16:05:00 +0200
+
+
+docs-mx (0.1.3) unstable; urgency=low
+ 
+  * Correction edits to smxi.html and customization.html.
+
+ -- anticapitalista <antiX@operamail.com>  Tues, 25 Feb 2014 19:25:00 +0200
+
+
+docs-mx (0.1.2) unstable; urgency=low
+ 
+  * Added mx-apps, mx-codecs-license and mx-user-license.
+
+ -- anticapitalista <antiX@operamail.com>  Sun, 23 Feb 2014 14:25:00 +0200
+
+
+docs-mx (0.1.1) unstable; urgency=low
+ 
+  * Various minor edits.
+
+ -- anticapitalista <antiX@operamail.com>  Mon, 10 Feb 2014 14:35:00 +0200
+
+
+docs-mx (0.1.0) unstable; urgency=low
+ 
+  * Initial release.
+
+ -- anticapitalista <antiX@operamail.com>  Tue, 04 Feb 2014 19:10:00 +0200

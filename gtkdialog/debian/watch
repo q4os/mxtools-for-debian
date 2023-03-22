@@ -1,0 +1,4 @@
+# watch control file for uscan
+version=2
+# Site                                      Version Script
+ftp://linux.pte.hu/pub/gtkdialog/gtkdialog-(0.7.*)\.tar.gz	debian uupdate

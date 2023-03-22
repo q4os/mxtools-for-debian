@@ -1,0 +1,39 @@
+#!/bin/bash
+
+
+usage() {
+    cat <<End_Usage
+Usage: $ME file directory
+
+List disk usage of all files and directories listed in <file>.
+We will prepend <directory> to each file or directory name so
+you can examine the disk usage on differnt file systems.
+End_Usage
+
+    exit
+}
+
+[ "$#" -ne "2" ] && usage
+case "$1" in
+    -h|-help|--help) usage;;
+esac
+
+
+file="$1"
+dir="$2"
+
+ME=$(basename $0)
+
+if ! [ -f "$file" ]; then
+    echo "$ME: could not find file \"$file\""
+    echo "$ME: try /live/config/remaster.exclude or /live/config/rsync.exclude"
+    exit
+fi
+
+# append trailing slash to non-empty $dir
+[ "${#dir}" -gt "0" ] && echo $dir | grep -q "[^/]$" && dir="$dir/"
+
+du -sch $(cat $file | sed "s=^/\?=$dir=") 2>/dev/null
+
+
+

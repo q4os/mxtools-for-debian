@@ -1,0 +1,11 @@
+[Plymouth Theme]
+Name=elegant-wine
+Description=Script example plugin.
+ModuleName=script
+
+[script]
+ImageDir=/usr/share/plymouth/themes/elegant-blue
+ScriptFile=/usr/share/plymouth/themes/elegant-blue/script.script
+
+[script-env-vars]
+example_env_var=example env var value

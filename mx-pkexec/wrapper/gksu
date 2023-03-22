@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# gksu wrapper for mx-pkexec
+# 
+# to handle/ignore gksu options
+
+while [ $# -gt 0 ]; do 
+    [ -n "${1%%-*}" ] && break; 
+    case $1 in  
+        --user|-u       ) shift ;; 
+        --description|-D) shift ;; 
+        --message|-m    ) shift ;; 
+    esac 
+    shift 
+done
+exec mx-pkexec "$@"

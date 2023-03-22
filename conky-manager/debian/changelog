@@ -1,0 +1,131 @@
+conky-manager (2.7+dfsg1-6mx19+2+deb11u13) stable; urgency=medium
+
+  * MX Tools release
+
+ -- fehlix <administrator@localdomain>  Wed, 22 Mar 2023 10:43:48 +0100
+
+conky-manager (2.7+dfsg1-6mx19+2) mx; urgency=medium
+
+  * Do not trimm spaces in path
+  * Adjust start-conky.sh
+  * Fix background color changes
+
+ -- fehlix <fehlix@mxlinux.org>  Tue, 06 Dec 2022 12:33:29 -0500
+
+conky-manager (2.7+dfsg1-6mx19+1) mx; urgency=medium
+
+  * Add username to temp-dir path to avoid coredump by other user
+  * Terminate running conky for current user only
+  * Detect conky started with '--config=' option or addtional options
+    and also with relative path of conkyrc
+
+ -- fehlix <fehlix@mxlinux.org>  Sun, 04 Dec 2022 14:56:22 -0500
+
+conky-manager (2.7+dfsg1-5mx19+1) mx; urgency=medium
+
+  * Rebuild for MX Linux.
+  
+  [ fehlix ]
+  * Rework the svg icon install.
+
+ -- Steven Pusser <stevep@mxlinux.org>  Sun, 14 Jun 2020 22:09:53 -0700
+
+conky-manager (2.7+dfsg1-4.5mx19+1) UNRELEASED; urgency=medium
+
+  [ fehlix ]
+  * Add Papirus conky-manager2 icons from asqwerth.
+
+  [ Steven Pusser ]
+  * Instead install the png icons from debian/icons, and add overrides to do so
+    and clean them.
+
+ -- fehlix <fehlix@mxlinux.org>  Sun, 14 Jun 2020 22:30:51 +0200
+
+conky-manager (2.7+dfsg1-4mx19+1) mx; urgency=medium
+
+  * display/login manager adjustment from Fehlix.
+
+ -- Steven Pusser <stevep@mxlinux.org>  Fri, 29 May 2020 16:27:15 -0700
+
+conky-manager (2.7+dfsg1-3mx19+2) mx; urgency=medium
+
+  * Rebuild for MX Linux repository.
+
+ -- Steven Pusser <stevep@mxlinux.org>  Tue, 05 May 2020 20:32:53 -0700
+
+conky-manager (2.7+dfsg1-3mx19+1) mx; urgency=medium
+
+  * add desktop session for startup script 
+
+ -- fehlix <fehlix@mxlinux.org>  Wed, 20 Apr 2020 12:56:55 +0200
+
+conky-manager (2.7+dfsg1-2mx19+1) mx; urgency=medium
+
+  * add detect lua format when generating preview
+  * reduced wait_interval to 4
+
+ -- fehlix <fehlix@mxlinux.org>  Wed, 15 Apr 2020 22:56:55 +0200
+
+conky-manager (2.7+dfsg1-1mx19+1) mx; urgency=medium
+
+  * New build of the fork that supports conky 1.10.
+  * debian/control: I'm the new maintainer.
+  * Bump up to debhelper 10 compat.
+  * debian/rules: drop "deprecated --with autotools-dev"".
+  * Refresh french-localization.patch.
+
+ -- Steven Pusser <stevep@mxlinux.org>  Mon, 16 Mar 2020 15:19:38 -0700
+
+conky-manager (2.4+dfsg1-2mx19+1) mx; urgency=medium
+
+  * Repackaged for MX-19.
+  * Removed realpath from the depends list.
+
+ -- Mike Purtell <mmikeinsantarosa@mxlinux.org>  Sun, 16 Jun 2019 07:46:55 -0700
+
+conky-manager (2.4+dfsg1-2mx17+1) mx; urgency=medium
+
+  * Patch in French localizations, courtesy of cyrilus31 (thanks!)
+  * Drop dependency on fonts-noto-unhinted.
+
+ -- Steven Pusser <stevep@mxlinux.org>  Thu, 30 Nov 2017 10:25:01 -0800
+
+conky-manager (2.4+dfsg1-1mx17+1) mx; urgency=medium
+
+  * Completely remove themepack to avoid conflicts with MX conky themes.
+
+ -- Steven Pusser <stevep@mxlinux.org>  Fri, 27 Oct 2017 10:57:23 -0700
+
+conky-manager (2.4+dfsg-2mx17+1) mx; urgency=medium
+
+  * Remove non-free Avant Gard and GE Inspira from provided theme pack.
+  * Add dependency for fonts-noto-hinted.
+
+ -- Steven Pusser <stevep@mxlinux.org>  Sun, 22 Oct 2017 13:04:48 -0700
+
+conky-manager (2.4-2mx17+1) mx; urgency=medium
+
+  * Add alternative dependencies for conky-legacy packages.
+
+ -- Steven Pusser <stevep@mxlinux.org>  Mon, 09 Oct 2017 19:00:18 -0700
+
+conky-manager (2.4-1mx17+1) mx; urgency=medium
+
+  * Rebuild for MX 17.
+  * Conflict with and replace conky-manager2.
+  * Switch to 3.0 (quilt) source format.
+  * Bump debhelper compat to 9.
+
+ -- Steven Pusser <stevep@mxlinux.org>  Sun, 10 Sep 2017 13:14:19 -0700
+
+conky-manager (2.4~136~ubuntu15.10.1) wily; urgency=low
+
+  * Auto build.
+
+ -- Tony George <teejee2008@gmail.com>  Wed, 21 Oct 2015 13:17:29 +0000
+
+conky-manager (2.4) trusty; urgency=low
+
+  * Minor changes
+  
+ -- Tony George <tony.george.kol@gmail.com>  Wed, 21 Oct 2015 10:00:00 +0530

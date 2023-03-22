@@ -1,0 +1,10 @@
+#!/bin/sh
+set -e
+case "$1" in
+    configure)
+        update-alternatives --install /usr/bin/x-www-browser \
+            x-www-browser /usr/bin/mx-viewer 20 \
+        ;;
+esac
+#DEBHELPER#
+exit 0

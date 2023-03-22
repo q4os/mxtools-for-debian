@@ -1,0 +1,322 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the apt-notifier package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+# Translators:
+# anticapitalista <anticapitalista@riseup.net>, 2022
+# Geoff Gigg <geoffgigg@hotmail.com>, 2022
+# el Presidento, 2022
+# joyinko <joyinko@azet.sk>, 2022
+# Dolphin Oracle <dolphinoracle@gmail.com>, 2022
+# fehlix, 2022
+# 
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: apt-notifier\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-01-28 02:38+0100\n"
+"PO-Revision-Date: 2017-05-11 01:14+0000\n"
+"Last-Translator: fehlix, 2022\n"
+"Language-Team: Czech (https://www.transifex.com/anticapitalista/teams/10162/cs/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: cs\n"
+"Plural-Forms: nplurals=4; plural=(n == 1 && n % 1 == 0) ? 0 : (n >= 2 && n <= 4 && n % 1 == 0) ? 1: (n % 1 != 0 ) ? 2 : 3;\n"
+
+msgid "$count new updates available"
+msgstr "$count nových aktualizací k dispozici"
+
+msgid "0 updates available"
+msgstr "0 aktualizací k dispozici"
+
+msgid "1 new update available"
+msgstr "1 nová aktualizace k dispozici"
+
+msgid "About"
+msgstr "O aplikaci"
+
+msgid "About MX Updater"
+msgstr "O MX Aktualizace"
+
+msgid "Auto-update"
+msgstr "Auto-aktualizace"
+
+msgid "Auto-update dpkg log(s)"
+msgstr "Dpkg protokol(y) auto-aktualizace"
+
+msgid "Auto-update log(s)"
+msgstr "Protokol(y) auto-aktualizace"
+
+msgid "Automatically answer 'yes' to all prompts during full/basic upgrade"
+msgstr ""
+"Automaticky odpovídat 'ano' na všechny výzvy v průběhu úplné/základní "
+"aktualizace"
+
+msgid "Automatically answer 'yes' to all prompts during upgrade"
+msgstr "Automaticky odpovědět 'ano' na všechny výzvy v průběhu aktualizace"
+
+msgid "Cancel"
+msgstr "Zrušit"
+
+msgid "Changelog"
+msgstr "Protokol změn"
+
+msgid "Check for Updates"
+msgstr "Vyhledat Aktualizace"
+
+msgid "Close"
+msgstr "Zavřít"
+
+msgid "For a less detailed view see 'Auto-update dpkg log(s)' or 'History'."
+msgstr ""
+"Pro méně detailní pohled zobrazte 'Dpkg protokol(y) auto-aktualizace' nebo "
+"'Historie'."
+
+msgid "Hide until updates available"
+msgstr "Skrýt pokud aktualizace nejsou k dispozici"
+
+msgid "History"
+msgstr "Historie"
+
+msgid "Icons"
+msgstr "Ikony"
+
+msgid "Left-click behaviour   (when updates are available)"
+msgstr ""
+"Chování při kliknutí Levým tlačítkem myši (když jsou aktualizace k "
+"dispozici)"
+
+msgid "License"
+msgstr "Licence"
+
+msgid "MX Auto-update  --  unattended-upgrades dpkg log viewer"
+msgstr "MX Auto-aktualizace  --  dpkg prohlížeč protokolu unattended-upgrades"
+
+msgid "MX Auto-update  --  unattended-upgrades log viewer"
+msgstr "MX Auto-aktualizace -- prohlížeč protokolu unattended-upgrades"
+
+msgid "MX Package Installer"
+msgstr "MX Instalátor softvéru "
+
+#. The autostart desktop entry name will be shown within the list of autostart
+#. entries.
+#. The desktop entry name will be displayed within the menu.
+msgid "MX Updater"
+msgstr "MX Aktualizace"
+
+msgid "MX Updater Help"
+msgstr "Nápověda"
+
+msgid "MX Updater preferences"
+msgstr "Předvolby MX Aktualizace"
+
+msgid "MX Updater--View and Upgrade, previewing: basic upgrade"
+msgstr "MX Aktualizace--Zobrazit a aktualizovat, náhled: základní aktualizace"
+
+msgid "MX Updater--View and Upgrade, previewing: full upgrade"
+msgstr "MX Aktualizace--Zobrazit a aktualizovat, náhled: úplná aktualizace"
+
+msgid "No logs found."
+msgstr "Žádné protokoly nenalezeny"
+
+msgid "No unattended-upgrades dpkg log(s) found."
+msgstr "Nenalezen(y) žádný dpkg protokol unattended-upgrades"
+
+msgid "No updates available"
+msgstr "Nejsou k dispozici žádné nové aktualizace"
+
+msgid "Other options"
+msgstr "Další volby"
+
+msgid "Preferences"
+msgstr "Nastavení"
+
+msgid "Press 'h' for help, 'q' to quit"
+msgstr "Stiskněte 'h' pro nápovědu, 'q' pro ukončení"
+
+msgid "Quit"
+msgstr "Konec"
+
+msgid "Reload"
+msgstr "Načíst znovu"
+
+msgid ""
+"Reload the package information to become informed about new, removed or "
+"upgraded software packages. (apt-get update)"
+msgstr ""
+"Znovu načíst informace o balících k získání přehledu o nových, odstraněných "
+"nebo zaktualizovaných softvérových balících. (apt-get update)"
+
+msgid "Restart MX Updater"
+msgstr "Restartovat MX Aktualizace"
+
+msgid "Running apt-get autoremove, if you are unsure type 'n'."
+msgstr "Spoustit apt-get autoremove, když si nejste jistí napište 'n'."
+
+msgid ""
+"Switches the type of Upgrade that will be performed, alternating back and "
+"forth between 'full upgrade' and 'basic upgrade'."
+msgstr ""
+"Přepíná typ aktualizace, který bude proveden, střídavě tam a zpět mezi "
+"'úplnou aktualizací' a 'základní aktualizací'."
+
+msgid "Synaptic Help"
+msgstr "Pomoc pro Synaptic"
+
+msgid "Tray applet to notify of system and application updates"
+msgstr ""
+"Aplet oznamovací oblasti pro upozornění na aktualizace systému a aplikací"
+
+msgid "Unattended-upgrades"
+msgstr "Bezobslužné aktualizace"
+
+msgid "Unneeded packages are installed that can be removed."
+msgstr "Nepotřebné nainstalované balíky, které mohou být odtsraněny."
+
+msgid "Updates"
+msgstr "Aktualizace"
+
+msgid "Upgrade mode"
+msgstr "Režim aktualizace"
+
+msgid "Upgrade using Synaptic"
+msgstr "Aktualizovat přes Synaptic"
+
+msgid "Using basic upgrade (not recommended)"
+msgstr "Použití základní aktualizace (nedoporučuje se)"
+
+msgid "Using full upgrade"
+msgstr "Použití úplné aktualizace"
+
+msgid "View and Upgrade"
+msgstr "Prohlížet a Aktualizovat"
+
+msgid "You have $count new updates available"
+msgstr "Je k dispozici $count nových aktualizací"
+
+msgid "You have 1 new update available"
+msgstr "1 nová aktualizace k dispozici"
+
+#. TRANSLATORS: Fill in all plural forms. The parenthesized expression '{num}'
+#. is replaced by the actual number of updates available at runtime.
+#. For the singular form, you can replace '{num}' with 'one'.
+#. Example with 2 plural forms:
+#. msgstr[0] -> singular form: use 'one new update' or '{num} new update'.
+#. msgstr[1] -> plural form: use '{num} new updates'.
+#, python-brace-format
+msgid "You have {num} new update available"
+msgid_plural "You have {num} new updates available"
+msgstr[0] "Je k dispozici {num} nová aktualizace"
+msgstr[1] "Je k dispozici {num} nové aktualizace"
+msgstr[2] "Je k dispozici {num} nových aktualizací"
+msgstr[3] "Je k dispozici {num} nových aktualizací"
+
+msgid "automatically close terminal window when full/basic upgrade complete"
+msgstr ""
+"automaticky zavřít terminálové okno jakmile je úplná/základní aktualizace "
+"dokončena"
+
+msgid "automatically close terminal window when upgrade complete"
+msgstr "automaticky zavřít terminálové okno jakmile je aktualizace dokončena"
+
+msgid "basic upgrade"
+msgstr "základní aktualizace"
+
+msgid "basic upgrade complete (or was canceled)"
+msgstr "základní aktualizace dokončena (nebo přerušena)"
+
+msgid "check for autoremovable packages after full/basic upgrade"
+msgstr ""
+"kontrola automaticky odebratelných balíčků po úplné/základní aktualizaci"
+
+msgid "classic"
+msgstr "klasicky"
+
+msgid "full upgrade"
+msgstr "úplná aktualizace"
+
+msgid "full upgrade   (recommended)"
+msgstr "úplná aktualizace (doporučeno)"
+
+msgid "full upgrade complete (or was canceled)"
+msgstr "úplná aktualizace dokončena (nebo přerušena)"
+
+msgid "opens MX Updater 'View and Upgrade' window"
+msgstr "otevře okno MX Aktualizace 'Zobrazit a aktualizovat'"
+
+msgid "opens Synaptic"
+msgstr "spouští Synaptic"
+
+msgid "press any key to close"
+msgstr "Pro ukončení stiskněte libovolnou klávesu"
+
+msgid "press any key to stop automatic closing"
+msgstr "Stiskněte libovolnou klávesu pro zrušení automatického zavření"
+
+msgid "pulse"
+msgstr "puls"
+
+msgid "start MX Updater at login"
+msgstr "Spustit MX Aktualizace při přihlášení"
+
+msgid "switch to basic upgrade"
+msgstr "přepnout na základní aktualizaci"
+
+msgid "switch to full upgrade"
+msgstr "přepnout na úplnou aktualizaci"
+
+msgid "this terminal window can now be closed"
+msgstr "toto okno terminálu už můžete zavřít"
+
+msgid "update automatically   (will not add new or remove existing packages)"
+msgstr ""
+"aktualizovat automaticky (nebude přidávat nové, ani odebírat stávající "
+"balíčky)"
+
+msgid "upgrade"
+msgstr "aktualizace"
+
+msgid "use desktop notifications"
+msgstr "používat notifikace"
+
+msgid "use transparent interior for no-updates wireframe"
+msgstr "pouźít průhlednou ikonu u statusu Plně aktualizováno"
+
+msgid "wireframe"
+msgstr "drátový model"
+
+#. TRANSLATORS: Fill in all plural forms. The parenthesized expression '{num}'
+#. is replaced by the actual number of updates available at runtime.
+#. For the singular form, you can replace '{num}' with 'one'.
+#. Example with 2 plural forms:
+#. msgstr[0] -> singular form: use 'one new update' or '{num} new update'.
+#. msgstr[1] -> plural form: use '{num} new updates'.
+#, python-brace-format
+msgid "{num} new update available"
+msgid_plural "{num} new updates available"
+msgstr[0] "{num} nová aktualizace k dispozici"
+msgstr[1] "{num} nové aktualizace k dispozici"
+msgstr[2] "{num} nových aktualizací k dispozici"
+msgstr[3] "{num} nových aktualizací k dispozici"
+
+#. TRANSLATORS:
+#. This autostart desktop entry comment will be shown within 'Session and
+#. Startup' (Autostart).
+msgid "An applet to show updates"
+msgstr "Aplet zobrazující aktualizace"
+
+#. TRANSLATORS:
+#. This desktop entry comment will be shown within the menu.
+msgid "Re-enable MX Updater icon even if no updates available"
+msgstr ""
+"Znovu povolit ikonu MX Aktualizace, i když nejsou žádné aktualizace k "
+"dispozici"
+
+msgid "Enable Auto-update"
+msgstr "Zapnout auto-aktualizaci"
+
+msgid "Disable Auto-update"
+msgstr "Vypnout auto-aktualizaci"

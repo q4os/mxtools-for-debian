@@ -1,0 +1,84 @@
+bash-config (22.08.02+deb11u13) stable; urgency=medium
+
+  * MX Tools release
+
+ -- Dolphin Oracle <administrator@localdomain>  Wed, 22 Mar 2023 10:43:47 +0100
+
+bash-config (22.08.02) mx; urgency=medium
+
+  * put segfault fix back 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 05 Aug 2022 07:07:10 -0400
+
+bash-config (22.08.01) mx; urgency=medium
+
+  * remove mx-viewer depend 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 04 Aug 2022 19:43:13 -0400
+
+bash-config (20.11.01) mx; urgency=medium
+
+  * new upstream release
+  * fix for segfaults (Nite Coder) 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Tue, 03 Nov 2020 22:13:11 -0500
+
+bash-config (20.07.01) mx; urgency=medium
+
+  [ Nite Coder ]
+  * new release
+  * revised alias, prompt building, ui improvements 
+
+ -- Dolphin Oracle <dolphin@littlebyte>  Wed, 08 Jul 2020 19:37:05 -0400
+
+bash-config (19.10.09) mx; urgency=medium
+
+  * icon change in app 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 19 Oct 2019 13:40:30 -0400
+
+bash-config (19.10.08) mx; urgency=medium
+
+  * fix to "remove all newlines" function (nite coder)
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 18 Oct 2019 22:01:50 -0400
+
+bash-config (19.10.07) mx; urgency=medium
+
+  * latest from upstream
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 14 Oct 2019 15:46:18 -0400
+
+bash-config (19.10.06) MX; urgency=medium
+
+  * update help file (images of prompts) 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 13 Oct 2019 08:49:35 -0400
+
+bash-config (19.10.05) mx; urgency=medium
+
+  * update help file format
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 12 Oct 2019 13:20:28 -0400
+
+bash-config (19.10.04) mx; urgency=medium
+
+  * update help file 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 11 Oct 2019 22:15:43 -0400
+
+bash-config (19.10.03) mx; urgency=medium
+
+  * remove unnecessary translations
+  * update help file
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 10 Oct 2019 21:29:36 -0400
+
+bash-config (19.10.02) mx; urgency=medium
+
+  * Initial release (Nite Coder)
+  * name adjustments
+  * added help file 
+  * 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 10 Oct 2019 21:29:22 -0400

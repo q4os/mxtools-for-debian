@@ -1,0 +1,92 @@
+
+<window title="{window_title_preferences}" icon-name="{window_icon_name}">
+  <vbox>
+    <frame {frame_upgrade_behaviour}>
+      <radiobutton active="{UpgradeBehaviourAptGetDistUpgrade}">
+        <label>{label_full_upgrade}</label>
+        <variable>UpgradeType_dist-upgrade</variable>
+        <action>:</action>
+      </radiobutton>
+      <radiobutton active="{UpgradeBehaviourAptGetUpgrade}">
+        <label>{label_basic_upgrade}</label>
+        <variable>UpgradeType_upgrade</variable>
+        <action>:</action>
+      </radiobutton>
+      <checkbox active="{unattended_upgrade}">
+        <label>{auto_update_checkbox_txt}</label>
+        <variable>AutoUpdate</variable>
+        <action>:</action>
+      </checkbox>
+    </frame>
+    {LeftClickBehaviourPackageManagerFrame}
+    <frame {frame_Icons}>
+      <hbox homogeneous="true">
+        <vbox>
+          <radiobutton active="{IconLookWireframeDark}">
+            <label>{label_wireframe}</label>
+            <variable>IconLook_wireframe_dark</variable>
+            <action>:</action>
+          </radiobutton>
+          <vseparator></vseparator>
+          <radiobutton active="{IconLookWireframeLight}">
+            <label>{label_wireframe}</label>
+            <variable>IconLook_wireframe_light</variable>
+            <action>:</action>
+          </radiobutton>
+          <vseparator></vseparator>
+          <radiobutton active="{IconLookClassic}">
+            <label>{label_classic}</label>
+            <variable>IconLook_classic</variable>
+            <action>:</action>
+          </radiobutton>
+          <vseparator></vseparator>
+          <vseparator></vseparator>
+          <radiobutton active="{IconLookPulse}">
+            <label>{label_pulse}</label>
+            <variable>IconLook_pulse</variable>
+            <action>:</action>
+          </radiobutton>
+        </vbox>
+        <vbox>
+          <pixmap icon_size="2"><input file>{wireframe_some}</input></pixmap>
+          <pixmap icon_size="2"><input file>{wireframe_some}</input></pixmap>
+          <pixmap icon_size="2"><input file>{classic_some}</input></pixmap>
+          <pixmap icon_size="2"><input file>{pulse_some}</input></pixmap>
+        </vbox>
+        <vbox>
+          <pixmap icon_size="2"><input file>{wireframe_none_dark}</input></pixmap>
+          <pixmap icon_size="2"><input file>{wireframe_none_light}</input></pixmap>
+          <pixmap icon_size="2"><input file>{classic_none}</input></pixmap>
+          <pixmap icon_size="2"><input file>{pulse_none}</input></pixmap>
+        </vbox>
+      </hbox>
+      <checkbox active="{WireframeTransparent}">
+        <label>{label_wireframe_transparent}</label>
+        <variable>WireframeTransparent</variable>
+        <action>:</action>
+      </checkbox>
+    </frame>
+    <frame {frame_other_options}>
+      <checkbox active="{UpgradeAssumeYes}">
+        <label>{use_apt_get_dash_dash_yes}</label>
+        <variable>UpgradeAssumeYes</variable>
+        <action>:</action>
+      </checkbox>
+      <checkbox active="{UpgradeAutoClose}">
+        <label>{auto_close_term_window_when_complete}</label>
+        <variable>UpgradeAutoClose</variable>
+        <action>:</action>
+      </checkbox>
+      {NotificationCheckBox}
+      <checkbox active="{AutoStart}">
+        <label>{label_autostart}</label>
+        <variable>PrefAutoStart</variable>
+        <action>:</action>
+      </checkbox>
+    </frame>
+    <hbox>
+      <button ok></button>
+      <button cancel></button>
+    </hbox>
+  </vbox>
+</window>

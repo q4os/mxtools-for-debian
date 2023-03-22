@@ -1,0 +1,20 @@
+#!/bin/sh
+
+#Purpose: runs the given app or kills all running instances of it for the user running this script.
+#Date: April 2020
+#Author: MX Linux Dev antiX-Dave, user Misko_2083 and others
+#Syntax: toggle <app>
+
+user=`whoami`;
+
+if hash "$1" >/dev/null; then
+    if pgrep -u $user $1 >/dev/null; then
+        kill -15 `pgrep -u $user $1`
+    else    
+        exec $* &
+    fi
+else
+    echo "Program name:' $1 ' does not appear to be a valid program name";
+fi
+
+exit 0;

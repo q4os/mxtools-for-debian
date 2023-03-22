@@ -1,0 +1,9 @@
+install instructions:
+
+ddm-mx goes in /usr/local/bin
+
+nvidia-detect-mx goes in /usr/local/bin
+
+bm files go into /usr/share/mx-packageinstaller-pkglist
+
+depends:  cli-shell-utils, nvidia-detect

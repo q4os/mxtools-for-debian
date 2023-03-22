@@ -1,0 +1,3 @@
+locale/*	usr/share/locale
+cli-installer	usr/local/bin
+rc.local.cli	usr/share/antiX

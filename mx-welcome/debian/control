@@ -1,0 +1,22 @@
+Source: mx-welcome
+Section: admin
+Priority: optional
+Maintainer: Adrian <adrian@mxlinux.org>
+Build-Depends: debhelper (>=10), qtbase5-dev, qttools5-dev-tools
+Standards-Version: 3.9.8
+Vcs-Git: git://github.com/AdrianTM/mx-welcome
+
+Package: mx-welcome
+Architecture: any
+Depends: mx-viewer | xdg-utils,
+        mx-welcome-data (>= 22.02.01),
+        ${misc:Depends},
+        ${shlibs:Depends}
+Description: MX Welcome
+ MX Welcome displays a welcome screen with two tabs.
+ .
+ The Welcome tab provides quick access links to many useful resources
+ and tools.
+ .
+ The About tab provides basic information about the current MX Linux 
+ version, the user's hardware, and access to a full system report.

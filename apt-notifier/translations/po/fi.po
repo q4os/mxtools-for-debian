@@ -1,0 +1,317 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the apt-notifier package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+# Translators:
+# Kimmo Kujansuu <mrkujansuu@gmail.com>, 2022
+# asd asd <ekeimaja@gmail.com>, 2022
+# Oi Suomi On! <oisuomion@protonmail.com>, 2022
+# En Kerro <inactive+ekeimaja@transifex.com>, 2022
+# Dolphin Oracle <dolphinoracle@gmail.com>, 2022
+# 
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: apt-notifier\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-01-28 02:38+0100\n"
+"PO-Revision-Date: 2017-05-11 01:14+0000\n"
+"Last-Translator: Dolphin Oracle <dolphinoracle@gmail.com>, 2022\n"
+"Language-Team: Finnish (https://www.transifex.com/anticapitalista/teams/10162/fi/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: fi\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "$count new updates available"
+msgstr "$count uutta päivitystä saatavilla"
+
+msgid "0 updates available"
+msgstr "0 päivitystä saatavilla"
+
+msgid "1 new update available"
+msgstr "1 uusi päivitys saatavilla"
+
+msgid "About"
+msgstr "Tietoja"
+
+msgid "About MX Updater"
+msgstr "Tietoja MX Päivitys-sovelluksesta"
+
+msgid "Auto-update"
+msgstr "Automaattipäivitys"
+
+msgid "Auto-update dpkg log(s)"
+msgstr "Päivitä dpkg loki(t) automaattisesti"
+
+msgid "Auto-update log(s)"
+msgstr "Automaattipäivityksen loki(t)"
+
+msgid "Automatically answer 'yes' to all prompts during full/basic upgrade"
+msgstr ""
+"Vastaa automaattisesti 'kyllä' kaikkiin kohtiin täydellisen/tavallisen "
+"päivityksen aikana"
+
+msgid "Automatically answer 'yes' to all prompts during upgrade"
+msgstr "Vastaa automaattisesti 'kyllä' päivityksen aikana"
+
+msgid "Cancel"
+msgstr "Peruuta"
+
+msgid "Changelog"
+msgstr "Muutosloki"
+
+msgid "Check for Updates"
+msgstr "Tarkista päivitykset"
+
+msgid "Close"
+msgstr "Sulje"
+
+msgid "For a less detailed view see 'Auto-update dpkg log(s)' or 'History'."
+msgstr ""
+"Vähemmän yksityiskohtaista näkymää varten katso 'Automaattipäivitysten dpkg-"
+"ylöskirjaus (kirjaukset)' tai 'Historia'"
+
+msgid "Hide until updates available"
+msgstr "Piilota kunnes päivityksiä on saatavilla"
+
+msgid "History"
+msgstr "Historia"
+
+msgid "Icons"
+msgstr "Kuvakkeet"
+
+msgid "Left-click behaviour   (when updates are available)"
+msgstr ""
+"Vasemman hiiren painikkeen käyttäytyminen (kun päivityksiä on saatavilla)"
+
+msgid "License"
+msgstr "Lisenssi"
+
+msgid "MX Auto-update  --  unattended-upgrades dpkg log viewer"
+msgstr ""
+"MX automaattipäivitys -- valvomattomien päivitysten dpkg-ylöskirjauskatselin"
+
+msgid "MX Auto-update  --  unattended-upgrades log viewer"
+msgstr ""
+"MX automaattipäivitys - valvomattomien päivitysten ylöskirjauskatselin "
+
+msgid "MX Package Installer"
+msgstr "MX Pakettien asennus"
+
+#. The autostart desktop entry name will be shown within the list of autostart
+#. entries.
+#. The desktop entry name will be displayed within the menu.
+msgid "MX Updater"
+msgstr "MX Päivitys"
+
+msgid "MX Updater Help"
+msgstr "MX Päivitys -ohje"
+
+msgid "MX Updater preferences"
+msgstr "MX Päivitysohjelman asetukset"
+
+msgid "MX Updater--View and Upgrade, previewing: basic upgrade"
+msgstr "MX Päivitys--Tarkista ja päivitä, näytetään: tavallinen päivitys"
+
+msgid "MX Updater--View and Upgrade, previewing: full upgrade"
+msgstr "MX Päivitys--Tarkista ja päivitä, näytetään: täydellinen päivitys"
+
+msgid "No logs found."
+msgstr "Lokeja ei löytynyt."
+
+msgid "No unattended-upgrades dpkg log(s) found."
+msgstr ""
+"Valvomattomien päivitysten dpkg-ylöskirjaustietoa (tietoja) ei löytynyt."
+
+msgid "No updates available"
+msgstr "Ei päivityksiä saatavillla"
+
+msgid "Other options"
+msgstr "Muut asetukset"
+
+msgid "Preferences"
+msgstr "Asetukset"
+
+msgid "Press 'h' for help, 'q' to quit"
+msgstr "Paina 'h' saadaksesi apua, 'q' lopettaaksesi"
+
+msgid "Quit"
+msgstr "Lopeta"
+
+msgid "Reload"
+msgstr "Päivitä"
+
+msgid ""
+"Reload the package information to become informed about new, removed or "
+"upgraded software packages. (apt-get update)"
+msgstr ""
+"Päivitä pakettien tiedot saadaksesi tiedot uusista, poistetuista tai "
+"päivitetystä ohjelmistopaketeista. (apt-get update)"
+
+msgid "Restart MX Updater"
+msgstr "Käynnistä MX Päivitys uudelleen"
+
+msgid "Running apt-get autoremove, if you are unsure type 'n'."
+msgstr "Suoritetaan apt-get autoremove, jos olet epävarma, paina 'e'."
+
+msgid ""
+"Switches the type of Upgrade that will be performed, alternating back and "
+"forth between 'full upgrade' and 'basic upgrade'."
+msgstr ""
+"Vaihtaa suoritettavan päivitysmallin, vaihdellen edes-takaisin "
+"'täyspäivityksen' ja 'peruspäivityksen' välillä."
+
+msgid "Synaptic Help"
+msgstr "Synaptic -ohje"
+
+msgid "Tray applet to notify of system and application updates"
+msgstr ""
+"Ilmaisinalueen sovelma joka ilmoittaa järjestelmä- ja sovelluspäivityksistä"
+
+msgid "Unattended-upgrades"
+msgstr "Unattended-upgrades"
+
+msgid "Unneeded packages are installed that can be removed."
+msgstr "Turhia paketteja on asennettu jotka voidaan poistaa."
+
+msgid "Updates"
+msgstr "Päivitykset"
+
+msgid "Upgrade mode"
+msgstr "Päivitystapa"
+
+msgid "Upgrade using Synaptic"
+msgstr "Päivitä käyttäen Synapticia"
+
+msgid "Using basic upgrade (not recommended)"
+msgstr "Käytetään tavallista päivitystä (ei suositeltu)"
+
+msgid "Using full upgrade"
+msgstr "Käytetään täydellistä päivitystä"
+
+msgid "View and Upgrade"
+msgstr "Katso ja päivitä"
+
+msgid "You have $count new updates available"
+msgstr "Sinulla on $count uutta päivitystä saatavilla"
+
+msgid "You have 1 new update available"
+msgstr "Sinulla on 1 uusi päivitys saatavilla"
+
+#. TRANSLATORS: Fill in all plural forms. The parenthesized expression '{num}'
+#. is replaced by the actual number of updates available at runtime.
+#. For the singular form, you can replace '{num}' with 'one'.
+#. Example with 2 plural forms:
+#. msgstr[0] -> singular form: use 'one new update' or '{num} new update'.
+#. msgstr[1] -> plural form: use '{num} new updates'.
+#, python-brace-format
+msgid "You have {num} new update available"
+msgid_plural "You have {num} new updates available"
+msgstr[0] "Sinulla on {num} uutta päivitystä saatavilla"
+msgstr[1] "Sinulla on {num} uutta päivitystä saatavilla"
+
+msgid "automatically close terminal window when full/basic upgrade complete"
+msgstr "Sulje pääteikkuna täydellisen/tavallisen päivityksen valmistuttua"
+
+msgid "automatically close terminal window when upgrade complete"
+msgstr "Sulje automaattisesti kaikki pääteikkunat päivityksen valmistuttua"
+
+msgid "basic upgrade"
+msgstr "tavallinen päivitys"
+
+msgid "basic upgrade complete (or was canceled)"
+msgstr "tavallinen päivitys valmistui (tai keskeytettiin)"
+
+msgid "check for autoremovable packages after full/basic upgrade"
+msgstr ""
+"tarkasta kaikki automaattisesti poistettavat paketit täydellisen/tavallisen "
+"pävityksen jälkeen"
+
+msgid "classic"
+msgstr "classic"
+
+msgid "full upgrade"
+msgstr "täydellinen päivitys"
+
+msgid "full upgrade   (recommended)"
+msgstr "täydellinen päivitys   (suositeltu)"
+
+msgid "full upgrade complete (or was canceled)"
+msgstr "täydellinen päivitys valmistui (tai keskeytettiin)"
+
+msgid "opens MX Updater 'View and Upgrade' window"
+msgstr "avaa MX Päivitysohjelman 'Tarkasta ja päivitä' -ikkunan"
+
+msgid "opens Synaptic"
+msgstr "avaa Synapticin"
+
+msgid "press any key to close"
+msgstr "paina mitä tahansa näppäintä sulkeaksesi"
+
+msgid "press any key to stop automatic closing"
+msgstr ""
+"paina mitä tahansa näppäintä estääksesi automaattisen ikkunan sulkemisen"
+
+msgid "pulse"
+msgstr "pulse"
+
+msgid "start MX Updater at login"
+msgstr "käynnistä MX Päivitys sisäänkirjautuessa"
+
+msgid "switch to basic upgrade"
+msgstr "siirry tavalliseen päivitystapaan"
+
+msgid "switch to full upgrade"
+msgstr "siirry täydelliseen päivitystapaan"
+
+msgid "this terminal window can now be closed"
+msgstr "tämän pääteikkunan voi nyt sulkea"
+
+msgid "update automatically   (will not add new or remove existing packages)"
+msgstr ""
+"päivitä automaattisesti (ei lisää uusia tai poista olemassaolevia paketteja)"
+
+msgid "upgrade"
+msgstr "päivitä"
+
+msgid "use desktop notifications"
+msgstr "Käytä työpöytäilmoituksia"
+
+msgid "use transparent interior for no-updates wireframe"
+msgstr "käytä läpinäkyvää sisustustaa päivittämättömiin ääriviivoihin"
+
+msgid "wireframe"
+msgstr "ääriviivat"
+
+#. TRANSLATORS: Fill in all plural forms. The parenthesized expression '{num}'
+#. is replaced by the actual number of updates available at runtime.
+#. For the singular form, you can replace '{num}' with 'one'.
+#. Example with 2 plural forms:
+#. msgstr[0] -> singular form: use 'one new update' or '{num} new update'.
+#. msgstr[1] -> plural form: use '{num} new updates'.
+#, python-brace-format
+msgid "{num} new update available"
+msgid_plural "{num} new updates available"
+msgstr[0] "{num} uutta päivitystä saatavilla"
+msgstr[1] "{num} uutta päivitystä saatavilla"
+
+#. TRANSLATORS:
+#. This autostart desktop entry comment will be shown within 'Session and
+#. Startup' (Autostart).
+msgid "An applet to show updates"
+msgstr "Sovelma päivitysten näyttämiseen"
+
+#. TRANSLATORS:
+#. This desktop entry comment will be shown within the menu.
+msgid "Re-enable MX Updater icon even if no updates available"
+msgstr ""
+"Ota MX Päivitys uudelleen käyttöön vaikka päivityksiä ei ole saatavilla"
+
+msgid "Enable Auto-update"
+msgstr "Kytke päälle automaattipäivitys"
+
+msgid "Disable Auto-update"
+msgstr "Kytke automaattipäivitys pois"

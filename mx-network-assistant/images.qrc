@@ -1,0 +1,13 @@
+<RCC>
+    <qresource prefix="/">
+        <file>icons/logo.png</file>
+        <file>icons/connect_creating.png</file>
+        <file>icons/connect_no.png</file>
+        <file>icons/network-workgroup.png</file>
+        <file>icons/samba.png</file>
+        <file>icons/tux.png</file>
+        <file>icons/emblem-checked.svg</file>
+        <file>icons/emblem-unreadable.svg</file>
+        <file>icons/emblem-documents.svg</file>
+    </qresource>
+</RCC>

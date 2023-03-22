@@ -1,0 +1,267 @@
+#!/bin/bash
+
+#TEST=true
+
+ME=${0##*/}
+MY_DIR=$(dirname $(readlink -f $0))
+
+XORG_BUS_ID_FILE="/etc/X11/xorg-bus-id"
+
+#==============================================================================
+# Proof of concept for letting users choose when graphics card/chip to use
+# when they have more than one.
+#==============================================================================
+
+main() {
+    set_colors
+    local lspci_graphics=$(lspci_graphics)
+    show_current_default "$lspci_graphics"
+    video_card_menu "$lspci_graphics" "$@"
+}
+
+#------------------------------------------------------------------------------
+#
+#------------------------------------------------------------------------------
+show_current_default() {
+    lspci_graphics=$1
+
+    local bus_id=$(cat $XORG_BUS_ID_FILE 2>/dev/null)
+
+    [ -z "$bus_id" ] && return
+    local id_card=$(echo "$lspci_graphics" | sed -n "s/^$bus_id //p")
+    if [ -z "$id_card" ]; then
+        say "Found bus-id %s but did not find associated card" "$bus_id"
+        return
+    fi
+    say "Currently selected card: %s" "$id_card"
+    XORG_BUS_ID=$bus_id
+}
+
+#------------------------------------------------------------------------------
+#
+#------------------------------------------------------------------------------
+save_bus_id() {
+    local file=$XORG_BUS_ID_FILE  bus_id=$1
+    [ -z "$bus_id" ] && return
+
+    [ "$bus_id" = "$XORG_BUS_ID" ] && return
+
+    if [ -z "$XORG_BUS_ID" ]; then
+        say "Saving bus-id %s in file %s" "$bus_id" "$file"
+    else
+        say "Updating bus-id to %s in file %s" "$bus_id" "$file"
+    fi
+    echo "$bus_id" > $file
+}
+
+#------------------------------------------------------------------------------
+# Select a video card bus_id based on the names
+#------------------------------------------------------------------------------
+video_card_menu() {
+    local lspci_graphics=$1 ; shift
+
+    local card_cnt=$(echo "$lspci_graphics" | wc -l)
+
+    case $card_cnt in
+        0) say "No video cards found"      ; return ;;
+        #1) say "Only one video card found" ; return ;;
+    esac
+
+    local disp_fmt="$green %2s)$m_co %s$nc_co"
+    local cnt=1  bus_id  text  data  disp
+    while read bus_id text; do
+        [ -z "$bus_id" ] && continue
+        data="${data}$cnt:$bus_id\n"
+        disp="${disp}$(printf "$disp_fmt" "$cnt" "$text")\n"
+        cnt=$((cnt + 1))
+        # echo "id: $id   text: $text"
+    done<<Lspci_nn
+$(munge_lspci "$lspci_graphics")
+Lspci_nn
+
+    data="${data}0:quit\n"
+    disp="$disp$(printf "$disp_fmt" "0" "quit")\n"
+
+    local my_id title="Please select a video card to use"
+    my_select_2 "$title" my_id "0" "$data" "$disp"
+
+    if [ "$my_id" = "quit" ]; then
+        say "Not selecting a video card"
+        return
+    fi
+    say "Using bus id: %s" "$my_id"
+    if [ $(id -u) -ne 0 ]; then
+        say "Would create the following xorg.conf file"
+        echo
+        make-xorg-conf busid=$my_id
+        return
+    fi
+    say "Making xorg.conf file"
+    make-xorg-conf -o /etc/X11/xorg.conf "busid=$my_id" 
+
+    save_bus_id $my_id
+}
+
+#------------------------------------------------------------------------------
+# Remove class description, horten some of the text, and removed the pci-id
+#------------------------------------------------------------------------------
+munge_lspci() {
+    echo "$1" | sed -r -n "s/^([0-9a-f:.]+) [^:]+: /\1 /pi"  \
+        | sed -r -e "s/Advanced Micro Devices, Inc\./AMD/" \
+        -e "s/ \[AMD\/ATI\]//" -e "s/\[AMD\]//" \
+        -e "s/(NVIDIA|Intel) Corporation/\1/" \
+        -e "s/ \[[0-9a-f]{4}:[0-9a-f]{4}\]//i"
+}
+
+#------------------------------------------------------------------------------
+# Run lspci with then 4 different graphics classes.  For my slow code that
+# gets the graphics drivers this provides a big speed-up.
+#------------------------------------------------------------------------------
+lspci_graphics() {
+    #lspci "$@"
+    lspci -d::0300 "$@"
+    lspci -d::0301 "$@"
+    lspci -d::0302 "$@"
+    lspci -d::0390 "$@"
+}
+
+#==============================================================================
+# Code below taken from select-device-2 test script
+#==============================================================================
+
+#------------------------------------------------------------------------------
+# my_select_2  title variable name default-entry-# data display
+#  "data" is $:value.  Display is whatever gets displayed
+#------------------------------------------------------------------------------
+my_select_2() {
+    local title=$1  var=$2  default=$3  data=$4  display=$5
+    local def_prompt=$(printf "Press <%s> for the default selection" "$(cq "enter")")
+
+    local val input err_msg
+    while [ -z "$val" ]; do
+
+        echo -e "$hi_co$title$nc_co"
+        printf "$display" | sed -r -e "s/(^|\t)( ?[0-9]+)(\))/\t$green\2$white\3$cyan/g" -e "s/$/$nc_co/"
+        [ "$err_msg" ] && printf "$err_co%s$nc_co\n" "$err_msg"
+        [ "$default" ] && printf "$m_co%s$nc_co\n" "$def_prompt"
+        echo -n "$green>$nc_co "
+
+        #return
+
+        read input
+        err_msg=
+        [ -z "$input" -a -n "$default" ] && input=$default
+
+        if ! echo "$input" | grep -q "^[0-9]\+$"; then
+            err_msg="You must enter a number"
+            [ "$default" ] && err_msg="You must enter a number or press <enter>"
+            continue
+        fi
+
+        val=$(echo -e "$data" | sed -n "s/^$input://p")
+
+        if [ -z "$val" ]; then
+            err_msg=$(printf "The number <%s> is out of range" "$(pqe $input)")
+            continue
+        fi
+
+        eval $var=\$val
+        break
+    done
+}
+
+
+db_msg() { vmsg 5 "${green}db+:$hi_co $@" ;}
+err()    { vmsg 1 "$err_co$@"             ;}
+msg()    { vmsg 5 "$@"                    ;}
+msgN()   { vmsgN 5 "$@"                   ;}
+msg_nc() { vmsg 5 "$nc_co$@"              ;}
+warn()   { vmsg 3 "$warn_co$@"            ;}
+
+bq()     { echo "$yellow$*$m_co"          ;}
+cq()     { echo "$cheat_co$*$m_co"        ;}
+cqw()    { echo "$cheat_co$*$warn_co"     ;}
+cqe()    { echo "$cheat_co$*$err_co"      ;}
+dq()     { echo "$dev_co$*$m_co"          ;}
+dqe()    { echo "$dev_co$*$err_co"        ;}
+fq()     { echo "$from_co$*$m_co"         ;}
+fqe()    { echo "$from_co$*$err_co"       ;}
+mpq()    { echo "$mp_co$*$m_co"           ;}
+nq()     { echo "$num_co$*$m_co"          ;}
+nqw()    { echo "$num_co$*$warn_co"       ;}
+pq()     { echo "$hi_co$*$m_co"           ;}
+pqe()    { echo "$bold_co$*$err_co"       ;}
+pqw()    { echo "$hi_co$*$warn_co"        ;}
+pqh()    { echo "$m_co$*$hi_co"           ;}
+hq()     { echo "$hi_co$*$m_co"           ;}
+
+vmsg() {
+    local level=$1  fmt=$2
+    shift 2
+
+    msg=$(printf "$m_co$fmt$nc_co" "$@")
+
+    [ "$level" -le "$VERBOSE" ] && printf "$msg\n"
+    echo -e "$msg" >> $MY_LOG
+    return 0
+}
+
+fatal() {
+    local fmt=$1 ; shift
+    printf "ERROR: $fmt\n" "$@" >&2
+    exit 3
+}
+
+vmsgN() {
+    local level=$1  fmt=$2
+    shift 2
+
+    msg=$(printf "$m_co$fmt$nc_co" "$@")
+
+    [ "$level" -le "$VERBOSE" ] && printf "$msg"
+    echo -ne "$msg" >> $MY_LOG
+    return 0
+}
+
+vmsg_if() {
+    local level=$1; shift
+    [ "$VERBOSE" -ge "$level" ] || return
+    vmsg $level "$@"
+}
+
+vmsg_nc() {
+    local level=$1; shift
+    vmsg $level "$nc_co$@"
+}
+
+say() {
+    local fmt=$1 ; shift
+    printf "$fmt\n" "$@"
+}
+
+set_colors() {
+    local noco=$1  loco=$2
+
+    [ "$noco" ] && return
+
+    local e=$(printf "\e")
+     black="$e[0;30m";    blue="$e[0;34m";    green="$e[0;32m";    cyan="$e[0;36m";
+       red="$e[0;31m";  purple="$e[0;35m";    brown="$e[0;33m"; lt_gray="$e[0;37m";
+   dk_gray="$e[1;30m"; lt_blue="$e[1;34m"; lt_green="$e[1;32m"; lt_cyan="$e[1;36m";
+    lt_red="$e[1;31m"; magenta="$e[1;35m";   yellow="$e[1;33m";   white="$e[1;37m";
+     nc_co="$e[0m";
+
+    cheat_co=$white;      err_co=$red;       hi_co=$white;
+      cmd_co=$white;     from_co=$lt_green;  mp_co=$magenta;   num_co=$magenta;
+      dev_co=$magenta;   head_co=$yellow;     m_co=$lt_cyan;    ok_co=$lt_green;
+       to_co=$lt_green;  warn_co=$yellow;  bold_co=$yellow;
+
+    [ "$loco" ] || return
+
+    from_co=$brown
+      hi_co=$white
+       m_co=$nc_co
+     num_co=$white
+}
+
+main "$@"

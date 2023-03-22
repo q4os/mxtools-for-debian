@@ -1,0 +1,131 @@
+2011-05-02        disk-manager        <flomertens@gmail.com>
+============================================================
+
+* Release : 1.1.1
+* Fix LP #771666; LP #381717
+* Fix browse mount point with double click on ubuntu
+  
+
+2011-01-20        disk-manager        <flomertens@gmail.com>
+============================================================
+
+* Release : 1.1
+* The "Make it thiner but stronger" release.
+* Fix a bunch of bugs.
+* Improve build system.
+* Remove some feature that was hard to maintain to avoid future bug:
+  - Remove new device notification.
+  - Remove special ntfs-3g support.
+  - Remove add device wizard.
+
+
+2007-07-16        disk-manager        <flomertens@gmail.com>
+============================================================
+
+* Release : 1.0.1
+* Revision number : 144
+* Fix : parsing label & fs type on old system (old udev, no vol_id)
+
+
+2007-07-05        disk-manager        <flomertens@gmail.com>
+============================================================
+
+* Release : 1.0
+* Revision number : 143
+* Change : Ask user before calling undo
+* Change : improve the way we handle multiple driver.
+* Fix : improve support for system with udev < 60
+* Fix : improve support for md (soft raid) device
+* Fix : label wasn't parse correctly when containing special character
+* Translation :
+- new translations : da, de, el, it, nb, pl, zh_CN thanks to : 
+Joe Hansen, sjolle, Ioannis Koniaris, Milo Casagrande,
+Morten Mytting Wang, tymmej, rainofchaos.
+- translation update : en_GB, es, pt_BR, sv thanks to :
+Nicholas WASTELL, Ezhgnu, Stênio Ferraz, Daniel Nylander
+
+
+2007-06-25        disk-manager        <flomertens@gmail.com>
+============================================================
+
+* Release : 1.0-RC5
+* Revision number : 129
+* The "Hopefully the last RC" release.
+* Fix : installation in /usr/local now works even if your python path is not set correctly.
+* Fix : typo in handle_mount_error that treated all ntfs-3g mount error as NTFSUNCLEAN error.
+* Fix : detection of bad option in handle_mount_error for reiserfs.
+* Fix : regression in question dialogs return code.
+* Fix : in handl_umount_error, searching used file could hanged while waiting for network reply.
+* Fix : LVM detection (LP #120455). The problem was that LVM configuration use a symlink
+that we didn't list. Instead of trying to maintain a list of symlink for each devices, which is
+difficult, we now resolve this symlink at Fstab creation to know if it refer to a known device.
+* Change : options and type of mounted but not configured partitions are now initialized
+with what give us MTAB instead of initialized them with default options.
+* Change : Don't allow to change system partition mount point or to unmount them with the
+lazy option, but allow them to be enable if they are not in FSTAB.
+* Change : Some little performance improvement by refactoring the Entry copy method.
+* Translation : 
+- Some new translations, and update. Thank you for your hard work.
+- POT status : 1 string added (this is in fact one that i forgot to make translatable).
+- Rosetta finaly works : https://translations.launchpad.net/disk-manager/+translations
+
+
+2007-06-11        disk-manager        <flomertens@gmail.com>
+============================================================
+
+* Release : 1.0-RC4
+* Revision number : 108
+* The "Last call before release" release
+* New : device mounted on multiple mount point should now be handle correctly
+* New : Show what changes will be apply before reverting to an 
+old configuration in the historic dialog
+* New : Propose actions when mounting/unmounting fail :
+- Propose the lazy option when device is busy
+- Propose to remove bad option or revert them to default
+when an unknow option was detected
+- Propose to use default FSTYPE driver when type wasn't found
+- Propose to use the force option when NTFS is unclean with ntfs-3g
+* Translation : some string changed == more works for translator. Sorry.
+
+
+2007-06-02        disk-manager        <flomertens@gmail.com>
+============================================================
+
+* Release : 1.0-RC3
+* Revision number : 101
+* The "If it works on debian sarge, it should works everywhere" release
+* Fix : ntfs device was ignored on old system (udev < 60)
+* Fix : detection of mapped device didn't work on old system due to change in dmsetup syntax
+* Fix : mount dialog wasn't compatible with pygtk < 2.10
+* Fix : opening browser failed for path with some special character
+* Fix : mount/umount didn't works for path with some special character
+* Fix : apps crashed on old system when hal fdi policy directory didn't exist.
+* Change : improve the way we choose browser & auth programm
+* Translation : improvement in localisation thanks to Abel Cheung
+
+
+2007-05-20        disk-manager        <flomertens@gmail.com>
+============================================================
+
+* Release : 1.0-RC2
+* Revision number : 97
+* Fix regression : MTAB and size change watch didn't work as expected.
+  It is know integrate in FstabHanler, and we also know manage watch for FSTAB
+  change. (try to run 2 session of disk-manager, and do change in one)
+* Change : improve duplicate entry detection.
+* Fix : Reorder FstabHandler init, to set window parent correctly (LP #115847).
+* Fix : Path created by the program that contained space wasn't removed
+  as expected after device was unconfigured.
+* Fix : fix a lot of strings thanks to Nicholas WASTELL, you may need
+  to update your translations.
+* Translation : add en-gb translation thanks to Nicholas WASTELL
+* Some other stuff. See ChangeLog for details.
+
+
+2007-05-20        disk-manager        <flomertens@gmail.com>
+============================================================
+
+* Release : 1.0-RC1
+* Revision number : 88
+* First Release Candidate. See ChangeLog for older news.
+

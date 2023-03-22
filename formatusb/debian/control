@@ -1,0 +1,18 @@
+Source: formatusb
+Section: admin
+Priority: optional
+Maintainer: Dolphin Oracle <dolphinoracle@gmail.com>
+Build-Depends: debhelper (>=10), qtbase5-dev, qttools5-dev-tools
+Standards-Version: 3.9.8
+
+Package: formatusb
+Architecture: any
+Depends: cli-shell-utils,
+         coreutils,
+         parted,
+         menu,
+         mx-viewer | antix-viewer| xdg-utils,
+         ${misc:Depends},
+         ${shlibs:Depends}
+Description: format usb devices
+ gui to aid users to format removable usb media

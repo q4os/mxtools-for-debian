@@ -1,0 +1,80 @@
+#!/bin/bash
+
+PREFIX=$(kdialog --title "Enter your ServiceMenu path" --getexistingdirectory /usr) # enter the path of the systemwide ServiceMenu dir
+CURRENTDIR=`dirname "$0"`	# looks at the location this file has
+cd "$CURRENTDIR"/src		# change to src-dir inside the installation folder
+
+if [ "$PREFIX" == "" ]; then	# ckecking if no dir was specified	
+echo "Installation failed!"	# error-message for aborted installation
+kdialog --title "ExtractAndCompres 1.4" --error "Installation failed!"  # error-dialog for aborted installation
+killall install.sh		# kills the installation script
+
+else				# if a dir was specified
+# copies *.desktop-files to specified dir
+cp compress.desktop "$PREFIX"
+cp compress_bgz.desktop "$PREFIX"
+cp extract7ZIP.desktop "$PREFIX"
+cp extractACE.desktop "$PREFIX"
+cp extractBZIP.desktop "$PREFIX"
+cp extractGZIP.desktop "$PREFIX"
+cp extractRAR.desktop "$PREFIX"
+cp extractTAR.desktop "$PREFIX"
+cp extractTARGZ.desktop "$PREFIX"
+cp extractZIP.desktop "$PREFIX"
+# copies all scripts to /usr/local/bin	
+cp compress_7ZIP.sh /usr/local/bin && chmod a=r+w+x /usr/local/bin/compress_7ZIP.sh
+cp compress_BZIP.sh /usr/local/bin && chmod a=r+w+x /usr/local/bin/compress_BZIP.sh
+cp compress_GZIP.sh /usr/local/bin && chmod a=r+w+x /usr/local/bin/compress_GZIP.sh
+cp compress_RAR.sh /usr/local/bin && chmod a=r+w+x /usr/local/bin/compress_RAR.sh
+cp compress_TAR7Z.sh /usr/local/bin && chmod a=r+w+x /usr/local/bin/compress_TAR7Z.sh
+cp compress_TARBZ2.sh /usr/local/bin && chmod a=r+w+x /usr/local/bin/compress_TARBZ2.sh
+cp compress_TARGZ.sh /usr/local/bin && chmod a=r+w+x /usr/local/bin/compress_TARGZ.sh
+cp compress_TAR.sh /usr/local/bin && chmod a=r+w+x /usr/local/bin/compress_TAR.sh
+cp compress_TGZ.sh /usr/local/bin && chmod a=r+w+x /usr/local/bin/compress_TGZ.sh
+cp compress_ZIP.sh /usr/local/bin && chmod a=r+w+x /usr/local/bin/compress_ZIP.sh
+cp extract_7ZIP_pw.sh /usr/local/bin && chmod a=r+w+x /usr/local/bin/extract_7ZIP_pw.sh
+cp extract_7ZIP_pw_to_folder.sh /usr/local/bin && chmod a=r+w+x /usr/local/bin/extract_7ZIP_pw.sh
+cp extract_7ZIP_pw_to.sh /usr/local/bin && chmod a=r+w+x /usr/local/bin/extract_7ZIP_pw_to.sh
+cp extract_7ZIP.sh /usr/local/bin && chmod a=r+w+x /usr/local/bin/extract_7ZIP.sh
+cp extract_7ZIP_to_folder.sh /usr/local/bin && chmod a=r+w+x /usr/local/bin/extract_7ZIP_to_folder.sh
+cp extract_7ZIP_to.sh /usr/local/bin && chmod a=r+w+x /usr/local/bin/extract_7ZIP_to.sh
+cp extract_ACE_pw.sh /usr/local/bin && chmod a=r+w+x /usr/local/bin/extract_ACE_pw.sh
+cp extract_ACE_pw_to_folder.sh /usr/local/bin && chmod a=r+w+x /usr/local/bin/extract_ACE_pw_to_folder.sh
+cp extract_ACE_pw_to.sh /usr/local/bin && chmod a=r+w+x /usr/local/bin/extract_ACE_pw_to.sh
+cp extract_ACE.sh /usr/local/bin && chmod a=r+w+x /usr/local/bin/extract_ACE.sh
+cp extract_ACE_to_folder.sh /usr/local/bin && chmod a=r+w+x /usr/local/bin/extract_ACE_to_folder.sh
+cp extract_ACE_to.sh /usr/local/bin && chmod a=r+w+x /usr/local/bin/extract_ACE_to.sh
+cp extract_BZIP.sh /usr/local/bin && chmod a=r+w+x /usr/local/bin/extract_BZIP.sh
+cp extract_BZIP_to_folder.sh /usr/local/bin && chmod a=r+w+x /usr/local/bin/extract_BZIP_to_folder.sh
+cp extract_BZIP_to.sh /usr/local/bin && chmod a=r+w+x /usr/local/bin/extract_BZIP_to.sh
+cp extract_GZIP.sh /usr/local/bin && chmod a=r+w+x /usr/local/bin/extract_GZIP.sh
+cp extract_GZIP_to_folder.sh /usr/local/bin && chmod a=r+w+x /usr/local/bin/extract_GZIP_to_folder.sh
+cp extract_GZIP_to.sh /usr/local/bin && chmod a=r+w+x /usr/local/bin/extract_GZIP_to.sh
+cp extract_RAR_pw.sh /usr/local/bin && chmod a=r+w+x /usr/local/bin/extract_RAR_pw.sh
+cp extract_RAR_pw_to_folder.sh /usr/local/bin && chmod a=r+w+x /usr/local/bin/extract_RAR_pw_to_folder.sh
+cp extract_RAR_pw_to.sh /usr/local/bin && chmod a=r+w+x /usr/local/bin/extract_RAR_pw_to.sh
+cp extract_RAR.sh /usr/local/bin && chmod a=r+w+x /usr/local/bin/extract_RAR.sh
+cp extract_RAR_to_folder.sh /usr/local/bin && chmod a=r+w+x /usr/local/bin/extract_RAR_to_folder.sh
+cp extract_RAR_to.sh /usr/local/bin && chmod a=r+w+x /usr/local/bin/extract_RAR_to.sh
+cp extract_TARGZ.sh /usr/local/bin && chmod a=r+w+x /usr/local/bin/extract_TARGZ.sh
+cp extract_TARGZ_to_folder.sh /usr/local/bin && chmod a=r+w+x /usr/local/bin/extract_TARGZ_to_folder.sh
+cp extract_TARGZ_to.sh /usr/local/bin && chmod a=r+w+x /usr/local/bin/extract_TARGZ_to.sh
+cp extract_TAR.sh /usr/local/bin && chmod a=r+w+x /usr/local/bin/extract_TAR.sh
+cp extract_TAR_to_folder.sh /usr/local/bin && chmod a=r+w+x /usr/local/bin/extract_TAR_to_folder.sh
+cp extract_TAR_to.sh /usr/local/bin && chmod a=r+w+x /usr/local/bin/extract_TAR_to.sh
+cp extract_ZIP.sh /usr/local/bin && chmod a=r+w+x /usr/local/bin/extract_ZIP.sh
+cp extract_ZIP_to_folder.sh /usr/local/bin && chmod a=r+w+x /usr/local/bin/extract_ZIP_to_folder.sh
+cp extract_ZIP_to.sh /usr/local/bin && chmod a=r+w+x /usr/local/bin/extract_ZIP_to.sh
+cd dialogs			# change to dialogs-dir
+# copies all dialog-scripts to /usr/local/bin
+cp archname_dialog.sh /usr/local/bin && chmod a=r+w+x /usr/local/bin/archname_dialog.sh
+cp compress_dialog.sh /usr/local/bin && chmod a=r+w+x /usr/local/bin/compress_dialog.sh
+cp compress_cancel_dialog.sh /usr/local/bin && chmod a=r+w+x /usr/local/bin/compress_cancel_dialog.sh
+cp extract_dialog.sh /usr/local/bin && chmod a=r+w+x /usr/local/bin/extract_dialog.sh
+cp extract_cancel_dialog.sh /usr/local/bin && chmod a=r+w+x /usr/local/bin/extract_cancel_dialog.sh
+cp extract_dir_dialog.sh /usr/local/bin && chmod a=r+w+x /usr/local/bin/extract_dir_dialog.sh
+cp extract_pw_dialog.sh /usr/local/bin && chmod a=r+w+x /usr/local/bin/extract_pw_dialog.sh
+cp overwrite_dialog.sh /usr/local/bin && chmod a=r+w+x /usr/local/bin/overwrite_dialog.sh
+cp overwrite_compress_dialog.sh /usr/local/bin && chmod a=r+w+x /usr/local/bin/overwrite_compress_dialog.sh
+
+fi

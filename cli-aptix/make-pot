@@ -1,0 +1,43 @@
+#!/bin/bash
+
+COPYRIGHT_HOLDER="antiX Linux"
+PACKAGE_NAME="antiX Development"
+BUGS_TO="translation@antixlinux.org"
+
+out_dir="Private/pot/"
+cat_file="cli-shell-utils.pot"
+
+files="cli-aptiX"
+
+xgt_opts="--no-location --add-comments --no-wrap --language=Shell"
+
+ofile_list=
+
+mkdir -p "$out_dir"
+
+ofile=$cat_file
+
+for file in $files; do
+    name=$(basename $file)
+    ofile=$out_dir/$name.pot
+    xgettext $xgt_opts \
+        --copyright-holder="$COPYRIGHT_HOLDER" \
+        --package-name="$PACKAGE_NAME" \
+        --msgid-bugs-address="$BUGS_TO" \
+        -o "$ofile" "$file" 2>/dev/null
+
+    sed -i "s/charset=CHARSET/charset=UTF-8/" $ofile
+
+    str_file=$out_dir/$name.str
+    egrep "^(msgid|#\.)" $ofile | sed "s/^msgid //" | sed -r 's/^"|"$//g' > $str_file
+
+    lines=$(grep ^msgid $ofile | wc -l)
+    words=$(grep ^msgid $ofile | wc -w)
+    words=$((words - lines))
+    lines=$((lines - 1))
+
+    echo
+    printf "$name:\n"
+    printf "  %4s strings to translate\n" $lines
+    printf "  %4s words in the strings\n" $words
+done

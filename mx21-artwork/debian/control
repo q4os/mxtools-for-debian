@@ -1,0 +1,12 @@
+Source: mx21-artwork
+Section: xfce
+Priority: extra
+Maintainer: dolphin oracle <dolphinoracle@gmail.com>
+Build-Depends: debhelper (>= 9.0.0)
+Standards-Version: 3.9.3
+
+Package: mx21-artwork
+Architecture: all
+Depends: ${misc:Depends}
+Replaces:  desktop-defaults-mx-xfce-desktop
+Description: Default wallpaper backgrounds for MX21

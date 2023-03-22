@@ -1,0 +1,18 @@
+Source: mx-conky
+Section: admin
+Priority: optional
+Maintainer: fehlix <fehlix@mxlinux.org>
+XSBC-Original-Maintainer: Adrian <adrian@mxlinux.org>
+Build-Depends: 	debhelper (>=10), 
+		qtbase5-dev, 
+		qttools5-dev-tools
+Standards-Version: 3.9.8
+Vcs-Git: git://github.com/MX-Linux/mx-conky
+
+Package: mx-conky
+Architecture: any
+Depends: mx-conky-data, 
+	${misc:Depends}, 
+	${shlibs:Depends}
+Description: MX Conky
+ MX Conky is a tool used for manipulating detailed attributes such as color or formats

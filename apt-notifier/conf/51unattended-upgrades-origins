@@ -1,0 +1,5 @@
+Unattended-Upgrade::Origins-Pattern {
+// Shipped without a Origins-Pattern, will be generated later by the
+// update-Origins-Pattern script which is run by cronjob or when user
+// enables unattended upgrade with apt-notifier preferences.
+};

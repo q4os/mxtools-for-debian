@@ -1,0 +1,12 @@
+[Unit]
+Description=mount swap on live
+After=local-fs.target
+ConditionPathExists=/live/linux
+
+[Service]
+Type=oneshot
+ExecStart=/sbin/swapon -a
+ExecStop=/bin/true
+
+[Install]
+WantedBy=multi-user.target

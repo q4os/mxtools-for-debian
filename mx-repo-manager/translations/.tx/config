@@ -1,0 +1,8 @@
+[main]
+host = https://www.transifex.com
+
+[antix-development.mx-repo-manager]
+file_filter = ./mx-repo-manager_<lang>.ts
+source_file = mx-repo-manager_en.ts
+source_lang = en
+type = ts

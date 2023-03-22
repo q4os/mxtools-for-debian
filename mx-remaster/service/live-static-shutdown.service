@@ -1,0 +1,14 @@
+[Unit]
+Description=antiX live-USB static persistence shutdown
+After=umount.target
+ConditionPathExists=/live/linux
+RequiresMountsFor=/ /live
+
+[Service]
+ExecStart=/bin/true
+ExecStop=/live/etc/init.d/live-static-shutdown stop
+Type=oneshot
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target

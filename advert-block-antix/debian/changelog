@@ -1,0 +1,248 @@
+advert-block-antix (0.2.31+deb11u13) stable; urgency=medium
+
+  * MX Tools release
+
+ -- anticapitalista <administrator@localdomain>  Wed, 22 Mar 2023 10:43:46 +0100
+
+advert-block-antix (0.2.31) mx; urgency=medium
+
+  * fix Turkish translation
+  * fix height of dialog boxes
+
+ -- anticapitalista <antix@operamail.com>  Sat, 02 Apr 2022 17:20:04 +0300
+
+advert-block-antix (0.2.30) unstable; urgency=medium
+
+  * TEXTDOMAIN=block-advert not TEXTDOMAIN=block-advert.sh
+
+ -- anticapitalista <antix@operamail.com>  Sat, 30 Oct 2021 16:39:35 +0300
+
+advert-block-antix (0.2.29) unstable; urgency=medium
+
+  * translation updates
+
+ -- anticapitalista <antix@operamail.com>  Tue, 12 Oct 2021 15:08:02 +0300
+
+advert-block-antix (0.2.28) unstable; urgency=medium
+
+  * updated translations
+
+ -- anticapitalista <antix@operamail.com>  Sat, 28 Aug 2021 14:47:14 +0300
+
+advert-block-antix (0.2.27) unstable; urgency=medium
+
+  * pt_BR edits to .desktop file
+
+ -- anticapitalista <antix@operamail.com>  Fri, 19 Mar 2021 18:51:23 +0200
+
+advert-block-antix (0.2.26) unstable; urgency=medium
+
+  * added gl_ES
+
+ -- anticapitalista <antix@operamail.com>  Sat, 28 Nov 2020 16:46:06 +0200
+
+advert-block-antix (0.2.25) unstable; urgency=medium
+
+  * added nb, improved pt_BR
+
+ -- anticapitalista <antix@operamail.com>  Thu, 08 Oct 2020 14:12:13 +0300
+
+advert-block-antix (0.2.24) unstable; urgency=medium
+
+  * translation update
+
+ -- anticapitalista <antix@operamail.com>  Tue, 16 Jun 2020 17:59:24 +0300
+
+advert-block-antix (0.2.23) unstable; urgency=medium
+
+  * added zh_TW
+
+ -- anticapitalista <antix@operamail.com>  Wed, 27 May 2020 15:37:21 +0300
+
+advert-block-antix (0.2.22) unstable; urgency=medium
+
+  * added ja translation
+
+ -- anticapitalista <antix@operamail.com>  Mon, 23 Mar 2020 13:29:55 +0200
+
+advert-block-antix (0.2.21) unstable; urgency=medium
+
+  * added sysctl
+  * minor adjustments
+  * added fil_PH, sl and tr
+
+ -- anticapitalista <antix@operamail.com>  Thu, 16 Jan 2020 16:57:42 +0200
+
+advert-block-antix (0.2.20) unstable; urgency=medium
+
+  * removed gksu dependency - open app with su-to-root -X -c
+
+ -- anticapitalista <antix@operamail.com>  Mon, 13 Jan 2020 16:12:46 +0200
+
+advert-block-antix (0.2.19) unstable; urgency=medium
+
+  * buster release
+
+ -- anticapitalista <antix@operamail.com>  Fri, 05 Jul 2019 21:01:07 +0300
+
+advert-block-antix (0.2.18) unstable; urgency=medium
+
+  * added pl
+
+ -- anticapitalista <antix@operamail.com>  Sun, 03 Mar 2019 18:06:04 +0200
+
+advert-block-antix (0.2.17) unstable; urgency=medium
+
+  * Adblock in desktop name
+
+ -- anticapitalista <antix@operamail.com>  Mon, 18 Feb 2019 17:07:38 +0200
+
+advert-block-antix (0.2.16) unstable; urgency=medium
+
+  * new icon
+
+ -- anticapitalista <antix@operamail.com>  Fri, 08 Feb 2019 11:48:23 +0200
+
+advert-block-antix (0.2.15) unstable; urgency=medium
+
+  * added fi
+
+ -- anticapitalista <antix@operamail.com>  Fri, 25 Jan 2019 14:28:15 +0200
+
+advert-block-antix (0.2.14) unstable; urgency=medium
+
+  * Updated and new translations
+
+ -- anticapitalista <antix@operamail.com>  Sun, 23 Sep 2018 15:42:04 +0300
+
+advert-block-antix (0.2.13) unstable; urgency=medium
+
+  * New Amharic
+
+ -- anticapitalista <antix@operamail.com>  Fri, 02 Mar 2018 16:08:19 +0200
+
+advert-block-antix (0.2.12) unstable; urgency=medium
+
+  * Improved translations
+
+ -- anticapitalista <antix@operamail.com>  Mon, 13 Nov 2017 18:19:56 +0200
+
+advert-block-antix (0.2.11) unstable; urgency=medium
+
+  * Include in Applications menu
+
+ -- anticapitalista <antix@operamail.com>  Sat, 07 Oct 2017 14:44:22 +0300
+
+advert-block-antix (0.2.10) unstable; urgency=medium
+
+  * Updated and new translations 
+
+ -- anticapitalista <antix@operamail.com>  Sat, 07 Jan 2017 14:03:22 +0200
+
+advert-block-antix (0.2.7.1) unstable; urgency=low
+ 
+  * Revert back to 2.6 version
+
+ -- anticapitalista <antiX@operamail.com>  Fri, 04 Dec 2015 13:19:00 +0200
+
+
+advert-block-antix (0.2.7) unstable; urgency=low
+ 
+  * Add only show in xfce for MX users
+
+ -- anticapitalista <antiX@operamail.com>  Mon, 30 Nov 2015 14:23:00 +0200
+
+
+advert-block-antix (0.2.6) unstable; urgency=low
+ 
+  * Added Italian, Japanese, Swedish
+
+ -- anticapitalista <antiX@operamail.com>  Fri, 26 Jun 2015 15:06:00 +0200
+
+
+advert-block-antix (0.2.5) unstable; urgency=low
+ 
+  * Removed ktsuss dependency
+
+ -- anticapitalista <antiX@operamail.com>  Wed, 25 Mar 2015 16:03:00 +0200
+
+
+advert-block-antix (0.2.4) unstable; urgency=low
+ 
+  * Removed technobeta entry
+  * Added unblock/restore original hosts file option
+  * Removed gtkdialog dependency
+
+ -- anticapitalista <antiX@operamail.com>  Sun, 19 Oct 2014 18:45:00 +0200
+
+
+advert-block-antix (0.2.3) unstable; urgency=low
+ 
+  * Using dpkg-buildpackage.
+  * xz compression for debs.
+
+ -- anticapitalista <antiX@operamail.com>  Fri, 18 Oct 2013 19:20:00 +0200
+
+
+advert-block-antix (0.2.2) unstable; urgency=low
+ 
+  * Added more localisations.
+
+ -- anticapitalista <antiX@operamail.com>  Tue, 09 Apr 2012 16:20:00 +0200
+
+
+advert-block-antix (0.2.1) unstable; urgency=low
+ 
+  * Added localisations.
+
+ -- anticapitalista <antiX@operamail.com>  Sun, 27 January 2012 20:55:00 +0200
+
+
+advert-block-antix (0.2.0) unstable; urgency=low
+ 
+  * ktsuss replaces gksu.
+
+ -- anticapitalista <antiX@operamail.com>  Sun, 23 September 2012 15:40:00 +0200
+
+
+advert-block-antix (0.1.5.1) unstable; urgency=low
+ 
+  * Fixed ownership bug.
+
+ -- anticapitalista <antiX@operamail.com>  Sun, 26 August 2012 15:40:00 +0200
+
+
+advert-block-antix (0.1.5) unstable; urgency=low 
+ 
+  * Added copyright notice.
+
+ -- anticapitalista <antiX@operamail.com> Mon, 16 July 2012 15:30:00 +0200
+
+
+advert-block-antix (0.1.4) unstable; urgency=low 
+ 
+  * Edited .desktop entry for /bin/bash.
+
+ -- anticapitalista <antiX@operamail.com>  Tues, 10 July 2012 18:30:00 +0200
+
+
+advert-block-antix (0.1.3) unstable; urgency=low 
+ 
+  * Added .desktop entry.
+
+ -- anticapitalista <antiX@operamail.com>  Wed, 30 May 2012 15:30:00 +0200
+
+
+advert-block-antix (0.1.2) unstable; urgency=low 
+ 
+  * Added localisation.
+
+ -- anticapitalista <antiX@operamail.com>  Wed, 25 April 2012 15:30:00 +0200
+
+
+advert-block-antix (0.1.1) unstable; urgency=low 
+ 
+  * Initial Release.
+
+ -- anticapitalista <antiX@operamail.com>  Sun, 29 January 2012 15:30:00 +0200
+

@@ -1,0 +1,14 @@
+[Desktop Entry]
+Encoding=UTF-8
+Version=0.9.4
+Type=Application
+# The desktop entry name will be displayed within the menu.
+Name=xfce4-notifyd-start
+# # The desktop entry comment will be shown within the menu.
+Comment=start xfce4-notifyd if not running
+Exec=/usr/bin/xfce4-notifyd-start
+OnlyShowIn=XFCE;
+StartupNotify=false
+Terminal=false
+Hidden=false
+

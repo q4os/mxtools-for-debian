@@ -1,0 +1,16 @@
+Source: mx-live-usb-maker
+Section: admin
+Priority: optional
+Maintainer: Adrian <adrian@mxlinux.org>
+Build-Depends: debhelper (>=10), qtbase5-dev, qttools5-dev-tools
+Standards-Version: 3.9.8
+
+Package: mx-live-usb-maker
+Architecture: any
+Depends: cli-shell-utils,
+         live-usb-maker,
+         xdg-utils | mx-viewer,
+         ${misc:Depends},
+         ${shlibs:Depends}
+Description: mx-live-usb-maker
+ mx-live-usb-maker

@@ -1,0 +1,8 @@
+[main]
+host = https://www.transifex.com
+
+[antix-development.mx-datetime]
+file_filter = ./mx-datetime_<lang>.ts
+source_file = mx-datetime_en.ts
+source_lang = en
+type = ts

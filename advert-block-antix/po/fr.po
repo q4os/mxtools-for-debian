@@ -1,0 +1,55 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# Translators:
+# cyril cottet <cyrilusber2001@yahoo.fr>, 2017
+# sombreros <sebastiendebierre@gmail.com>, 2011
+msgid ""
+msgstr ""
+"Project-Id-Version: antix-development\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-10-27 02:09+0300\n"
+"PO-Revision-Date: 2017-11-13 16:22+0000\n"
+"Last-Translator: cyril cottet <cyrilusber2001@yahoo.fr>\n"
+"Language-Team: French (http://www.transifex.com/anticapitalista/antix-development/language/fr/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: fr\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: block-advert.sh:24
+#, sh-format
+msgid ""
+"The <b>$title</b> tool adds stuff to your /etc/hosts file, so \\nthat many "
+"advertising servers and websites will not be able to connect \\nto this "
+"PC.\\n\\nYou can choose one service or combine multiple services for more "
+"advert protection.\\nBlocking ad servers protects your privacy, saves you "
+"bandwidth, greatly \\nimproves web-browsing speed and makes the internet "
+"much less annoying in general.\\n\\nDo you want to proceed?"
+msgstr "L'outil <b>$title</b> ajoute des éléments à votre fichier /etc/hosts , et grâce à ça de nombreux serveurs publicitaires et sites web ne pourront plus se connecter à votre PC.\\n\\nVous pouvez choisir un service ou combiner de multiples services pour plus de protection anti-pub.\\nBloquer les serveurs publicitaires préserve votre vie privée, économise votre bande passante, \\naméliore considérablement votre vitesse de surf et rend Internet bien moins désagréable en général. \\n\\nVoulez-vous continuer?"
+
+#: block-advert.sh:81
+msgid "Restoring original /etc/hosts."
+msgstr "Restauration du fichier /etc/hosts d'origine."
+
+#: block-advert.sh:117
+#, sh-format
+msgid "Loading  adlist from $domain"
+msgstr "Chargement de adlist depuis $domain"
+
+#: block-advert.sh:161
+msgid ""
+"Success - your settings have been changed.\\n\\nYour hosts file has been "
+"updated.\\nRestart your browser to see the changes."
+msgstr "Succès - vos paramètres ont été modifiés. \\n\\n Les fichier hosts ont été mis à jour. \\n Redémarrer votre navigateur pour voir les changements."
+
+#: block-advert.sh:182
+msgid "Choose your preferred ad blocking service(s)"
+msgstr "Choisissez votre bloqueur de publicité préféré "
+
+#: block-advert.sh:225
+msgid "No item selected"
+msgstr "Aucun élément sélectionné"

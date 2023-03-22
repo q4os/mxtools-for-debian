@@ -1,0 +1,40 @@
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA512
+
+Format: 1.8
+Date: Mon, 22 Aug 2022 19:03:57 -0400
+Source: mx-network-assistant
+Architecture: source
+Version: 22.8.01
+Distribution: mx
+Urgency: medium
+Maintainer: Adrian <adrian@mxlinux.org>
+Changed-By: Adrian <adrian@mxlinux.org>
+Changes:
+ mx-network-assistant (22.8.01) mx; urgency=medium
+ .
+   * Fix: launching documents from Help (fixes a problem in Plasma)
+Checksums-Sha1:
+ fe1dd88303972117424b01dcacec2accfcf892d3 1239 mx-network-assistant_22.8.01.dsc
+ 97d9b496b033e1e584113e6e0017b48c24033649 160508 mx-network-assistant_22.8.01.tar.xz
+ 9a7d2beb120e4136fc0cf5f0203a1fbfec5f4a4a 10836 mx-network-assistant_22.8.01_amd64.buildinfo
+Checksums-Sha256:
+ 22bc6afd5cd7bc67bbf0f9e85d5e6fff9c51b42829d1c5d9e555791d1120ff20 1239 mx-network-assistant_22.8.01.dsc
+ 011272b7c23168f72b5f659d2b7bbdb608c619a30c0b46cbdae09ec76ea0ef84 160508 mx-network-assistant_22.8.01.tar.xz
+ ba041edaea777a032763f1cb1275ee1eae228a5341cb8f0c640e3b318213243e 10836 mx-network-assistant_22.8.01_amd64.buildinfo
+Files:
+ dc91fedac388e7ec913cbdcafac94874 1239 admin optional mx-network-assistant_22.8.01.dsc
+ fd7f9dc4074e2a02ef62142a30fd6308 160508 admin optional mx-network-assistant_22.8.01.tar.xz
+ 4f07cf290f0d66a9294f67ea3b471dbd 10836 admin optional mx-network-assistant_22.8.01_amd64.buildinfo
+
+-----BEGIN PGP SIGNATURE-----
+
+iQFHBAEBCgAxFiEE8ndToY6S45N+YzXncJOMeAZ57pgFAmMEC70THGFkcmlhbkBt
+eGxpbnV4Lm9yZwAKCRBwk4x4BnnumDIWCACwdnt9+wkcvGhwGwA2qWhsBkby/ySz
+W1CdzKego/IZeRFCyL/1YMXrGLKq654b5dculTn5FoGaj9xZl16cwFDZEVVyuBJB
+gg6muPGNou7zOM22kmUvHikxsCq6BjsDl2kytCsvKaR5uQHoW/XXRRMwk0WN5EmY
+3vPVIlKBwOW+oEtu3D+YjJeqyq+SknP7erW3vmFKpXDa+X2Rsn+/0drLvp+Fw/Aq
+Ngx4Ubb66RAXirdDUzUnoYZeAU9ATL0Uz4qajw8zq7gXCpblX3f2feyUXle05ClT
+apUZAIXip7A3XrM6eTtw4dQpbzPeBDhB2w8WLXTx594KxzM5n9ioNGvI
+=05S3
+-----END PGP SIGNATURE-----

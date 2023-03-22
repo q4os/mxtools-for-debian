@@ -1,0 +1,24 @@
+#!/bin/bash
+
+# This script is used to capture the return code from mksquashfs
+# and store it in a file, the name of which is passed as the
+# first command line parameter.  Could make it more general purpose
+# having the command name passed as the 2nd parameter.
+#
+# This script is used when launching mksquashfs inside a terminal.
+
+file="$1"
+shift
+
+output="/tmp/mksquash_output"
+
+mksquashfs "$@" |tee $output
+ret="$?"
+echo $ret > $file
+
+#also capture uncompressed filesystem output into a variable and place that in a file in the SQFILE_DIR location
+. /live/config/initrd.out
+UNCOMPRESSEDSIZE_FILE="$SQFILE_DIR/linuxfs.info"
+UNCOMPRESSEDSIZE=$(grep "uncompressed filesystem" "$output" | cut -d"(" -f2 | cut -d" " -f1) 
+echo "UncompressedSizeKB=$UNCOMPRESSEDSIZE">"$UNCOMPRESSEDSIZE_FILE"
+rm -f $output 

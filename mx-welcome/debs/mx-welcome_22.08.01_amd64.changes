@@ -1,0 +1,31 @@
+Format: 1.8
+Date: Sun, 21 Aug 2022 21:25:19 -0400
+Source: mx-welcome
+Binary: mx-welcome
+Architecture: source amd64
+Version: 22.08.01
+Distribution: mx
+Urgency: medium
+Maintainer: Adrian <adrian@mxlinux.org>
+Changed-By: Dolphin Oracle <dolphinoracle@gmail.com>
+Description:
+ mx-welcome - MX Welcome
+Changes:
+ mx-welcome (22.08.01) mx; urgency=medium
+ .
+   * call gui instead of qsi cli mode
+Checksums-Sha1:
+ 24d1e52a4fcba0cf9aac70dc8b319d7b0bf4bd19 611 mx-welcome_22.08.01.dsc
+ 02245e7d8b9f6e52e1fe9f25a2f939d6bf98763c 246956 mx-welcome_22.08.01.tar.xz
+ 5c8f266e4e5a6f7e0161b553331004d63730e9cc 10484 mx-welcome_22.08.01_amd64.buildinfo
+ c8791e9559b4628072ae184815da68a3dae2536c 68852 mx-welcome_22.08.01_amd64.deb
+Checksums-Sha256:
+ 9a7e30f57e03898f260853d2adcc4c12564e69ae7a1aedad78098ce8d39aa8e9 611 mx-welcome_22.08.01.dsc
+ bea2b8db4c665d1ed393a0643b90260dd2b9566992812375eab5161d509cd404 246956 mx-welcome_22.08.01.tar.xz
+ 3bdce629f381cec8a8c10a82924e043a4c1946bd0ca1aef88f06a743d7f811fc 10484 mx-welcome_22.08.01_amd64.buildinfo
+ a7897b8b8ceae85dff81bb9f2d97925998a4b6fae7c08d9749026b2bc1b960de 68852 mx-welcome_22.08.01_amd64.deb
+Files:
+ 0c9fc2134ac3630e5f14180e1a438cb9 611 admin optional mx-welcome_22.08.01.dsc
+ 98c86f931089c25e2de537db628fc341 246956 admin optional mx-welcome_22.08.01.tar.xz
+ 7e9eae2327bd10dff9c1e42ae0310aa1 10484 admin optional mx-welcome_22.08.01_amd64.buildinfo
+ 54f0a662a99fd0515b9a4e00b2e23cb6 68852 admin optional mx-welcome_22.08.01_amd64.deb

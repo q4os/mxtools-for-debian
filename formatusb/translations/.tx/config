@@ -1,0 +1,8 @@
+[main]
+host = https://www.transifex.com
+
+[antix-development.formatusb]
+file_filter = ./formatusb_<lang>.ts
+source_file = formatusb_en.ts
+source_lang = en
+type = ts

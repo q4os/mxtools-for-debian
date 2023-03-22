@@ -1,0 +1,237 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+ALIASTAB_H	aliastab.h	2;"	d
+AR	Makefile	/^AR            = ar cqs$/;"	m
+AliasData	aliastab.h	/^struct AliasData$/;"	s
+AliasTab	aliastab.cpp	/^AliasTab::AliasTab()$/;"	f	class:AliasTab
+AliasTab	aliastab.h	/^class AliasTab : public Tab$/;"	c
+AliasTabTableWidgetItem	aliastab.cpp	/^AliasTabTableWidgetItem::AliasTabTableWidgetItem(QString text, QVariant info)$/;"	f	class:AliasTabTableWidgetItem
+AliasTabTableWidgetItem	aliastab.h	/^class AliasTabTableWidgetItem : public QObject, public QTableWidgetItem$/;"	c
+BUFFER_H	buffer.h	2;"	d
+BashrcSource	global.h	/^struct BashrcSource$/;"	s
+Buffer	buffer.cpp	/^Buffer::Buffer()$/;"	f	class:Buffer
+Buffer	buffer.cpp	/^Buffer::Buffer(Buffer &&move)$/;"	f	class:Buffer
+Buffer	buffer.cpp	/^Buffer::Buffer(Buffer &copy)$/;"	f	class:Buffer
+Buffer	buffer.cpp	/^Buffer::Buffer(const QString source)$/;"	f	class:Buffer
+Buffer	buffer.h	/^class Buffer : public QObject$/;"	c
+CC	Makefile	/^CC            = gcc$/;"	m
+CFLAGS	Makefile	/^CFLAGS        = -m64 -pipe -O2 -Wall -W -D_REENTRANT -fPIC $(DEFINES)$/;"	m
+CHECK	aliastab.cpp	56;"	d	file:
+CHECK_SEARCH	global.h	20;"	d
+CHK_DIR_EXISTS	Makefile	/^CHK_DIR_EXISTS= test -d$/;"	m
+COMPRESS	Makefile	/^COMPRESS      = gzip -9f$/;"	m
+COPY	Makefile	/^COPY          = cp -f$/;"	m
+COPY_DIR	Makefile	/^COPY_DIR      = cp -f -R$/;"	m
+COPY_FILE	Makefile	/^COPY_FILE     = cp -f$/;"	m
+CXX	Makefile	/^CXX           = g++$/;"	m
+CXXFLAGS	Makefile	/^CXXFLAGS      = -m64 -pipe -O2 -std=gnu++11 -Wall -W -D_REENTRANT -fPIC $(DEFINES)$/;"	m
+DEBUG	global.h	17;"	d
+DEBUG_ENTER	global.h	21;"	d
+DEBUG_EXIT	global.h	22;"	d
+DEBUG_POS	global.h	19;"	d
+DEBUG_VAR	global.h	18;"	d
+DEFINES	Makefile	/^DEFINES       = -DQT_DEPRECATED_WARNINGS -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB$/;"	m
+DEL_DIR	Makefile	/^DEL_DIR       = rmdir$/;"	m
+DEL_FILE	Makefile	/^DEL_FILE      = rm -f$/;"	m
+DESTDIR	Makefile	/^DESTDIR       = $/;"	m
+DIST	Makefile	/^DIST          = \/usr\/lib\/x86_64-linux-gnu\/qt5\/mkspecs\/features\/spec_pre.prf \\$/;"	m
+DISTDIR	Makefile	/^DISTDIR = \/home\/sd\/dev\/github\/mx-bashrc-config\/application-rw\/.tmp\/application-rw1.0.0$/;"	m
+DISTNAME	Makefile	/^DISTNAME      = application-rw1.0.0$/;"	m
+GLOBAL_H	global.h	2;"	d
+INCPATH	Makefile	/^INCPATH       = -I. -isystem \/usr\/include\/x86_64-linux-gnu\/qt5 -isystem \/usr\/include\/x86_64-linux-gnu\/qt5\/QtWidgets -isystem \/usr\/include\/x86_64-linux-gnu\/qt5\/QtGui -isystem \/usr\/include\/x86_64-linux-gnu\/qt5\/QtCore -I. -I. -I\/usr\/lib\/x86_64-linux-gnu\/qt5\/mkspecs\/linux-g++-64$/;"	m
+INSTALL_DIR	Makefile	/^INSTALL_DIR   = cp -f -R$/;"	m
+INSTALL_FILE	Makefile	/^INSTALL_FILE  = install -m 644 -p$/;"	m
+INSTALL_PROGRAM	Makefile	/^INSTALL_PROGRAM = install -m 755 -p$/;"	m
+LFLAGS	Makefile	/^LFLAGS        = -m64 -Wl,-O1$/;"	m
+LIBS	Makefile	/^LIBS          = $(SUBLIBS) -L\/usr\/X11R6\/lib64 -lQt5Widgets -lQt5Gui -lQt5Core -lGL -lpthread $/;"	m
+LINK	Makefile	/^LINK          = g++$/;"	m
+MAKEFILE	Makefile	/^MAKEFILE      = Makefile$/;"	m
+MKDIR	Makefile	/^MKDIR         = mkdir -p$/;"	m
+MOVE	Makefile	/^MOVE          = mv -f$/;"	m
+NAME	global.h	13;"	d
+NAME_BIN	global.h	14;"	d
+OBJECTS	Makefile	/^OBJECTS       = main.o \\$/;"	m
+OBJECTS_DIR	Makefile	/^OBJECTS_DIR   = .\/$/;"	m
+ORG	global.h	15;"	d
+PROMPTTAB_H	prompttab.h	2;"	d
+PromptTab	prompttab.cpp	/^PromptTab::PromptTab()$/;"	f	class:PromptTab
+PromptTab	prompttab.h	/^class PromptTab : public Tab$/;"	c
+PromptTab	ui_prompttab.h	/^    class PromptTab: public Ui_PromptTab {};$/;"	c	namespace:Ui
+QMAKE	Makefile	/^QMAKE         = \/usr\/lib\/x86_64-linux-gnu\/qt5\/bin\/qmake$/;"	m
+QMAKE_TARGET	Makefile	/^QMAKE_TARGET  = application-rw$/;"	m
+RANLIB	Makefile	/^RANLIB        = $/;"	m
+ReturnValueSearchStatesFailed	searcher.h	/^        ReturnValueSearchStatesFailed = -1,$/;"	e	enum:Searcher::ReturnValues
+ReturnValueSearchStringNotFound	searcher.h	/^        ReturnValueSearchStringNotFound = -2,$/;"	e	enum:Searcher::ReturnValues
+ReturnValues	searcher.h	/^    enum ReturnValues$/;"	g	class:Searcher
+SEARCHER_H	searcher.h	2;"	d
+SED	Makefile	/^SED           = sed$/;"	m
+SOURCES	Makefile	/^SOURCES       = main.cpp \\$/;"	m
+STRIP	Makefile	/^STRIP         = strip$/;"	m
+SYMLINK	Makefile	/^SYMLINK       = ln -f -s$/;"	m
+SearchStates	searcher.h	/^    enum SearchStates$/;"	g	class:Searcher
+Searcher	searcher.cpp	/^Searcher::Searcher()$/;"	f	class:Searcher
+Searcher	searcher.cpp	/^Searcher::Searcher(Searcher &&move)$/;"	f	class:Searcher
+Searcher	searcher.cpp	/^Searcher::Searcher(Searcher &copy)$/;"	f	class:Searcher
+Searcher	searcher.cpp	/^Searcher::Searcher(const QString *source, const int states)$/;"	f	class:Searcher
+Searcher	searcher.h	/^class Searcher : public QObject$/;"	c
+State	buffer.cpp	/^Buffer::State::State()$/;"	f	class:Buffer::State
+State	buffer.cpp	/^Buffer::State::State(State& copy)$/;"	f	class:Buffer::State
+State	buffer.cpp	/^Buffer::State::State(State&& move)$/;"	f	class:Buffer::State
+State	buffer.cpp	/^Buffer::State::State(const QString search, int state)$/;"	f	class:Buffer::State
+State	buffer.h	/^    class State$/;"	c	class:Buffer
+StateCheckDoubleQuotations	searcher.h	/^        StateCheckDoubleQuotations = (1 << 0),$/;"	e	enum:Searcher::SearchStates
+StateCheckSingleQuotations	searcher.h	/^        StateCheckSingleQuotations = (1 << 1),$/;"	e	enum:Searcher::SearchStates
+StateCheckSpecialQuotations	searcher.h	/^        StateCheckSpecialQuotations = (1 << 2),$/;"	e	enum:Searcher::SearchStates
+StateNone	searcher.h	/^        StateNone = 0,$/;"	e	enum:Searcher::SearchStates
+TAB_H	tab.h	2;"	d
+TAR	Makefile	/^TAR           = tar -cf$/;"	m
+TARGET	Makefile	/^TARGET        = application-rw$/;"	m
+Tab	tab.cpp	/^Tab::Tab(Tab &&move)$/;"	f	class:Tab
+Tab	tab.cpp	/^Tab::Tab(Tab &copy)$/;"	f	class:Tab
+Tab	tab.cpp	/^Tab::Tab(const QString name, const QIcon icon, QObject *parent)$/;"	f	class:Tab
+Tab	tab.h	/^class Tab : public QObject$/;"	c
+TabManager	window.cpp	/^Window::TabManager::TabManager(Ui::Window *ui)$/;"	f	class:Window::TabManager
+TabManager	window.h	/^    class TabManager : public QObject$/;"	c	class:Window
+UI_PROMPTTAB_H	ui_prompttab.h	10;"	d
+UI_WINDOW_H	ui_window.h	10;"	d
+Ui	aliastab.h	/^namespace Ui$/;"	n
+Ui	prompttab.h	/^namespace Ui{$/;"	n
+Ui	ui_prompttab.h	/^namespace Ui {$/;"	n
+Ui	ui_window.h	/^namespace Ui {$/;"	n
+Ui	window.h	/^namespace Ui {$/;"	n
+Ui_PromptTab	ui_prompttab.h	/^class Ui_PromptTab$/;"	c
+Ui_Window	ui_window.h	/^class Ui_Window$/;"	c
+WINDOW_H	window.h	2;"	d
+Window	ui_window.h	/^    class Window: public Ui_Window {};$/;"	c	namespace:Ui
+Window	window.cpp	/^Window::Window(QWidget *parent) :$/;"	f	class:Window
+Window	window.h	/^class Window : public QWidget$/;"	c
+addState	buffer.cpp	/^Buffer &Buffer::addState(Buffer::State *state)$/;"	f	class:Buffer
+addStates	buffer.cpp	/^Buffer &Buffer::addStates(QList<Buffer::State *> states)$/;"	f	class:Buffer
+addTab	window.cpp	/^Window::TabManager &Window::TabManager::addTab(Tab *tab)$/;"	f	class:Window::TabManager
+addTabs	window.cpp	/^Window::TabManager &Window::TabManager::addTabs(QList<Tab *> tabs)$/;"	f	class:Window::TabManager
+alias	aliastab.h	/^    QString alias;$/;"	m	struct:AliasData
+bashrc	global.h	/^    QString bashrc;$/;"	m	struct:BashrcSource
+buffer	buffer.cpp	/^QString Buffer::buffer()$/;"	f	class:Buffer
+checkBox_BoldLines	ui_prompttab.h	/^    QCheckBox *checkBox_BoldLines;$/;"	m	class:Ui_PromptTab
+checkBox_CompactLargePrompts	ui_prompttab.h	/^    QCheckBox *checkBox_CompactLargePrompts;$/;"	m	class:Ui_PromptTab
+checkBox_DisableUnicode	ui_prompttab.h	/^    QCheckBox *checkBox_DisableUnicode;$/;"	m	class:Ui_PromptTab
+checkBox_DoubleLines	ui_prompttab.h	/^    QCheckBox *checkBox_DoubleLines;$/;"	m	class:Ui_PromptTab
+checkBox_MutedColors	ui_prompttab.h	/^    QCheckBox *checkBox_MutedColors;$/;"	m	class:Ui_PromptTab
+checkBox_NoColor	ui_prompttab.h	/^    QCheckBox *checkBox_NoColor;$/;"	m	class:Ui_PromptTab
+checkBox_ParensInstead	ui_prompttab.h	/^    QCheckBox *checkBox_ParensInstead;$/;"	m	class:Ui_PromptTab
+closeEvent	window.cpp	/^void Window::closeEvent(QCloseEvent *event)$/;"	f	class:Window
+comboBox_SelectFancyPrompt	ui_prompttab.h	/^    QComboBox *comboBox_SelectFancyPrompt;$/;"	m	class:Ui_PromptTab
+comboBox_SelectPromptProvider	ui_prompttab.h	/^    QComboBox *comboBox_SelectPromptProvider;$/;"	m	class:Ui_PromptTab
+command	aliastab.h	/^    QString command;$/;"	m	struct:AliasData
+exec	aliastab.cpp	/^BashrcSource AliasTab::exec(const BashrcSource data)$/;"	f	class:AliasTab
+exec	prompttab.cpp	/^BashrcSource PromptTab::exec(const BashrcSource data)$/;"	f	class:PromptTab
+exec	window.cpp	/^BashrcSource Window::TabManager::exec(const BashrcSource source)$/;"	f	class:Window::TabManager
+getSource	window.cpp	/^BashrcSource Window::getSource()$/;"	f	class:Window
+horizontalLayout	ui_prompttab.h	/^    QHBoxLayout *horizontalLayout;$/;"	m	class:Ui_PromptTab
+horizontalLayout	ui_window.h	/^    QHBoxLayout *horizontalLayout;$/;"	m	class:Ui_Window
+horizontalLayout_2	ui_prompttab.h	/^    QHBoxLayout *horizontalLayout_2;$/;"	m	class:Ui_PromptTab
+horizontalLayout_3	ui_prompttab.h	/^    QHBoxLayout *horizontalLayout_3;$/;"	m	class:Ui_PromptTab
+horizontalLayout_4	ui_prompttab.h	/^    QHBoxLayout *horizontalLayout_4;$/;"	m	class:Ui_PromptTab
+horizontalLayout_5	ui_prompttab.h	/^    QHBoxLayout *horizontalLayout_5;$/;"	m	class:Ui_PromptTab
+horizontalLayout_7	ui_prompttab.h	/^    QHBoxLayout *horizontalLayout_7;$/;"	m	class:Ui_PromptTab
+icon	tab.cpp	/^QIcon Tab::icon()$/;"	f	class:Tab
+inBashrc	aliastab.h	/^    bool inBashrc;$/;"	m	struct:AliasData
+info	aliastab.cpp	/^QVariant& AliasTabTableWidgetItem::info()$/;"	f	class:AliasTabTableWidgetItem
+label	ui_prompttab.h	/^    QLabel *label;$/;"	m	class:Ui_PromptTab
+label	ui_window.h	/^    QLabel *label;$/;"	m	class:Ui_Window
+label_2	ui_prompttab.h	/^    QLabel *label_2;$/;"	m	class:Ui_PromptTab
+label_3	ui_prompttab.h	/^    QLabel *label_3;$/;"	m	class:Ui_PromptTab
+label_4	ui_prompttab.h	/^    QLabel *label_4;$/;"	m	class:Ui_PromptTab
+label_5	ui_prompttab.h	/^    QLabel *label_5;$/;"	m	class:Ui_PromptTab
+label_7	ui_prompttab.h	/^    QLabel *label_7;$/;"	m	class:Ui_PromptTab
+lineEdit_DateFormatText	ui_prompttab.h	/^    QLineEdit *lineEdit_DateFormatText;$/;"	m	class:Ui_PromptTab
+lineEdit_PromptText	ui_prompttab.h	/^    QLineEdit *lineEdit_PromptText;$/;"	m	class:Ui_PromptTab
+lineEdit_TimeFormatText	ui_prompttab.h	/^    QLineEdit *lineEdit_TimeFormatText;$/;"	m	class:Ui_PromptTab
+lineEdit_TitleText	ui_prompttab.h	/^    QLineEdit *lineEdit_TitleText;$/;"	m	class:Ui_PromptTab
+m_deletedAliases	aliastab.h	/^   QList<AliasData> m_deletedAliases;$/;"	m	class:AliasTab
+m_icon	tab.h	/^    QIcon m_icon;$/;"	m	class:Tab
+m_info	aliastab.h	/^    QVariant m_info;$/;"	m	class:AliasTabTableWidgetItem
+m_manager	window.h	/^    TabManager m_manager;$/;"	m	class:Window
+m_name	tab.h	/^    QString m_name;$/;"	m	class:Tab
+m_search	buffer.h	/^        QString m_search;$/;"	m	class:Buffer::State
+m_source	buffer.h	/^    QString m_source;$/;"	m	class:Buffer
+m_source	searcher.h	/^    QString* m_source;$/;"	m	class:Searcher
+m_sourceiter	buffer.h	/^    QString::iterator m_sourceiter;$/;"	m	class:Buffer
+m_state	buffer.h	/^        int m_state;$/;"	m	class:Buffer::State
+m_states	buffer.h	/^    QVector<State*> m_states;$/;"	m	class:Buffer
+m_states	searcher.h	/^    SearchStates m_states;$/;"	m	class:Searcher
+m_tabs	window.h	/^        QVector<Tab*> m_tabs;$/;"	m	class:Window::TabManager
+m_widget	tab.h	/^    QWidget* m_widget;$/;"	m	class:Tab
+main	main.cpp	/^int main(int argc, char *argv[])$/;"	f
+move	buffer.cpp	/^Buffer &Buffer::move(int times)$/;"	f	class:Buffer
+name	tab.cpp	/^QString Tab::name()$/;"	f	class:Tab
+operator =	buffer.cpp	/^Buffer &Buffer::operator =(Buffer &&move)$/;"	f	class:Buffer
+operator =	buffer.cpp	/^Buffer &Buffer::operator =(Buffer &copy)$/;"	f	class:Buffer
+operator =	buffer.cpp	/^Buffer::State& Buffer::State::operator =(Buffer::State &&move)$/;"	f	class:Buffer::State
+operator =	buffer.cpp	/^Buffer::State& Buffer::State::operator =(Buffer::State &copy)$/;"	f	class:Buffer::State
+operator =	searcher.cpp	/^Searcher& Searcher::operator = (Searcher& copy)$/;"	f	class:Searcher
+operator =	searcher.cpp	/^Searcher& Searcher::operator = (Searcher&& move)$/;"	f	class:Searcher
+operator =	tab.cpp	/^Tab& Tab::operator =(Tab &&move)$/;"	f	class:Tab
+operator =	tab.cpp	/^Tab& Tab::operator =(Tab &copy)$/;"	f	class:Tab
+page_2	ui_prompttab.h	/^    QWidget *page_2;$/;"	m	class:Ui_PromptTab
+page_FancyPrompts	ui_prompttab.h	/^    QWidget *page_FancyPrompts;$/;"	m	class:Ui_PromptTab
+program	global.h	/^    QString program;$/;"	m	struct:BashrcSource
+pushButton	ui_window.h	/^    QPushButton *pushButton;$/;"	m	class:Ui_Window
+pushButton_2	ui_window.h	/^    QPushButton *pushButton_2;$/;"	m	class:Ui_Window
+pushButton_3	ui_window.h	/^    QPushButton *pushButton_3;$/;"	m	class:Ui_Window
+readPositionSettings	window.cpp	/^void Window::readPositionSettings()$/;"	f	class:Window
+retranslateUi	ui_prompttab.h	/^    void retranslateUi(QWidget *PromptTab)$/;"	f	class:Ui_PromptTab
+retranslateUi	ui_window.h	/^    void retranslateUi(QWidget *Window)$/;"	f	class:Ui_Window
+scrollArea	ui_prompttab.h	/^    QScrollArea *scrollArea;$/;"	m	class:Ui_PromptTab
+scrollAreaWidgetContents	ui_prompttab.h	/^    QWidget *scrollAreaWidgetContents;$/;"	m	class:Ui_PromptTab
+search	searcher.cpp	/^int Searcher::search(const QChar search, int from)$/;"	f	class:Searcher
+search	searcher.cpp	/^int Searcher::search(const QRegExp search, int from)$/;"	f	class:Searcher
+search	searcher.cpp	/^int Searcher::search(const QRegularExpression search, int from)$/;"	f	class:Searcher
+search	searcher.cpp	/^int Searcher::search(const QString search, int from)$/;"	f	class:Searcher
+searchString	buffer.cpp	/^QString Buffer::State::searchString()$/;"	f	class:Buffer::State
+setIcon	tab.cpp	/^Tab& Tab::setIcon(const QIcon icon)$/;"	f	class:Tab
+setInfo	aliastab.cpp	/^AliasTabTableWidgetItem &AliasTabTableWidgetItem::setInfo(QVariant info)$/;"	f	class:AliasTabTableWidgetItem
+setName	tab.cpp	/^Tab& Tab::setName(const QString name)$/;"	f	class:Tab
+setSearchString	buffer.cpp	/^Buffer::State &Buffer::State::setSearchString(const QString search)$/;"	f	class:Buffer::State
+setSource	buffer.cpp	/^Buffer &Buffer::setSource(const QString source)$/;"	f	class:Buffer
+setSource	searcher.cpp	/^Searcher &Searcher::setSource(const QString *source)$/;"	f	class:Searcher
+setSource	window.cpp	/^void Window::setSource(const BashrcSource data)$/;"	f	class:Window
+setState	buffer.cpp	/^Buffer::State &Buffer::State::setState(int state)$/;"	f	class:Buffer::State
+setStates	searcher.cpp	/^Searcher &Searcher::setStates(const int states)$/;"	f	class:Searcher
+setWidget	tab.cpp	/^Tab &Tab::setWidget(QWidget *widget)$/;"	f	class:Tab
+setup	aliastab.cpp	/^void AliasTab::setup(const BashrcSource data)$/;"	f	class:AliasTab
+setup	prompttab.cpp	/^void PromptTab::setup(const BashrcSource data)$/;"	f	class:PromptTab
+setup	window.cpp	/^Window::TabManager &Window::TabManager::setup(const BashrcSource source)$/;"	f	class:Window::TabManager
+setupUi	ui_prompttab.h	/^    void setupUi(QWidget *PromptTab)$/;"	f	class:Ui_PromptTab
+setupUi	ui_window.h	/^    void setupUi(QWidget *Window)$/;"	f	class:Ui_Window
+source	buffer.cpp	/^QString Buffer::source()$/;"	f	class:Buffer
+source	searcher.cpp	/^QString Searcher::source()$/;"	f	class:Searcher
+spinBox_ExtraNewlinesBeforePrompt	ui_prompttab.h	/^    QSpinBox *spinBox_ExtraNewlinesBeforePrompt;$/;"	m	class:Ui_PromptTab
+spinBox_RightMargin	ui_prompttab.h	/^    QSpinBox *spinBox_RightMargin;$/;"	m	class:Ui_PromptTab
+stackedWidget	ui_prompttab.h	/^    QStackedWidget *stackedWidget;$/;"	m	class:Ui_PromptTab
+state	buffer.cpp	/^int Buffer::State::state()$/;"	f	class:Buffer::State
+states	searcher.cpp	/^Searcher::SearchStates Searcher::states()$/;"	f	class:Searcher
+tabWidget_Tabs	ui_window.h	/^    QTabWidget *tabWidget_Tabs;$/;"	m	class:Ui_Window
+templateSearch	searcher.cpp	/^int Searcher::templateSearch(Type search, int from)$/;"	f	class:Searcher
+ui	aliastab.h	/^   Ui::AliasTab* ui;$/;"	m	class:AliasTab
+ui	prompttab.h	/^    Ui::PromptTab* ui;$/;"	m	class:PromptTab
+ui	window.h	/^    Ui::Window *ui;$/;"	m	class:Window
+verticalLayout	ui_prompttab.h	/^    QVBoxLayout *verticalLayout;$/;"	m	class:Ui_PromptTab
+verticalLayout	ui_window.h	/^    QVBoxLayout *verticalLayout;$/;"	m	class:Ui_Window
+verticalLayout_2	ui_prompttab.h	/^    QVBoxLayout *verticalLayout_2;$/;"	m	class:Ui_PromptTab
+verticalLayout_3	ui_prompttab.h	/^    QVBoxLayout *verticalLayout_3;$/;"	m	class:Ui_PromptTab
+widget	tab.cpp	/^QWidget *Tab::widget()$/;"	f	class:Tab
+window_ui	window.h	/^        Ui::Window* window_ui;$/;"	m	class:Window::TabManager
+writePositionSettings	window.cpp	/^void Window::writePositionSettings()$/;"	f	class:Window
+~AliasTab	aliastab.cpp	/^AliasTab::~AliasTab()$/;"	f	class:AliasTab
+~AliasTabTableWidgetItem	aliastab.cpp	/^AliasTabTableWidgetItem::~AliasTabTableWidgetItem()$/;"	f	class:AliasTabTableWidgetItem
+~Buffer	buffer.h	/^    virtual ~Buffer(){}$/;"	f	class:Buffer
+~PromptTab	prompttab.cpp	/^PromptTab::~PromptTab()$/;"	f	class:PromptTab
+~Searcher	searcher.cpp	/^Searcher::~Searcher()$/;"	f	class:Searcher
+~State	buffer.cpp	/^Buffer::State::~State()$/;"	f	class:Buffer::State
+~Tab	tab.cpp	/^Tab::~Tab()$/;"	f	class:Tab
+~Window	window.cpp	/^Window::~Window()$/;"	f	class:Window

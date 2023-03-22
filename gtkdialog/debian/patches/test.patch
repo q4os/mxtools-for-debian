@@ -1,0 +1,58 @@
+Description: <short summary of the patch>
+ TODO: Put a short summary on the line above and replace this paragraph
+ with a longer explanation of this change. Complete the meta-information
+ with other relevant fields (see below for details). To make it easier, the
+ information below has been extracted from the changelog. Adjust it or drop
+ it.
+ .
+ gtkdialog (2:0.8.3-1) unstable; urgency=low
+ .
+   * New upstream release.
+Author: Mateusz Łukasik <mati75@linuxmint.pl>
+
+---
+The information above should follow the Patch Tagging Guidelines, please
+checkout http://dep.debian.net/deps/dep3/ to learn about the format. Here
+are templates for supplementary fields that you might want to add:
+
+Origin: <vendor|upstream|other>, <url of original patch>
+Bug: <url in upstream bugtracker>
+Bug-Debian: http://bugs.debian.org/<bugnumber>
+Bug-Ubuntu: https://launchpad.net/bugs/<bugnumber>
+Forwarded: <no|not-needed|url proving that it has been forwarded>
+Reviewed-By: <name and email of someone who approved the patch>
+Last-Update: <YYYY-MM-DD>
+
+--- gtkdialog-0.8.3.orig/data/icons/hicolor/Makefile.am
++++ gtkdialog-0.8.3/data/icons/hicolor/Makefile.am
+@@ -1,8 +1 @@
+ SUBDIRS=32x32
+-
+-UPDATE_ICON_CACHE=gtk-update-icon-cache -f -t $(datadir)/icons/hicolor
+-
+-install-data-hook:
+-	$(UPDATE_ICON_CACHE)
+-uninstall-hook:
+-	$(UPDATE_ICON_CACHE)
+--- gtkdialog-0.8.3.orig/data/icons/hicolor/Makefile.in
++++ gtkdialog-0.8.3/data/icons/hicolor/Makefile.in
+@@ -191,7 +191,6 @@ top_build_prefix = @top_build_prefix@
+ top_builddir = @top_builddir@
+ top_srcdir = @top_srcdir@
+ SUBDIRS = 32x32
+-UPDATE_ICON_CACHE = gtk-update-icon-cache -f -t $(datadir)/icons/hicolor
+ all: all-recursive
+ 
+ .SUFFIXES:
+@@ -536,11 +535,6 @@ uninstall-am:
+ 	uninstall-hook
+ 
+ 
+-install-data-hook:
+-	$(UPDATE_ICON_CACHE)
+-uninstall-hook:
+-	$(UPDATE_ICON_CACHE)
+-
+ # Tell versions [3.59,3.63) of GNU make to not export all variables.
+ # Otherwise a system limit (for SysV at least) may be exceeded.
+ .NOEXPORT:

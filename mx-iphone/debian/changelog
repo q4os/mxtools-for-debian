@@ -1,0 +1,23 @@
+mx-iphone (0.1mx21+deb11u13) stable; urgency=medium
+
+  * MX Tools release
+
+ -- Timothy E. Harris <administrator@localdomain>  Wed, 22 Mar 2023 10:43:53 +0100
+
+mx-iphone (0.1mx21) mx; urgency=medium
+
+  * Adjusted dependencies for bullseye base.
+
+ -- Timothy E. Harris <maintainer@mxrepo.com>  Wed, 10 Feb 2021 21:47:03 -0500
+
+mx-iphone (0.1mx17) mx; urgency=medium
+
+  * Adjusted for versioned dependencies in stretch
+
+ -- Timothy E. Harris <maintainer@mxrepo.com>  Sat, 07 Oct 2017 11:00:50 -0400
+
+mx-iphone (0.1) mx; urgency=medium
+
+  * Meta package to install software required to mount iphone filesystems 
+
+ -- Timothy E. Harris <maintainer@mxrepo.com>  Thu, 10 Nov 2016 17:07:00 -0500

@@ -1,0 +1,16 @@
+TODO list for checkaptgpg
+-------------------------
+
+Translations (and lack thereof)
+  There is currently no attempt to translate checkaptgpg into anything 
+  other than English. Translating the .desktop menu entry should be easy 
+  to do. But I've no idea how to translate a script.
+
+Manpage (and lack thereof)
+  There is currently no manpage for checkaptgpg. There is also no help 
+  produced by the script if something goes wrong or if --help is 
+  provided as a switch.
+
+Debian directory not clean
+  The debian directory has not been cleared of detritus yet.
+

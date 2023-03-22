@@ -1,0 +1,75 @@
+quick-system-info-gui (22.10.010mx21+deb11u13) stable; urgency=medium
+
+  * MX Tools release
+
+ -- Dolphin Oracle <administrator@localdomain>  Wed, 22 Mar 2023 10:43:58 +0100
+
+quick-system-info-gui (22.10.010mx21) mx; urgency=medium
+
+  * translations 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 26 Oct 2022 20:11:49 -0400
+
+quick-system-info-gui (22.10.09mx21) mx; urgency=medium
+
+  * fix license button
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 23 Oct 2022 09:49:16 -0400
+
+quick-system-info-gui (22.10.08mx21) mx; urgency=medium
+
+  * update translations 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 16 Oct 2022 23:49:17 -0400
+
+quick-system-info-gui (22.10.07mx21) mx; urgency=medium
+
+  [AK-47]
+  * show busy cursor at launch
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 16 Oct 2022 00:02:47 -0400
+
+quick-system-info-gui (22.10.06mx21) mx; urgency=medium
+
+  [AK-47]
+  * Ui improvements
+
+  [Dolphin]
+  * update help file 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 14 Oct 2022 21:47:19 -0400
+
+quick-system-info-gui (22.08.05mx21) mx; urgency=medium
+
+  *  fix blank space in http: characters
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 14 Aug 2022 19:45:29 -0400
+
+quick-system-info-gui (22.08.04mx21) mx; urgency=medium
+
+  * make control+C copy the whole report
+  * prevent selecting of partial report
+  * set accelerator key for button (alt+c also works)
+  * make copy button default 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 14 Aug 2022 15:08:10 -0400
+
+quick-system-info-gui (22.08.03mx21) mx; urgency=medium
+
+  * add help and license 
+  * allow better window resizing
+  * eliminate a few blank lines from display
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Tue, 09 Aug 2022 22:14:50 -0400
+
+quick-system-info-gui (22.08.02mx21) mx; urgency=medium
+
+  * hide code tags 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 08 Aug 2022 23:36:29 -0400
+
+quick-system-info-gui (22.08.01mx21) mx; urgency=medium
+
+  * initial build 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 7 Aug 2022 10:44:43 -0500

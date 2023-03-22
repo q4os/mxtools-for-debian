@@ -1,0 +1,169 @@
+--- conky-manager-2.7+dfsg1.orig/src/Main.vala
++++ conky-manager-2.7+dfsg1/src/Main.vala
+@@ -449,8 +449,10 @@ public class Main : GLib.Object {
+ 	public void find_conkyrc_files_in_path(string path){
+ 		string std_out = "";
+ 		string std_err = "";
+-		string cmd = "grep -r \"^[[:blank:]]*TEXT[[:blank:]]*$\\|conky\\.text[[:blank:]]*=\" \"%s\"".printf(path);
++		string regexp = "^[[:blank:]]*(TEXT[[:blank:]]*$|conky[.](config|text)[[:blank:]]*=[[:blank:]]([{]|[[][[]))";
++		string cmd = "grep -lEr '%s' ".printf(regexp) + "'%s'".printf(path);
+ 		last_cmd = cmd;
++
+ 		int exit_code = execute_command_script_sync(cmd, out std_out, out std_err);
+ 
+ 		if (exit_code != 0){
+@@ -458,24 +460,20 @@ public class Main : GLib.Object {
+ 			return;
+ 		}
+ 
+-		string file_path;
+-		foreach(string line in std_out.split("\n")){
+-			if (line.index_of(":") > -1){
+-				file_path = line.split(":")[0].strip();
+-				if (file_path.strip().has_suffix("~")){ continue; }
+-
+-				bool found = false;
+-				foreach(ConkyConfigItem item in conkyrc_list){
+-					if (item.path == file_path){
+-						found = true;
+-						break;
+-					}
+-				}
+-				if (!found){
+-					ConkyRC rc = new ConkyRC(file_path);
+-					conkyrc_list.add(rc);
++		foreach(string file_path in std_out.split("\n")){
++			if ((file_path == null) || (file_path == "")){ continue; }
++			if (file_path.strip().has_suffix("~")){ continue; }
++			bool found = false;
++			foreach(ConkyConfigItem item in conkyrc_list){
++				if (item.path == file_path){
++					found = true;
++					break;
+ 				}
+ 			}
++			if (!found){
++				ConkyRC rc = new ConkyRC(file_path);
++				conkyrc_list.add(rc);
++			}
+ 		}
+ 	}
+ 
+@@ -590,13 +588,13 @@ public class Main : GLib.Object {
+ 		string pids = execute_command_sync_get_output("pgrep -u %s -x conky".printf(uname));
+ 		foreach(string pid in pids.split("\n")){
+ 			if (pid == null || pid.length == 0){ continue; }
+-			string cmd_conkyrc = execute_command_sync_get_output(get_cmd_conkyrc.printf(pid)).chomp();
++			string cmd_conkyrc = execute_command_sync_get_output(get_cmd_conkyrc.printf(pid));
+ 			if (cmd_conkyrc == null || cmd_conkyrc.length == 0){ continue; }
+ 			if (cmd_conkyrc.index_of("/") != 0){
+-				string cmd_cwd = execute_command_sync_get_output(get_cmd_cwd.printf(pid)).chomp();
++				string cmd_cwd = execute_command_sync_get_output(get_cmd_cwd.printf(pid));
+ 				cmd_conkyrc = cmd_cwd + "/" + cmd_conkyrc;
+ 			}
+-			string realpath = execute_command_sync_get_output("realpath '%s'".printf(cmd_conkyrc)).chomp();
++			string realpath = execute_command_sync_get_output("realpath '%s'".printf(cmd_conkyrc));
+ 			if (FileUtils.test(realpath, GLib.FileTest.EXISTS)){
+ 				cmd_conkyrc = realpath;
+ 			}
+@@ -608,6 +606,7 @@ public class Main : GLib.Object {
+ 			foreach(string path in active_list){
+ 				if (rc.path == path){
+ 					active = true;
++					break;
+ 				}
+ 			}
+ 			rc.enabled = active;
+@@ -659,7 +658,7 @@ public class Main : GLib.Object {
+ 		string txt_start_conky = "";
+ 		txt_start_conky += "if [ x\"${DESKTOP_SESSION##*/}\" = x\"%s\" ]; then \n".printf(desktop_session);
+ 		txt_start_conky += "   sleep %ds\n".printf(startup_delay);
+-		txt_start_conky += "   killall -u $(id -nu) conky\n";
++		txt_start_conky += "   killall -u $(id -nu) conky 2>/dev/null\n";
+ 		foreach(ConkyRC conf in conkyrc_list){
+ 			if (conf.enabled){
+ 				txt_start_conky += "   cd \"" + conf.dir.replace(home, "$HOME")  + "\"\n";
+@@ -750,7 +749,7 @@ Comment=
+ 	}
+ 
+ 	public void kill_all_conky(){
+-		Posix.system("killall conky");
++		Posix.system("/bin/sh -c 'killall -u $(id -nu) conky'");
+ 		foreach(ConkyRC rc in conkyrc_list){
+ 			rc.enabled = false;
+ 		}
+@@ -932,13 +931,13 @@ public class ConkyRC : ConkyConfigItem {
+ 		string pids = execute_command_sync_get_output("pgrep -u %s -x conky".printf(uname));
+ 		foreach(string pid in pids.split("\n")){
+ 			if (pid == null || pid.length == 0){ continue; }
+-			string cmd_conkyrc = execute_command_sync_get_output(get_cmd_conkyrc.printf(pid)).chomp();
++			string cmd_conkyrc = execute_command_sync_get_output(get_cmd_conkyrc.printf(pid));
+ 			if (cmd_conkyrc == null || cmd_conkyrc.length == 0){ continue; }
+ 			if (cmd_conkyrc.index_of("/") != 0){
+-				string cmd_cwd = execute_command_sync_get_output(get_cmd_cwd.printf(pid)).chomp();
++				string cmd_cwd = execute_command_sync_get_output(get_cmd_cwd.printf(pid));
+ 				cmd_conkyrc = cmd_cwd + "/" + cmd_conkyrc;
+ 			}
+-			string realpath = execute_command_sync_get_output("realpath '%s'".printf(cmd_conkyrc)).chomp();
++			string realpath = execute_command_sync_get_output("realpath '%s'".printf(cmd_conkyrc));
+ 			if (FileUtils.test(realpath, GLib.FileTest.EXISTS)){
+ 				cmd_conkyrc = realpath;
+ 			}
+@@ -988,13 +987,13 @@ public class ConkyRC : ConkyConfigItem {
+ 		string pids = execute_command_sync_get_output("pgrep -u %s -x conky".printf(uname));
+ 		foreach(string pid in pids.split("\n")){
+ 			if (pid == null || pid.length == 0){ continue; }
+-			string cmd_conkyrc = execute_command_sync_get_output(get_cmd_conkyrc.printf(pid)).chomp();
++			string cmd_conkyrc = execute_command_sync_get_output(get_cmd_conkyrc.printf(pid));
+ 			if (cmd_conkyrc == null || cmd_conkyrc.length == 0){ continue; }
+ 			if (cmd_conkyrc.index_of("/") != 0){
+-				string cmd_cwd = execute_command_sync_get_output(get_cmd_cwd.printf(pid)).chomp();
++				string cmd_cwd = execute_command_sync_get_output(get_cmd_cwd.printf(pid));
+ 				cmd_conkyrc = cmd_cwd + "/" + cmd_conkyrc;
+ 			}
+-			string realpath = execute_command_sync_get_output("realpath '%s'".printf(cmd_conkyrc)).chomp();
++			string realpath = execute_command_sync_get_output("realpath '%s'".printf(cmd_conkyrc));
+ 			if (FileUtils.test(realpath, GLib.FileTest.EXISTS)){
+ 				cmd_conkyrc = realpath;
+ 			}
+@@ -1324,9 +1323,9 @@ public class ConkyRC : ConkyConfigItem {
+ 			return s.up();
+ 		}
+ 		set{
+-			string newLine = "own_window_colour " + value.up();
++			string newLine = "own_window_colour " + value;
+ 			set_value("own_window_colour", newLine);
+-			log_debug("Set: own_window_colour " + value.up());
++			log_debug("Set: own_window_colour " + value);
+ 		}
+ 	}
+ 
+@@ -1734,7 +1733,7 @@ public class ConkyRC : ConkyConfigItem {
+ 				if (!remove){
+ 					//replace line
+ 					if (one_ten_config){
+-						newText += line.replace(get_value(param), newLine.split(" ")[1]) + "\n";
++						newText += s.replace(get_value(param).down(), newLine.split(" ")[1]) + "\n";
+ 					}
+ 					else{
+ 						newText += newLine + "\n";
+--- conky-manager-2.7+dfsg1.orig/src/MainWindow.vala
++++ conky-manager-2.7+dfsg1/src/MainWindow.vala
+@@ -885,16 +885,7 @@ public class MainWindow : Window {
+ 	
+ 	private void btn_kill_all_clicked(){
+ 		App.kill_all_conky();
+-		
+-		TreeModel model = filterThemes;
+-		TreeStore store = (TreeStore) filterThemes.child_model;
+-		TreeIter iter;
+-
+-		bool iterExists = model.get_iter_first (out iter);
+-		while (iterExists){
+-			store.set (iter, 0, false, -1);
+-			iterExists = model.iter_next (ref iter);
+-		}
++        scan_themes();
+ 	}
+ 
+ 	private void btn_import_themes_clicked(){

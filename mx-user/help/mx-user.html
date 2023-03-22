@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>HELP: MX User Manager</title>
+</head>
+<body>
+<h1>HELP: MX User Manager</h1>
+<img src="usermanager.png" alt="User manager" />
+
+<h2>General</h2>
+
+<p>This application has 6 tabs.</p>
+
+	<ul>
+		<li>Administration: self-explanatory.</li>
+		<li> Options: restore default configurations for selected user.</li>
+		<li> Copy/Sync: copies or symlinks one user’s folder to another’s. If you are using a browser other than one by Mozilla, you will need to copy by hand the hidden folder in your Home (e.g., .opera)</li>
+		<li> Free Up Space: Offers several easy actions to check and increase hard drive space.</li>
+		<li> Add/Remove Groups: self-explanatory.</li>
+		<li> Group Membership: allows root to change a given user’s access to services and applications.</li>
+	</ul>
+
+<h2>Notes</h2>
+
+<p>Options tab: Restore Defaults: Xfce defaults<br> When the user selects to restore the original Xfce settings for MX Linux, the contents of two <a href="http://www.linfo.org/etc_skel.html" target="_blank" rel="noreferrer noopener" aria-label="&quot;skeleton file (opens in a new tab)">&#8220;skeleton file</a>s&#8221; are copied to the user&#8217;s Home:</p>
+
+	<ul>
+		<li><em>/etc/skel/.config/, to ~/.config</em></li>
+		<li><em> /etc/skel/.gtk-2.0/ to ~/.gtk-2.0/</em></li>
+	</ul>
+
+<p>Other than that, no files are replaced. If at some later point the user changes his/her mind, the files that were replaced can be found in the user&#8217;s Home directory in the hidden directory ~/.restore. The user would simply need to copy those archived directories, paste them back in Home, and accept to overwrite.</p>
+
+<p>License: <a href="https://mxlinux.org/wiki/licenses/license-mx-user-manager">here</a>.</p>
+
+<p>Development history: Warren Woodford (Mepis), Adrian</p>
+
+<p>v. 20170507</p>
+</body>
+</html>

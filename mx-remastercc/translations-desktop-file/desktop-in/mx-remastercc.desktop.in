@@ -1,0 +1,13 @@
+[Desktop Entry]
+Encoding=UTF-8
+# The desktop entry name will be displayed within the menu.
+Name=MX RemasterCC
+# # The desktop entry comment will be shown within the menu.
+Comment=Live persistence and remastering tools
+Exec=mx-remastercc
+Terminal=false
+Type=Application
+Icon=preferences-desktop
+Categories=GNOME;GTK;System;MX-Live
+NoDisplay=false
+

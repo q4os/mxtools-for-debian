@@ -1,0 +1,6 @@
+path_classifiers:
+  library:
+    - src/assets/KindleUnpack/
+    - src/assets/libarchivejs/
+    - src/web/crypto-js/
+    - src/epubcfi.js

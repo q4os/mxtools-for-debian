@@ -1,0 +1,46 @@
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA512
+
+Format: 1.8
+Date: Sun, 21 Aug 2022 02:12:42 -0400
+Source: mx-apps-kde
+Binary: mx-apps-kde
+Architecture: source all
+Version: 22.08.02
+Distribution: mx
+Urgency: medium
+Maintainer: Dolphin Oracle <dolphinoracle@gmail.com>
+Changed-By: Adrian <adrian@mxlinux.org>
+Description:
+ mx-apps-kde - metapackage for MX applets
+Changes:
+ mx-apps-kde (22.08.02) mx; urgency=medium
+ .
+   * Remmove mx-viewer dependency
+Checksums-Sha1:
+ 2453628b80f86fdbefcb469763c3e68a9a03dd76 1111 mx-apps-kde_22.08.02.dsc
+ ae6c0ff2dc686eb583a287e1700fe171d097a1f9 17456 mx-apps-kde_22.08.02.tar.xz
+ 5a6c26e8c083b56efe5f82145c11dfe6159d200a 16332 mx-apps-kde_22.08.02_all.deb
+ d8d0af734804b2cae590332f7590dad49ba71e5c 5112 mx-apps-kde_22.08.02_amd64.buildinfo
+Checksums-Sha256:
+ 03fdbf052cec75ed477e326cb39f44e8700ae70d176ce58efd0824ac677515f7 1111 mx-apps-kde_22.08.02.dsc
+ 16ac5b8b00d05ec30f9a80829a94ca03dbf5a512d648011fc3a5371f87bad721 17456 mx-apps-kde_22.08.02.tar.xz
+ 5953ea6237f22b77ba6aa090e21b7aeddcdf0d61712cd3f73ac42473b1b8e66a 16332 mx-apps-kde_22.08.02_all.deb
+ cbf1a9ecc411946e4fd9472bad5a9bfcbe124be064f5631aa15b57e76988065e 5112 mx-apps-kde_22.08.02_amd64.buildinfo
+Files:
+ fb1a7f9277451efde00afe13842353fc 1111 system optional mx-apps-kde_22.08.02.dsc
+ 8a40f87d8e51e4ddcb3efc2c66cba1c4 17456 system optional mx-apps-kde_22.08.02.tar.xz
+ eae98177d06c0d389295795f0070b021 16332 system optional mx-apps-kde_22.08.02_all.deb
+ d98605f361dae2e7c111322e48767470 5112 system optional mx-apps-kde_22.08.02_amd64.buildinfo
+
+-----BEGIN PGP SIGNATURE-----
+
+iQFHBAEBCgAxFiEE8ndToY6S45N+YzXncJOMeAZ57pgFAmMBzR4THGFkcmlhbkBt
+eGxpbnV4Lm9yZwAKCRBwk4x4BnnumOH8B/9OKRLkhQkxPpvuH9v6EMjLzcFtAY+I
++h2VKGTwgR/cBSuW1NdxEge8dWwE+yjq2Vm+HTqA2h74lQqwUkVt5D7iZt9EF2CI
+MJwTXOCxDHbzwOD+Q/bVybHozejGyChUkd+94DHoxLY2T3EQbd/tkXObiyWXU8tS
+oYPqKWNLcTVRPS8d93FQjKRJ661TLzvOcsK+1eqSj+CAnxQ0eXcMu1UDry/cUDPP
+9+GbhlhMq4xALVnTFHiSpK4aqIlOrs6c8lyqIiFcSKR7G32A/Hool4s84csGTUD3
+R0em850HTrWaX7BAMrVsuXXf43MmpoLCRTFrmIsm0cBAXx0lq9UkIkCr
+=uHtO
+-----END PGP SIGNATURE-----

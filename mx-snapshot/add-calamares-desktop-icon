@@ -1,0 +1,7 @@
+#!/bin/sh
+if [ -z "$(mount | grep " squashfs " | grep "linuxfs ")" ] ; then
+  #we are not riding live media
+  rm -f "$( xdg-user-dir DESKTOP )/install-debian.desktop"
+  exit
+fi
+/usr/bin/add-calamares-desktop-icon.real1

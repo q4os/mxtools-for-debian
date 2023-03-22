@@ -1,0 +1,8 @@
+[main]
+host = https://www.transifex.com
+
+[antix-development.ddm-mx]
+file_filter = po/ddm-mx_<lang>.po
+source_file = ddm-mx.pot
+source_lang = en
+type = po

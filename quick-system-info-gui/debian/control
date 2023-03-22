@@ -1,0 +1,11 @@
+Source: quick-system-info-gui
+Section: admin
+Priority: optional
+Maintainer: dolphin oracle <dolphinoracle@gmail.com>
+Build-Depends: debhelper (>=10), qtbase5-dev, qttools5-dev-tools
+Standards-Version: 3.9.8
+
+Package: quick-system-info-gui
+Architecture: any
+Depends: mx-goodies (>= 22.08.02), ${misc:Depends}, ${shlibs:Depends}
+Description: A utility to show quick-system-info (inxi, etc...) in a gui

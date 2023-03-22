@@ -1,0 +1,1692 @@
+mx-packageinstaller-pkglist (23.01.01mx21+deb11u13) stable; urgency=medium
+
+  * MX Tools release
+
+ -- Dolphin Oracle <administrator@localdomain>  Wed, 22 Mar 2023 10:43:54 +0100
+
+mx-packageinstaller-pkglist (23.01.01mx21) mx; urgency=medium
+
+  * remove 32 bit zoom.  no longer offerred
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 11 Jan 2023 20:02:14 -0500
+
+mx-packageinstaller-pkglist (22.12.02mx21) mx; urgency=medium
+
+  * remove kernel entries with ksmbd zero day vulnerability
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Tue, 27 Dec 2022 22:18:56 -0500
+
+mx-packageinstaller-pkglist (22.12.01mx21) mx; urgency=medium
+
+  * bump 6.0 kernel abi 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 17 Dec 2022 13:52:53 -0500
+
+mx-packageinstaller-pkglist (22.11.04mx21) mx; urgency=medium
+
+  * update teamviewer 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 26 Nov 2022 22:15:49 -0500
+
+mx-packageinstaller-pkglist (22.11.03mx21) mx; urgency=medium
+
+  * update 6.0 kernel (4mx) 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 19 Nov 2022 21:15:47 -0500
+
+mx-packageinstaller-pkglist (22.11.02mx21) mx; urgency=medium
+
+  * update 6.0 kernel (3.1mx)
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 11 Nov 2022 19:50:21 -0500
+
+mx-packageinstaller-pkglist (22.11.01mx21) mx; urgency=medium
+
+  * add 6.0 (3mx) kernel
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Tue, 01 Nov 2022 20:51:21 -0400
+
+mx-packageinstaller-pkglist (22.10.03mx21) mx; urgency=medium
+
+  *  update mullvad (again again)
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Tue, 18 Oct 2022 17:59:54 -0400
+
+mx-packageinstaller-pkglist (22.10.02mx21) mx; urgency=medium
+
+  [fehlix]
+  *  update mullvad vpn (again)
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 17 Oct 2022 20:48:20 -0400
+
+mx-packageinstaller-pkglist (22.10.01mx21) mx; urgency=medium
+
+  * add vscodium 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 09 Oct 2022 16:28:56 -0400
+
+mx-packageinstaller-pkglist (22.09.03mx21) mx; urgency=medium
+
+  * update 5.9 kernel 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 30 Sep 2022 23:02:47 -0400
+
+mx-packageinstaller-pkglist (22.09.02mx21) mx; urgency=medium
+
+  [fehlix]
+  * update Mullvad VPN
+  * update Windscribe VPN
+  * update Master PDF Editor 4 + 5
+ 
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 15 Sep 2022 22:28:05 -0400
+
+mx-packageinstaller-pkglist (22.09.01mx21) mx; urgency=medium
+
+  [Dolphin Oracle]
+  * update antiX kernels 
+  
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 15 Sep 2022 18:36:29 -0400
+
+mx-packageinstaller-pkglist (22.08.02mx21) mx; urgency=medium
+
+  * update 5.18 kernel to -4mx
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Tue, 23 Aug 2022 20:47:16 -0400
+
+mx-packageinstaller-pkglist (22.08.01mx21) mx; urgency=medium
+
+  * add ms-fonts
+  * add 5.18 kernel
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 21 Aug 2022 15:07:42 -0400
+
+mx-packageinstaller-pkglist (22.07.02mx21) mx; urgency=medium
+
+  * add steam-devices
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 24 Jul 2022 10:28:54 -0400
+
+mx-packageinstaller-pkglist (22.07.01mx21) mx; urgency=medium
+
+  * update vivaldi 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 14 Jul 2022 23:27:10 -0400
+
+mx-packageinstaller-pkglist (22.06.01mx21) mx; urgency=medium
+
+  * update 5.17 kernel 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 15 Jun 2022 21:58:16 -0400
+
+mx-packageinstaller-pkglist (22.05.03mx21) mx; urgency=medium
+
+  * add Windscribe VPN
+  * add xterm to NordVPN
+  * add xfce4-helpers for LibreWolf
+  * remove curl from uninstall in localwebserver
+
+ -- fehlix <fehlix@mxlinux.org>  Mon, 30 May 2022 20:14:57 -0400
+
+mx-packageinstaller-pkglist (22.05.02mx21) mx; urgency=medium
+
+  * fix typo in 5.17 kernel entry 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 23 May 2022 22:52:57 -0400
+
+mx-packageinstaller-pkglist (22.05.01mx21) mx; urgency=medium
+
+  * add shutter
+  * add 5.17 kernel 
+  * update antiX kernels 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 22 May 2022 16:28:57 -0400
+
+mx-packageinstaller-pkglist (22.04.04mx21) mx; urgency=medium
+
+  * virtualization category
+  * virt-manager
+  * gnome-boxes 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 25 Apr 2022 21:33:06 -0400
+
+mx-packageinstaller-pkglist (22.04.03mx21) mx; urgency=medium
+
+  *  update spotify
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 18 Apr 2022 18:59:17 -0400
+
+mx-packageinstaller-pkglist (22.04.02mx21) mx; urgency=medium
+
+  * add ms edge
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 09 Apr 2022 22:55:45 -0400
+
+mx-packageinstaller-pkglist (22.04.01mx21) mx; urgency=medium
+
+  * update avideodemux
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 07 Apr 2022 18:39:19 -0400
+
+mx-packageinstaller-pkglist (22.03.06mx21) mx; urgency=medium
+
+  * update ahs kernel 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 26 Mar 2022 20:35:07 -0400
+
+mx-packageinstaller-pkglist (22.03.05mx21) mx; urgency=medium
+
+  * add librewolf 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 21 Mar 2022 18:28:34 -0400
+
+mx-packageinstaller-pkglist (22.03.04mx21) mx; urgency=medium
+
+  * replace myspell with hunspell for language meta packs 
+  * use hunspell "frami" version de_AT, de_DE and de_CH
+  * adjust filenames Firefox-, LibreOffice-, Thunderbird- and nag-meta packs 
+  * add UTF-8 encoding to XML declaration header
+  * replace KeePassX with KeePassXC
+
+ -- fehlix <fehlix@mxlinux.org>  Sun, 20 Mar 2022 17:22:09 -0400
+
+mx-packageinstaller-pkglist (22.03.03mx21) mx; urgency=medium
+
+  * update ahs 5.16 kernel 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 12 Mar 2022 18:10:50 -0500
+
+mx-packageinstaller-pkglist (22.03.02mx21) mx; urgency=medium
+
+  * update ahs 5.16 kernel
+  * remove celestia from primary 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 05 Mar 2022 17:50:48 -0500
+
+mx-packageinstaller-pkglist (22.03.01mx21) mx; urgency=medium
+
+  * remove celestia from package descriptions 
+  * update ahs 5.16 kernel
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 02 Mar 2022 13:09:32 -0500
+
+mx-packageinstaller-pkglist (22.02.01mx21) mx; urgency=medium
+
+  * add 5.16 kernel 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 12 Feb 2022 09:35:01 -0500
+
+mx-packageinstaller-pkglist (22.01.03mx21) mx; urgency=medium
+
+  * update ahs kernel entry 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 29 Jan 2022 14:19:44 -0500
+
+mx-packageinstaller-pkglist (22.01.02mx21) mx; urgency=medium
+
+  * fix megasync 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Tue, 18 Jan 2022 23:01:33 -0500
+
+mx-packageinstaller-pkglist (22.01.01mx21) mx; urgency=medium
+
+  * add more default packages
+  * add avidemux 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Tue, 18 Jan 2022 18:13:49 -0500
+
+mx-packageinstaller-pkglist (21.12.05mx21) mx; urgency=medium
+
+  * update antix kernels
+  * add 5.15 kernel
+  * add fotoxx 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 30 Dec 2021 15:55:28 -0500
+
+mx-packageinstaller-pkglist (21.12.04mx21) mx; urgency=medium
+
+  * add pulseeffects
+  * add xfce 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 19 Dec 2021 16:22:28 -0500
+
+mx-packageinstaller-pkglist (21.12.03mx21) mx; urgency=medium
+
+  * update opera
+
+ -- fehlix <fehlix@mxlinux.org>  Fri, 17 Dec 2021 03:18:15 -0500
+
+mx-packageinstaller-pkglist (21.12.02mx21) mx; urgency=medium
+
+  * update telegram-desktop 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 10 Dec 2021 17:21:28 -0500
+
+mx-packageinstaller-pkglist (21.12.01mx21) mx; urgency=medium
+
+  * fix Libreoffice installer up/downgrade backports/main
+
+ -- fehlix <fehlix@mxlinux.org>  Mon, 06 Dec 2021 19:28:22 -0500
+
+mx-packageinstaller-pkglist (21.11.03mx21) mx; urgency=medium
+
+  * add variety wallpaper changer 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Tue, 30 Nov 2021 20:44:15 -0500
+
+mx-packageinstaller-pkglist (21.11.02mx21) mx; urgency=medium
+
+  * update master-pdf-editor-5 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 27 Nov 2021 13:16:52 -0500
+
+mx-packageinstaller-pkglist (21.11.01mx21) mx; urgency=medium
+
+  * update signal-desktop
+  * add 5.14 kernel (ahs) 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Tue, 23 Nov 2021 22:53:07 -0500
+
+mx-packageinstaller-pkglist (21.10.08mx21) mx; urgency=medium
+
+  * flesh out mxfluxbox.pm
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 30 Oct 2021 16:27:05 -0400
+
+mx-packageinstaller-pkglist (21.10.07mx21) mx; urgency=medium
+
+  * update kodi.pm 
+  * antiX kernel update
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 29 Oct 2021 18:54:27 -0400
+
+mx-packageinstaller-pkglist (21.10.06mx21) mx; urgency=medium
+
+  * add veracrypt 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 24 Oct 2021 14:47:55 -0400
+
+mx-packageinstaller-pkglist (21.10.05mx21) mx; urgency=medium
+
+  * add slack-desktop 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 23 Oct 2021 12:48:26 -0400
+
+mx-packageinstaller-pkglist (21.10.03mx21) mx; urgency=medium
+
+  * update freeoffice 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 22 Oct 2021 21:30:31 -0400
+
+mx-packageinstaller-pkglist (21.10.02mx21) mx; urgency=medium
+
+  * update opera_64, vivaldi and waterfox installer
+
+ -- fehlix <fehlix@mxlinux.org>  Mon, 11 Oct 2021 12:36:33 +0000
+
+mx-packageinstaller-pkglist (21.10.01mx21) mx; urgency=medium
+
+  * update debian kernel label 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 06 Oct 2021 09:54:43 -0400
+
+mx-packageinstaller-pkglist (21.09.06mx21) mx; urgency=medium
+
+  * hindi fonts 
+  * add telegram-desktop
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Tue, 05 Oct 2021 20:07:12 -0400
+
+mx-packageinstaller-pkglist (21.09.05mx21) mx; urgency=medium
+
+  * add synaptic to utilities 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 30 Sep 2021 19:46:52 -0400
+
+mx-packageinstaller-pkglist (21.09.04mx21) mx; urgency=medium
+
+  * update screenshots 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 18 Sep 2021 17:27:34 -0400
+
+mx-packageinstaller-pkglist (21.09.03mx21) mx; urgency=medium
+
+  * add xfce4-screenshooter
+  * remove muon modified desktop launcher from kde5.pm
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 09 Sep 2021 22:09:28 -0400
+
+mx-packageinstaller-pkglist (21.09.02mx21) mx; urgency=medium
+
+  * update krita
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 06 Sep 2021 20:53:31 -0400
+
+mx-packageinstaller-pkglist (21.09.01mx21) mx; urgency=medium
+
+  * add lazpaint 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 06 Sep 2021 11:44:47 -0400
+
+mx-packageinstaller-pkglist (21.08.5mx21) mx; urgency=medium
+
+  * update gimp-full and localwebserver 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 20 Aug 2021 23:35:59 -0400
+
+mx-packageinstaller-pkglist (21.08.4mx21) mx; urgency=medium
+
+  * update thunderbird language definitions 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 15 Aug 2021 11:35:08 -0400
+
+mx-packageinstaller-pkglist (21.08.3mx21) mx; urgency=medium
+
+  * fix playonlinux install routine 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 08 Aug 2021 15:42:58 -0400
+
+mx-packageinstaller-pkglist (21.07.3mx21) mx; urgency=medium
+
+  * fcitx entry changes
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 31 Jul 2021 10:02:18 -0400
+
+mx-packageinstaller-pkglist (21.07.2mx21) mx; urgency=medium
+
+  * update megasync 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 29 Jul 2021 18:33:30 -0400
+
+mx-packageinstaller-pkglist (21.07.1mx21) mx; urgency=medium
+
+  * update simplegames 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 28 Jul 2021 17:30:57 -0400
+
+mx-packageinstaller-pkglist (21.06.2mx21) mx; urgency=medium
+
+  * put discord back 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 27 Jun 2021 20:03:50 -0400
+
+mx-packageinstaller-pkglist (21.06.1mx21) mx; urgency=medium
+
+  * update blender 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 16 Jun 2021 19:47:25 -0400
+
+mx-packageinstaller-pkglist (21.04.4mx21+2) mx; urgency=medium
+
+  * fix Mullvad VPN download url
+
+ -- fehlix <fehlix@mxlinux.org>  Mon, 10 May 2021 18:58:37 -0400
+
+mx-packageinstaller-pkglist (21.04.4mx21+1) mx; urgency=medium
+
+  * fix Mullvad VPN sysvinit
+
+ -- fehlix <fehlix@mxlinux.org>  Sat, 01 May 2021 14:04:16 -0400
+
+mx-packageinstaller-pkglist (21.04.4mx21) mx; urgency=medium
+
+  * fix expressvpn sysvinit
+
+ -- fehlix <fehlix@mxlinux.org>  Tue, 27 Apr 2021 16:42:02 -0400
+
+mx-packageinstaller-pkglist (21.04.3mx21+1) mx; urgency=medium
+
+  * correct 4.9 kernel entries
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 22 Apr 2021 06:38:03 -0400
+
+mx-packageinstaller-pkglist (21.04.3mx21) mx; urgency=medium
+
+  * bullseye updates 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Tue, 20 Apr 2021 23:25:06 -0400
+
+mx-packageinstaller-pkglist (21.04.2) mx; urgency=medium
+
+  * update waterfox 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 14 Apr 2021 20:12:30 -0400
+
+mx-packageinstaller-pkglist (21.04.1) mx; urgency=medium
+
+  * update ahs kernel (5.10.26) 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 07 Apr 2021 19:07:25 -0400
+
+mx-packageinstaller-pkglist (21.03.06) mx; urgency=medium
+
+  * update ahs kernel (5.10.-5mx) 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Tue, 30 Mar 2021 18:16:09 -0400
+
+mx-packageinstaller-pkglist (21.03.05) mx; urgency=medium
+
+  * update ahs kernel (add 5.10)
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 27 Mar 2021 15:50:13 -0400
+
+mx-packageinstaller-pkglist (21.03.04) mx; urgency=medium
+
+  * update antiX 4.9 kernels 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 18 Mar 2021 20:16:06 -0400
+
+mx-packageinstaller-pkglist (21.03.03) mx; urgency=medium
+
+  * remove calibre-lastest
+  * add qmmp-arm 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 10 Mar 2021 18:56:14 -0500
+
+mx-packageinstaller-pkglist (21.03.02) mx; urgency=medium
+
+  * remove libreoffice entries
+  * add gnome-games for armhf entry
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 07 Mar 2021 18:29:31 -0500
+
+mx-packageinstaller-pkglist (21.03.01) mx; urgency=medium
+
+  * revise for armhf support 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 07 Mar 2021 12:54:57 -0500
+
+mx-packageinstaller-pkglist (21.01.02) mx; urgency=medium
+
+  * fix plex uninstall entry 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 28 Jan 2021 23:30:35 -0500
+
+mx-packageinstaller-pkglist (21.01.01) mx; urgency=medium
+
+  * add signal desktop 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Tue, 26 Jan 2021 21:48:24 -0500
+
+mx-packageinstaller-pkglist (20.11.05) mx; urgency=medium
+
+  * update spotify 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 14 Nov 2020 13:26:07 -0500
+
+mx-packageinstaller-pkglist (20.11.04) mx; urgency=medium
+
+  * put missing scripts back 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 12 Nov 2020 07:34:15 -0500
+
+mx-packageinstaller-pkglist (20.11.03) mx; urgency=medium
+
+  * bug fix in debian kernel 64 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Tue, 10 Nov 2020 06:55:43 -0500
+
+mx-packageinstaller-pkglist (20.11.02) mx; urgency=medium
+
+  * revise test in rebuild-dkms script (thanks tony37)
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 09 Nov 2020 18:35:44 -0500
+
+mx-packageinstaller-pkglist (20.11.01) mx; urgency=medium
+
+  * revise rebuild-dkms script
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 08 Nov 2020 15:48:11 -0500
+
+mx-packageinstaller-pkglist (20.10.05) mx; urgency=medium
+
+  * add new 5.8 kernel, remove old 5.6 kernel 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 28 Oct 2020 18:46:33 -0400
+
+mx-packageinstaller-pkglist (20.10.04) mx; urgency=medium
+
+  * update antiX kernels (bluez bug patched) 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 25 Oct 2020 16:47:45 -0400
+
+mx-packageinstaller-pkglist (20.10.03) mx; urgency=medium
+
+  * added lutris
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 17 Oct 2020 20:01:15 -0400
+
+mx-packageinstaller-pkglist (20.10.02) mx; urgency=medium
+
+  * adjust ExpressVPN
+
+ -- fehlix <fehlix@mxlinux.org>  Wed, 14 Oct 2020 15:54:22 -0400
+
+mx-packageinstaller-pkglist (20.10.01) mx; urgency=medium
+
+  [fehlix]
+  * adjust Vivaldi
+  * added OnlyOffice
+  * added Waterfox Classic, Waterfox Current
+  [dolphin]
+  * add 5.8 kernel
+
+ -- dolphinoracle <dolphinoracle@gmail.com>  Sat, 10 Oct 2020 14:21:52 -0400
+
+mx-packageinstaller-pkglist (20.09.04) mx; urgency=medium
+
+  * update antix kernels 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 30 Sep 2020 19:18:37 -0400
+
+mx-packageinstaller-pkglist (20.09.03) mx; urgency=medium
+
+  * add some more file managers
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Tue, 22 Sep 2020 07:03:44 -0400
+
+mx-packageinstaller-pkglist (20.09.02) mx; urgency=medium
+
+  * fix calibre (latest) uninstaller to work with MXPI
+  * make wine-config show up after installing wine
+
+ -- fehlix <fehlix@mxlinux.org>  Sun, 20 Sep 2020 14:07:16 -0400
+
+mx-packageinstaller-pkglist (20.09.01) mx; urgency=medium
+
+  * revise liquorix kernel entries
+  * revise mx-fluxbox entry
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 20 Sep 2020 09:32:19 -0400
+
+mx-packageinstaller-pkglist (20.08.02) mx; urgency=medium
+
+  * fix kernel entry 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 26 Aug 2020 11:17:21 -0400
+
+mx-packageinstaller-pkglist (20.08.01) mx; urgency=medium
+
+  * added krita, kmail 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 13 Aug 2020 20:09:33 -0400
+
+mx-packageinstaller-pkglist (20.07.04) mx; urgency=medium
+
+  * revised KDE installation
+
+ -- Dolphin Oracle <dolphin@littlebyte>  Sun, 02 Aug 2020 14:48:12 -0400
+
+mx-packageinstaller-pkglist (20.07.03) mx; urgency=medium
+
+  * revised 64 bit kernel entries 
+
+ -- Dolphin Oracle <dolphin@littlebyte>  Fri, 24 Jul 2020 22:26:00 -0400
+
+mx-packageinstaller-pkglist (20.07.02) mx; urgency=medium
+
+  * update master-pdf-editor 
+
+ -- Dolphin Oracle <dolphin@littlebyte>  Sun, 19 Jul 2020 10:30:04 -0400
+
+mx-packageinstaller-pkglist (20.07.01) mx; urgency=medium
+
+  * add kdiff3 and kompare
+  * update deadbeef 
+
+ -- Dolphin Oracle <dolphin@littlebyte>  Sat, 04 Jul 2020 11:28:58 -0400
+
+mx-packageinstaller-pkglist (20.05.05) mx; urgency=medium
+
+  * add ahs kernel 
+  * update antiX kernels
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 30 May 2020 14:50:29 -0400
+
+mx-packageinstaller-pkglist (20.05.03) mx; urgency=medium
+
+  * update antix kernel entries 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 09 May 2020 12:04:53 -0400
+
+mx-packageinstaller-pkglist (20.05.02) mx; urgency=medium
+
+  * another lxde change 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 03 May 2020 13:49:40 -0400
+
+mx-packageinstaller-pkglist (20.05.01) mx; urgency=medium
+
+  * update test kernels
+  * update lxde to include lxpolkit 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 03 May 2020 12:27:23 -0400
+
+mx-packageinstaller-pkglist (20.04.04) mx; urgency=medium
+
+  * revise kernels 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 30 Apr 2020 22:34:31 -0400
+
+mx-packageinstaller-pkglist (20.04.03) mx; urgency=medium
+
+  * revise wine packages in playonlinux 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 20 Apr 2020 20:02:41 -0400
+
+mx-packageinstaller-pkglist (20.04.02) mx; urgency=medium
+
+  * remove more wine 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 19 Apr 2020 14:08:29 -0400
+
+mx-packageinstaller-pkglist (20.04.01) mx; urgency=medium
+
+  * ad ms-teams 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 09 Apr 2020 19:57:34 -0400
+
+mx-packageinstaller-pkglist (20.03.08) mx; urgency=medium
+
+  * update control file
+  * update lo-backports (fehlix) 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 30 Mar 2020 22:43:45 -0400
+
+mx-packageinstaller-pkglist (20.03.07) mx; urgency=medium
+
+  * update zoom to remove screenshots 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 29 Mar 2020 11:57:49 -0400
+
+mx-packageinstaller-pkglist (20.03.06) mx; urgency=medium
+
+  * update masted-pdf-editor (fehlix) 
+  * add zoom to messaging
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 28 Mar 2020 21:30:46 -0400
+
+mx-packageinstaller-pkglist (20.03.05) mx; urgency=medium
+
+  * add vscode
+  * update lo-help-indonesia and chinese_fonts 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 21 Mar 2020 11:28:13 -0400
+
+mx-packageinstaller-pkglist (20.03.04) mx; urgency=medium
+
+  * update xmms to pull from antix repo 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 18 Mar 2020 20:03:36 -0400
+
+mx-packageinstaller-pkglist (20.03.03) mx; urgency=medium
+
+  * touchup icewm.pm 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Tue, 10 Mar 2020 16:12:42 -0400
+
+mx-packageinstaller-pkglist (20.03.02) mx; urgency=medium
+
+  * futher correction of japanese-ibus
+  * also chinese-ibus
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 01 Mar 2020 20:55:24 -0500
+
+mx-packageinstaller-pkglist (20.03.01) mx; urgency=medium
+
+  * remove ibus-qt4 from depends on japanese-ibus 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 01 Mar 2020 09:23:24 -0500
+
+mx-packageinstaller-pkglist (20.02.04) mx; urgency=medium
+
+  * new xnview-64
+  * update antiX kernel entries
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 22 Feb 2020 19:30:06 -0500
+
+mx-packageinstaller-pkglist (20.02.03) mx; urgency=medium
+
+  * update libreoffice entires (fehlix) 
+  * update antiX 4.9 kernel entries
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Tue, 11 Feb 2020 18:21:12 -0500
+
+mx-packageinstaller-pkglist (20.02.02) mx; urgency=medium
+
+  * remove 32 bit virtualbox entry
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 10 Feb 2020 18:33:21 -0500
+
+mx-packageinstaller-pkglist (20.02.01) mx; urgency=medium
+
+  * update antiX kernel entries
+  * update antiX 1-to-1 entries 
+  * update ssh-conduit-antix entry
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 05 Feb 2020 18:55:07 -0500
+
+mx-packageinstaller-pkglist (20.01.03) mx; urgency=medium
+
+  * add libreoffice-firefox-compat depend on lo-helper packages 
+  * add mx test kernel entry (currently 5.4.0-3)
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Tue, 28 Jan 2020 17:12:30 -0500
+
+mx-packageinstaller-pkglist (20.01.02) mx; urgency=medium
+
+  * fix virtualbox-test so that test is disabled when done. 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 23 Jan 2020 22:47:06 -0500
+
+mx-packageinstaller-pkglist (20.01.01) mx; urgency=medium
+
+  * add virtualbox-test
+  * add kernel master version to debian kernel entries 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 23 Jan 2020 20:49:55 -0500
+
+mx-packageinstaller-pkglist (19.12.04) mx; urgency=medium
+
+  * add calibre-latest (downloads from cablibre) 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 28 Dec 2019 18:54:34 -0500
+
+mx-packageinstaller-pkglist (19.12.03) mx; urgency=medium
+
+  * update mxfluxbox.pm
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 22 Dec 2019 19:05:29 -0500
+
+mx-packageinstaller-pkglist (19.12.02) mx; urgency=medium
+
+  * add brave 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 19 Dec 2019 18:01:45 -0500
+
+mx-packageinstaller-pkglist (19.12.01) mx; urgency=medium
+
+  * add airvpn, mxfluxbox 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 13 Dec 2019 12:21:31 -0500
+
+mx-packageinstaller-pkglist (19.11.03) mx; urgency=medium
+
+  * update vpn entries
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Tue, 03 Dec 2019 18:04:43 -0500
+
+mx-packageinstaller-pkglist (19.11.02) mx; urgency=medium
+
+  * revised vivaldi.pm (fehlix)
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 24 Nov 2019 20:18:43 -0500
+
+mx-packageinstaller-pkglist (19.11.01) mx; urgency=medium
+
+  * update debian kernel entries 
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 14 Nov 2019 10:07:12 -0500
+
+mx-packageinstaller-pkglist (19.10.05) mx; urgency=medium
+
+  * update waterfox entry to new package names 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 27 Oct 2019 22:40:18 -0400
+
+mx-packageinstaller-pkglist (19.10.04) mx; urgency=medium
+
+  * add additiona language packs for LO (fehlix)
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 19 Oct 2019 18:36:24 -0400
+
+mx-packageinstaller-pkglist (19.10.03) mx; urgency=medium
+
+  * fix screensavers-opengl typo 
+  * add libreoffice backports functionality
+  * update kernel entries
+  * move rebuild_dkms_packages.sh to /usr/bin
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 16 Oct 2019 18:39:49 -0400
+
+mx-packageinstaller-pkglist (19.10.01) mx; urgency=medium
+
+  *  update translations
+  *  update kernel entries
+  *  add apparmor
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 03 Oct 2019 19:51:02 -0400
+
+mx-packageinstaller-pkglist (19.09.03) mx; urgency=medium
+
+  * update localwebserver.pm to php7.3 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 21 Sep 2019 12:48:52 -0400
+
+mx-packageinstaller-pkglist (19.09.02) mx; urgency=medium
+
+  * opera_64 now tries to set up extra codecs (fehlix)
+  * kde-standard now installs recommends 
+  * preschool pm file fixed, removing missing packages (sleepyeyesvince)
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 18 Sep 2019 12:45:34 -0400
+
+mx-packageinstaller-pkglist (19.09.01) mx; urgency=medium
+
+  * fix to dutch language pack
+  * fix spotify
+  * add odrive 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 14 Sep 2019 16:17:53 -0400
+
+mx-packageinstaller-pkglist (19.08.04) mx; urgency=medium
+
+  * added redshift
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 31 Aug 2019 21:31:37 -0400
+
+mx-packageinstaller-pkglist (19.08.03) mx; urgency=medium
+
+  * update freeoffice pm file (fehlix) 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 28 Aug 2019 18:37:51 -0400
+
+mx-packageinstaller-pkglist (19.08.02) mx; urgency=medium
+
+  * update chromium routine 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Tue, 27 Aug 2019 21:10:34 -0400
+
+mx-packageinstaller-pkglist (19.08.01) mx; urgency=medium
+
+  * misc. updates 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 24 Aug 2019 11:52:33 -0400
+
+mx-packageinstaller-pkglist (19.07.09) mx; urgency=medium
+
+  * cleanup screensaver entries 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Tue, 06 Aug 2019 21:59:05 -0400
+
+mx-packageinstaller-pkglist (19.07.08) mx; urgency=medium
+
+  *  updated screensaver entries
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Tue, 30 Jul 2019 18:53:44 -0400
+
+mx-packageinstaller-pkglist (19.07.07) mx; urgency=medium
+
+  * remove compiz and shutter 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 22 Jul 2019 22:14:22 -0400
+
+mx-packageinstaller-pkglist (19.07.06) mx; urgency=medium
+
+  * added hearts 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 21 Jul 2019 21:20:34 -0400
+
+mx-packageinstaller-pkglist (19.07.05) mx; urgency=medium
+
+  * add firefox-esr 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 17 Jul 2019 23:10:54 -0400
+
+mx-packageinstaller-pkglist (19.07.04) mx; urgency=medium
+
+  * updae anydesk, teamviewer, add freeoffice
+  * fix plex 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Tue, 16 Jul 2019 21:40:47 -0400
+
+mx-packageinstaller-pkglist (19.07.03) mx; urgency=medium
+
+  * update piavpn (fehlix)
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 10 Jul 2019 21:53:04 -0400
+
+mx-packageinstaller-pkglist (19.07.02) mx; urgency=medium
+
+  * modified plex install routine (using plex-sysvinit-compat)
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 06 Jul 2019 16:55:04 -0400
+
+mx-packageinstaller-pkglist (19.07.01) mx; urgency=medium
+
+  * update language entries
+  * adjust secondary and primary entries
+  * misc. other adjustments for buster 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 05 Jul 2019 00:07:13 -0400
+
+mx-packageinstaller-pkglist (19.07) mx; urgency=medium
+
+  * updated google entries 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Tue, 02 Jul 2019 21:35:50 -0400
+
+mx-packageinstaller-pkglist (19.05.04) mx; urgency=medium
+
+  * added mullvadvpn scripts 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 25 May 2019 19:02:10 -0400
+
+mx-packageinstaller-pkglist (19.05.03) mx; urgency=medium
+
+  * modified handbrake.pm 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Tue, 21 May 2019 19:41:43 -0400
+
+mx-packageinstaller-pkglist (19.05.02) mx; urgency=medium
+
+  * updated antiX and MX kernel entries 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 19 May 2019 17:05:23 -0400
+
+mx-packageinstaller-pkglist (19.05.01) mx; urgency=medium
+
+  * revised antiX kernel and piavpn entries
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 09 May 2019 21:09:44 -0400
+
+mx-packageinstaller-pkglist (19.04.06) mx; urgency=medium
+
+  * removed icetea plugin from java.pm 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 27 Apr 2019 13:20:38 -0400
+
+mx-packageinstaller-pkglist (19.04.05) mx; urgency=medium
+
+  * add pia and nordvpn installers 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 26 Apr 2019 19:44:25 -0400
+
+mx-packageinstaller-pkglist (19.04.04) mx; urgency=medium
+
+  * add anydesk (fehlix) and font-manager (stevo) 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 22 Apr 2019 20:59:45 -0400
+
+mx-packageinstaller-pkglist (19.04.03) mx; urgency=medium
+
+  * added syncthing.net  
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 14 Apr 2019 14:23:16 -0400
+
+mx-packageinstaller-pkglist (19.04.01) mx; urgency=medium
+
+  * translation update
+  * add master-pdf-4 (fehlix) 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 05 Apr 2019 18:34:45 -0400
+
+mx-packageinstaller-pkglist (19.03.01) mx; urgency=medium
+
+  * update antiX kernels
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Tue, 05 Mar 2019 18:34:27 -0500
+
+mx-packageinstaller-pkglist (19.01.03) mx; urgency=medium
+
+  * update antiX kernels 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 02 Feb 2019 10:04:21 -0500
+
+mx-packageinstaller-pkglist (19.01.02) mx; urgency=medium
+
+  * refresh translations 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 31 Jan 2019 19:47:37 -0500
+
+mx-packageinstaller-pkglist (19.01.01) mx; urgency=medium
+
+  * new icon themes
+  * update antiX 4.19 kernel entries
+  * updated waterfox
+  * added atom
+  * added XnViewMP
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 12 Jan 2019 18:50:20 -0500
+
+mx-packageinstaller-pkglist (18.12.06) mx; urgency=medium
+
+  * updated antix kernels 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 19 Dec 2018 06:51:51 -0500
+
+mx-packageinstaller-pkglist (18.12.05) mx; urgency=medium
+
+  * updated debian kernel 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 17 Dec 2018 20:37:14 -0500
+
+mx-packageinstaller-pkglist (18.12.04) mx; urgency=medium
+
+  * corrected spelling on xscreesaver extra packages 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 14 Dec 2018 14:28:05 -0500
+
+mx-packageinstaller-pkglist (18.12.03) mx; urgency=medium
+
+  * updated antiX kernel entries
+  * added mx18-artwork 
+  * added lo-pt to languages
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 08 Dec 2018 11:08:06 -0500
+
+mx-packageinstaller-pkglist (18.12.02) mx; urgency=medium
+
+  * added grub-customizer
+  * added xscreensavers 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 07 Dec 2018 21:11:19 -0500
+
+mx-packageinstaller-pkglist (18.12.01) mx; urgency=medium
+
+  * added mx17-artwork
+  * removed nomachine
+  * added 4.19 kernel entries from antiX and mx
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 05 Dec 2018 17:34:00 -0500
+
+mx-packageinstaller-pkglist (18.11.03) mx; urgency=medium
+
+  * updated translations
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 01 Dec 2018 14:33:07 -0500
+
+mx-packageinstaller-pkglist (18.11.02) mx; urgency=medium
+
+  * updated spotify repo keys 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 29 Nov 2018 06:47:08 -0500
+
+mx-packageinstaller-pkglist (18.11.01) mx; urgency=medium
+
+  * added clonezilla and ssh-conduit-antix 
+
+ -- dolphin <dolphin@littlebyte>  Sun, 18 Nov 2018 21:12:31 -0500
+
+mx-packageinstaller-pkglist (18.10.4) mx; urgency=medium
+
+  * use logname instead of ps command for run_wincfg.sh
+
+ -- dolphin <dolphinoracle@gmail.com>  Sun, 21 Oct 2018 19:51:39 -0400
+
+mx-packageinstaller-pkglist (18.10.2) mx; urgency=medium
+
+  * updated translations 
+
+ -- dolphin <dolphin@littlebyte>  Mon, 15 Oct 2018 22:32:29 -0400
+
+mx-packageinstaller-pkglist (18.10.1) mx; urgency=medium
+
+  * updated antiX kernel packages 
+
+ -- dolphin <dolphinoracle@gmail.com>  Thu, 04 Oct 2018 20:05:49 -0400
+
+mx-packageinstaller-pkglist (18.09.01) mx; urgency=medium
+
+  * added discord
+  * replaced 64 bit google-earth with google-earth-pro 
+
+ -- dolphin <dolphinoracle@gmail.com>  Tue, 25 Sep 2018 20:46:13 -0400
+
+mx-packageinstaller-pkglist (18.07.03) mx; urgency=medium
+
+  *  revised kernel entries to force dkms rebuilds
+
+ -- dolphin <dolphinoracle@gmail.com>  Tue, 17 Jul 2018 20:55:40 -0400
+
+mx-packageinstaller-pkglist (18.07.02) mx; urgency=medium
+
+  * fix missing escape char 
+
+ -- Adrian <adrian@mxlinux.org>  Tue, 17 Jul 2018 17:16:06 -0400
+
+mx-packageinstaller-pkglist (18.07.01) mx; urgency=medium
+
+  * revised debian kernels 
+
+ -- dolphin <dolphinoracle@gmail.com>  Mon, 16 Jul 2018 19:34:35 -0400
+
+mx-packageinstaller-pkglist (18.07) mx; urgency=medium
+
+  * added translations
+
+ -- Adrian <adrian@mxlinux.org>  Sun, 15 Jul 2018 21:27:46 -0400
+
+mx-packageinstaller-pkglist (18.06.04) mx; urgency=medium
+
+  * added waterfox 
+
+ -- dolphinoracle <dolphinoracle@gmail.com>  Thu, 14 Jun 2018 17:07:52 -0400
+
+mx-packageinstaller-pkglist (18.06.03) mx; urgency=medium
+
+  *  update to mx-icons-start package
+
+ -- dolphinoracle <dolphin@mx>  Wed, 13 Jun 2018 19:01:56 -0400
+
+mx-packageinstaller-pkglist (18.06.02) mx; urgency=medium
+
+  * update thunderbird language packs 
+
+ -- dolphinoracle <dolphin@mx>  Tue, 05 Jun 2018 19:45:51 -0400
+
+mx-packageinstaller-pkglist (18.06.01) mx; urgency=medium
+
+  * added vivaldi 
+
+ -- dolphinoracle <dolphin@mx>  Sat, 02 Jun 2018 09:22:44 -0400
+
+mx-packageinstaller-pkglist (18.05.02) mx; urgency=medium
+
+  * added artwork packages, revised window managers
+  * fixed key info in megasync.pm
+
+ -- dolphinoracle <dolphin@mx>  Sun, 27 May 2018 22:25:27 -0400
+
+mx-packageinstaller-pkglist (18.05.01) mx; urgency=medium
+
+  * added master-pdf-editor, nomachine remote access and megasync client 
+
+ -- dolphinoracle <dolphin@mx>  Sat, 05 May 2018 20:28:42 -0400
+
+mx-packageinstaller-pkglist (18.03.07) mx; urgency=medium
+
+  * update for antiX 4.9.91 and 4.15.14 kernels 
+
+ -- dolphinoracle <dolphinoracle@gmail.com>  Wed, 25 Apr 2018 21:20:33 -0400
+
+mx-packageinstaller-pkglist (18.03.06) mx; urgency=medium
+
+  * update kernel entries, add googlemusicmanager (paul) 
+
+ -- dolphinoracle <dolphin@mx>  Tue, 20 Mar 2018 20:51:14 -0400
+
+mx-packageinstaller-pkglist (18.03.05) mx; urgency=medium
+
+  * revised plex init script 
+
+ -- dolphinoracle <dolphin@littlebyte>  Sat, 10 Mar 2018 20:42:14 -0500
+
+mx-packageinstaller-pkglist (18.03.04) mx; urgency=medium
+
+  * plex modifications 
+
+ -- dolphinoracle <dolphin@littlebyte>  Sun, 04 Mar 2018 23:24:05 -0500
+
+mx-packageinstaller-pkglist (18.03.03) mx; urgency=medium
+
+  * kernel changes 
+
+ -- dolphinoracle <dolphin@littlebyte>  Sun, 04 Mar 2018 20:50:26 -0500
+
+mx-packageinstaller-pkglist (18.03.02) mx; urgency=medium
+
+  * virtualbox changes
+
+ -- dolphinoracle <dolphin@littlebyte>  Fri, 02 Mar 2018 18:07:17 -0500
+
+mx-packageinstaller-pkglist (18.03.01) mx; urgency=medium
+
+  * update for mxpi temp repo removal schema 
+
+ -- dolphinoracle <dolphin@littlebyte>  Thu, 01 Mar 2018 17:35:32 -0500
+
+mx-packageinstaller-pkglist (18.02.05) mx; urgency=medium
+
+  * updated kernel entries (paul) 
+
+ -- dolphinoracle <dolphinoracle@gmail.com>  Tue, 20 Feb 2018 21:43:22 -0500
+
+mx-packageinstaller-pkglist (18.02.04) mx; urgency=medium
+
+  * modifications for new mxpi
+
+ -- dolphinoracle <dolphin@littlebyte>  Fri, 16 Feb 2018 22:12:37 -0500
+
+mx-packageinstaller-pkglist (18.02.03) mx; urgency=medium
+
+  * new antiX kernel option 
+
+ -- dolphinoracle <dolphinoracle@gmail.com>  Tue, 13 Feb 2018 19:37:43 -0500
+
+mx-packageinstaller-pkglist (18.02.02) mx; urgency=medium
+
+  * added thunar-dropbox-plugin
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 12 Feb 2018 11:50:23 -0500
+ 
+mx-packageinstaller-pkglist (18.02.01) mx; urgency=medium
+
+  * revised kernel options , wine
+
+ -- dolphin_oracle <dolphin@littlebyte>  Sun, 04 Feb 2018 20:58:20 -0500
+
+mx-packageinstaller-pkglist (18.01.10) mx; urgency=medium
+
+  * fix to hp printing
+
+ -- dolphin_oracle <dolphin@littlebyte>  Sat, 27 Jan 2018 18:15:12 -0500
+ 
+mx-packageinstaller-pkglist (18.01.09) mx; urgency=medium
+
+  * adjusted debian kernel versions (paul) to current debian KTPI patched kernels
+
+ -- dolphin_oracle <dolphin@littlebyte>  Sat, 13 Jan 2018 13:25:33 -0500
+
+mx-packageinstaller-pkglist (18.01.07) mx; urgency=medium
+
+  * added mx 4.14 kernel options 
+
+ -- dolphin_oracle <dolphin@littlebyte>  Mon, 08 Jan 2018 21:02:43 -0500
+
+mx-packageinstaller-pkglist (18.01.06) mx; urgency=medium
+
+  * debian backports kernel options
+
+ -- dolphin_oracle <dolphinoracle@gmail.com>  Sun, 07 Jan 2018 15:07:54 -0500
+ 
+mx-packageinstaller-pkglist (18.01.05) mx; urgency=medium
+
+  * plex changes
+
+ -- dolphin_oracle <dolphin@littlebyte>  Fri, 05 Jan 2018 20:35:08 -0500
+
+mx-packageinstaller-pkglist (18.01.04) mx; urgency=medium
+
+  * changes to hp printing, added plex 
+
+ -- dolphin_oracle <dolphinoracle@gmail.com>  Fri, 05 Jan 2018 19:09:14 -0500
+
+mx-packageinstaller-pkglist (17.12.05) mx; urgency=medium
+
+  *  moka/faba icons 
+
+ -- dolphin_oracle <dolphinoracle@gmail.com>  Tue, 19 Dec 2017 20:23:02 -0500
+
+mx-packageinstaller-pkglist (17.12.04) mx; urgency=medium
+
+  * kde modified, more icon themes added (paul) 
+
+ -- dolphin_oracle <dolphin@littlebyte>  Wed, 13 Dec 2017 18:10:41 -0500
+
+mx-packageinstaller-pkglist (17.12.03) mx; urgency=medium
+
+  * more themes added (paul)
+  * budgie desktop option added (paul)
+
+ -- dolphin_oracle <dolphin@littlebyte>  Sun, 10 Dec 2017 21:17:41 -0500
+
+mx-packageinstaller-pkglist (17.12.02) mx; urgency=medium
+
+  * new themes added (paul)
+
+ -- dolphin_oracle <dolphinoracle@gmail.com>  Sat, 09 Dec 2017 18:14:05 -0500
+
+mx-packageinstaller-pkglist (17.12.01) mx; urgency=medium
+
+  * added okular and evince (paul) 
+
+ -- dolphin_oracle <dolphinoracle@gmail.com>  Tue, 05 Dec 2017 18:45:32 -0500
+
+mx-packageinstaller-pkglist (17.12) mx; urgency=medium
+
+  * added skype, removed arista (paul) 
+
+ -- dolphin_oracle <dolphin@littlebyte>  Sun, 03 Dec 2017 22:13:16 -0500
+
+mx-packageinstaller-pkglist (17.11.04) mx; urgency=medium
+
+  * added gthumb 
+
+ -- dolphin_oracle <dolphin@littlebyte>  Thu, 30 Nov 2017 21:18:49 -0500
+
+mx-packageinstaller-pkglist (17.11.03) mx; urgency=medium
+
+  * virtualbox-5.2
+  
+ -- dolphin_oracle <dolphinoracle@gmail.com>  Fri, 17 Nov 2017 21:28:17 -0400
+
+mx-packageinstaller-pkglist (17.11.02) mx; urgency=medium
+
+  * local server updates
+  
+ -- dolphin_oracle <dolphinoracle@gmail.com>  Fri, 10 Nov 2017 22:04:43 -0400
+
+mx-packageinstaller-pkglist (17.11.01) mx; urgency=medium
+
+  * misc. updates to kernel and languages
+  
+ -- dolphin_oracle <dolphinoracle@gmail.com>  Thu, 09 Nov 2017 19:54:12 -0400
+ 
+mx-packageinstaller-pkglist (17.11) mx; urgency=medium
+
+  * modified libreoffice language options
+  
+ -- dolphin_oracle <dolphinoracle@gmail.com>  Tue, 07 Nov 2017 20:55:23 -0400
+ 
+mx-packageinstaller-pkglist (17.10.04) mx; urgency=medium
+
+  * added geany & mirage, removed pinta
+  
+ -- dolphin_oracle <dolphinoracle@gmail.com>  Sun, 29 Oct 2017 16:54:14 -0400
+
+mx-packageinstaller-pkglist (17.10.03) mx; urgency=medium
+
+  * fix to gnome
+  
+ -- dolphin_oracle <dolphinoracle@gmail.com>  Sun, 22 Oct 2017 13:38:01 -0400
+ 
+mx-packageinstaller-pkglist (17.10.02) mx; urgency=medium
+
+  * new entries
+
+ -- dolphin_oracle <dolphinoracle@gmail.com>  Sat, 14 Oct 2017 21:30:01 -0400
+
+mx-packageinstaller-pkglist (17.10.01) mx; urgency=medium
+
+  * mx17 bug fixes
+
+ -- dolphin_oracle <dolphinoracle@gmail.com>  Fri, 13 Oct 2017 20:50:01 -0400
+
+mx-packageinstaller-pkglist (17.9.01) mx; urgency=medium
+
+  * added compiz
+
+ -- dolphin_oracle <dolphinoracle@gmail.com>  Wed, 27 Sep 2017 21:00:01 -0400
+
+mx-packageinstaller-pkglist (17.7.01) mx; urgency=medium
+
+  * updated virtualbox, dropbox, removed remmina and plex
+
+ -- dolphin_oracle <dolphinoracle@gmail.com>  Thu, 08 Sep 2017 18:50:01 -0400
+
+mx-packageinstaller-pkglist (17.7mx16) mx; urgency=medium
+
+  * removed skype
+
+ -- dolphin_oracle <dolphinoracle@gmail.com>  Sun, 02 Jul 2017 21:01:01 -0400
+
+mx-packageinstaller-pkglist (17.6.01mx16) mx; urgency=medium
+
+  * modify install script for virtualbox to fix type when adding to vboxusers group
+
+ -- dolphin_oracle <dolphinoracle@gmail.com>  Tue, 13 Jun 2017 19:42:01 -0400
+
+mx-packageinstaller-pkglist (17.6mx16) mx; urgency=medium
+
+  * modify liquorix kernel installers to git rid of a post-process bug 
+
+ -- dolphin_oracle <dolphinoracle@gmail.com>  Sun, 11 Jun 2017 13:23:26 -0400
+
+mx-packageinstaller-pkglist (17.5.02mx16) mx; urgency=medium
+
+  * added flash
+
+ -- dolphin_oracle <dolphinoracle@gmail.com>  Tue, 30 May 2017 21:39:09 -0400
+
+mx-packageinstaller-pkglist (17.5.01mx16) mx; urgency=medium
+
+  * added qt5-docs, keepassx, kernel options
+
+ -- dolphin_oracle <dolphinoracle@gmail.com>  Sat, 13 May 2017 20:05:30 -0400
+
+mx-packageinstaller-pkglist (17.5mx16) mx; urgency=medium
+
+  * modified virtual box setup
+
+ -- dolphin_oracle <dolphinoracle@gmail.com>  Tue, 09 May 2017 22:05:30 -0400
+
+mx-packageinstaller-pkglist (17.4mx16) mx; urgency=medium
+
+  * New package with .pm files for the new verions of mx-packageinstaller
+
+ -- Adrian <adrian@mxlinux.org>  Sat, 22 Apr 2017 21:09:30 -0400
+
+mx-packageinstaller-pkglist (16.12.03mx16) mx; urgency=medium
+
+  * modified wine to run winecfg as regular user
+
+ -- dolphin_oracle <dolphinoracle@gmail.com>  Sun, 11 Dec 2016 06:05:15 -0400
+
+mx-packageinstaller-pkglist (16.12.02mx16) mx; urgency=medium
+
+  * modified wine to run winecfg as regular user
+
+ -- dolphin_oracle <dolphinoracle@gmail.com>  Tue, 06 Dec 2016 19:05:15 -0400
+
+mx-packageinstaller-pkglist (16.12.01mx16) mx; urgency=medium
+
+  * mx16-fixing skype entry
+
+ -- dolphin_oracle <dolphinoracle@gmail.com>  Tue, 06 Dec 2016 19:05:15 -0400
+
+mx-packageinstaller-pkglist (16.12mx16) mx; urgency=medium
+
+  * mx16-fixed kernel and pulseaudio entries
+
+ -- dolphin_oracle <dolphinoracle@gmail.com>  Sun, 04 Dec 2016 19:13:15 -0400
+
+mx-packageinstaller-pkglist (16.11mx16) mx; urgency=medium
+
+  * mx16
+
+ -- dolphin_oracle <dolphinoracle@gmail.com>  Thu, 10 Nov 2016 12:20:15 -0400
+
+mx-packageinstaller-pkglist (16.10mx16+4) mx; urgency=medium
+
+  * migration
+
+ -- dolphin_oracle <dolphinoracle@gmail.com>  Thu, 10 Nov 2016 12:15:15 -0400
+
+mx-packageinstaller-pkglist (16.10mx16+3) mx; urgency=medium
+
+  * fixed plex, java 8 entries, primary
+
+ -- dolphin_oracle <dolphinoracle@gmail.com>  Sun, 30 Oct 2016 08:55:15 -0400
+
+mx-packageinstaller-pkglist (16.10mx16+2) mx; urgency=medium
+
+  * removed libreoffice 5, utilities entries that are now included
+  * by default in mx16
+
+ -- dolphin_oracle <dolphinoracle@gmail.com>  Sat, 29 Oct 2016 17:23:15 -0400
+
+mx-packageinstaller-pkglist (16.10mx16+1) mx; urgency=medium
+
+  * revised kernel entries
+
+ -- dolphin_oracle <dolphinoracle@gmail.com>  Fri, 28 Oct 2016 21:03:15 -0400
+
+mx-packageinstaller-pkglist (16.10mx16) mx; urgency=medium
+
+  * removed entries for major bugged alternate kernel
+
+ -- dolphin_oracle <dolphinoracle@gmail.com>  Sat, 22 Oct 2016 12:32:15 -0400
+
+mx-packageinstaller-pkglist (16.8mx15) mx; urgency=medium
+
+  * added obs-studio
+
+ -- dolphin_oracle <dolphinoracle@gmail.com>  Mon, 22 Aug 2016 22:05:15 -0400
+
+mx-packageinstaller-pkglist (16.5.1mx15) mx; urgency=medium
+
+  * added utility category
+  * added Pinta to Graphics
+
+ -- dolphin_oracle <dolphinoracle@gmail.com>  Mon, 16 May 2016 21:40:15 -0400
+
+mx-packageinstaller-pkglist (16.4.1mx15) mx; urgency=low
+
+  * added slimjet browser
+
+ -- dolphin_oracle <dolphinoracle@gmail.com>  Mon, 04 Apr 2016 18:50:21 -0400
+
+mx-packageinstaller-pkglist (16.3.2mx15) UNRELEASED; urgency=medium
+
+  * changed iceweasel to iceweasel-esr, removed mozilla-backports
+  * modified firefox description to simply "latest"
+
+ -- dolphin_oracle <dolphin@mx1>  Sun, 12 Mar 2016 21:01:37 -0500
+
+mx-packageinstaller-pkglist (16.3.1mx15) UNRELEASED; urgency=medium
+
+  * changed google-chrome browser to 64 bit only
+
+ -- dolphin_oracle <dolphin@mx1>  Thu, 03 Mar 2016 18:17:37 -0500
+
+mx-packageinstaller-pkglist (16.2.1mx15) mx; urgency=medium
+
+  * fixes to bm files that use mxtest or deb-multimedia
+  * fixes to bm files to correct hack made to make apps shown as installed
+  * simplify googleearth 64 bit bm file
+  * added mediacenter with plex and kodi
+
+ -- dolphin_oracle <dolphin@mx1>  Mon, 1 Feb 2016 19:22:24 -0500
+
+mx-packageinstaller-pkglist (16.1.1mx15) mx; urgency=medium
+
+  * added RemoteAccess area.
+
+ -- dolphin_oracle <dolphin@mx1>  Mon, 18 Jan 2016 20:12:46 -0500
+
+mx-packageinstaller-pkglist (15.12.4mx15) mx; urgency=medium
+
+  * updated libreoffice-5 bm file to bring in help documents
+  * updated virtual box to add all users in "users" group to "vboxusers" 
+
+ -- dolphin_oracle <dolphin@mx1>  Fri, 01 Jan 2016 21:21:48 -0500
+
+mx-packageinstaller-pkglist (15.12.3mx15) mx; urgency=medium
+
+  * revised opera bm file to reflect different 32 and 64 bit options
+  * fixed minor bug in steam bm file
+  * added phonon4qt5 to kde bm files
+
+ -- dolphin_oracle <dolphin@mx1>  Mon, 28 Dec 2015 22:38:53 -0500
+
+mx-packageinstaller-pkglist (15.12.2mx15) mx; urgency=medium
+
+  * modified libreoffice bm to eliminate warning messages
+  * modified gnome-min bm to eliminate warning messages
+  * modified steam to eliminate warning messages
+
+ -- dolphin_oracle <dolphin@mx1>  Tues, 22 Dec 2015 15:17:58 -0500
+
+mx-packageinstaller-pkglist (15.12.1mx15) mx; urgency=medium
+
+  * 
+  * changed 64bit google earth file.
+  * modified libreoffice bm
+
+ -- dolphin_oracle <dolphin@mx1>  Sun, 20 Dec 2015 20:22:58 -0500
+
+mx-packageinstaller-pkglist (15.11.13mx15) mx; urgency=medium
+
+  * 
+  * mixed missing libreoffice bm file
+  * 
+
+ -- dolphin_oracle <dolphin@mx1>  Wed, 17 Dec 2015 10:39:58 -0500
+
+mx-packageinstaller-pkglist (15.11.12mx15) mx; urgency=medium
+
+  * changed default kernel bm to match new default
+  * added libreoffice_5
+  * updated Browser-operat
+
+ -- dolphin_oracle <dolphin@mx1>  Wed, 17 Dec 2015 10:39:58 -0500
+
+mx-packageinstaller-pkglist (15.11.11mx15) mx; urgency=medium
+
+  * added browser-palemoon
+  * modifed misc-virtualbox to enable automatic extenstions install
+  * added MediaConverter category, with arista, winff, and handbrake
+
+ -- dolphin_oracle <dolphin@mx1>  Wed, 09 Dec 2015 14:02:58 -0500
+
+mx-packageinstaller-pkglist (15.11.10mx15) mx; urgency=medium
+
+  * updated spotify bms to install 32bit testing and 64 bit stable
+  * fixed a minor bug in skype bm
+  * updated misc-wine and playonlinux bms to use wine-staging-compat
+
+ -- dolphin_oracle <dolphin@mx1>  Wed, 04 Dec 2015 20:21:49 -0500
+
+mx-packageinstaller-pkglist (15.11.9mx15) mx; urgency=medium
+
+  * modified adobe reader bm file to allow plugin installation
+  * added ftp and docks sections
+  * added tor-browser to browser section
+
+ -- dolphin_oracle <dolphin@mx1>  Sun, 29 Nov 2015 14:25:54 -0500
+
+mx-packageinstaller-pkglist (15.11.8mx15) mx; urgency=medium
+
+  * removed broken bm files (portugese(br)
+  * fixed gnome_ultra bm to gnome_min bm
+  * corrected some language packs so because they did not install due to errors
+  * updated skype, steam, supertuxkart, and google-earth bm's so they would show as installed after installation
+  * fixed build dependencies in debian control
+  * hacked audio-pulseaudio, children-primary, graphics-inkscape and graphics-blender so they show installed (this does not fix basic problem)
+
+ -- dolphin_oracle <dolphin@mx1>  Wed, 28 Nov 2015 18:11:57 -0500
+
+mx-packageinstaller-pkglist (15.11.7mx16) mx; urgency=medium
+
+  * revised meld bm file
+
+ -- dolphin_oracle <dolphin@littlebyte>  Sun, 22 Nov 2015 14:11:30 -0500
+
+mx-packageinstaller-pkglist (15.11.6mx15) mx; urgency=medium
+
+  *  add development category
+
+ -- dolphin_oracle <dolphin@littlebyte>  Sun, 22 Nov 2015 13:26:29 -0500
+
+mx-packageinstaller-pkglist (15.11.5mx15) mx; urgency=medium
+ 
+  * added google-earth
+
+ -- dolphin_oracle <dolphinoracle@gmail.com> Fri, 20 Nov 2015 14:35:32 -0500
+
+mx-packageinstaller-pkglist (15.11.4mx15) mx; urgency=medium
+
+  * fixed steam bm so user can accept EULA.
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 16 Nov 2015 15:34:32 -0500
+
+mx-packageinstaller-pkglist (15.11.3mx15) mx; urgency=medium
+
+  * vbox change
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 11 Nov 2015 09:06:50 -0500
+
+mx-packageinstaller-pkglist (15.11.2mx15) mx; urgency=medium
+
+  * new and updated files for spotify, playonlinux, steam, virtualbox,
+    mplayer, and kernels
+
+ -- Adrian <adrian@mxlinux.org>  Tue, 10 Nov 2015 17:49:32 -0500
+
+mx-packageinstaller-pkglist (15.11.1mx15) mx; urgency=medium
+
+  * update Inkspace with recommends
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 06 Nov 2015 19:23:38 -0500
+
+mx-packageinstaller-pkglist (15.11mx15) mx; urgency=medium
+
+  * kernel package changes
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 06 Nov 2015 18:02:24 -0500
+
+mx-packageinstaller-pkglist (15.10mx15) mx; urgency=medium
+
+  * Initial package
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 29 Oct 2015 10:16:15 -0400

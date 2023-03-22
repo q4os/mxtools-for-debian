@@ -1,0 +1,138 @@
+#-------------------------------------------------------------------------------
+# Email
+#-------------------------------------------------------------------------------
+alpine            *** Text-based email client, friendly for novices but powerful
+mutt             **** text-based mailreader supporting MIME, GPG, PGP and threading
+
+#-------------------------------------------------------------------------------
+# Graphics and Video
+#-------------------------------------------------------------------------------
+fbcat            **** framebuffer grabber
+fbi              **** Linux frame buffer image viewer
+fbless            *** terminal fiction book reader
+fbtv                  television viewer - Linux framebuffer application
+mps-youtube     ***** Terminal based YouTube jukebox with playlist management
+mpv              **** video player based on MPlayer/mplayer2
+ttv                   television viewer - console application
+
+#-------------------------------------------------------------------------------
+# Toys and Games
+#-------------------------------------------------------------------------------
+bsdgames              collection of classic textual unix games
+cavezofphear          ASCII Boulder Dash clone
+cmatrix          **** simulates the display from "The Matrix"
+ninvaders        **** A space invaders-like game using ncurses
+nsnake                classic snake game on the terminal
+sudoku                console based sudoku
+
+#-------------------------------------------------------------------------------
+# Browser
+#-------------------------------------------------------------------------------
+elinks           **** advanced text-mode WWW browser
+links2           **** Web browser running in both graphics and text mode
+w3m               *** Pager/text-based web browser. It has vim-like keybindings, and is able to display images	
+
+#-------------------------------------------------------------------------------
+# Audio
+#-------------------------------------------------------------------------------
+adplay                console-based OPL2 audio player
+cdcd                  command line or console based CD player
+cdtool                text-based audio CD player and CD-ROM control commands
+cmus                  feature-rich ncurses-based music player
+cplay                 Curses front-end for various audio players (ogg123, mpg123, mpg321, splay, madplay, and mikmod, xmp, and sox)
+moc             ***** ncurses based console audio player
+mp3blaster            Full-screen console mp3 and Ogg Vorbis player
+mpd                   Lightweight and scalable choice for music management.
+pianobar              console based player for Pandora radio
+zomg                  console-based libre.fm submission and radio client
+
+#-------------------------------------------------------------------------------
+# File Managers and Window Managers
+#-------------------------------------------------------------------------------
+apparix               console-based bookmark tool for fast file system navigation
+fdclone               console-base lightweight file manager
+lfm               *** simple but powerful file manager for the UNIX console
+mc              ***** Midnight Commander - a powerful file manager
+dvtm                  Tiling window management for the console
+ranger                Console-based file manager with vi bindings, customizability, and lots of features
+vifm                  Ncurses-based two-panel file manager with vi-like keybindings
+
+#-------------------------------------------------------------------------------
+# Network Monitors
+#-------------------------------------------------------------------------------
+bwm-ng                small and simple console-based bandwidth monitor
+dnstop                console tool to analyze DNS traffic
+ethstatus             console-based ethernet statistics monitor
+nload                 realtime console network usage monitor
+tshark                network traffic analyzer - console version
+vnstat                console-based network traffic monitor
+
+#-------------------------------------------------------------------------------
+# System Tools
+#-------------------------------------------------------------------------------
+backupninja           lightweight, extensible meta-backup system
+dar              **** Disk ARchive: extremely powerful backup/recovery tool
+git              **** fast, scalable, distributed revision control system
+hexcompare            utility to compare and identify binary files
+
+#-------------------------------------------------------------------------------
+# System monitors
+#-------------------------------------------------------------------------------
+htop            ***** interactive processes viewer
+multitail             view multiple logfiles windowed on console
+sysinfo               display computer and system information
+ttyload               console based color-coded graphs of CPU load average
+
+#-------------------------------------------------------------------------------
+# Office
+#-------------------------------------------------------------------------------
+calcurse              text-based calendar and todo manager
+concalc               console calculator
+dict                  dictionary client
+khard                 address book for the Linux console
+nodau                 simple console based note taking program
+presentty             Console-based presentation software
+task                  feature-rich console based todo list manager - transitional package
+taskwarrior           feature-rich console based todo list manager
+tpp                   text presentation program
+
+#-------------------------------------------------------------------------------
+# Utilities
+#-------------------------------------------------------------------------------
+binclock              binary clock for console with color support
+conspy                Remote control of Linux virtual consoles
+physlock              lightweight Linux console locking tool
+pinfo                 An alternative info-file viewer
+pwman3                console password management application
+tty-clock             simple terminal clock
+tzwatch           *** Displays time and date in specified time zones on console
+vlock                 Virtual Console locking program
+
+#-------------------------------------------------------------------------------
+# Chatting and Bittorrent
+#-------------------------------------------------------------------------------
+bitchx                console-based IRC client developed from the popular ircII
+bittornado            bittorrent client (and tracker) with console and curses interfaces
+deluge-console        bittorrent client written in Python/PyGTK (console ui)
+irssi           ***** terminal based IRC client
+mcabber               small Jabber (XMPP) console client
+ttytter               console Twitter client
+weechat-curses        Fast, light and extensible chat client - console client
+
+#-------------------------------------------------------------------------------
+# News, RSS, and blogs
+#-------------------------------------------------------------------------------
+canto 		Ncurses RSS aggregator.
+newsboat            Ncurses RSS aggregator with layout and keybinding similar to the Mutt email client.
+
+#-------------------------------------------------------------------------------
+# Other
+#-------------------------------------------------------------------------------
+dvorak7min            typing tutor for Dvorak keyboards
+etktab                ASCII guitar tab editor
+fbset                 framebuffer device maintenance program
+fbterm                fast framebuffer based terminal emulator for Linux
+vim             ***** extremely full featured text editor born from vi
+vim-scripts           plugins for vim, adding bells and whistles
+zhcon                 Fast console CJK system using FrameBuffer
+zsh              **** shell with lots of features

@@ -1,0 +1,23 @@
+#!/usr/bin/make -f
+
+%:
+	dh $@ 
+
+override_dh_auto_clean:
+	$(MAKE) -C icons clean
+	$(MAKE) -C translations clean
+	dh_auto_clean
+
+override_dh_auto_build:
+	bash scripts/build_version
+	$(MAKE) -C icons
+	$(MAKE) -C translations
+	dh_auto_build
+
+override_dh_auto_install:
+	dh_auto_install
+
+override_dh_usrlocal:
+
+override_dh_builddeb:
+	dh_builddeb -- -Z xz

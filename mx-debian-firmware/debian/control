@@ -1,0 +1,32 @@
+Source: mx-debian-firmware
+Section: contrib/misc
+Priority: optional
+Maintainer: Steven Pusser <stevep@mxlinux.org>
+Build-Depends: debhelper (>= 10)
+Standards-Version: 4.5.0
+
+Package: mx-debian-firmware
+Architecture: all
+Depends: atmel-firmware,
+         firmware-atheros,
+         firmware-b43-installer,
+         firmware-b43legacy-installer,
+         firmware-bnx2,
+         firmware-bnx2x,
+         firmware-brcm80211,
+         firmware-intel-sound,
+         firmware-intelwimax,
+         firmware-ipw2x00,
+         firmware-iwlwifi,
+         firmware-libertas,
+         firmware-linux,
+         firmware-myricom,
+         firmware-netxen,
+         firmware-qlogic,
+         firmware-ralink,
+         firmware-realtek,
+         firmware-zd1211
+Conflicts: linux-firmware
+Replaces: linux-firmware
+Description: metapackage that depends on Debian firmware shipped with MX Linux
+ Metapackage that depends on Debian firmware shipped with MX Linux.

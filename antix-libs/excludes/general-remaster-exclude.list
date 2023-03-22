@@ -1,0 +1,21 @@
+#--------------------------------------------------------------------
+# general-remaster-exclude.list
+#
+# Additional files to be excluded when a general-purpose remaster
+# is created.
+#
+# The original list is available in general-remaster-exclude.orig.
+#--------------------------------------------------------------------
+
+etc/NetworkManager/system-connections/*
+etc/X11/xorg.conf
+#etc/network/interfaces
+etc/network/interfaces.d/*
+etc/udev/*-persistent-net.rules
+etc/wicd/*.conf
+etc/wicd/dhclient.conf.template
+etc/wicd/manager-settings.conf
+etc/wicd/wired-settings.conf
+etc/wicd/wireless-settings.conf
+etc/X11/xorg-bus-id
+var/lib/wicd/configurations/*

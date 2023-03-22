@@ -1,0 +1,13 @@
+Source: job-scheduler
+Section: admin
+Priority: optional
+Maintainer: Adrian <adrian@mxlinux.org>
+Build-Depends: debhelper (>=10), qtbase5-dev, qttools5-dev-tools
+Standards-Version: 3.9.8
+
+Package: job-scheduler
+Architecture: any
+Depends: ${misc:Depends},
+         ${shlibs:Depends}
+Description: job-scheduler
+ Job Scheduler is a scheduling utility which uses crontab as the backend 

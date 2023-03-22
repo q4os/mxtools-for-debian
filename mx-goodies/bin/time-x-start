@@ -1,0 +1,14 @@
+#!/bin/bash
+
+dt=-
+
+for c in slim X desktop-session icewm-session "rox\>" conky; do
+    t=$(echo $(start-t $c 2>/dev/null | head -n1))
+    if [ -z "$t" ]; then
+        printf "%15s: %6s %6s\n" "$c"  - -
+        continue
+    fi
+    [ "$prev" ] && dt=$(echo "scale=2; $t - $prev" | bc)
+    prev=$t
+    printf "%15s: %6s %6s\n" "$c" "$t" "$dt"
+done

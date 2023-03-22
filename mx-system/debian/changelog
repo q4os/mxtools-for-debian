@@ -1,0 +1,523 @@
+mx-system (22.09.01mx21+deb11u13) stable; urgency=medium
+
+  * MX Tools release
+
+ -- Dolphin Oracle <administrator@localdomain>  Wed, 22 Mar 2023 10:43:56 +0100
+
+mx-system (22.09.01mx21) mx; urgency=medium
+
+  * update strings
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Tue, 13 Sep 2022 17:59:52 -0400
+
+mx-system (22.08.03mx21) mx; urgency=medium
+
+  * fix string replacement
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 26 Aug 2022 23:28:00 -0400
+
+mx-system (22.08.02mx21) mx; urgency=medium
+
+  * update 57mesaoverride to not take affect on mesa 22 and up
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 26 Aug 2022 13:04:06 -0400
+ 
+mx-system (22.08.01mx21) mx; urgency=medium
+
+  * mx21.2 strings
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 20 Aug 2022 18:40:44 -0400
+
+mx-system (22.05.01mx21) mx; urgency=medium
+
+  * remove gtk2-engines depend
+  * keep divert in case it gets installed
+  * as of mx21.1 all isos should have it already 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 15 May 2022 18:41:29 -0400
+
+mx-system (22.04.01mx21) mx; urgency=medium
+
+  * update 21.1 strings 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 03 Apr 2022 11:28:01 -0400
+
+mx-system (22.03.02mx21) mx; urgency=medium
+
+  * adjust mcode detection with os-prober diversion
+  * adjust set of debian frontend
+
+ -- fehlix <fehlix@mxlinux.org>  Fri, 01 Apr 2022 16:22:42 -0400
+
+mx-system (22.03.01mx21) mx; urgency=medium
+
+  * add gtk2-engines with diversions
+
+ -- fehlix <fehlix@mxlinux.org>  Mon, 21 Mar 2022 16:43:49 -0400
+
+mx-system (21.11.01mx21) mx; urgency=medium
+
+  * mx21 ahs bump
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 24 Nov 2021 15:16:57 -0500
+
+mx-system (21.10.03mx21) mx; urgency=medium
+
+  * mx21 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 16 Oct 2021 22:23:58 -0400
+
+mx-system (21.10.02mx21) mx; urgency=medium
+
+  * create /etc/machine-id from dbus machine-id if not present 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 11 Oct 2021 19:52:44 -0400
+
+mx-system (21.10.01mx21) mx; urgency=medium
+
+  * update strings for mx19 upgraders
+  * update strings for mx21 beta and rc users
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 06 Oct 2021 12:32:03 -0400
+
+mx-system (21.08.01mx21) mx; urgency=medium
+
+  * correct and activate security repo on betas
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 25 Aug 2021 22:59:15 -0400
+
+mx-system (21.07.01mx21) mx; urgency=medium
+
+  * hide conky from menus 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 29 Jul 2021 19:20:06 -0400
+
+mx-system (21.04.03mx21) mx; urgency=medium
+
+  * adjust 30_uefi-firmware for preempt_rt kernels
+  * adjust tag for mx-system updates
+
+ -- fehlix <fehlix@mxlinux.org>  Sat, 10 Apr 2021 05:20:03 -0400
+
+mx-system (21.04.02mx21) mx; urgency=medium
+
+  * uefi grub updates 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 08 Apr 2021 18:49:38 -0400
+
+mx-system (21.04.01mx21) mx; urgency=medium
+
+  * uefi grub updates
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 02 Apr 2021 20:22:40 -0400
+
+mx-system (21.02.02mx21) mx; urgency=medium
+
+  * update 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 14 Mar 2021 20:37:12 -0400
+
+mx-system (21.02.01) mx; urgency=medium
+
+  * initial mx-21 setup 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Tue, 09 Feb 2021 19:36:05 -0500
+
+mx-system (20.11.01) mx; urgency=medium
+
+  * update KDE pretty name string 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 11 Nov 2020 11:47:13 -0500
+
+mx-system (20.10.05) mx; urgency=medium
+
+  * final 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 01 Nov 2020 19:46:38 -0500
+
+mx-system (20.10.04) mx; urgency=medium
+
+  * bump version  
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 28 Oct 2020 19:11:05 -0400
+
+mx-system (20.10.03) mx; urgency=medium
+
+  * bump version 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 17 Oct 2020 21:07:49 -0400
+
+mx-system (20.10.02) mx; urgency=medium
+
+  * 19.3 strings 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 10 Oct 2020 14:39:47 -0400
+
+mx-system (20.10.01) mx; urgency=medium
+
+  * revise vbox xclient script for multiple vbox versions 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 03 Oct 2020 15:32:16 -0400
+
+mx-system (20.08.01) mx; urgency=medium
+
+  * update for KDE -RC1 string update 
+
+ -- Dolphin Oracle <dolphin@littlebyte>  Sun, 09 Aug 2020 12:40:50 -0400
+
+mx-system (20.07.01) mx; urgency=medium
+
+  * add KDE debconf configuration 
+
+ -- Dolphin Oracle <dolphin@littlebyte>  Wed, 15 Jul 2020 19:00:12 -0400
+
+mx-system (20.05.03) mx; urgency=medium
+
+  * add 57mesa_override 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 24 May 2020 07:25:21 -0400
+
+mx-system (20.05.02) mx; urgency=medium
+
+  * mx 19.2 strings 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 13 May 2020 21:24:03 -0400
+
+mx-system (20.05.01) mx; urgency=medium
+
+  *  updated 20memtest86+ file
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 13 May 2020 21:10:12 -0400
+
+mx-system (20.03.01) mx; urgency=medium
+
+  * update control file 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 30 Mar 2020 22:57:11 -0400
+
+mx-system (20.02.08) mx; urgency=medium
+
+  * fix labels in debian list files 
+  * /etc/xdg/autostart/at-spi-dbus-bus.desktop to /etc/xdg/autostart/zz-at-spi-dbus-bus.desktop
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 20 Feb 2020 23:08:17 -0500
+
+mx-system (20.02.07) mx; urgency=medium
+
+  *  adjust string change
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 13 Feb 2020 23:04:40 -0500
+
+mx-system (20.02.06) mx; urgency=medium
+
+  * correct test for 20memtest86+ 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Tue, 11 Feb 2020 18:48:31 -0500
+
+mx-system (20.02.05) mx; urgency=medium
+
+  * mx19.1 strings 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 08 Feb 2020 13:48:33 -0500
+
+mx-system (20.02.04) mx; urgency=medium
+
+  * another antix.list correction
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 08 Feb 2020 13:41:57 -0500
+
+mx-system (20.02.03) mx; urgency=medium
+
+  * correct antiX.list removal
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 06 Feb 2020 19:18:54 -0500
+
+mx-system (20.02.02) mx; urgency=medium
+
+  * grub config fixes 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 06 Feb 2020 19:10:12 -0500
+
+mx-system (20.02.01) mx; urgency=medium
+
+  * remove antix sources 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 05 Jan 2020 18:00:00 -0500
+
+mx-system (20.01.01) mx; urgency=medium
+
+  * update memtest grub entries on installed systems 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 05 Jan 2020 20:43:18 -0500
+
+mx-system (19.11.02) mx; urgency=medium
+
+  * remove udevadm from update 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 23 Nov 2019 17:41:14 -0500
+
+mx-system (19.11.01) mx; urgency=medium
+
+  * add ahs repo 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 20 Nov 2019 20:31:58 -0500
+
+mx-system (19.10.05) mx; urgency=medium
+
+  * add ndisgtk icon update
+  * bring in localize-repo-mx 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 23 Oct 2019 17:33:53 -0400
+
+mx-system (19.10.04) mx; urgency=medium
+
+  * bump name for RC users 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 20 Oct 2019 20:11:02 -0400
+
+mx-system (19.10.03) mx; urgency=medium
+
+  * icon updates for gnome-ppp and pppoeconf and luckybackup
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 19 Oct 2019 19:40:27 -0400
+
+mx-system (19.10.02) mx; urgency=medium
+
+  * maintenance  
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 19 Oct 2019 07:06:54 -0400
+
+mx-system (19.10.01) mx; urgency=medium
+
+  * add sources.list blank file 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 05 Oct 2019 14:32:40 -0400
+
+mx-system (19.09.04) mx; urgency=medium
+
+  * add icon override for luckybackup 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 15 Sep 2019 14:15:01 -0400
+
+mx-system (19.09.03) mx; urgency=medium
+
+  * added icons for ndisgtk,gnome-ppp and pppoe per asqwerth 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 15 Sep 2019 11:58:49 -0400
+
+mx-system (19.09.02) mx; urgency=medium
+
+  * added modified wacom udev rule
+  * added modified wacom eudev xorg conf file
+  * removed matcha-theme dependency 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 14 Sep 2019 17:47:22 -0400
+
+mx-system (19.09.01) mx; urgency=medium
+
+  * temparily bring in matcha-themes as a depend for beta 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 08 Sep 2019 12:02:13 -0400
+
+mx-system (19.08.02) mx; urgency=medium
+
+  * revert os-release change 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 12 Aug 2019 18:44:58 -0400
+
+mx-system (19.08.01) mx; urgency=medium
+
+  * fix for os-release 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 07 Aug 2019 20:21:16 -0400
+
+mx-system (19.06.01) mx; urgency=medium
+
+  * buster 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Tue, 28 May 2019 22:33:50 -0400
+
+mx-system (19.05.02) mx; urgency=medium
+
+  * bump version number 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 11 May 2019 11:22:27 -0400
+
+mx-system (19.05.01) mx; urgency=medium
+
+  * revised for 18.3 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 08 May 2019 20:53:22 -0400
+
+mx-system (19.04.01) mx; urgency=medium
+
+  * update for 18.2 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 04 Apr 2019 21:25:22 -0400
+
+mx-system (19.02.03) mx; urgency=medium
+
+  * add libnss-mdns 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Tue, 19 Feb 2019 07:05:15 -0500
+
+mx-system (19.02.02) mx; urgency=medium
+
+  * revised mx-system to fix version numbers 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 18 Feb 2019 18:12:40 -0500
+
+mx-system (19.02.01) mx; urgency=medium
+
+  * bump for 18.1 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Tue, 05 Feb 2019 19:17:16 -0500
+
+mx-system (19.01.01) mx; urgency=medium
+
+  * fix symlink on mx-version to antix-version 
+  * add vmd to /etc/initramfs-tools/modules
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Tue, 22 Jan 2019 19:24:42 -0500
+
+mx-system (18.12.04) mx; urgency=medium
+
+  * bump issue to reflect generic mx linux instead of version number 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Tue, 25 Dec 2018 12:43:42 -0500
+
+mx-system (18.12.03) mx; urgency=medium
+
+  * for mx18 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 15 Dec 2018 22:13:19 -0500
+
+mx-system (18.12.02) mx; urgency=medium
+
+  * final mx18 release 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 14 Dec 2018 19:23:52 -0500
+
+mx-system (18.11.05) mx; urgency=medium
+
+  * initial mx18 release
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 01 Dec 2018 18:27:45 -0500
+
+mx-system (18.11.04) mx; urgency=medium
+
+  * refreshed for mx17 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 01 Dec 2018 18:24:09 -0500
+
+mx-system (18.11.03) mx; urgency=medium
+
+  * removed some depends from the mx17 days 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 29 Nov 2018 21:02:45 -0500
+
+mx-system (18.11.02) mx; urgency=medium
+
+  * added libelf-dev
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 29 Nov 2018 20:10:48 -0500
+
+mx-system (18.11.01) mx; urgency=medium
+
+  * modify DEBIAN_FRONTEND 
+
+ -- dolphin <dolphin@littlebyte>  Wed, 14 Nov 2018 22:08:14 -0500
+
+mx-system (18.07) mx; urgency=medium
+
+  * correct systemd tmp directory cleanup at boot 
+
+ -- dolphinoracle <dolphinoracle@gmail.com>  Mon, 16 Jul 2018 19:47:54 -0400
+
+mx-system (18.05) mx; urgency=medium
+
+  * added /etc/issue 
+
+ -- dolphinoracle <dolphinoracle@gmail.com>  Thu, 31 May 2018 20:56:22 -0400
+
+mx-system (17.06) mx; urgency=medium
+
+  * mx 17.1 
+
+ -- dolphinoracle <dolphin@littlebyte>  Sat, 24 Feb 2018 09:50:59 -0500
+
+mx-system (17.05) mx; urgency=medium
+
+  * Add libelf-dev as a workaround to Debian bug 885474.
+
+ -- Steven Pusser <stevep@mxlinux.org>  Mon, 08 Jan 2018 11:43:22 -0800
+
+mx-system (17.04) mx; urgency=medium
+
+  *  add udev rule to allow optical disk detection and automount
+  *  added 10-evdev.conf to /etc/X11/xorg.conf.d/ to fix mouse acceleration settings
+
+ -- dolphinoracle <dolphinoracle@gmail.com>  Tue, 19 Dec 2017 10:28:13 -0500
+ 
+mx-system (17.03) mx; urgency=medium
+
+  *  modify RC and PRE_RC mx-version files to reflect release
+
+ -- Timothy E. Harris <dolphin@littlebyte>  Sat, 16 Dec 2017 18:12:28 -0500
+
+mx-system (17.02) mx; urgency=medium
+
+  * Add /etc/mx-version symlink to postinst
+
+ -- Timothy E. Harris <maintainer@mxrepo.com>  Fri, 15 Dec 2017 13:40:27 -0500
+
+mx-system (17.01) mx; urgency=medium
+
+  * Remove lightlocker dependency
+
+ -- Timothy E. Harris <maintainer@mxrepo.com>  Thu, 14 Dec 2017 17:37:41 -0500
+
+mx-system (17) mx; urgency=medium
+
+  * Update for final MX 17 release.
+  * Add light-locker to dependencies.
+
+ -- Steven Pusser <stevep@mxlinux.org>  Wed, 13 Dec 2017 12:29:04 -0800
+
+mx-system (17~rc1+2) mx; urgency=medium
+
+  * added symlink for init man files 
+
+ -- dolphin oracle <dolphinoracle@gmail.com>  Wed, 13 Dec 2017 20:06:28 -0500
+
+mx-system (17~rc1+1) mx; urgency=medium
+
+  * modify postinst script to test for files 
+
+ -- Steven Pusser <stevep@mxlinux.org>  Mon, 11 Dec 2017 22:06:30 -0500
+
+mx-system (17~rc1) mx; urgency=medium
+
+  * Restore the dependencies.
+  * debian/postinst: update some files, apt-mark the dependencies as manually
+    installed.
+
+ -- Steven Pusser <stevep@mxlinux.org>  Sun, 10 Dec 2017 14:27:27 -0500
+
+mx-system (17~b1) mx; urgency=medium
+
+  * Remove any dependencies for the beta.
+
+ -- Steven Pusser <stevep@mxlinux.org>  Mon, 09 Oct 2017 19:25:03 -0700
+
+mx-system (16.9) mx; urgency=medium
+
+  * Preliminary version for MX 17.
+
+ -- Steven Pusser <stevep@mxlinux.org>  Sat, 16 Sep 2017 10:08:10 -0700
+
+mx-system (16.1) mx; urgency=medium
+
+  * Initial packaging.
+
+ -- Steven Pusser <stevep@mxlinux.org>  Fri, 15 Sep 2017 12:46:19 -0700

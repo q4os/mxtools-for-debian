@@ -1,0 +1,311 @@
+live-usb-maker (0.4.8mx19+1+deb11u13) stable; urgency=medium
+
+  * MX Tools release
+
+ -- anticapitalista <administrator@localdomain>  Wed, 22 Mar 2023 10:43:51 +0100
+
+live-usb-maker (0.4.8mx19+1) mx; urgency=medium
+
+  * EXT4_OPTIONS= -m0 -i16384 rather than 100000
+  * different kernels bugfix
+
+ -- anticapitalista <antix@operamail.com>  Sat, 19 Dec 2020 17:58:00 +0200
+
+live-usb-maker (0.4.7) unstable; urgency=medium
+
+  * fix the fix to --label bug
+
+ -- anticapitalista <antix@operamail.com>  Sat, 12 Dec 2020 17:08:56 +0200
+
+live-usb-maker (0.4.6) unstable; urgency=medium
+
+  * improved encryption options when using non-default kernel
+
+ -- anticapitalista <antix@operamail.com>  Fri, 13 Dec 2019 17:08:33 +0200
+
+live-usb-maker (0.4.5) unstable; urgency=medium
+
+  * chown data partitions fixes
+
+ -- anticapitalista <antix@operamail.com>  Sun, 17 Nov 2019 14:32:04 +0200
+
+live-usb-maker (0.4.4) unstable; urgency=medium
+
+  * Bump vesion to 2.41.12
+
+ -- anticapitalista <antix@operamail.com>  Thu, 14 Nov 2019 13:24:04 +0200
+
+live-usb-maker (0.4.3) unstable; urgency=medium
+
+  * Bump version (lsblk fix)
+
+ -- anticapitalista <antix@operamail.com>  Fri, 25 Oct 2019 17:03:49 +0300
+
+live-usb-maker (0.4.2) unstable; urgency=medium
+
+  * Bump version to 2.41.09 (default to luks1) 
+
+ -- anticapitalista <antix@operamail.com>  Fri, 18 Oct 2019 14:24:19 +0300
+
+live-usb-maker (0.4.1) unstable; urgency=medium
+
+  * make sure file exist before testing it as a shell script
+  * version 2.41.08
+
+ -- anticapitalista <antix@operamail.com>  Thu, 17 Oct 2019 16:04:40 +0300
+
+live-usb-maker (0.4.0) unstable; urgency=medium
+
+  * Bump version to 2.41.07
+
+ -- anticapitalista <antix@operamail.com>  Fri, 11 Oct 2019 12:35:49 +0300
+
+live-usb-maker (0.3.14) unstable; urgency=medium
+
+  * remove unneeded data-first-lum
+
+ -- anticapitalista <antix@operamail.com>  Sun, 16 Jun 2019 10:59:35 +0300
+
+live-usb-maker (0.3.13) unstable; urgency=medium
+
+  * Bump version to 2.41.00
+
+ -- anticapitalista <antix@operamail.com>  Thu, 06 Jun 2019 18:42:39 +0300
+
+live-usb-maker (0.3.12) unstable; urgency=medium
+
+  * Bump live-usb-maker version to 2.40.21
+
+ -- anticapitalista <antix@operamail.com>  Sun, 02 Jun 2019 14:47:40 +0300
+
+live-usb-maker (0.3.11) unstable; urgency=medium
+
+  * fix nasty bug in the --initrd feature
+
+ -- anticapitalista <antix@operamail.com>  Fri, 31 May 2019 01:15:11 +0300
+
+live-usb-maker (0.3.10) unstable; urgency=medium
+
+  * Bump version to 2.40.19
+
+ -- anticapitalista <antix@operamail.com>  Thu, 09 May 2019 15:16:50 +0300
+
+live-usb-maker (0.3.9) unstable; urgency=medium
+
+  * added data-first feature to start live-usb with a data partition, usually fat32 or ntfs
+  * add --format option to format a usb-stick for data
+  * add/change --initrd option to update the initrd on a live usb.  It can point to a .gz file or a directory
+
+ -- anticapitalista <antix@operamail.com>  Mon, 08 Apr 2019 16:20:05 +0300
+
+live-usb-maker (0.3.8) unstable; urgency=medium
+
+  * further fuseiso fixes
+
+ -- anticapitalista <antix@operamail.com>  Fri, 29 Mar 2019 16:40:30 +0200
+
+live-usb-maker (0.3.7) unstable; urgency=medium
+
+  * fuseiso fixes
+
+ -- anticapitalista <antix@operamail.com>  Sun, 24 Mar 2019 22:10:53 +0200
+
+live-usb-maker (0.3.6) unstable; urgency=medium
+
+  * upstream changes to fix/improve dd-live-usb
+
+ -- anticapitalista <antix@operamail.com>  Tue, 22 Jan 2019 18:59:17 +0200
+
+live-usb-maker (0.3.5) unstable; urgency=medium
+
+  * upstream changes to use fuseiso
+
+ -- anticapitalista <antix@operamail.com>  Wed, 09 Jan 2019 17:10:09 +0200
+
+live-usb-maker (0.3.4) unstable; urgency=medium
+
+  * Fix bug in fatal error message "The live media is not mounted" 
+
+ -- anticapitalista <antix@operamail.com>  Fri, 28 Dec 2018 20:28:48 +0200
+
+live-usb-maker (0.3.3) unstable; urgency=medium
+
+  * added wamerican and dict to depends
+
+ -- anticapitalista <antix@operamail.com>  Tue, 20 Mar 2018 20:33:01 +0200
+
+live-usb-maker (0.3.2) unstable; urgency=medium
+
+  * added parted to depends
+
+ -- anticapitalista <antix@operamail.com>  Fri, 09 Feb 2018 17:56:23 +0200
+
+live-usb-maker (0.3.1) unstable; urgency=medium
+
+  * bump version
+
+ -- anticapitalista <antix@operamail.com>  Thu, 21 Dec 2017 23:48:57 +0200
+
+live-usb-maker (0.3.0) unstable; urgency=medium
+
+  * bump version to match gui
+  * encryption + uefi + save is working
+
+ -- anticapitalista <antix@operamail.com>  Wed, 11 Oct 2017 14:47:33 +0300
+
+live-usb-maker (0.2.10) unstable; urgency=medium
+
+  * Bump version
+
+ -- anticapitalista <antix@operamail.com>  Tue, 03 Oct 2017 01:00:12 +0300
+
+live-usb-maker (0.2.9) unstable; urgency=medium
+
+  * update usage readme
+  * For 32-bit uefi only search 1st part of first drive for windows
+
+ -- anticapitalista <antix@operamail.com>  Fri, 25 Aug 2017 19:25:26 +0100
+
+live-usb-maker (0.2.8) unstable; urgency=medium
+
+  * Bump version
+
+ -- anticapitalista <antix@operamail.com>  Sat, 12 Aug 2017 11:14:49 +0100
+
+live-usb-maker (0.2.7) unstable; urgency=medium
+
+  * Bump version
+
+ -- anticapitalista <antix@operamail.com>  Mon, 31 Jul 2017 20:19:23 +0100
+
+live-usb-maker (0.2.6) unreleased; urgency=medium
+
+  * bump version
+
+ -- anticapitalista <antix@operamail.com>  Sun, 09 Jul 2017 14:19:24 +0300
+
+live-usb-maker (0.2.5) unstable; urgency=medium
+
+  * fix for 64 bit encryption
+
+ -- anticapitalista <antix@operamail.com>  Sun, 02 Jul 2017 22:49:44 +0300
+
+live-usb-maker (0.2.4) unstable; urgency=medium
+
+  * bump version
+
+ -- anticapitalista <antix@operamail.com>  Tue, 06 Jun 2017 19:16:49 +0300
+
+live-usb-maker (0.2.3) unstable; urgency=medium
+
+  * Bump version
+
+ -- anticapitalista <antix@operamail.com>  Sat, 20 May 2017 21:54:58 +0300
+
+live-usb-maker (0.2.2) unstable; urgency=medium
+
+  * various niggles fixed
+
+ -- anticapitalista <antix@operamail.com>  Tue, 25 Apr 2017 14:06:43 +0300
+
+live-usb-maker (0.2.1) unstable; urgency=medium
+
+  * Bump version
+
+ -- anticapitalista <antix@operamail.com>  Sun, 23 Apr 2017 23:35:23 +0300
+
+live-usb-maker (0.2.0) unstable; urgency=medium
+
+  * Added encryption options
+
+ -- anticapitalista <antix@operamail.com>  Thu, 20 Apr 2017 13:25:00 +0300
+
+live-usb-maker (0.1.13) unstable; urgency=medium
+
+  * Added dependencies, extlinux and syslinux-common 
+
+ -- anticapitalista <antix@operamail.com>  Mon, 23 Jan 2017 20:06:25 +0200
+
+live-usb-maker (0.1.12) unstable; urgency=medium
+
+  * Bump version number
+
+ -- anticapitalista <antix@operamail.com>  Wed, 07 Dec 2016 18:51:15 +0200
+
+live-usb-maker (0.1.11) unstable; urgency=medium
+
+  * Fix memtest in UEFI boot. 
+  * Bump version
+
+ -- anticapitalista <antix@operamail.com>  Tue, 06 Dec 2016 12:02:14 +0200
+
+live-usb-maker (0.1.10) unstable; urgency=medium
+
+  * Fix typo bug in wait_for_file() error message
+
+ -- anticapitalista <antix@operamail.com>  Tue, 29 Nov 2016 13:55:41 +0200
+
+live-usb-maker (0.1.9) unstable; urgency=medium
+
+  * Call lib_clean_up() to ensure dirty values are restored at exit
+
+ -- anticapitalista <antix@operamail.com>  Mon, 28 Nov 2016 18:16:48 +0200
+
+live-usb-maker (0.1.8) unstable; urgency=medium
+
+  * Fix bug in "gui" mode so we don't ask about live-boot directory
+
+ -- anticapitalista <antix@operamail.com>  Thu, 24 Nov 2016 23:15:24 +0200
+
+live-usb-maker (0.1.7) unstable; urgency=medium
+
+  * Update usage
+  * Hide error messages when we can't do final recursive umounts
+  * Make size of fat partition adapt automatically if it is too small
+  * Add copyright notice and license
+
+ -- anticapitalista <antix@operamail.com>  Thu, 24 Nov 2016 13:25:22 +0200
+
+live-usb-maker (0.1.6) unstable; urgency=medium
+
+  * Rename error file to lum.error (no trailing "s")
+  * Rename desktop file beause it is no longer used
+  * Re-enable fatal error if we can't run extlinux
+
+ -- anticapitalista <antix@operamail.com>  Wed, 16 Nov 2016 14:38:20 +0200
+
+live-usb-maker (0.1.4) unstable; urgency=medium
+
+  * Remove unused PRE_CMDS and POST_CMDS
+  * Tweak strings in new menu
+  * Remove the no_from variable (not really needed)
+  * Remove "simple" from .desktop file call 
+
+ -- anticapitalista <antix@operamail.com>  Mon, 07 Nov 2016 12:24:29 +0200
+
+live-usb-maker (0.1.3) mx; urgency=medium
+
+  * Fix to work with latest e2fsprogs-1.43
+  * Removed empty strings in .desktop file for beta release
+
+ -- anticapitalista <antix@operamail.com>  Sat, 29 Oct 2016 12:44:47 +0300
+
+live-usb-maker (0.1.2) unstable; urgency=medium
+
+  * Add "dark" color theme
+
+ -- anticapitalista <antix@operamail.com>  Thu, 13 Oct 2016 12:24:15 +0300
+
+live-usb-maker (0.1.1) unstable; urgency=medium
+
+  * Fix strings and comments
+  * Use -C for color scheme. Remove --clear option	 
+
+ -- anticapitalista <antix@operamail.com>  Mon, 12 Oct 2016 11:57:26 +0300
+
+live-usb-maker (0.1.0) unstable; urgency=low 
+ 
+  * Initial Release.
+
+ -- anticapitalista <antiX@operamail.com>  Wed, 05 Oct 2016 17:00:00 +0200
+

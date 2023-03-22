@@ -1,0 +1,21 @@
+<!DOCTYPE Menu PUBLIC "-//freedesktop//DTD Menu 1.0//EN"
+          "http://www.freedesktop.org/standards/menu-spec/menu-1.0.dtd">
+          <Menu>
+            <Name>Applications</Name>
+            <Menu>
+              <Name>System</Name>
+              <Exclude>
+                <Category>MX-Software</Category>
+				<Category>MX-Maintenance</Category>
+				<Category>MX-Setup</Category>
+				<Category>MX-Live</Category>
+				<Category>MX-Utilities</Category>
+              </Exclude>
+            </Menu>
+            <Menu>
+              <Name>Education</Name>
+              <Exclude>
+                <Filename>libreoffice-math.desktop</Filename>
+              </Exclude>
+            </Menu>
+          </Menu>
