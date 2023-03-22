@@ -1,11 +1,11 @@
+#include "dialog.h"
+
 #include <QLabel>
 #include <QLayout>
 #include <QPushButton>
 
-#include "dialog.h"
-
-CustomDialog::CustomDialog(const QStringList &items, QDialog *parent) :
-    QDialog(parent)
+CustomDialog::CustomDialog(const QStringList &items, QDialog *parent)
+    : QDialog(parent)
 {
     auto *layout = new QGridLayout();
     setLayout(layout);
@@ -14,7 +14,7 @@ CustomDialog::CustomDialog(const QStringList &items, QDialog *parent) :
     box->addItems(items);
 
     auto *label = new QLabel(tr("Live environment detected. Please select the root partition of the\n"
-                                  " system you want to modify (only Linux partitions are displayed)"));
+                                " system you want to modify (only Linux partitions are displayed)"));
 
     layout->addWidget(label, 0, 0, 1, 3);
     layout->addWidget(box, 1, 0, 1, 3);
@@ -29,10 +29,6 @@ CustomDialog::CustomDialog(const QStringList &items, QDialog *parent) :
 
     connect(ok, &QPushButton::clicked, this, &CustomDialog::accept);
     connect(cancel, &QPushButton::clicked, this, &CustomDialog::reject);
-
 }
 
- QComboBox* CustomDialog::comboBox()
- {
-     return box;
- }
+QComboBox *CustomDialog::comboBox() { return box; }

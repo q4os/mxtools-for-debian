@@ -15,7 +15,7 @@
   </property>
   <layout class="QGridLayout" name="gridLayout" rowstretch="0,0,0,0" rowminimumheight="0,0,0,0">
    <property name="sizeConstraint">
-    <enum>QLayout::SetDefaultConstraint</enum>
+    <enum>QLayout::SetNoConstraint</enum>
    </property>
    <item row="2" column="0">
     <widget class="Line" name="line">
@@ -205,6 +205,9 @@
       <number>1</number>
      </property>
      <layout class="QGridLayout" name="gridLayout_2">
+      <property name="sizeConstraint">
+       <enum>QLayout::SetNoConstraint</enum>
+      </property>
       <property name="verticalSpacing">
        <number>20</number>
       </property>
@@ -217,7 +220,7 @@
          <bool>false</bool>
         </property>
         <property name="horizontalScrollBarPolicy">
-         <enum>Qt::ScrollBarAlwaysOff</enum>
+         <enum>Qt::ScrollBarAsNeeded</enum>
         </property>
         <property name="sizeAdjustPolicy">
          <enum>QAbstractScrollArea::AdjustToContentsOnFirstShow</enum>
@@ -225,19 +228,25 @@
         <property name="widgetResizable">
          <bool>true</bool>
         </property>
+        <property name="alignment">
+         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+        </property>
         <widget class="QWidget" name="scrollAreaWidgetContents">
          <property name="geometry">
           <rect>
            <x>0</x>
            <y>0</y>
-           <width>755</width>
-           <height>408</height>
+           <width>747</width>
+           <height>364</height>
           </rect>
          </property>
          <property name="autoFillBackground">
           <bool>true</bool>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout">
+          <property name="sizeConstraint">
+           <enum>QLayout::SetDefaultConstraint</enum>
+          </property>
           <item>
            <layout class="QGridLayout" name="gridLayout_btn"/>
           </item>

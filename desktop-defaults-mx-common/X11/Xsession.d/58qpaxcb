@@ -1,0 +1,4 @@
+# Set QT variables to not log qpa.xcb errrors
+# /etc/X11/Xsession.d/568qpaxcb
+#
+export QT_LOGGING_RULES='qt.qpa.xcb.warning=false'

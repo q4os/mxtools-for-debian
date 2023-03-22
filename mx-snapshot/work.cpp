@@ -34,8 +34,9 @@
 #define RUN settings->shell->run
 const extern QFile logFile;
 
-Work::Work(Settings *settings)
-    : settings(settings)
+Work::Work(Settings *settings, QObject *parent)
+    : QObject(parent)
+    , settings(settings)
 {
 }
 
@@ -170,8 +171,9 @@ void Work::closeInitrd(const QString &initrd_dir, const QString &file)
 // copyModules(mod_dir/kernel kernel)
 void Work::copyModules(const QString &to, const QString &kernel)
 {
-    RUN(QStringLiteral("/usr/share/mx-snapshot/scripts/copy-initrd-modules -t=\"%1\" -k=\"%2\"").arg(to, kernel));
-    RUN(QStringLiteral("/usr/share/mx-snapshot/scripts/copy-initrd-programs --to=\"%1\"").arg(to));
+    RUN(QStringLiteral("/usr/share/%1/scripts/copy-initrd-modules -t=\"%2\" -k=\"%3\"")
+            .arg(qApp->applicationName(), to, kernel));
+    RUN(QStringLiteral("/usr/share/%1/scripts/copy-initrd-programs --to=\"%2\"").arg(qApp->applicationName(), to));
 }
 
 // Copying the iso-template filesystem
@@ -206,6 +208,7 @@ void Work::copyNewIso()
 
     // Overwrite with this file, probably a better location _if_ the file exists
     RUN("test -r /etc/initrd-release && cp /etc/initrd-release \"" + path + "/etc\"");
+    RUN("test -r /etc/initrd_release && cp /etc/initrd_release \"" + path + "/etc\"");
     if (initrd_dir.isValid()) {
         copyModules(path, settings->kernel);
         closeInitrd(path, settings->work_dir + "/iso-template/antiX/initrd.gz");
@@ -219,13 +222,12 @@ bool Work::createIso(const QString &filename)
     qDebug() << "+++" << __PRETTY_FUNCTION__ << "+++";
     // squash the filesystem copy
     QDir::setCurrent(settings->work_dir);
-    QString cmd;
     QString maybe_unbuffer = (settings->cli_mode && checkInstalled(QStringLiteral("expect")))
                                  ? QStringLiteral("unbuffer ")
                                  : QLatin1String("");
-    cmd = maybe_unbuffer + "mksquashfs /.bind-root iso-template/antiX/linuxfs -comp " + settings->compression
-          + ((settings->mksq_opt.isEmpty()) ? QLatin1String("") : " " + settings->mksq_opt) + " -wildcards -ef "
-          + settings->snapshot_excludes.fileName() + " " + settings->session_excludes;
+    QString cmd = maybe_unbuffer + "mksquashfs /.bind-root iso-template/antiX/linuxfs -comp " + settings->compression
+                  + ((settings->mksq_opt.isEmpty()) ? QLatin1String("") : " " + settings->mksq_opt) + " -wildcards -ef "
+                  + settings->snapshot_excludes.fileName() + " " + settings->session_excludes;
 
     emit message(tr("Squashing filesystem..."));
     QString out;
@@ -257,25 +259,19 @@ bool Work::createIso(const QString &filename)
             tr("Could not create ISO file, please check whether you have enough space on the destination partition."));
         return false;
     }
-    system("chown $(logname):$(logname) \"" + settings->snapshot_dir.toUtf8() + "/" + filename.toUtf8() + "\"");
 
     // make it isohybrid
     if (settings->make_isohybrid) {
         emit message(tr("Making hybrid iso"));
-        cmd = "isohybrid --uefi \"" + settings->snapshot_dir + "/" + filename + "\"";
-        RUN(cmd);
+        RUN("isohybrid --uefi \"" + settings->snapshot_dir + "/" + filename + "\"");
     }
 
     // make ISO checksums
-    if (settings->make_md5sum) {
+    if (settings->make_md5sum)
         makeChecksum(HashType::md5, settings->snapshot_dir, filename);
-        system("chown $(logname):$(logname) \"" + settings->snapshot_dir.toUtf8() + "/" + filename.toUtf8() + ".md5\"");
-    }
-    if (settings->make_sha512sum) {
+    if (settings->make_sha512sum)
         makeChecksum(HashType::sha512, settings->snapshot_dir, filename);
-        system("chown $(logname):$(logname) \"" + settings->snapshot_dir.toUtf8() + "/" + filename.toUtf8()
-               + ".sha512\"");
-    }
+    RUN("chown $(logname):$(logname) \"" + settings->snapshot_dir + "/" + filename + "\"*");
 
     QTime time(0, 0);
     time = time.addMSecs(e_timer.elapsed());
@@ -359,13 +355,6 @@ void Work::openInitrd(const QString &file, const QString &initrd_dir)
 void Work::replaceMenuStrings()
 {
     qDebug() << "+++" << __PRETTY_FUNCTION__ << "+++";
-
-    if (!QFileInfo::exists(QStringLiteral("/etc/lsb-release"))) {
-        emit messageBox(BoxType::critical, tr("Error"),
-                        tr("Could not find %1 file, cannot continue").arg(QStringLiteral("/etc/lsb-release")));
-        cleanUp();
-    }
-
     QString full_distro_name_space = settings->full_distro_name;
     full_distro_name_space.replace(QLatin1String("_"), QLatin1String(" "));
 

@@ -1,0 +1,8 @@
+[main]
+host = https://www.transifex.com
+
+[o:anticapitalista:p:antix-development:r:mx-samba-config-desktop]
+file_filter = po/mx-samba-config-desktop_<lang>.po
+source_file = mx-samba-config-desktop.pot
+source_lang = en
+type = po

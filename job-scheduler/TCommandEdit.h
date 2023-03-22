@@ -51,9 +51,8 @@ private:
     QLabel *userLabel;
     bool viewChanging;
 
-    TCommand *tCommand{};
+    TCommand *tCommand {};
     QTimer timer;
-
 };
 
 #endif

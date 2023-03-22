@@ -25,6 +25,7 @@
 #include "lockfile.h"
 
 #include <QApplication>
+#include <QCommandLineParser>
 #include <QDate>
 #include <QDebug>
 #include <QIcon>
@@ -33,15 +34,16 @@
 #include <QTranslator>
 
 #include "mainwindow.h"
+#include "version.h"
 #include <unistd.h>
 
 static QFile logFile;
 extern const QString starting_home = qEnvironmentVariable("HOME");
 
-void messageHandler(QtMsgType type, const QMessageLogContext &context, const QString &msg);
-
 int main(int argc, char *argv[])
 {
+    void messageHandler(QtMsgType type, const QMessageLogContext &context, const QString &msg);
+
     if (getuid() == 0) {
         qputenv("XDG_RUNTIME_DIR", "/run/user/0");
         qunsetenv("SESSION_MANAGER");
@@ -52,10 +54,10 @@ int main(int argc, char *argv[])
 
     QApplication::setWindowIcon(QIcon::fromTheme(QApplication::applicationName()));
     QApplication::setOrganizationName(QStringLiteral("MX-Linux"));
+    QApplication::setApplicationVersion(VERSION);
 
     QTranslator qtTran;
-    if (qtTran.load(QLocale(), QStringLiteral("qt"), QStringLiteral("_"),
-                    QLibraryInfo::location(QLibraryInfo::TranslationsPath)))
+    if (qtTran.load("qt_" + QLocale().name(), QLibraryInfo::location(QLibraryInfo::TranslationsPath)))
         QApplication::installTranslator(&qtTran);
 
     QTranslator qtBaseTran;
@@ -66,6 +68,19 @@ int main(int argc, char *argv[])
     if (appTran.load(QApplication::applicationName() + "_" + QLocale().name(),
                      "/usr/share/" + QApplication::applicationName() + "/locale"))
         QApplication::installTranslator(&appTran);
+
+    QCommandLineParser parser;
+    parser.setApplicationDescription(
+        QObject::tr("MX Package Installer is a tool used for managing packages on MX Linux\n\
+    - installs popular programs from different sources\n\
+    - installs programs from the MX Test repo\n\
+    - installs programs from Debian Backports repo\n\
+    - installs flatpaks"));
+    parser.addHelpOption();
+    parser.addVersionOption();
+    parser.addOption({{QStringLiteral("s"), QStringLiteral("skip-online-check")},
+                      QObject::tr("Skip online check if it falsely reports lack of internet access.")});
+    parser.process(app);
 
     // Root guard
     if (QProcess::execute(QStringLiteral("/bin/bash"), {"-c", "logname |grep -q ^root$"}) == 0) {
@@ -101,7 +116,7 @@ int main(int argc, char *argv[])
         logFile.open(QFile::Append | QFile::Text);
         qInstallMessageHandler(messageHandler);
 
-        MainWindow w;
+        MainWindow w(parser);
         w.show();
         return QApplication::exec();
     } else {

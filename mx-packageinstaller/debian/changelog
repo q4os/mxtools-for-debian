@@ -1,8 +1,39 @@
-mx-packageinstaller (22.12+deb11u13) stable; urgency=medium
+mx-packageinstaller (23.3.01+deb11u13) stable; urgency=medium
 
   * MX Tools release
 
- -- Adrian <administrator@localdomain>  Wed, 22 Mar 2023 10:43:54 +0100
+ -- Adrian <administrator@localdomain>  Wed, 22 Mar 2023 13:32:37 +0100
+
+mx-packageinstaller (23.3.01) mx; urgency=medium
+
+  * Try to detect proxy configuration
+  * Add command line switches --help, --version, --skip-online-check
+  * Fix displaing version in About menu
+  * Some translations updates
+
+ -- Adrian <adrian@mxlinux.org>  Sat, 11 Mar 2023 14:18:41 -0500
+
+mx-packageinstaller (23.3) mx; urgency=medium
+
+  * Use https addresses for network check
+
+ -- Adrian <adrian@mxlinux.org>  Sun, 05 Mar 2023 21:44:49 -0500
+
+mx-packageinstaller (23.2) mx; urgency=medium
+
+  * Disable Flatpak tab on 32-bit
+
+ -- Adrian <adrian@mxlinux.org>  Sun, 05 Feb 2023 17:35:33 -0500
+
+mx-packageinstaller (23.1) mx; urgency=medium
+
+  * Mark installed packages with an icon instead of graying out
+  * Clarified wording: "Enabled repos" instead of "Stable repo"
+  * Changed Popular tab to show categories at a different level
+  * Display upgradable packages too when displaying installed packages
+  * Fix: performance issue when switching tabs
+
+ -- Adrian <adrian@mxlinux.org>  Sat, 28 Jan 2023 23:53:02 -0500
 
 mx-packageinstaller (22.12) mx; urgency=medium
 

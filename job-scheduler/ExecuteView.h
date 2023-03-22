@@ -16,15 +16,13 @@ class QModelIndex;
 class ExecuteModel;
 class TCommand;
 
-
 class ExecuteView : public QTreeView
 {
     Q_OBJECT
 public:
     ExecuteView(ExecuteModel *model);
     void resetView();
-    void hideUser(bool flag)
-    { setColumnHidden(2, flag); }
+    void hideUser(bool flag) { setColumnHidden(2, flag); }
 
 public slots:
     void selectChanged(const QModelIndex &idx, const QModelIndex &prev);

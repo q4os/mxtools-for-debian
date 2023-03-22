@@ -22,16 +22,18 @@
  * along with mx-welcome.  If not, see <http://www.gnu.org/licenses/>.
  **********************************************************************/
 
-
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
 #include <QCommandLineParser>
+#include <QMenu>
 #include <QMessageBox>
+#include <QPoint>
 #include <QProcess>
 #include <QSettings>
 
-namespace Ui {
+namespace Ui
+{
 class MainWindow;
 }
 
@@ -40,20 +42,19 @@ struct Result {
     QString output;
 };
 
-
 class MainWindow : public QDialog
 {
     Q_OBJECT
 
 protected:
-    QProcess *proc;
+    QProcess *proc {};
 
 public:
     explicit MainWindow(const QCommandLineParser &arg_parser, QWidget *parent = nullptr);
     ~MainWindow();
 
-    Result runCmd(QString cmd);
-    QString getVersion(QString name);
+    Result runCmd(const QString &cmd);
+    QString getVersion(const QString &name);
 
     QString version;
     QString output;
@@ -63,15 +64,24 @@ private slots:
     void on_pushSave_clicked();
     void on_ButtonCopy_clicked();
     void on_buttonAbout_clicked();
-    void systeminfo();
-
     void on_ButtonHelp_clicked();
+
+    void on_comboBoxCommand_currentIndexChanged(int index);
 
 private:
     Ui::MainWindow *ui;
     QSettings user_settings;
+    void forumcopy();
+    void plaincopy();
+    QMenu *menu {};
+    QAction *forumcopyaction {};
+    QAction *plaincopyaction {};
+    QAction *saveasfile {};
+    void createmenu(QPoint pos);
+    void systeminfo();
+    void apthistory();
+    void displaylog(const QString &logfile);
+    void buildcomboBoxCommand();
 };
 
-
 #endif // MAINWINDOW_H
-

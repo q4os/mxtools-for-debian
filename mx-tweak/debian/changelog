@@ -1,8 +1,14 @@
-mx-tweak (22.12.05mx21+deb11u13) stable; urgency=medium
+mx-tweak (23.01.01mx21+deb11u13) stable; urgency=medium
 
   * MX Tools release
 
- -- Dolphin Oracle <administrator@localdomain>  Wed, 22 Mar 2023 10:43:56 +0100
+ -- Dolphin Oracle <administrator@localdomain>  Wed, 22 Mar 2023 13:32:39 +0100
+
+mx-tweak (23.01.01mx21) mx; urgency=medium
+
+  * add thunar split view functions
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Tue, 17 Jan 2023 22:33:21 -0500
 
 mx-tweak (22.12.05mx21) mx; urgency=medium
 

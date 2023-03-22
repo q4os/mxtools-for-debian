@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="nl">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="nl">
 <context>
     <name>MEConfig</name>
     <message>
@@ -360,19 +358,34 @@
         <translation>Groep Toevoegen</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="1252"/>
-        <source>Group name:</source>
-        <translation>Groepsnaam:</translation>
-    </message>
-    <message>
         <location filename="../mainwindow.ui" line="1201"/>
         <source>Enter name of new group</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1207"/>
         <source>groupname</source>
         <translation>groepsnaam</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="1217"/>
+        <source>Create a group with GID &gt; 1000</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="1220"/>
+        <source>Create a user-level group</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="1249"/>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Enter name of new group&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="1252"/>
+        <source>Group name:</source>
+        <translation>Groepsnaam:</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1271"/>
@@ -382,21 +395,22 @@
     <message>
         <location filename="../mainwindow.ui" line="1340"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Select group to delete&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
-        <source>Group to delete:</source>
-        <translation type="vanished">Te verwijderen groep:</translation>
+        <location filename="../mainwindow.ui" line="1349"/>
+        <source>Select group to delete:</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="1356"/>
+        <source>*Please doublecheck your selections before applying, removing a wrong group can break your system.</source>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1371"/>
         <source>Group Membership</source>
         <translation>Groepslidmaatschap</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="1497"/>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Select user to change&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1445"/>
@@ -406,52 +420,17 @@
     <message>
         <location filename="../mainwindow.ui" line="1468"/>
         <source>*Please doublecheck your selections before applying, assigning wrong group memberships can break your system. If you made a mistake, use restore group membership in Options tab to restore the defaults.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="1641"/>
-        <source>Apply any changes</source>
-        <translation>Veranderingen toepassen</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="1644"/>
-        <source>Apply</source>
-        <translation>Toepassen</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="1651"/>
-        <source>Alt+A</source>
-        <translation>Alt+A</translation>
+        <location filename="../mainwindow.ui" line="1497"/>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Select user to change&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1573"/>
         <source>Cancel any changes then quit</source>
         <translation>Iedere verandering ongedaan maken, dan afsluiten</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="1217"/>
-        <source>Create a group with GID &gt; 1000</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="1220"/>
-        <source>Create a user-level group</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="1249"/>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Enter name of new group&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="1349"/>
-        <source>Select group to delete:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="1356"/>
-        <source>*Please doublecheck your selections before applying, removing a wrong group can break your system.</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1576"/>
@@ -477,6 +456,21 @@
         <location filename="../mainwindow.ui" line="1634"/>
         <source>Alt+H</source>
         <translation>Alt+H</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="1641"/>
+        <source>Apply any changes</source>
+        <translation>Veranderingen toepassen</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="1644"/>
+        <source>Apply</source>
+        <translation>Toepassen</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="1651"/>
+        <source>Alt+A</source>
+        <translation>Alt+A</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1658"/>
@@ -676,17 +670,7 @@ Kies a.u.b. een andere naam voordat u doorgaat.</translation>
     <message>
         <location filename="../mainwindow.cpp" line="467"/>
         <source>This action cannot be undone. Are you sure you want to delete the following groups: %1?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="474"/>
-        <source>Group: %1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="479"/>
-        <source>The group has been deleted.</source>
-        <translation>De groep is verwijderd.</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="474"/>
@@ -694,9 +678,19 @@ Kies a.u.b. een andere naam voordat u doorgaat.</translation>
         <translation>Het verwijderen van de groep is mislukt.</translation>
     </message>
     <message>
+        <location filename="../mainwindow.cpp" line="474"/>
+        <source>Group: %1</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="479"/>
+        <source>The group has been deleted.</source>
+        <translation>De groep is verwijderd.</translation>
+    </message>
+    <message>
         <location filename="../mainwindow.cpp" line="479"/>
         <source>The groups have been deleted.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="496"/>

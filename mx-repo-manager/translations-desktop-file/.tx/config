@@ -1,0 +1,8 @@
+[main]
+host = https://www.transifex.com
+
+[o:anticapitalista:p:antix-development:r:mx-repo-manager-desktop]
+file_filter = po/mx-repo-manager-desktop_<lang>.po
+source_file = mx-repo-manager-desktop.pot
+source_lang = en
+type = po

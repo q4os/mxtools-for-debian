@@ -27,10 +27,10 @@
 #include <QLocale>
 #include <QTranslator>
 
-#include <unistd.h>
 #include "lockfile.h"
 #include "mainwindow.h"
 #include "version.h"
+#include <unistd.h>
 
 extern const QString starting_home = qEnvironmentVariable("HOME");
 
@@ -41,12 +41,14 @@ int main(int argc, char *argv[])
         qunsetenv("SESSION_MANAGER");
     }
     QApplication app(argc, argv);
-    if (getuid() == 0) qputenv("HOME", "/root");
+    if (getuid() == 0)
+        qputenv("HOME", "/root");
     QApplication::setWindowIcon(QIcon::fromTheme(QApplication::applicationName()));
     QApplication::setApplicationVersion(VERSION);
 
     QTranslator qtTran;
-    if (qtTran.load(QLocale(), QStringLiteral("qt"), QStringLiteral("_"), QLibraryInfo::location(QLibraryInfo::TranslationsPath)))
+    if (qtTran.load(QLocale(), QStringLiteral("qt"), QStringLiteral("_"),
+                    QLibraryInfo::location(QLibraryInfo::TranslationsPath)))
         QApplication::installTranslator(&qtTran);
 
     QTranslator qtBaseTran;
@@ -54,13 +56,16 @@ int main(int argc, char *argv[])
         QApplication::installTranslator(&qtBaseTran);
 
     QTranslator appTran;
-    if (appTran.load(QApplication::applicationName() + "_" + QLocale().name(), "/usr/share/" + QApplication::applicationName() + "/locale"))
+    if (appTran.load(QApplication::applicationName() + "_" + QLocale().name(),
+                     "/usr/share/" + QApplication::applicationName() + "/locale"))
         QApplication::installTranslator(&appTran);
 
     // root guard
     if (QProcess::execute(QStringLiteral("/bin/bash"), {"-c", "logname |grep -q ^root$"}) == 0) {
-        QMessageBox::critical(nullptr, QObject::tr("Error"),
-                              QObject::tr("You seem to be logged in as root, please log out and log in as normal user to use this program."));
+        QMessageBox::critical(
+            nullptr, QObject::tr("Error"),
+            QObject::tr(
+                "You seem to be logged in as root, please log out and log in as normal user to use this program."));
         exit(EXIT_FAILURE);
     }
 
@@ -70,8 +75,8 @@ int main(int argc, char *argv[])
         if (lock_file.isLocked()) {
             QApplication::beep();
             QMessageBox::critical(nullptr, QObject::tr("Unable to get exclusive lock"),
-                                  QObject::tr("Another package management application (like Synaptic or apt-get), "\
-                                                   "is already running. Please close that application first"));
+                                  QObject::tr("Another package management application (like Synaptic or apt-get), "
+                                              "is already running. Please close that application first"));
             return EXIT_FAILURE;
         } else {
             lock_file.lock();
@@ -80,6 +85,6 @@ int main(int argc, char *argv[])
         w.show();
         return QApplication::exec();
     } else {
-        QProcess::startDetached(QStringLiteral("/usr/bin/mx-cleanup-launcher"), {});
+        QProcess::startDetached(QStringLiteral("/usr/bin/mx-codecs-launcher"), {});
     }
 }

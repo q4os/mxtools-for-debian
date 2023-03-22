@@ -1,8 +1,51 @@
-mx-system (22.09.01mx21+deb11u13) stable; urgency=medium
+mx-system (23.03.01mx21+deb11u13) stable; urgency=medium
 
   * MX Tools release
 
- -- Dolphin Oracle <administrator@localdomain>  Wed, 22 Mar 2023 10:43:56 +0100
+ -- Dolphin Oracle <administrator@localdomain>  Wed, 22 Mar 2023 13:32:39 +0100
+
+mx-system (23.03.01mx21) mx; urgency=medium
+
+  * add remote changelog checking for mx repo
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 03 Mar 2023 17:53:39 -0500
+
+mx-system (23.01.05mx21) mx; urgency=medium
+
+  * remove bogus /usr/share/applications/display-im6.desktop
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Tue, 24 Jan 2023 17:50:33 -0500
+
+mx-system (23.01.04mx21) mx; urgency=medium
+
+  * fix NoDisplay values that were incorrectly formated 
+  * remove old keys
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 23 Jan 2023 20:08:37 -0500
+
+mx-system (23.01.03mx21) mx; urgency=medium
+
+  * misc adjustments to string changes in intrd-release 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 11 Jan 2023 22:02:35 -0500
+
+mx-system (23.01.02mx21) mx; urgency=medium
+
+  * divert certain desktop files 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 11 Jan 2023 19:37:56 -0500
+
+mx-system (23.01.01mx21) mx; urgency=medium
+
+  * add adjusting strings for initrd-release 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 04 Jan 2023 22:16:40 -0500
+
+mx-system (22.12.01mx21) mx; urgency=medium
+
+  * update strings for 21.3 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 17 Dec 2022 12:52:49 -0500
 
 mx-system (22.09.01mx21) mx; urgency=medium
 

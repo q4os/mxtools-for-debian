@@ -18,13 +18,18 @@ class Execute
 {
 public:
     Execute(TCommand *cd, const QString &dt, int fl = 0, int sl = 0)
-        : tCommands(cd), exeTime(dt), flag(fl), sel(sl) {}
+        : tCommands(cd)
+        , exeTime(dt)
+        , flag(fl)
+        , sel(sl)
+    {
+    }
 
-    ~Execute() {}
+    ~Execute() { }
 
     TCommand *tCommands;
     QString exeTime;
-    int flag;		// 0:Normal, -1:Time format error,
-    int sel;		// 1:Selecting(Cron) 2:Selecting(Command)
+    int flag; // 0:Normal, -1:Time format error,
+    int sel;  // 1:Selecting(Cron) 2:Selecting(Command)
 };
 #endif

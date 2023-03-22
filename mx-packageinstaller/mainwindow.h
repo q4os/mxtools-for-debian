@@ -26,6 +26,7 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include <QCommandLineParser>
 #include <QDomDocument>
 #include <QFile>
 #include <QMessageBox>
@@ -51,7 +52,7 @@ class MainWindow;
 
 namespace Tab
 {
-enum { Popular, Stable, Test, Backports, Flatpak, Output };
+enum { Popular, EnabledRepos, Test, Backports, Flatpak, Output };
 }
 namespace PopCol
 {
@@ -59,11 +60,11 @@ enum { Icon, Check, Name, Info, Description, InstallNames, UninstallNames, Scree
 }
 namespace TreeCol
 {
-enum { Check, UpdateIcon, Name, Version, Description, Status, Displayed };
+enum { Check, Name, Version, Description, Status, Displayed };
 }
 namespace FlatCol
 {
-enum { Check, ShortName, LongName, Version, Size, Status, Displayed, Duplicate, FullName };
+enum { Check, Name, LongName, Version, Size, Status, Duplicate, FullName };
 }
 namespace Popular
 {
@@ -91,7 +92,7 @@ class MainWindow : public QDialog
     Q_OBJECT
 
 public:
-    explicit MainWindow(QWidget *parent = nullptr);
+    MainWindow(const QCommandLineParser &arg_parser, QWidget *parent = nullptr);
     ~MainWindow();
 
     QString version;
@@ -184,7 +185,7 @@ private slots:
     void on_pushEnter_clicked();
     void on_pushForceUpdateBP_clicked();
     void on_pushForceUpdateMX_clicked();
-    void on_pushForceUpdateStable_clicked();
+    void on_pushForceUpdateEnabled_clicked();
     void on_pushHelp_clicked();
     void on_pushInstall_clicked();
     void on_pushRemotes_clicked();
@@ -202,14 +203,14 @@ private slots:
     void on_treePopularApps_itemChanged(QTreeWidgetItem *item);
     void on_treePopularApps_itemCollapsed(QTreeWidgetItem *item);
     void on_treePopularApps_itemExpanded(QTreeWidgetItem *item);
-    void on_treeStable_itemChanged(QTreeWidgetItem *item);
+    void on_treeEnabled_itemChanged(QTreeWidgetItem *item);
 
 private:
     Ui::MainWindow *ui;
 
     QString indexFilterFP;
     bool dirtyBackports = true;
-    bool dirtyStable = true;
+    bool dirtyEnabledRepos = true;
     bool dirtyTest = true;
     bool test_initially_enabled {};
     bool updated_once {};
@@ -225,7 +226,7 @@ private:
     QLocale locale;
     QMap<QString, QStringList> backports_list;
     QMap<QString, QStringList> mx_list;
-    QMap<QString, QStringList> stable_list;
+    QMap<QString, QStringList> enabled_list;
     QMetaObject::Connection conn;
     QProgressBar *bar {};
     QProgressDialog *progress {};
@@ -233,7 +234,6 @@ private:
     QSettings dictionary;
     QSettings settings;
     QString arch;
-    QString stable_raw;
     QString user;
     QString ver_name;
     QStringList change_list;
@@ -247,6 +247,7 @@ private:
     QTimer timer;
     QTreeWidget *tree {}; // current/calling tree
     VersionNumber fp_ver;
+    const QCommandLineParser &args;
 
     QNetworkAccessManager manager;
     QNetworkReply *reply;

@@ -1,7 +1,7 @@
 [main]
 host = https://www.transifex.com
 
-[antix-development.mx-boot-options]
+[o:anticapitalista:p:antix-development:r:mx-boot-options]
 file_filter = ./mx-boot-options_<lang>.ts
 source_file = mx-boot-options_en.ts
 source_lang = en

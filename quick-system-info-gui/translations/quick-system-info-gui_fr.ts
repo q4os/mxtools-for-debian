@@ -7,141 +7,152 @@
         <translation>MX Centre d&apos;accueil - MX Welcome</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="94"/>
+        <location filename="../mainwindow.ui" line="130"/>
         <source>Copy the system information to the clipboard, encased in [CODE][/CODE] tags ready to use in a forum post.</source>
         <translation>Copier les informations du système dans le presse-papiers, prêtes à être utilisées dans un message du forum entre les balises [CODE][/CODE].</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="97"/>
+        <location filename="../mainwindow.ui" line="133"/>
         <source>&amp;Copy for forum</source>
         <translation>&amp;Copier pour le forum</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="104"/>
+        <location filename="../mainwindow.ui" line="140"/>
         <source>C</source>
         <translation>C</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="114"/>
+        <location filename="../mainwindow.ui" line="116"/>
         <source>Save the system information to a text file.</source>
         <translation>Sauvegarder les informations du système dans un fichier texte.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="117"/>
+        <location filename="../mainwindow.ui" line="119"/>
         <source>&amp;Save</source>
         <translation>Enre&amp;gistrer</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="248"/>
+        <location filename="../mainwindow.ui" line="221"/>
         <source>Quit application</source>
         <translation>Quitter l&apos;application</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="251"/>
+        <location filename="../mainwindow.ui" line="224"/>
         <source>Close</source>
         <translation>Fermer</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="258"/>
+        <location filename="../mainwindow.ui" line="231"/>
         <source>Alt+N</source>
         <translation>Alt+N</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="280"/>
+        <location filename="../mainwindow.ui" line="285"/>
         <source>About this application</source>
         <translation>À propos de cette application</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="283"/>
+        <location filename="../mainwindow.ui" line="288"/>
         <source>About...</source>
         <translation>À propos ...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="290"/>
+        <location filename="../mainwindow.ui" line="295"/>
         <source>Alt+B</source>
         <translation>Alt+B</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="309"/>
+        <location filename="../mainwindow.ui" line="201"/>
         <source>Help</source>
         <translation>Aide</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="99"/>
+        <location filename="../mainwindow.cpp" line="111"/>
         <source>Version: </source>
         <translation>Version : </translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="47"/>
-        <location filename="../mainwindow.cpp" line="99"/>
-        <location filename="../mainwindow.cpp" line="108"/>
+        <location filename="../mainwindow.cpp" line="49"/>
+        <location filename="../mainwindow.cpp" line="110"/>
         <source>Quick System Info</source>
         <translation>Informations rapides sur le système - Quick System Info</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="51"/>
+        <location filename="../mainwindow.cpp" line="54"/>
         <source>Loading...</source>
         <translation>Chargement ...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="99"/>
+        <location filename="../mainwindow.cpp" line="114"/>
         <source>Copyright (c) MX Linux</source>
         <translation>Copyright (c) MX Linux</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="99"/>
+        <location filename="../mainwindow.cpp" line="109"/>
         <source>About Quick-System-Info-gui</source>
         <translation>À propos de Quick-System-Info-gui</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="99"/>
+        <location filename="../mainwindow.cpp" line="112"/>
         <source>Program for displaying a quick system info report</source>
         <translation>Programme affichant le rapport d&apos;informations système</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="100"/>
+        <location filename="../mainwindow.cpp" line="115"/>
         <source>License</source>
         <translation>Licence</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="101"/>
         <source>Changelog</source>
-        <translation>Journal des modifications</translation>
+        <translation type="vanished">Journal des modifications</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="102"/>
         <source>Cancel</source>
-        <translation>Annuler</translation>
+        <translation type="vanished">Annuler</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="118"/>
         <source>&amp;Close</source>
-        <translation>&amp;Fermer</translation>
+        <translation type="vanished">&amp;Fermer</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="133"/>
+        <location filename="../mainwindow.cpp" line="121"/>
         <source>Save System Information</source>
         <translation>Sauvegarder les informations système</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="146"/>
+        <location filename="../mainwindow.cpp" line="134"/>
         <source>System information saved.</source>
         <translation>Informations système sauvegardées</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="147"/>
+        <location filename="../mainwindow.cpp" line="135"/>
         <source>Could not save system information.</source>
         <translation>La sauvegarde d&apos;informations système n&apos;a pas pu aboutir</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="173"/>
+        <location filename="../mainwindow.cpp" line="160"/>
         <source>%1 Help</source>
         <translation>%1 Aide</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="173"/>
+        <location filename="../mainwindow.cpp" line="160"/>
         <source>Quick System Info (gui)</source>
         <translation>Informations système (interface graphique) - Quick System Info gui</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="189"/>
+        <source>Copy for forum</source>
+        <translation>Copier pour le forum</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="191"/>
+        <source>Plain text copy</source>
+        <translation>Copier en texte brut</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="193"/>
+        <source>Save</source>
+        <translation>Sauvegarder</translation>
     </message>
 </context>
 <context>

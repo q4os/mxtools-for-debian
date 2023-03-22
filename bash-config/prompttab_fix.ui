@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string notr="true">Form</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
@@ -45,17 +45,17 @@
          </property>
          <item>
           <property name="text">
-           <string>Default</string>
+           <string notr="true">Default</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>Fancy Prompt</string>
+           <string notr="true">Fancy Prompt</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>Custom</string>
+           <string notr="true">Custom</string>
           </property>
          </item>
         </widget>
@@ -77,8 +77,8 @@
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>388</width>
-                <height>568</height>
+                <width>389</width>
+                <height>535</height>
                </rect>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_6">
@@ -86,62 +86,62 @@
                 <widget class="QComboBox" name="comboBox_SelectFancyPrompt">
                  <item>
                   <property name="text">
-                   <string>Tiny</string>
+                   <string notr="true">Tiny</string>
                   </property>
                  </item>
                  <item>
                   <property name="text">
-                   <string>Std</string>
+                   <string notr="true">Std</string>
                   </property>
                  </item>
                  <item>
                   <property name="text">
-                   <string>Color</string>
+                   <string notr="true">Color</string>
                   </property>
                  </item>
                  <item>
                   <property name="text">
-                   <string>Gentoo</string>
+                   <string notr="true">Gentoo</string>
                   </property>
                  </item>
                  <item>
                   <property name="text">
-                   <string>Dir</string>
+                   <string notr="true">Dir</string>
                   </property>
                  </item>
                  <item>
                   <property name="text">
-                   <string>Med</string>
+                   <string notr="true">Med</string>
                   </property>
                  </item>
                  <item>
                   <property name="text">
-                   <string>Narrow</string>
+                   <string notr="true">Narrow</string>
                   </property>
                  </item>
                  <item>
                   <property name="text">
-                   <string>Wide</string>
+                   <string notr="true">Wide</string>
                   </property>
                  </item>
                  <item>
                   <property name="text">
-                   <string>Fancy</string>
+                   <string notr="true">Fancy</string>
                   </property>
                  </item>
                  <item>
                   <property name="text">
-                   <string>Zee</string>
+                   <string notr="true">Zee</string>
                   </property>
                  </item>
                  <item>
                   <property name="text">
-                   <string>Date</string>
+                   <string notr="true">Date</string>
                   </property>
                  </item>
                  <item>
                   <property name="text">
-                   <string>Curl</string>
+                   <string notr="true">Curl</string>
                   </property>
                  </item>
                 </widget>

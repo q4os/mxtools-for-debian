@@ -129,7 +129,9 @@ class FstabHandler(MntFile) :
             else :
                 if device not in self.fstab.list() :
                     entry = self.add([device])
-                    logging.debug("-> Adding %s on %s" % (device, entry["FSTAB_PATH"]))
+                    logging.debug("-> Adding %s on %s [type: %s]" % (device, entry["FSTAB_PATH"], entry["FSTAB_TYPE"]))
+                    if entry["FSTAB_TYPE"] in "ntfs":
+                       entry["FSTAB_TYPE"] = "ntfs-3g"
         logging.debug("FstabHandler build in %s s", time.time() -t)
 
     def _rebuild_object(self, fstab) :
@@ -143,8 +145,8 @@ class FstabHandler(MntFile) :
                 if not entry in self.fstab or not entry["DEVICE"] in new.list() \
                     or (entry["FSTAB_PATH"] not in new.list("FSTAB_PATH") and \
                             entry.get_is_mounted()) :
-                    logging.debug("-> Adding %s on %s" % (entry["DEVICE"], \
-                            entry["FSTAB_PATH"]))
+                    logging.debug("-> Adding %s on %s  (type: %s)" % (entry["DEVICE"], \
+                            entry["FSTAB_PATH"], entry["FSTAB_TYPE"] ))
                     new.append(entry)
         self[:] = new
         self.fstab = fstab

@@ -36,12 +36,6 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
-    // helpers
-    static bool replaceStringInFile(const QString &oldtext, const QString &newtext, const QString &filepath);
-    // common
-    void refresh();
-    // special
-    static void restartPanel(const QString &user);
     void applyAdd();
     void applyChangePass();
     void applyDelete();
@@ -52,6 +46,7 @@ public:
     void applyRename();
     void buildListGroups();
     void buildListGroupsToRemove();
+    void refresh();
     void refreshAdd();
     void refreshChangePass();
     void refreshCopy();

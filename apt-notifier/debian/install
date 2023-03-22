@@ -1,5 +1,6 @@
 conf/01_apt-notifier.conf                                         usr/share/apt-notifier/conf/apt-notifier.conf.d
 conf/02periodic                                                   usr/share/apt-notifier
+conf/03apt-notifier-update-stamp                                  usr/share/apt-notifier
 conf/51unattended-upgrades-config                                 usr/share/apt-notifier
 conf/51unattended-upgrades-disable                                usr/share/apt-notifier
 conf/51unattended-upgrades-enable                                 usr/share/apt-notifier

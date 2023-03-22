@@ -66,11 +66,13 @@ TRANSLATIONS += translations/bash-config_am.ts \
                 translations/bash-config_de.ts \
                 translations/bash-config_el.ts \
                 translations/bash-config_es.ts \
+                translations/bash-config_en.ts \
                 translations/bash-config_et.ts \
                 translations/bash-config_eu.ts \
                 translations/bash-config_fa.ts \
                 translations/bash-config_fi.ts \
                 translations/bash-config_fr.ts \
+                translations/bash-config_fr_BE.ts \
                 translations/bash-config_he_IL.ts \
                 translations/bash-config_hi.ts \
                 translations/bash-config_hr.ts \

@@ -6,6 +6,7 @@
 # Translators:
 # James Bowlin <BitJam@gmail.com>, 2022
 # anticapitalista <anticapitalista@riseup.net>, 2022
+# Seok Chae <seok.chae@gmail.com>, 2023
 # 
 #, fuzzy
 msgid ""
@@ -14,7 +15,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-01-28 02:38+0100\n"
 "PO-Revision-Date: 2017-05-11 01:14+0000\n"
-"Last-Translator: anticapitalista <anticapitalista@riseup.net>, 2022\n"
+"Last-Translator: Seok Chae <seok.chae@gmail.com>, 2023\n"
 "Language-Team: Korean (https://www.transifex.com/anticapitalista/teams/10162/ko/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -74,7 +75,7 @@ msgid "History"
 msgstr ""
 
 msgid "Icons"
-msgstr ""
+msgstr "아이콘"
 
 msgid "Left-click behaviour   (when updates are available)"
 msgstr ""

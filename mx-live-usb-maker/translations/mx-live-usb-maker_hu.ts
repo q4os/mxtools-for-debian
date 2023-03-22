@@ -1,10 +1,12 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="hu">
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.1" language="hu">
 <context>
     <name>MainWindow</name>
     <message>
         <location filename="../mainwindow.ui" line="14"/>
         <source>Program_Name</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="46"/>
@@ -14,7 +16,7 @@
     <message>
         <location filename="../mainwindow.ui" line="49"/>
         <source>Close</source>
-        <translation>Bezár</translation>
+        <translation>Bezárás</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="56"/>
@@ -54,7 +56,7 @@
     <message>
         <location filename="../mainwindow.ui" line="201"/>
         <source>About...</source>
-        <translation>Névjegy</translation>
+        <translation>Névjegy...</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="208"/>
@@ -64,104 +66,104 @@
     <message>
         <location filename="../mainwindow.ui" line="224"/>
         <source>View Log</source>
-        <translation type="unfinished"/>
+        <translation>Napló megtekintése</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="259"/>
-        <location filename="../mainwindow.cpp" line="490"/>
-        <location filename="../mainwindow.cpp" line="511"/>
+        <location filename="../mainwindow.cpp" line="500"/>
+        <location filename="../mainwindow.cpp" line="521"/>
         <source>Select ISO</source>
-        <translation>Válaszzon ISO képfájlt</translation>
+        <translation>Válasszon ISO képfájlt</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="270"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Select Target USB Device&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"/>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;USB eszköz kiválasztása&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="280"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Select ISO file&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"/>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;ISO fájl kiválasztása&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="309"/>
         <source>Advanced Options</source>
-        <translation type="unfinished"/>
+        <translation>Haladó lehetőségek</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="327"/>
         <source>Make the ext4 filesystem even if one exists</source>
-        <translation type="unfinished"/>
+        <translation>Akkor is hozzon létre ext4 fájlrendszert, ha már létezik</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="334"/>
         <source>Save the original boot directory when updating a live-usb</source>
-        <translation type="unfinished"/>
+        <translation>Mentse az eredeti /boot könyvtárat, egy Live-USB frissítésekor</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="341"/>
         <source>Use gpt partitioning instead of msdos</source>
-        <translation type="unfinished"/>
+        <translation>GPT particionálást használjon, msdos helyett</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="344"/>
         <source>GPT partitioning</source>
-        <translation type="unfinished"/>
+        <translation>GPT particionálás</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="351"/>
         <source>Update (only update an existing live-usb)</source>
-        <translation type="unfinished"/>
+        <translation>Frissítés (csak frissítsen egy meglévő Live-USB-t)</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="358"/>
         <source>Don&apos;t replace syslinux files</source>
-        <translation type="unfinished"/>
+        <translation>Ne cserélje le a syslinux fájlokat</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="361"/>
         <source>Keep syslinux files</source>
-        <translation type="unfinished"/>
+        <translation>Syslinux fájlok megtartása</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="368"/>
         <source>Ignore USB/removable check</source>
-        <translation type="unfinished"/>
+        <translation>Hagyja figyelmen kívül az USB/eltávolítható ellenőrzést</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="375"/>
         <source>Temporarily disable automounting</source>
-        <translation type="unfinished"/>
+        <translation>Átmenetileg kapcsolja ki az automatikus leválasztást</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="385"/>
         <source>Set pmbr_boot disk flag (won&apos;t boot via UEFI)</source>
-        <translation type="unfinished"/>
+        <translation>Kapcsolja be a pmbr_boot lemez jelzőt (UEFI-vel nem fog elindulni)</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="392"/>
         <source>Don&apos;t use fuseiso to mount iso files</source>
-        <translation type="unfinished"/>
+        <translation>Ne használja  fuseiso-t az ISO fájlok csatolásához</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="418"/>
         <source>Size of ESP (uefi) partition:</source>
-        <translation type="unfinished"/>
+        <translation>Az ESP (UEFI) partíció mérete:</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="438"/>
         <source>Verbosity (less to more):</source>
-        <translation type="unfinished"/>
+        <translation>Bőbeszédűség (kevesebb vagy több)</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="477"/>
         <source>vfat</source>
-        <translation type="unfinished"/>
+        <translation>vfat</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="482"/>
         <source>exfat</source>
-        <translation type="unfinished"/>
+        <translation>exfat</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="487"/>
@@ -171,53 +173,53 @@
     <message>
         <location filename="../mainwindow.ui" line="492"/>
         <source>ntfs</source>
-        <translation type="unfinished"/>
+        <translation>ntfs</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="516"/>
         <source>Make separate data partition (percent)</source>
-        <translation type="unfinished"/>
+        <translation>Készítsen külön adat partíciót (százalék)</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="523"/>
         <source>Format</source>
-        <translation type="unfinished"/>
+        <translation>Formázás</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="533"/>
         <source>Refresh drive list</source>
-        <translation type="unfinished"/>
+        <translation>Lista frissítése</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="547"/>
-        <location filename="../mainwindow.cpp" line="450"/>
+        <location filename="../mainwindow.cpp" line="460"/>
         <source>Show advanced options</source>
-        <translation type="unfinished"/>
+        <translation>Haladó lehetőségek megjelenítése</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="567"/>
         <source>Mode</source>
-        <translation type="unfinished"/>
+        <translation>Mód</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="582"/>
         <source>Full-featured mode - writable Li&amp;veUSB</source>
-        <translation type="unfinished"/>
+        <translation>Teljes felszereltségű mód - írható LiveUSB</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="592"/>
         <source>Read-only, cannot be used with persistency</source>
-        <translation type="unfinished"/>
+        <translation>Csak olvasható, nem használható adatmegőrzéssel</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="595"/>
         <source>Image &amp;mode - read-only LiveUSB (dd)</source>
-        <translation type="unfinished"/>
+        <translation>Képfájl mód - csak olvasható LiveUSB (dd)</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="609"/>
         <source>For distros other than antiX/MX use image mode (dd).</source>
-        <translation type="unfinished"/>
+        <translation>Az antiX/MX disztribúcióktól eltérő esetben használja a képfájl módot (dd).</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="657"/>
@@ -227,251 +229,254 @@
     <message>
         <location filename="../mainwindow.ui" line="695"/>
         <source>Percent of USB-device to use:</source>
-        <translation type="unfinished"/>
+        <translation>Az USB eszköz százalékának használata:</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="702"/>
         <source>Label ext partition:</source>
-        <translation type="unfinished"/>
+        <translation>Az ext partíció címkéje:</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="750"/>
         <source>Don&apos;t run commands that affect the usb device</source>
-        <translation type="unfinished"/>
+        <translation>Ne futtassa azokat a parancsokat, amelyek módosítják az USB eszközt</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="753"/>
         <source>Dry run (no change to system)</source>
-        <translation type="unfinished"/>
+        <translation>Csak próba (nem végez változtatást)</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="760"/>
         <source>clone from a mounted live-usb or iso-file.</source>
-        <translation type="unfinished"/>
+        <translation>Klónozás egy csatolt Live-USB eszközről vagy ISO fájlból.</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="763"/>
         <source>Clone an existing live system</source>
-        <translation type="unfinished"/>
+        <translation>Egy meglévő Live rendszer klónozása</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="770"/>
         <source>Set up to boot from an encrypted partition, will prompt for pass phrase on first boot</source>
-        <translation type="unfinished"/>
+        <translation>Titkosított partícióról való indítás beállítása. Az első indításkor fogja bekérni a jelmondatot.</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="773"/>
         <source>Encrypt</source>
-        <translation type="unfinished"/>
+        <translation>Titkosítás</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="780"/>
         <source>Clone running live system</source>
-        <translation type="unfinished"/>
+        <translation>A jelenleg futó Live rendszer klónozása</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="75"/>
+        <source>Confirmation</source>
+        <translation>Jóváhagyás</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="76"/>
-        <source>Confirmation</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="77"/>
         <source>Target device %1 is larger than %2 GB. Do you wish to proceed?</source>
-        <translation type="unfinished"/>
+        <translation>A cél eszköz %1 nagyobb, mint %2 GB. Kívánja folytatni?</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="109"/>
-        <location filename="../mainwindow.cpp" line="306"/>
-        <location filename="../mainwindow.cpp" line="436"/>
+        <location filename="../mainwindow.cpp" line="110"/>
+        <location filename="../mainwindow.cpp" line="309"/>
+        <location filename="../mainwindow.cpp" line="444"/>
         <source>Failure</source>
-        <translation type="unfinished"/>
+        <translation>Hiba</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="109"/>
+        <location filename="../mainwindow.cpp" line="111"/>
         <source>Source and destination are on the same device, please select again.</source>
-        <translation type="unfinished"/>
+        <translation>A forrás és a cél ugyanazon az eszközön van. Válassza ki újra.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="144"/>
-        <source>Writing %1 using 'dd' command to /dev/%2,
+        <location filename="../mainwindow.cpp" line="146"/>
+        <source>Writing %1 using &apos;dd&apos; command to /dev/%2,
 
 Please wait until the the process is completed</source>
-        <translation type="unfinished"/>
+        <translation>%1 kiírása &apos;dd&apos; használatával erre: /dev/%2,
+
+Kérjük várjon, amíg a folyamat befejeződik</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="301"/>
+        <location filename="../mainwindow.cpp" line="304"/>
         <source>Success</source>
-        <translation type="unfinished"/>
+        <translation>Sikeres</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="301"/>
+        <location filename="../mainwindow.cpp" line="304"/>
         <source>LiveUSB creation successful!</source>
-        <translation>ÉlőUSB készítése sikeres!</translation>
+        <translation>LiveUSB készítése sikeres!</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="306"/>
+        <location filename="../mainwindow.cpp" line="309"/>
         <source>Error encountered in the LiveUSB creation process</source>
-        <translation type="unfinished"/>
+        <translation>Hiba történt a LiveUSB létrehozása közben</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="364"/>
+        <location filename="../mainwindow.cpp" line="367"/>
         <source>Error</source>
         <translation>Hiba</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="364"/>
+        <location filename="../mainwindow.cpp" line="367"/>
         <source>Please select a USB device to write to</source>
-        <translation type="unfinished"/>
+        <translation>Válasszon egy USB eszközt amelyre írni szeretne</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="367"/>
+        <location filename="../mainwindow.cpp" line="370"/>
         <source>These actions will destroy all data on 
 
 </source>
-        <translation type="unfinished"/>
+        <translation>Ez minden adatot töröl a következőről
+
+</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="367"/>
+        <location filename="../mainwindow.cpp" line="371"/>
         <source>Do you wish to continue?</source>
-        <translation type="unfinished"/>
+        <translation>Szeretné folytatni?</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="372"/>
-        <location filename="../mainwindow.cpp" line="504"/>
-        <source>clone</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="399"/>
+        <location filename="../mainwindow.cpp" line="404"/>
         <source>About %1</source>
-        <translation type="unfinished"/>
+        <translation>%1 névjegye</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="400"/>
+        <location filename="../mainwindow.cpp" line="405"/>
         <source>Version: </source>
         <translation>Verzió:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="401"/>
+        <location filename="../mainwindow.cpp" line="407"/>
         <source>Program for creating a live-usb from an iso-file, another live-usb, a live-cd/dvd, or a running live system.</source>
-        <translation type="unfinished"/>
+        <translation>LiveUSB létrehozására szolgáló program, egy ISO fájlból, másik LiveUSB-ről, Live CD/DVD-ről, vagy a futó Live rendszerről.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="403"/>
+        <location filename="../mainwindow.cpp" line="410"/>
         <source>Copyright (c) MX Linux</source>
         <translation>Copyright (c) MX Linux</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="404"/>
-        <source>%1 License</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
         <location filename="../mainwindow.cpp" line="411"/>
+        <source>%1 License</source>
+        <translation>%1 licenc</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="418"/>
         <source>%1 Help</source>
-        <translation type="unfinished"/>
+        <translation>%1 Súgó</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="419"/>
+        <location filename="../mainwindow.cpp" line="426"/>
         <source>Select an ISO file to write to the USB drive</source>
-        <translation type="unfinished"/>
+        <translation>Válassza ki az ISO fájlt amelyet az USB eszközre kiír</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="420"/>
+        <location filename="../mainwindow.cpp" line="427"/>
         <source>ISO Files (*.iso);;All Files (*.*)</source>
-        <translation type="unfinished"/>
+        <translation>ISO fájlok (*.iso);Minden fájl (*.*)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="430"/>
-        <location filename="../mainwindow.cpp" line="486"/>
+        <location filename="../mainwindow.cpp" line="437"/>
+        <location filename="../mainwindow.cpp" line="496"/>
         <source>Select Source Directory</source>
-        <translation type="unfinished"/>
+        <translation>Válassza ki a forrás könyvtárat</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="436"/>
+        <location filename="../mainwindow.cpp" line="445"/>
         <source>Could not find %1/antiX/linuxfs file</source>
-        <translation type="unfinished"/>
+        <translation>Nem található %1/antiX/linuxfs fájl</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="456"/>
+        <location filename="../mainwindow.cpp" line="466"/>
         <source>Hide advanced options</source>
-        <translation type="unfinished"/>
+        <translation>Haladó lehetőségek elrejtése</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="485"/>
-        <location filename="../mainwindow.cpp" line="502"/>
+        <location filename="../mainwindow.cpp" line="495"/>
+        <location filename="../mainwindow.cpp" line="512"/>
         <source>Select Source</source>
-        <translation type="unfinished"/>
+        <translation>Forrás kiválasztása</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="489"/>
-        <location filename="../mainwindow.cpp" line="509"/>
+        <location filename="../mainwindow.cpp" line="499"/>
+        <location filename="../mainwindow.cpp" line="519"/>
         <source>Select ISO file</source>
-        <translation type="unfinished"/>
+        <translation>ISO fájl kiválasztása</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="514"/>
+        <source>clone</source>
+        <translation>klónozás</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="576"/>
         <source>Could not find a log file at: </source>
-        <translation type="unfinished"/>
+        <translation>Nem található a napló fájl:</translation>
     </message>
 </context>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../about.cpp" line="41"/>
+        <location filename="../about.cpp" line="52"/>
         <source>License</source>
-        <translation>Liszensz</translation>
+        <translation>Licenc</translation>
     </message>
     <message>
-        <location filename="../about.cpp" line="42"/>
-        <location filename="../about.cpp" line="51"/>
+        <location filename="../about.cpp" line="53"/>
+        <location filename="../about.cpp" line="62"/>
         <source>Changelog</source>
-        <translation>Változásbejegyzés</translation>
+        <translation>Változások listája</translation>
     </message>
     <message>
-        <location filename="../about.cpp" line="43"/>
+        <location filename="../about.cpp" line="54"/>
         <source>Cancel</source>
         <translation>Mégsem</translation>
     </message>
     <message>
-        <location filename="../about.cpp" line="63"/>
+        <location filename="../about.cpp" line="74"/>
         <source>&amp;Close</source>
-        <translation>&amp;Bezár</translation>
+        <translation>&amp;Bezárás</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="55"/>
+        <location filename="../main.cpp" line="57"/>
         <source>Program for creating a live-usb from an iso-file, another live-usb, a live-cd/dvd, or a running live system.</source>
-        <translation type="unfinished"/>
+        <translation>LiveUSB létrehozására szolgáló program, egy ISO fájlból, másik LiveUSB-ről, Live CD/DVD-ről, vagy a futó Live rendszerről.</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="58"/>
+        <location filename="../main.cpp" line="61"/>
         <source>filename</source>
-        <translation type="unfinished"/>
+        <translation>fájlnév</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="58"/>
+        <location filename="../main.cpp" line="61"/>
         <source>Name of .iso file to open</source>
-        <translation type="unfinished"/>
+        <translation>A megnyitni kívánt .iso fájl neve</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="58"/>
+        <location filename="../main.cpp" line="62"/>
         <source>[filename]</source>
-        <translation type="unfinished"/>
+        <translation>[fájlnév]</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="77"/>
+        <location filename="../main.cpp" line="84"/>
         <source>Error</source>
         <translation>Hiba</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="78"/>
+        <location filename="../main.cpp" line="85"/>
         <source>You seem to be logged in as root, please log out and log in as normal user to use this program.</source>
-        <translation type="unfinished"/>
+        <translation>Úgy tűnik, hogy root felhasználóként van bejelentkezve. Jelentkezzen ki és jelentkezzen be egyszerű felhasználóként a program használatához.</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="91"/>
+        <location filename="../main.cpp" line="99"/>
         <source>version:</source>
-        <translation type="unfinished"/>
+        <translation>verzió:</translation>
     </message>
 </context>
 </TS>

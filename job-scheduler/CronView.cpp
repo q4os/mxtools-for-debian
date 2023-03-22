@@ -7,11 +7,12 @@
    as published by the Free Software Foundation; either version 2
    of the License, or (at your option) any later version.
 */
+#include "CronView.h"
+
 #include <QScrollBar>
 #include <QtGui>
 
 #include "CronModel.h"
-#include "CronView.h"
 #include "Crontab.h"
 
 void dumpIndex(const QModelIndex &idx, const QString &h)
@@ -23,7 +24,6 @@ void dumpIndex(const QModelIndex &idx, const QString &h)
     } else {
         qDebug() << h << ": invalid";
     }
-
 }
 
 CronView::CronView(CronModel *model)
@@ -35,7 +35,6 @@ CronView::CronView(CronModel *model)
     setSelectionBehavior(QAbstractItemView::SelectRows);
     setSelectionMode(QAbstractItemView::SingleSelection);
     setAcceptDrops(true);
-
 
     //	setDropIndicatorShown(true);
 
@@ -63,7 +62,6 @@ void CronView::resetView()
         setCurrentIndex(idx);
     else
         emit viewSelected(getCurrentCrontab(), nullptr);
-
 }
 
 void CronView::selectChanged(const QModelIndex &cur, const QModelIndex & /*unused*/)
@@ -82,7 +80,6 @@ void CronView::removeTCommand()
 {
     QModelIndex index = currentIndex();
 
-
     QModelIndex next = cronModel->removeCComand(index);
     if (next.isValid())
         setCurrentIndex(next);
@@ -93,7 +90,6 @@ void CronView::removeTCommand()
         resizeColumnToContents(i);
 
     emit dataChanged();
-
 }
 
 void CronView::insertTCommand(TCommand *cmnd)
@@ -128,12 +124,12 @@ void CronView::newTCommand()
 {
     auto *cron = getCurrentCrontab();
     QString u;
-    if ( cron->cronOwner == QLatin1String("/etc/crontab") )
+    if (cron->cronOwner == QLatin1String("/etc/crontab"))
         u = QStringLiteral("root");
     else
         u = cron->cronOwner;
 
-    auto *cmnd =  new TCommand(QStringLiteral("0 * * * *"), u, QLatin1String(""), QLatin1String(""), cron );
+    auto *cmnd = new TCommand(QStringLiteral("0 * * * *"), u, QLatin1String(""), QLatin1String(""), cron);
     insertTCommand(cmnd);
 }
 
@@ -163,15 +159,9 @@ void CronView::TCommandMoved(TCommand *cmnd)
     emit dataChanged();
 }
 
-Crontab *CronView::getCurrentCrontab()
-{
-    return cronModel->getCrontab(currentIndex());
-}
+Crontab *CronView::getCurrentCrontab() { return cronModel->getCrontab(currentIndex()); }
 
-TCommand *CronView::getCurrentTCommand()
-{
-    return cronModel->getTCommand(currentIndex());
-}
+TCommand *CronView::getCurrentTCommand() { return cronModel->getTCommand(currentIndex()); }
 
 void CronView::scrollTo(const QModelIndex &idx, ScrollHint /*hint*/)
 {
@@ -181,12 +171,10 @@ void CronView::scrollTo(const QModelIndex &idx, ScrollHint /*hint*/)
     QRect area = viewport()->rect();
     double step = static_cast<double>(verticalStepsPerItem()) / rect.height();
     if (rect.top() < 0)
-        verticalScrollBar()->setValue(
-                    verticalScrollBar()->value() + static_cast<int>(rect.top() * step) );
+        verticalScrollBar()->setValue(verticalScrollBar()->value() + static_cast<int>(rect.top() * step));
     else if (rect.bottom() > area.bottom())
-        verticalScrollBar()->setValue(
-                    verticalScrollBar()->value() +
-                    static_cast<int>((rect.bottom() - area.bottom()) * step) + 5);
+        verticalScrollBar()->setValue(verticalScrollBar()->value()
+                                      + static_cast<int>((rect.bottom() - area.bottom()) * step) + 5);
 }
 
 void CronView::startDrag(Qt::DropActions supportedActions)
@@ -195,4 +183,3 @@ void CronView::startDrag(Qt::DropActions supportedActions)
 
     QTreeView::startDrag(supportedActions);
 }
-

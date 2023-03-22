@@ -1,0 +1,14 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+# The desktop entry name will be displayed within the menu.
+Name=Quick System Info
+# # The desktop entry comment will be shown within the menu.
+Comment=inxi -Fxxxrza
+Exec=quick-system-info-gui
+Icon=mx-qsi
+Path=
+Terminal=false
+StartupNotify=false
+Type=Application
+Categories=System;MX-Utilities

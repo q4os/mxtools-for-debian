@@ -1,0 +1,13 @@
+[Desktop Entry]
+Encoding=UTF-8
+# The desktop entry name will be displayed within the menu.
+Name=MX Repo Manager
+# # The desktop entry comment will be shown within the menu.
+Comment=Choose the default APT repo
+Exec=mxrm-launcher
+Terminal=false
+Type=Application
+Icon=mx-repo-manager
+Categories=GNOME;GTK;System;MX-Software;
+NoDisplay=false
+

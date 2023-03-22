@@ -29,12 +29,12 @@
 #include <QTemporaryDir>
 #include <QTimer>
 
+#include <cmd.h>
 #include <dialog.h>
 #include <version.h>
-#include <cmd.h>
 
-
-namespace Ui {
+namespace Ui
+{
 class MainWindow;
 }
 
@@ -64,11 +64,12 @@ public:
     void addGrubArg(const QString &key, const QString &item);
     void addGrubLine(const QString &item);
     void addUefiEntry(QListWidget *listEntries, QDialog *dialogUefi);
-    void createChrootEnv(const QString& root);
+    void createChrootEnv(const QString &root);
     void disableGrubLine(const QString &item);
     void enableGrubLine(const QString &item);
     void loadPlymouthThemes();
-    void readBootEntries(QListWidget *list, QLabel *textTimeout, QLabel *textBootNext, QLabel *textBootCurrent, QStringList &bootorder);
+    void readBootEntries(QListWidget *list, QLabel *textTimeout, QLabel *textBootNext, QLabel *textBootCurrent,
+                         QStringList &bootorder);
     void readDefaultGrub();
     void readGrubCfg();
     void readKernelOpts();
@@ -76,7 +77,7 @@ public:
     void saveBootOrder(const QListWidget *list);
     void setGeneralConnections();
     void setup();
-    void unmountAndClean(const QStringList &mount_list);
+    static void unmountAndClean(const QStringList &mount_list);
     void writeDefaultGrub() const;
 
 private slots:
@@ -110,19 +111,19 @@ private slots:
 
 protected:
     void keyPressEvent(QKeyEvent *event);
-    QProgressBar *bar{};
+    QProgressBar *bar {};
 
 private:
     Ui::MainWindow *ui;
     Cmd cmd;
     QTimer timer;
 
-    bool grub_installed{};
-    bool just_installed{};
-    bool kernel_options_changed{};
-    bool messages_changed{};
-    bool options_changed{};
-    bool splash_changed{};
+    bool grub_installed {};
+    bool just_installed {};
+    bool kernel_options_changed {};
+    bool messages_changed {};
+    bool options_changed {};
+    bool splash_changed {};
 
     QString chroot;
     QString kernel_options;
@@ -132,6 +133,4 @@ private:
     QTemporaryDir tmpdir;
 };
 
-
 #endif
-

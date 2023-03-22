@@ -22,20 +22,16 @@
 
 #include <QApplication>
 #include <QCommandLineParser>
-#include <QDateTime>
 #include <QDebug>
-#include <QFile>
 #include <QFileInfo>
 #include <QIcon>
 #include <QLibraryInfo>
 #include <QLocale>
-#include <QProcess>
 #include <QTranslator>
 
 #include "mainwindow.h"
 #include <unistd.h>
 #include <version.h>
-
 
 static QFile logFile;
 extern const QString starting_home = qEnvironmentVariable("HOME");
@@ -48,20 +44,29 @@ int main(int argc, char *argv[])
         qunsetenv("SESSION_MANAGER");
     }
     QApplication app(argc, argv);
-    if (getuid() == 0) qputenv("HOME", "/root");
+    if (getuid() == 0)
+        qputenv("HOME", "/root");
     QApplication::setApplicationVersion(VERSION);
 
+    QProcess proc;
+    proc.start("logname", {}, QIODevice::ReadOnly);
+    proc.waitForFinished();
+    auto const logname = QString::fromLatin1(proc.readAllStandardOutput().trimmed());
+
     QCommandLineParser parser;
-    parser.setApplicationDescription(QObject::tr("Program for creating a live-usb from an iso-file, another live-usb, a live-cd/dvd, or a running live system."));
+    parser.setApplicationDescription(QObject::tr("Program for creating a live-usb from an iso-file, another live-usb, "
+                                                 "a live-cd/dvd, or a running live system."));
     parser.addHelpOption();
     parser.addVersionOption();
-    parser.addPositionalArgument(QObject::tr("filename"), QObject::tr("Name of .iso file to open"), QObject::tr("[filename]"));
+    parser.addPositionalArgument(QObject::tr("filename"), QObject::tr("Name of .iso file to open"),
+                                 QObject::tr("[filename]"));
     parser.process(app);
 
     QApplication::setWindowIcon(QIcon::fromTheme(QApplication::applicationName()));
 
     QTranslator qtTran;
-    if (qtTran.load(QLocale::system(), QStringLiteral("qt"), QStringLiteral("_"), QLibraryInfo::location(QLibraryInfo::TranslationsPath)))
+    if (qtTran.load(QLocale::system(), QStringLiteral("qt"), QStringLiteral("_"),
+                    QLibraryInfo::location(QLibraryInfo::TranslationsPath)))
         QApplication::installTranslator(&qtTran);
 
     QTranslator qtBaseTran;
@@ -69,34 +74,44 @@ int main(int argc, char *argv[])
         QApplication::installTranslator(&qtBaseTran);
 
     QTranslator appTran;
-    if (appTran.load(QApplication::applicationName() + "_" + QLocale::system().name(), "/usr/share/" + QApplication::applicationName() + "/locale"))
+    if (appTran.load(QApplication::applicationName() + "_" + QLocale::system().name(),
+                     "/usr/share/" + QApplication::applicationName() + "/locale"))
         QApplication::installTranslator(&appTran);
 
     // root guard
-    if (QProcess::execute(QStringLiteral("/bin/bash"), {"-c", "logname |grep -q ^root$"}) == 0) {
-        QMessageBox::critical(nullptr, QObject::tr("Error"),
-                              QObject::tr("You seem to be logged in as root, please log out and log in as normal user to use this program."));
+    if (logname == "root") {
+        QMessageBox::critical(
+            nullptr, QObject::tr("Error"),
+            QObject::tr(
+                "You seem to be logged in as root, please log out and log in as normal user to use this program."));
         exit(EXIT_FAILURE);
     }
 
     if (getuid() == 0) {
-        QString log_name = "/var/log/" + QApplication::applicationName() + ".log";
-        if (QFileInfo::exists(log_name)) {
-            QFile::remove(log_name + ".old");
-            QFile::rename(log_name, log_name + ".old");
+        auto const log_file_name = "/var/log/" + QApplication::applicationName() + ".log";
+        if (QFileInfo::exists(log_file_name)) {
+            QFile::remove(log_file_name + ".old");
+            QFile::rename(log_file_name, log_file_name + ".old");
         }
-        logFile.setFileName(log_name);
+        logFile.setFileName(log_file_name);
         logFile.open(QFile::Append | QFile::Text);
         qInstallMessageHandler(messageHandler);
-        qDebug().noquote() << QApplication::applicationName() << QObject::tr("version:") << QApplication::applicationVersion();
+        qDebug().noquote() << QApplication::applicationName() << QObject::tr("version:")
+                           << QApplication::applicationVersion();
         MainWindow w(QApplication::arguments());
         w.show();
-        return QApplication::exec();
+        auto const exit_code = QApplication::exec();
+        proc.start("grep", {"^" + logname + ":", "/etc/passwd"});
+        proc.waitForFinished();
+        auto const home = QString::fromLatin1(proc.readAllStandardOutput().trimmed()).section(":", 5, 5);
+        auto const file_name = home + "/.config/" + QApplication::applicationName() + "rc";
+        if (QFile::exists(file_name))
+            QProcess::execute("chown", {logname + ":", file_name});
+        return exit_code;
     } else {
         QProcess::startDetached(QStringLiteral("/usr/bin/mxlum-launcher"), {});
     }
 }
-
 
 // The implementation of the handler
 void messageHandler(QtMsgType type, const QMessageLogContext &context, const QString &msg)
@@ -106,13 +121,22 @@ void messageHandler(QtMsgType type, const QMessageLogContext &context, const QSt
 
     QTextStream out(&logFile);
     out << QDateTime::currentDateTime().toString(QStringLiteral("yyyy-MM-dd hh:mm:ss.zzz "));
-    switch (type)
-    {
-    case QtInfoMsg:     out << QStringLiteral("INF "); break;
-    case QtDebugMsg:    out << QStringLiteral("DBG "); break;
-    case QtWarningMsg:  out << QStringLiteral("WRN "); break;
-    case QtCriticalMsg: out << QStringLiteral("CRT "); break;
-    case QtFatalMsg:    out << QStringLiteral("FTL "); break;
+    switch (type) {
+    case QtInfoMsg:
+        out << QStringLiteral("INF ");
+        break;
+    case QtDebugMsg:
+        out << QStringLiteral("DBG ");
+        break;
+    case QtWarningMsg:
+        out << QStringLiteral("WRN ");
+        break;
+    case QtCriticalMsg:
+        out << QStringLiteral("CRT ");
+        break;
+    case QtFatalMsg:
+        out << QStringLiteral("FTL ");
+        break;
     }
     out << context.category << QStringLiteral(": ") << msg << QStringLiteral("\n");
 }

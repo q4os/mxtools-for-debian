@@ -77,12 +77,12 @@ notify_icon             = /usr/share/icons/hicolor/scalable/apt-notifier.svg
 # license file
 license_file            = /usr/share/doc/apt-notifier/license.html
 # about
-about_box_url           = http://mxlinux.org
+about_box_url           = https://mxlinux.org
 about_copyright         = Copyright (c) MX Linux
 
 # changelog
 changelog_file          = /usr/share/doc/apt-notifier/changelog.gz
-changelog_url           = http://mxrepo.com/mx/repo/pool/main/a/apt-notifier/current.{debian_codename}
+changelog_url           = https://mxrepo.com/mx/repo/pool/main/a/apt-notifier/current.{debian_codename}
 
 # apt-notifier help
 apt_notifier_help_url       = https://mxlinux.org/wiki/help-files/help-mx-apt-notifier
@@ -128,9 +128,9 @@ upgrade_auto_close_timeout   = 10
 # check for updates:
 # check_for_updates_interval in seconds: min. 15 max. 21600 (= 6h )
 check_for_updates_interval        = 15
-# forced check even if packages cache has not changed, disable 0, max 60
-# defaults to 20, which is 20 * 15s = 5min
-check_for_updates_force_counter   = 20
+# forced check even if packages cache has not changed, disable 0, max 720
+# defaults to 720, which is 720 * 15s = 3h
+check_for_updates_force_counter   = 720
 
 # desktop notifications by dbus not by qt-applet
 use_dbus_notifications             = true
@@ -223,7 +223,8 @@ domain                   = antiX
         if os.path.exists(user_config_file):
             try:
                 with open(user_config_file, 'r') as f:
-                    user_config += f.read()
+                    t = f.read()
+                    user_config += '\n'.join([ x.strip() for x in t.splitlines() ])
             except:
                 pass
 

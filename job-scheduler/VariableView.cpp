@@ -7,11 +7,12 @@
    as published by the Free Software Foundation; either version 2
    of the License, or (at your option) any later version.
 */
+#include "VariableView.h"
+
 #include <QScrollBar>
 #include <QtGui>
 
 #include "Crontab.h"
-#include "VariableView.h"
 #include "VariableModel.h"
 
 VariableView::VariableView(VariableModel *model)
@@ -54,7 +55,7 @@ void VariableView::varDataChanged()
 
 void VariableView::insertVariable()
 {
-    auto *v = new Variable(QStringLiteral("*"),QStringLiteral("*"),QLatin1String(""));
+    auto *v = new Variable(QStringLiteral("*"), QStringLiteral("*"), QLatin1String(""));
     QModelIndex index = currentIndex();
     int pos = 0;
     if (index.isValid())
@@ -81,13 +82,12 @@ void VariableView::scrollTo(const QModelIndex &idx, ScrollHint /*hint*/)
 {
     QRect area = viewport()->rect();
     QRect rect = visualRect(idx);
-    if (rect.height() == 0) return;
+    if (rect.height() == 0)
+        return;
     double step = static_cast<double>(verticalStepsPerItem()) / rect.height();
     if (rect.top() < 0)
-        verticalScrollBar()->setValue(
-                    verticalScrollBar()->value() + static_cast<int>(rect.top() * step));
+        verticalScrollBar()->setValue(verticalScrollBar()->value() + static_cast<int>(rect.top() * step));
     else if (rect.bottom() > area.bottom())
-        verticalScrollBar()->setValue(
-                    verticalScrollBar()->value() +
-                    static_cast<int>((rect.bottom() - area.bottom()) * step) + 5);
+        verticalScrollBar()->setValue(verticalScrollBar()->value()
+                                      + static_cast<int>((rect.bottom() - area.bottom()) * step) + 5);
 }

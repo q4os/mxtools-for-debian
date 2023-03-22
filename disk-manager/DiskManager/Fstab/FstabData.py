@@ -43,7 +43,7 @@ defaults = { "btrfs"        :   ("defaults" + gvfs, "0", "2"),
 
 # Known special driver
 special_driver = { "ntfs-3g"    : "Read-write driver",
-                   "ntfs"       : "Access driver",
+                   "ntfs"       : "Read-only driver",
                    "ntfs-fuse"  : "Read-write driver",
                    "__unknow__" : "Unknow driver" }
 

@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="ru">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="ru">
 <context>
     <name>MEConfig</name>
     <message>
@@ -360,15 +358,6 @@
         <translation>Добавить группу</translation>
     </message>
     <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="1252"/>
-        <source>Group name:</source>
-        <translation>Имя группы:</translation>
-    </message>
-    <message>
         <location filename="../mainwindow.ui" line="1201"/>
         <source>Enter name of new group</source>
         <translation>Имя новой группы</translation>
@@ -379,13 +368,29 @@
         <translation>groupname</translation>
     </message>
     <message>
+        <location filename="../mainwindow.ui" line="1217"/>
+        <source>Create a group with GID &gt; 1000</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="1220"/>
+        <source>Create a user-level group</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="1249"/>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Enter name of new group&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="1252"/>
+        <source>Group name:</source>
+        <translation>Имя группы:</translation>
+    </message>
+    <message>
         <location filename="../mainwindow.ui" line="1271"/>
         <source>Delete Group</source>
         <translation>Удалить группу</translation>
-    </message>
-    <message>
-        <source>Select group to delete</source>
-        <translation type="vanished">Выберите удаляемую группу</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1340"/>
@@ -393,18 +398,19 @@
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Выберите удаляемую группу&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <source>Group to delete:</source>
-        <translation type="vanished">Группа для удаления:</translation>
+        <location filename="../mainwindow.ui" line="1349"/>
+        <source>Select group to delete:</source>
+        <translation>Выберите удаляемую группу:</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="1356"/>
+        <source>*Please doublecheck your selections before applying, removing a wrong group can break your system.</source>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1371"/>
         <source>Group Membership</source>
         <translation>Членство в группах</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="1497"/>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Select user to change&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Выберите изменяемого пользователя&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1445"/>
@@ -417,49 +423,14 @@
         <translation>*Пожалуйста, перепроверьте свой выбор перед применением, назначая неправильное членство в группах может привести к поломке вашей системы. Если вы допустили ошибку, используйте восстановить членство в группе на вкладке Параметры, чтобы восстановить значения по умолчанию.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="1641"/>
-        <source>Apply any changes</source>
-        <translation>Применить все изменения</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="1644"/>
-        <source>Apply</source>
-        <translation>Применить</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="1651"/>
-        <source>Alt+A</source>
-        <translation>Alt+A</translation>
+        <location filename="../mainwindow.ui" line="1497"/>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Select user to change&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Выберите изменяемого пользователя&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1573"/>
         <source>Cancel any changes then quit</source>
         <translation>Отменить все изменения, затем выйти</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="1217"/>
-        <source>Create a group with GID &gt; 1000</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="1220"/>
-        <source>Create a user-level group</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="1249"/>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Enter name of new group&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="1349"/>
-        <source>Select group to delete:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="1356"/>
-        <source>*Please doublecheck your selections before applying, removing a wrong group can break your system.</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1576"/>
@@ -485,6 +456,21 @@
         <location filename="../mainwindow.ui" line="1634"/>
         <source>Alt+H</source>
         <translation>Alt+H</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="1641"/>
+        <source>Apply any changes</source>
+        <translation>Применить все изменения</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="1644"/>
+        <source>Apply</source>
+        <translation>Применить</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="1651"/>
+        <source>Alt+A</source>
+        <translation>Alt+A</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1658"/>
@@ -683,17 +669,7 @@ Please choose another name before proceeding.</source>
     <message>
         <location filename="../mainwindow.cpp" line="467"/>
         <source>This action cannot be undone. Are you sure you want to delete the following groups: %1?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="474"/>
-        <source>Group: %1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="479"/>
-        <source>The group has been deleted.</source>
-        <translation>Группа была удалена.</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="474"/>
@@ -701,9 +677,19 @@ Please choose another name before proceeding.</source>
         <translation>Не удалось удалить группу.</translation>
     </message>
     <message>
+        <location filename="../mainwindow.cpp" line="474"/>
+        <source>Group: %1</source>
+        <translation>Группа: %1</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="479"/>
+        <source>The group has been deleted.</source>
+        <translation>Группа была удалена.</translation>
+    </message>
+    <message>
         <location filename="../mainwindow.cpp" line="479"/>
         <source>The groups have been deleted.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="496"/>

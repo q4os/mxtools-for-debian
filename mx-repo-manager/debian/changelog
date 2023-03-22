@@ -1,8 +1,15 @@
-mx-repo-manager (22.10+deb11u13) stable; urgency=medium
+mx-repo-manager (23.3+deb11u13) stable; urgency=medium
 
   * MX Tools release
 
- -- Dolphin Oracle <administrator@localdomain>  Wed, 22 Mar 2023 10:43:55 +0100
+ -- Adrian <administrator@localdomain>  Wed, 22 Mar 2023 13:32:38 +0100
+
+mx-repo-manager (23.3) mx; urgency=medium
+
+  * Detect proxy
+  * Update translations
+
+ -- Adrian <adrian@mxlinux.org>  Sat, 11 Mar 2023 15:11:33 -0500
 
 mx-repo-manager (22.10) mx; urgency=medium
 

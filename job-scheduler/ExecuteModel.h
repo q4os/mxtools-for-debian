@@ -19,34 +19,35 @@ class ExecuteModel : public QAbstractItemModel
     Q_OBJECT
 
 public:
-    ExecuteModel(QList<Execute*>*exe, QObject *parent = nullptr)
-        : QAbstractItemModel(parent), executes(exe),
-          sortColumn(0), sortOrder(Qt::AscendingOrder) {}
+    ExecuteModel(QList<Execute *> *exe, QObject *parent = nullptr)
+        : QAbstractItemModel(parent)
+        , executes(exe)
+        , sortColumn(0)
+        , sortOrder(Qt::AscendingOrder)
+    {
+    }
 
-    ~ExecuteModel() {}
+    ~ExecuteModel() { }
 
     enum Col { ExeTime, CronTime, User, Command };
     static Execute *getExecute(const QModelIndex &idx);
     void doSort();
 
 private:
-    Qt::ItemFlags flags(const QModelIndex &) const
-    { return Qt::ItemIsSelectable | Qt::ItemIsEnabled; }
-    QModelIndex parent(const QModelIndex &) const
-    { return QModelIndex(); }
-    int columnCount(const QModelIndex &) const
-    { return 5; }
-    int rowCount(const QModelIndex &parent) const
-    { return (parent.isValid() ? 0 : executes->count()); }
+    Qt::ItemFlags flags(const QModelIndex &) const { return Qt::ItemIsSelectable | Qt::ItemIsEnabled; }
+    QModelIndex parent(const QModelIndex &) const { return QModelIndex(); }
+    int columnCount(const QModelIndex &) const { return 5; }
+    int rowCount(const QModelIndex &parent) const { return (parent.isValid() ? 0 : executes->count()); }
     QModelIndex index(int row, int column, const QModelIndex &) const
-    { return createIndex(row, column, (*executes).at(row)); }
+    {
+        return createIndex(row, column, (*executes).at(row));
+    }
 
-    QVariant headerData(int section, Qt::Orientation orientation,
-                        int role) const;
+    QVariant headerData(int section, Qt::Orientation orientation, int role) const;
     QVariant data(const QModelIndex &index, int role) const;
     void sort(int column, Qt::SortOrder order = Qt::AscendingOrder);
 
-    QList<Execute*>*executes;
+    QList<Execute *> *executes;
     int sortColumn;
     Qt::SortOrder sortOrder;
 };

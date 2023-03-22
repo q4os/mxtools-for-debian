@@ -1,0 +1,20 @@
+adlibtracker2 (2.4.24-1+deb11u13) stable; urgency=medium
+
+  * MX Tools release
+
+ -- Gürkan Myczko <administrator@localdomain>  Wed, 22 Mar 2023 13:32:30 +0100
+
+adlibtracker2 (2.4.24-1) unstable; urgency=medium
+
+  * New upstream version.
+  * Bump standards version to 4.2.1.
+  * Bump debhelper version to 11.
+  * debian/README.source: added.
+
+ -- Gürkan Myczko <gurkan@phys.ethz.ch>  Fri, 28 Dec 2018 22:05:36 +0100
+
+adlibtracker2 (2.4.23-1) unstable; urgency=medium
+
+  * Initial release. (Closes: #860904)
+
+ -- Gürkan Myczko <gurkan@phys.ethz.ch>  Thu, 26 Oct 2017 10:39:35 +0200

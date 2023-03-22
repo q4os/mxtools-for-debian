@@ -1,0 +1,8 @@
+[main]
+host = https://www.transifex.com
+
+[o:anticapitalista:p:antix-development:r:mx-live-usb-maker-desktop]
+file_filter = po/mx-live-usb-maker-desktop_<lang>.po
+source_file = mx-live-usb-maker-desktop.pot
+source_lang = en
+type = po

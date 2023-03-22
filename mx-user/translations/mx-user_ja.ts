@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="ja">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="ja">
 <context>
     <name>MEConfig</name>
     <message>
@@ -316,12 +314,12 @@
     <message>
         <location filename="../mainwindow.ui" line="1034"/>
         <source>Select to copy/sync Documents</source>
-        <translation>コピー・同期ドキュメント先を選択して下さい</translation>
+        <translation>コピー／同期する文書を選択して下さい</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1037"/>
         <source>Documents folder</source>
-        <translation>ドキュメントフォルダ</translation>
+        <translation>文書フォルダ</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1044"/>
@@ -360,15 +358,6 @@
         <translation>グループの追加</translation>
     </message>
     <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="1252"/>
-        <source>Group name:</source>
-        <translation>グループ名:</translation>
-    </message>
-    <message>
         <location filename="../mainwindow.ui" line="1201"/>
         <source>Enter name of new group</source>
         <translation>新しいグループ名を入れてください</translation>
@@ -379,13 +368,29 @@
         <translation>グループ名</translation>
     </message>
     <message>
+        <location filename="../mainwindow.ui" line="1217"/>
+        <source>Create a group with GID &gt; 1000</source>
+        <translation>GID &gt; 1000 のグループを作成</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="1220"/>
+        <source>Create a user-level group</source>
+        <translation>ユーザーレベルのグループを作成</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="1249"/>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Enter name of new group&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;新しいグループ名を入力してください&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="1252"/>
+        <source>Group name:</source>
+        <translation>グループ名:</translation>
+    </message>
+    <message>
         <location filename="../mainwindow.ui" line="1271"/>
         <source>Delete Group</source>
         <translation>グループの削除</translation>
-    </message>
-    <message>
-        <source>Select group to delete</source>
-        <translation type="vanished">削除するグループを選択します</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1340"/>
@@ -393,18 +398,19 @@
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;削除するグループを選択&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <source>Group to delete:</source>
-        <translation type="vanished">削除するグループ：</translation>
+        <location filename="../mainwindow.ui" line="1349"/>
+        <source>Select group to delete:</source>
+        <translation>削除するグループを選択:</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="1356"/>
+        <source>*Please doublecheck your selections before applying, removing a wrong group can break your system.</source>
+        <translation>*変更を適用する前に選択内容をもう一度確認してください。間違ったグループを削除すると、システムが壊れるおそれがあります。</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1371"/>
         <source>Group Membership</source>
         <translation>グループメンバーシップ</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="1497"/>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Select user to change&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;変更するユーザーを選択&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1445"/>
@@ -417,49 +423,14 @@
         <translation>*選択を適用する前にもう一度見直してください。間違ったグループメンバーシップを割り当てると、システムが壊れてしまう可能性があります。間違えた場合は、オプションタブのグループメンバーシップの復元を使用して、既定に戻してください。</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="1641"/>
-        <source>Apply any changes</source>
-        <translation>全ての変更を適用</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="1644"/>
-        <source>Apply</source>
-        <translation>適用</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="1651"/>
-        <source>Alt+A</source>
-        <translation>Alt+A</translation>
+        <location filename="../mainwindow.ui" line="1497"/>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Select user to change&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;変更するユーザーを選択&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1573"/>
         <source>Cancel any changes then quit</source>
         <translation>変更をキャンセルして終了</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="1217"/>
-        <source>Create a group with GID &gt; 1000</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="1220"/>
-        <source>Create a user-level group</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="1249"/>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Enter name of new group&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="1349"/>
-        <source>Select group to delete:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="1356"/>
-        <source>*Please doublecheck your selections before applying, removing a wrong group can break your system.</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1576"/>
@@ -485,6 +456,21 @@
         <location filename="../mainwindow.ui" line="1634"/>
         <source>Alt+H</source>
         <translation>Alt+H</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="1641"/>
+        <source>Apply any changes</source>
+        <translation>全ての変更を適用</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="1644"/>
+        <source>Apply</source>
+        <translation>適用</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="1651"/>
+        <source>Alt+A</source>
+        <translation>Alt+A</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1658"/>
@@ -683,17 +669,7 @@ Please choose another name before proceeding.</source>
     <message>
         <location filename="../mainwindow.cpp" line="467"/>
         <source>This action cannot be undone. Are you sure you want to delete the following groups: %1?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="474"/>
-        <source>Group: %1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="479"/>
-        <source>The group has been deleted.</source>
-        <translation>グループを削除しました。</translation>
+        <translation>このアクションは完了していません。本当に次のグループを削除してもよろしいですか: %1</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="474"/>
@@ -701,14 +677,24 @@ Please choose another name before proceeding.</source>
         <translation>グループの削除に失敗しました。</translation>
     </message>
     <message>
+        <location filename="../mainwindow.cpp" line="474"/>
+        <source>Group: %1</source>
+        <translation>グループ: %1</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="479"/>
+        <source>The group has been deleted.</source>
+        <translation>グループを削除しました。</translation>
+    </message>
+    <message>
         <location filename="../mainwindow.cpp" line="479"/>
         <source>The groups have been deleted.</source>
-        <translation type="unfinished"></translation>
+        <translation>グループを削除しました。</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="496"/>
         <source>The changes have been applied.</source>
-        <translation>変更は適用されました。</translation>
+        <translation>変更を適用しました。</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="498"/>
@@ -832,7 +818,7 @@ Please choose another name before proceeding.</source>
     <message>
         <location filename="../about.cpp" line="54"/>
         <source>Cancel</source>
-        <translation>取り消し</translation>
+        <translation>キャンセル</translation>
     </message>
     <message>
         <location filename="../about.cpp" line="74"/>
@@ -847,7 +833,7 @@ Please choose another name before proceeding.</source>
     <message>
         <location filename="../main.cpp" line="59"/>
         <source>You seem to be logged in as root, please log out and log in as normal user to use this program.</source>
-        <translation>rootとしてログインしているようです。このプログラムを使用するには、一度ログアウトして通常のユーザーとしてログインしてください。</translation>
+        <translation>root としてログインしているようです。このプログラムを使用するには、一度ログアウトして通常のユーザーとしてログインしてください。</translation>
     </message>
 </context>
 </TS>

@@ -636,75 +636,25 @@ public class Main : GLib.Object {
 		
 		string startupScript = data_dir + "/conky-startup.sh";
 		string home = Environment.get_home_dir ();
-        bool defined_desktop_session = true;
-		string desktop_session = Environment.get_variable ("DESKTOP_SESSION");
-		int slen = 0;
-		
-		if (desktop_session == null){ 
-		    desktop_session = "";
-		}
-		slen = desktop_session.length;
-
-		if (slen == 0 ){ 
-			defined_desktop_session = false;
-		}
-		if (defined_desktop_session){ 
-            // remove leading "/" in DESKTOP_SESSION if any
-			   desktop_session = desktop_session.slice(desktop_session.last_index_of("/",0)+1, slen);
-		}
-		
 		bool atleast_one_widget_enabled = false;
 
 		string txt_start_conky = "";
-		txt_start_conky += "if [ x\"${DESKTOP_SESSION##*/}\" = x\"%s\" ]; then \n".printf(desktop_session);
-		txt_start_conky += "   sleep %ds\n".printf(startup_delay);
-		txt_start_conky += "   killall -u $(id -nu) conky 2>/dev/null\n";
+		txt_start_conky += "sleep %ds\n".printf(startup_delay);
+		txt_start_conky += "killall -u $(id -nu) conky 2>/dev/null\n";
 		foreach(ConkyRC conf in conkyrc_list){
 			if (conf.enabled){
-				txt_start_conky += "   cd \"" + conf.dir.replace(home, "$HOME")  + "\"\n";
-				txt_start_conky += "   conky -c \"" + conf.path.replace(home, "$HOME") + "\" &\n";
+				txt_start_conky += "cd \"" + conf.dir.replace(home, "$HOME")  + "\"\n";
+				txt_start_conky += "conky -c \"" + conf.path.replace(home, "$HOME") + "\" &\n";
 				atleast_one_widget_enabled = true;
 			}
 		}
-		txt_start_conky += "   exit 0\n";
-		txt_start_conky += "fi\n";
+		txt_start_conky += "exit 0\n";
 		
 		string txt_no_conky = "";
-		txt_no_conky += "if [ x\"${DESKTOP_SESSION##*/}\" = x\"%s\" ]; then \n".printf(desktop_session);
-		txt_no_conky += "   # No widgets enabled!\n";
-		txt_no_conky += "   exit 0\n";
-		txt_no_conky += "fi\n";
+		txt_no_conky += "# No widgets enabled!\n";
+		txt_no_conky += "exit 0\n";
 		
-		string cmd1 = "grep  -sq -E '^[[:space:]]*if[[:space:]]+\\[[[:space:]]+x?\"?\\$\\{?DESKTOP_SESSION(##\\*/)?\\}?\"?' \"%s\" || rm  \"%s\"".printf (startupScript, startupScript);
-        
-		// stdout.printf (cmd1);
-		string prex = "";
-		if (defined_desktop_session){ 
-			prex = "[^\"]*";
-		}
-
-		string cmd2 = "sed -i -r '/^[[:space:]]*if[[:space:]]+\\[[[:space:]]+x?\"?\\$\\{?DESKTOP_SESSION(##\\*\\/)?\\}?\"?[[:space:]]*==?[[:space:]]*x?\"%s%s\"[[:space:]]+\\]/,/^[[:space:]]*fi/d' \"%s\"".printf (prex, desktop_session, startupScript);
-		// stdout.printf (cmd2);
-
-		if (file_exists(startupScript)){
-			try{
-				execute_command_script_sync(cmd1, out std_out, out std_err);
-			}
-			catch (Error e) {
-				log_error (e.message);
-			}
-		}	
-
-		if (file_exists(startupScript)){
-			try{
-				execute_command_script_sync(cmd2, out std_out, out std_err);
-			}
-			catch (Error e) {
-				log_error (e.message);
-			}
-		} else {
-			write_file(startupScript, "#!/bin/sh\n\n"); // write shebang 
-		}	
+		write_file(startupScript, "#!/bin/sh\n\n"); // write shebang 
 
 		if (atleast_one_widget_enabled){
 			append_file(startupScript, txt_start_conky);

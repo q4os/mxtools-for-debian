@@ -7,12 +7,13 @@
    as published by the Free Software Foundation; either version 2
    of the License, or (at your option) any later version.
 */
+#include "ExecuteView.h"
+
 #include <QHeaderView>
 #include <QScrollBar>
 
 #include "Execute.h"
 #include "ExecuteModel.h"
-#include "ExecuteView.h"
 
 ExecuteView::ExecuteView(ExecuteModel *model)
     : executeModel(model)
@@ -30,11 +31,10 @@ ExecuteView::ExecuteView(ExecuteModel *model)
 void ExecuteView::resetView()
 {
     for (int i = 0; i < 4; ++i)
-        resizeColumnToContents( i );
+        resizeColumnToContents(i);
 }
 
-
-void ExecuteView::selectChanged(const QModelIndex &idx, const QModelIndex& /*unused*/)
+void ExecuteView::selectChanged(const QModelIndex &idx, const QModelIndex & /*unused*/)
 {
     if (idx.isValid()) {
         auto *e = ExecuteModel::getExecute(idx);
@@ -46,11 +46,12 @@ void ExecuteView::scrollTo(const QModelIndex &idx, ScrollHint /*hint*/)
 {
     QRect area = viewport()->rect();
     QRect rect = visualRect(idx);
-    if (rect.height() == 0) return;
+    if (rect.height() == 0)
+        return;
     double step = static_cast<double>(verticalStepsPerItem()) / rect.height();
     if (rect.top() < 0)
-        verticalScrollBar()->setValue(verticalScrollBar()->value() + static_cast<int>(rect.top() * step) );
+        verticalScrollBar()->setValue(verticalScrollBar()->value() + static_cast<int>(rect.top() * step));
     else if (rect.bottom() > area.bottom())
-        verticalScrollBar()->setValue(verticalScrollBar()->value() +
-                    static_cast<int>((rect.bottom() - area.bottom()) * step) + 5);
+        verticalScrollBar()->setValue(verticalScrollBar()->value()
+                                      + static_cast<int>((rect.bottom() - area.bottom()) * step) + 5);
 }

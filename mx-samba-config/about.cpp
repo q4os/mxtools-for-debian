@@ -1,3 +1,5 @@
+#include "about.h"
+
 #include <QApplication>
 #include <QFileInfo>
 #include <QMessageBox>
@@ -6,7 +8,6 @@
 #include <QTextEdit>
 #include <QVBoxLayout>
 
-#include "about.h"
 #include "version.h"
 
 // display doc as nomal user when run as root
@@ -23,15 +24,16 @@ void displayDoc(const QString &url, const QString &title, bool runned_as_root)
             proc.start(QStringLiteral("logname"), {}, QIODevice::ReadOnly);
             proc.waitForFinished();
             QString user = QString::fromUtf8(proc.readAllStandardOutput()).trimmed();
-            QProcess::startDetached(QStringLiteral("runuser"),
-                                    {QStringLiteral("-u"), user, QStringLiteral("--"), QStringLiteral("xdg-open"), url});
+            QProcess::startDetached(QStringLiteral("runuser"), {QStringLiteral("-u"), user, QStringLiteral("--"),
+                                                                QStringLiteral("xdg-open"), url});
         }
     }
 }
 
-void displayAboutMsgBox(const QString &title, const QString &message, const QString &licence_url, const QString &license_title, bool runned_as_root)
+void displayAboutMsgBox(const QString &title, const QString &message, const QString &licence_url,
+                        const QString &license_title, bool runned_as_root)
 {
-    const auto width  = 600;
+    const auto width = 600;
     const auto height = 500;
     QMessageBox msgBox(QMessageBox::NoIcon, title, message);
     auto *btnLicense = msgBox.addButton(QObject::tr("License"), QMessageBox::HelpRole);
@@ -50,9 +52,10 @@ void displayAboutMsgBox(const QString &title, const QString &message, const QStr
         auto *text = new QTextEdit(changelog);
         text->setReadOnly(true);
         QProcess proc;
-        proc.start(QStringLiteral("zless"), {QStringLiteral("/usr/share/doc/") +
-                                             QFileInfo(QCoreApplication::applicationFilePath()).fileName() +
-                                             QStringLiteral("/changelog.gz")}, QIODevice::ReadOnly);
+        proc.start(QStringLiteral("zless"),
+                   {QStringLiteral("/usr/share/doc/") + QFileInfo(QCoreApplication::applicationFilePath()).fileName()
+                    + QStringLiteral("/changelog.gz")},
+                   QIODevice::ReadOnly);
         proc.waitForFinished();
         text->setText(QString::fromLatin1(proc.readAllStandardOutput()));
 

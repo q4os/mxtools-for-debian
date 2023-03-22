@@ -1,8 +1,41 @@
-quick-system-info-gui (22.10.010mx21+deb11u13) stable; urgency=medium
+quick-system-info-gui (23.02.05mx21+deb11u13) stable; urgency=medium
 
   * MX Tools release
 
- -- Dolphin Oracle <administrator@localdomain>  Wed, 22 Mar 2023 10:43:58 +0100
+ -- Dolphin Oracle <administrator@localdomain>  Wed, 22 Mar 2023 13:32:41 +0100
+
+quick-system-info-gui (23.02.05mx21) mx; urgency=medium
+
+  * widen search for logs 
+  * don't show logs of 0 size
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 03 Feb 2023 20:01:51 -0500
+
+quick-system-info-gui (23.02.04mx21) mx; urgency=medium
+
+  * include missing lib 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 03 Feb 2023 06:37:25 -0500
+
+quick-system-info-gui (23.02.03mx21) mx; urgency=medium
+
+  * add message to policy file 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 02 Feb 2023 22:21:46 -0500
+
+quick-system-info-gui (23.02.02mx21) mx; urgency=medium
+
+  * show shortcut keys on right-click menu 
+  * update translations
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 01 Feb 2023 23:10:26 -0500
+
+quick-system-info-gui (23.02.01mx21) mx; urgency=medium
+
+  * add log viewer  
+  * adjust depends 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 01 Feb 2023 19:35:38 -0500
 
 quick-system-info-gui (22.10.010mx21) mx; urgency=medium
 

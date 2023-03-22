@@ -19,7 +19,7 @@ if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-remov
     #add a sources.list if one doesn't exist
     if [ ! -e /etc/apt/sources.list ]; then
         touch /etc/apt/sources.list
-        echo "#this file is empty by default.  Sources are under /etc/apt/souces.list.d" >/etc/apt/sources.list
+        echo "#this file is empty by default.  Sources are under /etc/apt/sources.list.d" >/etc/apt/sources.list
     fi
 
     #make /etc/machine-id from /var/lib/dbus/machine-id if not present
@@ -45,6 +45,8 @@ if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-remov
     sed -i s/MX-21.1_/MX-21.2_/ /etc/mx-version
     #21.2 to 21.2.1
     sed -i s/MX-21.2_/MX-21.2.1_/ /etc/mx-version
+    #21.2.2.1 to 21.3
+    sed -i s/MX-21.2.1_/MX-21.3_/ /etc/mx-version
     fi
     
     ##add vmd to /etc/initramfs-tools/modules if its not already there
@@ -76,6 +78,49 @@ if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-remov
         mkdir -p /usr/lib64/sane
         fi
     fi
+
+	#remove old keys
+
+	keys="1F5C2E815EC294453B15233CD3F985C51A77B3E9
+	630239CC130E1A7FD81A27B140976EAF437D05B5
+	64D15ADAFA81B2C5619B32972EBC26B60C5A2783
+	C5986B4F1257FFA86632CBA746181433FBB75451
+	1D7FC53F80F852C188F4ED0B07DC563D1F41B907
+	64C36120DA8D91E7378BE79F3916C431F80994F6
+	CD5A97769F6EF4D9EBCD8F92033431536A423791
+	6947BD50026AE8C89AC409FD390EC3FF927CCC73
+	B80BCDE319EE84E0A353E7CFFEC820F4B8C0755A
+	AF45122801DAD61329EF9570DCF9F87B6DFBCBAE
+	A949B28F7A9680636CA336DE81D4980FA1704726
+	70C4F178C4AC36D29A3B52F03EFF4F272FB2CD80
+	7B0FAB3A13B907435925D9C954422A4B98AB5139
+	8526E45FAF83DE2F634C1909F9A2F76A9D1A0061
+	565F67CD02BA29CF4F5D5405E6AD81A8B9FBE3CE
+	EA29BBBE6A4195E6EF3CE709A40E385D15B0B570
+	DB3DFC6C82D3D79B4590F2760393B8638C00FC18
+	5929601B7779956E0117749A515F1784FFF06A93
+	255F023751CFAA0F3B78F548F4EA6AF93465FC9B
+	48A9B68696FFFD91ED9C5AD88982541DFD08FE04
+	5C686B8FD30FA0E6AB7E6DAEAAFF4A5B336064B5
+	3289E2A97822F308E66030F07DCAC92F09F8ECEF
+	D95E9BC93D6342FA4843805E0CA321713B07EE13
+	2920868DC0F8016AA35AA0F8E429CCF86CE33D20
+	C8CF351360C3739451788AE581E77EAF14E225A0
+"
+
+	#check presense of old key
+
+
+	if [ -e /etc/apt/trusted.gpg ]; then
+		if [ -n "$(apt-key --keyring /etc/apt/trusted.gpg list 2>/dev/null | grep '6302 39CC 130E 1A7F D81A  27B1 4097 6EAF 437D 05B5')" ]; then
+			apt-key --keyring /etc/apt/trusted.gpg del $keys 2>/dev/null 1>/dev/null		
+		fi
+	fi
+
+	#remove bogus imagemagick display desktop file
+	if [ -e /usr/share/applications/display-im6.desktop ]; then
+		rm /usr/share/applications/display-im6.desktop
+	fi
 
     set -e
 fi

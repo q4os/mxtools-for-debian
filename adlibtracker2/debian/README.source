@@ -1,0 +1,11 @@
+Repackaged with following removals:
+
+sdl.dll
+package/ver/sdl/windows/sdl.dll
+font/charedit.exe
+utils/*.exe
+package/ver/dos/*.EXE
+
+Example songs removed due unclear copyright status:
+
+package/modules/*

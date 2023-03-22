@@ -21,7 +21,6 @@
  * along with this package. If not, see <http://www.gnu.org/licenses/>.
  **********************************************************************/
 
-
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
@@ -31,7 +30,8 @@
 
 #include "editshare.h"
 
-namespace Ui {
+namespace Ui
+{
 class MainWindow;
 }
 
@@ -48,7 +48,7 @@ public:
 public slots:
 
 private slots:
-    void addEditShares(EditShare*);
+    void addEditShares(EditShare *);
     void pushAbout_clicked();
     void pushAddShare_clicked();
     void pushAddUser_clicked();
@@ -65,8 +65,8 @@ private:
     QProcess proc;
     QSettings settings;
     QStringList listUsers();
-    int run(const QString&, const QStringList&);
-    void buildUserList(EditShare*);
+    int run(const QString &, const QStringList &);
+    void buildUserList(EditShare *);
     void checkSambashareGroup();
     void checksamba();
     void disablesamba();
@@ -77,6 +77,4 @@ private:
     void stopsamba();
 };
 
-
 #endif
-

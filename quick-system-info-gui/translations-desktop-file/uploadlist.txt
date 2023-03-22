@@ -1,0 +1,17 @@
+quick-system-info-gui-desktop_am.po
+quick-system-info-gui-desktop_ca.po
+quick-system-info-gui-desktop_da.po
+quick-system-info-gui-desktop_el.po
+quick-system-info-gui-desktop_es.po
+quick-system-info-gui-desktop_fr.po
+quick-system-info-gui-desktop_hu.po
+quick-system-info-gui-desktop_it.po
+quick-system-info-gui-desktop_lt.po
+quick-system-info-gui-desktop_nl.po
+quick-system-info-gui-desktop_pl.po
+quick-system-info-gui-desktop_pt.po
+quick-system-info-gui-desktop_pt_BR.po
+quick-system-info-gui-desktop_ro.po
+quick-system-info-gui-desktop_sl.po
+quick-system-info-gui-desktop_sv.po
+quick-system-info-gui-desktop_zh_TW.po

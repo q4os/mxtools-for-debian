@@ -1,8 +1,27 @@
-mx-iso-template (23.01.02mx21+deb11u13) stable; urgency=medium
+mx-iso-template (23.02.01mx21+deb11u13) stable; urgency=medium
 
   * MX Tools release
 
- -- Dolphin Oracle <administrator@localdomain>  Wed, 22 Mar 2023 10:43:53 +0100
+ -- Dolphin Oracle <administrator@localdomain>  Wed, 22 Mar 2023 13:32:36 +0100
+
+mx-iso-template (23.02.01mx21) mx; urgency=medium
+
+  * update iso template to read initrd_release
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 27 Feb 2023 21:34:02 -0500
+
+mx-iso-template (23.01.04mx21) mx; urgency=medium
+
+  * remove avlinux custom live scripts
+  * enable base determination for execution of custom live scripts [fehlix] 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 30 Jan 2023 23:26:42 -0500
+
+mx-iso-template (23.01.03mx21) mx; urgency=medium
+
+  * add avlinux custom live scripts
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 27 Jan 2023 18:45:44 -0500
 
 mx-iso-template (23.01.02mx21) mx; urgency=medium
 

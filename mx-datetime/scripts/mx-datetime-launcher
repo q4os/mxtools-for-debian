@@ -35,6 +35,7 @@ else
     # from users environment into an array
     __ENVIRONEMENT_PATTERN__=(
     DESKTOP_SESSION=
+    DISPLAY=
     HOME=
     KDE_FULL_SESSION=
     LANG=

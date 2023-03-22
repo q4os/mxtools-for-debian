@@ -19,23 +19,30 @@ class CronType
 {
 public:
     enum DataType { CRON, COMMAND };
-    CronType() {}
+    CronType() { }
     CronType(const int t)
-        : type(t) {}
+        : type(t)
+    {
+    }
     int type;
 };
 
 class TCommand : public CronType
 {
 public:
-    TCommand() {}
-    TCommand(const QString &t, const QString &u, const QString &cmnd,
-             const QString &cmnt, Crontab *p)
-        : CronType(CronType::COMMAND), time(t), user(u), command(cmnd),
-          comment(cmnt), parent(p) {}
-    ~TCommand() {}
+    TCommand() { }
+    TCommand(const QString &t, const QString &u, const QString &cmnd, const QString &cmnt, Crontab *p)
+        : CronType(CronType::COMMAND)
+        , time(t)
+        , user(u)
+        , command(cmnd)
+        , comment(cmnt)
+        , parent(p)
+    {
+    }
+    ~TCommand() { }
 
-    //private:
+    // private:
     QString time;
     QString user;
     QString command;
@@ -47,8 +54,12 @@ class Variable
 {
 public:
     Variable(const QString &n, const QString &v, const QString &c)
-        : name(n), value(v), comment(c) {}
-    ~Variable() {}
+        : name(n)
+        , value(v)
+        , comment(c)
+    {
+    }
+    ~Variable() { }
 
     QString name;
     QString value;
@@ -58,7 +69,7 @@ public:
 class Crontab : public CronType
 {
 public:
-    Crontab() {}
+    Crontab() { }
     Crontab(const QString &user);
     ~Crontab();
 
@@ -68,18 +79,17 @@ public:
 
     void setup(const QString &str);
     QString writeTempFile(const QString &test, const QString &tmp);
-    static QString list2String(const QStringList &list) ;
+    static QString list2String(const QStringList &list);
     QString cronText();
 
     QString estr;
 
-
-    //private:
+    // private:
     QString cronOwner;
     QString comment;
     bool changed;
-    QList<Variable*> variables;
-    QList<TCommand*> tCommands;
+    QList<Variable *> variables;
+    QList<TCommand *> tCommands;
 };
 
 #endif

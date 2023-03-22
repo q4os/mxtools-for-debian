@@ -1,8 +1,58 @@
-mx-packageinstaller-pkglist (23.01.01mx21+deb11u13) stable; urgency=medium
+mx-packageinstaller-pkglist (23.03.02mx21+deb11u13) stable; urgency=medium
 
   * MX Tools release
 
- -- Dolphin Oracle <administrator@localdomain>  Wed, 22 Mar 2023 10:43:54 +0100
+ -- Dolphin Oracle <administrator@localdomain>  Wed, 22 Mar 2023 13:32:37 +0100
+
+mx-packageinstaller-pkglist (23.03.02mx21) mx; urgency=medium
+
+  * update 6.1 kernel to -6mx
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Tue, 14 Mar 2023 23:32:29 -0400
+
+mx-packageinstaller-pkglist (23.03.01mx21) mx; urgency=medium
+
+  * remove ms-teams
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 09 Mar 2023 19:01:05 -0500
+
+mx-packageinstaller-pkglist (23.02.02mx21) mx; urgency=medium
+
+  * update 6.1 kernel to -5mx
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 25 Feb 2023 10:48:20 -0500
+
+mx-packageinstaller-pkglist (23.02.01mx21) mx; urgency=medium
+
+  * update ahs kernel to 6.1.0-4mx
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 16 Feb 2023 19:44:48 -0500
+
+mx-packageinstaller-pkglist (23.01.05mx21) mx; urgency=medium
+
+  [fehlix]
+  * update windscribe-vpn
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 30 Jan 2023 20:11:07 -0500
+
+mx-packageinstaller-pkglist (23.01.04mx21) mx; urgency=medium
+
+  * add antix-archive-keyring if necessary
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 26 Jan 2023 20:56:25 -0500
+
+mx-packageinstaller-pkglist (23.01.03mx21) mx; urgency=medium
+
+  * add 6.1 kernel
+  * remove masterpdf4 for 32 bit
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 25 Jan 2023 19:25:09 -0500
+
+mx-packageinstaller-pkglist (23.01.02mx21) mx; urgency=medium
+
+  * adjust ahs repo handingl 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 20 Jan 2023 19:02:56 -0500
 
 mx-packageinstaller-pkglist (23.01.01mx21) mx; urgency=medium
 

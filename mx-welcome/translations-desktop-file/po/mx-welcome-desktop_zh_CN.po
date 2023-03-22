@@ -1,0 +1,43 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+# Translators:
+# EldersJavas <eldersjavas@gmail.com>, 2022
+# Xie Yanbo <xieyanbo@gmail.com>, 2023
+# 
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-12-04 21:38-0500\n"
+"PO-Revision-Date: 2022-12-09 04:15+0000\n"
+"Last-Translator: Xie Yanbo <xieyanbo@gmail.com>, 2023\n"
+"Language-Team: Chinese (China) (https://www.transifex.com/anticapitalista/teams/10162/zh_CN/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: zh_CN\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#. The desktop entry name will be displayed within the menu.
+#: desktop-in/about-mx-linux.desktop.in:5
+msgid "About MX Linux"
+msgstr "关于 MX Linux"
+
+#. # The desktop entry comment will be shown within the menu.
+#: desktop-in/about-mx-linux.desktop.in:7
+msgid "View basic info about your MX install"
+msgstr "查看关于 MX 安装的基本信息"
+
+#. The desktop entry name will be displayed within the menu.
+#: desktop-in/mx-welcome.desktop.in:5
+msgid "MX Welcome"
+msgstr "MX 欢迎界面"
+
+#. # The desktop entry comment will be shown within the menu.
+#: desktop-in/mx-welcome.desktop.in:7
+msgid "Display welcome message"
+msgstr "显示欢迎信息"

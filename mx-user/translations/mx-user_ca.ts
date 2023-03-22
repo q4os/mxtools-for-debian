@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="ca">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="ca">
 <context>
     <name>MEConfig</name>
     <message>
@@ -360,15 +358,6 @@
         <translation>Afegeix Grup</translation>
     </message>
     <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="1252"/>
-        <source>Group name:</source>
-        <translation>Nom del grup: </translation>
-    </message>
-    <message>
         <location filename="../mainwindow.ui" line="1201"/>
         <source>Enter name of new group</source>
         <translation>Entreu el nom del nou grup</translation>
@@ -379,13 +368,29 @@
         <translation>nomdegrup</translation>
     </message>
     <message>
+        <location filename="../mainwindow.ui" line="1217"/>
+        <source>Create a group with GID &gt; 1000</source>
+        <translation>Crea un grup amb GID &gt; 1000</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="1220"/>
+        <source>Create a user-level group</source>
+        <translation>Crea un grup a nivell d&apos;usuari</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="1249"/>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Enter name of new group&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Entreu el nom del nou grup&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="1252"/>
+        <source>Group name:</source>
+        <translation>Nom del grup: </translation>
+    </message>
+    <message>
         <location filename="../mainwindow.ui" line="1271"/>
         <source>Delete Group</source>
         <translation>Elimina Grup</translation>
-    </message>
-    <message>
-        <source>Select group to delete</source>
-        <translation type="vanished">Trieu el grup a eliminar</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1340"/>
@@ -393,18 +398,20 @@
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Trieu el grup a esborrar&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <source>Group to delete:</source>
-        <translation type="vanished">Grup a eliminar:</translation>
+        <location filename="../mainwindow.ui" line="1349"/>
+        <source>Select group to delete:</source>
+        <translation>Trieu el grup a esborrar:</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="1356"/>
+        <source>*Please doublecheck your selections before applying, removing a wrong group can break your system.</source>
+        <translation>&quot;
+*Si us plau, comproveu bé les seleccions abans d&apos;aplicar-les, eliminar un grup incorrecte pot trencar el vostre sistema.</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1371"/>
         <source>Group Membership</source>
         <translation>Pertinença a grups</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="1497"/>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Select user to change&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Trieu l&apos;usuari a canviar&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1445"/>
@@ -417,49 +424,14 @@
         <translation>*Si us plau, comproveu bé la vostra tria abans d&apos;aplicar els canvis; assignar una pertinença a grup errònia pot trencar el vostre sistema. Si feu un error, useu restaura la pertinença a grup a la pestanya Opcions per restaurar els valors per omissió.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="1641"/>
-        <source>Apply any changes</source>
-        <translation>Aplica els canvis</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="1644"/>
-        <source>Apply</source>
-        <translation>Aplica</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="1651"/>
-        <source>Alt+A</source>
-        <translation>Alt+A</translation>
+        <location filename="../mainwindow.ui" line="1497"/>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Select user to change&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Trieu l&apos;usuari a canviar&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1573"/>
         <source>Cancel any changes then quit</source>
         <translation>Cancel·la els canvis i surt</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="1217"/>
-        <source>Create a group with GID &gt; 1000</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="1220"/>
-        <source>Create a user-level group</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="1249"/>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Enter name of new group&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="1349"/>
-        <source>Select group to delete:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="1356"/>
-        <source>*Please doublecheck your selections before applying, removing a wrong group can break your system.</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1576"/>
@@ -485,6 +457,21 @@
         <location filename="../mainwindow.ui" line="1634"/>
         <source>Alt+H</source>
         <translation>Alt+H</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="1641"/>
+        <source>Apply any changes</source>
+        <translation>Aplica els canvis</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="1644"/>
+        <source>Apply</source>
+        <translation>Aplica</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="1651"/>
+        <source>Alt+A</source>
+        <translation>Alt+A</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1658"/>
@@ -684,17 +671,7 @@ Si us plau, trieu un altre nom abans de continuar.</translation>
     <message>
         <location filename="../mainwindow.cpp" line="467"/>
         <source>This action cannot be undone. Are you sure you want to delete the following groups: %1?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="474"/>
-        <source>Group: %1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="479"/>
-        <source>The group has been deleted.</source>
-        <translation>S&apos;ha eliminat el grup.</translation>
+        <translation>Aquesta acció no es pot desfer. Esteu segur que voleu eliminar els següents grups: %1?</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="474"/>
@@ -702,9 +679,19 @@ Si us plau, trieu un altre nom abans de continuar.</translation>
         <translation>Error en eliminar el grup.</translation>
     </message>
     <message>
+        <location filename="../mainwindow.cpp" line="474"/>
+        <source>Group: %1</source>
+        <translation>Group: %1</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="479"/>
+        <source>The group has been deleted.</source>
+        <translation>S&apos;ha eliminat el grup.</translation>
+    </message>
+    <message>
         <location filename="../mainwindow.cpp" line="479"/>
         <source>The groups have been deleted.</source>
-        <translation type="unfinished"></translation>
+        <translation>S&apos;han esborrat els grups.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="496"/>

@@ -1,7 +1,7 @@
 [main]
 host = https://www.transifex.com
 
-[antix-development.mx-packageinstaller]
+[o:anticapitalista:p:antix-development:r:mx-packageinstaller]
 file_filter = ./mx-packageinstaller_<lang>.ts
 source_file = mx-packageinstaller_en.ts
 source_lang = en

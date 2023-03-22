@@ -45,15 +45,14 @@ private slots:
     void mailToClicked(bool state);
     void userActivated(int index);
 
-
 signals:
     void dataChanged();
 
 private:
     void setMailVar(int flag);
-    void setMailCombo(const QList<Variable*> &var);
+    void setMailCombo(const QList<Variable *> &var);
 
-    QVBoxLayout *varInputLayout{};
+    QVBoxLayout *varInputLayout {};
     QTextEdit *commentEdit;
     QRadioButton *mailOffRadio;
     QRadioButton *mailOnRadio;
@@ -66,8 +65,8 @@ private:
     bool viewChanging;
     bool varViewChanging;
 
-    Crontab *crontab{};
-    Variable *variable{};
+    Crontab *crontab {};
+    Variable *variable {};
     VariableModel *variableModel;
 };
 

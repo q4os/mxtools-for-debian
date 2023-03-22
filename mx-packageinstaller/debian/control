@@ -30,3 +30,4 @@ Description: Package Installer
  - installs popular programs from different sources
  - installs programs from the MX Test repo
  - installs programs from Debian Backports repo
+ - installs flatpaks

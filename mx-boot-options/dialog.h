@@ -1,8 +1,8 @@
 #ifndef DIALOG_H
 #define DIALOG_H
 
-#include <QDialog>
 #include <QComboBox>
+#include <QDialog>
 
 class CustomDialog : public QDialog
 {
@@ -16,10 +16,8 @@ signals:
 
 public slots:
 
-
 private:
     QComboBox *box;
-
 };
 
 #endif // DIALOG_H

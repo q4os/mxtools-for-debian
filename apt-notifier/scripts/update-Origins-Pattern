@@ -115,6 +115,10 @@ def debian_codename():
                 debian_codename = "bullseye"
             elif dv == "12":
                 debian_codename = "bookworm"
+            elif dv == "13":
+                debian_codename = "trixie"
+            elif dv == "14":
+                debian_codename = "forky"
             else:
                 debian_codename = dv
     except FileNotFoundError as e:

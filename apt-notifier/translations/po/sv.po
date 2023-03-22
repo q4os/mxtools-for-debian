@@ -7,6 +7,7 @@
 # Geoff Gigg <geoffgigg@hotmail.com>, 2022
 # Henry Oquist <henryoquist@nomalm.se>, 2022
 # Dolphin Oracle <dolphinoracle@gmail.com>, 2022
+# fehlix, 2023
 # 
 #, fuzzy
 msgid ""
@@ -15,7 +16,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-01-28 02:38+0100\n"
 "PO-Revision-Date: 2017-05-11 01:14+0000\n"
-"Last-Translator: Dolphin Oracle <dolphinoracle@gmail.com>, 2022\n"
+"Last-Translator: fehlix, 2023\n"
 "Language-Team: Swedish (https://www.transifex.com/anticapitalista/teams/10162/sv/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -204,8 +205,8 @@ msgstr "Du har 1 ny uppdatering tillgänglig"
 #, python-brace-format
 msgid "You have {num} new update available"
 msgid_plural "You have {num} new updates available"
-msgstr[0] "Du har {num} nya uppdateringar tillgängliga"
-msgstr[1] "Du har {en} ny uppdatering tillgänglig"
+msgstr[0] "Du har {num} ny uppdatering tillgänglig"
+msgstr[1] "Du har {num} nya uppdateringar tillgängliga"
 
 msgid "automatically close terminal window when full/basic upgrade complete"
 msgstr ""
@@ -288,8 +289,8 @@ msgstr "trådram"
 #, python-brace-format
 msgid "{num} new update available"
 msgid_plural "{num} new updates available"
-msgstr[0] "{num} nya uppdateringar tillgängliga"
-msgstr[1] "{en} ny uppdatering tillgänglig"
+msgstr[0] "{num} ny uppdatering tillgänglig"
+msgstr[1] "{num} nya uppdateringar tillgängliga"
 
 #. TRANSLATORS:
 #. This autostart desktop entry comment will be shown within 'Session and

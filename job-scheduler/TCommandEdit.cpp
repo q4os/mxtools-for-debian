@@ -7,6 +7,8 @@
    as published by the Free Software Foundation; either version 2
    of the License, or (at your option) any later version.
 */
+#include "TCommandEdit.h"
+
 #include <QComboBox>
 #include <QGroupBox>
 #include <QHBoxLayout>
@@ -19,7 +21,6 @@
 #include "Clib.h"
 #include "CronTime.h"
 #include "Crontab.h"
-#include "TCommandEdit.h"
 #include "TimeDialog.h"
 #include <chrono>
 
@@ -47,8 +48,9 @@ TCommandEdit::TCommandEdit(QWidget *parent)
         {
             h->addWidget(new QLabel(tr("Time:")));
             h->addWidget((timeEdit = new QLineEdit()));
-            h->addWidget((timeButton =
-                    new QPushButton(QIcon::fromTheme(QStringLiteral("edit-symbolic"), QIcon(":/images/edit_small.png")), tr("Time String E&ditor"))));
+            h->addWidget((timeButton = new QPushButton(
+                              QIcon::fromTheme(QStringLiteral("edit-symbolic"), QIcon(":/images/edit_small.png")),
+                              tr("Time String E&ditor"))));
             timeButton->setMinimumSize(QSize(150, timeButton->maximumHeight()));
         }
         mainLayout->addSpacing(5);
@@ -132,13 +134,14 @@ void TCommandEdit::setExecuteList(const QString &time)
     QDateTime dt = cur;
     QString str;
     for (int i = 0; i < 7; ++i) {
-        if (!str.isEmpty()) str += '\n';
+        if (!str.isEmpty())
+            str += '\n';
         dt = cronTime.getNextTime(dt);
         qint64 sec = cur.secsTo(dt);
-        str += QStringLiteral( "%1 - %2:%3 later" )
-                .arg(dt.toString(QStringLiteral("yyyy-MM-dd(ddd) hh:mm")))
-                .arg(sec / (60 * 60))
-                .arg((sec / 60) % 60 , 2, 10, QChar('0'));
+        str += QStringLiteral("%1 - %2:%3 later")
+                   .arg(dt.toString(QStringLiteral("yyyy-MM-dd(ddd) hh:mm")))
+                   .arg(sec / (60 * 60))
+                   .arg((sec / 60) % 60, 2, 10, QChar('0'));
         if (dt.date() == today)
             str += " - " + tr("Today");
         else if (dt.date() == tommorow)
@@ -177,7 +180,8 @@ void TCommandEdit::userChanged(int index)
 
 void TCommandEdit::resetExeTime()
 {
-    if (timeEdit->text().isEmpty()) return;
+    if (timeEdit->text().isEmpty())
+        return;
     setExecuteList(timeEdit->text());
 }
 

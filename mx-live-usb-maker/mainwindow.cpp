@@ -20,14 +20,14 @@
  * along with this package. If not, see <http://www.gnu.org/licenses/>.
  **********************************************************************/
 
+#include "mainwindow.h"
+#include "ui_mainwindow.h"
+
 #include <QDebug>
 #include <QFileDialog>
 #include <QScrollBar>
-#include <QTemporaryDir>
 
 #include "about.h"
-#include "mainwindow.h"
-#include "ui_mainwindow.h"
 #include "unistd.h"
 #include <chrono>
 
@@ -35,9 +35,9 @@ using namespace std::chrono_literals;
 
 extern const QString starting_home;
 
-MainWindow::MainWindow(const QStringList &args, QDialog *parent) :
-    QDialog(parent),
-    ui(new Ui::MainWindow)
+MainWindow::MainWindow(const QStringList &args, QDialog *parent)
+    : QDialog(parent)
+    , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
     setGeneralConnections();
@@ -63,17 +63,16 @@ MainWindow::MainWindow(const QStringList &args, QDialog *parent) :
     this->adjustSize();
 }
 
-MainWindow::~MainWindow()
-{
-    delete ui;
-}
+MainWindow::~MainWindow() { delete ui; }
 
 bool MainWindow::checkDestSize()
 {
     const quint64 disk_size = cmd.getCmdOut("blockdev --getsize64 /dev/" + device).toULongLong() / (1024 * 1024 * 1024);
 
     if (disk_size > size_check) // question when writing on large drives (potentially unintended)
-        return (QMessageBox::Yes == QMessageBox::question(this, tr("Confirmation"),
+        return (QMessageBox::Yes
+                == QMessageBox::question(
+                    this, tr("Confirmation"),
                     tr("Target device %1 is larger than %2 GB. Do you wish to proceed?").arg(device).arg(size_check),
                     QMessageBox::No | QMessageBox::Yes, QMessageBox::No));
     else
@@ -82,14 +81,11 @@ bool MainWindow::checkDestSize()
 
 bool MainWindow::isRunningLive()
 {
-    const QString test = cmd.getCmdOut(QStringLiteral("df -T / |tail -n1 |awk '{print $2}'"));
+    const QString test = cmd.getCmdOut(QStringLiteral("df -T / |tail -n1 |awk '{print $2}'"), true);
     return (test == QLatin1String("aufs") || test == QLatin1String("overlay"));
 }
 
-bool MainWindow::isToRam()
-{
-    return QFileInfo::exists(QStringLiteral("/live/config/did-toram"));
-}
+bool MainWindow::isToRam() { return QFileInfo::exists(QStringLiteral("/live/config/did-toram")); }
 
 void MainWindow::makeUsb(const QString &options)
 {
@@ -99,14 +95,20 @@ void MainWindow::makeUsb(const QString &options)
     QString source_size;
     if (!ui->checkCloneLive->isChecked() && !ui->checkCloneMode->isChecked()) {
         source = "\"" + ui->pushSelectSource->property("filename").toString() + "\"";
-        source_size = cmd.getCmdOut("du -m \"" + ui->pushSelectSource->property("filename").toString() + "\" 2>/dev/null |cut -f1", true);
+        source_size = cmd.getCmdOut(
+            "du -m \"" + ui->pushSelectSource->property("filename").toString() + "\" 2>/dev/null |cut -f1", true);
     } else if (ui->checkCloneMode->isChecked()) {
-        source_size = cmd.getCmdOut("du -m --summarize \"" + ui->pushSelectSource->property("filename").toString() + "\" 2>/dev/null |cut -f1", true);
+        source_size = cmd.getCmdOut("du -m --summarize \"" + ui->pushSelectSource->property("filename").toString()
+                                        + "\" 2>/dev/null |cut -f1",
+                                    true);
         source = "clone=\"" + ui->pushSelectSource->property("filename").toString() + "\"";
         // check if source and destination are on the same drive
-        QString root_partition = cmd.getCmdOut("df --output=source \"" + ui->pushSelectSource->property("filename").toString() + "\" |awk 'END{print $1}'");
+        QString root_partition
+            = cmd.getCmdOut("df --output=source \"" + ui->pushSelectSource->property("filename").toString()
+                            + "\" |awk 'END{print $1}'");
         if ("/dev/" + device == cmd.getCmdOut(cli_utils + "get_drive " + root_partition)) {
-            QMessageBox::critical(this, tr("Failure"), tr("Source and destination are on the same device, please select again."));
+            QMessageBox::critical(this, tr("Failure"),
+                                  tr("Source and destination are on the same device, please select again."));
             ui->stackedWidget->setCurrentWidget(ui->selectionPage);
             ui->pushNext->setEnabled(true);
             setCursor(QCursor(Qt::ArrowCursor));
@@ -142,7 +144,8 @@ void MainWindow::makeUsb(const QString &options)
         qDebug() << cmd.getCmdOut(cmdstr);
         cmdstr = "dd bs=1M if=" + source + " of=/dev/" + device;
         ui->outputBox->appendPlainText(tr("Writing %1 using 'dd' command to /dev/%2,\n\n"
-                                          "Please wait until the the process is completed").arg(source, device));
+                                          "Please wait until the the process is completed")
+                                           .arg(source, device));
     }
     setConnections();
     stat_file = new QFile("/sys/block/" + device + "/stat");
@@ -151,7 +154,7 @@ void MainWindow::makeUsb(const QString &options)
 
 void MainWindow::setup()
 {
-    connect(qApp, &QApplication::aboutToQuit, this, &MainWindow::cleanup);
+    connect(QApplication::instance(), &QApplication::aboutToQuit, this, &MainWindow::cleanup);
     this->setWindowTitle(QStringLiteral("MX Live Usb-Maker"));
 
     QFont font(QStringLiteral("monospace"));
@@ -192,22 +195,23 @@ void MainWindow::setup()
 
 void MainWindow::setGeneralConnections()
 {
-    connect(ui->pushAbout, &QPushButton::clicked, this, &MainWindow::pushAbout_clicked);
-    connect(ui->pushBack, &QPushButton::clicked, this, &MainWindow::pushBack_clicked);
-    connect(ui->pushHelp, &QPushButton::clicked, this, &MainWindow::pushHelp_clicked);
-    connect(ui->pushNext, &QPushButton::clicked, this, &MainWindow::pushNext_clicked);
-    connect(ui->pushOptions, &QPushButton::clicked, this, &MainWindow::pushOptions_clicked);
-    connect(ui->pushRefresh, &QPushButton::clicked, this, &MainWindow::pushRefresh_clicked);
-    connect(ui->pushSelectSource, &QPushButton::clicked, this, &MainWindow::pushSelectSource_clicked);
-    connect(ui->pushLumLogFile, &QPushButton::clicked, this, &MainWindow::pushLumLogFile_clicked);
     connect(ui->checkCloneLive, &QCheckBox::clicked, this, &MainWindow::checkCloneLive_clicked);
     connect(ui->checkCloneMode, &QCheckBox::clicked, this, &MainWindow::checkCloneMode_clicked);
     connect(ui->checkDataFirst, &QCheckBox::clicked, this, &MainWindow::checkDataFirst_clicked);
     connect(ui->checkUpdate, &QCheckBox::clicked, this, &MainWindow::checkUpdate_clicked);
+    connect(ui->pushAbout, &QPushButton::clicked, this, &MainWindow::pushAbout_clicked);
+    connect(ui->pushBack, &QPushButton::clicked, this, &MainWindow::pushBack_clicked);
+    connect(ui->pushCancel, &QPushButton::clicked, this, &MainWindow::close);
+    connect(ui->pushHelp, &QPushButton::clicked, this, &MainWindow::pushHelp_clicked);
+    connect(ui->pushLumLogFile, &QPushButton::clicked, this, &MainWindow::pushLumLogFile_clicked);
+    connect(ui->pushNext, &QPushButton::clicked, this, &MainWindow::pushNext_clicked);
+    connect(ui->pushOptions, &QPushButton::clicked, this, &MainWindow::pushOptions_clicked);
+    connect(ui->pushRefresh, &QPushButton::clicked, this, &MainWindow::pushRefresh_clicked);
+    connect(ui->pushSelectSource, &QPushButton::clicked, this, &MainWindow::pushSelectSource_clicked);
     connect(ui->radioDd, &QRadioButton::clicked, this, &MainWindow::radioDd_clicked);
     connect(ui->radioNormal, &QRadioButton::clicked, this, &MainWindow::radioNormal_clicked);
-    connect(ui->textLabel, &QLineEdit::textChanged, this, &MainWindow::textLabel_textChanged);
     connect(ui->spinBoxSize, QOverload<int>::of(&QSpinBox::valueChanged), this, &MainWindow::spinBoxSize_valueChanged);
+    connect(ui->textLabel, &QLineEdit::textChanged, this, &MainWindow::textLabel_textChanged);
 }
 
 // Build the option list to be passed to live-usb-maker
@@ -246,7 +250,8 @@ QString MainWindow::buildOptionList()
     if (ui->checkForceNofuse->isChecked())
         options += QLatin1String("--force=nofuse ");
     if (ui->checkDataFirst->isChecked())
-        options += "--data-first=" + ui->spinBoxDataSize->cleanText() + "," + ui->comboBoxDataFormat->currentText() + " ";
+        options
+            += "--data-first=" + ui->spinBoxDataSize->cleanText() + "," + ui->comboBoxDataFormat->currentText() + " ";
 
     if (ui->sliderVerbosity->value() == 1)
         options += QLatin1String("-V ");
@@ -268,7 +273,8 @@ void MainWindow::cleanup()
 // build the USB list
 QStringList MainWindow::buildUsbList()
 {
-    QString drives = cmd.getCmdOut(QStringLiteral("lsblk --nodeps -nlo NAME,SIZE,MODEL,VENDOR -I 3,8,22,179,259"));
+    QString drives
+        = cmd.getCmdOut(QStringLiteral("lsblk --nodeps -nlo NAME,SIZE,MODEL,VENDOR -I 3,8,22,179,259"), true);
     return removeUnsuitable(drives.split(QStringLiteral("\n")));
 }
 
@@ -286,10 +292,7 @@ QStringList MainWindow::removeUnsuitable(const QStringList &devices)
     return list;
 }
 
-void MainWindow::cmdStart()
-{
-}
-
+void MainWindow::cmdStart() { }
 
 void MainWindow::cmdDone()
 {
@@ -364,12 +367,13 @@ void MainWindow::pushNext_clicked()
             QMessageBox::critical(this, tr("Error"), tr("Please select a USB device to write to"));
             return;
         }
-        QString msg = tr("These actions will destroy all data on \n\n") + ui->comboUsb->currentText().simplified() + "\n\n " + tr("Do you wish to continue?");
+        QString msg = tr("These actions will destroy all data on \n\n") + ui->comboUsb->currentText().simplified()
+                      + "\n\n " + tr("Do you wish to continue?");
         if (QMessageBox::Yes != QMessageBox::warning(this, windowTitle(), msg, QMessageBox::Yes, QMessageBox::No))
             return;
         // pop the selection box if no valid selection (or clone)
-        if (!(QFileInfo::exists(ui->pushSelectSource->property("filename").toString()) ||
-              ui->pushSelectSource->property("filename").toString() == tr("clone"))) {
+        if (!(QFileInfo::exists(ui->pushSelectSource->property("filename").toString())
+              || ui->pushSelectSource->property("filename").toString() == "clone")) {
             emit ui->pushSelectSource->clicked();
             return;
         }
@@ -396,12 +400,15 @@ void MainWindow::pushBack_clicked()
 void MainWindow::pushAbout_clicked()
 {
     this->hide();
-    displayAboutMsgBox(tr("About %1").arg(this->windowTitle()), "<p align=\"center\"><b><h2>" + this->windowTitle() +"</h2></b></p><p align=\"center\">" +
-                       tr("Version: ") + QApplication::applicationVersion() + "</p><p align=\"center\"><h3>" +
-                       tr("Program for creating a live-usb from an iso-file, another live-usb, a live-cd/dvd, or a running live system.") +
-                       R"(</h3></p><p align="center"><a href="http://mxlinux.org">http://mxlinux.org</a><br /></p><p align="center">)" +
-                       tr("Copyright (c) MX Linux") + "<br /><br /></p>",
-                       QStringLiteral("/usr/share/doc/mx-live-usb-maker/license.html"), tr("%1 License").arg(this->windowTitle()));
+    displayAboutMsgBox(
+        tr("About %1").arg(this->windowTitle()),
+        "<p align=\"center\"><b><h2>" + this->windowTitle() + "</h2></b></p><p align=\"center\">" + tr("Version: ")
+            + QApplication::applicationVersion() + "</p><p align=\"center\"><h3>"
+            + tr("Program for creating a live-usb from an iso-file, another live-usb, a live-cd/dvd, or a running live "
+                 "system.")
+            + R"(</h3></p><p align="center"><a href="http://mxlinux.org">http://mxlinux.org</a><br /></p><p align="center">)"
+            + tr("Copyright (c) MX Linux") + "<br /><br /></p>",
+        QStringLiteral("/usr/share/doc/mx-live-usb-maker/license.html"), tr("%1 License").arg(this->windowTitle()));
     this->show();
 }
 
@@ -427,13 +434,16 @@ void MainWindow::pushSelectSource_clicked()
             setDefaultMode(selected); // set proper default mode based on iso contents
         }
     } else if (ui->checkCloneMode->isChecked()) {
-        selected = QFileDialog::getExistingDirectory(this, tr("Select Source Directory"), QString(QDir::rootPath()), QFileDialog::ShowDirsOnly);
+        selected = QFileDialog::getExistingDirectory(this, tr("Select Source Directory"), QString(QDir::rootPath()),
+                                                     QFileDialog::ShowDirsOnly);
         if (QFileInfo::exists(selected + "/antiX/linuxfs") || QFileInfo::exists(selected + "/linuxfs")) {
             ui->pushSelectSource->setText(selected);
             ui->pushSelectSource->setProperty("filename", selected);
         } else {
             selected = (selected == QLatin1String("/")) ? QLatin1String("") : selected;
-            QMessageBox::critical(this, tr("Failure"), tr("Could not find %1/antiX/linuxfs file").arg(selected)); // TODO(adrian): -- the file might be in %/linuxfs too for frugal
+            QMessageBox::critical(this, tr("Failure"),
+                                  tr("Could not find %1/antiX/linuxfs file")
+                                      .arg(selected)); // TODO(adrian): -- the file might be in %/linuxfs too for frugal
         }
     }
 }
@@ -549,22 +559,11 @@ void MainWindow::radioNormal_clicked()
 
 bool MainWindow::isantiX_mx_family(const QString &selected)
 {
-    QTemporaryDir tmpdir;
-    if (!tmpdir.isValid()) {
-        qDebug() << "Could not create temp folder";
-        return false;
-    }
-
-    // mount the iso file
-    if (QProcess::execute(QStringLiteral("mount"), {"-o", "loop", selected, tmpdir.path()}) != 0) {
-        qDebug() << "Could not mount iso file to temp folder";
-        return false;
-    }
-
-    // check for antiX folder - this is a BS check but works for now since no antiX family iso doens't have an antiX folder
-    bool test = QFileInfo::exists(tmpdir.path() + "/antiX");
-    QProcess::startDetached(QStringLiteral("umount"), {"-l", tmpdir.path()});
-    return test;
+    Cmd cmd;
+    return cmd.run(
+        QStringLiteral("xorriso -indev '%1' -find /antiX -name linuxfs -prune  2>/dev/null | grep -q /antiX/linuxfs")
+            .arg(selected),
+        true);
 }
 
 void MainWindow::pushLumLogFile_clicked()
@@ -573,7 +572,8 @@ void MainWindow::pushLumLogFile_clicked()
     QString url = "file:///tmp/" + lum.baseName() + ".log";
     qDebug() << "lumlog" << url;
     if (!QFileInfo::exists("/var/log/" + lum.baseName() + ".log")) {
-        QMessageBox::information(this, QApplication::applicationName(), tr("Could not find a log file at: ") + "/var/log/" + lum.baseName() + ".log");
+        QMessageBox::information(this, QApplication::applicationName(),
+                                 tr("Could not find a log file at: ") + "/var/log/" + lum.baseName() + ".log");
         return;
     }
     QFileInfo viewer(QStringLiteral("/usr/bin/mx-viewer"));
@@ -581,7 +581,8 @@ void MainWindow::pushLumLogFile_clicked()
     QString rootrunoption = QString();
 
     // generate temporary log file
-    QString cmd_str = "tac /var/log/" + lum.baseName() + R"(.log | sed "/^=\{60\}=*$/q" |tac > /tmp/)" + lum.baseName() + ".log ";
+    QString cmd_str
+        = "tac /var/log/" + lum.baseName() + R"(.log | sed "/^=\{60\}=*$/q" |tac > /tmp/)" + lum.baseName() + ".log ";
     Cmd cmd; // new Cmd so it allows user opening the log while the ISO is being burned
     cmd.run(cmd_str);
 
@@ -609,7 +610,4 @@ void MainWindow::spinBoxSize_valueChanged(int arg1)
     ui->labelFormat->setEnabled(arg1 == max);
 }
 
-void MainWindow::checkDataFirst_clicked(bool checked)
-{
-    ui->spinBoxSize->setDisabled(checked);
-}
+void MainWindow::checkDataFirst_clicked(bool checked) { ui->spinBoxSize->setDisabled(checked); }

@@ -7,6 +7,8 @@
    as published by the Free Software Foundation; either version 2
    of the License, or (at your option) any later version.
 */
+#include "ExecuteList.h"
+
 #include <QLabel>
 #include <QPushButton>
 #include <QSpinBox>
@@ -15,12 +17,13 @@
 #include "CronTime.h"
 #include "Crontab.h"
 #include "Execute.h"
-#include "ExecuteList.h"
 #include "ExecuteModel.h"
 #include "ExecuteView.h"
 
-ExecuteList::ExecuteList(int maxN, int maxD, QList<Crontab*> *cron)
-    :maxNum(maxN), maxDate(maxD), crontabs(cron)
+ExecuteList::ExecuteList(int maxN, int maxD, QList<Crontab *> *cron)
+    : maxNum(maxN)
+    , maxDate(maxD)
+    , crontabs(cron)
 {
     executeModel = new ExecuteModel(&executes);
     QHBoxLayout *h = nullptr;
@@ -30,7 +33,7 @@ ExecuteList::ExecuteList(int maxN, int maxD, QList<Crontab*> *cron)
 
     auto *mainLayout = new QVBoxLayout;
     {
-        mainLayout->addWidget(executeView=new ExecuteView(executeModel));
+        mainLayout->addWidget(executeView = new ExecuteView(executeModel));
         mainLayout->addLayout((h = new QHBoxLayout));
         {
             h->addWidget(new QLabel(tr("Max Item")));
@@ -38,10 +41,11 @@ ExecuteList::ExecuteList(int maxN, int maxD, QList<Crontab*> *cron)
             h->addWidget(new QLabel(tr("Max Date")));
             h->addWidget(dateSpinBox);
             h->addWidget(new QLabel(tr("Select")));
-            h->addWidget(countLabel=new QLabel(QLatin1String("")));
+            h->addWidget(countLabel = new QLabel(QLatin1String("")));
             h->addStretch();
-            h->addWidget(resetButton =
-                    new QPushButton(QIcon::fromTheme(QStringLiteral("undo"), QIcon(":/images/undo_small.png")), tr("&Update")));
+            h->addWidget(resetButton
+                         = new QPushButton(QIcon::fromTheme(QStringLiteral("undo"), QIcon(":/images/undo_small.png")),
+                                           tr("&Update")));
         }
     }
     //	mainLayout->setMargin(0);
@@ -60,7 +64,6 @@ ExecuteList::ExecuteList(int maxN, int maxD, QList<Crontab*> *cron)
 
     curCrontab = nullptr;
     curTCommand = nullptr;
-
 }
 
 void ExecuteList::dataChanged()
@@ -72,12 +75,13 @@ void ExecuteList::dataChanged()
     QDateTime stopTime = QDateTime::currentDateTime().addDays(maxDate);
 
     executeView->clearSelection();
-    for (auto *e : qAsConst(executes)) delete e;
+    for (auto *e : qAsConst(executes))
+        delete e;
     executes.clear();
-    QList<TCommand*> cmnd;
+    QList<TCommand *> cmnd;
     QList<QDateTime> date;
-    for (const auto& cron : qAsConst(*crontabs)) {
-        for (const auto& cc : qAsConst(cron->tCommands)) {
+    for (const auto &cron : qAsConst(*crontabs)) {
+        for (const auto &cc : qAsConst(cron->tCommands)) {
             CronTime ct(cc->time);
             if (ct.isValid()) {
                 cmnd << cc;
@@ -92,7 +96,7 @@ void ExecuteList::dataChanged()
         for (int i = 0; i < maxNum; ++i) {
             int p = 0;
             QDateTime cur = date.at(0);
-            for (int j=1; j < cmnd.count(); j++) {
+            for (int j = 1; j < cmnd.count(); j++) {
                 if (cur > date.at(j)) {
                     cur = date.at(j);
                     p = j;
@@ -100,7 +104,7 @@ void ExecuteList::dataChanged()
             }
             if (cur > stopTime)
                 break;
-            executes << new Execute( cmnd.at(p), cur.toString(QStringLiteral("yyyy-MM-dd(ddd) hh:mm")) );
+            executes << new Execute(cmnd.at(p), cur.toString(QStringLiteral("yyyy-MM-dd(ddd) hh:mm")));
             itemCount++;
             date[p] = CronTime(cmnd.at(p)->time).getNextTime(cur);
         }
@@ -119,17 +123,17 @@ void ExecuteList::changeCurrent(Crontab *cron, TCommand *cmnd)
     if (!isVisible())
         return;
 
-    for (auto& e : executes)
+    for (auto &e : executes)
         e->sel = 0;
 
     int sel = 0;
     if (crontabs->count() > 1 && cron != nullptr)
-        for (auto& e : executes)
+        for (auto &e : executes)
             if (reinterpret_cast<uintptr_t>(e->tCommands->parent) == reinterpret_cast<uintptr_t>(cron))
                 e->sel = 1;
 
     if (cmnd != nullptr)
-        for (auto& e : executes)
+        for (auto &e : executes)
             if (reinterpret_cast<uintptr_t>(e->tCommands) == reinterpret_cast<uintptr_t>(cmnd)) {
                 e->sel = 2;
                 sel++;
@@ -139,15 +143,9 @@ void ExecuteList::changeCurrent(Crontab *cron, TCommand *cmnd)
     executeModel->doSort();
 }
 
-void ExecuteList::numChanged(int num)
-{
-    maxNum = num;
-}
+void ExecuteList::numChanged(int num) { maxNum = num; }
 
-void ExecuteList::dateChanged(int num)
-{
-    maxDate = num;
-}
+void ExecuteList::dateChanged(int num) { maxDate = num; }
 
 void ExecuteList::setVisible(bool flag)
 {

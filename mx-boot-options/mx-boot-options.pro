@@ -18,8 +18,8 @@
 # * along with this package. If not, see <http://www.gnu.org/licenses/>.
 # **********************************************************************/
 
-QT       += core gui widgets
-CONFIG   += c++1z
+QT       += widgets
+CONFIG   += c++1z warn_on
 
 TARGET = mx-boot-options
 TEMPLATE = app
@@ -49,19 +49,21 @@ FORMS    += \
 TRANSLATIONS += translations/mx-boot-options_am.ts \
                 translations/mx-boot-options_ar.ts \
                 translations/mx-boot-options_bg.ts \
+                translations/mx-boot-options_bs_BA.ts \
                 translations/mx-boot-options_ca.ts \
                 translations/mx-boot-options_cs.ts \
                 translations/mx-boot-options_da.ts \
                 translations/mx-boot-options_de.ts \
                 translations/mx-boot-options_el.ts \
+                translations/mx-boot-options_en_US.ts \
                 translations/mx-boot-options_en.ts \
                 translations/mx-boot-options_es.ts \
                 translations/mx-boot-options_et.ts \
                 translations/mx-boot-options_eu.ts \
                 translations/mx-boot-options_fa.ts \
                 translations/mx-boot-options_fi.ts \
-                translations/mx-boot-options_fr.ts \
                 translations/mx-boot-options_fr_BE.ts \
+                translations/mx-boot-options_fr.ts \
                 translations/mx-boot-options_he_IL.ts \
                 translations/mx-boot-options_hi.ts \
                 translations/mx-boot-options_hr.ts \
@@ -78,9 +80,10 @@ TRANSLATIONS += translations/mx-boot-options_am.ts \
                 translations/mx-boot-options_nb.ts \
                 translations/mx-boot-options_nl.ts \
                 translations/mx-boot-options_pl.ts \
-                translations/mx-boot-options_pt.ts \
                 translations/mx-boot-options_pt_BR.ts \
+                translations/mx-boot-options_pt.ts \
                 translations/mx-boot-options_ro.ts \
+                translations/mx-boot-options_ru_RU.ts \
                 translations/mx-boot-options_ru.ts \
                 translations/mx-boot-options_sk.ts \
                 translations/mx-boot-options_sl.ts \
@@ -89,9 +92,9 @@ TRANSLATIONS += translations/mx-boot-options_am.ts \
                 translations/mx-boot-options_sv.ts \
                 translations/mx-boot-options_tr.ts \
                 translations/mx-boot-options_uk.ts \
+                translations/mx-boot-options_yue_CN.ts \
                 translations/mx-boot-options_zh_CN.ts \
                 translations/mx-boot-options_zh_TW.ts
 
 RESOURCES += \
     images.qrc
-

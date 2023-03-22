@@ -1,0 +1,8 @@
+[main]
+host = https://www.transifex.com
+
+[o:anticapitalista:p:antix-development:r:mx-cleanup-desktop]
+file_filter = po/mx-cleanup-desktop_<lang>.po
+source_file = mx-cleanup-desktop.pot
+source_lang = en
+type = po

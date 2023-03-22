@@ -3,13 +3,16 @@ export QT_SELECT=5
 
 QMAKE_OPTS = DEFINES+=NO_DEBUG_ON_CONSOLE
 MAKE_OPTS  = QMAKE=qmake-qt5 LRELEASE=lrelease-qt5 QMAKE_OPTS="$(QMAKE_OPTS)"
+VERSION   := $(shell dpkg-parsechangelog -SVersion)
 
 override_dh_auto_clean:
 	dh_auto_clean
+	rm -f translations/*.qm
 	rm -f src/translations/*.qm
 
 override_dh_auto_build:
 	lrelease *.pro
+	sed -i~ '/^#define VERSION/c#define VERSION "$(VERSION)"' version.h
 	dh_auto_build -- $(MAKE_OPTS)
 
 override_dh_auto_install:
@@ -19,6 +22,9 @@ override_dh_shlibdeps:
 	dh_shlibdeps --dpkg-shlibdeps-params=--ignore-missing-info
 
 override_dh_usrlocal:
+
+execute_after_dh_builddeb:
+	mv version.h~ version.h
 
 %:
 	dh $@ --no-automatic-dbgsym --parallel 

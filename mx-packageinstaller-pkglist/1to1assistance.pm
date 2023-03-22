@@ -67,6 +67,7 @@ Remote Access
 <screenshot>none</screenshot>
 
 <preinstall>
+apt-get install antix-archive-keyring
 echo "deb http://la.mxrepo.com/antix/buster buster main">/etc/apt/sources.list.d/mxpitemp.list
 apt-get update
 </preinstall>

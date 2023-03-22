@@ -8,4 +8,3 @@ usr/lib/apt-notifier/modules
 usr/lib/apt-notifier/shlib
 usr/share/applications
 usr/share/apt-notifier
-usr/share/apt-notifier

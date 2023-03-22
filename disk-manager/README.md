@@ -8,3 +8,10 @@
   
 
 ***This version is a updated fork of the original abandoned disk-manager application.***
+
+
+## Help translate disk-manager in your language
+
+Translation for disk-manager takes place on Transifex.
+
+https://www.transifex.com/anticapitalista/antix-development/disk-manager/

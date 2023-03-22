@@ -1,8 +1,14 @@
-conky-manager (2.7+dfsg1-6mx19+2+deb11u13) stable; urgency=medium
+conky-manager (2.7+dfsg1-6mx19+3+deb11u13) stable; urgency=medium
 
   * MX Tools release
 
- -- fehlix <administrator@localdomain>  Wed, 22 Mar 2023 10:43:48 +0100
+ -- fehlix <administrator@localdomain>  Wed, 22 Mar 2023 13:32:32 +0100
+
+conky-manager (2.7+dfsg1-6mx19+3) mx; urgency=medium
+
+  * Remove desktop-session from conky-startup.sh script
+
+ -- fehlix <fehlix@mxlinux.org>  Thu, 19 Jan 2023 12:41:38 -0500
 
 conky-manager (2.7+dfsg1-6mx19+2) mx; urgency=medium
 

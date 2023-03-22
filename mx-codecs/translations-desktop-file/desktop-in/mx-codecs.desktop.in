@@ -1,0 +1,10 @@
+[Desktop Entry]
+# The desktop entry name will be displayed within the menu.
+Name=MX Codecs Installer
+# # The desktop entry comment will be shown within the menu.
+Comment=Simple install of restricted codecs
+Exec=mx-codecs-launcher
+Icon=mx-codecs
+NoDisplay=false
+Categories=System;MX-Setup;
+Type=Application

@@ -65,6 +65,11 @@ int main(int argc, char *argv[])
     signal(SIGHUP, signalHandler);
     // signal(SIGQUIT, signalHandler); // allow SIGQUIT CTRL-\?
 
+    QProcess proc;
+    proc.start("logname", {}, QIODevice::ReadOnly);
+    proc.waitForFinished();
+    auto const logname = QString::fromLatin1(proc.readAllStandardOutput().trimmed());
+
     QCommandLineParser parser;
     parser.setApplicationDescription(QObject::tr("Tool used for creating a live-CD from the running system"));
     parser.addHelpOption();
@@ -97,6 +102,7 @@ int main(int argc, char *argv[])
     parser.addOption({{"s", "checksums"}, QObject::tr("Calculate checksums for resulting ISO file")});
     parser.addOption(
         {{"o", "override-size"}, QObject::tr("Skip calculating free space to see if the resulting ISO will fit")});
+    parser.addOption({{"w", "workdir"}, QObject::tr("Work directory"), QObject::tr("path")});
     parser.addOption({{"x", "exclude"},
                       QObject::tr("Exclude main folders, valid choices: ")
                           + "Desktop, Documents, Downloads, Music, Networks, Pictures, Steam, Videos, VirtualBox. "
@@ -123,7 +129,7 @@ int main(int argc, char *argv[])
 
 #ifdef CLI_BUILD
     // root guard
-    if (QProcess::execute("/bin/bash", {"-c", "logname |grep -q ^root$"}) == 0) {
+    if (logname == "root") {
         qDebug() << QObject::tr(
             "You seem to be logged in as root, please log out and log in as normal user to use this program.");
         exit(EXIT_FAILURE);
@@ -133,7 +139,7 @@ int main(int argc, char *argv[])
     if (parser.isSet(QStringLiteral("cli")) || parser.isSet(QStringLiteral("help"))) {
         QCoreApplication app(argc, argv);
         // root guard
-        if (QProcess::execute(QStringLiteral("/bin/bash"), {"-c", "logname |grep -q ^root$"}) == 0) {
+        if (logname == "root") {
             qDebug() << QObject::tr(
                 "You seem to be logged in as root, please log out and log in as normal user to use this program.");
             exit(EXIT_FAILURE);
@@ -146,9 +152,10 @@ int main(int argc, char *argv[])
     if (getuid() == 0) {
         qputenv("HOME", "/root");
         setLog();
-        qDebug().noquote() << qApp->applicationName() << QObject::tr("version:") << qApp->applicationVersion();
+        qDebug().noquote() << QCoreApplication::applicationName() << QObject::tr("version:")
+                           << QCoreApplication::applicationVersion();
         if (argc > 1)
-            qDebug().noquote() << "Args:" << qApp->arguments();
+            qDebug().noquote() << "Args:" << QCoreApplication::arguments();
         Batchprocessing batch(parser);
         QTimer::singleShot(0, &app, &QCoreApplication::quit);
         return QCoreApplication::exec();
@@ -168,7 +175,7 @@ else
     checkSquashfs();
 
     // root guard
-    if (QProcess::execute(QStringLiteral("/bin/bash"), {"-c", "logname |grep -q ^root$"}) == 0) {
+    if (logname == "root") {
         QMessageBox::critical(
             nullptr, QObject::tr("Error"),
             QObject::tr(
@@ -179,12 +186,20 @@ else
     if (getuid() == 0) {
         qputenv("HOME", "/root");
         setLog();
-        qDebug().noquote() << qApp->applicationName() << QObject::tr("version:") << qApp->applicationVersion();
+        qDebug().noquote() << QApplication::applicationName() << QObject::tr("version:")
+                           << QApplication::applicationVersion();
         if (argc > 1)
-            qDebug().noquote() << "Args:" << qApp->arguments();
-        MainWindow w(nullptr, parser);
+            qDebug().noquote() << "Args:" << QApplication::arguments();
+        MainWindow w(parser);
         w.show();
-        exit(QApplication::exec());
+        auto const exit_code = QApplication::exec();
+        proc.start("grep", {"^" + logname + ":", "/etc/passwd"});
+        proc.waitForFinished();
+        auto const home = QString::fromLatin1(proc.readAllStandardOutput().trimmed()).section(":", 5, 5);
+        auto const file_name = home + "/.config/" + QApplication::applicationName() + "rc";
+        if (QFile::exists(file_name))
+            QProcess::execute("chown", {logname + ":", file_name});
+        return exit_code;
     } else {
         QProcess::startDetached(QStringLiteral("/usr/bin/mx-snapshot-launcher"), {});
     }
@@ -224,16 +239,15 @@ void messageHandler(QtMsgType type, const QMessageLogContext &context, const QSt
 
 void setTranslation()
 {
-    if (qtTran.load(QLocale(), QStringLiteral("qt"), QStringLiteral("_"),
-                    QLibraryInfo::location(QLibraryInfo::TranslationsPath)))
-        qApp->installTranslator(&qtTran);
+    if (qtTran.load("qt_" + QLocale().name(), QLibraryInfo::location(QLibraryInfo::TranslationsPath)))
+        QCoreApplication::installTranslator(&qtTran);
 
     if (qtBaseTran.load("qtbase_" + QLocale().name(), QLibraryInfo::location(QLibraryInfo::TranslationsPath)))
-        qApp->installTranslator(&qtBaseTran);
+        QCoreApplication::installTranslator(&qtBaseTran);
 
-    if (appTran.load(qApp->applicationName() + "_" + QLocale().name(),
-                     "/usr/share/" + qApp->applicationName() + "/locale"))
-        qApp->installTranslator(&appTran);
+    if (appTran.load("mx-snapshot_" + QLocale().name(),
+                     "/usr/share/" + QCoreApplication::applicationName() + "/locale"))
+        QCoreApplication::installTranslator(&appTran);
 }
 
 // Check if SQUASHFS is available
@@ -251,7 +265,7 @@ void checkSquashfs()
         qDebug() << QObject::tr("Current kernel doesn't support Squashfs, cannot continue.");
 #else
             QString message = QObject::tr("Current kernel doesn't support Squashfs, cannot continue.");
-            if (qApp->metaObject()->className() != QLatin1String("QApplication"))
+            if (QCoreApplication::staticMetaObject.className() != QLatin1String("QApplication"))
                 qDebug() << message;
             else
                 QMessageBox::critical(nullptr, QObject::tr("Error"), message);
@@ -262,7 +276,7 @@ void checkSquashfs()
 
 void setLog()
 {
-    QString log_name = "/var/log/" + qApp->applicationName() + ".log";
+    auto const log_name = "/var/log/" + QCoreApplication::applicationName() + ".log";
     if (QFileInfo::exists(log_name)) {
         QFile::remove(log_name + ".old");
         QFile::rename(log_name, log_name + ".old");
@@ -288,5 +302,5 @@ void signalHandler(int signal)
         qDebug() << "\nSIGTERM";
         break;
     }
-    qApp->quit(); // quit app anyway in case a subprocess was killed, but at least this calls aboutToQuit
+    QCoreApplication::quit(); // quit app anyway in case a subprocess was killed, but at least this calls aboutToQuit
 }

@@ -1,0 +1,8 @@
+[main]
+host = https://www.transifex.com
+
+[o:anticapitalista:p:antix-development:r:mx-boot-options-desktop]
+file_filter = po/mx-boot-options-desktop_<lang>.po
+source_file = mx-boot-options-desktop.pot
+source_lang = en
+type = po

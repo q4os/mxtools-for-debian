@@ -10,6 +10,7 @@ Architecture: any
 Depends: cli-shell-utils,
          live-usb-maker,
          xdg-utils | mx-viewer,
+         xorriso,
          ${misc:Depends},
          ${shlibs:Depends}
 Description: mx-live-usb-maker

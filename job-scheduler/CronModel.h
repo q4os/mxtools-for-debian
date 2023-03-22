@@ -20,39 +20,37 @@ class CronModel : public QAbstractItemModel
     Q_OBJECT
 
 public:
-    CronModel(QList<Crontab*>*cron, QObject *parent = nullptr)
-        : QAbstractItemModel(parent), crontabs(cron) {}
-    ~CronModel() {}
+    CronModel(QList<Crontab *> *cron, QObject *parent = nullptr)
+        : QAbstractItemModel(parent)
+        , crontabs(cron)
+    {
+    }
+    ~CronModel() { }
 
     enum Data { Time, User, Command };
     Qt::ItemFlags flags(const QModelIndex &) const;
     QModelIndex index(int row, int column, const QModelIndex &parent = QModelIndex()) const;
     int rowCount(const QModelIndex &parent) const;
     int columnCount(const QModelIndex &) const { return 4; }
-    QVariant headerData(int section, Qt::Orientation orientation,
-                        int role) const;
+    QVariant headerData(int section, Qt::Orientation orientation, int role) const;
     QVariant data(const QModelIndex &idx, int role) const;
     QModelIndex parent(const QModelIndex &index) const;
-    bool dropMimeData( const QMimeData *data, Qt::DropAction action,
-                       int row, int column, const QModelIndex &parent);
-
+    bool dropMimeData(const QMimeData *data, Qt::DropAction action, int row, int column, const QModelIndex &parent);
 
     void tCommandChanged(const QModelIndex &idx);
     void dragTCommand(const QModelIndex &idx);
     QModelIndex removeCComand(const QModelIndex &idx);
     QModelIndex insertTCommand(const QModelIndex &idx, TCommand *cmnd);
     QModelIndex searchTCommand(TCommand *cmnd) const;
-    inline bool isOneUser() const
-    { return (crontabs->count() == 1); }
+    inline bool isOneUser() const { return (crontabs->count() == 1); }
     TCommand *getTCommand(const QModelIndex &idx) const;
     Crontab *getCrontab(const QModelIndex &idx) const;
 
-    QList<Crontab*>*crontabs;
+    QList<Crontab *> *crontabs;
     TCommand *drag;
 
 signals:
     void moveTCommand(TCommand *cmd);
-
 };
 
 #endif

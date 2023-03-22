@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="pt_BR">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="pt_BR">
 <context>
     <name>MEConfig</name>
     <message>
@@ -360,15 +358,6 @@
         <translation>Adicionar Grupo</translation>
     </message>
     <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="1252"/>
-        <source>Group name:</source>
-        <translation>Nome do grupo:</translation>
-    </message>
-    <message>
         <location filename="../mainwindow.ui" line="1201"/>
         <source>Enter name of new group</source>
         <translation>Insira o nome do novo grupo</translation>
@@ -379,13 +368,29 @@
         <translation>nomedogrupo</translation>
     </message>
     <message>
+        <location filename="../mainwindow.ui" line="1217"/>
+        <source>Create a group with GID &gt; 1000</source>
+        <translation>Crie um grupo com GID &gt; 1000</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="1220"/>
+        <source>Create a user-level group</source>
+        <translation>Criar um grupo com um GID no intervalo do usuário</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="1249"/>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Enter name of new group&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Inserir o nome do novo grupo&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="1252"/>
+        <source>Group name:</source>
+        <translation>Nome do grupo:</translation>
+    </message>
+    <message>
         <location filename="../mainwindow.ui" line="1271"/>
         <source>Delete Group</source>
         <translation>Excluir Grupo</translation>
-    </message>
-    <message>
-        <source>Select group to delete</source>
-        <translation type="vanished">Selecione o grupo a ser excluído</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1340"/>
@@ -393,18 +398,19 @@
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Selecione o grupo a ser excluído&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <source>Group to delete:</source>
-        <translation type="vanished">Grupo a ser excluído:</translation>
+        <location filename="../mainwindow.ui" line="1349"/>
+        <source>Select group to delete:</source>
+        <translation>Selecione o grupo a ser excluído:</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="1356"/>
+        <source>*Please doublecheck your selections before applying, removing a wrong group can break your system.</source>
+        <translation>*Por favor, verifique as suas seleções antes de aplicar, porque se você excluir um grupo errado poderá danificar o seu sistema operacional.</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1371"/>
         <source>Group Membership</source>
         <translation>Membros do Grupo</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="1497"/>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Select user to change&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Selecione o usuário a ser alterado&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1445"/>
@@ -417,49 +423,14 @@
         <translation>*Por favor, verifique as suas seleções antes de aplicá-las, se você atribuir associações erradas dos membros do grupo poderá danificar o seu sistema operacional. Se você cometeu algum erro, utilize a opção “Restaurar associações de grupo para os padrões do MX” que está disponível na aba ou guia Opções.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="1641"/>
-        <source>Apply any changes</source>
-        <translation>Aplicar as alterações</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="1644"/>
-        <source>Apply</source>
-        <translation>Aplicar</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="1651"/>
-        <source>Alt+A</source>
-        <translation>Alt+A</translation>
+        <location filename="../mainwindow.ui" line="1497"/>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Select user to change&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Selecione o usuário a ser alterado&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1573"/>
         <source>Cancel any changes then quit</source>
         <translation>Cancelar as alterações e sair</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="1217"/>
-        <source>Create a group with GID &gt; 1000</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="1220"/>
-        <source>Create a user-level group</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="1249"/>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Enter name of new group&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="1349"/>
-        <source>Select group to delete:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="1356"/>
-        <source>*Please doublecheck your selections before applying, removing a wrong group can break your system.</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1576"/>
@@ -485,6 +456,21 @@
         <location filename="../mainwindow.ui" line="1634"/>
         <source>Alt+H</source>
         <translation>Alt+H</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="1641"/>
+        <source>Apply any changes</source>
+        <translation>Aplicar as alterações</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="1644"/>
+        <source>Apply</source>
+        <translation>Aplicar</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="1651"/>
+        <source>Alt+A</source>
+        <translation>Alt+A</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1658"/>
@@ -686,17 +672,7 @@ continuar.</translation>
     <message>
         <location filename="../mainwindow.cpp" line="467"/>
         <source>This action cannot be undone. Are you sure you want to delete the following groups: %1?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="474"/>
-        <source>Group: %1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="479"/>
-        <source>The group has been deleted.</source>
-        <translation>O grupo foi excluído.</translation>
+        <translation>Esta ação não poderá ser desfeita. Você tem certeza de que pretende excluir os grupos %1?</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="474"/>
@@ -704,9 +680,19 @@ continuar.</translation>
         <translation>Falha ao excluir o grupo.</translation>
     </message>
     <message>
+        <location filename="../mainwindow.cpp" line="474"/>
+        <source>Group: %1</source>
+        <translation>Grupo: %1</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="479"/>
+        <source>The group has been deleted.</source>
+        <translation>O grupo foi excluído.</translation>
+    </message>
+    <message>
         <location filename="../mainwindow.cpp" line="479"/>
         <source>The groups have been deleted.</source>
-        <translation type="unfinished"></translation>
+        <translation>Os grupos foram excluídos.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="496"/>

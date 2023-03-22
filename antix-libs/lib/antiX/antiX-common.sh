@@ -31,7 +31,7 @@ CMDLINE_ARGS=("$@")
        GUI_TERM="urxvt"
       TERM_OPTS="-e"
  TERM_TITLE_OPT="--title"
-     GUI_FILERS="rox thunar spacefm zzz"
+     GUI_FILERS="rox thunar dolphin spacefm zzz"
 
         ARCHIVE="archive"
 

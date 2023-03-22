@@ -1,7 +1,7 @@
 [main]
 host = https://www.transifex.com
 
-[antix-development.mx-welcome]
+[o:anticapitalista:p:antix-development:r:mx-welcome]
 file_filter = ./mx-welcome_<lang>.ts
 source_file = mx-welcome_en.ts
 source_lang = en

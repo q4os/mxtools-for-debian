@@ -36,7 +36,6 @@ public:
     TimeDialog(QString time, QWidget *parent = nullptr);
     QString time() { return outTime; }
 
-
 private slots:
     void minuteButtonClicked(QAbstractButton *b);
     void hourButtonClicked(QAbstractButton *b);
@@ -66,5 +65,3 @@ private:
 };
 
 #endif
-
-

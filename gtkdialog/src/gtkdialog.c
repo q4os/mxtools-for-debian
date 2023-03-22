@@ -81,6 +81,14 @@ gint geometry_dy = 0;
 gint geometry_x = 0;
 gint geometry_y = 0;
 
+gint function_signals_block;
+gint project_space_expand;
+gint project_space_fill;
+GtkWidget *lastradiowidget;
+GList *accel_groups;
+GList *widget_hide_list, *widget_show_list;
+gint window_id;
+
 static gboolean 
 get_geometry(const char *argument)
 {

@@ -22,13 +22,11 @@
  **********************************************************************/
 
 #include "lockfile.h"
-#include <unistd.h>
-#include <sys/file.h>
 
-LockFile::LockFile(const QString &file_name)
-{
-    this->file_name = file_name;
-}
+#include <sys/file.h>
+#include <unistd.h>
+
+LockFile::LockFile(const QString &file_name) { this->file_name = file_name; }
 
 // checks if file is locked by another process (if locked by the same process returns false)
 bool LockFile::isLocked()
@@ -49,7 +47,7 @@ bool LockFile::lock()
         return false;
     }
     // create a file lock
-    return(lockf(fd, F_LOCK, 0) == 0);
+    return (lockf(fd, F_LOCK, 0) == 0);
 }
 
 bool LockFile::unlock()

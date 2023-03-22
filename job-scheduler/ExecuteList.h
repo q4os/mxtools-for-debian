@@ -19,15 +19,14 @@ class ExecuteView;
 class ExecuteModel;
 class Execute;
 
-
 class ExecuteList : public QWidget
 {
     Q_OBJECT
 
 public:
-    ExecuteList(int maxN, int maxD, QList<Crontab*> *cron);
+    ExecuteList(int maxN, int maxD, QList<Crontab *> *cron);
 
-    QList<Execute*> executes;
+    QList<Execute *> executes;
 
     int maxNum;
     int maxDate;
@@ -42,13 +41,12 @@ public slots:
     void setVisible(bool flag);
 
 private:
-    int itemCount{};
+    int itemCount {};
     QLabel *countLabel;
     ExecuteModel *executeModel;
-    QList<Crontab*> *crontabs;
-    Crontab* curCrontab;
-    TCommand* curTCommand;
+    QList<Crontab *> *crontabs;
+    Crontab *curCrontab;
+    TCommand *curTCommand;
 };
 
 #endif
-

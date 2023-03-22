@@ -837,22 +837,5 @@
  <resources>
   <include location="images.qrc"/>
  </resources>
- <connections>
-  <connection>
-   <sender>pushCancel</sender>
-   <signal>pressed()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>close()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>723</x>
-     <y>519</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>388</x>
-     <y>272</y>
-    </hint>
-   </hints>
-  </connection>
- </connections>
+ <connections/>
 </ui>

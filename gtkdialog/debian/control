@@ -1,15 +1,18 @@
 Source: gtkdialog
 Section: interpreters
 Priority: optional
-Maintainer: Mike Purtell (mmikeinsantarosa) <maintainer@mepiscommunity.org>
-Bugs: mailto: maintainer@mepiscommunity.org
-XSBC-Original-Maintainer: Mateusz Łukasik <mati75@linuxmint.pl>
-Build-Depends:  debhelper (>= 9), dpatch, libgtk2.0-dev, libgtk2.0-bin, libglade2-dev, autotools-dev, byacc, flex, texinfo, docbook-to-man
+Maintainer: Steven Pusser <stevep@mxlinux.org>
+XSBC-Original-Maintainer: Mike Purtell (mmikeinsantarosa) <maintainer@mepiscommunity.org>
+Build-Depends: debhelper-compat (= 12),
+               docbook-to-man,
+               libglade2-dev,
+               libgtk2.0-bin,
+               libgtk2.0-dev
 Standards-Version: 3.9.4
 
 Package: gtkdialog
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}
+Depends: ${misc:Depends}, ${shlibs:Depends}
 Description: GUI-creation command-line utility based on GTK+ library
  Gtkdialog is a small utility for fast and easy GUI building. It can be used to
  create dialog boxes for almost any interpreted and compiled programs which is
@@ -20,4 +23,4 @@ Description: GUI-creation command-line utility based on GTK+ library
  files. Gtkdialog makes the use of Glade created user interfaces convenient in
  a shell script or any other interpreted language.
  .
- Stand-alone, bash, and awk examples are provided. 
+ Stand-alone, bash, and awk examples are provided.

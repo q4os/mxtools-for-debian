@@ -20,25 +20,21 @@
  * You should have received a copy of the GNU General Public License
  * along with this package. If not, see <http://www.gnu.org/licenses/>.
  **********************************************************************/
-
-#include <QFileDialog>
-#include <QDebug>
-
 #include "editshare.h"
 #include "ui_editshare.h"
 
-EditShare::EditShare(QWidget *parent) :
-    QDialog(parent),
-    ui(new Ui::EditShare)
+#include <QDebug>
+#include <QFileDialog>
+
+EditShare::EditShare(QWidget *parent)
+    : QDialog(parent)
+    , ui(new Ui::EditShare)
 {
     ui->setupUi(this);
     setWindowFlags(Qt::WindowStaysOnTopHint);
 }
 
-EditShare::~EditShare()
-{
-    delete ui;
-}
+EditShare::~EditShare() { delete ui; }
 
 void EditShare::on_pushChooseDirectory_clicked()
 {
@@ -46,7 +42,8 @@ void EditShare::on_pushChooseDirectory_clicked()
     QString path = ui->textSharePath->text();
     if (path.isEmpty() || !QFileInfo::exists(path))
         path = QDir::homePath();
-    const QString &selected = QFileDialog::getExistingDirectory(this, tr("Select directory to share"), path, QFileDialog::ShowDirsOnly);
+    const QString &selected
+        = QFileDialog::getExistingDirectory(this, tr("Select directory to share"), path, QFileDialog::ShowDirsOnly);
     if (!selected.isEmpty())
         ui->textSharePath->setText(selected);
 }

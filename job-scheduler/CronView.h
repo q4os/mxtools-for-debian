@@ -47,7 +47,7 @@ private slots:
     void selectChanged(const QModelIndex &cur, const QModelIndex &prev);
 
 signals:
-    void viewSelected(Crontab*, TCommand*);
+    void viewSelected(Crontab *, TCommand *);
     void pasted(bool flg = true);
     void dataChanged();
 
@@ -56,7 +56,6 @@ private:
 
     TCommand *pasteData;
     CronModel *cronModel;
-
 };
 
 #endif

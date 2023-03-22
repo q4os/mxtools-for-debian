@@ -8,7 +8,9 @@
 #==============================================================================
 
      VERSION="1.07"
- VERSION_DATE="Wed Dec 23 01:19:04 PM MST 2020"
+#VERSION_DATE="Wed Dec 23 01:19:04 PM MST 2020"
+     VERSION="1.07-2302"
+ VERSION_DATE="Sat, 25 Feb 2023 12:45:10 -0500"
 
           TOP_DIR="/media"
   GRAPHICAL_MENUS="true"
@@ -429,14 +431,14 @@ distro_name() {
     local dir=$1  max_width=${2:-$MAX_DISTRO_WIDTH}  distro
     local etc="$dir/etc"
     local fname  file
-    local fname_list="os-release initrd-release"
+    local fname_list="os-release initrd_release initrd-release"
 
     # antiX and MX are a special case !!
     if [ -e "$etc/antix-version" -o -e "$etc/mx-version" ]; then
-        fname_list="lsb-release initrd-release"
+        fname_list="lsb-release initrd_release initrd-release"
     fi
     for fname in $fname_list $etc/*-release; do
-        file="$etc/$fname"
+        file="$etc/${fname##*/}"
         test -e "$file" || continue
 
         distro=$(get_value PRETTY_NAME "$file")

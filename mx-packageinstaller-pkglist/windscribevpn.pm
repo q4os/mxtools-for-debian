@@ -69,6 +69,7 @@ Windscribe VPN
 <preinstall>
 <![CDATA[
 INITHELPER=/usr/share/mx-packageinstaller-pkglist/windscribe_sysvinit_helper.sh
+PRERM=/var/lib/dpkg/info/windscribe.prerm 
 
 TMP_DIR=$(mktemp -d /tmp/mxpi-windscribe-installer.XXXXXXXXXX)
 tidy_up() { rm -r /tmp/mxpi-windscribe-installer.* 2>/dev/null ; }
@@ -101,24 +102,34 @@ if [ -z "${HLP_SVC##*.service}" ]; then
    chmod +x windscribe-helper
    cp windscribe-helper /etc/init.d/windscribe-helper 
 fi
-ar x "$DEB" control.tar.gz
+
+CNTRL=$(ar t "$DEB" | grep control.tar)
+case $CNTRL in
+*.gz) CMP=--gzip ;;
+ *.xz) CMP=--xz ;;
+*.zstd) CMP=--zstd ;;
+esac
+
+ar x "$DEB" $CNTRL
 mkdir AR
-tar -C AR -xzf control.tar.gz
+tar -C AR $CMP -xf  $CNTRL
 pushd AR >/dev/null
 sed -i "\:$INITHELPER:d" /var/lib/dpkg/info/windscribe.p* 2>/dev/null
 sed -i 's/sudo //' /var/lib/dpkg/info/windscribe.p* 2>/dev/null
+sed -i "\:rm /usr/local/bin/windscribe-cli:d" /var/lib/dpkg/info/windscribe.prerm  2>/dev/null
+echo "test -f /usr/local/bin/windscribe-cli && rm /usr/local/bin/windscribe-cli" >> /var/lib/dpkg/info/windscribe.prerm
 sed -i "2itest -r $INITHELPER && source $INITHELPER" /var/lib/dpkg/info/windscribe.p*  2>/dev/null
 sed -i "2itest -r $INITHELPER && source $INITHELPER" p*
 sed -i 's/sudo //' p*
-echo "# remove sysVinit script" >> prerm
+sed -i "\:rm /usr/local/bin/windscribe-cli:d" prerm  2>/dev/null
 echo "test -f /usr/local/bin/windscribe-cli && rm /usr/local/bin/windscribe-cli" >> prerm
+echo "# remove sysVinit script" >> prerm
 echo "test -f /etc/init.d/windscribe-helper && rm /etc/init.d/windscribe-helper" >> prerm
-rm ../control.tar.gz 
-tar -czf ../control.tar.gz ./
+rm ../$CNTRL
+tar $CMP -cf  ../$CNTRL ./
 popd >/dev/null
 cp $DEB ${DEB%.deb}.orig.deb
-ar r $DEB control.tar.gz
-
+ar r $DEB $CNTRL
 dpkg --unpack $DEB
 cp windscribe-helper /etc/init.d/windscribe-helper 
 dpkg --configure windscribe

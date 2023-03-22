@@ -1,0 +1,12 @@
+[Desktop Entry]
+Encoding=UTF-8
+# The desktop entry name will be displayed within the menu.
+Name=MX Welcome
+# # The desktop entry comment will be shown within the menu.
+Comment=Display welcome message
+Exec=mx-welcome
+Terminal=false
+Type=Application
+Icon=mx-welcome
+Categories=GNOME;GTK;System;MX-Setup;
+NoDisplay=false

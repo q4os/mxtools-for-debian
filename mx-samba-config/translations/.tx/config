@@ -1,7 +1,7 @@
 [main]
 host = https://www.transifex.com
 
-[antix-development.mx-samba-config]
+[o:anticapitalista:p:antix-development:r:mx-samba-config]
 file_filter = ./mx-samba-config_<lang>.ts
 source_file = mx-samba-config_en.ts
 source_lang = en

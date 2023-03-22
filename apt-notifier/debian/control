@@ -3,7 +3,7 @@ Section: admin
 Priority: optional
 Maintainer: fehlix <fehlix@mxlinux.org>
 XSBC-Original-Maintainer: Kent Mathern <maintainer@mepiscommunity.org>
-Build-Depends: debhelper (>= 13), inkscape (>= 1.0)
+Build-Depends: debhelper-compat (= 13), debhelper (>= 13), inkscape (>= 1.0)
 Standards-Version: 3.9.3
 Homepage: https://github.com/MX-Linux/apt-notifier
 
@@ -12,7 +12,7 @@ Architecture: all
 Depends: ${misc:Depends}, anacron, apt, bash (>= 3.2-4), gtkdialog,
  python3-pyqt5, xdotool, xfce4-terminal | x-terminal-emulator,
  yad (>= 0.26), unattended-upgrades, curl, python3-notify2,
- python3-distutils, util-linux-locales
+ util-linux-locales, python3-ewmh
 Recommends: policykit-1-gnome | lxpolkit | polkit-1-auth-agent,
  synaptic | muon
 Conflicts: mepis-aptnotify

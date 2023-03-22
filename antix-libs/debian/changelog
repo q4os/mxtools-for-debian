@@ -1,8 +1,14 @@
-antix-libs (0.8.14+4mx+deb11u13) stable; urgency=medium
+antix-libs (0.8.14+5mx+deb11u13) stable; urgency=medium
 
   * MX Tools release
 
- -- Dolphin Oracle <administrator@localdomain>  Wed, 22 Mar 2023 10:43:47 +0100
+ -- Dolphin Oracle <administrator@localdomain>  Wed, 22 Mar 2023 13:32:30 +0100
+
+antix-libs (0.8.14+5mx) mx; urgency=medium
+
+  * add dolphin to gui file manager list
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 13 Jan 2023 23:40:46 -0500
 
 antix-libs (0.8.14+4mx) mx; urgency=medium
 

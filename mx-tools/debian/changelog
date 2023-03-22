@@ -1,14 +1,27 @@
-mx-tools (22.10.01+deb11u13) stable; urgency=medium
+mx-tools (23.1.02+deb11u13) stable; urgency=medium
 
   * MX Tools release
 
- -- Dolphin Oracle <administrator@localdomain>  Wed, 22 Mar 2023 10:43:56 +0100
+ -- Dolphin Oracle <administrator@localdomain>  Wed, 22 Mar 2023 13:32:39 +0100
 
-mx-tools (22.10.01) mx; urgency=medium
+mx-tools (23.1.02) mx; urgency=medium
 
-  * fix string source files 
+  * new method to set colum size
 
- -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 28 Oct 2022 15:49:53 -0400
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 23 Jan 2023 22:29:42 -0500
+
+mx-tools (23.1.01) mx; urgency=medium
+
+  * Add horizontal scrollbar if needed 
+
+ -- Adrian <adrian@mxlinux.org>  Sun, 22 Jan 2023 11:28:27 -0500
+
+mx-tools (23.1) mx; urgency=medium
+
+  * Strip %f,%F,%U from command since the program is called without arguments from launcher. This should fix starting deb-installer
+  * Update translations
+
+ -- Adrian <adrian@mxlinux.org>  Sat, 21 Jan 2023 09:24:40 -0500
 
 mx-tools (22.10) mx; urgency=medium
 

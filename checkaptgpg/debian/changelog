@@ -1,8 +1,16 @@
-checkaptgpg (20.10.12+deb11u13) stable; urgency=medium
+checkaptgpg (23.01.01+deb11u13) stable; urgency=medium
 
   * MX Tools release
 
- -- fehlix <administrator@localdomain>  Wed, 22 Mar 2023 10:43:47 +0100
+ -- fehlix <administrator@localdomain>  Wed, 22 Mar 2023 13:32:31 +0100
+
+checkaptgpg (23.01.01) mx; urgency=medium
+
+  * use C.UTF-8 to handle umlauts
+  * adjust keyserver list
+  * ignore asc-keyrings
+
+ -- fehlix <fehlix@mxlinux.org>  Sun, 22 Jan 2023 16:58:45 -0500
 
 checkaptgpg (20.10.12) mx; urgency=medium
 

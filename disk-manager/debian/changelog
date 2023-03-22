@@ -1,8 +1,15 @@
-disk-manager (22.01.02+deb11u13) stable; urgency=medium
+disk-manager (23.01.01+deb11u13) stable; urgency=medium
 
   * MX Tools release
 
- -- fehlix <administrator@localdomain>  Wed, 22 Mar 2023 10:43:49 +0100
+ -- fehlix <administrator@localdomain>  Wed, 22 Mar 2023 13:32:32 +0100
+
+disk-manager (23.01.01) mx; urgency=medium
+
+  * make ntfs-3g default preselected driver for ntfs
+  * replace "Access driver" with "Read-only driver" for ntfs
+
+ -- fehlix <fehlix@mxlinux.org>  Sat, 21 Jan 2023 16:38:38 +0000
 
 disk-manager (22.01.02) mx; urgency=medium
 

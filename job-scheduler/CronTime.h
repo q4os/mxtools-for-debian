@@ -37,7 +37,6 @@ private:
     static QString toTimeString(int start, int cnt, int interval);
     static QString toWeekLiteral(const QString &str);
     static QString toMonthLiteral(const QString &str);
-
 };
 
 #endif

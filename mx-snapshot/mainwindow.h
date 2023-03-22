@@ -45,7 +45,7 @@ class MainWindow : public QDialog, public Settings
     Q_OBJECT
 
 public:
-    MainWindow(QWidget *parent = nullptr, const QCommandLineParser &arg_parser = QCommandLineParser());
+    MainWindow(const QCommandLineParser &arg_parser = QCommandLineParser(), QWidget *parent = nullptr);
     ~MainWindow();
 
     [[noreturn]] void cleanUp();
@@ -80,6 +80,7 @@ private slots:
     void btnEditExclude_clicked();
     void btnHelp_clicked();
     void btnNext_clicked();
+    void btnSelectKernel_clicked();
     void btnSelectSnapshot_clicked();
     void cbCompression_currentIndexChanged();
     void checkMd5_toggled(bool checked);

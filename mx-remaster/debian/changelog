@@ -1,8 +1,20 @@
-mx-remaster (23.01.03mx21+deb11u13) stable; urgency=medium
+mx-remaster (23.02.02mx21+deb11u13) stable; urgency=medium
 
   * MX Tools release
 
- -- Dolphin Oracle <administrator@localdomain>  Wed, 22 Mar 2023 10:43:54 +0100
+ -- Dolphin Oracle <administrator@localdomain>  Wed, 22 Mar 2023 13:32:37 +0100
+
+mx-remaster (23.02.02mx21) mx; urgency=medium
+
+  * revese maksing initrd.target
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 20 Feb 2023 19:47:21 -0500
+
+mx-remaster (23.02.01mx21) mx; urgency=medium
+
+  * mask initrd.target 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 20 Feb 2023 10:22:47 -0500
 
 mx-remaster (23.01.03mx21) mx; urgency=medium
 

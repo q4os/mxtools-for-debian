@@ -67,6 +67,7 @@ antiX 4.9 64 bit
 <screenshot>none</screenshot>
 
 <preinstall>
+apt-get install antix-archive-keyring
 echo "deb http://la.mxrepo.com/antix/bullseye bullseye main">/etc/apt/sources.list.d/mxpitemp.list
 apt-get update
 </preinstall>

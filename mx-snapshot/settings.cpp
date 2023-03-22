@@ -166,8 +166,11 @@ int Settings::getSnapshotCount() const
 quint64 Settings::getFreeSpace(const QString &path) const
 {
     bool ok = false;
-    quint64 result
-        = shell->getCmdOut(QStringLiteral("df -k --output=avail \"%1\" |tail -n1").arg(path)).toULongLong(&ok);
+    quint64 result {};
+    if (shell->getCmdOut("stat --file-system --format=%T \"" + path + "\"").trimmed() == "ramfs")
+        result = shell->getCmdOut("LC_ALL=C free |awk '/^Mem/ {print $7}'").toULongLong(&ok);
+    else
+        result = shell->getCmdOut(QStringLiteral("df -k --output=avail \"%1\" |tail -n1").arg(path)).toULongLong(&ok);
     if (!ok) {
         qDebug() << "Can't calculate free space on" << path;
         return 0;
@@ -211,7 +214,7 @@ void Settings::selectKernel()
         if (!QFileInfo::exists(
                 "/boot/vmlinuz-"
                 + kernel)) { // if current kernel doesn't exist for some reason (e.g. WSL) in /boot pick latest kernel
-            kernel = shell->getCmdOut(QStringLiteral("ls -1 /boot/vmlinuz* |sort |tail -n1"))
+            kernel = shell->getCmdOut(QStringLiteral("ls -1 /boot/vmlinuz-* |sort |tail -n1"))
                          .remove(QRegularExpression(QStringLiteral("^/boot/vmlinuz-")));
             if (!QFileInfo::exists("/boot/vmlinuz-" + kernel)) {
                 QString message = QObject::tr("Could not find a usable kernel");
@@ -269,25 +272,28 @@ void Settings::setVariables()
     }
 
     QString distro_version_file;
-    if (QFileInfo::exists(QStringLiteral("/etc/antix-version")))
-        distro_version_file = QStringLiteral("/etc/antix-version");
-    else if (QFileInfo::exists(QStringLiteral("/etc/mx-version")))
-        distro_version_file = QStringLiteral("/etc/mx-version");
+    if (QFileInfo::exists("/etc/mx-version"))
+        distro_version_file = "/etc/mx-version";
+    else if (QFileInfo::exists("/etc/antix-version"))
+        distro_version_file = "/etc/antix-version";
 
-    project_name = shell->getCmdOut(QStringLiteral("grep -oP '(?<=DISTRIB_ID=).*' /etc/lsb-release"));
+    if (QFileInfo::exists("/etc/lsb-release"))
+        project_name = shell->getCmdOut(QStringLiteral("grep -oP '(?<=DISTRIB_ID=).*' /etc/lsb-release"));
+    else
+        project_name = shell->getCmdOut("lsb_release -i | cut -f2");
     project_name.replace(QLatin1String("\""), QLatin1String(""));
     if (!distro_version_file.isEmpty()) {
         distro_version = shell->getCmdOut("cut -f1 -d'_' " + distro_version_file);
         distro_version.remove(QRegularExpression("^" + project_name + "_|^" + project_name + "-"));
-        full_distro_name
-            = project_name + "-" + distro_version + "_" + QString(i686 ? QStringLiteral("386") : QStringLiteral("x64"));
     } else {
-        distro_version
-            = project_name + QStringLiteral("_") + QString(i686 ? QStringLiteral("386") : QStringLiteral("x64"));
-        full_distro_name = distro_version;
+        distro_version = shell->getCmdOut("lsb_release -r | cut -f2");
     }
+    full_distro_name = project_name + "-" + distro_version + "_" + QString(i686 ? "386" : "x64");
     release_date = QDate::currentDate().toString(QStringLiteral("MMMM dd, yyyy"));
-    codename = shell->getCmdOut(QStringLiteral("grep -oP '(?<=DISTRIB_CODENAME=).*' /etc/lsb-release"));
+    if (QFileInfo::exists("/etc/lsb-release"))
+        codename = shell->getCmdOut(QStringLiteral("grep -oP '(?<=DISTRIB_CODENAME=).*' /etc/lsb-release"));
+    else
+        codename = shell->getCmdOut("lsb_release -c | cut -f2");
     codename.replace(QLatin1String("\""), QLatin1String(""));
     boot_options = live ? readKernelOpts() : filterOptions(readKernelOpts());
 }
@@ -392,9 +398,9 @@ bool Settings::isOnSupportedPart(const QString &dir) const
 {
     qDebug() << "+++" << __PRETTY_FUNCTION__ << "+++";
     // Supported partition types (NTFS returns fuseblk)
-    QStringList supported_partitions
-        = (QStringList() << QStringLiteral("ext2/ext3") << QStringLiteral("btrfs") << QStringLiteral("jfs")
-                         << QStringLiteral("reiserfs") << QStringLiteral("xfs") << QStringLiteral("fuseblk"));
+    QStringList supported_partitions {QStringLiteral("ext2/ext3"), QStringLiteral("btrfs"), QStringLiteral("jfs"),
+                                      QStringLiteral("reiserfs"),  QStringLiteral("xfs"),   QStringLiteral("fuseblk"),
+                                      QStringLiteral("ramfs"),     QStringLiteral("tmpfs")};
     QString part_type = shell->getCmdOut("stat --file-system --format=%T \"" + dir + "\"").trimmed();
     qDebug() << "detected partition" << part_type << "supported part:" << supported_partitions.contains(part_type);
     return supported_partitions.contains(part_type);
@@ -538,6 +544,26 @@ void Settings::excludeSteam(bool exclude)
     addRemoveExclusion(exclude, QStringLiteral("home/*/.local/share/Steam"));
 }
 
+void Settings::excludeSwapFile()
+{
+    QFile file("/etc/fstab");
+    if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+        qWarning() << "Failed to open /etc/fstab";
+        return;
+    }
+
+    while (!file.atEnd()) {
+        QString line = QString::fromUtf8(file.readLine()).trimmed();
+        if (line.startsWith("/") && !line.startsWith("/dev/")) {
+            QStringList parts = line.split(QRegExp("\\s+"));
+            if (parts.size() > 3) {
+                if (parts.at(2) == "swap")
+                    addRemoveExclusion(true, parts[0].remove(0, 1));
+            }
+        }
+    }
+}
+
 void Settings::excludeVideos(bool exclude)
 {
     qDebug() << "+++" << __PRETTY_FUNCTION__ << "+++";
@@ -615,6 +641,7 @@ void Settings::otherExclusions()
             && shell->getCmdOut(QStringLiteral("cat /etc/timezone")) != QLatin1String("America/New_York"))
             addRemoveExclusion(true, QStringLiteral("/etc/localtime"));
     }
+    excludeSwapFile();
 }
 
 void Settings::processArgs(const QCommandLineParser &arg_parser)
@@ -626,6 +653,11 @@ void Settings::processArgs(const QCommandLineParser &arg_parser)
         && QFileInfo::exists(arg_parser.value(QStringLiteral("directory"))))
         snapshot_dir = arg_parser.value(QStringLiteral("directory"))
                        + (snapshot_dir.endsWith(QLatin1String("/")) ? "snapshot" : "/snapshot");
+
+    if (!arg_parser.value(QStringLiteral("workdir")).isEmpty()
+        && QFileInfo::exists(arg_parser.value(QStringLiteral("workdir"))))
+        tempdir_parent = arg_parser.value(QStringLiteral("workdir"));
+
     if (!arg_parser.value(QStringLiteral("file")).isEmpty())
         snapshot_name
             = arg_parser.value(QStringLiteral("file"))
@@ -713,10 +745,13 @@ QString Settings::filterOptions(QString options)
 void Settings::setMonthlySnapshot(const QCommandLineParser &arg_parser)
 {
     QString name = QStringLiteral("Debian_") + (i686 ? QStringLiteral("386") : QStringLiteral("x64"));
-    if (arg_parser.value(QStringLiteral("file")).isEmpty())
-        snapshot_name = name.section(QStringLiteral("_"), 0, 0) + "_"
-                        + QDate::currentDate().toString(QStringLiteral("MMMM")) + "_"
-                        + name.section(QStringLiteral("_"), 1, 1) + ".iso";
+    if (arg_parser.value("file").isEmpty()) {
+        auto month = QDate::currentDate().toString("MMMM");
+        auto suffix = name.section("_", 1, 1);
+        if (qgetenv("DESKTOP_SESSION") == "plasma")
+            suffix = "KDE";
+        snapshot_name = name.section("_", 0, 0) + "_" + month + "_" + suffix + ".iso";
+    }
     if (QFile::exists(snapshot_dir + "/" + snapshot_name)) {
         QString message
             = QObject::tr("Output file %1 already exists. Please use another file name, or delete the existent file.")

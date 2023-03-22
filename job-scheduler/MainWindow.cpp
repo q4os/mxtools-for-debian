@@ -8,6 +8,8 @@
    of the License, or (at your option) any later version.
 */
 
+#include "MainWindow.h"
+
 #include <QApplication>
 #include <QFileInfo>
 #include <QMenu>
@@ -17,19 +19,18 @@
 #include <QSplitter>
 #include <QToolBar>
 
-#include "about.h"
 #include "Clib.h"
 #include "CronModel.h"
 #include "CronView.h"
 #include "Crontab.h"
 #include "ExecuteList.h"
 #include "ExecuteView.h"
-#include "MainWindow.h"
 #include "QCloseEvent"
 #include "SaveDialog.h"
 #include "TCommandEdit.h"
 #include "VariableEdit.h"
 #include "Version.h"
+#include "about.h"
 
 MainWindow::MainWindow()
 {
@@ -48,9 +49,11 @@ MainWindow::MainWindow()
     {
         tab->addTab(tCommandEdit, QIcon::fromTheme(QStringLiteral("edit-symbolic"), QIcon(":/images/edit_small.png")),
                     tr("&Command"));
-        tab->addTab(variableEdit, QIcon::fromTheme(QStringLiteral("edit-tag-symbolic"), QIcon(":/images/edit_small.png")),
+        tab->addTab(variableEdit,
+                    QIcon::fromTheme(QStringLiteral("edit-tag-symbolic"), QIcon(":/images/edit_small.png")),
                     tr("&Variables"));
-        tab->addTab(executeList, QIcon::fromTheme(QStringLiteral("view-list-symbolic"), QIcon(":/images/view_text.png")),
+        tab->addTab(executeList,
+                    QIcon::fromTheme(QStringLiteral("view-list-symbolic"), QIcon(":/images/view_text.png")),
                     tr("&Job List"));
     }
 
@@ -89,7 +92,8 @@ MainWindow::MainWindow()
 
     initCron();
 
-    if (this->isMaximized()) this->resize(QSize(670,480)); // reset size if started maximized
+    if (this->isMaximized())
+        this->resize(QSize(670, 480)); // reset size if started maximized
     cronView->resize(viewSize);
 
     setWindowTitle(Clib::uName() + " - " + tr("Job Scheduler"));
@@ -108,7 +112,8 @@ void MainWindow::changeUser()
         proc.start(QStringLiteral("logname"), {}, QIODevice::ReadOnly);
         proc.waitForFinished();
         QString user = QString::fromUtf8(proc.readAllStandardOutput()).trimmed();
-        QProcess::startDetached(QStringLiteral("runuser"), {QStringLiteral("-u"), user, QStringLiteral("job-scheduler")});
+        QProcess::startDetached(QStringLiteral("runuser"),
+                                {QStringLiteral("-u"), user, QStringLiteral("job-scheduler")});
     }
     qApp->quit();
 }
@@ -119,15 +124,15 @@ void MainWindow::createActions()
     auto *fileMenu = new QMenu(tr("&File"), this);
     QToolBar *fileToolBar = addToolBar(tr("File"));
 
-    newAction = fileMenu->addAction(
-                QIcon::fromTheme(QStringLiteral("filenew"), QIcon(":/images/filenew.png")), tr("&New Item"));
+    newAction = fileMenu->addAction(QIcon::fromTheme(QStringLiteral("filenew"), QIcon(":/images/filenew.png")),
+                                    tr("&New Item"));
     newAction->setShortcut(QKeySequence(tr("Ctrl+N")));
     fileMenu->addSeparator();
-    reloadAction = fileMenu->addAction(
-                QIcon::fromTheme(QStringLiteral("reload"), QIcon(":/images/reload.png")), tr("&Reload"));
+    reloadAction
+        = fileMenu->addAction(QIcon::fromTheme(QStringLiteral("reload"), QIcon(":/images/reload.png")), tr("&Reload"));
     reloadAction->setShortcut(QKeySequence(tr("Ctrl+R")));
-    saveAction = fileMenu->addAction(
-                QIcon::fromTheme(QStringLiteral("filesave"), QIcon(":/images/filesave.png")), tr("&Save"));
+    saveAction = fileMenu->addAction(QIcon::fromTheme(QStringLiteral("filesave"), QIcon(":/images/filesave.png")),
+                                     tr("&Save"));
     saveAction->setShortcut(QKeySequence(tr("Ctrl+S")));
     fileMenu->addSeparator();
     if (Clib::uId() != 0)
@@ -137,8 +142,7 @@ void MainWindow::createActions()
     chuserAction->setShortcut(QKeySequence(tr("Ctrl+U")));
     fileMenu->addSeparator();
 
-    quitAction = fileMenu->addAction(
-                 QIcon::fromTheme(QStringLiteral("exit"), QIcon(":images/exit.png")), tr("E&xit"));
+    quitAction = fileMenu->addAction(QIcon::fromTheme(QStringLiteral("exit"), QIcon(":images/exit.png")), tr("E&xit"));
     quitAction->setShortcut(QKeySequence(tr("Ctrl+Q")));
 
     fileToolBar->addAction(newAction);
@@ -148,18 +152,18 @@ void MainWindow::createActions()
 
     auto *editMenu = new QMenu(tr("&Edit"), this);
     QToolBar *editToolBar = addToolBar(tr("Edit"));
-    cutAction = editMenu->addAction(
-                QIcon::fromTheme(QStringLiteral("edit-cut"), QIcon(":/images/editcut.png")), tr("Cu&t"));
+    cutAction
+        = editMenu->addAction(QIcon::fromTheme(QStringLiteral("edit-cut"), QIcon(":/images/editcut.png")), tr("Cu&t"));
     cutAction->setShortcut(QKeySequence(tr("Ctrl+X")));
-    copyAction = editMenu->addAction(
-                QIcon::fromTheme(QStringLiteral("edit-copy"), QIcon(":/images/editcopy.png")), tr("&Copy"));
+    copyAction = editMenu->addAction(QIcon::fromTheme(QStringLiteral("edit-copy"), QIcon(":/images/editcopy.png")),
+                                     tr("&Copy"));
     copyAction->setShortcut(QKeySequence(tr("Ctrl+C")));
-    pasteAction = editMenu->addAction(
-                QIcon::fromTheme(QStringLiteral("edit-paste"), QIcon(":/images/editpaste.png")), tr("&Paste"));
+    pasteAction = editMenu->addAction(QIcon::fromTheme(QStringLiteral("edit-paste"), QIcon(":/images/editpaste.png")),
+                                      tr("&Paste"));
     pasteAction->setShortcut(QKeySequence(tr("Ctrl+V")));
     editMenu->addSeparator();
     deleteAction = editMenu->addAction(
-                QIcon::fromTheme(QStringLiteral("edit-delete"), QIcon(":/images/editdelete.png")), tr("&Delete"));
+        QIcon::fromTheme(QStringLiteral("edit-delete"), QIcon(":/images/editdelete.png")), tr("&Delete"));
     deleteAction->setShortcut(QKeySequence(tr("Del")));
 
     editToolBar->addAction(cutAction);
@@ -172,8 +176,7 @@ void MainWindow::createActions()
     menuBar()->addMenu(editMenu);
 
     auto *helpMenu = new QMenu(tr("&Help"), this);
-    aboutAction = helpMenu->addAction(
-                QIcon(":/images/job-scheduler.svg"), tr("&About"));
+    aboutAction = helpMenu->addAction(QIcon(":/images/job-scheduler.svg"), tr("&About"));
     helpAction = helpMenu->addAction(QIcon::fromTheme(QStringLiteral("help")), tr("&Help"));
     helpAction->setShortcut(QKeySequence(QStringLiteral("F1")));
     menuBar()->addMenu(helpMenu);
@@ -190,13 +193,13 @@ void MainWindow::displayHelp()
 
 void MainWindow::initCron()
 {
-    for (auto *d : qAsConst(crontabs)) delete d;
+    for (auto *d : qAsConst(crontabs))
+        delete d;
     crontabs.clear();
 
     QString user = Clib::uName();
     auto *cron = new Crontab(user);
-    if (cron->tCommands.count() == 0 && cron->comment.isEmpty() &&
-            cron->variables.count() == 0) {
+    if (cron->tCommands.count() == 0 && cron->comment.isEmpty() && cron->variables.count() == 0) {
         cron->comment = QLatin1String("");
         cron->variables << new Variable(QStringLiteral("HOME"), Clib::uHome(), QStringLiteral("Home"));
         cron->variables << new Variable(QStringLiteral("PATH"), Clib::getEnv("PATH"), QStringLiteral("Path"));
@@ -204,9 +207,9 @@ void MainWindow::initCron()
     }
     crontabs << cron;
     if (Clib::uId() == 0) {
-        cron = new Crontab( QStringLiteral("/etc/crontab") );
+        cron = new Crontab(QStringLiteral("/etc/crontab"));
         crontabs << cron;
-        for (const auto& s : Clib::allUsers()) {
+        for (const auto &s : Clib::allUsers()) {
             if (s == user)
                 continue;
 
@@ -229,26 +232,25 @@ void MainWindow::reloadCron()
 {
 
     if (saveAction->isEnabled()) {
-        if (QMessageBox::Ok == QMessageBox::question(this,
-                                                     tr("Job Scheduler"),
-                                                     tr("Not saved since last change.\nAre you OK to reload?"),
-                                                     QMessageBox::Ok, QMessageBox::Cancel)) {
+        if (QMessageBox::Ok
+            == QMessageBox::question(this, tr("Job Scheduler"),
+                                     tr("Not saved since last change.\nAre you OK to reload?"), QMessageBox::Ok,
+                                     QMessageBox::Cancel)) {
             initCron();
         }
     }
-
 }
 
 void MainWindow::saveCron()
 {
 
     bool saved = false;
-    bool notSaved =false;
+    bool notSaved = false;
 
     for (auto *cron : qAsConst(crontabs)) {
         if (cron->changed) {
             SaveDialog dialog(cron->cronOwner, cron->cronText());
-            if (dialog.exec()==QDialog::Accepted) {
+            if (dialog.exec() == QDialog::Accepted) {
                 bool ret = cron->putCrontab(dialog.getText());
                 if (!ret) {
                     QMessageBox::critical(this, tr("Job Scheduler"), cron->estr);
@@ -271,7 +273,6 @@ void MainWindow::saveCron()
         cronView->resetView();
     }
     saveAction->setEnabled(notSaved);
-
 }
 
 void MainWindow::dataChanged()
@@ -293,9 +294,9 @@ void MainWindow::changeCurrent(Crontab * /*unused*/, TCommand *cmnd)
 void MainWindow::readSettings()
 {
     settings.beginGroup(QStringLiteral("Main"));
-    exeMaxNum = settings.value(QStringLiteral("MaxListNum"), 100 ).toInt();
-    exeMaxDate = settings.value(QStringLiteral("MaxListDate"), 1 ).toInt();
-    viewSize = settings.value(QStringLiteral("ViewSize"), QSize(200,460)).toSize();
+    exeMaxNum = settings.value(QStringLiteral("MaxListNum"), 100).toInt();
+    exeMaxDate = settings.value(QStringLiteral("MaxListDate"), 1).toInt();
+    viewSize = settings.value(QStringLiteral("ViewSize"), QSize(200, 460)).toSize();
     restoreGeometry(settings.value(QStringLiteral("Geometry")).toByteArray());
     settings.endGroup();
 }
@@ -314,17 +315,16 @@ void MainWindow::closeEvent(QCloseEvent *event)
 {
 
     bool changed = false;
-    for (const auto& cron : qAsConst(crontabs)) {
+    for (const auto &cron : qAsConst(crontabs)) {
         if (cron->changed) {
             changed = true;
             break;
         }
     }
-    if (changed && QMessageBox::question(this,
-                                         tr("Job Scheduler"),
-                                         tr("Not saved since last change.\nAre you OK to exit?"),
-                                         QMessageBox::Ok, QMessageBox::Cancel)
-            == QMessageBox::Cancel) {
+    if (changed
+        && QMessageBox::question(this, tr("Job Scheduler"), tr("Not saved since last change.\nAre you OK to exit?"),
+                                 QMessageBox::Ok, QMessageBox::Cancel)
+               == QMessageBox::Cancel) {
         event->ignore();
         return;
     }
@@ -335,10 +335,19 @@ void MainWindow::closeEvent(QCloseEvent *event)
 void MainWindow::AboutJobScheduler()
 {
     this->hide();
-    displayAboutMsgBox(tr("About Job Scheduler"), tr("<b>Job Scheduler</b>") + " - " + tr("Version: %1").arg(VERSION) + "<p>" +
-                       tr("Job Scheduler is based upon qroneko 0.5.4, released in 2005 by korewaisai (<a href=\"mailto:korewaisai@yahoo.co.jp\">korewaisai@yahoo.co.jp</a>)") + "<p>" +
-                       tr("Original project page: %1").arg(QStringLiteral("<a href=\"https://qroneko.sourceforge.net\">https://qroneko.sourceforge.net</a>")) + "<p>" +
-                       tr("MX project page: %1").arg(QStringLiteral("<a href=\"https://github.com/mx-linux/job-scheduler\">https://github.com/mx-linux/job-scheduler</a>")),
+    displayAboutMsgBox(tr("About Job Scheduler"),
+                       tr("<b>Job Scheduler</b>") + " - " + tr("Version: %1").arg(VERSION) + "<p>"
+                           + tr("Job Scheduler is based upon qroneko 0.5.4, released in 2005 by korewaisai (<a "
+                                "href=\"mailto:korewaisai@yahoo.co.jp\">korewaisai@yahoo.co.jp</a>)")
+                           + "<p>"
+                           + tr("Original project page: %1")
+                                 .arg(QStringLiteral(
+                                     "<a href=\"https://qroneko.sourceforge.net\">https://qroneko.sourceforge.net</a>"))
+                           + "<p>"
+                           + tr("MX project page: %1")
+                                 .arg(QStringLiteral("<a "
+                                                     "href=\"https://github.com/mx-linux/job-scheduler\">https://"
+                                                     "github.com/mx-linux/job-scheduler</a>")),
                        QStringLiteral("/usr/share/doc/job-scheduler/license.html"),
                        tr("%1 License").arg(this->windowTitle()));
     this->show();

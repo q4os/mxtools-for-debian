@@ -34,17 +34,15 @@ fi
 
 
 if [ x"$APT_NOTIFIER_USE_NALA" = x"true" ]; then
-        UPDATER_APTPREF=/usr/lib/apt-notifier/shlib/updater_aptpref
-        AptPref_Opts=""
-        if [ -f "$UPDATER_APTPREF" ]; then
-                  . "$UPDATER_APTPREF"
-        fi
+        NalaPrefs="--option Nala::update_show_packages=false"
         echo "nala update"
-        nala update $AptPref_Opts
+        nala update $NalaPrefs 
 else
-        echo "apt-get update"
-        apt-get update
+        echo "apt update"
+        apt update  --option 'APT::Cmd::Show-Update-Stats=0'
 fi
+[ -d /var/lib/apt/periodic ] || mkdir -p /var/lib/apt/periodic
+touch /var/lib/apt/periodic/update-stamp
 working="...$(mygettext -d apt ' [Working]')..."
 printf "${working}"
 

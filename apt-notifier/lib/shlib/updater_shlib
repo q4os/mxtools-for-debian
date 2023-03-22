@@ -104,7 +104,7 @@ updater_show() {
     if ((DW <= 1440)); then
         TW=$((DW*4/5))  # desired terminal width
     else
-        TW=$((DW*2/3))  # desired terminal width
+        TW=$((DW*3/4))  # desired terminal width
     fi
 
     read -r XOFF YOFF < <(xrandr | sed -n -r '/connected primary/{/.*[0-9]+x[0-9]+\+([0-9]+)\+([0-9]+).*/{s::\1 \2:p;q}}')

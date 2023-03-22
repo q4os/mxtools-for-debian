@@ -33,10 +33,11 @@
 #include <QNetworkReply>
 #include <QTemporaryDir>
 
-#include "lockfile.h"
 #include "cmd.h"
+#include "lockfile.h"
 
-namespace Ui {
+namespace Ui
+{
 class MainWindow;
 }
 
@@ -69,13 +70,12 @@ private:
     QTemporaryDir tempdir;
 
     QNetworkAccessManager manager;
-    QNetworkReply* reply;
+    QNetworkReply *reply;
 
     bool downloadDeb(const QString &url, const QString &filepath);
     bool downloadFile(const QString &url, QFile &file);
     bool downloadInfoAndPackage(const QString &url, const QString &release, const QString &repo, const QString &arch,
                                 QFile &file, const QStringList &search_terms, int progress);
-
 };
 
 #endif // MAINWINDOW_H

@@ -1,0 +1,12 @@
+[Desktop Entry]
+Encoding=UTF-8
+# The desktop entry name will be displayed within the menu.
+Name=About MX Linux
+# # The desktop entry comment will be shown within the menu.
+Comment=View basic info about your MX install
+Exec=mx-welcome --about
+Terminal=false
+Type=Application
+Icon=mx-welcome
+Categories=GNOME;GTK;System;MX-Setup;
+NoDisplay=false

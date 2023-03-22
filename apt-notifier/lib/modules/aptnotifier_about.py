@@ -10,11 +10,12 @@ from PyQt5 import QtWidgets, QtGui, QtCore
 from PyQt5.QtWidgets import QApplication, QPushButton, QMessageBox
 from PyQt5.QtGui import QIcon
 
-BUILD_VERSION='22.08.01mx21'
+BUILD_VERSION='23.03.01'
 
 class AptnotifierAbout():
 
     def __init__(self):
+        os.environ["QT_LOGGING_RULES"] = "qt.qpa.xcb.warning=false"
         global xlate
         try: xlate
         except NameError:

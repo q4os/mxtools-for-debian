@@ -1,0 +1,12 @@
+[Desktop Entry]
+Encoding=UTF-8
+# The desktop entry name will be displayed within the menu.
+Name=MX Samba Config
+# # The desktop entry comment will be shown within the menu.
+Comment=Manage user Samba shares
+Exec=mx-samba-config
+Terminal=false
+Type=Application
+Icon=mx-samba-config
+Categories=System;MX-Maintenance;
+NoDisplay=false

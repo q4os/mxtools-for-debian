@@ -67,7 +67,10 @@ Debian 6.0 64 bit (AHS)
 <screenshot>none</screenshot>
 
 <preinstall>
-echo "deb http://mxrepo.com/mx/repo/ bullseye ahs">/etc/apt/sources.list.d/mxpitemp.list
+[ $(apt-get update --print-uris | grep -c -m1 -E "/mx/repo/dists/bullseye/ahs/") = 0 ] || exit 0
+MXREPO=$(apt-get update --print-uris | grep -m1 -oE "https?://.*/mx/repo/dists/bullseye/main" | tail -1 | sed "s:^:deb :; s:/repo/dists/:/repo/ :; s:/main: ahs:")
+: ${MXREPO:=deb http://mxrepo.com/mx/repo/ bullseye ahs}
+echo "$MXREPO" > /etc/apt/sources.list.d/mxpitemp.list
 apt-get update 
 </preinstall>
 
@@ -78,8 +81,10 @@ linux-headers-6.0.0-6mx-amd64
 
 
 <postinstall>
+if [ -f /etc/apt/sources.list.d/mxpitemp.list ]; then
 rm /etc/apt/sources.list.d/mxpitemp.list
 apt-get update
+fi
 rebuild_dkms_packages.sh linux-image-6.0.0-6mx-amd64-unsigned
 </postinstall>
 

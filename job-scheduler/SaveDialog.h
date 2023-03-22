@@ -18,7 +18,6 @@ class QTextEdit;
 
 class SaveDialog : public QDialog
 {
-
     Q_OBJECT
 
 public:

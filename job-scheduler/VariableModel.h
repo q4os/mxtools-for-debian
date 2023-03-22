@@ -14,7 +14,7 @@
 
 #include "Crontab.h"
 
-//class Variable;
+// class Variable;
 
 class VariableModel : public QAbstractItemModel
 {
@@ -23,15 +23,20 @@ class VariableModel : public QAbstractItemModel
 public:
     VariableModel(QObject *parent = nullptr)
         : QAbstractItemModel(parent)
-    { variables = &dummy; }
+    {
+        variables = &dummy;
+    }
 
-    ~VariableModel() {}
+    ~VariableModel() { }
 
     Qt::ItemFlags flags(const QModelIndex &) const { return Qt::ItemIsSelectable | Qt::ItemIsEnabled; }
     QModelIndex parent(const QModelIndex &) const { return QModelIndex(); }
-    QModelIndex index(int row, int column, const QModelIndex &) const { return createIndex(row, column, (*variables)[row]); }
+    QModelIndex index(int row, int column, const QModelIndex &) const
+    {
+        return createIndex(row, column, (*variables)[row]);
+    }
     int columnCount(const QModelIndex &) const { return 3; }
-    void resetData(QList<Variable*>*var) { variables = var; }
+    void resetData(QList<Variable *> *var) { variables = var; }
     int rowCount(const QModelIndex &parent) const { return (parent.isValid() ? 0 : variables->count()); }
 
     void varDataChanged(const QModelIndex &idx);
@@ -39,14 +44,12 @@ public:
     bool removeVariable(int row);
     bool insertVariable(int row, Variable *var);
 
-    QList<Variable*> *variables;
-    QList<Variable*> dummy;
+    QList<Variable *> *variables;
+    QList<Variable *> dummy;
 
 private:
-    QVariant headerData(int section, Qt::Orientation orientation,
-                        int role) const;
+    QVariant headerData(int section, Qt::Orientation orientation, int role) const;
     QVariant data(const QModelIndex &idx, int role) const;
-
 };
 
 #endif

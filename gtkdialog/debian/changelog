@@ -1,8 +1,24 @@
-gtkdialog (2:0.8.3-2mx19+deb11u13) stable; urgency=medium
+gtkdialog (2:0.8.3-2mx21+2+deb11u13) stable; urgency=medium
 
   * MX Tools release
 
- -- Timothy E. Harris <administrator@localdomain>  Wed, 22 Mar 2023 10:43:50 +0100
+ -- Steven Pusser <administrator@localdomain>  Wed, 22 Mar 2023 13:32:33 +0100
+
+gtkdialog (2:0.8.3-2mx21+2) mx; urgency=medium
+
+  * Remove build-deps that don't do anything: dpatch, autotools-dev, byacc, and
+    texinfo.
+
+ -- Steven Pusser <stevep@mxlinux.org>  Wed, 22 Feb 2023 11:57:46 -0800
+
+gtkdialog (2:0.8.3-2mx21+1) mx; urgency=medium
+
+  * Rebuild for MX Linux 21.
+  * Add fno-common.patch to fix FTBFS on gcc-10.
+  * Make myself maintainer.
+  * Bump up to debhelper-compat = 12.
+
+ -- Steven Pusser <stevep@mxlinux.org>  Tue, 21 Feb 2023 15:17:00 -0800
 
 gtkdialog (2:0.8.3-2mx19) mx; urgency=medium
 

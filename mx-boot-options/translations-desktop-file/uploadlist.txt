@@ -1,0 +1,15 @@
+mx-boot-options-desktop_ca.po
+mx-boot-options-desktop_da.po
+mx-boot-options-desktop_de.po
+mx-boot-options-desktop_el.po
+mx-boot-options-desktop_es.po
+mx-boot-options-desktop_fr.po
+mx-boot-options-desktop_it.po
+mx-boot-options-desktop_lt.po
+mx-boot-options-desktop_nl.po
+mx-boot-options-desktop_pl.po
+mx-boot-options-desktop_pt.po
+mx-boot-options-desktop_pt_BR.po
+mx-boot-options-desktop_sk.po
+mx-boot-options-desktop_sl.po
+mx-boot-options-desktop_sv.po

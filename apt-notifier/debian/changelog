@@ -1,8 +1,28 @@
-apt-notifier (22.12.01mx21+deb11u13) stable; urgency=medium
+apt-notifier (23.03.01+deb11u13) stable; urgency=medium
 
   * MX Tools release
 
- -- fehlix <administrator@localdomain>  Wed, 22 Mar 2023 10:43:47 +0100
+ -- fehlix <administrator@localdomain>  Wed, 22 Mar 2023 13:32:31 +0100
+
+apt-notifier (23.03.01) mx; urgency=medium
+
+  * fix quick-live-update
+  * add check for last apt update run
+  * add 03apt-notifier-update-stamp
+  * adjust forced check to 3 hours
+  * add debhelper-compat (= 13) to build-depends
+  * use shutil.which instead of distutils.spawn.find_executable
+  * add python3-ewmh as depends to detect fullscreen
+  * remove python3-distutils from build-depends
+  * translations refresh
+
+ -- fehlix <fehlix@mxlinux.org>  Wed, 08 Mar 2023 14:35:52 -0500
+
+apt-notifier (23.01.01mx21) mx; urgency=medium
+
+  * get adjusted {num} placeholder from transifex for sv_SE locale
+
+ -- fehlix <fehlix@mxlinux.org>  Sun, 22 Jan 2023 16:03:03 -0500
 
 apt-notifier (22.12.01mx21) mx; urgency=medium
 

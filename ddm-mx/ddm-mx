@@ -20,16 +20,17 @@
 #add BitJam's soure cli-shell-utils
 source /usr/local/lib/cli-shell-utils/cli-shell-utils.bash
 source gettext.sh
+DEBIAN_VERSION_CODENAME=$(grep VERSION_CODENAME /etc/os-release|cut -d"=" -f2)
 
-VERSION="22.12.01"
+VERSION="23.03.01"
 ME=${0##*/}
 CLI_PROG="ddm-mx"
 LOCK_FILE="/run/lock/$CLI_PROG"
 ERR_FILE="/dev/null"
 LOG="/var/log/ddm.log"
-BP_REPO="bullseye-backports"
+BP_REPO="$DEBIAN_VERSION_CODENAME-backports"
 BP_REPO_ADDRESS="deb http://ftp.debian.org/debian"
-MX_TEST_REPO_ADDRESS="deb http://la.mxrepo.com/mx/testrepo/ bullseye test"
+MX_TEST_REPO_ADDRESS="deb http://la.mxrepo.com/mx/testrepo/ $DEBIAN_VERSION_CODENAME test"
 BACKPORTS_OVERRIDE=false
 
 export TEXTDOMAINDIR=/usr/share/locale 
@@ -70,7 +71,7 @@ PURGE=''
 INSTALL=''
 FORCEDRIVER=''
 TEST=false
-while getopts ":f:bi:p:htd:" opt; do
+while getopts ":f:bi:p:htd:c" opt; do
   case $opt in
     h)
       usage HELP
@@ -98,6 +99,10 @@ while getopts ":f:bi:p:htd:" opt; do
       # Testing
       BACKPORTS_OVERRIDE=true
       ;;
+    c) #force create of 20-nvidia.conf file
+    	create_20_nvidiaconf
+    	exit 0
+    	;;
     f)
       # Testing
       FORCEDRIVER="$FORCEDRIVER$OPTARG"
@@ -135,6 +140,12 @@ fi
 
 ###file locking
 echo $(eval_gettext "creating lock ...") | tee -a $LOG
+
+# if running in a chroot, /run/lock doesn't exist. so make it
+if [ ! -d "/run/lock" ];then
+	mkdir -p /run/lock
+fi
+
 trap clean_up EXIT
 do_flock 
 
@@ -231,6 +242,7 @@ function usage() {
   echo $(gettext "The following options are allowed:")
   echo
   echo "-b            " $(gettext "Offer debian-backports alternative")
+  echo "-c            " $(gettext "Create 20-nvidia.conf")
   echo
   echo "-i [driver]   " $(gettext "Install given driver.")
   echo "              " $(gettext "drivers: nvidia, open, fixbumblebee")
@@ -241,7 +253,7 @@ function usage() {
   echo "-f [driver]   " $(gettext "force specific nvidia driver package.")
   echo "               nvidia-driver, nvidia-legacy-390xx-driver, nvidia-tesla-418-driver,"
   echo "               nvidia-tesla-450-driver, nvidia-tesla-460-driver, nvidia-tesla-470-driver"
-  echo "               nvidia-legacy-340xx-driver, bumblebee-nvidia"
+  echo "               nvidia-tesla-510-driver nvidia-legacy-340xx-driver, bumblebee-nvidia"
   echo
   echo "-t            " $(gettext "For development testing only!  simulate installs")
   echo "              " $(gettext "This will install drivers for pre-defined hardware.")
@@ -279,10 +291,11 @@ function install_nvidia {
   USER=$(logname)
   ARCHITECTURE=$(uname -m)
   if [ -z "$FORCEDRIVER" ]; then
+    nvidia-detect-mx | tee -a $LOG
 	DRIVER=$(nvidia-detect-mx $PCIID|grep INSTALL: |tr -d ' ' |cut -d ':' -f2)
   fi
   
-  UNSUPPORTED_LEGACY=$(nvidia-detect-mx $PCIID| grep -e173.14 -e96.43 -e71.86 -e304)
+  UNSUPPORTED_LEGACY=$(nvidia-detect-mx $PCIID| grep -e173.14 -e96.43 -e71.86 -e304 -e340)
   
   # Testing
   if $TEST; then
@@ -367,6 +380,9 @@ fi
   echo $(eval_gettext "Nvidia command ") "= apt-get install --install-recommends --reinstall -y $FORCE $SWITCH $BP $DRIVER" | tee -a $LOG
   apt-get install --reinstall -y linux-headers-$(uname -r) build-essential $TESTSWITCH 2>&1 | tee -a $LOG
   apt-get install --reinstall $INSTALL_RECOMMENDS -y $SWITCH $BP $DRIVER $TESTSWITCH 2>&1 | tee -a $LOG
+  if [ "$?" = "0" ]; then
+  	POSTINSTALL=true;
+  fi
   
   #install certain 32 bit libs that don't like --install-recommends
   #if [ -n "$LIB32" ]; then
@@ -405,6 +421,27 @@ fi
         fi
     fi
   fi
+  #POSTINSTALL
+  if [ $POSTINSTALL ]; then
+    echo "POSTINSTALL" | tee -a $LOG
+  	#add possible missing symlinks
+  	echo "symlinks" | tee -a $LOG
+  	create_modprobe_symlinks
+  	#create 20_nvidia.conf file for non-optimus parts
+  	if [ $OPTIMUS = 1 ]; then
+    	echo "20_nvidia.conf" | tee -a $LOG
+  		create_20_nvidiaconf
+  	fi
+  	#backup any existing xorg.conf file
+  	if [ -e /etc/X11/xorg.conf ]; then
+  		XORGBACKUP="/etc/X11/xorg.conf.bak.$(date +%Y%m%H%M%S)"
+  		echo "mv /etc/X11/xorg.conf --> $XORGBACKUP" | tee -a $LOG
+  		mv /etc/X11/xorg.conf $XORGBACKUP
+  	fi
+  	#update initramfs one more time
+  	
+  	update-initramfs -u -k all | tee -a $LOG
+  fi
   echo $(eval_gettext "Finished") | tee -a $LOG
   echo ""
   finish_purge_message
@@ -417,10 +454,12 @@ function purge_proprietary_drivers {
   rm /etc/X11/xorg.conf 2>/dev/null
   rm /etc/modprobe.d/nvidia* 2>/dev/null
   rm /etc/modprobe.d/blacklist-nouveau.conf 2>/dev/null
+  remove_20_nvidiaconf
   # Leave nvidia-installer-cleanup
-  apt-get purge $FORCE $(apt-cache pkgnames | grep nvidia | grep -v cleanup | cut -d':' -f1) bumblebee* primus* primus*:i386 2>&1 | tee -a $LOG
-# apt-get purge $FORCE bumblebee* primus* primus*:i386 2>&1 | tee -a $LOG
-
+  apt-get purge $FORCE $(apt-cache pkgnames | grep nvidia | grep -v cleanup | cut -d':' -f1) bumblebee* primus* primus*:i386 *nvidia*:i386 2>&1 | tee -a $LOG
+  # apt-get purge $FORCE bumblebee* primus* primus*:i386 2>&1 | tee -a $LOG
+  # remove possible leftover symlinks
+	remove_modprobe_symlinks
   if [ "$?" = "0" ]; then 
       echo $(eval_gettext "Proprietary drivers removed") | tee -a $LOG
   fi
@@ -752,7 +791,7 @@ check_source_install(){
 
 # Check for Optimus
 check_optimus(){
-    local OPTIMUS MIN_XORG_VERSION MIN_NVIDIA_VERSION MAJOR_NVIDIA_VERSION
+    local MIN_XORG_VERSION MIN_NVIDIA_VERSION MAJOR_NVIDIA_VERSION
     OPTIMUS=1
     if [ -z "$FORCEDRIVER" ]; then
 		if lspci -vnn | grep Intel |grep -q 0300 ; then
@@ -760,8 +799,7 @@ check_optimus(){
 				echo $(eval_gettext "nvidia-optimus detected") | tee -a $LOG
 				OPTIMUS=2
 			else
-				YES_no "$(eval_gettext "Is this a NVIDIA/INTEL Optimus system?")" | tee -a $LOG
-				echo "$?"
+				YES_no "$(eval_gettext "Is this a NVIDIA/INTEL Optimus system?")"
 				if [ "$?" = "0" ]; then
 					OPTIMUS=2
 				fi
@@ -769,6 +807,10 @@ check_optimus(){
 			fi
 		fi
     fi
+	
+	if [ -z $CANDIDATE ]; then
+		return
+	fi
 
     if [ $OPTIMUS = 2 ]; then
         # Bumblebee used to be required, but now NVIDIA drivers support Optimus out of the box.
@@ -890,10 +932,19 @@ set_packages(){
                                        ;;
         nvidia-tesla-470-driver)    if [ "$ARCHITECTURE" == "x86_64" ]; then
                                            NVIDIA_XCONFIG=""
-                                           DRIVER="$DRIVER nvidia-settings-tesla-470 nvidia-tesla-460-kernel-dkms"
+                                           DRIVER="$DRIVER nvidia-settings-tesla-470 nvidia-tesla-470-kernel-dkms"
                                        else
                                            NVIDIA_XCONFIG=""
-                                           DRIVER="$DRIVER nvidia-settings-tesla-470 nvidia-tesla-460-kernel-dkms"
+                                           DRIVER="$DRIVER nvidia-settings-tesla-470 nvidia-tesla-470-kernel-dkms"
+                                       fi
+                                       ;;
+                                       
+        nvidia-tesla-510-driver)    if [ "$ARCHITECTURE" == "x86_64" ]; then
+                                           NVIDIA_XCONFIG=""
+                                           DRIVER="$DRIVER nvidia-settings-tesla-510 nvidia-tesla-510-kernel-dkms"
+                                       else
+                                           NVIDIA_XCONFIG=""
+                                           DRIVER="$DRIVER nvidia-settings-tesla-510 nvidia-tesla-510-kernel-dkms"
                                        fi
                                        ;;
                   bumblebee-nvidia)    if [ "$DRIVER" == "bumblebee-nvidia" ]; then
@@ -991,6 +1042,50 @@ if [ "$ARCH" = "amd64" ]; then
 		echo ""
     fi
 fi
+}
+
+create_modprobe_symlinks(){
+	#files to check for
+	#/etc/modprobe.d/nvidia-blacklists-nouveau.conf
+    #/etc/modprobe.d/nvidia-modprobe.conf
+    #/etc/modprobe.d/nvidia-options.conf
+    
+    if [ ! -e /etc/modprobe.d/nvidia-blacklists-nouveau.conf ]; then
+		ln -s /etc/nvidia/current/nvidia-blacklists-nouveau.conf /etc/modprobe.d/nvidia-blacklists-nouveau.conf
+	fi
+	if [ ! -e /etc/modprobe.d/nvidia-modprobe.conf ]; then
+		ln -s /etc/nvidia/current/nvidia-modprobe.conf /etc/modprobe.d/nvidia-modprobe.conf
+	fi
+	if [ ! -e /etc/modprobe.d/nvidia-options.conf ]; then
+		ln -s /etc/nvidia/current/nvidia-options.conf /etc/modprobe.d/nvidia-options.conf
+	fi
+	if [ ! -e /etc/modules-load.d/nvidia.conf ]; then
+		ln -s /etc/nvidia/current/nvidia-load.conf /etc/modules-load.d/nvidia.conf
+	fi
+    
+}
+
+remove_modprobe_symlinks(){
+    echo "rm symlinks" | tee -a $LOG
+	rm --force /etc/modprobe.d/nvidia-blacklists-nouveau.conf /etc/modprobe.d/nvidia-modprobe.conf /etc/modprobe.d/nvidia-options.conf /etc/modules-load.d/nvidia.conf
+}
+
+create_20_nvidiaconf(){
+	sudo tee /etc/X11/xorg.conf.d/20-nvidia.conf <<!
+Section "Device"
+     Identifier "Nvidia Card"
+     Driver "nvidia"
+     VendorName "NVIDIA Corporation"
+     Option "RegistryDwords" "EnableBrightnessControl=1"
+EndSection
+!
+}
+
+remove_20_nvidiaconf(){
+    echo "rm 20-nvidia.conf" | tee -a $LOG
+	if [ -e /etc/X11/xorg.conf.d/20-nvidia.conf ]; then
+		rm --force /etc/X11/xorg.conf.d/20-nvidia.conf
+	fi
 }
 
 main "$@"

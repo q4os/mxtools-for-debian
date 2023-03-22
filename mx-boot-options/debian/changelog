@@ -1,8 +1,28 @@
-mx-boot-options (22.10.02+deb11u13) stable; urgency=medium
+mx-boot-options (23.2.01+deb11u13) stable; urgency=medium
 
   * MX Tools release
 
- -- Adrian <administrator@localdomain>  Wed, 22 Mar 2023 10:43:51 +0100
+ -- Adrian <administrator@localdomain>  Wed, 22 Mar 2023 13:32:35 +0100
+
+mx-boot-options (23.2.01) mx; urgency=medium
+
+  * Change ownership of the rc file created by KDE/Plasma
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 27 Feb 2023 19:57:54 -0500
+
+mx-boot-options (23.2) mx; urgency=medium
+
+  * Disable saving last boot choice on Btrs (not supported)
+  * Update translations
+
+ -- Adrian <adrian@mxlinux.org>  Sun, 19 Feb 2023 13:03:57 -0500
+
+mx-boot-options (23.1) mx; urgency=medium
+
+  * Fix: disable boot splash
+  * Update translations
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 30 Jan 2023 20:15:16 -0500
 
 mx-boot-options (22.10.02) mx; urgency=medium
 

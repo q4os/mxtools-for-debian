@@ -1,7 +1,7 @@
 [main]
 host = https://www.transifex.com
 
-[antix-development.mx-snapshot-desktop]
+[o:anticapitalista:p:antix-development:r:mx-snapshot-desktop]
 file_filter = po/mx-snapshot-desktop_<lang>.po
 source_file = mx-snapshot-desktop.pot
 source_lang = en

@@ -7,15 +7,16 @@
    as published by the Free Software Foundation; either version 2
    of the License, or (at your option) any later version.
 */
+#include "VariableModel.h"
+
 #include <QtGui>
 
 #include "Crontab.h"
-#include "VariableModel.h"
 
 QVariant VariableModel::data(const QModelIndex &idx, int role) const
 {
     if (idx.isValid() && role == Qt::DisplayRole) {
-        auto *v = static_cast<Variable*>(idx.internalPointer());
+        auto *v = static_cast<Variable *>(idx.internalPointer());
         switch (idx.column()) {
         case 0:
             return v->name;
@@ -27,8 +28,7 @@ QVariant VariableModel::data(const QModelIndex &idx, int role) const
     return QVariant();
 }
 
-QVariant VariableModel::headerData(int section, Qt::Orientation orientation,
-                                   int role) const
+QVariant VariableModel::headerData(int section, Qt::Orientation orientation, int role) const
 {
 
     if (role == Qt::DisplayRole && orientation == Qt::Horizontal) {
@@ -58,8 +58,8 @@ bool VariableModel::insertVariable(int row, Variable *var)
 {
     beginInsertRows(QModelIndex(), row, row);
 
-    if (variables->count() > 0 )
-        variables->insert(row,var);
+    if (variables->count() > 0)
+        variables->insert(row, var);
     else
         *variables << var;
 
@@ -74,7 +74,4 @@ void VariableModel::varDataChanged(const QModelIndex &idx)
     emit dataChanged(first, end);
 }
 
-Variable *VariableModel::getVariable(const QModelIndex &idx)
-{
-    return static_cast<Variable*>(idx.internalPointer());
-}
+Variable *VariableModel::getVariable(const QModelIndex &idx) { return static_cast<Variable *>(idx.internalPointer()); }

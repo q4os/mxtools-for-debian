@@ -1,6 +1,6 @@
 #!/bin/bash
 
-APPNAME="ddm-mx"
+APPNAME="$(basename $(dirname $(pwd)))"
 
 echodo() {
   echo "${@}"
@@ -14,7 +14,7 @@ if [ ! -s  .tx/config ]; then
 [main]
 host = https://www.transifex.com
 
-[antix-development.$APPNAME]
+[o:anticapitalista:p:antix-development:r:$APPNAME]
 file_filter = po/${APPNAME}_<lang>.po
 source_file = ${APPNAME}.pot
 source_lang = en
@@ -24,12 +24,9 @@ fi
 
 
 #remove existing translations
-backdir="po_$(date '+%Y-%m-%d_%H%M%S')"
-mkdir "$backdir"
-mv po/* "$backdir/"
+rm po/*
 
 # get all translations
 if command -v tx >/dev/null; then
    echodo tx pull -r antix-development.$APPNAME  --all
 fi
-

@@ -22,7 +22,6 @@
  * along with mx-repo-manager.  If not, see <http://www.gnu.org/licenses/>.
  **********************************************************************/
 
-
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
@@ -37,8 +36,8 @@
 
 #include "cmd.h"
 
-
-namespace Ui {
+namespace Ui
+{
 class MainWindow;
 }
 
@@ -50,7 +49,7 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
-    enum Version {Jessie = 8, Stretch, Buster, Bullseye, Bookworm};
+    enum Version { Jessie = 8, Stretch, Buster, Bullseye, Bookworm };
     QFileInfoList listAptFiles();
     static QIcon getFlag(QString country);
     QList<QStringList> queued_changes;
@@ -95,21 +94,18 @@ private:
     Ui::MainWindow *ui;
     Cmd *shell;
     QHash<QString, QIcon> flags;
-    QProgressBar *bar{};
-    QProgressDialog *progress{};
-    QPushButton *progCancel{};
+    QProgressBar *bar {};
+    QProgressDialog *progress {};
+    QPushButton *progCancel {};
     QSettings settings;
     QString current_repo;
     QStringList repos;
     QTimer timer;
 
     QNetworkAccessManager manager;
-    QNetworkReply* reply{};
+    QNetworkReply *reply {};
     bool checkRepo(const QString &repo);
     bool downloadFile(const QString &url, QFile &file);
-
 };
 
-
 #endif // MAINWINDOW_H
-

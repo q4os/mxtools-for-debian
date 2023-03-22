@@ -54,23 +54,37 @@ HEADERS  += \
 FORMS    += \
     mainwindow.ui
 
-TRANSLATIONS += translations/mx-codecs_am.ts \
+TRANSLATIONS += translations/mx-codecs_af.ts \
+                translations/mx-codecs_am.ts \
                 translations/mx-codecs_ar.ts \
+                translations/mx-codecs_be.ts \
                 translations/mx-codecs_bg.ts \
+                translations/mx-codecs_bn.ts \
+                translations/mx-codecs_bs_BA.ts \
                 translations/mx-codecs_ca.ts \
                 translations/mx-codecs_cs.ts \
                 translations/mx-codecs_da.ts \
                 translations/mx-codecs_de.ts \
                 translations/mx-codecs_el.ts \
+                translations/mx-codecs_en_GB.ts \
+                translations/mx-codecs_en_US.ts \
                 translations/mx-codecs_en.ts \
+                translations/mx-codecs_eo.ts \
+                translations/mx-codecs_es_ES.ts \
                 translations/mx-codecs_es.ts \
                 translations/mx-codecs_et.ts \
                 translations/mx-codecs_eu.ts \
                 translations/mx-codecs_fa.ts \
+                translations/mx-codecs_fi_FI.ts \
                 translations/mx-codecs_fi.ts \
-                translations/mx-codecs_fr.ts \
+                translations/mx-codecs_fil_PH.ts \
                 translations/mx-codecs_fr_BE.ts \
+                translations/mx-codecs_fr_FR.ts \
+                translations/mx-codecs_fr.ts \
+                translations/mx-codecs_gl_ES.ts \
+                translations/mx-codecs_gu.ts \
                 translations/mx-codecs_he_IL.ts \
+                translations/mx-codecs_he.ts \
                 translations/mx-codecs_hi.ts \
                 translations/mx-codecs_hr.ts \
                 translations/mx-codecs_hu.ts \
@@ -80,24 +94,35 @@ TRANSLATIONS += translations/mx-codecs_am.ts \
                 translations/mx-codecs_ja.ts \
                 translations/mx-codecs_kk.ts \
                 translations/mx-codecs_ko.ts \
+                translations/mx-codecs_ku.ts \
                 translations/mx-codecs_lt.ts \
                 translations/mx-codecs_mk.ts \
                 translations/mx-codecs_mr.ts \
+                translations/mx-codecs_nb_NO.ts \
                 translations/mx-codecs_nb.ts \
+                translations/mx-codecs_nl_BE.ts \
                 translations/mx-codecs_nl.ts \
+                translations/mx-codecs_or.ts \
                 translations/mx-codecs_pl.ts \
-                translations/mx-codecs_pt.ts \
                 translations/mx-codecs_pt_BR.ts \
+                translations/mx-codecs_pt.ts \
                 translations/mx-codecs_ro.ts \
+                translations/mx-codecs_ru_RU.ts \
                 translations/mx-codecs_ru.ts \
+                translations/mx-codecs_rue.ts \
                 translations/mx-codecs_sk.ts \
                 translations/mx-codecs_sl.ts \
+                translations/mx-codecs_so.ts \
                 translations/mx-codecs_sq.ts \
                 translations/mx-codecs_sr.ts \
                 translations/mx-codecs_sv.ts \
+                translations/mx-codecs_th.ts \
                 translations/mx-codecs_tr.ts \
                 translations/mx-codecs_uk.ts \
+                translations/mx-codecs_vi.ts \
+                translations/mx-codecs_yue_CN.ts \
                 translations/mx-codecs_zh_CN.ts \
+                translations/mx-codecs_zh_HK.ts \
                 translations/mx-codecs_zh_TW.ts
 
 RESOURCES += \

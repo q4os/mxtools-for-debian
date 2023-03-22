@@ -7,12 +7,12 @@
    as published by the Free Software Foundation; either version 2
    of the License, or (at your option) any later version.
 */
+#include "SaveDialog.h"
+
 #include <QBoxLayout>
 #include <QLabel>
 #include <QPushButton>
 #include <QtGui>
-
-#include "SaveDialog.h"
 
 SaveDialog::SaveDialog(const QString &user, const QString &text)
 {

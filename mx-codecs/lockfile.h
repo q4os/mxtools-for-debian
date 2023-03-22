@@ -24,9 +24,8 @@
 #ifndef LOCKFILE_H
 #define LOCKFILE_H
 
-#include <QString>
 #include <QFile>
-
+#include <QString>
 
 class LockFile
 {
@@ -39,8 +38,7 @@ public:
 
 private:
     QString file_name;
-    int fd{};
-
+    int fd {};
 };
 
 #endif // LOCKFILE_H

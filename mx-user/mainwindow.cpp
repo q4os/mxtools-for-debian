@@ -59,13 +59,6 @@ MainWindow::MainWindow(QWidget *parent)
 
 MainWindow::~MainWindow() { settings.setValue(QStringLiteral("geometry"), saveGeometry()); }
 
-bool MainWindow::replaceStringInFile(const QString &oldtext, const QString &newtext, const QString &filepath)
-{
-
-    QString cmd = QStringLiteral("sed -i 's/%1/%2/g' %3").arg(oldtext, newtext, filepath);
-    return system(cmd.toUtf8()) == 0;
-}
-
 void MainWindow::refresh()
 {
     setCursor(QCursor(Qt::ArrowCursor));
@@ -117,7 +110,7 @@ void MainWindow::refreshOptions()
     radioAutologinYes->setAutoExclusive(false);
     radioAutologinYes->setChecked(false);
     radioAutologinYes->setAutoExclusive(true);
-    if (system("pgrep lightdm\\|sddm") != 0) // if unknown desktop manager
+    if ((QProcess::execute("pgrep", {"lightdm"}) != 0) && QProcess::execute("pgrep", {"sddm"}) != 0)
         groupBox->setVisible(false);
 }
 
@@ -222,35 +215,29 @@ void MainWindow::applyOptions()
         for (const QString &group : extra_groups_list)
             if (!listGroups->findItems(group, Qt::MatchExactly).isEmpty())
                 new_group_list << group;
-        cmd = "usermod -G '' " + user + "; usermod -G " + new_group_list.join(QStringLiteral(",")) + " "
-              + user; // reset group and add extra from /etc/adduser.conf
-        system(cmd.toUtf8());
+        QProcess::execute("usermod", {"-G", "", user});
+        QProcess::execute("usermod", {"-G", new_group_list.join(","), user});
         QMessageBox::information(this, windowTitle(), tr("User group membership was restored."));
     }
-    // restore Mozilla configs
+    // reset Mozilla configs
     if (checkMozilla->isChecked()) {
-        cmd = QStringLiteral("rm -r %1/.mozilla").arg(home);
-        system(cmd.toUtf8());
+        QProcess::execute("rm", {"-r", home + "/.mozilla"});
         QMessageBox::information(this, windowTitle(), tr("Mozilla settings were reset."));
     }
     if (radioAutologinNo->isChecked()) {
-        if (QFile::exists(QStringLiteral("/etc/lightdm/lightdm.conf"))) {
-            cmd = QStringLiteral("sed -i -r '/^autologin-user=%1/d' /etc/lightdm/lightdm.conf").arg(user);
-            system(cmd.toUtf8());
-        }
+        if (QFile::exists(QStringLiteral("/etc/lightdm/lightdm.conf")))
+            QProcess::execute("sed", {"-iE", QString("/^autologin-user=%1/d").arg(user), "/etc/lightdm/lightdm.conf"});
         if (QFile::exists(QStringLiteral("/etc/sddm.conf")))
-            system(QStringLiteral("sed -i 's/^User=%1/User=/' /etc/sddm.conf").arg(user).toUtf8());
+            QProcess::execute("sed", {"-i", QString("s/^User=%1/User=/").arg(user), "/etc/sddm.conf"});
         QMessageBox::information(this, tr("Autologin options"),
                                  (tr("Autologin has been disabled for the '%1' account.").arg(user)));
     } else if (radioAutologinYes->isChecked()) {
-        if (QFile::exists(QStringLiteral("/etc/lightdm/lightdm.conf"))) {
-            cmd = QStringLiteral("sed -i -r '/^autologin-user=/d; /^[[]SeatDefaults[]]/aautologin-user=%1' "
-                                 "/etc/lightdm/lightdm.conf")
-                      .arg(user);
-            system(cmd.toUtf8());
-        }
+        if (QFile::exists(QStringLiteral("/etc/lightdm/lightdm.conf")))
+            QProcess::execute("sed",
+                              {"-iE", QString("/^autologin-user=/d; /^[[]SeatDefaults[]]/aautologin-user=%1").arg(user),
+                               "/etc/lightdm/lightdm.conf"});
         if (QFile::exists(QStringLiteral("/etc/sddm.conf")))
-            system(QStringLiteral("sed -i 's/^User=.*/User=%1/' /etc/sddm.conf").arg(user).toUtf8());
+            QProcess::execute("sed", {"-i", QString("s/^User=.*/User=%1/").arg(user), "/etc/sddm.conf"});
         QMessageBox::information(this, tr("Autologin options"),
                                  (tr("Autologin has been enabled for the '%1' account.").arg(user)));
     }
@@ -334,8 +321,7 @@ void MainWindow::applyAdd()
         return;
     }
     // check that user name is not already used
-    QString cmd = QStringLiteral("grep -w '^%1' /etc/passwd >/dev/null").arg(userNameEdit->text());
-    if (system(cmd.toUtf8()) == 0) {
+    if (QProcess::execute("grep", {"-w", "^" + userNameEdit->text(), "/etc/passwd"}) == 0) {
         QMessageBox::critical(this, windowTitle(), tr("Sorry, this name is in use. Please enter a different name."));
         return;
     }
@@ -350,8 +336,24 @@ void MainWindow::applyAdd()
         return;
     }
 
-    cmd = QStringLiteral("adduser --disabled-login --force-badname --gecos %1 %1").arg(userNameEdit->text());
-    system(cmd.toUtf8());
+    QString cmd;
+    cmd = QStringLiteral("sed -n '/^DSHELL=/{ s///; s:^/bin/:/usr/bin/:; h}; ${x; p}' /etc/adduser.conf");
+    QString dshell = shell->getCmdOut(cmd, true).trimmed();
+    if (!QFile::exists(dshell))
+        dshell = "/usr/bin/bash";
+
+    cmd = QStringLiteral("LC_ALL=C adduser --help 2>/dev/null | grep -m1 -o -- --comment | head -1");
+    QString commentOption = shell->getCmdOut(cmd, true).trimmed();
+    if (commentOption != QStringLiteral("--comment"))
+        commentOption = "--gecos";
+
+    cmd = QStringLiteral("LC_ALL=C adduser --help 2>/dev/null | grep -m1 -o -- --allow-bad-names | head -1");
+    QString allowBadNames = shell->getCmdOut(cmd, true).trimmed();
+    if (allowBadNames != QStringLiteral("--allow-bad-names"))
+        allowBadNames = QStringLiteral("--force-badname");
+
+    QProcess::execute("adduser", {"--disabled-login", allowBadNames, "--shell", dshell,
+                                  commentOption, userNameEdit->text(), userNameEdit->text()});
 
     QProcess proc;
     proc.start(QStringLiteral("passwd"), QStringList {userNameEdit->text()}, QIODevice::ReadWrite);
@@ -399,17 +401,17 @@ void MainWindow::applyChangePass()
 
 void MainWindow::applyDelete()
 {
-    QString cmd = QString(tr("This action cannot be undone. Are you sure you want to delete user %1?"))
+    QString cmd;
+    QString msg = QString(tr("This action cannot be undone. Are you sure you want to delete user %1?"))
                       .arg(comboDeleteUser->currentText());
-    if (QMessageBox::Yes == QMessageBox::warning(this, windowTitle(), cmd, QMessageBox::Yes, QMessageBox::No)) {
+    if (QMessageBox::Yes == QMessageBox::warning(this, windowTitle(), msg, QMessageBox::Yes, QMessageBox::No)) {
         if (deleteHomeCheckBox->isChecked()) {
-            cmd = QStringLiteral("killall -u %1").arg(comboDeleteUser->currentText());
-            system(cmd.toUtf8());
-            cmd = QStringLiteral("deluser --force --remove-home %1").arg(comboDeleteUser->currentText());
+            QProcess::execute("killall", {"-u", comboDeleteUser->currentText()});
+            cmd = QStringLiteral("deluser --remove-home %1").arg(comboDeleteUser->currentText());
         } else {
             cmd = QStringLiteral("deluser %1").arg(comboDeleteUser->currentText());
         }
-        if (system(cmd.toUtf8()) == 0)
+        if (shell->run(cmd))
             QMessageBox::information(this, windowTitle(), tr("The user has been deleted."));
         else
             QMessageBox::critical(this, windowTitle(), tr("Failed to delete the user."));
@@ -527,9 +529,7 @@ void MainWindow::applyRename()
                                  "Please choose another name before proceeding."));
         return;
     }
-    // check that user name is not already used
-    QString cmd = QStringLiteral("grep -w '^%1' /etc/passwd >/dev/null").arg(new_name);
-    if (system(cmd.toUtf8()) == 0) {
+    if (QProcess::execute("grep", {"-w", "^" + new_name, "/etc/passwd"}) == 0) {
         QMessageBox::critical(this, windowTitle(),
                               tr("Sorry, this name already exists on your system. Please enter a different name."));
         return;
@@ -583,7 +583,7 @@ void MainWindow::syncDone(bool success)
 
         // fix owner
         QString cmd = QStringLiteral("chown -R %1:%1 %2").arg(toUserComboBox->currentText(), toDir);
-        system(cmd.toUtf8());
+        shell->run(cmd);
 
         // fix "home/old_user" string in all ~/ or ~/.mozilla files
         if (entireRadioButton->isChecked())
@@ -596,10 +596,8 @@ void MainWindow::syncDone(bool success)
 
         if (entireRadioButton->isChecked()) {
             // delete some files
-            cmd = QStringLiteral("rm -f %1/.recently-used >/dev/null").arg(toDir);
-            system(cmd.toUtf8());
-            cmd = QStringLiteral("rm -f %1/.openoffice.org/*/.lock >/dev/null").arg(toDir);
-            system(cmd.toUtf8());
+            QProcess::execute("rm", {"-f", toDir + "/.recently-used"});
+            QProcess::execute("rm", {"-f", toDir + "/.openoffice.org/*/.lock"});
         }
         if (syncRadioButton->isChecked())
             syncStatusEdit->setText(tr("Synchronizing desktop...ok"));
@@ -663,13 +661,13 @@ void MainWindow::on_userComboBox_activated(const QString & /*unused*/)
     QString user = userComboBox->currentText();
     if (user == (tr("none")))
         return;
-    if (system("pgrep lightdm") == 0) {
+    if (QProcess::execute("pgrep", {"lightdm"}) == 0) {
         const QString cmd = QStringLiteral("grep -qw ^autologin-user=%1 /etc/lightdm/lightdm.conf").arg(user);
-        if (system(cmd.toUtf8()) == 0)
+        if (shell->run(cmd, true))
             radioAutologinYes->setChecked(true);
         else
             radioAutologinNo->setChecked(true);
-    } else if (system("pgrep sddm") == 0) {
+    } else if (QProcess::execute("pgrep", {"sddm"}) == 0) {
         QSettings sddm_settings(QStringLiteral("/etc/sddm.conf"), QSettings::NativeFormat);
         qDebug() << "TEST" << sddm_settings.value(QStringLiteral("Autologin/User")).toString();
         if (sddm_settings.value(QStringLiteral("Autologin/User")).toString() == user)
@@ -852,12 +850,6 @@ void MainWindow::on_buttonHelp_clicked()
     if (lang.startsWith(QLatin1String("fr")))
         url = QStringLiteral("https://mxlinux.org/wiki/help-files/help-gestionnaire-des-utilisateurs");
     displayDoc(url, tr("%1 Help").arg(this->windowTitle()));
-}
-
-void MainWindow::restartPanel(const QString &user)
-{
-    const QString cmd = QStringLiteral("pkill xfconfd; sudo -Eu %1 bash -c 'xfce4-panel -r'").arg(user);
-    system(cmd.toUtf8());
 }
 
 void MainWindow::on_comboChangePass_activated(const QString & /*unused*/)

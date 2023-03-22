@@ -5,7 +5,7 @@
     <name>MainWindow</name>
     <message>
         <location filename="../mainwindow.ui" line="20"/>
-        <location filename="../mainwindow.cpp" line="94"/>
+        <location filename="../mainwindow.cpp" line="100"/>
         <source>MX Package Installer</source>
         <translation>MX Установщик пакетов</translation>
     </message>
@@ -15,708 +15,716 @@
         <translation>Популярные приложения</translation>
     </message>
     <message>
+        <location filename="../mainwindow.ui" line="73"/>
+        <source>Category</source>
+        <translation>Категория</translation>
+    </message>
+    <message>
         <location filename="../mainwindow.ui" line="83"/>
-        <location filename="../mainwindow.cpp" line="97"/>
         <source>Package</source>
         <translation>Пакет</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="88"/>
-        <location filename="../mainwindow.cpp" line="97"/>
         <source>Info</source>
         <translation>Информация</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="93"/>
-        <location filename="../mainwindow.ui" line="250"/>
-        <location filename="../mainwindow.ui" line="657"/>
-        <location filename="../mainwindow.ui" line="986"/>
-        <location filename="../mainwindow.cpp" line="97"/>
+        <location filename="../mainwindow.ui" line="468"/>
+        <location filename="../mainwindow.ui" line="660"/>
+        <location filename="../mainwindow.ui" line="1030"/>
         <source>Description</source>
         <translation>Описание</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="113"/>
-        <location filename="../mainwindow.ui" line="216"/>
-        <location filename="../mainwindow.ui" line="623"/>
-        <location filename="../mainwindow.ui" line="955"/>
-        <location filename="../mainwindow.ui" line="1235"/>
+        <location filename="../mainwindow.ui" line="101"/>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:16pt;&quot;&gt;Manage popular packages&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:16pt;&quot;&gt;Управление популярными пакетами&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="120"/>
+        <location filename="../mainwindow.ui" line="191"/>
+        <location filename="../mainwindow.ui" line="730"/>
+        <location filename="../mainwindow.ui" line="1055"/>
+        <location filename="../mainwindow.ui" line="1274"/>
         <source>search</source>
         <translation>поиск</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="123"/>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:16pt;&quot;&gt;Manage popular packages&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Greyed out items have already been installed.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:16pt;&quot;&gt;Управление популярными пакетами&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Элементы, отмеченные серым, уже установлены.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <location filename="../mainwindow.ui" line="149"/>
+        <location filename="../mainwindow.ui" line="204"/>
+        <location filename="../mainwindow.ui" line="772"/>
+        <location filename="../mainwindow.ui" line="1118"/>
+        <location filename="../mainwindow.ui" line="1245"/>
+        <source>= Installed packages</source>
+        <translation>= Установленные пакеты</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="153"/>
-        <source>Stable Repo</source>
-        <translation>Стабильный репозиторий</translation>
+        <location filename="../mainwindow.ui" line="173"/>
+        <source>Enabled Repos</source>
+        <translation>Включить репозитории</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="174"/>
-        <location filename="../mainwindow.ui" line="568"/>
-        <location filename="../mainwindow.ui" line="900"/>
-        <location filename="../mainwindow.ui" line="1178"/>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Filter packages according to their status.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Фильтровать пакеты в зависимости от их статуса.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="177"/>
-        <location filename="../mainwindow.ui" line="181"/>
-        <location filename="../mainwindow.ui" line="571"/>
-        <location filename="../mainwindow.ui" line="575"/>
-        <location filename="../mainwindow.ui" line="903"/>
-        <location filename="../mainwindow.ui" line="907"/>
-        <location filename="../mainwindow.cpp" line="2513"/>
-        <source>All packages</source>
-        <translation>Все пакеты</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="186"/>
-        <location filename="../mainwindow.ui" line="580"/>
-        <location filename="../mainwindow.ui" line="912"/>
-        <location filename="../mainwindow.cpp" line="2526"/>
-        <source>Installed</source>
-        <translation>Установлено</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="191"/>
-        <location filename="../mainwindow.ui" line="585"/>
-        <location filename="../mainwindow.ui" line="917"/>
-        <location filename="../mainwindow.cpp" line="2524"/>
-        <source>Upgradable</source>
-        <translation>Доступно обновление</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="196"/>
-        <location filename="../mainwindow.ui" line="590"/>
-        <location filename="../mainwindow.ui" line="922"/>
-        <location filename="../mainwindow.ui" line="1215"/>
-        <location filename="../mainwindow.cpp" line="2498"/>
-        <location filename="../mainwindow.cpp" line="2528"/>
-        <location filename="../mainwindow.cpp" line="2619"/>
-        <location filename="../mainwindow.cpp" line="2620"/>
-        <source>Not installed</source>
-        <translation>Не установлено</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="240"/>
-        <location filename="../mainwindow.ui" line="647"/>
-        <location filename="../mainwindow.ui" line="976"/>
-        <source>Package Name</source>
-        <translation>Имя пакета</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="245"/>
-        <location filename="../mainwindow.ui" line="652"/>
-        <location filename="../mainwindow.ui" line="981"/>
-        <location filename="../mainwindow.ui" line="1270"/>
-        <source>Version</source>
-        <translation>Версия</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="277"/>
-        <location filename="../mainwindow.ui" line="684"/>
-        <location filename="../mainwindow.ui" line="1043"/>
-        <source>Total packages:</source>
-        <translation>Всего пакетов:</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="291"/>
-        <location filename="../mainwindow.ui" line="698"/>
-        <location filename="../mainwindow.ui" line="1050"/>
-        <source>Hide library and developer packages</source>
-        <translation>Скрыть библиотеки и пакеты для разработчиков</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="313"/>
-        <location filename="../mainwindow.ui" line="720"/>
-        <location filename="../mainwindow.ui" line="1102"/>
-        <source>Refresh list</source>
-        <translation>Обновить список</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="327"/>
-        <location filename="../mainwindow.ui" line="734"/>
-        <location filename="../mainwindow.ui" line="1022"/>
-        <source>Installed:</source>
-        <translation>Установлено:</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="357"/>
-        <location filename="../mainwindow.ui" line="764"/>
-        <location filename="../mainwindow.ui" line="1015"/>
-        <source>Upgradable:</source>
-        <translation>Доступно обновление:</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="387"/>
-        <location filename="../mainwindow.ui" line="791"/>
-        <location filename="../mainwindow.ui" line="1083"/>
-        <source>Also Install &quot;Recommended&quot; Packages</source>
-        <translation>Устанавливать рекомендованные пакеты</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="394"/>
+        <location filename="../mainwindow.ui" line="237"/>
         <source>Remove orphan packages</source>
         <translation>Удалить лишние пакеты</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="404"/>
-        <location filename="../mainwindow.ui" line="1340"/>
+        <location filename="../mainwindow.ui" line="264"/>
+        <location filename="../mainwindow.ui" line="1337"/>
         <source>Upgrade All</source>
         <translation>Обновить все</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="421"/>
-        <location filename="../mainwindow.ui" line="598"/>
-        <location filename="../mainwindow.ui" line="930"/>
-        <location filename="../mainwindow.ui" line="1497"/>
-        <source>Greyed out items have already been installed.</source>
-        <translation>Выделенные серым цветом пункты уже установлены.</translation>
+        <location filename="../mainwindow.ui" line="278"/>
+        <location filename="../mainwindow.ui" line="558"/>
+        <location filename="../mainwindow.ui" line="886"/>
+        <source>Installed:</source>
+        <translation>Установлено:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="477"/>
-        <location filename="../mainwindow.ui" line="540"/>
-        <location filename="../mainwindow.ui" line="867"/>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;= Upgradable package. Newer version available in selected repository.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;= Пакет можно обновить. Более новая версия доступна в выбранном репозитории.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <location filename="../mainwindow.ui" line="301"/>
+        <location filename="../mainwindow.ui" line="508"/>
+        <location filename="../mainwindow.ui" line="907"/>
+        <source>Total packages:</source>
+        <translation>Всего пакетов:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="497"/>
+        <location filename="../mainwindow.ui" line="315"/>
+        <location filename="../mainwindow.ui" line="615"/>
+        <location filename="../mainwindow.ui" line="947"/>
+        <source>Also Install &quot;Recommended&quot; Packages</source>
+        <translation>Устанавливать рекомендованные пакеты</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="322"/>
+        <location filename="../mainwindow.ui" line="588"/>
+        <location filename="../mainwindow.ui" line="879"/>
+        <source>Upgradable:</source>
+        <translation>Доступно обновление:</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="329"/>
+        <location filename="../mainwindow.ui" line="522"/>
+        <location filename="../mainwindow.ui" line="914"/>
+        <source>Hide library and developer packages</source>
+        <translation>Скрыть библиотеки и пакеты для разработчиков</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="351"/>
+        <location filename="../mainwindow.ui" line="544"/>
+        <location filename="../mainwindow.ui" line="966"/>
+        <source>Refresh list</source>
+        <translation>Обновить список</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="390"/>
+        <location filename="../mainwindow.ui" line="688"/>
+        <location filename="../mainwindow.ui" line="1085"/>
+        <location filename="../mainwindow.ui" line="1197"/>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Filter packages according to their status.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Фильтровать пакеты в зависимости от их статуса.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="393"/>
+        <location filename="../mainwindow.ui" line="397"/>
+        <location filename="../mainwindow.ui" line="691"/>
+        <location filename="../mainwindow.ui" line="695"/>
+        <location filename="../mainwindow.ui" line="1088"/>
+        <location filename="../mainwindow.ui" line="1092"/>
+        <location filename="../mainwindow.cpp" line="2529"/>
+        <source>All packages</source>
+        <translation>Все пакеты</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="402"/>
+        <location filename="../mainwindow.ui" line="700"/>
+        <location filename="../mainwindow.ui" line="1097"/>
+        <location filename="../mainwindow.cpp" line="2542"/>
+        <source>Installed</source>
+        <translation>Установлено</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="407"/>
+        <location filename="../mainwindow.ui" line="705"/>
+        <location filename="../mainwindow.ui" line="1102"/>
+        <location filename="../mainwindow.cpp" line="2540"/>
+        <source>Upgradable</source>
+        <translation>Доступно обновление</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="412"/>
+        <location filename="../mainwindow.ui" line="710"/>
+        <location filename="../mainwindow.ui" line="1107"/>
+        <location filename="../mainwindow.ui" line="1234"/>
+        <location filename="../mainwindow.cpp" line="2514"/>
+        <location filename="../mainwindow.cpp" line="2545"/>
+        <location filename="../mainwindow.cpp" line="2637"/>
+        <location filename="../mainwindow.cpp" line="2638"/>
+        <source>Not installed</source>
+        <translation>Не установлено</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="432"/>
+        <location filename="../mainwindow.ui" line="752"/>
+        <location filename="../mainwindow.ui" line="814"/>
+        <source>= Upgradable package. Newer version available in selected repository.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="458"/>
+        <location filename="../mainwindow.ui" line="650"/>
+        <location filename="../mainwindow.ui" line="1020"/>
+        <source>Package Name</source>
+        <translation>Имя пакета</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="463"/>
+        <location filename="../mainwindow.ui" line="655"/>
+        <location filename="../mainwindow.ui" line="1025"/>
+        <location filename="../mainwindow.ui" line="1469"/>
+        <source>Version</source>
+        <translation>Версия</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="493"/>
         <source>MX Test Repo</source>
         <translation>MX тестовый репозиторий</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="824"/>
+        <location filename="../mainwindow.ui" line="796"/>
         <source>Debian Backports</source>
         <translation>Бэкпорты Debian</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="1157"/>
+        <location filename="../mainwindow.ui" line="1142"/>
         <source>Flatpaks</source>
         <translation>Флатпак</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="1181"/>
-        <location filename="../mainwindow.ui" line="1185"/>
-        <location filename="../mainwindow.cpp" line="2480"/>
-        <source>All apps</source>
-        <translation>Все приложения</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="1190"/>
-        <location filename="../mainwindow.cpp" line="2484"/>
-        <source>All runtimes</source>
-        <translation>Все среды времени выполнения</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="1195"/>
-        <location filename="../mainwindow.cpp" line="2488"/>
-        <source>All available</source>
-        <translation>Все доступные</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="1200"/>
-        <location filename="../mainwindow.cpp" line="2478"/>
-        <source>Installed apps</source>
-        <translation>Установленные приложения</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="1205"/>
-        <location filename="../mainwindow.cpp" line="2476"/>
-        <source>Installed runtimes</source>
-        <translation>Установленные рантаймы</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="1210"/>
-        <location filename="../mainwindow.cpp" line="2496"/>
-        <location filename="../mainwindow.cpp" line="2613"/>
-        <location filename="../mainwindow.cpp" line="2614"/>
-        <source>All installed</source>
-        <translation>Все установленные</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="1260"/>
-        <source>Short Name</source>
-        <translation>Короткое имя</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="1265"/>
-        <source>Full Package Name</source>
-        <translation>Полное имя пакета</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="1275"/>
-        <source>Size</source>
-        <translation>Размер</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="1319"/>
-        <source>Total items </source>
-        <translation>Всего элементов</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="1333"/>
-        <source>Installed apps:</source>
-        <translation>Установленные приложения:</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="1386"/>
-        <source>Advanced</source>
-        <translation>Расширенный</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="1416"/>
-        <source>Total installed size:</source>
-        <translation>Общий размер установленного:</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="1430"/>
-        <source>Remove unused runtimes</source>
-        <translation>Удалить ненужные среды выполнения</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="1447"/>
-        <location filename="../mainwindow.ui" line="1451"/>
+        <location filename="../mainwindow.ui" line="1148"/>
+        <location filename="../mainwindow.ui" line="1152"/>
         <source>For all users</source>
         <translation>Для всех пользователей</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="1456"/>
+        <location filename="../mainwindow.ui" line="1157"/>
         <source>For current user</source>
         <translation>Для текущего пользователя</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="1474"/>
+        <location filename="../mainwindow.ui" line="1165"/>
         <source>Remote (repo):</source>
         <translation>Внешний репозиторий:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="1517"/>
-        <location filename="../mainwindow.cpp" line="2302"/>
-        <location filename="../mainwindow.cpp" line="2436"/>
+        <location filename="../mainwindow.ui" line="1200"/>
+        <location filename="../mainwindow.ui" line="1204"/>
+        <location filename="../mainwindow.cpp" line="2496"/>
+        <source>All apps</source>
+        <translation>Все приложения</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="1209"/>
+        <location filename="../mainwindow.cpp" line="2500"/>
+        <source>All runtimes</source>
+        <translation>Все среды времени выполнения</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="1214"/>
+        <location filename="../mainwindow.cpp" line="2504"/>
+        <source>All available</source>
+        <translation>Все доступные</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="1219"/>
+        <location filename="../mainwindow.cpp" line="2494"/>
+        <source>Installed apps</source>
+        <translation>Установленные приложения</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="1224"/>
+        <location filename="../mainwindow.cpp" line="2492"/>
+        <source>Installed runtimes</source>
+        <translation>Установленные рантаймы</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="1229"/>
+        <location filename="../mainwindow.cpp" line="2512"/>
+        <location filename="../mainwindow.cpp" line="2631"/>
+        <location filename="../mainwindow.cpp" line="2632"/>
+        <source>All installed</source>
+        <translation>Все установленные</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="1316"/>
+        <source>Total items </source>
+        <translation>Всего элементов</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="1330"/>
+        <source>Installed apps:</source>
+        <translation>Установленные приложения:</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="1383"/>
+        <source>Advanced</source>
+        <translation>Расширенный</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="1413"/>
+        <source>Total installed size:</source>
+        <translation>Общий размер установленного:</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="1427"/>
+        <source>Remove unused runtimes</source>
+        <translation>Удалить ненужные среды выполнения</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="1459"/>
+        <source>Short Name</source>
+        <translation>Короткое имя</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="1464"/>
+        <source>Full Package Name</source>
+        <translation>Полное имя пакета</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="1474"/>
+        <source>Size</source>
+        <translation>Размер</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="1504"/>
+        <location filename="../mainwindow.cpp" line="2315"/>
+        <location filename="../mainwindow.cpp" line="2452"/>
         <source>Console Output</source>
         <translation>Вывод консоли</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="1523"/>
+        <location filename="../mainwindow.ui" line="1510"/>
         <source>Enter</source>
         <translation>Enter</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="1534"/>
+        <location filename="../mainwindow.ui" line="1521"/>
         <source>Respond here, or just press Enter</source>
         <translation>Ответьте здесь или просто нажмите Enter</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="1590"/>
-        <source>Uninstall</source>
-        <translation>Удалить</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="1597"/>
-        <source>Alt+U</source>
-        <translation>Alt+U</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="1613"/>
-        <source>About this application</source>
-        <translation>Об этом приложении</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="1616"/>
-        <source>About...</source>
-        <translation>О программе...</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="1623"/>
-        <source>Alt+B</source>
-        <translation>Alt+B</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="1671"/>
-        <source>Display help </source>
-        <translation>Показать справку</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="1674"/>
-        <source>Help</source>
-        <translation>Справка</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="1681"/>
-        <source>Alt+H</source>
-        <translation>Alt+H</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="1697"/>
-        <location filename="../mainwindow.cpp" line="1072"/>
-        <location filename="../mainwindow.cpp" line="2606"/>
-        <location filename="../mainwindow.cpp" line="2610"/>
-        <location filename="../mainwindow.cpp" line="2865"/>
+        <location filename="../mainwindow.ui" line="1577"/>
+        <location filename="../mainwindow.cpp" line="1075"/>
+        <location filename="../mainwindow.cpp" line="2624"/>
+        <location filename="../mainwindow.cpp" line="2628"/>
+        <location filename="../mainwindow.cpp" line="2883"/>
         <source>Install</source>
         <translation>Установить</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="1704"/>
+        <location filename="../mainwindow.ui" line="1584"/>
         <source>Alt+I</source>
         <translation>Alt+I</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="1723"/>
+        <location filename="../mainwindow.ui" line="1603"/>
         <source>Quit application</source>
         <translation>Выйти из приложения</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="1726"/>
+        <location filename="../mainwindow.ui" line="1606"/>
         <source>Close</source>
         <translation>Закрыть</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="1733"/>
+        <location filename="../mainwindow.ui" line="1613"/>
         <source>Alt+C</source>
         <translation>Alt+C</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="176"/>
+        <location filename="../mainwindow.ui" line="1645"/>
+        <source>About this application</source>
+        <translation>Об этом приложении</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="1648"/>
+        <source>About...</source>
+        <translation>О программе...</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="1655"/>
+        <source>Alt+B</source>
+        <translation>Alt+B</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="1693"/>
+        <source>Display help </source>
+        <translation>Показать справку</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="1696"/>
+        <source>Help</source>
+        <translation>Справка</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="1703"/>
+        <source>Alt+H</source>
+        <translation>Alt+H</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="1719"/>
+        <source>Uninstall</source>
+        <translation>Удалить</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="1726"/>
+        <source>Alt+U</source>
+        <translation>Alt+U</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="91"/>
+        <source>Flatpak tab is disabled on 32-bit.</source>
+        <translation>Вкладка Флатпака отключена для 32-битной системы.</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="184"/>
         <source>Uninstalling packages...</source>
         <translation>Удаление пакетов...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="181"/>
+        <location filename="../mainwindow.cpp" line="189"/>
         <source>Running pre-uninstall operations...</source>
         <translation>Выполняются предварительные действия удаления...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="196"/>
+        <location filename="../mainwindow.cpp" line="204"/>
         <source>Running post-uninstall operations...</source>
         <translation>Действия, предусмотренные после деинсталляции, теперь выполняются...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="210"/>
+        <location filename="../mainwindow.cpp" line="218"/>
         <source>Refreshing sources...</source>
         <translation>Обновляются источники...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="226"/>
-        <location filename="../mainwindow.cpp" line="1120"/>
-        <location filename="../mainwindow.cpp" line="1249"/>
-        <location filename="../mainwindow.cpp" line="1387"/>
-        <location filename="../mainwindow.cpp" line="1449"/>
-        <location filename="../mainwindow.cpp" line="2120"/>
-        <location filename="../mainwindow.cpp" line="2150"/>
+        <location filename="../mainwindow.cpp" line="232"/>
+        <location filename="../mainwindow.cpp" line="1121"/>
+        <location filename="../mainwindow.cpp" line="1250"/>
+        <location filename="../mainwindow.cpp" line="1392"/>
+        <location filename="../mainwindow.cpp" line="1454"/>
+        <location filename="../mainwindow.cpp" line="2132"/>
         <location filename="../mainwindow.cpp" line="2162"/>
-        <location filename="../mainwindow.cpp" line="2275"/>
-        <location filename="../mainwindow.cpp" line="2294"/>
-        <location filename="../mainwindow.cpp" line="2689"/>
-        <location filename="../mainwindow.cpp" line="2765"/>
-        <location filename="../mainwindow.cpp" line="2795"/>
-        <location filename="../mainwindow.cpp" line="2888"/>
-        <location filename="../mainwindow.cpp" line="2912"/>
+        <location filename="../mainwindow.cpp" line="2174"/>
+        <location filename="../mainwindow.cpp" line="2288"/>
+        <location filename="../mainwindow.cpp" line="2307"/>
+        <location filename="../mainwindow.cpp" line="2707"/>
+        <location filename="../mainwindow.cpp" line="2783"/>
+        <location filename="../mainwindow.cpp" line="2813"/>
+        <location filename="../mainwindow.cpp" line="2906"/>
+        <location filename="../mainwindow.cpp" line="2930"/>
         <source>Error</source>
         <translation>Ошибка</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="227"/>
+        <location filename="../mainwindow.cpp" line="233"/>
         <source>There was a problem updating sources. Some sources may not have provided updates. For more info check: </source>
         <translation>Возникла проблема при обновлении источников. Возможно, некоторые источники не предоставили обновления. Для подробной информации проверьте:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="619"/>
+        <location filename="../mainwindow.cpp" line="625"/>
         <source>Cancel</source>
         <translation>Отмена</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="626"/>
+        <location filename="../mainwindow.cpp" line="632"/>
         <source>Please wait...</source>
         <translation>Пожалуйста, ждите...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="810"/>
-        <location filename="../mainwindow.cpp" line="829"/>
+        <location filename="../mainwindow.cpp" line="814"/>
+        <location filename="../mainwindow.cpp" line="831"/>
         <source>Version </source>
         <translation>Версия </translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="810"/>
+        <location filename="../mainwindow.cpp" line="814"/>
         <source> in stable repo</source>
         <translation>в стабильном репозитории</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="812"/>
+        <location filename="../mainwindow.cpp" line="816"/>
         <source>Not available in stable repo</source>
         <translation>Недоступно в стабильном репозитории</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="821"/>
-        <location filename="../mainwindow.cpp" line="2413"/>
+        <location filename="../mainwindow.cpp" line="825"/>
+        <location filename="../mainwindow.cpp" line="2429"/>
         <source>Latest version </source>
         <translation>Последняя версия</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="821"/>
-        <location filename="../mainwindow.cpp" line="2413"/>
+        <location filename="../mainwindow.cpp" line="825"/>
+        <location filename="../mainwindow.cpp" line="2429"/>
         <source> already installed</source>
         <translation> уже установлено</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="829"/>
+        <location filename="../mainwindow.cpp" line="831"/>
         <source> installed</source>
         <translation> установлена</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="940"/>
+        <location filename="../mainwindow.cpp" line="943"/>
         <source>You are about to use the MX Test repository, whose packages are provided for testing purposes only. It is possible that they might break your system, so it is suggested that you back up your system and install or update only one package at a time. Please provide feedback in the Forum so the package can be evaluated before moving up to Main.</source>
         <translation>Вы собираетесь подключить репозиторий MX Test, пакеты которого представлены только для тестирования. Они могут нарушить работу вашей системы, поэтому рекомендуется сделать резервную копию системы и устанавливать по одному пакету за раз. Пожалуйста, оставьте отчёт на Форуме для того, чтобы пакет был дополнительно оценён до переноса в основной репозиторий.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="949"/>
+        <location filename="../mainwindow.cpp" line="952"/>
         <source>You are about to use Debian Backports, which contains packages taken from the next Debian release (called &apos;testing&apos;), adjusted and recompiled for usage on Debian stable. They cannot be tested as extensively as in the stable releases of Debian and MX Linux, and are provided on an as-is basis, with risk of incompatibilities with other components in Debian stable. Use with care!</source>
         <translation>Вы собираетесь использовать Debian Backports, который содержит пакеты, взятые из следующего выпуска Debian (именуемого &quot;testing&quot;), скорректированные и перекомпилированные для использования на Debian stable. Они не могли быть проверены так хорошо, как в стабильных версиях Debian и MX Linux, и предоставляются на основании &quot;как есть&quot;, с риском несовместимости с другими компонентами в Debian stable. Используйте с осторожностью!</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="957"/>
+        <location filename="../mainwindow.cpp" line="960"/>
         <source>MX Linux includes this repository of flatpaks for the users&apos; convenience only, and is not responsible for the functionality of the individual flatpaks themselves. For more, consult flatpaks in the Wiki.</source>
         <translation>MX Linux включает этот репозиторий флатпаков только для удобства пользователей и не несёт ответственности за их функционирование. Подробнее о флатпаках в Вики.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="964"/>
-        <location filename="../mainwindow.cpp" line="2898"/>
+        <location filename="../mainwindow.cpp" line="967"/>
+        <location filename="../mainwindow.cpp" line="2916"/>
         <source>Warning</source>
         <translation>Предупреждение</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="968"/>
+        <location filename="../mainwindow.cpp" line="971"/>
         <source>Do not show this message again</source>
         <translation>Больше не показывать это окно</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1070"/>
+        <location filename="../mainwindow.cpp" line="1073"/>
         <source>Remove</source>
         <translation>Удалить</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1084"/>
+        <location filename="../mainwindow.cpp" line="1087"/>
         <source>The following packages were selected. Click Show Details for list of changes.</source>
         <translation>Следующие пакеты были выбраны. Щёлкните на &quot;Показать подробности&quot; для просмотра списка изменений.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1121"/>
-        <location filename="../mainwindow.cpp" line="1250"/>
-        <location filename="../mainwindow.cpp" line="1450"/>
+        <location filename="../mainwindow.cpp" line="1122"/>
+        <location filename="../mainwindow.cpp" line="1251"/>
+        <location filename="../mainwindow.cpp" line="1455"/>
         <source>Internet is not available, won&apos;t be able to download the list of packages</source>
         <translation>Интернет недоступен, невозможно загрузить список пакетов</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1126"/>
+        <location filename="../mainwindow.cpp" line="1127"/>
         <source>Installing packages...</source>
         <translation>Установка пакетов...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1183"/>
+        <location filename="../mainwindow.cpp" line="1184"/>
         <source>Post-processing...</source>
         <translation>Обработка...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1213"/>
+        <location filename="../mainwindow.cpp" line="1214"/>
         <source>Pre-processing for </source>
         <translation>Предварительная обработка для</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1226"/>
+        <location filename="../mainwindow.cpp" line="1227"/>
         <source>Installing </source>
         <translation>Установка</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1233"/>
+        <location filename="../mainwindow.cpp" line="1234"/>
         <source>Post-processing for </source>
         <translation>Обработка для</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1388"/>
+        <location filename="../mainwindow.cpp" line="1393"/>
         <source>There was an error writing file: %1. Please check if you have enough free space on your drive</source>
         <translation>Ошибка при записи файла: %1. Проверьте наличие свободного места на диске.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1458"/>
+        <location filename="../mainwindow.cpp" line="1463"/>
         <source>Downloading package info...</source>
         <translation>Загрузка информации о пакетах...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1912"/>
-        <location filename="../mainwindow.cpp" line="1989"/>
-        <location filename="../mainwindow.cpp" line="2013"/>
+        <location filename="../mainwindow.cpp" line="1919"/>
+        <location filename="../mainwindow.cpp" line="1996"/>
+        <location filename="../mainwindow.cpp" line="2020"/>
         <source>Package info</source>
         <translation>Информация о пакете</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1926"/>
-        <location filename="../mainwindow.cpp" line="2831"/>
+        <location filename="../mainwindow.cpp" line="1933"/>
+        <location filename="../mainwindow.cpp" line="2849"/>
         <source>More &amp;info...</source>
         <translation>Подро&amp;бности...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1955"/>
+        <location filename="../mainwindow.cpp" line="1962"/>
         <source>Packages to be installed: </source>
         <translation>Пакеты для установки:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="2116"/>
-        <location filename="../mainwindow.cpp" line="2129"/>
-        <location filename="../mainwindow.cpp" line="2144"/>
-        <location filename="../mainwindow.cpp" line="2159"/>
-        <location filename="../mainwindow.cpp" line="2247"/>
-        <location filename="../mainwindow.cpp" line="2270"/>
-        <location filename="../mainwindow.cpp" line="2685"/>
-        <location filename="../mainwindow.cpp" line="2759"/>
-        <location filename="../mainwindow.cpp" line="2789"/>
-        <location filename="../mainwindow.cpp" line="2882"/>
+        <location filename="../mainwindow.cpp" line="2128"/>
+        <location filename="../mainwindow.cpp" line="2141"/>
+        <location filename="../mainwindow.cpp" line="2156"/>
+        <location filename="../mainwindow.cpp" line="2171"/>
+        <location filename="../mainwindow.cpp" line="2260"/>
+        <location filename="../mainwindow.cpp" line="2283"/>
+        <location filename="../mainwindow.cpp" line="2703"/>
+        <location filename="../mainwindow.cpp" line="2777"/>
+        <location filename="../mainwindow.cpp" line="2807"/>
+        <location filename="../mainwindow.cpp" line="2900"/>
         <source>Done</source>
         <translation>Готово</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="2116"/>
-        <location filename="../mainwindow.cpp" line="2129"/>
-        <location filename="../mainwindow.cpp" line="2144"/>
-        <location filename="../mainwindow.cpp" line="2159"/>
-        <location filename="../mainwindow.cpp" line="2247"/>
-        <location filename="../mainwindow.cpp" line="2270"/>
-        <location filename="../mainwindow.cpp" line="2288"/>
-        <location filename="../mainwindow.cpp" line="2685"/>
-        <location filename="../mainwindow.cpp" line="2759"/>
-        <location filename="../mainwindow.cpp" line="2789"/>
-        <location filename="../mainwindow.cpp" line="2882"/>
-        <location filename="../mainwindow.cpp" line="2906"/>
+        <location filename="../mainwindow.cpp" line="2128"/>
+        <location filename="../mainwindow.cpp" line="2141"/>
+        <location filename="../mainwindow.cpp" line="2156"/>
+        <location filename="../mainwindow.cpp" line="2171"/>
+        <location filename="../mainwindow.cpp" line="2260"/>
+        <location filename="../mainwindow.cpp" line="2283"/>
+        <location filename="../mainwindow.cpp" line="2301"/>
+        <location filename="../mainwindow.cpp" line="2703"/>
+        <location filename="../mainwindow.cpp" line="2777"/>
+        <location filename="../mainwindow.cpp" line="2807"/>
+        <location filename="../mainwindow.cpp" line="2900"/>
+        <location filename="../mainwindow.cpp" line="2924"/>
         <source>Processing finished successfully.</source>
         <translation>Обработка успешно завершена.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="2121"/>
-        <location filename="../mainwindow.cpp" line="2151"/>
+        <location filename="../mainwindow.cpp" line="2133"/>
         <location filename="../mainwindow.cpp" line="2163"/>
-        <location filename="../mainwindow.cpp" line="2690"/>
-        <location filename="../mainwindow.cpp" line="2766"/>
-        <location filename="../mainwindow.cpp" line="2796"/>
+        <location filename="../mainwindow.cpp" line="2175"/>
+        <location filename="../mainwindow.cpp" line="2708"/>
+        <location filename="../mainwindow.cpp" line="2784"/>
+        <location filename="../mainwindow.cpp" line="2814"/>
         <source>Problem detected while installing, please inspect the console output.</source>
         <translation>Обнаружена проблема при установке, пожалуйста, проверьте консольный вывод.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="2173"/>
+        <location filename="../mainwindow.cpp" line="2185"/>
         <source>About %1</source>
         <translation>О %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="2174"/>
+        <location filename="../mainwindow.cpp" line="2186"/>
         <source>Version: </source>
         <translation>Версия:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="2175"/>
+        <location filename="../mainwindow.cpp" line="2188"/>
         <source>Package Installer for MX Linux</source>
         <translation>Установщик пакетов для MX Linux</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="2177"/>
+        <location filename="../mainwindow.cpp" line="2190"/>
         <source>Copyright (c) MX Linux</source>
         <translation>Авторское право (c) MX Linux</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="2178"/>
+        <location filename="../mainwindow.cpp" line="2191"/>
         <source>%1 License</source>
         <translation>%1 Лицензия</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="2191"/>
+        <location filename="../mainwindow.cpp" line="2204"/>
         <source>%1 Help</source>
         <translation>%1 Справка</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="2275"/>
+        <location filename="../mainwindow.cpp" line="2288"/>
         <source>We encountered a problem uninstalling, please check output</source>
         <translation>При деинсталляции возникла ошибка, пожалуйста, проверьте вывод</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="2288"/>
-        <location filename="../mainwindow.cpp" line="2906"/>
+        <location filename="../mainwindow.cpp" line="2301"/>
+        <location filename="../mainwindow.cpp" line="2924"/>
         <source>Success</source>
         <translation>Успешно</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="2294"/>
-        <location filename="../mainwindow.cpp" line="2912"/>
+        <location filename="../mainwindow.cpp" line="2307"/>
+        <location filename="../mainwindow.cpp" line="2930"/>
         <source>We encountered a problem uninstalling the program</source>
         <translation>Возникла проблема при удалении приложения</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="2387"/>
-        <location filename="../mainwindow.cpp" line="2399"/>
+        <location filename="../mainwindow.cpp" line="2403"/>
+        <location filename="../mainwindow.cpp" line="2415"/>
         <source>Flatpak not installed</source>
         <translation>Флатпак не установлен</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="2388"/>
+        <location filename="../mainwindow.cpp" line="2404"/>
         <source>Flatpak is not currently installed.
 OK to go ahead and install it?</source>
         <translation>В настоящий момент флатпак не установлен.
 Начать его установку?</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="2399"/>
+        <location filename="../mainwindow.cpp" line="2415"/>
         <source>Flatpak was not installed</source>
         <translation>Флатпак не был установлен</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="2423"/>
-        <location filename="../mainwindow.cpp" line="2445"/>
+        <location filename="../mainwindow.cpp" line="2439"/>
+        <location filename="../mainwindow.cpp" line="2461"/>
         <source>Flathub remote failed</source>
         <translation>Дистанционный Флэтхаб завершился ошибкой</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="2423"/>
-        <location filename="../mainwindow.cpp" line="2445"/>
+        <location filename="../mainwindow.cpp" line="2439"/>
+        <location filename="../mainwindow.cpp" line="2461"/>
         <source>Flathub remote could not be added</source>
         <translation>Не удалось добавить дистанционный для Флэтхаб</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="2431"/>
+        <location filename="../mainwindow.cpp" line="2447"/>
         <source>Needs re-login</source>
         <translation>Требуется повторить логин</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="2432"/>
+        <location filename="../mainwindow.cpp" line="2448"/>
         <source>You might need to logout/login to see installed items in the menu</source>
         <translation>Возможно, вам потребуется выйти/войти в систему, чтобы увидеть в меню только что установленные приложения</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="2606"/>
+        <location filename="../mainwindow.cpp" line="2624"/>
         <source>Upgrade</source>
         <translation>Обновление</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="2718"/>
+        <location filename="../mainwindow.cpp" line="2736"/>
         <source>Quit?</source>
         <translation>Выйти?</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="2719"/>
+        <location filename="../mainwindow.cpp" line="2737"/>
         <source>Process still running, quitting might leave the system in an unstable state.&lt;p&gt;&lt;b&gt;Are you sure you want to exit MX Package Installer?&lt;/b&gt;</source>
         <translation>Процесс еще выполняется, выход может оставить систему в нестабильном состоянии.&lt;p&gt;&lt;b&gt;Вы уверены, что хотите выйти из MX Установщика пакетов?&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="2863"/>
+        <location filename="../mainwindow.cpp" line="2881"/>
         <source>Reinstall</source>
         <translation>Переустановить</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="2889"/>
+        <location filename="../mainwindow.cpp" line="2907"/>
         <source>Problem detected during last operation, please inspect the console output.</source>
         <translation>Обнаружена проблема во время последней операции, пожалуйста, проверьте вывод консоли.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="2899"/>
+        <location filename="../mainwindow.cpp" line="2917"/>
         <source>Potentially dangerous operation.
 Please make sure you check carefully the list of packages to be removed.</source>
         <translation>Опасная операция.
@@ -830,22 +838,36 @@ Please make sure you check carefully the list of packages to be removed.</source
         <translation>&amp;Закрыть</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="73"/>
+        <location filename="../main.cpp" line="74"/>
+        <source>MX Package Installer is a tool used for managing packages on MX Linux
+    - installs popular programs from different sources
+    - installs programs from the MX Test repo
+    - installs programs from Debian Backports repo
+    - installs flatpaks</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../main.cpp" line="82"/>
+        <source>Skip online check if it falsely reports lack of internet access.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../main.cpp" line="88"/>
         <source>Error</source>
         <translation>Ошибка</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="74"/>
+        <location filename="../main.cpp" line="89"/>
         <source>You seem to be logged in as root, please log out and log in as normal user to use this program.</source>
         <translation>Программа запущена суперпользователем. Для использования программы войдите в систему как обычный пользователь.</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="84"/>
+        <location filename="../main.cpp" line="99"/>
         <source>Unable to get exclusive lock</source>
         <translation>Не удалось получить свою блокировку</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="85"/>
+        <location filename="../main.cpp" line="100"/>
         <source>Another package management application (like Synaptic or apt-get), is already running. Please close that application first</source>
         <translation>Другое приложение управления пакетами (например, Synaptic или apt-get), уже работает. Пожалуйста, закройте сначала это приложение</translation>
     </message>

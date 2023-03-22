@@ -1,8 +1,14 @@
-desktop-defaults-mx-common (23.01.04mx21+deb11u13) stable; urgency=medium
+desktop-defaults-mx-common (23.01.05mx21+deb11u13) stable; urgency=medium
 
   * MX Tools release
 
- -- Dolphin Oracle <administrator@localdomain>  Wed, 22 Mar 2023 10:43:49 +0100
+ -- Dolphin Oracle <administrator@localdomain>  Wed, 22 Mar 2023 13:32:32 +0100
+
+desktop-defaults-mx-common (23.01.05mx21) mx; urgency=medium
+
+  * add 58qxcb
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 25 Jan 2023 19:02:27 -0500
 
 desktop-defaults-mx-common (23.01.04mx21) mx; urgency=medium
 

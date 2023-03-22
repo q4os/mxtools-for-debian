@@ -1,0 +1,12 @@
+[Desktop Entry]
+Encoding=UTF-8
+# The desktop entry name will be displayed within the menu.
+Name=MX Date & Time
+# # The desktop entry comment will be shown within the menu.
+Comment=Date & Time Settings
+Exec=mx-datetime-launcher
+Terminal=false
+Type=Application
+Icon=mx-datetime
+Categories=GNOME;GTK;System;MX-Setup;
+NoDisplay=false

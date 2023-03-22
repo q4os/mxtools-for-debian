@@ -1,8 +1,57 @@
-ddm-mx (22.12.01mx21+deb11u13) stable; urgency=medium
+ddm-mx (23.03.03+deb11u13) stable; urgency=medium
 
   * MX Tools release
 
- -- Dolphin Oracle <administrator@localdomain>  Wed, 22 Mar 2023 10:43:48 +0100
+ -- Dolphin Oracle <administrator@localdomain>  Wed, 22 Mar 2023 13:32:32 +0100
+
+ddm-mx (23.03.03) mx; urgency=medium
+
+  * purge leftover i386 libs
+  * translation support for nvidia-detect-mx
+  * update translations
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 04 Mar 2023 10:46:14 -0500
+
+ddm-mx (23.03.01) mx; urgency=medium
+
+  * offer check against more packages
+  * present alternatives
+  * fix bug in some question case handling
+  * support both bullseye and bookworm in same package
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 02 Mar 2023 20:31:39 -0500
+
+ddm-mx (23.02.05mx21) mx; urgency=medium
+
+  * fix 20-nvidia.conf filename in removal stage
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 24 Feb 2023 23:25:33 -0500
+
+ddm-mx (23.02.04mx21) mx; urgency=medium
+
+  * create 20-nvidia.conf file, add modules-load.d symlink
+  * add -c switch to ONLY generate a 20-nvidia.conf file
+  * backup any exisitng xorg.conf file when nvidia is installed
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Tue, 21 Feb 2023 18:28:41 -0500
+
+ddm-mx (23.02.02mx21) mx; urgency=medium
+
+  * create symlinks in /etc/modprobe if driver install doesn't create files
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 05 Feb 2023 22:17:37 -0500
+
+ddm-mx (23.02.01mx21) mx; urgency=medium
+
+  * generalize debian version
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 04 Feb 2023 20:35:59 -0500
+
+ddm-mx (22.12.02mx22) mx; urgency=medium
+
+  * more translations work
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 04 Dec 2022 19:46:45 -0500
 
 ddm-mx (22.12.01mx21) mx; urgency=medium
 

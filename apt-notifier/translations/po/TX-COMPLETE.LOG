@@ -1,66 +1,73 @@
+# Languages codes with translation completness  >= 5%
+# generated with tx-complete.sh at Wed, 08 Mar 2023 14:30:18 -0500
    Nr.		Cnt.	 Compl.		Code		Language
    ---		----	 ------		----		--------
-     1		  83	   100%    	ca      	Catalan; Valencian
-     2		  83	   100%    	cs      	Czech
-     3		  83	   100%    	de      	German
-     4		  83	   100%    	el      	Greek, Modern (1453-)
-     5		  83	   100%    	es      	Spanish; Castilian
-     6		  83	   100%    	es_ES   	Spanish; Castilian @ Spain
-     7		  83	   100%    	fi      	Finnish
-     8		  83	   100%    	fr      	French
-     9		  83	   100%    	fr_BE   	French @ Belgium
-    10		  83	   100%    	hi      	Hindi
-    11		  83	   100%    	hu      	Hungarian
-    12		  83	   100%    	it      	Italian
-    13		  83	   100%    	ja      	Japanese
-    14		  83	   100%    	nb      	Bokmål, Norwegian; Norwegian Bokmål
-    15		  83	   100%    	nl      	Dutch; Flemish
-    16		  83	   100%    	pl      	Polish
-    17		  83	   100%    	pt      	Portuguese
-    18		  83	   100%    	pt_BR   	Portuguese @ Brazil
-    19		  83	   100%    	ru      	Russian
-    20		  83	   100%    	sl      	Slovenian
-    21		  83	   100%    	sv      	Swedish
-    22		  83	   100%    	tr      	Turkish
-    23		  80	    96%    	sq      	Albanian
-    24		  79	    95%    	nl_BE   	Dutch; Flemish @ Belgium
-    25		  77	    92%    	gl_ES   	Galician @ Spain
-    26		  72	    86%    	da      	Danish
-    27		  69	    83%    	fil_PH  	Filipino; Pilipino @ Philippines
-    28		  52	    62%    	fa      	Persian
-    29		  48	    57%    	sk      	Slovak
-    30		  44	    53%    	am      	Amharic
-    31		  44	    53%    	hr      	Croatian
-    32		  44	    53%    	lt      	Lithuanian
-    33		  35	    42%    	th      	Thai
-    34		  30	    36%    	zh_TW   	Chinese @ Taiwan, Province of China
-    35		  26	    31%    	zh_CN   	Chinese @ China
-    36		  18	    21%    	he_IL   	Hebrew @ Israel
-    37		   9	    10%    	uk      	Ukrainian
-    38		   8	     9%    	nb_NO   	Bokmål, Norwegian; Norwegian Bokmål @ Norway
-    39		   8	     9%    	ro      	Romanian; Moldavian; Moldovan
-    40		   7	     8%    	is      	Icelandic
-    41		   6	     7%    	bg      	Bulgarian
-    42		   6	     7%    	vi      	Vietnamese
-    43		   5	     6%    	ar      	Arabic
-    44		   5	     6%    	id      	Indonesian
-    45		   5	     6%    	kk      	Kazakh
-    46		   3	     3%    	et      	Estonian
-    47		   3	     3%    	ko      	Korean
-    48		   3	     3%    	mr      	Marathi
-    49		   3	     3%    	sr      	Serbian
-    50		   3	     3%    	zh_HK   	Chinese @ Hong Kong
-    51		   2	     2%    	eu      	Basque
-    52		   2	     2%    	mk      	Macedonian
-    53		   1	     1%    	gu      	Gujarati
-    54		   1	     1%    	rue     	
-    55		   0	     0%    	af      	Afrikaans
-    56		   0	     0%    	be      	Belarusian
-    57		   0	     0%    	bn      	Bengali
-    58		   0	     0%    	en_GB   	English @ United Kingdom
-    59		   0	     0%    	eo      	Esperanto
-    60		   0	     0%    	fr_FR   	French @ France
-    61		   0	     0%    	he      	Hebrew
-    62		   0	     0%    	ku      	Kurdish
-    63		   0	     0%    	or      	Oriya
-    64		   0	     0%    	so      	Somali
+     1		  83	   100%    	ca      	ca	Catalan; Valencian
+     2		  83	   100%    	cs      	cs	Czech
+     3		  83	   100%    	de      	de	German
+     4		  83	   100%    	el      	el	Greek, Modern (1453-)
+     5		  83	   100%    	es      	es	Spanish; Castilian
+     6		  83	   100%    	es_ES   	es	Spanish; Castilian @ Spain
+     7		  83	   100%    	fi      	fi	Finnish
+     8		  83	   100%    	fr      	fr	French
+     9		  83	   100%    	fr_BE   	fr	French @ Belgium
+    10		  83	   100%    	hi      	hi	Hindi
+    11		  83	   100%    	hu      	hu	Hungarian
+    12		  83	   100%    	it      	it	Italian
+    13		  83	   100%    	ja      	ja	Japanese
+    14		  83	   100%    	nb      	nb	Bokmål, Norwegian; Norwegian Bokmål
+    15		  83	   100%    	nl      	nl	Dutch; Flemish
+    16		  83	   100%    	pl      	pl	Polish
+    17		  83	   100%    	pt      	pt	Portuguese
+    18		  83	   100%    	pt_BR   	pt	Portuguese @ Brazil
+    19		  83	   100%    	ru      	ru	Russian
+    20		  83	   100%    	sl      	sl	Slovenian
+    21		  83	   100%    	sv      	sv	Swedish
+    22		  83	   100%    	tr      	tr	Turkish
+    23		  80	    96%    	sq      	sq	Albanian
+    24		  79	    95%    	nl_BE   	nl	Dutch; Flemish @ Belgium
+    25		  77	    92%    	gl_ES   	gl	Galician @ Spain
+    26		  72	    86%    	da      	da	Danish
+    27		  69	    83%    	fil_PH  		Filipino @ Philippines
+    28		  52	    62%    	fa      	fa	Persian
+    29		  48	    57%    	sk      	sk	Slovak
+    30		  44	    53%    	am      	am	Amharic
+    31		  44	    53%    	hr      	hr	Croatian
+    32		  44	    53%    	lt      	lt	Lithuanian
+    33		  35	    42%    	th      	th	Thai
+    34		  30	    36%    	zh_TW   	zh	Chinese @ Taiwan, Province of China
+    35		  26	    31%    	zh_CN   	zh	Chinese @ China
+    36		  18	    21%    	he_IL   	he	Hebrew @ Israel
+    37		   9	    10%    	uk      	uk	Ukrainian
+    38		   8	     9%    	nb_NO   	nb	Bokmål, Norwegian; Norwegian Bokmål @ Norway
+    39		   8	     9%    	ro      	ro	Romanian; Moldavian; Moldovan
+    40		   7	     8%    	is      	is	Icelandic
+    41		   6	     7%    	bg      	bg	Bulgarian
+    42		   6	     7%    	vi      	vi	Vietnamese
+    43		   5	     6%    	ar      	ar	Arabic
+    44		   5	     6%    	id      	id	Indonesian
+    45		   5	     6%    	kk      	kk	Kazakh
+    46		   4	     4%    	ko      	ko	Korean
+    47		   3	     3%    	et      	et	Estonian
+    48		   3	     3%    	mr      	mr	Marathi
+    49		   3	     3%    	sr      	sr	Serbian
+    50		   3	     3%    	zh_HK   	zh	Chinese @ Hong Kong
+    51		   2	     2%    	eu      	eu	Basque
+    52		   2	     2%    	mk      	mk	Macedonian
+    53		   1	     1%    	gu      	gu	Gujarati
+    54		   1	     1%    	rue     		Rusyn
+    55		   0	     0%    	af      	af	Afrikaans
+    56		   0	     0%    	be      	be	Belarusian
+    57		   0	     0%    	bn      	bn	Bengali
+    58		   0	     0%    	bs_BA   	bs	Bosnian @ Bosnia and Herzegovina
+    59		   0	     0%    	en_GB   	en	English @ United Kingdom
+    60		   0	     0%    	en_US   	en	English @ United States
+    61		   0	     0%    	eo      	eo	Esperanto
+    62		   0	     0%    	fi_FI   	fi	Finnish @ Finland
+    63		   0	     0%    	fr_FR   	fr	French @ France
+    64		   0	     0%    	he      	he	Hebrew
+    65		   0	     0%    	ku      	ku	Kurdish
+    66		   0	     0%    	or      	or	Oriya
+    67		   0	     0%    	ru_RU   	ru	Russian @ Russian Federation
+    68		   0	     0%    	so      	so	Somali
+    69		   0	     0%    	yue_CN  		Yue Chinese @ China

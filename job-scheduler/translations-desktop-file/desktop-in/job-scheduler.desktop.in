@@ -1,0 +1,9 @@
+[Desktop Entry]
+# The desktop entry name will be displayed within the menu.
+Name=Job Scheduler
+# # The desktop entry comment will be shown within the menu.
+Comment=Job scheduling utility which uses crontab as the backend
+Exec=job-scheduler
+Icon=job-scheduler
+Categories=System;MX-Maintenance
+Type=Application

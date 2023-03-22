@@ -2,6 +2,7 @@ udev/* etc/udev/rules.d
 xorg.d/* etc/X11/xorg.conf.d
 issue usr/share/antiX
 sysctl/* etc/sysctl.d
+apt.conf.d/* etc/apt/apt.conf.d
 icon_overrides/* usr/share/pixmaps
 desktop_file_overrides/* usr/share/applications
 #luckybackup/* usr/share/mx-system/luckybackup

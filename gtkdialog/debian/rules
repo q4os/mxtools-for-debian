@@ -20,3 +20,6 @@ override_dh_installman:
 override_dh_clean:
 	dh_clean debian/gtkdialog.1
 
+# No dbgsym packages:
+override_dh_strip:
+	dh_strip --no-automatic-dbgsym

@@ -17,9 +17,15 @@ if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-remov
 	if [ -e "/usr/share/icons/hicolor/scalable/apps/ndisgtk.svg" ]; then
 		rm /usr/share/icons/hicolor/scalable/apps/ndisgtk.svg
 	fi
+	
+	#remove bogus synaptic-kde.desktop file
+	if [ -e "/usr/share/applications/synaptic-kde.desktop" ]; then
+		rm /usr/share/applications/synaptic-kde.desktop
+	fi
 
 fi
 
+#dpkg-diver some apps that don't have desktop files and a few that need hidden
 case "$1" in
   install|upgrade) dpkg-divert --quiet                                               \
                                --add                                                 \
@@ -27,7 +33,28 @@ case "$1" in
                                --rename                                              \
                                --divert /usr/share/applications/conky.desktop.dpkg-dist \
                                /usr/share/applications/conky.desktop || :
-
+                               
+              	   dpkg-divert --quiet                                               \
+                               --add                                                 \
+                               --package mx-system              \
+                               --rename                                              \
+                               --divert /usr/share/applications/alsamixer.desktop.dpkg-dist \
+                               /usr/share/applications/alsamixer.desktop || :
+                               
+				   dpkg-divert --quiet                                               \
+                               --add                                                 \
+                               --package mx-system              \
+                               --rename                                              \
+                               --divert /usr/share/applications/display-im6.q16.desktop.dpkg-dist \
+                               /usr/share/applications/display-im6.q16.desktop || :
+                               
+				   dpkg-divert --quiet                                               \
+                               --add                                                 \
+                               --package mx-system              \
+                               --rename                                              \
+                               --divert /usr/share/applications/nano.desktop.dpkg-dist \
+                               /usr/share/applications/nano.desktop || :
+#divert os-prober to a fixed version
                    dpkg-divert --quiet --package mx-system --rename \
                       --divert /usr/lib/linux-boot-probes/mounted/40grub2.dpkg-dist \
                       --add    /usr/lib/linux-boot-probes/mounted/40grub2 || :

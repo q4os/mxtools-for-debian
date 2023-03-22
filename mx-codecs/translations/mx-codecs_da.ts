@@ -1,4 +1,6 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.0" language="da">
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.1" language="da">
 <context>
     <name>MainWindow</name>
     <message>
@@ -17,215 +19,283 @@
         <translation>Downloader codecs-filer</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="94"/>
+        <location filename="../mainwindow.ui" line="100"/>
         <source>Cancel any changes then quit</source>
         <translation>Annuller ændringer og afslut</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="97"/>
-        <location filename="../mainwindow.cpp" line="268"/>
+        <location filename="../mainwindow.ui" line="103"/>
         <source>Cancel</source>
         <translation>Annuller</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="104"/>
+        <location filename="../mainwindow.ui" line="110"/>
         <source>Alt+N</source>
         <translation>Alt+N</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="117"/>
+        <location filename="../mainwindow.ui" line="129"/>
         <source>Begin codec download and installation</source>
         <translation>Begynd download og installation af codec</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="120"/>
+        <location filename="../mainwindow.ui" line="132"/>
         <source>OK</source>
         <translation>OK</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="175"/>
+        <location filename="../mainwindow.ui" line="193"/>
         <source>About this application</source>
         <translation>Om programmet</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="178"/>
+        <location filename="../mainwindow.ui" line="196"/>
         <source>About...</source>
         <translation>Om...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="185"/>
+        <location filename="../mainwindow.ui" line="203"/>
         <source>Alt+B</source>
         <translation>Alt+O</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="214"/>
+        <location filename="../mainwindow.ui" line="232"/>
         <source>Display help </source>
         <translation>Vis hjælp</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="217"/>
+        <location filename="../mainwindow.ui" line="235"/>
         <source>Help</source>
         <translation>Hjælp</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="224"/>
+        <location filename="../mainwindow.ui" line="242"/>
         <source>Alt+H</source>
         <translation>Alt+H</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="105"/>
-        <location filename="../mainwindow.cpp" line="112"/>
-        <location filename="../mainwindow.cpp" line="120"/>
-        <location filename="../mainwindow.cpp" line="128"/>
-        <location filename="../mainwindow.cpp" line="137"/>
-        <location filename="../mainwindow.cpp" line="144"/>
-        <location filename="../mainwindow.cpp" line="153"/>
-        <location filename="../mainwindow.cpp" line="161"/>
+        <location filename="../mainwindow.cpp" line="184"/>
+        <location filename="../mainwindow.cpp" line="191"/>
+        <location filename="../mainwindow.cpp" line="200"/>
+        <location filename="../mainwindow.cpp" line="226"/>
         <source>&lt;b&gt;Running command...&lt;/b&gt;&lt;p&gt;</source>
         <translation>&lt;b&gt;Kører kommando...&lt;/b&gt;&lt;p&gt;</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="108"/>
-        <location filename="../mainwindow.cpp" line="124"/>
-        <location filename="../mainwindow.cpp" line="131"/>
-        <location filename="../mainwindow.cpp" line="140"/>
-        <location filename="../mainwindow.cpp" line="146"/>
-        <location filename="../mainwindow.cpp" line="157"/>
-        <location filename="../mainwindow.cpp" line="164"/>
-        <location filename="../mainwindow.cpp" line="193"/>
+        <location filename="../mainwindow.cpp" line="110"/>
+        <location filename="../mainwindow.cpp" line="151"/>
+        <location filename="../mainwindow.cpp" line="171"/>
+        <location filename="../mainwindow.cpp" line="214"/>
+        <location filename="../mainwindow.cpp" line="223"/>
         <location filename="../mainwindow.cpp" line="246"/>
+        <location filename="../mainwindow.cpp" line="287"/>
         <source>Error</source>
         <translation>Fejl</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="109"/>
-        <location filename="../mainwindow.cpp" line="125"/>
-        <location filename="../mainwindow.cpp" line="141"/>
-        <location filename="../mainwindow.cpp" line="158"/>
+        <location filename="../mainwindow.cpp" line="214"/>
         <source>Cannot connect to the download site</source>
         <translation>Kan ikke oprette forbindelse til downloadstedet</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="115"/>
-        <location filename="../mainwindow.cpp" line="132"/>
-        <location filename="../mainwindow.cpp" line="147"/>
-        <location filename="../mainwindow.cpp" line="165"/>
+        <location filename="../mainwindow.cpp" line="126"/>
         <source>Error downloading %1</source>
         <translation>Fejl ved download af %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="170"/>
+        <location filename="../mainwindow.cpp" line="111"/>
+        <source>Internet is not available, won&apos;t be able to download the list of packages</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="152"/>
+        <source>There was an error writing file: %1. Please check if you have enough free space on your drive</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="171"/>
+        <source>Could not create temp directory. </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="184"/>
+        <source>downloading Packages.gz from &apos;main&apos;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="191"/>
+        <source>downloading Packages.gz from &apos;non-free&apos;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="200"/>
+        <source>downloading Packages.gz from i386 &apos;main&apos;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="206"/>
         <source>&lt;b&gt;Download Finished.&lt;/b&gt;</source>
         <translation>&lt;b&gt;Download blev færdig.&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="189"/>
+        <location filename="../mainwindow.cpp" line="223"/>
+        <source>Cannot connect find %1 package</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="243"/>
         <source>Installing downloaded files</source>
         <translation>Installerer downloadede filer</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="194"/>
+        <location filename="../mainwindow.cpp" line="246"/>
         <source>No downloaded *.debs files found.</source>
         <translation>Fandt ingen downloadede *.debs-filer.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="207"/>
+        <location filename="../mainwindow.cpp" line="264"/>
         <source>&lt;b&gt;Installing...&lt;/b&gt;&lt;p&gt;</source>
         <translation>&lt;b&gt;Installerer...&lt;/b&gt;&lt;p&gt;</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="220"/>
+        <location filename="../mainwindow.cpp" line="266"/>
         <source>Error installing %1</source>
         <translation>Fejl ved installering af %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="224"/>
+        <location filename="../mainwindow.cpp" line="271"/>
         <source>Fix missing dependencies...</source>
         <translation>Ret manglende afhængigheder ...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="226"/>
+        <location filename="../mainwindow.cpp" line="274"/>
         <source>Error running %1 command</source>
         <translation>Fejl ved kørsel af %1-kommando</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="238"/>
+        <location filename="../mainwindow.cpp" line="279"/>
         <source>&lt;b&gt;Installation process has finished&lt;/b&gt;</source>
         <translation>&lt;b&gt;Installationsprocessen er færdig&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="242"/>
+        <location filename="../mainwindow.cpp" line="283"/>
         <source>Finished</source>
         <translation>Færdig</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="243"/>
+        <location filename="../mainwindow.cpp" line="284"/>
         <source>Codecs files have been downloaded and installed successfully.</source>
         <translation>Codecs-filer er blevet downloadet og installeret.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="247"/>
+        <location filename="../mainwindow.cpp" line="287"/>
         <source>Process finished. Errors have occurred during the installation.</source>
         <translation>Processen er færdig. Der opstod fejl under installationen.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="261"/>
+        <location filename="../mainwindow.cpp" line="296"/>
         <source>About MX Codecs</source>
         <translation>Om MX Codecs</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="262"/>
-        <source>MX Codecs</source>
-        <translation>MX Codecs</translation>
+        <location filename="../mainwindow.cpp" line="302"/>
+        <source>%1 License</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="262"/>
+        <location filename="../mainwindow.cpp" line="313"/>
+        <source>%1 Help</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MX Codecs</source>
+        <translation type="vanished">MX Codecs</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="297"/>
         <source>Version: </source>
         <translation>Version: </translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="264"/>
+        <location filename="../mainwindow.cpp" line="299"/>
         <source>Simple codecs downloader for MX Linux</source>
         <translation>Simpel codecs-downloader til MX Linux</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="265"/>
+        <location filename="../mainwindow.cpp" line="301"/>
         <source>Copyright (c) MX Linux</source>
         <translation>Ophavsret (c) MX Linux</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="266"/>
         <source>License</source>
-        <translation>Licens</translation>
+        <translation type="vanished">Licens</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="267"/>
-        <location filename="../mainwindow.cpp" line="277"/>
         <source>Changelog</source>
-        <translation>Ændringslog</translation>
+        <translation type="vanished">Ændringslog</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="285"/>
         <source>&amp;Close</source>
-        <translation>&amp;Luk</translation>
+        <translation type="vanished">&amp;Luk</translation>
     </message>
 </context>
 <context>
     <name>QApplication</name>
     <message>
-        <location filename="../main.cpp" line="53"/>
         <source>Unable to get exclusive lock</source>
-        <translation>Kan ikke få eksklusiv lås</translation>
+        <translation type="vanished">Kan ikke få eksklusiv lås</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="54"/>
         <source>Another package management application (like Synaptic or apt-get), is already running. Please close that application first</source>
-        <translation>Der kører allerede et andet pakkehåndteringsprogram (såsom Synaptic eller apt-get). Luk venligst programmet først</translation>
+        <translation type="vanished">Der kører allerede et andet pakkehåndteringsprogram (såsom Synaptic eller apt-get). Luk venligst programmet først</translation>
+    </message>
+    <message>
+        <source>You must run this program as root.</source>
+        <translation type="vanished">Du skal køre programmet som root.</translation>
+    </message>
+</context>
+<context>
+    <name>QObject</name>
+    <message>
+        <location filename="../about.cpp" line="52"/>
+        <source>License</source>
+        <translation type="unfinished">Licens</translation>
+    </message>
+    <message>
+        <location filename="../about.cpp" line="53"/>
+        <location filename="../about.cpp" line="62"/>
+        <source>Changelog</source>
+        <translation type="unfinished">Ændringslog</translation>
+    </message>
+    <message>
+        <location filename="../about.cpp" line="54"/>
+        <source>Cancel</source>
+        <translation type="unfinished">Annuller</translation>
+    </message>
+    <message>
+        <location filename="../about.cpp" line="74"/>
+        <source>&amp;Close</source>
+        <translation type="unfinished">&amp;Luk</translation>
+    </message>
+    <message>
+        <location filename="../main.cpp" line="66"/>
+        <source>Error</source>
+        <translation type="unfinished">Fejl</translation>
     </message>
     <message>
         <location filename="../main.cpp" line="67"/>
-        <source>You must run this program as root.</source>
-        <translation>Du skal køre programmet som root.</translation>
+        <source>You seem to be logged in as root, please log out and log in as normal user to use this program.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../main.cpp" line="77"/>
+        <source>Unable to get exclusive lock</source>
+        <translation type="unfinished">Kan ikke få eksklusiv lås</translation>
+    </message>
+    <message>
+        <location filename="../main.cpp" line="78"/>
+        <source>Another package management application (like Synaptic or apt-get), is already running. Please close that application first</source>
+        <translation type="unfinished">Der kører allerede et andet pakkehåndteringsprogram (såsom Synaptic eller apt-get). Luk venligst programmet først</translation>
     </message>
 </context>
 </TS>

@@ -20,20 +20,20 @@
  * along with this package. If not, see <http://www.gnu.org/licenses/>.
  **********************************************************************/
 
-
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
 #include <QMessageBox>
 #include <QProcess>
-#include <QTimer>
 #include <QSettings>
+#include <QTimer>
 
 #include <cmd.h>
 
 class QFile;
 
-namespace Ui {
+namespace Ui
+{
 class MainWindow;
 }
 
@@ -48,7 +48,8 @@ public:
     QString LUM;
     QString buildOptionList();
     QStringList buildUsbList();
-    QStringList removeUnsuitable(const QStringList &devices); // remove unsuitable disks from the list (live and unremovable)
+    QStringList
+    removeUnsuitable(const QStringList &devices); // remove unsuitable disks from the list (live and unremovable)
     bool checkDestSize();
     bool isRunningLive();
     static bool isToRam();
@@ -57,7 +58,6 @@ public:
     void progress();
     void setGeneralConnections();
     void setup();
-
 
 public slots:
 
@@ -91,14 +91,12 @@ private slots:
 private:
     Ui::MainWindow *ui;
     Cmd cmd;
-    QFile *stat_file{};
+    QFile *stat_file {};
     QString device;
     QTimer timer;
-    bool advancedOptions{};
-    int height{};
+    bool advancedOptions {};
+    int height {};
     uint size_check;
 };
 
-
 #endif
-

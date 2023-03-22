@@ -32,7 +32,6 @@ fi
 
 # use nala if needed
 #
-
 APT_NOTIFIERRC="/home/$(logname)/.config/apt-notifierrc"
 
 UpgradeType=$(     grep -oP '^UpgradeType=\K.*'      "$APT_NOTIFIERRC" 2>/dev/null)
@@ -47,7 +46,7 @@ if [ "$UpgradeType" = "upgrade" ]
     #mygettext "basic upgrade"; echo
   else
     #mygettext "full upgrade" ; echo
-    UpgradeType='dist-upgrade'
+    UpgradeType='full-upgrade'
 fi
 
 # assume yes handling
@@ -82,28 +81,35 @@ if [ x"${APT_NOTIFIER_CONFIG_ITEMS[use_nala]}" = x"true" ]; then
     fi
 fi
 
+# check if the last apt update run was less than 3 minutes ago
+update_stamp=$(find /var/lib/apt/periodic/update-stamp -mmin -3 2>/dev/null)
 
 if [ x"$APT_NOTIFIER_USE_NALA" = x"true" ]; then
-	Nala_Pref=""
-	#Nala_Pref+=" --update"
-	Nala_Pref+=" --no-autoremove"
-	if [ "$UpgradeType" = "upgrade" ]; then
-	    Nala_UpgradeType="--no-full"
-	else
-	    Nala_UpgradeType="--full" # default
-	fi
-
-	#echo "DEBUG: nala upgrade $Nala_Pref $AssumeYes $AptPref_Opts $Nala_UpgradeType"
-	#DEBUG_APT_NOTIFIER
+    Nala_Pref="--no-autoremove"
+    [ -z "$update_stamp" ] && Nala_Update_Pref="--update" || Nala_Update_Pref="--no-update"
+    if [ "$UpgradeType" = "upgrade" ]; then
+        Nala_UpgradeType="--no-full"
+    else
+        Nala_UpgradeType="--full" # default
+    fi
 
     [ y"${DEBUG_APT_NOTIFIER/true/es}" = "yes" ] &&  echo nala upgrade $AptPref_Opts $Nala_UpgradeType $Nala_Pref $AssumeYes
-    echo nala upgrade $Nala_Pref $Nala_UpgradeType
-	nala upgrade $AptPref_Opts $Nala_UpgradeType $Nala_Pref $AssumeYes
+    echo "nala upgrade $Nala_UpgradeType $Nala_Pref" 
+    nala upgrade $AptPref_Opts $Nala_UpgradeType $Nala_Pref $Nala_Update_Pref $AssumeYes
+    if [ "$Nala_Update_Pref" = "--update" ]; then
+       [ -d /var/lib/apt/periodic ] || mkdir -p /var/lib/apt/periodic
+       touch /var/lib/apt/periodic/update-stamp
+    fi
+
 else
-
-	echo apt-get $UpgradeType
-	apt-get -V $AssumeYes $AptPref_Opts $UpgradeType
-
+    if [ -z "$update_stamp" ]; then
+       echo apt update
+       apt update --option 'APT::Cmd::Show-Update-Stats=0'
+       [ -d /var/lib/apt/periodic ] || mkdir -p /var/lib/apt/periodic
+       touch /var/lib/apt/periodic/update-stamp
+    fi
+    echo apt $UpgradeType
+    apt --verbose-versions $AssumeYes $AptPref_Opts $UpgradeType 
 fi
 
 echo ""

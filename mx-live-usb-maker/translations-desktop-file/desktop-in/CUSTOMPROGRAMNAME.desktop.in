@@ -1,0 +1,13 @@
+[Desktop Entry]
+Encoding=UTF-8
+# The desktop entry name will be displayed within the menu.
+Name=MX Live USB Maker
+# # The desktop entry comment will be shown within the menu.
+Comment=Create a full-featured live-usb
+Exec=mxlum-launcher
+Terminal=false
+Type=Application
+Icon=mx-live-usb-maker
+Categories=System;MX-Live;
+NoDisplay=false
+MimeType=application/x-cd-image;

@@ -138,6 +138,7 @@ do_start() {
     fi
 
     get_init_param DISTRO ""
+    get_init_param DISTRO_BASE ""
 
     # Try really hard to get the distro name
     if [ ${#DISTRO} = 0 ]; then
@@ -149,10 +150,17 @@ do_start() {
         done
     fi
 
-    if [ ${#DISTRO} = 0 -a -r /etc/initrd-release ]; then
-        DISTRO="$(sed -n 's/^NAME="//' /etc/initrd-release)"
-        DISTRO=${DISTRO%\"}
+    local initrd_release=/etc/initrd_release
+    [ -r $initrd_release ] || initrd_release=/etc/initrd-release
+    if [ ${#DISTRO} = 0 -a -r $initrd_release ]; then
+        DISTRO=$(sed -n "/^NAME=/{s///; s/[\x22']//g; s/[[:space:]]*$//; p;q}" $initrd_release)
     fi
+
+    if [ -z "$DISTRO_BASE" ] && [ -n "$DISTRO" ] ; then
+       [ -z "${DISTRO##*antiX*}" ] && DISTRO_BASE="antiX"
+       [ -z "${DISTRO##*MX*}"    ] && DISTRO_BASE="MX"
+    fi
+    [ -z "$DISTRO_BASE" ] && DISTRO_BASE="$DISTRO"
 
     write_issue_file "$DISTRO" "$FORCE_ISSUE"
 
@@ -161,7 +169,7 @@ do_start() {
     local user_automount
     [ -n "$HAVE_X" -a -e $AUTOMOUNT_CMD -a -z "$CMD_FSTAB" ] && user_automount=true
 
-    create_fstab "$DISTRO" "$user_automount"  "$CMD_FSTAB" "$CMD_MOUNT"
+    create_fstab "${DISTRO_BASE:=$DISTRO}" "$user_automount"  "$CMD_FSTAB" "$CMD_MOUNT"
 
     #-jbb: for debugging
     unset COUNTRY WM_LANG KEYBOARDS KEYTABLE LANG MIRROR TZ XKBLAYOUT CONSOLE_FONT
@@ -174,7 +182,7 @@ do_start() {
 
     # Always create keyboard file in non-persistent system even with no X
     # Unless NO_LOAD_KEYS
-    [ -z "$NO_LOAD_KEYS" ] && set_keyboard "$DISTRO"
+    [ -z "$NO_LOAD_KEYS" ] && set_keyboard "${DISTRO_BASE:=$DISTRO}"
 
     if [ -e /live/config/virtualbox -a -z "$VBOX_DECOR" ]; then
         echo_live "$_Disabling_splash_fbcondecor_inside_of_Virtual_Box_"
@@ -318,7 +326,7 @@ do_start() {
 
     unset DEF_USER USER_HOME
 
-    if ! find_def_user $DISTRO; then
+    if ! find_def_user ${DISTRO_BASE:=$DISTRO}; then
         echo_live "$_No_default_user_found_on_the_system_"
         return
     fi
@@ -600,7 +608,7 @@ XKBOPTIONS="${XKBOPTIONS:=$default_xkb_opts}"
 
 BACKSPACE="guess"
 Keyboard_Out
-    
+
     # feh: need re-set console keyboard for password prompt
     echo_live "CONSOLE KEYMAP: $(pquote $kb_file)"
     # suppress "ugly" warnings due to an old, known but never fixed German keysym issue
@@ -1192,7 +1200,7 @@ create_home() {
     echo_live "$_Populating_X_directory_" $(pquote $home)
     mkdir -p $home
     cp -a /etc/skel/* /etc/skel/.[!.]* $home 2>/dev/null # Avoid error msgs for ".../* not found"
-    
+
     local uid_gid=$(getent passwd $user | cut -d: -f3,4)
     chown -R $uid_gid $home
 }

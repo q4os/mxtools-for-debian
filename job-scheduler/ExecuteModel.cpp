@@ -7,17 +7,18 @@
    as published by the Free Software Foundation; either version 2
    of the License, or (at your option) any later version.
 */
+#include "ExecuteModel.h"
+
 #include <QtGui>
 
 #include "Crontab.h"
 #include "Execute.h"
-#include "ExecuteModel.h"
 
 QVariant ExecuteModel::data(const QModelIndex &index, int role) const
 {
     if (index.isValid()) {
         if (role == Qt::DisplayRole) {
-            auto *e = static_cast<Execute*>(index.internalPointer());
+            auto *e = static_cast<Execute *>(index.internalPointer());
             switch (index.column()) {
             case 0:
                 return e->exeTime;
@@ -29,7 +30,7 @@ QVariant ExecuteModel::data(const QModelIndex &index, int role) const
                 return e->tCommands->command;
             }
         } else if (role == Qt::BackgroundColorRole) {
-            auto *e = static_cast<Execute*>(index.internalPointer());
+            auto *e = static_cast<Execute *>(index.internalPointer());
             switch (e->sel) {
             case 1:
                 return QColor(229, 241, 255);
@@ -37,7 +38,7 @@ QVariant ExecuteModel::data(const QModelIndex &index, int role) const
                 return QColor(208, 255, 241);
             }
         } else if (role == Qt::TextColorRole) {
-            auto *e = static_cast<Execute*>(index.internalPointer());
+            auto *e = static_cast<Execute *>(index.internalPointer());
             if (index.column() == 0 && e->flag != 0)
                 return QColor(189, 55, 44);
             else
@@ -51,14 +52,12 @@ QVariant ExecuteModel::data(const QModelIndex &index, int role) const
     }
 
     return QVariant();
-
 }
 
-QVariant ExecuteModel::headerData(int section, Qt::Orientation orientation,
-                                  int role) const
+QVariant ExecuteModel::headerData(int section, Qt::Orientation orientation, int role) const
 {
     if (role == Qt::DisplayRole && orientation == Qt::Horizontal) {
-        switch(section) {
+        switch (section) {
         case Col::ExeTime:
             return tr("Execute Time");
         case Col::CronTime:
@@ -71,7 +70,6 @@ QVariant ExecuteModel::headerData(int section, Qt::Orientation orientation,
     }
 
     return QVariant();
-
 }
 void ExecuteModel::sort(int column, Qt::SortOrder order)
 {
@@ -80,28 +78,20 @@ void ExecuteModel::sort(int column, Qt::SortOrder order)
     doSort();
 }
 
-bool ltExeTime(Execute *e1, Execute *e2)
-{ return e1->exeTime < e2->exeTime; }
-bool ltCronTime(Execute *e1, Execute *e2)
-{ return e1->tCommands->time < e2->tCommands->time; }
-bool ltUser(Execute *e1, Execute *e2)
-{ return e1->tCommands->user < e2->tCommands->user; }
-bool ltCommand(Execute *e1, Execute *e2)
-{ return e1->tCommands->command < e2->tCommands->command; }
-bool gtExeTime(Execute *e1, Execute *e2)
-{ return e1->exeTime > e2->exeTime; }
-bool gtCronTime(Execute *e1, Execute *e2)
-{ return e1->tCommands->time > e2->tCommands->time; }
-bool gtUser(Execute *e1, Execute *e2)
-{ return e1->tCommands->user > e2->tCommands->user; }
-bool gtCommand(Execute *e1, Execute *e2)
-{ return e1->tCommands->command > e2->tCommands->command; }
+bool ltExeTime(Execute *e1, Execute *e2) { return e1->exeTime < e2->exeTime; }
+bool ltCronTime(Execute *e1, Execute *e2) { return e1->tCommands->time < e2->tCommands->time; }
+bool ltUser(Execute *e1, Execute *e2) { return e1->tCommands->user < e2->tCommands->user; }
+bool ltCommand(Execute *e1, Execute *e2) { return e1->tCommands->command < e2->tCommands->command; }
+bool gtExeTime(Execute *e1, Execute *e2) { return e1->exeTime > e2->exeTime; }
+bool gtCronTime(Execute *e1, Execute *e2) { return e1->tCommands->time > e2->tCommands->time; }
+bool gtUser(Execute *e1, Execute *e2) { return e1->tCommands->user > e2->tCommands->user; }
+bool gtCommand(Execute *e1, Execute *e2) { return e1->tCommands->command > e2->tCommands->command; }
 
 void ExecuteModel::doSort()
 {
-    bool (*cmp)(Execute *e1, Execute *e2) { nullptr };
+    bool (*cmp)(Execute * e1, Execute * e2) {nullptr};
     if (sortOrder == Qt::AscendingOrder) {
-        switch(sortColumn) {
+        switch (sortColumn) {
         case Col::ExeTime:
             cmp = ltExeTime;
             break;
@@ -118,7 +108,7 @@ void ExecuteModel::doSort()
             return;
         }
     } else {
-        switch(sortColumn) {
+        switch (sortColumn) {
         case Col::ExeTime:
             cmp = gtExeTime;
             break;
@@ -140,13 +130,11 @@ void ExecuteModel::doSort()
     emit layoutChanged();
 }
 
-
 Execute *ExecuteModel::getExecute(const QModelIndex &idx)
 {
 
     if (idx.isValid())
-        return static_cast<Execute*>(idx.internalPointer());
+        return static_cast<Execute *>(idx.internalPointer());
     else
         return nullptr;
-
 }

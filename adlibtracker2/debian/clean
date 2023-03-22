@@ -1,0 +1,3 @@
+sdl/*.o
+*.o
+sdl/*.ppu

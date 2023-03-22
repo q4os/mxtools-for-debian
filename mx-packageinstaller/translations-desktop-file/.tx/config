@@ -1,7 +1,7 @@
 [main]
 host = https://www.transifex.com
 
-[antix-development.mx-packageinstaller-desktop]
+[o:anticapitalista:p:antix-development:r:mx-packageinstaller-desktop]
 file_filter = po/mx-packageinstaller-desktop_<lang>.po
 source_file = mx-packageinstaller-desktop.pot
 source_lang = en

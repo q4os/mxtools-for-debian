@@ -11,9 +11,9 @@ make_po()
 for val in $lang; do
     if [ ! -e "po/$val/$RESOURCE.po" ]; then
         mkdir -p po/$val
-        msginit --input=po/"$RESOURCE".pot --no-translator --locale=$val --output=po/$val/"$RESOURCE".po
+        msginit --input=po/"$RESOURCE".pot --no-translator --locale=$val --output=po/${"RESOURCE"}_${val}.po
     else
-        msgmerge --update po/$val/$RESOURCE.po po/$RESOURCE.pot
+        msgmerge --update po/"${RESOURCE}_${val}.po" po/$RESOURCE.pot
     fi
 done
 }
@@ -23,7 +23,7 @@ make_pot()
 if [ ! -d "pot" ]; then
     mkdir pot
 fi
-xgettext --language Shell  --add-comments -o pot/$RESOURCE.pot ../ddm-mx
+xgettext --language Shell  --add-comments -o pot/$RESOURCE.pot ../ddm-mx ../nvidia-detect-mx
 xgettext --language Desktop --join --add-comments -o pot/$RESOURCE.pot ../xdg/ddm-nvidia.desktop.in
 }
 

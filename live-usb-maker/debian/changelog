@@ -1,10 +1,35 @@
-live-usb-maker (0.4.8mx19+1+deb11u13) stable; urgency=medium
+live-usb-maker (0.4.12+deb11u13) stable; urgency=medium
 
   * MX Tools release
 
- -- anticapitalista <administrator@localdomain>  Wed, 22 Mar 2023 10:43:51 +0100
+ -- fehlix <administrator@localdomain>  Wed, 22 Mar 2023 13:32:34 +0100
 
-live-usb-maker (0.4.8mx19+1) mx; urgency=medium
+live-usb-maker (0.4.12) unstable; urgency=medium
+
+  * Copy initrd_release if exists
+  * Clone additional kernel and initrd if exists
+
+ -- fehlix <fehlix@mxlinux.org>  Sat, 25 Feb 2023 12:45:10 -0500
+
+live-usb-maker (0.4.11) unstable; urgency=medium
+
+  * Build debs for all antiX flavours - man thanks to Peter Sagi for the encrytion fix
+
+ -- anticapitalista <antix@operamail.com>  Mon, 13 Feb 2023 14:01:59 +0200
+
+live-usb-maker (0.4.10) unstable; urgency=medium
+
+  * FIX: cloning live system encrypted
+
+ -- Peter Sagi <peter.sagi.s@gmail.com>  Sun Oct  9 19:37:08 CEST 2022
+
+live-usb-maker (0.4.9) unstable; urgency=medium
+
+  * Fix parted parsing for non-english locale - thanks graybatonrandomstuff
+
+ -- anticapitalista <antix@operamail.com>  Thu, 10 Nov 2022 16:06:33 +0200
+
+live-usb-maker (0.4.8) unstable; urgency=medium
 
   * EXT4_OPTIONS= -m0 -i16384 rather than 100000
   * different kernels bugfix

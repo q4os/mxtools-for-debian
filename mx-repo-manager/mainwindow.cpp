@@ -21,10 +21,13 @@
  * You should have received a copy of the GNU General Public License
  * along with mx-repo-manager.  If not, see <http://www.gnu.org/licenses/>.
  **********************************************************************/
+#include "mainwindow.h"
+#include "ui_mainwindow.h"
 
 #include <QDebug>
 #include <QDir>
 #include <QMetaEnum>
+#include <QNetworkProxyFactory>
 #include <QNetworkReply>
 #include <QProgressBar>
 #include <QRadioButton>
@@ -34,15 +37,13 @@
 #include <QTextEdit>
 
 #include "about.h"
-#include "mainwindow.h"
-#include "ui_mainwindow.h"
 #include <chrono>
 
 using namespace std::chrono_literals;
 
-MainWindow::MainWindow(QWidget *parent) :
-    QDialog(parent),
-    ui(new Ui::MainWindow)
+MainWindow::MainWindow(QWidget *parent)
+    : QDialog(parent)
+    , ui(new Ui::MainWindow)
 {
     qDebug().noquote() << qApp->applicationName() << "version:" << qApp->applicationVersion();
     ui->setupUi(this);
@@ -55,7 +56,8 @@ MainWindow::MainWindow(QWidget *parent) :
         ui->pushFastestMX->setIcon(QIcon::fromTheme(QStringLiteral("cursor-arrow"), QIcon(":/icons/cursor-arrow.svg")));
 
     if (ui->pushFastestDebian->icon().isNull())
-        ui->pushFastestDebian->setIcon(QIcon::fromTheme(QStringLiteral("cursor-arrow"), QIcon(":/icons/cursor-arrow.svg")));
+        ui->pushFastestDebian->setIcon(
+            QIcon::fromTheme(QStringLiteral("cursor-arrow"), QIcon(":/icons/cursor-arrow.svg")));
 
     shell = new Cmd(this);
 
@@ -79,13 +81,9 @@ MainWindow::MainWindow(QWidget *parent) :
             centerWindow();
         }
     }
-
 }
 
-MainWindow::~MainWindow()
-{
-    delete ui;
-}
+MainWindow::~MainWindow() { delete ui; }
 
 // refresh repo info
 void MainWindow::refresh()
@@ -115,16 +113,18 @@ void MainWindow::replaceDebianRepos(const QString &url)
         cmd = "cp " + file + " /etc/apt/sources.list.d/backups/" + fileinfo.fileName() + ".$(date +%s)";
         shell->run(cmd);
 
-        cmd = "sed -i 's;deb\\s.*/debian/*[^-];deb " + url + " ;' " + file ; // replace deb lines in file
+        cmd = "sed -i 's;deb\\s.*/debian/*[^-];deb " + url + " ;' " + file; // replace deb lines in file
         shell->run(cmd);
         cmd = "sed -i 's;deb-src\\s.*/debian/*[^-];deb-src " + url + ";' " + file; // replace deb-src lines in file
         shell->run(cmd);
         if (url == QLatin1String("https://deb.debian.org/debian/")) {
-            cmd = "sed -i 's;deb\\s*http://security.debian.org/;deb https://deb.debian.org/debian-security/;' " + file; // replace security.debian.org in file
+            cmd = "sed -i 's;deb\\s*http://security.debian.org/;deb https://deb.debian.org/debian-security/;' "
+                  + file; // replace security.debian.org in file
             shell->run(cmd);
         }
     }
-    QMessageBox::information(this, tr("Success"), tr("Your new selection will take effect the next time sources are updated."));
+    QMessageBox::information(this, tr("Success"),
+                             tr("Your new selection will take effect the next time sources are updated."));
 }
 
 // List available repos
@@ -154,7 +154,8 @@ QStringList MainWindow::readMXRepos()
 // List current repo
 void MainWindow::getCurrentRepo()
 {
-    current_repo = shell->getCmdOut(QStringLiteral("grep -m1 '^deb.*/repo/ ' /etc/apt/sources.list.d/mx.list |cut -d' ' -f2 |cut -d/ -f3"));
+    current_repo = shell->getCmdOut(
+        QStringLiteral("grep -m1 '^deb.*/repo/ ' /etc/apt/sources.list.d/mx.list |cut -d' ' -f2 |cut -d/ -f3"));
 }
 
 int MainWindow::getDebianVerNum()
@@ -164,19 +165,18 @@ int MainWindow::getDebianVerNum()
     bool ok = false;
     int ver = list.at(0).toInt(&ok);
     if (ok)
-      return ver;
+        return ver;
     else if (list.at(0).split(QStringLiteral("/")).at(0) == QLatin1String("bullseye"))
-      return Version::Bullseye;
+        return Version::Bullseye;
     else if (list.at(0).split(QStringLiteral("/")).at(0) == QLatin1String("bookworm"))
-      return Version::Bookworm;
+        return Version::Bookworm;
     else
-      return 0; // unknown
+        return 0; // unknown
 }
 
 QString MainWindow::getDebianVerName(int ver)
 {
-    switch (ver)
-    {
+    switch (ver) {
     case Version::Jessie:
         return QStringLiteral("jessie");
     case Version::Stretch:
@@ -293,17 +293,13 @@ void MainWindow::centerWindow()
     this->move(x, y);
 }
 
-void MainWindow::closeEvent(QCloseEvent * /*unused*/)
-{
-    settings.setValue(QStringLiteral("geometry"), saveGeometry());
-}
-
+void MainWindow::closeEvent(QCloseEvent * /*unused*/) { settings.setValue(QStringLiteral("geometry"), saveGeometry()); }
 
 // displays the current repo by selecting the item
 void MainWindow::displaySelected(const QString &repo)
 {
     for (int row = 0; row < ui->listWidget->count(); ++row) {
-        auto *radio = static_cast<QRadioButton*>(ui->listWidget->itemWidget(ui->listWidget->item(row)));
+        auto *radio = dynamic_cast<QRadioButton *>(ui->listWidget->itemWidget(ui->listWidget->item(row)));
         if (radio->text().contains(repo)) {
             radio->setChecked(true);
             ui->listWidget->scrollToItem(ui->listWidget->item(row));
@@ -327,7 +323,7 @@ void MainWindow::setSelected()
 {
     QString url;
     for (int row = 0; row < ui->listWidget->count(); ++row) {
-        auto *radio = static_cast<QRadioButton*>(ui->listWidget->itemWidget(ui->listWidget->item(row)));
+        auto *radio = dynamic_cast<QRadioButton *>(ui->listWidget->itemWidget(ui->listWidget->item(row)));
         if (radio->isChecked()) {
             url = radio->text().section(QStringLiteral(" - "), 1, 1).trimmed();
             replaceRepos(url);
@@ -338,7 +334,7 @@ void MainWindow::setSelected()
 void MainWindow::procTime()
 {
     bar->setValue((bar->value() + 1) % bar->maximum());
-//    qApp->processEvents();
+    //    qApp->processEvents();
 }
 
 void MainWindow::procStart()
@@ -357,8 +353,6 @@ void MainWindow::procDone()
     QApplication::setOverrideCursor(QCursor(Qt::ArrowCursor));
 }
 
-
-
 // replaces the lines in the APT file
 void MainWindow::replaceRepos(const QString &url)
 {
@@ -373,28 +367,30 @@ void MainWindow::replaceRepos(const QString &url)
     // mx source files to be edited (mx.list and mx16.list for MX15/16)
     QString mx_file {QStringLiteral("/etc/apt/sources.list.d/mx.list")};
     if (QFileInfo::exists(QStringLiteral("/etc/apt/sources.list.d/mx16.list")))
-        mx_file += QLatin1String(" /etc/apt/sources.list.d/mx16.list");       // add mx16.list to the list if it exists
+        mx_file += QLatin1String(" /etc/apt/sources.list.d/mx16.list"); // add mx16.list to the list if it exists
 
     // for MX repos
     QString repo_line_mx = "deb " + url + "/mx/repo/ ";
     QString test_line_mx = "deb " + url + "/mx/testrepo/ ";
-    cmd_mx = QStringLiteral("sed -i 's;deb.*/repo/ ;%1;' %2 && ").arg(repo_line_mx, mx_file) +
-            QStringLiteral("sed -i 's;deb.*/testrepo/ ;%1;' %2").arg(test_line_mx, mx_file);
+    cmd_mx = QStringLiteral("sed -i 's;deb.*/repo/ ;%1;' %2 && ").arg(repo_line_mx, mx_file)
+             + QStringLiteral("sed -i 's;deb.*/testrepo/ ;%1;' %2").arg(test_line_mx, mx_file);
 
-    if (ver_num < Version::Stretch && QFileInfo::exists(QStringLiteral("/etc/antix-version"))) { // Added antix-version check in case running this on a MXfyied Debian
+    if (ver_num < Version::Stretch
+        && QFileInfo::exists(QStringLiteral(
+            "/etc/antix-version"))) { // Added antix-version check in case running this on a MXfyied Debian
         // for antiX repos
         QString antix_file = QStringLiteral("/etc/apt/sources.list.d/antix.list");
         repo_line_antix = (url == QLatin1String("http://mxrepo.com")) ? "http://la.mxrepo.com/antix/" + ver_name + "/"
-                                                       : url + "/antix/" + ver_name + "/";
+                                                                      : url + "/antix/" + ver_name + "/";
         cmd_antix = QString("sed -i 's;https\\?://.*/" + ver_name + "/\\?;%1;' %2").arg(repo_line_antix, antix_file);
     }
 
     // check if both replacement were successful
     if (shell->run(cmd_mx) && (ver_num >= Version::Stretch || shell->run(cmd_antix)))
-        QMessageBox::information(this, tr("Success"), tr("Your new selection will take effect the next time sources are updated."));
+        QMessageBox::information(this, tr("Success"),
+                                 tr("Your new selection will take effect the next time sources are updated."));
     else
         QMessageBox::critical(this, tr("Error"), tr("Could not change the repo."));
-
 }
 
 void MainWindow::setConnections()
@@ -418,8 +414,8 @@ void MainWindow::setProgressBar()
     progCancel = new QPushButton(tr("Cancel"));
     connect(progCancel, &QPushButton::clicked, this, &MainWindow::cancelOperation);
     progress->setWindowModality(Qt::WindowModal);
-    progress->setWindowFlags(Qt::Dialog | Qt::CustomizeWindowHint | Qt::WindowTitleHint
-                             | Qt::WindowSystemMenuHint | Qt::WindowStaysOnTopHint);
+    progress->setWindowFlags(Qt::Dialog | Qt::CustomizeWindowHint | Qt::WindowTitleHint | Qt::WindowSystemMenuHint
+                             | Qt::WindowStaysOnTopHint);
     progress->setCancelButton(progCancel);
     progress->setLabelText(tr("Please wait..."));
     progress->setAutoClose(false);
@@ -462,13 +458,14 @@ void MainWindow::pushOk_clicked()
 void MainWindow::pushAbout_clicked()
 {
     this->hide();
-    displayAboutMsgBox(tr("About %1").arg(this->windowTitle()), "<p align=\"center\"><b><h2>" + this->windowTitle()
-                       + "</h2></b></p><p align=\"center\">" +
-                       tr("Version: ") + qApp->applicationVersion() + "</p><p align=\"center\"><h3>" +
-                       tr("Program for choosing the default APT repository") +
-                       R"(</h3></p><p align="center"><a href="http://mxlinux.org">http://mxlinux.org</a><br /></p><p align="center">)" +
-                       tr("Copyright (c) MX Linux") + "<br /><br /></p>",
-                       QStringLiteral("/usr/share/doc/mx-repo-manager/license.html"), tr("%1 License").arg(this->windowTitle()));
+    displayAboutMsgBox(
+        tr("About %1").arg(this->windowTitle()),
+        "<p align=\"center\"><b><h2>" + this->windowTitle() + "</h2></b></p><p align=\"center\">" + tr("Version: ")
+            + qApp->applicationVersion() + "</p><p align=\"center\"><h3>"
+            + tr("Program for choosing the default APT repository")
+            + R"(</h3></p><p align="center"><a href="http://mxlinux.org">http://mxlinux.org</a><br /></p><p align="center">)"
+            + tr("Copyright (c) MX Linux") + "<br /><br /></p>",
+        QStringLiteral("/usr/share/doc/mx-repo-manager/license.html"), tr("%1 License").arg(this->windowTitle()));
     this->show();
 }
 
@@ -485,14 +482,16 @@ void MainWindow::pushHelp_clicked()
     displayDoc(url, tr("%1 Help").arg(this->windowTitle()));
 }
 
-void MainWindow::treeWidget_itemChanged(QTreeWidgetItem * item, int column)
+void MainWindow::treeWidget_itemChanged(QTreeWidgetItem *item, int column)
 {
     ui->pushOk->setEnabled(true);
     ui->treeWidget->blockSignals(true);
     if (item->text(column).contains(QLatin1String("/mx/testrepo/")) && item->checkState(column) == Qt::Checked)
         QMessageBox::warning(this, tr("Warning"),
-                             tr("You have selected MX Test Repo. It's not recommended to leave it enabled or to upgrade all the packages from it.") +"\n\n" +
-                             tr("A safer option is to install packages individually with MX Package Installer."));
+                             tr("You have selected MX Test Repo. It's not recommended to leave it enabled or to "
+                                "upgrade all the packages from it.")
+                                 + "\n\n"
+                                 + tr("A safer option is to install packages individually with MX Package Installer."));
 
     QFile file;
     QString new_text;
@@ -568,7 +567,8 @@ QIcon MainWindow::getFlag(QString country)
 
     // QMetaEnum metaEnum = QMetaEnum::fromType<QLocale::Country>(); -- not in older Qt versions
     int index = metaEnum.keyToValue(country.remove(QStringLiteral(" ")).toUtf8());
-    QList<QLocale> locales = QLocale::matchingLocales(QLocale::AnyLanguage, QLocale::AnyScript, QLocale::Country(index));
+    QList<QLocale> locales
+        = QLocale::matchingLocales(QLocale::AnyLanguage, QLocale::AnyScript, QLocale::Country(index));
     // qDebug() << "etFlag county: " << country << " locales: " << locales;
     if (locales.length() > 0) {
         QString short_name = locales.at(0).name().section(QStringLiteral("_"), 1, 1).toLower();
@@ -588,7 +588,9 @@ void MainWindow::pushFastestDebian_clicked()
     }
 
     QString ver_name {getDebianVerName(getDebianVerNum())};
-    if (ver_name == QLatin1String("buster") || ver_name == QLatin1String("bullseye")) ver_name = QString(); // netselect-apt doesn't like name buster/bullseye for some reason, maybe it expects "stable"
+    if (ver_name == QLatin1String("buster") || ver_name == QLatin1String("bullseye"))
+        ver_name
+            = QString(); // netselect-apt doesn't like name buster/bullseye for some reason, maybe it expects "stable"
 
     QString out;
     bool success = shell->run("netselect-apt " + ver_name + " -o " + tmpfile.fileName(), out, false);
@@ -614,7 +616,8 @@ void MainWindow::pushFastestMX_clicked()
 {
     progress->show();
     QString out;
-    bool success = shell->run("set -o pipefail; netselect -D -I " + listMXurls + " |tr -s ' ' |sed 's/^ //' |cut -d' ' -f2", out);
+    bool success = shell->run(
+        "set -o pipefail; netselect -D -I " + listMXurls + " |tr -s ' ' |sed 's/^ //' |cut -d' ' -f2", out);
     qDebug() << listMXurls;
     qDebug() << "FASTEST " << success << out;
     progress->hide();
@@ -626,29 +629,29 @@ void MainWindow::pushFastestMX_clicked()
     }
 }
 
-//void MainWindow::pushRedirector_clicked()
+// void MainWindow::pushRedirector_clicked()
 //{
 //    replaceDebianRepos("https://deb.debian.org/debian/");
 //    refresh();
 //}
 
-void MainWindow::lineSearch_textChanged(const QString &arg1)
-{
-    displayMXRepos(repos, arg1);
-}
+void MainWindow::lineSearch_textChanged(const QString &arg1) { displayMXRepos(repos, arg1); }
 
 void MainWindow::pb_restoreSources_clicked()
 {
     // check if running on antiX/MX
-    if (!QFileInfo::exists(QStringLiteral("/etc/antix-version")) && !QFileInfo::exists(QStringLiteral("/etc/mx-version"))) {
+    if (!QFileInfo::exists(QStringLiteral("/etc/antix-version"))
+        && !QFileInfo::exists(QStringLiteral("/etc/mx-version"))) {
         QMessageBox::critical(this, tr("Error"), tr("Can't figure out if this app is running on antiX or MX"));
         return;
     }
 
     bool ok = true;
-    int mx_version = shell->getCmdOut(QStringLiteral("grep -oP '(?<=DISTRIB_RELEASE=).*' /etc/lsb-release")).leftRef(2).toInt(&ok);
+    int mx_version
+        = shell->getCmdOut(QStringLiteral("grep -oP '(?<=DISTRIB_RELEASE=).*' /etc/lsb-release")).leftRef(2).toInt(&ok);
     if (!ok || mx_version < 15) {
-        QMessageBox::critical(this, tr("Error"), tr("MX version not detected or out of range: ") + QString::number(mx_version));
+        QMessageBox::critical(this, tr("Error"),
+                              tr("MX version not detected or out of range: ") + QString::number(mx_version));
         return;
     }
 
@@ -661,8 +664,8 @@ void MainWindow::pb_restoreSources_clicked()
 
     // download source files from
     const QString branch = (mx_version > 19) ? QStringLiteral("main") : QStringLiteral("master");
-    const QString url = QString("https://codeload.github.com/MX-Linux/MX-%1_sources/zip/"
-                                + branch).arg(QString::number(mx_version));
+    const QString url
+        = QString("https://codeload.github.com/MX-Linux/MX-%1_sources/zip/" + branch).arg(QString::number(mx_version));
     QFileInfo fi(url);
     QFile tofile(tmpdir.path() + "/" + fi.fileName() + ".zip");
     if (!downloadFile(url, tofile)) {
@@ -681,28 +684,42 @@ void MainWindow::pb_restoreSources_clicked()
 
     // for 64-bit OS check if user wants AHS repo
     if (mx_version >= 19 && shell->getCmdOut(QStringLiteral("uname -m"), true) == QLatin1String("x86_64"))
-        if (QMessageBox::Yes == QMessageBox::question(this, tr("Enabling AHS"), tr("Do you use AHS (Advanced Hardware Stack) repo?")))
-            shell->run(QStringLiteral("sed -i '/^\\s*#*\\s*deb.*ahs\\s*/s/^#*\\s*//' /etc/apt/sources.list.d/mx.list"), true);
+        if (QMessageBox::Yes
+            == QMessageBox::question(this, tr("Enabling AHS"), tr("Do you use AHS (Advanced Hardware Stack) repo?")))
+            shell->run(QStringLiteral("sed -i '/^\\s*#*\\s*deb.*ahs\\s*/s/^#*\\s*//' /etc/apt/sources.list.d/mx.list"),
+                       true);
 
     refresh();
     QMessageBox::information(this, tr("Success"),
-                             tr("Original APT sources have been restored to the release status. User added source files in /etc/apt/sources.list.d/ have not been touched.") + "\n\n" +
-                             tr("Your new selection will take effect the next time sources are updated."));
+                             tr("Original APT sources have been restored to the release status. User added source "
+                                "files in /etc/apt/sources.list.d/ have not been touched.")
+                                 + "\n\n"
+                                 + tr("Your new selection will take effect the next time sources are updated."));
 }
 
 bool MainWindow::checkRepo(const QString &repo)
 {
+    QNetworkProxyQuery query {QUrl(repo)};
+    QList<QNetworkProxy> proxies = QNetworkProxyFactory::systemProxyForQuery(query);
+    if (!proxies.isEmpty())
+        manager.setProxy(proxies.first());
+
     QNetworkRequest request;
-    request.setRawHeader("User-Agent", qApp->applicationName().toUtf8() + "/" + qApp->applicationVersion().toUtf8() + " (linux-gnu)");
+    request.setRawHeader("User-Agent",
+                         qApp->applicationName().toUtf8() + "/" + qApp->applicationVersion().toUtf8() + " (linux-gnu)");
     request.setUrl(QUrl(repo));
     reply = manager.head(request);
 
     auto error {QNetworkReply::NoError};
     QEventLoop loop;
-    connect(reply, QOverload<QNetworkReply::NetworkError>::of(&QNetworkReply::error), [&error](QNetworkReply::NetworkError err) {error = err;} ); // errorOccured only in Qt >= 5.15
+    connect(reply, QOverload<QNetworkReply::NetworkError>::of(&QNetworkReply::error),
+            [&error](QNetworkReply::NetworkError err) { error = err; }); // errorOccured only in Qt >= 5.15
     connect(reply, QOverload<QNetworkReply::NetworkError>::of(&QNetworkReply::error), &loop, &QEventLoop::quit);
     connect(reply, &QNetworkReply::finished, &loop, &QEventLoop::quit);
-    QTimer::singleShot(5s, &loop, [&loop, &error]() {error = QNetworkReply::TimeoutError; loop.quit();} ); // manager.setTransferTimeout(time) // only in Qt >= 5.15
+    QTimer::singleShot(5s, &loop, [&loop, &error]() {
+        error = QNetworkReply::TimeoutError;
+        loop.quit();
+    }); // manager.setTransferTimeout(time) // only in Qt >= 5.15
     loop.exec();
     reply->disconnect();
     if (error == QNetworkReply::NoError)
@@ -718,21 +735,31 @@ bool MainWindow::downloadFile(const QString &url, QFile &file)
         return false;
     }
 
+    QNetworkProxyQuery query {QUrl(url)};
+    QList<QNetworkProxy> proxies = QNetworkProxyFactory::systemProxyForQuery(query);
+    if (!proxies.isEmpty())
+        manager.setProxy(proxies.first());
+
     QNetworkRequest request;
-    request.setRawHeader("User-Agent", qApp->applicationName().toUtf8() + "/" + qApp->applicationVersion().toUtf8() + " (linux-gnu)");
+    request.setRawHeader("User-Agent", QApplication::applicationName().toUtf8() + "/"
+                                           + QApplication::applicationVersion().toUtf8() + " (linux-gnu)");
     request.setUrl(QUrl(url));
 
     reply = manager.get(request);
     QEventLoop loop;
 
     bool success = true;
-    connect(reply, &QNetworkReply::readyRead, [this, &file, &success]() { success = file.write(reply->readAll()) > 0; });
+    connect(reply, &QNetworkReply::readyRead,
+            [this, &file, &success]() { success = file.write(reply->readAll()) > 0; });
     connect(reply, &QNetworkReply::finished, &loop, &QEventLoop::quit);
     loop.exec();
     reply->disconnect();
 
     if (!success) {
-        QMessageBox::warning(this, tr("Error"), tr("There was an error writing file: %1. Please check if you have enough free space on your drive").arg(file.fileName()));
+        QMessageBox::warning(
+            this, tr("Error"),
+            tr("There was an error writing file: %1. Please check if you have enough free space on your drive")
+                .arg(file.fileName()));
         exit(EXIT_FAILURE);
     }
 

@@ -1,10 +1,16 @@
-bash-config (22.08.02+deb11u13) stable; urgency=medium
+bash-config (23.03.01+deb11u13) stable; urgency=medium
 
   * MX Tools release
 
- -- Dolphin Oracle <administrator@localdomain>  Wed, 22 Mar 2023 10:43:47 +0100
+ -- Dolphin Oracle <administrator@localdomain>  Wed, 22 Mar 2023 13:32:31 +0100
 
-bash-config (22.08.02) mx; urgency=medium
+bash-config (23.03.01) mx; urgency=medium
+
+  * update translations 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 08 Mar 2023 22:38:41 -0500
+
+bash-config (20.08.02) mx; urgency=medium
 
   * put segfault fix back 
 

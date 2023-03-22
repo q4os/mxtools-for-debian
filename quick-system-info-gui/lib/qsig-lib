@@ -1,0 +1,20 @@
+#!/bin/bash
+
+#root level functions requiring password for quick-system-info-gui
+
+
+readadminfile(){
+
+zcat --force "$FILE"*
+
+}
+
+main()
+{
+ACTION="$1"
+FILE="$2"
+
+$ACTION
+}
+
+main "$@"

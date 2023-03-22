@@ -7,6 +7,8 @@
    as published by the Free Software Foundation; either version 2
    of the License, or (at your option) any later version.
 */
+#include "VariableEdit.h"
+
 #include <QButtonGroup>
 #include <QComboBox>
 #include <QGroupBox>
@@ -20,7 +22,6 @@
 
 #include "Clib.h"
 #include "Crontab.h"
-#include "VariableEdit.h"
 #include "VariableModel.h"
 #include "VariableView.h"
 
@@ -61,12 +62,12 @@ VariableEdit::VariableEdit(QWidget *parent)
                 v->addLayout((h2 = new QHBoxLayout));
                 {
                     h2->addStretch();
-                    h2->addWidget((newButton =
-                            new QPushButton(QIcon::fromTheme(QStringLiteral("filenew"), QIcon(":/images/filenew.png")),
-                                            tr("&New"))));
-                    h2->addWidget((deleteButton =
-                            new QPushButton(QIcon::fromTheme(QStringLiteral("edit-delete"), QIcon(":/images/editdelete.png")),
-                                            tr("&Delete"))));
+                    h2->addWidget(
+                        (newButton = new QPushButton(
+                             QIcon::fromTheme(QStringLiteral("filenew"), QIcon(":/images/filenew.png")), tr("&New"))));
+                    h2->addWidget((deleteButton = new QPushButton(QIcon::fromTheme(QStringLiteral("edit-delete"),
+                                                                                   QIcon(":/images/editdelete.png")),
+                                                                  tr("&Delete"))));
                 }
             }
 
@@ -91,10 +92,10 @@ VariableEdit::VariableEdit(QWidget *parent)
 
     userCombo->addItems(Clib::allUsers());
 
-    sepFrame->setFrameShape( QFrame::HLine );
-    sepFrame->setFrameShadow( QFrame::Sunken );
+    sepFrame->setFrameShape(QFrame::HLine);
+    sepFrame->setFrameShadow(QFrame::Sunken);
 
-    connect(variableView, &VariableView::changeVar, this , &VariableEdit::varViewSelected);
+    connect(variableView, &VariableView::changeVar, this, &VariableEdit::varViewSelected);
     connect(commentEdit, &QTextEdit::textChanged, this, &VariableEdit::commentChanged);
     connect(nameEdit, &QLineEdit::textEdited, this, &VariableEdit::varEdited);
     connect(valueEdit, &QLineEdit::textEdited, this, &VariableEdit::valEdited);
@@ -108,7 +109,6 @@ VariableEdit::VariableEdit(QWidget *parent)
 
     viewChanging = true;
     varViewChanging = true;
-
 }
 
 void VariableEdit::changeCurrent(Crontab *cron, TCommand * /*unused*/)
@@ -194,38 +194,35 @@ void VariableEdit::newClicked()
 
 void VariableEdit::mailOnClicked(bool state)
 {
-    if ( state )
+    if (state)
         setMailVar(0);
 }
 
 void VariableEdit::mailOffClicked(bool state)
 {
-    if ( state )
+    if (state)
         setMailVar(1);
 }
 void VariableEdit::mailToClicked(bool state)
 {
-    if ( state )
+    if (state)
         setMailVar(2);
 }
-void VariableEdit::userActivated(int /*unused*/)
-{
-    setMailVar(-1);
-}
+void VariableEdit::userActivated(int /*unused*/) { setMailVar(-1); }
 
 void VariableEdit::setMailVar(int flag)
 {
     // 0 = On, 1 = Off, 2 = To, -1 = User activated
     int curFlag = 0;
     Variable *v = nullptr;
-    for (auto& var : crontab->variables) {
+    for (auto &var : crontab->variables) {
         if (var->name == QLatin1String("MAILTO")) {
             curFlag = (var->value == QLatin1String("\"\"")) ? 1 : 2;
             v = var;
             break;
         }
     }
-    if ( flag != -1 ) {
+    if (flag != -1) {
         if (curFlag == flag)
             return;
     } else {
@@ -240,7 +237,8 @@ void VariableEdit::setMailVar(int flag)
         }
     } else if (flag == 1) {
         if (curFlag == 0) {
-            crontab->variables << new Variable(QStringLiteral("MAILTO"),QStringLiteral("\"\""),QStringLiteral("Don't send mail to anyone"));
+            crontab->variables << new Variable(QStringLiteral("MAILTO"), QStringLiteral("\"\""),
+                                               QStringLiteral("Don't send mail to anyone"));
         } else if (curFlag == 2) {
             v->value = QStringLiteral("\"\"");
             v->comment = QStringLiteral("Don't send mail to anyone");
@@ -252,11 +250,11 @@ void VariableEdit::setMailVar(int flag)
             crontab->variables << new Variable(QStringLiteral("MAILTO"), u, c);
         } else if (curFlag == 1) {
             v->value = u;
-            v->comment = "Send mail to \""+u+"\"";
+            v->comment = "Send mail to \"" + u + "\"";
         } else if (curFlag == 2) {
-            if ( v->value != u ) {
+            if (v->value != u) {
                 v->value = u;
-                v->comment = "Send mail to \""+u+"\"";
+                v->comment = "Send mail to \"" + u + "\"";
             } else {
                 return;
             }
@@ -266,10 +264,10 @@ void VariableEdit::setMailVar(int flag)
     emit dataChanged();
 }
 
-void VariableEdit::setMailCombo(const QList<Variable*> &var)
+void VariableEdit::setMailCombo(const QList<Variable *> &var)
 {
     bool mvar = false;
-    for (const auto& v : var) {
+    for (const auto &v : var) {
         if (v->name == QLatin1String("MAILTO")) {
             mvar = true;
             if (v->value == QLatin1String("\"\"")) {

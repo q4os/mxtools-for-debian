@@ -19,8 +19,10 @@
 #==============================================================================
 
 LIB_NAME="cli-shell-utils"
-LIB_VERSION="2.41.05"
-LIB_DATE="Tue 05 Nov 2019 08:50:59 PM MST"
+#LIB_VERSION="2.41.05"
+#LIB_DATE="Tue 05 Nov 2019 08:50:59 PM MST"
+LIB_VERSION="2.41.05-2302"
+LIB_DATE="Sat, 25 Feb 2023 12:45:10 -0500"
 
 : ${ME:=${0##*/}}
 : ${MY_DIR:=$(dirname "$(readlink -f $0)")}
@@ -2715,7 +2717,7 @@ this_distro_() {
     local var=${1:-PRETTY_NAME}  name  file
     [ -z "$var" ] && return
 
-    for name in antix-release initrd-release lsb-release os-release /etc/*-release; do
+    for name in antix-release initrd_release initrd-release lsb-release os-release /etc/*-release; do
         file=/etc/${name#/etc/}
         test -r $file || continue
         grep -q "^\s*$var=" $file  || continue

@@ -27,14 +27,14 @@ fi
 # apt's trusted keyrings
 declare -a APT_KEYRINGS DETACHED_SIGS SIGNED_RELEASES
 shopt -s nullglob;
-APT_KEYRINGS_LIST=( /etc/apt/trusted[.]gpg{,.d/*{.gpg,.asc}} )
+APT_KEYRINGS_LIST=( /etc/apt/trusted[.]gpg{,.d/*.gpg} )
 # detached Release signatures
 DETACHED_SIGS=( /var/lib/apt/lists/{,partial/}*Release.gpg )
 # inline signed Release
 shopt -u nullglob
 readarray -t SIGNED_RELEASES < <(grep -IFlsx  /var/lib/apt/lists/{,partial/}*Release -e '-----BEGIN PGP SIGNED MESSAGE-----' )
 # keyring options for gpg
-APT_KEYRINGS="${APT_KEYRINGS_LIST[@]///etc/--keyring /etc}"
+APT_KEYRINGS="${APT_KEYRINGS_LIST[@]///etc/--keyring gnupg-ring:/etc}"
 
 # prepare gpg import key
 TMP_GPG_HOME=$(mktemp -d /tmp/temp-apt-gpg-home.XXXXXXXXX)
@@ -51,9 +51,14 @@ EXPORT_OPTIONS="--export-options export-clean,export-minimal"
 IMPORT_OPTIONS="--import-options import-clean,import-minimal"
 KEYSERVER_OPTIONS="--keyserver-options import-clean,import-minimal"
 KEYSERVER=(
+        hkps://keys.openpgp.org
+        hkps://keyserver.ubuntu.com
+        hkps://pgpkeys.eu
         hkp://keyserver.ubuntu.com:80
-        hkp://pool.sks-keyservers.net
-        hkp://pgp.mit.edu
+        #--------------------------------------------------------------
+        # below not used
+        #hkp://pool.sks-keyservers.net
+        #hkp://pgp.mit.edu
         #hkp://subkeys.pgp.net
         #hkp://eu.pool.sks-keyservers.net
         #hkp://keys.gnupg.net
@@ -76,8 +81,8 @@ for SIG in "${SIGNED_RELEASES[@]}" "${DETACHED_SIGS[@]}"; do
    CHK=$(basename -s .gpg "$SIG")
    echo
    echo "Checking ${CHK}"
-
-   CHECK=$(LANG=C gpg $GPG_OPTS ${APT_KEYRINGS[@]} --verify $SIG $REL 2>&1)
+   unset LC_ALL
+   CHECK=$(LANG=C.UTF-8 gpg $GPG_OPTS ${APT_KEYRINGS[@]} --verify $SIG $REL 2>&1)
    RET=$?
    if [ $RET = 0 ] && grep -v expired <<<$CHECK | grep -sq "Good signature"; then
         printf "$GREEN%s$END\n" "    Good GPG signature found."
@@ -86,21 +91,20 @@ for SIG in "${SIGNED_RELEASES[@]}" "${DETACHED_SIGS[@]}"; do
         declare -a KEYS
         readarray -t KEYS < <( grep -oE '[[:xdigit:]]{16}\b' <<<$CHECK | sort -u)
         #
-        KEYS_FOUND=""
+        KEYS_FOUND="false"
+        
         for keyserver in ${KEYSERVER[*]}; do
             [ -f $TMP_KEYRING ] && rm $TMP_KEYRING
             [ -f $TMP_PUBKEY  ] && rm $TMP_PUBKEY
             if gpg $GPG_OPTS --keyring=$TMP_KEYRING $KEYSERVER_OPTIONS --keyserver $keyserver  --recv-key ${KEYS[@]/#/0x} 1>/dev/null 2>&1; then
+                [ $(gpg $GPG_OPTS --keyring=$TMP_KEYRING  --with-colons --list-keys 2>/dev/null | grep -c ^pub) = 0 ] && continue
                 KEYS_FOUND="true"
                 gpg $GPG_OPTS --keyring=$TMP_KEYRING --output $TMP_PUBKEY $EXPORT_OPTIONS --export ;  # 1>/dev/null 2>&1
-                if [ -f /etc/apt/trusted.gpg ]; then
-                   gpg $GPG_OPTS ${APT_KEYRINGS[@]} $IMPORT_OPTIONS --import $TMP_PUBKEY
-                else
-                   cp $TMP_PUBKEY /etc/apt/trusted.gpg
-                   APT_KEYRINGS+=( --keyring /etc/apt/trusted.gpg )
-                   gpg $GPG_OPTS ${APT_KEYRINGS[@]} $IMPORT_OPTIONS --import $TMP_PUBKEY
-                   #gpg $GPG_OPTS ${APT_KEYRINGS[@]} --list-keys
+                if [ ! -f /etc/apt/trusted.gpg ]; then
+                   touch  /etc/apt/trusted.gpg
+                   APT_KEYRINGS=( "--keyring gnupg-ring:/etc/apt/trusted.gpg" "${APT_KEYRINGS[@]}")
                 fi
+                gpg $GPG_OPTS ${APT_KEYRINGS[@]} $IMPORT_OPTIONS --import $TMP_PUBKEY
                 break
             fi
         done

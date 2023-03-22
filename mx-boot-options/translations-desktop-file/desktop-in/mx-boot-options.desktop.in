@@ -1,0 +1,12 @@
+[Desktop Entry]
+Encoding=UTF-8
+# The desktop entry name will be displayed within the menu.
+Name=MX Boot Options
+# # The desktop entry comment will be shown within the menu.
+Comment=Common start-up choices
+Exec=mxbo-launcher
+Terminal=false
+Type=Application
+Icon=mx-boot-options
+Categories=GNOME;GTK;System;MX-Maintenance
+NoDisplay=false
