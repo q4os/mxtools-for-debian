@@ -1,8 +1,8 @@
-mx-goodies (23.01.04mx21+deb11u13) stable; urgency=medium
+mx-goodies (23.04.01) mx; urgency=medium
 
-  * MX Tools release
+  * system-locales-mx launcher policy kit action
 
- -- Dolphin Oracle <administrator@localdomain>  Wed, 22 Mar 2023 15:16:42 +0100
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 08 Apr 2023 18:14:09 -0400
 
 mx-goodies (23.01.04mx21) mx; urgency=medium
 

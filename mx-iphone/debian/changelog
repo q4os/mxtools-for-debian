@@ -1,9 +1,3 @@
-mx-iphone (0.1mx21+deb11u13) stable; urgency=medium
-
-  * MX Tools release
-
- -- Timothy E. Harris <administrator@localdomain>  Wed, 22 Mar 2023 15:16:43 +0100
-
 mx-iphone (0.1mx21) mx; urgency=medium
 
   * Adjusted dependencies for bullseye base.

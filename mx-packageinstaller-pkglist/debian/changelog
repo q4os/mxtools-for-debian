@@ -1,8 +1,14 @@
-mx-packageinstaller-pkglist (23.03.02mx21+deb11u13) stable; urgency=medium
+mx-packageinstaller-pkglist (23.03.04mx21) mx; urgency=medium
 
-  * MX Tools release
+  * update category.dict
 
- -- Dolphin Oracle <administrator@localdomain>  Wed, 22 Mar 2023 15:16:43 +0100
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 02 Apr 2023 22:12:05 -0400
+
+mx-packageinstaller-pkglist (23.03.03mx21) mx; urgency=medium
+
+  * update 6.1 kenrel to -7mx-ahs
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 30 Mar 2023 20:09:26 -0400
 
 mx-packageinstaller-pkglist (23.03.02mx21) mx; urgency=medium
 

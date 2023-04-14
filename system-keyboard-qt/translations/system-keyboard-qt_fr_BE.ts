@@ -78,7 +78,7 @@
         <location filename="window.cpp" line="204"/>
         <location filename="window.cpp" line="241"/>
         <source>Failed to open file: </source>
-        <translation>Impossible d&apos;ouvrir le dossier :</translation>
+        <translation>Impossible d’ouvrir le dossier:</translation>
     </message>
     <message>
         <location filename="window.cpp" line="241"/>

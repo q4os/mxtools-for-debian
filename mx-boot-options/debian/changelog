@@ -1,9 +1,3 @@
-mx-boot-options (23.2.01+deb11u13) stable; urgency=medium
-
-  * MX Tools release
-
- -- Adrian <administrator@localdomain>  Wed, 22 Mar 2023 15:16:41 +0100
-
 mx-boot-options (23.2.01) mx; urgency=medium
 
   * Change ownership of the rc file created by KDE/Plasma

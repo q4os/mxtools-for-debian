@@ -1,4 +1,6 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="ca">
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.1" language="ca">
 <context>
     <name>MXDateTime</name>
     <message>
@@ -39,8 +41,8 @@
     </message>
     <message>
         <location filename="../datetime.ui" line="278"/>
-        <location filename="../datetime.cpp" line="296"/>
-        <location filename="../datetime.cpp" line="303"/>
+        <location filename="../datetime.cpp" line="298"/>
+        <location filename="../datetime.cpp" line="305"/>
         <source>Hardware Clock</source>
         <translation>Rellotge de maquinari</translation>
     </message>
@@ -190,96 +192,120 @@
         <translation>Opcions </translation>
     </message>
     <message>
-        <location filename="../datetime.cpp" line="270"/>
+        <location filename="../datetime.cpp" line="272"/>
         <source>Reading...</source>
         <translation>Llegint...</translation>
     </message>
     <message>
-        <location filename="../datetime.cpp" line="284"/>
+        <location filename="../datetime.cpp" line="286"/>
         <source>Adjusting...</source>
         <translation>Ajustant...</translation>
     </message>
     <message>
-        <location filename="../datetime.cpp" line="296"/>
-        <location filename="../datetime.cpp" line="303"/>
+        <location filename="../datetime.cpp" line="298"/>
+        <location filename="../datetime.cpp" line="305"/>
         <source>System Clock</source>
         <translation>Rellotge de Sistema</translation>
     </message>
     <message>
-        <location filename="../datetime.cpp" line="309"/>
+        <location filename="../datetime.cpp" line="311"/>
         <source>The %1 time was transferred to the %2.</source>
         <translation>L&apos;hora %1 s&apos;ha transferit al %2.</translation>
     </message>
     <message>
-        <location filename="../datetime.cpp" line="312"/>
+        <location filename="../datetime.cpp" line="314"/>
         <source>The %1 time could not be transferred to the %2.</source>
         <translation>No es pot transferir l&apos;hora %1 al %2.</translation>
     </message>
     <message>
-        <location filename="../datetime.cpp" line="352"/>
+        <location filename="../datetime.cpp" line="354"/>
         <source>Updating...</source>
         <translation>Actualitzant...</translation>
     </message>
     <message>
-        <location filename="../datetime.cpp" line="365"/>
+        <location filename="../datetime.cpp" line="367"/>
         <source>The system clock was updated successfully.</source>
         <translation>El rellotge del Sistema s&apos;ha actualitzat amb èxit.</translation>
     </message>
     <message>
-        <location filename="../datetime.cpp" line="367"/>
+        <location filename="../datetime.cpp" line="369"/>
         <source>The system clock could not be updated.</source>
         <translation>No es pot actualitzar el rellotge del Sistema.</translation>
     </message>
     <message>
-        <location filename="../datetime.cpp" line="369"/>
+        <location filename="../datetime.cpp" line="371"/>
         <source>None of the NTP servers on the list are currently enabled.</source>
         <translation>Cap dels servidors de la llista està activat en aquest moment.</translation>
     </message>
     <message>
-        <location filename="../datetime.cpp" line="603"/>
+        <location filename="../datetime.cpp" line="604"/>
         <source>About MX Date &amp; Time</source>
         <translation>Quant a MX Data i Hora</translation>
     </message>
     <message>
-        <location filename="../datetime.cpp" line="604"/>
+        <location filename="../datetime.cpp" line="605"/>
         <source>Version: </source>
         <translation>Versió: </translation>
     </message>
     <message>
-        <location filename="../datetime.cpp" line="605"/>
+        <location filename="../datetime.cpp" line="606"/>
         <source>GUI program for setting the time and date in MX Linux</source>
         <translation>Programa amb IGU per ajustar la data i l&apos;hora a MX Linux</translation>
     </message>
     <message>
-        <location filename="../datetime.cpp" line="607"/>
+        <location filename="../datetime.cpp" line="608"/>
         <source>Copyright (c) MX Linux</source>
         <translation>Copyright (c) MX Linux</translation>
     </message>
     <message>
-        <location filename="../datetime.cpp" line="608"/>
-        <location filename="../datetime.cpp" line="622"/>
-        <source>License</source>
-        <translation>Llicència</translation>
-    </message>
-    <message>
-        <location filename="../datetime.cpp" line="609"/>
-        <source>Changelog</source>
-        <translation>Registre de canvis</translation>
-    </message>
-    <message>
         <location filename="../datetime.cpp" line="610"/>
+        <source>%1 License</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>License</source>
+        <translation type="vanished">Llicència</translation>
+    </message>
+    <message>
+        <source>Changelog</source>
+        <translation type="vanished">Registre de canvis</translation>
+    </message>
+    <message>
         <source>Cancel</source>
-        <translation>Cancel·la</translation>
+        <translation type="vanished">Cancel·la</translation>
     </message>
     <message>
-        <location filename="../datetime.cpp" line="636"/>
         <source>&amp;Close</source>
-        <translation>Tan&amp;ca </translation>
+        <translation type="vanished">Tan&amp;ca </translation>
     </message>
     <message>
-        <location filename="../datetime.cpp" line="654"/>
+        <location filename="../datetime.cpp" line="616"/>
         <source>MX Date &amp; Time Help</source>
         <translation>Ajuda de MX Data i Hora</translation>
+    </message>
+</context>
+<context>
+    <name>QObject</name>
+    <message>
+        <location filename="../about.cpp" line="52"/>
+        <source>License</source>
+        <translation type="unfinished">Llicència</translation>
+    </message>
+    <message>
+        <location filename="../about.cpp" line="53"/>
+        <location filename="../about.cpp" line="62"/>
+        <source>Changelog</source>
+        <translation type="unfinished">Registre de canvis</translation>
+    </message>
+    <message>
+        <location filename="../about.cpp" line="54"/>
+        <source>Cancel</source>
+        <translation type="unfinished">Cancel·la</translation>
+    </message>
+    <message>
+        <location filename="../about.cpp" line="74"/>
+        <source>&amp;Close</source>
+        <translation type="unfinished">Tan&amp;ca </translation>
     </message>
 </context>
 </TS>

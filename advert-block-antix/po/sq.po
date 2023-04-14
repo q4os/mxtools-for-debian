@@ -1,0 +1,54 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Translators:
+msgid ""
+msgstr ""
+"Project-Id-Version: antix-development\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-08-24 20:37+0300\n"
+"PO-Revision-Date: 2023-01-09 21:36+0200\n"
+"Last-Translator: \n"
+"Language-Team: Albanian (http://www.transifex.com/anticapitalista/antix-development/language/sq/)\n"
+"Language: sq\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
+
+#: block-advert.sh:42
+#, sh-format
+msgid "The <b>$title</b> tool adds stuff to your /etc/hosts file, so \\nthat many advertising servers and websites can't connect to this PC.\\nYou can choose to block ads, malware, pornography, gambling, fakenews and social media\\nBlocking ad servers protects your privacy, saves you bandwidth, greatly \\nimproves web-browsing speed and makes the internet much less annoying in general.\\n\\nDo you want to proceed?"
+msgstr ""
+"Mjeti <b>$title</b> shton gjëra te kartela juaj /etc/hosts, në mënyrë që\\n\n"
+"mjaft shërbyes dhe sajte reklamash të mos lidhen dot me këtë PC.\\n\n"
+"Mund të zgjidhni të bllokoni reklama, malware, pornografi, kumar, lajme të rreme dhe media shoqërore\\n\n"
+"Bllokimi i shërbyesve të reklamave mbron privatësinë tuaj, ju kursen sasi trafiku të dhënash, përmirëson shumë shpejtësinë e shfletimit\\n\n"
+"dhe, në përgjithësi, e bën internetin më pak të bezdisur.\\n\\nDoni të vazhdohet?"
+
+#: block-advert.sh:53
+msgid "<b> Failed </b> \\n\\n\tantiX advert blocker must be run as root or with sudo "
+msgstr "<b> U dështua </b> \\n\\n\tBllokuesi antiX i reklamave duhet xhiruar si rrënjë ose me sudo "
+
+#: block-advert.sh:140
+msgid "Restoring original /etc/hosts."
+msgstr "Po rikthehen /etc/hosts origjinale."
+
+#: block-advert.sh:182
+#, sh-format
+msgid "Loading  blocklist from $domain"
+msgstr "Po ngarkohet listë bllokimesh nga $domain"
+
+#: block-advert.sh:211
+msgid "Success - your settings have been changed.\\n\\nYour hosts file has been updated.\\nRestart your browser to see the changes."
+msgstr "Sukses - rregullimet tuaja u ndryshuan.\\n\\nKartela juaj “hosts” u përditësua.\\nQë të shihni ndryshimet, rinisni shfletuesin tuaj."
+
+#: block-advert.sh:232
+msgid "Choose what to block"
+msgstr "Zgjidhni ç’të bllokohet"
+
+#: block-advert.sh:305
+msgid "No item selected"
+msgstr "Pa objekt të përzgjedhur"

@@ -1,8 +1,8 @@
-checkaptgpg (23.01.01+deb11u13) stable; urgency=medium
+checkaptgpg (23.04.01) mx; urgency=medium
 
-  * MX Tools release
+  * use polkit for gui authentication
 
- -- fehlix <administrator@localdomain>  Wed, 22 Mar 2023 15:16:37 +0100
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 08 Apr 2023 17:48:49 -0400
 
 checkaptgpg (23.01.01) mx; urgency=medium
 

@@ -1,8 +1,14 @@
-disk-manager (23.01.01+deb11u13) stable; urgency=medium
+disk-manager (23.04.03) mx; urgency=medium
 
-  * MX Tools release
+  * fix policy file 
 
- -- fehlix <administrator@localdomain>  Wed, 22 Mar 2023 15:16:39 +0100
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 08 Apr 2023 21:33:50 -0400
+
+disk-manager (23.04.01) mx; urgency=medium
+
+  * add polkit policy
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 08 Apr 2023 12:48:10 -0400
 
 disk-manager (23.01.01) mx; urgency=medium
 

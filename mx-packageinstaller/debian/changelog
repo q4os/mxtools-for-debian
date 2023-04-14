@@ -1,8 +1,8 @@
-mx-packageinstaller (23.3.01+deb11u13) stable; urgency=medium
+mx-packageinstaller (23.3.02) mx; urgency=medium
 
-  * MX Tools release
+  * Add error message if it cannot download list of packages.
 
- -- Adrian <administrator@localdomain>  Wed, 22 Mar 2023 15:16:43 +0100
+ -- Adrian <adrian@mxlinux.org>  Thu, 30 Mar 2023 14:00:16 -0400
 
 mx-packageinstaller (23.3.01) mx; urgency=medium
 

@@ -1,0 +1,52 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Translators:
+# anticapitalista <anticapitalista@riseup.net>, 2012
+# Danylo Sa <kaiserblast@gmail.com>, 2018
+# marcelo cripe <marcelocripe@gmail.com>, 2020-2022
+msgid ""
+msgstr ""
+"Project-Id-Version: antix-development\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-08-24 20:37+0300\n"
+"PO-Revision-Date: 2022-08-29 19:35+0300\n"
+"Last-Translator: marcelo cripe <marcelocripe@gmail.com>, 2020-2022\n"
+"Language-Team: Portuguese (Brazil) (http://www.transifex.com/anticapitalista/antix-development/language/pt_BR/)\n"
+"Language: pt_BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n == 0 || n == 1) ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
+"X-Generator: Poedit 3.0.1\n"
+
+#: block-advert.sh:42
+#, sh-format
+msgid "The <b>$title</b> tool adds stuff to your /etc/hosts file, so \\nthat many advertising servers and websites can't connect to this PC.\\nYou can choose to block ads, malware, pornography, gambling, fakenews and social media\\nBlocking ad servers protects your privacy, saves you bandwidth, greatly \\nimproves web-browsing speed and makes the internet much less annoying in general.\\n\\nDo you want to proceed?"
+msgstr "A ferramenta <b>$title</b> adiciona dados no seu arquivo\\nde configurações /etc/hosts, para que muitos servidores de publicidade\\ne sítios/sites não possam se conectar com este computador.\\nVocê pode optar por bloquear os anúncios, malware, pornografia, jogos\\nde azar, notícias falsas e as mídias sociais.\\nO bloqueio dos servidores de anúncios protegem a sua privacidade,\\neconomizam a sua largura de banda, melhoram bastante a velocidade\\nde navegação na internet e tornam a internet muito menos irritante.\\n\\nVocê quer continuar?"
+
+#: block-advert.sh:53
+msgid "<b> Failed </b> \\n\\n\tantiX advert blocker must be run as root or with sudo "
+msgstr "<b> Ocorreu uma falha </b> \\n\\n\tO bloqueador de publicidade do antiX deve ser executado com as permissões de root ou sudo"
+
+#: block-advert.sh:140
+msgid "Restoring original /etc/hosts."
+msgstr "Restaurando o arquivo original /etc/hosts."
+
+#: block-advert.sh:182
+#, sh-format
+msgid "Loading  blocklist from $domain"
+msgstr "Carregando a lista de bloqueio de $domain"
+
+#: block-advert.sh:211
+msgid "Success - your settings have been changed.\\n\\nYour hosts file has been updated.\\nRestart your browser to see the changes."
+msgstr "As suas configurações foram alteradas com sucesso. \\n\\nO seu arquivo hospedeiro (hosts) foi atualizado. \\n Reinicie o seu navegador de internet para ver as alterações."
+
+#: block-advert.sh:232
+msgid "Choose what to block"
+msgstr "Escolha o que você quer que seja bloqueado"
+
+#: block-advert.sh:305
+msgid "No item selected"
+msgstr "Nenhum item foi selecionado"

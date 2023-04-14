@@ -1,4 +1,6 @@
-block-advert.sh      /usr/local/bin 
-advert-block.desktop /usr/share/applications/antix
+block-advert.sh      /usr/bin 
+advert-block.desktop /usr/share/applications
 locale/*	     /usr/share/locale
 advert-block.png     /usr/share/pixmaps
+policy/*	usr/share/polkit-1/actions
+script/*	usr/bin

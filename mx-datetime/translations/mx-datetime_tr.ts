@@ -1,4 +1,6 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="tr">
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.1" language="tr">
 <context>
     <name>MXDateTime</name>
     <message>
@@ -39,8 +41,8 @@
     </message>
     <message>
         <location filename="../datetime.ui" line="278"/>
-        <location filename="../datetime.cpp" line="296"/>
-        <location filename="../datetime.cpp" line="303"/>
+        <location filename="../datetime.cpp" line="298"/>
+        <location filename="../datetime.cpp" line="305"/>
         <source>Hardware Clock</source>
         <translation>Donanım Saati</translation>
     </message>
@@ -190,96 +192,120 @@
         <translation>Seçenekler</translation>
     </message>
     <message>
-        <location filename="../datetime.cpp" line="270"/>
+        <location filename="../datetime.cpp" line="272"/>
         <source>Reading...</source>
         <translation>Okunuyor...</translation>
     </message>
     <message>
-        <location filename="../datetime.cpp" line="284"/>
+        <location filename="../datetime.cpp" line="286"/>
         <source>Adjusting...</source>
         <translation>Ayarlanıyor...</translation>
     </message>
     <message>
-        <location filename="../datetime.cpp" line="296"/>
-        <location filename="../datetime.cpp" line="303"/>
+        <location filename="../datetime.cpp" line="298"/>
+        <location filename="../datetime.cpp" line="305"/>
         <source>System Clock</source>
         <translation>Sistem Saati</translation>
     </message>
     <message>
-        <location filename="../datetime.cpp" line="309"/>
+        <location filename="../datetime.cpp" line="311"/>
         <source>The %1 time was transferred to the %2.</source>
         <translation>% 1 zamanı % 2&apos;ye aktarıldı.</translation>
     </message>
     <message>
-        <location filename="../datetime.cpp" line="312"/>
+        <location filename="../datetime.cpp" line="314"/>
         <source>The %1 time could not be transferred to the %2.</source>
         <translation>%1 zamanı %2&apos;ye aktarılamadı.</translation>
     </message>
     <message>
-        <location filename="../datetime.cpp" line="352"/>
+        <location filename="../datetime.cpp" line="354"/>
         <source>Updating...</source>
         <translation>Güncelleniyor...</translation>
     </message>
     <message>
-        <location filename="../datetime.cpp" line="365"/>
+        <location filename="../datetime.cpp" line="367"/>
         <source>The system clock was updated successfully.</source>
         <translation>Sistem saati başarıyla güncellendi.</translation>
     </message>
     <message>
-        <location filename="../datetime.cpp" line="367"/>
+        <location filename="../datetime.cpp" line="369"/>
         <source>The system clock could not be updated.</source>
         <translation>Sistem saati güncellenemedi.</translation>
     </message>
     <message>
-        <location filename="../datetime.cpp" line="369"/>
+        <location filename="../datetime.cpp" line="371"/>
         <source>None of the NTP servers on the list are currently enabled.</source>
         <translation>Listedeki NTP sunucularının hiçbiri şu anda etkin değil.</translation>
     </message>
     <message>
-        <location filename="../datetime.cpp" line="603"/>
+        <location filename="../datetime.cpp" line="604"/>
         <source>About MX Date &amp; Time</source>
         <translation>MX Tarih &amp; Saat Hakkında</translation>
     </message>
     <message>
-        <location filename="../datetime.cpp" line="604"/>
+        <location filename="../datetime.cpp" line="605"/>
         <source>Version: </source>
         <translation>Sürüm</translation>
     </message>
     <message>
-        <location filename="../datetime.cpp" line="605"/>
+        <location filename="../datetime.cpp" line="606"/>
         <source>GUI program for setting the time and date in MX Linux</source>
         <translation>MX Linux &apos;ta tarih ve saati ayarlamak için grafik arayüzlü program</translation>
     </message>
     <message>
-        <location filename="../datetime.cpp" line="607"/>
+        <location filename="../datetime.cpp" line="608"/>
         <source>Copyright (c) MX Linux</source>
         <translation>Copyright (c) MX Linux</translation>
     </message>
     <message>
-        <location filename="../datetime.cpp" line="608"/>
-        <location filename="../datetime.cpp" line="622"/>
-        <source>License</source>
-        <translation>Ruhsat</translation>
-    </message>
-    <message>
-        <location filename="../datetime.cpp" line="609"/>
-        <source>Changelog</source>
-        <translation>Değişim günlüğü</translation>
-    </message>
-    <message>
         <location filename="../datetime.cpp" line="610"/>
+        <source>%1 License</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>License</source>
+        <translation type="vanished">Ruhsat</translation>
+    </message>
+    <message>
+        <source>Changelog</source>
+        <translation type="vanished">Değişim günlüğü</translation>
+    </message>
+    <message>
         <source>Cancel</source>
-        <translation>İptal</translation>
+        <translation type="vanished">İptal</translation>
     </message>
     <message>
-        <location filename="../datetime.cpp" line="636"/>
         <source>&amp;Close</source>
-        <translation>&amp;Kapat</translation>
+        <translation type="vanished">&amp;Kapat</translation>
     </message>
     <message>
-        <location filename="../datetime.cpp" line="654"/>
+        <location filename="../datetime.cpp" line="616"/>
         <source>MX Date &amp; Time Help</source>
         <translation>MX Tarih ve Zaman Yardımı</translation>
+    </message>
+</context>
+<context>
+    <name>QObject</name>
+    <message>
+        <location filename="../about.cpp" line="52"/>
+        <source>License</source>
+        <translation type="unfinished">Ruhsat</translation>
+    </message>
+    <message>
+        <location filename="../about.cpp" line="53"/>
+        <location filename="../about.cpp" line="62"/>
+        <source>Changelog</source>
+        <translation type="unfinished">Değişim günlüğü</translation>
+    </message>
+    <message>
+        <location filename="../about.cpp" line="54"/>
+        <source>Cancel</source>
+        <translation type="unfinished">İptal</translation>
+    </message>
+    <message>
+        <location filename="../about.cpp" line="74"/>
+        <source>&amp;Close</source>
+        <translation type="unfinished">&amp;Kapat</translation>
     </message>
 </context>
 </TS>

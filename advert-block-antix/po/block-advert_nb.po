@@ -1,0 +1,52 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Translators:
+# heskjestad <cato@heskjestad.xyz>, 2022
+# heskjestad <cato@heskjestad.xyz>, 2020
+msgid ""
+msgstr ""
+"Project-Id-Version: antix-development\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-08-24 20:37+0300\n"
+"PO-Revision-Date: 2022-08-29 19:35+0300\n"
+"Last-Translator: heskjestad <cato@heskjestad.xyz>, 2022\n"
+"Language-Team: Norwegian Bokmål (http://www.transifex.com/anticapitalista/antix-development/language/nb/)\n"
+"Language: nb\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
+
+#: block-advert.sh:42
+#, sh-format
+msgid ""
+"The <b>$title</b> tool adds stuff to your /etc/hosts file, so \\nthat many advertising servers and websites can't connect to this PC.\\nYou can choose to block ads, malware, pornography, gambling, fakenews and social media\\nBlocking ad servers protects your privacy, saves you bandwidth, greatly \\nimproves web-browsing speed and makes the internet much less annoying in general.\\n\\nDo you want to proceed?"
+msgstr "Verktøyet <b>$title</b> legger til innhold i filen /etc/hosts\\nslik at mange reklametjenere og -nettsteder ikke kan koble seg\\ntil denne PC-en. Du kan velge å blokkere reklame, skadevare, pornografi, gambling, falske nyheter og sosiale media. \\nDette beskytter personvernet ditt\\n, begrenser bruken av båndbredde, øker nettlesingshastigheten\\nog gjør Internett mindre irriterende.\\n\\nVil du fortsette?"
+
+#: block-advert.sh:53
+msgid "<b> Failed </b> \\n\\n\tantiX advert blocker must be run as root or with sudo "
+msgstr "<b>Mislyktes</b>\\n\\n\tantiX reklameblokkering må kjøres som root eller med sudo"
+
+#: block-advert.sh:140
+msgid "Restoring original /etc/hosts."
+msgstr "Gjenoppretter original /etc/hosts."
+
+#: block-advert.sh:182
+#, sh-format
+msgid "Loading  blocklist from $domain"
+msgstr "Laster blokkeringsliste fra $domain"
+
+#: block-advert.sh:211
+msgid "Success - your settings have been changed.\\n\\nYour hosts file has been updated.\\nRestart your browser to see the changes."
+msgstr "Fullført – innstillingene er endret.\\n\\nHosts-filen er oppdatert.\\nStart nettleseren din på nytt for å ta i bruk endringene."
+
+#: block-advert.sh:232
+msgid "Choose what to block"
+msgstr "Velg hva som skal blokkeres"
+
+#: block-advert.sh:305
+msgid "No item selected"
+msgstr "Ingenting er valgt"

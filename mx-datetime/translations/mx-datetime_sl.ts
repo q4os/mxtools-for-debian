@@ -1,4 +1,6 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="sl">
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.1" language="sl">
 <context>
     <name>MXDateTime</name>
     <message>
@@ -39,8 +41,8 @@
     </message>
     <message>
         <location filename="../datetime.ui" line="278"/>
-        <location filename="../datetime.cpp" line="296"/>
-        <location filename="../datetime.cpp" line="303"/>
+        <location filename="../datetime.cpp" line="298"/>
+        <location filename="../datetime.cpp" line="305"/>
         <source>Hardware Clock</source>
         <translation>Strojna ura</translation>
     </message>
@@ -190,96 +192,120 @@
         <translation>Opcije</translation>
     </message>
     <message>
-        <location filename="../datetime.cpp" line="270"/>
+        <location filename="../datetime.cpp" line="272"/>
         <source>Reading...</source>
         <translation>Odčitavanje...</translation>
     </message>
     <message>
-        <location filename="../datetime.cpp" line="284"/>
+        <location filename="../datetime.cpp" line="286"/>
         <source>Adjusting...</source>
         <translation>Nastavljanje...</translation>
     </message>
     <message>
-        <location filename="../datetime.cpp" line="296"/>
-        <location filename="../datetime.cpp" line="303"/>
+        <location filename="../datetime.cpp" line="298"/>
+        <location filename="../datetime.cpp" line="305"/>
         <source>System Clock</source>
         <translation>Sistemska ura</translation>
     </message>
     <message>
-        <location filename="../datetime.cpp" line="309"/>
+        <location filename="../datetime.cpp" line="311"/>
         <source>The %1 time was transferred to the %2.</source>
         <translation>Čas %1 je bil prenešen v %2.</translation>
     </message>
     <message>
-        <location filename="../datetime.cpp" line="312"/>
+        <location filename="../datetime.cpp" line="314"/>
         <source>The %1 time could not be transferred to the %2.</source>
         <translation>Časa %1 ni bilo mogoče prenesti v %2.</translation>
     </message>
     <message>
-        <location filename="../datetime.cpp" line="352"/>
+        <location filename="../datetime.cpp" line="354"/>
         <source>Updating...</source>
         <translation>Posodabljanje...</translation>
     </message>
     <message>
-        <location filename="../datetime.cpp" line="365"/>
+        <location filename="../datetime.cpp" line="367"/>
         <source>The system clock was updated successfully.</source>
         <translation>Sistemska ura je bila uspešno posodobljena.</translation>
     </message>
     <message>
-        <location filename="../datetime.cpp" line="367"/>
+        <location filename="../datetime.cpp" line="369"/>
         <source>The system clock could not be updated.</source>
         <translation>Sistemske ure ni bilo mogoče posodobiti.</translation>
     </message>
     <message>
-        <location filename="../datetime.cpp" line="369"/>
+        <location filename="../datetime.cpp" line="371"/>
         <source>None of the NTP servers on the list are currently enabled.</source>
         <translation>Noben od NTP strežnikov iz seznama trenutno ni vklopljen.</translation>
     </message>
     <message>
-        <location filename="../datetime.cpp" line="603"/>
+        <location filename="../datetime.cpp" line="604"/>
         <source>About MX Date &amp; Time</source>
         <translation>O programu MX datum in ura</translation>
     </message>
     <message>
-        <location filename="../datetime.cpp" line="604"/>
+        <location filename="../datetime.cpp" line="605"/>
         <source>Version: </source>
         <translation>Različica:</translation>
     </message>
     <message>
-        <location filename="../datetime.cpp" line="605"/>
+        <location filename="../datetime.cpp" line="606"/>
         <source>GUI program for setting the time and date in MX Linux</source>
         <translation>Grafični program za nastavljanje ure in datuma v MX Linuxu</translation>
     </message>
     <message>
-        <location filename="../datetime.cpp" line="607"/>
+        <location filename="../datetime.cpp" line="608"/>
         <source>Copyright (c) MX Linux</source>
         <translation>Copyright (c) MX Linux</translation>
     </message>
     <message>
-        <location filename="../datetime.cpp" line="608"/>
-        <location filename="../datetime.cpp" line="622"/>
-        <source>License</source>
-        <translation>Licenca</translation>
-    </message>
-    <message>
-        <location filename="../datetime.cpp" line="609"/>
-        <source>Changelog</source>
-        <translation>Dnevnik sprememb</translation>
-    </message>
-    <message>
         <location filename="../datetime.cpp" line="610"/>
+        <source>%1 License</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>License</source>
+        <translation type="vanished">Licenca</translation>
+    </message>
+    <message>
+        <source>Changelog</source>
+        <translation type="vanished">Dnevnik sprememb</translation>
+    </message>
+    <message>
         <source>Cancel</source>
-        <translation>Prekliči</translation>
+        <translation type="vanished">Prekliči</translation>
     </message>
     <message>
-        <location filename="../datetime.cpp" line="636"/>
         <source>&amp;Close</source>
-        <translation>&amp;Zapri</translation>
+        <translation type="vanished">&amp;Zapri</translation>
     </message>
     <message>
-        <location filename="../datetime.cpp" line="654"/>
+        <location filename="../datetime.cpp" line="616"/>
         <source>MX Date &amp; Time Help</source>
         <translation>Pomoč za MX datum in ura</translation>
+    </message>
+</context>
+<context>
+    <name>QObject</name>
+    <message>
+        <location filename="../about.cpp" line="52"/>
+        <source>License</source>
+        <translation type="unfinished">Licenca</translation>
+    </message>
+    <message>
+        <location filename="../about.cpp" line="53"/>
+        <location filename="../about.cpp" line="62"/>
+        <source>Changelog</source>
+        <translation type="unfinished">Dnevnik sprememb</translation>
+    </message>
+    <message>
+        <location filename="../about.cpp" line="54"/>
+        <source>Cancel</source>
+        <translation type="unfinished">Prekliči</translation>
+    </message>
+    <message>
+        <location filename="../about.cpp" line="74"/>
+        <source>&amp;Close</source>
+        <translation type="unfinished">&amp;Zapri</translation>
     </message>
 </context>
 </TS>

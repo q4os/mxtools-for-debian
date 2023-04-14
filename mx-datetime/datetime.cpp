@@ -521,7 +521,7 @@ void MXDateTime::loadNetworkTime()
         confBaseNTP = conf.trimmed();
         file.close();
     }
-    if (sysInit == SystemD) enabledNTP = execute(QStringLiteral("bash -c \"timedatectl | grep NTP | grep yes\""));
+    if (sysInit == SystemD) enabledNTP = execute(QStringLiteral("bash -c \"LANG=C systemctl status ntp* |grep Loaded | grep service |cut -d';' -f2 |grep -q enabled\""));
     else enabledNTP = execute(QStringLiteral("bash -c \"ls /etc/rc*.d | grep ntp | grep '^S'"));
     checkAutoSync->setChecked(enabledNTP);
 }

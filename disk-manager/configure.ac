@@ -1,7 +1,7 @@
 dnl Process this file with autoconf to produce a configure script.
 
 AC_PREREQ([2.57])
-AC_INIT(disk-manager,[23.01.01],[https://github.com/MX-Linux/disk-manager/])
+AC_INIT(disk-manager,[21.10.21],[https://github.com/MX-Linux/disk-manager/])
 AM_INIT_AUTOMAKE()
 AM_MAINTAINER_MODE
 

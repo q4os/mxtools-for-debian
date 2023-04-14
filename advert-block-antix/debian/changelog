@@ -1,10 +1,43 @@
-advert-block-antix (0.2.31+deb11u13) stable; urgency=medium
+advert-block-antix (0.3.1+2) mx; urgency=medium
 
-  * MX Tools release
+  * fix exec line in desktop file
 
- -- anticapitalista <administrator@localdomain>  Wed, 22 Mar 2023 15:16:36 +0100
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 13 Apr 2023 06:57:39 -0400
 
-advert-block-antix (0.2.31) mx; urgency=medium
+advert-block-antix (0.3.1+1) mx; urgency=medium
+
+  * modifications for mx
+  * policy kit authentication
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 12 Apr 2023 19:39:45 -0400
+
+advert-block-antix (0.3.1) unstable; urgency=medium
+
+  * include GenericName in desktop file
+  * updated translations
+
+ -- anticapitalista <antix@operamail.com>  Mon, 09 Jan 2023 21:37:34 +0200
+
+advert-block-antix (0.3.0) unstable; urgency=medium
+
+  * updated script to use changes suggested by Lionel Zaylan - many thanks
+  * updated translations
+
+ -- anticapitalista <antix@operamail.com>  Wed, 24 Aug 2022 20:49:06 +0300
+
+advert-block-antix (0.2.33) unstable; urgency=medium
+
+  * updated desktop file
+
+ -- anticapitalista <antix@operamail.com>  Sun, 14 Aug 2022 11:40:06 +0300
+
+advert-block-antix (0.2.32) unstable; urgency=medium
+
+  * updated translations
+
+ -- anticapitalista <antix@operamail.com>  Mon, 20 Jun 2022 16:02:39 +0300
+
+advert-block-antix (0.2.31) unstable; urgency=medium
 
   * fix Turkish translation
   * fix height of dialog boxes

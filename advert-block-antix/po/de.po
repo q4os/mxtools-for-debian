@@ -1,56 +1,53 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# 
-# Translators:
+#
 # Translators:
 # alfredmale <maledora4@googlemail.com>, 2014
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2012
 # Vinzenz Vietzke <vinz@vinzv.de>, 2017
+# wahnsinn, 2022
 msgid ""
 msgstr ""
 "Project-Id-Version: antix-development\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-10-27 02:09+0300\n"
-"PO-Revision-Date: 2017-11-13 16:22+0000\n"
-"Last-Translator: Vinzenz Vietzke <vinz@vinzv.de>\n"
+"POT-Creation-Date: 2022-08-24 20:37+0300\n"
+"PO-Revision-Date: 2023-01-09 21:36+0200\n"
+"Last-Translator: wahnsinn, 2022\n"
 "Language-Team: German (http://www.transifex.com/anticapitalista/antix-development/language/de/)\n"
+"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: de\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
 
-#: block-advert.sh:24
+#: block-advert.sh:42
 #, sh-format
-msgid ""
-"The <b>$title</b> tool adds stuff to your /etc/hosts file, so \\nthat many "
-"advertising servers and websites will not be able to connect \\nto this "
-"PC.\\n\\nYou can choose one service or combine multiple services for more "
-"advert protection.\\nBlocking ad servers protects your privacy, saves you "
-"bandwidth, greatly \\nimproves web-browsing speed and makes the internet "
-"much less annoying in general.\\n\\nDo you want to proceed?"
-msgstr "Das <b>$title</b> Tool fügt Ihrer /etc/hosts Datei Inhalte hinzu, \\ndamit sich viele Werbeserver und Webseiten nicht mit diesem PC verbinden können.\\n\\nSie können einen Service wählen oder mehrere Services für besseren Schutz vor Werbung kombinieren.\\n Werbung zu blockieren schützt Ihre Privatsphäre, spart Bandbreite, verbessert stark die Surfgeschwindigkeit und macht das Internet im allgemeinen weniger nervig.\\n\\nMöchten Sie fortfahren?"
+msgid "The <b>$title</b> tool adds stuff to your /etc/hosts file, so \\nthat many advertising servers and websites can't connect to this PC.\\nYou can choose to block ads, malware, pornography, gambling, fakenews and social media\\nBlocking ad servers protects your privacy, saves you bandwidth, greatly \\nimproves web-browsing speed and makes the internet much less annoying in general.\\n\\nDo you want to proceed?"
+msgstr "The <b>$title</b> Tool fügt Daten zu Ihrer /etc/hosts-Datei hinzu, so dass viele Werbeserver und Websites keine Verbindung zu diesem PC herstellen können.\\nSie können Werbung, Malware, Pornografie, Glücksspiel, Fakenews und soziale Medien blockieren.\\nDas Blockieren von Werbeservern schützt Ihre Privatsphäre, spart Ihnen Bandbreite, verbessert die Surfgeschwindigkeit und macht das Internet im Allgemeinen viel weniger lästig.\\n\\nWollen Sie fortfahren?"
 
-#: block-advert.sh:81
+#: block-advert.sh:53
+msgid "<b> Failed </b> \\n\\n\tantiX advert blocker must be run as root or with sudo "
+msgstr "<b> Failed </b> \\n\\n\tantiX Werbeblocker muss als root oder mit sudo ausgeführt werden"
+
+#: block-advert.sh:140
 msgid "Restoring original /etc/hosts."
 msgstr "Stelle originale /etc/hosts wieder her."
 
-#: block-advert.sh:117
+#: block-advert.sh:182
 #, sh-format
-msgid "Loading  adlist from $domain"
-msgstr "Geladen ad-List von $domain"
+msgid "Loading  blocklist from $domain"
+msgstr "Blockliste von $domain laden"
 
-#: block-advert.sh:161
-msgid ""
-"Success - your settings have been changed.\\n\\nYour hosts file has been "
-"updated.\\nRestart your browser to see the changes."
+#: block-advert.sh:211
+msgid "Success - your settings have been changed.\\n\\nYour hosts file has been updated.\\nRestart your browser to see the changes."
 msgstr "Erfolg - Ihre Einstellungen wurden geändert.\\n\\nIhre Hosts-Datei wurde aktualisiert.\\nStarten Sie Ihren Browser, um die Änderungen zu sehen."
 
-#: block-advert.sh:182
-msgid "Choose your preferred ad blocking service(s)"
-msgstr "Bitte wählen Sie Ihre Werbeblocker-Dienste"
+#: block-advert.sh:232
+msgid "Choose what to block"
+msgstr "Auswählen, was blockiert werden soll"
 
-#: block-advert.sh:225
+#: block-advert.sh:305
 msgid "No item selected"
 msgstr "Kein Eintrag ausgewählt"

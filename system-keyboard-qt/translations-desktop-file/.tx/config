@@ -1,0 +1,9 @@
+[main]
+host = https://www.transifex.com
+
+[o:anticapitalista:p:antix-development:r:system-keyboard-qt-desktop]
+file_filter = po/system-keyboard-qt-desktop_<lang>.po
+source_file = system-keyboard-qt-desktop.pot
+source_lang = en
+type        = po
+

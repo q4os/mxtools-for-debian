@@ -139,6 +139,7 @@ void MainWindow::refreshAdd()
     userPasswordEdit->clear();
     userPassword2Edit->clear();
     addUserBox->setEnabled(true);
+    checkSudoGroup->setVisible(shell->run("grep -q '^EXTRA_GROUPS=.*\\<sudo\\>' /etc/adduser.conf", true));
 }
 
 void MainWindow::refreshDelete()
@@ -363,6 +364,8 @@ void MainWindow::applyAdd()
     proc.waitForFinished();
 
     if (proc.exitCode() == 0) {
+        if (!checkSudoGroup->isChecked())
+            QProcess::execute("delgroup", {userNameEdit->text(), "sudo"});
         QMessageBox::information(this, windowTitle(), tr("The user was added ok."));
         refresh();
     } else {

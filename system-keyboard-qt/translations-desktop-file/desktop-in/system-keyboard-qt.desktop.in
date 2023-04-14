@@ -1,0 +1,14 @@
+[Desktop Entry]
+Encoding=UTF-8
+# The desktop entry name will be displayed within the menu.
+Name=System Keyboard
+# # The desktop entry comment will be shown within the menu.
+Comment=Configure System Keyboard
+Exec=system-keyboard-qt-launcher
+Type=Application
+Icon=system-keyboard-qt
+Path=
+Terminal=false
+NoDisplay=false
+StartupNotify=false
+Categories=XFCE;GTK;Settings;DesktopSettings;X-XFCE-SettingsDialog;X-XFCE-HardwareSettings;MX-Setup;

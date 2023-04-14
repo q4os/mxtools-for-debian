@@ -1,8 +1,8 @@
-mx-datetime (23.2+deb11u13) stable; urgency=medium
+mx-datetime (23.4) mx; urgency=medium
 
-  * MX Tools release
+  * Adjust check for autosync ntp daemon -- fix for systemd
 
- -- Adrian <administrator@localdomain>  Wed, 22 Mar 2023 15:16:42 +0100
+ -- Adrian <adrian@mxlinux.org>  Tue, 04 Apr 2023 23:31:02 -0400
 
 mx-datetime (23.2) mx; urgency=medium
 

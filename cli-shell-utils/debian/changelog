@@ -1,9 +1,3 @@
-cli-shell-utils (0.4.2+3+deb11u13) stable; urgency=medium
-
-  * MX Tools release
-
- -- Dolphin Oracle <administrator@localdomain>  Wed, 22 Mar 2023 15:16:38 +0100
-
 cli-shell-utils (0.4.2+3) mx; urgency=medium
 
   [fehlix]

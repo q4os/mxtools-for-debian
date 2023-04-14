@@ -29,7 +29,7 @@
         <location filename="window.cpp" line="113"/>
         <location filename="window.cpp" line="117"/>
         <source>System Keyboard</source>
-        <translation type="unfinished"/>
+        <translation>Klavyeya pergalê</translation>
     </message>
     <message>
         <location filename="window.ui" line="28"/>

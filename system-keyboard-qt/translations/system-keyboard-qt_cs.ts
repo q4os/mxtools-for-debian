@@ -4,22 +4,22 @@
     <message>
         <location filename="selectlayoutdialog.ui" line="14"/>
         <source>Select Keyboard Layout and Variant</source>
-        <translation type="unfinished"/>
+        <translation>Nastavte rozložení klávesnice a další volby</translation>
     </message>
     <message>
         <location filename="selectlayoutdialog.ui" line="29"/>
         <source>Layout</source>
-        <translation type="unfinished"/>
+        <translation>Rozložení</translation>
     </message>
     <message>
         <location filename="selectlayoutdialog.ui" line="47"/>
         <source>Variants</source>
-        <translation type="unfinished"/>
+        <translation>Volby</translation>
     </message>
     <message>
         <location filename="selectlayoutdialog.cpp" line="57"/>
         <source>No Variant</source>
-        <translation type="unfinished"/>
+        <translation>Bez dodatečné volby</translation>
     </message>
 </context>
 <context>
@@ -29,17 +29,17 @@
         <location filename="window.cpp" line="113"/>
         <location filename="window.cpp" line="117"/>
         <source>System Keyboard</source>
-        <translation type="unfinished"/>
+        <translation>Systémová klávesnice</translation>
     </message>
     <message>
         <location filename="window.ui" line="28"/>
         <source>Layouts</source>
-        <translation type="unfinished"/>
+        <translation>Rozložení</translation>
     </message>
     <message>
         <location filename="window.ui" line="34"/>
         <source>Keyboard Model</source>
-        <translation type="unfinished"/>
+        <translation>Model klávesnice</translation>
     </message>
     <message>
         <location filename="window.ui" line="55"/>
@@ -49,12 +49,12 @@
     <message>
         <location filename="window.ui" line="68"/>
         <source>Keyboard Layouts</source>
-        <translation type="unfinished"/>
+        <translation>Rozložení klávesnice</translation>
     </message>
     <message>
         <location filename="window.ui" line="158"/>
         <source>Hotkeys</source>
-        <translation type="unfinished"/>
+        <translation>Hotkeys</translation>
     </message>
     <message>
         <location filename="window.ui" line="181"/>
@@ -78,17 +78,17 @@
         <location filename="window.cpp" line="204"/>
         <location filename="window.cpp" line="241"/>
         <source>Failed to open file: </source>
-        <translation type="unfinished"/>
+        <translation>Nepodařilo se otevřít:</translation>
     </message>
     <message>
         <location filename="window.cpp" line="241"/>
         <source>Most settings will not be loaded</source>
-        <translation type="unfinished"/>
+        <translation>Většina nastavení se nenačte</translation>
     </message>
     <message>
         <location filename="window.cpp" line="352"/>
         <source>Disabled</source>
-        <translation type="unfinished"/>
+        <translation>Zakázáno</translation>
     </message>
 </context>
 </TS>

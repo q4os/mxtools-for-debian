@@ -1,8 +1,31 @@
-cli-installer-mx (5.0+5mx21+deb11u13) stable; urgency=medium
+cli-installer-mx (5.3) mx; urgency=medium
 
-  * MX Tools release
+  *  set bios_grub flag on legacy btfs
+  *  inform user not to run as root
+  *  install parted if needed
+  *  exclude /mnt
 
- -- Dolphin Oracle <administrator@localdomain>  Wed, 22 Mar 2023 15:16:37 +0100
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 23 Mar 2023 19:22:30 -0400
+
+cli-installer-mx (5.2) mx; urgency=medium
+
+  * set bios_legacy flag when installing to mbr
+  * force choice of where to install grub 
+  * don't offer ESP if not booted via EFI
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 23 Mar 2023 06:48:10 -0400
+
+cli-installer-mx (5.1) mx; urgency=medium
+
+  [Adrian]
+  * update btrfs formatting
+  * only run apt-get to fetch packages if they aren't installed
+  * fix DISTR0 typos
+  * fix root setup question
+  [dolphin oracle]
+  * replace /live/aufs/dev/null with just /dev/null
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 22 Mar 2023 19:21:54 -0400
 
 cli-installer-mx (5.0+5mx21) mx; urgency=medium
 

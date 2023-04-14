@@ -1,0 +1,14 @@
+system-keyboard-qt-desktop_ca.po
+system-keyboard-qt-desktop_da.po
+system-keyboard-qt-desktop_de.po
+system-keyboard-qt-desktop_el.po
+system-keyboard-qt-desktop_es.po
+system-keyboard-qt-desktop_fr.po
+system-keyboard-qt-desktop_it.po
+system-keyboard-qt-desktop_lt.po
+system-keyboard-qt-desktop_nl.po
+system-keyboard-qt-desktop_pl.po
+system-keyboard-qt-desktop_pt.po
+system-keyboard-qt-desktop_pt_BR.po
+system-keyboard-qt-desktop_sl.po
+system-keyboard-qt-desktop_sv.po

@@ -64,14 +64,14 @@
     <message>
         <location filename="window.ui" line="209"/>
         <source>Help</source>
-        <translation type="unfinished"/>
+        <translation>說明</translation>
     </message>
     <message>
         <location filename="window.cpp" line="186"/>
         <location filename="window.cpp" line="204"/>
         <location filename="window.cpp" line="241"/>
         <source>Error</source>
-        <translation type="unfinished"/>
+        <translation>錯誤</translation>
     </message>
     <message>
         <location filename="window.cpp" line="186"/>

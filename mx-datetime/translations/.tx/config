@@ -1,7 +1,7 @@
 [main]
 host = https://www.transifex.com
 
-[antix-development.mx-datetime]
+[o:anticapitalista:p:antix-development:r:mx-datetime]
 file_filter = ./mx-datetime_<lang>.ts
 source_file = mx-datetime_en.ts
 source_lang = en

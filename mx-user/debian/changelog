@@ -1,8 +1,9 @@
-mx-user (23.2+deb11u13) stable; urgency=medium
+mx-user (23.4) mx; urgency=medium
 
-  * MX Tools release
+  * Add a checkbox to add/remove new user from sudo group
+  * Update translations
 
- -- fehlix <administrator@localdomain>  Wed, 22 Mar 2023 15:16:46 +0100
+ -- Adrian <adrian@mxlinux.org>  Thu, 13 Apr 2023 13:06:44 -0400
 
 mx-user (23.2) mx; urgency=medium
 

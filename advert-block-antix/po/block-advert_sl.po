@@ -1,0 +1,62 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Translators:
+# Arnold Marko <arnold.marko@gmail.com>, 2019,2022
+msgid ""
+msgstr ""
+"Project-Id-Version: antix-development\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-08-24 20:37+0300\n"
+"PO-Revision-Date: 2022-08-29 19:36+0300\n"
+"Last-Translator: Arnold Marko <arnold.marko@gmail.com>, 2019,2022\n"
+"Language-Team: Slovenian (http://www.transifex.com/anticapitalista/antix-development/language/sl/)\n"
+"Language: sl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3);\n"
+"X-Generator: Poedit 3.0.1\n"
+
+#: block-advert.sh:42
+#, sh-format
+msgid "The <b>$title</b> tool adds stuff to your /etc/hosts file, so \\nthat many advertising servers and websites can't connect to this PC.\\nYou can choose to block ads, malware, pornography, gambling, fakenews and social media\\nBlocking ad servers protects your privacy, saves you bandwidth, greatly \\nimproves web-browsing speed and makes the internet much less annoying in general.\\n\\nDo you want to proceed?"
+msgstr ""
+"Orodje <b>$title</b> doda v vašo /etc/hosts datoteko elemente,\n"
+"ki mnogim oglaševalskim strežnikom in spletnim stranem onemogočajo\n"
+"povezovanje s tem računalnikom.\n"
+"\n"
+"Lahko izberete blokiranje oglasov, škodljive kode, pornografije, iger na srečo, lažnih novic in družabnih omrežji.\\nBlokiranje oglaševalskih strežnikov sčiti vašo zasebnost, manjša pretok podatkov,\n"
+"zelo poveča hitrost brskanja in naredi splet veliko manj zoprn.\n"
+"\n"
+"Ali želite nadaljevati?"
+
+#: block-advert.sh:53
+msgid "<b> Failed </b> \\n\\n\tantiX advert blocker must be run as root or with sudo "
+msgstr "<b> Napaka </b> \\n\\n\tantiX blokada oglasov motra biti zagnana kot root ali preko sudo"
+
+#: block-advert.sh:140
+msgid "Restoring original /etc/hosts."
+msgstr "Obnova originalnega /etc/hosts."
+
+#: block-advert.sh:182
+#, sh-format
+msgid "Loading  blocklist from $domain"
+msgstr "Nalaganje seznama blokiranih z $domain"
+
+#: block-advert.sh:211
+msgid "Success - your settings have been changed.\\n\\nYour hosts file has been updated.\\nRestart your browser to see the changes."
+msgstr ""
+"Sprememba nastavitev je uspela.\n"
+"\n"
+"Vaše gostiteljska datoteka je bila posodobljena.\n"
+"Ponovno zaženite spletni brskalnik, da bodo spremembe vidne."
+
+#: block-advert.sh:232
+msgid "Choose what to block"
+msgstr "Izberite kaj naj se blokira"
+
+#: block-advert.sh:305
+msgid "No item selected"
+msgstr "Nič ni izbrano"

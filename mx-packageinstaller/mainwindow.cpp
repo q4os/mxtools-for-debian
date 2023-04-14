@@ -2389,7 +2389,11 @@ void MainWindow::on_tabWidget_currentChanged(int index)
         setCurrentTree();
         change_list.clear();
         if (tree->topLevelItemCount() == 0 || dirtyEnabledRepos)
-            buildPackageLists();
+            if (!buildPackageLists()) {
+                QMessageBox::critical(this, tr("Error"),
+                                      tr("Could not download the list of packages. Please check your APT sources."));
+                return;
+            }
         ui->comboFilterEnabled->setCurrentIndex(filter_idx);
         if (!ui->searchBoxEnabled->text().isEmpty())
             findPackageOther();
@@ -2402,7 +2406,11 @@ void MainWindow::on_tabWidget_currentChanged(int index)
         displayWarning(QStringLiteral("test"));
         change_list.clear();
         if (tree->topLevelItemCount() == 0 || dirtyTest)
-            buildPackageLists();
+            if (!buildPackageLists()) {
+                QMessageBox::critical(this, tr("Error"),
+                                      tr("Could not download the list of packages. Please check your APT sources."));
+                return;
+            }
         ui->comboFilterMX->setCurrentIndex(filter_idx);
         if (!ui->searchBoxMX->text().isEmpty())
             findPackageOther();
@@ -2415,7 +2423,11 @@ void MainWindow::on_tabWidget_currentChanged(int index)
         displayWarning(QStringLiteral("backports"));
         change_list.clear();
         if (tree->topLevelItemCount() == 0 || dirtyBackports)
-            buildPackageLists();
+            if (!buildPackageLists()) {
+                QMessageBox::critical(this, tr("Error"),
+                                      tr("Could not download the list of packages. Please check your APT sources."));
+                return;
+            }
         ui->comboFilterBP->setCurrentIndex(filter_idx);
         if (!ui->searchBoxBP->text().isEmpty())
             findPackageOther();

@@ -1,7 +1,7 @@
 [main]
 host = https://www.transifex.com
 
-[antix-development.mx-datetime-desktop]
+[o:anticapitalista:p:antix-development:r:mx-datetime-desktop]
 file_filter = po/mx-datetime-desktop_<lang>.po
 source_file = mx-datetime-desktop.pot
 source_lang = en
