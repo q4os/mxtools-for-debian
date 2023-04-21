@@ -11,7 +11,7 @@
     <message>
         <location filename="../mainwindow.ui" line="46"/>
         <source>Quit application</source>
-        <translation>Quitter l&apos;application</translation>
+        <translation>Quitter l’application</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="49"/>
@@ -26,7 +26,7 @@
     <message>
         <location filename="../mainwindow.ui" line="88"/>
         <source>Display help </source>
-        <translation>Afficher l&apos;aide </translation>
+        <translation>Afficher l’aide </translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="91"/>
@@ -93,7 +93,7 @@
     <message>
         <location filename="../mainwindow.ui" line="327"/>
         <source>Make the ext4 filesystem even if one exists</source>
-        <translation>Créer le système de fichiers ext4 même s&apos;il en existe déjà un</translation>
+        <translation>Créer le système de fichiers ext4 même s’il en existe déjà un</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="334"/>
@@ -143,7 +143,7 @@
     <message>
         <location filename="../mainwindow.ui" line="392"/>
         <source>Don&apos;t use fuseiso to mount iso files</source>
-        <translation>N&apos;utilisez pas fuseiso pour monter des images iso</translation>
+        <translation>N’utilisez pas fuseiso pour monter des images iso</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="418"/>
@@ -249,7 +249,7 @@
     <message>
         <location filename="../mainwindow.ui" line="760"/>
         <source>clone from a mounted live-usb or iso-file.</source>
-        <translation>Cloner à partir d&apos;un usb-live monté ou d&apos;un fichier iso.</translation>
+        <translation>Cloner à partir d’un usb-live monté ou d’un fichier iso.</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="763"/>
@@ -298,7 +298,7 @@
         <source>Writing %1 using &apos;dd&apos; command to /dev/%2,
 
 Please wait until the the process is completed</source>
-        <translation>Ecriture de %1 à l&apos;aide de &apos;dd&apos; vers /dev/%2,
+        <translation>Ecriture de %1 à l’aide de la commande « dd » vers /dev/%2,
 
 Veuillez attendre la fin du processus</translation>
     </message>
@@ -354,7 +354,7 @@ Veuillez attendre la fin du processus</translation>
     <message>
         <location filename="../mainwindow.cpp" line="407"/>
         <source>Program for creating a live-usb from an iso-file, another live-usb, a live-cd/dvd, or a running live system.</source>
-        <translation>Programme de création d&apos;un live-usb à partir d&apos;un fichier ISO, d&apos;un autre live-usb, d&apos;un live-cd/dvd ou d&apos;un système live en fonctionnement.</translation>
+        <translation>Programme de création d’un live-usb à partir d’un fichier ISO, d’un autre live-usb, d’un live-cd/dvd ou d’un système live en fonctionnement.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="410"/>
@@ -446,7 +446,7 @@ Veuillez attendre la fin du processus</translation>
     <message>
         <location filename="../main.cpp" line="57"/>
         <source>Program for creating a live-usb from an iso-file, another live-usb, a live-cd/dvd, or a running live system.</source>
-        <translation>Programme de création d&apos;un live-usb à partir d&apos;un fichier ISO, d&apos;un autre live-usb, d&apos;un live-cd/dvd ou d&apos;un système live en fonctionnement.</translation>
+        <translation>Programme de création d’un live-usb à partir d’un fichier ISO, d’un autre live-usb, d’un live-cd/dvd ou d’un système live en fonctionnement.</translation>
     </message>
     <message>
         <location filename="../main.cpp" line="61"/>
@@ -471,7 +471,7 @@ Veuillez attendre la fin du processus</translation>
     <message>
         <location filename="../main.cpp" line="85"/>
         <source>You seem to be logged in as root, please log out and log in as normal user to use this program.</source>
-        <translation>Vous semblez être connecté en tant que root, veuillez vous déconnecter et vous connecter en tant qu&apos;utilisateur normal pour utiliser ce programme.</translation>
+        <translation>Vous semblez être connecté en tant qu’administrateur, veuillez vous déconnecter et vous connecter en tant qu’utilisateur normal pour utiliser ce programme.</translation>
     </message>
     <message>
         <location filename="../main.cpp" line="99"/>

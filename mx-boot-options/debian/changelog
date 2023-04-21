@@ -1,3 +1,10 @@
+mx-boot-options (23.4) mx; urgency=medium
+
+  * Update icon
+  * Uptate translations
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 13 Apr 2023 22:42:32 -0400
+
 mx-boot-options (23.2.01) mx; urgency=medium
 
   * Change ownership of the rc file created by KDE/Plasma

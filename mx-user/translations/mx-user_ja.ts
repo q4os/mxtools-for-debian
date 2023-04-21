@@ -24,6 +24,16 @@
         <translation>ユーザーアカウントの追加</translation>
     </message>
     <message>
+        <location filename="../mainwindow.ui" line="132"/>
+        <source>Enter password for new user</source>
+        <translation>新規ユーザーのパスワードを入れて下さい</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="141"/>
+        <source>password</source>
+        <translation>パスワード</translation>
+    </message>
+    <message>
         <location filename="../mainwindow.ui" line="173"/>
         <source>Reenter password for new user</source>
         <translation>新規ユーザーパスワードを再入力</translation>
@@ -62,28 +72,18 @@
         <translation>新規ユーザーのパスワード</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="261"/>
-        <source>User password:</source>
-        <translation>ユーザーパスワード:</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="132"/>
-        <source>Enter password for new user</source>
-        <translation>新規ユーザーのパスワードを入れて下さい</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="141"/>
-        <source>password</source>
-        <translation>パスワード</translation>
-    </message>
-    <message>
         <location filename="../mainwindow.ui" line="242"/>
         <source>Confirm user password:</source>
         <translation>ユーザーパスワードの確認:</translation>
     </message>
     <message>
+        <location filename="../mainwindow.ui" line="261"/>
+        <source>User password:</source>
+        <translation>ユーザーパスワード:</translation>
+    </message>
+    <message>
         <location filename="../mainwindow.ui" line="271"/>
-        <source>Include user in sudo group</source>
+        <source>Grant this user administrative rights to the system (sudo)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

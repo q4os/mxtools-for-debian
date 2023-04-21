@@ -24,6 +24,16 @@
         <translation>Kullanıcı Hesabı Ekle</translation>
     </message>
     <message>
+        <location filename="../mainwindow.ui" line="132"/>
+        <source>Enter password for new user</source>
+        <translation>Yeni kullanıcı için parola girişi</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="141"/>
+        <source>password</source>
+        <translation>parola</translation>
+    </message>
+    <message>
         <location filename="../mainwindow.ui" line="173"/>
         <source>Reenter password for new user</source>
         <translation>Yeni kullanıcı için parolayı tekrar girin</translation>
@@ -62,28 +72,18 @@
         <translation>Yeni kullanıcı için parola </translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="261"/>
-        <source>User password:</source>
-        <translation>Kullanıcı parolası:</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="132"/>
-        <source>Enter password for new user</source>
-        <translation>Yeni kullanıcı için parola girişi</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="141"/>
-        <source>password</source>
-        <translation>parola</translation>
-    </message>
-    <message>
         <location filename="../mainwindow.ui" line="242"/>
         <source>Confirm user password:</source>
         <translation>Kullanıcı parolasını onayla:</translation>
     </message>
     <message>
+        <location filename="../mainwindow.ui" line="261"/>
+        <source>User password:</source>
+        <translation>Kullanıcı parolası:</translation>
+    </message>
+    <message>
         <location filename="../mainwindow.ui" line="271"/>
-        <source>Include user in sudo group</source>
+        <source>Grant this user administrative rights to the system (sudo)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

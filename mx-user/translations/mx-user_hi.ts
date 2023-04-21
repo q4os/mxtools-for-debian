@@ -24,6 +24,16 @@
         <translation>नया उपयोक्ता अकाउंट जोड़ें</translation>
     </message>
     <message>
+        <location filename="../mainwindow.ui" line="132"/>
+        <source>Enter password for new user</source>
+        <translation>नए उपयोक्ता हेतु कूटशब्द दर्ज करें</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="141"/>
+        <source>password</source>
+        <translation>कूटशब्द</translation>
+    </message>
+    <message>
         <location filename="../mainwindow.ui" line="173"/>
         <source>Reenter password for new user</source>
         <translation>नए उपयोक्ता हेतु कूटशब्द पुनः दर्ज करें</translation>
@@ -62,28 +72,18 @@
         <translation>नए उपयोक्ता हेतु कूटशब्द</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="261"/>
-        <source>User password:</source>
-        <translation>उपयोक्ता कूटशब्द :</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="132"/>
-        <source>Enter password for new user</source>
-        <translation>नए उपयोक्ता हेतु कूटशब्द दर्ज करें</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="141"/>
-        <source>password</source>
-        <translation>कूटशब्द</translation>
-    </message>
-    <message>
         <location filename="../mainwindow.ui" line="242"/>
         <source>Confirm user password:</source>
         <translation>उपयोक्ता कूटशब्द पुष्टिकरण :</translation>
     </message>
     <message>
+        <location filename="../mainwindow.ui" line="261"/>
+        <source>User password:</source>
+        <translation>उपयोक्ता कूटशब्द :</translation>
+    </message>
+    <message>
         <location filename="../mainwindow.ui" line="271"/>
-        <source>Include user in sudo group</source>
+        <source>Grant this user administrative rights to the system (sudo)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

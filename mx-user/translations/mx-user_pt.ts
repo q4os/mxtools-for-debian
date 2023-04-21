@@ -24,6 +24,16 @@
         <translation>Adicionar conta de utilizador</translation>
     </message>
     <message>
+        <location filename="../mainwindow.ui" line="132"/>
+        <source>Enter password for new user</source>
+        <translation>Introduzir a senha para o novo utilizador</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="141"/>
+        <source>password</source>
+        <translation>senha</translation>
+    </message>
+    <message>
         <location filename="../mainwindow.ui" line="173"/>
         <source>Reenter password for new user</source>
         <translation>Reintroduzir a senha para o novo utilizador</translation>
@@ -62,28 +72,18 @@
         <translation>Senha para o novo utilizador</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="261"/>
-        <source>User password:</source>
-        <translation>Senha de utilizador:</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="132"/>
-        <source>Enter password for new user</source>
-        <translation>Introduzir a senha para o novo utilizador</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="141"/>
-        <source>password</source>
-        <translation>senha</translation>
-    </message>
-    <message>
         <location filename="../mainwindow.ui" line="242"/>
         <source>Confirm user password:</source>
         <translation>Confirmar a senha do utilizador:</translation>
     </message>
     <message>
+        <location filename="../mainwindow.ui" line="261"/>
+        <source>User password:</source>
+        <translation>Senha de utilizador:</translation>
+    </message>
+    <message>
         <location filename="../mainwindow.ui" line="271"/>
-        <source>Include user in sudo group</source>
+        <source>Grant this user administrative rights to the system (sudo)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

@@ -352,7 +352,7 @@ sistema, ki ga želite spreminjati (prikazani so le Linux razdelki)</translation
     <message>
         <location filename="../mainwindow.cpp" line="883"/>
         <source>Program for selecting common start-up choices</source>
-        <translation>Program za določitev občajnih izbir ob zagonu</translation>
+        <translation>Program za določitev izbora pri običajnem zagonu</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="885"/>

@@ -46,7 +46,7 @@ sistema que você deseja modificar (apenas as  partições GNU/Linux são exibid
     <message>
         <location filename="../mainwindow.ui" line="78"/>
         <source>Set to &apos;0&apos; to boot immediately without displaying the menu, or to &apos;-1&apos; to wait indefinitely</source>
-        <translation>Ajuste para &quot;0&quot; para iniciar imediatamente sem exibir o menu, ou, para &quot;-1&quot; para aguardar indefinidamente</translation>
+        <translation>Ajuste para ‘0’ para iniciar imediatamente sem exibir o menu, ou, para ‘-1’ para aguardar indefinidamente</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="81"/>

@@ -1,0 +1,8 @@
+[main]
+host = https://www.transifex.com
+
+[o:anticapitalista:p:antix-development:r:adrian]
+file_filter = ./adrian_<lang>.ts
+source_file = adrian_en.ts
+source_lang = en
+type = ts

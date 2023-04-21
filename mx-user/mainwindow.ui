@@ -265,10 +265,10 @@
             </property>
            </widget>
           </item>
-          <item row="3" column="1">
+          <item row="3" column="1" colspan="2">
            <widget class="QCheckBox" name="checkSudoGroup">
             <property name="text">
-             <string>Include user in sudo group</string>
+             <string>Grant this user administrative rights to the system (sudo)</string>
             </property>
             <property name="checked">
              <bool>true</bool>
@@ -1718,6 +1718,7 @@
   <tabstop>userNameEdit</tabstop>
   <tabstop>userPasswordEdit</tabstop>
   <tabstop>userPassword2Edit</tabstop>
+  <tabstop>checkSudoGroup</tabstop>
   <tabstop>comboChangePass</tabstop>
   <tabstop>lineEditChangePass</tabstop>
   <tabstop>lineEditChangePassConf</tabstop>
@@ -1744,6 +1745,8 @@
   <tabstop>sharedRadioButton</tabstop>
   <tabstop>syncStatusEdit</tabstop>
   <tabstop>groupNameEdit</tabstop>
+  <tabstop>checkGroupUserLevel</tabstop>
+  <tabstop>listGroupsToRemove</tabstop>
   <tabstop>userComboMembership</tabstop>
   <tabstop>listGroups</tabstop>
  </tabstops>

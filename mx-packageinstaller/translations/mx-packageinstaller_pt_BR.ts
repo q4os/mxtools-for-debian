@@ -40,7 +40,7 @@
     <message>
         <location filename="../mainwindow.ui" line="101"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:16pt;&quot;&gt;Manage popular packages&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:16pt;&quot;&gt;Instalador e Desinstalador de Programas Aplicativos do MX Linux&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Este programa é um gerenciador de pacotes do antiX Linux, o nome original em inglês é &apos;&lt;b&gt;MX Package Installer&lt;/b&gt;&apos;. &lt;br&gt;Os itens sombreados indicam que os programas aplicativos já estão instalados.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:16pt;&quot;&gt;Instalador e Desinstalador de Programas Aplicativos do MX Linux&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Este programa é um gerenciador de pacotes do antiX Linux, o nome original em inglês é ‘&lt;b&gt;MX Package Installer&lt;/b&gt;’. &lt;br&gt;Os itens sombreados indicam que os programas aplicativos já estão instalados.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="120"/>
@@ -95,7 +95,7 @@
         <location filename="../mainwindow.ui" line="615"/>
         <location filename="../mainwindow.ui" line="947"/>
         <source>Also Install &quot;Recommended&quot; Packages</source>
-        <translation>Instalar também os pacotes &quot;recomendados&quot;</translation>
+        <translation>Instalar também os pacotes “recomendados”</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="322"/>
@@ -285,7 +285,7 @@
     <message>
         <location filename="../mainwindow.ui" line="1459"/>
         <source>Short Name</source>
-        <translation>Nome</translation>
+        <translation>Nome Resumido</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1464"/>
@@ -386,7 +386,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="91"/>
         <source>Flatpak tab is disabled on 32-bit.</source>
-        <translation>A aba ou guia &quot;Flatpak&quot; está desativada para 32 bits.</translation>
+        <translation>A aba ou guia “Flatpak” está desativada para 32 bits.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="184"/>
@@ -486,12 +486,12 @@
     <message>
         <location filename="../mainwindow.cpp" line="952"/>
         <source>You are about to use Debian Backports, which contains packages taken from the next Debian release (called &apos;testing&apos;), adjusted and recompiled for usage on Debian stable. They cannot be tested as extensively as in the stable releases of Debian and MX Linux, and are provided on an as-is basis, with risk of incompatibilities with other components in Debian stable. Use with care!</source>
-        <translation>Você está prestes a utilizar o repositório do &apos;Backports&apos; do Debian (atualizações retroportadas), que contém pacotes retirados do próximo lançamento do Debian (chamado de &apos;teste&apos;/&apos;testing&apos;), adaptados e recompilados para o uso na versão atual do Debian &apos;estável&apos;/&apos;stable&apos;. Esses pacotes não foram testados tão extensivamente como os das versões estáveis do Debian e do MX Linux, são fornecidos no estado em que se encontram ou &apos;como estão&apos;, com o risco de incompatibilidade com outros componentes do Debian estável. Utilize com muito cuidado!</translation>
+        <translation>Você está prestes a utilizar o repositório do ‘Backports’ do Debian (atualizações retroportadas), que contém pacotes retirados do próximo lançamento do Debian (chamado de ‘teste’/‘testing’), adaptados e recompilados para o uso na versão atual do Debian ‘estável’/‘stable’. Estes pacotes não foram testados tão extensivamente como os das versões estáveis do Debian e do MX Linux, são fornecidos no estado em que se encontram ou ‘como estão’, com o risco de incompatibilidade com outros componentes do Debian estável. Por tanto, utilize com muito cuidado!</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="960"/>
         <source>MX Linux includes this repository of flatpaks for the users&apos; convenience only, and is not responsible for the functionality of the individual flatpaks themselves. For more, consult flatpaks in the Wiki.</source>
-        <translation>O MX Linux inclui este repositório de pacotes flatpaks, apenas para conveniência dos usuários, não é responsável pelo funcionamento dos próprios pacotes flatpaks. Para obter mais informações, consulte &apos;flatpaks&apos; no Wiki.</translation>
+        <translation>O MX Linux inclui este repositório de pacotes flatpaks, apenas para conveniência dos usuários, não é responsável pelo funcionamento dos próprios pacotes flatpaks. Para obter mais informações, consulte ‘flatpaks’ no Wiki.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="967"/>
@@ -666,7 +666,7 @@
         <location filename="../mainwindow.cpp" line="2382"/>
         <location filename="../mainwindow.cpp" line="2399"/>
         <source>Could not download the list of packages. Please check your APT sources.</source>
-        <translation type="unfinished"></translation>
+        <translation>Não foi possível baixar a lista de pacotes atualizada. Por favor, verifique as suas fontes do APT na pasta /etc/apt/sources.list.d.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="2415"/>
@@ -801,7 +801,7 @@ Por favor, certifique-se de verificar cuidadosamente a lista de pacotes a ser re
     <message>
         <location filename="../remotes.cpp" line="76"/>
         <source>Flathub is the main Flatpak remote and won&apos;t be removed</source>
-        <translation>O Flathub é o repositório principal dos Flatpak&apos;s e não pode ser removido</translation>
+        <translation>O Flathub é o repositório principal dos Flatpak’s e não pode ser removido</translation>
     </message>
     <message>
         <location filename="../remotes.cpp" line="96"/>
@@ -854,10 +854,10 @@ Por favor, certifique-se de verificar cuidadosamente a lista de pacotes a ser re
     - installs programs from the MX Test repo
     - installs programs from Debian Backports repo
     - installs flatpaks</source>
-        <translation>O Instalador e Desinstalador de Programas do MX, o nome original em inglês é &apos;MX Package Installer&apos;, é um programa gerenciador de pacotes utilizado no MX Linux
+        <translation>O Instalador e Desinstalador de Programas do MX, o nome original em inglês é ‘MX Package Installer’, é um programa gerenciador de pacotes utilizado no MX Linux
     - instala programas aplicativos de diferentes fontes
     - instala programas aplicativos do repositório de teste MX
-    - instala programas aplicativos do repositório  retroportado do Debian (Backports)
+    - instala programas aplicativos do repositório retroportado do Debian (Backports)
     - instala programas aplicativos com o formato Flatpaks</translation>
     </message>
     <message>

@@ -95,7 +95,7 @@
         <location filename="../mainwindow.ui" line="615"/>
         <location filename="../mainwindow.ui" line="947"/>
         <source>Also Install &quot;Recommended&quot; Packages</source>
-        <translation>Installez également les paquets &quot;recommandés&quot;</translation>
+        <translation>Installez également les paquets « recommandés »</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="322"/>
@@ -211,7 +211,7 @@
     <message>
         <location filename="../mainwindow.ui" line="1157"/>
         <source>For current user</source>
-        <translation>Pour l&apos;utilisateur actuel</translation>
+        <translation>Pour l’utilisateur actuel</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1165"/>
@@ -229,7 +229,7 @@
         <location filename="../mainwindow.ui" line="1209"/>
         <location filename="../mainwindow.cpp" line="2512"/>
         <source>All runtimes</source>
-        <translation>Tous les environnements d&apos;exécution (runtimes)</translation>
+        <translation>Tous les environnements d’exécution (runtimes)</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1214"/>
@@ -247,7 +247,7 @@
         <location filename="../mainwindow.ui" line="1224"/>
         <location filename="../mainwindow.cpp" line="2504"/>
         <source>Installed runtimes</source>
-        <translation>Environnements d&apos;exécution (runtimes) installés</translation>
+        <translation>Environnements d’exécution (runtimes) installés</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1229"/>
@@ -260,7 +260,7 @@
     <message>
         <location filename="../mainwindow.ui" line="1316"/>
         <source>Total items </source>
-        <translation>Nombre d&apos;objets total</translation>
+        <translation>Nombre de paquets au total</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1330"/>
@@ -280,7 +280,7 @@
     <message>
         <location filename="../mainwindow.ui" line="1427"/>
         <source>Remove unused runtimes</source>
-        <translation>Suppression des runtimes (environnements d&apos;exécution) inutilisés</translation>
+        <translation>Suppression des runtimes (environnements d’exécution) inutilisés</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1459"/>
@@ -331,7 +331,7 @@
     <message>
         <location filename="../mainwindow.ui" line="1603"/>
         <source>Quit application</source>
-        <translation>Quitter l&apos;application</translation>
+        <translation>Quitter l’application</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1606"/>
@@ -361,7 +361,7 @@
     <message>
         <location filename="../mainwindow.ui" line="1693"/>
         <source>Display help </source>
-        <translation>Afficher l&apos;aide </translation>
+        <translation>Afficher l’aide </translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1696"/>
@@ -386,7 +386,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="91"/>
         <source>Flatpak tab is disabled on 32-bit.</source>
-        <translation>L&apos;onglet Flatpak est désactivé en 32 bits.</translation>
+        <translation>L’onglet Flatpak est désactivé en 32 bits.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="184"/>
@@ -433,7 +433,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="233"/>
         <source>There was a problem updating sources. Some sources may not have provided updates. For more info check: </source>
-        <translation>Un problème a été rencontré lors de la mise à jour des sources. Certaines sources n&apos;ont pas pu fournir de mises à jour. Pour plus d&apos;informations, consultez : </translation>
+        <translation>Un problème a été rencontré lors de la mise à jour des sources. Certaines sources n’ont pas pu fournir de mises à jour. Pour plus d’informations, consultez : </translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="625"/>
@@ -481,17 +481,17 @@
     <message>
         <location filename="../mainwindow.cpp" line="943"/>
         <source>You are about to use the MX Test repository, whose packages are provided for testing purposes only. It is possible that they might break your system, so it is suggested that you back up your system and install or update only one package at a time. Please provide feedback in the Forum so the package can be evaluated before moving up to Main.</source>
-        <translation>Vous allez utiliser le dépôt de test MX dont les paquets sont fournis uniquement à des fins de test. Ils peuvent potentiellement casser votre système, aussi nous vous suggérons d&apos;en faire une copie de sauvegarde et d&apos;installer ou de mettre à jour un seul paquet à la fois. N&apos;hésitez pas à nous faire un retour via le forum afin que les paquets soient évalués avant d&apos;être transférés dans les dépôts principaux.</translation>
+        <translation>Vous allez utiliser le dépôt de test MX dont les paquets sont fournis uniquement à des fins de test. Ils peuvent potentiellement casser votre système, aussi nous vous suggérons d’en faire une copie de sauvegarde et d’installer ou de mettre à jour un seul paquet à la fois. N’hésitez pas à nous faire un retour via le forum afin que les paquets soient évalués avant d’être transférés dans les dépôts principaux.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="952"/>
         <source>You are about to use Debian Backports, which contains packages taken from the next Debian release (called &apos;testing&apos;), adjusted and recompiled for usage on Debian stable. They cannot be tested as extensively as in the stable releases of Debian and MX Linux, and are provided on an as-is basis, with risk of incompatibilities with other components in Debian stable. Use with care!</source>
-        <translation>Vous êtes sur le point d&apos;utiliser le dépôt de rétroportage (Backports) de Debian. Il contient des paquets provenant de la prochaine version de Debian (appelée &apos;testing&apos;) qui ont été modifiés et recompilés pour être utilisés dans Debian &apos;stable&apos;. Par conséquent, ils n&apos;ont pas pu faire l&apos;objet de tests aussi poussés que pour les versions stables de Debian et de MX Linux et peuvent présenter des incompatibilités avec d&apos;autres composants de Debian &apos;stable&apos;. À utiliser avec précaution !</translation>
+        <translation>Vous êtes sur le point d’utiliser le dépôt de rétroportage (Backports) de Debian. Il contient des paquets provenant de la prochaine version de Debian (appelée « testing ») qui ont été modifiés et recompilés pour être utilisés dans Debian « stable ». Par conséquent, ils n’ont pas pu faire l’objet de tests aussi poussés que pour les versions stables de Debian et de MX Linux et peuvent présenter des incompatibilités avec d’autres composants de Debian « stable ». À utiliser avec précaution !</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="960"/>
         <source>MX Linux includes this repository of flatpaks for the users&apos; convenience only, and is not responsible for the functionality of the individual flatpaks themselves. For more, consult flatpaks in the Wiki.</source>
-        <translation>MX Linux inclut ce dépôt de flatpaks par commodité pour les utilisateurs, mais n&apos;est pas responsable de leur bon fonctionnement. Pour plus d&apos;informations, consultez flatpaks dans le Wiki.</translation>
+        <translation>MX Linux inclut ce dépôt de flatpaks par commodité pour les utilisateurs, mais n’est pas responsable de leur bon fonctionnement. Pour plus d’informations, consultez flatpaks dans le Wiki.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="967"/>
@@ -549,7 +549,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="1393"/>
         <source>There was an error writing file: %1. Please check if you have enough free space on your drive</source>
-        <translation>Il y a eu une erreur dans l&apos;écriture du fichier : %1. Veuillez vérifier si vous avez suffisamment d&apos;espace libre sur votre disque dur</translation>
+        <translation>Il y a eu une erreur dans l’écriture du fichier : %1. Veuillez vérifier si vous avez suffisamment d’espace libre sur votre disque dur</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1463"/>
@@ -612,7 +612,7 @@
         <location filename="../mainwindow.cpp" line="2796"/>
         <location filename="../mainwindow.cpp" line="2826"/>
         <source>Problem detected while installing, please inspect the console output.</source>
-        <translation>Un problème a été détecté pendant l&apos;installation, veuillez examiner les données de sortie de la console.</translation>
+        <translation>Un problème a été détecté pendant l’installation, veuillez examiner les données de sortie de la console.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="2185"/>
@@ -653,7 +653,7 @@
         <location filename="../mainwindow.cpp" line="2301"/>
         <location filename="../mainwindow.cpp" line="2936"/>
         <source>Success</source>
-        <translation>Réussite de l&apos;installation</translation>
+        <translation>Installation réussie</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="2307"/>
@@ -666,25 +666,25 @@
         <location filename="../mainwindow.cpp" line="2382"/>
         <location filename="../mainwindow.cpp" line="2399"/>
         <source>Could not download the list of packages. Please check your APT sources.</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossible de télécharger la liste des paquets. Veuillez vérifier vos sources APT.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="2415"/>
         <location filename="../mainwindow.cpp" line="2427"/>
         <source>Flatpak not installed</source>
-        <translation>Flatpak n&apos;est pas installé</translation>
+        <translation>Flatpak n’est pas installé</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="2416"/>
         <source>Flatpak is not currently installed.
 OK to go ahead and install it?</source>
-        <translation>Flatpak n&apos;est pas installé actuellement.
-OK pour continuer et l&apos;installer ?</translation>
+        <translation>Flatpak n’est pas installé actuellement.
+Voulez-vous l’installer ?</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="2427"/>
         <source>Flatpak was not installed</source>
-        <translation>Flatpak n&apos;a pas été installé</translation>
+        <translation>Flatpak n’a pas été installé</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="2451"/>
@@ -696,7 +696,7 @@ OK pour continuer et l&apos;installer ?</translation>
         <location filename="../mainwindow.cpp" line="2451"/>
         <location filename="../mainwindow.cpp" line="2473"/>
         <source>Flathub remote could not be added</source>
-        <translation>Le dépôt à distance Flathub n&apos;a pas pu être ajouté.</translation>
+        <translation>Le dépôt à distance Flathub n’a pas pu être ajouté.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="2459"/>
@@ -706,7 +706,7 @@ OK pour continuer et l&apos;installer ?</translation>
     <message>
         <location filename="../mainwindow.cpp" line="2460"/>
         <source>You might need to logout/login to see installed items in the menu</source>
-        <translation>Vous pourriez devoir vous déconnecter/reconnecter pour voir les objets installés dans le menu</translation>
+        <translation>Vous pourriez devoir vous déconnecter/reconnecter pour voir les paquets installés dans le menu</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="2636"/>
@@ -721,7 +721,7 @@ OK pour continuer et l&apos;installer ?</translation>
     <message>
         <location filename="../mainwindow.cpp" line="2749"/>
         <source>Process still running, quitting might leave the system in an unstable state.&lt;p&gt;&lt;b&gt;Are you sure you want to exit MX Package Installer?&lt;/b&gt;</source>
-        <translation>Processus toujours en cours, quitter maintenant pourrait laisser le système en état d&apos;instabilité .&lt;p&gt;&lt;b&gt;Êtes-vous sûr de vouloir quitter l&apos;installateur de paquets MX ?&lt;/b&gt;</translation>
+        <translation>Processus toujours en cours, quitter maintenant pourrait laisser le système en état d’instabilité .&lt;p&gt;&lt;b&gt;Êtes-vous sûr de vouloir quitter l’installateur de paquets MX ?&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="2893"/>
@@ -756,22 +756,22 @@ Veillez à bien vérifier la liste des paquets à supprimer.</translation>
     <message>
         <location filename="../remotes.cpp" line="23"/>
         <source>For current user</source>
-        <translation>Pour l&apos;utilisateur actuel</translation>
+        <translation>Pour l’utilisateur actuel</translation>
     </message>
     <message>
         <location filename="../remotes.cpp" line="29"/>
         <source>enter Flatpak remote URL</source>
-        <translation>Entrez l&apos;URL du dépôt à distance Flatpak</translation>
+        <translation>Entrez l’URL du dépôt à distance Flatpak</translation>
     </message>
     <message>
         <location filename="../remotes.cpp" line="32"/>
         <source>enter Flatpakref location to install app</source>
-        <translation>Entrez l&apos;emplacement Flatpakref pour installer l&apos;application</translation>
+        <translation>Entrez l’emplacement Flatpakref pour installer l’application</translation>
     </message>
     <message>
         <location filename="../remotes.cpp" line="34"/>
         <source>Add or remove flatpak remotes (repos), or install apps using flatpakref URL or path</source>
-        <translation>Ajouter ou supprimer dépôts à distance flatpak (dépôts), ou installer des applications via l&apos;URL ou le chemin flatpakref</translation>
+        <translation>Ajouter ou supprimer dépôts à distance flatpak (dépôts), ou installer des applications via l’URL ou le chemin flatpakref</translation>
     </message>
     <message>
         <location filename="../remotes.cpp" line="43"/>
@@ -786,7 +786,7 @@ Veillez à bien vérifier la liste des paquets à supprimer.</translation>
     <message>
         <location filename="../remotes.cpp" line="53"/>
         <source>Install app</source>
-        <translation>Installer l&apos;application</translation>
+        <translation>Installer l’application</translation>
     </message>
     <message>
         <location filename="../remotes.cpp" line="58"/>
@@ -806,17 +806,17 @@ Veillez à bien vérifier la liste des paquets à supprimer.</translation>
     <message>
         <location filename="../remotes.cpp" line="96"/>
         <source>Error adding remote</source>
-        <translation>Erreur durant l&apos;ajout du dépôt à distance</translation>
+        <translation>Erreur durant l’ajout du dépôt à distance</translation>
     </message>
     <message>
         <location filename="../remotes.cpp" line="97"/>
         <source>Could not add remote - command returned an error. Please double-check the remote address and try again</source>
-        <translation>Le dépôt à distance n&apos;a pas pu être ajouté - la commande a diagnostiqué une erreur. Vérifiez attentivement l&apos;adresse du dépôt à distance et essayez à nouveau</translation>
+        <translation>Le dépôt à distance n’a pas pu être ajouté - la commande a diagnostiqué une erreur. Vérifiez attentivement l’adresse du dépôt à distance et essayez à nouveau</translation>
     </message>
     <message>
         <location filename="../remotes.cpp" line="102"/>
         <source>Success</source>
-        <translation>Réussite de l&apos;installation</translation>
+        <translation>Installation réussie</translation>
     </message>
     <message>
         <location filename="../remotes.cpp" line="102"/>
@@ -863,7 +863,7 @@ Veillez à bien vérifier la liste des paquets à supprimer.</translation>
     <message>
         <location filename="../main.cpp" line="82"/>
         <source>Skip online check if it falsely reports lack of internet access.</source>
-        <translation>Ignorer le contrôle en ligne s&apos;il signale à tort l&apos;absence d&apos;accès à l&apos;internet.</translation>
+        <translation>Ignorer le contrôle en ligne s’il signale à tort l’absence d’accès à l’internet.</translation>
     </message>
     <message>
         <location filename="../main.cpp" line="88"/>
@@ -873,17 +873,17 @@ Veillez à bien vérifier la liste des paquets à supprimer.</translation>
     <message>
         <location filename="../main.cpp" line="89"/>
         <source>You seem to be logged in as root, please log out and log in as normal user to use this program.</source>
-        <translation>Vous semblez être connecté en tant que root, veuillez vous déconnecter et vous connecter en tant qu&apos;utilisateur normal pour utiliser ce programme.</translation>
+        <translation>Vous semblez être connecté en tant qu’administrateur, veuillez vous déconnecter et vous connecter en tant qu’utilisateur normal pour utiliser ce programme.</translation>
     </message>
     <message>
         <location filename="../main.cpp" line="99"/>
         <source>Unable to get exclusive lock</source>
-        <translation>Impossible d&apos;obtenir le verrou exclusif</translation>
+        <translation>Impossible d’obtenir le verrou exclusif</translation>
     </message>
     <message>
         <location filename="../main.cpp" line="100"/>
         <source>Another package management application (like Synaptic or apt-get), is already running. Please close that application first</source>
-        <translation>Une autre application de gestion des paquets (comme Synaptic ou apt-get) est déjà en cours d&apos;exécution. Veuillez d&apos;abord fermer cette application.</translation>
+        <translation>Une autre application de gestion des paquets (comme Synaptic ou apt-get) est déjà en cours d’exécution. Veuillez d’abord fermer cette application.</translation>
     </message>
 </context>
 </TS>

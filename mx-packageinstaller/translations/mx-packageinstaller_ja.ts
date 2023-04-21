@@ -12,7 +12,7 @@
     <message>
         <location filename="../mainwindow.ui" line="57"/>
         <source>Popular Applications</source>
-        <translation>人気のアプリ</translation>
+        <translation>人気のアプリ（一般的なアプリ）</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="73"/>
@@ -40,7 +40,7 @@
     <message>
         <location filename="../mainwindow.ui" line="101"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:16pt;&quot;&gt;Manage popular packages&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:16pt;&quot;&gt;人気パッケージの管理&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:16pt;&quot;&gt;一般的なパッケージの管理&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="120"/>
@@ -88,7 +88,7 @@
         <location filename="../mainwindow.ui" line="508"/>
         <location filename="../mainwindow.ui" line="907"/>
         <source>Total packages:</source>
-        <translation>合計のパッケージ：</translation>
+        <translation>合計のパッケージ数：</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="315"/>
@@ -529,12 +529,12 @@
     <message>
         <location filename="../mainwindow.cpp" line="1184"/>
         <source>Post-processing...</source>
-        <translation>後処理中...</translation>
+        <translation>インストール後の処理中...</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1214"/>
         <source>Pre-processing for </source>
-        <translation>の前処理中</translation>
+        <translation>次の前処理中です：</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1227"/>
@@ -666,7 +666,7 @@
         <location filename="../mainwindow.cpp" line="2382"/>
         <location filename="../mainwindow.cpp" line="2399"/>
         <source>Could not download the list of packages. Please check your APT sources.</source>
-        <translation type="unfinished"></translation>
+        <translation>パッケージの一覧がダウンロードできませんでした。APT source を確認してください。</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="2415"/>
@@ -771,17 +771,17 @@ Please make sure you check carefully the list of packages to be removed.</source
     <message>
         <location filename="../remotes.cpp" line="34"/>
         <source>Add or remove flatpak remotes (repos), or install apps using flatpakref URL or path</source>
-        <translation>flatpak remotes (repos) の追加や削除、flatpakref の URL やパスを使ってアプリのインストールなどを行います</translation>
+        <translation>flatpak リモート (repos) の追加や削除、flatpakref の URL やパスを使ってアプリのインストールなどを行います</translation>
     </message>
     <message>
         <location filename="../remotes.cpp" line="43"/>
         <source>Remove remote</source>
-        <translation>remote の削除</translation>
+        <translation>リモートの削除</translation>
     </message>
     <message>
         <location filename="../remotes.cpp" line="48"/>
         <source>Add remote</source>
-        <translation>remote の追加</translation>
+        <translation>リモートの追加</translation>
     </message>
     <message>
         <location filename="../remotes.cpp" line="53"/>
@@ -801,17 +801,17 @@ Please make sure you check carefully the list of packages to be removed.</source
     <message>
         <location filename="../remotes.cpp" line="76"/>
         <source>Flathub is the main Flatpak remote and won&apos;t be removed</source>
-        <translation>Flathub はメインの Flatpak remote なので、撤去できません</translation>
+        <translation>Flathub はメインの Flatpak リモートなので、削除できません</translation>
     </message>
     <message>
         <location filename="../remotes.cpp" line="96"/>
         <source>Error adding remote</source>
-        <translation>remote 追加中にエラー発生</translation>
+        <translation>リモートの追加中にエラー発生</translation>
     </message>
     <message>
         <location filename="../remotes.cpp" line="97"/>
         <source>Could not add remote - command returned an error. Please double-check the remote address and try again</source>
-        <translation>remote を追加できませんでした - コマンドはエラーを返しました。remote アドレスを再度確認してから、もう一度試してください</translation>
+        <translation>リモートを追加できませんでした - コマンドはエラーを返しました。リモートアドレスを再度確認してから、もう一度試してください</translation>
     </message>
     <message>
         <location filename="../remotes.cpp" line="102"/>
@@ -821,7 +821,7 @@ Please make sure you check carefully the list of packages to be removed.</source
     <message>
         <location filename="../remotes.cpp" line="102"/>
         <source>Remote added successfully</source>
-        <translation>Remote の追加に成功しました</translation>
+        <translation>リモートの追加に成功しました</translation>
     </message>
 </context>
 <context>
@@ -873,7 +873,7 @@ Please make sure you check carefully the list of packages to be removed.</source
     <message>
         <location filename="../main.cpp" line="89"/>
         <source>You seem to be logged in as root, please log out and log in as normal user to use this program.</source>
-        <translation>rootとしてログインしているようです。このプログラムを使用するには、一度ログアウトして通常のユーザーとしてログインしてください。</translation>
+        <translation>root としてログインしているようです。このプログラムを使用するには、一度ログアウトして通常のユーザーとしてログインしてください。</translation>
     </message>
     <message>
         <location filename="../main.cpp" line="99"/>

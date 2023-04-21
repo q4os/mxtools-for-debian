@@ -331,7 +331,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="868"/>
         <source>Done</source>
-        <translation>Hecho</translation>
+        <translation>Listo</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="868"/>

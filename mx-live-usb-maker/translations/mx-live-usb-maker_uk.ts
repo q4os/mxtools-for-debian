@@ -88,7 +88,7 @@
     <message>
         <location filename="../mainwindow.ui" line="309"/>
         <source>Advanced Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Додаткові параметри</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="327"/>

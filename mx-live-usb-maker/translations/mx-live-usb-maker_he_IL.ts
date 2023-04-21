@@ -467,7 +467,7 @@ Please wait until the the process is completed</source>
     <message>
         <location filename="../main.cpp" line="85"/>
         <source>You seem to be logged in as root, please log out and log in as normal user to use this program.</source>
-        <translation type="unfinished"></translation>
+        <translation>כנראה שנכנסת למערכת בתור משתמש על (root), נא לצאת ולהיכנס כמשתמש רגיל כדי להשתמש בתוכנית הזאת.</translation>
     </message>
     <message>
         <location filename="../main.cpp" line="99"/>

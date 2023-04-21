@@ -1,4 +1,6 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="es_ES">
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.1" language="es_ES">
 <context>
     <name>MainWindow</name>
     <message>
@@ -293,7 +295,7 @@
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="146"/>
-        <source>Writing %1 using 'dd' command to /dev/%2,
+        <source>Writing %1 using &apos;dd&apos; command to /dev/%2,
 
 Please wait until the the process is completed</source>
         <translation>Escribiendo %1 con el comando &apos;dd&apos; hacia /dev/%2,
@@ -442,37 +444,37 @@ Por favor espere hasta que se complete el proceso</translation>
         <translation>&amp;Cerrar</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="52"/>
+        <location filename="../main.cpp" line="57"/>
         <source>Program for creating a live-usb from an iso-file, another live-usb, a live-cd/dvd, or a running live system.</source>
         <translation>Programa para grabar un live-usb a partir de un archivo iso, otro live-usb, un live-cd/dvd o un sistema en vivo en ejecución.</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="56"/>
+        <location filename="../main.cpp" line="61"/>
         <source>filename</source>
         <translation>nombre de archivo</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="56"/>
+        <location filename="../main.cpp" line="61"/>
         <source>Name of .iso file to open</source>
         <translation>Nombre del archivo .iso para abrir</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="57"/>
+        <location filename="../main.cpp" line="62"/>
         <source>[filename]</source>
         <translation>[nombre de archivo]</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="79"/>
+        <location filename="../main.cpp" line="84"/>
         <source>Error</source>
         <translation>Error</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="80"/>
+        <location filename="../main.cpp" line="85"/>
         <source>You seem to be logged in as root, please log out and log in as normal user to use this program.</source>
         <translation>Parece que ha iniciado sesión como root, cierre la sesión e inicie sesión como usuario normal para usar este programa.</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="94"/>
+        <location filename="../main.cpp" line="99"/>
         <source>version:</source>
         <translation>versión:</translation>
     </message>

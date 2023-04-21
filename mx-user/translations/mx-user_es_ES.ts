@@ -24,6 +24,16 @@
         <translation>Añadir una Cuenta de Usuario</translation>
     </message>
     <message>
+        <location filename="../mainwindow.ui" line="132"/>
+        <source>Enter password for new user</source>
+        <translation>Ingrese la contraseña para el nuevo usuario</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="141"/>
+        <source>password</source>
+        <translation>contraseña</translation>
+    </message>
+    <message>
         <location filename="../mainwindow.ui" line="173"/>
         <source>Reenter password for new user</source>
         <translation>Vuelva a ingresar la contraseña para el nuevo usuario</translation>
@@ -62,28 +72,22 @@
         <translation>Contraseña para el nuevo usuario</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="261"/>
-        <source>User password:</source>
-        <translation>Contraseña de usuario:</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="132"/>
-        <source>Enter password for new user</source>
-        <translation>Ingrese la contraseña para el nuevo usuario</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="141"/>
-        <source>password</source>
-        <translation>contraseña</translation>
-    </message>
-    <message>
         <location filename="../mainwindow.ui" line="242"/>
         <source>Confirm user password:</source>
         <translation>Confirmar contraseña de usuario:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="271"/>
+        <location filename="../mainwindow.ui" line="261"/>
+        <source>User password:</source>
+        <translation>Contraseña de usuario:</translation>
+    </message>
+    <message>
         <source>Include user in sudo group</source>
+        <translation type="vanished">Incluir usuario en el grupo sudo</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="271"/>
+        <source>Grant this user administrative rights to the system (sudo)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

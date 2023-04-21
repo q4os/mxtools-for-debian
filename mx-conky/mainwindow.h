@@ -33,8 +33,8 @@
 
 #include "cmd.h"
 
-
-namespace Ui {
+namespace Ui
+{
 class MainWindow;
 }
 
@@ -47,9 +47,9 @@ public:
     ~MainWindow();
 
     QString file_name;
-    bool modified;
+    bool modified {};
 
-    bool is_lua_format;
+    bool is_lua_format {};
     bool conky_format_detected = false;
     bool debug = false;
 
@@ -62,8 +62,10 @@ public:
     QString lua_comment_start;
     QString lua_comment_end;
 
-    QString capture_lua_owh = QStringLiteral("^(?<before>(?:.*\\]\\])?\\s*(?<item>own_window_hints)(?:\\s*=\\s*[\\\"\\']))(?<value>[[:alnum:],_]*)(?<after>(?:[\\\"\\']\\s*,).*)");
-    QString capture_old_owh = QStringLiteral("^(?<before>(?:.*\\]\\])?\\s*(?<item>own_window_hints)(?:\\s+))(?<value>[[:alnum:],_]*)(?<after>.*)");
+    QString capture_lua_owh = QStringLiteral("^(?<before>(?:.*\\]\\])?\\s*(?<item>own_window_hints)(?:\\s*=\\s*[\\\"\\'"
+                                             "]))(?<value>[[:alnum:],_]*)(?<after>(?:[\\\"\\']\\s*,).*)");
+    QString capture_old_owh = QStringLiteral(
+        "^(?<before>(?:.*\\]\\])?\\s*(?<item>own_window_hints)(?:\\s+))(?<value>[[:alnum:],_]*)(?<after>.*)");
 
     QString block_comment_start = QStringLiteral("--[[");
     QString block_comment_end = QStringLiteral("]]");
@@ -72,14 +74,13 @@ public:
     QString capture_old_color;
     QRegularExpression regexp_lua_color(QString);
 
-
     void parseContent();
     void detectConkyFormat();
     void pickColor(QWidget *widget);
     void refresh();
     void saveBackup();
-    void setColor(QWidget *widget, QColor color);
-    void writeColor(QWidget *widget, QColor color);
+    void setColor(QWidget *widget, const QColor &color);
+    void writeColor(QWidget *widget, const QColor &color);
     void writeFile(const QString &file_name, const QString &content);
 
     bool checkConkyRunning();
@@ -119,15 +120,14 @@ private slots:
     void on_radioMonthShort_clicked();
     void setConnections();
 
-    void closeEvent(QCloseEvent *);
+    void closeEvent(QCloseEvent *event);
+
 private:
     Ui::MainWindow *ui;
     Cmd cmd;
-    QTimer *timer;
+    QTimer *timer {};
     QSettings settings;
     QString file_content;
 };
 
-
 #endif
-

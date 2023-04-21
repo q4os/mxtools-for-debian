@@ -1,3 +1,10 @@
+mx-conky (23.4) mx; urgency=medium
+
+  * Update icon
+  * Uptate translations
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 13 Apr 2023 22:50:51 -0400
+
 mx-conky (22.12.02) mx; urgency=medium
 
   * Fix handling of spaces in conkyrc path

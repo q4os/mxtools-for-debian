@@ -486,7 +486,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="952"/>
         <source>You are about to use Debian Backports, which contains packages taken from the next Debian release (called &apos;testing&apos;), adjusted and recompiled for usage on Debian stable. They cannot be tested as extensively as in the stable releases of Debian and MX Linux, and are provided on an as-is basis, with risk of incompatibilities with other components in Debian stable. Use with care!</source>
-        <translation>Вы собираетесь использовать Debian Backports, который содержит пакеты, взятые из следующего выпуска Debian (именуемого &quot;testing&quot;), скорректированные и перекомпилированные для использования на Debian stable. Они не могли быть проверены так хорошо, как в стабильных версиях Debian и MX Linux, и предоставляются на основании &quot;как есть&quot;, с риском несовместимости с другими компонентами в Debian stable. Используйте с осторожностью!</translation>
+        <translation>Вы собираетесь использовать Debian Backports, который содержит пакеты, взятые из следующего выпуска Debian (именуемого «testing»), скорректированные и перекомпилированные для использования на Debian stable. Они не могли быть проверены так хорошо, как в стабильных версиях Debian и MX Linux, и предоставляются на основании «как есть» с риском несовместимости с другими компонентами в Debian stable. Используйте с осторожностью!</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="960"/>
@@ -666,7 +666,7 @@
         <location filename="../mainwindow.cpp" line="2382"/>
         <location filename="../mainwindow.cpp" line="2399"/>
         <source>Could not download the list of packages. Please check your APT sources.</source>
-        <translation type="unfinished"></translation>
+        <translation>Не удалось загрузить список пакетов. Пожалуйста, проверьте ваши источники APT.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="2415"/>

@@ -1,3 +1,10 @@
+mx-user (23.4.01) mx; urgency=medium
+
+  * Update icon
+  * Update mx-user.desktop translation
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 13 Apr 2023 23:58:35 -0400
+
 mx-user (23.4) mx; urgency=medium
 
   * Add a checkbox to add/remove new user from sudo group

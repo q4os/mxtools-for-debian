@@ -1,8 +1,8 @@
 [main]
 host = https://www.transifex.com
 
-[o:anticapitalista:p:antix-development:r:mx-boot-repair-desktop]
-file_filter = po/mx-boot-repair-desktop_<lang>.po
-source_file = mx-boot-repair-desktop.pot
+[o:anticapitalista:p:antix-development:r:mx-bootrepair-desktop]
+file_filter = po/mx-bootrepair-desktop_<lang>.po
+source_file = mx-bootrepair-desktop.pot
 source_lang = en
 type = po

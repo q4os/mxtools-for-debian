@@ -497,7 +497,7 @@
         <location filename="../mainwindow.cpp" line="967"/>
         <location filename="../mainwindow.cpp" line="2928"/>
         <source>Warning</source>
-        <translation type="unfinished"></translation>
+        <translation>Ескерту</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="971"/>

@@ -24,6 +24,16 @@
         <translation>Ajouter un compte utilisateur</translation>
     </message>
     <message>
+        <location filename="../mainwindow.ui" line="132"/>
+        <source>Enter password for new user</source>
+        <translation>Entrez le mot de passe du nouvel utilisateur</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="141"/>
+        <source>password</source>
+        <translation>mot de passe</translation>
+    </message>
+    <message>
         <location filename="../mainwindow.ui" line="173"/>
         <source>Reenter password for new user</source>
         <translation>Ressaisissez le mot de passe du nouvel utilisateur</translation>
@@ -62,28 +72,22 @@
         <translation>Mot de passe du nouvel utilisateur</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="261"/>
-        <source>User password:</source>
-        <translation>Mot de passe utilisateur:</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="132"/>
-        <source>Enter password for new user</source>
-        <translation>Entrez le mot de passe du nouvel utilisateur</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="141"/>
-        <source>password</source>
-        <translation>mot de passe</translation>
-    </message>
-    <message>
         <location filename="../mainwindow.ui" line="242"/>
         <source>Confirm user password:</source>
         <translation>Confirmer le mot de passe utilisateur:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="271"/>
+        <location filename="../mainwindow.ui" line="261"/>
+        <source>User password:</source>
+        <translation>Mot de passe utilisateur:</translation>
+    </message>
+    <message>
         <source>Include user in sudo group</source>
+        <translation type="vanished">Inclure l’utilisateur dans le groupe sudo</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="271"/>
+        <source>Grant this user administrative rights to the system (sudo)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -563,7 +567,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="262"/>
         <source>Before copying, close all other applications. Be sure the copy to destination is large enough to contain the files you are copying. Copying between desktops may overwrite or delete your files or preferences on the destination desktop. Are you sure you want to proceed?</source>
-        <translation>Avant de débuter la copie, veuillez fermer toutes les applications ouvertes. Assurez-vous que le répertoire de destination a une taille suffisante pour contenir les fichiers que vous désirez copier. Le processus peut effacer ou écraser vos fichiers ou configurations du bureau de destination. Êtes-vous certain(e) de vouloir continuer?</translation>
+        <translation>Avant de débuter la copie, veuillez fermer toutes les applications ouvertes. Assurez-vous que le répertoire de destination a une taille suffisante pour contenir les fichiers que vous désirez copier. Le processus peut effacer ou écraser vos fichiers ou configurations du bureau de destination. Êtes-vous certain de vouloir continuer?</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="286"/>

@@ -76,7 +76,7 @@
     <message>
         <location filename="../mainwindow.ui" line="134"/>
         <source>Manage UEFI Boot Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Zarządzaj opcjami rozruchu UEFI</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="150"/>
@@ -192,19 +192,19 @@
     <message>
         <location filename="../mainwindow.cpp" line="216"/>
         <source>Set timeout</source>
-        <translation type="unfinished"></translation>
+        <translation>Ustaw limit czasu</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="216"/>
         <source>Timeout in seconds:</source>
-        <translation type="unfinished"></translation>
+        <translation>Limit czasu w sekundach:</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="220"/>
         <location filename="../mainwindow.cpp" line="441"/>
         <location filename="../mainwindow.cpp" line="1076"/>
         <source>Timeout: %1 seconds</source>
-        <translation type="unfinished"></translation>
+        <translation>Limit czasu: %1 sekund</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="231"/>
@@ -212,30 +212,31 @@
         <location filename="../mainwindow.cpp" line="1075"/>
         <location filename="../mainwindow.cpp" line="1091"/>
         <source>Boot Next: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Uruchom następny: %1</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="238"/>
         <source>Removal confirmation</source>
-        <translation type="unfinished"></translation>
+        <translation>Potwierdzenie usunięcia</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="239"/>
         <source>Are you sure you want to delete this boot entry?
 %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Czy na pewno chcesz usunąć ten wpis rozruchowy?
+%1</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="305"/>
         <location filename="../mainwindow.cpp" line="308"/>
         <source>Select EFI file</source>
-        <translation type="unfinished"></translation>
+        <translation>Wybierz plik EFI</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="306"/>
         <location filename="../mainwindow.cpp" line="309"/>
         <source>EFI files (*.efi *.EFI)</source>
-        <translation type="unfinished"></translation>
+        <translation>Pliki EFI (*.efi *.EFI)</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="319"/>
@@ -249,22 +250,22 @@
     <message>
         <location filename="../mainwindow.cpp" line="320"/>
         <source>Could not find the source mountpoint for %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Nie można znaleźć źródłowego punktu montowania dla %1</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="324"/>
         <source>Set name</source>
-        <translation type="unfinished"></translation>
+        <translation>Ustaw nazwę</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="324"/>
         <source>Enter the name for the UEFI menu item:</source>
-        <translation type="unfinished"></translation>
+        <translation>Wprowadź nazwę elementu menu UEFI:</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="331"/>
         <source>Something went wrong, could not add entry.</source>
-        <translation type="unfinished"></translation>
+        <translation>Coś poszło nie tak, nie można dodać wpisu.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="349"/>
@@ -289,7 +290,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="445"/>
         <source>Boot Current: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Uruchom bieżący: %1</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="524"/>
@@ -309,7 +310,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="604"/>
         <source>Something went wrong, could not save boot order.</source>
-        <translation type="unfinished"></translation>
+        <translation>Coś poszło nie tak, nie udało się zapisać kolejności rozruchu.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="801"/>
@@ -415,30 +416,32 @@ Czy kontynuować i zainstalować je?</translation>
     <message>
         <location filename="../mainwindow.cpp" line="1057"/>
         <source>Edit UEFI Boot Entries</source>
-        <translation type="unfinished"></translation>
+        <translation>Edytuj wpisy rozruchowe UEFI</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1060"/>
         <source>You can use the Up/Down buttons, or drag &amp; drop items to change boot order.
 - Items are listed in the boot order.
 - Grayed out lines are inactive.</source>
-        <translation type="unfinished"></translation>
+        <translation>Możesz użyć przycisków w górę/w dół lub przeciągnąć i upuścić elementy, aby zmienić kolejność rozruchu.
+- Elementy są wymienione w kolejności rozruchu.
+- Linie wyszarzone są nieaktywne.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1064"/>
         <location filename="../mainwindow.cpp" line="1117"/>
         <source>Set ac&amp;tive</source>
-        <translation type="unfinished"></translation>
+        <translation>Ustaw ak&amp;tywny</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1065"/>
         <source>&amp;Add entry</source>
-        <translation type="unfinished"></translation>
+        <translation>Dodaj &amp;wpis</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1066"/>
         <source>Boot &amp;next</source>
-        <translation type="unfinished"></translation>
+        <translation>Uruchom &amp;następny</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1067"/>
@@ -448,38 +451,38 @@ Czy kontynuować i zainstalować je?</translation>
     <message>
         <location filename="../mainwindow.cpp" line="1068"/>
         <source>Move &amp;down</source>
-        <translation type="unfinished"></translation>
+        <translation>Przesuń w &amp;dół</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1069"/>
         <source>&amp;Remove entry</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Usuń wpis</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1070"/>
         <source>Re&amp;set next</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Zresetuj następny</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1071"/>
         <source>Change &amp;timeout</source>
-        <translation type="unfinished"></translation>
+        <translation>Zmień &amp;limitu czasu</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1072"/>
         <source>Move &amp;up</source>
-        <translation type="unfinished"></translation>
+        <translation>Przesuń w &amp;górę</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1075"/>
         <location filename="../mainwindow.cpp" line="1091"/>
         <source>not set, will boot using list order</source>
-        <translation type="unfinished"></translation>
+        <translation>nie ustawione, uruchomi się używając kolejności na liście</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1114"/>
         <source>Set &amp;inactive</source>
-        <translation type="unfinished"></translation>
+        <translation>Ustaw ni&amp;eaktywny</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1167"/>

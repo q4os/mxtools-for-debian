@@ -66,7 +66,7 @@
     <message>
         <location filename="../mainwindow.ui" line="224"/>
         <source>View Log</source>
-        <translation type="unfinished"></translation>
+        <translation> Log ansehen</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="259"/>
@@ -204,7 +204,7 @@
     <message>
         <location filename="../mainwindow.ui" line="582"/>
         <source>Full-featured mode - writable Li&amp;veUSB</source>
-        <translation type="unfinished"></translation>
+        <translation>Modus mit allen Funktionen - beschreibbares Live-USB-System</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="592"/>
@@ -417,7 +417,7 @@ bitte auf Abschluss des Vorgangs warten</translation>
     <message>
         <location filename="../mainwindow.cpp" line="576"/>
         <source>Could not find a log file at: </source>
-        <translation type="unfinished"></translation>
+        <translation>Konnte keine Log-Datei finden in:</translation>
     </message>
 </context>
 <context>
@@ -451,17 +451,17 @@ bitte auf Abschluss des Vorgangs warten</translation>
     <message>
         <location filename="../main.cpp" line="61"/>
         <source>filename</source>
-        <translation type="unfinished"></translation>
+        <translation>Dateiname</translation>
     </message>
     <message>
         <location filename="../main.cpp" line="61"/>
         <source>Name of .iso file to open</source>
-        <translation type="unfinished"></translation>
+        <translation>Name der zu öffnenden ISO-Datei</translation>
     </message>
     <message>
         <location filename="../main.cpp" line="62"/>
         <source>[filename]</source>
-        <translation type="unfinished"></translation>
+        <translation>[Dateiname]</translation>
     </message>
     <message>
         <location filename="../main.cpp" line="84"/>

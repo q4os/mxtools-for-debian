@@ -22,32 +22,32 @@
  * along with mx-conky.  If not, see <http://www.gnu.org/licenses/>.
  **********************************************************************/
 
-
 #include <QApplication>
-#include <QTranslator>
-#include <QLibraryInfo>
-#include <QLocale>
-#include <QIcon>
+#include <QDebug>
 #include <QDir>
 #include <QFileDialog>
-#include <QDebug>
+#include <QIcon>
+#include <QLibraryInfo>
+#include <QLocale>
 #include <QSettings>
+#include <QTranslator>
 
-#include <unistd.h>
-#include "mainwindow.h"
 #include "cmd.h"
+#include "mainwindow.h"
+#include "version.h"
 #include "versionnumber.h"
+#include <unistd.h>
 
 // return the config file used for the newest conky process
 QString getRunningConky()
 {
     Cmd cmd;
-    QString file_name;
 
     QString pid = cmd.getCmdOut(QStringLiteral("pgrep -u $(id -nu) -nx conky"), true);
     if (pid.isEmpty())
         return QString();
-    QString conkyrc = cmd.getCmdOutUntrimmed(QString("sed -nrz '/^--config=/s///p; /^(-c|--config)/{n;p;}' /proc/%1/cmdline").arg(pid), true);
+    QString conkyrc = cmd.getCmdOutUntrimmed(
+        QString("sed -nrz '/^--config=/s///p; /^(-c|--config)/{n;p;}' /proc/%1/cmdline").arg(pid), true);
     if (conkyrc.startsWith("/"))
         return conkyrc;
     QString conkywd = cmd.getCmdOutUntrimmed(QString("sed -nrz '/^PWD=/s///p' /proc/%1/environ").arg(pid), true);
@@ -61,7 +61,8 @@ QString openFile(const QDir &dir)
     if (not file_name.isEmpty())
         return file_name;
 
-    QString selected = QFileDialog::getOpenFileName(nullptr, QObject::tr("Select Conky Manager config file"), dir.path());
+    QString selected
+        = QFileDialog::getOpenFileName(nullptr, QObject::tr("Select Conky Manager config file"), dir.path());
     if (not selected.isEmpty())
         return selected;
     return QString();
@@ -70,7 +71,8 @@ QString openFile(const QDir &dir)
 void messageUpdate()
 {
     Cmd cmd;
-    VersionNumber current_version = cmd.getCmdOut(QStringLiteral("dpkg -l mx-conky-data | awk 'NR==6 {print $3}'"), true);
+    VersionNumber current_version
+        = cmd.getCmdOut(QStringLiteral("dpkg -l mx-conky-data | awk 'NR==6 {print $3}'"), true);
 
     QSettings settings;
 
@@ -81,7 +83,8 @@ void messageUpdate()
     QString message = QObject::tr("The MX Conky data set has been updated. <p><p>\
                                   Copy from the folder where it is located <a href=\"/usr/share/mx-conky-data/themes\">/usr/share/mx-conky-data/themes</a> \
                                   whatever you wish to your Home hidden conky folder <a href=\"%1/.conky\">~/.conky</a>. \
-                                  Be careful not to overwrite any conkies you have changed.").arg(QDir::homePath());
+                                  Be careful not to overwrite any conkies you have changed.")
+                          .arg(QDir::homePath());
 
     if (recorded_version.toString().isEmpty() || current_version > recorded_version) {
         settings.setValue(QStringLiteral("data-version"), current_version.toString());
@@ -92,23 +95,25 @@ void messageUpdate()
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
-    app.setWindowIcon(QIcon::fromTheme(app.applicationName()));
-    app.setOrganizationName(QStringLiteral("MX-Linux"));
+    QApplication::setWindowIcon(QIcon::fromTheme(QApplication::applicationName()));
+    QApplication::setOrganizationName(QStringLiteral("MX-Linux"));
+    QApplication::setApplicationVersion(VERSION);
 
     QTranslator qtTran;
-    if (qtTran.load(QLocale::system(), QStringLiteral("qt"), QStringLiteral("_"), QLibraryInfo::location(QLibraryInfo::TranslationsPath)))
-        app.installTranslator(&qtTran);
+    if (qtTran.load("qt_" + QLocale().name(), QLibraryInfo::location(QLibraryInfo::TranslationsPath)))
+        QApplication::installTranslator(&qtTran);
 
     QTranslator qtBaseTran;
-    if (qtBaseTran.load("qtbase_" + QLocale::system().name(), QLibraryInfo::location(QLibraryInfo::TranslationsPath)))
-        app.installTranslator(&qtBaseTran);
+    if (qtBaseTran.load("qtbase_" + QLocale().name(), QLibraryInfo::location(QLibraryInfo::TranslationsPath)))
+        QApplication::installTranslator(&qtBaseTran);
 
     QTranslator appTran;
-    if (appTran.load(app.applicationName() + "_" + QLocale::system().name(), "/usr/share/" + app.applicationName() + "/locale"))
-        app.installTranslator(&appTran);
+    if (appTran.load(QApplication::applicationName() + "_" + QLocale().name(),
+                     "/usr/share/" + QApplication::applicationName() + "/locale"))
+        QApplication::installTranslator(&appTran);
 
-    if (system("dpkg -s conky-manager | grep -q 'Status: install ok installed'") != 0 &&
-               system("dpkg -s conky-manager2 | grep -q 'Status: install ok installed'" ) != 0) {
+    if (system("dpkg -s conky-manager | grep -q 'Status: install ok installed'") != 0
+        && system("dpkg -s conky-manager2 | grep -q 'Status: install ok installed'") != 0) {
         QMessageBox::critical(nullptr, QObject::tr("Error"),
                               QObject::tr("Could not find conky-manager, please install it before running mx-conky"));
         return EXIT_FAILURE;
@@ -117,7 +122,7 @@ int main(int argc, char *argv[])
     if (getuid() != 0) {
 
         QString dir = QDir::homePath() + "/.conky";
-        if (not QFile::exists(dir))
+        if (!QFile::exists(dir))
             QDir().mkdir(dir);
 
         messageUpdate();
@@ -126,8 +131,8 @@ int main(int argc, char *argv[])
         system("cp -rn /usr/share/mx-conky-data/themes/* " + dir.toUtf8());
 
         QString file;
-        if (qApp->arguments().length() >= 2 && QFile::exists(qApp->arguments().at(1)))
-            file = qApp->arguments().at(1);
+        if (QApplication::arguments().length() >= 2 && QFile::exists(QApplication::arguments().at(1)))
+            file = QApplication::arguments().at(1);
         else
             file = openFile(dir);
 
@@ -136,7 +141,7 @@ int main(int argc, char *argv[])
 
         MainWindow w(nullptr, file);
         w.show();
-        return app.exec();
+        return QApplication::exec();
 
     } else {
         QApplication::beep();

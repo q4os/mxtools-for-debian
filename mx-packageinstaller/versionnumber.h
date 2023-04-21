@@ -77,7 +77,6 @@ public:
     VersionNumber() = default;
     VersionNumber(const VersionNumber &value) = default;
     VersionNumber(const QString &value);
-    ~VersionNumber() = default;
 
     QString toString() const;
 

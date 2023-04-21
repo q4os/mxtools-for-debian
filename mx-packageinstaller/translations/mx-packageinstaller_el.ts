@@ -40,7 +40,7 @@
     <message>
         <location filename="../mainwindow.ui" line="101"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:16pt;&quot;&gt;Manage popular packages&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:16pt;&quot;&gt;Διαχειριστείτε δημοφιλή πακέτα&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:16pt;&quot;&gt;Διαχείρηση δημοφιλών πακέτων&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="120"/>
@@ -63,12 +63,12 @@
     <message>
         <location filename="../mainwindow.ui" line="173"/>
         <source>Enabled Repos</source>
-        <translation>Ενεργοποιημένα Repos</translation>
+        <translation>Ενεργοποιημένα αποθετήρια</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="237"/>
         <source>Remove orphan packages</source>
-        <translation>Αφαιρέστε τα ορφανά πακέτα</translation>
+        <translation>Αφαίρεση ορφανών πακέτων</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="264"/>
@@ -95,7 +95,7 @@
         <location filename="../mainwindow.ui" line="615"/>
         <location filename="../mainwindow.ui" line="947"/>
         <source>Also Install &quot;Recommended&quot; Packages</source>
-        <translation>Εγκαταστήστε επίσης τα &quot;συνιστάται&quot; πακέτα</translation>
+        <translation>Εγκατάσταση και των &quot;προτεινόμενων&quot; πακέτων</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="322"/>
@@ -433,7 +433,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="233"/>
         <source>There was a problem updating sources. Some sources may not have provided updates. For more info check: </source>
-        <translation>Παρουσιάστηκε πρόβλημα κατά την ενημέρωση. Ορισμένες πηγές ενδέχεται να μην έχουν παράσχει ενημερώσεις. Για περισσότερες πληροφορίες, ελέγξτε: </translation>
+        <translation>Παρουσιάστηκε πρόβλημα κατά την ενημέρωση. Ορισμένες πηγές ενδέχεται να μην έχουν δώσει ενημερώσεις. Για περισσότερες πληροφορίες, ελέγξτε: </translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="625"/>
@@ -519,7 +519,7 @@
         <location filename="../mainwindow.cpp" line="1251"/>
         <location filename="../mainwindow.cpp" line="1455"/>
         <source>Internet is not available, won&apos;t be able to download the list of packages</source>
-        <translation>Το Internet δεν είναι διαθέσιμο, δεν θα ληφθεί η λίστα των πακέτων</translation>
+        <translation>Δεν είναι διαθέσιμο το διαδίκτυο, δεν θα ληφθεί η λίστα των πακέτων</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1127"/>
@@ -549,7 +549,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="1393"/>
         <source>There was an error writing file: %1. Please check if you have enough free space on your drive</source>
-        <translation>Υπήρξε ένα αρχείο γραφής σφάλματος: %1. Ελέγξτε αν έχετε αρκετό ελεύθερο χώρο στη μονάδα δίσκου σας</translation>
+        <translation>Υπήρξε σφάλμα στην εγγραφή του αρχείου: %1. Ελέγξτε αν έχετε αρκετό ελεύθερο χώρο στη μονάδα δίσκου σας</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1463"/>
@@ -666,7 +666,7 @@
         <location filename="../mainwindow.cpp" line="2382"/>
         <location filename="../mainwindow.cpp" line="2399"/>
         <source>Could not download the list of packages. Please check your APT sources.</source>
-        <translation type="unfinished"></translation>
+        <translation>Δεν ήταν δυνατή η λήψη της λίστας των πακέτων. Παρακαλώ ελέγξτε τις πηγές σας.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="2415"/>
@@ -863,7 +863,7 @@ Please make sure you check carefully the list of packages to be removed.</source
     <message>
         <location filename="../main.cpp" line="82"/>
         <source>Skip online check if it falsely reports lack of internet access.</source>
-        <translation>Παραλείψτε τον διαδικτυακό έλεγχο εάν αναφέρει ψευδώς την έλλειψη πρόσβασης στο Διαδίκτυο.</translation>
+        <translation>Παραλείψτε τον διαδικτυακό έλεγχο εάν αναφέρει ψευδώς την έλλειψη πρόσβασης στο διαδίκτυο.</translation>
     </message>
     <message>
         <location filename="../main.cpp" line="88"/>
@@ -873,7 +873,7 @@ Please make sure you check carefully the list of packages to be removed.</source
     <message>
         <location filename="../main.cpp" line="89"/>
         <source>You seem to be logged in as root, please log out and log in as normal user to use this program.</source>
-        <translation>Φαίνεται ότι έχετε συνδεθεί ως root, αποσυνδεθείτε και συνδεθείτε ως κανονικός χρήστης για να χρησιμοποιήσετε αυτό το πρόγραμμα.</translation>
+        <translation>Φαίνεται ότι έχετε συνδεθεί ως διαχειριστής, αποσυνδεθείτε και συνδεθείτε ως κανονικός χρήστης για να χρησιμοποιήσετε αυτό το πρόγραμμα.</translation>
     </message>
     <message>
         <location filename="../main.cpp" line="99"/>

@@ -66,7 +66,7 @@
     <message>
         <location filename="../mainwindow.ui" line="224"/>
         <source>View Log</source>
-        <translation type="unfinished"></translation>
+        <translation>Wyświetl dziennik</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="259"/>
@@ -204,7 +204,7 @@
     <message>
         <location filename="../mainwindow.ui" line="582"/>
         <source>Full-featured mode - writable Li&amp;veUSB</source>
-        <translation type="unfinished"></translation>
+        <translation>W pełni funkcjonalny tryb - zapisywalny Li&amp;veUSB</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="592"/>
@@ -214,7 +214,7 @@
     <message>
         <location filename="../mainwindow.ui" line="595"/>
         <source>Image &amp;mode - read-only LiveUSB (dd)</source>
-        <translation type="unfinished"></translation>
+        <translation>Tryb &amp;obrazu — LiveUSB tylko do odczytu (dd)</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="609"/>
@@ -417,7 +417,7 @@ Poczekaj, aż proces się zakończy.</translation>
     <message>
         <location filename="../mainwindow.cpp" line="576"/>
         <source>Could not find a log file at: </source>
-        <translation type="unfinished"></translation>
+        <translation>Nie można znaleźć pliku dziennika pod adresem:</translation>
     </message>
 </context>
 <context>
@@ -451,17 +451,17 @@ Poczekaj, aż proces się zakończy.</translation>
     <message>
         <location filename="../main.cpp" line="61"/>
         <source>filename</source>
-        <translation type="unfinished"></translation>
+        <translation>nazwapliku</translation>
     </message>
     <message>
         <location filename="../main.cpp" line="61"/>
         <source>Name of .iso file to open</source>
-        <translation type="unfinished"></translation>
+        <translation>Nazwa pliku .iso do otwarcia</translation>
     </message>
     <message>
         <location filename="../main.cpp" line="62"/>
         <source>[filename]</source>
-        <translation type="unfinished"></translation>
+        <translation>[nazwapliku]</translation>
     </message>
     <message>
         <location filename="../main.cpp" line="84"/>

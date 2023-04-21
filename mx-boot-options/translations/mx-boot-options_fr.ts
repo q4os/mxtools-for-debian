@@ -12,7 +12,7 @@
     <message>
         <location filename="../dialog.cpp" line="22"/>
         <source>OK</source>
-        <translation>OK</translation>
+        <translation>Valider</translation>
     </message>
     <message>
         <location filename="../dialog.cpp" line="23"/>
@@ -45,7 +45,7 @@
     <message>
         <location filename="../mainwindow.ui" line="78"/>
         <source>Set to &apos;0&apos; to boot immediately without displaying the menu, or to &apos;-1&apos; to wait indefinitely</source>
-        <translation>Régler sur &apos;0&apos; pour démarrer immédiatement sans afficher le menu, ou sur &apos;-1&apos; pour attendre indéfiniment</translation>
+        <translation>Régler sur « 0 » pour démarrer immédiatement sans afficher le menu, ou sur « -1 » pour attendre indéfiniment</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="81"/>
@@ -65,7 +65,7 @@
     <message>
         <location filename="../mainwindow.ui" line="124"/>
         <source>With this option enabled whatever entry you select from the grub boot menu will be saved as the new default for future boots</source>
-        <translation>En activant cette option, l&apos;entrée choisie depuis le menu de démarrage grub sera sauvegardée et activée par défaut pour les prochains démarrages</translation>
+        <translation>En activant cette option, l’entrée choisie depuis le menu de démarrage grub sera sauvegardée et activée par défaut pour les prochains démarrages</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="127"/>
@@ -96,7 +96,7 @@
     <message>
         <location filename="../mainwindow.ui" line="261"/>
         <source>Splash</source>
-        <translation>Écran d&apos;accueil</translation>
+        <translation>Écran d’accueil</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="296"/>
@@ -131,7 +131,7 @@
     <message>
         <location filename="../mainwindow.ui" line="411"/>
         <source>Display help </source>
-        <translation>Afficher l&apos;aide</translation>
+        <translation>Afficher l’aide </translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="414"/>
@@ -161,7 +161,7 @@
     <message>
         <location filename="../mainwindow.ui" line="498"/>
         <source>Quit application</source>
-        <translation>Quitter l&apos;application</translation>
+        <translation>Quitter l’application</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="501"/>
@@ -191,19 +191,19 @@
     <message>
         <location filename="../mainwindow.cpp" line="216"/>
         <source>Set timeout</source>
-        <translation>Définir un délai d&apos;attente</translation>
+        <translation>Définir un délai d’attente</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="216"/>
         <source>Timeout in seconds:</source>
-        <translation>Délai d&apos;attente en secondes :</translation>
+        <translation>Délai d’attente en secondes :</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="220"/>
         <location filename="../mainwindow.cpp" line="441"/>
         <location filename="../mainwindow.cpp" line="1076"/>
         <source>Timeout: %1 seconds</source>
-        <translation>Délai d&apos;attente : %1 secondes</translation>
+        <translation>Délai d’attente : %1 secondes</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="231"/>
@@ -211,12 +211,12 @@
         <location filename="../mainwindow.cpp" line="1075"/>
         <location filename="../mainwindow.cpp" line="1091"/>
         <source>Boot Next: %1</source>
-        <translation>Élément sélectionné sera le paramètre par défaut, une seule fois pour le prochain démarrage: %1</translation>
+        <translation>Élément sélectionné sera le paramètre par défaut, une seule fois pour le prochain démarrage : %1</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="238"/>
         <source>Removal confirmation</source>
-        <translation>Confirmer l&apos;éjection</translation>
+        <translation>Confirmer l’éjection</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="239"/>
@@ -259,17 +259,17 @@
     <message>
         <location filename="../mainwindow.cpp" line="324"/>
         <source>Enter the name for the UEFI menu item:</source>
-        <translation>Entrez le nom de l&apos;entrée du menu UEFI :</translation>
+        <translation>Entrez le nom de l’entrée du menu UEFI :</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="331"/>
         <source>Something went wrong, could not add entry.</source>
-        <translation>Un problème est survenu, il n&apos;a pas été possible d&apos;ajouter l&apos;entrée.</translation>
+        <translation>Un problème est survenu, il n’a pas été possible d’ajouter l’entrée.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="349"/>
         <source>Installing bootsplash, please wait</source>
-        <translation>Installation de l&apos;écran d&apos;amorçage, veuillez patienter</translation>
+        <translation>Installation de l’écran d’amorçage, veuillez patienter</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="356"/>
@@ -284,7 +284,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="362"/>
         <source>Could not install the bootsplash.</source>
-        <translation>L&apos;écran d&apos;amorçage n&apos;a pas pu être installé.</translation>
+        <translation>L’écran d’amorçage n’a pas pu être installé.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="445"/>
@@ -309,7 +309,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="604"/>
         <source>Something went wrong, could not save boot order.</source>
-        <translation>Un problème est survenu, impossible de sauvegarder l&apos;ordre de démarrage.</translation>
+        <translation>Un problème est survenu, impossible de sauvegarder l’ordre de démarrage.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="801"/>
@@ -378,7 +378,7 @@
         <source>You current system is running in a Virtual Machine,
 Plymouth bootsplash will work in a limited way, you also won&apos;t be able to preview the theme</source>
         <translation>Votre système actuel fonctionne dans une Machine Virtuelle,
-L&apos;écran d&apos;amorçage Plymouth fonctionnera de façon restreinte, vous ne pourrez pas non plus prévisualiser le thème</translation>
+L’écran d’amorçage Plymouth fonctionnera de façon restreinte, vous ne pourrez pas non plus prévisualiser le thème</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="922"/>
@@ -390,7 +390,7 @@ L&apos;écran d&apos;amorçage Plymouth fonctionnera de façon restreinte, vous 
         <source>Plymouth packages are not currently installed.
 OK to go ahead and install them?</source>
         <translation>Les paquets Plymouth ne sont pas installés actuellement.
-OK pour continuer et les installer ?</translation>
+Voulez-vous les installer ?</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="945"/>
@@ -422,8 +422,8 @@ OK pour continuer et les installer ?</translation>
         <source>You can use the Up/Down buttons, or drag &amp; drop items to change boot order.
 - Items are listed in the boot order.
 - Grayed out lines are inactive.</source>
-        <translation>Vous pouvez utiliser les boutons Haut/Bas, ou faire glisser et déposer les éléments pour changer l&apos;ordre de démarrage.
-- Les éléments sont listés dans l&apos;ordre de démarrage.
+        <translation>Vous pouvez utiliser les boutons Haut/Bas, ou faire glisser et déposer les éléments pour changer l’ordre de démarrage.
+- Les éléments sont listés dans l’ordre de démarrage.
 - Les lignes grisées sont inactives.</translation>
     </message>
     <message>
@@ -455,17 +455,17 @@ OK pour continuer et les installer ?</translation>
     <message>
         <location filename="../mainwindow.cpp" line="1069"/>
         <source>&amp;Remove entry</source>
-        <translation>&amp;Supprimer l&apos;entrée</translation>
+        <translation>&amp;Supprimer l’entrée</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1070"/>
         <source>Re&amp;set next</source>
-        <translation>Ré&amp;initialiser l&apos;entrée par défaut en cours pour le prochain démarrage</translation>
+        <translation>Ré&amp;initialiser l’entrée par défaut en cours pour le prochain démarrage</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1071"/>
         <source>Change &amp;timeout</source>
-        <translation>M&amp;odifier le délai d&apos;attente</translation>
+        <translation>M&amp;odifier le délai d’attente</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1072"/>
@@ -476,7 +476,7 @@ OK pour continuer et les installer ?</translation>
         <location filename="../mainwindow.cpp" line="1075"/>
         <location filename="../mainwindow.cpp" line="1091"/>
         <source>not set, will boot using list order</source>
-        <translation>non défini, le démarrage se fera dans l&apos;ordre de la liste</translation>
+        <translation>non défini, le démarrage se fera dans l’ordre de la liste</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1114"/>
@@ -491,7 +491,7 @@ OK pour continuer et les installer ?</translation>
     <message>
         <location filename="../mainwindow.cpp" line="1168"/>
         <source>Plymouth was just installed, you might need to reboot before being able to display previews</source>
-        <translation>Plymouth vient d&apos;être installé, vous devrez probablement redémarrer avant de pouvoir afficher les aperçus</translation>
+        <translation>Plymouth vient d’être installé, vous devrez probablement redémarrer avant de pouvoir afficher les aperçus</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1224"/>
@@ -538,12 +538,12 @@ OK pour continuer et les installer ?</translation>
     <message>
         <location filename="../main.cpp" line="78"/>
         <source>You seem to be logged in as root, please log out and log in as normal user to use this program.</source>
-        <translation>Vous semblez être connecté en tant que root, veuillez vous déconnecter et vous connecter en tant qu&apos;utilisateur normal pour utiliser ce programme.</translation>
+        <translation>Vous semblez être connecté en tant qu’administrateur, veuillez vous déconnecter et vous connecter en tant qu’utilisateur normal pour utiliser ce programme.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="942"/>
         <source>Select image to display in bootloader</source>
-        <translation>Choisir l&apos;image à afficher pour le chargeur de démarrage</translation>
+        <translation>Choisir l’image à afficher pour le chargeur de démarrage</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1234"/>

@@ -1,3 +1,9 @@
+mx-datetime (23.4.01) mx; urgency=medium
+
+  * Update icon
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 13 Apr 2023 23:26:45 -0400
+
 mx-datetime (23.4) mx; urgency=medium
 
   * Adjust check for autosync ntp daemon -- fix for systemd

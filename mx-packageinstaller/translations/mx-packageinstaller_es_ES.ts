@@ -666,7 +666,7 @@
         <location filename="../mainwindow.cpp" line="2382"/>
         <location filename="../mainwindow.cpp" line="2399"/>
         <source>Could not download the list of packages. Please check your APT sources.</source>
-        <translation type="unfinished"></translation>
+        <translation>No se ha podido descargar la lista de paquetes. Por favor, compruebe sus fuentes APT.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="2415"/>

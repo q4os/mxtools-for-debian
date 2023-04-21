@@ -98,7 +98,7 @@
     <message>
         <location filename="../mainwindow.ui" line="334"/>
         <source>Save the original boot directory when updating a live-usb</source>
-        <translation>Med posodabljanjem živega usb nosilca shrani originalni zagonski imenik</translation>
+        <translation>Med posodabljanjem živega usb nosilca shrani originalni zagonski direktorij</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="341"/>
@@ -386,7 +386,7 @@ Prosimo počakajte, da se proces konča</translation>
         <location filename="../mainwindow.cpp" line="437"/>
         <location filename="../mainwindow.cpp" line="496"/>
         <source>Select Source Directory</source>
-        <translation>Izberite imenik z virom</translation>
+        <translation>Izberite direktorij z virom</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="445"/>

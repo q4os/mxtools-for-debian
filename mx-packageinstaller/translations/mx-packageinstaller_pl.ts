@@ -17,7 +17,7 @@
     <message>
         <location filename="../mainwindow.ui" line="73"/>
         <source>Category</source>
-        <translation type="unfinished"></translation>
+        <translation>Kategoria</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="83"/>
@@ -40,7 +40,7 @@
     <message>
         <location filename="../mainwindow.ui" line="101"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:16pt;&quot;&gt;Manage popular packages&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:16pt;&quot;&gt;Zarządzaj popularnymi pakietami&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="120"/>
@@ -58,12 +58,12 @@
         <location filename="../mainwindow.ui" line="1118"/>
         <location filename="../mainwindow.ui" line="1245"/>
         <source>= Installed packages</source>
-        <translation type="unfinished"></translation>
+        <translation>= Zainstalowane pakiety</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="173"/>
         <source>Enabled Repos</source>
-        <translation type="unfinished"></translation>
+        <translation>Włączone repozytoria</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="237"/>
@@ -170,7 +170,7 @@
         <location filename="../mainwindow.ui" line="752"/>
         <location filename="../mainwindow.ui" line="814"/>
         <source>= Upgradable package. Newer version available in selected repository.</source>
-        <translation type="unfinished"></translation>
+        <translation>= Pakiet z możliwością aktualizacji. Nowsza wersja dostępna w wybranym repozytorium.</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="458"/>
@@ -386,7 +386,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="91"/>
         <source>Flatpak tab is disabled on 32-bit.</source>
-        <translation type="unfinished"></translation>
+        <translation>Karta Flatpak jest wyłączona w wersji 32-bitowej.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="184"/>
@@ -666,7 +666,7 @@
         <location filename="../mainwindow.cpp" line="2382"/>
         <location filename="../mainwindow.cpp" line="2399"/>
         <source>Could not download the list of packages. Please check your APT sources.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nie można pobrać listy pakietów. Sprawdź swoje źródła APT.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="2415"/>
@@ -854,12 +854,16 @@ Upewnij się, że dokładnie sprawdziłeś listę pakietów do usunięcia.</tran
     - installs programs from the MX Test repo
     - installs programs from Debian Backports repo
     - installs flatpaks</source>
-        <translation type="unfinished"></translation>
+        <translation>MX Instalator pakietów to narzędzie służące do zarządzania pakietami w systemie MX Linux
+    - instaluje popularne programy z różnych źródeł
+    - instaluje programy z repozytorium MX Test
+    - instaluje programy z repozytorium Debian Backports
+    - instaluje flatpaki</translation>
     </message>
     <message>
         <location filename="../main.cpp" line="82"/>
         <source>Skip online check if it falsely reports lack of internet access.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pomiń sprawdzanie online, jeśli fałszywie zgłasza brak dostępu do internetu.</translation>
     </message>
     <message>
         <location filename="../main.cpp" line="88"/>

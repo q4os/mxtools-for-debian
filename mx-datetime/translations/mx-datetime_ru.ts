@@ -159,7 +159,7 @@
     <message>
         <location filename="../datetime.ui" line="498"/>
         <source>Automatically update the System Clock with NTP servers:</source>
-        <translation>Использовать NTP-сервера для обновления времени:</translation>
+        <translation>Автообновлять системное время с серверов NTP:</translation>
     </message>
     <message>
         <location filename="../datetime.ui" line="505"/>

@@ -1,5 +1,6 @@
 help/*				usr/share/doc/mx-packageinstaller
 icons/mx-packageinstaller.png	usr/share/icons/hicolor/256x256/apps
+icons/mx-packageinstaller.svg	usr/share/icons/hicolor/scalable/apps
 mx-packageinstaller		usr/bin
 mx-packageinstaller.desktop	usr/share/applications
 scripts/mxpi-launcher		usr/bin

@@ -138,7 +138,7 @@
     <message>
         <location filename="../mainwindow.ui" line="385"/>
         <source>Set pmbr_boot disk flag (won&apos;t boot via UEFI)</source>
-        <translation>Definir o marcador (flag) de disco &apos;pmbr_boot&apos; (não inicializa via UEFI)
+        <translation>Definir o marcador (flag) de disco ‘pmbr_boot’ (não inicializa via UEFI)
 </translation>
     </message>
     <message>
@@ -210,7 +210,7 @@
     <message>
         <location filename="../mainwindow.ui" line="592"/>
         <source>Read-only, cannot be used with persistency</source>
-        <translation>Somente leitura, não pode ser utilizado com &apos;persistência&apos;</translation>
+        <translation>Somente leitura, não pode ser utilizado com ‘persistência’</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="595"/>
@@ -300,7 +300,7 @@
         <source>Writing %1 using &apos;dd&apos; command to /dev/%2,
 
 Please wait until the the process is completed</source>
-        <translation>Gravando %1, utilizando o comando &apos;dd&apos; em /dev/%2.
+        <translation>Gravando %1, utilizando o comando ‘dd’ em /dev/%2.
 
 Por favor, espere até que o processo seja concluído</translation>
     </message>

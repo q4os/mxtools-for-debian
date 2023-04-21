@@ -1,7 +1,8 @@
-help/*			usr/share/doc/mx-user
-icons/mx-user.png	usr/share/icons/hicolor/256x256/apps
-mx-user			usr/bin
-mx-user.desktop		usr/share/applications
+help/*			            usr/share/doc/mx-user
+icons/mx-user.png	        usr/share/icons/hicolor/256x256/apps
+icons/mx-user.svg	        usr/share/icons/hicolor/scalable/apps
+mx-user			            usr/bin
+mx-user.desktop		        usr/share/applications
 scripts/mx-user-launcher	usr/bin
 scripts/org.mxlinux.pkexec.mx-user-launcher.policy	usr/share/polkit-1/actions
-translations/*.qm	usr/share/mx-user/locale
+translations/*.qm	        usr/share/mx-user/locale
