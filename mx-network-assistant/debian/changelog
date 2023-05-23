@@ -1,3 +1,16 @@
+mx-network-assistant (23.5) mx; urgency=medium
+
+  * Update logo
+  * Refresh translations
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 17 May 2023 22:24:50 -0400
+
+mx-network-assistant (22.10.03) mx; urgency=medium
+
+  * fix string sources 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 28 Oct 2022 18:42:35 -0400
+
 mx-network-assistant (22.10.01) mx; urgency=medium
 
   * update translations 

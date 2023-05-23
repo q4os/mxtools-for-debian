@@ -1,0 +1,12 @@
+#!/usr/bin/make -f
+
+export DH_ALWAYS_EXCLUDE=CVS:.svn:GIT:.git:.gitignore:debs:*.bak:.tx:*~
+#export DH_VERBOSE=1
+export DH_QUIET=1
+
+%:
+	dh $@  --buildsystem=meson --builddirectory=mesonbuild
+
+override_dh_auto_clean:
+	@rm -r translations/.tx 2>/dev/null || :
+	dh_auto_clean

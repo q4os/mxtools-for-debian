@@ -33,8 +33,8 @@
 
 extern QString current_kernel;
 
-static QHash<QString, uint> compression_factor {{"xz", 31},  {"zstd", 35}, {"gzip", 37},
-                                                {"lzo", 52}, {"lzma", 52}, {"lz4", 52}};
+static QHash<QString, quint8> compression_factor {{"xz", 31},  {"zstd", 35}, {"gzip", 37},
+                                                  {"lzo", 52}, {"lzma", 52}, {"lz4", 52}};
 
 class Settings
 {
@@ -83,7 +83,7 @@ public:
     bool cli_mode;
     bool edit_boot_menu {};
     bool force_installer {};
-    bool i686 {};
+    bool x86 {};
     bool live {};
     bool make_isohybrid {};
     bool make_md5sum {};
@@ -105,18 +105,17 @@ public:
     QString getXdgUserDirs(const QString &folder);
     QString largerFreeSpace(const QString &dir1, const QString &dir2) const;
     QString largerFreeSpace(const QString &dir1, const QString &dir2, const QString &dir3) const;
+    QString readKernelOpts() const;
     QStringList listUsers() const;
     bool checkCompression() const;
     bool checkSnapshotDir() const;
     bool checkTempDir();
-    bool isLive() const;
     bool isOnSupportedPart(const QString &dir) const;
-    bool isi686() const;
     int getSnapshotCount() const;
     quint64 getFreeSpace(const QString &path) const;
     quint64 getLiveRootSpace() const;
-    static QString filterOptions(QString options);
-    QString readKernelOpts() const;
+    static bool isLive();
+    static bool isi386();
     void addRemoveExclusion(bool add, QString exclusion);
     void excludeAll();
     void excludeDesktop(bool exclude);

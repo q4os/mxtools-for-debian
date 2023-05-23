@@ -5,7 +5,7 @@
     <name>MainWindow</name>
     <message>
         <location filename="../mainwindow.ui" line="14"/>
-        <location filename="../mainwindow.cpp" line="398"/>
+        <location filename="../mainwindow.cpp" line="410"/>
         <source>MX Tools</source>
         <translation>Công cụ MX</translation>
     </message>
@@ -45,42 +45,42 @@
         <translation>Hướng dẫn sử dụng</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="265"/>
+        <location filename="../mainwindow.ui" line="274"/>
         <source>These MX applications save time and effort with important tasks.</source>
         <translation>Những ứng dụng MX này giúp tiết kiệm thời gian và công sức với các tác vụ quan trọng.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="281"/>
+        <location filename="../mainwindow.ui" line="290"/>
         <source>Hide individual tools from the menu</source>
         <translation>Che các công cụ riêng biệt khỏi thực đơn</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="300"/>
+        <location filename="../mainwindow.ui" line="309"/>
         <source>search</source>
         <translation>tìm kiếm</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="397"/>
+        <location filename="../mainwindow.cpp" line="409"/>
         <source>About MX Tools</source>
         <translation>Về công cụ MX</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="398"/>
+        <location filename="../mainwindow.cpp" line="410"/>
         <source>Version: </source>
         <translation>Phiên bản:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="399"/>
+        <location filename="../mainwindow.cpp" line="411"/>
         <source>Configuration Tools for MX Linux</source>
         <translation>Công cụ cấu hình cho MX Linux</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="402"/>
+        <location filename="../mainwindow.cpp" line="414"/>
         <source>Copyright (c) MX Linux</source>
         <translation>Copyright (c) MX Linux</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="403"/>
+        <location filename="../mainwindow.cpp" line="415"/>
         <source>%1 License</source>
         <translation type="unfinished"></translation>
     </message>
@@ -88,23 +88,23 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../about.cpp" line="42"/>
+        <location filename="../about.cpp" line="43"/>
         <source>License</source>
         <translation>Giấy phép</translation>
     </message>
     <message>
-        <location filename="../about.cpp" line="43"/>
-        <location filename="../about.cpp" line="53"/>
+        <location filename="../about.cpp" line="44"/>
+        <location filename="../about.cpp" line="54"/>
         <source>Changelog</source>
         <translation>Nhật kí thay đổi</translation>
     </message>
     <message>
-        <location filename="../about.cpp" line="44"/>
+        <location filename="../about.cpp" line="45"/>
         <source>Cancel</source>
         <translation>Hủy bỏ</translation>
     </message>
     <message>
-        <location filename="../about.cpp" line="66"/>
+        <location filename="../about.cpp" line="67"/>
         <source>&amp;Close</source>
         <translation>&amp;Đóng</translation>
     </message>

@@ -48,12 +48,11 @@ public:
     QString LUM;
     QString buildOptionList();
     QStringList buildUsbList();
-    QStringList
-    removeUnsuitable(const QStringList &devices); // remove unsuitable disks from the list (live and unremovable)
+    QStringList removeUnsuitable(const QStringList &devices); // remove unsuitable disks (live and unremovable)
     bool checkDestSize();
     bool isRunningLive();
+    const QString cli_utils {". /usr/local/lib/cli-shell-utils/cli-shell-utils.bash;"};
     static bool isToRam();
-    const QString cli_utils = QStringLiteral(". /usr/local/lib/cli-shell-utils/cli-shell-utils.bash;");
     void makeUsb(const QString &options);
     void progress();
     void setGeneralConnections();
@@ -65,7 +64,6 @@ private slots:
     static bool isantiX_mx_family(const QString &bselected);
     void cleanup();
     void cmdDone();
-    void cmdStart();
     void setConnections();
     void setDefaultMode(const QString &iso_name);
     void updateBar();

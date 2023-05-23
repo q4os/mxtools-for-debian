@@ -1,0 +1,126 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the mx-launcher-l10n package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: mx-launcher-l10n\n"
+"Report-Msgid-Bugs-To: https://forum.mxlinux.org/viewforum.php?f=96\n"
+"POT-Creation-Date: 2023-05-10 20:29+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. The desktop entry name will be displayed within the menu.
+msgid "Nvidia driver installer"
+msgstr ""
+
+#. The desktop entry name will be displayed within the menu.
+msgid "Deb Installer"
+msgstr ""
+
+#. The desktop entry name will be displayed within the menu.
+msgid "Format USB"
+msgstr ""
+
+#. The desktop entry name will be displayed within the menu.
+msgid "Job Scheduler"
+msgstr ""
+
+#. The desktop entry name will be displayed within the menu.
+#. The desktop entry name will be displayed within the menu.
+msgid "MX Snapshot"
+msgstr ""
+
+#. The desktop entry name will be displayed within the menu.
+msgid "MX Boot Options"
+msgstr ""
+
+#. The desktop entry name will be displayed within the menu.
+msgid "MX Boot Repair"
+msgstr ""
+
+#. The desktop entry name will be displayed within the menu.
+msgid "MX Cleanup"
+msgstr ""
+
+#. The desktop entry name will be displayed within the menu.
+msgid "MX Codecs Installer"
+msgstr ""
+
+#. The desktop entry name will be displayed within the menu.
+msgid "MX Date & Time"
+msgstr ""
+
+#. The desktop entry name will be displayed within the menu.
+msgid "System Locales"
+msgstr ""
+
+#. The desktop entry name will be displayed within the menu.
+msgid "xfce4-notifyd-start"
+msgstr ""
+
+#. The desktop entry name will be displayed within the menu.
+msgid "MX Live USB Maker"
+msgstr ""
+
+#. The desktop entry name will be displayed within the menu.
+msgid "MX Network Assistant"
+msgstr ""
+
+#. The desktop entry name will be displayed within the menu.
+msgid "MX Package Installer"
+msgstr ""
+
+#. The desktop entry name will be displayed within the menu.
+msgid "MX RemasterCC"
+msgstr ""
+
+#. The desktop entry name will be displayed within the menu.
+msgid "MX Repo Manager"
+msgstr ""
+
+#. The desktop entry name will be displayed within the menu.
+msgid "MX Samba Config"
+msgstr ""
+
+#. The desktop entry name will be displayed within the menu.
+msgid "MX Tweak"
+msgstr ""
+
+#. The desktop entry name will be displayed within the menu.
+msgid "Brightness Systray"
+msgstr ""
+
+#. The desktop entry name will be displayed within the menu.
+msgid "mx-tweak brightness systray"
+msgstr ""
+
+#. The desktop entry name will be displayed within the menu.
+msgid "compton"
+msgstr ""
+
+#. The desktop entry name will be displayed within the menu.
+msgid "restore-software-brightness"
+msgstr ""
+
+#. The desktop entry name will be displayed within the menu.
+msgid "MX User Manager"
+msgstr ""
+
+#. The desktop entry name will be displayed within the menu.
+msgid "Quick System Info"
+msgstr ""
+
+#. The desktop entry name will be displayed within the menu.
+msgid "System Keyboard"
+msgstr ""
+
+msgid "Disk Manager"
+msgstr ""

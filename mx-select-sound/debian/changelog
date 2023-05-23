@@ -1,3 +1,10 @@
+mx-select-sound (23.5) mx; urgency=medium
+
+  * Update logo
+  * Refresh translations
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 18 May 2023 08:06:33 -0400
+
 mx-select-sound (22.8) mx; urgency=medium
 
   * Remove mx-viewer dependency

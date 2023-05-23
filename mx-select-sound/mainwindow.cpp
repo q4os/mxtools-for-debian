@@ -21,6 +21,8 @@
  * You should have received a copy of the GNU General Public License
  * along with mx-select-sound.  If not, see <http://www.gnu.org/licenses/>.
  **********************************************************************/
+#include "mainwindow.h"
+#include "ui_mainwindow.h"
 
 #include <QDebug>
 #include <QDir>
@@ -30,13 +32,11 @@
 #include <QTimer>
 
 #include "about.h"
-#include "mainwindow.h"
-#include "ui_mainwindow.h"
 #include "version.h"
 
-MainWindow::MainWindow(QWidget *parent) :
-    QDialog(parent),
-    ui(new Ui::MainWindow)
+MainWindow::MainWindow(QWidget *parent)
+    : QDialog(parent)
+    , ui(new Ui::MainWindow)
 {
     qDebug().noquote() << QCoreApplication::applicationName() << "version:" << VERSION;
     ui->setupUi(this);
@@ -48,10 +48,7 @@ MainWindow::MainWindow(QWidget *parent) :
     this->adjustSize();
 }
 
-MainWindow::~MainWindow()
-{
-    delete ui;
-}
+MainWindow::~MainWindow() { delete ui; }
 
 // Util function for getting bash command output and error code
 Result MainWindow::runCmd(const QString &cmd)
@@ -72,10 +69,10 @@ Result MainWindow::runCmd(const QString &cmd)
 QStringList MainWindow::listCards()
 {
     QStringList card_list;
-    const QString cards = runCmd(R"(cat /proc/asound/cards 2>/dev/null | sed -n -r 's/[0-9 ]+\[//p' |  sed 's/\s*\]:/:/')").output;
+    const QString cards
+        = runCmd(R"(cat /proc/asound/cards 2>/dev/null | sed -n -r 's/[0-9 ]+\[//p' |  sed 's/\s*\]:/:/')").output;
     if (cards.size() == 0) {
-        QMessageBox::critical(this, tr("MX Select Sound"),
-          tr("No sound cards/devices were found."));
+        QMessageBox::critical(this, tr("MX Select Sound"), tr("No sound cards/devices were found."));
     } else {
         card_list = cards.split(QStringLiteral("\n"));
         ui->comboBox->addItems(card_list);
@@ -117,7 +114,7 @@ void MainWindow::pushApply_clicked()
     QFile asoundrc;
 
     asoundrc.setFileName(QDir::homePath() + "/.asoundrc");
-    if (asoundrc.open(QFile::WriteOnly|QFile::Text)) {
+    if (asoundrc.open(QFile::WriteOnly | QFile::Text)) {
         asoundrc.write(QStringLiteral("defaults.pcm.!card %1\ndefaults.ctl.!card %1").arg(selected).toUtf8());
         asoundrc.close();
         getDefault();
@@ -127,13 +124,14 @@ void MainWindow::pushApply_clicked()
 void MainWindow::pushAbout_clicked()
 {
     this->hide();
-    displayAboutMsgBox(tr("About MX Select Sound"),
-                       "<p align=\"center\"><b><h2>" + tr("MX Select Sound") + "</h2></b></p><p align=\"center\">" +
-                       tr("Version: ") + VERSION + "</p><p align=\"center\"><h3>" +
-                       tr("Program for selecting the default sound card in MX Linux") +
-                       "</h3></p><p align=\"center\"><a href=\"http://mxlinux.org\">http://mxlinux.org</a><br /></p>"
-                       "<p align=\"center\">" + tr("Copyright (c) MX Linux") + "<br /><br /></p>",
-                       QStringLiteral("/usr/share/doc/mx-select-sound/license.html"), tr("%1 License").arg(this->windowTitle()));
+    displayAboutMsgBox(
+        tr("About MX Select Sound"),
+        "<p align=\"center\"><b><h2>" + tr("MX Select Sound") + "</h2></b></p><p align=\"center\">" + tr("Version: ")
+            + VERSION + "</p><p align=\"center\"><h3>" + tr("Program for selecting the default sound card in MX Linux")
+            + "</h3></p><p align=\"center\"><a href=\"http://mxlinux.org\">http://mxlinux.org</a><br /></p>"
+              "<p align=\"center\">"
+            + tr("Copyright (c) MX Linux") + "<br /><br /></p>",
+        QStringLiteral("/usr/share/doc/mx-select-sound/license.html"), tr("%1 License").arg(this->windowTitle()));
     this->show();
 }
 
@@ -155,6 +153,5 @@ void MainWindow::pushTest_clicked()
 {
     const int exitCode = runCmd(QStringLiteral("speaker-test -c 2 -t wav -l 2")).exitCode;
     if (exitCode != 0)
-        QMessageBox::critical(this, tr("MX Select Sound"),
-          tr("Could not play test sound."));
+        QMessageBox::critical(this, tr("MX Select Sound"), tr("Could not play test sound."));
 }

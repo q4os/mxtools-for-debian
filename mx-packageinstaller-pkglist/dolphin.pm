@@ -2,7 +2,7 @@
 <app>
 
 <category>
-FileManagers
+File Managers
 </category>
 
 <name>

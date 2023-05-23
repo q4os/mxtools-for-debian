@@ -1,3 +1,10 @@
+advert-block-antix (0.3.1+4) mx; urgency=medium
+
+  * mod policy file
+  * add mx-launcher-l10n as recommend
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 12 May 2023 21:49:10 -0400
+
 advert-block-antix (0.3.1+2) mx; urgency=medium
 
   * fix exec line in desktop file

@@ -1,0 +1,8 @@
+[main]
+host = https://www.transifex.com
+
+[o:anticapitalista:p:antix-development:r:mx-network-assistant-desktop]
+file_filter = po/mx-network-assistant-desktop_<lang>.po
+source_file = mx-network-assistant-desktop.pot
+source_lang = en
+type = po

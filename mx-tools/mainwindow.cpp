@@ -39,7 +39,6 @@ MainWindow::MainWindow(QWidget *parent)
     : QDialog(parent)
     , ui(new Ui::MainWindow)
 {
-    qDebug().noquote() << qApp->applicationName() << "version:" << VERSION;
     ui->setupUi(this);
     setConnections();
     setWindowFlags(Qt::Window); // for the close, min and max buttons
@@ -56,10 +55,10 @@ MainWindow::MainWindow(QWidget *parent)
 
     QVector<QStringList *> lists {&live_list, &maintenance_list, &setup_list, &software_list, &utilities_list};
 
-    QString test = getCmdOut(QStringLiteral("df -T / |tail -n1 |awk '{print $2}'"));
+    QString partitionType = getCmdOut(QStringLiteral("df -T / |tail -n1 |awk '{print $2}'"));
 
     // remove mx-remastercc and live-kernel-updater from list if not running Live
-    bool live = (test == QLatin1String("aufs") || test == QLatin1String("overlay"));
+    bool live = (partitionType == QLatin1String("aufs") || partitionType == QLatin1String("overlay"));
     if (!live) {
         const QStringList live_list_copy = live_list;
         for (const QString &item : live_list_copy)
@@ -68,18 +67,20 @@ MainWindow::MainWindow(QWidget *parent)
                 live_list.removeOne(item);
     }
 
+    QStringList termsToRemove;
+    termsToRemove << (live ? QStringLiteral("MX-OnlyInstalled") : QStringLiteral("MX-OnlyLive"));
+    // Since we are loading only MX apps we control this works OK, however we need to keep in mind that some
+    // app .desktop files have something like "OnlyShownIn=Blah;Xfce;KDE;Blah" so this login would fail in that case
+    QString desktop = qgetenv("XDG_CURRENT_DESKTOP");
+    if (desktop != "XFCE")
+        termsToRemove << QStringLiteral("OnlyShowIn=XFCE");
+    if (desktop != "Fluxbox")
+        termsToRemove << QStringLiteral("OnlyShowIn=FLUXBOX");
+    if (desktop != "KDE")
+        termsToRemove << QStringLiteral("OnlyShowIn=KDE");
+
     for (auto &list : lists)
-        removeEnvExclusive(*list, live);
-
-    // remove item from list if it is only meant for XFCE
-    if (qgetenv("XDG_CURRENT_DESKTOP") != "XFCE")
-        for (auto &list : lists)
-            removeXfceOnly(*list);
-
-    // remove item from list if it is only meant for FLUXBOX
-    if (qgetenv("XDG_SESSION_DESKTOP") != "fluxbox")
-        for (auto &list : lists)
-            removeFLUXBOXonly(*list);
+        removeEnvExclusive(*list, termsToRemove);
 
     category_map.insert(QStringLiteral("MX-Live"), live_list);
     category_map.insert(QStringLiteral("MX-Maintenance"), maintenance_list);
@@ -90,7 +91,7 @@ MainWindow::MainWindow(QWidget *parent)
     readInfo(category_map);
     addButtons(info_map);
     ui->textSearch->setFocus();
-    //this->adjustSize();
+    // this->adjustSize();
     QSize size = this->size();
     restoreGeometry(settings.value(QStringLiteral("geometry")).toByteArray());
     if (this->isMaximized()) { // if started maximized give option to resize to normal window size
@@ -382,7 +383,7 @@ void MainWindow::checkHide_clicked(bool checked)
     for (const QStringList &list : qAsConst(category_map))
         for (const QString &file_name : qAsConst(list))
             hideShowIcon(file_name, checked);
-    system("sh -c 'which xfce4-panel >/dev/null 2>/dev/null && xfce4-panel --restart'");
+    system("sh -c 'pgrep xfce4-panel >/dev/null && xfce4-panel --restart'");
 }
 
 // hide or show icon for .desktop file
@@ -418,9 +419,10 @@ void MainWindow::pushAbout_clicked()
 void MainWindow::pushHelp_clicked()
 {
     if (QFile::exists(QStringLiteral("/usr/bin/mx-manual")))
-        QProcess::execute(QStringLiteral("mx-manual"), {});
+        QProcess::startDetached(QStringLiteral("mx-manual"), {});
     else // for MX19?
-        QProcess::execute(QStringLiteral("xdg-open"), {"file:///usr/local/share/doc/mxum.html#toc-Subsection-3.2"});
+        QProcess::startDetached(QStringLiteral("xdg-open"),
+                                {"file:///usr/local/share/doc/mxum.html#toc-Subsection-3.2"});
 }
 
 void MainWindow::textSearch_textChanged(const QString &arg1)
@@ -443,9 +445,9 @@ void MainWindow::textSearch_textChanged(const QString &arg1)
         QMultiMap<QString, QStringList> file_info = info_map.value(category);
         for (const QString &file_name : category_map.value(category)) {
             // qDebug() << file_name;
-            QString name = file_info.value(file_name)[0];
-            QString comment = file_info.value(file_name)[1];
-            QString category = file_info.value(file_name)[4];
+            QString name = file_info.value(file_name).at(0);
+            QString comment = file_info.value(file_name).at(1);
+            QString category = file_info.value(file_name).at(4);
             if (name.contains(arg1, Qt::CaseInsensitive) || comment.contains(arg1, Qt::CaseInsensitive)
                 || category.contains(arg1, Qt::CaseInsensitive)) {
                 map.insert(file_name, info_map.value(category).value(file_name));
@@ -461,51 +463,26 @@ void MainWindow::textSearch_textChanged(const QString &arg1)
     }
 }
 
-// Remove Xfce-only apps from the list
-void MainWindow::removeXfceOnly(QStringList &list)
-{
-    const QStringList list_copy = list;
-    for (const QString &file_name : list_copy) {
-        QFile file(file_name);
-        if (!file.open(QFile::Text | QFile::ReadOnly))
-            continue;
-        QString text = file.readAll();
-        file.close();
-        if (text.contains(QLatin1String("OnlyShowIn=XFCE")))
-            list.removeOne(file_name);
-    }
-}
-
 // Strip %f, %F, %U, etc. if exec expects a file name since it's called without an argument from this launcher.
 void MainWindow::fixExecItem(QString &item) { item.remove(QRegularExpression(QStringLiteral(R"( %[a-zA-Z])"))); }
 
-// Remove FLUXBOX-only apps from the list
-void MainWindow::removeFLUXBOXonly(QStringList &list)
-{
-    const QStringList list_copy = list;
-    for (const QString &file_name : list_copy) {
-        QFile file(file_name);
-        if (!file.open(QFile::Text | QFile::ReadOnly))
-            continue;
-        QString text = file.readAll();
-        file.close();
-        if (text.contains(QLatin1String("OnlyShowIn=FLUXBOX")))
-            list.removeOne(file_name);
-    }
-}
-
 // When running live remove programs meant only for installed environments and the other way round
-void MainWindow::removeEnvExclusive(QStringList &list, bool live)
+// Remove XfceOnly and FluxboxOnly when not running in that environment
+void MainWindow::removeEnvExclusive(QStringList &list, const QStringList &termsToRemove)
 {
-    const QString term = live ? QStringLiteral("MX-OnlyInstalled") : QStringLiteral("MX-OnlyLive");
-    const QStringList list_copy = list;
-    for (const QString &file_name : list_copy) {
-        QFile file(file_name);
-        if (!file.open(QFile::Text | QFile::ReadOnly))
-            continue;
-        QString text = file.readAll();
-        file.close();
-        if (text.contains(term))
-            list.removeOne(file_name);
+    for (auto it = list.begin(); it != list.end();) {
+        QFile file(*it);
+        if (file.open(QFile::Text | QFile::ReadOnly)) {
+            QString text = file.readAll();
+            file.close();
+            if (std::none_of(termsToRemove.cbegin(), termsToRemove.cend(),
+                             [&text](const QString &term) { return text.contains(term); }))
+                ++it;
+            else
+                it = list.erase(it);
+        } else {
+            qWarning() << "Could not open file:" << *it;
+            ++it;
+        }
     }
 }

@@ -56,7 +56,19 @@ enum { Popular, EnabledRepos, Test, Backports, Flatpak, Output };
 }
 namespace PopCol
 {
-enum { Icon, Check, Name, Info, Description, InstallNames, UninstallNames, Screenshot, PostUninstall, PreUninstall };
+enum {
+    Icon,
+    Check,
+    Name,
+    Info,
+    Description,
+    InstallNames,
+    UninstallNames,
+    Screenshot,
+    PostUninstall,
+    PreUninstall,
+    MAX
+};
 }
 namespace TreeCol
 {
@@ -156,6 +168,7 @@ protected:
     void keyPressEvent(QKeyEvent *event);
 
 private slots:
+    void afterWindowShown();
     void checkUnckeckItem();
     void cleanup();
     void cmdDone();
@@ -209,9 +222,10 @@ private:
     Ui::MainWindow *ui;
 
     QString indexFilterFP;
-    bool dirtyBackports = true;
-    bool dirtyEnabledRepos = true;
-    bool dirtyTest = true;
+    bool dirtyBackports {true};
+    bool dirtyEnabledRepos {true};
+    bool dirtyTest {true};
+    bool firstRun {true};
     bool test_initially_enabled {};
     bool updated_once {};
     bool warning_backports {};

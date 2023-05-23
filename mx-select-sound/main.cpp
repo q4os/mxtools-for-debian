@@ -21,6 +21,7 @@
  * You should have received a copy of the GNU General Public License
  * along with mx-select-sound.  If not, see <http://www.gnu.org/licenses/>.
  **********************************************************************/
+#include "mainwindow.h"
 
 #include <QApplication>
 #include <QIcon>
@@ -28,10 +29,7 @@
 #include <QLocale>
 #include <QTranslator>
 
-#include "mainwindow.h"
 #include <unistd.h>
-
-
 
 int main(int argc, char *argv[])
 {
@@ -39,7 +37,8 @@ int main(int argc, char *argv[])
     app.setWindowIcon(QIcon::fromTheme(app.applicationName()));
 
     QTranslator qtTran;
-    if (qtTran.load(QLocale::system(), QStringLiteral("qt"), QStringLiteral("_"), QLibraryInfo::location(QLibraryInfo::TranslationsPath)))
+    if (qtTran.load(QLocale::system(), QStringLiteral("qt"), QStringLiteral("_"),
+                    QLibraryInfo::location(QLibraryInfo::TranslationsPath)))
         app.installTranslator(&qtTran);
 
     QTranslator qtBaseTran;
@@ -47,7 +46,8 @@ int main(int argc, char *argv[])
         app.installTranslator(&qtBaseTran);
 
     QTranslator appTran;
-    if (appTran.load(app.applicationName() + "_" + QLocale::system().name(), "/usr/share/" + app.applicationName() + "/locale"))
+    if (appTran.load(app.applicationName() + "_" + QLocale::system().name(),
+                     "/usr/share/" + app.applicationName() + "/locale"))
         app.installTranslator(&appTran);
 
     MainWindow w;

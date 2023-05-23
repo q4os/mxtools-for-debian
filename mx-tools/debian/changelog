@@ -1,3 +1,10 @@
+mx-tools (23.5) mx; urgency=medium
+
+  * Update logo
+  * Refresh translations
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 18 May 2023 00:11:34 -0400
+
 mx-tools (23.1.02) mx; urgency=medium
 
   * new method to set colum size

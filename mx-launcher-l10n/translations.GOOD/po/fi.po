@@ -1,0 +1,123 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+# Translators:
+# anticapitalista <anticapitalista@riseup.net>, 2017
+# Kalevipoeg <linux@disroot.org>, 2018
+# Kimmo Kujansuu <mrkujansuu@gmail.com>, 2021
+# En Kerro <inactive+ekeimaja@transifex.com>, 2022
+# Oi Suomi On! <oisuomion@protonmail.com>, 2022
+# Robin, 2023
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-03-04 14:51-0500\n"
+"PO-Revision-Date: 2016-11-29 14:08+0000\n"
+"Last-Translator: Robin, 2023\n"
+"Language-Team: Finnish (https://app.transifex.com/anticapitalista/teams/10162/fi/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: fi\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. The desktop entry name will be displayed within the menu.
+msgid "Nvidia driver installer"
+msgstr ""
+
+#. The desktop entry name will be displayed within the menu.
+msgid "Deb Installer"
+msgstr "Deb asentaja"
+
+#. The desktop entry name will be displayed within the menu.
+msgid "Format USB"
+msgstr "Alusta USB-tikku"
+
+#. The desktop entry name will be displayed within the menu.
+msgid "Job Scheduler"
+msgstr "Työn vuorontaja"
+
+#. The desktop entry name will be displayed within the menu.
+#. The desktop entry name will be displayed within the menu.
+msgid "MX Snapshot"
+msgstr "MX Tilannevedos"
+
+#. The desktop entry name will be displayed within the menu.
+msgid "MX Boot Options"
+msgstr "MX Käynnistysasetukset"
+
+#. The desktop entry name will be displayed within the menu.
+msgid "MX Boot Repair"
+msgstr "Käynnistyksen korjaus"
+
+#. The desktop entry name will be displayed within the menu.
+msgid "MX Cleanup"
+msgstr "MX Puhdistus"
+
+#. The desktop entry name will be displayed within the menu.
+msgid "MX Codecs Installer"
+msgstr "MX-Koodekkien asennusohjelma"
+
+#. The desktop entry name will be displayed within the menu.
+msgid "MX Date & Time"
+msgstr "MX päivämäärä & kellonaika"
+
+#. The desktop entry name will be displayed within the menu.
+msgid "System Locales"
+msgstr ""
+
+#. The desktop entry name will be displayed within the menu.
+msgid "xfce4-notifyd-start"
+msgstr ""
+
+#. The desktop entry name will be displayed within the menu.
+msgid "MX Live USB Maker"
+msgstr ""
+
+#. The desktop entry name will be displayed within the menu.
+msgid "MX Network Assistant"
+msgstr "MX Verkkoavustin"
+
+#. The desktop entry name will be displayed within the menu.
+msgid "MX Package Installer"
+msgstr "MX Pakettien asennus"
+
+#. The desktop entry name will be displayed within the menu.
+msgid "MX Repo Manager"
+msgstr "MX Pakettivarastojen hallinta"
+
+#. The desktop entry name will be displayed within the menu.
+msgid "MX Tweak"
+msgstr "MX Hienosäätö"
+
+#. The desktop entry name will be displayed within the menu.
+msgid "Brightness Systray"
+msgstr "Kirkkaus Systray"
+
+#. The desktop entry name will be displayed within the menu.
+msgid "mx-tweak brightness systray"
+msgstr ""
+
+#. The desktop entry name will be displayed within the menu.
+msgid "compton"
+msgstr ""
+
+#. The desktop entry name will be displayed within the menu.
+msgid "restore-software-brightness"
+msgstr ""
+
+#. The desktop entry name will be displayed within the menu.
+msgid "MX User Manager"
+msgstr "MX Käyttäjänhallinta"
+
+#. The desktop entry name will be displayed within the menu.
+msgid "System Keyboard"
+msgstr "Järjestelmän näppäimistö"
+
+msgid "Disk Manager"
+msgstr "Levynhallinta"

@@ -9,4 +9,5 @@ Homepage: https://gitlab.com/antiX-Linux/advert-block-antix
 Package: advert-block-antix
 Architecture: all
 Depends: wget
+Recommend: mx-launcher-l10n
 Description: Script and Desktop launcher for advert block, website add blocker for antiX. 

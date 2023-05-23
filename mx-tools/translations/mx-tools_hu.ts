@@ -5,7 +5,7 @@
     <name>MainWindow</name>
     <message>
         <location filename="../mainwindow.ui" line="14"/>
-        <location filename="../mainwindow.cpp" line="398"/>
+        <location filename="../mainwindow.cpp" line="410"/>
         <source>MX Tools</source>
         <translation>MX eszközök</translation>
     </message>
@@ -17,7 +17,7 @@
     <message>
         <location filename="../mainwindow.ui" line="56"/>
         <source>About...</source>
-        <translation>Névjegy</translation>
+        <translation>Névjegy...</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="63"/>
@@ -27,7 +27,7 @@
     <message>
         <location filename="../mainwindow.ui" line="127"/>
         <source>Close application</source>
-        <translation type="unfinished"></translation>
+        <translation>Alkalmazás bezárása</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="130"/>
@@ -45,42 +45,42 @@
         <translation>Kézikönyv</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="265"/>
+        <location filename="../mainwindow.ui" line="274"/>
         <source>These MX applications save time and effort with important tasks.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ezek az MX alkalmazások időt és munkát takarítanak meg, fontos feladatoknál.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="281"/>
+        <location filename="../mainwindow.ui" line="290"/>
         <source>Hide individual tools from the menu</source>
-        <translation type="unfinished"></translation>
+        <translation>Az egyes eszközök elrejtése a menüben</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="300"/>
+        <location filename="../mainwindow.ui" line="309"/>
         <source>search</source>
         <translation>keresés</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="397"/>
+        <location filename="../mainwindow.cpp" line="409"/>
         <source>About MX Tools</source>
-        <translation type="unfinished"></translation>
+        <translation>Az MX eszközökről</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="398"/>
+        <location filename="../mainwindow.cpp" line="410"/>
         <source>Version: </source>
         <translation>Verzió:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="399"/>
+        <location filename="../mainwindow.cpp" line="411"/>
         <source>Configuration Tools for MX Linux</source>
-        <translation type="unfinished"></translation>
+        <translation>Beállítási eszközök MX Linuxhoz</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="402"/>
+        <location filename="../mainwindow.cpp" line="414"/>
         <source>Copyright (c) MX Linux</source>
         <translation>Copyright (c) MX Linux</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="403"/>
+        <location filename="../mainwindow.cpp" line="415"/>
         <source>%1 License</source>
         <translation>%1 licenc</translation>
     </message>
@@ -88,25 +88,25 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../about.cpp" line="42"/>
-        <source>License</source>
-        <translation>Liszensz</translation>
-    </message>
-    <message>
         <location filename="../about.cpp" line="43"/>
-        <location filename="../about.cpp" line="53"/>
-        <source>Changelog</source>
-        <translation>Változásbejegyzés</translation>
+        <source>License</source>
+        <translation>Licenc</translation>
     </message>
     <message>
         <location filename="../about.cpp" line="44"/>
+        <location filename="../about.cpp" line="54"/>
+        <source>Changelog</source>
+        <translation>Változások listája</translation>
+    </message>
+    <message>
+        <location filename="../about.cpp" line="45"/>
         <source>Cancel</source>
         <translation>Mégsem</translation>
     </message>
     <message>
-        <location filename="../about.cpp" line="66"/>
+        <location filename="../about.cpp" line="67"/>
         <source>&amp;Close</source>
-        <translation>&amp;Bezár</translation>
+        <translation>&amp;Bezárás</translation>
     </message>
 </context>
 </TS>

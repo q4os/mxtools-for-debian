@@ -689,6 +689,11 @@ bool defaultlook::checkPlasma() const
 // backs up the current panel configuration
 void defaultlook::backupPanel()
 {
+    //ensure .restore folder exists
+    QString home_path = QDir::homePath();
+    if ( ! QDir(home_path + "/.restore/").exists()){
+        runCmd("mkdir -p " + home_path + "/.restore/");
+    }
     //validate file name
     qDebug() << "ui file name " << ui->lineEditBackupName->text();
     //QRegExp rx("(@|\\$|%|\\&|\\*|(|)|{|}|[|]|/|\\|\\?");
@@ -700,8 +705,6 @@ void defaultlook::backupPanel()
                                  tr("Plese remove special characters") + "@,$,%,&,*,(,),[,],{,},|,\\,?" + tr("from file name"));
         validateflag = true;
         } else {
-
-        QString home_path = QDir::homePath();
         QString path = home_path + "/.restore/" + ui->lineEditBackupName->text() + ".tar.xz";
         qDebug() << path;
         //check filename existence
@@ -796,6 +799,7 @@ void defaultlook::on_radioBackupPanel_clicked()
         ui->checkVert->setChecked(false);
         ui->radioDefaultPanel->setChecked(false);
         ui->radioRestoreBackup->setChecked(false);
+        ui->lineEditBackupName->setText("panel_backup_" + QDateTime::currentDateTime().toString("dd.MM.yyyy.hh.mm.ss"));
         ui->lineEditBackupName->show();
     }
 }
@@ -939,10 +943,18 @@ void defaultlook::setuppanel()
         migratepanel(backuppanel.lastModified().toString("dd.MM.yyyy.hh.mm.ss"));
         //message2();
     }
+
     ui->comboBoxAvailableBackups->clear();
     ui->lineEditBackupName->hide();
     ui->lineEditBackupName->setText("panel_backup_" + QDateTime::currentDateTime().toString("dd.MM.yyyy.hh.mm.ss"));
     QStringList availablebackups = QDir(home_path + "/.restore").entryList(QStringList() << "*.tar.xz",QDir::Files);
+
+    // if backup available, make the restore backup option available
+
+    if ( availablebackups.isEmpty()){
+        backupPanel();
+        availablebackups = QDir(home_path + "/.restore").entryList(QStringList() << "*.tar.xz",QDir::Files);
+    }
     availablebackups.replaceInStrings(".tar.xz", "");
     ui->comboBoxAvailableBackups->addItems(availablebackups);
     ui->radioBackupPanel->setToolTip(home_path + "/.restore");
@@ -1001,14 +1013,6 @@ void defaultlook::setuppanel()
         if (test2 == QLatin1String("p=1")) {
             ui->comboboxVertpostition->setCurrentIndex(1);
         }
-    }
-
-    // if backup available, make the restore backup option available
-
-    if ( availablebackups.isEmpty()){
-        backupPanel();
-        ui->radioRestoreBackup->setEnabled(false);
-        ui->comboBoxAvailableBackups->hide();
     }
 
     panelflag = true;
@@ -1201,6 +1205,20 @@ void defaultlook::setupFluxbox()
     if (verbose) qDebug() << "slit autohide" << slitautohide;
     ui->checkboxfluxSlitautohide->setChecked(slitautohide == QLatin1String("true"));
     ui->ApplyFluxboxResets->setDisabled(true);
+
+    //thunar options
+    //only if thunar exists, else hide
+    if (QFile("/usr/bin/thunar").exists()){
+        //thunar single click
+        thunarsingleclicksetup();
+        //thunarsetupsplitview
+        thunarsetupsplitview();
+    } else {
+        ui->checkBoxThunarCAReset_2->hide();
+        ui->checkBoxThunarSplitView_2->hide();
+        ui->checkBoxsplitviewhorizontal_2->hide();
+        ui->checkBoxThunarSingleClick_2->hide();
+    }
 }
 
 void defaultlook::setupEtc()
@@ -1453,17 +1471,10 @@ void defaultlook::setupConfigoptions()
         ui->checkBoxSingleClick->setChecked(test == QLatin1String("true"));
 
         //check single click thunar status
-        test = runCmd(QStringLiteral("xfconf-query  -c thunar -p /misc-single-click")).output;
-        ui->checkBoxThunarSingleClick->setChecked(test == QLatin1String("true"));
+        thunarsingleclicksetup();
 
         //check split window status
-        test = runCmd(QStringLiteral("xfconf-query  -c thunar -p /misc-open-new-windows-in-split-view")).output;
-        ui->checkBoxThunarSplitView->setChecked(test == QLatin1String("true"));
-
-        //check split view horizontal or vertical.  default false is vertical, true is horizontal;
-        test = runCmd(QStringLiteral("xfconf-query  -c thunar -p /misc-vertical-split-pane")).output;
-        ui->checkBoxsplitviewhorizontal->setChecked(test == QLatin1String("true"));
-
+        thunarsetupsplitview();
         //check systray frame status
         //frame has been removed from systray
 
@@ -2590,27 +2601,26 @@ void defaultlook::on_ButtonApplyMiscDefualts_clicked()
         runCmd(QStringLiteral("xfconf-query  -c xfce4-desktop -p /desktop-icons/single-click -s false"));
     }
 
-    if (ui->checkBoxThunarSingleClick->isChecked()) {
-        runCmd(QStringLiteral("xfconf-query  -c thunar -p /misc-single-click -s true"));
+    //thunar single click
+    if (ui->checkBoxThunarSingleClick->isChecked()){
+        thunarsetsingleclick(true);
     } else {
-        runCmd(QStringLiteral("xfconf-query  -c thunar -p /misc-single-click -s false"));
+        thunarsetsingleclick(false);
     }
 
     //split view thunar
-    if (ui->checkBoxThunarSplitView->isChecked()){
-        runCmd(QStringLiteral("xfconf-query  -c thunar -p /misc-open-new-windows-in-split-view -t bool -s true --create"));
+    if (ui->checkBoxThunarSplitView->isChecked() ){
+        thunarsplitview(true);
     } else {
-        runCmd(QStringLiteral("xfconf-query  -c thunar -p /misc-open-new-windows-in-split-view --reset"));
-
+        thunarsplitview(false);
     }
 
     //split view thunar horizontal or vertical
     if (ui->checkBoxsplitviewhorizontal->isChecked()){
-        runCmd(QStringLiteral("xfconf-query -c thunar -p /misc-vertical-split-pane -t bool -s true --create"));
+        thunarsplitviewhorizontal(true);
     } else {
-        runCmd(QStringLiteral("xfconf-query -c thunar -p /misc-vertical-split-pane --reset"));
+        thunarsplitviewhorizontal(false);
     }
-
     //systray frame removed
 
     //set desktop zoom
@@ -2621,9 +2631,7 @@ void defaultlook::on_ButtonApplyMiscDefualts_clicked()
     }
 
     if (ui->checkBoxThunarCAReset->isChecked()) {
-        cmd = QStringLiteral("cp /home/$USER/.config/Thunar/uca.xml /home/$USER/.config/Thunar/uca.xml.$(date +%Y%m%H%M%S)");
-        system(cmd.toUtf8());
-        runCmd(QStringLiteral("cp /etc/skel/.config/Thunar/uca.xml /home/$USER/.config/Thunar/uca.xml"));
+        resetthunar();
     }
 
     //deal with gtk dialog button settings
@@ -3021,6 +3029,34 @@ void defaultlook::on_ApplyFluxboxResets_clicked()
         runCmd(QStringLiteral("$HOME/.fluxbox/scripts/DefaultDock.mxdk"));
     }
 
+    //thunar actions
+    //only if thunar installed
+    if ( QFile("/usr/bin/thunar").exists()){
+        //reset thunar custom actions
+        if (ui->checkBoxThunarCAReset->isChecked()) {
+            resetthunar();
+        }
+        //thunar single click
+        if (ui->checkBoxThunarSingleClick_2->isChecked()){
+            thunarsetsingleclick(true);
+        } else {
+            thunarsetsingleclick(false);
+        }
+
+        //split view thunar
+        if (ui->checkBoxThunarSplitView_2->isChecked() ){
+            thunarsplitview(true);
+        } else {
+            thunarsplitview(false);
+        }
+
+        //split view thunar horizontal or vertical
+        if (ui->checkBoxsplitviewhorizontal_2->isChecked()){
+            thunarsplitviewhorizontal(true);
+        } else {
+            thunarsplitviewhorizontal(false);
+        }
+    }
     //when all done, restart fluxbox
     ui->checkboxfluxresetdock->setChecked(false);
     ui->checkboxfluxresetmenu->setChecked(false);
@@ -3376,7 +3412,7 @@ void defaultlook::settheme(const QString &type, const QString &theme, const QStr
             cmd = cmd = "yad --form --title \"Preview\"  --button:gtk-ok --field=Button:FBTN --field=Combobox:CBE --field=Checkbox:CHK --close-on-unfocus";
             system(cmd.toUtf8());
             cmd = "sed -i 's/gtk-icon-theme-name=\".*/gtk-icon-theme-name=\"" + theme + "\"/' $HOME/.gtkrc-2.0";
-        }        
+        }
     }
     system(cmd.toUtf8());
 }
@@ -3515,4 +3551,76 @@ void defaultlook::on_checkBoxThunarSplitView_clicked()
 void defaultlook::on_checkBoxsplitviewhorizontal_clicked()
 {
     ui->ButtonApplyMiscDefualts->setEnabled(true);
+}
+
+void defaultlook::thunarsplitview(bool state){
+
+    if (state){
+        runCmd(QStringLiteral("xfconf-query  -c thunar -p /misc-open-new-windows-in-split-view -t bool -s true --create"));
+    } else {
+        runCmd(QStringLiteral("xfconf-query  -c thunar -p /misc-open-new-windows-in-split-view --reset"));
+    }
+}
+
+void defaultlook::thunarsplitviewhorizontal(bool state){
+    if (state){
+        runCmd(QStringLiteral("xfconf-query -c thunar -p /misc-vertical-split-pane -t bool -s true --create"));
+    } else {
+        runCmd(QStringLiteral("xfconf-query -c thunar -p /misc-vertical-split-pane --reset"));
+    }
+}
+
+void defaultlook::thunarsetupsplitview(){
+    QString test;
+    //check split window status
+    test = runCmd(QStringLiteral("xfconf-query  -c thunar -p /misc-open-new-windows-in-split-view")).output;
+    ui->checkBoxThunarSplitView->setChecked(test == QLatin1String("true"));
+    ui->checkBoxThunarSplitView_2->setChecked(test == QLatin1String("true"));
+
+    //check split view horizontal or vertical.  default false is vertical, true is horizontal;
+    test = runCmd(QStringLiteral("xfconf-query  -c thunar -p /misc-vertical-split-pane")).output;
+    ui->checkBoxsplitviewhorizontal->setChecked(test == QLatin1String("true"));
+    ui->checkBoxsplitviewhorizontal_2->setChecked(test == QLatin1String("true"));
+}
+
+void defaultlook::resetthunar(){
+    QString cmd = QStringLiteral("cp /home/$USER/.config/Thunar/uca.xml /home/$USER/.config/Thunar/uca.xml.$(date +%Y%m%H%M%S)");
+    system(cmd.toUtf8());
+    runCmd(QStringLiteral("cp /etc/skel/.config/Thunar/uca.xml /home/$USER/.config/Thunar/uca.xml"));
+}
+
+void defaultlook::thunarsingleclicksetup(){
+    //check single click thunar status
+    QString test = runCmd(QStringLiteral("xfconf-query  -c thunar -p /misc-single-click")).output;
+    ui->checkBoxThunarSingleClick->setChecked(test == QLatin1String("true"));
+    ui->checkBoxThunarSingleClick_2->setChecked(test == QLatin1String("true"));
+
+}
+
+void defaultlook::thunarsetsingleclick(bool state){
+    if (state) {
+        runCmd(QStringLiteral("xfconf-query  -c thunar -p /misc-single-click -s true --create"));
+    } else {
+        runCmd(QStringLiteral("xfconf-query  -c thunar -p /misc-single-click -s false --create"));
+    }
+}
+
+void defaultlook::on_checkBoxThunarCAReset_2_clicked()
+{
+    ui->ApplyFluxboxResets->setEnabled(true);
+}
+
+void defaultlook::on_checkBoxThunarSplitView_2_clicked()
+{
+    ui->ApplyFluxboxResets->setEnabled(true);
+}
+
+void defaultlook::on_checkBoxsplitviewhorizontal_2_clicked()
+{
+    ui->ApplyFluxboxResets->setEnabled(true);
+}
+
+void defaultlook::on_checkBoxThunarSingleClick_2_clicked()
+{
+    ui->ApplyFluxboxResets->setEnabled(true);
 }

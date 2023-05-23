@@ -1,285 +1,567 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="ja">
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.1" language="ja">
 <context>
-    <name>MXDateTime</name>
+    <name>MainWindow</name>
     <message>
-        <location filename="../datetime.ui" line="20"/>
-        <location filename="../datetime.cpp" line="604"/>
-        <source>MX Date &amp; Time</source>
-        <translation>MX Date &amp; Time</translation>
+        <location filename="../mainwindow.ui" line="26"/>
+        <source>MX Network Assistant</source>
+        <translation>MX ネットワーク・アシスタント</translation>
     </message>
     <message>
-        <location filename="../datetime.ui" line="26"/>
-        <source>Close</source>
-        <translation>閉じる</translation>
-    </message>
-    <message>
-        <location filename="../datetime.ui" line="40"/>
-        <source>Help</source>
-        <translation>ヘルプ</translation>
-    </message>
-    <message>
-        <location filename="../datetime.ui" line="73"/>
-        <source>Apply</source>
-        <translation>適用</translation>
-    </message>
-    <message>
-        <location filename="../datetime.ui" line="100"/>
+        <location filename="../mainwindow.ui" line="86"/>
         <source>About...</source>
         <translation>情報...</translation>
     </message>
     <message>
-        <location filename="../datetime.ui" line="124"/>
-        <source>Date &amp;&amp; Time</source>
-        <translation>日付 &amp;&amp; 時間</translation>
+        <location filename="../mainwindow.ui" line="109"/>
+        <source>Help</source>
+        <translation>ヘルプ</translation>
     </message>
     <message>
-        <location filename="../datetime.ui" line="192"/>
-        <source>H:mm:ss</source>
-        <translation>時:分:秒</translation>
-    </message>
-    <message>
-        <location filename="../datetime.ui" line="278"/>
-        <location filename="../datetime.cpp" line="296"/>
-        <location filename="../datetime.cpp" line="303"/>
-        <source>Hardware Clock</source>
-        <translation>ハードウェアクロック</translation>
-    </message>
-    <message>
-        <location filename="../datetime.ui" line="284"/>
-        <source>Hardware Clock tools</source>
-        <translation>ハードウェアクロックのツール</translation>
-    </message>
-    <message>
-        <location filename="../datetime.ui" line="290"/>
-        <source>Obtain information from the Hardware Clock and present it in the box below.</source>
-        <translation>ハードウェアクロックから情報を入手し、下のボックスに示します。</translation>
-    </message>
-    <message>
-        <location filename="../datetime.ui" line="293"/>
-        <source>Read the Hardware Clock</source>
-        <translation>ハードウェアクロックの取得</translation>
-    </message>
-    <message>
-        <location filename="../datetime.ui" line="303"/>
-        <source>Apply systematic drift corrections to the Hardware Clock.</source>
-        <translation>ハードウェアクロックにシステマティックなドリフト補正を適用します。</translation>
-    </message>
-    <message>
-        <location filename="../datetime.ui" line="306"/>
-        <source>Drift Adjust</source>
-        <translation>ドリフト補正</translation>
-    </message>
-    <message>
-        <location filename="../datetime.ui" line="329"/>
-        <source>Time transfer</source>
-        <translation>時間の転送</translation>
-    </message>
-    <message>
-        <location filename="../datetime.ui" line="335"/>
-        <source>Immediately set the System Clock to match the current time registered by the Hardware Clock.</source>
-        <translation>ハードウェアクロックに登録されている現在時刻に合わせて、システムクロックを直ちに設定します。</translation>
-    </message>
-    <message>
-        <location filename="../datetime.ui" line="338"/>
-        <source>Hardware Clock to System Clock</source>
-        <translation>ハードウェアクロックをシステムクロックに</translation>
-    </message>
-    <message>
-        <location filename="../datetime.ui" line="348"/>
-        <source>Immediately set the Hardware Clock to match the current time registered by the System Clock.</source>
-        <translation>システムクロックに登録されている現在の時刻に合わせて、直ちにハードウェアクロックを設定します。</translation>
-    </message>
-    <message>
-        <location filename="../datetime.ui" line="351"/>
-        <source>System Clock to Hardware Clock</source>
-        <translation>システムクロックをハードウェアクロックに</translation>
-    </message>
-    <message>
-        <location filename="../datetime.ui" line="361"/>
-        <source>Update the drift factor for the Hardware Clock when it is being set.</source>
-        <translation>ハードウェアクロックが設定されている時、ドリフト係数を更新します。</translation>
-    </message>
-    <message>
-        <location filename="../datetime.ui" line="364"/>
-        <source>Update the drift</source>
-        <translation>ドリフトを更新</translation>
-    </message>
-    <message>
-        <location filename="../datetime.ui" line="374"/>
-        <source>Time zone for the Hardware Clock</source>
-        <translation>ハードウェアクロックのタイムゾーン</translation>
-    </message>
-    <message>
-        <location filename="../datetime.ui" line="380"/>
-        <source>Local time</source>
-        <translation>現地時刻</translation>
-    </message>
-    <message>
-        <location filename="../datetime.ui" line="383"/>
-        <source>Local</source>
-        <translation>地域</translation>
-    </message>
-    <message>
-        <location filename="../datetime.ui" line="390"/>
-        <source>Universally Coordinated Time (or Greenwich Meridian Time)</source>
-        <translation>世界標準時（グリニッジ標準時）</translation>
-    </message>
-    <message>
-        <location filename="../datetime.ui" line="393"/>
-        <source>UTC</source>
-        <translation>UTC</translation>
-    </message>
-    <message>
-        <location filename="../datetime.ui" line="433"/>
-        <source>Network Time</source>
-        <translation>Network Time</translation>
-    </message>
-    <message>
-        <location filename="../datetime.ui" line="439"/>
-        <source>Move the selected item down</source>
-        <translation>選択したアイテムを下に移動</translation>
-    </message>
-    <message>
-        <location filename="../datetime.ui" line="450"/>
-        <source>Move the selected item up</source>
-        <translation>選択したアイテムを上に移動</translation>
-    </message>
-    <message>
-        <location filename="../datetime.ui" line="461"/>
-        <source>Remove the current item from the list</source>
-        <translation>一覧から現在のアイテムを削除</translation>
-    </message>
-    <message>
-        <location filename="../datetime.ui" line="472"/>
-        <source>Add an item to the list</source>
-        <translation>一覧にアイテムを追加</translation>
-    </message>
-    <message>
-        <location filename="../datetime.ui" line="498"/>
-        <source>Automatically update the System Clock with NTP servers:</source>
-        <translation>NTPサーバーでシステムクロックを自動的に更新：</translation>
-    </message>
-    <message>
-        <location filename="../datetime.ui" line="505"/>
-        <source>Immediately update the system clock with NTP servers.</source>
-        <translation>NTPサーバーでシステムクロックを今すぐ更新</translation>
-    </message>
-    <message>
-        <location filename="../datetime.ui" line="508"/>
-        <source>Update Now</source>
-        <translation>今すぐ更新</translation>
-    </message>
-    <message>
-        <location filename="../datetime.ui" line="520"/>
-        <source>List of NTP servers to use.</source>
-        <translation>利用可能な NTP サーバー一覧</translation>
-    </message>
-    <message>
-        <location filename="../datetime.ui" line="536"/>
-        <source>Type</source>
-        <translation>種類</translation>
-    </message>
-    <message>
-        <location filename="../datetime.ui" line="541"/>
-        <source>Address</source>
-        <translation>アドレス</translation>
-    </message>
-    <message>
-        <location filename="../datetime.ui" line="546"/>
-        <source>Options</source>
-        <translation>オプション</translation>
-    </message>
-    <message>
-        <location filename="../datetime.cpp" line="270"/>
-        <source>Reading...</source>
-        <translation>読み込み中...</translation>
-    </message>
-    <message>
-        <location filename="../datetime.cpp" line="284"/>
-        <source>Adjusting...</source>
-        <translation>調整中...</translation>
-    </message>
-    <message>
-        <location filename="../datetime.cpp" line="296"/>
-        <location filename="../datetime.cpp" line="303"/>
-        <source>System Clock</source>
-        <translation>システムクロック</translation>
-    </message>
-    <message>
-        <location filename="../datetime.cpp" line="309"/>
-        <source>The %1 time was transferred to the %2.</source>
-        <translation>%1 の時間を %2 に転送しました。</translation>
-    </message>
-    <message>
-        <location filename="../datetime.cpp" line="312"/>
-        <source>The %1 time could not be transferred to the %2.</source>
-        <translation>%1 の時間を %2 に転送できません。</translation>
-    </message>
-    <message>
-        <location filename="../datetime.cpp" line="352"/>
-        <source>Updating...</source>
-        <translation>更新中...</translation>
-    </message>
-    <message>
-        <location filename="../datetime.cpp" line="365"/>
-        <source>The system clock was updated successfully.</source>
-        <translation>システムクロックの更新に成功しました。</translation>
-    </message>
-    <message>
-        <location filename="../datetime.cpp" line="367"/>
-        <source>The system clock could not be updated.</source>
-        <translation>システムクロックは更新されませんでした。</translation>
-    </message>
-    <message>
-        <location filename="../datetime.cpp" line="369"/>
-        <source>None of the NTP servers on the list are currently enabled.</source>
-        <translation>リスト上の NTP サーバーは現在有効ではありません。</translation>
-    </message>
-    <message>
-        <location filename="../datetime.cpp" line="603"/>
-        <source>About MX Date &amp; Time</source>
-        <translation>MX Date &amp; Time について</translation>
-    </message>
-    <message>
-        <location filename="../datetime.cpp" line="604"/>
-        <source>Version: </source>
-        <translation>バージョン: </translation>
-    </message>
-    <message>
-        <location filename="../datetime.cpp" line="605"/>
-        <source>GUI program for setting the time and date in MX Linux</source>
-        <translation>MX Linux で日時を設定する GUI プログラム</translation>
-    </message>
-    <message>
-        <location filename="../datetime.cpp" line="607"/>
-        <source>Copyright (c) MX Linux</source>
-        <translation>Copyright (c) MX Linux</translation>
-    </message>
-    <message>
-        <location filename="../datetime.cpp" line="608"/>
-        <location filename="../datetime.cpp" line="622"/>
-        <source>License</source>
-        <translation>ライセンス</translation>
-    </message>
-    <message>
-        <location filename="../datetime.cpp" line="609"/>
-        <source>Changelog</source>
-        <translation>更新履歴</translation>
-    </message>
-    <message>
-        <location filename="../datetime.cpp" line="610"/>
-        <source>Cancel</source>
-        <translation>キャンセル</translation>
-    </message>
-    <message>
-        <location filename="../datetime.cpp" line="636"/>
+        <location filename="../mainwindow.ui" line="177"/>
         <source>&amp;Close</source>
         <translation>閉じる(&amp;C)</translation>
     </message>
     <message>
-        <location filename="../datetime.cpp" line="654"/>
-        <source>MX Date &amp; Time Help</source>
-        <translation>MX Date &amp; Time のヘルプ</translation>
+        <location filename="../mainwindow.ui" line="184"/>
+        <source>Alt+C</source>
+        <translation>Alt+C</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="219"/>
+        <source>Status</source>
+        <translation>ステータス</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="225"/>
+        <source>IP address</source>
+        <translation>IP アドレス</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="261"/>
+        <source>Hardware detected</source>
+        <translation>ハードウェアの検出</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="280"/>
+        <source>Enable</source>
+        <translation>有効化</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="303"/>
+        <location filename="../mainwindow.ui" line="593"/>
+        <location filename="../mainwindow.ui" line="706"/>
+        <source>Re-scan</source>
+        <translation>再スキャン</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="372"/>
+        <source>Enabled</source>
+        <translation>有効</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="377"/>
+        <source>Interface</source>
+        <translation>インターフェース</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="382"/>
+        <source>Driver</source>
+        <translation>ドライバ</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="387"/>
+        <source>Description</source>
+        <translation>説明</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="392"/>
+        <source>Vendor</source>
+        <translation>ベンダ</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="397"/>
+        <source>Product</source>
+        <translation>製品</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="405"/>
+        <source>Disable</source>
+        <translation>無効化</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="419"/>
+        <source>Active interface</source>
+        <translation>アクティブなインターフェース</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="435"/>
+        <source>WiFi status</source>
+        <translation>WiFi ステータス</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="457"/>
+        <source>Unblocks all soft/hard blocked wireless devices</source>
+        <translation>全ての無線デバイスのブロックを解除</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="460"/>
+        <source>Unblock WiFi Devices</source>
+        <translation>Wi-Fi デバイスのブロック解除</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="492"/>
+        <source>Linux drivers</source>
+        <translation>Linux ドライバ</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="504"/>
+        <source>Associated Linux drivers</source>
+        <translation>関連の Linux ドライバ</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="513"/>
+        <source>Load Driver</source>
+        <translation>ドライバの読み込み</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="576"/>
+        <source>Unload Driver</source>
+        <translation>ドライバの読み込み解除</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="613"/>
+        <location filename="../mainwindow.cpp" line="847"/>
+        <source>Block Driver</source>
+        <translation>デバイスをブロック</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="632"/>
+        <source>Windows drivers</source>
+        <translation>Windows ドライバ</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="638"/>
+        <source>Available Windows drivers</source>
+        <translation>利用可能な Windowsドライバ</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="672"/>
+        <source>Remove Driver</source>
+        <translation>ドライバを削除</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="683"/>
+        <source>Add Driver</source>
+        <translation>ドライバを追加</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="724"/>
+        <source>About NDISwrapper</source>
+        <translation>NDISwrapper について</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="736"/>
+        <source>Install NDISwrapper</source>
+        <translation>NDISwrapper のインストール</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="747"/>
+        <source>In order to use Windows drivers you need first to install NDISwrapper</source>
+        <translation>Windowsドライバを使用するためには、まず NDISwrapper をインストールする必要があります</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="763"/>
+        <source>Uninstall NDISwrapper</source>
+        <translation>NDISwrapper を削除</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="795"/>
+        <source>Net diagnostics</source>
+        <translation>ネット診断</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="807"/>
+        <source>Ping</source>
+        <translation>Ping</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="813"/>
+        <location filename="../mainwindow.ui" line="930"/>
+        <source>Target URL:</source>
+        <translation>送出先 URL:</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="823"/>
+        <source>Packets</source>
+        <translation>パケット</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="865"/>
+        <location filename="../mainwindow.ui" line="985"/>
+        <source>Start</source>
+        <translation>開始</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="882"/>
+        <location filename="../mainwindow.ui" line="1002"/>
+        <source>Clear</source>
+        <translation>クリア</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="896"/>
+        <location filename="../mainwindow.ui" line="1016"/>
+        <source>Cancel</source>
+        <translation>キャンセル</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="924"/>
+        <source>Traceroute</source>
+        <translation>トレースルート</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="940"/>
+        <source>Hops</source>
+        <translation>Hops</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="98"/>
+        <source>IP address from router:</source>
+        <translation>ルーターの IP アドレス:</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="99"/>
+        <source>External IP address:</source>
+        <translation>外部 IP アドレス:</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="135"/>
+        <location filename="../mainwindow.cpp" line="148"/>
+        <source>Interface: %1</source>
+        <translation>インターフェース: %1</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="135"/>
+        <location filename="../mainwindow.cpp" line="149"/>
+        <source>Driver: %1</source>
+        <translation>ドライバ: %1</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="136"/>
+        <location filename="../mainwindow.cpp" line="150"/>
+        <source>Description: %1</source>
+        <translation>説明: %1</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="137"/>
+        <location filename="../mainwindow.cpp" line="151"/>
+        <source>Product: %1</source>
+        <translation>製品: %1</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="137"/>
+        <location filename="../mainwindow.cpp" line="152"/>
+        <source>Vendor: %1</source>
+        <translation>ベンダ: %1</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="138"/>
+        <location filename="../mainwindow.cpp" line="153"/>
+        <source>Enabled: %1</source>
+        <translation>有効: %1</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="206"/>
+        <location filename="../mainwindow.cpp" line="220"/>
+        <location filename="../mainwindow.cpp" line="234"/>
+        <source>&amp;Copy</source>
+        <translation>コピー(&amp;C)</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="208"/>
+        <location filename="../mainwindow.cpp" line="222"/>
+        <location filename="../mainwindow.cpp" line="236"/>
+        <source>Ctrl+C</source>
+        <translation>Ctrl+C</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="209"/>
+        <location filename="../mainwindow.cpp" line="223"/>
+        <location filename="../mainwindow.cpp" line="237"/>
+        <source>Copy &amp;All</source>
+        <translation>すべてコピー(&amp;A)</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="211"/>
+        <location filename="../mainwindow.cpp" line="225"/>
+        <location filename="../mainwindow.cpp" line="239"/>
+        <source>Ctrl+A</source>
+        <translation>Ctrl+A</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="264"/>
+        <location filename="../mainwindow.cpp" line="282"/>
+        <source>Traceroute not installed</source>
+        <translation>トレースルートがインストールされていません</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="265"/>
+        <source>Traceroute is not installed, do you want to install it now?</source>
+        <translation>トレースルートがインストールされていません。今すぐインストールを行いますか？</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="272"/>
+        <source>Traceroute hasn&apos;t been installed</source>
+        <translation>トレースルートをインストールできませんでした</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="273"/>
+        <source>Traceroute cannot be installed. This may mean you are using the LiveCD or you are unable to reach the software repository,</source>
+        <translation>トレースルートをインストールできません。これは LiveCD を使用しているか、ソフトウェアリポジトリへ接続できないからです。</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="283"/>
+        <source>Traceroute is not installed and no Internet connection could be detected so it cannot be installed</source>
+        <translation>トレースルートがインストールされておらず、インターネットに接続されていないためインストールできません。</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="290"/>
+        <location filename="../mainwindow.cpp" line="329"/>
+        <source>No destination host</source>
+        <translation>宛先のホストは存在しません</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="290"/>
+        <location filename="../mainwindow.cpp" line="329"/>
+        <source>Please fill in the destination host field</source>
+        <translation>宛先ホスト欄を入力して下さい</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="454"/>
+        <source>Loaded Drivers</source>
+        <translation>ロードしたドライバー</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="462"/>
+        <source>Unloaded Drivers</source>
+        <translation>ロードしていないドライバー</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="475"/>
+        <source>Blocked Drivers</source>
+        <translation>ブロックしたデバイス</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="494"/>
+        <source>Blocked Broadcom Drivers</source>
+        <translation>ブロックした Broadcom ドライバ</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="515"/>
+        <source>Ndiswrapper is not installed</source>
+        <translation>Ndiswrapper はインストールされていません</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="527"/>
+        <source>driver installed</source>
+        <translation>ドライバはインストール済み</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="536"/>
+        <source> and in use by </source>
+        <translation>で使用中</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="543"/>
+        <source>. Alternate driver: </source>
+        <translation> 代替ドライバー:</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="614"/>
+        <source>Driver removed from blocklist</source>
+        <translation>ブロックリストから除外されたドライバ</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="614"/>
+        <source>Driver removed from blocklist.</source>
+        <translation>ブロックリストから除外されたドライバ</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="620"/>
+        <source>Module blocked</source>
+        <translation>モジュールはブロック中</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="780"/>
+        <source>Installation successful</source>
+        <translation>インストール完了</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="782"/>
+        <source>Error detected, could not compile ndiswrapper driver.</source>
+        <translation>エラーを検出しました。ndiswrapper ドライバをコンパイルできませんでした。</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="785"/>
+        <source>Error detected, could not install ndiswrapper.</source>
+        <translation>エラーを検出したので ndiswrapper をインストールできませんでした。</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="797"/>
+        <source>Error encountered while removing Ndiswrapper</source>
+        <translation>ndiswrapper の削除中にエラーが発生しました</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="844"/>
+        <source>Unblock Driver</source>
+        <translation>ドライバのブロックを解除</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="876"/>
+        <source>enabled</source>
+        <translation>有効化</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="879"/>
+        <source>disabled</source>
+        <translation>無効化</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="882"/>
+        <source>WiFi hardware switch is off</source>
+        <translation>WiFi のハードウェアスイッチがオフです</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="890"/>
+        <source>Locate the Windows driver you want to add</source>
+        <translation>追加する Windows ドライバを探します</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="891"/>
+        <source>Windows installation information file (*.inf)</source>
+        <translation>Windows インストール情報ファイル (*.inf)</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="921"/>
+        <source>*.sys file not found</source>
+        <translation>*.sys ファイルが見つかりません</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="922"/>
+        <source>The *.sys files must be in the same location as the *.inf file. %1 cannot be found</source>
+        <translation>*.sys ファイルは *.infファイルと同じ場所にある必要があります。  %1 が見つかりません</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="933"/>
+        <source>sys file reference not found</source>
+        <translation>参照する sys ファイルが見つかりません</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="934"/>
+        <source>The sys file for the given driver cannot be determined after parsing the inf file</source>
+        <translation>指定 sys ファイルのドライバは、inf ファイルを解析しても決定することができません</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="948"/>
+        <source>Ndiswrapper driver removed.</source>
+        <translation>Ndiswrapper ドライバを削除しました。</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="956"/>
+        <source>%1 Help</source>
+        <translation>%1 のヘルプ</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="965"/>
+        <source>Could not unlock devices.
+WiFi device(s) might already be unlocked.</source>
+        <translation>デバイスのロック解除を行えません。
+Wi-Fi デバイスはすでにロック解除されたようです。</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="967"/>
+        <source>WiFi devices unlocked.</source>
+        <translation>Wi-Fi デバイスのロックを解除しました。</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="978"/>
+        <source>About %1</source>
+        <translation> %1 について</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="979"/>
+        <source>Version: </source>
+        <translation>バージョン：</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="981"/>
+        <source>Program for troubleshooting and configuring network for MX Linux</source>
+        <translation>MX Linux のネットワーク設定とトラブル解決を行うプログラム</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="983"/>
+        <source>Copyright (c) MEPIS LLC and MX Linux</source>
+        <translation>Copyright (c) MEPIS LLC and MX Linux</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="984"/>
+        <source>%1 License</source>
+        <translation>%1 ライセンス</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="1003"/>
+        <source>Driver loaded successfully</source>
+        <translation>ドライバは正常に読み込みまれました</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="1018"/>
+        <source>Driver unloaded successfully</source>
+        <translation>ドライバの読み込みを無効にしました</translation>
+    </message>
+</context>
+<context>
+    <name>QObject</name>
+    <message>
+        <location filename="../about.cpp" line="52"/>
+        <source>License</source>
+        <translation>ライセンス</translation>
+    </message>
+    <message>
+        <location filename="../about.cpp" line="53"/>
+        <location filename="../about.cpp" line="62"/>
+        <source>Changelog</source>
+        <translation>更新履歴</translation>
+    </message>
+    <message>
+        <location filename="../about.cpp" line="54"/>
+        <source>Cancel</source>
+        <translation>キャンセル</translation>
+    </message>
+    <message>
+        <location filename="../about.cpp" line="74"/>
+        <source>&amp;Close</source>
+        <translation>閉じる(&amp;C)</translation>
+    </message>
+    <message>
+        <location filename="../main.cpp" line="64"/>
+        <source>Error</source>
+        <translation>エラー</translation>
+    </message>
+    <message>
+        <location filename="../main.cpp" line="65"/>
+        <source>You seem to be logged in as root, please log out and log in as normal user to use this program.</source>
+        <translation>root としてログインしているようです。このプログラムを使用するには、一度ログアウトして通常のユーザーとしてログインしてください。</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="637"/>
+        <source>Could not load </source>
+        <translation>読み込めませんでした</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="661"/>
+        <source>Could not unload </source>
+        <translation>アンロードできませんでした</translation>
     </message>
 </context>
 </TS>

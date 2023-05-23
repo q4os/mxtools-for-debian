@@ -5,7 +5,7 @@
     <name>MXDateTime</name>
     <message>
         <location filename="../datetime.ui" line="20"/>
-        <location filename="../datetime.cpp" line="604"/>
+        <location filename="../datetime.cpp" line="615"/>
         <source>MX Date &amp; Time</source>
         <translation>Ημερομηνία και ώρα του MX</translation>
     </message>
@@ -41,8 +41,8 @@
     </message>
     <message>
         <location filename="../datetime.ui" line="278"/>
-        <location filename="../datetime.cpp" line="298"/>
         <location filename="../datetime.cpp" line="305"/>
+        <location filename="../datetime.cpp" line="312"/>
         <source>Hardware Clock</source>
         <translation>Ρολόι υλικού</translation>
     </message>
@@ -124,7 +124,7 @@
     <message>
         <location filename="../datetime.ui" line="390"/>
         <source>Universally Coordinated Time (or Greenwich Meridian Time)</source>
-        <translation>Παγκόσμιος συγχρονισμός ώρας (ή χρόνος Greenwich)</translation>
+        <translation>Παγκοσμίως ώρα συντονισμού (ή ώρα Greenwich)</translation>
     </message>
     <message>
         <location filename="../datetime.ui" line="393"/>
@@ -192,73 +192,73 @@
         <translation>Επιλογές</translation>
     </message>
     <message>
-        <location filename="../datetime.cpp" line="272"/>
+        <location filename="../datetime.cpp" line="279"/>
         <source>Reading...</source>
         <translation>Ανάγνωση...</translation>
     </message>
     <message>
-        <location filename="../datetime.cpp" line="286"/>
+        <location filename="../datetime.cpp" line="293"/>
         <source>Adjusting...</source>
         <translation>Ρύθμιση...</translation>
     </message>
     <message>
-        <location filename="../datetime.cpp" line="298"/>
         <location filename="../datetime.cpp" line="305"/>
+        <location filename="../datetime.cpp" line="312"/>
         <source>System Clock</source>
         <translation>Ρολόι συστήματος</translation>
     </message>
     <message>
-        <location filename="../datetime.cpp" line="311"/>
+        <location filename="../datetime.cpp" line="318"/>
         <source>The %1 time was transferred to the %2.</source>
         <translation>Η ώρα %1 μεταφέρθηκε στο %2.</translation>
     </message>
     <message>
-        <location filename="../datetime.cpp" line="314"/>
+        <location filename="../datetime.cpp" line="321"/>
         <source>The %1 time could not be transferred to the %2.</source>
         <translation>Η ώρα %1 δεν μεταφέρθηκε στο %2.</translation>
     </message>
     <message>
-        <location filename="../datetime.cpp" line="354"/>
+        <location filename="../datetime.cpp" line="361"/>
         <source>Updating...</source>
         <translation>Ενημέρωση...</translation>
     </message>
     <message>
-        <location filename="../datetime.cpp" line="367"/>
+        <location filename="../datetime.cpp" line="375"/>
         <source>The system clock was updated successfully.</source>
         <translation>Το ρολόι συστήματος ενημερώθηκε με επιτυχία.</translation>
     </message>
     <message>
-        <location filename="../datetime.cpp" line="369"/>
+        <location filename="../datetime.cpp" line="377"/>
         <source>The system clock could not be updated.</source>
         <translation>Το ρολόι συστήματος δεν ενημερώθηκε.</translation>
     </message>
     <message>
-        <location filename="../datetime.cpp" line="371"/>
+        <location filename="../datetime.cpp" line="379"/>
         <source>None of the NTP servers on the list are currently enabled.</source>
         <translation>Κανένας από τους διακομιστές NTP της λίστας δεν είναι ενεργοποιημένος.</translation>
     </message>
     <message>
-        <location filename="../datetime.cpp" line="604"/>
+        <location filename="../datetime.cpp" line="615"/>
         <source>About MX Date &amp; Time</source>
         <translation>Περί του MX Date &amp; Time</translation>
     </message>
     <message>
-        <location filename="../datetime.cpp" line="605"/>
+        <location filename="../datetime.cpp" line="616"/>
         <source>Version: </source>
         <translation>Έκδοση: </translation>
     </message>
     <message>
-        <location filename="../datetime.cpp" line="606"/>
+        <location filename="../datetime.cpp" line="617"/>
         <source>GUI program for setting the time and date in MX Linux</source>
         <translation>Γραφικό πρόγραμμα για τον καθορισμό της ώρας και της ημερομηνίας στο MX Linux</translation>
     </message>
     <message>
-        <location filename="../datetime.cpp" line="608"/>
+        <location filename="../datetime.cpp" line="619"/>
         <source>Copyright (c) MX Linux</source>
         <translation>Πνευματικά δικαιώματα (c) MX Linux</translation>
     </message>
     <message>
-        <location filename="../datetime.cpp" line="610"/>
+        <location filename="../datetime.cpp" line="621"/>
         <source>%1 License</source>
         <translation type="unfinished"></translation>
     </message>
@@ -279,7 +279,7 @@
         <translation type="vanished">&amp;Κλείσιμο</translation>
     </message>
     <message>
-        <location filename="../datetime.cpp" line="616"/>
+        <location filename="../datetime.cpp" line="627"/>
         <source>MX Date &amp; Time Help</source>
         <translation>Βοήθεια για το MX Date &amp; Time</translation>
     </message>
@@ -293,17 +293,12 @@
     </message>
     <message>
         <location filename="../about.cpp" line="53"/>
-        <location filename="../about.cpp" line="62"/>
+        <location filename="../about.cpp" line="61"/>
         <source>Changelog</source>
         <translation type="unfinished">Αρχείο αλλαγών</translation>
     </message>
     <message>
-        <location filename="../about.cpp" line="54"/>
-        <source>Cancel</source>
-        <translation type="unfinished">Ακύρωση</translation>
-    </message>
-    <message>
-        <location filename="../about.cpp" line="74"/>
+        <location filename="../about.cpp" line="73"/>
         <source>&amp;Close</source>
         <translation type="unfinished">&amp;Κλείσιμο</translation>
     </message>

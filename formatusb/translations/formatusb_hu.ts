@@ -9,42 +9,42 @@
     <message>
         <location filename="../mainwindow.ui" line="39"/>
         <source>Show all devices</source>
-        <translation type="unfinished"/>
+        <translation>Minden eszköz megjelenítése</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="46"/>
         <source>Format</source>
-        <translation type="unfinished"/>
+        <translation>Formázás</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="54"/>
         <source>Defaults</source>
-        <translation type="unfinished"/>
+        <translation>Alapértékek</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="59"/>
         <source>msdos</source>
-        <translation type="unfinished"/>
+        <translation>msdos</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="64"/>
         <source>gpt</source>
-        <translation type="unfinished"/>
+        <translation>gpt</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="72"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Select Target USB Device&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"/>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;USB eszköz kiválasztása&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="82"/>
         <source>Show partitions</source>
-        <translation type="unfinished"/>
+        <translation>Partíciók megjelenítése</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="112"/>
         <source>fat32</source>
-        <translation type="unfinished"/>
+        <translation>fat32</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="117"/>
@@ -54,32 +54,32 @@
     <message>
         <location filename="../mainwindow.ui" line="122"/>
         <source>exfat</source>
-        <translation type="unfinished"/>
+        <translation>exfat</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="127"/>
         <source>ntfs</source>
-        <translation type="unfinished"/>
+        <translation>ntfs</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="135"/>
         <source>Refresh drive list</source>
-        <translation type="unfinished"/>
+        <translation>Lista frissítése</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="149"/>
         <source>USB-DATA</source>
-        <translation type="unfinished"/>
+        <translation>USB-ADAT</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="156"/>
         <source>File System Label</source>
-        <translation type="unfinished"/>
+        <translation>Fájlrendszer címke</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="163"/>
         <source>Partition Table Type</source>
-        <translation type="unfinished"/>
+        <translation>Partíciós tábla</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="222"/>
@@ -119,7 +119,7 @@
     <message>
         <location filename="../mainwindow.ui" line="315"/>
         <source>About...</source>
-        <translation>Névjegy</translation>
+        <translation>Névjegy...</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="322"/>
@@ -139,22 +139,22 @@
     <message>
         <location filename="../mainwindow.cpp" line="178"/>
         <source>Success</source>
-        <translation type="unfinished"/>
+        <translation>Sikeres</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="178"/>
         <source>Format successful!</source>
-        <translation type="unfinished"/>
+        <translation>Formázás sikeres!</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="180"/>
         <source>Failure</source>
-        <translation type="unfinished"/>
+        <translation>Hiba</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="180"/>
         <source>Error encountered in the Format process</source>
-        <translation type="unfinished"/>
+        <translation>Hiba történt a formázás közben</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="211"/>
@@ -164,24 +164,26 @@
     <message>
         <location filename="../mainwindow.cpp" line="211"/>
         <source>Please select a USB device to write to</source>
-        <translation type="unfinished"/>
+        <translation>Válassza ki a formázandó USB eszközt</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="216"/>
         <source>These actions will destroy all data on 
 
 </source>
-        <translation type="unfinished"/>
+        <translation>Ez minden adatot töröl a következőről
+
+</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="216"/>
         <source>Do you wish to continue?</source>
-        <translation type="unfinished"/>
+        <translation>Szeretné folytatni?</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="252"/>
         <source>About %1</source>
-        <translation type="unfinished"/>
+        <translation>%1 névjegye</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="253"/>
@@ -191,7 +193,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="254"/>
         <source>Program for formatting USB devices</source>
-        <translation type="unfinished"/>
+        <translation>USB eszközök formázására szolgáló eszköz</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="256"/>
@@ -201,12 +203,12 @@
     <message>
         <location filename="../mainwindow.cpp" line="257"/>
         <source>%1 License</source>
-        <translation type="unfinished"/>
+        <translation>%1 Licenc</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="265"/>
         <source>%1 Help</source>
-        <translation type="unfinished"/>
+        <translation>%1 Súgó</translation>
     </message>
 </context>
 <context>
@@ -214,13 +216,13 @@
     <message>
         <location filename="../about.cpp" line="34"/>
         <source>License</source>
-        <translation>Liszensz</translation>
+        <translation>Licenc</translation>
     </message>
     <message>
         <location filename="../about.cpp" line="35"/>
         <location filename="../about.cpp" line="45"/>
         <source>Changelog</source>
-        <translation>Változásbejegyzés</translation>
+        <translation>Változások listája</translation>
     </message>
     <message>
         <location filename="../about.cpp" line="36"/>
@@ -230,7 +232,7 @@
     <message>
         <location filename="../about.cpp" line="53"/>
         <source>&amp;Close</source>
-        <translation>&amp;Bezár</translation>
+        <translation>&amp;Bezárás</translation>
     </message>
 </context>
 </TS>

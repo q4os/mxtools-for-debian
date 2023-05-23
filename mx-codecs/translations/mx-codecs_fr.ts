@@ -11,7 +11,7 @@
     <message>
         <location filename="../mainwindow.ui" line="27"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;justify&quot;&gt;This application allows you to install restricted codecs that permit advanced video and audio functions.&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;In some jurisdictions, their distribution may be limited. Please check the regulations in your area. &lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;br/&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Do you assume legal responsibility for downloading these codecs?&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;justify&quot;&gt;Cette application vous permet d&apos;installer des codecs non libres permettant des fonctions audio et vidéo avancées.&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;Dans certaines juridictions, leur distribution doit être limitée afin que l&apos;utilisateur puisse respecter les réglementations locales. &lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;br/&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Êtes-vous prêt à assumer la responsabilité juridique du téléchargement de ces codecs ?&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;justify&quot;&gt;Cette application vous permet d’installer des codecs non libres permettant des fonctions audio et vidéo avancées.&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;Dans certaines juridictions, leur distribution doit être limitée afin que l’utilisateur puisse respecter les réglementations locales. &lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;br/&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Êtes-vous prêt à assumer la responsabilité juridique du téléchargement de ces codecs ?&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="44"/>
@@ -36,12 +36,12 @@
     <message>
         <location filename="../mainwindow.ui" line="129"/>
         <source>Begin codec download and installation</source>
-        <translation>Démarrer le téléchargement et l&apos;installation du codec</translation>
+        <translation>Démarrer le téléchargement et l’installation du codec</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="132"/>
         <source>OK</source>
-        <translation>OK</translation>
+        <translation>Valider</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="193"/>
@@ -61,7 +61,7 @@
     <message>
         <location filename="../mainwindow.ui" line="232"/>
         <source>Display help </source>
-        <translation>Afficher l&apos;aide</translation>
+        <translation>Afficher l’aide </translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="235"/>
@@ -79,7 +79,7 @@
         <location filename="../mainwindow.cpp" line="200"/>
         <location filename="../mainwindow.cpp" line="226"/>
         <source>&lt;b&gt;Running command...&lt;/b&gt;&lt;p&gt;</source>
-        <translation>&lt;b&gt;Commande en cours d&apos;exécution...&lt;/b&gt;&lt;p&gt;</translation>
+        <translation>&lt;b&gt;Commande en cours d’exécution...&lt;/b&gt;&lt;p&gt;</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="110"/>
@@ -160,7 +160,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="266"/>
         <source>Error installing %1</source>
-        <translation>Erreur lors de l&apos;installation de %1</translation>
+        <translation>Erreur lors de l’installation de %1</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="271"/>
@@ -170,12 +170,12 @@
     <message>
         <location filename="../mainwindow.cpp" line="274"/>
         <source>Error running %1 command</source>
-        <translation>Erreur lors de l&apos;activation de la commande %1</translation>
+        <translation>Erreur lors de l’activation de la commande %1</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="279"/>
         <source>&lt;b&gt;Installation process has finished&lt;/b&gt;</source>
-        <translation>&lt;b&gt;Le processus d&apos;installation est terminé&lt;/b&gt;</translation>
+        <translation>&lt;b&gt;Le processus d’installation est terminé&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="283"/>
@@ -190,7 +190,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="287"/>
         <source>Process finished. Errors have occurred during the installation.</source>
-        <translation>Processus terminé. Des erreurs se sont produites lors de l&apos;installation.</translation>
+        <translation>Processus terminé. Des erreurs se sont produites lors de l’installation.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="296"/>
@@ -214,7 +214,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="297"/>
         <source>Version: </source>
-        <translation>Version: </translation>
+        <translation>Version : </translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="299"/>
@@ -236,22 +236,22 @@
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation type="vanished">&amp;Fermer</translation>
+        <translation type="vanished">&amp;Quitter</translation>
     </message>
 </context>
 <context>
     <name>QApplication</name>
     <message>
         <source>Unable to get exclusive lock</source>
-        <translation type="vanished">Impossible d&apos;obtenir le verrou exclusif</translation>
+        <translation type="vanished">Impossible d’obtenir le verrou exclusif</translation>
     </message>
     <message>
         <source>Another package management application (like Synaptic or apt-get), is already running. Please close that application first</source>
-        <translation type="vanished">Une autre application de gestion des paquets (comme Synaptic ou apt-get) est déjà en cours d&apos;exécution. Veuillez d&apos;abord fermer cette application.</translation>
+        <translation type="vanished">Une autre application de gestion des paquets (comme Synaptic ou apt-get) est déjà en cours d’exécution. Veuillez d’abord fermer cette application.</translation>
     </message>
     <message>
         <source>You must run this program as root.</source>
-        <translation type="vanished">Vous devez lancer cette application avec les droits administrateur.</translation>
+        <translation type="vanished">Vous devez exécuter cette application en tant qu’administrateur.</translation>
     </message>
 </context>
 <context>
@@ -275,7 +275,7 @@
     <message>
         <location filename="../about.cpp" line="74"/>
         <source>&amp;Close</source>
-        <translation type="unfinished">&amp;Fermer</translation>
+        <translation type="unfinished">&amp;Quitter</translation>
     </message>
     <message>
         <location filename="../main.cpp" line="66"/>
@@ -290,12 +290,12 @@
     <message>
         <location filename="../main.cpp" line="77"/>
         <source>Unable to get exclusive lock</source>
-        <translation type="unfinished">Impossible d&apos;obtenir le verrou exclusif</translation>
+        <translation type="unfinished">Impossible d’obtenir le verrou exclusif</translation>
     </message>
     <message>
         <location filename="../main.cpp" line="78"/>
         <source>Another package management application (like Synaptic or apt-get), is already running. Please close that application first</source>
-        <translation type="unfinished">Une autre application de gestion des paquets (comme Synaptic ou apt-get) est déjà en cours d&apos;exécution. Veuillez d&apos;abord fermer cette application.</translation>
+        <translation type="unfinished">Une autre application de gestion des paquets (comme Synaptic ou apt-get) est déjà en cours d’exécution. Veuillez d’abord fermer cette application.</translation>
     </message>
 </context>
 </TS>

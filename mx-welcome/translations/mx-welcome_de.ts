@@ -78,7 +78,7 @@
     <message>
         <location filename="../mainwindow.ui" line="652"/>
         <source>Tour</source>
-        <translation type="unfinished"></translation>
+        <translation>Tour</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="674"/>
@@ -108,17 +108,17 @@
     <message>
         <location filename="../mainwindow.ui" line="798"/>
         <source>SHORT SYSTEM REPORT:</source>
-        <translation type="unfinished"></translation>
+        <translation>KURZER SYSTEMBERICHT:</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="805"/>
         <source>DESKTOP</source>
-        <translation type="unfinished"></translation>
+        <translation>DESKTOP</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="819"/>
         <source>Quick-System-Info Full Report</source>
-        <translation type="unfinished"></translation>
+        <translation>Quick-System-Info Vollständiger Bericht</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="829"/>
@@ -239,12 +239,12 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../main.cpp" line="47"/>
         <source>Start with About tab selected. The About tab provides basic information about the current MX Linux version, the user&apos;s hardware, and access to a full system report.</source>
-        <translation type="unfinished"></translation>
+        <translation>Beginnen Sie damit, den Über-Reiter (About-Tab) auszuwählen. Der About-Tab liefert erste Informationen über die aktuelle MX-Linux-Version, die Hardware des Anwenders, und Zugang zu einem vollständigen Systembericht.</translation>
     </message>
     <message>
         <location filename="../main.cpp" line="50"/>
         <source>Run a test mode.</source>
-        <translation type="unfinished"></translation>
+        <translation>Einen Testmodus starten.</translation>
     </message>
     <message>
         <location filename="../main.cpp" line="71"/>
@@ -257,23 +257,23 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished">Diese Anwendung muss als normaler Benutzer (nicht: root) ausgeführt werden.</translation>
     </message>
     <message>
-        <location filename="../about.cpp" line="40"/>
+        <location filename="../about.cpp" line="41"/>
         <source>License</source>
         <translation type="unfinished">Lizenz</translation>
     </message>
     <message>
-        <location filename="../about.cpp" line="41"/>
-        <location filename="../about.cpp" line="51"/>
+        <location filename="../about.cpp" line="42"/>
+        <location filename="../about.cpp" line="52"/>
         <source>Changelog</source>
         <translation type="unfinished">Changelog</translation>
     </message>
     <message>
-        <location filename="../about.cpp" line="42"/>
+        <location filename="../about.cpp" line="43"/>
         <source>Cancel</source>
         <translation type="unfinished">Abbrechen</translation>
     </message>
     <message>
-        <location filename="../about.cpp" line="63"/>
+        <location filename="../about.cpp" line="64"/>
         <source>&amp;Close</source>
         <translation type="unfinished">&amp;Close</translation>
     </message>

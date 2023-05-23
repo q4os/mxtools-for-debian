@@ -81,7 +81,7 @@
     </message>
     <message>
         <location filename="../mainwindow.ui" line="271"/>
-        <source>Include user in sudo group</source>
+        <source>Grant this user administrative rights to the system (sudo)</source>
         <translation type="unfinished"/>
     </message>
     <message>

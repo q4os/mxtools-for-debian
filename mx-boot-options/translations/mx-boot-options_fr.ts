@@ -320,13 +320,13 @@
     <message>
         <location filename="../mainwindow.cpp" line="853"/>
         <source>Updating initramfs...</source>
-        <translation>Mise-à-jour de initramfs...</translation>
+        <translation>Mise à jour d’initramfs...</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="864"/>
         <location filename="../mainwindow.cpp" line="1203"/>
         <source>Updating grub...</source>
-        <translation>Mise-à-jour de grub...</translation>
+        <translation>Mise à jour de grub...</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="868"/>
@@ -445,7 +445,7 @@ Voulez-vous les installer ?</translation>
     <message>
         <location filename="../mainwindow.cpp" line="1067"/>
         <source>&amp;Close</source>
-        <translation>&amp;Fermer</translation>
+        <translation>&amp;Quitter</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1068"/>
@@ -528,15 +528,15 @@ Voulez-vous les installer ?</translation>
     <message>
         <location filename="../about.cpp" line="74"/>
         <source>&amp;Close</source>
-        <translation>&amp;Fermer</translation>
+        <translation>&amp;Quitter</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="77"/>
+        <location filename="../main.cpp" line="81"/>
         <source>Error</source>
         <translation>Erreur</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="78"/>
+        <location filename="../main.cpp" line="82"/>
         <source>You seem to be logged in as root, please log out and log in as normal user to use this program.</source>
         <translation>Vous semblez être connecté en tant qu’administrateur, veuillez vous déconnecter et vous connecter en tant qu’utilisateur normal pour utiliser ce programme.</translation>
     </message>

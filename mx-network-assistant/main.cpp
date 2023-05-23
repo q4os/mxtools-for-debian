@@ -20,8 +20,8 @@
 #include <QLocale>
 #include <QTranslator>
 
-#include <unistd.h>
 #include "mainwindow.h"
+#include <unistd.h>
 #include <version.h>
 
 extern const QString starting_home = qEnvironmentVariable("HOME");
@@ -33,35 +33,44 @@ int main(int argc, char *argv[])
         qunsetenv("SESSION_MANAGER");
     }
     QApplication app(argc, argv);
-    if (getuid() == 0) qputenv("HOME", "/root");
-    QDir::setCurrent("/root");
+    if (getuid() == 0)
+        qputenv("HOME", "/root");
+    QDir::setCurrent(QStringLiteral("/root"));
 
-    app.setApplicationVersion(VERSION);
-    app.setWindowIcon(QIcon::fromTheme(app.applicationName()));
+    QApplication::setApplicationVersion(VERSION);
+    QApplication::setWindowIcon(QIcon::fromTheme(QApplication::applicationName()));
+    QApplication::setOrganizationName(QStringLiteral("MX-Linux"));
 
     QTranslator qtTran;
-    if (qtTran.load(QLocale::system(), QStringLiteral("qt"), QStringLiteral("_"), QLibraryInfo::location(QLibraryInfo::TranslationsPath)))
-        app.installTranslator(&qtTran);
+    if (qtTran.load("qt_" + QLocale().name(), QLibraryInfo::location(QLibraryInfo::TranslationsPath)))
+        QApplication::installTranslator(&qtTran);
 
     QTranslator qtBaseTran;
-    if (qtBaseTran.load("qtbase_" + QLocale::system().name(), QLibraryInfo::location(QLibraryInfo::TranslationsPath)))
-        app.installTranslator(&qtBaseTran);
+    if (qtBaseTran.load("qtbase_" + QLocale().name(), QLibraryInfo::location(QLibraryInfo::TranslationsPath)))
+        QApplication::installTranslator(&qtBaseTran);
 
     QTranslator appTran;
-    if (appTran.load(app.applicationName() + "_" + QLocale::system().name(), "/usr/share/" + app.applicationName() + "/locale"))
-        app.installTranslator(&appTran);
+    if (appTran.load(QApplication::applicationName() + "_" + QLocale::system().name(),
+                     "/usr/share/" + QApplication::applicationName() + "/locale"))
+        QApplication::installTranslator(&appTran);
 
-    // root guard
-    if (QProcess::execute(QStringLiteral("/bin/bash"), {"-c", "logname |grep -q ^root$"}) == 0) {
-        QMessageBox::critical(nullptr, QObject::tr("Error"),
-                              QObject::tr("You seem to be logged in as root, please log out and log in as normal user to use this program."));
-        exit(EXIT_FAILURE);
+    // Root guard
+    QFile loginUidFile {"/proc/self/loginuid"};
+    if (loginUidFile.open(QIODevice::ReadOnly)) {
+        QString loginUid = QString(loginUidFile.readAll()).trimmed();
+        loginUidFile.close();
+        if (loginUid == "0") {
+            QMessageBox::critical(
+                nullptr, QObject::tr("Error"),
+                QObject::tr(
+                    "You seem to be logged in as root, please log out and log in as normal user to use this program."));
+            exit(EXIT_FAILURE);
+        }
     }
-
     if (getuid() == 0) {
         MainWindow mw;
         mw.show();
-        return app.exec();
+        return QApplication::exec();
     } else {
         QProcess::startDetached(QStringLiteral("/usr/bin/mxna-launcher"), {});
     }

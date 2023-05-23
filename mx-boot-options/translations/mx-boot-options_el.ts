@@ -18,7 +18,7 @@
     <message>
         <location filename="../dialog.cpp" line="23"/>
         <source>Cancel</source>
-        <translation>Ακύρωση</translation>
+        <translation>Άκυρο</translation>
     </message>
 </context>
 <context>
@@ -51,7 +51,7 @@
     <message>
         <location filename="../mainwindow.ui" line="81"/>
         <source>Menu timeout</source>
-        <translation>Εμφάνιση μενού</translation>
+        <translation>Διάρκεια εμφάνισης μενού</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="104"/>
@@ -76,7 +76,7 @@
     <message>
         <location filename="../mainwindow.ui" line="134"/>
         <source>Manage UEFI Boot Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Διαχείριση ρυθμίσεων εκκίνησης UEFI</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="150"/>
@@ -122,7 +122,7 @@
     <message>
         <location filename="../mainwindow.ui" line="342"/>
         <source>Limited</source>
-        <translation>Περιορισμένο</translation>
+        <translation>Περιορισμένα</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="358"/>
@@ -187,24 +187,24 @@
     <message>
         <location filename="../mainwindow.cpp" line="74"/>
         <source>Process still running. Are you sure you want to quit?</source>
-        <translation>Η διαδικασία εφαρμογής εξακολουθεί να λειτουργεί. Είστε βέβαιοι ότι θέλετε να αποσυνδεθείτε;</translation>
+        <translation>Η διαδικασία εξακολουθεί να εκτελείται. Θέλετε σίγουρα να αποσυνδεθείτε;</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="216"/>
         <source>Set timeout</source>
-        <translation type="unfinished"></translation>
+        <translation>Ορισμός χρονικής διάρκειας</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="216"/>
         <source>Timeout in seconds:</source>
-        <translation type="unfinished"></translation>
+        <translation>Χρονική διάρκεια σε δευτερόλεπτα:</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="220"/>
         <location filename="../mainwindow.cpp" line="441"/>
         <location filename="../mainwindow.cpp" line="1076"/>
         <source>Timeout: %1 seconds</source>
-        <translation type="unfinished"></translation>
+        <translation>Χρονική διάρκεια: %1 δευτερόλεπτα</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="231"/>
@@ -212,30 +212,31 @@
         <location filename="../mainwindow.cpp" line="1075"/>
         <location filename="../mainwindow.cpp" line="1091"/>
         <source>Boot Next: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Επόμενη εκκίνηση: %1</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="238"/>
         <source>Removal confirmation</source>
-        <translation type="unfinished"></translation>
+        <translation>Επιβεβαίωση αφαίρεσης</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="239"/>
         <source>Are you sure you want to delete this boot entry?
 %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Θέλετε σίγουρα να διαγράψετε την καταχώρηση εκκίνησης;
+%1</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="305"/>
         <location filename="../mainwindow.cpp" line="308"/>
         <source>Select EFI file</source>
-        <translation type="unfinished"></translation>
+        <translation>Επιλογή αρχείου EFI</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="306"/>
         <location filename="../mainwindow.cpp" line="309"/>
         <source>EFI files (*.efi *.EFI)</source>
-        <translation type="unfinished"></translation>
+        <translation>Αρχεία EFI (*.efi *.EFI)</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="319"/>
@@ -249,22 +250,22 @@
     <message>
         <location filename="../mainwindow.cpp" line="320"/>
         <source>Could not find the source mountpoint for %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Δεν βρέθηκε σημείο προσάρτησης για το %1</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="324"/>
         <source>Set name</source>
-        <translation type="unfinished"></translation>
+        <translation>Ορισμός ονόματος</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="324"/>
         <source>Enter the name for the UEFI menu item:</source>
-        <translation type="unfinished"></translation>
+        <translation>Εισαγωγή ονόματος για το μενού UEFI:</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="331"/>
         <source>Something went wrong, could not add entry.</source>
-        <translation type="unfinished"></translation>
+        <translation>Κάτι πήγε λάθος, δεν προστέθηκε η καταχώρηση.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="349"/>
@@ -289,7 +290,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="445"/>
         <source>Boot Current: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Τρέχουσα εκκίνηση: %1</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="524"/>
@@ -309,13 +310,13 @@
     <message>
         <location filename="../mainwindow.cpp" line="604"/>
         <source>Something went wrong, could not save boot order.</source>
-        <translation type="unfinished"></translation>
+        <translation>Κάτι πήγε λάθος, δεν αποθηκεύτηκε η σειρά εκκίνησης.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="801"/>
         <location filename="../mainwindow.cpp" line="1191"/>
         <source>Updating configuration, please wait</source>
-        <translation>Ενημέρωση διαμόρφωσης, παρακαλώ περιμένετε</translation>
+        <translation>Ενημέρωση ρυθμίσεων, παρακαλώ περιμένετε</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="853"/>
@@ -351,7 +352,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="883"/>
         <source>Program for selecting common start-up choices</source>
-        <translation>Πρόγραμμα επιλογής των συνηθισμένων προτιμήσεων της εκκίνησης</translation>
+        <translation>Πρόγραμμα για τις επιλογές εκκίνησης</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="885"/>
@@ -415,30 +416,32 @@ OK to go ahead and install them?</source>
     <message>
         <location filename="../mainwindow.cpp" line="1057"/>
         <source>Edit UEFI Boot Entries</source>
-        <translation type="unfinished"></translation>
+        <translation>Επεξεργασία καταχωρήσεων εκκίνησης UEFI</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1060"/>
         <source>You can use the Up/Down buttons, or drag &amp; drop items to change boot order.
 - Items are listed in the boot order.
 - Grayed out lines are inactive.</source>
-        <translation type="unfinished"></translation>
+        <translation>Για να αλλάξετε τη σειρά εκκίνησης μπορείτε να χρησιμοποιήσετε τα κουμπιά Επάνω/Κάτω ή να σύρετε και να αποθέσετε τις καταχωρήσεις.
+- Οι καταχωρήσεις εμφανίζονται με τη σειρά εκκίνησης.
+- Οι γραμμές με γκρίζο χρώμα είναι ανενεργές.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1064"/>
         <location filename="../mainwindow.cpp" line="1117"/>
         <source>Set ac&amp;tive</source>
-        <translation type="unfinished"></translation>
+        <translation>Ορισμός ε&amp;νεργού</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1065"/>
         <source>&amp;Add entry</source>
-        <translation type="unfinished"></translation>
+        <translation>Προσ&amp;θήκη καταχώρησης</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1066"/>
         <source>Boot &amp;next</source>
-        <translation type="unfinished"></translation>
+        <translation>Εκκίνηση ε&amp;πόμενου</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1067"/>
@@ -448,38 +451,38 @@ OK to go ahead and install them?</source>
     <message>
         <location filename="../mainwindow.cpp" line="1068"/>
         <source>Move &amp;down</source>
-        <translation type="unfinished"></translation>
+        <translation>Μετακίνηση &amp;κάτω</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1069"/>
         <source>&amp;Remove entry</source>
-        <translation type="unfinished"></translation>
+        <translation>Α&amp;φαίρεση καταχώρησης</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1070"/>
         <source>Re&amp;set next</source>
-        <translation type="unfinished"></translation>
+        <translation>Επαναφο&amp;ρά επόμενου</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1071"/>
         <source>Change &amp;timeout</source>
-        <translation type="unfinished"></translation>
+        <translation>Αλλαγή &amp;χρονικής διάρκειας</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1072"/>
         <source>Move &amp;up</source>
-        <translation type="unfinished"></translation>
+        <translation>Μετακίνηση &amp;επάνω</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1075"/>
         <location filename="../mainwindow.cpp" line="1091"/>
         <source>not set, will boot using list order</source>
-        <translation type="unfinished"></translation>
+        <translation>δεν ορίστηκε, θα εκκινήσει με τη σειρά της λίστας </translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1114"/>
         <source>Set &amp;inactive</source>
-        <translation type="unfinished"></translation>
+        <translation>Ορισμός ανενε&amp;ργού</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1167"/>
@@ -529,12 +532,12 @@ OK to go ahead and install them?</source>
         <translation>&amp;Κλείσιμο</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="77"/>
+        <location filename="../main.cpp" line="81"/>
         <source>Error</source>
         <translation>Σφάλμα</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="78"/>
+        <location filename="../main.cpp" line="82"/>
         <source>You seem to be logged in as root, please log out and log in as normal user to use this program.</source>
         <translation>Φαίνεται ότι έχετε συνδεθεί ως root, αποσυνδεθείτε και συνδεθείτε ως κανονικός χρήστης για να χρησιμοποιήσετε αυτό το πρόγραμμα.</translation>
     </message>
@@ -546,7 +549,7 @@ OK to go ahead and install them?</source>
     <message>
         <location filename="../mainwindow.cpp" line="1234"/>
         <source>Select GRUB theme</source>
-        <translation>Επιλέξτε θέμα GRUB</translation>
+        <translation>Επιλέξτε θέμα του GRUB</translation>
     </message>
 </context>
 </TS>

@@ -1,0 +1,109 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+# Translators:
+# anticapitalista <anticapitalista@riseup.net>, 2017
+# José Vieira <jvieira33@sapo.pt>, 2022
+# Hugo Carvalho <hugokarvalho@hotmail.com>, 2022
+# Paulo C., 2023
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-03-04 14:51-0500\n"
+"PO-Revision-Date: 2016-11-29 14:08+0000\n"
+"Last-Translator: Paulo C., 2023\n"
+"Language-Team: Portuguese (https://app.transifex.com/anticapitalista/teams/10162/pt/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: pt\n"
+"Plural-Forms: nplurals=3; plural=(n == 0 || n == 1) ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
+
+msgid "Nvidia driver installer"
+msgstr "Instalador de controladores Nvidia"
+
+msgid "Deb Installer"
+msgstr "Instalador deb"
+
+msgid "Format USB"
+msgstr "Formatar USB"
+
+msgid "Job Scheduler"
+msgstr "Agendador de Tarefas [job-scheduler]"
+
+msgid "MX Snapshot"
+msgstr "MX-Criar Imagem ISO"
+
+msgid "MX Boot Options"
+msgstr "MX Opções de Arranque"
+
+msgid "MX Boot Repair"
+msgstr "MX-Reparador do Arranque"
+
+msgid "MX Cleanup"
+msgstr "MX-Limpar"
+
+msgid "MX Codecs Installer"
+msgstr "MX-Instalador de Codecs"
+
+msgid "MX Date & Time"
+msgstr "MX Data & Hora"
+
+msgid "System Locales"
+msgstr "Localizações do sistema"
+
+msgid "xfce4-notifyd-start"
+msgstr "xfce4-notifyd-start"
+
+msgid "MX Live USB Maker"
+msgstr "MX-Criar USB-executável"
+
+msgid "MX Network Assistant"
+msgstr "MX-Assistente de Redes"
+
+msgid "MX Package Installer"
+msgstr "MX-Instalador de Pacotes"
+
+msgid "MX RemasterCC"
+msgstr "MX-Centro de Controlo de Recomposição"
+
+msgid "MX Repo Manager"
+msgstr "MX-Gestor de Repositórios"
+
+msgid "MX Samba Config"
+msgstr "MX Configurar o Samba"
+
+msgid "MX Tweak"
+msgstr "MX Ajustes Rápidos"
+
+msgid "Brightness Systray"
+msgstr "Brilho Systray"
+
+msgid "mx-tweak brightness systray"
+msgstr "Regulação de brilho na bandeja"
+
+msgid "compton"
+msgstr "compton"
+
+msgid "restore-software-brightness"
+msgstr "restore-software-brightness"
+
+msgid "MX User Manager"
+msgstr "MX-Gestor de utilizadores"
+
+msgid "Quick System Info"
+msgstr "Sistema (Informação sumária)"
+
+msgid "System Keyboard"
+msgstr "Teclado do sistema"
+
+msgid "Disk Manager"
+msgstr "Gestor de Discos"
+
+msgid "Adblock"
+msgstr "Bloquear publicidade"

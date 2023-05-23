@@ -25,22 +25,23 @@
 #ifndef LOCKFILE_H
 #define LOCKFILE_H
 
-#include <QString>
+#include <QFile>
 
 class LockFile
 {
 public:
     LockFile(const QString &file_name)
-        : file_name {file_name}
+        : file(file_name)
     {
     }
     ~LockFile() { unlock(); };
+
     bool isLocked();
     bool lock();
-    bool unlock();
+    void unlock();
 
 private:
-    QString file_name;
+    QFile file;
 };
 
 #endif // LOCKFILE_H

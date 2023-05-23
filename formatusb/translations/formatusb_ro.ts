@@ -14,7 +14,7 @@
     <message>
         <location filename="../mainwindow.ui" line="46"/>
         <source>Format</source>
-        <translation type="unfinished"/>
+        <translation>Formatare</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="54"/>

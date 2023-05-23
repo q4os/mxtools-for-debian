@@ -82,13 +82,9 @@
         <translation>Contraseña del usuario:</translation>
     </message>
     <message>
-        <source>Include user in sudo group</source>
-        <translation type="vanished">Incluir usuario en el grupo sudo</translation>
-    </message>
-    <message>
         <location filename="../mainwindow.ui" line="271"/>
         <source>Grant this user administrative rights to the system (sudo)</source>
-        <translation type="unfinished"></translation>
+        <translation>Conceder a este usuario derechos administrativos sobre el sistema (sudo)</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="290"/>

@@ -84,7 +84,7 @@
     <message>
         <location filename="../mainwindow.ui" line="271"/>
         <source>Grant this user administrative rights to the system (sudo)</source>
-        <translation type="unfinished"></translation>
+        <translation>Conceder diretos de adminstrador ao sistema (sudo)</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="290"/>

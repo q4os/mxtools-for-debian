@@ -1,3 +1,9 @@
+mx-boot-options (23.5) mx; urgency=medium
+
+  * Update logo
+
+ -- Adrian <adrian@mxlinux.org>  Tue, 16 May 2023 21:24:18 -0400
+
 mx-boot-options (23.4) mx; urgency=medium
 
   * Update icon

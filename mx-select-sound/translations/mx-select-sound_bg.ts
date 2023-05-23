@@ -5,12 +5,11 @@
     <name>MainWindow</name>
     <message>
         <location filename="../mainwindow.ui" line="14"/>
-        <location filename="../mainwindow.cpp" line="46"/>
-        <location filename="../mainwindow.cpp" line="76"/>
-        <location filename="../mainwindow.cpp" line="133"/>
-        <location filename="../mainwindow.cpp" line="146"/>
-        <location filename="../mainwindow.cpp" line="180"/>
-        <location filename="../mainwindow.cpp" line="188"/>
+        <location filename="../mainwindow.cpp" line="47"/>
+        <location filename="../mainwindow.cpp" line="75"/>
+        <location filename="../mainwindow.cpp" line="129"/>
+        <location filename="../mainwindow.cpp" line="148"/>
+        <location filename="../mainwindow.cpp" line="156"/>
         <source>MX Select Sound</source>
         <translation type="unfinished"></translation>
     </message>
@@ -22,7 +21,7 @@
     <message>
         <location filename="../mainwindow.ui" line="64"/>
         <source>Display help </source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Помощ за дисплея</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="67"/>
@@ -32,22 +31,22 @@
     <message>
         <location filename="../mainwindow.ui" line="74"/>
         <source>Alt+H</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Alt+H</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="103"/>
         <source>About this application</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Относно това приложение</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="106"/>
         <source>About...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Относно...</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="113"/>
         <source>Alt+B</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Alt+B</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="145"/>
@@ -62,7 +61,7 @@
     <message>
         <location filename="../mainwindow.ui" line="155"/>
         <source>Alt+N</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Alt+N</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="196"/>
@@ -85,80 +84,137 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="77"/>
+        <location filename="../mainwindow.cpp" line="75"/>
         <source>No sound cards/devices were found.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="89"/>
-        <location filename="../mainwindow.cpp" line="100"/>
+        <location filename="../mainwindow.cpp" line="87"/>
+        <location filename="../mainwindow.cpp" line="98"/>
         <source>none</source>
         <translation type="unfinished">няма</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="132"/>
+        <location filename="../mainwindow.cpp" line="128"/>
         <source>About MX Select Sound</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="133"/>
+        <location filename="../mainwindow.cpp" line="129"/>
         <source>Version: </source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Версия:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="134"/>
+        <location filename="../mainwindow.cpp" line="130"/>
         <source>Program for selecting the default sound card in MX Linux</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="136"/>
+        <location filename="../mainwindow.cpp" line="133"/>
         <source>Copyright (c) MX Linux</source>
+        <translation type="unfinished">Copyright (c) MX Linux</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="134"/>
+        <source>%1 License</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="137"/>
-        <location filename="../mainwindow.cpp" line="146"/>
-        <source>License</source>
+        <location filename="../mainwindow.cpp" line="148"/>
+        <source>%1 Help</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="138"/>
-        <source>Changelog</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="139"/>
-        <source>Cancel</source>
-        <translation type="unfinished">Отмяна</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="156"/>
-        <source>&amp;Close</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="189"/>
         <source>Could not play test sound.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
+    <name>QObject</name>
+    <message>
+        <location filename="../about.cpp" line="43"/>
+        <source>License</source>
+        <translation type="unfinished">Лиценз</translation>
+    </message>
+    <message>
+        <location filename="../about.cpp" line="44"/>
+        <location filename="../about.cpp" line="54"/>
+        <source>Changelog</source>
+        <translation type="unfinished">Промени</translation>
+    </message>
+    <message>
+        <location filename="../about.cpp" line="45"/>
+        <source>Cancel</source>
+        <translation type="unfinished">Отмяна</translation>
+    </message>
+    <message>
+        <location filename="../about.cpp" line="67"/>
+        <source>&amp;Close</source>
+        <translation type="unfinished">&amp;Затвори</translation>
+    </message>
+</context>
+<context>
     <name>mxselectsound</name>
+    <message>
+        <source>Display help </source>
+        <translation type="vanished">Помощ за дисплея</translation>
+    </message>
     <message>
         <source>Help</source>
         <translation type="vanished">Помощ</translation>
+    </message>
+    <message>
+        <source>Alt+H</source>
+        <translation type="vanished">Alt+H</translation>
+    </message>
+    <message>
+        <source>About this application</source>
+        <translation type="vanished">Относно това приложение</translation>
+    </message>
+    <message>
+        <source>About...</source>
+        <translation type="vanished">Относно...</translation>
+    </message>
+    <message>
+        <source>Alt+B</source>
+        <translation type="vanished">Alt+B</translation>
     </message>
     <message>
         <source>Close</source>
         <translation type="vanished">Затваряне</translation>
     </message>
     <message>
+        <source>Alt+N</source>
+        <translation type="vanished">Alt+N</translation>
+    </message>
+    <message>
         <source>none</source>
         <translation type="vanished">няма</translation>
     </message>
     <message>
+        <source>Version: </source>
+        <translation type="vanished">Версия:</translation>
+    </message>
+    <message>
+        <source>Copyright (c) MX Linux</source>
+        <translation type="vanished">Copyright (c) MX Linux</translation>
+    </message>
+    <message>
+        <source>License</source>
+        <translation type="vanished">Лиценз</translation>
+    </message>
+    <message>
+        <source>Changelog</source>
+        <translation type="vanished">Промени</translation>
+    </message>
+    <message>
         <source>Cancel</source>
         <translation type="vanished">Отмяна</translation>
+    </message>
+    <message>
+        <source>&amp;Close</source>
+        <translation type="vanished">&amp;Затвори</translation>
     </message>
 </context>
 </TS>

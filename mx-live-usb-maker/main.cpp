@@ -78,15 +78,19 @@ int main(int argc, char *argv[])
                      "/usr/share/" + QApplication::applicationName() + "/locale"))
         QApplication::installTranslator(&appTran);
 
-    // root guard
-    if (logname == "root") {
-        QMessageBox::critical(
-            nullptr, QObject::tr("Error"),
-            QObject::tr(
-                "You seem to be logged in as root, please log out and log in as normal user to use this program."));
-        exit(EXIT_FAILURE);
+    // Root guard
+    QFile loginUidFile {"/proc/self/loginuid"};
+    if (loginUidFile.open(QIODevice::ReadOnly)) {
+        QString loginUid = QString(loginUidFile.readAll()).trimmed();
+        loginUidFile.close();
+        if (loginUid == "0") {
+            QMessageBox::critical(
+                nullptr, QObject::tr("Error"),
+                QObject::tr(
+                    "You seem to be logged in as root, please log out and log in as normal user to use this program."));
+            exit(EXIT_FAILURE);
+        }
     }
-
     if (getuid() == 0) {
         auto const log_file_name = "/var/log/" + QApplication::applicationName() + ".log";
         if (QFileInfo::exists(log_file_name)) {

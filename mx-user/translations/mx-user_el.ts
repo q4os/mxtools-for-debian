@@ -367,7 +367,7 @@
     <message>
         <location filename="../mainwindow.ui" line="1211"/>
         <source>Enter name of new group</source>
-        <translation type="unfinished"></translation>
+        <translation>Εισαγάγετε το όνομα της νέας ομάδας</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1217"/>
@@ -377,17 +377,17 @@
     <message>
         <location filename="../mainwindow.ui" line="1227"/>
         <source>Create a group with GID &gt; 1000</source>
-        <translation type="unfinished"></translation>
+        <translation>Δημιουργήστε μια ομάδα με GID &gt; 1000</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1230"/>
         <source>Create a user-level group</source>
-        <translation type="unfinished"></translation>
+        <translation>Δημιουργήστε μια ομάδα σε επίπεδο χρήστη</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1259"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Enter name of new group&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Εισαγάγετε το όνομα της νέας ομάδας&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1262"/>
@@ -402,17 +402,17 @@
     <message>
         <location filename="../mainwindow.ui" line="1350"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Select group to delete&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Επιλέξτε ομάδα για διαγραφή&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1359"/>
         <source>Select group to delete:</source>
-        <translation type="unfinished"></translation>
+        <translation>Επιλέξτε ομάδα για διαγραφή:</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1366"/>
         <source>*Please doublecheck your selections before applying, removing a wrong group can break your system.</source>
-        <translation type="unfinished"></translation>
+        <translation>*Ελέγξτε ξανά τις επιλογές σας πριν υποβάλετε αίτηση, η κατάργηση μιας λανθασμένης ομάδας μπορεί να καταστρέψει το σύστημά σας.</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1381"/>
@@ -427,12 +427,12 @@
     <message>
         <location filename="../mainwindow.ui" line="1478"/>
         <source>*Please doublecheck your selections before applying, assigning wrong group memberships can break your system. If you made a mistake, use restore group membership in Options tab to restore the defaults.</source>
-        <translation type="unfinished"></translation>
+        <translation>*Ελέγξτε ξανά τις επιλογές σας πριν υποβάλετε αίτηση, η ανάθεση λανθασμένων συνδρομών σε ομάδες μπορεί να χαλάσει το σύστημά σας. Εάν κάνατε λάθος, χρησιμοποιήστε την επαναφορά της ιδιότητας μέλους ομάδας στην καρτέλα Επιλογές για να επαναφέρετε τις προεπιλογές.</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1507"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Select user to change&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Επιλέξτε χρήστη για αλλαγή&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1583"/>
@@ -677,7 +677,7 @@ Please choose another name before proceeding.</source>
     <message>
         <location filename="../mainwindow.cpp" line="472"/>
         <source>This action cannot be undone. Are you sure you want to delete the following groups: %1?</source>
-        <translation type="unfinished"></translation>
+        <translation>Αυτή η πράξη δε μπορεί να αναιρεθεί. Είστε βέβαιοι ότι θέλετε να διαγράψετε τις ακόλουθες ομάδες: %1;</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="479"/>
@@ -687,7 +687,7 @@ Please choose another name before proceeding.</source>
     <message>
         <location filename="../mainwindow.cpp" line="479"/>
         <source>Group: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Ομάδα: %1</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="484"/>
@@ -697,7 +697,7 @@ Please choose another name before proceeding.</source>
     <message>
         <location filename="../mainwindow.cpp" line="484"/>
         <source>The groups have been deleted.</source>
-        <translation type="unfinished"></translation>
+        <translation>Οι ομάδες έχουν διαγραφεί.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="501"/>

@@ -1,3 +1,22 @@
+mx-packageinstaller (23.5.02) mx; urgency=medium
+
+  * Update logo
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 17 May 2023 22:30:20 -0400
+
+mx-packageinstaller (23.5.01) mx; urgency=medium
+
+  * Update icon
+  * Refresh translations 
+
+ -- Adrian <adrian@mxlinux.org>  Sun, 14 May 2023 22:16:55 -0400
+
+mx-packageinstaller (23.5) mx; urgency=medium
+
+  * Fix: when switching tabs resets search
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 05 May 2023 13:41:06 -0400
+
 mx-packageinstaller (23.4) mx; urgency=medium
 
   * Update icon

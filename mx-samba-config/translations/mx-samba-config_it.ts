@@ -220,8 +220,9 @@
         <location filename="../mainwindow.cpp" line="464"/>
         <location filename="../mainwindow.cpp" line="478"/>
         <location filename="../mainwindow.cpp" line="488"/>
-        <location filename="../mainwindow.cpp" line="520"/>
-        <location filename="../mainwindow.cpp" line="532"/>
+        <location filename="../mainwindow.cpp" line="511"/>
+        <location filename="../mainwindow.cpp" line="528"/>
+        <location filename="../mainwindow.cpp" line="540"/>
         <source>Error</source>
         <translation>Errore</translation>
     </message>
@@ -234,10 +235,6 @@
         <location filename="../mainwindow.cpp" line="99"/>
         <source>Path: %1 doesn&apos;t exist.</source>
         <translation>Percorso: %1 non esiste.</translation>
-    </message>
-    <message>
-        <source>Everyone</source>
-        <translation type="vanished">Tutti</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="124"/>
@@ -403,59 +400,37 @@
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="489"/>
-        <location filename="../mainwindow.cpp" line="533"/>
+        <location filename="../mainwindow.cpp" line="541"/>
         <source>Samba service is not running. Please start Samba before adding or editing shares</source>
         <translation>Il servizio samba non è in esecuzione. Avviare samba prima di aggiungere o modificare condivisioni</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="520"/>
+        <location filename="../mainwindow.cpp" line="511"/>
+        <location filename="../mainwindow.cpp" line="528"/>
         <source>Error: trying to process permissions: </source>
         <translation>Errore: tentativo di elaborare i permessi:</translation>
     </message>
 </context>
 <context>
-    <name>QApplication</name>
-    <message>
-        <source>License</source>
-        <translation type="vanished">Licenza</translation>
-    </message>
-    <message>
-        <source>Changelog</source>
-        <translation type="vanished">Registro delle modifiche</translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation type="vanished">Annulla</translation>
-    </message>
-    <message>
-        <source>&amp;Close</source>
-        <translation type="vanished">Chiu&amp;di</translation>
-    </message>
-    <message>
-        <source>You must run this program as normal user.</source>
-        <translation type="vanished">Devi eseguire questo programma come utente normale.</translation>
-    </message>
-</context>
-<context>
     <name>QObject</name>
     <message>
-        <location filename="../about.cpp" line="39"/>
+        <location filename="../about.cpp" line="42"/>
         <source>License</source>
         <translation>Licenza</translation>
     </message>
     <message>
-        <location filename="../about.cpp" line="40"/>
-        <location filename="../about.cpp" line="49"/>
+        <location filename="../about.cpp" line="43"/>
+        <location filename="../about.cpp" line="52"/>
         <source>Changelog</source>
         <translation>Registro delle modifiche</translation>
     </message>
     <message>
-        <location filename="../about.cpp" line="41"/>
+        <location filename="../about.cpp" line="44"/>
         <source>Cancel</source>
         <translation>Annulla</translation>
     </message>
     <message>
-        <location filename="../about.cpp" line="62"/>
+        <location filename="../about.cpp" line="64"/>
         <source>&amp;Close</source>
         <translation>&amp;Chiudi</translation>
     </message>

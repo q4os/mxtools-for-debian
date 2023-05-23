@@ -22,19 +22,20 @@
 #define MAINWINDOW_H
 
 #include "ui_mainwindow.h"
+#include <QDir>
 #include <QMessageBox>
 #include <QProcess>
-#include <QDir>
 
 #include "cmd.h"
 
-enum Tab {Status, LinuxDrivers, Diagnostics}; // WindowsDrivers is removed in constructor
-enum Col {Enabled, Interface, Driver, Description, Vendor, Product};
+enum Tab { Status, LinuxDrivers, Diagnostics }; // WindowsDrivers is removed in constructor
+enum Col { Enabled, Interface, Driver, Description, Vendor, Product };
 
-class MainWindow : public QDialog, public Ui::MainWindow {
+class MainWindow : public QDialog, public Ui::MainWindow
+{
     Q_OBJECT
 public:
-    MainWindow(QWidget *parent = nullptr);
+    MainWindow(QWidget* parent = nullptr);
     ~MainWindow() = default;
 
     QString getIP();
@@ -62,11 +63,11 @@ public slots:
     virtual void on_hwDiagnosePushButton_clicked();
     virtual void on_linuxDrvBlockPushButton_clicked();
     virtual void on_linuxDrvDiagnosePushButton_clicked();
-    virtual void on_linuxDrvList_currentRowChanged(int currentRow );
+    virtual void on_linuxDrvList_currentRowChanged(int currentRow);
     virtual void on_pingButton_clicked();
     virtual void on_tabWidget_currentChanged();
     virtual void on_tracerouteButton_clicked();
-    virtual void on_windowsDrvAddPushButton_clicked() ;
+    virtual void on_windowsDrvAddPushButton_clicked();
     virtual void on_windowsDrvDiagnosePushButton_clicked();
     virtual void on_windowsDrvList_currentRowChanged(int row);
     virtual void on_windowsDrvRemovePushButton_clicked();
@@ -84,18 +85,18 @@ public slots:
     virtual void writeTraceOutput();
 
 protected:
-    QProcess *installProc;
-    QProcess *pingProc;
-    QProcess *traceProc;
+    QProcess* installProc;
+    QProcess* pingProc;
+    QProcess* traceProc;
     QStringList blockedModules;
     QStringList broadcomModules;
     QStringList loadedModules;
     QStringList unloadedModules;
-    QTextEdit *installOutputEdit;
+    QTextEdit* installOutputEdit;
     Tab currentTab;
-    bool driverBlocklisted{};
-    bool internetConnection{};
-    bool ndiswrapBlocklisted{};
+    bool driverBlocklisted {};
+    bool internetConnection {};
+    bool ndiswrapBlocklisted {};
 
     bool blockModule(const QString& module);
     bool installModule(const QString& module);
@@ -116,8 +117,6 @@ private slots:
 
 private:
     Cmd cmd;
-
 };
 
 #endif
-

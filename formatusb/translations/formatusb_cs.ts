@@ -19,17 +19,17 @@
     <message>
         <location filename="../mainwindow.ui" line="54"/>
         <source>Defaults</source>
-        <translation type="unfinished"/>
+        <translation>Předvolené</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="59"/>
         <source>msdos</source>
-        <translation type="unfinished"/>
+        <translation>msdos</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="64"/>
         <source>gpt</source>
-        <translation type="unfinished"/>
+        <translation>gpt</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="72"/>
@@ -79,7 +79,7 @@
     <message>
         <location filename="../mainwindow.ui" line="163"/>
         <source>Partition Table Type</source>
-        <translation type="unfinished"/>
+        <translation>Typ Tabulky oddílů</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="222"/>
@@ -183,7 +183,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="252"/>
         <source>About %1</source>
-        <translation>O %1</translation>
+        <translation>O programu %1</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="253"/>

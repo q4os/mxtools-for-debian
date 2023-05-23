@@ -1,0 +1,14 @@
+[Desktop Entry]
+Encoding=UTF-8
+# The desktop entry name will be displayed within the menu.
+Name=Format USB
+# The desktop entry name will be displayed within the menu.
+Name=Format USB
+# # The desktop entry comment will be shown within the menu.
+Comment=Format USB devices
+Exec=formatusb
+Terminal=false
+Type=Application
+Icon=formatusb
+Categories=System;MX-Utilities;X-antiX;
+NoDisplay=false

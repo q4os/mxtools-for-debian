@@ -84,7 +84,7 @@
     <message>
         <location filename="../mainwindow.ui" line="271"/>
         <source>Grant this user administrative rights to the system (sudo)</source>
-        <translation type="unfinished"></translation>
+        <translation>Uporabniku omogočite skrbniške pravice za sistem (sudo)</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="290"/>

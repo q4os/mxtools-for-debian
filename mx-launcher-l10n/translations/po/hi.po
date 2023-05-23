@@ -1,0 +1,89 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+# Translators:
+# Panwar108 <caspian7pena@gmail.com>, 2022
+# Robin, 2023
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-03-04 14:51-0500\n"
+"PO-Revision-Date: 2016-11-29 14:08+0000\n"
+"Last-Translator: Robin, 2023\n"
+"Language-Team: Hindi (https://app.transifex.com/anticapitalista/teams/10162/hi/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: hi\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Nvidia driver installer"
+msgstr ""
+
+msgid "Format USB"
+msgstr "यूएसबी फॉर्मेट"
+
+msgid "Job Scheduler"
+msgstr "कार्य अनुसूचक"
+
+msgid "MX Snapshot"
+msgstr "एमएक्स स्नैपशॉट"
+
+msgid "MX Boot Options"
+msgstr "एमएक्स बूट विकल्प"
+
+msgid "MX Boot Repair"
+msgstr "एमएक्स बूट सुधार"
+
+msgid "MX Cleanup"
+msgstr "एमएक्स परिमार्जन"
+
+msgid "MX Codecs Installer"
+msgstr "MX कोडेक्स इंस्टॉलर"
+
+msgid "MX Date & Time"
+msgstr "एमएक्स दिनांक व समय"
+
+msgid "MX Live USB Maker"
+msgstr ""
+
+msgid "MX Network Assistant"
+msgstr "एमएक्स नेटवर्क साधन"
+
+msgid "MX Package Installer"
+msgstr "एमएक्स पैकेज इंस्टॉलर"
+
+msgid "MX Repo Manager"
+msgstr "एमएक्स पैकेज-संग्रह प्रबंधक"
+
+msgid "MX Tweak"
+msgstr "एमएक्स-अनुकूलन"
+
+msgid "Brightness Systray"
+msgstr "चमक Systray"
+
+msgid "mx-tweak brightness systray"
+msgstr ""
+
+msgid "compton"
+msgstr ""
+
+msgid "restore-software-brightness"
+msgstr ""
+
+msgid "MX User Manager"
+msgstr "एमएक्स उपयोक्ता प्रबंधक"
+
+msgid "System Keyboard"
+msgstr "सिस्टम कुंजीपटल"
+
+msgid "Disk Manager"
+msgstr ""
+
+msgid "Adblock"
+msgstr "विज्ञापन-अवरोध"

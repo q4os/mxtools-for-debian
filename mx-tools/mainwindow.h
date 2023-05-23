@@ -46,44 +46,42 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
-    enum Info { Name, Comment, IconName, Exec, Category, Terminal };
     FlatButton *btn {};
-    QMultiMap<QString, QStringList> category_map;
     QMultiMap<QString, QMultiMap<QString, QStringList>> info_map;
+    QMultiMap<QString, QStringList> category_map;
     QStringList live_list;
     QStringList maintenance_list;
     QStringList setup_list;
     QStringList software_list;
     QStringList utilities_list;
-
-    void addButtons(const QMultiMap<QString, QMultiMap<QString, QStringList>> &info_map);
-    static void hideShowIcon(const QString &file_name, bool hide);
-    void readInfo(const QMultiMap<QString, QStringList> &category_map);
-    void setConnections();
+    enum Info { Name, Comment, IconName, Exec, Category, Terminal };
 
     QIcon findIcon(QString icon_name);
     QString getCmdOut(const QString &cmd);
     QStringList listDesktopFiles(const QString &search_string, const QString &location);
+    static void hideShowIcon(const QString &file_name, bool hide);
+    void addButtons(const QMultiMap<QString, QMultiMap<QString, QStringList>> &info_map);
+    void readInfo(const QMultiMap<QString, QStringList> &category_map);
+    void setConnections();
 
 private slots:
-    void btn_clicked();
-    void closeEvent(QCloseEvent *);
-    void resizeEvent(QResizeEvent *event);
-    void pushAbout_clicked();
     static void pushHelp_clicked();
+    void btn_clicked();
     void checkHide_clicked(bool checked);
+    void closeEvent(QCloseEvent *);
+    void pushAbout_clicked();
+    void resizeEvent(QResizeEvent *event);
     void textSearch_textChanged(const QString &arg1);
 
 private:
     Ui::MainWindow *ui;
     QSettings settings;
+
     int col_count = 0;
     int icon_size = 32;
     int max_col = 0;
     int max_elements = 0;
-    static void removeEnvExclusive(QStringList &list, bool live);
-    static void removeFLUXBOXonly(QStringList &list);
-    static void removeXfceOnly(QStringList &list);
+    static void removeEnvExclusive(QStringList &list, const QStringList &termsToRemove);
     static void fixExecItem(QString &item);
 };
 

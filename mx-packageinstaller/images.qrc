@@ -2,6 +2,6 @@
     <qresource prefix="/">
         <file>icons/package-installed-outdated.png</file>
         <file>icons/package-installed-updated.png</file>
-        <file>icons/logo.png</file>
+        <file>icons/logo.svg</file>
     </qresource>
 </RCC>

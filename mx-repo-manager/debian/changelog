@@ -1,3 +1,20 @@
+mx-repo-manager (23.5.01) mx; urgency=medium
+
+  * Update logo
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 17 May 2023 23:18:00 -0400
+
+mx-repo-manager (23.5) mx; urgency=medium
+
+  * Make sure /etc/apt/source.list file is read if present
+  * Run apt-get update when closing the app if sources are changed
+  * Preserve "security" repo line because it might not be available on the mirror
+  * Find default mx repo even if commented out in mx.list
+  * Allow for tab separators in .list files
+  * Update translations
+
+ -- Adrian <adrian@mxlinux.org>  Sun, 30 Apr 2023 23:34:21 -0400
+
 mx-repo-manager (23.3) mx; urgency=medium
 
   * Detect proxy

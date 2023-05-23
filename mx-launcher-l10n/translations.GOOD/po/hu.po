@@ -1,0 +1,129 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+# Translators:
+# anticapitalista <anticapitalista@riseup.net>, 2017
+# Tamas Szarvas <szarvy@gmail.com>, 2018
+# Gabor Drot <gdrot@yahoo.com>, 2022
+# Kempelen, 2023
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-03-04 14:51-0500\n"
+"PO-Revision-Date: 2016-11-29 14:08+0000\n"
+"Last-Translator: Kempelen, 2023\n"
+"Language-Team: Hungarian (https://app.transifex.com/anticapitalista/teams/10162/hu/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: hu\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. The desktop entry name will be displayed within the menu.
+msgid "Nvidia driver installer"
+msgstr "Nvidia illesztőprogram telepítő"
+
+#. The desktop entry name will be displayed within the menu.
+msgid "Format USB"
+msgstr "USB formázás"
+
+#. The desktop entry name will be displayed within the menu.
+msgid "Job Scheduler"
+msgstr "Feladat ütemező"
+
+#. The desktop entry name will be displayed within the menu.
+#. The desktop entry name will be displayed within the menu.
+msgid "MX Snapshot"
+msgstr "MX pillanatkép"
+
+#. The desktop entry name will be displayed within the menu.
+msgid "MX Boot Options"
+msgstr "MX indítási paraméterek"
+
+#. The desktop entry name will be displayed within the menu.
+msgid "MX Boot Repair"
+msgstr "MX bootjavító"
+
+#. The desktop entry name will be displayed within the menu.
+msgid "MX Cleanup"
+msgstr "MX Takarító"
+
+#. The desktop entry name will be displayed within the menu.
+msgid "MX Codecs Installer"
+msgstr "MX kodektelepítő"
+
+#. The desktop entry name will be displayed within the menu.
+msgid "MX Date & Time"
+msgstr "MX dátum és idő"
+
+#. The desktop entry name will be displayed within the menu.
+msgid "System Locales"
+msgstr "Rendszer területi beállítások"
+
+#. The desktop entry name will be displayed within the menu.
+msgid "xfce4-notifyd-start"
+msgstr "xfce4-notifyd indítása"
+
+#. The desktop entry name will be displayed within the menu.
+msgid "MX Live USB Maker"
+msgstr "MX Live-USB készítő"
+
+#. The desktop entry name will be displayed within the menu.
+msgid "MX Network Assistant"
+msgstr "MX hálózati asszisztens"
+
+#. The desktop entry name will be displayed within the menu.
+msgid "MX Package Installer"
+msgstr "MX csomagtelepítő"
+
+#. The desktop entry name will be displayed within the menu.
+msgid "MX RemasterCC"
+msgstr "MX lemezképbe rögzítés vezérlőközpont"
+
+#. The desktop entry name will be displayed within the menu.
+msgid "MX Repo Manager"
+msgstr "MX tárolókezelő"
+
+#. The desktop entry name will be displayed within the menu.
+msgid "MX Samba Config"
+msgstr "MX Samba Beállítások"
+
+#. The desktop entry name will be displayed within the menu.
+msgid "MX Tweak"
+msgstr "MX finomhangoló"
+
+#. The desktop entry name will be displayed within the menu.
+msgid "Brightness Systray"
+msgstr "Fényerősség tálcaikon"
+
+#. The desktop entry name will be displayed within the menu.
+msgid "mx-tweak brightness systray"
+msgstr "mx-tweak fényerősség tálca"
+
+#. The desktop entry name will be displayed within the menu.
+msgid "compton"
+msgstr "compton"
+
+#. The desktop entry name will be displayed within the menu.
+msgid "restore-software-brightness"
+msgstr "Szoftveres fényerősség visszaállítása"
+
+#. The desktop entry name will be displayed within the menu.
+msgid "MX User Manager"
+msgstr "MX felhasználókezelő"
+
+#. The desktop entry name will be displayed within the menu.
+msgid "Quick System Info"
+msgstr "Gyors rendszerinformáció"
+
+#. The desktop entry name will be displayed within the menu.
+msgid "System Keyboard"
+msgstr "Rendszer billentyűzet"
+
+msgid "Disk Manager"
+msgstr "Lemezkezelő"

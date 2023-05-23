@@ -9,7 +9,7 @@
   <vendor>MX Linux</vendor>
   <vendor_url>https://mxlinux.org</vendor_url>
   <action id="org.mxlinux.quick-system-info-gui">
-	<message>Quick System Info:  Authentication is required to proceed</message>
+	<message gettext-domain="mx-launcher-l10n">Quick System Info</message>
     <icon_name>mx-qsi</icon_name>
     <description>root actions for quick-system-info-gui</description>
     <defaults>
@@ -21,7 +21,7 @@
     <annotate key="org.freedesktop.policykit.exec.allow_gui">true</annotate>
   </action>
   <action id="org.mxlinux.quick-system-info-gui-list">
-	<message>Quick System Info:  Authentication is required to proceed</message>
+	<message gettext-domain="mx-launcher-l10n">Quick System Info</message>
     <icon_name>mx-qsi</icon_name>
     <description>list root owned files for quick-system-info-gui</description>
     <defaults>

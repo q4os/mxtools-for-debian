@@ -82,13 +82,9 @@
         <translation>Fjalëkalim përdoruesi:</translation>
     </message>
     <message>
-        <source>Include user in sudo group</source>
-        <translation type="vanished">Përfshije përdoruesin në grupin sudo</translation>
-    </message>
-    <message>
         <location filename="../mainwindow.ui" line="271"/>
         <source>Grant this user administrative rights to the system (sudo)</source>
-        <translation type="unfinished"></translation>
+        <translation>Akordoji këtij përdoruesi të drejta administrative mbi sistemin (sudo)</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="290"/>

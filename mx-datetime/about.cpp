@@ -51,8 +51,7 @@ void displayAboutMsgBox(const QString &title, const QString &message, const QStr
     QMessageBox msgBox(QMessageBox::NoIcon, title, message);
     auto *btnLicense = msgBox.addButton(QObject::tr("License"), QMessageBox::HelpRole);
     auto *btnChangelog = msgBox.addButton(QObject::tr("Changelog"), QMessageBox::HelpRole);
-    auto *btnCancel = msgBox.addButton(QObject::tr("Cancel"), QMessageBox::NoRole);
-    btnCancel->setIcon(QIcon::fromTheme(QStringLiteral("window-close")));
+    msgBox.addButton(QMessageBox::Close);
 
     msgBox.exec();
     if (msgBox.clickedButton() == btnLicense) {

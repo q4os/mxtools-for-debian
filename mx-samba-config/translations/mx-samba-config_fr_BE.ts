@@ -21,7 +21,7 @@
     <message>
         <location filename="../editshare.ui" line="37"/>
         <source>&amp;Path</source>
-        <translation>&amp;Chemin d&apos;accès</translation>
+        <translation>&amp;Chemin d’accès</translation>
     </message>
     <message>
         <location filename="../editshare.ui" line="51"/>
@@ -46,7 +46,7 @@
     <message>
         <location filename="../editshare.ui" line="111"/>
         <source>Access rights for valid users</source>
-        <translation>Droits d&apos;accès pour les utilisateurs autorisés</translation>
+        <translation>Droits d’accès pour les utilisateurs autorisés</translation>
     </message>
     <message>
         <location filename="../editshare.cpp" line="46"/>
@@ -96,7 +96,7 @@
     <message>
         <location filename="../mainwindow.ui" line="85"/>
         <source>Path</source>
-        <translation>Chemin d&apos;accès</translation>
+        <translation>Chemin d’accès</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="90"/>
@@ -156,7 +156,7 @@
         <location filename="../mainwindow.ui" line="285"/>
         <location filename="../mainwindow.cpp" line="286"/>
         <source>Samba is running</source>
-        <translation>Samba est en cours d&apos;exécution</translation>
+        <translation>Samba est en cours d’exécution</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="324"/>
@@ -166,7 +166,7 @@
     <message>
         <location filename="../mainwindow.ui" line="327"/>
         <source>A&amp;bout...</source>
-        <translation>A&amp;propos de...</translation>
+        <translation>A&amp;propos de ...</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="334"/>
@@ -176,7 +176,7 @@
     <message>
         <location filename="../mainwindow.ui" line="366"/>
         <source>Display help </source>
-        <translation>Afficher l&apos;aide </translation>
+        <translation>Afficher l’aide </translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="369"/>
@@ -191,12 +191,12 @@
     <message>
         <location filename="../mainwindow.ui" line="411"/>
         <source>Quit application</source>
-        <translation>Quitter l&apos;application</translation>
+        <translation>Quitter l’application</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="414"/>
         <source>&amp;Close</source>
-        <translation>&amp;Fermer</translation>
+        <translation>&amp;Quitter</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="421"/>
@@ -220,24 +220,21 @@
         <location filename="../mainwindow.cpp" line="464"/>
         <location filename="../mainwindow.cpp" line="478"/>
         <location filename="../mainwindow.cpp" line="488"/>
-        <location filename="../mainwindow.cpp" line="520"/>
-        <location filename="../mainwindow.cpp" line="532"/>
+        <location filename="../mainwindow.cpp" line="511"/>
+        <location filename="../mainwindow.cpp" line="528"/>
+        <location filename="../mainwindow.cpp" line="540"/>
         <source>Error</source>
         <translation>Erreur</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="94"/>
         <source>Error, could not add share. Empty share name</source>
-        <translation>Erreur, impossible d&apos;ajouter un partage. Nom de partage vide</translation>
+        <translation>Erreur, impossible d’ajouter un partage. Nom de partage vide</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="99"/>
         <source>Path: %1 doesn&apos;t exist.</source>
-        <translation>Le chemin : %1 n&apos;existe pas.</translation>
-    </message>
-    <message>
-        <source>Everyone</source>
-        <translation type="vanished">Tout le monde</translation>
+        <translation>Le chemin: %1 n’existe pas.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="124"/>
@@ -249,7 +246,7 @@
         <source>Could not add share. Error message:
 
 %1</source>
-        <translation>Impossible d&apos;ajouter un partage. Message d&apos;erreur :
+        <translation>Impossible d’ajouter un partage. Message d’erreur:
 
 %1</translation>
     </message>
@@ -281,7 +278,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="275"/>
         <source>Your user doesn&apos;t belong to &apos;sambashare&apos; group  if you just installed the app you might need to restart the system first.</source>
-        <translation>Votre utilisateur n&apos;appartient pas au groupe &apos;sambashare&apos;. Si vous venez d&apos;installer l&apos;application, vous devrez peut-être redémarrer le système.</translation>
+        <translation>Votre utilisateur n’appartient pas au groupe « sambashare ». Si vous venez d’installer l’application, vous devrez peut-être redémarrer le système.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="285"/>
@@ -296,7 +293,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="292"/>
         <source>Samba not installed</source>
-        <translation>Samba n&apos;est pas installé</translation>
+        <translation>Samba n’est pas installé</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="308"/>
@@ -316,7 +313,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="361"/>
         <source>Version: </source>
-        <translation>Version : </translation>
+        <translation>Version: </translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="363"/>
@@ -341,39 +338,39 @@
     <message>
         <location filename="../mainwindow.cpp" line="385"/>
         <source>Cannot delete user: </source>
-        <translation>Impossible de supprimer l&apos;utilisateur : </translation>
+        <translation>Impossible de supprimer l’utilisateur: </translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="393"/>
         <source>Enter the username and password:</source>
-        <translation>Entrez le nom d&apos;utilisateur et le mot de passe :</translation>
+        <translation>Entrez le nom d’utilisateur et le mot de passe:</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="400"/>
         <source>Username:</source>
-        <translation>Nom d&apos;utilisateur :</translation>
+        <translation>Nom d’utilisateur:</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="401"/>
         <location filename="../mainwindow.cpp" line="447"/>
         <source>Password:</source>
-        <translation>Mot de passe :</translation>
+        <translation>Mot de passe:</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="402"/>
         <location filename="../mainwindow.cpp" line="448"/>
         <source>Confirm password:</source>
-        <translation>Confirmer le mot de passe :</translation>
+        <translation>Confirmer le mot de passe:</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="412"/>
         <source>Empty username, please enter a name.</source>
-        <translation>Nom d&apos;utilisateur vide, veuillez entrer un nom.</translation>
+        <translation>Nom d’utilisateur vide, veuillez entrer un nom.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="417"/>
         <source>Matching linux user not found on system, make sure you enter a valid username.</source>
-        <translation>Utilisateur linux non trouvé sur le système, veuillez entrer un nom d&apos;utilisateur valide.</translation>
+        <translation>Utilisateur linux non trouvé sur le système, veuillez entrer un nom d’utilisateur valide.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="422"/>
@@ -384,12 +381,12 @@
     <message>
         <location filename="../mainwindow.cpp" line="428"/>
         <source>Could not add user.</source>
-        <translation>Impossible d&apos;ajouter un utilisateur.</translation>
+        <translation>Impossible d’ajouter un utilisateur.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="441"/>
         <source>Change the password for &apos;%1&apos;</source>
-        <translation>Changer le mot de passe de &apos;%1&apos;</translation>
+        <translation>Changer le mot de passe de « %1 »</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="464"/>
@@ -399,70 +396,48 @@
     <message>
         <location filename="../mainwindow.cpp" line="478"/>
         <source>Cannot delete share: </source>
-        <translation>Impossible de supprimer le partage : </translation>
+        <translation>Impossible de supprimer le partage: </translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="489"/>
-        <location filename="../mainwindow.cpp" line="533"/>
+        <location filename="../mainwindow.cpp" line="541"/>
         <source>Samba service is not running. Please start Samba before adding or editing shares</source>
-        <translation>Le service Samba est inactif. Veuillez démarrer Samba avant d&apos;ajouter ou de modifier des partages</translation>
+        <translation>Le service Samba est inactif. Veuillez démarrer Samba avant d’ajouter ou de modifier des partages</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="520"/>
+        <location filename="../mainwindow.cpp" line="511"/>
+        <location filename="../mainwindow.cpp" line="528"/>
         <source>Error: trying to process permissions: </source>
-        <translation>Erreur : essai de traitement des autorisations : </translation>
-    </message>
-</context>
-<context>
-    <name>QApplication</name>
-    <message>
-        <source>License</source>
-        <translation type="vanished">Licence</translation>
-    </message>
-    <message>
-        <source>Changelog</source>
-        <translation type="vanished">Journal des modifications</translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation type="vanished">Annuler</translation>
-    </message>
-    <message>
-        <source>&amp;Close</source>
-        <translation type="vanished">&amp;Fermer</translation>
-    </message>
-    <message>
-        <source>You must run this program as normal user.</source>
-        <translation type="vanished">Vous devez lancer cette application en tant qu&apos;utilisateur normal.</translation>
+        <translation>Erreur: essai de traitement des autorisations: </translation>
     </message>
 </context>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../about.cpp" line="39"/>
+        <location filename="../about.cpp" line="42"/>
         <source>License</source>
         <translation>Licence</translation>
     </message>
     <message>
-        <location filename="../about.cpp" line="40"/>
-        <location filename="../about.cpp" line="49"/>
+        <location filename="../about.cpp" line="43"/>
+        <location filename="../about.cpp" line="52"/>
         <source>Changelog</source>
         <translation>Journal des modifications</translation>
     </message>
     <message>
-        <location filename="../about.cpp" line="41"/>
+        <location filename="../about.cpp" line="44"/>
         <source>Cancel</source>
         <translation>Annuler</translation>
     </message>
     <message>
-        <location filename="../about.cpp" line="62"/>
+        <location filename="../about.cpp" line="64"/>
         <source>&amp;Close</source>
-        <translation>&amp;Fermer</translation>
+        <translation>&amp;Quitter</translation>
     </message>
     <message>
         <location filename="../main.cpp" line="61"/>
         <source>You must run this program as normal user.</source>
-        <translation>Vous devez lancer cette application en tant qu&apos;utilisateur normal.</translation>
+        <translation>Vous devez exécuter cette application en tant qu’utilisateur normal.</translation>
     </message>
 </context>
 </TS>

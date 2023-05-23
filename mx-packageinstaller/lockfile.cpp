@@ -24,33 +24,28 @@
 
 #include "lockfile.h"
 
-#include <sys/file.h>
+#include <QDebug>
+
 #include <unistd.h>
 
 // Checks if file is locked by another process (if locked by the same process returns false)
 bool LockFile::isLocked()
 {
-    int fd = open(file_name.toUtf8(), O_RDONLY);
-    if (fd < -1) {
-        perror("open");
+    if (!file.open(QIODevice::ReadOnly)) {
+        qWarning() << "Unable to open lock file" << file.fileName() << "for reading:" << file.errorString();
         return false;
     }
-    return (lockf(fd, F_TEST, 0) != 0);
+    return (lockf(file.handle(), F_TEST, 0) != 0);
 }
 
 bool LockFile::lock()
 {
-    int fd = open(file_name.toUtf8(), O_WRONLY);
-    if (fd < -1) {
-        perror("open");
+    file.close(); // if openned by isLocked()
+    if (!file.open(QIODevice::WriteOnly)) {
+        qWarning() << "Unable to open lock file" << file.fileName() << "for writing:" << file.errorString();
         return false;
     }
-    return (lockf(fd, F_LOCK, 0) == 0);
+    return (lockf(file.handle(), F_LOCK, 0) == 0);
 }
 
-bool LockFile::unlock()
-{
-    int fd = open(file_name.toUtf8(), O_WRONLY);
-    close(fd);
-    return true;
-}
+void LockFile::unlock() { file.close(); }

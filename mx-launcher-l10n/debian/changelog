@@ -1,0 +1,11 @@
+mx-launcher-l10n (23.05.01) mx; urgency=medium
+
+  * added translation resources to fetch from tansifex
+
+ -- fehlix <fehlix@mxlinux.org>  Wed, 10 May 2023 12:10:42 -0500
+
+mx-launcher-l10n (23.04) mx; urgency=medium
+
+  * Initial build.
+
+ -- fehlix <fehlix@mxlinux.org>  Mon, 24 Apr 2023 10:22:01 -0500

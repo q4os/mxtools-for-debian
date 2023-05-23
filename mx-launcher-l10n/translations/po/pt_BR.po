@@ -1,0 +1,108 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+# Translators:
+# anticapitalista <anticapitalista@riseup.net>, 2017
+# cmenemrs <cmenemrs@gmail.com>, 2022
+# marcelo cripe <marcelocripe@gmail.com>, 2023
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-03-04 14:51-0500\n"
+"PO-Revision-Date: 2016-11-29 14:08+0000\n"
+"Last-Translator: marcelo cripe <marcelocripe@gmail.com>, 2023\n"
+"Language-Team: Portuguese (Brazil) (https://app.transifex.com/anticapitalista/teams/10162/pt_BR/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: pt_BR\n"
+"Plural-Forms: nplurals=3; plural=(n == 0 || n == 1) ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
+
+msgid "Nvidia driver installer"
+msgstr "Instalador de Controladores da NVidia"
+
+msgid "Deb Installer"
+msgstr "Instalador e Desinstalador de Pacotes *.deb"
+
+msgid "Format USB"
+msgstr "Formatador de Dispositivos USB"
+
+msgid "Job Scheduler"
+msgstr "Agendador de Tarefas"
+
+msgid "MX Snapshot"
+msgstr "Snapshot do MX - Criador de Imagem ISO do Sistema Operacional"
+
+msgid "MX Boot Options"
+msgstr "Opções de Inicialização do MX"
+
+msgid "MX Boot Repair"
+msgstr "Reparador de Inicialização do MX"
+
+msgid "MX Cleanup"
+msgstr "Limpeza Automática do MX"
+
+msgid "MX Codecs Installer"
+msgstr "Instalador de Codecs do MX"
+
+msgid "MX Date & Time"
+msgstr "Configurações de Data e Hora do MX"
+
+msgid "System Locales"
+msgstr "Configurações de Idioma do Sistema Operacional"
+
+msgid "xfce4-notifyd-start"
+msgstr "Inicializador das Notificações do XFCE4"
+
+msgid "MX Live USB Maker"
+msgstr "Criador de Dispositivo USB Executável do MX"
+
+msgid "MX Network Assistant"
+msgstr "Assistente de Redes do MX"
+
+msgid "MX Package Installer"
+msgstr "Instalador e Desinstalador de Programas do MX"
+
+msgid "MX RemasterCC"
+msgstr "Centro de Controle para a Remasterização do MX"
+
+msgid "MX Repo Manager"
+msgstr "Gerenciador de Repositórios do MX"
+
+msgid "MX Samba Config"
+msgstr "Configurações do Servidor Samba do MX"
+
+msgid "MX Tweak"
+msgstr "Ajustes Rápidos do MX"
+
+msgid "Brightness Systray"
+msgstr "Controle do Brilho na Bandeja do Sistema"
+
+msgid "mx-tweak brightness systray"
+msgstr "Controle do Brilho da Tela na Bandeja do Sistema do Ajustes Rápidos do MX"
+
+msgid "compton"
+msgstr "Compositor de Janelas e Efeitos Visuais Compton"
+
+msgid "restore-software-brightness"
+msgstr "Restaurador do Controle do Brilho da Tela"
+
+msgid "MX User Manager"
+msgstr "Gerenciador de Usuários do MX"
+
+msgid "Quick System Info"
+msgstr "Informações do Computador"
+
+msgid "System Keyboard"
+msgstr "Configurações do Teclado do Sistema"
+
+msgid "Disk Manager"
+msgstr "Gerenciador de Disco"
+
+msgid "Adblock"
+msgstr "Bloqueador de Publicidade"

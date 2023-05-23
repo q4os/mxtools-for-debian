@@ -456,7 +456,7 @@
         <string/>
        </property>
        <property name="pixmap">
-        <pixmap resource="images.qrc">:/icons/logo.png</pixmap>
+        <pixmap resource="images.qrc">:/icons/logo.svg</pixmap>
        </property>
        <property name="scaledContents">
         <bool>true</bool>
@@ -479,22 +479,5 @@
  <resources>
   <include location="images.qrc"/>
  </resources>
- <connections>
-  <connection>
-   <sender>pushCancel</sender>
-   <signal>pressed()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>close()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>766</x>
-     <y>839</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>388</x>
-     <y>272</y>
-    </hint>
-   </hints>
-  </connection>
- </connections>
+ <connections/>
 </ui>

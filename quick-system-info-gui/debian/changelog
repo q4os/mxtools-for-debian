@@ -1,3 +1,9 @@
+quick-system-info-gui (23.02.06) mx; urgency=medium
+
+  * mx-launcher-l10n strings in policy file
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 12 May 2023 22:18:25 -0400
+
 quick-system-info-gui (23.02.05mx21) mx; urgency=medium
 
   * widen search for logs 

@@ -1,0 +1,131 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+# Translators:
+# Ioannis LM, 2022
+# anticapitalista <anticapitalista@riseup.net>, 2023
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-03-04 14:51-0500\n"
+"PO-Revision-Date: 2016-11-29 14:08+0000\n"
+"Last-Translator: anticapitalista <anticapitalista@riseup.net>, 2023\n"
+"Language-Team: Greek (https://app.transifex.com/anticapitalista/teams/10162/el/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: el\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. The desktop entry name will be displayed within the menu.
+msgid "Nvidia driver installer"
+msgstr "Nvidia driver installer"
+
+#. The desktop entry name will be displayed within the menu.
+msgid "Deb Installer"
+msgstr "Πρόγραμμα εγκατάστασης Deb"
+
+#. The desktop entry name will be displayed within the menu.
+msgid "Format USB"
+msgstr "Format USB"
+
+#. The desktop entry name will be displayed within the menu.
+msgid "Job Scheduler"
+msgstr "Προγραμματιστής εργασιών"
+
+#. The desktop entry name will be displayed within the menu.
+#. The desktop entry name will be displayed within the menu.
+msgid "MX Snapshot"
+msgstr "MX Snapshot"
+
+#. The desktop entry name will be displayed within the menu.
+msgid "MX Boot Options"
+msgstr "Ρυθμίσεις εκκίνησης MX"
+
+#. The desktop entry name will be displayed within the menu.
+msgid "MX Boot Repair"
+msgstr "Επισκευή Εκκίνησης του MX"
+
+#. The desktop entry name will be displayed within the menu.
+msgid "MX Cleanup"
+msgstr "Καθαρισμός του MX"
+
+#. The desktop entry name will be displayed within the menu.
+msgid "MX Codecs Installer"
+msgstr "Εγκατάσταση codecs του MX"
+
+#. The desktop entry name will be displayed within the menu.
+msgid "MX Date & Time"
+msgstr "Ημερομηνία και ώρα του MX"
+
+#. The desktop entry name will be displayed within the menu.
+msgid "System Locales"
+msgstr ""
+
+#. The desktop entry name will be displayed within the menu.
+msgid "xfce4-notifyd-start"
+msgstr ""
+
+#. The desktop entry name will be displayed within the menu.
+msgid "MX Live USB Maker"
+msgstr "MX Δημιουργός Live-usb"
+
+#. The desktop entry name will be displayed within the menu.
+msgid "MX Network Assistant"
+msgstr "MX Network Assistant"
+
+#. The desktop entry name will be displayed within the menu.
+msgid "MX Package Installer"
+msgstr "Εγκατάσταση πακέτων του MX"
+
+#. The desktop entry name will be displayed within the menu.
+msgid "MX RemasterCC"
+msgstr "MX RemasterCC"
+
+#. The desktop entry name will be displayed within the menu.
+msgid "MX Repo Manager"
+msgstr "Διαχειριστής αποθετηρίων MX"
+
+#. The desktop entry name will be displayed within the menu.
+msgid "MX Samba Config"
+msgstr "MX Samba Config"
+
+#. The desktop entry name will be displayed within the menu.
+msgid "MX Tweak"
+msgstr "MX Tweak"
+
+#. The desktop entry name will be displayed within the menu.
+msgid "Brightness Systray"
+msgstr "λάμψη Systray"
+
+#. The desktop entry name will be displayed within the menu.
+msgid "mx-tweak brightness systray"
+msgstr "mx-tweak εικονίδιο φωτεινότητας"
+
+#. The desktop entry name will be displayed within the menu.
+msgid "compton"
+msgstr "στιχειοθετης compton"
+
+#. The desktop entry name will be displayed within the menu.
+msgid "restore-software-brightness"
+msgstr "ανάκτηση-λογισμικού-φωτεινότητας"
+
+#. The desktop entry name will be displayed within the menu.
+msgid "MX User Manager"
+msgstr "διαχειριστής του χρήστη για MX"
+
+#. The desktop entry name will be displayed within the menu.
+msgid "Quick System Info"
+msgstr "Συνοπτικές πληροφορίες συστήματος"
+
+#. The desktop entry name will be displayed within the menu.
+msgid "System Keyboard"
+msgstr "Πληκτρολόγιο συστήματος"
+
+msgid "Disk Manager"
+msgstr "Διαχείριση δίσκων"

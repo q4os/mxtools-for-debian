@@ -5,12 +5,11 @@
     <name>MainWindow</name>
     <message>
         <location filename="../mainwindow.ui" line="14"/>
-        <location filename="../mainwindow.cpp" line="46"/>
-        <location filename="../mainwindow.cpp" line="76"/>
-        <location filename="../mainwindow.cpp" line="133"/>
-        <location filename="../mainwindow.cpp" line="146"/>
-        <location filename="../mainwindow.cpp" line="180"/>
-        <location filename="../mainwindow.cpp" line="188"/>
+        <location filename="../mainwindow.cpp" line="47"/>
+        <location filename="../mainwindow.cpp" line="75"/>
+        <location filename="../mainwindow.cpp" line="129"/>
+        <location filename="../mainwindow.cpp" line="148"/>
+        <location filename="../mainwindow.cpp" line="156"/>
         <source>MX Select Sound</source>
         <translation type="unfinished">MX ध्वनि चयन</translation>
     </message>
@@ -85,61 +84,74 @@
         <translation type="unfinished">वर्तमान ध्वनि कार्ड जाँचें</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="77"/>
+        <location filename="../mainwindow.cpp" line="75"/>
         <source>No sound cards/devices were found.</source>
         <translation type="unfinished">कोई ध्वनि कार्ड / डिवाइस नहीं मिला।</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="89"/>
-        <location filename="../mainwindow.cpp" line="100"/>
+        <location filename="../mainwindow.cpp" line="87"/>
+        <location filename="../mainwindow.cpp" line="98"/>
         <source>none</source>
         <translation type="unfinished">कोई नहीं</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="132"/>
+        <location filename="../mainwindow.cpp" line="128"/>
         <source>About MX Select Sound</source>
         <translation type="unfinished">MX ध्वनि चयन के बारे में</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="133"/>
+        <location filename="../mainwindow.cpp" line="129"/>
         <source>Version: </source>
         <translation type="unfinished">संस्करण :</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="134"/>
+        <location filename="../mainwindow.cpp" line="130"/>
         <source>Program for selecting the default sound card in MX Linux</source>
         <translation type="unfinished">एमएक्स-लिनक्स में डिफ़ॉल्ट ध्वनि कार्ड चुनें हेतु अनुप्रयोग</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="136"/>
+        <location filename="../mainwindow.cpp" line="133"/>
         <source>Copyright (c) MX Linux</source>
-        <translation type="unfinished">प्रतिलिप्याधिकार (c) MX Linux</translation>
+        <translation type="unfinished">कॉपीराइट (c) एमएक्स लिनक्स</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="137"/>
-        <location filename="../mainwindow.cpp" line="146"/>
+        <location filename="../mainwindow.cpp" line="134"/>
+        <source>%1 License</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="148"/>
+        <source>%1 Help</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="156"/>
+        <source>Could not play test sound.</source>
+        <translation type="unfinished">जाँच हेतु ध्वनि चलाई नहीं जा सकी।</translation>
+    </message>
+</context>
+<context>
+    <name>QObject</name>
+    <message>
+        <location filename="../about.cpp" line="43"/>
         <source>License</source>
         <translation type="unfinished">लाइसेंस</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="138"/>
+        <location filename="../about.cpp" line="44"/>
+        <location filename="../about.cpp" line="54"/>
         <source>Changelog</source>
         <translation type="unfinished">परिवर्तन सूची</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="139"/>
+        <location filename="../about.cpp" line="45"/>
         <source>Cancel</source>
         <translation type="unfinished">रद्द</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="156"/>
+        <location filename="../about.cpp" line="67"/>
         <source>&amp;Close</source>
         <translation type="unfinished">&amp;बंद करें</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="189"/>
-        <source>Could not play test sound.</source>
-        <translation type="unfinished">जाँच हेतु ध्वनि चलाई नहीं जा सकी।</translation>
     </message>
 </context>
 <context>
@@ -226,7 +238,7 @@
     </message>
     <message>
         <source>Copyright (c) MX Linux</source>
-        <translation type="vanished">प्रतिलिप्याधिकार (c) MX Linux</translation>
+        <translation type="vanished">कॉपीराइट (c) एमएक्स लिनक्स</translation>
     </message>
     <message>
         <source>License</source>

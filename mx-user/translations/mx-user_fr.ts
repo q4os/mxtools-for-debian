@@ -82,13 +82,9 @@
         <translation>Mot de passe utilisateur :</translation>
     </message>
     <message>
-        <source>Include user in sudo group</source>
-        <translation type="vanished">Inclure l’utilisateur dans le groupe sudo</translation>
-    </message>
-    <message>
         <location filename="../mainwindow.ui" line="271"/>
         <source>Grant this user administrative rights to the system (sudo)</source>
-        <translation type="unfinished"></translation>
+        <translation>Accorder à cet utilisateur les droits d’administration sur le système (sudo)</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="290"/>
@@ -446,7 +442,7 @@
     <message>
         <location filename="../mainwindow.ui" line="1586"/>
         <source>Close</source>
-        <translation>Fermer</translation>
+        <translation>Quitter</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1593"/>
@@ -740,7 +736,7 @@ Veuillez choisir un autre nom avant de poursuivre.</translation>
     <message>
         <location filename="../mainwindow.cpp" line="545"/>
         <source>Failed to rename the user. Please make sure that the user is not logged in, you might need to restart</source>
-        <translation>Échec lors du renommage. Assurez-vous que l’utilisateur ne soit pas connecté. Vous devrez peut-être redémarrer.</translation>
+        <translation>Impossible de renommer l’utilisateur. Assurez-vous que l’utilisateur ne soit pas connecté. Vous devrez peut-être redémarrer.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="567"/>
@@ -762,12 +758,12 @@ Veuillez choisir un autre nom avant de poursuivre.</translation>
     <message>
         <location filename="../mainwindow.cpp" line="611"/>
         <source>Synchronizing desktop...failed</source>
-        <translation>Synchronisation des bureaux... échec</translation>
+        <translation>Synchronisation des bureaux... impossible</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="613"/>
         <source>Copying desktop...failed</source>
-        <translation>Copie des bureaux... échec</translation>
+        <translation>Copie des bureaux... impossible</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="630"/>
@@ -836,7 +832,7 @@ Veuillez choisir un autre nom avant de poursuivre.</translation>
     <message>
         <location filename="../about.cpp" line="74"/>
         <source>&amp;Close</source>
-        <translation>&amp;Fermer</translation>
+        <translation>&amp;Quitter</translation>
     </message>
     <message>
         <location filename="../main.cpp" line="58"/>

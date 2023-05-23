@@ -1,3 +1,21 @@
+mx-datetime (23.5.01) mx; urgency=medium
+
+  * Update logo
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 17 May 2023 18:54:12 -0400
+
+mx-datetime (23.5) mx; urgency=medium
+
+  * Temporary fix for time being incorrect on Qt6.
+  * Fixed duplicate time zones. Found while porting to Qt6.
+  * Eliminate Qt4 test. MX Linux has Qt6 now.
+  * Allow building with qmake6.
+  * Eliminate Qt APIs deprecated before 5.15
+  * Update icon
+  * Update translations
+
+ -- Adrian <adrian@mxlinux.org>  Sun, 14 May 2023 22:11:21 -0400
+
 mx-datetime (23.4.01) mx; urgency=medium
 
   * Update icon

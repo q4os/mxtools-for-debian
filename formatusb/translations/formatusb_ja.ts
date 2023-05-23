@@ -227,12 +227,12 @@
     <message>
         <location filename="../about.cpp" line="36"/>
         <source>Cancel</source>
-        <translation>取り消し</translation>
+        <translation>キャンセル</translation>
     </message>
     <message>
         <location filename="../about.cpp" line="53"/>
         <source>&amp;Close</source>
-        <translation>&amp;閉じる</translation>
+        <translation>閉じる(&amp;C)</translation>
     </message>
 </context>
 </TS>

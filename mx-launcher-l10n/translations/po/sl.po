@@ -1,0 +1,108 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+# Translators:
+# anticapitalista <anticapitalista@riseup.net>, 2017
+# Mario <al.manja@gmx.com>, 2019
+# Arnold Marko <arnold.marko@gmail.com>, 2023
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-03-04 14:51-0500\n"
+"PO-Revision-Date: 2016-11-29 14:08+0000\n"
+"Last-Translator: Arnold Marko <arnold.marko@gmail.com>, 2023\n"
+"Language-Team: Slovenian (https://app.transifex.com/anticapitalista/teams/10162/sl/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: sl\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3);\n"
+
+msgid "Nvidia driver installer"
+msgstr "Namestilnik Nvidia gonilnika"
+
+msgid "Deb Installer"
+msgstr "Deb namestilnik"
+
+msgid "Format USB"
+msgstr "Formatiraj USB"
+
+msgid "Job Scheduler"
+msgstr "Razpored opravil"
+
+msgid "MX Snapshot"
+msgstr "MX posnetek"
+
+msgid "MX Boot Options"
+msgstr "MX Zagonske opcije"
+
+msgid "MX Boot Repair"
+msgstr "Popravljanje zagona"
+
+msgid "MX Cleanup"
+msgstr "MX Čistilec"
+
+msgid "MX Codecs Installer"
+msgstr "Namestilnik kodekov"
+
+msgid "MX Date & Time"
+msgstr "MX Datum in ura"
+
+msgid "System Locales"
+msgstr "Lokalne nastavitve sistema"
+
+msgid "xfce4-notifyd-start"
+msgstr "xfce4-notifyd-start"
+
+msgid "MX Live USB Maker"
+msgstr "MX Ustvarjalec za živi-usb pogon"
+
+msgid "MX Network Assistant"
+msgstr "MX Omrežni asistent"
+
+msgid "MX Package Installer"
+msgstr "MX Namestilnik paketov"
+
+msgid "MX RemasterCC"
+msgstr "MX PredelavaCC"
+
+msgid "MX Repo Manager"
+msgstr "MX Upravljalnik repozitorijev"
+
+msgid "MX Samba Config"
+msgstr "MX Samba nastavitve"
+
+msgid "MX Tweak"
+msgstr "MX Prilagoditve"
+
+msgid "Brightness Systray"
+msgstr "Osvetlitev v sistemski pasici"
+
+msgid "mx-tweak brightness systray"
+msgstr "mx-tweak osvetlitev v sistemski pasici"
+
+msgid "compton"
+msgstr "compton"
+
+msgid "restore-software-brightness"
+msgstr "obnovi-programsko-osvetlitev"
+
+msgid "MX User Manager"
+msgstr "MX Upravljalnik uporabnikov"
+
+msgid "Quick System Info"
+msgstr "Hitre informacije o sistemu"
+
+msgid "System Keyboard"
+msgstr "Tipkovnica"
+
+msgid "Disk Manager"
+msgstr "Upravljalnik diskov"
+
+msgid "Adblock"
+msgstr "blok-objava"

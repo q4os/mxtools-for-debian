@@ -239,7 +239,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../main.cpp" line="47"/>
         <source>Start with About tab selected. The About tab provides basic information about the current MX Linux version, the user&apos;s hardware, and access to a full system report.</source>
-        <translation>Iniciar com a aba ou guia &apos;Sobre&apos; selecionada. A aba ou guia &apos;Sobre&apos; fornece informações básicas sobre a versão atual do MX Linux, a descrição do equipamento do usuário e o acesso a um relatório completo do sistema operacional.</translation>
+        <translation>Iniciar com a aba ou guia ‘Sobre’ selecionada. A aba ou guia ‘Sobre’ fornece informações básicas sobre a versão atual do MX Linux, a descrição do equipamento do usuário e o acesso a um relatório completo do sistema operacional.</translation>
     </message>
     <message>
         <location filename="../main.cpp" line="50"/>
@@ -257,23 +257,23 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished">Você tem que executar este programa como usuário normal.</translation>
     </message>
     <message>
-        <location filename="../about.cpp" line="40"/>
+        <location filename="../about.cpp" line="41"/>
         <source>License</source>
         <translation type="unfinished">Licença</translation>
     </message>
     <message>
-        <location filename="../about.cpp" line="41"/>
-        <location filename="../about.cpp" line="51"/>
+        <location filename="../about.cpp" line="42"/>
+        <location filename="../about.cpp" line="52"/>
         <source>Changelog</source>
         <translation type="unfinished">Relatório de alterações</translation>
     </message>
     <message>
-        <location filename="../about.cpp" line="42"/>
+        <location filename="../about.cpp" line="43"/>
         <source>Cancel</source>
         <translation type="unfinished">Cancelar</translation>
     </message>
     <message>
-        <location filename="../about.cpp" line="63"/>
+        <location filename="../about.cpp" line="64"/>
         <source>&amp;Close</source>
         <translation type="unfinished">&amp;Fechar</translation>
     </message>

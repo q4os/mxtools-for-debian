@@ -83,14 +83,18 @@ int main(int argc, char *argv[])
     parser.process(app);
 
     // Root guard
-    if (QProcess::execute(QStringLiteral("/bin/bash"), {"-c", "logname |grep -q ^root$"}) == 0) {
-        QMessageBox::critical(
-            nullptr, QObject::tr("Error"),
-            QObject::tr(
-                "You seem to be logged in as root, please log out and log in as normal user to use this program."));
-        exit(EXIT_FAILURE);
+    QFile loginUidFile {"/proc/self/loginuid"};
+    if (loginUidFile.open(QIODevice::ReadOnly)) {
+        QString loginUid = QString(loginUidFile.readAll()).trimmed();
+        loginUidFile.close();
+        if (loginUid == "0") {
+            QMessageBox::critical(
+                nullptr, QObject::tr("Error"),
+                QObject::tr(
+                    "You seem to be logged in as root, please log out and log in as normal user to use this program."));
+            exit(EXIT_FAILURE);
+        }
     }
-
     if (getuid() == 0) {
         // Don't start app if Synaptic/apt-get is running, lock dpkg otherwise while the program runs
         LockFile lock_file(QStringLiteral("/var/lib/dpkg/lock"));
@@ -104,13 +108,19 @@ int main(int argc, char *argv[])
             lock_file.lock();
         }
         QString log_name = QStringLiteral("/var/log/mxpi.log");
-        if (QFile::exists(log_name)) {
-            QProcess::execute(QStringLiteral("/bin/bash"),
-                              {"-c", "echo '-----------------------------------------------------------\n"
-                                     "MXPI SESSION\n-----------------------------------------------------------' >> "
-                                         + log_name.toUtf8() + ".old"});
-            QProcess::execute(QStringLiteral("/bin/bash"), {"-c", "cat " + log_name + " >> " + log_name + ".old"});
-            QFile::remove(log_name);
+        logFile.setFileName(log_name);
+        if (logFile.open(QFile::ReadOnly)) {
+            QFile oldLogFile(log_name + ".old");
+            if (oldLogFile.open(QFile::Append | QFile::Text)) {
+                QTextStream oldLogStream(&oldLogFile);
+                oldLogStream << "-----------------------------------------------------------\n"
+                             << "MXPI SESSION\n"
+                             << "-----------------------------------------------------------\n"
+                             << logFile.readAll();
+                oldLogFile.close();
+                logFile.close();
+                QFile::remove(log_name);
+            }
         }
         logFile.setFileName(log_name);
         logFile.open(QFile::Append | QFile::Text);

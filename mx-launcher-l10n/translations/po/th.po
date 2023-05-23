@@ -1,0 +1,77 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+# Translators:
+# Pongpeera Wongprasitthiporn, 2022
+# Robin, 2023
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-03-04 14:51-0500\n"
+"PO-Revision-Date: 2016-11-29 14:08+0000\n"
+"Last-Translator: Robin, 2023\n"
+"Language-Team: Thai (https://app.transifex.com/anticapitalista/teams/10162/th/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: th\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+msgid "Nvidia driver installer"
+msgstr ""
+
+msgid "Format USB"
+msgstr "ฟอร์แมต USB"
+
+msgid "Job Scheduler"
+msgstr ""
+
+msgid "MX Snapshot"
+msgstr ""
+
+msgid "MX Boot Repair"
+msgstr ""
+
+msgid "MX Cleanup"
+msgstr "MX Cleanup"
+
+msgid "MX Date & Time"
+msgstr ""
+
+msgid "MX Live USB Maker"
+msgstr ""
+
+msgid "MX Network Assistant"
+msgstr ""
+
+msgid "MX Package Installer"
+msgstr "MX Package Installer"
+
+msgid "MX Tweak"
+msgstr "MX Tweak"
+
+msgid "Brightness Systray"
+msgstr ""
+
+msgid "mx-tweak brightness systray"
+msgstr ""
+
+msgid "compton"
+msgstr ""
+
+msgid "restore-software-brightness"
+msgstr ""
+
+msgid "MX User Manager"
+msgstr ""
+
+msgid "System Keyboard"
+msgstr "แป้นพิมพ์ระบบ"
+
+msgid "Adblock"
+msgstr "บล็อกโฆษณา"

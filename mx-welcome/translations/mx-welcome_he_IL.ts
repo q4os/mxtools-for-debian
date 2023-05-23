@@ -123,7 +123,7 @@
     <message>
         <location filename="../mainwindow.ui" line="829"/>
         <source>Terms of Use</source>
-        <translation type="unfinished"></translation>
+        <translation>תנאי שימוש</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="846"/>
@@ -257,23 +257,23 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished">יש להריץ את התכנית הזו כמשתמש רגיל.</translation>
     </message>
     <message>
-        <location filename="../about.cpp" line="40"/>
+        <location filename="../about.cpp" line="41"/>
         <source>License</source>
         <translation type="unfinished">רשיון</translation>
     </message>
     <message>
-        <location filename="../about.cpp" line="41"/>
-        <location filename="../about.cpp" line="51"/>
+        <location filename="../about.cpp" line="42"/>
+        <location filename="../about.cpp" line="52"/>
         <source>Changelog</source>
         <translation type="unfinished">יומן שינויים</translation>
     </message>
     <message>
-        <location filename="../about.cpp" line="42"/>
+        <location filename="../about.cpp" line="43"/>
         <source>Cancel</source>
         <translation type="unfinished">ביטול</translation>
     </message>
     <message>
-        <location filename="../about.cpp" line="63"/>
+        <location filename="../about.cpp" line="64"/>
         <source>&amp;Close</source>
         <translation type="unfinished">&amp;סגירה</translation>
     </message>

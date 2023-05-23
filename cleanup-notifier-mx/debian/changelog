@@ -1,3 +1,11 @@
+cleanup-notifier-mx (23.04) mx; urgency=medium
+
+  * Get translations from transifex
+  * Adjust notification icon
+  * Adjust meson build setup
+
+ -- fehlix <fehlix@mxlinux.org>  Sun, 23 Apr 2023 07:02:47 -0500
+ 
 cleanup-notifier-mx (22.05.02mx) mx; urgency=medium
 
   * Adjust last runtime-check by dbus session-id

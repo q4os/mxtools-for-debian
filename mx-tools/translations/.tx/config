@@ -1,7 +1,7 @@
 [main]
 host = https://www.transifex.com
 
-[antix-development.mx-tools]
+[o:anticapitalista:p:antix-development:r:mx-tools]
 file_filter = ./mx-tools_<lang>.ts
 source_file = mx-tools_en.ts
 source_lang = en

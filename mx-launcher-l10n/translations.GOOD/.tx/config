@@ -1,0 +1,11 @@
+[main]
+host = https://app.transifex.com
+
+[o:anticapitalista:p:antix-development:r:disk-manager]
+
+file_filter = po/<lang>.po
+minimum_perc = 10
+resource_name = disk-manager
+source_file = disk-manager.pot
+source_lang = en
+type = PO

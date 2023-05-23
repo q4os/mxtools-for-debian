@@ -1,6 +1,7 @@
-bin_file = [
-    'cleanup-notifier-mx'
-    ]
-
-install_data(bin_file, install_dir: get_option('bindir'))
+    
+install_data(
+    'cleanup-notifier-mx.py', 
+    install_dir: get_option('bindir'),
+    rename : 'cleanup-notifier-mx' 
+    )
 

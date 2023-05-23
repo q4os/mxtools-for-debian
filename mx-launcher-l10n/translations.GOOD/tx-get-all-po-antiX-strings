@@ -1,0 +1,141 @@
+#!/bin/bash
+
+# pull transifex resouces to generate a combined pot/po-files
+#
+# transifex resources to pull
+TX_RESOURCES_FILE=./RESOURCES
+[ ! -f $TX_RESOURCES_FILE ] && echo "Error: Transifex resouce file '$TX_RESOURCES_FILE' not found!" && exit 1
+
+# need 'latest' transifex client
+: ${TXBIN:=$(which tx)}
+[ ! -x "$TXBIN" ] && echo "Error: transifex client not found!" && exit 1
+
+: ${PROP2PO:=$(which prop2po)}
+[ ! -x "$PROP2PO" ] && echo "Error: prop2po client not found! [install: translate-toolkit]; exit" && exit 1
+
+unset TX_RESOURCES
+readarray -t TX_RESOURCES < <(
+	   sed -rn '/^[[:space:]]*[[:alpha:]]+/{s/^[[:space:]]+//; s/[[:space:]]+$//; p}' \
+	   $TX_RESOURCES_FILE \
+	   )
+
+#  set default msg filter
+#MSGGREP=( -X -E -e "desktop entry (name|comment)" )
+MSGGREP=( -X -E -e "desktop entry name" )
+
+
+echodo() { echo "${@}";  ${@}; }
+
+#  fehlix test project do not use
+#: ${ORGANIZATION:=fehlix}
+#: ${PROJECT:=testproject-do-not-use}
+
+# set minium translations completion in percent to pull translation
+: ${MINIMUM_PERC:=10}
+export MINIMUM_PERC
+
+# set transifex organization and project name - if not set in environment already
+: ${ORGANIZATION:=anticapitalista}
+: ${PROJECT:=antix-development}
+
+PODIR=po
+[ -d ${PODIR} ] && echodo cp -a ${PODIR} ${PODIR}_$(date '+%y.%m%d_%H%M%S').bak~
+[ -d ${PODIR} ] || echodo mkdir ${PODIR}
+
+# perpare mesonbuild
+if [ ! -f ${PODIR}/meson.build ]; then
+    cat <<'MESONBUILD' > ${PODIR}/meson.build
+i18n = import('i18n')
+i18n.gettext(meson.project_name(), preset: 'glib' )
+MESONBUILD
+fi
+
+for PO in ${PODIR}/*.po; do
+    [ -e "$PO" ] || continue
+    CAT=${PO}.cat
+    mv $PO $CAT
+done
+
+for RESOURCE in "${TX_RESOURCES[@]}"; do
+	MSGGREP=( -X -E -e "desktop entry name" )
+	SOURCE_TYPE="po"
+	SOURCE_FILE="$RESOURCE".pot
+    # adjust msg filter for msggrep
+    case "$RESOURCE" in
+		antix23-desktop-files) 
+				MSGGREP=( --msgid -E -e "Adblock" )
+				SOURCE_TYPE="strings"
+				SOURCE_FILE="$RESOURCE".${SOURCE_TYPE,,}
+				;;
+		disk-manager)
+				MSGGREP=( --msgid -E -e "Disk Manager" )
+				;;
+	esac
+
+    # prepare transifex 
+    [ -d .tx         ] || mkdir -p .tx
+    [ -f  .tx/config ] && rm  .tx/config
+
+    # set transifex resource_id
+    RESOUCE_ID="${PROJECT}.${RESOURCE}"
+    
+    cat <<EOF > .tx/config
+[main]
+host = https://app.transifex.com
+
+[o:${ORGANIZATION}:p:${PROJECT}:r:${RESOURCE}]
+
+file_filter   = ${PODIR}/<lang>.${SOURCE_TYPE,,}
+minimum_perc  = ${MINIMUM_PERC:=10}
+resource_name = ${RESOURCE}
+source_file   = ${SOURCE_FILE}
+source_lang   = en
+type = ${SOURCE_TYPE^^}
+EOF
+    
+    
+    #TXOPTS=( pull --force  --all "$RESOUCE_ID" )
+    TXOPTS=( pull --force  --languages "de,el,fr_BE" "$RESOUCE_ID")
+    echo ${TXBIN} "${TXOPTS[@]@Q}"
+    ${TXBIN} "${TXOPTS[@]}"
+
+    if [ "${SOURCE_TYPE^^}" == "STRINGS" ]; then
+        TXOPTS=( pull --source  "$RESOUCE_ID")
+        echo ${TXBIN} "${TXOPTS[@]@Q}"
+        ${TXBIN} "${TXOPTS[@]}"
+        
+		for STR in ${PODIR}/*.strings; do
+	        [ -e "$STR" ] || continue
+	        PO=${STR%.strings}.po
+	        [ -f ${PO} ] && rm ${PO}
+	        prop2po --personality=strings -t ${SOURCE_FILE} -i ${STR} -o ${PO}
+	        rm ${STR}
+	    done
+	    rm ${SOURCE_FILE}
+    fi
+    
+    for PO in ${PODIR}/*.po; do
+        [ -e "$PO" ] || continue
+        CAT=$PO.cat
+        GPO=$PO.gpo~
+        PAT=$PO.tmp~
+        touch $CAT
+        msggrep --force-po --no-location --no-wrap "${MSGGREP[@]}" -o $GPO $PO
+        msgcat  --force-po --use-first --no-wrap  --no-location -o $PAT $CAT $GPO 
+        mv $PAT $CAT
+        rm $GPO $PO
+    done
+done
+
+for CAT in ${PODIR}/*.po.cat; do
+    [ -e "$CAT" ] || continue
+    PO=${CAT%.cat}
+    mv $CAT $PO
+    sed -i '/^#[.]/d' $PO
+done
+
+# re-generate pot file based on po-files
+[ -x ./make-pot ] &&  ./make-pot
+
+# re-generate translation completion report
+[ -x ./tx-complete-log ] &&  ./tx-complete-log 

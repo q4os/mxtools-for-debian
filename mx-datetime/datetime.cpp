@@ -50,8 +50,8 @@ MXDateTime::MXDateTime(QWidget *parent) :
         pushClose->hide();
         tabsDateTime->tabBar()->hide();
         tabsDateTime->setDocumentMode(true);
-        gridWindow->setMargin(0);
-        gridDateTime->setMargin(0);
+        gridWindow->setContentsMargins(0,0,0,0);
+        gridDateTime->setContentsMargins(0,0,0,0);
         gridDateTime->setSpacing(1);
     }
     // This runs the slow startup tasks after the GUI is displayed.
@@ -60,6 +60,7 @@ MXDateTime::MXDateTime(QWidget *parent) :
 
 void MXDateTime::startup()
 {
+    timeEdit->setTimeSpec(Qt::LocalTime); // TODO: Implement time zone differences properly.
     timeEdit->setDateTime(QDateTime::currentDateTime()); // Curtail the sudden jump.
     if (userRoot) {
         // Make the NTP server table columns the right proportions.
@@ -76,7 +77,7 @@ void MXDateTime::startup()
         QByteArray testSystemD;
         if (QFileInfo::exists(QStringLiteral("/run/openrc"))) sysInit = OpenRC;
         else if (QFileInfo(QStringLiteral("/usr/bin/timedatectl")).isExecutable()
-                && execute(QStringLiteral("ps -hp1"), &testSystemD) && testSystemD.contains("systemd")) {
+                && execute("ps", {"-hp1"}, &testSystemD) && testSystemD.contains("systemd")) {
             sysInit = SystemD;
         } else sysInit = SystemV;
         static const char *sysInitNames[] = {"SystemV", "OpenRC", "SystemD"};
@@ -85,7 +86,8 @@ void MXDateTime::startup()
 
     // Time zone areas.
     QByteArray zoneOut;
-    execute(QStringLiteral("find -L /usr/share/zoneinfo -mindepth 2 ! -path */posix/* ! -path */right/* -type f -printf %P\\n"), &zoneOut);
+    execute("find", {"-L", "/usr/share/zoneinfo", "-mindepth", "2", "!", "-path",
+        "*/posix/*", "!", "-path", "*/right/*", "-type", "f", "-printf", "%P\n"}, &zoneOut);
     zones = zoneOut.trimmed().split('\n');
     comboTimeZone->blockSignals(true); // Keep blocked until loadSysTimeConfig().
     comboTimeArea->clear();
@@ -95,7 +97,7 @@ void MXDateTime::startup()
             QString text(area);
             if (area == QLatin1String("Indian") || area == QLatin1String("Pacific")
                 || area == QLatin1String("Atlantic") || area == QLatin1String("Arctic")) text.append(" Ocean");
-            comboTimeArea->addItem(text, QVariant(area.toUtf8()));
+            comboTimeArea->addItem(text, area);
         }
     }
     comboTimeArea->model()->sort(0);
@@ -122,13 +124,18 @@ void MXDateTime::setClockLock(bool locked)
         if (!locked) qApp->restoreOverrideCursor();
     }
 }
-bool MXDateTime::execute(const QString &cmd, QByteArray *output)
+bool MXDateTime::shell(const QString &cmd, QByteArray *output)
 {
-    qDebug() << "Exec:" << cmd;
+    qDebug() << "Shell:" << cmd;
+    return execute("bash", {"-c", cmd}, output);
+}
+bool MXDateTime::execute(const QString &program, const QStringList &arguments, QByteArray *output)
+{
+    qDebug() << "Exec:" << program << arguments;
     QProcess proc(this);
     QEventLoop eloop;
     connect(&proc, QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished), &eloop, &QEventLoop::quit);
-    proc.start(cmd);
+    proc.start(program, arguments);
     if (!output) proc.closeReadChannel(QProcess::StandardOutput);
     proc.closeWriteChannel();
     eloop.exec();
@@ -211,7 +218,7 @@ void MXDateTime::loadDateTime()
     // Time zone.
     comboTimeZone->blockSignals(true);
     const QByteArray &zone = QTimeZone::systemTimeZoneId();
-    int index = comboTimeArea->findData(QVariant(QString(zone).section('/', 0, 0).toUtf8()));
+    int index = comboTimeArea->findData(QString(zone).section('/', 0, 0));
     comboTimeArea->setCurrentIndex(index);
     qApp->processEvents();
     index = comboTimeZone->findData(QVariant(zone));
@@ -227,9 +234,9 @@ void MXDateTime::saveDateTime(const QDateTime &driftStart)
     // Set the time zone (if changed) before setting the time.
     if (zoneDelta) {
         const QString newzone(comboTimeZone->currentData().toByteArray());
-        if (sysInit == SystemD) execute("timedatectl set-timezone " + newzone);
+        if (sysInit == SystemD) execute("timedatectl", {"set-timezone", newzone});
         else {
-            execute("ln -nfs /usr/share/zoneinfo/" + newzone + " /etc/localtime");
+            execute("ln", {"-nfs", "/usr/share/zoneinfo/" + newzone, "/etc/localtime"});
             QFile file(QStringLiteral("/etc/timezone"));
             if (file.open(QFile::WriteOnly | QFile::Text)) {
                 file.write(newzone.toUtf8());
@@ -241,20 +248,20 @@ void MXDateTime::saveDateTime(const QDateTime &driftStart)
 
     // Set the date and time if their controls have been altered.
     if (dateDelta || timeDelta) {
-        QString cmd;
-        if (sysInit == SystemD) cmd = QStringLiteral("timedatectl set-time ");
-        else cmd = QStringLiteral("date -s ");
         static const QString dtFormat(QStringLiteral("yyyy-MM-ddTHH:mm:ss.zzz"));
         QDateTime newTime(calendar->selectedDate(),
                           timeEdit->time());
         updater.stop();
+        QString param;
         if (timeDelta) {
             const qint64 drift = driftStart.msecsTo(QDateTime::currentDateTimeUtc());
-            execute(cmd + newTime.addMSecs(drift).toString(dtFormat));
+            param = newTime.addMSecs(drift).toString(dtFormat);
         } else {
             newTime.setTime(QTime::currentTime());
-            execute(cmd + newTime.toString(dtFormat));
+            param = newTime.toString(dtFormat);
         }
+        if (sysInit != SystemD) execute("date", {"-s", param});
+        else execute("timedatectl", {"set-time", param});
         dateDelta = 0;
         timeDelta = 0;
     }
@@ -271,7 +278,7 @@ void MXDateTime::on_pushReadHardware_clicked()
     const QString btext = pushReadHardware->text();
     pushReadHardware->setText(tr("Reading..."));
     QByteArray rtcout;
-    execute(QStringLiteral("hwclock --verbose"), &rtcout);
+    execute("hwclock", {"--verbose"}, &rtcout);
     isHardwareUTC = rtcout.contains("\nHardware clock is on UTC time\n");
     if (isHardwareUTC) radioHardwareUTC->setChecked(true);
     else radioHardwareLocal->setChecked(true);
@@ -285,7 +292,7 @@ void MXDateTime::on_pushHardwareAdjust_clicked()
     const QString btext = pushHardwareAdjust->text();
     pushHardwareAdjust->setText(tr("Adjusting..."));
     QByteArray rtcout;
-    execute(QStringLiteral("hwclock --adjust"), &rtcout);
+    execute("hwclock", {"--adjust"}, &rtcout);
     textHardwareClock->setPlainText(QString(rtcout.trimmed()));
     pushHardwareAdjust->setText(btext);
     setClockLock(false);
@@ -293,21 +300,21 @@ void MXDateTime::on_pushHardwareAdjust_clicked()
 void MXDateTime::on_pushSystemToHardware_clicked()
 {
     setClockLock(true);
-    QString cmd(QStringLiteral("hwclock --systohc"));
-    if (checkDriftUpdate->isChecked()) cmd.append(" --update-drift");
-    transferTime(cmd, tr("System Clock"), tr("Hardware Clock"));
+    QStringList params("--systohc");
+    if (checkDriftUpdate->isChecked()) params.append("--update-drift");
+    transferTime(params, tr("System Clock"), tr("Hardware Clock"));
     checkDriftUpdate->setCheckState(Qt::Unchecked);
     setClockLock(false);
 }
 void MXDateTime::on_pushHardwareToSystem_clicked()
 {
     setClockLock(true);
-    transferTime(QStringLiteral("hwclock --hctosys"), tr("Hardware Clock"), tr("System Clock"));
+    transferTime({"--hctosys"}, tr("Hardware Clock"), tr("System Clock"));
     setClockLock(false);
 }
-void MXDateTime::transferTime(const QString &cmd, const QString &from, const QString &to)
+void MXDateTime::transferTime(const QStringList &params, const QString &from, const QString &to)
 {
-    if (execute(cmd)) {
+    if (execute("hwclock", params)) {
         const QString &msg = tr("The %1 time was transferred to the %2.");
         QMessageBox::information(this, windowTitle(), msg.arg(from, to));
     } else {
@@ -321,13 +328,13 @@ void MXDateTime::saveHardwareClock()
     const bool rtcUTC = radioHardwareUTC->isChecked();
     if (rtcUTC != isHardwareUTC) {
         if (sysInit == SystemD) {
-            execute("timedatectl set-local-rtc " + QString(rtcUTC?"0":"1"));
+            execute("timedatectl", {"set-local-rtc", rtcUTC?"0":"1"});
         } else if (sysInit == OpenRC) {
             if (QFile::exists(QStringLiteral("/etc/conf.d/hwclock"))) {
-                execute(QStringLiteral("sed -i \"s/clock=.*/clock=\\\"UTC\\\"/\" /etc/conf.d/hwclock"));
+                execute("sed", {"-i", "s/clock=.*/clock=\\\"UTC\\\"/", "/etc/conf.d/hwclock"});
             }
         }
-        execute("hwclock --systohc --" + QString(rtcUTC?"utc":"localtime"));
+        execute("hwclock", {"--systohc", rtcUTC?"--utc":"--localtime"});
     }
 }
 
@@ -344,7 +351,7 @@ void MXDateTime::on_pushSyncNow_clicked()
     bool rexit = false;
 
     // Run ntpdate one server at a time and break at first succesful update
-    const QString cmd = QFile::exists(QStringLiteral("/usr/bin/ntpdig")) ? "ntpdig -Ss --steplimit=500 " : "ntpdate -u ";
+    const bool ntpdig = QFile::exists(QStringLiteral("/usr/bin/ntpdig"));
     for (int ixi = 0; ixi < serverCount; ++ixi) {
         QTableWidgetItem *item = tableServers->item(ixi, 1);
         const QString &address = item->text().trimmed();
@@ -352,7 +359,8 @@ void MXDateTime::on_pushSyncNow_clicked()
             checked = true;
             QString btext = pushSyncNow->text();
             pushSyncNow->setText(tr("Updating..."));
-            rexit = execute(cmd + address);
+            if (!ntpdig) rexit = execute("ntpdate", {"-u", address});
+            else rexit = execute("ntpdig", {"-Ss", "--steplimit=500", address});
             pushSyncNow->setText(btext);
         }
         if (rexit) break;
@@ -501,7 +509,7 @@ void MXDateTime::loadNetworkTime()
             const QRegularExpression tregex(QStringLiteral("^#?(pool|server|peer)\\s"));
             if (!line.contains(tregex)) conf.append(bline);
             else {
-                QStringList args = line.split(QRegularExpression(QStringLiteral("\\s")), QString::SkipEmptyParts);
+                QStringList args = line.split(QRegularExpression(QStringLiteral("\\s")), Qt::SkipEmptyParts);
                 QString curarg = args.at(0);
                 bool enabled = true;
                 if (curarg.startsWith('#')) {
@@ -515,14 +523,17 @@ void MXDateTime::loadNetworkTime()
                 }
                 addServerRow(enabled, curarg, args.at(1), options.trimmed());
                 confServers.append('\n');
-                confServers.append(line);
+                confServers.append(line.toUtf8());
             }
         }
         confBaseNTP = conf.trimmed();
         file.close();
     }
-    if (sysInit == SystemD) enabledNTP = execute(QStringLiteral("bash -c \"LANG=C systemctl status ntp* |grep Loaded | grep service |cut -d';' -f2 |grep -q enabled\""));
-    else enabledNTP = execute(QStringLiteral("bash -c \"ls /etc/rc*.d | grep ntp | grep '^S'"));
+    if (sysInit != SystemD) enabledNTP = shell("ls /etc/rc*.d | grep ntp | grep '^S'");
+    else {
+        enabledNTP = shell("LANG=C systemctl status ntp* | grep Loaded"
+            "| grep service |cut -d';' -f2 |grep -q enabled");
+    }
     checkAutoSync->setChecked(enabledNTP);
 }
 void MXDateTime::saveNetworkTime()
@@ -530,17 +541,17 @@ void MXDateTime::saveNetworkTime()
     const bool ntp = checkAutoSync->isChecked();
     if (ntp != enabledNTP) {
         if (sysInit == SystemD) {
-            execute("timedatectl set-ntp " + QString(ntp?"1":"0"));
+            execute("timedatectl", {"set-ntp", ntp?"1":"0"});
         } else if (sysInit == OpenRC) {
             if (QFile::exists(QStringLiteral("/etc/init.d/ntpd"))) {
-                execute("rc-update " + QString(ntp?"add":"del") + " ntpd");
+                shell("rc-update " + QString(ntp?"add":"del") + " ntpd");
             }
         } else if (ntp){
-            execute(QStringLiteral("update-rc.d ntp enable"));
-            execute(QStringLiteral("service ntp start"));
+            shell(QStringLiteral("update-rc.d ntp enable"));
+            shell(QStringLiteral("service ntp start"));
         } else {
-            execute(QStringLiteral("service ntp stop"));
-            execute(QStringLiteral("update-rc.d ntp disable"));
+            shell(QStringLiteral("service ntp stop"));
+            shell(QStringLiteral("update-rc.d ntp disable"));
         }
     }
     QByteArray confServersNew;
@@ -549,13 +560,13 @@ void MXDateTime::saveNetworkTime()
         QTableWidgetItem *item = tableServers->item(ixi, 1);
         confServersNew.append('\n');
         if (item->checkState() != Qt::Checked) confServersNew.append('#');
-        confServersNew.append(comboType->currentData().toString());
+        confServersNew.append(comboType->currentData().toByteArray());
         confServersNew.append(' ');
-        confServersNew.append(item->text().trimmed());
+        confServersNew.append(item->text().trimmed().toUtf8());
         const QString &options = tableServers->item(ixi, 2)->text().trimmed();
         if (!options.isEmpty()) {
             confServersNew.append(' ');
-            confServersNew.append(options);
+            confServersNew.append(options.toUtf8());
         }
     }
     if (confServersNew != confServers) {

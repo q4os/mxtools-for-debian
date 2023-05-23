@@ -23,7 +23,7 @@
     <message>
         <location filename="../mainwindow.ui" line="85"/>
         <source>Run</source>
-        <translation>Démarrer</translation>
+        <translation>Exécuter</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="141"/>
@@ -210,7 +210,7 @@
     <message>
         <location filename="../mainwindow.ui" line="2051"/>
         <source>About...</source>
-        <translation>À propos...</translation>
+        <translation>À propos ...</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="2058"/>
@@ -240,7 +240,7 @@
     <message>
         <location filename="../mainwindow.ui" line="2135"/>
         <source>Close</source>
-        <translation>Fermer</translation>
+        <translation>Quitter</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="2142"/>
@@ -286,7 +286,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="544"/>
         <source>&amp;Close</source>
-        <translation>&amp;Fermer</translation>
+        <translation>&amp;Quitter</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="562"/>

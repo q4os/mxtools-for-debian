@@ -532,12 +532,12 @@ Você quer continuar e instalar os pacotes do Plymouth?</translation>
         <translation>&amp;Fechar</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="77"/>
+        <location filename="../main.cpp" line="81"/>
         <source>Error</source>
         <translation>Ocorreu um erro</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="78"/>
+        <location filename="../main.cpp" line="82"/>
         <source>You seem to be logged in as root, please log out and log in as normal user to use this program.</source>
         <translation>Parece que você está conectado como usuário root. Por favor, saia da sessão e entre novamente como usuário normal para utilizar este programa.</translation>
     </message>

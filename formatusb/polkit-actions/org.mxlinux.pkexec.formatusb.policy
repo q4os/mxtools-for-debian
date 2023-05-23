@@ -4,7 +4,7 @@
  "http://www.freedesktop.org/standards/PolicyKit/1/policyconfig.dtd">
 <policyconfig>
   <action id="org.mxlinux.pkexec.formatusb">
-    <message>formatusb:  Authentication is required to proceed</message>
+    <message gettext-domain="mx-launcher-l10n">Format USB</message>
     <icon_name>media-removable</icon_name>
     <defaults>
       <allow_any>no</allow_any>

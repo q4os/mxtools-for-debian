@@ -5,19 +5,18 @@
     <name>MainWindow</name>
     <message>
         <location filename="../mainwindow.ui" line="14"/>
-        <location filename="../mainwindow.cpp" line="46"/>
-        <location filename="../mainwindow.cpp" line="76"/>
-        <location filename="../mainwindow.cpp" line="133"/>
-        <location filename="../mainwindow.cpp" line="146"/>
-        <location filename="../mainwindow.cpp" line="180"/>
-        <location filename="../mainwindow.cpp" line="188"/>
+        <location filename="../mainwindow.cpp" line="47"/>
+        <location filename="../mainwindow.cpp" line="75"/>
+        <location filename="../mainwindow.cpp" line="129"/>
+        <location filename="../mainwindow.cpp" line="148"/>
+        <location filename="../mainwindow.cpp" line="156"/>
         <source>MX Select Sound</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">MX hangválasztó</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="28"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Your current default sound card is:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;A jelenlegi hangkártyája:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="64"/>
@@ -42,7 +41,7 @@
     <message>
         <location filename="../mainwindow.ui" line="106"/>
         <source>About...</source>
-        <translation type="unfinished">Névjegy</translation>
+        <translation type="unfinished">Névjegy...</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="113"/>
@@ -52,12 +51,12 @@
     <message>
         <location filename="../mainwindow.ui" line="145"/>
         <source>Quit application</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Kilépés az alkalmazásból</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="148"/>
         <source>Close</source>
-        <translation type="unfinished">Bezár</translation>
+        <translation type="unfinished">Bezárás</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="155"/>
@@ -67,83 +66,104 @@
     <message>
         <location filename="../mainwindow.ui" line="196"/>
         <source>Apply</source>
-        <translation type="unfinished">Alkamaz</translation>
+        <translation type="unfinished">Alkalmazás</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="218"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Select another sound card if necessary:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Szükség esetén válasszon másik hangkártyát:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="244"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If your computer has more than one sound card, you can use this application to select the one to be default. &lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Ha a számítógépében több hangkártya található, ezzel a programmal kiválaszthatja melyik legyen az alapértelmezett.&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="290"/>
         <source>Test current sound card</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Jelenlegi hangkártya kipróbálása</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="77"/>
+        <location filename="../mainwindow.cpp" line="75"/>
         <source>No sound cards/devices were found.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Nincsenek hangkártyák.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="89"/>
-        <location filename="../mainwindow.cpp" line="100"/>
+        <location filename="../mainwindow.cpp" line="87"/>
+        <location filename="../mainwindow.cpp" line="98"/>
         <source>none</source>
         <translation type="unfinished">nincs</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="132"/>
+        <location filename="../mainwindow.cpp" line="128"/>
         <source>About MX Select Sound</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Az MX hangválasztóról</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="133"/>
+        <location filename="../mainwindow.cpp" line="129"/>
         <source>Version: </source>
         <translation type="unfinished">Verzió:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="134"/>
+        <location filename="../mainwindow.cpp" line="130"/>
         <source>Program for selecting the default sound card in MX Linux</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Program az alapértelmezett hangkártya kiválasztására MX Linuxban</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="136"/>
+        <location filename="../mainwindow.cpp" line="133"/>
         <source>Copyright (c) MX Linux</source>
         <translation type="unfinished">Copyright (c) MX Linux</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="137"/>
-        <location filename="../mainwindow.cpp" line="146"/>
+        <location filename="../mainwindow.cpp" line="134"/>
+        <source>%1 License</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="148"/>
+        <source>%1 Help</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="156"/>
+        <source>Could not play test sound.</source>
+        <translation type="unfinished">A hang kipróbálása nem sikerült.</translation>
+    </message>
+</context>
+<context>
+    <name>QObject</name>
+    <message>
+        <location filename="../about.cpp" line="43"/>
         <source>License</source>
-        <translation type="unfinished">Liszensz</translation>
+        <translation type="unfinished">Licenc</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="138"/>
+        <location filename="../about.cpp" line="44"/>
+        <location filename="../about.cpp" line="54"/>
         <source>Changelog</source>
-        <translation type="unfinished">Változásbejegyzés</translation>
+        <translation type="unfinished">Változások listája</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="139"/>
+        <location filename="../about.cpp" line="45"/>
         <source>Cancel</source>
         <translation type="unfinished">Mégsem</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="156"/>
+        <location filename="../about.cpp" line="67"/>
         <source>&amp;Close</source>
-        <translation type="unfinished">&amp;Bezár</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="189"/>
-        <source>Could not play test sound.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&amp;Bezárás</translation>
     </message>
 </context>
 <context>
     <name>mxselectsound</name>
+    <message>
+        <source>MX Select Sound</source>
+        <translation type="vanished">MX hangválasztó</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Your current default sound card is:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;A jelenlegi hangkártyája:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
     <message>
         <source>Display help </source>
         <translation type="vanished">Súgó megjelenítése</translation>
@@ -162,15 +182,19 @@
     </message>
     <message>
         <source>About...</source>
-        <translation type="vanished">Névjegy</translation>
+        <translation type="vanished">Névjegy...</translation>
     </message>
     <message>
         <source>Alt+B</source>
         <translation type="vanished">Alt+B</translation>
     </message>
     <message>
+        <source>Quit application</source>
+        <translation type="vanished">Kilépés az alkalmazásból</translation>
+    </message>
+    <message>
         <source>Close</source>
-        <translation type="vanished">Bezár</translation>
+        <translation type="vanished">Bezárás</translation>
     </message>
     <message>
         <source>Alt+N</source>
@@ -178,15 +202,39 @@
     </message>
     <message>
         <source>Apply</source>
-        <translation type="vanished">Alkamaz</translation>
+        <translation type="vanished">Alkalmazás</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Select another sound card if necessary:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Szükség esetén válasszon másik hangkártyát:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If your computer has more than one sound card, you can use this application to select the one to be default. &lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Ha a számítógépében több hangkártya található, ezzel a programmal kiválaszthatja melyik legyen az alapértelmezett.&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>Test current sound card</source>
+        <translation type="vanished">Jelenlegi hangkártya kipróbálása</translation>
+    </message>
+    <message>
+        <source>No sound cards/devices were found.</source>
+        <translation type="vanished">Nincsenek hangkártyák.</translation>
     </message>
     <message>
         <source>none</source>
         <translation type="vanished">nincs</translation>
     </message>
     <message>
+        <source>About MX Select Sound</source>
+        <translation type="vanished">Az MX hangválasztóról</translation>
+    </message>
+    <message>
         <source>Version: </source>
         <translation type="vanished">Verzió:</translation>
+    </message>
+    <message>
+        <source>Program for selecting the default sound card in MX Linux</source>
+        <translation type="vanished">Program az alapértelmezett hangkártya kiválasztására MX Linuxban</translation>
     </message>
     <message>
         <source>Copyright (c) MX Linux</source>
@@ -194,11 +242,11 @@
     </message>
     <message>
         <source>License</source>
-        <translation type="vanished">Liszensz</translation>
+        <translation type="vanished">Licenc</translation>
     </message>
     <message>
         <source>Changelog</source>
-        <translation type="vanished">Változásbejegyzés</translation>
+        <translation type="vanished">Változások listája</translation>
     </message>
     <message>
         <source>Cancel</source>
@@ -206,7 +254,11 @@
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation type="vanished">&amp;Bezár</translation>
+        <translation type="vanished">&amp;Bezárás</translation>
+    </message>
+    <message>
+        <source>Could not play test sound.</source>
+        <translation type="vanished">A hang kipróbálása nem sikerült.</translation>
     </message>
 </context>
 </TS>

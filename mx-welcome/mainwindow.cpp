@@ -362,7 +362,7 @@ void MainWindow::setup()
 
     ui->labelSupportUntil->setText(SUPPORTED);
 
-    QString DESKTOP = runCmd(QStringLiteral("LANG=C inxi -c 0 -S ")).output.trimmed().section(QStringLiteral(":"), 4, 4).section(QStringLiteral("\n"), 0, 0);
+    QString DESKTOP = runCmd(QStringLiteral("LANG=C inxi -c 0 -S | grep Desktop")).output.section(":",4,4).section("v",0,0).trimmed();
     qDebug() << "desktop is " << DESKTOP;
     if (DESKTOP.contains(QLatin1String("Fluxbox"))) {
         isfluxbox = true;

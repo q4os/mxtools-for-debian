@@ -8,4 +8,5 @@ Standards-Version: 3.9.8
 Package: quick-system-info-gui
 Architecture: any
 Depends: mx-goodies (>= 22.08.02), grep, inxi, ${misc:Depends}, ${shlibs:Depends}
+Recommends:  mx-launcher-l10n
 Description: A utility to show quick-system-info (inxi, etc...) in a gui

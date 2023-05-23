@@ -1,0 +1,123 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+# Translators:
+# scootergrisen, 2022
+# Robin, 2023
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-03-04 14:51-0500\n"
+"PO-Revision-Date: 2016-11-29 14:08+0000\n"
+"Last-Translator: Robin, 2023\n"
+"Language-Team: Danish (https://app.transifex.com/anticapitalista/teams/10162/da/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: da\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. The desktop entry name will be displayed within the menu.
+msgid "Nvidia driver installer"
+msgstr ""
+
+#. The desktop entry name will be displayed within the menu.
+msgid "Format USB"
+msgstr "Formatér USB"
+
+#. The desktop entry name will be displayed within the menu.
+msgid "Job Scheduler"
+msgstr ""
+
+#. The desktop entry name will be displayed within the menu.
+#. The desktop entry name will be displayed within the menu.
+msgid "MX Snapshot"
+msgstr "MX Øjebliksbillede"
+
+#. The desktop entry name will be displayed within the menu.
+msgid "MX Boot Options"
+msgstr "MX Opstartsvalgmuligheder"
+
+#. The desktop entry name will be displayed within the menu.
+msgid "MX Boot Repair"
+msgstr "MX Opstartsreparation"
+
+#. The desktop entry name will be displayed within the menu.
+msgid "MX Cleanup"
+msgstr "MX Oprydning"
+
+#. The desktop entry name will be displayed within the menu.
+msgid "MX Codecs Installer"
+msgstr "MX Codecs-installationsprogram"
+
+#. The desktop entry name will be displayed within the menu.
+msgid "MX Date & Time"
+msgstr "MX Dato og klokkeslæt"
+
+#. The desktop entry name will be displayed within the menu.
+msgid "System Locales"
+msgstr "Systemlokaliteter"
+
+#. The desktop entry name will be displayed within the menu.
+msgid "xfce4-notifyd-start"
+msgstr ""
+
+#. The desktop entry name will be displayed within the menu.
+msgid "MX Live USB Maker"
+msgstr "MX Live USB-skaber"
+
+#. The desktop entry name will be displayed within the menu.
+msgid "MX Network Assistant"
+msgstr "MX Netværksassistent"
+
+#. The desktop entry name will be displayed within the menu.
+msgid "MX Package Installer"
+msgstr "MX Pakkeinstallationsprogram"
+
+#. The desktop entry name will be displayed within the menu.
+msgid "MX RemasterCC"
+msgstr ""
+
+#. The desktop entry name will be displayed within the menu.
+msgid "MX Repo Manager"
+msgstr "MX Softwarekildehåndtering"
+
+#. The desktop entry name will be displayed within the menu.
+msgid "MX Tweak"
+msgstr "MX Finjustering"
+
+#. The desktop entry name will be displayed within the menu.
+msgid "Brightness Systray"
+msgstr "Lysstyrke Systray"
+
+#. The desktop entry name will be displayed within the menu.
+msgid "mx-tweak brightness systray"
+msgstr ""
+
+#. The desktop entry name will be displayed within the menu.
+msgid "compton"
+msgstr ""
+
+#. The desktop entry name will be displayed within the menu.
+msgid "restore-software-brightness"
+msgstr ""
+
+#. The desktop entry name will be displayed within the menu.
+msgid "MX User Manager"
+msgstr "MX Brugerhåndtering"
+
+#. The desktop entry name will be displayed within the menu.
+msgid "Quick System Info"
+msgstr "Hurtig systeminfo"
+
+#. The desktop entry name will be displayed within the menu.
+msgid "System Keyboard"
+msgstr "Systemtastatur"
+
+msgid "Disk Manager"
+msgstr ""

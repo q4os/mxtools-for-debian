@@ -73,7 +73,7 @@
     <message>
         <location filename="../mainwindow.ui" line="295"/>
         <source>NOTE: changes last only for the current session</source>
-        <translation>ПРИМЕЧАНИЕ: изменения действуют только в текущей сессии</translation>
+        <translation>ПРИМЕЧАНИЕ: изменения действуют только в текущем сеансе</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="365"/>

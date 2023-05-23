@@ -4,7 +4,7 @@
     <message>
         <location filename="../mainwindow.ui" line="14"/>
         <source>Program_Name</source>
-        <translation type="unfinished"/>
+        <translation>程序名称</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="39"/>
@@ -34,7 +34,7 @@
     <message>
         <location filename="../mainwindow.ui" line="72"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Select Target USB Device&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"/>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;选择目标 USB 设备&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="82"/>
@@ -49,17 +49,17 @@
     <message>
         <location filename="../mainwindow.ui" line="117"/>
         <source>ext4</source>
-        <translation type="unfinished"/>
+        <translation>ext4</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="122"/>
         <source>exfat</source>
-        <translation type="unfinished"/>
+        <translation>exfat</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="127"/>
         <source>ntfs</source>
-        <translation type="unfinished"/>
+        <translation>ntfs</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="135"/>
@@ -149,7 +149,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="180"/>
         <source>Failure</source>
-        <translation type="unfinished"/>
+        <translation>失败</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="180"/>
@@ -164,19 +164,21 @@
     <message>
         <location filename="../mainwindow.cpp" line="211"/>
         <source>Please select a USB device to write to</source>
-        <translation type="unfinished"/>
+        <translation>请选择要写入的 USB 设备</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="216"/>
         <source>These actions will destroy all data on 
 
 </source>
-        <translation type="unfinished"/>
+        <translation>这些操作将销毁所有数据
+
+</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="216"/>
         <source>Do you wish to continue?</source>
-        <translation type="unfinished"/>
+        <translation>你想继续吗？</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="252"/>

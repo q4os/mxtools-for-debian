@@ -1,0 +1,110 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+# Translators:
+# Caner Başaran <basaran.caner@gmail.com>, 2017
+# anticapitalista <anticapitalista@riseup.net>, 2017
+# e0360fc3c0afcd70e5aed1cfc885bac6, 2022
+# mahmut özcan <mahmutozcan@protonmail.com>, 2022
+# Mehmet Akif 9oglu, 2022
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-03-04 14:51-0500\n"
+"PO-Revision-Date: 2016-11-29 14:08+0000\n"
+"Last-Translator: Mehmet Akif 9oglu, 2022\n"
+"Language-Team: Turkish (https://app.transifex.com/anticapitalista/teams/10162/tr/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: tr\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+msgid "Nvidia driver installer"
+msgstr "Nvidia sürücü yükleme programı"
+
+msgid "Deb Installer"
+msgstr "Deb Yükleyici"
+
+msgid "Format USB"
+msgstr "USB Biçimlendirme"
+
+msgid "Job Scheduler"
+msgstr "İş Çizelgeleyici"
+
+msgid "MX Snapshot"
+msgstr "MX Sistem Anlık Görüntüsü"
+
+msgid "MX Boot Options"
+msgstr "MX Açılış Seçenekleri"
+
+msgid "MX Boot Repair"
+msgstr "MX Önyükleme Onarımı"
+
+msgid "MX Cleanup"
+msgstr "MX Temizleyici"
+
+msgid "MX Codecs Installer"
+msgstr " Çözücü Yükleyici"
+
+msgid "MX Date & Time"
+msgstr "MX Tarih & Saat"
+
+msgid "System Locales"
+msgstr "Sistem Yerelleri"
+
+msgid "xfce4-notifyd-start"
+msgstr "xfce4-notifyd-start"
+
+msgid "MX Live USB Maker"
+msgstr "MX Live USB Oluşturucu"
+
+msgid "MX Network Assistant"
+msgstr "MX Ağ Yardımcısı"
+
+msgid "MX Package Installer"
+msgstr "MX Paket Yükleyici"
+
+msgid "MX RemasterCC"
+msgstr "MX RemasterCC"
+
+msgid "MX Repo Manager"
+msgstr "MX Depo Yöneticisi"
+
+msgid "MX Samba Config"
+msgstr "MX Samba Yapılandırması"
+
+msgid "MX Tweak"
+msgstr "MX İnce ayar"
+
+msgid "Brightness Systray"
+msgstr "Parlaklık Systray"
+
+msgid "mx-tweak brightness systray"
+msgstr "mx-tweak parlaklık sistem tepsisi"
+
+msgid "compton"
+msgstr "compton"
+
+msgid "restore-software-brightness"
+msgstr "yazılım parlaklığını geri yükle"
+
+msgid "MX User Manager"
+msgstr "MX Kullanıcı Yöneticisi"
+
+msgid "Quick System Info"
+msgstr "Hızlı Sistem Bilgisi"
+
+msgid "System Keyboard"
+msgstr "Sistem Klavyesi"
+
+msgid "Disk Manager"
+msgstr "Disk Yöneticisi"
+
+msgid "Adblock"
+msgstr "reklam-engelleme"

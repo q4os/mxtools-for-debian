@@ -1,0 +1,51 @@
+#!/bin/bash
+
+#  fehlix test project do not use
+#: ${ORGANIZATION:=fehlix}
+#: ${PROJECT:=testproject-do-not-use}
+
+# set transifex organization and project name - if not set in environment already
+: ${ORGANIZATION:=anticapitalista}
+: ${PROJECT:=antix-development}
+
+echodo() { echo "${@}";  ${@}; }
+
+# need 'latest' transifex client
+: ${TXBIN:=$(which tx)}
+[ ! -x "$TXBIN" ] && echo "Error: transifex client not found!" && exit 1
+
+# prepare transifex 
+# get package name from changelog
+CHNGLOG=$(find {,../,../../}debian/changelog  -type f -name changelog -print -quit 2>/dev/null)
+PKGNAME=$(dpkg-parsechangelog -l "$CHNGLOG" -SSource)
+
+# set transifex resource name here if it is not the package name
+RESOURCE=$PKGNAME
+# set transifex resource_id
+RESOUCE_ID="${PROJECT}.${RESOURCE}"
+PODIR=po
+POTFILE=$PKGNAME.pot
+# set minium translations completion in percent to pull translation
+: ${MINIMUM_PERC:=30}
+
+[ -d .tx         ] || mkdir -p .tx
+[ -f  .tx/config ] && rm  .tx/config
+
+cat <<EOF | tee .tx/config
+[main]
+host = https://app.transifex.com
+
+[o:${ORGANIZATION}:p:${PROJECT}:r:${RESOURCE}]
+
+file_filter = ${PODIR}/<lang>.po
+minimum_perc = ${MINIMUM_PERC:=5}
+resource_name = ${RESOURCE}
+source_file = ${POTFILE}
+source_lang = en
+type = PO
+EOF
+
+
+echo "" 
+echo "To push pot-file source to transifex run:" 
+echo ${TXBIN} push --source  "$RESOUCE_ID"

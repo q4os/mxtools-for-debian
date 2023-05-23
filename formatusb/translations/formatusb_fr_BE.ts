@@ -84,12 +84,12 @@
     <message>
         <location filename="../mainwindow.ui" line="222"/>
         <source>Quit application</source>
-        <translation>Quitter l&apos;application</translation>
+        <translation>Quitter l’application</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="225"/>
         <source>Close</source>
-        <translation>Fermer</translation>
+        <translation>Quitter</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="232"/>
@@ -99,7 +99,7 @@
     <message>
         <location filename="../mainwindow.ui" line="270"/>
         <source>Display help </source>
-        <translation>Afficher l&apos;aide</translation>
+        <translation>Afficher l’aide </translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="273"/>
@@ -119,7 +119,7 @@
     <message>
         <location filename="../mainwindow.ui" line="315"/>
         <source>About...</source>
-        <translation>À propos...</translation>
+        <translation>À propos ...</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="322"/>
@@ -139,7 +139,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="178"/>
         <source>Success</source>
-        <translation>Réussite de l&apos;installation</translation>
+        <translation>Installation réussie</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="178"/>
@@ -232,7 +232,7 @@
     <message>
         <location filename="../about.cpp" line="53"/>
         <source>&amp;Close</source>
-        <translation>&amp;Fermer</translation>
+        <translation>&amp;Quitter</translation>
     </message>
 </context>
 </TS>

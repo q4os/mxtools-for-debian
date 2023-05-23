@@ -1,0 +1,54 @@
+# Translation completion report for resource mx-launcher-l10n 
+# with minimum completion percent 10%
+# generated at Wed, 10 May 2023 13:29:33 -0500
+   Nr.		Cnt.	 Compl.		Code		Language
+   ---		----	 ------		----		--------
+     1		  27	   100%    	ca      	ca	Catalan; Valencian
+     2		  27	   100%    	es      	es	Spanish; Castilian
+     3		  27	   100%    	es_ES   	es	Spanish; Castilian @ Spain
+     4		  27	   100%    	fr      	fr	French
+     5		  27	   100%    	fr_BE   	fr	French @ Belgium
+     6		  27	   100%    	it      	it	Italian
+     7		  27	   100%    	ja      	ja	Japanese
+     8		  27	   100%    	nb      	nb	Bokmål, Norwegian; Norwegian Bokmål
+     9		  27	   100%    	pt      	pt	Portuguese
+    10		  27	   100%    	pt_BR   	pt	Portuguese @ Brazil
+    11		  27	   100%    	ru      	ru	Russian
+    12		  27	   100%    	sl      	sl	Slovenian
+    13		  27	   100%    	sv      	sv	Swedish
+    14		  27	   100%    	tr      	tr	Turkish
+    15		  26	    96%    	cs      	cs	Czech
+    16		  26	    96%    	hu      	hu	Hungarian
+    17		  26	    96%    	pl      	pl	Polish
+    18		  25	    92%    	de      	de	German
+    19		  25	    92%    	el      	el	Greek, Modern (1453-)
+    20		  23	    85%    	he_IL   	he	Hebrew @ Israel
+    21		  23	    85%    	nl      	nl	Dutch; Flemish
+    22		  23	    85%    	sq      	sq	Albanian
+    23		  19	    70%    	nl_BE   	nl	Dutch; Flemish @ Belgium
+    24		  17	    62%    	da      	da	Danish
+    25		  17	    62%    	fi      	fi	Finnish
+    26		  16	    59%    	zh_CN   	zh	Chinese @ China
+    27		  15	    55%    	hi      	hi	Hindi
+    28		  15	    55%    	lt      	lt	Lithuanian
+    29		  15	    55%    	sk      	sk	Slovak
+    30		  14	    51%    	am      	am	Amharic
+    31		  14	    51%    	zh_TW   	zh	Chinese @ Taiwan, Province of China
+    32		  13	    48%    	gl_ES   	gl	Galician @ Spain
+    33		   9	    33%    	hr      	hr	Croatian
+    34		   8	    29%    	ro      	ro	Romanian; Moldavian; Moldovan
+    35		   6	    22%    	uk      	uk	Ukrainian
+    36		   5	    18%    	is      	is	Icelandic
+    37		   5	    18%    	kk      	kk	Kazakh
+    38		   5	    18%    	th      	th	Thai
+    39		   4	    14%    	ar      	ar	Arabic
+    40		   4	    14%    	bg      	bg	Bulgarian
+    41		   4	    14%    	id      	id	Indonesian
+    42		   4	    14%    	mr      	mr	Marathi
+    43		   3	    11%    	et      	et	Estonian
+    44		   3	    11%    	eu      	eu	Basque
+    45		   3	    11%    	fa      	fa	Persian
+    46		   3	    11%    	gu      	gu	Gujarati
+    47		   3	    11%    	ko      	ko	Korean
+    48		   3	    11%    	mk      	mk	Macedonian
+    49		   3	    11%    	sr      	sr	Serbian

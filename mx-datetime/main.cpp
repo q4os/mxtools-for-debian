@@ -38,12 +38,15 @@ int main(int argc, char *argv[])
     a.setWindowIcon(QIcon::fromTheme(QStringLiteral("mx-datetime")));
 
     QTranslator qtTran;
-    qtTran.load(QStringLiteral("qt_") + QLocale::system().name());
-    a.installTranslator(&qtTran);
+    if (qtTran.load(QStringLiteral("qt_") + QLocale::system().name())) {
+        a.installTranslator(&qtTran);
+    }
 
     QTranslator appTran;
-    appTran.load(QStringLiteral("mx-datetime_") + QLocale::system().name(), QStringLiteral("/usr/share/mx-datetime/locale"));
-    a.installTranslator(&appTran);
+    if (appTran.load(QStringLiteral("mx-datetime_") + QLocale::system().name(),
+        QStringLiteral("/usr/share/mx-datetime/locale"))) {
+        a.installTranslator(&appTran);
+    }
 
     MXDateTime w;
     w.show();

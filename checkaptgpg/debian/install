@@ -1,4 +1,5 @@
 GPG-Key4.png                usr/share/pixmaps
+GPG-Key4.svg usr/share/icons/hicolor/scalable/apps
 checkaptgpg                 usr/bin
 mx-checkaptgpg.desktop      usr/share/applications
 mx-checkaptgpg-kde.desktop  usr/share/applications

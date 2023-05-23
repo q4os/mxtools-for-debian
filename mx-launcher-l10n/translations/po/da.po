@@ -1,0 +1,101 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+# Translators:
+# scootergrisen, 2022
+# Robin, 2023
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-03-04 14:51-0500\n"
+"PO-Revision-Date: 2016-11-29 14:08+0000\n"
+"Last-Translator: Robin, 2023\n"
+"Language-Team: Danish (https://app.transifex.com/anticapitalista/teams/10162/da/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: da\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Nvidia driver installer"
+msgstr ""
+
+msgid "Format USB"
+msgstr "Formatér USB"
+
+msgid "Job Scheduler"
+msgstr ""
+
+msgid "MX Snapshot"
+msgstr "MX Øjebliksbillede"
+
+msgid "MX Boot Options"
+msgstr "MX Opstartsvalgmuligheder"
+
+msgid "MX Boot Repair"
+msgstr "MX Opstartsreparation"
+
+msgid "MX Cleanup"
+msgstr "MX Oprydning"
+
+msgid "MX Codecs Installer"
+msgstr "MX Codecs-installationsprogram"
+
+msgid "MX Date & Time"
+msgstr "MX Dato og klokkeslæt"
+
+msgid "System Locales"
+msgstr "Systemlokaliteter"
+
+msgid "xfce4-notifyd-start"
+msgstr ""
+
+msgid "MX Live USB Maker"
+msgstr "MX Live USB-skaber"
+
+msgid "MX Network Assistant"
+msgstr "MX Netværksassistent"
+
+msgid "MX Package Installer"
+msgstr "MX Pakkeinstallationsprogram"
+
+msgid "MX RemasterCC"
+msgstr ""
+
+msgid "MX Repo Manager"
+msgstr "MX Softwarekildehåndtering"
+
+msgid "MX Tweak"
+msgstr "MX Finjustering"
+
+msgid "Brightness Systray"
+msgstr "Lysstyrke Systray"
+
+msgid "mx-tweak brightness systray"
+msgstr ""
+
+msgid "compton"
+msgstr ""
+
+msgid "restore-software-brightness"
+msgstr ""
+
+msgid "MX User Manager"
+msgstr "MX Brugerhåndtering"
+
+msgid "Quick System Info"
+msgstr "Hurtig systeminfo"
+
+msgid "System Keyboard"
+msgstr "Systemtastatur"
+
+msgid "Disk Manager"
+msgstr ""
+
+msgid "Adblock"
+msgstr "Reklameblokering"

@@ -18,7 +18,7 @@
     <message>
         <location filename="../mainwindow.ui" line="73"/>
         <source>Launch</source>
-        <translation>Εκτέλεση</translation>
+        <translation>Εκκίνηση</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="85"/>
@@ -109,7 +109,7 @@
     <message>
         <location filename="../mainwindow.ui" line="546"/>
         <source>Abbreviated name, e.g. Tu</source>
-        <translation>Σύντομο όνομα, π.χ. Tu</translation>
+        <translation>Σύντομο όνομα, π.χ. Tρ</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="549"/>
@@ -180,27 +180,27 @@
     <message>
         <location filename="../mainwindow.ui" line="1480"/>
         <source>Color5</source>
-        <translation type="unfinished">Χρώμα4  {5?}</translation>
+        <translation>Χρώμα5</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1595"/>
         <source>Color6</source>
-        <translation type="unfinished">Χρώμα4  {6?}</translation>
+        <translation>Χρώμα6</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1710"/>
         <source>Color7</source>
-        <translation type="unfinished">Χρώμα4  {7?}</translation>
+        <translation>Χρώμα7</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1825"/>
         <source>Color8</source>
-        <translation type="unfinished">Χρώμα4  {8?}</translation>
+        <translation>Χρώμα8</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1940"/>
         <source>Color9</source>
-        <translation type="unfinished">Χρώμα4  {9?}</translation>
+        <translation>Χρώμα9</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="2048"/>

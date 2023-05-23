@@ -1,3 +1,16 @@
+checkaptgpg (23.05.01) mx; urgency=medium
+
+  * new icons
+  * store keys in trusted.gpg.d
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 15 May 2023 21:35:17 -0400
+
+checkaptgpg (23.04.02) mx; urgency=medium
+
+  * icon updates
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 14 Apr 2023 21:08:51 -0400
+
 checkaptgpg (23.04.01) mx; urgency=medium
 
   * use polkit for gui authentication

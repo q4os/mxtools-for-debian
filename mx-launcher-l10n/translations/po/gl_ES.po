@@ -1,0 +1,83 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+# Translators:
+# José Vieira <jvieira33@sapo.pt>, 2021
+# David Rebolo Magariños <drgaga345@gmail.com>, 2022
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-03-04 14:51-0500\n"
+"PO-Revision-Date: 2016-11-29 14:08+0000\n"
+"Last-Translator: David Rebolo Magariños <drgaga345@gmail.com>, 2022\n"
+"Language-Team: Galician (Spain) (https://app.transifex.com/anticapitalista/teams/10162/gl_ES/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: gl_ES\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Nvidia driver installer"
+msgstr ""
+
+msgid "Job Scheduler"
+msgstr "Axendador de Tarefas"
+
+msgid "MX Snapshot"
+msgstr "MX-Capturas ISO"
+
+msgid "MX Boot Options"
+msgstr "MX Opcións de arranque"
+
+msgid "MX Boot Repair"
+msgstr "MX Reparador do arranque"
+
+msgid "MX Cleanup"
+msgstr "MX Limpar"
+
+msgid "MX Codecs Installer"
+msgstr "MX Instalador de Codecs"
+
+msgid "MX Date & Time"
+msgstr "MX Data & Hora"
+
+msgid "MX Network Assistant"
+msgstr "MX Asistente de redes"
+
+msgid "MX Package Installer"
+msgstr "MX Instalador de paquetes"
+
+msgid "MX Repo Manager"
+msgstr "MX Xestor de repositorios"
+
+msgid "MX Tweak"
+msgstr "MX axustes rápidos"
+
+msgid "Brightness Systray"
+msgstr ""
+
+msgid "mx-tweak brightness systray"
+msgstr ""
+
+msgid "compton"
+msgstr ""
+
+msgid "restore-software-brightness"
+msgstr ""
+
+msgid "MX User Manager"
+msgstr "MX Xestor de usuarios"
+
+msgid "System Keyboard"
+msgstr "Teclado do sistema"
+
+msgid "Disk Manager"
+msgstr ""
+
+msgid "Adblock"
+msgstr "Bloqueador de anuncios"

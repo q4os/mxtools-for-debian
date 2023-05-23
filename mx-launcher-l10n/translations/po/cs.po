@@ -1,0 +1,108 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+# Translators:
+# anticapitalista <anticapitalista@riseup.net>, 2017
+# el Presidento, 2019
+# joyinko <joyinko@azet.sk>, 2023
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-03-04 14:51-0500\n"
+"PO-Revision-Date: 2016-11-29 14:08+0000\n"
+"Last-Translator: joyinko <joyinko@azet.sk>, 2023\n"
+"Language-Team: Czech (https://app.transifex.com/anticapitalista/teams/10162/cs/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: cs\n"
+"Plural-Forms: nplurals=4; plural=(n == 1 && n % 1 == 0) ? 0 : (n >= 2 && n <= 4 && n % 1 == 0) ? 1: (n % 1 != 0 ) ? 2 : 3;\n"
+
+msgid "Nvidia driver installer"
+msgstr "Nainstalovat ovladače Nvidia"
+
+msgid "Deb Installer"
+msgstr "Instalátor DEB balíků"
+
+msgid "Format USB"
+msgstr "Formát USB"
+
+msgid "Job Scheduler"
+msgstr "Plánovač akcí"
+
+msgid "MX Snapshot"
+msgstr "MX Snapshot"
+
+msgid "MX Boot Options"
+msgstr "MX Možnosti zavaděče"
+
+msgid "MX Boot Repair"
+msgstr "MX Oprava zavaděče"
+
+msgid "MX Cleanup"
+msgstr "MX Cleanup"
+
+msgid "MX Codecs Installer"
+msgstr "MX instalátor kodeků"
+
+msgid "MX Date & Time"
+msgstr "MX Datum a čas"
+
+msgid "System Locales"
+msgstr "Systémové lokalizace"
+
+msgid "xfce4-notifyd-start"
+msgstr "xfce4-notifyd-start"
+
+msgid "MX Live USB Maker"
+msgstr "MX Tvůrce Live-USB"
+
+msgid "MX Network Assistant"
+msgstr "MX Pomocník se sítí"
+
+msgid "MX Package Installer"
+msgstr "MX Instalátor softvéru"
+
+msgid "MX RemasterCC"
+msgstr "MX RemasterCC"
+
+msgid "MX Repo Manager"
+msgstr "MX Repo Manager"
+
+msgid "MX Samba Config"
+msgstr "MX Samba konfigurace"
+
+msgid "MX Tweak"
+msgstr "MX Vyladění"
+
+msgid "Brightness Systray"
+msgstr "Systémová lišta jasu"
+
+msgid "mx-tweak brightness systray"
+msgstr "mx-tweak systémová lišta jasu"
+
+msgid "compton"
+msgstr "compton"
+
+msgid "restore-software-brightness"
+msgstr "obnovit-softwarový-jas"
+
+msgid "MX User Manager"
+msgstr "MX Správa uživatelů"
+
+msgid "Quick System Info"
+msgstr "Quick System Info"
+
+msgid "System Keyboard"
+msgstr "Systémová klávesnice"
+
+msgid "Disk Manager"
+msgstr ""
+
+msgid "Adblock"
+msgstr "Adblock"

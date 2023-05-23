@@ -1,0 +1,107 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+# Translators:
+# 63f334ffc0709ba0fc2361b80bf3c0f0_00ffd1e <ab96c93ca0ac55ba7fa06385427e60dd_878890>, 2022
+# Yaron Shahrabani <sh.yaron@gmail.com>, 2023
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-03-04 14:51-0500\n"
+"PO-Revision-Date: 2016-11-29 14:08+0000\n"
+"Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>, 2023\n"
+"Language-Team: Hebrew (Israel) (https://app.transifex.com/anticapitalista/teams/10162/he_IL/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: he_IL\n"
+"Plural-Forms: nplurals=4; plural=(n == 1 && n % 1 == 0) ? 0 : (n == 2 && n % 1 == 0) ? 1: (n % 10 == 0 && n % 1 == 0 && n > 10) ? 2 : 3;\n"
+
+msgid "Nvidia driver installer"
+msgstr ""
+
+msgid "Deb Installer"
+msgstr "תוכנית התקנת Deb"
+
+msgid "Format USB"
+msgstr "פרמוט USB"
+
+msgid "Job Scheduler"
+msgstr "מתזמן משימות"
+
+msgid "MX Snapshot"
+msgstr "תמונות מערכת MX"
+
+msgid "MX Boot Options"
+msgstr "אפשרויות אתחול MX"
+
+msgid "MX Boot Repair"
+msgstr "תיקון האתחול של MX"
+
+msgid "MX Cleanup"
+msgstr "ניקוי MX"
+
+msgid "MX Codecs Installer"
+msgstr "אשף התקנת הקודקים של MX"
+
+msgid "MX Date & Time"
+msgstr "התאריך והשעה של MX"
+
+msgid "System Locales"
+msgstr "שפות המערכת"
+
+msgid "xfce4-notifyd-start"
+msgstr "xfce4-notifyd-start"
+
+msgid "MX Live USB Maker"
+msgstr "יוצר USB חי MX"
+
+msgid "MX Network Assistant"
+msgstr "מסייע הרשת MX"
+
+msgid "MX Package Installer"
+msgstr "אשף התקנת החבילות של MX"
+
+msgid "MX RemasterCC"
+msgstr "MX RemasterCC"
+
+msgid "MX Repo Manager"
+msgstr "מנהל מאגרים של MX"
+
+msgid "MX Samba Config"
+msgstr "הגדרות סמבה MX"
+
+msgid "MX Tweak"
+msgstr "התאמות MX"
+
+msgid "Brightness Systray"
+msgstr "בהירות Systray"
+
+msgid "mx-tweak brightness systray"
+msgstr ""
+
+msgid "compton"
+msgstr ""
+
+msgid "restore-software-brightness"
+msgstr ""
+
+msgid "MX User Manager"
+msgstr "מנהל המשתמשים של MX"
+
+msgid "Quick System Info"
+msgstr "פרטים מהירים על המערכת"
+
+msgid "System Keyboard"
+msgstr "מקלדת המערכת"
+
+msgid "Disk Manager"
+msgstr "מנהל כוננים"
+
+msgid "Adblock"
+msgstr "חסימת פרסומות"

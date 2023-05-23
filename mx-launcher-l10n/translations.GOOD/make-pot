@@ -1,0 +1,52 @@
+#!/bin/bash
+
+# create pot-file  based on an existing po file
+
+
+PKG=mx-launcher-l10n
+BUG='https://forum.mxlinux.org/viewforum.php?f=96'
+POT=$PKG.pot
+HDR=$POT.head
+BDY=$POT.body
+
+# get po with most translations
+PO=$(
+	for PO in po/*.po; do 
+		printf '%d %s\n' $(grep -c '^msgid' $PO) $PO; 
+	done | sort -rn | head -1 | cut -d ' ' -f2
+	)
+
+[ ! -f "$PO" ] && echo "Need po-file to generate pot-file, exit" && exit 1
+
+# pot header
+echo | 
+     xgettext --force-po -L Shell --msgid-bugs-address=$BUG \
+     --package-name=$PKG -o -  - | 
+     sed 's/charset=CHARSET/charset=UTF-8/' > $HDR
+
+# pot body
+msgfilter --force-po --keep-header  --input=$PO --output=$BDY true
+
+[ -f $POT ] && mv $POT $POT~
+
+# pot file
+msgcat --force-po --use-first --output=$POT $HDR $BDY
+
+if [ -f $POT~ ]; then
+	msgcat --force-po -s $POT~ > $POT.sort~
+	msgcat --force-po -s $POT  > $POT.sort
+    POT_CHANGE=$(diff -I 'POT-Creation-Date:' $POT.sort~ $POT.sort | wc -l)
+    if ((POT_CHANGE==0)); then
+       echo "No change in POT-file: $POT"
+       mv $POT~ $POT
+    else
+       echo "New POT-file generated:  $POT"
+    fi
+    rm $POT.sort $POT.sort~
+else
+   echo "New POT-file generated:  $POT"
+fi
+
+rm $HDR $BDY
+
+exit

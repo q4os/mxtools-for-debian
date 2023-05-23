@@ -1,0 +1,140 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+# Translators:
+# anticapitalista <anticapitalista@riseup.net>, 2017
+# delix02, 2017
+# fehlix, 2018
+# count.negative <count.negative@gmx.de>, 2019
+# Robin, 2021
+# WPSchulz <fly@wp-schulz.de>, 2022
+# Taiwanoca <taiwanoca@gmail.com>, 2022
+# Eugen Brodski <eugen.brodski@web.de>, 2022
+# Vinzenz Vietzke <vinz@vinzv.de>, 2022
+# wahnsinn, 2022
+# Der Dings, 2023
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-03-04 14:51-0500\n"
+"PO-Revision-Date: 2016-11-29 14:08+0000\n"
+"Last-Translator: Der Dings, 2023\n"
+"Language-Team: German (https://app.transifex.com/anticapitalista/teams/10162/de/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: de\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. The desktop entry name will be displayed within the menu.
+msgid "Nvidia driver installer"
+msgstr "Nvidia-Treiber Installer"
+
+#. The desktop entry name will be displayed within the menu.
+msgid "Deb Installer"
+msgstr "Installationsprogramm für .deb-Dateien"
+
+#. The desktop entry name will be displayed within the menu.
+msgid "Format USB"
+msgstr "Formatiere USB"
+
+#. The desktop entry name will be displayed within the menu.
+msgid "Job Scheduler"
+msgstr "Aufgabenplaner"
+
+#. The desktop entry name will be displayed within the menu.
+#. The desktop entry name will be displayed within the menu.
+msgid "MX Snapshot"
+msgstr "MX Schnappschuss"
+
+#. The desktop entry name will be displayed within the menu.
+msgid "MX Boot Options"
+msgstr "MX Boot Optionen"
+
+#. The desktop entry name will be displayed within the menu.
+msgid "MX Boot Repair"
+msgstr "MX Bootreparatur"
+
+#. The desktop entry name will be displayed within the menu.
+msgid "MX Cleanup"
+msgstr "MX Cleanup"
+
+#. The desktop entry name will be displayed within the menu.
+msgid "MX Codecs Installer"
+msgstr "MX Codecs Installer"
+
+#. The desktop entry name will be displayed within the menu.
+msgid "MX Date & Time"
+msgstr "MX Datum & Zeit"
+
+#. The desktop entry name will be displayed within the menu.
+msgid "System Locales"
+msgstr "Systemlokalisierung"
+
+#. The desktop entry name will be displayed within the menu.
+msgid "xfce4-notifyd-start"
+msgstr ""
+
+#. The desktop entry name will be displayed within the menu.
+msgid "MX Live USB Maker"
+msgstr "MX Live USB Erzeugung"
+
+#. The desktop entry name will be displayed within the menu.
+msgid "MX Network Assistant"
+msgstr "MX Netzwerkassistent"
+
+#. The desktop entry name will be displayed within the menu.
+msgid "MX Package Installer"
+msgstr "MX Paket-Installer"
+
+#. The desktop entry name will be displayed within the menu.
+msgid "MX RemasterCC"
+msgstr "MX RemasterCC"
+
+#. The desktop entry name will be displayed within the menu.
+msgid "MX Repo Manager"
+msgstr "MX Repo Manager"
+
+#. The desktop entry name will be displayed within the menu.
+msgid "MX Samba Config"
+msgstr "MX Samba Konfiguration"
+
+#. The desktop entry name will be displayed within the menu.
+msgid "MX Tweak"
+msgstr "MX Tweak"
+
+#. The desktop entry name will be displayed within the menu.
+msgid "Brightness Systray"
+msgstr "Helligkeit Systray"
+
+#. The desktop entry name will be displayed within the menu.
+msgid "mx-tweak brightness systray"
+msgstr "mx-tweak Helligkeit systray"
+
+#. The desktop entry name will be displayed within the menu.
+msgid "compton"
+msgstr "compton"
+
+#. The desktop entry name will be displayed within the menu.
+msgid "restore-software-brightness"
+msgstr ""
+
+#. The desktop entry name will be displayed within the menu.
+msgid "MX User Manager"
+msgstr "Benutzer-Manager für MX"
+
+#. The desktop entry name will be displayed within the menu.
+msgid "Quick System Info"
+msgstr "Quick System Info"
+
+#. The desktop entry name will be displayed within the menu.
+msgid "System Keyboard"
+msgstr "Systemtastatur"
+
+msgid "Disk Manager"
+msgstr "Disk Manager"

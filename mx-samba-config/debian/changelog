@@ -1,3 +1,9 @@
+mx-samba-config (23.5) mx; urgency=medium
+
+  * Update logo
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 17 May 2023 22:43:51 -0400
+
 mx-samba-config (23.03) mx; urgency=medium
 
   * update translations

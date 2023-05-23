@@ -1,0 +1,58 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the cleanup-notifier-mx package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+# Translators:
+# fehlix, 2023
+# 
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: cleanup-notifier-mx\n"
+"Report-Msgid-Bugs-To: https://forum.mxlinux.org/viewforum.php?f=96\n"
+"POT-Creation-Date: 2023-04-05 01:28+0200\n"
+"PO-Revision-Date: 2023-04-04 23:53+0000\n"
+"Last-Translator: fehlix, 2023\n"
+"Language-Team: Indonesian (https://app.transifex.com/anticapitalista/teams/10162/id/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: id\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#. TRANSLATORS:
+#. A message is displayed to warn the user that there is not enough space on
+#. the boot partition.
+msgid "Warning"
+msgstr "Peringatan"
+
+#. TRANSLATORS:
+#. A message is displayed to warn the user that there is not enough space on
+#. the boot partition.
+#, python-format
+msgid "Not enough space on %s partition"
+msgstr ""
+
+#. TRANSLATORS:
+#. The user can click the "Dismiss" button so that the warning will not be
+#. displayed in the future.
+msgid "Dismiss"
+msgstr "Buang"
+
+#. TRANSLATORS:
+#. The user can click the "Clean Up" button to start the cleanup program.
+msgid "Clean Up"
+msgstr "Bersihkan"
+
+#. TRANSLATORS:
+#. The autostart desktop name will be shown within 'Session and Startup'
+#. (Autostart).
+msgid "Cleanup Notifier"
+msgstr ""
+
+#. TRANSLATORS:
+#. The autostart desktop entry comment will be shown within 'Session and
+#. Startup' (Autostart).
+msgid "Check available space at /boot"
+msgstr ""

@@ -220,8 +220,9 @@
         <location filename="../mainwindow.cpp" line="464"/>
         <location filename="../mainwindow.cpp" line="478"/>
         <location filename="../mainwindow.cpp" line="488"/>
-        <location filename="../mainwindow.cpp" line="520"/>
-        <location filename="../mainwindow.cpp" line="532"/>
+        <location filename="../mainwindow.cpp" line="511"/>
+        <location filename="../mainwindow.cpp" line="528"/>
+        <location filename="../mainwindow.cpp" line="540"/>
         <source>Error</source>
         <translation>错误</translation>
     </message>
@@ -234,10 +235,6 @@
         <location filename="../mainwindow.cpp" line="99"/>
         <source>Path: %1 doesn&apos;t exist.</source>
         <translation>目录: %1 不存在.</translation>
-    </message>
-    <message>
-        <source>Everyone</source>
-        <translation type="vanished">任何人</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="124"/>
@@ -403,59 +400,37 @@
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="489"/>
-        <location filename="../mainwindow.cpp" line="533"/>
+        <location filename="../mainwindow.cpp" line="541"/>
         <source>Samba service is not running. Please start Samba before adding or editing shares</source>
         <translation>Samba服务未启动.请在添加或修改分享前先启动Samba.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="520"/>
+        <location filename="../mainwindow.cpp" line="511"/>
+        <location filename="../mainwindow.cpp" line="528"/>
         <source>Error: trying to process permissions: </source>
         <translation>错误:试图处理权限:</translation>
     </message>
 </context>
 <context>
-    <name>QApplication</name>
-    <message>
-        <source>License</source>
-        <translation type="vanished">许可证</translation>
-    </message>
-    <message>
-        <source>Changelog</source>
-        <translation type="vanished">更新日志</translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation type="vanished">取消</translation>
-    </message>
-    <message>
-        <source>&amp;Close</source>
-        <translation type="vanished">关闭(&amp;C)</translation>
-    </message>
-    <message>
-        <source>You must run this program as normal user.</source>
-        <translation type="vanished">您必须以普通用户的身份来运行该程序。</translation>
-    </message>
-</context>
-<context>
     <name>QObject</name>
     <message>
-        <location filename="../about.cpp" line="39"/>
+        <location filename="../about.cpp" line="42"/>
         <source>License</source>
         <translation>许可证</translation>
     </message>
     <message>
-        <location filename="../about.cpp" line="40"/>
-        <location filename="../about.cpp" line="49"/>
+        <location filename="../about.cpp" line="43"/>
+        <location filename="../about.cpp" line="52"/>
         <source>Changelog</source>
         <translation>更新日志</translation>
     </message>
     <message>
-        <location filename="../about.cpp" line="41"/>
+        <location filename="../about.cpp" line="44"/>
         <source>Cancel</source>
         <translation>取消</translation>
     </message>
     <message>
-        <location filename="../about.cpp" line="62"/>
+        <location filename="../about.cpp" line="64"/>
         <source>&amp;Close</source>
         <translation>关闭(&amp;C)</translation>
     </message>

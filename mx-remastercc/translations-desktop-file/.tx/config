@@ -1,8 +1,0 @@
-[main]
-host = https://www.transifex.com
-
-[antix-development.mx-remastercc-desktop]
-file_filter = po/mx-remastercc-desktop_<lang>.po
-source_file = mx-remastercc-desktop.pot
-source_lang = en
-type = po

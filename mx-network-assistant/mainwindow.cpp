@@ -19,7 +19,6 @@
 */
 
 #include "mainwindow.h"
-#include "version.h"
 
 #include <QClipboard>
 #include <QDebug>
@@ -30,6 +29,7 @@
 #include <QMenu>
 #include <QScreen>
 
+#include "version.h"
 #include <about.h>
 #include <unistd.h>
 
@@ -48,7 +48,7 @@ MainWindow::MainWindow(QWidget *parent)
     tabWidget->setCurrentIndex(Tab::Status);
     tabWidget->removeTab(2); // remove WindowsDrivers tab.
 
-    pingProc  = new QProcess(this);
+    pingProc = new QProcess(this);
     traceProc = new QProcess(this);
     installProc = new QProcess(this);
 
@@ -67,12 +67,14 @@ MainWindow::MainWindow(QWidget *parent)
             return;
         }
         pushEnable->setEnabled(!hwList->currentItem()->data(Col::Enabled, Qt::UserRole).toBool());
-        pushDisable->setEnabled(hwList->currentItem()->data(Col::Enabled, Qt::UserRole).toBool()); });
+        pushDisable->setEnabled(hwList->currentItem()->data(Col::Enabled, Qt::UserRole).toBool());
+    });
 
-    tabWidget->setTabIcon(Tab::Status, QIcon::fromTheme(QStringLiteral("emblem-documents"), QIcon(":/icons/emblem-documents.svg")));
+    tabWidget->setTabIcon(Tab::Status,
+                          QIcon::fromTheme(QStringLiteral("emblem-documents"), QIcon(":/icons/emblem-documents.svg")));
 }
 
-bool MainWindow::replaceStringInFile(const QString& oldtext, const QString& newtext, const QString& filepath)
+bool MainWindow::replaceStringInFile(const QString &oldtext, const QString &newtext, const QString &filepath)
 {
     const QString expr = QStringLiteral("s/%1/%2/g'").arg(oldtext, newtext);
     return (QProcess::execute(QStringLiteral("sed"), {QStringLiteral("-i"), expr, filepath}) == 0);
@@ -84,7 +86,7 @@ void MainWindow::refresh()
     groupWifi->hide();
     hwDiagnosePushButton->setEnabled(true);
     const QString out = cmd.getCmdOut(QStringLiteral("rfkill list 2>&1"));
-    qApp->processEvents();
+    QApplication::processEvents();
 
     switch (tabWidget->currentIndex()) {
     case Tab::Status:
@@ -102,9 +104,9 @@ void MainWindow::refresh()
     case Tab::LinuxDrivers:
         on_linuxDrvDiagnosePushButton_clicked();
         break;
-//    case Tab::WindowsDrivers:
-//        on_windowsDrvDiagnosePushButton_clicked();
-//        break;
+        //    case Tab::WindowsDrivers:
+        //        on_windowsDrvDiagnosePushButton_clicked();
+        //        break;
     }
 }
 
@@ -122,22 +124,18 @@ void MainWindow::on_cancelTrace_clicked()
     cancelTrace->setEnabled(false);
 }
 
-void MainWindow::on_clearPingOutput_clicked()
-{
-    pingOutputEdit->clear();
-}
+void MainWindow::on_clearPingOutput_clicked() { pingOutputEdit->clear(); }
 
 void MainWindow::hwListToClipboard()
 {
     if (hwList->currentItem() != nullptr) {
         auto *clipboard = QApplication::clipboard();
         auto *item = hwList->currentItem();
-        clipboard->setText(tr("Interface: %1").arg(item->text(Col::Interface)) + "\t" +
-                           tr("Driver: %1").arg(item->text(Col::Driver)) + "\t" +
-                           tr("Description: %1").arg(item->text(Col::Description)) + "\t" +
-                           tr("Product: %1").arg(item->text(Col::Product)) + "\t" +
-                           tr("Vendor: %1").arg(item->text(Col::Vendor)) +"\t" +
-                           tr("Enabled: %1").arg(item->data(Col::Enabled, Qt::UserRole).toString()));
+        clipboard->setText(
+            tr("Interface: %1").arg(item->text(Col::Interface)) + "\t" + tr("Driver: %1").arg(item->text(Col::Driver))
+            + "\t" + tr("Description: %1").arg(item->text(Col::Description)) + "\t"
+            + tr("Product: %1").arg(item->text(Col::Product)) + "\t" + tr("Vendor: %1").arg(item->text(Col::Vendor))
+            + "\t" + tr("Enabled: %1").arg(item->data(Col::Enabled, Qt::UserRole).toString()));
     }
 }
 
@@ -147,12 +145,12 @@ void MainWindow::hwListFullToClipboard()
         auto *clipboard = QApplication::clipboard();
         QString list;
         for (QTreeWidgetItemIterator it(hwList); (*it) != nullptr; ++it) {
-            list += tr("Interface: %1").arg((*it)->text(Col::Interface)) + "\t" +
-                    tr("Driver: %1").arg((*it)->text(Col::Driver)) + "\t" +
-                    tr("Description: %1").arg((*it)->text(Col::Description)) + "\t" +
-                    tr("Product: %1").arg((*it)->text(Col::Product)) + "\t" +
-                    tr("Vendor: %1").arg((*it)->text(Col::Vendor)) +"\t" +
-                    tr("Enabled: %1").arg((*it)->data(Col::Enabled, Qt::UserRole).toString()) + "\n";
+            list += tr("Interface: %1").arg((*it)->text(Col::Interface)) + "\t"
+                    + tr("Driver: %1").arg((*it)->text(Col::Driver)) + "\t"
+                    + tr("Description: %1").arg((*it)->text(Col::Description)) + "\t"
+                    + tr("Product: %1").arg((*it)->text(Col::Product)) + "\t"
+                    + tr("Vendor: %1").arg((*it)->text(Col::Vendor)) + "\t"
+                    + tr("Enabled: %1").arg((*it)->data(Col::Enabled, Qt::UserRole).toString()) + "\n";
         }
         clipboard->setText(list);
     }
@@ -244,10 +242,7 @@ void MainWindow::showContextMenuForWindowsDrv(QPoint pos)
     contextMenu.exec(windowsDrvList->mapToGlobal(pos));
 }
 
-void MainWindow::on_clearTraceOutput_clicked()
-{
-    tracerouteOutputEdit->clear();
-}
+void MainWindow::on_clearTraceOutput_clicked() { tracerouteOutputEdit->clear(); }
 
 void MainWindow::writeTraceOutput()
 {
@@ -258,10 +253,7 @@ void MainWindow::writeTraceOutput()
             tracerouteOutputEdit->append(line);
 }
 
-void MainWindow::tracerouteFinished()
-{
-    cancelTrace->setEnabled(false);
-}
+void MainWindow::tracerouteFinished() { cancelTrace->setEnabled(false); }
 
 void MainWindow::on_tracerouteButton_clicked()
 {
@@ -278,7 +270,8 @@ void MainWindow::on_tracerouteButton_clicked()
                 statusl = cmd.getCmdOut(QStringLiteral("dpkg -s traceroute | grep ^Status"));
                 if (statusl != QLatin1String("Status: install ok installed")) {
                     QMessageBox::critical(this, tr("Traceroute hasn't been installed"),
-                                          tr("Traceroute cannot be installed. This may mean you are using the LiveCD or you are unable to reach the software repository,"),
+                                          tr("Traceroute cannot be installed. This may mean you are using the LiveCD "
+                                             "or you are unable to reach the software repository,"),
                                           QMessageBox::Ok);
                 } else {
                     setCursor(QCursor(Qt::ArrowCursor));
@@ -287,7 +280,8 @@ void MainWindow::on_tracerouteButton_clicked()
             }
         } else {
             QMessageBox::critical(this, tr("Traceroute not installed"),
-                                  tr("Traceroute is not installed and no Internet connection could be detected so it cannot be installed"),
+                                  tr("Traceroute is not installed and no Internet connection could be detected so it "
+                                     "cannot be installed"),
                                   QMessageBox::Ok);
             return;
         }
@@ -302,13 +296,15 @@ void MainWindow::on_tracerouteButton_clicked()
         QStringList arguments;
         arguments << tracerouteHostEdit->text() << QStringLiteral("-m %1").arg(traceHopsNumber->value());
 
-        if (traceProc->state() != QProcess::NotRunning) traceProc->kill();
+        if (traceProc->state() != QProcess::NotRunning)
+            traceProc->kill();
 
         traceProc->start(program, arguments);
         disconnect(traceProc, &QProcess::readyReadStandardOutput, nullptr, nullptr);
         connect(traceProc, &QProcess::readyReadStandardOutput, this, &MainWindow::writeTraceOutput);
         disconnect(traceProc, QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished), nullptr, nullptr);
-        connect(traceProc, QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished), this, &MainWindow::tracerouteFinished);
+        connect(traceProc, QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished), this,
+                &MainWindow::tracerouteFinished);
 
         clearTraceOutput->setEnabled(true);
         cancelTrace->setEnabled(true);
@@ -325,10 +321,7 @@ void MainWindow::writePingOutput()
             pingOutputEdit->append(line);
 }
 
-void MainWindow::pingFinished()
-{
-    cancelPing->setEnabled(false);
-}
+void MainWindow::pingFinished() { cancelPing->setEnabled(false); }
 
 void MainWindow::on_pingButton_clicked()
 {
@@ -339,24 +332,28 @@ void MainWindow::on_pingButton_clicked()
         setCursor(QCursor(Qt::WaitCursor));
         QString program = QStringLiteral("ping");
         QStringList arguments;
-        arguments << QStringLiteral("-c %1").arg(pingPacketNumber->value()) << QStringLiteral("-W 5") << pingHostEdit->text();
+        arguments << QStringLiteral("-c %1").arg(pingPacketNumber->value()) << QStringLiteral("-W 5")
+                  << pingHostEdit->text();
 
-        if (pingProc->state() != QProcess::NotRunning)  pingProc->kill();
+        if (pingProc->state() != QProcess::NotRunning)
+            pingProc->kill();
         pingProc->start(program, arguments);
         disconnect(pingProc, &QProcess::readyReadStandardOutput, nullptr, nullptr);
         connect(pingProc, &QProcess::readyReadStandardOutput, this, &MainWindow::writePingOutput);
         disconnect(pingProc, QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished), nullptr, nullptr);
-        connect(pingProc, QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished), this, &MainWindow::pingFinished);
+        connect(pingProc, QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished), this,
+                &MainWindow::pingFinished);
 
-        //QStringList vals = getCmdOuts(QString("ping -c 4 -W 5 %1").arg(pingHostEdit->text()));
-        //pingOutputEdit->append(vals.join("\n"));
+        // QStringList vals = getCmdOuts(QString("ping -c 4 -W 5 %1").arg(pingHostEdit->text()));
+        // pingOutputEdit->append(vals.join("\n"));
         clearPingOutput->setEnabled(true);
         cancelPing->setEnabled(true);
         setCursor(QCursor(Qt::ArrowCursor));
     }
 }
 
-void MainWindow::show() {
+void MainWindow::show()
+{
     QDialog::show();
     refresh();
 }
@@ -364,7 +361,8 @@ void MainWindow::show() {
 void MainWindow::on_hwDiagnosePushButton_clicked()
 {
     hwList->clear();
-    const auto &jsonDoc = QJsonDocument::fromJson(cmd.getCmdOut(QStringLiteral("lshw -disable IDE -disable SCSI -class network -json")).toUtf8());
+    const auto &jsonDoc = QJsonDocument::fromJson(
+        cmd.getCmdOut(QStringLiteral("lshw -disable IDE -disable SCSI -class network -json")).toUtf8());
     const auto &jsonArray = jsonDoc.array();
     QString desc;
     QString vendor;
@@ -392,8 +390,10 @@ void MainWindow::on_hwDiagnosePushButton_clicked()
         else
             icon = QIcon::fromTheme(QStringLiteral("network-server-database"));
         auto *tree_item = new QTreeWidgetItem();
-        tree_item->setIcon(Col::Enabled, isDisabled ? QIcon::fromTheme(QStringLiteral("emblem-unreadable"), QIcon(":/icons/emblem-unreadable.svg"))
-                                                    : QIcon::fromTheme(QStringLiteral("emblem-checked"), QIcon(":/icons/emblem-checked.svg")));
+        tree_item->setIcon(
+            Col::Enabled,
+            isDisabled ? QIcon::fromTheme(QStringLiteral("emblem-unreadable"), QIcon(":/icons/emblem-unreadable.svg"))
+                       : QIcon::fromTheme(QStringLiteral("emblem-checked"), QIcon(":/icons/emblem-checked.svg")));
         tree_item->setData(Col::Enabled, Qt::UserRole, !isDisabled);
 
         tree_item->setIcon(Col::Interface, icon);
@@ -409,13 +409,14 @@ void MainWindow::on_hwDiagnosePushButton_clicked()
     checkWifiEnabled();
 }
 
-void MainWindow::on_linuxDrvList_currentRowChanged(int currentRow )
+void MainWindow::on_linuxDrvList_currentRowChanged(int currentRow)
 {
     if (currentRow != -1 && !linuxDrvList->currentItem()->text().contains(QLatin1String("---------"))) {
         linuxDrvBlockPushButton->setEnabled(true);
         linuxDrvUnload->setEnabled(loadedModules.contains(linuxDrvList->currentItem()->text()));
         linuxDrvLoad->setEnabled(unloadedModules.contains(linuxDrvList->currentItem()->text()));
-        if (blockedModules.contains(linuxDrvList->currentItem()->text()) && !loadedModules.contains(linuxDrvList->currentItem()->text()))
+        if (blockedModules.contains(linuxDrvList->currentItem()->text())
+            && !loadedModules.contains(linuxDrvList->currentItem()->text()))
             linuxDrvLoad->setEnabled(true);
     } else {
         linuxDrvBlockPushButton->setEnabled(false);
@@ -429,11 +430,14 @@ void MainWindow::on_linuxDrvDiagnosePushButton_clicked()
 {
     linuxDrvList->clear();
     loadedModules.clear();
-    //QStringList queryResult = getCmdOuts("lsmod | grep -i net");
+    // QStringList queryResult = getCmdOuts("lsmod | grep -i net");
     const QStringList loadedKernelModules = cmd.getCmdOut(QStringLiteral("lsmod")).split(QStringLiteral("\n"));
-    QStringList completeKernelNetModules = cmd.getCmdOut(QStringLiteral("find /lib/modules/$(uname -r)/kernel/drivers/net -name *.ko")).split(QStringLiteral("\n"));
+    QStringList completeKernelNetModules
+        = cmd.getCmdOut(QStringLiteral("find /lib/modules/$(uname -r)/kernel/drivers/net -name *.ko"))
+              .split(QStringLiteral("\n"));
     completeKernelNetModules = completeKernelNetModules.replaceInStrings(QStringLiteral(".ko"), QLatin1String(""));
-    completeKernelNetModules = completeKernelNetModules.replaceInStrings(QRegExp("[\\w|\\.|-]*/"), QLatin1String(""));
+    completeKernelNetModules
+        = completeKernelNetModules.replaceInStrings(QRegularExpression("[\\w|\\.|-]*/"), QLatin1String(""));
     // Those three kernel modules are in the "misc" section we add them manually
     // To the filter list for convenience
     completeKernelNetModules << QStringLiteral("ndiswrapper");
@@ -521,12 +525,13 @@ void MainWindow::on_windowsDrvDiagnosePushButton_clicked()
         const QString &currentElement = queryResult.at(i);
         QString label = currentElement.left(currentElement.indexOf(QLatin1String(":")));
         label.append(tr("driver installed"));
-        //label = currentElement.remove(": ");
+        // label = currentElement.remove(": ");
         if ((i + 1) < queryResult.size()) {
             if (!queryResult.at(i + 1).contains(QLatin1String(": driver installed"))) {
                 const QString &installInfo = queryResult.at(i + 1);
-                int infoPos = installInfo.indexOf(QRegExp(R"([\d|A|B|C|D|E|F][\d|A|B|C|D|E|F][\d|A|B|C|D|E|F][\d|A|B|C|D|E|F]:[\d|A|B|C|D|E|F][\d|A|B|C|D|E|F][\d|A|B|C|D|E|F][\d|A|B|C|D|E|F])"));
-                //device (14E4:4320) present (alternate driver: bcm43xx)
+                int infoPos = installInfo.indexOf(QRegExp(
+                    R"([\d|A|B|C|D|E|F][\d|A|B|C|D|E|F][\d|A|B|C|D|E|F][\d|A|B|C|D|E|F]:[\d|A|B|C|D|E|F][\d|A|B|C|D|E|F][\d|A|B|C|D|E|F][\d|A|B|C|D|E|F])"));
+                // device (14E4:4320) present (alternate driver: bcm43xx)
                 if (infoPos != -1) {
                     label.append(tr(" and in use by "));
                     label.append(installInfo.midRef(infoPos, 9));
@@ -536,7 +541,7 @@ void MainWindow::on_windowsDrvDiagnosePushButton_clicked()
                     if (infoPos != -1) {
                         int strLen = installInfo.length();
                         label.append(tr(". Alternate driver: "));
-                        QString s =installInfo.right(strLen - infoPos);
+                        QString s = installInfo.right(strLen - infoPos);
                         s.remove(QStringLiteral(")"));
                         s.remove(QStringLiteral(" "));
                         s.remove(QStringLiteral(":"));
@@ -551,7 +556,7 @@ void MainWindow::on_windowsDrvDiagnosePushButton_clicked()
     }
 }
 
-bool MainWindow::blockModule(const QString& module)
+bool MainWindow::blockModule(const QString &module)
 {
     QFile outputBlockList;
     if (!broadcomModules.contains(module))
@@ -606,8 +611,7 @@ void MainWindow::on_linuxDrvBlockPushButton_clicked()
                 return;
             outputBlockList.write(outputString.toUtf8());
             outputBlockList.close();
-            QMessageBox::information(this, tr("Driver removed from blocklist"),
-                                     tr("Driver removed from blocklist."));
+            QMessageBox::information(this, tr("Driver removed from blocklist"), tr("Driver removed from blocklist."));
             loadModule(driver);
             driverBlocklisted = false;
             unloadedModules.removeAll(driver);
@@ -621,10 +625,11 @@ void MainWindow::on_linuxDrvBlockPushButton_clicked()
 }
 
 // load module
-bool MainWindow::loadModule(const QString& module)
+bool MainWindow::loadModule(const QString &module)
 {
     QProcess::execute(QStringLiteral("service"), {"network-manager", "stop"});
-    QProcess::execute(QStringLiteral("modprobe"), {"cfg80211"}); //this has to get loaded and some drivers don't put it back correctly
+    QProcess::execute(QStringLiteral("modprobe"),
+                      {"cfg80211"}); // this has to get loaded and some drivers don't put it back correctly
     if (QProcess::execute(QStringLiteral("modprobe"), {module}) != 0) {
         // run depmod and try to load again
         QProcess::execute(QStringLiteral("depmod"), {});
@@ -644,12 +649,12 @@ bool MainWindow::loadModule(const QString& module)
     return true;
 }
 
-bool MainWindow::removable(const QString& module)
+bool MainWindow::removable(const QString &module)
 {
     return (QProcess::execute(QStringLiteral("modprobe"), {"-rn", module}) == 0);
 }
 
-bool MainWindow::removeModule(const QString& module)
+bool MainWindow::removeModule(const QString &module)
 {
     QProcess::execute(QStringLiteral("service"), {"network-manager", "stop"});
     if (QProcess::execute(QStringLiteral("modprobe"), {"-r", module}) != 0) {
@@ -663,31 +668,29 @@ bool MainWindow::removeModule(const QString& module)
     return true;
 }
 
-bool MainWindow::removeStart(const QString& module)
+bool MainWindow::removeStart(const QString &module)
 {
-    QFile inputModules(QStringLiteral("/etc/modules"));
-    QFile outputModules(QStringLiteral("/etc/modules"));
-    if (!inputModules.open(QFile::ReadOnly | QFile::Text))
+    QFile modulesFile("/etc/modules");
+    if (!modulesFile.open(QIODevice::ReadWrite | QIODevice::Text))
         return false;
 
-    QString s;
+    QString inputString;
     QString outputString;
-    while (!inputModules.atEnd()){
-        s = inputModules.readLine();
+    QTextStream in(&modulesFile);
+    while (!in.atEnd()) {
+        QString line = in.readLine();
         const QString expr = QStringLiteral("^\\s*(%1)\\s*").arg(module);
-        if (!s.contains(QRegExp(expr)))
-            outputString += s;
-        outputModules.write(s.toUtf8());
+        if (!line.contains(QRegularExpression(expr)))
+            outputString += line + "\n";
     }
-    inputModules.close();
-    if (!outputModules.open(QFile::WriteOnly | QFile::Text))
-        return false;
-    outputModules.write(outputString.toUtf8());
-    outputModules.close();
+
+    QTextStream out(&modulesFile);
+    out << outputString;
+    modulesFile.close();
     return true;
 }
 
-bool MainWindow::installModule(const QString& module)
+bool MainWindow::installModule(const QString &module)
 {
     if (!loadModule(module))
         return false;
@@ -713,8 +716,8 @@ void MainWindow::on_installNdiswrapper_clicked()
     installOutputEdit->resize(width, height);
     // center output window
     QRect screenGeometry = QApplication::primaryScreen()->geometry();
-    const int x = (screenGeometry.width()-installOutputEdit->width()) / 2;
-    const int y = (screenGeometry.height()-installOutputEdit->height()) / 2;
+    const int x = (screenGeometry.width() - installOutputEdit->width()) / 2;
+    const int y = (screenGeometry.height() - installOutputEdit->height()) / 2;
     installOutputEdit->move(x, y);
     // hide main window
     this->hide();
@@ -722,7 +725,8 @@ void MainWindow::on_installNdiswrapper_clicked()
     disconnect(installProc, &QProcess::readyReadStandardOutput, nullptr, nullptr);
     connect(installProc, &QProcess::readyReadStandardOutput, this, &MainWindow::writeInstallOutput);
     disconnect(installProc, QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished), nullptr, nullptr);
-    connect(installProc, QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished), this, &MainWindow::aptUpdateFinished);
+    connect(installProc, QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished), this,
+            &MainWindow::aptUpdateFinished);
 }
 
 void MainWindow::on_uninstallNdiswrapper_clicked()
@@ -731,7 +735,8 @@ void MainWindow::on_uninstallNdiswrapper_clicked()
     if (installProc->state() != QProcess::NotRunning)
         installProc->kill();
     removeModule(QStringLiteral("ndiswrapper"));
-    installProc->start(QStringLiteral("apt-get"), {"purge", "-y", "ndiswrapper-utils-1.9", "ndiswrapper-dkms", "ndiswrapper-common"});
+    installProc->start(QStringLiteral("apt-get"),
+                       {"purge", "-y", "ndiswrapper-utils-1.9", "ndiswrapper-dkms", "ndiswrapper-common"});
     installOutputEdit->clear();
     installOutputEdit->show();
     const int height = 600;
@@ -739,8 +744,8 @@ void MainWindow::on_uninstallNdiswrapper_clicked()
     installOutputEdit->resize(height, width);
     // center output window
     QRect screenGeometry = QApplication::primaryScreen()->geometry();
-    const int x = (screenGeometry.width()-installOutputEdit->width()) / 2;
-    const int y = (screenGeometry.height()-installOutputEdit->height()) / 2;
+    const int x = (screenGeometry.width() - installOutputEdit->width()) / 2;
+    const int y = (screenGeometry.height() - installOutputEdit->height()) / 2;
     installOutputEdit->move(x, y);
     // hide main window
     this->hide();
@@ -748,7 +753,8 @@ void MainWindow::on_uninstallNdiswrapper_clicked()
     disconnect(installProc, &QProcess::readyReadStandardOutput, nullptr, nullptr);
     connect(installProc, &QProcess::readyReadStandardOutput, this, &MainWindow::writeInstallOutput);
     disconnect(installProc, QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished), nullptr, nullptr);
-    connect(installProc, QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished), this, &MainWindow::uninstallNdisFinished);
+    connect(installProc, QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished), this,
+            &MainWindow::uninstallNdisFinished);
 }
 
 void MainWindow::aptUpdateFinished()
@@ -759,7 +765,8 @@ void MainWindow::aptUpdateFinished()
     disconnect(installProc, &QProcess::readyReadStandardOutput, nullptr, nullptr);
     connect(installProc, &QProcess::readyReadStandardOutput, this, &MainWindow::writeInstallOutput);
     disconnect(installProc, QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished), nullptr, nullptr);
-    connect(installProc, QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished), this, &MainWindow::installFinished);
+    connect(installProc, QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished), this,
+            &MainWindow::installFinished);
 }
 
 void MainWindow::installFinished(int errorCode)
@@ -771,8 +778,7 @@ void MainWindow::installFinished(int errorCode)
         if (installModule(QStringLiteral("ndiswrapper"))) {
             uninstallNdiswrapper->setVisible(true);
             QMessageBox::information(this, windowTitle(), tr("Installation successful"));
-        }
-        else {
+        } else {
             QMessageBox::information(this, windowTitle(), tr("Error detected, could not compile ndiswrapper driver."));
         }
     } else {
@@ -821,7 +827,7 @@ void MainWindow::updateDriverStatus()
     while (!InputBlockList.atEnd()) {
         s = InputBlockList.readLine();
         QString expr = QStringLiteral("^\\s*(blacklist)\\s*(%1)\\s*").arg(driver);
-        if (s.contains(QRegExp(expr))) {
+        if (s.contains(QRegularExpression(expr))) {
             driverBlocklisted = true;
             break;
         }
@@ -829,7 +835,7 @@ void MainWindow::updateDriverStatus()
     while (!inputBroadcomBlocklist.atEnd()) {
         s = inputBroadcomBlocklist.readLine();
         QString expr = QStringLiteral("^\\s*(blacklist)\\s*(%1)\\s*").arg(driver);
-        if (s.contains(QRegExp(expr))) {
+        if (s.contains(QRegularExpression(expr))) {
             driverBlocklisted = true;
             break;
         }
@@ -844,19 +850,12 @@ void MainWindow::updateDriverStatus()
     InputBlockList.close();
 }
 
-bool MainWindow::checkSysFileExists(const QDir& searchPath, const QString& fileName, Qt::CaseSensitivity cs)
+bool MainWindow::checkSysFileExists(const QDir &searchPath, const QString &fileName, Qt::CaseSensitivity cs)
 {
     const QStringList fileList = searchPath.entryList(QStringList() << QStringLiteral("*.SYS"));
-    bool found = false;
-    auto it = fileList.constBegin();
-    while (it != fileList.constEnd()) {
-        if ((*it).contains(fileName, cs)) {
-            found = true;
-            break;
-        }
-        ++it;
-    }
-    return found;
+    const auto it = std::find_if(fileList.cbegin(), fileList.cend(),
+                                 [&](const QString &file) { return file.contains(fileName, cs); });
+    return it != fileList.cend();
 }
 
 bool MainWindow::checkWifiAvailable()
@@ -887,8 +886,9 @@ bool MainWindow::checkWifiEnabled()
 
 void MainWindow::on_windowsDrvAddPushButton_clicked()
 {
-    QString infFileName = QFileDialog::getOpenFileName(this,
-                                                       tr("Locate the Windows driver you want to add"), QStringLiteral("/home"), tr("Windows installation information file (*.inf)"));
+    QString infFileName
+        = QFileDialog::getOpenFileName(this, tr("Locate the Windows driver you want to add"), QStringLiteral("/home"),
+                                       tr("Windows installation information file (*.inf)"));
     if (!infFileName.isEmpty()) {
         // Search in the inf file the name of the .sys file
         QFile infFile(infFileName);
@@ -902,7 +902,7 @@ void MainWindow::on_windowsDrvAddPushButton_clicked()
         sysDir.cdUp();
         while ((!infFile.atEnd())) {
             s = infFile.readLine();
-            if (s.contains(QLatin1String("ServiceBinary"),Qt::CaseInsensitive)) {
+            if (s.contains(QLatin1String("ServiceBinary"), Qt::CaseInsensitive)) {
                 s = s.right(s.length() - s.lastIndexOf('\\'));
                 s = s.remove('\\');
                 s = s.remove('\n');
@@ -917,7 +917,10 @@ void MainWindow::on_windowsDrvAddPushButton_clicked()
 
         if (found) {
             if (!exist) {
-                QMessageBox::warning(this, QString(tr("*.sys file not found")), tr("The *.sys files must be in the same location as the *.inf file. %1 cannot be found").arg(foundSysFiles.join(QStringLiteral(", "))));
+                QMessageBox::warning(
+                    this, QString(tr("*.sys file not found")),
+                    tr("The *.sys files must be in the same location as the *.inf file. %1 cannot be found")
+                        .arg(foundSysFiles.join(QStringLiteral(", "))));
             } else {
                 QString cmd_str = QStringLiteral("ndiswrapper -i %1").arg(infFileName);
                 cmd.run(cmd_str);
@@ -926,22 +929,18 @@ void MainWindow::on_windowsDrvAddPushButton_clicked()
                 on_windowsDrvDiagnosePushButton_clicked();
             }
         } else {
-            QMessageBox::critical(this, QString(tr("sys file reference not found")).arg(infFile.fileName()),
-                                  tr("The sys file for the given driver cannot be determined after parsing the inf file"));
+            QMessageBox::critical(
+                this, QString(tr("sys file reference not found")).arg(infFile.fileName()),
+                tr("The sys file for the given driver cannot be determined after parsing the inf file"));
         }
     }
 }
 
-void MainWindow::on_windowsDrvList_currentRowChanged(int row)
-{
-    windowsDrvRemovePushButton->setEnabled(row != -1);
-}
-
+void MainWindow::on_windowsDrvList_currentRowChanged(int row) { windowsDrvRemovePushButton->setEnabled(row != -1); }
 
 void MainWindow::on_windowsDrvRemovePushButton_clicked()
 {
-    if (windowsDrvList->currentRow() != -1)
-    {
+    if (windowsDrvList->currentRow() != -1) {
         QListWidgetItem *currentDriver = windowsDrvList->currentItem();
         QString driver = currentDriver->text();
         QString cmd_str = QStringLiteral("ndiswrapper -r %1").arg(driver.left(driver.indexOf(QLatin1String(" "))));
@@ -957,43 +956,36 @@ void MainWindow::on_generalHelpPushButton_clicked()
     displayDoc(url, tr("%1 Help").arg(this->windowTitle()));
 }
 
-void MainWindow::on_tabWidget_currentChanged()
-{
-    refresh();
-}
+void MainWindow::on_tabWidget_currentChanged() { refresh(); }
 
 void MainWindow::on_hwUnblock_clicked()
 {
     if (QProcess::execute(QStringLiteral("rfkill"), {"unblock", "wlan", "wifi"}) != 0)
-        QMessageBox::warning(this, windowTitle(), tr("Could not unlock devices.\nWiFi device(s) might already be unlocked."));
+        QMessageBox::warning(this, windowTitle(),
+                             tr("Could not unlock devices.\nWiFi device(s) might already be unlocked."));
     else
         QMessageBox::information(this, windowTitle(), tr("WiFi devices unlocked."));
     checkWifiEnabled();
 }
 
 // close but do not apply
-void MainWindow::on_buttonCancel_clicked()
-{
-    close();
-}
+void MainWindow::on_buttonCancel_clicked() { close(); }
 
 void MainWindow::on_buttonAbout_clicked()
 {
     this->hide();
-    displayAboutMsgBox(tr("About %1").arg(this->windowTitle()), "<p align=\"center\"><b><h2>" + this->windowTitle() +
-                       "</h2></b></p><p align=\"center\">" + tr("Version: ") + VERSION + "</p><p align=\"center\"><h3>" +
-                       tr("Program for troubleshooting and configuring network for MX Linux") +
-                       R"(</h3></p><p align="center"><a href="http://mxlinux.org">http://mxlinux.org</a><br /></p><p align="center">)" +
-                       tr("Copyright (c) MEPIS LLC and MX Linux") + "<br /><br /></p>",
-                       QStringLiteral("/usr/share/doc/mx-network-assistant/license.html"), tr("%1 License").arg(this->windowTitle()));
+    displayAboutMsgBox(
+        tr("About %1").arg(this->windowTitle()),
+        "<p align=\"center\"><b><h2>" + this->windowTitle() + "</h2></b></p><p align=\"center\">" + tr("Version: ")
+            + VERSION + "</p><p align=\"center\"><h3>"
+            + tr("Program for troubleshooting and configuring network for MX Linux")
+            + R"(</h3></p><p align="center"><a href="http://mxlinux.org">http://mxlinux.org</a><br /></p><p align="center">)"
+            + tr("Copyright (c) MEPIS LLC and MX Linux") + "<br /><br /></p>",
+        QStringLiteral("/usr/share/doc/mx-network-assistant/license.html"), tr("%1 License").arg(this->windowTitle()));
     this->show();
 }
 
-
-QString MainWindow::getIP()
-{
-    return cmd.getCmdOut(QStringLiteral("wget -qO - icanhazip.com"));
-}
+QString MainWindow::getIP() { return cmd.getCmdOut(QStringLiteral("wget -qO - icanhazip.com")); }
 
 QString MainWindow::getIPfromRouter()
 {

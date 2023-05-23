@@ -251,7 +251,7 @@
     </message>
     <message>
         <source>You must run this program as root.</source>
-        <translation type="vanished">Ta program morate zagnati kot root</translation>
+        <translation type="vanished">Ta program morate zagnati kot korenski (root) uporabnik</translation>
     </message>
 </context>
 <context>

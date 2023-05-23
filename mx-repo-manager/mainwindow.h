@@ -28,7 +28,6 @@
 #include <QDir>
 #include <QListWidgetItem>
 #include <QMessageBox>
-#include <QNetworkAccessManager>
 #include <QProgressDialog>
 #include <QSettings>
 #include <QTimer>
@@ -50,15 +49,16 @@ public:
     ~MainWindow();
 
     enum Version { Jessie = 8, Stretch, Buster, Bullseye, Bookworm };
-    QFileInfoList listAptFiles();
-    static QIcon getFlag(QString country);
     QList<QStringList> queued_changes;
-    static QString getDebianVerName(int ver);
     QString listMXurls;
     QString version;
-    QStringList loadAptFile(const QString &file);
+
     QStringList readMXRepos();
-    int getDebianVerNum();
+    static QFileInfoList listAptFiles();
+    static QIcon getFlag(QString country);
+    static QString getDebianVerName(int ver);
+    static QStringList loadAptFile(const QString &file);
+    static int getDebianVerNum();
     void centerWindow();
     void displayAllRepos(const QFileInfoList &apt_files);
     void displayMXRepos(const QStringList &repos, const QString &filter);
@@ -66,7 +66,7 @@ public:
     void extractUrls(const QStringList &repos);
     void getCurrentRepo();
     void refresh();
-    void replaceDebianRepos(const QString &url);
+    void replaceDebianRepos(QString url);
     void replaceRepos(const QString &url);
     void setConnections();
     void setProgressBar();
@@ -87,7 +87,6 @@ private slots:
     void pushHelp_clicked();
     void pushOk_clicked();
     void tabWidget_currentChanged();
-    void treeWidgetDeb_itemChanged(QTreeWidgetItem *item, int column);
     void treeWidget_itemChanged(QTreeWidgetItem *item, int column);
 
 private:
@@ -101,10 +100,9 @@ private:
     QString current_repo;
     QStringList repos;
     QTimer timer;
+    bool sources_changed {};
 
-    QNetworkAccessManager manager;
-    QNetworkReply *reply {};
-    bool checkRepo(const QString &repo);
+    static bool checkRepo(const QString &repo);
     bool downloadFile(const QString &url, QFile &file);
 };
 

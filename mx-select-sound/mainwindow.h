@@ -22,7 +22,6 @@
  * along with mx-select-sound.  If not, see <http://www.gnu.org/licenses/>.
  **********************************************************************/
 
-
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
@@ -31,22 +30,20 @@
 
 namespace Ui
 {
-    class MainWindow;
+class MainWindow;
 }
 
-struct Result
-{
+struct Result {
     int exitCode;
     QString output;
 };
-
 
 class MainWindow : public QDialog
 {
     Q_OBJECT
 
 protected:
-    QProcess *proc{};
+    QProcess *proc {};
 
 public:
     explicit MainWindow(QWidget *parent = nullptr);
@@ -69,6 +66,4 @@ private:
     Ui::MainWindow *ui;
 };
 
-
 #endif // MXSNAPSHOT_H
-

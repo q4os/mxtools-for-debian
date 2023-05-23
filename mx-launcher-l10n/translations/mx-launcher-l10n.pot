@@ -1,0 +1,102 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the mx-launcher-l10n package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: mx-launcher-l10n\n"
+"Report-Msgid-Bugs-To: https://forum.mxlinux.org/viewforum.php?f=96\n"
+"POT-Creation-Date: 2023-05-11 00:43+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Nvidia driver installer"
+msgstr ""
+
+msgid "Deb Installer"
+msgstr ""
+
+msgid "Format USB"
+msgstr ""
+
+msgid "Job Scheduler"
+msgstr ""
+
+msgid "MX Snapshot"
+msgstr ""
+
+msgid "MX Boot Options"
+msgstr ""
+
+msgid "MX Boot Repair"
+msgstr ""
+
+msgid "MX Cleanup"
+msgstr ""
+
+msgid "MX Codecs Installer"
+msgstr ""
+
+msgid "MX Date & Time"
+msgstr ""
+
+msgid "System Locales"
+msgstr ""
+
+msgid "xfce4-notifyd-start"
+msgstr ""
+
+msgid "MX Live USB Maker"
+msgstr ""
+
+msgid "MX Network Assistant"
+msgstr ""
+
+msgid "MX Package Installer"
+msgstr ""
+
+msgid "MX RemasterCC"
+msgstr ""
+
+msgid "MX Repo Manager"
+msgstr ""
+
+msgid "MX Samba Config"
+msgstr ""
+
+msgid "MX Tweak"
+msgstr ""
+
+msgid "Brightness Systray"
+msgstr ""
+
+msgid "mx-tweak brightness systray"
+msgstr ""
+
+msgid "compton"
+msgstr ""
+
+msgid "restore-software-brightness"
+msgstr ""
+
+msgid "MX User Manager"
+msgstr ""
+
+msgid "Quick System Info"
+msgstr ""
+
+msgid "System Keyboard"
+msgstr ""
+
+msgid "Disk Manager"
+msgstr ""
+
+msgid "Adblock"
+msgstr ""

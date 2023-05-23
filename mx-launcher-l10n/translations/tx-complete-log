@@ -1,0 +1,67 @@
+#!/bin/bash
+
+# set minium translations completion in percent to pull translation
+: ${MINIMUM_PERC:=10}
+
+# get package name from changelog
+CHNGLOG=$(find {,../,../../}debian/changelog  -type f -name changelog -print -quit 2>/dev/null)
+PKGNAME=$(dpkg-parsechangelog -l "$CHNGLOG" -SSource)
+RESOURCE=mx-launcher-l10n
+
+PODIR=po
+POTFILE=${PKGNAME}.pot
+
+T=$(grep -cw ^msgid $POTFILE) ;
+((T<=1)) && echo "No Translations found in potfile '$POTFILE' - exit" && exit
+((T--))
+
+echodo() { echo "${@}";  ${@}; }
+
+# make LINGUAS
+LINGUAS=${PODIR}/LINGUAS
+[ -f $LINGUAS ] && echodo rm $LINGUAS
+touch $LINGUAS
+
+cat<<LINGUAS | tee $LINGUAS
+# LINGUAS with minimum completion percent ${MINIMUM_PERC}% 
+# generated at $(TZ=EST date -R)
+#
+LINGUAS
+
+for po in ${PODIR}/*.po; do
+    [ -e "$po" ] || continue
+    lang=${po##*/}
+    lang=${lang%.po}
+    printf '%s ' "${lang}"
+    echo "${lang}" >> $LINGUAS
+done
+echo
+
+LOG=$PODIR/TX-COMPLETE.LOG
+[ -f $LOG ] && mv  $LOG  $LOG~
+
+echo
+echo "# Translation completion report for resource $RESOURCE " | tee    $LOG
+echo "# with minimum completion percent ${MINIMUM_PERC}%"  | tee  -a  $LOG
+echo "# generated at $(TZ=EST date -R)"                    | tee -a $LOG
+
+printf '%6s\t\t%4s\t%7s\t\t%s\t\t%s\n' "Nr." "Cnt." "Compl." "Code" "Language" | tee -a $LOG
+printf '%6s\t\t%4s\t%7s\t\t%s\t\t%s\n' "---" "----" "------" "----" "--------" | tee -a $LOG
+
+for P in $PODIR/*.po ; do
+    [ -e "$P" ] || continue
+    L=${P##*/};
+    L=${L%.po};
+    ll=${L%%_*}
+    rr=${L##*_}
+    [[ -n ${L##*_*} ]] && rr=
+    L="$(printf '%-8s' ${L})";
+
+    Z=$(msggrep --no-wrap -T -e '..' $P  | grep -cw ^msgid);
+    ((Z>0)) && ((Z--))
+    printf '\t%4d\t%6d%%    \t%s\t%s%s\n' $Z $((Z*100/T)) "$L" \
+        "$( isoquery --iso=639-${#ll} -n $ll | sed 's/L\t\t//' | cut -f3- )"  \
+        "${rr:+ @ $(isoquery -i 3166-1 $rr   | cut -f4 )}";
+done | sort -t $'\t' -k2nr,2 -k4,4 | cat -n | tee -a $LOG
+
+[ -f $LOG~ ] && rm $LOG~

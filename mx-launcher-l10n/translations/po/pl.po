@@ -1,0 +1,109 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+# Translators:
+# anticapitalista <anticapitalista@riseup.net>, 2017
+# Przemek P <ppjg@dami.pl>, 2019
+# MX Linux Polska <mxlinuxpl@gmail.com>, 2022
+# Robin, 2023
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-03-04 14:51-0500\n"
+"PO-Revision-Date: 2016-11-29 14:08+0000\n"
+"Last-Translator: Robin, 2023\n"
+"Language-Team: Polish (https://app.transifex.com/anticapitalista/teams/10162/pl/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: pl\n"
+"Plural-Forms: nplurals=4; plural=(n==1 ? 0 : (n%10>=2 && n%10<=4) && (n%100<12 || n%100>14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && n%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
+
+msgid "Nvidia driver installer"
+msgstr ""
+
+msgid "Deb Installer"
+msgstr "Instalator DEB"
+
+msgid "Format USB"
+msgstr "Sformatuj USB"
+
+msgid "Job Scheduler"
+msgstr "Harmonogram zadań"
+
+msgid "MX Snapshot"
+msgstr "MX Zrzut systemu"
+
+msgid "MX Boot Options"
+msgstr "MX Opcje uruchamiania"
+
+msgid "MX Boot Repair"
+msgstr "MX Naprawa rozruchu"
+
+msgid "MX Cleanup"
+msgstr "MX Porządki"
+
+msgid "MX Codecs Installer"
+msgstr "MX Instalator kodeków"
+
+msgid "MX Date & Time"
+msgstr "MX Data i godzina"
+
+msgid "System Locales"
+msgstr "Ustawienia lokalne systemu"
+
+msgid "xfce4-notifyd-start"
+msgstr "xfce4-notifyd-start"
+
+msgid "MX Live USB Maker"
+msgstr "MX Live USB Maker"
+
+msgid "MX Network Assistant"
+msgstr "MX Asystent sieci"
+
+msgid "MX Package Installer"
+msgstr "MX Instalator pakietów"
+
+msgid "MX RemasterCC"
+msgstr "MX Remaster"
+
+msgid "MX Repo Manager"
+msgstr "MX Menedżer repozytoriów"
+
+msgid "MX Samba Config"
+msgstr "Konfiguracja MX Samba"
+
+msgid "MX Tweak"
+msgstr "MX Ulepszenia"
+
+msgid "Brightness Systray"
+msgstr "Jasność Systray"
+
+msgid "mx-tweak brightness systray"
+msgstr "mx-tweak brightness systray"
+
+msgid "compton"
+msgstr "compton"
+
+msgid "restore-software-brightness"
+msgstr "restore-software-brightness"
+
+msgid "MX User Manager"
+msgstr "MX Zarządzanie użytkownikiem"
+
+msgid "Quick System Info"
+msgstr "Szybka Informacja o systemie"
+
+msgid "System Keyboard"
+msgstr "Klawiatura systemowa"
+
+msgid "Disk Manager"
+msgstr "Disk Manager"
+
+msgid "Adblock"
+msgstr "blokada-reklam"

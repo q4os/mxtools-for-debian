@@ -412,7 +412,7 @@
     <message>
         <location filename="../mainwindow.ui" line="1366"/>
         <source>*Please doublecheck your selections before applying, removing a wrong group can break your system.</source>
-        <translation type="unfinished"></translation>
+        <translation>*Пожалуйста, перепроверьте свой выбор перед применением, удаление неправильной группы может сломать вашу систему.</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1381"/>

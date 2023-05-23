@@ -4,7 +4,7 @@
 [ -z "$BASH_VERSION" ] && exec "$0" "$@"
 
 ME="$0"
-VERSION="221228-01"
+VERSION="230518-01"
 
 # PATH sanity
 PATH=/usr/local/bin:/usr/bin:/usr/sbin
@@ -219,14 +219,25 @@ live_grubsave() {
 
     # replace BOOT_IMAGE=/.../vmlinuz with kernel=vmlinuz
     local par=$( (echo $proc_cmdline; cat $config_dir/cmdline* 2>/dev/null) |
-                 tr $'\n' ' ' |
-                 sed -r 's:\bBOOT_IMAGE=.*/(vmlinuz[0-9]*):kernel=\1:'
+                 tr $'\n' ' '
                  )
-    # prepare boot parameter with double quotes
-    q=${par//=\\\"/=\'\"}" ";  q=${q//=\"/=\'\"};
-    q=${q//\\\" /\"\'  }    ;  q=${q//\" /\"\'  };
-    eval BPR=( $(echo "${q}") )
 
+    par=$(sed -r 's|[[:space:]]BOOT_IMAGE=[^[:space:]]*/(vmlinuz[0-9]*)| kernel=\1|g' <<<" $par ")
+
+    # prepare boot parameter with double quotes and spaces
+
+    local par_list=$(
+        echo " $par "                                            |
+        sed -r 's/\\//g;
+                s/[[:space:]]"([[:alnum:]._-]+=)/\n\1"/g;
+                s/[[:space:]]([[:alnum:]._-]+=")/\n\1/g;
+                s/" /"\n/g;'                                     |
+        sed -r '/="[^"]+"/s/[[:space:]]/__SPACE_PLACEHOLDER__/g;
+                s/\s\s*/\n/g; s/__SPACE_PLACEHOLDER__/ /g;'      |
+        sed '/^\s*$/d'
+        )
+
+    readarray -t BPR <<<"$par_list"
     local c p v  # => c := p=v
     for c in "${BPR[@]}" "$@"; do
         [[ -z $c ]] && continue
@@ -473,41 +484,41 @@ live_grubsave() {
 #${GRUB_DEV:+[$GRUB_DEV] @ }$grub_env
 EOF
 
-	    if [ "$RESET" = "true" ] && touch ${grub_env} 2>/dev/null; then
-	        echo "$grub_head"   | teecat ${grub_env}
-	    elif (( ${#GRP[@]} > 0 )) && touch ${grub_env} 2>/dev/null; then
-	        echo "$grub_head"   | teecat ${grub_env}
-	        #echo "#${grub_env}" | teecat -a ${grub_env}
-	        for p in $( printf "%s\n" ${!GRP[@]} | sort ); do
-	            [[ -z ${GRP[$p]} ]] && continue
-	            # extra last
-	            [[ $p == extra ]] && continue
+        if [ "$RESET" = "true" ] && touch ${grub_env} 2>/dev/null; then
+            echo "$grub_head"   | teecat ${grub_env}
+        elif (( ${#GRP[@]} > 0 )) && touch ${grub_env} 2>/dev/null; then
+            echo "$grub_head"   | teecat ${grub_env}
+            #echo "#${grub_env}" | teecat -a ${grub_env}
+            for p in $( printf "%s\n" ${!GRP[@]} | sort ); do
+                [[ -z ${GRP[$p]} ]] && continue
+                # extra last
+                [[ $p == extra ]] && continue
 
-	            if [[ $p == splasht ]]; then
-	                #(( CNT[$p] == 1 )) && continue
-	                if [[ ${GRP[$p]} == "splasht=" ]]; then
-	                    echo $p='""' | teecat -a ${grub_env}
-	                else
-	                    echo $p='"'"${GRP[$p]}"'"' | teecat -a ${grub_env}
-	                fi
-	                continue
-	            fi
-	            [[ -z ${GRP[$p]} ]] && continue
-	            echo $p='"'"${GRP[$p]}"'"' | teecat -a ${grub_env}
+                if [[ $p == splasht ]]; then
+                    #(( CNT[$p] == 1 )) && continue
+                    if [[ ${GRP[$p]} == "splasht=" ]]; then
+                        echo $p='""' | teecat -a ${grub_env}
+                    else
+                        echo $p='"'"${GRP[$p]}"'"' | teecat -a ${grub_env}
+                    fi
+                    continue
+                fi
+                [[ -z ${GRP[$p]} ]] && continue
+                echo $p='"'"${GRP[$p]}"'"' | teecat -a ${grub_env}
 
-	        done
-	        p=extra
-	        extra=${GRP[$p]}
-	        extra="${extra% }"
-	        if [ -n "$extra" ]; then
-	            if [ -z "${extra//*\"*/}" ]; then
-	                echo $p="'${extra//\'/\"}'" | teecat -a ${grub_env}
-	            else
-	                echo $p='"'"${extra}"'"' | teecat -a ${grub_env}
-	            fi
-	        fi
-	    fi
-	    sync; sync
+            done
+            p=extra
+            extra=${GRP[$p]}
+            extra="${extra% }"
+            if [ -n "$extra" ]; then
+                if [ -z "${extra//*\"*/}" ]; then
+                    echo $p="'${extra//\'/\"}'" | teecat -a ${grub_env}
+                else
+                    echo $p='"'"${extra}"'"' | teecat -a ${grub_env}
+                fi
+            fi
+        fi
+        sync; sync
     fi
 
     if [[ ! $KEEP_MOUNTED ]]; then

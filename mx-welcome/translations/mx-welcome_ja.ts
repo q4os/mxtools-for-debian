@@ -53,7 +53,7 @@
     <message>
         <location filename="../mainwindow.ui" line="510"/>
         <source>Tweak (Panel, etc...)</source>
-        <translation>詳細設定（パネル、その他）</translation>
+        <translation>詳細設定（パネルなど）</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="536"/>
@@ -63,7 +63,7 @@
     <message>
         <location filename="../mainwindow.ui" line="568"/>
         <source>Wiki</source>
-        <translation>ウィキ</translation>
+        <translation>公式 Wiki サイト</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="600"/>
@@ -88,7 +88,7 @@
     <message>
         <location filename="../mainwindow.ui" line="700"/>
         <source>Contribute</source>
-        <translation>参加するには</translation>
+        <translation>貢献する</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="732"/>
@@ -108,7 +108,7 @@
     <message>
         <location filename="../mainwindow.ui" line="798"/>
         <source>SHORT SYSTEM REPORT:</source>
-        <translation>システムレポートの簡略版:</translation>
+        <translation>システムレポートの簡易版:</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="805"/>
@@ -162,12 +162,12 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../mainwindow.cpp" line="318"/>
         <source>User demo, password:</source>
-        <translation>demoユーザ、パスワード</translation>
+        <translation>demo, パスワード:</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="318"/>
         <source>Superuser root, password:</source>
-        <translation>rootユーザ、パスワード</translation>
+        <translation>root, パスワード:</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="355"/>
@@ -226,7 +226,7 @@ p, li { white-space: pre-wrap; }
     <name>QApplication</name>
     <message>
         <source>You must run this program as normal user.</source>
-        <translation type="vanished">このプログラムは標準ユーザーで実行して下さい。</translation>
+        <translation type="vanished">このプログラムは一般ユーザーで実行して下さい。</translation>
     </message>
 </context>
 <context>
@@ -254,26 +254,26 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../main.cpp" line="71"/>
         <source>You must run this program as normal user.</source>
-        <translation type="unfinished">このプログラムは標準ユーザーで実行して下さい。</translation>
+        <translation type="unfinished">このプログラムは一般ユーザーで実行して下さい。</translation>
     </message>
     <message>
-        <location filename="../about.cpp" line="40"/>
+        <location filename="../about.cpp" line="41"/>
         <source>License</source>
         <translation type="unfinished">ライセンス</translation>
     </message>
     <message>
-        <location filename="../about.cpp" line="41"/>
-        <location filename="../about.cpp" line="51"/>
+        <location filename="../about.cpp" line="42"/>
+        <location filename="../about.cpp" line="52"/>
         <source>Changelog</source>
         <translation type="unfinished">更新履歴</translation>
     </message>
     <message>
-        <location filename="../about.cpp" line="42"/>
+        <location filename="../about.cpp" line="43"/>
         <source>Cancel</source>
         <translation type="unfinished">キャンセル</translation>
     </message>
     <message>
-        <location filename="../about.cpp" line="63"/>
+        <location filename="../about.cpp" line="64"/>
         <source>&amp;Close</source>
         <translation type="unfinished">閉じる(&amp;C)</translation>
     </message>

@@ -1,285 +1,567 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="el">
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.1" language="el">
 <context>
-    <name>MXDateTime</name>
+    <name>MainWindow</name>
     <message>
-        <location filename="../datetime.ui" line="20"/>
-        <location filename="../datetime.cpp" line="604"/>
-        <source>MX Date &amp; Time</source>
-        <translation>Ημερομηνία και ώρα του MX</translation>
+        <location filename="../mainwindow.ui" line="26"/>
+        <source>MX Network Assistant</source>
+        <translation>MX Network Assistant</translation>
     </message>
     <message>
-        <location filename="../datetime.ui" line="26"/>
-        <source>Close</source>
-        <translation>Κλείσιμο</translation>
-    </message>
-    <message>
-        <location filename="../datetime.ui" line="40"/>
-        <source>Help</source>
-        <translation>Βοήθεια</translation>
-    </message>
-    <message>
-        <location filename="../datetime.ui" line="73"/>
-        <source>Apply</source>
-        <translation>Εφαρμογή</translation>
-    </message>
-    <message>
-        <location filename="../datetime.ui" line="100"/>
+        <location filename="../mainwindow.ui" line="86"/>
         <source>About...</source>
         <translation>Περί...</translation>
     </message>
     <message>
-        <location filename="../datetime.ui" line="124"/>
-        <source>Date &amp;&amp; Time</source>
-        <translation>Ημερομηνία &amp;&amp; Ώρα</translation>
+        <location filename="../mainwindow.ui" line="109"/>
+        <source>Help</source>
+        <translation>Βοήθεια</translation>
     </message>
     <message>
-        <location filename="../datetime.ui" line="192"/>
-        <source>H:mm:ss</source>
-        <translation>H:mm:ss</translation>
-    </message>
-    <message>
-        <location filename="../datetime.ui" line="278"/>
-        <location filename="../datetime.cpp" line="296"/>
-        <location filename="../datetime.cpp" line="303"/>
-        <source>Hardware Clock</source>
-        <translation>Ρολόι υλικού</translation>
-    </message>
-    <message>
-        <location filename="../datetime.ui" line="284"/>
-        <source>Hardware Clock tools</source>
-        <translation>Εργαλεία για το ρολόι υλικού</translation>
-    </message>
-    <message>
-        <location filename="../datetime.ui" line="290"/>
-        <source>Obtain information from the Hardware Clock and present it in the box below.</source>
-        <translation>Λήψη πληροφοριών από το ρολόι υλικού και εμφάνιση στο παρακάτω πλαίσιο.</translation>
-    </message>
-    <message>
-        <location filename="../datetime.ui" line="293"/>
-        <source>Read the Hardware Clock</source>
-        <translation>Ανάγνωση από το ρολόι υλικού</translation>
-    </message>
-    <message>
-        <location filename="../datetime.ui" line="303"/>
-        <source>Apply systematic drift corrections to the Hardware Clock.</source>
-        <translation>Εφαρμογή διορθώσεων στο ρολόι υλικού.</translation>
-    </message>
-    <message>
-        <location filename="../datetime.ui" line="306"/>
-        <source>Drift Adjust</source>
-        <translation>Ρύθμιση διόρθωσης</translation>
-    </message>
-    <message>
-        <location filename="../datetime.ui" line="329"/>
-        <source>Time transfer</source>
-        <translation>Μεταφορά ώρας</translation>
-    </message>
-    <message>
-        <location filename="../datetime.ui" line="335"/>
-        <source>Immediately set the System Clock to match the current time registered by the Hardware Clock.</source>
-        <translation>Άμεση ρύθμιση του ρολογιού συστήματος ώστε να ταιριάζει με την τρέχουσα ώρα από το ρολόι υλικού.</translation>
-    </message>
-    <message>
-        <location filename="../datetime.ui" line="338"/>
-        <source>Hardware Clock to System Clock</source>
-        <translation>Ρολόι υλικού σε ρολόι συστήματος</translation>
-    </message>
-    <message>
-        <location filename="../datetime.ui" line="348"/>
-        <source>Immediately set the Hardware Clock to match the current time registered by the System Clock.</source>
-        <translation>Άμεση ρύθμιση του ρολογιού υλικού ώστε να ταιριάζει με την τρέχουσα ώρα από το ρολόι συστήματος.</translation>
-    </message>
-    <message>
-        <location filename="../datetime.ui" line="351"/>
-        <source>System Clock to Hardware Clock</source>
-        <translation>Ρολόι συστήματος σε ρολόι υλικού</translation>
-    </message>
-    <message>
-        <location filename="../datetime.ui" line="361"/>
-        <source>Update the drift factor for the Hardware Clock when it is being set.</source>
-        <translation>Ενημέρωση του συντελεστή διόρθωσης όταν ρυθμίζεται το ρολόι υλικού.</translation>
-    </message>
-    <message>
-        <location filename="../datetime.ui" line="364"/>
-        <source>Update the drift</source>
-        <translation>Ενημέρωση διόρθωσης</translation>
-    </message>
-    <message>
-        <location filename="../datetime.ui" line="374"/>
-        <source>Time zone for the Hardware Clock</source>
-        <translation>Ζώνη ώρας για το ρολόι υλικού</translation>
-    </message>
-    <message>
-        <location filename="../datetime.ui" line="380"/>
-        <source>Local time</source>
-        <translation>Τοπική ώρα</translation>
-    </message>
-    <message>
-        <location filename="../datetime.ui" line="383"/>
-        <source>Local</source>
-        <translation>Τοπικός</translation>
-    </message>
-    <message>
-        <location filename="../datetime.ui" line="390"/>
-        <source>Universally Coordinated Time (or Greenwich Meridian Time)</source>
-        <translation>Παγκόσμιος συγχρονισμός ώρας (ή χρόνος Greenwich)</translation>
-    </message>
-    <message>
-        <location filename="../datetime.ui" line="393"/>
-        <source>UTC</source>
-        <translation>UTC</translation>
-    </message>
-    <message>
-        <location filename="../datetime.ui" line="433"/>
-        <source>Network Time</source>
-        <translation>Χρόνος δικτύου</translation>
-    </message>
-    <message>
-        <location filename="../datetime.ui" line="439"/>
-        <source>Move the selected item down</source>
-        <translation>Μετακίνηση του επιλεγμένου στοιχείου προς τα κάτω</translation>
-    </message>
-    <message>
-        <location filename="../datetime.ui" line="450"/>
-        <source>Move the selected item up</source>
-        <translation>Μετακίνηση του επιλεγμένου στοιχείου προς τα επάνω</translation>
-    </message>
-    <message>
-        <location filename="../datetime.ui" line="461"/>
-        <source>Remove the current item from the list</source>
-        <translation>Αφαίρεση του στοιχείου από τη λίστα</translation>
-    </message>
-    <message>
-        <location filename="../datetime.ui" line="472"/>
-        <source>Add an item to the list</source>
-        <translation>Προσθήκη στοιχείου στη λίστα</translation>
-    </message>
-    <message>
-        <location filename="../datetime.ui" line="498"/>
-        <source>Automatically update the System Clock with NTP servers:</source>
-        <translation>Αυτόματη ενημέρωση του ρολογιού συστήματος από τους διακομιστές NTP:</translation>
-    </message>
-    <message>
-        <location filename="../datetime.ui" line="505"/>
-        <source>Immediately update the system clock with NTP servers.</source>
-        <translation>Άμεση ενημέρωση του ρολογιού συστήματος από τους διακομιστές NTP.</translation>
-    </message>
-    <message>
-        <location filename="../datetime.ui" line="508"/>
-        <source>Update Now</source>
-        <translation>Ενημέρωση τώρα</translation>
-    </message>
-    <message>
-        <location filename="../datetime.ui" line="520"/>
-        <source>List of NTP servers to use.</source>
-        <translation>Λίστα διακομιστών NTP.</translation>
-    </message>
-    <message>
-        <location filename="../datetime.ui" line="536"/>
-        <source>Type</source>
-        <translation>Τύπος</translation>
-    </message>
-    <message>
-        <location filename="../datetime.ui" line="541"/>
-        <source>Address</source>
-        <translation>Διεύθυνση</translation>
-    </message>
-    <message>
-        <location filename="../datetime.ui" line="546"/>
-        <source>Options</source>
-        <translation>Επιλογές</translation>
-    </message>
-    <message>
-        <location filename="../datetime.cpp" line="270"/>
-        <source>Reading...</source>
-        <translation>Ανάγνωση...</translation>
-    </message>
-    <message>
-        <location filename="../datetime.cpp" line="284"/>
-        <source>Adjusting...</source>
-        <translation>Ρύθμιση...</translation>
-    </message>
-    <message>
-        <location filename="../datetime.cpp" line="296"/>
-        <location filename="../datetime.cpp" line="303"/>
-        <source>System Clock</source>
-        <translation>Ρολόι συστήματος</translation>
-    </message>
-    <message>
-        <location filename="../datetime.cpp" line="309"/>
-        <source>The %1 time was transferred to the %2.</source>
-        <translation>Η ώρα %1 μεταφέρθηκε στο %2.</translation>
-    </message>
-    <message>
-        <location filename="../datetime.cpp" line="312"/>
-        <source>The %1 time could not be transferred to the %2.</source>
-        <translation>Η ώρα %1 δεν μεταφέρθηκε στο %2.</translation>
-    </message>
-    <message>
-        <location filename="../datetime.cpp" line="352"/>
-        <source>Updating...</source>
-        <translation>Ενημέρωση...</translation>
-    </message>
-    <message>
-        <location filename="../datetime.cpp" line="365"/>
-        <source>The system clock was updated successfully.</source>
-        <translation>Το ρολόι συστήματος ενημερώθηκε με επιτυχία.</translation>
-    </message>
-    <message>
-        <location filename="../datetime.cpp" line="367"/>
-        <source>The system clock could not be updated.</source>
-        <translation>Το ρολόι συστήματος δεν ενημερώθηκε.</translation>
-    </message>
-    <message>
-        <location filename="../datetime.cpp" line="369"/>
-        <source>None of the NTP servers on the list are currently enabled.</source>
-        <translation>Κανένας από τους διακομιστές NTP της λίστας δεν είναι ενεργοποιημένος.</translation>
-    </message>
-    <message>
-        <location filename="../datetime.cpp" line="603"/>
-        <source>About MX Date &amp; Time</source>
-        <translation>Περί του MX Date &amp; Time</translation>
-    </message>
-    <message>
-        <location filename="../datetime.cpp" line="604"/>
-        <source>Version: </source>
-        <translation>Έκδοση: </translation>
-    </message>
-    <message>
-        <location filename="../datetime.cpp" line="605"/>
-        <source>GUI program for setting the time and date in MX Linux</source>
-        <translation>Γραφικό πρόγραμμα για τον καθορισμό της ώρας και της ημερομηνίας στο MX Linux</translation>
-    </message>
-    <message>
-        <location filename="../datetime.cpp" line="607"/>
-        <source>Copyright (c) MX Linux</source>
-        <translation>Πνευματικά δικαιώματα (c) MX Linux</translation>
-    </message>
-    <message>
-        <location filename="../datetime.cpp" line="608"/>
-        <location filename="../datetime.cpp" line="622"/>
-        <source>License</source>
-        <translation>Άδεια</translation>
-    </message>
-    <message>
-        <location filename="../datetime.cpp" line="609"/>
-        <source>Changelog</source>
-        <translation>Αρχείο αλλαγών</translation>
-    </message>
-    <message>
-        <location filename="../datetime.cpp" line="610"/>
-        <source>Cancel</source>
-        <translation>Ακύρωση</translation>
-    </message>
-    <message>
-        <location filename="../datetime.cpp" line="636"/>
+        <location filename="../mainwindow.ui" line="177"/>
         <source>&amp;Close</source>
         <translation>&amp;Κλείσιμο</translation>
     </message>
     <message>
-        <location filename="../datetime.cpp" line="654"/>
-        <source>MX Date &amp; Time Help</source>
-        <translation>Βοήθεια για το MX Date &amp; Time</translation>
+        <location filename="../mainwindow.ui" line="184"/>
+        <source>Alt+C</source>
+        <translation>Alt+C</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="219"/>
+        <source>Status</source>
+        <translation>Κατάσταση</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="225"/>
+        <source>IP address</source>
+        <translation>Διεύθυνση IP</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="261"/>
+        <source>Hardware detected</source>
+        <translation>Ανιχνεύθηκε υλικό</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="280"/>
+        <source>Enable</source>
+        <translation>Ενεργοποίηση </translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="303"/>
+        <location filename="../mainwindow.ui" line="593"/>
+        <location filename="../mainwindow.ui" line="706"/>
+        <source>Re-scan</source>
+        <translation>Επανάληψη σάρωσης</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="372"/>
+        <source>Enabled</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="377"/>
+        <source>Interface</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="382"/>
+        <source>Driver</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="387"/>
+        <source>Description</source>
+        <translation>Περιγραφή</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="392"/>
+        <source>Vendor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="397"/>
+        <source>Product</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="405"/>
+        <source>Disable</source>
+        <translation>Απενεργοποίηση</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="419"/>
+        <source>Active interface</source>
+        <translation>Ενεργή διασύνδεση</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="435"/>
+        <source>WiFi status</source>
+        <translation>Κατάσταση WiFi</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="457"/>
+        <source>Unblocks all soft/hard blocked wireless devices</source>
+        <translation>Καθολική ενεργοποίηση όλων των ασύρματων συσκευών</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="460"/>
+        <source>Unblock WiFi Devices</source>
+        <translation>Ενεργοποίηση συσκευών WiFi</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="492"/>
+        <source>Linux drivers</source>
+        <translation>Προγράμματα οδήγησης Linux</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="504"/>
+        <source>Associated Linux drivers</source>
+        <translation>Προγράμματα οδήγησης Linux</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="513"/>
+        <source>Load Driver</source>
+        <translation>Φόρτωση προγράμματος οδήγησης</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="576"/>
+        <source>Unload Driver</source>
+        <translation>Εκφόρτωση προγράμματος οδήγησης</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="613"/>
+        <location filename="../mainwindow.cpp" line="847"/>
+        <source>Block Driver</source>
+        <translation>Αποκλεισμός του driver</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="632"/>
+        <source>Windows drivers</source>
+        <translation>Προγράμματα οδήγησης Windows</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="638"/>
+        <source>Available Windows drivers</source>
+        <translation>Διαθέσιμα προγράμματα οδήγησης των Windows</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="672"/>
+        <source>Remove Driver</source>
+        <translation>Αφαίρεση προγράμματος οδήγησης</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="683"/>
+        <source>Add Driver</source>
+        <translation>Προσθήκη προγράμματος οδήγησης</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="724"/>
+        <source>About NDISwrapper</source>
+        <translation>Σχετικά με το NDISwrapper</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="736"/>
+        <source>Install NDISwrapper</source>
+        <translation>Εγκατάσταση του NDISwrapper</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="747"/>
+        <source>In order to use Windows drivers you need first to install NDISwrapper</source>
+        <translation>Για να χρησιμοποιήσετε τα προγράμματα οδήγησης των Windows θα πρέπει πρώτα να εγκαταστήσετε το NDISwrapper</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="763"/>
+        <source>Uninstall NDISwrapper</source>
+        <translation>Απεγκατάσταση του NDISwrapper</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="795"/>
+        <source>Net diagnostics</source>
+        <translation>Διαγνωστικά διαδικτύου</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="807"/>
+        <source>Ping</source>
+        <translation>Ping</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="813"/>
+        <location filename="../mainwindow.ui" line="930"/>
+        <source>Target URL:</source>
+        <translation>Προορισμός:</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="823"/>
+        <source>Packets</source>
+        <translation>Πακέτα</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="865"/>
+        <location filename="../mainwindow.ui" line="985"/>
+        <source>Start</source>
+        <translation>Έναρξη</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="882"/>
+        <location filename="../mainwindow.ui" line="1002"/>
+        <source>Clear</source>
+        <translation>Εκκαθάριση</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="896"/>
+        <location filename="../mainwindow.ui" line="1016"/>
+        <source>Cancel</source>
+        <translation>Ακύρωση</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="924"/>
+        <source>Traceroute</source>
+        <translation>Traceroute</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="940"/>
+        <source>Hops</source>
+        <translation>Hops</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="98"/>
+        <source>IP address from router:</source>
+        <translation>Διεύθυνση IP από το router:</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="99"/>
+        <source>External IP address:</source>
+        <translation>Εξωτερική διεύθυνση IP:</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="135"/>
+        <location filename="../mainwindow.cpp" line="148"/>
+        <source>Interface: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="135"/>
+        <location filename="../mainwindow.cpp" line="149"/>
+        <source>Driver: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="136"/>
+        <location filename="../mainwindow.cpp" line="150"/>
+        <source>Description: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="137"/>
+        <location filename="../mainwindow.cpp" line="151"/>
+        <source>Product: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="137"/>
+        <location filename="../mainwindow.cpp" line="152"/>
+        <source>Vendor: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="138"/>
+        <location filename="../mainwindow.cpp" line="153"/>
+        <source>Enabled: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="206"/>
+        <location filename="../mainwindow.cpp" line="220"/>
+        <location filename="../mainwindow.cpp" line="234"/>
+        <source>&amp;Copy</source>
+        <translation>&amp;Αντιγραφή</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="208"/>
+        <location filename="../mainwindow.cpp" line="222"/>
+        <location filename="../mainwindow.cpp" line="236"/>
+        <source>Ctrl+C</source>
+        <translation>Ctrl+C</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="209"/>
+        <location filename="../mainwindow.cpp" line="223"/>
+        <location filename="../mainwindow.cpp" line="237"/>
+        <source>Copy &amp;All</source>
+        <translation>Αντιγραφή ό&amp;λων</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="211"/>
+        <location filename="../mainwindow.cpp" line="225"/>
+        <location filename="../mainwindow.cpp" line="239"/>
+        <source>Ctrl+A</source>
+        <translation>Ctrl+A</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="264"/>
+        <location filename="../mainwindow.cpp" line="282"/>
+        <source>Traceroute not installed</source>
+        <translation>Δεν έχει εγκατασταθεί το traceroute</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="265"/>
+        <source>Traceroute is not installed, do you want to install it now?</source>
+        <translation>Δεν είναι εγκατεστημένο το traceroute, θέλετε να το εγκαταστήσετε τώρα;</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="272"/>
+        <source>Traceroute hasn&apos;t been installed</source>
+        <translation>Δεν έχει εγκατασταθεί το traceroute</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="273"/>
+        <source>Traceroute cannot be installed. This may mean you are using the LiveCD or you are unable to reach the software repository,</source>
+        <translation>Δεν μπόρεσε να εγκατασταθεί το traceroute. Αυτό σημαίνει ότι μάλλον χρησιμοποιείτε το LiveCD ή δεν έχετε πρόσβαση στο αποθετήριο λογισμικού,</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="283"/>
+        <source>Traceroute is not installed and no Internet connection could be detected so it cannot be installed</source>
+        <translation>Δεν είναι εγκατεστημένο το traceroute καθώς δεν ανιχνεύτηκε σύνδεση στο Internet έτσι δεν μπόρεσε να εγκατασταθεί</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="290"/>
+        <location filename="../mainwindow.cpp" line="329"/>
+        <source>No destination host</source>
+        <translation>Δεν υπάρχει προορισμός</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="290"/>
+        <location filename="../mainwindow.cpp" line="329"/>
+        <source>Please fill in the destination host field</source>
+        <translation>Παρακαλώ συμπληρώστε το πεδίο προορισμού</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="454"/>
+        <source>Loaded Drivers</source>
+        <translation>Φορτωμένα προγράμματα οδήγησης</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="462"/>
+        <source>Unloaded Drivers</source>
+        <translation>Εκφορτωμένα προγράμματα οδήγησης</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="475"/>
+        <source>Blocked Drivers</source>
+        <translation>Αποκλεισμένο drivers</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="494"/>
+        <source>Blocked Broadcom Drivers</source>
+        <translation>Αποκλεισμένο drivers του Broadcom</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="515"/>
+        <source>Ndiswrapper is not installed</source>
+        <translation>Το Ndiswrapper δεν είναι εγκατεστημένο</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="527"/>
+        <source>driver installed</source>
+        <translation>εγκαταστάθηκε το πρόγραμμα οδήγησης</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="536"/>
+        <source> and in use by </source>
+        <translation> χρησιμοποιώντας </translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="543"/>
+        <source>. Alternate driver: </source>
+        <translation>. εναλλακτικό οδηγό: </translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="614"/>
+        <source>Driver removed from blocklist</source>
+        <translation>Το driver καταργήθηκε από τη λίστα αποκλεισμού</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="614"/>
+        <source>Driver removed from blocklist.</source>
+        <translation>Το driver καταργήθηκε από τη λίστα αποκλεισμού</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="620"/>
+        <source>Module blocked</source>
+        <translation>Αποκλεισμένο module</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="780"/>
+        <source>Installation successful</source>
+        <translation>Επιτυχής εγκατάσταση</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="782"/>
+        <source>Error detected, could not compile ndiswrapper driver.</source>
+        <translation>Εντοπίστηκε σφάλμα, δεν μεταγλωτίστηκε το ndiswrapper.</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="785"/>
+        <source>Error detected, could not install ndiswrapper.</source>
+        <translation>Εντοπίστηκε σφάλμα, δεν εγκαταστάθηκε το ndiswrapper.</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="797"/>
+        <source>Error encountered while removing Ndiswrapper</source>
+        <translation>Προέκυψε σφάλμα κατά την αφαίρεση του ndiswrapper</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="844"/>
+        <source>Unblock Driver</source>
+        <translation>Unblock Driver</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="876"/>
+        <source>enabled</source>
+        <translation>ενεργοποιημένο</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="879"/>
+        <source>disabled</source>
+        <translation>απενεργοποιημένο</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="882"/>
+        <source>WiFi hardware switch is off</source>
+        <translation>Ο διακόπτης του WiFi είναι κλειστός</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="890"/>
+        <source>Locate the Windows driver you want to add</source>
+        <translation>Επιλέξτε το πρόγραμμα οδήγησης των Windows που θέλετε να προσθέσετε</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="891"/>
+        <source>Windows installation information file (*.inf)</source>
+        <translation>Αρχείο πληροφοριών εγκατάστασης των Windows (*.inf)</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="921"/>
+        <source>*.sys file not found</source>
+        <translation>Το αρχείο *.sys δεν βρέθηκε</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="922"/>
+        <source>The *.sys files must be in the same location as the *.inf file. %1 cannot be found</source>
+        <translation>Τα αρχεία *.sys πρέπει να είναι στον ίδιο κατάλογο με το αρχείο * .inf. Δεν βρέθηκε το %1</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="933"/>
+        <source>sys file reference not found</source>
+        <translation>Δε βρέθηκε το αναφερόμενο αρχείο sys</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="934"/>
+        <source>The sys file for the given driver cannot be determined after parsing the inf file</source>
+        <translation>Μετά την ανάλυση του αρχείου .inf, δεν προσδιορίστηκε αρχείο sys για το δεδομένο πρόγραμμα οδήγησης</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="948"/>
+        <source>Ndiswrapper driver removed.</source>
+        <translation>Αφαιρέθηκε το Ndiswrapper.</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="956"/>
+        <source>%1 Help</source>
+        <translation>Βοήθεια %1</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="965"/>
+        <source>Could not unlock devices.
+WiFi device(s) might already be unlocked.</source>
+        <translation>Δεν ενεργοποιήθηκαν συσκευές.
+Η συσκευή(ες) WiFi ίσως να είναι ήδη ενεργοποιημένη(ες).</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="967"/>
+        <source>WiFi devices unlocked.</source>
+        <translation>Οι συσκευές WiFi ενεργοποιήθηκαν.</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="978"/>
+        <source>About %1</source>
+        <translation>Περί του %1</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="979"/>
+        <source>Version: </source>
+        <translation>Έκδοση: </translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="981"/>
+        <source>Program for troubleshooting and configuring network for MX Linux</source>
+        <translation>Eφαρμογή του MX Linux για τη διαμόρφωση και την αντιμετώπιση προβλημάτων δικτύου</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="983"/>
+        <source>Copyright (c) MEPIS LLC and MX Linux</source>
+        <translation>Πνευματικά δικαιώματα (c) MEPIS LLC και MX Linux</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="984"/>
+        <source>%1 License</source>
+        <translation>Άδεια %1</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="1003"/>
+        <source>Driver loaded successfully</source>
+        <translation>Το πρόγραμμα οδήγησης φορτώθηκε με επιτυχία</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="1018"/>
+        <source>Driver unloaded successfully</source>
+        <translation>Το πρόγραμμα οδήγησης εκφορτώθηκε με επιτυχία</translation>
+    </message>
+</context>
+<context>
+    <name>QObject</name>
+    <message>
+        <location filename="../about.cpp" line="52"/>
+        <source>License</source>
+        <translation>Άδεια</translation>
+    </message>
+    <message>
+        <location filename="../about.cpp" line="53"/>
+        <location filename="../about.cpp" line="62"/>
+        <source>Changelog</source>
+        <translation>Αρχείο αλλαγών</translation>
+    </message>
+    <message>
+        <location filename="../about.cpp" line="54"/>
+        <source>Cancel</source>
+        <translation>Ακύρωση</translation>
+    </message>
+    <message>
+        <location filename="../about.cpp" line="74"/>
+        <source>&amp;Close</source>
+        <translation>&amp;Κλείσιμο</translation>
+    </message>
+    <message>
+        <location filename="../main.cpp" line="64"/>
+        <source>Error</source>
+        <translation>Σφάλμα</translation>
+    </message>
+    <message>
+        <location filename="../main.cpp" line="65"/>
+        <source>You seem to be logged in as root, please log out and log in as normal user to use this program.</source>
+        <translation>Φαίνεται ότι έχετε συνδεθεί ως root, αποσυνδεθείτε και συνδεθείτε ως κανονικός χρήστης για να χρησιμοποιήσετε αυτό το πρόγραμμα.</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="637"/>
+        <source>Could not load </source>
+        <translation>Δεν ήταν δυνατή η φόρτωση </translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="661"/>
+        <source>Could not unload </source>
+        <translation>Δεν ήταν δυνατή η εκφόρτωση </translation>
     </message>
 </context>
 </TS>

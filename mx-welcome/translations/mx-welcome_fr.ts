@@ -8,17 +8,17 @@
         <location filename="../mainwindow.cpp" line="66"/>
         <location filename="../mainwindow.cpp" line="433"/>
         <source>MX Welcome</source>
-        <translation>MX Centre d&apos;accueil</translation>
+        <translation>MX Centre d’accueil - MX Welcome</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="80"/>
         <source>Quit application</source>
-        <translation>Quitter l&apos;application</translation>
+        <translation>Quitter l’application</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="83"/>
         <source>Close</source>
-        <translation>Fermer</translation>
+        <translation>Quitter</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="90"/>
@@ -43,7 +43,7 @@
     <message>
         <location filename="../mainwindow.ui" line="203"/>
         <source>Welcome</source>
-        <translation>Centre d&apos;accueil</translation>
+        <translation>Centre d’accueil - Welcome</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="484"/>
@@ -53,7 +53,7 @@
     <message>
         <location filename="../mainwindow.ui" line="510"/>
         <source>Tweak (Panel, etc...)</source>
-        <translation>Ajustements (Tableau de bord, etc...)</translation>
+        <translation>Ajustements (Tableau de bord, etc. ...)</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="536"/>
@@ -68,7 +68,7 @@
     <message>
         <location filename="../mainwindow.ui" line="600"/>
         <source>Users Manual</source>
-        <translation>Manuel de l&apos;utilisateur</translation>
+        <translation>Manuel de l’utilisateur</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="626"/>
@@ -123,12 +123,12 @@
     <message>
         <location filename="../mainwindow.ui" line="829"/>
         <source>Terms of Use</source>
-        <translation>Conditions d&apos;utilisation</translation>
+        <translation>Conditions d’utilisation</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="846"/>
         <source>The name “MX Linux” is covered by Linux Foundation Sublicense No. 20140605-0483. We develop software that is covered by a free license that can be examined in the Wiki list. We also include software developed by others that is under a free license.</source>
-        <translation>Le nom « MX Linux » est couvert par la sous-licence de la Fondation Linux n° 20140605-0483. Nous développons des logiciels qui sont couverts par une licence libre qui peut être examinée dans la liste Wiki. Nous incluons également des logiciels développés par d&apos;autres qui sont sous une licence libre.</translation>
+        <translation>Le nom « MX Linux » est couvert par la sous-licence de la Fondation Linux n° 20140605-0483. Nous développons des logiciels qui sont couverts par une licence libre qui peut être examinée dans la liste Wiki. Nous incluons également des logiciels développés par d’autres qui sont sous une licence libre.</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="856"/>
@@ -143,7 +143,7 @@
     <message>
         <location filename="../mainwindow.ui" line="870"/>
         <source>SUPPORTED UNTIL:</source>
-        <translation>PRIS EN CHARGE JUSQU&apos;AU :</translation>
+        <translation>PRIS EN CHARGE JUSQU’AU :</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="890"/>
@@ -183,7 +183,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../mainwindow.cpp" line="432"/>
         <source>About MX Welcome</source>
-        <translation>À propos de MX Centre d&apos;accueil</translation>
+        <translation>À propos de MX Centre d’accueil</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="434"/>
@@ -193,7 +193,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../mainwindow.cpp" line="435"/>
         <source>Program for displaying a welcome screen in MX Linux</source>
-        <translation>Programme affichant un écran d&apos;accueil pour MX Linux</translation>
+        <translation>Programme affichant un écran d’accueil pour MX Linux</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="437"/>
@@ -219,14 +219,14 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation type="vanished">&amp;Fermer</translation>
+        <translation type="vanished">&amp;Quitter</translation>
     </message>
 </context>
 <context>
     <name>QApplication</name>
     <message>
         <source>You must run this program as normal user.</source>
-        <translation type="vanished">Vous devez lancer cette application en tant qu&apos;utilisateur normal.</translation>
+        <translation type="vanished">Vous devez exécuter cette application en tant qu’utilisateur normal.</translation>
     </message>
 </context>
 <context>
@@ -239,7 +239,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../main.cpp" line="47"/>
         <source>Start with About tab selected. The About tab provides basic information about the current MX Linux version, the user&apos;s hardware, and access to a full system report.</source>
-        <translation>Commencer avec l&apos;onglet « À propos » sélectionné. L&apos;onglet « À propos » fournit des informations de base sur la version actuelle de MX Linux, le matériel de l&apos;utilisateur et l&apos;accès à un rapport complet du système.</translation>
+        <translation>Commencer avec l’onglet « À propos » sélectionné. L’onglet « À propos » fournit des informations de base sur la version actuelle de MX Linux, le matériel de l’utilisateur et l’accès à un rapport complet du système.</translation>
     </message>
     <message>
         <location filename="../main.cpp" line="50"/>
@@ -254,28 +254,28 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../main.cpp" line="71"/>
         <source>You must run this program as normal user.</source>
-        <translation type="unfinished">Vous devez lancer cette application en tant qu&apos;utilisateur normal.</translation>
+        <translation type="unfinished">Vous devez exécuter cette application en tant qu’utilisateur normal.</translation>
     </message>
     <message>
-        <location filename="../about.cpp" line="40"/>
+        <location filename="../about.cpp" line="41"/>
         <source>License</source>
         <translation type="unfinished">Licence</translation>
     </message>
     <message>
-        <location filename="../about.cpp" line="41"/>
-        <location filename="../about.cpp" line="51"/>
+        <location filename="../about.cpp" line="42"/>
+        <location filename="../about.cpp" line="52"/>
         <source>Changelog</source>
         <translation type="unfinished">Journal des modifications</translation>
     </message>
     <message>
-        <location filename="../about.cpp" line="42"/>
+        <location filename="../about.cpp" line="43"/>
         <source>Cancel</source>
         <translation type="unfinished">Annuler</translation>
     </message>
     <message>
-        <location filename="../about.cpp" line="63"/>
+        <location filename="../about.cpp" line="64"/>
         <source>&amp;Close</source>
-        <translation type="unfinished">&amp;Fermer</translation>
+        <translation type="unfinished">&amp;Quitter</translation>
     </message>
 </context>
 </TS>

@@ -1,8 +1,12 @@
 [Desktop Entry]
 Type=Application
+# TRANSLATORS:
+# The autostart desktop name will be shown within 'Session and Startup' (Autostart).
 Name=Cleanup Notifier
+# TRANSLATORS:
+# The autostart desktop entry comment will be shown within 'Session and Startup' (Autostart).
 Comment=Check available space at /boot
-Icon=mx-cleanup
+Icon=cleanup-notifier-mx
 Exec=sh -c 'sleep 15; exec cleanup-notifier-mx'
 Categories=GTK;Utility;
 NoDisplay=true

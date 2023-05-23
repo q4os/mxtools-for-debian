@@ -84,7 +84,7 @@
     <message>
         <location filename="../mainwindow.ui" line="271"/>
         <source>Grant this user administrative rights to the system (sudo)</source>
-        <translation type="unfinished"></translation>
+        <translation>このユーザーにシステムの管理者権限を与える (sudo)</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="290"/>
@@ -94,7 +94,7 @@
     <message>
         <location filename="../mainwindow.ui" line="333"/>
         <source>Select user</source>
-        <translation>ユーザーを選択します</translation>
+        <translation>ユーザーの選択</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="349"/>
@@ -189,7 +189,7 @@
     <message>
         <location filename="../mainwindow.ui" line="717"/>
         <source>Restore Defaults</source>
-        <translation>既定の復旧</translation>
+        <translation>初期設定に戻す</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="738"/>
@@ -255,7 +255,7 @@
     <message>
         <location filename="../mainwindow.ui" line="868"/>
         <source>Select to only copy files</source>
-        <translation>コピーのファイルだけを選択</translation>
+        <translation>コピーするファイルだけを選択</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="871"/>
@@ -786,7 +786,7 @@ Please choose another name before proceeding.</source>
     <message>
         <location filename="../mainwindow.cpp" line="838"/>
         <source>Simple user configuration for MX Linux</source>
-        <translation>MX Linux 向けのシンプルなユーザー設定</translation>
+        <translation>MX Linux 用のシンプルなユーザー設定ツール</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="840"/>
@@ -806,7 +806,7 @@ Please choose another name before proceeding.</source>
     <message>
         <location filename="../mainwindow.cpp" line="871"/>
         <source>Select folder to copy to</source>
-        <translation>コピー先のフォルダーを選択します</translation>
+        <translation>コピー先のフォルダを選択します</translation>
     </message>
 </context>
 <context>

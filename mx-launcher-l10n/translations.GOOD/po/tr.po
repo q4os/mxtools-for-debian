@@ -1,0 +1,134 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+# Translators:
+# Caner Başaran <basaran.caner@gmail.com>, 2017
+# anticapitalista <anticapitalista@riseup.net>, 2017
+# e0360fc3c0afcd70e5aed1cfc885bac6, 2022
+# mahmut özcan <mahmutozcan@protonmail.com>, 2022
+# Mehmet Akif 9oglu, 2022
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-03-04 14:51-0500\n"
+"PO-Revision-Date: 2016-11-29 14:08+0000\n"
+"Last-Translator: Mehmet Akif 9oglu, 2022\n"
+"Language-Team: Turkish (https://app.transifex.com/anticapitalista/teams/10162/tr/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: tr\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#. The desktop entry name will be displayed within the menu.
+msgid "Nvidia driver installer"
+msgstr "Nvidia sürücü yükleme programı"
+
+#. The desktop entry name will be displayed within the menu.
+msgid "Deb Installer"
+msgstr "Deb Yükleyici"
+
+#. The desktop entry name will be displayed within the menu.
+msgid "Format USB"
+msgstr "USB Biçimlendirme"
+
+#. The desktop entry name will be displayed within the menu.
+msgid "Job Scheduler"
+msgstr "İş Çizelgeleyici"
+
+#. The desktop entry name will be displayed within the menu.
+#. The desktop entry name will be displayed within the menu.
+msgid "MX Snapshot"
+msgstr "MX Sistem Anlık Görüntüsü"
+
+#. The desktop entry name will be displayed within the menu.
+msgid "MX Boot Options"
+msgstr "MX Açılış Seçenekleri"
+
+#. The desktop entry name will be displayed within the menu.
+msgid "MX Boot Repair"
+msgstr "MX Önyükleme Onarımı"
+
+#. The desktop entry name will be displayed within the menu.
+msgid "MX Cleanup"
+msgstr "MX Temizleyici"
+
+#. The desktop entry name will be displayed within the menu.
+msgid "MX Codecs Installer"
+msgstr " Çözücü Yükleyici"
+
+#. The desktop entry name will be displayed within the menu.
+msgid "MX Date & Time"
+msgstr "MX Tarih & Saat"
+
+#. The desktop entry name will be displayed within the menu.
+msgid "System Locales"
+msgstr "Sistem Yerelleri"
+
+#. The desktop entry name will be displayed within the menu.
+msgid "xfce4-notifyd-start"
+msgstr "xfce4-notifyd-start"
+
+#. The desktop entry name will be displayed within the menu.
+msgid "MX Live USB Maker"
+msgstr "MX Live USB Oluşturucu"
+
+#. The desktop entry name will be displayed within the menu.
+msgid "MX Network Assistant"
+msgstr "MX Ağ Yardımcısı"
+
+#. The desktop entry name will be displayed within the menu.
+msgid "MX Package Installer"
+msgstr "MX Paket Yükleyici"
+
+#. The desktop entry name will be displayed within the menu.
+msgid "MX RemasterCC"
+msgstr "MX RemasterCC"
+
+#. The desktop entry name will be displayed within the menu.
+msgid "MX Repo Manager"
+msgstr "MX Depo Yöneticisi"
+
+#. The desktop entry name will be displayed within the menu.
+msgid "MX Samba Config"
+msgstr "MX Samba Yapılandırması"
+
+#. The desktop entry name will be displayed within the menu.
+msgid "MX Tweak"
+msgstr "MX İnce ayar"
+
+#. The desktop entry name will be displayed within the menu.
+msgid "Brightness Systray"
+msgstr "Parlaklık Systray"
+
+#. The desktop entry name will be displayed within the menu.
+msgid "mx-tweak brightness systray"
+msgstr "mx-tweak parlaklık sistem tepsisi"
+
+#. The desktop entry name will be displayed within the menu.
+msgid "compton"
+msgstr "compton"
+
+#. The desktop entry name will be displayed within the menu.
+msgid "restore-software-brightness"
+msgstr "yazılım parlaklığını geri yükle"
+
+#. The desktop entry name will be displayed within the menu.
+msgid "MX User Manager"
+msgstr "MX Kullanıcı Yöneticisi"
+
+#. The desktop entry name will be displayed within the menu.
+msgid "Quick System Info"
+msgstr "Hızlı Sistem Bilgisi"
+
+#. The desktop entry name will be displayed within the menu.
+msgid "System Keyboard"
+msgstr "Sistem Klavyesi"
+
+msgid "Disk Manager"
+msgstr "Disk Yöneticisi"

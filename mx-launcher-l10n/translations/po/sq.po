@@ -1,0 +1,106 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+# Translators:
+# Besnik Bleta <besnik@programeshqip.org>, 2023
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-03-04 14:51-0500\n"
+"PO-Revision-Date: 2016-11-29 14:08+0000\n"
+"Last-Translator: Besnik Bleta <besnik@programeshqip.org>, 2023\n"
+"Language-Team: Albanian (https://app.transifex.com/anticapitalista/teams/10162/sq/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: sq\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Nvidia driver installer"
+msgstr "Instalues përudhësish Nvidia"
+
+msgid "Deb Installer"
+msgstr "Instalues Paketash Deb"
+
+msgid "Format USB"
+msgstr "Formatoni USB"
+
+msgid "Job Scheduler"
+msgstr "Planifikues Aktesh"
+
+msgid "MX Snapshot"
+msgstr "Fotografim MX Sistemi"
+
+msgid "MX Boot Options"
+msgstr "Mundësi MX Nisjeje"
+
+msgid "MX Boot Repair"
+msgstr "Riparim Nisjeje MX"
+
+msgid "MX Cleanup"
+msgstr "Pastrim MX"
+
+msgid "MX Codecs Installer"
+msgstr "Instalues MX Kodekësh"
+
+msgid "MX Date & Time"
+msgstr "Datë & Kohë MX"
+
+msgid "System Locales"
+msgstr "Vendore Sistemi"
+
+msgid "xfce4-notifyd-start"
+msgstr "xfce4-notifyd-start"
+
+msgid "MX Live USB Maker"
+msgstr "Krijues USB-je për MX Live"
+
+msgid "MX Network Assistant"
+msgstr "Asistent Rrjeti MX"
+
+msgid "MX Package Installer"
+msgstr "Instalues Paketash MX"
+
+msgid "MX RemasterCC"
+msgstr "MX RemasterCC"
+
+msgid "MX Repo Manager"
+msgstr "Përgjegjës MX Deposh"
+
+msgid "MX Samba Config"
+msgstr "Formësim MX i Samba-s"
+
+msgid "MX Tweak"
+msgstr "Përimtim MX-i"
+
+msgid "Brightness Systray"
+msgstr ""
+
+msgid "mx-tweak brightness systray"
+msgstr ""
+
+msgid "compton"
+msgstr ""
+
+msgid "restore-software-brightness"
+msgstr ""
+
+msgid "MX User Manager"
+msgstr "Përgjegjës MX Përdoruesish"
+
+msgid "Quick System Info"
+msgstr "Hollësi Sistemi Shpejt e Shpejt"
+
+msgid "System Keyboard"
+msgstr "Tastierë Sistemi"
+
+msgid "Disk Manager"
+msgstr "Përgjegjës Disqesh"
+
+msgid "Adblock"
+msgstr "Adblock"

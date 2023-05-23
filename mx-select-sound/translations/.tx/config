@@ -1,0 +1,8 @@
+[main]
+host = https://www.transifex.com
+
+[o:anticapitalista:p:antix-development:r:mx-select-sound]
+file_filter = ./mx-select-sound_<lang>.ts
+source_file = mx-select-sound_en.ts
+source_lang = en
+type = ts

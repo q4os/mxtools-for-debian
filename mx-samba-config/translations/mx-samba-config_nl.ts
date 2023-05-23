@@ -11,7 +11,7 @@
     <message>
         <location filename="../editshare.ui" line="20"/>
         <source>&amp;Name</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Name</translation>
     </message>
     <message>
         <location filename="../editshare.ui" line="30"/>
@@ -21,7 +21,7 @@
     <message>
         <location filename="../editshare.ui" line="37"/>
         <source>&amp;Path</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Path</translation>
     </message>
     <message>
         <location filename="../editshare.ui" line="51"/>
@@ -36,22 +36,22 @@
     <message>
         <location filename="../editshare.ui" line="64"/>
         <source>&amp;Comment</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Comment</translation>
     </message>
     <message>
         <location filename="../editshare.ui" line="77"/>
         <source>&amp;Guest OK</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Guest OK</translation>
     </message>
     <message>
         <location filename="../editshare.ui" line="111"/>
         <source>Access rights for valid users</source>
-        <translation type="unfinished"></translation>
+        <translation>Toegangsrechten voor geldige gebruikers</translation>
     </message>
     <message>
         <location filename="../editshare.cpp" line="46"/>
         <source>Select directory to share</source>
-        <translation type="unfinished"></translation>
+        <translation>Selecteer de map die u wilt delen</translation>
     </message>
 </context>
 <context>
@@ -59,7 +59,7 @@
     <message>
         <location filename="../mainwindow.ui" line="24"/>
         <source>&amp;Shares</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Shares</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="32"/>
@@ -69,19 +69,19 @@
     <message>
         <location filename="../mainwindow.ui" line="41"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;No samba user shares found&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Geen samba gebruiker shares gevonden&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="50"/>
         <location filename="../mainwindow.ui" line="157"/>
         <source>&amp;Remove</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Remove</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="63"/>
         <location filename="../mainwindow.ui" line="164"/>
         <source>&amp;Add</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Add</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="70"/>
@@ -96,37 +96,37 @@
     <message>
         <location filename="../mainwindow.ui" line="85"/>
         <source>Path</source>
-        <translation type="unfinished"></translation>
+        <translation>Pad</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="90"/>
         <source>Comment</source>
-        <translation type="unfinished"></translation>
+        <translation>Commentaar</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="95"/>
         <source>Permissions</source>
-        <translation type="unfinished"></translation>
+        <translation>Machtigingen</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="100"/>
         <source>Guest OK</source>
-        <translation type="unfinished"></translation>
+        <translation>Gast OK</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="142"/>
         <source>&amp;Users</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Users</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="150"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;No samba users found&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Geen samba gebruikers gevonden&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="171"/>
         <source>&amp;Password</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Password</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="194"/>
@@ -220,8 +220,9 @@
         <location filename="../mainwindow.cpp" line="464"/>
         <location filename="../mainwindow.cpp" line="478"/>
         <location filename="../mainwindow.cpp" line="488"/>
-        <location filename="../mainwindow.cpp" line="520"/>
-        <location filename="../mainwindow.cpp" line="532"/>
+        <location filename="../mainwindow.cpp" line="511"/>
+        <location filename="../mainwindow.cpp" line="528"/>
+        <location filename="../mainwindow.cpp" line="540"/>
         <source>Error</source>
         <translation>Fout</translation>
     </message>
@@ -397,59 +398,37 @@
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="489"/>
-        <location filename="../mainwindow.cpp" line="533"/>
+        <location filename="../mainwindow.cpp" line="541"/>
         <source>Samba service is not running. Please start Samba before adding or editing shares</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="520"/>
+        <location filename="../mainwindow.cpp" line="511"/>
+        <location filename="../mainwindow.cpp" line="528"/>
         <source>Error: trying to process permissions: </source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
-    <name>QApplication</name>
-    <message>
-        <source>License</source>
-        <translation type="vanished">Licentie</translation>
-    </message>
-    <message>
-        <source>Changelog</source>
-        <translation type="vanished">Changelog</translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation type="vanished">Ongedaan maken</translation>
-    </message>
-    <message>
-        <source>&amp;Close</source>
-        <translation type="vanished">&amp;Sluiten</translation>
-    </message>
-    <message>
-        <source>You must run this program as normal user.</source>
-        <translation type="vanished">U moet dit programma als normale gebruiker uitvoeren.</translation>
-    </message>
-</context>
-<context>
     <name>QObject</name>
     <message>
-        <location filename="../about.cpp" line="39"/>
+        <location filename="../about.cpp" line="42"/>
         <source>License</source>
         <translation>Licentie</translation>
     </message>
     <message>
-        <location filename="../about.cpp" line="40"/>
-        <location filename="../about.cpp" line="49"/>
+        <location filename="../about.cpp" line="43"/>
+        <location filename="../about.cpp" line="52"/>
         <source>Changelog</source>
         <translation>Changelog</translation>
     </message>
     <message>
-        <location filename="../about.cpp" line="41"/>
+        <location filename="../about.cpp" line="44"/>
         <source>Cancel</source>
         <translation>Ongedaan maken</translation>
     </message>
     <message>
-        <location filename="../about.cpp" line="62"/>
+        <location filename="../about.cpp" line="64"/>
         <source>&amp;Close</source>
         <translation>&amp;Sluiten</translation>
     </message>

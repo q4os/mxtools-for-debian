@@ -248,7 +248,7 @@ void Settings::setVariables()
 
     live = isLive();
     users = listUsers();
-    i686 = isi686();
+    x86 = isi386();
 
     if ( (QFileInfo::exists("/etc/q4os_version")) || (! QFileInfo::exists("/etc/lsb-release")) ) {
       QString debian_version1 = shell->getCmdOut(QStringLiteral("cat /etc/debian_version | cut -f1 -d'.'"), true);
@@ -286,14 +286,14 @@ void Settings::setVariables()
     } else {
         distro_version = shell->getCmdOut("lsb_release -r | cut -f2");
     }
-    full_distro_name = project_name + "-" + distro_version + "_" + QString(i686 ? "386" : "x64");
+    full_distro_name = project_name + "-" + distro_version + "_" + QString(x86 ? "386" : "x64");
     release_date = QDate::currentDate().toString(QStringLiteral("MMMM dd, yyyy"));
     if (QFileInfo::exists("/etc/lsb-release"))
         codename = shell->getCmdOut(QStringLiteral("grep -oP '(?<=DISTRIB_CODENAME=).*' /etc/lsb-release"));
     else
         codename = shell->getCmdOut("lsb_release -c | cut -f2");
     codename.replace(QLatin1String("\""), QLatin1String(""));
-    boot_options = filterOptions(readKernelOpts());
+    boot_options = readKernelOpts();
 }
 
 // Create the output filename
@@ -332,21 +332,14 @@ quint64 Settings::getLiveRootSpace() const
     const quint8 default_factor = 30;
     quint8 c_factor = default_factor;
     // gzip, xz, or lz4
-    if (linuxfs_compression_type == QLatin1String("1"))
-        c_factor = compression_factor.value(QStringLiteral("gzip"));
-    else if (linuxfs_compression_type == QLatin1String("2"))
-        c_factor = compression_factor.value(QStringLiteral("lzo")); // lzo, not used by antiX
-    else if (linuxfs_compression_type == QLatin1String("3"))
-        c_factor = compression_factor.value(QStringLiteral("lzma")); // lzma, not used by antiX
-    else if (linuxfs_compression_type == QLatin1String("4"))
-        c_factor = compression_factor.value(QStringLiteral("xz"));
-    else if (linuxfs_compression_type == QLatin1String("5"))
-        c_factor = compression_factor.value(QStringLiteral("lz4"));
-    else if (linuxfs_compression_type == QLatin1String("6"))
-        c_factor = compression_factor.value(QStringLiteral("zstd"));
-    else
-        c_factor = default_factor; // anything else or linuxfs not reachable (toram), should be pretty conservative
-
+    QMap<QString, QString> compression_types
+        = {{"1", "gzip"}, {"2", "lzo"}, {"3", "lzma"}, {"4", "xz"}, {"5", "lz4"}, {"6", "zstd"}};
+    if (compression_types.contains(linuxfs_compression_type)) {
+        c_factor = compression_factor.value(compression_types.value(linuxfs_compression_type));
+    } else {
+        c_factor = default_factor;
+        qWarning() << "Unknown compression type:" << linuxfs_compression_type;
+    }
     quint64 rootfs_file_size = 0;
     quint64 linuxfs_file_size
         = shell->getCmdOut(QStringLiteral("df -k /live/linux --output=used --total |tail -n1")).toULongLong() * 100
@@ -386,10 +379,10 @@ QString Settings::getUsedSpace()
 }
 
 // Check if running from a 32bit environment
-bool Settings::isi686() const { return (shell->getCmdOut(QStringLiteral("uname -m"), true) == QLatin1String("i686")); }
+bool Settings::isi386() { return (QSysInfo::currentCpuArchitecture() == QLatin1String("i386")); }
 
 // Check if running from a live envoronment
-bool Settings::isLive() const { return (shell->run(QStringLiteral("mountpoint -q /live/aufs"), true)); }
+bool Settings::isLive() { return (QProcess::execute("mountpoint", {"-q", "/live/aufs"}) == 0); }
 
 // checks if the directory is on a Linux partition
 bool Settings::isOnSupportedPart(const QString &dir) const
@@ -676,30 +669,22 @@ void Settings::processArgs(const QCommandLineParser &arg_parser)
         exit(EXIT_FAILURE);
     }
     reset_accounts = arg_parser.isSet(QStringLiteral("reset"));
-    if (reset_accounts) {
+    if (reset_accounts)
         excludeAll();
-    }
-    if (arg_parser.isSet(QStringLiteral("month"))) {
+    if (arg_parser.isSet(QStringLiteral("month")))
         reset_accounts = true;
-    }
-    if (arg_parser.isSet(QStringLiteral("checksums"))) {
-        make_sha512sum = true;
-        make_md5sum = true;
-    }
+    if (arg_parser.isSet(QStringLiteral("checksums")))
+        make_sha512sum = make_md5sum = true;
     if (arg_parser.isSet(QStringLiteral("month"))) {
         make_sha512sum = true;
         make_md5sum = false;
     }
-    if (arg_parser.isSet(QStringLiteral("no-checksums"))) {
-        make_sha512sum = false;
-        make_md5sum = false;
-    }
-    if (!arg_parser.value(QStringLiteral("compression")).isEmpty()) {
+    if (arg_parser.isSet(QStringLiteral("no-checksums")))
+        make_sha512sum = make_md5sum = false;
+    if (!arg_parser.value(QStringLiteral("compression")).isEmpty())
         compression = arg_parser.value(QStringLiteral("compression"));
-    }
-    if (!arg_parser.value(QStringLiteral("compression-level")).isEmpty()) {
+    if (!arg_parser.value(QStringLiteral("compression-level")).isEmpty())
         mksq_opt = arg_parser.value(QStringLiteral("compression-level"));
-    }
     selectKernel();
 }
 
@@ -715,32 +700,17 @@ void Settings::processExclArgs(const QCommandLineParser &arg_parser)
     }
 }
 
-// Read kernel line and options from /proc/cmdline
+// Use script to return useful kernel options
 QString Settings::readKernelOpts() const
 {
-    QFile file(QStringLiteral("/proc/cmdline"));
-    if (!file.open(QIODevice::ReadOnly)) {
-        qDebug() << "Could not open file:" << file.fileName();
-        return QString();
-    }
-    QString proc_cmdline = file.readAll().trimmed();
-    QString conf_cmdline
-        = shell->getCmdOut("sed -nr 's/^CONFIG_CMDLINE=\"(.*)\"$/\\1/p' /boot/config-$(uname -r) 2>/dev/null");
-    QString krnl_cmdline = proc_cmdline.replace(conf_cmdline, "").trimmed();
-    krnl_cmdline.remove(QRegularExpression("^BOOT_IMAGE=\\S* ?"));
-    return krnl_cmdline.trimmed();
-}
 
-QString Settings::filterOptions(QString options)
-{
-    options.remove(QRegularExpression(R"(\b(initrd|init|root|resume|resume_offset|cryptsetup)=\S*\s?)"));
-    options.remove(QRegularExpression(R"(\bro\s?\b)"));
-    return options.trimmed();
+    return shell->getCmdOut((QString("/usr/share/%1/scripts/snapshot-bootparameter.sh | tr '\n' ' '")
+                                 .arg(QCoreApplication::applicationName())));
 }
 
 void Settings::setMonthlySnapshot(const QCommandLineParser &arg_parser)
 {
-    QString name = QStringLiteral("Debian_") + (i686 ? QStringLiteral("386") : QStringLiteral("x64"));
+    QString name = "Debian_" + QString(x86 ? "386" : "x64");
     if (arg_parser.value("file").isEmpty()) {
         auto month = QDate::currentDate().toString("MMMM");
         auto suffix = name.section("_", 1, 1);

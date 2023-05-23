@@ -10,7 +10,7 @@ Architecture: any
 Depends: cli-shell-utils,
          coreutils,
          parted,
-         menu,
+         mx-launcher-l10n,
          mx-viewer | antix-viewer| xdg-utils,
          ${misc:Depends},
          ${shlibs:Depends}

@@ -293,7 +293,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="524"/>
         <source>Could not create a temporary folder</source>
-        <translation type="unfinished"></translation>
+        <translation>לא ניתן ליצור תיקיית זמניים</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="533"/>
@@ -526,12 +526,12 @@ OK to go ahead and install them?</source>
         <translation>&amp;סגירה</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="77"/>
+        <location filename="../main.cpp" line="81"/>
         <source>Error</source>
         <translation>שגיאה</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="78"/>
+        <location filename="../main.cpp" line="82"/>
         <source>You seem to be logged in as root, please log out and log in as normal user to use this program.</source>
         <translation>כנראה שנכנסת למערכת בתור משתמש על (root), נא לצאת ולהיכנס כמשתמש רגיל כדי להשתמש בתוכנית הזאת.</translation>
     </message>

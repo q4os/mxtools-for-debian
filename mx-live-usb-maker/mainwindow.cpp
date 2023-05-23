@@ -81,8 +81,14 @@ bool MainWindow::checkDestSize()
 
 bool MainWindow::isRunningLive()
 {
-    const QString test = cmd.getCmdOut(QStringLiteral("df -T / |tail -n1 |awk '{print $2}'"), true);
-    return (test == QLatin1String("aufs") || test == QLatin1String("overlay"));
+    QProcess process;
+    process.start("df", {"-T", "/"});
+    process.waitForFinished();
+    QString output = process.readAllStandardOutput();
+    QRegularExpression re(R"(.*\n\S+\s+(\S+)\s+)");
+    QRegularExpressionMatch match = re.match(output);
+    QString fileSystemType = match.captured(1);
+    return (fileSystemType == "aufs" || fileSystemType == "overlay");
 }
 
 bool MainWindow::isToRam() { return QFileInfo::exists(QStringLiteral("/live/config/did-toram")); }
@@ -218,45 +224,49 @@ void MainWindow::setGeneralConnections()
 QString MainWindow::buildOptionList()
 {
     QString options(QStringLiteral("-N "));
-    if (ui->checkEncrypt->isChecked())
-        options += QLatin1String("-E ");
-    if (ui->checkGpt->isChecked())
-        options += QLatin1String("-g ");
-    if (ui->checkKeep->isChecked())
-        options += QLatin1String("-k ");
-    if (ui->checkPretend->isChecked()) {
-        options += QLatin1String("-p ");
-        if (ui->sliderVerbosity->value() == 0) // add Verbosity of not selected, workaround for LUM bug
-            ui->sliderVerbosity->setSliderPosition(1);
+
+    // map the checkboxes to the corresponding options
+    QHash<QCheckBox *, QString> checkboxOptions = {
+        {ui->checkEncrypt, "-E"},
+        {ui->checkGpt, "-g"},
+        {ui->checkKeep, "-k"},
+        {ui->checkPretend, "-p"},
+        {ui->checkSaveBoot, "-S"},
+        {ui->checkUpdate, "-u"},
+        {ui->checkSetPmbrBoot, "--gpt-pmbr"},
+        {ui->checkForceUsb, "--force=usb"},
+        {ui->checkForceAutomount, "--force=automount"},
+        {ui->checkForceMakefs, "--force=makefs"},
+        {ui->checkForceNofuse, "--force=nofuse"},
+    };
+
+    // add options for the checked checkboxes
+    for (auto it = checkboxOptions.begin(); it != checkboxOptions.end(); ++it) {
+        if (it.key()->isChecked())
+            options += it.value() + " ";
     }
-    if (ui->checkSaveBoot->isChecked())
-        options += QLatin1String("-S ");
-    if (ui->checkUpdate->isChecked())
-        options += QLatin1String("-u ");
-    if (ui->checkSetPmbrBoot->isChecked())
-        options += QLatin1String("--gpt-pmbr ");
+
+    // add additional options
     if (ui->spinBoxEsp->value() != 50)
         options += "--esp-size=" + ui->spinBoxEsp->cleanText() + " ";
     if (ui->spinBoxSize->value() < ui->spinBoxSize->maximum())
         options += "--size=" + ui->spinBoxSize->cleanText() + " ";
     if (!ui->textLabel->text().isEmpty())
         options += " --label=" + ui->textLabel->text() + " ";
-    if (ui->checkForceUsb->isChecked())
-        options += QLatin1String("--force=usb ");
-    if (ui->checkForceAutomount->isChecked())
-        options += QLatin1String("--force=automount ");
-    if (ui->checkForceMakefs->isChecked())
-        options += QLatin1String("--force=makefs ");
-    if (ui->checkForceNofuse->isChecked())
-        options += QLatin1String("--force=nofuse ");
     if (ui->checkDataFirst->isChecked())
         options
             += "--data-first=" + ui->spinBoxDataSize->cleanText() + "," + ui->comboBoxDataFormat->currentText() + " ";
 
-    if (ui->sliderVerbosity->value() == 1)
+    // add the verbosity option
+    switch (ui->sliderVerbosity->value()) {
+    case 1:
         options += QLatin1String("-V ");
-    else if (ui->sliderVerbosity->value() == 2)
+        break;
+    case 2:
         options += QLatin1String("-VV ");
+        break;
+    }
+
     qDebug() << "Options: " << options;
     return options;
 }
@@ -292,8 +302,6 @@ QStringList MainWindow::removeUnsuitable(const QStringList &devices)
     return list;
 }
 
-void MainWindow::cmdStart() { }
-
 void MainWindow::cmdDone()
 {
     timer.stop();
@@ -316,7 +324,6 @@ void MainWindow::setConnections()
 {
     timer.start(1s);
     connect(&cmd, &QProcess::readyRead, this, &MainWindow::updateOutput);
-    connect(&cmd, &QProcess::started, this, &MainWindow::cmdStart);
     connect(&timer, &QTimer::timeout, this, &MainWindow::updateBar);
     connect(&cmd, QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished), this, &MainWindow::cmdDone);
 }
@@ -346,7 +353,8 @@ void MainWindow::updateOutput()
 {
     // remove escape sequences that are not handled by code
     QString out = cmd.readAll();
-    out.remove(QRegularExpression(u8R"(\[0m|\]0;|\|\|\[1000D|\[74C||\[\?25l|\[\?25h|\[0;36m|\[1;37m)"));
+    const QRegularExpression re(u8R"(\[0m|\]0;|\|\|\[1000D|\[74C||\[\?25l|\[\?25h|\[0;36m|\[1;37m)");
+    out.remove(re);
     ui->outputBox->moveCursor(QTextCursor::End);
     if (out.contains(QLatin1String("\r"))) {
         ui->outputBox->moveCursor(QTextCursor::Up, QTextCursor::KeepAnchor);
@@ -478,12 +486,9 @@ void MainWindow::textLabel_textChanged(QString arg1)
 
 void MainWindow::checkUpdate_clicked(bool checked)
 {
-    if (checked) {
-        ui->checkSaveBoot->setEnabled(true);
-    } else {
+    ui->checkSaveBoot->setEnabled(checked);
+    if (!checked)
         ui->checkSaveBoot->setChecked(false);
-        ui->checkSaveBoot->setEnabled(false);
-    }
 }
 
 void MainWindow::checkCloneMode_clicked(bool checked)

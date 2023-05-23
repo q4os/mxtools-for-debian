@@ -1,0 +1,59 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the cleanup-notifier-mx package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+# Translators:
+# anticapitalista <anticapitalista@riseup.net>, 2023
+# fehlix, 2023
+# 
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: cleanup-notifier-mx\n"
+"Report-Msgid-Bugs-To: https://forum.mxlinux.org/viewforum.php?f=96\n"
+"POT-Creation-Date: 2023-04-05 01:28+0200\n"
+"PO-Revision-Date: 2023-04-04 23:53+0000\n"
+"Last-Translator: fehlix, 2023\n"
+"Language-Team: Greek (https://app.transifex.com/anticapitalista/teams/10162/el/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: el\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. TRANSLATORS:
+#. A message is displayed to warn the user that there is not enough space on
+#. the boot partition.
+msgid "Warning"
+msgstr "Προειδοποίηση "
+
+#. TRANSLATORS:
+#. A message is displayed to warn the user that there is not enough space on
+#. the boot partition.
+#, python-format
+msgid "Not enough space on %s partition"
+msgstr "Δεν υπάρχει αρκετός χώρος στο διαμέρισμα %s"
+
+#. TRANSLATORS:
+#. The user can click the "Dismiss" button so that the warning will not be
+#. displayed in the future.
+msgid "Dismiss"
+msgstr "Απόρριψη"
+
+#. TRANSLATORS:
+#. The user can click the "Clean Up" button to start the cleanup program.
+msgid "Clean Up"
+msgstr "Καθαρισμός"
+
+#. TRANSLATORS:
+#. The autostart desktop name will be shown within 'Session and Startup'
+#. (Autostart).
+msgid "Cleanup Notifier"
+msgstr ""
+
+#. TRANSLATORS:
+#. The autostart desktop entry comment will be shown within 'Session and
+#. Startup' (Autostart).
+msgid "Check available space at /boot"
+msgstr ""

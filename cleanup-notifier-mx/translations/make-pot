@@ -1,0 +1,33 @@
+#!/bin/bash
+
+# get packagename from changelog
+PKGNAME=$(dpkg-parsechangelog  -l ../debian/changelog  -SSource)
+
+POT=${PKGNAME}.pot
+
+[ -f $POT ] && mv $POT $POT~
+touch $POT
+
+(
+    cd .. 
+    meson setup mesonbuild
+    cd mesonbuild || exit 
+    TARGET=${PKGNAME}-pot
+    meson compile ${TARGET}
+)
+
+sed -i 's/charset=CHARSET/charset=UTF-8/' ${POT}
+
+if [ -f $POT~ ]; then
+    POT_CHANGE=$(diff -I 'POT-Creation-Date:' $POT~ $POT | wc -l)
+    if ((POT_CHANGE==0)); then
+       echo "No change in POT-file: $POT"
+       mv $POT~ $POT
+    else
+       echo "New POT-file generated:  $POT"
+    fi
+else
+   echo "New POT-file generated:  $POT"
+fi
+
+exit

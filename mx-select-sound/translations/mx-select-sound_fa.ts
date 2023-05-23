@@ -5,12 +5,11 @@
     <name>MainWindow</name>
     <message>
         <location filename="../mainwindow.ui" line="14"/>
-        <location filename="../mainwindow.cpp" line="46"/>
-        <location filename="../mainwindow.cpp" line="76"/>
-        <location filename="../mainwindow.cpp" line="133"/>
-        <location filename="../mainwindow.cpp" line="146"/>
-        <location filename="../mainwindow.cpp" line="180"/>
-        <location filename="../mainwindow.cpp" line="188"/>
+        <location filename="../mainwindow.cpp" line="47"/>
+        <location filename="../mainwindow.cpp" line="75"/>
+        <location filename="../mainwindow.cpp" line="129"/>
+        <location filename="../mainwindow.cpp" line="148"/>
+        <location filename="../mainwindow.cpp" line="156"/>
         <source>MX Select Sound</source>
         <translation type="unfinished"></translation>
     </message>
@@ -22,7 +21,7 @@
     <message>
         <location filename="../mainwindow.ui" line="64"/>
         <source>Display help </source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">نمایش راهنما</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="67"/>
@@ -32,27 +31,27 @@
     <message>
         <location filename="../mainwindow.ui" line="74"/>
         <source>Alt+H</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Alt+H</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="103"/>
         <source>About this application</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">درباره این نرم افزار</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="106"/>
         <source>About...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">درباره...</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="113"/>
         <source>Alt+B</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Alt+B</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="145"/>
         <source>Quit application</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">خروج از برنامه</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="148"/>
@@ -62,12 +61,12 @@
     <message>
         <location filename="../mainwindow.ui" line="155"/>
         <source>Alt+N</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Alt+N</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="196"/>
         <source>Apply</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">اعمال تغییرات</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="218"/>
@@ -85,71 +84,144 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="77"/>
+        <location filename="../mainwindow.cpp" line="75"/>
         <source>No sound cards/devices were found.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="89"/>
-        <location filename="../mainwindow.cpp" line="100"/>
+        <location filename="../mainwindow.cpp" line="87"/>
+        <location filename="../mainwindow.cpp" line="98"/>
         <source>none</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">هیچکدام</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="132"/>
+        <location filename="../mainwindow.cpp" line="128"/>
         <source>About MX Select Sound</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="133"/>
+        <location filename="../mainwindow.cpp" line="129"/>
         <source>Version: </source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">نسخه:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="134"/>
+        <location filename="../mainwindow.cpp" line="130"/>
         <source>Program for selecting the default sound card in MX Linux</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="136"/>
+        <location filename="../mainwindow.cpp" line="133"/>
         <source>Copyright (c) MX Linux</source>
+        <translation type="unfinished">Copyright (c) MX Linux</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="134"/>
+        <source>%1 License</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="137"/>
-        <location filename="../mainwindow.cpp" line="146"/>
-        <source>License</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="138"/>
-        <source>Changelog</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="139"/>
-        <source>Cancel</source>
+        <location filename="../mainwindow.cpp" line="148"/>
+        <source>%1 Help</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="156"/>
-        <source>&amp;Close</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="189"/>
         <source>Could not play test sound.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
+    <name>QObject</name>
+    <message>
+        <location filename="../about.cpp" line="43"/>
+        <source>License</source>
+        <translation type="unfinished">لایسنس</translation>
+    </message>
+    <message>
+        <location filename="../about.cpp" line="44"/>
+        <location filename="../about.cpp" line="54"/>
+        <source>Changelog</source>
+        <translation type="unfinished">لیست موارد بهبود یافته</translation>
+    </message>
+    <message>
+        <location filename="../about.cpp" line="45"/>
+        <source>Cancel</source>
+        <translation type="unfinished">لغو</translation>
+    </message>
+    <message>
+        <location filename="../about.cpp" line="67"/>
+        <source>&amp;Close</source>
+        <translation type="unfinished">بستن</translation>
+    </message>
+</context>
+<context>
     <name>mxselectsound</name>
+    <message>
+        <source>Display help </source>
+        <translation type="vanished">نمایش راهنما</translation>
+    </message>
     <message>
         <source>Help</source>
         <translation type="vanished">راهنما </translation>
     </message>
     <message>
+        <source>Alt+H</source>
+        <translation type="vanished">Alt+H</translation>
+    </message>
+    <message>
+        <source>About this application</source>
+        <translation type="vanished">درباره این نرم افزار</translation>
+    </message>
+    <message>
+        <source>About...</source>
+        <translation type="vanished">درباره...</translation>
+    </message>
+    <message>
+        <source>Alt+B</source>
+        <translation type="vanished">Alt+B</translation>
+    </message>
+    <message>
+        <source>Quit application</source>
+        <translation type="vanished">خروج از برنامه</translation>
+    </message>
+    <message>
         <source>Close</source>
+        <translation type="vanished">بستن</translation>
+    </message>
+    <message>
+        <source>Alt+N</source>
+        <translation type="vanished">Alt+N</translation>
+    </message>
+    <message>
+        <source>Apply</source>
+        <translation type="vanished">اعمال تغییرات</translation>
+    </message>
+    <message>
+        <source>none</source>
+        <translation type="vanished">هیچکدام</translation>
+    </message>
+    <message>
+        <source>Version: </source>
+        <translation type="vanished">نسخه:</translation>
+    </message>
+    <message>
+        <source>Copyright (c) MX Linux</source>
+        <translation type="vanished">Copyright (c) MX Linux</translation>
+    </message>
+    <message>
+        <source>License</source>
+        <translation type="vanished">لایسنس</translation>
+    </message>
+    <message>
+        <source>Changelog</source>
+        <translation type="vanished">لیست موارد بهبود یافته</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="vanished">لغو</translation>
+    </message>
+    <message>
+        <source>&amp;Close</source>
         <translation type="vanished">بستن</translation>
     </message>
 </context>

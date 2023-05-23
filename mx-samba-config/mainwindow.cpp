@@ -505,16 +505,24 @@ void MainWindow::pushEditShare_clicked()
     for (const QString &item : qAsConst(permission_list)) {
         if (item.isEmpty())
             continue;
-        QString user = item.section(QStringLiteral(":"), 0, 0);
-        if (user.contains(QLatin1String("\\")))
-            user = user.section(QStringLiteral("\\"), 1, 1);
-        QString permission = item.section(QStringLiteral(":"), 1, 1);
+
+        const QStringList parts = item.split(':');
+        if (parts.size() != 2) {
+            QMessageBox::critical(this, tr("Error"), tr("Error: trying to process permissions: ") + item);
+            return;
+        }
+
+        QString user = parts.at(0);
+        if (user.contains('\\'))
+            user = user.section('\\', 1);
+
+        const QString permission = parts.at(1).toLower();
         QRadioButton *button = nullptr;
-        if (permission.toLower() == QLatin1String("d")) {
+        if (permission == QLatin1String("d")) {
             button = editshare->findChild<QRadioButton *>("*Deny*" + user);
-        } else if (permission.toLower() == QLatin1String("r")) {
+        } else if (permission == QLatin1String("r")) {
             button = editshare->findChild<QRadioButton *>("*ReadOnly*" + user);
-        } else if (permission.toLower() == QLatin1String("f")) {
+        } else if (permission == QLatin1String("f")) {
             button = editshare->findChild<QRadioButton *>("*FullAccess*" + user);
         } else {
             QMessageBox::critical(this, tr("Error"), tr("Error: trying to process permissions: ") + item);
