@@ -254,7 +254,7 @@ void Settings::setVariables()
       QString debian_version1 = shell->getCmdOut(QStringLiteral("cat /etc/debian_version | cut -f1 -d'.'"), true);
       project_name = "Debian";
       distro_version = debian_version1;
-      full_distro_name = project_name + "-" + distro_version + "_" + QString(i686 ? QStringLiteral("386") : QStringLiteral("x64"));
+      full_distro_name = project_name + "-" + distro_version + "_" + QString(x86 ? QStringLiteral("386") : QStringLiteral("x64"));
       release_date = QDate::currentDate().toString(QStringLiteral("MMMM dd, yyyy"));
       if (debian_version1 == "10") {
         codename = "buster";
