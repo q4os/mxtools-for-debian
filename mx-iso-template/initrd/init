@@ -1347,7 +1347,7 @@ do_welcome() {
     esac
 
     pretty_name="$pretty_name$arch"
-    vmsg 2  "$_Welcome_to_X_" "$(pq $pretty_name)!"
+    vmsg 2  "$_Welcome_to_X_" "$(pq Debian)"
 
     echo "$pretty_name" > /live/config/pretty-name
 
@@ -1402,14 +1402,7 @@ show_bootcodes() {
 
     [ -n "$unknown"  -a -n "$CHECK_BOOTCODES" ] || return
 
-    vmsg 4
-    vmsg 4 "$warn_co%s:"  "$_Possibly_unknown_or_misspelled_boot_codes_"
-    vmsg 4 "(%s)"  "$_dont_take_this_too_seriously_"
-    local code
-    for code in $unknown; do
-        vmsg 4 "%s" "$hi_co    $code"
-    done
-    vmsg 4
+    #debian fix: don't print a superfluous and confusing message about possibly misspelled boot codes
 }
 
 #------------------------------------------------------------------------------
@@ -7070,7 +7063,7 @@ prepare_switch_root() {
 
     mkdir -p -m 777 $new_root/run/lock
 
-    #debian fix - don't link resolv.conf as systemd do that
+    #debian fix: don't link resolv.conf as systemd do that
     # rm -f $new_root/etc/resolv.conf
     # ln -s ../run/resolvconf/resolv.conf $new_root/etc/resolv.conf
 
@@ -7087,9 +7080,15 @@ prepare_switch_root() {
     done
 
     #linking for calamares installer
-    vmsg 6 '[qdbg2] $$new_live: %s' $new_live
-    mkdir -p $new_live/run/live/medium/live/
-    ln -s /live/bootdev/antiX/linuxfs $new_live/run/live/medium/live/filesystem.squashfs
+    #todo ?: move to the live-init script ?
+    LINUXFS1_LIVEFL="/live/bootdev/antiX/linuxfs"
+    if [ -f "$LINUXFS1_LIVEFL" ] ; then
+      vmsg 6 '[qdbg2] $$new_live: %s' $new_live
+      mkdir -p $new_live/run/live/medium/live/
+      ln -s $LINUXFS1_LIVEFL $new_live/run/live/medium/live/filesystem.squashfs
+    else
+      vmsg 6 '[qdbg2] Error. Not found: %s' $LINUXFS1_LIVEFL
+    fi
 
     breakpoint 0 before move
 

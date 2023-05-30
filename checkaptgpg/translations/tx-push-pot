@@ -1,0 +1,57 @@
+#!/bin/bash
+
+#  fehlix test project do not use
+#: ${ORGANIZATION:=fehlix}
+#: ${PROJECT:=testproject-do-not-use}
+
+PACKAGE="mx-checkaptgpg"
+RESOURCE=$PACKAGE
+POTFILE=${RESOURCE}.pot
+PODIR=po
+MINIMUM_PERC=0
+
+
+# need 'latest' transifex client
+[ -z "$TXBIN" ] && [ -f ./tx ] && [ -x ./tx ] && TXBIN=./tx 
+: ${TXBIN:=$(which tx)}
+[ ! -x "$TXBIN" ] && echo "Need 'tx' transifex client! exit" && exit 1
+
+# prepare transifex
+[ -d .tx        ] || mkdir -p .tx
+[ -f .tx/config ] && rm  .tx/config
+
+# set transifex organization and project name - if not set in environment already
+: ${ORGANIZATION:=anticapitalista}
+: ${PROJECT:=antix-development}
+
+
+cat<<EOF > .tx/config
+[main]
+host = https://app.transifex.com
+
+[o:${ORGANIZATION}:p:${PROJECT}:r:${RESOURCE}]
+
+file_filter   = ${PODIR}/<lang>.po
+minimum_perc  = ${MINIMUM_PERC}
+resource_name = ${RESOURCE}
+source_file   = ${POTFILE}
+source_lang   = en
+type          = PO
+
+EOF
+
+echo "#---- .tx/config -----"
+cat .tx/config
+
+POTFILE=${RESOURCE}.pot
+RESOUCE_ID="${PROJECT}.${RESOURCE}"
+echo "" 
+echo "To push pot-file ${POTFILE} to transifex" 
+echo "Run:" 
+echo ${TXBIN} push --source  "$RESOUCE_ID"
+echo
+echo "To push existing translations with existing po-files to transifex" 
+echo "Run:" 
+
+echo ${TXBIN} push --force -t -l $( A=( $(grep '^[a-z]' po/LINGUAS) ); IFS=, ; echo "${A[*]}" ) "$RESOUCE_ID"
+

@@ -1,0 +1,59 @@
+#!/bin/bash
+
+# top level directories:
+
+# get package name from changelog - or set otherwise
+
+PKGNAME=checkaptgpg
+GETTEXT=mx-checkaptgpg
+DESK_ID=mx-checkaptgpg
+
+
+# set pot-file name
+POT=$GETTEXT.pot
+
+[ -f $POT ] && mv $POT $POT~
+touch $POT
+
+# no-location: don't generate new POT if only location has changed
+# translator comments in scripts: only thos with TRANSLATOR tag
+#
+# msgid-bugs-address
+#SENDBUGS="translations@mxlinux.org"
+SENDBUGS="https://forum.mxlinux.org/viewforum.php?f=96"
+
+# desktop file(s) 
+POTFILES=(
+        ../desktop/$DESK_ID.desktop
+        )
+xgettext --package-name=$GETTEXT --language=Desktop --join-existing \
+          --msgid-bugs-address="$SENDBUGS" \
+          --no-location --no-wrap --add-comments  \
+          -k --keyword=Name --keyword=GenericName \
+          --keyword=Comment  --keyword=Keywords \
+          --output=$POT "${POTFILES[@]}"
+
+# script in bin-dir
+POTFILES=(
+        ../scripts/$PKGNAME
+        )
+xgettext --package-name=$GETTEXT --language Shell --join-existing \
+          --msgid-bugs-address="$SENDBUGS" \
+          --no-location --no-wrap --add-comments=TRANSLATORS  \
+          --output=$POT "${POTFILES[@]}"
+
+
+sed -i 's/charset=CHARSET/charset=UTF-8/' $POT
+
+if [ -f $POT~ ]; then
+    if diff -sq -I 'POT-Creation-Date' ${POT}~ ${POT} >/dev/null; then
+       echo "No change in POT-file: $POT"
+       echo "Keeping existing POT-file"
+       mv $POT~ $POT
+    else
+       echo "New POT-file generated:  $POT"
+       echo "Old POT-file: $POT~"
+       #rm $POT~
+    fi
+fi
+

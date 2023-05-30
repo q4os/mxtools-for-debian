@@ -1,0 +1,71 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the mx-checkaptgpg package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: mx-checkaptgpg\n"
+"Report-Msgid-Bugs-To: https://forum.mxlinux.org/viewforum.php?f=96\n"
+"POT-Creation-Date: 2023-05-25 01:14+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. TRANSLATORS:
+#. The desktop entry "Name" will be displayed within the menu.
+msgid "MX Fix GPG keys"
+msgstr ""
+
+#. TRANSLATORS:
+#. The desktop entry "Comment" will be shown within the menu.
+msgid "Check and install missing apt GPG keys"
+msgstr ""
+
+#. TRANSLATORS:
+#. The desktop entry "GenericName" will be shown within the menu.
+msgid "Check for and install missing apt GPG keys"
+msgstr ""
+
+#. TRANSLATORS:
+#. Keywords to search in the menu. Hint: Add translated keywords to existing.
+#. apt=the debian package manager; fix=repair; check=verify; gpg=the signing and verfication tool; keys=the public signing keys
+msgid "apt;fix;check;gpg;keys;"
+msgstr ""
+
+#. TRANSLATORS:
+#. The GPG signature of the repository release file was successfully verified.
+msgid "Good GPG signature found."
+msgstr ""
+
+#. TRANSLATORS:
+#. The missing public GPG signing keys could not be found on any key server.
+#. Keys not found on keyserver: 0xABCDEFGH12345678
+msgid "Keys not found on keyserver:"
+msgstr ""
+
+msgid "Press 'H' for online help, press any other key to close this window."
+msgstr ""
+
+msgid "Please wait while the link '%s' opens ..."
+msgstr ""
+
+msgid "Press any key to close this window."
+msgstr ""
+
+#. TRANSLATORS:
+#. The GPG signature of the signed repository release file is verified:
+#. "Checking mxrepo.com_mx_repo_dists_bookworm_InRelease"
+msgid "Checking"
+msgstr ""
+
+#. TRANSLATORS:
+#. The user must run this command as 'root'.
+#. This command needs 'root' privileges to be executed.
+msgid "This command needs %s privileges to be executed.\\n"
+msgstr ""

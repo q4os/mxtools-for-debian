@@ -129,6 +129,8 @@ Commands:
 
     tdmnoautologin     Disable automatic login for TDM
 
+    sddmnoautologin    Disable automatic login for SDDM
+
     grubdefault        Configure the /etc/default/grub
 
     cleanup             Clean up all that we did
@@ -264,6 +266,7 @@ main() {
      version-file=*) do_version_file  $CONF_FILE $WORK_DIR "$val"      ;;
             adjtime) do_adjtime       $CONF_FILE $WORK_DIR             ;;
             tdmnoautologin) do_tdm_disable_autologin $CONF_FILE $WORK_DIR ;;
+            sddmnoautologin) do_sddm_disable_autologin $CONF_FILE $WORK_DIR ;;
             grubdefault) do_grubdefault  $CONF_FILE $WORK_DIR         ;;
           exclude=*) do_exclude       "$val" "$@" ; exit 0             ;;
             exclude) do_exclude       ""     "$@" ; exit 0             ;;
@@ -567,6 +570,24 @@ do_tdm_disable_autologin() {
     bind_mount_template "$template_dir"  "$BIND_ROOT" "$REAL_ROOT"
 }
 
+#disable sddm autologin, this function should be called by mx-snapshot only if it resets users accounts
+#based on "do_adjtime", see above
+do_sddm_disable_autologin() {
+    local conf_file=$1  work_dir=$2
+    read_conf_file $conf_file
+    local orig_file=/etc/sddm.conf
+    test -r $orig_file || return 0
+    test -x /usr/bin/kwriteconfig5 || return 0
+
+    local template_dir=$work_dir/sddmnoautologin
+    local targ_file=$template_dir$orig_file
+    mkdir -p $(dirname $targ_file)
+    cp $orig_file $targ_file
+    /usr/bin/kwriteconfig5 --file "$targ_file" --group "Autologin" --key "User" ""
+    /usr/bin/kwriteconfig5 --file "$targ_file" --group "Autologin" --key "Session" ""
+    bind_mount_template "$template_dir"  "$BIND_ROOT" "$REAL_ROOT"
+}
+
 #need to remove some user defined entries from /etc/default/grub,
 # for example "cryptdevice=", as they could obstruct correct booting for the target system
 #based on "do_adjtime", see above
@@ -820,6 +841,9 @@ munge_files() {
     [ x"$comment_opt" != x"--comment" ] && comment_opt="--gecos"
 
     local added_user="live_temp_user"$(dd if=/dev/urandom bs=1 count=40 2>/dev/null | md5sum | cut -c 1-12)
+    #debian workaround: removed --no-create-home switch for demo user to be able to login on installed system
+    #todo: add --no-create-home switch back, as soon as demo user is removed by calamares installer
+    # pretend adduser $quiet --disabled-login --shell "${DEF_SHELL:-/usr/bin/bash}" --no-create-home  $comment_opt $def_user $added_user
     pretend adduser $quiet --disabled-login --shell "${DEF_SHELL:-/usr/bin/bash}" --no-create-home  $comment_opt $def_user $added_user
     local added_group=$(id -u $added_user 2>/dev/null)
 

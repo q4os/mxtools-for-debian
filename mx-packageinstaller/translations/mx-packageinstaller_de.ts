@@ -386,7 +386,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="91"/>
         <source>Flatpak tab is disabled on 32-bit.</source>
-        <translation type="unfinished"></translation>
+        <translation>Der flatpak-Reiter ist für 32-bit-Versionen deaktiviert.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="183"/>
@@ -666,7 +666,7 @@
         <location filename="../mainwindow.cpp" line="2407"/>
         <location filename="../mainwindow.cpp" line="2424"/>
         <source>Could not download the list of packages. Please check your APT sources.</source>
-        <translation type="unfinished"></translation>
+        <translation>Die Liste der Pakete konnte nicht heruntergeladen werden. Bitte überprüfen Sie Ihre APT-Quellen.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="2440"/>
@@ -854,12 +854,16 @@ Bitte überprüfen Sie sorgfältig die Liste der zur Entfernung vorgesehenen Pak
     - installs programs from the MX Test repo
     - installs programs from Debian Backports repo
     - installs flatpaks</source>
-        <translation type="unfinished"></translation>
+        <translation>MX Package Installer ist eine Anwendung zur Verwaltung von Paketen in MX Linux
+    - installiert beliebte Programme aus verschiedenen Quellen
+    - installiert Programme aus dem MX-Test-Repository
+    - installiert Programme aus dem Debian-Backports-Repository
+    - installiert Flatpak-Dateien</translation>
     </message>
     <message>
         <location filename="../main.cpp" line="82"/>
         <source>Skip online check if it falsely reports lack of internet access.</source>
-        <translation type="unfinished"></translation>
+        <translation>Den Online-Check überspringen, wenn fälschlicherweise gemeldet wird, dass kein Internetzugang vorhanden ist.</translation>
     </message>
     <message>
         <location filename="../main.cpp" line="92"/>

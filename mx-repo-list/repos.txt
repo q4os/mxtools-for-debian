@@ -148,6 +148,7 @@ Taiwan, Hsinchu - https://mxlinux.cs.nycu.edu.tw/mx-workspace
 Thailand, Khon Kaen - https://mirror.kku.ac.th/mx-packages
 Turkey, Ankara - http://ftp.linux.org.tr/mx/repo
 Uganda, Kampala - http://mirror.renu.ac.ug/mxlinux
+Ukraine, Kyiv - https://fastmirror.pp.ua/mxlinux
 Ukraine, Vinnytsia - https://mx-packages.ip-connect.vn.ua
 United Kingdom, London - http://mxlinux.mirrors.uk2.net/packages
 United Kingdom, Manchester - https://mirrors.ukfast.co.uk/sites/MX_antiX_packages

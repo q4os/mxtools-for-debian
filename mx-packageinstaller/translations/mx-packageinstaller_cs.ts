@@ -666,7 +666,7 @@
         <location filename="../mainwindow.cpp" line="2407"/>
         <location filename="../mainwindow.cpp" line="2424"/>
         <source>Could not download the list of packages. Please check your APT sources.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nepodařilo se stáhnout seznam balíčků. Prosím, zkontrolujte své zdroje APT.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="2440"/>
@@ -854,12 +854,16 @@ Prosíme pozorně si zkontrolujte seznam aplikací k odinstalaci.</translation>
     - installs programs from the MX Test repo
     - installs programs from Debian Backports repo
     - installs flatpaks</source>
-        <translation type="unfinished"></translation>
+        <translation>MX Instalátor softvéru je nástroj používaný pro správu balíčků na MX Linux
+ - instaluje oblíbené programy z různých zdrojů
+ - instaluje programy z Testovacího repozitáře
+ - instaluje programy z repozitáře Debian Backports
+ - instaluje balíčky ve formátu Flatpak</translation>
     </message>
     <message>
         <location filename="../main.cpp" line="82"/>
         <source>Skip online check if it falsely reports lack of internet access.</source>
-        <translation type="unfinished"></translation>
+        <translation>Přeskočte online kontrolu, pokud nesprávně hlásí chybějící přístup k internetu.</translation>
     </message>
     <message>
         <location filename="../main.cpp" line="92"/>

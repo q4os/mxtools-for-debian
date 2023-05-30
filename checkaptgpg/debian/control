@@ -1,17 +1,25 @@
 Source: checkaptgpg
 Section: admin
 Priority: optional
-Maintainer: Steven Pusser (Stevo) <maintainer@mepiscommunity.org>
-Bugs: mailto: <maintainer@mepiscommunity.org>
-XSBC-Original-Maintainer: James Carr <maintainer@mepiscommunity.org>
-Build-Depends: debhelper (>= 7.0.50~)
-Standards-Version: 3.9.1
-Homepage: http://mepiscommunity.org/
+Maintainer: fehlix <fehlix@mxlinux.org>
+XSBC-Original-Maintainer:
+ Steven Pusser <stevep@mxlinux.org>,
+ James Carr <maintainer@mepiscommunity.org>
+Build-Depends:
+	 debhelper-compat (=13),
+	 meson (>=1.0),
+Standards-Version: 4.6.2
+Homepage: https://mxlinux.org
 
 Package: checkaptgpg
 Architecture: all
-Depends: gnupg, apt, menu, 
- x-www-browser | www-browser | gnome-www-browser | firefox | qupzilla | google-chrome | opera
+Depends: 
+ gnupg, 
+ apt, 
+ menu, 
+ x-www-browser | www-browser | gnome-www-browser |
+ firefox | qupzilla | google-chrome | opera |
+ mx-viewer
 Description: check and add missing GPG keys needed by apt
  Check Apt GPG will scan the already downloaded Release files cached by apt
  (and siblings) and will check that any needed GPG keys are available. Will

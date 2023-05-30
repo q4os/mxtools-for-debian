@@ -1,0 +1,129 @@
+#!/bin/bash
+
+# fetch translations from transifex
+#
+
+PACKAGE="mx-checkaptgpg"
+RESOURCE=$PACKAGE
+POTFILE=${RESOURCE}.pot
+PODIR=po
+MINIMUM_PERC=5
+
+# need 'latest' transifex client
+: ${TXBIN:=$(which tx)}
+[ ! -x "$TXBIN" ] && echo "Error: transifex client not found!" && exit 1
+
+# need 'latest' transifex client
+[ -z "$TXBIN" ] && [ -f ./tx ] && [ -x ./tx ] && TXBIN=./tx 
+: ${TXBIN:=$(which tx)}
+[ ! -x "$TXBIN" ] && echo "Need 'tx' transifex client! exit" && exit 1
+
+echodo() { echo "${@}";  ${@}; }
+
+#  fehlix test project do not use
+#: ${ORGANIZATION:=fehlix}
+#: ${PROJECT:=testproject-do-not-use}
+
+# set minium translations completion in percent to pull translation
+: ${MINIMUM_PERC:=10}
+export MINIMUM_PERC
+
+# set transifex organization and project name - if not set in environment already
+: ${ORGANIZATION:=anticapitalista}
+: ${PROJECT:=antix-development}
+
+[ -d ${PODIR} ] && echodo mv ${PODIR} ${PODIR}_$(date '+%y.%m%d_%H%M%S').bak~
+[ -d ${PODIR} ] || echodo mkdir ${PODIR}
+
+# perpare mesonbuild
+cat <<'MESONBUILD' > ${PODIR}/meson.build
+i18n = import('i18n')
+i18n.gettext(gettext_package, preset: 'glib' )
+MESONBUILD
+
+# prepare transifex
+[ -d .tx        ] || mkdir -p .tx
+[ -f .tx/config ] && rm  .tx/config
+
+
+cat<<EOF > .tx/config
+[main]
+host = https://app.transifex.com
+
+[o:${ORGANIZATION}:p:${PROJECT}:r:${RESOURCE}]
+
+file_filter   = ${PODIR}/<lang>.po
+minimum_perc  = ${MINIMUM_PERC}
+resource_name = ${RESOURCE}
+source_file   = ${POTFILE}
+source_lang   = en
+type          = PO
+
+EOF
+
+
+RESOUCE_ID="${PROJECT}.${RESOURCE}"
+echodo ${TXBIN} pull --translations --all "$RESOUCE_ID"
+
+    # make LINGUAS
+    LINGUAS=${PODIR}/LINGUAS
+    [ -f $LINGUAS ] && rm $LINGUAS
+    touch $LINGUAS
+
+    cat<<LINGUAS | tee $LINGUAS
+# LINGUAS for ${RESOURCE}
+# with minimum completion percent ${MINIMUM_PERC}%
+# generated at $(LANG=C.UTF-8 TZ=EST date -R)
+#
+LINGUAS
+
+for po in "$PODIR"/*.po; do
+    [ -e "$po" ] || continue
+    lang=${po##*/}
+    lang=${lang%.po}
+    printf '%s ' "${lang}"
+    echo "${lang}" >> $LINGUAS
+done
+echo
+
+# prepare meson build
+if [ ! -f "$PODIR"/meson.build ]; then
+    echo "i18n.gettext(gettext_package, preset: 'glib' )" > "$PODIR"/meson.build
+fi
+
+LOG=$PODIR/TX-COMPLETE.LOG
+
+which isoquery >/dev/null || {
+    echo "Need 'isoquery' to genrated TX-COMPLETE.LOG. Install with: apt install isoquery";
+    exit 1;
+    }
+
+
+echo
+echo "# Transifex resource $RESOURCE "                      | tee    $LOG
+echo "# with minimum completion percent ${MINIMUM_PERC}%"   | tee -a $LOG
+echo "# generated at $(TZ=EST date -R)"                     | tee -a $LOG
+
+printf '%6s\t\t%4s\t%7s\t\t%s\t\t%s\n' "Nr." "Cnt." "Compl." "Code" "Language" | tee -a $LOG
+printf '%6s\t\t%4s\t%7s\t\t%s\t\t%s\n' "---" "----" "------" "----" "--------" | tee -a $LOG
+
+T=$(grep -cw ^msgid $POTFILE) ;
+((T--))
+for P in $PODIR/*.po ; do
+    [ -e "$P" ] || continue
+    L=${P##*/};
+    L=${L%.po};
+    ll=${L%%_*}
+    rr=${L##*_}
+    [[ -n ${L##*_*} ]] && rr=
+    L="$(printf '%-8s' ${L})";
+
+    Z=$(msggrep --no-wrap -T -e '..' $P  | grep -cw ^msgid);
+    ((Z>0)) && ((Z--))
+    printf '\t%4d\t%6d%%    \t%s\t%s%s\n' $Z $((Z*100/T)) "$L" \
+        "$( isoquery --iso=639-${#ll} -n $ll | sed 's/L\t\t//' | cut -f3- )"  \
+        "${rr:+ @ $(isoquery -i 3166-1 $rr   | cut -f4 )}";
+done | sort -t $'\t' -k2nr,2 -k4,4 | cat -n | tee -a $LOG
+echo
+
+exit

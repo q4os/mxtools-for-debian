@@ -9,6 +9,7 @@ Vcs-Git: git://github.com/mx-linux/mx-iso-template
 Package: mx-iso-template
 Architecture: any
 Depends:
+Recommends: menu
 Conflicts: iso-template (<< 16.17.1)
 Replaces: iso-template
 Provides: iso-template (= 16.17.1)

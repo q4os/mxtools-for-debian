@@ -449,10 +449,8 @@ void Work::setupEnv()
     }
 
     // install installer if absent
-    if (settings->force_installer && !checkInstalled(QStringLiteral("calamares-settings-debian"))) {
+    if (settings->force_installer && !checkInstalled(QStringLiteral("calamares-settings-debian")))
         installPackage(QStringLiteral("calamares-settings-debian"));
-    }
-    RUN(QStringLiteral("dash /usr/share/mx-snapshot/scripts/configure_debian_calamares.sh")); //configure calamares for use with mx snapshot
 
     writeSnapshotInfo();
     writeVersionFile();
@@ -463,7 +461,7 @@ void Work::setupEnv()
     if (settings->reset_accounts) {
         RUN(QStringLiteral("mkdir -p /var/lib/mxdebian/"));
         RUN(QStringLiteral("touch /var/lib/mxdebian/.mxsnapshot_accounts_reset.stp"));
-        RUN("installed-to-live -b /.bind-root start " + bind_boot + "empty=/home general version-file tdmnoautologin grubdefault read-only");
+        RUN("installed-to-live -b /.bind-root start " + bind_boot + "empty=/home general version-file tdmnoautologin sddmnoautologin grubdefault read-only");
     } else {
         if (settings->force_installer) { // copy minstall.desktop to Desktop on all accounts
             RUN(QStringLiteral(
@@ -482,6 +480,8 @@ void Work::setupEnv()
         RUN("installed-to-live -b /.bind-root start bind=/home" + bind_boot_too
             + " live-files version-file adjtime grubdefault read-only");
     }
+
+    //RUN(QStringLiteral("dash /usr/share/mx-snapshot/scripts/configure_debian_calamares.sh")); //configure calamares for use with mx snapshot
 }
 
 void Work::writeLsbRelease()

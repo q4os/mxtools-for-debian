@@ -2,6 +2,18 @@
 case "$1" in
     install|upgrade)
       set +e
+      echo "Adding initrd-release ..."
+      cat > "/etc/initrd-release" <<EOF
+NAME="MX"
+VERSION="11.x (Bullseye)"
+ID="mx"
+VERSION_ID="11.x"
+PRETTY_NAME="Debian 11.x (Bullseye)"
+ANSI_COLOR="0;34"
+HOME_URL="https://debian.org"
+BUG_REPORT_URL="https://debian.org"
+EOF
+
       echo "Diverting Calamares launcher ..."
       dpkg-divert --quiet --rename --divert /usr/bin/add-calamares-desktop-icon.real1 /usr/bin/add-calamares-desktop-icon
     ;;

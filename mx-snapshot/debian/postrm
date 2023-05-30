@@ -5,6 +5,9 @@ case "$1" in
       set +e
       echo "Cancel diversion of Calamares launcher ..."
       dpkg-divert --quiet --rename --remove /usr/bin/add-calamares-desktop-icon
+
+      # echo "Removing initrd-release ..."
+      # rm -f /etc/initrd-release
     ;;
 
     *)

@@ -1,0 +1,79 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the mx-checkaptgpg package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+# Translators:
+# Wallon Wallon, 2023
+# fehlix, 2023
+# 
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: mx-checkaptgpg\n"
+"Report-Msgid-Bugs-To: https://forum.mxlinux.org/viewforum.php?f=96\n"
+"POT-Creation-Date: 2023-05-24 13:31+0200\n"
+"PO-Revision-Date: 2023-05-24 14:42+0000\n"
+"Last-Translator: fehlix, 2023\n"
+"Language-Team: French (https://app.transifex.com/anticapitalista/teams/10162/fr/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: fr\n"
+"Plural-Forms: nplurals=3; plural=(n == 0 || n == 1) ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
+
+#. TRANSLATORS:
+#. The desktop entry "Name" will be displayed within the menu.
+msgid "MX Fix GPG keys"
+msgstr "MX Réparation des clés GPG - MX Fix GPG keys"
+
+#. TRANSLATORS:
+#. The desktop entry "Comment" will be shown within the menu.
+msgid "Check and install missing apt GPG keys"
+msgstr "Vérifier et installer les clés GPG manquantes pour apt"
+
+#. TRANSLATORS:
+#. The desktop entry "GenericName" will be shown within the menu.
+msgid "Check for and install missing apt GPG keys"
+msgstr "Vérifier et installer les clés GPG manquantes pour apt"
+
+#. TRANSLATORS:
+#. Keywords to search in the menu. Hint: Add translated keywords to existing.
+#. apt=the debian package manager; fix=repair; check=verify; gpg=the signing
+#. and verfication tool; keys=the public signing keys
+msgid "apt;fix;check;gpg;keys;"
+msgstr "apt;fix;check;gpg;keys;clés;vérifier;corriger;"
+
+#. TRANSLATORS:
+#. The GPG signature of the repository release file was successfully verified.
+msgid "Good GPG signature found."
+msgstr "Une bonne signature GPG a été trouvée."
+
+#. TRANSLATORS:
+#. The missing public GPG signing keys could not be found on any key server.
+#. Keys not found on keyserver: 0xABCDEFGH12345678
+msgid "Keys not found on keyserver:"
+msgstr "Clés non trouvées sur le serveur de clés :"
+
+msgid "Press 'H' for online help, press any other key to close this window."
+msgstr ""
+"Appuyez sur « H » pour obtenir l’aide en ligne, appuyez sur n’importe quelle"
+" autre touche pour fermer cette fenêtre."
+
+msgid "Please wait while the link '%s' opens ..."
+msgstr "Veuillez patienter pendant que le lien « %s » s’ouvre..."
+
+msgid "Press any key to close this window."
+msgstr "Appuyez sur n’importe quelle touche pour fermer cette fenêtre."
+
+#. TRANSLATORS:
+#. The GPG signature of the signed repository release file is verified:
+#. "Checking mxrepo.com_mx_repo_dists_bookworm_InRelease"
+msgid "Checking"
+msgstr "Vérification"
+
+#. TRANSLATORS:
+#. The user must run this command as 'root'.
+#. This command needs 'root' privileges to be executed.
+msgid "This command needs %s privileges to be executed.\\n"
+msgstr "Cette commande nécessite les privilèges %s pour être exécutée.\\n"

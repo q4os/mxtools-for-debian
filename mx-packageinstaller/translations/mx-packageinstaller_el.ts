@@ -7,7 +7,7 @@
         <location filename="../mainwindow.ui" line="20"/>
         <location filename="../mainwindow.cpp" line="100"/>
         <source>MX Package Installer</source>
-        <translation>Εγκατάσταση πακέτων του MX</translation>
+        <translation>MX Εγκατάσταση πακέτων</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="57"/>
@@ -58,7 +58,7 @@
         <location filename="../mainwindow.ui" line="1118"/>
         <location filename="../mainwindow.ui" line="1245"/>
         <source>= Installed packages</source>
-        <translation>= Εγκατεστημένα πακέτα</translation>
+        <translation>= Εγκατεστημένα</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="173"/>
@@ -247,7 +247,7 @@
         <location filename="../mainwindow.ui" line="1224"/>
         <location filename="../mainwindow.cpp" line="2529"/>
         <source>Installed runtimes</source>
-        <translation>Εγκατεστημένες runtimes</translation>
+        <translation>Εγκατεστημένα runtimes</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1229"/>
@@ -280,7 +280,7 @@
     <message>
         <location filename="../mainwindow.ui" line="1427"/>
         <source>Remove unused runtimes</source>
-        <translation>Αφαιρέστε τις αχρησιμοποίητες runtimes</translation>
+        <translation>Αφαίρεση αχρησιμοποίητων runtimes</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1459"/>
@@ -438,7 +438,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="641"/>
         <source>Cancel</source>
-        <translation>Ακύρωση</translation>
+        <translation>Άκυρο</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="648"/>
@@ -497,7 +497,7 @@
         <location filename="../mainwindow.cpp" line="983"/>
         <location filename="../mainwindow.cpp" line="2960"/>
         <source>Warning</source>
-        <translation>Προειδοποίηση</translation>
+        <translation>Προσοχή</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="987"/>
@@ -512,7 +512,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="1105"/>
         <source>The following packages were selected. Click Show Details for list of changes.</source>
-        <translation>Επιλέχθηκαν τα ακόλουθα πακέτα. Κάντε κλικ στην επιλογή Εμφάνιση λεπτομερειών για λίστα αλλαγών.</translation>
+        <translation>Επιλέχθηκαν τα ακόλουθα πακέτα. Κάντε κλικ στην επιλογή Εμφάνιση λεπτομερειών για τη λίστα αλλαγών.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1140"/>
@@ -721,7 +721,7 @@ OK to go ahead and install it?</source>
     <message>
         <location filename="../mainwindow.cpp" line="2774"/>
         <source>Process still running, quitting might leave the system in an unstable state.&lt;p&gt;&lt;b&gt;Are you sure you want to exit MX Package Installer?&lt;/b&gt;</source>
-        <translation>Εκτελείται ακόμα μια διαδικασία, η διακοπή της μπορεί να αφήσει το σύστημα σε ασταθή κατάσταση. &lt;p&gt;&lt;b&gt;Είστε βέβαιοι ότι θέλετε να κλείσετε το Εγκατάσταση πακέτων του MX;&lt;/b&gt;</translation>
+        <translation>Εκτελείται ακόμα μια διαδικασία, η διακοπή της μπορεί να αφήσει το σύστημα σε ασταθή κατάσταση. &lt;p&gt;&lt;b&gt;Θέλετε σίγουρα να κλείσετε το MX Εγκατάσταση πακέτων;&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="2925"/>
@@ -731,7 +731,7 @@ OK to go ahead and install it?</source>
     <message>
         <location filename="../mainwindow.cpp" line="2951"/>
         <source>Problem detected during last operation, please inspect the console output.</source>
-        <translation>Πρόβλημα που εντοπίστηκαν κατά τη διάρκεια της τελευταίας λειτουργίας, ελέγξτε την έξοδο της κονσόλας.</translation>
+        <translation>Εντοπίστηκε πρόβλημα κατά τη διάρκεια της τελευταίας λειτουργίας, ελέγξτε την έξοδο της κονσόλας.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="2961"/>
@@ -840,7 +840,7 @@ Please make sure you check carefully the list of packages to be removed.</source
     <message>
         <location filename="../about.cpp" line="54"/>
         <source>Cancel</source>
-        <translation>Ακύρωση</translation>
+        <translation>Άκυρο</translation>
     </message>
     <message>
         <location filename="../about.cpp" line="74"/>
@@ -854,7 +854,7 @@ Please make sure you check carefully the list of packages to be removed.</source
     - installs programs from the MX Test repo
     - installs programs from Debian Backports repo
     - installs flatpaks</source>
-        <translation>Το MX Package Installer είναι ένα εργαλείο που χρησιμοποιείται για τη διαχείριση πακέτων στο MX Linux 
+        <translation>Το MX Εγκατάσταση πακέτων, είναι εργαλείο που χρησιμοποιείται για τη διαχείριση πακέτων στο MX Linux 
 - εγκαθιστά δημοφιλή προγράμματα από διαφορετικές πηγές 
 - εγκαθιστά προγράμματα από το αποθετήριο MX Test 
 - εγκαθιστά προγράμματα από το αποθετήριο Debian Backports 
@@ -863,7 +863,7 @@ Please make sure you check carefully the list of packages to be removed.</source
     <message>
         <location filename="../main.cpp" line="82"/>
         <source>Skip online check if it falsely reports lack of internet access.</source>
-        <translation>Παραλείψτε τον διαδικτυακό έλεγχο εάν αναφέρει ψευδώς την έλλειψη πρόσβασης στο διαδίκτυο.</translation>
+        <translation>Παράλειψη διαδικτυακού ελέγχου εάν αναφέρεται ψευδώς έλλειψη πρόσβασης στο διαδίκτυο.</translation>
     </message>
     <message>
         <location filename="../main.cpp" line="92"/>
@@ -873,7 +873,7 @@ Please make sure you check carefully the list of packages to be removed.</source
     <message>
         <location filename="../main.cpp" line="93"/>
         <source>You seem to be logged in as root, please log out and log in as normal user to use this program.</source>
-        <translation>Φαίνεται ότι έχετε συνδεθεί ως διαχειριστής, αποσυνδεθείτε και συνδεθείτε ως κανονικός χρήστης για να χρησιμοποιήσετε αυτό το πρόγραμμα.</translation>
+        <translation>Φαίνεται ότι έχετε συνδεθεί ως διαχειριστής, αποσυνδεθείτε και συνδεθείτε ως απλός χρήστης για να χρησιμοποιήσετε αυτό το πρόγραμμα.</translation>
     </message>
     <message>
         <location filename="../main.cpp" line="103"/>

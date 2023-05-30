@@ -14,7 +14,7 @@ MX_BUILD_DIR="/tmp/.build-mxtools-for-debian"
 echo
 read -p "Prepare for build, press Enter to continue ..." XYZ
 rm -rf $MX_BUILD_DIR
-rsync -a --exclude '.git/' --exclude '.git/' . $MX_BUILD_DIR/
+rsync -a --exclude '.git/' . $MX_BUILD_DIR/
 find $MX_BUILD_DIR/ -maxdepth 1 -type f -delete
 
 echo

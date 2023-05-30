@@ -1,0 +1,79 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the mx-checkaptgpg package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+# Translators:
+# fehlix, 2023
+# Eadwine Rose, 2023
+# 
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: mx-checkaptgpg\n"
+"Report-Msgid-Bugs-To: https://forum.mxlinux.org/viewforum.php?f=96\n"
+"POT-Creation-Date: 2023-05-24 13:31+0200\n"
+"PO-Revision-Date: 2023-05-24 14:42+0000\n"
+"Last-Translator: Eadwine Rose, 2023\n"
+"Language-Team: Dutch (https://app.transifex.com/anticapitalista/teams/10162/nl/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: nl\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. TRANSLATORS:
+#. The desktop entry "Name" will be displayed within the menu.
+msgid "MX Fix GPG keys"
+msgstr "MX Fix GPG sleutels"
+
+#. TRANSLATORS:
+#. The desktop entry "Comment" will be shown within the menu.
+msgid "Check and install missing apt GPG keys"
+msgstr "Controleer en installeer ontbrekende GPG sleutels"
+
+#. TRANSLATORS:
+#. The desktop entry "GenericName" will be shown within the menu.
+msgid "Check for and install missing apt GPG keys"
+msgstr "Controleer de GPG sleutels voor APT/Synaptic"
+
+#. TRANSLATORS:
+#. Keywords to search in the menu. Hint: Add translated keywords to existing.
+#. apt=the debian package manager; fix=repair; check=verify; gpg=the signing
+#. and verfication tool; keys=the public signing keys
+msgid "apt;fix;check;gpg;keys;"
+msgstr "apt;repareer;controleer;gpg;sleutels;"
+
+#. TRANSLATORS:
+#. The GPG signature of the repository release file was successfully verified.
+msgid "Good GPG signature found."
+msgstr "Goede GPG handtekening gevonden."
+
+#. TRANSLATORS:
+#. The missing public GPG signing keys could not be found on any key server.
+#. Keys not found on keyserver: 0xABCDEFGH12345678
+msgid "Keys not found on keyserver:"
+msgstr "Sleutels niet gevonden op keyserver:"
+
+msgid "Press 'H' for online help, press any other key to close this window."
+msgstr ""
+"Druk op 'H' voor online hulp, druk op een andere toets om dit venster te "
+"sluiten."
+
+msgid "Please wait while the link '%s' opens ..."
+msgstr "Even wachten terwijl de link '%s' wordt geopend ..."
+
+msgid "Press any key to close this window."
+msgstr "Druk op een willekeurige toets om dit venster te sluiten."
+
+#. TRANSLATORS:
+#. The GPG signature of the signed repository release file is verified:
+#. "Checking mxrepo.com_mx_repo_dists_bookworm_InRelease"
+msgid "Checking"
+msgstr "Controleren"
+
+#. TRANSLATORS:
+#. The user must run this command as 'root'.
+#. This command needs 'root' privileges to be executed.
+msgid "This command needs %s privileges to be executed.\\n"
+msgstr "Dit commando heeft %s privileges nodig om uitgevoerd te worden.\\n"

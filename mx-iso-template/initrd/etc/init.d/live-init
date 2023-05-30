@@ -335,14 +335,31 @@ do_start() {
 
     create_home "$DEF_USER" "$USER_HOME"
 
+    # echo "[I:] Adding $DEF_USER to certain groups ..."
+    imsg "Adding %s to certain groups ..." "$(iq $DEF_USER)"
+    /usr/sbin/usermod -a -G adm $DEF_USER > /dev/null
+    /usr/sbin/usermod -a -G sudo $DEF_USER > /dev/null
     if [ -f "/var/lib/mxdebian/.mxsnapshot_accounts_reset.stp" ] ; then
-      # echo "[I:] Disabling password for the first user $DEF_USER ..."
+      #if mx-snapshot has been commanded to reset users accounts within the live media..
+      imsg "Snapshot app has been commanded to reset users accounts within the live media."
+      # echo "[I:] Make first user $DEF_USER passwordless..."
+      imsg "Making first user %s passwordless ..." "$(iq $DEF_USER)"
       /usr/bin/passwd -d "$DEF_USER" > /dev/null
-      if [ -f "/etc/trinity/tdm/tdmrc" ] ; then
-        #if mx-snapshot has been commanded to reset users accounts within the live media, do enable autologin for trinity first user
-        # echo "[I:] Enabling TDM autologin ..."
+      if [ -f "/usr/bin/startplasma-x11" ] ; then
+        # echo "Enabling autologin into Plasma ..."
+        imsg "Enabling %s user autologin into Plasma ..." "$(iq $DEF_USER)"
+        /usr/bin/ctrl-autologin --enable "$DEF_USER" "" "plasma.desktop" > /dev/null
+      elif [ -f "/opt/trinity/bin/starttde" ] ; then
+        # echo "Enabling autologin into Trinity ..."
+        imsg "Enabling %s user autologin into Trinity ..." "$(iq $DEF_USER)"
         /usr/bin/ctrl-autologin --enable "$DEF_USER" "" "trinity.desktop" > /dev/null
       fi
+    fi
+
+    if [ -f "/usr/share/mx-snapshot/scripts/configure_debian_calamares.sh" ] ; then
+      # echo "[I:] Configuring Calamares installer ..."
+      imsg "Configuring Calamares installer ..."
+      dash /usr/share/mx-snapshot/scripts/configure_debian_calamares.sh
     fi
 
     # Don't bother with desktop stuff on systems without X
@@ -404,7 +421,8 @@ create_fstab() {
 
     case $distro in
         antiX) automount_and_fstab "$@" $swap_opts            ;;
-      Debian|Debian*) add_fstab_swap $swap_opts                      ;;
+      MX|MX-*) add_fstab_swap $swap_opts                      ;;
+      Debian|Debian-*) add_fstab_swap $swap_opts              ;;
             *) error 'Unknown distro %s' "$(pquote $distro)"  ;;
     esac
 }
@@ -581,6 +599,7 @@ set_keyboard() {
     case "$distro" in
         antiX) default_xkb_opts="$xkb_opts_antiX" ;;
       MX|MX-*) default_xkb_opts="$xkb_opts_MX"    ;;
+      Debian|Debian-*) default_xkb_opts="$xkb_opts_MX" ;;
     esac
 
     first_write $kb_file || [ "$DO_XKBD" ] || return
@@ -1130,7 +1149,7 @@ find_def_user() {
     USER_HOME=  DEF_USER=
 
     case $distro in
-        Debian|Debian*) valid_user $(mx_user) && return 0
+        MX|MX-*) valid_user $(mx_user) && return 0
                  valid_user $(ax_user) && return 0 ;;
 
               *) valid_user $(ax_user) && return 0

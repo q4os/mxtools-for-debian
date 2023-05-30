@@ -1,0 +1,80 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the mx-checkaptgpg package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+# Translators:
+# marcelo cripe <marcelocripe@gmail.com>, 2023
+# 
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: mx-checkaptgpg\n"
+"Report-Msgid-Bugs-To: https://forum.mxlinux.org/viewforum.php?f=96\n"
+"POT-Creation-Date: 2023-05-24 13:31+0200\n"
+"PO-Revision-Date: 2023-05-24 14:42+0000\n"
+"Last-Translator: marcelo cripe <marcelocripe@gmail.com>, 2023\n"
+"Language-Team: Portuguese (Brazil) (https://app.transifex.com/anticapitalista/teams/10162/pt_BR/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: pt_BR\n"
+"Plural-Forms: nplurals=3; plural=(n == 0 || n == 1) ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
+
+#. TRANSLATORS:
+#. The desktop entry "Name" will be displayed within the menu.
+msgid "MX Fix GPG keys"
+msgstr "Consertar as Chaves GPG do MX"
+
+#. TRANSLATORS:
+#. The desktop entry "Comment" will be shown within the menu.
+msgid "Check and install missing apt GPG keys"
+msgstr ""
+"Verifica e instala as chaves GPG ou GnuPG (GNU Privacy Guard ou Proteção de "
+"Privacidade do GNU) que estiverem ausentes com o programa MX Fix GPG Keys"
+
+#. TRANSLATORS:
+#. The desktop entry "GenericName" will be shown within the menu.
+msgid "Check for and install missing apt GPG keys"
+msgstr "Verifica e instala as chaves GPG do APT que estiverem ausentes"
+
+#. TRANSLATORS:
+#. Keywords to search in the menu. Hint: Add translated keywords to existing.
+#. apt=the debian package manager; fix=repair; check=verify; gpg=the signing
+#. and verfication tool; keys=the public signing keys
+msgid "apt;fix;check;gpg;keys;"
+msgstr "apt;corrigir;consertar;verificar;chaves;keys;gpg;"
+
+#. TRANSLATORS:
+#. The GPG signature of the repository release file was successfully verified.
+msgid "Good GPG signature found."
+msgstr "A assinatura das chaves do GPG que foi encontrada é confiável."
+
+#. TRANSLATORS:
+#. The missing public GPG signing keys could not be found on any key server.
+#. Keys not found on keyserver: 0xABCDEFGH12345678
+msgid "Keys not found on keyserver:"
+msgstr "As chaves não foram encontradas no servidor de chaves:"
+
+msgid "Press 'H' for online help, press any other key to close this window."
+msgstr ""
+"Pressione a tecla ‘H’ para obter ajuda na internet ou pressione qualquer "
+"outra tecla para fechar esta janela."
+
+msgid "Please wait while the link '%s' opens ..."
+msgstr "Por favor, aguarde enquanto o endereço eletrônico ‘%s’ abre..."
+
+msgid "Press any key to close this window."
+msgstr "Pressione qualquer tecla para fechar esta janela."
+
+#. TRANSLATORS:
+#. The GPG signature of the signed repository release file is verified:
+#. "Checking mxrepo.com_mx_repo_dists_bookworm_InRelease"
+msgid "Checking"
+msgstr "Verificando a assinatura da chave GPG"
+
+#. TRANSLATORS:
+#. The user must run this command as 'root'.
+#. This command needs 'root' privileges to be executed.
+msgid "This command needs %s privileges to be executed.\\n"
+msgstr "Este comando precisa de privilégios de ‘%s’ para ser executado.\\n"

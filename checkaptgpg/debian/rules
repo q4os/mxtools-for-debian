@@ -1,3 +1,8 @@
 #!/usr/bin/make -f
+
+export DH_ALWAYS_EXCLUDE=CVS:.svn:GIT:.git:.gitignore:debs:.tx:*~
+#export DH_VERBOSE=1
+export DH_QUIET=1
+
 %:
-	dh $@
+	dh $@  --buildsystem=meson --builddirectory=mesonbuild

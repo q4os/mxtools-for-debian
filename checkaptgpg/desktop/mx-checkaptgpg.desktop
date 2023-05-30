@@ -1,0 +1,19 @@
+[Desktop Entry]
+Type=Application
+# TRANSLATORS:
+# The desktop entry "Name" will be displayed within the menu.
+Name=MX Fix GPG keys
+# TRANSLATORS:
+# The desktop entry "Comment" will be shown within the menu.
+Comment=Check and install missing apt GPG keys
+# TRANSLATORS:
+# The desktop entry "GenericName" will be shown within the menu.
+GenericName=Check for and install missing apt GPG keys
+Exec=pkexec checkaptgpg --wait-at-end
+Terminal=true
+Icon=checkaptgpg
+Categories=PackageManager;System;MX-Software;
+# TRANSLATORS:
+# Keywords to search in the menu. Hint: Add translated keywords to existing.
+# apt=the debian package manager; fix=repair; check=verify; gpg=the signing and verfication tool; keys=the public signing keys
+Keywords=apt;fix;check;gpg;keys;
