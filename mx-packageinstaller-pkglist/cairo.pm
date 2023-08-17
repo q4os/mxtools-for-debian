@@ -18,30 +18,29 @@ Cairo Dock
    <cs>3d capable dock w/ plugins</cs>
    <da>dok med plugins som formår 3d</da>
    <de>3d-fähiges Dock mit Plugins</de>
-   <el>3d dock με plugins</el>
+   <el>3d dock με πρόσθετα</el>
    <en>3d capable dock w/ plugins</en>
    <es>Muelle compatible con plugins 3D</es>
    <et>3d capable dock w/ plugins</et>
    <eu>3d capable dock w/ plugins</eu>
    <fa>3d capable dock w/ plugins</fa>
    <fil_PH>3d capable dock w/ plugins</fil_PH>
-   <fi>3d capable dock w/ plugins</fi>
+   <fi>3D-kykenevä telakka liitännäisten kera</fi>
    <fr>Un dock avec possibilités 3D et ses plugins</fr>
    <he_IL>3d capable dock w/ plugins</he_IL>
-   <hi>3d capable dock w/ plugins</hi>
+   <hi>प्लगिन युक्त 3डी सक्षम डॉक</hi>
    <hr>3d capable dock w/ plugins</hr>
    <hu>3d capable dock w/ plugins</hu>
    <id>3d capable dock w/ plugins</id>
    <is>3d capable dock w/ plugins</is>
    <it>Barra dock con capacità 3D e plugin</it>
-   <ja_JP>3d capable dock w/ plugins</ja_JP>
-   <ja>3d capable dock w/ plugins</ja>
+   <ja>プラグイン付き3Dドック</ja>
    <kk>3d capable dock w/ plugins</kk>
    <ko>3d capable dock w/ plugins</ko>
    <lt>3d capable dock w/ plugins</lt>
    <mk>3d capable dock w/ plugins</mk>
    <mr>3d capable dock w/ plugins</mr>
-   <nb>3d capable dock w/ plugins</nb>
+   <nb>programmeny m/tillegg (3D-muligheter)</nb>
    <nl>3d geschikt dock met plugins</nl>
    <pl>panel dokujący obsługujacy 3D</pl>
    <pt_BR>Doca com capacidade 3D, com suplementos (plugins)</pt_BR>
@@ -50,10 +49,10 @@ Cairo Dock
    <ru>Док-панель с поддержкой 3D и плагинами</ru>
    <sk>3d capable dock w/ plugins</sk>
    <sl>Sidrišče z vstavki, ki podpira tudi 3d</sl>
-   <sq>3d capable dock w/ plugins</sq>
+   <sq>panel i aftë për 3d, me shtojca</sq>
    <sr>3d capable dock w/ plugins</sr>
    <sv>3D kapabel docka med plugins</sv>
-   <tr>3d capable dock w/ plugins</tr>
+   <tr>Eklentilerle birlikte 3B özellikli sabitleyici</tr>
    <uk>3D док з набором плагінів</uk>
    <vi>3d capable dock w/ plugins</vi>
    <zh_CN>3d capable dock w/ plugins</zh_CN>

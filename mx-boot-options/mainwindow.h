@@ -31,7 +31,6 @@
 
 #include <cmd.h>
 #include <dialog.h>
-#include <version.h>
 
 namespace Ui
 {
@@ -44,7 +43,7 @@ class MainWindow : public QDialog
 
 public:
     explicit MainWindow(QWidget *parent = nullptr);
-    ~MainWindow();
+    ~MainWindow() override;
 
     QString selectPartiton(const QStringList &list);
     QStringList getLinuxPartitions();
@@ -53,7 +52,7 @@ public:
     bool isInstalled(const QString &package);
     bool isInstalled(const QStringList &packages);
     bool replaceGrubArg(const QString &key, const QString &item);
-    int findMenuEntryById(const QString &id) const;
+    //    int findMenuEntryById(const QString &id) const;
     static bool isUefi();
     static void removeUefiEntry(QListWidget *listEntries, QDialog *uefiDialog);
     static void sendMouseEvents();
@@ -61,19 +60,19 @@ public:
     static void setUefiTimeout(QDialog *uefiDialog, QLabel *textTimeout);
     static void sortUefiBootOrder(const QStringList &order, QListWidget *list);
     static void toggleUefiActive(QListWidget *listEntries);
-    void addGrubArg(const QString &key, const QString &item);
+    //    void addGrubArg(const QString &key, const QString &item);
     void addGrubLine(const QString &item);
     void addUefiEntry(QListWidget *listEntries, QDialog *dialogUefi);
     void createChrootEnv(const QString &root);
     void disableGrubLine(const QString &item);
     void enableGrubLine(const QString &item);
     void loadPlymouthThemes();
-    void readBootEntries(QListWidget *list, QLabel *textTimeout, QLabel *textBootNext, QLabel *textBootCurrent,
-                         QStringList &bootorder);
+    void readBootEntries(QListWidget *listEntries, QLabel *textTimeout, QLabel *textBootNext, QLabel *textBootCurrent,
+                         QStringList *bootorder);
     void readDefaultGrub();
     void readGrubCfg();
     void readKernelOpts();
-    void remGrubArg(const QString &key, const QString &item);
+    //    void remGrubArg(const QString &key, const QString &item);
     void saveBootOrder(const QListWidget *list);
     void setGeneralConnections();
     void setup();
@@ -102,7 +101,7 @@ private slots:
     void combo_save_default_clicked();
     void combo_menu_entry_currentIndexChanged();
     void combo_theme_activated(int);
-    void combo_theme_currentIndexChanged(int index1);
+    void combo_theme_currentIndexChanged(int index);
     void lineEdit_kernel_textEdited();
     void radio_detailed_msg_toggled(bool checked);
     void radio_limited_msg_toggled(bool checked);
@@ -110,12 +109,12 @@ private slots:
     void spinBoxTimeout_valueChanged(int val);
 
 protected:
-    void keyPressEvent(QKeyEvent *event);
-    QProgressBar *bar {};
+    void keyPressEvent(QKeyEvent *event) override;
 
 private:
     Ui::MainWindow *ui;
     Cmd cmd;
+    QProgressBar *bar {};
     QTimer timer;
 
     bool grub_installed {};

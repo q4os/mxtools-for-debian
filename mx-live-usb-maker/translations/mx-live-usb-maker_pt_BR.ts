@@ -299,10 +299,10 @@
         <location filename="../mainwindow.cpp" line="152"/>
         <source>Writing %1 using &apos;dd&apos; command to /dev/%2,
 
-Please wait until the the process is completed</source>
-        <translation>Gravando %1, utilizando o comando ‘dd’ em /dev/%2.
+Please wait until the process is completed</source>
+        <translation>Escrevendo ou gravando %1 com o comando ‘dd’ para /dev/%2,
 
-Por favor, espere até que o processo seja concluído</translation>
+Por favor, aguarde até que o processo seja finalizado</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="312"/>

@@ -49,7 +49,7 @@
         <translation>Jogosultságok érvényes felhasználóknak</translation>
     </message>
     <message>
-        <location filename="../editshare.cpp" line="46"/>
+        <location filename="../editshare.cpp" line="48"/>
         <source>Select directory to share</source>
         <translation>Válassza ki a megosztandó könyvtárat</translation>
     </message>

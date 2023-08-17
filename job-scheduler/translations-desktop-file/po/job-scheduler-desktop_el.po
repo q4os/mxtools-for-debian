@@ -4,8 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Dimitrios Anogiatis <gnutechie.didsbury@gmail.com>, 2022
-# anticapitalista <anticapitalista@riseup.net>, 2022
+# Ioannis LM, 2023
 # 
 #, fuzzy
 msgid ""
@@ -14,8 +13,8 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-12-08 21:33-0500\n"
 "PO-Revision-Date: 2022-12-09 02:56+0000\n"
-"Last-Translator: anticapitalista <anticapitalista@riseup.net>, 2022\n"
-"Language-Team: Greek (https://www.transifex.com/anticapitalista/teams/10162/el/)\n"
+"Last-Translator: Ioannis LM, 2023\n"
+"Language-Team: Greek (https://app.transifex.com/anticapitalista/teams/10162/el/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -25,23 +24,22 @@ msgstr ""
 #. The desktop entry name will be displayed within the menu.
 #: desktop-in/job-scheduler.desktop.in:4
 msgid "Job Scheduler"
-msgstr "Προγραμματιστής εργασιών"
+msgstr "Προγραμματισμός εργασιών"
 
 #. # The desktop entry comment will be shown within the menu.
 #: desktop-in/job-scheduler.desktop.in:6
 msgid "Job scheduling utility which uses crontab as the backend"
 msgstr ""
+"Εργαλείο προγραμματισμού εργασιών που χρησιμοποιεί το υποσύστημα crontab"
 
 #. The desktop entry name will be displayed within the menu.
 #. The desktop entry name will be displayed within the menu.
 #: desktop-in/mx-snapshot.desktop.in:6
 msgid "MX Snapshot"
-msgstr "MX Snapshot"
+msgstr "MX Στιγμιότυπο συστήματος"
 
 #. # The desktop entry comment will be shown within the menu.
 #. # The desktop entry comment will be shown within the menu.
 #: desktop-in/mx-snapshot.desktop.in:9
 msgid "Create a live iso snapshot of your running system."
-msgstr ""
-"Δημιουργήστε ένα στιγμιότυπο του τρέχοντος συστήματός σας σε ζωντανή ISO "
-"μορφή."
+msgstr "Δημιουργία στιγμιότυπου του συστήματος σας σε μορφή live iso."

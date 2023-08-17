@@ -14,7 +14,6 @@ Depends:
  mx-bootrepair,
  mx-boot-options,
  mx-conky,
- mx-codecs,
  mx-datetime,
  mx-docs,
  mx-network-assistant,

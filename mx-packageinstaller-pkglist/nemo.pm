@@ -34,7 +34,6 @@ Nemo
    <id>default file manager from the cinnamon desktop</id>
    <is>default file manager from the cinnamon desktop</is>
    <it>default file manager from the cinnamon desktop</it>
-   <ja_JP>default file manager from the cinnamon desktop</ja_JP>
    <ja>default file manager from the cinnamon desktop</ja>
    <kk>default file manager from the cinnamon desktop</kk>
    <ko>default file manager from the cinnamon desktop</ko>

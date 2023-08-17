@@ -1,6 +1,7 @@
 mx-packageinstaller-desktop_af
 mx-packageinstaller-desktop_am
 mx-packageinstaller-desktop_ar
+mx-packageinstaller-desktop_ast
 mx-packageinstaller-desktop_be
 mx-packageinstaller-desktop_bg
 mx-packageinstaller-desktop_bn
@@ -44,12 +45,16 @@ mx-packageinstaller-desktop_hr
 mx-packageinstaller-desktop_ht
 mx-packageinstaller-desktop_hu
 mx-packageinstaller-desktop_hy
+mx-packageinstaller-desktop_hy_AM
+mx-packageinstaller-desktop_hye
 mx-packageinstaller-desktop_id
+mx-packageinstaller-desktop_ie
 mx-packageinstaller-desktop_is
 mx-packageinstaller-desktop_it
 mx-packageinstaller-desktop_ja
 mx-packageinstaller-desktop_jv
 mx-packageinstaller-desktop_ka
+mx-packageinstaller-desktop_kab
 mx-packageinstaller-desktop_kk
 mx-packageinstaller-desktop_km
 mx-packageinstaller-desktop_kn
@@ -74,7 +79,9 @@ mx-packageinstaller-desktop_nb_NO
 mx-packageinstaller-desktop_ne
 mx-packageinstaller-desktop_nl
 mx-packageinstaller-desktop_nl_BE
+mx-packageinstaller-desktop_nn
 mx-packageinstaller-desktop_ny
+mx-packageinstaller-desktop_oc
 mx-packageinstaller-desktop_or
 mx-packageinstaller-desktop_pa
 mx-packageinstaller-desktop_pl

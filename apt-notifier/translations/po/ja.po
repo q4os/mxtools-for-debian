@@ -8,8 +8,8 @@
 # night1ynx <night1ynxd@gmail.com>, 2022
 # Transifex Bot <>, 2022
 # Geoff Gigg <geoffgigg@hotmail.com>, 2022
-# Green, 2022
 # Dolphin Oracle <dolphinoracle@gmail.com>, 2022
+# Green <usergreen@users.osdn.me>, 2023
 # 
 #, fuzzy
 msgid ""
@@ -18,8 +18,8 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-01-28 02:38+0100\n"
 "PO-Revision-Date: 2017-05-11 01:14+0000\n"
-"Last-Translator: Dolphin Oracle <dolphinoracle@gmail.com>, 2022\n"
-"Language-Team: Japanese (https://www.transifex.com/anticapitalista/teams/10162/ja/)\n"
+"Last-Translator: Green <usergreen@users.osdn.me>, 2023\n"
+"Language-Team: Japanese (https://app.transifex.com/anticapitalista/teams/10162/ja/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -93,7 +93,7 @@ msgid "MX Auto-update  --  unattended-upgrades log viewer"
 msgstr "MX 自動更新 -- 自動更新ログビューア"
 
 msgid "MX Package Installer"
-msgstr "MX パッケージ・インストーラー"
+msgstr "MX パッケージインストーラ"
 
 #. The autostart desktop entry name will be shown within the list of autostart
 #. entries.

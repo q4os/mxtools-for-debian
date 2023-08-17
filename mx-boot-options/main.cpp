@@ -41,8 +41,9 @@ int main(int argc, char *argv[])
         qunsetenv("SESSION_MANAGER");
     }
     QApplication app(argc, argv);
-    if (getuid() == 0)
+    if (getuid() == 0) {
         qputenv("HOME", "/root");
+    }
 
     QApplication::setApplicationVersion(VERSION);
     QApplication::setWindowIcon(QIcon::fromTheme(QApplication::applicationName()));
@@ -59,17 +60,20 @@ int main(int argc, char *argv[])
     parser.process(app);
 
     QTranslator qtTran;
-    if (qtTran.load("qt_" + QLocale().name(), QLibraryInfo::location(QLibraryInfo::TranslationsPath)))
+    if (qtTran.load("qt_" + QLocale().name(), QLibraryInfo::location(QLibraryInfo::TranslationsPath))) {
         QApplication::installTranslator(&qtTran);
+    }
 
     QTranslator qtBaseTran;
-    if (qtBaseTran.load("qtbase_" + QLocale().name(), QLibraryInfo::location(QLibraryInfo::TranslationsPath)))
+    if (qtBaseTran.load("qtbase_" + QLocale().name(), QLibraryInfo::location(QLibraryInfo::TranslationsPath))) {
         QApplication::installTranslator(&qtBaseTran);
+    }
 
     QTranslator appTran;
     if (appTran.load(QApplication::applicationName() + "_" + QLocale().name(),
-                     "/usr/share/" + QApplication::applicationName() + "/locale"))
+                     "/usr/share/" + QApplication::applicationName() + "/locale")) {
         QApplication::installTranslator(&appTran);
+    }
 
     // Root guard
     QFile loginUidFile {"/proc/self/loginuid"};
@@ -93,8 +97,9 @@ int main(int argc, char *argv[])
         proc.waitForFinished();
         auto const home = QString::fromLatin1(proc.readAllStandardOutput().trimmed()).section(":", 5, 5);
         auto const file_name = home + "/.config/" + QApplication::applicationName() + "rc";
-        if (QFile::exists(file_name))
+        if (QFile::exists(file_name)) {
             QProcess::execute("chown", {logname + ":", file_name});
+        }
         return exit_code;
     } else {
         QProcess::startDetached(QStringLiteral("/usr/bin/mxbo-launcher"), {});

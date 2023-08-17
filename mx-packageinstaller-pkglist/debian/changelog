@@ -1,44 +1,200 @@
-mx-packageinstaller-pkglist (23.05.01mx21) mx; urgency=medium
+mx-packageinstaller-pkglist (23.08.06mx23) mx; urgency=medium
 
-  * update 6.1 kernel
+  * update ahs 6.4 kernel 
 
- -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 18 May 2023 21:27:05 -0400
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 11 Aug 2023 19:30:18 -0400
 
-mx-packageinstaller-pkglist (23.04.02mx21) mx; urgency=medium
+mx-packageinstaller-pkglist (23.08.05mx23) mx; urgency=medium
 
-  * update 6.1 kernel
+  * update ahs kernel installation
 
- -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 26 Apr 2023 20:01:12 -0400
+ -- fehlix <fehlix@mxlinux.org>  Tue, 08 Aug 2023 14:13:29 -0400
 
-mx-packageinstaller-pkglist (23.04.01mx21) mx; urgency=medium
+mx-packageinstaller-pkglist (23.08.04mx23) mx; urgency=medium
 
-  * update category translations 
+  * install default-jre before rest of libreoffice (fixes ca-certificates-java issue)
 
- -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 22 Apr 2023 15:58:30 -0400
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 04 Aug 2023 22:11:21 -0400
 
-mx-packageinstaller-pkglist (23.03.04mx21) mx; urgency=medium
+mx-packageinstaller-pkglist (23.08.03mx23) mx; urgency=medium
 
-  * update category.dict
+  * update megasync repo
 
- -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 02 Apr 2023 22:12:05 -0400
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 03 Aug 2023 21:10:57 -0400
 
-mx-packageinstaller-pkglist (23.03.03mx21) mx; urgency=medium
+mx-packageinstaller-pkglist (23.08.02mx23) mx; urgency=medium
 
-  * update 6.1 kenrel to -7mx-ahs
+  * updae librewolf repositoary
+  * archive waterfox pm files
 
- -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 30 Mar 2023 20:09:26 -0400
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 03 Aug 2023 06:39:46 -0400
 
-mx-packageinstaller-pkglist (23.03.02mx21) mx; urgency=medium
+mx-packageinstaller-pkglist (23.08.01mx23) mx; urgency=medium
 
-  * update 6.1 kernel to -6mx
+  * fix keyserver error when fetching OnlyOffice signing key
 
- -- Dolphin Oracle <dolphinoracle@gmail.com>  Tue, 14 Mar 2023 23:32:29 -0400
+ -- fehlix <fehlix@mxlinux.org>  Wed, 02 Aug 2023 15:15:52 -0500
 
-mx-packageinstaller-pkglist (23.03.01mx21) mx; urgency=medium
+mx-packageinstaller-pkglist (23.07.25mx23) mx; urgency=medium
 
-  * remove ms-teams
+  * remove 32 bit liquiorix kernel entries
+  * update debian and ahs kernel entries
 
- -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 09 Mar 2023 19:01:05 -0500
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 29 Jul 2023 11:20:18 -0400
+
+mx-packageinstaller-pkglist (23.07.24mx23) mx; urgency=medium
+
+  * update LO install routine to pull in python-uno (fehlix)
+  * make avidemux 64 bit only
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 23 Jul 2023 15:44:49 -0400
+
+mx-packageinstaller-pkglist (23.07.23mx23) mx; urgency=medium
+
+  * install openjdk-17-jre BEFORE running libreoffice install
+  * fixes weird issue with ca-certificates-java
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 20 Jul 2023 20:53:00 -0400
+
+mx-packageinstaller-pkglist (23.07.22mx23) mx; urgency=medium
+
+  * update translations
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Tue, 18 Jul 2023 22:57:41 -0400
+
+mx-packageinstaller-pkglist (23.07.21mx23) mx; urgency=medium
+
+  * update categories.dict
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 17 Jul 2023 19:58:45 -0400
+
+mx-packageinstaller-pkglist (23.07.20mx23) mx; urgency=medium
+
+  * don't remove rtl88cu-dkms on 6.3 kernels
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 16 Jul 2023 16:16:16 -0400
+
+mx-packageinstaller-pkglist (23.07.19mx23) mx; urgency=medium
+
+  *  remove unneeded rtl dkms file when installing ahs kernel
+  *  update megasync key managmenet and repo
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 15 Jul 2023 09:16:48 -0400
+
+mx-packageinstaller-pkglist (23.07.18mx23) mx; urgency=medium
+
+  * update xmms (remove xmms-plugins-antix, add xmms-skins-antix)
+  * add ahs kernel entry
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 13 Jul 2023 22:19:17 -0400
+
+mx-packageinstaller-pkglist (23.07.17mx23) mx; urgency=medium
+
+  * remove rtl8821cu-dkms from kernel installs over 6.1
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 06 Jul 2023 23:32:16 -0400
+
+mx-packageinstaller-pkglist (23.07.16mx23) mx; urgency=medium
+
+  * update kernel entries
+  * update windscribe (fehlix) 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 03 Jul 2023 16:29:44 -0400
+
+mx-packageinstaller-pkglist (23.07.15mx23) mx; urgency=medium
+
+  * remove ja_JP 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 28 Jun 2023 19:35:17 -0400
+
+mx-packageinstaller-pkglist (23.07.14mx23) mx; urgency=medium
+
+  * update package descriptions
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 26 Jun 2023 21:24:53 -0400
+
+mx-packageinstaller-pkglist (23.07.13mx23) mx; urgency=medium
+
+  * fix labels in debian kernels
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 10 Jun 2023 21:46:37 -0400
+
+mx-packageinstaller-pkglist (23.07.12mx23) mx; urgency=medium
+
+  * adjust vlc
+  * correct uninstall area of xfce4-appfinder
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 04 Jun 2023 12:33:02 -0400
+
+mx-packageinstaller-pkglist (23.07.11mx23) mx; urgency=medium
+
+  * remove debian-builder from deb-packaging tools
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 13 May 2023 23:41:33 -0400
+
+mx-packageinstaller-pkglist (23.07.10mx23) mx; urgency=medium
+
+  * update some gpg key management in several pm files
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 13 May 2023 23:12:46 -0400
+
+mx-packageinstaller-pkglist (23.07.09mx23) mx; urgency=medium
+
+  * remove partitionmanage-modified-launcher 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 12 May 2023 20:21:25 -0400
+
+mx-packageinstaller-pkglist (23.07.08mx23) mx; urgency=medium
+
+  * add showfoto and digikam 
+  * update Xfce, add Xfce4-appfinder
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 08 May 2023 19:07:30 -0400
+
+mx-packageinstaller-pkglist (23.07.07mx23) mx; urgency=medium
+
+  * update kde install routine 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Tue, 02 May 2023 22:59:29 -0400
+
+mx-packageinstaller-pkglist (23.07.06mx23) mx; urgency=medium
+
+  * add japanese input uim
+  * update popular app category translations 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 22 Apr 2023 15:56:41 -0400
+
+mx-packageinstaller-pkglist (23.07.05mx23) mx; urgency=medium
+
+  * update category.dict 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 02 Apr 2023 22:13:16 -0400
+
+mx-packageinstaller-pkglist (23.07.04mx23) mx; urgency=medium
+
+  * remove wayland plasma session entry from display manager
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 11 Mar 2023 09:34:06 -0500
+
+mx-packageinstaller-pkglist (23.07.03mx23) mx; urgency=medium
+
+  * add former mx-codecs functions to mxpi
+  * w32codecs, w64codecs, libtxc-dxtn0, libdvdcss2
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 05 Mar 2023 21:03:47 -0500
+
+mx-packageinstaller-pkglist (23.07.02mx23) mx; urgency=medium
+
+  * add roxterm to mxfluxbox.pm 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 02 Mar 2023 17:42:54 -0500
+
+mx-packageinstaller-pkglist (23.07.01mx23) mx; urgency=medium
+
+  * update pm files for bookworm
+  * some not working yet due to repo not built out 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 25 Feb 2023 13:09:32 -0500
 
 mx-packageinstaller-pkglist (23.02.02mx21) mx; urgency=medium
 

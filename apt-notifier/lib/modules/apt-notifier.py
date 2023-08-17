@@ -1,7 +1,7 @@
 #! /usr/bin/python3
 # -*- coding: utf-8 -*-
 
-BUILD_VERSION='23.03.01'
+BUILD_VERSION='23.06.01'
 MODULES = "/usr/lib/apt-notifier/modules"
 
 import subprocess

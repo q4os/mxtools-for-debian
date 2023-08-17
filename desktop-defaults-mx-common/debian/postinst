@@ -9,4 +9,8 @@ if [ -x /etc/init.d/umountnfs-alternative.sh ]; then
   fi
 fi
 
+if [ -e  /etc/polkit-1/localauthority.conf.d/52-force-root-for-admin-auth.conf ]; then
+	rm /etc/polkit-1/localauthority.conf.d/52-force-root-for-admin-auth.conf
+fi
+
 exit 0

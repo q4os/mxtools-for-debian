@@ -6,6 +6,8 @@
 # Translators:
 # anticapitalista <anticapitalista@riseup.net>, 2017
 # Tamas Szarvas <szarvy@gmail.com>, 2018
+# Tamás Szekeres <szekeres.tamas@icloud.com>, 2019
+# Pál András Ciocan (Andris) <csokan.andras87@protonmail.ch>, 2022
 # 
 #, fuzzy
 msgid ""
@@ -14,7 +16,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-12-02 11:04-0500\n"
 "PO-Revision-Date: 2017-12-02 16:14+0000\n"
-"Last-Translator: Tamas Szarvas <szarvy@gmail.com>, 2018\n"
+"Last-Translator: Pál András Ciocan (Andris) <csokan.andras87@protonmail.ch>, 2022\n"
 "Language-Team: Hungarian (https://www.transifex.com/anticapitalista/teams/10162/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -41,7 +43,7 @@ msgstr "Copyright (c) MX Linux"
 
 #: idevice-mounter:128
 msgid "Mount"
-msgstr ""
+msgstr "Csatolás"
 
 #: idevice-mounter:133
 msgid "Rescan"
@@ -49,7 +51,7 @@ msgstr ""
 
 #: idevice-mounter:138
 msgid "Unmount"
-msgstr ""
+msgstr "Lecsatlakoztatás"
 
 #: idevice-mounter:143
 msgid "Close"
@@ -57,7 +59,7 @@ msgstr "Bezár"
 
 #: idevice-mounter:148
 msgid "About"
-msgstr ""
+msgstr "Névjegy"
 
 #: idevice-mounter:153
 msgid "Help"

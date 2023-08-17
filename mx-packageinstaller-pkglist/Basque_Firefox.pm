@@ -18,39 +18,38 @@ Basque_Firefox
    <cs>Basque localisation of Firefox</cs>
    <da>Baskisk oversættelse af Firefox</da>
    <de>Baskische Lokalisierung von Firefox</de>
-   <el>Basque εντοπισμός του Firefox</el>
+   <el>Βασκικά για το Firefox</el>
    <en>Basque localisation of Firefox</en>
    <es>Localización Vasco de Firefox</es>
    <et>Basque localisation of Firefox</et>
    <eu>Basque localisation of Firefox</eu>
    <fa>Basque localisation of Firefox</fa>
    <fil_PH>Basque localisation of Firefox</fil_PH>
-   <fi>Basque localisation of Firefox</fi>
+   <fi>Baskilainen Firefox-kotoistus</fi>
    <fr>Localisation basque pour Firefox</fr>
    <he_IL>Basque localisation of Firefox</he_IL>
-   <hi>Basque localisation of Firefox</hi>
+   <hi>फायरफॉक्स का बास्क संस्करण</hi>
    <hr>Baskijska lokalizacija Firefoxa</hr>
    <hu>Basque localisation of Firefox</hu>
    <id>Basque localisation of Firefox</id>
    <is>Basque localisation of Firefox</is>
-   <it>Localizzazione basca di Firefox</it>
-   <ja_JP>Basque localisation of Firefox</ja_JP>
-   <ja>Basque localisation of Firefox</ja>
+   <it>Localizzazione basca di Firefox </it>
+   <ja>Firefox のバスク語用言語パック</ja>
    <kk>Basque localisation of Firefox</kk>
    <ko>Basque localisation of Firefox</ko>
    <lt>Basque localisation of Firefox</lt>
    <mk>Basque localisation of Firefox</mk>
    <mr>Basque localisation of Firefox</mr>
-   <nb>Basque localisation of Firefox</nb>
+   <nb>Baskisk lokaltilpassing av Firefox</nb>
    <nl>Baskische lokalisatie van Firefox</nl>
    <pl>Baskijska lokalizacja przeglądarki Firefox</pl>
-   <pt_BR>Basco Localização para Firefox</pt_BR>
+   <pt_BR>Basco Localização para o Firefox</pt_BR>
    <pt>Basco Localização para Firefox</pt>
    <ro>Basque localisation of Firefox</ro>
    <ru>Баскская локализация Firefox</ru>
    <sk>Basque lokalizácia pre Firefox</sk>
-   <sl>Basque localisation of Firefox</sl>
-   <sq>Basque localisation of Firefox</sq>
+   <sl>Baskovske krajevne nastavitve za Firefox</sl>
+   <sq>Përkthimi i Firefox-it në baskisht</sq>
    <sr>Basque localisation of Firefox</sr>
    <sv>Baskisk lokalisering av Firefox</sv>
    <tr>Firefox'un Bask dili yerelleştirmesi</tr>

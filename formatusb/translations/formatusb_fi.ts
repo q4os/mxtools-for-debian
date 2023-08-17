@@ -1,4 +1,6 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="fi">
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.1" language="fi">
 <context>
     <name>MainWindow</name>
     <message>
@@ -19,17 +21,17 @@
     <message>
         <location filename="../mainwindow.ui" line="54"/>
         <source>Defaults</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="59"/>
         <source>msdos</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="64"/>
         <source>gpt</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="72"/>
@@ -79,7 +81,7 @@
     <message>
         <location filename="../mainwindow.ui" line="163"/>
         <source>Partition Table Type</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="222"/>
@@ -148,6 +150,7 @@
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="180"/>
+        <location filename="../mainwindow.cpp" line="308"/>
         <source>Failure</source>
         <translation>Virhe</translation>
     </message>
@@ -209,6 +212,11 @@
         <location filename="../mainwindow.cpp" line="265"/>
         <source>%1 Help</source>
         <translation>%1 Apuopas</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="308"/>
+        <source>Invalid Name</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

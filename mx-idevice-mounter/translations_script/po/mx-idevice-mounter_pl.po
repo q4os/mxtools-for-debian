@@ -6,7 +6,7 @@
 # Translators:
 # anticapitalista <anticapitalista@riseup.net>, 2017
 # Przemek P <ppjg@dami.pl>, 2019
-# Filip Bog <mxlinuxpl@gmail.com>, 2019
+# MX Linux Polska <mxlinuxpl@gmail.com>, 2019
 # 
 #, fuzzy
 msgid ""
@@ -15,7 +15,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-12-02 11:04-0500\n"
 "PO-Revision-Date: 2017-12-02 16:14+0000\n"
-"Last-Translator: Filip Bog <mxlinuxpl@gmail.com>, 2019\n"
+"Last-Translator: MX Linux Polska <mxlinuxpl@gmail.com>, 2019\n"
 "Language-Team: Polish (https://www.transifex.com/anticapitalista/teams/10162/pl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"

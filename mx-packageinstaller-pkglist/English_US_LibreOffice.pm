@@ -18,39 +18,38 @@ US_English_Libreoffice
    <cs>US English Help for LibreOffice</cs>
    <da>Engelsk (USA) hjælp til LibreOffice</da>
    <de>Englische (US) Hilfe für LibreOffice</de>
-   <el>Βοήθεια για το LibreOffice στα Αγγλικά (ΗΠΑ)</el>
+   <el>Βοήθεια για το LibreOffice στα Αγγλικά(USA)</el>
    <en>US English Help for LibreOffice</en>
    <es>Ayuda Inglesa (EE.UU.) para LiberOffice</es>
    <et>US English Help for LibreOffice</et>
    <eu>US English Help for LibreOffice</eu>
    <fa>US English Help for LibreOffice</fa>
    <fil_PH>US English Help for LibreOffice</fil_PH>
-   <fi>US English Help for LibreOffice</fi>
+   <fi>US-englantilainen apuopas LibreOffice:lle</fi>
    <fr>Aide anglais_US pour LibreOffice</fr>
    <he_IL>US English Help for LibreOffice</he_IL>
-   <hi>US English Help for LibreOffice</hi>
+   <hi>लिब्रे-ऑफिस हेतु अमेरिकी अंग्रेजी में सहायता</hi>
    <hr>US English Help for LibreOffice</hr>
    <hu>US English Help for LibreOffice</hu>
    <id>US English Help for LibreOffice</id>
    <is>US English Help for LibreOffice</is>
    <it>Guida in Inglese US per LibreOffice</it>
-   <ja_JP>US English Help for LibreOffice</ja_JP>
-   <ja>US English Help for LibreOffice</ja>
+   <ja>LibreOffice のアメリカ英語ヘルプ</ja>
    <kk>US English Help for LibreOffice</kk>
    <ko>US English Help for LibreOffice</ko>
    <lt>US English Help for LibreOffice</lt>
    <mk>US English Help for LibreOffice</mk>
    <mr>US English Help for LibreOffice</mr>
-   <nb>US English Help for LibreOffice</nb>
+   <nb>Amerikansk engelsk hjelpetekst for LibreOffice</nb>
    <nl>US Engelse Hulp voor LibreOffice</nl>
    <pl>Angielski Amerykański pomoc dla LibreOffice</pl>
-   <pt_BR>US Inglês Help para LibreOffice</pt_BR>
+   <pt_BR>Inglês dos EUA Ajuda para o LibreOffice</pt_BR>
    <pt>Inglês US Help para LibreOffice</pt>
    <ro>US English Help for LibreOffice</ro>
-   <ru>US English Help for LibreOffice</ru>
+   <ru>Американо-английская справка для LibreOffice</ru>
    <sk>US English Help for LibreOffice</sk>
-   <sl>US English Help for LibreOffice</sl>
-   <sq>US English Help for LibreOffice</sq>
+   <sl>ZDA angleščina - pomoč za LibreOffice</sl>
+   <sq>Meta-Paketë gjuhësore në anglishte të ShBA-s për LibreOffice-in</sq>
    <sr>US English Help for LibreOffice</sr>
    <sv>US Engelsk Hjälp för LibreOffice</sv>
    <tr>LibreOffice için Amerikan İngilizcesi Yardımı</tr>

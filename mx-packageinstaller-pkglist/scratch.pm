@@ -25,23 +25,22 @@ Scratch
    <eu>Scratch Graphical Programming envirnoment from M.I.T. https://scratch.mit.edu/</eu>
    <fa>Scratch Graphical Programming envirnoment from M.I.T. https://scratch.mit.edu/</fa>
    <fil_PH>Scratch Graphical Programming envirnoment from M.I.T. https://scratch.mit.edu/</fil_PH>
-   <fi>Scratch Graphical Programming envirnoment from M.I.T. https://scratch.mit.edu/</fi>
+   <fi>Scratch on graafinen ohjelmointiympäristö jota kehittää M.I.T. https://scratch.mit.edu/</fi>
    <fr>Environnement graphique de programmation Scratch de M.I.T. https://scratch.mit.edu/</fr>
    <he_IL>Scratch Graphical Programming envirnoment from M.I.T. https://scratch.mit.edu/</he_IL>
-   <hi>Scratch Graphical Programming envirnoment from M.I.T. https://scratch.mit.edu/</hi>
+   <hi>एमआईटी से स्क्रैच ग्राफ़िकल प्रोग्रामिंग वातावरण https://scratch.mit.edu/</hi>
    <hr>Scratch Graphical Programming envirnoment from M.I.T. https://scratch.mit.edu/</hr>
    <hu>Scratch Graphical Programming envirnoment from M.I.T. https://scratch.mit.edu/</hu>
    <id>Scratch Graphical Programming envirnoment from M.I.T. https://scratch.mit.edu/</id>
    <is>Scratch Graphical Programming envirnoment from M.I.T. https://scratch.mit.edu/</is>
    <it>Ambiente di programmazione grafica Scratch dal M.I.T. https://scratch.mit.edu/</it>
-   <ja_JP>Scratch Graphical Programming envirnoment from M.I.T. https://scratch.mit.edu/</ja_JP>
-   <ja>Scratch Graphical Programming envirnoment from M.I.T. https://scratch.mit.edu/</ja>
+   <ja>M.I.T. からのスクラッチ グラフィカル プログラミング環境 https://scratch.mit.edu/</ja>
    <kk>Scratch Graphical Programming envirnoment from M.I.T. https://scratch.mit.edu/</kk>
    <ko>Scratch Graphical Programming envirnoment from M.I.T. https://scratch.mit.edu/</ko>
    <lt>Scratch Graphical Programming envirnoment from M.I.T. https://scratch.mit.edu/</lt>
    <mk>Scratch Graphical Programming envirnoment from M.I.T. https://scratch.mit.edu/</mk>
    <mr>Scratch Graphical Programming envirnoment from M.I.T. https://scratch.mit.edu/</mr>
-   <nb>Scratch Graphical Programming envirnoment from M.I.T. https://scratch.mit.edu/</nb>
+   <nb>Scratch grafisk programmeringsmiljø fra MIT. https://scratch.mit.edu/</nb>
    <nl>Scratch Grafische Progammeer Omgeving van M.I.T. https://scratch.mit.edu/</nl>
    <pl>programistyczne środowisko graficzne Scratch od M.I.T. https://scratch.mit.edu/</pl>
    <pt_BR>Ambiente de programação gráfica Scratch do M.I.T. https://scratch.mit.edu/</pt_BR>
@@ -50,10 +49,10 @@ Scratch
    <ru>Окружение визуального программирования Scratch https://scratch.mit.edu/</ru>
    <sk>Scratch Graphical Programming envirnoment from M.I.T. https://scratch.mit.edu/</sk>
    <sl>Scratch grafično okolje za učenje programiranja (M.I.T. https://scratch.mit.edu/)</sl>
-   <sq>Scratch Graphical Programming envirnoment from M.I.T. https://scratch.mit.edu/</sq>
+   <sq>Mjedisi Scratch i Programimit Grafik prej M.I.T. https://scratch.mit.edu/</sq>
    <sr>Scratch Graphical Programming envirnoment from M.I.T. https://scratch.mit.edu/</sr>
    <sv>Scratch Grafisk Programmeringsmiljö från M.I.T. https://scratch.mit.edu/</sv>
-   <tr>Scratch Graphical Programming envirnoment from M.I.T. https://scratch.mit.edu/</tr>
+   <tr>M.I.T'den Sıfırdan Grafiksel Programlama ortamı https://scratch.mit.edu/</tr>
    <uk>Scratch Graphical Programming envirnoment from M.I.T. https://scratch.mit.edu/</uk>
    <vi>Scratch Graphical Programming envirnoment from M.I.T. https://scratch.mit.edu/</vi>
    <zh_CN>Scratch Graphical Programming envirnoment from M.I.T. https://scratch.mit.edu/</zh_CN>

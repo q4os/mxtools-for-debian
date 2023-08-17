@@ -1,3 +1,45 @@
+plymouth-themes-mx (23.07.01) mx; urgency=medium
+
+  * fix border color around logo
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 07 Jul 2023 07:59:22 -0400
+
+plymouth-themes-mx (23.06.07) mx; urgency=medium
+
+  * update MXLiveLogo theme (dynamic scaling, CharlesV)
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Tue, 04 Jul 2023 20:58:53 -0400
+
+plymouth-themes-mx (23.06.06) mx; urgency=medium
+
+  * do not rebuild initramfs while running live 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 30 Jun 2023 19:03:00 -0400
+
+plymouth-themes-mx (23.06.05) mx; urgency=medium
+
+  * update MXLiveLogo, addresses frozen graphic on some systems
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 28 Jun 2023 19:49:42 -0400
+
+plymouth-themes-mx (23.06.03) mx; urgency=medium
+
+  * update MXLiveLogo theme, encryption box, size 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 24 Jun 2023 19:10:56 -0400
+
+plymouth-themes-mx (23.06.01) mx; urgency=medium
+
+  * update images and scripts for MXLiveLogo
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 12 Jun 2023 06:59:30 -0400
+
+plymouth-themes-mx (23.02.01) mx; urgency=medium
+
+  * add MXLiveLogo
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 19 Feb 2023 19:09:10 -0500
+
 plymouth-themes-mx (21.09.01) mx; urgency=medium
 
   * add mx21 defualt (elegant-linen-grey) 

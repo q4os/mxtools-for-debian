@@ -297,10 +297,8 @@
         <location filename="../mainwindow.cpp" line="152"/>
         <source>Writing %1 using &apos;dd&apos; command to /dev/%2,
 
-Please wait until the the process is completed</source>
-        <translation>Skriver %1 med &apos;dd&apos;-kommando til /dev/%2,
-
-Vent venligst indtil processen er fuldført</translation>
+Please wait until the process is completed</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="312"/>

@@ -34,7 +34,6 @@ Lazpaint
    <id>Editor gambar dengan lapisan raster dan vektor</id>
    <is>Myndritstjóri með raster- og vektorlagi</is>
    <it>Editor di immagini con livelli raster e vettoriali</it>
-   <ja_JP>ラスターレイヤーとベクターレイヤーを備えた画像エディター</ja_JP>
    <ja>ラスターレイヤーとベクターレイヤーを備えた画像エディター</ja>
    <kk>Растрлық және векторлық қабаттары бар кескін редакторы</kk>
    <ko>래스터 및 벡터 레이어가 있는 이미지 편집기</ko>

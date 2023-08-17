@@ -6,7 +6,7 @@
     <message>
         <location filename="../mainwindow.ui" line="14"/>
         <source>Program_Name</source>
-        <translation>プログラムの名前(&amp;N)</translation>
+        <translation>プログラム名(&amp;N)</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="46"/>
@@ -98,7 +98,7 @@
     <message>
         <location filename="../mainwindow.ui" line="334"/>
         <source>Save the original boot directory when updating a live-usb</source>
-        <translation>ライブUSB更新時に元の boot ディレクトリを保存</translation>
+        <translation>LiveUSB 更新時に元の boot ディレクトリを保存</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="341"/>
@@ -113,7 +113,7 @@
     <message>
         <location filename="../mainwindow.ui" line="351"/>
         <source>Update (only update an existing live-usb)</source>
-        <translation>更新（既存ライブUSBの更新のみ）</translation>
+        <translation>更新（既存の LiveUSB 更新のみ）</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="358"/>
@@ -204,7 +204,7 @@
     <message>
         <location filename="../mainwindow.ui" line="582"/>
         <source>Full-featured mode - writable Li&amp;veUSB</source>
-        <translation>フル機能モード - 書き込み可能なLi&amp;veUSB</translation>
+        <translation>フル機能モード - 書き込み可能な LiveUSB(&amp;V)</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="592"/>
@@ -214,12 +214,12 @@
     <message>
         <location filename="../mainwindow.ui" line="595"/>
         <source>Image &amp;mode - read-only LiveUSB (dd)</source>
-        <translation>イメージ &amp;モード - 読み取り専用の LiveUSB (dd)</translation>
+        <translation>イメージモード - 読み取り専用の LiveUSB (dd)(&amp;M)</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="609"/>
         <source>For distros other than antiX/MX use image mode (dd).</source>
-        <translation>antiX/MX 以外のディストロではイメージモード(dd)を使用します</translation>
+        <translation>antiX/MX 以外のディストロではイメージモード (dd) を使用します</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="657"/>
@@ -229,7 +229,7 @@
     <message>
         <location filename="../mainwindow.ui" line="695"/>
         <source>Percent of USB-device to use:</source>
-        <translation>USBデバイスの使用率:</translation>
+        <translation>USB デバイスの使用率:</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="702"/>
@@ -239,7 +239,7 @@
     <message>
         <location filename="../mainwindow.ui" line="750"/>
         <source>Don&apos;t run commands that affect the usb device</source>
-        <translation>usb デバイスに影響を与えるコマンドを実行しないでください</translation>
+        <translation>USB デバイスに影響を与えるコマンドを実行しない</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="753"/>
@@ -249,12 +249,12 @@
     <message>
         <location filename="../mainwindow.ui" line="760"/>
         <source>clone from a mounted live-usb or iso-file.</source>
-        <translation>マウントされたライブUSBやISOファイルからクローンを作成</translation>
+        <translation>マウントされた LiveUSB や ISO ファイルからクローンを作成します。</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="763"/>
         <source>Clone an existing live system</source>
-        <translation>すでに作成済みのライブシステムをクローン</translation>
+        <translation>既存のライブシステムをクローン</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="770"/>
@@ -297,8 +297,10 @@
         <location filename="../mainwindow.cpp" line="152"/>
         <source>Writing %1 using &apos;dd&apos; command to /dev/%2,
 
-Please wait until the the process is completed</source>
-        <translation>dd コマンドを使用して %1 を /dev/%2 に書き込んでるので、処理完了までお待ちください</translation>
+Please wait until the process is completed</source>
+        <translation>&apos;dd&apos; コマンドを使用して %1 を /dev/%2 に書き込んでいます
+
+処理が完了するまでお待ちください</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="312"/>
@@ -313,7 +315,7 @@ Please wait until the the process is completed</source>
     <message>
         <location filename="../mainwindow.cpp" line="317"/>
         <source>Error encountered in the LiveUSB creation process</source>
-        <translation>ライブUSBの作成プロセスでエラーが発生しました</translation>
+        <translation>LiveUSB の作成プロセスでエラーが発生しました</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="375"/>
@@ -323,7 +325,7 @@ Please wait until the the process is completed</source>
     <message>
         <location filename="../mainwindow.cpp" line="375"/>
         <source>Please select a USB device to write to</source>
-        <translation>書き込むUSBデバイスを選択してください</translation>
+        <translation>書き込む USB デバイスを選択してください</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="378"/>
@@ -352,7 +354,7 @@ Please wait until the the process is completed</source>
     <message>
         <location filename="../mainwindow.cpp" line="415"/>
         <source>Program for creating a live-usb from an iso-file, another live-usb, a live-cd/dvd, or a running live system.</source>
-        <translation>ISOファイルや別のライブUSB、ライブCD/DVD または実行中のライブシステムからライブUSBを作成するためのプログラム。</translation>
+        <translation>ISO ファイルや別の LiveUSB、LiveCD/DVD または実行中のライブシステムから LiveUSB を作成するためのプログラム。</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="418"/>
@@ -393,7 +395,7 @@ Please wait until the the process is completed</source>
     <message>
         <location filename="../mainwindow.cpp" line="474"/>
         <source>Hide advanced options</source>
-        <translation>詳細オプションを非表示</translation>
+        <translation>詳細オプションを隠す</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="500"/>
@@ -444,12 +446,12 @@ Please wait until the the process is completed</source>
     <message>
         <location filename="../main.cpp" line="57"/>
         <source>Program for creating a live-usb from an iso-file, another live-usb, a live-cd/dvd, or a running live system.</source>
-        <translation>ISOファイルや別のライブUSB、ライブCD/DVD または実行中のライブシステムからライブUSBを作成するためのプログラム。</translation>
+        <translation>ISO ファイルや別の LiveUSB、LiveCD/DVD または実行中のライブシステムから LiveUSB を作成するためのプログラム。</translation>
     </message>
     <message>
         <location filename="../main.cpp" line="61"/>
         <source>filename</source>
-        <translation>ファイルの名前</translation>
+        <translation>ファイル名</translation>
     </message>
     <message>
         <location filename="../main.cpp" line="61"/>
@@ -469,7 +471,7 @@ Please wait until the the process is completed</source>
     <message>
         <location filename="../main.cpp" line="89"/>
         <source>You seem to be logged in as root, please log out and log in as normal user to use this program.</source>
-        <translation>rootとしてログインしているようです。このプログラムを使用するには、一度ログアウトして通常のユーザーとしてログインしてください。</translation>
+        <translation>root としてログインしているようです。このプログラムを使用するには、一度ログアウトして通常のユーザーとしてログインしてください。</translation>
     </message>
     <message>
         <location filename="../main.cpp" line="103"/>

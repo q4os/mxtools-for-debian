@@ -18,39 +18,38 @@ Turkish_Thunderbird
    <cs>Turkish localisation of Thunderbird</cs>
    <da>Tyrkisk oversættelse af Thunderbird</da>
    <de>Türkische Lokalisierung von Thunderbird</de>
-   <el>Τουρκικός εντοπισμός του Thunderbird</el>
+   <el>Τουρκικά για το Thunderbird</el>
    <en>Turkish localisation of Thunderbird</en>
-   <es>Localización Turca de Thunderbird</es>
+   <es>Localización Turco de Thunderbird</es>
    <et>Turkish localisation of Thunderbird</et>
    <eu>Turkish localisation of Thunderbird</eu>
    <fa>Turkish localisation of Thunderbird</fa>
    <fil_PH>Turkish localisation of Thunderbird</fil_PH>
-   <fi>Turkish localisation of Thunderbird</fi>
+   <fi>Turkkilainen Thunderbird-kotoistus</fi>
    <fr>Localisation turque pour Thunderbird</fr>
    <he_IL>Turkish localisation of Thunderbird</he_IL>
-   <hi>Turkish localisation of Thunderbird</hi>
+   <hi>थंडरबर्ड का तुर्क संस्करण</hi>
    <hr>Turkish localisation of Thunderbird</hr>
    <hu>Turkish localisation of Thunderbird</hu>
    <id>Turkish localisation of Thunderbird</id>
    <is>Turkish localisation of Thunderbird</is>
    <it>Localizzazione turca di Thunderbird</it>
-   <ja_JP>Turkish localisation of Thunderbird</ja_JP>
-   <ja>Turkish localisation of Thunderbird</ja>
+   <ja>Thunderbird のトルコ語パック</ja>
    <kk>Turkish localisation of Thunderbird</kk>
    <ko>Turkish localisation of Thunderbird</ko>
    <lt>Turkish localisation of Thunderbird</lt>
    <mk>Turkish localisation of Thunderbird</mk>
    <mr>Turkish localisation of Thunderbird</mr>
-   <nb>Turkish localisation of Thunderbird</nb>
+   <nb>Tyrkisk lokaltilpassing av Thunderbird</nb>
    <nl>Turkse lokalisatie van Thunderbird</nl>
    <pl>Turecka lokalizacja Thunderbirda</pl>
-   <pt_BR>Turco Localização para Thunderbird</pt_BR>
+   <pt_BR>Turco Localização para o Thunderbird</pt_BR>
    <pt>Turco Localização para Thunderbird</pt>
    <ro>Turkish localisation of Thunderbird</ro>
-   <ru>Turkish localisation of Thunderbird</ru>
+   <ru>Турецкий перевод для Thunderbird</ru>
    <sk>Turkish localisation of Thunderbird</sk>
-   <sl>Turkish localisation of Thunderbird</sl>
-   <sq>Turkish localisation of Thunderbird</sq>
+   <sl>Turške krajevne nastavitve za Thunderbird</sl>
+   <sq>Përkthimi i Thunderbird-it në turqisht</sq>
    <sr>Turkish localisation of Thunderbird</sr>
    <sv>Turkisk lokalisering av Thunderbird</sv>
    <tr>Thunderbird'ün Türkçe yerelleştirmesi</tr>

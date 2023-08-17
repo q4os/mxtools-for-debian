@@ -20,12 +20,12 @@ all
 <screenshot></screenshot>
 
 <preinstall>
-apt-get update
+
 </preinstall>
 
 <install_package_names>
 desktop-defaults-mx-xfce
-mx21-artwork
+mx23-artwork
 xfce-superkey-mx
 xfce4-appfinder
 xfce4-battery-plugin
@@ -83,7 +83,6 @@ mx-comfort-themes
 <uninstall_package_names>
 desktop-defaults-mx-xfce-desktop
 desktop-defaultx-mx-xfce-system
-mx21-artwork
 xfce-superkey-mx
 xfce4-appfinder
 xfce4-battery-plugin

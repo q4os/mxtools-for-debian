@@ -3,7 +3,6 @@ init.d/*		etc/init.d
 fstrim-mx       	etc/cron.weekly      
 Jar-Loader.desktop	usr/share/applications
 Py-Loader.desktop 	usr/share/applications
-99-mx_allow_non_root_dmesg.conf	etc/sysctl.d
 #quick-system-info/Quick_System_Info.desktop usr/share/applications
 quick-system-info/quick-system-info-mx usr/bin
 #quick-system-info/mx-qsi.png /usr/share/pixmaps

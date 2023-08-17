@@ -25,26 +25,25 @@ Google Earth
    <eu>Google Earth Globe</eu>
    <fa>Google Earth Globe</fa>
    <fil_PH>Google Earth Globe</fil_PH>
-   <fi>Google Earth Globe</fi>
+   <fi>Google Earth Maapallo</fi>
    <fr>Google Earth Globe</fr>
    <he_IL>Google Earth Globe</he_IL>
-   <hi>Google Earth Globe</hi>
+   <hi>गूगल पृथ्वी ग्लोब</hi>
    <hr>Google Earth Globe</hr>
    <hu>Google Earth Globe</hu>
    <id>Google Earth Globe</id>
    <is>Google Earth Globe</is>
    <it>Google Earth Globe</it>
-   <ja_JP>Google Earth Globe</ja_JP>
-   <ja>Google Earth Globe</ja>
+   <ja>Google Earth 地球儀</ja>
    <kk>Google Earth Globe</kk>
    <ko>Google Earth Globe</ko>
    <lt>Google Earth Globe</lt>
    <mk>Google Earth Globe</mk>
    <mr>Google Earth Globe</mr>
-   <nb>Google Earth Globe</nb>
+   <nb>Globusen Google Earth</nb>
    <nl>Google Earth Wereldbol</nl>
    <pl>Globus Google Earth</pl>
-   <pt_BR>Ver a Terra a partir do espaço</pt_BR>
+   <pt_BR>Google Earth - Visualizar o planeta Terra a partir do espaço</pt_BR>
    <pt>Ver a Terra a partir do espaço</pt>
    <ro>Google Earth Globe</ro>
    <ru>Google Планета Земля - спутниковые снимки земного шара</ru>

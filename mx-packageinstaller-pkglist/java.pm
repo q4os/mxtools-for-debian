@@ -34,7 +34,6 @@ Java
    <id>Java 17- installs openjdk-17</id>
    <is>Java 17- installs openjdk-17</is>
    <it>Java 17- installa openjdk-17</it>
-   <ja_JP>Java 17- installs openjdk-17</ja_JP>
    <ja>Java 17- installs openjdk-17</ja>
    <kk>Java 17- installs openjdk-17</kk>
    <ko>Java 17- installs openjdk-17</ko>

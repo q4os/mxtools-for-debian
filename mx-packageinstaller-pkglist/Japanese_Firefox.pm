@@ -18,39 +18,38 @@ Japanese_Firefox
    <cs>Japanese localisation of Firefox</cs>
    <da>Japansk oversættelse af Firefox</da>
    <de>Japanische Lokalisierung von Firefox</de>
-   <el>Ιαπωνικό εντοπισμό του Firefox</el>
+   <el>Ιαπωνικά για το Firefox</el>
    <en>Japanese localisation of Firefox</en>
    <es>Localización Japonesa de Firefox</es>
    <et>Japanese localisation of Firefox</et>
    <eu>Japanese localisation of Firefox</eu>
    <fa>Japanese localisation of Firefox</fa>
    <fil_PH>Japanese localisation of Firefox</fil_PH>
-   <fi>Japanese localisation of Firefox</fi>
+   <fi>Japanilainen Firefox-kotoistus</fi>
    <fr>Localisation japonaise pour Firefox</fr>
    <he_IL>Japanese localisation of Firefox</he_IL>
-   <hi>Japanese localisation of Firefox</hi>
+   <hi>फायरफॉक्स का जापानी संस्करण</hi>
    <hr>Japanese localisation of Firefox</hr>
    <hu>Japanese localisation of Firefox</hu>
    <id>Japanese localisation of Firefox</id>
    <is>Japanese localisation of Firefox</is>
-   <it>Localizzazione giapponese di Firefox</it>
-   <ja_JP>Japanese localisation of Firefox</ja_JP>
-   <ja>Japanese localisation of Firefox</ja>
+   <it>Localizzazione giapponese di Firefox </it>
+   <ja>Firefox の日本語パック</ja>
    <kk>Japanese localisation of Firefox</kk>
    <ko>Japanese localisation of Firefox</ko>
    <lt>Japanese localisation of Firefox</lt>
    <mk>Japanese localisation of Firefox</mk>
    <mr>Japanese localisation of Firefox</mr>
-   <nb>Japanese localisation of Firefox</nb>
+   <nb>Japansk lokaltilpassing av Firefox</nb>
    <nl>Japanse lokalisatie van Firefox</nl>
    <pl>Japońska lokalizacja przeglądarki Firefox</pl>
-   <pt_BR>Japonês Localização para Firefox</pt_BR>
+   <pt_BR>Japonês Localização para o Firefox</pt_BR>
    <pt>Japonês Localização para Firefox</pt>
    <ro>Japanese localisation of Firefox</ro>
    <ru>Японская локализация Firefox</ru>
    <sk>Japanese localisation of Firefox</sk>
-   <sl>Japanese localisation of Firefox</sl>
-   <sq>Japanese localisation of Firefox</sq>
+   <sl>Japonske krajevne nastavitve za Firefox</sl>
+   <sq>Përkthimi i Firefox-it në japonisht</sq>
    <sr>Japanese localisation of Firefox</sr>
    <sv>Japansk lokalisering av Firefox</sv>
    <tr>Firefox'un Japonca yerelleştirmesi</tr>

@@ -1,3 +1,42 @@
+mx-repo-manager (23.8.02) mx; urgency=medium
+
+  * Minor GUI improvement:
+  *     - don't scroll/refresh after applying the change
+  *     - disable Apply button after the change has been applied
+
+ -- Adrian <adrian@mxlinux.org>  Tue, 08 Aug 2023 16:39:07 -0400
+
+mx-repo-manager (23.8.01) mx; urgency=medium
+
+  * Fix: restore sources list files only, remove wrongly copied license file
+
+ -- fehlix <fehlix@mxlinux.org>  Mon, 07 Aug 2023 17:46:27 -0400
+
+mx-repo-manager (23.8) mx; urgency=medium
+
+  * Fix: avoid displaying '#debian backports' comment as a repo
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 07 Aug 2023 11:39:28 -0400
+
+mx-repo-manager (23.7.01) mx; urgency=medium
+
+  * Fix a couple of translations
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 24 Jul 2023 08:58:02 -0400
+
+mx-repo-manager (23.7) mx; urgency=medium
+
+  * Update translations
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 20 Jul 2023 17:03:30 -0400
+
+mx-repo-manager (23.6) mx; urgency=medium
+
+  * Update policy
+  * Refresh translation
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 24 May 2023 13:43:14 -0400
+
 mx-repo-manager (23.5.01) mx; urgency=medium
 
   * Update logo

@@ -25,32 +25,31 @@ Remote Access
    <eu>Remote access help app from antiX</eu>
    <fa>Remote access help app from antiX</fa>
    <fil_PH>Remote access help app from antiX</fil_PH>
-   <fi>Remote access help app from antiX</fi>
-   <fr>Application d'aide pour l'accès à distance d'antiX</fr>
+   <fi>Etäyhteyden apusovellus antiX-kehittäjäryhmältä</fi>
+   <fr>Application d’aide pour l’accès à distance d’antiX</fr>
    <he_IL>Remote access help app from antiX</he_IL>
-   <hi>Remote access help app from antiX</hi>
+   <hi>एंटी-एक्स द्वारा दूरस्थ अभिगम सहायता अनुप्रयोग</hi>
    <hr>Remote access help app from antiX</hr>
    <hu>Remote access help app from antiX</hu>
    <id>Remote access help app from antiX</id>
    <is>Remote access help app from antiX</is>
    <it>App da antiX, che permette un accesso remoto</it>
-   <ja_JP>Remote access help app from antiX</ja_JP>
-   <ja>Remote access help app from antiX</ja>
+   <ja>antiX リモートアクセスのアプリヘルプ</ja>
    <kk>Remote access help app from antiX</kk>
    <ko>Remote access help app from antiX</ko>
    <lt>Nuotolinės prieigos pagalbos programa iš antiX</lt>
    <mk>Remote access help app from antiX</mk>
    <mr>Remote access help app from antiX</mr>
-   <nb>Remote access help app from antiX</nb>
+   <nb>Fjernstyringsprogram fra antiX</nb>
    <nl>Afstand toegankelijke hulp app van antiX</nl>
    <pl>aplikacja zdalnej pomocy od antiX</pl>
-   <pt_BR>Aplicativo do antiX para ajuda por acesso remoto</pt_BR>
+   <pt_BR>Aplicativo de ajuda de acesso remoto do antiX</pt_BR>
    <pt>Aplicação do antiX para ajuda por acesso remoto</pt>
    <ro>Remote access help app from antiX</ro>
-   <ru>Приложение для помощи через удаленный доступ</ru>
+   <ru>Приложение antiX для помощи по удалённому доступу</ru>
    <sk>Remote access help app from antiX</sk>
    <sl>antiX pomoč za oddaljni dostop</sl>
-   <sq>Remote access help app from antiX</sq>
+   <sq>Aplikacion ndihme nga antiX për hyrje së largëti</sq>
    <sr>Remote access help app from antiX</sr>
    <sv>Hjälp-app för fjärråtkomst från antiX</sv>
    <tr>AntiX'ten uzaktan erişim yardımı uygulaması</tr>
@@ -68,7 +67,7 @@ Remote Access
 
 <preinstall>
 apt-get install antix-archive-keyring
-echo "deb http://la.mxrepo.com/antix/buster buster main">/etc/apt/sources.list.d/mxpitemp.list
+echo "deb http://la.mxrepo.com/antix/bookworm bookworm main">/etc/apt/sources.list.d/mxpitemp.list
 apt-get update
 </preinstall>
 

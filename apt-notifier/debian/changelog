@@ -1,3 +1,29 @@
+apt-notifier (23.07.02) mx; urgency=medium
+
+  * update pulse icons [MelBer]
+
+ -- fehlix <fehlix@mxlinux.org>  Mon, 10 Jul 2023 05:40:06 -0500
+
+apt-notifier (23.07.01) mx; urgency=medium
+
+  * set max size for yad and terminal window
+  * fix nala's --raw-dpkg switch for kernel- and dkms-upgrades
+
+ -- fehlix <fehlix@mxlinux.org>  Sat, 01 Jul 2023 19:54:12 -0500
+
+apt-notifier (23.06.01) mx; urgency=medium
+
+  * set apt as default
+
+ -- fehlix <fehlix@mxlinux.org>  Sat, 10 Jun 2023 15:36:00 -0500
+
+apt-notifier (23.05.01) mx; urgency=medium
+
+  * set nala as default
+  * use nala's --raw-dpkg switch for kernel- and dkms- upgrades
+
+ -- fehlix <fehlix@mxlinux.org>  Wed, 17 May 2023 20:08:18 -0500
+
 apt-notifier (23.03.01) mx; urgency=medium
 
   * fix quick-live-update

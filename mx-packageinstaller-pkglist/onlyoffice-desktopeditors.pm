@@ -34,7 +34,6 @@ OnlyOffice Desktop Editors
    <id>OnlyOffice Desktop Editors - a free software office suite</id>
    <is>OnlyOffice Desktop Editors - a free software office suite</is>
    <it>OnlyOffice Desktop Editors - a free software office suite</it>
-   <ja_JP>OnlyOffice Desktop Editors - a free software office suite</ja_JP>
    <ja>OnlyOffice Desktop Editors - a free software office suite</ja>
    <kk>OnlyOffice Desktop Editors - a free software office suite</kk>
    <ko>OnlyOffice Desktop Editors - a free software office suite</ko>
@@ -67,6 +66,8 @@ OnlyOffice Desktop Editors
 <screenshot></screenshot>
 
 <preinstall>
+<![CDATA[
+
 echo " "
 echo "Preparing installation of 'OnlyOffice Desktop Editors'..."
 TMP=$(mktemp -d /tmp/mxpi-tmpdir-onlyoffice-desktop-editors.XXXXXXXXXXXXX)
@@ -76,7 +77,7 @@ trap tidy_up EXIT
 #echo "Fetching release signature..."
 pushd $TMP >/dev/null
 # OnlyOffice long key-id:
-KEY="0x8320CA65CB2DE8E5"  # OnlyOffice signing long key-id
+KEY="CB2DE8E5"  # OnlyOffice signing long key-id
 
 popd >/dev/null
 echo "Fetching OnlyOffice release signing key 0x$KEY ..."
@@ -85,35 +86,45 @@ GHD="--homedir $TMP"
 KBX=$TMP/onlyoffice-archive-keyring.kbx
 RNG="--no-default-keyring  --keyring $KBX"
 OPT="--import-options self-sigs-only,import-clean"
-HKP="--keyserver hkp://keyserver.ubuntu.com:80"  
+KEYSERVER=(
+hkps://keys.openpgp.org
+hkps://keyserver.ubuntu.com
+hkps://pgpkeys.eu
+hkp://keyserver.ubuntu.com:80
+)
 GPG=/etc/apt/trusted.gpg.d/onlyoffice-archive-keyring.gpg
-if gpg -v $GHD $RNG $OPT $HKP --recv-keys $KEY; then
-   echo "Add onlyoffice-archive-keyring.gpg ..."
-   if [ -f $GPG ]; then
-       rm $GPG 
-   fi
-   gpg -v $GHD $RNG --output $GPG --export $KEY
-else
+found=0
+for KSRV in ${KEYSERVER[@]}; do
+    echo gpg -v $GHD $RNG $OPT --keyserver $KSRV --recv-keys $KEY
+    gpg -v $GHD $RNG $OPT --keyserver $KSRV --recv-keys $KEY || :
+    found=$( gpg --keyid-format 0xlong  $GHD $RNG --list-keys $KEY| grep -c "^pub.*$KEY" )
+    if (( found != 0 )) ; then
+       echo "Add onlyoffice-archive-keyring.gpg ..."
+       [ -f $GPG ] && rm $GPG
+       gpg -v $GHD $RNG --output $GPG --export $KEY
+       break
+    fi
+done
+if (( found == 0 )); then
    echo "Error:****"
    echo "Fatal: Cannot fetch OnlyOffice release signing key 0x$KEY ..."
    if [ -f /etc/apt/sources.list.d/onlyoffice.list ]; then
       echo "Removing OnlyOffice apt-source-list..."
       rm /etc/apt/sources.list.d/onlyoffice.list
-   fi 
+   fi
    echo "Error: exit 1"
-   exit 1 
+   exit 1
 fi
 
 # add OnlyOffice source ĺist if not allready added
 #
-REXP="^[[:space:]]*deb[[:space:]]+https://download.onlyoffice.com/repo/debian[[:space:]]+squeeze[[:space:]]+main"
-if ! grep -sq -E "$REXP" /etc/apt/sources.list{,.d/*.list}; then
+if [ $(apt-get update --print-uris | grep -c -m1 -E "https://download.onlyoffice.com/repo/debian") = 0 ]; then
    echo "Add OnlyOffice apt-source-list..."
-   echo "deb https://download.onlyoffice.com/repo/debian squeeze main" > /etc/apt/sources.list.d/onlyoffice.list  
+   echo "deb https://download.onlyoffice.com/repo/debian squeeze main" > /etc/apt/sources.list.d/onlyoffice.list
    echo /etc/apt/sources.list.d/onlyoffice.list :
    cat  /etc/apt/sources.list.d/onlyoffice.list
    echo " "
-fi 
+fi
 echo " "
 echo "Refreshing package lists ..."
 apt-get  -o=Dpkg::Use-Pty=0  update
@@ -121,6 +132,7 @@ echo " "
 echo "Preparations finished ..."
 echo "Installing onlyoffice-desktopeditors ..."
 echo " "
+]]>
 </preinstall>
 
 <install_package_names>
@@ -128,7 +140,7 @@ onlyoffice-desktopeditors
 </install_package_names>
 
 <postinstall>
-echo "Done!"
+echo "...$(gettext -d apt -s ' Done')!"
 </postinstall>
 
 <uninstall_package_names>
@@ -139,14 +151,14 @@ onlyoffice-desktopeditors
 echo " "
 echo "Purge onlyoffice-desktopeditors ..."
 apt-get  -o=Dpkg::Use-Pty=0  --yes remove --purge  onlyoffice-desktopeditors
- 
-if [  -f /etc/apt/sources.list.d/onlyoffice.list ]; then 
-   rm -f /etc/apt/sources.list.d/onlyoffice.list; 
+
+if [  -f /etc/apt/sources.list.d/onlyoffice.list ]; then
+   rm -f /etc/apt/sources.list.d/onlyoffice.list;
 fi
-if [  -f /etc/apt/trusted.gpg.d/onlyoffice-archive-keyring.gpg ]; then 
-   rm -f /etc/apt/trusted.gpg.d/onlyoffice-archive-keyring.gpg; 
+if [  -f /etc/apt/trusted.gpg.d/onlyoffice-archive-keyring.gpg ]; then
+   rm -f /etc/apt/trusted.gpg.d/onlyoffice-archive-keyring.gpg;
 fi
-echo "Done!"
+echo "...$(gettext -d apt -s ' Done')!"
 </postuninstall>
 
 </app>

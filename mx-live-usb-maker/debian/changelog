@@ -1,3 +1,22 @@
+mx-live-usb-maker (23.7.02) mx; urgency=medium
+
+  * Update translations
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 20 Jul 2023 16:39:10 -0400
+
+mx-live-usb-maker (23.7.01) mx; urgency=medium
+
+  * Fix typo
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 19 Jul 2023 10:42:42 -0400
+
+mx-live-usb-maker (23.7) mx; urgency=medium
+
+  * Refresh translations
+  * Update policy file
+
+ -- Adrian <adrian@mxlinux.org>  Sat, 01 Jul 2023 19:21:06 -0400
+
 mx-live-usb-maker (23.5.01) mx; urgency=medium
 
   * Update icon

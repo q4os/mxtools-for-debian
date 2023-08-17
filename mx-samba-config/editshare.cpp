@@ -25,6 +25,7 @@
 
 #include <QDebug>
 #include <QFileDialog>
+#include <QPushButton>
 
 EditShare::EditShare(QWidget *parent)
     : QDialog(parent)
@@ -32,11 +33,12 @@ EditShare::EditShare(QWidget *parent)
 {
     ui->setupUi(this);
     setWindowFlags(Qt::WindowStaysOnTopHint);
+    connect(ui->pushChooseDirectory, &QPushButton::clicked, this, &EditShare::pushChooseDirectory_clicked);
 }
 
 EditShare::~EditShare() { delete ui; }
 
-void EditShare::on_pushChooseDirectory_clicked()
+void EditShare::pushChooseDirectory_clicked()
 {
     QFileDialog dialog;
     QString path = ui->textSharePath->text();

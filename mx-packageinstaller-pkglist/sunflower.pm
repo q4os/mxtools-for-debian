@@ -34,7 +34,6 @@ Sunflower
    <id> Small and highly customizable twin-panel file manager</id>
    <is> Small and highly customizable twin-panel file manager</is>
    <it> Small and highly customizable twin-panel file manager</it>
-   <ja_JP> Small and highly customizable twin-panel file manager</ja_JP>
    <ja> Small and highly customizable twin-panel file manager</ja>
    <kk> Small and highly customizable twin-panel file manager</kk>
    <ko> Small and highly customizable twin-panel file manager</ko>

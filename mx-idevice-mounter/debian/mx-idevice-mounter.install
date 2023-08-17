@@ -1,4 +1,5 @@
 idevice-mounter	usr/bin
 iDevice-Mounter.desktop usr/share/applications
-idevice.svg usr/share/pixmaps
+idevice.png usr/share/pixmaps
+idevice.svg usr/share/icons/hicolor/scalable/apps
 license.html usr/share/doc/mx-idevice-mounter

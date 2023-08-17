@@ -39,21 +39,10 @@ class MainWindow : public QDialog
 {
     Q_OBJECT
 
-protected:
-    QProcess *proc {};
-
 public:
     explicit MainWindow(QWidget *parent = nullptr);
-    ~MainWindow();
+    ~MainWindow() override;
 
-    FlatButton *btn {};
-    QMultiMap<QString, QMultiMap<QString, QStringList>> info_map;
-    QMultiMap<QString, QStringList> category_map;
-    QStringList live_list;
-    QStringList maintenance_list;
-    QStringList setup_list;
-    QStringList software_list;
-    QStringList utilities_list;
     enum Info { Name, Comment, IconName, Exec, Category, Terminal };
 
     QIcon findIcon(QString icon_name);
@@ -68,21 +57,29 @@ private slots:
     static void pushHelp_clicked();
     void btn_clicked();
     void checkHide_clicked(bool checked);
-    void closeEvent(QCloseEvent *);
+    void closeEvent(QCloseEvent * /*unused*/) override;
     void pushAbout_clicked();
-    void resizeEvent(QResizeEvent *event);
+    void resizeEvent(QResizeEvent *event) override;
     void textSearch_textChanged(const QString &arg1);
 
 private:
     Ui::MainWindow *ui;
     QSettings settings;
-
+    FlatButton *btn {};
+    QMultiMap<QString, QMultiMap<QString, QStringList>> info_map;
+    QMultiMap<QString, QStringList> category_map;
+    QProcess *proc {};
+    QStringList live_list;
+    QStringList maintenance_list;
+    QStringList setup_list;
+    QStringList software_list;
+    QStringList utilities_list;
     int col_count = 0;
     int icon_size = 32;
     int max_col = 0;
     int max_elements = 0;
-    static void removeEnvExclusive(QStringList &list, const QStringList &termsToRemove);
-    static void fixExecItem(QString &item);
+    static void removeEnvExclusive(QStringList *list, const QStringList &termsToRemove);
+    static void fixExecItem(QString *item);
 };
 
 #endif // MAINWINDOW_H

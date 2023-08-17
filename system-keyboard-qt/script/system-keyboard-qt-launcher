@@ -31,12 +31,11 @@ else
     # add /usr/local/bin as first entry if not already
     [ -z "${PATH##/usr/local/bin:*}" ] || PATH="/usr/local/bin:$PATH"
 
-    # put pattern list of environment variables we want get
+    # put pattern list of environment variables we want get 
     # from users environment into an array
     __ENVIRONEMENT_PATTERN__=(
     DESKTOP_SESSION=
     KDE_FULL_SESSION=
-    HOME=
     LANG=
     LANGUAGE=
     LC_[[:alpha:]]+=
@@ -45,7 +44,6 @@ else
     XDG_CURRENT_DESKTOP=
     XDG_SESSION_TYPE=
     WAYLAND_DISPLAY=
-    DBUS_SESSION_BUS_ADDRESS=
     )
     # combine array into a string of space separated entries
     __ENVIRONEMENT_PATTERN__="${__ENVIRONEMENT_PATTERN__[*]}"

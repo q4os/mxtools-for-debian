@@ -18,39 +18,38 @@ Polish_Firefox
    <cs>Polish localisation of Firefox</cs>
    <da>Polsk oversættelse af Firefox</da>
    <de>Polnische Lokalisierung von Firefox</de>
-   <el>Πολωνική εντοπισμός του Firefox</el>
+   <el>Πολωνικά για το Firefox</el>
    <en>Polish localisation of Firefox</en>
    <es>Localización Polaca de Firefox</es>
    <et>Polish localisation of Firefox</et>
    <eu>Polish localisation of Firefox</eu>
    <fa>Polish localisation of Firefox</fa>
    <fil_PH>Polish localisation of Firefox</fil_PH>
-   <fi>Polish localisation of Firefox</fi>
+   <fi>Puolalainen Firefox-kotoistus</fi>
    <fr>Localisation polonaise pour Firefox</fr>
    <he_IL>Polish localisation of Firefox</he_IL>
-   <hi>Polish localisation of Firefox</hi>
+   <hi>फायरफॉक्स का पोलिश संस्करण</hi>
    <hr>Polish localisation of Firefox</hr>
    <hu>Polish localisation of Firefox</hu>
    <id>Polish localisation of Firefox</id>
    <is>Polish localisation of Firefox</is>
-   <it>Localizzazione polacca di Firefox</it>
-   <ja_JP>Polish localisation of Firefox</ja_JP>
-   <ja>Polish localisation of Firefox</ja>
+   <it>Localizzazione polacca di Firefox </it>
+   <ja>Firefox のポーランド語パック</ja>
    <kk>Polish localisation of Firefox</kk>
    <ko>Polish localisation of Firefox</ko>
    <lt>Polish localisation of Firefox</lt>
    <mk>Polish localisation of Firefox</mk>
    <mr>Polish localisation of Firefox</mr>
-   <nb>Polish localisation of Firefox</nb>
+   <nb>Polsk lokaltilpassing av Firefox</nb>
    <nl>Poolse lokalisatie van Firefox</nl>
    <pl>Polska lokalizacja przeglądarki Firefox</pl>
-   <pt_BR>Polonês Localização para Firefox</pt_BR>
+   <pt_BR>Polonês Localização para o Firefox</pt_BR>
    <pt>Polaco Localização para Firefox</pt>
    <ro>Polish localisation of Firefox</ro>
    <ru>Польская локализация Firefox</ru>
    <sk>Polish localisation of Firefox</sk>
-   <sl>Polish localisation of Firefox</sl>
-   <sq>Polish localisation of Firefox</sq>
+   <sl>Poljske krajevne nastavitve za Firefox</sl>
+   <sq>Përkthimi i Firefox-it në polonisht</sq>
    <sr>Polish localisation of Firefox</sr>
    <sv>Polsk lokalisering av Firefox</sv>
    <tr>Firefox'un Lehçe yerelleştirmesi</tr>

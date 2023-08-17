@@ -25,32 +25,31 @@ Ukrainian_Fonts
    <eu>Ukrainian fonts packages</eu>
    <fa>Ukrainian fonts packages</fa>
    <fil_PH>Ukrainian fonts packages</fil_PH>
-   <fi>Ukrainian fonts packages</fi>
+   <fi>Ukrainalaiset kirjasinpaketit</fi>
    <fr>Paquets pour polices ukrainiennes</fr>
    <he_IL>Ukrainian fonts packages</he_IL>
-   <hi>Ukrainian fonts packages</hi>
+   <hi>यूक्रेनी मुद्रलिपि पैकेज</hi>
    <hr>Ukrainian fonts packages</hr>
    <hu>Ukrainian fonts packages</hu>
    <id>Ukrainian fonts packages</id>
    <is>Ukrainian fonts packages</is>
    <it>Pacchetti di fonts per l'Ucraino</it>
-   <ja_JP>Ukrainian fonts packages</ja_JP>
-   <ja>Ukrainian fonts packages</ja>
+   <ja>ウクライナ語のフォントパッケージ集</ja>
    <kk>Ukrainian fonts packages</kk>
    <ko>Ukrainian fonts packages</ko>
    <lt>Ukrainian fonts packages</lt>
    <mk>Ukrainian fonts packages</mk>
    <mr>Ukrainian fonts packages</mr>
-   <nb>Ukrainian fonts packages</nb>
+   <nb>Pakke med ukrainske skrifttyper</nb>
    <nl>Oekraïense font pakketten</nl>
    <pl>pakiety z ukraińskimi fontami (czcionkami)</pl>
-   <pt_BR>Ucraniano Pacotes de fontes</pt_BR>
+   <pt_BR>Pacotes de Fontes Ucraniano</pt_BR>
    <pt>Ucraniano Pacotes de fontes</pt>
    <ro>Ukrainian fonts packages</ro>
-   <ru>Ukrainian fonts packages</ru>
+   <ru>Пакеты украинских шрифтов</ru>
    <sk>Ukrainian fonts packages</sk>
-   <sl>Ukrainian fonts packages</sl>
-   <sq>Ukrainian fonts packages</sq>
+   <sl>Ukrajinski paketi pisav</sl>
+   <sq>Paketa shkronjash ukrainishteje</sq>
    <sr>Ukrainian fonts packages</sr>
    <sv>Ukrainska typsnitts-paket</sv>
    <tr>Ukraynaca yazı tipi paketleri</tr>

@@ -18,42 +18,41 @@ AirVPN
    <cs>AirVPN - Eddie - OpenVPN GUI with additional user-friendly features</cs>
    <da>AirVPN - Eddie - OpenVPN GUI with additional user-friendly features</da>
    <de>AirVPN - Eddie - OpenVPN GUI mit zusätzlichen nutzerfreundlichen Möglichkeiten</de>
-   <el>AirVPN - Eddie - OpenVPN GUI with additional user-friendly features</el>
+   <el>AirVPN - Eddie - OpenVPN GUI με πρόσθετα φιλικά προς το χρήστη χαρακτηριστικά</el>
    <en>AirVPN - Eddie - OpenVPN GUI with additional user-friendly features</en>
-   <es>AirVPN - Eddie - OpenVPN GUI with additional user-friendly features</es>
+   <es>AirVPN - Eddie - OpenVPN GUI con características adicionales de fácil uso</es>
    <et>AirVPN - Eddie - OpenVPN GUI with additional user-friendly features</et>
    <eu>AirVPN - Eddie - OpenVPN GUI with additional user-friendly features</eu>
    <fa>AirVPN - Eddie - OpenVPN GUI with additional user-friendly features</fa>
    <fil_PH>AirVPN - Eddie - OpenVPN GUI with additional user-friendly features</fil_PH>
-   <fi>AirVPN - Eddie - OpenVPN GUI with additional user-friendly features</fi>
-   <fr>AirVPN - Eddie - OpenVPN GUI with additional user-friendly features</fr>
+   <fi>AirVPN - Eddie - OpenVPN-graafinen käyttöliittymä lisätyin käyttäjäystävällisin ominaisuuksin</fi>
+   <fr>AirVPN - Eddie - OpenVPN Interface graphique dotée de fonctionnalités conviviales</fr>
    <he_IL>AirVPN - Eddie - OpenVPN GUI with additional user-friendly features</he_IL>
-   <hi>AirVPN - Eddie - OpenVPN GUI with additional user-friendly features</hi>
+   <hi>एयर-वीपीएन - Eddie - अतिरिक्त उपयोक्ता हितैषी विशेषताओं युक्त ओपन वीपीएन का ग्राफ़िकल अंतरफलक</hi>
    <hr>AirVPN - Eddie - OpenVPN GUI with additional user-friendly features</hr>
    <hu>AirVPN - Eddie - OpenVPN GUI with additional user-friendly features</hu>
    <id>AirVPN - Eddie - OpenVPN GUI with additional user-friendly features</id>
    <is>AirVPN - Eddie - OpenVPN GUI with additional user-friendly features</is>
-   <it>AirVPN - Eddie - OpenVPN GUI with additional user-friendly features</it>
-   <ja_JP>AirVPN - Eddie - OpenVPN GUI with additional user-friendly features</ja_JP>
-   <ja>AirVPN - Eddie - OpenVPN GUI with additional user-friendly features</ja>
+   <it>AirVPN - Eddie - OpenVPN GUI con funzioni aggiuntive di facile utilizzo</it>
+   <ja>AirVPN - Eddie - ユーザーフレンドリーな機能を追加した OpenVPN GUI</ja>
    <kk>AirVPN - Eddie - OpenVPN GUI with additional user-friendly features</kk>
    <ko>AirVPN - Eddie - OpenVPN GUI with additional user-friendly features</ko>
    <lt>AirVPN - Eddie - OpenVPN GUI with additional user-friendly features</lt>
    <mk>AirVPN - Eddie - OpenVPN GUI with additional user-friendly features</mk>
    <mr>AirVPN - Eddie - OpenVPN GUI with additional user-friendly features</mr>
-   <nb>AirVPN - Eddie - OpenVPN GUI with additional user-friendly features</nb>
-   <nl>AirVPN - Eddie - OpenVPN GUI with additional user-friendly features</nl>
-   <pl>AirVPN - Eddie - OpenVPN GUI with additional user-friendly features</pl>
-   <pt_BR>AirVPN - Eddie - OpenVPN GUI with additional user-friendly features</pt_BR>
-   <pt>AirVPN - Eddie - OpenVPN GUI with additional user-friendly features</pt>
+   <nb>AirVPN - Eddie - OpenVPN-grensesnitt med brukervennlig funksjonalitet </nb>
+   <nl>AirVPN - Eddie - OpenVPN GUI met extra gebruiksvriendelijke functies</nl>
+   <pl>AirVPN - Eddie - OpenVPN GUI z dodatkowymi funkcjami przyjaznymi dla użytkownika</pl>
+   <pt_BR>AirVPN - Eddie - OpenVPN GUI com recursos adicionais de fácil utilização para o usuário</pt_BR>
+   <pt>AirVPN - Eddie - Interface gráfica do OpenVPN com funcionalidades adicionais intuitivas</pt>
    <ro>AirVPN - Eddie - OpenVPN GUI with additional user-friendly features</ro>
-   <ru>AirVPN - Eddie - OpenVPN GUI with additional user-friendly features</ru>
+   <ru>AirVPN - Eddie - Графический интерфейс OpenVPN с расширенными, удобными в использовании функциями</ru>
    <sk>AirVPN - Eddie - OpenVPN GUI with additional user-friendly features</sk>
-   <sl>AirVPN - Eddie - OpenVPN GUI with additional user-friendly features</sl>
-   <sq>AirVPN - Eddie - OpenVPN GUI with additional user-friendly features</sq>
+   <sl>AirVPN - Eddie - OpenVPN grafični vmesnik z dodatnimi uporabniku prijaznimi funkcijami</sl>
+   <sq>AirVPN - Eddie - GUI OpenVPN me veçori shtesë miqësore ndaj përdoruesit</sq>
    <sr>AirVPN - Eddie - OpenVPN GUI with additional user-friendly features</sr>
-   <sv>AirVPN - Eddie - OpenVPN GUI with additional user-friendly features</sv>
-   <tr>AirVPN - Eddie - OpenVPN GUI with additional user-friendly features</tr>
+   <sv>AirVPN - Eddie - OpenVPN GUI med tillagda användarvänliga funktioner</sv>
+   <tr>AirVPN - Eddie - Kullanıcı dostu ek özelliklere sahip OpenVPN Grafik arayüzü</tr>
    <uk>AirVPN - Eddie - OpenVPN GUI with additional user-friendly features</uk>
    <vi>AirVPN - Eddie - OpenVPN GUI with additional user-friendly features</vi>
    <zh_CN>AirVPN - Eddie - OpenVPN GUI with additional user-friendly features</zh_CN>

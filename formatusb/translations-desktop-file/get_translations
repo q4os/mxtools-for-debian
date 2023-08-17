@@ -24,7 +24,7 @@ fi
 
 
 #remove existing translations
-rm po/* 
+#rm po/* 
 
 
 # get all translations

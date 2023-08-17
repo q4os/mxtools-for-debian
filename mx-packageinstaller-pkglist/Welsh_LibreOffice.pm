@@ -18,42 +18,41 @@ Welsh_Libreoffice
    <cs>Welsh Language Meta-Package for LibreOffice</cs>
    <da>Welsh Language Meta-Package for LibreOffice</da>
    <de>Walisisches Meta-Paket für LibreOffice</de>
-   <el>LibreOffice στα ουαλικά</el>
+   <el>LibreOffice στα Ουαλικά</el>
    <en>Welsh Language Meta-Package for LibreOffice</en>
    <es>Meta-Paquete de idioma galés para LibreOffice</es>
    <et>Welsh Language Meta-Package for LibreOffice</et>
    <eu>Welsh Language Meta-Package for LibreOffice</eu>
    <fa>Welsh Language Meta-Package for LibreOffice</fa>
    <fil_PH>Welsh Language Meta-Package for LibreOffice</fil_PH>
-   <fi>Welsh Language Meta-Package for LibreOffice</fi>
-   <fr>Welsh Language Meta-Package for LibreOffice</fr>
+   <fi>Kymrinkielinen (Wales) kielipaketti LibreOffice:lle</fi>
+   <fr>Méta-paquet langue galloise pour LibreOffice</fr>
    <he_IL>Welsh Language Meta-Package for LibreOffice</he_IL>
-   <hi>Welsh Language Meta-Package for LibreOffice</hi>
+   <hi>लिब्रे-ऑफिस हेतु वेल्श भाषा मेटा-पैकेज</hi>
    <hr>Welsh Language Meta-Package for LibreOffice</hr>
    <hu>Welsh Language Meta-Package for LibreOffice</hu>
    <id>Welsh Language Meta-Package for LibreOffice</id>
    <is>Welsh Language Meta-Package for LibreOffice</is>
    <it>Meta-pacchetto della lingua gallese per LibreOffice</it>
-   <ja_JP>Welsh Language Meta-Package for LibreOffice</ja_JP>
-   <ja>Welsh Language Meta-Package for LibreOffice</ja>
+   <ja>LibreOffice 用 ウェールズ語メタパッケージ</ja>
    <kk>Welsh Language Meta-Package for LibreOffice</kk>
    <ko>Welsh Language Meta-Package for LibreOffice</ko>
    <lt>Welsh Language Meta-Package for LibreOffice</lt>
    <mk>Welsh Language Meta-Package for LibreOffice</mk>
    <mr>Welsh Language Meta-Package for LibreOffice</mr>
-   <nb>Welsh Language Meta-Package for LibreOffice</nb>
-   <nl>Welsh Language Meta-Package for LibreOffice</nl>
-   <pl>Welsh Language Meta-Package for LibreOffice</pl>
-   <pt_BR>Welsh Language Meta-Package for LibreOffice</pt_BR>
+   <nb>Walisisk språkpakke for LibreOffice</nb>
+   <nl>Welsh Taal Meta-Pakket voor LibreOffice</nl>
+   <pl>Walijski meta-pakiet językowy dla LibreOffice</pl>
+   <pt_BR>Galês Pacote de Idioma para o LibreOffice</pt_BR>
    <pt>Galês Meta-Pacote de Idioma para LibreOffice</pt>
    <ro>Welsh Language Meta-Package for LibreOffice</ro>
-   <ru>Welsh Language Meta-Package for LibreOffice</ru>
+   <ru>Мета-пакет валлийского языка для LibreOffice</ru>
    <sk>Welsh Language Meta-Package for LibreOffice</sk>
    <sl>Velški jezikovni meta-paket za LibreOffice</sl>
-   <sq>Welsh Language Meta-Package for LibreOffice</sq>
+   <sq>Meta-Paketë gjuhësore në uellsisht për LibreOffice-in</sq>
    <sr>Welsh Language Meta-Package for LibreOffice</sr>
    <sv>Walesiska Språk Meta-Paket för LibreOffice</sv>
-   <tr>Welsh Language Meta-Package for LibreOffice</tr>
+   <tr>LibreOffice için Galce Dili Üst-Paketi</tr>
    <uk>Welsh Language Meta-Package for LibreOffice</uk>
    <vi>Welsh Language Meta-Package for LibreOffice</vi>
    <zh_CN>Welsh Language Meta-Package for LibreOffice</zh_CN>

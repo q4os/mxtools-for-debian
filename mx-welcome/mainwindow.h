@@ -24,7 +24,6 @@
  * along with mx-welcome.  If not, see <http://www.gnu.org/licenses/>.
  **********************************************************************/
 
-
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
@@ -33,7 +32,8 @@
 #include <QProcess>
 #include <QSettings>
 
-namespace Ui {
+namespace Ui
+{
 class MainWindow;
 }
 
@@ -42,42 +42,21 @@ struct Result {
     QString output;
 };
 
-
 class MainWindow : public QDialog
 {
     Q_OBJECT
 
-protected:
-    QProcess *proc{};
-
 public:
     explicit MainWindow(const QCommandLineParser &arg_parser, QWidget *parent = nullptr);
-    ~MainWindow();
+    ~MainWindow() override;
 
     static Result runCmd(const QString &cmd);
     static QString getVersion(const QString &name);
 
-    QString version;
-    QString output;
-    bool isfluxbox = false;
-    QString SETUPCMD;
-    QString FAQCMD;
-    QString FORUMCMD;
-    QString MANUALCMD;
-    QString VIDEOCMD;
-    QString WIKICMD;
-    QString CONTRIBUTECMD;
-    QString TOOLSCMD;
-    QString PACKAGEINSTALLERCMD;
-    QString TWEAKCMD;
-    QString TOURCMD;
-    QString TOSCMD;
-    QString debian_version;
-
     void setup();
 
 private slots:
-    void on_ButtonQSI_clicked();
+    void on_ButtonQSI_clicked() const;
     void on_buttonAbout_clicked();
     void on_buttonContribute_clicked() const;
     void on_buttonFAQ_clicked() const;
@@ -88,21 +67,36 @@ private slots:
     void on_buttonSetup_clicked() const;
     void on_buttonTOS_clicked() const;
     void on_buttonTools_clicked() const;
+    void on_buttonTour_clicked() const;
     void on_buttonVideo_clicked() const;
     void on_buttonWiki_clicked() const;
     void on_checkBox_clicked(bool checked);
     void on_tabWidget_currentChanged(int index);
-    void resizeEvent(QResizeEvent*);
+    void resizeEvent(QResizeEvent * /*unused*/) override;
     void settabstyle();
     void shortsysteminfo();
 
-    void on_buttonTour_clicked() const;
-
 private:
     Ui::MainWindow *ui;
+    QProcess *proc {};
     QSettings user_settings;
+
+    QString CONTRIBUTECMD;
+    QString FAQCMD;
+    QString FORUMCMD;
+    QString MANUALCMD;
+    QString PACKAGEINSTALLERCMD;
+    QString SETUPCMD;
+    QString TOOLSCMD;
+    QString TOSCMD;
+    QString TOURCMD;
+    QString TWEAKCMD;
+    QString VIDEOCMD;
+    QString WIKICMD;
+    QString debian_version;
+    QString output;
+    QString version;
+    bool isfluxbox = false;
 };
 
-
 #endif // MAINWINDOW_H
-

@@ -51,7 +51,7 @@ msgstr "Ponovi iskanje"
 
 #: idevice-mounter:138
 msgid "Unmount"
-msgstr "Odklopi"
+msgstr "Odklop"
 
 #: idevice-mounter:143
 msgid "Close"
@@ -91,4 +91,4 @@ msgid ""
 "unplugged it, plug your device back in, Rescan, and Unmount."
 msgstr ""
 "Uporabite gumb za odklop, preden odstranite napravo. Če ste jo že izklopili,"
-" jo priključir nazaj, pritisnite Ponovno branje in Odklop."
+" jo priključite nazaj, pritisnite Ponovno branje in Odklop."

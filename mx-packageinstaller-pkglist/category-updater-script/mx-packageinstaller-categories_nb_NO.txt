@@ -1,0 +1,37 @@
+Lyd
+Nettleser
+Barn
+Desktop Environments
+Development
+Disks
+Docks
+Email
+File Managers
+FTP
+Spill
+Graphics
+Icons
+Kernels
+Språk
+LaTex
+Media Center
+Media Converter
+Messaging
+Misc
+Nettverk
+Newsreader
+Non-Free
+Office
+Printing
+Remote Access
+Screencast
+Screensaver
+Screenshot Utilities
+Server
+Themes
+Torrent
+Utility
+Video
+Wallpapers
+Window Managers
+Virtualization

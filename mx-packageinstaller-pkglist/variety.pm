@@ -34,7 +34,6 @@ Variety
    <id>pengubah dan pengelola wallpaper</id>
    <is>veggfóðursbreytir og framkvæmdastjóri</is>
    <it>cambia sfondi e gestore</it>
-   <ja_JP>壁紙チェンジャーとマネージャー</ja_JP>
    <ja>壁紙チェンジャーとマネージャー</ja>
    <kk>тұсқағазды өзгертуші және менеджер</kk>
    <ko>월페이퍼 체인저 및 관리자</ko>

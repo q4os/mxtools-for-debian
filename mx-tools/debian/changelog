@@ -1,3 +1,15 @@
+mx-tools (23.7.01) mx; urgency=medium
+
+  * Fix a couple of translations
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 24 Jul 2023 15:11:53 -0400
+
+mx-tools (23.7) mx; urgency=medium
+
+  * Update translations
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 20 Jul 2023 17:37:33 -0400
+
 mx-tools (23.5) mx; urgency=medium
 
   * Update logo

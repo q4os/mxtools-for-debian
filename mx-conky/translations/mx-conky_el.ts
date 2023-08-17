@@ -6,7 +6,7 @@
     <message>
         <location filename="../mainwindow.ui" line="14"/>
         <location filename="../mainwindow.cpp" line="47"/>
-        <location filename="../mainwindow.cpp" line="513"/>
+        <location filename="../mainwindow.cpp" line="498"/>
         <source>MX Conky</source>
         <translation>MX Conky</translation>
     </message>
@@ -23,7 +23,7 @@
     <message>
         <location filename="../mainwindow.ui" line="85"/>
         <source>Run</source>
-        <translation>Εκτέλεση </translation>
+        <translation>Εκτέλεση</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="141"/>
@@ -63,7 +63,7 @@
     <message>
         <location filename="../mainwindow.ui" line="281"/>
         <source>To Move</source>
-        <translation>Μετακίνηση </translation>
+        <translation>Μετακίνηση</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="288"/>
@@ -88,7 +88,7 @@
     <message>
         <location filename="../mainwindow.ui" line="410"/>
         <source>All Desktops</source>
-        <translation>Όλες τις επιφάνειες εργασίας </translation>
+        <translation>Όλες τις επιφάνειες εργασίας</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="436"/>
@@ -220,17 +220,17 @@
     <message>
         <location filename="../mainwindow.ui" line="2074"/>
         <source>Display help </source>
-        <translation>Εμφάνιση βοήθειας</translation>
+        <translation>Εμφάνιση βοήθειας </translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="2077"/>
         <source>Help</source>
-        <translation>Βοήθεια </translation>
+        <translation>Βοήθεια</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="2084"/>
         <source>Alt+H</source>
-        <translation>Alt+H </translation>
+        <translation>Alt+H</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="2132"/>
@@ -248,48 +248,48 @@
         <translation>Alt+N</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="512"/>
+        <location filename="../mainwindow.cpp" line="497"/>
         <source>About MX Conky</source>
         <translation>Περί του MX Conky</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="514"/>
+        <location filename="../mainwindow.cpp" line="499"/>
         <source>Version: </source>
-        <translation>Έκδοση:</translation>
+        <translation>Έκδοση: </translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="515"/>
+        <location filename="../mainwindow.cpp" line="500"/>
         <source>GUI program for configuring Conky in MX Linux</source>
         <translation>Γραφικό πρόγραμμα για τη διαμόρφωση του Conky στο MX Linux</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="518"/>
+        <location filename="../mainwindow.cpp" line="503"/>
         <source>Copyright (c) MX Linux</source>
-        <translation>Πνευματικά δικαιώματα (c)  MX Linux </translation>
+        <translation>Πνευματικά δικαιώματα (c)  MX Linux</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="519"/>
+        <location filename="../mainwindow.cpp" line="504"/>
         <source>License</source>
         <translation>Άδεια</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="520"/>
-        <location filename="../mainwindow.cpp" line="533"/>
+        <location filename="../mainwindow.cpp" line="505"/>
+        <location filename="../mainwindow.cpp" line="518"/>
         <source>Changelog</source>
         <translation>Αρχείο αλλαγών</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="521"/>
+        <location filename="../mainwindow.cpp" line="506"/>
         <source>Cancel</source>
-        <translation>Ακύρωση</translation>
+        <translation>Άκυρο</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="544"/>
+        <location filename="../mainwindow.cpp" line="529"/>
         <source>&amp;Close</source>
         <translation>&amp;Κλείσιμο</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="562"/>
+        <location filename="../mainwindow.cpp" line="547"/>
         <source>MX Conky Help</source>
         <translation>Βοήθεια του MX Conky</translation>
     </message>
@@ -298,7 +298,7 @@
     <name>QObject</name>
     <message>
         <location filename="../main.cpp" line="65"/>
-        <location filename="../mainwindow.cpp" line="648"/>
+        <location filename="../mainwindow.cpp" line="627"/>
         <source>Select Conky Manager config file</source>
         <translation>Επιλογή αρχείου διαμόρφωσης του Conky Manager</translation>
     </message>
@@ -310,7 +310,7 @@
     <message>
         <location filename="../main.cpp" line="83"/>
         <source>The MX Conky data set has been updated. &lt;p&gt;&lt;p&gt;                                  Copy from the folder where it is located &lt;a href=&quot;/usr/share/mx-conky-data/themes&quot;&gt;/usr/share/mx-conky-data/themes&lt;/a&gt;                                   whatever you wish to your Home hidden conky folder &lt;a href=&quot;%1/.conky&quot;&gt;~/.conky&lt;/a&gt;.                                   Be careful not to overwrite any conkies you have changed.</source>
-        <translation>Το σύνολο δεδομένων MX Conky έχει ενημερωθεί.&lt;p&gt;&lt;p&gt;                    Αντιγράψτε από το φάκελο στον οποίο βρίσκεται &lt;a href=&quot;/usr/share/mx-conky-data/themes&quot;&gt;/usr/share/mx-conky-data/themes&lt;/a&gt;                                   ότι επιθυμείτε στο γονικό κρυφό conky φάκελο&lt;a href=&quot;%1/.conky&quot;&gt;~/.conky &lt;/a&gt;.                                   Προσέξτε να μην αντικαταστήσετε τυχόν conkies που έχετε αλλάξει.</translation>
+        <translation>Τα δεδομένα του MX Conky ενημερώθηκαν.&lt;p&gt;&lt;p&gt;                    Αντιγράψτε από το φάκελο &lt;a href=&quot;/usr/share/mx-conky-data/themes&quot;&gt;/usr/share/mx-conky-data/themes&lt;/a&gt;                                   ότι επιθυμείτε, στο κρυφό φάκελο του conky&lt;a href=&quot;%1/.conky&quot;&gt;~/.conky &lt;/a&gt;.                                   Προσέξτε να μην αντικαταστήσετε τυχόν conkies που έχετε αλλάξει.</translation>
     </message>
     <message>
         <location filename="../main.cpp" line="117"/>
@@ -326,7 +326,7 @@
     <message>
         <location filename="../main.cpp" line="148"/>
         <source>You must run this program as normal user</source>
-        <translation>Πρέπει να τρέξετε αυτή την εφαρμογή ως κανονικός χρήστης</translation>
+        <translation>Πρέπει να τρέξετε αυτή την εφαρμογή ως απλός χρήστης</translation>
     </message>
 </context>
 </TS>

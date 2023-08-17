@@ -18,39 +18,38 @@ Ukrainian_Thunderbird
    <cs>Ukrainian localisation of Thunderbird</cs>
    <da>Ukrainsk oversættelse af Thunderbird</da>
    <de>Ukrainische Lokalisierung von Thunderbird</de>
-   <el>Ουκρανικός εντοπισμός του Thunderbird</el>
+   <el>Ουκρανικά για το Thunderbird</el>
    <en>Ukrainian localisation of Thunderbird</en>
    <es>Localización Ucraniana de Thunderbird</es>
    <et>Ukrainian localisation of Thunderbird</et>
    <eu>Ukrainian localisation of Thunderbird</eu>
    <fa>Ukrainian localisation of Thunderbird</fa>
    <fil_PH>Ukrainian localisation of Thunderbird</fil_PH>
-   <fi>Ukrainian localisation of Thunderbird</fi>
+   <fi>Ukrainalainen Thunderbird-kotoistus</fi>
    <fr>Localisation ukrainienne pour Thunderbird</fr>
    <he_IL>Ukrainian localisation of Thunderbird</he_IL>
-   <hi>Ukrainian localisation of Thunderbird</hi>
+   <hi>थंडरबर्ड का यूक्रेनी संस्करण</hi>
    <hr>Ukrainian localisation of Thunderbird</hr>
    <hu>Ukrainian localisation of Thunderbird</hu>
    <id>Ukrainian localisation of Thunderbird</id>
    <is>Ukrainian localisation of Thunderbird</is>
    <it>Localizzazione ucraina di Thunderbird</it>
-   <ja_JP>Ukrainian localisation of Thunderbird</ja_JP>
-   <ja>Ukrainian localisation of Thunderbird</ja>
+   <ja>Thunderbird のウクライナ語パック</ja>
    <kk>Ukrainian localisation of Thunderbird</kk>
    <ko>Ukrainian localisation of Thunderbird</ko>
    <lt>Ukrainian localisation of Thunderbird</lt>
    <mk>Ukrainian localisation of Thunderbird</mk>
    <mr>Ukrainian localisation of Thunderbird</mr>
-   <nb>Ukrainian localisation of Thunderbird</nb>
+   <nb>Ukrainsk lokaltilpassing av Thunderbird</nb>
    <nl>Oekraïense lokalisatie van Thunderbird</nl>
    <pl>Ukraińska lokalizacja Thunderbirda</pl>
-   <pt_BR>Ucraniano Localização para Thunderbird</pt_BR>
+   <pt_BR>Ucraniano Localização para o Thunderbird</pt_BR>
    <pt>Ucraniano Localização para Thunderbird</pt>
    <ro>Ukrainian localisation of Thunderbird</ro>
-   <ru>Ukrainian localisation of Thunderbird</ru>
+   <ru>Украинский перевод для Thunderbird</ru>
    <sk>Ukrainian localisation of Thunderbird</sk>
    <sl>Ukrainian localisation of Thunderbird</sl>
-   <sq>Ukrainian localisation of Thunderbird</sq>
+   <sq>Përkthimi i Thunderbird-it në ukrainisht</sq>
    <sr>Ukrainian localisation of Thunderbird</sr>
    <sv>Ukrainsk lokalisering av Thunderbird</sv>
    <tr>Thunderbird'ün Ukraynaca yerelleştirmesi</tr>

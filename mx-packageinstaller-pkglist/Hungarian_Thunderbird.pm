@@ -18,39 +18,38 @@ Hungarian_Thunderbird
    <cs>Hungarian localisation of Thunderbird</cs>
    <da>Ungarsk oversættelse af Thunderbird</da>
    <de>Ungarische Lokalisierung von Thunderbird</de>
-   <el>Ουγγρικός εντοπισμός του Thunderbird</el>
+   <el>Ουγγρικά για το Thunderbird</el>
    <en>Hungarian localisation of Thunderbird</en>
-   <es>Localización Húngara de Thunderbird</es>
+   <es>Localización Húngaro de Thunderbird</es>
    <et>Hungarian localisation of Thunderbird</et>
    <eu>Hungarian localisation of Thunderbird</eu>
    <fa>Hungarian localisation of Thunderbird</fa>
    <fil_PH>Hungarian localisation of Thunderbird</fil_PH>
-   <fi>Hungarian localisation of Thunderbird</fi>
+   <fi>Unkarilainen Thunderbird-kotoistus</fi>
    <fr>Localisation hongroise pour Thunderbird</fr>
    <he_IL>Hungarian localisation of Thunderbird</he_IL>
-   <hi>Hungarian localisation of Thunderbird</hi>
+   <hi>थंडरबर्ड का हंगेरियन संस्करण</hi>
    <hr>Hungarian localisation of Thunderbird</hr>
    <hu>Hungarian localisation of Thunderbird</hu>
    <id>Hungarian localisation of Thunderbird</id>
    <is>Hungarian localisation of Thunderbird</is>
    <it>Localizzazione ungherese di Thunderbird</it>
-   <ja_JP>Hungarian localisation of Thunderbird</ja_JP>
-   <ja>Hungarian localisation of Thunderbird</ja>
+   <ja>Thunderbird のハンガリー語パック</ja>
    <kk>Hungarian localisation of Thunderbird</kk>
    <ko>Hungarian localisation of Thunderbird</ko>
    <lt>Hungarian localisation of Thunderbird</lt>
    <mk>Hungarian localisation of Thunderbird</mk>
    <mr>Hungarian localisation of Thunderbird</mr>
-   <nb>Hungarian localisation of Thunderbird</nb>
+   <nb>Ungarsk lokaltilpassing av Thunderbird</nb>
    <nl>Hongaarse lokalisatie van Thunderbird</nl>
    <pl>Węgierska lokalizacja Thunderbirda</pl>
-   <pt_BR>Húngaro Localização para Thunderbird</pt_BR>
+   <pt_BR>Húngaro Localização para o Thunderbird</pt_BR>
    <pt>Húngaro Localização para Thunderbird</pt>
    <ro>Hungarian localisation of Thunderbird</ro>
-   <ru>Hungarian localisation of Thunderbird</ru>
+   <ru>Венгерский перевод для Thunderbird</ru>
    <sk>Hungarian localisation of Thunderbird</sk>
-   <sl>Hungarian localisation of Thunderbird</sl>
-   <sq>Hungarian localisation of Thunderbird</sq>
+   <sl>Madžarske krajevne nastavitve za Thunderbird</sl>
+   <sq>Përkthimi i Thunderbird-it në hungarisht</sq>
    <sr>Hungarian localisation of Thunderbird</sr>
    <sv>Ungersk lokalisering av Thunderbird</sv>
    <tr>Thunderbird'ün Macarca yerelleştirmesi</tr>

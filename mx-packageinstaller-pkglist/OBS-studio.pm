@@ -26,35 +26,34 @@ OBS-Studio
    <eu>OBS-Studio - Streaming Video and Screencaster (OpenGL 3 hardware required)</eu>
    <fa>OBS-Studio - Streaming Video and Screencaster (OpenGL 3 hardware required)</fa>
    <fil_PH>OBS-Studio - Streaming Video and Screencaster (OpenGL 3 hardware required)</fil_PH>
-   <fi>OBS-Studio - Streaming Video and Screencaster (OpenGL 3 hardware required)</fi>
-   <fr>OBS-Studio - Diffusion vidéo et capture vidéo d'écran (support OpenGL 3 nécessaire)</fr>
+   <fi>OBS-Studio - striimaa videota ja toteuta ohjelmalähetyksiä (vaatii OpenGL 3 laitteiston)</fi>
+   <fr>OBS-Studio - Diffusion vidéo et capture vidéo d’écran (support OpenGL 3 nécessaire)</fr>
    <he_IL>OBS-Studio - Streaming Video and Screencaster (OpenGL 3 hardware required)</he_IL>
-   <hi>OBS-Studio - Streaming Video and Screencaster (OpenGL 3 hardware required)</hi>
+   <hi>ओबीएस स्टूडियो - वीडियो व स्क्रीन सहभाजन स्ट्रीम साधन (ओपेन जीएल 3 हार्डवेयर आवश्यक)</hi>
    <hr>OBS-Studio - Streaming Video and Screencaster (OpenGL 3 hardware required)</hr>
    <hu>OBS-Studio - Streaming Video and Screencaster (OpenGL 3 hardware required)</hu>
    <id>OBS-Studio - Streaming Video and Screencaster (OpenGL 3 hardware required)</id>
    <is>OBS-Studio - Streaming Video and Screencaster (OpenGL 3 hardware required)</is>
    <it>OBS-Studio - Strumento di registrazione e streaming di contenuti video (è richiesto hardware OpenGL 3)</it>
-   <ja_JP>OBS-Studio - Streaming Video and Screencaster (OpenGL 3 hardware required)</ja_JP>
-   <ja>OBS-Studio - Streaming Video and Screencaster (OpenGL 3 hardware required)</ja>
+   <ja>OBS-Studio - ストリーミングビデオおよびスクリーンキャスター（OpenGL 3 ハードウェアが必要です）</ja>
    <kk>OBS-Studio - Streaming Video and Screencaster (OpenGL 3 hardware required)</kk>
    <ko>OBS-Studio - Streaming Video and Screencaster (OpenGL 3 hardware required)</ko>
    <lt>OBS-Studio - Streaming Video and Screencaster (OpenGL 3 hardware required)</lt>
    <mk>OBS-Studio - Streaming Video and Screencaster (OpenGL 3 hardware required)</mk>
    <mr>OBS-Studio - Streaming Video and Screencaster (OpenGL 3 hardware required)</mr>
-   <nb>OBS-Studio - Streaming Video and Screencaster (OpenGL 3 hardware required)</nb>
+   <nb>OBS-Studio – videostrømming og skjermkringkasting (OpenGL 3-maskinvare påkrevd)</nb>
    <nl>OBS-Studio - Video en Screencaster Streamen (OpenGL 3 hardware vereist)</nl>
    <pl>strumieniowanie wideo i nagrywanie ekranu komputera (wymagany sprzęt OpenGL 3)</pl>
-   <pt_BR>OBS-Studio - Streaming Video and Screencaster (OpenGL 3 hardware required)</pt_BR>
-   <pt>OBS-Studio - Streaming Video and Screencaster (OpenGL 3 hardware required)</pt>
+   <pt_BR>OBS-Studio - Grava a tela da área de trabalho, captura imagens da câmera (webcam), permite realizar transmissões ao vivo de vídeos na internet (requer equipamento OpenGL 3)</pt_BR>
+   <pt>OBS-Studio - Visualização de vídeos da internet e criação de vídeos do ecrã (requer equipamento OpenGL 3)</pt>
    <ro>OBS-Studio - Streaming Video and Screencaster (OpenGL 3 hardware required)</ro>
    <ru>Потоковое видео и видеотрансляции экрана (требуется OpenGL 3 оборудование)</ru>
    <sk>OBS-Studio - Streaming Video and Screencaster (OpenGL 3 hardware required)</sk>
    <sl>OBS-Studio - program za pretakanje videa in vsebine zaslona (potrebna je OpenGL 3 strojna oprema)</sl>
-   <sq>OBS-Studio - Streaming Video and Screencaster (OpenGL 3 hardware required)</sq>
+   <sq>OBS-Studio - Transmetim videosh dhe regjistrues ekrani (lyp hardware OpenGL 3)</sq>
    <sr>OBS-Studio - Streaming Video and Screencaster (OpenGL 3 hardware required)</sr>
    <sv>OBS-Studio - Strömmande Video och Skärminspelare (OpenGL 3 hårdvara krävs)</sv>
-   <tr>OBS-Studio - Streaming Video and Screencaster (OpenGL 3 hardware required)</tr>
+   <tr>OBS-Studio - Video Akışı ve Hareketli Ekran Görüntüsü yapıcı (OpenGL 3 donanım gerekir)</tr>
    <uk>OBS-Studio - Streaming Video and Screencaster (OpenGL 3 hardware required)</uk>
    <vi>OBS-Studio - Streaming Video and Screencaster (OpenGL 3 hardware required)</vi>
    <zh_CN>OBS-Studio - Streaming Video and Screencaster (OpenGL 3 hardware required)</zh_CN>

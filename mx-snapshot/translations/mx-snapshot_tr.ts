@@ -41,7 +41,7 @@
     <message>
         <location filename="../mainwindow.ui" line="56"/>
         <source>Live kernel:</source>
-        <translation type="unfinished"></translation>
+        <translation>Canlı çekirdek:</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="97"/>
@@ -56,7 +56,7 @@
     <message>
         <location filename="../mainwindow.ui" line="159"/>
         <source>Change live kernel</source>
-        <translation type="unfinished"></translation>
+        <translation>Canlı çekirdeği değiştir</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="166"/>
@@ -97,7 +97,7 @@
     <message>
         <location filename="../mainwindow.ui" line="379"/>
         <source>You can also exclude certain directories by ticking the common choices below, or by clicking on the button to directly edit /etc/mx-snapshot-exclude.list.</source>
-        <translation>Aşağıdaki ortak seçimleri işaretleyerek veya /etc/mx-snapshot-exclude.list.&apos;i doğrudan düzenlemek için düğmeyi tıklayarak belli dizinleri de hariç tutabilirsiniz.</translation>
+        <translation>Aşağıdaki ortak seçimleri işaretleyerek veya /etc/mx-snapshot-exclude.list’i doğrudan düzenlemek için düğmeyi tıklayarak belli dizinleri de hariç tutabilirsiniz.</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="436"/>
@@ -277,7 +277,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="199"/>
         <source>Free space on %1, where snapshot folder is placed: </source>
-        <translation>Anlık Görüntü&apos;nün bulunduğu %1 &apos;deki boş alan:</translation>
+        <translation>Anlık Görüntü’nün bulunduğu %1’deki boş alan:</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="202"/>
@@ -287,7 +287,7 @@
       by removing previous snapshots and saved copies:
       %1 snapshots are taking up %2 of disk space.
 </source>
-        <translation>Boş alan, / ve / home /&apos;dan sıkıştırılmış veriyi kaydetmek için yeterli olmalıdır.
+        <translation>Boş alan, /’ ve / home /’dan sıkıştırılmış veriyi kaydetmek için yeterli olmalıdır.
 
 Gerekirse, önceki anlık görüntüleri kaldırarak
 daha fazla kullanılabilir alan oluşturabilirsiniz:
@@ -331,7 +331,7 @@ daha fazla kullanılabilir alan oluşturabilirsiniz:
     <message>
         <location filename="../mainwindow.cpp" line="331"/>
         <source>Snapshot will use the following settings:</source>
-        <translation type="unfinished"></translation>
+        <translation>Anlık görüntü aşağıdaki ayarları kullanır:</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="333"/>
@@ -396,7 +396,7 @@ daha fazla kullanılabilir alan oluşturabilirsiniz:
     <message>
         <location filename="../mainwindow.cpp" line="400"/>
         <source>The program will now pause to allow you to edit any files in the work directory. Select Yes to edit the boot menu or select No to bypass this step and continue creating the snapshot.</source>
-        <translation>Program şimdi çalışma dizinindeki herhangi bir dosyayı düzenleyebilmenize imkan sağlamak için duraklatılacak. Önyükleme menüsünü düzenlemek için Evet&apos;i ; ya da bu adımı atlamak ve anlık görüntüyü oluşturmaya devam etmek için Hayır&apos;ı seçin.</translation>
+        <translation>Program şimdi çalışma dizinindeki herhangi bir dosyayı düzenleyebilmenize imkan sağlamak için duraklatılacak. Önyükleme menüsünü düzenlemek için Evet’i ; ya da bu adımı atlamak ve anlık görüntüyü oluşturmaya devam etmek için Hayır’ı seçin.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="413"/>
@@ -406,7 +406,7 @@ daha fazla kullanılabilir alan oluşturabilirsiniz:
     <message>
         <location filename="../mainwindow.cpp" line="421"/>
         <source>Select kernel</source>
-        <translation type="unfinished"></translation>
+        <translation>Çekirdeği seç</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="504"/>
@@ -495,7 +495,7 @@ daha fazla kullanılabilir alan oluşturabilirsiniz:
     <message>
         <location filename="../main.cpp" line="83"/>
         <source>Name a different kernel to use other than the default running kernel, use format returned by &apos;uname -r&apos;</source>
-        <translation>Öntanımlı çalışan çekirdek dışında kullanmak için farklı bir çekirdeği adlandırın, &apos;uname -r&apos; ile döndürülen biçimi kullanın</translation>
+        <translation>Öntanımlı çalışan çekirdek dışında kullanmak için farklı bir çekirdeği adlandırın, ‘uname -r’ ile döndürülen biçimi kullanın</translation>
     </message>
     <message>
         <location filename="../main.cpp" line="85"/>
@@ -525,7 +525,7 @@ daha fazla kullanılabilir alan oluşturabilirsiniz:
     <message>
         <location filename="../main.cpp" line="94"/>
         <source>Create a monthly snapshot, add &apos;Month&apos; name in the ISO name, skip used space calculation</source>
-        <translation>Aylık bir anlık görüntü oluşturun, ISO adına &apos; ay &apos; adı ekleyin, kullanılan alan hesaplamasını atlayın</translation>
+        <translation>Aylık bir anlık görüntü oluşturun, ISO adına ‘Ay’ adı ekleyin, kullanılan alan hesaplamasını atlayın</translation>
     </message>
     <message>
         <location filename="../main.cpp" line="95"/>
@@ -555,7 +555,7 @@ daha fazla kullanılabilir alan oluşturabilirsiniz:
     <message>
         <location filename="../main.cpp" line="104"/>
         <source>Skip calculating free space to see if the resulting ISO will fit</source>
-        <translation>Oluşturulan ISO&apos;nun sığıp sığmayacağını görmek için boş alan hesaplamayı atlayın</translation>
+        <translation>Oluşturulan ISO’nun sığıp sığmayacağını görmek için boş alan hesaplamayı atlayın</translation>
     </message>
     <message>
         <location filename="../main.cpp" line="105"/>
@@ -593,89 +593,89 @@ daha fazla kullanılabilir alan oluşturabilirsiniz:
         <translation>Tamamlandığında bilgisayarı kapat.</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="133"/>
-        <location filename="../main.cpp" line="143"/>
-        <location filename="../main.cpp" line="181"/>
+        <location filename="../main.cpp" line="132"/>
+        <location filename="../main.cpp" line="142"/>
+        <location filename="../main.cpp" line="180"/>
         <source>You seem to be logged in as root, please log out and log in as normal user to use this program.</source>
         <translation>Görünüşe göre root olarak girmişsiniz, lütfen çıkın ve bu programı kullanmak için normal kullanıcı olarak girin. </translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="155"/>
-        <location filename="../main.cpp" line="189"/>
+        <location filename="../main.cpp" line="154"/>
+        <location filename="../main.cpp" line="188"/>
         <source>version:</source>
         <translation>sürüm:</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="163"/>
+        <location filename="../main.cpp" line="162"/>
         <source>You must run this program with sudo or pkexec.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bu programı sudo veya pkexec ile çalıştırmalısınız.</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="172"/>
+        <location filename="../main.cpp" line="171"/>
         <source>MX Snapshot</source>
         <translation>MX Sistem Anlık Görüntüsü</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="180"/>
-        <location filename="../main.cpp" line="271"/>
-        <location filename="../settings.cpp" line="223"/>
-        <location filename="../settings.cpp" line="236"/>
-        <location filename="../settings.cpp" line="648"/>
-        <location filename="../settings.cpp" line="716"/>
+        <location filename="../main.cpp" line="179"/>
+        <location filename="../main.cpp" line="270"/>
+        <location filename="../settings.cpp" line="247"/>
+        <location filename="../settings.cpp" line="260"/>
+        <location filename="../settings.cpp" line="670"/>
+        <location filename="../settings.cpp" line="738"/>
         <source>Error</source>
         <translation>Hata</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="265"/>
-        <location filename="../main.cpp" line="267"/>
-        <location filename="../settings.cpp" line="231"/>
+        <location filename="../main.cpp" line="264"/>
+        <location filename="../main.cpp" line="266"/>
+        <location filename="../settings.cpp" line="255"/>
         <source>Current kernel doesn&apos;t support Squashfs, cannot continue.</source>
         <translation>Şu an kullanılan çekirdek squashfs dosya sistemini desteklemediği için devam edilemiyor.</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="85"/>
+        <location filename="../settings.cpp" line="86"/>
         <source>Could not create working directory. </source>
         <translation>Çalışma dizini oluşturulamadı.</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="107"/>
+        <location filename="../settings.cpp" line="108"/>
         <source>Could not create temp directory. </source>
         <translation>Geçici dizin oluşturulamadı.</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="218"/>
+        <location filename="../settings.cpp" line="242"/>
         <source>Could not find a usable kernel</source>
         <translation>Kullanılabilir bir çekirdek bulunamadı </translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="340"/>
+        <location filename="../settings.cpp" line="362"/>
         <source>Used space on / (root): </source>
-        <translation>/ (root) &apos;daki Kullanılan Alan:</translation>
+        <translation>/(root)’daki Kullanılan Alan:</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="343"/>
+        <location filename="../settings.cpp" line="365"/>
         <source>estimated</source>
         <translation>Tahminen</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="354"/>
+        <location filename="../settings.cpp" line="376"/>
         <source>Used space on /home: </source>
-        <translation>/home &apos;daki Kullanılan Alan:</translation>
+        <translation>/home’daki Kullanılan Alan:</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="405"/>
+        <location filename="../settings.cpp" line="427"/>
         <source>Free space on %1, where snapshot folder is placed: </source>
-        <translation>Anlık Görüntü&apos;nün bulunduğu %1 &apos;deki boş alan:</translation>
+        <translation>Anlık Görüntü’nün bulunduğu %1’deki boş alan:</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="409"/>
+        <location filename="../settings.cpp" line="431"/>
         <source>The free space should be sufficient to hold the compressed data from / and /home
 
       If necessary, you can create more available space
       by removing previous snapshots and saved copies:
       %1 snapshots are taking up %2 of disk space.
 </source>
-        <translation>Boş alan, / ve / home /&apos;dan sıkıştırılmış veriyi kaydetmek için yeterli olmalıdır.
+        <translation>Boş alan, /’ ve /home/’dan sıkıştırılmış veriyi kaydetmek için yeterli olmalıdır.
 
 Gerekirse, önceki anlık görüntüleri kaldırarak
 daha fazla kullanılabilir alan oluşturabilirsiniz:
@@ -683,43 +683,43 @@ daha fazla kullanılabilir alan oluşturabilirsiniz:
 </translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="427"/>
+        <location filename="../settings.cpp" line="449"/>
         <source>Desktop</source>
         <translation>Masaüstü</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="429"/>
+        <location filename="../settings.cpp" line="451"/>
         <source>Documents</source>
         <translation>Belgeler</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="431"/>
+        <location filename="../settings.cpp" line="453"/>
         <source>Downloads</source>
         <translation>İndirilenler</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="433"/>
+        <location filename="../settings.cpp" line="455"/>
         <source>Music</source>
         <translation>Müzik</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="435"/>
+        <location filename="../settings.cpp" line="457"/>
         <source>Networks</source>
         <translation>Ağlar</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="437"/>
+        <location filename="../settings.cpp" line="459"/>
         <source>Pictures</source>
         <translation>Resimler</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="441"/>
+        <location filename="../settings.cpp" line="463"/>
         <source>Videos</source>
         <translation>Videolar</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="642"/>
-        <location filename="../settings.cpp" line="710"/>
+        <location filename="../settings.cpp" line="664"/>
+        <location filename="../settings.cpp" line="732"/>
         <source>Output file %1 already exists. Please use another file name, or delete the existent file.</source>
         <translation>Çıktı dosyası %1 zaten var. Lütfen başka bir dosya adı kullanın veya mevcut dosyayı silin.</translation>
     </message>
@@ -841,7 +841,7 @@ daha fazla kullanılabilir alan oluşturabilirsiniz:
     <message>
         <location filename="../work.cpp" line="294"/>
         <source>Thanks for using MX Snapshot, run MX Live USB Maker next!</source>
-        <translation>MX Snapshot &apos;ı kullandığınız için teşekkürler, boot edilebilir usb hazırlamak için MX Live USB Maker &apos;ı kullanabilirsiniz!</translation>
+        <translation>MX Snapshot’ı kullandığınız için teşekkürler, boot edilebilir usb hazırlamak için MX Live USB Maker’ı kullanabilirsiniz!</translation>
     </message>
     <message>
         <location filename="../work.cpp" line="302"/>
@@ -869,12 +869,12 @@ daha fazla kullanılabilir alan oluşturabilirsiniz:
         <translation>Çalışma dizini oluşturulamadı.</translation>
     </message>
     <message>
-        <location filename="../work.cpp" line="568"/>
+        <location filename="../work.cpp" line="569"/>
         <source>Calculating total size of excluded files...</source>
         <translation>Hariç tutulan dosyaların toplam boyutu hesaplanıyor...</translation>
     </message>
     <message>
-        <location filename="../work.cpp" line="579"/>
+        <location filename="../work.cpp" line="580"/>
         <source>Calculating size of root...</source>
         <translation>Kök boyutu hesaplanıyor...</translation>
     </message>

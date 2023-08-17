@@ -16,12 +16,12 @@
     <message>
         <location filename="../mainwindow.ui" line="81"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;This tool allows you to rework an ISO while running Live. &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Remaster&lt;/span&gt; allows you to change files, applications and settings with the goal of producing a new master copy for storage or distribution. &lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Persistence&lt;/span&gt; allows you to retain data, settings and installed programs when the machine gets switched off for personal use.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Cet outil vous permet de modifier un ISO lors d&apos;une session Live&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Remastériser&lt;/span&gt; vous permet de changer les fichiers, applications et paramètres dans le but de produire un nouvel ISO original en vue de son stockage ou de sa distribution.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Persistance&lt;/span&gt; vous permet de conserver, après extinction de la machine, les données, paramètres et programmes installés pour votre usage personnel.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Cet outil vous permet de modifier un ISO lors d’une session Live&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Remastériser&lt;/span&gt; vous permet de changer les fichiers, applications et paramètres dans le but de produire un nouvel ISO original en vue de son stockage ou de sa distribution.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Persistance&lt;/span&gt; vous permet de conserver, après extinction de la machine, les données, paramètres et programmes installés pour votre usage personnel.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="133"/>
         <source>Display help </source>
-        <translation>Afficher l&apos;aide </translation>
+        <translation>Afficher l’aide </translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="136"/>
@@ -41,7 +41,7 @@
     <message>
         <location filename="../mainwindow.ui" line="178"/>
         <source>About...</source>
-        <translation>À propos ...</translation>
+        <translation>À propos...</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="185"/>
@@ -51,12 +51,12 @@
     <message>
         <location filename="../mainwindow.ui" line="217"/>
         <source>Quit application</source>
-        <translation>Quitter l&apos;application</translation>
+        <translation>Quitter l’application</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="220"/>
         <source>Close</source>
-        <translation>Fermer</translation>
+        <translation>Quitter</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="227"/>
@@ -76,7 +76,7 @@
     <message>
         <location filename="../mainwindow.ui" line="301"/>
         <source>Save root persistence</source>
-        <translation>Enregistrer la persistance &quot;racine&quot;</translation>
+        <translation>Enregistrer la persistance « racine »</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="315"/>
@@ -86,7 +86,7 @@
     <message>
         <location filename="../mainwindow.ui" line="325"/>
         <source>Configure live persistence</source>
-        <translation>Configurer la persistance &apos;live&apos;</translation>
+        <translation>Configurer la persistance « live »</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="50"/>
@@ -137,7 +137,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="126"/>
         <source>&amp;Close</source>
-        <translation>&amp;Fermer</translation>
+        <translation>&amp;Quitter</translation>
     </message>
 </context>
 </TS>

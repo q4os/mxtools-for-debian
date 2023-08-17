@@ -18,6 +18,7 @@
    limitations under the License.
 */
 #include "mainwindow.h"
+#include "passedit.h"
 
 #include <QDebug>
 #include <QFileDialog>
@@ -40,6 +41,8 @@ MainWindow::MainWindow(QWidget *parent)
     setupUi(this);
     setWindowFlags(Qt::Window); // for the close, min and max buttons
     setWindowIcon(QApplication::windowIcon());
+    passUser = new PassEdit(userPasswordEdit, userPassword2Edit, 1, this);
+    passChange = new PassEdit(lineEditChangePass, lineEditChangePassConf, 1, this);
 
     shell = new Cmd(this);
     tabWidget->blockSignals(true);
@@ -237,8 +240,12 @@ void MainWindow::applyOptions()
             QProcess::execute("sed",
                               {"-iE", QString("/^autologin-user=/d; /^[[]SeatDefaults[]]/aautologin-user=%1").arg(user),
                                "/etc/lightdm/lightdm.conf"});
-        if (QFile::exists(QStringLiteral("/etc/sddm.conf")))
-            QProcess::execute("sed", {"-i", QString("s/^User=.*/User=%1/").arg(user), "/etc/sddm.conf"});
+        if (QFile::exists("/etc/sddm.conf")) {
+            QSettings sddm_settings("/etc/sddm.conf", QSettings::NativeFormat);
+            if (qEnvironmentVariable("XDG_CURRENT_DESKTOP") == "KDE")
+                sddm_settings.setValue("Autologin/Session", "plasma.desktop");
+            sddm_settings.setValue("Autologin/User", user);
+        }
         QMessageBox::information(this, tr("Autologin options"),
                                  (tr("Autologin has been enabled for the '%1' account.").arg(user)));
     }
@@ -326,11 +333,11 @@ void MainWindow::applyAdd()
         QMessageBox::critical(this, windowTitle(), tr("Sorry, this name is in use. Please enter a different name."));
         return;
     }
-    if (userPasswordEdit->text() != userPassword2Edit->text()) {
+    if (!passUser->confirmed()) {
         QMessageBox::critical(this, windowTitle(), tr("Password entries do not match. Please try again."));
         return;
     }
-    if (userPasswordEdit->text().length() < 2) {
+    if (!passUser->lengthOK()) {
         QMessageBox::critical(
             this, windowTitle(),
             tr("Password needs to be at least 2 characters long. Please enter a longer password before proceeding."));
@@ -353,8 +360,8 @@ void MainWindow::applyAdd()
     if (allowBadNames != QStringLiteral("--allow-bad-names"))
         allowBadNames = QStringLiteral("--force-badname");
 
-    QProcess::execute("adduser", {"--disabled-login", allowBadNames, "--shell", dshell,
-                                  commentOption, userNameEdit->text(), userNameEdit->text()});
+    QProcess::execute("adduser", {"--disabled-login", allowBadNames, "--shell", dshell, commentOption,
+                                  userNameEdit->text(), userNameEdit->text()});
 
     QProcess proc;
     proc.start(QStringLiteral("passwd"), QStringList {userNameEdit->text()}, QIODevice::ReadWrite);
@@ -376,11 +383,11 @@ void MainWindow::applyAdd()
 // change user password
 void MainWindow::applyChangePass()
 {
-    if (lineEditChangePass->text() != lineEditChangePassConf->text()) {
+    if (!passChange->confirmed()) {
         QMessageBox::critical(this, windowTitle(), tr("Password entries do not match. Please try again."));
         return;
     }
-    if (lineEditChangePass->text().length() < 2) {
+    if (!passChange->lengthOK()) {
         QMessageBox::critical(
             this, windowTitle(),
             tr("Password needs to be at least 2 characters long. Please enter a longer password before proceeding."));
@@ -473,13 +480,14 @@ void MainWindow::applyGroup()
                         .arg(groups.join(" "));
         int ans = QMessageBox::warning(this, windowTitle(), msg, QMessageBox::Yes, QMessageBox::No);
         if (ans == QMessageBox::Yes) {
-            for (const auto &group : qAsConst(groups)) {
-                if (QProcess::execute("delgroup", {group}) != 0) {
-                    QMessageBox::critical(this, windowTitle(),
-                                          tr("Failed to delete the group.") + "\n" + tr("Group: %1").arg(group));
-                    refresh();
-                    return;
-                }
+            auto it = std::find_if(groups.cbegin(), groups.cend(),
+                                   [&](const auto &group) { return QProcess::execute("delgroup", {group}) != 0; });
+            if (it != groups.cend()) {
+                const auto &group = *it;
+                QMessageBox::critical(this, windowTitle(),
+                                      tr("Failed to delete the group.") + "\n" + tr("Group: %1").arg(group));
+                refresh();
+                return;
             }
             msg = groups.count() == 1 ? tr("The group has been deleted.") : tr("The groups have been deleted.");
             QMessageBox::information(this, windowTitle(), msg);
@@ -672,7 +680,6 @@ void MainWindow::on_userComboBox_activated(const QString & /*unused*/)
             radioAutologinNo->setChecked(true);
     } else if (QProcess::execute("pgrep", {"sddm"}) == 0) {
         QSettings sddm_settings(QStringLiteral("/etc/sddm.conf"), QSettings::NativeFormat);
-        qDebug() << "TEST" << sddm_settings.value(QStringLiteral("Autologin/User")).toString();
         if (sddm_settings.value(QStringLiteral("Autologin/User")).toString() == user)
             radioAutologinYes->setChecked(true);
         else
@@ -918,42 +925,6 @@ void MainWindow::on_sharedRadioButton_clicked()
 {
     buttonApply->setEnabled(true);
     syncProgressBar->setValue(0);
-}
-
-void MainWindow::on_userPassword2Edit_textChanged(const QString &arg1)
-{
-    QPalette pal = userPassword2Edit->palette();
-    if (arg1 != userPasswordEdit->text())
-        pal.setColor(QPalette::Base, QColor(255, 0, 0, 20));
-    else
-        pal.setColor(QPalette::Base, QColor(0, 255, 0, 10));
-    userPasswordEdit->setPalette(pal);
-    userPassword2Edit->setPalette(pal);
-}
-
-void MainWindow::on_lineEditChangePassConf_textChanged(const QString &arg1)
-{
-    QPalette pal = lineEditChangePassConf->palette();
-    if (arg1 != lineEditChangePass->text())
-        pal.setColor(QPalette::Base, QColor(255, 0, 0, 20));
-    else
-        pal.setColor(QPalette::Base, QColor(0, 255, 0, 10));
-    lineEditChangePassConf->setPalette(pal);
-    lineEditChangePass->setPalette(pal);
-}
-
-void MainWindow::on_userPasswordEdit_textChanged()
-{
-    userPassword2Edit->clear();
-    userPasswordEdit->setPalette(QApplication::palette());
-    userPassword2Edit->setPalette(QApplication::palette());
-}
-
-void MainWindow::on_lineEditChangePass_textChanged()
-{
-    lineEditChangePassConf->clear();
-    lineEditChangePass->setPalette(QApplication::palette());
-    lineEditChangePassConf->setPalette(QApplication::palette());
 }
 
 void MainWindow::on_comboRenameUser_activated(const QString & /*unused*/)

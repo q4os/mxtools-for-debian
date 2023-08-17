@@ -130,7 +130,7 @@
     </message>
     <message>
         <location filename="../mainwindow.ui" line="613"/>
-        <location filename="../mainwindow.cpp" line="841"/>
+        <location filename="../mainwindow.cpp" line="845"/>
         <source>Block Driver</source>
         <translation type="unfinished"/>
     </message>
@@ -224,224 +224,224 @@
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="96"/>
+        <location filename="../mainwindow.cpp" line="98"/>
         <source>IP address from router:</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="97"/>
+        <location filename="../mainwindow.cpp" line="99"/>
         <source>External IP address:</source>
         <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="135"/>
-        <location filename="../mainwindow.cpp" line="150"/>
+        <location filename="../mainwindow.cpp" line="148"/>
         <source>Interface: %1</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="136"/>
-        <location filename="../mainwindow.cpp" line="151"/>
+        <location filename="../mainwindow.cpp" line="135"/>
+        <location filename="../mainwindow.cpp" line="149"/>
         <source>Driver: %1</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="136"/>
+        <location filename="../mainwindow.cpp" line="150"/>
+        <source>Description: %1</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="137"/>
+        <location filename="../mainwindow.cpp" line="151"/>
+        <source>Product: %1</source>
         <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="137"/>
         <location filename="../mainwindow.cpp" line="152"/>
-        <source>Description: %1</source>
+        <source>Vendor: %1</source>
         <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="138"/>
         <location filename="../mainwindow.cpp" line="153"/>
-        <source>Product: %1</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="139"/>
-        <location filename="../mainwindow.cpp" line="154"/>
-        <source>Vendor: %1</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="140"/>
-        <location filename="../mainwindow.cpp" line="155"/>
         <source>Enabled: %1</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="206"/>
+        <location filename="../mainwindow.cpp" line="220"/>
+        <location filename="../mainwindow.cpp" line="234"/>
+        <source>&amp;Copy</source>
         <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="208"/>
         <location filename="../mainwindow.cpp" line="222"/>
         <location filename="../mainwindow.cpp" line="236"/>
-        <source>&amp;Copy</source>
+        <source>Ctrl+C</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="210"/>
-        <location filename="../mainwindow.cpp" line="224"/>
-        <location filename="../mainwindow.cpp" line="238"/>
-        <source>Ctrl+C</source>
+        <location filename="../mainwindow.cpp" line="209"/>
+        <location filename="../mainwindow.cpp" line="223"/>
+        <location filename="../mainwindow.cpp" line="237"/>
+        <source>Copy &amp;All</source>
         <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="211"/>
         <location filename="../mainwindow.cpp" line="225"/>
         <location filename="../mainwindow.cpp" line="239"/>
-        <source>Copy &amp;All</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="213"/>
-        <location filename="../mainwindow.cpp" line="227"/>
-        <location filename="../mainwindow.cpp" line="241"/>
         <source>Ctrl+A</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="272"/>
-        <location filename="../mainwindow.cpp" line="289"/>
+        <location filename="../mainwindow.cpp" line="264"/>
+        <location filename="../mainwindow.cpp" line="282"/>
         <source>Traceroute not installed</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="273"/>
+        <location filename="../mainwindow.cpp" line="265"/>
         <source>Traceroute is not installed, do you want to install it now?</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="280"/>
+        <location filename="../mainwindow.cpp" line="272"/>
         <source>Traceroute hasn&apos;t been installed</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="281"/>
+        <location filename="../mainwindow.cpp" line="273"/>
         <source>Traceroute cannot be installed. This may mean you are using the LiveCD or you are unable to reach the software repository,</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="290"/>
+        <location filename="../mainwindow.cpp" line="283"/>
         <source>Traceroute is not installed and no Internet connection could be detected so it cannot be installed</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="296"/>
-        <location filename="../mainwindow.cpp" line="336"/>
+        <location filename="../mainwindow.cpp" line="290"/>
+        <location filename="../mainwindow.cpp" line="329"/>
         <source>No destination host</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="296"/>
-        <location filename="../mainwindow.cpp" line="336"/>
+        <location filename="../mainwindow.cpp" line="290"/>
+        <location filename="../mainwindow.cpp" line="329"/>
         <source>Please fill in the destination host field</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="450"/>
+        <location filename="../mainwindow.cpp" line="452"/>
         <source>Loaded Drivers</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="458"/>
+        <location filename="../mainwindow.cpp" line="460"/>
         <source>Unloaded Drivers</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="471"/>
+        <location filename="../mainwindow.cpp" line="473"/>
         <source>Blocked Drivers</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="490"/>
+        <location filename="../mainwindow.cpp" line="492"/>
         <source>Blocked Broadcom Drivers</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="511"/>
+        <location filename="../mainwindow.cpp" line="513"/>
         <source>Ndiswrapper is not installed</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="523"/>
+        <location filename="../mainwindow.cpp" line="525"/>
         <source>driver installed</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="531"/>
+        <location filename="../mainwindow.cpp" line="534"/>
         <source> and in use by </source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="538"/>
+        <location filename="../mainwindow.cpp" line="541"/>
         <source>. Alternate driver: </source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="609"/>
+        <location filename="../mainwindow.cpp" line="612"/>
         <source>Driver removed from blocklist</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="610"/>
+        <location filename="../mainwindow.cpp" line="612"/>
         <source>Driver removed from blocklist.</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="616"/>
+        <location filename="../mainwindow.cpp" line="618"/>
         <source>Module blocked</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="773"/>
+        <location filename="../mainwindow.cpp" line="778"/>
         <source>Installation successful</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="776"/>
+        <location filename="../mainwindow.cpp" line="780"/>
         <source>Error detected, could not compile ndiswrapper driver.</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="779"/>
+        <location filename="../mainwindow.cpp" line="783"/>
         <source>Error detected, could not install ndiswrapper.</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="791"/>
+        <location filename="../mainwindow.cpp" line="795"/>
         <source>Error encountered while removing Ndiswrapper</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="838"/>
+        <location filename="../mainwindow.cpp" line="842"/>
         <source>Unblock Driver</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="877"/>
+        <location filename="../mainwindow.cpp" line="874"/>
         <source>enabled</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="880"/>
+        <location filename="../mainwindow.cpp" line="877"/>
         <source>disabled</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="883"/>
+        <location filename="../mainwindow.cpp" line="880"/>
         <source>WiFi hardware switch is off</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="891"/>
+        <location filename="../mainwindow.cpp" line="888"/>
         <source>Locate the Windows driver you want to add</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="891"/>
+        <location filename="../mainwindow.cpp" line="889"/>
         <source>Windows installation information file (*.inf)</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="920"/>
+        <location filename="../mainwindow.cpp" line="919"/>
         <source>*.sys file not found</source>
         <translation type="unfinished"/>
     </message>
@@ -451,68 +451,68 @@
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="929"/>
+        <location filename="../mainwindow.cpp" line="931"/>
         <source>sys file reference not found</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="930"/>
+        <location filename="../mainwindow.cpp" line="932"/>
         <source>The sys file for the given driver cannot be determined after parsing the inf file</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="949"/>
+        <location filename="../mainwindow.cpp" line="946"/>
         <source>Ndiswrapper driver removed.</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="957"/>
+        <location filename="../mainwindow.cpp" line="954"/>
         <source>%1 Help</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="968"/>
+        <location filename="../mainwindow.cpp" line="963"/>
         <source>Could not unlock devices.
 WiFi device(s) might already be unlocked.</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="970"/>
+        <location filename="../mainwindow.cpp" line="965"/>
         <source>WiFi devices unlocked.</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="983"/>
+        <location filename="../mainwindow.cpp" line="976"/>
         <source>About %1</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="984"/>
+        <location filename="../mainwindow.cpp" line="977"/>
         <source>Version: </source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="985"/>
+        <location filename="../mainwindow.cpp" line="979"/>
         <source>Program for troubleshooting and configuring network for MX Linux</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="987"/>
+        <location filename="../mainwindow.cpp" line="981"/>
         <source>Copyright (c) MEPIS LLC and MX Linux</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="988"/>
+        <location filename="../mainwindow.cpp" line="982"/>
         <source>%1 License</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1011"/>
+        <location filename="../mainwindow.cpp" line="1001"/>
         <source>Driver loaded successfully</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1026"/>
+        <location filename="../mainwindow.cpp" line="1016"/>
         <source>Driver unloaded successfully</source>
         <translation type="unfinished"/>
     </message>
@@ -520,43 +520,43 @@ WiFi device(s) might already be unlocked.</source>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../about.cpp" line="50"/>
+        <location filename="../about.cpp" line="52"/>
         <source>License</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../about.cpp" line="51"/>
-        <location filename="../about.cpp" line="60"/>
+        <location filename="../about.cpp" line="53"/>
+        <location filename="../about.cpp" line="62"/>
         <source>Changelog</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../about.cpp" line="52"/>
+        <location filename="../about.cpp" line="54"/>
         <source>Cancel</source>
         <translation>Одмінити</translation>
     </message>
     <message>
-        <location filename="../about.cpp" line="70"/>
+        <location filename="../about.cpp" line="74"/>
         <source>&amp;Close</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../main.cpp" line="56"/>
+        <location filename="../main.cpp" line="64"/>
         <source>Error</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../main.cpp" line="57"/>
+        <location filename="../main.cpp" line="65"/>
         <source>You seem to be logged in as root, please log out and log in as normal user to use this program.</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="632"/>
+        <location filename="../mainwindow.cpp" line="635"/>
         <source>Could not load </source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="656"/>
+        <location filename="../mainwindow.cpp" line="659"/>
         <source>Could not unload </source>
         <translation type="unfinished"/>
     </message>

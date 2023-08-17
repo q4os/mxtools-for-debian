@@ -76,7 +76,7 @@
     <message>
         <location filename="../mainwindow.ui" line="301"/>
         <source>Save root persistence</source>
-        <translation>Kalıcı root&apos;u kaydedin</translation>
+        <translation>Kalıcı root’u kaydedin</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="315"/>
@@ -112,7 +112,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="101"/>
         <source>This program provides access to different remaster and persistence tools in MX Linux</source>
-        <translation>Bu program MX Linux&apos;taki farklı yeniden düzenleme ve kalıcı yapma araçlarına erişim sağlar</translation>
+        <translation>Bu program MX Linux’taki farklı yeniden düzenleme ve kalıcı yapma araçlarına erişim sağlar</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="103"/>

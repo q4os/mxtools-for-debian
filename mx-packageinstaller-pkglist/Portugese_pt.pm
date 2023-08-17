@@ -25,35 +25,34 @@ Portugese(PT)
    <eu>Portugese(PT) Language Meta-Package</eu>
    <fa>Portugese(PT) Language Meta-Package</fa>
    <fil_PH>Portugese(PT) Language Meta-Package</fil_PH>
-   <fi>Portugese(PT) Language Meta-Package</fi>
+   <fi>Portugalinkielinen (PT) metatieto-paketti</fi>
    <fr>Méta-paquet pour langue portugaise (PT)</fr>
    <he_IL>Portugese(PT) Language Meta-Package</he_IL>
-   <hi>Portugese(PT) Language Meta-Package</hi>
+   <hi>पुर्तगाली (पुर्तगाल) भाषा मेटा-पैकेज</hi>
    <hr>Portugese(PT) Language Meta-Package</hr>
    <hu>Portugese(PT) Language Meta-Package</hu>
    <id>Portugese(PT) Language Meta-Package</id>
    <is>Portugese(PT) Language Meta-Package</is>
    <it>Meta-pacchetto della lingua portoghese(PT)</it>
-   <ja_JP>Portugese(PT) Language Meta-Package</ja_JP>
-   <ja>Portugese(PT) Language Meta-Package</ja>
+   <ja>ポルトガル語 (PT) のメタパッケージ</ja>
    <kk>Portugese(PT) Language Meta-Package</kk>
    <ko>Portugese(PT) Language Meta-Package</ko>
    <lt>Portugese(PT) Language Meta-Package</lt>
    <mk>Portugese(PT) Language Meta-Package</mk>
    <mr>Portugese(PT) Language Meta-Package</mr>
-   <nb>Portugese(PT) Language Meta-Package</nb>
+   <nb>Portugisisk språkpakke</nb>
    <nl>Portugese(PT) Taal Meta-Pakket</nl>
    <pl>Portugalski (PT) metapakiet językowy</pl>
-   <pt_BR>Português(PT) Meta-Pacote de Idioma</pt_BR>
+   <pt_BR>Português (PT) Meta-Pacote de Idioma</pt_BR>
    <pt>Português(PT) Meta-Pacote de Idioma</pt>
    <ro>Portugese(PT) Language Meta-Package</ro>
-   <ru>Portugese(PT) Language Meta-Package</ru>
+   <ru>Мета-пакет португальского языка</ru>
    <sk>Portugese(PT) Language Meta-Package</sk>
-   <sl>Portugese(PT) Language Meta-Package</sl>
-   <sq>Portugese(PT) Language Meta-Package</sq>
+   <sl>Portugalski (PT) jezikovni meta-paket</sl>
+   <sq>Meta-Paketë gjuhësore në portugalishte (PT)</sq>
    <sr>Portugese(PT) Language Meta-Package</sr>
    <sv>Portugisiskt(PT) Språk Meta-Paket </sv>
-   <tr>Portugese(PT) Language Meta-Package</tr>
+   <tr>Portekizca(PT) Dili Üst-Paketi</tr>
    <uk>Portugese(PT) Language Meta-Package</uk>
    <vi>Portugese(PT) Language Meta-Package</vi>
    <zh_CN>Portugese(PT) Language Meta-Package</zh_CN>

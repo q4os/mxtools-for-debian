@@ -20,37 +20,36 @@ Slovak_Thunderbird
    <de>Slowakische Lokalisierung von Thunderbird</de>
    <el>Σλοβακική εντοπισμός του Thunderbird</el>
    <en>Slovak localisation of Thunderbird</en>
-   <es>Localización Eslovaca de Thunderbird</es>
+   <es>Localización Eslovaco de Thunderbird</es>
    <et>Slovak localisation of Thunderbird</et>
    <eu>Slovak localisation of Thunderbird</eu>
    <fa>Slovak localisation of Thunderbird</fa>
    <fil_PH>Slovak localisation of Thunderbird</fil_PH>
-   <fi>Slovak localisation of Thunderbird</fi>
+   <fi>Slovakialainen Thunderbird-kotoistus</fi>
    <fr>Localisation slovaque pour Thunderbird</fr>
    <he_IL>Slovak localisation of Thunderbird</he_IL>
-   <hi>Slovak localisation of Thunderbird</hi>
+   <hi>थंडरबर्ड का स्लोवाक संस्करण</hi>
    <hr>Slovak localisation of Thunderbird</hr>
    <hu>Slovak localisation of Thunderbird</hu>
    <id>Slovak localisation of Thunderbird</id>
    <is>Slovak localisation of Thunderbird</is>
    <it>Localizzazione slovacca di Thunderbird</it>
-   <ja_JP>Slovak localisation of Thunderbird</ja_JP>
-   <ja>Slovak localisation of Thunderbird</ja>
+   <ja>Thunderbird のスロバキア語パック</ja>
    <kk>Slovak localisation of Thunderbird</kk>
    <ko>Slovak localisation of Thunderbird</ko>
    <lt>Slovak localisation of Thunderbird</lt>
    <mk>Slovak localisation of Thunderbird</mk>
    <mr>Slovak localisation of Thunderbird</mr>
-   <nb>Slovak localisation of Thunderbird</nb>
+   <nb>Slovakisk lokaltilpassing av Thunderbird</nb>
    <nl>Slovaakse lokalisatie van Thunderbird</nl>
    <pl>Słowacka lokalizacja Thunderbirda</pl>
-   <pt_BR>Eslovaco Localização para Thunderbird</pt_BR>
+   <pt_BR>Eslovaco Localização para o Thunderbird</pt_BR>
    <pt>Eslovaco Localização para Thunderbird</pt>
    <ro>Slovak localisation of Thunderbird</ro>
-   <ru>Slovak localisation of Thunderbird</ru>
+   <ru>Словацкий перевод для Thunderbird</ru>
    <sk>Slovak localisation of Thunderbird</sk>
-   <sl>Slovak localisation of Thunderbird</sl>
-   <sq>Slovak localisation of Thunderbird</sq>
+   <sl>Slovaške krajevne nastavitve za Thunderbird</sl>
+   <sq>Përkthimi i Thunderbird-it në sllovenisht</sq>
    <sr>Slovak localisation of Thunderbird</sr>
    <sv>Slovakisk lokalisering av Thunderbird</sv>
    <tr>Thunderbird'ün Slovakça yerelleştirmesi</tr>

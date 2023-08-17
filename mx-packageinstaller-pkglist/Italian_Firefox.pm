@@ -18,39 +18,38 @@ Italian_Firefox
    <cs>Italian localisation of Firefox</cs>
    <da>Italiensk oversættelse af Firefox</da>
    <de>Italienische Lokalisierung von Firefox</de>
-   <el>Ιταλικός εντοπισμός του Firefox</el>
+   <el>Ιταλικά για το Firefox</el>
    <en>Italian localisation of Firefox</en>
    <es>Localización Italiana de Firefox</es>
    <et>Italian localisation of Firefox</et>
    <eu>Italian localisation of Firefox</eu>
    <fa>Italian localisation of Firefox</fa>
    <fil_PH>Italian localisation of Firefox</fil_PH>
-   <fi>Italian localisation of Firefox</fi>
+   <fi>Italialainen Firefox-kotoistus</fi>
    <fr>Localisation italienne pour Firefox</fr>
    <he_IL>Italian localisation of Firefox</he_IL>
-   <hi>Italian localisation of Firefox</hi>
+   <hi>फायरफॉक्स का इतालवी संस्करण</hi>
    <hr>Italian localisation of Firefox</hr>
    <hu>Italian localisation of Firefox</hu>
    <id>Italian localisation of Firefox</id>
    <is>Italian localisation of Firefox</is>
    <it>Localizzazione italiana di Firefox</it>
-   <ja_JP>Italian localisation of Firefox</ja_JP>
-   <ja>Italian localisation of Firefox</ja>
+   <ja>Firefox のイタリア語パック</ja>
    <kk>Italian localisation of Firefox</kk>
    <ko>Italian localisation of Firefox</ko>
    <lt>Italian localisation of Firefox</lt>
    <mk>Italian localisation of Firefox</mk>
    <mr>Italian localisation of Firefox</mr>
-   <nb>Italian localisation of Firefox</nb>
+   <nb>Italiensk lokaltilpassing av Firefox</nb>
    <nl>Italiaanse lokalisatie van Firefox</nl>
    <pl>Włoska lokalizacja przeglądarki Firefox</pl>
-   <pt_BR>Italiano Localização para Firefox</pt_BR>
+   <pt_BR>Italiano Localização para o Firefox</pt_BR>
    <pt>Italiano Localização para Firefox</pt>
    <ro>Italian localisation of Firefox</ro>
    <ru>Итальянская локализация Firefox</ru>
    <sk>Italian localisation of Firefox</sk>
-   <sl>Italian localisation of Firefox</sl>
-   <sq>Italian localisation of Firefox</sq>
+   <sl>Italijanske krajevne nastavitve za Firefox</sl>
+   <sq>Përkthimi i Firefox-it në italisht</sq>
    <sr>Italian localisation of Firefox</sr>
    <sv>Italiensk lokalisering av Firefox </sv>
    <tr>Firefox'un İtalyanca yerelleştirmesi</tr>

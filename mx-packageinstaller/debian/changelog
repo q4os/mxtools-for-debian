@@ -1,3 +1,36 @@
+mx-packageinstaller (23.8) mx; urgency=medium
+
+  * Fix displaying the correct version of installed package if the package is available in multiple sources
+  *  -- fixes upgradable package list
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 11 Aug 2023 14:12:41 -0400
+
+mx-packageinstaller (23.7.02) mx; urgency=medium
+
+  * Fix search when switching back to Popular tab
+  * Set proxy when downloading package info
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 26 Jul 2023 17:26:42 -0400
+
+mx-packageinstaller (23.7.01) mx; urgency=medium
+
+  * Fix a couple of translations
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 24 Jul 2023 08:57:12 -0400
+
+mx-packageinstaller (23.7) mx; urgency=medium
+
+  * Update translations
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 20 Jul 2023 16:54:58 -0400
+
+mx-packageinstaller (23.6) mx; urgency=medium
+
+  * Fix progress bar for flatpak
+  * Fix displaying space taken by flatpak packages
+ 
+ -- Adrian <adrian@mxlinux.org>  Thu, 08 Jun 2023 02:15:54 -0400
+
 mx-packageinstaller (23.5.03) mx; urgency=medium
 
   * Fix logo file location

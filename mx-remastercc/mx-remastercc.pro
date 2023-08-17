@@ -64,7 +64,6 @@ FORMS    += \
     translations/mx-remastercc_fil_PH.ts \
     translations/mx-remastercc_fi.ts \
     translations/mx-remastercc_fr_BE.ts \
-    translations/mx-remastercc_fr_FR.ts \
     translations/mx-remastercc_fr.ts \
     translations/mx-remastercc_gl_ES.ts \
     translations/mx-remastercc_gu.ts \

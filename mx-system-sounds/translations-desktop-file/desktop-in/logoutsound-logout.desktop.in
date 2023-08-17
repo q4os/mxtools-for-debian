@@ -1,0 +1,15 @@
+[Desktop Entry]
+Encoding=UTF-8
+Version=0.9.4
+Type=Application
+# The desktop entry name will be displayed within the menu.
+Name=logoutsound
+# # The desktop entry comment will be shown within the menu.
+Comment=
+Exec=logoutsound-mx
+OnlyShowIn=XFCE;
+RunHook=1
+StartupNotify=false
+Terminal=false
+Hidden=false
+

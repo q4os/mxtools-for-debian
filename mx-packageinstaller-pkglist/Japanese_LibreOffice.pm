@@ -20,37 +20,36 @@ Japanses_Libreoffice
    <de>Japanische Lokalisierung von LibreOffice</de>
    <el>LibreOffice στα Ιαπωνικά</el>
    <en>Japanese localisation of LibreOffice</en>
-   <es>Localización Japonesa de LibreOffice</es>
+   <es>Localización Japonés de LibreOffice</es>
    <et>Japanese localisation of LibreOffice</et>
    <eu>Japanese localisation of LibreOffice</eu>
    <fa>Japanese localisation of LibreOffice</fa>
    <fil_PH>Japanese localisation of LibreOffice</fil_PH>
-   <fi>Japanese localisation of LibreOffice</fi>
+   <fi>Japanilainen kotoistus LibreOffice:lle</fi>
    <fr>Localisation japonaise pour LibreOffice</fr>
    <he_IL>Japanese localisation of LibreOffice</he_IL>
-   <hi>Japanese localisation of LibreOffice</hi>
+   <hi>लिब्रे-ऑफिस का जापानी संस्करण</hi>
    <hr>Japanese localisation of LibreOffice</hr>
    <hu>Japanese localisation of LibreOffice</hu>
    <id>Japanese localisation of LibreOffice</id>
    <is>Japanese localisation of LibreOffice</is>
-   <it>Localizzazione giapponese di LibreOffice</it>
-   <ja_JP>Japanese localisation of LibreOffice</ja_JP>
-   <ja>Japanese localisation of LibreOffice</ja>
+   <it>Localizzazione giapponese di LibreOffice </it>
+   <ja>LibreOffice の日本語パック</ja>
    <kk>Japanese localisation of LibreOffice</kk>
    <ko>Japanese localisation of LibreOffice</ko>
    <lt>Japanese localisation of LibreOffice</lt>
    <mk>Japanese localisation of LibreOffice</mk>
    <mr>Japanese localisation of LibreOffice</mr>
-   <nb>Japanese localisation of LibreOffice</nb>
+   <nb>Japansk lokaltilpassing av LibreOffice</nb>
    <nl>Japanse lokalisatie van LibreOffice</nl>
    <pl>Japońska lokalizacja LibreOffice</pl>
-   <pt_BR>Japonês Localização para LibreOffice</pt_BR>
+   <pt_BR>Japonês Localização para o LibreOffice</pt_BR>
    <pt>Japonês Localização para LibreOffice</pt>
    <ro>Japanese localisation of LibreOffice</ro>
-   <ru>Japanese localisation of LibreOffice</ru>
+   <ru>Японский перевод для LibreOffice</ru>
    <sk>Japanese localisation of LibreOffice</sk>
-   <sl>Japanese localisation of LibreOffice</sl>
-   <sq>Japanese localisation of LibreOffice</sq>
+   <sl>Japonske krajevne nastavitve za LibreOffice</sl>
+   <sq>Përkthimi i LibreOffice-it në japonisht</sq>
    <sr>Japanese localisation of LibreOffice</sr>
    <sv>Japansk lokalisering av LibreOffice</sv>
    <tr>LibreOffice Japonca yerelleştirmesi</tr>

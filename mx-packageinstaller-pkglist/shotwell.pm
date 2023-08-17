@@ -18,30 +18,29 @@ Shotwell
    <cs>digital photo organizer</cs>
    <da>organisering af digitale billeder</da>
    <de>Digitalfoto-Organizer</de>
-   <el>ψηφιακό διοργανωτή φωτογραφιών</el>
+   <el>Ψηφιακός οργανωτής φωτογραφιών</el>
    <en>digital photo organizer</en>
    <es>Organizador de fotografías digitales</es>
    <et>digital photo organizer</et>
    <eu>digital photo organizer</eu>
    <fa>digital photo organizer</fa>
    <fil_PH>digital photo organizer</fil_PH>
-   <fi>digital photo organizer</fi>
+   <fi>digitaalistenkuvien järjestelyohjelma</fi>
    <fr>Agenda photo numérique</fr>
    <he_IL>digital photo organizer</he_IL>
-   <hi>digital photo organizer</hi>
+   <hi>डिजिटल चित्र संयोजक</hi>
    <hr>digital photo organizer</hr>
    <hu>digital photo organizer</hu>
    <id>digital photo organizer</id>
    <is>digital photo organizer</is>
    <it>organizzatore di foto digitali</it>
-   <ja_JP>digital photo organizer</ja_JP>
-   <ja>digital photo organizer</ja>
+   <ja>デジタル写真オーガナイザ</ja>
    <kk>digital photo organizer</kk>
    <ko>digital photo organizer</ko>
    <lt>digital photo organizer</lt>
    <mk>digital photo organizer</mk>
    <mr>digital photo organizer</mr>
-   <nb>digital photo organizer</nb>
+   <nb>organisering av digitale foto</nb>
    <nl>digitale foto-organisator</nl>
    <pl>przeglądarka i menedżer plików graficznych i fotografii cyfrowych</pl>
    <pt_BR>Organizador de fotos digitais</pt_BR>
@@ -50,10 +49,10 @@ Shotwell
    <ru>Каталогизатор фотографий и видеофайлов</ru>
    <sk>digital photo organizer</sk>
    <sl>Digitalni organizator fotografiji</sl>
-   <sq>digital photo organizer</sq>
+   <sq>album fotosh dixhitale</sq>
    <sr>digital photo organizer</sr>
    <sv>digital foto-organiserare</sv>
-   <tr>digital photo organizer</tr>
+   <tr>dijital fotoğraf düzenleyici</tr>
    <uk>digital photo organizer</uk>
    <vi>digital photo organizer</vi>
    <zh_CN>digital photo organizer</zh_CN>

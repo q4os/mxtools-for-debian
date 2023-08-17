@@ -132,7 +132,7 @@
     </message>
     <message>
         <location filename="../mainwindow.ui" line="613"/>
-        <location filename="../mainwindow.cpp" line="847"/>
+        <location filename="../mainwindow.cpp" line="845"/>
         <source>Block Driver</source>
         <translation>Blockera Drivrutin</translation>
     </message>
@@ -338,184 +338,184 @@
         <translation>Var vänlig fyll i destinations-värds fältet</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="454"/>
+        <location filename="../mainwindow.cpp" line="452"/>
         <source>Loaded Drivers</source>
         <translation>Laddade Drivrutiner</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="462"/>
+        <location filename="../mainwindow.cpp" line="460"/>
         <source>Unloaded Drivers</source>
         <translation>Ej laddade Drivrutiner</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="475"/>
+        <location filename="../mainwindow.cpp" line="473"/>
         <source>Blocked Drivers</source>
         <translation>Blockerade Drivrutiner</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="494"/>
+        <location filename="../mainwindow.cpp" line="492"/>
         <source>Blocked Broadcom Drivers</source>
         <translation>Blockerade Broadcom Drivrutiner</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="515"/>
+        <location filename="../mainwindow.cpp" line="513"/>
         <source>Ndiswrapper is not installed</source>
         <translation>Ndiswrapper är inte installerad</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="527"/>
+        <location filename="../mainwindow.cpp" line="525"/>
         <source>driver installed</source>
         <translation>drivrutin är installerad</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="536"/>
+        <location filename="../mainwindow.cpp" line="534"/>
         <source> and in use by </source>
         <translation>och används av</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="543"/>
+        <location filename="../mainwindow.cpp" line="541"/>
         <source>. Alternate driver: </source>
         <translation>Alternativ drivrutin:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="614"/>
+        <location filename="../mainwindow.cpp" line="612"/>
         <source>Driver removed from blocklist</source>
         <translation>Drivrutin borttagen från blockeringslista</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="614"/>
+        <location filename="../mainwindow.cpp" line="612"/>
         <source>Driver removed from blocklist.</source>
         <translation>Drivrutin borttagen från blockeringslista</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="620"/>
+        <location filename="../mainwindow.cpp" line="618"/>
         <source>Module blocked</source>
         <translation>Modul blockerad</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="780"/>
+        <location filename="../mainwindow.cpp" line="778"/>
         <source>Installation successful</source>
         <translation>Installationen lyckades</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="782"/>
+        <location filename="../mainwindow.cpp" line="780"/>
         <source>Error detected, could not compile ndiswrapper driver.</source>
         <translation>Fel upptäckt, kunde inte kompilera ndiswrapper drivrutin.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="785"/>
+        <location filename="../mainwindow.cpp" line="783"/>
         <source>Error detected, could not install ndiswrapper.</source>
         <translation>Fel upptäckt, kunde inte installera ndiswrapper.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="797"/>
+        <location filename="../mainwindow.cpp" line="795"/>
         <source>Error encountered while removing Ndiswrapper</source>
         <translation>Fel uppstod vid Ndiswrappers borttagande </translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="844"/>
+        <location filename="../mainwindow.cpp" line="842"/>
         <source>Unblock Driver</source>
         <translation>Ta bort blockering av Drivrutin</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="876"/>
+        <location filename="../mainwindow.cpp" line="874"/>
         <source>enabled</source>
         <translation>aktiverad</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="879"/>
+        <location filename="../mainwindow.cpp" line="877"/>
         <source>disabled</source>
         <translation>inaktiverad</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="882"/>
+        <location filename="../mainwindow.cpp" line="880"/>
         <source>WiFi hardware switch is off</source>
         <translation>WiFi-hårdvaruswitchen är avstängd</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="890"/>
+        <location filename="../mainwindow.cpp" line="888"/>
         <source>Locate the Windows driver you want to add</source>
         <translation>Hitta den Windows drivrutin du vill lägga till</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="891"/>
+        <location filename="../mainwindow.cpp" line="889"/>
         <source>Windows installation information file (*.inf)</source>
         <translation>Windows installation informationsfil (*.inf)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="921"/>
+        <location filename="../mainwindow.cpp" line="919"/>
         <source>*.sys file not found</source>
         <translation>*.sys fil ej hittad</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="922"/>
+        <location filename="../mainwindow.cpp" line="920"/>
         <source>The *.sys files must be in the same location as the *.inf file. %1 cannot be found</source>
         <translation>*.sys filer måste vara på sama plats som *.inf filen. %1 kan inte hittas</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="933"/>
+        <location filename="../mainwindow.cpp" line="931"/>
         <source>sys file reference not found</source>
         <translation>sys fil referens ej hittad</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="934"/>
+        <location filename="../mainwindow.cpp" line="932"/>
         <source>The sys file for the given driver cannot be determined after parsing the inf file</source>
         <translation>sys filen för den angivna drivrutinen kan inte bestämmas efter att ha gått igenom inf filen</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="948"/>
+        <location filename="../mainwindow.cpp" line="946"/>
         <source>Ndiswrapper driver removed.</source>
         <translation>Ndiswrappers drivrutin borttagen.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="956"/>
+        <location filename="../mainwindow.cpp" line="954"/>
         <source>%1 Help</source>
         <translation>%1 Hjälp</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="965"/>
+        <location filename="../mainwindow.cpp" line="963"/>
         <source>Could not unlock devices.
 WiFi device(s) might already be unlocked.</source>
         <translation>Kunde inte låsa upp enheter
 WiFi enhet(er) kanske redan är upplåsta.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="967"/>
+        <location filename="../mainwindow.cpp" line="965"/>
         <source>WiFi devices unlocked.</source>
         <translation>WiFi enheter upplåsta.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="978"/>
+        <location filename="../mainwindow.cpp" line="976"/>
         <source>About %1</source>
         <translation>Om %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="979"/>
+        <location filename="../mainwindow.cpp" line="977"/>
         <source>Version: </source>
         <translation>Version:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="981"/>
+        <location filename="../mainwindow.cpp" line="979"/>
         <source>Program for troubleshooting and configuring network for MX Linux</source>
         <translation>Program för för felsökning och inställning av nätverk för MX Linux</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="983"/>
+        <location filename="../mainwindow.cpp" line="981"/>
         <source>Copyright (c) MEPIS LLC and MX Linux</source>
         <translation>Copyright (c) MEPIS LLC och MX Linux</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="984"/>
+        <location filename="../mainwindow.cpp" line="982"/>
         <source>%1 License</source>
         <translation>%1 Licens</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1003"/>
+        <location filename="../mainwindow.cpp" line="1001"/>
         <source>Driver loaded successfully</source>
         <translation>Drivrutin framgångsrikt laddad</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1018"/>
+        <location filename="../mainwindow.cpp" line="1016"/>
         <source>Driver unloaded successfully</source>
         <translation>Drivrutin framgångsrikt avladdad</translation>
     </message>
@@ -554,12 +554,12 @@ WiFi enhet(er) kanske redan är upplåsta.</translation>
         <translation>Du verkar vara inloggad som root, var vänlig logga ut och logga in som vanlig användare för att använda detta program.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="637"/>
+        <location filename="../mainwindow.cpp" line="635"/>
         <source>Could not load </source>
         <translation>Kunde inte ladda</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="661"/>
+        <location filename="../mainwindow.cpp" line="659"/>
         <source>Could not unload </source>
         <translation>Kunde inte ta bort</translation>
     </message>

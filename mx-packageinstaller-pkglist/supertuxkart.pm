@@ -28,32 +28,31 @@ SuperTuxKart
    <fi>Mario Kartin tyylinen kilpa-ajopeli</fi>
    <fr>Jeu de courses de type Mario-kart</fr>
    <he_IL>Mario kart style racing</he_IL>
-   <hi>Mario kart style racing</hi>
+   <hi>मारिओ कार्ट स्टाइल रेस</hi>
    <hr>Mario kart style racing</hr>
    <hu>Mario kart style racing</hu>
    <id>Mario kart style racing</id>
    <is>Mario kart style racing</is>
    <it>gioco di corse con i kart stile SuperMario</it>
-   <ja_JP>Mario kart style racing</ja_JP>
-   <ja>Mario kart style racing</ja>
+   <ja>マリオカート風のレースゲーム</ja>
    <kk>Mario kart style racing</kk>
    <ko>Mario kart style racing</ko>
    <lt>Mario kart style racing</lt>
    <mk>Mario kart style racing</mk>
    <mr>Mario kart style racing</mr>
-   <nb>Mario kart style racing</nb>
+   <nb>Super Mario Kart-lignende kappkjøring</nb>
    <nl>Mario kart stijl racen</nl>
    <pl>wyścigi w stylu Mario Kart</pl>
-   <pt_BR>Mario kart style racing</pt_BR>
-   <pt>Mario kart style racing</pt>
+   <pt_BR>Jogo de vídeo de corridas de carte, estilo o jogo Mario Kart</pt_BR>
+   <pt>Jogo de vídeo de corridas de karts, do tipo Mario kart</pt>
    <ro>Mario kart style racing</ro>
    <ru>Гонки на картах в стиле Mario</ru>
    <sk>Mario kart style racing</sk>
    <sl>Mario kartingu podobna  igra</sl>
-   <sq>Mario kart style racing</sq>
+   <sq>Gara makinash kart në stil të lojës Mario</sq>
    <sr>Mario kart style racing</sr>
    <sv>Mario kart stil racing</sv>
-   <tr>Mario kart style racing</tr>
+   <tr>Mario kart tarzı yarış</tr>
    <uk>Mario kart style racing</uk>
    <vi>Mario kart style racing</vi>
    <zh_CN>Mario kart style racing</zh_CN>

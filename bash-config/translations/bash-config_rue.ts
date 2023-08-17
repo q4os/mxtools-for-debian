@@ -4,12 +4,12 @@
     <message>
         <location filename="../aliastab.ui" line="71"/>
         <source>Add</source>
-        <translation type="unfinished"/>
+        <translation>Придати</translation>
     </message>
     <message>
         <location filename="../aliastab.ui" line="82"/>
         <source>Remove</source>
-        <translation type="unfinished"/>
+        <translation>Удалити</translation>
     </message>
 </context>
 <context>
@@ -42,12 +42,12 @@
     <message>
         <location filename="../othertab.ui" line="97"/>
         <source>Add</source>
-        <translation type="unfinished"/>
+        <translation>Придати</translation>
     </message>
     <message>
         <location filename="../othertab.ui" line="108"/>
         <source>Remove</source>
-        <translation type="unfinished"/>
+        <translation>Удалити</translation>
     </message>
 </context>
 <context>
@@ -140,12 +140,12 @@
     <message>
         <location filename="../prompttab_fix.ui" line="478"/>
         <source>Add</source>
-        <translation type="unfinished"/>
+        <translation>Придати</translation>
     </message>
     <message>
         <location filename="../prompttab_fix.ui" line="501"/>
         <source>Remove</source>
-        <translation type="unfinished"/>
+        <translation>Удалити</translation>
     </message>
     <message>
         <location filename="../prompttab_fix.ui" line="518"/>

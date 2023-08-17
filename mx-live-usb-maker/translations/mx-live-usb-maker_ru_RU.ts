@@ -16,7 +16,7 @@
     <message>
         <location filename="../mainwindow.ui" line="49"/>
         <source>Close</source>
-        <translation type="unfinished"></translation>
+        <translation>Закрыть</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="56"/>
@@ -31,7 +31,7 @@
     <message>
         <location filename="../mainwindow.ui" line="91"/>
         <source>Help</source>
-        <translation type="unfinished"></translation>
+        <translation>Помощь</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="98"/>
@@ -224,7 +224,7 @@
     <message>
         <location filename="../mainwindow.ui" line="657"/>
         <source>Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Варианты</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="695"/>
@@ -297,7 +297,7 @@
         <location filename="../mainwindow.cpp" line="152"/>
         <source>Writing %1 using &apos;dd&apos; command to /dev/%2,
 
-Please wait until the the process is completed</source>
+Please wait until the process is completed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -318,7 +318,7 @@ Please wait until the the process is completed</source>
     <message>
         <location filename="../mainwindow.cpp" line="375"/>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="375"/>
@@ -462,7 +462,7 @@ Please wait until the the process is completed</source>
     <message>
         <location filename="../main.cpp" line="88"/>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка</translation>
     </message>
     <message>
         <location filename="../main.cpp" line="89"/>

@@ -133,6 +133,7 @@ main() {
         uno-libs-private
         ure
         fonts-opensymbol
+        python3-uno
         )
 
     LO_INSTALL_PACKAGES_MANUAL=(
@@ -153,6 +154,7 @@ main() {
         ure
         fonts-opensymbol
         libreoffice-avmedia-backend-gstreamer
+        python3-uno
         )
 
     LO_INSTALL_PACKAGES_MANUAL_KDE=(
@@ -275,6 +277,7 @@ debian_codename() {
         11) echo bullseye ;;
         12) echo bookworm ;;
         13) echo trixie   ;;
+        "bookworm/sid") echo bookworm;;
          *) echo "[FATAL]: Debian [$debian_id] codename not found. exit " >&2
             exit 1
             ;;

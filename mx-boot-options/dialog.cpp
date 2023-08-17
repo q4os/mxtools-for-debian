@@ -31,4 +31,7 @@ CustomDialog::CustomDialog(const QStringList &items, QDialog *parent)
     connect(cancel, &QPushButton::clicked, this, &CustomDialog::reject);
 }
 
-QComboBox *CustomDialog::comboBox() { return box; }
+QComboBox *CustomDialog::comboBox()
+{
+    return box;
+}

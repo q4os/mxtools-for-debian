@@ -18,39 +18,38 @@ GB_English_Firefox
    <cs>GB English localisation of Firefox</cs>
    <da>Engelsk (storbritannien) oversættelse af Firefox</da>
    <de>Englische (GB) Lokalisierung von Firefox</de>
-   <el>Αγγλικός (ΜΒ) εντοπισμός του Firefox</el>
+   <el>Αγγλικά(GΒ) για το Firefox</el>
    <en>GB English localisation of Firefox</en>
    <es>Localización Inglesa (GB) de Firefox</es>
    <et>GB English localisation of Firefox</et>
    <eu>GB English localisation of Firefox</eu>
    <fa>GB English localisation of Firefox</fa>
    <fil_PH>GB English localisation of Firefox</fil_PH>
-   <fi>GB English localisation of Firefox</fi>
+   <fi>GB-englantilainen Firefox-kotoistus</fi>
    <fr>Localisation anglaise_GB pour Firefox</fr>
    <he_IL>GB English localisation of Firefox</he_IL>
-   <hi>GB English localisation of Firefox</hi>
+   <hi>फायरफॉक्स का ब्रिटिश अंग्रेज़ी संस्करण</hi>
    <hr>GB English localisation of Firefox</hr>
    <hu>GB English localisation of Firefox</hu>
    <id>GB English localisation of Firefox</id>
    <is>GB English localisation of Firefox</is>
-   <it>Localizzazione in Inglese GB di Firefox</it>
-   <ja_JP>GB English localisation of Firefox</ja_JP>
-   <ja>GB English localisation of Firefox</ja>
+   <it>Localizzazione in Inglese GB di Firefox </it>
+   <ja>Firefox のイギリス英語パック</ja>
    <kk>GB English localisation of Firefox</kk>
    <ko>GB English localisation of Firefox</ko>
    <lt>GB English localisation of Firefox</lt>
    <mk>GB English localisation of Firefox</mk>
    <mr>GB English localisation of Firefox</mr>
-   <nb>GB English localisation of Firefox</nb>
+   <nb>Britisk engelsk lokaltilpassing av Firefox</nb>
    <nl>GB Engelse lokalisatie van Firefox</nl>
    <pl>Angielski Brytyjski lokalizacja przeglądarki Firefox</pl>
-   <pt_BR>GB Inglês Localização para Firefox</pt_BR>
+   <pt_BR>Inglês da Grã-Bretanha Localização para o Firefox</pt_BR>
    <pt>Inglês GB Localização para Firefox</pt>
    <ro>GB English localisation of Firefox</ro>
-   <ru>GB English localisation of Firefox</ru>
+   <ru>Британская английская локализация Firefox</ru>
    <sk>GB English localisation of Firefox</sk>
-   <sl>GB English localisation of Firefox</sl>
-   <sq>GB English localisation of Firefox</sq>
+   <sl>VB angleške krajevne nastavitve za Firefox</sl>
+   <sq>Përkthimi i Firefox-it në anglishte britanike</sq>
    <sr>GB English localisation of Firefox</sr>
    <sv>GB Engelsk lokalisering av Firefox</sv>
    <tr>Firefox'un Britanya İngilizcesi yerelleştirmesi</tr>

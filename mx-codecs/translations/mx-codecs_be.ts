@@ -66,7 +66,7 @@
     <message>
         <location filename="../mainwindow.ui" line="235"/>
         <source>Help</source>
-        <translation type="unfinished"></translation>
+        <translation>Даведка</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="242"/>

@@ -25,32 +25,31 @@ Chinese_fonts
    <eu>Chinese fonts packages</eu>
    <fa>Chinese fonts packages</fa>
    <fil_PH>Chinese fonts packages</fil_PH>
-   <fi>Chinese fonts packages</fi>
+   <fi>Kiinalaiset kirjasinpaketit</fi>
    <fr>Paquets pour polices chinoises</fr>
    <he_IL>Chinese fonts packages</he_IL>
-   <hi>Chinese fonts packages</hi>
+   <hi>चीनी मुद्रलिपि पैकेज</hi>
    <hr>Chinese fonts packages</hr>
    <hu>Chinese fonts packages</hu>
    <id>Chinese fonts packages</id>
    <is>Chinese fonts packages</is>
    <it>Pacchetti di fonts per il Cinese</it>
-   <ja_JP>Chinese fonts packages</ja_JP>
-   <ja>Chinese fonts packages</ja>
+   <ja>中国語用のフォントパッケージ</ja>
    <kk>Chinese fonts packages</kk>
    <ko>Chinese fonts packages</ko>
    <lt>Kinų šriftų paketai</lt>
    <mk>Chinese fonts packages</mk>
    <mr>Chinese fonts packages</mr>
-   <nb>Chinese fonts packages</nb>
+   <nb>Pakke med kinesiske skrifttyper</nb>
    <nl>Chinese font pakketten</nl>
    <pl>pakiety z chińskimi fontami (czcionkami)</pl>
-   <pt_BR>Chinês Pacotes de fontes</pt_BR>
+   <pt_BR>Pacotes de fontes Chinês </pt_BR>
    <pt>Chinês Pacotes de fontes</pt>
    <ro>Chinese fonts packages</ro>
    <ru>Пакеты китайских шрифтов</ru>
    <sk>Chinese fonts packages</sk>
-   <sl>Chinese fonts packages</sl>
-   <sq>Chinese fonts packages</sq>
+   <sl>Kitajski paketi s pisavami</sl>
+   <sq>Paketa shkronjash kinezçe</sq>
    <sr>Chinese fonts packages</sr>
    <sv>Kinesiska typsnitts-paket</sv>
    <tr>Çince yazı tipi paketleri</tr>

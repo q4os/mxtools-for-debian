@@ -1,3 +1,9 @@
+kde-servicemenu-checkhash-installdebs (1.3mx23) mx; urgency=medium
+
+  * Rebuild for MX Linux 23.
+
+ -- Steven Pusser <stevep@mxlinux.org>  Thu, 13 Apr 2023 15:18:06 -0700
+
 kde-servicemenu-checkhash-installdebs (1.3mx21) mx; urgency=medium
 
   * Rebuild for MX 21.

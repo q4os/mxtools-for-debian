@@ -52,6 +52,7 @@ public:
     void setup();
     QString buildOptionList();
     QStringList buildUsbList();
+    void validate_name();
     QStringList removeUnsuitable(const QStringList &devices); // remove unsuitable disks from the list (live and unremovable)
 
 private slots:
@@ -67,6 +68,10 @@ private slots:
     void on_buttonRefresh_clicked();
     void on_checkBoxShowAll_clicked();
     void on_checkBoxshowpartitions_clicked();
+
+    void on_lineEditFSlabel_textChanged(const QString &arg1);
+
+    void on_comboBoxDataFormat_currentIndexChanged(int index);
 
 private:
     Ui::MainWindow *ui;

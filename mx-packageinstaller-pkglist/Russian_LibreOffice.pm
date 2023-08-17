@@ -18,39 +18,38 @@ Russian_Libreoffice
    <cs>Russian localisation of LibreOffice</cs>
    <da>Russisk oversættelse af LibreOffice</da>
    <de>Russische Lokalisierung von LibreOffice</de>
-   <el>LibreOffice στα ρωσικά</el>
+   <el>LibreOffice στα Ρωσικά</el>
    <en>Russian localisation of LibreOffice</en>
-   <es>Localización Rusa de LibreOffice</es>
+   <es>Localización Ruso de LibreOffice</es>
    <et>Russian localisation of LibreOffice</et>
    <eu>Russian localisation of LibreOffice</eu>
    <fa>Russian localisation of LibreOffice</fa>
    <fil_PH>Russian localisation of LibreOffice</fil_PH>
-   <fi>Russian localisation of LibreOffice</fi>
+   <fi>Venäläinen kotoistus LibreOffice:lle</fi>
    <fr>Localisation russe pour LibreOffice</fr>
    <he_IL>Russian localisation of LibreOffice</he_IL>
-   <hi>Russian localisation of LibreOffice</hi>
+   <hi>लिब्रे-ऑफिस का रूसी संस्करण</hi>
    <hr>Russian localisation of LibreOffice</hr>
    <hu>Russian localisation of LibreOffice</hu>
    <id>Russian localisation of LibreOffice</id>
    <is>Russian localisation of LibreOffice</is>
-   <it>Localizzazione russa di LibreOffice</it>
-   <ja_JP>Russian localisation of LibreOffice</ja_JP>
-   <ja>Russian localisation of LibreOffice</ja>
+   <it>Localizzazione russa di LibreOffice </it>
+   <ja>LibreOffice のロシア語パック</ja>
    <kk>Russian localisation of LibreOffice</kk>
    <ko>Russian localisation of LibreOffice</ko>
    <lt>Russian localisation of LibreOffice</lt>
    <mk>Russian localisation of LibreOffice</mk>
    <mr>Russian localisation of LibreOffice</mr>
-   <nb>Russian localisation of LibreOffice</nb>
+   <nb>Russisk lokaltilpassing av LibreOffice</nb>
    <nl>Russische lokalisatie van LibreOffice</nl>
    <pl>Rosyjska lokalizacja LibreOffice</pl>
-   <pt_BR>Russo Localização para LibreOffice</pt_BR>
+   <pt_BR>Russo Localização para o LibreOffice</pt_BR>
    <pt>Russo Localização para LibreOffice</pt>
    <ro>Russian localisation of LibreOffice</ro>
    <ru>Русский перевод для LibreOffice</ru>
    <sk>Russian localisation of LibreOffice</sk>
-   <sl>Russian localisation of LibreOffice</sl>
-   <sq>Russian localisation of LibreOffice</sq>
+   <sl>Ruske krajevne nastavitve za LibreOffice</sl>
+   <sq>Përkthimi i LibreOffice-it në rusisht</sq>
    <sr>Russian localisation of LibreOffice</sr>
    <sv>Rysk  lokalisering av LibreOffice</sv>
    <tr>LibreOffice Rusça yerelleştirmesi</tr>

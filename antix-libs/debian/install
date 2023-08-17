@@ -3,7 +3,8 @@ lib/*                   usr/local/lib
 make-fstab              sbin
 autologin               sbin
 make-xorg-conf          sbin
-antixers                etc/sudoers.d
+antixers                etc/sudoers.d	
+sudo_password_display   etc/sudoers.d
 sbin/*                  usr/sbin
 desktop_tool.py         usr/local/bin
 excludes/*              usr/local/share/excludes 

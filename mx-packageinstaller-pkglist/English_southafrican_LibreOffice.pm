@@ -14,46 +14,45 @@ English_southafrican_Libreoffice
    <ar>English_southafrican Language Meta-Package for LibreOffice</ar>
    <bg>English_southafrican Language Meta-Package for LibreOffice</bg>
    <bn>English_southafrican Language Meta-Package for LibreOffice</bn>
-   <ca>Metapaquet d'Angés Sudafricà per LibreOffice</ca>
+   <ca>Metapaquet per LibreOffice</ca>
    <cs>English_southafrican Language Meta-Package for LibreOffice</cs>
    <da>English_southafrican Language Meta-Package for LibreOffice</da>
-   <de>Südafrikanisches Englisch Meta-Paket für LibreOffice</de>
-   <el>LibreOffice στα αγγλικά-Νότια Αφρικής</el>
+   <de>Meta-Paket für LibreOffice</de>
+   <el>Meta-Package για το LibreOffice</el>
    <en>English_southafrican Language Meta-Package for LibreOffice</en>
-   <es>Meta-Paquete de idioma inglés_southafricano para LibreOffice</es>
+   <es>Meta-Package para LibreOffice</es>
    <et>English_southafrican Language Meta-Package for LibreOffice</et>
    <eu>English_southafrican Language Meta-Package for LibreOffice</eu>
    <fa>English_southafrican Language Meta-Package for LibreOffice</fa>
    <fil_PH>English_southafrican Language Meta-Package for LibreOffice</fil_PH>
-   <fi>English_southafrican Language Meta-Package for LibreOffice</fi>
-   <fr>English_southafrican Language Meta-Package for LibreOffice</fr>
+   <fi>Metatieto-paketti LibreOffice:lle</fi>
+   <fr>Meta-Paquet pour LibreOffice</fr>
    <he_IL>English_southafrican Language Meta-Package for LibreOffice</he_IL>
-   <hi>English_southafrican Language Meta-Package for LibreOffice</hi>
+   <hi>लिब्रे-ऑफिस हेतु मेटा-पैकेज</hi>
    <hr>English_southafrican Language Meta-Package for LibreOffice</hr>
    <hu>English_southafrican Language Meta-Package for LibreOffice</hu>
    <id>English_southafrican Language Meta-Package for LibreOffice</id>
    <is>English_southafrican Language Meta-Package for LibreOffice</is>
-   <it>Meta-pacchetto della lingua anglo-sudafricana per LibreOffice</it>
-   <ja_JP>English_southafrican Language Meta-Package for LibreOffice</ja_JP>
-   <ja>English_southafrican Language Meta-Package for LibreOffice</ja>
+   <it>Meta-pacchetto per LibreOffice</it>
+   <ja>LibreOffice用メタパッケージ</ja>
    <kk>English_southafrican Language Meta-Package for LibreOffice</kk>
    <ko>English_southafrican Language Meta-Package for LibreOffice</ko>
    <lt>English_southafrican Language Meta-Package for LibreOffice</lt>
    <mk>English_southafrican Language Meta-Package for LibreOffice</mk>
    <mr>English_southafrican Language Meta-Package for LibreOffice</mr>
-   <nb>English_southafrican Language Meta-Package for LibreOffice</nb>
-   <nl>English_southafrican Language Meta-Package for LibreOffice</nl>
-   <pl>English_southafrican Language Meta-Package for LibreOffice</pl>
-   <pt_BR>English_southafrican Language Meta-Package for LibreOffice</pt_BR>
-   <pt>Inglês SA Meta-Pacote de Idioma para LibreOffice</pt>
+   <nb>LibreOffice metapakke</nb>
+   <nl>Meta-Pakket voor LibreOffice</nl>
+   <pl>Meta-Pakiet dla LibreOffice</pl>
+   <pt_BR>Meta-Pacote para o LibreOffice</pt_BR>
+   <pt>Meta-Pacote para LibreOffice</pt>
    <ro>English_southafrican Language Meta-Package for LibreOffice</ro>
-   <ru>English_southafrican Language Meta-Package for LibreOffice</ru>
+   <ru>Мета-пакет для LibreOffice</ru>
    <sk>English_southafrican Language Meta-Package for LibreOffice</sk>
-   <sl>Angleški južnoafriški jezikovni meta-paket za LibreOffice</sl>
-   <sq>English_southafrican Language Meta-Package for LibreOffice</sq>
+   <sl>Meta-paket za LibreOffice</sl>
+   <sq>Meta-Paketë për LibreOffice-in</sq>
    <sr>English_southafrican Language Meta-Package for LibreOffice</sr>
-   <sv>Engelska_sydafrikansk Språk Meta-Paket för LibreOffice</sv>
-   <tr>English_southafrican Language Meta-Package for LibreOffice</tr>
+   <sv>Meta-Paket för LibreOffice</sv>
+   <tr>LibreOffice için Üst-Paket</tr>
    <uk>English_southafrican Language Meta-Package for LibreOffice</uk>
    <vi>English_southafrican Language Meta-Package for LibreOffice</vi>
    <zh_CN>English_southafrican Language Meta-Package for LibreOffice</zh_CN>

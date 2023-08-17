@@ -249,7 +249,7 @@ Are you OK to exit?</source>
     <message>
         <location filename="../MainWindow.cpp" line="340"/>
         <source>Job Scheduler is based upon qroneko 0.5.4, released in 2005 by korewaisai (&lt;a href=&quot;mailto:korewaisai@yahoo.co.jp&quot;&gt;korewaisai@yahoo.co.jp&lt;/a&gt;)</source>
-        <translation>İş Çizelgeleyici, 2005 yılında korewaisai tarafından yayınlanan qroneko 0.5.4&apos;e dayanmaktadır (&lt;a href=&quot;mailto:korewaisai@yahoo.co.jp&quot;&gt;korewaisai@yahoo.co.jp&lt;/a&gt;)</translation>
+        <translation>İş Çizelgeleyici, 2005 yılında korewaisai tarafından yayınlanan qroneko 0.5.4’e dayanmaktadır (&lt;a href=&quot;mailto:korewaisai@yahoo.co.jp&quot;&gt;korewaisai@yahoo.co.jp&lt;/a&gt;)</translation>
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="343"/>

@@ -18,42 +18,41 @@ Catalan
    <cs>Catalan Language Meta-Package</cs>
    <da>Catalansk sprog-metapakke</da>
    <de>Katalanisches Sprach-Meta-Paket</de>
-   <el>Καταλανικά</el>
+   <el>Καταλανική γλώσσα</el>
    <en>Catalan Language Meta-Package</en>
    <es>Meta paquete idioma Catalán</es>
    <et>Catalan Language Meta-Package</et>
    <eu>Catalan Language Meta-Package</eu>
    <fa>Catalan Language Meta-Package</fa>
    <fil_PH>Catalan Language Meta-Package</fil_PH>
-   <fi>Catalan Language Meta-Package</fi>
+   <fi>Kataloniankielinen metatieto-paketti</fi>
    <fr>Méta-Paquet pour langue catalane</fr>
    <he_IL>Catalan Language Meta-Package</he_IL>
-   <hi>Catalan Language Meta-Package</hi>
+   <hi>कैटलन भाषा मेटा-पैकेज</hi>
    <hr>Catalan Language Meta-Package</hr>
    <hu>Catalan Language Meta-Package</hu>
    <id>Catalan Language Meta-Package</id>
    <is>Catalan Language Meta-Package</is>
    <it>Meta-pacchetto della lingua catalana</it>
-   <ja_JP>Catalan Language Meta-Package</ja_JP>
-   <ja>Catalan Language Meta-Package</ja>
+   <ja>カタロニア語のメタパッケージ</ja>
    <kk>Catalan Language Meta-Package</kk>
    <ko>Catalan Language Meta-Package</ko>
    <lt>Catalan Language Meta-Package</lt>
    <mk>Catalan Language Meta-Package</mk>
    <mr>Catalan Language Meta-Package</mr>
-   <nb>Catalan Language Meta-Package</nb>
+   <nb>Katalansk språkpakke</nb>
    <nl>Catalaanse Taal Meta-Pakket</nl>
    <pl>Kataloński metapakiet językowy</pl>
-   <pt_BR>Catalão Meta-Pacote de Idioma</pt_BR>
+   <pt_BR>Catalão Pacote de Idioma</pt_BR>
    <pt>Catalão Meta-Pacote de Idioma</pt>
    <ro>Catalan Language Meta-Package</ro>
-   <ru>Catalan Language Meta-Package</ru>
+   <ru>Мета-пакет каталонского языка</ru>
    <sk>Catalan Language Meta-Package</sk>
-   <sl>Catalan Language Meta-Package</sl>
-   <sq>Catalan Language Meta-Package</sq>
+   <sl>Katalonski jezikovni metapaket</sl>
+   <sq>Meta-Paketë gjuhësore në katalanisht</sq>
    <sr>Catalan Language Meta-Package</sr>
    <sv>Katalansk Språk-Meta-Paket</sv>
-   <tr>Catalan Language Meta-Package</tr>
+   <tr>Katalanca Dili Üst-Paketi</tr>
    <uk>Catalan Language Meta-Package</uk>
    <vi>Catalan Language Meta-Package</vi>
    <zh_CN>Catalan Language Meta-Package</zh_CN>

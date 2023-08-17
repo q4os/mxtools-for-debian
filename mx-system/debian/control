@@ -8,6 +8,7 @@ Standards-Version: 3.9.8
 Package: mx-system
 Architecture: all
 Depends: localize-repo-mx
+Conflicts:  mx-buildiso-dkms
 Recommends: gtk2-engines
 Description: metapackage for packages needed for system functions
  This metapackage depends on packages needed for certain systems to work with

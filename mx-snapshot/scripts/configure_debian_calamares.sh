@@ -58,8 +58,9 @@ username: $FRSTUSER
 EOF
   sed -i '/ - unpackfs/a\  - removeuser' /etc/calamares/settings.conf #add line after unpackfs
 else
-  #don't add a user+keyboard+locale
+  #don't proceed a user+keyboard+locale+displaymanager
   sed -i '/ - users/d' /etc/calamares/settings.conf
   sed -i '/ - keyboard/d' /etc/calamares/settings.conf
   # sed -i '/ - locale/d' /etc/calamares/settings.conf
+  sed -i '/ - displaymanager/d' /etc/calamares/settings.conf
 fi

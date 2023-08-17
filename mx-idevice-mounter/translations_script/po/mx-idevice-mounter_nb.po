@@ -5,7 +5,7 @@
 # 
 # Translators:
 # anticapitalista <anticapitalista@riseup.net>, 2017
-# xmaus <49bolgen@gmail.com>, 2018
+# heskjestad <cato@heskjestad.xyz>, 2020
 # 
 #, fuzzy
 msgid ""
@@ -14,7 +14,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-12-02 11:04-0500\n"
 "PO-Revision-Date: 2017-12-02 16:14+0000\n"
-"Last-Translator: xmaus <49bolgen@gmail.com>, 2018\n"
+"Last-Translator: heskjestad <cato@heskjestad.xyz>, 2020\n"
 "Language-Team: Norwegian Bokmål (https://www.transifex.com/anticapitalista/teams/10162/nb/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -24,32 +24,32 @@ msgstr ""
 
 #: idevice-mounter:97
 msgid "MX iDevice Mounter"
-msgstr ""
+msgstr "MX iDevice-montering"
 
 #: idevice-mounter:98
 msgid "Version:"
-msgstr ""
+msgstr "Versjon:"
 
 #: idevice-mounter:99
 msgid ""
 "GUI program for mounting & unmounting <br> iPhones and Ipads in MX Linux"
-msgstr ""
+msgstr "Program som kan montere og avmontere <br> iPhone og iPad i MX Linux"
 
 #: idevice-mounter:100
 msgid "Copyright (c) MX Linux"
-msgstr "Copyright (c) MX Linux"
+msgstr "Opphavsrett (c) MX Linux"
 
 #: idevice-mounter:128
 msgid "Mount"
-msgstr ""
+msgstr "Monter"
 
 #: idevice-mounter:133
 msgid "Rescan"
-msgstr ""
+msgstr "Søk på nytt"
 
 #: idevice-mounter:138
 msgid "Unmount"
-msgstr ""
+msgstr "Avmonter"
 
 #: idevice-mounter:143
 msgid "Close"
@@ -57,7 +57,7 @@ msgstr "Lukk"
 
 #: idevice-mounter:148
 msgid "About"
-msgstr ""
+msgstr "Om"
 
 #: idevice-mounter:153
 msgid "Help"
@@ -65,22 +65,28 @@ msgstr "Hjelp"
 
 #: idevice-mounter:160
 msgid "If your device is not found, make sure it is unlocked."
-msgstr ""
+msgstr "Sørg for at enheten er ulåst hvis den ikke kan finnes."
 
 #: idevice-mounter:161
 msgid ""
 "If you get a  \"Trust This Computer?\"  popup on your device when you plug "
 "it in, answer \"Trust\", then Rescan."
 msgstr ""
+"Hvis enheten spør deg om datamaskinen kan stoles på, velg «Trust» og "
+"deretter «Søk på nytt»."
 
 #: idevice-mounter:167
 msgid ""
 "If the information below describes your Apple device press the \"Mount\" "
 "button to access its files."
 msgstr ""
+"Velg knappen «Monter» hvis informasjonen under beskriver Apple-enheten din. "
+"Dermed får du tilgang til dens filer."
 
 #: idevice-mounter:186
 msgid ""
 "Use the Unmount button before you remove your device.  If you have already "
 "unplugged it, plug your device back in, Rescan, and Unmount."
 msgstr ""
+"Velg knappen «Avmonter» før du fjerner enheten. Hvis du allerede har koblet "
+"den fra, bør du koble den til igjen, søke på nytt og deretter avmontere den."

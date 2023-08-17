@@ -18,39 +18,38 @@ Greek_Firefox
    <cs>Greek localisation of Firefox</cs>
    <da>Græsk oversættelse af Firefox</da>
    <de>Griechische Lokalisierung von Firefox</de>
-   <el>Ελληνικός εντοπισμός του Firefox</el>
+   <el>Ελληνικά για το Firefox</el>
    <en>Greek localisation of Firefox</en>
-   <es>Localización Griega de Firefox</es>
+   <es>Localización Griego de Firefox</es>
    <et>Greek localisation of Firefox</et>
    <eu>Greek localisation of Firefox</eu>
    <fa>Greek localisation of Firefox</fa>
    <fil_PH>Greek localisation of Firefox</fil_PH>
-   <fi>Greek localisation of Firefox</fi>
+   <fi>Kreikkalainen Firefox-kotoistus</fi>
    <fr>Localisation grecque pour Firefox</fr>
    <he_IL>Greek localisation of Firefox</he_IL>
-   <hi>Greek localisation of Firefox</hi>
+   <hi>फायरफॉक्स का यूनानी संस्करण</hi>
    <hr>Greek localisation of Firefox</hr>
    <hu>Greek localisation of Firefox</hu>
    <id>Greek localisation of Firefox</id>
    <is>Greek localisation of Firefox</is>
-   <it>Localizzazione greca di Firefox</it>
-   <ja_JP>Greek localisation of Firefox</ja_JP>
-   <ja>Greek localisation of Firefox</ja>
+   <it>Localizzazione greca di Firefox </it>
+   <ja>Firefox のギリシャ語パック</ja>
    <kk>Greek localisation of Firefox</kk>
    <ko>Greek localisation of Firefox</ko>
    <lt>Greek localisation of Firefox</lt>
    <mk>Greek localisation of Firefox</mk>
    <mr>Greek localisation of Firefox</mr>
-   <nb>Greek localisation of Firefox</nb>
+   <nb>Gresk lokaltilpassing av Firefox</nb>
    <nl>Griekse lokalisatie van Firefox</nl>
    <pl>Grecka lokalizacja przeglądarki Firefox</pl>
-   <pt_BR>Grego Localização para Firefox</pt_BR>
+   <pt_BR>Grego Localização para o Firefox</pt_BR>
    <pt>Grego Localização para Firefox</pt>
    <ro>Greek localisation of Firefox</ro>
    <ru>Греческая локализация Firefox</ru>
    <sk>Greek localisation of Firefox</sk>
    <sl>Grška lokalizacija za Firefox</sl>
-   <sq>Greek localisation of Firefox</sq>
+   <sq>Përkthimi i Firefox-it në greqisht</sq>
    <sr>Greek localisation of Firefox</sr>
    <sv>Grekisk lokalisering för Firefox</sv>
    <tr>Firefox'un Yunanca yerelleştirmesi</tr>

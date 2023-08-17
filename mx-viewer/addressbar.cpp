@@ -25,7 +25,6 @@
 AddressBar::AddressBar(QWidget *parent)
     : QLineEdit(parent)
 {
-
 }
 
 void AddressBar::focusInEvent(QFocusEvent *event)

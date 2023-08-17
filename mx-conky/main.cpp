@@ -71,13 +71,13 @@ QString openFile(const QDir &dir)
 void messageUpdate()
 {
     Cmd cmd;
-    VersionNumber current_version
-        = cmd.getCmdOut(QStringLiteral("dpkg -l mx-conky-data | awk 'NR==6 {print $3}'"), true);
+    VersionNumber current_version {
+        cmd.getCmdOut(QStringLiteral("dpkg -l mx-conky-data | awk 'NR==6 {print $3}'"), true)};
 
     QSettings settings;
 
     QString ver = settings.value(QStringLiteral("data-version")).toByteArray();
-    VersionNumber recorded_version = ver;
+    VersionNumber recorded_version {ver};
 
     QString title = QObject::tr("Conky Data Update");
     QString message = QObject::tr("The MX Conky data set has been updated. <p><p>\

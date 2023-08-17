@@ -25,35 +25,34 @@ Spanish
    <eu>Spanish Language Meta-Package</eu>
    <fa>Spanish Language Meta-Package</fa>
    <fil_PH>Spanish Language Meta-Package</fil_PH>
-   <fi>Spanish Language Meta-Package</fi>
+   <fi>Espanjankielinen metatieto-paketti</fi>
    <fr>Méta-paquet pour langue espagnole</fr>
    <he_IL>Spanish Language Meta-Package</he_IL>
-   <hi>Spanish Language Meta-Package</hi>
+   <hi>स्पेनिश भाषा मेटा-पैकेज</hi>
    <hr>Spanish Language Meta-Package</hr>
    <hu>Spanish Language Meta-Package</hu>
    <id>Spanish Language Meta-Package</id>
    <is>Spanish Language Meta-Package</is>
    <it>Meta-pacchetto della lingua spagnola</it>
-   <ja_JP>Spanish Language Meta-Package</ja_JP>
-   <ja>Spanish Language Meta-Package</ja>
+   <ja>スペイン語のメタパッケージ</ja>
    <kk>Spanish Language Meta-Package</kk>
    <ko>Spanish Language Meta-Package</ko>
    <lt>Spanish Language Meta-Package</lt>
    <mk>Spanish Language Meta-Package</mk>
    <mr>Spanish Language Meta-Package</mr>
-   <nb>Spanish Language Meta-Package</nb>
+   <nb>Spansk språkpakke</nb>
    <nl>Spaanse Taal Meta-Pakket</nl>
    <pl>Hiszpański metapakiet językowy</pl>
-   <pt_BR>Castelhano Meta-Pacote de Idioma</pt_BR>
+   <pt_BR>Espanhol Meta-Pacote de Idioma</pt_BR>
    <pt>Castelhano Meta-Pacote de Idioma</pt>
    <ro>Spanish Language Meta-Package</ro>
-   <ru>Spanish Language Meta-Package</ru>
+   <ru>Мета-пакет испанского языка</ru>
    <sk>Spanish Language Meta-Package</sk>
-   <sl>Spanish Language Meta-Package</sl>
-   <sq>Spanish Language Meta-Package</sq>
+   <sl>Španski jezikovni meta-paket</sl>
+   <sq>Meta-Paketë gjuhësore në spanjisht</sq>
    <sr>Spanish Language Meta-Package</sr>
    <sv>Spanskt Språk-Meta-Paket</sv>
-   <tr>Spanish Language Meta-Package</tr>
+   <tr>İspanyolca Dili Üst-Paketi</tr>
    <uk>Spanish Language Meta-Package</uk>
    <vi>Spanish Language Meta-Package</vi>
    <zh_CN>Spanish Language Meta-Package</zh_CN>

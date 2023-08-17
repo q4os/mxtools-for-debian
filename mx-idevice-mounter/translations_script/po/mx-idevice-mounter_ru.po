@@ -6,6 +6,8 @@
 # Translators:
 # Geoff Gigg <geoffgigg@hotmail.com>, 2017
 # Вячеслав Волошин <vol_vel@mail.ru>, 2017
+# Vladimir O <vldoduv@yandex.ru>, 2020
+# Andrei Stepanov, 2022
 # 
 #, fuzzy
 msgid ""
@@ -14,7 +16,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-12-02 11:04-0500\n"
 "PO-Revision-Date: 2017-12-02 16:14+0000\n"
-"Last-Translator: Вячеслав Волошин <vol_vel@mail.ru>, 2017\n"
+"Last-Translator: Andrei Stepanov, 2022\n"
 "Language-Team: Russian (https://www.transifex.com/anticapitalista/teams/10162/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -24,16 +26,18 @@ msgstr ""
 
 #: idevice-mounter:97
 msgid "MX iDevice Mounter"
-msgstr ""
+msgstr "MX монтировщик iDevice"
 
 #: idevice-mounter:98
 msgid "Version:"
-msgstr ""
+msgstr "Версия:"
 
 #: idevice-mounter:99
 msgid ""
 "GUI program for mounting & unmounting <br> iPhones and Ipads in MX Linux"
 msgstr ""
+"Программа с графическим интерфейсом для монтирования и размонтирования "
+"устройств <br> iPhone и Ipad в MX Linux"
 
 #: idevice-mounter:100
 msgid "Copyright (c) MX Linux"
@@ -45,11 +49,11 @@ msgstr "Монтирование"
 
 #: idevice-mounter:133
 msgid "Rescan"
-msgstr ""
+msgstr "Пересканировать"
 
 #: idevice-mounter:138
 msgid "Unmount"
-msgstr ""
+msgstr "Размонтировать"
 
 #: idevice-mounter:143
 msgid "Close"
@@ -66,21 +70,30 @@ msgstr "Справка"
 #: idevice-mounter:160
 msgid "If your device is not found, make sure it is unlocked."
 msgstr ""
+"Если ваше устройство не найдено, удостоверьтесь, что оно разблокировано."
 
 #: idevice-mounter:161
 msgid ""
 "If you get a  \"Trust This Computer?\"  popup on your device when you plug "
 "it in, answer \"Trust\", then Rescan."
 msgstr ""
+"Если вы получите всплывающее сообщение «Доверяете этому компьютеру?» на "
+"вашем устройстве при подключении, выберите «Доверять», затем повторите "
+"сканирование."
 
 #: idevice-mounter:167
 msgid ""
 "If the information below describes your Apple device press the \"Mount\" "
 "button to access its files."
 msgstr ""
+"Если приведённая ниже информация описывает ваше устройство Apple, нажмите "
+"кнопку «Подключить», чтобы получить доступ к его файлам."
 
 #: idevice-mounter:186
 msgid ""
 "Use the Unmount button before you remove your device.  If you have already "
 "unplugged it, plug your device back in, Rescan, and Unmount."
 msgstr ""
+"Используйте кнопку размонтирования, прежде чем извлекать устройство. Если вы"
+" уже отключили его, снова подключите устройство, выполните повторное "
+"сканирование и отмонтируйте его."

@@ -25,35 +25,34 @@ Tor and Privoxy
    <eu>Tor and Privoxy</eu>
    <fa>Tor and Privoxy</fa>
    <fil_PH>Tor and Privoxy</fil_PH>
-   <fi>Tor and Privoxy</fi>
+   <fi>Tor ja Privoxy</fi>
    <fr>Tor et Privoxy</fr>
    <he_IL>Tor and Privoxy</he_IL>
-   <hi>Tor and Privoxy</hi>
+   <hi>Tor व Privoxy</hi>
    <hr>Tor and Privoxy</hr>
    <hu>Tor and Privoxy</hu>
    <id>Tor and Privoxy</id>
    <is>Tor and Privoxy</is>
    <it>Tor e Privoxy</it>
-   <ja_JP>Tor and Privoxy</ja_JP>
-   <ja>Tor and Privoxy</ja>
+   <ja>Tor と Privoxy</ja>
    <kk>Tor and Privoxy</kk>
    <ko>Tor and Privoxy</ko>
    <lt>Tor ir Privoxy</lt>
    <mk>Tor and Privoxy</mk>
    <mr>Tor and Privoxy</mr>
-   <nb>Tor and Privoxy</nb>
+   <nb>Tor og Privoxy</nb>
    <nl>Tor en Privoxy</nl>
    <pl>przeglądarka Tor i serwer proxy Privoxy</pl>
-   <pt_BR>Tor and Privoxy</pt_BR>
+   <pt_BR>Tor e Privoxy - Anonimato, privacidade e segurança ao navegar na internet</pt_BR>
    <pt>Tor and Privoxy</pt>
    <ro>Tor and Privoxy</ro>
    <ru>Tor и Privoxy - обеспечение анонимности и фильтрации веб</ru>
    <sk>Tor and Privoxy</sk>
    <sl>Tor in Privoxy</sl>
-   <sq>Tor and Privoxy</sq>
+   <sq>Tor dhe Privoxy</sq>
    <sr>Tor and Privoxy</sr>
    <sv>Tor och Privoxy</sv>
-   <tr>Tor and Privoxy</tr>
+   <tr>Tor ve Privoxy</tr>
    <uk>Tor and Privoxy</uk>
    <vi>Tor and Privoxy</vi>
    <zh_CN>Tor and Privoxy</zh_CN>

@@ -25,35 +25,34 @@ Polish
    <eu>Polish Language Meta-Package</eu>
    <fa>Polish Language Meta-Package</fa>
    <fil_PH>Polish Language Meta-Package</fil_PH>
-   <fi>Polish Language Meta-Package</fi>
+   <fi>Puolankielinen metatieto-paketti</fi>
    <fr>Méta-paquet pour langue polonaise</fr>
    <he_IL>Polish Language Meta-Package</he_IL>
-   <hi>Polish Language Meta-Package</hi>
+   <hi>पोलिश भाषा मेटा-पैकेज</hi>
    <hr>Polish Language Meta-Package</hr>
    <hu>Polish Language Meta-Package</hu>
    <id>Polish Language Meta-Package</id>
    <is>Polish Language Meta-Package</is>
    <it>Meta-pacchetto della lingua polacca</it>
-   <ja_JP>Polish Language Meta-Package</ja_JP>
-   <ja>Polish Language Meta-Package</ja>
+   <ja>ポーランド語メタパッケージ</ja>
    <kk>Polish Language Meta-Package</kk>
    <ko>Polish Language Meta-Package</ko>
    <lt>Polish Language Meta-Package</lt>
    <mk>Polish Language Meta-Package</mk>
    <mr>Polish Language Meta-Package</mr>
-   <nb>Polish Language Meta-Package</nb>
+   <nb>Polsk språkpakke</nb>
    <nl>Poolse Taal Meta-Pakket</nl>
    <pl>Polski metapakiet językowy</pl>
    <pt_BR>Polonês Meta-Pacote de Idioma</pt_BR>
    <pt>Polaco Meta-Pacote de Idioma</pt>
    <ro>Polish Language Meta-Package</ro>
-   <ru>Polish Language Meta-Package</ru>
+   <ru>Мета-пакет польского языка</ru>
    <sk>Polish Language Meta-Package</sk>
-   <sl>Polish Language Meta-Package</sl>
-   <sq>Polish Language Meta-Package</sq>
+   <sl>Poljski jezikovni meta-paket</sl>
+   <sq>Meta-Paketë gjuhësore në polonisht</sq>
    <sr>Polish Language Meta-Package</sr>
    <sv>Polskt Språk-Meta-Paket</sv>
-   <tr>Polish Language Meta-Package</tr>
+   <tr>Lehçe Dili Üst-Paketi</tr>
    <uk>Polish Language Meta-Package</uk>
    <vi>Polish Language Meta-Package</vi>
    <zh_CN>Polish Language Meta-Package</zh_CN>

@@ -75,8 +75,12 @@ class Apt:
         cmd = ['xdotool', 'getdisplaygeometry']
         res = run(cmd, capture_output=True, text=True).stdout
         width,height = res.strip().split()
-        width  = int(width)*3/4
+        if int(width) >= 1600:
+            width  = 1600
+            height =  900
+        width  = int(width)*3/5
         height = int(height)*2/3
+        
         yad_filler = {
             'window_title'  : window_title,
             'window_icon'   : window_icon,

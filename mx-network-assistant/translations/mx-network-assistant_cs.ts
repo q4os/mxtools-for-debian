@@ -132,7 +132,7 @@
     </message>
     <message>
         <location filename="../mainwindow.ui" line="613"/>
-        <location filename="../mainwindow.cpp" line="847"/>
+        <location filename="../mainwindow.cpp" line="845"/>
         <source>Block Driver</source>
         <translation>Zakázat ovladač</translation>
     </message>
@@ -338,184 +338,184 @@
         <translation>Prosím vyplňte políčko cílový host</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="454"/>
+        <location filename="../mainwindow.cpp" line="452"/>
         <source>Loaded Drivers</source>
         <translation>Načtené ovladače</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="462"/>
+        <location filename="../mainwindow.cpp" line="460"/>
         <source>Unloaded Drivers</source>
         <translation>Nenačtené ovladače</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="475"/>
+        <location filename="../mainwindow.cpp" line="473"/>
         <source>Blocked Drivers</source>
         <translation>Zakázané ovladače</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="494"/>
+        <location filename="../mainwindow.cpp" line="492"/>
         <source>Blocked Broadcom Drivers</source>
         <translation>Zakázané ovladače Mobilního připojení</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="515"/>
+        <location filename="../mainwindow.cpp" line="513"/>
         <source>Ndiswrapper is not installed</source>
         <translation>NDISwrapper není nainstalován</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="527"/>
+        <location filename="../mainwindow.cpp" line="525"/>
         <source>driver installed</source>
         <translation>Ovladač nainstalován</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="536"/>
+        <location filename="../mainwindow.cpp" line="534"/>
         <source> and in use by </source>
         <translation>a používán</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="543"/>
+        <location filename="../mainwindow.cpp" line="541"/>
         <source>. Alternate driver: </source>
         <translation>. Alternativní ovladač:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="614"/>
+        <location filename="../mainwindow.cpp" line="612"/>
         <source>Driver removed from blocklist</source>
         <translation>Ovladač byl odstraněn se seznamu zakázaných</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="614"/>
+        <location filename="../mainwindow.cpp" line="612"/>
         <source>Driver removed from blocklist.</source>
         <translation>Ovladač byl odstraněn se seznamu zakázaných</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="620"/>
+        <location filename="../mainwindow.cpp" line="618"/>
         <source>Module blocked</source>
         <translation>Modul byl zakázán</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="780"/>
+        <location filename="../mainwindow.cpp" line="778"/>
         <source>Installation successful</source>
         <translation>Instalace úspěšná</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="782"/>
+        <location filename="../mainwindow.cpp" line="780"/>
         <source>Error detected, could not compile ndiswrapper driver.</source>
         <translation>Chyba, není možné zkompilovat ovladač NDISwrapper.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="785"/>
+        <location filename="../mainwindow.cpp" line="783"/>
         <source>Error detected, could not install ndiswrapper.</source>
         <translation>Chyba, není možné nainstalovat NDISwrapper.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="797"/>
+        <location filename="../mainwindow.cpp" line="795"/>
         <source>Error encountered while removing Ndiswrapper</source>
         <translation>Počas odstraňování NDISwrapper se vyskytly chyby</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="844"/>
+        <location filename="../mainwindow.cpp" line="842"/>
         <source>Unblock Driver</source>
         <translation>Povolit ovladač</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="876"/>
+        <location filename="../mainwindow.cpp" line="874"/>
         <source>enabled</source>
         <translation>povoleno</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="879"/>
+        <location filename="../mainwindow.cpp" line="877"/>
         <source>disabled</source>
         <translation>zakázáno</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="882"/>
+        <location filename="../mainwindow.cpp" line="880"/>
         <source>WiFi hardware switch is off</source>
         <translation>Hardvérový přepínač WiFi je v poloze vypnuto.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="890"/>
+        <location filename="../mainwindow.cpp" line="888"/>
         <source>Locate the Windows driver you want to add</source>
         <translation>Určit ovladač z Windows, který si přejete přidat</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="891"/>
+        <location filename="../mainwindow.cpp" line="889"/>
         <source>Windows installation information file (*.inf)</source>
         <translation>Windows installation information file (*.inf)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="921"/>
+        <location filename="../mainwindow.cpp" line="919"/>
         <source>*.sys file not found</source>
         <translation>sobor *.sys nenalezen</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="922"/>
+        <location filename="../mainwindow.cpp" line="920"/>
         <source>The *.sys files must be in the same location as the *.inf file. %1 cannot be found</source>
         <translation>Soubory *.sys musí být umístněny v stejné složce jako soubor *.inf. %1 nelze nalézt</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="933"/>
+        <location filename="../mainwindow.cpp" line="931"/>
         <source>sys file reference not found</source>
         <translation>referene soboru *.sys nenalezena</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="934"/>
+        <location filename="../mainwindow.cpp" line="932"/>
         <source>The sys file for the given driver cannot be determined after parsing the inf file</source>
         <translation>Po zanalyzování inf souboru nemůže být určen sys soubor daného ovladače</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="948"/>
+        <location filename="../mainwindow.cpp" line="946"/>
         <source>Ndiswrapper driver removed.</source>
         <translation>Ovladač Ndiswrapper odstraněn.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="956"/>
+        <location filename="../mainwindow.cpp" line="954"/>
         <source>%1 Help</source>
         <translation>Nápověda %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="965"/>
+        <location filename="../mainwindow.cpp" line="963"/>
         <source>Could not unlock devices.
 WiFi device(s) might already be unlocked.</source>
         <translation>Nebylo možné odblokovat zařízení.
 Zařízení WiFi by už mohlo být odblokováno(y).</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="967"/>
+        <location filename="../mainwindow.cpp" line="965"/>
         <source>WiFi devices unlocked.</source>
         <translation>WiFi zařízení odblokovány.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="978"/>
+        <location filename="../mainwindow.cpp" line="976"/>
         <source>About %1</source>
         <translation>O programu %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="979"/>
+        <location filename="../mainwindow.cpp" line="977"/>
         <source>Version: </source>
         <translation>Verze:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="981"/>
+        <location filename="../mainwindow.cpp" line="979"/>
         <source>Program for troubleshooting and configuring network for MX Linux</source>
         <translation>Program pro řešení problémů a nastavení sítě pro MX Linux</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="983"/>
+        <location filename="../mainwindow.cpp" line="981"/>
         <source>Copyright (c) MEPIS LLC and MX Linux</source>
         <translation>Vlastnická práva (c) MEPIS LLC a MX Linux</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="984"/>
+        <location filename="../mainwindow.cpp" line="982"/>
         <source>%1 License</source>
         <translation>Licence %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1003"/>
+        <location filename="../mainwindow.cpp" line="1001"/>
         <source>Driver loaded successfully</source>
         <translation>Ovladač byl úspěšně načten</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1018"/>
+        <location filename="../mainwindow.cpp" line="1016"/>
         <source>Driver unloaded successfully</source>
         <translation>Ovladač byl úspěšně uvolněn</translation>
     </message>
@@ -554,12 +554,12 @@ Zařízení WiFi by už mohlo být odblokováno(y).</translation>
         <translation>Spuštěno pod účtem root-a, odhlašte se a přihlašte jako bězný uživatel.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="637"/>
+        <location filename="../mainwindow.cpp" line="635"/>
         <source>Could not load </source>
         <translation>Nelze načíst</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="661"/>
+        <location filename="../mainwindow.cpp" line="659"/>
         <source>Could not unload </source>
         <translation>Nelze uvolnit</translation>
     </message>

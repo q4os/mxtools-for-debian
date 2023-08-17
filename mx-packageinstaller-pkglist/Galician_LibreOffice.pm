@@ -14,46 +14,45 @@ Galician_Libreoffice
    <ar>Galician Language Meta-Package for LibreOffice</ar>
    <bg>Galician Language Meta-Package for LibreOffice</bg>
    <bn>Galician Language Meta-Package for LibreOffice</bn>
-   <ca>Metapaquet d'idioma Gallec per LibreOffice</ca>
+   <ca>Metapaquet per LibreOffice</ca>
    <cs>Galician Language Meta-Package for LibreOffice</cs>
    <da>Galician Language Meta-Package for LibreOffice</da>
-   <de>Galizisches Meta-Paket für LibreOffice</de>
-   <el>LibreOffice στα Galician</el>
+   <de>Meta-Paket für LibreOffice</de>
+   <el>Meta-Package για το LibreOffice</el>
    <en>Galician Language Meta-Package for LibreOffice</en>
-   <es>Meta-Paquete de idioma gallego para LibreOffice</es>
+   <es>Meta-Package para LibreOffice</es>
    <et>Galician Language Meta-Package for LibreOffice</et>
    <eu>Galician Language Meta-Package for LibreOffice</eu>
    <fa>Galician Language Meta-Package for LibreOffice</fa>
    <fil_PH>Galician Language Meta-Package for LibreOffice</fil_PH>
-   <fi>Galician Language Meta-Package for LibreOffice</fi>
-   <fr>Galician Language Meta-Package for LibreOffice</fr>
+   <fi>Metatieto-paketti LibreOffice:lle</fi>
+   <fr>Meta-Paquet pour LibreOffice</fr>
    <he_IL>Galician Language Meta-Package for LibreOffice</he_IL>
-   <hi>Galician Language Meta-Package for LibreOffice</hi>
+   <hi>लिब्रे-ऑफिस हेतु मेटा-पैकेज</hi>
    <hr>Galician Language Meta-Package for LibreOffice</hr>
    <hu>Galician Language Meta-Package for LibreOffice</hu>
    <id>Galician Language Meta-Package for LibreOffice</id>
    <is>Galician Language Meta-Package for LibreOffice</is>
-   <it>Meta-pacchetto della lingua galiziana per LibreOffice</it>
-   <ja_JP>Galician Language Meta-Package for LibreOffice</ja_JP>
-   <ja>Galician Language Meta-Package for LibreOffice</ja>
+   <it>Meta-pacchetto per LibreOffice</it>
+   <ja>LibreOffice用メタパッケージ</ja>
    <kk>Galician Language Meta-Package for LibreOffice</kk>
    <ko>Galician Language Meta-Package for LibreOffice</ko>
    <lt>Galician Language Meta-Package for LibreOffice</lt>
    <mk>Galician Language Meta-Package for LibreOffice</mk>
    <mr>Galician Language Meta-Package for LibreOffice</mr>
-   <nb>Galician Language Meta-Package for LibreOffice</nb>
-   <nl>Galician Language Meta-Package for LibreOffice</nl>
-   <pl>Galician Language Meta-Package for LibreOffice</pl>
-   <pt_BR>Galician Language Meta-Package for LibreOffice</pt_BR>
-   <pt>Galego Meta-Pacote de Idioma para LibreOffice</pt>
+   <nb>LibreOffice metapakke</nb>
+   <nl>Meta-Pakket voor LibreOffice</nl>
+   <pl>Meta-Pakiet dla LibreOffice</pl>
+   <pt_BR>Meta-Pacote para o LibreOffice</pt_BR>
+   <pt>Meta-Pacote para LibreOffice</pt>
    <ro>Galician Language Meta-Package for LibreOffice</ro>
-   <ru>Galician Language Meta-Package for LibreOffice</ru>
+   <ru>Мета-пакет для LibreOffice</ru>
    <sk>Galician Language Meta-Package for LibreOffice</sk>
-   <sl>Galicijski jezikovni meta-paket za LibreOffice</sl>
-   <sq>Galician Language Meta-Package for LibreOffice</sq>
+   <sl>Meta-paket za LibreOffice</sl>
+   <sq>Meta-Paketë për LibreOffice-in</sq>
    <sr>Galician Language Meta-Package for LibreOffice</sr>
-   <sv>Galiciskt Språk Meta-Paket för LibreOffice</sv>
-   <tr>Galician Language Meta-Package for LibreOffice</tr>
+   <sv>Meta-Paket för LibreOffice</sv>
+   <tr>LibreOffice için Üst-Paket</tr>
    <uk>Galician Language Meta-Package for LibreOffice</uk>
    <vi>Galician Language Meta-Package for LibreOffice</vi>
    <zh_CN>Galician Language Meta-Package for LibreOffice</zh_CN>

@@ -25,32 +25,31 @@ Japanese_Fonts
    <eu>Japanese fonts packages</eu>
    <fa>Japanese fonts packages</fa>
    <fil_PH>Japanese fonts packages</fil_PH>
-   <fi>Japanese fonts packages</fi>
+   <fi>Japanilaiset kirjasinpaketit</fi>
    <fr>Paquets pour polices japonaises</fr>
    <he_IL>Japanese fonts packages</he_IL>
-   <hi>Japanese fonts packages</hi>
+   <hi>जापानी मुद्रलिपि पैकेज</hi>
    <hr>Japanese fonts packages</hr>
    <hu>Japanese fonts packages</hu>
    <id>Japanese fonts packages</id>
    <is>Japanese fonts packages</is>
    <it>Pacchetti di fonts per il Giapponese</it>
-   <ja_JP>Japanese fonts packages</ja_JP>
-   <ja>Japanese fonts packages</ja>
+   <ja>日本語フォントのパッケージ集</ja>
    <kk>Japanese fonts packages</kk>
    <ko>Japanese fonts packages</ko>
    <lt>Japonų šriftų paketai</lt>
    <mk>Japanese fonts packages</mk>
    <mr>Japanese fonts packages</mr>
-   <nb>Japanese fonts packages</nb>
+   <nb>Pakke med japanske skrifttyper</nb>
    <nl>Japanse font pakketten</nl>
    <pl>pakiety z japońskimi fontami (czcionkami)</pl>
-   <pt_BR>Japonês fonts Pacotes</pt_BR>
+   <pt_BR>Pacotes de Fontes Japonês</pt_BR>
    <pt>Japonês Pacotes de fontes</pt>
    <ro>Japanese fonts packages</ro>
-   <ru>Japanese fonts packages</ru>
+   <ru>Пакеты японских шрифтов</ru>
    <sk>Japanese fonts packages</sk>
-   <sl>Japanese fonts packages</sl>
-   <sq>Japanese fonts packages</sq>
+   <sl>Japonski paketi s pisavami</sl>
+   <sq>Paketa shkronjash për japonishten</sq>
    <sr>Japanese fonts packages</sr>
    <sv>Japanska typsnitts-paket</sv>
    <tr>Japonca yazı tipi paketleri</tr>

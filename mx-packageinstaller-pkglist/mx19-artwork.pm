@@ -34,7 +34,6 @@ MX 19 Wallpapers
    <id>backgrounds originally supplied with MX 19</id>
    <is>backgrounds originally supplied with MX 19</is>
    <it>sfondi originariamente forniti con MX 19</it>
-   <ja_JP>backgrounds originally supplied with MX 19</ja_JP>
    <ja>backgrounds originally supplied with MX 19</ja>
    <kk>backgrounds originally supplied with MX 19</kk>
    <ko>backgrounds originally supplied with MX 19</ko>

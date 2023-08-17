@@ -18,7 +18,7 @@ Inkscape
    <cs>a vector-based drawing program</cs>
    <da>et vektorbaseret tegneprogram</da>
    <de>Ein vektorbasiertes Zeichenprogramm</de>
-   <el>ένα πρόγραμμα σχεδίασης vector-based</el>
+   <el>Πρόγραμμα σχεδίασης vector-based</el>
    <en>a vector-based drawing program</en>
    <es>programa de dibujo vectorial</es>
    <et>a vector-based drawing program</et>
@@ -28,29 +28,28 @@ Inkscape
    <fi>Vektoripohjainen piirto-ohjelma</fi>
    <fr>Programme de dessin vectoriel</fr>
    <he_IL>a vector-based drawing program</he_IL>
-   <hi>a vector-based drawing program</hi>
+   <hi>वेक्टर-आधारित चित्रकला प्रोग्राम</hi>
    <hr>a vector-based drawing program</hr>
    <hu>a vector-based drawing program</hu>
    <id>a vector-based drawing program</id>
    <is>a vector-based drawing program</is>
    <it>programma di disegno vettoriale</it>
-   <ja_JP>a vector-based drawing program</ja_JP>
-   <ja>a vector-based drawing program</ja>
+   <ja>ベクトル描画プログラム</ja>
    <kk>a vector-based drawing program</kk>
    <ko>a vector-based drawing program</ko>
    <lt>a vector-based drawing program</lt>
    <mk>a vector-based drawing program</mk>
    <mr>a vector-based drawing program</mr>
-   <nb>a vector-based drawing program</nb>
+   <nb>vektorbasert tegneprogram</nb>
    <nl>een vector-gebaseerd tekenprogramma</nl>
    <pl>program do tworzenia grafiki wektorowej</pl>
-   <pt_BR>Programa de desenho de base vectorial</pt_BR>
+   <pt_BR>Programa de desenho de base vetorial</pt_BR>
    <pt>Programa de desenho de base vectorial</pt>
    <ro>a vector-based drawing program</ro>
    <ru>Векторный графический редактор с богатым функционалом</ru>
    <sk>a vector-based drawing program</sk>
    <sl>Program za vektorsko risanje</sl>
-   <sq>a vector-based drawing program</sq>
+   <sq>një program për vizatime me bazë vektoriale</sq>
    <sr>a vector-based drawing program</sr>
    <sv>ett vektorbaserat ritprogram</sv>
    <tr>bir vektörel çizim programı</tr>
@@ -77,7 +76,6 @@ imagemagick
 libwmf-bin
 perlmagick
 pstoedit
-transfig
 </install_package_names>
 
 

@@ -34,7 +34,6 @@ SoftMaker FreeOffice 2021
    <id>SoftMaker FreeOffice 2021 is a fast, compatible and reliable office suite</id>
    <is>SoftMaker FreeOffice 2021 is a fast, compatible and reliable office suite</is>
    <it>SoftMaker FreeOffice 2021 è una suite per ufficio veloce, affidabile e compatibile</it>
-   <ja_JP>SoftMaker FreeOffice 2021 is a fast, compatible and reliable office suite</ja_JP>
    <ja>SoftMaker FreeOffice 2021 is a fast, compatible and reliable office suite</ja>
    <kk>SoftMaker FreeOffice 2021 is a fast, compatible and reliable office suite</kk>
    <ko>SoftMaker FreeOffice 2021 is a fast, compatible and reliable office suite</ko>

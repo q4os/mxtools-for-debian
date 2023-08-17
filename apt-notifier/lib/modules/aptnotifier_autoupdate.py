@@ -38,7 +38,10 @@ class UnattendedUpgrade:
         cmd = ['xdotool', 'getdisplaygeometry']
         res = run(cmd, capture_output=True, text=True).stdout
         w,h = res.strip().split()
-        self.__tokens['width']  = str(int(w) * 3 // 4 )
+        if int(w) >= 1600:
+            w = 1600
+            h =  900
+        self.__tokens['width']  = str(int(w) * 3 // 5 )
         self.__tokens['height'] = str(int(h) * 2 // 3 )
         self.__tokens['window_icon'] = conf.config['window_icon']
 

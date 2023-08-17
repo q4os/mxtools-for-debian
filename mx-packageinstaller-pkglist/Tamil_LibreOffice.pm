@@ -25,35 +25,34 @@ Tamil_Libreoffice
    <eu>Tamil Language Meta-Package for LibreOffice</eu>
    <fa>Tamil Language Meta-Package for LibreOffice</fa>
    <fil_PH>Tamil Language Meta-Package for LibreOffice</fil_PH>
-   <fi>Tamil Language Meta-Package for LibreOffice</fi>
-   <fr>Tamil Language Meta-Package for LibreOffice</fr>
+   <fi>Tamilinkielinen kielipaketti LibreOffice:lle</fi>
+   <fr>Méta-Paquet en langue tamoule pour LibreOffice</fr>
    <he_IL>Tamil Language Meta-Package for LibreOffice</he_IL>
-   <hi>Tamil Language Meta-Package for LibreOffice</hi>
+   <hi>लिब्रे-ऑफिस हेतु तमिल भाषा मेटा-पैकेज</hi>
    <hr>Tamil Language Meta-Package for LibreOffice</hr>
    <hu>Tamil Language Meta-Package for LibreOffice</hu>
    <id>Tamil Language Meta-Package for LibreOffice</id>
    <is>Tamil Language Meta-Package for LibreOffice</is>
-   <it>Tamil Language Meta-Package for LibreOffice</it>
-   <ja_JP>Tamil Language Meta-Package for LibreOffice</ja_JP>
-   <ja>Tamil Language Meta-Package for LibreOffice</ja>
+   <it>Meta-pacchetto della lingua tamil per LibreOffice</it>
+   <ja>LibreOffice 用のタミル語メタパッケージ</ja>
    <kk>Tamil Language Meta-Package for LibreOffice</kk>
    <ko>Tamil Language Meta-Package for LibreOffice</ko>
    <lt>Tamil Language Meta-Package for LibreOffice</lt>
    <mk>Tamil Language Meta-Package for LibreOffice</mk>
    <mr>Tamil Language Meta-Package for LibreOffice</mr>
-   <nb>Tamil Language Meta-Package for LibreOffice</nb>
-   <nl>Tamil Language Meta-Package for LibreOffice</nl>
-   <pl>Tamil Language Meta-Package for LibreOffice</pl>
-   <pt_BR>Tamil Language Meta-Package for LibreOffice</pt_BR>
+   <nb>Tamil språkpakke for LibreOffice</nb>
+   <nl>Tamilse Taal Meta-Pakket voor LibreOffice</nl>
+   <pl>Tamilski meta-pakiet językowy dla LibreOffice</pl>
+   <pt_BR>Tamil Pacote de Idioma para o LibreOffice</pt_BR>
    <pt>Tamil Meta-Pacote de Idioma para LibreOffice</pt>
    <ro>Tamil Language Meta-Package for LibreOffice</ro>
-   <ru>Tamil Language Meta-Package for LibreOffice</ru>
+   <ru>Мета-пакет тамильского языка для LibreOffice</ru>
    <sk>Tamil Language Meta-Package for LibreOffice</sk>
    <sl>Tamilski jezikovni meta-paket za LibreOffice</sl>
-   <sq>Tamil Language Meta-Package for LibreOffice</sq>
+   <sq>Meta-Paketë gjuhësore në tamile për LibreOffice-in</sq>
    <sr>Tamil Language Meta-Package for LibreOffice</sr>
    <sv>Tamil Språk Meta-Paket för LibreOffice</sv>
-   <tr>Tamil Language Meta-Package for LibreOffice</tr>
+   <tr>LibreOffice için Tamil Dili Üst-Paketi</tr>
    <uk>Tamil Language Meta-Package for LibreOffice</uk>
    <vi>Tamil Language Meta-Package for LibreOffice</vi>
    <zh_CN>Tamil Language Meta-Package for LibreOffice</zh_CN>

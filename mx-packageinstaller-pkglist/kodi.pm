@@ -25,35 +25,34 @@ Kodi
    <eu>Kodi Media Center (formerly XBMC)</eu>
    <fa>Kodi Media Center (formerly XBMC)</fa>
    <fil_PH>Kodi Media Center (formerly XBMC)</fil_PH>
-   <fi>Kodi Media Center (formerly XBMC)</fi>
+   <fi>Kodi-mediakeskus (tunnettiin aikasemmin nimellä XBMC)</fi>
    <fr>Kodi Media Center (anciennement XBMC)</fr>
    <he_IL>Kodi Media Center (formerly XBMC)</he_IL>
-   <hi>Kodi Media Center (formerly XBMC)</hi>
+   <hi>Kodi मीडिया केंद्र (पूर्व नाम XBMC)</hi>
    <hr>Kodi Media Center (formerly XBMC)</hr>
    <hu>Kodi Media Center (formerly XBMC)</hu>
    <id>Kodi Media Center (formerly XBMC)</id>
    <is>Kodi Media Center (formerly XBMC)</is>
    <it>Kodi Media Center (in precedenza XBMC)</it>
-   <ja_JP>Kodi Media Center (formerly XBMC)</ja_JP>
-   <ja>Kodi Media Center (formerly XBMC)</ja>
+   <ja>Kodi メディアセンタ（旧 XBMC）</ja>
    <kk>Kodi Media Center (formerly XBMC)</kk>
    <ko>Kodi Media Center (formerly XBMC)</ko>
    <lt>Kodi medijos centras (buvęs XBMC)</lt>
    <mk>Kodi Media Center (formerly XBMC)</mk>
    <mr>Kodi Media Center (formerly XBMC)</mr>
-   <nb>Kodi Media Center (formerly XBMC)</nb>
+   <nb>Kodi Media Center (het tidligere XBMC)</nb>
    <nl>Kodi Media Centrum (voorheen XBMC)</nl>
    <pl>Kodi Media Center (poprzednio XBMC)</pl>
-   <pt_BR>Centro Multimídia Kodi (anteriormente XBMC)</pt_BR>
+   <pt_BR>Kodi - Centro de Multimídia (anteriormente chamado de XBMC)</pt_BR>
    <pt>Centro Multimédia Kodi (anteriormente chamava-se XBMC)</pt>
    <ro>Kodi Media Center (formerly XBMC)</ro>
    <ru>Медиацентр Kodi (бывший XBMC)</ru>
    <sk>Kodi Media Center (formerly XBMC)</sk>
    <sl>Kodi medijsko središče (bivši XBMC)</sl>
-   <sq>Kodi Media Center (formerly XBMC)</sq>
+   <sq>Qendra e Medias Kodi (ish-XBMC)</sq>
    <sr>Kodi Media Center (formerly XBMC)</sr>
    <sv>Kodi Media Center (tidigare XBMC)</sv>
-   <tr>Kodi Media Center (formerly XBMC)</tr>
+   <tr>Kodi Ortam Merkezi (eskiden XBMC)</tr>
    <uk>Kodi Media Center (колишній XBMC)</uk>
    <vi>Kodi Media Center (formerly XBMC)</vi>
    <zh_CN>Kodi Media Center (formerly XBMC)</zh_CN>

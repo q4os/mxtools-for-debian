@@ -10,7 +10,7 @@ from PyQt5 import QtWidgets, QtGui, QtCore
 from PyQt5.QtWidgets import QApplication, QPushButton, QMessageBox
 from PyQt5.QtGui import QIcon
 
-BUILD_VERSION='23.03.01'
+BUILD_VERSION='23.06.01'
 
 class AptnotifierAbout():
 
@@ -163,6 +163,9 @@ class AptnotifierAbout():
                 cmd = ['xdotool', 'getdisplaygeometry']
                 res = run(cmd, capture_output=True, text=True).stdout
                 W, H = res.strip().split()
+                if int(W) >= 1600:
+                    W = "1600"
+                    H = "900"
                 width  = int(W)*3/5
                 height = int(H)*2/3
                 yad_filler = {

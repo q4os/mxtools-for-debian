@@ -132,7 +132,7 @@
     </message>
     <message>
         <location filename="../mainwindow.ui" line="613"/>
-        <location filename="../mainwindow.cpp" line="847"/>
+        <location filename="../mainwindow.cpp" line="845"/>
         <source>Block Driver</source>
         <translation>Заблокировать драйвер</translation>
     </message>
@@ -213,7 +213,7 @@
         <location filename="../mainwindow.ui" line="896"/>
         <location filename="../mainwindow.ui" line="1016"/>
         <source>Cancel</source>
-        <translation>Отменить</translation>
+        <translation>Отмена</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="924"/>
@@ -338,184 +338,184 @@
         <translation>Пожалуйста, заполните поле компьютера назначения</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="454"/>
+        <location filename="../mainwindow.cpp" line="452"/>
         <source>Loaded Drivers</source>
         <translation>Загруженные драйвера</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="462"/>
+        <location filename="../mainwindow.cpp" line="460"/>
         <source>Unloaded Drivers</source>
         <translation>Выгруженные драйвера</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="475"/>
+        <location filename="../mainwindow.cpp" line="473"/>
         <source>Blocked Drivers</source>
         <translation>Заблокированные драйвера</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="494"/>
+        <location filename="../mainwindow.cpp" line="492"/>
         <source>Blocked Broadcom Drivers</source>
         <translation>Заблокированные драйвера Broadcom</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="515"/>
+        <location filename="../mainwindow.cpp" line="513"/>
         <source>Ndiswrapper is not installed</source>
         <translation>Ndiswrapper не установлена</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="527"/>
+        <location filename="../mainwindow.cpp" line="525"/>
         <source>driver installed</source>
         <translation>драйвер установлен</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="536"/>
+        <location filename="../mainwindow.cpp" line="534"/>
         <source> and in use by </source>
         <translation>и используется</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="543"/>
+        <location filename="../mainwindow.cpp" line="541"/>
         <source>. Alternate driver: </source>
         <translation>. Альтернативный драйвер:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="614"/>
+        <location filename="../mainwindow.cpp" line="612"/>
         <source>Driver removed from blocklist</source>
         <translation>Драйвер извлечен из блокировки</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="614"/>
+        <location filename="../mainwindow.cpp" line="612"/>
         <source>Driver removed from blocklist.</source>
         <translation>Драйвер извлечен из блокировки.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="620"/>
+        <location filename="../mainwindow.cpp" line="618"/>
         <source>Module blocked</source>
         <translation>Модуль заблокирован</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="780"/>
+        <location filename="../mainwindow.cpp" line="778"/>
         <source>Installation successful</source>
         <translation>Установка завершилась успешно</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="782"/>
+        <location filename="../mainwindow.cpp" line="780"/>
         <source>Error detected, could not compile ndiswrapper driver.</source>
         <translation>Обнаружена ошибка, невозможно скомпилировать драйвер NdisWrapper.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="785"/>
+        <location filename="../mainwindow.cpp" line="783"/>
         <source>Error detected, could not install ndiswrapper.</source>
         <translation>Обнаружена ошибка, невозможно установить драйвер NdisWrapper.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="797"/>
+        <location filename="../mainwindow.cpp" line="795"/>
         <source>Error encountered while removing Ndiswrapper</source>
         <translation>Ошибка при удалении Ndiswrapper</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="844"/>
+        <location filename="../mainwindow.cpp" line="842"/>
         <source>Unblock Driver</source>
         <translation>Разблокировать драйвер</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="876"/>
+        <location filename="../mainwindow.cpp" line="874"/>
         <source>enabled</source>
         <translation>активирован</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="879"/>
+        <location filename="../mainwindow.cpp" line="877"/>
         <source>disabled</source>
         <translation>отключен</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="882"/>
+        <location filename="../mainwindow.cpp" line="880"/>
         <source>WiFi hardware switch is off</source>
         <translation>WiFi отключен аппаратным переключателем</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="890"/>
+        <location filename="../mainwindow.cpp" line="888"/>
         <source>Locate the Windows driver you want to add</source>
         <translation>Найдите Windows драйвер, который Вы хотите добавить</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="891"/>
+        <location filename="../mainwindow.cpp" line="889"/>
         <source>Windows installation information file (*.inf)</source>
         <translation>Файл установочной информации Windows (*.inf)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="921"/>
+        <location filename="../mainwindow.cpp" line="919"/>
         <source>*.sys file not found</source>
         <translation>*.sys файл не найден</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="922"/>
+        <location filename="../mainwindow.cpp" line="920"/>
         <source>The *.sys files must be in the same location as the *.inf file. %1 cannot be found</source>
         <translation>Файл *.sys должен быть в том же местоположении, что и *.inf файл. %1 не может быть найден</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="933"/>
+        <location filename="../mainwindow.cpp" line="931"/>
         <source>sys file reference not found</source>
         <translation>Ссылка на sys файл не найдена</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="934"/>
+        <location filename="../mainwindow.cpp" line="932"/>
         <source>The sys file for the given driver cannot be determined after parsing the inf file</source>
         <translation>Файл sys для этого драйвера не может быть определен после анализа inf файла</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="948"/>
+        <location filename="../mainwindow.cpp" line="946"/>
         <source>Ndiswrapper driver removed.</source>
         <translation>Ndiswrapper драйвер удален.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="956"/>
+        <location filename="../mainwindow.cpp" line="954"/>
         <source>%1 Help</source>
         <translation>%1 Справка</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="965"/>
+        <location filename="../mainwindow.cpp" line="963"/>
         <source>Could not unlock devices.
 WiFi device(s) might already be unlocked.</source>
         <translation>Не удалось разблокировать устройства.
 Wi-Fi устройство(а) может быть уже разблокировано.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="967"/>
+        <location filename="../mainwindow.cpp" line="965"/>
         <source>WiFi devices unlocked.</source>
         <translation>WiFi устройства разблокированы.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="978"/>
+        <location filename="../mainwindow.cpp" line="976"/>
         <source>About %1</source>
         <translation>О %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="979"/>
+        <location filename="../mainwindow.cpp" line="977"/>
         <source>Version: </source>
         <translation>Версия: </translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="981"/>
+        <location filename="../mainwindow.cpp" line="979"/>
         <source>Program for troubleshooting and configuring network for MX Linux</source>
         <translation>Программа для поиска и устранения неисправностей и конфигурации сети.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="983"/>
+        <location filename="../mainwindow.cpp" line="981"/>
         <source>Copyright (c) MEPIS LLC and MX Linux</source>
         <translation>Авторское право (c) MEPIS LLC и MX Linux</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="984"/>
+        <location filename="../mainwindow.cpp" line="982"/>
         <source>%1 License</source>
         <translation>%1 Лицензия</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1003"/>
+        <location filename="../mainwindow.cpp" line="1001"/>
         <source>Driver loaded successfully</source>
         <translation>Драйвер загружен успешно</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1018"/>
+        <location filename="../mainwindow.cpp" line="1016"/>
         <source>Driver unloaded successfully</source>
         <translation>Драйвер выгружен успешно</translation>
     </message>
@@ -554,12 +554,12 @@ Wi-Fi устройство(а) может быть уже разблокиров
         <translation>Программа запущена суперпользователем. Для использования программы войдите в систему как обычный пользователь.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="637"/>
+        <location filename="../mainwindow.cpp" line="635"/>
         <source>Could not load </source>
         <translation>Невозможно загрузить</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="661"/>
+        <location filename="../mainwindow.cpp" line="659"/>
         <source>Could not unload </source>
         <translation>Невозможно выгрузить</translation>
     </message>

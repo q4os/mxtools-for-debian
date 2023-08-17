@@ -18,39 +18,38 @@ font-manager
    <cs>font management application from the GNOME desktop</cs>
    <da>font management application from the GNOME desktop</da>
    <de>Schriftenverwaltung der GNOME Oberfläche</de>
-   <el>εφαρμογή διαχείρισης γραμματοσειρών από την επιφάνεια εργασίας του GNOME</el>
+   <el>Εφαρμογή διαχείρισης γραμματοσειρών από την επιφάνεια εργασίας του GNOME</el>
    <en>font management application from the GNOME desktop</en>
    <es>Aplicación de gestión de fuentes desde el escritorio de GNOME</es>
    <et>font management application from the GNOME desktop</et>
    <eu>font management application from the GNOME desktop</eu>
    <fa>font management application from the GNOME desktop</fa>
    <fil_PH>font management application from the GNOME desktop</fil_PH>
-   <fi>font management application from the GNOME desktop</fi>
+   <fi>kirjasimien hallintaan tarkoitettu sovellus GNOME-työpöytää kehittävältä ryhmältä</fi>
    <fr>Application de gestion de polices du bureau GNOME</fr>
    <he_IL>font management application from the GNOME desktop</he_IL>
-   <hi>font management application from the GNOME desktop</hi>
+   <hi>गनोम डेस्कटॉप द्वारा मुद्रलिपि प्रबंधन अनुप्रयोग</hi>
    <hr>font management application from the GNOME desktop</hr>
    <hu>font management application from the GNOME desktop</hu>
    <id>font management application from the GNOME desktop</id>
    <is>font management application from the GNOME desktop</is>
    <it>applicazione per la gestione dei font da GNOME desktop</it>
-   <ja_JP>font management application from the GNOME desktop</ja_JP>
-   <ja>font management application from the GNOME desktop</ja>
+   <ja>GNOME デスクトップ用のフォント管理アプリ</ja>
    <kk>font management application from the GNOME desktop</kk>
    <ko>font management application from the GNOME desktop</ko>
    <lt>font management application from the GNOME desktop</lt>
    <mk>font management application from the GNOME desktop</mk>
    <mr>font management application from the GNOME desktop</mr>
-   <nb>font management application from the GNOME desktop</nb>
+   <nb>behandling av skrifttyper i skrivebordsmiljøet GNOME</nb>
    <nl>font beheer applicatie vanuit de GNOME desktop</nl>
    <pl>aplikacja do zarządzania czcionkami ze środowiska GNOME</pl>
-   <pt_BR>Aplicativo de gerenciamento de fontes, do ambiente de trabalho GNOME</pt_BR>
-   <pt>Aplicação de gestão de fontes, do ambiente de trabalho GNOME</pt>
+   <pt_BR>Aplicativo de gerenciamento de fontes do ambiente de trabalho GNOME</pt_BR>
+   <pt>Aplicação de gestão de fontes, do ambiente de trabalho GNOME </pt>
    <ro>font management application from the GNOME desktop</ro>
    <ru>Менеджер шрифтов из состава GNOME</ru>
    <sk>font management application from the GNOME desktop</sk>
    <sl>aplikacija za upravljanje slogov pisav za GNOME namizje</sl>
-   <sq>font management application from the GNOME desktop</sq>
+   <sq>aplikacion administrimi shkronjash për desktopin GNOME</sq>
    <sr>font management application from the GNOME desktop</sr>
    <sv>stilhanteringsprogram från GNOME skrivbordsmiljö</sv>
    <tr>GNOME masaüstünden yazı tipi yönetim uygulaması</tr>

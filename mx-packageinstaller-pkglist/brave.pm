@@ -18,42 +18,41 @@ Brave
    <cs>Latest Brave browser</cs>
    <da>Latest Brave browser</da>
    <de>Brave Browser (neuste Version)</de>
-   <el>Latest Brave browser</el>
+   <el>Το τελευταίο πρόγραμμα περιήγησης Brave</el>
    <en>Latest Brave browser</en>
-   <es>Latest Brave browser</es>
+   <es>Último navegador Brave</es>
    <et>Latest Brave browser</et>
    <eu>Latest Brave browser</eu>
    <fa>Latest Brave browser</fa>
    <fil_PH>Latest Brave browser</fil_PH>
-   <fi>Latest Brave browser</fi>
-   <fr>Latest Brave browser</fr>
+   <fi>Viimeisin Brave-selain</fi>
+   <fr>Dernière version du navigateur Brave</fr>
    <he_IL>Latest Brave browser</he_IL>
-   <hi>Latest Brave browser</hi>
+   <hi>नवीनतम ब्रेव ब्राउज़र</hi>
    <hr>Latest Brave browser</hr>
    <hu>Latest Brave browser</hu>
    <id>Latest Brave browser</id>
    <is>Latest Brave browser</is>
-   <it>Latest Brave browser</it>
-   <ja_JP>Latest Brave browser</ja_JP>
-   <ja>Latest Brave browser</ja>
+   <it>Ultimo browser Brave</it>
+   <ja>最新の Brave ブラウザ</ja>
    <kk>Latest Brave browser</kk>
    <ko>Latest Brave browser</ko>
    <lt>Latest Brave browser</lt>
    <mk>Latest Brave browser</mk>
    <mr>Latest Brave browser</mr>
-   <nb>Latest Brave browser</nb>
-   <nl>Latest Brave browser</nl>
-   <pl>Latest Brave browser</pl>
-   <pt_BR>Latest Brave browser</pt_BR>
-   <pt>Latest Brave browser</pt>
+   <nb>Nettleseren Brave, seneste utgivelse</nb>
+   <nl>Meest recente Brave browser</nl>
+   <pl>Najnowsza przeglądarka Brave</pl>
+   <pt_BR>Brave - Versão mais recente do navegador de internet</pt_BR>
+   <pt>Navegador web Brave, última versão</pt>
    <ro>Latest Brave browser</ro>
-   <ru>Latest Brave browser</ru>
+   <ru>Последняя версия браузера Brave</ru>
    <sk>Latest Brave browser</sk>
-   <sl>Latest Brave browser</sl>
-   <sq>Latest Brave browser</sq>
+   <sl>Zadnja različica Brave brskalnika</sl>
+   <sq>Shfletuesi më i ri Brave</sq>
    <sr>Latest Brave browser</sr>
-   <sv>Latest Brave browser</sv>
-   <tr>Latest Brave browser</tr>
+   <sv>Senaste Brave Webbläsare</sv>
+   <tr>En son Brave tarayıcı</tr>
    <uk>Latest Brave browser</uk>
    <vi>Latest Brave browser</vi>
    <zh_CN>Latest Brave browser</zh_CN>

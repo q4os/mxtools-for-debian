@@ -13,6 +13,7 @@ TARGET = mx-network-assistant
 TRANSLATIONS += translations/mx-network-assistant_af.ts \
                 translations/mx-network-assistant_am.ts \
                 translations/mx-network-assistant_ar.ts \
+                translations/mx-network-assistant_ast.ts \
                 translations/mx-network-assistant_be.ts \
                 translations/mx-network-assistant_bg.ts \
                 translations/mx-network-assistant_bn.ts \
@@ -40,7 +41,6 @@ TRANSLATIONS += translations/mx-network-assistant_af.ts \
                 translations/mx-network-assistant_fil.ts \
                 translations/mx-network-assistant_fi.ts \
                 translations/mx-network-assistant_fr_BE.ts \
-                translations/mx-network-assistant_fr_FR.ts \
                 translations/mx-network-assistant_fr.ts \
                 translations/mx-network-assistant_fy.ts \
                 translations/mx-network-assistant_ga.ts \
@@ -56,12 +56,16 @@ TRANSLATIONS += translations/mx-network-assistant_af.ts \
                 translations/mx-network-assistant_hr.ts \
                 translations/mx-network-assistant_ht.ts \
                 translations/mx-network-assistant_hu.ts \
+                translations/mx-network-assistant_hy_AM.ts \
+                translations/mx-network-assistant_hye.ts \
                 translations/mx-network-assistant_hy.ts \
                 translations/mx-network-assistant_id.ts \
+                translations/mx-network-assistant_ie.ts \
                 translations/mx-network-assistant_is.ts \
                 translations/mx-network-assistant_it.ts \
                 translations/mx-network-assistant_ja.ts \
                 translations/mx-network-assistant_jv.ts \
+                translations/mx-network-assistant_kab.ts \
                 translations/mx-network-assistant_ka.ts \
                 translations/mx-network-assistant_kk.ts \
                 translations/mx-network-assistant_km.ts \
@@ -87,7 +91,9 @@ TRANSLATIONS += translations/mx-network-assistant_af.ts \
                 translations/mx-network-assistant_ne.ts \
                 translations/mx-network-assistant_nl_BE.ts \
                 translations/mx-network-assistant_nl.ts \
+                translations/mx-network-assistant_nn.ts \
                 translations/mx-network-assistant_ny.ts \
+                translations/mx-network-assistant_oc.ts \
                 translations/mx-network-assistant_or.ts \
                 translations/mx-network-assistant_pa.ts \
                 translations/mx-network-assistant_pl.ts \

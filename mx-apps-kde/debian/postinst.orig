@@ -1,0 +1,37 @@
+#!/bin/sh -e
+
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-remove" ] ; then
+    apt-mark manual mx-bootrepair \
+ bash-config \
+ disk-manager \
+ cleanup-notifier-mx \
+ mx-boot-options \
+ mx-conky \
+ mx-datetime \
+ mx-docs \
+ mx-network-assistant \
+ mx-packageinstaller \
+ mx-remaster \
+ mx-remastercc \
+ mx-repo-manager \
+ mx-samba-config \
+ mx-select-sound \
+ mx-snapshot \
+ mx-tools \
+ mx-tweak \
+ mx-user \
+ mx-viewer \
+ mx-welcome \
+ live-kernel-updater \
+ mx-live-usb-maker \
+ live-usb-maker \
+ quick-system-info-gui \
+ conky-toggle-mx \
+ ddm-mx \
+ formatusb \
+ mx-system-kde \
+ system-keyboard-qt \
+ mx-cleanup 
+fi
+
+#DEBHELPER#

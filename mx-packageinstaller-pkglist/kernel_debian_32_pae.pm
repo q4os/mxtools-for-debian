@@ -6,58 +6,55 @@ Kernels
 </category>
 
 <name>
-Debian 32 bit w/pae (5.10)
+Debian 32 bit w/pae
 </name>
 
 <description>
-   <am>Default Debian 32bit linux kernel w/PAE</am>
-   <ar>Default Debian 32bit linux kernel w/PAE</ar>
-   <bg>Default Debian 32bit linux kernel w/PAE</bg>
-   <bn>Default Debian 32bit linux kernel w/PAE</bn>
-   <ca>Kernel Linux Debian 32bit per omissió amb PAE</ca>
-   <cs>Default Debian 32bit linux kernel w/PAE</cs>
-   <da>Default Debian 32bit linux kernel w/PAE</da>
-   <de>Default Debian 32bit Linux Kernel w/PAE</de>
-   <el>Προεπιλεγμένο Debian 32bit linux kernel PAE</el>
-   <en>Default Debian 32bit linux kernel w/PAE</en>
-   <es>Kernel Debian predeterminado 32bit linux  w/PAE</es>
-   <et>Default Debian 32bit linux kernel w/PAE</et>
-   <eu>Default Debian 32bit linux kernel w/PAE</eu>
-   <fa>Default Debian 32bit linux kernel w/PAE</fa>
-   <fil_PH>Default Debian 32bit linux kernel w/PAE</fil_PH>
-   <fi>Default Debian 32bit linux kernel w/PAE</fi>
-   <fr>Default Debian 32bit linux kernel w/PAE</fr>
-   <he_IL>Default Debian 32bit linux kernel w/PAE</he_IL>
-   <hi>Default Debian 32bit linux kernel w/PAE</hi>
-   <hr>Default Debian 32bit linux kernel w/PAE</hr>
-   <hu>Default Debian 32bit linux kernel w/PAE</hu>
-   <id>Default Debian 32bit linux kernel w/PAE</id>
-   <is>Default Debian 32bit linux kernel w/PAE</is>
-   <it>Kernel Debian di default 32bit w/PAE</it>
-   <ja_JP>Default Debian 32bit linux kernel w/PAE</ja_JP>
-   <ja>Default Debian 32bit linux kernel w/PAE</ja>
-   <kk>Default Debian 32bit linux kernel w/PAE</kk>
-   <ko>Default Debian 32bit linux kernel w/PAE</ko>
-   <lt>Default Debian 32bit linux kernel w/PAE</lt>
-   <mk>Default Debian 32bit linux kernel w/PAE</mk>
-   <mr>Default Debian 32bit linux kernel w/PAE</mr>
-   <nb>Default Debian 32bit linux kernel w/PAE</nb>
-   <nl>Default Debian 32bit linux kernel w/PAE</nl>
-   <pl>Default Debian 32bit linux kernel w/PAE</pl>
-   <pt_BR>Default Debian 32bit linux kernel w/PAE</pt_BR>
-   <pt>Núcleo (kernel) linux Debian predefinido 32bit c/PAE</pt>
-   <ro>Default Debian 32bit linux kernel w/PAE</ro>
-   <ru>Стандартное Debian ядро, 32 bit PAE</ru>
-   <sk>Default Debian 32bit linux kernel w/PAE</sk>
-   <sl>Privzeto Debian 32 bitno linux jedro s PAE</sl>
-   <sq>Default Debian 32bit linux kernel w/PAE</sq>
-   <sr>Default Debian 32bit linux kernel w/PAE</sr>
-   <sv>Standard Debian 32bit linux kärna med PAE</sv>
-   <tr>Default Debian 32bit linux kernel w/PAE</tr>
-   <uk>Default Debian 32bit linux kernel w/PAE</uk>
-   <vi>Default Debian 32bit linux kernel w/PAE</vi>
-   <zh_CN>Default Debian 32bit linux kernel w/PAE</zh_CN>
-   <zh_TW>Default Debian 32bit linux kernel w/PAE</zh_TW>
+<am>የዴቢያን ነባሪ ከርነል</am>
+<ar>ﺔﻴﺿﺍﺮﺘﻓﻻ﻿ﺍ ﻥﺎﻴﺑﺩ ﺓﺍﻮﻧ</ar>
+<bg>Ядрото по подразбиране на Debian</bg>
+<bn>ডেবিয়ান ডিফল্ট কার্নেল</bn>
+<ca>Nucli predeterminat de Debian</ca>
+<cs>Výchozí jádro Debianu</cs>
+<da>Debians standardkerne</da>
+<de>Debian-Standardkernel</de>
+<el>Προεπιλεγμένος πυρήνας του Debian</el>
+<es>Núcleo predeterminado de Debian</es>
+<et>Debiani vaiketuum</et>
+<eu>Debian kernel lehenetsia</eu>
+<en>Debian default kernel</en>
+<fa>ﻥﺎﯿﺑﺩ ﺽﺮﻓ ﺶﯿﭘ ﻪﺘﺴﻫ</fa>
+<fil_PH>Debian na default na kernel</fil_PH>
+<fi>Debianin oletusydin</fi>
+<fr>Noyau par défaut de Debian</fr>
+<he_IL>ןאיבד לש לדחמה תרירב תביל</he_IL>
+<hi>डेबियन डिफ़ॉल्ट कर्नेल</hi>
+<hr>Zadana jezgra Debiana</hr>
+<hu>Debian alapértelmezett kernel</hu>
+<id>Kernel bawaan Debian</id>
+<is>Debian sjálfgefinn kjarni</is>
+<it>Kernel predefinito Debian</it>
+<ja>Debian のデフォルトのカーネル</ja>
+<kk>Debian әдепкі ядросы</kk>
+<ko>데비안 기본 커널</ko>
+<lt>Debian'o numatytasis branduolys</lt>
+<mk>Стандардно јадро на Debian</mk>
+<mr>डेबियन डीफॉल्ट कर्नल</mr>
+<nb>Debians standard kjerne</nb>
+<nl>Standaard kernel van Debian</nl>
+<pl>Domyślne jądro Debiana</pl>
+<pt_BR>Kernel padrão do Debian</pt_BR>
+<pt>Kernel padrão do Debian</pt>
+<ro>Nucleul implicit Debian</ro>
+<ru>Ядро Debian по умолчанию</ru>
+<sk>Predvolené jadro Debianu</sk>
+<sl>Privzeto jedro Debian</sl>
+<sq>Kerneli i paracaktuar i Debian</sq>
+<sr>Дебиан подразумевано језгро</sr>
+<sv>Debians standardkärna</sv>
+<tr>Debian varsayılan çekirdeği</tr>
+<uk>Стандартне ядро Debian</uk>
+<vi>Hạt nhân mặc định của Debian</vi>
 </description>
 
 <installable>

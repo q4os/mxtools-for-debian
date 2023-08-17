@@ -150,7 +150,7 @@ void MainWindow::makeUsb(const QString &options)
         qDebug() << cmd.getCmdOut(cmdstr);
         cmdstr = "dd bs=1M if=" + source + " of=/dev/" + device;
         ui->outputBox->appendPlainText(tr("Writing %1 using 'dd' command to /dev/%2,\n\n"
-                                          "Please wait until the the process is completed")
+                                          "Please wait until the process is completed")
                                            .arg(source, device));
     }
     setConnections();

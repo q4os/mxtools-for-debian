@@ -6,7 +6,7 @@
     <message>
         <location filename="../mainwindow.ui" line="14"/>
         <location filename="../mainwindow.cpp" line="47"/>
-        <location filename="../mainwindow.cpp" line="513"/>
+        <location filename="../mainwindow.cpp" line="498"/>
         <source>MX Conky</source>
         <translation type="unfinished"></translation>
     </message>
@@ -248,48 +248,48 @@
         <translation>Alt+N</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="512"/>
+        <location filename="../mainwindow.cpp" line="497"/>
         <source>About MX Conky</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="514"/>
+        <location filename="../mainwindow.cpp" line="499"/>
         <source>Version: </source>
         <translation>Bersyon: </translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="515"/>
+        <location filename="../mainwindow.cpp" line="500"/>
         <source>GUI program for configuring Conky in MX Linux</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="518"/>
+        <location filename="../mainwindow.cpp" line="503"/>
         <source>Copyright (c) MX Linux</source>
         <translation>Karapatan (c) MX Linux</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="519"/>
+        <location filename="../mainwindow.cpp" line="504"/>
         <source>License</source>
         <translation>Lisensya</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="520"/>
-        <location filename="../mainwindow.cpp" line="533"/>
+        <location filename="../mainwindow.cpp" line="505"/>
+        <location filename="../mainwindow.cpp" line="518"/>
         <source>Changelog</source>
         <translation>Ulat na mga pagbabago</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="521"/>
+        <location filename="../mainwindow.cpp" line="506"/>
         <source>Cancel</source>
         <translation>I-cancel</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="544"/>
+        <location filename="../mainwindow.cpp" line="529"/>
         <source>&amp;Close</source>
         <translation>&amp;Lumabas</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="562"/>
+        <location filename="../mainwindow.cpp" line="547"/>
         <source>MX Conky Help</source>
         <translation type="unfinished"></translation>
     </message>
@@ -298,7 +298,7 @@
     <name>QObject</name>
     <message>
         <location filename="../main.cpp" line="65"/>
-        <location filename="../mainwindow.cpp" line="648"/>
+        <location filename="../mainwindow.cpp" line="627"/>
         <source>Select Conky Manager config file</source>
         <translation type="unfinished"></translation>
     </message>

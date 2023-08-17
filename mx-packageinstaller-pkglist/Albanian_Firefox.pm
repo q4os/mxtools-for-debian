@@ -18,39 +18,38 @@ Albanian_Firefox
    <cs>Albanian localisation of Firefox</cs>
    <da>Albansk oversættelse af Firefox</da>
    <de>Albanische Lokalisierung von Firefox</de>
-   <el>Αλβανικός εντοπισμός του Firefox</el>
+   <el>Αλβανικά για το Firefox</el>
    <en>Albanian localisation of Firefox</en>
-   <es>Localización Albania de Firefox</es>
+   <es>Localización Albanés de Firefox</es>
    <et>Albanian localisation of Firefox</et>
    <eu>Albanian localisation of Firefox</eu>
    <fa>Albanian localisation of Firefox</fa>
    <fil_PH>Albanian localisation of Firefox</fil_PH>
-   <fi>Albanian localisation of Firefox</fi>
+   <fi>Albanialainen Firefox-kotoistus</fi>
    <fr>Localisation albanaise pour Firefox</fr>
    <he_IL>Albanian localisation of Firefox</he_IL>
-   <hi>Albanian localisation of Firefox</hi>
+   <hi>फायरफॉक्स का अल्बानियाई संस्करण</hi>
    <hr>Albanska lokalizacija Firefoxa</hr>
    <hu>Albanian localisation of Firefox</hu>
    <id>Albanian localisation of Firefox</id>
    <is>Albanian localisation of Firefox</is>
-   <it>Localizzazione albanese di Firefox</it>
-   <ja_JP>Albanian localisation of Firefox</ja_JP>
-   <ja>Albanian localisation of Firefox</ja>
+   <it>Localizzazione albanese di Firefox </it>
+   <ja>Firefox のアルバニア語用言語パック</ja>
    <kk>Albanian localisation of Firefox</kk>
    <ko>Albanian localisation of Firefox</ko>
    <lt>Albanian localisation of Firefox</lt>
    <mk>Albanian localisation of Firefox</mk>
    <mr>Albanian localisation of Firefox</mr>
-   <nb>Albanian localisation of Firefox</nb>
+   <nb>Albansk lokaltilpassing av Firefox</nb>
    <nl>Albanese lokalisatie van Firefox</nl>
    <pl>Albańska lokalizacja przeglądarki Firefox</pl>
-   <pt_BR>Albanês Localização para Firefox</pt_BR>
+   <pt_BR>Albanês Localização para o Firefox</pt_BR>
    <pt>Albanês Localização para Firefox</pt>
    <ro>Albanian localisation of Firefox</ro>
    <ru>Албанская локализация Firefox</ru>
    <sk>Albanian lokalizácia pre Firefox</sk>
-   <sl>Albanian localisation of Firefox</sl>
-   <sq>Albanian localisation of Firefox</sq>
+   <sl>Albanske krajevne nastavitve za Firefox</sl>
+   <sq>Përkthimi i Firefox-it në shqip</sq>
    <sr>Albanian localisation of Firefox</sr>
    <sv>Albansk lokalisering av Firefox</sv>
    <tr>Firefox'un Arnavutça yerelleştirmesi</tr>

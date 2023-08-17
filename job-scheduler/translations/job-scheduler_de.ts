@@ -134,7 +134,7 @@
     <message>
         <location filename="../MainWindow.cpp" line="139"/>
         <source>Start as &amp;Root</source>
-        <translation>Als &amp;Root ausführen</translation>
+        <translation>Als &amp;Administrator ausführen</translation>
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="141"/>
@@ -159,7 +159,7 @@
     <message>
         <location filename="../MainWindow.cpp" line="153"/>
         <source>&amp;Edit</source>
-        <translation>&amp;Editieren</translation>
+        <translation>&amp;Bearbeiten</translation>
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="154"/>
@@ -179,7 +179,7 @@
     <message>
         <location filename="../MainWindow.cpp" line="159"/>
         <source>&amp;Copy</source>
-        <translation>&amp;Copy</translation>
+        <translation>&amp;Kopieren</translation>
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="160"/>
@@ -222,14 +222,14 @@
         <source>Not saved since last change.
 Are you OK to reload?</source>
         <translation>Nicht gespeichert seit der letzten Änderung.
-Sind Sie bereit, neu zu laden?</translation>
+Sind sie bereit, neu zu laden?</translation>
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="325"/>
         <source>Not saved since last change.
 Are you OK to exit?</source>
         <translation>Nicht gespeichert seit der letzten Änderung.
-Sind Sie bereit zum Verlassen?</translation>
+Sind sie bereit zum Verlassen?</translation>
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="338"/>
@@ -329,7 +329,7 @@ Sind Sie bereit zum Verlassen?</translation>
     <message>
         <location filename="../TCommandEdit.cpp" line="53"/>
         <source>Time String E&amp;ditor</source>
-        <translation>Zeitleisten E&amp;ditor</translation>
+        <translation>Zeitleisten-E&amp;ditor</translation>
     </message>
     <message>
         <location filename="../TCommandEdit.cpp" line="57"/>
@@ -427,7 +427,7 @@ Sind Sie bereit zum Verlassen?</translation>
     <message>
         <location filename="../TimeDialog.cpp" line="171"/>
         <source>&amp;Ok</source>
-        <translation>&amp;Ok</translation>
+        <translation>&amp;OK</translation>
     </message>
 </context>
 <context>

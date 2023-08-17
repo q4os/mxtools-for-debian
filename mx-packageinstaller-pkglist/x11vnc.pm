@@ -25,35 +25,34 @@ x11vnc
    <eu>VNC server for X window environments</eu>
    <fa>VNC server for X window environments</fa>
    <fil_PH>VNC server for X window environments</fil_PH>
-   <fi>VNC server for X window environments</fi>
+   <fi>VNC palvelin X-ikkunointi ympäristöihin</fi>
    <fr>Serveur VNC pour environnements X window</fr>
    <he_IL>VNC server for X window environments</he_IL>
-   <hi>VNC server for X window environments</hi>
+   <hi>एक्स विंडो वातावरण हेतु वीएनसी सर्वर</hi>
    <hr>VNC server for X window environments</hr>
    <hu>VNC server for X window environments</hu>
    <id>VNC server for X window environments</id>
    <is>VNC server for X window environments</is>
    <it>Server VNC per ambienti X Window</it>
-   <ja_JP>VNC server for X window environments</ja_JP>
-   <ja>VNC server for X window environments</ja>
+   <ja>X Window 環境用のVNCサーバー</ja>
    <kk>VNC server for X window environments</kk>
    <ko>VNC server for X window environments</ko>
    <lt>VNC server for X window environments</lt>
    <mk>VNC server for X window environments</mk>
    <mr>VNC server for X window environments</mr>
-   <nb>VNC server for X window environments</nb>
+   <nb>VNC-tjener for X Window System-miljøer</nb>
    <nl>VNC server voor X window omgevingen</nl>
    <pl>Serwer VNC dla środowisk X Window</pl>
-   <pt_BR>Servidor VNC para ambientes de janelas "X"</pt_BR>
+   <pt_BR>Servidor VNC para ambientes de janelas “X”</pt_BR>
    <pt>Servidor VNC para ambientes de janelas "X"</pt>
    <ro>VNC server for X window environments</ro>
    <ru>VNC сервер для оконной среды X Window</ru>
    <sk>VNC server for X window environments</sk>
    <sl>VNC strežnik za X window okolja</sl>
-   <sq>VNC server for X window environments</sq>
+   <sq>shërbyes VNC për mjedise dritaresh X</sq>
    <sr>VNC server for X window environments</sr>
    <sv>VNC server för X window miljöer</sv>
-   <tr>VNC server for X window environments</tr>
+   <tr>X pencere ortamları için VNC sunucusu</tr>
    <uk>VNC server for X window environments</uk>
    <vi>VNC server for X window environments</vi>
    <zh_CN>VNC server for X window environments</zh_CN>

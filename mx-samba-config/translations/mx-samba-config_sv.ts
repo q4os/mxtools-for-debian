@@ -49,7 +49,7 @@
         <translation>Åtkomsträttigheter för giltiga användare</translation>
     </message>
     <message>
-        <location filename="../editshare.cpp" line="46"/>
+        <location filename="../editshare.cpp" line="48"/>
         <source>Select directory to share</source>
         <translation>Välj katalog att dela</translation>
     </message>

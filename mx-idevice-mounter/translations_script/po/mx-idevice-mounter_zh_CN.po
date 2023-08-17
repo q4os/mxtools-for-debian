@@ -5,6 +5,9 @@
 # 
 # Translators:
 # anticapitalista <anticapitalista@riseup.net>, 2018
+# EldersJavas <eldersjavas@gmail.com>, 2020
+# a73a47e368cc011d8f94528bd9d5d3f1_91fccdf <1b07f49e2a323989c85dd26d526f7bb9_871526>, 2020
+# Roy Avrett <rjavrett@gmail.com>, 2022
 # 
 #, fuzzy
 msgid ""
@@ -13,7 +16,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-12-02 11:04-0500\n"
 "PO-Revision-Date: 2017-12-02 16:14+0000\n"
-"Last-Translator: anticapitalista <anticapitalista@riseup.net>, 2018\n"
+"Last-Translator: Roy Avrett <rjavrett@gmail.com>, 2022\n"
 "Language-Team: Chinese (China) (https://www.transifex.com/anticapitalista/teams/10162/zh_CN/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -36,11 +39,11 @@ msgstr ""
 
 #: idevice-mounter:100
 msgid "Copyright (c) MX Linux"
-msgstr ""
+msgstr "版权所有(c) MX Linux"
 
 #: idevice-mounter:128
 msgid "Mount"
-msgstr ""
+msgstr "挂载"
 
 #: idevice-mounter:133
 msgid "Rescan"
@@ -48,7 +51,7 @@ msgstr ""
 
 #: idevice-mounter:138
 msgid "Unmount"
-msgstr ""
+msgstr "卸载"
 
 #: idevice-mounter:143
 msgid "Close"
@@ -56,7 +59,7 @@ msgstr "关闭"
 
 #: idevice-mounter:148
 msgid "About"
-msgstr ""
+msgstr "关于"
 
 #: idevice-mounter:153
 msgid "Help"

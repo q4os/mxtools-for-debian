@@ -2,8 +2,8 @@ Source: kde-servicemenu-extract-and-compress
 Section: contrib/kde
 Priority: optional
 Maintainer: Steven Pusser <stevep@mxlinux.org>
-Build-Depends: debhelper (>= 10)
-Standards-Version: 3.9.1
+Build-Depends: debhelper-compat (= 12)
+Standards-Version: 4.6.2
 Homepage: http://kde-apps.org/content/show.php/Extract+And+Compress+KDE4?content=84206
 
 Package: kde-servicemenu-extract-and-compress

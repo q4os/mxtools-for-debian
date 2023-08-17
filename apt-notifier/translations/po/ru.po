@@ -7,11 +7,10 @@
 # какой-то человек, 2022
 # Вячеслав Волошин <vol_vel@mail.ru>, 2022
 # Geoff Gigg <geoffgigg@hotmail.com>, 2022
-# Владимир Н <ua3elr@gmail.com>, 2022
+# Vedun <ua3elr@gmail.com>, 2022
 # Vladimir O <vldoduv@yandex.ru>, 2022
 # Dolphin Oracle <dolphinoracle@gmail.com>, 2022
-# fehlix, 2022
-# Andrei Stepanov, 2022
+# Andrei Stepanov, 2023
 # 
 #, fuzzy
 msgid ""
@@ -20,8 +19,8 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-01-28 02:38+0100\n"
 "PO-Revision-Date: 2017-05-11 01:14+0000\n"
-"Last-Translator: Andrei Stepanov, 2022\n"
-"Language-Team: Russian (https://www.transifex.com/anticapitalista/teams/10162/ru/)\n"
+"Last-Translator: Andrei Stepanov, 2023\n"
+"Language-Team: Russian (https://app.transifex.com/anticapitalista/teams/10162/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -29,7 +28,7 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%100>=11 && n%100<=14)? 2 : 3);\n"
 
 msgid "$count new updates available"
-msgstr "доступно $count новых обновлений"
+msgstr "доступно $count свежих обновлений"
 
 msgid "0 updates available"
 msgstr "0 обновлений доступно"
@@ -106,23 +105,22 @@ msgstr "MX Установщик пакетов"
 #. entries.
 #. The desktop entry name will be displayed within the menu.
 msgid "MX Updater"
-msgstr "MX Обновления"
+msgstr "MX Центр обновления"
 
 msgid "MX Updater Help"
-msgstr "Справка MX Updater"
+msgstr "Справка MX Центра обновления"
 
 msgid "MX Updater preferences"
-msgstr "Предпочтения MX Updater"
+msgstr "Настройки MX Центра обновления"
 
 msgid "MX Updater--View and Upgrade, previewing: basic upgrade"
 msgstr ""
-"MX Updater--Просмотр и обновление, предварительный просмотр: базовое "
+"MX Центр обновления - Просмотр и обновление, предпросмотр: базовое "
 "обновление"
 
 msgid "MX Updater--View and Upgrade, previewing: full upgrade"
 msgstr ""
-"MX Updater--Просмотр и обновление, предварительный просмотр: полное "
-"обновление"
+"MX Центр обновления - Просмотр и обновление, предпросмотр: полное обновление"
 
 msgid "No logs found."
 msgstr "Нет найденных логов."
@@ -156,7 +154,7 @@ msgstr ""
 "или обновленных пакетах программного обеспечения. (apt-get update)"
 
 msgid "Restart MX Updater"
-msgstr "Перезапустить MX Updater"
+msgstr "Перезапустить MX Центр обновления"
 
 msgid "Running apt-get autoremove, if you are unsure type 'n'."
 msgstr ""
@@ -200,10 +198,10 @@ msgid "View and Upgrade"
 msgstr "Просмотр и обновление"
 
 msgid "You have $count new updates available"
-msgstr "У Вас есть $count доступных обновлений"
+msgstr "Вам доступны свежие обновления: $count"
 
 msgid "You have 1 new update available"
-msgstr "У вас есть 1 доступное обновление"
+msgstr "Вам доступно 1 обновление"
 
 #. TRANSLATORS: Fill in all plural forms. The parenthesized expression '{num}'
 #. is replaced by the actual number of updates available at runtime.
@@ -214,10 +212,10 @@ msgstr "У вас есть 1 доступное обновление"
 #, python-brace-format
 msgid "You have {num} new update available"
 msgid_plural "You have {num} new updates available"
-msgstr[0] "У Вас есть {num} доступное обновление"
-msgstr[1] "У Вас есть {num} доступных обновления"
-msgstr[2] "У Вас есть {num} доступных обновлений"
-msgstr[3] "У Вас есть {num} доступных обновлений"
+msgstr[0] "Вам доступно {num} обновление"
+msgstr[1] "Вам доступно {num} обновления"
+msgstr[2] "Вам доступно {num} обновлений"
+msgstr[3] "Вам доступно {num} обновлений"
 
 msgid "automatically close terminal window when full/basic upgrade complete"
 msgstr ""
@@ -247,10 +245,10 @@ msgid "full upgrade   (recommended)"
 msgstr "Полное обновление (рекомендовано)"
 
 msgid "full upgrade complete (or was canceled)"
-msgstr "полное обновление завершено (или было отменено) "
+msgstr "Полное обновление было завершено (или отменено)"
 
 msgid "opens MX Updater 'View and Upgrade' window"
-msgstr "открывает окно MX Updater 'Посмотреть и Обновить'"
+msgstr "открывает окно MX Центра обновления «Обзор и обновление»"
 
 msgid "opens Synaptic"
 msgstr "открыть Synaptic"
@@ -265,7 +263,7 @@ msgid "pulse"
 msgstr "pulse"
 
 msgid "start MX Updater at login"
-msgstr "Запускать Инструмент обновления MX при входе в систему"
+msgstr "Запускать MX Центр обновления при входе в систему"
 
 msgid "switch to basic upgrade"
 msgstr "переключить на базовое обновление"
@@ -274,7 +272,7 @@ msgid "switch to full upgrade"
 msgstr "переключить на полное обновление"
 
 msgid "this terminal window can now be closed"
-msgstr "это окно терминала теперь можно закрыть"
+msgstr "Это окно терминала теперь можно закрыть"
 
 msgid "update automatically   (will not add new or remove existing packages)"
 msgstr ""
@@ -301,10 +299,10 @@ msgstr "каркас"
 #, python-brace-format
 msgid "{num} new update available"
 msgid_plural "{num} new updates available"
-msgstr[0] "Доступно {num} новое обновление"
-msgstr[1] "Доступно {num} новых обновления"
-msgstr[2] "Доступно {num} новых обновлений"
-msgstr[3] "Доступно {num} новых обновлений"
+msgstr[0] "Доступно {num} свежее обновление"
+msgstr[1] "Доступно {num} свежих обновления"
+msgstr[2] "Доступно {num} свежих обновлений"
+msgstr[3] "Доступно {num} свежих обновлений"
 
 #. TRANSLATORS:
 #. This autostart desktop entry comment will be shown within 'Session and
@@ -315,7 +313,8 @@ msgstr "Приложение для показа обновлений"
 #. TRANSLATORS:
 #. This desktop entry comment will be shown within the menu.
 msgid "Re-enable MX Updater icon even if no updates available"
-msgstr "Ре-активировать иконку MX Обновления в случае, когда нет обновлений"
+msgstr ""
+"Повторно включить значок MX Центра обновления в случае, когда нет обновлений"
 
 msgid "Enable Auto-update"
 msgstr "Включить автообновление"

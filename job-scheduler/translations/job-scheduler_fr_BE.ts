@@ -47,7 +47,7 @@
     <message>
         <location filename="../ExecuteModel.cpp" line="62"/>
         <source>Execute Time</source>
-        <translation>Moment d&apos;exécution</translation>
+        <translation>Moment d’exécution</translation>
     </message>
     <message>
         <location filename="../ExecuteModel.cpp" line="64"/>
@@ -134,12 +134,12 @@
     <message>
         <location filename="../MainWindow.cpp" line="139"/>
         <source>Start as &amp;Root</source>
-        <translation>Démarrer en tant &amp;que Root</translation>
+        <translation>Démarrer en tant &amp;qu’administrateur</translation>
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="141"/>
         <source>Start as &amp;Regular user</source>
-        <translation>Démarrer en tant qu&apos;&amp;utilisateur régulier</translation>
+        <translation>Démarrer en tant qu’&amp;utilisateur régulier</translation>
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="142"/>
@@ -234,7 +234,7 @@ Pouvez-vous sortir?</translation>
     <message>
         <location filename="../MainWindow.cpp" line="338"/>
         <source>About Job Scheduler</source>
-        <translation>À propos de l&apos;ordonnanceur de tâches</translation>
+        <translation>À propos de l’ordonnanceur de tâches</translation>
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="339"/>
@@ -249,7 +249,7 @@ Pouvez-vous sortir?</translation>
     <message>
         <location filename="../MainWindow.cpp" line="340"/>
         <source>Job Scheduler is based upon qroneko 0.5.4, released in 2005 by korewaisai (&lt;a href=&quot;mailto:korewaisai@yahoo.co.jp&quot;&gt;korewaisai@yahoo.co.jp&lt;/a&gt;)</source>
-        <translation>L&apos;ordonnanceur de tâches - Job Scheduler - est basé sur qroneko 0.5.4, publié en 2005 par korewaisai (&lt;a href=&quot;mailto:korewaisai@yahoo.co.jp&quot;&gt;korewaisai@yahoo.co.jp&lt;/a&gt;)</translation>
+        <translation>L’ordonnanceur de tâches - Job Scheduler - est basé sur qroneko 0.5.4, publié en 2005 par korewaisai (&lt;a href=&quot;mailto:korewaisai@yahoo.co.jp&quot;&gt;korewaisai@yahoo.co.jp&lt;/a&gt;)</translation>
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="343"/>
@@ -288,7 +288,7 @@ Pouvez-vous sortir?</translation>
     <message>
         <location filename="../about.cpp" line="74"/>
         <source>&amp;Close</source>
-        <translation>&amp;Fermer</translation>
+        <translation>&amp;Quitter</translation>
     </message>
 </context>
 <context>
@@ -306,7 +306,7 @@ Pouvez-vous sortir?</translation>
     <message>
         <location filename="../SaveDialog.cpp" line="40"/>
         <source>&amp;OK</source>
-        <translation>&amp;OK</translation>
+        <translation>&amp;Valider</translation>
     </message>
     <message>
         <location filename="../SaveDialog.cpp" line="41"/>
@@ -349,12 +349,12 @@ Pouvez-vous sortir?</translation>
     <message>
         <location filename="../TCommandEdit.cpp" line="128"/>
         <source>Time Format Error</source>
-        <translation>Erreur de format d&apos;heure</translation>
+        <translation>Erreur de format d’heure</translation>
     </message>
     <message>
         <location filename="../TCommandEdit.cpp" line="146"/>
         <source>Today</source>
-        <translation>Aujourd&apos;hui</translation>
+        <translation>Aujourd’hui</translation>
     </message>
     <message>
         <location filename="../TCommandEdit.cpp" line="148"/>
@@ -427,7 +427,7 @@ Pouvez-vous sortir?</translation>
     <message>
         <location filename="../TimeDialog.cpp" line="171"/>
         <source>&amp;Ok</source>
-        <translation>&amp;Ok</translation>
+        <translation>&amp;Valider</translation>
     </message>
 </context>
 <context>

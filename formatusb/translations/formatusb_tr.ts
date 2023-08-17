@@ -216,7 +216,7 @@
     <message>
         <location filename="../about.cpp" line="34"/>
         <source>License</source>
-        <translation>Ruhsat</translation>
+        <translation>Lisans</translation>
     </message>
     <message>
         <location filename="../about.cpp" line="35"/>

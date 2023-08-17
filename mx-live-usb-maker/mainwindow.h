@@ -42,16 +42,14 @@ class MainWindow : public QDialog
     Q_OBJECT
 
 public:
-    MainWindow(const QStringList &args, QDialog *parent = nullptr);
-    ~MainWindow();
+    explicit MainWindow(const QStringList &args, QDialog *parent = nullptr);
+    ~MainWindow() override;
 
-    QString LUM;
     QString buildOptionList();
     QStringList buildUsbList();
     QStringList removeUnsuitable(const QStringList &devices); // remove unsuitable disks (live and unremovable)
     bool checkDestSize();
-    bool isRunningLive();
-    const QString cli_utils {". /usr/local/lib/cli-shell-utils/cli-shell-utils.bash;"};
+    static bool isRunningLive();
     static bool isToRam();
     void makeUsb(const QString &options);
     void progress();
@@ -61,7 +59,7 @@ public:
 public slots:
 
 private slots:
-    static bool isantiX_mx_family(const QString &bselected);
+    static bool isantiX_mx_family(const QString &selected);
     void cleanup();
     void cmdDone();
     void setConnections();
@@ -90,9 +88,11 @@ private:
     Ui::MainWindow *ui;
     Cmd cmd;
     QFile *stat_file {};
+    QString LUM;
     QString device;
     QTimer timer;
     bool advancedOptions {};
+    const QString cli_utils {". /usr/local/lib/cli-shell-utils/cli-shell-utils.bash;"};
     int height {};
     uint size_check;
 };

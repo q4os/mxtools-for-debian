@@ -5,8 +5,8 @@
     <name>MainWindow</name>
     <message>
         <location filename="../mainwindow.ui" line="14"/>
-        <location filename="../mainwindow.cpp" line="66"/>
-        <location filename="../mainwindow.cpp" line="433"/>
+        <location filename="../mainwindow.cpp" line="64"/>
+        <location filename="../mainwindow.cpp" line="434"/>
         <source>MX Welcome</source>
         <translation>MX Centre d’accueil - MX Welcome</translation>
     </message>
@@ -113,7 +113,7 @@
     <message>
         <location filename="../mainwindow.ui" line="805"/>
         <source>DESKTOP</source>
-        <translation>ORDINATEUR</translation>
+        <translation>BUREAU</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="819"/>
@@ -143,12 +143,12 @@
     <message>
         <location filename="../mainwindow.ui" line="870"/>
         <source>SUPPORTED UNTIL:</source>
-        <translation>PRIS EN CHARGE JUSQU’AU :</translation>
+        <translation>PRIS EN CHARGE JUSQU’EN :</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="890"/>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta charset=&quot;utf-8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Noto Sans&apos;; font-size:10.5pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -160,7 +160,7 @@ p, li { white-space: pre-wrap; }
         <translation>Afficher cette fenêtre au démarrage</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="318"/>
+        <location filename="../mainwindow.cpp" line="317"/>
         <source>User demo, password:</source>
         <translation>Utilisateur demo, mot de passe :</translation>
     </message>
@@ -171,17 +171,17 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="355"/>
-        <location filename="../mainwindow.cpp" line="372"/>
+        <location filename="../mainwindow.cpp" line="373"/>
         <source>Error</source>
         <translation>Erreur</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="384"/>
+        <location filename="../mainwindow.cpp" line="386"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:14pt; font-weight:600;&quot;&gt;%1 &amp;quot;%2&amp;quot;&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="432"/>
+        <location filename="../mainwindow.cpp" line="433"/>
         <source>About MX Welcome</source>
         <translation>À propos de MX Centre d’accueil</translation>
     </message>
@@ -196,12 +196,12 @@ p, li { white-space: pre-wrap; }
         <translation>Programme affichant un écran d’accueil pour MX Linux</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="437"/>
+        <location filename="../mainwindow.cpp" line="438"/>
         <source>Copyright (c) MX Linux</source>
         <translation>Copyright (c) MX Linux</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="438"/>
+        <location filename="../mainwindow.cpp" line="439"/>
         <source>%1 License</source>
         <translation type="unfinished"></translation>
     </message>
@@ -237,43 +237,43 @@ p, li { white-space: pre-wrap; }
         <translation>Cet outil affiche un écran de bienvenue avec deux onglets.</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="47"/>
+        <location filename="../main.cpp" line="48"/>
         <source>Start with About tab selected. The About tab provides basic information about the current MX Linux version, the user&apos;s hardware, and access to a full system report.</source>
         <translation>Commencer avec l’onglet « À propos » sélectionné. L’onglet « À propos » fournit des informations de base sur la version actuelle de MX Linux, le matériel de l’utilisateur et l’accès à un rapport complet du système.</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="50"/>
+        <location filename="../main.cpp" line="51"/>
         <source>Run a test mode.</source>
         <translation>Exécuter en mode test.</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="71"/>
+        <location filename="../main.cpp" line="73"/>
         <source>Error</source>
         <translation>Erreur</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="71"/>
+        <location filename="../main.cpp" line="73"/>
         <source>You must run this program as normal user.</source>
         <translation type="unfinished">Vous devez exécuter cette application en tant qu’utilisateur normal.</translation>
     </message>
     <message>
-        <location filename="../about.cpp" line="41"/>
+        <location filename="../about.cpp" line="39"/>
         <source>License</source>
         <translation type="unfinished">Licence</translation>
     </message>
     <message>
-        <location filename="../about.cpp" line="42"/>
-        <location filename="../about.cpp" line="52"/>
+        <location filename="../about.cpp" line="40"/>
+        <location filename="../about.cpp" line="50"/>
         <source>Changelog</source>
         <translation type="unfinished">Journal des modifications</translation>
     </message>
     <message>
-        <location filename="../about.cpp" line="43"/>
+        <location filename="../about.cpp" line="41"/>
         <source>Cancel</source>
         <translation type="unfinished">Annuler</translation>
     </message>
     <message>
-        <location filename="../about.cpp" line="64"/>
+        <location filename="../about.cpp" line="63"/>
         <source>&amp;Close</source>
         <translation type="unfinished">&amp;Quitter</translation>
     </message>

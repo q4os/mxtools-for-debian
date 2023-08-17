@@ -1,0 +1,88 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-12-02 11:04-0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: \n"
+
+#: idevice-mounter:97
+msgid "MX iDevice Mounter"
+msgstr "MX iDevice Mounter"
+
+#: idevice-mounter:98
+msgid "Version:"
+msgstr "Version:"
+
+#: idevice-mounter:99
+msgid ""
+"GUI program for mounting & unmounting <br> iPhones and Ipads in MX Linux"
+msgstr ""
+"GUI program for mounting & unmounting <br> iPhones and Ipads in MX Linux"
+
+#: idevice-mounter:100
+msgid "Copyright (c) MX Linux"
+msgstr "Copyright (c) MX Linux"
+
+#: idevice-mounter:128
+msgid "Mount"
+msgstr "Mount"
+
+#: idevice-mounter:133
+msgid "Rescan"
+msgstr "Rescan"
+
+#: idevice-mounter:138
+msgid "Unmount"
+msgstr "Unmount"
+
+#: idevice-mounter:143
+msgid "Close"
+msgstr "Close"
+
+#: idevice-mounter:148
+msgid "About"
+msgstr "About"
+
+#: idevice-mounter:153
+msgid "Help"
+msgstr "Help"
+
+#: idevice-mounter:160
+msgid "If your device is not found, make sure it is unlocked."
+msgstr "If your device is not found, make sure it is unlocked."
+
+#: idevice-mounter:161
+msgid ""
+"If you get a  \"Trust This Computer?\"  popup on your device when you plug "
+"it in, answer \"Trust\", then Rescan."
+msgstr ""
+"If you get a  \"Trust This Computer?\"  popup on your device when you plug "
+"it in, answer \"Trust\", then Rescan."
+
+#: idevice-mounter:167
+msgid ""
+"If the information below describes your Apple device press the \"Mount\" "
+"button to access its files."
+msgstr ""
+"If the information below describes your Apple device press the \"Mount\" "
+"button to access its files."
+
+#: idevice-mounter:186
+msgid ""
+"Use the Unmount button before you remove your device.  If you have already "
+"unplugged it, plug your device back in, Rescan, and Unmount."
+msgstr ""
+"Use the Unmount button before you remove your device.  If you have already "
+"unplugged it, plug your device back in, Rescan, and Unmount."

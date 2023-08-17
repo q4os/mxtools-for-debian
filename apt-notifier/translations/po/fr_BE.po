@@ -5,7 +5,7 @@
 # 
 # Translators:
 # James Bowlin <BitJam@gmail.com>, 2022
-# Wallon Wallon, 2022
+# Wallon Wallon, 2023
 # 
 #, fuzzy
 msgid ""
@@ -14,8 +14,8 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-01-28 02:38+0100\n"
 "PO-Revision-Date: 2017-05-11 01:14+0000\n"
-"Last-Translator: Wallon Wallon, 2022\n"
-"Language-Team: French (Belgium) (https://www.transifex.com/anticapitalista/teams/10162/fr_BE/)\n"
+"Last-Translator: Wallon Wallon, 2023\n"
+"Language-Team: French (Belgium) (https://app.transifex.com/anticapitalista/teams/10162/fr_BE/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -48,12 +48,12 @@ msgstr "Journ(al/aux) de mise à jour automatique"
 
 msgid "Automatically answer 'yes' to all prompts during full/basic upgrade"
 msgstr ""
-"Répondre automatiquement 'oui' à tous les messages lors de la mise à jour "
+"Répondre automatiquement « oui » à tous les messages lors de la mise à jour "
 "complète ou basique"
 
 msgid "Automatically answer 'yes' to all prompts during upgrade"
 msgstr ""
-"Répondre automatiquement \"oui\" à toutes les questions pendant la mise à "
+"Répondre automatiquement « oui » à toutes les questions pendant la mise à "
 "jour"
 
 msgid "Cancel"
@@ -66,15 +66,15 @@ msgid "Check for Updates"
 msgstr "Vérifier les mises à jour"
 
 msgid "Close"
-msgstr "Fermer"
+msgstr "Quitter"
 
 msgid "For a less detailed view see 'Auto-update dpkg log(s)' or 'History'."
 msgstr ""
-"Pour une vue moins détaillée, voir \"Journ(al/aux) dpkg de mise à jour "
-"automatique\" ou \"Historique\"."
+"Pour une vue moins détaillée, voir « Journ(al/aux) dpkg de mise à jour "
+"automatique » ou « Historique »."
 
 msgid "Hide until updates available"
-msgstr "Cacher jusqu'à ce que des mises à niveau soient disponibles"
+msgstr "Cacher jusqu’à ce que des mises à niveau soient disponibles"
 
 msgid "History"
 msgstr "Historique"
@@ -138,7 +138,7 @@ msgid "Preferences"
 msgstr "Préférences"
 
 msgid "Press 'h' for help, 'q' to quit"
-msgstr "Appuyez 'h' pour obtenir de l'aide, 'q' pour quitter"
+msgstr "Appuyez « h » pour obtenir de l’aide, « q » pour quitter"
 
 msgid "Quit"
 msgstr "Quitter"
@@ -159,14 +159,15 @@ msgstr "Relancer MX Mise à jour apt-notifier"
 
 msgid "Running apt-get autoremove, if you are unsure type 'n'."
 msgstr ""
-"Lancement de apt-get autoremove; si vous n'êtes pas sûr de vous, entrez 'n'."
+"Lancement de apt-get autoremove; si vous n’êtes pas sûr de vous, entrez « n "
+"»."
 
 msgid ""
 "Switches the type of Upgrade that will be performed, alternating back and "
 "forth between 'full upgrade' and 'basic upgrade'."
 msgstr ""
-"Modifie le type de mise à niveau réalisée, alternativement 'complète' ou "
-"'basique'."
+"Modifie le type de mise à niveau réalisée, alternativement « complète » ou «"
+" basique »."
 
 msgid "Synaptic Help"
 msgstr "Aide Synaptic"
@@ -231,7 +232,7 @@ msgid "basic upgrade"
 msgstr "Mise à jour basique"
 
 msgid "basic upgrade complete (or was canceled)"
-msgstr "mise à jour basique terminée (ou annulée)"
+msgstr "Mise à jour basique terminée (ou annulée)"
 
 msgid "check for autoremovable packages after full/basic upgrade"
 msgstr ""
@@ -248,19 +249,19 @@ msgid "full upgrade   (recommended)"
 msgstr "Mise à niveau complète (recommandée)"
 
 msgid "full upgrade complete (or was canceled)"
-msgstr "mise à jour complète terminée (ou annulée)"
+msgstr "Mise à jour complète terminée (ou annulée)"
 
 msgid "opens MX Updater 'View and Upgrade' window"
-msgstr "ouvre la fenêtre 'Voir et mettre à niveau' de MX Mise à jour"
+msgstr "ouvre la fenêtre « Voir et mettre à niveau » de MX Mise à jour"
 
 msgid "opens Synaptic"
 msgstr "lance Synaptic"
 
 msgid "press any key to close"
-msgstr "appuyez sur une touche pour fermer"
+msgstr "Appuyez sur une touche pour fermer"
 
 msgid "press any key to stop automatic closing"
-msgstr "appuyer sur une touche pour arrêter la fermeture automatique"
+msgstr "Appuyer sur une touche pour arrêter la fermeture automatique"
 
 msgid "pulse"
 msgstr "pulsation"
@@ -275,7 +276,7 @@ msgid "switch to full upgrade"
 msgstr "Basculer vers à la mise à jour complète"
 
 msgid "this terminal window can now be closed"
-msgstr "cette fenêtre de terminal peut maintenant être fermée"
+msgstr "Cette fenêtre de terminal peut maintenant être fermée"
 
 msgid "update automatically   (will not add new or remove existing packages)"
 msgstr "Mettre automatiquement à jour (sans ajouter ou supprimer de paquets)"
@@ -288,7 +289,7 @@ msgstr "utiliser les notifications du bureau"
 
 msgid "use transparent interior for no-updates wireframe"
 msgstr ""
-"utiliser un intérieur transparent pour la boîte filaire (cas où il n'y a pas"
+"utiliser un intérieur transparent pour la boîte filaire (cas où il n’y a pas"
 " de mise à niveau disponible)"
 
 msgid "wireframe"
@@ -317,7 +318,7 @@ msgstr "Une applet pour montrer les mises à jour"
 #. This desktop entry comment will be shown within the menu.
 msgid "Re-enable MX Updater icon even if no updates available"
 msgstr ""
-"Réactivation de l'icône MX Mise à jour même si aucune mise à jour n'est "
+"Réactivation de l’icône MX Mise à jour même si aucune mise à jour n’est "
 "disponible"
 
 msgid "Enable Auto-update"

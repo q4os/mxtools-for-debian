@@ -25,35 +25,34 @@ HP Printing
    <eu>HPLIP and printing extras</eu>
    <fa>HPLIP and printing extras</fa>
    <fil_PH>HPLIP and printing extras</fil_PH>
-   <fi>HPLIP and printing extras</fi>
-   <fr>HPLIP et utilitaires d'impression</fr>
+   <fi>HPLIP ja tulostukseen liittyvät lisät</fi>
+   <fr>HPLIP et utilitaires d’impression</fr>
    <he_IL>HPLIP and printing extras</he_IL>
-   <hi>HPLIP and printing extras</hi>
+   <hi>HPLIP व अतिरिक्त प्रिंटिंग सॉफ्टवेयर</hi>
    <hr>HPLIP and printing extras</hr>
    <hu>HPLIP and printing extras</hu>
    <id>HPLIP and printing extras</id>
    <is>HPLIP and printing extras</is>
    <it>HPLIP ed ulteriori pacchetti per la stampa</it>
-   <ja_JP>HPLIP and printing extras</ja_JP>
-   <ja>HPLIP and printing extras</ja>
+   <ja>HPLIP と印刷用エキストラ</ja>
    <kk>HPLIP and printing extras</kk>
    <ko>HPLIP and printing extras</ko>
    <lt>HPLIP ir spausdinimo papildiniai</lt>
    <mk>HPLIP and printing extras</mk>
    <mr>HPLIP and printing extras</mr>
-   <nb>HPLIP and printing extras</nb>
+   <nb>HPLIP og ekstra utskriftsprogrammer</nb>
    <nl>HPLIP en printing extras</nl>
    <pl>HPLIP i dodatki do drukowania</pl>
-   <pt_BR>Criação de imagens e impressão para computadores HP com Linux [HP Linux Imaging and Printing] e extras de impressão</pt_BR>
+   <pt_BR>Criação de imagens e impressão para computadores HP com Linux (HP Linux Imaging and Printing) e extras de impressão</pt_BR>
    <pt>Criação de imagens e impressão para computadores HP com Linux [HP Linux Imaging and Printing] e extras de impressão</pt>
    <ro>HPLIP and printing extras</ro>
    <ru>HPLIP и вспомогательные компоненты печати</ru>
    <sk>HPLIP and printing extras</sk>
    <sl>Dodatki za HPLIP in tiskanje</sl>
-   <sq>HPLIP and printing extras</sq>
+   <sq>HPLIP dhe ekstra shtypjeje</sq>
    <sr>HPLIP and printing extras</sr>
    <sv>HPLIP och utskrifts-extras</sv>
-   <tr>HPLIP and printing extras</tr>
+   <tr>HPLIP ve yazdırma ile ilgili ekler</tr>
    <uk>HPLIP and printing extras</uk>
    <vi>HPLIP and printing extras</vi>
    <zh_CN>HPLIP and printing extras</zh_CN>

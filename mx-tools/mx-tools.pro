@@ -55,10 +55,10 @@ FORMS    += \
 TRANSLATIONS += translations/mx-tools_af.ts \
                 translations/mx-tools_am.ts \
                 translations/mx-tools_ar.ts \
+                translations/mx-tools_ast.ts \
                 translations/mx-tools_be.ts \
                 translations/mx-tools_bg.ts \
                 translations/mx-tools_bn.ts \
-                translations/mx-tools_bs_BA.ts \
                 translations/mx-tools_bs.ts \
                 translations/mx-tools_ca.ts \
                 translations/mx-tools_ceb.ts \
@@ -77,12 +77,10 @@ TRANSLATIONS += translations/mx-tools_af.ts \
                 translations/mx-tools_et.ts \
                 translations/mx-tools_eu.ts \
                 translations/mx-tools_fa.ts \
-                translations/mx-tools_fi_FI.ts \
                 translations/mx-tools_fil_PH.ts \
                 translations/mx-tools_fil.ts \
                 translations/mx-tools_fi.ts \
                 translations/mx-tools_fr_BE.ts \
-                translations/mx-tools_fr_FR.ts \
                 translations/mx-tools_fr.ts \
                 translations/mx-tools_fy.ts \
                 translations/mx-tools_ga.ts \
@@ -98,12 +96,15 @@ TRANSLATIONS += translations/mx-tools_af.ts \
                 translations/mx-tools_hr.ts \
                 translations/mx-tools_ht.ts \
                 translations/mx-tools_hu.ts \
+                translations/mx-tools_hye.ts \
                 translations/mx-tools_hy.ts \
                 translations/mx-tools_id.ts \
+                translations/mx-tools_ie.ts \
                 translations/mx-tools_is.ts \
                 translations/mx-tools_it.ts \
                 translations/mx-tools_ja.ts \
                 translations/mx-tools_jv.ts \
+                translations/mx-tools_kab.ts \
                 translations/mx-tools_ka.ts \
                 translations/mx-tools_kk.ts \
                 translations/mx-tools_km.ts \
@@ -129,7 +130,9 @@ TRANSLATIONS += translations/mx-tools_af.ts \
                 translations/mx-tools_ne.ts \
                 translations/mx-tools_nl_BE.ts \
                 translations/mx-tools_nl.ts \
+                translations/mx-tools_nn.ts \
                 translations/mx-tools_ny.ts \
+                translations/mx-tools_oc.ts \
                 translations/mx-tools_or.ts \
                 translations/mx-tools_pa.ts \
                 translations/mx-tools_pl.ts \
@@ -138,7 +141,6 @@ TRANSLATIONS += translations/mx-tools_af.ts \
                 translations/mx-tools_pt.ts \
                 translations/mx-tools_ro.ts \
                 translations/mx-tools_rue.ts \
-                translations/mx-tools_ru_RU.ts \
                 translations/mx-tools_ru.ts \
                 translations/mx-tools_rw.ts \
                 translations/mx-tools_sd.ts \
@@ -172,7 +174,7 @@ TRANSLATIONS += translations/mx-tools_af.ts \
                 translations/mx-tools_yue_CN.ts \
                 translations/mx-tools_zh_CN.ts \
                 translations/mx-tools_zh_HK.ts \
-                translations/mx-tools_zh_TW.ts
+                translations/mx-tools_zh_TW.ts \
 
 RESOURCES += \
     images.qrc

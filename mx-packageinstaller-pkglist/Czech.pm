@@ -25,35 +25,34 @@ Czech
    <eu>Czech Language Meta-Package</eu>
    <fa>Czech Language Meta-Package</fa>
    <fil_PH>Czech Language Meta-Package</fil_PH>
-   <fi>Czech Language Meta-Package</fi>
+   <fi>Tsekinkielinen metatieto-paketti</fi>
    <fr>Méta-Paquet langue tchèque</fr>
    <he_IL>Czech Language Meta-Package</he_IL>
-   <hi>Czech Language Meta-Package</hi>
+   <hi>चेक भाषा मेटा-पैकेज</hi>
    <hr>Czech Language Meta-Package</hr>
    <hu>Czech Language Meta-Package</hu>
    <id>Czech Language Meta-Package</id>
    <is>Czech Language Meta-Package</is>
    <it>Meta-pacchetto della lingua ceca</it>
-   <ja_JP>Czech Language Meta-Package</ja_JP>
-   <ja>Czech Language Meta-Package</ja>
+   <ja>チェコ語のメタパッケージ</ja>
    <kk>Czech Language Meta-Package</kk>
    <ko>Czech Language Meta-Package</ko>
    <lt>Czech Language Meta-Package</lt>
    <mk>Czech Language Meta-Package</mk>
    <mr>Czech Language Meta-Package</mr>
-   <nb>Czech Language Meta-Package</nb>
+   <nb>Tsjekkisk språkpakke</nb>
    <nl>Tjechische Taal Meta-Pakket</nl>
    <pl>Czeski metapakiet językowy</pl>
-   <pt_BR>Checo Meta-Pacote de Idioma</pt_BR>
+   <pt_BR>Checo Pacote de Idioma</pt_BR>
    <pt>Checo Meta-Pacote de Idioma</pt>
    <ro>Czech Language Meta-Package</ro>
-   <ru>Czech Language Meta-Package</ru>
+   <ru>Мета-пакет чешского языка</ru>
    <sk>Czech Language Meta-Package</sk>
-   <sl>Czech Language Meta-Package</sl>
-   <sq>Czech Language Meta-Package</sq>
+   <sl>Češki jezikovni metapaket</sl>
+   <sq>Meta-Paketë gjuhësore në çekisht</sq>
    <sr>Czech Language Meta-Package</sr>
    <sv>Tjeckiskt Språk Meta-Paket</sv>
-   <tr>Czech Language Meta-Package</tr>
+   <tr>Çek Dili Üst-Paketi</tr>
    <uk>Czech Language Meta-Package</uk>
    <vi>Czech Language Meta-Package</vi>
    <zh_CN>Czech Language Meta-Package</zh_CN>

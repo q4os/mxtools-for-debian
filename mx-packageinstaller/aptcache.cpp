@@ -4,7 +4,12 @@
 #include <QDirIterator>
 #include <QRegularExpression>
 
-AptCache::AptCache() { loadCacheFiles(); }
+#include "versionnumber.h"
+
+AptCache::AptCache()
+{
+    loadCacheFiles();
+}
 
 void AptCache::loadCacheFiles()
 {
@@ -19,20 +24,28 @@ void AptCache::loadCacheFiles()
     QList<QString> matchingFiles;
     while (it.hasNext()) {
         QString fileName = it.next();
-        if (packages_filter.match(fileName).hasMatch())
+        if (packages_filter.match(fileName).hasMatch()) {
             matchingFiles.append(fileName);
+        }
     }
     for (const QString &fileName : matchingFiles) {
-        if (!readFile(fileName))
+        if (!readFile(fileName)) {
             qDebug() << "error reading a cache file";
+        }
     }
     parseContent();
 }
 
-QMap<QString, QStringList> AptCache::getCandidates() { return candidates; }
+QMap<QString, QStringList> AptCache::getCandidates()
+{
+    return candidates;
+}
 
 // return DEB_BUILD_ARCH format which differs from what 'arch' or currentCpuArchitecture return
-QString AptCache::getArch() { return arch_names.value(QSysInfo::currentCpuArchitecture()); }
+QString AptCache::getArch()
+{
+    return arch_names.value(QSysInfo::currentCpuArchitecture());
+}
 
 void AptCache::parseContent()
 {
@@ -58,13 +71,10 @@ void AptCache::parseContent()
         } else if (line.startsWith(QLatin1String("Description:"))) {
             description = line.midRef(13).trimmed();
             if (match_arch) {
-                candidates.insert(package.toString(), {version.toString(), description.toString()});
-                // clear the variables for the next package
-                package.clear();
-                version.clear();
-                description.clear();
-                architecture.clear();
-                match_arch = false;
+                if (candidates.constFind(package.toString()) == candidates.constEnd()
+                    || VersionNumber(candidates.value(package.toString()).at(0)) < VersionNumber(version.toString())) {
+                    candidates.insert(package.toString(), {version.toString(), description.toString()});
+                }
             }
         }
     }

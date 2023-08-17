@@ -18,42 +18,41 @@ Thai_Libreoffice
    <cs>Thai Language Meta-Package for LibreOffice</cs>
    <da>Thai Language Meta-Package for LibreOffice</da>
    <de>Thai Meta-Paket für LibreOffice</de>
-   <el>LibreOffice στα ταϊλανδέζικα</el>
+   <el>LibreOffice στα Ταϊλανδέζικα</el>
    <en>Thai Language Meta-Package for LibreOffice</en>
    <es>Meta-Paquete de idioma tailandés para LibreOffice</es>
    <et>Thai Language Meta-Package for LibreOffice</et>
    <eu>Thai Language Meta-Package for LibreOffice</eu>
    <fa>Thai Language Meta-Package for LibreOffice</fa>
    <fil_PH>Thai Language Meta-Package for LibreOffice</fil_PH>
-   <fi>Thai Language Meta-Package for LibreOffice</fi>
-   <fr>Thai Language Meta-Package for LibreOffice</fr>
+   <fi>Thainkielinen kielipaketti LibreOffice:lle</fi>
+   <fr>Méta-Paquet en langue thaïlandaise pour LibreOffice</fr>
    <he_IL>Thai Language Meta-Package for LibreOffice</he_IL>
-   <hi>Thai Language Meta-Package for LibreOffice</hi>
+   <hi>लिब्रे-ऑफिस हेतु थाई भाषा मेटा-पैकेज</hi>
    <hr>Thai Language Meta-Package for LibreOffice</hr>
    <hu>Thai Language Meta-Package for LibreOffice</hu>
    <id>Thai Language Meta-Package for LibreOffice</id>
    <is>Thai Language Meta-Package for LibreOffice</is>
-   <it>Thai Language Meta-Package for LibreOffice</it>
-   <ja_JP>Thai Language Meta-Package for LibreOffice</ja_JP>
-   <ja>Thai Language Meta-Package for LibreOffice</ja>
+   <it>Meta-pacchetto della lingua tailandese per LibreOffice</it>
+   <ja>LibreOffice 用のタイ語メタパッケージ</ja>
    <kk>Thai Language Meta-Package for LibreOffice</kk>
    <ko>Thai Language Meta-Package for LibreOffice</ko>
    <lt>Thai Language Meta-Package for LibreOffice</lt>
    <mk>Thai Language Meta-Package for LibreOffice</mk>
    <mr>Thai Language Meta-Package for LibreOffice</mr>
-   <nb>Thai Language Meta-Package for LibreOffice</nb>
-   <nl>Thai Language Meta-Package for LibreOffice</nl>
-   <pl>Thai Language Meta-Package for LibreOffice</pl>
-   <pt_BR>Thai Language Meta-Package for LibreOffice</pt_BR>
+   <nb>Thai språkpakke for LibreOffice</nb>
+   <nl>Thais Taal Meta-Pakket voor LibreOffice</nl>
+   <pl>Tajski meta-pakiet językowy dla LibreOffice</pl>
+   <pt_BR>Tailandês Pacote de Idioma para o LibreOffice</pt_BR>
    <pt>Tailandês Meta-Pacote de Idioma para LibreOffice</pt>
    <ro>Thai Language Meta-Package for LibreOffice</ro>
-   <ru>Thai Language Meta-Package for LibreOffice</ru>
+   <ru>Мета-пакет тайского языка для LibreOffice</ru>
    <sk>Thai Language Meta-Package for LibreOffice</sk>
    <sl>Tajski jezikovni meta-paket za LibreOffice</sl>
-   <sq>Thai Language Meta-Package for LibreOffice</sq>
+   <sq>Meta-Paketë gjuhësore në tajlandisht për LibreOffice-in</sq>
    <sr>Thai Language Meta-Package for LibreOffice</sr>
    <sv>Thai Språk Meta-Paket för LibreOffice</sv>
-   <tr>Thai Language Meta-Package for LibreOffice</tr>
+   <tr>LibreOffice için Tayca Dili Üst-Paketi</tr>
    <uk>Thai Language Meta-Package for LibreOffice</uk>
    <vi>Thai Language Meta-Package for LibreOffice</vi>
    <zh_CN>Thai Language Meta-Package for LibreOffice</zh_CN>

@@ -19,42 +19,41 @@ SimpleScreenRecorder
    <cs>a Qt-based screencast recorder</cs>
    <da>en Qt-baseret screencast-optager</da>
    <de>Ein Qt-basierter Bildschirm-Rekorder</de>
-   <el>μια καταγραφική εκπομπής με βάση το Qt</el>
+   <el>Καταγραφή εκπομπής με βάση το Qt</el>
    <en>a Qt-based screencast recorder</en>
    <es>Grabador de pantalla basado en Qt</es>
    <et>a Qt-based screencast recorder</et>
    <eu>a Qt-based screencast recorder</eu>
    <fa>a Qt-based screencast recorder</fa>
    <fil_PH>a Qt-based screencast recorder</fil_PH>
-   <fi>a Qt-based screencast recorder</fi>
+   <fi>Qt-pohjainen ruudunjako- ja tallennusohjelma</fi>
    <fr>Outil de capture vidéo basé sur Qt</fr>
    <he_IL>a Qt-based screencast recorder</he_IL>
-   <hi>a Qt-based screencast recorder</hi>
+   <hi>क्यूटी-आधारित स्क्रीन रिकॉर्डर</hi>
    <hr>a Qt-based screencast recorder</hr>
    <hu>a Qt-based screencast recorder</hu>
    <id>a Qt-based screencast recorder</id>
    <is>a Qt-based screencast recorder</is>
    <it>registratore dello schermo basato su librerie Qt</it>
-   <ja_JP>a Qt-based screencast recorder</ja_JP>
-   <ja>a Qt-based screencast recorder</ja>
+   <ja>Qt ベースのスクリーンキャスト・レコーダー</ja>
    <kk>a Qt-based screencast recorder</kk>
    <ko>a Qt-based screencast recorder</ko>
    <lt>a Qt-based screencast recorder</lt>
    <mk>a Qt-based screencast recorder</mk>
    <mr>a Qt-based screencast recorder</mr>
-   <nb>a Qt-based screencast recorder</nb>
+   <nb>Qt-basert videoopptak av skjerm</nb>
    <nl>a Qt-gebaseerde screencast recorder</nl>
    <pl>rejestrator ekranu oparty na QT</pl>
-   <pt_BR>Gravador de vídeo na tela baseado em Qt</pt_BR>
+   <pt_BR>Gravador de tela (captura vídeo-áudio) baseado em Qt</pt_BR>
    <pt>Gravador de vídeo no ecrã baseado em Qt</pt>
    <ro>a Qt-based screencast recorder</ro>
    <ru>Запись скринкастов</ru>
    <sk>a Qt-based screencast recorder</sk>
    <sl>Qt snemalnik zaslona</sl>
-   <sq>a Qt-based screencast recorder</sq>
+   <sq>regjistrues transmetimi ekrani, bazuar në Qt</sq>
    <sr>a Qt-based screencast recorder</sr>
    <sv>en Qt-baserad skärmbildsinspelare</sv>
-   <tr>a Qt-based screencast recorder</tr>
+   <tr>Qt temelli hareketli ekran görüntüsü kaydedici</tr>
    <uk>a Qt-based screencast recorder</uk>
    <vi>a Qt-based screencast recorder</vi>
    <zh_CN>a Qt-based screencast recorder</zh_CN>

@@ -14,12 +14,12 @@ echodo() {
 mkdir -p .tx
 cat <<EOF > .tx/config
 [main]
-host = https://www.transifex.com
+host = https://app.transifex.com
 
 [o:anticapitalista:p:antix-development:r:apt-notifier]
 
 file_filter = po/<lang>.po
-minimum_perc = 0
+minimum_perc = 5
 source_file = apt-notifier.pot
 source_lang = en
 type = PO

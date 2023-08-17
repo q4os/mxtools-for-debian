@@ -49,7 +49,7 @@
         <translation>Të drejta hyrjeje për përdorues të vlefshëm</translation>
     </message>
     <message>
-        <location filename="../editshare.cpp" line="46"/>
+        <location filename="../editshare.cpp" line="48"/>
         <source>Select directory to share</source>
         <translation>Përzgjidhni drejtori për ndarje</translation>
     </message>

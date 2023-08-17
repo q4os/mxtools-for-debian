@@ -367,7 +367,6 @@ void MainWindow::on_hwDiagnosePushButton_clicked()
     QString desc;
     QString vendor;
     QString name;
-    QString disabled;
     QString version;
     QString product;
     QString driver;
@@ -376,7 +375,6 @@ void MainWindow::on_hwDiagnosePushButton_clicked()
         vendor = item[QStringLiteral("vendor")].toString();
         name = item[QStringLiteral("logicalname")].toString();
         bool isDisabled = item[QStringLiteral("disabled")].toBool();
-        disabled = isDisabled ? QStringLiteral("\tdisabled") : QStringLiteral("\tenabled");
         version = item[QStringLiteral("version")].toString();
         version = !version.isEmpty() ? " (rev " + version + ")" : QLatin1String("");
         product = item[QStringLiteral("product")].toString();

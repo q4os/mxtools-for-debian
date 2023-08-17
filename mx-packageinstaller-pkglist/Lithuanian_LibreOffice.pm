@@ -25,35 +25,34 @@ Lithuanian_Libreoffice
    <eu>Lithuanian Language Meta-Package for LibreOffice</eu>
    <fa>Lithuanian Language Meta-Package for LibreOffice</fa>
    <fil_PH>Lithuanian Language Meta-Package for LibreOffice</fil_PH>
-   <fi>Lithuanian Language Meta-Package for LibreOffice</fi>
-   <fr>Lithuanian Language Meta-Package for LibreOffice</fr>
+   <fi>Liettualainen kielipaketti LibreOffice:lle</fi>
+   <fr>Méta-Paquet en langue lituanienne pour LibreOffice</fr>
    <he_IL>Lithuanian Language Meta-Package for LibreOffice</he_IL>
-   <hi>Lithuanian Language Meta-Package for LibreOffice</hi>
+   <hi>लिब्रे-ऑफिस हेतु लिथुआनियाई भाषा मेटा-पैकेज</hi>
    <hr>Lithuanian Language Meta-Package for LibreOffice</hr>
    <hu>Lithuanian Language Meta-Package for LibreOffice</hu>
    <id>Lithuanian Language Meta-Package for LibreOffice</id>
    <is>Lithuanian Language Meta-Package for LibreOffice</is>
    <it>Meta-pacchetto della lingua lituana per LibreOffice</it>
-   <ja_JP>Lithuanian Language Meta-Package for LibreOffice</ja_JP>
-   <ja>Lithuanian Language Meta-Package for LibreOffice</ja>
+   <ja>LibreOffice用のリトアニア語メタパッケージ</ja>
    <kk>Lithuanian Language Meta-Package for LibreOffice</kk>
    <ko>Lithuanian Language Meta-Package for LibreOffice</ko>
    <lt>Lithuanian Language Meta-Package for LibreOffice</lt>
    <mk>Lithuanian Language Meta-Package for LibreOffice</mk>
    <mr>Lithuanian Language Meta-Package for LibreOffice</mr>
-   <nb>Lithuanian Language Meta-Package for LibreOffice</nb>
+   <nb>Litauisk språkpakke for LibreOffice</nb>
    <nl>Litouws Taal Meta-Pakket voor LibreOffice</nl>
-   <pl>Lithuanian Language Meta-Package for LibreOffice</pl>
-   <pt_BR>Lithuanian Language Meta-Package for LibreOffice</pt_BR>
+   <pl>Litewski meta-pakiet językowy dla LibreOffice</pl>
+   <pt_BR>Lituano Pacote de Idioma para o LibreOffice</pt_BR>
    <pt>Lituano Meta-Pacote de Idioma para LibreOffice</pt>
    <ro>Lithuanian Language Meta-Package for LibreOffice</ro>
-   <ru>Lithuanian Language Meta-Package for LibreOffice</ru>
+   <ru>Мета-пакет литовского языка для LibreOffice</ru>
    <sk>Lithuanian Language Meta-Package for LibreOffice</sk>
-   <sl>Latvijski jezikovni meta-paket za LibreOffice</sl>
-   <sq>Lithuanian Language Meta-Package for LibreOffice</sq>
+   <sl>Litvanski jezikovni meta-paket za LibreOffice</sl>
+   <sq>Meta-Paketë gjuhësore në lituanisht për LibreOffice-in</sq>
    <sr>Lithuanian Language Meta-Package for LibreOffice</sr>
    <sv>Litauiskt Språk Meta-Paket för LibreOffice</sv>
-   <tr>Lithuanian Language Meta-Package for LibreOffice</tr>
+   <tr>LibreOffice için Litvanyaca Dili Üst-Paketi</tr>
    <uk>Lithuanian Language Meta-Package for LibreOffice</uk>
    <vi>Lithuanian Language Meta-Package for LibreOffice</vi>
    <zh_CN>Lithuanian Language Meta-Package for LibreOffice</zh_CN>

@@ -1,3 +1,65 @@
+quick-system-info-gui (23.07.04) mx; urgency=medium
+
+  * update translations 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 20 Jul 2023 19:57:12 -0400
+
+quick-system-info-gui (23.07.03) mx; urgency=medium
+
+  * only show apt-history if dpkg.log exists
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 19 Jul 2023 19:32:56 -0400
+
+quick-system-info-gui (23.07.02) mx; urgency=medium
+
+  * update translations 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Tue, 18 Jul 2023 22:59:48 -0400
+
+quick-system-info-gui (23.07.01) mx; urgency=medium
+
+  * update translations 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 09 Jul 2023 00:20:03 -0400
+
+quick-system-info-gui (23.06.04) mx; urgency=medium
+
+  * updated help
+  * updated translations
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 11 Jun 2023 18:07:03 -0400
+
+quick-system-info-gui (23.06.03) mx; urgency=medium
+
+  * revert to using quick-system-info-mx script
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 10 Jun 2023 17:09:28 -0400
+
+quick-system-info-gui (23.06.02) mx; urgency=medium
+
+  * remove depend on mx-goodies
+  * update translations 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 10 Jun 2023 15:14:26 -0400
+
+quick-system-info-gui (23.06.01) mx; urgency=medium
+
+  [chkboom]
+  * Add open folder option to save message box.
+  * Make the save dialog default to the home folder.
+  * UI file cleanup. Fixed spacers. 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 09 Jun 2023 23:15:09 -0400
+
+quick-system-info-gui (23.02.07) mx; urgency=medium
+
+  * new dual-pane report and log viewer paradigm
+  * save multiple reports into a compressed archive file
+  * update help
+  * update build depends
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 09 Jun 2023 20:00:39 -0400
+
 quick-system-info-gui (23.02.06) mx; urgency=medium
 
   * mx-launcher-l10n strings in policy file

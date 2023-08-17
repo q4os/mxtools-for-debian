@@ -49,7 +49,7 @@
         <translation>Geçerli kullanıcılar için erişim hakları</translation>
     </message>
     <message>
-        <location filename="../editshare.cpp" line="46"/>
+        <location filename="../editshare.cpp" line="48"/>
         <source>Select directory to share</source>
         <translation>Paylaşılacak dizini seçin</translation>
     </message>
@@ -138,14 +138,14 @@
         <location filename="../mainwindow.cpp" line="311"/>
         <location filename="../mainwindow.cpp" line="337"/>
         <source>E&amp;nable Automatic Samba Startup</source>
-        <translation>Samba&apos;nın Otomatik Başlamasını Etki&amp;nleştir</translation>
+        <translation>Samba’nın Otomatik Başlamasını Etki&amp;nleştir</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="226"/>
         <location filename="../mainwindow.cpp" line="288"/>
         <location filename="../mainwindow.cpp" line="346"/>
         <source>Star&amp;t Samba</source>
-        <translation>Samba&apos;yı Başla&amp;t</translation>
+        <translation>Samba’yı Başla&amp;t</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="254"/>
@@ -278,12 +278,12 @@
     <message>
         <location filename="../mainwindow.cpp" line="275"/>
         <source>Your user doesn&apos;t belong to &apos;sambashare&apos; group  if you just installed the app you might need to restart the system first.</source>
-        <translation>Kullanıcı adınız &apos;sambashare&apos; grubuna ait değildir, uygulamayı yeni yüklediyseniz, önce sistemi yeniden başlatmanız gerekebilir.</translation>
+        <translation>Kullanıcı adınız ‘sambashare’ grubuna ait değildir, uygulamayı yeni yüklediyseniz, önce sistemi yeniden başlatmanız gerekebilir.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="285"/>
         <source>Sto&amp;p Samba</source>
-        <translation>Samba&apos;yı &amp;durdur</translation>
+        <translation>Samba’yı &amp;durdur</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="289"/>
@@ -386,7 +386,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="441"/>
         <source>Change the password for &apos;%1&apos;</source>
-        <translation>&apos;%1&apos; şifresini değiştirin</translation>
+        <translation>‘%1’ şifresini değiştirin</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="464"/>
@@ -402,7 +402,7 @@
         <location filename="../mainwindow.cpp" line="489"/>
         <location filename="../mainwindow.cpp" line="541"/>
         <source>Samba service is not running. Please start Samba before adding or editing shares</source>
-        <translation>Samba hizmeti çalışmıyor. Paylaşımları eklemeden veya düzenlemeden önce lütfen Samba&apos;yı başlatın</translation>
+        <translation>Samba hizmeti çalışmıyor. Paylaşımları eklemeden veya düzenlemeden önce lütfen Samba’yı başlatın</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="511"/>

@@ -28,29 +28,28 @@ Opera
    <fi>Opera-nettiselain</fi>
    <fr>Navigateur Opera</fr>
    <he_IL>Opera browser</he_IL>
-   <hi>Opera browser</hi>
+   <hi>ओपेरा ब्राउज़र</hi>
    <hr>Opera browser</hr>
    <hu>Opera browser</hu>
    <id>Opera browser</id>
    <is>Opera browser</is>
    <it>Opera browser</it>
-   <ja_JP>Opera browser</ja_JP>
-   <ja>Opera browser</ja>
+   <ja>Opera ブラウザ</ja>
    <kk>Opera browser</kk>
    <ko>Opera browser</ko>
    <lt>Opera naršyklė</lt>
    <mk>Opera browser</mk>
    <mr>Opera browser</mr>
-   <nb>Opera browser</nb>
+   <nb>Nettleseren Opera</nb>
    <nl>Opera browser</nl>
    <pl>przeglądarka Opera</pl>
-   <pt_BR>Navegador web Opera</pt_BR>
+   <pt_BR>Opera - Navegador de internet </pt_BR>
    <pt>Navegador web Opera</pt>
    <ro>Opera browser</ro>
    <ru>Браузер Opera</ru>
    <sk>Opera browser</sk>
    <sl>Opera brskalnik</sl>
-   <sq>Opera browser</sq>
+   <sq>Shfletuesi Opera</sq>
    <sr>Opera browser</sr>
    <sv>Opera webbläsare</sv>
    <tr>Opera tarayıcı</tr>
@@ -85,7 +84,7 @@ fi
 SHOWKEY=$($GPGCMD --show-keys ${KEYASC})
 if (($? ==0 )); then
 echo  "$SHOWKEY" | sed 's/^uid\s*/uid   /'
-apt-key add $KEYASC 2>/dev/null >/dev/null
+cp $KEYASC /etc/apt/trusted.gpg.d/opera-archive.asc 2>/dev/null >/dev/null
 else
 echo "[ERROR]: Invalid Opera archive keyring"
 echo "Exit"

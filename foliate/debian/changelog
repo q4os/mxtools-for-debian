@@ -1,239 +1,30 @@
-foliate (2.6.4-0.1~mx21+1) mx; urgency=medium
+foliate (2.6.4-1+dfsg3) unstable; urgency=medium
 
-  * Import new 2.6.4 release with various small bug fixes.
-  * Add alternative gir1.2-tracker-3.0 dependency.
+  * Merge MR!3, adds recommends for gnome-epub-thumbnailer
 
- -- Steven Pusser <stevep@mxlinux.org>  Fri, 14 Jan 2022 15:24:58 -0800
+ -- Jonathan Carter <jcc@debian.org>  Wed, 10 Aug 2022 09:43:13 +0200
 
-foliate (2.6.3-0.1~mx21+1) mx; urgency=medium
+foliate (2.6.4-1+dfsg2) unstable; urgency=medium
 
-  * Import 2.6.3 release:
-    - Fixed a performance issue with zipped files (including EPUB files)
+  * Post-NEW source-only upload
+  * Update standards version to 4.6.1
+  * Update copyright years
+  * Fix previous changelog entry s/UNRELEASED/unstable/g
+  * Add debian/links for /usr/bin/foliate
+    (MR!1, thanks Jeremy Bicha)
+  * Add foliate symlink
+    (MR!2, thanks Jeremy Bicha)
 
- -- Steven Pusser <stevep@mxlinux.org>  Thu, 01 Apr 2021 10:33:29 -0700
+ -- Jonathan Carter <jcc@debian.org>  Tue, 05 Jul 2022 16:01:50 +0200
 
-foliate (2.6.2-0.1~mx19+1) mx; urgency=medium
+foliate (2.6.4-1+dfsg1) unstable; urgency=medium
 
-  * New upstream release:
-    - Fix UI when running with libhandy 1.x
-    - Fixed automatic layout
-    - Added support for opening HTML files
-    - Consistent inner and outer margins
-    - The automatic layout no longer supports 4 columns
-    - Fixed long words overflowing
-    - Fixed custom themes not saved across sessions
-    - Fixed shortcuts for key pads
-    - Fixed opening non-UTF-8 zipped FB2 files
-    - Fixed books not opening on GNOME 40
+  * Initial release (Closes: #945270)
 
- -- Steven Pusser <stevep@mxlinux.org>  Mon, 29 Mar 2021 21:20:25 -0700
+ -- Federico Ceratto <federico@debian.org>  Tue, 18 Jan 2022 18:55:51 +0000
 
-foliate (2.5.0-0.1~mx19+1) mx; urgency=medium
+foliate (1.5.3+dfsg1-1~exp1) UNRELEASED; urgency=medium
 
-  * New upstream release:
-    - Improved support for touch screen.
-    - OPDS credentials can now be remembered.
-    - Various fixes for GNOME 3.38.
-    - Fixed Wiktionary internal links.
-    - Added Basque, Korean, and Norwegian translations.
+  * Initial release (Closes: #945270)
 
- -- Steven Pusser <stevep@mxlinux.org>  Wed, 21 Oct 2020 09:44:50 -0700
-
-foliate (2.4.2-0.1~mx19+1) mx; urgency=medium
-
-  * New upstream release:
-    - Fix opening of certain flavors of mobipocket and other ebook formats.
-
- -- Steven Pusser <stevep@mxlinux.org>  Thu, 09 Jul 2020 09:23:46 -0700
-
-foliate (2.4.0-0.1~mx19+1) mx; urgency=medium
-
-  * New upstream release:
-    - Improved metadata display
-    - Improved FictionBook rendering
-    - Improved UI for acquiring books from OPDS (#404, #405)
-    - Fixed unique identifier extraction for EPUB files
-    - Fixed missing window icon (#456)
-    - Fixed TTS environment variables not set when using Flatpak
-    - Fixed eSpeak NG voice not selected when testing TTS configuration
-    - Fixed wrong __ibooks_internal_theme attribute when “Invert” is enabled
-    - Foliate no longer depends on libsoup (gir1.2-soup-2.4 on Debian based
-      distributions). Previously, it was an optional dependency for opening
-      remote files.
-
- -- Steven Pusser <stevep@mxlinux.org>  Fri, 03 Jul 2020 09:55:37 -0700
-
-foliate (2.3.0-0.1~mx19+1) mx; urgency=medium
-
-  * New upstream release:
-    - Catalogs are now opened in the main library window (#403).
-    - View current location.
-    - Go to catalog start page.
-    - Reload catalog.
-    - Add current feed to catalogs.
-    - HTTP authentication support (#421).
-    - Fixed unique identifier extraction for FictionBook (.fb2, .fb2.zip)
-    . files (#462).
-    - Fixed newlines being ignored when copying text (#463).
-    - “Turn page on tap” is now disabled in non-paginated layouts (#464).
-    - Opening a book from the library view now closes the library window (#446).
-    - Language and publication dates in metadata are now parsed and formatted.
-    - Export annotations from the library view.
-    - New optional dependency iso-codes (>= 3.67), which provides display names
-    . for languages and regions. It is highly recommended to install this
-    . dependency.
-    - Flag emojis are now displayed for books whose language property contains
-    . a country/region code. For the best experience, an emoji font should be
-    . installed.
-
-  * Add iso-codes (>= 3.67) as dependency.
-
-
- -- Steven Pusser <stevep@mxlinux.org>  Mon, 22 Jun 2020 09:58:10 -0700
-
-foliate (2.2.1-0.1~mx19+1) mx; urgency=medium
-
-  * New upstream release:
-    - several bugfixes.
-
- -- Steven Pusser <stevep@mxlinux.org>  Mon, 08 Jun 2020 12:39:11 -0700
-
-foliate (2.2.0-0.1~mx19+1) mx; urgency=medium
-
-  * New upstream release:
-    - added a library view showing recent books and reading progress.
-    - now can search books by metadata.
-    - added e-book discovery with OPDS.
-    - newly supported formats:
-      - FictionBook (.fb2, .fb2.zip) (#128)
-      - comic book archive (.cbr, .cbz, .cbt, .cb7)
-      - plain text (.txt
-      - unpacked EPUB files
-    - added option to set maximum page width.
-    - "automatic" layout will now show four columns when the page width is
-      wide.
-    - improved image viewer, with new shortcuts and the ability to rotate
-      and invert images.
-    - added option to disable image viewer, or to open images on double,
-      middle, or right click.
-    - improved text-to-speech configuration UI.
-    - added ability to set text-to-speech voice based on book language.
-    - now can import annotations from JSON.
-    - now can search in annotations.
-    - annotations are now sorted in the same order as they appear in the book.
-    - "Allow Unsafe Content" now only enables JavaScript; external content will
-      no longer be loaded. This is an important security fix. If you are running
-      an older version of Foliate and cannot upgrade, do NOT enable
-      "Allow Unsafe Content" (it is disabled by default).
-    - webKit processes are now sandboxed.
-    - improved support for vertical and right-to-left books.
-    - support for StarDict dictionaries (requires new optional dependency sdcv).
-    - fixed current location not preserved when resizing.
-    - fixed auto-hiding header bar under some themes.
-    - command-line options for showing version and adding books to library.
-    - option to clear or disable cache.
-    - when an HTML page contains invalid self-closing anchor tags, it is now
-      parsed as XHTML.
-    - Foliate now stores file locations in
-      ~/.local/share/com.github.johnfactotum.Foliate/library/uri-store.json, and
-      saves book covers to ~/.cache/com.github.johnfactotum.Foliate. Both can
-      be disabled.
-    - new dependency tracker (gir1.2-tracker-2.0), which is used to get
-      file locations.
-    - new dependency libhandy (gir1.2-handy-0.0), to make the experience better
-      on larger as well as smaller screens.
-    - to open remote files, Foliate now depends on libsoup (gir1.2-soup-2.4).
-    - Foliate now bundles two additional libraries:
-      - libarchivejs, which is MIT licensed. It is a WASM port of the popular
-        libarchive C library.
-      - crypto-js, which is MIT licensed. The MD5 module is used to generate
-        identifiers for files that don't have unique identifiers.
-
-  * debian/control: added new dependencies as well as suggested sdcv and the
-    gir1.2-handy-0.0 package..
-  * debian/copyright: added info for bundled libarchivejs and crypto-js.
-
- -- Steven Pusser <stevep@mxlinux.org>  Sun, 31 May 2020 10:36:05 -0700
-
-foliate (2.1.1-0.1~mx19+1) mx; urgency=medium
-
-  * New upstream release:
-    - Fixed wrong version number.
-    - Fixed dictionary, translation, and Wikipedia not working in the Snap
-      package (#284)
-    - New and improved icon (#268)
-    - Option to disable turn page on tap (#270)
-    - A menu on the welcome screen for opening recent files (#69)
-    - Restored shortcuts for showing ToC, annotations, and bookmarks
-
- -- Steven Pusser <stevep@mxlinux.org>  Tue, 21 Apr 2020 23:49:53 -0700
-
-foliate (2.0.0-0.1~mx19+1) mx; urgency=medium
-
-  * New upstream release.
-  * debian/control:
-    - Add gir1.2-gspell-1 to dependencies.
-    - Make the various hyphenation packages alternatives instead of installing
-      them all when a user invokes "--install-suggests".
-    - Improve short and long descriptions.
-  * Update debian/copyright.
-
- -- Steven Pusser <stevep@mxlinux.org>  Mon, 06 Apr 2020 08:32:31 -0700
-
-foliate (1.5.3-0.1~mx19+1) mx; urgency=medium
-
-  * New upstream release:
-    - Improved Wiktionary lookup, now with links and example sentences.
-    - Improved popover footnote extraction and formatting.
-    - Added option to export annotations to BibTeX (#130).
-    - Foliate no longer bundles cheerio.
-
- -- Steven Pusser <stevep@mxlinux.org>  Thu, 25 Jul 2019 10:31:10 -0700
-
-foliate (1.5.2-0.1~mx19+1) mx; urgency=medium
-
-  * New upstream release:
-    - Fixed table of contents navigation not working with some books.
-    - Fixed not being able to zoom images with Kindle books.
-    - Fixed not being able to open books with .epub3 filename extension.
-    - Fixed temporary directory not being cleaned after closing.
-
- -- Steven Pusser <stevep@mxlinux.org>  Fri, 19 Jul 2019 11:15:18 -0700
-
-foliate (1.5.1-0.2~mx19+1) mx; urgency=medium
-
-  * Per the developer, replace libwebkit2gtk-4.0-37 dependency with
-    gir1.2-webkit2-4.0.
-
- -- Steven Pusser <stevep@mxlinux.org>  Thu, 18 Jul 2019 17:01:26 -0700
-
-foliate (1.5.1-0.1~obs) obs; urgency=medium
-
-  * New upstream release:
-    - updated translations.
-    - fix broken F9 key function.
-
- -- Steven Pusser <stevep@mxlinux.org>  Wed, 17 Jul 2019 19:12:10 -0700
-
-foliate (1.5.0-0.1~mx17+1) mx; urgency=medium
-
-  * New upstream release:
-    - adds support for mobi and azw3 ebook formats.
-    - adds support for text-to-speech.
-  * Add python (>= 2.7) | python3 (>= 3.4) to depends.
-
- -- Steven Pusser <stevep@mxlinux.org>  Mon, 15 Jul 2019 13:52:57 -0700
-
-foliate (1.4.0-0.2~obs) obs; urgency=medium
-
-  * debian/control: add gjs (>= 1.52), libglib2.0-dev, libglib2.0-bin, and
-    desktop-file-utils to build-deps.
-
- -- Steven Pusser <stevep@mxlinux.org>  Mon, 15 Jul 2019 12:59:03 -0700
-
-foliate (1.4.0-0.1~mx19+1) mx; urgency=low
-
-  * Initial packaging.
-  * For Buster build, add Build-Conflicts for appstream-util, the test fails.
-
- -- Steven Pusser <stevep@mxlinux.org>  Wed, 10 Jul 2019 14:29:17 -0700
+ -- Jonathan Carter <jcc@debian.org>  Thu, 24 Oct 2019 12:17:00 +0000

@@ -18,39 +18,38 @@ Thai_Firefox
    <cs>Thai localisation of Firefox</cs>
    <da>Thai oversættelse af Firefox</da>
    <de>Thailändische Lokalisierung von Firefox</de>
-   <el>Ταϊλάνδης εντοπισμός του Firefox</el>
+   <el>Ταϊλανδέζικα για το Firefox</el>
    <en>Thai localisation of Firefox</en>
    <es>Localización Tailandesa de Firefox</es>
    <et>Thai localisation of Firefox</et>
    <eu>Thai localisation of Firefox</eu>
    <fa>Thai localisation of Firefox</fa>
    <fil_PH>Thai localisation of Firefox</fil_PH>
-   <fi>Thai localisation of Firefox</fi>
+   <fi>Thaimaalainen Firefox-kotoistus</fi>
    <fr>Localisation thai pour Firefox</fr>
    <he_IL>Thai localisation of Firefox</he_IL>
-   <hi>Thai localisation of Firefox</hi>
+   <hi>फायरफॉक्स का थाई संस्करण</hi>
    <hr>Thai localisation of Firefox</hr>
    <hu>Thai localisation of Firefox</hu>
    <id>Thai localisation of Firefox</id>
    <is>Thai localisation of Firefox</is>
    <it>Localizzazione tailandese di Firefox</it>
-   <ja_JP>Thai localisation of Firefox</ja_JP>
-   <ja>Thai localisation of Firefox</ja>
+   <ja>Firefox のタイ語版ローカライズ</ja>
    <kk>Thai localisation of Firefox</kk>
    <ko>Thai localisation of Firefox</ko>
    <lt>Thai localisation of Firefox</lt>
    <mk>Thai localisation of Firefox</mk>
    <mr>Thai localisation of Firefox</mr>
-   <nb>Thai localisation of Firefox</nb>
+   <nb>Thai lokaltilpassing av Firefox</nb>
    <nl>Thaise lokalisatie van Firefox</nl>
    <pl>Tajska lokalizacja przeglądarki Firefox</pl>
-   <pt_BR>Tailandês Localização para Firefox</pt_BR>
+   <pt_BR>Tailandês Localização para o Firefox</pt_BR>
    <pt>Tailandês Localização para Firefox</pt>
    <ro>Thai localisation of Firefox</ro>
    <ru>Тайская локализация Firefox</ru>
    <sk>Thai localisation of Firefox</sk>
-   <sl>Thai localisation of Firefox</sl>
-   <sq>Thai localisation of Firefox</sq>
+   <sl>Tajske krajevne nastavitve za Firefox</sl>
+   <sq>Përkthimi i Firefox-it në tajlandisht </sq>
    <sr>Thai localisation of Firefox</sr>
    <sv>Thailändsk lokalisering av Firefox</sv>
    <tr>Firefox'un Tayca yerelleştirmesi</tr>

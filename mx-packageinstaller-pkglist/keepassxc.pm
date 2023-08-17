@@ -34,7 +34,6 @@ KeePassXC
    <id>KeePassXC is a free/open-source password manager/safe</id>
    <is>KeePassXC is a free/open-source password manager/safe</is>
    <it>KeePassXC è un gestore di password free/open-source</it>
-   <ja_JP>KeePassXC is a free/open-source password manager/safe</ja_JP>
    <ja>KeePassXC is a free/open-source password manager/safe</ja>
    <kk>KeePassXC is a free/open-source password manager/safe</kk>
    <ko>KeePassXC is a free/open-source password manager/safe</ko>

@@ -18,7 +18,7 @@ LXDE
    <cs>basic install of LXDE</cs>
    <da>grundlæggende installation af LXDE</da>
    <de>Grundinstallation von LXDE</de>
-   <el>βασική εγκατάσταση του LXDE</el>
+   <el>Βασική εγκατάσταση του LXDE</el>
    <en>basic install of LXDE</en>
    <es>Instalación mínima de LXDE</es>
    <et>basic install of LXDE</et>
@@ -28,29 +28,28 @@ LXDE
    <fi>LXDE-työpöydän perusasennus</fi>
    <fr>Installation de base du bureau LXDE</fr>
    <he_IL>basic install of LXDE</he_IL>
-   <hi>basic install of LXDE</hi>
+   <hi>एलएक्सडीई का सामान्य इंस्टॉल</hi>
    <hr>basic install of LXDE</hr>
    <hu>basic install of LXDE</hu>
    <id>basic install of LXDE</id>
    <is>basic install of LXDE</is>
    <it>installazione base di LXDE</it>
-   <ja_JP>basic install of LXDE</ja_JP>
-   <ja>basic install of LXDE</ja>
+   <ja>LXDE の基本的なインストール</ja>
    <kk>basic install of LXDE</kk>
    <ko>basic install of LXDE</ko>
    <lt>basic install of LXDE</lt>
    <mk>basic install of LXDE</mk>
    <mr>basic install of LXDE</mr>
-   <nb>basic install of LXDE</nb>
+   <nb>grunnleggende installasjon av LXDE</nb>
    <nl>basisinstallatie van LXDE</nl>
    <pl>podstawowa instalacja LXDE</pl>
-   <pt_BR>Instalação básica do Ambiente de Trabalho LXDE</pt_BR>
+   <pt_BR>Instalação Básica do Ambiente de Trabalho LXDE</pt_BR>
    <pt>Instalação básica do Ambiente de Trabalho LXDE</pt>
    <ro>basic install of LXDE</ro>
    <ru>Базовая установка LXDE</ru>
    <sk>basic install of LXDE</sk>
    <sl>Osnovna namestitev LXDE</sl>
-   <sq>basic install of LXDE</sq>
+   <sq>instalim elementar i LXDE-së</sq>
    <sr>basic install of LXDE</sr>
    <sv>enkel installation av LXDE</sv>
    <tr>LXDE temel kurulumu</tr>
@@ -80,7 +79,6 @@ lxde-icon-theme
 lxinput
 lxlauncher
 lxtask
-lxmusic
 lxpanel
 lxpolkit
 obconf
@@ -102,7 +100,6 @@ lxde-icon-theme
 lxinput
 lxlauncher
 lxtask
-lxmusic
 lxpanel
 lxpolkit
 </uninstall_package_names>

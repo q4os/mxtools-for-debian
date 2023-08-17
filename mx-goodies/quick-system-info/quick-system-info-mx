@@ -59,7 +59,7 @@ done
 }
 
 run_report(){
-
+    . /etc/lsb-release
     local snapshot_created=""
     if [ -e "/etc/snapshot_created" ]; then
         snapshot_created="Snapshot created on: "$(cat /etc/snapshot_created)
@@ -67,39 +67,28 @@ run_report(){
     local inxi_color="$(( echo VIRT_TERM_COLOR_SCHEME=10;
                           grep -sh '^VIRT_TERM_COLOR_SCHEME=' /etc/inxi.conf ~/.config/inxi.conf) | \
                           sed 's/^VIRT_TERM_COLOR_SCHEME=//' | tail -1)"
-    local ansi='\x1b\[[0-9;]+[mK]'
-    local host_filter="^(.+Host:(${ansi}|[[:space:]])+)([[:alnum:].-]+)"
-    local uuid_filter="[[:xdigit:]]{8}-([[:xdigit:]]{4}-){3}[[:xdigit:]]{12}"
     local video_tweaks=/live/config/video-tweaks
 	if [ "$GUI" == "true" ]; then
 		inxi_color="0"
 	fi
     REPORT=$(
-    echo ""
-    echo "[code]"
     [ -n "$snapshot_created" ] && echo $snapshot_created
-    inxi -Fxxxrza -c$inxi_color | \
-    sed -r -e "/Host:/{s/${host_filter}(.*)/\1<filter>\4/}
-               /Kernel:/s/$UNAMER/$UNAMER${UNAMEV:+ \[$UNAMEV\]}/
-               s/${uuid_filter}/<filter>/g
-               s/(Shell[^:]*):[^:]*default:/\1:/
-               t qsi
-               s/(Shell[^q]+)quick-system-in\b/\1bash/
-               :qsi
-               s/quick-system-in\b/quick-system-info-mx/"
+    if [ -n "$(inxi --help |grep filter-all)" ]; then
+    	filters="--filter-all"
+    else
+    	filters="--filter --filter-label --filter-uuid"
+    fi
+   	inxi -Fxxxra $filters -c$inxi_color | \
+    sed -r -e "/Kernel:/s/$UNAMER/$UNAMER${UNAMEV:+ \[$UNAMEV\]}/"
     local BM=$(test -d /sys/firmware/efi && echo "UEFI" || echo "BIOS (legacy, CSM, MBR)")
     echo "Boot Mode: $BM"
     local SB=$((mokutil --sb-state || bootctl --no-variables status) 2>/dev/null | sed -nr 's/^\s*Secure\s?Boot:?/SecureBoot/p')
     [[ -n "$SB" &&  -z "${SB//*enabled*/}" ]] && echo "$SB"
     [ -r $video_tweaks ] && echo 'Video Tweaks:' && cat $video_tweaks 2>/dev/null
-    echo "[/code]"
-    echo ""
     ) 
-    if [ "$GUI" == "true" ]; then
-		echo "$REPORT"
-		exit 0
-	fi
-    echo "$REPORT" |tee >(
+    echo "$REPORT"
+    [ "$GUI" == "true" ] && exit 0
+    echo "[code]$REPORT[/code]" | (
     (
     sed -r 's/\x1b\[([0-9]{1,2}(;[0-9]{1,2})?)?m//g';
     ) | \

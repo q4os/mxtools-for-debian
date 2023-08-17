@@ -1,0 +1,76 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the mx-checkaptgpg package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+# Translators:
+# Green <usergreen@users.osdn.me>, 2023
+# 
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: mx-checkaptgpg\n"
+"Report-Msgid-Bugs-To: https://forum.mxlinux.org/viewforum.php?f=96\n"
+"POT-Creation-Date: 2023-05-24 13:31+0200\n"
+"PO-Revision-Date: 2023-05-24 14:42+0000\n"
+"Last-Translator: Green <usergreen@users.osdn.me>, 2023\n"
+"Language-Team: Japanese (https://app.transifex.com/anticapitalista/teams/10162/ja/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: ja\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#. TRANSLATORS:
+#. The desktop entry "Name" will be displayed within the menu.
+msgid "MX Fix GPG keys"
+msgstr "MX GPG キー修復"
+
+#. TRANSLATORS:
+#. The desktop entry "Comment" will be shown within the menu.
+msgid "Check and install missing apt GPG keys"
+msgstr "APT GPG キーのチェック／インストールを行います"
+
+#. TRANSLATORS:
+#. The desktop entry "GenericName" will be shown within the menu.
+msgid "Check for and install missing apt GPG keys"
+msgstr "必要な APT GPG キーのチェック／インストール"
+
+#. TRANSLATORS:
+#. Keywords to search in the menu. Hint: Add translated keywords to existing.
+#. apt=the debian package manager; fix=repair; check=verify; gpg=the signing
+#. and verfication tool; keys=the public signing keys
+msgid "apt;fix;check;gpg;keys;"
+msgstr "apt;fix;修復;修正;復旧;check;チェック;確認;gpg;keys;キー;鍵;"
+
+#. TRANSLATORS:
+#. The GPG signature of the repository release file was successfully verified.
+msgid "Good GPG signature found."
+msgstr "正当な GPG 署名が見つかりました。"
+
+#. TRANSLATORS:
+#. The missing public GPG signing keys could not be found on any key server.
+#. Keys not found on keyserver: 0xABCDEFGH12345678
+msgid "Keys not found on keyserver:"
+msgstr "次のキーサーバーにはキーが見つかりません："
+
+msgid "Press 'H' for online help, press any other key to close this window."
+msgstr "オンラインヘルプを表示するには H キーを押します。ウィンドウを閉じるにはそれ以外のキーを押してください。"
+
+msgid "Please wait while the link '%s' opens ..."
+msgstr "リンク先の '%s' が開くまでお待ちください ..."
+
+msgid "Press any key to close this window."
+msgstr "任意のキーを押せば、ウィンドウが閉じます。"
+
+#. TRANSLATORS:
+#. The GPG signature of the signed repository release file is verified:
+#. "Checking mxrepo.com_mx_repo_dists_bookworm_InRelease"
+msgid "Checking"
+msgstr "チェック中です"
+
+#. TRANSLATORS:
+#. The user must run this command as 'root'.
+#. This command needs 'root' privileges to be executed.
+msgid "This command needs %s privileges to be executed.\\n"
+msgstr "このコマンドを実行するには %s 権限が必要です。\\n"

@@ -25,35 +25,34 @@ Tsonga_Libreoffice
    <eu>Tsonga Language Meta-Package for LibreOffice</eu>
    <fa>Tsonga Language Meta-Package for LibreOffice</fa>
    <fil_PH>Tsonga Language Meta-Package for LibreOffice</fil_PH>
-   <fi>Tsonga Language Meta-Package for LibreOffice</fi>
-   <fr>Tsonga Language Meta-Package for LibreOffice</fr>
+   <fi>Tsongankielinen kielipaketti LibreOffice:lle</fi>
+   <fr>Méta-Paquet en langue Tsonga pour LibreOffice</fr>
    <he_IL>Tsonga Language Meta-Package for LibreOffice</he_IL>
-   <hi>Tsonga Language Meta-Package for LibreOffice</hi>
+   <hi>लिब्रे-ऑफिस हेतु सोंगा भाषा मेटा-पैकेज</hi>
    <hr>Tsonga Language Meta-Package for LibreOffice</hr>
    <hu>Tsonga Language Meta-Package for LibreOffice</hu>
    <id>Tsonga Language Meta-Package for LibreOffice</id>
    <is>Tsonga Language Meta-Package for LibreOffice</is>
-   <it>Tsonga Language Meta-Package for LibreOffice</it>
-   <ja_JP>Tsonga Language Meta-Package for LibreOffice</ja_JP>
-   <ja>Tsonga Language Meta-Package for LibreOffice</ja>
+   <it>Meta-pacchetto della lingua tsonga per LibreOffice</it>
+   <ja>LibreOffice 用のツォンガ語メタパッケージ</ja>
    <kk>Tsonga Language Meta-Package for LibreOffice</kk>
    <ko>Tsonga Language Meta-Package for LibreOffice</ko>
    <lt>Tsonga Language Meta-Package for LibreOffice</lt>
    <mk>Tsonga Language Meta-Package for LibreOffice</mk>
    <mr>Tsonga Language Meta-Package for LibreOffice</mr>
-   <nb>Tsonga Language Meta-Package for LibreOffice</nb>
-   <nl>Tsonga Language Meta-Package for LibreOffice</nl>
-   <pl>Tsonga Language Meta-Package for LibreOffice</pl>
-   <pt_BR>Tsonga Language Meta-Package for LibreOffice</pt_BR>
+   <nb>Tsonga språkpakke for LibreOffice</nb>
+   <nl>Tsonga Taal Meta-Pakket voor LibreOffice</nl>
+   <pl>Meta-pakiet języka Tsonga dla LibreOffice</pl>
+   <pt_BR>Tsonga Pacote de Idioma para o LibreOffice</pt_BR>
    <pt>Tsonga Meta-Pacote de Idioma para LibreOffice</pt>
    <ro>Tsonga Language Meta-Package for LibreOffice</ro>
-   <ru>Tsonga Language Meta-Package for LibreOffice</ru>
+   <ru>Мета-пакет языка тсонга для LibreOffice</ru>
    <sk>Tsonga Language Meta-Package for LibreOffice</sk>
    <sl>Tsongški jezikovni meta-paket za LibreOffice</sl>
-   <sq>Tsonga Language Meta-Package for LibreOffice</sq>
+   <sq>Meta-Paketë gjuhësore në conga për LibreOffice-in</sq>
    <sr>Tsonga Language Meta-Package for LibreOffice</sr>
    <sv>Tsonga Språk Meta-Paket för LibreOffice</sv>
-   <tr>Tsonga Language Meta-Package for LibreOffice</tr>
+   <tr>LibreOffice için Tsonga Dili Üst-Paketi</tr>
    <uk>Tsonga Language Meta-Package for LibreOffice</uk>
    <vi>Tsonga Language Meta-Package for LibreOffice</vi>
    <zh_CN>Tsonga Language Meta-Package for LibreOffice</zh_CN>

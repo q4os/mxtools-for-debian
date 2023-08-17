@@ -42,28 +42,26 @@ class MainWindow : public QDialog
 {
     Q_OBJECT
 
-protected:
-    QProcess *proc {};
-
 public:
     explicit MainWindow(QWidget *parent = nullptr);
-    ~MainWindow();
+    ~MainWindow() override;
 
     Result runCmd(const QString &cmd);
-    QString output;
 
-    QStringList listCards();
     QString getDefault();
+    QStringList listCards();
     void setConnections();
 
 private slots:
-    void pushApply_clicked();
-    void pushAbout_clicked();
     static void pushHelp_clicked();
+    void pushAbout_clicked();
+    void pushApply_clicked();
     void pushTest_clicked();
 
 private:
     Ui::MainWindow *ui;
+    QProcess *proc {};
+    QString output;
 };
 
 #endif // MXSNAPSHOT_H

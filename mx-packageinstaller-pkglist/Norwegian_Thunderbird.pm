@@ -18,39 +18,38 @@ Norwegian_Thunderbird
    <cs>Norwegian localisation of Thunderbird</cs>
    <da>Norsk oversættelse af Thunderbird</da>
    <de>Norwegische Lokalisierung von Thunderbird</de>
-   <el>Νορβηγική εντοπισμός του Thunderbird</el>
+   <el>Νορβηγικά για το Thunderbird</el>
    <en>Norwegian localisation of Thunderbird</en>
-   <es>Localización Noruega de Thunderbird</es>
+   <es>Localización Noruego de Thunderbird</es>
    <et>Norwegian localisation of Thunderbird</et>
    <eu>Norwegian localisation of Thunderbird</eu>
    <fa>Norwegian localisation of Thunderbird</fa>
    <fil_PH>Norwegian localisation of Thunderbird</fil_PH>
-   <fi>Norwegian localisation of Thunderbird</fi>
+   <fi>Norjalainen Thunderbird-kotoistus</fi>
    <fr>Localisation norvégienne pour Thunderbird</fr>
    <he_IL>Norwegian localisation of Thunderbird</he_IL>
-   <hi>Norwegian localisation of Thunderbird</hi>
+   <hi>थंडरबर्ड का नार्वेजियन संस्करण</hi>
    <hr>Norwegian localisation of Thunderbird</hr>
    <hu>Norwegian localisation of Thunderbird</hu>
    <id>Norwegian localisation of Thunderbird</id>
    <is>Norwegian localisation of Thunderbird</is>
    <it>Localizzazione norvegese di Thunderbird</it>
-   <ja_JP>Norwegian localisation of Thunderbird</ja_JP>
-   <ja>Norwegian localisation of Thunderbird</ja>
+   <ja>Thunderbird のノルウェー語パック</ja>
    <kk>Norwegian localisation of Thunderbird</kk>
    <ko>Norwegian localisation of Thunderbird</ko>
    <lt>Norwegian localisation of Thunderbird</lt>
    <mk>Norwegian localisation of Thunderbird</mk>
    <mr>Norwegian localisation of Thunderbird</mr>
-   <nb>Norwegian localisation of Thunderbird</nb>
+   <nb>Norsk bokmålsk lokaltilpassing av Thunderbird</nb>
    <nl>Noorse lokalisatie van Thunderbird</nl>
    <pl>Norweska lokalizacja Thunderbirda</pl>
-   <pt_BR>Norueguês Localização para Thunderbird</pt_BR>
+   <pt_BR>Norueguês Localização para o Thunderbird</pt_BR>
    <pt>Norueguês Localização para Thunderbird</pt>
    <ro>Norwegian localisation of Thunderbird</ro>
-   <ru>Norwegian localisation of Thunderbird</ru>
+   <ru>Норвежский перевод для Thunderbird</ru>
    <sk>Norwegian localisation of Thunderbird</sk>
-   <sl>Norwegian localisation of Thunderbird</sl>
-   <sq>Norwegian localisation of Thunderbird</sq>
+   <sl>Norveške krajevne nastavitve za Thunderbird</sl>
+   <sq>Përkthimi i Thunderbird-it në norvegjisht</sq>
    <sr>Norwegian localisation of Thunderbird</sr>
    <sv>Norsk lokalisering av Thunderbird</sv>
    <tr>Thunderbird'ün Norveççe yerelleştirmesi</tr>

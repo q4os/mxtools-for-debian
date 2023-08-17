@@ -6,7 +6,7 @@
  * Authors: Dolphin Oracle, AK-47, Adrian
  *          MX Linux <http://mxlinux.org>
  *
- * This file is part of mx-welcome.
+ * This file is part of Quick System Info.
  *
  * mx-welcome is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -28,6 +28,7 @@
 #include <QLibraryInfo>
 #include <QLocale>
 #include <QTranslator>
+#include <QMessageBox>
 
 #include "mainwindow.h"
 #include <unistd.h>

@@ -490,21 +490,6 @@ void MainWindow::setColor(QWidget *widget, const QColor &color)
     }
 }
 
-void MainWindow::cmdStart() { setCursor(QCursor(Qt::BusyCursor)); }
-
-void MainWindow::cmdDone()
-{
-    //   ui->progressBar->setValue(ui->progressBar->maximum());
-    setCursor(QCursor(Qt::ArrowCursor));
-    // cmd->disconnect();
-}
-
-void MainWindow::setConnections()
-{
-    //    connect(cmd, &Cmd::started, this, &MainWindow::cmdStart);
-    //    connect(cmd, &Cmd::finished, this, &MainWindow::cmdDone);
-}
-
 void MainWindow::on_pushAbout_clicked()
 {
     this->hide();
@@ -566,17 +551,11 @@ void MainWindow::on_pushHelp_clicked()
 }
 
 void MainWindow::on_pushDefaultColor_clicked() { pickColor(ui->widgetDefaultColor); }
-
 void MainWindow::on_pushColor0_clicked() { pickColor(ui->widgetColor0); }
-
 void MainWindow::on_pushColor1_clicked() { pickColor(ui->widgetColor1); }
-
 void MainWindow::on_pushColor2_clicked() { pickColor(ui->widgetColor2); }
-
 void MainWindow::on_pushColor3_clicked() { pickColor(ui->widgetColor3); }
-
 void MainWindow::on_pushColor4_clicked() { pickColor(ui->widgetColor4); }
-
 void MainWindow::on_pushColor5_clicked() { pickColor(ui->widgetColor5); }
 void MainWindow::on_pushColor6_clicked() { pickColor(ui->widgetColor6); }
 void MainWindow::on_pushColor7_clicked() { pickColor(ui->widgetColor7); }

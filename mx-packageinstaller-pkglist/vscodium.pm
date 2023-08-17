@@ -34,7 +34,6 @@ vscodium
    <id>de-Microsofted Visual Studio Code</id>
    <is>de-Microsofted Visual Studio Code</is>
    <it>de-Microsofted Visual Studio Code</it>
-   <ja_JP>de-Microsofted Visual Studio Code</ja_JP>
    <ja>de-Microsofted Visual Studio Code</ja>
    <kk>de-Microsofted Visual Studio Code</kk>
    <ko>de-Microsofted Visual Studio Code</ko>

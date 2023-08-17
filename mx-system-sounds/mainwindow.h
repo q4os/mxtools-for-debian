@@ -22,7 +22,6 @@
  * along with mx-system-sounds.  If not, see <http://www.gnu.org/licenses/>.
  **********************************************************************/
 
-
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
@@ -35,7 +34,8 @@ struct Output {
     QString str;
 };
 
-namespace Ui {
+namespace Ui
+{
 class MainWindow;
 }
 
@@ -44,26 +44,16 @@ class MainWindow : public QDialog
     Q_OBJECT
 
 public:
-    explicit MainWindow(QWidget *parent = 0);
-    ~MainWindow();
+    explicit MainWindow(QWidget *parent = nullptr);
+    ~MainWindow() override;
 
     Output runCmd(const QString &cmd);
-    QString currentlogin;
-    QString currentlogout;
-    QString customloginsound;
-    QString customlogoutsound;
-    QString defualtloginsound;
-    QString defualtlogoutsound;
-    bool loginreset;
-    bool logoutreset;
-    bool theme_login_flag;
-    bool theme_logout_flag;
     void setup();
 
 private slots:
+    static void on_buttonHelp_clicked();
     void on_buttonAbout_clicked();
     void on_buttonApply_clicked();
-    void on_buttonHelp_clicked();
     void on_button_login_sound_clicked();
     void on_button_logout_sound_clicked();
     void on_button_play_login_clicked();
@@ -78,8 +68,16 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
+    QString currentlogin;
+    QString currentlogout;
+    QString customloginsound;
+    QString customlogoutsound;
+    QString defualtloginsound;
+    QString defualtlogoutsound;
+    bool loginreset {};
+    bool logoutreset {};
+    bool theme_login_flag {};
+    bool theme_logout_flag {};
 };
 
-
 #endif // MXSNAPSHOT_H
-

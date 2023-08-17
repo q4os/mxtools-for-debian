@@ -1,6 +1,7 @@
 mx-tools-desktop_af
 mx-tools-desktop_am
 mx-tools-desktop_ar
+mx-tools-desktop_ast
 mx-tools-desktop_be
 mx-tools-desktop_bg
 mx-tools-desktop_bn
@@ -44,12 +45,16 @@ mx-tools-desktop_hr
 mx-tools-desktop_ht
 mx-tools-desktop_hu
 mx-tools-desktop_hy
+mx-tools-desktop_hy_AM
+mx-tools-desktop_hye
 mx-tools-desktop_id
+mx-tools-desktop_ie
 mx-tools-desktop_is
 mx-tools-desktop_it
 mx-tools-desktop_ja
 mx-tools-desktop_jv
 mx-tools-desktop_ka
+mx-tools-desktop_kab
 mx-tools-desktop_kk
 mx-tools-desktop_km
 mx-tools-desktop_kn
@@ -74,7 +79,9 @@ mx-tools-desktop_nb_NO
 mx-tools-desktop_ne
 mx-tools-desktop_nl
 mx-tools-desktop_nl_BE
+mx-tools-desktop_nn
 mx-tools-desktop_ny
+mx-tools-desktop_oc
 mx-tools-desktop_or
 mx-tools-desktop_pa
 mx-tools-desktop_pl

@@ -49,9 +49,9 @@
         <translation>Zugriffsrechte für erlaubte Benutzer</translation>
     </message>
     <message>
-        <location filename="../editshare.cpp" line="46"/>
+        <location filename="../editshare.cpp" line="48"/>
         <source>Select directory to share</source>
-        <translation>Wählen Sie Ordner zum Freigeben</translation>
+        <translation>Freigabeordner auswählen</translation>
     </message>
 </context>
 <context>
@@ -86,7 +86,7 @@
     <message>
         <location filename="../mainwindow.ui" line="70"/>
         <source>&amp;Edit</source>
-        <translation>&amp;Editieren</translation>
+        <translation>&amp;Bearbeiten</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="80"/>
@@ -258,7 +258,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="165"/>
         <source>&amp;Deny</source>
-        <translation>&amp;verweigern</translation>
+        <translation>&amp;Verweigern</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="175"/>
@@ -268,7 +268,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="185"/>
         <source>&amp;Full Access</source>
-        <translation>&amp;vollständiger Zugriff</translation>
+        <translation>&amp;Vollständiger Zugriff</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="209"/>
@@ -278,7 +278,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="275"/>
         <source>Your user doesn&apos;t belong to &apos;sambashare&apos; group  if you just installed the app you might need to restart the system first.</source>
-        <translation>Ihr Benutzer gehört nicht zur &apos;sambashare&apos;-Gruppe, wenn Sie die Anwendung gerade erst installiert haben, müssen Sie das System möglicherweise erst neu starten.</translation>
+        <translation>Ihr Benutzer gehört nicht zur &apos;sambashare&apos;-Gruppe, wenn sie die Anwendung gerade erst installiert haben, müssen sie das System möglicherweise erst neustarten.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="285"/>
@@ -298,7 +298,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="308"/>
         <source>&amp;Disable Automatic Samba Startup</source>
-        <translation>&amp;Automatischer Samba-Start deaktivieren</translation>
+        <translation>Automatischen Samba-Start &amp;deaktivieren</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="360"/>
@@ -370,13 +370,13 @@
     <message>
         <location filename="../mainwindow.cpp" line="417"/>
         <source>Matching linux user not found on system, make sure you enter a valid username.</source>
-        <translation>Entsprechender Linux-Benutzer wurde nicht im System gefunden, stellen Sie sicher, dass Sie einen gültigen Benutzernamen eingeben haben.</translation>
+        <translation>Entsprechender Linux-Benutzer wurde nicht im System gefunden, stellen sie sicher, dass sie einen gültigen Benutzernamen eingeben haben.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="422"/>
         <location filename="../mainwindow.cpp" line="458"/>
         <source>Passwords don&apos;t match, please enter again.</source>
-        <translation>Die eingetragenen Passwörter stimmen nicht überein.  Versuchen Sie es bitte noch einmal.</translation>
+        <translation>Die eingetragenen Passwörter stimmen nicht überein.  Versuchen sie es bitte noch einmal.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="428"/>
@@ -402,7 +402,7 @@
         <location filename="../mainwindow.cpp" line="489"/>
         <location filename="../mainwindow.cpp" line="541"/>
         <source>Samba service is not running. Please start Samba before adding or editing shares</source>
-        <translation>Der Samba-Dienst läuft nicht. Bitte starten Sie Samba, bevor Sie Freigaben hinzufügen oder bearbeiten</translation>
+        <translation>Der Samba-Dienst läuft nicht. Bitte starten sie Samba, bevor sie Freigaben hinzufügen oder bearbeiten</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="511"/>

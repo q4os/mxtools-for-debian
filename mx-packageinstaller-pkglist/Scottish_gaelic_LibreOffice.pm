@@ -18,42 +18,41 @@ Scottish_gaelic_Libreoffice
    <cs>Scottish_gaelic Language Meta-Package for LibreOffice</cs>
    <da>Scottish_gaelic Language Meta-Package for LibreOffice</da>
    <de>Schottisch-gälisches Meta-Paket für LibreOffice</de>
-   <el>LibreOffice στα Scottish Gaelic</el>
+   <el>LibreOffice στα Scottish Gaelic </el>
    <en>Scottish_gaelic Language Meta-Package for LibreOffice</en>
    <es>Meta-Paquete de idioma gallego escocés para LibreOffice</es>
    <et>Scottish_gaelic Language Meta-Package for LibreOffice</et>
    <eu>Scottish_gaelic Language Meta-Package for LibreOffice</eu>
    <fa>Scottish_gaelic Language Meta-Package for LibreOffice</fa>
    <fil_PH>Scottish_gaelic Language Meta-Package for LibreOffice</fil_PH>
-   <fi>Scottish_gaelic Language Meta-Package for LibreOffice</fi>
-   <fr>Scottish_gaelic Language Meta-Package for LibreOffice</fr>
+   <fi>Skotlantilais-gaelilainen kielipaketti LibreOffice:lle</fi>
+   <fr>Méta-Paquet en langue gaélique écossaise pour LibreOffice</fr>
    <he_IL>Scottish_gaelic Language Meta-Package for LibreOffice</he_IL>
-   <hi>Scottish_gaelic Language Meta-Package for LibreOffice</hi>
+   <hi>लिब्रे-ऑफिस हेतु स्कॉटिश_गेलिक भाषा मेटा-पैकेज</hi>
    <hr>Scottish_gaelic Language Meta-Package for LibreOffice</hr>
    <hu>Scottish_gaelic Language Meta-Package for LibreOffice</hu>
    <id>Scottish_gaelic Language Meta-Package for LibreOffice</id>
    <is>Scottish_gaelic Language Meta-Package for LibreOffice</is>
-   <it>Scottish_gaelic Language Meta-Package for LibreOffice</it>
-   <ja_JP>Scottish_gaelic Language Meta-Package for LibreOffice</ja_JP>
-   <ja>Scottish_gaelic Language Meta-Package for LibreOffice</ja>
+   <it>Meta-pacchetto della lingua gaelica scozzese per LibreOffice</it>
+   <ja>LibreOffice用の高地スコットランド・ゲール語メタパッケージ</ja>
    <kk>Scottish_gaelic Language Meta-Package for LibreOffice</kk>
    <ko>Scottish_gaelic Language Meta-Package for LibreOffice</ko>
    <lt>Scottish_gaelic Language Meta-Package for LibreOffice</lt>
    <mk>Scottish_gaelic Language Meta-Package for LibreOffice</mk>
    <mr>Scottish_gaelic Language Meta-Package for LibreOffice</mr>
-   <nb>Scottish_gaelic Language Meta-Package for LibreOffice</nb>
-   <nl>Scottish_gaelic Language Meta-Package for LibreOffice</nl>
-   <pl>Scottish_gaelic Language Meta-Package for LibreOffice</pl>
-   <pt_BR>Scottish_gaelic Language Meta-Package for LibreOffice</pt_BR>
+   <nb>Skotsk-gælisk språkpakke for LibreOffice</nb>
+   <nl>Schots-Gaelic Taal Meta-Pakket voor LibreOffice</nl>
+   <pl>Meta-pakiet języka gaelickiego szkockiego dla LibreOffice</pl>
+   <pt_BR>Gaélico Escocês Pacote de Idioma para o LibreOffice</pt_BR>
    <pt>Gaélico_escocês Meta-Pacote de Idioma para LibreOffice</pt>
    <ro>Scottish_gaelic Language Meta-Package for LibreOffice</ro>
-   <ru>Scottish_gaelic Language Meta-Package for LibreOffice</ru>
+   <ru>Мета-пакет шотландского языка для LibreOffice</ru>
    <sk>Scottish_gaelic Language Meta-Package for LibreOffice</sk>
    <sl>Škotski gelik jezikovni meta-paket za LibreOffice</sl>
-   <sq>Scottish_gaelic Language Meta-Package for LibreOffice</sq>
+   <sq>Meta-Paketë gjuhësire në skoceze gaelike për LibreOffice</sq>
    <sr>Scottish_gaelic Language Meta-Package for LibreOffice</sr>
    <sv>Skottsk_gaelic Språk Meta-Paket för LibreOffice</sv>
-   <tr>Scottish_gaelic Language Meta-Package for LibreOffice</tr>
+   <tr>LibreOffice için İskoç Dili Üst-Paketi</tr>
    <uk>Scottish_gaelic Language Meta-Package for LibreOffice</uk>
    <vi>Scottish_gaelic Language Meta-Package for LibreOffice</vi>
    <zh_CN>Scottish_gaelic Language Meta-Package for LibreOffice</zh_CN>

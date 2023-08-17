@@ -18,39 +18,38 @@ Spanish_Firefox
    <cs>Spanish localisation of Firefox</cs>
    <da>Spansk oversættelse af Firefox</da>
    <de>Spanische Lokalisierung von Firefox</de>
-   <el>Ισπανικός εντοπισμός του Firefox</el>
+   <el>Ισπανικά για το Firefox</el>
    <en>Spanish localisation of Firefox</en>
-   <es>Localización española para Firefox</es>
+   <es>Localización Español de Firefox</es>
    <et>Spanish localisation of Firefox</et>
    <eu>Spanish localisation of Firefox</eu>
    <fa>Spanish localisation of Firefox</fa>
    <fil_PH>Spanish localisation of Firefox</fil_PH>
-   <fi>Spanish localisation of Firefox</fi>
+   <fi>Espanjalainen Firefox-kotoistus</fi>
    <fr>Localisation espagnole pour Firefox</fr>
    <he_IL>Spanish localisation of Firefox</he_IL>
-   <hi>Spanish localisation of Firefox</hi>
+   <hi>फायरफॉक्स का स्पेनिश संस्करण</hi>
    <hr>Spanish localisation of Firefox</hr>
    <hu>Spanish localisation of Firefox</hu>
    <id>Spanish localisation of Firefox</id>
    <is>Spanish localisation of Firefox</is>
-   <it>Localizzazione spagnola di Firefox</it>
-   <ja_JP>Spanish localisation of Firefox</ja_JP>
-   <ja>Spanish localisation of Firefox</ja>
+   <it>Localizzazione spagnola di Firefox </it>
+   <ja>Firefox のスペイン語パック</ja>
    <kk>Spanish localisation of Firefox</kk>
    <ko>Spanish localisation of Firefox</ko>
    <lt>Spanish localisation of Firefox</lt>
    <mk>Spanish localisation of Firefox</mk>
    <mr>Spanish localisation of Firefox</mr>
-   <nb>Spanish localisation of Firefox</nb>
+   <nb>Spansk lokaltilpassing av Firefox</nb>
    <nl>Spaanse lokalisatie van Firefox</nl>
    <pl>Hiszpańska lokalizacja przeglądarki Firefox</pl>
-   <pt_BR>Castelhano Localização para Firefox</pt_BR>
+   <pt_BR>Espanhol Localização para o Firefox</pt_BR>
    <pt>Castelhano Localização para Firefox</pt>
    <ro>Spanish localisation of Firefox</ro>
    <ru>Испанская локализация Firefox</ru>
    <sk>Spanish localisation of Firefox</sk>
-   <sl>Spanish localisation of Firefox</sl>
-   <sq>Spanish localisation of Firefox</sq>
+   <sl>Španske krajevne nastavitve za Firefox</sl>
+   <sq>Përkthimi i Firefox-it në spanjisht</sq>
    <sr>Spanish localisation of Firefox</sr>
    <sv>Spansk lokalisering av Firefox </sv>
    <tr>Firefox'un İspanyolca yerelleştirmesi</tr>

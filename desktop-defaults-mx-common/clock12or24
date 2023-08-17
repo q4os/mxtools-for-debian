@@ -21,11 +21,11 @@ if [ -e "/etc/skel/.config/xfce4/panel/datetime-1.rc" ]; then
 	sed -i -r s/%H/%l/ /etc/skel/.config/xfce4/panel/datetime-1.rc 
 fi
 #these are the orage clock plugin settings
-if [ -e "/home/demo/.config/xfce4/panel/xfce4-orageclock-plugin-1.rc" ]; then
-	sed -i -r s/data0=%H/data0=%l/ /home/demo/.config/xfce4/panel/xfce4-orageclock-plugin-1.rc 
+if [ -e "/home/demo/.config/xfce4/panel/org.xfce.orage.clock-plugin-1.rc" ]; then
+	sed -i -r s/%H/%l/ /home/demo/.config/xfce4/panel/org.xfce.orage.clock-plugin-1.rc
 fi
-if [ -e "/etc/skel/.config/xfce4/panel/xfce4-orageclock-plugin-1.rc" ]; then
-	sed -i -r s/data0=%H/data0=%l/ /etc/skel/.config/xfce4/panel/xfce4-orageclock-plugin-1.rc
+if [ -e "/etc/skel/.config/xfce4/panel/org.xfce.orage.clock-plugin-1.rc" ]; then
+	sed -i -r s/%H/%l/ /etc/skel/.config/xfce4/panel/org.xfce.orage.clock-plugin-1.rc
 fi
 #these are the plasma clock settings
 if [ -e "/usr/bin/kwriteconfig5" ]; then
@@ -44,11 +44,11 @@ if [ -e "/etc/skel/.config/tint2/tint2rc" ]; then
         sed -i -r s/%H/%l/ /home/demo/.config/tint2/tint2rc
 fi
 
-#these next 4 lines are for the xfce4-clock plugin
-#sed -i -r s/%H/%l/ /home/demo/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-panel.xml
-#sed -i -r s/%H/%l/ /etc/skel/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-panel.xml
-#sed -i -r s/%H/%l/ /usr/local/share/appdata/panels/horizontal/xfce4-panel.xml
-#sed -i -r s/%H/%l/ /usr/local/share/appdata/panels/vertical/xfce4-panel.xml
+#these next 2 lines are for the xfce4-clock plugin
+if [ -e "/etc/skel/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-panel.xml" ]; then
+	sed -i -r s/%H/%l/ /home/demo/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-panel.xml
+	sed -i -r s/%H/%l/ /etc/skel/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-panel.xml
+fi
 
 }
 

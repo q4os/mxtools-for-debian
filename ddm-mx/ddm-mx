@@ -22,7 +22,7 @@ source /usr/local/lib/cli-shell-utils/cli-shell-utils.bash
 source gettext.sh
 DEBIAN_VERSION_CODENAME=$(grep VERSION_CODENAME /etc/os-release|cut -d"=" -f2)
 
-VERSION="23.03.01"
+VERSION="23.07.01"
 ME=${0##*/}
 CLI_PROG="ddm-mx"
 LOCK_FILE="/run/lock/$CLI_PROG"
@@ -291,11 +291,15 @@ function install_nvidia {
   USER=$(logname)
   ARCHITECTURE=$(uname -m)
   if [ -z "$FORCEDRIVER" ]; then
-    nvidia-detect-mx | tee -a $LOG
-	DRIVER=$(nvidia-detect-mx $PCIID|grep INSTALL: |tr -d ' ' |cut -d ':' -f2)
+    nvidia-detect-mx $PCIID
+    nvidia_detect_exit_code=$?
+	DRIVER=$(nvidia-detect-mx $PCIID | tee -a $LOG |grep INSTALL: |tr -d ' ' |cut -d ':' -f2)
   fi
   
-  UNSUPPORTED_LEGACY=$(nvidia-detect-mx $PCIID| grep -e173.14 -e96.43 -e71.86 -e304 -e340)
+  UNSUPPORTED_LEGACY=""
+  if [ -z "$DRIVER" ]; then
+   UNSUPPORTED_LEGACY=$(nvidia-detect-mx $PCIID| grep -e173.14 -e96.43 -e71.86 -e304 -e340)
+  fi
   
   # Testing
   if $TEST; then
@@ -314,6 +318,10 @@ function install_nvidia {
     echo "test for $DRIVER"
   fi
   
+  if [ $nvidia_detect_exit_code = 3 ]; then
+  	nvidia_driver_override
+  fi
+  	
   check_source_install
   check_cand
   
@@ -843,8 +851,7 @@ check_optimus(){
                 echo $(eval_gettext 'Use "nvidia-run-mx" followed by your application command to use the nvidia graphics') | tee -a $LOG
                 echo ""
                 printf "$(eval_gettext "If you want to force the older bumblebee optimus drivers,\n quit and restart with sudo ddm-mx -i nvidia -f bumblebee-nvidia")" | tee -a $LOG
-                echo ""
-                DRIVER='nvidia-driver'    
+                echo ""    
             else
                 echo $(eval_gettext "You need to use the bumblebee-nvidia driver.") | tee -a $LOG
                 # For nvidia-driver versions below 450 we must still use Bumblebee
@@ -1086,6 +1093,26 @@ remove_20_nvidiaconf(){
 	if [ -e /etc/X11/xorg.conf.d/20-nvidia.conf ]; then
 		rm --force /etc/X11/xorg.conf.d/20-nvidia.conf
 	fi
+}
+
+nvidia_driver_override(){
+	echo ""
+	## Ask to try installing the latest nvidia driver if graphics card is unknown
+    echo $(eval_gettext "Try latest nvidia-driver?") | tee -a $LOG
+    echo "" | tee -a $LOG
+    echo 1: $(eval_gettext "Yes") | tee -a $LOG
+    echo 2: $(eval_gettext "No") | tee -a $LOG
+    echo "" | tee -a $LOG
+    echo $(eval_gettext "Enter Number of selection") | tee -a $LOG
+    read -n 1 -e x
+
+    case $x in
+       1) echo "" | tee -a $LOG
+          DRIVER="nvidia-driver";;
+       2) echo $(eval_gettext "exiting")... | tee -a $LOG && exit 0 ;;
+       *) echo $(eval_gettext "invalid option.")  $(eval_gettext "exiting")... | tee -a $LOG && exit 0;;
+    esac
+    echo ""
 }
 
 main "$@"

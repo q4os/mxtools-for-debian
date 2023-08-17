@@ -46,12 +46,9 @@ class MainWindow : public QDialog
 
 public:
     explicit MainWindow(QWidget *parent = nullptr);
-    ~MainWindow();
+    ~MainWindow() override;
 
     enum Version { Jessie = 8, Stretch, Buster, Bullseye, Bookworm };
-    QList<QStringList> queued_changes;
-    QString listMXurls;
-    QString version;
 
     QStringList readMXRepos();
     static QFileInfoList listAptFiles();
@@ -74,7 +71,7 @@ public:
 
 private slots:
     void cancelOperation();
-    void closeEvent(QCloseEvent *);
+    void closeEvent(QCloseEvent * /*unused*/) override;
     void procDone();
     void procTime();
     void procStart();
@@ -93,17 +90,19 @@ private:
     Ui::MainWindow *ui;
     Cmd *shell;
     QHash<QString, QIcon> flags;
+    QList<QStringList> queued_changes;
     QProgressBar *bar {};
     QProgressDialog *progress {};
     QPushButton *progCancel {};
     QSettings settings;
     QString current_repo;
+    QString listMXurls;
     QStringList repos;
     QTimer timer;
     bool sources_changed {};
 
     static bool checkRepo(const QString &repo);
-    bool downloadFile(const QString &url, QFile &file);
+    bool downloadFile(const QString &url, QFile *file);
 };
 
 #endif // MAINWINDOW_H

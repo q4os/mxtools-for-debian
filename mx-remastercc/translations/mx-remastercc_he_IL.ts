@@ -97,7 +97,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="78"/>
         <source>MX RemasterCC</source>
-        <translation type="unfinished"></translation>
+        <translation>MX RemasterCC</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="98"/>

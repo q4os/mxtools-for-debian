@@ -11,12 +11,12 @@
         <location filename="../mainwindow.cpp" line="148"/>
         <location filename="../mainwindow.cpp" line="156"/>
         <source>MX Select Sound</source>
-        <translation type="unfinished">MX Select Sound</translation>
+        <translation type="unfinished">MX Επιλογή ήχου</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="28"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Your current default sound card is:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Η τρέχουσα προεπιλογή για τη κάρτα ήχου σας είναι:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Η τρέχουσα επιλογή για τη βασική κάρτα ήχου σας είναι:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="64"/>
@@ -76,7 +76,7 @@
     <message>
         <location filename="../mainwindow.ui" line="244"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If your computer has more than one sound card, you can use this application to select the one to be default. &lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Εάν ο υπολογιστής σας διαθέτει περισσότερες από μία κάρτες ήχου, μπορείτε να χρησιμοποιήσετε αυτήν την εφαρμογή για να επιλέξετε μία σαν προεπιλογή.&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Εάν ο υπολογιστής σας διαθέτει περισσότερες από μία κάρτες ήχου, μπορείτε να χρησιμοποιήσετε αυτήν την εφαρμογή για να επιλέξετε τη βασική.&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="290"/>
@@ -97,7 +97,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="128"/>
         <source>About MX Select Sound</source>
-        <translation type="unfinished">Περί του MX Select Sound</translation>
+        <translation type="unfinished">Περί του MX Επιλογή ήχου</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="129"/>
@@ -107,7 +107,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="130"/>
         <source>Program for selecting the default sound card in MX Linux</source>
-        <translation type="unfinished">Πρόγραμμα για την επιλογή προεπιλεγμένης κάρτας ήχου στο MX Linux</translation>
+        <translation type="unfinished">Πρόγραμμα για την επιλογή βασικής κάρτας ήχου στο MX Linux</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="133"/>
@@ -127,29 +127,29 @@
     <message>
         <location filename="../mainwindow.cpp" line="156"/>
         <source>Could not play test sound.</source>
-        <translation type="unfinished">Δεν παίζει ήχος δοκιμής.</translation>
+        <translation type="unfinished">Δεν αναπαράγεται ήχος δοκιμής.</translation>
     </message>
 </context>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../about.cpp" line="43"/>
+        <location filename="../about.cpp" line="40"/>
         <source>License</source>
         <translation type="unfinished">Άδεια</translation>
     </message>
     <message>
-        <location filename="../about.cpp" line="44"/>
-        <location filename="../about.cpp" line="54"/>
+        <location filename="../about.cpp" line="41"/>
+        <location filename="../about.cpp" line="51"/>
         <source>Changelog</source>
         <translation type="unfinished">Αρχείο αλλαγών</translation>
     </message>
     <message>
-        <location filename="../about.cpp" line="45"/>
+        <location filename="../about.cpp" line="42"/>
         <source>Cancel</source>
-        <translation type="unfinished">Ακύρωση</translation>
+        <translation type="unfinished">Άκυρο</translation>
     </message>
     <message>
-        <location filename="../about.cpp" line="67"/>
+        <location filename="../about.cpp" line="64"/>
         <source>&amp;Close</source>
         <translation type="unfinished">&amp;Κλείσιμο</translation>
     </message>
@@ -158,11 +158,11 @@
     <name>mxselectsound</name>
     <message>
         <source>MX Select Sound</source>
-        <translation type="vanished">MX Select Sound</translation>
+        <translation type="vanished">MX Επιλογή ήχου</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Your current default sound card is:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Η τρέχουσα προεπιλογή για τη κάρτα ήχου σας είναι:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Η τρέχουσα επιλογή για τη βασική κάρτα ήχου σας είναι:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Display help </source>
@@ -210,7 +210,7 @@
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If your computer has more than one sound card, you can use this application to select the one to be default. &lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Εάν ο υπολογιστής σας διαθέτει περισσότερες από μία κάρτες ήχου, μπορείτε να χρησιμοποιήσετε αυτήν την εφαρμογή για να επιλέξετε μία σαν προεπιλογή.&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Εάν ο υπολογιστής σας διαθέτει περισσότερες από μία κάρτες ήχου, μπορείτε να χρησιμοποιήσετε αυτήν την εφαρμογή για να επιλέξετε τη βασική.&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Test current sound card</source>
@@ -226,7 +226,7 @@
     </message>
     <message>
         <source>About MX Select Sound</source>
-        <translation type="vanished">Περί του MX Select Sound</translation>
+        <translation type="vanished">Περί του MX Επιλογή ήχου</translation>
     </message>
     <message>
         <source>Version: </source>
@@ -234,7 +234,7 @@
     </message>
     <message>
         <source>Program for selecting the default sound card in MX Linux</source>
-        <translation type="vanished">Πρόγραμμα για την επιλογή προεπιλεγμένης κάρτας ήχου στο MX Linux</translation>
+        <translation type="vanished">Πρόγραμμα για την επιλογή βασικής κάρτας ήχου στο MX Linux</translation>
     </message>
     <message>
         <source>Copyright (c) MX Linux</source>
@@ -250,7 +250,7 @@
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="vanished">Ακύρωση</translation>
+        <translation type="vanished">Άκυρο</translation>
     </message>
     <message>
         <source>&amp;Close</source>
@@ -258,7 +258,7 @@
     </message>
     <message>
         <source>Could not play test sound.</source>
-        <translation type="vanished">Δεν παίζει ήχος δοκιμής.</translation>
+        <translation type="vanished">Δεν αναπαράγεται ήχος δοκιμής.</translation>
     </message>
 </context>
 </TS>

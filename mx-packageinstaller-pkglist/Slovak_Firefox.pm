@@ -18,39 +18,38 @@ Slovak_Firefox
    <cs>Slovak localisation of Firefox</cs>
    <da>Slovakisk oversættelse af Firefox</da>
    <de>Slowakische Lokalisierung von Firefox</de>
-   <el>Σλοβακικός εντοπισμός του Firefox</el>
+   <el>Σλοβακικά για το Firefox</el>
    <en>Slovak localisation of Firefox</en>
    <es>Localización Eslovaca de Firefox</es>
    <et>Slovak localisation of Firefox</et>
    <eu>Slovak localisation of Firefox</eu>
    <fa>Slovak localisation of Firefox</fa>
    <fil_PH>Slovak localisation of Firefox</fil_PH>
-   <fi>Slovak localisation of Firefox</fi>
+   <fi>Slovakialainen Firefox-kotoistus</fi>
    <fr>Localisation slovaque pour Firefox</fr>
    <he_IL>Slovak localisation of Firefox</he_IL>
-   <hi>Slovak localisation of Firefox</hi>
+   <hi>फायरफॉक्स का स्लोवाक संस्करण</hi>
    <hr>Slovak localisation of Firefox</hr>
    <hu>Slovak localisation of Firefox</hu>
    <id>Slovak localisation of Firefox</id>
    <is>Slovak localisation of Firefox</is>
    <it>Localizzazione slovacca di Firefox</it>
-   <ja_JP>Slovak localisation of Firefox</ja_JP>
-   <ja>Slovak localisation of Firefox</ja>
+   <ja>Firefox のスロバキア語パック</ja>
    <kk>Slovak localisation of Firefox</kk>
    <ko>Slovak localisation of Firefox</ko>
    <lt>Slovak localisation of Firefox</lt>
    <mk>Slovak localisation of Firefox</mk>
    <mr>Slovak localisation of Firefox</mr>
-   <nb>Slovak localisation of Firefox</nb>
+   <nb>Slovakisk lokaltilpassing av Firefox</nb>
    <nl>Slovaakse lokalisatie van Firefox</nl>
    <pl>Słowacka lokalizacja przeglądarki Firefox</pl>
-   <pt_BR>Eslovaco Localização para Firefox</pt_BR>
+   <pt_BR>Eslovaco Localização para o Firefox</pt_BR>
    <pt>Eslovaco Localização para Firefox</pt>
    <ro>Slovak localisation of Firefox</ro>
    <ru>Словацкая локализация Firefox</ru>
    <sk>Slovak localisation of Firefox</sk>
-   <sl>Slovak localisation of Firefox</sl>
-   <sq>Slovak localisation of Firefox</sq>
+   <sl>Slovaške krajevne nastavitve za Firefox</sl>
+   <sq>Përkthimi i Firefox-it në sllovakisht</sq>
    <sr>Slovak localisation of Firefox</sr>
    <sv>Slovakisk lokalisering av Firefox</sv>
    <tr>Firefox'un Slovakça yerelleştirmesi</tr>

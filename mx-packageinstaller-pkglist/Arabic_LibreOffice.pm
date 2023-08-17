@@ -14,46 +14,45 @@ Arabic_Libreoffice
    <ar>Arabic Language Meta-Package for LibreOffice</ar>
    <bg>Arabic Language Meta-Package for LibreOffice</bg>
    <bn>Arabic Language Meta-Package for LibreOffice</bn>
-   <ca>Metapaquet d'idioma Àrab per LibreOffice</ca>
+   <ca>Metapaquet per LibreOffice</ca>
    <cs>Arabic Language Meta-Package for LibreOffice</cs>
    <da>Arabic Language Meta-Package for LibreOffice</da>
-   <de>Arabisches Meta-Paket für LibreOffice</de>
-   <el>LibreOffice στα αραβικα</el>
+   <de>Meta-Paket für LibreOffice</de>
+   <el>Meta-Package για το LibreOffice</el>
    <en>Arabic Language Meta-Package for LibreOffice</en>
-   <es>Meta-Paquete de idioma árabe para LibreOffice</es>
+   <es>Meta-Package para LibreOffice</es>
    <et>Arabic Language Meta-Package for LibreOffice</et>
    <eu>Arabic Language Meta-Package for LibreOffice</eu>
    <fa>Arabic Language Meta-Package for LibreOffice</fa>
    <fil_PH>Arabic Language Meta-Package for LibreOffice</fil_PH>
-   <fi>Arabic Language Meta-Package for LibreOffice</fi>
-   <fr>Arabic Language Meta-Package for LibreOffice</fr>
+   <fi>Metatieto-paketti LibreOffice:lle</fi>
+   <fr>Meta-Paquet pour LibreOffice</fr>
    <he_IL>Arabic Language Meta-Package for LibreOffice</he_IL>
-   <hi>Arabic Language Meta-Package for LibreOffice</hi>
+   <hi>लिब्रे-ऑफिस हेतु मेटा-पैकेज</hi>
    <hr>Arabic Language Meta-Package for LibreOffice</hr>
    <hu>Arabic Language Meta-Package for LibreOffice</hu>
    <id>Arabic Language Meta-Package for LibreOffice</id>
    <is>Arabic Language Meta-Package for LibreOffice</is>
-   <it>Meta-pacchetto della lingua araba per LibreOffice</it>
-   <ja_JP>Arabic Language Meta-Package for LibreOffice</ja_JP>
-   <ja>Arabic Language Meta-Package for LibreOffice</ja>
+   <it>Meta-pacchetto per LibreOffice</it>
+   <ja>LibreOffice用メタパッケージ</ja>
    <kk>Arabic Language Meta-Package for LibreOffice</kk>
    <ko>Arabic Language Meta-Package for LibreOffice</ko>
    <lt>Arabic Language Meta-Package for LibreOffice</lt>
    <mk>Arabic Language Meta-Package for LibreOffice</mk>
    <mr>Arabic Language Meta-Package for LibreOffice</mr>
-   <nb>Arabic Language Meta-Package for LibreOffice</nb>
-   <nl>Arabische Taal Meta-Pakket voor LibreOffice​</nl>
-   <pl>Arabic Language Meta-Package for LibreOffice</pl>
-   <pt_BR>Arabic Language Meta-Package for LibreOffice</pt_BR>
-   <pt>Árabe Meta-Pacote de Idioma para LibreOffice</pt>
+   <nb>LibreOffice metapakke</nb>
+   <nl>Meta-Pakket voor LibreOffice</nl>
+   <pl>Meta-Pakiet dla LibreOffice</pl>
+   <pt_BR>Meta-Pacote para o LibreOffice</pt_BR>
+   <pt>Meta-Pacote para LibreOffice</pt>
    <ro>Arabic Language Meta-Package for LibreOffice</ro>
-   <ru>Arabic Language Meta-Package for LibreOffice</ru>
+   <ru>Мета-пакет для LibreOffice</ru>
    <sk>Arabic Language Meta-Package for LibreOffice</sk>
-   <sl>Arabski jezikovni meta-paket za LibreOffice</sl>
-   <sq>Arabic Language Meta-Package for LibreOffice</sq>
+   <sl>Meta-paket za LibreOffice</sl>
+   <sq>Meta-Paketë për LibreOffice-in</sq>
    <sr>Arabic Language Meta-Package for LibreOffice</sr>
-   <sv>Arabiskt Språk Meta-Paket för LibreOffice</sv>
-   <tr>Arabic Language Meta-Package for LibreOffice</tr>
+   <sv>Meta-Paket för LibreOffice</sv>
+   <tr>LibreOffice için Üst-Paket</tr>
    <uk>Arabic Language Meta-Package for LibreOffice</uk>
    <vi>Arabic Language Meta-Package for LibreOffice</vi>
    <zh_CN>Arabic Language Meta-Package for LibreOffice</zh_CN>

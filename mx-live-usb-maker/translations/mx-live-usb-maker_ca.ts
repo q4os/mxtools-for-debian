@@ -297,10 +297,10 @@
         <location filename="../mainwindow.cpp" line="152"/>
         <source>Writing %1 using &apos;dd&apos; command to /dev/%2,
 
-Please wait until the the process is completed</source>
-        <translation>Enregistrant %1 amb l&apos;ordre &apos;dd&apos; a /dev/%2,
+Please wait until the process is completed</source>
+        <translation>Enregistrant %1 usant l&apos;ordre &apos;dd&apos; a /dev/%2,
 
-Si us plau, espereu fins que s&apos;hagi acabat el procés</translation>
+Si us plau, espereu fins que el procés s&apos;hagi acabat</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="312"/>

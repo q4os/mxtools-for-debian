@@ -17,40 +17,39 @@ TeamViewer
    <ca>Accés remot Teamviewer</ca>
    <cs>Teamviewer remote access</cs>
    <da>Teamviewer fjernadgang</da>
-   <de>Fernzugriff mit Teamviewer</de>
-   <el>Teamviewer απομακρυσμένη πρόσβαση</el>
+   <de>Fernzugriff mit Teamviewer </de>
+   <el>Απομακρυσμένη πρόσβαση με το Teamviewer</el>
    <en>Teamviewer remote access</en>
    <es>Teamviewer acceso remoto</es>
    <et>Teamviewer remote access</et>
    <eu>Teamviewer remote access</eu>
    <fa>Teamviewer remote access</fa>
    <fil_PH>Teamviewer remote access</fil_PH>
-   <fi>Teamviewer remote access</fi>
+   <fi>Teamviewer-etäyhteys</fi>
    <fr>Teamviewer accès à distance</fr>
    <he_IL>Teamviewer remote access</he_IL>
-   <hi>Teamviewer remote access</hi>
+   <hi>Teamviewer दूरस्थ अभिगम</hi>
    <hr>Teamviewer remote access</hr>
    <hu>Teamviewer remote access</hu>
    <id>Teamviewer remote access</id>
    <is>Teamviewer remote access</is>
    <it>Teamviewer accesso remoto</it>
-   <ja_JP>Teamviewer remote access</ja_JP>
-   <ja>Teamviewer remote access</ja>
+   <ja>TeamViewer リモートアクセス</ja>
    <kk>Teamviewer remote access</kk>
    <ko>Teamviewer remote access</ko>
    <lt>Teamviewer nuotolinė prieiga</lt>
    <mk>Teamviewer remote access</mk>
    <mr>Teamviewer remote access</mr>
-   <nb>Teamviewer remote access</nb>
+   <nb>Teamviewer fjerntilgang</nb>
    <nl>Teamviewer afstand toegang</nl>
    <pl>dostęp zdalny TeamViewer</pl>
-   <pt_BR>Aplicativo de acesso remoto</pt_BR>
+   <pt_BR>Teamviewer - Aplicativo de acesso remoto</pt_BR>
    <pt>Aplicação de acesso remoto</pt>
    <ro>Teamviewer remote access</ro>
-   <ru>Удаленный рабочий стол, передача файлов и видеосвязь</ru>
+   <ru>Удалённый доступ Teamviewer</ru>
    <sk>Teamviewer remote access</sk>
    <sl>Teamviewer oddaljeni dostop</sl>
-   <sq>Teamviewer remote access</sq>
+   <sq>Hyrje e largët me Teamviewer</sq>
    <sr>Teamviewer remote access</sr>
    <sv>Teamviewer fjärråtkomst</sv>
    <tr>Teamviewer uzaktan erişim</tr>

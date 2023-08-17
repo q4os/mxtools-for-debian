@@ -18,39 +18,38 @@ Polish_Thunderbird
    <cs>Polish localisation of Thunderbird</cs>
    <da>Polsk oversættelse af Thunderbird</da>
    <de>Polnische Lokalisierung von Thunderbird</de>
-   <el>Πολωνικός εντοπισμός του Thunderbird</el>
+   <el>Πολωνικά για το Thunderbird</el>
    <en>Polish localisation of Thunderbird</en>
-   <es>Localización Polaca de Thunderbird</es>
+   <es>Localización Polaco de Thunderbird</es>
    <et>Polish localisation of Thunderbird</et>
    <eu>Polish localisation of Thunderbird</eu>
    <fa>Polish localisation of Thunderbird</fa>
    <fil_PH>Polish localisation of Thunderbird</fil_PH>
-   <fi>Polish localisation of Thunderbird</fi>
+   <fi>Puolalainen Thunderbird-kotoistus</fi>
    <fr>Localisation polonaise pour Thunderbird</fr>
    <he_IL>Polish localisation of Thunderbird</he_IL>
-   <hi>Polish localisation of Thunderbird</hi>
+   <hi>थंडरबर्ड का पोलिश संस्करण</hi>
    <hr>Polish localisation of Thunderbird</hr>
    <hu>Polish localisation of Thunderbird</hu>
    <id>Polish localisation of Thunderbird</id>
    <is>Polish localisation of Thunderbird</is>
    <it>Localizzazione polacca di Thunderbird</it>
-   <ja_JP>Polish localisation of Thunderbird</ja_JP>
-   <ja>Polish localisation of Thunderbird</ja>
+   <ja>Thunderbird のポーランド語パック</ja>
    <kk>Polish localisation of Thunderbird</kk>
    <ko>Polish localisation of Thunderbird</ko>
    <lt>Polish localisation of Thunderbird</lt>
    <mk>Polish localisation of Thunderbird</mk>
    <mr>Polish localisation of Thunderbird</mr>
-   <nb>Polish localisation of Thunderbird</nb>
+   <nb>Polsk lokaltilpassing av Thunderbird</nb>
    <nl>Poolse lokalisatie van Thunderbird</nl>
    <pl>Polska lokalizacja Thunderbirda</pl>
-   <pt_BR>Polonês Localização para Thunderbird</pt_BR>
+   <pt_BR>Polonês Localização para o Thunderbird</pt_BR>
    <pt>Polaco Localização para Thunderbird</pt>
    <ro>Polish localisation of Thunderbird</ro>
-   <ru>Polish localisation of Thunderbird</ru>
+   <ru>Польский перевод для Thunderbird</ru>
    <sk>Polish localisation of Thunderbird</sk>
-   <sl>Polish localisation of Thunderbird</sl>
-   <sq>Polish localisation of Thunderbird</sq>
+   <sl>Poljske krajevne nastavitve za Thunderbird</sl>
+   <sq>Përkthimi i Thunderbird-it në polonisht</sq>
    <sr>Polish localisation of Thunderbird</sr>
    <sv>Polsk lokalisering av Thunderbird</sv>
    <tr>Thunderbird'ün Lehçe yerelleştirmesi</tr>

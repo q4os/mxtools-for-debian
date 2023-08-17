@@ -6,8 +6,8 @@ case "$1" in
       echo "Cancel diversion of Calamares launcher ..."
       dpkg-divert --quiet --rename --remove /usr/bin/add-calamares-desktop-icon
 
-      # echo "Removing initrd-release ..."
-      # rm -f /etc/initrd-release
+      # echo "Removing initrd_release ..."
+      # rm -f /etc/initrd_release
     ;;
 
     *)

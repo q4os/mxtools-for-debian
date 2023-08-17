@@ -71,12 +71,12 @@
     <message>
         <location filename="../mainwindow.ui" line="218"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Select another sound card if necessary:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Wählen Sie eine andere Soundkarte wenn nötig:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Wählen sie eine andere Soundkarte, wenn nötig:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="244"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If your computer has more than one sound card, you can use this application to select the one to be default. &lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Falls Ihr Computer über mehr als eine Soundkarte verfügt, können Sie mit dieser Anwendung eine davon als voreingestellt (default) festlegen.&lt;/br&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Falls Ihr Computer über mehr als eine Soundkarte verfügt, können sie mit dieser Anwendung eine davon als voreingestellt (default) festlegen.&lt;/br&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="290"/>
@@ -127,31 +127,31 @@
     <message>
         <location filename="../mainwindow.cpp" line="156"/>
         <source>Could not play test sound.</source>
-        <translation type="unfinished">Konnte den Test-Sound nicht abspielen.</translation>
+        <translation type="unfinished">Der Testklang konnte nicht abgespielt werden.</translation>
     </message>
 </context>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../about.cpp" line="43"/>
+        <location filename="../about.cpp" line="40"/>
         <source>License</source>
         <translation type="unfinished">Lizenz</translation>
     </message>
     <message>
-        <location filename="../about.cpp" line="44"/>
-        <location filename="../about.cpp" line="54"/>
+        <location filename="../about.cpp" line="41"/>
+        <location filename="../about.cpp" line="51"/>
         <source>Changelog</source>
-        <translation type="unfinished">Changelog</translation>
+        <translation type="unfinished">Änderungsprotokoll</translation>
     </message>
     <message>
-        <location filename="../about.cpp" line="45"/>
+        <location filename="../about.cpp" line="42"/>
         <source>Cancel</source>
         <translation type="unfinished">Abbrechen</translation>
     </message>
     <message>
-        <location filename="../about.cpp" line="67"/>
+        <location filename="../about.cpp" line="64"/>
         <source>&amp;Close</source>
-        <translation type="unfinished">&amp;Close</translation>
+        <translation type="unfinished">&amp;Schließen</translation>
     </message>
 </context>
 <context>
@@ -206,11 +206,11 @@
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Select another sound card if necessary:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Wählen Sie eine andere Soundkarte wenn nötig:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Wählen sie eine andere Soundkarte, wenn nötig:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If your computer has more than one sound card, you can use this application to select the one to be default. &lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Falls Ihr Computer über mehr als eine Soundkarte verfügt, können Sie mit dieser Anwendung eine davon als voreingestellt (default) festlegen.&lt;/br&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Falls Ihr Computer über mehr als eine Soundkarte verfügt, können sie mit dieser Anwendung eine davon als voreingestellt (default) festlegen.&lt;/br&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Test current sound card</source>
@@ -246,7 +246,7 @@
     </message>
     <message>
         <source>Changelog</source>
-        <translation type="vanished">Changelog</translation>
+        <translation type="vanished">Änderungsprotokoll</translation>
     </message>
     <message>
         <source>Cancel</source>
@@ -254,11 +254,11 @@
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation type="vanished">&amp;Close</translation>
+        <translation type="vanished">&amp;Schließen</translation>
     </message>
     <message>
         <source>Could not play test sound.</source>
-        <translation type="vanished">Konnte den Test-Sound nicht abspielen.</translation>
+        <translation type="vanished">Der Testklang konnte nicht abgespielt werden.</translation>
     </message>
 </context>
 </TS>

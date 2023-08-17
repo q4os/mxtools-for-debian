@@ -1,8 +1,20 @@
+mx-idevice-mounter (0.1.5.15) mx; urgency=medium
+
+  * update icons 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 15 May 2023 18:13:38 -0400
+
+mx-idevice-mounter (0.1.5.14) mx; urgency=medium
+
+  * icon updates 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 14 Apr 2023 21:12:20 -0400
+
 mx-idevice-mounter (0.1.5.13) mx; urgency=medium
 
-  * Adjusted dependencies for Bulleye base.
+  * translation refresh
 
- -- Timothy E. Harris <maintainer@mxrepo.com>  Wed, 10 Feb 2021 21:53:18 -0500
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 26 Oct 2022 23:41:33 -0400
 
 mx-idevice-mounter (0.1.5.12) mx; urgency=medium
 

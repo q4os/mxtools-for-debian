@@ -1,0 +1,37 @@
+Audio
+Browser
+Children
+Desktop Environments
+అభివృద్ధి
+Disks
+Docks
+Email
+File Managers
+FTP
+ఆటలు
+రేఖాచిత్రాలు
+Icons
+Kernels
+Language
+LaTex
+Media Center
+Media Converter
+Messaging
+Misc
+Network
+Newsreader
+Non-Free
+కార్యాలయం
+Printing
+Remote Access
+Screencast
+Screensaver
+Screenshot Utilities
+Server
+Themes
+Torrent
+Utility
+Video
+Wallpapers
+Window Managers
+Virtualization

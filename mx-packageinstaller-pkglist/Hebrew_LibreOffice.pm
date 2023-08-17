@@ -14,46 +14,45 @@ Hebrew_Libreoffice
    <ar>Hebrew Language Meta-Package for LibreOffice</ar>
    <bg>Hebrew Language Meta-Package for LibreOffice</bg>
    <bn>Hebrew Language Meta-Package for LibreOffice</bn>
-   <ca>Metpaquet d'idioma Hebreu per LibreOffice</ca>
+   <ca>Metapaquet per LibreOffice</ca>
    <cs>Hebrew Language Meta-Package for LibreOffice</cs>
    <da>Hebrew Language Meta-Package for LibreOffice</da>
-   <de>Hebräisches Meta-Paket für LibreOffice</de>
-   <el>LibreOffice στα Εβραϊκά</el>
+   <de>Meta-Paket für LibreOffice</de>
+   <el>Meta-Package για το LibreOffice</el>
    <en>Hebrew Language Meta-Package for LibreOffice</en>
-   <es>Meta-Paquete de idioma hebreo para LibreOffice</es>
+   <es>Meta-Package para LibreOffice</es>
    <et>Hebrew Language Meta-Package for LibreOffice</et>
    <eu>Hebrew Language Meta-Package for LibreOffice</eu>
    <fa>Hebrew Language Meta-Package for LibreOffice</fa>
    <fil_PH>Hebrew Language Meta-Package for LibreOffice</fil_PH>
-   <fi>Hebrew Language Meta-Package for LibreOffice</fi>
-   <fr>Hebrew Language Meta-Package for LibreOffice</fr>
+   <fi>Metatieto-paketti LibreOffice:lle</fi>
+   <fr>Meta-Paquet pour LibreOffice</fr>
    <he_IL>Hebrew Language Meta-Package for LibreOffice</he_IL>
-   <hi>Hebrew Language Meta-Package for LibreOffice</hi>
+   <hi>लिब्रे-ऑफिस हेतु मेटा-पैकेज</hi>
    <hr>Hebrew Language Meta-Package for LibreOffice</hr>
    <hu>Hebrew Language Meta-Package for LibreOffice</hu>
    <id>Hebrew Language Meta-Package for LibreOffice</id>
    <is>Hebrew Language Meta-Package for LibreOffice</is>
-   <it>Meta-pacchetto della lingua ebraica per LibreOffice</it>
-   <ja_JP>Hebrew Language Meta-Package for LibreOffice</ja_JP>
-   <ja>Hebrew Language Meta-Package for LibreOffice</ja>
+   <it>Meta-pacchetto per LibreOffice</it>
+   <ja>LibreOffice用メタパッケージ</ja>
    <kk>Hebrew Language Meta-Package for LibreOffice</kk>
    <ko>Hebrew Language Meta-Package for LibreOffice</ko>
    <lt>Hebrew Language Meta-Package for LibreOffice</lt>
    <mk>Hebrew Language Meta-Package for LibreOffice</mk>
    <mr>Hebrew Language Meta-Package for LibreOffice</mr>
-   <nb>Hebrew Language Meta-Package for LibreOffice</nb>
-   <nl>Hebreews Taal Meta-Pakket voor LibreOffice</nl>
-   <pl>Hebrew Language Meta-Package for LibreOffice</pl>
-   <pt_BR>Hebrew Language Meta-Package for LibreOffice</pt_BR>
-   <pt>Hebreu Meta-Pacote de Idioma para LibreOffice</pt>
+   <nb>LibreOffice metapakke</nb>
+   <nl>Meta-Pakket voor LibreOffice</nl>
+   <pl>Meta-Pakiet dla LibreOffice</pl>
+   <pt_BR>Meta-Pacote para o LibreOffice</pt_BR>
+   <pt>Meta-Pacote para LibreOffice</pt>
    <ro>Hebrew Language Meta-Package for LibreOffice</ro>
-   <ru>Hebrew Language Meta-Package for LibreOffice</ru>
+   <ru>Мета-пакет для LibreOffice</ru>
    <sk>Hebrew Language Meta-Package for LibreOffice</sk>
-   <sl>Hebrejski jezikovni meta-paket za LibreOffice</sl>
-   <sq>Hebrew Language Meta-Package for LibreOffice</sq>
+   <sl>Meta-paket za LibreOffice</sl>
+   <sq>Meta-Paketë për LibreOffice-in</sq>
    <sr>Hebrew Language Meta-Package for LibreOffice</sr>
-   <sv>Hebreiskt Språk Meta-Paket för LibreOffice</sv>
-   <tr>Hebrew Language Meta-Package for LibreOffice</tr>
+   <sv>Meta-Paket för LibreOffice</sv>
+   <tr>LibreOffice için Üst-Paket</tr>
    <uk>Hebrew Language Meta-Package for LibreOffice</uk>
    <vi>Hebrew Language Meta-Package for LibreOffice</vi>
    <zh_CN>Hebrew Language Meta-Package for LibreOffice</zh_CN>

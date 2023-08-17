@@ -18,7 +18,7 @@ Budgie Desktop
    <cs>a lightweight desktop environment</cs>
    <da>et letvægts skrivebordsmiljø</da>
    <de>Eine leichtgewichtige Desktop-Umgebung</de>
-   <el>ένα ελαφρύ περιβάλλον επιφάνειας εργασίας</el>
+   <el>Ένα ελαφρύ γραφικό περιβάλλον επιφάνειας εργασίας</el>
    <en>a lightweight desktop environment</en>
    <es>Entorno de escritorio liviano</es>
    <et>a lightweight desktop environment</et>
@@ -28,29 +28,28 @@ Budgie Desktop
    <fi>kevyt työpöytäympäristö</fi>
    <fr>Un environnement léger de bureau</fr>
    <he_IL>a lightweight desktop environment</he_IL>
-   <hi>a lightweight desktop environment</hi>
+   <hi>सरल डेस्कटॉप वातावरण</hi>
    <hr>lagano radno okruženje</hr>
    <hu>a lightweight desktop environment</hu>
    <id>a lightweight desktop environment</id>
    <is>a lightweight desktop environment</is>
    <it>Un ambiente desktop leggero</it>
-   <ja_JP>a lightweight desktop environment</ja_JP>
-   <ja>a lightweight desktop environment</ja>
+   <ja>軽量なデスクトップ環境</ja>
    <kk>a lightweight desktop environment</kk>
    <ko>a lightweight desktop environment</ko>
    <lt>supaprastinta darbalaukio aplinka</lt>
    <mk>a lightweight desktop environment</mk>
    <mr>a lightweight desktop environment</mr>
-   <nb>a lightweight desktop environment</nb>
+   <nb>et lettvektig skrivebordsmiljø</nb>
    <nl>een lichtgewicht desktop omgeving</nl>
    <pl>lekkie środowisko graficzne</pl>
-   <pt_BR>Ambiente de Trabalho simples e ligeiro</pt_BR>
-   <pt>Ambiente de Trabalho simples e ligeiro</pt>
+   <pt_BR>Ambiente de Trabalho simples e leve</pt_BR>
+   <pt>Ambiente de Trabalho ligeiro</pt>
    <ro>a lightweight desktop environment</ro>
    <ru>Легковесное окружение рабочего стола</ru>
    <sk>ľahké užívateľské prostredie</sk>
    <sl>lahko namizno okolje</sl>
-   <sq>a lightweight desktop environment</sq>
+   <sq>një mjedis desktop i peshës së lehtë</sq>
    <sr>a lightweight desktop environment</sr>
    <sv>en lättvikts skrivbordsmiljö</sv>
    <tr>hafif bir masaüstü ortamı</tr>
@@ -71,7 +70,7 @@ all
 
 <install_package_names>
 budgie-desktop
-gnome-tweak-tool
+gnome-tweaks
 budgie-desktop-doc
 </install_package_names>
 
@@ -81,7 +80,7 @@ budgie-desktop-doc
 
 <uninstall_package_names>
 budgie-desktop
-gnome-tweak-tool
+gnome-tweaks
 budgie-desktop-doc
 </uninstall_package_names>
 

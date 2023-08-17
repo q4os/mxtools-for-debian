@@ -1,3 +1,44 @@
+mx-datetime (23.7.04mx23) mx; urgency=medium
+
+  * Fixed: hardware clock time zone set twice on systemd.
+  * Code optimisation
+  * Packaging improvements
+  * Updated help. 
+
+ -- Adrian <adrian@mxlinux.org>  Sun, 30 Jul 2023 10:13:57 -0400
+
+mx-datetime (23.7.03mx23) mx; urgency=emergency
+
+  * update postinst routine to correct bad sources in 23.07.01mx23 version
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 29 Jul 2023 14:22:45 -0400
+
+mx-datetime (23.7.02mx23) mx; urgency=emergency
+
+  * Eliminate de-duplication to identify duplicate sources.
+  * No more default sources file, stick with upstream defaults.
+  * More info: https://bugs.launchpad.net/ubuntu/+source/chrony/+bug/1754358
+
+ -- Adrian <adrian@mxlinux.org>  Sat, 22 Jul 2023 22:28:51 -0400
+
+mx-datetime (23.7.01mx23) mx; urgency=medium
+
+  * Move from NTPsec to Chrony, fixes stability issues noticed with NTP sync and config.
+  * Add default time sources (mx-datetime.sources).
+  * Fixed: time edit box is not big enough to show the time.
+  * Font tweaks, rely on the system font size.
+  * Use monospace fonts for the calendar and time zone/area combo boxes.
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 20 Jul 2023 11:05:18 -0400
+
+mx-datetime (23.7) mx; urgency=medium
+
+  * Use standard icons for list buttons.
+  * Fixed NTPsec service setup.
+  * Retire support for ntp. 
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 13 Jul 2023 21:08:55 -0400
+
 mx-datetime (23.5.01) mx; urgency=medium
 
   * Update logo

@@ -18,39 +18,38 @@ IceWM
    <cs>lightweight environment</cs>
    <da>letvægts miljø</da>
    <de>Leichtgewichtige Umgebung</de>
-   <el>ελαφρύ περιβάλλον</el>
+   <el>Ελαφρύ περιβάλλον</el>
    <en>lightweight environment</en>
    <es>Entorno de escritorio ligero</es>
    <et>lightweight environment</et>
    <eu>lightweight environment</eu>
    <fa>lightweight environment</fa>
    <fil_PH>lightweight environment</fil_PH>
-   <fi>lightweight environment</fi>
+   <fi>keveä ympäristö</fi>
    <fr>Environnement léger</fr>
    <he_IL>lightweight environment</he_IL>
-   <hi>lightweight environment</hi>
+   <hi>सरल वातावरण</hi>
    <hr>lightweight environment</hr>
    <hu>lightweight environment</hu>
    <id>lightweight environment</id>
    <is>lightweight environment</is>
    <it>Gestore di finestre che crea un ambiente leggero in stile Win95-OS/2-Motif</it>
-   <ja_JP>lightweight environment</ja_JP>
-   <ja>lightweight environment</ja>
+   <ja>軽量級の環境</ja>
    <kk>lightweight environment</kk>
    <ko>lightweight environment</ko>
    <lt>supaprastinta aplinka</lt>
    <mk>lightweight environment</mk>
    <mr>lightweight environment</mr>
-   <nb>lightweight environment</nb>
+   <nb>lettvektig vindusbehandler</nb>
    <nl>lichtgewicht omgeving</nl>
    <pl>lekkie środowisko</pl>
-   <pt_BR>Ambiente de Trabalho simples e ligeiro</pt_BR>
+   <pt_BR>Ambiente de Trabalho simples e leve</pt_BR>
    <pt>Ambiente de Trabalho simples e ligeiro</pt>
    <ro>lightweight environment</ro>
    <ru>Легковесный оконный менеджер</ru>
    <sk>lightweight environment</sk>
    <sl>Lahko okolje</sl>
-   <sq>lightweight environment</sq>
+   <sq>mjedis i peshës së lehtë</sq>
    <sr>lightweight environment</sr>
    <sv>lättviktsmiljö</sv>
    <tr>hafif masaüstü ortamı</tr>

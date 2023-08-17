@@ -25,35 +25,34 @@ Gnome Base
    <eu>Minimal install of gnome shell</eu>
    <fa>Minimal install of gnome shell</fa>
    <fil_PH>Minimal install of gnome shell</fil_PH>
-   <fi>Minimal install of gnome shell</fi>
+   <fi>Gnome-työpöydän vähimmäisasennus</fi>
    <fr>Installation minimale de Gnome Shell</fr>
    <he_IL>Minimal install of gnome shell</he_IL>
-   <hi>Minimal install of gnome shell</hi>
+   <hi>गनोम शैल का संक्षिप्त इंस्टॉल</hi>
    <hr>Minimal install of gnome shell</hr>
    <hu>Minimal install of gnome shell</hu>
    <id>Minimal install of gnome shell</id>
    <is>Minimal install of gnome shell</is>
    <it>Installazione minimale di Gnome Shell</it>
-   <ja_JP>Minimal install of gnome shell</ja_JP>
-   <ja>Minimal install of gnome shell</ja>
+   <ja>GNOMEシェルの最小インストール</ja>
    <kk>Minimal install of gnome shell</kk>
    <ko>Minimal install of gnome shell</ko>
    <lt>Minimal install of gnome shell</lt>
    <mk>Minimal install of gnome shell</mk>
    <mr>Minimal install of gnome shell</mr>
-   <nb>Minimal install of gnome shell</nb>
+   <nb>Minimal installasjon av gnome-skall</nb>
    <nl>Minimale installatie van de gnome shell</nl>
    <pl>minimalna instalalacja powłoki gnome</pl>
-   <pt_BR>Instalação mínima do interpretador de comandos (shell) gnome</pt_BR>
-   <pt>Instalação mínima do interpretador de comandos (shell) gnome</pt>
+   <pt_BR>Instalação mínima do ambiente de trabalho gnome</pt_BR>
+   <pt>Instalação mínima do ambiente de trabalho gnome</pt>
    <ro>Minimal install of gnome shell</ro>
    <ru>Минимальная установка Gnome Shell</ru>
    <sk>Minimal install of gnome shell</sk>
    <sl>Minimalna namestitev gnome ogrodja</sl>
-   <sq>Minimal install of gnome shell</sq>
+   <sq>Instalim minimal i gnome shell</sq>
    <sr>Minimal install of gnome shell</sr>
    <sv>Minimal installation av gnome shell</sv>
-   <tr>Minimal install of gnome shell</tr>
+   <tr>Gnome kabuğunun en küçük kurulumu</tr>
    <uk>мінімальний набір середовища gnome</uk>
    <vi>Minimal install of gnome shell</vi>
    <zh_CN>Minimal install of gnome shell</zh_CN>

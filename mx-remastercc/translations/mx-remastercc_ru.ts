@@ -16,7 +16,7 @@
     <message>
         <location filename="../mainwindow.ui" line="81"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;This tool allows you to rework an ISO while running Live. &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Remaster&lt;/span&gt; allows you to change files, applications and settings with the goal of producing a new master copy for storage or distribution. &lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Persistence&lt;/span&gt; allows you to retain data, settings and installed programs when the machine gets switched off for personal use.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Этот инструмент позволяет сделать свой ISO во время живой сессии. &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Ремастеринг&lt;/span&gt; позволяет изменять файлы, приложения и настройки с целью получения новой копии ОС для хранения или распространения. &lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Сохранение состояния&lt;/span&gt; позволяет сохранять данные, настройки и установленные программы, при выключении компьютера, для личного использования.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Этот инструмент позволяет сделать свой ISO во время живого сеанса. &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Ремастеринг&lt;/span&gt; позволяет изменять файлы, приложения и настройки с целью получения новой копии ОС для хранения или распространения. &lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Сохранение состояния&lt;/span&gt; позволяет сохранять данные, настройки и установленные программы, при выключении компьютера, для личного использования.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="133"/>
@@ -81,7 +81,7 @@
     <message>
         <location filename="../mainwindow.ui" line="315"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Optional operations&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Дополнительные операции&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;Необязательные операции&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="325"/>
@@ -132,7 +132,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="106"/>
         <source>Cancel</source>
-        <translation>Отменить</translation>
+        <translation>Отмена</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="126"/>

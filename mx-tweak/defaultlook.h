@@ -79,11 +79,12 @@ public:
     bool Intel_flag{};
     bool radeon_flag{};
     bool amdgpuflag{};
-    bool libinput_touchpadflag{};
     bool bluetoothautoenableflag{};
     bool enable_recommendsflag{};
     bool vblankflag{};
     bool displayflag = false;
+    bool themetabflag = false;
+    bool othertabflag = false;
     bool displaysetupflag = false;
     bool brightnessflag = false;
     bool sandboxflag = false;
@@ -97,12 +98,14 @@ public:
     bool plasmasystrayiconsizeflag{};
     bool themeflag = false;
     bool validateflag = false;
+    bool tasklistflag = false;
     void thunarsplitview(bool state);
     void thunarsplitviewhorizontal(bool state);
     void thunarsetupsplitview();
     void resetthunar();
     void thunarsingleclicksetup();
     void thunarsetsingleclick(bool state);
+    void tasklistchange();
 
 
     QString g1;
@@ -151,6 +154,7 @@ public:
     static void message2();
     void savethemeundo();
     void themeundo();
+    QString get_tasklistid();
 
     void setBrightness();
 
@@ -202,9 +206,6 @@ private slots:
     void on_checkBoxSingleClick_clicked();
     void on_checkBoxThunarCAReset_clicked();
     void on_checkBoxThunarSingleClick_clicked();
-    void on_checkBoxlibinput_clicked();
-    void on_checkFirefox_clicked();
-    void on_checkHexchat_clicked();
     void on_checkHorz_clicked();
     void on_checkVert_clicked();
     void on_checkboxAMDtearfree_clicked();
@@ -274,6 +275,17 @@ private slots:
     void on_checkBoxsplitviewhorizontal_2_clicked();
 
     void on_checkBoxThunarSingleClick_2_clicked();
+
+    void on_radioButtonTasklist_clicked();
+
+    void on_comboBoxTasklistPlugin_currentIndexChanged(int);
+
+    void on_radioButtonSetPanelPluginScales_clicked();
+
+    void on_checkBoxDisableFluxboxMenuGeneration_clicked();
+
+
+    void on_listWidgetCursorThemes_currentTextChanged(const QString &currentText);
 
 private:
     Ui::defaultlook *ui;

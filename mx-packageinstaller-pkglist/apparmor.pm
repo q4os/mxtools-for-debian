@@ -34,7 +34,6 @@ apparmor
    <id>Userspace components of AppArmor</id>
    <is>Userspace components of AppArmor</is>
    <it>Componenti dello spazio-utente di AppArmor</it>
-   <ja_JP>Userspace components of AppArmor</ja_JP>
    <ja>Userspace components of AppArmor</ja>
    <kk>Userspace components of AppArmor</kk>
    <ko>Userspace components of AppArmor</ko>

@@ -297,10 +297,8 @@
         <location filename="../mainwindow.cpp" line="152"/>
         <source>Writing %1 using &apos;dd&apos; command to /dev/%2,
 
-Please wait until the the process is completed</source>
-        <translation>&apos;dd&apos; कमांड द्वारा %1 को /dev/%2 पर राइट करना जारी,
-
-कृपया प्रक्रिया पूर्ण होने तक प्रतीक्षा करें</translation>
+Please wait until the process is completed</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="312"/>

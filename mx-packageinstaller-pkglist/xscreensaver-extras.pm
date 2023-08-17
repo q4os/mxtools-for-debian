@@ -18,30 +18,29 @@ additional screensavers
    <cs>extra screensavers</cs>
    <da>ekstra pauseskærme</da>
    <de>zusätzliche Bildschirmschoner</de>
-   <el>επιπλέον προφύλαξη οθόνης</el>
+   <el>Επιπλέον προφύλαξη οθόνης</el>
    <en>extra screensavers</en>
    <es>Salvapantallas extra</es>
    <et>extra screensavers</et>
    <eu>extra screensavers</eu>
    <fa>extra screensavers</fa>
    <fil_PH>extra screensavers</fil_PH>
-   <fi>extra screensavers</fi>
+   <fi>lisä-näytönsäästäjät</fi>
    <fr>écrans de veille supplémentaires</fr>
    <he_IL>extra screensavers</he_IL>
-   <hi>extra screensavers</hi>
+   <hi>अतिरिक्त स्क्रीनसेवर</hi>
    <hr>extra screensavers</hr>
    <hu>extra screensavers</hu>
    <id>extra screensavers</id>
    <is>extra screensavers</is>
    <it>screensaver extra</it>
-   <ja_JP>extra screensavers</ja_JP>
-   <ja>extra screensavers</ja>
+   <ja>その他のスクリーンセーバー</ja>
    <kk>extra screensavers</kk>
    <ko>extra screensavers</ko>
    <lt>extra screensavers</lt>
    <mk>extra screensavers</mk>
    <mr>extra screensavers</mr>
-   <nb>extra screensavers</nb>
+   <nb>ekstra skjermbeskyttere</nb>
    <nl>extra screensavers</nl>
    <pl>dodatkowe wygaszacze ekranu</pl>
    <pt_BR>Proteções de tela adicionais</pt_BR>
@@ -50,7 +49,7 @@ additional screensavers
    <ru>дополнительные экранные заставки</ru>
    <sk>extra screensavers</sk>
    <sl>Dodatni ohranjevalniki zaslona</sl>
-   <sq>extra screensavers</sq>
+   <sq>ekrankursyes ekstra</sq>
    <sr>extra screensavers</sr>
    <sv>extra skärmsläckare</sv>
    <tr>fazladan ekran koruyucular</tr>

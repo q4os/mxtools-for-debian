@@ -19,7 +19,7 @@ public:
 private:
     QMap<QString, QStringList> candidates;
     QString files_content;
-    const QDir dir {QStringLiteral("/var/lib/apt/lists/")};
+    const QDir dir {"/var/lib/apt/lists/"};
 
     bool readFile(const QString &file_name);
     void loadCacheFiles();

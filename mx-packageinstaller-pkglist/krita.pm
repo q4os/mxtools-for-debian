@@ -34,7 +34,6 @@ Krita
    <id>Krita is a creative application for raster images</id>
    <is>Krita is a creative application for raster images</is>
    <it>Krita is a creative application for raster images</it>
-   <ja_JP>Krita is a creative application for raster images</ja_JP>
    <ja>Krita is a creative application for raster images</ja>
    <kk>Krita is a creative application for raster images</kk>
    <ko>Krita is a creative application for raster images</ko>

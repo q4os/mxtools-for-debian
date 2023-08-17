@@ -49,7 +49,7 @@
         <translation>Toegangsrechten voor geldige gebruikers</translation>
     </message>
     <message>
-        <location filename="../editshare.cpp" line="46"/>
+        <location filename="../editshare.cpp" line="48"/>
         <source>Select directory to share</source>
         <translation>Selecteer de map die u wilt delen</translation>
     </message>

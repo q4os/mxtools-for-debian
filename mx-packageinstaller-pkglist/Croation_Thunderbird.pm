@@ -18,39 +18,38 @@ Croatian_thunderbird
    <cs>Croatian localisation of thunderbird</cs>
    <da>Kroatisk oversættelse af Thunderbird</da>
    <de>Kroatische Lokalisierung von Thunderbird</de>
-   <el>Κροατικός εντοπισμός του thunderbird</el>
+   <el>Κροατικά για το thunderbird</el>
    <en>Croatian localisation of thunderbird</en>
    <es>Localización Croata de Thunderbird</es>
    <et>Croatian localisation of thunderbird</et>
    <eu>Croatian localisation of thunderbird</eu>
    <fa>Croatian localisation of thunderbird</fa>
    <fil_PH>Croatian localisation of thunderbird</fil_PH>
-   <fi>Croatian localisation of thunderbird</fi>
+   <fi>Kroatialainen Thunderbird-kotoistus</fi>
    <fr>Localisation croate pour Thunderbird</fr>
    <he_IL>Croatian localisation of thunderbird</he_IL>
-   <hi>Croatian localisation of thunderbird</hi>
+   <hi>थंडरबर्ड का क्रोएशियाई संस्करण</hi>
    <hr>Croatian localisation of thunderbird</hr>
    <hu>Croatian localisation of thunderbird</hu>
    <id>Croatian localisation of thunderbird</id>
    <is>Croatian localisation of thunderbird</is>
    <it>Localizzazione croata di Thunderbird</it>
-   <ja_JP>Croatian localisation of thunderbird</ja_JP>
-   <ja>Croatian localisation of thunderbird</ja>
+   <ja>Thunderbird のクロアチア語パック</ja>
    <kk>Croatian localisation of thunderbird</kk>
    <ko>Croatian localisation of thunderbird</ko>
    <lt>Croatian localisation of thunderbird</lt>
    <mk>Croatian localisation of thunderbird</mk>
    <mr>Croatian localisation of thunderbird</mr>
-   <nb>Croatian localisation of thunderbird</nb>
+   <nb>Kroatisk lokaltilpassing av Thunderbird</nb>
    <nl>Kroatische lokalisatie van Thunderbird</nl>
    <pl>Chorwacka lokalizacja Thunderbirda</pl>
-   <pt_BR>Croata Localização para Thunderbird</pt_BR>
+   <pt_BR>Croata Localização para o Thunderbird</pt_BR>
    <pt>Croata Localização para Thunderbird</pt>
    <ro>Croatian localisation of thunderbird</ro>
-   <ru>Croatian localisation of thunderbird</ru>
+   <ru>Хорватский перевод для Thunderbird</ru>
    <sk>Croatian localisation of thunderbird</sk>
-   <sl>Croatian localisation of thunderbird</sl>
-   <sq>Croatian localisation of thunderbird</sq>
+   <sl>Hrvaške krajevne nastavitve za thunderbird</sl>
+   <sq>Përkthimi i Thunderbird-it në koratisht</sq>
    <sr>Croatian localisation of thunderbird</sr>
    <sv>Kroatisk lokalisering av thunderbird</sv>
    <tr>Thunderbird'ün Hırvatça yerelleştirmesi</tr>

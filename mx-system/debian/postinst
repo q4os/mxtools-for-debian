@@ -6,7 +6,7 @@ if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-remov
     #test for live system, exit if found  (check used below)
     LIVE_CHECK=$(df -T / |tail -n1 |awk '{print $2}')
 
-    #add a symlink to mx-version called antix-version, because some apps look for info from antix-version
+     #add a symlink to mx-version called antix-version, because some apps look for info from antix-version
     if [ -e /etc/mx-version ]; then
         if [ ! -e /etc/antix-version ]; then
         ln -frs /etc/mx-version /etc/antix-version
@@ -29,24 +29,15 @@ if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-remov
         fi
     fi
 
-#update mx-version to latest for MX19, beta, and RC and later
+#update mx-version to latest for MX21, beta, and RC and later
     if [ -e /etc/mx-version ]; then
 
-    sed -i s/'patito feo'/'Wildflower'/ /etc/mx-version
-    sed -i s/"MX-19".*"_"/"MX-21_"/ /etc/mx-version
+    sed -i s/'Wildflower'/'Libretto'/ /etc/mx-version
+    sed -i s/'Next'/'Libretto'/ /etc/mx-version
+    sed -i s/"MX-21.._"/"MX-23_"/ /etc/mx-version
     #handle update from beta and rc users
     sed -i s/_beta.*_/_/ /etc/mx-version
     sed -i s/_RC.*_/_/ /etc/mx-version
-    sed -i s/_rc.*_/_/ /etc/mx-version
-    sed -i s/MX-21_/MX-21.1_/ /etc/mx-version
-    #21 to 21.1
-    sed -i s/MX-21_/MX-21.1_/ /etc/mx-version
-    #21.1 to 21.2
-    sed -i s/MX-21.1_/MX-21.2_/ /etc/mx-version
-    #21.2 to 21.2.1
-    sed -i s/MX-21.2_/MX-21.2.1_/ /etc/mx-version
-    #21.2.2.1 to 21.3
-    sed -i s/MX-21.2.1_/MX-21.3_/ /etc/mx-version
     fi
     
     ##add vmd to /etc/initramfs-tools/modules if its not already there
@@ -115,11 +106,6 @@ if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-remov
 		if [ -n "$(apt-key --keyring /etc/apt/trusted.gpg list 2>/dev/null | grep '6302 39CC 130E 1A7F D81A  27B1 4097 6EAF 437D 05B5')" ]; then
 			apt-key --keyring /etc/apt/trusted.gpg del $keys 2>/dev/null 1>/dev/null		
 		fi
-	fi
-
-	#remove bogus imagemagick display desktop file
-	if [ -e /usr/share/applications/display-im6.desktop ]; then
-		rm /usr/share/applications/display-im6.desktop
 	fi
 
     set -e

@@ -5,9 +5,9 @@
 # 
 # Translators:
 # Geoff Gigg <geoffgigg@hotmail.com>, 2022
-# Ioannis LM, 2022
 # anticapitalista <anticapitalista@riseup.net>, 2022
 # Dolphin Oracle <dolphinoracle@gmail.com>, 2022
+# Ioannis LM, 2023
 # 
 #, fuzzy
 msgid ""
@@ -16,8 +16,8 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-01-28 02:38+0100\n"
 "PO-Revision-Date: 2017-05-11 01:14+0000\n"
-"Last-Translator: Dolphin Oracle <dolphinoracle@gmail.com>, 2022\n"
-"Language-Team: Greek (https://www.transifex.com/anticapitalista/teams/10162/el/)\n"
+"Last-Translator: Ioannis LM, 2023\n"
+"Language-Team: Greek (https://app.transifex.com/anticapitalista/teams/10162/el/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -37,7 +37,7 @@ msgid "About"
 msgstr "Περί"
 
 msgid "About MX Updater"
-msgstr "Περί του MX Updater"
+msgstr "Περί του MX Ενημερώσεις"
 
 msgid "Auto-update"
 msgstr "Αυτόματη ενημέρωση"
@@ -46,18 +46,18 @@ msgid "Auto-update dpkg log(s)"
 msgstr "Αυτόματη ενημέρωση αρχείου(ων) καταγραφής dpkg"
 
 msgid "Auto-update log(s)"
-msgstr "Αυτόματη ενημέρωση αρχείων καταγραφής"
+msgstr "Αυτόματη ενημέρωση αρχείου(ων) καταγραφής"
 
 msgid "Automatically answer 'yes' to all prompts during full/basic upgrade"
 msgstr ""
-"Απαντήστε αυτόματα 'ναι' σε όλες τις προτροπές κατά την πλήρη/βασική "
+"Αυτόματη απάντηση 'ναι' σε όλες τις προτροπές κατά την πλήρη/βασική "
 "αναβάθμιση"
 
 msgid "Automatically answer 'yes' to all prompts during upgrade"
-msgstr "Απαντήστε αυτόματα 'ναι' σε όλες τις προτροπές κατά την αναβάθμιση"
+msgstr "Αυτόματη απάντηση 'ναι' σε όλες τις προτροπές κατά την αναβάθμιση"
 
 msgid "Cancel"
-msgstr "Ακύρωση"
+msgstr "Άκυρο"
 
 msgid "Changelog"
 msgstr "Αρχείο αλλαγών"
@@ -71,7 +71,7 @@ msgstr "Κλείσιμο"
 msgid "For a less detailed view see 'Auto-update dpkg log(s)' or 'History'."
 msgstr ""
 "Για λιγότερο λεπτομερή προβολή, ανατρέξτε στην ενότητα 'Αυτόματη ενημέρωση "
-"του αρχείου(ων) αλλαγών dpkg' ή το 'Ιστορικό'."
+"του αρχείου(ων) αλλαγών dpkg' ή του 'Ιστορικού'."
 
 msgid "Hide until updates available"
 msgstr "Απόκρυψη μέχρι να βρεθούν διαθέσιμες ενημερώσεις"
@@ -90,40 +90,40 @@ msgstr "Άδεια"
 
 msgid "MX Auto-update  --  unattended-upgrades dpkg log viewer"
 msgstr ""
-"Αυτόματη ενημέρωση του MX - αρχείο αλλαγών μη παρακολουθούμενων αναβαθμίσεων"
-" dpkg"
+"MX Αυτόματη ενημέρωση -- αρχείο αλλαγών των αναβαθμίσεων dpkg χωρίς επίβλεψη"
 
 msgid "MX Auto-update  --  unattended-upgrades log viewer"
 msgstr ""
-"Αυτόματη ενημέρωση του MX -- αρχείο αλλαγών μη παρακολουθούμενων "
-"αναβαθμίσεων"
+"MX Αυτόματη ενημέρωση -- αρχείο αλλαγών των αναβαθμίσεων χωρίς επίβλεψη"
 
 msgid "MX Package Installer"
-msgstr "Εγκατάσταση πακέτων του MX"
+msgstr "MX Εγκατάσταση πακέτων"
 
 #. The autostart desktop entry name will be shown within the list of autostart
 #. entries.
 #. The desktop entry name will be displayed within the menu.
 msgid "MX Updater"
-msgstr "MX Updater"
+msgstr "MX Ενημερώσεις"
 
 msgid "MX Updater Help"
-msgstr "Βοήθεια του MX Updater"
+msgstr "Βοήθεια του MX Ενημερώσεις"
 
 msgid "MX Updater preferences"
-msgstr "Προτιμήσεις του MX Updater "
+msgstr "Προτιμήσεις του MX Ενημερώσεις"
 
 msgid "MX Updater--View and Upgrade, previewing: basic upgrade"
-msgstr "MX Updater--Προβολή και αναβάθμιση, προεπισκόπηση: βασική αναβάθμιση"
+msgstr ""
+"MX Ενημερώσεις--Προβολή και αναβάθμιση, προεπισκόπηση: βασική αναβάθμιση"
 
 msgid "MX Updater--View and Upgrade, previewing: full upgrade"
-msgstr "MX Updater--Προβολή και αναβάθμιση, προεπισκόπηση: πλήρης αναβάθμιση"
+msgstr ""
+"MX Ενημερώσεις--Προβολή και αναβάθμιση, προεπισκόπηση: πλήρης αναβάθμιση"
 
 msgid "No logs found."
-msgstr "Δεν βρέθηκαν αρχεία καταγραφής."
+msgstr "Δεν βρέθηκαν αρχεία αλλαγών."
 
 msgid "No unattended-upgrades dpkg log(s) found."
-msgstr "Δεν βρέθηκε αρχείο(α) αλλαγών dpkg."
+msgstr "Δεν βρέθηκε αρχείο(α) αλλαγών των αναβαθμίσεων dpkg χωρίς επίβλεψη."
 
 msgid "No updates available"
 msgstr "Δεν υπάρχουν διαθέσιμες ενημερώσεις"
@@ -135,7 +135,7 @@ msgid "Preferences"
 msgstr "Προτιμήσεις"
 
 msgid "Press 'h' for help, 'q' to quit"
-msgstr "Πατήστε 'h' για βοήθεια, 'q' για να τερματίσετε"
+msgstr "Πατήστε 'h' για βοήθεια, 'q' για τερματισμό"
 
 msgid "Quit"
 msgstr "Έξοδος "
@@ -151,7 +151,7 @@ msgstr ""
 "get update)"
 
 msgid "Restart MX Updater"
-msgstr "Επανεκκινήστε το MX Updater"
+msgstr "Επανεκκίνηση του MX Ενημερώσεις"
 
 msgid "Running apt-get autoremove, if you are unsure type 'n'."
 msgstr ""
@@ -169,7 +169,7 @@ msgstr "Βοήθεια του Synaptic"
 
 msgid "Tray applet to notify of system and application updates"
 msgstr ""
-"Μικρο-εφαρμογή δίσκου για ειδοποίηση ενημερώσεων συστήματος και εφαρμογών"
+"Εφαρμογή ειδοποίησης για τις ενημερώσεις του συστήματος και των εφαρμογών"
 
 msgid "Unattended-upgrades"
 msgstr "Αναβαθμίσεις χωρίς επίβλεψη"
@@ -196,7 +196,7 @@ msgid "View and Upgrade"
 msgstr "Προβολή και αναβάθμιση"
 
 msgid "You have $count new updates available"
-msgstr "Έχετε $count  νέες ενημερώσεις"
+msgstr "Έχετε $count νέες ενημερώσεις"
 
 msgid "You have 1 new update available"
 msgstr "Έχετε 1 νέα ενημέρωση"
@@ -210,29 +210,29 @@ msgstr "Έχετε 1 νέα ενημέρωση"
 #, python-brace-format
 msgid "You have {num} new update available"
 msgid_plural "You have {num} new updates available"
-msgstr[0] "Έχετε {num} νέες διαθέσιμες ενημερώσεις"
+msgstr[0] "Έχετε {num} νέα διαθέσιμη ενημέρωση"
 msgstr[1] "Έχετε {num} νέες διαθέσιμες ενημερώσεις"
 
 msgid "automatically close terminal window when full/basic upgrade complete"
 msgstr ""
-"αυτόματο κλείσιμο τερματικού όταν ολοκληρωθεί η πλήρης/βασική αναβάθμιση"
+"κλείσιμο παραθύρου του τερματικού όταν ολοκληρωθεί η πλήρης/βασική "
+"αναβάθμιση"
 
 msgid "automatically close terminal window when upgrade complete"
-msgstr ""
-"Να κλείσει αυτόματα το παράθυρο του τερματικού όταν ολοκληρωθεί η αναβάθμιση"
+msgstr "κλείσιμο παραθύρου του τερματικού όταν ολοκληρωθεί η αναβάθμιση"
 
 msgid "basic upgrade"
 msgstr "βασική αναβάθμιση"
 
 msgid "basic upgrade complete (or was canceled)"
-msgstr "%s ολοκληρώθηκε (ή ακυρώθηκε)"
+msgstr "η αναβάθμιση ολοκληρώθηκε (ή ακυρώθηκε)"
 
 msgid "check for autoremovable packages after full/basic upgrade"
 msgstr ""
 "έλεγχος για αυτόματα αφαιρούμενα πακέτα μετά την πλήρη/βασική αναβάθμιση"
 
 msgid "classic"
-msgstr "κλασσικά"
+msgstr "classic"
 
 msgid "full upgrade"
 msgstr "πλήρης αναβάθμιση"
@@ -244,7 +244,7 @@ msgid "full upgrade complete (or was canceled)"
 msgstr "Η πλήρης αναβάθμιση ολοκληρώθηκε (ή ακυρώθηκε)"
 
 msgid "opens MX Updater 'View and Upgrade' window"
-msgstr "ανοίγει το παράθυρο 'Προβολή και αναβάθμιση' του MX Updater"
+msgstr "ανοίγει το παράθυρο 'Προβολή και αναβάθμιση' του MX Ενημερώσεις"
 
 msgid "opens Synaptic"
 msgstr "ανοίγει το  Synaptic"
@@ -259,7 +259,7 @@ msgid "pulse"
 msgstr "pulse"
 
 msgid "start MX Updater at login"
-msgstr "εκκινήστε το MX Updater κατά τη σύνδεση"
+msgstr "εκκίνηση του MX Ενημερώσεις κατά τη σύνδεση"
 
 msgid "switch to basic upgrade"
 msgstr "αλλαγή σε βασική αναβάθμιση"
@@ -278,10 +278,11 @@ msgid "upgrade"
 msgstr "αναβάθμιση"
 
 msgid "use desktop notifications"
-msgstr "Χρησιμοποιήστε ειδοποιήσεις επιφάνειας εργασίας"
+msgstr "χρήση ειδοποιήσεων στην επιφάνεια εργασίας"
 
 msgid "use transparent interior for no-updates wireframe"
-msgstr "χρησιμοποιήστε διαφανές εσωτερικό για wireframe για χωρίς ενημερώσεις"
+msgstr ""
+"χρήση εσωτερικής διαφάνειας στο wireframe όταν δεν υπάρχουν ενημερώσεις"
 
 msgid "wireframe"
 msgstr "wireframe"
@@ -302,17 +303,17 @@ msgstr[1] "{num} νέες διαθέσιμες ενημερώσεις"
 #. This autostart desktop entry comment will be shown within 'Session and
 #. Startup' (Autostart).
 msgid "An applet to show updates"
-msgstr "Μια μικροεφαρμογή για την εμφάνιση ενημερώσεων"
+msgstr "Eφαρμογή για την εμφάνιση ενημερώσεων"
 
 #. TRANSLATORS:
 #. This desktop entry comment will be shown within the menu.
 msgid "Re-enable MX Updater icon even if no updates available"
 msgstr ""
-"Ενεργοποιήστε ξανά το εικονίδιο του MX Updater, ακόμη και αν δεν υπάρχουν "
-"διαθέσιμες ενημερώσεις"
+"Εμφάνιση του εικονιδίου MX Ενημερώσεις, ακόμη και αν δεν υπάρχουν διαθέσιμες"
+" ενημερώσεις"
 
 msgid "Enable Auto-update"
-msgstr "Ενεργοποίηση Auto-update"
+msgstr "Ενεργοποίηση αυτόματων ενημερώσεων"
 
 msgid "Disable Auto-update"
-msgstr "Απενεργοποίηση Auto-update"
+msgstr "Απενεργοποίηση αυτόματων ενημερώσεων"

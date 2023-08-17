@@ -25,35 +25,34 @@ Vietnamese_Input_fcitx
    <eu>Vietnamese Fonts and fcitx</eu>
    <fa>Vietnamese Fonts and fcitx</fa>
    <fil_PH>Vietnamese Fonts and fcitx</fil_PH>
-   <fi>Vietnamese Fonts and fcitx</fi>
+   <fi>Vietnamilaiset kirjasimet ja fcitx</fi>
    <fr>Polices vietnamiennes et fcitx</fr>
    <he_IL>Vietnamese Fonts and fcitx</he_IL>
-   <hi>Vietnamese Fonts and fcitx</hi>
+   <hi>वियतनामी मुद्रलिपि व Fcitx</hi>
    <hr>Vietnamese Fonts and fcitx</hr>
    <hu>Vietnamese Fonts and fcitx</hu>
    <id>Vietnamese Fonts and fcitx</id>
    <is>Vietnamese Fonts and fcitx</is>
    <it>Font e fcitx per la lingua vietnamita</it>
-   <ja_JP>Vietnamese Fonts and fcitx</ja_JP>
-   <ja>Vietnamese Fonts and fcitx</ja>
+   <ja>ベトナム語のフォントと fcitx</ja>
    <kk>Vietnamese Fonts and fcitx</kk>
    <ko>Vietnamese Fonts and fcitx</ko>
    <lt>Vietnamese Fonts and fcitx</lt>
    <mk>Vietnamese Fonts and fcitx</mk>
    <mr>Vietnamese Fonts and fcitx</mr>
-   <nb>Vietnamese Fonts and fcitx</nb>
+   <nb>Vietnamesiske skrifter og fcitx</nb>
    <nl>Vietnamese Fonts en fcitx</nl>
    <pl>Wietnamskie fonty i fcitx</pl>
-   <pt_BR>Vietnamita Fontes e fcitx</pt_BR>
+   <pt_BR>Fontes e fcitx Vietnamita</pt_BR>
    <pt>Vietnamita Fontes e fcitx</pt>
    <ro>Vietnamese Fonts and fcitx</ro>
-   <ru>Vietnamese Fonts and fcitx</ru>
+   <ru>Вьетнамские шрифты и метод ввода fcitx</ru>
    <sk>Vietnamese Fonts and fcitx</sk>
-   <sl>Vietnamese Fonts and fcitx</sl>
-   <sq>Vietnamese Fonts and fcitx</sq>
+   <sl>Vietnamske pisave in fcitx</sl>
+   <sq>Shkronja dhe fcitx për vietnamishten</sq>
    <sr>Vietnamese Fonts and fcitx</sr>
    <sv>Vietnamesiska Typsnitt och fcitx</sv>
-   <tr>Vietnamese Fonts and fcitx</tr>
+   <tr>Vietnamca Yazı Tipi ve fcitx</tr>
    <uk>Vietnamese Fonts and fcitx</uk>
    <vi>Vietnamese Fonts and fcitx</vi>
    <zh_CN>Vietnamese Fonts and fcitx</zh_CN>

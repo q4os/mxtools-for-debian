@@ -71,7 +71,7 @@
     <message>
         <location filename="../mainwindow.ui" line="274"/>
         <source>Remaster</source>
-        <translation type="unfinished"></translation>
+        <translation>Қайта өңдеу</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="301"/>

@@ -18,7 +18,7 @@ deb packaging tools
    <cs>tools for creation of deb packages</cs>
    <da>værktøjer til at oprette deb-pakker</da>
    <de>Werkzeuge zur Erstellung von Deb-Paketen</de>
-   <el>εργαλεία για τη δημιουργία πακέτων deb</el>
+   <el>Εργαλεία για τη δημιουργία πακέτων deb</el>
    <en>tools for creation of deb packages</en>
    <es>Herramientas para la creación de paquetes deb</es>
    <et>tools for creation of deb packages</et>
@@ -28,29 +28,28 @@ deb packaging tools
    <fi>*deb pakettien luontityökalu</fi>
    <fr>Outils pour la création de paquets .deb</fr>
    <he_IL>tools for creation of deb packages</he_IL>
-   <hi>tools for creation of deb packages</hi>
+   <hi>Deb पैकेज सृजन हेतु साधन</hi>
    <hr>tools for creation of deb packages</hr>
    <hu>tools for creation of deb packages</hu>
    <id>tools for creation of deb packages</id>
    <is>tools for creation of deb packages</is>
    <it>Strumenti per la creazione di pacchetti deb</it>
-   <ja_JP>tools for creation of deb packages</ja_JP>
-   <ja>tools for creation of deb packages</ja>
+   <ja>deb パッケージ作成ツール</ja>
    <kk>tools for creation of deb packages</kk>
    <ko>tools for creation of deb packages</ko>
    <lt>įrankiai, skirti deb paketų kūrimui</lt>
    <mk>tools for creation of deb packages</mk>
    <mr>tools for creation of deb packages</mr>
-   <nb>tools for creation of deb packages</nb>
+   <nb>verktøy for å lage deb-pakker</nb>
    <nl>gereedschappen voor het maken van deb pakketten</nl>
    <pl>narzędzia do tworzenia pakietów deb</pl>
-   <pt_BR>Ferramentas para criação de Pacotes deb</pt_BR>
+   <pt_BR>Ferramentas para criação de pacotes deb</pt_BR>
    <pt>Ferramentas para criar pacotes deb</pt>
    <ro>tools for creation of deb packages</ro>
    <ru>Инструменты для создания deb пакетов</ru>
    <sk>Nástroje na vytváranie deb balíkov</sk>
    <sl>orodja za izdelavo deb paketov</sl>
-   <sq>tools for creation of deb packages</sq>
+   <sq>mjete për krijim paketash deb</sq>
    <sr>tools for creation of deb packages</sr>
    <sv>verktyg för att skapa deb paket</sv>
    <tr>deb paketleri oluşturma araçları</tr>
@@ -73,7 +72,6 @@ cp /etc/apt/sources.list.d/debian.list /etc/apt/pbuilder.list
 
 <install_package_names>
 pbuilder
-debian-builder
 debhelper
 libparse-debcontrol-perl
 devscripts
@@ -92,7 +90,6 @@ rm -f /etc/apt/pbuilder.list
 
 <uninstall_package_names>
 pbuilder
-debian-builder
 debhelper
 libparse-debcontrol-perl
 devscripts

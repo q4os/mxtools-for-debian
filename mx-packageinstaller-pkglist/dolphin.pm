@@ -34,7 +34,6 @@ Dolphin
    <id> default file manager from the KDE plasma desktop</id>
    <is> default file manager from the KDE plasma desktop</is>
    <it> default file manager from the KDE plasma desktop</it>
-   <ja_JP> default file manager from the KDE plasma desktop</ja_JP>
    <ja> default file manager from the KDE plasma desktop</ja>
    <kk> default file manager from the KDE plasma desktop</kk>
    <ko> default file manager from the KDE plasma desktop</ko>
@@ -72,7 +71,6 @@ all
 
 <install_package_names>
 dolphin
-kde-servicemenu-rootactions
 </install_package_names>
 
 
@@ -83,6 +81,5 @@ kde-servicemenu-rootactions
 
 <uninstall_package_names>
 dolphin
-kde-servicemenu-rootactions
 </uninstall_package_names>
 </app>

@@ -5,8 +5,8 @@
     <name>MainWindow</name>
     <message>
         <location filename="../mainwindow.ui" line="14"/>
-        <location filename="../mainwindow.cpp" line="66"/>
-        <location filename="../mainwindow.cpp" line="433"/>
+        <location filename="../mainwindow.cpp" line="64"/>
+        <location filename="../mainwindow.cpp" line="434"/>
         <source>MX Welcome</source>
         <translation>MX 欢迎界面</translation>
     </message>
@@ -148,7 +148,7 @@
     <message>
         <location filename="../mainwindow.ui" line="890"/>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta charset=&quot;utf-8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Noto Sans&apos;; font-size:10.5pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -160,7 +160,7 @@ p, li { white-space: pre-wrap; }
         <translation>启动时显示此窗口</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="318"/>
+        <location filename="../mainwindow.cpp" line="317"/>
         <source>User demo, password:</source>
         <translation>demo 用户，密码：</translation>
     </message>
@@ -171,17 +171,17 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="355"/>
-        <location filename="../mainwindow.cpp" line="372"/>
+        <location filename="../mainwindow.cpp" line="373"/>
         <source>Error</source>
         <translation>错误</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="384"/>
+        <location filename="../mainwindow.cpp" line="386"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:14pt; font-weight:600;&quot;&gt;%1 &amp;quot;%2&amp;quot;&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="432"/>
+        <location filename="../mainwindow.cpp" line="433"/>
         <source>About MX Welcome</source>
         <translation>关于 MX 欢迎界面</translation>
     </message>
@@ -196,12 +196,12 @@ p, li { white-space: pre-wrap; }
         <translation>显示 MX Linux 欢迎界面的程序</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="437"/>
+        <location filename="../mainwindow.cpp" line="438"/>
         <source>Copyright (c) MX Linux</source>
         <translation>Copyright (c) MX Linux</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="438"/>
+        <location filename="../mainwindow.cpp" line="439"/>
         <source>%1 License</source>
         <translation type="unfinished"></translation>
     </message>
@@ -237,43 +237,43 @@ p, li { white-space: pre-wrap; }
         <translation>此工具显示带有两个选项卡的欢迎屏幕。</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="47"/>
+        <location filename="../main.cpp" line="48"/>
         <source>Start with About tab selected. The About tab provides basic information about the current MX Linux version, the user&apos;s hardware, and access to a full system report.</source>
         <translation>从以选中的“关于”选项卡开始。“关于”选项卡提供有关当前 MX Linux 版本、用户硬件和完整系统报告的基本信息。</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="50"/>
+        <location filename="../main.cpp" line="51"/>
         <source>Run a test mode.</source>
         <translation>运行测试模块</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="71"/>
+        <location filename="../main.cpp" line="73"/>
         <source>Error</source>
         <translation>错误</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="71"/>
+        <location filename="../main.cpp" line="73"/>
         <source>You must run this program as normal user.</source>
         <translation type="unfinished">您必须以普通用户的身份来运行该程序。</translation>
     </message>
     <message>
-        <location filename="../about.cpp" line="41"/>
+        <location filename="../about.cpp" line="39"/>
         <source>License</source>
         <translation type="unfinished">许可证</translation>
     </message>
     <message>
-        <location filename="../about.cpp" line="42"/>
-        <location filename="../about.cpp" line="52"/>
+        <location filename="../about.cpp" line="40"/>
+        <location filename="../about.cpp" line="50"/>
         <source>Changelog</source>
         <translation type="unfinished">更新日志</translation>
     </message>
     <message>
-        <location filename="../about.cpp" line="43"/>
+        <location filename="../about.cpp" line="41"/>
         <source>Cancel</source>
         <translation type="unfinished">取消</translation>
     </message>
     <message>
-        <location filename="../about.cpp" line="64"/>
+        <location filename="../about.cpp" line="63"/>
         <source>&amp;Close</source>
         <translation type="unfinished">关闭(&amp;C)</translation>
     </message>

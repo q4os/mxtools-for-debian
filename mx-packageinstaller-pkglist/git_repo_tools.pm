@@ -25,35 +25,34 @@ GIT Tools
    <eu>GIT Repo tools</eu>
    <fa>GIT Repo tools</fa>
    <fil_PH>GIT Repo tools</fil_PH>
-   <fi>GIT Repo tools</fi>
+   <fi>GIT-ohjelmavarastotyökalut</fi>
    <fr>Outils pour dépôt GIT</fr>
    <he_IL>GIT Repo tools</he_IL>
-   <hi>GIT Repo tools</hi>
+   <hi>GIT पैकेज-संग्रह साधन</hi>
    <hr>GIT Repo tools</hr>
    <hu>GIT Repo tools</hu>
    <id>GIT Repo tools</id>
    <is>GIT Repo tools</is>
    <it>Strumenti GIT Repo</it>
-   <ja_JP>GIT Repo tools</ja_JP>
-   <ja>GIT Repo tools</ja>
+   <ja>GIT Repo ツール</ja>
    <kk>GIT Repo tools</kk>
    <ko>GIT Repo tools</ko>
    <lt>GIT saugyklos įrankiai</lt>
    <mk>GIT Repo tools</mk>
    <mr>GIT Repo tools</mr>
-   <nb>GIT Repo tools</nb>
+   <nb>Verktøy for GIT-kodelager</nb>
    <nl>GIT Pakketbron Gereedschappen</nl>
    <pl>repozytorium narzędzi GIT</pl>
-   <pt_BR>Ferramentas GIT Repo</pt_BR>
-   <pt>Ferramentas GIT Repo</pt>
+   <pt_BR>GIT Repo - Ferramenta de Gerenciamento de Repositórios</pt_BR>
+   <pt>Ferramentas para  Repositórios GIT</pt>
    <ro>GIT Repo tools</ro>
    <ru>Инструменты репозитория GIT</ru>
    <sk>GIT Repo tools</sk>
    <sl>orodja za GIT repozitorije</sl>
-   <sq>GIT Repo tools</sq>
+   <sq>Mjete Deposh GIT</sq>
    <sr>GIT Repo tools</sr>
    <sv>GIT Förråds verktyg</sv>
-   <tr>GIT Repo tools</tr>
+   <tr>GIT depo araçları</tr>
    <uk>інструменти сховища GIT</uk>
    <vi>GIT Repo tools</vi>
    <zh_CN>GIT Repo tools</zh_CN>

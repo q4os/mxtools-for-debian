@@ -98,7 +98,7 @@
     <message>
         <location filename="../mainwindow.ui" line="334"/>
         <source>Save the original boot directory when updating a live-usb</source>
-        <translation>Αποθήκευση του αρχικού φορτωτή εκκίνησης κατά την ενημέρωση ενός live-usb</translation>
+        <translation>Αποθήκευση του αρχικού φορτωτή εκκίνησης κατά την ενημέρωση του live-usb</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="341"/>
@@ -143,7 +143,7 @@
     <message>
         <location filename="../mainwindow.ui" line="392"/>
         <source>Don&apos;t use fuseiso to mount iso files</source>
-        <translation>Χωρίς τη χρήση fuseiso για την προσάρτηση αρχείων iso</translation>
+        <translation>Χωρίς χρήση fuseiso για την προσάρτηση αρχείων iso</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="418"/>
@@ -204,7 +204,7 @@
     <message>
         <location filename="../mainwindow.ui" line="582"/>
         <source>Full-featured mode - writable Li&amp;veUSB</source>
-        <translation type="unfinished"></translation>
+        <translation>Με όλες τις λειτουργίες - Liv&amp;eUSB με δυνατότητα εγγραφής</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="592"/>
@@ -214,7 +214,7 @@
     <message>
         <location filename="../mainwindow.ui" line="595"/>
         <source>Image &amp;mode - read-only LiveUSB (dd)</source>
-        <translation type="unfinished"></translation>
+        <translation>Λειτουργία εικόνας - Li&amp;veUSB μόνο για ανάγνωση (dd)</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="609"/>
@@ -239,7 +239,7 @@
     <message>
         <location filename="../mainwindow.ui" line="750"/>
         <source>Don&apos;t run commands that affect the usb device</source>
-        <translation>Μην εκτελείτε εντολές που επηρεάζουν τη συσκευή USB</translation>
+        <translation>Χωρίς εκτέλεση εντολών που επηρεάζουν τη συσκευή usb</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="753"/>
@@ -291,16 +291,14 @@
     <message>
         <location filename="../mainwindow.cpp" line="117"/>
         <source>Source and destination are on the same device, please select again.</source>
-        <translation>Η πηγή και ο προορισμός βρίσκονται στην ίδια συσκευή, παρακαλώ επιλέξτε πάλι.</translation>
+        <translation>Η προέλευση και ο προορισμός βρίσκονται στην ίδια συσκευή, παρακαλώ επιλέξτε πάλι.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="152"/>
         <source>Writing %1 using &apos;dd&apos; command to /dev/%2,
 
-Please wait until the the process is completed</source>
-        <translation>Εγγραφή %1 με την εντολή &apos;dd&apos; στο /dev/%2,
-
-Παρακαλώ περιμένετε μέχρι να ολοκληρωθεί η διαδικασία</translation>
+Please wait until the process is completed</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="312"/>
@@ -374,7 +372,7 @@ Please wait until the the process is completed</source>
     <message>
         <location filename="../mainwindow.cpp" line="434"/>
         <source>Select an ISO file to write to the USB drive</source>
-        <translation>Επιλογή αρχείου ISO για εγγραφή του στη μονάδα USB</translation>
+        <translation>Επιλογή αρχείου ISO για εγγραφή στη μονάδα USB</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="435"/>
@@ -401,7 +399,7 @@ Please wait until the the process is completed</source>
         <location filename="../mainwindow.cpp" line="500"/>
         <location filename="../mainwindow.cpp" line="517"/>
         <source>Select Source</source>
-        <translation>Επιλογή πηγής</translation>
+        <translation>Επιλογή πρoέλευσης</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="504"/>
@@ -417,7 +415,7 @@ Please wait until the the process is completed</source>
     <message>
         <location filename="../mainwindow.cpp" line="581"/>
         <source>Could not find a log file at: </source>
-        <translation type="unfinished"></translation>
+        <translation>Δεν βρέθηκε αρχείο αλλαγών στο: </translation>
     </message>
 </context>
 <context>
@@ -436,7 +434,7 @@ Please wait until the the process is completed</source>
     <message>
         <location filename="../about.cpp" line="54"/>
         <source>Cancel</source>
-        <translation>Ακύρωση</translation>
+        <translation>Άκυρο</translation>
     </message>
     <message>
         <location filename="../about.cpp" line="74"/>
@@ -446,22 +444,22 @@ Please wait until the the process is completed</source>
     <message>
         <location filename="../main.cpp" line="57"/>
         <source>Program for creating a live-usb from an iso-file, another live-usb, a live-cd/dvd, or a running live system.</source>
-        <translation>Πρόγραμμα δημιουργίας live-usb από αρχείο iso, από άλλο live-usb, από cd/dvd ή από το τρέχον live σύστημα.</translation>
+        <translation>Πρόγραμμα δημιουργίας live-usb από αρχείο iso, από άλλο live-usb, από cd/dvd ή από το τρέχον σύστημα live.</translation>
     </message>
     <message>
         <location filename="../main.cpp" line="61"/>
         <source>filename</source>
-        <translation type="unfinished"></translation>
+        <translation>όνομα αρχείου</translation>
     </message>
     <message>
         <location filename="../main.cpp" line="61"/>
         <source>Name of .iso file to open</source>
-        <translation type="unfinished"></translation>
+        <translation>Όνομα του .iso</translation>
     </message>
     <message>
         <location filename="../main.cpp" line="62"/>
         <source>[filename]</source>
-        <translation type="unfinished"></translation>
+        <translation>[όνομα αρχείου]</translation>
     </message>
     <message>
         <location filename="../main.cpp" line="88"/>
@@ -471,7 +469,7 @@ Please wait until the the process is completed</source>
     <message>
         <location filename="../main.cpp" line="89"/>
         <source>You seem to be logged in as root, please log out and log in as normal user to use this program.</source>
-        <translation>Φαίνεται ότι έχετε συνδεθεί ως root, αποσυνδεθείτε και συνδεθείτε ως κανονικός χρήστης για να χρησιμοποιήσετε αυτό το πρόγραμμα.</translation>
+        <translation>Φαίνεται ότι έχετε συνδεθεί ως διαχειριστής, αποσυνδεθείτε και συνδεθείτε ως απλός χρήστης για να χρησιμοποιήσετε αυτό το πρόγραμμα.</translation>
     </message>
     <message>
         <location filename="../main.cpp" line="103"/>

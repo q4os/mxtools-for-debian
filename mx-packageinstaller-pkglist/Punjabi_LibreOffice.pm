@@ -25,35 +25,34 @@ Punjabi_Libreoffice
    <eu>Punjabi Language Meta-Package for LibreOffice</eu>
    <fa>Punjabi Language Meta-Package for LibreOffice</fa>
    <fil_PH>Punjabi Language Meta-Package for LibreOffice</fil_PH>
-   <fi>Punjabi Language Meta-Package for LibreOffice</fi>
-   <fr>Punjabi Language Meta-Package for LibreOffice</fr>
+   <fi>Punjabinkielinen kielipaketti LibreOffice:lle</fi>
+   <fr>Méta-Paquet en langue punjabi pour LibreOffice</fr>
    <he_IL>Punjabi Language Meta-Package for LibreOffice</he_IL>
-   <hi>Punjabi Language Meta-Package for LibreOffice</hi>
+   <hi>लिब्रे-ऑफिस हेतु पंजाबी भाषा मेटा-पैकेज</hi>
    <hr>Punjabi Language Meta-Package for LibreOffice</hr>
    <hu>Punjabi Language Meta-Package for LibreOffice</hu>
    <id>Punjabi Language Meta-Package for LibreOffice</id>
    <is>Punjabi Language Meta-Package for LibreOffice</is>
-   <it>Punjabi Language Meta-Package for LibreOffice</it>
-   <ja_JP>Punjabi Language Meta-Package for LibreOffice</ja_JP>
-   <ja>Punjabi Language Meta-Package for LibreOffice</ja>
+   <it>Meta-pacchetto della lingua punjabi per LibreOffice</it>
+   <ja>LibreOffice用パンジャブ語メタパッケージ</ja>
    <kk>Punjabi Language Meta-Package for LibreOffice</kk>
    <ko>Punjabi Language Meta-Package for LibreOffice</ko>
    <lt>Punjabi Language Meta-Package for LibreOffice</lt>
    <mk>Punjabi Language Meta-Package for LibreOffice</mk>
    <mr>Punjabi Language Meta-Package for LibreOffice</mr>
-   <nb>Punjabi Language Meta-Package for LibreOffice</nb>
-   <nl>Punjabi Language Meta-Package for LibreOffice</nl>
-   <pl>Punjabi Language Meta-Package for LibreOffice</pl>
-   <pt_BR>Punjabi Language Meta-Package for LibreOffice</pt_BR>
+   <nb>Punjabi språkpakke for LibreOffice</nb>
+   <nl>Punjabi Taal Meta-Pakket voor LibreOffice</nl>
+   <pl>Meta-pakiet języka Punjabi dla LibreOffice</pl>
+   <pt_BR>Punjabi Pacote de Idioma para o LibreOffice</pt_BR>
    <pt>Panjabi Meta-Pacote de Idioma para LibreOffice</pt>
    <ro>Punjabi Language Meta-Package for LibreOffice</ro>
-   <ru>Punjabi Language Meta-Package for LibreOffice</ru>
+   <ru>Мета-пакет языка панджаби для LibreOffice</ru>
    <sk>Punjabi Language Meta-Package for LibreOffice</sk>
    <sl>Pundžabski jezikovni meta-paket za LibreOffice</sl>
-   <sq>Punjabi Language Meta-Package for LibreOffice</sq>
+   <sq>Meta-Paketë gjuhësore në panxhabi për LibreOffice-in</sq>
    <sr>Punjabi Language Meta-Package for LibreOffice</sr>
    <sv>Punjabi Språk Meta-Paket för LibreOffice</sv>
-   <tr>Punjabi Language Meta-Package for LibreOffice</tr>
+   <tr>LibreOffice için Pencap Dili Üst-Paketi</tr>
    <uk>Punjabi Language Meta-Package for LibreOffice</uk>
    <vi>Punjabi Language Meta-Package for LibreOffice</vi>
    <zh_CN>Punjabi Language Meta-Package for LibreOffice</zh_CN>

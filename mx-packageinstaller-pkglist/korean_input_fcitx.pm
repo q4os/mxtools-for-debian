@@ -25,32 +25,31 @@ Korean_Input_fcitx
    <eu>Korean Fonts and fcitx</eu>
    <fa>Korean Fonts and fcitx</fa>
    <fil_PH>Korean Fonts and fcitx</fil_PH>
-   <fi>Korean Fonts and fcitx</fi>
+   <fi>Korealaiset kirjasimet ja fcitx</fi>
    <fr>Polices coréennes et fcitx</fr>
    <he_IL>Korean Fonts and fcitx</he_IL>
-   <hi>Korean Fonts and fcitx</hi>
+   <hi>कोरियाई मुद्रलिपि व Fcitx</hi>
    <hr>Korean Fonts and fcitx</hr>
    <hu>Korean Fonts and fcitx</hu>
    <id>Korean Fonts and fcitx</id>
    <is>Korean Fonts and fcitx</is>
    <it>Font coreani e fcitx</it>
-   <ja_JP>Korean Fonts and fcitx</ja_JP>
-   <ja>Korean Fonts and fcitx</ja>
+   <ja>韓国語のフォントと fcitx</ja>
    <kk>Korean Fonts and fcitx</kk>
    <ko>Korean Fonts and fcitx</ko>
    <lt>Korėjietiški šriftai ir fcitx</lt>
    <mk>Korean Fonts and fcitx</mk>
    <mr>Korean Fonts and fcitx</mr>
-   <nb>Korean Fonts and fcitx</nb>
+   <nb>Koreanske skrifter og fcitx</nb>
    <nl>Koreaanse Fonts en fcitx</nl>
    <pl>Koreańskie fonty i fcitx</pl>
-   <pt_BR>Coreano Fontes e fcitx</pt_BR>
+   <pt_BR>Pacotes de Fontes Coreano e fcitx</pt_BR>
    <pt>Coreano Fontes e fcitx</pt>
    <ro>Korean Fonts and fcitx</ro>
-   <ru>Korean Fonts and fcitx</ru>
+   <ru>Корейские шрифты и метод ввода fcitx</ru>
    <sk>Korean Fonts and fcitx</sk>
-   <sl>Korean Fonts and fcitx</sl>
-   <sq>Korean Fonts and fcitx</sq>
+   <sl>Korejske pisave in fcitx</sl>
+   <sq>Shkronja dhe fcitx për koreançe</sq>
    <sr>Korean Fonts and fcitx</sr>
    <sv>Koreanska Typsnitt och fcitx</sv>
    <tr>Korece Yazı Tipleri ve fcitx</tr>

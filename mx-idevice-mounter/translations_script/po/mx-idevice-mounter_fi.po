@@ -7,6 +7,7 @@
 # anticapitalista <anticapitalista@riseup.net>, 2017
 # James Bowlin <BitJam@gmail.com>, 2017
 # En Kerro <inactive+ekeimaja@transifex.com>, 2018
+# Henri Koivuneva <henri.koivuneva@gmail.com>, 2020
 # 
 #, fuzzy
 msgid ""
@@ -15,7 +16,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-12-02 11:04-0500\n"
 "PO-Revision-Date: 2017-12-02 16:14+0000\n"
-"Last-Translator: En Kerro <inactive+ekeimaja@transifex.com>, 2018\n"
+"Last-Translator: Henri Koivuneva <henri.koivuneva@gmail.com>, 2020\n"
 "Language-Team: Finnish (https://www.transifex.com/anticapitalista/teams/10162/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -35,8 +36,8 @@ msgstr "Versio: "
 msgid ""
 "GUI program for mounting & unmounting <br> iPhones and Ipads in MX Linux"
 msgstr ""
-"Graafinen käyttöliittymä <br> iPhonen ja Ipadin liittämiseen ja "
-"irrottamiseen MX Linux:issa"
+"Graafinen käyttöliittymä <br> iPhonen ja iPadin liittämiseen ja "
+"irrottamiseen MX Linuxissa"
 
 #: idevice-mounter:100
 msgid "Copyright (c) MX Linux"

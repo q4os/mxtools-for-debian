@@ -98,6 +98,7 @@ Germany, Karlsruhe - https://mirror.eu.oneandone.net/linux/distributions/mx/pack
 Germany, Landshut - http://mirror.funkfreundelandshut.de/mxlinux/packages
 Greece, Athens - http://ftp.ntua.gr/pub/linux/mxlinux
 Greece, Crete - http://ftp.cc.uoc.gr/mirrors/linux/mx
+Greece, Thessaloniki - https://fosszone.csd.auth.gr/mxlinux-archive
 Hong Kong, KoDDoS - https://mirror-hk.koddos.net/mxlinux
 Hungary, Miskolc - https://quantum-mirror.hu/mirrors/pub/mx-linux/packages
 India - http://mirrors.piconets.webwerks.in/mx-mirror/packages

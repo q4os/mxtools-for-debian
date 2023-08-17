@@ -16,7 +16,7 @@
     <message>
         <location filename="../mainwindow.ui" line="81"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;This tool allows you to rework an ISO while running Live. &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Remaster&lt;/span&gt; allows you to change files, applications and settings with the goal of producing a new master copy for storage or distribution. &lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Persistence&lt;/span&gt; allows you to retain data, settings and installed programs when the machine gets switched off for personal use.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Mit diesem Tool können Sie aus einer Live-Sitzung eine angepasste ISO-Datei erzeugen. &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Remaster&lt;/span&gt; erlaubt Ihnen, eine neue Master-Kopie mit geänderten Dateien, Anwendungen und Einstellungen zu erzeugen, als Sicherheitskopie oder zur Distribution an andere Benutzer. &lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Persistenz&lt;/span&gt; erlaubt es, Ihre Daten, Einstellungen und installierte Programme auch nach dem Abschalten des Computers zu erhalten.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Mit diesem Tool können sie aus einer Live-Sitzung heraus eine angepasste ISO-Datei erzeugen. &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Remaster&lt;/span&gt; erlaubt Ihnen, eine neue Master-Kopie mit geänderten Dateien, Anwendungen und Einstellungen zu erzeugen, als Sicherheitskopie oder zur Distribution an andere Benutzer. &lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Persistenz&lt;/span&gt; erlaubt es, Ihre Daten, Einstellungen und installierte Programme auch nach dem Abschalten des Computers zu erhalten.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="133"/>
@@ -76,7 +76,7 @@
     <message>
         <location filename="../mainwindow.ui" line="301"/>
         <source>Save root persistence</source>
-        <translation>Speichern der Root-Persistenz</translation>
+        <translation>root-Persistenz speichern </translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="315"/>

@@ -1,4 +1,4 @@
-gtkdialog (2:0.8.3-2mx21+2) mx; urgency=medium
+gtkdialog (2:0.8.3-2mx23+1) mx; urgency=medium
 
   * Remove build-deps that don't do anything: dpatch, autotools-dev, byacc, and
     texinfo.

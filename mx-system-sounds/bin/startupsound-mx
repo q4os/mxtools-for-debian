@@ -18,7 +18,7 @@ conffile="$HOME/.config/MX-Linux/mx-system-sounds/mx-login-logout_sounds.conf"
 
 if [ -e "$conffile" ]; then
 
-	customsound=$(cat "$configfile")
+	customsound=$(cat "$configfile" 2>/dev/null)
 	#echo custom sound is $customsound
 
 	startup_enabled=$(grep startup "$conffile" |cut -d '=' -f2)
@@ -34,6 +34,7 @@ fi
 
 if [ "$customsound" = "" ]; then
 	if [ "$startup_enabled" = "true" ]; then
+        sleep 5
 		play "$defaultsound" 
 		exit 0
 	else
@@ -41,6 +42,7 @@ if [ "$customsound" = "" ]; then
 	fi
 else
 	if [ "$startup_enabled" = "true" ]; then
+		sleep 5
 		play "$customsound" 
 		exit 0
 	else

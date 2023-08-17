@@ -14,46 +14,45 @@ German_Libreoffice
    <ar>German Language Meta-Package for LibreOffice</ar>
    <bg>German Language Meta-Package for LibreOffice</bg>
    <bn>German Language Meta-Package for LibreOffice</bn>
-   <ca>Meta-paquet d'alemany per LibreOffice</ca>
+   <ca>Metapaquet per LibreOffice</ca>
    <cs>German Language Meta-Package for LibreOffice</cs>
    <da>Tysk sprog-metapakke til LibreOffice</da>
-   <de>Deutsches Meta-Paket für LibreOffice</de>
-   <el>LibreOffice στα γερμανικά</el>
+   <de>Meta-Paket für LibreOffice</de>
+   <el>Meta-Package για το LibreOffice</el>
    <en>German Language Meta-Package for LibreOffice</en>
-   <es>Meta-Paquete de Idioma Alemán para LibreOffice</es>
+   <es>Meta-Package para LibreOffice</es>
    <et>German Language Meta-Package for LibreOffice</et>
    <eu>German Language Meta-Package for LibreOffice</eu>
    <fa>German Language Meta-Package for LibreOffice</fa>
    <fil_PH>German Language Meta-Package for LibreOffice</fil_PH>
-   <fi>German Language Meta-Package for LibreOffice</fi>
-   <fr>Méta-paquet langue allemande pour LibreOffice</fr>
+   <fi>Metatieto-paketti LibreOffice:lle</fi>
+   <fr>Meta-Paquet pour LibreOffice</fr>
    <he_IL>German Language Meta-Package for LibreOffice</he_IL>
-   <hi>German Language Meta-Package for LibreOffice</hi>
+   <hi>लिब्रे-ऑफिस हेतु मेटा-पैकेज</hi>
    <hr>German Language Meta-Package for LibreOffice</hr>
    <hu>German Language Meta-Package for LibreOffice</hu>
    <id>German Language Meta-Package for LibreOffice</id>
    <is>German Language Meta-Package for LibreOffice</is>
-   <it>Meta-pacchetto della lingua tedesca per LibreOffice</it>
-   <ja_JP>German Language Meta-Package for LibreOffice</ja_JP>
-   <ja>German Language Meta-Package for LibreOffice</ja>
+   <it>Meta-pacchetto per LibreOffice</it>
+   <ja>LibreOffice用メタパッケージ</ja>
    <kk>German Language Meta-Package for LibreOffice</kk>
    <ko>German Language Meta-Package for LibreOffice</ko>
    <lt>German Language Meta-Package for LibreOffice</lt>
    <mk>German Language Meta-Package for LibreOffice</mk>
    <mr>German Language Meta-Package for LibreOffice</mr>
-   <nb>German Language Meta-Package for LibreOffice</nb>
-   <nl>Duitse Taal Meta-Pakket voor LibreOffice</nl>
-   <pl>Niemiecki metapakiet językowy dla LibreOffice</pl>
-   <pt_BR>Alemão Meta-Pacote de Idioma para LibreOffice</pt_BR>
-   <pt>Alemão Meta-Pacote de Idioma para LibreOffice</pt>
+   <nb>LibreOffice metapakke</nb>
+   <nl>Meta-Pakket voor LibreOffice</nl>
+   <pl>Meta-Pakiet dla LibreOffice</pl>
+   <pt_BR>Meta-Pacote para o LibreOffice</pt_BR>
+   <pt>Meta-Pacote para LibreOffice</pt>
    <ro>German Language Meta-Package for LibreOffice</ro>
-   <ru>German Language Meta-Package for LibreOffice</ru>
+   <ru>Мета-пакет для LibreOffice</ru>
    <sk>German Language Meta-Package for LibreOffice</sk>
-   <sl>German Language Meta-Package for LibreOffice</sl>
-   <sq>German Language Meta-Package for LibreOffice</sq>
+   <sl>Meta-paket za LibreOffice</sl>
+   <sq>Meta-Paketë për LibreOffice-in</sq>
    <sr>German Language Meta-Package for LibreOffice</sr>
-   <sv>Tyskt Språk Meta-Paket för LibreOffice</sv>
-   <tr>German Language Meta-Package for LibreOffice</tr>
+   <sv>Meta-Paket för LibreOffice</sv>
+   <tr>LibreOffice için Üst-Paket</tr>
    <uk>German Language Meta-Package for LibreOffice</uk>
    <vi>German Language Meta-Package for LibreOffice</vi>
    <zh_CN>German Language Meta-Package for LibreOffice</zh_CN>

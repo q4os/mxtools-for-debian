@@ -1,3 +1,40 @@
+mx-goodies (23.07.02) mx; urgency=medium
+
+  * update ps_mem.py shebang statement
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 04 Aug 2023 20:54:01 -0400
+
+mx-goodies (23.07.01) mx; urgency=medium
+
+  * adjust qsi filter check
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 22 Jul 2023 23:37:30 -0400
+
+mx-goodies (23.06.04) mx; urgency=medium
+
+  * use different filters on less than mx23 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 11 Jun 2023 07:19:53 -0400
+
+mx-goodies (23.06.03) mx; urgency=medium
+
+  * use inxi built in filters
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 10 Jun 2023 17:04:55 -0400
+
+mx-goodies (23.06.02mx23) mx; urgency=medium
+
+  * remove dmesg non-user override
+  * 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 10 Jun 2023 15:21:54 -0400
+
+mx-goodies (23.06.01) mx; urgency=medium
+
+  * adjust py-loader icon
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 05 Jun 2023 19:18:55 -0400
+
 mx-goodies (23.04.03) mx; urgency=medium
 
   * update policy file message 

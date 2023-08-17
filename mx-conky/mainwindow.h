@@ -44,7 +44,7 @@ class MainWindow : public QDialog
 
 public:
     explicit MainWindow(QWidget *parent = nullptr, const QString &file = QLatin1String(""));
-    ~MainWindow();
+    ~MainWindow() override;
 
     QString file_name;
     bool modified {};
@@ -91,9 +91,9 @@ public:
 public slots:
 
 private slots:
+    static void on_pushHelp_clicked();
     void cleanup();
-    void cmdDone();
-    void cmdStart();
+    void closeEvent(QCloseEvent *event);
     void on_pushAbout_clicked();
     void on_pushCM_clicked();
     void on_pushChange_clicked();
@@ -109,7 +109,6 @@ private slots:
     void on_pushColor9_clicked();
     void on_pushDefaultColor_clicked();
     void on_pushEdit_clicked();
-    static void on_pushHelp_clicked();
     void on_pushRestore_clicked();
     void on_pushToggleOn_clicked();
     void on_radioAllDesktops_clicked();
@@ -118,9 +117,6 @@ private slots:
     void on_radioDesktop1_clicked();
     void on_radioMonthLong_clicked();
     void on_radioMonthShort_clicked();
-    void setConnections();
-
-    void closeEvent(QCloseEvent *event);
 
 private:
     Ui::MainWindow *ui;

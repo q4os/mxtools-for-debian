@@ -76,9 +76,9 @@ class VersionNumber
 public:
     VersionNumber() = default;
     VersionNumber(const VersionNumber &value) = default;
-    VersionNumber(const QString &value);
+    explicit VersionNumber(const QString &value);
 
-    QString toString() const;
+    [[nodiscard]] QString toString() const;
 
     VersionNumber &operator=(const VersionNumber &value) = default;
     VersionNumber &operator=(const QString &value);
@@ -99,8 +99,8 @@ private:
     static QStringList groupDigits(const QString &value); // add characters to separate elements, groups digits together
     void setStrings(const QString &value);
 
-    int compare(const VersionNumber &first,
-                const VersionNumber &second) const; // 1 for >second, -1 for <second, 0 for equal
+    [[nodiscard]] int compare(const VersionNumber &first,
+                              const VersionNumber &second) const; // 1 for >second, -1 for <second, 0 for equal
     static int compare(const QStringList &first, const QStringList &second);
     static int compare(QChar first, QChar second);
 };

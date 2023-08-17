@@ -6,7 +6,7 @@
     <message>
         <location filename="../mainwindow.ui" line="14"/>
         <source>MX Codecs Installer</source>
-        <translation>Εγκατάσταση κωδικοποιητών του MX</translation>
+        <translation>MX Εγκατάσταση κωδικοποιητών</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="27"/>
@@ -26,7 +26,7 @@
     <message>
         <location filename="../mainwindow.ui" line="103"/>
         <source>Cancel</source>
-        <translation>Ακύρωση</translation>
+        <translation>Άκυρο</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="110"/>
@@ -195,7 +195,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="296"/>
         <source>About MX Codecs</source>
-        <translation>Περί του MX Codecs</translation>
+        <translation>Περί του MX Κωδικοποιητές</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="302"/>
@@ -209,7 +209,7 @@
     </message>
     <message>
         <source>MX Codecs</source>
-        <translation type="vanished">MX Codecs</translation>
+        <translation type="vanished">MX Κωδικοποιητές</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="297"/>
@@ -247,11 +247,11 @@
     </message>
     <message>
         <source>Another package management application (like Synaptic or apt-get), is already running. Please close that application first</source>
-        <translation type="vanished">Μια άλλη εφαρμογή διαχείρισης πακέτων (όπως Synaptic ή apt-get), βρίσκεται ήδη σε λειτουργία. Παρακαλώ πρώτα κλείστε αυτή την εφαρμογή</translation>
+        <translation type="vanished">Μια άλλη εφαρμογή διαχείρισης πακέτων (όπως το Synaptic ή η εντολή apt-get), βρίσκεται ήδη σε λειτουργία. Παρακαλώ κλείστε αυτή την εφαρμογή</translation>
     </message>
     <message>
         <source>You must run this program as root.</source>
-        <translation type="vanished">Πρέπει να τρέξετε αυτή την εφαρμογή ως Root.</translation>
+        <translation type="vanished">Πρέπει να τρέξετε αυτή την εφαρμογή ως διαχειριστής.</translation>
     </message>
 </context>
 <context>
@@ -270,7 +270,7 @@
     <message>
         <location filename="../about.cpp" line="54"/>
         <source>Cancel</source>
-        <translation type="unfinished">Ακύρωση</translation>
+        <translation type="unfinished">Άκυρο</translation>
     </message>
     <message>
         <location filename="../about.cpp" line="74"/>
@@ -295,7 +295,7 @@
     <message>
         <location filename="../main.cpp" line="78"/>
         <source>Another package management application (like Synaptic or apt-get), is already running. Please close that application first</source>
-        <translation type="unfinished">Μια άλλη εφαρμογή διαχείρισης πακέτων (όπως Synaptic ή apt-get), βρίσκεται ήδη σε λειτουργία. Παρακαλώ πρώτα κλείστε αυτή την εφαρμογή</translation>
+        <translation type="unfinished">Μια άλλη εφαρμογή διαχείρισης πακέτων (όπως το Synaptic ή η εντολή apt-get), βρίσκεται ήδη σε λειτουργία. Παρακαλώ κλείστε αυτή την εφαρμογή</translation>
     </message>
 </context>
 </TS>

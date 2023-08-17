@@ -1,6 +1,7 @@
 mx-samba-config-desktop_af
 mx-samba-config-desktop_am
 mx-samba-config-desktop_ar
+mx-samba-config-desktop_ast
 mx-samba-config-desktop_be
 mx-samba-config-desktop_bg
 mx-samba-config-desktop_bn
@@ -44,12 +45,16 @@ mx-samba-config-desktop_hr
 mx-samba-config-desktop_ht
 mx-samba-config-desktop_hu
 mx-samba-config-desktop_hy
+mx-samba-config-desktop_hy_AM
+mx-samba-config-desktop_hye
 mx-samba-config-desktop_id
+mx-samba-config-desktop_ie
 mx-samba-config-desktop_is
 mx-samba-config-desktop_it
 mx-samba-config-desktop_ja
 mx-samba-config-desktop_jv
 mx-samba-config-desktop_ka
+mx-samba-config-desktop_kab
 mx-samba-config-desktop_kk
 mx-samba-config-desktop_km
 mx-samba-config-desktop_kn
@@ -74,7 +79,9 @@ mx-samba-config-desktop_nb_NO
 mx-samba-config-desktop_ne
 mx-samba-config-desktop_nl
 mx-samba-config-desktop_nl_BE
+mx-samba-config-desktop_nn
 mx-samba-config-desktop_ny
+mx-samba-config-desktop_oc
 mx-samba-config-desktop_or
 mx-samba-config-desktop_pa
 mx-samba-config-desktop_pl

@@ -25,21 +25,22 @@
 
 #include <QtWebEngineWidgets>
 
-namespace Ui {
+namespace Ui
+{
 class DownloadWidget;
 }
 
-class DownloadWidget : public QWidget {
+class DownloadWidget : public QWidget
+{
     Q_OBJECT
 public:
     explicit DownloadWidget(QWidget* parent = nullptr);
-    ~DownloadWidget();
-    Ui::DownloadWidget *ui;
+    ~DownloadWidget() override;
 
     inline static QString withUnit(qreal bytes);
-    inline static QString timeUnit(int sec);
+    inline static QString timeUnit(int seconds);
     void downloadRequested(QWebEngineDownloadItem* download);
-    static void updateDownload(QWebEngineDownloadItem* download, QPushButton* pushButton, QProgressBar* prog);
+    static void updateDownload(QWebEngineDownloadItem* download, QPushButton* pushButton, QProgressBar* progressBar);
 
 protected:
     inline static QElapsedTimer timerDownload;
@@ -47,6 +48,7 @@ protected:
 
 private:
     QSettings settings;
+    Ui::DownloadWidget* ui;
 };
 
 #endif // DOWNLOADWIDGET_H

@@ -124,7 +124,7 @@
     <message>
         <location filename="../MainWindow.cpp" line="135"/>
         <source>&amp;Save</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;שמירה</translation>
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="136"/>

@@ -18,39 +18,38 @@ Lithuanian_Thunderbird
    <cs>Lithuanian localisation of Thunderbird</cs>
    <da>Litauisk oversættelse af Thunderbird</da>
    <de>Litauische Lokalisierung von Thunderbird</de>
-   <el>Λιθουανικός εντοπισμός του Thunderbird</el>
+   <el>Λιθουανικά για το Thunderbird</el>
    <en>Lithuanian localisation of Thunderbird</en>
    <es>Localización Lituana de Thunderbird</es>
    <et>Lithuanian localisation of Thunderbird</et>
    <eu>Lithuanian localisation of Thunderbird</eu>
    <fa>Lithuanian localisation of Thunderbird</fa>
    <fil_PH>Lithuanian localisation of Thunderbird</fil_PH>
-   <fi>Lithuanian localisation of Thunderbird</fi>
+   <fi>Liettualainen Thunderbird-kotoistus</fi>
    <fr>Localisation lithuanienne pour Thunderbird</fr>
    <he_IL>Lithuanian localisation of Thunderbird</he_IL>
-   <hi>Lithuanian localisation of Thunderbird</hi>
+   <hi>थंडरबर्ड का लिथुआनियाई संस्करण</hi>
    <hr>Lithuanian localisation of Thunderbird</hr>
    <hu>Lithuanian localisation of Thunderbird</hu>
    <id>Lithuanian localisation of Thunderbird</id>
    <is>Lithuanian localisation of Thunderbird</is>
    <it>Localizzazione lituana di Thunderbird</it>
-   <ja_JP>Lithuanian localisation of Thunderbird</ja_JP>
-   <ja>Lithuanian localisation of Thunderbird</ja>
+   <ja>Thunderbird のリトアニア語パック</ja>
    <kk>Lithuanian localisation of Thunderbird</kk>
    <ko>Lithuanian localisation of Thunderbird</ko>
    <lt>Lithuanian localisation of Thunderbird</lt>
    <mk>Lithuanian localisation of Thunderbird</mk>
    <mr>Lithuanian localisation of Thunderbird</mr>
-   <nb>Lithuanian localisation of Thunderbird</nb>
+   <nb>Litauisk lokaltilpassing av Thunderbird</nb>
    <nl>Litouwse lokalisatie van Thunderbird</nl>
    <pl>Litewska lokalizacja Thunderbirda</pl>
-   <pt_BR>Lituano Localização para Thunderbird</pt_BR>
+   <pt_BR>Lituano Localização para o Thunderbird</pt_BR>
    <pt>Lituano Localização para Thunderbird</pt>
    <ro>Lithuanian localisation of Thunderbird</ro>
-   <ru>Lithuanian localisation of Thunderbird</ru>
+   <ru>Литовский перевод для Thunderbird</ru>
    <sk>Lithuanian localisation of Thunderbird</sk>
-   <sl>Lithuanian localisation of Thunderbird</sl>
-   <sq>Lithuanian localisation of Thunderbird</sq>
+   <sl>Litvanske krajevne nastavitve za Thunderbird</sl>
+   <sq>Përkthimi i Thunderbird-it në lituanisht</sq>
    <sr>Lithuanian localisation of Thunderbird</sr>
    <sv>Litauisk lokalisering av Thunderbird </sv>
    <tr>Thunderbird'ün Litvanyaca yerelleştirmesi</tr>

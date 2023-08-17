@@ -25,35 +25,34 @@ Plex
    <eu>Plex Mediaserver (includes web client)(requires reboot after install)</eu>
    <fa>Plex Mediaserver (includes web client)(requires reboot after install)</fa>
    <fil_PH>Plex Mediaserver (includes web client)(requires reboot after install)</fil_PH>
-   <fi>Plex Mediaserver (includes web client)(requires reboot after install)</fi>
+   <fi>Plex - mediapalvelin (sisältää verkkoasiakasohjelman) (vaatii uudelleenkäynnistyksen asennuksen jälkeen)</fi>
    <fr>Plex Mediaserver (client web inclus)(nécessite un re-démarrage après installation)</fr>
    <he_IL>Plex Mediaserver (includes web client)(requires reboot after install)</he_IL>
-   <hi>Plex Mediaserver (includes web client)(requires reboot after install)</hi>
+   <hi>प्लेक्स मीडिया सर्वर (वेब साधन युक्त)(इंस्टॉल उपरांत बूट आवश्यक)</hi>
    <hr>Plex Mediaserver (includes web client)(requires reboot after install)</hr>
    <hu>Plex Mediaserver (includes web client)(requires reboot after install)</hu>
    <id>Plex Mediaserver (includes web client)(requires reboot after install)</id>
    <is>Plex Mediaserver (includes web client)(requires reboot after install)</is>
    <it>Plex Mediaserver (include un client web)(richiede un reboot dopo l'installazione)</it>
-   <ja_JP>Plex Mediaserver (includes web client)(requires reboot after install)</ja_JP>
-   <ja>Plex Mediaserver (includes web client)(requires reboot after install)</ja>
+   <ja>Plex メディアサーバー (ウェブクライアントを含む) (インストール後に再起動が必要)</ja>
    <kk>Plex Mediaserver (includes web client)(requires reboot after install)</kk>
    <ko>Plex Mediaserver (includes web client)(requires reboot after install)</ko>
    <lt>Plex Mediaserver (includes web client)(requires reboot after install)</lt>
    <mk>Plex Mediaserver (includes web client)(requires reboot after install)</mk>
    <mr>Plex Mediaserver (includes web client)(requires reboot after install)</mr>
-   <nb>Plex Mediaserver (includes web client)(requires reboot after install)</nb>
+   <nb>Plex Mediaserver (inkluderer nettklient) (maskinen må omstartes etter installasjon)</nb>
    <nl>Plex Mediaserver (inclusief webcliënt) (moet na installatie opnieuw worden opgestart)</nl>
    <pl>Plex Media Server (zawiera klienta WWW) (wymaga ponownego uruchomienia po instalacji)</pl>
-   <pt_BR>Servidor multimédia Plex - inclui cliente de web (requere reinício do computador após a instalação)</pt_BR>
+   <pt_BR>Plex - Servidor multimídia (inclui cliente de internet/web, requer reinicialização do computador após a instalação)</pt_BR>
    <pt>Servidor multimédia Plex - inclui cliente de web (requere reinício do computador após a instalação)</pt>
    <ro>Plex Mediaserver (includes web client)(requires reboot after install)</ro>
    <ru>Медиасервер Plex (включает веб клиент) (после установки требуется перезагрузка)</ru>
    <sk>Plex Mediaserver (includes web client)(requires reboot after install)</sk>
    <sl>Plex medijski strežnik (vključuje web odjemalec) (zahteva ponovni zagon po namestitvi)</sl>
-   <sq>Plex Mediaserver (includes web client)(requires reboot after install)</sq>
+   <sq>Shërbyesi Plex për media (përfshin klient web)(lyp rinisje pas instalimi)</sq>
    <sr>Plex Mediaserver (includes web client)(requires reboot after install)</sr>
    <sv>Plex Mediaserver (inkluderar webbklient)(kräver omstart efter installation)</sv>
-   <tr>Plex Mediaserver (includes web client)(requires reboot after install)</tr>
+   <tr>Plex Mediaserver  (web istemcisi içerir) (kurulumdan sonra yeniden başlatma gerektirir)</tr>
    <uk>Plex Mediaserver (includes web client)(requires reboot after install)</uk>
    <vi>Plex Mediaserver (includes web client)(requires reboot after install)</vi>
    <zh_CN>Plex Mediaserver (includes web client)(requires reboot after install)</zh_CN>
@@ -68,7 +67,7 @@ Plex
 
 <preinstall>
 apt-get install apt-transport-https
-curl https://downloads.plex.tv/plex-keys/PlexSign.key | apt-key add -
+curl https://downloads.plex.tv/plex-keys/PlexSign.key |tee /etc/apt/trusted.gpg.d/plex.asc
 echo "deb https://downloads.plex.tv/repo/deb public main">/etc/apt/sources.list.d/plex-mx.list
 apt-get update
 </preinstall>

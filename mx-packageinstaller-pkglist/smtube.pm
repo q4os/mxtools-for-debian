@@ -18,42 +18,41 @@ SMtube
    <cs>search and download Youtube videos</cs>
    <da>søg efter og download Youtube-videoer</da>
    <de>YouTube-Videos finden und herunterladen</de>
-   <el>αναζήτηση και λήψη βίντεο Youtube</el>
+   <el>Αναζήτηση και λήψη βίντεο από το Youtube</el>
    <en>search and download Youtube videos</en>
    <es>Busque y descargue videos de Youtube</es>
    <et>search and download Youtube videos</et>
    <eu>search and download Youtube videos</eu>
    <fa>search and download Youtube videos</fa>
    <fil_PH>search and download Youtube videos</fil_PH>
-   <fi>search and download Youtube videos</fi>
+   <fi>etsi ja lataa Youtube-videoita</fi>
    <fr>Rechercher et télécharger des vidéos Youtube</fr>
    <he_IL>search and download Youtube videos</he_IL>
-   <hi>search and download Youtube videos</hi>
+   <hi>यूट्यूब वीडियो खोज व डाउनलोड</hi>
    <hr>search and download Youtube videos</hr>
    <hu>search and download Youtube videos</hu>
    <id>search and download Youtube videos</id>
    <is>search and download Youtube videos</is>
    <it>cerca e scarica video da Youtube</it>
-   <ja_JP>search and download Youtube videos</ja_JP>
-   <ja>search and download Youtube videos</ja>
+   <ja>YouTube 動画の検索とダウンロード</ja>
    <kk>search and download Youtube videos</kk>
    <ko>search and download Youtube videos</ko>
    <lt>search and download Youtube videos</lt>
    <mk>search and download Youtube videos</mk>
    <mr>search and download Youtube videos</mr>
-   <nb>search and download Youtube videos</nb>
+   <nb>søk og last ned Youtube-videoer</nb>
    <nl>zoek en download Youtube video's</nl>
    <pl>wyszukuj i pobieraj filmy z YouTube</pl>
    <pt_BR>Pesquisar e baixar vídeos do Youtube</pt_BR>
-   <pt>pesquisar e descarregar vídeos do Youtube</pt>
+   <pt>Pesquisar e descarregar vídeos do Youtube</pt>
    <ro>search and download Youtube videos</ro>
    <ru>Поиск и скачивание видео в Youtube</ru>
    <sk>search and download Youtube videos</sk>
    <sl>Išči in prenesivideo posnetke iz Youtube</sl>
-   <sq>search and download Youtube videos</sq>
+   <sq>kërkoni dhe shkarkoni video Youtube</sq>
    <sr>search and download Youtube videos</sr>
    <sv>sök och ladda ner Youtube videos</sv>
-   <tr>search and download Youtube videos</tr>
+   <tr>Youtube videolarını arama ve indirme</tr>
    <uk>пошук та завантаження відео з Youtube</uk>
    <vi>search and download Youtube videos</vi>
    <zh_CN>search and download Youtube videos</zh_CN>

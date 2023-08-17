@@ -30,14 +30,14 @@ class FlatButton : public QPushButton
 {
     Q_OBJECT
 public:
-    FlatButton(QWidget *parent = nullptr);
-    FlatButton(const QString &name, QWidget *parent = nullptr);
+    explicit FlatButton(QWidget *parent = nullptr);
+    explicit FlatButton(const QString &name, QWidget *parent = nullptr);
     void setIconSize(int, int);
     void setIconSize(QSize size);
 
 protected:
-    void enterEvent(QEvent *e);
-    void leaveEvent(QEvent *e);
+    void enterEvent(QEvent *e) override;
+    void leaveEvent(QEvent *e) override;
 };
 
 #endif // FLATBUTTON_H

@@ -14,46 +14,45 @@ WinFF
    <ar>graphical video and audio batch converter</ar>
    <bg>graphical video and audio batch converter</bg>
    <bn>graphical video and audio batch converter</bn>
-   <ca>Convertidor gràfic de vídeo i àudio per lots</ca>
+   <ca>Convertidor gràfic de vídeo i àudio per lots </ca>
    <cs>graphical video and audio batch converter</cs>
    <da>grafisk batchkonvertering af video og lyd</da>
    <de>Grafischer Video- und Audio-Batch-Konverter</de>
-   <el>γραφικό μετατροπέα βίντεο και ήχου</el>
+   <el>Γραφικός μετατροπέας βίντεο και ήχου</el>
    <en>graphical video and audio batch converter</en>
    <es>Conversor gráfico de formatos de audio y video</es>
    <et>graphical video and audio batch converter</et>
    <eu>graphical video and audio batch converter</eu>
    <fa>graphical video and audio batch converter</fa>
    <fil_PH>graphical video and audio batch converter</fil_PH>
-   <fi>graphical video and audio batch converter</fi>
+   <fi>graafinen video- ja audio-muunnin</fi>
    <fr>Convertisseur vidéo et audio</fr>
    <he_IL>graphical video and audio batch converter</he_IL>
-   <hi>graphical video and audio batch converter</hi>
+   <hi>एकाधिक वीडियो व ऑडियो सामग्री हेतु ग्राफ़िकल रूपांतरण साधन</hi>
    <hr>graphical video and audio batch converter</hr>
    <hu>graphical video and audio batch converter</hu>
    <id>graphical video and audio batch converter</id>
    <is>graphical video and audio batch converter</is>
    <it>convertitore grafico batch per video e audio che usa FFmpeg o avconv</it>
-   <ja_JP>graphical video and audio batch converter</ja_JP>
-   <ja>graphical video and audio batch converter</ja>
+   <ja>グラフィカルなビデオとオーディオのバッチコンバータ</ja>
    <kk>graphical video and audio batch converter</kk>
    <ko>graphical video and audio batch converter</ko>
    <lt>graphical video and audio batch converter</lt>
    <mk>graphical video and audio batch converter</mk>
    <mr>graphical video and audio batch converter</mr>
-   <nb>graphical video and audio batch converter</nb>
+   <nb>grafisk verktøy for konvertering av video- og lydfiler</nb>
    <nl>grafische video- en audiobatchomzetter</nl>
    <pl>graficzny konwerter wsadowy wideo i audio</pl>
-   <pt_BR>Conversor gráfico de vídeo e áudio (conversão em lotes)</pt_BR>
+   <pt_BR>Conversor gráfico de áudio e vídeo (conversão em lotes)</pt_BR>
    <pt>Conversor gráfico de vídeo e áudio (conversão em lotes)</pt>
    <ro>graphical video and audio batch converter</ro>
    <ru>Пакетный конвертер видео и аудио</ru>
    <sk>graphical video and audio batch converter</sk>
    <sl>Grafični video in zvočni pretvornik za več datotek</sl>
-   <sq>graphical video and audio batch converter</sq>
+   <sq>shndërrues grafik në masë videosh dhe audiosh</sq>
    <sr>graphical video and audio batch converter</sr>
    <sv>grafisk video och ljud mass-konverterare</sv>
-   <tr>graphical video and audio batch converter</tr>
+   <tr>grafiksel video ve ses toplu dönüştürücü</tr>
    <uk>graphical video and audio batch converter</uk>
    <vi>graphical video and audio batch converter</vi>
    <zh_CN>graphical video and audio batch converter</zh_CN>

@@ -49,7 +49,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../editshare.cpp" line="46"/>
+        <location filename="../editshare.cpp" line="48"/>
         <source>Select directory to share</source>
         <translation type="unfinished"></translation>
     </message>
@@ -91,7 +91,7 @@
     <message>
         <location filename="../mainwindow.ui" line="80"/>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Název</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="85"/>
@@ -181,7 +181,7 @@
     <message>
         <location filename="../mainwindow.ui" line="369"/>
         <source>&amp;Help</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Nápověda</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="376"/>

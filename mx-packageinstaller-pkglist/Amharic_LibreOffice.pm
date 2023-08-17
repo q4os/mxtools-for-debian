@@ -14,46 +14,45 @@ Amharic_Libreoffice
    <ar>Amharic Language Meta-Package for LibreOffice</ar>
    <bg>Amharic Language Meta-Package for LibreOffice</bg>
    <bn>Amharic Language Meta-Package for LibreOffice</bn>
-   <ca>Metapaquet d'idioma Amharic per LibreOffice</ca>
+   <ca>Metapaquet per LibreOffice</ca>
    <cs>Amharic Language Meta-Package for LibreOffice</cs>
    <da>Amharic Language Meta-Package for LibreOffice</da>
-   <de>Amharisches Meta-Paket für LibreOffice</de>
-   <el>LibreOffice στα Amharic</el>
+   <de>Meta-Paket für LibreOffice</de>
+   <el>Meta-Package για το LibreOffice</el>
    <en>Amharic Language Meta-Package for LibreOffice</en>
-   <es>Metapaquete de idioma amárico para LibreOffice</es>
+   <es>Meta-Package para LibreOffice</es>
    <et>Amharic Language Meta-Package for LibreOffice</et>
    <eu>Amharic Language Meta-Package for LibreOffice</eu>
    <fa>Amharic Language Meta-Package for LibreOffice</fa>
    <fil_PH>Amharic Language Meta-Package for LibreOffice</fil_PH>
-   <fi>Amharic Language Meta-Package for LibreOffice</fi>
-   <fr>Amharic Language Meta-Package for LibreOffice</fr>
+   <fi>Metatieto-paketti LibreOffice:lle</fi>
+   <fr>Meta-Paquet pour LibreOffice</fr>
    <he_IL>Amharic Language Meta-Package for LibreOffice</he_IL>
-   <hi>Amharic Language Meta-Package for LibreOffice</hi>
+   <hi>लिब्रे-ऑफिस हेतु मेटा-पैकेज</hi>
    <hr>Amharic Language Meta-Package for LibreOffice</hr>
    <hu>Amharic Language Meta-Package for LibreOffice</hu>
    <id>Amharic Language Meta-Package for LibreOffice</id>
    <is>Amharic Language Meta-Package for LibreOffice</is>
-   <it>Meta-pacchetto della lingua amarica per LibreOffice</it>
-   <ja_JP>Amharic Language Meta-Package for LibreOffice</ja_JP>
-   <ja>Amharic Language Meta-Package for LibreOffice</ja>
+   <it>Meta-pacchetto per LibreOffice</it>
+   <ja>LibreOffice用メタパッケージ</ja>
    <kk>Amharic Language Meta-Package for LibreOffice</kk>
    <ko>Amharic Language Meta-Package for LibreOffice</ko>
    <lt>Amharic Language Meta-Package for LibreOffice</lt>
    <mk>Amharic Language Meta-Package for LibreOffice</mk>
    <mr>Amharic Language Meta-Package for LibreOffice</mr>
-   <nb>Amharic Language Meta-Package for LibreOffice</nb>
-   <nl>Amharisch Taal Meta-Pakket voor LibreOffice</nl>
-   <pl>Amharic Language Meta-Package for LibreOffice</pl>
-   <pt_BR>Amharic Language Meta-Package for LibreOffice</pt_BR>
-   <pt>Amárico Meta-Pacote de Idioma para LibreOffice</pt>
+   <nb>LibreOffice metapakke</nb>
+   <nl>Meta-Pakket voor LibreOffice</nl>
+   <pl>Meta-Pakiet dla LibreOffice</pl>
+   <pt_BR>Meta-Pacote para o LibreOffice</pt_BR>
+   <pt>Meta-Pacote para LibreOffice</pt>
    <ro>Amharic Language Meta-Package for LibreOffice</ro>
-   <ru>Amharic Language Meta-Package for LibreOffice</ru>
+   <ru>Мета-пакет для LibreOffice</ru>
    <sk>Amharic Language Meta-Package for LibreOffice</sk>
-   <sl>Amharični jezikovni meta-paket za LibreOffice</sl>
-   <sq>Amharic Language Meta-Package for LibreOffice</sq>
+   <sl>Meta-paket za LibreOffice</sl>
+   <sq>Meta-Paketë për LibreOffice-in</sq>
    <sr>Amharic Language Meta-Package for LibreOffice</sr>
-   <sv>Amhariskt Språk Meta-Paket för LibreOffice</sv>
-   <tr>Amharic Language Meta-Package for LibreOffice</tr>
+   <sv>Meta-Paket för LibreOffice</sv>
+   <tr>LibreOffice için Üst-Paket</tr>
    <uk>Amharic Language Meta-Package for LibreOffice</uk>
    <vi>Amharic Language Meta-Package for LibreOffice</vi>
    <zh_CN>Amharic Language Meta-Package for LibreOffice</zh_CN>

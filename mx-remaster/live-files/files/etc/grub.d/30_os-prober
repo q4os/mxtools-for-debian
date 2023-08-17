@@ -5,6 +5,10 @@
 
 export LVM_SUPPRESS_FD_WARNINGS=true
 
+if [ "x$(debconf-get-selections |grep  '^grub-pc\sgrub2/enable_os_prober\sboolean\strue' | awk '{print $4}')" = "xtrue" ]; then
+   export GRUB_DISABLE_OS_PROBER="false"
+fi
+
 set -e
 
 

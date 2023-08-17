@@ -85,7 +85,7 @@
     <message>
         <location filename="../prompttab_fix.ui" line="187"/>
         <source>No Colors(Overrides All Other Color Options)</source>
-        <translation>Sin colores (anula todas las demás opciones de color)</translation>
+        <translation>Sin colores (Reemplaza todas las demás opciones de color)</translation>
     </message>
     <message>
         <location filename="../prompttab_fix.ui" line="194"/>

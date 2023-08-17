@@ -34,7 +34,6 @@ Kmail
    <id>Email client from the KDE Community</id>
    <is>Email client from the KDE Community</is>
    <it>Email client from the KDE Community</it>
-   <ja_JP>Email client from the KDE Community</ja_JP>
    <ja>Email client from the KDE Community</ja>
    <kk>Email client from the KDE Community</kk>
    <ko>Email client from the KDE Community</ko>

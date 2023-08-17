@@ -133,23 +133,23 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../about.cpp" line="43"/>
+        <location filename="../about.cpp" line="40"/>
         <source>License</source>
         <translation type="unfinished">परवाना</translation>
     </message>
     <message>
-        <location filename="../about.cpp" line="44"/>
-        <location filename="../about.cpp" line="54"/>
+        <location filename="../about.cpp" line="41"/>
+        <location filename="../about.cpp" line="51"/>
         <source>Changelog</source>
         <translation type="unfinished">बदल सूची</translation>
     </message>
     <message>
-        <location filename="../about.cpp" line="45"/>
+        <location filename="../about.cpp" line="42"/>
         <source>Cancel</source>
         <translation type="unfinished">रद्द करा</translation>
     </message>
     <message>
-        <location filename="../about.cpp" line="67"/>
+        <location filename="../about.cpp" line="64"/>
         <source>&amp;Close</source>
         <translation type="unfinished">बंद</translation>
     </message>

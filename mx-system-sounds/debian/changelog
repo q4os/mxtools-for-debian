@@ -1,3 +1,28 @@
+mx-system-sounds (23.7.01) mx; urgency=medium
+
+  * correct XFCE check at app launch
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 22 Jul 2023 10:01:43 -0400
+
+mx-system-sounds (23.7) mx; urgency=medium
+
+  * Update translations
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 20 Jul 2023 17:31:16 -0400
+
+mx-system-sounds (23.05.01mx23) mx; urgency=medium
+
+  * update logo 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 17 May 2023 00:41:09 -0400
+
+mx-system-sounds (23.04.01mx23) mx; urgency=medium
+
+  * remove logout sound function
+  * delay playing login sound so pipewire can load
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 09 Apr 2023 12:40:59 -0400
+
 mx-system-sounds (22.11.02) mx; urgency=medium
 
   * fix faulty logic

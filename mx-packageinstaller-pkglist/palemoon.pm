@@ -25,35 +25,34 @@ Palemoon
    <eu>Palemoon from the mx repo</eu>
    <fa>Palemoon from the mx repo</fa>
    <fil_PH>Palemoon from the mx repo</fil_PH>
-   <fi>Palemoon from the mx repo</fi>
+   <fi>Palemoon-selain MX-ohjelmavarastosta</fi>
    <fr>Palemoon du dépôt MX</fr>
    <he_IL>Palemoon from the mx repo</he_IL>
-   <hi>Palemoon from the mx repo</hi>
+   <hi>एमएक्स पैकेज-संग्रह से पेलमून</hi>
    <hr>Palemoon from the mx repo</hr>
    <hu>Palemoon from the mx repo</hu>
    <id>Palemoon from the mx repo</id>
    <is>Palemoon from the mx repo</is>
    <it>Palemoon dal repo mx</it>
-   <ja_JP>Palemoon from the mx repo</ja_JP>
-   <ja>Palemoon from the mx repo</ja>
+   <ja>Pale Mmoon ブラウザ（MX repo より）</ja>
    <kk>Palemoon from the mx repo</kk>
    <ko>Palemoon from the mx repo</ko>
    <lt>Palemoon iš mx saugyklos</lt>
    <mk>Palemoon from the mx repo</mk>
    <mr>Palemoon from the mx repo</mr>
-   <nb>Palemoon from the mx repo</nb>
+   <nb>Palemoon fra mx-pakkearkiv</nb>
    <nl>Palemoon uit de mx pakketbron</nl>
    <pl>Palemoon z repozytorium MX</pl>
-   <pt_BR>Navegador web Palemoon do repositório mx repo</pt_BR>
+   <pt_BR>Palemoon - Navegador de internet do repositório do MX</pt_BR>
    <pt>Navegador web Palemoon do repositório mx repo</pt>
    <ro>Palemoon from the mx repo</ro>
-   <ru>Браузер Palemoon из репозитория mx</ru>
+   <ru>Браузер Palemoon из репозитория MX</ru>
    <sk>Palemoon from the mx repo</sk>
    <sl>Palemoon iz mx repozitorija</sl>
-   <sq>Palemoon from the mx repo</sq>
+   <sq>Palemoon prej depos mx</sq>
    <sr>Palemoon from the mx repo</sr>
    <sv>Palemoon från mx repo</sv>
-   <tr>Palemoon from the mx repo</tr>
+   <tr>MX Depo'dan Palemoon</tr>
    <uk>Palemoon зі сховища mx</uk>
    <vi>Palemoon from the mx repo</vi>
    <zh_CN>Palemoon from the mx repo</zh_CN>

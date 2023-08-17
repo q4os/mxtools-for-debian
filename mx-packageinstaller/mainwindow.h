@@ -69,7 +69,7 @@ enum {
     PreUninstall,
     MAX
 };
-}
+} // namespace PopCol
 namespace TreeCol
 {
 enum { Check, Name, Version, Description, Status, Displayed };
@@ -93,25 +93,35 @@ enum {
     PostUninstall,
     PreUninstall
 };
-}
+} // namespace Popular
 namespace Release
 {
 enum { Jessie = 8, Stretch, Buster, Bullseye, Bookworm };
 }
+
+constexpr int KiB = 1024;
+constexpr int MiB = KiB * 1024;
+constexpr int GiB = MiB * 1024;
 
 class MainWindow : public QDialog
 {
     Q_OBJECT
 
 public:
-    MainWindow(const QCommandLineParser &arg_parser, QWidget *parent = nullptr);
-    ~MainWindow();
+    explicit MainWindow(const QCommandLineParser &arg_parser, QWidget *parent = nullptr);
+    ~MainWindow() override;
 
-    QString version;
+    QString categoryTranslation(const QString &item);
+    static QString getDebianVerName();
+    [[nodiscard]] QString getLocalizedName(const QDomElement &element) const;
+    QString getVersion(const QString &name);
+    QStringList listFlatpaks(const QString &remote, const QString &type = QLatin1String(""));
+    QStringList listInstalled();
+    QStringList listInstalledFlatpaks(const QString &type = QLatin1String(""));
     bool buildPackageLists(bool force_download = false);
-    bool checkInstalled(const QString &names) const;
-    bool checkInstalled(const QStringList &name_list) const;
-    bool checkUpgradable(const QStringList &name_list) const;
+    [[nodiscard]] bool checkInstalled(const QString &names) const;
+    [[nodiscard]] bool checkInstalled(const QStringList &name_list) const;
+    [[nodiscard]] bool checkUpgradable(const QStringList &name_list) const;
     bool confirmActions(const QString &names, const QString &action);
     bool downloadPackageList(bool force_download = false);
     bool install(const QString &names);
@@ -119,22 +129,19 @@ public:
     bool installPopularApp(const QString &name);
     bool installPopularApps();
     bool installSelected();
-    static bool isFilteredName(const QString &name);
     bool readPackageList(bool force_download = false);
     bool uninstall(const QString &names, const QString &preuninstall = QLatin1String(""),
                    const QString &postuninstall = QLatin1String(""));
     bool updateApt();
-
-    static double convert(double number, const QString &unit);
-
-    int getDebianVerNum();
-
+    static bool isFilteredName(const QString &name);
+    static int getDebianVerNum();
+    static quint64 convert(const QString &size);
+    static QString convert(quint64 bytes);
     void blockInterfaceFP(bool block);
     void buildChangeList(QTreeWidgetItem *item);
     void cancelDownload();
     void centerWindow();
     void clearUi();
-    static void copyTree(QTreeWidget *, QTreeWidget *);
     void displayFilteredFP(QStringList list, bool raw = false);
     void displayFlatpaks(bool force_update = false);
     void displayPackages();
@@ -155,26 +162,15 @@ public:
     void setup();
     void updateInterface();
 
-    static QString addSizes(const QString &arg1, const QString &arg2);
-    QString getDebianVerName();
-    QString getLocalizedName(const QDomElement &element) const;
-    QString categoryTranslation(const QString &item);
-    QString getVersion(const QString &name);
-    QStringList listFlatpaks(const QString &remote, const QString &type = QLatin1String(""));
-    QStringList listInstalled();
-    QStringList listInstalledFlatpaks(const QString &type = QLatin1String(""));
-
 protected:
-    void keyPressEvent(QKeyEvent *event);
+    void keyPressEvent(QKeyEvent *event) override;
 
 private slots:
-    void afterWindowShown();
     void checkUnckeckItem();
     void cleanup();
     void cmdDone();
     void cmdStart();
     void disableOutput();
-    void disableWarning(bool checked, const QString &key);
     void displayInfoTestOrBackport(const QTreeWidget *tree, const QTreeWidgetItem *item);
     void displayPackageInfo(const QTreeWidget *tree, QPoint pos);
     void displayPackageInfo(const QTreeWidgetItem *item);

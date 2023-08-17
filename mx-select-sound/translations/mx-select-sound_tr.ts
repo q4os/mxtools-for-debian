@@ -107,7 +107,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="130"/>
         <source>Program for selecting the default sound card in MX Linux</source>
-        <translation type="unfinished">MX Linux &apos;ta öntanımlı ses kartı seçme programı</translation>
+        <translation type="unfinished">MX Linux’ta öntanımlı ses kartı seçme programı</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="133"/>
@@ -133,23 +133,23 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../about.cpp" line="43"/>
+        <location filename="../about.cpp" line="40"/>
         <source>License</source>
         <translation type="unfinished">Ruhsat</translation>
     </message>
     <message>
-        <location filename="../about.cpp" line="44"/>
-        <location filename="../about.cpp" line="54"/>
+        <location filename="../about.cpp" line="41"/>
+        <location filename="../about.cpp" line="51"/>
         <source>Changelog</source>
         <translation type="unfinished">Değişim günlüğü</translation>
     </message>
     <message>
-        <location filename="../about.cpp" line="45"/>
+        <location filename="../about.cpp" line="42"/>
         <source>Cancel</source>
         <translation type="unfinished">İptal</translation>
     </message>
     <message>
-        <location filename="../about.cpp" line="67"/>
+        <location filename="../about.cpp" line="64"/>
         <source>&amp;Close</source>
         <translation type="unfinished">&amp;Kapat</translation>
     </message>
@@ -234,7 +234,7 @@
     </message>
     <message>
         <source>Program for selecting the default sound card in MX Linux</source>
-        <translation type="vanished">MX Linux &apos;ta öntanımlı ses kartı seçme programı</translation>
+        <translation type="vanished">MX Linux’ta öntanımlı ses kartı seçme programı</translation>
     </message>
     <message>
         <source>Copyright (c) MX Linux</source>

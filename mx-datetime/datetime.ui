@@ -82,15 +82,9 @@
     </widget>
    </item>
    <item row="1" column="4">
-    <spacer name="horizontalSpacer_4">
+    <spacer>
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
-     </property>
-     <property name="sizeHint" stdset="0">
-      <size>
-       <width>40</width>
-       <height>0</height>
-      </size>
      </property>
     </spacer>
    </item>
@@ -116,9 +110,6 @@
        <verstretch>0</verstretch>
       </sizepolicy>
      </property>
-     <property name="currentIndex">
-      <number>0</number>
-     </property>
      <widget class="QWidget" name="tabDateTime">
       <attribute name="title">
        <string>Date &amp;&amp; Time</string>
@@ -132,7 +123,7 @@
          <property name="frameShadow">
           <enum>QFrame::Sunken</enum>
          </property>
-         <layout class="QHBoxLayout" name="horizontalLayout_2">
+         <layout class="QHBoxLayout">
           <property name="spacing">
            <number>0</number>
           </property>
@@ -152,8 +143,7 @@
            <widget class="QCalendarWidget" name="calendar">
             <property name="font">
              <font>
-              <family>Sans</family>
-              <pointsize>10</pointsize>
+              <family>Monospace</family>
              </font>
             </property>
             <property name="minimumDate">
@@ -182,7 +172,6 @@
          <property name="font">
           <font>
            <family>Monospace</family>
-           <pointsize>10</pointsize>
           </font>
          </property>
          <property name="wrapping">
@@ -194,7 +183,7 @@
         </widget>
        </item>
        <item row="0" column="2">
-        <layout class="QHBoxLayout" name="horizontalLayout_4">
+        <layout class="QHBoxLayout">
          <property name="spacing">
           <number>0</number>
          </property>
@@ -208,8 +197,7 @@
            </property>
            <property name="font">
             <font>
-             <family>Sans</family>
-             <pointsize>9</pointsize>
+             <family>Monospace</family>
             </font>
            </property>
            <property name="sizeAdjustPolicy">
@@ -227,8 +215,7 @@
            </property>
            <property name="font">
             <font>
-             <family>Sans</family>
-             <pointsize>9</pointsize>
+             <family>Monospace</family>
             </font>
            </property>
            <property name="sizeAdjustPolicy">
@@ -252,7 +239,7 @@
          <property name="frameShadow">
           <enum>QFrame::Sunken</enum>
          </property>
-         <layout class="QHBoxLayout" name="horizontalLayout">
+         <layout class="QHBoxLayout">
           <property name="leftMargin">
            <number>0</number>
           </property>
@@ -277,13 +264,13 @@
       <attribute name="title">
        <string>Hardware Clock</string>
       </attribute>
-      <layout class="QGridLayout" name="gridLayout_6">
+      <layout class="QGridLayout">
        <item row="2" column="0" colspan="2">
         <widget class="QGroupBox" name="boxHardwareTools">
          <property name="title">
           <string>Hardware Clock tools</string>
          </property>
-         <layout class="QGridLayout" name="gridLayout">
+         <layout class="QGridLayout">
           <item row="0" column="0">
            <widget class="QPushButton" name="pushReadHardware">
             <property name="toolTip">
@@ -328,7 +315,7 @@
          <property name="title">
           <string>Time transfer</string>
          </property>
-         <layout class="QGridLayout" name="gridLayout_2">
+         <layout class="QGridLayout">
           <item row="0" column="1">
            <widget class="QPushButton" name="pushHardwareToSystem">
             <property name="toolTip">
@@ -373,7 +360,7 @@
          <property name="title">
           <string>Time zone for the Hardware Clock</string>
          </property>
-         <layout class="QGridLayout" name="gridLayout_4">
+         <layout class="QGridLayout">
           <item row="0" column="2">
            <widget class="QRadioButton" name="radioHardwareLocal">
             <property name="toolTip">
@@ -395,31 +382,19 @@
            </widget>
           </item>
           <item row="0" column="1">
-           <spacer name="horizontalSpacer_3">
+           <spacer>
             <property name="orientation">
              <enum>Qt::Horizontal</enum>
             </property>
             <property name="sizeType">
              <enum>QSizePolicy::Maximum</enum>
             </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>20</width>
-              <height>22</height>
-             </size>
-            </property>
            </spacer>
           </item>
           <item row="0" column="3">
-           <spacer name="horizontalSpacer_2">
+           <spacer>
             <property name="orientation">
              <enum>Qt::Horizontal</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>40</width>
-              <height>20</height>
-             </size>
             </property>
            </spacer>
           </item>
@@ -432,15 +407,14 @@
       <attribute name="title">
        <string>Network Time</string>
       </attribute>
-      <layout class="QGridLayout" name="gridLayout_5">
+      <layout class="QGridLayout">
        <item row="5" column="1">
         <widget class="QToolButton" name="pushServerMoveDown">
          <property name="toolTip">
           <string>Move the selected item down</string>
          </property>
          <property name="icon">
-          <iconset theme="down">
-           <normaloff>.</normaloff>.</iconset>
+          <iconset theme="go-down"/>
          </property>
         </widget>
        </item>
@@ -450,8 +424,7 @@
           <string>Move the selected item up</string>
          </property>
          <property name="icon">
-          <iconset theme="up">
-           <normaloff>.</normaloff>.</iconset>
+          <iconset theme="go-up"/>
          </property>
         </widget>
        </item>
@@ -461,7 +434,7 @@
           <string>Remove the current item from the list</string>
          </property>
          <property name="icon">
-          <iconset theme="remove">
+          <iconset theme="list-remove">
            <normaloff>.</normaloff>.</iconset>
          </property>
         </widget>
@@ -472,26 +445,20 @@
           <string>Add an item to the list</string>
          </property>
          <property name="icon">
-          <iconset theme="add">
+          <iconset theme="list-add">
            <normaloff>.</normaloff>.</iconset>
          </property>
         </widget>
        </item>
        <item row="6" column="1">
-        <spacer name="verticalSpacer">
+        <spacer>
          <property name="orientation">
           <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>40</height>
-          </size>
          </property>
         </spacer>
        </item>
        <item row="1" column="0" colspan="2">
-        <layout class="QHBoxLayout" name="horizontalLayout_8">
+        <layout class="QHBoxLayout">
          <item>
           <widget class="QCheckBox" name="checkAutoSync">
            <property name="text">
@@ -522,10 +489,10 @@
          <property name="selectionBehavior">
           <enum>QAbstractItemView::SelectRows</enum>
          </property>
-         <attribute name="horizontalHeaderDefaultSectionSize">
+         <attribute name="horizontalHeaderMinimumSectionSize">
           <number>10</number>
          </attribute>
-         <attribute name="horizontalHeaderMinimumSectionSize">
+         <attribute name="horizontalHeaderDefaultSectionSize">
           <number>10</number>
          </attribute>
          <attribute name="verticalHeaderVisible">
@@ -553,15 +520,9 @@
     </widget>
    </item>
    <item row="1" column="2">
-    <spacer name="horizontalSpacer">
+    <spacer>
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
-     </property>
-     <property name="sizeHint" stdset="0">
-      <size>
-       <width>40</width>
-       <height>0</height>
-      </size>
      </property>
     </spacer>
    </item>

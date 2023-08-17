@@ -1,0 +1,63 @@
+#/bin/bash
+
+#update category.dict files
+
+#assuming zip file downloadded from transifex in extract in same folder as script
+
+#categories to update
+
+CAT="Audio
+Browser
+Children
+Desktop_Environments
+Development
+Disks
+Docks
+Email
+File_Managers
+FTP
+Games
+Graphics
+Icons
+Kernels
+Language
+LaTex
+Media_Center
+Media_Converter
+Messaging
+Misc
+Network
+Newsreader
+Non-Free
+Office
+Printing
+Remote_Access
+Screencast
+Screensaver
+Screenshot_Utilities
+Server
+Themes
+Torrent
+Utility
+Video
+Wallpapers
+Window_Managers
+Virtualization"
+
+LANG="af am ar be bg bn bs ca ceb co cs cy da de el eo es et eu fa fi fil fil_PH fr fr_BE fy ga gd gl gl_ES gu ha haw he he_IL hi hr ht hu hy id is it ja jv ka kk km kn ko ku ky lb lo lt lv mg mi mk ml mn mr ms mt my nb ne nl ny or pa pl ps pt pt_BR ro ru rue tw sd si sk sl sm sn so sq sr st su sv sw ta te tg th tk tr tt ug uk ur uz vi xh yi yo yue_CN zh_CN zh_HK zh_TW"
+
+count=1
+echo "" > category.dict
+for i in $CAT; do
+	echo "[${i}]" | sed "s/_/ /" >> category.dict
+	for j in $LANG; do
+		file="mx-packageinstaller-categories_${j}.txt"
+		if [ -e "$file" ]; then
+			echo "${j}=$(sed -n "${count}p" "$file")"  >> category.dict
+		fi
+	done
+	echo "" >> category.dict
+	count=$((count + 1))
+done
+
+

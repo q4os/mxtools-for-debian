@@ -34,7 +34,6 @@ Windscribe VPN
    <id>Windscribe VPN and sysVinit scripts</id>
    <is>Windscribe VPN and sysVinit scripts</is>
    <it>Windscribe VPN and sysVinit scripts</it>
-   <ja_JP>Windscribe VPN and sysVinit scripts</ja_JP>
    <ja>Windscribe VPN and sysVinit scripts</ja>
    <kk>Windscribe VPN and sysVinit scripts</kk>
    <ko>Windscribe VPN and sysVinit scripts</ko>
@@ -77,7 +76,7 @@ trap tidy_up EXIT
 chmod +xr $TMP_DIR
 pushd $TMP_DIR >/dev/null
 
-DLD_URL=https://windscribe.net/install/desktop/linux_deb_x64/beta
+DLD_URL=https://windscribe.net/install/desktop/linux_deb_x64
 DEB_URL=$(curl -sI $DLD_URL | grep -oP '^location: \Khttps://[0-9a-zA-Z/._-].*/windscribe[0-9a-zA-Z._-]*_amd64.deb')
 DEB=${DEB_URL##*/}
 echo " "
@@ -99,8 +98,9 @@ if [ -z "${HLP_SVC##*.service}" ]; then
    tar -x "$HLP_SVC" -O     | 
    sysd2v.sh -n windscribe-helper  | 
    sed s/windscribe-helper-sysd2v.pid/windscribe-helper.pid/ > windscribe-helper
-   chmod +x windscribe-helper
+   chmod 755 /etc/init.d/windscribe-helper
    cp windscribe-helper /etc/init.d/windscribe-helper 
+   chmod 755 /etc/init.d/windscribe-helper
 fi
 
 CNTRL=$(ar t "$DEB" | grep control.tar)
@@ -116,15 +116,30 @@ tar -C AR $CMP -xf  $CNTRL
 pushd AR >/dev/null
 sed -i "\:$INITHELPER:d" /var/lib/dpkg/info/windscribe.p* 2>/dev/null
 sed -i 's/sudo //' /var/lib/dpkg/info/windscribe.p* 2>/dev/null
+sed -i 's/^\s*//'  /var/lib/dpkg/info/windscribe.prerm  2>/dev/null
 sed -i "\:rm /usr/local/bin/windscribe-cli:d" /var/lib/dpkg/info/windscribe.prerm  2>/dev/null
-echo "test -f /usr/local/bin/windscribe-cli && rm /usr/local/bin/windscribe-cli" >> /var/lib/dpkg/info/windscribe.prerm
+sed -i "\:rm /usr/bin/windscribe-cli:d" /var/lib/dpkg/info/windscribe.prerm  2>/dev/null
+sed -i "\:rm -f /usr/local/bin/windscribe-cli:d" /var/lib/dpkg/info/windscribe.prerm  2>/dev/null
+sed -i "\:rm -f /usr/bin/windscribe-cli:d" /var/lib/dpkg/info/windscribe.prerm  2>/dev/null
+sed -i '/^rm /s=$= 2>/dev/null || :='  /var/lib/dpkg/info/windscribe.prerm  2>/dev/null
+echo "test -e /usr/local/bin/windscribe-cli && rm /usr/local/bin/windscribe-cli" >> /var/lib/dpkg/info/windscribe.prerm
+echo "test -e /usr/bin/windscribe-cli && rm /usr/bin/windscribe-cli" >> /var/lib/dpkg/info/windscribe.prerm
+
 sed -i "2itest -r $INITHELPER && source $INITHELPER" /var/lib/dpkg/info/windscribe.p*  2>/dev/null
 sed -i "2itest -r $INITHELPER && source $INITHELPER" p*
 sed -i 's/sudo //' p*
+sed -i 's/^\s*//'  prerm  2>/dev/null
 sed -i "\:rm /usr/local/bin/windscribe-cli:d" prerm  2>/dev/null
-echo "test -f /usr/local/bin/windscribe-cli && rm /usr/local/bin/windscribe-cli" >> prerm
+sed -i "\:rm /usr/bin/windscribe-cli:d" prerm  2>/dev/null
+sed -i "\:rm -f /usr/local/bin/windscribe-cli:d" prerm  2>/dev/null
+sed -i "\:rm -f /usr/bin/windscribe-cli:d" prerm  2>/dev/null
+sed -i '/^rm /s=$= 2>/dev/null || :='  prerm  2>/dev/null
+
+echo "test -e /usr/local/bin/windscribe-cli && rm /usr/local/bin/windscribe-cli" >> prerm
+echo "test -e /usr/bin/windscribe-cli && rm /usr/bin/windscribe-cli" >> prerm
+
 echo "# remove sysVinit script" >> prerm
-echo "test -f /etc/init.d/windscribe-helper && rm /etc/init.d/windscribe-helper" >> prerm
+echo "test -e /etc/init.d/windscribe-helper && rm /etc/init.d/windscribe-helper" >> prerm
 rm ../$CNTRL
 tar $CMP -cf  ../$CNTRL ./
 popd >/dev/null
@@ -132,6 +147,7 @@ cp $DEB ${DEB%.deb}.orig.deb
 ar r $DEB $CNTRL
 dpkg --unpack $DEB
 cp windscribe-helper /etc/init.d/windscribe-helper 
+chmod 755 /etc/init.d/windscribe-helper
 dpkg --configure windscribe
 apt-get -y install -f
 echo "...$(gettext -d apt -s ' Done')!"
@@ -154,7 +170,7 @@ windscribe
 
 <postuninstall>
 <![CDATA[
-test -f /etc/init.d/windscribe-helper && rm /etc/init.d/windscribe-helper
+test -e /etc/init.d/windscribe-helper && rm /etc/init.d/windscribe-helper
 echo "...$(gettext -d apt -s ' Done')!"
 ]]>
 

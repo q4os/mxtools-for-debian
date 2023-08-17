@@ -208,7 +208,7 @@ bool Window::apply()
     }
     // makes X see the changes to /etc/default/keyboard right away
     // is better than setxkbmap because if you logout but don't reboot the changes don't apply
-    system("udevadm trigger --subsystem-match=input --action=change");
+    system("udevadm trigger -t subsystems --subsystem-match=input --action=change");
 //    QEventLoop loop;
 //    QProcess proc;
 //    QObject::connect(&proc, QOverload<int>::of(&QProcess::finished), &loop, &QEventLoop::quit);

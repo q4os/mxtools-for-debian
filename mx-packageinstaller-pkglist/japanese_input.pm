@@ -25,32 +25,31 @@ Japanese_Input
    <eu>Japanese ibus</eu>
    <fa>Japanese ibus</fa>
    <fil_PH>Japanese ibus</fil_PH>
-   <fi>Japanese ibus</fi>
+   <fi>Japanilainen ibus</fi>
    <fr>Japonais ibus</fr>
    <he_IL>Japanese ibus</he_IL>
-   <hi>Japanese ibus</hi>
+   <hi>जापानी Ibus</hi>
    <hr>Japanese ibus</hr>
    <hu>Japanese ibus</hu>
    <id>Japanese ibus</id>
    <is>Japanese ibus</is>
    <it>Ibus per la lingua giapponese</it>
-   <ja_JP>Japanese ibus</ja_JP>
-   <ja>Japanese ibus</ja>
+   <ja>日本語 ibus</ja>
    <kk>Japanese ibus</kk>
    <ko>Japanese ibus</ko>
    <lt>Japonų ibus</lt>
    <mk>Japanese ibus</mk>
    <mr>Japanese ibus</mr>
-   <nb>Japanese ibus</nb>
+   <nb>Japansk ibus</nb>
    <nl>Japanse ibus</nl>
    <pl>Japoński ibus</pl>
-   <pt_BR>Japonês ibus</pt_BR>
+   <pt_BR>ibus para o idioma Japonês</pt_BR>
    <pt>Japonês ibus</pt>
    <ro>Japanese ibus</ro>
-   <ru>Japanese ibus</ru>
+   <ru>Японский метод ввода ibus</ru>
    <sk>Japanese ibus</sk>
-   <sl>Japanese ibus</sl>
-   <sq>Japanese ibus</sq>
+   <sl>Japonski ibus</sl>
+   <sq>ibus për japonishte</sq>
    <sr>Japanese ibus</sr>
    <sv>Japansk ibus</sv>
    <tr>Japonca ibus</tr>

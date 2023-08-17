@@ -1,3 +1,32 @@
+mx-snapshot (23.7.02) mx; urgency=medium
+
+  * Fix a couple of translations
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 24 Jul 2023 15:10:39 -0400
+
+mx-snapshot (23.7.01) mx; urgency=medium
+
+  * Update translations
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 20 Jul 2023 17:19:44 -0400
+
+mx-snapshot (23.7) mx; urgency=medium
+
+  [ fehlix ]
+  * Remove rootflags and init from saved bootparamter
+
+  [ Dolphin Oracle ]
+  * new build
+
+ -- Dolphin Oracle  <dolphinoracle@gmail.com>  Mon, 03 Jul 2023 19:12:11 -0500
+
+mx-snapshot (23.6) mx; urgency=medium
+
+  * Improve file editor detection (for editing exclusion file)
+  * Refresh translations
+
+ -- Adrian <adrian@mxlinux.org>  Sun, 18 Jun 2023 22:59:13 -0400
+
 mx-snapshot (23.5.05) mx; urgency=medium
 
   * Fix to handle empty resulting boot parameter list

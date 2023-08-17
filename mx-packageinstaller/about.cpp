@@ -5,10 +5,10 @@
 #include <QMessageBox>
 #include <QProcess>
 #include <QPushButton>
+#include <QStandardPaths>
 #include <QTextEdit>
 #include <QVBoxLayout>
 
-#include "version.h"
 #include <unistd.h>
 
 extern const QString starting_home;
@@ -16,9 +16,14 @@ extern const QString starting_home;
 // display doc as nomal user when run as root
 void displayDoc(const QString &url, const QString &title)
 {
-    qputenv("HOME", starting_home.toUtf8());
-    // prefer mx-viewer otherwise use xdg-open (use runuser to run that as logname user) "gio open" would also work here
-    if (QFile::exists(QStringLiteral("/usr/bin/mx-viewer"))) {
+    bool started_as_root = false;
+    if (qEnvironmentVariable("HOME") == QLatin1String("root")) {
+        started_as_root = true;
+        qputenv("HOME", starting_home.toUtf8()); // use original home for theming purposes
+    }
+    // prefer mx-viewer otherwise use xdg-open (use runuser to run that as logname user)
+    QString executablePath = QStandardPaths::findExecutable("mx-viewer");
+    if (!executablePath.isEmpty()) {
         QProcess::startDetached(QStringLiteral("mx-viewer"), {url, title});
     } else {
         if (getuid() != 0) {
@@ -40,7 +45,9 @@ void displayDoc(const QString &url, const QString &title)
             qputenv("XDG_RUNTIME_DIR", "/run/user/0");
         }
     }
-    qputenv("HOME", "/root");
+    if (started_as_root) {
+        qputenv("HOME", "/root");
+    }
 }
 
 void displayAboutMsgBox(const QString &title, const QString &message, const QString &licence_url,

@@ -25,35 +25,34 @@ Ndebele_Libreoffice
    <eu>Ndebele Language Meta-Package for LibreOffice</eu>
    <fa>Ndebele Language Meta-Package for LibreOffice</fa>
    <fil_PH>Ndebele Language Meta-Package for LibreOffice</fil_PH>
-   <fi>Ndebele Language Meta-Package for LibreOffice</fi>
-   <fr>Ndebele Language Meta-Package for LibreOffice</fr>
+   <fi>Ndebelekielinen kielipaketti LibreOffice:lle</fi>
+   <fr>Méta-Paquet en langue Ndebele pour LibreOffice</fr>
    <he_IL>Ndebele Language Meta-Package for LibreOffice</he_IL>
-   <hi>Ndebele Language Meta-Package for LibreOffice</hi>
+   <hi>लिब्रे-ऑफिस हेतु नेबेले भाषा मेटा-पैकेज</hi>
    <hr>Ndebele Language Meta-Package for LibreOffice</hr>
    <hu>Ndebele Language Meta-Package for LibreOffice</hu>
    <id>Ndebele Language Meta-Package for LibreOffice</id>
    <is>Ndebele Language Meta-Package for LibreOffice</is>
-   <it>Ndebele Language Meta-Package for LibreOffice</it>
-   <ja_JP>Ndebele Language Meta-Package for LibreOffice</ja_JP>
-   <ja>Ndebele Language Meta-Package for LibreOffice</ja>
+   <it>Meta-pacchetto della lingua ndebele per LibreOffice</it>
+   <ja>LibreOffice 用ンデベレ語 メタパッケージ</ja>
    <kk>Ndebele Language Meta-Package for LibreOffice</kk>
    <ko>Ndebele Language Meta-Package for LibreOffice</ko>
    <lt>Ndebele Language Meta-Package for LibreOffice</lt>
    <mk>Ndebele Language Meta-Package for LibreOffice</mk>
    <mr>Ndebele Language Meta-Package for LibreOffice</mr>
-   <nb>Ndebele Language Meta-Package for LibreOffice</nb>
+   <nb>Ndebele språkpakke for LibreOffice</nb>
    <nl>Ndebele Taal Meta-Pakket voor LibreOffice</nl>
-   <pl>Ndebele Language Meta-Package for LibreOffice</pl>
-   <pt_BR>Ndebele Language Meta-Package for LibreOffice</pt_BR>
+   <pl>Meta-pakiet języka Ndebele dla LibreOffice</pl>
+   <pt_BR>Sindebele Pacote de Idioma para o LibreOffice</pt_BR>
    <pt>Ndebele Meta-Pacote de Idioma para LibreOffice</pt>
    <ro>Ndebele Language Meta-Package for LibreOffice</ro>
-   <ru>Ndebele Language Meta-Package for LibreOffice</ru>
+   <ru>Мета-пакет языка ндебеле для LibreOffice</ru>
    <sk>Ndebele Language Meta-Package for LibreOffice</sk>
    <sl>Ndebelski jezikovni meta-paket za LibreOffice</sl>
-   <sq>Ndebele Language Meta-Package for LibreOffice</sq>
+   <sq>Meta-Paketë gjuhësore në ndebelisht për LibreOffice-in</sq>
    <sr>Ndebele Language Meta-Package for LibreOffice</sr>
    <sv>Ndebele Språk Meta-Paket för LibreOffice</sv>
-   <tr>Ndebele Language Meta-Package for LibreOffice</tr>
+   <tr>LibreOffice için Bantuca Dili Üst-Paketi</tr>
    <uk>Ndebele Language Meta-Package for LibreOffice</uk>
    <vi>Ndebele Language Meta-Package for LibreOffice</vi>
    <zh_CN>Ndebele Language Meta-Package for LibreOffice</zh_CN>

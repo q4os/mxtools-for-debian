@@ -3,16 +3,19 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
 	<title>HELP: MX Date &amp; Time</title>
+	<link rel="stylesheet" href="help.css"/>
 </head>
 <body>
-	<h1>HELP: MX Date &amp; Time</h1>
+	<h1>MX Date &amp; Time</h1>
 	<p>This application provides access to common settings and tools to make managing the system date and time easy.</p>
+	<hr/>
 
 	<h2>Date &amp; Time</h2>
 	<p>The settings on this tab control the date, time and zone of the system clock.</p>
 	<p><img src="datetime.png" alt="Date &amp; Time"/></p>
 	<p>When selecting a different time zone, the calendar and clock controls will reflect the change.
 		The system clock will not be altered until <strong>Apply</strong> is pressed.</p>
+	<hr/>
 
 	<h2>Hardware Clock</h2>
 	<p>The hardware clock, also known as a realtime clock (RTC), keeps track of the time when the system is off.
@@ -38,27 +41,56 @@
 	<h3>Drift factor calculation</h3>
 	<p>For a useful drift factor to be calculated, first go to <strong>Network Time</strong> and update the system clock using NTP.
 		Then with <strong>Update the drift</strong> selected, press <strong>System Clock to Hardware Clock</strong>.
-		Perform these steps again after at least 4 hours. The longer the time between drift calculations, the more precise the drift factor will be.</p>
+		Perform these steps again after at least 4 hours.</p>
+	<p class="info"><strong>Tip:</strong> The longer the time between drift calculations, the more precise the drift factor will be.</p>
+	<hr/>
 
 	<h2>Network Time</h2>
 	<p>The system clock can be maintained with the help of other systems that communicate using the Network Time Protocol (NTP).
 		The settings on this tab control how the NTP client service behaves.</p>
 	<p><img src="network.png" alt="Network Time"/></p>
 	<p>When <strong>Automatically update the System Clock with NTP servers</strong> is selected, the NTP servers that are on the list will be periodically checked and, if necessary, the system time will be adjusted.
-		The <strong>Update Now</strong> button can be used to manually adjust the system clock in line with the NTP servers on the list.</p>
+		The <strong>Update Now</strong> button can be used to manually adjust the system clock in line with the configured time sources.</p>
+	<div class="warning">
+		<strong>Warning:</strong>
+		Be cautious about using <strong>Update Now</strong> too frequently if using any public NTP services.
+		Synchronizing the clock too often is considered abusive by some NTP services, which may result in the NTP service blocking your network or system.</div>
+	</div>
 	<p>The NTP list contains a list of servers that are used for updating the time. The <strong>Type</strong> is one of the following:</p>
 	<dl>
-		<dt>Pool</dt>
-		<dd>A persistent association with a number of remote servers. Multiple <strong>Pool</strong> items are required for this to work.</dd>
 		<dt>Server</dt>
-		<dd>A persistent association with the specified remote server or local radio clock.</dd>
+		<dd>A single NTP server which can be used as a time source. Although the client (this system) can synchronize its system time to that of the server, the server's time will never be influenced by that of the client.</dd>
+		<dt>Pool</dt>
+		<dd>A group of remote servers. The pool name is expected to resolve to multiple addresses which can change over time.<br/>
+		<a href="#warning-ntp">Please be careful about using multiple pools from the same service provider.</a></dd>
 		<dt>Peer</dt>
-		<dd>A pesistent symmetric-active mode association with the specified remote peer. Unlike <strong>Server</strong> and <strong>Pool</strong> the remote peer can also be synchronized to the local clock.</dd>
+		<dd>A pesistent symmetric association with the specified remote peer. Unlike <strong>Server</strong> and <strong>Pool</strong> the remote peer can also be synchronized to the local clock.</dd>
 	</dl>
 	<p>The <strong>Address</strong> must be a valid IP address (IPv4 or IPv6) or a domain.
 		The item is only used if there is a tick in the box next to its address, otherwise it is ignored.</p>
+	<div class="warning" id="warning-ntp">
+		<p><strong>Warning:</strong>
+			Be careful when adding multiple servers from the same service provider.
+			Some services do not appreciate clients accessing more than a few servers at a time.</p>
+		<p>Be especially vigilant about these limits when using pools.
+			Each pool usually resolves to multiple servers, making it easy to exceed these limits with multiple pools.
+			This could result in your network or system being blocked from accessing the service.</p>
+	</div>
 	<p>The <strong>Options</strong> can specify additional flags and options for the server.</p>
-	<p>To apply the settings, <strong>/etc/ntp.conf</strong> is parsed and altered.
-		This application does not cover the entire scope of this file, so for more advanced configurations, edit this file manually.</p>
+	<div class="warning">
+		<p><strong>Warning:</strong> Some options (such as <code>burst</code>) can result in a large number of requests being sent to a service at any given time, which some NTP services consider abusive, and may result in the NTP service blocking your network or system.</p>
+		<p>If in doubt about what configuration to use, consult your chosen NTP service provider.</p>
+	</div>
+
+	<h3><em>chrony</em> and <em>chronyc</em></h3>
+	<p>MX Date &amp; Time interfaces with <em>chrony</em> for NTP settings.
+		This service can also be accessed by a command-line program called <em>chronyc</em>, which provides an advanced console interface for managing <em>chrony</em> and configured time sources.
+		The use of <em>chronyc</em> is beyond the scope of this documentation, however extensive documentation can be found in their manual pages.</p>
+	<p>The NTP sources on the list are saved in the sources file (<code>/etc/chrony/sources.d/mx-datetime.sources</code>) when <strong>Apply</strong> is pressed.
+		The <em>chrony</em> configuration file (<code>/etc/chrony/chrony.conf</code>) will also be parsed, and any NTP sources will be migrated to the sources file.
+		This application does not cover the entire scope of the <em>chrony</em> configuation file, so for more advanced configurations, edit this file manually.</p>
+	<hr/>
+
+	<p class="revision">MX Linux 23 - July 30, 2023</p>
 </body>
 </html>

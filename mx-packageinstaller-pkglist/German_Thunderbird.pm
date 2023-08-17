@@ -18,39 +18,38 @@ German_Thunderbird
    <cs>German localisation of Thunderbird</cs>
    <da>Tysk oversættelse af Thunderbird</da>
    <de>Deutsche Lokalisierung von Thunderbird</de>
-   <el>Γερμανικός εντοπισμός του Thunderbird</el>
+   <el>Γερμανικά για το Thunderbird</el>
    <en>German localisation of Thunderbird</en>
-   <es>Localización Alemana de Thunderbird</es>
+   <es>Localización Alemán de Thunderbird</es>
    <et>German localisation of Thunderbird</et>
    <eu>German localisation of Thunderbird</eu>
    <fa>German localisation of Thunderbird</fa>
    <fil_PH>German localisation of Thunderbird</fil_PH>
-   <fi>German localisation of Thunderbird</fi>
+   <fi>Saksalainen Thunderbird-kotoistus</fi>
    <fr>Localisation allemande pour Thunderbird</fr>
    <he_IL>German localisation of Thunderbird</he_IL>
-   <hi>German localisation of Thunderbird</hi>
+   <hi>थंडरबर्ड का जर्मन संस्करण</hi>
    <hr>German localisation of Thunderbird</hr>
    <hu>German localisation of Thunderbird</hu>
    <id>German localisation of Thunderbird</id>
    <is>German localisation of Thunderbird</is>
    <it>Localizzazione tedesca di Thunderbird</it>
-   <ja_JP>German localisation of Thunderbird</ja_JP>
-   <ja>German localisation of Thunderbird</ja>
+   <ja>Thunderbird のドイツ語パック</ja>
    <kk>German localisation of Thunderbird</kk>
    <ko>German localisation of Thunderbird</ko>
    <lt>German localisation of Thunderbird</lt>
    <mk>German localisation of Thunderbird</mk>
    <mr>German localisation of Thunderbird</mr>
-   <nb>German localisation of Thunderbird</nb>
+   <nb>Tysk lokaltilpassing av Thunderbird</nb>
    <nl>Duitse lokalisatie van Thunderbird</nl>
    <pl>Niemiecka lokalizacja Thunderbirda</pl>
-   <pt_BR>Alemão Localização para Thunderbird</pt_BR>
+   <pt_BR>Alemão Localização para o Thunderbird</pt_BR>
    <pt>Alemão Localização para Thunderbird</pt>
    <ro>German localisation of Thunderbird</ro>
-   <ru>German localisation of Thunderbird</ru>
+   <ru>Немецкий перевод для Thunderbird</ru>
    <sk>German localisation of Thunderbird</sk>
-   <sl>German localisation of Thunderbird</sl>
-   <sq>German localisation of Thunderbird</sq>
+   <sl>Nemške krajevne nastavitve za Thunderbird</sl>
+   <sq>Përkthimi i Thunderbird-it në gjermanisht</sq>
    <sr>German localisation of Thunderbird</sr>
    <sv>Tysk lokalisering av Thunderbird</sv>
    <tr>Thunderbird'ün Almanca yerelleştirmesi</tr>

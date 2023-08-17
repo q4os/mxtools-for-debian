@@ -19,15 +19,16 @@
  * You should have received a copy of the GNU General Public License
  * along with MX Viewer.  If not, see <http://www.gnu.org/licenses/>.
  ****************************************************************************/
-
-#include <chrono>
 #include "mainwindow.h"
+
 #include "version.h"
+#include <chrono>
 
 using namespace std::chrono_literals;
 
 MainWindow::MainWindow(const QCommandLineParser &arg_parser, QWidget *parent)
-    : QMainWindow(parent), args{arg_parser}
+    : QMainWindow(parent)
+    , args {arg_parser}
 {
     timer = new QTimer(this);
     toolBar = new QToolBar(this);
@@ -75,26 +76,29 @@ void MainWindow::addActions()
 void MainWindow::addBookmarksSubmenu()
 {
     bookmarks->setContextMenuPolicy(Qt::CustomContextMenu);
-    connect(bookmarks, &QMenu::customContextMenuRequested, [this](QPoint pos) {
+    connect(bookmarks, &QMenu::customContextMenuRequested, this, [this](QPoint pos) {
         if (bookmarks->actionAt(pos) == bookmarks->actions().at(0)) // skip first "Add bookmark" action.
             return;
         QPoint globalPos = bookmarks->mapToGlobal(pos);
         QMenu submenu;
         if (bookmarks->actionAt(pos) != bookmarks->actions().at(1)) {
             submenu.addAction(QIcon::fromTheme(QStringLiteral("arrow-up")), tr("Move up"), bookmarks, [this, pos]() {
-                for (int i = 2; i < bookmarks->actions().count(); ++i) { // starting from third action (ignoring "Add bookmark" and first bookmark we cannot move up)
+                for (int i = 2; i < bookmarks->actions().count();
+                     ++i) { // starting from third action (ignoring "Add bookmark" and first bookmark we cannot move up)
                     if (bookmarks->actions().at(i) == bookmarks->actionAt(pos))
                         bookmarks->insertAction(bookmarks->actions().at(i - 1), bookmarks->actions().at(i));
                 }
             });
         }
         if (bookmarks->actionAt(pos) != bookmarks->actions().at(bookmarks->actions().count() - 1)) {
-            submenu.addAction(QIcon::fromTheme(QStringLiteral("arrow-down")), tr("Move down"), bookmarks, [this, pos]() {
-                for (int i = 1; i < bookmarks->actions().count(); ++i) { // starting from second action (ignoring "Add bookmark")
-                    if (bookmarks->actions().at(i) == bookmarks->actionAt(pos))
-                        bookmarks->insertAction(bookmarks->actions().at(i + 2), bookmarks->actions().at(i));
-                }
-            });
+            submenu.addAction(
+                QIcon::fromTheme(QStringLiteral("arrow-down")), tr("Move down"), bookmarks, [this, pos]() {
+                    for (int i = 1; i < bookmarks->actions().count();
+                         ++i) { // starting from second action (ignoring "Add bookmark")
+                        if (bookmarks->actions().at(i) == bookmarks->actionAt(pos))
+                            bookmarks->insertAction(bookmarks->actions().at(i + 2), bookmarks->actions().at(i));
+                    }
+                });
         }
         submenu.addAction(QIcon::fromTheme(QStringLiteral("edit-symbolic")), tr("Rename"), bookmarks, [this, pos]() {
             auto *edit = new QInputDialog(this);
@@ -106,9 +110,8 @@ void MainWindow::addBookmarksSubmenu()
             if (edit->exec() == QDialog::Accepted)
                 bookmarks->actionAt(pos)->setText(edit->textValue());
         });
-        submenu.addAction(QIcon::fromTheme(QStringLiteral("user-trash")), tr("Delete"), bookmarks, [this, pos]() {
-            bookmarks->removeAction(bookmarks->actionAt(pos));
-        });
+        submenu.addAction(QIcon::fromTheme(QStringLiteral("user-trash")), tr("Delete"), bookmarks,
+                          [this, pos]() { bookmarks->removeAction(bookmarks->actionAt(pos)); });
         submenu.exec(globalPos);
     });
 }
@@ -116,14 +119,15 @@ void MainWindow::addBookmarksSubmenu()
 void MainWindow::addHistorySubmenu()
 {
     history->setContextMenuPolicy(Qt::CustomContextMenu);
-    connect(history, &QMenu::customContextMenuRequested, [this](QPoint pos) {
+    connect(history, &QMenu::customContextMenuRequested, this, [this](QPoint pos) {
         if (history->actionAt(pos) == history->actions().at(0)) // skip first "Clear history" action.
             return;
         QPoint globalPos = history->mapToGlobal(pos);
         QMenu submenu;
         submenu.addAction(QIcon::fromTheme(QStringLiteral("user-trash")), tr("Delete"), history, [this, pos]() {
             history->removeAction(history->actionAt(pos));
-            saveMenuItems(history, 3); // skip "clear history", separator, and first item which gets added at menu refresh
+            saveMenuItems(history,
+                          3); // skip "clear history", separator, and first item which gets added at menu refresh
             webview->history()->clear(); // next menu refresh will load from saved file not from webview->history()
         });
         submenu.exec(globalPos);
@@ -134,14 +138,18 @@ void MainWindow::listHistory()
 {
     history->clear();
     auto *deleteHistory = new QAction(QIcon::fromTheme(QStringLiteral("user-trash")), tr("&Clear history"));
-    connect(deleteHistory, &QAction::triggered, [this]() { history->clear(); webview->history()->clear(); saveMenuItems(history, 2); });
+    connect(deleteHistory, &QAction::triggered, this, [this]() {
+        history->clear();
+        webview->history()->clear();
+        saveMenuItems(history, 2);
+    });
     history->addAction(deleteHistory);
     history->addSeparator();
-    QAction *histItem {nullptr};
     auto *hist = webview->history();
 
     for (int i = hist->items().count() - 1; i >= 0; --i) {
         auto item = hist->itemAt(i);
+        QAction *histItem {nullptr};
         history->addAction(histItem = new QAction(histIcons.value(item.url()), item.title()));
         histItem->setProperty("url", item.url());
         connectAddress(histItem, history);
@@ -158,7 +166,7 @@ void MainWindow::addToolbar()
     QAction *forward {nullptr};
     QAction *reload {nullptr};
     QAction *stop {nullptr};
-//    QAction *tab {nullptr};
+    //    QAction *tab {nullptr};
     QAction *home {nullptr};
     QAction *zoomin {nullptr};
     QAction *zoompercent {nullptr};
@@ -168,17 +176,18 @@ void MainWindow::addToolbar()
     toolBar->addAction(forward = webview->pageAction(QWebEnginePage::Forward));
     toolBar->addAction(reload = webview->pageAction(QWebEnginePage::Reload));
     toolBar->addAction(stop = webview->pageAction(QWebEnginePage::Stop));
-    toolBar->addAction(home = new QAction(QIcon::fromTheme(QStringLiteral("go-home"),
-                                                           QIcon(QStringLiteral(":/icons/go-home.svg"))), tr("Home")));
+    toolBar->addAction(
+        home = new QAction(QIcon::fromTheme(QStringLiteral("go-home"), QIcon(QStringLiteral(":/icons/go-home.svg"))),
+                           tr("Home")));
     back->setShortcut(QKeySequence::Back);
     forward->setShortcut(QKeySequence::Forward);
     home->setShortcut(Qt::CTRL + Qt::Key_H);
     reload->setShortcuts(QKeySequence::Refresh);
     stop->setShortcut(QKeySequence::Cancel);
-//    tab = webview->pageAction(QWebEnginePage::OpenLinkInNewTab);
-//    tab->setShortcut(Qt::CTRL + Qt::Key_T);
+    //    tab = webview->pageAction(QWebEnginePage::OpenLinkInNewTab);
+    //    tab->setShortcut(Qt::CTRL + Qt::Key_T);
     connect(stop, &QAction::triggered, this, &MainWindow::done);
-    connect(home, &QAction::triggered, [this]() {displaySite();});
+    connect(home, &QAction::triggered, this, [this]() { displaySite(); });
 
     searchBox->setPlaceholderText(tr("search in page"));
     searchBox->setClearButtonEnabled(true);
@@ -191,31 +200,39 @@ void MainWindow::addToolbar()
     addressBar = new AddressBar(this);
     addressBar->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
     addressBar->setClearButtonEnabled(true);
-    addBookmark = addressBar->addAction(QIcon::fromTheme(QStringLiteral("emblem-favorite"),
-                                                         QIcon(QStringLiteral(":/icons/emblem-favorite.png"))), QLineEdit::TrailingPosition);
+    addBookmark = addressBar->addAction(
+        QIcon::fromTheme(QStringLiteral("emblem-favorite"), QIcon(QStringLiteral(":/icons/emblem-favorite.png"))),
+        QLineEdit::TrailingPosition);
     addBookmark->setToolTip(tr("Add bookmark"));
-    connect(addressBar, &QLineEdit::returnPressed, [this]() { displaySite(addressBar->text()); });
+    connect(addressBar, &QLineEdit::returnPressed, this, [this]() { displaySite(addressBar->text()); });
     toolBar->addWidget(addressBar);
     toolBar->addWidget(searchBox);
-    toolBar->addAction(zoomout = new QAction(QIcon::fromTheme(QStringLiteral("zoom-out"),
-                                                              QIcon(QStringLiteral(":/icons/zoom-out.svg"))), tr("Zoom out")));
+    toolBar->addAction(zoomout = new QAction(
+                           QIcon::fromTheme(QStringLiteral("zoom-out"), QIcon(QStringLiteral(":/icons/zoom-out.svg"))),
+                           tr("Zoom out")));
     toolBar->addAction(zoompercent = new QAction(QStringLiteral("100%")));
-    toolBar->addAction(zoomin = new QAction(QIcon::fromTheme(QStringLiteral("zoom-in"),
-                                                             QIcon(QStringLiteral(":/icons/zoom-in.svg"))), tr("Zoom In")));
+    toolBar->addAction(
+        zoomin = new QAction(QIcon::fromTheme(QStringLiteral("zoom-in"), QIcon(QStringLiteral(":/icons/zoom-in.svg"))),
+                             tr("Zoom In")));
     toolBar->addAction(menuButton = new QAction(QIcon::fromTheme(QStringLiteral("open-menu"),
-                                                                 QIcon(QStringLiteral(":/icons/open-menu.png"))), tr("Settings")));
+                                                                 QIcon(QStringLiteral(":/icons/open-menu.png"))),
+                                                tr("Settings")));
     const auto step = 0.1;
     zoomin->setShortcuts({QKeySequence::ZoomIn, Qt::CTRL + Qt::Key_Equal});
     zoomout->setShortcut(QKeySequence::ZoomOut);
     zoompercent->setShortcut(Qt::CTRL + Qt::Key_0);
-    connect(zoomout, &QAction::triggered, [this, step, zoompercent]() {
+    connect(zoomout, &QAction::triggered, this, [this, step, zoompercent]() {
         webview->setZoomFactor(webview->zoomFactor() - step);
-        zoompercent->setText(QString::number(webview->zoomFactor() * 100) + "%");});
-    connect(zoomin, &QAction::triggered, [this, step, zoompercent]() {
-        webview->setZoomFactor(webview->zoomFactor()  + step);
-        zoompercent->setText(QString::number(webview->zoomFactor() * 100) + "%");});
-    connect(zoompercent, &QAction::triggered, [this, zoompercent]() {webview->setZoomFactor(1);
-        zoompercent->setText(QStringLiteral("100%"));});
+        zoompercent->setText(QString::number(webview->zoomFactor() * 100) + "%");
+    });
+    connect(zoomin, &QAction::triggered, this, [this, step, zoompercent]() {
+        webview->setZoomFactor(webview->zoomFactor() + step);
+        zoompercent->setText(QString::number(webview->zoomFactor() * 100) + "%");
+    });
+    connect(zoompercent, &QAction::triggered, this, [this, zoompercent]() {
+        webview->setZoomFactor(1);
+        zoompercent->setText(QStringLiteral("100%"));
+    });
     menuButton->setShortcut(Qt::Key_F10);
     buildMenu();
     toolBar->show();
@@ -223,8 +240,8 @@ void MainWindow::addToolbar()
 
 void MainWindow::openBrowseDialog()
 {
-    QString file = QFileDialog::getOpenFileName(this, tr("Select file to open"),
-                                                QDir::homePath(), tr("Hypertext Files (*.htm *.html);;All Files (*.*)"));
+    QString file = QFileDialog::getOpenFileName(this, tr("Select file to open"), QDir::homePath(),
+                                                tr("Hypertext Files (*.htm *.html);;All Files (*.*)"));
     if (QFileInfo::exists(file))
         displaySite(file, file);
 }
@@ -235,7 +252,12 @@ void MainWindow::displaySite(QString url, const QString &title)
     if (url.isEmpty())
         url = homeAddress;
     disconnect(conn);
-    conn = connect(webview, &QWebEngineView::loadFinished, [url](bool ok) { if (!ok) qDebug() << "Error :" << url; });
+    conn = connect(webview, &QWebEngineView::loadFinished, [url](bool ok) {
+        if (!ok)
+            qDebug() << "Error :" << url;
+    });
+    if (QFile::exists(url))
+        url = QFileInfo(url).absoluteFilePath();
     QUrl qurl = QUrl::fromUserInput(url);
     webview->setUrl(qurl);
     webview->load(qurl);
@@ -246,10 +268,10 @@ void MainWindow::displaySite(QString url, const QString &title)
 
 void MainWindow::loadBookmarks()
 {
-    QAction *bookmark {nullptr};
     int size = settings.beginReadArray(QStringLiteral("Bookmarks"));
     for (int i = 0; i < size; ++i) {
         settings.setArrayIndex(i);
+        QAction *bookmark {nullptr};
         bookmarks->addAction(bookmark = new QAction(settings.value(QStringLiteral("icon")).value<QIcon>(),
                                                     settings.value(QStringLiteral("title")).toString()));
         bookmark->setProperty("url", settings.value(QStringLiteral("url")));
@@ -260,12 +282,12 @@ void MainWindow::loadBookmarks()
 
 void MainWindow::loadHistory()
 {
-    QAction *histItem {nullptr};
     int size = settings.beginReadArray(QStringLiteral("History"));
     for (int i = 0; i < size; ++i) {
         settings.setArrayIndex(i);
+        QAction *histItem {nullptr};
         history->addAction(histItem = new QAction(settings.value(QStringLiteral("icon")).value<QIcon>(),
-                                                    settings.value(QStringLiteral("title")).toString()));
+                                                  settings.value(QStringLiteral("title")).toString()));
         histItem->setProperty("url", settings.value(QStringLiteral("url")));
         connectAddress(histItem, history);
     }
@@ -282,10 +304,12 @@ void MainWindow::loadSettings()
     homeAddress = settings.value(QStringLiteral("Home"), QStringLiteral("https://duckduckgo.com")).toString();
     showProgress = settings.value(QStringLiteral("ShowProgressBar"), false).toBool();
 
-
-    websettings->setAttribute(QWebEngineSettings::SpatialNavigationEnabled, settings.value(QStringLiteral("SpatialNavigation"), false).toBool());
-    websettings->setAttribute(QWebEngineSettings::JavascriptEnabled, !settings.value(QStringLiteral("DisableJava"), false).toBool());
-    websettings->setAttribute(QWebEngineSettings::AutoLoadImages, settings.value(QStringLiteral("LoadImages"), true).toBool());
+    websettings->setAttribute(QWebEngineSettings::SpatialNavigationEnabled,
+                              settings.value(QStringLiteral("SpatialNavigation"), false).toBool());
+    websettings->setAttribute(QWebEngineSettings::JavascriptEnabled,
+                              !settings.value(QStringLiteral("DisableJava"), false).toBool());
+    websettings->setAttribute(QWebEngineSettings::AutoLoadImages,
+                              settings.value(QStringLiteral("LoadImages"), true).toBool());
 
     if (args.isSet(QStringLiteral("enable-spatial-navigation")))
         websettings->setAttribute(QWebEngineSettings::SpatialNavigationEnabled, true);
@@ -319,13 +343,11 @@ void MainWindow::centerWindow()
 void MainWindow::openQuickInfo()
 {
     QMessageBox::about(this, tr("Keyboard Shortcuts"),
-                       tr("Ctrl-F, or F3") + "\t - " + tr("Find") + "\n" +
-                       tr("Shift-F3") + "\t - " + tr("Find previous") + "\n" +
-                       tr("Ctrl-R, or F5") + "\t - " + tr("Reload") + "\n" +
-                       tr("Ctrl-O") + "\t - " + tr("Browse file to open") + "\n" +
-                       tr("Esc") + "\t - " + tr("Stop loading/clear Find field") + "\n" +
-                       tr("Alt→, Alt←") + "\t - " + tr("Back/Forward") + "\n" +
-                       tr("F1, or ?") + "\t - " + tr("Open this help dialog"));
+                       tr("Ctrl-F, or F3") + "\t - " + tr("Find") + "\n" + tr("Shift-F3") + "\t - "
+                           + tr("Find previous") + "\n" + tr("Ctrl-R, or F5") + "\t - " + tr("Reload") + "\n"
+                           + tr("Ctrl-O") + "\t - " + tr("Browse file to open") + "\n" + tr("Esc") + "\t - "
+                           + tr("Stop loading/clear Find field") + "\n" + tr("Alt→, Alt←") + "\t - "
+                           + tr("Back/Forward") + "\n" + tr("F1, or ?") + "\t - " + tr("Open this help dialog"));
 }
 
 void MainWindow::saveMenuItems(const QMenu *menu, int offset)
@@ -345,13 +367,14 @@ void MainWindow::setConnections()
 {
     connect(webview, &QWebEngineView::loadStarted, toolBar, &QToolBar::show); // show toolbar when loading a new page
     connect(webview, &QWebEngineView::urlChanged, this, &MainWindow::updateUrl);
-    connect(webview, &QWebEngineView::iconChanged, [this]() { histIcons.insert(webview->url(), webview->icon()); });
-    connect(QWebEngineProfile::defaultProfile(), &QWebEngineProfile::downloadRequested,
-            downloadWidget, &DownloadWidget::downloadRequested);
+    connect(webview, &QWebEngineView::iconChanged, this,
+            [this]() { histIcons.insert(webview->url(), webview->icon()); });
+    connect(QWebEngineProfile::defaultProfile(), &QWebEngineProfile::downloadRequested, downloadWidget,
+            &DownloadWidget::downloadRequested);
     if (showProgress)
         connect(webview, &QWebEngineView::loadStarted, this, &MainWindow::loading);
     connect(webview, &QWebEngineView::loadFinished, this, &MainWindow::done);
-    connect(webview->page(), &QWebEnginePage::linkHovered, [this](const QString &url) {
+    connect(webview->page(), &QWebEnginePage::linkHovered, this, [this](const QString &url) {
         if (url.isEmpty()) {
             this->statusBar()->hide();
         } else {
@@ -395,7 +418,7 @@ void MainWindow::showFullScreenNotification()
 // Show the address in the toolbar and also connect it to launch it
 void MainWindow::connectAddress(const QAction *action, const QMenu *menu)
 {
-    connect(action, &QAction::hovered, [this, action]() {
+    connect(action, &QAction::hovered, this, [this, action]() {
         QString url = action->property("url").toString();
         if (url.isEmpty()) {
             this->statusBar()->hide();
@@ -404,7 +427,7 @@ void MainWindow::connectAddress(const QAction *action, const QMenu *menu)
             this->statusBar()->showMessage(url);
         }
     });
-    connect(action, &QAction::triggered, [this, action]() {
+    connect(action, &QAction::triggered, this, [this, action]() {
         QString url = action->property("url").toString();
         displaySite(url);
     });
@@ -433,9 +456,11 @@ void MainWindow::buildMenu()
     menu->addSeparator();
     menu->addAction(historyAction = new QAction(QIcon::fromTheme(QStringLiteral("history")), tr("H&istory")));
     historyAction->setMenu(history);
-    menu->addAction(downloadAction = new QAction(QIcon::fromTheme(QStringLiteral("folder-download")),tr("&Downloads")));
+    menu->addAction(downloadAction
+                    = new QAction(QIcon::fromTheme(QStringLiteral("folder-download")), tr("&Downloads")));
     downloadAction->setShortcut(Qt::CTRL + Qt::Key_J);
-    menu->addAction(bookmarkAction = new QAction(QIcon::fromTheme(QStringLiteral("emblem-favorite")), tr("&Bookmarks")));
+    menu->addAction(bookmarkAction
+                    = new QAction(QIcon::fromTheme(QStringLiteral("emblem-favorite")), tr("&Bookmarks")));
     bookmarkAction->setMenu(bookmarks);
     bookmarks->addAction(addBookmark);
     addBookmark->setText(tr("Bookmark current address"));
@@ -445,20 +470,20 @@ void MainWindow::buildMenu()
     menu->addAction(help = new QAction(QIcon::fromTheme(QStringLiteral("help-contents")), tr("&Help")));
     menu->addAction(about = new QAction(QIcon::fromTheme(QStringLiteral("help-about")), tr("&About")));
     menu->addSeparator();
-    menu->addAction(quit  = new QAction(QIcon::fromTheme(QStringLiteral("window-close")), tr("&Exit")));
+    menu->addAction(quit = new QAction(QIcon::fromTheme(QStringLiteral("window-close")), tr("&Exit")));
 
     loadBookmarks();
     addBookmarksSubmenu();
     addHistorySubmenu();
 
-    connect(addBookmark, &QAction::triggered, [this]() {
+    connect(addBookmark, &QAction::triggered, this, [this]() {
         QAction *bookmark {nullptr};
         bookmarks->addAction(bookmark = new QAction(webview->icon(), webview->title()));
         bookmark->setProperty("url", webview->url());
         connectAddress(bookmark, bookmarks);
     });
 
-    connect(menuButton, &QAction::triggered, [this, menu]() {
+    connect(menuButton, &QAction::triggered, this, [this, menu]() {
         QPoint pos = mapToParent(toolBar->widgetForAction(menuButton)->pos());
         pos.setY(pos.y() + toolBar->widgetForAction(menuButton)->size().height());
         menu->popup(pos);
@@ -468,31 +493,31 @@ void MainWindow::buildMenu()
     connect(fullscreen, &QAction::triggered, this, &MainWindow::toggleFullScreen);
     QApplication::processEvents();
 
-
     connect(downloadAction, &QAction::triggered, downloadWidget, &QWidget::show);
     connect(help, &QAction::triggered, this, &MainWindow::openQuickInfo);
     connect(quit, &QAction::triggered, this, &MainWindow::close);
-    connect(about, &QAction::triggered, [this]() {
-        QMessageBox::about(this, tr("About MX Viewer"), tr(
-"This is a VERY basic browser based on Qt WebEngine.\n\n"
+    connect(about, &QAction::triggered, this, [this]() {
+        QMessageBox::about(this, tr("About MX Viewer"),
+                           tr("This is a VERY basic browser based on Qt WebEngine.\n\n"
 
-"The main purpose is to provide a basic document viewer for MX documentation. "
-"It could be used for LIMITED internet browsing, but it's not recommended to be "
-"used for anything important or secure because it's not a fully featured browser "
-"and its security/privacy features were not tested.\n\n"
+                              "The main purpose is to provide a basic document viewer for MX documentation. "
+                              "It could be used for LIMITED internet browsing, but it's not recommended to be "
+                              "used for anything important or secure because it's not a fully featured browser "
+                              "and its security/privacy features were not tested.\n\n"
 
-"This program is free software: you can redistribute it and/or modify "
-"it under the terms of the GNU General Public License as published by "
-"the Free Software Foundation, either version 3 of the License, or "
-"(at your option) any later version.\n\n"
+                              "This program is free software: you can redistribute it and/or modify "
+                              "it under the terms of the GNU General Public License as published by "
+                              "the Free Software Foundation, either version 3 of the License, or "
+                              "(at your option) any later version.\n\n"
 
-"MX Viewer is distributed in the hope that it will be useful, "
-"but WITHOUT ANY WARRANTY; without even the implied warranty of "
-"MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the "
-"GNU General Public License for more details.\n\n"
+                              "MX Viewer is distributed in the hope that it will be useful, "
+                              "but WITHOUT ANY WARRANTY; without even the implied warranty of "
+                              "MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the "
+                              "GNU General Public License for more details.\n\n"
 
-"You should have received a copy of the GNU General Public License "
-"along with MX Viewer.  If not, see <http://www.gnu.org/licenses/>.")); });
+                              "You should have received a copy of the GNU General Public License "
+                              "along with MX Viewer.  If not, see <http://www.gnu.org/licenses/>."));
+    });
 }
 
 void MainWindow::toggleFullScreen()
@@ -545,23 +570,22 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
 }
 
 // resize event
-void MainWindow::resizeEvent(QResizeEvent* /*event*/)
+void MainWindow::resizeEvent(QResizeEvent * /*event*/)
 {
     if (showProgress)
-        progressBar->move(this->geometry().width() / 2 - progressBar->width() / 2, this->geometry().height() - progBarVerticalAdj);
+        progressBar->move(this->geometry().width() / 2 - progressBar->width() / 2,
+                          this->geometry().height() - progBarVerticalAdj);
 }
 
-void MainWindow::closeEvent(QCloseEvent * /*event*/)
-{
-    downloadWidget->close();
-}
+void MainWindow::closeEvent(QCloseEvent * /*event*/) { downloadWidget->close(); }
 
 // display progressbar while loading page
 void MainWindow::loading()
 {
     progressBar->setFixedHeight(progBarWidth);
     progressBar->setTextVisible(false);
-    progressBar->move(this->geometry().width() / 2 - progressBar->width() / 2, this->geometry().height() - progBarVerticalAdj);
+    progressBar->move(this->geometry().width() / 2 - progressBar->width() / 2,
+                      this->geometry().height() - progBarVerticalAdj);
     progressBar->setFocus();
     progressBar->show();
     timer->start(100ms);
@@ -586,5 +610,3 @@ void MainWindow::procTime()
     const int step = 5;
     progressBar->setValue((progressBar->value() + step) % progressBar->maximum());
 }
-
-

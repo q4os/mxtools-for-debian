@@ -8,7 +8,6 @@ if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-remov
  cleanup-notifier-mx \
  mx-boot-options \
  mx-conky \
- mx-codecs \
  mx-datetime \
  mx-docs \
  mx-network-assistant \

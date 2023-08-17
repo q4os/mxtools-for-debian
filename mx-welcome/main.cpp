@@ -37,35 +37,37 @@
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
-    app.setWindowIcon(QIcon::fromTheme(app.applicationName()));
-    app.setOrganizationName(QStringLiteral("MX-Linux"));
+    QApplication::setWindowIcon(QIcon::fromTheme(QApplication::applicationName()));
+    QApplication::setOrganizationName(QStringLiteral("MX-Linux"));
 
     QCommandLineParser parser;
     parser.setApplicationDescription(QObject::tr("This tool displays a welcome screen with two tabs."));
     parser.addHelpOption();
     parser.addVersionOption();
-    parser.addOption({{"a", "about"}, QObject::tr("Start with About tab selected. "
-                      "The About tab provides basic information about the current "
-                      "MX Linux version, the user's hardware, and access to a full system report.")});
+    parser.addOption({{"a", "about"},
+                      QObject::tr("Start with About tab selected. "
+                                  "The About tab provides basic information about the current "
+                                  "MX Linux version, the user's hardware, and access to a full system report.")});
     parser.addOption({{"t", "test"}, QObject::tr("Run a test mode.")});
     parser.process(app);
 
     QTranslator qtTran;
-    if (qtTran.load(QLocale::system(), QStringLiteral("qt"), QStringLiteral("_"), QLibraryInfo::location(QLibraryInfo::TranslationsPath)))
-        app.installTranslator(&qtTran);
+    if (qtTran.load("qt_" + QLocale().name(), QLibraryInfo::location(QLibraryInfo::TranslationsPath)))
+        QApplication::installTranslator(&qtTran);
 
     QTranslator qtBaseTran;
     if (qtBaseTran.load("qtbase_" + QLocale::system().name(), QLibraryInfo::location(QLibraryInfo::TranslationsPath)))
-        app.installTranslator(&qtBaseTran);
+        QApplication::installTranslator(&qtBaseTran);
 
     QTranslator appTran;
-    if (appTran.load(app.applicationName() + "_" + QLocale::system().name(), "/usr/share/" + app.applicationName() + "/locale"))
-        app.installTranslator(&appTran);
+    if (appTran.load(QApplication::applicationName() + "_" + QLocale::system().name(),
+                     "/usr/share/" + QApplication::applicationName() + "/locale"))
+        QApplication::installTranslator(&appTran);
 
     if (getuid() != 0) {
         MainWindow w(parser);
         w.show();
-        return app.exec();
+        return QApplication::exec();
     } else {
         QApplication::beep();
         QMessageBox::critical(nullptr, QObject::tr("Error"), QObject::tr("You must run this program as normal user."));

@@ -66,7 +66,7 @@
     <message>
         <location filename="../mainwindow.ui" line="224"/>
         <source>View Log</source>
-        <translation> Log ansehen</translation>
+        <translation>Protokoll ansehen</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="259"/>
@@ -93,7 +93,7 @@
     <message>
         <location filename="../mainwindow.ui" line="327"/>
         <source>Make the ext4 filesystem even if one exists</source>
-        <translation>Erzeugung des ext4 Dateisystems, auch falls es bereits eines gibt</translation>
+        <translation>Ein ext4.Dateisystem erzeugen, auch wenn es bereits eines gibt</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="334"/>
@@ -214,12 +214,12 @@
     <message>
         <location filename="../mainwindow.ui" line="595"/>
         <source>Image &amp;mode - read-only LiveUSB (dd)</source>
-        <translation type="unfinished"></translation>
+        <translation>Abbild &amp;Modus - schreibgeschütztes Live-USB (dd)</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="609"/>
         <source>For distros other than antiX/MX use image mode (dd).</source>
-        <translation>Für andere Distributionen als antiX/MX verwende den Abbild-Modus (dd).</translation>
+        <translation>Für andere Distributionen als antiX/MX verwende den Abbildmodus (dd).</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="657"/>
@@ -279,7 +279,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="76"/>
         <source>Target device %1 is larger than %2 GB. Do you wish to proceed?</source>
-        <translation>Das Ziel-Gerät %1 ist größer als %2 GB. Möchten Sie fortfahren?</translation>
+        <translation>Das Ziel-Gerät %1 ist größer als %2 GB. Möchten sie fortfahren?</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="116"/>
@@ -297,10 +297,10 @@
         <location filename="../mainwindow.cpp" line="152"/>
         <source>Writing %1 using &apos;dd&apos; command to /dev/%2,
 
-Please wait until the the process is completed</source>
+Please wait until the process is completed</source>
         <translation>%1 wird mittels &apos;dd&apos; Befehl auf /dev/%2 geschrieben,
 
-bitte auf Abschluss des Vorgangs warten</translation>
+Bitte auf Abschluss des Vorgangs warten</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="312"/>
@@ -315,7 +315,7 @@ bitte auf Abschluss des Vorgangs warten</translation>
     <message>
         <location filename="../mainwindow.cpp" line="317"/>
         <source>Error encountered in the LiveUSB creation process</source>
-        <translation>Bei der LiveUSB-Erzeugung trat ein Fehler auf</translation>
+        <translation>Beim Erzeugen des Live-USB trat ein Fehler auf</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="375"/>
@@ -417,7 +417,7 @@ bitte auf Abschluss des Vorgangs warten</translation>
     <message>
         <location filename="../mainwindow.cpp" line="581"/>
         <source>Could not find a log file at: </source>
-        <translation>Konnte keine Log-Datei finden in:</translation>
+        <translation>Konnte keine Protokolldatei finden in:</translation>
     </message>
 </context>
 <context>
@@ -446,7 +446,7 @@ bitte auf Abschluss des Vorgangs warten</translation>
     <message>
         <location filename="../main.cpp" line="57"/>
         <source>Program for creating a live-usb from an iso-file, another live-usb, a live-cd/dvd, or a running live system.</source>
-        <translation>Programm zur LiveUSB-Erzeugung aus einer ISO-Datei, einem anderen LiveUSB-System, einer Live-CD/DVD oder einem laufenden Live-System.</translation>
+        <translation>Programm zur Live-USB-Erzeugung aus einer ISO-Datei, einem anderen Live-USB-System, einer Live-CD/DVD oder einem laufenden Live-System.</translation>
     </message>
     <message>
         <location filename="../main.cpp" line="61"/>
@@ -471,7 +471,7 @@ bitte auf Abschluss des Vorgangs warten</translation>
     <message>
         <location filename="../main.cpp" line="89"/>
         <source>You seem to be logged in as root, please log out and log in as normal user to use this program.</source>
-        <translation>Sie sind als Benutzer “root” am System angemeldet. Bitte melden Sie sich ab und melden sich als normaler Benutzer an, um dieses Programm zu verwenden.</translation>
+        <translation>Sie sind als Administrator am System angemeldet. Bitte melden sie sich ab und dann als normaler Benutzer wieder an, um dieses Programm zu verwenden.</translation>
     </message>
     <message>
         <location filename="../main.cpp" line="103"/>

@@ -1,4 +1,6 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="nb">
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.1" language="nb">
 <context>
     <name>MainWindow</name>
     <message>
@@ -148,6 +150,7 @@
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="180"/>
+        <location filename="../mainwindow.cpp" line="308"/>
         <source>Failure</source>
         <translation>Mislykket</translation>
     </message>
@@ -209,6 +212,11 @@
         <location filename="../mainwindow.cpp" line="265"/>
         <source>%1 Help</source>
         <translation>Hjelpetekst for %1</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="308"/>
+        <source>Invalid Name</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

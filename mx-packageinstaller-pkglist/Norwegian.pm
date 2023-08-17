@@ -25,35 +25,34 @@ Norwegian
    <eu>Norwegian Language Meta-Package</eu>
    <fa>Norwegian Language Meta-Package</fa>
    <fil_PH>Norwegian Language Meta-Package</fil_PH>
-   <fi>Norwegian Language Meta-Package</fi>
+   <fi>Norjankielinen metatieto-paketti</fi>
    <fr>Méta-paquet pour langue norvégienne</fr>
    <he_IL>Norwegian Language Meta-Package</he_IL>
-   <hi>Norwegian Language Meta-Package</hi>
+   <hi>नॉर्वेजियाई भाषा मेटा-पैकेज</hi>
    <hr>Norwegian Language Meta-Package</hr>
    <hu>Norwegian Language Meta-Package</hu>
    <id>Norwegian Language Meta-Package</id>
    <is>Norwegian Language Meta-Package</is>
    <it>Meta-pacchetto della lingua norvegese</it>
-   <ja_JP>Norwegian Language Meta-Package</ja_JP>
-   <ja>Norwegian Language Meta-Package</ja>
+   <ja>ノルウェー語メタパッケージ</ja>
    <kk>Norwegian Language Meta-Package</kk>
    <ko>Norwegian Language Meta-Package</ko>
    <lt>Norwegian Language Meta-Package</lt>
    <mk>Norwegian Language Meta-Package</mk>
    <mr>Norwegian Language Meta-Package</mr>
-   <nb>Norwegian Language Meta-Package</nb>
+   <nb>Norsk bokmålsk språkpakke</nb>
    <nl>Noorse Taal Meta-Pakket</nl>
    <pl>Norweski metapakiet językowy</pl>
    <pt_BR>Norueguês Meta-Pacote de Idioma</pt_BR>
    <pt>Norueguês Meta-Pacote de Idioma</pt>
    <ro>Norwegian Language Meta-Package</ro>
-   <ru>Norwegian Language Meta-Package</ru>
+   <ru>Мета-пакет норвежского языка</ru>
    <sk>Norwegian Language Meta-Package</sk>
-   <sl>Norwegian Language Meta-Package</sl>
-   <sq>Norwegian Language Meta-Package</sq>
+   <sl>Norveški jezikovni meta-paket</sl>
+   <sq>Meta-Paketë gjuhësore në norvegjisht</sq>
    <sr>Norwegian Language Meta-Package</sr>
    <sv>Norskt Språk Meta-Paket </sv>
-   <tr>Norwegian Language Meta-Package</tr>
+   <tr>Norveççe Dili Üst-Paketi</tr>
    <uk>Norwegian Language Meta-Package</uk>
    <vi>Norwegian Language Meta-Package</vi>
    <zh_CN>Norwegian Language Meta-Package</zh_CN>

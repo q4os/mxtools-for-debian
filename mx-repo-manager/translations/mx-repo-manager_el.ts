@@ -5,13 +5,13 @@
     <name>MainWindow</name>
     <message>
         <location filename="../mainwindow.ui" line="17"/>
-        <location filename="../mainwindow.cpp" line="71"/>
+        <location filename="../mainwindow.cpp" line="74"/>
         <source>MX Repo Manager</source>
-        <translation>Διαχειριστής αποθετηρίων MX</translation>
+        <translation>MX Διαχειριστής αποθετηρίων</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="32"/>
-        <location filename="../mainwindow.cpp" line="607"/>
+        <location filename="../mainwindow.cpp" line="602"/>
         <source>Select the APT repository that you want to use:</source>
         <translation>Επιλέξτε το αποθετήριο που θέλετε να χρησιμοποιήσετε:</translation>
     </message>
@@ -43,7 +43,7 @@
     <message>
         <location filename="../mainwindow.ui" line="229"/>
         <source>Individual sources</source>
-        <translation>Μεμονωμένες πηγές</translation>
+        <translation>Πηγές</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="248"/>
@@ -101,179 +101,179 @@
         <translation>Εφαρμογή</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="154"/>
-        <location filename="../mainwindow.cpp" line="458"/>
-        <location filename="../mainwindow.cpp" line="751"/>
+        <location filename="../mainwindow.cpp" line="162"/>
+        <location filename="../mainwindow.cpp" line="451"/>
+        <location filename="../mainwindow.cpp" line="748"/>
         <source>Success</source>
         <translation>Επιτυχία</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="155"/>
-        <location filename="../mainwindow.cpp" line="459"/>
-        <location filename="../mainwindow.cpp" line="755"/>
+        <location filename="../mainwindow.cpp" line="163"/>
+        <location filename="../mainwindow.cpp" line="451"/>
+        <location filename="../mainwindow.cpp" line="752"/>
         <source>Your new selection will take effect the next time sources are updated.</source>
         <translation>Η νέα επιλογή σας θα τεθεί σε ισχύ την επόμενη φορά που θα ενημερωθούν οι πηγές σας.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="276"/>
+        <location filename="../mainwindow.cpp" line="283"/>
         <source>Lists</source>
-        <translation>Κατάλογος</translation>
+        <translation>Κατάλογοι</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="276"/>
+        <location filename="../mainwindow.cpp" line="283"/>
         <source>Sources (checked sources are enabled)</source>
         <translation>Πηγές (οι επιλεγμένες πηγές είναι ενεργοποιημένες)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="461"/>
-        <location filename="../mainwindow.cpp" line="658"/>
-        <location filename="../mainwindow.cpp" line="668"/>
-        <location filename="../mainwindow.cpp" line="686"/>
-        <location filename="../mainwindow.cpp" line="703"/>
-        <location filename="../mainwindow.cpp" line="711"/>
+        <location filename="../mainwindow.cpp" line="452"/>
+        <location filename="../mainwindow.cpp" line="657"/>
+        <location filename="../mainwindow.cpp" line="667"/>
+        <location filename="../mainwindow.cpp" line="685"/>
+        <location filename="../mainwindow.cpp" line="699"/>
+        <location filename="../mainwindow.cpp" line="707"/>
+        <location filename="../mainwindow.cpp" line="724"/>
         <location filename="../mainwindow.cpp" line="730"/>
-        <location filename="../mainwindow.cpp" line="736"/>
-        <location filename="../mainwindow.cpp" line="819"/>
+        <location filename="../mainwindow.cpp" line="818"/>
         <source>Error</source>
         <translation>Σφάλμα</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="461"/>
+        <location filename="../mainwindow.cpp" line="452"/>
         <source>Could not change the repo.</source>
         <translation>Δεν ήταν δυνατή η αλλαγή αποθετηρίου.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="484"/>
+        <location filename="../mainwindow.cpp" line="475"/>
         <source>Cancel</source>
-        <translation>Ακύρωση</translation>
+        <translation>Άκυρο</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="490"/>
+        <location filename="../mainwindow.cpp" line="481"/>
         <source>Please wait...</source>
         <translation>Παρακαλώ περιμένετε...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="545"/>
+        <location filename="../mainwindow.cpp" line="536"/>
         <source>About %1</source>
         <translation>Περί του %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="546"/>
+        <location filename="../mainwindow.cpp" line="537"/>
         <source>Version: </source>
         <translation>Έκδοση: </translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="548"/>
+        <location filename="../mainwindow.cpp" line="539"/>
         <source>Program for choosing the default APT repository</source>
         <translation>Πρόγραμμα επιλογής αποθετηρίων</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="550"/>
+        <location filename="../mainwindow.cpp" line="541"/>
         <source>Copyright (c) MX Linux</source>
-        <translation>Πνευματικά δικαιώματα (c)  MX Linux</translation>
+        <translation>Πνευματικά δικαιώματα (c) MX Linux</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="551"/>
+        <location filename="../mainwindow.cpp" line="542"/>
         <source>%1 License</source>
         <translation>Άδεια %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="565"/>
+        <location filename="../mainwindow.cpp" line="557"/>
         <source>%1 Help</source>
         <translation>Βοήθεια %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="574"/>
+        <location filename="../mainwindow.cpp" line="566"/>
         <source>Warning</source>
-        <translation>Προειδοποίηση</translation>
+        <translation>Προσοχή</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="575"/>
+        <location filename="../mainwindow.cpp" line="567"/>
         <source>You have selected MX Test Repo. It&apos;s not recommended to leave it enabled or to upgrade all the packages from it.</source>
-        <translation>Έχετε επιλέξει το αποθετήριο Test του MX. Δεν συνιστάται η ενεργοποίησή του ή η αναβάθμιση όλων των πακέτων από αυτό.</translation>
+        <translation>Έχετε επιλέξει το αποθετήριο Test του MX. Δεν συνιστάται η ενεργοποίηση ή η αναβάθμιση όλων των πακέτων από αυτό.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="578"/>
+        <location filename="../mainwindow.cpp" line="570"/>
         <source>A safer option is to install packages individually with MX Package Installer.</source>
-        <translation>Ασφαλέστερη επιλογή είναι, να εγκαταστήσετε μεμονωμένα πακέτα από το Διαχειριστή πακέτων MX.</translation>
+        <translation>Η ασφαλέστερη επιλογή είναι, να εγκαταστήσετε μεμονωμένα πακέτα από την εγκατάσταση πακέτων του MX.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="609"/>
+        <location filename="../mainwindow.cpp" line="604"/>
         <source>Select the APT repository and sources that you want to use:</source>
         <translation>Επιλέξτε αποθετήριο και τις πηγές που θέλετε να χρησιμοποιήσετε:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="658"/>
+        <location filename="../mainwindow.cpp" line="657"/>
         <source>netselect-apt could not detect fastest repo.</source>
         <translation>η εντολή netselect-apt δεν μπόρεσε να ανιχνεύσει ταχύτερο αποθετήριο.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="668"/>
-        <location filename="../mainwindow.cpp" line="686"/>
+        <location filename="../mainwindow.cpp" line="667"/>
+        <location filename="../mainwindow.cpp" line="685"/>
         <source>Could not detect fastest repo.</source>
         <translation>Δεν ανιχνεύτηκε ταχύτερο αποθετήριο.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="703"/>
+        <location filename="../mainwindow.cpp" line="699"/>
         <source>Can&apos;t figure out if this app is running on antiX or MX</source>
-        <translation type="unfinished"></translation>
+        <translation>Δεν μπορώ να καταλάβω αν αυτή η εφαρμογή τρέχει σε antiX ή MX</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="712"/>
+        <location filename="../mainwindow.cpp" line="708"/>
         <source>MX version not detected or out of range: </source>
-        <translation type="unfinished"></translation>
+        <translation>Δεν ανιχνεύεται η έκδοση MX ή είναι εκτός ορίων: </translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="730"/>
+        <location filename="../mainwindow.cpp" line="724"/>
         <source>Could not download original APT files.</source>
         <translation>Δεν ήταν δυνατή η λήψη των αρχικών αρχείων.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="736"/>
+        <location filename="../mainwindow.cpp" line="730"/>
         <source>Could not unzip downloaded file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Δεν μπόρεσε να αποσυμπιεστεί το ληφθέν αρχείο.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="746"/>
+        <location filename="../mainwindow.cpp" line="741"/>
         <source>Enabling AHS</source>
-        <translation type="unfinished"></translation>
+        <translation>Ενεργοποίηση AHS</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="746"/>
+        <location filename="../mainwindow.cpp" line="741"/>
         <source>Do you use AHS (Advanced Hardware Stack) repo?</source>
-        <translation type="unfinished"></translation>
+        <translation>Θέλετε να χρησιμοποιήσετε το αποθετήριο AHS (Advanced Hardware Stack);</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="752"/>
+        <location filename="../mainwindow.cpp" line="749"/>
         <source>Original APT sources have been restored to the release status. User added source files in /etc/apt/sources.list.d/ have not been touched.</source>
-        <translation>Τα αποθετήρια επανήλθαν στα αρχικά. Τα αρχεία χρήστη στο /etc/apt/sources.list.d/ δεν τροποποιήθηκαν.</translation>
+        <translation>Τα αποθετήρια επανήλθαν στα αρχική κατάσταση. Τα αρχεία χρήστη στο /etc/apt/sources.list.d/ δεν τροποποιήθηκαν.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="820"/>
+        <location filename="../mainwindow.cpp" line="819"/>
         <source>There was an error writing file: %1. Please check if you have enough free space on your drive</source>
-        <translation>Υπήρξε ένα αρχείο γραφής σφάλματος: %1. Ελέγξτε αν έχετε αρκετό ελεύθερο χώρο στη μονάδα δίσκου σας</translation>
+        <translation>Υπήρξε σφάλμα στην εγγραφή του αρχείου: %1. Παρακαλώ ελέγξτε αν έχετε αρκετό ελεύθερο χώρο στη μονάδα δίσκου σας</translation>
     </message>
 </context>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../about.cpp" line="52"/>
+        <location filename="../about.cpp" line="51"/>
         <source>License</source>
         <translation>Άδεια</translation>
     </message>
     <message>
-        <location filename="../about.cpp" line="53"/>
+        <location filename="../about.cpp" line="52"/>
         <location filename="../about.cpp" line="62"/>
         <source>Changelog</source>
         <translation>Αρχείο αλλαγών</translation>
     </message>
     <message>
-        <location filename="../about.cpp" line="54"/>
+        <location filename="../about.cpp" line="53"/>
         <source>Cancel</source>
-        <translation>Ακύρωση</translation>
+        <translation>Άκυρο</translation>
     </message>
     <message>
-        <location filename="../about.cpp" line="74"/>
+        <location filename="../about.cpp" line="75"/>
         <source>&amp;Close</source>
         <translation>&amp;Κλείσιμο</translation>
     </message>
@@ -285,7 +285,7 @@
     <message>
         <location filename="../main.cpp" line="72"/>
         <source>You seem to be logged in as root, please log out and log in as normal user to use this program.</source>
-        <translation>Φαίνεται ότι έχετε συνδεθεί ως root, αποσυνδεθείτε και συνδεθείτε ως κανονικός χρήστης για να χρησιμοποιήσετε αυτό το πρόγραμμα.</translation>
+        <translation>Φαίνεται ότι έχετε συνδεθεί ως διαχειριστής, αποσυνδεθείτε και συνδεθείτε ως απλός χρήστης για να χρησιμοποιήσετε αυτό το πρόγραμμα.</translation>
     </message>
 </context>
 </TS>

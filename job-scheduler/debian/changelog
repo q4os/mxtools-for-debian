@@ -1,3 +1,10 @@
+job-scheduler (23.7) mx; urgency=medium
+
+  * Update translations
+  * Fix version
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 20 Jul 2023 15:59:22 -0400
+
 job-scheduler (0.23.03.01) mx; urgency=medium
 
   * update translations

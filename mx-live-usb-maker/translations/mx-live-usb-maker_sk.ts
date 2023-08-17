@@ -297,9 +297,8 @@
         <location filename="../mainwindow.cpp" line="152"/>
         <source>Writing %1 using &apos;dd&apos; command to /dev/%2,
 
-Please wait until the the process is completed</source>
-        <translation>Zapisujem %1 na /dev/%2 s použitím príkazu &apos;dd&apos;
-Prosím vydržte pokiaľ proces zápisu nebude dokončený</translation>
+Please wait until the process is completed</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="312"/>

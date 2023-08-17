@@ -26,6 +26,8 @@ source gettext.sh
 export TEXTDOMAINDIR=/usr/share/locale 
 export TEXTDOMAIN="ddm-mx"
 
+LOG="/var/log/ddm.log"
+
 if [ "$1" = "-h" -o "$1" = "--help" ]; then
 	echo "Usage: nvidia-detect-mx [PCIID]..."
 	echo "       "$(gettext "Reports the Debian packages supporting the NVIDIA GPU that is installed on the local system (or given as a PCIID parameter).")
@@ -41,9 +43,9 @@ NVIDIA_DETECT_PRESENT="/usr/bin/nvidia-detect"
 # -------------------------------------------------------------------------
 #get release info
 source /etc/lsb-release
-echo
+echo 
 echo "Distribution:  " $DISTRIB_ID
-echo
+echo  
 
 # -------------------------------------------------------------------------
 
@@ -55,7 +57,7 @@ if [ -e "$NVIDIA_DETECT_PRESENT" ]; then
     LATEST=$(cat /usr/bin/nvidia-detect|grep LATEST= |cut -d '"' -f2)
 fi
 
-echo $(gettext "Latest") " = $LATEST"
+echo $(gettext "Latest") " = $LATEST" 
 PACKAGE=
 
 NV_DETECT()
@@ -162,18 +164,18 @@ if [ "$ARCH" = "amd64" ]; then
 fi
 
 if [[ ${#VERSIONS[*]} == 0 ]]; then
-       	echo $(eval_gettext "Uh oh. Your card is not supported by any driver version up to $LATEST.")
-	echo $(eval_gettext "A newer driver may add support for your card.")
-	echo $(eval_gettext "Newer driver releases may be available in the MX testing repository or debian-backports.")
-	return
+       	echo $(eval_gettext "Uh oh. Your card is not supported by any driver version up to $LATEST.") 
+	echo $(eval_gettext "A newer driver may add support for your card.") 
+	echo $(eval_gettext "Newer driver releases may be available in the MX testing repository or debian-backports.") 
+	exit 3
 fi
 
 if [[ -n ${VERSIONS[340]} ]]; then
 	PACKAGE="nvidia-legacy-340xx-driver"
 	if [ -n "$(apt-cache madison $PACKAGE 2>/dev/null |grep $PACKAGE)" ]; then
 	    #inform which driver series works
-		printf "$(eval_gettext "Your card is supported by the nvidia %s drivers series. %s")" "340"  "$PACKAGE"
-		echo ""
+		printf "$(eval_gettext "Your card is supported by the nvidia %s drivers series. %s")" "340"  "$PACKAGE" 
+		echo "" 
 	else
 		unset PACKAGE
 	fi
@@ -181,8 +183,8 @@ fi
 if [[ -n ${VERSIONS[390]} ]]; then
 	PACKAGE="nvidia-legacy-390xx-driver" #; changes for mx
 	if [ -n "$(apt-cache madison $PACKAGE 2>/dev/null |grep $PACKAGE)" ]; then
-		printf "$(eval_gettext "Your card is supported by the nvidia %s drivers series. %s")" "390"  "$PACKAGE"
-		echo ""
+		printf "$(eval_gettext "Your card is supported by the nvidia %s drivers series. %s")" "390"  "$PACKAGE" 
+		echo "" 
 	else
 		unset PACKAGE
 	fi
@@ -190,8 +192,8 @@ fi
 if [[ -n ${VERSIONS[391]} ]]; then
 	PACKAGE="nvidia-legacy-390xx-driver" #; changes for mx	
 	if [ -n "$(apt-cache madison $PACKAGE 2>/dev/null |grep $PACKAGE)" ]; then
-	    printf "$(eval_gettext "Your card is supported by the nvidia %s drivers series. %s")" "390"  "$PACKAGE"
-	    echo ""
+	    printf "$(eval_gettext "Your card is supported by the nvidia %s drivers series. %s")" "390"  "$PACKAGE" 
+	    echo "" 
 	else
 		unset PACKAGE
 	fi
@@ -199,8 +201,8 @@ fi
 if [[ -n ${VERSIONS[419]} ]]; then
 	PACKAGE="nvidia-tesla-418-driver"
 	if [ -n "$(apt-cache madison $PACKAGE 2>/dev/null |grep $PACKAGE)" ]; then
-	    printf "$(eval_gettext "Your card is supported by the nvidia %s drivers series. %s")" "tesla 418"  "$PACKAGE"
-	    echo ""
+	    printf "$(eval_gettext "Your card is supported by the nvidia %s drivers series. %s")" "tesla 418"  "$PACKAGE" 
+	    echo "" 
 	else
 		unset PACKAGE
 	fi
@@ -208,8 +210,8 @@ fi
 if [[ -n ${VERSIONS[441]} ]]; then
 	PACKAGE="nvidia-tesla-440-driver"
 	if [ -n "$(apt-cache madison $PACKAGE 2>/dev/null |grep $PACKAGE)" ]; then
-		printf "$(eval_gettext "Your card is supported by the nvidia %s drivers series. %s")" "tesla 440"  "$PACKAGE"
-		echo ""
+		printf "$(eval_gettext "Your card is supported by the nvidia %s drivers series. %s")" "tesla 440"  "$PACKAGE" 
+		echo "" 
 	else
 		unset PACKAGE
 	fi
@@ -217,8 +219,8 @@ fi
 if [[ -n ${VERSIONS[451]} ]]; then
 	PACKAGE="nvidia-tesla-450-driver"
 	if [ -n "$(apt-cache madison $PACKAGE 2>/dev/null |grep $PACKAGE)" ]; then
-		printf "$(eval_gettext "Your card is supported by the nvidia %s drivers series. %s")" "tesla 450"  "$PACKAGE"
-		echo ""
+		printf "$(eval_gettext "Your card is supported by the nvidia %s drivers series. %s")" "tesla 450"  "$PACKAGE" 
+		echo "" 
 	else
 		unset PACKAGE
 	fi
@@ -226,8 +228,8 @@ fi
 if [[ -n ${VERSIONS[461]} ]]; then
 	PACKAGE="nvidia-tesla-460-driver1"
 	if [ -n "$(apt-cache madison $PACKAGE 2>/dev/null |grep $PACKAGE)" ]; then
-		printf "$(eval_gettext "Your card is supported by the nvidia %s drivers series. %s")" "tesla 460"  "$PACKAGE"
-		echo ""
+		printf "$(eval_gettext "Your card is supported by the nvidia %s drivers series. %s")" "tesla 460"  "$PACKAGE" 
+		echo "" 
 	else
 		unset PACKAGE
 	fi
@@ -235,8 +237,8 @@ fi
 if [[ -n ${VERSIONS[471]} ]]; then
 	PACKAGE="nvidia-tesla-470-driver"
 	if [ -n "$(apt-cache madison $PACKAGE 2>/dev/null |grep $PACKAGE)" ]; then
-	    printf "$(eval_gettext "Your card is supported by the nvidia %s drivers series. %s")" "tesla 470"  "$PACKAGE"
-	    echo ""
+	    printf "$(eval_gettext "Your card is supported by the nvidia %s drivers series. %s")" "tesla 470"  "$PACKAGE" 
+	    echo "" 
 	else
 		unset PACKAGE
 	fi
@@ -244,8 +246,8 @@ fi
 if [[ -n ${VERSIONS[510]} ]]; then
 	PACKAGE="nvidia-tesla-510-driver"
 	if [ -n "$(apt-cache madison $PACKAGE 2>/dev/null |grep $PACKAGE)" ]; then
-		printf "$(eval_gettext "Your card is supported by the nvidia %s drivers series. %s")" "tesla 510"  "$PACKAGE"
-		echo ""
+		printf "$(eval_gettext "Your card is supported by the nvidia %s drivers series. %s")" "tesla 510"  "$PACKAGE" 
+		echo "" 
 	else
 		unset PACKAGE
 	fi
@@ -253,8 +255,8 @@ fi
 if [[ -n ${VERSIONS[999]} ]]; then
 	PACKAGE="nvidia-driver" #; changes for mx
 	if [ -n "$(apt-cache madison $PACKAGE 2>/dev/null |grep $PACKAGE)" ]; then
-		printf "$(eval_gettext "Your card is supported by the nvidia %s drivers series. %s")" "$LATEST"  "$PACKAGE"
-		echo ""
+		printf "$(eval_gettext "Your card is supported by the nvidia %s drivers series. %s")" "$LATEST"  "$PACKAGE" 
+		echo "" 
 	else
 		unset PACKAGE
 	fi
@@ -264,18 +266,18 @@ if [[ -z $PACKAGE ]]; then
 	if [[ -n ${VERSIONS[304]} ]]; then
 	#. inform which driver series are totally unsupported
 	    printf "$(eval_gettext "Uh oh. Your card is only supported by the %s legacy drivers series, which is not in any current Debian suite.")" "304" 
-	    echo ""
+	    echo "" 
 	elif [[ -n ${VERSIONS[173]} ]]; then
 		printf "$(eval_gettext "Uh oh. Your card is only supported by the %s legacy drivers series, which is not in any current Debian suite.")" "173" 
-		echo ""
+		echo "" 
 	elif [[ -n ${VERSIONS[96]} ]]; then
 		printf "$(eval_gettext "Uh oh. Your card is only supported by the %s legacy drivers series, which is not in any current Debian suite.")" "96" 
-		echo ""
+		echo "" 
 	elif [[ -n ${VERSIONS[71]} ]]; then
 		printf "$(eval_gettext "Uh oh. Your card is only supported by the %s legacy drivers series, which is not in any current Debian suite.")" "71" 
-		echo ""
+		echo "" 
 	else
-		echo $(eval_gettext "Oops. Supported driver not found") "($NVGA)"
+		echo $(eval_gettext "Oops. Supported driver not found") "($NVGA)" 
 		echo ""
 	fi
 fi
@@ -283,11 +285,11 @@ fi
 echo ""
 
 if [ -n "$PACKAGE" ]; then
-	echo $(eval_gettext "It is recommended to install the following:")
-	echo "INSTALL: "    $PACKAGE 
-	echo ""
-	echo "$(eval_gettext "To install alternate driver packages, use") sudo ddm-mx -i nvidia -f [driver package name]"
-	echo ""
+	echo $(eval_gettext "It is recommended to install the following:") 
+	echo "INSTALL: "    $PACKAGE  
+	echo "" 
+	echo "$(eval_gettext "To install alternate driver packages, use") sudo ddm-mx -i nvidia -f [driver package name]" 
+	echo "" 
 fi
 
 }
@@ -326,7 +328,7 @@ else
 			exit 1
 		fi
 
-		echo "Checking driver support for PCI ID [$(echo $PCIID | sed -r 's/(....)(....)/\1:\2/')]"
+		echo "Checking driver support for PCI ID [$(echo $PCIID | sed -r 's/(....)(....)/\1:\2/')]" 
 		NV_DETECT "$PCIID"
 	done
 

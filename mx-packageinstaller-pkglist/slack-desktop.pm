@@ -34,7 +34,6 @@ Slack Desktop Client
    <id>Slack Desktop Client</id>
    <is>Slack Desktop Client</is>
    <it>Slack Desktop Client</it>
-   <ja_JP>Slack Desktop Client</ja_JP>
    <ja>Slack Desktop Client</ja>
    <kk>Slack Desktop Client</kk>
    <ko>Slack Desktop Client</ko>

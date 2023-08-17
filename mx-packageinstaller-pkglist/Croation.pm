@@ -25,35 +25,34 @@ Croatian
    <eu>Croatian Language Meta-Package</eu>
    <fa>Croatian Language Meta-Package</fa>
    <fil_PH>Croatian Language Meta-Package</fil_PH>
-   <fi>Croatian Language Meta-Package</fi>
+   <fi>Kroatiankielinen metatieto-paketti</fi>
    <fr>Méta-Paquet pour langue croate</fr>
    <he_IL>Croatian Language Meta-Package</he_IL>
-   <hi>Croatian Language Meta-Package</hi>
+   <hi>क्रोशियाई भाषा मेटा-पैकेज</hi>
    <hr>Croatian Language Meta-Package</hr>
    <hu>Croatian Language Meta-Package</hu>
    <id>Croatian Language Meta-Package</id>
    <is>Croatian Language Meta-Package</is>
    <it>Meta-pacchetto della lingua croata</it>
-   <ja_JP>Croatian Language Meta-Package</ja_JP>
-   <ja>Croatian Language Meta-Package</ja>
+   <ja>クロアチア語のメタパッケージ</ja>
    <kk>Croatian Language Meta-Package</kk>
    <ko>Croatian Language Meta-Package</ko>
    <lt>Croatian Language Meta-Package</lt>
    <mk>Croatian Language Meta-Package</mk>
    <mr>Croatian Language Meta-Package</mr>
-   <nb>Croatian Language Meta-Package</nb>
+   <nb>Kroatisk språkpakke</nb>
    <nl>Kroatische Taal Meta-Pakket</nl>
    <pl>Chorwacki metapakiet językowy</pl>
-   <pt_BR>Croata Meta-Pacote de Idioma</pt_BR>
+   <pt_BR>Croata Pacote de Idioma</pt_BR>
    <pt>Croata Meta-Pacote de Idioma</pt>
    <ro>Croatian Language Meta-Package</ro>
-   <ru>Croatian Language Meta-Package</ru>
+   <ru>Мета-пакет хорватского языка</ru>
    <sk>Croatian Language Meta-Package</sk>
-   <sl>Croatian Language Meta-Package</sl>
-   <sq>Croatian Language Meta-Package</sq>
+   <sl>Hrvaški jezikovni metapaket</sl>
+   <sq>Meta-Paketë gjuhësore në kroatisht</sq>
    <sr>Croatian Language Meta-Package</sr>
    <sv>Kroatiskt Språk Meta-Paket</sv>
-   <tr>Croatian Language Meta-Package</tr>
+   <tr>Hırvatça Dili Üst-Paketi</tr>
    <uk>Croatian Language Meta-Package</uk>
    <vi>Croatian Language Meta-Package</vi>
    <zh_CN>Croatian Language Meta-Package</zh_CN>

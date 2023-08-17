@@ -11,7 +11,7 @@
     <message>
         <location filename="../mainwindow.ui" line="27"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;justify&quot;&gt;This application allows you to install restricted codecs that permit advanced video and audio functions.&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;In some jurisdictions, their distribution may be limited. Please check the regulations in your area. &lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;br/&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Do you assume legal responsibility for downloading these codecs?&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;justify&quot;&gt;Diese Anwendung ermöglicht das Herunterladen von Codecs für erweiterte Audio- und Videofunktionen. &lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;In manchen Ländern kann die Nutzung solcher Codecs wegen nationaler Rechtsprechung eingeschränkt sein, daher muss der Benutzer die jeweiligen rechtlichen Vorschriften beachten.&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;br/&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Übernehmen Sie die Verantwortung für das Herunterladen dieser Codecs?&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;justify&quot;&gt;Diese Anwendung ermöglicht das Herunterladen von Codecs für erweiterte Audio- und Videofunktionen. &lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;In manchen Ländern kann die Nutzung solcher Codecs wegen nationaler Rechtsprechung eingeschränkt sein, daher muss der Benutzer die jeweiligen rechtlichen Vorschriften beachten.&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;br/&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Übernehmen sie die Verantwortung für das Herunterladen dieser Codecs?&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="44"/>
@@ -232,11 +232,11 @@
     </message>
     <message>
         <source>Changelog</source>
-        <translation type="vanished">Changelog</translation>
+        <translation type="vanished">Änderungsprotokoll</translation>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation type="vanished">&amp;Close</translation>
+        <translation type="vanished">&amp;Schließen</translation>
     </message>
 </context>
 <context>
@@ -251,7 +251,7 @@
     </message>
     <message>
         <source>You must run this program as root.</source>
-        <translation type="vanished">Die Anwendung muss als &quot;root&quot;-Benutzer ausgeführt werden.</translation>
+        <translation type="vanished">Diese Anwendung muss mit-Administratorrechten ausgeführt werden.</translation>
     </message>
 </context>
 <context>
@@ -265,7 +265,7 @@
         <location filename="../about.cpp" line="53"/>
         <location filename="../about.cpp" line="62"/>
         <source>Changelog</source>
-        <translation type="unfinished">Changelog</translation>
+        <translation type="unfinished">Änderungsprotokoll</translation>
     </message>
     <message>
         <location filename="../about.cpp" line="54"/>
@@ -275,7 +275,7 @@
     <message>
         <location filename="../about.cpp" line="74"/>
         <source>&amp;Close</source>
-        <translation type="unfinished">&amp;Close</translation>
+        <translation type="unfinished">&amp;Schließen</translation>
     </message>
     <message>
         <location filename="../main.cpp" line="66"/>

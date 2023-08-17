@@ -25,32 +25,31 @@ Chinese_Input_fcitx
    <eu>Chinese fcitx</eu>
    <fa>Chinese fcitx</fa>
    <fil_PH>Chinese fcitx</fil_PH>
-   <fi>Chinese fcitx</fi>
+   <fi>Kiinalainen fctx</fi>
    <fr>Chinois fcitx</fr>
    <he_IL>Chinese fcitx</he_IL>
-   <hi>Chinese fcitx</hi>
+   <hi>चीनी fcitx</hi>
    <hr>Chinese fcitx</hr>
    <hu>Chinese fcitx</hu>
    <id>Chinese fcitx</id>
    <is>Chinese fcitx</is>
    <it>Chinese fcitx</it>
-   <ja_JP>Chinese fcitx</ja_JP>
-   <ja>Chinese fcitx</ja>
+   <ja>中国語用 fcitx</ja>
    <kk>Chinese fcitx</kk>
    <ko>Chinese fcitx</ko>
    <lt>Kinų fcitx</lt>
    <mk>Chinese fcitx</mk>
    <mr>Chinese fcitx</mr>
-   <nb>Chinese fcitx</nb>
+   <nb>Kinesisk fcitx</nb>
    <nl>Chinese fcitx</nl>
    <pl>Chiński fcitx</pl>
-   <pt_BR>Chinês fcitx</pt_BR>
+   <pt_BR>fcitx para idioma Chinês</pt_BR>
    <pt>Chinês fcitx</pt>
    <ro>Chinese fcitx</ro>
-   <ru>Chinese fcitx</ru>
+   <ru>Китайский метод ввода fcitx</ru>
    <sk>Chinese fcitx</sk>
-   <sl>Chinese fcitx</sl>
-   <sq>Chinese fcitx</sq>
+   <sl>Kitajski fcitx</sl>
+   <sq>fcitx kinezçe</sq>
    <sr>Chinese fcitx</sr>
    <sv>Kinesisk fcitx</sv>
    <tr>Çince fcitx</tr>

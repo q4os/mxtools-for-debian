@@ -49,6 +49,7 @@ FORMS    += \
 TRANSLATIONS += translations/mx-conky_af.ts \
                 translations/mx-conky_am.ts \
                 translations/mx-conky_ar.ts \
+                translations/mx-conky_ast.ts \
                 translations/mx-conky_be.ts \
                 translations/mx-conky_bg.ts \
                 translations/mx-conky_bn.ts \
@@ -76,7 +77,6 @@ TRANSLATIONS += translations/mx-conky_af.ts \
                 translations/mx-conky_fil.ts \
                 translations/mx-conky_fi.ts \
                 translations/mx-conky_fr_BE.ts \
-                translations/mx-conky_fr_FR.ts \
                 translations/mx-conky_fr.ts \
                 translations/mx-conky_fy.ts \
                 translations/mx-conky_ga.ts \
@@ -92,12 +92,16 @@ TRANSLATIONS += translations/mx-conky_af.ts \
                 translations/mx-conky_hr.ts \
                 translations/mx-conky_ht.ts \
                 translations/mx-conky_hu.ts \
+                translations/mx-conky_hy_AM.ts \
+                translations/mx-conky_hye.ts \
                 translations/mx-conky_hy.ts \
                 translations/mx-conky_id.ts \
+                translations/mx-conky_ie.ts \
                 translations/mx-conky_is.ts \
                 translations/mx-conky_it.ts \
                 translations/mx-conky_ja.ts \
                 translations/mx-conky_jv.ts \
+                translations/mx-conky_kab.ts \
                 translations/mx-conky_ka.ts \
                 translations/mx-conky_kk.ts \
                 translations/mx-conky_km.ts \
@@ -123,7 +127,9 @@ TRANSLATIONS += translations/mx-conky_af.ts \
                 translations/mx-conky_ne.ts \
                 translations/mx-conky_nl_BE.ts \
                 translations/mx-conky_nl.ts \
+                translations/mx-conky_nn.ts \
                 translations/mx-conky_ny.ts \
+                translations/mx-conky_oc.ts \
                 translations/mx-conky_or.ts \
                 translations/mx-conky_pa.ts \
                 translations/mx-conky_pl.ts \

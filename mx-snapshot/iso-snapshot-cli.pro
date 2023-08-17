@@ -58,10 +58,10 @@ HEADERS  += \
 TRANSLATIONS += translations/mx-snapshot_af.ts \
                 translations/mx-snapshot_am.ts \
                 translations/mx-snapshot_ar.ts \
+                translations/mx-snapshot_ast.ts \
                 translations/mx-snapshot_be.ts \
                 translations/mx-snapshot_bg.ts \
                 translations/mx-snapshot_bn.ts \
-                translations/mx-snapshot_bs_BA.ts \
                 translations/mx-snapshot_bs.ts \
                 translations/mx-snapshot_ca.ts \
                 translations/mx-snapshot_ceb.ts \
@@ -72,7 +72,6 @@ TRANSLATIONS += translations/mx-snapshot_af.ts \
                 translations/mx-snapshot_de.ts \
                 translations/mx-snapshot_el.ts \
                 translations/mx-snapshot_en_GB.ts \
-                translations/mx-snapshot_en.ts \
                 translations/mx-snapshot_en_US.ts \
                 translations/mx-snapshot_eo.ts \
                 translations/mx-snapshot_es_ES.ts \
@@ -85,7 +84,6 @@ TRANSLATIONS += translations/mx-snapshot_af.ts \
                 translations/mx-snapshot_fil.ts \
                 translations/mx-snapshot_fi.ts \
                 translations/mx-snapshot_fr_BE.ts \
-                translations/mx-snapshot_fr_FR.ts \
                 translations/mx-snapshot_fr.ts \
                 translations/mx-snapshot_fy.ts \
                 translations/mx-snapshot_ga.ts \
@@ -97,16 +95,20 @@ TRANSLATIONS += translations/mx-snapshot_af.ts \
                 translations/mx-snapshot_haw.ts \
                 translations/mx-snapshot_he_IL.ts \
                 translations/mx-snapshot_he.ts \
-                translations/mx-snapshot_hi.ts \
+                translations/mx-snapshot_hi.ts \                
                 translations/mx-snapshot_hr.ts \
                 translations/mx-snapshot_ht.ts \
                 translations/mx-snapshot_hu.ts \
+                translations/mx-snapshot_hy_AM.ts \
+                translations/mx-snapshot_hye.ts \
                 translations/mx-snapshot_hy.ts \
                 translations/mx-snapshot_id.ts \
+                translations/mx-snapshot_ie.ts \
                 translations/mx-snapshot_is.ts \
                 translations/mx-snapshot_it.ts \
                 translations/mx-snapshot_ja.ts \
                 translations/mx-snapshot_jv.ts \
+                translations/mx-snapshot_kab.ts \
                 translations/mx-snapshot_ka.ts \
                 translations/mx-snapshot_kk.ts \
                 translations/mx-snapshot_km.ts \
@@ -132,7 +134,9 @@ TRANSLATIONS += translations/mx-snapshot_af.ts \
                 translations/mx-snapshot_ne.ts \
                 translations/mx-snapshot_nl_BE.ts \
                 translations/mx-snapshot_nl.ts \
+                translations/mx-snapshot_nn.ts \
                 translations/mx-snapshot_ny.ts \
+                translations/mx-snapshot_oc.ts \
                 translations/mx-snapshot_or.ts \
                 translations/mx-snapshot_pa.ts \
                 translations/mx-snapshot_pl.ts \
@@ -141,7 +145,6 @@ TRANSLATIONS += translations/mx-snapshot_af.ts \
                 translations/mx-snapshot_pt.ts \
                 translations/mx-snapshot_ro.ts \
                 translations/mx-snapshot_rue.ts \
-                translations/mx-snapshot_ru_RU.ts \
                 translations/mx-snapshot_ru.ts \
                 translations/mx-snapshot_rw.ts \
                 translations/mx-snapshot_sd.ts \
@@ -176,6 +179,6 @@ TRANSLATIONS += translations/mx-snapshot_af.ts \
                 translations/mx-snapshot_zh_CN.ts \
                 translations/mx-snapshot_zh_HK.ts \
                 translations/mx-snapshot_zh_TW.ts
-
+                 
 RESOURCES += \
     images.qrc

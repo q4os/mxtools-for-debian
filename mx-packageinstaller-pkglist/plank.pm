@@ -25,35 +25,34 @@ Plank
    <eu>Simple but good looking dock</eu>
    <fa>Simple but good looking dock</fa>
    <fil_PH>Simple but good looking dock</fil_PH>
-   <fi>Simple but good looking dock</fi>
+   <fi>Yksinkertainen mutta hyvännäköinen telakka</fi>
    <fr>Un dock sobre et agréable</fr>
    <he_IL>Simple but good looking dock</he_IL>
-   <hi>Simple but good looking dock</hi>
+   <hi>सरल परन्तु आकर्षक डॉक</hi>
    <hr>Simple but good looking dock</hr>
    <hu>Simple but good looking dock</hu>
    <id>Simple but good looking dock</id>
    <is>Simple but good looking dock</is>
    <it>barra dock semplice ma bella</it>
-   <ja_JP>Simple but good looking dock</ja_JP>
-   <ja>Simple but good looking dock</ja>
+   <ja>シンプルでも見栄えの良いドック</ja>
    <kk>Simple but good looking dock</kk>
    <ko>Simple but good looking dock</ko>
    <lt>Simple but good looking dock</lt>
    <mk>Simple but good looking dock</mk>
    <mr>Simple but good looking dock</mr>
-   <nb>Simple but good looking dock</nb>
+   <nb>Enkel, men pen programmeny</nb>
    <nl>Eenvoudig maar goed uitziende dock</nl>
    <pl>prosty, ale dobrze wyglądający panel dokujący</pl>
-   <pt_BR>Doca simples mas elegante</pt_BR>
+   <pt_BR>Doca (dock) simples mas elegante</pt_BR>
    <pt>Doca simples mas elegante</pt>
    <ro>Simple but good looking dock</ro>
    <ru>Простой но стильно выглядящий док</ru>
    <sk>Simple but good looking dock</sk>
-   <sl>Enostaven a lep dock</sl>
-   <sq>Simple but good looking dock</sq>
+   <sl>Enostavno sidrišče lepega videza</sl>
+   <sq>Panel i thjeshtë, por i hijshëm</sq>
    <sr>Simple but good looking dock</sr>
    <sv>Enkel men snygg docka</sv>
-   <tr>Simple but good looking dock</tr>
+   <tr>Basit ama güzel görünümlü panel</tr>
    <uk>простий, але гарний док</uk>
    <vi>Simple but good looking dock</vi>
    <zh_CN>Simple but good looking dock</zh_CN>

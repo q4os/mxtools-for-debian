@@ -1,3 +1,10 @@
+mx-debian-firmware (23.03.01mx23) mx; urgency=medium
+
+  * initial mx23 build
+  * remove firmware-intelwimax from depends
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 27 Mar 2023 08:04:21 -0400
+
 mx-debian-firmware (20.10.11mx21) mx; urgency=medium
 
   * Build for MX 21, now that linux-firmware is going to AHS.

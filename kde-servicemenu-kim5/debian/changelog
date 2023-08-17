@@ -1,0 +1,6 @@
+kde-servicemenu-kim5 (0.9.6-1mx23+1) mx; urgency=medium
+
+  * Initial packaging of the KDE5 version of this service-menu
+  * from fork found @ https://github.com/caco3/kim5
+
+ -- Timothy E. Harris <maintainer@mxrepo.com>  Sun, 12 Feb 2023 16:29:50 -0500

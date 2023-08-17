@@ -14,46 +14,45 @@ Belarusian_Libreoffice
    <ar>Belarusian Language Meta-Package for LibreOffice</ar>
    <bg>Belarusian Language Meta-Package for LibreOffice</bg>
    <bn>Belarusian Language Meta-Package for LibreOffice</bn>
-   <ca>Metapaquet d'idioma Bielorús per LibreOffice</ca>
+   <ca>Metapaquet per LibreOffice</ca>
    <cs>Belarusian Language Meta-Package for LibreOffice</cs>
    <da>Belarusian Language Meta-Package for LibreOffice</da>
-   <de>Weißrussisches Meta-Paket für LibreOffice</de>
-   <el>LibreOffice στα Belarusian</el>
+   <de>Meta-Paket für LibreOffice</de>
+   <el>Meta-Package για το LibreOffice</el>
    <en>Belarusian Language Meta-Package for LibreOffice</en>
-   <es>Metapaquete de idioma bielorruso para LibreOffice</es>
+   <es>Meta-Package para LibreOffice</es>
    <et>Belarusian Language Meta-Package for LibreOffice</et>
    <eu>Belarusian Language Meta-Package for LibreOffice</eu>
    <fa>Belarusian Language Meta-Package for LibreOffice</fa>
    <fil_PH>Belarusian Language Meta-Package for LibreOffice</fil_PH>
-   <fi>Belarusian Language Meta-Package for LibreOffice</fi>
-   <fr>Belarusian Language Meta-Package for LibreOffice</fr>
+   <fi>Metatieto-paketti LibreOffice:lle</fi>
+   <fr>Meta-Paquet pour LibreOffice</fr>
    <he_IL>Belarusian Language Meta-Package for LibreOffice</he_IL>
-   <hi>Belarusian Language Meta-Package for LibreOffice</hi>
+   <hi>लिब्रे-ऑफिस हेतु मेटा-पैकेज</hi>
    <hr>Belarusian Language Meta-Package for LibreOffice</hr>
    <hu>Belarusian Language Meta-Package for LibreOffice</hu>
    <id>Belarusian Language Meta-Package for LibreOffice</id>
    <is>Belarusian Language Meta-Package for LibreOffice</is>
-   <it>Meta-pacchetto della lingua bielorussa per LibreOffice</it>
-   <ja_JP>Belarusian Language Meta-Package for LibreOffice</ja_JP>
-   <ja>Belarusian Language Meta-Package for LibreOffice</ja>
+   <it>Meta-pacchetto per LibreOffice</it>
+   <ja>LibreOffice用メタパッケージ</ja>
    <kk>Belarusian Language Meta-Package for LibreOffice</kk>
    <ko>Belarusian Language Meta-Package for LibreOffice</ko>
    <lt>Belarusian Language Meta-Package for LibreOffice</lt>
    <mk>Belarusian Language Meta-Package for LibreOffice</mk>
    <mr>Belarusian Language Meta-Package for LibreOffice</mr>
-   <nb>Belarusian Language Meta-Package for LibreOffice</nb>
-   <nl>Russisch Taal Meta-Pakket voor LibreOffice</nl>
-   <pl>Belarusian Language Meta-Package for LibreOffice</pl>
-   <pt_BR>Belarusian Language Meta-Package for LibreOffice</pt_BR>
-   <pt>Bielorrusso Meta-Pacote de Idioma para LibreOffice</pt>
+   <nb>LibreOffice metapakke</nb>
+   <nl>Meta-Pakket voor LibreOffice</nl>
+   <pl>Meta-Pakiet dla LibreOffice</pl>
+   <pt_BR>Meta-Pacote para o LibreOffice</pt_BR>
+   <pt>Meta-Pacote para LibreOffice</pt>
    <ro>Belarusian Language Meta-Package for LibreOffice</ro>
-   <ru>Belarusian Language Meta-Package for LibreOffice</ru>
+   <ru>Мета-пакет для LibreOffice</ru>
    <sk>Belarusian Language Meta-Package for LibreOffice</sk>
-   <sl>Beloruski jezikovni meta-paket za LibreOffice</sl>
-   <sq>Belarusian Language Meta-Package for LibreOffice</sq>
+   <sl>Meta-paket za LibreOffice</sl>
+   <sq>Meta-Paketë për LibreOffice-in</sq>
    <sr>Belarusian Language Meta-Package for LibreOffice</sr>
-   <sv>Belarusiskt Språk Meta-Paket för LibreOffice</sv>
-   <tr>Belarusian Language Meta-Package for LibreOffice</tr>
+   <sv>Meta-Paket för LibreOffice</sv>
+   <tr>LibreOffice için Üst-Paket</tr>
    <uk>Belarusian Language Meta-Package for LibreOffice</uk>
    <vi>Belarusian Language Meta-Package for LibreOffice</vi>
    <zh_CN>Belarusian Language Meta-Package for LibreOffice</zh_CN>

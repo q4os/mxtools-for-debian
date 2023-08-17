@@ -14,46 +14,45 @@ Farsi_Libreoffice
    <ar>Farsi Language Meta-Package for LibreOffice</ar>
    <bg>Farsi Language Meta-Package for LibreOffice</bg>
    <bn>Farsi Language Meta-Package for LibreOffice</bn>
-   <ca>Metapaquet d'idioma Farsi per LibreOffice</ca>
+   <ca>Metapaquet per LibreOffice</ca>
    <cs>Farsi Language Meta-Package for LibreOffice</cs>
    <da>Farsi Language Meta-Package for LibreOffice</da>
-   <de>Farsi Meta-Paket für LibreOffice</de>
-   <el>LibreOffice στα Φάρσι</el>
+   <de>Meta-Paket für LibreOffice</de>
+   <el>Meta-Package για το LibreOffice</el>
    <en>Farsi Language Meta-Package for LibreOffice</en>
-   <es>Meta-Paquete de idioma farsi para LibreOffice</es>
+   <es>Meta-Package para LibreOffice</es>
    <et>Farsi Language Meta-Package for LibreOffice</et>
    <eu>Farsi Language Meta-Package for LibreOffice</eu>
    <fa>Farsi Language Meta-Package for LibreOffice</fa>
    <fil_PH>Farsi Language Meta-Package for LibreOffice</fil_PH>
-   <fi>Farsi Language Meta-Package for LibreOffice</fi>
-   <fr>Farsi Language Meta-Package for LibreOffice</fr>
+   <fi>Metatieto-paketti LibreOffice:lle</fi>
+   <fr>Meta-Paquet pour LibreOffice</fr>
    <he_IL>Farsi Language Meta-Package for LibreOffice</he_IL>
-   <hi>Farsi Language Meta-Package for LibreOffice</hi>
+   <hi>लिब्रे-ऑफिस हेतु मेटा-पैकेज</hi>
    <hr>Farsi Language Meta-Package for LibreOffice</hr>
    <hu>Farsi Language Meta-Package for LibreOffice</hu>
    <id>Farsi Language Meta-Package for LibreOffice</id>
    <is>Farsi Language Meta-Package for LibreOffice</is>
-   <it>Meta-pacchetto della lingua persiana per LibreOffice</it>
-   <ja_JP>Farsi Language Meta-Package for LibreOffice</ja_JP>
-   <ja>Farsi Language Meta-Package for LibreOffice</ja>
+   <it>Meta-pacchetto per LibreOffice</it>
+   <ja>LibreOffice用メタパッケージ</ja>
    <kk>Farsi Language Meta-Package for LibreOffice</kk>
    <ko>Farsi Language Meta-Package for LibreOffice</ko>
    <lt>Farsi Language Meta-Package for LibreOffice</lt>
    <mk>Farsi Language Meta-Package for LibreOffice</mk>
    <mr>Farsi Language Meta-Package for LibreOffice</mr>
-   <nb>Farsi Language Meta-Package for LibreOffice</nb>
-   <nl>Farsi Language Meta-Package for LibreOffice</nl>
-   <pl>Farsi Language Meta-Package for LibreOffice</pl>
-   <pt_BR>Farsi Language Meta-Package for LibreOffice</pt_BR>
-   <pt>Persa Meta-Pacote de Idioma para LibreOffice</pt>
+   <nb>LibreOffice metapakke</nb>
+   <nl>Meta-Pakket voor LibreOffice</nl>
+   <pl>Meta-Pakiet dla LibreOffice</pl>
+   <pt_BR>Meta-Pacote para o LibreOffice</pt_BR>
+   <pt>Meta-Pacote para LibreOffice</pt>
    <ro>Farsi Language Meta-Package for LibreOffice</ro>
-   <ru>Farsi Language Meta-Package for LibreOffice</ru>
+   <ru>Мета-пакет для LibreOffice</ru>
    <sk>Farsi Language Meta-Package for LibreOffice</sk>
-   <sl>Farsi jezikovni meta-paket za LibreOffice</sl>
-   <sq>Farsi Language Meta-Package for LibreOffice</sq>
+   <sl>Meta-paket za LibreOffice</sl>
+   <sq>Meta-Paketë për LibreOffice-in</sq>
    <sr>Farsi Language Meta-Package for LibreOffice</sr>
-   <sv>Farsi Språk Meta-Paket för LibreOffice</sv>
-   <tr>Farsi Language Meta-Package for LibreOffice</tr>
+   <sv>Meta-Paket för LibreOffice</sv>
+   <tr>LibreOffice için Üst-Paket</tr>
    <uk>Farsi Language Meta-Package for LibreOffice</uk>
    <vi>Farsi Language Meta-Package for LibreOffice</vi>
    <zh_CN>Farsi Language Meta-Package for LibreOffice</zh_CN>

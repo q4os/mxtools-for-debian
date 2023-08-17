@@ -34,7 +34,6 @@ Primary
    <id>Primary. Includes: gcompris, laby, ri-li, stellarium, tuxmath, tuxpaint, tuxtype, and marble</id>
    <is>Primary. Includes: gcompris, laby, ri-li, stellarium, tuxmath, tuxpaint, tuxtype, and marble</is>
    <it>Medie. Include: gcompris, laby, ri-li, stellarium, tuxmath, tuxpaint, tuxtype, e marble</it>
-   <ja_JP>Primary. Includes: gcompris, laby, ri-li, stellarium, tuxmath, tuxpaint, tuxtype, and marble</ja_JP>
    <ja>Primary. Includes: gcompris, laby, ri-li, stellarium, tuxmath, tuxpaint, tuxtype, and marble</ja>
    <kk>Primary. Includes: gcompris, laby, ri-li, stellarium, tuxmath, tuxpaint, tuxtype, and marble</kk>
    <ko>Primary. Includes: gcompris, laby, ri-li, stellarium, tuxmath, tuxpaint, tuxtype, and marble</ko>

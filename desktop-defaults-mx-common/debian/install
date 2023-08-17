@@ -1,5 +1,4 @@
 icons/*                    	usr/local/share/icons
-52-force-root-for-admin-auth.conf 	etc/polkit-1/localauthority.conf.d
 X11/*                      	etc/X11
 azerty/*                   	usr/share/keymaps/i386/azerty
 qwerty/*                   	usr/share/keymaps/i386/qwerty

@@ -1,0 +1,42 @@
+#!/bin/bash
+
+# buildiso dkms-helper
+# dkms wrapper to prevent dkms build and install 
+# for detected host kernels when buildiso is performed 
+# not within target kernel and architecture
+# 
+# part of buildiso-mx
+# initial version fehlix@mxlinux.org April 2022 
+#
+# version 22.04.01
+
+architecture_option=""
+case $(dpkg --print-architecture) in
+   i386)   architecture_option="-a i686"   ;;
+   amd64)  architecture_option="-a x86_64" ;;
+esac
+
+dkms_kernel_option=""
+kernel_option=""
+
+for kernel_version in $(find /lib/modules -mindepth 1 -maxdepth 1 -type d  -printf ' %f'); do 
+    kernel_option+=" -k $kernel_version"
+done
+
+case "$1" in 
+    build|install) 
+         dkms_kernel_option="$kernel_option $architecture_option"
+         ;;
+         *) :
+         ;;
+esac
+
+if [ -x /usr/sbin/dkms.mx ]; then
+   echo /usr/sbin/dkms.mx "$@" $dkms_kernel_option
+   exec /usr/sbin/dkms.mx "$@" $dkms_kernel_option
+else
+   echo "Error: /usr/sbin/dkms.mx not found!"
+   exit 1
+fi
+exit 0
+

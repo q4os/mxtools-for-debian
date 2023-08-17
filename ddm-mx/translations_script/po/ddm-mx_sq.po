@@ -11,10 +11,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-04 14:51-0500\n"
+"POT-Creation-Date: 2023-06-11 15:22-0400\n"
 "PO-Revision-Date: 2016-11-29 14:08+0000\n"
 "Last-Translator: Besnik Bleta <besnik@programeshqip.org>, 2023\n"
-"Language-Team: Albanian (https://www.transifex.com/anticapitalista/teams/10162/sq/)\n"
+"Language-Team: Albanian (https://app.transifex.com/anticapitalista/teams/10162/sq/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -87,7 +87,7 @@ msgstr "Fillo më d(/m/y):"
 msgid "ERROR: Unknown argument: $DRV"
 msgstr "GABIM: Argument i panjohur: $DRV"
 
-#: ../ddm-mx:224 ../ddm-mx:964
+#: ../ddm-mx:224 ../ddm-mx:968
 #, sh-format
 msgid "ERROR: Unknown argument: "
 msgstr "GABIM: Argument i panjohur: "
@@ -141,7 +141,7 @@ msgstr "Kjo do të instalojë përudhësa për hardware të paracaktuar."
 msgid "Use with -i."
 msgstr "Përdoreni me -i."
 
-#: ../ddm-mx:321
+#: ../ddm-mx:325
 #, sh-format
 msgid ""
 "Unsupported configuration.  bumblebee only works with 390xx drivers and up."
@@ -149,235 +149,236 @@ msgstr ""
 "Formësim i pambuluar.  bumblebee funksionon vetëm me përudhësa 390xx e "
 "sipër."
 
-#: ../ddm-mx:353
+#: ../ddm-mx:357
 #, sh-format
 msgid "Need driver: "
 msgstr "Lyp përudhës: "
 
-#: ../ddm-mx:357
+#: ../ddm-mx:361
 #, sh-format
 msgid "NVIDIA packages to install are "
 msgstr "Paketat NVIDIA për instalim janë "
 
-#: ../ddm-mx:359 ../ddm-mx:697
+#: ../ddm-mx:363 ../ddm-mx:701
 #, sh-format
 msgid "Continue?"
 msgstr "Të vazhdohet?"
 
-#: ../ddm-mx:380
+#: ../ddm-mx:384
 #, sh-format
 msgid "Nvidia command "
 msgstr "Urdhër Nvidia "
 
-#: ../ddm-mx:407
+#: ../ddm-mx:411
 #, sh-format
 msgid "ERROR: Could not configure Bumblebee for user: "
 msgstr "GABIM: S’u formësua dot Bumblebee për përdorim: "
 
-#: ../ddm-mx:411
+#: ../ddm-mx:415
 #, sh-format
 msgid "test enabled, not creating xorg.conf file"
 msgstr "testim i aktivizuar, s’po krijohet kartelë xorg.conf"
 
-#: ../ddm-mx:415
+#: ../ddm-mx:419
 #, sh-format
 msgid "creating /etc/X11/xorg.conf file"
 msgstr "po krijohet kartelë /etc/X11/xorg.conf"
 
-#: ../ddm-mx:445
+#: ../ddm-mx:449
 #, sh-format
 msgid "Finished"
 msgstr "Përfundoi"
 
-#: ../ddm-mx:464
+#: ../ddm-mx:468
 #, sh-format
 msgid "Proprietary drivers removed"
 msgstr "Përudhësit pronësorë u hoqën"
 
-#: ../ddm-mx:477
+#: ../ddm-mx:481
 #, sh-format
 msgid "Open command "
 msgstr "Urdhër për të hapur "
 
-#: ../ddm-mx:481
+#: ../ddm-mx:485
 #, sh-format
 msgid "Open drivers installed"
 msgstr "Përudhësit e hapur u instaluan"
 
-#: ../ddm-mx:495 ../ddm-mx:501
+#: ../ddm-mx:499 ../ddm-mx:505
 #, sh-format
 msgid "Resetting sources"
 msgstr "Po rikthen burimet te parazgjedhjet"
 
-#: ../ddm-mx:512
+#: ../ddm-mx:516
 #, sh-format
 msgid "Press <Enter> to exit"
 msgstr "Shtypni tastin <Enter> që të dilet"
 
 #. enabling debian-backports
-#: ../ddm-mx:526
+#: ../ddm-mx:530
 #, sh-format
 msgid "Enabling backports repo"
 msgstr "Po aktivizohet depo “backports”"
 
-#: ../ddm-mx:527 ../ddm-mx:543
+#: ../ddm-mx:531 ../ddm-mx:547
 #, sh-format
 msgid "Running apt-get update..."
 msgstr "Po xhirohet “apt-get update”…"
 
-#: ../ddm-mx:532 ../ddm-mx:548 ../ddm-mx:1039
+#: ../ddm-mx:536 ../ddm-mx:552 ../ddm-mx:1043
 #, sh-format
 msgid "Installing latest nvidia-detect package"
 msgstr "Po instalohet paketa më e re nvidia-detect"
 
 #. enabling mx_test_repo
-#: ../ddm-mx:542
+#: ../ddm-mx:546
 #, sh-format
 msgid "Enabling MX Test repo"
 msgstr "Po aktivizohet depo MX Test"
 
-#: ../ddm-mx:557
+#: ../ddm-mx:561
 #, sh-format
 msgid "Would you like to check debian-backports for a later version?"
 msgstr ""
 "Do të donit të kontrollohen te debian-backports për një version të "
 "mëvonshëm?"
 
-#: ../ddm-mx:559
+#: ../ddm-mx:563
 #, sh-format
 msgid "Yes or No?"
 msgstr "Po apo Jo?"
 
-#: ../ddm-mx:561
+#: ../ddm-mx:565 ../ddm-mx:1100
 #, sh-format
 msgid "Yes"
 msgstr "Po"
 
-#: ../ddm-mx:562
+#: ../ddm-mx:566 ../ddm-mx:1101
 #, sh-format
 msgid "No"
 msgstr "Jo"
 
-#: ../ddm-mx:564 ../ddm-mx:609 ../ddm-mx:647 ../ddm-mx:1003
+#: ../ddm-mx:568 ../ddm-mx:613 ../ddm-mx:651 ../ddm-mx:1007 ../ddm-mx:1103
 #, sh-format
 msgid "Enter Number of selection"
 msgstr "Jepni Numër përzgjedhjeje"
 
-#: ../ddm-mx:568 ../ddm-mx:572 ../ddm-mx:585 ../ddm-mx:589 ../ddm-mx:613
-#: ../ddm-mx:626 ../ddm-mx:651 ../ddm-mx:664
+#: ../ddm-mx:572 ../ddm-mx:576 ../ddm-mx:589 ../ddm-mx:593 ../ddm-mx:617
+#: ../ddm-mx:630 ../ddm-mx:655 ../ddm-mx:668
 #, sh-format
 msgid "Ok"
 msgstr "Ok"
 
-#: ../ddm-mx:575 ../ddm-mx:592 ../ddm-mx:631 ../ddm-mx:671 ../ddm-mx:1009
+#: ../ddm-mx:579 ../ddm-mx:596 ../ddm-mx:635 ../ddm-mx:675 ../ddm-mx:1013
+#: ../ddm-mx:1110
 #, sh-format
 msgid "invalid option."
 msgstr "mundësi e pavlefshme."
 
 #. NVIDIA_XCONFIG=""
-#: ../ddm-mx:575 ../ddm-mx:592 ../ddm-mx:629 ../ddm-mx:631 ../ddm-mx:669
-#: ../ddm-mx:671 ../ddm-mx:1008 ../ddm-mx:1009
+#: ../ddm-mx:579 ../ddm-mx:596 ../ddm-mx:633 ../ddm-mx:635 ../ddm-mx:673
+#: ../ddm-mx:675 ../ddm-mx:1012 ../ddm-mx:1013 ../ddm-mx:1109 ../ddm-mx:1110
 #, sh-format
 msgid "exiting"
 msgstr "po dilet"
 
-#: ../ddm-mx:581 ../ddm-mx:582
+#: ../ddm-mx:585 ../ddm-mx:586
 #, sh-format
 msgid "Would you like to check MX Test Repo for a later version?"
 msgstr ""
 "Do të donit të kontrollohet MX Test Repo për një version të mëvonshëm?"
 
-#: ../ddm-mx:599 ../ddm-mx:637
+#: ../ddm-mx:603 ../ddm-mx:641
 #, sh-format
 msgid "Which driver do you wish to install"
 msgstr "Cilin përudhës do të donit të instalohet"
 
-#: ../ddm-mx:601
+#: ../ddm-mx:605
 #, sh-format
 msgid "Main repos or debian-backports?"
 msgstr "Depot kryesore apo debian-backports?"
 
-#: ../ddm-mx:603 ../ddm-mx:641
+#: ../ddm-mx:607 ../ddm-mx:645
 #, sh-format
 msgid "Main"
 msgstr "Kryesoret"
 
-#: ../ddm-mx:607 ../ddm-mx:645
+#: ../ddm-mx:611 ../ddm-mx:649
 #, sh-format
 msgid "Exit"
 msgstr "Dalje"
 
-#: ../ddm-mx:622 ../ddm-mx:660
+#: ../ddm-mx:626 ../ddm-mx:664
 #, sh-format
 msgid "Reset nvidia-detect"
 msgstr "Rikthe te parazgjedhjet nvidia-detect"
 
-#: ../ddm-mx:639
+#: ../ddm-mx:643
 #, sh-format
 msgid "Main repos or MX Test"
 msgstr "Depo kryesore, ose MX Test"
 
-#: ../ddm-mx:643
+#: ../ddm-mx:647
 #, sh-format
 msgid "MX Test"
 msgstr "MX Test"
 
-#: ../ddm-mx:687
+#: ../ddm-mx:691
 #, sh-format
 msgid "Candidate is: "
 msgstr "Kandidati është: "
 
-#: ../ddm-mx:688 ../ddm-mx:976 ../ddm-mx:985
+#: ../ddm-mx:692 ../ddm-mx:980 ../ddm-mx:989
 #, sh-format
 msgid "Installed is: "
 msgstr "I instaluari është: "
 
-#: ../ddm-mx:696
+#: ../ddm-mx:700
 #, sh-format
 msgid "Refreshing Sources with apt-get update"
 msgstr "Po rifreskohen Burimet me “apt-get update”"
 
-#: ../ddm-mx:703
+#: ../ddm-mx:707
 #, sh-format
 msgid "There was a problem with the apt-get update.  See $LOG for details"
 msgstr "Pati një problem me “apt-get update”.  Për hollësi, shihni $LOG"
 
-#: ../ddm-mx:713
+#: ../ddm-mx:717
 #, sh-format
 msgid "To restore open source drivers use:  "
 msgstr "Që të riktheni përudhës me burim të hapur, përdorni: "
 
-#: ../ddm-mx:730
+#: ../ddm-mx:734
 #, sh-format
 msgid "To restore open source drivers later use:  "
 msgstr "Që të riktheni përudhës me burim të hapur më vonë, përdorni: "
 
-#: ../ddm-mx:742
+#: ../ddm-mx:746
 #, sh-format
 msgid "For recovery help see "
 msgstr "Për ndihmë mbi rikthim, shihni "
 
-#: ../ddm-mx:745
+#: ../ddm-mx:749
 #, sh-format
 msgid "Information written to "
 msgstr "Hollësitë shkruar te "
 
-#: ../ddm-mx:781
+#: ../ddm-mx:785
 #, sh-format
 msgid "Possible previous install from source or smxi/sgfxi detected."
 msgstr "U pikas instalim i mëparshëm i mundshëm prej burimi, ose smxi/sgfxi."
 
-#: ../ddm-mx:782
+#: ../ddm-mx:786
 #, sh-format
 msgid "Version detected: "
 msgstr "Version i pikasur: "
 
-#: ../ddm-mx:783
+#: ../ddm-mx:787
 #, sh-format
 msgid "Latest possible with this script : "
 msgstr "Më i riu i mundshëm me këtë programth: "
 
-#: ../ddm-mx:784
+#: ../ddm-mx:788
 #, sh-format
 msgid ""
 "Please remove with  <sudo nvidia-install --uninstall> and reboot if you wish"
@@ -386,23 +387,23 @@ msgstr ""
 "Ju lutemi, hiqeni me  <sudo nvidia-install --uninstall> dhe riniseni, nëse "
 "doni të ecet më tej"
 
-#: ../ddm-mx:799
+#: ../ddm-mx:803
 #, sh-format
 msgid "nvidia-optimus detected"
 msgstr "U pikas nvidia-optimus"
 
-#: ../ddm-mx:802
+#: ../ddm-mx:806
 #, sh-format
 msgid "Is this a NVIDIA/INTEL Optimus system?"
 msgstr "A është ky një sistem NVIDIA/INTEL Optimus?"
 
-#: ../ddm-mx:842
+#: ../ddm-mx:846
 #, sh-format
 msgid "You can use the new PRIMUS driver built in to the nvidia drivers."
 msgstr ""
 "Mund të përdorni përudhësin e ri PRIMUS që përmbajnë përudhësit Nvidia."
 
-#: ../ddm-mx:843
+#: ../ddm-mx:847
 #, sh-format
 msgid ""
 "Use \"nvidia-run-mx\" followed by your application command to use the nvidia"
@@ -411,7 +412,7 @@ msgstr ""
 "Që të përdoren përudhës grafikë nvidia, përdorni “nvidia-run-mx” pasuar nga "
 "urdhri për aplikacionin tuaj"
 
-#: ../ddm-mx:845
+#: ../ddm-mx:849
 #, sh-format
 msgid ""
 "If you want to force the older bumblebee optimus drivers,\\n quit and "
@@ -421,17 +422,17 @@ msgstr ""
 "optimus,\\n dilni nga këtu dhe riniseni me: sudo ddm-mx -i nvidia -f "
 "bumblebee-nvidia"
 
-#: ../ddm-mx:849 ../ddm-mx:855
+#: ../ddm-mx:853 ../ddm-mx:859
 #, sh-format
 msgid "You need to use the bumblebee-nvidia driver."
 msgstr "Lypset të përdorni përudhësin bumblebee-nvidia."
 
-#: ../ddm-mx:868
+#: ../ddm-mx:872
 #, sh-format
 msgid "nvidia driver not available, check your repo sources"
 msgstr "s’ka përudhës nvidia, kontrolloni burimet tuaja depo"
 
-#: ../ddm-mx:873
+#: ../ddm-mx:877
 #, sh-format
 msgid ""
 "Uh oh. Your card is only supported by older legacy drivers which are not in "
@@ -440,50 +441,57 @@ msgstr ""
 "Oh oh. Karta juaj mbulohet vetëm nga përudhës të dikurshëm, të cilët "
 "s’gjenden në ndonjë suitë të tanishme Debian."
 
-#: ../ddm-mx:974 ../ddm-mx:983
+#: ../ddm-mx:978 ../ddm-mx:987
 #, sh-format
 msgid "Main repo candidate is:  "
 msgstr "Kandidat për burim kryesor është:"
 
-#: ../ddm-mx:975
+#: ../ddm-mx:979
 #, sh-format
 msgid "Debian backports candidate is:  "
 msgstr "Kandidat për “Debian backports” është:  "
 
-#: ../ddm-mx:984
+#: ../ddm-mx:988
 #, sh-format
 msgid "MX Test repo candidate is:  "
 msgstr "Kandidat për depo MX Test është:  "
 
-#: ../ddm-mx:995
+#: ../ddm-mx:999
 #, sh-format
 msgid "nvidia driver already installed"
 msgstr "përudhës nvidia tashmë i instaluar"
 
-#: ../ddm-mx:997
+#: ../ddm-mx:1001
 #, sh-format
 msgid "Reinstall or quit?"
 msgstr "Të riinstalohet, apo të dilet?"
 
-#: ../ddm-mx:1000
+#: ../ddm-mx:1004
 #, sh-format
 msgid "Reinstall"
 msgstr "Riinstaloje"
 
-#: ../ddm-mx:1001
+#: ../ddm-mx:1005
 #, sh-format
 msgid "quit"
 msgstr "mbylle"
 
-#: ../ddm-mx:1007
+#: ../ddm-mx:1011
 #, sh-format
 msgid "reinstalling"
 msgstr "riinstalim"
 
-#: ../ddm-mx:1030
+#: ../ddm-mx:1034
 #, sh-format
 msgid "No nvidia card found - exiting"
 msgstr "S’u gjet kartë nvidia - po dilet"
+
+#. # Ask to try installing the latest nvidia driver if graphics card is
+#. unknown
+#: ../ddm-mx:1098
+#, sh-format
+msgid "Try latest nvidia-driver?"
+msgstr "Të provohen përudhësit më të rinj Nvidia?"
 
 #: ../nvidia-detect-mx:31
 msgid ""
@@ -495,12 +503,12 @@ msgstr ""
 
 #: ../nvidia-detect-mx:58
 msgid "Latest"
-msgstr ""
+msgstr "Më të rinjtë"
 
 #: ../nvidia-detect-mx:166
 #, sh-format
 msgid "A newer driver may add support for your card."
-msgstr "Një përudhës më i ri mund të shtojcë mbulim për kartën tuaj."
+msgstr "Një përudhës më i ri mund të shtojë mbulim për kartën tuaj."
 
 #: ../nvidia-detect-mx:167
 #, sh-format
@@ -508,7 +516,7 @@ msgid ""
 "Newer driver releases may be available in the MX testing repository or "
 "debian-backports."
 msgstr ""
-"Versioni te rinj përudhësi mund të ketë të gatshëm në depon test të MX-it, "
+"Versione te rinj përudhësi mund të ketë të gatshëm në depon test të MX-it, "
 "ose te debian-backports."
 
 #. inform which driver series works

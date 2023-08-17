@@ -25,35 +25,34 @@ Mongolian_Libreoffice
    <eu>Mongolian Language Meta-Package for LibreOffice</eu>
    <fa>Mongolian Language Meta-Package for LibreOffice</fa>
    <fil_PH>Mongolian Language Meta-Package for LibreOffice</fil_PH>
-   <fi>Mongolian Language Meta-Package for LibreOffice</fi>
-   <fr>Mongolian Language Meta-Package for LibreOffice</fr>
+   <fi>Mongolialainen kielipaketti LibreOffice:lle</fi>
+   <fr>Méta-Paquet en langue mongole pour LibreOffice</fr>
    <he_IL>Mongolian Language Meta-Package for LibreOffice</he_IL>
-   <hi>Mongolian Language Meta-Package for LibreOffice</hi>
+   <hi>लिब्रे-ऑफिस हेतु मंगोल भाषा मेटा-पैकेज</hi>
    <hr>Mongolian Language Meta-Package for LibreOffice</hr>
    <hu>Mongolian Language Meta-Package for LibreOffice</hu>
    <id>Mongolian Language Meta-Package for LibreOffice</id>
    <is>Mongolian Language Meta-Package for LibreOffice</is>
    <it>Meta-pacchetto della lingua mongola per LibreOffice</it>
-   <ja_JP>Mongolian Language Meta-Package for LibreOffice</ja_JP>
-   <ja>Mongolian Language Meta-Package for LibreOffice</ja>
+   <ja>LibreOffice 用モンゴル語メタパッケージ</ja>
    <kk>Mongolian Language Meta-Package for LibreOffice</kk>
    <ko>Mongolian Language Meta-Package for LibreOffice</ko>
    <lt>Mongolian Language Meta-Package for LibreOffice</lt>
    <mk>Mongolian Language Meta-Package for LibreOffice</mk>
    <mr>Mongolian Language Meta-Package for LibreOffice</mr>
-   <nb>Mongolian Language Meta-Package for LibreOffice</nb>
+   <nb>Mongolsk språkpakke for LibreOffice</nb>
    <nl>Mongools Taal Meta-Pakket voor LibreOffice</nl>
-   <pl>Mongolian Language Meta-Package for LibreOffice</pl>
-   <pt_BR>Mongolian Language Meta-Package for LibreOffice</pt_BR>
+   <pl>Mongolski meta-pakiet językowy dla LibreOffice</pl>
+   <pt_BR>Mongol Pacote de Idioma para o LibreOffice</pt_BR>
    <pt>Mongol Meta-Pacote de Idioma para LibreOffice</pt>
    <ro>Mongolian Language Meta-Package for LibreOffice</ro>
-   <ru>Mongolian Language Meta-Package for LibreOffice</ru>
+   <ru>Мета-пакет монгольского языка для LibreOffice</ru>
    <sk>Mongolian Language Meta-Package for LibreOffice</sk>
    <sl>Mongolski jezikovni meta-paket za LibreOffice</sl>
-   <sq>Mongolian Language Meta-Package for LibreOffice</sq>
+   <sq>Meta-Paketë gjuhësore në mongolisht për LibreOffice-in</sq>
    <sr>Mongolian Language Meta-Package for LibreOffice</sr>
    <sv>Mongoliskt Språk Meta-Paket för LibreOffice</sv>
-   <tr>Mongolian Language Meta-Package for LibreOffice</tr>
+   <tr>LibreOffice için Moğolca Dili Üst-Paketi</tr>
    <uk>Mongolian Language Meta-Package for LibreOffice</uk>
    <vi>Mongolian Language Meta-Package for LibreOffice</vi>
    <zh_CN>Mongolian Language Meta-Package for LibreOffice</zh_CN>

@@ -13,10 +13,19 @@ class ManageRemotes : public QDialog
     Q_OBJECT
 public:
     explicit ManageRemotes(QWidget *parent = nullptr);
-    bool isChanged() const { return changed; }
+    [[nodiscard]] bool isChanged() const
+    {
+        return changed;
+    }
     void listFlatpakRemotes() const;
-    QString getInstallRef() const { return install_ref; }
-    QString getUser() const { return user; }
+    [[nodiscard]] QString getInstallRef() const
+    {
+        return install_ref;
+    }
+    [[nodiscard]] QString getUser() const
+    {
+        return user;
+    }
 
 signals:
 

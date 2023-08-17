@@ -1,0 +1,20 @@
+.info
+{
+	border: green ridge;
+	background-color: #030; color: #FFF;
+	padding: 0.1em;
+}
+.warning
+{
+	border: red ridge;
+	background-color: #600; color: #FFF;
+	padding: 0.1em;
+}
+.info,.warning :first-child { margin-top: 0 }
+.info,.warning :last-child { margin-bottom: 0 }
+
+.revision
+{
+	margin: 0; padding: 0;
+	font-style: italic;
+}

@@ -48,4 +48,7 @@ bool LockFile::lock()
     return (lockf(file.handle(), F_LOCK, 0) == 0);
 }
 
-void LockFile::unlock() { file.close(); }
+void LockFile::unlock()
+{
+    file.close();
+}

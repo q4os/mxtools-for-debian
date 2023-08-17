@@ -18,39 +18,38 @@ Catalan_Thunderbird
    <cs>Catalan localisation of Thunderbird</cs>
    <da>Catalansk oversættelse af Thunderbird</da>
    <de>Katalanische Lokalisierung von Thunderbird</de>
-   <el>Καταλανική εντοπισμός του Thunderbird</el>
+   <el>Καταλανική για το Thunderbird</el>
    <en>Catalan localisation of Thunderbird</en>
-   <es>Localización catalana de Thunderbird</es>
+   <es>Localización Catalán de Thunderbird</es>
    <et>Catalan localisation of Thunderbird</et>
    <eu>Catalan localisation of Thunderbird</eu>
    <fa>Catalan localisation of Thunderbird</fa>
    <fil_PH>Catalan localisation of Thunderbird</fil_PH>
-   <fi>Catalan localisation of Thunderbird</fi>
+   <fi>Katalonialainen Thunderbird-kotoistus</fi>
    <fr>Localisation catalane pour Thunderbird</fr>
    <he_IL>Catalan localisation of Thunderbird</he_IL>
-   <hi>Catalan localisation of Thunderbird</hi>
+   <hi>थंडरबर्ड का कैटलन संस्करण</hi>
    <hr>Catalan localisation of Thunderbird</hr>
    <hu>Catalan localisation of Thunderbird</hu>
    <id>Catalan localisation of Thunderbird</id>
    <is>Catalan localisation of Thunderbird</is>
    <it>Localizzazione catalana di Thunderbird</it>
-   <ja_JP>Catalan localisation of Thunderbird</ja_JP>
-   <ja>Catalan localisation of Thunderbird</ja>
+   <ja>Thunderbird のカタロニア語パック</ja>
    <kk>Catalan localisation of Thunderbird</kk>
    <ko>Catalan localisation of Thunderbird</ko>
    <lt>Catalan localisation of Thunderbird</lt>
    <mk>Catalan localisation of Thunderbird</mk>
    <mr>Catalan localisation of Thunderbird</mr>
-   <nb>Catalan localisation of Thunderbird</nb>
+   <nb>Katalansk lokaltilpassing av Thunderbird</nb>
    <nl>Catalaanse lokalisatie van Thunderbird</nl>
    <pl>Katalońska lokalizacja Thunderbirda</pl>
-   <pt_BR>Catalão Localização para Thunderbird</pt_BR>
+   <pt_BR>Catalão Localização para o Thunderbird</pt_BR>
    <pt>Catalão Localização para Thunderbird</pt>
    <ro>Catalan localisation of Thunderbird</ro>
-   <ru>Catalan localisation of Thunderbird</ru>
+   <ru>Каталонский перевод для Thunderbird</ru>
    <sk>Catalan localisation of Thunderbird</sk>
    <sl>Catalan localisation of Thunderbird</sl>
-   <sq>Catalan localisation of Thunderbird</sq>
+   <sq>Përkthimi i Thunderbird-it në katalanisht</sq>
    <sr>Catalan localisation of Thunderbird</sr>
    <sv>Katalansk lokalisering av Thunderbird</sv>
    <tr>Thunderbird'ün Katalanca yerelleştirmesi</tr>

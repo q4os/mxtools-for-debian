@@ -14,46 +14,45 @@ Belarusian_Thunderbird
    <ar>Belarusian localisation of Thunderbird</ar>
    <bg>Belarusian localisation of Thunderbird</bg>
    <bn>Belarusian localisation of Thunderbird</bn>
-   <ca>Localització de Thunderbird en Belarus</ca>
+   <ca>Localització de Thunderbird en Belarus </ca>
    <cs>Belarusian localisation of Thunderbird</cs>
    <da>Hviderussisk oversættelse af Thunderbird</da>
    <de>Weißrussische Lokalisierung von Thunderbird</de>
-   <el>Λευκορωσικός εντοπισμός του Thunderbird</el>
+   <el>Λευκορώσικα για το Thunderbird</el>
    <en>Belarusian localisation of Thunderbird</en>
-   <es>Localización Belorusso de Thunderbird</es>
+   <es>Localización Bielorruso de Thunderbird</es>
    <et>Belarusian localisation of Thunderbird</et>
    <eu>Belarusian localisation of Thunderbird</eu>
    <fa>Belarusian localisation of Thunderbird</fa>
    <fil_PH>Belarusian localisation of Thunderbird</fil_PH>
-   <fi>Belarusian localisation of Thunderbird</fi>
+   <fi>Valko-venäläinen Thunderbird-kotoistus</fi>
    <fr>Localisation biélorusse pour Thunderbird</fr>
    <he_IL>Belarusian localisation of Thunderbird</he_IL>
-   <hi>Belarusian localisation of Thunderbird</hi>
+   <hi>थंडरबर्ड का बेलारूसी संस्करण</hi>
    <hr>Bjeloruska lokalizacija Thunderbirda</hr>
    <hu>Belarusian localisation of Thunderbird</hu>
    <id>Belarusian localisation of Thunderbird</id>
    <is>Belarusian localisation of Thunderbird</is>
    <it>Localizzazione bielorussa di Thunderbird</it>
-   <ja_JP>Belarusian localisation of Thunderbird</ja_JP>
-   <ja>Belarusian localisation of Thunderbird</ja>
+   <ja>Thunderbird のベラルーシ語パック</ja>
    <kk>Belarusian localisation of Thunderbird</kk>
    <ko>Belarusian localisation of Thunderbird</ko>
    <lt>Belarusian localisation of Thunderbird</lt>
    <mk>Belarusian localisation of Thunderbird</mk>
    <mr>Belarusian localisation of Thunderbird</mr>
-   <nb>Belarusian localisation of Thunderbird</nb>
+   <nb>Hviterussisk lokaltilpassing av Thunderbird</nb>
    <nl>Wit-Russische lokalisatie van Thunderbird</nl>
    <pl>Białoruska lokalizacja Thunderbirda</pl>
-   <pt_BR>Bielorrusso Localização para Thunderbird</pt_BR>
+   <pt_BR>Bielorrusso Localização para o Thunderbird</pt_BR>
    <pt>Bielorrusso Localização para Thunderbird</pt>
    <ro>Belarusian localisation of Thunderbird</ro>
-   <ru>Belarusian localisation of Thunderbird</ru>
+   <ru>Белорусский перевод для Thunderbird</ru>
    <sk>Bieloruská lokalizácia pre Thunderbird</sk>
-   <sl>Belarusian localisation of Thunderbird</sl>
-   <sq>Belarusian localisation of Thunderbird</sq>
+   <sl>Beloruske krajevne nastavitve za Thunderbird</sl>
+   <sq>Përkthimi i Thunderbird-it në bjellorusisht</sq>
    <sr>Belarusian localisation of Thunderbird</sr>
    <sv>Belarus lokalisering av Thunderbird</sv>
-   <tr>Thunderbird'ün Beyazrusça yerelleştirmesi</tr>
+   <tr>Thunderbird'ün Beyaz rusça yerelleştirmesi</tr>
    <uk>Belarusian локалізація Thunderbird</uk>
    <vi>Belarusian localisation of Thunderbird</vi>
    <zh_CN>Belarusian localisation of Thunderbird</zh_CN>

@@ -34,7 +34,6 @@ MS-Edge
    <id>Microsoft Edge</id>
    <is>Microsoft Edge</is>
    <it>Microsoft Edge</it>
-   <ja_JP>Microsoft Edge</ja_JP>
    <ja>Microsoft Edge</ja>
    <kk>Microsoft Edge</kk>
    <ko>Microsoft Edge</ko>

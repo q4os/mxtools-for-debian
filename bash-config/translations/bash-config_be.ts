@@ -186,7 +186,7 @@
     <message>
         <location filename="../window_fix.ui" line="46"/>
         <source>Help</source>
-        <translation type="unfinished"/>
+        <translation>Даведка</translation>
     </message>
     <message>
         <location filename="../window_fix.ui" line="85"/>

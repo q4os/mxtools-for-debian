@@ -25,23 +25,22 @@ Steam
    <eu>Steam powered games</eu>
    <fa>Steam powered games</fa>
    <fil_PH>Steam powered games</fil_PH>
-   <fi>Steam powered games</fi>
+   <fi>Steam-pelit</fi>
    <fr>Jeux fonctionnant avec Steam</fr>
    <he_IL>Steam powered games</he_IL>
-   <hi>Steam powered games</hi>
+   <hi>स्टीम चलित खेल</hi>
    <hr>Steam powered games</hr>
    <hu>Steam powered games</hu>
    <id>Steam powered games</id>
    <is>Steam powered games</is>
    <it>Giochi offerti da Steam</it>
-   <ja_JP>Steam powered games</ja_JP>
-   <ja>Steam powered games</ja>
+   <ja>Steam で動くゲーム</ja>
    <kk>Steam powered games</kk>
    <ko>Steam powered games</ko>
    <lt>Steam powered games</lt>
    <mk>Steam powered games</mk>
    <mr>Steam powered games</mr>
-   <nb>Steam powered games</nb>
+   <nb>Steam-baserte spill</nb>
    <nl>Steam aangedreven spellen</nl>
    <pl>Gry na Steam</pl>
    <pt_BR>Jogos da Plataforma Steam</pt_BR>
@@ -50,10 +49,10 @@ Steam
    <ru>Платформа цифрового распространения игр</ru>
    <sk>Steam powered games</sk>
    <sl>Steam igre</sl>
-   <sq>Steam powered games</sq>
+   <sq>Lojëra bazuar në Steam</sq>
    <sr>Steam powered games</sr>
    <sv>Steam-drivna spel</sv>
-   <tr>Steam powered games</tr>
+   <tr>Steam detekli oyunlar</tr>
    <uk>Steam powered games</uk>
    <vi>Steam powered games</vi>
    <zh_CN>Steam powered games</zh_CN>
@@ -71,7 +70,9 @@ Steam
 </preinstall>
 
 <install_package_names>
-steam
+steam-installer
+steam-libs
+steam-libs-i386
 </install_package_names>
 
 
@@ -81,6 +82,8 @@ apt-get install -f
 
 
 <uninstall_package_names>
-steam
+steam-installer
+steam-libs
+steam-libs-i386
 </uninstall_package_names>
 </app>

@@ -28,29 +28,28 @@ Master PDF Editor 4 (Free Version)
    <fi>Muokkaa PDF-asiakirjoja.</fi>
    <fr>Éditer des documents PDF.</fr>
    <he_IL>Edit PDF documents.</he_IL>
-   <hi>Edit PDF documents.</hi>
+   <hi>पीडीएफ प्रलेख संपादन।</hi>
    <hr>Edit PDF documents.</hr>
    <hu>Edit PDF documents.</hu>
    <id>Edit PDF documents.</id>
    <is>Edit PDF documents.</is>
    <it>Modifica i documenti in PDF.</it>
-   <ja_JP>Edit PDF documents.</ja_JP>
-   <ja>Edit PDF documents.</ja>
+   <ja>PDF 文書の編集</ja>
    <kk>Edit PDF documents.</kk>
    <ko>Edit PDF documents.</ko>
    <lt>Taisyti PDF dokumentus.</lt>
    <mk>Edit PDF documents.</mk>
    <mr>Edit PDF documents.</mr>
-   <nb>Edit PDF documents.</nb>
+   <nb>Rediger PDF-dokumenter.</nb>
    <nl>Bewerk PDF documenten</nl>
    <pl>edytuje dokumenty PDF</pl>
-   <pt_BR>Editar documentos em formato .pdf.</pt_BR>
+   <pt_BR>Editor de documentos em formato .pdf.</pt_BR>
    <pt>Editar documentos em formato .pdf.</pt>
    <ro>Edit PDF documents.</ro>
    <ru>Редактор PDF документов</ru>
    <sk>Edit PDF documents.</sk>
    <sl>Urejanje PDF dokumentov</sl>
-   <sq>Edit PDF documents.</sq>
+   <sq>Përpunoni dokumente PDF.</sq>
    <sr>Edit PDF documents.</sr>
    <sv>Redigera PDF-dokument</sv>
    <tr>PDF belgeleri düzenle.</tr>

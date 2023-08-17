@@ -211,7 +211,7 @@
     <message>
         <location filename="../window.cpp" line="48"/>
         <source>An easy way to configure your ~/.bashrc and bash prompt</source>
-        <translation>Uma maneira fácil de configurar o arquivo ~/.bashrc e o seu prompt do interpretador de comandos &apos;bash&apos;</translation>
+        <translation>Uma maneira fácil de configurar o arquivo ~/.bashrc e o seu prompt do interpretador de comandos ‘bash’</translation>
     </message>
     <message>
         <location filename="../window.cpp" line="260"/>

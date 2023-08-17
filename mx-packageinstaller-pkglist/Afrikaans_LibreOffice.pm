@@ -14,46 +14,45 @@ Afrikaans_Libreoffice
    <ar>Afrikaans Language Meta-Package for LibreOffice</ar>
    <bg>Afrikaans Language Meta-Package for LibreOffice</bg>
    <bn>Afrikaans Language Meta-Package for LibreOffice</bn>
-   <ca>Metapaquet d'idioma Afrikaans per LibreOffice</ca>
+   <ca>Metapaquet per LibreOffice</ca>
    <cs>Afrikaans Language Meta-Package for LibreOffice</cs>
    <da>Afrikaans Language Meta-Package for LibreOffice</da>
-   <de>Afrikaans Meta-Paket für LibreOffice</de>
-   <el>LibreOffice στα Afrikaans</el>
+   <de>Meta-Paket für LibreOffice</de>
+   <el>Meta-Package για το LibreOffice</el>
    <en>Afrikaans Language Meta-Package for LibreOffice</en>
-   <es>Meta-Paquete de idioma afrikáans para LibreOffice</es>
+   <es>Meta-Package para LibreOffice</es>
    <et>Afrikaans Language Meta-Package for LibreOffice</et>
    <eu>Afrikaans Language Meta-Package for LibreOffice</eu>
    <fa>Afrikaans Language Meta-Package for LibreOffice</fa>
    <fil_PH>Afrikaans Language Meta-Package for LibreOffice</fil_PH>
-   <fi>Afrikaans Language Meta-Package for LibreOffice</fi>
-   <fr>Afrikaans Language Meta-Package for LibreOffice</fr>
+   <fi>Metatieto-paketti LibreOffice:lle</fi>
+   <fr>Meta-Paquet pour LibreOffice</fr>
    <he_IL>Afrikaans Language Meta-Package for LibreOffice</he_IL>
-   <hi>Afrikaans Language Meta-Package for LibreOffice</hi>
+   <hi>लिब्रे-ऑफिस हेतु मेटा-पैकेज</hi>
    <hr>Afrikaans Language Meta-Package for LibreOffice</hr>
    <hu>Afrikaans Language Meta-Package for LibreOffice</hu>
    <id>Afrikaans Language Meta-Package for LibreOffice</id>
    <is>Afrikaans Language Meta-Package for LibreOffice</is>
-   <it>Meta-pacchetto della lingua afrikaans per LibreOffice</it>
-   <ja_JP>Afrikaans Language Meta-Package for LibreOffice</ja_JP>
-   <ja>Afrikaans Language Meta-Package for LibreOffice</ja>
+   <it>Meta-pacchetto per LibreOffice</it>
+   <ja>LibreOffice用メタパッケージ</ja>
    <kk>Afrikaans Language Meta-Package for LibreOffice</kk>
    <ko>Afrikaans Language Meta-Package for LibreOffice</ko>
    <lt>Afrikaans Language Meta-Package for LibreOffice</lt>
    <mk>Afrikaans Language Meta-Package for LibreOffice</mk>
    <mr>Afrikaans Language Meta-Package for LibreOffice</mr>
-   <nb>Afrikaans Language Meta-Package for LibreOffice</nb>
-   <nl>Afrikaans Taal Meta-Pakket voor LibreOffice</nl>
-   <pl>Afrikaans Language Meta-Package for LibreOffice</pl>
-   <pt_BR>Afrikaans Language Meta-Package for LibreOffice</pt_BR>
-   <pt>Africander Meta-Pacote de Idioma para LibreOffice</pt>
+   <nb>LibreOffice metapakke</nb>
+   <nl>Meta-Pakket voor LibreOffice</nl>
+   <pl>Meta-Pakiet dla LibreOffice</pl>
+   <pt_BR>Meta-Pacote para o LibreOffice</pt_BR>
+   <pt>Meta-Pacote para LibreOffice</pt>
    <ro>Afrikaans Language Meta-Package for LibreOffice</ro>
-   <ru>Afrikaans Language Meta-Package for LibreOffice</ru>
+   <ru>Мета-пакет для LibreOffice</ru>
    <sk>Afrikaans Language Meta-Package for LibreOffice</sk>
-   <sl>Afrikaan jezikovni meta-paket za LibreOffice</sl>
-   <sq>Afrikaans Language Meta-Package for LibreOffice</sq>
+   <sl>Meta-paket za LibreOffice</sl>
+   <sq>Meta-Paketë për LibreOffice-in</sq>
    <sr>Afrikaans Language Meta-Package for LibreOffice</sr>
-   <sv>Afrikaans Språk Meta-Paket för LibreOffice</sv>
-   <tr>Afrikaans Language Meta-Package for LibreOffice</tr>
+   <sv>Meta-Paket för LibreOffice</sv>
+   <tr>LibreOffice için Üst-Paket</tr>
    <uk>Afrikaans Language Meta-Package for LibreOffice</uk>
    <vi>Afrikaans Language Meta-Package for LibreOffice</vi>
    <zh_CN>Afrikaans Language Meta-Package for LibreOffice</zh_CN>

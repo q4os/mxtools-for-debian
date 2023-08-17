@@ -18,42 +18,41 @@ Chinese_CN_LO
    <cs>Chinese_simplified localisation of LibreOffice</cs>
    <da>Kinesisk (forenklet) oversættelse af LibreOffice</da>
    <de>Chinesisch (vereinfacht) Lokalisierung von LibreOffice</de>
-   <el>LibreOffice για κινέζικα</el>
+   <el>LibreOffice στα Κινεζικά</el>
    <en>Chinese_simplified localisation of LibreOffice</en>
    <es>Localización Chino simplificado de LibreOffice</es>
    <et>Chinese_simplified localisation of LibreOffice</et>
    <eu>Chinese_simplified localisation of LibreOffice</eu>
    <fa>Chinese_simplified localisation of LibreOffice</fa>
    <fil_PH>Chinese_simplified localisation of LibreOffice</fil_PH>
-   <fi>Chinese_simplified localisation of LibreOffice</fi>
+   <fi>Yksinkertaistetun kiinankielen kotoistus LibreOffice:lle</fi>
    <fr>Localisation chinois-simplifié pour LibreOffice</fr>
    <he_IL>Chinese_simplified localisation of LibreOffice</he_IL>
-   <hi>Chinese_simplified localisation of LibreOffice</hi>
+   <hi>लिब्रे-ऑफिस का सरल चीनी संस्करण</hi>
    <hr>Chinese_simplified localisation of LibreOffice</hr>
    <hu>Chinese_simplified localisation of LibreOffice</hu>
    <id>Chinese_simplified localisation of LibreOffice</id>
    <is>Chinese_simplified localisation of LibreOffice</is>
    <it>Localizzazione in Cinese_semplificato di LibreOffice</it>
-   <ja_JP>Chinese_simplified localisation of LibreOffice</ja_JP>
-   <ja>Chinese_simplified localisation of LibreOffice</ja>
+   <ja>LibreOffice の簡体中国語パック</ja>
    <kk>Chinese_simplified localisation of LibreOffice</kk>
    <ko>Chinese_simplified localisation of LibreOffice</ko>
    <lt>Chinese_simplified localisation of LibreOffice</lt>
    <mk>Chinese_simplified localisation of LibreOffice</mk>
    <mr>Chinese_simplified localisation of LibreOffice</mr>
-   <nb>Chinese_simplified localisation of LibreOffice</nb>
+   <nb>Kinesisk (forenklet) lokaltilpassing av LibreOffice</nb>
    <nl>Vereenvoudigd Chinese lokalisatie van LibreOffice</nl>
    <pl>Chiński uproszczony lokalizacja LibreOffice</pl>
-   <pt_BR>Chinês_simplificado Localização para LibreOffice</pt_BR>
+   <pt_BR>Chinês simplificado Localização para LibreOffice</pt_BR>
    <pt>Chinês_simplificado Localização para LibreOffice</pt>
    <ro>Chinese_simplified localisation of LibreOffice</ro>
-   <ru>Chinese_simplified localisation of LibreOffice</ru>
+   <ru>Китайская упрощенная локализация LibreOffice</ru>
    <sk>Chinese_simplified localisation of LibreOffice</sk>
-   <sl>Chinese_simplified localisation of LibreOffice</sl>
-   <sq>Chinese_simplified localisation of LibreOffice</sq>
+   <sl>Kitajske (poenostavljeno) krajevne nastavitve za LibreOffice</sl>
+   <sq>Përkthimi i LibreOffice-it në kinezçe të thjeshtuar</sq>
    <sr>Chinese_simplified localisation of LibreOffice</sr>
    <sv>Kinesisk_förenklad lokalisering av LibreOffice</sv>
-   <tr>Chinese_simplified localisation of LibreOffice</tr>
+   <tr>LibreOffice'in Basitleştirilmiş_Çince yerelleştirmesi</tr>
    <uk>Chinese_simplified локалізація LibreOffice</uk>
    <vi>Chinese_simplified localisation of LibreOffice</vi>
    <zh_CN>Chinese_simplified localisation of LibreOffice</zh_CN>

@@ -80,7 +80,7 @@ MainWindow::MainWindow(QWidget *parent)
         termsToRemove << QStringLiteral("OnlyShowIn=KDE");
 
     for (auto &list : lists)
-        removeEnvExclusive(*list, termsToRemove);
+        removeEnvExclusive(list, termsToRemove);
 
     category_map.insert(QStringLiteral("MX-Live"), live_list);
     category_map.insert(QStringLiteral("MX-Maintenance"), maintenance_list);
@@ -108,9 +108,10 @@ MainWindow::~MainWindow() { delete ui; }
 
 void MainWindow::setConnections()
 {
-    connect(ui->pushAbout, &QPushButton::clicked, this, &MainWindow::pushAbout_clicked);
-    connect(ui->pushHelp, &QPushButton::clicked, this, &MainWindow::pushHelp_clicked);
     connect(ui->checkHide, &QCheckBox::clicked, this, &MainWindow::checkHide_clicked);
+    connect(ui->pushAbout, &QPushButton::clicked, this, &MainWindow::pushAbout_clicked);
+    connect(ui->pushCancel, &QPushButton::clicked, this, &MainWindow::close);
+    connect(ui->pushHelp, &QPushButton::clicked, this, &MainWindow::pushHelp_clicked);
     connect(ui->textSearch, &QLineEdit::textChanged, this, &MainWindow::textSearch_textChanged);
 }
 
@@ -198,7 +199,7 @@ void MainWindow::readInfo(const QMultiMap<QString, QStringList> &category_map)
             }
             re.setPattern(QStringLiteral("^Exec=(.*)$"));
             exec = re.match(text).captured(1).trimmed();
-            fixExecItem(exec);
+            fixExecItem(&exec);
             re.setPattern(QStringLiteral("^Icon=(.*)$"));
             icon_name = re.match(text).captured(1).trimmed();
             re.setPattern(QStringLiteral("^Terminal=(.*)$"));
@@ -447,7 +448,6 @@ void MainWindow::textSearch_textChanged(const QString &arg1)
             // qDebug() << file_name;
             QString name = file_info.value(file_name).at(0);
             QString comment = file_info.value(file_name).at(1);
-            QString category = file_info.value(file_name).at(4);
             if (name.contains(arg1, Qt::CaseInsensitive) || comment.contains(arg1, Qt::CaseInsensitive)
                 || category.contains(arg1, Qt::CaseInsensitive)) {
                 map.insert(file_name, info_map.value(category).value(file_name));
@@ -464,13 +464,13 @@ void MainWindow::textSearch_textChanged(const QString &arg1)
 }
 
 // Strip %f, %F, %U, etc. if exec expects a file name since it's called without an argument from this launcher.
-void MainWindow::fixExecItem(QString &item) { item.remove(QRegularExpression(QStringLiteral(R"( %[a-zA-Z])"))); }
+void MainWindow::fixExecItem(QString *item) { item->remove(QRegularExpression(QStringLiteral(R"( %[a-zA-Z])"))); }
 
 // When running live remove programs meant only for installed environments and the other way round
 // Remove XfceOnly and FluxboxOnly when not running in that environment
-void MainWindow::removeEnvExclusive(QStringList &list, const QStringList &termsToRemove)
+void MainWindow::removeEnvExclusive(QStringList *list, const QStringList &termsToRemove)
 {
-    for (auto it = list.begin(); it != list.end();) {
+    for (auto it = list->begin(); it != list->end();) {
         QFile file(*it);
         if (file.open(QFile::Text | QFile::ReadOnly)) {
             QString text = file.readAll();
@@ -479,7 +479,7 @@ void MainWindow::removeEnvExclusive(QStringList &list, const QStringList &termsT
                              [&text](const QString &term) { return text.contains(term); }))
                 ++it;
             else
-                it = list.erase(it);
+                it = list->erase(it);
         } else {
             qWarning() << "Could not open file:" << *it;
             ++it;

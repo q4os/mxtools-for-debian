@@ -3,7 +3,6 @@ export QT_SELECT=5
 
 QMAKE_OPTS = DEFINES+=NO_DEBUG_ON_CONSOLE
 MAKE_OPTS  = QMAKE=qmake-qt5 LRELEASE=lrelease-qt5 QMAKE_OPTS="$(QMAKE_OPTS)"
-VERSION   := $(shell dpkg-parsechangelog -SVersion)
 
 override_dh_auto_clean:
 	dh_auto_clean
@@ -12,7 +11,7 @@ override_dh_auto_clean:
 
 override_dh_auto_build:
 	lrelease *.pro
-	sed -i~ '/^#define VERSION/c#define VERSION "$(VERSION)"' version.h
+	head -n1 debian/changelog | sed -e "s/.*(\([^(]*\)).*/const QString VERSION {\"\1\"};/" > version.h
 	dh_auto_build -- $(MAKE_OPTS)
 
 override_dh_auto_install:

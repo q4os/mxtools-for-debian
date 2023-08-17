@@ -25,35 +25,34 @@ QT5 Documention
    <eu>Documentation files for Qt-5 and QtCreator IDE</eu>
    <fa>Documentation files for Qt-5 and QtCreator IDE</fa>
    <fil_PH>Documentation files for Qt-5 and QtCreator IDE</fil_PH>
-   <fi>Documentation files for Qt-5 and QtCreator IDE</fi>
+   <fi>Dokumentaatiotiedostot Qt-5 ja QtCreator ohjelmakehitysympäristölle</fi>
    <fr>Fichiers de documentation pour Qt-5 et QtCreator IDE</fr>
    <he_IL>Documentation files for Qt-5 and QtCreator IDE</he_IL>
-   <hi>Documentation files for Qt-5 and QtCreator IDE</hi>
+   <hi>क्यूटी-5 व क्यूटी क्रिएटर आईडीई हेतु प्रलेखन फाइलें</hi>
    <hr>Documentation files for Qt-5 and QtCreator IDE</hr>
    <hu>Documentation files for Qt-5 and QtCreator IDE</hu>
    <id>Documentation files for Qt-5 and QtCreator IDE</id>
    <is>Documentation files for Qt-5 and QtCreator IDE</is>
    <it>File di documentazione per Qt-5 e QtCreator IDE</it>
-   <ja_JP>Documentation files for Qt-5 and QtCreator IDE</ja_JP>
-   <ja>Documentation files for Qt-5 and QtCreator IDE</ja>
+   <ja>Qt-5 および QtCreator IDE の文書ファイル</ja>
    <kk>Documentation files for Qt-5 and QtCreator IDE</kk>
    <ko>Documentation files for Qt-5 and QtCreator IDE</ko>
    <lt>Documentation files for Qt-5 and QtCreator IDE</lt>
    <mk>Documentation files for Qt-5 and QtCreator IDE</mk>
    <mr>Documentation files for Qt-5 and QtCreator IDE</mr>
-   <nb>Documentation files for Qt-5 and QtCreator IDE</nb>
+   <nb>Dokumentasjonsfiler for Qt 5 og QtCreator IDE</nb>
    <nl>Documentatiebestanden voor Qt-5 en QtCreator IDE</nl>
    <pl>pliki dokumentacji dla QT-5 i QtCreator IDE</pl>
-   <pt_BR>Documentation files for Qt-5 and QtCreator IDE</pt_BR>
+   <pt_BR>Arquivos de documentação para Qt-5 e QtCreator IDE (Integrated Development Environment)</pt_BR>
    <pt>Documentation files for Qt-5 and QtCreator IDE</pt>
    <ro>Documentation files for Qt-5 and QtCreator IDE</ro>
    <ru>Документация по QT-5 и QtCreator IDE</ru>
    <sk>Documentation files for Qt-5 and QtCreator IDE</sk>
    <sl>Dokumentacija za Qt-5 in QtCreator IDE</sl>
-   <sq>Documentation files for Qt-5 and QtCreator IDE</sq>
+   <sq>Kartela dokumentimi për Qt-5 dhe QtCreator IDE</sq>
    <sr>Documentation files for Qt-5 and QtCreator IDE</sr>
    <sv>Dokumentationsfiler för Qt-5 och QtCreator IDE</sv>
-   <tr>Documentation files for Qt-5 and QtCreator IDE</tr>
+   <tr>QtCreator IDE ve Qt-5 için belgeleme dosyaları</tr>
    <uk>Documentation files for Qt-5 and QtCreator IDE</uk>
    <vi>Documentation files for Qt-5 and QtCreator IDE</vi>
    <zh_CN>Documentation files for Qt-5 and QtCreator IDE</zh_CN>

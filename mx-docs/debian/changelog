@@ -1,3 +1,81 @@
+mx-docs (20230728) mx; urgency=medium
+
+  [ Jerry ]
+  * substituted reworked ja mxum
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 28 Jul 2023 06:24:57 -0400
+
+mx-docs (20230712) mx; urgency=medium
+
+  * update desktop file icons
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 16 Jul 2023 08:57:05 -0400
+
+mx-docs (20230711) mx; urgency=medium
+
+  * update mx-manual script for changed manual file name
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 15 Jul 2023 08:55:11 -0400
+
+mx-docs (20230710) mx; urgency=medium
+
+  * Update reformated mxum pdfs
+  * uploaded odt source
+
+ -- Jerry <jb@mx>  Mon, 10 Jul 2023 10:17:08 -0400
+
+mx-docs (20230701+1) mx; urgency=medium
+
+  * update desktop file translations 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 03 Jul 2023 15:46:42 -0400
+
+mx-docs (20230701) mx; urgency=medium
+
+  * Non-maintainer upload.
+  * removed individual sections, uploaded completed mxum.odt for mx-23
+  * uploaded 10 translations + mxum_en.pdf
+  * removed old manuals
+
+ -- Jerry <jb@mx>  Fri, 30 Jun 2023 07:31:07 -0400
+
+mx-docs (20230630mx23) mx; urgency=medium
+
+  [ Jerry ]
+  * uploaded S1-S4 to folder mx23
+  * uploaded S5 to same location
+  * uploaded S6
+  * uploaded S7
+
+  [ Dolphin Oracle ]
+  * new build
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 30 Jun 2023 00:38:19 -0400
+
+mx-docs (20230614mx23) mx; urgency=medium
+
+  * added CA translation of FAQs
+  * Updated Manual with revised S1-S3
+
+ -- Jerry <jb@mx>  Wed, 14 Jun 2023 17:30:17 -0400
+
+mx-docs (20230609mx23) mx; urgency=medium
+
+  [ Jerry ]
+  * Non-maintainer upload.
+  * first draft of MX-23 Manual, S1 and S2 revised
+
+  [ Dolphin Oracle ]
+  * new build
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 08 Jun 2023 19:20:57 -0400
+
+mx-docs (20230520+1) mx; urgency=medium
+
+  * update icons in desktop files
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 05 Jun 2023 19:13:28 -0400
+
 mx-docs (20230519) mx; urgency=medium
 
   [ Jerry ]

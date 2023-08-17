@@ -98,7 +98,7 @@
     <message>
         <location filename="../mainwindow.ui" line="334"/>
         <source>Save the original boot directory when updating a live-usb</source>
-        <translation>Çalışan-USB&apos;yi güncellerken orijinal önyükleme dizinini kaydedin
+        <translation>Çalışan-USB’yi güncellerken orijinal önyükleme dizinini kaydedin
 &#xa0;</translation>
     </message>
     <message>
@@ -114,7 +114,7 @@
     <message>
         <location filename="../mainwindow.ui" line="351"/>
         <source>Update (only update an existing live-usb)</source>
-        <translation>Güncelle (sadece var olan Canlı-USB&apos;yi güncelle)</translation>
+        <translation>Güncelle (sadece var olan Canlı-USB’yi güncelle)</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="358"/>
@@ -250,7 +250,7 @@
     <message>
         <location filename="../mainwindow.ui" line="760"/>
         <source>clone from a mounted live-usb or iso-file.</source>
-        <translation>takılı bir canlı-usb&apos;den veya iso dosyasından klonla</translation>
+        <translation>takılı bir canlı-usb’den veya iso dosyasından klonla</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="763"/>
@@ -280,7 +280,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="76"/>
         <source>Target device %1 is larger than %2 GB. Do you wish to proceed?</source>
-        <translation>Hedef aygıt %1 %2 GB&apos;dan büyük. Devam etmek istiyor musunuz?</translation>
+        <translation>Hedef aygıt %1 %2 GB’dan büyük. Devam etmek istiyor musunuz?</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="116"/>
@@ -298,8 +298,8 @@
         <location filename="../mainwindow.cpp" line="152"/>
         <source>Writing %1 using &apos;dd&apos; command to /dev/%2,
 
-Please wait until the the process is completed</source>
-        <translation>%1 &apos;dd&apos; komutuyla /dev/%2&apos;ye yazılıyor,
+Please wait until the process is completed</source>
+        <translation>%1 ‘dd’ komutuyla /dev/%2’ye yazılıyor,
 
  Lütfen işlem tamamlanana kadar bekleyin</translation>
     </message>

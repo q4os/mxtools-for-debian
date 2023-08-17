@@ -55,12 +55,13 @@ FORMS    += \
     mainwindow.ui
 
 TRANSLATIONS += translations/mx-codecs_af.ts \
+                translations/mx-codecs_af.ts \
                 translations/mx-codecs_am.ts \
                 translations/mx-codecs_ar.ts \
+                translations/mx-codecs_ast.ts \
                 translations/mx-codecs_be.ts \
                 translations/mx-codecs_bg.ts \
                 translations/mx-codecs_bn.ts \
-                translations/mx-codecs_bs_BA.ts \
                 translations/mx-codecs_bs.ts \
                 translations/mx-codecs_ca.ts \
                 translations/mx-codecs_ceb.ts \
@@ -79,12 +80,10 @@ TRANSLATIONS += translations/mx-codecs_af.ts \
                 translations/mx-codecs_et.ts \
                 translations/mx-codecs_eu.ts \
                 translations/mx-codecs_fa.ts \
-                translations/mx-codecs_fi_FI.ts \
                 translations/mx-codecs_fil_PH.ts \
                 translations/mx-codecs_fil.ts \
                 translations/mx-codecs_fi.ts \
                 translations/mx-codecs_fr_BE.ts \
-                translations/mx-codecs_fr_FR.ts \
                 translations/mx-codecs_fr.ts \
                 translations/mx-codecs_fy.ts \
                 translations/mx-codecs_ga.ts \
@@ -100,12 +99,15 @@ TRANSLATIONS += translations/mx-codecs_af.ts \
                 translations/mx-codecs_hr.ts \
                 translations/mx-codecs_ht.ts \
                 translations/mx-codecs_hu.ts \
+                translations/mx-codecs_hye.ts \
                 translations/mx-codecs_hy.ts \
                 translations/mx-codecs_id.ts \
+                translations/mx-codecs_ie.ts \
                 translations/mx-codecs_is.ts \
                 translations/mx-codecs_it.ts \
                 translations/mx-codecs_ja.ts \
                 translations/mx-codecs_jv.ts \
+                translations/mx-codecs_kab.ts \
                 translations/mx-codecs_ka.ts \
                 translations/mx-codecs_kk.ts \
                 translations/mx-codecs_km.ts \
@@ -131,7 +133,9 @@ TRANSLATIONS += translations/mx-codecs_af.ts \
                 translations/mx-codecs_ne.ts \
                 translations/mx-codecs_nl_BE.ts \
                 translations/mx-codecs_nl.ts \
+                translations/mx-codecs_nn.ts \
                 translations/mx-codecs_ny.ts \
+                translations/mx-codecs_oc.ts \
                 translations/mx-codecs_or.ts \
                 translations/mx-codecs_pa.ts \
                 translations/mx-codecs_pl.ts \
@@ -140,7 +144,6 @@ TRANSLATIONS += translations/mx-codecs_af.ts \
                 translations/mx-codecs_pt.ts \
                 translations/mx-codecs_ro.ts \
                 translations/mx-codecs_rue.ts \
-                translations/mx-codecs_ru_RU.ts \
                 translations/mx-codecs_ru.ts \
                 translations/mx-codecs_rw.ts \
                 translations/mx-codecs_sd.ts \
@@ -174,7 +177,7 @@ TRANSLATIONS += translations/mx-codecs_af.ts \
                 translations/mx-codecs_yue_CN.ts \
                 translations/mx-codecs_zh_CN.ts \
                 translations/mx-codecs_zh_HK.ts \
-                translations/mx-codecs_zh_TW.ts 
+                translations/mx-codecs_zh_TW.ts
 
 RESOURCES += \
     images.qrc

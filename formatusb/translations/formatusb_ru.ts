@@ -226,7 +226,7 @@
     <message>
         <location filename="../about.cpp" line="36"/>
         <source>Cancel</source>
-        <translation>Отменить</translation>
+        <translation>Отмена</translation>
     </message>
     <message>
         <location filename="../about.cpp" line="53"/>

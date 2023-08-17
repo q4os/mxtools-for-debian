@@ -11,6 +11,10 @@ if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-remov
            /etc/init.d/efimount          || :
         fi
 	fi
+	
+	if [ -e /etc/sysctl.d/99-mx_allow_non_root_dmesg.conf ]; then
+		rm /etc/sysctl.d/99-mx_allow_non_root_dmesg.conf
+	fi
 fi
 
 #DEBHELPER#

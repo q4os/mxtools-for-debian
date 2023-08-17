@@ -1,0 +1,37 @@
+Audio
+דפדפן
+Children
+Desktop Environments
+פיתוח
+כוננים
+מעגנים
+Email
+File Managers
+FTP
+Games
+גרפיקה
+Icons
+Kernels
+שפה
+LaTex
+Media Center
+Media Converter
+Messaging
+Misc
+אינטרנט
+Newsreader
+Non-Free
+משרד
+הדפסה
+Remote Access
+Screencast
+שומר מסך
+Screenshot Utilities
+Server
+Themes
+Torrent
+Utility
+Video
+Wallpapers
+Window Managers
+Virtualization

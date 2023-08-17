@@ -1,0 +1,11 @@
+[Desktop Entry]
+# The desktop entry name will be displayed within the menu.
+Name=MX Viewer
+# # The desktop entry comment will be shown within the menu.
+Comment=Basic document viewer and browser
+Exec=mx-viewer %U
+Icon=mx-viewer
+NoDisplay=false
+Categories=Qt;Network;Utilities;
+Type=Application
+

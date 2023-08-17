@@ -29,6 +29,7 @@
 #include <QDebug>
 #include <QRegularExpression>
 #include <QSettings>
+#include <QStandardPaths>
 
 #ifndef CLI_BUILD
 #include <QMessageBox>
@@ -118,23 +119,46 @@ bool Settings::checkTempDir()
 QString Settings::getEditor() const
 {
     QString editor = gui_editor;
-    if (editor.isEmpty()
-        || QProcess::execute("/bin/bash", {"-c", "command -v " + editor})
-               != 0) { // if specified editor doesn't exist get the default one
-        QString local = QDir::homePath() + "/.local/share/applications ";
-        if (!QFile::exists(local))
-            local = QLatin1String("");
-        QString desktop_file = shell->getCmdOut(
-            "find " + local + "/usr/share/applications -name $(xdg-mime query default text/plain) -print -quit", true);
-        editor = shell->getCmdOut("grep -m1 ^Exec= " + desktop_file, true);
-        editor = editor.remove(QRegularExpression(QStringLiteral("^Exec=|%u|%U|%f|%F|%c|%C"))).trimmed();
-        if (editor.isEmpty()) // if default one doesn't exit use nano as backup editor
-            editor = QStringLiteral("x-terminal-emulator -e nano");
+    QString desktop_file;
+    QProcess proc;
+    // if specified editor doesn't exist get the default one
+    if (editor.isEmpty() || QStandardPaths::findExecutable(editor, {path}).isEmpty()) {
+        proc.start("xdg-mime", {"query", "default", "text/plain"});
+        proc.waitForFinished();
+        QString default_editor = proc.readAllStandardOutput().trimmed();
+
+        // find first app with .desktop name that matches default_editors
+        desktop_file
+            = QStandardPaths::locate(QStandardPaths::ApplicationsLocation, default_editor, QStandardPaths::LocateFile);
+        QFile file(desktop_file);
+        if (file.open(QIODevice::ReadOnly)) {
+            QString line;
+            while (!file.atEnd()) {
+                line = file.readLine();
+                if (line.contains(QRegularExpression(QStringLiteral("^Exec="))))
+                    break;
+            }
+            file.close();
+            editor = line.remove(QRegularExpression(QStringLiteral("^Exec=|%u|%U|%f|%F|%c|%C|-b"))).trimmed();
+        }
+        if (editor.isEmpty()) // use nano as backup editor
+            editor = "nano";
     }
-    if (editor.endsWith(QLatin1String("kate")) || editor.endsWith(QLatin1String("kwrite"))
-        || editor.endsWith(QLatin1String("atom"))) // need to run these as normal user
-        editor = "runuser -u $(logname) " + editor;
-    return editor;
+
+    bool isEditorThatElevates = QRegularExpression("(kate|kwrite|featherpad)$").match(editor).hasMatch();
+    bool isAtom = QRegularExpression("atom\\.desktop$").match(desktop_file).hasMatch();
+    bool isCliEditor = QRegularExpression("nano|vi|vim|nvim|micro|emacs").match(editor).hasMatch();
+
+    QStringList editorCommands {"pkexec"};
+    if (isEditorThatElevates || isAtom)
+        editorCommands << "--user $(logname)";
+
+    editorCommands << "env DISPLAY=$DISPLAY XAUTHORITY=$XAUTHORITY";
+
+    if (isCliEditor)
+        editorCommands << "x-terminal-emulator -e";
+
+    return editorCommands.join(" ") + " " + editor;
 }
 
 // return the size of the snapshot folder
@@ -182,7 +206,7 @@ QString Settings::getXdgUserDirs(const QString &folder)
     QString result;
     for (const QString &user : qAsConst(users)) {
         QString dir;
-        bool success = shell->run("runuser " + user + " -c \"xdg-user-dir " + folder + "\"", dir);
+        bool success = shell->run("runuser " + user + " -c \"xdg-user-dir " + folder + "\"", &dir);
         if (success) {
             if (englishDirs.value(folder) == dir.section(QStringLiteral("/"), -1) || dir.trimmed() == "/home/" + user
                 || dir.trimmed() == "/home/" + user + "/"
@@ -263,7 +287,7 @@ void Settings::setVariables()
       } else if (debian_version1 == "12") {
         codename = "bookworm";
       } else {
-        codename = "bullseye";
+        codename = "bookworm";
       }
       boot_options = QStringLiteral("quiet splash loglevel=3 systemd.log_color=0 systemd.show_status=1");
       return;
@@ -334,12 +358,10 @@ quint64 Settings::getLiveRootSpace() const
     // gzip, xz, or lz4
     QMap<QString, QString> compression_types
         = {{"1", "gzip"}, {"2", "lzo"}, {"3", "lzma"}, {"4", "xz"}, {"5", "lz4"}, {"6", "zstd"}};
-    if (compression_types.contains(linuxfs_compression_type)) {
+    if (compression_types.contains(linuxfs_compression_type))
         c_factor = compression_factor.value(compression_types.value(linuxfs_compression_type));
-    } else {
-        c_factor = default_factor;
+    else
         qWarning() << "Unknown compression type:" << linuxfs_compression_type;
-    }
     quint64 rootfs_file_size = 0;
     quint64 linuxfs_file_size
         = shell->getCmdOut(QStringLiteral("df -k /live/linux --output=used --total |tail -n1")).toULongLong() * 100

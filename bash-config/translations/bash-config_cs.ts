@@ -22,17 +22,17 @@
     <message>
         <location filename="../othertab.ui" line="41"/>
         <source>Custom</source>
-        <translation type="unfinished"/>
+        <translation>Vlastní</translation>
     </message>
     <message>
         <location filename="../othertab.ui" line="63"/>
         <source>Infinite</source>
-        <translation type="unfinished"/>
+        <translation>Nekonečná</translation>
     </message>
     <message>
         <location filename="../othertab.ui" line="75"/>
         <source>Executable Paths</source>
-        <translation type="unfinished"/>
+        <translation>Spustitelné cesty</translation>
     </message>
     <message>
         <location filename="../othertab.ui" line="84"/>
@@ -60,22 +60,22 @@
     <message>
         <location filename="../prompttab_fix.ui" line="152"/>
         <source>Make The Larger Prompts Smaller</source>
-        <translation type="unfinished"/>
+        <translation>Zmenšení větších promptů</translation>
     </message>
     <message>
         <location filename="../prompttab_fix.ui" line="159"/>
         <source>Muted Colors</source>
-        <translation type="unfinished"/>
+        <translation>Tlumené barvy</translation>
     </message>
     <message>
         <location filename="../prompttab_fix.ui" line="166"/>
         <source>Disable Unicode</source>
-        <translation type="unfinished"/>
+        <translation>Zakázat Unicode</translation>
     </message>
     <message>
         <location filename="../prompttab_fix.ui" line="173"/>
         <source>Use Double Lines</source>
-        <translation type="unfinished"/>
+        <translation>Použití dvojitých řádků</translation>
     </message>
     <message>
         <location filename="../prompttab_fix.ui" line="180"/>
@@ -95,7 +95,7 @@
     <message>
         <location filename="../prompttab_fix.ui" line="201"/>
         <source>Make the Larger Prompts Smaller Elsewhere</source>
-        <translation type="unfinished"/>
+        <translation>Zmenšení větších promptů někde jinde</translation>
     </message>
     <message>
         <location filename="../prompttab_fix.ui" line="225"/>
@@ -115,22 +115,22 @@
     <message>
         <location filename="../prompttab_fix.ui" line="351"/>
         <source>Extra Newlines Before Prompt</source>
-        <translation type="unfinished"/>
+        <translation>Řádky navíc před promptem</translation>
     </message>
     <message>
         <location filename="../prompttab_fix.ui" line="380"/>
         <source>Prompt Text</source>
-        <translation type="unfinished"/>
+        <translation>Text promptu</translation>
     </message>
     <message>
         <location filename="../prompttab_fix.ui" line="409"/>
         <source>Title Text</source>
-        <translation type="unfinished"/>
+        <translation>Text názvu</translation>
     </message>
     <message>
         <location filename="../prompttab_fix.ui" line="429"/>
         <source>Remove all newlines</source>
-        <translation type="unfinished"/>
+        <translation>Odstranit všechny nové řádky</translation>
     </message>
     <message>
         <location filename="../prompttab_fix.ui" line="456"/>
@@ -173,7 +173,7 @@
     <message>
         <location filename="../prompttab.cpp" line="545"/>
         <source>Bold</source>
-        <translation type="unfinished"/>
+        <translation>Tučný</translation>
     </message>
 </context>
 <context>
@@ -191,7 +191,7 @@
     <message>
         <location filename="../window_fix.ui" line="85"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Applies Changes.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"/>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Aplikuje změny.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../window_fix.ui" line="88"/>
@@ -201,7 +201,7 @@
     <message>
         <location filename="../window_fix.ui" line="99"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Closes the application.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"/>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Zavírá aplikaci.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../window_fix.ui" line="102"/>
@@ -211,7 +211,7 @@
     <message>
         <location filename="../window.cpp" line="48"/>
         <source>An easy way to configure your ~/.bashrc and bash prompt</source>
-        <translation type="unfinished"/>
+        <translation>Snadný způsob konfigurace ~/.bashrc a bash promptu</translation>
     </message>
     <message>
         <location filename="../window.cpp" line="260"/>

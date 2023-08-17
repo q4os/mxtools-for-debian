@@ -49,6 +49,7 @@ FORMS    += \
 TRANSLATIONS += translations/mx-samba-config_af.ts \
                 translations/mx-samba-config_am.ts \
                 translations/mx-samba-config_ar.ts \
+                translations/mx-samba-config_ast.ts \
                 translations/mx-samba-config_be.ts \
                 translations/mx-samba-config_bg.ts \
                 translations/mx-samba-config_bn.ts \
@@ -76,7 +77,6 @@ TRANSLATIONS += translations/mx-samba-config_af.ts \
                 translations/mx-samba-config_fil.ts \
                 translations/mx-samba-config_fi.ts \
                 translations/mx-samba-config_fr_BE.ts \
-                translations/mx-samba-config_fr_FR.ts \
                 translations/mx-samba-config_fr.ts \
                 translations/mx-samba-config_fy.ts \
                 translations/mx-samba-config_ga.ts \
@@ -92,12 +92,16 @@ TRANSLATIONS += translations/mx-samba-config_af.ts \
                 translations/mx-samba-config_hr.ts \
                 translations/mx-samba-config_ht.ts \
                 translations/mx-samba-config_hu.ts \
+                translations/mx-samba-config_hy_AM.ts \
+                translations/mx-samba-config_hye.ts \
                 translations/mx-samba-config_hy.ts \
                 translations/mx-samba-config_id.ts \
+                translations/mx-samba-config_ie.ts \
                 translations/mx-samba-config_is.ts \
                 translations/mx-samba-config_it.ts \
                 translations/mx-samba-config_ja.ts \
                 translations/mx-samba-config_jv.ts \
+                translations/mx-samba-config_kab.ts \
                 translations/mx-samba-config_ka.ts \
                 translations/mx-samba-config_kk.ts \
                 translations/mx-samba-config_km.ts \
@@ -123,7 +127,9 @@ TRANSLATIONS += translations/mx-samba-config_af.ts \
                 translations/mx-samba-config_ne.ts \
                 translations/mx-samba-config_nl_BE.ts \
                 translations/mx-samba-config_nl.ts \
+                translations/mx-samba-config_nn.ts \
                 translations/mx-samba-config_ny.ts \
+                translations/mx-samba-config_oc.ts \
                 translations/mx-samba-config_or.ts \
                 translations/mx-samba-config_pa.ts \
                 translations/mx-samba-config_pl.ts \

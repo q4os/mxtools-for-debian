@@ -49,7 +49,7 @@
         <translation>有效用户的访问权限</translation>
     </message>
     <message>
-        <location filename="../editshare.cpp" line="46"/>
+        <location filename="../editshare.cpp" line="48"/>
         <source>Select directory to share</source>
         <translation>选择要分享的文件夹</translation>
     </message>

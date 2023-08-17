@@ -98,7 +98,7 @@
     <message>
         <location filename="../mainwindow.ui" line="334"/>
         <source>Save the original boot directory when updating a live-usb</source>
-        <translation>Guarda la carpeta original de inicio cuando actualice un live-usb</translation>
+        <translation>Guardar el directorio de arranque original al actualizar un live-usb</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="341"/>
@@ -297,10 +297,10 @@
         <location filename="../mainwindow.cpp" line="152"/>
         <source>Writing %1 using &apos;dd&apos; command to /dev/%2,
 
-Please wait until the the process is completed</source>
+Please wait until the process is completed</source>
         <translation>Escribiendo %1 con el comando &apos;dd&apos; hacia /dev/%2,
 
-Favor espere hasta que el proceso termine.</translation>
+Por favor espere hasta que se complete el proceso</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="312"/>

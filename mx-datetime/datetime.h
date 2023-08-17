@@ -33,7 +33,7 @@ class MTimeEdit : public QTimeEdit
 {
 	Q_OBJECT
 public:
-    MTimeEdit(QWidget *parent = nullptr);
+    MTimeEdit(QWidget *parent = nullptr) : QTimeEdit(parent) {}
     void updateDateTime(const QDateTime &dateTime);
 };
 
@@ -49,12 +49,10 @@ public:
     ~MXDateTime() = default;
 
 private slots:
-    void on_tabsDateTime_currentChanged(int index);
     void on_comboTimeArea_currentIndexChanged(int index);
     void on_comboTimeZone_currentIndexChanged(int index);
     void on_calendar_selectionChanged();
     void on_timeEdit_dateTimeChanged(const QDateTime &dateTime);
-    void on_pushReadHardware_clicked();
     void on_pushHardwareAdjust_clicked();
     void on_pushSystemToHardware_clicked();
     void on_pushHardwareToSystem_clicked();
@@ -62,16 +60,14 @@ private slots:
     void on_tableServers_itemSelectionChanged();
     void on_pushServerAdd_clicked();
     void on_pushServerRemove_clicked();
-    void on_pushServerMoveUp_clicked();
-    void on_pushServerMoveDown_clicked();
     void on_pushApply_clicked();
-    void on_pushClose_clicked();
     void on_pushAbout_clicked();
     void on_pushHelp_clicked();
 
 private:
     QTimer updater;
     bool clockLock = false;
+    bool changedServers = false;
     unsigned int loadedTabs = 0;
     int dateDelta = 0;
     qint64 timeDelta = 0;
@@ -83,8 +79,6 @@ private:
     } sysInit = SystemV;
     bool userRoot = false;
     QList<QByteArray> zones;
-    QByteArray confBaseNTP;
-    QByteArray confServers;
     bool enabledNTP{};
     bool isHardwareUTC{};
     bool updating = false;
@@ -92,17 +86,25 @@ private:
     void startup();
     void setClockLock(bool locked);
     bool shell(const QString &cmd, QByteArray *output = nullptr);
-    bool execute(const QString &program, const QStringList &arguments = QStringList(), QByteArray *output = nullptr);
+    bool execute(const QString &program, const QStringList &arguments = QStringList(),
+        QByteArray *output = nullptr, QByteArray *error = nullptr);
+    void loadTab(int index);
     void update();
     void loadDateTime();
     void saveDateTime(const QDateTime &driftStart);
     void transferTime(const QStringList &params, const QString &from, const QString &to);
+    void readHardwareClock();
     void saveHardwareClock();
     QTableWidgetItem *addServerRow(bool enabled, const QString &type, const QString &address, const QString &options);
     void moveServerRow(int movement);
     bool validateServerList();
     void loadNetworkTime();
     void saveNetworkTime();
+    bool loadSources(const QString &filename);
+    bool clearSources(const QString &filename);
+
+    // Slots
+    void serverRowChanged();
 };
 
 #endif // DATETIME_H

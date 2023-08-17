@@ -9,7 +9,7 @@
 # Danylo Sa <kaiserblast@gmail.com>, 2022
 # cmenemrs <cmenemrs@gmail.com>, 2022
 # fehlix, 2022
-# marcelo cripe <marcelocripe@gmail.com>, 2022
+# marcelo cripe <marcelocripe@gmail.com>, 2023
 # 
 #, fuzzy
 msgid ""
@@ -18,8 +18,8 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-01-28 02:38+0100\n"
 "PO-Revision-Date: 2017-05-11 01:14+0000\n"
-"Last-Translator: marcelo cripe <marcelocripe@gmail.com>, 2022\n"
-"Language-Team: Portuguese (Brazil) (https://www.transifex.com/anticapitalista/teams/10162/pt_BR/)\n"
+"Last-Translator: marcelo cripe <marcelocripe@gmail.com>, 2023\n"
+"Language-Team: Portuguese (Brazil) (https://app.transifex.com/anticapitalista/teams/10162/pt_BR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -52,12 +52,12 @@ msgstr "Atualizar automaticamente o(s) registro(s)"
 
 msgid "Automatically answer 'yes' to all prompts during full/basic upgrade"
 msgstr ""
-"Responder automaticamente 'sim' para todas as perguntas durante a "
+"Responder automaticamente ‘sim’ para todas as perguntas durante a "
 "atualização completa ou básica do sistema operacional"
 
 msgid "Automatically answer 'yes' to all prompts during upgrade"
 msgstr ""
-"Responder automaticamente 'sim' para todas as perguntas durante a "
+"Responder automaticamente ‘sim’ para todas as perguntas durante a "
 "atualização"
 
 msgid "Cancel"
@@ -75,7 +75,7 @@ msgstr "Fechar"
 msgid "For a less detailed view see 'Auto-update dpkg log(s)' or 'History'."
 msgstr ""
 "Para uma visualização menos detalhada, consulte o(s) registro(s) de "
-"atualização automática 'Auto-update dpkg log(s)' ou do histórico 'History'."
+"atualização automática ‘Auto-update dpkg log(s)’ ou do histórico ‘History’."
 
 msgid "Hide until updates available"
 msgstr "Ocultar até que as atualizações estejam disponíveis"
@@ -146,7 +146,7 @@ msgid "Preferences"
 msgstr "Preferências"
 
 msgid "Press 'h' for help, 'q' to quit"
-msgstr "Pressione a tecla 'h' para obter ajuda ou 'q' para sair"
+msgstr "Pressione a tecla ‘h’ para obter ajuda ou a tecla ‘q’ para sair"
 
 msgid "Quit"
 msgstr "Sair"
@@ -166,16 +166,16 @@ msgstr "Reiniciar o Atualizador do MX"
 
 msgid "Running apt-get autoremove, if you are unsure type 'n'."
 msgstr ""
-"Executando o comando 'apt-get autoremove', se você não tiver certeza do que "
-"este comando faz, pressione a tecla 'n' para não executar este  comando."
+"Executando o comando ‘apt-get autoremove’, se você não tiver certeza do que "
+"este comando faz, pressione a tecla ‘n’ para não executar este comando."
 
 msgid ""
 "Switches the type of Upgrade that will be performed, alternating back and "
 "forth between 'full upgrade' and 'basic upgrade'."
 msgstr ""
-"Alterar o tipo de Atualização que será realizada, alternando entre "
-"'atualização completa do sistema operacional' e 'atualização básica dos "
-"pacotes'"
+"Alterar o tipo da ‘Atualização’ que será realizada, alternando entre "
+"‘atualização completa do sistema operacional’ e ‘atualização básica dos "
+"pacotes’"
 
 msgid "Synaptic Help"
 msgstr "Ajuda do Synaptic"
@@ -204,11 +204,11 @@ msgstr "Atualizar utilizando o Synaptic"
 
 msgid "Using basic upgrade (not recommended)"
 msgstr ""
-"Utilizando a opção 'atualização básica dos pacotes' (esta opção não é "
+"Utilizando a opção ‘atualização básica dos pacotes’ (esta opção não é "
 "recomendada)"
 
 msgid "Using full upgrade"
-msgstr "Utilizando a opção 'atualização completa do sistema operacional'"
+msgstr "Utilizando a opção ‘atualização completa do sistema operacional’"
 
 msgid "View and Upgrade"
 msgstr "Exibir e Atualizar"
@@ -270,7 +270,7 @@ msgstr ""
 "cancelada)"
 
 msgid "opens MX Updater 'View and Upgrade' window"
-msgstr "Abrir a janela 'Exibir e Atualizar' do Atualizador do MX"
+msgstr "Abrir a janela ‘Exibir e Atualizar’ do Atualizador do MX"
 
 msgid "opens Synaptic"
 msgstr "Abrir o Synaptic"
@@ -288,10 +288,10 @@ msgid "start MX Updater at login"
 msgstr "Iniciar o Atualizador do MX ao iniciar a sessão (login)"
 
 msgid "switch to basic upgrade"
-msgstr "Alterar para a opção 'atualização básica dos pacotes'"
+msgstr "Alterar para a opção ‘atualização básica dos pacotes’"
 
 msgid "switch to full upgrade"
-msgstr "Alterar para a opção 'atualização completa do sistema operacional'"
+msgstr "Alterar para a opção ‘atualização completa do sistema operacional’"
 
 msgid "this terminal window can now be closed"
 msgstr "Esta janela de terminal/console agora pode ser fechada"

@@ -45,8 +45,10 @@ FORMS    += \
     mainwindow.ui
 
 TRANSLATIONS += translations/mx-live-usb-maker_af.ts \
+                translations/mx-live-usb-maker_af.ts \
                 translations/mx-live-usb-maker_am.ts \
                 translations/mx-live-usb-maker_ar.ts \
+                translations/mx-live-usb-maker_ast.ts \
                 translations/mx-live-usb-maker_be.ts \
                 translations/mx-live-usb-maker_bg.ts \
                 translations/mx-live-usb-maker_bn.ts \
@@ -74,7 +76,6 @@ TRANSLATIONS += translations/mx-live-usb-maker_af.ts \
                 translations/mx-live-usb-maker_fil.ts \
                 translations/mx-live-usb-maker_fi.ts \
                 translations/mx-live-usb-maker_fr_BE.ts \
-                translations/mx-live-usb-maker_fr_FR.ts \
                 translations/mx-live-usb-maker_fr.ts \
                 translations/mx-live-usb-maker_fy.ts \
                 translations/mx-live-usb-maker_ga.ts \
@@ -90,12 +91,16 @@ TRANSLATIONS += translations/mx-live-usb-maker_af.ts \
                 translations/mx-live-usb-maker_hr.ts \
                 translations/mx-live-usb-maker_ht.ts \
                 translations/mx-live-usb-maker_hu.ts \
+                translations/mx-live-usb-maker_hy_AM.ts \
+                translations/mx-live-usb-maker_hye.ts \
                 translations/mx-live-usb-maker_hy.ts \
                 translations/mx-live-usb-maker_id.ts \
+                translations/mx-live-usb-maker_ie.ts \
                 translations/mx-live-usb-maker_is.ts \
                 translations/mx-live-usb-maker_it.ts \
                 translations/mx-live-usb-maker_ja.ts \
                 translations/mx-live-usb-maker_jv.ts \
+                translations/mx-live-usb-maker_kab.ts \
                 translations/mx-live-usb-maker_ka.ts \
                 translations/mx-live-usb-maker_kk.ts \
                 translations/mx-live-usb-maker_km.ts \
@@ -121,7 +126,9 @@ TRANSLATIONS += translations/mx-live-usb-maker_af.ts \
                 translations/mx-live-usb-maker_ne.ts \
                 translations/mx-live-usb-maker_nl_BE.ts \
                 translations/mx-live-usb-maker_nl.ts \
+                translations/mx-live-usb-maker_nn.ts \
                 translations/mx-live-usb-maker_ny.ts \
+                translations/mx-live-usb-maker_oc.ts \
                 translations/mx-live-usb-maker_or.ts \
                 translations/mx-live-usb-maker_pa.ts \
                 translations/mx-live-usb-maker_pl.ts \
@@ -164,7 +171,7 @@ TRANSLATIONS += translations/mx-live-usb-maker_af.ts \
                 translations/mx-live-usb-maker_yue_CN.ts \
                 translations/mx-live-usb-maker_zh_CN.ts \
                 translations/mx-live-usb-maker_zh_HK.ts \
-                translations/mx-live-usb-maker_zh_TW.ts
+                translations/mx-live-usb-maker_zh_TW.ts 
 
 RESOURCES += \
     images.qrc

@@ -18,39 +18,38 @@ Russian_Firefox
    <cs>Russian localisation of Firefox</cs>
    <da>Russisk oversættelse af Firefox</da>
    <de>Russische Lokalisierung von Firefox</de>
-   <el>Ρωσικός εντοπισμός του Firefox</el>
+   <el>Ρωσικά για το Firefox</el>
    <en>Russian localisation of Firefox</en>
    <es>Localización Rusa de Firefox</es>
    <et>Russian localisation of Firefox</et>
    <eu>Russian localisation of Firefox</eu>
    <fa>Russian localisation of Firefox</fa>
    <fil_PH>Russian localisation of Firefox</fil_PH>
-   <fi>Russian localisation of Firefox</fi>
+   <fi>Venäläinen Firefox-kotoistus</fi>
    <fr>Localisation russe pour Firefox</fr>
    <he_IL>Russian localisation of Firefox</he_IL>
-   <hi>Russian localisation of Firefox</hi>
+   <hi>फायरफॉक्स का रूसी संस्करण</hi>
    <hr>Russian localisation of Firefox</hr>
    <hu>Russian localisation of Firefox</hu>
    <id>Russian localisation of Firefox</id>
    <is>Russian localisation of Firefox</is>
    <it>Localizzazione russa di Firefox</it>
-   <ja_JP>Russian localisation of Firefox</ja_JP>
-   <ja>Russian localisation of Firefox</ja>
+   <ja>Firefox のロシア語パック</ja>
    <kk>Russian localisation of Firefox</kk>
    <ko>Russian localisation of Firefox</ko>
    <lt>Russian localisation of Firefox</lt>
    <mk>Russian localisation of Firefox</mk>
    <mr>Russian localisation of Firefox</mr>
-   <nb>Russian localisation of Firefox</nb>
+   <nb>Russisk lokaltilpassing av Firefox</nb>
    <nl>Russische lokalisatie van Firefox</nl>
    <pl>Rosyjska lokalizacja przeglądarki Firefox</pl>
-   <pt_BR>Russo Localização para Firefox</pt_BR>
+   <pt_BR>Russo Localização para o Firefox</pt_BR>
    <pt>Russo Localização para Firefox</pt>
    <ro>Russian localisation of Firefox</ro>
    <ru>Русская локализация Firefox</ru>
    <sk>Russian localisation of Firefox</sk>
-   <sl>Russian localisation of Firefox</sl>
-   <sq>Russian localisation of Firefox</sq>
+   <sl>Ruske krajevne nastavitve za Firefox</sl>
+   <sq>Përkthimi i Firefox-it në rusisht</sq>
    <sr>Russian localisation of Firefox</sr>
    <sv>Rysk lokalisering av Firefox </sv>
    <tr>Firefox'un Rusça yerelleştirmesi</tr>

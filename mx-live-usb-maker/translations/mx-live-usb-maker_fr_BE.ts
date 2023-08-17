@@ -234,7 +234,7 @@
     <message>
         <location filename="../mainwindow.ui" line="702"/>
         <source>Label ext partition:</source>
-        <translation>Etiquette de la partition:</translation>
+        <translation>Étiquette de la partition:</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="750"/>
@@ -297,10 +297,10 @@
         <location filename="../mainwindow.cpp" line="152"/>
         <source>Writing %1 using &apos;dd&apos; command to /dev/%2,
 
-Please wait until the the process is completed</source>
-        <translation>Ecriture de %1 à l’aide de la commande « dd » vers /dev/%2,
+Please wait until the process is completed</source>
+        <translation>Écriture de %1 à l’aide de la commande « dd » sur /dev/%2.
 
-Veuillez attendre la fin du processus</translation>
+Veuillez patienter jusqu’à la fin de la procédure.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="312"/>

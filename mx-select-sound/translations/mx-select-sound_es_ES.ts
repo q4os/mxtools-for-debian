@@ -1,143 +1,264 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="es_ES">
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.1" language="es_ES">
+<context>
+    <name>MainWindow</name>
+    <message>
+        <location filename="../mainwindow.ui" line="14"/>
+        <location filename="../mainwindow.cpp" line="47"/>
+        <location filename="../mainwindow.cpp" line="75"/>
+        <location filename="../mainwindow.cpp" line="129"/>
+        <location filename="../mainwindow.cpp" line="148"/>
+        <location filename="../mainwindow.cpp" line="156"/>
+        <source>MX Select Sound</source>
+        <translation type="unfinished">MX Selector de Sonido</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="28"/>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Your current default sound card is:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Su tarjeta de sonido por defecto es:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="64"/>
+        <source>Display help </source>
+        <translation type="unfinished">Mostrar la ayuda</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="67"/>
+        <source>Help</source>
+        <translation type="unfinished">Ayuda</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="74"/>
+        <source>Alt+H</source>
+        <translation type="unfinished">Alt+H</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="103"/>
+        <source>About this application</source>
+        <translation type="unfinished">Acerca de esta aplicación</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="106"/>
+        <source>About...</source>
+        <translation type="unfinished">Acerca de...</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="113"/>
+        <source>Alt+B</source>
+        <translation type="unfinished">Alt+B</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="145"/>
+        <source>Quit application</source>
+        <translation type="unfinished">Salir de la aplicación</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="148"/>
+        <source>Close</source>
+        <translation type="unfinished">Cerrar</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="155"/>
+        <source>Alt+N</source>
+        <translation type="unfinished">Alt+N</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="196"/>
+        <source>Apply</source>
+        <translation type="unfinished">Aplicar</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="218"/>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Select another sound card if necessary:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Seleccione otra tarjeta de sonido si es necesario:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="244"/>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If your computer has more than one sound card, you can use this application to select the one to be default. &lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Si su computadora tiene más de una tarjeta de sonido, puede usar esta aplicación para seleccionar la predeterminada. &lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="290"/>
+        <source>Test current sound card</source>
+        <translation type="unfinished">Probar la tarjeta de sonido actual</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="75"/>
+        <source>No sound cards/devices were found.</source>
+        <translation type="unfinished">No se encontraron tarjetas/dispositivos de sonido.</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="87"/>
+        <location filename="../mainwindow.cpp" line="98"/>
+        <source>none</source>
+        <translation type="unfinished">ninguno</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="128"/>
+        <source>About MX Select Sound</source>
+        <translation type="unfinished">Acerca de MX Selector de Sonido</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="129"/>
+        <source>Version: </source>
+        <translation type="unfinished">Versión: </translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="130"/>
+        <source>Program for selecting the default sound card in MX Linux</source>
+        <translation type="unfinished">Programa para seleccionar la tarjeta de sonido predeterminada en MX Linux</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="133"/>
+        <source>Copyright (c) MX Linux</source>
+        <translation type="unfinished">Copyright (c) MX Linux</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="134"/>
+        <source>%1 License</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="148"/>
+        <source>%1 Help</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="156"/>
+        <source>Could not play test sound.</source>
+        <translation type="unfinished">No se pudo reproducir el sonido de prueba.</translation>
+    </message>
+</context>
+<context>
+    <name>QObject</name>
+    <message>
+        <location filename="../about.cpp" line="40"/>
+        <source>License</source>
+        <translation type="unfinished">Licencia</translation>
+    </message>
+    <message>
+        <location filename="../about.cpp" line="41"/>
+        <location filename="../about.cpp" line="51"/>
+        <source>Changelog</source>
+        <translation type="unfinished">Registro de cambios</translation>
+    </message>
+    <message>
+        <location filename="../about.cpp" line="42"/>
+        <source>Cancel</source>
+        <translation type="unfinished">Cancelar</translation>
+    </message>
+    <message>
+        <location filename="../about.cpp" line="64"/>
+        <source>&amp;Close</source>
+        <translation type="unfinished">&amp;Cerrar</translation>
+    </message>
+</context>
 <context>
     <name>mxselectsound</name>
     <message>
-        <location filename="mxselectsound.ui" line="14"/>
-        <location filename="mxselectsound.cpp" line="46"/>
-        <location filename="mxselectsound.cpp" line="82"/>
-        <location filename="mxselectsound.cpp" line="140"/>
-        <location filename="mxselectsound.cpp" line="152"/>
-        <location filename="mxselectsound.cpp" line="186"/>
-        <location filename="mxselectsound.cpp" line="195"/>
         <source>MX Select Sound</source>
-        <translation>MX Selector de Sonido</translation>
+        <translation type="vanished">MX Selector de Sonido</translation>
     </message>
     <message>
-        <location filename="mxselectsound.ui" line="28"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Your current default sound card is:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Su tarjeta de sonido por defecto es:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Su tarjeta de sonido por defecto es:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="mxselectsound.ui" line="64"/>
         <source>Display help </source>
-        <translation>Mostrar la ayuda</translation>
+        <translation type="vanished">Mostrar la ayuda</translation>
     </message>
     <message>
-        <location filename="mxselectsound.ui" line="67"/>
         <source>Help</source>
-        <translation>Ayuda</translation>
+        <translation type="vanished">Ayuda</translation>
     </message>
     <message>
-        <location filename="mxselectsound.ui" line="75"/>
         <source>Alt+H</source>
-        <translation>Alt+H</translation>
+        <translation type="vanished">Alt+H</translation>
     </message>
     <message>
-        <location filename="mxselectsound.ui" line="104"/>
         <source>About this application</source>
-        <translation>Acerca de esta aplicación</translation>
+        <translation type="vanished">Acerca de esta aplicación</translation>
     </message>
     <message>
-        <location filename="mxselectsound.ui" line="107"/>
         <source>About...</source>
-        <translation>Acerca de...</translation>
+        <translation type="vanished">Acerca de...</translation>
     </message>
     <message>
-        <location filename="mxselectsound.ui" line="115"/>
         <source>Alt+B</source>
-        <translation>Alt+B</translation>
+        <translation type="vanished">Alt+B</translation>
     </message>
     <message>
-        <location filename="mxselectsound.ui" line="147"/>
         <source>Quit application</source>
-        <translation>Salir de la aplicación</translation>
+        <translation type="vanished">Salir de la aplicación</translation>
     </message>
     <message>
-        <location filename="mxselectsound.ui" line="150"/>
         <source>Close</source>
-        <translation>Cerrar</translation>
+        <translation type="vanished">Cerrar</translation>
     </message>
     <message>
-        <location filename="mxselectsound.ui" line="158"/>
         <source>Alt+N</source>
-        <translation>Alt+N</translation>
+        <translation type="vanished">Alt+N</translation>
     </message>
     <message>
-        <location filename="mxselectsound.ui" line="199"/>
         <source>Apply</source>
-        <translation>Aplicar</translation>
+        <translation type="vanished">Aplicar</translation>
     </message>
     <message>
-        <location filename="mxselectsound.ui" line="222"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Select another sound card if necessary:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Seleccione otra tarjeta de sonido si es necesario:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Seleccione otra tarjeta de sonido si es necesario:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="mxselectsound.ui" line="248"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If your computer has more than one sound card, you can use this application to select the one to be default. &lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Si su computadora tiene más de una tarjeta de sonido, puede usar esta aplicación para seleccionar la predeterminada. &lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Si su computadora tiene más de una tarjeta de sonido, puede usar esta aplicación para seleccionar la predeterminada. &lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="mxselectsound.ui" line="294"/>
         <source>Test current sound card</source>
-        <translation>Probar la tarjeta de sonido actual</translation>
+        <translation type="vanished">Probar la tarjeta de sonido actual</translation>
     </message>
     <message>
-        <location filename="mxselectsound.cpp" line="83"/>
         <source>No sound cards/devices were found.</source>
-        <translation>No se encontraron tarjetas/dispositivos de sonido.</translation>
+        <translation type="vanished">No se encontraron tarjetas/dispositivos de sonido.</translation>
     </message>
     <message>
-        <location filename="mxselectsound.cpp" line="95"/>
-        <location filename="mxselectsound.cpp" line="109"/>
         <source>none</source>
-        <translation>ninguno</translation>
+        <translation type="vanished">ninguno</translation>
     </message>
     <message>
-        <location filename="mxselectsound.cpp" line="139"/>
         <source>About MX Select Sound</source>
-        <translation>Acerca de MX Selector de Sonido</translation>
+        <translation type="vanished">Acerca de MX Selector de Sonido</translation>
     </message>
     <message>
-        <location filename="mxselectsound.cpp" line="140"/>
         <source>Version: </source>
-        <translation>Versión: </translation>
+        <translation type="vanished">Versión: </translation>
     </message>
     <message>
-        <location filename="mxselectsound.cpp" line="141"/>
         <source>Program for selecting the default sound card in MX Linux</source>
-        <translation>Programa para seleccionar la tarjeta de sonido predeterminada en MX Linux</translation>
+        <translation type="vanished">Programa para seleccionar la tarjeta de sonido predeterminada en MX Linux</translation>
     </message>
     <message>
-        <location filename="mxselectsound.cpp" line="143"/>
         <source>Copyright (c) MX Linux</source>
-        <translation>Copyright (c) MX Linux</translation>
+        <translation type="vanished">Copyright (c) MX Linux</translation>
     </message>
     <message>
-        <location filename="mxselectsound.cpp" line="144"/>
-        <location filename="mxselectsound.cpp" line="152"/>
         <source>License</source>
-        <translation>Licencia</translation>
+        <translation type="vanished">Licencia</translation>
     </message>
     <message>
-        <location filename="mxselectsound.cpp" line="145"/>
         <source>Changelog</source>
-        <translation>Registro de cambios</translation>
+        <translation type="vanished">Registro de cambios</translation>
     </message>
     <message>
-        <location filename="mxselectsound.cpp" line="146"/>
         <source>Cancel</source>
-        <translation>Cancelar</translation>
+        <translation type="vanished">Cancelar</translation>
     </message>
     <message>
-        <location filename="mxselectsound.cpp" line="161"/>
         <source>&amp;Close</source>
-        <translation>&amp;Cerrar</translation>
+        <translation type="vanished">&amp;Cerrar</translation>
     </message>
     <message>
-        <location filename="mxselectsound.cpp" line="196"/>
         <source>Could not play test sound.</source>
-        <translation>No se pudo reproducir el sonido de prueba.</translation>
+        <translation type="vanished">No se pudo reproducir el sonido de prueba.</translation>
     </message>
 </context>
 </TS>

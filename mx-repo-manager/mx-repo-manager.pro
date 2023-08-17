@@ -47,10 +47,10 @@ FORMS    += mainwindow.ui
 TRANSLATIONS += translations/mx-repo-manager_af.ts \
                 translations/mx-repo-manager_am.ts \
                 translations/mx-repo-manager_ar.ts \
+                translations/mx-repo-manager_ast.ts \
                 translations/mx-repo-manager_be.ts \
                 translations/mx-repo-manager_bg.ts \
                 translations/mx-repo-manager_bn.ts \
-                translations/mx-repo-manager_bs_BA.ts \
                 translations/mx-repo-manager_bs.ts \
                 translations/mx-repo-manager_ca.ts \
                 translations/mx-repo-manager_ceb.ts \
@@ -69,12 +69,10 @@ TRANSLATIONS += translations/mx-repo-manager_af.ts \
                 translations/mx-repo-manager_et.ts \
                 translations/mx-repo-manager_eu.ts \
                 translations/mx-repo-manager_fa.ts \
-                translations/mx-repo-manager_fi_FI.ts \
                 translations/mx-repo-manager_fil_PH.ts \
                 translations/mx-repo-manager_fil.ts \
                 translations/mx-repo-manager_fi.ts \
                 translations/mx-repo-manager_fr_BE.ts \
-                translations/mx-repo-manager_fr_FR.ts \
                 translations/mx-repo-manager_fr.ts \
                 translations/mx-repo-manager_fy.ts \
                 translations/mx-repo-manager_ga.ts \
@@ -90,12 +88,15 @@ TRANSLATIONS += translations/mx-repo-manager_af.ts \
                 translations/mx-repo-manager_hr.ts \
                 translations/mx-repo-manager_ht.ts \
                 translations/mx-repo-manager_hu.ts \
+                translations/mx-repo-manager_hye.ts \
                 translations/mx-repo-manager_hy.ts \
                 translations/mx-repo-manager_id.ts \
+                translations/mx-repo-manager_ie.ts \
                 translations/mx-repo-manager_is.ts \
                 translations/mx-repo-manager_it.ts \
                 translations/mx-repo-manager_ja.ts \
                 translations/mx-repo-manager_jv.ts \
+                translations/mx-repo-manager_kab.ts \
                 translations/mx-repo-manager_ka.ts \
                 translations/mx-repo-manager_kk.ts \
                 translations/mx-repo-manager_km.ts \
@@ -121,7 +122,9 @@ TRANSLATIONS += translations/mx-repo-manager_af.ts \
                 translations/mx-repo-manager_ne.ts \
                 translations/mx-repo-manager_nl_BE.ts \
                 translations/mx-repo-manager_nl.ts \
+                translations/mx-repo-manager_nn.ts \
                 translations/mx-repo-manager_ny.ts \
+                translations/mx-repo-manager_oc.ts \
                 translations/mx-repo-manager_or.ts \
                 translations/mx-repo-manager_pa.ts \
                 translations/mx-repo-manager_pl.ts \
@@ -130,7 +133,6 @@ TRANSLATIONS += translations/mx-repo-manager_af.ts \
                 translations/mx-repo-manager_pt.ts \
                 translations/mx-repo-manager_ro.ts \
                 translations/mx-repo-manager_rue.ts \
-                translations/mx-repo-manager_ru_RU.ts \
                 translations/mx-repo-manager_ru.ts \
                 translations/mx-repo-manager_rw.ts \
                 translations/mx-repo-manager_sd.ts \
@@ -164,7 +166,7 @@ TRANSLATIONS += translations/mx-repo-manager_af.ts \
                 translations/mx-repo-manager_yue_CN.ts \
                 translations/mx-repo-manager_zh_CN.ts \
                 translations/mx-repo-manager_zh_HK.ts \
-                translations/mx-repo-manager_zh_TW.ts 
+                translations/mx-repo-manager_zh_TW.ts
 
 RESOURCES += \
     images.qrc

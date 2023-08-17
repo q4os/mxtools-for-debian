@@ -1,3 +1,34 @@
+mx-boot-options (23.8.01) mx; urgency=medium
+
+  * Fix applying different message levels
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 10 Aug 2023 13:12:39 -0400
+
+mx-boot-options (23.8) mx; urgency=medium
+
+  * Fix displaying bootlog
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 10 Aug 2023 00:34:18 -0400
+
+mx-boot-options (23.7.01) mx; urgency=medium
+
+  * Update translations
+
+ -- Adrian <adrian@mxlinux.org>  Sun, 23 Jul 2023 11:15:55 -0400
+
+mx-boot-options (23.7) mx; urgency=medium
+
+  * Update translations
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 20 Jul 2023 16:05:36 -0400
+
+mx-boot-options (23.6) mx; urgency=medium
+
+  * Update policy file
+  * Refresh translations
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 09 Jun 2023 00:22:39 -0400
+
 mx-boot-options (23.5) mx; urgency=medium
 
   * Update logo
@@ -7,7 +38,7 @@ mx-boot-options (23.5) mx; urgency=medium
 mx-boot-options (23.4) mx; urgency=medium
 
   * Update icon
-  * Uptate translations
+  * Update translations
 
  -- Adrian <adrian@mxlinux.org>  Thu, 13 Apr 2023 22:42:32 -0400
 

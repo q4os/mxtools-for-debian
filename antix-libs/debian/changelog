@@ -1,3 +1,9 @@
+antix-libs (0.8.14+6mx23) nx; urgency=medium
+
+  * stars for sudo password display
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 12 Feb 2023 21:57:08 -0500
+
 antix-libs (0.8.14+5mx) mx; urgency=medium
 
   * add dolphin to gui file manager list

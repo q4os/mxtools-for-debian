@@ -33,8 +33,8 @@ class MainWindow : public QDialog, public Ui::MEConfig
     Q_OBJECT
 
 public:
-    MainWindow(QWidget *parent = nullptr);
-    ~MainWindow();
+    explicit MainWindow(QWidget *parent = nullptr);
+    ~MainWindow() override;
 
     void applyAdd();
     void applyChangePass();
@@ -61,7 +61,7 @@ public slots:
     void syncDone(bool success);
 
 protected:
-    void keyPressEvent(QKeyEvent *event);
+    void keyPressEvent(QKeyEvent *event) override;
 
 private slots:
     void closeApp();
@@ -79,8 +79,6 @@ private slots:
     void on_entireRadioButton_clicked();
     void on_fromUserComboBox_activated(const QString &);
     void on_groupNameEdit_textEdited();
-    void on_lineEditChangePassConf_textChanged(const QString &arg1);
-    void on_lineEditChangePass_textChanged();
     void on_mozillaRadioButton_clicked();
     void on_radioAutologinNo_clicked();
     void on_radioAutologinYes_clicked();
@@ -91,13 +89,13 @@ private slots:
     void on_userComboBox_activated(const QString &);
     void on_userComboMembership_activated(const QString &);
     void on_userNameEdit_textEdited();
-    void on_userPassword2Edit_textChanged(const QString &arg1);
-    void on_userPasswordEdit_textChanged();
 
 private:
     Cmd *shell;
     QSettings settings;
     QStringList users;
+    class PassEdit *passUser;
+    class PassEdit *passChange;
 };
 
 #endif

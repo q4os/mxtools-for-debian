@@ -6,7 +6,7 @@
     <message>
         <location filename="../CronModel.cpp" line="112"/>
         <source>Time</source>
-        <translation>χρόνος</translation>
+        <translation>Χρόνος</translation>
     </message>
     <message>
         <location filename="../CronModel.cpp" line="114"/>
@@ -24,17 +24,17 @@
     <message>
         <location filename="../ExecuteList.cpp" line="39"/>
         <source>Max Item</source>
-        <translation>Μέγιστο στοιχείο</translation>
+        <translation>Μέγιστα στοιχεία</translation>
     </message>
     <message>
         <location filename="../ExecuteList.cpp" line="41"/>
         <source>Max Date</source>
-        <translation>Μέγιστη ημερομηνία</translation>
+        <translation>Μέγιστες ημερομηνίες</translation>
     </message>
     <message>
         <location filename="../ExecuteList.cpp" line="43"/>
         <source>Select</source>
-        <translation>Επιλέξτε</translation>
+        <translation>Επιλογή</translation>
     </message>
     <message>
         <location filename="../ExecuteList.cpp" line="48"/>
@@ -47,12 +47,12 @@
     <message>
         <location filename="../ExecuteModel.cpp" line="62"/>
         <source>Execute Time</source>
-        <translation>Εκτελέστε Ώρα</translation>
+        <translation>Χρόνος εκτέλεσης</translation>
     </message>
     <message>
         <location filename="../ExecuteModel.cpp" line="64"/>
         <source>Time</source>
-        <translation>χρόνος</translation>
+        <translation>Χρόνος</translation>
     </message>
     <message>
         <location filename="../ExecuteModel.cpp" line="66"/>
@@ -89,7 +89,7 @@
         <location filename="../MainWindow.cpp" line="256"/>
         <location filename="../MainWindow.cpp" line="325"/>
         <source>Job Scheduler</source>
-        <translation>Προγραμματιστής εργασιών</translation>
+        <translation>Προγραμματισμός εργασιών</translation>
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="124"/>
@@ -104,7 +104,7 @@
     <message>
         <location filename="../MainWindow.cpp" line="128"/>
         <source>&amp;New Item</source>
-        <translation>&amp;Νέο αντικείμενο</translation>
+        <translation>&amp;Νέο</translation>
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="129"/>
@@ -114,7 +114,7 @@
     <message>
         <location filename="../MainWindow.cpp" line="132"/>
         <source>&amp;Reload</source>
-        <translation>&amp;φόρτωση</translation>
+        <translation>&amp;Ανανέωση</translation>
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="133"/>
@@ -124,7 +124,7 @@
     <message>
         <location filename="../MainWindow.cpp" line="135"/>
         <source>&amp;Save</source>
-        <translation>&amp;Αποθήκευση</translation>
+        <translation>Α&amp;ποθήκευση</translation>
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="136"/>
@@ -134,12 +134,12 @@
     <message>
         <location filename="../MainWindow.cpp" line="139"/>
         <source>Start as &amp;Root</source>
-        <translation>Ξεκινήστε ως &amp;Root</translation>
+        <translation>Εκκίνηση ως &amp;διαχειριστής</translation>
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="141"/>
         <source>Start as &amp;Regular user</source>
-        <translation>Ξεκινήστε ως &amp;Κανονικός χρήστης</translation>
+        <translation>Εκκίνηση ως απ&amp;λός χρήστης</translation>
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="142"/>
@@ -149,7 +149,7 @@
     <message>
         <location filename="../MainWindow.cpp" line="145"/>
         <source>E&amp;xit</source>
-        <translation>Εξοδος</translation>
+        <translation>Ε&amp;ξοδος</translation>
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="146"/>
@@ -169,7 +169,7 @@
     <message>
         <location filename="../MainWindow.cpp" line="156"/>
         <source>Cu&amp;t</source>
-        <translation>Αποκοπή</translation>
+        <translation>Απο&amp;κοπή</translation>
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="157"/>
@@ -221,25 +221,25 @@
         <location filename="../MainWindow.cpp" line="237"/>
         <source>Not saved since last change.
 Are you OK to reload?</source>
-        <translation>Δεν αποθηκεύτηκε από την τελευταία αλλαγή. 
-Είστε εντάξει για επαναφόρτωση;</translation>
+        <translation>Δεν αποθηκεύτηκε μετά από τη τελευταία αλλαγή. 
+Θέλετε ανανέωση;</translation>
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="325"/>
         <source>Not saved since last change.
 Are you OK to exit?</source>
-        <translation>Δεν αποθηκεύτηκε από την τελευταία αλλαγή.
-Είσαι εντάξει για έξοδο;</translation>
+        <translation>Δεν αποθηκεύτηκε μετά από τη τελευταία αλλαγή.
+Θέλετε έξοδο;</translation>
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="338"/>
         <source>About Job Scheduler</source>
-        <translation>Περί Προγραμματιστής εργασιών</translation>
+        <translation>Περί του Προγραμματισμού εργασιών</translation>
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="339"/>
         <source>&lt;b&gt;Job Scheduler&lt;/b&gt;</source>
-        <translation>&lt;b&gt;Προγραμματιστής εργασιών&lt;/b&gt;</translation>
+        <translation>&lt;b&gt;Προγραμματισμός εργασιών&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="339"/>
@@ -249,7 +249,7 @@ Are you OK to exit?</source>
     <message>
         <location filename="../MainWindow.cpp" line="340"/>
         <source>Job Scheduler is based upon qroneko 0.5.4, released in 2005 by korewaisai (&lt;a href=&quot;mailto:korewaisai@yahoo.co.jp&quot;&gt;korewaisai@yahoo.co.jp&lt;/a&gt;)</source>
-        <translation>Ο προγραμματιστής εργασίας βασίζεται σε qroneko 0.5.4, που κυκλοφόρησε το 2005 από το korewaisai (&lt;a href=&quot;mailto:korewaisai@yahoo.co.jp&quot;&gt;korewaisai@yahoo.co.jp&lt;/a&gt;)</translation>
+        <translation>Ο προγραμματισμός εργασιών βασίζεται στο qroneko 0.5.4, που κυκλοφόρησε το 2005 από το korewaisai (&lt;a href=&quot;mailto:korewaisai@yahoo.co.jp&quot;&gt;korewaisai@yahoo.co.jp&lt;/a&gt;)</translation>
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="343"/>
@@ -259,7 +259,7 @@ Are you OK to exit?</source>
     <message>
         <location filename="../MainWindow.cpp" line="347"/>
         <source>MX project page: %1</source>
-        <translation>Σελίδα έργου MX: %1</translation>
+        <translation>Σελίδα έργου στο MX: %1</translation>
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="352"/>
@@ -283,7 +283,7 @@ Are you OK to exit?</source>
     <message>
         <location filename="../about.cpp" line="54"/>
         <source>Cancel</source>
-        <translation>Ακύρωση</translation>
+        <translation>Άκυρο</translation>
     </message>
     <message>
         <location filename="../about.cpp" line="74"/>
@@ -311,7 +311,7 @@ Are you OK to exit?</source>
     <message>
         <location filename="../SaveDialog.cpp" line="41"/>
         <source>&amp;Cancel</source>
-        <translation>&amp;Ακύρωση</translation>
+        <translation>&amp;Άκυρο</translation>
     </message>
 </context>
 <context>
@@ -324,12 +324,12 @@ Are you OK to exit?</source>
     <message>
         <location filename="../TCommandEdit.cpp" line="49"/>
         <source>Time:</source>
-        <translation>χρόνος</translation>
+        <translation>Χρόνος:</translation>
     </message>
     <message>
         <location filename="../TCommandEdit.cpp" line="53"/>
         <source>Time String E&amp;ditor</source>
-        <translation>Πρόγραμμα επεξεργασίας χρόνου</translation>
+        <translation>Επεξεργασία χρονικής &amp;συμβολοσειράς</translation>
     </message>
     <message>
         <location filename="../TCommandEdit.cpp" line="57"/>
@@ -344,12 +344,12 @@ Are you OK to exit?</source>
     <message>
         <location filename="../TCommandEdit.cpp" line="66"/>
         <source>Job Schedule:</source>
-        <translation>Πρόγραμμα εργασίας:</translation>
+        <translation>Προγραμματισμός εργασιών:</translation>
     </message>
     <message>
         <location filename="../TCommandEdit.cpp" line="128"/>
         <source>Time Format Error</source>
-        <translation>Σφάλμα μορφής ώρας</translation>
+        <translation>Σφάλμα στη μορφή της ώρας</translation>
     </message>
     <message>
         <location filename="../TCommandEdit.cpp" line="146"/>
@@ -367,7 +367,7 @@ Are you OK to exit?</source>
     <message>
         <location filename="../TimeDialog.cpp" line="76"/>
         <source>time</source>
-        <translation>ώρα</translation>
+        <translation>χρόνος</translation>
     </message>
     <message>
         <location filename="../TimeDialog.cpp" line="81"/>
@@ -377,17 +377,17 @@ Are you OK to exit?</source>
     <message>
         <location filename="../TimeDialog.cpp" line="93"/>
         <source>Hour</source>
-        <translation>Ωρα</translation>
+        <translation>Ώρα</translation>
     </message>
     <message>
         <location filename="../TimeDialog.cpp" line="99"/>
         <source>AM </source>
-        <translation>π.μ.</translation>
+        <translation>πμ </translation>
     </message>
     <message>
         <location filename="../TimeDialog.cpp" line="105"/>
         <source>PM </source>
-        <translation>μ.μ</translation>
+        <translation>μμ </translation>
     </message>
     <message>
         <location filename="../TimeDialog.cpp" line="112"/>
@@ -407,12 +407,12 @@ Are you OK to exit?</source>
     <message>
         <location filename="../TimeDialog.cpp" line="153"/>
         <source>Simple</source>
-        <translation>Απλό</translation>
+        <translation>Απλά</translation>
     </message>
     <message>
         <location filename="../TimeDialog.cpp" line="167"/>
         <source>Enable Literal</source>
-        <translation>Ενεργοποίηση Κατά γράμμα</translation>
+        <translation>Λεκτική ενεργοποίηση</translation>
     </message>
     <message>
         <location filename="../TimeDialog.cpp" line="169"/>
@@ -422,7 +422,7 @@ Are you OK to exit?</source>
     <message>
         <location filename="../TimeDialog.cpp" line="170"/>
         <source>&amp;Cancel</source>
-        <translation>&amp;Ακύρωση</translation>
+        <translation>&amp;Άκυρο</translation>
     </message>
     <message>
         <location filename="../TimeDialog.cpp" line="171"/>
@@ -440,22 +440,22 @@ Are you OK to exit?</source>
     <message>
         <location filename="../VariableEdit.cpp" line="52"/>
         <source>Mail:</source>
-        <translation>Ταχυδρομείο:</translation>
+        <translation>Ηλεκτρονικό ταχυδρομείο:</translation>
     </message>
     <message>
         <location filename="../VariableEdit.cpp" line="53"/>
         <source>Don&apos;t send</source>
-        <translation>Μην στείλετε</translation>
+        <translation>Χωρίς αποστολή</translation>
     </message>
     <message>
         <location filename="../VariableEdit.cpp" line="54"/>
         <source>Send</source>
-        <translation>Στείλετε</translation>
+        <translation>Αποστολή</translation>
     </message>
     <message>
         <location filename="../VariableEdit.cpp" line="55"/>
         <source>To</source>
-        <translation>σε</translation>
+        <translation>Σε</translation>
     </message>
     <message>
         <location filename="../VariableEdit.cpp" line="67"/>
@@ -475,7 +475,7 @@ Are you OK to exit?</source>
     <message>
         <location filename="../VariableEdit.cpp" line="83"/>
         <source>Value:</source>
-        <translation>Αξία:</translation>
+        <translation>Τιμή:</translation>
     </message>
     <message>
         <location filename="../VariableEdit.cpp" line="86"/>
@@ -493,7 +493,7 @@ Are you OK to exit?</source>
     <message>
         <location filename="../VariableModel.cpp" line="39"/>
         <source>Value</source>
-        <translation>Αξία</translation>
+        <translation>Τιμή</translation>
     </message>
 </context>
 </TS>

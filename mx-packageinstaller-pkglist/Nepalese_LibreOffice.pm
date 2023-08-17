@@ -25,35 +25,34 @@ Nepalese_Libreoffice
    <eu>Nepalese Language Meta-Package for LibreOffice</eu>
    <fa>Nepalese Language Meta-Package for LibreOffice</fa>
    <fil_PH>Nepalese Language Meta-Package for LibreOffice</fil_PH>
-   <fi>Nepalese Language Meta-Package for LibreOffice</fi>
-   <fr>Nepalese Language Meta-Package for LibreOffice</fr>
+   <fi>Nepalilainen kielipaketti LibreOffice:lle</fi>
+   <fr>Méta-Paquet en langue népalaise pour LibreOffice</fr>
    <he_IL>Nepalese Language Meta-Package for LibreOffice</he_IL>
-   <hi>Nepalese Language Meta-Package for LibreOffice</hi>
+   <hi>लिब्रे-ऑफिस हेतु नेपाली भाषा मेटा-पैकेज</hi>
    <hr>Nepalese Language Meta-Package for LibreOffice</hr>
    <hu>Nepalese Language Meta-Package for LibreOffice</hu>
    <id>Nepalese Language Meta-Package for LibreOffice</id>
    <is>Nepalese Language Meta-Package for LibreOffice</is>
    <it>Meta-pacchetto della lingua nepalese per LibreOffice</it>
-   <ja_JP>Nepalese Language Meta-Package for LibreOffice</ja_JP>
-   <ja>Nepalese Language Meta-Package for LibreOffice</ja>
+   <ja>LibreOffice 用ネパール語メタパッケージ</ja>
    <kk>Nepalese Language Meta-Package for LibreOffice</kk>
    <ko>Nepalese Language Meta-Package for LibreOffice</ko>
    <lt>Nepalese Language Meta-Package for LibreOffice</lt>
    <mk>Nepalese Language Meta-Package for LibreOffice</mk>
    <mr>Nepalese Language Meta-Package for LibreOffice</mr>
-   <nb>Nepalese Language Meta-Package for LibreOffice</nb>
+   <nb>Nepalesisk språkpakke for LibreOffice</nb>
    <nl>Nepalees Taal Meta-Pakket voor LibreOffice</nl>
-   <pl>Nepalese Language Meta-Package for LibreOffice</pl>
-   <pt_BR>Nepalese Language Meta-Package for LibreOffice</pt_BR>
+   <pl>Nepalski meta-pakiet językowy dla LibreOffice</pl>
+   <pt_BR>Nepali Pacote de Idioma para o LibreOffice</pt_BR>
    <pt>Nepalês Meta-Pacote de Idioma para LibreOffice</pt>
    <ro>Nepalese Language Meta-Package for LibreOffice</ro>
-   <ru>Nepalese Language Meta-Package for LibreOffice</ru>
+   <ru>Мета-пакет непальского языка для LibreOffice</ru>
    <sk>Nepalese Language Meta-Package for LibreOffice</sk>
    <sl>Nepalski jezikovni meta-paket za LibreOffice</sl>
-   <sq>Nepalese Language Meta-Package for LibreOffice</sq>
+   <sq>Meta-Paketë gjuhësore në nepalisht për LibreOffice-in</sq>
    <sr>Nepalese Language Meta-Package for LibreOffice</sr>
    <sv>Nepalesiskt Språk Meta-Paket för LibreOffice</sv>
-   <tr>Nepalese Language Meta-Package for LibreOffice</tr>
+   <tr>LibreOffice için Nepalce Dili Üst-Paketi</tr>
    <uk>Nepalese Language Meta-Package for LibreOffice</uk>
    <vi>Nepalese Language Meta-Package for LibreOffice</vi>
    <zh_CN>Nepalese Language Meta-Package for LibreOffice</zh_CN>

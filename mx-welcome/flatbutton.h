@@ -32,10 +32,10 @@ class FlatButton : public QPushButton
 {
 	Q_OBJECT
 public:
-    FlatButton(QWidget *parent = nullptr);
+    explicit FlatButton(QWidget *parent = nullptr);
 protected:
-    void enterEvent(QEvent *e);
-    void leaveEvent(QEvent *e);
+    void enterEvent(QEvent *e) override;
+    void leaveEvent(QEvent *e) override;
 };
 
 #endif // FLATBUTTON_H

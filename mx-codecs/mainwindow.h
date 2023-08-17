@@ -47,7 +47,7 @@ class MainWindow : public QDialog
 
 public:
     explicit MainWindow(QWidget *parent = nullptr);
-    ~MainWindow();
+    ~MainWindow() override;
     bool arch_flag = true;
     bool i386_flag = true;
 
@@ -73,9 +73,9 @@ private:
     QNetworkReply *reply;
 
     bool downloadDeb(const QString &url, const QString &filepath);
-    bool downloadFile(const QString &url, QFile &file);
+    bool downloadFile(const QString &url, QFile *file);
     bool downloadInfoAndPackage(const QString &url, const QString &release, const QString &repo, const QString &arch,
-                                QFile &file, const QStringList &search_terms, int progress);
+                                QFile *file, const QStringList &search_terms, int progress);
 };
 
 #endif // MAINWINDOW_H

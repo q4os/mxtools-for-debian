@@ -18,30 +18,29 @@ Mirage
    <cs>fast and simple image viewer</cs>
    <da>hurtig og simpel billedfremviser</da>
    <de>Schneller und einfacher Bildbetrachter</de>
-   <el>γρήγορο και απλό πρόγραμμα προβολής εικόνων</el>
+   <el>Γρήγορο και απλό πρόγραμμα προβολής εικόνων</el>
    <en>fast and simple image viewer</en>
    <es>Visor de imágenes rápido y simple</es>
    <et>fast and simple image viewer</et>
    <eu>fast and simple image viewer</eu>
    <fa>fast and simple image viewer</fa>
    <fil_PH>fast and simple image viewer</fil_PH>
-   <fi>fast and simple image viewer</fi>
-   <fr>Visionneuse d'images facile et rapide</fr>
+   <fi>nopea ja yksinkertainen kuvankatseluohjelma</fi>
+   <fr>Visionneuse d’images facile et rapide</fr>
    <he_IL>fast and simple image viewer</he_IL>
-   <hi>fast and simple image viewer</hi>
+   <hi>तीव्र व सरल चित्र प्रदर्शक</hi>
    <hr>fast and simple image viewer</hr>
    <hu>fast and simple image viewer</hu>
    <id>fast and simple image viewer</id>
    <is>fast and simple image viewer</is>
    <it>visualizzatore di immagini semplice e veloce</it>
-   <ja_JP>fast and simple image viewer</ja_JP>
-   <ja>fast and simple image viewer</ja>
+   <ja>高速でシンプルな画像ビューア</ja>
    <kk>fast and simple image viewer</kk>
    <ko>fast and simple image viewer</ko>
    <lt>greita ir paprasta paveikslų žiūryklė</lt>
    <mk>fast and simple image viewer</mk>
    <mr>fast and simple image viewer</mr>
-   <nb>fast and simple image viewer</nb>
+   <nb>rask og enkel bildeframviser</nb>
    <nl>snelle en eenvoudige afbeeldingsweergave</nl>
    <pl>szybka i prosta przeglądarka grafiki i zdjęć</pl>
    <pt_BR>Visualizador de imagens rápido e simples</pt_BR>
@@ -50,7 +49,7 @@ Mirage
    <ru>Быстрый и простой просмотрщик изображений</ru>
    <sk>fast and simple image viewer</sk>
    <sl>Hiter in enostaven pregledovalnik slik</sl>
-   <sq>fast and simple image viewer</sq>
+   <sq>parësh figurash i thjeshtë dhe i shpejtë</sq>
    <sr>fast and simple image viewer</sr>
    <sv>snabb och enkel bildvisare</sv>
    <tr>hızlı ve basit resim gösterici</tr>

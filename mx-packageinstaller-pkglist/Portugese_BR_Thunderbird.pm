@@ -18,39 +18,38 @@ Portugese(BR)_Thunderbird
    <cs>Portuguese(BR) localisation of Thunderbird</cs>
    <da>Portugisisk (brasilien) oversættelse af Thunderbird</da>
    <de>Portugiesische (BR) Lokalisierung von Thunderbird</de>
-   <el>Πορτογαλική (Βραζιλίας) εντοπισμός του Thunderbird</el>
+   <el>Πορτογαλικά(Βραζιλίας) για το Thunderbird</el>
    <en>Portuguese(BR) localisation of Thunderbird</en>
-   <es>Localización Portuguesa (BR) de Thunderbird</es>
+   <es>Localización Portugués (BR) de Thunderbird</es>
    <et>Portuguese(BR) localisation of Thunderbird</et>
    <eu>Portuguese(BR) localisation of Thunderbird</eu>
    <fa>Portuguese(BR) localisation of Thunderbird</fa>
    <fil_PH>Portuguese(BR) localisation of Thunderbird</fil_PH>
-   <fi>Portuguese(BR) localisation of Thunderbird</fi>
+   <fi>Portugalilainen (BR) Thunderbird-kotoistus</fi>
    <fr>Localisation portugaise (BR) pour Thunderbird</fr>
    <he_IL>Portuguese(BR) localisation of Thunderbird</he_IL>
-   <hi>Portuguese(BR) localisation of Thunderbird</hi>
+   <hi>थंडरबर्ड का पुर्तगाली(ब्राज़ील) संस्करण</hi>
    <hr>Portuguese(BR) localisation of Thunderbird</hr>
    <hu>Portuguese(BR) localisation of Thunderbird</hu>
    <id>Portuguese(BR) localisation of Thunderbird</id>
    <is>Portuguese(BR) localisation of Thunderbird</is>
    <it>Localizzazione portoghese(BR) di Thunderbird</it>
-   <ja_JP>Portuguese(BR) localisation of Thunderbird</ja_JP>
-   <ja>Portuguese(BR) localisation of Thunderbird</ja>
+   <ja>Thunderbird のポルトガル語 (BR) パック</ja>
    <kk>Portuguese(BR) localisation of Thunderbird</kk>
    <ko>Portuguese(BR) localisation of Thunderbird</ko>
    <lt>Portuguese(BR) localisation of Thunderbird</lt>
    <mk>Portuguese(BR) localisation of Thunderbird</mk>
    <mr>Portuguese(BR) localisation of Thunderbird</mr>
-   <nb>Portuguese(BR) localisation of Thunderbird</nb>
+   <nb>Brasiliansk portugisisk lokaltilpassing av Thunderbird</nb>
    <nl>Portugese(BR) lokalisatie van Thunderbird</nl>
    <pl>Portugalska (BR) lokalizacja Thunderbirda</pl>
-   <pt_BR>Português(BR) Localização para Thunderbird</pt_BR>
+   <pt_BR>Português (BR) Localização para o Thunderbird</pt_BR>
    <pt>Português(BR) Localização para Thunderbird</pt>
    <ro>Portuguese(BR) localisation of Thunderbird</ro>
-   <ru>Portuguese(BR) localisation of Thunderbird</ru>
+   <ru>Бразильский португальский перевод для Thunderbird</ru>
    <sk>Portuguese(BR) localisation of Thunderbird</sk>
-   <sl>Portuguese(BR) localisation of Thunderbird</sl>
-   <sq>Portuguese(BR) localisation of Thunderbird</sq>
+   <sl>Portugalske (BR) krajevne nastavitve za Thunderbird</sl>
+   <sq>Përkthimi i Thunderbird-it në portugalishte (BR)</sq>
    <sr>Portuguese(BR) localisation of Thunderbird</sr>
    <sv>PortugisisktBR) lokalisering för Thunderbird</sv>
    <tr>Thunderbird'ün Brezilya Portekizcesi yerelleştirmesi</tr>

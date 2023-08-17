@@ -18,42 +18,41 @@ Newsboat
    <cs>a text mode rss feed reader with podcast support</cs>
    <da>en teksttilstand rss-feed-læser med understøttelse af podcast</da>
    <de>Ein Textmodus-RSS-Feedreader mit Podcast-Unterstützung</de>
-   <el>μια λειτουργία ανάγνωσης ροής RSS με υποστήριξη podcast</el>
+   <el>Aνάγνωση ροής RSS με υποστήριξη podcast</el>
    <en>a text mode rss feed reader with podcast support</en>
    <es>Un lector de fuentes rss en modo texto con soporte para podcast</es>
    <et>a text mode rss feed reader with podcast support</et>
    <eu>a text mode rss feed reader with podcast support</eu>
    <fa>a text mode rss feed reader with podcast support</fa>
    <fil_PH>a text mode rss feed reader with podcast support</fil_PH>
-   <fi>a text mode rss feed reader with podcast support</fi>
+   <fi>tekstitilan rss-syötelukija podcast-tuella</fi>
    <fr>Un lecteur texte de flux rss avec support podcast</fr>
    <he_IL>a text mode rss feed reader with podcast support</he_IL>
-   <hi>a text mode rss feed reader with podcast support</hi>
+   <hi>पॉडकास्ट समर्थन युक्त टेक्स्ट मोड आरएसएस समाचार साधन</hi>
    <hr>a text mode rss feed reader with podcast support</hr>
    <hu>a text mode rss feed reader with podcast support</hu>
    <id>a text mode rss feed reader with podcast support</id>
    <is>a text mode rss feed reader with podcast support</is>
    <it>lettore di feed RSS testuale con supporto per podcast</it>
-   <ja_JP>a text mode rss feed reader with podcast support</ja_JP>
-   <ja>a text mode rss feed reader with podcast support</ja>
+   <ja>ポッドキャストをサポートしたテキストモードの RSS フィードリーダー</ja>
    <kk>a text mode rss feed reader with podcast support</kk>
    <ko>a text mode rss feed reader with podcast support</ko>
    <lt>a text mode rss feed reader with podcast support</lt>
    <mk>a text mode rss feed reader with podcast support</mk>
    <mr>a text mode rss feed reader with podcast support</mr>
-   <nb>a text mode rss feed reader with podcast support</nb>
+   <nb>RSS-nyhetsleser med podcast-støtte i terminalen</nb>
    <nl>een tekstmodus rss-feedlezer met podcast-ondersteuning</nl>
    <pl>czytnik kanałów RSS w trybie tekstowym z obsługą podcastów</pl>
-   <pt_BR>Agregador de notícias (rss feed reader) em modo de texto com capacidade de leitura de podcast</pt_BR>
+   <pt_BR>Agregador de notícias (‘rss feed reader’) em modo de texto com capacidade de leitura de ‘podcast’</pt_BR>
    <pt>Agregador de notícias (rss feed reader) em modo de texto com capacidade de leitura de podcast</pt>
    <ro>a text mode rss feed reader with podcast support</ro>
    <ru>Текстовый агрегатор новостей RSS с поддержкой подкастов</ru>
    <sk>a text mode rss feed reader with podcast support</sk>
    <sl>Tekstovni bralnik za RSS vire s podporo za podcaste</sl>
-   <sq>a text mode rss feed reader with podcast support</sq>
+   <sq>një lexues prurjesh rss, tekst, me mbulim podkastesh</sq>
    <sr>a text mode rss feed reader with podcast support</sr>
    <sv>en textläges  rss feed läsare med podcast support</sv>
-   <tr>a text mode rss feed reader with podcast support</tr>
+   <tr>podcast desteği ile metin kipinde bir rss okuyucu</tr>
    <uk>текстовий переглядач rss з підтримкою подкастів</uk>
    <vi>a text mode rss feed reader with podcast support</vi>
    <zh_CN>a text mode rss feed reader with podcast support</zh_CN>

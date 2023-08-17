@@ -4,7 +4,7 @@
     <message>
         <location filename="../mainwindow.ui" line="14"/>
         <source>Program_Name</source>
-        <translation type="unfinished"/>
+        <translation>Program_Name</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="39"/>

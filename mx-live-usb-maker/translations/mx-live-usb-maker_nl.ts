@@ -66,7 +66,7 @@
     <message>
         <location filename="../mainwindow.ui" line="224"/>
         <source>View Log</source>
-        <translation type="unfinished"></translation>
+        <translation>Logboek bekijken</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="259"/>
@@ -204,7 +204,7 @@
     <message>
         <location filename="../mainwindow.ui" line="582"/>
         <source>Full-featured mode - writable Li&amp;veUSB</source>
-        <translation type="unfinished"></translation>
+        <translation>Full-featured modus - beschrijfbare Li&amp;veUSB</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="592"/>
@@ -214,7 +214,7 @@
     <message>
         <location filename="../mainwindow.ui" line="595"/>
         <source>Image &amp;mode - read-only LiveUSB (dd)</source>
-        <translation type="unfinished"></translation>
+        <translation>Beeld &amp;modus - alleen-lezen LiveUSB (dd)</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="609"/>
@@ -297,10 +297,10 @@
         <location filename="../mainwindow.cpp" line="152"/>
         <source>Writing %1 using &apos;dd&apos; command to /dev/%2,
 
-Please wait until the the process is completed</source>
-        <translation>Schrijven van %1 met &apos;dd&apos; commando naar /dev/%2,
+Please wait until the process is completed</source>
+        <translation>%1 wordt geschreven met de opdracht &apos;dd&apos; naar /dev/%2,
 
-Wacht aub tot het proces beëindigd is</translation>
+Wacht aub tot het proces is voltooid</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="312"/>
@@ -417,7 +417,7 @@ Wacht aub tot het proces beëindigd is</translation>
     <message>
         <location filename="../mainwindow.cpp" line="581"/>
         <source>Could not find a log file at: </source>
-        <translation type="unfinished"></translation>
+        <translation>Kon geen logbestand vinden op:</translation>
     </message>
 </context>
 <context>
@@ -451,17 +451,17 @@ Wacht aub tot het proces beëindigd is</translation>
     <message>
         <location filename="../main.cpp" line="61"/>
         <source>filename</source>
-        <translation type="unfinished"></translation>
+        <translation>bestandsnaam</translation>
     </message>
     <message>
         <location filename="../main.cpp" line="61"/>
         <source>Name of .iso file to open</source>
-        <translation type="unfinished"></translation>
+        <translation>Naam van .iso bestand om te openen</translation>
     </message>
     <message>
         <location filename="../main.cpp" line="62"/>
         <source>[filename]</source>
-        <translation type="unfinished"></translation>
+        <translation>[filename]</translation>
     </message>
     <message>
         <location filename="../main.cpp" line="88"/>

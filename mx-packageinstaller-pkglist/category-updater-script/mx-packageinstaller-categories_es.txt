@@ -1,0 +1,37 @@
+Audio
+Navegador
+Niños
+Ambiente de escritorio
+Desarrollo
+Discos
+Docks
+Email
+Gestores de archivos
+FTP
+Juegos
+Gráficos
+Iconos
+Kernels
+Idioma
+LaTex
+Centro multimedia
+Convertidor de media
+Mensajería
+Misc
+Red
+Lector de noticias
+Non-Free
+Oficina
+Impresión
+Acceso remoto
+Screencast
+Salvapantallas
+Utilidades de capturas de pantallas
+Servidor
+Temas
+Torrent
+Utilidad
+Vídeo
+Papel tapiz
+Gestores de ventanas
+Virtualización

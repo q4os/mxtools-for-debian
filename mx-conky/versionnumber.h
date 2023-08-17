@@ -19,68 +19,66 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-
 #ifndef VERSIONNUMBER_H
 #define VERSIONNUMBER_H
 
-#include <QStringList>
 #include <QMetaType>
+#include <QStringList>
 
 /** \brief A data type for version numbers.
-  *
-  * This class provides a data type for version numbers. Think of it
-  * as a \e QString which provides special behavior for version
-  * numbers in the six relational operators (\<, \<=, \>, \>=, ==, !=).
-  *
-  * The behavior of the relational operators is similar to the behavior
-  * of RPM when comparing versions. "Similar" means that it is \e not
-  * \e equal! See http://rpm.org/wiki/PackagerDocs/Dependencies for a
-  * good description of the algorithm used by RPM to determinate
-  * version ordering.
-  *
-  * You can assign values of the type \e QString and even \e qint64
-  * (which will be converted to a QString) and of course of the
-  * type \e %VersionNumber itself
-  * to it. You can use the assignment operator or the constructor
-  * for initiation. The data type is made available to QMetaType and
-  * is this way available in for example QVariant. If you want to use
-  * it in in non-template based functions like \e queued signal
-  * and slot connections, do something like
-  * <tt>int id = qRegisterMetaType<VersionNumber>("VersionNumber");</tt>
-  * at the begin of your main function.
-  * This will register the type also for this use case. <tt>id</tt>
-  * will contain the type identifier used by QMetaObject. However,
-  * for most cases <tt>id</tt> isn't intresting.
-  *
-  * You can convert to a string with toString(). This function returns
-  * always exactly the string which was used to initialize this object.
-  *
-  * To compare version numbers, the QString is segmented into small
-  * parts. See http://rpm.org/wiki/PackagerDocs/Dependencies for details.
-  * The algorithm of \e %VersionNumber differs in some points from the
-  * algorithm of RPM:
-  * \li It accepts \e all strings, also with special characters.
-  * \li You can use not only "." but also "-" as often as you want. (Each
-  *     new dash separates a new part in the number.)
-  * \li You can safely use special characters. If they aren't "." or "-",
-  *     then they are treated as normal characters. The very last
-  *     segmentation (e.g. "12#rc1" to "12", "#", "rc", "1") does not only
-  *     differ between QChar::isDigit() and QChar::isLetter (like RPM does), but has
-  *     a third category for characters who are neither digit nor letter.
-  * \li The very first occurrence of ":" is treated as separator for the epoch.
-  *     Each following occurrence of ":" is treated as normal character.
-  * */
+ *
+ * This class provides a data type for version numbers. Think of it
+ * as a \e QString which provides special behavior for version
+ * numbers in the six relational operators (\<, \<=, \>, \>=, ==, !=).
+ *
+ * The behavior of the relational operators is similar to the behavior
+ * of RPM when comparing versions. "Similar" means that it is \e not
+ * \e equal! See http://rpm.org/wiki/PackagerDocs/Dependencies for a
+ * good description of the algorithm used by RPM to determinate
+ * version ordering.
+ *
+ * You can assign values of the type \e QString and even \e qint64
+ * (which will be converted to a QString) and of course of the
+ * type \e %VersionNumber itself
+ * to it. You can use the assignment operator or the constructor
+ * for initiation. The data type is made available to QMetaType and
+ * is this way available in for example QVariant. If you want to use
+ * it in in non-template based functions like \e queued signal
+ * and slot connections, do something like
+ * <tt>int id = qRegisterMetaType<VersionNumber>("VersionNumber");</tt>
+ * at the begin of your main function.
+ * This will register the type also for this use case. <tt>id</tt>
+ * will contain the type identifier used by QMetaObject. However,
+ * for most cases <tt>id</tt> isn't intresting.
+ *
+ * You can convert to a string with toString(). This function returns
+ * always exactly the string which was used to initialize this object.
+ *
+ * To compare version numbers, the QString is segmented into small
+ * parts. See http://rpm.org/wiki/PackagerDocs/Dependencies for details.
+ * The algorithm of \e %VersionNumber differs in some points from the
+ * algorithm of RPM:
+ * \li It accepts \e all strings, also with special characters.
+ * \li You can use not only "." but also "-" as often as you want. (Each
+ *     new dash separates a new part in the number.)
+ * \li You can safely use special characters. If they aren't "." or "-",
+ *     then they are treated as normal characters. The very last
+ *     segmentation (e.g. "12#rc1" to "12", "#", "rc", "1") does not only
+ *     differ between QChar::isDigit() and QChar::isLetter (like RPM does), but has
+ *     a third category for characters who are neither digit nor letter.
+ * \li The very first occurrence of ":" is treated as separator for the epoch.
+ *     Each following occurrence of ":" is treated as normal character.
+ * */
 
 class VersionNumber
 {
 
-  public:
+public:
     VersionNumber() = default;
     VersionNumber(const VersionNumber &value) = default;
-    VersionNumber(const QString &value);
-    ~VersionNumber() = default;
+    explicit VersionNumber(const QString &value);
 
-    QString toString() const;
+    [[nodiscard]] QString toString() const;
 
     VersionNumber &operator=(const VersionNumber &value) = default;
     VersionNumber &operator=(const QString &value);
@@ -92,19 +90,19 @@ class VersionNumber
     bool operator==(const VersionNumber &value) const;
     bool operator!=(const VersionNumber &value) const;
 
-  private:
-    QString str;                    // full version string
+private:
+    QString str; // full version string
     int epoch {};
-    QStringList upstream_version;   // a string list of characters, numbers are grouped together
+    QStringList upstream_version; // a string list of characters, numbers are grouped together
     QStringList debian_revision;
 
     static QStringList groupDigits(const QString &value); // add characters to separate elements, groups digits together
     void setStrings(const QString &value);
 
-    int compare(const VersionNumber &first, const VersionNumber &second) const; // 1 for >second, -1 for <second, 0 for equal
+    [[nodiscard]] int compare(const VersionNumber &first,
+                              const VersionNumber &second) const; // 1 for >second, -1 for <second, 0 for equal
     static int compare(const QStringList &first, const QStringList &second);
     static int compare(QChar first, QChar second);
-
 };
 
 Q_DECLARE_METATYPE(VersionNumber)

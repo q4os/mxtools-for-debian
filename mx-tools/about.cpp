@@ -13,7 +13,6 @@
 // display doc as nomal user when run as root
 void displayDoc(const QString &url, const QString &title)
 {
-    bool started_as_root = false;
     // prefer mx-viewer otherwise use xdg-open (use runuser to run that as logname user)
     if (QFile::exists(QStringLiteral("/usr/bin/mx-viewer"))) {
         QProcess::startDetached(QStringLiteral("mx-viewer"), {url, title});
@@ -30,8 +29,6 @@ void displayDoc(const QString &url, const QString &title)
                                                                 QStringLiteral("xdg-open"), url});
         }
     }
-    if (started_as_root)
-        qputenv("HOME", "/root");
 }
 
 void displayAboutMsgBox(const QString &title, const QString &message, const QString &licence_url,

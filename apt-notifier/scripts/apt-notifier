@@ -225,7 +225,7 @@ if [ -e /etc/mx-version ]; then
         # Alternative apt/apt-get command line package manager
         # use_nala = true
 
-        # Example section - will be ignored
+        # Example section below will be ignored
         #
         [Example]
         # comment out the section header line above to make it active

@@ -34,7 +34,6 @@ MS-VSCode
    <id>Microsoft Visual Studio Code</id>
    <is>Microsoft Visual Studio Code</is>
    <it>Microsoft Visual Studio Code</it>
-   <ja_JP>Microsoft Visual Studio Code</ja_JP>
    <ja>Microsoft Visual Studio Code</ja>
    <kk>Microsoft Visual Studio Code</kk>
    <ko>Microsoft Visual Studio Code</ko>

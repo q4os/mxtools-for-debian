@@ -1,0 +1,9 @@
+[main]
+host = https://www.transifex.com
+
+[o:anticapitalista:p:antix-development:r:mx-packageinstaller-categories]
+file_filter = ./mx-packageinstaller-categories_<lang>.txt
+source_file = mx-packageinstaller-categories_ex.txt
+source_lang = en
+type        = txt
+

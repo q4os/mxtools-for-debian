@@ -3,7 +3,7 @@
     <name>MainWindow</name>
     <message>
         <location filename="../mainwindow.ui" line="14"/>
-        <location filename="../mainwindow.cpp" line="398"/>
+        <location filename="../mainwindow.cpp" line="411"/>
         <source>MX Tools</source>
         <translation type="unfinished"/>
     </message>
@@ -43,42 +43,42 @@
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="265"/>
+        <location filename="../mainwindow.ui" line="274"/>
         <source>These MX applications save time and effort with important tasks.</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="281"/>
+        <location filename="../mainwindow.ui" line="290"/>
         <source>Hide individual tools from the menu</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="300"/>
+        <location filename="../mainwindow.ui" line="309"/>
         <source>search</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="397"/>
+        <location filename="../mainwindow.cpp" line="410"/>
         <source>About MX Tools</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="398"/>
+        <location filename="../mainwindow.cpp" line="411"/>
         <source>Version: </source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="399"/>
+        <location filename="../mainwindow.cpp" line="412"/>
         <source>Configuration Tools for MX Linux</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="402"/>
+        <location filename="../mainwindow.cpp" line="415"/>
         <source>Copyright (c) MX Linux</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="403"/>
+        <location filename="../mainwindow.cpp" line="416"/>
         <source>%1 License</source>
         <translation type="unfinished"/>
     </message>
@@ -86,23 +86,23 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../about.cpp" line="42"/>
+        <location filename="../about.cpp" line="40"/>
         <source>License</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../about.cpp" line="43"/>
-        <location filename="../about.cpp" line="53"/>
+        <location filename="../about.cpp" line="41"/>
+        <location filename="../about.cpp" line="51"/>
         <source>Changelog</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../about.cpp" line="44"/>
+        <location filename="../about.cpp" line="42"/>
         <source>Cancel</source>
         <translation>Одмінити</translation>
     </message>
     <message>
-        <location filename="../about.cpp" line="66"/>
+        <location filename="../about.cpp" line="64"/>
         <source>&amp;Close</source>
         <translation type="unfinished"/>
     </message>

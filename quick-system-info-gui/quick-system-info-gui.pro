@@ -35,7 +35,8 @@ SOURCES += main.cpp\
 
 HEADERS  += \
     about.h \
-    mainwindow.h
+    mainwindow.h \
+    version.h
 
 FORMS    += \
     mainwindow.ui
@@ -103,6 +104,9 @@ TRANSLATIONS += translations/quick-system-info-gui_af.ts \
                 translations/quick-system-info-gui_zh_HK.ts \
                 translations/quick-system-info-gui_zh_TW.ts
 
-RESOURCES +=
+RESOURCES += \
+    qsi_resource.qrc
 
+LIBS += -larchive
 
+CONFIG += release warn_on c++17

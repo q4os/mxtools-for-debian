@@ -5,7 +5,7 @@
     <name>MainWindow</name>
     <message>
         <location filename="../mainwindow.ui" line="14"/>
-        <location filename="../mainwindow.cpp" line="410"/>
+        <location filename="../mainwindow.cpp" line="411"/>
         <source>MX Tools</source>
         <translation>MX-verktøy</translation>
     </message>
@@ -60,27 +60,27 @@
         <translation>søk</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="409"/>
+        <location filename="../mainwindow.cpp" line="410"/>
         <source>About MX Tools</source>
         <translation>Om MX-verktøy</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="410"/>
+        <location filename="../mainwindow.cpp" line="411"/>
         <source>Version: </source>
         <translation>Versjon:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="411"/>
+        <location filename="../mainwindow.cpp" line="412"/>
         <source>Configuration Tools for MX Linux</source>
         <translation>Verktøy for oppsett av MX Linux</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="414"/>
+        <location filename="../mainwindow.cpp" line="415"/>
         <source>Copyright (c) MX Linux</source>
         <translation>Opphavsrett (c) MX Linux</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="415"/>
+        <location filename="../mainwindow.cpp" line="416"/>
         <source>%1 License</source>
         <translation>Lisens for %1</translation>
     </message>
@@ -88,23 +88,23 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../about.cpp" line="43"/>
+        <location filename="../about.cpp" line="40"/>
         <source>License</source>
         <translation>Lisens</translation>
     </message>
     <message>
-        <location filename="../about.cpp" line="44"/>
-        <location filename="../about.cpp" line="54"/>
+        <location filename="../about.cpp" line="41"/>
+        <location filename="../about.cpp" line="51"/>
         <source>Changelog</source>
         <translation>Endringslogg</translation>
     </message>
     <message>
-        <location filename="../about.cpp" line="45"/>
+        <location filename="../about.cpp" line="42"/>
         <source>Cancel</source>
         <translation>Avbryt</translation>
     </message>
     <message>
-        <location filename="../about.cpp" line="67"/>
+        <location filename="../about.cpp" line="64"/>
         <source>&amp;Close</source>
         <translation>&amp;Lukk</translation>
     </message>

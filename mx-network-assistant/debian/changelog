@@ -1,3 +1,16 @@
+mx-network-assistant (23.7.01) mx; urgency=medium
+
+  * Update translations
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 20 Jul 2023 16:50:52 -0400
+
+mx-network-assistant (23.7) mx; urgency=medium
+
+  * Refresh translations
+  * Update policy file
+
+ -- Adrian <adrian@mxlinux.org>  Sat, 01 Jul 2023 19:23:56 -0400
+
 mx-network-assistant (23.5) mx; urgency=medium
 
   * Update logo

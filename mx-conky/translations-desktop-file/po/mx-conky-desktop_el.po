@@ -30,5 +30,4 @@ msgstr "MX Conky"
 #. # The desktop entry comment will be shown within the menu.
 #: desktop-in/mx-conky.desktop.in:7
 msgid "Change details of desktop system monitor"
-msgstr ""
-"Αλλαγή εμφάνισης των παραμέτρων του συστήματος στην επιφάνεια εργασίας"
+msgstr "Εμφάνιση παραμέτρων του συστήματος στην επιφάνεια εργασίας"

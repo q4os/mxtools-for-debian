@@ -25,32 +25,31 @@ Japanese_Input_fcitx
    <eu>Japanese fcitx</eu>
    <fa>Japanese fcitx</fa>
    <fil_PH>Japanese fcitx</fil_PH>
-   <fi>Japanese fcitx</fi>
+   <fi>Japanilainen fcitx</fi>
    <fr>Japonais fcitx</fr>
    <he_IL>Japanese fcitx</he_IL>
-   <hi>Japanese fcitx</hi>
+   <hi>जापानी Fcitx</hi>
    <hr>Japanese fcitx</hr>
    <hu>Japanese fcitx</hu>
    <id>Japanese fcitx</id>
    <is>Japanese fcitx</is>
    <it>Fcitx per la lingua giapponese</it>
-   <ja_JP>Japanese fcitx</ja_JP>
-   <ja>Japanese fcitx</ja>
+   <ja>日本語 fcitx</ja>
    <kk>Japanese fcitx</kk>
    <ko>Japanese fcitx</ko>
    <lt>Japonų fcitx</lt>
    <mk>Japanese fcitx</mk>
    <mr>Japanese fcitx</mr>
-   <nb>Japanese fcitx</nb>
+   <nb>Japansk fcitx</nb>
    <nl>Japanse fcitx</nl>
    <pl>Japoński fcitx</pl>
-   <pt_BR>Japonês fcitx</pt_BR>
+   <pt_BR>fcitx para o idioma Japonês</pt_BR>
    <pt>Japonês fcitx</pt>
    <ro>Japanese fcitx</ro>
-   <ru>Japanese fcitx</ru>
+   <ru>Японский метод ввода fcitx</ru>
    <sk>Japanese fcitx</sk>
-   <sl>Japanese fcitx</sl>
-   <sq>Japanese fcitx</sq>
+   <sl>Japonski fcitx</sl>
+   <sq>fcitx për japonishte</sq>
    <sr>Japanese fcitx</sr>
    <sv>Japansk fcitx</sv>
    <tr>Japonca fcitx</tr>

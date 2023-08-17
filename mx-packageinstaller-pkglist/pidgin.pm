@@ -18,42 +18,41 @@ Pidgin
    <cs>an easy to use and free chat client</cs>
    <da>en letanvendelig og fri chat-klient</da>
    <de>Ein einfach zu bedienender und kostenloser Chat-Client</de>
-   <el>ένα εύκολο στη χρήση και δωρεάν πελάτη συνομιλίας</el>
+   <el>Δωρεάν και εύκολο στη χρήση πρόγραμμα συνομιλίας</el>
    <en>an easy to use and free chat client</en>
    <es>Un cliente de chat fácil de usar y gratuito.</es>
    <et>an easy to use and free chat client</et>
    <eu>an easy to use and free chat client</eu>
    <fa>an easy to use and free chat client</fa>
    <fil_PH>an easy to use and free chat client</fil_PH>
-   <fi>an easy to use and free chat client</fi>
-   <fr>Un client de discussion libre et facile d'utilisation</fr>
+   <fi>ilmainen, vapaa ja helppokäyttöinen chat-asiakasohjelma</fi>
+   <fr>Un client de discussion libre et facile d’utilisation</fr>
    <he_IL>an easy to use and free chat client</he_IL>
-   <hi>an easy to use and free chat client</hi>
+   <hi>उपयोग में सरल व निःशुल्क चैट साधन</hi>
    <hr>an easy to use and free chat client</hr>
    <hu>an easy to use and free chat client</hu>
    <id>an easy to use and free chat client</id>
    <is>an easy to use and free chat client</is>
    <it>client chat libero e di facile uso</it>
-   <ja_JP>an easy to use and free chat client</ja_JP>
-   <ja>an easy to use and free chat client</ja>
+   <ja>使い易い無料のチャットクライアント</ja>
    <kk>an easy to use and free chat client</kk>
    <ko>an easy to use and free chat client</ko>
    <lt>an easy to use and free chat client</lt>
    <mk>an easy to use and free chat client</mk>
    <mr>an easy to use and free chat client</mr>
-   <nb>an easy to use and free chat client</nb>
+   <nb>enkelt lynmeldingsprogram</nb>
    <nl>een gebruiksvriendelijk en gratis chatprogramma</nl>
    <pl>łatwy w użyciu i darmowy klient czatu</pl>
-   <pt_BR>Cliente de 'chat' livre e fácil de usar</pt_BR>
+   <pt_BR>Cliente de bate-papo (chat) livre e fácil de usar</pt_BR>
    <pt>Cliente de 'chat' livre e fácil de usar</pt>
    <ro>an easy to use and free chat client</ro>
    <ru>Простой в использовании многопротокольный клиент мгновенных сообщений</ru>
    <sk>an easy to use and free chat client</sk>
    <sl>Brezplačen in enostaven odjemalec za klepet</sl>
-   <sq>an easy to use and free chat client</sq>
+   <sq>një klient fjalosjesh, i lirë dhe i lehtë për t’u përdorur</sq>
    <sr>an easy to use and free chat client</sr>
    <sv>en lättanvänd och fri chattklient</sv>
-   <tr>an easy to use and free chat client</tr>
+   <tr>kullanımı kolay ve ücretsiz bir söyleşi istemcisi</tr>
    <uk>легкий у користуванні та вільний чат клієнт</uk>
    <vi>an easy to use and free chat client</vi>
    <zh_CN>an easy to use and free chat client</zh_CN>

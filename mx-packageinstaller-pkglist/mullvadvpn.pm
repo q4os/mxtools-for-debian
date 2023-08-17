@@ -18,30 +18,29 @@ Mullvad VPN
    <cs>Mullvad VPN and sysVinit scripts</cs>
    <da>Mullvad VPN and sysVinit scripts</da>
    <de>Mullvad VPN und sysVinit Scripte</de>
-   <el>σενάρια του Mullvad VPN και sysVinit</el>
+   <el>Σενάρια του Mullvad VPN και sysVinit</el>
    <en>Mullvad VPN and sysVinit scripts</en>
    <es>Mullvad VPN y scripts sysVinit</es>
    <et>Mullvad VPN and sysVinit scripts</et>
    <eu>Mullvad VPN and sysVinit scripts</eu>
    <fa>Mullvad VPN and sysVinit scripts</fa>
    <fil_PH>Mullvad VPN and sysVinit scripts</fil_PH>
-   <fi>Mullvad VPN and sysVinit scripts</fi>
+   <fi>Mullvad VPN ja sysVinit script-ohjelmakoodisyötteet</fi>
    <fr>Scripts pour Mullvad VPN et sysVinit</fr>
    <he_IL>Mullvad VPN and sysVinit scripts</he_IL>
-   <hi>Mullvad VPN and sysVinit scripts</hi>
+   <hi>Mullvad वीपीएन व sysVinit स्क्रिप्ट</hi>
    <hr>Mullvad VPN and sysVinit scripts</hr>
    <hu>Mullvad VPN and sysVinit scripts</hu>
    <id>Mullvad VPN and sysVinit scripts</id>
    <is>Mullvad VPN and sysVinit scripts</is>
    <it>Mullvad VPN e script sysVinit</it>
-   <ja_JP>Mullvad VPN and sysVinit scripts</ja_JP>
-   <ja>Mullvad VPN and sysVinit scripts</ja>
+   <ja>Mullvad VPN と sysVinit スクリプト</ja>
    <kk>Mullvad VPN and sysVinit scripts</kk>
    <ko>Mullvad VPN and sysVinit scripts</ko>
    <lt>Mullvad VPN and sysVinit scripts</lt>
    <mk>Mullvad VPN and sysVinit scripts</mk>
    <mr>Mullvad VPN and sysVinit scripts</mr>
-   <nb>Mullvad VPN and sysVinit scripts</nb>
+   <nb>Mullvad VPN- og sysVinit-skript</nb>
    <nl>Mullvad VPN en sysVinit scripts</nl>
    <pl>Mullvad VPN and sysVinit scripts</pl>
    <pt_BR>Scripts para sysVinit e Mullvad VPN</pt_BR>
@@ -50,10 +49,10 @@ Mullvad VPN
    <ru>VPN и SysVinit - скрипты от Mullvad</ru>
    <sk>Mullvad VPN and sysVinit scripts</sk>
    <sl>Mullvad VPN in syVinit skripte</sl>
-   <sq>Mullvad VPN and sysVinit scripts</sq>
+   <sq>programthe për Mullvad VPN dhe sysVinit</sq>
    <sr>Mullvad VPN and sysVinit scripts</sr>
    <sv>Mullvad VPN och sysVinit skript</sv>
-   <tr>Mullvad VPN and sysVinit scripts</tr>
+   <tr>Mullvad VPN ve sysVinit betikleri</tr>
    <uk>Mullvad VPN and sysVinit scripts</uk>
    <vi>Mullvad VPN and sysVinit scripts</vi>
    <zh_CN>Mullvad VPN and sysVinit scripts</zh_CN>

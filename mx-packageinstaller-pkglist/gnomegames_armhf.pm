@@ -34,7 +34,6 @@ Simple Card Games
    <id>Simple Desktop Card and Puzzle Games (solitare, mines, etc)</id>
    <is>Simple Desktop Card and Puzzle Games (solitare, mines, etc)</is>
    <it>Semplici giochi di carte e puzzles (solitario mine, ecc.)</it>
-   <ja_JP>Simple Desktop Card and Puzzle Games (solitare, mines, etc)</ja_JP>
    <ja>Simple Desktop Card and Puzzle Games (solitare, mines, etc)</ja>
    <kk>Simple Desktop Card and Puzzle Games (solitare, mines, etc)</kk>
    <ko>Simple Desktop Card and Puzzle Games (solitare, mines, etc)</ko>

@@ -1,3 +1,9 @@
+mx-apps-kde (23.07.01mx23) mx; urgency=medium
+
+  * remove mx-codecs from default installation
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 05 Mar 2023 21:20:56 -0500
+
 mx-apps-kde (23.01.01) mx; urgency=medium
 
   * remove mx-menu-editor for postinstall script

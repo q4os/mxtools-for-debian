@@ -5,7 +5,7 @@
 # 
 # Translators:
 # James Bowlin <BitJam@gmail.com>, 2017
-# Panwar108 <caspian7pena@gmail.com>, 2018
+# Panwar108 <caspian7pena@gmail.com>, 2020
 # 
 #, fuzzy
 msgid ""
@@ -14,7 +14,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-12-02 11:04-0500\n"
 "PO-Revision-Date: 2017-12-02 16:14+0000\n"
-"Last-Translator: Panwar108 <caspian7pena@gmail.com>, 2018\n"
+"Last-Translator: Panwar108 <caspian7pena@gmail.com>, 2020\n"
 "Language-Team: Hindi (https://www.transifex.com/anticapitalista/teams/10162/hi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -38,7 +38,7 @@ msgstr ""
 
 #: idevice-mounter:100
 msgid "Copyright (c) MX Linux"
-msgstr "प्रतिलिप्याधिकार (c) MX Linux"
+msgstr "कॉपीराइट (c) एमएक्स लिनक्स"
 
 #: idevice-mounter:128
 msgid "Mount"

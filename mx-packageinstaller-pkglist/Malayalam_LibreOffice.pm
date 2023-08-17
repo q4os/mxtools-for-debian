@@ -25,35 +25,34 @@ Malayalam_Libreoffice
    <eu>Malayalam Language Meta-Package for LibreOffice</eu>
    <fa>Malayalam Language Meta-Package for LibreOffice</fa>
    <fil_PH>Malayalam Language Meta-Package for LibreOffice</fil_PH>
-   <fi>Malayalam Language Meta-Package for LibreOffice</fi>
-   <fr>Malayalam Language Meta-Package for LibreOffice</fr>
+   <fi> Malajalamkielinen kielipaketti LibreOffice:lle</fi>
+   <fr>Méta-Paquet en langue malayalam pour LibreOffice</fr>
    <he_IL>Malayalam Language Meta-Package for LibreOffice</he_IL>
-   <hi>Malayalam Language Meta-Package for LibreOffice</hi>
+   <hi>लिब्रे-ऑफिस हेतु मलयालम भाषा मेटा-पैकेज</hi>
    <hr>Malayalam Language Meta-Package for LibreOffice</hr>
    <hu>Malayalam Language Meta-Package for LibreOffice</hu>
    <id>Malayalam Language Meta-Package for LibreOffice</id>
    <is>Malayalam Language Meta-Package for LibreOffice</is>
-   <it>Malayalam Language Meta-Package for LibreOffice</it>
-   <ja_JP>Malayalam Language Meta-Package for LibreOffice</ja_JP>
-   <ja>Malayalam Language Meta-Package for LibreOffice</ja>
+   <it>Meta-pacchetto della lingua malayalam per LibreOffice</it>
+   <ja>LibreOffice 用のマレーシア語メタパッケージ</ja>
    <kk>Malayalam Language Meta-Package for LibreOffice</kk>
    <ko>Malayalam Language Meta-Package for LibreOffice</ko>
    <lt>Malayalam Language Meta-Package for LibreOffice</lt>
    <mk>Malayalam Language Meta-Package for LibreOffice</mk>
    <mr>Malayalam Language Meta-Package for LibreOffice</mr>
-   <nb>Malayalam Language Meta-Package for LibreOffice</nb>
+   <nb>Malayalam språkpakke for LibreOffice</nb>
    <nl>Malayalam Taal Meta-Pakket voor LibreOffice</nl>
-   <pl>Malayalam Language Meta-Package for LibreOffice</pl>
-   <pt_BR>Malayalam Language Meta-Package for LibreOffice</pt_BR>
+   <pl>Meta-pakiet języka malajalam dla LibreOffice</pl>
+   <pt_BR>Malaiala Pacote de Idioma para o LibreOffice</pt_BR>
    <pt>Malaio Meta-Pacote de Idioma para LibreOffice</pt>
    <ro>Malayalam Language Meta-Package for LibreOffice</ro>
-   <ru>Malayalam Language Meta-Package for LibreOffice</ru>
+   <ru>Мета-пакет малаяльского языка для LibreOffice</ru>
    <sk>Malayalam Language Meta-Package for LibreOffice</sk>
    <sl>Malajlamski jezikovni meta-paket za LibreOffice</sl>
-   <sq>Malayalam Language Meta-Package for LibreOffice</sq>
+   <sq>Meta-Paketë gjuhësore në malajalamase për LibreOffice-in</sq>
    <sr>Malayalam Language Meta-Package for LibreOffice</sr>
    <sv>Malayalam Språk Meta-Paket för LibreOffice</sv>
-   <tr>Malayalam Language Meta-Package for LibreOffice</tr>
+   <tr>LibreOffice için Malayalam Dili Üst-Paketi</tr>
    <uk>Malayalam Language Meta-Package for LibreOffice</uk>
    <vi>Malayalam Language Meta-Package for LibreOffice</vi>
    <zh_CN>Malayalam Language Meta-Package for LibreOffice</zh_CN>

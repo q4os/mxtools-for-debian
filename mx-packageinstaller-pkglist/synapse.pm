@@ -18,42 +18,41 @@ Synapse
    <cs>alternate semantic file launcher</cs>
    <da>alternativ skematisk filstarter</da>
    <de>Alternativer semantischer Datei-Starter</de>
-   <el>εναλλακτική σημασιολογική εκκίνηση αρχείων</el>
+   <el>Εναλλακτική σημασιολογική εκκίνηση αρχείων</el>
    <en>alternate semantic file launcher</en>
    <es>Lanzador de archivos semántico</es>
    <et>alternate semantic file launcher</et>
    <eu>alternate semantic file launcher</eu>
    <fa>alternate semantic file launcher</fa>
    <fil_PH>alternate semantic file launcher</fil_PH>
-   <fi>alternate semantic file launcher</fi>
-   <fr>Lanceur sémantique d'application</fr>
+   <fi>vaihtoehtoinen merkitysopillinen tiedostokäynnistin</fi>
+   <fr>Lanceur sémantique d’application</fr>
    <he_IL>alternate semantic file launcher</he_IL>
-   <hi>alternate semantic file launcher</hi>
+   <hi>वैकल्पिक अर्थ-संबंधी फाइल आरंभ साधन</hi>
    <hr>alternate semantic file launcher</hr>
    <hu>alternate semantic file launcher</hu>
    <id>alternate semantic file launcher</id>
    <is>alternate semantic file launcher</is>
-   <it>avviatore semantico per avviare applicazioni e accedere a file rilevanti</it>
-   <ja_JP>alternate semantic file launcher</ja_JP>
-   <ja>alternate semantic file launcher</ja>
+   <it>avviatore semantico per avviare applicazioni e accedere a file rilevanti </it>
+   <ja>代替セマンティック ファイルランチャー</ja>
    <kk>alternate semantic file launcher</kk>
    <ko>alternate semantic file launcher</ko>
    <lt>alternate semantic file launcher</lt>
    <mk>alternate semantic file launcher</mk>
    <mr>alternate semantic file launcher</mr>
-   <nb>alternate semantic file launcher</nb>
+   <nb>semantisk filstarter</nb>
    <nl>alternatieve semantische bestandsopstarter</nl>
    <pl>alternatywny program uruchamiający pliki semantyczne</pl>
-   <pt_BR>Lançador de arquivos semântico</pt_BR>
+   <pt_BR>Pesquisador rápido de aplicativos, arquivos e informações</pt_BR>
    <pt>Lançador de ficheiros semântico</pt>
    <ro>alternate semantic file launcher</ro>
    <ru>Приложение для продвинутого поиска и запуска файлов</ru>
    <sk>alternate semantic file launcher</sk>
    <sl>alternativni semantični zaganjalec datotek</sl>
-   <sq>alternate semantic file launcher</sq>
+   <sq>nisës semantik, alternativ, kartelash</sq>
    <sr>alternate semantic file launcher</sr>
    <sv>alternativ semantisk filstartare</sv>
-   <tr>alternate semantic file launcher</tr>
+   <tr>başka bir anlamsal dosya başlatıcı</tr>
    <uk>alternate semantic file launcher</uk>
    <vi>alternate semantic file launcher</vi>
    <zh_CN>alternate semantic file launcher</zh_CN>

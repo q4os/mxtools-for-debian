@@ -25,35 +25,34 @@ French
    <eu>French Language Meta-Package</eu>
    <fa>French Language Meta-Package</fa>
    <fil_PH>French Language Meta-Package</fil_PH>
-   <fi>French Language Meta-Package</fi>
+   <fi>Ranskankielinen metatieto-paketti</fi>
    <fr>Méta-paquet pour langue française</fr>
    <he_IL>French Language Meta-Package</he_IL>
-   <hi>French Language Meta-Package</hi>
+   <hi>फ्रेंच भाषा मेटा-पैकेज</hi>
    <hr>French Language Meta-Package</hr>
    <hu>French Language Meta-Package</hu>
    <id>French Language Meta-Package</id>
    <is>French Language Meta-Package</is>
    <it>Meta-pacchetto della lingua francese</it>
-   <ja_JP>French Language Meta-Package</ja_JP>
-   <ja>French Language Meta-Package</ja>
+   <ja>フランス語 メタパッケージ</ja>
    <kk>French Language Meta-Package</kk>
    <ko>French Language Meta-Package</ko>
    <lt>French Language Meta-Package</lt>
    <mk>French Language Meta-Package</mk>
    <mr>French Language Meta-Package</mr>
-   <nb>French Language Meta-Package</nb>
+   <nb>Fransk språkpakke</nb>
    <nl>Franse Taal Meta-Pakket</nl>
    <pl>Francuski metapakiet językowy</pl>
-   <pt_BR>Francês Meta-Pacote de Idioma</pt_BR>
+   <pt_BR>Francês Pacote de Idioma</pt_BR>
    <pt>Francês Meta-Pacote de Idioma</pt>
    <ro>French Language Meta-Package</ro>
-   <ru>French Language Meta-Package</ru>
+   <ru>Мета-пакет французского языка</ru>
    <sk>French Language Meta-Package</sk>
-   <sl>French Language Meta-Package</sl>
-   <sq>French Language Meta-Package</sq>
+   <sl>Fancoski jezikovni meta-paket</sl>
+   <sq>Meta-Paketë gjuhësore në frëngjisht</sq>
    <sr>French Language Meta-Package</sr>
    <sv>Franskt Språk Meta-Paket</sv>
-   <tr>French Language Meta-Package</tr>
+   <tr>Fransızca Dili Üst-Paketi</tr>
    <uk>French Language Meta-Package</uk>
    <vi>French Language Meta-Package</vi>
    <zh_CN>French Language Meta-Package</zh_CN>

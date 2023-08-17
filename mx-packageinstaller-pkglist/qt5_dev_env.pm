@@ -28,32 +28,31 @@ QT5 Dev Enviroment
    <fi>QT5 kehitysympäristö</fi>
    <fr>Environnement de développement QT5</fr>
    <he_IL>QT5 Development Environment</he_IL>
-   <hi>QT5 Development Environment</hi>
+   <hi>क्यूटी5 सॉफ्टवेयर विकास वातावरण</hi>
    <hr>QT5 Development Environment</hr>
    <hu>QT5 Development Environment</hu>
    <id>QT5 Development Environment</id>
    <is>QT5 Development Environment</is>
    <it>Ambiente di sviluppo QT5</it>
-   <ja_JP>QT5 Development Environment</ja_JP>
-   <ja>QT5 Development Environment</ja>
+   <ja>QT5 開発環境</ja>
    <kk>QT5 Development Environment</kk>
    <ko>QT5 Development Environment</ko>
    <lt>QT5 plėtojimo aplinka</lt>
    <mk>QT5 Development Environment</mk>
    <mr>QT5 Development Environment</mr>
-   <nb>QT5 Development Environment</nb>
+   <nb>Utviklingsmiljø for Qt 5</nb>
    <nl>QT5 Ontwikkelingsomgeving</nl>
    <pl>środowisko programistyczne QT5</pl>
-   <pt_BR>QT5 Development Environment</pt_BR>
+   <pt_BR>Ambiente de Desenvolvimento QT5</pt_BR>
    <pt>QT5 Development Environment</pt>
    <ro>QT5 Development Environment</ro>
    <ru>Среда разработки под QT-5</ru>
    <sk>QT5 Development Environment</sk>
    <sl>QT5 razvojno okolje</sl>
-   <sq>QT5 Development Environment</sq>
+   <sq>Mjedisi QT5 i Zhvillimit</sq>
    <sr>QT5 Development Environment</sr>
    <sv>QT5 Utvecklingsmiljö</sv>
-   <tr>QT5 Development Environment</tr>
+   <tr>QT5 Geliştirme Ortamı</tr>
    <uk>QT5 Development Environment</uk>
    <vi>QT5 Development Environment</vi>
    <zh_CN>QT5 Development Environment</zh_CN>

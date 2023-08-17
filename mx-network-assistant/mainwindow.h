@@ -35,8 +35,8 @@ class MainWindow : public QDialog, public Ui::MainWindow
 {
     Q_OBJECT
 public:
-    MainWindow(QWidget* parent = nullptr);
-    ~MainWindow() = default;
+    explicit MainWindow(QWidget* parent = nullptr);
+    ~MainWindow() override = default;
 
     QString getIP();
     QString getIPfromRouter();

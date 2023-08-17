@@ -34,21 +34,21 @@
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
-    app.setWindowIcon(QIcon::fromTheme(app.applicationName()));
+    QApplication::setWindowIcon(QIcon::fromTheme(QApplication::applicationName()));
 
     QTranslator qtTran;
     if (qtTran.load(QLocale::system(), QStringLiteral("qt"), QStringLiteral("_"),
                     QLibraryInfo::location(QLibraryInfo::TranslationsPath)))
-        app.installTranslator(&qtTran);
+        QApplication::installTranslator(&qtTran);
 
     QTranslator qtBaseTran;
     if (qtBaseTran.load("qtbase_" + QLocale::system().name(), QLibraryInfo::location(QLibraryInfo::TranslationsPath)))
-        app.installTranslator(&qtBaseTran);
+        QApplication::installTranslator(&qtBaseTran);
 
     QTranslator appTran;
-    if (appTran.load(app.applicationName() + "_" + QLocale::system().name(),
-                     "/usr/share/" + app.applicationName() + "/locale"))
-        app.installTranslator(&appTran);
+    if (appTran.load(QApplication::applicationName() + "_" + QLocale::system().name(),
+                     "/usr/share/" + QApplication::applicationName() + "/locale"))
+        QApplication::installTranslator(&appTran);
 
     MainWindow w;
     if (w.listCards().empty()) {
@@ -56,6 +56,6 @@ int main(int argc, char *argv[])
     } else {
         w.show();
         w.getDefault();
-        return app.exec();
+        return QApplication::exec();
     }
 }

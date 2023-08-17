@@ -1,0 +1,37 @@
+Audio
+Browser
+Children
+Desktop Environments
+Desvolopament
+Disks
+Docks
+Email
+File Managers
+FTP
+Jòcs
+Infografia
+Icons
+Kernels
+Language
+LaTex
+Media Center
+Media Converter
+Messaging
+Misc
+Network
+Newsreader
+Non-Free
+Burèu
+Printing
+Remote Access
+Screencast
+Screensaver
+Screenshot Utilities
+Server
+Themes
+Torrent
+Utility
+Video
+Wallpapers
+Window Managers
+Virtualization

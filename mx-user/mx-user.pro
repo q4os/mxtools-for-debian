@@ -11,12 +11,13 @@ TEMPLATE = app
 TARGET = mx-user
 
 TRANSLATIONS += translations/mx-user_af.ts \
+                translations/mx-user_af.ts \
                 translations/mx-user_am.ts \
                 translations/mx-user_ar.ts \
+                translations/mx-user_ast.ts \
                 translations/mx-user_be.ts \
                 translations/mx-user_bg.ts \
                 translations/mx-user_bn.ts \
-                translations/mx-user_bs_BA.ts \
                 translations/mx-user_bs.ts \
                 translations/mx-user_ca.ts \
                 translations/mx-user_ceb.ts \
@@ -35,12 +36,10 @@ TRANSLATIONS += translations/mx-user_af.ts \
                 translations/mx-user_et.ts \
                 translations/mx-user_eu.ts \
                 translations/mx-user_fa.ts \
-                translations/mx-user_fi_FI.ts \
                 translations/mx-user_fil_PH.ts \
                 translations/mx-user_fil.ts \
                 translations/mx-user_fi.ts \
                 translations/mx-user_fr_BE.ts \
-                translations/mx-user_fr_FR.ts \
                 translations/mx-user_fr.ts \
                 translations/mx-user_fy.ts \
                 translations/mx-user_ga.ts \
@@ -56,12 +55,15 @@ TRANSLATIONS += translations/mx-user_af.ts \
                 translations/mx-user_hr.ts \
                 translations/mx-user_ht.ts \
                 translations/mx-user_hu.ts \
+                translations/mx-user_hye.ts \
                 translations/mx-user_hy.ts \
                 translations/mx-user_id.ts \
+                translations/mx-user_ie.ts \
                 translations/mx-user_is.ts \
                 translations/mx-user_it.ts \
                 translations/mx-user_ja.ts \
                 translations/mx-user_jv.ts \
+                translations/mx-user_kab.ts \
                 translations/mx-user_ka.ts \
                 translations/mx-user_kk.ts \
                 translations/mx-user_km.ts \
@@ -87,7 +89,9 @@ TRANSLATIONS += translations/mx-user_af.ts \
                 translations/mx-user_ne.ts \
                 translations/mx-user_nl_BE.ts \
                 translations/mx-user_nl.ts \
+                translations/mx-user_nn.ts \
                 translations/mx-user_ny.ts \
+                translations/mx-user_oc.ts \
                 translations/mx-user_or.ts \
                 translations/mx-user_pa.ts \
                 translations/mx-user_pl.ts \
@@ -96,7 +100,6 @@ TRANSLATIONS += translations/mx-user_af.ts \
                 translations/mx-user_pt.ts \
                 translations/mx-user_ro.ts \
                 translations/mx-user_rue.ts \
-                translations/mx-user_ru_RU.ts \
                 translations/mx-user_ru.ts \
                 translations/mx-user_rw.ts \
                 translations/mx-user_sd.ts \
@@ -136,14 +139,16 @@ FORMS += \
     mainwindow.ui
 HEADERS += \
     mainwindow.h \
+    passedit.h \
     version.h \
     cmd.h \
     about.h
 SOURCES += main.cpp \
     mainwindow.cpp \
     cmd.cpp \
-    about.cpp
-LIBS += -lcrypt
+    about.cpp \
+    passedit.cpp
+LIBS += -lcrypt -lzxcvbn
 CONFIG += release warn_on thread qt
 
 RESOURCES += \

@@ -18,30 +18,29 @@ Syncthing
    <cs>Syncthing file sync utility</cs>
    <da>Syncthing file sync utility</da>
    <de>Syncthing Dateisynchronisationsprogramm</de>
-   <el>Συγχρονισμός χρησιμότητας συγχρονισμού αρχείων</el>
+   <el>Χρήσιμο για το συγχρονισμό αρχείων</el>
    <en>Syncthing file sync utility</en>
    <es>Utilidad de sincronización de archivos de sincronización</es>
    <et>Syncthing file sync utility</et>
    <eu>Syncthing file sync utility</eu>
    <fa>Syncthing file sync utility</fa>
    <fil_PH>Syncthing file sync utility</fil_PH>
-   <fi>Syncthing file sync utility</fi>
+   <fi>Syncthing tiedostosynkronointityökalu</fi>
    <fr>Utilitaire de synchronisation de fichier Syncthing</fr>
    <he_IL>Syncthing file sync utility</he_IL>
-   <hi>Syncthing file sync utility</hi>
+   <hi>Syncthing फाइल समकालीन साधन</hi>
    <hr>Syncthing file sync utility</hr>
    <hu>Syncthing file sync utility</hu>
    <id>Syncthing file sync utility</id>
    <is>Syncthing file sync utility</is>
    <it>Syncthing applicazione di sincronizzazione di file</it>
-   <ja_JP>Syncthing file sync utility</ja_JP>
-   <ja>Syncthing file sync utility</ja>
+   <ja>Syncthing ファイル同期ユーティリティ</ja>
    <kk>Syncthing file sync utility</kk>
    <ko>Syncthing file sync utility</ko>
    <lt>Syncthing file sync utility</lt>
    <mk>Syncthing file sync utility</mk>
    <mr>Syncthing file sync utility</mr>
-   <nb>Syncthing file sync utility</nb>
+   <nb>Syncthing filsynkroniseringsverktøy</nb>
    <nl>Syncthing file synchronisatie hulpprogramma</nl>
    <pl>Syncthing file sync utility</pl>
    <pt_BR>Utilitário de sincronização de arquivos</pt_BR>
@@ -50,10 +49,10 @@ Syncthing
    <ru>Syncthing - приложение распределенной синхронизации файлов</ru>
    <sk>Syncthing file sync utility</sk>
    <sl>Syncthing orodje za sinhronizacijo datotek</sl>
-   <sq>Syncthing file sync utility</sq>
+   <sq>Mjeti Syncthing për njëkohësim kartelash</sq>
    <sr>Syncthing file sync utility</sr>
-   <sv>Syncthing filsynkroniserings-redskap</sv>
-   <tr>Syncthing file sync utility</tr>
+   <sv>Syncthing filsynkroniserings-redskap </sv>
+   <tr>Syncthing dosya eşzamanlama uygulaması</tr>
    <uk>Syncthing file sync utility</uk>
    <vi>Syncthing file sync utility</vi>
    <zh_CN>Syncthing file sync utility</zh_CN>
@@ -67,7 +66,7 @@ all
 <screenshot>none</screenshot>
 
 <preinstall>
-curl -s https://syncthing.net/release-key.txt | apt-key add -
+curl -s https://syncthing.net/release-key.txt |tee /etc/apt/trusted.gpg.d/syncthing.asc
 echo "deb https://apt.syncthing.net/ syncthing stable">/etc/apt/sources.list.d/syncthing.list
 apt-get update
 </preinstall>

@@ -6,10 +6,10 @@
 # Translators:
 # anticapitalista <anticapitalista@riseup.net>, 2022
 # Geoff Gigg <geoffgigg@hotmail.com>, 2022
-# el Presidento, 2022
 # joyinko <joyinko@azet.sk>, 2022
 # Dolphin Oracle <dolphinoracle@gmail.com>, 2022
 # fehlix, 2022
+# el Presidento, 2023
 # 
 #, fuzzy
 msgid ""
@@ -18,8 +18,8 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-01-28 02:38+0100\n"
 "PO-Revision-Date: 2017-05-11 01:14+0000\n"
-"Last-Translator: fehlix, 2022\n"
-"Language-Team: Czech (https://www.transifex.com/anticapitalista/teams/10162/cs/)\n"
+"Last-Translator: el Presidento, 2023\n"
+"Language-Team: Czech (https://app.transifex.com/anticapitalista/teams/10162/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -192,7 +192,7 @@ msgid "Using full upgrade"
 msgstr "Použití úplné aktualizace"
 
 msgid "View and Upgrade"
-msgstr "Prohlížet a Aktualizovat"
+msgstr "Zobrazit a aktualizovat"
 
 msgid "You have $count new updates available"
 msgstr "Je k dispozici $count nových aktualizací"

@@ -1,3 +1,38 @@
+mx-conky-data (20230701) mx; urgency=medium
+
+  * updated fluxbox keys conky 
+  * change update colors in geektower
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 08 Jul 2023 23:59:27 -0400
+
+mx-conky-data (20230627) mx; urgency=medium
+
+  [ Jerry ]
+  * removed extra character in separator
+  * added alt q to screen grab
+  * added screen magnifier
+
+  [ Dolphin Oracle ]
+  * new build
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Tue, 27 Jun 2023 16:16:27 -0400
+
+mx-conky-data (20230626) mx; urgency=medium
+
+  * Non-maintainer upload.
+  * add compact date-time by user Ceeslans 
+  * add MX-Comfort-Sysinfo_noswaptemp
+  * ready for RC packaging
+
+ -- Jerry <jb@mx>  Mon, 26 Jun 2023 16:10:58 -0400
+
+mx-conky-data (20230601+nmu1) UNRELEASED; urgency=medium
+
+  * Non-maintainer upload.
+  * add midblue cowon variant
+
+ -- Jerry <jb@mx>  Mon, 21 Jun 2023 08:07:51 -0400
+
 mx-conky-data (20230501) mx; urgency=medium
 
   * new mx-comfort conky themes

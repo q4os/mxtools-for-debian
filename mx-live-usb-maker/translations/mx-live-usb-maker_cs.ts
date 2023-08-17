@@ -204,7 +204,7 @@
     <message>
         <location filename="../mainwindow.ui" line="582"/>
         <source>Full-featured mode - writable Li&amp;veUSB</source>
-        <translation>Full-featured mode - zapisovatelné Li&amp;veUSB</translation>
+        <translation>Plnohodnotný režim - zapisovatelné Li&amp;veUSB</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="592"/>
@@ -214,12 +214,12 @@
     <message>
         <location filename="../mainwindow.ui" line="595"/>
         <source>Image &amp;mode - read-only LiveUSB (dd)</source>
-        <translation>Image &amp;mode - read-only LiveUSB (dd)</translation>
+        <translation>Reži&amp;m obrazu - LiveUSB (dd) pouze pro čtení</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="609"/>
         <source>For distros other than antiX/MX use image mode (dd).</source>
-        <translation>Pro ostatní distra, ne antiX/MX použijte Mód Image (dd).</translation>
+        <translation>Pro jiné distribuce než antiX/MX použijte Režim obrazu (dd).</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="657"/>
@@ -297,10 +297,8 @@
         <location filename="../mainwindow.cpp" line="152"/>
         <source>Writing %1 using &apos;dd&apos; command to /dev/%2,
 
-Please wait until the the process is completed</source>
-        <translation>Zápis %1 s použitím příkazu &apos;dd&apos; na /dev/%2,
-
-Čekejte až bude proces dokončen</translation>
+Please wait until the process is completed</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="312"/>

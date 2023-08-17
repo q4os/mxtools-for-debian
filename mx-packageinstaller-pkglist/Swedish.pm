@@ -25,35 +25,34 @@ Swedish
    <eu>Swedish Language Meta-Package</eu>
    <fa>Swedish Language Meta-Package</fa>
    <fil_PH>Swedish Language Meta-Package</fil_PH>
-   <fi>Swedish Language Meta-Package</fi>
+   <fi>Ruotsinkielinen metatieto-paketti</fi>
    <fr>Méta-paquet langue pour suédoise</fr>
    <he_IL>Swedish Language Meta-Package</he_IL>
-   <hi>Swedish Language Meta-Package</hi>
+   <hi>स्वीडिश भाषा मेटा-पैकेज</hi>
    <hr>Swedish Language Meta-Package</hr>
    <hu>Swedish Language Meta-Package</hu>
    <id>Swedish Language Meta-Package</id>
    <is>Swedish Language Meta-Package</is>
    <it>Meta-pacchetto della lingua svedese</it>
-   <ja_JP>Swedish Language Meta-Package</ja_JP>
-   <ja>Swedish Language Meta-Package</ja>
+   <ja>スウェーデン語 メタパッケージ</ja>
    <kk>Swedish Language Meta-Package</kk>
    <ko>Swedish Language Meta-Package</ko>
    <lt>Swedish Language Meta-Package</lt>
    <mk>Swedish Language Meta-Package</mk>
    <mr>Swedish Language Meta-Package</mr>
-   <nb>Swedish Language Meta-Package</nb>
+   <nb>Svensk språkpakke</nb>
    <nl>Zweedse Taal Meta-Pakket</nl>
    <pl>Szwedzki metapakiet językowy</pl>
    <pt_BR>Sueco Meta-Pacote de Idioma</pt_BR>
    <pt>Sueco Meta-Pacote de Idioma</pt>
    <ro>Swedish Language Meta-Package</ro>
-   <ru>Swedish Language Meta-Package</ru>
+   <ru>Мета-пакет шведского языка</ru>
    <sk>Swedish Language Meta-Package</sk>
-   <sl>Swedish Language Meta-Package</sl>
-   <sq>Swedish Language Meta-Package</sq>
+   <sl>Švedski jezikovni meta-paket</sl>
+   <sq>Meta-Paketë gjuhësore në suedisht</sq>
    <sr>Swedish Language Meta-Package</sr>
    <sv>Svenskt Språk-Meta-Paket</sv>
-   <tr>Swedish Language Meta-Package</tr>
+   <tr>İsveççe Dili Üst-Paketi</tr>
    <uk>Swedish Language Meta-Package</uk>
    <vi>Swedish Language Meta-Package</vi>
    <zh_CN>Swedish Language Meta-Package</zh_CN>

@@ -6,7 +6,7 @@
  * Authors: Dolphin Oracle, AK-47, Adrian
  *          MX Linux <http://mxlinux.org>
  *
- * This file is part of mx-welcome.
+ * This file is part of Quick System Info.
  *
  * mx-welcome is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -26,62 +26,60 @@
 #define MAINWINDOW_H
 
 #include <QCommandLineParser>
-#include <QMenu>
-#include <QMessageBox>
-#include <QPoint>
-#include <QProcess>
-#include <QSettings>
+#include <QDialog>
+#include <QAction>
+#include <QEvent>
+#include <QTextDocument>
 
 namespace Ui
 {
 class MainWindow;
 }
 
-struct Result {
-    int exitCode;
-    QString output;
-};
-
 class MainWindow : public QDialog
 {
     Q_OBJECT
-
-protected:
-    QProcess *proc {};
 
 public:
     explicit MainWindow(const QCommandLineParser &arg_parser, QWidget *parent = nullptr);
     ~MainWindow();
 
-    Result runCmd(const QString &cmd);
-    QString getVersion(const QString &name);
+    int run(const char *program, const QStringList &args = QStringList(),
+        QByteArray *output = nullptr, const QByteArray *input = nullptr) noexcept;
+    inline int shell(const QString &cmd,
+        QByteArray *output = nullptr, const QByteArray *input = nullptr) noexcept
+    {
+        return run("/bin/bash", {"-c", cmd}, output, input);
+    }
 
-    QString version;
-    QString output;
-    void setup();
+    void setup() noexcept;
 
 private slots:
-    void on_pushSave_clicked();
-    void on_ButtonCopy_clicked();
-    void on_buttonAbout_clicked();
-    void on_ButtonHelp_clicked();
-
-    void on_comboBoxCommand_currentIndexChanged(int index);
+    void on_pushSave_clicked() noexcept;
+    void on_pushSaveText_clicked() noexcept;
+    void on_buttonAbout_clicked() noexcept;
+    void on_ButtonHelp_clicked() noexcept;
+    void on_listInfo_itemSelectionChanged() noexcept;
+    void on_listInfo_itemChanged() noexcept;
 
 private:
     Ui::MainWindow *ui;
-    QSettings user_settings;
-    void forumcopy();
-    void plaincopy();
-    QMenu *menu {};
-    QAction *forumcopyaction {};
-    QAction *plaincopyaction {};
-    QAction *saveasfile {};
-    void createmenu(QPoint pos);
-    void systeminfo();
-    void apthistory();
-    void displaylog(const QString &logfile);
-    void buildcomboBoxCommand();
+    QStringList defaultMatches;
+    QAction *actionSave = nullptr;
+    QString searchText;
+    QTextDocument::FindFlags searchFlags;
+    void lockGUI(bool lock) noexcept;
+    void forumcopy() noexcept;
+    void plaincopy() noexcept;
+    void showSavedMessage(const QString &filename, const QString &errmsg) noexcept;
+    QByteArray readReport(int row) noexcept(false);
+    void buildInfoList() noexcept;
+    void listSelectAll() noexcept;
+    void listSelectDefault() noexcept;
+    void showFindDialog() noexcept;
+    void findNext() noexcept;
+    bool eventFilter(QObject *watched, QEvent *event) noexcept;
+    void autoFitSplitter() noexcept;
 };
 
 #endif // MAINWINDOW_H

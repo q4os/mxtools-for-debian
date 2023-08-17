@@ -6,7 +6,7 @@
     <message>
         <location filename="../mainwindow.ui" line="14"/>
         <source>MX Remastercc</source>
-        <translation>MX Remastercc</translation>
+        <translation>MX Αλλαγή και διατήρηση δεδομένων ISO</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="64"/>
@@ -16,12 +16,12 @@
     <message>
         <location filename="../mainwindow.ui" line="81"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;This tool allows you to rework an ISO while running Live. &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Remaster&lt;/span&gt; allows you to change files, applications and settings with the goal of producing a new master copy for storage or distribution. &lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Persistence&lt;/span&gt; allows you to retain data, settings and installed programs when the machine gets switched off for personal use.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Το εργαλείο αυτό σας επιτρέπει να επεξεργαστείτε το ISO, ενώ εκτελείτε το Live.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Remaster&lt;/span&gt; σας επιτρέπει να αλλάξετε αρχεία, εφαρμογές και ρυθμίσεις με στόχο την παραγωγή νέου αντιγράφου για αποθήκευση ή διανομή. &lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Persistence&lt;/span&gt; σας επιτρέπει να διατηρήσετε τα δεδομένα, τις ρυθμίσεις και τα εγκατεστημένα προγράμματα, για προσωπική σας χρήση όταν κλείσετε.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Το εργαλείο αυτό σας επιτρέπει να επεξεργαστείτε το ISO, ενώ το εκτελείτε Live.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Remaster&lt;/span&gt; σας επιτρέπει να αλλάξετε αρχεία, εφαρμογές και ρυθμίσεις με στόχο την παραγωγή νέου αντιγράφου για αποθήκευση ή διανομή. &lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Persistence&lt;/span&gt; σας επιτρέπει να διατηρήσετε δεδομένα, ρυθμίσεις και εγκατεστημένα προγράμματα, για προσωπική σας χρήση όταν κλείσετε.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="133"/>
         <source>Display help </source>
-        <translation>Εμφάνιση βοήθειας</translation>
+        <translation>Εμφάνιση βοήθειας </translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="136"/>
@@ -71,7 +71,7 @@
     <message>
         <location filename="../mainwindow.ui" line="274"/>
         <source>Remaster</source>
-        <translation>Ρεμίξ</translation>
+        <translation>Remaster</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="301"/>
@@ -92,17 +92,17 @@
         <location filename="../mainwindow.cpp" line="50"/>
         <location filename="../mainwindow.cpp" line="99"/>
         <source>MX Remaster Control Center</source>
-        <translation>Κέντρο ελέγχου του MX Remaster</translation>
+        <translation>MX Remaster Κέντρο ελέγχου</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="78"/>
         <source>MX RemasterCC</source>
-        <translation>MX RemasterCC</translation>
+        <translation>MX Αλλαγή και διατήρηση δεδομένων ISO</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="98"/>
         <source>About MX Remaster Control Center</source>
-        <translation>Περί του Κέντρου ελέγχου MX Remaster</translation>
+        <translation>Περί του MX Remaster Κέντρο ελέγχου</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="100"/>
@@ -117,7 +117,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="103"/>
         <source>Copyright (c) MX Linux</source>
-        <translation>Πνευματικά δικαιώματα (c)  MX Linux </translation>
+        <translation>Πνευματικά δικαιώματα (c) MX Linux</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="104"/>
@@ -132,7 +132,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="106"/>
         <source>Cancel</source>
-        <translation>Ακύρωση</translation>
+        <translation>Άκυρο</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="126"/>

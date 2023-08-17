@@ -48,6 +48,7 @@ FORMS    += \
 TRANSLATIONS += translations/mx-select-sound_af.ts \
                 translations/mx-select-sound_am.ts \
                 translations/mx-select-sound_ar.ts \
+                translations/mx-select-sound_ast.ts \
                 translations/mx-select-sound_be.ts \
                 translations/mx-select-sound_bg.ts \
                 translations/mx-select-sound_bn.ts \
@@ -75,7 +76,6 @@ TRANSLATIONS += translations/mx-select-sound_af.ts \
                 translations/mx-select-sound_fil.ts \
                 translations/mx-select-sound_fi.ts \
                 translations/mx-select-sound_fr_BE.ts \
-                translations/mx-select-sound_fr_FR.ts \
                 translations/mx-select-sound_fr.ts \
                 translations/mx-select-sound_fy.ts \
                 translations/mx-select-sound_ga.ts \
@@ -91,12 +91,16 @@ TRANSLATIONS += translations/mx-select-sound_af.ts \
                 translations/mx-select-sound_hr.ts \
                 translations/mx-select-sound_ht.ts \
                 translations/mx-select-sound_hu.ts \
+                translations/mx-select-sound_hy_AM.ts \
+                translations/mx-select-sound_hye.ts \
                 translations/mx-select-sound_hy.ts \
                 translations/mx-select-sound_id.ts \
+                translations/mx-select-sound_ie.ts \
                 translations/mx-select-sound_is.ts \
                 translations/mx-select-sound_it.ts \
                 translations/mx-select-sound_ja.ts \
                 translations/mx-select-sound_jv.ts \
+                translations/mx-select-sound_kab.ts \
                 translations/mx-select-sound_ka.ts \
                 translations/mx-select-sound_kk.ts \
                 translations/mx-select-sound_km.ts \
@@ -122,7 +126,9 @@ TRANSLATIONS += translations/mx-select-sound_af.ts \
                 translations/mx-select-sound_ne.ts \
                 translations/mx-select-sound_nl_BE.ts \
                 translations/mx-select-sound_nl.ts \
+                translations/mx-select-sound_nn.ts \
                 translations/mx-select-sound_ny.ts \
+                translations/mx-select-sound_oc.ts \
                 translations/mx-select-sound_or.ts \
                 translations/mx-select-sound_pa.ts \
                 translations/mx-select-sound_pl.ts \

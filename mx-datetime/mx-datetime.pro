@@ -2,6 +2,12 @@ QT       += core gui widgets
 
 TARGET = mx-datetime
 TEMPLATE = app
+CONFIG += debug_and_release warn_on strict_c++
+CONFIG(release, debug|release) {
+    DEFINES += NDEBUG
+    QMAKE_CXXFLAGS += -flto
+    QMAKE_LFLAGS += -flto
+}
 DEFINES += QT_DEPRECATED_WARNINGS
 DEFINES += QT_DISABLE_DEPRECATED_UP_TO=0x050F00
 
@@ -20,6 +26,7 @@ RESOURCES += \
 TRANSLATIONS += translations/mx-datetime_af.ts \
                 translations/mx-datetime_am.ts \
                 translations/mx-datetime_ar.ts \
+                translations/mx-datetime_ast.ts \
                 translations/mx-datetime_be.ts \
                 translations/mx-datetime_bg.ts \
                 translations/mx-datetime_bn.ts \
@@ -63,12 +70,16 @@ TRANSLATIONS += translations/mx-datetime_af.ts \
                 translations/mx-datetime_hr.ts \
                 translations/mx-datetime_ht.ts \
                 translations/mx-datetime_hu.ts \
+                translations/mx-datetime_hy_AM.ts \
+                translations/mx-datetime_hye.ts \
                 translations/mx-datetime_hy.ts \
                 translations/mx-datetime_id.ts \
+                translations/mx-datetime_ie.ts \
                 translations/mx-datetime_is.ts \
                 translations/mx-datetime_it.ts \
                 translations/mx-datetime_ja.ts \
                 translations/mx-datetime_jv.ts \
+                translations/mx-datetime_kab.ts \
                 translations/mx-datetime_ka.ts \
                 translations/mx-datetime_kk.ts \
                 translations/mx-datetime_km.ts \
@@ -94,7 +105,9 @@ TRANSLATIONS += translations/mx-datetime_af.ts \
                 translations/mx-datetime_ne.ts \
                 translations/mx-datetime_nl_BE.ts \
                 translations/mx-datetime_nl.ts \
+                translations/mx-datetime_nn.ts \
                 translations/mx-datetime_ny.ts \
+                translations/mx-datetime_oc.ts \
                 translations/mx-datetime_or.ts \
                 translations/mx-datetime_pa.ts \
                 translations/mx-datetime_pl.ts \

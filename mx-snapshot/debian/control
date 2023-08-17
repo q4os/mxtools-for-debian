@@ -17,7 +17,9 @@ Depends: mx-iso-template | iso-template (>= 16.1mx15),
          xorriso (>= 1.4.6),
          ${misc:Depends},
          ${shlibs:Depends}
-Recommends: calamares-settings-debian
+Recommends: calamares-settings-debian,
+         grub-efi-amd64-bin | grub-efi-ia32-bin,
+         grub-pc-bin
 Description: MX Snapshot
  MX Snapshot is a tool used for creating a live-CD from the running system.
 

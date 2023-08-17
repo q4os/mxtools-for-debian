@@ -1,8 +1,9 @@
 [main]
 host = https://www.transifex.com
 
-[antix-development.quick-system-info-gui]
+[o:anticapitalista:p:antix-development:r:quick-system-info-gui]
 file_filter = ./quick-system-info-gui_<lang>.ts
 source_file = quick-system-info-gui_en.ts
 source_lang = en
-type = ts
+type        = ts
+

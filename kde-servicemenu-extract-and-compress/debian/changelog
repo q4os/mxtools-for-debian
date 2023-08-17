@@ -1,3 +1,11 @@
+kde-servicemenu-extract-and-compress (1.4.4-3mx23) mx; urgency=medium
+
+  * Rebuild for MX Linux 23.
+  * Bump up to debhelper-compat = 12.
+  * Don't install kde4 servicemenus.
+
+ -- Steven Pusser <stevep@mxlinux.org>  Thu, 13 Apr 2023 15:14:00 -0700
+
 kde-servicemenu-extract-and-compress (1.4.4-3mx21) mx; urgency=medium
 
   * Rebuild for MX 21.

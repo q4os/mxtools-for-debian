@@ -1,6 +1,7 @@
 mx-datetime-desktop_af
 mx-datetime-desktop_am
 mx-datetime-desktop_ar
+mx-datetime-desktop_ast
 mx-datetime-desktop_be
 mx-datetime-desktop_bg
 mx-datetime-desktop_bn
@@ -44,12 +45,16 @@ mx-datetime-desktop_hr
 mx-datetime-desktop_ht
 mx-datetime-desktop_hu
 mx-datetime-desktop_hy
+mx-datetime-desktop_hy_AM
+mx-datetime-desktop_hye
 mx-datetime-desktop_id
+mx-datetime-desktop_ie
 mx-datetime-desktop_is
 mx-datetime-desktop_it
 mx-datetime-desktop_ja
 mx-datetime-desktop_jv
 mx-datetime-desktop_ka
+mx-datetime-desktop_kab
 mx-datetime-desktop_kk
 mx-datetime-desktop_km
 mx-datetime-desktop_kn
@@ -74,7 +79,9 @@ mx-datetime-desktop_nb_NO
 mx-datetime-desktop_ne
 mx-datetime-desktop_nl
 mx-datetime-desktop_nl_BE
+mx-datetime-desktop_nn
 mx-datetime-desktop_ny
+mx-datetime-desktop_oc
 mx-datetime-desktop_or
 mx-datetime-desktop_pa
 mx-datetime-desktop_pl

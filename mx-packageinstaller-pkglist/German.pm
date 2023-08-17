@@ -25,35 +25,34 @@ German
    <eu>German Language Meta-Package</eu>
    <fa>German Language Meta-Package</fa>
    <fil_PH>German Language Meta-Package</fil_PH>
-   <fi>German Language Meta-Package</fi>
+   <fi>Saksankielinen metatieto-paketti</fi>
    <fr>Méta-paquet pour langue allemande</fr>
    <he_IL>German Language Meta-Package</he_IL>
-   <hi>German Language Meta-Package</hi>
+   <hi>जर्मन भाषा मेटा-पैकेज</hi>
    <hr>German Language Meta-Package</hr>
    <hu>German Language Meta-Package</hu>
    <id>German Language Meta-Package</id>
    <is>German Language Meta-Package</is>
    <it>Meta-pacchetto della lingua tedesca</it>
-   <ja_JP>German Language Meta-Package</ja_JP>
-   <ja>German Language Meta-Package</ja>
+   <ja>ドイツ語メタパッケージ</ja>
    <kk>German Language Meta-Package</kk>
    <ko>German Language Meta-Package</ko>
    <lt>German Language Meta-Package</lt>
    <mk>German Language Meta-Package</mk>
    <mr>German Language Meta-Package</mr>
-   <nb>German Language Meta-Package</nb>
+   <nb>Tysk språkpakke</nb>
    <nl>Duitse Taal Meta-Pakket</nl>
    <pl>Niemiecki metapakiet językowy</pl>
-   <pt_BR>Alemão Meta-Pacote de Idioma</pt_BR>
+   <pt_BR>Alemão Pacote de Idioma</pt_BR>
    <pt>Alemão Meta-Pacote de Idioma</pt>
    <ro>German Language Meta-Package</ro>
-   <ru>German Language Meta-Package</ru>
+   <ru>Мета-пакет немецкого языка</ru>
    <sk>German Language Meta-Package</sk>
-   <sl>German Language Meta-Package</sl>
-   <sq>German Language Meta-Package</sq>
+   <sl>Nemški jezikovni meta-paket</sl>
+   <sq>Meta-Paketë gjuhësore në gjermanisht</sq>
    <sr>German Language Meta-Package</sr>
    <sv>Tyskt Språk Meta-Paket</sv>
-   <tr>German Language Meta-Package</tr>
+   <tr>Almanca Dili Üst-Paketi</tr>
    <uk>German Language Meta-Package</uk>
    <vi>German Language Meta-Package</vi>
    <zh_CN>German Language Meta-Package</zh_CN>

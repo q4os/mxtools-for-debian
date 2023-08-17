@@ -3,26 +3,49 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<title>HELP: Quick System Info (gui)</title>
+	<title>HELP: Quick System Info (GUI)</title>
+	<style type="text/css">
+		th.vertical { margin:0; padding:0; width:1.1em }
+		th.vertical span { margin:0; padding:0; writing-mode:sideways-lr }
+		th, tr td:first-of-type { white-space:nowrap }
+		.sameasbutton { font-style:italic }
+	</style>
 </head>
 <body>
-<h1>HELP: Quick System Info (gui)</h1>
+<h1>HELP: Quick System Info (GUI)</h1>
 
-<img src="1.jpg" alt="Main display" />
+<img src="1.png" alt="Main display" />
 
-<p>Displays a report based on inxi and a few custom parameters for MX Linux.</p>
-<p>Use the "Copy for Forum" button at the bottom of the report display to copy the report to the clipboard in a format suitable </p>
-<p>for directly pasting into a forum post, complete with code tags</p>
-<p></p>
-<p>Use the "Save" button to save the report to a text file</p>
+<p>Displays a Quick System Info (QSI) report based on <code>inxi</code> and a few custom parameters for MX Linux.</p>
+<p>The Quick System Info GUI application can display any log or report shown in the list (left pane) by clicking on an item.</p>
+<p>Use the "Copy for forum" button at the bottom of the report display (right pane) to copy the report to the clipboard
+ in a format suitable for directly pasting into a forum post, complete with code tags.<br/>If a portion of text is seleted, only that portion is copied and encapsulated in code tags.</p>
+<p>Use the "Save" button to save multiple selected reports into an archive file.</p>
+<p>Use the "Save text" button to save the text from the report display to a text file.</p>
 
-<p>Shortcut keys:  Alt+C plain text copy, CTRL+C Copy for forum</p>
+<h2>Menus and Shortcut Keys</h2>
+<p>Right-clicking on a pane will trigger a pop-up menu, which can also be used to perform similar actions to the buttons.</p>
+<table border="1">
+	<tr><th style="font-size:75%">Pane</th><th>Menu Item</th><th>Shortcut</th><th>Action</th></tr>
+	<tr><th class="vertical" rowspan="3"><span>List</span></th><td>Select All</td><td>Ctrl+A*</td><td>Selects all reports to be saved to an archive file.</td></tr>
+	<tr><td>Revert Selection</td><td>Ctrl+Shift+A</td><td>Selects only the reports that were selected when the program started, unselecting the others.</td></tr>
+	<tr><td>Save</td><td>Ctrl+S</td><td class="sameasbutton">Same as the "Save" button.</td></tr>
+	<tr><th class="vertical" rowspan="5"><span>Text</span></th><td>Copy for forum</td><td>Ctrl+C</td><td class="sameasbutton">Same as the "Copy for forum" button.</td></tr>
+	<tr><td>Plain text copy</td><td>Alt+C</td><td>Copies the text displayed as-is to the clipboard. If a portion of text is selected, only that portion is copied to the clipboard.</td></tr>
+	<tr><td>Save text</td><td>Ctrl+Shift+S</td><td class="sameasbutton">Same as the "Save text" button.</td></tr>
+	<tr><td>Find</td><td>Ctrl+F</td><td>Search for text in the report display.</td></tr>
+	<tr><td>Find Next</td><td>F3</td><td>Find the next occurrence of the text from the previous search.</td></tr>
+</table>
+<p>* If the report display pane is in focus, Ctrl+A selects all the text in the report display, instead of selecting items in the list.</p>
 
+<h2>Resizing the report list</h2>
+<p>To resize or collapse the list pane, place the cursor in the handle between the two panes and drag it to the preferred size.
+Double-clicking this handle will resize the list pane to best fit its contents.</p>
 
-
+<hr/>
 <p>Development history: MX Linux</p>
 
-<p>License: GPL 3</p>
+<p><a href="license.html">License: GNU General Public License - Version 3.0</a></p>
 
 </body>
 </html>

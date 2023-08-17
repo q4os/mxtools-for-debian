@@ -1,0 +1,37 @@
+Audio
+Броусер
+Children
+Desktop Environments
+Развој
+Disks
+Docks
+Email
+File Managers
+FTP
+Игре
+Цртање
+Icons
+Kernels
+Језик
+LaTex
+Media Center
+Media Converter
+Messaging
+Misc
+Мрежа
+Newsreader
+Non-Free
+Канцеларија
+Printing
+Remote Access
+Screencast
+Screensaver
+Screenshot Utilities
+Server
+Themes
+Torrent
+Utility
+Video
+Wallpapers
+Window Managers
+Virtualization

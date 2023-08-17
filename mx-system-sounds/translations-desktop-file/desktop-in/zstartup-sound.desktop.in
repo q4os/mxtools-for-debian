@@ -1,0 +1,13 @@
+[Desktop Entry]
+Encoding=UTF-8
+Version=0.9.4
+Type=Application
+# The desktop entry name will be displayed within the menu.
+Name=Startup-sound
+# # The desktop entry comment will be shown within the menu.
+Comment=startupsound at login
+Exec=/usr/bin/startupsound-mx
+OnlyShowIn=XFCE;
+StartupNotify=false
+Terminal=false
+Hidden=false

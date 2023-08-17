@@ -30,8 +30,8 @@ class MainWindow : public QMainWindow
 {
     Q_OBJECT
 public:
-    MainWindow(const QCommandLineParser &arg_parser, QWidget *parent = nullptr);
-    ~MainWindow();
+    explicit MainWindow(const QCommandLineParser &arg_parser, QWidget *parent = nullptr);
+    ~MainWindow() override;
     void addActions();
     void addBookmarksSubmenu();
     void addHistorySubmenu();
@@ -60,10 +60,9 @@ public slots:
     void procTime();
 
 protected:
-    QTimer *timer {nullptr};
-    void keyPressEvent(QKeyEvent *event);
-    void resizeEvent(QResizeEvent *event);
-    void closeEvent(QCloseEvent *event);
+    void keyPressEvent(QKeyEvent *event) override;
+    void resizeEvent(QResizeEvent *event) override;
+    void closeEvent(QCloseEvent *event) override;
 
 private:
     AddressBar *addressBar {};
@@ -79,6 +78,7 @@ private:
     QSettings settings;
     QString homeAddress;
     QToolBar *toolBar {};
+    QTimer *timer {nullptr};
     QWebEngineSettings *websettings {};
     QWebEngineView *webview {};
     DownloadWidget *downloadWidget {};
@@ -90,6 +90,5 @@ private:
     const int progBarWidth {20};
     const int searchWidth {150};
 };
-
 
 #endif // MXVIEW_H

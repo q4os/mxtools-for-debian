@@ -18,39 +18,38 @@ Estonian_Thunderbird
    <cs>Estonian localisation of Thunderbird</cs>
    <da>Estisk oversættelse af Thunderbird</da>
    <de>Estnische Lokalisierung von Thunderbird</de>
-   <el>Εστονικός εντοπισμός του Thunderbird</el>
+   <el>Εσθονικά για το Thunderbird</el>
    <en>Estonian localisation of Thunderbird</en>
    <es>Localización Estonia de Thunderbird</es>
    <et>Estonian localisation of Thunderbird</et>
    <eu>Estonian localisation of Thunderbird</eu>
    <fa>Estonian localisation of Thunderbird</fa>
    <fil_PH>Estonian localisation of Thunderbird</fil_PH>
-   <fi>Estonian localisation of Thunderbird</fi>
+   <fi>Eestiläinen Thunderbird-kotoistus</fi>
    <fr>Localisation estonienne pour Thunderbird</fr>
    <he_IL>Estonian localisation of Thunderbird</he_IL>
-   <hi>Estonian localisation of Thunderbird</hi>
+   <hi>थंडरबर्ड का एस्टोनियाई संस्करण</hi>
    <hr>Estonian localisation of Thunderbird</hr>
    <hu>Estonian localisation of Thunderbird</hu>
    <id>Estonian localisation of Thunderbird</id>
    <is>Estonian localisation of Thunderbird</is>
    <it>Localizzazione estone di Thunderbird</it>
-   <ja_JP>Estonian localisation of Thunderbird</ja_JP>
-   <ja>Estonian localisation of Thunderbird</ja>
+   <ja>Thunderbird のエストニア語パック</ja>
    <kk>Estonian localisation of Thunderbird</kk>
    <ko>Estonian localisation of Thunderbird</ko>
    <lt>Estonian localisation of Thunderbird</lt>
    <mk>Estonian localisation of Thunderbird</mk>
    <mr>Estonian localisation of Thunderbird</mr>
-   <nb>Estonian localisation of Thunderbird</nb>
+   <nb>Estisk lokaltilpassing av Thunderbird</nb>
    <nl>Estische lokalisatie van Thunderbird</nl>
    <pl>Estońska lokalizacja Thunderbirda</pl>
-   <pt_BR>Estónio Localização para Thunderbird</pt_BR>
+   <pt_BR>Estónio Localização para o Thunderbird</pt_BR>
    <pt>Estónio Localização para Thunderbird</pt>
    <ro>Estonian localisation of Thunderbird</ro>
-   <ru>Estonian localisation of Thunderbird</ru>
+   <ru>Эстонский перевод для Thunderbird</ru>
    <sk>Estonian localisation of Thunderbird</sk>
    <sl>Estonska lokalizacjja za Thunderbird</sl>
-   <sq>Estonian localisation of Thunderbird</sq>
+   <sq>Përkthimi i Thunderbird-it në estonisht</sq>
    <sr>Estonian localisation of Thunderbird</sr>
    <sv>Estnisk lokalisering av Thunderbird</sv>
    <tr>Thunderbird'ün Estonya dili yerelleştirmesi</tr>

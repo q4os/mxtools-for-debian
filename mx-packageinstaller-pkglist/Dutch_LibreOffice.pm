@@ -18,42 +18,41 @@ Dutch_Libreoffice
    <cs>Dutch LibreOffice Language Meta-Package</cs>
    <da>Hollandsk LibreOffice sprog-metapakke</da>
    <de>Niederländisches LibreOffice Meta-Paket</de>
-   <el>Libreoffice για ολλανδική γλώσσα</el>
+   <el>Libreoffice στα Ολλανδικά</el>
    <en>Dutch LibreOffice Language Meta-Package</en>
    <es>Meta-Paquete de Idioma Holandés LibreOffice</es>
    <et>Dutch LibreOffice Language Meta-Package</et>
    <eu>Dutch LibreOffice Language Meta-Package</eu>
    <fa>Dutch LibreOffice Language Meta-Package</fa>
    <fil_PH>Dutch LibreOffice Language Meta-Package</fil_PH>
-   <fi>Dutch LibreOffice Language Meta-Package</fi>
+   <fi>Hollanninkielinen metatieto-paketti LibreOffice:lle</fi>
    <fr>Méta-Paquet langue néerlandaise pour LibreOffice</fr>
    <he_IL>Dutch LibreOffice Language Meta-Package</he_IL>
-   <hi>Dutch LibreOffice Language Meta-Package</hi>
+   <hi>लिब्रे-ऑफिस हेतु डच भाषा मेटा-पैकेज</hi>
    <hr>Dutch LibreOffice Language Meta-Package</hr>
    <hu>Dutch LibreOffice Language Meta-Package</hu>
    <id>Dutch LibreOffice Language Meta-Package</id>
    <is>Dutch LibreOffice Language Meta-Package</is>
    <it>Meta-pacchetto della lingua olandese per LibreOffice</it>
-   <ja_JP>Dutch LibreOffice Language Meta-Package</ja_JP>
-   <ja>Dutch LibreOffice Language Meta-Package</ja>
+   <ja>オランダ語の LibreOffice言語メタパッケージ</ja>
    <kk>Dutch LibreOffice Language Meta-Package</kk>
    <ko>Dutch LibreOffice Language Meta-Package</ko>
    <lt>Dutch LibreOffice Language Meta-Package</lt>
    <mk>Dutch LibreOffice Language Meta-Package</mk>
    <mr>Dutch LibreOffice Language Meta-Package</mr>
-   <nb>Dutch LibreOffice Language Meta-Package</nb>
+   <nb>Nederlandsk språkpakke for LibreOffice</nb>
    <nl>Nederlandse LibreOffice Taal Meta-Pakket</nl>
    <pl>Holenderski metapakiet językowy dla LibreOffice</pl>
-   <pt_BR>Holandês Meta-Pacote de Idioma para LibreOffice</pt_BR>
+   <pt_BR>Holandês Pacote de Idioma para o LibreOffice</pt_BR>
    <pt>Holandês Meta-Pacote de Idioma para LibreOffice</pt>
    <ro>Dutch LibreOffice Language Meta-Package</ro>
-   <ru>Dutch LibreOffice Language Meta-Package</ru>
+   <ru>Мета-пакет голландского языка для LibreOffice</ru>
    <sk>Dutch LibreOffice Language Meta-Package</sk>
-   <sl>Dutch LibreOffice Language Meta-Package</sl>
-   <sq>Dutch LibreOffice Language Meta-Package</sq>
+   <sl>Nizozemski jezikovni metapaket za LibreOffice</sl>
+   <sq>Meta-Paketë gjuhësore në holandisht për LibreOffice-in</sq>
    <sr>Dutch LibreOffice Language Meta-Package</sr>
    <sv>Holländska LibreOffice Språk Meta-Paket</sv>
-   <tr>Dutch LibreOffice Language Meta-Package</tr>
+   <tr>Flemenkçe LibreOffice Dil Üst-Paketi</tr>
    <uk>Dutch LibreOffice Language Meta-Package</uk>
    <vi>Dutch LibreOffice Language Meta-Package</vi>
    <zh_CN>Dutch LibreOffice Language Meta-Package</zh_CN>

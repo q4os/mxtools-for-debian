@@ -18,42 +18,41 @@ Google Chrome
    <cs>Latest Google Chrome browser (stable)</cs>
    <da>Seneste Google Chrome-browser (stabil)</da>
    <de>Aktueller Google Chrome-Browser (stabil)</de>
-   <el>Τελευταίο πρόγραμμα περιήγησης Google Chrome (σταθερό)</el>
+   <el>Το τελευταίο πρόγραμμα περιήγησης Google Chrome (σταθερό)</el>
    <en>Latest Google Chrome browser (stable)</en>
    <es>El último Google Chrome (estable)</es>
    <et>Latest Google Chrome browser (stable)</et>
    <eu>Latest Google Chrome browser (stable)</eu>
    <fa>Latest Google Chrome browser (stable)</fa>
    <fil_PH>Latest Google Chrome browser (stable)</fil_PH>
-   <fi>Latest Google Chrome browser (stable)</fi>
+   <fi>Viimeisin Google Chrome-selain (vakaa)</fi>
    <fr>La dernière version de Google Chrome (stable)</fr>
    <he_IL>Latest Google Chrome browser (stable)</he_IL>
-   <hi>Latest Google Chrome browser (stable)</hi>
+   <hi>नवीनतम गूगल क्रोम ब्राउज़र (स्थिर)</hi>
    <hr>Latest Google Chrome browser (stable)</hr>
    <hu>Latest Google Chrome browser (stable)</hu>
    <id>Latest Google Chrome browser (stable)</id>
    <is>Latest Google Chrome browser (stable)</is>
    <it>Ultima versione (stabile) del browser Google Chrome</it>
-   <ja_JP>Latest Google Chrome browser (stable)</ja_JP>
-   <ja>Latest Google Chrome browser (stable)</ja>
+   <ja>最新のGoogle Chromeブラウザ（安定版）</ja>
    <kk>Latest Google Chrome browser (stable)</kk>
    <ko>Latest Google Chrome browser (stable)</ko>
    <lt>Latest Google Chrome browser (stable)</lt>
    <mk>Latest Google Chrome browser (stable)</mk>
    <mr>Latest Google Chrome browser (stable)</mr>
-   <nb>Latest Google Chrome browser (stable)</nb>
+   <nb>Seneste Google Chrome-nettleser (stabil)</nb>
    <nl>Meest recente Chrome browser (stable)</nl>
    <pl>najnowsza przeglądarka Google Chrome (stabilna)</pl>
-   <pt_BR>Versão mais recente (estável) do navegador web Google Chrome</pt_BR>
+   <pt_BR>Google Chrome - Versão mais recente e estável/stable do navegador de internet</pt_BR>
    <pt>Versão mais recente (estável) do navegador web Google Chrome</pt>
    <ro>Latest Google Chrome browser (stable)</ro>
    <ru>Браузер Google Chrome (последняя стабильная версия)</ru>
    <sk>Posledný Google Chrome prehliadač (stabilný)</sk>
    <sl>Zadnja različica googlovega Chrome brskalnika</sl>
-   <sq>Latest Google Chrome browser (stable)</sq>
+   <sq>Shfletuesi Google Chrome më i ri (versioni i qëndrueshëm)</sq>
    <sr>Latest Google Chrome browser (stable)</sr>
    <sv>SenasteGoogle Chrome webbläsare (stable)</sv>
-   <tr>Latest Google Chrome browser (stable)</tr>
+   <tr>Enson Google Chrome tarayıcı (kararlı)</tr>
    <uk>Крайня стабільна версія браузера Google Chrome</uk>
    <vi>Latest Google Chrome browser (stable)</vi>
    <zh_CN>Latest Google Chrome browser (stable)</zh_CN>

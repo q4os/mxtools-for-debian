@@ -34,7 +34,6 @@ Secondary
    <id>Secondary. Includes: calibre, dia, laby, lightspeed, melting, ri-li and stellarium</id>
    <is>Secondary. Includes: calibre, dia, laby, lightspeed, melting, ri-li and stellarium</is>
    <it>Superiori. Include: calibre, dia, laby, lightspeed, melting, ri-li e stellarium</it>
-   <ja_JP>Secondary. Includes: calibre, dia, laby, lightspeed, melting, ri-li and stellarium</ja_JP>
    <ja>Secondary. Includes: calibre, dia, laby, lightspeed, melting, ri-li and stellarium</ja>
    <kk>Secondary. Includes: calibre, dia, laby, lightspeed, melting, ri-li and stellarium</kk>
    <ko>Secondary. Includes: calibre, dia, laby, lightspeed, melting, ri-li and stellarium</ko>

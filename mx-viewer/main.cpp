@@ -26,17 +26,17 @@
 
 QPair<int, int> getUserIDs()
 {
-    QPair<int, int> id;
+    QPair<uint, uint> id;
     QProcess proc;
     proc.start("logname", {}, QIODevice::ReadOnly);
     proc.waitForFinished();
     QString logname = QString::fromLatin1(proc.readAllStandardOutput().trimmed());
     proc.start("id", {"-u", logname}, QIODevice::ReadOnly);
     proc.waitForFinished();
-    id.first = proc.readAllStandardOutput().trimmed().toInt();
+    id.first = proc.readAllStandardOutput().trimmed().toUInt();
     proc.start("id", {"-g", logname}, QIODevice::ReadOnly);
     proc.waitForFinished();
-    id.second = proc.readAllStandardOutput().trimmed().toInt();
+    id.second = proc.readAllStandardOutput().trimmed().toUInt();
     return id;
 }
 
@@ -47,7 +47,8 @@ bool dropElevatedPrivileges(bool force_nobody)
     if (getuid() != 0 && geteuid() != 0)
         return true;
 
-    // ref:  https://www.safaribooksonline.com/library/view/secure-programming-cookbook/0596003943/ch01s03.html#secureprgckbk-CHP-1-SECT-3.3
+    // ref:
+    // https://www.safaribooksonline.com/library/view/secure-programming-cookbook/0596003943/ch01s03.html#secureprgckbk-CHP-1-SECT-3.3
     auto [id, gid] = getUserIDs();
     const int nobody = 65534; // nobody (uid 65534), nogroup (gid 65534)
     if (id == 0 || gid == 0 || force_nobody)
@@ -61,7 +62,7 @@ bool dropElevatedPrivileges(bool force_nobody)
     // On systems with defined _POSIX_SAVED_IDS in the unistd.h file, it should be
     // impossible to regain elevated privs after the setuid() call, above.  Test, try to regain elev priv:
     if (setuid(0) != -1 || seteuid(0) != -1)
-        return false;   // and the calling fn should EXIT/abort the program
+        return false; // and the calling fn should EXIT/abort the program
 
     // change cwd, for good measure (if unable to, treat as overall failure)
     if (chdir("/tmp") != 0) {
@@ -81,24 +82,29 @@ int main(int argc, char *argv[])
     app.setOrganizationName(QStringLiteral("MX-Linux"));
 
     QCommandLineParser parser;
-    parser.setApplicationDescription(QObject::tr("This tool will display the URL content in a window, window title is optional"));
+    parser.setApplicationDescription(
+        QObject::tr("This tool will display the URL content in a window, window title is optional"));
     parser.addHelpOption();
     parser.addVersionOption();
-    parser.addOption({{QStringLiteral("f"), QStringLiteral("full-screen")}, QObject::tr("Start program in full-screen mode")});
+    parser.addOption(
+        {{QStringLiteral("f"), QStringLiteral("full-screen")}, QObject::tr("Start program in full-screen mode")});
     parser.addOption({{QStringLiteral("i"), QStringLiteral("disable-images")},
                       QObject::tr("Disable load images automatically from websites")});
     parser.addOption({{QStringLiteral("j"), QStringLiteral("disable-js")}, QObject::tr("Disable JavaScript")});
     if (getuid() == 0 || geteuid() == 0)
-        parser.addOption({{QStringLiteral("n"), QStringLiteral("force-nobody")},
-                          QObject::tr("Drop program's rights to 'nobody'. By default, if run as root, the rights are "
-                          "dropped to normal user. This option might provide additional protection, but the program "
-                          "would not be able to write its cache and cookies to the user directory, so it might break "
-                          "some functionality.")});
+        parser.addOption(
+            {{QStringLiteral("n"), QStringLiteral("force-nobody")},
+             QObject::tr("Drop program's rights to 'nobody'. By default, if run as root, the rights are "
+                         "dropped to normal user. This option might provide additional protection, but the program "
+                         "would not be able to write its cache and cookies to the user directory, so it might break "
+                         "some functionality.")});
     parser.addOption({{QStringLiteral("s"), QStringLiteral("enable-spatial-navigation")},
                       QObject::tr("Enable spatial navigation with keyboard")});
-    parser.addPositionalArgument(QObject::tr("URL"), QObject::tr("URL of the page you want to load") +
-                                 "\ne.g., https://google.com, google.com, file:///home/user/file.html");
-    parser.addPositionalArgument(QObject::tr("Title"), QObject::tr("Window title for the viewer"), QStringLiteral("[title]"));
+    parser.addPositionalArgument(QObject::tr("URL"),
+                                 QObject::tr("URL of the page you want to load")
+                                     + "\ne.g., https://google.com, google.com, file:///home/user/file.html");
+    parser.addPositionalArgument(QObject::tr("Title"), QObject::tr("Window title for the viewer"),
+                                 QStringLiteral("[title]"));
     parser.process(app);
 
     bool force_nobody = (getuid() == 0 || geteuid() == 0) ? parser.isSet("force-nobody") : false;
@@ -108,7 +114,8 @@ int main(int argc, char *argv[])
     }
 
     QTranslator qtTran;
-    if (qtTran.load(QLocale::system(), QStringLiteral("qt"), QStringLiteral("_"), QLibraryInfo::location(QLibraryInfo::TranslationsPath)))
+    if (qtTran.load(QLocale::system(), QStringLiteral("qt"), QStringLiteral("_"),
+                    QLibraryInfo::location(QLibraryInfo::TranslationsPath)))
         app.installTranslator(&qtTran);
 
     QTranslator qtBaseTran;
@@ -116,7 +123,8 @@ int main(int argc, char *argv[])
         app.installTranslator(&qtBaseTran);
 
     QTranslator appTran;
-    if (appTran.load(app.applicationName() + "_" + QLocale::system().name(), "/usr/share/" + app.applicationName() + "/locale"))
+    if (appTran.load(app.applicationName() + "_" + QLocale::system().name(),
+                     "/usr/share/" + app.applicationName() + "/locale"))
         app.installTranslator(&appTran);
 
     MainWindow w(parser);

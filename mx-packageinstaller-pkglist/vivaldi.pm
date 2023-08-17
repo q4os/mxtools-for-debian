@@ -28,29 +28,28 @@ Vivaldi
    <fi>Vivaldi-verkkoselain</fi>
    <fr>Navigateur Web Vivaldi</fr>
    <he_IL>Vivaldi web browser</he_IL>
-   <hi>Vivaldi web browser</hi>
+   <hi>विवाल्डी वेब ब्राउज़र</hi>
    <hr>Vivaldi web browser</hr>
    <hu>Vivaldi web browser</hu>
    <id>Vivaldi web browser</id>
    <is>Vivaldi web browser</is>
    <it>Vivaldi web browser</it>
-   <ja_JP>Vivaldi web browser</ja_JP>
-   <ja>Vivaldi web browser</ja>
+   <ja>Vivaldi ウェブブラウザ</ja>
    <kk>Vivaldi web browser</kk>
    <ko>Vivaldi web browser</ko>
    <lt>Vivaldi saityno naršyklė</lt>
    <mk>Vivaldi web browser</mk>
    <mr>Vivaldi web browser</mr>
-   <nb>Vivaldi web browser</nb>
+   <nb>Nettleseren Vivaldi</nb>
    <nl>Vivaldi web browser</nl>
    <pl>przeglądarka Vivaldi</pl>
-   <pt_BR>Navegador web Vivaldi</pt_BR>
+   <pt_BR>Vivaldi Navegador de Internet</pt_BR>
    <pt>Navegador web Vivaldi</pt>
    <ro>Vivaldi web browser</ro>
    <ru>Браузер Vivaldi</ru>
    <sk>Vivaldi web browser</sk>
    <sl>Vivaldi spletni brskalnik</sl>
-   <sq>Vivaldi web browser</sq>
+   <sq>Shfletuesi Vivaldi</sq>
    <sr>Vivaldi web browser</sr>
    <sv>Vivaldi webbläsare</sv>
    <tr>Vivaldi internet tarayıcı</tr>

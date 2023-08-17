@@ -49,7 +49,7 @@
         <translation>Dostopne pravice za veljavne uporabnike</translation>
     </message>
     <message>
-        <location filename="../editshare.cpp" line="46"/>
+        <location filename="../editshare.cpp" line="48"/>
         <source>Select directory to share</source>
         <translation>Izberite direktorij za skupno rabo</translation>
     </message>

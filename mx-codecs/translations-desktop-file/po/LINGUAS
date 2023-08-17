@@ -1,6 +1,7 @@
 mx-codecs-desktop_af
 mx-codecs-desktop_am
 mx-codecs-desktop_ar
+mx-codecs-desktop_ast
 mx-codecs-desktop_be
 mx-codecs-desktop_bg
 mx-codecs-desktop_bn
@@ -44,12 +45,16 @@ mx-codecs-desktop_hr
 mx-codecs-desktop_ht
 mx-codecs-desktop_hu
 mx-codecs-desktop_hy
+mx-codecs-desktop_hy_AM
+mx-codecs-desktop_hye
 mx-codecs-desktop_id
+mx-codecs-desktop_ie
 mx-codecs-desktop_is
 mx-codecs-desktop_it
 mx-codecs-desktop_ja
 mx-codecs-desktop_jv
 mx-codecs-desktop_ka
+mx-codecs-desktop_kab
 mx-codecs-desktop_kk
 mx-codecs-desktop_km
 mx-codecs-desktop_kn
@@ -74,7 +79,9 @@ mx-codecs-desktop_nb_NO
 mx-codecs-desktop_ne
 mx-codecs-desktop_nl
 mx-codecs-desktop_nl_BE
+mx-codecs-desktop_nn
 mx-codecs-desktop_ny
+mx-codecs-desktop_oc
 mx-codecs-desktop_or
 mx-codecs-desktop_pa
 mx-codecs-desktop_pl

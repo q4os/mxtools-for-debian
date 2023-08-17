@@ -1,47 +1,39 @@
 Source: foliate
 Section: gnome
 Priority: optional
-Maintainer: Steven Pusser <stevep@mxlinux.org>
-XSBC-Original-Maintainer: John Factotum <50942278+johnfactotum@users.noreply.github.com>
-Build-Depends: debhelper (>= 10),
-               desktop-file-utils,
+Maintainer: Jonathan Carter <jcc@debian.org>
+Uploaders: Federico Ceratto <federico@debian.org>
+Build-Depends: debhelper-compat (= 13),
                gettext,
-               gjs (>= 1.52),
-               libglib2.0-bin (>= 2.54),
-               libglib2.0-dev (>= 2.54),
-               meson (>= 0.40),
-               ninja-build,
-               pkg-config
-Build-Conflicts: appstream-util
+               meson,
+               pkg-config,
+               libglib2.0-dev,
+               gjs
+Standards-Version: 4.6.1
+Homepage: https://github.com/johnfactotum/foliate
+Vcs-Browser: https://salsa.debian.org/debian/foliate
+Vcs-Git: https://salsa.debian.org/debian/foliate.git
 
 Package: foliate
 Architecture: all
-Depends: gir1.2-gspell-1,
-         gir1.2-tracker-2.0 | gir1.2-tracker-3.0,
+Depends: ${shlibs:Depends},
+         ${misc:Depends},
+         gjs,
          gir1.2-webkit2-4.0,
-         gjs (>= 1.52),
-         iso-codes (>= 3.67),
-         python (>= 2.7) | python3 (>= 3.4)
-Recommends: gir1.2-handy-0.0
-Suggests: dict,
-          dictd,
-          espeak-ng | espeak | festival,
-          hyphen-en-us | hyphen-af | hyphen-as | hyphen-bg | hyphen-bn | hyphen-ca | hyphen-cs | hyphen-da | hyphen-de | hyphen-el | hyphen-en-ca | hyphen-en-gb | hyphen-es | hyphen-fi | hyphen-fr | hyphen-ga | hyphen-gl | hyphen-gu | hyphen-hi | hyphen-hr | hyphen-hu | hyphen-id | hyphen-is | hyphen-it | hyphen-kn | hyphen-lt | hyphen-lv | hyphen-ml | hyphen-mr | hyphen-nl | hyphen-no | hyphen-or | hyphen-a | hyphen-pl | hyphen-pt-br | hyphen-pt-pt | hyphen-ro | hyphen-ru | hyphen-show | hyphen-sk | hyphen-sl | hyphen-sr | hyphen-sv | hyphen-a | hyphen-te | hyphen-uk | hyphen-zu,
-          sdcv
-Description: simple and modern eBook viewer.
- A simple and modern GTK+ eBook viewer, built with GJS and Epub.js.
+         python3
+Recommends: gnome-epub-thumbnailer
+Description: simple and modern ebook viewer
+ Foliate is an ebook reader with many features:
  .
- Features include:
- - View .epub, .mobi, .azw, and .azw3 files in two-page view or scrolled view
- - Customize font, line-spacing, margins, and brightness
- - Light, sepia, dark, and invert mode, or add your own custom themes
- - Reading progress slider with chapter marks
- - Bookmarks and annotations
- - Find in book
- - Quick dictionary lookup with Wiktionary, Wikipedia, and `dictd`, or translate
-   text with Google Translate
- - Touchpad gestures—use two-finger swipe to turn the page
- - Basic text-to-speech support with eSpeak and Festival (suggested packages)
-  .
- More features can be enabled by installing the suggested packages, including
- hyphenation.
+  - View .epub, .mobi, .azw, and .azw3 files in two-page view or scrolled view
+  - Fetch books from online catalogs using OPDS feeds
+  - Customize font, line-spacing, margins, and brightness
+  - Light, sepia, dark, and invert mode, or add your own custom themes
+  - Reading progress slider with chapter marks and reading time prediction
+  - Bookmarks and annotations
+  - Find in book
+  - Quick dictionary lookup with Wiktionary, Wikipedia, and dictd
+  - Touchpad gestures—use two-finger swipe to turn the page
+  - Basic text-to-speech support with eSpeak NG and Festival
+  - Sync or backup reading progress and notes
+  - Supports phones and tablets

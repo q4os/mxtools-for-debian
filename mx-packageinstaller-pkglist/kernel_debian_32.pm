@@ -6,58 +6,55 @@ Kernels
 </category>
 
 <name>
-Debian 32 bit no-pae (5.10)
+Debian 32 bit no-pae single core
 </name>
 
 <description>
-   <am>Default Debian 32bit linux kernel, no-PAE, single core</am>
-   <ar>Default Debian 32bit linux kernel, no-PAE, single core</ar>
-   <bg>Default Debian 32bit linux kernel, no-PAE, single core</bg>
-   <bn>Default Debian 32bit linux kernel, no-PAE, single core</bn>
-   <ca>Kernel Linux Debian 32bit no-PAE per omissió, 32 bit, single core</ca>
-   <cs>Default Debian 32bit linux kernel, no-PAE, single core</cs>
-   <da>Default Debian 32bit linux kernel, no-PAE, single core</da>
-   <de>Default Debian 32bit Linux Kernel, no-PAE, single core</de>
-   <el>Προκαθορισμένο Debian 32bit linux kernel, no-PAE, single core</el>
-   <en>Default Debian 32bit linux kernel, no-PAE, single core</en>
-   <es>Kernel Debian predeterminado 32bit linux, no-PAE, single core</es>
-   <et>Default Debian 32bit linux kernel, no-PAE, single core</et>
-   <eu>Default Debian 32bit linux kernel, no-PAE, single core</eu>
-   <fa>Default Debian 32bit linux kernel, no-PAE, single core</fa>
-   <fil_PH>Default Debian 32bit linux kernel, no-PAE, single core</fil_PH>
-   <fi>Default Debian 32bit linux kernel, no-PAE, single core</fi>
-   <fr>Default Debian 32bit linux kernel, no-PAE, single core</fr>
-   <he_IL>Default Debian 32bit linux kernel, no-PAE, single core</he_IL>
-   <hi>Default Debian 32bit linux kernel, no-PAE, single core</hi>
-   <hr>Default Debian 32bit linux kernel, no-PAE, single core</hr>
-   <hu>Default Debian 32bit linux kernel, no-PAE, single core</hu>
-   <id>Default Debian 32bit linux kernel, no-PAE, single core</id>
-   <is>Default Debian 32bit linux kernel, no-PAE, single core</is>
-   <it>Kernel Debian di default 32bit, no-PAE, single core</it>
-   <ja_JP>Default Debian 32bit linux kernel, no-PAE, single core</ja_JP>
-   <ja>Default Debian 32bit linux kernel, no-PAE, single core</ja>
-   <kk>Default Debian 32bit linux kernel, no-PAE, single core</kk>
-   <ko>Default Debian 32bit linux kernel, no-PAE, single core</ko>
-   <lt>Default Debian 32bit linux kernel, no-PAE, single core</lt>
-   <mk>Default Debian 32bit linux kernel, no-PAE, single core</mk>
-   <mr>Default Debian 32bit linux kernel, no-PAE, single core</mr>
-   <nb>Default Debian 32bit linux kernel, no-PAE, single core</nb>
-   <nl>Default Debian 32bit linux kernel, no-PAE, single core</nl>
-   <pl>Default Debian 32bit linux kernel, no-PAE, single core</pl>
-   <pt_BR>Default Debian 32bit linux kernel, no-PAE, single core</pt_BR>
-   <pt>Núcleo (kernel) linux Debian predefinido 32bit, no-PAE, single core</pt>
-   <ro>Default Debian 32bit linux kernel, no-PAE, single core</ro>
-   <ru>Стандартное Debian ядро, 32 bit no-PAE с поддержкой 1-core</ru>
-   <sk>Default Debian 32bit linux kernel, no-PAE, single core</sk>
-   <sl>Privzeto Debian 32 bitno linux jedro brez PAE, eno jedro</sl>
-   <sq>Default Debian 32bit linux kernel, no-PAE, single core</sq>
-   <sr>Default Debian 32bit linux kernel, no-PAE, single core</sr>
-   <sv>Standard Debian 32bit linux kärna, no-PAE, single core</sv>
-   <tr>Öntanımlı Debian 32 bit linux çekirdeği, PAE olmayan, tek çekirdek</tr>
-   <uk>Default Debian 32bit linux kernel, no-PAE, single core</uk>
-   <vi>Default Debian 32bit linux kernel, no-PAE, single core</vi>
-   <zh_CN>Default Debian 32bit linux kernel, no-PAE, single core</zh_CN>
-   <zh_TW>Default Debian 32bit linux kernel, no-PAE, single core</zh_TW>
+   <am>የዴቢያን ነባሪ ከርነል</am>
+<ar>ﺔﻴﺿﺍﺮﺘﻓﻻ﻿ﺍ ﻥﺎﻴﺑﺩ ﺓﺍﻮﻧ</ar>
+<bg>Ядрото по подразбиране на Debian</bg>
+<bn>ডেবিয়ান ডিফল্ট কার্নেল</bn>
+<ca>Nucli predeterminat de Debian</ca>
+<cs>Výchozí jádro Debianu</cs>
+<da>Debians standardkerne</da>
+<de>Debian-Standardkernel</de>
+<el>Προεπιλεγμένος πυρήνας του Debian</el>
+<es>Núcleo predeterminado de Debian</es>
+<et>Debiani vaiketuum</et>
+<eu>Debian kernel lehenetsia</eu>
+<en>Debian default kernel</en>
+<fa>ﻥﺎﯿﺑﺩ ﺽﺮﻓ ﺶﯿﭘ ﻪﺘﺴﻫ</fa>
+<fil_PH>Debian na default na kernel</fil_PH>
+<fi>Debianin oletusydin</fi>
+<fr>Noyau par défaut de Debian</fr>
+<he_IL>ןאיבד לש לדחמה תרירב תביל</he_IL>
+<hi>डेबियन डिफ़ॉल्ट कर्नेल</hi>
+<hr>Zadana jezgra Debiana</hr>
+<hu>Debian alapértelmezett kernel</hu>
+<id>Kernel bawaan Debian</id>
+<is>Debian sjálfgefinn kjarni</is>
+<it>Kernel predefinito Debian</it>
+<ja>Debian のデフォルトのカーネル</ja>
+<kk>Debian әдепкі ядросы</kk>
+<ko>데비안 기본 커널</ko>
+<lt>Debian'o numatytasis branduolys</lt>
+<mk>Стандардно јадро на Debian</mk>
+<mr>डेबियन डीफॉल्ट कर्नल</mr>
+<nb>Debians standard kjerne</nb>
+<nl>Standaard kernel van Debian</nl>
+<pl>Domyślne jądro Debiana</pl>
+<pt_BR>Kernel padrão do Debian</pt_BR>
+<pt>Kernel padrão do Debian</pt>
+<ro>Nucleul implicit Debian</ro>
+<ru>Ядро Debian по умолчанию</ru>
+<sk>Predvolené jadro Debianu</sk>
+<sl>Privzeto jedro Debian</sl>
+<sq>Kerneli i paracaktuar i Debian</sq>
+<sr>Дебиан подразумевано језгро</sr>
+<sv>Debians standardkärna</sv>
+<tr>Debian varsayılan çekirdeği</tr>
+<uk>Стандартне ядро Debian</uk>
+<vi>Hạt nhân mặc định của Debian</vi>
 </description>
 
 <installable>

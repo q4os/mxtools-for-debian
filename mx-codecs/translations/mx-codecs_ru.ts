@@ -26,7 +26,7 @@
     <message>
         <location filename="../mainwindow.ui" line="103"/>
         <source>Cancel</source>
-        <translation>Отменить</translation>
+        <translation>Отмена</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="110"/>
@@ -270,7 +270,7 @@
     <message>
         <location filename="../about.cpp" line="54"/>
         <source>Cancel</source>
-        <translation type="unfinished">Отменить</translation>
+        <translation type="unfinished">Отмена</translation>
     </message>
     <message>
         <location filename="../about.cpp" line="74"/>

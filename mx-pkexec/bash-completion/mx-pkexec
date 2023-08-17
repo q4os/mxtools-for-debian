@@ -1,5 +1,0 @@
-# mx-pkexec completion                                         -*- shell-script -*-
-
-complete -F _root_command mx-pkexec
-
-# ex: filetype=sh

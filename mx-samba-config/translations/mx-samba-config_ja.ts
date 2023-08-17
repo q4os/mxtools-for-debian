@@ -49,7 +49,7 @@
         <translation>有効なユーザーのアクセス権</translation>
     </message>
     <message>
-        <location filename="../editshare.cpp" line="46"/>
+        <location filename="../editshare.cpp" line="48"/>
         <source>Select directory to share</source>
         <translation>共有するディレクトリの選択</translation>
     </message>

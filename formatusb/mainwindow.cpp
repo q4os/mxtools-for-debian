@@ -287,3 +287,40 @@ void MainWindow::on_checkBoxshowpartitions_clicked()
          ui->comboBoxPartitionTableType->setEnabled(true);
      }
 }
+
+void MainWindow::validate_name(){
+    // see if name is reasonable
+    QString test;
+    test = ui->lineEditFSlabel->text();
+
+    if (test.isEmpty()){
+        return;
+    }
+    QString regexstring = "^[A-Za-z0-9_.-]{1,11}$";
+    if (ui->comboBoxDataFormat->currentText() == "ext4"){
+        regexstring = "^[A-Za-z0-9_.-]{1,16}$";
+    }
+    if (ui->comboBoxDataFormat->currentText() == "ntfs"){
+        regexstring = "^[A-Za-z0-9_.-]{1,32}$";
+    }
+
+    if (!test.contains(QRegExp(regexstring))) {
+        if (ui->buttonNext->isEnabled()) {
+            QMessageBox::critical(this, tr("Failure"), tr("Invalid Name"));
+            ui->buttonNext->setEnabled(false);
+        }
+    } else {
+        ui->buttonNext->setEnabled(true);
+    }
+}
+void MainWindow::on_lineEditFSlabel_textChanged(const QString &arg1)
+{
+    validate_name();
+}
+
+
+void MainWindow::on_comboBoxDataFormat_currentIndexChanged(int index)
+{
+    validate_name();
+}
+

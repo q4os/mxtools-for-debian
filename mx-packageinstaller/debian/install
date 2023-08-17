@@ -6,5 +6,3 @@ mx-packageinstaller.desktop	usr/share/applications
 scripts/mxpi-launcher		usr/bin
 scripts/org.mxlinux.pkexec.mxpi-launcher.policy usr/share/polkit-1/actions
 translations/*.qm		usr/share/mx-packageinstaller/locale
-mx-packageinstaller-pkexec	usr/bin
-org.mxlinux.pkexec.mx-packageinstaller-pkexec.policy usr/share/polkit-1/actions

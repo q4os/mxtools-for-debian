@@ -18,42 +18,41 @@ Geany
    <cs>fast and lightweight IDE and text editor</cs>
    <da>hurtig og letvægts IDE og tekstredigering</da>
    <de>Schneller und schlanker Texteditor und IDE</de>
-   <el>γρήγορο και ελαφρύ IDE και πρόγραμμα επεξεργασίας κειμένου</el>
+   <el>Γρήγορο και ελαφρύ πρόγραμμα IDE επεξεργασίας κειμένου</el>
    <en>fast and lightweight IDE and text editor</en>
    <es>Editor de textos rápido y liviano (IDE)</es>
    <et>fast and lightweight IDE and text editor</et>
    <eu>fast and lightweight IDE and text editor</eu>
    <fa>fast and lightweight IDE and text editor</fa>
    <fil_PH>fast and lightweight IDE and text editor</fil_PH>
-   <fi>fast and lightweight IDE and text editor</fi>
+   <fi>nopea ja keveä ohjelmointiympäristö ja tekstinmuokkain</fi>
    <fr>Éditeur de texte IDE rapide et léger</fr>
    <he_IL>fast and lightweight IDE and text editor</he_IL>
-   <hi>fast and lightweight IDE and text editor</hi>
+   <hi>तीव्र व सरल आईडीई व टेक्स्ट संपादक</hi>
    <hr>fast and lightweight IDE and text editor</hr>
    <hu>fast and lightweight IDE and text editor</hu>
    <id>fast and lightweight IDE and text editor</id>
    <is>fast and lightweight IDE and text editor</is>
    <it>Editor di testo, ed Ambiente di Sviluppo Integrato, veloce e leggero</it>
-   <ja_JP>fast and lightweight IDE and text editor</ja_JP>
-   <ja>fast and lightweight IDE and text editor</ja>
+   <ja>高速かつ軽量な IDE（統合開発環境）とテキストエディタ</ja>
    <kk>fast and lightweight IDE and text editor</kk>
    <ko>fast and lightweight IDE and text editor</ko>
    <lt>fast and lightweight IDE and text editor</lt>
    <mk>fast and lightweight IDE and text editor</mk>
    <mr>fast and lightweight IDE and text editor</mr>
-   <nb>fast and lightweight IDE and text editor</nb>
+   <nb>rask og lettvektig IDE og tekstredigeringsprogram</nb>
    <nl>snelle en lichtgewicht IDE en tekstverwerker</nl>
    <pl>szybkie i lekkie środowisko programistyczne oraz edytor tekstu</pl>
-   <pt_BR>IDE (Integrated Development Environment) e editor de texto, ligeiro e rápido</pt_BR>
+   <pt_BR>IDE (Integrated Development Environment) e editor de texto, leve e rápido</pt_BR>
    <pt>IDE (Integrated Development Environment) e editor de texto, ligeiro e rápido</pt>
    <ro>fast and lightweight IDE and text editor</ro>
    <ru>Быстрая и легковесная IDE и текстовый редактор</ru>
    <sk>fast and lightweight IDE and text editor</sk>
    <sl>lahek in hiter IDE urejevalnik teksta</sl>
-   <sq>fast and lightweight IDE and text editor</sq>
+   <sq>përpunues i shpejtë dhe i peshës së lehtë tekstesh dhe IDE</sq>
    <sr>fast and lightweight IDE and text editor</sr>
    <sv>snabb lättvikts IDE och textredigerare</sv>
-   <tr>fast and lightweight IDE and text editor</tr>
+   <tr>hızlı, hafif IDE ve metin düzenleyici</tr>
    <uk>швидкий і легкий текстовий редактор та IDE</uk>
    <vi>fast and lightweight IDE and text editor</vi>
    <zh_CN>fast and lightweight IDE and text editor</zh_CN>

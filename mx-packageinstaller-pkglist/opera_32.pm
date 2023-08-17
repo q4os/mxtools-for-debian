@@ -14,46 +14,45 @@ Opera
    <ar>Opera browser (32 bit is beta-only)</ar>
    <bg>Opera browser (32 bit is beta-only)</bg>
    <bn>Opera browser (32 bit is beta-only)</bn>
-   <ca>Navegador Opera (32 bit només beta)</ca>
+   <ca>Navegador Opera</ca>
    <cs>Opera browser (32 bit is beta-only)</cs>
    <da>Opera-browser (32 bit er kun beta)</da>
-   <de>Opera-Browser (32 Bit ist nur Beta-Version)</de>
-   <el>Πρόγραμμα περιήγησης Opera (32 bit είναι μόνο beta)</el>
+   <de>Opera-Browser</de>
+   <el>Πρόγραμμα περιήγησης Opera</el>
    <en>Opera browser (32 bit is beta-only)</en>
-   <es>Navegador Opera (32 bit - solo versión beta)</es>
+   <es>Navegador Opera</es>
    <et>Opera browser (32 bit is beta-only)</et>
    <eu>Opera browser (32 bit is beta-only)</eu>
    <fa>Opera browser (32 bit is beta-only)</fa>
    <fil_PH>Opera browser (32 bit is beta-only)</fil_PH>
-   <fi>Opera browser (32 bit is beta-only)</fi>
-   <fr>Navigateur Opera (32 bit en beta uniquement)</fr>
+   <fi>Opera-nettiselain</fi>
+   <fr>Navigateur Opera</fr>
    <he_IL>Opera browser (32 bit is beta-only)</he_IL>
-   <hi>Opera browser (32 bit is beta-only)</hi>
+   <hi>ओपेरा ब्राउज़र</hi>
    <hr>Opera browser (32 bit is beta-only)</hr>
    <hu>Opera browser (32 bit is beta-only)</hu>
    <id>Opera browser (32 bit is beta-only)</id>
    <is>Opera browser (32 bit is beta-only)</is>
-   <it>Opera browser (a 32 bit è esclusivamente-beta)</it>
-   <ja_JP>Opera browser (32 bit is beta-only)</ja_JP>
-   <ja>Opera browser (32 bit is beta-only)</ja>
+   <it>Opera browser</it>
+   <ja>Opera ブラウザ</ja>
    <kk>Opera browser (32 bit is beta-only)</kk>
    <ko>Opera browser (32 bit is beta-only)</ko>
    <lt>Opera naršyklė (32 bitų yra tik beta versija)</lt>
    <mk>Opera browser (32 bit is beta-only)</mk>
    <mr>Opera browser (32 bit is beta-only)</mr>
-   <nb>Opera browser (32 bit is beta-only)</nb>
-   <nl>Opera browser (32 bit is enkel-beta)</nl>
-   <pl>przeglądarka Opera (wersja 32-bitowa tylko w wersji beta)</pl>
-   <pt_BR>Navegador web Opera (32 bit is beta-only)</pt_BR>
-   <pt>Navegador web Opera (32 bit is beta-only)</pt>
+   <nb>Nettleseren Opera</nb>
+   <nl>Opera browser</nl>
+   <pl>przeglądarka Opera</pl>
+   <pt_BR>Opera - Navegador de internet </pt_BR>
+   <pt>Navegador web Opera</pt>
    <ro>Opera browser (32 bit is beta-only)</ro>
-   <ru>Браузер Opera (32 bit бета-версия)</ru>
+   <ru>Браузер Opera</ru>
    <sk>Opera browser (32 bit is beta-only)</sk>
-   <sl>Opera brskalnik (32 bitni je zgolj beta)</sl>
-   <sq>Opera browser (32 bit is beta-only)</sq>
+   <sl>Opera brskalnik</sl>
+   <sq>Shfletuesi Opera</sq>
    <sr>Opera browser (32 bit is beta-only)</sr>
-   <sv>Opera webbläsare (32 bit är enbart i beta)</sv>
-   <tr>Opera tarayıcı (32 bit yalnızca betadır)</tr>
+   <sv>Opera webbläsare</sv>
+   <tr>Opera tarayıcı</tr>
    <uk>Браузер Opera (32 біт лише у бета-версії)</uk>
    <vi>Opera browser (32 bit is beta-only)</vi>
    <zh_CN>Opera browser (32 bit is beta-only)</zh_CN>
@@ -68,7 +67,7 @@ Opera
 
 <preinstall>
 sed -i -r '/opera.com/ s/^#+//' /etc/apt/sources.list.d/various.list
-wget -O - http://deb.opera.com/archive.key | apt-key add -
+wget -O - http://deb.opera.com/archive.key | tee /etc/apt/trusted.gpg.d/opera.asc
 apt-get update
 </preinstall>
 

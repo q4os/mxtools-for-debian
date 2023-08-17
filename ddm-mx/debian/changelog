@@ -1,3 +1,35 @@
+ddm-mx (23.07.02) mx; urgency=medium
+
+  * update translations
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 20 Jul 2023 19:54:21 -0400
+
+ddm-mx (23.07.01) mx; urgency=medium
+
+  * update transations 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Tue, 18 Jul 2023 22:59:03 -0400
+
+ddm-mx (23.06.02) mx; urgency=medium
+
+  * update translations 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 10 Jul 2023 19:00:31 -0400
+
+ddm-mx (23.06.01) mx; urgency=medium
+
+  * only change nvidia-driver in optimus situations when using bumblebee 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 24 Jun 2023 18:57:02 -0400
+
+ddm-mx (23.03.05) mx; urgency=medium
+
+  * offer to install nvidia-driver if part not found
+  * update policy file with icon
+  * translations
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 11 Jun 2023 18:20:54 -0400
+
 ddm-mx (23.03.04) mx; urgency=medium
 
   * mx-launcher-l10n strings in policy file

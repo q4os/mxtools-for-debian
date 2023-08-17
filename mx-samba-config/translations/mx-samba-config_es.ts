@@ -49,7 +49,7 @@
         <translation>Derechos de acceso para usuarios válidos</translation>
     </message>
     <message>
-        <location filename="../editshare.cpp" line="46"/>
+        <location filename="../editshare.cpp" line="48"/>
         <source>Select directory to share</source>
         <translation>Seleccionar directorio para compartir</translation>
     </message>

@@ -1,3 +1,15 @@
+checkaptgpg (23.07.01) mx; urgency=medium
+
+  * translation refresh
+
+ -- fehlix <fehlix@mxlinux.org>  Sun, 02 Jul 2023 14:06:31 -0500
+
+checkaptgpg (23.06.01) mx; urgency=medium
+
+  * translation refresh
+
+ -- fehlix <fehlix@mxlinux.org>  Mon, 12 Jun 2023 10:00:06 -0500
+
 checkaptgpg (23.05.02) mx; urgency=medium
 
   * add translations

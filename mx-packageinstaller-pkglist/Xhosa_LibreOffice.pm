@@ -25,35 +25,34 @@ Xhosa_Libreoffice
    <eu>Xhosa Language Meta-Package for LibreOffice</eu>
    <fa>Xhosa Language Meta-Package for LibreOffice</fa>
    <fil_PH>Xhosa Language Meta-Package for LibreOffice</fil_PH>
-   <fi>Xhosa Language Meta-Package for LibreOffice</fi>
+   <fi>Xhosankielinen kielipaketti LibreOffice:lle</fi>
    <fr>Meta-Paquet de langue Xhosa pour LibreOffice</fr>
    <he_IL>Xhosa Language Meta-Package for LibreOffice</he_IL>
-   <hi>Xhosa Language Meta-Package for LibreOffice</hi>
+   <hi>लिब्रे-ऑफिस हेतु कोसा भाषा मेटा-पैकेज</hi>
    <hr>Xhosa Language Meta-Package for LibreOffice</hr>
    <hu>Xhosa Language Meta-Package for LibreOffice</hu>
    <id>Xhosa Language Meta-Package for LibreOffice</id>
    <is>Xhosa Language Meta-Package for LibreOffice</is>
-   <it>Xhosa Language Meta-Package for LibreOffice</it>
-   <ja_JP>Xhosa Language Meta-Package for LibreOffice</ja_JP>
-   <ja>Xhosa Language Meta-Package for LibreOffice</ja>
+   <it>Meta-pacchetto della lingua xhosa per LibreOffice</it>
+   <ja>LibreOffice 用 コサ語メタパッケージ</ja>
    <kk>Xhosa Language Meta-Package for LibreOffice</kk>
    <ko>Xhosa Language Meta-Package for LibreOffice</ko>
    <lt>Xhosa Language Meta-Package for LibreOffice</lt>
    <mk>Xhosa Language Meta-Package for LibreOffice</mk>
    <mr>Xhosa Language Meta-Package for LibreOffice</mr>
-   <nb>Xhosa Language Meta-Package for LibreOffice</nb>
-   <nl>Xhosa Language Meta-Package for LibreOffice</nl>
-   <pl>Xhosa Language Meta-Package for LibreOffice</pl>
-   <pt_BR>Xhosa Language Meta-Package for LibreOffice</pt_BR>
+   <nb>Xhosa språkpakke for LibreOffice</nb>
+   <nl>Xhosa Taal Meta-Pakket voor LibreOffice</nl>
+   <pl>Meta-pakiet języka Xhosa dla LibreOffice</pl>
+   <pt_BR>Xhosa Pacote de Idioma para o LibreOffice</pt_BR>
    <pt>Xosa Meta-Pacote de Idioma para LibreOffice</pt>
    <ro>Xhosa Language Meta-Package for LibreOffice</ro>
-   <ru>Xhosa Language Meta-Package for LibreOffice</ru>
+   <ru>Мета-пакет языка коса для LibreOffice</ru>
    <sk>Xhosa Language Meta-Package for LibreOffice</sk>
    <sl>Khoški jezikovni meta-paket za LibreOffice</sl>
-   <sq>Xhosa Language Meta-Package for LibreOffice</sq>
+   <sq>Meta-Paketë gjuhësore në xhosa për LibreOffice-in</sq>
    <sr>Xhosa Language Meta-Package for LibreOffice</sr>
    <sv>Xhosa Språk Meta-Paket för LibreOffice</sv>
-   <tr>Xhosa Language Meta-Package for LibreOffice</tr>
+   <tr>LibreOffice için Xhosa Dili Üst-Paketi</tr>
    <uk>Xhosa Language Meta-Package for LibreOffice</uk>
    <vi>Xhosa Language Meta-Package for LibreOffice</vi>
    <zh_CN>Xhosa Language Meta-Package for LibreOffice</zh_CN>

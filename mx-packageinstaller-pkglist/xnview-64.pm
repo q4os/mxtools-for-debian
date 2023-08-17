@@ -18,30 +18,29 @@ XnView
    <cs>picture viewer, browser and converter</cs>
    <da>billedfremviser, browser og konverter</da>
    <de>Bildbetrachter, -browser und -konverter</de>
-   <el>πρόγραμμα προβολής εικόνων, πρόγραμμα περιήγησης και μετατροπέα</el>
+   <el>Πρόγραμμα προβολής εικόνων, πρόγραμμα περιήγησης και μετατροπέα</el>
    <en>picture viewer, browser and converter</en>
    <es>visor de imágenes, navegador y conversor</es>
    <et>picture viewer, browser and converter</et>
    <eu>picture viewer, browser and converter</eu>
    <fa>picture viewer, browser and converter</fa>
    <fil_PH>picture viewer, browser and converter</fil_PH>
-   <fi>picture viewer, browser and converter</fi>
+   <fi>kuvankatseluohjelma, selain ja muunnin</fi>
    <fr>Visionner, feuilleter et convertir des images</fr>
    <he_IL>picture viewer, browser and converter</he_IL>
-   <hi>picture viewer, browser and converter</hi>
+   <hi>चित्र प्रदर्शक, ब्राउज़र व रूपांतरण साधन</hi>
    <hr>picture viewer, browser and converter</hr>
    <hu>picture viewer, browser and converter</hu>
    <id>picture viewer, browser and converter</id>
    <is>picture viewer, browser and converter</is>
    <it>visualizzatore e convertitore di immagini</it>
-   <ja_JP>picture viewer, browser and converter</ja_JP>
-   <ja>picture viewer, browser and converter</ja>
+   <ja>画像ビューアやブラウザ、コンバーター</ja>
    <kk>picture viewer, browser and converter</kk>
    <ko>picture viewer, browser and converter</ko>
    <lt>picture viewer, browser and converter</lt>
    <mk>picture viewer, browser and converter</mk>
    <mr>picture viewer, browser and converter</mr>
-   <nb>picture viewer, browser and converter</nb>
+   <nb>bildeframvisning, utforsking og konvertering</nb>
    <nl>afbeelding bekijker, verkenner en omzetter</nl>
    <pl>przeglądarka zdjęć i konwerter</pl>
    <pt_BR>Visualizador, navegador e conversor de imagens</pt_BR>
@@ -50,10 +49,10 @@ XnView
    <ru>Просмотрщик изображений, каталогизатор и конвертер</ru>
    <sk>picture viewer, browser and converter</sk>
    <sl>Pregledovalnik slik, brskalnik in pretvornik</sl>
-   <sq>picture viewer, browser and converter</sq>
+   <sq>parës, shfletues dhe shndërrues figurash</sq>
    <sr>picture viewer, browser and converter</sr>
    <sv>bildvisare och konverterare</sv>
-   <tr>picture viewer, browser and converter</tr>
+   <tr>resim görüntüleyici, tarayıcı ve dönüştürücü</tr>
    <uk>picture viewer, browser and converter</uk>
    <vi>picture viewer, browser and converter</vi>
    <zh_CN>picture viewer, browser and converter</zh_CN>

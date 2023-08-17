@@ -34,7 +34,6 @@ Synaptic Package Manager
    <id>manajer paket grafis</id>
    <is>grafískur pakkastjóri</is>
    <it>gestore di pacchetti grafico</it>
-   <ja_JP>グラフィカルパッケージマネージャー</ja_JP>
    <ja>グラフィカルパッケージマネージャー</ja>
    <kk>графикалық пакет менеджері</kk>
    <ko>그래픽 패키지 관리자</ko>

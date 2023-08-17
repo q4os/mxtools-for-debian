@@ -1,0 +1,10 @@
+[Plymouth Theme]
+Name=MXLiveLogo
+Description=MX Linux Live Logo
+Comment=created By CharlesV
+ModuleName=script
+
+[script]
+ImageDir=/usr/share/plymouth/themes/MXLiveLogo
+ScriptFile=/usr/share/plymouth/themes/MXLiveLogo/MXLiveLogo.script
+

@@ -26,26 +26,25 @@ VirtualBox
    <eu>Virtualbox</eu>
    <fa>Virtualbox</fa>
    <fil_PH>Virtualbox</fil_PH>
-   <fi>Virtualbox</fi>
+   <fi>Virtualbox - käyttöjärjestelmien ja muiden ohjelmien virtualisoimiseen tarkoitettu tietokoneohjelma.</fi>
    <fr>Virtualbox</fr>
    <he_IL>Virtualbox</he_IL>
-   <hi>Virtualbox</hi>
+   <hi>वर्चुअल बॉक्स</hi>
    <hr>Virtualbox</hr>
    <hu>Virtualbox</hu>
    <id>Virtualbox</id>
    <is>Virtualbox</is>
    <it>Virtualbox</it>
-   <ja_JP>Virtualbox</ja_JP>
-   <ja>Virtualbox</ja>
+   <ja>バーチャルボックス</ja>
    <kk>Virtualbox</kk>
    <ko>Virtualbox</ko>
    <lt>Virtualbox</lt>
    <mk>Virtualbox</mk>
    <mr>Virtualbox</mr>
-   <nb>Virtualbox</nb>
+   <nb>VirtualBox</nb>
    <nl>Virtualbox</nl>
    <pl>menedżer maszyn wirtualnych</pl>
-   <pt_BR>Virtualbox</pt_BR>
+   <pt_BR>VirtualBox - Máquina virtual que permite instalar e executar diferentes sistemas operacionais em um único computador</pt_BR>
    <pt>Virtualbox</pt>
    <ro>Virtualbox</ro>
    <ru>Приложение виртуализации VirtualBox</ru>

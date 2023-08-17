@@ -18,39 +18,38 @@ Redshift
    <cs>Transition monitor color temperature by time of day</cs>
    <da>Transition monitor color temperature by time of day</da>
    <de>Wechsel der Bildschirmfarbeneinstellung in Abhängig von der Tageszeit</de>
-   <el>Θερμοκρασία χρώματος οθόνης μετάβασης κατά ώρα της ημέρας</el>
+   <el>Θερμοκρασία χρώματος οθόνης, κατά ώρα της ημέρας</el>
    <en>Transition monitor color temperature by time of day</en>
    <es>Monitor de transición de temperatura de color por hora del día</es>
    <et>Transition monitor color temperature by time of day</et>
    <eu>Transition monitor color temperature by time of day</eu>
    <fa>Transition monitor color temperature by time of day</fa>
    <fil_PH>Transition monitor color temperature by time of day</fil_PH>
-   <fi>Transition monitor color temperature by time of day</fi>
+   <fi>Näytön värien sävy ja lämpötila muuttuu siirtymällisesti päivän kellonajan mukaan</fi>
    <fr>Adaptation de la température des couleurs de votre écran selon le moment de la journée</fr>
    <he_IL>Transition monitor color temperature by time of day</he_IL>
-   <hi>Transition monitor color temperature by time of day</hi>
+   <hi>दिन के समय अनुसार मॉनिटर रंग परिवर्तन हेतु निरीक्षक</hi>
    <hr>Transition monitor color temperature by time of day</hr>
    <hu>Transition monitor color temperature by time of day</hu>
    <id>Transition monitor color temperature by time of day</id>
    <is>Transition monitor color temperature by time of day</is>
    <it>Transizione della temperatura del colore del monitor per ora del giorno</it>
-   <ja_JP>Transition monitor color temperature by time of day</ja_JP>
-   <ja>Transition monitor color temperature by time of day</ja>
+   <ja>時間帯別のトランジションモニターの色温度</ja>
    <kk>Transition monitor color temperature by time of day</kk>
    <ko>Transition monitor color temperature by time of day</ko>
    <lt>Transition monitor color temperature by time of day</lt>
    <mk>Transition monitor color temperature by time of day</mk>
    <mr>Transition monitor color temperature by time of day</mr>
-   <nb>Transition monitor color temperature by time of day</nb>
+   <nb>Endre skjermens fargetemperatur i løpet av døgnet </nb>
    <nl>Pas monitor kleurtemperatuur aan aan tijdstip van de dag</nl>
-   <pl>Transition monitor color temperature by time of day</pl>
-   <pt_BR>Adaptar a cor da temperatura do monitor à hora do dia</pt_BR>
-   <pt>Cor de visualização da temperatura no monitor, com transição pela hora do dia</pt>
+   <pl>Zmiana temperatury barwowej monitora w zależności od pory dnia</pl>
+   <pt_BR>Altera a ‘temperatura de cor’ do monitor [dia/noite] (para a proteção dos olhos)</pt_BR>
+   <pt>Alterar a 'temperatura de cor' do monitor [dia/noite] (para protecção da vista)</pt>
    <ro>Transition monitor color temperature by time of day</ro>
    <ru>Смена цветовой температуры экрана в зависимости от времени суток</ru>
    <sk>Transition monitor color temperature by time of day</sk>
    <sl>Spreminjanje temperature zaslona glede na obdobje dneva</sl>
-   <sq>Transition monitor color temperature by time of day</sq>
+   <sq>Ndryshim i temperaturës së ngjyrës së ekranit sipas kohës së ditës</sq>
    <sr>Transition monitor color temperature by time of day</sr>
    <sv>Ändrar skärmens färgtemperatur efter tiden på dagen</sv>
    <tr>Günün saatine göre geçiş monitörü renk sıcaklığı</tr>

@@ -122,17 +122,17 @@ bool MainWindow::downloadDeb(const QString &url, const QString &filepath)
 {
     QFileInfo fi(filepath);
     QFile tofile(fi.fileName());
-    if (!(downloadFile(url + "/" + filepath, tofile))) {
+    if (!(downloadFile(url + "/" + filepath, &tofile))) {
         QMessageBox::critical(this, windowTitle(), QString(tr("Error downloading %1")).arg(fi.fileName()));
         return false;
     }
     return true;
 }
 
-bool MainWindow::downloadFile(const QString &url, QFile &file)
+bool MainWindow::downloadFile(const QString &url, QFile *file)
 {
-    if (!file.open(QIODevice::WriteOnly)) {
-        qDebug() << "Could not open file:" << file.fileName();
+    if (!file->open(QIODevice::WriteOnly)) {
+        qDebug() << "Could not open file:" << file->fileName();
         return false;
     }
 
@@ -141,7 +141,7 @@ bool MainWindow::downloadFile(const QString &url, QFile &file)
 
     bool success = true;
     connect(reply, &QNetworkReply::readyRead,
-            [this, &file, &success]() { success = file.write(reply->readAll()) > 0; });
+            [this, &file, &success]() { success = file->write(reply->readAll()) > 0; });
     connect(reply, &QNetworkReply::finished, &loop, &QEventLoop::quit);
     loop.exec();
     reply->disconnect();
@@ -150,11 +150,11 @@ bool MainWindow::downloadFile(const QString &url, QFile &file)
         QMessageBox::warning(
             this, tr("Error"),
             tr("There was an error writing file: %1. Please check if you have enough free space on your drive")
-                .arg(file.fileName()));
+                .arg(file->fileName()));
         exit(EXIT_FAILURE);
     }
 
-    file.close();
+    file->close();
     return (reply->error() == QNetworkReply::NoError);
 }
 
@@ -182,14 +182,14 @@ QString MainWindow::downloadDebs()
     QTemporaryFile file;
     QString url = QStringLiteral("http://deb-multimedia.org");
     updateStatus(tr("<b>Running command...</b><p>") + tr("downloading Packages.gz from 'main'"), idx += inc);
-    downloadInfoAndPackage(url, release, QStringLiteral("main"), arch, file, QStringList {"libdvdcss2", "libtxc-dxtn0"},
-                           idx += inc);
+    downloadInfoAndPackage(url, release, QStringLiteral("main"), arch, &file,
+                           QStringList {"libdvdcss2", "libtxc-dxtn0"}, idx += inc);
 
     // download and install w32 or w64 codecs on x86 platforms
     if (arch == QLatin1String("amd64") || arch == QLatin1String("i386")) {
         QTemporaryFile file_nonfree;
         updateStatus(tr("<b>Running command...</b><p>") + tr("downloading Packages.gz from 'non-free'"), idx += inc);
-        if (!downloadInfoAndPackage(url, "bullseye", QStringLiteral("non-free"), arch, file_nonfree,
+        if (!downloadInfoAndPackage(url, "bullseye", QStringLiteral("non-free"), arch, &file_nonfree,
                                     QStringList {"w.*codecs.*deb"}, idx += inc))
             arch_flag = false;
     }
@@ -201,7 +201,7 @@ QString MainWindow::downloadDebs()
 }
 
 bool MainWindow::downloadInfoAndPackage(const QString &url, const QString &release, const QString &repo,
-                                        const QString &arch, QFile &file, const QStringList &search_terms, int progress)
+                                        const QString &arch, QFile *file, const QStringList &search_terms, int progress)
 {
     if (!downloadFile(url + "/dists/" + release + "/" + repo + "/binary-" + arch + "/Packages.gz", file)) {
         QMessageBox::critical(this, tr("Error"), tr("Cannot connect to the download site"));
@@ -210,7 +210,7 @@ bool MainWindow::downloadInfoAndPackage(const QString &url, const QString &relea
 
     const int step = 10;
     for (const QString &search_deb : search_terms) {
-        QString out = cmd.getCmdOut("zgrep ^Filename " + file.fileName() + " |grep " + search_deb
+        QString out = cmd.getCmdOut("zgrep ^Filename " + file->fileName() + " |grep " + search_deb
                                     + " |cut -d' ' -f2 |head -n1");
         if (out.isEmpty()) {
             QMessageBox::critical(this, tr("Error"), tr("Cannot connect find %1 package").arg(search_deb));

@@ -18,42 +18,41 @@ Scribus
    <cs>a desktop page layout program</cs>
    <da>et program til skrivebordssidelayout</da>
    <de>Ein Desktop-Seitenlayout-Programm</de>
-   <el>ένα πρόγραμμα διάταξης σελίδας επιφάνειας εργασίας</el>
+   <el>Πρόγραμμα διάταξης σελίδας της επιφάνειας εργασίας</el>
    <en>a desktop page layout program</en>
    <es>Programa de maquetación de páginas para escritorio</es>
    <et>a desktop page layout program</et>
    <eu>a desktop page layout program</eu>
    <fa>a desktop page layout program</fa>
    <fil_PH>a desktop page layout program</fil_PH>
-   <fi>a desktop page layout program</fi>
+   <fi>työpöytäsivuohjelma ulkoasulle</fi>
    <fr>Programme de mise en page</fr>
    <he_IL>a desktop page layout program</he_IL>
-   <hi>a desktop page layout program</hi>
+   <hi>डेस्कटॉप पृष्ठ अभिन्यास प्रोग्राम</hi>
    <hr>a desktop page layout program</hr>
    <hu>a desktop page layout program</hu>
    <id>a desktop page layout program</id>
    <is>a desktop page layout program</is>
    <it>programma di impaginazione per il desktop</it>
-   <ja_JP>a desktop page layout program</ja_JP>
-   <ja>a desktop page layout program</ja>
+   <ja>デスクトップのページレイアウト用プログラム</ja>
    <kk>a desktop page layout program</kk>
    <ko>a desktop page layout program</ko>
    <lt>a desktop page layout program</lt>
    <mk>a desktop page layout program</mk>
    <mr>a desktop page layout program</mr>
-   <nb>a desktop page layout program</nb>
+   <nb>datatrykkeprogram (DTP)</nb>
    <nl>a desktop pagina layout programma</nl>
    <pl>program do składu tekstu (DTP), projektowania publikacji i tworzenia plików PDF</pl>
-   <pt_BR>Programa de paginação electrônica (composição de publicações)</pt_BR>
+   <pt_BR>Programa de paginação eletrônica (composição de publicações)</pt_BR>
    <pt>Programa de paginação electrónica (composição de publicações)</pt>
    <ro>a desktop page layout program</ro>
    <ru>Приложение для визуальной вёрстки документов</ru>
    <sk>a desktop page layout program</sk>
    <sl>Namizno urejanje preloma strani</sl>
-   <sq>a desktop page layout program</sq>
+   <sq>program desktop skicimi faqesh</sq>
    <sr>a desktop page layout program</sr>
    <sv>ett skrivbords sidlayout-program</sv>
-   <tr>a desktop page layout program</tr>
+   <tr>bir masaüstü sayfa düzeni programı</tr>
    <uk>a desktop page layout program</uk>
    <vi>a desktop page layout program</vi>
    <zh_CN>a desktop page layout program</zh_CN>

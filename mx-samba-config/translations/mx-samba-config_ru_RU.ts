@@ -49,7 +49,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../editshare.cpp" line="46"/>
+        <location filename="../editshare.cpp" line="48"/>
         <source>Select directory to share</source>
         <translation type="unfinished"></translation>
     </message>
@@ -224,7 +224,7 @@
         <location filename="../mainwindow.cpp" line="528"/>
         <location filename="../mainwindow.cpp" line="540"/>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="94"/>

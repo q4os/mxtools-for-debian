@@ -49,7 +49,7 @@
         <translation>זכויות גישה למשתמשים תקפים</translation>
     </message>
     <message>
-        <location filename="../editshare.cpp" line="46"/>
+        <location filename="../editshare.cpp" line="48"/>
         <source>Select directory to share</source>
         <translation>בחירת תיקייה לשיתוף</translation>
     </message>

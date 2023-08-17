@@ -1,4 +1,0 @@
-# src/kim_*.desktop usr/share/kde4/services/ServiceMenus
-src/bin/kim_*  usr/bin
-src/kim_*.desktop usr/share/kservices5/ServiceMenus
-src/slideshow/* usr/share/kim/slideshow

@@ -1,5 +1,4 @@
 udev/* etc/udev/rules.d 
-xorg.d/* etc/X11/xorg.conf.d
 issue usr/share/antiX
 sysctl/* etc/sysctl.d
 apt.conf.d/* etc/apt/apt.conf.d
@@ -7,7 +6,8 @@ icon_overrides/* usr/share/pixmaps
 desktop_file_overrides/* usr/share/applications
 #luckybackup/* usr/share/mx-system/luckybackup
 luckybackup/*.svg usr/share/icons/hicolor/scalable/apps
-grub.d/* usr/share/mx-system/grub.d
 Xsession.d/* usr/share/mx-system/Xsession.d
 Xsession.d/57mesa_override etc/X11/Xsession.d
 os-prober/40grub2 usr/lib/linux-boot-probes/mounted
+xorg.conf.d/* 	usr/share/X11/xorg.conf.d
+sbin/*	usr/sbin

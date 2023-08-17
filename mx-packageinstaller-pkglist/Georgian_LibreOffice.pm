@@ -14,46 +14,45 @@ Georgian_Libreoffice
    <ar>Georgian Language Meta-Package for LibreOffice</ar>
    <bg>Georgian Language Meta-Package for LibreOffice</bg>
    <bn>Georgian Language Meta-Package for LibreOffice</bn>
-   <ca>Metapaquet d'idioma Georgià per LibreOffice</ca>
+   <ca>Metapaquet per LibreOffice</ca>
    <cs>Georgian Language Meta-Package for LibreOffice</cs>
    <da>Georgian Language Meta-Package for LibreOffice</da>
-   <de>Georgisches Meta-Paket für LibreOffice</de>
-   <el>LibreOffice στα Georgian</el>
+   <de>Meta-Paket für LibreOffice</de>
+   <el>Meta-Package για το LibreOffice</el>
    <en>Georgian Language Meta-Package for LibreOffice</en>
-   <es>Meta-Paquete de idioma georgiano para LibreOffice</es>
+   <es>Meta-Package para LibreOffice</es>
    <et>Georgian Language Meta-Package for LibreOffice</et>
    <eu>Georgian Language Meta-Package for LibreOffice</eu>
    <fa>Georgian Language Meta-Package for LibreOffice</fa>
    <fil_PH>Georgian Language Meta-Package for LibreOffice</fil_PH>
-   <fi>Georgian Language Meta-Package for LibreOffice</fi>
-   <fr>Georgian Language Meta-Package for LibreOffice</fr>
+   <fi>Metatieto-paketti LibreOffice:lle</fi>
+   <fr>Meta-Paquet pour LibreOffice</fr>
    <he_IL>Georgian Language Meta-Package for LibreOffice</he_IL>
-   <hi>Georgian Language Meta-Package for LibreOffice</hi>
+   <hi>लिब्रे-ऑफिस हेतु मेटा-पैकेज</hi>
    <hr>Georgian Language Meta-Package for LibreOffice</hr>
    <hu>Georgian Language Meta-Package for LibreOffice</hu>
    <id>Georgian Language Meta-Package for LibreOffice</id>
    <is>Georgian Language Meta-Package for LibreOffice</is>
-   <it>Meta-pacchetto della lingua georgiana per LibreOffice</it>
-   <ja_JP>Georgian Language Meta-Package for LibreOffice</ja_JP>
-   <ja>Georgian Language Meta-Package for LibreOffice</ja>
+   <it>Meta-pacchetto per LibreOffice</it>
+   <ja>LibreOffice用メタパッケージ</ja>
    <kk>Georgian Language Meta-Package for LibreOffice</kk>
    <ko>Georgian Language Meta-Package for LibreOffice</ko>
    <lt>Georgian Language Meta-Package for LibreOffice</lt>
    <mk>Georgian Language Meta-Package for LibreOffice</mk>
    <mr>Georgian Language Meta-Package for LibreOffice</mr>
-   <nb>Georgian Language Meta-Package for LibreOffice</nb>
-   <nl>Georgian Language Meta-Package for LibreOffice</nl>
-   <pl>Georgian Language Meta-Package for LibreOffice</pl>
-   <pt_BR>Georgian Language Meta-Package for LibreOffice</pt_BR>
-   <pt>Georgiano Meta-Pacote de Idioma para LibreOffice</pt>
+   <nb>LibreOffice metapakke</nb>
+   <nl>Meta-Pakket voor LibreOffice</nl>
+   <pl>Meta-Pakiet dla LibreOffice</pl>
+   <pt_BR>Meta-Pacote para o LibreOffice</pt_BR>
+   <pt>Meta-Pacote para LibreOffice</pt>
    <ro>Georgian Language Meta-Package for LibreOffice</ro>
-   <ru>Georgian Language Meta-Package for LibreOffice</ru>
+   <ru>Мета-пакет для LibreOffice</ru>
    <sk>Georgian Language Meta-Package for LibreOffice</sk>
-   <sl>Gruzijski jezikovni meta-paket za LibreOffice</sl>
-   <sq>Georgian Language Meta-Package for LibreOffice</sq>
+   <sl>Meta-paket za LibreOffice</sl>
+   <sq>Meta-Paketë për LibreOffice-in</sq>
    <sr>Georgian Language Meta-Package for LibreOffice</sr>
-   <sv>Georgiskt Språk Meta-Paket för LibreOffice</sv>
-   <tr>Georgian Language Meta-Package for LibreOffice</tr>
+   <sv>Meta-Paket för LibreOffice</sv>
+   <tr>LibreOffice için Üst-Paket</tr>
    <uk>Georgian Language Meta-Package for LibreOffice</uk>
    <vi>Georgian Language Meta-Package for LibreOffice</vi>
    <zh_CN>Georgian Language Meta-Package for LibreOffice</zh_CN>

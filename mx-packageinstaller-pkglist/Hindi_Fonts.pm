@@ -34,7 +34,6 @@ Hindi Fonts फोंट नहीं
    <id>Hindi fonts</id>
    <is>Hindi fonts</is>
    <it>Hindi fonts</it>
-   <ja_JP>Hindi fonts</ja_JP>
    <ja>Hindi fonts</ja>
    <kk>Hindi fonts</kk>
    <ko>Hindi fonts</ko>

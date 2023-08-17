@@ -18,7 +18,7 @@ Firefox
    <cs>Latest Firefox</cs>
    <da>Seneste Firefox</da>
    <de>Neuester Firefox</de>
-   <el>Τελευταία Firefox</el>
+   <el>Το τελευταίο Firefox</el>
    <en>Latest Firefox</en>
    <es>Firefox actual</es>
    <et>Latest Firefox</et>
@@ -28,29 +28,28 @@ Firefox
    <fi>Viimeisin Firefox-versio</fi>
    <fr>La dernière version de Firefox</fr>
    <he_IL>Latest Firefox</he_IL>
-   <hi>Latest Firefox</hi>
+   <hi>फायरफॉक्स का नवीनतम संस्करण</hi>
    <hr>Latest Firefox</hr>
    <hu>Latest Firefox</hu>
    <id>Latest Firefox</id>
    <is>Latest Firefox</is>
    <it>Ultima versione di Firefox</it>
-   <ja_JP>Latest Firefox</ja_JP>
-   <ja>Latest Firefox</ja>
+   <ja>最新の Firefox</ja>
    <kk>Latest Firefox</kk>
    <ko>Latest Firefox</ko>
    <lt>Naujausia Firefox</lt>
    <mk>Latest Firefox</mk>
    <mr>Latest Firefox</mr>
-   <nb>Latest Firefox</nb>
+   <nb>Seneste Firefox</nb>
    <nl>Meest recente Firefox</nl>
    <pl>najnowszy Firefox</pl>
-   <pt_BR>Firefox mais recente</pt_BR>
+   <pt_BR>Firefox - Versão mais recente do navegador de internet</pt_BR>
    <pt>Versão mais recente do Firefox</pt>
    <ro>Latest Firefox</ro>
    <ru>Браузер Firefox последней версии</ru>
    <sk>Posledný Firefox</sk>
    <sl>Zadnja različica Firefox-a</sl>
-   <sq>Latest Firefox</sq>
+   <sq>Firefox-i më i ri</sq>
    <sr>Latest Firefox</sr>
    <sv>Senaste Firefox</sv>
    <tr>En son Firefox</tr>

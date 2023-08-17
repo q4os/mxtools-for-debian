@@ -40,6 +40,7 @@ UpgradeAutoClose=$(grep -oP '^UpgradeAutoClose=\K.*' "$APT_NOTIFIERRC" 2>/dev/nu
 
 # upgrade type dist-upgrade or upgrade
 export TEXTDOMAIN=apt-notifier
+APTGET_UPGRADETYPE='upgrade'
 if [ "$UpgradeType" = "upgrade" ]
   then
     :
@@ -47,6 +48,7 @@ if [ "$UpgradeType" = "upgrade" ]
   else
     #mygettext "full upgrade" ; echo
     UpgradeType='full-upgrade'
+    APTGET_UPGRADETYPE='dist-upgrade'
 fi
 
 # assume yes handling
@@ -86,16 +88,37 @@ update_stamp=$(find /var/lib/apt/periodic/update-stamp -mmin -3 2>/dev/null)
 
 if [ x"$APT_NOTIFIER_USE_NALA" = x"true" ]; then
     Nala_Pref="--no-autoremove"
-    [ -z "$update_stamp" ] && Nala_Update_Pref="--update" || Nala_Update_Pref="--no-update"
+    if [ -z "$update_stamp" ]; then
+        Nala_Update_Pref="--update"
+        nala update
+    else
+        Nala_Update_Pref="--no-update"
+    fi
+    Nala_Update_Pref="--no-update"
+
+    #[ -z "$update_stamp" ] && Nala_Update_Pref="--update" || Nala_Update_Pref="--no-update"
     if [ "$UpgradeType" = "upgrade" ]; then
         Nala_UpgradeType="--no-full"
     else
         Nala_UpgradeType="--full" # default
     fi
 
+    Nala_Update_Pref_Raw=""
+    LINUX_DKMS_COUNT=$(
+        LANGUAGE= LC_ALL= LANG=C
+        apt-get $AptPref_Opts -o Debug::NoLocking=true --trivial-only -V $APTGET_UPGRADETYPE 2>/dev/null |
+        sed -nr '/^The following.*will be (installed|upgraded):/,${
+                 s/^\s+//;
+                 /^linux-image-|^[^\s]*-dkms/p};
+                ' | wc -l )
+
+    if (( LINUX_DKMS_COUNT != 0 )); then
+        Nala_Update_Pref_Raw=" --raw-dpkg"
+    fi
+
     [ y"${DEBUG_APT_NOTIFIER/true/es}" = "yes" ] &&  echo nala upgrade $AptPref_Opts $Nala_UpgradeType $Nala_Pref $AssumeYes
-    echo "nala upgrade $Nala_UpgradeType $Nala_Pref" 
-    nala upgrade $AptPref_Opts $Nala_UpgradeType $Nala_Pref $Nala_Update_Pref $AssumeYes
+    echo "nala upgrade $Nala_UpgradeType $Nala_Pref $Nala_Update_Pref_Raw"
+    nala upgrade $AptPref_Opts $Nala_UpgradeType $Nala_Pref $Nala_Update_Pref $Nala_Update_Pref_Raw $AssumeYes
     if [ "$Nala_Update_Pref" = "--update" ]; then
        [ -d /var/lib/apt/periodic ] || mkdir -p /var/lib/apt/periodic
        touch /var/lib/apt/periodic/update-stamp
@@ -109,7 +132,7 @@ else
        touch /var/lib/apt/periodic/update-stamp
     fi
     echo apt $UpgradeType
-    apt --verbose-versions $AssumeYes $AptPref_Opts $UpgradeType 
+    apt --verbose-versions $AssumeYes $AptPref_Opts $UpgradeType
 fi
 
 echo ""

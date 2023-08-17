@@ -18,42 +18,41 @@ Slovak_Libreoffice
    <cs>Slovak Language Meta-Package for LibreOffice</cs>
    <da>Slovak Language Meta-Package for LibreOffice</da>
    <de>Slowakisches Meta-Paket für LibreOffice</de>
-   <el>LibreOffice στα Slovak</el>
+   <el>LibreOffice στα Σλοβακικά</el>
    <en>Slovak Language Meta-Package for LibreOffice</en>
    <es>Metapaquete de idioma eslovaco para LibreOffice</es>
    <et>Slovak Language Meta-Package for LibreOffice</et>
    <eu>Slovak Language Meta-Package for LibreOffice</eu>
    <fa>Slovak Language Meta-Package for LibreOffice</fa>
    <fil_PH>Slovak Language Meta-Package for LibreOffice</fil_PH>
-   <fi>Slovak Language Meta-Package for LibreOffice</fi>
-   <fr>Slovak Language Meta-Package for LibreOffice</fr>
+   <fi>Slovakialainen kielipaketti LibreOffice:lle</fi>
+   <fr>Méta-paquet langue slovaque pour LibreOffice</fr>
    <he_IL>Slovak Language Meta-Package for LibreOffice</he_IL>
-   <hi>Slovak Language Meta-Package for LibreOffice</hi>
+   <hi>लिब्रे-ऑफिस हेतु स्लोवाकियाई भाषा मेटा-पैकेज</hi>
    <hr>Slovak Language Meta-Package for LibreOffice</hr>
    <hu>Slovak Language Meta-Package for LibreOffice</hu>
    <id>Slovak Language Meta-Package for LibreOffice</id>
    <is>Slovak Language Meta-Package for LibreOffice</is>
-   <it>Slovak Language Meta-Package for LibreOffice</it>
-   <ja_JP>Slovak Language Meta-Package for LibreOffice</ja_JP>
-   <ja>Slovak Language Meta-Package for LibreOffice</ja>
+   <it>Meta-pacchetto della lingua slovacca per LibreOffice</it>
+   <ja>LibreOffice 用のスロバキア語メタパッケージ</ja>
    <kk>Slovak Language Meta-Package for LibreOffice</kk>
    <ko>Slovak Language Meta-Package for LibreOffice</ko>
    <lt>Slovak Language Meta-Package for LibreOffice</lt>
    <mk>Slovak Language Meta-Package for LibreOffice</mk>
    <mr>Slovak Language Meta-Package for LibreOffice</mr>
-   <nb>Slovak Language Meta-Package for LibreOffice</nb>
-   <nl>Slovak Language Meta-Package for LibreOffice</nl>
-   <pl>Slovak Language Meta-Package for LibreOffice</pl>
-   <pt_BR>Slovak Language Meta-Package for LibreOffice</pt_BR>
-   <pt>ESlovaco Meta-Pacote de Idioma para LibreOffice</pt>
+   <nb>Slovakisk språkpakke for LibreOffice</nb>
+   <nl>Slovaaks Taal Meta-Pakket voor LibreOffice</nl>
+   <pl>Słowacki meta-pakiet językowy dla LibreOffice</pl>
+   <pt_BR>Eslovaco Pacote de Idioma para o LibreOffice</pt_BR>
+   <pt>Eslovaco Meta-Pacote de Idioma para LibreOffice</pt>
    <ro>Slovak Language Meta-Package for LibreOffice</ro>
-   <ru>Slovak Language Meta-Package for LibreOffice</ru>
+   <ru>Мета-пакет словацкого языка для LibreOffice</ru>
    <sk>Slovak Language Meta-Package for LibreOffice</sk>
    <sl>Slovaški jezikovni meta-paket za LibreOffice</sl>
-   <sq>Slovak Language Meta-Package for LibreOffice</sq>
+   <sq>Meta-Paketë gjuhësore në sllovakisht për LibreOffice-in</sq>
    <sr>Slovak Language Meta-Package for LibreOffice</sr>
    <sv>Slovakiskt Språk Meta-Paket för LibreOffice</sv>
-   <tr>Slovak Language Meta-Package for LibreOffice</tr>
+   <tr>LibreOffice için Slovakça Dili Üst-Paketi</tr>
    <uk>Slovak Language Meta-Package for LibreOffice</uk>
    <vi>Slovak Language Meta-Package for LibreOffice</vi>
    <zh_CN>Slovak Language Meta-Package for LibreOffice</zh_CN>

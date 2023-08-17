@@ -1,3 +1,22 @@
+mx-codecs (23.7.02) mx; urgency=medium
+
+  * udpate language processing 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 22 Jul 2023 16:16:31 -0400
+
+mx-codecs (23.7.01) mx; urgency=medium
+
+  * translation update
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 20 Jul 2023 15:07:45 -0400
+
+mx-codecs (23.7) mx; urgency=medium
+
+  * Refresh translations
+  * Update policy file
+
+ -- Adrian <adrian@mxlinux.org>  Sat, 01 Jul 2023 19:51:42 -0400
+
 mx-codecs (23.5) mx; urgency=medium
 
   * Update logo

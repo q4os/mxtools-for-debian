@@ -34,7 +34,6 @@ Deluge
    <id>bittorrent client written in Python/PyGTK</id>
    <is>bittorrent client written in Python/PyGTK</is>
    <it>client BitTorrent che usa ncurses</it>
-   <ja_JP>bittorrent client written in Python/PyGTK</ja_JP>
    <ja>bittorrent client written in Python/PyGTK</ja>
    <kk>bittorrent client written in Python/PyGTK</kk>
    <ko>bittorrent client written in Python/PyGTK</ko>

@@ -18,39 +18,38 @@ Portugese(PT) Firefox
    <cs>Portugese(PT) localisation of Firefox</cs>
    <da>Portugisisk (portugal) oversættelse af Firefox</da>
    <de>Portugiesische (PT) Lokalisierung von Firefox</de>
-   <el>Πορτογαλικός εντοπισμός του Firefox</el>
+   <el>Πορτογαλικά για το Firefox</el>
    <en>Portugese(PT) localisation of Firefox</en>
    <es>Localización Portuguesa (PT) de Firefox</es>
    <et>Portugese(PT) localisation of Firefox</et>
    <eu>Portugese(PT) localisation of Firefox</eu>
    <fa>Portugese(PT) localisation of Firefox</fa>
    <fil_PH>Portugese(PT) localisation of Firefox</fil_PH>
-   <fi>Portugese(PT) localisation of Firefox</fi>
+   <fi>Portugalilainen (PT) Firefox-kotoistus</fi>
    <fr>Localisation portugaise (PT) pour Firefox</fr>
    <he_IL>Portugese(PT) localisation of Firefox</he_IL>
-   <hi>Portugese(PT) localisation of Firefox</hi>
+   <hi>फायरफॉक्स का पुर्तगाली(पुर्तगाल) संस्करण</hi>
    <hr>Portugese(PT) localisation of Firefox</hr>
    <hu>Portugese(PT) localisation of Firefox</hu>
    <id>Portugese(PT) localisation of Firefox</id>
    <is>Portugese(PT) localisation of Firefox</is>
    <it>Localizzazione portoghese(PT) di Firefox</it>
-   <ja_JP>Portugese(PT) localisation of Firefox</ja_JP>
-   <ja>Portugese(PT) localisation of Firefox</ja>
+   <ja>Firefox のポルトガル語 (PT) パック</ja>
    <kk>Portugese(PT) localisation of Firefox</kk>
    <ko>Portugese(PT) localisation of Firefox</ko>
    <lt>Portugese(PT) localisation of Firefox</lt>
    <mk>Portugese(PT) localisation of Firefox</mk>
    <mr>Portugese(PT) localisation of Firefox</mr>
-   <nb>Portugese(PT) localisation of Firefox</nb>
+   <nb>Portugisisk lokaltilpassing av Firefox</nb>
    <nl>Portugese(PT) lokalisatie van Firefox</nl>
    <pl>Portugalska (PT) lokalizacja przeglądarki Firefox</pl>
-   <pt_BR>Português(PT) Localização para Firefox</pt_BR>
+   <pt_BR>Português (PT) Localização para o Firefox</pt_BR>
    <pt>Português(PT) Localização para Firefox</pt>
    <ro>Portugese(PT) localisation of Firefox</ro>
-   <ru>Portugese(PT) localisation of Firefox</ru>
+   <ru>Португальская локализация Firefox</ru>
    <sk>Portugese(PT) localisation of Firefox</sk>
-   <sl>Portugese(PT) localisation of Firefox</sl>
-   <sq>Portugese(PT) localisation of Firefox</sq>
+   <sl>Portugalske (PT) krajevne nastavitve za Firefox</sl>
+   <sq>Përkthimi i Firefox-it në portugalishte (PT)</sq>
    <sr>Portugese(PT) localisation of Firefox</sr>
    <sv>Portugisisk(PT) lokalisering för Firefox</sv>
    <tr>Firefox'un Portekiz Portekizcesi yerelleştirmesi</tr>

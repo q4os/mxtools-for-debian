@@ -1,6 +1,0 @@
-bin/*
-release
-*.o
-*.ppu
-*.res
-adtrack2

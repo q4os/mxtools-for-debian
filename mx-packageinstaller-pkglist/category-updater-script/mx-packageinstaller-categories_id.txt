@@ -1,0 +1,37 @@
+Audio
+Browser
+Children
+Desktop Environments
+Pengembangan
+Disks
+Dok
+Email
+File Managers
+FTP
+Permainan
+Grafis
+Icons
+Kernels
+Language
+LaTex
+Media Center
+Media Converter
+Messaging
+Misc
+Network
+Newsreader
+Non-Free
+Perkantoran
+Printing
+Remote Access
+Screencast
+Screensaver
+Screenshot Utilities
+Server
+Themes
+Torrent
+Utility
+Video
+Wallpapers
+Window Managers
+Virtualization

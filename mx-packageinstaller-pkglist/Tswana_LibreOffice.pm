@@ -25,35 +25,34 @@ Tswana_Libreoffice
    <eu>Tswana Language Meta-Package for LibreOffice</eu>
    <fa>Tswana Language Meta-Package for LibreOffice</fa>
    <fil_PH>Tswana Language Meta-Package for LibreOffice</fil_PH>
-   <fi>Tswana Language Meta-Package for LibreOffice</fi>
-   <fr>Tswana Language Meta-Package for LibreOffice</fr>
+   <fi>Tswanankielinen kielipaketti LibreOffice:lle</fi>
+   <fr>Méta-Paquet en langue tswana pour LibreOffice</fr>
    <he_IL>Tswana Language Meta-Package for LibreOffice</he_IL>
-   <hi>Tswana Language Meta-Package for LibreOffice</hi>
+   <hi>लिब्रे-ऑफिस हेतु सेत्स्वाना भाषा मेटा-पैकेज</hi>
    <hr>Tswana Language Meta-Package for LibreOffice</hr>
    <hu>Tswana Language Meta-Package for LibreOffice</hu>
    <id>Tswana Language Meta-Package for LibreOffice</id>
    <is>Tswana Language Meta-Package for LibreOffice</is>
-   <it>Tswana Language Meta-Package for LibreOffice</it>
-   <ja_JP>Tswana Language Meta-Package for LibreOffice</ja_JP>
-   <ja>Tswana Language Meta-Package for LibreOffice</ja>
+   <it>Meta-pacchetto della lingua tswana per LibreOffice</it>
+   <ja>LibreOffice 用のツワナ語メタパッケージ</ja>
    <kk>Tswana Language Meta-Package for LibreOffice</kk>
    <ko>Tswana Language Meta-Package for LibreOffice</ko>
    <lt>Tswana Language Meta-Package for LibreOffice</lt>
    <mk>Tswana Language Meta-Package for LibreOffice</mk>
    <mr>Tswana Language Meta-Package for LibreOffice</mr>
-   <nb>Tswana Language Meta-Package for LibreOffice</nb>
-   <nl>Tswana Language Meta-Package for LibreOffice</nl>
-   <pl>Tswana Language Meta-Package for LibreOffice</pl>
-   <pt_BR>Tswana Language Meta-Package for LibreOffice</pt_BR>
+   <nb>Tswana språkpakke for LibreOffice</nb>
+   <nl>Tswana Taal Meta-Pakket voor LibreOffice</nl>
+   <pl>Tswana meta-pakiet językowy dla LibreOffice</pl>
+   <pt_BR>Tswana Pacote de Idioma para o LibreOffice</pt_BR>
    <pt>Tswana Meta-Pacote de Idioma para LibreOffice</pt>
    <ro>Tswana Language Meta-Package for LibreOffice</ro>
-   <ru>Tswana Language Meta-Package for LibreOffice</ru>
+   <ru>Мета-пакет языка тсвана для LibreOffice</ru>
    <sk>Tswana Language Meta-Package for LibreOffice</sk>
    <sl>Tswanski jezikovni meta-paket za LibreOffice</sl>
-   <sq>Tswana Language Meta-Package for LibreOffice</sq>
+   <sq>Meta-Paketë gjuhësore në cuana për LibreOffice-in</sq>
    <sr>Tswana Language Meta-Package for LibreOffice</sr>
    <sv>Tswana Språk Meta-Paket för LibreOffice</sv>
-   <tr>Tswana Language Meta-Package for LibreOffice</tr>
+   <tr>LibreOffice için Tswana Dili Üst-Paketi</tr>
    <uk>Tswana Language Meta-Package for LibreOffice</uk>
    <vi>Tswana Language Meta-Package for LibreOffice</vi>
    <zh_CN>Tswana Language Meta-Package for LibreOffice</zh_CN>

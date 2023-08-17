@@ -1,0 +1,37 @@
+Audio
+Browser
+Bimbi/Ragazzi
+Ambienti Desktop
+Sviluppo
+Dischi
+Barre Dock
+Email
+Gestori di File
+FTP
+Giochi
+Grafica
+Icone
+Kernel
+Lingua
+LaTex
+Media Center
+Media Converter
+Messaging
+Miscellanea
+Rete
+Newsreader
+Non-Libero
+Ufficio
+Stampa
+Accesso Remoto
+Registra Schermo
+Salva Schermo
+Fotografa Schermo
+Server
+Temi
+Torrent
+Utility
+Video
+Wallpaper
+Window Manager
+Virtualization

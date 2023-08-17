@@ -26,7 +26,7 @@
     <message>
         <location filename="../mainwindow.ui" line="136"/>
         <source>Help</source>
-        <translation type="unfinished"></translation>
+        <translation>Даведка</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="143"/>
@@ -71,7 +71,7 @@
     <message>
         <location filename="../mainwindow.ui" line="274"/>
         <source>Remaster</source>
-        <translation type="unfinished"></translation>
+        <translation>Рэмастэрынг</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="301"/>

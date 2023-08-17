@@ -18,42 +18,41 @@ Openshot
    <cs>non-linear video editor</cs>
    <da>ikke-lineær videoredigering</da>
    <de>Nichtlinearer Videoeditor</de>
-   <el>επεξεργαστής βίντεο - μη γραμμική</el>
+   <el>Επεξεργαστής βίντεο - μη γραμμικός</el>
    <en>non-linear video editor</en>
    <es>Editor de video no lineal</es>
    <et>non-linear video editor</et>
    <eu>non-linear video editor</eu>
    <fa>non-linear video editor</fa>
    <fil_PH>non-linear video editor</fil_PH>
-   <fi>non-linear video editor</fi>
+   <fi>ei-lineaarinen videonmuokkausohjelma</fi>
    <fr>Éditeur vidéo non-linéaire</fr>
    <he_IL>non-linear video editor</he_IL>
-   <hi>non-linear video editor</hi>
+   <hi>अरेखीय वीडियो संपादक</hi>
    <hr>non-linear video editor</hr>
    <hu>non-linear video editor</hu>
    <id>non-linear video editor</id>
    <is>non-linear video editor</is>
    <it>editor video non lineare</it>
-   <ja_JP>non-linear video editor</ja_JP>
-   <ja>non-linear video editor</ja>
+   <ja>ノンリニア・ビデオエディタ</ja>
    <kk>non-linear video editor</kk>
    <ko>non-linear video editor</ko>
    <lt>non-linear video editor</lt>
    <mk>non-linear video editor</mk>
    <mr>non-linear video editor</mr>
-   <nb>non-linear video editor</nb>
+   <nb>ikkelineær videoredigering</nb>
    <nl>niet-lineaire video-editor</nl>
    <pl>nieliniowy edytor wideo</pl>
-   <pt_BR>Editor de vídeo não-linear</pt_BR>
+   <pt_BR>Editor de vídeo não linear</pt_BR>
    <pt>Editor de vídeo não-linear</pt>
    <ro>non-linear video editor</ro>
    <ru>Нелинейный видеоредактор</ru>
    <sk>non-linear video editor</sk>
    <sl>Nelinearni video urejevalnik</sl>
-   <sq>non-linear video editor</sq>
+   <sq>përpunues jolinear videosh</sq>
    <sr>non-linear video editor</sr>
    <sv>icke-linjär videoredigerare</sv>
-   <tr>non-linear video editor</tr>
+   <tr>Doğrusal olmayan video düzenleyici</tr>
    <uk>нелінійний відео редактор</uk>
    <vi>non-linear video editor</vi>
    <zh_CN>non-linear video editor</zh_CN>
@@ -71,8 +70,8 @@ all
 </preinstall>
 
 <install_package_names>
-openshot
-openshot-doc
+openshot-qt
+openshot-qt-doc
 frei0r-plugins
 </install_package_names>
 
@@ -83,8 +82,8 @@ frei0r-plugins
 
 
 <uninstall_package_names>
-openshot
-openshot-doc
+openshot-qt
+openshot-qt-doc
 frei0r-plugins
 </uninstall_package_names>
 </app>

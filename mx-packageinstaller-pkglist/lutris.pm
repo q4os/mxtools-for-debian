@@ -34,7 +34,6 @@ Lutris
    <id>Game Installer Wrapper Suite</id>
    <is>Game Installer Wrapper Suite</is>
    <it>Game Installer Wrapper Suite</it>
-   <ja_JP>Game Installer Wrapper Suite</ja_JP>
    <ja>Game Installer Wrapper Suite</ja>
    <kk>Game Installer Wrapper Suite</kk>
    <ko>Game Installer Wrapper Suite</ko>

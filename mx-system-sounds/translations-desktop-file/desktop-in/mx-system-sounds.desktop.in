@@ -1,0 +1,16 @@
+[Desktop Entry]
+Encoding=UTF-8
+Version=1.0
+# The desktop entry name will be displayed within the menu.
+Name=MX System Sounds
+# # The desktop entry comment will be shown within the menu.
+Comment=Configure Event & Session Sounds
+Exec=mx-system-sounds
+Terminal=false
+Type=Application
+Icon=audio-speakers
+Categories=XFCE;Settings;DesktopSettings;X-XFCE-SettingsDialog;X-XFCE-PersonalSettings;MX-Setup;
+Path=
+StartupNotify=false
+OnlyShowIn=XFCE;
+

@@ -6,58 +6,57 @@ Messaging
 </category>
 
 <name>
-Telegram Desktop Client (debian backports)
+Telegram Desktop Client  
 </name>
 
 <description>
-   <am>Telegram Desktop Client (debian backports)</am>
-   <ar>Telegram Desktop Client (debian backports)</ar>
-   <bg>Telegram Desktop Client (debian backports)</bg>
-   <bn>Telegram Desktop Client (debian backports)</bn>
-   <ca>Telegram Desktop Client (debian backports)</ca>
-   <cs>Telegram Desktop Client (debian backports)</cs>
-   <da>Telegram Desktop Client (debian backports)</da>
-   <de>Telegram Desktop Client (debian backports)</de>
-   <el>Telegram Desktop Client (debian backports)</el>
-   <en>Telegram Desktop Client (debian backports)</en>
-   <es>Telegram Desktop Client (debian backports)</es>
-   <et>Telegram Desktop Client (debian backports)</et>
-   <eu>Telegram Desktop Client (debian backports)</eu>
-   <fa>Telegram Desktop Client (debian backports)</fa>
-   <fil_PH>Telegram Desktop Client (debian backports)</fil_PH>
-   <fi>Telegram Desktop Client (debian backports)</fi>
-   <fr>Telegram Desktop Client (debian backports)</fr>
-   <he_IL>Telegram Desktop Client (debian backports)</he_IL>
-   <hi>Telegram Desktop Client (debian backports)</hi>
-   <hr>Telegram Desktop Client (debian backports)</hr>
-   <hu>Telegram Desktop Client (debian backports)</hu>
-   <id>Telegram Desktop Client (debian backports)</id>
-   <is>Telegram Desktop Client (debian backports)</is>
-   <it>Telegram Desktop Client (debian backports)</it>
-   <ja_JP>Telegram Desktop Client (debian backports)</ja_JP>
-   <ja>Telegram Desktop Client (debian backports)</ja>
-   <kk>Telegram Desktop Client (debian backports)</kk>
-   <ko>Telegram Desktop Client (debian backports)</ko>
-   <lt>Telegram Desktop Client (debian backports)</lt>
-   <mk>Telegram Desktop Client (debian backports)</mk>
-   <mr>Telegram Desktop Client (debian backports)</mr>
-   <nb>Telegram Desktop Client (debian backports)</nb>
-   <nl>Telegram Desktop Client (debian backports)</nl>
-   <pl>Telegram Desktop Client (debian backports)</pl>
-   <pt_BR>Telegram Desktop Client (debian backports)</pt_BR>
-   <pt>Telegram Desktop Client (debian backports)</pt>
-   <ro>Telegram Desktop Client (debian backports)</ro>
-   <ru>Telegram Desktop Client (debian backports)</ru>
-   <sk>Telegram Desktop Client (debian backports)</sk>
-   <sl>Telegram Desktop Client (debian backports)</sl>
-   <sq>Telegram Desktop Client (debian backports)</sq>
-   <sr>Telegram Desktop Client (debian backports)</sr>
-   <sv>Telegram Desktop Client (debian backports)</sv>
-   <tr>Telegram Desktop Client (debian backports)</tr>
-   <uk>Telegram Desktop Client (debian backports)</uk>
-   <vi>Telegram Desktop Client (debian backports)</vi>
-   <zh_CN>Telegram Desktop Client (debian backports)</zh_CN>
-   <zh_TW>Telegram Desktop Client (debian backports)</zh_TW>
+   <am>Telegram Desktop Client  </am>
+   <ar>Telegram Desktop Client  </ar>
+   <bg>Telegram Desktop Client  </bg>
+   <bn>Telegram Desktop Client  </bn>
+   <ca>Telegram Desktop Client  </ca>
+   <cs>Telegram Desktop Client  </cs>
+   <da>Telegram Desktop Client  </da>
+   <de>Telegram Desktop Client  </de>
+   <el>Telegram Desktop Client  </el>
+   <en>Telegram Desktop Client  </en>
+   <es>Telegram Desktop Client  </es>
+   <et>Telegram Desktop Client  </et>
+   <eu>Telegram Desktop Client  </eu>
+   <fa>Telegram Desktop Client  </fa>
+   <fil_PH>Telegram Desktop Client  </fil_PH>
+   <fi>Telegram Desktop Client  </fi>
+   <fr>Telegram Desktop Client  </fr>
+   <he_IL>Telegram Desktop Client  </he_IL>
+   <hi>Telegram Desktop Client  </hi>
+   <hr>Telegram Desktop Client  </hr>
+   <hu>Telegram Desktop Client  </hu>
+   <id>Telegram Desktop Client  </id>
+   <is>Telegram Desktop Client  </is>
+   <it>Telegram Desktop Client  </it>
+   <ja>Telegram Desktop Client  </ja>
+   <kk>Telegram Desktop Client  </kk>
+   <ko>Telegram Desktop Client  </ko>
+   <lt>Telegram Desktop Client  </lt>
+   <mk>Telegram Desktop Client  </mk>
+   <mr>Telegram Desktop Client  </mr>
+   <nb>Telegram Desktop Client  </nb>
+   <nl>Telegram Desktop Client  </nl>
+   <pl>Telegram Desktop Client  </pl>
+   <pt_BR>Telegram Desktop Client  </pt_BR>
+   <pt>Telegram Desktop Client  </pt>
+   <ro>Telegram Desktop Client  </ro>
+   <ru>Telegram Desktop Client  </ru>
+   <sk>Telegram Desktop Client  </sk>
+   <sl>Telegram Desktop Client  </sl>
+   <sq>Telegram Desktop Client  </sq>
+   <sr>Telegram Desktop Client  </sr>
+   <sv>Telegram Desktop Client  </sv>
+   <tr>Telegram Desktop Client  </tr>
+   <uk>Telegram Desktop Client  </uk>
+   <vi>Telegram Desktop Client  </vi>
+   <zh_CN>Telegram Desktop Client  </zh_CN>
+   <zh_TW>Telegram Desktop Client  </zh_TW>
 </description>
 
 <installable>
@@ -67,19 +66,16 @@ Telegram Desktop Client (debian backports)
 <screenshot>https://screenshots.debian.net/shrine/screenshot/16680/simage/large-0fd665fe199a1e24fcbe3390976edca6.png</screenshot>
 
 <preinstall>
-echo "deb http://deb.debian.org/debian bullseye-backports main contrib non-free">/etc/apt/sources.list.d/mxpitemp.list
-apt-get update
-apt-get install telegram-desktop -t bullseye-backports
+
 </preinstall>
 
 <install_package_names>
-
+telegram-desktop
 </install_package_names>
 
 
 <postinstall>
-rm -f /etc/apt/sources.list.d/mxpitemp.list
-apt-get update
+
 </postinstall>
 
 

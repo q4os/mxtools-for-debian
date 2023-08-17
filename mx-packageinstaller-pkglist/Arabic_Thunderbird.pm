@@ -18,39 +18,38 @@ Arabic_Thunderbird
    <cs>Arabic localisation of Thunderbird</cs>
    <da>Arabisk oversættelse af Thunderbird</da>
    <de>Arabische Lokalisierung von Thunderbird</de>
-   <el>Αραβικός εντοπισμός του Thunderbird</el>
+   <el>Αραβικά για το Thunderbird</el>
    <en>Arabic localisation of Thunderbird</en>
    <es>Localización Árabe de Thunderbird</es>
    <et>Arabic localisation of Thunderbird</et>
    <eu>Arabic localisation of Thunderbird</eu>
    <fa>Arabic localisation of Thunderbird</fa>
    <fil_PH>Arabic localisation of Thunderbird</fil_PH>
-   <fi>Arabic localisation of Thunderbird</fi>
+   <fi>Arabialainen Thunderbird-kotoistus</fi>
    <fr>Localisation arabe pour Thunderbird</fr>
    <he_IL>Arabic localisation of Thunderbird</he_IL>
-   <hi>Arabic localisation of Thunderbird</hi>
+   <hi>थंडरबर्ड का अरबी संस्करण</hi>
    <hr>Arapska lokalizacija Thunderbirda</hr>
    <hu>Arabic localisation of Thunderbird</hu>
    <id>Arabic localisation of Thunderbird</id>
    <is>Arabic localisation of Thunderbird</is>
    <it>Localizzazione araba di Thunderbird</it>
-   <ja_JP>Arabic localisation of Thunderbird</ja_JP>
-   <ja>Arabic localisation of Thunderbird</ja>
+   <ja>Thunderbird のアラビア語用言語パック</ja>
    <kk>Arabic localisation of Thunderbird</kk>
    <ko>Arabic localisation of Thunderbird</ko>
    <lt>Arabic localisation of Thunderbird</lt>
    <mk>Arabic localisation of Thunderbird</mk>
    <mr>Arabic localisation of Thunderbird</mr>
-   <nb>Arabic localisation of Thunderbird</nb>
+   <nb>Arabisk lokaltilpassing av Thunderbird</nb>
    <nl>Arabische lokalisatie van Thunderbird</nl>
    <pl>Arabska lokalizacja Thunderbirda</pl>
-   <pt_BR>Árabe Localização para Thunderbird</pt_BR>
+   <pt_BR>Árabe Localização para o Thunderbird</pt_BR>
    <pt>Árabe Localização para Thunderbird</pt>
    <ro>Arabic localisation of Thunderbird</ro>
-   <ru>Arabic localisation of Thunderbird</ru>
+   <ru>Арабский перевод для Thunderbird</ru>
    <sk>Arabic lokalizácia pre Thunderbird</sk>
-   <sl>Arabic localisation of Thunderbird</sl>
-   <sq>Arabic localisation of Thunderbird</sq>
+   <sl>Arabic krajevne nastavitve za Thunderbird</sl>
+   <sq>Përkthimi i Thunderbird-it në arabisht</sq>
    <sr>Arabic localisation of Thunderbird</sr>
    <sv>Arabisk lokalisering av Thunderbird</sv>
    <tr>Thunderbird'in Arapça yerelleştirmesi</tr>

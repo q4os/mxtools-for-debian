@@ -18,39 +18,38 @@ Swedish_Firefox
    <cs>Swedish localisation of Firefox</cs>
    <da>Svensk oversættelse af Firefox</da>
    <de>Schwedische Lokalisierung von Firefox</de>
-   <el>Σουηδικός εντοπισμός του Firefox</el>
+   <el>Σουηδικά για το Firefox</el>
    <en>Swedish localisation of Firefox</en>
    <es>Localización Sueca de Firefox</es>
    <et>Swedish localisation of Firefox</et>
    <eu>Swedish localisation of Firefox</eu>
    <fa>Swedish localisation of Firefox</fa>
    <fil_PH>Swedish localisation of Firefox</fil_PH>
-   <fi>Swedish localisation of Firefox</fi>
+   <fi>Ruotsalainen Firefox-kotoistus</fi>
    <fr>Localisation suédoise pour Firefox</fr>
    <he_IL>Swedish localisation of Firefox</he_IL>
-   <hi>Swedish localisation of Firefox</hi>
+   <hi>फायरफॉक्स का स्वीडिश संस्करण</hi>
    <hr>Swedish localisation of Firefox</hr>
    <hu>Swedish localisation of Firefox</hu>
    <id>Swedish localisation of Firefox</id>
    <is>Swedish localisation of Firefox</is>
-   <it>Localizzazione svedese di Firefox</it>
-   <ja_JP>Swedish localisation of Firefox</ja_JP>
-   <ja>Swedish localisation of Firefox</ja>
+   <it>Localizzazione svedese di Firefox </it>
+   <ja>Firefox のスウェーデン語パック</ja>
    <kk>Swedish localisation of Firefox</kk>
    <ko>Swedish localisation of Firefox</ko>
    <lt>Swedish localisation of Firefox</lt>
    <mk>Swedish localisation of Firefox</mk>
    <mr>Swedish localisation of Firefox</mr>
-   <nb>Swedish localisation of Firefox</nb>
+   <nb>Svensk lokaltilpassing av Firefox</nb>
    <nl>Zweedse lokalisatie van Firefox</nl>
    <pl>Szwedzka lokalizacja przeglądarki Firefox</pl>
-   <pt_BR>Sueco Localização para Firefox</pt_BR>
+   <pt_BR>Sueco Localização para o Firefox</pt_BR>
    <pt>Sueco Localização para Firefox</pt>
    <ro>Swedish localisation of Firefox</ro>
    <ru>Шведская локализация Firefox</ru>
    <sk>Swedish localisation of Firefox</sk>
-   <sl>Swedish localisation of Firefox</sl>
-   <sq>Swedish localisation of Firefox</sq>
+   <sl>Švedske krajevne nastavitve za Firefox</sl>
+   <sq>Përkthimi i Firefox-it në suedisht</sq>
    <sr>Swedish localisation of Firefox</sr>
    <sv>Svensk lokalisering av Firefox</sv>
    <tr>Firefox'un İsveççe yerelleştirmesi</tr>

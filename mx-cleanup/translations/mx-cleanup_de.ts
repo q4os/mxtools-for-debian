@@ -8,7 +8,7 @@
         <location filename="../mainwindow.cpp" line="73"/>
         <location filename="../mainwindow.cpp" line="467"/>
         <source>MX Cleanup</source>
-        <translation>MX Cleanup</translation>
+        <translation>MX-Cleanup</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="59"/>
@@ -172,27 +172,27 @@
     <message>
         <location filename="../mainwindow.ui" line="543"/>
         <source>Delete Logs</source>
-        <translation>Logdateien löschen</translation>
+        <translation>Protokolldateien löschen</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="568"/>
         <source>All logs</source>
-        <translation>Alle Logdateien</translation>
+        <translation>Alle Protokolldateien</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="606"/>
         <source>Old logs</source>
-        <translation>Alte Logdateien</translation>
+        <translation>Alte Protokolldateien</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="641"/>
         <source>Logs older than:</source>
-        <translation>Logs älter als:</translation>
+        <translation>Die Protokolldateien sind älter als:</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="664"/>
         <source>Kernel removal tool</source>
-        <translation>Tool zur Kernelentfernung</translation>
+        <translation>Werkzeug zur Kernelentfernung</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="676"/>
@@ -202,7 +202,7 @@
     <message>
         <location filename="../mainwindow.ui" line="696"/>
         <source>Clean Flatpak</source>
-        <translation type="unfinished"></translation>
+        <translation>Flatpak reinigen</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="702"/>
@@ -217,7 +217,7 @@
     <message>
         <location filename="../mainwindow.ui" line="737"/>
         <source>Not accessed for:</source>
-        <translation type="unfinished"></translation>
+        <translation>Kein Zugriff für:</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="805"/>
@@ -239,7 +239,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="460"/>
         <source>Cleanup command done</source>
-        <translation>Cleanup-Ausführung beendet</translation>
+        <translation>Cleanup beendet</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="460"/>
@@ -279,7 +279,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="536"/>
         <source>Kernel currently in use: &lt;b&gt;%1&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Derzeit verwendeter Kernel: &lt;b&gt;%1&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="539"/>
@@ -299,7 +299,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="547"/>
         <source>&lt;b&gt;Nothing to remove.&lt;/b&gt; Cannot remove kernel in use.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Nichts zu entfernen.&lt;/b&gt; Der derzeit verwendete Kernel kann nicht entfernt werden..</translation>
     </message>
 </context>
 <context>
@@ -338,7 +338,7 @@
     <message>
         <location filename="../main.cpp" line="75"/>
         <source>You seem to be logged in as root, please log out and log in as normal user to use this program.</source>
-        <translation>Sie sind als Benutzer “root” am System angemeldet. Bitte melden Sie sich ab und melden sich als normaler Benutzer an, um dieses Programm zu verwenden.</translation>
+        <translation>Sie sind als Administrator am System angemeldet. Bitte melden sie sich ab und dann als normaler Benutzer wieder an, um dieses Programm zu verwenden.</translation>
     </message>
 </context>
 </TS>

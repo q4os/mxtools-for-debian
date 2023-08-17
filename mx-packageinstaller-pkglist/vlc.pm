@@ -72,8 +72,6 @@ all
 <install_package_names>
 vlc
 vlc-l10n 
-vlc-plugin-notify 
-vlc-plugin-skins2
 </install_package_names>
 
 
@@ -85,7 +83,5 @@ vlc-plugin-skins2
 <uninstall_package_names>
 vlc
 vlc-l10n 
-vlc-plugin-notify 
-vlc-plugin-skins2
 </uninstall_package_names>
 </app>

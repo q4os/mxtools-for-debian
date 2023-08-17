@@ -18,39 +18,38 @@ Ukrainian_Libreoffice
    <cs>Ukrainian localisation of LibreOffice</cs>
    <da>Ukrainsk oversættelse af LibreOffice</da>
    <de>Ukrainische Lokalisierung von LibreOffice</de>
-   <el>LibreOffice στην ουκρανική γλώσσα</el>
+   <el>LibreOffice στα Ουκρανικά</el>
    <en>Ukrainian localisation of LibreOffice</en>
-   <es>Localización Ucraniana de LibreOffice</es>
+   <es>Localización Ucraniano de LibreOffice</es>
    <et>Ukrainian localisation of LibreOffice</et>
    <eu>Ukrainian localisation of LibreOffice</eu>
    <fa>Ukrainian localisation of LibreOffice</fa>
    <fil_PH>Ukrainian localisation of LibreOffice</fil_PH>
-   <fi>Ukrainian localisation of LibreOffice</fi>
+   <fi>Ukrainalainen kotoistus LibreOffice:lle</fi>
    <fr>Localisation ukrainienne pour LibreOffice</fr>
    <he_IL>Ukrainian localisation of LibreOffice</he_IL>
-   <hi>Ukrainian localisation of LibreOffice</hi>
+   <hi>लिब्रे-ऑफिस का यूक्रेनी संस्करण</hi>
    <hr>Ukrainian localisation of LibreOffice</hr>
    <hu>Ukrainian localisation of LibreOffice</hu>
    <id>Ukrainian localisation of LibreOffice</id>
    <is>Ukrainian localisation of LibreOffice</is>
-   <it>Localizzazione ucraina di LibreOffice</it>
-   <ja_JP>Ukrainian localisation of LibreOffice</ja_JP>
-   <ja>Ukrainian localisation of LibreOffice</ja>
+   <it>Localizzazione ucraina di LibreOffice </it>
+   <ja>LibreOffice のウクライナ語パック</ja>
    <kk>Ukrainian localisation of LibreOffice</kk>
    <ko>Ukrainian localisation of LibreOffice</ko>
    <lt>Ukrainian localisation of LibreOffice</lt>
    <mk>Ukrainian localisation of LibreOffice</mk>
    <mr>Ukrainian localisation of LibreOffice</mr>
-   <nb>Ukrainian localisation of LibreOffice</nb>
+   <nb>Ukrainsk lokaltilpassing av LibreOffice</nb>
    <nl>Oekraïense lokalisatie van LibreOffice</nl>
    <pl>Ukraińska lokalizacja LibreOffice</pl>
-   <pt_BR>Ucraniano Localização para LibreOffice</pt_BR>
+   <pt_BR>Ucraniano Localização para o LibreOffice</pt_BR>
    <pt>Ucraniano Localização para LibreOffice</pt>
    <ro>Ukrainian localisation of LibreOffice</ro>
-   <ru>Ukrainian localisation of LibreOffice</ru>
+   <ru>Украинский перевод для LibreOffice</ru>
    <sk>Ukrainian localisation of LibreOffice</sk>
-   <sl>Ukrainian localisation of LibreOffice</sl>
-   <sq>Ukrainian localisation of LibreOffice</sq>
+   <sl>Ukrajinske krajevne nastavitve za LibreOffice</sl>
+   <sq>Përkthimi i LibreOffice-it në ukrainisht</sq>
    <sr>Ukrainian localisation of LibreOffice</sr>
    <sv>Ukrainsk lokalisering av LibreOffice</sv>
    <tr>LibreOffice Ukraynaca yerelleştirmesi</tr>

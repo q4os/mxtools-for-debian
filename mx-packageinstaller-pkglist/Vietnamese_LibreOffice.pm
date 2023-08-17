@@ -18,42 +18,41 @@ Vietnamese_Libreoffice
    <cs>Vietnamese Language Meta-Package for LibreOffice</cs>
    <da>Vietnamese Language Meta-Package for LibreOffice</da>
    <de>Vietnamesisches Meta-Paket für LibreOffice</de>
-   <el>LibreOffice στα βιετναμέζικα</el>
+   <el>LibreOffice στα Βιετναμέζικα</el>
    <en>Vietnamese Language Meta-Package for LibreOffice</en>
    <es>Meta-Paquete de idioma vietnamita para LibreOffice</es>
    <et>Vietnamese Language Meta-Package for LibreOffice</et>
    <eu>Vietnamese Language Meta-Package for LibreOffice</eu>
    <fa>Vietnamese Language Meta-Package for LibreOffice</fa>
    <fil_PH>Vietnamese Language Meta-Package for LibreOffice</fil_PH>
-   <fi>Vietnamese Language Meta-Package for LibreOffice</fi>
-   <fr>Vietnamese Language Meta-Package for LibreOffice</fr>
+   <fi>Vietnamilainen kielipaketti LibreOffice:lle</fi>
+   <fr>Méta-paquet langue vietnamienne pour LibreOffice</fr>
    <he_IL>Vietnamese Language Meta-Package for LibreOffice</he_IL>
-   <hi>Vietnamese Language Meta-Package for LibreOffice</hi>
+   <hi>लिब्रे-ऑफिस हेतु वियतनामी भाषा मेटा-पैकेज</hi>
    <hr>Vietnamese Language Meta-Package for LibreOffice</hr>
    <hu>Vietnamese Language Meta-Package for LibreOffice</hu>
    <id>Vietnamese Language Meta-Package for LibreOffice</id>
    <is>Vietnamese Language Meta-Package for LibreOffice</is>
    <it>Meta-pacchetto della lingua vietnamita per LibreOffice</it>
-   <ja_JP>Vietnamese Language Meta-Package for LibreOffice</ja_JP>
-   <ja>Vietnamese Language Meta-Package for LibreOffice</ja>
+   <ja>LibreOffice 用のベトナム語メタパッケージ</ja>
    <kk>Vietnamese Language Meta-Package for LibreOffice</kk>
    <ko>Vietnamese Language Meta-Package for LibreOffice</ko>
    <lt>Vietnamese Language Meta-Package for LibreOffice</lt>
    <mk>Vietnamese Language Meta-Package for LibreOffice</mk>
    <mr>Vietnamese Language Meta-Package for LibreOffice</mr>
-   <nb>Vietnamese Language Meta-Package for LibreOffice</nb>
-   <nl>Vietnamese Language Meta-Package for LibreOffice</nl>
-   <pl>Vietnamese Language Meta-Package for LibreOffice</pl>
-   <pt_BR>Vietnamese Language Meta-Package for LibreOffice</pt_BR>
+   <nb>Vietnamesisk språkpakke for LibreOffice</nb>
+   <nl>Vietnamese Taal Meta-Pakket voor LibreOffice</nl>
+   <pl>Wietnamski meta-pakiet językowy dla LibreOffice</pl>
+   <pt_BR>Vietnamita Pacote de Idioma para o LibreOffice</pt_BR>
    <pt>Vietnamita Meta-Pacote de Idioma para LibreOffice</pt>
    <ro>Vietnamese Language Meta-Package for LibreOffice</ro>
-   <ru>Vietnamese Language Meta-Package for LibreOffice</ru>
+   <ru>Мета-пакет вьетнамского языка для LibreOffice</ru>
    <sk>Vietnamese Language Meta-Package for LibreOffice</sk>
    <sl>Vietnamski jezikovni meta-paket za LibreOffice</sl>
-   <sq>Vietnamese Language Meta-Package for LibreOffice</sq>
+   <sq>Meta-Paketë gjuhësore në vietnamisht për LibreOffice-in</sq>
    <sr>Vietnamese Language Meta-Package for LibreOffice</sr>
    <sv>Vietnamesiskt Språk Meta-Paket för LibreOffice</sv>
-   <tr>Vietnamese Language Meta-Package for LibreOffice</tr>
+   <tr>LibreOffice için Vietnam Dili Üst-Paketi</tr>
    <uk>Vietnamese Language Meta-Package for LibreOffice</uk>
    <vi>Vietnamese Language Meta-Package for LibreOffice</vi>
    <zh_CN>Vietnamese Language Meta-Package for LibreOffice</zh_CN>

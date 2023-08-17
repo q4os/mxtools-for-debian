@@ -8,5 +8,15 @@
         <file>icons/mx-user.png</file>
         <file>icons/mx-user_one.png</file>
         <file>icons/package_development.png</file>
+        <file alias="eye-show">icons/eye-show.svg</file>
+        <file alias="eye-hide">icons/eye-hide.svg</file>
+    </qresource>
+    <qresource prefix="/gauge">
+        <file alias="0">gauge/0.svg</file>
+        <file alias="1">gauge/1.svg</file>
+        <file alias="2">gauge/2.svg</file>
+        <file alias="3">gauge/3.svg</file>
+        <file alias="4">gauge/4.svg</file>
+        <file alias="5">gauge/5.svg</file>
     </qresource>
 </RCC>

@@ -1,3 +1,23 @@
+system-keyboard-qt (23.04.05mx23) mx; urgency=medium
+
+  * update policy file
+  * go back to udevadm set method
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 18 May 2023 23:01:14 -0400
+
+system-keyboard-qt (23.04.04mx23) mx; urgency=medium
+
+  * use older method to set keyboard.  udevadm method crashes X
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Tue, 18 Apr 2023 19:41:04 -0400
+
+system-keyboard-qt (23.04.02) mx; urgency=medium
+
+  * update launcher script
+  * don't pass home or session bus variables 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 12 Apr 2023 19:56:29 -0400
+
 system-keyboard-qt (23.04.01) mx; urgency=medium
 
   * add polkit actions

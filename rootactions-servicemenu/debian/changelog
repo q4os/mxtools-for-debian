@@ -1,3 +1,13 @@
+rootactions-servicemenu (2.7.3+p8+git20160617.0159-1mx23) mx; urgency=medium
+
+  * Rebuild for MX Linux 23.
+  * d/control:
+    - fix long and short descriptions.
+    - Bump up to debhelper-compat = 12.
+    - don't install kde4 servicemenus.
+
+ -- Steven Pusser <stevep@mxlinux.org>  Thu, 13 Apr 2023 15:21:47 -0700
+
 rootactions-servicemenu (2.7.3+p8+git20160617.0159-1mx21) mx; urgency=medium
 
   * Rebuild for MX 21.

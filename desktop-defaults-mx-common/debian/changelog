@@ -1,3 +1,58 @@
+desktop-defaults-mx-common (23.04.02mx23) mx; urgency=medium
+
+  * update menu icons
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 14 Apr 2023 23:46:11 -0400
+
+desktop-defaults-mx-common (23.04.01mx23) mx; urgency=medium
+
+  * remove 52-force-root-for-admin-auth.conf (obsolete)
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 07 Apr 2023 19:54:37 -0400
+
+desktop-defaults-mx-common (23.03.03mx23) mx; urgency=medium
+
+  * update menu icon
+  * update clock12or24 to work with xfce clock plugin
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 22 Mar 2023 18:39:48 -0400
+
+desktop-defaults-mx-common (23.03.02mx23) mx; urgency=medium
+
+  * add 30-touchpad-libinput.conf, tap-to-click on by default
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 12 Mar 2023 18:27:51 -0400
+
+desktop-defaults-mx-common (23.03.01mx23) mx; urgency=medium
+
+  * add new menu icons 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 11 Mar 2023 18:47:25 -0500
+
+desktop-defaults-mx-common (23.02.08mx23) mx; urgency=medium
+
+  * fix typo in shebang, clock12or24
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 18 Feb 2023 10:57:05 -0500
+
+desktop-defaults-mx-common (23.02.07mx23) mx; urgency=medium
+
+  * correct filename in clock12or24 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 17 Feb 2023 20:00:40 -0500
+
+desktop-defaults-mx-common (23.02.06mx23) mx; urgency=medium
+
+  * adjust clock12or24 again
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 11 Feb 2023 18:58:54 -0500
+
+desktop-defaults-mx-common (23.02.05mx23) mx; urgency=medium
+
+  * update clock12or24 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 11 Feb 2023 09:23:02 -0500
+
 desktop-defaults-mx-common (23.01.05mx21) mx; urgency=medium
 
   * add 58qxcb

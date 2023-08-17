@@ -59,7 +59,13 @@ case "$1" in
                       --divert /usr/lib/linux-boot-probes/mounted/40grub2.dpkg-dist \
                       --add    /usr/lib/linux-boot-probes/mounted/40grub2 || :
 
+#divert dkms to a fixed version
+                   dpkg-divert --quiet --package mx-system --rename \
+                      --divert /usr/sbin/dkms.dpkg-dist \
+                      --add    /usr/sbin/dkms || :
+
                    ;;
+                   
 
                 *) :
                    ;;

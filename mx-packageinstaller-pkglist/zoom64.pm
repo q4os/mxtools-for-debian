@@ -34,7 +34,6 @@ Zoom
    <id>Zoom Teleconference Client</id>
    <is>Zoom Teleconference Client</is>
    <it>Zoom Teleconference Client</it>
-   <ja_JP>Zoom Teleconference Client</ja_JP>
    <ja>Zoom Teleconference Client</ja>
    <kk>Zoom Teleconference Client</kk>
    <ko>Zoom Teleconference Client</ko>
