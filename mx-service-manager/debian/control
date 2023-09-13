@@ -1,0 +1,12 @@
+Source: mx-service-manager
+Section: admin
+Priority: optional
+Maintainer: Adrian <adrian@mxlinux.org>
+Build-Depends: debhelper (>=10), qtbase5-dev, qttools5-dev-tools
+Standards-Version: 3.9.8
+
+Package: mx-service-manager
+Architecture: any
+Depends: xdg-utils | mx-viewer, ${misc:Depends}, ${shlibs:Depends}
+Description: mx-service-manager
+ mx-service-manager

@@ -40,10 +40,10 @@
 using namespace std::chrono_literals;
 
 MainWindow::MainWindow(const QCommandLineParser &arg_parser, QWidget *parent)
-    : QDialog(parent)
-    , Settings(arg_parser)
-    , ui(new Ui::MainWindow)
-    , work(this)
+    : QDialog(parent),
+      Settings(arg_parser),
+      ui(new Ui::MainWindow),
+      work(this)
 {
     ui->setupUi(this);
     monthly = arg_parser.isSet(QStringLiteral("month"));
@@ -62,7 +62,10 @@ MainWindow::MainWindow(const QCommandLineParser &arg_parser, QWidget *parent)
     }
 }
 
-MainWindow::~MainWindow() { delete ui; }
+MainWindow::~MainWindow()
+{
+    delete ui;
+}
 
 // load settings or use the default value
 void MainWindow::loadSettings()
@@ -71,18 +74,20 @@ void MainWindow::loadSettings()
     ui->labelTitleSummary->clear();
     ui->labelSummary->clear();
     ui->labelSnapshotDir->setText(snapshot_dir);
-    if (snapshot_name.isEmpty())
+    if (snapshot_name.isEmpty()) {
         ui->lineEditName->setText(getFilename());
-    else
+    } else {
         ui->lineEditName->setText(snapshot_name);
+    }
     ui->textCodename->setText(codename);
     ui->textDistroVersion->setText(distro_version);
     ui->textProjectName->setText(project_name);
     ui->textOptions->setText(boot_options);
     ui->textReleaseDate->setText(release_date);
     ui->textKernel->setText(kernel);
-    if (shell->getCmdOut("ls -1 /boot/vmlinuz-* | wc -l").toUInt() < 2)
+    if (shell->getCmdOut("ls -1 /boot/vmlinuz-* | wc -l").toUInt() < 2) {
         ui->btnKernel->setHidden(true);
+    }
 }
 
 void MainWindow::setOtherOptions()
@@ -98,7 +103,7 @@ void MainWindow::setConnections()
     connect(&timer, &QTimer::timeout, this, &MainWindow::progress);
     connect(&work, &Work::message, this, &MainWindow::processMsg);
     connect(&work, &Work::messageBox, this, &MainWindow::processMsgBox);
-    connect(QApplication::instance(), &QApplication::aboutToQuit, [this] { cleanUp(); });
+    connect(QApplication::instance(), &QApplication::aboutToQuit, this, [this] { cleanUp(); });
     connect(shell, &Cmd::errorAvailable, [](const QString &out) { qWarning().noquote() << out; });
     connect(shell, &Cmd::finished, this, &MainWindow::procDone);
     connect(shell, &Cmd::outputAvailable, [](const QString &out) { qDebug().noquote() << out; });
@@ -200,9 +205,12 @@ void MainWindow::listFreeSpace()
                                 + "\n");
     ui->labelDiskSpaceHelp->setText(
         tr("The free space should be sufficient to hold the compressed data from / and /home\n\n"
-           "      If necessary, you can create more available space\n"
-           "      by removing previous snapshots and saved copies:\n"
-           "      %1 snapshots are taking up %2 of disk space.\n")
+           "      If necessary, you can create more available space by removing previous snapshots and saved copies: "
+           "%1 snapshots are taking up %2 of disk space.")
+            //        tr("The free space should be sufficient to hold the compressed data from / and /home\n\n"
+            //           "      If necessary, you can create more available space\n"
+            //           "      by removing previous snapshots and saved copies:\n"
+            //           "      %1 snapshots are taking up %2 of disk space.\n")
             .arg(QString::number(getSnapshotCount()), getSnapshotSize()));
 }
 
@@ -299,10 +307,11 @@ void MainWindow::progress()
 
     // in live environment and first page, blink text while calculating used disk space
     if (live && (ui->stackedWidget->currentIndex() == 0)) {
-        if (ui->progressBar->value() % 4 == 0)
+        if (ui->progressBar->value() % 4 == 0) {
             ui->labelUsedSpace->setText("\n " + tr("Please wait."));
-        else
+        } else {
             ui->labelUsedSpace->setText("\n " + tr("Please wait. Calculating used disk space..."));
+        }
     }
 }
 
@@ -310,8 +319,9 @@ void MainWindow::progress()
 void MainWindow::btnNext_clicked()
 {
     QString file_name = ui->lineEditName->text();
-    if (!file_name.endsWith(QLatin1String(".iso")))
+    if (!file_name.endsWith(QLatin1String(".iso"))) {
         file_name += QLatin1String(".iso");
+    }
 
     if (QFile::exists(snapshot_dir + "/" + file_name)) {
         QMessageBox::critical(
@@ -361,12 +371,14 @@ void MainWindow::btnNext_clicked()
         auto *pushCancel = messageBox.addButton(QMessageBox::Cancel);
         auto *checkShutdown = new QCheckBox(this);
         checkShutdown->setText(tr("Shutdown computer when done."));
-        if (shutdown)
+        if (shutdown) {
             checkShutdown->setCheckState(Qt::Checked);
+        }
         messageBox.setCheckBox(checkShutdown);
         messageBox.exec();
-        if (messageBox.clickedButton() == pushCancel)
+        if (messageBox.clickedButton() == pushCancel) {
             return;
+        }
         shutdown = checkShutdown->isChecked();
 
         work.started = true;
@@ -387,8 +399,9 @@ void MainWindow::btnNext_clicked()
         this->setWindowTitle(tr("Output"));
         ui->outputBox->clear();
         work.setupEnv();
-        if (!monthly && !override_size)
+        if (!monthly && !override_size) {
             work.checkEnoughSpace();
+        }
         work.copyNewIso();
         ui->outputLabel->setText(QLatin1String(""));
         work.savePackageList(file_name);
@@ -444,57 +457,65 @@ void MainWindow::btnEditExclude_clicked()
 void MainWindow::excludeDocuments_toggled(bool checked)
 {
     excludeDocuments(checked);
-    if (!checked)
+    if (!checked) {
         ui->excludeAll->setChecked(false);
+    }
 }
 
 void MainWindow::excludeDownloads_toggled(bool checked)
 {
     excludeDownloads(checked);
-    if (!checked)
+    if (!checked) {
         ui->excludeAll->setChecked(false);
+    }
 }
 
 void MainWindow::excludePictures_toggled(bool checked)
 {
     excludePictures(checked);
-    if (!checked)
+    if (!checked) {
         ui->excludeAll->setChecked(false);
+    }
 }
 
 void MainWindow::excludeMusic_toggled(bool checked)
 {
     excludeMusic(checked);
-    if (!checked)
+    if (!checked) {
         ui->excludeAll->setChecked(false);
+    }
 }
 
 void MainWindow::excludeVideos_toggled(bool checked)
 {
     excludeVideos(checked);
-    if (!checked)
+    if (!checked) {
         ui->excludeAll->setChecked(false);
+    }
 }
 
 void MainWindow::excludeDesktop_toggled(bool checked)
 {
     excludeDesktop(checked);
-    if (!checked)
+    if (!checked) {
         ui->excludeAll->setChecked(false);
+    }
 }
 
 void MainWindow::radioRespin_toggled(bool checked)
 {
     reset_accounts = checked;
-    if (checked && !ui->excludeAll->isChecked())
+    if (checked && !ui->excludeAll->isChecked()) {
         ui->excludeAll->click();
+    }
 }
 
 void MainWindow::radioPersonal_clicked(bool checked)
 {
     reset_accounts = !checked;
-    if (checked && ui->excludeAll->isChecked())
+    if (checked && ui->excludeAll->isChecked()) {
         ui->excludeAll->click();
+    }
 }
 
 void MainWindow::btnAbout_clicked()
@@ -520,8 +541,9 @@ void MainWindow::btnHelp_clicked()
 
     QString url = QStringLiteral("/usr/share/doc/mx-snapshot/mx-snapshot.html");
 
-    if (lang.startsWith(QLatin1String("fr")))
+    if (lang.startsWith(QLatin1String("fr"))) {
         url = QStringLiteral("https://mxlinux.org/french-wiki/help-files-fr/help-mx-instantane");
+    }
     displayDoc(url, tr("%1 Help").arg(this->windowTitle()));
 }
 
@@ -540,8 +562,9 @@ void MainWindow::btnSelectSnapshot_clicked()
 // process keystrokes
 void MainWindow::keyPressEvent(QKeyEvent *event)
 {
-    if (event->key() == Qt::Key_Escape)
+    if (event->key() == Qt::Key_Escape) {
         closeApp();
+    }
 }
 
 // close application
@@ -551,13 +574,17 @@ void MainWindow::closeApp()
     if (ui->stackedWidget->currentWidget() == ui->outputPage && !work.done) {
         if (QMessageBox::Yes
             != QMessageBox::question(this, tr("Confirmation"), tr("Are you sure you want to quit the application?"),
-                                     QMessageBox::Yes | QMessageBox::No))
+                                     QMessageBox::Yes | QMessageBox::No)) {
             return;
+        }
     }
     cleanUp();
 }
 
-void MainWindow::btnCancel_clicked() { closeApp(); }
+void MainWindow::btnCancel_clicked()
+{
+    closeApp();
+}
 
 void MainWindow::cbCompression_currentIndexChanged()
 {
@@ -570,8 +597,9 @@ void MainWindow::cbCompression_currentIndexChanged()
 void MainWindow::excludeNetworks_toggled(bool checked)
 {
     excludeNetworks(checked);
-    if (!checked)
+    if (!checked) {
         ui->excludeAll->setChecked(false);
+    }
 }
 
 void MainWindow::checkMd5_toggled(bool checked)
@@ -605,13 +633,15 @@ void MainWindow::excludeAll_clicked(bool checked)
 void MainWindow::excludeSteam_toggled(bool checked)
 {
     excludeSteam(checked);
-    if (!checked)
+    if (!checked) {
         ui->excludeAll->setChecked(false);
+    }
 }
 
 void MainWindow::excludeVirtualBox_toggled(bool checked)
 {
     excludeVirtualBox(checked);
-    if (!checked)
+    if (!checked) {
         ui->excludeAll->setChecked(false);
+    }
 }

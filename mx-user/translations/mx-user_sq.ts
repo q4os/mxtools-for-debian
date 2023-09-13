@@ -498,155 +498,155 @@
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../mainwindow.cpp" line="106"/>
-        <location filename="../mainwindow.cpp" line="151"/>
-        <location filename="../mainwindow.cpp" line="159"/>
-        <location filename="../mainwindow.cpp" line="177"/>
-        <location filename="../mainwindow.cpp" line="186"/>
-        <location filename="../mainwindow.cpp" line="194"/>
-        <location filename="../mainwindow.cpp" line="673"/>
-        <location filename="../mainwindow.cpp" line="696"/>
-        <location filename="../mainwindow.cpp" line="723"/>
-        <location filename="../mainwindow.cpp" line="871"/>
-        <location filename="../mainwindow.cpp" line="936"/>
-        <location filename="../mainwindow.cpp" line="942"/>
-        <location filename="../mainwindow.cpp" line="947"/>
-        <location filename="../mainwindow.cpp" line="950"/>
-        <location filename="../mainwindow.cpp" line="952"/>
+        <location filename="../mainwindow.cpp" line="109"/>
+        <location filename="../mainwindow.cpp" line="156"/>
+        <location filename="../mainwindow.cpp" line="164"/>
+        <location filename="../mainwindow.cpp" line="182"/>
+        <location filename="../mainwindow.cpp" line="191"/>
+        <location filename="../mainwindow.cpp" line="199"/>
+        <location filename="../mainwindow.cpp" line="715"/>
+        <location filename="../mainwindow.cpp" line="741"/>
+        <location filename="../mainwindow.cpp" line="771"/>
+        <location filename="../mainwindow.cpp" line="935"/>
+        <location filename="../mainwindow.cpp" line="1002"/>
+        <location filename="../mainwindow.cpp" line="1009"/>
+        <location filename="../mainwindow.cpp" line="1014"/>
+        <location filename="../mainwindow.cpp" line="1019"/>
+        <location filename="../mainwindow.cpp" line="1024"/>
         <source>none</source>
         <translation>asnjë</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="136"/>
-        <location filename="../mainwindow.cpp" line="660"/>
-        <location filename="../mainwindow.cpp" line="877"/>
-        <location filename="../mainwindow.cpp" line="885"/>
+        <location filename="../mainwindow.cpp" line="141"/>
+        <location filename="../mainwindow.cpp" line="702"/>
+        <location filename="../mainwindow.cpp" line="942"/>
+        <location filename="../mainwindow.cpp" line="951"/>
         <source>browse...</source>
         <translation>shfletoni…</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="203"/>
+        <location filename="../mainwindow.cpp" line="210"/>
         <source>The user configuration will be repaired. Please close all other applications now. When finished, please logout or reboot. Are you sure you want to repair now?</source>
         <translation>Formësimi i përdoruesit do të riparohet. Ju lutemi, mbyllni krejt aplikacionet e tjera tani. Kur të përfundojë, ju lutemi, bëni daljen, ose riniseni. Jeni i sigurt se doni të riparohet tani?</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="224"/>
+        <location filename="../mainwindow.cpp" line="233"/>
         <source>User group membership was restored.</source>
         <translation>Anëtarësimi në grup i përdoruesit u rikthye.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="229"/>
+        <location filename="../mainwindow.cpp" line="238"/>
         <source>Mozilla settings were reset.</source>
         <translation>U rikthyen rregullimet Mozilla.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="236"/>
         <location filename="../mainwindow.cpp" line="249"/>
+        <location filename="../mainwindow.cpp" line="265"/>
         <source>Autologin options</source>
         <translation>Mundësi hyrjeje të automatizuar</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="237"/>
+        <location filename="../mainwindow.cpp" line="250"/>
         <source>Autologin has been disabled for the &apos;%1&apos; account.</source>
         <translation>Për llogarinë “%1” është çaktivizuar hyrja e automatizuar.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="250"/>
+        <location filename="../mainwindow.cpp" line="266"/>
         <source>Autologin has been enabled for the &apos;%1&apos; account.</source>
         <translation>Për llogarinë “%1” është aktivizuar hyrja e automatizuar.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="262"/>
+        <location filename="../mainwindow.cpp" line="278"/>
         <source>You must specify a &apos;copy to&apos; destination. You cannot copy to the desktop you are logged in to.</source>
         <translation>Duhet të kopjoni një vendmbërritje “kopjoje te”. S’mund të kopjoni te desktopi në të cilin keni bërë hyrje.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="269"/>
+        <location filename="../mainwindow.cpp" line="285"/>
         <source>Before copying, close all other applications. Be sure the copy to destination is large enough to contain the files you are copying. Copying between desktops may overwrite or delete your files or preferences on the destination desktop. Are you sure you want to proceed?</source>
         <translation>Para kopjimit, mbyllni krejt aplikacionet e tjera. Sigurohuni që vendmbërritja ku kopjohet të jetë mjaftueshëm e madhe për të përmbajtur kartelat që po kopjoni. Kopjimi nga një desktop në tjetrin mund të mbishkruajë ose fshijë kartelat ose parapëlqimet tuajas te dekstopi vendmbërritje. Jeni i sigurt se doni të vazhdohet?</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="293"/>
+        <location filename="../mainwindow.cpp" line="311"/>
         <source>Synchronizing desktop...</source>
         <translation>Po njëkohësohet desktopi…</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="295"/>
+        <location filename="../mainwindow.cpp" line="313"/>
         <source>Copying desktop...</source>
         <translation>Po kopjohet desktopi…</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="323"/>
-        <location filename="../mainwindow.cpp" line="534"/>
+        <location filename="../mainwindow.cpp" line="345"/>
+        <location filename="../mainwindow.cpp" line="568"/>
         <source>The user name needs to be at least 2 characters long. Please select a longer name before proceeding.</source>
         <translation>Emri i përdoruesit lypset të jetë të paktën 2 shenja i gjatë. Ju lutemi, para se të ecet më tej, përzgjidhni një emër më të gjatë.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="327"/>
+        <location filename="../mainwindow.cpp" line="349"/>
         <source>The user name cannot contain special characters or spaces.
 Please choose another name before proceeding.</source>
         <translation>Emri i përdoruesit s’mund të përmbajë shenja speciale ose
 Ju lutemi, para se të ecet më tej, zgjidhni një emër tjetër.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="333"/>
+        <location filename="../mainwindow.cpp" line="355"/>
         <source>Sorry, this name is in use. Please enter a different name.</source>
         <translation>Na ndjeni, ky emër është i përdorur. Ju lutemi, jepni një tjetër emër.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="337"/>
-        <location filename="../mainwindow.cpp" line="387"/>
+        <location filename="../mainwindow.cpp" line="359"/>
+        <location filename="../mainwindow.cpp" line="413"/>
         <source>Password entries do not match. Please try again.</source>
         <translation>Fjalëkalimet që u dhanë s’përputhen. Ju lutemi, riprovoni.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="343"/>
-        <location filename="../mainwindow.cpp" line="393"/>
+        <location filename="../mainwindow.cpp" line="365"/>
+        <location filename="../mainwindow.cpp" line="419"/>
         <source>Password needs to be at least 2 characters long. Please enter a longer password before proceeding.</source>
         <translation>Fjalëkalimi lypset të jetë të paktën 2 shenja i gjatë. Ju lutemi, para se të ecet më tej, jepni një fjalëkalim më të gjatë.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="376"/>
+        <location filename="../mainwindow.cpp" line="402"/>
         <source>The user was added ok.</source>
         <translation>Përdoruesi u shtua në rregull.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="379"/>
+        <location filename="../mainwindow.cpp" line="405"/>
         <source>Failed to add the user.</source>
         <translation>S’u arrit të shtohej përdoruesi.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="405"/>
+        <location filename="../mainwindow.cpp" line="431"/>
         <source>Password successfully changed.</source>
         <translation>Fjalëkalimi u ndryshua me sukse.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="408"/>
+        <location filename="../mainwindow.cpp" line="434"/>
         <source>Failed to change password.</source>
         <translation>S’u arrit të ndryshohej fjalëkalim.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="415"/>
+        <location filename="../mainwindow.cpp" line="440"/>
         <source>This action cannot be undone. Are you sure you want to delete user %1?</source>
         <translation>Ky veprim s’mund të zhbëhet. Jeni i sigurt se doni të fshihet përdoruesi %1?</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="425"/>
+        <location filename="../mainwindow.cpp" line="456"/>
         <source>The user has been deleted.</source>
         <translation>Përdoruesi u fshi.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="427"/>
+        <location filename="../mainwindow.cpp" line="458"/>
         <source>Failed to delete the user.</source>
         <translation>S’u arrit të fshihej përdoruesi.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="440"/>
+        <location filename="../mainwindow.cpp" line="472"/>
         <source>The group name needs to be at least 2 characters long. Please select a longer name before proceeding.</source>
         <translation>Emri i grupit lypset të jetë të paktën 2 shenja i gjatë. Ju lutemi, para se të ecet më tej, përzgjidhni një emër më të gjatë.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="445"/>
+        <location filename="../mainwindow.cpp" line="477"/>
         <source>The group name needs to be lower case and it 
 cannot contain special characters or spaces.
 Please choose another name before proceeding.</source>
@@ -657,72 +657,72 @@ Ju lutemi, para se të ecet më tej, zgjidhni
 një tjetër emër.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="453"/>
+        <location filename="../mainwindow.cpp" line="485"/>
         <source>Sorry, that group name already exists. Please enter a different name.</source>
         <translation>Na ndjeni, ky emër grupi ekziston tashmë. Ju lutemi, jepni një tjetër emër.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="461"/>
+        <location filename="../mainwindow.cpp" line="493"/>
         <source>The system group was added ok.</source>
         <translation>Grupi i sistemit u shtua në rregull.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="463"/>
+        <location filename="../mainwindow.cpp" line="495"/>
         <source>Failed to add the system group.</source>
         <translation>S’u arrit të shtohej grupi i sistemit.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="476"/>
+        <location filename="../mainwindow.cpp" line="510"/>
         <source>This action cannot be undone. Are you sure you want to delete group %1?</source>
         <translation>Ky veprim s’mund të zhbëhet. Jeni i sigurt se doni të fshihet grupi %1?</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="479"/>
+        <location filename="../mainwindow.cpp" line="511"/>
         <source>This action cannot be undone. Are you sure you want to delete the following groups: %1?</source>
         <translation>Ky veprim s’mund të zhbëhet. Jeni i sigurt se doni të fshihen grupet vijuese: %1?</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="488"/>
+        <location filename="../mainwindow.cpp" line="520"/>
         <source>Failed to delete the group.</source>
         <translation>S’u arrit të fshihej grupi.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="488"/>
+        <location filename="../mainwindow.cpp" line="520"/>
         <source>Group: %1</source>
         <translation>Grup: %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="492"/>
+        <location filename="../mainwindow.cpp" line="524"/>
         <source>The group has been deleted.</source>
         <translation>Grupi u fshi.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="492"/>
+        <location filename="../mainwindow.cpp" line="524"/>
         <source>The groups have been deleted.</source>
         <translation>Grupet u fshinë.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="509"/>
+        <location filename="../mainwindow.cpp" line="542"/>
         <source>The changes have been applied.</source>
         <translation>Ndryshimet u zbatuan.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="511"/>
+        <location filename="../mainwindow.cpp" line="544"/>
         <source>Failed to apply group changes</source>
         <translation>S’u arrit të zbatohen ndryshimegrupi</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="524"/>
+        <location filename="../mainwindow.cpp" line="558"/>
         <source>The selected user name is currently in use.</source>
         <translation>Emri i përzgjedhur për përdorues është aktualisht në përdorim.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="525"/>
+        <location filename="../mainwindow.cpp" line="559"/>
         <source>To rename this user, please log out and log back in using another user account.</source>
         <translation>Që të riemërtoni këtë përdorues, ju lutemi, dilni nga llogaria dhe rihyni duke përdorur tjetër llogari përdoruesi.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="538"/>
+        <location filename="../mainwindow.cpp" line="572"/>
         <source>The user name needs to be lower case and it
 cannot contain special characters or spaces.
 Please choose another name before proceeding.</source>
@@ -733,84 +733,84 @@ Ju lutemi, para se të ecet më tej, zgjidhni
 një tjetër emër.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="545"/>
+        <location filename="../mainwindow.cpp" line="579"/>
         <source>Sorry, this name already exists on your system. Please enter a different name.</source>
         <translation>Na ndjeni, ky emër ekziston tashmë në sistemin tuaj. Ju lutemi, jepni një tjetër emër.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="553"/>
+        <location filename="../mainwindow.cpp" line="587"/>
         <source>Failed to rename the user. Please make sure that the user is not logged in, you might need to restart</source>
         <translation>S’u arrit të riemërtohej përdoruesi. Ju lutemi, sigurohuni se përdoruesi s’ka bërë hyrjen në llogari, mund t’ju duhet të rinisni sistemin.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="575"/>
+        <location filename="../mainwindow.cpp" line="611"/>
         <source>The user was renamed.</source>
         <translation>Përdoruesi u riemërtua.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="587"/>
-        <location filename="../mainwindow.cpp" line="614"/>
+        <location filename="../mainwindow.cpp" line="623"/>
+        <location filename="../mainwindow.cpp" line="652"/>
         <source>Synchronizing desktop...ok</source>
         <translation>Po njëkohësohet desktopi…OK</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="589"/>
-        <location filename="../mainwindow.cpp" line="616"/>
+        <location filename="../mainwindow.cpp" line="625"/>
+        <location filename="../mainwindow.cpp" line="654"/>
         <source>Copying desktop...ok</source>
         <translation>Po kopjohet desktopi…OK</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="619"/>
+        <location filename="../mainwindow.cpp" line="658"/>
         <source>Synchronizing desktop...failed</source>
         <translation>Po njëkohësohet desktopi…dështoi</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="621"/>
+        <location filename="../mainwindow.cpp" line="660"/>
         <source>Copying desktop...failed</source>
         <translation>Po kopjohet desktopi…dështoi</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="638"/>
+        <location filename="../mainwindow.cpp" line="679"/>
         <source>Confirmation</source>
         <translation>Ripohim</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="639"/>
+        <location filename="../mainwindow.cpp" line="680"/>
         <source>Process not done. Are you sure you want to quit the application?</source>
         <translation>Procesi s’u krye. Jeni i sigurt se doni të mbyllet aplikacioni?</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="843"/>
+        <location filename="../mainwindow.cpp" line="906"/>
         <source>About %1</source>
         <translation>Mbi %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="844"/>
+        <location filename="../mainwindow.cpp" line="907"/>
         <source>Version: </source>
         <translation>Version: </translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="845"/>
+        <location filename="../mainwindow.cpp" line="908"/>
         <source>Simple user configuration for MX Linux</source>
         <translation>Formësim i thjeshtë përdoruesi për MX Linux</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="847"/>
+        <location filename="../mainwindow.cpp" line="910"/>
         <source>Copyright (c) MX Linux</source>
         <translation>Të drejta kopjimi (c) MX Linux</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="848"/>
+        <location filename="../mainwindow.cpp" line="911"/>
         <source>%1 License</source>
         <translation>Licencë %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="862"/>
+        <location filename="../mainwindow.cpp" line="926"/>
         <source>%1 Help</source>
         <translation>Ndihmë për %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="878"/>
+        <location filename="../mainwindow.cpp" line="943"/>
         <source>Select folder to copy to</source>
         <translation>Përzgjidhni dosje ku të kopjohet</translation>
     </message>
@@ -818,47 +818,47 @@ një tjetër emër.</translation>
 <context>
     <name>PassEdit</name>
     <message>
-        <location filename="../passedit.cpp" line="155"/>
+        <location filename="../passedit.cpp" line="162"/>
         <source>Negligible</source>
         <translation>I neglizhueshëm</translation>
     </message>
     <message>
-        <location filename="../passedit.cpp" line="155"/>
+        <location filename="../passedit.cpp" line="162"/>
         <source>Very weak</source>
         <translation>Shumë i dobët</translation>
     </message>
     <message>
-        <location filename="../passedit.cpp" line="155"/>
+        <location filename="../passedit.cpp" line="162"/>
         <source>Weak</source>
         <translation>I dobët</translation>
     </message>
     <message>
-        <location filename="../passedit.cpp" line="156"/>
+        <location filename="../passedit.cpp" line="163"/>
         <source>Moderate</source>
         <translation>Çka</translation>
     </message>
     <message>
-        <location filename="../passedit.cpp" line="156"/>
+        <location filename="../passedit.cpp" line="163"/>
         <source>Strong</source>
         <translation>I fortë</translation>
     </message>
     <message>
-        <location filename="../passedit.cpp" line="156"/>
+        <location filename="../passedit.cpp" line="163"/>
         <source>Very strong</source>
         <translation>Shumë i fortë</translation>
     </message>
     <message>
-        <location filename="../passedit.cpp" line="157"/>
+        <location filename="../passedit.cpp" line="164"/>
         <source>Password strength: %1</source>
         <translation>Fuqi fjalëkalimi: %1</translation>
     </message>
     <message>
-        <location filename="../passedit.cpp" line="192"/>
+        <location filename="../passedit.cpp" line="200"/>
         <source>Hide the password</source>
         <translation>Fshihe fjalëkalimin</translation>
     </message>
     <message>
-        <location filename="../passedit.cpp" line="192"/>
+        <location filename="../passedit.cpp" line="200"/>
         <source>Show the password</source>
         <translation>Shfaqe fjalëkalimin</translation>
     </message>
@@ -887,12 +887,12 @@ një tjetër emër.</translation>
         <translation>&amp;Mbylle</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="58"/>
+        <location filename="../main.cpp" line="62"/>
         <source>Error</source>
         <translation>Gabim</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="59"/>
+        <location filename="../main.cpp" line="63"/>
         <source>You seem to be logged in as root, please log out and log in as normal user to use this program.</source>
         <translation>Duket të jeni futur si rrënjë, ju lutemi, që të përdorni këtë program, dilni nga llogaria dhe hyni si përdorues i zakonshëm.</translation>
     </message>

@@ -3,7 +3,7 @@
  *****************************************************************************
  * Copyright (C) 2022 MX Authors
  *
- * Authors: Adrian
+ * Authors: Adrian <adrian@mxlinux.org>
  *          MX Linux <http://mxlinux.org>
  *
  * This program is free software: you can redistribute it and/or modify
@@ -24,21 +24,25 @@
 #include "ui_downloadwidget.h"
 
 DownloadWidget::DownloadWidget(QWidget* parent)
-    : QWidget(parent)
-    , ui(new Ui::DownloadWidget)
+    : QWidget(parent),
+      ui(new Ui::DownloadWidget)
 {
     ui->setupUi(this);
 }
 
-DownloadWidget::~DownloadWidget() { delete ui; }
+DownloadWidget::~DownloadWidget()
+{
+    delete ui;
+}
 
 void DownloadWidget::downloadRequested(QWebEngineDownloadItem* download)
 {
     timerDownload.start();
     QString path = QFileDialog::getSaveFileName(
         this, tr("Save as"), QDir(download->downloadDirectory()).filePath(download->downloadFileName()));
-    if (path.isEmpty())
+    if (path.isEmpty()) {
         return;
+    }
     download->setDownloadDirectory(QFileInfo(path).path());
     QWebEngineProfile::defaultProfile()->setDownloadPath(download->downloadDirectory());
     download->setDownloadFileName(QFileInfo(path).fileName());
@@ -53,14 +57,14 @@ void DownloadWidget::downloadRequested(QWebEngineDownloadItem* download)
     ui->gridLayout->addWidget(pushButton, row, 3);
     ui->gridLayout->addItem(ui->verticalSpacer, row + 1, 1);
 
-    if (!this->isVisible()) {
-        this->restoreGeometry(settings.value(QStringLiteral("DownloadGeometry")).toByteArray());
-        this->show();
+    if (!isVisible()) {
+        restoreGeometry(settings.value(QStringLiteral("DownloadGeometry")).toByteArray());
+        show();
     }
-    this->raise();
+    raise();
     download->accept();
 
-    connect(pushButton, &QPushButton::pressed, this, [this, download, pushButton, downloadLabel, progressBar]() {
+    connect(pushButton, &QPushButton::pressed, this, [this, download, pushButton, downloadLabel, progressBar] {
         if (download->state() == QWebEngineDownloadItem::DownloadInProgress) {
             download->cancel();
         } else {
@@ -74,31 +78,33 @@ void DownloadWidget::downloadRequested(QWebEngineDownloadItem* download)
     });
 
     connect(download, &QWebEngineDownloadItem::downloadProgress, this,
-            [download, pushButton, progressBar]() { updateDownload(download, pushButton, progressBar); });
+            [download, pushButton, progressBar] { updateDownload(download, pushButton, progressBar); });
     connect(download, &QWebEngineDownloadItem::stateChanged, this,
-            [download, pushButton, progressBar]() { updateDownload(download, pushButton, progressBar); });
+            [download, pushButton, progressBar] { updateDownload(download, pushButton, progressBar); });
 }
 
 inline QString DownloadWidget::withUnit(qreal bytes)
 {
-    if (bytes < (1 << 10))
+    if (bytes < (1 << 10)) {
         return tr("%L1 B").arg(bytes);
-    else if (bytes < (1 << 20))
+    } else if (bytes < (1 << 20)) {
         return tr("%L1 KiB").arg(bytes / (1 << 10), 0, 'f', 2);
-    else if (bytes < (1 << 30))
+    } else if (bytes < (1 << 30)) {
         return tr("%L1 MiB").arg(bytes / (1 << 20), 0, 'f', 2);
-    else
+    } else {
         return tr("%L1 GiB").arg(bytes / (1 << 30), 0, 'f', 2);
+    }
 }
 
 inline QString DownloadWidget::timeUnit(int seconds)
 {
-    if (seconds < 60)
+    if (seconds < 60) {
         return tr("%1sec.").arg(seconds);
-    else if (seconds < 3600)
+    } else if (seconds < 3600) {
         return tr("%1min. %2sec.").arg(seconds / 60).arg(seconds % 60);
-    else
+    } else {
         return tr("%1h. %2m. %3s.").arg(seconds / 3600, seconds % 3600, seconds % 3600 % 60);
+    }
 }
 
 void DownloadWidget::updateDownload(QWebEngineDownloadItem* download, QPushButton* pushButton,

@@ -1,3 +1,17 @@
+mx-user (23.9) mx; urgency=medium
+
+  * Fix: there can be only one autologin-user
+  * Fix: remove dead autologin-user with user deletion
+  * Adjust: version.h in debian rules
+
+ -- fehlix <fehlix@mxlinux.org>  Mon, 11 Sep 2023 17:57:25 -0400
+
+mx-user (23.8) mx; urgency=medium
+
+  * Change command to accommodate for different lightdm.conf structure when applying autologin 
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 18 Aug 2023 18:32:22 -0400
+
 mx-user (23.7.07) mx; urgency=medium
 
   * Fix a couple of translations

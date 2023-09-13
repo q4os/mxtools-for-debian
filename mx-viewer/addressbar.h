@@ -3,7 +3,7 @@
  *****************************************************************************
  * Copyright (C) 2022 MX Authors
  *
- * Authors: Adrian
+ * Authors: Adrian <adrian@mxlinux.org>
  *          MX Linux <http://mxlinux.org>
  *
  * This program is free software: you can redistribute it and/or modify

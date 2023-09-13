@@ -22,6 +22,7 @@ Depends:
  mx-remastercc,
  mx-repo-manager,
  mx-select-sound,
+ mx-service-manager,
  mx-samba-config,
  mx-snapshot,
  mx-tools,

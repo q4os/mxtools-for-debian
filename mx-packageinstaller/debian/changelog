@@ -1,3 +1,9 @@
+mx-packageinstaller (23.9) mx; urgency=medium
+
+  *  Load info for enabled repos and flatpaks in the background at start time
+
+ -- Adrian <adrian@mxlinux.org>  Sat, 02 Sep 2023 16:44:06 -0400
+
 mx-packageinstaller (23.8) mx; urgency=medium
 
   * Fix displaying the correct version of installed package if the package is available in multiple sources

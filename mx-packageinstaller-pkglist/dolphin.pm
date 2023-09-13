@@ -71,6 +71,9 @@ all
 
 <install_package_names>
 dolphin
+kdegraphics-thumbnailers
+kimageformat-plugins
+kio-extras
 </install_package_names>
 
 

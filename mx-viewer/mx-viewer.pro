@@ -3,7 +3,7 @@
 # *****************************************************************************
 # * Copyright (C) 2022 MX Authors
 # *
-# * Authors: Adrian
+# * Authors: Adrian <adrian@mxlinux.org>
 # *          MX Linux <http://mxlinux.org>
 # *
 # * This program is free software: you can redistribute it and/or modify
@@ -36,13 +36,17 @@ SOURCES += \
     main.cpp \
     addressbar.cpp \
     downloadwidget.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    tabwidget.cpp \
+    webview.cpp
 
 HEADERS  += \
     addressbar.h \
     downloadwidget.h \
+    tabwidget.h \
     version.h \
-    mainwindow.h
+    mainwindow.h \
+    webview.h
 
 TRANSLATIONS += \
                 translations/mx-viewer_af.ts \

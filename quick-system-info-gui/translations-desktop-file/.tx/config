@@ -1,8 +1,9 @@
 [main]
 host = https://www.transifex.com
 
-[antix-development.quick-system-info-gui-desktop]
+[o:anticapitalista:p:antix-development:r:quick-system-info-gui-desktop]
 file_filter = po/quick-system-info-gui-desktop_<lang>.po
 source_file = quick-system-info-gui-desktop.pot
 source_lang = en
-type = po
+type        = po
+

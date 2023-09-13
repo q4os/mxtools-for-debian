@@ -19,7 +19,7 @@
         <location filename="../mainwindow.ui" line="95"/>
         <location filename="../mainwindow.cpp" line="91"/>
         <source>Save text...</source>
-        <translation type="unfinished"/>
+        <translation>Сохранить текст…</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="106"/>
@@ -35,7 +35,7 @@
         <location filename="../mainwindow.ui" line="160"/>
         <location filename="../mainwindow.cpp" line="126"/>
         <source>&amp;Save...</source>
-        <translation type="unfinished"/>
+        <translation>&amp;Сохранить…</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="227"/>
@@ -102,7 +102,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="95"/>
         <source>&amp;Find...</source>
-        <translation type="unfinished"/>
+        <translation>&amp;Найти…</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="99"/>
@@ -113,12 +113,12 @@
     <message>
         <location filename="../mainwindow.cpp" line="115"/>
         <source>Select &amp;All</source>
-        <translation type="unfinished"/>
+        <translation>Выделить &amp;все</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="121"/>
         <source>Revert Selection</source>
-        <translation type="unfinished"/>
+        <translation>Отменить выделение</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="177"/>
@@ -168,22 +168,22 @@
     <message>
         <location filename="../mainwindow.cpp" line="488"/>
         <source>Direction</source>
-        <translation type="unfinished"/>
+        <translation>Направление</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="490"/>
         <source>&amp;Up</source>
-        <translation type="unfinished"/>
+        <translation>&amp;Вверх</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="491"/>
         <source>&amp;Down</source>
-        <translation type="unfinished"/>
+        <translation>В&amp;низ</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="533"/>
         <source>Cannot find &quot;%1&quot;</source>
-        <translation type="unfinished"/>
+        <translation>Не удаётся найти «%1»</translation>
     </message>
     <message>
         <source>Changelog</source>
@@ -216,7 +216,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="340"/>
         <source>history</source>
-        <translation type="unfinished"/>
+        <translation>история</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="356"/>

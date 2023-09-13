@@ -1,0 +1,12 @@
+[Desktop Entry]
+Encoding=UTF-8
+# The desktop entry name will be displayed within the menu.
+Name=MX Service Manager
+# # The desktop entry comment will be shown within the menu.
+Comment=Manually enable or disable services
+Exec=mxsm-launcher
+Terminal=false
+Type=Application
+Icon=mx-service-manager
+Categories=GNOME;GTK;System;MX-Maintenance;
+NoDisplay=false

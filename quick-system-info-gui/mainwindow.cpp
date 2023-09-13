@@ -47,7 +47,7 @@
 #include "ui_mainwindow.h"
 #include "version.h"
 
-MainWindow::MainWindow(const QCommandLineParser &arg_parser, QWidget *parent)
+MainWindow::MainWindow(const QCommandLineParser &arg_parser, QWidget *parent) noexcept
     : QDialog(parent)
     , ui(new Ui::MainWindow)
 {
@@ -331,7 +331,7 @@ void MainWindow::buildInfoList() noexcept
     // Special apt history info
     item = new QListWidgetItem("apt " + tr("history"));
     item->setData(Qt::UserRole, "apthistory.txt");
-    if (QFile("/var/log/dpkg.log").exists()){
+    if (QFile::exists("/var/log/dpkg.log")){
         ui->listInfo->insertItem(1, item);
     }
     listSelectDefault();

@@ -3,7 +3,7 @@
  *****************************************************************************
  * Copyright (C) 2022 MX Authors
  *
- * Authors: Adrian
+ * Authors: Adrian <adrian@mxlinux.org>
  *          MX Linux <http://mxlinux.org>
  *
  * This program is free software: you can redistribute it and/or modify
@@ -25,16 +25,62 @@
 
 #include "addressbar.h"
 #include "downloadwidget.h"
+#include "tabwidget.h"
+#include "webview.h"
 
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
 public:
     explicit MainWindow(const QCommandLineParser &arg_parser, QWidget *parent = nullptr);
+    explicit MainWindow(const QUrl &url, QWidget *parent = nullptr);
     ~MainWindow() override;
+
+public slots:
+    void listHistory();
+    void findBackward();
+    void findForward();
+    void loading();
+    void done();
+    void procTime();
+
+protected:
+    void closeEvent(QCloseEvent *event) override;
+    void keyPressEvent(QKeyEvent *event) override;
+    void resizeEvent(QResizeEvent *event) override;
+
+private:
+    AddressBar *addressBar {};
+    DownloadWidget *downloadWidget {};
+    QAction *addBookmark {};
+    QAction *manageBookmarks {};
+    QAction *menuButton {};
+    QHash<QUrl, QIcon> histIcons;
+    QLineEdit *searchBox {};
+    QMenu *bookmarks {};
+    QMenu *history {};
+    QMetaObject::Connection conn;
+    QProgressBar *progressBar {};
+    QSettings settings;
+    QString homeAddress;
+    QTimer *timer {nullptr};
+    QToolBar *toolBar {};
+    QWebEngineSettings *websettings {};
+    TabWidget *tabWidget {};
+    bool showProgress {};
+    const QCommandLineParser &args;
+    const int defaultHeight {600};
+    const int defaultWidth {800};
+    const int progBarVerticalAdj {40};
+    const int progBarWidth {20};
+    const int searchWidth {150};
+
+    QAction *pageAction(QWebEnginePage::WebAction webAction);
+    WebView *currentWebView();
     void addActions();
     void addBookmarksSubmenu();
     void addHistorySubmenu();
+    void addNewTab(const QString &url = {});
     void addToolbar();
     void buildMenu();
     void centerWindow();
@@ -48,47 +94,9 @@ public:
     void saveMenuItems(const QMenu *menu, int offset);
     void setConnections();
     void showFullScreenNotification();
+    void tabChanged();
     void toggleFullScreen();
     void updateUrl();
-
-public slots:
-    void listHistory();
-    void findBackward();
-    void findForward();
-    void loading();
-    void done();
-    void procTime();
-
-protected:
-    void keyPressEvent(QKeyEvent *event) override;
-    void resizeEvent(QResizeEvent *event) override;
-    void closeEvent(QCloseEvent *event) override;
-
-private:
-    AddressBar *addressBar {};
-    QAction *addBookmark {};
-    QAction *manageBookmarks {};
-    QAction *menuButton {};
-    QHash<QUrl, QIcon> histIcons;
-    QLineEdit *searchBox {};
-    QMenu *bookmarks {};
-    QMenu *history {};
-    QMetaObject::Connection conn;
-    QProgressBar *progressBar {};
-    QSettings settings;
-    QString homeAddress;
-    QToolBar *toolBar {};
-    QTimer *timer {nullptr};
-    QWebEngineSettings *websettings {};
-    QWebEngineView *webview {};
-    DownloadWidget *downloadWidget {};
-    bool showProgress {};
-    const QCommandLineParser &args;
-    const int defaultHeight {600};
-    const int defaultWidth {800};
-    const int progBarVerticalAdj {40};
-    const int progBarWidth {20};
-    const int searchWidth {150};
 };
 
 #endif // MXVIEW_H

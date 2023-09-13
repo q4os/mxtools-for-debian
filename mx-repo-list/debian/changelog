@@ -1,3 +1,15 @@
+mx-repo-list (23.9) mx; urgency=medium
+
+  * Update mirror from South Korea
+
+ -- Adrian <adrian@mxlinux.org>  Tue, 12 Sep 2023 10:52:27 -0400
+
+mx-repo-list (23.8) mx; urgency=medium
+
+  * New Mirror: Tokyo, Japan
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 25 Aug 2023 15:33:55 -0400
+
 mx-repo-list (23.6) mx; urgency=medium
 
   * New Mirror: Greece, Thessaloniki

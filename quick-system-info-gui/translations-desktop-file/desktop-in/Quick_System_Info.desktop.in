@@ -12,3 +12,4 @@ Terminal=false
 StartupNotify=false
 Type=Application
 Categories=System;MX-Utilities
+Keywords=qsi;quick;system;info;

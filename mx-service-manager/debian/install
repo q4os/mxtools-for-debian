@@ -1,0 +1,8 @@
+mx-service-manager		usr/bin
+mx-service-manager.desktop	usr/share/applications
+mx-service-manager.png		usr/share/icons/hicolor/48x48/apps
+mx-service-manager.png		usr/share/pixmaps
+docs/*				usr/share/doc/mx-service-manager
+translations/*.qm		usr/share/mx-service-manager/locale
+scripts/mxsm-launcher		usr/bin
+scripts/org.mxlinux.pkexec.mxsm-launcher.policy usr/share/polkit-1/actions

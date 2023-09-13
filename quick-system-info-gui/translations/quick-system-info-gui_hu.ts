@@ -8,34 +8,34 @@
     <message>
         <location filename="../mainwindow.ui" line="109"/>
         <source>&amp;Copy for forum</source>
-        <translation>Másolás fórumhoz</translation>
+        <translation>&amp;Másolás fórumhoz</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="92"/>
         <source>Save the displayed system information to a text file.</source>
-        <translation type="unfinished"/>
+        <translation>A megjelenített információk mentése egy szövegfájlba.</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="95"/>
         <location filename="../mainwindow.cpp" line="91"/>
         <source>Save text...</source>
-        <translation type="unfinished"/>
+        <translation>Szöveg mentése...</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="106"/>
         <source>Copy the displayed system information to the clipboard, encased in [CODE][/CODE] tags ready to use in a forum post.</source>
-        <translation type="unfinished"/>
+        <translation>A megjelenített rendszerinformációk másolása a vágólapra,  [CODE][/CODE] címkékkel, készen a fórumba való bemásolásra.</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="157"/>
         <source>Save the system information selected from the list to an archive file.</source>
-        <translation type="unfinished"/>
+        <translation>A listán kijelölt rendszerinformációk mentése egy archív fájlba.</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="160"/>
         <location filename="../mainwindow.cpp" line="126"/>
         <source>&amp;Save...</source>
-        <translation type="unfinished"/>
+        <translation>Menté&amp;s...</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="227"/>
@@ -102,23 +102,23 @@
     <message>
         <location filename="../mainwindow.cpp" line="95"/>
         <source>&amp;Find...</source>
-        <translation type="unfinished"/>
+        <translation>&amp;Keresés...</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="99"/>
         <location filename="../mainwindow.cpp" line="478"/>
         <source>Find &amp;Next</source>
-        <translation type="unfinished"/>
+        <translation>Köve&amp;tkező keresése...</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="115"/>
         <source>Select &amp;All</source>
-        <translation type="unfinished"/>
+        <translation>Öss&amp;zes kijelölése</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="121"/>
         <source>Revert Selection</source>
-        <translation type="unfinished"/>
+        <translation>Kijelölés megfordítása</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="177"/>
@@ -133,7 +133,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="274"/>
         <source>Open folder</source>
-        <translation>Nyitott mappa</translation>
+        <translation>Mappa megnyitása</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="276"/>
@@ -143,7 +143,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="437"/>
         <source>&amp;Save (×%1)...</source>
-        <translation type="unfinished"/>
+        <translation>Menté&amp;s (×%1)...</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="471"/>
@@ -153,37 +153,37 @@
     <message>
         <location filename="../mainwindow.cpp" line="474"/>
         <source>&amp;Find what:</source>
-        <translation type="unfinished"/>
+        <translation>&amp;Mit keres:</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="484"/>
         <source>Match c&amp;ase</source>
-        <translation type="unfinished"/>
+        <translation>Na&amp;gybetű érzékeny</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="485"/>
         <source>Match &amp;whole word only</source>
-        <translation type="unfinished"/>
+        <translation>&amp;Csak teljes szavak egyezése</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="488"/>
         <source>Direction</source>
-        <translation type="unfinished"/>
+        <translation>Irány</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="490"/>
         <source>&amp;Up</source>
-        <translation type="unfinished"/>
+        <translation>&amp;Fel</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="491"/>
         <source>&amp;Down</source>
-        <translation type="unfinished"/>
+        <translation>&amp;Le</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="533"/>
         <source>Cannot find &quot;%1&quot;</source>
-        <translation type="unfinished"/>
+        <translation>Nem található: &quot;%1&quot;</translation>
     </message>
     <message>
         <source>Changelog</source>
@@ -216,7 +216,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="340"/>
         <source>history</source>
-        <translation type="unfinished"/>
+        <translation>előzmények</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="356"/>
@@ -231,12 +231,12 @@
     <message>
         <location filename="../mainwindow.cpp" line="81"/>
         <source>Copy for forum</source>
-        <translation type="unfinished"/>
+        <translation>Másolás fórumhoz</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="86"/>
         <source>Plain text copy</source>
-        <translation type="unfinished"/>
+        <translation>Sima szöveg másolása</translation>
     </message>
 </context>
 <context>

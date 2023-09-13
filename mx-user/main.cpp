@@ -32,25 +32,29 @@ int main(int argc, char *argv[])
         qunsetenv("SESSION_MANAGER");
     }
     QApplication app(argc, argv);
-    if (getuid() == 0)
+    if (getuid() == 0) {
         qputenv("HOME", "/root");
+    }
 
     QApplication::setWindowIcon(QIcon::fromTheme(QApplication::applicationName()));
     QApplication::setOrganizationName(QStringLiteral("MX-Linux"));
 
     QTranslator qtTran;
     if (qtTran.load(QLocale::system(), QStringLiteral("qt"), QStringLiteral("_"),
-                    QLibraryInfo::location(QLibraryInfo::TranslationsPath)))
+                    QLibraryInfo::location(QLibraryInfo::TranslationsPath))) {
         QApplication::installTranslator(&qtTran);
+    }
 
     QTranslator qtBaseTran;
-    if (qtBaseTran.load("qtbase_" + QLocale::system().name(), QLibraryInfo::location(QLibraryInfo::TranslationsPath)))
+    if (qtBaseTran.load("qtbase_" + QLocale::system().name(), QLibraryInfo::location(QLibraryInfo::TranslationsPath))) {
         QApplication::installTranslator(&qtBaseTran);
+    }
 
     QTranslator appTran;
     if (appTran.load(QApplication::applicationName() + "_" + QLocale::system().name(),
-                     "/usr/share/" + QApplication::applicationName() + "/locale"))
+                     "/usr/share/" + QApplication::applicationName() + "/locale")) {
         QApplication::installTranslator(&appTran);
+    }
 
     // root guard
     if (QProcess::execute(QStringLiteral("/bin/bash"), {"-c", "logname |grep -q ^root$"}) == 0) {

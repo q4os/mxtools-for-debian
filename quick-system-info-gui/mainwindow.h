@@ -41,7 +41,7 @@ class MainWindow : public QDialog
     Q_OBJECT
 
 public:
-    explicit MainWindow(const QCommandLineParser &arg_parser, QWidget *parent = nullptr);
+    explicit MainWindow(const QCommandLineParser &arg_parser, QWidget *parent = nullptr) noexcept;
     ~MainWindow();
 
     int run(const char *program, const QStringList &args = QStringList(),

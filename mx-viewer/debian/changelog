@@ -1,3 +1,11 @@
+mx-viewer (23.8) mx; urgency=medium
+
+  * Implemented tab interface
+  * Open link (right-click menu, or with target _blank) in new tab, or new window
+  * Enabled show source
+
+ -- Adrian <adrian@mxlinux.org>  Sat, 19 Aug 2023 23:13:22 -0400
+
 mx-viewer (23.7.02) mx; urgency=medium
 
   * Open files without specifying the full path

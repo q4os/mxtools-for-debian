@@ -1,0 +1,10 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=MX Service Manager
+Comment=Manually enable or disable services
+Exec=mxsm-launcher
+Terminal=false
+Type=Application
+Icon=mx-service-manager
+Categories=GNOME;GTK;System;MX-Maintenance;
+NoDisplay=false

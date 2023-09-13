@@ -5,14 +5,14 @@
     <name>MainWindow</name>
     <message>
         <location filename="../mainwindow.ui" line="20"/>
-        <location filename="../mainwindow.cpp" line="109"/>
+        <location filename="../mainwindow.cpp" line="117"/>
         <source>MX Package Installer</source>
         <translation>MX Instalador de Pacotes</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="57"/>
         <source>Popular Applications</source>
-        <translation>Aplicações selecionadas</translation>
+        <translation>Aplicações populares</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="73"/>
@@ -133,7 +133,7 @@
         <location filename="../mainwindow.ui" line="695"/>
         <location filename="../mainwindow.ui" line="1088"/>
         <location filename="../mainwindow.ui" line="1092"/>
-        <location filename="../mainwindow.cpp" line="2685"/>
+        <location filename="../mainwindow.cpp" line="2741"/>
         <source>All packages</source>
         <translation>Todos os pacotes</translation>
     </message>
@@ -141,7 +141,7 @@
         <location filename="../mainwindow.ui" line="402"/>
         <location filename="../mainwindow.ui" line="700"/>
         <location filename="../mainwindow.ui" line="1097"/>
-        <location filename="../mainwindow.cpp" line="2698"/>
+        <location filename="../mainwindow.cpp" line="2754"/>
         <source>Installed</source>
         <translation>Instalado</translation>
     </message>
@@ -149,7 +149,7 @@
         <location filename="../mainwindow.ui" line="407"/>
         <location filename="../mainwindow.ui" line="705"/>
         <location filename="../mainwindow.ui" line="1102"/>
-        <location filename="../mainwindow.cpp" line="2696"/>
+        <location filename="../mainwindow.cpp" line="2752"/>
         <source>Upgradable</source>
         <translation>Atualizáveis</translation>
     </message>
@@ -158,10 +158,10 @@
         <location filename="../mainwindow.ui" line="710"/>
         <location filename="../mainwindow.ui" line="1107"/>
         <location filename="../mainwindow.ui" line="1234"/>
-        <location filename="../mainwindow.cpp" line="2669"/>
-        <location filename="../mainwindow.cpp" line="2701"/>
-        <location filename="../mainwindow.cpp" line="2799"/>
-        <location filename="../mainwindow.cpp" line="2800"/>
+        <location filename="../mainwindow.cpp" line="2725"/>
+        <location filename="../mainwindow.cpp" line="2757"/>
+        <location filename="../mainwindow.cpp" line="2855"/>
+        <location filename="../mainwindow.cpp" line="2856"/>
         <source>Not installed</source>
         <translation>Não instalado</translation>
     </message>
@@ -221,39 +221,39 @@
     <message>
         <location filename="../mainwindow.ui" line="1200"/>
         <location filename="../mainwindow.ui" line="1204"/>
-        <location filename="../mainwindow.cpp" line="2649"/>
+        <location filename="../mainwindow.cpp" line="2705"/>
         <source>All apps</source>
         <translation>Aplicações</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1209"/>
-        <location filename="../mainwindow.cpp" line="2654"/>
+        <location filename="../mainwindow.cpp" line="2710"/>
         <source>All runtimes</source>
         <translation>Software &apos;runtime&apos;</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1214"/>
-        <location filename="../mainwindow.cpp" line="2659"/>
+        <location filename="../mainwindow.cpp" line="2715"/>
         <source>All available</source>
         <translation>Tudo</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1219"/>
-        <location filename="../mainwindow.cpp" line="2647"/>
+        <location filename="../mainwindow.cpp" line="2703"/>
         <source>Installed apps</source>
         <translation>Aplicações instaladas</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1224"/>
-        <location filename="../mainwindow.cpp" line="2645"/>
+        <location filename="../mainwindow.cpp" line="2701"/>
         <source>Installed runtimes</source>
         <translation>Software &apos;runtime&apos; instalado</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1229"/>
-        <location filename="../mainwindow.cpp" line="2667"/>
-        <location filename="../mainwindow.cpp" line="2792"/>
-        <location filename="../mainwindow.cpp" line="2793"/>
+        <location filename="../mainwindow.cpp" line="2723"/>
+        <location filename="../mainwindow.cpp" line="2848"/>
+        <location filename="../mainwindow.cpp" line="2849"/>
         <source>All installed</source>
         <translation>Tudo instalado</translation>
     </message>
@@ -270,17 +270,17 @@
     <message>
         <location filename="../mainwindow.ui" line="1383"/>
         <source>Advanced</source>
-        <translation>Gestão avançada</translation>
+        <translation>Avançado</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1413"/>
         <source>Total installed size:</source>
-        <translation>Total instalado:</translation>
+        <translation>Tamanho total instalado:</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1427"/>
         <source>Remove unused runtimes</source>
-        <translation>Remover tempos de execução não utilizados</translation>
+        <translation>Remover &apos;runtimes&apos; não utilizados</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1459"/>
@@ -299,8 +299,8 @@
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1504"/>
-        <location filename="../mainwindow.cpp" line="2445"/>
-        <location filename="../mainwindow.cpp" line="2604"/>
+        <location filename="../mainwindow.cpp" line="2482"/>
+        <location filename="../mainwindow.cpp" line="2652"/>
         <source>Console Output</source>
         <translation>Processamento</translation>
     </message>
@@ -316,10 +316,10 @@
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1577"/>
-        <location filename="../mainwindow.cpp" line="1136"/>
-        <location filename="../mainwindow.cpp" line="2785"/>
-        <location filename="../mainwindow.cpp" line="2789"/>
-        <location filename="../mainwindow.cpp" line="3056"/>
+        <location filename="../mainwindow.cpp" line="1161"/>
+        <location filename="../mainwindow.cpp" line="2841"/>
+        <location filename="../mainwindow.cpp" line="2845"/>
+        <location filename="../mainwindow.cpp" line="3112"/>
         <source>Install</source>
         <translation>Instalar</translation>
     </message>
@@ -384,362 +384,362 @@
         <translation>Alt+U</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="95"/>
+        <location filename="../mainwindow.cpp" line="103"/>
         <source>Flatpak tab is disabled on 32-bit.</source>
         <translation>O separador Flatpak está desativado em 32 bits.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="100"/>
+        <location filename="../mainwindow.cpp" line="108"/>
         <source>Could not find MX sources.</source>
-        <translation type="unfinished"></translation>
+        <translation>Não foi possível encontrar as fontes do MX.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="195"/>
+        <location filename="../mainwindow.cpp" line="203"/>
         <source>Uninstalling packages...</source>
         <translation>A desinstalar pacotes...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="200"/>
+        <location filename="../mainwindow.cpp" line="208"/>
         <source>Running pre-uninstall operations...</source>
         <translation>A executar operações pré-desinstalação...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="219"/>
+        <location filename="../mainwindow.cpp" line="227"/>
         <source>Running post-uninstall operations...</source>
         <translation>A executar operações pós-desinstalação...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="234"/>
+        <location filename="../mainwindow.cpp" line="242"/>
         <source>Refreshing sources...</source>
-        <translation>A actualizar as origens...</translation>
+        <translation>A atualizar as fontes...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="247"/>
-        <location filename="../mainwindow.cpp" line="1184"/>
-        <location filename="../mainwindow.cpp" line="1318"/>
-        <location filename="../mainwindow.cpp" line="1468"/>
-        <location filename="../mainwindow.cpp" line="1529"/>
-        <location filename="../mainwindow.cpp" line="2257"/>
-        <location filename="../mainwindow.cpp" line="2288"/>
-        <location filename="../mainwindow.cpp" line="2300"/>
-        <location filename="../mainwindow.cpp" line="2416"/>
-        <location filename="../mainwindow.cpp" line="2437"/>
-        <location filename="../mainwindow.cpp" line="2498"/>
-        <location filename="../mainwindow.cpp" line="2517"/>
-        <location filename="../mainwindow.cpp" line="2536"/>
-        <location filename="../mainwindow.cpp" line="2872"/>
-        <location filename="../mainwindow.cpp" line="2949"/>
-        <location filename="../mainwindow.cpp" line="2980"/>
-        <location filename="../mainwindow.cpp" line="3082"/>
-        <location filename="../mainwindow.cpp" line="3108"/>
+        <location filename="../mainwindow.cpp" line="258"/>
+        <location filename="../mainwindow.cpp" line="1209"/>
+        <location filename="../mainwindow.cpp" line="1343"/>
+        <location filename="../mainwindow.cpp" line="1493"/>
+        <location filename="../mainwindow.cpp" line="1554"/>
+        <location filename="../mainwindow.cpp" line="2294"/>
+        <location filename="../mainwindow.cpp" line="2325"/>
+        <location filename="../mainwindow.cpp" line="2337"/>
+        <location filename="../mainwindow.cpp" line="2453"/>
+        <location filename="../mainwindow.cpp" line="2474"/>
+        <location filename="../mainwindow.cpp" line="2534"/>
+        <location filename="../mainwindow.cpp" line="2559"/>
+        <location filename="../mainwindow.cpp" line="2578"/>
+        <location filename="../mainwindow.cpp" line="2928"/>
+        <location filename="../mainwindow.cpp" line="3005"/>
+        <location filename="../mainwindow.cpp" line="3036"/>
+        <location filename="../mainwindow.cpp" line="3138"/>
+        <location filename="../mainwindow.cpp" line="3164"/>
         <source>Error</source>
         <translation>Erro</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="248"/>
+        <location filename="../mainwindow.cpp" line="259"/>
         <source>There was a problem updating sources. Some sources may not have provided updates. For more info check: </source>
-        <translation>Houve um problema ao actualizar as origens. Algumas origens podem não ter fornecido actualizações. Para mais informação, ver: </translation>
+        <translation>Houve um problema ao atualizar as fontes. Algumas fontes podem não ter fornecido atualizações. Para mais informação, ver: </translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="665"/>
+        <location filename="../mainwindow.cpp" line="678"/>
         <source>Cancel</source>
         <translation>Cancelar</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="672"/>
+        <location filename="../mainwindow.cpp" line="685"/>
         <source>Please wait...</source>
         <translation>Aguardar...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="861"/>
-        <location filename="../mainwindow.cpp" line="881"/>
+        <location filename="../mainwindow.cpp" line="875"/>
+        <location filename="../mainwindow.cpp" line="895"/>
         <source>Version </source>
         <translation>Versão </translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="862"/>
+        <location filename="../mainwindow.cpp" line="876"/>
         <source> in the enabled repos</source>
         <translation>nos repositórios ativados</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="864"/>
+        <location filename="../mainwindow.cpp" line="878"/>
         <source>Not available in the enabled repos</source>
         <translation>Não está disponível nos repositórios ativados</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="874"/>
-        <location filename="../mainwindow.cpp" line="2581"/>
+        <location filename="../mainwindow.cpp" line="888"/>
+        <location filename="../mainwindow.cpp" line="2622"/>
         <source>Latest version </source>
         <translation>Última versão </translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="874"/>
-        <location filename="../mainwindow.cpp" line="2581"/>
+        <location filename="../mainwindow.cpp" line="888"/>
+        <location filename="../mainwindow.cpp" line="2622"/>
         <source> already installed</source>
         <translation> já instalada</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="881"/>
+        <location filename="../mainwindow.cpp" line="895"/>
         <source> installed</source>
         <translation> instalada</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="998"/>
+        <location filename="../mainwindow.cpp" line="1022"/>
         <source>You are about to use the MX Test repository, whose packages are provided for testing purposes only. It is possible that they might break your system, so it is suggested that you back up your system and install or update only one package at a time. Please provide feedback in the Forum so the package can be evaluated before moving up to Main.</source>
         <translation>Está prestes a ser usado o repositório MX Teste, cujos pacotes são disponibilizados sobretudo para serem testados. Há alguma probabilidade de os pacotes deste repositório danificarem o sistema, pelo que é sugerido que seja feita uma cópia de segurança (backup) do sistema e que seja instalado ou actualizado apenas um pacote de cada vez. Solicita-se que os resultados (execução sem problemas ou com problemas e quais) sejam comunicados no fórum (https://forum.mxlinux.org, em &apos;Select language&apos; escolher Portuguese, registar-se se ainda não registado, e ir para a secção Comunidade), para que seja feita uma re-avaliação dos pacotes antes de serem movidos para o repositório estável.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1007"/>
+        <location filename="../mainwindow.cpp" line="1031"/>
         <source>You are about to use Debian Backports, which contains packages taken from the next Debian release (called &apos;testing&apos;), adjusted and recompiled for usage on Debian stable. They cannot be tested as extensively as in the stable releases of Debian and MX Linux, and are provided on an as-is basis, with risk of incompatibilities with other components in Debian stable. Use with care!</source>
         <translation>Está prestes a ser usado o repositório Debian Retroportados. Este repositório contém pacotes retirados da versão Debian &apos;testing&apos; (próxima versão oficial do Debian), adaptados e recompilados para uso na actual versão oficial (Debian &apos;stable&apos;) - sendo por isso designados de pacotes retroportados. Estes pacotes não foram tão extensivamente testados como os das versões estáveis do Debian e do MX; por isso, são disponibilizados &apos;como estão&apos;, com o risco de incompatibilidades com outros componentes do Debian &apos;stable&apos;. Usar com cuidado!</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1015"/>
+        <location filename="../mainwindow.cpp" line="1039"/>
         <source>MX Linux includes this repository of flatpaks for the users&apos; convenience only, and is not responsible for the functionality of the individual flatpaks themselves. For more, consult flatpaks in the Wiki.</source>
         <translation>O MX inclui este repositório de pacotes flatpak apenas para conveniência dos utilizadores, não sendo responsável pelo funcionamento dos próprios pacotes flatpak. Para mais informação (em inglês) consultar &apos;flatpaks&apos; no Wiki.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1023"/>
-        <location filename="../mainwindow.cpp" line="3092"/>
+        <location filename="../mainwindow.cpp" line="1047"/>
+        <location filename="../mainwindow.cpp" line="3148"/>
         <source>Warning</source>
         <translation>Aviso</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1027"/>
+        <location filename="../mainwindow.cpp" line="1051"/>
         <source>Do not show this message again</source>
         <translation>Não mostrar esta mensagem novamente</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1133"/>
+        <location filename="../mainwindow.cpp" line="1158"/>
         <source>Remove</source>
         <translation>Remover</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1149"/>
+        <location filename="../mainwindow.cpp" line="1174"/>
         <source>The following packages were selected. Click Show Details for list of changes.</source>
         <translation>Foram selecionados os seguintes pacotes. Clique em Mostrar detalhes para obter a lista de alterações.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1185"/>
-        <location filename="../mainwindow.cpp" line="1319"/>
-        <location filename="../mainwindow.cpp" line="1530"/>
+        <location filename="../mainwindow.cpp" line="1210"/>
+        <location filename="../mainwindow.cpp" line="1344"/>
+        <location filename="../mainwindow.cpp" line="1555"/>
         <source>Internet is not available, won&apos;t be able to download the list of packages</source>
         <translation>Sem ligação à Internet; é possível descarregar a lista de pacotes</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1188"/>
+        <location filename="../mainwindow.cpp" line="1213"/>
         <source>Installing packages...</source>
         <translation>A instalar pacotes...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1250"/>
+        <location filename="../mainwindow.cpp" line="1275"/>
         <source>Post-processing...</source>
         <translation>Pós-processamento...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1281"/>
+        <location filename="../mainwindow.cpp" line="1306"/>
         <source>Pre-processing for </source>
         <translation>Pré-processando para </translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1295"/>
+        <location filename="../mainwindow.cpp" line="1320"/>
         <source>Installing </source>
         <translation>A instalar </translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1302"/>
+        <location filename="../mainwindow.cpp" line="1327"/>
         <source>Post-processing for </source>
         <translation>Pós-processando para </translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1469"/>
+        <location filename="../mainwindow.cpp" line="1494"/>
         <source>There was an error writing file: %1. Please check if you have enough free space on your drive</source>
         <translation>Houve um erro ao gravar o ficheiro: %1. Verifique se tem espaço livre suficiente na sua unidade</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1538"/>
+        <location filename="../mainwindow.cpp" line="1563"/>
         <source>Downloading package info...</source>
         <translation>A descarregar informação do pacote...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="2026"/>
-        <location filename="../mainwindow.cpp" line="2109"/>
-        <location filename="../mainwindow.cpp" line="2133"/>
+        <location filename="../mainwindow.cpp" line="2063"/>
+        <location filename="../mainwindow.cpp" line="2146"/>
+        <location filename="../mainwindow.cpp" line="2170"/>
         <source>Package info</source>
         <translation>Informação do pacote</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="2038"/>
-        <location filename="../mainwindow.cpp" line="3019"/>
+        <location filename="../mainwindow.cpp" line="2075"/>
+        <location filename="../mainwindow.cpp" line="3075"/>
         <source>More &amp;info...</source>
         <translation>Mais &amp;informação...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="2070"/>
+        <location filename="../mainwindow.cpp" line="2107"/>
         <source>Packages to be installed: </source>
         <translation>Pacotes a instalar: </translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="2253"/>
-        <location filename="../mainwindow.cpp" line="2266"/>
-        <location filename="../mainwindow.cpp" line="2282"/>
-        <location filename="../mainwindow.cpp" line="2297"/>
-        <location filename="../mainwindow.cpp" line="2386"/>
-        <location filename="../mainwindow.cpp" line="2411"/>
-        <location filename="../mainwindow.cpp" line="2868"/>
-        <location filename="../mainwindow.cpp" line="2943"/>
-        <location filename="../mainwindow.cpp" line="2974"/>
-        <location filename="../mainwindow.cpp" line="3076"/>
+        <location filename="../mainwindow.cpp" line="2290"/>
+        <location filename="../mainwindow.cpp" line="2303"/>
+        <location filename="../mainwindow.cpp" line="2319"/>
+        <location filename="../mainwindow.cpp" line="2334"/>
+        <location filename="../mainwindow.cpp" line="2423"/>
+        <location filename="../mainwindow.cpp" line="2448"/>
+        <location filename="../mainwindow.cpp" line="2924"/>
+        <location filename="../mainwindow.cpp" line="2999"/>
+        <location filename="../mainwindow.cpp" line="3030"/>
+        <location filename="../mainwindow.cpp" line="3132"/>
         <source>Done</source>
         <translation>Concluído</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="2253"/>
-        <location filename="../mainwindow.cpp" line="2266"/>
-        <location filename="../mainwindow.cpp" line="2282"/>
-        <location filename="../mainwindow.cpp" line="2297"/>
-        <location filename="../mainwindow.cpp" line="2386"/>
-        <location filename="../mainwindow.cpp" line="2411"/>
-        <location filename="../mainwindow.cpp" line="2430"/>
-        <location filename="../mainwindow.cpp" line="2868"/>
-        <location filename="../mainwindow.cpp" line="2943"/>
-        <location filename="../mainwindow.cpp" line="2974"/>
-        <location filename="../mainwindow.cpp" line="3076"/>
-        <location filename="../mainwindow.cpp" line="3101"/>
+        <location filename="../mainwindow.cpp" line="2290"/>
+        <location filename="../mainwindow.cpp" line="2303"/>
+        <location filename="../mainwindow.cpp" line="2319"/>
+        <location filename="../mainwindow.cpp" line="2334"/>
+        <location filename="../mainwindow.cpp" line="2423"/>
+        <location filename="../mainwindow.cpp" line="2448"/>
+        <location filename="../mainwindow.cpp" line="2467"/>
+        <location filename="../mainwindow.cpp" line="2924"/>
+        <location filename="../mainwindow.cpp" line="2999"/>
+        <location filename="../mainwindow.cpp" line="3030"/>
+        <location filename="../mainwindow.cpp" line="3132"/>
+        <location filename="../mainwindow.cpp" line="3157"/>
         <source>Processing finished successfully.</source>
         <translation>Processamento terminado com êxito.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="2258"/>
-        <location filename="../mainwindow.cpp" line="2289"/>
-        <location filename="../mainwindow.cpp" line="2301"/>
-        <location filename="../mainwindow.cpp" line="2873"/>
-        <location filename="../mainwindow.cpp" line="2950"/>
-        <location filename="../mainwindow.cpp" line="2981"/>
+        <location filename="../mainwindow.cpp" line="2295"/>
+        <location filename="../mainwindow.cpp" line="2326"/>
+        <location filename="../mainwindow.cpp" line="2338"/>
+        <location filename="../mainwindow.cpp" line="2929"/>
+        <location filename="../mainwindow.cpp" line="3006"/>
+        <location filename="../mainwindow.cpp" line="3037"/>
         <source>Problem detected while installing, please inspect the console output.</source>
         <translation>Detectado problema ao instalar; ver informação no separador de processamento.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="2311"/>
+        <location filename="../mainwindow.cpp" line="2348"/>
         <source>About %1</source>
         <translation>Sobre o %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="2312"/>
+        <location filename="../mainwindow.cpp" line="2349"/>
         <source>Version: </source>
         <translation>Versão: </translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="2314"/>
+        <location filename="../mainwindow.cpp" line="2351"/>
         <source>Package Installer for MX Linux</source>
         <translation>Gestor de Programas/Pacotes do MX Linux</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="2316"/>
+        <location filename="../mainwindow.cpp" line="2353"/>
         <source>Copyright (c) MX Linux</source>
         <translation>Direitos de autor (c) MX Linux</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="2317"/>
+        <location filename="../mainwindow.cpp" line="2354"/>
         <source>%1 License</source>
         <translation>Licença do %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="2329"/>
+        <location filename="../mainwindow.cpp" line="2366"/>
         <source>%1 Help</source>
         <translation>Ajuda do %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="2416"/>
+        <location filename="../mainwindow.cpp" line="2453"/>
         <source>We encountered a problem uninstalling, please check output</source>
         <translation>Foi encontrado um problema ao desinstalar. Ver no separador de processamento</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="2430"/>
-        <location filename="../mainwindow.cpp" line="3101"/>
+        <location filename="../mainwindow.cpp" line="2467"/>
+        <location filename="../mainwindow.cpp" line="3157"/>
         <source>Success</source>
         <translation>Êxito</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="2437"/>
-        <location filename="../mainwindow.cpp" line="3108"/>
+        <location filename="../mainwindow.cpp" line="2474"/>
+        <location filename="../mainwindow.cpp" line="3164"/>
         <source>We encountered a problem uninstalling the program</source>
         <translation>Houve um problema ao desinstalar o programa</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="2499"/>
-        <location filename="../mainwindow.cpp" line="2518"/>
-        <location filename="../mainwindow.cpp" line="2537"/>
+        <location filename="../mainwindow.cpp" line="2535"/>
+        <location filename="../mainwindow.cpp" line="2560"/>
+        <location filename="../mainwindow.cpp" line="2579"/>
         <source>Could not download the list of packages. Please check your APT sources.</source>
-        <translation>Erro ao descarregar lista de pacotes. Verifique as Sources do APT</translation>
+        <translation>Erro ao descarregar lista de pacotes. Verifique as fontes do APT</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="2555"/>
-        <location filename="../mainwindow.cpp" line="2567"/>
+        <location filename="../mainwindow.cpp" line="2596"/>
+        <location filename="../mainwindow.cpp" line="2608"/>
         <source>Flatpak not installed</source>
         <translation>Pacote flatpak não instalado</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="2556"/>
+        <location filename="../mainwindow.cpp" line="2597"/>
         <source>Flatpak is not currently installed.
 OK to go ahead and install it?</source>
         <translation>O pacote flatpak não está instalado.
 Continuar e instalar o pacote?</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="2567"/>
+        <location filename="../mainwindow.cpp" line="2608"/>
         <source>Flatpak was not installed</source>
         <translation>O pacote flatpak não estava instalado</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="2591"/>
-        <location filename="../mainwindow.cpp" line="2613"/>
+        <location filename="../mainwindow.cpp" line="2632"/>
+        <location filename="../mainwindow.cpp" line="2662"/>
         <source>Flathub remote failed</source>
         <translation>Falha no repositório remoto Flathub</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="2591"/>
-        <location filename="../mainwindow.cpp" line="2613"/>
+        <location filename="../mainwindow.cpp" line="2632"/>
+        <location filename="../mainwindow.cpp" line="2662"/>
         <source>Flathub remote could not be added</source>
         <translation>Não foi possível adicionar o repositório remoto Flathub</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="2599"/>
+        <location filename="../mainwindow.cpp" line="2647"/>
         <source>Needs re-login</source>
         <translation>É necessário re-entrar</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="2600"/>
+        <location filename="../mainwindow.cpp" line="2648"/>
         <source>You might need to logout/login to see installed items in the menu</source>
         <translation>Poderá ser necessário sair e re-entrar para que os itens fiquem visíveis no menu</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="2785"/>
+        <location filename="../mainwindow.cpp" line="2841"/>
         <source>Upgrade</source>
         <translation>Actualizar</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="2902"/>
+        <location filename="../mainwindow.cpp" line="2958"/>
         <source>Quit?</source>
         <translation>Sair?</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="2903"/>
+        <location filename="../mainwindow.cpp" line="2959"/>
         <source>Process still running, quitting might leave the system in an unstable state.&lt;p&gt;&lt;b&gt;Are you sure you want to exit MX Package Installer?&lt;/b&gt;</source>
         <translation>Processo ainda em execução. Sair pode deixar o sistema num estado instável.&lt;p&gt;&lt;b&gt;Sair realmente do MX Instalador de Pacotes?&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="3054"/>
+        <location filename="../mainwindow.cpp" line="3110"/>
         <source>Reinstall</source>
         <translation>Reinstalar</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="3083"/>
+        <location filename="../mainwindow.cpp" line="3139"/>
         <source>Problem detected during last operation, please inspect the console output.</source>
         <translation>Problema detectado durante a última operação. Inspecione o resultado da consola.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="3093"/>
+        <location filename="../mainwindow.cpp" line="3149"/>
         <source>Potentially dangerous operation.
 Please make sure you check carefully the list of packages to be removed.</source>
         <translation>Operação potencialmente perigosa.

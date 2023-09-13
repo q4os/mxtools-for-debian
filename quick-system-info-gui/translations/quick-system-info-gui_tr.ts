@@ -128,7 +128,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="181"/>
         <source>License</source>
-        <translation>Ruhsat</translation>
+        <translation>Lisans</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="274"/>
@@ -262,7 +262,7 @@
     <message>
         <location filename="../about.cpp" line="40"/>
         <source>License</source>
-        <translation>Ruhsat</translation>
+        <translation>Lisans</translation>
     </message>
     <message>
         <location filename="../about.cpp" line="41"/>

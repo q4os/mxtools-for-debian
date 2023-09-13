@@ -1,0 +1,26 @@
+mx-service-manager (23.9.02) mx; urgency=medium
+
+  * Add alias for smbd/samba to make it easier to search
+  * List systemd services with 'systemctl list-units' command instead of 'services'
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 08 Sep 2023 12:03:50 -0400
+
+mx-service-manager (23.9.01) mx; urgency=medium
+
+  * Add it to mx-tools
+  * Improve sysvinit detection
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 08 Sep 2023 08:23:42 -0400
+
+mx-service-manager (23.9) mx; urgency=medium
+
+  * First official release with latest translations
+
+ -- Adrian <adrian@mxlinux.org>  Tue, 05 Sep 2023 09:07:58 -0400
+
+mx-service-manager (0.23.8) mx; urgency=medium
+
+  * Initial release
+
+ -- Adrian <adrian@mxlinux.org>  Sat, 26 Aug 2023 20:55:12 -0400
+

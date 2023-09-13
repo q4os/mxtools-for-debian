@@ -1,3 +1,9 @@
+mx-gpg-keys (23.09.04) mx; urgency=medium
+
+  * Updated Adrian's key
+
+ -- Timothy E. Harris <maintainer@mxrepo.com>  Sun, 03 Sep 2023 23:27:02 -0400
+
 mx-gpg-keys (22.11.11) mx; urgency=medium
 
   * Updated Adrian's subkey & Stevo's key

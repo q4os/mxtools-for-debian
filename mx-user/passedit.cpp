@@ -37,10 +37,10 @@ static const int GEN_NUMBER_MAX = 999;   // Numbers will go from 0 to GEN_NUMBER
 static const int GEN_WORD_NUM_RATIO = 3; // Ratio N:1 of words to numbers (if less than GEN_NUMBER_MAX).
 
 PassEdit::PassEdit(QLineEdit *master, QLineEdit *slave, int min, QObject *parent) noexcept
-    : QObject(parent)
-    , master(master)
-    , slave(slave)
-    , min(min)
+    : QObject(parent),
+      master(master),
+      slave(slave),
+      min(min)
 {
     disconnect(master);
     disconnect(slave);
@@ -50,8 +50,9 @@ PassEdit::PassEdit(QLineEdit *master, QLineEdit *slave, int min, QObject *parent
     master->setContextMenuPolicy(Qt::CustomContextMenu);
     connect(master, &QLineEdit::textChanged, this, &PassEdit::masterTextChanged);
     connect(slave, &QLineEdit::textChanged, this, &PassEdit::slaveTextChanged);
-    if (min == 0)
+    if (min == 0) {
         lastValid = true; // Control starts with no text
+    }
 
     generate(); // Pre-load the generator
     if (!gentext.isEmpty()) {
@@ -76,16 +77,19 @@ void PassEdit::generate() noexcept
         if (file.open(QFile::ReadOnly | QFile::Text)) {
             while (!file.atEnd()) {
                 const QByteArray &word = file.readLine().trimmed();
-                if (word.size() <= GEN_WORD_MAX)
+                if (word.size() <= GEN_WORD_MAX) {
                     words.append(word);
+                }
             }
             file.close();
         }
-        if (words.isEmpty())
+        if (words.isEmpty()) {
             return;
-        for (int i = std::min(GEN_NUMBER_MAX, (words.count() / GEN_WORD_NUM_RATIO) - 1); i >= 0; --i)
+        }
+        for (int i = std::min(GEN_NUMBER_MAX, (words.count() / GEN_WORD_NUM_RATIO) - 1); i >= 0; --i) {
             words.append(QString::number(i));
-        std::srand(unsigned(std::time(nullptr)));
+        }
+        std::srand(static_cast<unsigned>(std::time(nullptr)));
         pos = words.count();
     }
     gentext.clear();
@@ -98,8 +102,9 @@ void PassEdit::generate() noexcept
         }
         const QString &word = words.at(pos);
         const int origlen = gentext.length();
-        if (origlen != 0)
+        if (origlen != 0) {
             gentext.append(' ');
+        }
         gentext.append(word);
         if (gentext.length() > genmax) {
             gentext.truncate(origlen);
@@ -127,8 +132,9 @@ bool PassEdit::eventFilter(QObject *watched, QEvent *event) noexcept
     const QEvent::Type etype = event->type();
     if (etype == QEvent::EnabledChange || etype == QEvent::Hide) {
         auto *w = qobject_cast<QLineEdit *>(watched);
-        if ((actionEye != nullptr) && !(w->isVisible() && w->isEnabled()))
+        if ((actionEye != nullptr) && !(w->isVisible() && w->isEnabled())) {
             actionEye->setChecked(false);
+        }
     }
     return false;
 }
@@ -144,10 +150,11 @@ void PassEdit::masterTextChanged(const QString &text) noexcept
     const std::array<double, 5> thresholds {Negligible, VeryWeak, Weak, Strong, VeryStrong};
     int score = 0;
     for (const double threshold : thresholds) {
-        if (entropy < threshold || entropy == 0)
+        if (entropy < threshold || entropy == 0) {
             break;
-        else
+        } else {
             ++score;
+        }
     }
 
     actionGauge->setIcon(QIcon(":/gauge/" + QString::number(score)));
@@ -169,10 +176,11 @@ void PassEdit::slaveTextChanged(const QString &text) noexcept
     bool valid = true;
     if (text == master->text()) {
         QColor col(255, 255, 0, 40);
-        if (text.length() >= min)
+        if (text.length() >= min) {
             col.setRgb(0, 255, 0, 40);
-        else
+        } else {
             valid = false;
+        }
         pal.setColor(QPalette::Base, col);
     } else {
         pal.setColor(QPalette::Base, QColor(255, 0, 0, 70));

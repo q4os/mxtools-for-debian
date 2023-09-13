@@ -1,3 +1,46 @@
+mx-packageinstaller-pkglist (23.09.92mx23) mx; urgency=medium
+
+  * update ahs kernel
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 07 Sep 2023 18:56:12 -0400
+
+mx-packageinstaller-pkglist (23.09.91mx23) mx; urgency=medium
+
+  * remove lightspeed
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 03 Sep 2023 14:01:36 -0400
+
+mx-packageinstaller-pkglist (23.08.11mx23) mx; urgency=medium
+
+  * update avidemux
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 30 Aug 2023 18:43:09 -0400
+
+mx-packageinstaller-pkglist (23.08.10mx23) mx; urgency=medium
+
+  * update 6.4 kernels 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Tue, 22 Aug 2023 19:09:07 -0400
+
+mx-packageinstaller-pkglist (23.08.09mx23) mx; urgency=medium
+
+  * expressvpn patch to deal with their new setup
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 20 Aug 2023 19:15:33 -0400
+
+mx-packageinstaller-pkglist (23.08.08mx23) mx; urgency=medium
+
+  * update antix 4.9 entry, fix typo
+  * bump version on antiX 5.10 kernl
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 17 Aug 2023 22:00:03 -0400
+
+mx-packageinstaller-pkglist (23.08.07mx23) mx; urgency=medium
+
+  * update 6.4 liquorix kernel entry 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 17 Aug 2023 09:48:10 -0400
+
 mx-packageinstaller-pkglist (23.08.06mx23) mx; urgency=medium
 
   * update ahs 6.4 kernel 

@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QDialog" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>808</width>
+    <height>543</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MX Service Manager</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="5" column="3">
+    <widget class="QPushButton" name="pushEnableDisable">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="text">
+      <string>&amp;Enable at boot</string>
+     </property>
+     <property name="autoDefault">
+      <bool>false</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="9" column="0" colspan="4">
+    <layout class="QGridLayout" name="buttonBar" columnstretch="0,0,0,0,0,0,0,0,0">
+     <property name="sizeConstraint">
+      <enum>QLayout::SetDefaultConstraint</enum>
+     </property>
+     <property name="leftMargin">
+      <number>0</number>
+     </property>
+     <property name="topMargin">
+      <number>0</number>
+     </property>
+     <property name="rightMargin">
+      <number>0</number>
+     </property>
+     <property name="bottomMargin">
+      <number>0</number>
+     </property>
+     <property name="spacing">
+      <number>5</number>
+     </property>
+     <item row="0" column="0">
+      <widget class="QPushButton" name="pushAbout">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="toolTip">
+        <string>About this application</string>
+       </property>
+       <property name="text">
+        <string>&amp;About...</string>
+       </property>
+       <property name="icon">
+        <iconset theme="help-about">
+         <normaloff>.</normaloff>.</iconset>
+       </property>
+       <property name="shortcut">
+        <string>Alt+B</string>
+       </property>
+       <property name="autoDefault">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="3">
+      <widget class="QLabel" name="labelLogo">
+       <property name="maximumSize">
+        <size>
+         <width>32</width>
+         <height>32</height>
+        </size>
+       </property>
+       <property name="midLineWidth">
+        <number>0</number>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="pixmap">
+        <pixmap resource="images.qrc">:/icons/images/logo.svg</pixmap>
+       </property>
+       <property name="scaledContents">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="2">
+      <spacer name="horizontalSpacer1">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Expanding</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>100</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item row="0" column="1">
+      <widget class="QPushButton" name="pushHelp">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="toolTip">
+        <string>Display help </string>
+       </property>
+       <property name="text">
+        <string>&amp;Help</string>
+       </property>
+       <property name="icon">
+        <iconset theme="help-contents">
+         <normaloff>.</normaloff>.</iconset>
+       </property>
+       <property name="shortcut">
+        <string>Alt+H</string>
+       </property>
+       <property name="autoDefault">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="5">
+      <spacer name="horizontalSpacer2">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Expanding</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>100</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item row="0" column="8">
+      <widget class="QPushButton" name="pushCancel">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="toolTip">
+        <string>Quit application</string>
+       </property>
+       <property name="text">
+        <string>&amp;Close</string>
+       </property>
+       <property name="icon">
+        <iconset theme="window-close">
+         <normaloff>.</normaloff>.</iconset>
+       </property>
+       <property name="shortcut">
+        <string>Alt+N</string>
+       </property>
+       <property name="autoDefault">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item row="7" column="0">
+    <widget class="QLabel" name="labelEnabledAtBoot">
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="2">
+    <widget class="QPushButton" name="pushStartStop">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="text">
+      <string>&amp;Stop</string>
+     </property>
+     <property name="autoDefault">
+      <bool>false</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="2" rowspan="4" colspan="2">
+    <widget class="QTextBrowser" name="textBrowser"/>
+   </item>
+   <item row="2" column="0">
+    <widget class="QComboBox" name="comboFilter">
+     <item>
+      <property name="text">
+       <string>All services</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Running services</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Services enabled at boot</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Services disabled at boot</string>
+      </property>
+     </item>
+    </widget>
+   </item>
+   <item row="4" column="0">
+    <widget class="QListWidget" name="listServices">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="0">
+    <widget class="QLineEdit" name="lineSearch">
+     <property name="text">
+      <string/>
+     </property>
+     <property name="placeholderText">
+      <string>search</string>
+     </property>
+     <property name="clearButtonEnabled">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="0">
+    <widget class="QLabel" name="labelCount">
+     <property name="text">
+      <string>Loading...</string>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="0" colspan="4">
+    <widget class="QLabel" name="label">
+     <property name="font">
+      <font>
+       <pointsize>10</pointsize>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::NoFrame</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Plain</enum>
+     </property>
+     <property name="text">
+      <string>This tool lists services and daemons (processes that run in the background) found on this system. Be careful to avoid stopping something that might disrupt a critical component; best to leave it alone if you don't know what it is.</string>
+     </property>
+     <property name="scaledContents">
+      <bool>false</bool>
+     </property>
+     <property name="wordWrap">
+      <bool>true</bool>
+     </property>
+     <property name="margin">
+      <number>7</number>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <tabstops>
+  <tabstop>listServices</tabstop>
+  <tabstop>lineSearch</tabstop>
+  <tabstop>comboFilter</tabstop>
+  <tabstop>pushStartStop</tabstop>
+  <tabstop>pushEnableDisable</tabstop>
+  <tabstop>pushAbout</tabstop>
+  <tabstop>pushHelp</tabstop>
+  <tabstop>pushCancel</tabstop>
+  <tabstop>textBrowser</tabstop>
+ </tabstops>
+ <resources>
+  <include location="images.qrc"/>
+ </resources>
+ <connections/>
+</ui>

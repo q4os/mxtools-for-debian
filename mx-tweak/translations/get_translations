@@ -23,11 +23,11 @@ EOF
 fi    
 
 # remove existing translations
-find . -type f -name '*.ts' -not -name '*.en.ts' -delete
+#find . -type f -name '*.ts' -not -name '*.en.ts' -delete
 
 # get all translations
 if command -v tx >/dev/null; then
    echodo tx pull -r antix-development.$APPNAME  --all
 fi
 
-lupdate ../*.pro
+#lupdate ../*.pro

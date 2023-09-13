@@ -3,14 +3,18 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
+# Translators:
+# joyinko <joyinko@azet.sk>, 2023
+# 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-12-09 23:09-0500\n"
+"POT-Creation-Date: 2023-09-04 12:16-0400\n"
 "PO-Revision-Date: 2022-12-10 04:09+0000\n"
-"Language-Team: Czech (https://www.transifex.com/anticapitalista/teams/10162/cs/)\n"
+"Last-Translator: joyinko <joyinko@azet.sk>, 2023\n"
+"Language-Team: Czech (https://app.transifex.com/anticapitalista/teams/10162/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -20,9 +24,13 @@ msgstr ""
 #. The desktop entry name will be displayed within the menu.
 #: desktop-in/Quick_System_Info.desktop.in:6
 msgid "Quick System Info"
-msgstr ""
+msgstr "Quick System Info"
 
 #. # The desktop entry comment will be shown within the menu.
 #: desktop-in/Quick_System_Info.desktop.in:8
 msgid "inxi -Fxxxrza"
+msgstr "inxi -Fxxxrza"
+
+#: desktop-in/Quick_System_Info.desktop.in:16
+msgid "qsi;quick;system;info;"
 msgstr ""

@@ -1,3 +1,9 @@
+mx-apps-kde (23.09.01) mx; urgency=medium
+
+  * add mx-service-manager
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 06 Sep 2023 22:54:43 -0400
+
 mx-apps-kde (23.07.01mx23) mx; urgency=medium
 
   * remove mx-codecs from default installation

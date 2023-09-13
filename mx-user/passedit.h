@@ -39,14 +39,14 @@ private:
     void masterTextChanged(const QString &text) noexcept;
     void slaveTextChanged(const QString &text) noexcept;
     void eyeToggled(bool checked) noexcept;
-    bool eventFilter(QObject *watched, QEvent *event) noexcept;
+    bool eventFilter(QObject *watched, QEvent *event) noexcept override;
 
 public:
     PassEdit(QLineEdit *master, QLineEdit *slave, int min = 0, QObject *parent = nullptr) noexcept;
-    inline int minimum() { return min; }
-    inline bool valid() const noexcept { return lastValid; }
-    inline bool confirmed() const noexcept { return (slave->text() == master->text()); }
-    inline bool lengthOK() const noexcept { return (master->text().length() >= min); }
+    [[nodiscard]] inline int minimum() const { return min; }
+    [[nodiscard]] inline bool valid() const noexcept { return lastValid; }
+    [[nodiscard]] inline bool confirmed() const noexcept { return (slave->text() == master->text()); }
+    [[nodiscard]] inline bool lengthOK() const noexcept { return (master->text().length() >= min); }
     inline int length() { return master->text().length(); }
 signals:
     void validationChanged(bool valid);

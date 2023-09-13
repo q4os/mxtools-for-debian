@@ -1,3 +1,10 @@
+mx-goodies (23.08.01) mx; urgency=medium
+
+  * filter adjustements (put them back)
+  * put back legacy bios labels
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 04 Sep 2023 10:57:51 -0400
+
 mx-goodies (23.07.02) mx; urgency=medium
 
   * update ps_mem.py shebang statement

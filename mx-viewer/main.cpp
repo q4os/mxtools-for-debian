@@ -3,7 +3,7 @@
  *****************************************************************************
  * Copyright (C) 2022 MX Authors
  *
- * Authors: Adrian
+ * Authors: Adrian <adrian@mxlinux.org>
  *          MX Linux <http://mxlinux.org>
  *
  * This program is free software: you can redistribute it and/or modify
@@ -44,25 +44,30 @@ QPair<int, int> getUserIDs()
 // Used to drop rights to 'nobody', but normal user rights might be needed to write cache and cookies.
 bool dropElevatedPrivileges(bool force_nobody)
 {
-    if (getuid() != 0 && geteuid() != 0)
+    if (getuid() != 0 && geteuid() != 0) {
         return true;
+    }
 
     // ref:
     // https://www.safaribooksonline.com/library/view/secure-programming-cookbook/0596003943/ch01s03.html#secureprgckbk-CHP-1-SECT-3.3
     auto [id, gid] = getUserIDs();
     const int nobody = 65534; // nobody (uid 65534), nogroup (gid 65534)
-    if (id == 0 || gid == 0 || force_nobody)
+    if (id == 0 || gid == 0 || force_nobody) {
         id = gid = nobody;
+    }
 
-    if (setgid(id) != 0)
+    if (setgid(id) != 0) {
         return false;
-    if (setuid(gid) != 0)
+    }
+    if (setuid(gid) != 0) {
         return false;
+    }
 
     // On systems with defined _POSIX_SAVED_IDS in the unistd.h file, it should be
     // impossible to regain elevated privs after the setuid() call, above.  Test, try to regain elev priv:
-    if (setuid(0) != -1 || seteuid(0) != -1)
+    if (setuid(0) != -1 || seteuid(0) != -1) {
         return false; // and the calling fn should EXIT/abort the program
+    }
 
     // change cwd, for good measure (if unable to, treat as overall failure)
     if (chdir("/tmp") != 0) {
@@ -77,9 +82,9 @@ int main(int argc, char *argv[])
     QApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     QApplication::setAttribute(Qt::AA_UseHighDpiPixmaps);
     QApplication app(argc, argv);
-    app.setWindowIcon(QIcon::fromTheme(app.applicationName()));
-    app.setApplicationVersion(VERSION);
-    app.setOrganizationName(QStringLiteral("MX-Linux"));
+    QApplication::setWindowIcon(QIcon::fromTheme(QApplication::applicationName()));
+    QApplication::setApplicationVersion(VERSION);
+    QApplication::setOrganizationName(QStringLiteral("MX-Linux"));
 
     QCommandLineParser parser;
     parser.setApplicationDescription(
@@ -91,13 +96,14 @@ int main(int argc, char *argv[])
     parser.addOption({{QStringLiteral("i"), QStringLiteral("disable-images")},
                       QObject::tr("Disable load images automatically from websites")});
     parser.addOption({{QStringLiteral("j"), QStringLiteral("disable-js")}, QObject::tr("Disable JavaScript")});
-    if (getuid() == 0 || geteuid() == 0)
+    if (getuid() == 0 || geteuid() == 0) {
         parser.addOption(
             {{QStringLiteral("n"), QStringLiteral("force-nobody")},
              QObject::tr("Drop program's rights to 'nobody'. By default, if run as root, the rights are "
                          "dropped to normal user. This option might provide additional protection, but the program "
                          "would not be able to write its cache and cookies to the user directory, so it might break "
                          "some functionality.")});
+    }
     parser.addOption({{QStringLiteral("s"), QStringLiteral("enable-spatial-navigation")},
                       QObject::tr("Enable spatial navigation with keyboard")});
     parser.addPositionalArgument(QObject::tr("URL"),
@@ -115,20 +121,23 @@ int main(int argc, char *argv[])
 
     QTranslator qtTran;
     if (qtTran.load(QLocale::system(), QStringLiteral("qt"), QStringLiteral("_"),
-                    QLibraryInfo::location(QLibraryInfo::TranslationsPath)))
-        app.installTranslator(&qtTran);
+                    QLibraryInfo::location(QLibraryInfo::TranslationsPath))) {
+        QApplication::installTranslator(&qtTran);
+    }
 
     QTranslator qtBaseTran;
-    if (qtBaseTran.load("qtbase_" + QLocale::system().name(), QLibraryInfo::location(QLibraryInfo::TranslationsPath)))
-        app.installTranslator(&qtBaseTran);
+    if (qtBaseTran.load("qtbase_" + QLocale::system().name(), QLibraryInfo::location(QLibraryInfo::TranslationsPath))) {
+        QApplication::installTranslator(&qtBaseTran);
+    }
 
     QTranslator appTran;
-    if (appTran.load(app.applicationName() + "_" + QLocale::system().name(),
-                     "/usr/share/" + app.applicationName() + "/locale"))
-        app.installTranslator(&appTran);
+    if (appTran.load(QApplication::applicationName() + "_" + QLocale::system().name(),
+                     "/usr/share/" + QApplication::applicationName() + "/locale")) {
+        QApplication::installTranslator(&appTran);
+    }
 
     MainWindow w(parser);
     w.show();
 
-    return app.exec();
+    return QApplication::exec();
 }

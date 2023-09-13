@@ -33,11 +33,11 @@
 using namespace std::chrono_literals;
 
 Batchprocessing::Batchprocessing(const QCommandLineParser &arg_parser, QObject *parent)
-    : QObject(parent)
-    , Settings(arg_parser)
-    , work(this)
+    : QObject(parent),
+      Settings(arg_parser),
+      work(this)
 {
-    connect(qApp, &QCoreApplication::aboutToQuit, [this] { work.cleanUp(); });
+    connect(qApp, &QCoreApplication::aboutToQuit, this, [this] { work.cleanUp(); });
     setConnections();
 
     if (!checkCompression()) {
@@ -49,17 +49,20 @@ Batchprocessing::Batchprocessing(const QCommandLineParser &arg_parser, QObject *
 
     QString path = snapshot_dir;
     qDebug() << "Free space:" << getFreeSpaceStrings(path.remove(QRegularExpression(QStringLiteral("/snapshot$"))));
-    if (!arg_parser.isSet(QStringLiteral("month")) && !arg_parser.isSet(QStringLiteral("override-size")))
+    if (!arg_parser.isSet(QStringLiteral("month")) && !arg_parser.isSet(QStringLiteral("override-size"))) {
         qDebug() << "Unused space:" << getUsedSpace();
+    }
 
     work.started = true;
     work.e_timer.start();
-    if (!checkSnapshotDir() || !checkTempDir())
+    if (!checkSnapshotDir() || !checkTempDir()) {
         work.cleanUp();
+    }
     otherExclusions();
     work.setupEnv();
-    if (!arg_parser.isSet(QStringLiteral("month")) && !arg_parser.isSet(QStringLiteral("override-size")))
+    if (!arg_parser.isSet(QStringLiteral("month")) && !arg_parser.isSet(QStringLiteral("override-size"))) {
         work.checkEnoughSpace();
+    }
     work.copyNewIso();
     work.savePackageList(snapshot_name);
 
@@ -75,8 +78,8 @@ Batchprocessing::Batchprocessing(const QCommandLineParser &arg_parser, QObject *
 void Batchprocessing::setConnections()
 {
     connect(&timer, &QTimer::timeout, this, &Batchprocessing::progress);
-    connect(shell, &Cmd::started, [this] { timer.start(500ms); });
-    connect(shell, &Cmd::finished, [this] { timer.stop(); });
+    connect(shell, &Cmd::started, this, [this] { timer.start(500ms); });
+    connect(shell, &Cmd::finished, this, [this] { timer.stop(); });
     connect(shell, &Cmd::outputAvailable, [](const QString &out) { qDebug().noquote() << out; });
     connect(shell, &Cmd::errorAvailable, [](const QString &out) { qWarning().noquote() << out; });
     connect(&work, &Work::message, [](const QString &out) { qDebug().noquote() << out; });
