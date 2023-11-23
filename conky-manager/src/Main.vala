@@ -689,7 +689,7 @@ Name=Conky
 Comment[en_IN]=
 Comment=
 """;
-			txt = txt.replace("{command}", "sh \"" + data_dir + "/conky-startup.sh\"");
+			txt = txt.replace("{command}", "sh .conky/conky-startup.sh");
 
 			write_file(startupFile, txt);
 		}

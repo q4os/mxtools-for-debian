@@ -3,7 +3,7 @@
     <name>MainWindow</name>
     <message>
         <location filename="../mainwindow.ui" line="14"/>
-        <location filename="../mainwindow.cpp" line="223"/>
+        <location filename="../mainwindow.cpp" line="317"/>
         <source>MX Service Manager</source>
         <translation type="unfinished"/>
     </message>
@@ -14,8 +14,8 @@
     </message>
     <message>
         <location filename="../mainwindow.ui" line="26"/>
-        <location filename="../mainwindow.cpp" line="143"/>
-        <location filename="../mainwindow.cpp" line="238"/>
+        <location filename="../mainwindow.cpp" line="156"/>
+        <location filename="../mainwindow.cpp" line="332"/>
         <source>&amp;Enable at boot</source>
         <translation type="unfinished"/>
     </message>
@@ -45,36 +45,42 @@
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="276"/>
+        <location filename="../mainwindow.ui" line="227"/>
+        <location filename="../mainwindow.cpp" line="289"/>
+        <source>Services enabled at boot</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="232"/>
+        <location filename="../mainwindow.cpp" line="290"/>
+        <source>Services disabled at boot</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="268"/>
         <source>search</source>
         <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="203"/>
-        <location filename="../mainwindow.cpp" line="125"/>
+        <location filename="../mainwindow.cpp" line="138"/>
         <source>&amp;Stop</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="228"/>
+        <location filename="../mainwindow.ui" line="297"/>
         <source>This tool lists services and daemons (processes that run in the background) found on this system. Be careful to avoid stopping something that might disrupt a critical component; best to leave it alone if you don&apos;t know what it is.</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="245"/>
+        <location filename="../mainwindow.ui" line="217"/>
         <source>All services</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="250"/>
-        <location filename="../mainwindow.cpp" line="199"/>
+        <location filename="../mainwindow.ui" line="222"/>
+        <location filename="../mainwindow.cpp" line="284"/>
         <source>Running services</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="255"/>
-        <location filename="../mainwindow.cpp" line="204"/>
-        <source>Enabled at boot services</source>
         <translation type="unfinished"/>
     </message>
     <message>
@@ -93,122 +99,122 @@
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="286"/>
-        <location filename="../mainwindow.cpp" line="63"/>
-        <location filename="../mainwindow.cpp" line="70"/>
+        <location filename="../mainwindow.ui" line="278"/>
+        <location filename="../mainwindow.cpp" line="67"/>
+        <location filename="../mainwindow.cpp" line="80"/>
         <source>Loading...</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="57"/>
-        <location filename="../mainwindow.cpp" line="240"/>
-        <location filename="../mainwindow.cpp" line="247"/>
-        <location filename="../mainwindow.cpp" line="269"/>
-        <location filename="../mainwindow.cpp" line="278"/>
+        <location filename="../mainwindow.cpp" line="61"/>
+        <location filename="../mainwindow.cpp" line="334"/>
+        <location filename="../mainwindow.cpp" line="341"/>
+        <location filename="../mainwindow.cpp" line="363"/>
+        <location filename="../mainwindow.cpp" line="372"/>
         <source>Error</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="58"/>
+        <location filename="../mainwindow.cpp" line="62"/>
         <source>Could not determine the init system. This program is supposed to run either with systemd or sysvinit</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="130"/>
-        <location filename="../mainwindow.cpp" line="267"/>
+        <location filename="../mainwindow.cpp" line="143"/>
+        <location filename="../mainwindow.cpp" line="361"/>
         <source>S&amp;tart</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="136"/>
+        <location filename="../mainwindow.cpp" line="149"/>
         <source>&amp;Disable at boot</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="210"/>
-        <source>%1 total services, %2 currently running</source>
+        <location filename="../mainwindow.cpp" line="300"/>
+        <source>%1 total services, %2 currently %3running%4</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="211"/>
-        <source>%1 enabled at boot, but not running</source>
+        <location filename="../mainwindow.cpp" line="304"/>
+        <source>%1 %2enabled%3 at boot, but not running</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="223"/>
+        <location filename="../mainwindow.cpp" line="317"/>
         <source>About %1</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="224"/>
+        <location filename="../mainwindow.cpp" line="318"/>
         <source>Version: </source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="225"/>
+        <location filename="../mainwindow.cpp" line="319"/>
         <source>Service and daemon manager</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="227"/>
+        <location filename="../mainwindow.cpp" line="321"/>
         <source>Copyright (c) MX Linux</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="228"/>
+        <location filename="../mainwindow.cpp" line="322"/>
         <source>%1 License</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="240"/>
+        <location filename="../mainwindow.cpp" line="334"/>
         <source>Could not enable %1</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="244"/>
-        <location filename="../mainwindow.cpp" line="251"/>
-        <location filename="../mainwindow.cpp" line="274"/>
-        <location filename="../mainwindow.cpp" line="283"/>
+        <location filename="../mainwindow.cpp" line="338"/>
+        <location filename="../mainwindow.cpp" line="345"/>
+        <location filename="../mainwindow.cpp" line="368"/>
+        <location filename="../mainwindow.cpp" line="377"/>
         <source>Success</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="244"/>
+        <location filename="../mainwindow.cpp" line="338"/>
         <source>%1 was enabled at boot time.</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="247"/>
+        <location filename="../mainwindow.cpp" line="341"/>
         <source>Could not disable %1</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="251"/>
+        <location filename="../mainwindow.cpp" line="345"/>
         <source>%1 was disabled.</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="259"/>
+        <location filename="../mainwindow.cpp" line="353"/>
         <source>%1 Help</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="269"/>
+        <location filename="../mainwindow.cpp" line="363"/>
         <source>Could not start %1</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="274"/>
+        <location filename="../mainwindow.cpp" line="368"/>
         <source>%1 was started.</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="278"/>
+        <location filename="../mainwindow.cpp" line="372"/>
         <source>Could not stop %1</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="283"/>
+        <location filename="../mainwindow.cpp" line="377"/>
         <source>%1 was stopped.</source>
         <translation type="unfinished"/>
     </message>
@@ -238,6 +244,7 @@
     </message>
     <message>
         <location filename="../main.cpp" line="74"/>
+        <location filename="../main.cpp" line="82"/>
         <source>Error</source>
         <translation type="unfinished"/>
     </message>
@@ -247,8 +254,13 @@
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../main.cpp" line="81"/>
-        <source>version:</source>
+        <location filename="../main.cpp" line="83"/>
+        <source>You must run this program with admin access.</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../service.cpp" line="116"/>
+        <source>Could not find service description</source>
         <translation type="unfinished"/>
     </message>
 </context>

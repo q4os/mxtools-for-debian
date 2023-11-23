@@ -1,3 +1,11 @@
+conky-toggle-mx (23.11.01) mx; urgency=medium
+
+  * create conky.desktop autostart file if it doesn't exit
+  * use full paths for common gnu utilities
+  * update desktop file translations 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 17 Nov 2023 06:35:03 -0500
+
 conky-toggle-mx (23.03.01) mx; urgency=medium
 
   * update translations 

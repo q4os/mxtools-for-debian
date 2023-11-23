@@ -65,7 +65,7 @@ MainWindow::MainWindow(QWidget *parent)
     shell = new Cmd(this);
 
     connect(shell, &Cmd::started, this, &MainWindow::procStart);
-    connect(shell, &Cmd::finished, this, &MainWindow::procDone);
+    connect(shell, &Cmd::done, this, &MainWindow::procDone);
 
     setProgressBar();
 
@@ -91,7 +91,7 @@ MainWindow::~MainWindow()
 {
     delete ui;
     if (sources_changed) {
-        QProcess::startDetached("apt-get", {"update"});
+        Cmd().runAsRoot("apt-get update&");
     }
 }
 
@@ -112,11 +112,11 @@ void MainWindow::replaceDebianRepos(QString url)
     // which might be the default in some Debian releases
     const QStringList files {"/etc/apt/sources.list.d/debian.list",
                              "/etc/apt/sources.list.d/debian-stable-updates.list", "/etc/apt/sources.list"};
-    const QDir backupDir(QStringLiteral("/etc/apt/sources.list.d/backups"));
+    const QDir backupDir("/etc/apt/sources.list.d/backups");
 
     // make backup folder
     if (!backupDir.exists()) {
-        QDir().mkdir(QStringLiteral("/etc/apt/sources.list.d/backups"));
+        Cmd().runAsRoot("mkdir /etc/apt/sources.list.d/backups");
     }
 
     for (const QString &filePath : files) {
@@ -126,7 +126,7 @@ void MainWindow::replaceDebianRepos(QString url)
         QFileInfo fileInfo(filePath);
         const QString &backupFilePath = backupDir.absoluteFilePath(
             fileInfo.fileName() + "." + QDateTime::currentDateTime().toString("yyyyMMdd_HHmmss"));
-        if (!QFile::copy(filePath, backupFilePath)) {
+        if (!Cmd().runAsRoot("cp " + filePath + " " + backupFilePath)) {
             qWarning() << "Failed to backup" << filePath;
             continue;
         }
@@ -151,13 +151,18 @@ void MainWindow::replaceDebianRepos(QString url)
             content.append(line).append("\n");
         }
         file.close();
-        if (!file.open(QIODevice::WriteOnly | QIODevice::Text)) {
-            qWarning() << "Count not open file: " << file.fileName() << file.errorString();
+
+        QTemporaryFile tmpFile;
+        if (!tmpFile.open()) {
+            qWarning() << "Count not open file: " << tmpFile.fileName() << tmpFile.errorString();
             continue;
         }
-        QTextStream out(&file);
+        QTextStream out(&tmpFile);
         out << content;
         file.close();
+        shell->runAsRoot("mv " + tmpFile.fileName() + " " + filePath);
+        shell->runAsRoot("chown root: " + filePath);
+        shell->runAsRoot("chmod +r " + filePath);
     }
     sources_changed = true;
     QMessageBox::information(this, tr("Success"),
@@ -196,7 +201,7 @@ void MainWindow::getCurrentRepo()
     }
     QTextStream in(&file);
     while (!in.atEnd()) {
-        QString line = in.readLine().trimmed();
+        const QString line = in.readLine().trimmed();
         if (line.contains(QRegularExpression("^#?\\s?deb\\s+.*/repo[/]?"))) {
             QRegularExpression re {"//(.*?)/"};
             QRegularExpressionMatch match = re.match(line);
@@ -207,6 +212,18 @@ void MainWindow::getCurrentRepo()
         }
     }
     file.close();
+
+    readMXRepos();
+    bool containsRepo = std::any_of(repos.cbegin(), repos.cend(),
+                                    [this](const QString &item) { return item.contains(current_repo); });
+    if (!containsRepo) {
+        qDebug() << "Current repo not found in the up-to-date list of repos, it might have been removed as "
+                    "non-working; selecting mxrepo.com as default";
+        const QString defaultRepo = "http://mxrepo.com";
+        if (replaceRepos(defaultRepo, true)) {
+            current_repo = defaultRepo;
+        }
+    }
 }
 
 int MainWindow::getDebianVerNum()
@@ -241,11 +258,9 @@ int MainWindow::getDebianVerNum()
 
 QString MainWindow::getDebianVerName(int ver)
 {
-    QHash<int, QString> versionNames {{Version::Jessie, QStringLiteral("jessie")},
-                                      {Version::Stretch, QStringLiteral("stretch")},
-                                      {Version::Buster, QStringLiteral("buster")},
-                                      {Version::Bullseye, QStringLiteral("bullseye")},
-                                      {Version::Bookworm, QStringLiteral("bookworm")}};
+    QHash<int, QString> versionNames {{Version::Jessie, "jessie"},     {Version::Stretch, "stretch"},
+                                      {Version::Buster, "buster"},     {Version::Bullseye, "bullseye"},
+                                      {Version::Bookworm, "bookworm"}, {Version::Trixie, "trixie"}};
     if (!versionNames.contains(ver)) {
         qWarning() << "Error: Invalid Debian version, assumes Bullseye";
         return "bullseye";
@@ -361,7 +376,11 @@ QStringList MainWindow::loadAptFile(const QString &file)
 
 void MainWindow::cancelOperation()
 {
-    shell->close();
+    Cmd().runAsRoot("kill " + QString::number(shell->processId()));
+    Cmd().run("sleep 1", true);
+    if (shell->state() != QProcess::NotRunning) {
+        Cmd().runAsRoot("kill -9 " + QString::number(shell->processId()));
+    }
     procDone();
 }
 
@@ -441,17 +460,19 @@ void MainWindow::procDone()
 }
 
 // replaces the lines in the APT file in mx.list file
-void MainWindow::replaceRepos(const QString &url)
+bool MainWindow::replaceRepos(const QString &url, bool quiet)
 {
-    QString mx_file {QStringLiteral("/etc/apt/sources.list.d/mx.list")};
-    QString repo_line_mx = "deb " + url + "/mx/repo/ ";
-    QString test_line_mx = "deb " + url + "/mx/testrepo/ ";
-    QString cmd_mx = QStringLiteral("sed -i 's;deb.*/repo/ ;%1;' %2 && ").arg(repo_line_mx, mx_file)
-                     + QStringLiteral("sed -i 's;deb.*/testrepo/ ;%1;' %2").arg(test_line_mx, mx_file);
-    shell->run(cmd_mx) ? QMessageBox::information(
-        this, tr("Success"), tr("Your new selection will take effect the next time sources are updated."))
-                       : QMessageBox::critical(this, tr("Error"), tr("Could not change the repo."));
+    QString mx_file {"/etc/apt/sources.list.d/mx.list"};
+    QString cmd_mx
+        = QString(R"(sed -i -E 's;deb\s(\[.*\]\s)?.*(/mx/repo/|/mx/testrepo);deb \1%1\2;' %2)").arg(url, mx_file);
     sources_changed = true;
+    if (quiet) {
+        return shell->runAsRoot(cmd_mx);
+    } else {
+        return shell->runAsRoot(cmd_mx) ? QMessageBox::information(
+                   this, tr("Success"), tr("Your new selection will take effect the next time sources are updated."))
+                                        : QMessageBox::critical(this, tr("Error"), tr("Could not change the repo."));
+    }
 }
 
 void MainWindow::setConnections()
@@ -520,7 +541,7 @@ void MainWindow::pushOk_clicked()
             new_text = changes.at(1);
             file_name = changes.at(2);
             QString cmd = QStringLiteral("sed -i 's;%1;%2;g' %3").arg(text, new_text, file_name);
-            shell->run(cmd);
+            shell->runAsRoot(cmd);
             sources_changed = true;
         }
         queued_changes.clear();
@@ -651,14 +672,14 @@ void MainWindow::pushFastestDebian_clicked()
                               // maybe it expects "stable"
     }
 
-    bool success = shell->run("netselect-apt " + ver_name + " -o " + tmpfile.fileName(), false);
+    bool success = shell->runAsRoot("netselect-apt " + ver_name + " -o " + tmpfile.fileName(), false);
     progress->hide();
 
     if (!success) {
         QMessageBox::critical(this, tr("Error"), tr("netselect-apt could not detect fastest repo."));
         return;
     }
-    QString repo = shell->getCmdOut("set -o pipefail; grep -m1 '^deb ' " + tmpfile.fileName() + "| cut -d' ' -f2");
+    QString repo = shell->getOut("grep -m1 '^deb ' " + tmpfile.fileName() + "| cut -d' ' -f2").trimmed();
     this->blockSignals(false);
 
     if (checkRepo(repo)) {
@@ -673,10 +694,9 @@ void MainWindow::pushFastestDebian_clicked()
 void MainWindow::pushFastestMX_clicked()
 {
     progress->show();
-    QString out;
-    bool success = shell->run(
-        "set -o pipefail; netselect -D -I " + listMXurls + " |tr -s ' ' |sed 's/^ //' |cut -d' ' -f2", &out);
+    bool success = shell->runAsRoot("netselect -D -I " + listMXurls + " |tr -s ' ' |sed 's/^ //' |cut -d' ' -f2");
     qDebug() << listMXurls;
+    QString out = shell->readAllStandardOutput().trimmed();
     qDebug() << "FASTEST " << success << out;
     progress->hide();
     if (success && !out.isEmpty()) {
@@ -695,15 +715,14 @@ void MainWindow::lineSearch_textChanged(const QString &arg1)
 void MainWindow::pb_restoreSources_clicked()
 {
     // check if running on antiX/MX
-    if (!QFileInfo::exists(QStringLiteral("/etc/antix-version"))
-        && !QFileInfo::exists(QStringLiteral("/etc/mx-version"))) {
+    if (!QFileInfo::exists("/etc/antix-version") && !QFileInfo::exists("/etc/mx-version")) {
         QMessageBox::critical(this, tr("Error"), tr("Can't figure out if this app is running on antiX or MX"));
         return;
     }
 
     bool ok = true;
     int mx_version
-        = shell->getCmdOut(QStringLiteral("grep -oP '(?<=DISTRIB_RELEASE=).*' /etc/lsb-release")).leftRef(2).toInt(&ok);
+        = shell->getOut(QStringLiteral("grep -oP '(?<=DISTRIB_RELEASE=).*' /etc/lsb-release")).leftRef(2).toInt(&ok);
     if (!ok || mx_version < 18) {
         QMessageBox::critical(this, tr("Error"),
                               tr("MX version not detected or out of range: ") + QString::number(mx_version));
@@ -734,14 +753,13 @@ void MainWindow::pb_restoreSources_clicked()
     // move the sources list files from the temporary directory to /etc/apt/sources.list.d/
     cmd = ("mv -b %1/mx-sources-mx" + QString::number(mx_version) + "/*.list /etc/apt/sources.list.d/")
               .arg(tmpdir.path());
-    shell->run(cmd);
+    shell->runAsRoot(cmd);
 
     // for 64-bit OS check if user wants AHS repo
-    if (mx_version >= 19 && shell->getCmdOut(QStringLiteral("uname -m"), true) == QLatin1String("x86_64")) {
+    if (mx_version >= 19 && shell->getOut("uname -m", true) == "x86_64") {
         if (QMessageBox::Yes
             == QMessageBox::question(this, tr("Enabling AHS"), tr("Do you use AHS (Advanced Hardware Stack) repo?"))) {
-            shell->run(QStringLiteral("sed -i '/^\\s*#*\\s*deb.*ahs\\s*/s/^#*\\s*//' /etc/apt/sources.list.d/mx.list"),
-                       true);
+            shell->runAsRoot(R"(sed -i '/^\s*#*\s*deb.*ahs\s*/s/^#*\s*//' /etc/apt/sources.list.d/mx.list)", true);
         }
     }
     refresh();

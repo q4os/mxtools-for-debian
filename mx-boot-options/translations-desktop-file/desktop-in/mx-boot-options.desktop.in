@@ -4,7 +4,7 @@ Encoding=UTF-8
 Name=MX Boot Options
 # # The desktop entry comment will be shown within the menu.
 Comment=Common start-up choices
-Exec=mxbo-launcher
+Exec=mx-boot-options
 Terminal=false
 Type=Application
 Icon=mx-boot-options

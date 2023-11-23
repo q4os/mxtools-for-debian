@@ -29,7 +29,6 @@
 #include <QSettings>
 #include <QTimer>
 
-#include "cmd.h"
 #include "settings.h"
 #include "work.h"
 
@@ -66,7 +65,7 @@ protected:
 public slots:
     void disableOutput();
     void displayOutput();
-    void outputAvailable(const QString &output);
+    void outputAvailable(const QString &out);
     void procDone();
     void procStart();
     void processMsg(const QString &msg);
@@ -95,14 +94,17 @@ private slots:
     void excludeSteam_toggled(bool checked);
     void excludeVideos_toggled(bool checked);
     void excludeVirtualBox_toggled(bool checked);
+    void on_spinCPU_valueChanged(int arg1);
+    void on_spinThrottle_valueChanged(int arg1);
     void radioPersonal_clicked(bool checked);
     void radioRespin_toggled(bool checked);
 
 private:
     Ui::MainWindow *ui;
     QTimer timer;
-    Work work;
     bool monthly;
+    Work work;
+    QSettings settings;
 };
 
 #endif // MainWindow_H

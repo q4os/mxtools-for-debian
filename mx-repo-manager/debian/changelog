@@ -1,3 +1,33 @@
+mx-repo-manager (23.11.03) mx; urgency=medium
+
+  * Fix: /etc/apt/sources.list.d/debian.list ownership
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 16 Nov 2023 15:02:05 -0500
+
+mx-repo-manager (23.11.02) mx; urgency=medium
+
+  * Fix: add /mx/ to repo name
+
+ -- Adrian <adrian@mxlinux.org>  Tue, 14 Nov 2023 21:38:48 -0500
+
+mx-repo-manager (23.11.01) mx; urgency=medium
+
+  * Allow for [arch=arm64] and the line in the mx.list entries
+
+ -- Adrian <adrian@mxlinux.org>  Tue, 14 Nov 2023 18:10:47 -0500
+
+mx-repo-manager (23.11) mx; urgency=medium
+
+  * Run program as normal user and elevate only when running specific commands that need admin access
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 06 Nov 2023 11:46:00 -0500
+
+mx-repo-manager (23.9) mx; urgency=medium
+
+  * If current repo is not found in repos.txt, select mxrepo.com by default
+
+ -- Adrian <adrian@mxlinux.org>  Sat, 16 Sep 2023 14:29:55 -0400
+
 mx-repo-manager (23.8.02) mx; urgency=medium
 
   * Minor GUI improvement:

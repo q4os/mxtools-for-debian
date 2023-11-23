@@ -504,23 +504,23 @@
         <location filename="../mainwindow.cpp" line="182"/>
         <location filename="../mainwindow.cpp" line="191"/>
         <location filename="../mainwindow.cpp" line="199"/>
-        <location filename="../mainwindow.cpp" line="715"/>
-        <location filename="../mainwindow.cpp" line="741"/>
-        <location filename="../mainwindow.cpp" line="771"/>
-        <location filename="../mainwindow.cpp" line="935"/>
-        <location filename="../mainwindow.cpp" line="1002"/>
-        <location filename="../mainwindow.cpp" line="1009"/>
-        <location filename="../mainwindow.cpp" line="1014"/>
-        <location filename="../mainwindow.cpp" line="1019"/>
-        <location filename="../mainwindow.cpp" line="1024"/>
+        <location filename="../mainwindow.cpp" line="719"/>
+        <location filename="../mainwindow.cpp" line="745"/>
+        <location filename="../mainwindow.cpp" line="775"/>
+        <location filename="../mainwindow.cpp" line="939"/>
+        <location filename="../mainwindow.cpp" line="1006"/>
+        <location filename="../mainwindow.cpp" line="1013"/>
+        <location filename="../mainwindow.cpp" line="1018"/>
+        <location filename="../mainwindow.cpp" line="1023"/>
+        <location filename="../mainwindow.cpp" line="1028"/>
         <source>none</source>
         <translation>कोई नहीं</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="141"/>
-        <location filename="../mainwindow.cpp" line="702"/>
-        <location filename="../mainwindow.cpp" line="942"/>
-        <location filename="../mainwindow.cpp" line="951"/>
+        <location filename="../mainwindow.cpp" line="706"/>
+        <location filename="../mainwindow.cpp" line="946"/>
+        <location filename="../mainwindow.cpp" line="955"/>
         <source>browse...</source>
         <translation>ब्राउज करें...</translation>
     </message>
@@ -530,77 +530,77 @@
         <translation>अब उपयोक्ता विन्यास का सुधार होगा। कृपया अभी के लिए सभी अनुप्रयोग बंद कर दें। पूर्ण होने पर, कृपया लॉगआउट या पुनः आरंभ करें। क्या आप निश्चित ही अभी सुधार करना चाहते हैं ?</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="233"/>
+        <location filename="../mainwindow.cpp" line="232"/>
         <source>User group membership was restored.</source>
         <translation>समूह सदस्यताओं को पुनः स्थापित करना सफल।</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="238"/>
+        <location filename="../mainwindow.cpp" line="237"/>
         <source>Mozilla settings were reset.</source>
         <translation>मोज़िला सेटिंग्स पुनः स्थापित की गईं।</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="249"/>
-        <location filename="../mainwindow.cpp" line="265"/>
+        <location filename="../mainwindow.cpp" line="248"/>
+        <location filename="../mainwindow.cpp" line="264"/>
         <source>Autologin options</source>
         <translation>स्वतः लॉगिन विकल्प</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="250"/>
+        <location filename="../mainwindow.cpp" line="249"/>
         <source>Autologin has been disabled for the &apos;%1&apos; account.</source>
         <translation>&apos;%1&apos; अकाउंट हेतु स्वतः लॉगिन निष्क्रिय है।</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="266"/>
+        <location filename="../mainwindow.cpp" line="265"/>
         <source>Autologin has been enabled for the &apos;%1&apos; account.</source>
         <translation>&apos;%1&apos; अकाउंट हेतु स्वतः लॉगिन सक्रिय है। </translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="278"/>
+        <location filename="../mainwindow.cpp" line="277"/>
         <source>You must specify a &apos;copy to&apos; destination. You cannot copy to the desktop you are logged in to.</source>
         <translation>&apos;कॉपी करने&apos; हेतु लक्षित स्थान निर्दिष्ट करना आवश्यक है। आप अपने कार्यरत लॉगिन वाले डेस्कटॉप पर कॉपी नहीं कर सकते हैं।</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="285"/>
+        <location filename="../mainwindow.cpp" line="284"/>
         <source>Before copying, close all other applications. Be sure the copy to destination is large enough to contain the files you are copying. Copying between desktops may overwrite or delete your files or preferences on the destination desktop. Are you sure you want to proceed?</source>
         <translation>कॉपी करने से पूर्व सभी अनुप्रयोग बंद कर दें। सुनिश्चित कर लें कि लक्षित स्थान पर कॉपी होने वाली फाइलों हेतु पर्याप्त स्पेस है। दो डेस्कटॉप के मध्य कॉपी करने लक्षित डेस्कटॉप की फाइलें या विन्यास अधिलेखित या हट सकती हैं। क्या आप निश्चित ही प्रक्रिया जारी रखना चाहते हैं ?</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="311"/>
+        <location filename="../mainwindow.cpp" line="310"/>
         <source>Synchronizing desktop...</source>
         <translation>डेस्कटॉप समकालीन करना जारी...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="313"/>
+        <location filename="../mainwindow.cpp" line="312"/>
         <source>Copying desktop...</source>
         <translation>डेस्कटॉप कॉपी करना जारी...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="345"/>
-        <location filename="../mainwindow.cpp" line="568"/>
+        <location filename="../mainwindow.cpp" line="344"/>
+        <location filename="../mainwindow.cpp" line="571"/>
         <source>The user name needs to be at least 2 characters long. Please select a longer name before proceeding.</source>
         <translation>उपयोक्ता नाम में कम-से-कम 2 अक्षर होना आवश्यक है। कृपया प्रक्रिया जारी रखने से पहले एक दीर्घ नाम चुनें।</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="349"/>
+        <location filename="../mainwindow.cpp" line="348"/>
         <source>The user name cannot contain special characters or spaces.
 Please choose another name before proceeding.</source>
         <translation>उपयोक्ता नाम में कोई विशिष्ट या रिक्त अक्षर न हो।
 कृपया प्रक्रिया जारी रखने से पहले एक उचित नाम चुनें।</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="355"/>
+        <location filename="../mainwindow.cpp" line="354"/>
         <source>Sorry, this name is in use. Please enter a different name.</source>
         <translation>क्षमा करें, यह नाम पहले से प्रयुक्त है। कृपया कोई भिन्न नाम दर्ज करें।</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="359"/>
+        <location filename="../mainwindow.cpp" line="358"/>
         <location filename="../mainwindow.cpp" line="413"/>
         <source>Password entries do not match. Please try again.</source>
         <translation>कूटशब्द प्रविष्टियाँ मेल नहीं खाती हैं। कृपया पुनः प्रयास करें।</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="365"/>
+        <location filename="../mainwindow.cpp" line="364"/>
         <location filename="../mainwindow.cpp" line="419"/>
         <source>Password needs to be at least 2 characters long. Please enter a longer password before proceeding.</source>
         <translation>कूटशब्द में कम-से-कम अक्षर होना आवश्यक है। कृपया प्रक्रिया जारी रखने से पहले एक दीर्घ कूटशब्द चुनें।</translation>
@@ -616,37 +616,37 @@ Please choose another name before proceeding.</source>
         <translation>उपयोक्ता जोड़ना विफल।</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="431"/>
+        <location filename="../mainwindow.cpp" line="433"/>
         <source>Password successfully changed.</source>
         <translation>कूटशब्द परिवर्तन सफल।</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="434"/>
+        <location filename="../mainwindow.cpp" line="436"/>
         <source>Failed to change password.</source>
         <translation>कूटशब्द परिवर्तन विफल।</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="440"/>
+        <location filename="../mainwindow.cpp" line="442"/>
         <source>This action cannot be undone. Are you sure you want to delete user %1?</source>
         <translation>यह कार्य पूर्ववत करना संभव नहीं है। क्या आप निश्चित ही उपयोक्ता %1 को हटाना चाहते हैं?</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="456"/>
+        <location filename="../mainwindow.cpp" line="460"/>
         <source>The user has been deleted.</source>
         <translation>उपयोक्ता हटाना सफल।</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="458"/>
+        <location filename="../mainwindow.cpp" line="462"/>
         <source>Failed to delete the user.</source>
         <translation>उपयोक्ता हटाना विफल।</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="472"/>
+        <location filename="../mainwindow.cpp" line="476"/>
         <source>The group name needs to be at least 2 characters long. Please select a longer name before proceeding.</source>
         <translation>समूह नाम में कम-से-कम 2 अक्षर होना आवश्यक है। कृपया प्रक्रिया जारी रखने से पहले एक दीर्घ नाम चुनें।</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="477"/>
+        <location filename="../mainwindow.cpp" line="481"/>
         <source>The group name needs to be lower case and it 
 cannot contain special characters or spaces.
 Please choose another name before proceeding.</source>
@@ -655,72 +655,72 @@ Please choose another name before proceeding.</source>
 कृपया प्रक्रिया जारी रखने से पहले एक उचित नाम चुनें।</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="485"/>
+        <location filename="../mainwindow.cpp" line="489"/>
         <source>Sorry, that group name already exists. Please enter a different name.</source>
         <translation>क्षमा करें, यह समूह नाम पहले से प्रयुक्त है। कृपया कोई भिन्न नाम दर्ज करें।</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="493"/>
+        <location filename="../mainwindow.cpp" line="497"/>
         <source>The system group was added ok.</source>
         <translation>सिस्टम समूह जोड़ना सफल।</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="495"/>
+        <location filename="../mainwindow.cpp" line="499"/>
         <source>Failed to add the system group.</source>
         <translation>सिस्टम समूह जोड़ना विफल।</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="510"/>
+        <location filename="../mainwindow.cpp" line="514"/>
         <source>This action cannot be undone. Are you sure you want to delete group %1?</source>
         <translation>यह कार्य पूर्ववत करना संभव नहीं है। क्या आप निश्चित ही समूह %1 को हटाना चाहते हैं?</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="511"/>
+        <location filename="../mainwindow.cpp" line="515"/>
         <source>This action cannot be undone. Are you sure you want to delete the following groups: %1?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="520"/>
+        <location filename="../mainwindow.cpp" line="524"/>
         <source>Failed to delete the group.</source>
         <translation>समूह हटाना विफल।</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="520"/>
+        <location filename="../mainwindow.cpp" line="524"/>
         <source>Group: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="524"/>
+        <location filename="../mainwindow.cpp" line="528"/>
         <source>The group has been deleted.</source>
         <translation>समूह हटाना सफल।</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="524"/>
+        <location filename="../mainwindow.cpp" line="528"/>
         <source>The groups have been deleted.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="542"/>
+        <location filename="../mainwindow.cpp" line="545"/>
         <source>The changes have been applied.</source>
         <translation>परिवर्तन लागू करना सफल।</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="544"/>
+        <location filename="../mainwindow.cpp" line="547"/>
         <source>Failed to apply group changes</source>
         <translation>समूह परिवर्तन लागू करना विफल।</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="558"/>
+        <location filename="../mainwindow.cpp" line="561"/>
         <source>The selected user name is currently in use.</source>
         <translation>चयनित उपयोक्ता नाम वर्तमान में कार्यरत है।</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="559"/>
+        <location filename="../mainwindow.cpp" line="562"/>
         <source>To rename this user, please log out and log back in using another user account.</source>
         <translation>इस उपयोक्ता का नाम बदलने हेतु, कृपया लॉगआउट कर अन्य उपयोक्ता अकाउंट द्वारा पुनः लॉगिन करें।</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="572"/>
+        <location filename="../mainwindow.cpp" line="575"/>
         <source>The user name needs to be lower case and it
 cannot contain special characters or spaces.
 Please choose another name before proceeding.</source>
@@ -729,84 +729,84 @@ Please choose another name before proceeding.</source>
 कृपया प्रक्रिया जारी रखने से पहले एक उचित नाम चुनें।</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="579"/>
+        <location filename="../mainwindow.cpp" line="582"/>
         <source>Sorry, this name already exists on your system. Please enter a different name.</source>
         <translation>क्षमा करें, यह नाम आपके सिस्टम हेतु पहले से प्रयुक्त है। कृपया कोई भिन्न नाम दर्ज करें।</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="587"/>
+        <location filename="../mainwindow.cpp" line="591"/>
         <source>Failed to rename the user. Please make sure that the user is not logged in, you might need to restart</source>
         <translation>उपयोक्ता नाम परिवर्तन विफल। कृपया सुनिश्चित करें कि यह उपयोक्ता लॉगिन नहीं है, आपको संभवतः सिस्टम पुनः आरंभ करना पड़ें।</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="611"/>
+        <location filename="../mainwindow.cpp" line="615"/>
         <source>The user was renamed.</source>
         <translation>उपयोक्ता नाम परिवर्तन सफल।</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="623"/>
-        <location filename="../mainwindow.cpp" line="652"/>
+        <location filename="../mainwindow.cpp" line="627"/>
+        <location filename="../mainwindow.cpp" line="656"/>
         <source>Synchronizing desktop...ok</source>
         <translation>डेस्कटॉप समकालीन करना...सफल</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="625"/>
-        <location filename="../mainwindow.cpp" line="654"/>
+        <location filename="../mainwindow.cpp" line="629"/>
+        <location filename="../mainwindow.cpp" line="658"/>
         <source>Copying desktop...ok</source>
         <translation>डेस्कटॉप कॉपी करना...सफल</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="658"/>
+        <location filename="../mainwindow.cpp" line="662"/>
         <source>Synchronizing desktop...failed</source>
         <translation>डेस्कटॉप समकालीन करना...विफल</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="660"/>
+        <location filename="../mainwindow.cpp" line="664"/>
         <source>Copying desktop...failed</source>
         <translation>डेस्कटॉप कॉपी करना...विफल</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="679"/>
+        <location filename="../mainwindow.cpp" line="683"/>
         <source>Confirmation</source>
         <translation>पुष्टिकरण</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="680"/>
+        <location filename="../mainwindow.cpp" line="684"/>
         <source>Process not done. Are you sure you want to quit the application?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="906"/>
+        <location filename="../mainwindow.cpp" line="910"/>
         <source>About %1</source>
         <translation>%1 के बारे में</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="907"/>
+        <location filename="../mainwindow.cpp" line="911"/>
         <source>Version: </source>
         <translation>संस्करण :</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="908"/>
+        <location filename="../mainwindow.cpp" line="912"/>
         <source>Simple user configuration for MX Linux</source>
         <translation>एमएक्स लिनक्स हेतु सरल उपयोक्ता विन्यास</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="910"/>
+        <location filename="../mainwindow.cpp" line="914"/>
         <source>Copyright (c) MX Linux</source>
         <translation>कॉपीराइट (c) एमएक्स लिनक्स</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="911"/>
+        <location filename="../mainwindow.cpp" line="915"/>
         <source>%1 License</source>
         <translation>%1 लाइसेंस</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="926"/>
+        <location filename="../mainwindow.cpp" line="930"/>
         <source>%1 Help</source>
         <translation>%1 सहायता</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="943"/>
+        <location filename="../mainwindow.cpp" line="947"/>
         <source>Select folder to copy to</source>
         <translation>कॉपी हेतु लक्षित फोल्डर चुनें</translation>
     </message>
@@ -862,35 +862,41 @@ Please choose another name before proceeding.</source>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../about.cpp" line="52"/>
+        <location filename="../about.cpp" line="51"/>
         <source>License</source>
         <translation>लाइसेंस</translation>
     </message>
     <message>
-        <location filename="../about.cpp" line="53"/>
+        <location filename="../about.cpp" line="52"/>
         <location filename="../about.cpp" line="62"/>
         <source>Changelog</source>
         <translation>बदलाव सूची</translation>
     </message>
     <message>
-        <location filename="../about.cpp" line="54"/>
+        <location filename="../about.cpp" line="53"/>
         <source>Cancel</source>
         <translation>रद्द करें</translation>
     </message>
     <message>
-        <location filename="../about.cpp" line="74"/>
+        <location filename="../about.cpp" line="75"/>
         <source>&amp;Close</source>
         <translation>बंद करें (&amp;C)</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="62"/>
+        <location filename="../main.cpp" line="61"/>
+        <location filename="../main.cpp" line="68"/>
         <source>Error</source>
         <translation>त्रुटि</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="63"/>
+        <location filename="../main.cpp" line="62"/>
         <source>You seem to be logged in as root, please log out and log in as normal user to use this program.</source>
         <translation>प्रतीत होता है कि आप रुट के रूप में लॉगिन हैं, प्रोग्राम उपयोग करने हेतु लॉगआउट कर सामान्य उपयोक्ता के रूप में लॉगिन करें।</translation>
+    </message>
+    <message>
+        <location filename="../main.cpp" line="69"/>
+        <source>You must run this program with admin access.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

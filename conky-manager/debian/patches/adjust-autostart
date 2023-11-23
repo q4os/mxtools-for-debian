@@ -1,0 +1,18 @@
+Description: remove $HOME from autostart desktop entry
+ .
+ conky-manager (2.7+dfsg1-6mx19+4) mx; urgency=medium
+ .
+   * Remove $HOME from autostart desktop entry
+Author: fehlix <fehlix@mxlinux.org>
+
+--- conky-manager-2.7+dfsg1.orig/src/Main.vala
++++ conky-manager-2.7+dfsg1/src/Main.vala
+@@ -689,7 +689,7 @@ Name=Conky
+ Comment[en_IN]=
+ Comment=
+ """;
+-			txt = txt.replace("{command}", "sh \"" + data_dir + "/conky-startup.sh\"");
++			txt = txt.replace("{command}", "sh .conky/conky-startup.sh");
+ 
+ 			write_file(startupFile, txt);
+ 		}

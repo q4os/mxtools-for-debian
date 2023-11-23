@@ -10,10 +10,13 @@
 #include <QEventLoop>
 #include <QMessageBox>
 #include "unistd.h"
+#include <QTemporaryFile>
+
 
 Window::Window(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::Window)
+
 {
     ui->setupUi(this);
     ui->listWidget_KeyboardLayouts->setSelectionBehavior(QListWidget::SelectItems);
@@ -196,38 +199,34 @@ bool Window::apply()
     qDebug() << parser.source();
     {
         QFile io{KeyboardDefaultFile};
-        if(!io.open(QFile::WriteOnly))
+        if(io.open(QFile::WriteOnly))
         {
             qDebug() << "Failed to open file write-only:" << KeyboardDefaultFile;
             QMessageBox::critical(this, tr("Error"), tr("Failed to open file: ") + KeyboardDefaultFile, QMessageBox::Close);
             return false;
         }
-        QTextStream stream{&io};
+
+        QTemporaryFile tempfile;
+        if(!tempfile.open()){
+            qDebug() << "Failed to open file write-only:" << tempfile.fileName();
+            QMessageBox::critical(this, tr("Error"), tr("Failed to open file: ") + tempfile.fileName(), QMessageBox::Close);
+            return false;
+        }
+
+        QTextStream stream{&tempfile};
         stream << parser.source();
-        io.close();
+        tempfile.close();
+
+        if (getuid() != 0) {
+            Cmd().runAsRoot("cp " + tempfile.fileName() + " " + KeyboardDefaultFile);
+            Cmd().runAsRoot("udevadm trigger -t subsystems --subsystem-match=input --action=change");
+        } else {
+            Cmd().run("cp " + tempfile.fileName() + " " + KeyboardDefaultFile);
+            Cmd().run("udevadm trigger -t subsystems --subsystem-match=input --action=change");
+        }
+
     }
-    // makes X see the changes to /etc/default/keyboard right away
-    // is better than setxkbmap because if you logout but don't reboot the changes don't apply
-    system("udevadm trigger -t subsystems --subsystem-match=input --action=change");
-//    QEventLoop loop;
-//    QProcess proc;
-//    QObject::connect(&proc, QOverload<int>::of(&QProcess::finished), &loop, &QEventLoop::quit);
-//    auto command = QString("setxkbmap");
-//    auto commandOptions = QStringList()
-//               << "-model" << getModel()
-//               << "-layout" << getLayoutsAndVariants().first.join(',')
-//               << "-variant" << getLayoutsAndVariants().second.join(',')
-//               << "-option" << getOptions().join(',');
-//    proc.start("setxkbmap", commandOptions);
-//    loop.exec();
-//    QObject::disconnect(&proc, nullptr, nullptr, nullptr);
-//    if(proc.exitCode() != 0)
-//    {
-//        QMessageBox::critical(this, tr("Error"), tr("Command exited with code non-zero: ") + (QStringList() << command << commandOptions).join(' '), QMessageBox::Close);
-//        qDebug() << proc.readAllStandardError();
-//        return false;
-//    }
-//    proc.close();
+
     return true;
 }
 
@@ -257,7 +256,7 @@ void Window::loadDefaults()
         }
     }
     QStringList layouts = parser.config["XKBLAYOUT"].split(',');
-    QStringList variants = parser.config["XKBVARIANT"].split(',', QString::KeepEmptyParts);
+    QStringList variants = parser.config["XKBVARIANT"].split(',', Qt::KeepEmptyParts);
 
     while ( variants.size() < layouts.size()){
         variants.append(" ");

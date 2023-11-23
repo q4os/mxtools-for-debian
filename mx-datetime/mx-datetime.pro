@@ -5,8 +5,8 @@ TEMPLATE = app
 CONFIG += debug_and_release warn_on strict_c++
 CONFIG(release, debug|release) {
     DEFINES += NDEBUG
-    QMAKE_CXXFLAGS += -flto
-    QMAKE_LFLAGS += -flto
+    QMAKE_CXXFLAGS += -flto=auto
+    QMAKE_LFLAGS += -flto=auto
 }
 DEFINES += QT_DEPRECATED_WARNINGS
 DEFINES += QT_DISABLE_DEPRECATED_UP_TO=0x050F00

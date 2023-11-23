@@ -1,3 +1,9 @@
+system-keyboard-qt (23.11.01mx23) mx; urgency=medium
+
+  * run gui as standard user 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Tue, 14 Nov 2023 21:10:05 -0500
+
 system-keyboard-qt (23.04.05mx23) mx; urgency=medium
 
   * update policy file

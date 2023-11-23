@@ -1,3 +1,20 @@
+mx-goodies (23.09.02) mx; urgency=medium
+
+  * adjust filters in UUID in QSI
+  * show additional source info on kernel
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 11 Oct 2023 19:49:44 -0400
+
+mx-goodies (23.09.01) mx; urgency=medium
+
+  [ fehlix ]
+  * add filter to suppress Gtk-Warning in system-locales-mx
+
+  [ Dolphin Oracle ]
+  * minor correction to target folder for Installer desktop file.
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 20 Sep 2023 20:39:00 -0400
+
 mx-goodies (23.08.01) mx; urgency=medium
 
   * filter adjustements (put them back)

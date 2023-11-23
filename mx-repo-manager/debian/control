@@ -16,5 +16,6 @@ Depends: apt-transport-https,
          unzip,
          ${misc:Depends},
          ${shlibs:Depends}
+Recommends: mx-launcher-l10n, gksu | pkexec
 Description: MX Repo Manager
  MX Repo Manager is a tool used for choosing the default APT repository for MX Linux

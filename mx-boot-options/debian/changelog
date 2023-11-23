@@ -1,3 +1,35 @@
+mx-boot-options (23.11.06) mx; urgency=medium
+
+  * Fix: ownership for /etc/default/grub file
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 16 Nov 2023 15:57:10 -0500
+
+mx-boot-options (23.11.05) mx; urgency=medium
+
+  * Fix: use full path for plymouth-set-theme
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 15 Nov 2023 16:29:46 -0500
+
+mx-boot-options (23.11.04) mx; urgency=medium
+
+  * Fix listing Grub entries, it does require elevation unfortunately
+
+ -- Adrian <adrian@mxlinux.org>  Sun, 12 Nov 2023 21:17:03 -0500
+
+mx-boot-options (23.11.03) mx; urgency=medium
+
+  * Don't prompt for admin password when loading the GUI if not running as chroot
+
+ -- Adrian <adrian@mxlinux.org>  Sun, 12 Nov 2023 11:51:35 -0500
+
+mx-boot-options (23.11.02) mx; urgency=medium
+
+  * Run program as normal user and elevate only when running specific commands
+  * Display boot log in a native window instead of terminal
+  * Minor fixes
+
+ -- Adrian <adrian@mxlinux.org>  Sun, 05 Nov 2023 01:11:09 -0400
+
 mx-boot-options (23.8.01) mx; urgency=medium
 
   * Fix applying different message levels

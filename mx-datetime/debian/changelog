@@ -1,3 +1,15 @@
+mx-datetime (23.11.01mx23) mx; urgency=medium
+
+  * Fix: set correct ownership and rights .sources and .conf files
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 16 Nov 2023 13:11:15 -0500
+
+mx-datetime (23.11mx23) mx; urgency=medium
+
+  * Run as normal user and elevate commands when needed
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 15 Nov 2023 22:01:11 -0500
+
 mx-datetime (23.7.04mx23) mx; urgency=medium
 
   * Fixed: hardware clock time zone set twice on systemd.

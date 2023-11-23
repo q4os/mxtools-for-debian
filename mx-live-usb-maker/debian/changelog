@@ -1,3 +1,15 @@
+mx-live-usb-maker (23.11.01) mx; urgency=medium
+
+  * Run program as normal user and elevate only when needed
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 02 Nov 2023 02:05:29 -0400
+
+mx-live-usb-maker (23.10) mx; urgency=medium
+
+  * Fix: open live-usb-maker log file
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 04 Oct 2023 13:15:08 -0400
+
 mx-live-usb-maker (23.7.02) mx; urgency=medium
 
   * Update translations

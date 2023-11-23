@@ -5,7 +5,7 @@
     <name>MXDateTime</name>
     <message>
         <location filename="../datetime.ui" line="20"/>
-        <location filename="../datetime.cpp" line="664"/>
+        <location filename="../datetime.cpp" line="746"/>
         <source>MX Date &amp; Time</source>
         <translation>MX Data &amp; Ora</translation>
     </message>
@@ -41,8 +41,8 @@
     </message>
     <message>
         <location filename="../datetime.ui" line="265"/>
-        <location filename="../datetime.cpp" line="318"/>
-        <location filename="../datetime.cpp" line="325"/>
+        <location filename="../datetime.cpp" line="360"/>
+        <location filename="../datetime.cpp" line="367"/>
         <source>Hardware Clock</source>
         <translation>Orologio hardware</translation>
     </message>
@@ -192,33 +192,33 @@
         <translation>Opzioni</translation>
     </message>
     <message>
-        <location filename="../datetime.cpp" line="292"/>
+        <location filename="../datetime.cpp" line="329"/>
         <source>Reading...</source>
         <translation>Leggo...</translation>
     </message>
     <message>
-        <location filename="../datetime.cpp" line="306"/>
+        <location filename="../datetime.cpp" line="346"/>
         <source>Adjusting...</source>
         <translation>Sto regolando...</translation>
     </message>
     <message>
-        <location filename="../datetime.cpp" line="318"/>
-        <location filename="../datetime.cpp" line="325"/>
+        <location filename="../datetime.cpp" line="360"/>
+        <location filename="../datetime.cpp" line="367"/>
         <source>System Clock</source>
         <translation>Orologio di sistema</translation>
     </message>
     <message>
-        <location filename="../datetime.cpp" line="331"/>
+        <location filename="../datetime.cpp" line="373"/>
         <source>The %1 time was transferred to the %2.</source>
         <translation>Il tempo %1 è stato trasferito al %2.</translation>
     </message>
     <message>
-        <location filename="../datetime.cpp" line="334"/>
+        <location filename="../datetime.cpp" line="376"/>
         <source>The %1 time could not be transferred to the %2.</source>
         <translation>Il tempo %1 non può essere trasferito al %2.</translation>
     </message>
     <message>
-        <location filename="../datetime.cpp" line="670"/>
+        <location filename="../datetime.cpp" line="752"/>
         <source>%1 License</source>
         <translation type="unfinished"></translation>
     </message>
@@ -227,12 +227,12 @@
         <translation type="vanished">Aggiorno...</translation>
     </message>
     <message>
-        <location filename="../datetime.cpp" line="382"/>
+        <location filename="../datetime.cpp" line="430"/>
         <source>The system clock was updated successfully.</source>
         <translation>L&apos;orologio di sistema è stato aggiornato correttamente.</translation>
     </message>
     <message>
-        <location filename="../datetime.cpp" line="385"/>
+        <location filename="../datetime.cpp" line="433"/>
         <source>The system clock could not be updated.</source>
         <translation>L&apos;orologio di sistema non può essere aggiornato.</translation>
     </message>
@@ -241,22 +241,22 @@
         <translation type="vanished">Nessuno dei server NTP nell&apos;elenco è attualmente abilitato.</translation>
     </message>
     <message>
-        <location filename="../datetime.cpp" line="664"/>
+        <location filename="../datetime.cpp" line="745"/>
         <source>About MX Date &amp; Time</source>
         <translation>Informazioni su MX Data &amp; Ora</translation>
     </message>
     <message>
-        <location filename="../datetime.cpp" line="665"/>
+        <location filename="../datetime.cpp" line="747"/>
         <source>Version: </source>
         <translation>Versione: </translation>
     </message>
     <message>
-        <location filename="../datetime.cpp" line="666"/>
+        <location filename="../datetime.cpp" line="748"/>
         <source>GUI program for setting the time and date in MX Linux</source>
         <translation>Programma di interfaccia grafica per l&apos;impostazione di data e ora in MX Linux</translation>
     </message>
     <message>
-        <location filename="../datetime.cpp" line="668"/>
+        <location filename="../datetime.cpp" line="751"/>
         <source>Copyright (c) MX Linux</source>
         <translation>Copyright (c) MX Linux</translation>
     </message>
@@ -277,7 +277,7 @@
         <translation type="vanished">&amp;Chiudi</translation>
     </message>
     <message>
-        <location filename="../datetime.cpp" line="674"/>
+        <location filename="../datetime.cpp" line="756"/>
         <source>MX Date &amp; Time Help</source>
         <translation>MX Data &amp; Ora Aiuto</translation>
     </message>

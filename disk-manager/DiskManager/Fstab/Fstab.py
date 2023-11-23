@@ -234,10 +234,10 @@ class Entry(EntryBase) :
     def umount(self, lazy = False) :
         ''' x.umount() -> Unmount the entry and return (exit_code, stderr+stdout)
             fix bind mounts by unmounting all mountpoints related to device '''
-        
+
         device = self["DEVICE"]
         fstab_path = self["FSTAB_PATH"]
-        
+
         # get mountpoints based on device as listed in /proc/mounts
         mountpoints = []
         with open('/proc/mounts', 'rt') as mounts:
@@ -266,7 +266,7 @@ class Entry(EntryBase) :
                 out = e.stdout
                 logging.debug(f"Unmounting {device} on {mountpoint} :\n-> cmd : {' '.join(cmd)}\n-> exit : {ret}\n-> output : {out}")
                 break
-        
+
         return (ret, out)
 
     def get_is_mounted(self) :
@@ -374,6 +374,11 @@ class MntFile(list) :
         seen = []
         for line in lines :
             entry = line.split()
+            if len(entry) in [4,5] and not entry[0][0] == "#" :
+                if len(entry) == 4 :
+                    entry.append("0")
+                if len(entry) == 5 :
+                    entry.append("0")
             if not len(entry) == 6 :
                 continue
             if self.filename == "/etc/mtab":

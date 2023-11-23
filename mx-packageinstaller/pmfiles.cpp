@@ -23,7 +23,7 @@ void PMFiles::setup()
   is_ubuntu_based = false;
 
   if(QFile::exists("/usr/share/apps/q4os_system/bin/print_qaptdistr.sh")) {
-    qdistro = cmd.getCmdOut("dash /usr/share/apps/q4os_system/bin/print_qaptdistr.sh");
+    qdistro = cmd.getOut("dash /usr/share/apps/q4os_system/bin/print_qaptdistr.sh");
   }
   if(qdistro.length() < 1) {
     if(has_mx_repo)
@@ -33,25 +33,25 @@ void PMFiles::setup()
   }
   qDebug() << "qdistro: " << qdistro;
 
-  QString hstr1 = cmd.getCmdOut("dpkg --get-selections q4os-mxtools-common 2>/dev/null");
+  QString hstr1 = cmd.getOut("dpkg --get-selections q4os-mxtools-common 2>/dev/null");
   if(hstr1.length() > 10) {
     q4os_mxtools_installed = true;
   }
   qDebug() << "q4os_mxtools_installed: " << q4os_mxtools_installed;
 
-  hstr1 = cmd.getCmdOut("grep '" + qdistro + "-backports ' /etc/apt/sources.list.d/*.list /etc/apt/sources.list | grep '.list:deb ' | grep 'debian'");
+  hstr1 = cmd.getOut("grep '" + qdistro + "-backports ' /etc/apt/sources.list.d/*.list /etc/apt/sources.list | grep '.list:deb ' | grep 'debian'");
   if(hstr1.length() > 10) {
     has_debian_backports_repo = true;
   }
   qDebug() << "has_debian_backports_repo: " << has_debian_backports_repo;
 
-  hstr1 = cmd.getCmdOut("grep mx/testrepo /etc/apt/sources.list.d/*.list | grep \"deb \"");
+  hstr1 = cmd.getOut("grep mx/testrepo /etc/apt/sources.list.d/*.list | grep \"deb \"");
   if(hstr1.length() > 10) {
     has_mx_repo = true;
   }
   qDebug() << "has_mx_repo: " << has_mx_repo;
 
-  hstr1 = cmd.getCmdOut("lsb_release -d | grep Ubuntu");
+  hstr1 = cmd.getOut("lsb_release -d | grep Ubuntu");
   if(hstr1.length() > 8) {
     is_ubuntu_based = true;
   }

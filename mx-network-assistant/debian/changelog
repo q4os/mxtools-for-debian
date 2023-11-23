@@ -1,3 +1,15 @@
+mx-network-assistant (23.11.01) mx; urgency=medium
+
+  * Fix: ownership for /etc/modules
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 16 Nov 2023 15:49:08 -0500
+
+mx-network-assistant (23.11) mx; urgency=medium
+
+  * Run program as normal user and elevate only when running specific commands
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 09 Nov 2023 21:54:14 -0500
+
 mx-network-assistant (23.7.01) mx; urgency=medium
 
   * Update translations

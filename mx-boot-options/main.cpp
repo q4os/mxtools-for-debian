@@ -89,19 +89,23 @@ int main(int argc, char *argv[])
         }
     }
 
-    if (getuid() == 0) {
-        MainWindow w;
-        w.show();
-        auto const exit_code = QApplication::exec();
-        proc.start("grep", {"^" + logname + ":", "/etc/passwd"});
-        proc.waitForFinished();
-        auto const home = QString::fromLatin1(proc.readAllStandardOutput().trimmed()).section(":", 5, 5);
-        auto const file_name = home + "/.config/" + QApplication::applicationName() + "rc";
-        if (QFile::exists(file_name)) {
-            QProcess::execute("chown", {logname + ":", file_name});
+    if (getuid() != 0) {
+        if (!QFile::exists("/usr/bin/pkexec") && !QFile::exists("/usr/bin/gksu")) {
+            QMessageBox::critical(nullptr, QObject::tr("Error"),
+                                  QObject::tr("You must run this program with admin access."));
+            exit(EXIT_FAILURE);
         }
-        return exit_code;
-    } else {
-        QProcess::startDetached(QStringLiteral("/usr/bin/mxbo-launcher"), {});
     }
+
+    MainWindow w;
+    w.show();
+    auto const exit_code = QApplication::exec();
+    proc.start("grep", {"^" + logname + ":", "/etc/passwd"});
+    proc.waitForFinished();
+    auto const home = QString::fromLatin1(proc.readAllStandardOutput().trimmed()).section(":", 5, 5);
+    auto const file_name = home + "/.config/" + QApplication::applicationName() + "rc";
+    if (QFile::exists(file_name)) {
+        Cmd().runAsRoot("chown " + logname + ": " + file_name);
+    }
+    return exit_code;
 }

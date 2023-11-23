@@ -36,6 +36,7 @@ MainWindow::MainWindow(const QCommandLineParser &arg_parser, QWidget *parent)
       tabWidget {new TabWidget(this)},
       args {arg_parser}
 {
+    setAttribute(Qt::WA_DeleteOnClose);
     toolBar->toggleViewAction()->setVisible(false);
     connect(tabWidget, &TabWidget::currentChanged, this, [this] { tabChanged(); });
     websettings = currentWebView()->settings();
@@ -67,6 +68,7 @@ MainWindow::MainWindow(const QUrl &url, QWidget *parent)
       tabWidget {new TabWidget(this)},
       args {}
 {
+    setAttribute(Qt::WA_DeleteOnClose);
     toolBar->toggleViewAction()->setVisible(false);
     connect(tabWidget, &TabWidget::currentChanged, this, [this] { tabChanged(); });
     websettings = currentWebView()->settings();

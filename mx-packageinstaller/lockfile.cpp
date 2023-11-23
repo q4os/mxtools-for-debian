@@ -25,22 +25,44 @@
 #include "lockfile.h"
 
 #include <QDebug>
+#include <QFileInfo>
+#include <QMessageBox>
+
+#include <cmd.h>
 
 #include <unistd.h>
 
-// Checks if file is locked by another process (if locked by the same process returns false)
+LockFile::LockFile(const QString &file_name)
+    : file(file_name)
+{
+}
+
 bool LockFile::isLocked()
 {
-    if (!file.open(QIODevice::ReadOnly)) {
-        qWarning() << "Unable to open lock file" << file.fileName() << "for reading:" << file.errorString();
-        return false;
+    return Cmd().runAsRoot("fuser " + fileName());
+}
+
+// Check if the file is locked and pop up a message
+bool LockFile::isLockedGUI()
+{
+    QString proc = getLockingProcess();
+    if (!proc.isEmpty()) {
+        QMessageBox::warning(nullptr, QObject::tr("Warning"),
+                             QObject::tr("Dpkg/apt database is locked by another program: %1"
+                                         "\nClose the program, or wait until it is done processing and try again.")
+                                 .arg(proc));
+        return true;
     }
-    return (lockf(file.handle(), F_TEST, 0) != 0);
+    return false;
 }
 
 bool LockFile::lock()
 {
-    file.close(); // if openned by isLocked()
+    file.close(); // if already opened by this process, this avoids messages that this process is locking the file
+    if (isLockedGUI()) {
+        return false;
+    }
+    Cmd().runAsRoot("chown $(logname): " + file.fileName(), true); // take ownership
     if (!file.open(QIODevice::WriteOnly)) {
         qWarning() << "Unable to open lock file" << file.fileName() << "for writing:" << file.errorString();
         return false;
@@ -51,4 +73,17 @@ bool LockFile::lock()
 void LockFile::unlock()
 {
     file.close();
+}
+
+QString LockFile::fileName()
+{
+    return file.fileName();
+}
+
+QString LockFile::getLockingProcess()
+{
+    return Cmd()
+        .getOutAsRoot("pid=$(fuser " + fileName()
+                      + " 2>/dev/null); [[ -n \"$pid\" ]] && ps --no-headers -o comm -p $pid")
+        .trimmed();
 }

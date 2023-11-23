@@ -38,6 +38,8 @@
 
 using namespace std::chrono_literals;
 
+extern const QString init;
+
 MainWindow::MainWindow(QWidget *parent)
     : QDialog(parent),
       ui(new Ui::MainWindow)
@@ -54,7 +56,6 @@ MainWindow::MainWindow(QWidget *parent)
             centerWindow();
         }
     }
-    auto init = Service::getInit();
     if (init != "systemd" && !init.startsWith("init")) { // can be "init(mxlinux)" when running in WSL for example
         QMessageBox::warning(
             this, tr("Error"),
@@ -66,9 +67,9 @@ MainWindow::MainWindow(QWidget *parent)
     ui->listServices->addItem(tr("Loading..."));
 
     dependTargets
-        = cmd.getCmdOut("grep --no-filename \"TARGETS = \" /etc/init.d/.depend.start /etc/init.d/.depend.boot |  "
-                        "sed  -e ':a;N;$!ba;s/\\n/ /' -e 's/TARGETS = //g'",
-                        true)
+        = cmd.getOut("grep --no-filename \"TARGETS = \" /etc/init.d/.depend.start /etc/init.d/.depend.boot |  "
+                     "sed  -e ':a;N;$!ba;s/\\n/ /' -e 's/TARGETS = //g'",
+                     true)
               .split(" ");
 
     QTimer::singleShot(0, this, [this] {
@@ -82,6 +83,19 @@ MainWindow::MainWindow(QWidget *parent)
         listServices();
         displayServices();
         ui->listServices->setFocus();
+    });
+    connect(ui->listServices, &QListWidget::itemEntered, this, [this](QListWidgetItem *item) {
+        if (item->data(Qt::UserRole).value<Service *>()) {
+            ui->listServices->blockSignals(true);
+            if (!item->toolTip().isEmpty()) {
+                ui->listServices->blockSignals(false);
+                return;
+            }
+            ui->lineSearch->blockSignals(true);
+            item->setToolTip(item->data(Qt::UserRole).value<Service *>()->getDescription());
+            ui->lineSearch->blockSignals(false);
+            ui->listServices->blockSignals(false);
+        }
     });
 }
 
@@ -117,7 +131,7 @@ void MainWindow::onSelectionChanged(QListWidgetItem *current, QListWidgetItem *p
     if (!current) {
         return;
     }
-    ui->textBrowser->setText(Service::getInfo(current->text()));
+    ui->textBrowser->setText(current->data(Qt::UserRole).value<Service *>()->getInfo());
     bool running = current->data(Qt::UserRole).value<Service *>()->isRunning();
     bool enabled = current->data(Qt::UserRole).value<Service *>()->isEnabled();
     if (running) {
@@ -171,8 +185,8 @@ QString MainWindow::getHtmlColor(const QColor &color)
 void MainWindow::listServices()
 {
     services.clear();
-    if (Service::getInit().startsWith("init")) {
-        const auto list = cmd.getCmdOut("service --status-all").split("\n");
+    if (init != "systemd") {
+        const auto list = cmd.getOut("/sbin/service --status-all", true).trimmed().split("\n");
         services.reserve(list.count());
         QRegularExpression re("dpkg-.*$");
         QString name;
@@ -192,27 +206,35 @@ void MainWindow::listServices()
             services << QSharedPointer<Service>(service);
         }
     } else {
-        const auto list = cmd.getCmdOut("systemctl list-units --type=service --all -o json");
+        const auto list = cmd.getOutAsRoot("systemctl list-units --type=service --all -o json").trimmed();
         auto doc = QJsonDocument::fromJson(list.toUtf8());
         if (!doc.isArray()) {
             qDebug() << "JSON data is not an array.";
             return;
         }
         auto jsonArray = doc.array();
+        QStringList names;
+        names.reserve(jsonArray.size() * 2);
         for (const auto &value : jsonArray) {
             auto obj = value.toObject();
             if (value.isObject()) {
                 QString name = obj.value("unit").toString().section(".", 0, 0);
                 QString status = obj.value("sub").toString();
-                auto *service = new Service(name, status == "running");
-                service->setEnabled(Service::isEnabled(name));
-                if (dependTargets.contains(name)) {
-                    service->setEnabled(true);
+                QString load = obj.value("load").toString();
+                if (!names.contains(name) && load != "not-found") {
+                    auto *service = new Service(name, status == "running");
+                    names << name;
+
+                    service->setEnabled(Service::isEnabled(name));
+                    if (dependTargets.contains(name)) {
+                        service->setEnabled(true);
+                    }
+                    services << QSharedPointer<Service>(service);
                 }
-                services << QSharedPointer<Service>(service);
             }
         }
-        const auto masked = cmd.getCmdOut("systemctl list-unit-files --type=service --state=masked -o json");
+        const auto masked
+            = cmd.getOutAsRoot("systemctl list-unit-files --type=service --state=masked -o json").trimmed();
         doc = QJsonDocument::fromJson(masked.toUtf8());
         if (!doc.isArray()) {
             qDebug() << "JSON data is not an array.";
@@ -223,9 +245,12 @@ void MainWindow::listServices()
             auto obj = value.toObject();
             if (value.isObject()) {
                 QString name = obj.value("unit_file").toString().section(".", 0, 0);
-                auto *service = new Service(name, false);
-                service->setEnabled(false);
-                services << QSharedPointer<Service>(service);
+                if (!names.contains(name)) {
+                    auto *service = new Service(name, false);
+                    names << name;
+                    service->setEnabled(false);
+                    services << QSharedPointer<Service>(service);
+                }
             }
         }
     }
@@ -278,11 +303,11 @@ void MainWindow::displayServices()
     ui->labelEnabledAtBoot->setText(
         tr("%1 %2enabled%3 at boot, but not running").arg(QString::number(countEnabled), fontTagStart, fontTagEnd));
     ui->listServices->blockSignals(false);
+    ui->listServices->sortItems();
     if (savedRow >= ui->listServices->count()) {
         savedRow = ui->listServices->count() - 1;
     }
     ui->listServices->setCurrentRow(savedRow);
-    ui->listServices->sortItems();
 }
 
 void MainWindow::pushAbout_clicked()

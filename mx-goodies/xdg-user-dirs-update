@@ -27,7 +27,7 @@ fi
 
 if false ; then
 	#special case, check for Installer.desktop
-	if [ ! -e "$HOME/Desktop/Installer.desktop" ]; then 
+	if [ ! -e "$HOME/$targetfolder/Installer.desktop" ]; then 
 		copystuff "$liveapplist"
 	fi
 	#special case, check for installer link for idesktop

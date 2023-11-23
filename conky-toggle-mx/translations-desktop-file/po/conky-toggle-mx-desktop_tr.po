@@ -5,6 +5,7 @@
 # 
 # Translators:
 # kilickerem066 ., 2023
+# Mehmet Akif 9oglu, 2023
 # 
 #, fuzzy
 msgid ""
@@ -13,8 +14,8 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-12-09 23:41-0500\n"
 "PO-Revision-Date: 2022-12-10 04:42+0000\n"
-"Last-Translator: kilickerem066 ., 2023\n"
-"Language-Team: Turkish (https://www.transifex.com/anticapitalista/teams/10162/tr/)\n"
+"Last-Translator: Mehmet Akif 9oglu, 2023\n"
+"Language-Team: Turkish (https://app.transifex.com/anticapitalista/teams/10162/tr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -24,7 +25,7 @@ msgstr ""
 #. The desktop entry name will be displayed within the menu.
 #: desktop-in/conky-toggle.desktop.in:6
 msgid "Conky Toggle"
-msgstr "Conky'yi Değiştir"
+msgstr "Conky Açık/Kapalı"
 
 #. # The desktop entry comment will be shown within the menu.
 #: desktop-in/conky-toggle.desktop.in:8

@@ -8,7 +8,7 @@
         <location filename="../mainwindow.cpp" line="64"/>
         <location filename="../mainwindow.cpp" line="434"/>
         <source>MX Welcome</source>
-        <translation>MX Boas-vindas</translation>
+        <translation>MX Bem-vindo</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="80"/>
@@ -53,7 +53,7 @@
     <message>
         <location filename="../mainwindow.ui" line="510"/>
         <source>Tweak (Panel, etc...)</source>
-        <translation>Ajustes</translation>
+        <translation>Ajustes (Painel, etc...)</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="536"/>
@@ -78,12 +78,12 @@
     <message>
         <location filename="../mainwindow.ui" line="652"/>
         <source>Tour</source>
-        <translation>Visita</translation>
+        <translation>Guia</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="674"/>
         <source>Popular Apps</source>
-        <translation>Aplicações</translation>
+        <translation>Aplicações populares</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="700"/>
@@ -113,7 +113,7 @@
     <message>
         <location filename="../mainwindow.ui" line="805"/>
         <source>DESKTOP</source>
-        <translation>DESKTOP</translation>
+        <translation>AMBIENTE GRÁFICO</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="819"/>
@@ -128,7 +128,7 @@
     <message>
         <location filename="../mainwindow.ui" line="846"/>
         <source>The name “MX Linux” is covered by Linux Foundation Sublicense No. 20140605-0483. We develop software that is covered by a free license that can be examined in the Wiki list. We also include software developed by others that is under a free license.</source>
-        <translation>O nome &quot;MX Linux&quot; é abrangido pela Linux Foundation Sublicense No. 20140605-0483. Desenvolvemos software que é coberto por uma licença livre que pode ser examinada na lista Wiki. Também incluímos software desenvolvido por outros que está sob uma licença livre.</translation>
+        <translation>O nome &quot;MX Linux&quot; ESTÁ COBERTO pela Linux Foundation Sublicense n.º 20140605-0483. Desenvolvemos software que está coberto por uma licença livre que pode ser examinada na lista Wiki. Também incluímos software desenvolvido por outros que está sob uma licença livre.</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="856"/>
@@ -162,7 +162,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../mainwindow.cpp" line="317"/>
         <source>User demo, password:</source>
-        <translation>Utilizador demo, senha:</translation>
+        <translation>Utilizador demo, palavra-passe:</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="318"/>
@@ -183,7 +183,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../mainwindow.cpp" line="433"/>
         <source>About MX Welcome</source>
-        <translation>Sobre o MX Boas-vindas</translation>
+        <translation>Sobre o MX Bem-vindo</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="434"/>

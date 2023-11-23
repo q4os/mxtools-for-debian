@@ -1,0 +1,18 @@
+#!/bin/bash
+
+# Root level functions requiring password for mx-packageinstaller
+
+copy_log() {
+    echo -e "-----------------------------------------------------------\nMXPI SESSION\n-----------------------------------------------------------\n" >> /var/log/mxpi.log.old
+    cat /var/log/mxpi.log >> /var/log/mxpi.log.old
+    mv /tmp/mxpi.log /var/log
+}
+
+main() {
+case "$1" in 
+    copy_log) 
+        copy_log;;
+esac
+}
+
+main "$@"

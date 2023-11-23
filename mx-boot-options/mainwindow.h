@@ -45,40 +45,6 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow() override;
 
-    QString selectPartiton(const QStringList &list);
-    QStringList getLinuxPartitions();
-    bool inVirtualMachine();
-    bool installSplash();
-    bool isInstalled(const QString &package);
-    bool isInstalled(const QStringList &packages);
-    bool replaceGrubArg(const QString &key, const QString &item);
-    //    int findMenuEntryById(const QString &id) const;
-    static bool isUefi();
-    static void removeUefiEntry(QListWidget *listEntries, QDialog *uefiDialog);
-    static void sendMouseEvents();
-    static void setUefiBootNext(QListWidget *listEntries, QLabel *textBootNext);
-    static void setUefiTimeout(QDialog *uefiDialog, QLabel *textTimeout);
-    static void sortUefiBootOrder(const QStringList &order, QListWidget *list);
-    static void toggleUefiActive(QListWidget *listEntries);
-    //    void addGrubArg(const QString &key, const QString &item);
-    void addGrubLine(const QString &item);
-    void addUefiEntry(QListWidget *listEntries, QDialog *dialogUefi);
-    void createChrootEnv(const QString &root);
-    void disableGrubLine(const QString &item);
-    void enableGrubLine(const QString &item);
-    void loadPlymouthThemes();
-    void readBootEntries(QListWidget *listEntries, QLabel *textTimeout, QLabel *textBootNext, QLabel *textBootCurrent,
-                         QStringList *bootorder);
-    void readDefaultGrub();
-    void readGrubCfg();
-    void readKernelOpts();
-    //    void remGrubArg(const QString &key, const QString &item);
-    void saveBootOrder(const QListWidget *list);
-    void setGeneralConnections();
-    void setup();
-    static void unmountAndClean(const QStringList &mount_list);
-    void writeDefaultGrub() const;
-
 private slots:
     void cleanup();
     void cmdDone();
@@ -130,6 +96,37 @@ private:
     QStringList default_grub;
     QStringList grub_cfg;
     QTemporaryDir tmpdir;
+
+    QString selectPartiton(const QStringList &list);
+    QStringList getLinuxPartitions();
+    bool inVirtualMachine();
+    bool installSplash();
+    bool isInstalled(const QString &package);
+    bool isInstalled(const QStringList &packages);
+    bool replaceGrubArg(const QString &key, const QString &item);
+    static bool isUefi();
+    static void removeUefiEntry(QListWidget *listEntries, QDialog *uefiDialog);
+    static void sendMouseEvents();
+    static void setUefiBootNext(QListWidget *listEntries, QLabel *textBootNext);
+    static void setUefiTimeout(QDialog *uefiDialog, QLabel *textTimeout);
+    static void sortUefiBootOrder(const QStringList &order, QListWidget *list);
+    static void toggleUefiActive(QListWidget *listEntries);
+    void addGrubLine(const QString &item);
+    void addUefiEntry(QListWidget *listEntries, QDialog *dialogUefi);
+    void createChrootEnv(const QString &root);
+    void disableGrubLine(const QString &item);
+    void enableGrubLine(const QString &item);
+    void loadPlymouthThemes();
+    void readBootEntries(QListWidget *listEntries, QLabel *textTimeout, QLabel *textBootNext, QLabel *textBootCurrent,
+                         QStringList *bootorder);
+    void readDefaultGrub();
+    void readGrubCfg();
+    void readKernelOpts();
+    void saveBootOrder(const QListWidget *list);
+    void setGeneralConnections();
+    void setup();
+    void unmountAndClean(const QStringList &mount_list);
+    void writeDefaultGrub();
 };
 
 #endif

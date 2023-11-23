@@ -1,3 +1,21 @@
+disk-manager (23.10.01) mx; urgency=medium
+
+  * fix UnicodeDecodeError due to UTF-16 encoding of partition label
+
+ -- fehlix <fehlix@mxlinux.org>  Fri, 20 Oct 2023 18:19:28 -0400
+
+disk-manager (23.09.02) mx; urgency=medium
+
+  * adjust missing dump and passno fields for all fstab lines
+
+ -- fehlix <fehlix@mxlinux.org>  Thu, 21 Sep 2023 15:26:37 -0400
+
+disk-manager (23.09.01) mx; urgency=medium
+
+  * add missing dump- and pass-fields to swap lines in fstab
+
+ -- fehlix <fehlix@mxlinux.org>  Sun, 17 Sep 2023 21:01:52 -0400
+
 disk-manager (23.04.04) mx; urgency=medium
 
   * update launcher script

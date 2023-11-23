@@ -69,7 +69,7 @@ private:
     QList<QSharedPointer<Service>> services;
     int savedRow = 0;
 
-    static QString getHtmlColor(const QColor& color);
+    static QString getHtmlColor(const QColor &color);
     void displayServices();
     void listServices();
 };

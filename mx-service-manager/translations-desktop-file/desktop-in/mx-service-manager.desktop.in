@@ -4,7 +4,7 @@ Encoding=UTF-8
 Name=MX Service Manager
 # # The desktop entry comment will be shown within the menu.
 Comment=Manually enable or disable services
-Exec=mxsm-launcher
+Exec=mx-service-manager
 Terminal=false
 Type=Application
 Icon=mx-service-manager

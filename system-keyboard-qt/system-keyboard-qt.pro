@@ -25,6 +25,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++11
 
 SOURCES += \
+    cmd.cpp \
         main.cpp \
         window.cpp \
     keyboardlayouts.cpp \
@@ -34,6 +35,7 @@ SOURCES += \
     filterablecombobox.cpp
 
 HEADERS += \
+    cmd.h \
         window.h \
     keyboardlayouts.h \
     selectlayoutdialog.h \

@@ -3,6 +3,7 @@ icons/mx-packageinstaller.png	usr/share/icons/hicolor/64x64/apps
 icons/mx-packageinstaller.svg	usr/share/icons/hicolor/scalable/apps
 mx-packageinstaller		usr/bin
 mx-packageinstaller.desktop	usr/share/applications
-scripts/mxpi-launcher		usr/bin
-scripts/org.mxlinux.pkexec.mxpi-launcher.policy usr/share/polkit-1/actions
+scripts/helper			usr/lib/mx-packageinstaller
+scripts/mxpi-lib                usr/lib/mx-packageinstaller
+scripts/*.policy		usr/share/polkit-1/actions
 translations/*.qm		usr/share/mx-packageinstaller/locale

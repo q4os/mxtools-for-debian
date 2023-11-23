@@ -207,7 +207,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>License</source>
-        <translation type="vanished">Ruhsat</translation>
+        <translation type="vanished">Lisans</translation>
     </message>
     <message>
         <source>Changelog</source>
@@ -259,7 +259,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../about.cpp" line="39"/>
         <source>License</source>
-        <translation type="unfinished">Ruhsat</translation>
+        <translation type="unfinished">Lisans</translation>
     </message>
     <message>
         <location filename="../about.cpp" line="40"/>

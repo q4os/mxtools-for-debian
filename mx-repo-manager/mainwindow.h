@@ -48,9 +48,10 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow() override;
 
-    enum Version { Jessie = 8, Stretch, Buster, Bullseye, Bookworm };
+    enum Version { Jessie = 8, Stretch, Buster, Bullseye, Bookworm, Trixie };
 
     QStringList readMXRepos();
+    bool replaceRepos(const QString &url, bool quiet = false);
     static QFileInfoList listAptFiles();
     static QIcon getFlag(QString country);
     static QString getDebianVerName(int ver);
@@ -64,7 +65,6 @@ public:
     void getCurrentRepo();
     void refresh();
     void replaceDebianRepos(QString url);
-    void replaceRepos(const QString &url);
     void setConnections();
     void setProgressBar();
     void setSelected();

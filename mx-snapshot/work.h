@@ -41,6 +41,8 @@ public:
 
     explicit Work(Settings *settings, QObject *parent = nullptr);
 
+    Cmd shell;
+
     QElapsedTimer e_timer;
     bool done = false;
     bool started = false;
@@ -48,7 +50,7 @@ public:
     QTemporaryDir initrd_dir;
     [[noreturn]] void cleanUp();
     bool checkAndMoveWorkDir(const QString &dir, quint64 req_size);
-    bool checkInstalled(const QString &package);
+    static bool checkInstalled(const QString &package);
     bool createIso(const QString &filename);
     bool installPackage(const QString &package);
     bool replaceStringInFile(const QString &old_text, const QString &new_text, const QString &file_path);
@@ -74,6 +76,7 @@ signals:
 
 private:
     Settings *settings;
+    QString elevate {QFile::exists("/usr/bin/pkexec") ? "/usr/bin/pkexec" : "/usr/bin/gksu"};
 };
 
 #endif // WORK_H

@@ -1,3 +1,37 @@
+mx-service-manager (23.11.02) mx; urgency=medium
+
+  * Fix: run 'service' command with full path instead of running it as root
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 08 Nov 2023 12:53:05 -0500
+
+mx-service-manager (23.11.01) mx; urgency=medium
+
+  * Fix: launching from menu from Xfce, not enough permissions to list services
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 08 Nov 2023 11:19:17 -0500
+
+mx-service-manager (23.11) mx; urgency=medium
+
+  * Run program as normal user and elevate only when needed
+  * Fix random jumping in the service list when changing the status of a service
+
+ -- Adrian <adrian@mxlinux.org>  Tue, 07 Nov 2023 20:26:35 -0500
+
+mx-service-manager (23.10.01) mx; urgency=medium
+
+  * Fix: show description tooltip for systemd disabled services and add it to the info box
+  * Eliminate more duplicates from service list
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 27 Oct 2023 19:17:09 -0400
+
+mx-service-manager (23.10) mx; urgency=medium
+
+  * Add tooltip with service description
+  * Eliminate some duplicates in the service list
+  * Eliminate "not-found" services in systemd list
+
+ -- Adrian <adrian@mxlinux.org>  Sat, 21 Oct 2023 22:30:37 -0400
+
 mx-service-manager (23.9.02) mx; urgency=medium
 
   * Add alias for smbd/samba to make it easier to search

@@ -36,6 +36,11 @@ extern QString current_kernel;
 static QHash<QString, quint8> compression_factor {{"xz", 31},  {"zstd", 35}, {"gzip", 37},
                                                   {"lzo", 52}, {"lzma", 52}, {"lz4", 52}};
 
+namespace Release
+{
+enum Version { Jessie = 8, Stretch, Buster, Bullseye, Bookworm, Trixie };
+}
+
 class Settings
 {
 public:
@@ -54,7 +59,6 @@ public:
 
     explicit Settings(const QCommandLineParser &arg_parser);
 
-    Cmd *shell;
     Exclusions exclusions;
     QFile config_file;
     QFile snapshot_excludes;
@@ -80,7 +84,6 @@ public:
     QString version;
     QString work_dir;
     QStringList users; // list of users with /home folders
-    bool cli_mode;
     bool edit_boot_menu {};
     bool force_installer {};
     bool live {};
@@ -93,10 +96,13 @@ public:
     bool shutdown {};
     bool x86 {};
     const QStringList path {qEnvironmentVariable("PATH").split(":") << "/usr/sbin"};
+    const uint max_cores {Cmd().getOut("nproc", true).trimmed().toUInt()};
     quint64 free_space {};
     quint64 free_space_work {};
     quint64 home_size {};
     quint64 root_size {};
+    uint cores {};
+    uint throttle {};
 
     [[nodiscard]] QString getEditor() const;
     [[nodiscard]] QString getFilename() const;
@@ -104,19 +110,20 @@ public:
     [[nodiscard]] QString getSnapshotSize() const;
     [[nodiscard]] QString getUsedSpace();
     [[nodiscard]] QString getXdgUserDirs(const QString &folder);
-    [[nodiscard]] QString largerFreeSpace(const QString &dir1, const QString &dir2) const;
-    [[nodiscard]] QString largerFreeSpace(const QString &dir1, const QString &dir2, const QString &dir3) const;
-    [[nodiscard]] QString readKernelOpts() const;
-    [[nodiscard]] QStringList listUsers() const;
     [[nodiscard]] bool checkCompression() const;
     [[nodiscard]] bool checkSnapshotDir() const;
     [[nodiscard]] bool checkTempDir();
-    [[nodiscard]] bool isOnSupportedPart(const QString &dir) const;
     [[nodiscard]] int getSnapshotCount() const;
-    [[nodiscard]] quint64 getFreeSpace(const QString &path) const;
-    [[nodiscard]] quint64 getLiveRootSpace() const;
+    [[nodiscard]] static QString largerFreeSpace(const QString &dir1, const QString &dir2);
+    [[nodiscard]] static QString largerFreeSpace(const QString &dir1, const QString &dir2, const QString &dir3);
+    [[nodiscard]] static QString readKernelOpts();
+    [[nodiscard]] static QStringList listUsers();
     [[nodiscard]] static bool isLive();
+    [[nodiscard]] static bool isOnSupportedPart(const QString &dir);
     [[nodiscard]] static bool isi386();
+    [[nodiscard]] static int getDebianVerNum();
+    [[nodiscard]] static quint64 getFreeSpace(const QString &path);
+    [[nodiscard]] static quint64 getLiveRootSpace();
     void addRemoveExclusion(bool add, QString exclusion);
     void excludeAll();
     void excludeDesktop(bool exclude);

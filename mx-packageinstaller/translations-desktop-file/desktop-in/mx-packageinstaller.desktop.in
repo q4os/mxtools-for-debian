@@ -3,7 +3,7 @@
 Name=MX Package Installer
 # # The desktop entry comment will be shown within the menu.
 Comment=Simple Software Application Package Installer
-Exec=mxpi-launcher
+Exec=mx-packageinstaller
 Icon=mx-packageinstaller
 NoDisplay=false
 Categories=System;MX-Software;

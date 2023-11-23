@@ -1,3 +1,23 @@
+mx-bootrepair (23.11.01) mx; urgency=medium
+
+  * Fix changelog location
+  * Prompt once for elevation when closing the app
+
+ -- Adrian <adrian@mxlinux.org>  Sat, 11 Nov 2023 15:07:48 -0500
+
+mx-bootrepair (23.11) mx; urgency=medium
+
+  * Run program as normal user and elevate only when needed
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 10 Nov 2023 12:48:08 -0500
+
+mx-bootrepair (23.9) mx; urgency=medium
+
+  * Remove efivar dump-entries to avoid "No space left on device" error.
+  * Adjust version.h in debian rules
+
+ -- fehlix <fehlix@mxlinux.org>  Wed, 13 Sep 2023 17:05:38 -0400
+
 mx-bootrepair (23.8) mx; urgency=medium
 
   * Security Fix: LUKS password can end up on the console.

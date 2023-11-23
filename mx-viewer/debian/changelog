@@ -1,3 +1,10 @@
+mx-viewer (23.9) mx; urgency=medium
+
+  * Fix: key press event not being processed
+  * Update translations
+
+ -- Adrian <adrian@mxlinux.org>  Sat, 23 Sep 2023 13:06:51 -0400
+
 mx-viewer (23.8) mx; urgency=medium
 
   * Implemented tab interface

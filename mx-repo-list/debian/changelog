@@ -1,3 +1,9 @@
+mx-repo-list (23.9.01) mx; urgency=medium
+
+  * Remove mirrors that are not working
+
+ -- Adrian <adrian@mxlinux.org>  Sat, 16 Sep 2023 12:58:27 -0400
+
 mx-repo-list (23.9) mx; urgency=medium
 
   * Update mirror from South Korea

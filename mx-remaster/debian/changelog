@@ -1,3 +1,9 @@
+mx-remaster (23.10.01mx23) mx; urgency=medium
+
+  * update default grub file
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 14 Oct 2023 16:46:03 -0400
+
 mx-remaster (23.05.02mx23) mx; urgency=medium
 
   * update 30-os_prober 

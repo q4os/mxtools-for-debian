@@ -4,7 +4,7 @@ Encoding=UTF-8
 Name=MX Repo Manager
 # # The desktop entry comment will be shown within the menu.
 Comment=Choose the default APT repo
-Exec=mxrm-launcher
+Exec=mx-repo-manager
 Terminal=false
 Type=Application
 Icon=mx-repo-manager

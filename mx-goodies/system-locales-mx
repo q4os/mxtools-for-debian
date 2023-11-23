@@ -103,6 +103,7 @@ fi
        [[ -z "$LINE" ]] && continue
        [[ "$LINE" =~ 'dbind-WARNING' ]] && continue
        [[ "$LINE" =~ 'I/O error'     ]] && continue
+       [[ "$LINE" =~ 'Gtk-WARNING'   ]] && continue
        ((i++))
        if [ -n "$LINE" ] && [ -z "${LINE##*... done}" ]; then
          GEN_LANG="${LINE%... done}"

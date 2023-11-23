@@ -132,7 +132,7 @@
     </message>
     <message>
         <location filename="../mainwindow.ui" line="613"/>
-        <location filename="../mainwindow.cpp" line="845"/>
+        <location filename="../mainwindow.cpp" line="834"/>
         <source>Block Driver</source>
         <translation>Blloko Përudhës</translation>
     </message>
@@ -188,7 +188,7 @@
     </message>
     <message>
         <location filename="../mainwindow.ui" line="813"/>
-        <location filename="../mainwindow.ui" line="930"/>
+        <location filename="../mainwindow.ui" line="933"/>
         <source>Target URL:</source>
         <translation>URL e synuar:</translation>
     </message>
@@ -198,324 +198,324 @@
         <translation>Pakete</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="865"/>
-        <location filename="../mainwindow.ui" line="985"/>
+        <location filename="../mainwindow.ui" line="868"/>
+        <location filename="../mainwindow.ui" line="991"/>
         <source>Start</source>
         <translation>Nise</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="882"/>
-        <location filename="../mainwindow.ui" line="1002"/>
+        <location filename="../mainwindow.ui" line="885"/>
+        <location filename="../mainwindow.ui" line="1008"/>
         <source>Clear</source>
         <translation>Spastroje</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="896"/>
-        <location filename="../mainwindow.ui" line="1016"/>
+        <location filename="../mainwindow.ui" line="899"/>
+        <location filename="../mainwindow.ui" line="1022"/>
         <source>Cancel</source>
         <translation>Anuloje</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="924"/>
+        <location filename="../mainwindow.ui" line="927"/>
         <source>Traceroute</source>
         <translation>Traceroute</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="940"/>
+        <location filename="../mainwindow.ui" line="943"/>
         <source>Hops</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="98"/>
+        <location filename="../mainwindow.cpp" line="87"/>
         <source>IP address from router:</source>
         <translation>Adresë IP prej rrugëzuesi:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="99"/>
+        <location filename="../mainwindow.cpp" line="88"/>
         <source>External IP address:</source>
         <translation>Adresë IP e jashtme:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="135"/>
-        <location filename="../mainwindow.cpp" line="148"/>
+        <location filename="../mainwindow.cpp" line="125"/>
+        <location filename="../mainwindow.cpp" line="138"/>
         <source>Interface: %1</source>
         <translation>Ndërfaqe: %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="135"/>
-        <location filename="../mainwindow.cpp" line="149"/>
+        <location filename="../mainwindow.cpp" line="125"/>
+        <location filename="../mainwindow.cpp" line="139"/>
         <source>Driver: %1</source>
         <translation>Përudhës: %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="136"/>
-        <location filename="../mainwindow.cpp" line="150"/>
+        <location filename="../mainwindow.cpp" line="126"/>
+        <location filename="../mainwindow.cpp" line="140"/>
         <source>Description: %1</source>
         <translation>Përshkrim: %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="137"/>
-        <location filename="../mainwindow.cpp" line="151"/>
+        <location filename="../mainwindow.cpp" line="127"/>
+        <location filename="../mainwindow.cpp" line="141"/>
         <source>Product: %1</source>
         <translation>Produkt: %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="137"/>
-        <location filename="../mainwindow.cpp" line="152"/>
+        <location filename="../mainwindow.cpp" line="127"/>
+        <location filename="../mainwindow.cpp" line="142"/>
         <source>Vendor: %1</source>
         <translation>Tregtues: %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="138"/>
-        <location filename="../mainwindow.cpp" line="153"/>
+        <location filename="../mainwindow.cpp" line="128"/>
+        <location filename="../mainwindow.cpp" line="143"/>
         <source>Enabled: %1</source>
         <translation>Aktivizuar: %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="206"/>
-        <location filename="../mainwindow.cpp" line="220"/>
-        <location filename="../mainwindow.cpp" line="234"/>
+        <location filename="../mainwindow.cpp" line="196"/>
+        <location filename="../mainwindow.cpp" line="210"/>
+        <location filename="../mainwindow.cpp" line="224"/>
         <source>&amp;Copy</source>
         <translation>&amp;Kopjoje</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="208"/>
-        <location filename="../mainwindow.cpp" line="222"/>
-        <location filename="../mainwindow.cpp" line="236"/>
+        <location filename="../mainwindow.cpp" line="198"/>
+        <location filename="../mainwindow.cpp" line="212"/>
+        <location filename="../mainwindow.cpp" line="226"/>
         <source>Ctrl+C</source>
         <translation>Ctrl+C</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="209"/>
-        <location filename="../mainwindow.cpp" line="223"/>
-        <location filename="../mainwindow.cpp" line="237"/>
+        <location filename="../mainwindow.cpp" line="199"/>
+        <location filename="../mainwindow.cpp" line="213"/>
+        <location filename="../mainwindow.cpp" line="227"/>
         <source>Copy &amp;All</source>
         <translation>Kopjoje &amp;Krejt</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="211"/>
-        <location filename="../mainwindow.cpp" line="225"/>
-        <location filename="../mainwindow.cpp" line="239"/>
+        <location filename="../mainwindow.cpp" line="201"/>
+        <location filename="../mainwindow.cpp" line="215"/>
+        <location filename="../mainwindow.cpp" line="229"/>
         <source>Ctrl+A</source>
         <translation>Ctrl+A</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="264"/>
-        <location filename="../mainwindow.cpp" line="282"/>
+        <location filename="../mainwindow.cpp" line="261"/>
+        <location filename="../mainwindow.cpp" line="278"/>
         <source>Traceroute not installed</source>
         <translation>Traceroute-i s’është i instaluar</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="265"/>
+        <location filename="../mainwindow.cpp" line="262"/>
         <source>Traceroute is not installed, do you want to install it now?</source>
         <translation>Traceroute-i s’është i instaluar, doni të instalohet tani?</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="272"/>
+        <location filename="../mainwindow.cpp" line="268"/>
         <source>Traceroute hasn&apos;t been installed</source>
         <translation>Traceroute-i s’është instaluar</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="273"/>
+        <location filename="../mainwindow.cpp" line="269"/>
         <source>Traceroute cannot be installed. This may mean you are using the LiveCD or you are unable to reach the software repository,</source>
         <translation>Traceroute-i s’mund të instalohet. Kjo mund të dojë të thotë se po përdorni versionin LiveCD, ose s’jeni në gjendje të kapni depon e software-it,</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="283"/>
+        <location filename="../mainwindow.cpp" line="279"/>
         <source>Traceroute is not installed and no Internet connection could be detected so it cannot be installed</source>
         <translation>Traceroute-i s’është instaluar dhe s’u pikas dot lidhje Internet, ndaj s’mund të instalohet</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="290"/>
-        <location filename="../mainwindow.cpp" line="329"/>
+        <location filename="../mainwindow.cpp" line="286"/>
+        <location filename="../mainwindow.cpp" line="331"/>
         <source>No destination host</source>
         <translation>S’ka strehë vendmbërritje</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="290"/>
-        <location filename="../mainwindow.cpp" line="329"/>
+        <location filename="../mainwindow.cpp" line="286"/>
+        <location filename="../mainwindow.cpp" line="331"/>
         <source>Please fill in the destination host field</source>
         <translation>Ju lutemi, plotësoni fushën për strehë vendmbërritje</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="452"/>
+        <location filename="../mainwindow.cpp" line="446"/>
         <source>Loaded Drivers</source>
         <translation>U ngarkuan Përudhës</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="460"/>
+        <location filename="../mainwindow.cpp" line="455"/>
         <source>Unloaded Drivers</source>
         <translation>U shngarkuan Përudhës</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="473"/>
+        <location filename="../mainwindow.cpp" line="469"/>
         <source>Blocked Drivers</source>
         <translation>U bllokuan Përudhës</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="492"/>
+        <location filename="../mainwindow.cpp" line="489"/>
         <source>Blocked Broadcom Drivers</source>
         <translation>U bllokuan Përudhës Broadcom</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="513"/>
+        <location filename="../mainwindow.cpp" line="511"/>
         <source>Ndiswrapper is not installed</source>
         <translation>Ndiswrapper s’është instaluar</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="525"/>
+        <location filename="../mainwindow.cpp" line="524"/>
         <source>driver installed</source>
         <translation>përudhës i instaluar</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="534"/>
+        <location filename="../mainwindow.cpp" line="533"/>
         <source> and in use by </source>
         <translation> dhe në përdorim nga </translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="541"/>
+        <location filename="../mainwindow.cpp" line="540"/>
         <source>. Alternate driver: </source>
         <translation>. Përudhës alternativ: </translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="612"/>
+        <location filename="../mainwindow.cpp" line="604"/>
         <source>Driver removed from blocklist</source>
         <translation>Përudhësi u hoq nga listë bllokimesh</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="612"/>
+        <location filename="../mainwindow.cpp" line="604"/>
         <source>Driver removed from blocklist.</source>
         <translation>Përudhësi u hoq nga listë bllokimesh.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="618"/>
+        <location filename="../mainwindow.cpp" line="610"/>
         <source>Module blocked</source>
         <translation>Moduli u bllokua</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="778"/>
+        <location filename="../mainwindow.cpp" line="764"/>
         <source>Installation successful</source>
         <translation>Instalim i suksesshëm</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="780"/>
+        <location filename="../mainwindow.cpp" line="766"/>
         <source>Error detected, could not compile ndiswrapper driver.</source>
         <translation>U pikas gabim, s’u përpilua dot përudhës ndiswrapper.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="783"/>
+        <location filename="../mainwindow.cpp" line="769"/>
         <source>Error detected, could not install ndiswrapper.</source>
         <translation>U pikas gabim, s’u instalua dot ndiswrapper.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="795"/>
+        <location filename="../mainwindow.cpp" line="781"/>
         <source>Error encountered while removing Ndiswrapper</source>
         <translation>U has një gabim teksa hiqej Ndiswrapper</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="842"/>
+        <location filename="../mainwindow.cpp" line="831"/>
         <source>Unblock Driver</source>
         <translation>Zhbllokoje Përudhësin</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="874"/>
+        <location filename="../mainwindow.cpp" line="863"/>
         <source>enabled</source>
         <translation>aktivizuar</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="877"/>
+        <location filename="../mainwindow.cpp" line="866"/>
         <source>disabled</source>
         <translation>çaktivizuar</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="880"/>
+        <location filename="../mainwindow.cpp" line="869"/>
         <source>WiFi hardware switch is off</source>
         <translation>Çelësi fizik WiFi është i mbyllur</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="888"/>
+        <location filename="../mainwindow.cpp" line="876"/>
         <source>Locate the Windows driver you want to add</source>
         <translation>Lokalizoni përudhës Windows që doni të shtoni</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="889"/>
+        <location filename="../mainwindow.cpp" line="877"/>
         <source>Windows installation information file (*.inf)</source>
         <translation>Kartelë Windows hollësish instalimi (*.inf)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="919"/>
+        <location filename="../mainwindow.cpp" line="908"/>
         <source>*.sys file not found</source>
         <translation>S’u gjet kartelë *.sys</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="920"/>
+        <location filename="../mainwindow.cpp" line="909"/>
         <source>The *.sys files must be in the same location as the *.inf file. %1 cannot be found</source>
         <translation>Kartela *.sys duhet të gjendet në të njëjtin vend me kartelën *.inf. S’gjendet dot %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="931"/>
+        <location filename="../mainwindow.cpp" line="920"/>
         <source>sys file reference not found</source>
         <translation>s’u gjet referencë kartele sys</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="932"/>
+        <location filename="../mainwindow.cpp" line="921"/>
         <source>The sys file for the given driver cannot be determined after parsing the inf file</source>
         <translation>Pas përtypjes së kartelës inf, s’përcaktohet dot kartela sys për përudhësin e dhënë</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="946"/>
+        <location filename="../mainwindow.cpp" line="938"/>
         <source>Ndiswrapper driver removed.</source>
         <translation>U hoq përudhës Ndiswrapper.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="954"/>
+        <location filename="../mainwindow.cpp" line="946"/>
         <source>%1 Help</source>
         <translation>Ndihmë për %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="963"/>
+        <location filename="../mainwindow.cpp" line="958"/>
         <source>Could not unlock devices.
 WiFi device(s) might already be unlocked.</source>
         <translation>S’u shkyçën dot pajisje.
 Pajisja(et) WiFi mund të jenë tashmë të shkyçura.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="965"/>
+        <location filename="../mainwindow.cpp" line="960"/>
         <source>WiFi devices unlocked.</source>
         <translation>Pajisjet WiFi u shkyçën.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="976"/>
+        <location filename="../mainwindow.cpp" line="975"/>
         <source>About %1</source>
         <translation>Mbi %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="977"/>
+        <location filename="../mainwindow.cpp" line="976"/>
         <source>Version: </source>
         <translation>Version: </translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="979"/>
+        <location filename="../mainwindow.cpp" line="978"/>
         <source>Program for troubleshooting and configuring network for MX Linux</source>
         <translation>Program për diagnostikim dhe formësim rrjeti për MX Linux</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="981"/>
+        <location filename="../mainwindow.cpp" line="980"/>
         <source>Copyright (c) MEPIS LLC and MX Linux</source>
         <translation>Të drejta kopjimi (c) MEPIS LLC dhe MX Linux</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="982"/>
+        <location filename="../mainwindow.cpp" line="981"/>
         <source>%1 License</source>
         <translation>Licencë %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1001"/>
+        <location filename="../mainwindow.cpp" line="1007"/>
         <source>Driver loaded successfully</source>
         <translation>Përudhësi u ngarkua me sukses</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1016"/>
+        <location filename="../mainwindow.cpp" line="1022"/>
         <source>Driver unloaded successfully</source>
         <translation>Përudhësi u shngarkua me sukses</translation>
     </message>
@@ -523,43 +523,49 @@ Pajisja(et) WiFi mund të jenë tashmë të shkyçura.</translation>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../about.cpp" line="52"/>
+        <location filename="../about.cpp" line="51"/>
         <source>License</source>
         <translation>Licencë</translation>
     </message>
     <message>
-        <location filename="../about.cpp" line="53"/>
+        <location filename="../about.cpp" line="52"/>
         <location filename="../about.cpp" line="62"/>
         <source>Changelog</source>
         <translation>Regjistër ndryshimesh</translation>
     </message>
     <message>
-        <location filename="../about.cpp" line="54"/>
+        <location filename="../about.cpp" line="53"/>
         <source>Cancel</source>
         <translation>Anuloje</translation>
     </message>
     <message>
-        <location filename="../about.cpp" line="74"/>
+        <location filename="../about.cpp" line="75"/>
         <source>&amp;Close</source>
         <translation>&amp;Mbylle</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="64"/>
+        <location filename="../main.cpp" line="71"/>
+        <location filename="../main.cpp" line="79"/>
         <source>Error</source>
         <translation>Gabim</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="65"/>
+        <location filename="../main.cpp" line="72"/>
         <source>You seem to be logged in as root, please log out and log in as normal user to use this program.</source>
         <translation>Duket të jeni futur si rrënjë, ju lutemi, që të përdorni këtë program, dilni nga llogaria dhe hyni si përdorues i zakonshëm.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="635"/>
+        <location filename="../main.cpp" line="80"/>
+        <source>You must run this program with admin access.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="625"/>
         <source>Could not load </source>
         <translation>S’u ngarkua dot </translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="659"/>
+        <location filename="../mainwindow.cpp" line="650"/>
         <source>Could not unload </source>
         <translation>S’u shngarkua dot </translation>
     </message>

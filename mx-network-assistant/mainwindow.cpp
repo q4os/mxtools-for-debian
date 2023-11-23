@@ -28,8 +28,10 @@
 #include <QJsonObject>
 #include <QMenu>
 #include <QScreen>
+#include <QTemporaryFile>
 
 #include "version.h"
+
 #include <about.h>
 #include <unistd.h>
 
@@ -50,7 +52,6 @@ MainWindow::MainWindow(QWidget *parent)
 
     pingProc = new QProcess(this);
     traceProc = new QProcess(this);
-    installProc = new QProcess(this);
 
     installOutputEdit = new QTextEdit();
 
@@ -70,14 +71,7 @@ MainWindow::MainWindow(QWidget *parent)
         pushDisable->setEnabled(hwList->currentItem()->data(Col::Enabled, Qt::UserRole).toBool());
     });
 
-    tabWidget->setTabIcon(Tab::Status,
-                          QIcon::fromTheme(QStringLiteral("emblem-documents"), QIcon(":/icons/emblem-documents.svg")));
-}
-
-bool MainWindow::replaceStringInFile(const QString &oldtext, const QString &newtext, const QString &filepath)
-{
-    const QString expr = QStringLiteral("s/%1/%2/g'").arg(oldtext, newtext);
-    return (QProcess::execute(QStringLiteral("sed"), {QStringLiteral("-i"), expr, filepath}) == 0);
+    tabWidget->setTabIcon(Tab::Status, QIcon::fromTheme("emblem-documents", QIcon(":/icons/emblem-documents.svg")));
 }
 
 void MainWindow::refresh()
@@ -85,46 +79,42 @@ void MainWindow::refresh()
     hwUnblock->hide();
     groupWifi->hide();
     hwDiagnosePushButton->setEnabled(true);
-    const QString out = cmd.getCmdOut(QStringLiteral("rfkill list 2>&1"));
-    QApplication::processEvents();
-
     switch (tabWidget->currentIndex()) {
     case Tab::Status:
         on_hwDiagnosePushButton_clicked();
-        if (out == QLatin1String("Can't open RFKILL control device: No such file or directory"))
-            hwUnblock->hide();
-        else
-            hwUnblock->show();
+        // const QString out = Cmd().getOut("rfkill list 2>&1"); // need to run as root
+        // hwUnblock->setVisible(out != "Can't open RFKILL control device: No such file or directory");
         labelRouterIP->setText(tr("IP address from router:") + " " + getIPfromRouter());
         labelIP->setText(tr("External IP address:") + " " + getIP());
-        labelInterface->setText(cmd.getCmdOut(QStringLiteral("ip route | grep ^default | grep -Po '(?<=dev )(\\S+)'")));
+        labelInterface->setText(Cmd().getOut("ip route | grep ^default | grep -Po '(?<=dev )(\\S+)'"));
         checkWifiAvailable();
         checkWifiEnabled();
         break;
     case Tab::LinuxDrivers:
         on_linuxDrvDiagnosePushButton_clicked();
-        break;
-        //    case Tab::WindowsDrivers:
-        //        on_windowsDrvDiagnosePushButton_clicked();
-        //        break;
     }
 }
 
 void MainWindow::on_cancelPing_clicked()
 {
-    if (pingProc->state() != QProcess::NotRunning)
+    if (pingProc->state() != QProcess::NotRunning) {
         pingProc->kill();
+    }
     cancelPing->setEnabled(false);
 }
 
 void MainWindow::on_cancelTrace_clicked()
 {
-    if (traceProc->state() != QProcess::NotRunning)
+    if (traceProc->state() != QProcess::NotRunning) {
         traceProc->kill();
+    }
     cancelTrace->setEnabled(false);
 }
 
-void MainWindow::on_clearPingOutput_clicked() { pingOutputEdit->clear(); }
+void MainWindow::on_clearPingOutput_clicked()
+{
+    pingOutputEdit->clear();
+}
 
 void MainWindow::hwListToClipboard()
 {
@@ -169,7 +159,7 @@ void MainWindow::linuxDrvListFullToClipboard()
 {
     if (hwList->topLevelItemCount() > 0) {
         auto *clipboard = QApplication::clipboard();
-        QString elementList = QLatin1String("");
+        QString elementList;
         for (int i = 0; i < linuxDrvList->count(); i++) {
             auto *currentElement = linuxDrvList->item(i);
             elementList += currentElement->text() + "\n";
@@ -191,7 +181,7 @@ void MainWindow::windowsDrvListFullToClipboard()
 {
     if (hwList->topLevelItemCount() > 0) {
         auto *clipboard = QApplication::clipboard();
-        QString elementList = QLatin1String("");
+        QString elementList;
         for (int i = 0; i < windowsDrvList->count(); i++) {
             QListWidgetItem *currentElement = windowsDrvList->item(i);
             elementList += currentElement->text() + "\n";
@@ -242,33 +232,39 @@ void MainWindow::showContextMenuForWindowsDrv(QPoint pos)
     contextMenu.exec(windowsDrvList->mapToGlobal(pos));
 }
 
-void MainWindow::on_clearTraceOutput_clicked() { tracerouteOutputEdit->clear(); }
+void MainWindow::on_clearTraceOutput_clicked()
+{
+    tracerouteOutputEdit->clear();
+}
 
 void MainWindow::writeTraceOutput()
 {
     const auto bytes = traceProc->readAllStandardOutput();
-    const QStringList lines = QString(bytes).split(QStringLiteral("\n"));
-    for (const QString &line : lines)
-        if (!line.isEmpty())
+    const QStringList lines = QString(bytes).split("\n");
+    for (const QString &line : lines) {
+        if (!line.isEmpty()) {
             tracerouteOutputEdit->append(line);
+        }
+    }
 }
 
-void MainWindow::tracerouteFinished() { cancelTrace->setEnabled(false); }
+void MainWindow::tracerouteFinished()
+{
+    cancelTrace->setEnabled(false);
+}
 
 void MainWindow::on_tracerouteButton_clicked()
 {
-    QString statusl = cmd.getCmdOut(QStringLiteral("dpkg -s traceroute | grep ^Status"));
-    if (statusl != QLatin1String("Status: install ok installed")) {
+    if (!Cmd().run("dpkg -s traceroute | grep -q '^Status: install ok installed'")) {
         if (internetConnection) {
             setCursor(QCursor(Qt::WaitCursor));
             int ret = QMessageBox::information(this, tr("Traceroute not installed"),
                                                tr("Traceroute is not installed, do you want to install it now?"),
                                                QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);
             if (ret == QMessageBox::Yes) {
-                QProcess::execute(QStringLiteral("apt-get"), {"install", "-qq", "traceroute"});
+                cmd.runAsRoot("apt-get install -qq traceroute");
                 setCursor(QCursor(Qt::ArrowCursor));
-                statusl = cmd.getCmdOut(QStringLiteral("dpkg -s traceroute | grep ^Status"));
-                if (statusl != QLatin1String("Status: install ok installed")) {
+                if (!Cmd().run("dpkg -s traceroute | grep -q '^Status: install ok installed'")) {
                     QMessageBox::critical(this, tr("Traceroute hasn't been installed"),
                                           tr("Traceroute cannot be installed. This may mean you are using the LiveCD "
                                              "or you are unable to reach the software repository,"),
@@ -292,12 +288,13 @@ void MainWindow::on_tracerouteButton_clicked()
     } else {
         setCursor(QCursor(Qt::WaitCursor));
 
-        QString program = QStringLiteral("traceroute");
+        QString program = "traceroute";
         QStringList arguments;
         arguments << tracerouteHostEdit->text() << QStringLiteral("-m %1").arg(traceHopsNumber->value());
 
-        if (traceProc->state() != QProcess::NotRunning)
+        if (traceProc->state() != QProcess::NotRunning) {
             traceProc->kill();
+        }
 
         traceProc->start(program, arguments);
         disconnect(traceProc, &QProcess::readyReadStandardOutput, nullptr, nullptr);
@@ -315,13 +312,18 @@ void MainWindow::on_tracerouteButton_clicked()
 void MainWindow::writePingOutput()
 {
     const auto bytes = pingProc->readAllStandardOutput();
-    const QStringList lines = QString(bytes).split(QStringLiteral("\n"));
-    for (const QString &line : lines)
-        if (!line.isEmpty())
+    const QStringList lines = QString(bytes).split("\n");
+    for (const QString &line : lines) {
+        if (!line.isEmpty()) {
             pingOutputEdit->append(line);
+        }
+    }
 }
 
-void MainWindow::pingFinished() { cancelPing->setEnabled(false); }
+void MainWindow::pingFinished()
+{
+    cancelPing->setEnabled(false);
+}
 
 void MainWindow::on_pingButton_clicked()
 {
@@ -330,22 +332,19 @@ void MainWindow::on_pingButton_clicked()
                                  QMessageBox::Ok);
     } else {
         setCursor(QCursor(Qt::WaitCursor));
-        QString program = QStringLiteral("ping");
+        QString program = "ping";
         QStringList arguments;
-        arguments << QStringLiteral("-c %1").arg(pingPacketNumber->value()) << QStringLiteral("-W 5")
-                  << pingHostEdit->text();
+        arguments << QStringLiteral("-c %1").arg(pingPacketNumber->value()) << "-W 5" << pingHostEdit->text();
 
-        if (pingProc->state() != QProcess::NotRunning)
+        if (pingProc->state() != QProcess::NotRunning) {
             pingProc->kill();
+        }
         pingProc->start(program, arguments);
         disconnect(pingProc, &QProcess::readyReadStandardOutput, nullptr, nullptr);
         connect(pingProc, &QProcess::readyReadStandardOutput, this, &MainWindow::writePingOutput);
         disconnect(pingProc, QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished), nullptr, nullptr);
         connect(pingProc, QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished), this,
                 &MainWindow::pingFinished);
-
-        // QStringList vals = getCmdOuts(QString("ping -c 4 -W 5 %1").arg(pingHostEdit->text()));
-        // pingOutputEdit->append(vals.join("\n"));
         clearPingOutput->setEnabled(true);
         cancelPing->setEnabled(true);
         setCursor(QCursor(Qt::ArrowCursor));
@@ -361,32 +360,27 @@ void MainWindow::show()
 void MainWindow::on_hwDiagnosePushButton_clicked()
 {
     hwList->clear();
-    const auto &jsonDoc = QJsonDocument::fromJson(
-        cmd.getCmdOut(QStringLiteral("lshw -disable IDE -disable SCSI -class network -json")).toUtf8());
+    const QString out = Cmd().getOut("LANG=C lshw -disable IDE -disable SCSI -class network -json").trimmed();
+    const auto &jsonDoc = QJsonDocument::fromJson(out.toUtf8());
     const auto &jsonArray = jsonDoc.array();
-    QString desc;
-    QString vendor;
-    QString name;
-    QString version;
-    QString product;
-    QString driver;
     for (const auto &item : jsonArray) {
-        desc = item[QStringLiteral("description")].toString();
-        vendor = item[QStringLiteral("vendor")].toString();
-        name = item[QStringLiteral("logicalname")].toString();
+        QString desc = item[QStringLiteral("description")].toString();
+        QString vendor = item[QStringLiteral("vendor")].toString();
+        QString name = item[QStringLiteral("logicalname")].toString();
         bool isDisabled = item[QStringLiteral("disabled")].toBool();
-        version = item[QStringLiteral("version")].toString();
+        QString version = item[QStringLiteral("version")].toString();
         version = !version.isEmpty() ? " (rev " + version + ")" : QLatin1String("");
-        product = item[QStringLiteral("product")].toString();
+        QString product = item[QStringLiteral("product")].toString();
         const auto obj = item[QStringLiteral("configuration")].toObject();
-        driver = obj.value(QStringLiteral("driver")).toString();
+        QString driver = obj.value(QStringLiteral("driver")).toString();
         QIcon icon;
-        if (desc == QLatin1String("Ethernet interface"))
-            icon = QIcon::fromTheme(QStringLiteral("network-card"));
-        else if (desc == QLatin1String("Network interface"))
+        if (desc == "Ethernet interface") {
+            icon = QIcon::fromTheme(("network-card"));
+        } else if (desc == "Network interface") {
             icon = QIcon::fromTheme(QStringLiteral("network-workgroup"));
-        else
+        } else {
             icon = QIcon::fromTheme(QStringLiteral("network-server-database"));
+        }
         auto *tree_item = new QTreeWidgetItem();
         tree_item->setIcon(
             Col::Enabled,
@@ -402,20 +396,22 @@ void MainWindow::on_hwDiagnosePushButton_clicked()
         tree_item->setText(Col::Driver, driver);
         hwList->addTopLevelItem(tree_item);
     }
-    for (int i = 0; i < hwList->columnCount(); ++i)
+    for (int i = 0; i < hwList->columnCount(); ++i) {
         hwList->resizeColumnToContents(i);
+    }
     checkWifiEnabled();
 }
 
 void MainWindow::on_linuxDrvList_currentRowChanged(int currentRow)
 {
-    if (currentRow != -1 && !linuxDrvList->currentItem()->text().contains(QLatin1String("---------"))) {
+    if (currentRow != -1 && !linuxDrvList->currentItem()->text().contains("---------")) {
         linuxDrvBlockPushButton->setEnabled(true);
         linuxDrvUnload->setEnabled(loadedModules.contains(linuxDrvList->currentItem()->text()));
         linuxDrvLoad->setEnabled(unloadedModules.contains(linuxDrvList->currentItem()->text()));
         if (blockedModules.contains(linuxDrvList->currentItem()->text())
-            && !loadedModules.contains(linuxDrvList->currentItem()->text()))
+            && !loadedModules.contains(linuxDrvList->currentItem()->text())) {
             linuxDrvLoad->setEnabled(true);
+        }
     } else {
         linuxDrvBlockPushButton->setEnabled(false);
         linuxDrvLoad->setEnabled(false);
@@ -428,54 +424,55 @@ void MainWindow::on_linuxDrvDiagnosePushButton_clicked()
 {
     linuxDrvList->clear();
     loadedModules.clear();
-    // QStringList queryResult = getCmdOuts("lsmod | grep -i net");
-    const QStringList loadedKernelModules = cmd.getCmdOut(QStringLiteral("lsmod")).split(QStringLiteral("\n"));
+    const QStringList loadedKernelModules = Cmd().getOut("lsmod").trimmed().split("\n");
     QStringList completeKernelNetModules
-        = cmd.getCmdOut(QStringLiteral("find /lib/modules/$(uname -r)/kernel/drivers/net -name *.ko"))
-              .split(QStringLiteral("\n"));
-    completeKernelNetModules = completeKernelNetModules.replaceInStrings(QStringLiteral(".ko"), QLatin1String(""));
-    completeKernelNetModules
-        = completeKernelNetModules.replaceInStrings(QRegularExpression("[\\w|\\.|-]*/"), QLatin1String(""));
+        = Cmd().getOutAsRoot("find /lib/modules/$(uname -r)/kernel/drivers/net -name *.ko").trimmed().split("\n");
+    completeKernelNetModules = completeKernelNetModules.replaceInStrings(".ko", "");
+    completeKernelNetModules = completeKernelNetModules.replaceInStrings(QRegularExpression("[\\w|\\.|-]*/"), "");
     // Those three kernel modules are in the "misc" section we add them manually
     // To the filter list for convenience
-    completeKernelNetModules << QStringLiteral("ndiswrapper");
-    completeKernelNetModules << QStringLiteral("atl2");
-    completeKernelNetModules << QStringLiteral("wl");
+    completeKernelNetModules << "ndiswrapper"
+                             << "atl2"
+                             << "wl";
     for (const QString &mod : loadedKernelModules) {
-        if (completeKernelNetModules.contains(mod.left(mod.indexOf(' '))))
+        if (completeKernelNetModules.contains(mod.left(mod.indexOf(' ')))) {
             loadedModules.append(mod.left(mod.indexOf(' '))); // add to the QStringList of loadedModule
+        }
     }
 
     for (int i = 0; i < loadedModules.size(); ++i) {
         QString mod = loadedModules.at(i);
-        if (i == 0)
+        if (i == 0) {
             new QListWidgetItem("---------" + tr("Loaded Drivers") + "-------------", linuxDrvList);
+        }
         new QListWidgetItem(mod, linuxDrvList);
     }
 
     // list unloaded modules
     for (int i = 0; i < unloadedModules.size(); ++i) {
         QString mod = unloadedModules.at(i);
-        if (i == 0)
+        if (i == 0) {
             new QListWidgetItem("---------" + tr("Unloaded Drivers") + "-----------", linuxDrvList);
+        }
         auto *unloaded = new QListWidgetItem(mod, linuxDrvList);
         unloaded->setForeground(Qt::blue);
     }
 
-    QFile inputBlockList(QStringLiteral("/etc/modprobe.d/blacklist.conf"));
+    QFile inputBlockList("/etc/modprobe.d/blacklist.conf");
     inputBlockList.open(QFile::ReadOnly | QFile::Text);
 
     QString driver;
     QString s;
     // add blocklisted modules to the list
     while (!inputBlockList.atEnd()) {
-        if (inputBlockList.pos() == 0)
+        if (inputBlockList.pos() == 0) {
             new QListWidgetItem("---------" + tr("Blocked Drivers") + " --------", linuxDrvList);
+        }
         s = inputBlockList.readLine();
         QRegExp expr("^\\s*blacklist\\s*.*");
         if (expr.exactMatch(s)) {
             QString captured = expr.cap(0);
-            captured.remove(QStringLiteral("blacklist"));
+            captured.remove("blacklist");
             driver = captured.trimmed();
             auto *blocklisted = new QListWidgetItem(driver, linuxDrvList);
             blocklisted->setForeground(Qt::red);
@@ -485,16 +482,17 @@ void MainWindow::on_linuxDrvDiagnosePushButton_clicked()
     inputBlockList.close();
 
     // add blocklisted modules from /etc/modprobe.d/broadcom-sta-dkms.conf
-    QFile inputBroadcomBlocklist(QStringLiteral("/etc/modprobe.d/broadcom-sta-dkms.conf"));
+    QFile inputBroadcomBlocklist("/etc/modprobe.d/broadcom-sta-dkms.conf");
     inputBroadcomBlocklist.open(QFile::ReadOnly | QFile::Text);
     while (!inputBroadcomBlocklist.atEnd()) {
-        if (inputBroadcomBlocklist.pos() == 0)
+        if (inputBroadcomBlocklist.pos() == 0) {
             new QListWidgetItem("---------" + tr("Blocked Broadcom Drivers") + "--------", linuxDrvList);
+        }
         s = inputBroadcomBlocklist.readLine();
         QRegExp expr("^\\s*blacklist\\s*.*");
         if (expr.exactMatch(s)) {
             QString captured = expr.cap(0);
-            captured.remove(QStringLiteral("blacklist"));
+            captured.remove("blacklist");
             driver = captured.trimmed();
             auto *bloclisted = new QListWidgetItem(driver, linuxDrvList);
             bloclisted->setForeground(Qt::red);
@@ -508,24 +506,25 @@ void MainWindow::on_linuxDrvDiagnosePushButton_clicked()
 void MainWindow::on_windowsDrvDiagnosePushButton_clicked()
 {
     windowsDrvList->clear();
-    if (!QFile::exists(QStringLiteral("/usr/sbin/ndiswrapper"))) {
+    if (!QFile::exists("/usr/sbin/ndiswrapper")) {
         uninstallNdiswrapper->setVisible(false);
         QMessageBox::warning(this, windowTitle(), tr("Ndiswrapper is not installed"));
         return;
     }
-    QStringList queryResult = cmd.getCmdOut(QStringLiteral("ndiswrapper -l 2>/dev/null")).split(QStringLiteral("\n"));
+    QStringList queryResult = Cmd().getOutAsRoot("ndiswrapper -l 2>/dev/null").split("\n");
 
-    if (queryResult.size() == 1 && queryResult.at(0).isEmpty())
+    if (queryResult.size() == 1 && queryResult.at(0).isEmpty()) {
         return;
+    }
 
     int i = 0;
     while (i < queryResult.size()) {
         const QString &currentElement = queryResult.at(i);
-        QString label = currentElement.left(currentElement.indexOf(QLatin1String(":")));
+        QString label = currentElement.left(currentElement.indexOf(":"));
         label.append(tr("driver installed"));
         // label = currentElement.remove(": ");
         if ((i + 1) < queryResult.size()) {
-            if (!queryResult.at(i + 1).contains(QLatin1String(": driver installed"))) {
+            if (!queryResult.at(i + 1).contains(": driver installed")) {
                 const QString &installInfo = queryResult.at(i + 1);
                 int infoPos = installInfo.indexOf(QRegExp(
                     R"([\d|A|B|C|D|E|F][\d|A|B|C|D|E|F][\d|A|B|C|D|E|F][\d|A|B|C|D|E|F]:[\d|A|B|C|D|E|F][\d|A|B|C|D|E|F][\d|A|B|C|D|E|F][\d|A|B|C|D|E|F])"));
@@ -540,9 +539,9 @@ void MainWindow::on_windowsDrvDiagnosePushButton_clicked()
                         int strLen = installInfo.length();
                         label.append(tr(". Alternate driver: "));
                         QString s = installInfo.right(strLen - infoPos);
-                        s.remove(QStringLiteral(")"));
-                        s.remove(QStringLiteral(" "));
-                        s.remove(QStringLiteral(":"));
+                        s.remove(")");
+                        s.remove(" ");
+                        s.remove(":");
                         label.append(s);
                     }
                 }
@@ -557,20 +556,17 @@ void MainWindow::on_windowsDrvDiagnosePushButton_clicked()
 bool MainWindow::blockModule(const QString &module)
 {
     QFile outputBlockList;
-    if (!broadcomModules.contains(module))
-        outputBlockList.setFileName(QStringLiteral("/etc/modprobe.d/blacklist.conf"));
-    else
-        outputBlockList.setFileName(QStringLiteral("/etc/modprobe.d/broadcom-sta-dkms.conf"));
-
-    if (!outputBlockList.open(QFile::Append | QFile::Text))
-        return false;
-
-    outputBlockList.write(QStringLiteral("blacklist %1\n").arg(module).toUtf8());
-    outputBlockList.close();
-
-    if (removable(module))
-        if (!removeModule(module))
+    if (!broadcomModules.contains(module)) {
+        outputBlockList.setFileName("/etc/modprobe.d/blacklist.conf");
+    } else {
+        outputBlockList.setFileName("/etc/modprobe.d/broadcom-sta-dkms.conf");
+    }
+    Cmd().runAsRoot("echo blacklist " + module + ">>" + outputBlockList.fileName());
+    if (removable(module)) {
+        if (!removeModule(module)) {
             return false;
+        }
+    }
     loadedModules.removeAll(module);
     return true;
 }
@@ -580,35 +576,31 @@ void MainWindow::on_linuxDrvBlockPushButton_clicked()
     if (linuxDrvList->currentRow() != -1) {
         QListWidgetItem *currentDriver = linuxDrvList->currentItem();
         QString driver = currentDriver->text();
-        driver = driver.left(driver.indexOf(QLatin1String(" ")));
+        driver = driver.left(driver.indexOf(" "));
         if (driverBlocklisted) {
-            QFile InputBlockList;
+            QFile inputBlockList;
             QFile outputBlockList;
             if (broadcomModules.contains(driver)) {
-                InputBlockList.setFileName(QStringLiteral("/etc/modprobe.d/broadcom-sta-dkms.conf"));
-                outputBlockList.setFileName(QStringLiteral("/etc/modprobe.d/broadcom-sta-dkms.conf"));
-
+                inputBlockList.setFileName("/etc/modprobe.d/broadcom-sta-dkms.conf");
+                outputBlockList.setFileName("/etc/modprobe.d/broadcom-sta-dkms.conf");
             } else {
-                InputBlockList.setFileName(QStringLiteral("/etc/modprobe.d/blacklist.conf"));
-                outputBlockList.setFileName(QStringLiteral("/etc/modprobe.d/blacklist.conf"));
+                inputBlockList.setFileName("/etc/modprobe.d/blacklist.conf");
+                outputBlockList.setFileName("/etc/modprobe.d/blacklist.conf");
             }
-            if (!InputBlockList.open(QFile::ReadOnly | QFile::Text))
+            if (!inputBlockList.open(QFile::ReadOnly | QFile::Text)) {
                 return;
-
-            QString s;
-            QString outputString(QLatin1String(""));
-            while (!InputBlockList.atEnd()) {
-                s = InputBlockList.readLine();
+            }
+            QString outputString;
+            while (!inputBlockList.atEnd()) {
+                QString s = inputBlockList.readLine();
                 QString expr = QStringLiteral("^\\s*(blacklist)\\s*(%1)\\s*").arg(driver);
-                if (!s.contains(QRegExp(expr)))
+                if (!s.contains(QRegExp(expr))) {
                     outputString += s;
-                outputBlockList.write(s.toUtf8());
+                }
             }
-            InputBlockList.close();
-            if (!outputBlockList.open(QFile::WriteOnly | QFile::Text))
-                return;
-            outputBlockList.write(outputString.toUtf8());
-            outputBlockList.close();
+            inputBlockList.close();
+            Cmd().runAsRoot("echo '" + outputString.trimmed() + "' > " + outputBlockList.fileName());
+
             QMessageBox::information(this, tr("Driver removed from blocklist"), tr("Driver removed from blocklist."));
             loadModule(driver);
             driverBlocklisted = false;
@@ -622,81 +614,84 @@ void MainWindow::on_linuxDrvBlockPushButton_clicked()
     on_linuxDrvDiagnosePushButton_clicked();
 }
 
-// load module
 bool MainWindow::loadModule(const QString &module)
 {
-    QProcess::execute(QStringLiteral("service"), {"network-manager", "stop"});
-    QProcess::execute(QStringLiteral("modprobe"),
-                      {"cfg80211"}); // this has to get loaded and some drivers don't put it back correctly
-    if (QProcess::execute(QStringLiteral("modprobe"), {module}) != 0) {
+    Cmd().runAsRoot("service network-manager stop");
+    Cmd().runAsRoot("modprobe cfg80211"); // this has to get loaded and some drivers don't put it back correctly
+    if (!Cmd().runAsRoot("modprobe " + module)) {
         // run depmod and try to load again
-        QProcess::execute(QStringLiteral("depmod"), {});
-        if (QProcess::execute(QStringLiteral("modprobe"), {module}) != 0) {
+        Cmd().runAsRoot("depmod");
+        if (!Cmd().runAsRoot("modprobe " + module)) {
             QString msg = QObject::tr("Could not load ");
             msg += module;
             QMessageBox::information(this, windowTitle(), msg);
-            QProcess::execute(QStringLiteral("pkill"), {"wpa_supplicant"});
-            QProcess::execute(QStringLiteral("service"), {"network-manager", "start"});
+            Cmd().runAsRoot("pkill wpa_supplicant");
+            Cmd().runAsRoot("service network-manager start");
             return false;
         }
     }
-    if (!loadedModules.contains(module))
+    if (!loadedModules.contains(module)) {
         loadedModules.append(module);
-    QProcess::execute(QStringLiteral("pkill"), {"wpa_supplicant"});
-    QProcess::execute(QStringLiteral("service"), {"network-manager", "start"});
+    }
+    Cmd().runAsRoot("pkill wpa_supplicant");
+    Cmd().runAsRoot("service network-manager start");
     return true;
 }
 
 bool MainWindow::removable(const QString &module)
 {
-    return (QProcess::execute(QStringLiteral("modprobe"), {"-rn", module}) == 0);
+    return (Cmd().runAsRoot("modprobe -rn " + module));
 }
 
 bool MainWindow::removeModule(const QString &module)
 {
-    QProcess::execute(QStringLiteral("service"), {"network-manager", "stop"});
-    if (QProcess::execute(QStringLiteral("modprobe"), {"-r", module}) != 0) {
+    Cmd().runAsRoot("service network-manager stop");
+    if (!Cmd().runAsRoot("modprobe -r " + module)) {
         QString msg = QObject::tr("Could not unload ");
         msg += module;
         QMessageBox::information(this, windowTitle(), msg);
-        QProcess::execute(QStringLiteral("service"), {"network-manager", "start"});
+        Cmd().runAsRoot("service network-manager start");
         return false;
     }
-    QProcess::execute(QStringLiteral("service"), {"network-manager", "start"});
+    Cmd().runAsRoot("service network-manager start");
     return true;
 }
 
 bool MainWindow::removeStart(const QString &module)
 {
     QFile modulesFile("/etc/modules");
-    if (!modulesFile.open(QIODevice::ReadWrite | QIODevice::Text))
+    QTemporaryFile tempFile;
+    tempFile.open();
+    if (!modulesFile.open(QIODevice::ReadOnly | QIODevice::Text)) {
         return false;
+    }
 
-    QString inputString;
     QString outputString;
     QTextStream in(&modulesFile);
     while (!in.atEnd()) {
         QString line = in.readLine();
         const QString expr = QStringLiteral("^\\s*(%1)\\s*").arg(module);
-        if (!line.contains(QRegularExpression(expr)))
+        if (!line.contains(QRegularExpression(expr))) {
             outputString += line + "\n";
+        }
     }
 
-    QTextStream out(&modulesFile);
+    QTextStream out(&tempFile);
     out << outputString;
     modulesFile.close();
+    tempFile.close();
+    Cmd().runAsRoot("mv " + tempFile.fileName() + " " + modulesFile.fileName());
+    Cmd().runAsRoot("chown root: " + modulesFile.fileName(), true);
+    Cmd().runAsRoot("chmod +r " + modulesFile.fileName(), true);
     return true;
 }
 
 bool MainWindow::installModule(const QString &module)
 {
-    if (!loadModule(module))
+    if (!loadModule(module)) {
         return false;
-    QFile outputModules(QStringLiteral("/etc/modules"));
-    if (!outputModules.open(QFile::Append | QFile::Text))
-        return false;
-    outputModules.write(QStringLiteral("%1\n").arg(module).toUtf8());
-    outputModules.close();
+    }
+    Cmd().runAsRoot("echo " + module + ">>/etc/modules");
     return true;
 }
 
@@ -704,9 +699,7 @@ bool MainWindow::installModule(const QString &module)
 void MainWindow::on_installNdiswrapper_clicked()
 {
     setCursor(QCursor(Qt::BusyCursor));
-    if (installProc->state() != QProcess::NotRunning)
-        installProc->kill();
-    installProc->start(QStringLiteral("apt-get"), {"update"});
+    cmd.runAsRoot("apt-get update");
     installOutputEdit->clear();
     installOutputEdit->show();
     const int height = 600;
@@ -720,21 +713,17 @@ void MainWindow::on_installNdiswrapper_clicked()
     // hide main window
     this->hide();
     installOutputEdit->raise();
-    disconnect(installProc, &QProcess::readyReadStandardOutput, nullptr, nullptr);
-    connect(installProc, &QProcess::readyReadStandardOutput, this, &MainWindow::writeInstallOutput);
-    disconnect(installProc, QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished), nullptr, nullptr);
-    connect(installProc, QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished), this,
-            &MainWindow::aptUpdateFinished);
+    disconnect(&cmd, &QProcess::readyReadStandardOutput, nullptr, nullptr);
+    connect(&cmd, &QProcess::readyReadStandardOutput, this, &MainWindow::writeInstallOutput);
+    disconnect(&cmd, QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished), nullptr, nullptr);
+    connect(&cmd, QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished), this, &MainWindow::aptUpdateFinished);
 }
 
 void MainWindow::on_uninstallNdiswrapper_clicked()
 {
     setCursor(QCursor(Qt::BusyCursor));
-    if (installProc->state() != QProcess::NotRunning)
-        installProc->kill();
-    removeModule(QStringLiteral("ndiswrapper"));
-    installProc->start(QStringLiteral("apt-get"),
-                       {"purge", "-y", "ndiswrapper-utils-1.9", "ndiswrapper-dkms", "ndiswrapper-common"});
+    removeModule("ndiswrapper");
+    cmd.runAsRoot("apt-get purge -y ndiswrapper-utils-1.9 ndiswrapper-dkms ndiswrapper-common");
     installOutputEdit->clear();
     installOutputEdit->show();
     const int height = 600;
@@ -748,23 +737,20 @@ void MainWindow::on_uninstallNdiswrapper_clicked()
     // hide main window
     this->hide();
     installOutputEdit->raise();
-    disconnect(installProc, &QProcess::readyReadStandardOutput, nullptr, nullptr);
-    connect(installProc, &QProcess::readyReadStandardOutput, this, &MainWindow::writeInstallOutput);
-    disconnect(installProc, QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished), nullptr, nullptr);
-    connect(installProc, QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished), this,
+    disconnect(&cmd, &QProcess::readyReadStandardOutput, nullptr, nullptr);
+    connect(&cmd, &QProcess::readyReadStandardOutput, this, &MainWindow::writeInstallOutput);
+    disconnect(&cmd, QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished), nullptr, nullptr);
+    connect(&cmd, QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished), this,
             &MainWindow::uninstallNdisFinished);
 }
 
 void MainWindow::aptUpdateFinished()
 {
-    if (installProc->state() != QProcess::NotRunning)
-        installProc->kill();
-    installProc->start(QStringLiteral("apt-get"), {"install", "-y", "ndiswrapper-utils-1.9", "ndiswrapper-dkms"});
-    disconnect(installProc, &QProcess::readyReadStandardOutput, nullptr, nullptr);
-    connect(installProc, &QProcess::readyReadStandardOutput, this, &MainWindow::writeInstallOutput);
-    disconnect(installProc, QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished), nullptr, nullptr);
-    connect(installProc, QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished), this,
-            &MainWindow::installFinished);
+    cmd.runAsRoot("apt-get install -y ndiswrapper-utils-1.9 ndiswrapper-dkms");
+    disconnect(&cmd, &QProcess::readyReadStandardOutput, nullptr, nullptr);
+    connect(&cmd, &QProcess::readyReadStandardOutput, this, &MainWindow::writeInstallOutput);
+    disconnect(&cmd, QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished), nullptr, nullptr);
+    connect(&cmd, QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished), this, &MainWindow::installFinished);
 }
 
 void MainWindow::installFinished(int errorCode)
@@ -773,7 +759,7 @@ void MainWindow::installFinished(int errorCode)
     this->show();
     setCursor(QCursor(Qt::ArrowCursor));
     if (errorCode == 0) {
-        if (installModule(QStringLiteral("ndiswrapper"))) {
+        if (installModule("ndiswrapper")) {
             uninstallNdiswrapper->setVisible(true);
             QMessageBox::information(this, windowTitle(), tr("Installation successful"));
         } else {
@@ -789,28 +775,31 @@ void MainWindow::uninstallNdisFinished(int errorCode)
     installOutputEdit->close();
     this->show();
     setCursor(QCursor(Qt::ArrowCursor));
-    if (errorCode == 0)
-        removeStart(QStringLiteral("ndiswrapper"));
-    else
+    if (errorCode == 0) {
+        removeStart("ndiswrapper");
+    } else {
         QMessageBox::warning(this, windowTitle(), tr("Error encountered while removing Ndiswrapper"));
+    }
 }
 
 void MainWindow::writeInstallOutput()
 {
-    const auto bytes = installProc->readAllStandardOutput();
-    const QStringList lines = QString(bytes).split(QStringLiteral("\n"));
+    const auto bytes = cmd.readAllStandardOutput();
+    const QStringList lines = QString(bytes).split("\n");
 
-    for (const QString &line : lines)
-        if (!line.isEmpty())
+    for (const QString &line : lines) {
+        if (!line.isEmpty()) {
             installOutputEdit->append(line);
+        }
+    }
 }
 
 void MainWindow::updateDriverStatus()
 {
     driverBlocklisted = false;
-    QFile InputBlockList(QStringLiteral("/etc/modprobe.d/blacklist.conf"));
-    QFile inputBroadcomBlocklist(QStringLiteral("/etc/modprobe.d/broadcom-sta-dkms.conf"));
-    InputBlockList.open(QFile::ReadOnly | QFile::Text);
+    QFile inputBlockList("/etc/modprobe.d/blacklist.conf");
+    QFile inputBroadcomBlocklist("/etc/modprobe.d/broadcom-sta-dkms.conf");
+    inputBlockList.open(QFile::ReadOnly | QFile::Text);
     inputBroadcomBlocklist.open(QFile::ReadOnly | QFile::Text);
 
     QString driver;
@@ -818,12 +807,12 @@ void MainWindow::updateDriverStatus()
     if (linuxDrvList->currentRow() != -1) {
         QListWidgetItem *currentDriver = linuxDrvList->currentItem();
         driver = currentDriver->text();
-        driver = driver.left(driver.indexOf(QLatin1String(" ")));
+        driver = driver.left(driver.indexOf(" "));
     }
 
     QString s;
-    while (!InputBlockList.atEnd()) {
-        s = InputBlockList.readLine();
+    while (!inputBlockList.atEnd()) {
+        s = inputBlockList.readLine();
         QString expr = QStringLiteral("^\\s*(blacklist)\\s*(%1)\\s*").arg(driver);
         if (s.contains(QRegularExpression(expr))) {
             driverBlocklisted = true;
@@ -840,17 +829,17 @@ void MainWindow::updateDriverStatus()
     }
     if (driverBlocklisted) {
         linuxDrvBlockPushButton->setText(tr("Unblock Driver"));
-        linuxDrvBlockPushButton->setIcon(QIcon::fromTheme(QStringLiteral("object-unlocked")));
+        linuxDrvBlockPushButton->setIcon(QIcon::fromTheme("object-unlocked"));
     } else {
         linuxDrvBlockPushButton->setText(tr("Block Driver"));
-        linuxDrvBlockPushButton->setIcon(QIcon::fromTheme(QStringLiteral("object-locked")));
+        linuxDrvBlockPushButton->setIcon(QIcon::fromTheme("object-locked"));
     }
-    InputBlockList.close();
+    inputBlockList.close();
 }
 
 bool MainWindow::checkSysFileExists(const QDir &searchPath, const QString &fileName, Qt::CaseSensitivity cs)
 {
-    const QStringList fileList = searchPath.entryList(QStringList() << QStringLiteral("*.SYS"));
+    const QStringList fileList = searchPath.entryList({"*.SYS"});
     const auto it = std::find_if(fileList.cbegin(), fileList.cend(),
                                  [&](const QString &file) { return file.contains(fileName, cs); });
     return it != fileList.cend();
@@ -858,7 +847,7 @@ bool MainWindow::checkSysFileExists(const QDir &searchPath, const QString &fileN
 
 bool MainWindow::checkWifiAvailable()
 {
-    if (cmd.run(QStringLiteral("lspci | grep -Ei 'wireless|wifi' || lspci | grep -Ei 'wireless|wifi'"))) {
+    if (Cmd().run("lspci | grep -Ei 'wireless|wifi'")) {
         groupWifi->show();
         return true;
     } else {
@@ -870,10 +859,10 @@ bool MainWindow::checkWifiAvailable()
 bool MainWindow::checkWifiEnabled()
 {
     hwUnblock->hide();
-    if (cmd.getCmdOut(QStringLiteral("nmcli -t --fields WIFI r")) == QLatin1String("enabled")) {
+    if (Cmd().getOut("nmcli -t --fields WIFI r").trimmed() == "enabled") {
         labelWifi->setText(tr("enabled"));
         return true;
-    } else if (cmd.getCmdOut(QStringLiteral("nmcli -t --fields WIFI-HW r")) == QLatin1String("enabled")) {
+    } else if (Cmd().getOut("nmcli -t --fields WIFI-HW r").trimmed() == "enabled") {
         labelWifi->setText(tr("disabled"));
         hwUnblock->show();
     } else {
@@ -884,9 +873,8 @@ bool MainWindow::checkWifiEnabled()
 
 void MainWindow::on_windowsDrvAddPushButton_clicked()
 {
-    QString infFileName
-        = QFileDialog::getOpenFileName(this, tr("Locate the Windows driver you want to add"), QStringLiteral("/home"),
-                                       tr("Windows installation information file (*.inf)"));
+    QString infFileName = QFileDialog::getOpenFileName(this, tr("Locate the Windows driver you want to add"), "/home",
+                                                       tr("Windows installation information file (*.inf)"));
     if (!infFileName.isEmpty()) {
         // Search in the inf file the name of the .sys file
         QFile infFile(infFileName);
@@ -900,15 +888,16 @@ void MainWindow::on_windowsDrvAddPushButton_clicked()
         sysDir.cdUp();
         while ((!infFile.atEnd())) {
             s = infFile.readLine();
-            if (s.contains(QLatin1String("ServiceBinary"), Qt::CaseInsensitive)) {
+            if (s.contains("ServiceBinary", Qt::CaseInsensitive)) {
                 s = s.right(s.length() - s.lastIndexOf('\\'));
                 s = s.remove('\\');
                 s = s.remove('\n');
                 found = true;
-                if (this->checkSysFileExists(sysDir, s, Qt::CaseInsensitive))
+                if (this->checkSysFileExists(sysDir, s, Qt::CaseInsensitive)) {
                     exist = true;
-                else
+                } else {
                     foundSysFiles << s;
+                }
             }
         }
         infFile.close();
@@ -916,33 +905,36 @@ void MainWindow::on_windowsDrvAddPushButton_clicked()
         if (found) {
             if (!exist) {
                 QMessageBox::warning(
-                    this, QString(tr("*.sys file not found")),
+                    this, tr("*.sys file not found"),
                     tr("The *.sys files must be in the same location as the *.inf file. %1 cannot be found")
-                        .arg(foundSysFiles.join(QStringLiteral(", "))));
+                        .arg(foundSysFiles.join(", ")));
             } else {
                 QString cmd_str = QStringLiteral("ndiswrapper -i %1").arg(infFileName);
-                cmd.run(cmd_str);
-                cmd_str = QStringLiteral("ndiswrapper -ma");
-                cmd.run(cmd_str);
+                Cmd().runAsRoot(cmd_str);
+                cmd_str = "ndiswrapper -ma";
+                Cmd().runAsRoot(cmd_str);
                 on_windowsDrvDiagnosePushButton_clicked();
             }
         } else {
             QMessageBox::critical(
-                this, QString(tr("sys file reference not found")).arg(infFile.fileName()),
+                this, tr("sys file reference not found"),
                 tr("The sys file for the given driver cannot be determined after parsing the inf file"));
         }
     }
 }
 
-void MainWindow::on_windowsDrvList_currentRowChanged(int row) { windowsDrvRemovePushButton->setEnabled(row != -1); }
+void MainWindow::on_windowsDrvList_currentRowChanged(int row)
+{
+    windowsDrvRemovePushButton->setEnabled(row != -1);
+}
 
 void MainWindow::on_windowsDrvRemovePushButton_clicked()
 {
     if (windowsDrvList->currentRow() != -1) {
         QListWidgetItem *currentDriver = windowsDrvList->currentItem();
         QString driver = currentDriver->text();
-        QString cmd_str = QStringLiteral("ndiswrapper -r %1").arg(driver.left(driver.indexOf(QLatin1String(" "))));
-        cmd.run(cmd_str);
+        QString cmd_str = QStringLiteral("ndiswrapper -r %1").arg(driver.left(driver.indexOf(" ")));
+        Cmd().runAsRoot(cmd_str);
         QMessageBox::information(this, windowTitle(), tr("Ndiswrapper driver removed."));
         on_windowsDrvDiagnosePushButton_clicked();
     }
@@ -950,24 +942,31 @@ void MainWindow::on_windowsDrvRemovePushButton_clicked()
 
 void MainWindow::on_generalHelpPushButton_clicked()
 {
-    const QString url = QStringLiteral("/usr/share/doc/mx-network-assistant/mx-network-assistant.html");
+    const QString url {"/usr/share/doc/mx-network-assistant/mx-network-assistant.html"};
     displayDoc(url, tr("%1 Help").arg(this->windowTitle()));
 }
 
-void MainWindow::on_tabWidget_currentChanged() { refresh(); }
+void MainWindow::on_tabWidget_currentChanged()
+{
+    refresh();
+}
 
 void MainWindow::on_hwUnblock_clicked()
 {
-    if (QProcess::execute(QStringLiteral("rfkill"), {"unblock", "wlan", "wifi"}) != 0)
+    if (!Cmd().runAsRoot("rfkill unblock wlan wifi")) {
         QMessageBox::warning(this, windowTitle(),
                              tr("Could not unlock devices.\nWiFi device(s) might already be unlocked."));
-    else
+    } else {
         QMessageBox::information(this, windowTitle(), tr("WiFi devices unlocked."));
+    }
     checkWifiEnabled();
 }
 
 // close but do not apply
-void MainWindow::on_buttonCancel_clicked() { close(); }
+void MainWindow::on_buttonCancel_clicked()
+{
+    close();
+}
 
 void MainWindow::on_buttonAbout_clicked()
 {
@@ -979,15 +978,22 @@ void MainWindow::on_buttonAbout_clicked()
             + tr("Program for troubleshooting and configuring network for MX Linux")
             + R"(</h3></p><p align="center"><a href="http://mxlinux.org">http://mxlinux.org</a><br /></p><p align="center">)"
             + tr("Copyright (c) MEPIS LLC and MX Linux") + "<br /><br /></p>",
-        QStringLiteral("/usr/share/doc/mx-network-assistant/license.html"), tr("%1 License").arg(this->windowTitle()));
+        "/usr/share/doc/mx-network-assistant/license.html", tr("%1 License").arg(this->windowTitle()));
     this->show();
 }
 
-QString MainWindow::getIP() { return cmd.getCmdOut(QStringLiteral("wget -qO - icanhazip.com")); }
+QString MainWindow::getIP()
+{
+    QString ip = Cmd().getOut("wget -qO - icanhazip.com").trimmed();
+    if (!ip.isEmpty()) {
+        internetConnection = true;
+    }
+    return ip;
+}
 
 QString MainWindow::getIPfromRouter()
 {
-    return cmd.getCmdOut(QStringLiteral("ip a | awk '/127.0.0.1/ {next} /inet / {print $2}' | cut -d/ -f1"));
+    return Cmd().getOut("ip a | awk '/127.0.0.1/ {next} /inet / {print $2}' | cut -d/ -f1").trimmed();
 }
 
 void MainWindow::on_linuxDrvLoad_clicked()
@@ -995,7 +1001,7 @@ void MainWindow::on_linuxDrvLoad_clicked()
     if (linuxDrvList->currentRow() != -1) {
         QListWidgetItem *currentDriver = linuxDrvList->currentItem();
         QString driver = currentDriver->text();
-        driver = driver.left(driver.indexOf(QLatin1String(" ")));
+        driver = driver.left(driver.indexOf(" "));
         if (loadModule(driver)) {
             unloadedModules.removeAll(driver);
             QMessageBox::information(this, tr("Driver loaded successfully"), tr("Driver loaded successfully"));
@@ -1009,7 +1015,7 @@ void MainWindow::on_linuxDrvUnload_clicked()
     if (linuxDrvList->currentRow() != -1) {
         QListWidgetItem *currentDriver = linuxDrvList->currentItem();
         QString driver = currentDriver->text();
-        driver = driver.left(driver.indexOf(QLatin1String(" ")));
+        driver = driver.left(driver.indexOf(" "));
         if ((removable(driver)) && !unloadedModules.contains(driver)) {
             if (removeModule(driver)) {
                 unloadedModules.append(driver);
@@ -1025,7 +1031,7 @@ void MainWindow::on_pushEnable_clicked()
     pushEnable->setEnabled(false);
     pushDisable->setEnabled(false);
     hwDiagnosePushButton->setEnabled(false);
-    cmd.run("ip link set " + hwList->currentItem()->text(Col::Interface) + " up");
+    Cmd().runAsRoot("ip link set " + hwList->currentItem()->text(Col::Interface) + " up");
     refresh();
 }
 
@@ -1034,6 +1040,6 @@ void MainWindow::on_pushDisable_clicked()
     pushEnable->setEnabled(false);
     pushDisable->setEnabled(false);
     hwDiagnosePushButton->setEnabled(false);
-    cmd.run("ip link set " + hwList->currentItem()->text(Col::Interface) + " down");
+    Cmd().runAsRoot("ip link set " + hwList->currentItem()->text(Col::Interface) + " down");
     refresh();
 }

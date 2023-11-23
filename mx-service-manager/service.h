@@ -25,20 +25,18 @@
 #include <QObject>
 #include <QString>
 
-#include "cmd.h"
-
 class Service
 {
 public:
     Service() = default;
     explicit Service(QString name, bool running);
+    [[nodiscard]] QString getDescription() const;
+    [[nodiscard]] QString getInfo() const;
     [[nodiscard]] QString getName() const;
-    [[nodiscard]] bool isRunning() const;
     [[nodiscard]] bool isEnabled() const;
-    [[nodiscard]] static QString getInfo(const QString &name);
+    [[nodiscard]] bool isRunning() const;
     [[nodiscard]] static QString getInit();
     [[nodiscard]] static bool isEnabled(const QString &name);
-    static QString getInfoFromFile(const QString &name);
     bool disable();
     bool enable();
     bool start();
@@ -48,9 +46,9 @@ public:
 
 private:
     QString name;
-    Cmd cmd;
     bool running {};
     bool enabled {};
+    static QString getInfoFromFile(const QString &name);
 };
 
 Q_DECLARE_METATYPE(Service *)

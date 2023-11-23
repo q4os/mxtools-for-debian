@@ -4,7 +4,7 @@ Encoding=UTF-8
 Name=MX Date & Time
 # # The desktop entry comment will be shown within the menu.
 Comment=Date & Time Settings
-Exec=mx-datetime-launcher
+Exec=mx-datetime
 Terminal=false
 Type=Application
 Icon=mx-datetime

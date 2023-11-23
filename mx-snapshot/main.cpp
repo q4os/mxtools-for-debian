@@ -38,7 +38,9 @@
 #ifndef CLI_BUILD
 #include "mainwindow.h"
 #endif
+
 #include "version.h"
+
 #include <csignal>
 #include <unistd.h>
 
@@ -77,12 +79,13 @@ int main(int argc, char *argv[])
 #ifndef CLI_BUILD
     parser.addOption({{"c", "cli"}, QObject::tr("Use CLI only")});
 #endif
+    parser.addOption({"cores", QObject::tr("Number of CPU cores to be used."), QObject::tr("number")});
     parser.addOption({{"d", "directory"}, QObject::tr("Output directory"), QObject::tr("path")});
     parser.addOption({{"f", "file"}, QObject::tr("Output filename"), QObject::tr("name")});
     parser.addOption({{"k", "kernel"},
                       QObject::tr("Name a different kernel to use other than the default running kernel, use format "
                                   "returned by 'uname -r'")
-                          + " " + QObject::tr("Or the full path: %1").arg(QStringLiteral("/boot/vmlinuz-x.xx.x...")),
+                          + " " + QObject::tr("Or the full path: %1").arg("/boot/vmlinuz-x.xx.x..."),
                       QObject::tr("version, or path")});
     parser.addOption({{"l", "compression-level"},
                       QObject::tr("Compression level options.") + " "
@@ -97,11 +100,15 @@ int main(int argc, char *argv[])
                  "will be ignored")});
     parser.addOption({{"n", "no-checksums"}, QObject::tr("Don't calculate checksums for resulting ISO file")});
     parser.addOption(
+        {{"o", "override-size"}, QObject::tr("Skip calculating free space to see if the resulting ISO will fit")});
+    parser.addOption(
         {{"p", "preempt"}, QObject::tr("Option to fix issue with calculating checksums on preempt_rt kernels")});
     parser.addOption({{"r", "reset"}, QObject::tr("Resetting accounts (for distribution to others)")});
     parser.addOption({{"s", "checksums"}, QObject::tr("Calculate checksums for resulting ISO file")});
-    parser.addOption(
-        {{"o", "override-size"}, QObject::tr("Skip calculating free space to see if the resulting ISO will fit")});
+    parser.addOption({{"t", "throttle"},
+                      QObject::tr("Throttle the I/O input rate by the given percentage. This can be used to reduce the "
+                                  "I/O and CPU consumption of Mksquashfs."),
+                      QObject::tr("number")});
     parser.addOption({{"w", "workdir"}, QObject::tr("Work directory"), QObject::tr("path")});
     parser.addOption({{"x", "exclude"},
                       QObject::tr("Exclude main folders, valid choices: ")
@@ -111,7 +118,7 @@ int main(int argc, char *argv[])
     parser.addOption({{"z", "compression"},
                       QObject::tr("Compression format, valid choices: ") + "lz4, lzo, gzip, xz, zstd",
                       QObject::tr("format")});
-    parser.addOption({QStringLiteral("shutdown"), QObject::tr("Shutdown computer when done.")});
+    parser.addOption({"shutdown", QObject::tr("Shutdown computer when done.")});
 
     QStringList opts;
     opts.reserve(argc);
@@ -119,8 +126,8 @@ int main(int argc, char *argv[])
     parser.parse(opts);
 
     QStringList allowed_comp {"lz4", "lzo", "gzip", "xz", "zstd"};
-    if (!parser.value(QStringLiteral("compression")).isEmpty()) {
-        if (!allowed_comp.contains(parser.value(QStringLiteral("compression")))) {
+    if (!parser.value("compression").isEmpty()) {
+        if (!allowed_comp.contains(parser.value("compression"))) {
             qDebug() << "Wrong compression format";
             return EXIT_FAILURE;
         }
@@ -135,7 +142,7 @@ int main(int argc, char *argv[])
     }
     QCoreApplication app(argc, argv);
 #else
-    if (parser.isSet(QStringLiteral("cli")) || parser.isSet(QStringLiteral("help"))) {
+    if (parser.isSet("cli") || parser.isSet("help")) {
         QCoreApplication app(argc, argv);
         // root guard
         if (logname == "root") {
@@ -145,6 +152,7 @@ int main(int argc, char *argv[])
         }
 #endif
     QCoreApplication::setApplicationVersion(VERSION);
+    QCoreApplication::setOrganizationName("MX-Linux");
     parser.process(app);
     setTranslation();
     checkSquashfs();
@@ -169,6 +177,7 @@ else
 {
     QApplication app(argc, argv);
     QApplication::setApplicationVersion(VERSION);
+    QApplication::setOrganizationName("MX-Linux");
     QApplication::setApplicationDisplayName(QObject::tr("MX Snapshot"));
     parser.process(app);
     setTranslation();
@@ -182,29 +191,30 @@ else
                 "You seem to be logged in as root, please log out and log in as normal user to use this program."));
         exit(EXIT_FAILURE);
     }
-
-    if (getuid() == 0) {
-        qputenv("HOME", "/root");
-        setLog();
-        qDebug().noquote() << QApplication::applicationName() << QObject::tr("version:")
-                           << QApplication::applicationVersion();
-        if (argc > 1) {
-            qDebug().noquote() << "Args:" << QApplication::arguments();
+    if (getuid() != 0) {
+        if (!QFile::exists("/usr/bin/pkexec") && !QFile::exists("/usr/bin/gksu")) {
+            QMessageBox::critical(nullptr, QObject::tr("Error"),
+                                  QObject::tr("You must run this program with sudo or pkexec."));
+            exit(EXIT_FAILURE);
         }
-        MainWindow w(parser);
-        w.show();
-        auto const exit_code = QApplication::exec();
-        proc.start("grep", {"^" + logname + ":", "/etc/passwd"});
-        proc.waitForFinished();
-        auto const home = QString::fromLatin1(proc.readAllStandardOutput().trimmed()).section(":", 5, 5);
-        auto const file_name = home + "/.config/" + QApplication::applicationName() + "rc";
-        if (QFile::exists(file_name)) {
-            QProcess::execute("chown", {logname + ":", file_name});
-        }
-        return exit_code;
-    } else {
-        QProcess::startDetached(QStringLiteral("/usr/bin/mx-snapshot-launcher"), {});
     }
+    setLog();
+    qDebug().noquote() << QApplication::applicationName() << QObject::tr("version:")
+                       << QApplication::applicationVersion();
+    if (argc > 1) {
+        qDebug().noquote() << "Args:" << QApplication::arguments();
+    }
+    MainWindow w(parser);
+    w.show();
+    auto const exit_code = QApplication::exec();
+    proc.start("grep", {"^" + logname + ":", "/etc/passwd"});
+    proc.waitForFinished();
+    auto const home = QString::fromLatin1(proc.readAllStandardOutput().trimmed()).section(":", 5, 5);
+    auto const file_name = home + "/.config/" + QApplication::applicationName() + "rc";
+    if (QFile::exists(file_name)) {
+        Cmd().runAsRoot("chown " + logname + ": " + file_name);
+    }
+    return exit_code;
 }
 #endif
 }
@@ -213,13 +223,16 @@ else
 void messageHandler(QtMsgType type, const QMessageLogContext &context, const QString &msg)
 {
     QTextStream term_out(stdout);
-    msg.contains(QLatin1String("\r")) ? term_out << msg : term_out << msg << "\n";
 
-    if (msg.startsWith(QLatin1String("\033[2KProcessing"))) {
+    // Avoid saving endless mksquashfs output
+    if (msg.startsWith(QLatin1String("\r")) || msg.startsWith(QLatin1String("\033[2K"))) {
+        term_out << msg;
         return;
     }
+    term_out << msg << "\n";
+
     QTextStream out(&logFile);
-    out << QDateTime::currentDateTime().toString(QStringLiteral("yyyy-MM-dd hh:mm:ss.zzz "));
+    out << QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss.zzz ");
     switch (type) {
     case QtInfoMsg:
         out << QStringLiteral("INF ");
@@ -260,13 +273,12 @@ void setTranslation()
 void checkSquashfs()
 {
     QProcess proc;
-    proc.start(QStringLiteral("uname"), {"-r"});
+    proc.start("uname", {"-r"});
     proc.waitForFinished();
     current_kernel = proc.readAllStandardOutput().trimmed();
 
     if (QFile::exists("/boot/config-" + current_kernel)
-        && QProcess::execute(QStringLiteral("grep"), {"-q", "^CONFIG_SQUASHFS=[ym]", "/boot/config-" + current_kernel})
-               != 0) {
+        && QProcess::execute("grep", {"-q", "^CONFIG_SQUASHFS=[ym]", "/boot/config-" + current_kernel}) != 0) {
 #ifdef CLI_BUILD
         qDebug() << QObject::tr("Current kernel doesn't support Squashfs, cannot continue.");
 #else
@@ -283,13 +295,9 @@ void checkSquashfs()
 
 void setLog()
 {
-    auto const log_name = "/var/log/" + QCoreApplication::applicationName() + ".log";
-    if (QFileInfo::exists(log_name)) {
-        QFile::remove(log_name + ".old");
-        QFile::rename(log_name, log_name + ".old");
-    }
+    auto const log_name = "/tmp/" + QCoreApplication::applicationName() + ".log";
     logFile.setFileName(log_name);
-    logFile.open(QFile::Append | QFile::Text);
+    logFile.open(QIODevice::WriteOnly | QFile::Text);
     qInstallMessageHandler(messageHandler);
 }
 

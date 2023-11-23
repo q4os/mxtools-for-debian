@@ -526,7 +526,7 @@ void MainWindow::on_buttonPanelOrient_clicked() const
 
 void MainWindow::on_buttonPackageInstall_clicked() const
 {
-    QString cmd = QStringLiteral("mxpi-launcher&");
+    QString cmd = QStringLiteral("mx-packageinstaller&");
     if (!PACKAGEINSTALLERCMD.isEmpty()) {
         cmd = PACKAGEINSTALLERCMD;
     }

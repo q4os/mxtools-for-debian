@@ -37,20 +37,17 @@
 
 Settings::Settings(const QCommandLineParser &arg_parser)
 {
-    if (QFileInfo::exists(
-            QStringLiteral("/tmp/installed-to-live/cleanup.conf"))) { // cleanup installed-to-live from other sessions
-        QProcess::execute("installed-to-live", {"cleanup"});
+    if (QFileInfo::exists("/tmp/installed-to-live/cleanup.conf")) { // cleanup installed-to-live from other sessions
+        QString elevate {QFile::exists("/usr/bin/pkexec") ? "/usr/bin/pkexec" : "/usr/bin/gksu"};
+        Cmd().run(elevate + " /usr/lib/" + QCoreApplication::applicationName() + "/snapshot-lib cleanup");
     }
-    shell = new Cmd;
-
     loadConfig(); // load settings from .conf file
     setVariables();
     processArgs(arg_parser);
-    if (arg_parser.isSet(QStringLiteral("month"))) {
+    if (arg_parser.isSet("month")) {
         setMonthlySnapshot(arg_parser);
     }
-    override_size = arg_parser.isSet(QStringLiteral("override-size"));
-    cli_mode = arg_parser.isSet(QStringLiteral("cli"));
+    override_size = arg_parser.isSet("override-size");
     processExclArgs(arg_parser);
 }
 
@@ -63,10 +60,10 @@ bool Settings::checkCompression() const
     if (!QFileInfo::exists("/boot/config-" + kernel)) { // return true if cannot check config file
         return true;
     }
-    return (shell->run("grep ^CONFIG_SQUASHFS_" + compression.toUpper() + "=y /boot/config-" + kernel));
+    return (Cmd().run("grep ^CONFIG_SQUASHFS_" + compression.toUpper() + "=y /boot/config-" + kernel));
 }
 
-// adds or removes exclusion to the exclusion string
+// Adds or removes exclusion to the exclusion string
 void Settings::addRemoveExclusion(bool add, QString exclusion)
 {
     if (exclusion.startsWith(QLatin1String("/"))) {
@@ -89,11 +86,11 @@ void Settings::addRemoveExclusion(bool add, QString exclusion)
 bool Settings::checkSnapshotDir() const
 {
     qDebug() << "+++" << __PRETTY_FUNCTION__ << "+++";
-    if (!QDir().mkpath(snapshot_dir)) {
+    if (!Cmd().runAsRoot("mkdir -p " + snapshot_dir, false)) {
         qDebug() << QObject::tr("Could not create working directory. ") + snapshot_dir;
         return false;
     }
-    shell->run("chown $(logname):$(logname) \"/" + snapshot_dir + "\"", false);
+    Cmd().runAsRoot("chown $(logname): \"" + snapshot_dir + "\"");
     return true;
 }
 
@@ -105,12 +102,14 @@ bool Settings::checkTempDir()
         tempdir_parent = snapshot_dir;
         if (!isOnSupportedPart(
                 snapshot_dir)) { // if not saving snapshot on a supported partition, put working dir in /tmp or /home
-            tempdir_parent = largerFreeSpace(QStringLiteral("/tmp"), QStringLiteral("/home"));
+            tempdir_parent = largerFreeSpace("/tmp", "/home");
         } else {
-            tempdir_parent = largerFreeSpace(QStringLiteral("/tmp"), QStringLiteral("/home"), snapshot_dir);
+            tempdir_parent = largerFreeSpace("/tmp", "/home", snapshot_dir);
         }
     }
-
+    if (tempdir_parent == "/home") { // replace /home with user home path
+        tempdir_parent = "/home/" + Cmd().getOut("logname", true).trimmed();
+    }
     tmpdir.reset(new QTemporaryDir(tempdir_parent + "/mx-snapshot-XXXXXXXX"));
     if (!tmpdir->isValid()) {
         qDebug() << QObject::tr("Could not create temp directory. ") + tmpdir.data()->path();
@@ -131,10 +130,7 @@ QString Settings::getEditor() const
     QProcess proc;
     // if specified editor doesn't exist get the default one
     if (editor.isEmpty() || QStandardPaths::findExecutable(editor, {path}).isEmpty()) {
-        proc.start("xdg-mime", {"query", "default", "text/plain"});
-        proc.waitForFinished();
-        QString default_editor = proc.readAllStandardOutput().trimmed();
-
+        QString default_editor = Cmd().getOut("xdg-mime query default text/plain");
         // find first app with .desktop name that matches default_editors
         desktop_file
             = QStandardPaths::locate(QStandardPaths::ApplicationsLocation, default_editor, QStandardPaths::LocateFile);
@@ -143,69 +139,64 @@ QString Settings::getEditor() const
             QString line;
             while (!file.atEnd()) {
                 line = file.readLine();
-                if (line.contains(QRegularExpression(QStringLiteral("^Exec=")))) {
+                if (line.contains(QRegularExpression("^Exec="))) {
                     break;
                 }
             }
             file.close();
-            editor = line.remove(QRegularExpression(QStringLiteral("^Exec=|%u|%U|%f|%F|%c|%C|-b"))).trimmed();
+            editor = line.remove(QRegularExpression("^Exec=|%u|%U|%f|%F|%c|%C|-b")).trimmed();
         }
         if (editor.isEmpty()) { // use nano as backup editor
             editor = "nano";
         }
     }
-
     bool isEditorThatElevates = QRegularExpression("(kate|kwrite|featherpad)$").match(editor).hasMatch();
-    bool isAtom = QRegularExpression("atom\\.desktop$").match(desktop_file).hasMatch();
+    bool isElectronBased = QRegularExpression("(atom\\.desktop|code\\.desktop)$").match(desktop_file).hasMatch();
     bool isCliEditor = QRegularExpression("nano|vi|vim|nvim|micro|emacs").match(editor).hasMatch();
 
-    QStringList editorCommands {"pkexec"};
-    if (isEditorThatElevates || isAtom) {
-        editorCommands << "--user $(logname)";
+    QString elevate {QFile::exists("/usr/bin/pkexec") ? "/usr/bin/pkexec" : "/usr/bin/gksu"};
+    if (isEditorThatElevates || isElectronBased) {
+        return editor;
+    } else if (isCliEditor) {
+        return "x-terminal-emulator -e " + elevate + " " + editor;
+    } else {
+        return elevate + " env DISPLAY=$DISPLAY XAUTHORITY=$XAUTHORITY " + editor;
     }
-
-    editorCommands << "env DISPLAY=$DISPLAY XAUTHORITY=$XAUTHORITY";
-
-    if (isCliEditor) {
-        editorCommands << "x-terminal-emulator -e";
-    }
-
-    return editorCommands.join(" ") + " " + editor;
 }
 
 // return the size of the snapshot folder
 QString Settings::getSnapshotSize() const
 {
     if (QFileInfo::exists(snapshot_dir)) {
-        QString cmd = QStringLiteral(
-                          "find \"%1\" -maxdepth 1 -type f -name '*.iso' -exec du -shc {} + |tail -1 |awk '{print $1}'")
-                          .arg(snapshot_dir);
-        auto size = shell->getCmdOut(cmd);
+        QString cmd
+            = QString("find \"%1\" -maxdepth 1 -type f -name '*.iso' -exec du -shc {} + |tail -1 |awk '{print $1}'")
+                  .arg(snapshot_dir);
+        auto size = Cmd().getOut(cmd);
         if (!size.isEmpty()) {
             return size;
         }
     }
-    return QStringLiteral("0");
+    return "0";
 }
 
-// return number of snapshots in snapshot_dir
+// Number of snapshots in snapshot_dir
 int Settings::getSnapshotCount() const
 {
     if (QFileInfo::exists(snapshot_dir)) {
-        QFileInfoList list = QDir(snapshot_dir).entryInfoList(QStringList(QStringLiteral("*.iso")), QDir::Files);
+        QFileInfoList list = QDir(snapshot_dir).entryInfoList(QStringList("*.iso"), QDir::Files);
         return list.size();
     }
     return 0;
 }
 
-quint64 Settings::getFreeSpace(const QString &path) const
+quint64 Settings::getFreeSpace(const QString &path)
 {
     bool ok = false;
     quint64 result {};
-    if (shell->getCmdOut("stat --file-system --format=%T \"" + path + "\"").trimmed() == "ramfs") {
-        result = shell->getCmdOut("LC_ALL=C free |awk '/^Mem/ {print $7}'").toULongLong(&ok);
+    if (Cmd().getOut("stat --file-system --format=%T \"" + path + "\"") == "ramfs") {
+        result = Cmd().getOut("LC_ALL=C free |awk '/^Mem/ {print $7}'").toULongLong(&ok);
     } else {
-        result = shell->getCmdOut(QStringLiteral("df -k --output=avail \"%1\" |tail -n1").arg(path)).toULongLong(&ok);
+        result = Cmd().getOut(QString("df -k --output=avail \"%1\" |tail -n1").arg(path)).toULongLong(&ok);
     }
     if (!ok) {
         qDebug() << "Can't calculate free space on" << path;
@@ -219,13 +210,11 @@ QString Settings::getXdgUserDirs(const QString &folder)
 {
     QString result;
     for (const QString &user : qAsConst(users)) {
-        QString dir;
-        bool success = shell->run("runuser " + user + " -c \"xdg-user-dir " + folder + "\"", &dir);
-        if (success) {
-            if (englishDirs.value(folder) == dir.section(QStringLiteral("/"), -1) || dir.trimmed() == "/home/" + user
-                || dir.trimmed() == "/home/" + user + "/"
-                || dir.isEmpty()) { // skip if English name or of return folder is the home folder (if XDG-USER-DIR not
-                                    // defined)
+        QString dir = Cmd().getOutAsRoot("runuser " + user + " -c \"xdg-user-dir " + folder + "\"");
+        if (!dir.isEmpty()) {
+            if (englishDirs.value(folder) == dir.section("/", -1) || dir == "/home/" + user
+                || dir == "/home/" + user + "/") { // skip if English name or of return folder is the home
+                                                   // folder (if XDG-USER-DIR not defined)
                 continue;
             }
             if (dir.startsWith(QLatin1String("/"))) {
@@ -244,16 +233,15 @@ QString Settings::getXdgUserDirs(const QString &folder)
 void Settings::selectKernel()
 {
     qDebug() << "+++" << __PRETTY_FUNCTION__ << "+++";
-    kernel.remove(
-        QRegularExpression(QStringLiteral("^/boot/vmlinuz-"))); // remove path and part of name if passed as arg
+    kernel.remove(QRegularExpression("^/boot/vmlinuz-")); // remove path and part of name if passed as arg
     if (kernel.isEmpty()
         || !QFileInfo::exists("/boot/vmlinuz-" + kernel)) { // if kernel version not passed as arg, or incorrect
         kernel = current_kernel;
         if (!QFileInfo::exists(
                 "/boot/vmlinuz-"
                 + kernel)) { // if current kernel doesn't exist for some reason (e.g. WSL) in /boot pick latest kernel
-            kernel = shell->getCmdOut(QStringLiteral("ls -1 /boot/vmlinuz-* |sort |tail -n1"))
-                         .remove(QRegularExpression(QStringLiteral("^/boot/vmlinuz-")));
+            kernel
+                = Cmd().getOut("ls -1 /boot/vmlinuz-* |sort |tail -n1").remove(QRegularExpression("^/boot/vmlinuz-"));
             if (!QFileInfo::exists("/boot/vmlinuz-" + kernel)) {
                 QString message = QObject::tr("Could not find a usable kernel");
                 if (qApp->metaObject()->className() != QLatin1String("QApplication")) {
@@ -295,7 +283,7 @@ void Settings::setVariables()
     x86 = isi386();
 
     if ( (QFileInfo::exists("/etc/q4os_version")) || (! QFileInfo::exists("/etc/lsb-release")) ) {
-      QString debian_version1 = shell->getCmdOut(QStringLiteral("cat /etc/debian_version | cut -f1 -d'.'"), true);
+      QString debian_version1 = Cmd().getOut(QStringLiteral("cat /etc/debian_version | cut -f1 -d'.'"), true);
       project_name = "Debian";
       distro_version = debian_version1;
       full_distro_name = project_name + "-" + distro_version + "_" + QString(x86 ? QStringLiteral("386") : QStringLiteral("x64"));
@@ -321,35 +309,33 @@ void Settings::setVariables()
     }
 
     if (QFileInfo::exists("/etc/lsb-release")) {
-        project_name = shell->getCmdOut(QStringLiteral("grep -oP '(?<=DISTRIB_ID=).*' /etc/lsb-release"));
+        project_name = Cmd().getOut("grep -oP '(?<=DISTRIB_ID=).*' /etc/lsb-release");
     } else {
-        project_name = shell->getCmdOut("lsb_release -i | cut -f2");
+        project_name = Cmd().getOut("lsb_release -i | cut -f2");
     }
     project_name.replace(QLatin1String("\""), QLatin1String(""));
     if (!distro_version_file.isEmpty()) {
-        distro_version = shell->getCmdOut("cut -f1 -d'_' " + distro_version_file);
+        distro_version = Cmd().getOut("cut -f1 -d'_' " + distro_version_file);
         distro_version.remove(QRegularExpression("^" + project_name + "_|^" + project_name + "-"));
     } else {
-        distro_version = shell->getCmdOut("lsb_release -r | cut -f2");
+        distro_version = Cmd().getOut("lsb_release -r | cut -f2");
     }
     full_distro_name = project_name + "-" + distro_version + "_" + QString(x86 ? "386" : "x64");
-    release_date = QDate::currentDate().toString(QStringLiteral("MMMM dd, yyyy"));
+    release_date = QDate::currentDate().toString("MMMM dd, yyyy");
     if (QFileInfo::exists("/etc/lsb-release")) {
-        codename = shell->getCmdOut(QStringLiteral("grep -oP '(?<=DISTRIB_CODENAME=).*' /etc/lsb-release"));
+        codename = Cmd().getOut("grep -oP '(?<=DISTRIB_CODENAME=).*' /etc/lsb-release");
     } else {
-        codename = shell->getCmdOut("lsb_release -c | cut -f2");
+        codename = Cmd().getOut("lsb_release -c | cut -f2");
     }
     codename.replace(QLatin1String("\""), QLatin1String(""));
     boot_options = readKernelOpts();
 }
 
-// Create the output filename
 QString Settings::getFilename() const
 {
     qDebug() << "+++" << __PRETTY_FUNCTION__ << "+++";
     if (stamp == QLatin1String("datetime")) {
-        return snapshot_basename + "-" + QDateTime::currentDateTime().toString(QStringLiteral("yyyyMMdd_HHmm"))
-               + ".iso";
+        return snapshot_basename + "-" + QDateTime::currentDateTime().toString("yyyyMMdd_HHmm") + ".iso";
     } else {
         QString name;
         QDir dir;
@@ -363,19 +349,18 @@ QString Settings::getFilename() const
     }
 }
 
-quint64 Settings::getLiveRootSpace() const
+quint64 Settings::getLiveRootSpace()
 {
     // rootspaceneeded is the size of the linuxfs file * a compression factor + contents of the rootfs.  conservative
     // but fast factors are same as used in live-remaster
 
     // load some live variables
-    QSettings livesettings(QStringLiteral("/live/config/initrd.out"), QSettings::NativeFormat);
-    QString sqfile_full = livesettings.value(QStringLiteral("SQFILE_FULL"), "/live/boot-dev/antiX/linuxfs").toString();
+    QSettings livesettings("/live/config/initrd.out", QSettings::NativeFormat);
+    QString sqfile_full = livesettings.value("SQFILE_FULL", "/live/boot-dev/antiX/linuxfs").toString();
 
     // get compression factor by reading the linuxfs squasfs file, if available
     QString linuxfs_compression_type
-        = shell->getCmdOut("dd if=" + sqfile_full + " bs=1 skip=20 count=2 status=none 2>/dev/null |od -An -tdI")
-              .trimmed();
+        = Cmd().getOut("dd if=" + sqfile_full + " bs=1 skip=20 count=2 status=none 2>/dev/null |od -An -tdI");
     const quint8 default_factor = 30;
     quint8 c_factor = default_factor;
     // gzip, xz, or lz4
@@ -388,11 +373,9 @@ quint64 Settings::getLiveRootSpace() const
     }
     quint64 rootfs_file_size = 0;
     quint64 linuxfs_file_size
-        = shell->getCmdOut(QStringLiteral("df -k /live/linux --output=used --total |tail -n1")).toULongLong() * 100
-          / c_factor;
-    if (QFileInfo::exists(QStringLiteral("/live/persist-root"))) {
-        rootfs_file_size = shell->getCmdOut(QStringLiteral("df -k /live/persist-root --output=used --total |tail -n1"))
-                               .toULongLong();
+        = Cmd().getOut("df -k /live/linux --output=used --total |tail -n1").toULongLong() * 100 / c_factor;
+    if (QFileInfo::exists("/live/persist-root")) {
+        rootfs_file_size = Cmd().getOut("df -k /live/persist-root --output=used --total |tail -n1").toULongLong();
     }
 
     // add rootfs file size to the calculated linuxfs file size.  probaby conservative, as rootfs will likely have some
@@ -406,21 +389,21 @@ QString Settings::getUsedSpace()
     QString out = "\n- " + QObject::tr("Used space on / (root): ");
     if (bool ok = false; live) {
         root_size = getLiveRootSpace();
-        out += QString::number(root_size / factor, 'f', 2) + QStringLiteral("GiB -- ") + QObject::tr("estimated");
+        out += QString::number(static_cast<double>(root_size) / factor, 'f', 2) + "GiB -- " + QObject::tr("estimated");
     } else {
-        root_size = shell->getCmdOut(QStringLiteral("df -k --output=used / |tail -n1")).toULongLong(&ok);
+        root_size = Cmd().getOut("df -k --output=used / |tail -n1").toULongLong(&ok);
         if (!ok) {
-            return QStringLiteral("Can't calculate free space on root");
+            return "Can't calculate free space on root";
         }
-        out += QString::number(root_size / factor, 'f', 2) + QStringLiteral("GiB");
+        out += QString::number(static_cast<double>(root_size) / factor, 'f', 2) + "GiB";
     }
-    if (bool ok = false; shell->run(QStringLiteral("mountpoint -q /home"))) {
-        home_size = shell->getCmdOut(QStringLiteral("df -k --output=used /home |tail -n1")).toULongLong(&ok);
+    if (bool ok = false; Cmd().run("mountpoint -q /home")) {
+        home_size = Cmd().getOut("df -k --output=used /home |tail -n1").toULongLong(&ok);
         if (!ok) {
-            return QStringLiteral("Can't calculate free space on /home");
+            return "Can't calculate free space on /home";
         }
-        out.append("\n- " + QObject::tr("Used space on /home: ") + QString::number(home_size / factor, 'f', 2)
-                   + QStringLiteral("GiB"));
+        out.append("\n- " + QObject::tr("Used space on /home: ")
+                   + QString::number(static_cast<double>(home_size) / factor, 'f', 2) + "GiB");
     } else {
         home_size = 0; // /home on root
     }
@@ -433,6 +416,36 @@ bool Settings::isi386()
     return (QSysInfo::currentCpuArchitecture() == QLatin1String("i386"));
 }
 
+int Settings::getDebianVerNum()
+{
+    QFile file("/etc/debian_version");
+    QStringList list;
+    if (file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+        QTextStream in(&file);
+        QString line = in.readLine();
+        list = line.split(".");
+        file.close();
+    } else {
+        qCritical() << "Could not open /etc/debian_version:" << file.errorString() << "Assumes Bullseye";
+        return Release::Bullseye;
+    }
+    bool ok = false;
+    int ver = list.at(0).toInt(&ok);
+    if (ok) {
+        return ver;
+    } else {
+        QString verName = list.at(0).split("/").at(0);
+        if (verName == QLatin1String("bullseye")) {
+            return Release::Bullseye;
+        } else if (verName == QLatin1String("bookworm")) {
+            return Release::Bookworm;
+        } else {
+            qCritical() << "Unknown Debian version:" << ver << "Assumes Bullseye";
+            return Release::Bullseye;
+        }
+    }
+}
+
 // Check if running from a live envoronment
 bool Settings::isLive()
 {
@@ -440,23 +453,21 @@ bool Settings::isLive()
 }
 
 // checks if the directory is on a Linux partition
-bool Settings::isOnSupportedPart(const QString &dir) const
+bool Settings::isOnSupportedPart(const QString &dir)
 {
     qDebug() << "+++" << __PRETTY_FUNCTION__ << "+++";
     // Supported partition types (NTFS returns fuseblk)
-    QStringList supported_partitions {QStringLiteral("ext2/ext3"), QStringLiteral("btrfs"), QStringLiteral("jfs"),
-                                      QStringLiteral("reiserfs"),  QStringLiteral("xfs"),   QStringLiteral("fuseblk"),
-                                      QStringLiteral("ramfs"),     QStringLiteral("tmpfs")};
-    QString part_type = shell->getCmdOut("stat --file-system --format=%T \"" + dir + "\"").trimmed();
+    QStringList supported_partitions {"ext2/ext3", "btrfs", "jfs", "reiserfs", "xfs", "fuseblk", "ramfs", "tmpfs"};
+    QString part_type = Cmd().getOut("stat --file-system --format=%T \"" + dir + "\"");
     qDebug() << "detected partition" << part_type << "supported part:" << supported_partitions.contains(part_type);
     return supported_partitions.contains(part_type);
 }
 
 // return the directory that has more free space available
-QString Settings::largerFreeSpace(const QString &dir1, const QString &dir2) const
+QString Settings::largerFreeSpace(const QString &dir1, const QString &dir2)
 {
     qDebug() << "+++" << __PRETTY_FUNCTION__ << "+++";
-    if (shell->getCmdOut("stat -c '%d' " + dir1) == shell->getCmdOut("stat -c '%d' " + dir2)) {
+    if (Cmd().getOut("stat -c '%d' " + dir1) == Cmd().getOut("stat -c '%d' " + dir2)) {
         return dir1;
     }
     quint64 dir1_free = getFreeSpace(dir1);
@@ -465,7 +476,7 @@ QString Settings::largerFreeSpace(const QString &dir1, const QString &dir2) cons
 }
 
 // return the directory that has more free space available
-QString Settings::largerFreeSpace(const QString &dir1, const QString &dir2, const QString &dir3) const
+QString Settings::largerFreeSpace(const QString &dir1, const QString &dir2, const QString &dir3)
 {
     qDebug() << "+++" << __PRETTY_FUNCTION__ << "+++";
     return largerFreeSpace(largerFreeSpace(dir1, dir2), dir3);
@@ -475,7 +486,7 @@ QString Settings::getFreeSpaceStrings(const QString &path)
 {
     constexpr float factor = 1024 * 1024;
     free_space = getFreeSpace(path);
-    QString out = QString::number(free_space / factor, 'f', 2) + "GiB";
+    QString out = QString::number(static_cast<double>(free_space) / factor, 'f', 2) + "GiB";
 
     qDebug().noquote() << QString("- " + QObject::tr("Free space on %1, where snapshot folder is placed: ").arg(path)
                                   + out)
@@ -490,11 +501,10 @@ QString Settings::getFreeSpaceStrings(const QString &path)
     return out;
 }
 
-// return a list of users that have folders in /home
-QStringList Settings::listUsers() const
+// Return a list of users that have folders in /home
+QStringList Settings::listUsers()
 {
-    return shell->getCmdOut(QStringLiteral("lslogins --noheadings -u -o user |grep -vw root"), true)
-        .split(QStringLiteral("\n"));
+    return Cmd().getOut("lslogins --noheadings -u -o user |grep -vw root", true).split("\n");
 }
 
 void Settings::excludeItem(const QString &item)
@@ -534,7 +544,7 @@ void Settings::excludeDesktop(bool exclude)
     if (exclude) {
         exclusions.setFlag(Exclude::Desktop);
     }
-    QString exclusion = "/home/*/Desktop/!(minstall.desktop)" + getXdgUserDirs(QStringLiteral("DESKTOP"));
+    QString exclusion = "/home/*/Desktop/!(minstall.desktop)" + getXdgUserDirs("DESKTOP");
     addRemoveExclusion(exclude, exclusion);
 }
 
@@ -544,8 +554,8 @@ void Settings::excludeDocuments(bool exclude)
     if (exclude) {
         exclusions.setFlag(Exclude::Documents);
     }
-    QString folder = QStringLiteral("home/*/Documents/");
-    QString xdg_name = QStringLiteral("DOCUMENTS");
+    QString folder {"home/*/Documents/"};
+    QString xdg_name {"DOCUMENTS"};
     QString exclusion = folder + "*\" \"" + folder + ".*" + getXdgUserDirs(xdg_name);
     addRemoveExclusion(exclude, exclusion);
 }
@@ -556,8 +566,8 @@ void Settings::excludeDownloads(bool exclude)
     if (exclude) {
         exclusions.setFlag(Exclude::Downloads);
     }
-    QString folder = QStringLiteral("home/*/Downloads/");
-    QString xdg_name = QStringLiteral("DOWNLOAD");
+    QString folder {"home/*/Downloads/"};
+    QString xdg_name {"DOWNLOAD"};
     QString exclusion = folder + "*\" \"" + folder + ".*" + getXdgUserDirs(xdg_name);
     addRemoveExclusion(exclude, exclusion);
 }
@@ -568,8 +578,8 @@ void Settings::excludeMusic(bool exclude)
     if (exclude) {
         exclusions.setFlag(Exclude::Music);
     }
-    QString folder = QStringLiteral("home/*/Music/");
-    QString xdg_name = QStringLiteral("MUSIC");
+    QString folder {"home/*/Music/"};
+    QString xdg_name {"MUSIC"};
     QString exclusion = folder + "*\" \"" + folder + ".*" + getXdgUserDirs(xdg_name);
     addRemoveExclusion(exclude, exclusion);
 }
@@ -591,8 +601,8 @@ void Settings::excludePictures(bool exclude)
     if (exclude) {
         exclusions.setFlag(Exclude::Pictures);
     }
-    QString folder = QStringLiteral("home/*/Pictures/");
-    QString xdg_name = QStringLiteral("PICTURES");
+    QString folder {"home/*/Pictures/"};
+    QString xdg_name {"PICTURES"};
     QString exclusion = folder + "*\" \"" + folder + ".*" + getXdgUserDirs(xdg_name);
     addRemoveExclusion(exclude, exclusion);
 }
@@ -634,8 +644,8 @@ void Settings::excludeVideos(bool exclude)
     if (exclude) {
         exclusions.setFlag(Exclude::Videos);
     }
-    QString folder = QStringLiteral("home/*/Videos/");
-    QString xdg_name = QStringLiteral("VIDEOS");
+    QString folder {"home/*/Videos/"};
+    QString xdg_name {"VIDEOS"};
     QString exclusion = folder + "*\" \"" + folder + ".*" + getXdgUserDirs(xdg_name);
     addRemoveExclusion(exclude, exclusion);
 }
@@ -649,34 +659,48 @@ void Settings::excludeVirtualBox(bool exclude)
     addRemoveExclusion(exclude, QStringLiteral("home/*/VirtualBox VMs"));
 }
 
-// load settings from config file
+// Load settings from config file
 void Settings::loadConfig()
 {
     config_file.setFileName("/etc/" + qApp->applicationName() + ".conf");
-    QSettings settings(config_file.fileName(), QSettings::IniFormat);
+    QSettings settingsSystem(config_file.fileName(), QSettings::IniFormat);
+    QSettings settingsUser;
+
+    // Read all keys from system settings
+    settingsSystem.beginGroup("");
+    QStringList systemKeys = settingsSystem.allKeys();
+    settingsSystem.endGroup();
+
+    // Merge system settings into user settings
+    foreach (const QString &key, systemKeys) {
+        if (!settingsUser.contains(key)) {
+            QVariant value = settingsSystem.value(key);
+            settingsUser.setValue(key, value);
+        }
+    }
 
     session_excludes = QLatin1String("");
-    snapshot_dir = settings.value(QStringLiteral("snapshot_dir"), QStringLiteral("/home/snapshot")).toString();
+    snapshot_dir = settingsUser.value("snapshot_dir", "/home/snapshot").toString();
     if (!snapshot_dir.endsWith(QLatin1String("/snapshot"))) {
-        snapshot_dir
-            += (snapshot_dir.endsWith(QLatin1String("/")) ? QStringLiteral("snapshot") : QStringLiteral("/snapshot"));
+        snapshot_dir += (snapshot_dir.endsWith(QLatin1String("/")) ? "snapshot" : "/snapshot");
     }
     snapshot_excludes.setFileName(
-        settings
-            .value(QStringLiteral("snapshot_excludes"), QStringLiteral("/usr/local/share/excludes/")
-                                                            + qApp->applicationName() + QStringLiteral("-exclude.list"))
+        settingsUser
+            .value("snapshot_excludes", "/usr/local/share/excludes/" + qApp->applicationName() + "-exclude.list")
             .toString());
-    snapshot_basename = settings.value(QStringLiteral("snapshot_basename"), "snapshot").toString();
-    make_md5sum = settings.value(QStringLiteral("make_md5sum"), "no").toString() != QLatin1String("no");
-    make_sha512sum = settings.value(QStringLiteral("make_sha512sum"), "no").toString() != QLatin1String("no");
-    make_isohybrid = settings.value(QStringLiteral("make_isohybrid"), "yes").toString() == QLatin1String("yes");
-    compression = settings.value(QStringLiteral("compression"), "zstd").toString();
-    mksq_opt = settings.value(QStringLiteral("mksq_opt")).toString();
-    edit_boot_menu = settings.value(QStringLiteral("edit_boot_menu"), "no").toString() != QLatin1String("no");
-    gui_editor = settings.value(QStringLiteral("gui_editor")).toString();
-    stamp = settings.value(QStringLiteral("stamp")).toString();
-    force_installer = settings.value(QStringLiteral("force_installer"), "true").toBool();
-    tempdir_parent = settings.value(QStringLiteral("workdir")).toString();
+    snapshot_basename = settingsUser.value("snapshot_basename", "snapshot").toString();
+    make_md5sum = settingsUser.value("make_md5sum", "no").toString() != QLatin1String("no");
+    make_sha512sum = settingsUser.value("make_sha512sum", "no").toString() != QLatin1String("no");
+    make_isohybrid = settingsUser.value("make_isohybrid", "yes").toString() == QLatin1String("yes");
+    compression = settingsUser.value("compression", "zstd").toString();
+    mksq_opt = settingsUser.value("mksq_opt").toString();
+    edit_boot_menu = settingsUser.value("edit_boot_menu", "no").toString() != QLatin1String("no");
+    gui_editor = settingsUser.value("gui_editor").toString();
+    stamp = settingsUser.value("stamp").toString();
+    force_installer = settingsUser.value("force_installer", "true").toBool();
+    tempdir_parent = settingsUser.value("workdir").toString();
+    cores = settingsUser.value("cores", max_cores).toUInt();
+    throttle = settingsUser.value("throttle", 0).toUInt();
     reset_accounts = false;
 }
 
@@ -704,9 +728,9 @@ void Settings::otherExclusions()
     if (reset_accounts) {
         addRemoveExclusion(true, QStringLiteral("/etc/minstall.conf"));
         // exclude /etc/localtime if link and timezone not America/New_York
-        if (shell->run(QStringLiteral("test -L /etc/localtime"))
-            && shell->getCmdOut(QStringLiteral("cat /etc/timezone")) != QLatin1String("America/New_York")) {
-            addRemoveExclusion(true, QStringLiteral("/etc/localtime"));
+        if (Cmd().run("test -L /etc/localtime")
+            && Cmd().getOut("cat /etc/timezone") != QLatin1String("America/New_York")) {
+            addRemoveExclusion(true, "/etc/localtime");
         }
     }
     excludeSwapFile();
@@ -714,18 +738,15 @@ void Settings::otherExclusions()
 
 void Settings::processArgs(const QCommandLineParser &arg_parser)
 {
-    shutdown = arg_parser.isSet(QStringLiteral("shutdown"));
-    kernel = arg_parser.value(QStringLiteral("kernel"));
-    preempt = arg_parser.isSet(QStringLiteral("preempt"));
-    if (!arg_parser.value(QStringLiteral("directory")).isEmpty()
-        && QFileInfo::exists(arg_parser.value(QStringLiteral("directory")))) {
-        snapshot_dir = arg_parser.value(QStringLiteral("directory"))
-                       + (snapshot_dir.endsWith(QLatin1String("/")) ? "snapshot" : "/snapshot");
+    shutdown = arg_parser.isSet("shutdown");
+    kernel = arg_parser.value("kernel");
+    preempt = arg_parser.isSet("preempt");
+    if (!arg_parser.value("directory").isEmpty() && QFileInfo::exists(arg_parser.value("directory"))) {
+        snapshot_dir = arg_parser.value("directory") + (snapshot_dir.endsWith("/") ? "snapshot" : "/snapshot");
     }
 
-    if (!arg_parser.value(QStringLiteral("workdir")).isEmpty()
-        && QFileInfo::exists(arg_parser.value(QStringLiteral("workdir")))) {
-        tempdir_parent = arg_parser.value(QStringLiteral("workdir"));
+    if (!arg_parser.value("workdir").isEmpty() && QFileInfo::exists(arg_parser.value("workdir"))) {
+        tempdir_parent = arg_parser.value("workdir");
     }
 
     if (!arg_parser.value(QStringLiteral("file")).isEmpty()) {
@@ -750,36 +771,54 @@ void Settings::processArgs(const QCommandLineParser &arg_parser)
 #endif
         exit(EXIT_FAILURE);
     }
-    reset_accounts = arg_parser.isSet(QStringLiteral("reset"));
+    reset_accounts = arg_parser.isSet("reset");
     if (reset_accounts) {
         excludeAll();
     }
-    if (arg_parser.isSet(QStringLiteral("month"))) {
+    if (arg_parser.isSet("month")) {
         reset_accounts = true;
     }
-    if (arg_parser.isSet(QStringLiteral("checksums"))) {
+    if (arg_parser.isSet("checksums")) {
         make_sha512sum = make_md5sum = true;
     }
-    if (arg_parser.isSet(QStringLiteral("month"))) {
+    if (arg_parser.isSet("month")) {
         make_sha512sum = true;
         make_md5sum = false;
     }
-    if (arg_parser.isSet(QStringLiteral("no-checksums"))) {
+    if (arg_parser.isSet("no-checksums")) {
         make_sha512sum = make_md5sum = false;
     }
-    if (!arg_parser.value(QStringLiteral("compression")).isEmpty()) {
-        compression = arg_parser.value(QStringLiteral("compression"));
+    if (!arg_parser.value("compression").isEmpty()) {
+        compression = arg_parser.value("compression");
     }
-    if (!arg_parser.value(QStringLiteral("compression-level")).isEmpty()) {
-        mksq_opt = arg_parser.value(QStringLiteral("compression-level"));
+    if (!arg_parser.value("compression-level").isEmpty()) {
+        mksq_opt = arg_parser.value("compression-level");
+    }
+    if (!arg_parser.value("cores").isEmpty()) {
+        bool ok {false};
+        uint val = arg_parser.value("cores").toUInt(&ok);
+        if (!ok || val == 0 || val > max_cores) {
+            qDebug() << "Invalid number of cores argument, will use the default:" << cores;
+        } else {
+            cores = val;
+        }
+    }
+    if (!arg_parser.value("throttle").isEmpty()) {
+        bool ok {false};
+        uint val = arg_parser.value("throttle").toUInt(&ok);
+        if (!ok || val > 99) {
+            qDebug() << "Invalid argument for throttle, will use the default:" << throttle;
+        } else {
+            throttle = val;
+        }
     }
     selectKernel();
 }
 
 void Settings::processExclArgs(const QCommandLineParser &arg_parser)
 {
-    if (!arg_parser.values(QStringLiteral("exclude")).isEmpty()) {
-        QStringList options = arg_parser.values(QStringLiteral("exclude"));
+    if (!arg_parser.values("exclude").isEmpty()) {
+        QStringList options = arg_parser.values("exclude");
         QStringList valid_options {"Desktop",  "Documents", "Downloads", "Music",     "Networks",
                                    "Pictures", "Steam",     "Videos",    "VirtualBox"};
         for (const QString &option : options) {
@@ -791,11 +830,10 @@ void Settings::processExclArgs(const QCommandLineParser &arg_parser)
 }
 
 // Use script to return useful kernel options
-QString Settings::readKernelOpts() const
+QString Settings::readKernelOpts()
 {
-
-    return shell->getCmdOut((QString("/usr/share/%1/scripts/snapshot-bootparameter.sh | tr '\n' ' '")
-                                 .arg(QCoreApplication::applicationName())));
+    return Cmd().getOut((QString("/usr/share/%1/scripts/snapshot-bootparameter.sh | tr '\n' ' '")
+                             .arg(QCoreApplication::applicationName())));
 }
 
 void Settings::setMonthlySnapshot(const QCommandLineParser &arg_parser)
@@ -823,8 +861,8 @@ void Settings::setMonthlySnapshot(const QCommandLineParser &arg_parser)
 #endif
         exit(EXIT_FAILURE);
     }
-    if (arg_parser.value(QStringLiteral("compression")).isEmpty()) {
-        compression = QStringLiteral("zstd");
+    if (arg_parser.value("compression").isEmpty()) {
+        compression = "zstd";
     }
     reset_accounts = true;
     boot_options.remove("toram");

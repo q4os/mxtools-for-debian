@@ -5,6 +5,7 @@
 # 
 # Translators:
 # Bernd Brunner, 2022
+# aer, 2023
 # 
 #, fuzzy
 msgid ""
@@ -13,8 +14,8 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-12-09 23:41-0500\n"
 "PO-Revision-Date: 2022-12-10 04:42+0000\n"
-"Last-Translator: Bernd Brunner, 2022\n"
-"Language-Team: German (https://www.transifex.com/anticapitalista/teams/10162/de/)\n"
+"Last-Translator: aer, 2023\n"
+"Language-Team: German (https://app.transifex.com/anticapitalista/teams/10162/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -29,4 +30,4 @@ msgstr "Conky Umschalter "
 #. # The desktop entry comment will be shown within the menu.
 #: desktop-in/conky-toggle.desktop.in:8
 msgid "Desktop system monitor on or off"
-msgstr "Desktop Sytem Monitor an oder aus"
+msgstr "Conky-Systemmonitor an- oder ausschalten"

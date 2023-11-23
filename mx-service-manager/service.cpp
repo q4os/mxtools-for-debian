@@ -24,8 +24,11 @@
 
 #include <QDebug>
 #include <QFile>
+#include <QFileInfo>
+#include <QProcess>
+#include <QRegularExpression>
 
-#include <utility>
+extern const QString init = Service::getInit();
 
 Service::Service(QString name, bool running)
     : name {std::move(name)},
@@ -38,11 +41,14 @@ QString Service::getName() const
     return name;
 }
 
-QString Service::getInfo(const QString &name)
+QString Service::getInfo() const
 {
-    Cmd cmd;
-    if (getInit() == "systemd") {
-        return cmd.getCmdOut("service " + name + " status");
+    if (init == "systemd") {
+        QString info = Cmd().getOutAsRoot("/sbin/service " + name + " status").trimmed();
+        if (!isEnabled()) {
+            info.append("\nDescription:" + getDescription());
+        }
+        return info;
     } else {
         return getInfoFromFile(name);
     }
@@ -50,24 +56,67 @@ QString Service::getInfo(const QString &name)
 
 bool Service::isEnabled(const QString &name)
 {
-    Cmd cmd;
-    if (getInit() == "systemd") {
-        return cmd.run("systemctl -q is-enabled " + name, true);
+    if (init == "systemd") {
+        return (QProcess::execute("systemctl", {"-q", "is-enabled", name}) == 0);
     } else {
-        return cmd.run("[ -e /etc/rc5.d/S*" + name + " ] || [ -e /etc/rcS.d/S*" + name + " ]", true);
+        return (QProcess::execute("/bin/bash",
+                                  {"-c", R"([[ -e /etc/rc5.d/S*"$file_name" || -e /etc/rcS.d/S*"$file_name" ]])"})
+                == 0);
     }
     return false;
 }
 
 QString Service::getInit()
 {
-    Cmd cmd;
-    return cmd.getCmdOut("cat /proc/1/comm", true).trimmed();
+    QProcess proc;
+    proc.start("cat", {"/proc/1/comm"});
+    proc.waitForFinished();
+    return proc.readAll().trimmed();
 }
 
 bool Service::isRunning() const
 {
     return running;
+}
+
+QString Service::getDescription() const
+{
+    if (init != "systemd") {
+        QRegularExpression regex("\nShort-Description:([^\n]*)");
+        QString info = getInfo();
+        QRegularExpressionMatch match = regex.match(info);
+        if (match.captured(1).isEmpty()) {
+            regex.setPattern("\nDescription:\\s*(.*)\n");
+            match = regex.match(info);
+        }
+        if (match.hasMatch()) {
+            return match.captured(1);
+        }
+        return {};
+    } else {
+        QString out
+            = Cmd()
+                  .getOut("systemctl list-units " + name + ".service -o json-pretty | grep description | cut -d: -f2",
+                          true, false, true)
+                  .trimmed();
+        out = out.mid(1, out.length() - 2);
+        if (out.isEmpty()) {
+            out = Cmd()
+                      .getOut("systemctl status " + name + " | awk -F' - ' 'NR == 1 { print $2 } NR > 1 { exit }'",
+                              true, false, true)
+                      .trimmed();
+        }
+        if (out.isEmpty()) {
+            QRegularExpression regex("\nShort-Description:([^\n]*)");
+            QRegularExpressionMatch match = regex.match(getInfoFromFile(name));
+            if (match.captured(1).isEmpty()) {
+                regex.setPattern("\nDescription:\\s*(.*)\n");
+                match = regex.match(getInfoFromFile(name));
+            }
+            out = match.hasMatch() ? match.captured(1) : QObject::tr("Could not find service description");
+        }
+        return out;
+    }
 }
 
 bool Service::isEnabled() const
@@ -77,7 +126,7 @@ bool Service::isEnabled() const
 
 bool Service::start()
 {
-    if (cmd.run("service " + name + " start")) {
+    if (Cmd().runAsRoot("/sbin/service " + name + " start")) {
         setRunning(true);
         return true;
     }
@@ -86,7 +135,7 @@ bool Service::start()
 
 bool Service::stop()
 {
-    if (cmd.run("service " + name + " stop")) {
+    if (Cmd().runAsRoot("/sbin/service " + name + " stop")) {
         setRunning(false);
         return true;
     }
@@ -105,15 +154,17 @@ void Service::setRunning(bool running)
 
 QString Service::getInfoFromFile(const QString &name)
 {
-    Cmd cmd;
-    QFile file("/etc/init.d/" + name);
-    if (!file.exists()) {
-        qDebug() << "Could not find unit file";
-        return cmd.getCmdOut("service " + name + " status");
+    QFileInfo fileInfo("/etc/init.d/" + name);
+    if (!fileInfo.isFile()) {
+        fileInfo.setFile("/etc/init.d/" + name + ".sh");
+        if (!fileInfo.isFile()) {
+            qDebug() << "Could not find unit file" << name;
+            return Cmd().getOut("/sbin/service " + name + " status", false, false, true);
+        }
     }
+    QFile file {fileInfo.canonicalFilePath()};
     if (!file.open(QIODevice::ReadOnly)) {
-        qDebug() << "Could not open unit file";
-        return cmd.getCmdOut("service " + name + " status");
+        return Cmd().getOut("/sbin/service " + name + " status", false, false, true);
     }
     QString info;
     bool info_header = false;
@@ -135,15 +186,15 @@ QString Service::getInfoFromFile(const QString &name)
 
 bool Service::enable()
 {
-    if (getInit() == "systemd") {
-        cmd.run("systemctl unmask " + name);
-        if (cmd.run("systemctl enable " + name)) {
+    if (init == "systemd") {
+        Cmd().runAsRoot("systemctl unmask " + name);
+        if (Cmd().runAsRoot("systemctl enable " + name)) {
             setEnabled(true);
             return true;
         }
     } else {
-        cmd.run("sudo update-rc.d " + name + " defaults");
-        if (cmd.run("sudo update-rc.d " + name + " enable")) {
+        Cmd().runAsRoot("/sbin/update-rc.d " + name + " defaults");
+        if (Cmd().runAsRoot("/sbin/update-rc.d " + name + " enable")) {
             setEnabled(true);
             return true;
         }
@@ -153,14 +204,14 @@ bool Service::enable()
 
 bool Service::disable()
 {
-    if (getInit() == "systemd") {
-        if (cmd.run("systemctl disable " + name)) {
-            cmd.run("systemctl mask " + name);
+    if (init == "systemd") {
+        if (Cmd().runAsRoot("systemctl disable " + name)) {
+            Cmd().runAsRoot("systemctl mask " + name);
             setEnabled(false);
             return true;
         }
     } else {
-        if (cmd.run("sudo update-rc.d " + name + " remove")) {
+        if (Cmd().runAsRoot("/sbin/update-rc.d " + name + " remove")) {
             setEnabled(false);
             return true;
         }

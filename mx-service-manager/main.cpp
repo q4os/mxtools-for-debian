@@ -77,13 +77,14 @@ int main(int argc, char *argv[])
             exit(EXIT_FAILURE);
         }
     }
-    if (getuid() == 0) {
-        qDebug().noquote() << QApplication::applicationName() << QObject::tr("version:")
-                           << QApplication::applicationVersion();
-        MainWindow w;
-        w.show();
-        return QApplication::exec();
-    } else {
-        QProcess::startDetached(QStringLiteral("/usr/bin/mxsm-launcher"), {});
+    if (getuid() != 0) {
+        if (!QFile::exists("/usr/bin/pkexec") && !QFile::exists("/usr/bin/gksu")) {
+            QMessageBox::critical(nullptr, QObject::tr("Error"),
+                                  QObject::tr("You must run this program with admin access."));
+            exit(EXIT_FAILURE);
+        }
     }
+    MainWindow w;
+    w.show();
+    return QApplication::exec();
 }

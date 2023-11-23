@@ -27,6 +27,7 @@
 #include <QIcon>
 #include <QLibraryInfo>
 #include <QLocale>
+#include <QStandardPaths>
 #include <QTranslator>
 
 #include "mainwindow.h"
@@ -44,14 +45,10 @@ int main(int argc, char *argv[])
         qunsetenv("SESSION_MANAGER");
     }
     QApplication app(argc, argv);
-    if (getuid() == 0)
+    if (getuid() == 0) {
         qputenv("HOME", "/root");
+    }
     QApplication::setApplicationVersion(VERSION);
-
-    QProcess proc;
-    proc.start("logname", {}, QIODevice::ReadOnly);
-    proc.waitForFinished();
-    auto const logname = QString::fromLatin1(proc.readAllStandardOutput().trimmed());
 
     QCommandLineParser parser;
     parser.setApplicationDescription(QObject::tr("Program for creating a live-usb from an iso-file, another live-usb, "
@@ -66,17 +63,20 @@ int main(int argc, char *argv[])
 
     QTranslator qtTran;
     if (qtTran.load(QLocale::system(), QStringLiteral("qt"), QStringLiteral("_"),
-                    QLibraryInfo::location(QLibraryInfo::TranslationsPath)))
+                    QLibraryInfo::location(QLibraryInfo::TranslationsPath))) {
         QApplication::installTranslator(&qtTran);
+    }
 
     QTranslator qtBaseTran;
-    if (qtBaseTran.load("qtbase_" + QLocale::system().name(), QLibraryInfo::location(QLibraryInfo::TranslationsPath)))
+    if (qtBaseTran.load("qtbase_" + QLocale::system().name(), QLibraryInfo::location(QLibraryInfo::TranslationsPath))) {
         QApplication::installTranslator(&qtBaseTran);
+    }
 
     QTranslator appTran;
     if (appTran.load(QApplication::applicationName() + "_" + QLocale::system().name(),
-                     "/usr/share/" + QApplication::applicationName() + "/locale"))
+                     "/usr/share/" + QApplication::applicationName() + "/locale")) {
         QApplication::installTranslator(&appTran);
+    }
 
     // Root guard
     QFile loginUidFile {"/proc/self/loginuid"};
@@ -91,30 +91,29 @@ int main(int argc, char *argv[])
             exit(EXIT_FAILURE);
         }
     }
-    if (getuid() == 0) {
-        auto const log_file_name = "/var/log/" + QApplication::applicationName() + ".log";
-        if (QFileInfo::exists(log_file_name)) {
-            QFile::remove(log_file_name + ".old");
-            QFile::rename(log_file_name, log_file_name + ".old");
-        }
-        logFile.setFileName(log_file_name);
-        logFile.open(QFile::Append | QFile::Text);
-        qInstallMessageHandler(messageHandler);
-        qDebug().noquote() << QApplication::applicationName() << QObject::tr("version:")
-                           << QApplication::applicationVersion();
-        MainWindow w(QApplication::arguments());
-        w.show();
-        auto const exit_code = QApplication::exec();
-        proc.start("grep", {"^" + logname + ":", "/etc/passwd"});
-        proc.waitForFinished();
-        auto const home = QString::fromLatin1(proc.readAllStandardOutput().trimmed()).section(":", 5, 5);
-        auto const file_name = home + "/.config/" + QApplication::applicationName() + "rc";
-        if (QFile::exists(file_name))
-            QProcess::execute("chown", {logname + ":", file_name});
-        return exit_code;
-    } else {
-        QProcess::startDetached(QStringLiteral("/usr/bin/mxlum-launcher"), {});
+
+    QString executablePath = QStandardPaths::findExecutable("pkexec");
+    if (executablePath.isEmpty() && getuid() != 0) {
+        QMessageBox::critical(nullptr, QObject::tr("Error"), QObject::tr("You must run this program as root."));
+        exit(EXIT_FAILURE);
     }
+
+    auto const log_file_name = "/tmp/" + QApplication::applicationName() + ".log";
+    logFile.setFileName(log_file_name);
+    if (logFile.exists() && QFileInfo(logFile).isWritable()) {
+        QFile::remove(log_file_name + ".old");
+        QFile::rename(log_file_name, log_file_name + ".old");
+    }
+    if (logFile.exists() && !QFileInfo(logFile).isWritable()) {
+        logFile.setFileName(log_file_name + "_new");
+    }
+    logFile.open(QIODevice::ReadWrite);
+    qInstallMessageHandler(messageHandler);
+    qDebug().noquote() << QApplication::applicationName() << QObject::tr("version:")
+                       << QApplication::applicationVersion();
+    MainWindow w(QApplication::arguments());
+    w.show();
+    return QApplication::exec();
 }
 
 // The implementation of the handler

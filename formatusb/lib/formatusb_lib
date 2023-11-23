@@ -32,6 +32,7 @@ unmount_partitions()
 	local umount_device=$device*
 	if [ -n "$(df |grep $device)" ]; then
 	    umount -q /dev/$umount_device 2>/dev/null
+	    sleep 1
 	    checkerrorcode "unmount partitions"
 
 	fi

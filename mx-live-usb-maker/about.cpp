@@ -40,7 +40,9 @@ void displayDoc(const QString &url, const QString &title)
             qputenv("XDG_RUNTIME_DIR", "/run/user/0");
         }
     }
-    qputenv("HOME", "/root");
+    if (getuid() == 0) {
+        qputenv("HOME", "/root");
+    }
 }
 
 void displayAboutMsgBox(const QString &title, const QString &message, const QString &licence_url,

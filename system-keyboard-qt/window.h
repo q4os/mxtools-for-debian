@@ -9,6 +9,8 @@
 #include <QStringListModel>
 #include <QSortFilterProxyModel>
 
+#include "cmd.h"
+
 namespace Ui {
 class Window;
 }
@@ -61,6 +63,7 @@ private:
     QString getModel();
     QPair<QStringList, QStringList> getLayoutsAndVariants();
     QStringList getOptions();
+    Cmd *shell;
 
 private:
     void addLayout(KeyboardConfigItem layout, KeyboardConfigItem variant);

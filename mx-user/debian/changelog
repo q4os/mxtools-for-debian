@@ -1,3 +1,9 @@
+mx-user (23.11) mx; urgency=medium
+
+  * Run program as normal user and elevate only when needed
+
+ -- Adrian <adrian@mxlinux.org>  Tue, 07 Nov 2023 22:18:26 -0500
+
 mx-user (23.9) mx; urgency=medium
 
   * Fix: there can be only one autologin-user

@@ -493,7 +493,7 @@ msgstr "Nem található nvidia kártya - kilépés"
 #: ../ddm-mx:1098
 #, sh-format
 msgid "Try latest nvidia-driver?"
-msgstr ""
+msgstr "Megpróbálja a legfrissebb nvidia illesztőprogramot?"
 
 #: ../nvidia-detect-mx:31
 msgid ""

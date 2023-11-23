@@ -3,7 +3,7 @@
 Name=MX User Manager
 # # The desktop entry comment will be shown within the menu.
 Comment=Simple user configuration
-Exec=mx-user-launcher
+Exec=mx-user
 Icon=mx-user
 NoDisplay=false
 Categories=System;MX-Maintenance;

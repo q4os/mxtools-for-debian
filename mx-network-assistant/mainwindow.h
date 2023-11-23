@@ -22,6 +22,7 @@
 #define MAINWINDOW_H
 
 #include "ui_mainwindow.h"
+
 #include <QDir>
 #include <QMessageBox>
 #include <QProcess>
@@ -39,11 +40,10 @@ public:
     ~MainWindow() override = default;
 
     QString getIP();
-    QString getIPfromRouter();
+    static QString getIPfromRouter();
     static bool checkSysFileExists(const QDir& searchPath, const QString& fileName, Qt::CaseSensitivity cs);
     bool checkWifiAvailable();
     bool checkWifiEnabled();
-    static bool replaceStringInFile(const QString& oldtext, const QString& newtext, const QString& filepath);
     void refresh();
 
 public slots:
@@ -85,19 +85,6 @@ public slots:
     virtual void writeTraceOutput();
 
 protected:
-    QProcess* installProc;
-    QProcess* pingProc;
-    QProcess* traceProc;
-    QStringList blockedModules;
-    QStringList broadcomModules;
-    QStringList loadedModules;
-    QStringList unloadedModules;
-    QTextEdit* installOutputEdit;
-    Tab currentTab;
-    bool driverBlocklisted {};
-    bool internetConnection {};
-    bool ndiswrapBlocklisted {};
-
     bool blockModule(const QString& module);
     bool installModule(const QString& module);
     bool loadModule(const QString& module);
@@ -117,6 +104,17 @@ private slots:
 
 private:
     Cmd cmd;
+    QProcess* pingProc;
+    QProcess* traceProc;
+    QStringList blockedModules;
+    QStringList broadcomModules;
+    QStringList loadedModules;
+    QStringList unloadedModules;
+    QTextEdit* installOutputEdit;
+    Tab currentTab;
+    bool driverBlocklisted {};
+    bool internetConnection {};
+    bool ndiswrapBlocklisted {};
 };
 
 #endif

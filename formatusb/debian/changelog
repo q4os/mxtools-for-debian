@@ -1,3 +1,10 @@
+formatusb (23.11.01) mx; urgency=medium
+
+  * improve root action handling
+  * check if running root already before launching an authenticator
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 05 Nov 2023 14:45:40 -0500
+
 formatusb (23.07.02) mx; urgency=medium
 
   * fix localized "Defaults" string

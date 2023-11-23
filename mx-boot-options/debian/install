@@ -3,6 +3,6 @@ images/mx-boot-options.png	usr/share/icons/hicolor/1024x1024/apps
 images/mx-boot-options.svg	usr/share/icons/hicolor/scalable/apps
 mx-boot-options			usr/bin
 mx-boot-options.desktop		usr/share/applications
-scripts/mxbo-launcher		usr/bin
-scripts/org.mxlinux.pkexec.mxbo-launcher.policy	usr/share/polkit-1/actions
+scripts/*.policy		usr/share/polkit-1/actions
+scripts/helper			usr/lib/mx-boot-options
 translations/*.qm		usr/share/mx-boot-options/locale

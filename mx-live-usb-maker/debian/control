@@ -13,5 +13,6 @@ Depends: cli-shell-utils,
          xorriso,
          ${misc:Depends},
          ${shlibs:Depends}
+Recommends: mx-launcher-l10n, gksu | pkexec
 Description: mx-live-usb-maker
  mx-live-usb-maker

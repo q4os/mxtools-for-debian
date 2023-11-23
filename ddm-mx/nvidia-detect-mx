@@ -171,94 +171,84 @@ if [[ ${#VERSIONS[*]} == 0 ]]; then
 fi
 
 if [[ -n ${VERSIONS[340]} ]]; then
-	PACKAGE="nvidia-legacy-340xx-driver"
-	if [ -n "$(apt-cache madison $PACKAGE 2>/dev/null |grep $PACKAGE)" ]; then
+	PACKAGECHECK="nvidia-legacy-340xx-driver"
+	if [ -n "$(apt-cache madison $PACKAGECHECK 2>/dev/null |grep $PACKAGECHECK)" ]; then
 	    #inform which driver series works
+	    PACKAGE=$PACKAGECHECK
 		printf "$(eval_gettext "Your card is supported by the nvidia %s drivers series. %s")" "340"  "$PACKAGE" 
 		echo "" 
-	else
-		unset PACKAGE
 	fi
 fi
 if [[ -n ${VERSIONS[390]} ]]; then
-	PACKAGE="nvidia-legacy-390xx-driver" #; changes for mx
-	if [ -n "$(apt-cache madison $PACKAGE 2>/dev/null |grep $PACKAGE)" ]; then
+	PACKAGECHECK="nvidia-legacy-390xx-driver" #; changes for mx
+	if [ -n "$(apt-cache madison $PACKAGECHECK 2>/dev/null |grep $PACKAGECHECK)" ]; then
+		PACKAGE=$PACKAGECHECK
 		printf "$(eval_gettext "Your card is supported by the nvidia %s drivers series. %s")" "390"  "$PACKAGE" 
 		echo "" 
-	else
-		unset PACKAGE
 	fi
 fi
 if [[ -n ${VERSIONS[391]} ]]; then
-	PACKAGE="nvidia-legacy-390xx-driver" #; changes for mx	
-	if [ -n "$(apt-cache madison $PACKAGE 2>/dev/null |grep $PACKAGE)" ]; then
+	PACKAGECHECK="nvidia-legacy-390xx-driver" #; changes for mx	
+	if [ -n "$(apt-cache madison $PACKAGECHECK 2>/dev/null |grep $PACKAGECHECK)" ]; then
+		PACKAGE=$PACKAGECHECK
 	    printf "$(eval_gettext "Your card is supported by the nvidia %s drivers series. %s")" "390"  "$PACKAGE" 
 	    echo "" 
-	else
-		unset PACKAGE
 	fi
 fi
 if [[ -n ${VERSIONS[419]} ]]; then
-	PACKAGE="nvidia-tesla-418-driver"
-	if [ -n "$(apt-cache madison $PACKAGE 2>/dev/null |grep $PACKAGE)" ]; then
+	PACKAGECHECK="nvidia-tesla-418-driver"
+	if [ -n "$(apt-cache madison $PACKAGECHECK 2>/dev/null |grep $PACKAGECHECK)" ]; then
+		PACKAGE=$PACKAGECHECK
 	    printf "$(eval_gettext "Your card is supported by the nvidia %s drivers series. %s")" "tesla 418"  "$PACKAGE" 
 	    echo "" 
-	else
-		unset PACKAGE
 	fi
 fi
 if [[ -n ${VERSIONS[441]} ]]; then
-	PACKAGE="nvidia-tesla-440-driver"
-	if [ -n "$(apt-cache madison $PACKAGE 2>/dev/null |grep $PACKAGE)" ]; then
+	PACKAGECHECK="nvidia-tesla-440-driver"
+	if [ -n "$(apt-cache madison $PACKAGECHECK 2>/dev/null |grep $PACKAGECHECK)" ]; then
+		PACKAGE=$PACKAGECHECK
 		printf "$(eval_gettext "Your card is supported by the nvidia %s drivers series. %s")" "tesla 440"  "$PACKAGE" 
 		echo "" 
-	else
-		unset PACKAGE
 	fi
 fi
 if [[ -n ${VERSIONS[451]} ]]; then
-	PACKAGE="nvidia-tesla-450-driver"
-	if [ -n "$(apt-cache madison $PACKAGE 2>/dev/null |grep $PACKAGE)" ]; then
+	PACKAGECHECK="nvidia-tesla-450-driver"
+	if [ -n "$(apt-cache madison $PACKAGECHECK 2>/dev/null |grep $PACKAGECHECK)" ]; then
+		PACKAGE=$PACKAGECHECK
 		printf "$(eval_gettext "Your card is supported by the nvidia %s drivers series. %s")" "tesla 450"  "$PACKAGE" 
 		echo "" 
-	else
-		unset PACKAGE
 	fi
 fi
 if [[ -n ${VERSIONS[461]} ]]; then
-	PACKAGE="nvidia-tesla-460-driver1"
-	if [ -n "$(apt-cache madison $PACKAGE 2>/dev/null |grep $PACKAGE)" ]; then
+	PACKAGECHECK="nvidia-tesla-460-driver1"
+	if [ -n "$(apt-cache madison $PACKAGECHECK 2>/dev/null |grep $PACKAGECHECK)" ]; then
+		PACKAGE=$PACKAGECHECK
 		printf "$(eval_gettext "Your card is supported by the nvidia %s drivers series. %s")" "tesla 460"  "$PACKAGE" 
 		echo "" 
-	else
-		unset PACKAGE
 	fi
 fi
 if [[ -n ${VERSIONS[471]} ]]; then
-	PACKAGE="nvidia-tesla-470-driver"
-	if [ -n "$(apt-cache madison $PACKAGE 2>/dev/null |grep $PACKAGE)" ]; then
+	PACKAGECHECK="nvidia-tesla-470-driver"
+	if [ -n "$(apt-cache madison $PACKAGECHECK 2>/dev/null |grep $PACKAGECHECK)" ]; then
+		PACKAGE=$PACKAGECHECK
 	    printf "$(eval_gettext "Your card is supported by the nvidia %s drivers series. %s")" "tesla 470"  "$PACKAGE" 
 	    echo "" 
-	else
-		unset PACKAGE
 	fi
 fi
 if [[ -n ${VERSIONS[510]} ]]; then
-	PACKAGE="nvidia-tesla-510-driver"
-	if [ -n "$(apt-cache madison $PACKAGE 2>/dev/null |grep $PACKAGE)" ]; then
+	PACKAGECHECK="nvidia-tesla-510-driver"
+	if [ -n "$(apt-cache madison $PACKAGECHECK 2>/dev/null |grep $PACKAGECHECK)" ]; then
+		PACKAGE=$PACKAGECHECK
 		printf "$(eval_gettext "Your card is supported by the nvidia %s drivers series. %s")" "tesla 510"  "$PACKAGE" 
 		echo "" 
-	else
-		unset PACKAGE
 	fi
 fi
 if [[ -n ${VERSIONS[999]} ]]; then
-	PACKAGE="nvidia-driver" #; changes for mx
-	if [ -n "$(apt-cache madison $PACKAGE 2>/dev/null |grep $PACKAGE)" ]; then
+	PACKAGECHECK="nvidia-driver" #; changes for mx
+	if [ -n "$(apt-cache madison $PACKAGECHECK 2>/dev/null |grep $PACKAGECHECK)" ]; then
+		PACKAGE=$PACKAGECHECK
 		printf "$(eval_gettext "Your card is supported by the nvidia %s drivers series. %s")" "$LATEST"  "$PACKAGE" 
-		echo "" 
-	else
-		unset PACKAGE
+		echo ""
 	fi
 fi
 

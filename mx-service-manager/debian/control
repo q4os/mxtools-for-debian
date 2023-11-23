@@ -8,5 +8,6 @@ Standards-Version: 3.9.8
 Package: mx-service-manager
 Architecture: any
 Depends: xdg-utils | mx-viewer, ${misc:Depends}, ${shlibs:Depends}
+Recommends: mx-launcher-l10n, gksu | pkexec
 Description: mx-service-manager
  mx-service-manager

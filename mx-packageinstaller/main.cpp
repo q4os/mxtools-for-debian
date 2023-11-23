@@ -99,50 +99,45 @@ int main(int argc, char *argv[])
             exit(EXIT_FAILURE);
         }
     }
-    if (getuid() == 0) {
-        // Don't start app if Synaptic/apt-get is running, lock dpkg otherwise while the program runs
-        LockFile lock_file(QStringLiteral("/var/lib/dpkg/lock"));
-        if (lock_file.isLocked()) {
-            QApplication::beep();
-            QMessageBox::critical(nullptr, QObject::tr("Unable to get exclusive lock"),
-                                  QObject::tr("Another package management application (like Synaptic or apt-get), "
-                                              "is already running. Please close that application first"));
+    if (getuid() != 0) {
+        if (!QFile::exists("/usr/bin/pkexec") && !QFile::exists("/usr/bin/gksu")) {
+            QMessageBox::critical(nullptr, QObject::tr("Error"),
+                                  QObject::tr("You must run this program with admin access."));
             exit(EXIT_FAILURE);
-        } else {
-            lock_file.lock();
         }
-        QString log_name = QStringLiteral("/var/log/mxpi.log");
-        logFile.setFileName(log_name);
-        if (logFile.open(QFile::ReadOnly)) {
-            QFile oldLogFile(log_name + ".old");
-            if (oldLogFile.open(QFile::Append | QFile::Text)) {
-                QTextStream oldLogStream(&oldLogFile);
-                oldLogStream << "-----------------------------------------------------------\n"
-                             << "MXPI SESSION\n"
-                             << "-----------------------------------------------------------\n"
-                             << logFile.readAll();
-                oldLogFile.close();
-                logFile.close();
-                QFile::remove(log_name);
-            }
-        }
-        logFile.setFileName(log_name);
-        logFile.open(QFile::Append | QFile::Text);
-        qInstallMessageHandler(messageHandler);
-
-        MainWindow w(parser);
-        w.show();
-        return QApplication::exec();
-    } else {
-        QProcess::startDetached(QStringLiteral("/usr/bin/mxpi-launcher"), {});
     }
+    //    // Don't start app if Synaptic/apt-get is running, lock dpkg otherwise while the program runs
+    //    LockFile lock_file(QStringLiteral("/var/lib/dpkg/lock"));
+    //    if (lock_file.isLocked()) {
+    //        QApplication::beep();
+    //        QMessageBox::critical(nullptr, QObject::tr("Unable to get exclusive lock"),
+    //                              QObject::tr("Another package management application (like Synaptic or apt-get), "
+    //                                          "is already running. Please close that application first"));
+    //        exit(EXIT_FAILURE);
+    //    } else {
+    //        lock_file.lock();
+    //    }
+    QString log_name = "/tmp/mxpi.log";
+    logFile.setFileName(log_name);
+    logFile.setFileName(log_name);
+    logFile.open(QFile::Append | QFile::Text);
+    qInstallMessageHandler(messageHandler);
+
+    MainWindow w(parser);
+    w.show();
+    return QApplication::exec();
 }
 
 // The implementation of the handler
 void messageHandler(QtMsgType type, const QMessageLogContext &context, const QString &msg)
 {
     QTextStream term_out(stdout);
-    term_out << msg << QStringLiteral("\n");
+
+    if (msg.contains(QLatin1String("\r"))) {
+        term_out << msg;
+        return;
+    }
+    term_out << msg << "\n";
 
     QTextStream out(&logFile);
     out << QDateTime::currentDateTime().toString(QStringLiteral("yyyy-MM-dd hh:mm:ss.zzz "));

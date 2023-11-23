@@ -33,6 +33,7 @@
 #include <QTextStream>
 
 #include <QDebug>
+#include <unistd.h>
 
 MainWindow::MainWindow()  :
     ui(new Ui::MainWindow)
@@ -49,7 +50,6 @@ MainWindow::~MainWindow()
 {
     delete ui;
 }
-
 
 void MainWindow::makeUsb(const QString &options)
 {
@@ -110,12 +110,19 @@ QString MainWindow::buildOptionList()
         partoption = "part";
 
     QString authentication = "pkexec";
+    options = QString(authentication + " /usr/lib/formatusb/formatusb_lib \"" + device + "\" " + format + " \"" + label + "\" " + partoption + "");
+
     if ( !QFile::exists("/usr/bin/pkexec")){
             authentication = "su-to-root -X -c";
+            options = QString(authentication + " '/usr/lib/formatusb/formatusb_lib \"" + device + "\" " + format + " \"" + label + "\" " + partoption + "'");
 	}
 
+    if (getuid() == 0 )
+            authentication = "";
+
+
+    options = options.trimmed();
     qDebug() << "partition is" << device << "label " << label;
-    options = QString(authentication + " /usr/lib/formatusb/formatusb_lib \"" + device + "\" " + format + " \"" + label + "\" " + partoption + "");
     qDebug() << "Options: " << options;
     return options;
 }

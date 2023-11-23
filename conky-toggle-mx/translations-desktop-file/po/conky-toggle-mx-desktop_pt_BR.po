@@ -4,7 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# marcelo cripe <marcelocripe@gmail.com>, 2022
+# marcelo cripe <marcelocripe@gmail.com>, 2023
 # 
 #, fuzzy
 msgid ""
@@ -13,8 +13,8 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-12-09 23:41-0500\n"
 "PO-Revision-Date: 2022-12-10 04:42+0000\n"
-"Last-Translator: marcelo cripe <marcelocripe@gmail.com>, 2022\n"
-"Language-Team: Portuguese (Brazil) (https://www.transifex.com/anticapitalista/teams/10162/pt_BR/)\n"
+"Last-Translator: marcelo cripe <marcelocripe@gmail.com>, 2023\n"
+"Language-Team: Portuguese (Brazil) (https://app.transifex.com/anticapitalista/teams/10162/pt_BR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -24,11 +24,9 @@ msgstr ""
 #. The desktop entry name will be displayed within the menu.
 #: desktop-in/conky-toggle.desktop.in:6
 msgid "Conky Toggle"
-msgstr "Ativar/Desativar o Conky"
+msgstr "Ativar ou Desativar o Conky"
 
 #. # The desktop entry comment will be shown within the menu.
 #: desktop-in/conky-toggle.desktop.in:8
 msgid "Desktop system monitor on or off"
-msgstr ""
-"Monitor do sistema da área de trabalho que pode ser ativado/ligado ou "
-"desativado/desligado"
+msgstr "Comutar entre exibir ou ocultar o monitor do sistema Conky"

@@ -1,3 +1,87 @@
+mx-packageinstaller-pkglist (23.11.04mx23) mx; urgency=medium
+
+  * remove adapta theme entries (no longer available)
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 16 Nov 2023 23:11:56 -0500
+
+mx-packageinstaller-pkglist (23.11.03mx23) mx; urgency=medium
+
+  * update liquorix kernel 6.5.11
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Tue, 14 Nov 2023 18:01:08 -0500
+
+mx-packageinstaller-pkglist (23.11.02mx23) mx; urgency=medium
+
+  * update 6.5 kernels
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 08 Nov 2023 18:51:04 -0500
+
+mx-packageinstaller-pkglist (23.11.01mx23) mx; urgency=medium
+
+  * update liquorix 6.5 kernel 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 04 Nov 2023 20:02:46 -0400
+
+mx-packageinstaller-pkglist (23.10.07mx23) mx; urgency=medium
+
+  * correct label on 6.5 ahs kernel
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 27 Oct 2023 06:45:25 -0400
+
+mx-packageinstaller-pkglist (23.10.06mx23) mx; urgency=medium
+
+  * correct abi on ahs 6.5 kernel 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 23 Oct 2023 20:19:18 -0400
+
+mx-packageinstaller-pkglist (23.10.05mx23) mx; urgency=medium
+
+  * update deb tools entry
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 21 Oct 2023 23:50:32 -0400
+
+mx-packageinstaller-pkglist (23.10.04mx23) mx; urgency=medium
+
+  * update liquorix 6.5 kernel
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 12 Oct 2023 19:57:39 -0400
+
+mx-packageinstaller-pkglist (23.10.03mx23) mx; urgency=medium
+
+  * update ahs kernel
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 11 Oct 2023 19:55:06 -0400
+
+mx-packageinstaller-pkglist (23.10.02mx23) mx; urgency=medium
+
+  * update liquorix kernel 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 06 Oct 2023 16:01:38 -0400
+
+mx-packageinstaller-pkglist (23.10.01mx23) mx; urgency=medium
+
+  * kernel updates
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Tue, 03 Oct 2023 20:28:36 -0400
+
+mx-packageinstaller-pkglist (23.09.95mx23) mx; urgency=medium
+
+  * update veracrypt
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 25 Sep 2023 19:41:13 -0400
+
+mx-packageinstaller-pkglist (23.09.94mx23) mx; urgency=medium
+
+  * update liquorix kernels
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 17 Sep 2023 19:15:52 -0400
+
+mx-packageinstaller-pkglist (23.09.93mx23) mx; urgency=medium
+
+  * change cairo-dock so it doesn' conflict with pipewire
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 16 Sep 2023 10:41:25 -0400
+
 mx-packageinstaller-pkglist (23.09.92mx23) mx; urgency=medium
 
   * update ahs kernel

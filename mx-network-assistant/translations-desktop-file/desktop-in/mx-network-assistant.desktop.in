@@ -3,7 +3,7 @@
 Name=MX Network Assistant
 # # The desktop entry comment will be shown within the menu.
 Comment=Network configuration and troubleshooting
-Exec=mxna-launcher
+Exec=mx-network-assistant
 Icon=mx-network-assistant
 NoDisplay=false
 Categories=System;MX-Setup;

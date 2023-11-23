@@ -37,11 +37,10 @@ int main(int argc, char *argv[])
     }
 
     QApplication::setWindowIcon(QIcon::fromTheme(QApplication::applicationName()));
-    QApplication::setOrganizationName(QStringLiteral("MX-Linux"));
+    QApplication::setOrganizationName("MX-Linux");
 
     QTranslator qtTran;
-    if (qtTran.load(QLocale::system(), QStringLiteral("qt"), QStringLiteral("_"),
-                    QLibraryInfo::location(QLibraryInfo::TranslationsPath))) {
+    if (qtTran.load(QLocale::system(), "qt", "_", QLibraryInfo::location(QLibraryInfo::TranslationsPath))) {
         QApplication::installTranslator(&qtTran);
     }
 
@@ -57,19 +56,21 @@ int main(int argc, char *argv[])
     }
 
     // root guard
-    if (QProcess::execute(QStringLiteral("/bin/bash"), {"-c", "logname |grep -q ^root$"}) == 0) {
+    if (QProcess::execute("/bin/bash", {"-c", "logname |grep -q ^root$"}) == 0) {
         QMessageBox::critical(
             nullptr, QObject::tr("Error"),
             QObject::tr(
                 "You seem to be logged in as root, please log out and log in as normal user to use this program."));
         exit(EXIT_FAILURE);
     }
-
-    if (getuid() == 0) {
-        MainWindow mw;
-        mw.show();
-        return QApplication::exec();
-    } else {
-        QProcess::startDetached(QStringLiteral("/usr/bin/mx-user-launcher"), {});
+    if (getuid() != 0) {
+        if (!QFile::exists("/usr/bin/pkexec") && !QFile::exists("/usr/bin/gksu")) {
+            QMessageBox::critical(nullptr, QObject::tr("Error"),
+                                  QObject::tr("You must run this program with admin access."));
+            exit(EXIT_FAILURE);
+        }
     }
+    MainWindow w;
+    w.show();
+    return QApplication::exec();
 }

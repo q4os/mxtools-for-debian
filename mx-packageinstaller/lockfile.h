@@ -30,16 +30,13 @@
 class LockFile
 {
 public:
-    explicit LockFile(const QString &file_name)
-        : file(file_name)
-    {
-    }
-    ~LockFile()
-    {
-        unlock();
-    };
+    explicit LockFile(const QString &file_name);
 
+    QString fileName();
+    QString getLockingProcess();
     bool isLocked();
+    bool isLockedGUI();
+
     bool lock();
     void unlock();
 

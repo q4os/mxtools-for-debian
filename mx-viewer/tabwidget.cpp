@@ -118,6 +118,8 @@ void TabWidget::keyPressEvent(QKeyEvent *event)
         } else {
             removeTab(currentIndex());
         }
+    } else {
+        QTabWidget::keyPressEvent(event);
     }
 }
 

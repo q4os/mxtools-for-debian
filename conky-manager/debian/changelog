@@ -1,3 +1,9 @@
+conky-manager (2.7+dfsg1-6mx19+4) mx; urgency=medium
+
+  * Remove $HOME from autostart desktop entry
+
+ -- fehlix <fehlix@mxlinux.org>  Tue, 31 Oct 2023 07:00:44 -0500
+
 conky-manager (2.7+dfsg1-6mx19+3) mx; urgency=medium
 
   * Remove desktop-session from conky-startup.sh script

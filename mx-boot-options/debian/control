@@ -12,6 +12,6 @@ Architecture: any
 Depends: xdg-utils | mx-viewer,
          ${misc:Depends},
          ${shlibs:Depends}
-Recommends: efibootmgr
+Recommends: efibootmgr, mx-launcher-l10n, gksu | pkexec
 Description: mx-boot-options
  Program for selecting common start-up choices

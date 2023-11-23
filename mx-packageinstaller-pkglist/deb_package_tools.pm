@@ -66,8 +66,7 @@ all
 <screenshot>none</screenshot>
 
 <preinstall>
-#!/bin/bash
-cp /etc/apt/sources.list.d/debian.list /etc/apt/pbuilder.list
+
 </preinstall>
 
 <install_package_names>
@@ -83,8 +82,7 @@ dpkg-dev
 
 
 <postinstall>
-#!/bin/bash
-rm -f /etc/apt/pbuilder.list
+
 </postinstall>
 
 

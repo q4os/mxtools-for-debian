@@ -31,7 +31,7 @@
 // QTimeEdit subclassing just to stop the cursor and selection jumping every second.
 class MTimeEdit : public QTimeEdit
 {
-	Q_OBJECT
+    Q_OBJECT
 public:
     MTimeEdit(QWidget *parent = nullptr) : QTimeEdit(parent) {}
     void updateDateTime(const QDateTime &dateTime);
@@ -77,16 +77,17 @@ private:
         OpenRC,
         SystemD
     } sysInit = SystemV;
-    bool userRoot = false;
     QList<QByteArray> zones;
     bool enabledNTP{};
     bool isHardwareUTC{};
     bool updating = false;
-
+;
     void startup();
     void setClockLock(bool locked);
-    bool shell(const QString &cmd, QByteArray *output = nullptr);
+    bool shell(const QString &cmd, QByteArray *output = nullptr, bool elevate = false);
     bool execute(const QString &program, const QStringList &arguments = QStringList(),
+        QByteArray *output = nullptr, QByteArray *error = nullptr, bool elevate = false);
+    bool executeAsRoot(const QString &program, const QStringList &arguments = QStringList(),
         QByteArray *output = nullptr, QByteArray *error = nullptr);
     void loadTab(int index);
     void update();

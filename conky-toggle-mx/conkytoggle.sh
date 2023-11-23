@@ -11,7 +11,7 @@ main()
 {
     local user=$(id -nu)
     if [ $(pgrep -c -u "$user" -x conky) != 0 ];  then
-        killall -u "$user" conky
+        /usr/bin/killall -u "$user" conky
         autostart_off
     else
         if grep -q "conky -c" "$HOME"/.conky/conky-startup.sh 2>/dev/null; then
@@ -32,7 +32,7 @@ launch_conky()
 
 CONKY_TEMP=$(mktemp --tmpdir=${XDG_RUNTIME_DIR:-/tmp} conky-startup.sh.XXXXXXXXXXXX)
 
-sed -e 's/^[[:space:]]*sleep.*/sleep 1s/' "$HOME"/.conky/conky-startup.sh > $CONKY_TEMP
+/usr/bin/sed -e 's/^[[:space:]]*sleep.*/sleep 1s/' "$HOME"/.conky/conky-startup.sh > $CONKY_TEMP
 
 sh $CONKY_TEMP
 
@@ -42,19 +42,19 @@ rm $CONKY_TEMP
 
 autostart_off()
 {
-
-if [ -e "$HOME"/.config/autostart/conky.desktop ]; then
-    sed -i -r s/Hidden=.*/Hidden=true/ "$HOME"/.config/autostart/conky.desktop
+if [ ! -e "$HOME"/.config/autostart/conky.desktop ]; then
+    /usr/bin/cp /usr/share/conky-toggle/conky.desktop "$HOME"/.config/autostart/conky.desktop
 fi
+/usr/bin/sed -i -r s/Hidden=.*/Hidden=true/ "$HOME"/.config/autostart/conky.desktop
 
 }
 
 autostart_on()
 {
-
-if [ -e "$HOME"/.config/autostart/conky.desktop ]; then
-    sed -i -r s/Hidden=.*/Hidden=false/ "$HOME"/.config/autostart/conky.desktop
+if [ ! -e "$HOME"/.config/autostart/conky.desktop ]; then
+   /usr/bin/cp /usr/share/conky-toggle/conky.desktop "$HOME"/.config/autostart/conky.desktop
 fi
+/usr/bin/sed -i -r s/Hidden=.*/Hidden=false/ "$HOME"/.config/autostart/conky.desktop
 
 }
 
