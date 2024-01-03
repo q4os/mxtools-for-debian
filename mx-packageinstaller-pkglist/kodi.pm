@@ -60,7 +60,7 @@ Kodi
 </description>
 
 <installable>
-all
+64
 </installable>
 
 <screenshot>https://screenshots.debian.net/shrine/screenshot/13655/simage/large-416335837027fc248977245b4bf5d9e5.png</screenshot>

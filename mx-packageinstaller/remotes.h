@@ -1,6 +1,4 @@
-
-#ifndef REMOTES_H
-#define REMOTES_H
+#pragma once
 
 #include <QCheckBox>
 #include <QComboBox>
@@ -45,5 +43,3 @@ private:
     QString user;
     QString install_ref;
 };
-
-#endif // REMOTES_H

@@ -1,0 +1,40 @@
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA512
+
+Format: 1.8
+Date: Thu, 20 Jul 2023 15:09:03 -0400
+Source: mx-remastercc
+Architecture: source
+Version: 23.6
+Distribution: mx
+Urgency: medium
+Maintainer: Adrian <adrian@mxlinux.org>
+Changed-By: Dolphin Oracle <dolphinoracle@gmail.com>
+Changes:
+ mx-remastercc (23.6) mx; urgency=medium
+ .
+   * update translations
+Checksums-Sha1:
+ 3bc67c11b1b08f01b9f92e60fe0cf1698a4b92c2 1175 mx-remastercc_23.6.dsc
+ 6eeccede67cb3e497eaf6c97e168a965e622297c 54008 mx-remastercc_23.6.tar.xz
+ 79efb84544b69661f34363a29ff10ef15e9f24c7 11004 mx-remastercc_23.6_source.buildinfo
+Checksums-Sha256:
+ 26cc49e409c38c1bd34db57b62f87058f1c48008b16519d864f828f86d5d683c 1175 mx-remastercc_23.6.dsc
+ fb6831a1fdae86cec7e850d17d4e84d1359bf3bc457155222d7f62d8dc3d65f6 54008 mx-remastercc_23.6.tar.xz
+ 05b4dbf2f7e040a628deeaed08f751687b0c5ddfe5f9d189b09332fa7dfb0368 11004 mx-remastercc_23.6_source.buildinfo
+Files:
+ cacbb2b151e2dcb4cc051bb3c4dd8fc8 1175 admin optional mx-remastercc_23.6.dsc
+ e7b4591febb42c75ab15da2dc5bc541c 54008 admin optional mx-remastercc_23.6.tar.xz
+ 8b23fa52d52427549008bb551a12064f 11004 admin optional mx-remastercc_23.6_source.buildinfo
+
+-----BEGIN PGP SIGNATURE-----
+
+iQFHBAEBCgAxFiEE8ndToY6S45N+YzXncJOMeAZ57pgFAmU/vi4THGFkcmlhbkBt
+eGxpbnV4Lm9yZwAKCRBwk4x4BnnumMBTB/9T5E8Z+GOICCLwZK8mc+UMum2qJTKF
+vpWz/6+amVq8jGMuavjJ0v+s9YaUCtEExxpcBsRK1hbpm0tGNWpGBoawoj+IPorx
+Yp+4MnS2y445YXToIbYUapRYcjH61O2gkhqp+mENyvAf+UAe5ZRG/cAG401gtt+L
+twrE2xNFIHxFzZS3fNrOx59xpARw1LybFg6ipZswpXGlJV+z0oIey2R/DaLA88P+
+MLR/ZXTCg+a3wo8YIOk2rxk4r0f/fqNv5XOXV25E9PSi/b771AETFUKiCKdnDdRG
+Z2pgFgK83R4uadgW5aOe0l2w1A6JDvqxEqMSmxZyo1IADlUuXIErSG16
+=vTi2
+-----END PGP SIGNATURE-----

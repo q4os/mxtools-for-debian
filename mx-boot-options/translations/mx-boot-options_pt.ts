@@ -201,16 +201,16 @@
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="242"/>
-        <location filename="../mainwindow.cpp" line="486"/>
-        <location filename="../mainwindow.cpp" line="1123"/>
+        <location filename="../mainwindow.cpp" line="487"/>
+        <location filename="../mainwindow.cpp" line="1124"/>
         <source>Timeout: %1 seconds</source>
         <translation>Tempo de espera: %1 segundos</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="255"/>
-        <location filename="../mainwindow.cpp" line="488"/>
-        <location filename="../mainwindow.cpp" line="1122"/>
-        <location filename="../mainwindow.cpp" line="1138"/>
+        <location filename="../mainwindow.cpp" line="489"/>
+        <location filename="../mainwindow.cpp" line="1123"/>
+        <location filename="../mainwindow.cpp" line="1139"/>
         <source>Boot Next: %1</source>
         <translation>Carregar o próximo: %1</translation>
     </message>
@@ -240,10 +240,10 @@
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="361"/>
-        <location filename="../mainwindow.cpp" line="375"/>
-        <location filename="../mainwindow.cpp" line="406"/>
-        <location filename="../mainwindow.cpp" line="545"/>
-        <location filename="../mainwindow.cpp" line="616"/>
+        <location filename="../mainwindow.cpp" line="376"/>
+        <location filename="../mainwindow.cpp" line="407"/>
+        <location filename="../mainwindow.cpp" line="546"/>
+        <location filename="../mainwindow.cpp" line="617"/>
         <source>Error</source>
         <translation>Erro</translation>
     </message>
@@ -263,145 +263,145 @@
         <translation>Introduzir o nome para o item de menu UEFI</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="375"/>
+        <location filename="../mainwindow.cpp" line="376"/>
         <source>Something went wrong, could not add entry.</source>
         <translation>O processo falhou; não foi possível adicionar a entrada.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="393"/>
+        <location filename="../mainwindow.cpp" line="394"/>
         <source>Installing bootsplash, please wait</source>
         <translation>A instalar máscara. Aguardar. </translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="400"/>
+        <location filename="../mainwindow.cpp" line="401"/>
         <source>Updating sources</source>
         <translation>A actualizar as origens</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="402"/>
+        <location filename="../mainwindow.cpp" line="403"/>
         <source>Installing</source>
         <translation>A instalar</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="406"/>
+        <location filename="../mainwindow.cpp" line="407"/>
         <source>Could not install the bootsplash.</source>
         <translation>A máscara não foi instalada.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="490"/>
+        <location filename="../mainwindow.cpp" line="491"/>
         <source>Boot Current: %1</source>
         <translation>Carregar o actual: %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="545"/>
+        <location filename="../mainwindow.cpp" line="546"/>
         <source>Could not create a temporary folder</source>
         <translation>Não foi possível criar uma pasta temporária</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="555"/>
+        <location filename="../mainwindow.cpp" line="556"/>
         <source>Cannot continue</source>
         <translation>Impossível continuar</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="556"/>
+        <location filename="../mainwindow.cpp" line="557"/>
         <source>Cannot create chroot environment, cannot change boot options. Exiting...</source>
         <translation>Não é possível criar um ambiente chroot.  Não é possível alterar as opções de arranque. Saindo...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="616"/>
+        <location filename="../mainwindow.cpp" line="617"/>
         <source>Something went wrong, could not save boot order.</source>
         <translation>O processo falhou; não foi possível guardar a ordem das entradas de arranque.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="822"/>
-        <location filename="../mainwindow.cpp" line="1246"/>
+        <location filename="../mainwindow.cpp" line="823"/>
+        <location filename="../mainwindow.cpp" line="1247"/>
         <source>Updating configuration, please wait</source>
         <translation>A actualizar a configuração. Aguardar.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="875"/>
+        <location filename="../mainwindow.cpp" line="876"/>
         <source>Updating initramfs...</source>
         <translation>A actualizar o initramfs...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="887"/>
-        <location filename="../mainwindow.cpp" line="1259"/>
+        <location filename="../mainwindow.cpp" line="888"/>
+        <location filename="../mainwindow.cpp" line="1260"/>
         <source>Updating grub...</source>
         <translation>A actualizar o GRUB...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="891"/>
+        <location filename="../mainwindow.cpp" line="892"/>
         <source>Done</source>
         <translation>Concluído</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="891"/>
+        <location filename="../mainwindow.cpp" line="892"/>
         <source>Changes have been successfully applied.</source>
         <translation>Alterações aplicadas com êxito.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="903"/>
+        <location filename="../mainwindow.cpp" line="904"/>
         <source>About %1</source>
         <translation>Sobre o %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="904"/>
+        <location filename="../mainwindow.cpp" line="905"/>
         <source>Version: </source>
         <translation>Versão: </translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="906"/>
+        <location filename="../mainwindow.cpp" line="907"/>
         <source>Program for selecting common start-up choices</source>
         <translation>Programa para seleccionar opções de iniciação comuns</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="908"/>
+        <location filename="../mainwindow.cpp" line="909"/>
         <source>Copyright (c) MX Linux</source>
         <translation>Direitos de Autor (c) MX Linux</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="909"/>
+        <location filename="../mainwindow.cpp" line="910"/>
         <source>%1 License</source>
         <translation>Licença do %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="930"/>
+        <location filename="../mainwindow.cpp" line="931"/>
         <source>%1 Help</source>
         <translation>Ajuda do %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="939"/>
-        <location filename="../mainwindow.cpp" line="1224"/>
+        <location filename="../mainwindow.cpp" line="940"/>
+        <location filename="../mainwindow.cpp" line="1225"/>
         <source>Running in a Virtual Machine</source>
         <translation>Em execução numa Máquina Virtual</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="940"/>
-        <location filename="../mainwindow.cpp" line="1225"/>
+        <location filename="../mainwindow.cpp" line="941"/>
+        <location filename="../mainwindow.cpp" line="1226"/>
         <source>You current system is running in a Virtual Machine,
 Plymouth bootsplash will work in a limited way, you also won&apos;t be able to preview the theme</source>
         <translation>O sistema está a ser executado numa Máquina Virtual.
 A máscara do arranque Plymouth será executada com limitações. Também não será possível pré-visualizar o tema </translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="947"/>
+        <location filename="../mainwindow.cpp" line="948"/>
         <source>Plymouth packages not installed</source>
         <translation>Pacotes do Plymouth não instalados</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="948"/>
+        <location filename="../mainwindow.cpp" line="949"/>
         <source>Plymouth packages are not currently installed.
 OK to go ahead and install them?</source>
         <translation>Os pacotes do Plymouth não estão instalados.
 Continuar e instalar estes pacotes?</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="971"/>
+        <location filename="../mainwindow.cpp" line="972"/>
         <source>Images (*.png *.jpg *.jpeg *.tga)</source>
         <translation>Imagens (*.png *.jpg *.jpeg *.tga)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1083"/>
+        <location filename="../mainwindow.cpp" line="1084"/>
         <source>Boot log</source>
         <translation type="unfinished"></translation>
     </message>
@@ -410,22 +410,22 @@ Continuar e instalar estes pacotes?</translation>
         <translation type="vanished">Premir qualquer tecla para fechar</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1097"/>
+        <location filename="../mainwindow.cpp" line="1098"/>
         <source>Log not found</source>
         <translation>Registo não encontrado</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1097"/>
+        <location filename="../mainwindow.cpp" line="1098"/>
         <source>Could not find log at </source>
         <translation>Não foi encontrado registo em</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1104"/>
+        <location filename="../mainwindow.cpp" line="1105"/>
         <source>Edit UEFI Boot Entries</source>
         <translation>Editar as Entradas de Arranque UEFI</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1107"/>
+        <location filename="../mainwindow.cpp" line="1108"/>
         <source>You can use the Up/Down buttons, or drag &amp; drop items to change boot order.
 - Items are listed in the boot order.
 - Grayed out lines are inactive.</source>
@@ -434,75 +434,75 @@ Continuar e instalar estes pacotes?</translation>
 - As linhas a cinzento estão inactivas.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1111"/>
-        <location filename="../mainwindow.cpp" line="1165"/>
+        <location filename="../mainwindow.cpp" line="1112"/>
+        <location filename="../mainwindow.cpp" line="1166"/>
         <source>Set ac&amp;tive</source>
         <translation>Definir como ac&amp;tivo</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1112"/>
+        <location filename="../mainwindow.cpp" line="1113"/>
         <source>&amp;Add entry</source>
         <translation>&amp;Adicionar entrada</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1113"/>
+        <location filename="../mainwindow.cpp" line="1114"/>
         <source>Boot &amp;next</source>
         <translation>Carregar o pró&amp;ximo</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1088"/>
-        <location filename="../mainwindow.cpp" line="1114"/>
+        <location filename="../mainwindow.cpp" line="1089"/>
+        <location filename="../mainwindow.cpp" line="1115"/>
         <source>&amp;Close</source>
         <translation>&amp;Fechar</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1115"/>
+        <location filename="../mainwindow.cpp" line="1116"/>
         <source>Move &amp;down</source>
         <translation>Mover para &amp;baixo</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1116"/>
+        <location filename="../mainwindow.cpp" line="1117"/>
         <source>&amp;Remove entry</source>
         <translation>&amp;Remover entrada</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1117"/>
+        <location filename="../mainwindow.cpp" line="1118"/>
         <source>Re&amp;set next</source>
         <translation>Re&amp;stabelecer o próximo</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1118"/>
+        <location filename="../mainwindow.cpp" line="1119"/>
         <source>Change &amp;timeout</source>
         <translation>Alterar &amp;tempo de espera</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1119"/>
+        <location filename="../mainwindow.cpp" line="1120"/>
         <source>Move &amp;up</source>
         <translation>Mover para &amp;cima</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1122"/>
-        <location filename="../mainwindow.cpp" line="1138"/>
+        <location filename="../mainwindow.cpp" line="1123"/>
+        <location filename="../mainwindow.cpp" line="1139"/>
         <source>not set, will boot using list order</source>
         <translation>não definido; usa a ordem na lista para o arranque</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1162"/>
+        <location filename="../mainwindow.cpp" line="1163"/>
         <source>Set &amp;inactive</source>
         <translation>Definir como &amp;inactivo</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1215"/>
+        <location filename="../mainwindow.cpp" line="1216"/>
         <source>Needs reboot</source>
         <translation>É necessário reiniciar</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1216"/>
+        <location filename="../mainwindow.cpp" line="1217"/>
         <source>Plymouth was just installed, you might need to reboot before being able to display previews</source>
         <translation>O Plymouth acabou de ser instalado. Pode ser necessário reiniciar para exibir as pré-visualizações</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1280"/>
+        <location filename="../mainwindow.cpp" line="1281"/>
         <source>Click to select theme</source>
         <translation>Clicar para seleccionar o tema</translation>
     </message>
@@ -555,12 +555,12 @@ Continuar e instalar estes pacotes?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="968"/>
+        <location filename="../mainwindow.cpp" line="969"/>
         <source>Select image to display in bootloader</source>
         <translation>Seleccionar a imagem de fundo do carregador do arranque</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1290"/>
+        <location filename="../mainwindow.cpp" line="1291"/>
         <source>Select GRUB theme</source>
         <translation>Seleccionar o tema do GRUB</translation>
     </message>

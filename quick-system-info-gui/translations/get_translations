@@ -1,6 +1,6 @@
 #!/bin/bash
 
-APPNAME="quick-system-info-gui"
+APPNAME="$(basename $(dirname $(pwd)))"
 
 echodo() {
   echo "${@}"
@@ -11,20 +11,31 @@ echodo() {
 if [ ! -s  .tx/config ]; then
    mkdir -p .tx
    cat <<EOF > .tx/config
+
 [main]
 host = https://www.transifex.com
 
-[antix-development.$APPNAME]
+[o:anticapitalista:p:antix-development:r:$APPNAME]
 file_filter = ./${APPNAME}_<lang>.ts
 source_file = ${APPNAME}_en.ts
 source_lang = en
 type = ts
+minimum_perc = 25
 EOF
 fi    
 
+##migrate percent checking
+if [ -z "$(grep minimum_perc .tx/config)" ]; then
+	echo "minimum_perc = 25" >> .tx/config
+fi
+
+# remove existing translations
+find . -type f -name '*.ts' -not -name '*en.ts' -delete
 
 # get all translations
 if command -v tx >/dev/null; then
-   echodo tx pull -r antix-development.$APPNAME  --all
+   echodo tx pull -r antix-development.$APPNAME -a
 fi
 
+lupdate ../*.pro # Update en.ts file
+lupdate ../*.cpp ../*.h ../*.ui -ts *.ts

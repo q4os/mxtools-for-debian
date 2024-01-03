@@ -107,7 +107,7 @@ void ManageRemotes::addItem()
 void ManageRemotes::setInstall()
 {
     install_ref = editInstallFlatpakref->text();
-    this->close();
+    close();
 }
 
 void ManageRemotes::userSelected(int index)

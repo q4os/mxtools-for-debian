@@ -13,7 +13,7 @@
 
 extern const QString starting_home;
 
-// display doc as nomal user when run as root
+// Display doc as nomal user when run as root
 void displayDoc(const QString &url, const QString &title)
 {
     bool started_as_root = false;
@@ -21,7 +21,7 @@ void displayDoc(const QString &url, const QString &title)
         started_as_root = true;
         qputenv("HOME", starting_home.toUtf8()); // use original home for theming purposes
     }
-    // prefer mx-viewer otherwise use xdg-open (use runuser to run that as logname user)
+    // Prefer mx-viewer otherwise use xdg-open (use runuser to run that as logname user)
     QString executablePath = QStandardPaths::findExecutable("mx-viewer");
     if (!executablePath.isEmpty()) {
         QProcess::startDetached(QStringLiteral("mx-viewer"), {url, title});
@@ -81,6 +81,5 @@ void displayAboutMsgBox(const QString &title, const QString &message, const QStr
         layout->addWidget(btnClose);
         changelog->setLayout(layout);
         changelog->exec();
-        delete changelog;
     }
 }

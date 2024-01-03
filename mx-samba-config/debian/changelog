@@ -1,3 +1,9 @@
+mx-samba-config (23.12) mx; urgency=medium
+
+  * Fix about window title
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 08 Dec 2023 10:51:20 -0500
+
 mx-samba-config (23.7) mx; urgency=medium
 
   * Update translations

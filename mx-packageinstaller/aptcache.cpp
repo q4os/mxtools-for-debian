@@ -14,21 +14,19 @@ AptCache::AptCache()
 void AptCache::loadCacheFiles()
 {
     // Exclude Debian backports and MX testrepo and temp repos
-    const QRegularExpression packages_filter("(.*binary-" + getArch()
-                                             + "_Packages)|"
-                                               "(.*binary-.*_Packages(?!.*debian_.*-backports_.*_Packages)"
-                                               "(?!.*mx_testrepo.*_test_.*_Packages)"
-                                               "(?!.*mx_repo.*_temp_.*_Packages))");
-
-    QDirIterator it(dir);
-    QList<QString> matchingFiles;
-    while (it.hasNext()) {
-        QString fileName = it.next();
-        if (packages_filter.match(fileName).hasMatch()) {
+    const QRegularExpression packagesFilter("(.*binary-" + getArch()
+                                            + "_Packages)|"
+                                              "(.*binary-.*_Packages(?!.*debian_.*-backports_.*_Packages)"
+                                              "(?!.*mx_testrepo.*_test_.*_Packages)"
+                                              "(?!.*mx_repo.*_temp_.*_Packages))");
+    QStringList matchingFiles;
+    const QStringList files = QDir(dir).entryList(QDir::Files);
+    for (const QString &fileName : qAsConst(files)) {
+        if (packagesFilter.match(fileName).hasMatch()) {
             matchingFiles.append(fileName);
         }
     }
-    for (const QString &fileName : matchingFiles) {
+    for (const QString &fileName : qAsConst(matchingFiles)) {
         if (!readFile(fileName)) {
             qDebug() << "error reading a cache file";
         }
@@ -36,7 +34,7 @@ void AptCache::loadCacheFiles()
     parseContent();
 }
 
-QMap<QString, QStringList> AptCache::getCandidates()
+QMap<QString, PackageInfo> AptCache::getCandidates() const
 {
     return candidates;
 }
@@ -72,12 +70,14 @@ void AptCache::parseContent()
             description = line.midRef(13).trimmed();
             if (match_arch) {
                 if (candidates.constFind(package.toString()) == candidates.constEnd()
-                    || VersionNumber(candidates.value(package.toString()).at(0)) < VersionNumber(version.toString())) {
+                    || VersionNumber(candidates.value(package.toString()).version)
+                           < VersionNumber(version.toString())) {
                     candidates.insert(package.toString(), {version.toString(), description.toString()});
                 }
             }
         }
     }
+    files_content.clear();
 }
 
 bool AptCache::readFile(const QString &file_name)

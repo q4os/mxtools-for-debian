@@ -44,133 +44,113 @@
         <translation>Prikaži razdelke</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="112"/>
-        <source>fat32</source>
-        <translation>fat32</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="117"/>
-        <source>ext4</source>
-        <translation>ext4</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="122"/>
-        <source>exfat</source>
-        <translation>exfat</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="127"/>
-        <source>ntfs</source>
-        <translation>ntfs</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="135"/>
+        <location filename="../mainwindow.ui" line="138"/>
         <source>Refresh drive list</source>
         <translation>Osveži seznam pogonov</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="149"/>
+        <location filename="../mainwindow.ui" line="152"/>
         <source>USB-DATA</source>
         <translation>USB-DATA</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="156"/>
+        <location filename="../mainwindow.ui" line="159"/>
         <source>File System Label</source>
         <translation>Oznaka datotečnega sistema</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="163"/>
+        <location filename="../mainwindow.ui" line="166"/>
         <source>Partition Table Type</source>
         <translation>Vrsta tabele razdelka</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="222"/>
+        <location filename="../mainwindow.ui" line="225"/>
         <source>Quit application</source>
         <translation>Zapri aplikacijo</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="225"/>
+        <location filename="../mainwindow.ui" line="228"/>
         <source>Close</source>
         <translation>Zapri</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="232"/>
+        <location filename="../mainwindow.ui" line="235"/>
         <source>Alt+N</source>
         <translation>Alt+N</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="270"/>
+        <location filename="../mainwindow.ui" line="273"/>
         <source>Display help </source>
         <translation>Prikaži pomoč</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="273"/>
+        <location filename="../mainwindow.ui" line="276"/>
         <source>Help</source>
         <translation>Pomoč</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="280"/>
+        <location filename="../mainwindow.ui" line="283"/>
         <source>Alt+H</source>
         <translation>Alt+H</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="312"/>
+        <location filename="../mainwindow.ui" line="315"/>
         <source>About this application</source>
         <translation>O tem programu</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="315"/>
+        <location filename="../mainwindow.ui" line="318"/>
         <source>About...</source>
         <translation>O programu...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="322"/>
+        <location filename="../mainwindow.ui" line="325"/>
         <source>Alt+B</source>
         <translation>Alt+B</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="354"/>
+        <location filename="../mainwindow.ui" line="357"/>
         <source>Next</source>
         <translation>Naslednji</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="380"/>
+        <location filename="../mainwindow.ui" line="383"/>
         <source>Back</source>
         <translation>Nazaj</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="178"/>
+        <location filename="../mainwindow.cpp" line="184"/>
         <source>Success</source>
         <translation>Operacija je uspela</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="178"/>
+        <location filename="../mainwindow.cpp" line="184"/>
         <source>Format successful!</source>
         <translation>Formatiranje je bilo uspešno!</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="180"/>
-        <location filename="../mainwindow.cpp" line="308"/>
+        <location filename="../mainwindow.cpp" line="186"/>
+        <location filename="../mainwindow.cpp" line="315"/>
         <source>Failure</source>
         <translation>Napaka</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="180"/>
+        <location filename="../mainwindow.cpp" line="186"/>
         <source>Error encountered in the Format process</source>
         <translation>Napaka pri formatiranju</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="211"/>
+        <location filename="../mainwindow.cpp" line="217"/>
         <source>Error</source>
         <translation>Napaka</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="211"/>
+        <location filename="../mainwindow.cpp" line="217"/>
         <source>Please select a USB device to write to</source>
         <translation>Izberite USb napravo na katero naj se zapisuje</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="216"/>
+        <location filename="../mainwindow.cpp" line="222"/>
         <source>These actions will destroy all data on 
 
 </source>
@@ -179,42 +159,42 @@
 </translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="216"/>
+        <location filename="../mainwindow.cpp" line="222"/>
         <source>Do you wish to continue?</source>
         <translation>Ali želite nadaljevati?</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="252"/>
+        <location filename="../mainwindow.cpp" line="258"/>
         <source>About %1</source>
         <translation>O %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="253"/>
+        <location filename="../mainwindow.cpp" line="259"/>
         <source>Version: </source>
         <translation>Različica:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="254"/>
+        <location filename="../mainwindow.cpp" line="260"/>
         <source>Program for formatting USB devices</source>
         <translation>Program za formatiranje USB naprav</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="256"/>
+        <location filename="../mainwindow.cpp" line="262"/>
         <source>Copyright (c) MX Linux</source>
         <translation>Copyright (c) MX Linux</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="257"/>
+        <location filename="../mainwindow.cpp" line="263"/>
         <source>%1 License</source>
         <translation>%1 licenca</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="265"/>
+        <location filename="../mainwindow.cpp" line="271"/>
         <source>%1 Help</source>
         <translation>%1 pomoč</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="308"/>
+        <location filename="../mainwindow.cpp" line="315"/>
         <source>Invalid Name</source>
         <translation type="unfinished"></translation>
     </message>

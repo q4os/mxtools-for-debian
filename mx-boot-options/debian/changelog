@@ -1,3 +1,10 @@
+mx-boot-options (23.11.07) mx; urgency=medium
+
+  * Fix: trimm trailing line breaks from the shell command output
+  * Adjust error handling in UEFI Boot Options Manager
+
+ -- fehlix <fehlix@mxlinux.org>  Thu, 30 Nov 2023 19:14:18 -0500
+
 mx-boot-options (23.11.06) mx; urgency=medium
 
   * Fix: ownership for /etc/default/grub file

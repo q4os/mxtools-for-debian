@@ -1,3 +1,26 @@
+formatusb (23.12.01) mx; urgency=medium
+
+  * fix langauage issue combobox
+  * update translations
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 17 Dec 2023 11:47:22 -0500
+
+formatusb (23.11.03) mx; urgency=medium
+
+  * update translations 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 09 Dec 2023 14:39:24 -0500
+
+formatusb (23.11.02) mx; urgency=medium
+
+  * remove mx-launcher-l10n from depends, make recommend
+  * fix messages in lib script
+  * use path for parted command in create_partition
+  * use gksu directly instead of su-to-root
+  * add gksu and pkexec options to recommends in control file
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 05 Nov 2023 19:44:32 -0500
+
 formatusb (23.11.01) mx; urgency=medium
 
   * improve root action handling

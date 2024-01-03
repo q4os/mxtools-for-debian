@@ -1,3 +1,29 @@
+mx-snapshot (23.12.02) mx; urgency=medium
+
+  * Add minimum width for number of cores box
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 11 Dec 2023 23:00:41 -0500
+
+mx-snapshot (23.12.01) mx; urgency=medium
+
+  * Fix: quoting in sed replacement file path
+  * Use entryFileInfolist instead of iterator to avoid I/O timing issues
+
+ -- fehlix <fehlix@mxlinux.org>  Sat, 02 Dec 2023 20:09:10 -0500
+
+mx-snapshot (23.11.05) mx; urgency=medium
+
+  * Fix: more quoting to allow for spaces in snapshot directory
+
+ -- Adrian <adrian@mxlinux.org>  Tue, 28 Nov 2023 00:20:42 -0500
+
+mx-snapshot (23.11.04) mx; urgency=medium
+
+  * Fix: spaces in snapshot and working directory
+  * Fix: relative directory path in commandline arguments
+
+ -- fehlix <fehlix@mxlinux.org>  Mon, 27 Nov 2023 20:03:18 -0500
+
 mx-snapshot (23.11.03) mx; urgency=medium
 
   * Fix: getting xdg-user-dir info

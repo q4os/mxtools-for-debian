@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="hu">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="hu">
 <context>
     <name>MainWindow</name>
     <message>
@@ -89,53 +87,53 @@
         <translation>Live adatmegőrzés beállítása</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="50"/>
-        <location filename="../mainwindow.cpp" line="99"/>
+        <location filename="../mainwindow.cpp" line="54"/>
+        <location filename="../mainwindow.cpp" line="103"/>
         <source>MX Remaster Control Center</source>
         <translation>MX lemezképbe rögzítés vezérlőközpont</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="78"/>
+        <location filename="../mainwindow.cpp" line="82"/>
         <source>MX RemasterCC</source>
         <translation>MX lemezképbe rögzítés vezérlőközpont</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="98"/>
+        <location filename="../mainwindow.cpp" line="102"/>
         <source>About MX Remaster Control Center</source>
         <translation>Az MX lemezképbe rögzítés vezérlőközpontról</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="100"/>
+        <location filename="../mainwindow.cpp" line="104"/>
         <source>Version: </source>
         <translation>Verzió:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="101"/>
+        <location filename="../mainwindow.cpp" line="105"/>
         <source>This program provides access to different remaster and persistence tools in MX Linux</source>
         <translation>Ez a program az MX Linux különböző lemezképbe rögzítési és adatmegőrzési eszközeinek elérését biztosítja</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="103"/>
+        <location filename="../mainwindow.cpp" line="107"/>
         <source>Copyright (c) MX Linux</source>
         <translation>Copyright (c) MX Linux</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="104"/>
+        <location filename="../mainwindow.cpp" line="108"/>
         <source>License</source>
         <translation>Licenc</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="105"/>
+        <location filename="../mainwindow.cpp" line="109"/>
         <source>Changelog</source>
         <translation>Változások listája</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="106"/>
+        <location filename="../mainwindow.cpp" line="110"/>
         <source>Cancel</source>
         <translation>Mégsem</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="126"/>
+        <location filename="../mainwindow.cpp" line="128"/>
         <source>&amp;Close</source>
         <translation>&amp;Bezárás</translation>
     </message>

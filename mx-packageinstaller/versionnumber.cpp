@@ -89,7 +89,7 @@ bool VersionNumber::operator!=(const VersionNumber &value) const
     return !(*this == value);
 }
 
-// transform QString into QStringList with digits grouped together
+// Transform QString into QStringList with digits grouped together
 QStringList VersionNumber::groupDigits(const QString &value)
 {
     QStringList result = QStringList();
@@ -112,7 +112,7 @@ QStringList VersionNumber::groupDigits(const QString &value)
     return result;
 }
 
-// return 1 if second > first, -1 if second < first, 0 if equal
+// Return 1 if second > first, -1 if second < first, 0 if equal
 int VersionNumber::compare(const VersionNumber &first, const VersionNumber &second) const
 {
     if (second.epoch > first.epoch) {
@@ -131,13 +131,13 @@ int VersionNumber::compare(const VersionNumber &first, const VersionNumber &seco
     return 0;
 }
 
-// return 1 if second > first, -1 if second < first, 0 if equal
+// Return 1 if second > first, -1 if second < first, 0 if equal
 int VersionNumber::compare(const QStringList &first, const QStringList &second)
 {
     for (int i = 0; i < first.length() && i < second.length(); ++i) {
-        // check if equal
+        // Check if equal
         if (first.at(i) == second.at(i)) {
-            continue; // continue till it finds difference
+            continue; // Continue till it finds difference
         }
 
         // ~ sorts lowest
@@ -147,7 +147,7 @@ int VersionNumber::compare(const QStringList &first, const QStringList &second)
             return -1;
         }
 
-        // if one char length check which one is larger
+        // If one char length check which one is larger
         if (first.at(i).length() == 1 && second.at(i).length() == 1) {
             int res = compare(first.at(i).at(0), second.at(i).at(0));
             if (res == 0) {
@@ -155,14 +155,14 @@ int VersionNumber::compare(const QStringList &first, const QStringList &second)
             } else {
                 return res;
             }
-            // one char (not-number) vs. multiple (digits)
+            // One char (not-number) vs. multiple (digits)
         } else if (first.at(i).length() > 1 && second.at(i).length() == 1 && !second.at(i).at(0).isDigit()) {
             return 1;
         } else if (first.at(i).length() == 1 && !first.at(i).at(0).isDigit() && second.at(i).length() > 1) {
             return -1;
         }
 
-        // compare remaining digits
+        // Compare remaining digits
         if (second.at(i).toInt() > first.at(i).toInt()) {
             return 1;
         } else {
@@ -170,7 +170,7 @@ int VersionNumber::compare(const QStringList &first, const QStringList &second)
         }
     }
 
-    // if equal till the end of one of the lists, compare list size
+    // If equal till the end of one of the lists, compare list size
     // if the larger list doesn't have "~" it's the bigger version
     if (second.length() > first.length()) {
         if (second.at(first.length()) != QLatin1String("~")) {
@@ -188,7 +188,7 @@ int VersionNumber::compare(const QStringList &first, const QStringList &second)
     return 0;
 }
 
-// return 1 if second > first, -1 if second < first, 0 if equal
+// Return 1 if second > first, -1 if second < first, 0 if equal
 // letters and number sort before special chars
 int VersionNumber::compare(QChar first, QChar second)
 {
@@ -196,7 +196,7 @@ int VersionNumber::compare(QChar first, QChar second)
         return 0;
     }
 
-    // sort letters and numbers before special char
+    // Sort letters and numbers before special char
     if (first.isLetterOrNumber() && !second.isLetterOrNumber()) {
         return 1;
     } else if (!first.isLetterOrNumber() && second.isLetterOrNumber()) {

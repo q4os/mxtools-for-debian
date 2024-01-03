@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="it">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="it">
 <context>
     <name>MainWindow</name>
     <message>
@@ -89,53 +87,53 @@
         <translation>Configura persistenza della Live</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="50"/>
-        <location filename="../mainwindow.cpp" line="99"/>
+        <location filename="../mainwindow.cpp" line="54"/>
+        <location filename="../mainwindow.cpp" line="103"/>
         <source>MX Remaster Control Center</source>
         <translation>MX Remaster Control Center</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="78"/>
+        <location filename="../mainwindow.cpp" line="82"/>
         <source>MX RemasterCC</source>
         <translation>MX RemasterCC</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="98"/>
+        <location filename="../mainwindow.cpp" line="102"/>
         <source>About MX Remaster Control Center</source>
         <translation>Informazioni su MX Remaster Control Center</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="100"/>
+        <location filename="../mainwindow.cpp" line="104"/>
         <source>Version: </source>
         <translation>Versione: </translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="101"/>
+        <location filename="../mainwindow.cpp" line="105"/>
         <source>This program provides access to different remaster and persistence tools in MX Linux</source>
         <translation>Questo programma permette di accedere a diversi strumenti di rimasterizzazione e persistenza in MX Linux</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="103"/>
+        <location filename="../mainwindow.cpp" line="107"/>
         <source>Copyright (c) MX Linux</source>
         <translation>Copyright (c) MX Linux</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="104"/>
+        <location filename="../mainwindow.cpp" line="108"/>
         <source>License</source>
         <translation>Licenza</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="105"/>
+        <location filename="../mainwindow.cpp" line="109"/>
         <source>Changelog</source>
         <translation>Registro delle modifiche</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="106"/>
+        <location filename="../mainwindow.cpp" line="110"/>
         <source>Cancel</source>
         <translation>Annulla</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="126"/>
+        <location filename="../mainwindow.cpp" line="128"/>
         <source>&amp;Close</source>
         <translation>C&amp;hiudi</translation>
     </message>

@@ -86,7 +86,7 @@ void Settings::addRemoveExclusion(bool add, QString exclusion)
 bool Settings::checkSnapshotDir() const
 {
     qDebug() << "+++" << __PRETTY_FUNCTION__ << "+++";
-    if (!Cmd().runAsRoot("mkdir -p " + snapshot_dir, false)) {
+    if (!Cmd().runAsRoot("mkdir -p \"" + snapshot_dir + "\"", false)) {
         qDebug() << QObject::tr("Could not create working directory. ") + snapshot_dir;
         return false;
     }
@@ -741,12 +741,15 @@ void Settings::processArgs(const QCommandLineParser &arg_parser)
     shutdown = arg_parser.isSet("shutdown");
     kernel = arg_parser.value("kernel");
     preempt = arg_parser.isSet("preempt");
+    QDir dir;
     if (!arg_parser.value("directory").isEmpty() && QFileInfo::exists(arg_parser.value("directory"))) {
-        snapshot_dir = arg_parser.value("directory") + (snapshot_dir.endsWith("/") ? "snapshot" : "/snapshot");
+        dir.setPath(arg_parser.value("directory"));
+        snapshot_dir = dir.absolutePath() + "/snapshot";
     }
 
     if (!arg_parser.value("workdir").isEmpty() && QFileInfo::exists(arg_parser.value("workdir"))) {
-        tempdir_parent = arg_parser.value("workdir");
+        dir.setPath(arg_parser.value("workdir"));
+        tempdir_parent = dir.absolutePath();
     }
 
     if (!arg_parser.value(QStringLiteral("file")).isEmpty()) {

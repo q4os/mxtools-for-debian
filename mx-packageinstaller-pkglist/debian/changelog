@@ -1,3 +1,96 @@
+mx-packageinstaller-pkglist (24.01.2mx23) mx; urgency=medium
+
+  * update 6.6 debian and liquorix kernels
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Tue, 02 Jan 2024 20:41:52 -0500
+
+mx-packageinstaller-pkglist (24.01.1mx23) mx; urgency=medium
+
+  * update liquorux 6.6.8-2 kernel
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 01 Jan 2024 00:29:24 -0500
+
+mx-packageinstaller-pkglist (23.12.9mx23) mx; urgency=medium
+
+  * update liquorix 6.6 kernel
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 30 Dec 2023 21:02:07 -0500
+
+mx-packageinstaller-pkglist (23.12.8mx23) mx; urgency=medium
+
+  * add 6.6.8 debian kernel
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 30 Dec 2023 11:38:03 -0500
+
+mx-packageinstaller-pkglist (23.12.7mx23) mx; urgency=medium
+
+  * update liquorix kernel 6.6.7 (6.6.8)
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 20 Dec 2023 19:59:24 -0500
+
+mx-packageinstaller-pkglist (23.12.06mx23) mx; urgency=medium
+
+  * update gimp full remove gimp-dds as uninstallable
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 14 Dec 2023 08:05:08 -0500
+
+mx-packageinstaller-pkglist (23.12.05mx23+1) mx; urgency=medium
+
+  * remove parathenticals from machine translation of liqourix metpackage entry
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 13 Dec 2023 23:52:53 -0500
+
+mx-packageinstaller-pkglist (23.12.05mx23) mx; urgency=medium
+
+  * update liqourix kernels
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Tue, 12 Dec 2023 21:25:05 -0500
+
+mx-packageinstaller-pkglist (23.12.04mx23) mx; urgency=medium
+
+  * update liquorix kernel
+  * add liqourix kernel metapackage
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 09 Dec 2023 00:26:47 -0500
+
+mx-packageinstaller-pkglist (23.12.03mx23) mx; urgency=medium
+
+  * add rpi chromium-browser
+  * category changes for apparmour and keepasx
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 07 Dec 2023 18:31:11 -0500
+
+mx-packageinstaller-pkglist (23.12.02mx23) mx; urgency=medium
+
+  * update get_veracrypt
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 07 Dec 2023 17:43:57 -0500
+
+mx-packageinstaller-pkglist (23.12.01mx23) mx; urgency=medium
+
+  * correct liquorix 6.6 typos
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Tue, 05 Dec 2023 19:11:18 -0500
+
+mx-packageinstaller-pkglist (23.11.07mx23) mx; urgency=medium
+
+  * update liquorix (6.6) and ahs (6.5) kernels 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 02 Dec 2023 09:23:41 -0500
+
+mx-packageinstaller-pkglist (23.11.06mx23) mx; urgency=medium
+
+  * change arm64 pm installble tag to armsixtyfour (kodi-arm64)
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 27 Nov 2023 20:11:56 -0500
+
+mx-packageinstaller-pkglist (23.11.05mx23) mx; urgency=medium
+
+  * misc. arch adjustments
+  * add 6.6 liquorix kernel
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 26 Nov 2023 16:13:23 -0500
+
 mx-packageinstaller-pkglist (23.11.04mx23) mx; urgency=medium
 
   * remove adapta theme entries (no longer available)

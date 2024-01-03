@@ -1,3 +1,9 @@
+quick-system-info-gui (23.12.01) mx; urgency=medium
+
+  * update translations
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 09 Dec 2023 22:48:41 -0500
+
 quick-system-info-gui (23.09.01) mx; urgency=medium
 
   * update desktop file

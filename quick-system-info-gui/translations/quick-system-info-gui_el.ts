@@ -1,4 +1,6 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="el">
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.1" language="el">
 <context>
     <name>MainWindow</name>
     <message>
@@ -6,81 +8,82 @@
         <translation type="vanished">MX Οθόνη υποδοχής</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="109"/>
+        <location filename="../mainwindow.ui" line="74"/>
         <source>&amp;Copy for forum</source>
         <translation>Αντιγραφή για το &amp;φόρουμ</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="92"/>
+        <location filename="../mainwindow.ui" line="43"/>
         <source>Save the displayed system information to a text file.</source>
         <translation>Αποθήκευση των εμφανιζόμενων πληροφοριών σε αρχείο κειμένου.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="95"/>
+        <location filename="../mainwindow.ui" line="46"/>
         <location filename="../mainwindow.cpp" line="91"/>
         <source>Save text...</source>
         <translation>Αποθήκευση σε κείμενο...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="106"/>
+        <location filename="../mainwindow.ui" line="71"/>
         <source>Copy the displayed system information to the clipboard, encased in [CODE][/CODE] tags ready to use in a forum post.</source>
         <translation>Αποθήκευση των εμφανιζόμενων πληροφοριών στο πρόχειρο, έτοιμες για ανάρτηση στο φόρουμ (μέσα σε [CODE][/CODE]).</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="157"/>
+        <location filename="../mainwindow.ui" line="57"/>
         <source>Save the system information selected from the list to an archive file.</source>
         <translation>Αποθήκευση των επιλεγμένων σε συμπιεσμένο αρχείο.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="160"/>
+        <location filename="../mainwindow.ui" line="60"/>
         <location filename="../mainwindow.cpp" line="126"/>
         <source>&amp;Save...</source>
         <translation>&amp;Αποθήκευση...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="227"/>
+        <location filename="../mainwindow.ui" line="129"/>
         <source>Quit application</source>
         <translation>Κλείσιμο εφαρμογής</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="230"/>
+        <location filename="../mainwindow.ui" line="132"/>
         <source>Close</source>
         <translation>Κλείσιμο</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="237"/>
+        <location filename="../mainwindow.ui" line="139"/>
         <source>Alt+N</source>
         <translation>Alt+N</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="273"/>
+        <location filename="../mainwindow.ui" line="181"/>
         <source>About this application</source>
         <translation>Περί της εφαρμογής</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="276"/>
+        <location filename="../mainwindow.ui" line="184"/>
         <source>About...</source>
         <translation>Περί...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="283"/>
+        <location filename="../mainwindow.ui" line="191"/>
         <source>Alt+B</source>
         <translation>Alt+B</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="207"/>
+        <location filename="../mainwindow.ui" line="115"/>
         <source>Help</source>
         <translation>Βοήθεια</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="176"/>
+        <location filename="../mainwindow.cpp" line="187"/>
         <source>Version: </source>
         <translation>Έκδοση: </translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="32"/>
-        <location filename="../mainwindow.cpp" line="176"/>
-        <location filename="../mainwindow.cpp" line="333"/>
+        <location filename="../mainwindow.ui" line="14"/>
+        <location filename="../mainwindow.cpp" line="187"/>
+        <location filename="../mainwindow.cpp" line="325"/>
+        <location filename="../mainwindow.cpp" line="354"/>
         <source>Quick System Info</source>
         <translation>Συνοπτικές πληροφορίες συστήματος</translation>
     </message>
@@ -90,12 +93,12 @@
         <translation>Φόρτωση...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="180"/>
+        <location filename="../mainwindow.cpp" line="191"/>
         <source>Copyright (c) MX Linux</source>
         <translation>Πνευματικά δικαιώματα (c) MX Linux</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="175"/>
+        <location filename="../mainwindow.cpp" line="186"/>
         <source>About Quick-System-Info-gui</source>
         <translation>Περί του Συνοπτικές πληροφορίες συστήματος σε γραφικό περιβάλλον</translation>
     </message>
@@ -106,7 +109,7 @@
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="99"/>
-        <location filename="../mainwindow.cpp" line="478"/>
+        <location filename="../mainwindow.cpp" line="481"/>
         <source>Find &amp;Next</source>
         <translation>Εύρεση ε&amp;πόμενου</translation>
     </message>
@@ -121,67 +124,71 @@
         <translation>Αντιστροφή επιλογής</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="177"/>
+        <location filename="../mainwindow.cpp" line="188"/>
         <source>Program for displaying a quick system info report</source>
         <translation>Πρόγραμμα για την εμφάνιση συνοπτικών πληροφοριών του συστήματος</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="181"/>
         <source>License</source>
-        <translation>Άδεια</translation>
+        <translation type="vanished">Άδεια</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="274"/>
+        <location filename="../mainwindow.cpp" line="193"/>
+        <source>%1 License</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="280"/>
         <source>Open folder</source>
         <translation>Άνοιγμα φακέλου</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="276"/>
+        <location filename="../mainwindow.cpp" line="282"/>
         <source>OK</source>
         <translation>Εντάξει</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="437"/>
+        <location filename="../mainwindow.cpp" line="440"/>
         <source>&amp;Save (×%1)...</source>
         <translation>Απο&amp;θήκευση (×%1)...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="471"/>
+        <location filename="../mainwindow.cpp" line="474"/>
         <source>Find</source>
         <translation>Εύρεση</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="474"/>
+        <location filename="../mainwindow.cpp" line="477"/>
         <source>&amp;Find what:</source>
         <translation>Εύ&amp;ρεση του:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="484"/>
+        <location filename="../mainwindow.cpp" line="487"/>
         <source>Match c&amp;ase</source>
         <translation>Ταίριασμα &amp;πεζών-κεφαλαίων</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="485"/>
+        <location filename="../mainwindow.cpp" line="488"/>
         <source>Match &amp;whole word only</source>
         <translation>Ταίριασμα &amp;ολόκληρων λέξεων</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="488"/>
+        <location filename="../mainwindow.cpp" line="491"/>
         <source>Direction</source>
         <translation>Κατεύθυνση</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="490"/>
+        <location filename="../mainwindow.cpp" line="493"/>
         <source>&amp;Up</source>
         <translation>Ε&amp;πάνω</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="491"/>
+        <location filename="../mainwindow.cpp" line="494"/>
         <source>&amp;Down</source>
         <translation>&amp;Κάτω</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="533"/>
+        <location filename="../mainwindow.cpp" line="536"/>
         <source>Cannot find &quot;%1&quot;</source>
         <translation>Δεν βρέθηκε &quot;%1&quot;</translation>
     </message>
@@ -190,7 +197,7 @@
         <translation type="vanished">Αρχείο αλλαγών</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="479"/>
+        <location filename="../mainwindow.cpp" line="482"/>
         <source>Cancel</source>
         <translation>Άκυρο</translation>
     </message>
@@ -199,34 +206,33 @@
         <translation type="vanished">&amp;Κλείσιμο</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="212"/>
+        <location filename="../mainwindow.cpp" line="223"/>
         <source>Save System Information</source>
         <translation>Αποθήκευση των πληροφοριών του συστήματος</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="273"/>
+        <location filename="../mainwindow.cpp" line="279"/>
         <source>System information saved.</source>
         <translation>Οι πληροφορίες του συστήματος αποθηκεύτηκαν.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="281"/>
+        <location filename="../mainwindow.cpp" line="287"/>
         <source>Could not save system information.</source>
         <translation>Οι πληροφορίες του συστήματος δεν αποθηκεύτηκαν.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="340"/>
+        <location filename="../mainwindow.cpp" line="332"/>
         <source>history</source>
         <translation>ιστορικό</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="356"/>
+        <location filename="../mainwindow.cpp" line="354"/>
         <source>%1 Help</source>
         <translation>Βοήθεια %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="356"/>
         <source>Quick System Info (gui)</source>
-        <translation>Συνοπτικές πληροφορίες συστήματος (γραφικό περιβάλλον)</translation>
+        <translation type="vanished">Συνοπτικές πληροφορίες συστήματος (γραφικό περιβάλλον)</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="81"/>

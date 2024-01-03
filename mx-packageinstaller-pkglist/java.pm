@@ -70,8 +70,8 @@ all
 </preinstall>
 
 <install_package_names>
-openjdk-17-jre
-openjdk-17-jre-headless
+default-jre
+default-jre-headless
 </install_package_names>
 
 
@@ -81,6 +81,8 @@ openjdk-17-jre-headless
 
 
 <uninstall_package_names>
+default-jre
+default-jre-headless
 openjdk-17-jre
 openjdk-17-jre-headless
 </uninstall_package_names>

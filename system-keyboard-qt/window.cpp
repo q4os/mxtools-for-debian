@@ -198,13 +198,13 @@ bool Window::apply()
     parser.set("XKBOPTIONS", getOptions().join(','));
     qDebug() << parser.source();
     {
-        QFile io{KeyboardDefaultFile};
-        if(io.open(QFile::WriteOnly))
-        {
-            qDebug() << "Failed to open file write-only:" << KeyboardDefaultFile;
-            QMessageBox::critical(this, tr("Error"), tr("Failed to open file: ") + KeyboardDefaultFile, QMessageBox::Close);
-            return false;
-        }
+//        QFile io{KeyboardDefaultFile};
+//        if(!io.open(QFile::WriteOnly))
+//        {
+//            qDebug() << "Failed to open file write-only:" << KeyboardDefaultFile;
+//            QMessageBox::critical(this, tr("Error"), tr("Failed to open file: ") + KeyboardDefaultFile, QMessageBox::Close);
+//            return false;
+//        }
 
         QTemporaryFile tempfile;
         if(!tempfile.open()){

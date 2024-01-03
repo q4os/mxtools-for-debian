@@ -2,7 +2,7 @@
 <app>
 
 <category>
-Video
+Audio
 </category>
 
 <name>

@@ -1,3 +1,4 @@
+
 [main]
 host = https://www.transifex.com
 
@@ -6,3 +7,4 @@ file_filter = ./mx-remastercc_<lang>.ts
 source_file = mx-remastercc_en.ts
 source_lang = en
 type = ts
+minimum_perc = 25

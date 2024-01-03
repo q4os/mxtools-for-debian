@@ -44,133 +44,113 @@
         <translation>Mostra les particions </translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="112"/>
-        <source>fat32</source>
-        <translation>FAT32</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="117"/>
-        <source>ext4</source>
-        <translation>ext4</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="122"/>
-        <source>exfat</source>
-        <translation>EXFAT</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="127"/>
-        <source>ntfs</source>
-        <translation>NTFS</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="135"/>
+        <location filename="../mainwindow.ui" line="138"/>
         <source>Refresh drive list</source>
         <translation>Refresca la llista d&apos;unitats</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="149"/>
+        <location filename="../mainwindow.ui" line="152"/>
         <source>USB-DATA</source>
         <translation>USB-DATA</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="156"/>
+        <location filename="../mainwindow.ui" line="159"/>
         <source>File System Label</source>
         <translation>Etiqueta del Sistema de Fitxers</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="163"/>
+        <location filename="../mainwindow.ui" line="166"/>
         <source>Partition Table Type</source>
         <translation>Tipus de Taula de Particions</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="222"/>
+        <location filename="../mainwindow.ui" line="225"/>
         <source>Quit application</source>
         <translation>Surt de l&apos;aplicació</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="225"/>
+        <location filename="../mainwindow.ui" line="228"/>
         <source>Close</source>
         <translation>Tanca</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="232"/>
+        <location filename="../mainwindow.ui" line="235"/>
         <source>Alt+N</source>
         <translation>Alt+N</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="270"/>
+        <location filename="../mainwindow.ui" line="273"/>
         <source>Display help </source>
         <translation>Mostra l&apos;ajuda</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="273"/>
+        <location filename="../mainwindow.ui" line="276"/>
         <source>Help</source>
         <translation>Ajuda </translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="280"/>
+        <location filename="../mainwindow.ui" line="283"/>
         <source>Alt+H</source>
         <translation>Alt+H</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="312"/>
+        <location filename="../mainwindow.ui" line="315"/>
         <source>About this application</source>
         <translation>Quant a aquest programa</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="315"/>
+        <location filename="../mainwindow.ui" line="318"/>
         <source>About...</source>
         <translation>Quant a...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="322"/>
+        <location filename="../mainwindow.ui" line="325"/>
         <source>Alt+B</source>
         <translation>Alt+B</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="354"/>
+        <location filename="../mainwindow.ui" line="357"/>
         <source>Next</source>
         <translation>Següent</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="380"/>
+        <location filename="../mainwindow.ui" line="383"/>
         <source>Back</source>
         <translation>Enrere</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="178"/>
+        <location filename="../mainwindow.cpp" line="184"/>
         <source>Success</source>
         <translation>Èxit</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="178"/>
+        <location filename="../mainwindow.cpp" line="184"/>
         <source>Format successful!</source>
         <translation>Formatat correctament!</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="180"/>
-        <location filename="../mainwindow.cpp" line="308"/>
+        <location filename="../mainwindow.cpp" line="186"/>
+        <location filename="../mainwindow.cpp" line="315"/>
         <source>Failure</source>
         <translation>Fallada</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="180"/>
+        <location filename="../mainwindow.cpp" line="186"/>
         <source>Error encountered in the Format process</source>
         <translation>S&apos;ha trobat un error en el procés de Formatatge</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="211"/>
+        <location filename="../mainwindow.cpp" line="217"/>
         <source>Error</source>
         <translation>Error</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="211"/>
+        <location filename="../mainwindow.cpp" line="217"/>
         <source>Please select a USB device to write to</source>
         <translation>Si us plau, trieu un altre dispositiu USB per escriure-hi</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="216"/>
+        <location filename="../mainwindow.cpp" line="222"/>
         <source>These actions will destroy all data on 
 
 </source>
@@ -178,42 +158,42 @@
 </translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="216"/>
+        <location filename="../mainwindow.cpp" line="222"/>
         <source>Do you wish to continue?</source>
         <translation>Voleu continuar?</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="252"/>
+        <location filename="../mainwindow.cpp" line="258"/>
         <source>About %1</source>
         <translation>Quant a %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="253"/>
+        <location filename="../mainwindow.cpp" line="259"/>
         <source>Version: </source>
         <translation>Versió: </translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="254"/>
+        <location filename="../mainwindow.cpp" line="260"/>
         <source>Program for formatting USB devices</source>
         <translation>Programa per formatar dispositius USB</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="256"/>
+        <location filename="../mainwindow.cpp" line="262"/>
         <source>Copyright (c) MX Linux</source>
         <translation>Copyright (c) MX Linux</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="257"/>
+        <location filename="../mainwindow.cpp" line="263"/>
         <source>%1 License</source>
         <translation>Llicència de %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="265"/>
+        <location filename="../mainwindow.cpp" line="271"/>
         <source>%1 Help</source>
         <translation>Ajuda de %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="308"/>
+        <location filename="../mainwindow.cpp" line="315"/>
         <source>Invalid Name</source>
         <translation type="unfinished"></translation>
     </message>

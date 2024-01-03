@@ -47,52 +47,7 @@ FORMS += \
         window.ui \
     selectlayoutdialog.ui
 
-TRANSLATIONS += translations/system-keyboard-qt_am.ts \
-                translations/system-keyboard-qt_ar.ts \
-                translations/system-keyboard-qt_bg.ts \
-                translations/system-keyboard-qt_bn.ts \
-                translations/system-keyboard-qt_ca.ts \
-                translations/system-keyboard-qt_cs.ts \
-                translations/system-keyboard-qt_da.ts \
-                translations/system-keyboard-qt_de.ts \
-                translations/system-keyboard-qt_el.ts \
-                translations/system-keyboard-qt_es.ts \
-                translations/system-keyboard-qt_et.ts \
-                translations/system-keyboard-qt_eu.ts \
-                translations/system-keyboard-qt_fa.ts \
-                translations/system-keyboard-qt_fi.ts \
-                translations/system-keyboard-qt_fil_PH.ts \
-                translations/system-keyboard-qt_fr.ts \
-                translations/system-keyboard-qt_he_IL.ts \
-                translations/system-keyboard-qt_hi.ts \
-                translations/system-keyboard-qt_hr.ts \
-                translations/system-keyboard-qt_hu.ts \
-                translations/system-keyboard-qt_id.ts \
-                translations/system-keyboard-qt_is.ts \
-                translations/system-keyboard-qt_it.ts \
-                translations/system-keyboard-qt_ja.ts \
-                translations/system-keyboard-qt_kk.ts \
-                translations/system-keyboard-qt_ko.ts \
-                translations/system-keyboard-qt_lt.ts \
-                translations/system-keyboard-qt_mk.ts \
-                translations/system-keyboard-qt_mr.ts \
-                translations/system-keyboard-qt_nb.ts \
-                translations/system-keyboard-qt_nl.ts \
-                translations/system-keyboard-qt_pl.ts \
-                translations/system-keyboard-qt_pt.ts \
-                translations/system-keyboard-qt_pt_BR.ts \
-                translations/system-keyboard-qt_ro.ts \
-                translations/system-keyboard-qt_ru.ts \
-                translations/system-keyboard-qt_sk.ts \
-                translations/system-keyboard-qt_sl.ts \
-                translations/system-keyboard-qt_sq.ts \
-                translations/system-keyboard-qt_sr.ts \
-                translations/system-keyboard-qt_sv.ts \
-                translations/system-keyboard-qt_tr.ts \
-                translations/system-keyboard-qt_uk.ts \
-                translations/system-keyboard-qt_vi.ts \
-                translations/system-keyboard-qt_zh_CN.ts \
-                translations/system-keyboard-qt_zh_TW.ts
+TRANSLATIONS += translations/system-keyboard-qt_en.ts
 
 ## Default rules for deployment.
 #qnx: target.path = /tmp/$${TARGET}/bin

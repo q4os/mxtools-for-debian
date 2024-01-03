@@ -370,8 +370,9 @@ void MainWindow::addUefiEntry(QListWidget *listEntries, QDialog *dialogUefi)
     file_name = "/EFI/" + file_name.section(QStringLiteral("/EFI/"), 1);
     QString out
         = cmd.getOutAsRoot("efibootmgr -cL \"" + name + "\" -d " + disk + " -p " + partition + " -l " + file_name);
+    int exit_code = cmd.exitCode();
     unmountAndClean(mount_list);
-    if (cmd.exitCode() != 0) {
+    if (exit_code != 0) {
         QMessageBox::critical(dialogUefi, tr("Error"), tr("Something went wrong, could not add entry."));
         return;
     }

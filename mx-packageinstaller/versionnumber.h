@@ -18,9 +18,7 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-
-#ifndef VERSIONNUMBER_H
-#define VERSIONNUMBER_H
+#pragma once
 
 #include <QMetaType>
 #include <QStringList>
@@ -91,12 +89,12 @@ public:
     bool operator!=(const VersionNumber &value) const;
 
 private:
-    QString str; // full version string
+    QString str; // Full version string
     int epoch {};
-    QStringList upstream_version; // a string list of characters, numbers are grouped together
+    QStringList upstream_version; // A string list of characters, numbers are grouped together
     QStringList debian_revision;
 
-    static QStringList groupDigits(const QString &value); // add characters to separate elements, groups digits together
+    static QStringList groupDigits(const QString &value); // Add characters to separate elements, groups digits together
     void setStrings(const QString &value);
 
     [[nodiscard]] int compare(const VersionNumber &first,
@@ -106,5 +104,3 @@ private:
 };
 
 Q_DECLARE_METATYPE(VersionNumber)
-
-#endif

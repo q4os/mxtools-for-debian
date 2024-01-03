@@ -21,9 +21,7 @@
  * You should have received a copy of the GNU General Public License
  * along with mx-packageinstaller.  If not, see <http://www.gnu.org/licenses/>.
  **********************************************************************/
-
-#ifndef LOCKFILE_H
-#define LOCKFILE_H
+#pragma once
 
 #include <QFile>
 
@@ -43,5 +41,3 @@ public:
 private:
     QFile file;
 };
-
-#endif // LOCKFILE_H

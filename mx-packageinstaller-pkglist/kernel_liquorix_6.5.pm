@@ -27,7 +27,7 @@ echo "$MXREPO" > /etc/apt/sources.list.d/mxpitemp.list
 apt-get update 
 fi
 DKMS_PKGS=($(dpkg-query -f '${db:Status-Abbrev}\t${Package}\n' -W  -- '*-dkms' | grep ^i | grep -- '-dkms$' | cut -d$'\t' -f2))
-apt-get install linux-image-6.5.11-3-liquorix-amd64 linux-headers-6.5.11-3-liquorix-amd64 ${DKMS_PKGS[*]}
+apt-get install linux-image-6.5.11-4-liquorix-amd64 linux-headers-6.5.11-4-liquorix-amd64 ${DKMS_PKGS[*]}
 </preinstall>
 
 <install_package_names>
@@ -36,7 +36,7 @@ apt-get install linux-image-6.5.11-3-liquorix-amd64 linux-headers-6.5.11-3-liquo
 
 
 <postinstall>
-rebuild_dkms_packages.sh linux-image-6.5.11-3-liquorix-amd64
+rebuild_dkms_packages.sh linux-image-6.5.11-4-liquorix-amd64
 if [ -f /etc/apt/sources.list.d/mxpitemp.list ]; then
 rm /etc/apt/sources.list.d/mxpitemp.list
 apt-get update
@@ -46,7 +46,7 @@ echo "...$(gettext -d apt -s ' Done')!"
 
 
 <uninstall_package_names>
-linux-image-6.5.11-3-liquorix-amd64
-linux-headers-6.5.11-3-liquorix-amd64
+linux-image-6.5.11-4-liquorix-amd64
+linux-headers-6.5.11-4-liquorix-amd64
 </uninstall_package_names>
 </app>

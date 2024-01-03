@@ -2,7 +2,7 @@
 <app>
 
 <category>
-Utility
+Misc
 </category>
 
 <name>

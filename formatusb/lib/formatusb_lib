@@ -122,7 +122,7 @@ create_partition()
 	if [ "$part" = "msdos" ]; then
 		parttabletype="msdos" 
 		option="primary"
-		echo "making new gpt partition table"
+		echo "making new msdos partition table"
 		sleep 1
 	fi
 	
@@ -135,19 +135,19 @@ create_partition()
 		fi
 	fi
 	
-	parted -s $dev mklabel $parttabletype
+	/sbin/parted -s $dev mklabel $parttabletype
 	
 	checkerrorcode "making new partition table"
 	sleep 1
 	/sbin/partprobe $dev 
-	
 	checkerrorcode "refresh partitions info"
-	parted -s -a optimal $dev mkpart $option 1 100%
-	 
+	sleep 1
+	#create partition
+	/sbin/parted -s -a optimal $dev mkpart $option 1 100%
 	checkerrorcode "create new partition"
 	sleep 1
+	
 	/sbin/partprobe $dev
-	 
 	checkerrorcode "refresh partitions info"
 	sleep 1
 }

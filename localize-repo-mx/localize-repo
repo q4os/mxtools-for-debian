@@ -22,8 +22,8 @@ at_AX_HOST=http://mirror.easyname.ch/mxlinux-packages/antix
 at_MX_HOST=http://mirror.easyname.ch/mxlinux-packages/mx
 at_LOCATION="Vienna"
 
-be_AX_HOST=http://mirror.tiguinet.net/mx/packages/antix
-be_MX_HOST=http://mirror.tiguinet.net/mx/packages/mx
+be_AX_HOST=http://ftp.halifax.rwth-aachen.de/mxlinux/packages/antix
+be_MX_HOST=http://ftp.halifax.rwth-aachen.de/mxlinux/packages/mx
 be_LOCATION="Brussels"
 
 bg_AX_HOST=https://mirrors.netix.net/mx/MX-Packages/antix
@@ -94,8 +94,8 @@ id_AX_HOST=http://kartolo.sby.datautama.net.id/mx-packages/antix
 id_MX_HOST=http://kartolo.sby.datautama.net.id/mx-packages/mx
 id_LOCATION="Indonesia"
 
-in_AX_HOST=http://mx-pkg.mirror.net.in/MX-Linux/antix
-in_MX_HOST=http://mx-pkg.mirror.net.in/MX-Linux/mx
+in_AX_HOST=https://mirror.kku.ac.th/mx-packages/antix/
+in_MX_HOST=https://mirror.kku.ac.th/mx-packages/mx/
 in_LOCATION="India"
 
 it_AX_HOST=http://it.mxrepo.com/antix
@@ -191,7 +191,7 @@ ua_MX_HOST=https://fastmirror.pp.ua/mxlinux/mx
 ua_LOCATION="Ukraine"
 
 ut_AX_HOST=http://la.mxrepo.com/antix
-ut_MX_HOST=http://mxrepo.com/mx
+ut_MX_HOST=https://mxrepo.com/mx
 ut_LOCATION="Utah, USA"
 
 uy_AX_HOST=https://espejito.fder.edu.uy/mxlinux/packages/antix

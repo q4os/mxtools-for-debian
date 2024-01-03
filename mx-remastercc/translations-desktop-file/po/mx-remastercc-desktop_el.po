@@ -4,8 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# anticapitalista <anticapitalista@riseup.net>, 2022
-# Dolphin Oracle <dolphinoracle@gmail.com>, 2022
+# Ioannis LM, 2023
 # 
 #, fuzzy
 msgid ""
@@ -14,8 +13,8 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-12-04 21:29-0500\n"
 "PO-Revision-Date: 2022-12-09 04:03+0000\n"
-"Last-Translator: Dolphin Oracle <dolphinoracle@gmail.com>, 2022\n"
-"Language-Team: Greek (https://www.transifex.com/anticapitalista/teams/10162/el/)\n"
+"Last-Translator: Ioannis LM, 2023\n"
+"Language-Team: Greek (https://app.transifex.com/anticapitalista/teams/10162/el/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -25,9 +24,9 @@ msgstr ""
 #. The desktop entry name will be displayed within the menu.
 #: desktop-in/mx-remastercc.desktop.in:5
 msgid "MX RemasterCC"
-msgstr "MX RemasterCC"
+msgstr "MX Αλλαγή και διατήρηση δεδομένων ISO"
 
 #. # The desktop entry comment will be shown within the menu.
 #: desktop-in/mx-remastercc.desktop.in:7
 msgid "Live persistence and remastering tools"
-msgstr "ζωντανή persistence και εργαλεία για ρεμίξ."
+msgstr "Εργαλεία επεξεργασίας για Live ISO"

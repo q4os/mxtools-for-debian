@@ -33,17 +33,16 @@
 #include <QLocale>
 #include <QTranslator>
 
+#include "log.h"
 #include "mainwindow.h"
 #include "version.h"
+
 #include <unistd.h>
 
-static QFile logFile;
 extern const QString starting_home = qEnvironmentVariable("HOME");
 
 int main(int argc, char *argv[])
 {
-    void messageHandler(QtMsgType type, const QMessageLogContext &context, const QString &msg);
-
     if (getuid() == 0) {
         qputenv("XDG_RUNTIME_DIR", "/run/user/0");
         qunsetenv("SESSION_MANAGER");
@@ -106,57 +105,8 @@ int main(int argc, char *argv[])
             exit(EXIT_FAILURE);
         }
     }
-    //    // Don't start app if Synaptic/apt-get is running, lock dpkg otherwise while the program runs
-    //    LockFile lock_file(QStringLiteral("/var/lib/dpkg/lock"));
-    //    if (lock_file.isLocked()) {
-    //        QApplication::beep();
-    //        QMessageBox::critical(nullptr, QObject::tr("Unable to get exclusive lock"),
-    //                              QObject::tr("Another package management application (like Synaptic or apt-get), "
-    //                                          "is already running. Please close that application first"));
-    //        exit(EXIT_FAILURE);
-    //    } else {
-    //        lock_file.lock();
-    //    }
-    QString log_name = "/tmp/mxpi.log";
-    logFile.setFileName(log_name);
-    logFile.setFileName(log_name);
-    logFile.open(QFile::Append | QFile::Text);
-    qInstallMessageHandler(messageHandler);
-
+    Log startLog;
     MainWindow w(parser);
     w.show();
     return QApplication::exec();
-}
-
-// The implementation of the handler
-void messageHandler(QtMsgType type, const QMessageLogContext &context, const QString &msg)
-{
-    QTextStream term_out(stdout);
-
-    if (msg.contains(QLatin1String("\r"))) {
-        term_out << msg;
-        return;
-    }
-    term_out << msg << "\n";
-
-    QTextStream out(&logFile);
-    out << QDateTime::currentDateTime().toString(QStringLiteral("yyyy-MM-dd hh:mm:ss.zzz "));
-    switch (type) {
-    case QtInfoMsg:
-        out << QStringLiteral("INF ");
-        break;
-    case QtDebugMsg:
-        out << QStringLiteral("DBG ");
-        break;
-    case QtWarningMsg:
-        out << QStringLiteral("WRN ");
-        break;
-    case QtCriticalMsg:
-        out << QStringLiteral("CRT ");
-        break;
-    case QtFatalMsg:
-        out << QStringLiteral("FTL ");
-        break;
-    }
-    out << context.category << QStringLiteral(": ") << msg << QStringLiteral("\n");
 }

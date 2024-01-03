@@ -1109,7 +1109,7 @@
     <message>
         <location filename="../xfwm_compositor_settings.ui" line="86"/>
         <source>Show shadows under dock windows</source>
-        <translation>Mostra ombres sota l&apos;acoblador de finestres</translation>
+        <translation>Mostra ombres sota les finestres de l&apos;acoblador</translation>
     </message>
     <message>
         <location filename="../xfwm_compositor_settings.ui" line="93"/>

@@ -57,51 +57,7 @@ FORMS    += \
     prompttab_fix.ui \
     othertab.ui
 
-TRANSLATIONS += translations/bash-config_am.ts \
-                translations/bash-config_ar.ts \
-                translations/bash-config_bg.ts \
-                translations/bash-config_ca.ts \
-                translations/bash-config_cs.ts \
-                translations/bash-config_da.ts \
-                translations/bash-config_de.ts \
-                translations/bash-config_el.ts \
-                translations/bash-config_es.ts \
-                translations/bash-config_en.ts \
-                translations/bash-config_et.ts \
-                translations/bash-config_eu.ts \
-                translations/bash-config_fa.ts \
-                translations/bash-config_fi.ts \
-                translations/bash-config_fr.ts \
-                translations/bash-config_fr_BE.ts \
-                translations/bash-config_he_IL.ts \
-                translations/bash-config_hi.ts \
-                translations/bash-config_hr.ts \
-                translations/bash-config_hu.ts \
-                translations/bash-config_id.ts \
-                translations/bash-config_is.ts \
-                translations/bash-config_it.ts \
-                translations/bash-config_ja.ts \
-                translations/bash-config_kk.ts \
-                translations/bash-config_ko.ts \
-                translations/bash-config_lt.ts \
-                translations/bash-config_mk.ts \
-                translations/bash-config_mr.ts \
-                translations/bash-config_nb.ts \
-                translations/bash-config_nl.ts \
-                translations/bash-config_pl.ts \
-                translations/bash-config_pt.ts \
-                translations/bash-config_pt_BR.ts \
-                translations/bash-config_ro.ts \
-                translations/bash-config_ru.ts \
-                translations/bash-config_sk.ts \
-                translations/bash-config_sl.ts \
-                translations/bash-config_sq.ts \
-                translations/bash-config_sr.ts \
-                translations/bash-config_sv.ts \
-                translations/bash-config_tr.ts \
-                translations/bash-config_uk.ts \
-                translations/bash-config_zh_CN.ts \
-                translations/bash-config_zh_TW.ts
+TRANSLATIONS += translations/bash-config_en.ts
 
 
 RESOURCES += \

@@ -13,9 +13,9 @@ configfolder="$HOME/.config/MX-Linux"
 targetfolder="$(xdg-user-dir DESKTOP)"
 xdg_checkfile="xdg_check"
 liveapplist="minstall.desktop"
+rpi_list="FAQ.desktop rpi-tips.desktop rpi-video.desktop"
 
-applist="FAQ.desktop \ 
-Help.desktop"
+applist="FAQ.desktop Help.desktop"
 
 #check to see if we need to do anything else
 
@@ -38,8 +38,7 @@ if false ; then
 	fi
 fi
 
-#copy everything else
-# copystuff "$applist"
+
 
 #mark so we don't do it again
 
@@ -60,6 +59,10 @@ if [ -d "$targetfolder" ]; then
 				#special case; make sure NoDisplay is not in minstall.desktop file
 				if [ "$i" = "minstall.desktop" ]; then
 					sed -i '/NoDisplay*/d' "$targetfolder/minstall.desktop"
+				fi
+				#special case; make sure NoDisplay is not in rpi-video.desktop file
+				if [ "$i" = "rpi-video.desktop" ]; then
+					sed -i '/NoDisplay*/d' "$targetfolder/rpi-video.desktop"
 				fi
 				#make executable from Xfce desktop. safe as long as gio exists on system
 				if [ -x /usr/bin/gio ]; then

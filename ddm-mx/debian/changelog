@@ -1,3 +1,11 @@
+ddm-mx (23.12.01) mx; urgency=medium
+
+  * add -N switch for Nvidia developer repo
+  * quit checking test repo by default
+  * improve -t test switch
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 23 Dec 2023 11:22:36 -0500
+
 ddm-mx (23.09.01) mx; urgency=medium
 
   * update nvidia-detect-mx to correct driver selection logic

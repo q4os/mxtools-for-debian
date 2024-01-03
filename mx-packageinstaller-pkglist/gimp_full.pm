@@ -74,7 +74,6 @@ gimp
 gimp-data
 gimp-data-extras
 gimp-cbmplugs
-gimp-dds
 gimp-gluas
 gimp-gmic
 gimp-lensfun
@@ -93,7 +92,6 @@ gimp
 gimp-data
 gimp-data-extras
 gimp-cbmplugs
-gimp-dds
 gimp-gluas
 gimp-gmic
 gimp-lensfun

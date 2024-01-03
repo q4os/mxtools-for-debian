@@ -226,7 +226,7 @@ bool Work::createIso(const QString &filename)
     using Release::Version;
     QString throttle
         = (Settings::getDebianVerNum() < Version::Bookworm) ? "" : " -throttle " + QString::number(settings->throttle);
-    QString cmd = unbuffer + "mksquashfs /.bind-root " + settings->work_dir + "/iso-template/antiX/linuxfs -comp "
+    QString cmd = unbuffer + "mksquashfs /.bind-root \"" + settings->work_dir + "/iso-template/antiX/linuxfs\" -comp "
                   + settings->compression + " -processors " + QString::number(settings->cores) + throttle
                   + ((settings->mksq_opt.isEmpty()) ? "" : " " + settings->mksq_opt) + " -wildcards -ef "
                   + settings->snapshot_excludes.fileName() + " " + settings->session_excludes;
@@ -392,19 +392,17 @@ void Work::replaceMenuStrings()
         replaceStringInFile("%RELEASE_DATE%", settings->release_date, settings->work_dir + file);
     }
 
-    QString themeDir = settings->work_dir + "/iso-template/boot/grub/theme";
-    QDirIterator themeFileIt(themeDir, {"*.txt"}, QDir::Files);
-    while (themeFileIt.hasNext()) {
-        QString themeFile = themeFileIt.next();
-        replaceStringInFile("%ASCII_CODE_NAME%", settings->codename, themeFile);
-        replaceStringInFile("%DISTRO%", settings->project_name + "-" + settings->distro_version, themeFile);
+    QDir themeDir(settings->work_dir + "/iso-template/boot/grub/theme");
+    for (const QFileInfo &themeFile : themeDir.entryInfoList({"*.txt"}, QDir::Files)) {
+        replaceStringInFile("%ASCII_CODE_NAME%", settings->codename, themeFile.absoluteFilePath());
+        replaceStringInFile("%DISTRO%", settings->project_name + "-" + settings->distro_version, themeFile.absoluteFilePath());
     }
 }
 
 // Util function for replacing strings in files
 bool Work::replaceStringInFile(const QString &old_text, const QString &new_text, const QString &file_path)
 {
-    return shell.runAsRoot(QString("sed -i 's|%1|%2|g' %3").arg(old_text, new_text, file_path));
+    return shell.run(QString("sed -i 's|%1|%2|g' '%3'").arg(old_text, new_text, file_path));
 }
 
 // Save package list in working directory

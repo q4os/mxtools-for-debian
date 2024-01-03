@@ -60,7 +60,7 @@ Play on Linux
 </description>
 
 <installable>
-all
+32,64
 </installable>
 
 <screenshot>https://screenshots.debian.net/shrine/screenshot/15062/simage/large-ce0adddba47b1796d24f40baaad3daa5.png</screenshot>

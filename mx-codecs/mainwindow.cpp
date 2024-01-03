@@ -176,6 +176,9 @@ QString MainWindow::downloadDebs()
 
     // get release info
     QString release = cmd.getCmdOut(QStringLiteral("grep VERSION_CODENAME /etc/os-release |grep -Eo [a-z]+ "));
+    if ( release == "libretto" ){
+        release = "bookworm";
+    }
     qDebug() << "release is " << release;
     int idx = 0;
     const int inc = 10;

@@ -1,3 +1,16 @@
+mx-repo-list (23.12) mx; urgency=medium
+
+  * Remove inactive mirrors
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 11 Dec 2023 13:09:25 -0500
+
+mx-repo-list (23.11) mx; urgency=medium
+
+  * remove non-working India mirrors
+  * use https for mxrepo.com
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 27 Nov 2023 18:35:17 -0500
+
 mx-repo-list (23.9.01) mx; urgency=medium
 
   * Remove mirrors that are not working

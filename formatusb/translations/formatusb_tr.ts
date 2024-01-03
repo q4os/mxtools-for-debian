@@ -1,4 +1,6 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="tr">
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.1" language="tr">
 <context>
     <name>MainWindow</name>
     <message>
@@ -42,132 +44,113 @@
         <translation>Bölümleri göster</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="112"/>
-        <source>fat32</source>
-        <translation>fat32</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="117"/>
-        <source>ext4</source>
-        <translation>ext4</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="122"/>
-        <source>exfat</source>
-        <translation>exfat</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="127"/>
-        <source>ntfs</source>
-        <translation>ntfs</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="135"/>
+        <location filename="../mainwindow.ui" line="138"/>
         <source>Refresh drive list</source>
         <translation>Sürücü listesini yenile</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="149"/>
+        <location filename="../mainwindow.ui" line="152"/>
         <source>USB-DATA</source>
         <translation>USB-DATA</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="156"/>
+        <location filename="../mainwindow.ui" line="159"/>
         <source>File System Label</source>
         <translation>Dosya Sistemi Etiketi</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="163"/>
+        <location filename="../mainwindow.ui" line="166"/>
         <source>Partition Table Type</source>
         <translation>Bölümleme Tablosu Türü</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="222"/>
+        <location filename="../mainwindow.ui" line="225"/>
         <source>Quit application</source>
         <translation>Uygulamadan çık</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="225"/>
+        <location filename="../mainwindow.ui" line="228"/>
         <source>Close</source>
         <translation>Kapat</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="232"/>
+        <location filename="../mainwindow.ui" line="235"/>
         <source>Alt+N</source>
         <translation>Alt+N</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="270"/>
+        <location filename="../mainwindow.ui" line="273"/>
         <source>Display help </source>
         <translation>Yardımı görüntüle</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="273"/>
+        <location filename="../mainwindow.ui" line="276"/>
         <source>Help</source>
         <translation>Yardım</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="280"/>
+        <location filename="../mainwindow.ui" line="283"/>
         <source>Alt+H</source>
         <translation>Alt+H</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="312"/>
+        <location filename="../mainwindow.ui" line="315"/>
         <source>About this application</source>
         <translation>Uygulama hakkında</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="315"/>
+        <location filename="../mainwindow.ui" line="318"/>
         <source>About...</source>
         <translation>Hakkında...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="322"/>
+        <location filename="../mainwindow.ui" line="325"/>
         <source>Alt+B</source>
         <translation>Alt+B</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="354"/>
+        <location filename="../mainwindow.ui" line="357"/>
         <source>Next</source>
         <translation>Sonraki</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="380"/>
+        <location filename="../mainwindow.ui" line="383"/>
         <source>Back</source>
         <translation>Geri</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="178"/>
+        <location filename="../mainwindow.cpp" line="184"/>
         <source>Success</source>
         <translation>Başarılı</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="178"/>
+        <location filename="../mainwindow.cpp" line="184"/>
         <source>Format successful!</source>
         <translation>Biçimlendirme başarılı!</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="180"/>
+        <location filename="../mainwindow.cpp" line="186"/>
+        <location filename="../mainwindow.cpp" line="315"/>
         <source>Failure</source>
         <translation>Başarısız</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="180"/>
+        <location filename="../mainwindow.cpp" line="186"/>
         <source>Error encountered in the Format process</source>
         <translation>Biçimlendirme işleminde hatayla karşılaşıldı</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="211"/>
+        <location filename="../mainwindow.cpp" line="217"/>
         <source>Error</source>
         <translation>Hata</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="211"/>
+        <location filename="../mainwindow.cpp" line="217"/>
         <source>Please select a USB device to write to</source>
         <translation>Lütfen yazmak için bir USB aygıtı seçin</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="216"/>
+        <location filename="../mainwindow.cpp" line="222"/>
         <source>These actions will destroy all data on 
 
 </source>
@@ -176,39 +159,44 @@
 </translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="216"/>
+        <location filename="../mainwindow.cpp" line="222"/>
         <source>Do you wish to continue?</source>
         <translation>Devam etmek istiyor musunuz?</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="252"/>
+        <location filename="../mainwindow.cpp" line="258"/>
         <source>About %1</source>
         <translation>Hakkında %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="253"/>
+        <location filename="../mainwindow.cpp" line="259"/>
         <source>Version: </source>
         <translation>Sürüm</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="254"/>
+        <location filename="../mainwindow.cpp" line="260"/>
         <source>Program for formatting USB devices</source>
         <translation>USB aygıtları biçimlendirme programı</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="256"/>
+        <location filename="../mainwindow.cpp" line="262"/>
         <source>Copyright (c) MX Linux</source>
         <translation>Telif Hakkı (c) MX Linux</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="257"/>
+        <location filename="../mainwindow.cpp" line="263"/>
         <source>%1 License</source>
         <translation>%1 Telif Hakkı</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="265"/>
+        <location filename="../mainwindow.cpp" line="271"/>
         <source>%1 Help</source>
         <translation>%1 Yardım</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="315"/>
+        <source>Invalid Name</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

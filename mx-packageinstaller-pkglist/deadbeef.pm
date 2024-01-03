@@ -60,7 +60,7 @@ DeaDBeeF
 </description>
 
 <installable>
-all
+32,64
 </installable>
 
 <screenshot>http://deadbeef.sourceforge.net/screenshots/0.6/06.png</screenshot>

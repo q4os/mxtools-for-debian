@@ -1,3 +1,10 @@
+mx-tweak (23.12.01mx23) mx; urgency=medium
+
+  * add configuration of xfce-superkey .conf file
+  * update translations
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 09 Dec 2023 14:40:43 -0500
+
 mx-tweak (23.11.01mx23) mx; urgency=medium
 
   * cleanup setting of singleclick status on root KDE instances (dolphin)

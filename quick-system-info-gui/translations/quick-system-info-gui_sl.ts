@@ -1,4 +1,6 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="sl">
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.1" language="sl">
 <context>
     <name>MainWindow</name>
     <message>
@@ -6,81 +8,82 @@
         <translation type="vanished">MX dobrodošli</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="109"/>
+        <location filename="../mainwindow.ui" line="74"/>
         <source>&amp;Copy for forum</source>
         <translation>&amp;Kopiraj za forum</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="92"/>
+        <location filename="../mainwindow.ui" line="43"/>
         <source>Save the displayed system information to a text file.</source>
         <translation>Shrani prikazane podatke o sistemu v tekstovno datoteko.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="95"/>
+        <location filename="../mainwindow.ui" line="46"/>
         <location filename="../mainwindow.cpp" line="91"/>
         <source>Save text...</source>
         <translation>Shrani tekst...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="106"/>
+        <location filename="../mainwindow.ui" line="71"/>
         <source>Copy the displayed system information to the clipboard, encased in [CODE][/CODE] tags ready to use in a forum post.</source>
         <translation>Kopiraj prikazane podatke o sistemu na odložišče v obliki [CODE][/CODE] oznak za uporabo v sporočilu na forumu.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="157"/>
+        <location filename="../mainwindow.ui" line="57"/>
         <source>Save the system information selected from the list to an archive file.</source>
         <translation>Shrani s seznama izbrane podatke o sistemu v arhivsko datoteko.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="160"/>
+        <location filename="../mainwindow.ui" line="60"/>
         <location filename="../mainwindow.cpp" line="126"/>
         <source>&amp;Save...</source>
         <translation>&amp;Shrani</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="227"/>
+        <location filename="../mainwindow.ui" line="129"/>
         <source>Quit application</source>
         <translation>Zapri aplikacijo</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="230"/>
+        <location filename="../mainwindow.ui" line="132"/>
         <source>Close</source>
         <translation>Zapri</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="237"/>
+        <location filename="../mainwindow.ui" line="139"/>
         <source>Alt+N</source>
         <translation>Alt+N</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="273"/>
+        <location filename="../mainwindow.ui" line="181"/>
         <source>About this application</source>
         <translation>O tem programu</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="276"/>
+        <location filename="../mainwindow.ui" line="184"/>
         <source>About...</source>
         <translation>O programu...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="283"/>
+        <location filename="../mainwindow.ui" line="191"/>
         <source>Alt+B</source>
         <translation>Alt+B</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="207"/>
+        <location filename="../mainwindow.ui" line="115"/>
         <source>Help</source>
         <translation>Pomoč</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="176"/>
+        <location filename="../mainwindow.cpp" line="187"/>
         <source>Version: </source>
         <translation>Različica:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="32"/>
-        <location filename="../mainwindow.cpp" line="176"/>
-        <location filename="../mainwindow.cpp" line="333"/>
+        <location filename="../mainwindow.ui" line="14"/>
+        <location filename="../mainwindow.cpp" line="187"/>
+        <location filename="../mainwindow.cpp" line="325"/>
+        <location filename="../mainwindow.cpp" line="354"/>
         <source>Quick System Info</source>
         <translation>Hitri podatki o sistemu</translation>
     </message>
@@ -90,12 +93,12 @@
         <translation>Nalaganje...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="180"/>
+        <location filename="../mainwindow.cpp" line="191"/>
         <source>Copyright (c) MX Linux</source>
         <translation>Copyright (c) MX Linux</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="175"/>
+        <location filename="../mainwindow.cpp" line="186"/>
         <source>About Quick-System-Info-gui</source>
         <translation>O Hitri-podatki-o-sistemu-gui</translation>
     </message>
@@ -106,7 +109,7 @@
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="99"/>
-        <location filename="../mainwindow.cpp" line="478"/>
+        <location filename="../mainwindow.cpp" line="481"/>
         <source>Find &amp;Next</source>
         <translation>Najdi &amp;naslednje</translation>
     </message>
@@ -121,67 +124,71 @@
         <translation>Povrni izbor</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="177"/>
+        <location filename="../mainwindow.cpp" line="188"/>
         <source>Program for displaying a quick system info report</source>
         <translation>Program za hiter prikaz informacij o sistemu</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="181"/>
         <source>License</source>
-        <translation>Licenca</translation>
+        <translation type="vanished">Licenca</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="274"/>
+        <location filename="../mainwindow.cpp" line="193"/>
+        <source>%1 License</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="280"/>
         <source>Open folder</source>
         <translation>Odpri mapo</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="276"/>
+        <location filename="../mainwindow.cpp" line="282"/>
         <source>OK</source>
         <translation>V redu</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="437"/>
+        <location filename="../mainwindow.cpp" line="440"/>
         <source>&amp;Save (×%1)...</source>
         <translation>&amp;Shrani (×%1)...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="471"/>
+        <location filename="../mainwindow.cpp" line="474"/>
         <source>Find</source>
         <translation>Iskanje</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="474"/>
+        <location filename="../mainwindow.cpp" line="477"/>
         <source>&amp;Find what:</source>
         <translation>&amp;Najdi nekaj:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="484"/>
+        <location filename="../mainwindow.cpp" line="487"/>
         <source>Match c&amp;ase</source>
         <translation>Ujemanje velikosti črk</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="485"/>
+        <location filename="../mainwindow.cpp" line="488"/>
         <source>Match &amp;whole word only</source>
         <translation>Ujemanje &amp;celih besed</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="488"/>
+        <location filename="../mainwindow.cpp" line="491"/>
         <source>Direction</source>
         <translation>Smer</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="490"/>
+        <location filename="../mainwindow.cpp" line="493"/>
         <source>&amp;Up</source>
         <translation>&amp;Gor</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="491"/>
+        <location filename="../mainwindow.cpp" line="494"/>
         <source>&amp;Down</source>
         <translation>&amp;Dol</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="533"/>
+        <location filename="../mainwindow.cpp" line="536"/>
         <source>Cannot find &quot;%1&quot;</source>
         <translation>Ne najdem &quot;%1&quot;</translation>
     </message>
@@ -190,7 +197,7 @@
         <translation type="vanished">Dnevnik sprememb</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="479"/>
+        <location filename="../mainwindow.cpp" line="482"/>
         <source>Cancel</source>
         <translation>Prekliči</translation>
     </message>
@@ -199,34 +206,33 @@
         <translation type="vanished">&amp;Zapri</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="212"/>
+        <location filename="../mainwindow.cpp" line="223"/>
         <source>Save System Information</source>
         <translation>Shrani informacije o sistemu</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="273"/>
+        <location filename="../mainwindow.cpp" line="279"/>
         <source>System information saved.</source>
         <translation>Ingformacije o sistemu so shranjene.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="281"/>
+        <location filename="../mainwindow.cpp" line="287"/>
         <source>Could not save system information.</source>
         <translation>Informaciji o sistemu ni bilo mogoče shraniti.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="340"/>
+        <location filename="../mainwindow.cpp" line="332"/>
         <source>history</source>
         <translation>zgodovina</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="356"/>
+        <location filename="../mainwindow.cpp" line="354"/>
         <source>%1 Help</source>
         <translation>%1 pomoč</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="356"/>
         <source>Quick System Info (gui)</source>
-        <translation>Hitri podatki o sistemu (gui)</translation>
+        <translation type="vanished">Hitri podatki o sistemu (gui)</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="81"/>

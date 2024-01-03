@@ -135,15 +135,15 @@
     </message>
     <message>
         <location filename="../mainwindow.ui" line="219"/>
-        <location filename="../mainwindow.cpp" line="311"/>
-        <location filename="../mainwindow.cpp" line="337"/>
+        <location filename="../mainwindow.cpp" line="327"/>
+        <location filename="../mainwindow.cpp" line="353"/>
         <source>E&amp;nable Automatic Samba Startup</source>
         <translation>Acti&amp;va l&apos;engegada automàtica de Samba</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="226"/>
-        <location filename="../mainwindow.cpp" line="288"/>
-        <location filename="../mainwindow.cpp" line="346"/>
+        <location filename="../mainwindow.cpp" line="302"/>
+        <location filename="../mainwindow.cpp" line="363"/>
         <source>Star&amp;t Samba</source>
         <translation>En&amp;gega Samba</translation>
     </message>
@@ -154,7 +154,7 @@
     </message>
     <message>
         <location filename="../mainwindow.ui" line="285"/>
-        <location filename="../mainwindow.cpp" line="286"/>
+        <location filename="../mainwindow.cpp" line="300"/>
         <source>Samba is running</source>
         <translation>Samba s&apos;està executant</translation>
     </message>
@@ -206,23 +206,23 @@
     <message>
         <location filename="../mainwindow.cpp" line="94"/>
         <location filename="../mainwindow.cpp" line="98"/>
-        <location filename="../mainwindow.cpp" line="127"/>
-        <location filename="../mainwindow.cpp" line="139"/>
-        <location filename="../mainwindow.cpp" line="209"/>
-        <location filename="../mainwindow.cpp" line="274"/>
-        <location filename="../mainwindow.cpp" line="292"/>
-        <location filename="../mainwindow.cpp" line="385"/>
-        <location filename="../mainwindow.cpp" line="412"/>
-        <location filename="../mainwindow.cpp" line="416"/>
-        <location filename="../mainwindow.cpp" line="422"/>
-        <location filename="../mainwindow.cpp" line="428"/>
-        <location filename="../mainwindow.cpp" line="458"/>
-        <location filename="../mainwindow.cpp" line="464"/>
-        <location filename="../mainwindow.cpp" line="478"/>
-        <location filename="../mainwindow.cpp" line="488"/>
-        <location filename="../mainwindow.cpp" line="511"/>
-        <location filename="../mainwindow.cpp" line="528"/>
-        <location filename="../mainwindow.cpp" line="540"/>
+        <location filename="../mainwindow.cpp" line="129"/>
+        <location filename="../mainwindow.cpp" line="141"/>
+        <location filename="../mainwindow.cpp" line="216"/>
+        <location filename="../mainwindow.cpp" line="288"/>
+        <location filename="../mainwindow.cpp" line="306"/>
+        <location filename="../mainwindow.cpp" line="404"/>
+        <location filename="../mainwindow.cpp" line="432"/>
+        <location filename="../mainwindow.cpp" line="436"/>
+        <location filename="../mainwindow.cpp" line="442"/>
+        <location filename="../mainwindow.cpp" line="448"/>
+        <location filename="../mainwindow.cpp" line="479"/>
+        <location filename="../mainwindow.cpp" line="485"/>
+        <location filename="../mainwindow.cpp" line="501"/>
+        <location filename="../mainwindow.cpp" line="513"/>
+        <location filename="../mainwindow.cpp" line="538"/>
+        <location filename="../mainwindow.cpp" line="556"/>
+        <location filename="../mainwindow.cpp" line="569"/>
         <source>Error</source>
         <translation>Error</translation>
     </message>
@@ -237,12 +237,12 @@
         <translation>El camí: %1 no existeix.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="124"/>
+        <location filename="../mainwindow.cpp" line="126"/>
         <source>Yes</source>
         <translation>Sí </translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="128"/>
+        <location filename="../mainwindow.cpp" line="130"/>
         <source>Could not add share. Error message:
 
 %1</source>
@@ -251,162 +251,162 @@
 %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="139"/>
+        <location filename="../mainwindow.cpp" line="141"/>
         <source>Error listing users</source>
         <translation>Error llistant usuaris</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="165"/>
+        <location filename="../mainwindow.cpp" line="169"/>
         <source>&amp;Deny</source>
         <translation>&amp;Denega</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="175"/>
+        <location filename="../mainwindow.cpp" line="180"/>
         <source>&amp;Read Only</source>
         <translation>Només &amp;Lectura</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="185"/>
+        <location filename="../mainwindow.cpp" line="191"/>
         <source>&amp;Full Access</source>
         <translation>Accés &amp;Total</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="209"/>
+        <location filename="../mainwindow.cpp" line="216"/>
         <source>Error listing shares</source>
         <translation>Error llistant compartits</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="275"/>
+        <location filename="../mainwindow.cpp" line="289"/>
         <source>Your user doesn&apos;t belong to &apos;sambashare&apos; group  if you just installed the app you might need to restart the system first.</source>
         <translation>El vostre usuari no pertany al grup &apos;sambashare&apos;. Si acabeu d&apos;instal·lar l&apos;aplicació, potser us cal tornar a engegar el sistema.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="285"/>
+        <location filename="../mainwindow.cpp" line="299"/>
         <source>Sto&amp;p Samba</source>
         <translation>At&amp;ura Samba</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="289"/>
+        <location filename="../mainwindow.cpp" line="303"/>
         <source>Samba is not running</source>
         <translation>Samba no s&apos;està executant</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="292"/>
+        <location filename="../mainwindow.cpp" line="306"/>
         <source>Samba not installed</source>
         <translation>No s&apos;ha instal·lat Samba</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="308"/>
+        <location filename="../mainwindow.cpp" line="324"/>
         <source>&amp;Disable Automatic Samba Startup</source>
         <translation>&amp;Desactiva l&apos;engegada automàtica de Samba</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="360"/>
+        <location filename="../mainwindow.cpp" line="378"/>
         <source>About %1</source>
         <translation>Quant a %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="360"/>
+        <location filename="../mainwindow.cpp" line="378"/>
         <source>MX Samba Config</source>
         <translation>MX Samba Config</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="361"/>
+        <location filename="../mainwindow.cpp" line="379"/>
         <source>Version: </source>
         <translation>Versió: </translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="363"/>
+        <location filename="../mainwindow.cpp" line="381"/>
         <source>Program for configuring Samba shares and users.</source>
         <translation>Programa per configurar els compartits i usuaris de Samba.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="365"/>
+        <location filename="../mainwindow.cpp" line="383"/>
         <source>Copyright (c) MX Linux</source>
         <translation>Copyright (c) MX Linux</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="366"/>
+        <location filename="../mainwindow.cpp" line="384"/>
         <source>%1 License</source>
         <translation>Llicència de %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="373"/>
+        <location filename="../mainwindow.cpp" line="391"/>
         <source>%1 Help</source>
         <translation>Ajuda de %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="385"/>
+        <location filename="../mainwindow.cpp" line="404"/>
         <source>Cannot delete user: </source>
         <translation>No puc esborrar l&apos;usuari: </translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="393"/>
+        <location filename="../mainwindow.cpp" line="413"/>
         <source>Enter the username and password:</source>
         <translation>Entreu el nom d&apos;usuari i la contrasenya: </translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="400"/>
+        <location filename="../mainwindow.cpp" line="420"/>
         <source>Username:</source>
         <translation>Nom d&apos;usuari: </translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="401"/>
-        <location filename="../mainwindow.cpp" line="447"/>
+        <location filename="../mainwindow.cpp" line="421"/>
+        <location filename="../mainwindow.cpp" line="468"/>
         <source>Password:</source>
         <translation>Contrasenya: </translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="402"/>
-        <location filename="../mainwindow.cpp" line="448"/>
+        <location filename="../mainwindow.cpp" line="422"/>
+        <location filename="../mainwindow.cpp" line="469"/>
         <source>Confirm password:</source>
         <translation>Confirmeu la contrasenya: </translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="412"/>
+        <location filename="../mainwindow.cpp" line="432"/>
         <source>Empty username, please enter a name.</source>
         <translation>Nom d&apos;usuari buit, si us plau entreu un nom.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="417"/>
+        <location filename="../mainwindow.cpp" line="437"/>
         <source>Matching linux user not found on system, make sure you enter a valid username.</source>
         <translation>No he trobat aquest nom d&apos;usuari linux al sistema, assegureu-vos d&apos;entrar un nom d&apos;usuari vàlid.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="422"/>
-        <location filename="../mainwindow.cpp" line="458"/>
+        <location filename="../mainwindow.cpp" line="442"/>
+        <location filename="../mainwindow.cpp" line="479"/>
         <source>Passwords don&apos;t match, please enter again.</source>
         <translation>Les contrasenyes no coincideixen, si us plau torneu a provar-ho.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="428"/>
+        <location filename="../mainwindow.cpp" line="448"/>
         <source>Could not add user.</source>
         <translation>No puc afegir l&apos;usuari.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="441"/>
+        <location filename="../mainwindow.cpp" line="462"/>
         <source>Change the password for &apos;%1&apos;</source>
         <translation>Canvieu la contrasenya per &apos;%1&apos;</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="464"/>
+        <location filename="../mainwindow.cpp" line="485"/>
         <source>Could not change password.</source>
         <translation>No puc canviar la contrasenya.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="478"/>
+        <location filename="../mainwindow.cpp" line="501"/>
         <source>Cannot delete share: </source>
         <translation>No puc eliminar el compartit: </translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="489"/>
-        <location filename="../mainwindow.cpp" line="541"/>
+        <location filename="../mainwindow.cpp" line="514"/>
+        <location filename="../mainwindow.cpp" line="570"/>
         <source>Samba service is not running. Please start Samba before adding or editing shares</source>
         <translation>No s&apos;està executant el servei Samba. Si us plau, engegueu Samba abans d&apos;afegir o editar compartits </translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="511"/>
-        <location filename="../mainwindow.cpp" line="528"/>
+        <location filename="../mainwindow.cpp" line="538"/>
+        <location filename="../mainwindow.cpp" line="556"/>
         <source>Error: trying to process permissions: </source>
         <translation>Error intentant processar els permisos: </translation>
     </message>

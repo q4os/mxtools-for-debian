@@ -1,3 +1,55 @@
+mx-packageinstaller (23.12.08) mx; urgency=medium
+
+  * Fix: crash that happened in some conditions when switching tabs
+  * Fix: enable interface when installing flatpak app
+  * Fix: more consistent experience when switching tabs
+
+ -- Adrian <adrian@mxlinux.org>  Sat, 30 Dec 2023 14:36:32 -0500
+
+mx-packageinstaller (23.12.04) mx; urgency=medium
+
+  * Add the package architecture to the list of temporary testrepo sources
+
+ -- fehlix <fehlix@mxlinux.org>  Tue, 26 Dec 2023 08:51:02 -0500
+
+mx-packageinstaller (23.12.03) mx; urgency=medium
+
+  * Fix: switching to flatpak tab was locking the interfaces in some cases
+  * Fix: search flatpaks using the search term entered in another tab on tab switch
+
+ -- Adrian <adrian@mxlinux.org>  Sat, 23 Dec 2023 17:43:31 -0500
+
+mx-packageinstaller (23.12.02) mx; urgency=medium
+
+  * Fix refresh package list after installing/uninstalling
+  * Read flatpak version from name string if version is missing
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 22 Dec 2023 17:41:48 -0500
+
+mx-packageinstaller (23.12.01) mx; urgency=medium
+
+  * Improve memory usage
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 21 Dec 2023 13:09:03 -0500
+
+mx-packageinstaller (23.12) mx; urgency=medium
+
+  * Fix: listed size of install flatpaks
+
+ -- Adrian <adrian@mxlinux.org>  Sat, 02 Dec 2023 14:27:24 -0500
+
+mx-packageinstaller (23.11.09) mx; urgency=medium
+
+  * change arm64 pm filter tag to armsixtyfour
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 27 Nov 2023 20:09:56 -0500
+
+mx-packageinstaller (23.11.08) mx; urgency=medium
+
+  * add arm64 and armhf filters for marking items installed
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 26 Nov 2023 22:22:54 -0500
+
 mx-packageinstaller (23.11.07) mx; urgency=medium
 
   * fix version number

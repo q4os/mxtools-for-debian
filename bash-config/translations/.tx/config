@@ -1,9 +1,10 @@
+
 [main]
 host = https://www.transifex.com
 
 [o:anticapitalista:p:antix-development:r:bash-config-mx]
-file_filter = ./bash-config_<lang>.ts
-source_file = bash-config_en.ts
+file_filter = ./bash-config-mx_<lang>.ts
+source_file = bash-config-mx_en.ts
 source_lang = en
-type        = ts
-
+type = ts
+minimum_perc = 25

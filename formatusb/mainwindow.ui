@@ -107,24 +107,27 @@
          </item>
          <item row="1" column="1">
           <widget class="QComboBox" name="comboBoxDataFormat">
+           <property name="currentText">
+            <string notr="true">fat32</string>
+           </property>
            <item>
             <property name="text">
-             <string>fat32</string>
+             <string notr="true">fat32</string>
             </property>
            </item>
            <item>
             <property name="text">
-             <string>ext4</string>
+             <string notr="true">ext4</string>
             </property>
            </item>
            <item>
             <property name="text">
-             <string>exfat</string>
+             <string notr="true">exfat</string>
             </property>
            </item>
            <item>
             <property name="text">
-             <string>ntfs</string>
+             <string notr="true">ntfs</string>
             </property>
            </item>
           </widget>

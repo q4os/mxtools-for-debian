@@ -1,3 +1,21 @@
+mx-goodies (23.11.03) mx; urgency=medium
+
+  * add video link for rpi
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 21 Dec 2023 20:15:13 -0500
+
+mx-goodies (23.11.02) mx; urgency=medium
+
+  * adjust what gets populated on rpi desktop
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 20 Dec 2023 17:31:55 -0500
+
+mx-goodies (23.11.01) mx; urgency=medium
+
+  * add rpi_list feature
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 29 Nov 2023 20:23:27 -0500
+
 mx-goodies (23.09.02) mx; urgency=medium
 
   * adjust filters in UUID in QSI

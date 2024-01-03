@@ -1,3 +1,9 @@
+mx-system (23.12.01mx23) mx; urgency=medium
+
+  * handle rc* strings (lowercase)
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 28 Dec 2023 20:54:21 -0500
+
 mx-system (23.10.02mx23) mc; urgency=medium
 
   * add gcc to depends, ensures some symlinks are present to gcc

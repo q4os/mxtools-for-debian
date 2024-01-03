@@ -43,53 +43,8 @@ HEADERS  += \
 FORMS    += \
     mainwindow.ui
 
-TRANSLATIONS += translations/formatusb_am.ts \
-                translations/formatusb_ar.ts \
-                translations/formatusb_bg.ts \
-                translations/formatusb_ca.ts \
-                translations/formatusb_cs.ts \
-                translations/formatusb_da.ts \
-                translations/formatusb_de.ts \
-                translations/formatusb_el.ts \
-                translations/formatusb_es.ts \
-                translations/formatusb_es_ES.ts \
-                translations/formatusb_et.ts \
-                translations/formatusb_eu.ts \
-                translations/formatusb_fa.ts \
-                translations/formatusb_fil_PH.ts \
-                translations/formatusb_fi.ts \
-                translations/formatusb_fr.ts \
-                translations/formatusb_fr_BE.ts \
-                translations/formatusb_he_IL.ts \
-                translations/formatusb_hi.ts \
-                translations/formatusb_hr.ts \
-                translations/formatusb_hu.ts \
-                translations/formatusb_id.ts \
-                translations/formatusb_is.ts \
-                translations/formatusb_it.ts \
-                translations/formatusb_ja.ts \
-                translations/formatusb_kk.ts \
-                translations/formatusb_ko.ts \
-                translations/formatusb_lt.ts \
-                translations/formatusb_mk.ts \
-                translations/formatusb_mr.ts \
-                translations/formatusb_nb.ts \
-                translations/formatusb_nl.ts \
-                translations/formatusb_pl.ts \
-                translations/formatusb_pt.ts \
-                translations/formatusb_pt_BR.ts \
-                translations/formatusb_ro.ts \
-                translations/formatusb_ru.ts \
-                translations/formatusb_sk.ts \
-                translations/formatusb_sl.ts \
-                translations/formatusb_sq.ts \
-                translations/formatusb_sr.ts \
-                translations/formatusb_sv.ts \
-                translations/formatusb_tr.ts \
-                translations/formatusb_uk.ts \
-                translations/formatusb_vi.ts \
-                translations/formatusb_zh_CN.ts \
-                translations/formatusb_zh_TW.ts
+TRANSLATIONS += translations/formatusb_en.ts \
+                
 
 RESOURCES += \
     images.qrc
