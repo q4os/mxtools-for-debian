@@ -1,0 +1,76 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# Andrei Stepanov, 2022
+# Вячеслав Волошин <vol_vel@mail.ru>, 2015
+msgid ""
+msgstr ""
+"Project-Id-Version: antix-development\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-06-29 15:33-0600\n"
+"PO-Revision-Date: 2012-01-01 11:19+0000\n"
+"Last-Translator: Andrei Stepanov, 2022\n"
+"Language-Team: Russian (http://www.transifex.com/anticapitalista/antix-development/language/ru/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: ru\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%100>=11 && n%100<=14)? 2 : 3);\n"
+
+#: bin/toram-eject:14
+msgid "Eject LiveCD/DVD via a simple GUI if %s is enabled."
+msgstr "Извлечь LiveCD/DVD с помощью простого графического интерфейса, если %s включено."
+
+#: bin/toram-eject:16
+msgid "Automatic toram Eject"
+msgstr "Автоматическое извлечение"
+
+#: bin/toram-eject:24
+msgid "no BOOT_DEV given!"
+msgstr "BOOT_DEV не установлен!"
+
+#: bin/toram-eject:33
+msgid "boot device: %s is not removable."
+msgstr "загрузочное устройство: %s не является съемным."
+
+#: bin/toram-eject:39
+msgid "boot device: %s is still mounted!"
+msgstr "загрузочное устройство: %s остается смонтированным!"
+
+#: bin/toram-eject:46
+msgid "The %s boot option succeeded."
+msgstr "Загрузочная опция %s применена успешно."
+
+#: bin/toram-eject:47
+msgid "The boot media is no longer needed."
+msgstr "Загрузочный носитель более не нужен."
+
+#: bin/toram-eject:49
+msgid "Do you want the LiveCD/DVD ejected?"
+msgstr "Вы хотите извлечь LiveCD/DVD?"
+
+#: bin/toram-eject:50
+msgid "did not eject as per user request."
+msgstr "не извлекается по запросу пользователя."
+
+#: bin/toram-eject:52
+msgid "Could not eject %s"
+msgstr "Не удалось извлечь %s"
+
+#: bin/toram-eject:57
+msgid "Feel free to remove the CD or DVD."
+msgstr "Можно спокойно удалить CD или DVD."
+
+#: bin/toram-eject:59
+msgid "Do you want the drive closed now?"
+msgstr "Вы хотите закрыть привод сейчас?"
+
+#: bin/toram-eject:60
+msgid "did not closing drive as per user request."
+msgstr "привод не закрывается по запросу пользователя."
+
+#: bin/toram-eject:62
+msgid "Could not close %s"
+msgstr "Не удалось закрыть %s"

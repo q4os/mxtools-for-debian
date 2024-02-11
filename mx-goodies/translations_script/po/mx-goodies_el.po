@@ -5,6 +5,7 @@
 # 
 # Translators:
 # anticapitalista <anticapitalista@riseup.net>, 2021
+# Ioannis LM, 2023
 # 
 #, fuzzy
 msgid ""
@@ -13,8 +14,8 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-02-21 11:35-0600\n"
 "PO-Revision-Date: 2017-12-31 03:14+0000\n"
-"Last-Translator: anticapitalista <anticapitalista@riseup.net>, 2021\n"
-"Language-Team: Greek (https://www.transifex.com/anticapitalista/teams/10162/el/)\n"
+"Last-Translator: Ioannis LM, 2023\n"
+"Language-Team: Greek (https://app.transifex.com/anticapitalista/teams/10162/el/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -27,27 +28,27 @@ msgstr "ακυρώθηκε"
 
 #: system-locales-mx:14
 msgid "Configure System Locales"
-msgstr "Ρύθμιση παραμέτρων τοπικών συστημάτων"
+msgstr "Τοπική ρύθμιση συστήματος"
 
 #: system-locales-mx:15
 msgid "System locale"
-msgstr "Τοπική ρύθμιση συστήματος"
+msgstr "Τοποθεσία συστήματος"
 
 #: quick-system-info/quick-system-info-mx:15
 msgid "Required inxi app not found"
-msgstr "Η απαιτούμενη εφαρμογή inxi δε βρέθηκε"
+msgstr "Δε βρέθηκε η απαιτούμενη εφαρμογή inxi"
 
 #: quick-system-info/quick-system-info-mx:16
 msgid "Report copied to system clipboard"
-msgstr "Η αναφορά αντιγράφηκε στο clipboard του συστήματος"
+msgstr "Η αναφορά αντιγράφηκε στο πρόχειρο του συστήματος"
 
 #: quick-system-info/quick-system-info-mx:17
 msgid "Report is already formatted for forum."
-msgstr "Η αναφορά έχει ήδη μορφοποιηθεί για φόρουμ."
+msgstr "Η αναφορά έχει ήδη μορφοποιηθεί για το φόρουμ."
 
 #: quick-system-info/quick-system-info-mx:18
 msgid "Paste directly into forum post."
-msgstr "Επικόλληση απευθείας σε ανάρτηση φόρουμ."
+msgstr "Άμεση επικόλληση σε ανάρτηση του φόρουμ."
 
 #: quick-system-info/quick-system-info-mx:19
 msgid "Press any key to close"

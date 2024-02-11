@@ -1,0 +1,110 @@
+mx-locale (24.1.15) mx; urgency=medium
+
+  * Use "UTF-8" instead of "utf8" to avoid locale warnings
+
+ -- fehlix <fehlix@mxlinux.org>  Sun, 28 Jan 2024 14:03:08 -0500
+
+mx-locale (24.1.14) mx; urgency=medium
+
+  * Fix crash when pressing OK without selecting any item
+  * Update translations 
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 24 Jan 2024 18:25:00 -0500
+
+mx-locale (24.1.13) mx; urgency=medium
+
+  * Adjust regexp of the C.UTF-8 or C.utf8 pattern
+  * Use LANG=C and LC_ALL=C for locale list
+
+ -- fehlix <fehlix@mxlinux.org>  Tue, 23 Jan 2024 11:43:26 -0500
+
+mx-locale (24.1.12) mx; urgency=medium
+
+  * Bump version, needed for Bullseye update
+
+ -- Adrian <adrian@mxlinux.org>  Sun, 21 Jan 2024 12:50:38 -0500
+
+mx-locale (24.1.11) mx; urgency=medium
+
+  * Typo fix, new translations
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 19 Jan 2024 20:14:42 -0500
+
+mx-locale (24.1.10) mx; urgency=medium
+
+  * Allow only UTF-8 locale to be sectabled as system locale
+  * Add locale titles/names in the list
+  * Add option to reset locale.gen
+  * Add search field in Manage Locales tab
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 18 Jan 2024 17:17:40 -0500
+
+mx-locale (24.1.09) mx; urgency=medium
+
+  * adjust regexp patterns, two+three letter language and 2 letter regional code
+  * ignore commented out locale in SUPPORTED
+  * trim spaces in updated locale.gen
+  * remove locale duplicates
+
+ -- fehlix <fehlix@mxlinux.org>  Wed, 17 Jan 2024 15:39:25 -0500
+
+mx-locale (24.1.08) mx; urgency=medium
+
+  * allow enabling of any locale, no check against running or system locale
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Tue, 16 Jan 2024 13:20:49 -0500
+
+mx-locale (24.1.07) mx; urgency=medium
+
+  * Don't disable current session lang when disabing all the other locales
+
+ -- Adrian <adrian@mxlinux.org>  Tue, 16 Jan 2024 11:24:35 -0500
+
+mx-locale (24.1.06) mx; urgency=medium
+
+  * filter iso out of choose dialog 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 14 Jan 2024 22:56:48 -0500
+
+mx-locale (24.1.05) mx; urgency=medium
+
+  * revise regular expression for uncommenting locales
+  * misc. typo and string adjustments
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 14 Jan 2024 20:50:36 -0500
+
+mx-locale (24.1.04) mx; urgency=medium
+
+  * use /usr/share/i18n/SUPPORTED AND /usr/local/share/i18n/SUPPORTED for available locales list
+  * add to locale.gen if missing when enabling a locale for generation
+  * don't allow disable of locale if in use as LANG
+  * adjustments to Cmd
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 14 Jan 2024 15:09:41 -0500
+
+mx-locale (24.1.03) mx; urgency=medium
+
+  * add message about taking effect on login
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 13 Jan 2024 14:43:51 -0500
+
+mx-locale (24.1.02) mx; urgency=medium
+
+  * Added icon
+  * Renamed tabs
+  * Use UTF-8 insted of utf8
+  * Use selected LANG from button instead of $LANG when disabing other locales
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 12 Jan 2024 21:15:26 -0500
+
+mx-locale (24.1.01) mx; urgency=medium
+
+  * Various improvements
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 11 Jan 2024 14:42:29 -0500
+
+mx-locale (24.01.01) mx; urgency=medium
+
+  * Initial build
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 06 Jan 2024 13:51:05 -0500

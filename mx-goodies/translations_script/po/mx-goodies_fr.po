@@ -5,7 +5,7 @@
 # 
 # Translators:
 # cyril cottet <cyrilusber2001@yahoo.fr>, 2019
-# Wallon Wallon <franckjl@hotmail.com>, 2021
+# Wallon Wallon, 2023
 # 
 #, fuzzy
 msgid ""
@@ -14,13 +14,13 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-02-21 11:35-0600\n"
 "PO-Revision-Date: 2017-12-31 03:14+0000\n"
-"Last-Translator: Wallon Wallon <franckjl@hotmail.com>, 2021\n"
-"Language-Team: French (https://www.transifex.com/anticapitalista/teams/10162/fr/)\n"
+"Last-Translator: Wallon Wallon, 2023\n"
+"Language-Team: French (https://app.transifex.com/anticapitalista/teams/10162/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: fr\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Plural-Forms: nplurals=3; plural=(n == 0 || n == 1) ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
 
 #: system-locales-mx:13 archive/system-keyboard-mx:12
 msgid "canceled"
@@ -36,7 +36,7 @@ msgstr "Locale du système"
 
 #: quick-system-info/quick-system-info-mx:15
 msgid "Required inxi app not found"
-msgstr "L'application inxi requise n'a pas été trouvée"
+msgstr "L’application inxi requise n’a pas été trouvée"
 
 #: quick-system-info/quick-system-info-mx:16
 msgid "Report copied to system clipboard"
@@ -56,7 +56,7 @@ msgstr "Appuyez sur une touche pour fermer"
 
 #: quick-system-info/quick-system-info-mx:20
 msgid "Do not show this message in future"
-msgstr "Ne plus montrer ce message à l'avenir"
+msgstr "Ne plus montrer ce message à l’avenir"
 
 #: archive/system-keyboard-mx:13
 msgid "System Keyboard Configuration"

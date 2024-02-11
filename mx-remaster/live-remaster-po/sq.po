@@ -1,0 +1,276 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+msgid ""
+msgstr ""
+"Project-Id-Version: antix-development\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-10-22 19:22-0600\n"
+"PO-Revision-Date: 2015-05-07 19:18+0000\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: Albanian (http://www.transifex.com/anticapitalista/antix-development/language/sq/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: sq\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: bin/live-remaster:29
+msgid ""
+"Create a new compressed file system saving all of the changes you have made "
+"to the system."
+msgstr "Krijoni një sistem të ri kartelash të ngjeshur, duke ruajtur krejt ndryshimet që keni bërë te sistemi."
+
+#: bin/live-remaster:35
+msgid "Extra options for"
+msgstr "Mundësi ekstra për"
+
+#: bin/live-remaster:36
+msgid "Make a smaller linuxfs.new.  NOT deleted when done."
+msgstr "Krijo një linuxfs.new më të vogël.  PA e fshirë, kur të mbarojë."
+
+#: bin/live-remaster:37
+msgid "Use %s instead of prompting user for title."
+msgstr "Përdor %s, në vend se t’i kërkohet përdoruesit një titull."
+
+#: bin/live-remaster:38
+msgid "Make a general-purpose remaster."
+msgstr "Kryeni një rikrijim për qëllime të përgjithshme."
+
+#: bin/live-remaster:39
+msgid "Make a personalized remaster."
+msgstr "Bëni një rikrijim të personalizuar."
+
+#: bin/live-remaster:71
+msgid "The live file system is read-only.  Cannot remaster."
+msgstr "Sistemi i kartelave për “live” është vetëm për lexim.  S’mund të ripërziehet."
+
+#: bin/live-remaster:73
+msgid "General"
+msgstr "Të përgjithshme"
+
+#: bin/live-remaster:74
+msgid "Personal"
+msgstr "Personale"
+
+#: bin/live-remaster:81
+msgid "%s uses your personal settings."
+msgstr "%s përdor rregullimet tuaja personale."
+
+#: bin/live-remaster:82
+msgid "%s does not."
+msgstr "%s s’i përdor."
+
+#: bin/live-remaster:95
+msgid "Do you want to save files under %s in the new remaster?"
+msgstr "Doni të ruani kartela nën %s në rikrijimin e ri?"
+
+#: bin/live-remaster:101
+msgid "Checking for existing files and"
+msgstr "Po kontrollohen për kartela ekzistuese dhe"
+
+#: bin/live-remaster:102
+msgid "Checking if there is enough room ..."
+msgstr "Po kontrollohet nëse ka vend të mjaftueshëm …"
+
+#: bin/live-remaster:113
+msgid "The %s program was unable to start"
+msgstr "S’qe në gjendje të nisej programi %s"
+
+#: bin/live-remaster:165
+msgid "current linuxfs size"
+msgstr "madhësi e tanishme e linuxfs-së"
+
+#: bin/live-remaster:166
+msgid "excluded files est."
+msgstr "kartela të përjashtuara, përafërsisht"
+
+#: bin/live-remaster:167 bin/live-remaster:168
+msgid "estimated new size"
+msgstr "madhësi e re afërsisht"
+
+#: bin/live-remaster:174
+msgid "boot device total"
+msgstr "pajisja e nisjeve gjithsej"
+
+#: bin/live-remaster:175
+msgid "boot device free"
+msgstr "pajisja e nisjeve, të lira"
+
+#: bin/live-remaster:176 bin/live-remaster:177
+msgid "est. remaining"
+msgstr "mbetur afërsisht"
+
+#: bin/live-remaster:194
+msgid "Have: %s megs available.  Need: %s."
+msgstr "Keni: %s MB të përdorshme.  Duhen: %s."
+
+#: bin/live-remaster:198
+msgid "Leftover files found"
+msgstr "U gjetën kartela të mbetura"
+
+#: bin/live-remaster:200
+msgid "The following file(s) already exist"
+msgstr "Kartela(t) vijuese ekziston tashmë"
+
+#: bin/live-remaster:201
+msgid "in the %s directory:"
+msgstr "te drejtoria %s:"
+
+#: bin/live-remaster:205
+msgid "They may be left over from a previous remastering."
+msgstr "Mund të kenë mbetur prej një rikrijimi të mëparshëm."
+
+#: bin/live-remaster:206
+msgid "Do you want to fix this problem now?"
+msgstr "Doni të ndreqet ky problem tani?"
+
+#: bin/live-remaster:207
+msgid "(the alternative is to quit now)"
+msgstr "(alternativa është të mbyllet tani)"
+
+#: bin/live-remaster:221
+msgid "Ready to create a new linuxfs file"
+msgstr "Gati për të krijuar një kartelë të re linuxfs"
+
+#: bin/live-remaster:225
+msgid "Shall we begin?"
+msgstr "A fillojmë?"
+
+#: bin/live-remaster:235
+msgid "(compresses faster, boots faster)"
+msgstr "(ngjishet më shpejt, niset më shpejt)"
+
+#: bin/live-remaster:236
+msgid "(compresses better)"
+msgstr "(ngjishet më mirë)"
+
+#: bin/live-remaster:242
+msgid "Please choose the type of compression to use"
+msgstr "Ju lutemi, zgjidhni llojin e ngjeshjes për përdorim"
+
+#: bin/live-remaster:243
+msgid "%s will take less time"
+msgstr "%s do të dojë më pak kohë"
+
+#: bin/live-remaster:244
+msgid "%s will result in a smaller file"
+msgstr "%s do të sjellë një kartelë më të vogël"
+
+#: bin/live-remaster:260
+msgid "Do you want remaster to use all of the CPUs?"
+msgstr "Doni që rikrijimi të përdorë krejt CPU-të?"
+
+#: bin/live-remaster:262
+msgid "This will make the remaster process run as fast as possible."
+msgstr "Kjo do të bëjë që procesi i rikrijimit të xhirojë sa më shpejt të jetë e mundur."
+
+#: bin/live-remaster:263
+msgid "But there is more of a chance your computer will overheat."
+msgstr "Por ka më tepër mundësi që kompjuteri juaj të tejnxehet."
+
+#: bin/live-remaster:272
+msgid "Remaster Version Identification"
+msgstr "Identifikim Versioni Rikrijimi"
+
+#: bin/live-remaster:274
+msgid "Please enter an (optional) title for this remaster"
+msgstr "Ju lutemi, jepni një titull (opsional) për këtë rikrijim"
+
+#: bin/live-remaster:295
+msgid "The %s program failed to work"
+msgstr "Programi %s s’arrit të funksionojë"
+
+#: bin/live-remaster:335
+msgid "Remastering -- DO NOT CLOSE"
+msgstr "Po bëhet rikrijim -- MOS E MBYLLNI"
+
+#: bin/live-remaster:351
+msgid "Remaster in Progress"
+msgstr "Rikrijimi në Punë e Sipër"
+
+#: bin/live-remaster:352
+msgid "Do you REALLY want to stop midway?"
+msgstr "Doni VËRTET të ndalet në mes të rrugës?"
+
+#: bin/live-remaster:379
+msgid "Created new compressed filesystem file:"
+msgstr "U krijua kartelë e re sistemi të ngjeshur kartelash:"
+
+#: bin/live-remaster:384
+msgid "The new file should be used automatically the next time you boot."
+msgstr "Kartela e re do të duhej të përdorej automatikisht herës tjetër që bëni nisje."
+
+#: bin/live-remaster:386
+msgid "If there is a problem with the new system:"
+msgstr "Nëse ka problem me sistemin e ri:"
+
+#: bin/live-remaster:387
+msgid "Use the %s  boot option to return to the current system."
+msgstr "Përdorni mundësinë %s e nisjes, që të ktheheni te sistemi aktual."
+
+#: bin/live-remaster:411
+msgid "Root persistence is enabled"
+msgstr "Vazhdueshmëri rrënje është e aktivizuar"
+
+#: bin/live-remaster:413
+msgid "Do you want to make a new %s file now?"
+msgstr "Doni të krijoni një kartelë të re %s tani?"
+
+#: bin/live-remaster:421
+msgid "Remaster in progress"
+msgstr "Rikrijimi në punë e sipër"
+
+#: bin/live-remaster:423
+msgid "please be patient"
+msgstr "ju lutemi, bëni durim"
+
+#: bin/live-remaster:424
+msgid "(even after it says it is 100% done)"
+msgstr "(edhe pasi thotë se u bë 100%)"
+
+#: bin/live-remaster:429
+msgid "antiX Remaster in Progress"
+msgstr "Rikrijimi antiX në Punë e Sipër"
+
+#: bin/live-remaster:445
+msgid "Remastering Terminated Early"
+msgstr "Rikrijimi Përfundoi Herët"
+
+#: bin/live-remaster:450
+msgid "Remastering Failed"
+msgstr "Rikrijimi Dështoi"
+
+#: bin/live-remaster:452
+msgid "New linuxfs file was not created!"
+msgstr "S’u krijua kartelë e re linuxfs!"
+
+#: bin/live-remaster:456
+msgid "Could not mount new file as %s!"
+msgstr "S’u montua dot si %s kartela e re!"
+
+#: bin/live-remaster:467
+msgid "linuxfs size"
+msgstr "madhësi linuxfs-je"
+
+#: bin/live-remaster:468
+msgid "elapsed time"
+msgstr "kohë e rrjedhur"
+
+#: bin/live-remaster:469
+msgid "processors"
+msgstr "procesorë"
+
+#: bin/live-remaster:470
+msgid "compression"
+msgstr "ngjeshje"
+
+#: bin/live-remaster:484
+msgid "Error"
+msgstr "Gabim"
+
+#: bin/live-remaster:489
+msgid "Do you want to save the incomplete file?"
+msgstr "Doni të ruhet kartela e paplotë?"

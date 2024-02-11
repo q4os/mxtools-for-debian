@@ -1,0 +1,105 @@
+mx-comfort-themes (23.12.02) mx; urgency=medium
+
+  * change background in some popovers
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 13 Jan 2024 20:03:43 -0500
+
+mx-comfort-themes (23.12.01) mx; urgency=medium
+
+  * correct some checkbox assests (disabled, unchecked)
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 20 Dec 2023 20:02:39 -0500
+
+mx-comfort-themes (23.09.03) mx; urgency=medium
+
+  * fix window frame decoration border width
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 10 Sep 2023 20:19:07 -0400
+
+mx-comfort-themes (23.09.02) mx; urgency=medium
+
+  * modify 1px border to 1px bottom-border (melber)
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 07 Sep 2023 19:38:59 -0400
+
+mx-comfort-themes (23.09.01) mx; urgency=medium
+
+  * modification to gtk3 theme (1px border)
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 04 Sep 2023 22:06:44 -0400
+
+mx-comfort-themes (23.04.01) mx; urgency=medium
+
+  * initial gtk4.0 folder
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 09 Apr 2023 14:02:39 -0400
+
+mx-comfort-themes (21.10.02) mx; urgency=medium
+
+  * xfwm adjustments (swamprabbit) 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 14 Oct 2021 19:39:14 -0400
+
+mx-comfort-themes (21.10.01) mx; urgency=medium
+
+  * docklike adjustments
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 07 Oct 2021 21:00:54 -0400
+
+mx-comfort-themes (21.09.10) mx; urgency=medium
+
+  * adjust xfwm top border 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 30 Sep 2021 23:00:53 -0400
+
+mx-comfort-themes (21.09.09) mx; urgency=medium
+
+  * button and gtk2/Qt app theming adjustments
+  * dark theme panel updates
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Tue, 14 Sep 2021 19:45:34 -0400
+
+mx-comfort-themes (21.09.07) mx; urgency=medium
+
+  * update theme with file manager changes
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 13 Sep 2021 14:45:04 -0400
+
+mx-comfort-themes (21.09.06) mx; urgency=medium
+
+  * fix icons 
+  * add pager themeing
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 13 Sep 2021 06:54:48 -0400
+
+mx-comfort-themes (21.09.05) mx; urgency=medium
+
+  * make active pager window blue
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 12 Sep 2021 19:38:25 -0400
+
+mx-comfort-themes (21.09.04) mx; urgency=medium
+
+  * add thick border themes (xfwm4) 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 11 Sep 2021 12:40:03 -0400
+
+mx-comfort-themes (21.09.03) mx; urgency=medium
+
+  * bug fix in whisker menu
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 02 Sep 2021 23:40:09 -0400
+
+mx-comfort-themes (21.09.02) mx; urgency=medium
+
+  * thin border by defualt
+  * add thick board xfwm4 option
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Tue, 31 Aug 2021 22:35:37 -0400
+
+mx-comfort-themes (21.09.01) mx; urgency=medium
+
+  * Initial release.  
+  * created by asqwerth
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Tue, 31 Aug 2021 19:36:13 -0400

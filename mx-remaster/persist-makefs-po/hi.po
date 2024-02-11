@@ -1,0 +1,427 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# Panwar108 <caspian7pena@gmail.com>, 2021
+msgid ""
+msgstr ""
+"Project-Id-Version: antix-development\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-04-03 12:45-0600\n"
+"PO-Revision-Date: 2014-03-15 01:03+0000\n"
+"Last-Translator: Panwar108 <caspian7pena@gmail.com>, 2021\n"
+"Language-Team: Hindi (http://www.transifex.com/anticapitalista/antix-development/language/hi/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: hi\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: bin/persist-makefs:31
+msgid "antiX Create or Resize Persistence"
+msgstr "एंटी-एक्स संरक्षण बनाना या आकार परिवर्तन"
+
+#: bin/persist-makefs:32
+msgid "Create or resize the files need for root and/or home persistence."
+msgstr "रूट व/या होम संरक्षण हेतु आवश्यक फाइलें बनाएँ या आकार परिवर्तन करें।"
+
+#: bin/persist-makefs:36
+msgid "Use <%s> as the persistence device"
+msgstr "<%s> को संरक्षण डिवाइस हेतु उपयोग करें"
+
+#: bin/persist-makefs:37
+msgid "Go directly to the explore menu"
+msgstr "सीधे अवलोकन मेन्यू पर जाएँ"
+
+#: bin/persist-makefs:38
+msgid "Go directly to the making a %s file"
+msgstr "सीधे %s फाइल सृजन कार्य पर जाएँ"
+
+#: bin/persist-makefs:43
+msgid "Change Persistence Device"
+msgstr "संरक्षण उपकरण बदलें"
+
+#: bin/persist-makefs:44
+msgid "Change Peristence Path"
+msgstr "संरक्षण पथ बदलें"
+
+#: bin/persist-makefs:45
+msgid "Create Root Persistence"
+msgstr "रूट संरक्षण बनाएँ"
+
+#: bin/persist-makefs:46
+msgid "Resize Root Persistence"
+msgstr "रूट संरक्षण आकार परिवर्तन करें"
+
+#: bin/persist-makefs:47
+msgid "Make rootfs.new file for remastering"
+msgstr "रीमास्टर हेतु rootfs.new फाइल बनाएँ"
+
+#: bin/persist-makefs:48
+msgid "Create Home Persistence"
+msgstr "होम संरक्षण बनाएँ"
+
+#: bin/persist-makefs:49
+msgid "Resize Home Persistence"
+msgstr "होम संरक्षण आकार परिवर्तन करें"
+
+#: bin/persist-makefs:51
+msgid "Quit this program"
+msgstr "यह प्रोग्राम बंद करें"
+
+#: bin/persist-makefs:52
+msgid "Update information"
+msgstr "सूचना अपडेट करें"
+
+#: bin/persist-makefs:53
+msgid "Fix or delete broken and outdated files"
+msgstr "विकृत व पुरानी फाइलों को सुधारें या हटाएँ"
+
+#: bin/persist-makefs:55
+msgid "Fix"
+msgstr "सुधारें"
+
+#: bin/persist-makefs:56
+msgid "Delete"
+msgstr "हटाएँ"
+
+#: bin/persist-makefs:57
+msgid "Explore"
+msgstr "अवलोकन"
+
+#: bin/persist-makefs:59 bin/persist-makefs:641
+msgid "Exploration Menu"
+msgstr "अवलोकन मेन्यू"
+
+#: bin/persist-makefs:60
+msgid "Exploring"
+msgstr "अवलोकन जारी"
+
+#: bin/persist-makefs:61
+msgid "Persistence Device"
+msgstr "संरक्षण उपकरण"
+
+#: bin/persist-makefs:62
+msgid "Persistence Directory"
+msgstr "संरक्षण डायरेक्टरी"
+
+#: bin/persist-makefs:63
+msgid "Persistence file: %s"
+msgstr "संरक्षण फाइल : %s"
+
+#: bin/persist-makefs:64
+msgid "Stop Exploring"
+msgstr "अवलोकन रोकें"
+
+#: bin/persist-makefs:66
+msgid "Stop Fixing and deleting"
+msgstr "सुधारना व हटाना रोकें"
+
+#: bin/persist-makefs:67
+msgid "Fix and Delete Files Menu"
+msgstr "फाइल मेन्यू सुधारें व हटाएँ"
+
+#: bin/persist-makefs:69
+msgid "does not exist"
+msgstr "मौजूद नहीं है"
+
+#: bin/persist-makefs:70
+msgid "Broken!"
+msgstr "विकृत!"
+
+#: bin/persist-makefs:73
+msgid "Simple, stable, no journaling"
+msgstr "सरल, स्थिर, कोई रिकॉर्ड नहीं"
+
+#: bin/persist-makefs:74
+msgid "Adds journaling."
+msgstr "रिकॉर्ड करना जोड़ें।"
+
+#: bin/persist-makefs:75
+msgid "Journaling, checksums, fast fsck"
+msgstr "रिकॉर्ड करना, चेकसम, तीव्र fsck"
+
+#: bin/persist-makefs:116
+msgid "The persistence device with UUID %s was not found"
+msgstr "%s यूयूआईडी युक्त संरक्षण उपकरण नहीं मिला"
+
+#: bin/persist-makefs:117
+msgid "Please plug in the persistence device if you want to use it."
+msgstr "कृपया उपयोग हेतु इच्छित संरक्षण उपकरण को सिस्टम में लगाएँ।"
+
+#: bin/persist-makefs:119
+msgid "Do you want to try again?"
+msgstr "क्या आप पुनः प्रयास करना चाहते हैं?"
+
+#: bin/persist-makefs:127
+msgid "Default device %s is either missing or invalid"
+msgstr "डिफ़ॉल्ट उपकरण %s अनुपलब्ध या अमान्य है"
+
+#: bin/persist-makefs:128 bin/persist-makefs:144
+msgid "Please select a new device for the persistence files"
+msgstr "कृपया संरक्षण फाइलों हेतु एक नवीन उपकरण का चयन करें"
+
+#: bin/persist-makefs:143
+msgid "The boot/persist device %s is read-only."
+msgstr "यह बूट/संरक्षण %s उपकरण केवल रीड-योग्य है।"
+
+#: bin/persist-makefs:153
+msgid "Create rootfs.new (for remastering)"
+msgstr "rootfs.new फाइल बनाएँ (रीमास्टर हेतु)"
+
+#: bin/persist-makefs:222
+msgid "Create Root persistence"
+msgstr "रूट संरक्षण बनाएँ"
+
+#: bin/persist-makefs:229
+msgid "Can't resize %s while it is already mounted."
+msgstr "%s माउंट है अतः अभी इसका आकार परिवर्तन संभव नहीं है।"
+
+#: bin/persist-makefs:234
+msgid "Resize Root persistence"
+msgstr "रूट संरक्षण का आकार परिवर्तन करें"
+
+#: bin/persist-makefs:250
+msgid "Create %s (for remastering)"
+msgstr "%s बनाएँ (रीमास्टर हेतु)"
+
+#: bin/persist-makefs:255
+msgid "Create Home persistence"
+msgstr "होम संरक्षण बनाएँ"
+
+#: bin/persist-makefs:261
+msgid "Resize Home persistence"
+msgstr "होम संरक्षण का आकार परिवर्तन करें"
+
+#: bin/persist-makefs:285 bin/persist-makefs:611 bin/persist-makefs:654
+msgid "Really Quit?"
+msgstr "निश्चित ही बंद करें?"
+
+#: bin/persist-makefs:317
+msgid "File System Type"
+msgstr "फाइल सिस्टम प्रकार"
+
+#: bin/persist-makefs:327
+msgid "The file %s already exists"
+msgstr "%s फाइल पहले से मौजूद है"
+
+#: bin/persist-makefs:328
+msgid "Do you want to over-write it?"
+msgstr "क्या आप इसे अधिलेखित करना चाहते हैं?"
+
+#: bin/persist-makefs:332
+msgid "Please select size of the new file system"
+msgstr "कृपया नवीन फाइल सिस्टम का आकार चुनें"
+
+#: bin/persist-makefs:334
+msgid "Not enough space on device"
+msgstr "उपकरण पर पर्याप्त स्पेस नहीं है"
+
+#: bin/persist-makefs:345
+msgid "Warning: this can take several minutes per Gig on a %s file system"
+msgstr "चेतावनी : %s फाइल सिस्टम पर प्रति जीबी अनुसार एकाधिक मिनट का समय लग सकता है"
+
+#: bin/persist-makefs:346
+msgid "Please wait"
+msgstr "कृपया प्रतीक्षा करें"
+
+#: bin/persist-makefs:353
+msgid "Creating file %s"
+msgstr "%s फाइल बनाना जारी"
+
+#: bin/persist-makefs:354
+msgid "Size: %s Meg. Filesystem: %s"
+msgstr "आकार : %s एमबी। फाइल सिस्टम : %s"
+
+#: bin/persist-makefs:365
+msgid "Was unable to create directory for file %s"
+msgstr "%s फाइल हेतु डायरेक्टरी बनाना विफल"
+
+#: bin/persist-makefs:366
+msgid "Was unable to create file %s"
+msgstr "%s फाइल बनाना विफल"
+
+#: bin/persist-makefs:367
+msgid "Was unable to make %s filesystem on file %s"
+msgstr "%s फाइल सिस्टम को %s फाइल हेतु बनाना विफल"
+
+#: bin/persist-makefs:368
+msgid "Unknown error creating file %s"
+msgstr "%s फाइल बनाते समय अज्ञात त्रुटि"
+
+#: bin/persist-makefs:377
+msgid "The file %s is missing"
+msgstr "%s फाइल अनुपलब्ध है"
+
+#: bin/persist-makefs:385
+msgid "Success! File %s was created."
+msgstr "सफलता! %s फाइल बनाना सफल।"
+
+#: bin/persist-makefs:386
+msgid "Success! File %s was created and its filesystem was fixed."
+msgstr "सफलता! %s फाइल बनाना व फाइल सिस्टम सुधारना सफल।"
+
+#: bin/persist-makefs:387
+msgid "The filesystem on %s is broken and wasn't fixed"
+msgstr "%s का फाइल सिस्टम विकृत है व उसे सुधारना विफल रहा"
+
+#: bin/persist-makefs:401
+msgid "About to create %s file"
+msgstr "%s फाइल बनाना आरंभ होगा"
+
+#: bin/persist-makefs:402
+msgid "size"
+msgstr "आकार"
+
+#: bin/persist-makefs:403
+msgid "type"
+msgstr "प्रकार"
+
+#: bin/persist-makefs:404
+msgid "device"
+msgstr "उपकरण"
+
+#: bin/persist-makefs:405
+msgid "Shall we proceed?"
+msgstr "क्या जारी रखें?"
+
+#: bin/persist-makefs:411
+msgid "Creating %s file"
+msgstr "%s फाइल बनाना जारी"
+
+#: bin/persist-makefs:438
+msgid "Please be patient while %s megs are copied ..."
+msgstr "कृपया धैर्य रखें %s एमबी कॉपी करना जारी है ..."
+
+#: bin/persist-makefs:452
+msgid "Was unable to unmount %s at %s"
+msgstr "%s को %s पर से माउंट से हटाना विफल"
+
+#: bin/persist-makefs:455
+msgid "Please select a new persistence device"
+msgstr "कृपया एक नवीन संरक्षण उपकरण चुनें"
+
+#: bin/persist-makefs:456
+msgid "Current device is: %s"
+msgstr "वर्तमान उपकरण : %s"
+
+#: bin/persist-makefs:467
+msgid "The selected device %s is read-only"
+msgstr "चयनित डिवाइस %s केवल-रीड योग्य है"
+
+#: bin/persist-makefs:468
+msgid "Please select a different device"
+msgstr "कृपया कोई अन्य उपकरण चुनें"
+
+#: bin/persist-makefs:487
+msgid "new"
+msgstr "नवीन"
+
+#: bin/persist-makefs:491
+msgid "Please choose a new persistence directory"
+msgstr "कृपया एक नवीन संरक्षण डायरेक्टरी चुनें"
+
+#: bin/persist-makefs:492
+msgid "The current choice is %s"
+msgstr "वर्तमान विकल्प %s है"
+
+#: bin/persist-makefs:500
+msgid "Please select a new persistence directory"
+msgstr "कृपया एक नवीन संरक्षण डायरेक्टरी चुनें"
+
+#: bin/persist-makefs:501
+msgid "The current one is %s"
+msgstr "वर्तमान %s है"
+
+#: bin/persist-makefs:512
+msgid "Expected a directory at %s but found a file."
+msgstr "%s पर डायरेक्टरी अपेक्षित थी परन्तु फाइल मिली।"
+
+#: bin/persist-makefs:514
+msgid "The only other option is to quit."
+msgstr "दूसरा विकल्प प्रक्रिया बंद करना है।"
+
+#: bin/persist-makefs:519
+msgid "Unable to erase file %s"
+msgstr "%s फाइल हटाना विफल"
+
+#: bin/persist-makefs:525
+msgid "Unable to make directory %s"
+msgstr "%s डायरेक्टरी बनाना विफल"
+
+#: bin/persist-makefs:542
+msgid "There were no errors to correct in %s."
+msgstr "%s में सुधारने हेतु कोई त्रुटि नहीं है।"
+
+#: bin/persist-makefs:545
+msgid "File system in %s should be fixed."
+msgstr "%s का फाइल सिस्टम सुधारने की आवश्यकता है।"
+
+#: bin/persist-makefs:548
+msgid "File system in %s left uncorrected."
+msgstr "%s का फाइल सिस्टम सुधारा नहीं गया।"
+
+#: bin/persist-makefs:549
+msgid "You may be able to fix this manually with the command:"
+msgstr "इस कमांड द्वारा आप स्वयं इस समस्या का समाधान कर सकते हैं :"
+
+#: bin/persist-makefs:553
+msgid "Failed to fix %s"
+msgstr "%s सुधारना विफल"
+
+#: bin/persist-makefs:554
+msgid "Shall I delete the file: %s?"
+msgstr "क्या इस फाइल को हटाया जाए : %s?"
+
+#: bin/persist-makefs:562
+msgid "Delete file %s?"
+msgstr "फाइल %s हटाएँ?"
+
+#: bin/persist-makefs:577
+msgid "No more files left to fix or delete"
+msgstr "सुधारने या हटाने हेतु कोई फाइल शेष नहीं है"
+
+#: bin/persist-makefs:596
+msgid "Strange.  No more files left to fix or delete"
+msgstr "आश्चर्य। सुधारने या हटाने हेतु कोई फाइल शेष नहीं है"
+
+#: bin/persist-makefs:670
+msgid "Strange.  Could not find file %s"
+msgstr "आश्चर्य। फाइल %s प्राप्ति विफल"
+
+#: bin/persist-makefs:671
+msgid "Cannot explore what we cannot find."
+msgstr "अप्राप्त वस्तु का अवलोकन संभव नहीं है।"
+
+#: bin/persist-makefs:697
+msgid "total"
+msgstr "कुल"
+
+#: bin/persist-makefs:723
+msgid "Used"
+msgstr "प्रयुक्त"
+
+#: bin/persist-makefs:771
+msgid "total space on device"
+msgstr "उपकरण का कुल स्पेस"
+
+#: bin/persist-makefs:772
+msgid "available space"
+msgstr "उपलब्ध स्पेस"
+
+#: bin/persist-makefs:773
+msgid "total RAM"
+msgstr "कुल RAM"
+
+#: bin/persist-makefs:775
+msgid "persist device"
+msgstr "संरक्षण उपकरण"
+
+#: bin/persist-makefs:776
+msgid "persist path"
+msgstr "संरक्षण पथ"
+
+#: bin/persist-makefs:796
+msgid "(The %s file is already as large as all RAM)"
+msgstr "(%s फाइल का आकार अभी ही संपूर्ण RAM के बराबर है)"

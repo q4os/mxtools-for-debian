@@ -1,0 +1,122 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# MX Linux Polska <mxlinuxpl@gmail.com>, 2019
+# Jerry Bond, 2015
+# Jerry Bond, 2015
+# Przemek P <ppjg@dami.pl>, 2019
+msgid ""
+msgstr ""
+"Project-Id-Version: antix-development\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-10-06 10:59-0600\n"
+"PO-Revision-Date: 2012-01-01 11:17+0000\n"
+"Last-Translator: MX Linux Polska <mxlinuxpl@gmail.com>, 2019\n"
+"Language-Team: Polish (http://www.transifex.com/anticapitalista/antix-development/language/pl/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: pl\n"
+"Plural-Forms: nplurals=4; plural=(n==1 ? 0 : (n%10>=2 && n%10<=4) && (n%100<12 || n%100>14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && n%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
+
+#: bin/persist-save:14
+msgid "antiX Save Persistent Root"
+msgstr "antiX Zapisz Persistent Root"
+
+#: bin/persist-save:17
+msgid "Manually save filesystem changes in %s file for persistent root."
+msgstr "Zapisz ręcznie zmiany systemu plików w pliku %s dla persistent root."
+
+#: bin/persist-save:18
+msgid "You MUST run a program like this to save your filesystem changes."
+msgstr "MUSISZ uruchomić program taki jak ten, aby zapisać zmiany w systemie plików."
+
+#: bin/persist-save:43
+msgid "%s was not enabled.  Cannot %s"
+msgstr "%s nie został włączony. Nie można %s"
+
+#: bin/persist-save:46 bin/persist-save:138
+msgid "Shall we begin?"
+msgstr "Czy możemy zaczynać?"
+
+#: bin/persist-save:47 bin/persist-save:139
+msgid "Stopping at user's request"
+msgstr "Zatrzymywanie na żądanie użytkownika"
+
+#: bin/persist-save:55
+msgid "The persistence device with UUID %s was not found"
+msgstr "Nie znaleziono urządzenia persistence z UUID %s"
+
+#: bin/persist-save:56
+msgid "Please plug in the persistence device and try again"
+msgstr "Podłącz urządzenie persistence i spróbuj ponownie"
+
+#: bin/persist-save:74
+msgid "On VID error"
+msgstr "On VID error"
+
+#: bin/persist-save:82
+msgid "Checking for existing files and"
+msgstr "Sprawdzanie istniejących plików i"
+
+#: bin/persist-save:83
+msgid "Checking if there is enough room ..."
+msgstr "Sprawdzanie, czy jest wystarczająco dużo miejsca ..."
+
+#: bin/persist-save:113
+msgid "persist device"
+msgstr "urządzenie persist"
+
+#: bin/persist-save:114
+msgid "mounted at"
+msgstr "zamontowane w"
+
+#: bin/persist-save:127
+msgid "Available space, %s, is smaller than the margin of %s."
+msgstr "Dostępne miejsce, %s, jest mniejsze niż margines %s."
+
+#: bin/persist-save:131
+msgid "Insufficient space.  Have: %s. Need: %s."
+msgstr "Niewystarczająca przestrzeń. Dostępne: %s. Potrzebne: %s."
+
+#: bin/persist-save:134
+msgid "Ready to sync file system changes"
+msgstr "Gotowy do zsynchronizowania zmian w systemie plików"
+
+#: bin/persist-save:142
+msgid "Performing rsync ... please be patient"
+msgstr "Wykonywanie rsync ... zachowaj cierpliwość"
+
+#: bin/persist-save:178
+msgid "%s The rsync command failed Failed! %s"
+msgstr "%s Polecenie rsync nie powiodło się. Niepowodzenie! %s"
+
+#: bin/persist-save:180
+msgid "It returned an exit code of %s"
+msgstr "Zwrócono kod wyjścia %s"
+
+#: bin/persist-save:181
+msgid "See the rsync man page to look up its meaning."
+msgstr "Zaglądnij do dokumentacji rsync (man rsync), aby sprawdzić jego znaczenie."
+
+#: bin/persist-save:185 bin/persist-save:192
+msgid "%s succeeded"
+msgstr "%s zakończona powodzeniem"
+
+#: bin/persist-save:194
+msgid "    Your changes were saved in:"
+msgstr "Twoje zmiany zostały zapisane w:"
+
+#: bin/persist-save:217
+msgid "Missing rootfs version file %s"
+msgstr "Brak pliku wersji rootfs %s"
+
+#: bin/persist-save:220
+msgid "Missing version ID in rootfs file system"
+msgstr "Brak identyfikatora wersji w systemie plików rootfs"
+
+#: bin/persist-save:223
+msgid "Version id inside of %s file does not match"
+msgstr "Identyfikator wersji wewnątrz pliku %s nie jest zgodny"

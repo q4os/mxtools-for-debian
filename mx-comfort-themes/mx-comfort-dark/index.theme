@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=X-GNOME-Metatheme
+Name=mx-comfort-dark
+Comment=
+Encoding=UTF-8
+
+[X-GNOME-Metatheme]
+Name=mx-comfort-dark
+GtkTheme=mx-comfort-dark
+IconTheme=mx-comfort-dark
+MetacityTheme=mx-comfort-dark

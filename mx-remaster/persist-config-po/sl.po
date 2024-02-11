@@ -1,0 +1,159 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# Arnold Marko <arnold.marko@gmail.com>, 2019-2020,2023
+msgid ""
+msgstr ""
+"Project-Id-Version: antix-development\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-04-03 12:45-0600\n"
+"PO-Revision-Date: 2012-01-01 11:16+0000\n"
+"Last-Translator: Arnold Marko <arnold.marko@gmail.com>, 2019-2020,2023\n"
+"Language-Team: Slovenian (http://www.transifex.com/anticapitalista/antix-development/language/sl/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: sl\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3);\n"
+
+#: bin/persist-config:12
+msgid "antiX Root Persistence Auto-Save Configuration"
+msgstr "Samodejno shranjevanje konfiguracije za obstojni antiX root"
+
+#: bin/persist-config:20
+msgid "Automatic"
+msgstr "Samodejno"
+
+#: bin/persist-config:21
+msgid "Semi-Automatic"
+msgstr "Polavtomatsko"
+
+#: bin/persist-config:22
+msgid "Manual"
+msgstr "Priročnik"
+
+#: bin/persist-config:23
+msgid "Quit"
+msgstr "Končaj"
+
+#: bin/persist-config:29
+msgid "Configure root persistence saves to run either:"
+msgstr "Nastavi, da korenska obstojnost ob shranjevanju zažene bodisi:"
+
+#: bin/persist-config:31
+msgid "at shutdown/reboot, no asking"
+msgstr "brez vprašanj ob zaustavitvi/ponovnem zagonu"
+
+#: bin/persist-config:32
+msgid "ask at shutdown/reboot"
+msgstr "vprašaj ob zaustavitvi/ponovnem zagonu"
+
+#: bin/persist-config:33
+msgid "you snooze, you lose"
+msgstr "če spiš, izgubiš"
+
+#: bin/persist-config:35
+msgid ""
+"This program should be called with the %s option in a startup script to "
+"ensure a config file is created."
+msgstr "Ta program bi moral biti zagnan z %s opcijo iz zagonske skripte, kar bi zagotovilo, da bi bila narejena konfiguracijska datoteka."
+
+#: bin/persist-config:37
+msgid ""
+"It should be called with the %s option in shutdown scripts so your changes "
+"can be saved before shutting down."
+msgstr "Moral bi biti klican z %s opcijo v zaustavljalni skripti, da bi pred zaustavitvijo shranil spremembe."
+
+#: bin/persist-config:45
+msgid "%s specific options"
+msgstr "%s specfične opcije"
+
+#: bin/persist-config:46
+msgid "Create a %s file if one is missing."
+msgstr "Ustvari %s datoteko, če manjka."
+
+#: bin/persist-config:47
+msgid "Run persist-save as directed by %s file."
+msgstr "Zaženi obstojno shranjevanje, kot določa datoteka %s"
+
+#: bin/persist-config:48
+msgid "Run %s if %s succeeded."
+msgstr "Zaženi %s, če %s uspe."
+
+#: bin/persist-config:49
+msgid "If %s fails prompt user before running %s."
+msgstr "Če %s ne uspe, vprašaj uporabnika, preden zaženeš %s."
+
+#: bin/persist-config:50
+msgid "implies %s"
+msgstr "implicira %s"
+
+#: bin/persist-config:52
+msgid "Config file is located at: %s"
+msgstr "Konfiguracijska datoteka se nahaja na: %s"
+
+#: bin/persist-config:90
+msgid "Current mode is: %s"
+msgstr "Trenutni način je: %s"
+
+#: bin/persist-config:92
+msgid "There is no current auto-save mode.  The default is: %s."
+msgstr "Trenutno ni načina za samodejno shranjevanje. Privzeto je: %s."
+
+#: bin/persist-config:102
+msgid "save on shutdown/reboot automatically.  No asking."
+msgstr "samodejno shrani ob zaustavitvi/ponovnem zagonu. Brez vprašanj."
+
+#: bin/persist-config:103
+msgid "ask to save on shutdown/reboot."
+msgstr "vprašaj za shranjevanje ob zaustavitvi/ponovnem zagonu."
+
+#: bin/persist-config:104
+msgid "only save changes manually (you snooze, you lose)."
+msgstr "shrani zgolj ročno (če zaspiš, izgubiš)."
+
+#: bin/persist-config:105
+msgid "use current default."
+msgstr "uporabi trenutno privzeto."
+
+#: bin/persist-config:117
+msgid "Auto-save mode set to %s in %s."
+msgstr "Način samodejnega shranevanja je nastavljen na %s v %s."
+
+#: bin/persist-config:123
+msgid "It looks like root persistence was just enabled."
+msgstr "Videti je, da je bila ravnokar vključena korenska obstojnost"
+
+#: bin/persist-config:124
+msgid "Please set the save-mode for root persistence."
+msgstr "Prosimo, nastavite način shranjevanja za korensko obstojnost."
+
+#: bin/persist-config:125
+msgid "You will only have to do this once."
+msgstr "To boš storil le enkrat."
+
+#: bin/persist-config:127
+msgid "You can change your choice later with %s."
+msgstr "Izbiro lahko kasneje spremeniš z %s."
+
+#: bin/persist-config:159
+msgid "Already saved less than %s seconds ago"
+msgstr "Že shranjeno pred manj kot %s sekundami"
+
+#: bin/persist-config:160
+msgid "Won't autosave within %s seconds of a previous save"
+msgstr "Ne bo posneto v obdobju %s sekund od prejšnjega shranjevanja"
+
+#: bin/persist-config:199
+msgid "CONFIRM"
+msgstr "POTRDI"
+
+#: bin/persist-config:200
+msgid "There was an error saving your changes."
+msgstr "Napka pri shranjevanju vaših podatkov."
+
+#: bin/persist-config:202
+msgid "Do you still want to %s?"
+msgstr "Bi še vedno želeli %s?"

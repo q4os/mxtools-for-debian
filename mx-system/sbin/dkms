@@ -32,7 +32,7 @@ case "$1" in
 esac
 
 if [ -x /usr/sbin/dkms.mx ]; then
-   echo /usr/sbin/dkms.mx "$@" $dkms_kernel_option
+   echo /usr/sbin/dkms.mx "$@" $dkms_kernel_option 1>&2
    exec /usr/sbin/dkms.mx "$@" $dkms_kernel_option
 else
    echo "Error: /usr/sbin/dkms.mx not found!"

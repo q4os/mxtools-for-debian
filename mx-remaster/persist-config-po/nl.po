@@ -1,0 +1,161 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# anticapitalista <anticapitalista@riseup.net>, 2012
+# Eadwine Rose, 2015
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2012
+msgid ""
+msgstr ""
+"Project-Id-Version: antix-development\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-04-03 12:45-0600\n"
+"PO-Revision-Date: 2012-01-01 11:16+0000\n"
+"Last-Translator: Eadwine Rose, 2015\n"
+"Language-Team: Dutch (http://www.transifex.com/anticapitalista/antix-development/language/nl/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: nl\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: bin/persist-config:12
+msgid "antiX Root Persistence Auto-Save Configuration"
+msgstr "Auto-Save configuratie voor antiX Root persistentie"
+
+#: bin/persist-config:20
+msgid "Automatic"
+msgstr "Automatisch"
+
+#: bin/persist-config:21
+msgid "Semi-Automatic"
+msgstr "Semi-automatisch"
+
+#: bin/persist-config:22
+msgid "Manual"
+msgstr "Handleiding"
+
+#: bin/persist-config:23
+msgid "Quit"
+msgstr "Afmelden"
+
+#: bin/persist-config:29
+msgid "Configure root persistence saves to run either:"
+msgstr "Stel de opgeslagen root-persistentie in om uit te voeren:"
+
+#: bin/persist-config:31
+msgid "at shutdown/reboot, no asking"
+msgstr "niet vragen bij afsluiten/herstarten"
+
+#: bin/persist-config:32
+msgid "ask at shutdown/reboot"
+msgstr "vragen bij afsluiten/herstarten"
+
+#: bin/persist-config:33
+msgid "you snooze, you lose"
+msgstr "Waakzaam zijn, is de boodschap"
+
+#: bin/persist-config:35
+msgid ""
+"This program should be called with the %s option in a startup script to "
+"ensure a config file is created."
+msgstr "Dit programma dient te worden opgeroepen met de %s optie in een opstartscript, zodat er een configuratiebestand voor wordt aangemaakt."
+
+#: bin/persist-config:37
+msgid ""
+"It should be called with the %s option in shutdown scripts so your changes "
+"can be saved before shutting down."
+msgstr "Het dient te worden opgeroepen met de %s optie in het afsluit-script, zodat uw wijzigingen bij het afsluiten ook zijn opgeslagen."
+
+#: bin/persist-config:45
+msgid "%s specific options"
+msgstr "%s specifieke opties"
+
+#: bin/persist-config:46
+msgid "Create a %s file if one is missing."
+msgstr "Maak een %s bestand aan, als er een ontbreekt."
+
+#: bin/persist-config:47
+msgid "Run persist-save as directed by %s file."
+msgstr "Persist-save uitvoeren zoals is aangegeven in het %s bestand."
+
+#: bin/persist-config:48
+msgid "Run %s if %s succeeded."
+msgstr "%s uitvoeren indien %s geslaagd is."
+
+#: bin/persist-config:49
+msgid "If %s fails prompt user before running %s."
+msgstr "Indien %s mislukt, gebruiker waarschuwen voor het uitvoeren van %s."
+
+#: bin/persist-config:50
+msgid "implies %s"
+msgstr "impliceert %s"
+
+#: bin/persist-config:52
+msgid "Config file is located at: %s"
+msgstr "Configuratiebestand is te vinden in: %s"
+
+#: bin/persist-config:90
+msgid "Current mode is: %s"
+msgstr "Huidige modus is: %s"
+
+#: bin/persist-config:92
+msgid "There is no current auto-save mode.  The default is: %s."
+msgstr "Er is momenteel geen auto-save modus. De standaard is: %s."
+
+#: bin/persist-config:102
+msgid "save on shutdown/reboot automatically.  No asking."
+msgstr "Automatisch bewaren bij afsluiten/herstarten. Niet vooraf vragen."
+
+#: bin/persist-config:103
+msgid "ask to save on shutdown/reboot."
+msgstr "vragen om te bewaren bij het afsluiten/herstarten."
+
+#: bin/persist-config:104
+msgid "only save changes manually (you snooze, you lose)."
+msgstr "de veranderingen alleen handmatig opslaan (wees waakzaam!)."
+
+#: bin/persist-config:105
+msgid "use current default."
+msgstr "Gebruik huidige standaard."
+
+#: bin/persist-config:117
+msgid "Auto-save mode set to %s in %s."
+msgstr "Auto-save modus is in %s ingesteld op %s."
+
+#: bin/persist-config:123
+msgid "It looks like root persistence was just enabled."
+msgstr "het blijkt dat root-persistentie zojuist is ingesteld."
+
+#: bin/persist-config:124
+msgid "Please set the save-mode for root persistence."
+msgstr "Stel a.u.b. de save-modus in voor root-pesistentie."
+
+#: bin/persist-config:125
+msgid "You will only have to do this once."
+msgstr "U hoeft dit slechts eenmalig uit te voeren."
+
+#: bin/persist-config:127
+msgid "You can change your choice later with %s."
+msgstr "U kunt uw keuze later aanpassen met %s."
+
+#: bin/persist-config:159
+msgid "Already saved less than %s seconds ago"
+msgstr "Reeds minder dan %s seconden geleden opgeslagen"
+
+#: bin/persist-config:160
+msgid "Won't autosave within %s seconds of a previous save"
+msgstr "Zal niet opslaan binnen %s seconden van een eerdere opslag"
+
+#: bin/persist-config:199
+msgid "CONFIRM"
+msgstr "BEVESTIG"
+
+#: bin/persist-config:200
+msgid "There was an error saving your changes."
+msgstr "Er trad een fout op bij het bewaren van uw aanpassingen."
+
+#: bin/persist-config:202
+msgid "Do you still want to %s?"
+msgstr "Wilt u nog steeds %s"

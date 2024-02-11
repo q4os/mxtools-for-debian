@@ -1,0 +1,120 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# Eadwine Rose, 2015-2016
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2012
+msgid ""
+msgstr ""
+"Project-Id-Version: antix-development\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-10-06 10:59-0600\n"
+"PO-Revision-Date: 2012-01-01 11:17+0000\n"
+"Last-Translator: FIRST AUTHOR <EMAIL@ADDRESS>, 2012\n"
+"Language-Team: Dutch (http://www.transifex.com/anticapitalista/antix-development/language/nl/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: nl\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: bin/persist-save:14
+msgid "antiX Save Persistent Root"
+msgstr "antiX bewaar persistente Root"
+
+#: bin/persist-save:17
+msgid "Manually save filesystem changes in %s file for persistent root."
+msgstr "Handmatig wijzigingen van het bestandssysteem in het %s bestand opslaan voor persistente root."
+
+#: bin/persist-save:18
+msgid "You MUST run a program like this to save your filesystem changes."
+msgstr "U MOET een programma op deze wijze uitvoeren om de veranderingen in uw bestandssysteem te bewaren."
+
+#: bin/persist-save:43
+msgid "%s was not enabled.  Cannot %s"
+msgstr "%s was niet ingeschakeld. Kan niet %s"
+
+#: bin/persist-save:46 bin/persist-save:138
+msgid "Shall we begin?"
+msgstr "Zullen we beginnen?"
+
+#: bin/persist-save:47 bin/persist-save:139
+msgid "Stopping at user's request"
+msgstr "Stoppen op verzoek gebruiker"
+
+#: bin/persist-save:55
+msgid "The persistence device with UUID %s was not found"
+msgstr "Het persistente apparaat met UUID %s werd niet gevonden"
+
+#: bin/persist-save:56
+msgid "Please plug in the persistence device and try again"
+msgstr "Sluit aub het persistente apparaat aan en probeer opnieuw"
+
+#: bin/persist-save:74
+msgid "On VID error"
+msgstr "Op VID fout"
+
+#: bin/persist-save:82
+msgid "Checking for existing files and"
+msgstr "Onderzoeken op aanwezige bestanden en"
+
+#: bin/persist-save:83
+msgid "Checking if there is enough room ..."
+msgstr "Nagaan of er genoeg ruimte is ..."
+
+#: bin/persist-save:113
+msgid "persist device"
+msgstr "Apparaat met persistentie"
+
+#: bin/persist-save:114
+msgid "mounted at"
+msgstr "aangekoppeld op"
+
+#: bin/persist-save:127
+msgid "Available space, %s, is smaller than the margin of %s."
+msgstr "Beschikbare ruimte, %s, is minder dan de marge van %s."
+
+#: bin/persist-save:131
+msgid "Insufficient space.  Have: %s. Need: %s."
+msgstr "Onvoldoende ruimte. Beschikbaar: %s. Benodigd: %s."
+
+#: bin/persist-save:134
+msgid "Ready to sync file system changes"
+msgstr "Klaar om de veranderingen in de bestandssystemen te synchroniseren"
+
+#: bin/persist-save:142
+msgid "Performing rsync ... please be patient"
+msgstr "Rsync uitvoeren ... even geduld alstublieft"
+
+#: bin/persist-save:178
+msgid "%s The rsync command failed Failed! %s"
+msgstr "%s Het rsync commando mislukte Mislukte! %s"
+
+#: bin/persist-save:180
+msgid "It returned an exit code of %s"
+msgstr "Er kwam een exit-code terug van %s"
+
+#: bin/persist-save:181
+msgid "See the rsync man page to look up its meaning."
+msgstr "Lees de rsync handleiding na voor de betekenis."
+
+#: bin/persist-save:185 bin/persist-save:192
+msgid "%s succeeded"
+msgstr "%s gelukt"
+
+#: bin/persist-save:194
+msgid "    Your changes were saved in:"
+msgstr "    Uw veranderingen werden opgeslagen in:"
+
+#: bin/persist-save:217
+msgid "Missing rootfs version file %s"
+msgstr "Ontbrekende rootfs bestandsversie %s"
+
+#: bin/persist-save:220
+msgid "Missing version ID in rootfs file system"
+msgstr "Ontbrekende versie ID in rootfs bestandssysteem"
+
+#: bin/persist-save:223
+msgid "Version id inside of %s file does not match"
+msgstr "Versie ID in %s bestand komt niet overeen"

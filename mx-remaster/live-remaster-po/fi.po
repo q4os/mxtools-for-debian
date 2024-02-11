@@ -1,0 +1,278 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# En Kerro <inactive+ekeimaja@transifex.com>, 2018
+# Oi Suomi On! <oisuomion@protonmail.com>, 2020
+msgid ""
+msgstr ""
+"Project-Id-Version: antix-development\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-10-22 19:22-0600\n"
+"PO-Revision-Date: 2015-05-07 19:18+0000\n"
+"Last-Translator: Oi Suomi On! <oisuomion@protonmail.com>, 2020\n"
+"Language-Team: Finnish (http://www.transifex.com/anticapitalista/antix-development/language/fi/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: fi\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: bin/live-remaster:29
+msgid ""
+"Create a new compressed file system saving all of the changes you have made "
+"to the system."
+msgstr "Luo uusi pakattu tiedostojärjestelmä tallentaen kaikki järjestelmään tehdyt muutokset."
+
+#: bin/live-remaster:35
+msgid "Extra options for"
+msgstr "Lisävaihtoehdot kohteelle"
+
+#: bin/live-remaster:36
+msgid "Make a smaller linuxfs.new.  NOT deleted when done."
+msgstr "Tee pienempi linuxfs.new. EI poisteta kun valmista."
+
+#: bin/live-remaster:37
+msgid "Use %s instead of prompting user for title."
+msgstr "Käytä %s käyttäjäilmoituksen sijasta otsikkoa varten. "
+
+#: bin/live-remaster:38
+msgid "Make a general-purpose remaster."
+msgstr "Tee yleiskäytölle tarkoitettu uudelleenisännöinti."
+
+#: bin/live-remaster:39
+msgid "Make a personalized remaster."
+msgstr "Tee yksilöity uudelleenisännöinti."
+
+#: bin/live-remaster:71
+msgid "The live file system is read-only.  Cannot remaster."
+msgstr "Live-järjestelmä on tilassa vain-kirjoitus. Uudelleenisännöintiä ei voida suorittaa."
+
+#: bin/live-remaster:73
+msgid "General"
+msgstr "Yleinen"
+
+#: bin/live-remaster:74
+msgid "Personal"
+msgstr "Oma"
+
+#: bin/live-remaster:81
+msgid "%s uses your personal settings."
+msgstr "%s käyttää omia asetuksiasi."
+
+#: bin/live-remaster:82
+msgid "%s does not."
+msgstr "%s ei."
+
+#: bin/live-remaster:95
+msgid "Do you want to save files under %s in the new remaster?"
+msgstr "Haluatko tallentaa tiedostot %s alle tuoreessa uudelleenisännöinnissä?"
+
+#: bin/live-remaster:101
+msgid "Checking for existing files and"
+msgstr "Tarkastetaan olemassaolevia tiedostoja ja"
+
+#: bin/live-remaster:102
+msgid "Checking if there is enough room ..."
+msgstr "Tarkistetaan tilan riittävyys ..."
+
+#: bin/live-remaster:113
+msgid "The %s program was unable to start"
+msgstr "Ohjelma %s ei käynnistynyt"
+
+#: bin/live-remaster:165
+msgid "current linuxfs size"
+msgstr "nykyinen linuxfs-koko"
+
+#: bin/live-remaster:166
+msgid "excluded files est."
+msgstr "poisjätettävät tiedostot"
+
+#: bin/live-remaster:167 bin/live-remaster:168
+msgid "estimated new size"
+msgstr "arvioitu uusi koko"
+
+#: bin/live-remaster:174
+msgid "boot device total"
+msgstr "käynnistyslaitteen kokonaistila"
+
+#: bin/live-remaster:175
+msgid "boot device free"
+msgstr "käynnistyslaitteessa vapaana"
+
+#: bin/live-remaster:176 bin/live-remaster:177
+msgid "est. remaining"
+msgstr "Arvioitu jäljellejäävä"
+
+#: bin/live-remaster:194
+msgid "Have: %s megs available.  Need: %s."
+msgstr "Nyt on: %smegatavua vapaana. Tarvitaan: %s."
+
+#: bin/live-remaster:198
+msgid "Leftover files found"
+msgstr "Ylijäämätiedostoja löydetty"
+
+#: bin/live-remaster:200
+msgid "The following file(s) already exist"
+msgstr "Seuraava tiedosto tai tiedostot ovat jo olemassa"
+
+#: bin/live-remaster:201
+msgid "in the %s directory:"
+msgstr "Hakemistossa %s:"
+
+#: bin/live-remaster:205
+msgid "They may be left over from a previous remastering."
+msgstr "On mahdollista että ne ovat jääneet yli edellisestä uudelleenisännöinnistä."
+
+#: bin/live-remaster:206
+msgid "Do you want to fix this problem now?"
+msgstr "Haluatko korjata tämän ongelman heti?"
+
+#: bin/live-remaster:207
+msgid "(the alternative is to quit now)"
+msgstr "(vaihtoehto on lopettaa nyt)"
+
+#: bin/live-remaster:221
+msgid "Ready to create a new linuxfs file"
+msgstr "Kaikki valmista uuden linuxfs-tiedoston luomiselle"
+
+#: bin/live-remaster:225
+msgid "Shall we begin?"
+msgstr "Aloitetaanko?"
+
+#: bin/live-remaster:235
+msgid "(compresses faster, boots faster)"
+msgstr "(pakkaa nopeammin, käynnistyy nopeammin)"
+
+#: bin/live-remaster:236
+msgid "(compresses better)"
+msgstr "(pakkaa tehokkaammin)"
+
+#: bin/live-remaster:242
+msgid "Please choose the type of compression to use"
+msgstr "Valitse käytettävä pakkausmuoto"
+
+#: bin/live-remaster:243
+msgid "%s will take less time"
+msgstr "%s vie vähemmän aikaa"
+
+#: bin/live-remaster:244
+msgid "%s will result in a smaller file"
+msgstr "%s tuloksena syntyy pienempi tiedosto"
+
+#: bin/live-remaster:260
+msgid "Do you want remaster to use all of the CPUs?"
+msgstr "Haluatko uudelleenisännöidä käyttääksesi kaikkia suorittimia?"
+
+#: bin/live-remaster:262
+msgid "This will make the remaster process run as fast as possible."
+msgstr "Tämä ajaa uudelleenisännöintitoimenpiteen niin nopeasti kuin mahdollista."
+
+#: bin/live-remaster:263
+msgid "But there is more of a chance your computer will overheat."
+msgstr "Mutta on enemmän kuin mahdollista että tietokoneesi ylikuumenee."
+
+#: bin/live-remaster:272
+msgid "Remaster Version Identification"
+msgstr "Uudelleenisännöintiversion tunnistus"
+
+#: bin/live-remaster:274
+msgid "Please enter an (optional) title for this remaster"
+msgstr "Syötä (vaihtoehtoinen) nimike tälle uudelleenisännöinnille"
+
+#: bin/live-remaster:295
+msgid "The %s program failed to work"
+msgstr "Ohjelma %s ei toiminut"
+
+#: bin/live-remaster:335
+msgid "Remastering -- DO NOT CLOSE"
+msgstr "Uudelleenisännöinti - ÄLÄ SULJE"
+
+#: bin/live-remaster:351
+msgid "Remaster in Progress"
+msgstr "Uudelleenisännöinti käynnissä"
+
+#: bin/live-remaster:352
+msgid "Do you REALLY want to stop midway?"
+msgstr "Haluatko TODELLA pysäyttää kesken kaiken?"
+
+#: bin/live-remaster:379
+msgid "Created new compressed filesystem file:"
+msgstr "Uusi pakattu tiedostojärjestelmätiedosto luotu:"
+
+#: bin/live-remaster:384
+msgid "The new file should be used automatically the next time you boot."
+msgstr "Uusi tiedosto pitäisi olla automaattisesti käytössä seuraavan uudelleenkäynnistyksen yhteydessä."
+
+#: bin/live-remaster:386
+msgid "If there is a problem with the new system:"
+msgstr "Jos uuden järjestelmän kanssa ilmenee ongelma:"
+
+#: bin/live-remaster:387
+msgid "Use the %s  boot option to return to the current system."
+msgstr "Käytä %s käynnistysvalinta palataksesi tämänhetkiseen järjestelmään."
+
+#: bin/live-remaster:411
+msgid "Root persistence is enabled"
+msgstr "Juurikäytön persistenssi-tilavaraus on käytössä"
+
+#: bin/live-remaster:413
+msgid "Do you want to make a new %s file now?"
+msgstr "Haluatko tehdä uuden %s tiedoston nyt?"
+
+#: bin/live-remaster:421
+msgid "Remaster in progress"
+msgstr "Uudelleenisännöinti käynnissä"
+
+#: bin/live-remaster:423
+msgid "please be patient"
+msgstr "olethan kärsivällinen"
+
+#: bin/live-remaster:424
+msgid "(even after it says it is 100% done)"
+msgstr "(jopa sen jälkeen kun 100% on ilmoitettu tehdyksi)"
+
+#: bin/live-remaster:429
+msgid "antiX Remaster in Progress"
+msgstr "antiX:in uudelleenisännöinti käynnissä"
+
+#: bin/live-remaster:445
+msgid "Remastering Terminated Early"
+msgstr "Uudelleenisännöinti lopetettiin aikaisin"
+
+#: bin/live-remaster:450
+msgid "Remastering Failed"
+msgstr "Uudelleenisännöinti epäonnistui"
+
+#: bin/live-remaster:452
+msgid "New linuxfs file was not created!"
+msgstr "Uutta linuxfs-tiedostoa ei luotu!"
+
+#: bin/live-remaster:456
+msgid "Could not mount new file as %s!"
+msgstr "Uutta tiedostoa ei voitu liittää muodossa %s!"
+
+#: bin/live-remaster:467
+msgid "linuxfs size"
+msgstr "linuxfs:n koko"
+
+#: bin/live-remaster:468
+msgid "elapsed time"
+msgstr "aikaa kulunut"
+
+#: bin/live-remaster:469
+msgid "processors"
+msgstr "suorittimia"
+
+#: bin/live-remaster:470
+msgid "compression"
+msgstr "pakkaus"
+
+#: bin/live-remaster:484
+msgid "Error"
+msgstr "Virhe"
+
+#: bin/live-remaster:489
+msgid "Do you want to save the incomplete file?"
+msgstr "Haluatko tallentaa keskeneräisen tiedoston?"

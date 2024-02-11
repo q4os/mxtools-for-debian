@@ -1,0 +1,429 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# 🎈 BALLOON | FU-SEN, 2014-2015
+# Green <usergreen@users.osdn.me>, 2023
+# Green <usergreen@users.osdn.me>, 2020
+msgid ""
+msgstr ""
+"Project-Id-Version: antix-development\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-04-03 12:45-0600\n"
+"PO-Revision-Date: 2014-03-15 01:03+0000\n"
+"Last-Translator: Green <usergreen@users.osdn.me>, 2023\n"
+"Language-Team: Japanese (http://app.transifex.com/anticapitalista/antix-development/language/ja/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: ja\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: bin/persist-makefs:31
+msgid "antiX Create or Resize Persistence"
+msgstr "antiX パーシステンス 生成／サイズ変更"
+
+#: bin/persist-makefs:32
+msgid "Create or resize the files need for root and/or home persistence."
+msgstr "root and/or home パーシステンスのファイル生成／サイズ変更を行います。"
+
+#: bin/persist-makefs:36
+msgid "Use <%s> as the persistence device"
+msgstr "<%s> で パーシステンス デバイスを指定します"
+
+#: bin/persist-makefs:37
+msgid "Go directly to the explore menu"
+msgstr "探索メニューへ直接移動"
+
+#: bin/persist-makefs:38
+msgid "Go directly to the making a %s file"
+msgstr "%sファイル生成に直接移動"
+
+#: bin/persist-makefs:43
+msgid "Change Persistence Device"
+msgstr "パーシステンス デバイスの変更"
+
+#: bin/persist-makefs:44
+msgid "Change Peristence Path"
+msgstr "パーシステンス パス (path) の変更"
+
+#: bin/persist-makefs:45
+msgid "Create Root Persistence"
+msgstr "ルート パーシステンスの変更"
+
+#: bin/persist-makefs:46
+msgid "Resize Root Persistence"
+msgstr "ルート パーシステンスのサイズ変更"
+
+#: bin/persist-makefs:47
+msgid "Make rootfs.new file for remastering"
+msgstr "リマスター rootfs.new ファイルを生成"
+
+#: bin/persist-makefs:48
+msgid "Create Home Persistence"
+msgstr "ホーム パーシステンスの生成"
+
+#: bin/persist-makefs:49
+msgid "Resize Home Persistence"
+msgstr "ホーム パーシステンスのサイズ変更"
+
+#: bin/persist-makefs:51
+msgid "Quit this program"
+msgstr "プログラムの終了"
+
+#: bin/persist-makefs:52
+msgid "Update information"
+msgstr "更新情報"
+
+#: bin/persist-makefs:53
+msgid "Fix or delete broken and outdated files"
+msgstr "破損・古いファイルの修正・削除"
+
+#: bin/persist-makefs:55
+msgid "Fix"
+msgstr "修正"
+
+#: bin/persist-makefs:56
+msgid "Delete"
+msgstr "削除"
+
+#: bin/persist-makefs:57
+msgid "Explore"
+msgstr "探索"
+
+#: bin/persist-makefs:59 bin/persist-makefs:641
+msgid "Exploration Menu"
+msgstr "探索メニュー"
+
+#: bin/persist-makefs:60
+msgid "Exploring"
+msgstr "探索中"
+
+#: bin/persist-makefs:61
+msgid "Persistence Device"
+msgstr "パーシステンス デバイス"
+
+#: bin/persist-makefs:62
+msgid "Persistence Directory"
+msgstr "パーシステンス ディレクトリ"
+
+#: bin/persist-makefs:63
+msgid "Persistence file: %s"
+msgstr "パーシステンス ファイル: %s"
+
+#: bin/persist-makefs:64
+msgid "Stop Exploring"
+msgstr "探索の停止"
+
+#: bin/persist-makefs:66
+msgid "Stop Fixing and deleting"
+msgstr "修正／削除をやめる"
+
+#: bin/persist-makefs:67
+msgid "Fix and Delete Files Menu"
+msgstr "ファイルメニューの修正／削除"
+
+#: bin/persist-makefs:69
+msgid "does not exist"
+msgstr "存在しません"
+
+#: bin/persist-makefs:70
+msgid "Broken!"
+msgstr "壊れた！"
+
+#: bin/persist-makefs:73
+msgid "Simple, stable, no journaling"
+msgstr "シンプル・安定した・ジャーナリングなし"
+
+#: bin/persist-makefs:74
+msgid "Adds journaling."
+msgstr "ジャーナリングの追加"
+
+#: bin/persist-makefs:75
+msgid "Journaling, checksums, fast fsck"
+msgstr "ジャーナリング・チェックサム・fsck の高速化"
+
+#: bin/persist-makefs:116
+msgid "The persistence device with UUID %s was not found"
+msgstr "パーシステンス デバイスの UUID %s が見つかりません"
+
+#: bin/persist-makefs:117
+msgid "Please plug in the persistence device if you want to use it."
+msgstr "それを使用している場合はパーシステンス デバイスを接続してください。"
+
+#: bin/persist-makefs:119
+msgid "Do you want to try again?"
+msgstr "再度行いますか？"
+
+#: bin/persist-makefs:127
+msgid "Default device %s is either missing or invalid"
+msgstr "既定のデバイス %s は存在しないか無効です"
+
+#: bin/persist-makefs:128 bin/persist-makefs:144
+msgid "Please select a new device for the persistence files"
+msgstr "パーシステンス ファイルの新たなデバイスを選択して下さい"
+
+#: bin/persist-makefs:143
+msgid "The boot/persist device %s is read-only."
+msgstr "起動／パーシスト デバイス %s は読み込み専用になっています。"
+
+#: bin/persist-makefs:153
+msgid "Create rootfs.new (for remastering)"
+msgstr "rootfs.new 生成 (リマスターのため)"
+
+#: bin/persist-makefs:222
+msgid "Create Root persistence"
+msgstr "ルート パーシステンスの生成"
+
+#: bin/persist-makefs:229
+msgid "Can't resize %s while it is already mounted."
+msgstr "%s はすでにマウントされているためサイズを変更できません"
+
+#: bin/persist-makefs:234
+msgid "Resize Root persistence"
+msgstr "ルート パーシステンスのサイズ変更"
+
+#: bin/persist-makefs:250
+msgid "Create %s (for remastering)"
+msgstr "%s 生成 (リマスターのため)"
+
+#: bin/persist-makefs:255
+msgid "Create Home persistence"
+msgstr "ホーム パーシステンスの生成"
+
+#: bin/persist-makefs:261
+msgid "Resize Home persistence"
+msgstr "ホーム パーシステンスのサイズ変更"
+
+#: bin/persist-makefs:285 bin/persist-makefs:611 bin/persist-makefs:654
+msgid "Really Quit?"
+msgstr "本当に終了しますか？"
+
+#: bin/persist-makefs:317
+msgid "File System Type"
+msgstr "ファイルシステムの種類"
+
+#: bin/persist-makefs:327
+msgid "The file %s already exists"
+msgstr "ファイル %s はすでに存在します"
+
+#: bin/persist-makefs:328
+msgid "Do you want to over-write it?"
+msgstr "上書きしてよろしいですか？"
+
+#: bin/persist-makefs:332
+msgid "Please select size of the new file system"
+msgstr "新たなファイルシステムのサイズを選択して下さい"
+
+#: bin/persist-makefs:334
+msgid "Not enough space on device"
+msgstr "デバイスの空き領域が不足しています"
+
+#: bin/persist-makefs:345
+msgid "Warning: this can take several minutes per Gig on a %s file system"
+msgstr "警告: これは %s ファイルシステムで GB 毎に数分かかることがあります"
+
+#: bin/persist-makefs:346
+msgid "Please wait"
+msgstr "お待ち下さい"
+
+#: bin/persist-makefs:353
+msgid "Creating file %s"
+msgstr "ファイル %s を生成中"
+
+#: bin/persist-makefs:354
+msgid "Size: %s Meg. Filesystem: %s"
+msgstr "サイズ: %s M ファイルシステム: %s"
+
+#: bin/persist-makefs:365
+msgid "Was unable to create directory for file %s"
+msgstr "ファイル %s 用のディレクトリを生成できません"
+
+#: bin/persist-makefs:366
+msgid "Was unable to create file %s"
+msgstr "ファイル %s を生成できません"
+
+#: bin/persist-makefs:367
+msgid "Was unable to make %s filesystem on file %s"
+msgstr "%s ファイルシステムをファイル %s へ生成できません"
+
+#: bin/persist-makefs:368
+msgid "Unknown error creating file %s"
+msgstr "ファイル %s の生成にエラーが発生しました"
+
+#: bin/persist-makefs:377
+msgid "The file %s is missing"
+msgstr "ファイル %s が不足しています"
+
+#: bin/persist-makefs:385
+msgid "Success! File %s was created."
+msgstr "成功！ ファイル %s は生成されました。"
+
+#: bin/persist-makefs:386
+msgid "Success! File %s was created and its filesystem was fixed."
+msgstr "成功！ ファイル %s は生成されファイルシステムは修正されました。"
+
+#: bin/persist-makefs:387
+msgid "The filesystem on %s is broken and wasn't fixed"
+msgstr "ファイルシステム %s に問題があり修正されませんでした"
+
+#: bin/persist-makefs:401
+msgid "About to create %s file"
+msgstr "%s ファイル生成について"
+
+#: bin/persist-makefs:402
+msgid "size"
+msgstr "サイズ"
+
+#: bin/persist-makefs:403
+msgid "type"
+msgstr "種類"
+
+#: bin/persist-makefs:404
+msgid "device"
+msgstr "デバイス"
+
+#: bin/persist-makefs:405
+msgid "Shall we proceed?"
+msgstr "実行して良いですか？"
+
+#: bin/persist-makefs:411
+msgid "Creating %s file"
+msgstr "%s ファイルの生成中"
+
+#: bin/persist-makefs:438
+msgid "Please be patient while %s megs are copied ..."
+msgstr "%s M のコピーを行っている間お待ち下さい..."
+
+#: bin/persist-makefs:452
+msgid "Was unable to unmount %s at %s"
+msgstr "%s / %s アンマウントできませんでした"
+
+#: bin/persist-makefs:455
+msgid "Please select a new persistence device"
+msgstr "新たなパーシステンス デバイスを選択して下さい"
+
+#: bin/persist-makefs:456
+msgid "Current device is: %s"
+msgstr "現在のデバイス: %s"
+
+#: bin/persist-makefs:467
+msgid "The selected device %s is read-only"
+msgstr "選択したデバイス %s は読み込み専用です"
+
+#: bin/persist-makefs:468
+msgid "Please select a different device"
+msgstr "別のデバイスを選択して下さい"
+
+#: bin/persist-makefs:487
+msgid "new"
+msgstr "新規"
+
+#: bin/persist-makefs:491
+msgid "Please choose a new persistence directory"
+msgstr "新しいパーシステンス ディレクトリを選択して下さい"
+
+#: bin/persist-makefs:492
+msgid "The current choice is %s"
+msgstr "現在の選択 %s"
+
+#: bin/persist-makefs:500
+msgid "Please select a new persistence directory"
+msgstr "新しいパーシステンス ディレクトリを選択して下さい"
+
+#: bin/persist-makefs:501
+msgid "The current one is %s"
+msgstr "現在 %s"
+
+#: bin/persist-makefs:512
+msgid "Expected a directory at %s but found a file."
+msgstr "%s ディレクトリを期待しましたが、ファイルとして見つけました。"
+
+#: bin/persist-makefs:514
+msgid "The only other option is to quit."
+msgstr "他のオプションは終了するのみです。"
+
+#: bin/persist-makefs:519
+msgid "Unable to erase file %s"
+msgstr "ファイル %s の削除に失敗しました"
+
+#: bin/persist-makefs:525
+msgid "Unable to make directory %s"
+msgstr "ディレクトリ %s の生成に失敗しました"
+
+#: bin/persist-makefs:542
+msgid "There were no errors to correct in %s."
+msgstr "%s 内に修正すべきエラーは存在しません。"
+
+#: bin/persist-makefs:545
+msgid "File system in %s should be fixed."
+msgstr "%s 内のファイルシステムを修正する必要があります。"
+
+#: bin/persist-makefs:548
+msgid "File system in %s left uncorrected."
+msgstr "％sのファイルシステムは修正されずに残されています。"
+
+#: bin/persist-makefs:549
+msgid "You may be able to fix this manually with the command:"
+msgstr "コマンドを使用し手動でこれを修正することができる場合があります:"
+
+#: bin/persist-makefs:553
+msgid "Failed to fix %s"
+msgstr "%s の修正に失敗しました"
+
+#: bin/persist-makefs:554
+msgid "Shall I delete the file: %s?"
+msgstr "ファイル %s を削除しますか？"
+
+#: bin/persist-makefs:562
+msgid "Delete file %s?"
+msgstr "ファイル %s を削除？"
+
+#: bin/persist-makefs:577
+msgid "No more files left to fix or delete"
+msgstr "これ以上修正・削除するファイルは残っていません"
+
+#: bin/persist-makefs:596
+msgid "Strange.  No more files left to fix or delete"
+msgstr "奇妙です。これ以上修正・削除するファイルは残っていません"
+
+#: bin/persist-makefs:670
+msgid "Strange.  Could not find file %s"
+msgstr "奇妙です。ファイル %s が見つかりません"
+
+#: bin/persist-makefs:671
+msgid "Cannot explore what we cannot find."
+msgstr "見つけることができないものを検索できません。"
+
+#: bin/persist-makefs:697
+msgid "total"
+msgstr "全体"
+
+#: bin/persist-makefs:723
+msgid "Used"
+msgstr "使用"
+
+#: bin/persist-makefs:771
+msgid "total space on device"
+msgstr "デバイスの全ての空き容量"
+
+#: bin/persist-makefs:772
+msgid "available space"
+msgstr "有効な空き容量"
+
+#: bin/persist-makefs:773
+msgid "total RAM"
+msgstr "全体の RAM"
+
+#: bin/persist-makefs:775
+msgid "persist device"
+msgstr "パーシスト デバイス"
+
+#: bin/persist-makefs:776
+msgid "persist path"
+msgstr "パーシスト パス (path)"
+
+#: bin/persist-makefs:796
+msgid "(The %s file is already as large as all RAM)"
+msgstr "(%s ファイルはすでに全 RAM と同じ大きさです)"

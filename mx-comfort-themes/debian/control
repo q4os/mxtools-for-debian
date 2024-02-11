@@ -1,0 +1,13 @@
+Source: mx-comfort-themes
+Section: gnome
+Priority: optional
+Maintainer: Dolphin Oracle<dolphinoracle@gmail.com>
+Build-Depends: debhelper (>= 9)
+Standards-Version: 3.9.8
+
+Package: mx-comfort-themes
+Section: gnome
+Architecture: all
+Depends: ${misc:Depends}
+Description: mx-comfort themes for MX Linux
+ Provides mx-comfort themes for MX Linux

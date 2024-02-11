@@ -39,7 +39,7 @@
 
 #include <unistd.h>
 
-extern const QString starting_home = qEnvironmentVariable("HOME");
+inline const QString starting_home = qEnvironmentVariable("HOME");
 
 int main(int argc, char *argv[])
 {
@@ -53,7 +53,7 @@ int main(int argc, char *argv[])
     }
 
     QApplication::setWindowIcon(QIcon::fromTheme(QApplication::applicationName()));
-    QApplication::setOrganizationName(QStringLiteral("MX-Linux"));
+    QApplication::setOrganizationName("MX-Linux");
     QApplication::setApplicationVersion(VERSION);
 
     QTranslator qtTran;
@@ -81,8 +81,8 @@ int main(int argc, char *argv[])
     - installs flatpaks"));
     parser.addHelpOption();
     parser.addVersionOption();
-    parser.addOption({{QStringLiteral("s"), QStringLiteral("skip-online-check")},
-                      QObject::tr("Skip online check if it falsely reports lack of internet access.")});
+    parser.addOption(
+        {{"s", "skip-online-check"}, QObject::tr("Skip online check if it falsely reports lack of internet access.")});
     parser.process(app);
 
     // Root guard

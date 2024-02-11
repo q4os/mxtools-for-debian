@@ -77,10 +77,10 @@ void ManageRemotes::removeItem()
         return;
     }
     changed = true;
-    const QString remote = comboRemote->currentText().section("\t", 0, 0);
-    QString user = comboRemote->currentText().section("\t", 1, 1);
+    const QString remote = comboRemote->currentText().section('\t', 0, 0);
+    QString user = comboRemote->currentText().section('\t', 1, 1);
     user = user.isEmpty() ? "" : user.prepend("--");
-    cmd->run("flatpak remote-delete " + remote + " " + user);
+    cmd->run("flatpak remote-delete " + remote + ' ' + user);
     comboRemote->removeItem(comboRemote->currentIndex());
 }
 
@@ -88,9 +88,9 @@ void ManageRemotes::addItem()
 {
     setCursor(QCursor(Qt::BusyCursor));
     QString location = editAddRemote->text();
-    QString name = editAddRemote->text().section("/", -1).section(".", 0, 0); // obtain the name before .flatpakremo
+    QString name = editAddRemote->text().section('/', -1).section('.', 0, 0); // obtain the name before .flatpakremo
 
-    if (!cmd->run("flatpak remote-add " + user + "--if-not-exists " + name + " " + location)) {
+    if (!cmd->run("flatpak remote-add " + user + "--if-not-exists " + name + ' ' + location)) {
         setCursor(QCursor(Qt::ArrowCursor));
         QMessageBox::critical(this, tr("Error adding remote"),
                               tr("Could not add remote - command returned an error. Please double-check the remote "
@@ -123,11 +123,11 @@ void ManageRemotes::userSelected(int index)
     listFlatpakRemotes();
 }
 
-// List the flatpak remote and loade them into combobox
+// List the flatpak remote and load them into combobox
 void ManageRemotes::listFlatpakRemotes() const
 {
     qDebug() << "+++" << __PRETTY_FUNCTION__ << "+++";
     comboRemote->clear();
-    QStringList list = cmd->getOut("flatpak remote-list").split(("\n"));
+    QStringList list = cmd->getOut("flatpak remote-list").split('\n');
     comboRemote->addItems(list);
 }

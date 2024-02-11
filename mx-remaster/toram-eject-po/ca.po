@@ -1,0 +1,76 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# Eduard Selma <selma@tinet.cat>, 2015
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2012
+msgid ""
+msgstr ""
+"Project-Id-Version: antix-development\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-06-29 15:33-0600\n"
+"PO-Revision-Date: 2012-01-01 11:19+0000\n"
+"Last-Translator: Eduard Selma <selma@tinet.cat>, 2015\n"
+"Language-Team: Catalan (http://www.transifex.com/anticapitalista/antix-development/language/ca/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: ca\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: bin/toram-eject:14
+msgid "Eject LiveCD/DVD via a simple GUI if %s is enabled."
+msgstr "S'expulsa el CD/DVD autònom amb una IGU senzilla si s'activa %s"
+
+#: bin/toram-eject:16
+msgid "Automatic toram Eject"
+msgstr "Expulsió automàtica ToRAM"
+
+#: bin/toram-eject:24
+msgid "no BOOT_DEV given!"
+msgstr "no s'ha especificat el BOOT_DEV!"
+
+#: bin/toram-eject:33
+msgid "boot device: %s is not removable."
+msgstr "Dispositiu d'arrencada: %s no és extraïble."
+
+#: bin/toram-eject:39
+msgid "boot device: %s is still mounted!"
+msgstr "Dispositiu d'arrencada: %s encara està muntat!"
+
+#: bin/toram-eject:46
+msgid "The %s boot option succeeded."
+msgstr "L'opció d'arrencada %s ha tingut èxit."
+
+#: bin/toram-eject:47
+msgid "The boot media is no longer needed."
+msgstr "El dispositiu d'arrencada ja no és necessari."
+
+#: bin/toram-eject:49
+msgid "Do you want the LiveCD/DVD ejected?"
+msgstr "Voleu expulsar el CD/DVD autònom?"
+
+#: bin/toram-eject:50
+msgid "did not eject as per user request."
+msgstr "No s'ha expulsat a petició de l'usuari."
+
+#: bin/toram-eject:52
+msgid "Could not eject %s"
+msgstr "No s'ha pogut expulsar %s"
+
+#: bin/toram-eject:57
+msgid "Feel free to remove the CD or DVD."
+msgstr "Ja podeu treure el CD o DVD."
+
+#: bin/toram-eject:59
+msgid "Do you want the drive closed now?"
+msgstr "Voleu tancar ara la unitat?"
+
+#: bin/toram-eject:60
+msgid "did not closing drive as per user request."
+msgstr "No es tanca la unitat a petició de l'usuari."
+
+#: bin/toram-eject:62
+msgid "Could not close %s"
+msgstr "No es pot tancar %s"

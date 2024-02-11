@@ -14,7 +14,7 @@
 # Vinzenz Vietzke <vinz@vinzv.de>, 2022
 # wahnsinn, 2022
 # Der Dings, 2023
-# aer, 2023
+# aer, 2024
 # 
 #, fuzzy
 msgid ""
@@ -23,7 +23,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-12-14 20:02-0500\n"
 "PO-Revision-Date: 2016-11-29 14:08+0000\n"
-"Last-Translator: aer, 2023\n"
+"Last-Translator: aer, 2024\n"
 "Language-Team: German (https://app.transifex.com/anticapitalista/teams/10162/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -294,7 +294,7 @@ msgstr "Fehler beim Herunterladen des Nvidia-Direct-Paketquellenschlüssels"
 #, sh-format
 msgid "Would you like to check debian-backports for a later version?"
 msgstr ""
-"Möchten sie in den Debian Backports nach einer neueren Version suchen?"
+"Möchten Sie in den Debian Backports nach einer neueren Version suchen?"
 
 #: ../ddm-mx:641
 #, sh-format
@@ -342,7 +342,7 @@ msgstr "Beende"
 #, sh-format
 msgid "Would you like to check MX Test Repo for a later version?"
 msgstr ""
-"Möchten sie in der MX-Test-Paketquelle nach einer neueren Version suchen?"
+"Möchten Sie in der MX-Test-Paketquelle nach einer neueren Version suchen?"
 
 #: ../ddm-mx:680 ../ddm-mx:681
 #, sh-format
@@ -354,7 +354,7 @@ msgstr ""
 #: ../ddm-mx:699 ../ddm-mx:738 ../ddm-mx:778
 #, sh-format
 msgid "Which driver do you wish to install"
-msgstr "Welchen Treiber möchten sie installieren"
+msgstr "Welchen Treiber möchten Sie installieren"
 
 #: ../ddm-mx:701
 #, sh-format
@@ -417,14 +417,14 @@ msgstr "Aktualisiere Quellen mit apt-get update"
 #, sh-format
 msgid "There was a problem with the apt-get update.  See $LOG for details"
 msgstr ""
-"Es gab ein Problem mit apt-get update. Werfen sie einen Blick in $LOG für "
+"Es gab ein Problem mit apt-get update. Werfen Sie einen Blick in $LOG für "
 "Details"
 
 #. provide user with information on going back to open source drivers
 #: ../ddm-mx:853
 #, sh-format
 msgid "To restore open source drivers use:  "
-msgstr "Um die Open-Source-Treiber wiederherzustellen, verwenden sie: "
+msgstr "Um die Open-Source-Treiber wiederherzustellen, verwenden Sie: "
 
 #: ../ddm-mx:870
 #, sh-format
@@ -468,8 +468,8 @@ msgid ""
 "Please remove with  <sudo nvidia-install --uninstall> and reboot if you wish"
 " to proceed"
 msgstr ""
-"Bitte entfernen sie mit <sudo nvidia-install --uninstall> und starten sie "
-"neu, wenn sie fortfahren möchten."
+"Bitte entfernen Sie mit <sudo nvidia-install --uninstall> und starten Sie "
+"neu, wenn Sie fortfahren möchten."
 
 #. possible hybrid graphics detected
 #: ../ddm-mx:941
@@ -496,7 +496,7 @@ msgid ""
 "Use \"nvidia-run-mx\" followed by your application command to use the nvidia"
 " graphics"
 msgstr ""
-"Verwenden sie \"nvidia-run-mx\", gefolgt von ihrem Anwendungsbefehl, um die "
+"Verwenden Sie \"nvidia-run-mx\", gefolgt von Ihrem Anwendungsbefehl, um die "
 "nvidia-Grafik zu nutzen"
 
 #: ../ddm-mx:988
@@ -505,8 +505,8 @@ msgid ""
 "If you want to force the older bumblebee optimus drivers,\\n quit and "
 "restart with sudo ddm-mx -i nvidia -f bumblebee-nvidia"
 msgstr ""
-"Wenn sie die älteren bumblebee optimus Treiber erzwingen wollen,\\n beenden "
-"und starten sie neu mit sudo ddm-mx -i nvidia -f bumblebee-nvidia"
+"Wenn Sie die älteren bumblebee optimus Treiber erzwingen wollen,\\n beenden "
+"und starten Sie neu mit sudo ddm-mx -i nvidia -f bumblebee-nvidia"
 
 #: ../ddm-mx:991 ../ddm-mx:997
 #, sh-format
@@ -516,7 +516,7 @@ msgstr "Sie müssen den bumblebee-nvidia-Treiber verwenden."
 #: ../ddm-mx:1010
 #, sh-format
 msgid "nvidia driver not available, check your repo sources"
-msgstr "Der Nvidia-Treiber ist nicht verfügbar, prüfen sie ihre Paketquellen!"
+msgstr "Der Nvidia-Treiber ist nicht verfügbar, prüfen Sie Ihre Paketquellen!"
 
 #: ../ddm-mx:1015
 #, sh-format
@@ -524,8 +524,8 @@ msgid ""
 "Uh oh. Your card is only supported by older legacy drivers which are not in "
 "any current Debian suite."
 msgstr ""
-"Oh-oh. Ihre Karte wird nur von älteren Archivtreibern unterstützt, welche "
-"nicht in der aktuellen Debian-Suite vorhanden sind."
+"Ihre Karte wird nur von älteren Archivtreibern unterstützt, die aber nicht "
+"in der aktuellen Debian-Suite vorhanden sind."
 
 #. candidate from enabled repos
 #: ../ddm-mx:1117 ../ddm-mx:1128 ../ddm-mx:1137
@@ -646,4 +646,4 @@ msgstr "Es wird empfohlen, das Folgende zu installieren:"
 #: ../nvidia-detect-mx:281
 #, sh-format
 msgid "To install alternate driver packages, use"
-msgstr "Um alternative Treiberpakete zu installieren, verwenden sie"
+msgstr "Um alternative Treiberpakete zu installieren, verwenden Sie"

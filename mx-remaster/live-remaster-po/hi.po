@@ -1,0 +1,278 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# anticapitalista <anticapitalista@riseup.net>, 2022
+# Panwar108 <caspian7pena@gmail.com>, 2021
+msgid ""
+msgstr ""
+"Project-Id-Version: antix-development\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-10-22 19:22-0600\n"
+"PO-Revision-Date: 2015-05-07 19:18+0000\n"
+"Last-Translator: anticapitalista <anticapitalista@riseup.net>, 2022\n"
+"Language-Team: Hindi (http://www.transifex.com/anticapitalista/antix-development/language/hi/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: hi\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: bin/live-remaster:29
+msgid ""
+"Create a new compressed file system saving all of the changes you have made "
+"to the system."
+msgstr "आपके द्वारा सिस्टम में किए गए सभी परिवर्तन युक्त एक नवीन संपीड़ित फाइल सिस्टम बनाएँ।"
+
+#: bin/live-remaster:35
+msgid "Extra options for"
+msgstr "इस हेतु अतिरिक्त विकल्प"
+
+#: bin/live-remaster:36
+msgid "Make a smaller linuxfs.new.  NOT deleted when done."
+msgstr "लघुत्तर linuxfs.new बनाएँ। पूर्ण होने पर हटाएँ नहीं।"
+
+#: bin/live-remaster:37
+msgid "Use %s instead of prompting user for title."
+msgstr "उपयोक्ता से शीर्षक निवेदन न करते हुए %s उपयोग करें।"
+
+#: bin/live-remaster:38
+msgid "Make a general-purpose remaster."
+msgstr "सामान्य-कार्य हेतु रीमास्टर बनाएँ।"
+
+#: bin/live-remaster:39
+msgid "Make a personalized remaster."
+msgstr "व्यक्तिगत कार्य हेतु रीमास्टर बनाएँ।"
+
+#: bin/live-remaster:71
+msgid "The live file system is read-only.  Cannot remaster."
+msgstr "लाइव फाइल सिस्टम केवल रीड योग्य है। रीमास्टर संभव नहीं है।"
+
+#: bin/live-remaster:73
+msgid "General"
+msgstr "सामान्य"
+
+#: bin/live-remaster:74
+msgid "Personal"
+msgstr "व्यक्तिगत"
+
+#: bin/live-remaster:81
+msgid "%s uses your personal settings."
+msgstr "%s द्वारा आपकी व्यक्तिगत सेटिंग्स प्रयुक्त होंगी।"
+
+#: bin/live-remaster:82
+msgid "%s does not."
+msgstr "%s द्वारा प्रयुक्त नहीं होंगी।"
+
+#: bin/live-remaster:95
+msgid "Do you want to save files under %s in the new remaster?"
+msgstr "क्या आप नवीन रीमास्टर में %s के अंतर्गत फाइलें संचित करना चाहते हैं?"
+
+#: bin/live-remaster:101
+msgid "Checking for existing files and"
+msgstr "मौजूदा फाइलों हेतु जाँच जारी व"
+
+#: bin/live-remaster:102
+msgid "Checking if there is enough room ..."
+msgstr "पर्याप्त स्पेस हेतु जाँच जारी ..."
+
+#: bin/live-remaster:113
+msgid "The %s program was unable to start"
+msgstr "%s प्रोग्राम आरंभ विफल"
+
+#: bin/live-remaster:165
+msgid "current linuxfs size"
+msgstr "वर्तमान linuxfs आकार"
+
+#: bin/live-remaster:166
+msgid "excluded files est."
+msgstr "अपवर्जित फाइलों का अनुमान"
+
+#: bin/live-remaster:167 bin/live-remaster:168
+msgid "estimated new size"
+msgstr "नवीन आकार का अनुमान"
+
+#: bin/live-remaster:174
+msgid "boot device total"
+msgstr "कुल बूट उपकरण"
+
+#: bin/live-remaster:175
+msgid "boot device free"
+msgstr "अप्रयुक्त बूट उपकरण"
+
+#: bin/live-remaster:176 bin/live-remaster:177
+msgid "est. remaining"
+msgstr "शेष समय का अनुमान"
+
+#: bin/live-remaster:194
+msgid "Have: %s megs available.  Need: %s."
+msgstr "मौजूद : %s एमबी उपलब्ध। आवश्यक : %s।"
+
+#: bin/live-remaster:198
+msgid "Leftover files found"
+msgstr "शेष फाइलें मिली"
+
+#: bin/live-remaster:200
+msgid "The following file(s) already exist"
+msgstr "निम्नलिखित फाइलें पहले से मौजूद हैं"
+
+#: bin/live-remaster:201
+msgid "in the %s directory:"
+msgstr "%s डायरेक्टरी में :"
+
+#: bin/live-remaster:205
+msgid "They may be left over from a previous remastering."
+msgstr "संभवतः ये फाइलें पूर्व रीमास्टर के दौरान शेष रह गई थी।"
+
+#: bin/live-remaster:206
+msgid "Do you want to fix this problem now?"
+msgstr "क्या आप इस समस्या का समाधान अभी करना चाहते हैं?"
+
+#: bin/live-remaster:207
+msgid "(the alternative is to quit now)"
+msgstr "(दूसरा विकल्प है प्रक्रिया अभी बंद कर दें)"
+
+#: bin/live-remaster:221
+msgid "Ready to create a new linuxfs file"
+msgstr "नवीन linuxfs फाइल बनाने हेतु तैयार"
+
+#: bin/live-remaster:225
+msgid "Shall we begin?"
+msgstr "आरंभ करें?"
+
+#: bin/live-remaster:235
+msgid "(compresses faster, boots faster)"
+msgstr "(तीव्र संपीड़न, तीव्र बूट)"
+
+#: bin/live-remaster:236
+msgid "(compresses better)"
+msgstr "(उच्च संपीड़न)"
+
+#: bin/live-remaster:242
+msgid "Please choose the type of compression to use"
+msgstr "कृपया इच्छित संपीड़न विधि चुनें"
+
+#: bin/live-remaster:243
+msgid "%s will take less time"
+msgstr "%s द्वारा प्रक्रिया में कम समय लगेगा"
+
+#: bin/live-remaster:244
+msgid "%s will result in a smaller file"
+msgstr "%s द्वारा निर्मित फाइल का आकार छोटा होगा"
+
+#: bin/live-remaster:260
+msgid "Do you want remaster to use all of the CPUs?"
+msgstr "क्या आप चाहते है रीमास्टर प्रक्रिया हेतु सभी सीपीयू उपयोग किए जाएँ?"
+
+#: bin/live-remaster:262
+msgid "This will make the remaster process run as fast as possible."
+msgstr "इससे रीमास्टर प्रक्रिया की गति में वर्धन होगा।"
+
+#: bin/live-remaster:263
+msgid "But there is more of a chance your computer will overheat."
+msgstr "हालाँकि संभवतः इस कारण आपके कंप्यूटर का तापमान बढ़ जाएँ।"
+
+#: bin/live-remaster:272
+msgid "Remaster Version Identification"
+msgstr "रीमास्टर संस्करण पहचान"
+
+#: bin/live-remaster:274
+msgid "Please enter an (optional) title for this remaster"
+msgstr "कृपया इस रीमास्टर हेतु (वैकल्पिक) शीर्षक दर्ज करें"
+
+#: bin/live-remaster:295
+msgid "The %s program failed to work"
+msgstr "%s प्रोग्राम निष्पादन विफल"
+
+#: bin/live-remaster:335
+msgid "Remastering -- DO NOT CLOSE"
+msgstr "रीमास्टर करना जारी -- बंद न करें"
+
+#: bin/live-remaster:351
+msgid "Remaster in Progress"
+msgstr "रीमास्टर करना जारी"
+
+#: bin/live-remaster:352
+msgid "Do you REALLY want to stop midway?"
+msgstr "क्या निश्चित ही प्रक्रिया को बीच में रोकना चाहते हैं?"
+
+#: bin/live-remaster:379
+msgid "Created new compressed filesystem file:"
+msgstr "इस नवीन संपीड़ित फाइल सिस्टम का सृजन पूर्ण :"
+
+#: bin/live-remaster:384
+msgid "The new file should be used automatically the next time you boot."
+msgstr "आगामी बूट पर नवीन फाइल स्वतः ही कार्यरत हो जाएगी।"
+
+#: bin/live-remaster:386
+msgid "If there is a problem with the new system:"
+msgstr "नवीन सिस्टम हेतु कोई समस्या होने पर :"
+
+#: bin/live-remaster:387
+msgid "Use the %s  boot option to return to the current system."
+msgstr "%s बूट विकल्प द्वारा वर्तमान सिस्टम पर वापस आएँ।"
+
+#: bin/live-remaster:411
+msgid "Root persistence is enabled"
+msgstr "रुट संरक्षण सक्रिय"
+
+#: bin/live-remaster:413
+msgid "Do you want to make a new %s file now?"
+msgstr "क्या आप अभी एक नवीन फाइल बनाना %sचाहते हैं?"
+
+#: bin/live-remaster:421
+msgid "Remaster in progress"
+msgstr "रीमास्टर करना जारी"
+
+#: bin/live-remaster:423
+msgid "please be patient"
+msgstr "कृपया धैर्य बरतें"
+
+#: bin/live-remaster:424
+msgid "(even after it says it is 100% done)"
+msgstr "(100% पूर्ण होने के उपरांत भी)"
+
+#: bin/live-remaster:429
+msgid "antiX Remaster in Progress"
+msgstr "एंटी-एक्स रीमास्टर कार्यरत है"
+
+#: bin/live-remaster:445
+msgid "Remastering Terminated Early"
+msgstr "रीमास्टर पूर्ण होने से पहले निरस्त"
+
+#: bin/live-remaster:450
+msgid "Remastering Failed"
+msgstr "रीमास्टर करना विफल"
+
+#: bin/live-remaster:452
+msgid "New linuxfs file was not created!"
+msgstr "नवीन linuxfs फाइल सृजन विफल!"
+
+#: bin/live-remaster:456
+msgid "Could not mount new file as %s!"
+msgstr "नवीन फाइल को %s के रूप में माउंट करना विफल!"
+
+#: bin/live-remaster:467
+msgid "linuxfs size"
+msgstr "linuxfs आकार"
+
+#: bin/live-remaster:468
+msgid "elapsed time"
+msgstr "सक्रिय समय"
+
+#: bin/live-remaster:469
+msgid "processors"
+msgstr "प्रोसेसर"
+
+#: bin/live-remaster:470
+msgid "compression"
+msgstr "संपीड़न"
+
+#: bin/live-remaster:484
+msgid "Error"
+msgstr "त्रुटि"
+
+#: bin/live-remaster:489
+msgid "Do you want to save the incomplete file?"
+msgstr "क्या आप अर्धपूर्ण फाइल को संचित करना चाहते हैं?"

@@ -1,0 +1,77 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# alfredmale <maledora4@googlemail.com>, 2015
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2012
+# Robin, 2020
+msgid ""
+msgstr ""
+"Project-Id-Version: antix-development\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-06-29 15:33-0600\n"
+"PO-Revision-Date: 2012-01-01 11:19+0000\n"
+"Last-Translator: Robin, 2020\n"
+"Language-Team: German (http://www.transifex.com/anticapitalista/antix-development/language/de/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: de\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: bin/toram-eject:14
+msgid "Eject LiveCD/DVD via a simple GUI if %s is enabled."
+msgstr "Auswerfen der Live-CD/DVD über eine einfache GUI, wenn %s aktiviert ist."
+
+#: bin/toram-eject:16
+msgid "Automatic toram Eject"
+msgstr "Automatisches toram-auswerfen"
+
+#: bin/toram-eject:24
+msgid "no BOOT_DEV given!"
+msgstr "Kein Bootmedium angegeben!"
+
+#: bin/toram-eject:33
+msgid "boot device: %s is not removable."
+msgstr "Bootmedium: %s kann nicht entfernt werden."
+
+#: bin/toram-eject:39
+msgid "boot device: %s is still mounted!"
+msgstr "Bootmedium: %s ist noch eingehangen."
+
+#: bin/toram-eject:46
+msgid "The %s boot option succeeded."
+msgstr "Die Bootoption %s wurde erfolgreich angewandt."
+
+#: bin/toram-eject:47
+msgid "The boot media is no longer needed."
+msgstr "Das Boot-Medium wird nicht mehr benötigt."
+
+#: bin/toram-eject:49
+msgid "Do you want the LiveCD/DVD ejected?"
+msgstr "Möchten Sie die Live-CD/DVD auswerfen?"
+
+#: bin/toram-eject:50
+msgid "did not eject as per user request."
+msgstr "Das Medium wurde entsprechend der Nutzervorgabe nicht ausgeworfen."
+
+#: bin/toram-eject:52
+msgid "Could not eject %s"
+msgstr "Konnte%s nicht auswerfen."
+
+#: bin/toram-eject:57
+msgid "Feel free to remove the CD or DVD."
+msgstr "Sie können die CD oder DVD jetzt entfernen."
+
+#: bin/toram-eject:59
+msgid "Do you want the drive closed now?"
+msgstr "Soll das Laufwerk jetzt geschlossen werden?"
+
+#: bin/toram-eject:60
+msgid "did not closing drive as per user request."
+msgstr "Das Laufwerk wurde entsprechend der Nutzervorgabe nicht geschlossen."
+
+#: bin/toram-eject:62
+msgid "Could not close %s"
+msgstr "%s konnte nicht geschlossen werden."

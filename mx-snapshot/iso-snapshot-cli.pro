@@ -20,12 +20,6 @@
 # * along with MX Tools.  If not, see <http://www.gnu.org/licenses/>.
 # **********************************************************************
 
-#-------------------------------------------------
-#
-# Project created by QtCreator 2014-12-14
-#
-#-------------------------------------------------
-
 DEFINES += "CLI_BUILD=1"
 
 QT       += core
@@ -43,6 +37,7 @@ TEMPLATE = app
 DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
+    log.cpp \
     main.cpp \
     cmd.cpp \
     settings.cpp \
@@ -50,6 +45,8 @@ SOURCES += \
     work.cpp
 
 HEADERS  += \
+    common.h \
+    log.h \
     version.h \
     cmd.h \
     settings.h \
@@ -58,6 +55,6 @@ HEADERS  += \
 
 TRANSLATIONS += \
     translations/mx-snapshot_en.ts
-                 
+
 RESOURCES += \
     images.qrc

@@ -1,0 +1,121 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# José Vieira <jvieira33@sapo.pt>, 2019
+# 9dc2486d5858e5a4d192f5ce124b5be4_cf18c09, 2017
+# Sérgio Marques <smarquespt@gmail.com>, 2021
+msgid ""
+msgstr ""
+"Project-Id-Version: antix-development\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-10-06 10:59-0600\n"
+"PO-Revision-Date: 2012-01-01 11:17+0000\n"
+"Last-Translator: Sérgio Marques <smarquespt@gmail.com>, 2021\n"
+"Language-Team: Portuguese (http://www.transifex.com/anticapitalista/antix-development/language/pt/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: pt\n"
+"Plural-Forms: nplurals=3; plural=(n == 0 || n == 1) ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
+
+#: bin/persist-save:14
+msgid "antiX Save Persistent Root"
+msgstr "Guardar Persistência de Root antiX "
+
+#: bin/persist-save:17
+msgid "Manually save filesystem changes in %s file for persistent root."
+msgstr "Guardar manualmente as alterações ao sistema de ficheiros no ficheiro %s para persistência de root."
+
+#: bin/persist-save:18
+msgid "You MUST run a program like this to save your filesystem changes."
+msgstr "É NECESSÁRIO executar um programa como este para guardar as alterações ao sistema de ficheiros."
+
+#: bin/persist-save:43
+msgid "%s was not enabled.  Cannot %s"
+msgstr "%s não foi activado. Não é possível %s"
+
+#: bin/persist-save:46 bin/persist-save:138
+msgid "Shall we begin?"
+msgstr "Começar?"
+
+#: bin/persist-save:47 bin/persist-save:139
+msgid "Stopping at user's request"
+msgstr "A parar por acção do utilizador"
+
+#: bin/persist-save:55
+msgid "The persistence device with UUID %s was not found"
+msgstr "O dispositivo de persistência com o UUID %s não foi encontrado"
+
+#: bin/persist-save:56
+msgid "Please plug in the persistence device and try again"
+msgstr "Inserir o dispositivo de persistência e tentar novamente"
+
+#: bin/persist-save:74
+msgid "On VID error"
+msgstr "Erro em VID"
+
+#: bin/persist-save:82
+msgid "Checking for existing files and"
+msgstr "A procurar ficheiros existentes e"
+
+#: bin/persist-save:83
+msgid "Checking if there is enough room ..."
+msgstr "A verificar se há espaço suficiente ..."
+
+#: bin/persist-save:113
+msgid "persist device"
+msgstr "dispositivo de persistência"
+
+#: bin/persist-save:114
+msgid "mounted at"
+msgstr "montado em"
+
+#: bin/persist-save:127
+msgid "Available space, %s, is smaller than the margin of %s."
+msgstr "O espaço disponível, %s, é menor do que a margem de %s."
+
+#: bin/persist-save:131
+msgid "Insufficient space.  Have: %s. Need: %s."
+msgstr "Espaço insuficiente. Existente: %s. Necessário: %s."
+
+#: bin/persist-save:134
+msgid "Ready to sync file system changes"
+msgstr "Pronto para sincronizar alterações ao sistema de ficheiros"
+
+#: bin/persist-save:142
+msgid "Performing rsync ... please be patient"
+msgstr "A executar rsync ... aguardar"
+
+#: bin/persist-save:178
+msgid "%s The rsync command failed Failed! %s"
+msgstr "%s O comando rsync falhou! %s"
+
+#: bin/persist-save:180
+msgid "It returned an exit code of %s"
+msgstr "Devolveu um código de saída de %s"
+
+#: bin/persist-save:181
+msgid "See the rsync man page to look up its meaning."
+msgstr "Ir à página de manual do rsync para ver o significado."
+
+#: bin/persist-save:185 bin/persist-save:192
+msgid "%s succeeded"
+msgstr "%s teve êxito"
+
+#: bin/persist-save:194
+msgid "    Your changes were saved in:"
+msgstr "    As alterações foram guardadas em:"
+
+#: bin/persist-save:217
+msgid "Missing rootfs version file %s"
+msgstr "Ficheiro de versão rootfs em falta %s"
+
+#: bin/persist-save:220
+msgid "Missing version ID in rootfs file system"
+msgstr "Falta ID da versão no ficheiro de sistema rootfs"
+
+#: bin/persist-save:223
+msgid "Version id inside of %s file does not match"
+msgstr "ID da versão no ficheiro %s não coincide"

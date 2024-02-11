@@ -1,0 +1,277 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# anticapitalista <anticapitalista@riseup.net>, 2016
+msgid ""
+msgstr ""
+"Project-Id-Version: antix-development\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-10-22 19:22-0600\n"
+"PO-Revision-Date: 2015-05-07 19:18+0000\n"
+"Last-Translator: anticapitalista <anticapitalista@riseup.net>, 2016\n"
+"Language-Team: Greek (http://www.transifex.com/anticapitalista/antix-development/language/el/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: el\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: bin/live-remaster:29
+msgid ""
+"Create a new compressed file system saving all of the changes you have made "
+"to the system."
+msgstr "Δημιουργήστε ένα νέο συμπιεσμένο σύστημα αρχείων εξοικονόμηση όλες τις αλλαγές που έχετε κάνει στο σύστημα."
+
+#: bin/live-remaster:35
+msgid "Extra options for"
+msgstr "Επιπλέον επιλογές για"
+
+#: bin/live-remaster:36
+msgid "Make a smaller linuxfs.new.  NOT deleted when done."
+msgstr "Κάντε ένα μικρότερο linuxfs.new. ΔΕΝ διαγράφεται."
+
+#: bin/live-remaster:37
+msgid "Use %s instead of prompting user for title."
+msgstr "Χρησιμοποιήστε %s αντί να προωθηθούν χρήστη για τον τίτλο."
+
+#: bin/live-remaster:38
+msgid "Make a general-purpose remaster."
+msgstr "Κάντε ένα ρεμίξ γενικής χρήσης."
+
+#: bin/live-remaster:39
+msgid "Make a personalized remaster."
+msgstr "Κάντε μια εξατομικευμένη ρεμίξ."
+
+#: bin/live-remaster:71
+msgid "The live file system is read-only.  Cannot remaster."
+msgstr "Το σύστημα live είναι μόνο για ανάγνωση. Δεν μπορεί να γίνει remaster."
+
+#: bin/live-remaster:73
+msgid "General"
+msgstr "Γενικός"
+
+#: bin/live-remaster:74
+msgid "Personal"
+msgstr "Προσωπικό "
+
+#: bin/live-remaster:81
+msgid "%s uses your personal settings."
+msgstr "%s χρησιμοποιεί τις προσωπικές σας ρυθμίσεις."
+
+#: bin/live-remaster:82
+msgid "%s does not."
+msgstr "%s δεν το κάνει."
+
+#: bin/live-remaster:95
+msgid "Do you want to save files under %s in the new remaster?"
+msgstr "Θέλετε να αποθηκεύσετε τα αρχεία κάτω από το %s στο νέο ρεμίξ;"
+
+#: bin/live-remaster:101
+msgid "Checking for existing files and"
+msgstr "Έλεγχος για τα υπάρχοντα αρχεία και"
+
+#: bin/live-remaster:102
+msgid "Checking if there is enough room ..."
+msgstr "Έλεγχος αν υπάρχει αρκετός χώρος ..."
+
+#: bin/live-remaster:113
+msgid "The %s program was unable to start"
+msgstr "το πρόγραμμα %s δεν ήταν σε θέση να ξεκινήσει"
+
+#: bin/live-remaster:165
+msgid "current linuxfs size"
+msgstr "τρέχον μέγεθος linuxfs"
+
+#: bin/live-remaster:166
+msgid "excluded files est."
+msgstr "εξαιρούμενα αρχεία"
+
+#: bin/live-remaster:167 bin/live-remaster:168
+msgid "estimated new size"
+msgstr "αναμενόμενη νέο μέγεθος"
+
+#: bin/live-remaster:174
+msgid "boot device total"
+msgstr "Συνολικό μέγεθος "
+
+#: bin/live-remaster:175
+msgid "boot device free"
+msgstr "συσκευή εκκίνησης ελεύθερο χώρο"
+
+#: bin/live-remaster:176 bin/live-remaster:177
+msgid "est. remaining"
+msgstr "εκτιμώμενη απομένουσα"
+
+#: bin/live-remaster:194
+msgid "Have: %s megs available.  Need: %s."
+msgstr "Υπάρχει: διαθέσιμα %s Μ. Χρειάζεται: %s."
+
+#: bin/live-remaster:198
+msgid "Leftover files found"
+msgstr "Επιπλέον αρχεία"
+
+#: bin/live-remaster:200
+msgid "The following file(s) already exist"
+msgstr "Τα ακόλουθα αρχεία ήδη υπάρχουν"
+
+#: bin/live-remaster:201
+msgid "in the %s directory:"
+msgstr "στο %s κατάλογο:"
+
+#: bin/live-remaster:205
+msgid "They may be left over from a previous remastering."
+msgstr "Μπορούν να απομείνει από μια προηγούμενη remastering."
+
+#: bin/live-remaster:206
+msgid "Do you want to fix this problem now?"
+msgstr "Θέλετε να διορθώσετε αυτό το πρόβλημα τώρα;"
+
+#: bin/live-remaster:207
+msgid "(the alternative is to quit now)"
+msgstr "(Η εναλλακτική λύση είναι να σταματήσουν το κάπνισμα τώρα)"
+
+#: bin/live-remaster:221
+msgid "Ready to create a new linuxfs file"
+msgstr "Έτοιμος να δημιουργήσετε ένα νέο αρχείο linuxfs"
+
+#: bin/live-remaster:225
+msgid "Shall we begin?"
+msgstr "Να προχωρήσουμε;"
+
+#: bin/live-remaster:235
+msgid "(compresses faster, boots faster)"
+msgstr "(Συμπιέζει πιο γρήγορα, μποταρει πιο γρήγορα)"
+
+#: bin/live-remaster:236
+msgid "(compresses better)"
+msgstr "(Συμπιέζει καλύτερα)"
+
+#: bin/live-remaster:242
+msgid "Please choose the type of compression to use"
+msgstr "Παρακαλούμε επιλέξτε τον τύπο συμπίεσης"
+
+#: bin/live-remaster:243
+msgid "%s will take less time"
+msgstr "%s θα χρειαστεί λιγότερο χρόνο"
+
+#: bin/live-remaster:244
+msgid "%s will result in a smaller file"
+msgstr "%s θα αποτελέσει σε ένα μικρότερο αρχείο"
+
+#: bin/live-remaster:260
+msgid "Do you want remaster to use all of the CPUs?"
+msgstr "Θέλετε το ρεμίξ να χρησιμοποιήσετε όλες τις CPUs;"
+
+#: bin/live-remaster:262
+msgid "This will make the remaster process run as fast as possible."
+msgstr "Αυτό θα κάνει τη διαδικασία να τρέχει όσο το δυνατόν γρηγορότερα."
+
+#: bin/live-remaster:263
+msgid "But there is more of a chance your computer will overheat."
+msgstr "Αλλά υπάρχει κάτι περισσότερο από μια ευκαιρία ο υπολογιστής σας θα υπερθερμανθεί."
+
+#: bin/live-remaster:272
+msgid "Remaster Version Identification"
+msgstr "Remaster Αναγνώριση Έκδοση"
+
+#: bin/live-remaster:274
+msgid "Please enter an (optional) title for this remaster"
+msgstr "Παρακαλώ εισάγετε ένα (προαιρετικό) τίτλο για αυτό το ρεμίξ"
+
+#: bin/live-remaster:295
+msgid "The %s program failed to work"
+msgstr "Αυτό το πρόγραμμα %s απέτυχε"
+
+#: bin/live-remaster:335
+msgid "Remastering -- DO NOT CLOSE"
+msgstr "Ρεμίξ -- ΜΗΝ ΚΛΕΙΣΕΤΕ"
+
+#: bin/live-remaster:351
+msgid "Remaster in Progress"
+msgstr "Ρεμίξ σε εξέλιξη"
+
+#: bin/live-remaster:352
+msgid "Do you REALLY want to stop midway?"
+msgstr "Είστε σίγουροι ότι θέλετε να σταματήσετε στο μέσο;"
+
+#: bin/live-remaster:379
+msgid "Created new compressed filesystem file:"
+msgstr "Δημιουργία νέου συμπιεσμένο αρχείο αρχείων:"
+
+#: bin/live-remaster:384
+msgid "The new file should be used automatically the next time you boot."
+msgstr "Το νέο αρχείο χρησιμοποιείται αυτόματα την επόμενη φορά που θα εκκινήσετε."
+
+#: bin/live-remaster:386
+msgid "If there is a problem with the new system:"
+msgstr "Αν υπάρχει ένα πρόβλημα με το νέο σύστημα:"
+
+#: bin/live-remaster:387
+msgid "Use the %s  boot option to return to the current system."
+msgstr "Χρησιμοποιήστε την επιλογή εκκίνησης του %s για να επιστρέψετε στο τρέχον σύστημα."
+
+#: bin/live-remaster:411
+msgid "Root persistence is enabled"
+msgstr "ενεργοποίηση της root persistence"
+
+#: bin/live-remaster:413
+msgid "Do you want to make a new %s file now?"
+msgstr "Θέλετε να κάνετε ένα νέο αρχείο %s τώρα;"
+
+#: bin/live-remaster:421
+msgid "Remaster in progress"
+msgstr "Ρεμίξ σε εξέλιξη"
+
+#: bin/live-remaster:423
+msgid "please be patient"
+msgstr "παρακαλώ να είστε υπομονετικοί"
+
+#: bin/live-remaster:424
+msgid "(even after it says it is 100% done)"
+msgstr "(Ακόμη και μετά να λέει ότι είναι 100% έτοιμο)"
+
+#: bin/live-remaster:429
+msgid "antiX Remaster in Progress"
+msgstr "antiX Ρεμίξ σε εξέλιξη "
+
+#: bin/live-remaster:445
+msgid "Remastering Terminated Early"
+msgstr "Ρεμίξ διακόπηκε πρόωρα"
+
+#: bin/live-remaster:450
+msgid "Remastering Failed"
+msgstr "Αποτυχία του Ρεμίξ"
+
+#: bin/live-remaster:452
+msgid "New linuxfs file was not created!"
+msgstr "Το νέο αρχείο linuxfs δεν δημιουργήθηκε!"
+
+#: bin/live-remaster:456
+msgid "Could not mount new file as %s!"
+msgstr "Δεν μπορούσε να κάνει mount του νέο αρχείο ως %s!"
+
+#: bin/live-remaster:467
+msgid "linuxfs size"
+msgstr "μέγεθος linuxfs"
+
+#: bin/live-remaster:468
+msgid "elapsed time"
+msgstr "χρόνος που παρήλθε"
+
+#: bin/live-remaster:469
+msgid "processors"
+msgstr "επεξεργαστές"
+
+#: bin/live-remaster:470
+msgid "compression"
+msgstr "συμπίεση"
+
+#: bin/live-remaster:484
+msgid "Error"
+msgstr "Σφάλμα"
+
+#: bin/live-remaster:489
+msgid "Do you want to save the incomplete file?"
+msgstr "Θέλετε να αποθηκεύσετε το ελλιπές αρχείο;"

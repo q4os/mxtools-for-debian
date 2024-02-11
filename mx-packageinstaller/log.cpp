@@ -36,11 +36,11 @@ Log::Log(const QString &file_name)
 void Log::messageHandler(QtMsgType type, const QMessageLogContext &, const QString &msg)
 {
     QTextStream term_out(stdout);
-    if (msg.contains(QLatin1String("\r"))) {
+    if (msg.contains('\r')) {
         term_out << msg;
         return;
     }
-    term_out << msg << "\n";
+    term_out << msg << '\n';
 
     QTextStream out(&logFile);
     out << QDateTime::currentDateTime().toString(QStringLiteral("yyyy-MM-dd hh:mm:ss.zzz "));
@@ -61,7 +61,7 @@ void Log::messageHandler(QtMsgType type, const QMessageLogContext &, const QStri
         out << QStringLiteral("FTL");
         break;
     }
-    out << QStringLiteral(": ") << msg << QStringLiteral("\n");
+    out << QStringLiteral(": ") << msg << '\n';
 }
 
 QString Log::getLog()

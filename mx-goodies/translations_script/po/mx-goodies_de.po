@@ -6,6 +6,7 @@
 # Translators:
 # delix02, 2019
 # wahnsinn, 2021
+# aer, 2023
 # 
 #, fuzzy
 msgid ""
@@ -14,8 +15,8 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-02-21 11:35-0600\n"
 "PO-Revision-Date: 2017-12-31 03:14+0000\n"
-"Last-Translator: wahnsinn, 2021\n"
-"Language-Team: German (https://www.transifex.com/anticapitalista/teams/10162/de/)\n"
+"Last-Translator: aer, 2023\n"
+"Language-Team: German (https://app.transifex.com/anticapitalista/teams/10162/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -28,11 +29,11 @@ msgstr "abgebrochen"
 
 #: system-locales-mx:14
 msgid "Configure System Locales"
-msgstr "Konfiguration Systemlokalisierung"
+msgstr "Systemsprachumgebungen konfigurieren"
 
 #: system-locales-mx:15
 msgid "System locale"
-msgstr "Systemlokalisierung"
+msgstr "Systemsprachumgebung"
 
 #: quick-system-info/quick-system-info-mx:15
 msgid "Required inxi app not found"
@@ -60,4 +61,4 @@ msgstr "Diese Meldung in Zukunft nicht mehr anzeigen"
 
 #: archive/system-keyboard-mx:13
 msgid "System Keyboard Configuration"
-msgstr "Konfiguration Systemtastatur"
+msgstr "Systemtastatur konfigurieren"

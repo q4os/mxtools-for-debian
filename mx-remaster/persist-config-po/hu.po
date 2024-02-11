@@ -1,0 +1,159 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# Feri, 2022
+msgid ""
+msgstr ""
+"Project-Id-Version: antix-development\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-04-03 12:45-0600\n"
+"PO-Revision-Date: 2012-01-01 11:16+0000\n"
+"Last-Translator: Feri, 2022\n"
+"Language-Team: Hungarian (http://www.transifex.com/anticapitalista/antix-development/language/hu/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: hu\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: bin/persist-config:12
+msgid "antiX Root Persistence Auto-Save Configuration"
+msgstr "antiX gyökérkönyvtár adatmegőrzés mentési beállítások"
+
+#: bin/persist-config:20
+msgid "Automatic"
+msgstr "Automatikus"
+
+#: bin/persist-config:21
+msgid "Semi-Automatic"
+msgstr "Félautomatikus"
+
+#: bin/persist-config:22
+msgid "Manual"
+msgstr "Kézi"
+
+#: bin/persist-config:23
+msgid "Quit"
+msgstr "Kilépés"
+
+#: bin/persist-config:29
+msgid "Configure root persistence saves to run either:"
+msgstr "A gyökérkönyvtár adatmegőrzés beállítása menti ezek egyikének futtatását:"
+
+#: bin/persist-config:31
+msgid "at shutdown/reboot, no asking"
+msgstr "leállításkor és újraindításkor, nincs kérdés"
+
+#: bin/persist-config:32
+msgid "ask at shutdown/reboot"
+msgstr "kérdezi leállításkor és újraindításkor"
+
+#: bin/persist-config:33
+msgid "you snooze, you lose"
+msgstr "ha Ön elaszik, elveszti"
+
+#: bin/persist-config:35
+msgid ""
+"This program should be called with the %s option in a startup script to "
+"ensure a config file is created."
+msgstr "A programot a %s opcióval kell indítani egy rendszerindítási parancsfájlból, hogy egy beállítási fájl létrejöjjön."
+
+#: bin/persist-config:37
+msgid ""
+"It should be called with the %s option in shutdown scripts so your changes "
+"can be saved before shutting down."
+msgstr "A programot a %s opcióval kell indítani a leállítási parancsfájlokból, hogy a változtatások mentésre kerüljenek a leállás előtt."
+
+#: bin/persist-config:45
+msgid "%s specific options"
+msgstr "%s specifikus opciók"
+
+#: bin/persist-config:46
+msgid "Create a %s file if one is missing."
+msgstr "Hozzon létre egy %s fájlt, ha hiányzik."
+
+#: bin/persist-config:47
+msgid "Run persist-save as directed by %s file."
+msgstr "A %s fájlban meghatározott módon futtassa a persist-save parancsot."
+
+#: bin/persist-config:48
+msgid "Run %s if %s succeeded."
+msgstr "Futtassa a %s parancsot, ha a %s sikeresen lefutott."
+
+#: bin/persist-config:49
+msgid "If %s fails prompt user before running %s."
+msgstr "Ha a %s hibára futott, kérdezzen a %s futtatása előtt."
+
+#: bin/persist-config:50
+msgid "implies %s"
+msgstr "feltételezi a %s opciót"
+
+#: bin/persist-config:52
+msgid "Config file is located at: %s"
+msgstr "A beállítási fájl helye: %s"
+
+#: bin/persist-config:90
+msgid "Current mode is: %s"
+msgstr "A jelenlegi mód: %s"
+
+#: bin/persist-config:92
+msgid "There is no current auto-save mode.  The default is: %s."
+msgstr "Nincs jelenlegi automatikus mentési mód. Az alapértelmezett: %s."
+
+#: bin/persist-config:102
+msgid "save on shutdown/reboot automatically.  No asking."
+msgstr "automatikus mentés leállításkor és újraindításkor. Nincs kérdés."
+
+#: bin/persist-config:103
+msgid "ask to save on shutdown/reboot."
+msgstr "rákérdez a mentésre leállításkor és újraindításkor."
+
+#: bin/persist-config:104
+msgid "only save changes manually (you snooze, you lose)."
+msgstr "csak kézi mentés van (ha Ön elalszik, elveszti)."
+
+#: bin/persist-config:105
+msgid "use current default."
+msgstr "használja a jelenlegi alapértelmezettet."
+
+#: bin/persist-config:117
+msgid "Auto-save mode set to %s in %s."
+msgstr "Automatikus mentés jelenleg: %s, itt: %s. "
+
+#: bin/persist-config:123
+msgid "It looks like root persistence was just enabled."
+msgstr "Úgy tűnik, a gyökérkönyvtár adatmegőrzés most került bekapcsolásra."
+
+#: bin/persist-config:124
+msgid "Please set the save-mode for root persistence."
+msgstr "Válassza ki a gyökérkönyvtár adatmegőrzés mentési módját."
+
+#: bin/persist-config:125
+msgid "You will only have to do this once."
+msgstr "Ezt csak egyszer kell megtennie."
+
+#: bin/persist-config:127
+msgid "You can change your choice later with %s."
+msgstr "Később megváltoztathatja a választását ezzel: %s."
+
+#: bin/persist-config:159
+msgid "Already saved less than %s seconds ago"
+msgstr "Már mentésre került, kevesebb mint %s másodperce."
+
+#: bin/persist-config:160
+msgid "Won't autosave within %s seconds of a previous save"
+msgstr "Nem ment automatikusan, egy előző mentés utáni %s másodpercben"
+
+#: bin/persist-config:199
+msgid "CONFIRM"
+msgstr "JÓVÁHAGYÁS"
+
+#: bin/persist-config:200
+msgid "There was an error saving your changes."
+msgstr "Hiba történt a változtatások mentésekor."
+
+#: bin/persist-config:202
+msgid "Do you still want to %s?"
+msgstr "Így is biztos, hogy: %s?"

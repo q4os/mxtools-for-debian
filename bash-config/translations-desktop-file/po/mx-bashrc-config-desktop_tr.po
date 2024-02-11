@@ -5,7 +5,7 @@
 # 
 # Translators:
 # mahmut özcan <mahmutozcan@protonmail.com>, 2022
-# kilickerem066 ., 2023
+# Mehmet Akif 9oglu, 2023
 # 
 #, fuzzy
 msgid ""
@@ -14,8 +14,8 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-12-09 23:19-0500\n"
 "PO-Revision-Date: 2022-12-10 04:20+0000\n"
-"Last-Translator: kilickerem066 ., 2023\n"
-"Language-Team: Turkish (https://www.transifex.com/anticapitalista/teams/10162/tr/)\n"
+"Last-Translator: Mehmet Akif 9oglu, 2023\n"
+"Language-Team: Turkish (https://app.transifex.com/anticapitalista/teams/10162/tr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -30,4 +30,4 @@ msgstr "Bash Yapılandırma"
 #. # The desktop entry comment will be shown within the menu.
 #: desktop-in/bashrc-config.desktop.in:7
 msgid "bashrc aliases and prompt theming"
-msgstr "bashrc'nin diğer isimleri ve komut temalama"
+msgstr "bashrc’nin kısayolları ve prompt teması"

@@ -6,7 +6,7 @@
     <message>
         <location filename="../mainwindow.ui" line="14"/>
         <source>Program_Name</source>
-        <translation>プログラムの名前</translation>
+        <translation>プログラムの名前(_N)</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="39"/>
@@ -147,7 +147,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="217"/>
         <source>Please select a USB device to write to</source>
-        <translation>書き込むUSBデバイスを選択してください</translation>
+        <translation>書き込む USB デバイスを選択してください</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="222"/>
@@ -161,7 +161,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="222"/>
         <source>Do you wish to continue?</source>
-        <translation>続行しますか？</translation>
+        <translation>作業を続けますか？</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="258"/>
@@ -196,7 +196,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="315"/>
         <source>Invalid Name</source>
-        <translation type="unfinished"></translation>
+        <translation>無効な名前です</translation>
     </message>
 </context>
 <context>

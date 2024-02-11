@@ -1,3 +1,10 @@
+mx-packageinstaller (24.1) mx; urgency=medium
+
+  * Increase timeout for online check
+  * Check for some dpkg errors
+
+ -- Adrian <adrian@mxlinux.org>  Tue, 09 Jan 2024 16:13:07 -0500
+
 mx-packageinstaller (23.12.08) mx; urgency=medium
 
   * Fix: crash that happened in some conditions when switching tabs

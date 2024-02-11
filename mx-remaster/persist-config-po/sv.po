@@ -1,0 +1,159 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# Henry Oquist <henryoquist@nomalm.se>, 2015
+msgid ""
+msgstr ""
+"Project-Id-Version: antix-development\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-04-03 12:45-0600\n"
+"PO-Revision-Date: 2012-01-01 11:16+0000\n"
+"Last-Translator: Henry Oquist <henryoquist@nomalm.se>, 2015\n"
+"Language-Team: Swedish (http://www.transifex.com/anticapitalista/antix-development/language/sv/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: sv\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: bin/persist-config:12
+msgid "antiX Root Persistence Auto-Save Configuration"
+msgstr "antiX Root Persistens Auto-spar Konfiguration"
+
+#: bin/persist-config:20
+msgid "Automatic"
+msgstr "Automatisk"
+
+#: bin/persist-config:21
+msgid "Semi-Automatic"
+msgstr "Halvautomatisk"
+
+#: bin/persist-config:22
+msgid "Manual"
+msgstr "Manuell"
+
+#: bin/persist-config:23
+msgid "Quit"
+msgstr "Avsluta"
+
+#: bin/persist-config:29
+msgid "Configure root persistence saves to run either:"
+msgstr "Konfigurera sparade root persistenser för att köra endera:"
+
+#: bin/persist-config:31
+msgid "at shutdown/reboot, no asking"
+msgstr "vid stäng av/starta om, fråga inte"
+
+#: bin/persist-config:32
+msgid "ask at shutdown/reboot"
+msgstr "fråga vid stäng av/starta om"
+
+#: bin/persist-config:33
+msgid "you snooze, you lose"
+msgstr "missa inte det här tillfället"
+
+#: bin/persist-config:35
+msgid ""
+"This program should be called with the %s option in a startup script to "
+"ensure a config file is created."
+msgstr "Detta program bör anropas med %s alternativ i ett startup-skript för att säkerställa att en konfigurationsfil skapas."
+
+#: bin/persist-config:37
+msgid ""
+"It should be called with the %s option in shutdown scripts so your changes "
+"can be saved before shutting down."
+msgstr "Det bör anropas med %s alternativ i shutdown-skript så dina ändringar kan spara före avstängning."
+
+#: bin/persist-config:45
+msgid "%s specific options"
+msgstr "%s specifika alternativ"
+
+#: bin/persist-config:46
+msgid "Create a %s file if one is missing."
+msgstr "Skapa en %s fil om den saknas."
+
+#: bin/persist-config:47
+msgid "Run persist-save as directed by %s file."
+msgstr "Kör persist-save som angivet av %s fil."
+
+#: bin/persist-config:48
+msgid "Run %s if %s succeeded."
+msgstr "Kör %s om %s lyckades."
+
+#: bin/persist-config:49
+msgid "If %s fails prompt user before running %s."
+msgstr "Om %s misslyckas meddela användare innan %s körs."
+
+#: bin/persist-config:50
+msgid "implies %s"
+msgstr "medför %s"
+
+#: bin/persist-config:52
+msgid "Config file is located at: %s"
+msgstr "Konfigurationsfil finns vid: %s"
+
+#: bin/persist-config:90
+msgid "Current mode is: %s"
+msgstr "Nuvarande sätt är: %s"
+
+#: bin/persist-config:92
+msgid "There is no current auto-save mode.  The default is: %s."
+msgstr "Det finns inget nuvarande auto-spar sätt. Standard är: %s."
+
+#: bin/persist-config:102
+msgid "save on shutdown/reboot automatically.  No asking."
+msgstr "spara automatiskt vid shutdown/reboot. Fråga inte."
+
+#: bin/persist-config:103
+msgid "ask to save on shutdown/reboot."
+msgstr "fråga för att spara vid shutdown/reboot."
+
+#: bin/persist-config:104
+msgid "only save changes manually (you snooze, you lose)."
+msgstr "spara bara ändringar manuellt (missa inte detta tillfälle)."
+
+#: bin/persist-config:105
+msgid "use current default."
+msgstr "använd nuvarande standard"
+
+#: bin/persist-config:117
+msgid "Auto-save mode set to %s in %s."
+msgstr "Auto-spar sätt inställt på %s i %s."
+
+#: bin/persist-config:123
+msgid "It looks like root persistence was just enabled."
+msgstr "Det verkar som om root persistens just möjliggjorts."
+
+#: bin/persist-config:124
+msgid "Please set the save-mode for root persistence."
+msgstr "Var vänlig ställ in sparningssättet för root persistens."
+
+#: bin/persist-config:125
+msgid "You will only have to do this once."
+msgstr "Du behöver bara göra detta en gång."
+
+#: bin/persist-config:127
+msgid "You can change your choice later with %s."
+msgstr "Du kan ändra ditt val senare med %s."
+
+#: bin/persist-config:159
+msgid "Already saved less than %s seconds ago"
+msgstr "Redan sparad för mindre än %s sekunder sedan"
+
+#: bin/persist-config:160
+msgid "Won't autosave within %s seconds of a previous save"
+msgstr "Kommer inte att auto-spara inom %s sekunder efter tidigare sparande"
+
+#: bin/persist-config:199
+msgid "CONFIRM"
+msgstr "BEKRÄFTA"
+
+#: bin/persist-config:200
+msgid "There was an error saving your changes."
+msgstr "Det blev ett fel när dina ändringar sparades."
+
+#: bin/persist-config:202
+msgid "Do you still want to %s?"
+msgstr "Vill du fortfarande %s?"

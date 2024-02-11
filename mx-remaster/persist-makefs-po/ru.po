@@ -1,0 +1,428 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# Andrei Stepanov, 2022-2023
+# Вячеслав Волошин <vol_vel@mail.ru>, 2015
+msgid ""
+msgstr ""
+"Project-Id-Version: antix-development\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-04-03 12:45-0600\n"
+"PO-Revision-Date: 2014-03-15 01:03+0000\n"
+"Last-Translator: Andrei Stepanov, 2022-2023\n"
+"Language-Team: Russian (http://app.transifex.com/anticapitalista/antix-development/language/ru/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: ru\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%100>=11 && n%100<=14)? 2 : 3);\n"
+
+#: bin/persist-makefs:31
+msgid "antiX Create or Resize Persistence"
+msgstr "antiX Создание или изменение размера сохранения"
+
+#: bin/persist-makefs:32
+msgid "Create or resize the files need for root and/or home persistence."
+msgstr "Создать или изменить файлы, необходимые для сохранения корневой и/или домашней папки."
+
+#: bin/persist-makefs:36
+msgid "Use <%s> as the persistence device"
+msgstr "Используйте <%s> как устройство сохранения"
+
+#: bin/persist-makefs:37
+msgid "Go directly to the explore menu"
+msgstr "Перейти непосредственно к исследовательскому меню"
+
+#: bin/persist-makefs:38
+msgid "Go directly to the making a %s file"
+msgstr "Перейти непосредственно к созданию файла %s"
+
+#: bin/persist-makefs:43
+msgid "Change Persistence Device"
+msgstr "Изменить устройство сохранения"
+
+#: bin/persist-makefs:44
+msgid "Change Peristence Path"
+msgstr "Изменить путь сохранения"
+
+#: bin/persist-makefs:45
+msgid "Create Root Persistence"
+msgstr "Создать сохранение корневой папки"
+
+#: bin/persist-makefs:46
+msgid "Resize Root Persistence"
+msgstr "Изменить размер сохранения корневой папки"
+
+#: bin/persist-makefs:47
+msgid "Make rootfs.new file for remastering"
+msgstr "Создать файл rootfs.new для ремастеринга"
+
+#: bin/persist-makefs:48
+msgid "Create Home Persistence"
+msgstr "Создать сохранение домашней папки"
+
+#: bin/persist-makefs:49
+msgid "Resize Home Persistence"
+msgstr "Изменить размер сохранения домашней папки"
+
+#: bin/persist-makefs:51
+msgid "Quit this program"
+msgstr "Выйти из этой программы"
+
+#: bin/persist-makefs:52
+msgid "Update information"
+msgstr "Обновить информацию"
+
+#: bin/persist-makefs:53
+msgid "Fix or delete broken and outdated files"
+msgstr "Исправить или удалить \"сломанные\" и устаревшие файлы"
+
+#: bin/persist-makefs:55
+msgid "Fix"
+msgstr "Исправить"
+
+#: bin/persist-makefs:56
+msgid "Delete"
+msgstr "Удалить"
+
+#: bin/persist-makefs:57
+msgid "Explore"
+msgstr "Исследовать"
+
+#: bin/persist-makefs:59 bin/persist-makefs:641
+msgid "Exploration Menu"
+msgstr "Исследовательское меню"
+
+#: bin/persist-makefs:60
+msgid "Exploring"
+msgstr "Исследование"
+
+#: bin/persist-makefs:61
+msgid "Persistence Device"
+msgstr "Устройство сохранения"
+
+#: bin/persist-makefs:62
+msgid "Persistence Directory"
+msgstr "Директория сохранения"
+
+#: bin/persist-makefs:63
+msgid "Persistence file: %s"
+msgstr "Файл сохранения: %s"
+
+#: bin/persist-makefs:64
+msgid "Stop Exploring"
+msgstr "Остановить исследование"
+
+#: bin/persist-makefs:66
+msgid "Stop Fixing and deleting"
+msgstr "Остановить исправление и удаление"
+
+#: bin/persist-makefs:67
+msgid "Fix and Delete Files Menu"
+msgstr "Меню исправления и удаления файлов"
+
+#: bin/persist-makefs:69
+msgid "does not exist"
+msgstr "не существует"
+
+#: bin/persist-makefs:70
+msgid "Broken!"
+msgstr "Сломан!"
+
+#: bin/persist-makefs:73
+msgid "Simple, stable, no journaling"
+msgstr "Простой, стабильный, без журналирования"
+
+#: bin/persist-makefs:74
+msgid "Adds journaling."
+msgstr "Добавляет журналирование."
+
+#: bin/persist-makefs:75
+msgid "Journaling, checksums, fast fsck"
+msgstr "Журналирование, проверка контр.суммы, быстрая проверка ФС"
+
+#: bin/persist-makefs:116
+msgid "The persistence device with UUID %s was not found"
+msgstr "Устройство сохранения с UUID %s не найдено"
+
+#: bin/persist-makefs:117
+msgid "Please plug in the persistence device if you want to use it."
+msgstr "Пожалуйста, подключите устройство сохранения, если Вы хотите использовать его."
+
+#: bin/persist-makefs:119
+msgid "Do you want to try again?"
+msgstr "Вы хотите попробовать еще раз?"
+
+#: bin/persist-makefs:127
+msgid "Default device %s is either missing or invalid"
+msgstr "Устройство по умолчанию %s отсутствует или неисправно"
+
+#: bin/persist-makefs:128 bin/persist-makefs:144
+msgid "Please select a new device for the persistence files"
+msgstr "Пожалуйста, выберите новое устройство для файлов сохранения"
+
+#: bin/persist-makefs:143
+msgid "The boot/persist device %s is read-only."
+msgstr "Загрузочное/для сохранения устройство %s только для чтения."
+
+#: bin/persist-makefs:153
+msgid "Create rootfs.new (for remastering)"
+msgstr "Создать rootfs.new (для ремастеринга)"
+
+#: bin/persist-makefs:222
+msgid "Create Root persistence"
+msgstr "Создать сохранение корневой папки"
+
+#: bin/persist-makefs:229
+msgid "Can't resize %s while it is already mounted."
+msgstr "Нельзя изменить размер %s, когда он уже смонтирован."
+
+#: bin/persist-makefs:234
+msgid "Resize Root persistence"
+msgstr "Изменить размер сохранения корневой папки"
+
+#: bin/persist-makefs:250
+msgid "Create %s (for remastering)"
+msgstr "Создать %s (для ремастеринга)"
+
+#: bin/persist-makefs:255
+msgid "Create Home persistence"
+msgstr "Создать сохранение домашней папки"
+
+#: bin/persist-makefs:261
+msgid "Resize Home persistence"
+msgstr "Изменить размер сохранения домашней папки"
+
+#: bin/persist-makefs:285 bin/persist-makefs:611 bin/persist-makefs:654
+msgid "Really Quit?"
+msgstr "Действительно, выйти?"
+
+#: bin/persist-makefs:317
+msgid "File System Type"
+msgstr "Тип файловой системы"
+
+#: bin/persist-makefs:327
+msgid "The file %s already exists"
+msgstr "Файл %s уже существует"
+
+#: bin/persist-makefs:328
+msgid "Do you want to over-write it?"
+msgstr "Вы хотите перезаписать его?"
+
+#: bin/persist-makefs:332
+msgid "Please select size of the new file system"
+msgstr "Пожалуйста, выберите размер новой файловой системы"
+
+#: bin/persist-makefs:334
+msgid "Not enough space on device"
+msgstr "Не хватает места на устройстве"
+
+#: bin/persist-makefs:345
+msgid "Warning: this can take several minutes per Gig on a %s file system"
+msgstr "Внимание: это может занять несколько минут на ГБ в файловой системе %s"
+
+#: bin/persist-makefs:346
+msgid "Please wait"
+msgstr "Пожалуйста, ждите."
+
+#: bin/persist-makefs:353
+msgid "Creating file %s"
+msgstr "Создание файла %s"
+
+#: bin/persist-makefs:354
+msgid "Size: %s Meg. Filesystem: %s"
+msgstr "Размер: %s MB. Файловая система: %s"
+
+#: bin/persist-makefs:365
+msgid "Was unable to create directory for file %s"
+msgstr "Невозможно создать директорию для файла %s"
+
+#: bin/persist-makefs:366
+msgid "Was unable to create file %s"
+msgstr "Невозможно создать файл %s"
+
+#: bin/persist-makefs:367
+msgid "Was unable to make %s filesystem on file %s"
+msgstr "Невозможно создать файловую систему %s для файла %s"
+
+#: bin/persist-makefs:368
+msgid "Unknown error creating file %s"
+msgstr "Неизвестная ошибка создания файла %s"
+
+#: bin/persist-makefs:377
+msgid "The file %s is missing"
+msgstr "Файл %s отсутствует"
+
+#: bin/persist-makefs:385
+msgid "Success! File %s was created."
+msgstr "Успешно! Файл %s был создан."
+
+#: bin/persist-makefs:386
+msgid "Success! File %s was created and its filesystem was fixed."
+msgstr "Успешно! Файл %s был создан, и его файловая система была установлена."
+
+#: bin/persist-makefs:387
+msgid "The filesystem on %s is broken and wasn't fixed"
+msgstr "Файловая система в %s сломана и не может быть исправлена"
+
+#: bin/persist-makefs:401
+msgid "About to create %s file"
+msgstr "О создании файла %s"
+
+#: bin/persist-makefs:402
+msgid "size"
+msgstr "размер"
+
+#: bin/persist-makefs:403
+msgid "type"
+msgstr "тип"
+
+#: bin/persist-makefs:404
+msgid "device"
+msgstr "устройство"
+
+#: bin/persist-makefs:405
+msgid "Shall we proceed?"
+msgstr "Продолжим?"
+
+#: bin/persist-makefs:411
+msgid "Creating %s file"
+msgstr "Создание файла %s"
+
+#: bin/persist-makefs:438
+msgid "Please be patient while %s megs are copied ..."
+msgstr "Пожалуйста, подождите, пока %s МБ копируются..."
+
+#: bin/persist-makefs:452
+msgid "Was unable to unmount %s at %s"
+msgstr "Невозможно отмонтировать %s на %s"
+
+#: bin/persist-makefs:455
+msgid "Please select a new persistence device"
+msgstr "Пожалуйста, выберите новое устройство для сохранения"
+
+#: bin/persist-makefs:456
+msgid "Current device is: %s"
+msgstr "Текущее устройство: %s"
+
+#: bin/persist-makefs:467
+msgid "The selected device %s is read-only"
+msgstr "Выбранное устройство %s только для чтения"
+
+#: bin/persist-makefs:468
+msgid "Please select a different device"
+msgstr "Пожалуйста, выберите другое устройство"
+
+#: bin/persist-makefs:487
+msgid "new"
+msgstr "новый"
+
+#: bin/persist-makefs:491
+msgid "Please choose a new persistence directory"
+msgstr "Пожалуйста, выберите новую папку для сохранения"
+
+#: bin/persist-makefs:492
+msgid "The current choice is %s"
+msgstr "Текущий выбор - %s"
+
+#: bin/persist-makefs:500
+msgid "Please select a new persistence directory"
+msgstr "Пожалуйста, выберите новую папку для сохранения"
+
+#: bin/persist-makefs:501
+msgid "The current one is %s"
+msgstr "Один текущий - %s"
+
+#: bin/persist-makefs:512
+msgid "Expected a directory at %s but found a file."
+msgstr "Ожидалась директория в %s, но найден файл."
+
+#: bin/persist-makefs:514
+msgid "The only other option is to quit."
+msgstr "Только другая опция, чтобы выйти."
+
+#: bin/persist-makefs:519
+msgid "Unable to erase file %s"
+msgstr "Невозможно удалить файл %s"
+
+#: bin/persist-makefs:525
+msgid "Unable to make directory %s"
+msgstr "Невозможно создать директорию %s"
+
+#: bin/persist-makefs:542
+msgid "There were no errors to correct in %s."
+msgstr "Не было ошибок для исправления в %s."
+
+#: bin/persist-makefs:545
+msgid "File system in %s should be fixed."
+msgstr "Файловая система в %s должна быть исправлена."
+
+#: bin/persist-makefs:548
+msgid "File system in %s left uncorrected."
+msgstr "Файловая система в %s осталась неисправленной."
+
+#: bin/persist-makefs:549
+msgid "You may be able to fix this manually with the command:"
+msgstr "Вы можете исправить это вручную с помощью команды:"
+
+#: bin/persist-makefs:553
+msgid "Failed to fix %s"
+msgstr "Не удалось исправить %s"
+
+#: bin/persist-makefs:554
+msgid "Shall I delete the file: %s?"
+msgstr "Нужно ли удалить файл: %s?"
+
+#: bin/persist-makefs:562
+msgid "Delete file %s?"
+msgstr "Удалить файл %s?"
+
+#: bin/persist-makefs:577
+msgid "No more files left to fix or delete"
+msgstr "Нет больше файлов для исправления или удаления"
+
+#: bin/persist-makefs:596
+msgid "Strange.  No more files left to fix or delete"
+msgstr "Странно. Нет больше файлов для исправления или удаления"
+
+#: bin/persist-makefs:670
+msgid "Strange.  Could not find file %s"
+msgstr "Странно.  Не удалось найти файл %s"
+
+#: bin/persist-makefs:671
+msgid "Cannot explore what we cannot find."
+msgstr "Невозможно исследовать то, что не найдено."
+
+#: bin/persist-makefs:697
+msgid "total"
+msgstr "всего"
+
+#: bin/persist-makefs:723
+msgid "Used"
+msgstr "Использовано"
+
+#: bin/persist-makefs:771
+msgid "total space on device"
+msgstr "всего места на устройстве"
+
+#: bin/persist-makefs:772
+msgid "available space"
+msgstr "доступное пространство"
+
+#: bin/persist-makefs:773
+msgid "total RAM"
+msgstr "всего RAM"
+
+#: bin/persist-makefs:775
+msgid "persist device"
+msgstr "устройство сохранения"
+
+#: bin/persist-makefs:776
+msgid "persist path"
+msgstr "путь сохранения"
+
+#: bin/persist-makefs:796
+msgid "(The %s file is already as large as all RAM)"
+msgstr "(Файл %s уже больше, чем вся RAM)"

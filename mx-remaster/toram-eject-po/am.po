@@ -1,0 +1,75 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# samson <sambelet@yahoo.com>, 2018
+msgid ""
+msgstr ""
+"Project-Id-Version: antix-development\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-06-29 15:33-0600\n"
+"PO-Revision-Date: 2012-01-01 11:19+0000\n"
+"Last-Translator: samson <sambelet@yahoo.com>, 2018\n"
+"Language-Team: Amharic (http://www.transifex.com/anticapitalista/antix-development/language/am/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: am\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: bin/toram-eject:14
+msgid "Eject LiveCD/DVD via a simple GUI if %s is enabled."
+msgstr "ሶዲ /ዲቪዲ ማውጣት ይችላልይ በ GUI ይህን %s ካስቻሉ"
+
+#: bin/toram-eject:16
+msgid "Automatic toram Eject"
+msgstr "ራሱ በራሱ toram ማውጫ"
+
+#: bin/toram-eject:24
+msgid "no BOOT_DEV given!"
+msgstr "ምንም የ BOOT_DEV አልተሰጠም!"
+
+#: bin/toram-eject:33
+msgid "boot device: %s is not removable."
+msgstr "የ ማስነሻ አካል: %s የሚወልቅ አይደለም"
+
+#: bin/toram-eject:39
+msgid "boot device: %s is still mounted!"
+msgstr "የ ማስነሻ አካል: %s እንደ ተጫነ ነው"
+
+#: bin/toram-eject:46
+msgid "The %s boot option succeeded."
+msgstr "የ %s ማስነሻ ምርጫ  ተሳክቷል"
+
+#: bin/toram-eject:47
+msgid "The boot media is no longer needed."
+msgstr "የ ማስነሻ አካል አሁን አያስፈልግም"
+
+#: bin/toram-eject:49
+msgid "Do you want the LiveCD/DVD ejected?"
+msgstr "እርስዎ በ እርግጥ ሲዲ ወይንም ዲቪዲ ይፈልጋሉ?  "
+
+#: bin/toram-eject:50
+msgid "did not eject as per user request."
+msgstr "ተጠቃሚው በጠየቀው መሰረት አታውጣ"
+
+#: bin/toram-eject:52
+msgid "Could not eject %s"
+msgstr "ማውጣት አልተቻለም %s"
+
+#: bin/toram-eject:57
+msgid "Feel free to remove the CD or DVD."
+msgstr "ሲዲ ወይንም ዲቪድ ማውጣት ይችላሉ"
+
+#: bin/toram-eject:59
+msgid "Do you want the drive closed now?"
+msgstr "እርስዎ አካሉን መዝጋት ይፈልጋሉ?  "
+
+#: bin/toram-eject:60
+msgid "did not closing drive as per user request."
+msgstr "ተጠቃሚው በጠየቀው መሰረት አትዝጋ"
+
+#: bin/toram-eject:62
+msgid "Could not close %s"
+msgstr "መዝጋት አልተቻለም %s"

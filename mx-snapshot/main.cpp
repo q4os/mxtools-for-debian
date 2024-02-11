@@ -1,7 +1,7 @@
 /**********************************************************************
  *  main.cpp
  **********************************************************************
- * Copyright (C) 2015 MX Authors
+ * Copyright (C) 2015-2024 MX Authors
  *
  * Authors: Adrian
  *          MX Linux <http://mxlinux.org>
@@ -21,7 +21,6 @@
  * You should have received a copy of the GNU General Public License
  * along with MX Snapshot.  If not, see <http://www.gnu.org/licenses/>.
  **********************************************************************/
-
 #ifdef CLI_BUILD
 #include <QCoreApplication>
 #else
@@ -39,20 +38,18 @@
 #include "mainwindow.h"
 #endif
 
+#include "common.h"
+#include "log.h"
 #include "version.h"
 
 #include <csignal>
 #include <unistd.h>
 
-QFile logFile;
-QString current_kernel;
-extern const QString starting_home = qEnvironmentVariable("HOME");
 static QTranslator qtTran, qtBaseTran, appTran;
+inline QString current_kernel {};
 
 void checkSquashfs();
-void messageHandler(QtMsgType, QMessageLogContext, QString);
 void runApp(QCommandLineParser);
-void setLog();
 void setTranslation();
 void signalHandler(int signal);
 
@@ -134,7 +131,7 @@ int main(int argc, char *argv[])
     }
 
 #ifdef CLI_BUILD
-    // root guard
+    // Root guard
     if (logname == "root") {
         qDebug() << QObject::tr(
             "You seem to be logged in as root, please log out and log in as normal user to use this program.");
@@ -158,7 +155,7 @@ int main(int argc, char *argv[])
     checkSquashfs();
     if (getuid() == 0) {
         qputenv("HOME", "/root");
-        setLog();
+        Log setLog(logFile.fileName());
         qDebug().noquote() << QCoreApplication::applicationName() << QObject::tr("version:")
                            << QCoreApplication::applicationVersion();
         if (argc > 1) {
@@ -183,7 +180,7 @@ else
     setTranslation();
     checkSquashfs();
 
-    // root guard
+    // Root guard
     if (logname == "root") {
         QMessageBox::critical(
             nullptr, QObject::tr("Error"),
@@ -198,7 +195,7 @@ else
             exit(EXIT_FAILURE);
         }
     }
-    setLog();
+    Log setLog(logFile.fileName());
     qDebug().noquote() << QApplication::applicationName() << QObject::tr("version:")
                        << QApplication::applicationVersion();
     if (argc > 1) {
@@ -217,40 +214,6 @@ else
     return exit_code;
 }
 #endif
-}
-
-// The implementation of the handler
-void messageHandler(QtMsgType type, const QMessageLogContext &context, const QString &msg)
-{
-    QTextStream term_out(stdout);
-
-    // Avoid saving endless mksquashfs output
-    if (msg.startsWith(QLatin1String("\r")) || msg.startsWith(QLatin1String("\033[2K"))) {
-        term_out << msg;
-        return;
-    }
-    term_out << msg << "\n";
-
-    QTextStream out(&logFile);
-    out << QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss.zzz ");
-    switch (type) {
-    case QtInfoMsg:
-        out << QStringLiteral("INF ");
-        break;
-    case QtDebugMsg:
-        out << QStringLiteral("DBG ");
-        break;
-    case QtWarningMsg:
-        out << QStringLiteral("WRN ");
-        break;
-    case QtCriticalMsg:
-        out << QStringLiteral("CRT ");
-        break;
-    case QtFatalMsg:
-        out << QStringLiteral("FTL ");
-        break;
-    }
-    out << context.category << QStringLiteral(": ") << msg << "\n";
 }
 
 void setTranslation()
@@ -291,14 +254,6 @@ void checkSquashfs()
 #endif
         exit(EXIT_FAILURE);
     }
-}
-
-void setLog()
-{
-    auto const log_name = "/tmp/" + QCoreApplication::applicationName() + ".log";
-    logFile.setFileName(log_name);
-    logFile.open(QIODevice::WriteOnly | QFile::Text);
-    qInstallMessageHandler(messageHandler);
 }
 
 void signalHandler(int signal)

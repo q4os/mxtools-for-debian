@@ -1,3 +1,9 @@
+papirus-mxblue (24.01.01) mx; urgency=medium
+
+  * revised "logout" and "switchuser" icons
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 07 Jan 2024 20:22:31 -0500
+
 papirus-mxblue (21.08.01) mx; urgency=medium
 
   * modifiy index.theme files to drop inherit on numix-circle 

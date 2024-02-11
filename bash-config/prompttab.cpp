@@ -64,6 +64,9 @@ PromptTab::PromptTab()
 	});
 
 	connect(ui->pushButton_PromptCustomEdit, &QPushButton::clicked, [=]() {
+		if (ui->listWidget_PromptCustom->currentItem() == nullptr) {
+			return;
+		}
 		CustomPromptItemEditor::edit(static_cast<CustomPromptItem*>(ui->listWidget_PromptCustom->currentItem()));
 	});
 

@@ -39,7 +39,7 @@ QMap<QString, PackageInfo> AptCache::getCandidates() const
     return candidates;
 }
 
-// return DEB_BUILD_ARCH format which differs from what 'arch' or currentCpuArchitecture return
+// Return DEB_BUILD_ARCH format which differs from what 'arch' or currentCpuArchitecture return
 QString AptCache::getArch()
 {
     return arch_names.value(QSysInfo::currentCpuArchitecture());
@@ -47,7 +47,7 @@ QString AptCache::getArch()
 
 void AptCache::parseContent()
 {
-    const QStringList list = files_content.split(QStringLiteral("\n"));
+    const QStringList list = files_content.split('\n');
 
     QStringRef package;
     QStringRef version;

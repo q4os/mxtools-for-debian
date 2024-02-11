@@ -1,0 +1,122 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# anticapitalista <anticapitalista@riseup.net>, 2016
+# anticapitalista <anticapitalista@riseup.net>, 2016
+# Eduard Selma <selma@tinet.cat>, 2015-2016
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2012
+msgid ""
+msgstr ""
+"Project-Id-Version: antix-development\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-10-06 10:59-0600\n"
+"PO-Revision-Date: 2012-01-01 11:17+0000\n"
+"Last-Translator: FIRST AUTHOR <EMAIL@ADDRESS>, 2012\n"
+"Language-Team: Catalan (http://www.transifex.com/anticapitalista/antix-development/language/ca/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: ca\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: bin/persist-save:14
+msgid "antiX Save Persistent Root"
+msgstr "antiX Save Persistent Root"
+
+#: bin/persist-save:17
+msgid "Manually save filesystem changes in %s file for persistent root."
+msgstr "Desa manualment els canvis al sistema de fitxers a %s per a Root persistent."
+
+#: bin/persist-save:18
+msgid "You MUST run a program like this to save your filesystem changes."
+msgstr "CAL executar un programa com aquest per desar els canvis al vostre sistema de fitxers"
+
+#: bin/persist-save:43
+msgid "%s was not enabled.  Cannot %s"
+msgstr "No s'ha activat %s. No es pot %s "
+
+#: bin/persist-save:46 bin/persist-save:138
+msgid "Shall we begin?"
+msgstr "Cal començar?"
+
+#: bin/persist-save:47 bin/persist-save:139
+msgid "Stopping at user's request"
+msgstr "Aturant a petició de l'usuari "
+
+#: bin/persist-save:55
+msgid "The persistence device with UUID %s was not found"
+msgstr "No es troba el dispositiu amb UUID %s amb persistència "
+
+#: bin/persist-save:56
+msgid "Please plug in the persistence device and try again"
+msgstr "Connecteu el dispositiu de persistència i torneu a provar-ho"
+
+#: bin/persist-save:74
+msgid "On VID error"
+msgstr "En error VID "
+
+#: bin/persist-save:82
+msgid "Checking for existing files and"
+msgstr "Verificant els fitxers existents i"
+
+#: bin/persist-save:83
+msgid "Checking if there is enough room ..."
+msgstr "Comprovant si hi prou espai..."
+
+#: bin/persist-save:113
+msgid "persist device"
+msgstr "dispositiu persistent"
+
+#: bin/persist-save:114
+msgid "mounted at"
+msgstr "muntat a"
+
+#: bin/persist-save:127
+msgid "Available space, %s, is smaller than the margin of %s."
+msgstr "L'espai disponible, %s, és menor que el marge de %s."
+
+#: bin/persist-save:131
+msgid "Insufficient space.  Have: %s. Need: %s."
+msgstr "Espai insuficient. En teniu: %s. Cal: %s."
+
+#: bin/persist-save:134
+msgid "Ready to sync file system changes"
+msgstr "A punt per a fer rsync dels canvis al sistema de fitxers"
+
+#: bin/persist-save:142
+msgid "Performing rsync ... please be patient"
+msgstr "Efectuant rsync... si us plau, tingueu paciència"
+
+#: bin/persist-save:178
+msgid "%s The rsync command failed Failed! %s"
+msgstr "%s L'ordre rsync ha fallat! %s"
+
+#: bin/persist-save:180
+msgid "It returned an exit code of %s"
+msgstr "Ha retornat el codi de sortida  de %s"
+
+#: bin/persist-save:181
+msgid "See the rsync man page to look up its meaning."
+msgstr "Vegeu el manual de rsync per copsar el seu significat."
+
+#: bin/persist-save:185 bin/persist-save:192
+msgid "%s succeeded"
+msgstr "%s amb èxit"
+
+#: bin/persist-save:194
+msgid "    Your changes were saved in:"
+msgstr "    Els vostres canvis s'han desat a:"
+
+#: bin/persist-save:217
+msgid "Missing rootfs version file %s"
+msgstr "Falta el fitxer de versió rootfs %s "
+
+#: bin/persist-save:220
+msgid "Missing version ID in rootfs file system"
+msgstr "Falta l'identificador de versió al sistema de fitxers rootfs "
+
+#: bin/persist-save:223
+msgid "Version id inside of %s file does not match"
+msgstr "L'indicador de versió del fitxer %s no concorda "

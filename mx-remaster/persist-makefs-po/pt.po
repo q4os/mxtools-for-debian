@@ -1,0 +1,428 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# José Vieira <jvieira33@sapo.pt>, 2019
+# 9dc2486d5858e5a4d192f5ce124b5be4_cf18c09, 2017
+msgid ""
+msgstr ""
+"Project-Id-Version: antix-development\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-04-03 12:45-0600\n"
+"PO-Revision-Date: 2014-03-15 01:03+0000\n"
+"Last-Translator: José Vieira <jvieira33@sapo.pt>, 2019\n"
+"Language-Team: Portuguese (http://www.transifex.com/anticapitalista/antix-development/language/pt/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: pt\n"
+"Plural-Forms: nplurals=3; plural=(n == 0 || n == 1) ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
+
+#: bin/persist-makefs:31
+msgid "antiX Create or Resize Persistence"
+msgstr "antiX Criar ou Redimensionar Persistência"
+
+#: bin/persist-makefs:32
+msgid "Create or resize the files need for root and/or home persistence."
+msgstr "Criar ou redimensionar os ficheiros necessários à persistência de root e/ou home"
+
+#: bin/persist-makefs:36
+msgid "Use <%s> as the persistence device"
+msgstr "Usar <%s> como dispositivo de persistência"
+
+#: bin/persist-makefs:37
+msgid "Go directly to the explore menu"
+msgstr "Ir directamente para o menu de exploração"
+
+#: bin/persist-makefs:38
+msgid "Go directly to the making a %s file"
+msgstr "Ir directamente para a criação dum ficheiro %s"
+
+#: bin/persist-makefs:43
+msgid "Change Persistence Device"
+msgstr "Mudar de Dispositivo de Persistência"
+
+#: bin/persist-makefs:44
+msgid "Change Peristence Path"
+msgstr "Alterar o Caminho (a Localização) da Persistência"
+
+#: bin/persist-makefs:45
+msgid "Create Root Persistence"
+msgstr "Criar Persistência de Root"
+
+#: bin/persist-makefs:46
+msgid "Resize Root Persistence"
+msgstr "Redimensionar a Persistência de Root"
+
+#: bin/persist-makefs:47
+msgid "Make rootfs.new file for remastering"
+msgstr "Criar ficheiro rootfs.new para recomposição"
+
+#: bin/persist-makefs:48
+msgid "Create Home Persistence"
+msgstr "Criar Persistência de Home"
+
+#: bin/persist-makefs:49
+msgid "Resize Home Persistence"
+msgstr "Redimensionar Persistência de Home"
+
+#: bin/persist-makefs:51
+msgid "Quit this program"
+msgstr "Sair deste programa"
+
+#: bin/persist-makefs:52
+msgid "Update information"
+msgstr "Actualizar informação"
+
+#: bin/persist-makefs:53
+msgid "Fix or delete broken and outdated files"
+msgstr "Reparar ou eliminar ficheiros quebrados ou desactualizados"
+
+#: bin/persist-makefs:55
+msgid "Fix"
+msgstr "Reparar"
+
+#: bin/persist-makefs:56
+msgid "Delete"
+msgstr "Eliminar"
+
+#: bin/persist-makefs:57
+msgid "Explore"
+msgstr "Explorar"
+
+#: bin/persist-makefs:59 bin/persist-makefs:641
+msgid "Exploration Menu"
+msgstr "Menu de Exploração"
+
+#: bin/persist-makefs:60
+msgid "Exploring"
+msgstr "A explorar"
+
+#: bin/persist-makefs:61
+msgid "Persistence Device"
+msgstr "Dispositivo de Persistência"
+
+#: bin/persist-makefs:62
+msgid "Persistence Directory"
+msgstr "Directório de Persistência"
+
+#: bin/persist-makefs:63
+msgid "Persistence file: %s"
+msgstr "Ficheiro de Persistência: %s"
+
+#: bin/persist-makefs:64
+msgid "Stop Exploring"
+msgstr "Parar a exploração"
+
+#: bin/persist-makefs:66
+msgid "Stop Fixing and deleting"
+msgstr "Parar o Reparar e eliminar"
+
+#: bin/persist-makefs:67
+msgid "Fix and Delete Files Menu"
+msgstr "Menu de Reparar e Eliminar Ficheiros"
+
+#: bin/persist-makefs:69
+msgid "does not exist"
+msgstr "não existe"
+
+#: bin/persist-makefs:70
+msgid "Broken!"
+msgstr "Quebrado!"
+
+#: bin/persist-makefs:73
+msgid "Simple, stable, no journaling"
+msgstr "Simples, estável, sem registar (journaling)"
+
+#: bin/persist-makefs:74
+msgid "Adds journaling."
+msgstr "Adicionar registos (journaling)"
+
+#: bin/persist-makefs:75
+msgid "Journaling, checksums, fast fsck"
+msgstr "Journaling, checksums, fast fsck"
+
+#: bin/persist-makefs:116
+msgid "The persistence device with UUID %s was not found"
+msgstr "O dispositivo de persistência com o UUID %s não foi encontrado"
+
+#: bin/persist-makefs:117
+msgid "Please plug in the persistence device if you want to use it."
+msgstr "Acoplar o dispositivo de persistência, se for para ser usado."
+
+#: bin/persist-makefs:119
+msgid "Do you want to try again?"
+msgstr "Tentar novamente?"
+
+#: bin/persist-makefs:127
+msgid "Default device %s is either missing or invalid"
+msgstr "O dispositivo pré-definido %s não está presente ou é inválido"
+
+#: bin/persist-makefs:128 bin/persist-makefs:144
+msgid "Please select a new device for the persistence files"
+msgstr "Escolher um novo dispositivo para os ficheiros de persistência"
+
+#: bin/persist-makefs:143
+msgid "The boot/persist device %s is read-only."
+msgstr "O dispositivo de arranque/persistência %s é só de leitura."
+
+#: bin/persist-makefs:153
+msgid "Create rootfs.new (for remastering)"
+msgstr "Criar ficheiro rootfs.new (para recomposição [remastering])"
+
+#: bin/persist-makefs:222
+msgid "Create Root persistence"
+msgstr "Criar persistência de Root"
+
+#: bin/persist-makefs:229
+msgid "Can't resize %s while it is already mounted."
+msgstr "Não é possível redimensionar %s apesar de já estar montado."
+
+#: bin/persist-makefs:234
+msgid "Resize Root persistence"
+msgstr "Redimensionar a persistência de Root"
+
+#: bin/persist-makefs:250
+msgid "Create %s (for remastering)"
+msgstr "Criar %s (para recomposição [remastering])"
+
+#: bin/persist-makefs:255
+msgid "Create Home persistence"
+msgstr "Criar persistência de Home"
+
+#: bin/persist-makefs:261
+msgid "Resize Home persistence"
+msgstr "Redimensionar persistência de Home"
+
+#: bin/persist-makefs:285 bin/persist-makefs:611 bin/persist-makefs:654
+msgid "Really Quit?"
+msgstr "Sair, realmente?"
+
+#: bin/persist-makefs:317
+msgid "File System Type"
+msgstr "Tipo de Sistema de Ficheiros"
+
+#: bin/persist-makefs:327
+msgid "The file %s already exists"
+msgstr "O fixeiro %s já existe"
+
+#: bin/persist-makefs:328
+msgid "Do you want to over-write it?"
+msgstr "Sobrescrever?"
+
+#: bin/persist-makefs:332
+msgid "Please select size of the new file system"
+msgstr "Seleccionar tamanho do novo sistema de ficheiros"
+
+#: bin/persist-makefs:334
+msgid "Not enough space on device"
+msgstr "Não há espaço suficiente no dispositivo"
+
+#: bin/persist-makefs:345
+msgid "Warning: this can take several minutes per Gig on a %s file system"
+msgstr "Aviso: isto pode demorar vários minutos por Gig num sistema de ficheiros %s"
+
+#: bin/persist-makefs:346
+msgid "Please wait"
+msgstr "Aguardar"
+
+#: bin/persist-makefs:353
+msgid "Creating file %s"
+msgstr "A criar ficheiro %s"
+
+#: bin/persist-makefs:354
+msgid "Size: %s Meg. Filesystem: %s"
+msgstr "Tamanho: %s Meg. Sistema de ficheiros: %s"
+
+#: bin/persist-makefs:365
+msgid "Was unable to create directory for file %s"
+msgstr "Não foi possível criar o directório para o ficheiro %s"
+
+#: bin/persist-makefs:366
+msgid "Was unable to create file %s"
+msgstr "Não foi possível criar o ficheiro %s"
+
+#: bin/persist-makefs:367
+msgid "Was unable to make %s filesystem on file %s"
+msgstr "Não foi possível criar o sistema de ficheiros %s no ficheiro %s"
+
+#: bin/persist-makefs:368
+msgid "Unknown error creating file %s"
+msgstr "Erro desconhecido ao criar o ficheiro %s"
+
+#: bin/persist-makefs:377
+msgid "The file %s is missing"
+msgstr "Falta o ficheiro %s"
+
+#: bin/persist-makefs:385
+msgid "Success! File %s was created."
+msgstr "Êxito! O ficheiro %s foi criado."
+
+#: bin/persist-makefs:386
+msgid "Success! File %s was created and its filesystem was fixed."
+msgstr "Êxito! O ficheiro %ss foi criado e o seu sistema de ficheiros reparado."
+
+#: bin/persist-makefs:387
+msgid "The filesystem on %s is broken and wasn't fixed"
+msgstr "O sistema de ficheiros em %s está corrompido e não foi reparado"
+
+#: bin/persist-makefs:401
+msgid "About to create %s file"
+msgstr "Prestes a criar o ficheiro %s"
+
+#: bin/persist-makefs:402
+msgid "size"
+msgstr "tamanho"
+
+#: bin/persist-makefs:403
+msgid "type"
+msgstr "tipo"
+
+#: bin/persist-makefs:404
+msgid "device"
+msgstr "dispositivo"
+
+#: bin/persist-makefs:405
+msgid "Shall we proceed?"
+msgstr "Prosseguir?"
+
+#: bin/persist-makefs:411
+msgid "Creating %s file"
+msgstr "A criar o ficheiro %s"
+
+#: bin/persist-makefs:438
+msgid "Please be patient while %s megs are copied ..."
+msgstr "Aguardar enquanto %s Megs são copiados ..."
+
+#: bin/persist-makefs:452
+msgid "Was unable to unmount %s at %s"
+msgstr "Não foi possível desmontar %s em %s"
+
+#: bin/persist-makefs:455
+msgid "Please select a new persistence device"
+msgstr "Seleccionar outro dispositivo de persistência"
+
+#: bin/persist-makefs:456
+msgid "Current device is: %s"
+msgstr "O dispositivo em uso é: %s"
+
+#: bin/persist-makefs:467
+msgid "The selected device %s is read-only"
+msgstr "O dispositivo seleccionado %s é só de leitura"
+
+#: bin/persist-makefs:468
+msgid "Please select a different device"
+msgstr "Seleccionar outro dispositivo"
+
+#: bin/persist-makefs:487
+msgid "new"
+msgstr "novo"
+
+#: bin/persist-makefs:491
+msgid "Please choose a new persistence directory"
+msgstr "Escolher um novo diretório de persistência"
+
+#: bin/persist-makefs:492
+msgid "The current choice is %s"
+msgstr "A escolha actual é %s"
+
+#: bin/persist-makefs:500
+msgid "Please select a new persistence directory"
+msgstr "Escolher um novo diretório de persistência"
+
+#: bin/persist-makefs:501
+msgid "The current one is %s"
+msgstr "O actual é %s"
+
+#: bin/persist-makefs:512
+msgid "Expected a directory at %s but found a file."
+msgstr "Era esperado um diretório em %s, mas foi encontrado um ficheiro."
+
+#: bin/persist-makefs:514
+msgid "The only other option is to quit."
+msgstr "A outra única opção é sair."
+
+#: bin/persist-makefs:519
+msgid "Unable to erase file %s"
+msgstr "Não foi possível apagar o ficheiro %s"
+
+#: bin/persist-makefs:525
+msgid "Unable to make directory %s"
+msgstr "Não foi possível criar o diretório %s"
+
+#: bin/persist-makefs:542
+msgid "There were no errors to correct in %s."
+msgstr "Não havia erros a corrigir em %s"
+
+#: bin/persist-makefs:545
+msgid "File system in %s should be fixed."
+msgstr "O sistema de ficheiros em %s deverá estar reparado."
+
+#: bin/persist-makefs:548
+msgid "File system in %s left uncorrected."
+msgstr "Sistema de ficheiros em %s não corrigido."
+
+#: bin/persist-makefs:549
+msgid "You may be able to fix this manually with the command:"
+msgstr "Talvez seja possível reparar manualmente com o comando:"
+
+#: bin/persist-makefs:553
+msgid "Failed to fix %s"
+msgstr "A reparação de %s falhou"
+
+#: bin/persist-makefs:554
+msgid "Shall I delete the file: %s?"
+msgstr "Eliminar o ficheiro: %s?"
+
+#: bin/persist-makefs:562
+msgid "Delete file %s?"
+msgstr "Eliminar o ficheiro %s?"
+
+#: bin/persist-makefs:577
+msgid "No more files left to fix or delete"
+msgstr "Não há mais ficheiros para reparar ou eliminar"
+
+#: bin/persist-makefs:596
+msgid "Strange.  No more files left to fix or delete"
+msgstr "Estranho... Não há mais ficheiros para reparar ou eliminar"
+
+#: bin/persist-makefs:670
+msgid "Strange.  Could not find file %s"
+msgstr "Estranho... Não foi possível encontrar o ficheiro %s"
+
+#: bin/persist-makefs:671
+msgid "Cannot explore what we cannot find."
+msgstr "Não é possível explorar algo que não é encontrado."
+
+#: bin/persist-makefs:697
+msgid "total"
+msgstr "total"
+
+#: bin/persist-makefs:723
+msgid "Used"
+msgstr "Usado"
+
+#: bin/persist-makefs:771
+msgid "total space on device"
+msgstr "espaço total no dispositivo"
+
+#: bin/persist-makefs:772
+msgid "available space"
+msgstr "espaço disponível"
+
+#: bin/persist-makefs:773
+msgid "total RAM"
+msgstr "RAM total"
+
+#: bin/persist-makefs:775
+msgid "persist device"
+msgstr "dispositivo de persistência"
+
+#: bin/persist-makefs:776
+msgid "persist path"
+msgstr "caminho para a persistência"
+
+#: bin/persist-makefs:796
+msgid "(The %s file is already as large as all RAM)"
+msgstr "(O ficheiro %s já tem a dimensão total da RAM)"

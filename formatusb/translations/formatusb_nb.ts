@@ -196,7 +196,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="315"/>
         <source>Invalid Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Ugyldig navn</translation>
     </message>
 </context>
 <context>

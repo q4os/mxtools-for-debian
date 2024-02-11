@@ -8,7 +8,7 @@
 # anticapitalista <anticapitalista@riseup.net>, 2017
 # e0360fc3c0afcd70e5aed1cfc885bac6, 2022
 # mahmut özcan <mahmutozcan@protonmail.com>, 2022
-# Mehmet Akif 9oglu, 2023
+# Mehmet Akif 9oglu, 2024
 # 
 #, fuzzy
 msgid ""
@@ -17,7 +17,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-12-14 20:02-0500\n"
 "PO-Revision-Date: 2016-11-29 14:08+0000\n"
-"Last-Translator: Mehmet Akif 9oglu, 2023\n"
+"Last-Translator: Mehmet Akif 9oglu, 2024\n"
 "Language-Team: Turkish (https://app.transifex.com/anticapitalista/teams/10162/tr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -122,7 +122,7 @@ msgstr "Debian-backports alternatifi öner"
 
 #: ../ddm-mx:262
 msgid "Offer Nvidia developer repo alternative"
-msgstr ""
+msgstr "Nvidia geliştirici deposu alternatifi öner."
 
 #: ../ddm-mx:263
 msgid "Create 20-nvidia.conf"
@@ -270,19 +270,19 @@ msgstr "MX Test deposu etkinleştirme"
 #: ../ddm-mx:609
 #, sh-format
 msgid "Enabling Nvidia developer repo"
-msgstr ""
+msgstr "Nvidia geliştirici deposu etkinleştiriliyor"
 
 #. getting the nvidia gpg archive key
 #: ../ddm-mx:611
 #, sh-format
 msgid "Getting Nvidia repo signing key"
-msgstr ""
+msgstr "Nvidia depo imza anahtarı alınıyor"
 
 #. problem downloading and installing the nvidia gpg key package
 #: ../ddm-mx:621
 #, sh-format
 msgid "Error downloading nvidia direct repo key"
-msgstr ""
+msgstr "nvidia direct repo anahtarının indirilmesi sırasında hata oluştu."
 
 #: ../ddm-mx:639
 #, sh-format
@@ -340,6 +340,8 @@ msgstr "Daha sonraki sürüm için MX Sınama Deposunu denemek ister misiniz?"
 #, sh-format
 msgid "Would you like to check the Nvidia developer repo for a later version?"
 msgstr ""
+"Nvidia geliştirici deposunu daha yeni bir sürüm için kontrol etmek ister "
+"misiniz?"
 
 #. a choice of driver versions is being offerred
 #: ../ddm-mx:699 ../ddm-mx:738 ../ddm-mx:778
@@ -381,12 +383,12 @@ msgstr "MX Test"
 #: ../ddm-mx:780
 #, sh-format
 msgid "Main repos or Nvidia direct repo"
-msgstr ""
+msgstr "Ana depo veya Nvidia doğrudan depo"
 
 #: ../ddm-mx:784
 #, sh-format
 msgid "Nvidia Direct"
-msgstr ""
+msgstr "Nvidia Doğrudan"
 
 #: ../ddm-mx:826
 #, sh-format
@@ -537,7 +539,7 @@ msgstr "MX Test deposu adayı:"
 #: ../ddm-mx:1139
 #, sh-format
 msgid "Nvidia developer repo candidate is:  "
-msgstr ""
+msgstr "Nvidia geliştirici repo adayı:"
 
 #: ../ddm-mx:1150
 #, sh-format

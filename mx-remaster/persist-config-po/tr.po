@@ -1,0 +1,163 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# Ali İlteriş Keskin <aliilteriskeskin@gmail.com>, 2020
+# e0360fc3c0afcd70e5aed1cfc885bac6, 2019
+# mahmut özcan <mahmutozcan@protonmail.com>, 2016
+# mahmut özcan <mahmutozcan@protonmail.com>, 2020
+# Mehmet Akif 9oglu, 2022
+msgid ""
+msgstr ""
+"Project-Id-Version: antix-development\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-04-03 12:45-0600\n"
+"PO-Revision-Date: 2012-01-01 11:16+0000\n"
+"Last-Translator: Mehmet Akif 9oglu, 2022\n"
+"Language-Team: Turkish (http://www.transifex.com/anticapitalista/antix-development/language/tr/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: tr\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: bin/persist-config:12
+msgid "antiX Root Persistence Auto-Save Configuration"
+msgstr "antiX Home Kalıcılığı Otomatik Kayıt Yapılandırması"
+
+#: bin/persist-config:20
+msgid "Automatic"
+msgstr "Otomatik"
+
+#: bin/persist-config:21
+msgid "Semi-Automatic"
+msgstr "Yarı Otomatik"
+
+#: bin/persist-config:22
+msgid "Manual"
+msgstr "El ile"
+
+#: bin/persist-config:23
+msgid "Quit"
+msgstr "Çıkış"
+
+#: bin/persist-config:29
+msgid "Configure root persistence saves to run either:"
+msgstr "Root kalıcılığını yapılandırmak aşağıdakilerden birini çalıştırmak için kaydeder:"
+
+#: bin/persist-config:31
+msgid "at shutdown/reboot, no asking"
+msgstr "kapatırken / yeniden başlatırken sorma"
+
+#: bin/persist-config:32
+msgid "ask at shutdown/reboot"
+msgstr "kapatırken / yeniden başlatırken sor"
+
+#: bin/persist-config:33
+msgid "you snooze, you lose"
+msgstr "sona kalan, dona kalır"
+
+#: bin/persist-config:35
+msgid ""
+"This program should be called with the %s option in a startup script to "
+"ensure a config file is created."
+msgstr "Bu program, bir yapılandırma dosyasının oluşturulduğundan emin olmak için başlangıç komut dosyasında %s seçeneğiyle çağrılmalıdır."
+
+#: bin/persist-config:37
+msgid ""
+"It should be called with the %s option in shutdown scripts so your changes "
+"can be saved before shutting down."
+msgstr "Kapatmadan önce değişikliklerinizin kaydedilebilmesi için kapatma komut dosyalarında %s seçeneğiyle çağrılmalıdır."
+
+#: bin/persist-config:45
+msgid "%s specific options"
+msgstr "%s 'e özel seçenekler"
+
+#: bin/persist-config:46
+msgid "Create a %s file if one is missing."
+msgstr "Eğer biri eksikse %s dosyası oluştur."
+
+#: bin/persist-config:47
+msgid "Run persist-save as directed by %s file."
+msgstr "Kalıcı-kaydı %s dosyasının yönlendirdiği şekilde  çalıştırın."
+
+#: bin/persist-config:48
+msgid "Run %s if %s succeeded."
+msgstr "Eğer %s başarıldıysa %s 'ı çalıştırın."
+
+#: bin/persist-config:49
+msgid "If %s fails prompt user before running %s."
+msgstr "Eğer %s başarısız olursa, %s çalıştırmadan önce kullanıcıya sor."
+
+#: bin/persist-config:50
+msgid "implies %s"
+msgstr "%s anlamına gelir"
+
+#: bin/persist-config:52
+msgid "Config file is located at: %s"
+msgstr "Yapılandırma dosyası şurada: %s"
+
+#: bin/persist-config:90
+msgid "Current mode is: %s"
+msgstr "Şu anki mod: %s"
+
+#: bin/persist-config:92
+msgid "There is no current auto-save mode.  The default is: %s."
+msgstr "Şu an otomatik kaydetme kipi geçerli değil. Öntanımlı olan: %s."
+
+#: bin/persist-config:102
+msgid "save on shutdown/reboot automatically.  No asking."
+msgstr "Kapanırken / Yeniden Başlatırken otomatik kaydet, sorma."
+
+#: bin/persist-config:103
+msgid "ask to save on shutdown/reboot."
+msgstr "Kapanırken / Yeniden Başlatırken Kaydetmeyi Sor"
+
+#: bin/persist-config:104
+msgid "only save changes manually (you snooze, you lose)."
+msgstr "yalnızca değişiklikleri elle kaydet (ertelersiniz, kaybedersiniz)."
+
+#: bin/persist-config:105
+msgid "use current default."
+msgstr "şimdiki öntanımlıyı kullan."
+
+#: bin/persist-config:117
+msgid "Auto-save mode set to %s in %s."
+msgstr "Otomatik kaydetme kipi %s'de %s olarak ayarlı."
+
+#: bin/persist-config:123
+msgid "It looks like root persistence was just enabled."
+msgstr "Görünüşe göre root kalıcılığı yeni etkinleştirildi."
+
+#: bin/persist-config:124
+msgid "Please set the save-mode for root persistence."
+msgstr "Lütfen root kalıcılığı için kaydetme modunu ayarlayın."
+
+#: bin/persist-config:125
+msgid "You will only have to do this once."
+msgstr "Bunu yalnızca bir defa yapmanız gerekecek"
+
+#: bin/persist-config:127
+msgid "You can change your choice later with %s."
+msgstr "Seçimizi daha sonra %s ile değiştirebilirsiniz."
+
+#: bin/persist-config:159
+msgid "Already saved less than %s seconds ago"
+msgstr "%s saniyeden daha kısa süre önce kaydedildi"
+
+#: bin/persist-config:160
+msgid "Won't autosave within %s seconds of a previous save"
+msgstr "Önceki kaydetmeden %s saniye geçmeden otomatik kaydetmez"
+
+#: bin/persist-config:199
+msgid "CONFIRM"
+msgstr "ONAY"
+
+#: bin/persist-config:200
+msgid "There was an error saving your changes."
+msgstr "Yaptığınız değişiklikler kaydedilirken bir hata oluştu."
+
+#: bin/persist-config:202
+msgid "Do you still want to %s?"
+msgstr "Yine de %s istiyor musunuz?"

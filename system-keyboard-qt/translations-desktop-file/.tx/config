@@ -6,4 +6,5 @@ file_filter = po/system-keyboard-qt-desktop_<lang>.po
 source_file = system-keyboard-qt-desktop.pot
 source_lang = en
 type        = po
+minimum_perc = 25
 

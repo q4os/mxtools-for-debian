@@ -4,8 +4,8 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# mahmut özcan <mahmutozcan@protonmail.com>, 2018
 # e0360fc3c0afcd70e5aed1cfc885bac6, 2019
+# mahmut özcan <mahmutozcan@protonmail.com>, 2021
 # 
 #, fuzzy
 msgid ""
@@ -14,8 +14,8 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-02-21 11:35-0600\n"
 "PO-Revision-Date: 2017-12-31 03:14+0000\n"
-"Last-Translator: e0360fc3c0afcd70e5aed1cfc885bac6, 2019\n"
-"Language-Team: Turkish (https://www.transifex.com/anticapitalista/teams/10162/tr/)\n"
+"Last-Translator: mahmut özcan <mahmutozcan@protonmail.com>, 2021\n"
+"Language-Team: Turkish (https://app.transifex.com/anticapitalista/teams/10162/tr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -44,11 +44,11 @@ msgstr "Bildirim sistem panosuna kopyalandı"
 
 #: quick-system-info/quick-system-info-mx:17
 msgid "Report is already formatted for forum."
-msgstr ""
+msgstr "Bildirim zaten forum için biçimlendirilmiş. "
 
 #: quick-system-info/quick-system-info-mx:18
 msgid "Paste directly into forum post."
-msgstr ""
+msgstr "Doğrudan forum gönderisine yapıştırın."
 
 #: quick-system-info/quick-system-info-mx:19
 msgid "Press any key to close"
@@ -56,7 +56,7 @@ msgstr "Kapatmak için herhangi bir tuşa basın"
 
 #: quick-system-info/quick-system-info-mx:20
 msgid "Do not show this message in future"
-msgstr ""
+msgstr "Bu iletiyi gelecekte gösterme"
 
 #: archive/system-keyboard-mx:13
 msgid "System Keyboard Configuration"

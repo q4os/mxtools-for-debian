@@ -12,7 +12,7 @@ int main(int argc, char* argv[])
 	QApplication::setApplicationVersion("1.0.0");
 
 	QTranslator qtTran;
-	qtTran.load(QString("qt_") + QLocale::system().name(), "/usr/share/bash-config/locale");
+	qtTran.load(QStringLiteral("bash-config_") + QLocale::system().name(), "/usr/share/bash-config/locale");
 	a.installTranslator(&qtTran);
 
 	/*

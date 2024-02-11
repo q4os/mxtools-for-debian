@@ -1,0 +1,279 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2012
+# Appukonrad <appukonrad@gmail.com>, 2012
+# joyinko <joyinko@azet.sk>, 2017
+msgid ""
+msgstr ""
+"Project-Id-Version: antix-development\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-10-22 19:22-0600\n"
+"PO-Revision-Date: 2015-05-07 19:18+0000\n"
+"Last-Translator: joyinko <joyinko@azet.sk>, 2017\n"
+"Language-Team: Czech (http://www.transifex.com/anticapitalista/antix-development/language/cs/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: cs\n"
+"Plural-Forms: nplurals=4; plural=(n == 1 && n % 1 == 0) ? 0 : (n >= 2 && n <= 4 && n % 1 == 0) ? 1: (n % 1 != 0 ) ? 2 : 3;\n"
+
+#: bin/live-remaster:29
+msgid ""
+"Create a new compressed file system saving all of the changes you have made "
+"to the system."
+msgstr "Vytvořit nový komprimovaný souborový systém, címž uložíte všechny změny, které jste v systému provedli."
+
+#: bin/live-remaster:35
+msgid "Extra options for"
+msgstr "Dodatečné možnosti pro"
+
+#: bin/live-remaster:36
+msgid "Make a smaller linuxfs.new.  NOT deleted when done."
+msgstr "Vytvořit menší linuxfs.new. Po skončení NENÍ smazán."
+
+#: bin/live-remaster:37
+msgid "Use %s instead of prompting user for title."
+msgstr "Použít %s místo dotazování uživatele pro název."
+
+#: bin/live-remaster:38
+msgid "Make a general-purpose remaster."
+msgstr "Vytvořit všeobecné přizpůsobení."
+
+#: bin/live-remaster:39
+msgid "Make a personalized remaster."
+msgstr "Vytvořit osobní přizpůsobení."
+
+#: bin/live-remaster:71
+msgid "The live file system is read-only.  Cannot remaster."
+msgstr "Souborový systém je pouze pro čtení, nebude remástrován."
+
+#: bin/live-remaster:73
+msgid "General"
+msgstr "Základní"
+
+#: bin/live-remaster:74
+msgid "Personal"
+msgstr "Osobní"
+
+#: bin/live-remaster:81
+msgid "%s uses your personal settings."
+msgstr "%s používá Vaše osobní nastavení."
+
+#: bin/live-remaster:82
+msgid "%s does not."
+msgstr "%s nepoužívá."
+
+#: bin/live-remaster:95
+msgid "Do you want to save files under %s in the new remaster?"
+msgstr "Chcete soubory uložit do %s v novém remástru?"
+
+#: bin/live-remaster:101
+msgid "Checking for existing files and"
+msgstr "Kontrola existujících souborů a"
+
+#: bin/live-remaster:102
+msgid "Checking if there is enough room ..."
+msgstr "Kontrola, zdali je dostatek místa ..."
+
+#: bin/live-remaster:113
+msgid "The %s program was unable to start"
+msgstr "%s program nemohl nastrtovat"
+
+#: bin/live-remaster:165
+msgid "current linuxfs size"
+msgstr "aktuální velikost linuxfs"
+
+#: bin/live-remaster:166
+msgid "excluded files est."
+msgstr "odhad zbývajících souborů"
+
+#: bin/live-remaster:167 bin/live-remaster:168
+msgid "estimated new size"
+msgstr "odhadovaná nová velikost"
+
+#: bin/live-remaster:174
+msgid "boot device total"
+msgstr "celkem bootovací disk"
+
+#: bin/live-remaster:175
+msgid "boot device free"
+msgstr "volno bootovací disk"
+
+#: bin/live-remaster:176 bin/live-remaster:177
+msgid "est. remaining"
+msgstr "odhad zbývající"
+
+#: bin/live-remaster:194
+msgid "Have: %s megs available.  Need: %s."
+msgstr "Máte %s MB dostupných. Požadováno: %s."
+
+#: bin/live-remaster:198
+msgid "Leftover files found"
+msgstr "Nalezeny pozůstalé soubory"
+
+#: bin/live-remaster:200
+msgid "The following file(s) already exist"
+msgstr "Následující soubory již existují"
+
+#: bin/live-remaster:201
+msgid "in the %s directory:"
+msgstr "ve složce %s:"
+
+#: bin/live-remaster:205
+msgid "They may be left over from a previous remastering."
+msgstr "Mohou zde být pozůstatky z předchozího remástru."
+
+#: bin/live-remaster:206
+msgid "Do you want to fix this problem now?"
+msgstr "Chcete problém opravit nyní?"
+
+#: bin/live-remaster:207
+msgid "(the alternative is to quit now)"
+msgstr "(druhou možností je okamžité ukončení)"
+
+#: bin/live-remaster:221
+msgid "Ready to create a new linuxfs file"
+msgstr "Vytvoření nového souboru linuxfs je připraveno"
+
+#: bin/live-remaster:225
+msgid "Shall we begin?"
+msgstr "Můžeme začít?"
+
+#: bin/live-remaster:235
+msgid "(compresses faster, boots faster)"
+msgstr "(rychlejší komprese, rychlý boot)"
+
+#: bin/live-remaster:236
+msgid "(compresses better)"
+msgstr "(lepší komprese)"
+
+#: bin/live-remaster:242
+msgid "Please choose the type of compression to use"
+msgstr "Prosím zvolte si typ komprese, který bude použit"
+
+#: bin/live-remaster:243
+msgid "%s will take less time"
+msgstr "%s zabere kratší čas"
+
+#: bin/live-remaster:244
+msgid "%s will result in a smaller file"
+msgstr "%s vytvoří menší soubor"
+
+#: bin/live-remaster:260
+msgid "Do you want remaster to use all of the CPUs?"
+msgstr "Chcete remástrovat s použitím všech jader CPU?"
+
+#: bin/live-remaster:262
+msgid "This will make the remaster process run as fast as possible."
+msgstr "Toto umožní nejvyšší možnou rychlost remástru."
+
+#: bin/live-remaster:263
+msgid "But there is more of a chance your computer will overheat."
+msgstr "Ale je zde velká šance, že se počítač přehřeje."
+
+#: bin/live-remaster:272
+msgid "Remaster Version Identification"
+msgstr "Přizpůsobit identifikaci verze"
+
+#: bin/live-remaster:274
+msgid "Please enter an (optional) title for this remaster"
+msgstr "Zadejte, prosím, (nepovinný) název tohoto přizpůsobení"
+
+#: bin/live-remaster:295
+msgid "The %s program failed to work"
+msgstr "%s program přestal pracovat"
+
+#: bin/live-remaster:335
+msgid "Remastering -- DO NOT CLOSE"
+msgstr "Přizpůsobení - NEZAVÍRAT"
+
+#: bin/live-remaster:351
+msgid "Remaster in Progress"
+msgstr "Probíhá přizpůsobení"
+
+#: bin/live-remaster:352
+msgid "Do you REALLY want to stop midway?"
+msgstr "OPRAVDU chcete v půli cesty přestat?"
+
+#: bin/live-remaster:379
+msgid "Created new compressed filesystem file:"
+msgstr "Vytvořen nový komprimovaný soubor souborového systému:"
+
+#: bin/live-remaster:384
+msgid "The new file should be used automatically the next time you boot."
+msgstr "Nový soubor by měl být automaticky použit při příštím restartu."
+
+#: bin/live-remaster:386
+msgid "If there is a problem with the new system:"
+msgstr "Pokud se v novém systému vyskytnou problémy:"
+
+#: bin/live-remaster:387
+msgid "Use the %s  boot option to return to the current system."
+msgstr "Použijte možnost zavedení %s pro návrat do současného systému."
+
+#: bin/live-remaster:411
+msgid "Root persistence is enabled"
+msgstr "Persistence root-a je aktivní"
+
+#: bin/live-remaster:413
+msgid "Do you want to make a new %s file now?"
+msgstr "Chcete nyní vytvořit nový %s soubor?"
+
+#: bin/live-remaster:421
+msgid "Remaster in progress"
+msgstr "Probíhá remáster"
+
+#: bin/live-remaster:423
+msgid "please be patient"
+msgstr "mějte strpení prosím"
+
+#: bin/live-remaster:424
+msgid "(even after it says it is 100% done)"
+msgstr "(i když se píše, že je hotovo 100%)"
+
+#: bin/live-remaster:429
+msgid "antiX Remaster in Progress"
+msgstr "Probíhá remáster antiX"
+
+#: bin/live-remaster:445
+msgid "Remastering Terminated Early"
+msgstr "Remáster předčasně ukončen"
+
+#: bin/live-remaster:450
+msgid "Remastering Failed"
+msgstr "Remáster selhal"
+
+#: bin/live-remaster:452
+msgid "New linuxfs file was not created!"
+msgstr "Nový soubor linuxfs nebyl vytvořen!"
+
+#: bin/live-remaster:456
+msgid "Could not mount new file as %s!"
+msgstr "Nelze připojit nový soubor jako %s!"
+
+#: bin/live-remaster:467
+msgid "linuxfs size"
+msgstr "velikost linuxfs"
+
+#: bin/live-remaster:468
+msgid "elapsed time"
+msgstr "strávený čas"
+
+#: bin/live-remaster:469
+msgid "processors"
+msgstr "procesory"
+
+#: bin/live-remaster:470
+msgid "compression"
+msgstr "komprese"
+
+#: bin/live-remaster:484
+msgid "Error"
+msgstr "Chyba"
+
+#: bin/live-remaster:489
+msgid "Do you want to save the incomplete file?"
+msgstr "Chcete uložit nedokončený soubor?"

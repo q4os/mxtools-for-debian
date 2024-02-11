@@ -1,0 +1,277 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# Feri, 2022
+msgid ""
+msgstr ""
+"Project-Id-Version: antix-development\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-10-22 19:22-0600\n"
+"PO-Revision-Date: 2015-05-07 19:18+0000\n"
+"Last-Translator: Feri, 2022\n"
+"Language-Team: Hungarian (http://www.transifex.com/anticapitalista/antix-development/language/hu/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: hu\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: bin/live-remaster:29
+msgid ""
+"Create a new compressed file system saving all of the changes you have made "
+"to the system."
+msgstr "Létrehoz egy új, tömörített fájlrendszert a rendszeren eddig történt változtatások rögzítésével."
+
+#: bin/live-remaster:35
+msgid "Extra options for"
+msgstr "Extra opciók ehhez"
+
+#: bin/live-remaster:36
+msgid "Make a smaller linuxfs.new.  NOT deleted when done."
+msgstr "Kisebb linuxfs.new fájlt készít. NEM törli amikor kész."
+
+#: bin/live-remaster:37
+msgid "Use %s instead of prompting user for title."
+msgstr "A %s használata, ahelyett, hogy bekérné a címet."
+
+#: bin/live-remaster:38
+msgid "Make a general-purpose remaster."
+msgstr "Általános célú lemezkép létrehozása."
+
+#: bin/live-remaster:39
+msgid "Make a personalized remaster."
+msgstr "Személyes lemezkép létrehozása."
+
+#: bin/live-remaster:71
+msgid "The live file system is read-only.  Cannot remaster."
+msgstr "A fájlrendszer nem írható. Nem hozható létre lemezkép."
+
+#: bin/live-remaster:73
+msgid "General"
+msgstr "Általános"
+
+#: bin/live-remaster:74
+msgid "Personal"
+msgstr "Személyes"
+
+#: bin/live-remaster:81
+msgid "%s uses your personal settings."
+msgstr "A %s az ön személyes beállításait használja."
+
+#: bin/live-remaster:82
+msgid "%s does not."
+msgstr "Az %s nem."
+
+#: bin/live-remaster:95
+msgid "Do you want to save files under %s in the new remaster?"
+msgstr "Szeretné a %s alatti fájlokat belementeni az új lemezképbe?"
+
+#: bin/live-remaster:101
+msgid "Checking for existing files and"
+msgstr "Meglévő fájlok ellenőrzése és"
+
+#: bin/live-remaster:102
+msgid "Checking if there is enough room ..."
+msgstr "A rendelkezésre álló hely ellenőrzése..."
+
+#: bin/live-remaster:113
+msgid "The %s program was unable to start"
+msgstr "A %s nem tudott elindulni"
+
+#: bin/live-remaster:165
+msgid "current linuxfs size"
+msgstr "jelenlegi linuxfs méret"
+
+#: bin/live-remaster:166
+msgid "excluded files est."
+msgstr "kihagyott fájlok kb."
+
+#: bin/live-remaster:167 bin/live-remaster:168
+msgid "estimated new size"
+msgstr "becsült új méret"
+
+#: bin/live-remaster:174
+msgid "boot device total"
+msgstr "indítási eszköz összesen"
+
+#: bin/live-remaster:175
+msgid "boot device free"
+msgstr "indítási eszköz szabad"
+
+#: bin/live-remaster:176 bin/live-remaster:177
+msgid "est. remaining"
+msgstr "becsült fennmaradó"
+
+#: bin/live-remaster:194
+msgid "Have: %s megs available.  Need: %s."
+msgstr "Elérhető: %s MB szabad hely. Szüskéges: %s."
+
+#: bin/live-remaster:198
+msgid "Leftover files found"
+msgstr "Maradvány fájlok találhatók"
+
+#: bin/live-remaster:200
+msgid "The following file(s) already exist"
+msgstr "Az alábbi fájlok már léteznek"
+
+#: bin/live-remaster:201
+msgid "in the %s directory:"
+msgstr "a %s könyvtárban:"
+
+#: bin/live-remaster:205
+msgid "They may be left over from a previous remastering."
+msgstr "Ezek maradványok lehetnek egy korábbi lemezképbe rögzítésből."
+
+#: bin/live-remaster:206
+msgid "Do you want to fix this problem now?"
+msgstr "Szeretné most javítani ezt a problémát?"
+
+#: bin/live-remaster:207
+msgid "(the alternative is to quit now)"
+msgstr "(a másik lehetőség a kilépés)"
+
+#: bin/live-remaster:221
+msgid "Ready to create a new linuxfs file"
+msgstr "Minden készen áll az új linuxfs létrehozására"
+
+#: bin/live-remaster:225
+msgid "Shall we begin?"
+msgstr "Elindítja a folyamatot?"
+
+#: bin/live-remaster:235
+msgid "(compresses faster, boots faster)"
+msgstr "(gyorsabban tömörít, gyorsabban indul)"
+
+#: bin/live-remaster:236
+msgid "(compresses better)"
+msgstr "(jobban tömörít)"
+
+#: bin/live-remaster:242
+msgid "Please choose the type of compression to use"
+msgstr "Válassza ki a használandó tömörítési módot"
+
+#: bin/live-remaster:243
+msgid "%s will take less time"
+msgstr "%s hamarabb kész van"
+
+#: bin/live-remaster:244
+msgid "%s will result in a smaller file"
+msgstr "%s kisebb fájlt eredményez"
+
+#: bin/live-remaster:260
+msgid "Do you want remaster to use all of the CPUs?"
+msgstr "Kívánja az összes processzort használni a folyamathoz?"
+
+#: bin/live-remaster:262
+msgid "This will make the remaster process run as fast as possible."
+msgstr "Ezzel érhető el a lemezkép készítés legnagyobb sebessége."
+
+#: bin/live-remaster:263
+msgid "But there is more of a chance your computer will overheat."
+msgstr "De több esélye van, hogy esetleg túlmelegszik a számítógép."
+
+#: bin/live-remaster:272
+msgid "Remaster Version Identification"
+msgstr "Lemezképbe rögzítés verzió azonosítása"
+
+#: bin/live-remaster:274
+msgid "Please enter an (optional) title for this remaster"
+msgstr "Adjon meg egy címez ehhez a lemezképhez (nem kötelező)"
+
+#: bin/live-remaster:295
+msgid "The %s program failed to work"
+msgstr "A %s program nem működött"
+
+#: bin/live-remaster:335
+msgid "Remastering -- DO NOT CLOSE"
+msgstr "Lemezképbe rögzítés - NE ZÁRJA BE"
+
+#: bin/live-remaster:351
+msgid "Remaster in Progress"
+msgstr "Lemezképbe rögzítés folyamatban"
+
+#: bin/live-remaster:352
+msgid "Do you REALLY want to stop midway?"
+msgstr "TELJESEN biztos benne, hogy megállítja félúton?"
+
+#: bin/live-remaster:379
+msgid "Created new compressed filesystem file:"
+msgstr "Új, tömörített fájlrendszer fájl létrehozva:"
+
+#: bin/live-remaster:384
+msgid "The new file should be used automatically the next time you boot."
+msgstr "A következő rendszerindításkor ez automatikusan használatba kell kerüljön."
+
+#: bin/live-remaster:386
+msgid "If there is a problem with the new system:"
+msgstr "Ha probléma lenne az új rendszerrel:"
+
+#: bin/live-remaster:387
+msgid "Use the %s  boot option to return to the current system."
+msgstr "Használja a %s indítási opciót, hogy visszatérjen a jelenlegi rendszerhez."
+
+#: bin/live-remaster:411
+msgid "Root persistence is enabled"
+msgstr "Gyökérkönyvtár adatmegőrzés be van kapcsolva"
+
+#: bin/live-remaster:413
+msgid "Do you want to make a new %s file now?"
+msgstr "Szeretne most egy új %s fájlt készíteni?"
+
+#: bin/live-remaster:421
+msgid "Remaster in progress"
+msgstr "Lemezképbe rögzítés folyamatban"
+
+#: bin/live-remaster:423
+msgid "please be patient"
+msgstr "kérjük várjon"
+
+#: bin/live-remaster:424
+msgid "(even after it says it is 100% done)"
+msgstr "(azután is, hogy eléri a 100%-ot)"
+
+#: bin/live-remaster:429
+msgid "antiX Remaster in Progress"
+msgstr "antiX Lemezképbe rögzítés folyamatban"
+
+#: bin/live-remaster:445
+msgid "Remastering Terminated Early"
+msgstr "A lemezképbe rögzítés korán megszakadt"
+
+#: bin/live-remaster:450
+msgid "Remastering Failed"
+msgstr "A lemezképbe rögzítés sikertelen"
+
+#: bin/live-remaster:452
+msgid "New linuxfs file was not created!"
+msgstr "Nem lett létrehozva új linuxfs fájl!"
+
+#: bin/live-remaster:456
+msgid "Could not mount new file as %s!"
+msgstr "Nem sikerült az új fájl csatolása mint %s!"
+
+#: bin/live-remaster:467
+msgid "linuxfs size"
+msgstr "linuxfs mérete"
+
+#: bin/live-remaster:468
+msgid "elapsed time"
+msgstr "eltelt idő"
+
+#: bin/live-remaster:469
+msgid "processors"
+msgstr "processzor"
+
+#: bin/live-remaster:470
+msgid "compression"
+msgstr "tömörítés"
+
+#: bin/live-remaster:484
+msgid "Error"
+msgstr "Hiba"
+
+#: bin/live-remaster:489
+msgid "Do you want to save the incomplete file?"
+msgstr "Kívánja menteni a befejezetlen fájlt?"

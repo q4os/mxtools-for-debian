@@ -1,0 +1,120 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# Guybrush88 <erpizzo@alice.it>, 2014
+# Pierluigi Mario <pierluigimariomail@gmail.com>, 2014-2016
+msgid ""
+msgstr ""
+"Project-Id-Version: antix-development\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-10-06 10:59-0600\n"
+"PO-Revision-Date: 2012-01-01 11:17+0000\n"
+"Last-Translator: Guybrush88 <erpizzo@alice.it>, 2014\n"
+"Language-Team: Italian (http://www.transifex.com/anticapitalista/antix-development/language/it/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: it\n"
+"Plural-Forms: nplurals=3; plural=n == 1 ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
+
+#: bin/persist-save:14
+msgid "antiX Save Persistent Root"
+msgstr "antiX Salva Persistenza Root"
+
+#: bin/persist-save:17
+msgid "Manually save filesystem changes in %s file for persistent root."
+msgstr "Salvare manualmente le modifiche al filesystem nel file %s per root persistente."
+
+#: bin/persist-save:18
+msgid "You MUST run a program like this to save your filesystem changes."
+msgstr "Tu DEVI eseguire un programma come questo per salvare i cambiamenti del tuo filesystem."
+
+#: bin/persist-save:43
+msgid "%s was not enabled.  Cannot %s"
+msgstr "%s non era abilitata. Non è possibile fare %s"
+
+#: bin/persist-save:46 bin/persist-save:138
+msgid "Shall we begin?"
+msgstr "Possiamo iniziare?"
+
+#: bin/persist-save:47 bin/persist-save:139
+msgid "Stopping at user's request"
+msgstr "Si interrompe la richiesta all'utente"
+
+#: bin/persist-save:55
+msgid "The persistence device with UUID %s was not found"
+msgstr "Il dispositivo con persistenza, con UUID %s , non è stato trovato"
+
+#: bin/persist-save:56
+msgid "Please plug in the persistence device and try again"
+msgstr "Prego re-inserisci il dispositivo e riprova"
+
+#: bin/persist-save:74
+msgid "On VID error"
+msgstr "Errore su VID"
+
+#: bin/persist-save:82
+msgid "Checking for existing files and"
+msgstr "Verifica dei file esistenti e"
+
+#: bin/persist-save:83
+msgid "Checking if there is enough room ..."
+msgstr "Verifica se c'è spazio sufficiente ..."
+
+#: bin/persist-save:113
+msgid "persist device"
+msgstr "dispositivo con persistenza"
+
+#: bin/persist-save:114
+msgid "mounted at"
+msgstr "montato su"
+
+#: bin/persist-save:127
+msgid "Available space, %s, is smaller than the margin of %s."
+msgstr "Lo spazio disponibile, %s, è più piccolo del margine di %s."
+
+#: bin/persist-save:131
+msgid "Insufficient space.  Have: %s. Need: %s."
+msgstr "Spazio insufficiente. Spazio presente: %s. Spazio richiesto: %s."
+
+#: bin/persist-save:134
+msgid "Ready to sync file system changes"
+msgstr "Pronto a sincronizzare i cambiamenti del filesystem"
+
+#: bin/persist-save:142
+msgid "Performing rsync ... please be patient"
+msgstr "Attivazione di rsync ... si prega di essere pazienti"
+
+#: bin/persist-save:178
+msgid "%s The rsync command failed Failed! %s"
+msgstr "%s Il comando rsync non è andato a buon fine. Azione Fallita! %s"
+
+#: bin/persist-save:180
+msgid "It returned an exit code of %s"
+msgstr "Ha restituito un codice di uscita %s"
+
+#: bin/persist-save:181
+msgid "See the rsync man page to look up its meaning."
+msgstr "Vedi la pagina di man, il manuale via terminale, di rsync per capirne il significato"
+
+#: bin/persist-save:185 bin/persist-save:192
+msgid "%s succeeded"
+msgstr "%s ha avuto successo"
+
+#: bin/persist-save:194
+msgid "    Your changes were saved in:"
+msgstr "Le tue modifiche sono state salvate in:"
+
+#: bin/persist-save:217
+msgid "Missing rootfs version file %s"
+msgstr "Non si trova la versione %s di file system rootfs "
+
+#: bin/persist-save:220
+msgid "Missing version ID in rootfs file system"
+msgstr "Non si trova l' ID della versione di file system rootfs"
+
+#: bin/persist-save:223
+msgid "Version id inside of %s file does not match"
+msgstr "L'id della versione del file %s non corrisponde"

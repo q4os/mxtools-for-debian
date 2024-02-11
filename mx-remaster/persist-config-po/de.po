@@ -1,0 +1,161 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# alfredmale <maledora4@googlemail.com>, 2015
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2012
+# Jerry Bond, 2015
+msgid ""
+msgstr ""
+"Project-Id-Version: antix-development\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-04-03 12:45-0600\n"
+"PO-Revision-Date: 2012-01-01 11:16+0000\n"
+"Last-Translator: Jerry Bond, 2015\n"
+"Language-Team: German (http://www.transifex.com/anticapitalista/antix-development/language/de/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: de\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: bin/persist-config:12
+msgid "antiX Root Persistence Auto-Save Configuration"
+msgstr "Automatische Speicherung der antiX Root-Persistenz-Konfiguration"
+
+#: bin/persist-config:20
+msgid "Automatic"
+msgstr "Automatisch"
+
+#: bin/persist-config:21
+msgid "Semi-Automatic"
+msgstr "Halbautomatisch"
+
+#: bin/persist-config:22
+msgid "Manual"
+msgstr "Manuell"
+
+#: bin/persist-config:23
+msgid "Quit"
+msgstr "Beenden"
+
+#: bin/persist-config:29
+msgid "Configure root persistence saves to run either:"
+msgstr "Konfigurieren Sie root Persistenz um zu speichern oder auszuführen:"
+
+#: bin/persist-config:31
+msgid "at shutdown/reboot, no asking"
+msgstr "beim Herunterfahren/Neustart nicht fragen"
+
+#: bin/persist-config:32
+msgid "ask at shutdown/reboot"
+msgstr "fragen beim Herunterfahren/Neustart"
+
+#: bin/persist-config:33
+msgid "you snooze, you lose"
+msgstr "wenn Sie schlafen, verlieren Sie"
+
+#: bin/persist-config:35
+msgid ""
+"This program should be called with the %s option in a startup script to "
+"ensure a config file is created."
+msgstr "Dieses Programm sollte mit der Option %s aus einem Startup-Script aufgerufen werden, um die Erstellung einer Konfigurations-Datei zu gewährleisten."
+
+#: bin/persist-config:37
+msgid ""
+"It should be called with the %s option in shutdown scripts so your changes "
+"can be saved before shutting down."
+msgstr "Es sollte mit der %s Option das Shutdown-Skript aufrufen, damit Ihre Änderungen vor dem Beenden gespeichert werden."
+
+#: bin/persist-config:45
+msgid "%s specific options"
+msgstr "%s spezifische Optionen"
+
+#: bin/persist-config:46
+msgid "Create a %s file if one is missing."
+msgstr "Erstelle eine %s Datei, wenn eine fehlt."
+
+#: bin/persist-config:47
+msgid "Run persist-save as directed by %s file."
+msgstr "Ausführen persist-Speichern unter Regie durch %s Datei."
+
+#: bin/persist-config:48
+msgid "Run %s if %s succeeded."
+msgstr "Ausführen %s wenn %s erfolgreich."
+
+#: bin/persist-config:49
+msgid "If %s fails prompt user before running %s."
+msgstr "Wenn %s fehlschlägt, Eingabeaufforderung an den Benutzer vor dem Ausführen von %s."
+
+#: bin/persist-config:50
+msgid "implies %s"
+msgstr "impliziert %s"
+
+#: bin/persist-config:52
+msgid "Config file is located at: %s"
+msgstr "Konfigurations-Datei befindet sich unter: %s"
+
+#: bin/persist-config:90
+msgid "Current mode is: %s"
+msgstr "Aktueller Modus ist: %s"
+
+#: bin/persist-config:92
+msgid "There is no current auto-save mode.  The default is: %s."
+msgstr "Es gibt keinen aktuellen Auto-Save Modus. Der Standard ist: %s."
+
+#: bin/persist-config:102
+msgid "save on shutdown/reboot automatically.  No asking."
+msgstr "speichern Sie Herunterfahren/Neustart automatisch. Ohne fragen."
+
+#: bin/persist-config:103
+msgid "ask to save on shutdown/reboot."
+msgstr "ohne zu speichern Herunterfahren/Neustart."
+
+#: bin/persist-config:104
+msgid "only save changes manually (you snooze, you lose)."
+msgstr "Änderungen lediglich manuell speichern."
+
+#: bin/persist-config:105
+msgid "use current default."
+msgstr "Aktuellen Standard benutzen"
+
+#: bin/persist-config:117
+msgid "Auto-save mode set to %s in %s."
+msgstr "Auto-Save Modus setzen auf %s in %s."
+
+#: bin/persist-config:123
+msgid "It looks like root persistence was just enabled."
+msgstr "Es sieht aus wie root Persistenz war gerade aktiviert."
+
+#: bin/persist-config:124
+msgid "Please set the save-mode for root persistence."
+msgstr "Bitte setzen Sie den Speichermodus für root Persistenz."
+
+#: bin/persist-config:125
+msgid "You will only have to do this once."
+msgstr "Sie werden dies lediglich einmal tun müssen."
+
+#: bin/persist-config:127
+msgid "You can change your choice later with %s."
+msgstr "Sie können Ihre Auswahl später mit %s ändern."
+
+#: bin/persist-config:159
+msgid "Already saved less than %s seconds ago"
+msgstr "Schon gespeichert vor weniger als %s Sekunden"
+
+#: bin/persist-config:160
+msgid "Won't autosave within %s seconds of a previous save"
+msgstr "Autosave nicht möglich innerhalb %s Sekunden nach einer früheren Speicherung"
+
+#: bin/persist-config:199
+msgid "CONFIRM"
+msgstr "BESTÄTIGEN"
+
+#: bin/persist-config:200
+msgid "There was an error saving your changes."
+msgstr "Es gab einen Fehler bei der Speicherung deiner Änderungen."
+
+#: bin/persist-config:202
+msgid "Do you still want to %s?"
+msgstr "Wollen Sie immer noch %s?"

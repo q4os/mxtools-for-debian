@@ -1,0 +1,160 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# En Kerro <inactive+ekeimaja@transifex.com>, 2018
+# Oi Suomi On! <oisuomion@protonmail.com>, 2020
+msgid ""
+msgstr ""
+"Project-Id-Version: antix-development\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-04-03 12:45-0600\n"
+"PO-Revision-Date: 2012-01-01 11:16+0000\n"
+"Last-Translator: Oi Suomi On! <oisuomion@protonmail.com>, 2020\n"
+"Language-Team: Finnish (http://www.transifex.com/anticapitalista/antix-development/language/fi/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: fi\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: bin/persist-config:12
+msgid "antiX Root Persistence Auto-Save Configuration"
+msgstr "antiX Juurikäytön Persistenssi-tilavaran Automaatti-Tallennus Asetelma"
+
+#: bin/persist-config:20
+msgid "Automatic"
+msgstr "Automaattinen"
+
+#: bin/persist-config:21
+msgid "Semi-Automatic"
+msgstr "Puoliautomaattinen"
+
+#: bin/persist-config:22
+msgid "Manual"
+msgstr "Käyttöohje"
+
+#: bin/persist-config:23
+msgid "Quit"
+msgstr "Lopeta"
+
+#: bin/persist-config:29
+msgid "Configure root persistence saves to run either:"
+msgstr "Määritä juurikäytön persistenssi-tilavara tallennukset ajettavaksi joko:"
+
+#: bin/persist-config:31
+msgid "at shutdown/reboot, no asking"
+msgstr "Sammutettaessa/käynnistettäessä uudelleen, ei kysytä"
+
+#: bin/persist-config:32
+msgid "ask at shutdown/reboot"
+msgstr "Kysy sammutettaessa/käynnistettäessä uudelleen"
+
+#: bin/persist-config:33
+msgid "you snooze, you lose"
+msgstr "jos torkahdat niin kosahtaa"
+
+#: bin/persist-config:35
+msgid ""
+"This program should be called with the %s option in a startup script to "
+"ensure a config file is created."
+msgstr "Tämä ohjelma tulisi kutsua valitsimella %s käynnistyskirjoituskoodissa jotta varmistettaisiin asetustiedoston luonti."
+
+#: bin/persist-config:37
+msgid ""
+"It should be called with the %s option in shutdown scripts so your changes "
+"can be saved before shutting down."
+msgstr "se tulisi kutsua valitsimella %s järjestelmänsammutuksen kirjoituskoodissa jotta muutokset voidaan tallenta ennen sammutusta."
+
+#: bin/persist-config:45
+msgid "%s specific options"
+msgstr "%s erityisvalinnat"
+
+#: bin/persist-config:46
+msgid "Create a %s file if one is missing."
+msgstr "Luo %s tiedosto jos sellaista ei löydy."
+
+#: bin/persist-config:47
+msgid "Run persist-save as directed by %s file."
+msgstr "Aja tilavara-tallennus kuten ohjattu %s tiedostossa."
+
+#: bin/persist-config:48
+msgid "Run %s if %s succeeded."
+msgstr "Suorita %s jos %s onnistui."
+
+#: bin/persist-config:49
+msgid "If %s fails prompt user before running %s."
+msgstr "Jos %sepäonnistuu anna käyttäjälle kehote ennen %sajamista. "
+
+#: bin/persist-config:50
+msgid "implies %s"
+msgstr "vihjaa %s"
+
+#: bin/persist-config:52
+msgid "Config file is located at: %s"
+msgstr "Konfiguraatiotiedoston sijainti on: %s"
+
+#: bin/persist-config:90
+msgid "Current mode is: %s"
+msgstr "Tämänhetkinen tila on: %s"
+
+#: bin/persist-config:92
+msgid "There is no current auto-save mode.  The default is: %s."
+msgstr "Tämänhetkistä automaatti-tallennus tilaa ei ole. Vakio on: %s."
+
+#: bin/persist-config:102
+msgid "save on shutdown/reboot automatically.  No asking."
+msgstr "tallenna sammuttaessa/uudelleenkäynnistettäessä automaattisesti. Ei kyselyä."
+
+#: bin/persist-config:103
+msgid "ask to save on shutdown/reboot."
+msgstr "Kysy tallennusta sammutettaessa/käynnistettäessä uudelleen"
+
+#: bin/persist-config:104
+msgid "only save changes manually (you snooze, you lose)."
+msgstr "tallenna vain käsin (jos torkahdat niin kosahtaa)."
+
+#: bin/persist-config:105
+msgid "use current default."
+msgstr "käytä tämänhetkistä vakiota."
+
+#: bin/persist-config:117
+msgid "Auto-save mode set to %s in %s."
+msgstr "Automaatti-tallennus tila asetettu %s %s :ssä."
+
+#: bin/persist-config:123
+msgid "It looks like root persistence was just enabled."
+msgstr "Näyttää siltä että juurikäytön persistenssi-tilavaraus on tuoreeltaan otettu käyttöön."
+
+#: bin/persist-config:124
+msgid "Please set the save-mode for root persistence."
+msgstr "Aseta tallennus-tila juurikäytön persistenssi-tilavaraukselle."
+
+#: bin/persist-config:125
+msgid "You will only have to do this once."
+msgstr "Sinun tarvitsee tehdä tämä vain kerran."
+
+#: bin/persist-config:127
+msgid "You can change your choice later with %s."
+msgstr "Voit vaihtaa valintasi myöhemmin %s kautta."
+
+#: bin/persist-config:159
+msgid "Already saved less than %s seconds ago"
+msgstr "Valmiiksi tallennettu alle %ssekuntia sitten"
+
+#: bin/persist-config:160
+msgid "Won't autosave within %s seconds of a previous save"
+msgstr "Ei voida tehdä automaattista tallennusta %s sekuntia edellisestä tallennuksesta"
+
+#: bin/persist-config:199
+msgid "CONFIRM"
+msgstr "VAHVISTA"
+
+#: bin/persist-config:200
+msgid "There was an error saving your changes."
+msgstr "Tapahtui virhe tallennettaessa muutoksia."
+
+#: bin/persist-config:202
+msgid "Do you still want to %s?"
+msgstr "Haluatko silti %s?"

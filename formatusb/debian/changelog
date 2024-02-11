@@ -1,3 +1,9 @@
+formatusb (24.01.01) mx; urgency=medium
+
+  * update translations 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Tue, 09 Jan 2024 23:09:11 -0500
+
 formatusb (23.12.01) mx; urgency=medium
 
   * fix langauage issue combobox

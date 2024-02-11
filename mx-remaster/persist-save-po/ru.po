@@ -1,0 +1,120 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# Andrei Stepanov, 2022-2023
+# Вячеслав Волошин <vol_vel@mail.ru>, 2015-2016
+msgid ""
+msgstr ""
+"Project-Id-Version: antix-development\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-10-06 10:59-0600\n"
+"PO-Revision-Date: 2012-01-01 11:17+0000\n"
+"Last-Translator: Andrei Stepanov, 2022-2023\n"
+"Language-Team: Russian (http://app.transifex.com/anticapitalista/antix-development/language/ru/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: ru\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%100>=11 && n%100<=14)? 2 : 3);\n"
+
+#: bin/persist-save:14
+msgid "antiX Save Persistent Root"
+msgstr "antiX Сохранение корневой папки"
+
+#: bin/persist-save:17
+msgid "Manually save filesystem changes in %s file for persistent root."
+msgstr "Вручную сохранить изменения файловой системы в файле %s для корневой папки."
+
+#: bin/persist-save:18
+msgid "You MUST run a program like this to save your filesystem changes."
+msgstr "Вы ДОЛЖНЫ запустить эту программу для сохранения изменений вашей файловой системы."
+
+#: bin/persist-save:43
+msgid "%s was not enabled.  Cannot %s"
+msgstr "%s не было включено. Невозможно %s"
+
+#: bin/persist-save:46 bin/persist-save:138
+msgid "Shall we begin?"
+msgstr "Приступить?"
+
+#: bin/persist-save:47 bin/persist-save:139
+msgid "Stopping at user's request"
+msgstr "Остановка по требованию пользователя"
+
+#: bin/persist-save:55
+msgid "The persistence device with UUID %s was not found"
+msgstr "Устройство сохранения с UUID %s не найдено"
+
+#: bin/persist-save:56
+msgid "Please plug in the persistence device and try again"
+msgstr "Пожалуйста, подключите устройство сохранения и попробуйте еще раз"
+
+#: bin/persist-save:74
+msgid "On VID error"
+msgstr "Ошибка версии ID"
+
+#: bin/persist-save:82
+msgid "Checking for existing files and"
+msgstr "Проверка существующих файлов и"
+
+#: bin/persist-save:83
+msgid "Checking if there is enough room ..."
+msgstr "Проверка доступного места..."
+
+#: bin/persist-save:113
+msgid "persist device"
+msgstr "устройство сохранения"
+
+#: bin/persist-save:114
+msgid "mounted at"
+msgstr "смонтировано на"
+
+#: bin/persist-save:127
+msgid "Available space, %s, is smaller than the margin of %s."
+msgstr "Свободное пространство, %s, меньше, чем границы %s."
+
+#: bin/persist-save:131
+msgid "Insufficient space.  Have: %s. Need: %s."
+msgstr "Недостаточно места.  Имеем: %s. Требуется: %s."
+
+#: bin/persist-save:134
+msgid "Ready to sync file system changes"
+msgstr "Готово для синхронизации изменений файловой системы"
+
+#: bin/persist-save:142
+msgid "Performing rsync ... please be patient"
+msgstr "Выполнение rsync... пожалуйста, подождите"
+
+#: bin/persist-save:178
+msgid "%s The rsync command failed Failed! %s"
+msgstr "%s Команда rsync не выполнена! %s"
+
+#: bin/persist-save:180
+msgid "It returned an exit code of %s"
+msgstr "Возврат с кодом выхода %s"
+
+#: bin/persist-save:181
+msgid "See the rsync man page to look up its meaning."
+msgstr "Смотрите страницу rsync man, чтобы узнать его значение."
+
+#: bin/persist-save:185 bin/persist-save:192
+msgid "%s succeeded"
+msgstr "%s успешно"
+
+#: bin/persist-save:194
+msgid "    Your changes were saved in:"
+msgstr "Ваши изменения были сохранены в:"
+
+#: bin/persist-save:217
+msgid "Missing rootfs version file %s"
+msgstr "Отсутствует файл версии корневой файловой системы %s"
+
+#: bin/persist-save:220
+msgid "Missing version ID in rootfs file system"
+msgstr "Отсутствует идентификатор версии корневой файловой системы"
+
+#: bin/persist-save:223
+msgid "Version id inside of %s file does not match"
+msgstr "Версия ID внутри файла %s не совпадает"

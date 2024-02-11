@@ -78,216 +78,216 @@ void MainWindow::setup()
     // setup title block & icons
     QSettings settings(QStringLiteral("/usr/share/mx-welcome/mx-welcome.conf"), QSettings::NativeFormat);
     QSettings settingsusr(QStringLiteral("/etc/mx-welcome/mx-welcome.conf"), QSettings::NativeFormat);
-    QString DISTRO = settings.value(QStringLiteral("DISTRO")).toString();
+    QString DISTRO = settingsusr.value(QStringLiteral("DISTRO")).toString();
     if (DISTRO.isEmpty()) {
-        DISTRO = settingsusr.value(QStringLiteral("DISTRO")).toString();
+        DISTRO = settings.value(QStringLiteral("DISTRO")).toString();
     }
-    QString CODENAME = settings.value(QStringLiteral("CODENAME")).toString();
+    QString CODENAME = settingsusr.value(QStringLiteral("CODENAME")).toString();
     if (CODENAME.isEmpty()) {
-        CODENAME = settingsusr.value(QStringLiteral("CODENAME")).toString();
+        CODENAME = settings.value(QStringLiteral("CODENAME")).toString();
     }
 
-    QString HEADER = settings.value(QStringLiteral("HEADER")).toString();
+    QString HEADER = settingsusr.value(QStringLiteral("HEADER")).toString();
     if (HEADER.isEmpty()) {
-        HEADER = settingsusr.value(QStringLiteral("HEADER")).toString();
+        HEADER = settings.value(QStringLiteral("HEADER")).toString();
     }
 
-    QString LOGO = settings.value(QStringLiteral("LOGO")).toString();
+    QString LOGO = settingsusr.value(QStringLiteral("LOGO")).toString();
     if (LOGO.isEmpty()) {
-        LOGO = settingsusr.value(QStringLiteral("LOGO")).toString();
+        LOGO = settings.value(QStringLiteral("LOGO")).toString();
     }
 
-    QString SUPPORTED = settings.value(QStringLiteral("SUPPORTED")).toString();
+    QString SUPPORTED = settingsusr.value(QStringLiteral("SUPPORTED")).toString();
     if (SUPPORTED.isEmpty()) {
-        SUPPORTED = settingsusr.value(QStringLiteral("SUPPORTED")).toString();
+        SUPPORTED = settings.value(QStringLiteral("SUPPORTED")).toString();
     }
 
-    TOSCMD = settings.value(QStringLiteral("TOSCMD")).toString();
+    TOSCMD = settingsusr.value(QStringLiteral("TOSCMD")).toString();
     if (TOSCMD.isEmpty()) {
-        TOSCMD = settingsusr.value(QStringLiteral("TOSCMD")).toString();
+        TOSCMD = settings.value(QStringLiteral("TOSCMD")).toString();
     }
-    QString TOSTEXT = settings.value(QStringLiteral("TOSTEXT")).toString();
+    QString TOSTEXT = settingsusr.value(QStringLiteral("TOSTEXT")).toString();
     if (TOSTEXT.isEmpty()) {
-        TOSTEXT = settingsusr.value(QStringLiteral("TOSTEXT")).toString();
+        TOSTEXT = settings.value(QStringLiteral("TOSTEXT")).toString();
     }
     if (!TOSTEXT.isEmpty()) {
-        ui->buttonFAQ->setText(TOSTEXT);
+        ui->labelTOS->setText(TOSTEXT);
     }
 
-    QString SETUP = settings.value(QStringLiteral("1icon")).toString();
+    QString SETUP = settingsusr.value(QStringLiteral("1icon")).toString();
     if (SETUP.isEmpty()) {
-        SETUP = settingsusr.value(QStringLiteral("1icon")).toString();
+        SETUP = settings.value(QStringLiteral("1icon")).toString();
     }
-    QString SETUPTEXT = settings.value(QStringLiteral("1text")).toString();
+    QString SETUPTEXT = settingsusr.value(QStringLiteral("1text")).toString();
     if (SETUPTEXT.isEmpty()) {
-        SETUPTEXT = settingsusr.value(QStringLiteral("1text")).toString();
+        SETUPTEXT = settings.value(QStringLiteral("1text")).toString();
     }
     if (!SETUPTEXT.isEmpty()) {
         ui->buttonSetup->setText(SETUPTEXT);
     }
-    SETUPCMD = settings.value(QStringLiteral("1command")).toString();
+    SETUPCMD = settingsusr.value(QStringLiteral("1command")).toString();
     if (SETUPCMD.isEmpty()) {
-        SETUPCMD = settingsusr.value(QStringLiteral("1command")).toString();
+        SETUPCMD = settings.value(QStringLiteral("1command")).toString();
     }
 
-    QString FAQ = settings.value(QStringLiteral("2icon")).toString();
+    QString FAQ = settingsusr.value(QStringLiteral("2icon")).toString();
     if (FAQ.isEmpty()) {
-        FAQ = settingsusr.value(QStringLiteral("2icon")).toString();
+        FAQ = settings.value(QStringLiteral("2icon")).toString();
     }
-    QString FAQTEXT = settings.value(QStringLiteral("2text")).toString();
+    QString FAQTEXT = settingsusr.value(QStringLiteral("2text")).toString();
     if (FAQTEXT.isEmpty()) {
-        FAQTEXT = settingsusr.value(QStringLiteral("2text")).toString();
+        FAQTEXT = settings.value(QStringLiteral("2text")).toString();
     }
     if (!FAQTEXT.isEmpty()) {
         ui->buttonFAQ->setText(FAQTEXT);
     }
-    FAQCMD = settings.value(QStringLiteral("2command")).toString();
+    FAQCMD = settingsusr.value(QStringLiteral("2command")).toString();
     if (FAQCMD.isEmpty()) {
-        FAQCMD = settingsusr.value(QStringLiteral("2command")).toString();
+        FAQCMD = settings.value(QStringLiteral("2command")).toString();
     }
 
-    QString FORUMS = settings.value(QStringLiteral("3icon")).toString();
+    QString FORUMS = settingsusr.value(QStringLiteral("3icon")).toString();
     if (FORUMS.isEmpty()) {
-        FORUMS = settingsusr.value(QStringLiteral("3icon")).toString();
+        FORUMS = settings.value(QStringLiteral("3icon")).toString();
     }
-    QString FORUMTEXT = settings.value(QStringLiteral("3text")).toString();
+    QString FORUMTEXT = settingsusr.value(QStringLiteral("3text")).toString();
     if (FORUMTEXT.isEmpty()) {
-        FORUMTEXT = settingsusr.value(QStringLiteral("3text")).toString();
+        FORUMTEXT = settings.value(QStringLiteral("3text")).toString();
     }
     if (!FORUMTEXT.isEmpty()) {
         ui->buttonForum->setText(FORUMTEXT);
     }
-    FORUMCMD = settings.value(QStringLiteral("3command")).toString();
+    FORUMCMD = settingsusr.value(QStringLiteral("3command")).toString();
     if (FORUMCMD.isEmpty()) {
-        FORUMCMD = settingsusr.value(QStringLiteral("3command")).toString();
+        FORUMCMD = settings.value(QStringLiteral("3command")).toString();
     }
 
-    QString MANUAL = settings.value(QStringLiteral("4icon")).toString();
+    QString MANUAL = settingsusr.value(QStringLiteral("4icon")).toString();
     if (MANUAL.isEmpty()) {
-        MANUAL = settingsusr.value(QStringLiteral("4icon")).toString();
+        MANUAL = settings.value(QStringLiteral("4icon")).toString();
     }
-    QString MANUALTEXT = settings.value(QStringLiteral("4text")).toString();
+    QString MANUALTEXT = settingsusr.value(QStringLiteral("4text")).toString();
     if (MANUALTEXT.isEmpty()) {
-        MANUALTEXT = settingsusr.value(QStringLiteral("4text")).toString();
+        MANUALTEXT = settings.value(QStringLiteral("4text")).toString();
     }
     if (!MANUALTEXT.isEmpty()) {
         ui->buttonManual->setText(MANUALTEXT);
     }
-    MANUALCMD = settings.value(QStringLiteral("4command")).toString();
+    MANUALCMD = settingsusr.value(QStringLiteral("4command")).toString();
     if (MANUALCMD.isEmpty()) {
-        MANUALCMD = settingsusr.value(QStringLiteral("4command")).toString();
+        MANUALCMD = settings.value(QStringLiteral("4command")).toString();
     }
 
-    QString VIDEOS = settings.value(QStringLiteral("5icon")).toString();
+    QString VIDEOS = settingsusr.value(QStringLiteral("5icon")).toString();
     if (VIDEOS.isEmpty()) {
-        VIDEOS = settingsusr.value(QStringLiteral("5icon")).toString();
+        VIDEOS = settings.value(QStringLiteral("5icon")).toString();
     }
-    QString VIDEOTEXT = settings.value(QStringLiteral("5text")).toString();
+    QString VIDEOTEXT = settingsusr.value(QStringLiteral("5text")).toString();
     if (VIDEOTEXT.isEmpty()) {
-        VIDEOTEXT = settingsusr.value(QStringLiteral("5text")).toString();
+        VIDEOTEXT = settings.value(QStringLiteral("5text")).toString();
     }
     if (!VIDEOTEXT.isEmpty()) {
         ui->buttonVideo->setText(VIDEOTEXT);
     }
-    VIDEOCMD = settings.value(QStringLiteral("5command")).toString();
+    VIDEOCMD = settingsusr.value(QStringLiteral("5command")).toString();
     if (VIDEOCMD.isEmpty()) {
-        VIDEOCMD = settingsusr.value(QStringLiteral("5command")).toString();
+        VIDEOCMD = settings.value(QStringLiteral("5command")).toString();
     }
 
-    QString WIKI = settings.value(QStringLiteral("6icon")).toString();
+    QString WIKI = settingsusr.value(QStringLiteral("6icon")).toString();
     if (WIKI.isEmpty()) {
-        WIKI = settingsusr.value(QStringLiteral("6icon")).toString();
+        WIKI = settings.value(QStringLiteral("6icon")).toString();
     }
-    QString WIKITEXT = settings.value(QStringLiteral("6text")).toString();
+    QString WIKITEXT = settingsusr.value(QStringLiteral("6text")).toString();
     if (WIKITEXT.isEmpty()) {
-        WIKITEXT = settingsusr.value(QStringLiteral("6text")).toString();
+        WIKITEXT = settings.value(QStringLiteral("6text")).toString();
     }
     if (!WIKITEXT.isEmpty()) {
         ui->buttonWiki->setText(WIKITEXT);
     }
-    WIKICMD = settings.value(QStringLiteral("6command")).toString();
+    WIKICMD = settingsusr.value(QStringLiteral("6command")).toString();
     if (WIKICMD.isEmpty()) {
-        WIKICMD = settingsusr.value(QStringLiteral("6command")).toString();
+        WIKICMD = settings.value(QStringLiteral("6command")).toString();
     }
 
-    QString CONTRIBUTE = settings.value(QStringLiteral("7icon")).toString();
+    QString CONTRIBUTE = settingsusr.value(QStringLiteral("7icon")).toString();
     if (CONTRIBUTE.isEmpty()) {
-        CONTRIBUTE = settingsusr.value(QStringLiteral("7icon")).toString();
+        CONTRIBUTE = settings.value(QStringLiteral("7icon")).toString();
     }
-    QString CONTRIBUTETEXT = settings.value(QStringLiteral("7text")).toString();
+    QString CONTRIBUTETEXT = settingsusr.value(QStringLiteral("7text")).toString();
     if (CONTRIBUTETEXT.isEmpty()) {
-        CONTRIBUTETEXT = settingsusr.value(QStringLiteral("7text")).toString();
+        CONTRIBUTETEXT = settings.value(QStringLiteral("7text")).toString();
     }
     if (!CONTRIBUTETEXT.isEmpty()) {
         ui->buttonContribute->setText(CONTRIBUTETEXT);
     }
-    CONTRIBUTECMD = settings.value(QStringLiteral("7command")).toString();
+    CONTRIBUTECMD = settingsusr.value(QStringLiteral("7command")).toString();
     if (CONTRIBUTECMD.isEmpty()) {
-        CONTRIBUTECMD = settingsusr.value(QStringLiteral("7command")).toString();
+        CONTRIBUTECMD = settings.value(QStringLiteral("7command")).toString();
     }
 
-    QString TOOLS = settings.value(QStringLiteral("8icon")).toString();
+    QString TOOLS = settingsusr.value(QStringLiteral("8icon")).toString();
     if (TOOLS.isEmpty()) {
-        TOOLS = settingsusr.value(QStringLiteral("8icon")).toString();
+        TOOLS = settings.value(QStringLiteral("8icon")).toString();
     }
-    QString TOOLSTEXT = settings.value(QStringLiteral("8text")).toString();
+    QString TOOLSTEXT = settingsusr.value(QStringLiteral("8text")).toString();
     if (TOOLSTEXT.isEmpty()) {
-        TOOLSTEXT = settingsusr.value(QStringLiteral("8text")).toString();
+        TOOLSTEXT = settings.value(QStringLiteral("8text")).toString();
     }
     if (!TOOLSTEXT.isEmpty()) {
         ui->buttonTools->setText(TOOLSTEXT);
     }
-    TOOLSCMD = settings.value(QStringLiteral("8command")).toString();
+    TOOLSCMD = settingsusr.value(QStringLiteral("8command")).toString();
     if (TOOLSCMD.isEmpty()) {
-        TOOLSCMD = settingsusr.value(QStringLiteral("8command")).toString();
+        TOOLSCMD = settings.value(QStringLiteral("8command")).toString();
     }
 
-    QString PACKAGEINSTALLER = settings.value(QStringLiteral("9icon")).toString();
+    QString PACKAGEINSTALLER = settingsusr.value(QStringLiteral("9icon")).toString();
     if (PACKAGEINSTALLER.isEmpty()) {
-        PACKAGEINSTALLER = settingsusr.value(QStringLiteral("9icon")).toString();
+        PACKAGEINSTALLER = settings.value(QStringLiteral("9icon")).toString();
     }
-    QString PACKAGEINSTALLERTEXT = settings.value(QStringLiteral("9text")).toString();
+    QString PACKAGEINSTALLERTEXT = settingsusr.value(QStringLiteral("9text")).toString();
     if (PACKAGEINSTALLERTEXT.isEmpty()) {
-        PACKAGEINSTALLERTEXT = settingsusr.value(QStringLiteral("9text")).toString();
+        PACKAGEINSTALLERTEXT = settings.value(QStringLiteral("9text")).toString();
     }
     if (!PACKAGEINSTALLERTEXT.isEmpty()) {
         ui->buttonPackageInstall->setText(PACKAGEINSTALLERTEXT);
     }
-    PACKAGEINSTALLERCMD = settings.value(QStringLiteral("9command")).toString();
+    PACKAGEINSTALLERCMD = settingsusr.value(QStringLiteral("9command")).toString();
     if (PACKAGEINSTALLERCMD.isEmpty()) {
-        PACKAGEINSTALLERCMD = settingsusr.value(QStringLiteral("9command")).toString();
+        PACKAGEINSTALLERCMD = settings.value(QStringLiteral("9command")).toString();
     }
 
-    QString TWEAK = settings.value(QStringLiteral("10icon")).toString();
+    QString TWEAK = settingsusr.value(QStringLiteral("10icon")).toString();
     if (TWEAK.isEmpty()) {
-        TWEAK = settingsusr.value(QStringLiteral("10icon")).toString();
+        TWEAK = settings.value(QStringLiteral("10icon")).toString();
     }
-    QString TWEAKTEXT = settings.value(QStringLiteral("10text")).toString();
+    QString TWEAKTEXT = settingsusr.value(QStringLiteral("10text")).toString();
     if (TWEAKTEXT.isEmpty()) {
-        TWEAKTEXT = settingsusr.value(QStringLiteral("10text")).toString();
+        TWEAKTEXT = settings.value(QStringLiteral("10text")).toString();
     }
     if (!TWEAKTEXT.isEmpty()) {
         ui->buttonPanelOrient->setText(TWEAKTEXT);
     }
-    TWEAKCMD = settings.value(QStringLiteral("10command")).toString();
+    TWEAKCMD = settingsusr.value(QStringLiteral("10command")).toString();
     if (TWEAKCMD.isEmpty()) {
-        TWEAKCMD = settingsusr.value(QStringLiteral("10command")).toString();
+        TWEAKCMD = settings.value(QStringLiteral("10command")).toString();
     }
 
-    QString TOUR = settings.value(QStringLiteral("11icon")).toString();
+    QString TOUR = settingsusr.value(QStringLiteral("11icon")).toString();
     if (TOUR.isEmpty()) {
-        TOUR = settingsusr.value(QStringLiteral("11icon")).toString();
+        TOUR = settings.value(QStringLiteral("11icon")).toString();
     }
-    QString TOURTEXT = settings.value(QStringLiteral("11text")).toString();
+    QString TOURTEXT = settingsusr.value(QStringLiteral("11text")).toString();
     if (TOURTEXT.isEmpty()) {
-        TOURTEXT = settingsusr.value(QStringLiteral("11text")).toString();
+        TOURTEXT = settings.value(QStringLiteral("11text")).toString();
     }
     if (!TOURTEXT.isEmpty()) {
         ui->buttonTour->setText(TOURTEXT);
     }
-    TOURCMD = settings.value(QStringLiteral("11command")).toString();
+    TOURCMD = settingsusr.value(QStringLiteral("11command")).toString();
     if (TOURCMD.isEmpty()) {
-        TOURCMD = settingsusr.value(QStringLiteral("11command")).toString();
+        TOURCMD = settings.value(QStringLiteral("11command")).toString();
     }
 
     // hide tour if not present AND TOURTEXT.ISEMPTY
@@ -297,16 +297,16 @@ void MainWindow::setup()
         }
     }
 
-    QString LIVEUSERINFOTEXT = settings.value(QStringLiteral("LIVEUSERINFOTEXT")).toString();
+    QString LIVEUSERINFOTEXT = settingsusr.value(QStringLiteral("LIVEUSERINFOTEXT")).toString();
     if (LIVEUSERINFOTEXT.isEmpty()) {
-        LIVEUSERINFOTEXT = settingsusr.value(QStringLiteral("LIVEUSERINFOTEXT")).toString();
+        LIVEUSERINFOTEXT = settings.value(QStringLiteral("LIVEUSERINFOTEXT")).toString();
     }
     if (!LIVEUSERINFOTEXT.isEmpty()) {
         ui->labelLoginInfo->setText(LIVEUSERINFOTEXT);
     }
-    QString SHOWLIVEUSERINFO = settings.value(QStringLiteral("SHOWLIVEUSERINFO"), "true").toString();
+    QString SHOWLIVEUSERINFO = settingsusr.value(QStringLiteral("SHOWLIVEUSERINFO"), "true").toString();
     if (SHOWLIVEUSERINFO.isEmpty()) {
-        SHOWLIVEUSERINFO = settingsusr.value(QStringLiteral("SHOWLIVEUSERINFO"), "true").toString();
+        SHOWLIVEUSERINFO = settings.value(QStringLiteral("SHOWLIVEUSERINFO"), "true").toString();
     }
     // qDebug() << "hide value: " << SHOWLIVEUSERINFO;
     bool LIVEUSERINFOSHOW = true;
@@ -328,9 +328,9 @@ void MainWindow::setup()
     }
 
     // check /etc/lsb-release file, overridable
-    QString CHECKLSB_RELEASE = settings.value(QStringLiteral("CHECKLSB_RELEASE"), "true").toString();
+    QString CHECKLSB_RELEASE = settingsusr.value(QStringLiteral("CHECKLSB_RELEASE"), "true").toString();
     if (CHECKLSB_RELEASE.isEmpty()) {
-        CHECKLSB_RELEASE = settingsusr.value(QStringLiteral("CHECKLSB_RELEASE"), "true").toString();
+        CHECKLSB_RELEASE = settings.value(QStringLiteral("CHECKLSB_RELEASE"), "true").toString();
     }
 
     bool CHECKLSB = true;

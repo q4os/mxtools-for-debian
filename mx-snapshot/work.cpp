@@ -1,7 +1,7 @@
 /**********************************************************************
  *  work.cpp
  **********************************************************************
- * Copyright (C) 2020 MX Authors
+ * Copyright (C) 2020-2024 MX Authors
  *
  * Authors: Adrian
  *          MX Linux <http://mxlinux.org>
@@ -23,14 +23,13 @@
  **********************************************************************/
 
 #include "work.h"
+#include "common.h"
 
 #include <QDate>
 #include <QDebug>
 #include <QDirIterator>
 #include <QRegularExpression>
 #include <QSettings>
-
-const extern QFile logFile;
 
 Work::Work(Settings *settings, QObject *parent)
     : QObject(parent),
@@ -157,7 +156,7 @@ void Work::closeInitrd(const QString &initrd_dir, const QString &file)
 // copyModules(mod_dir/kernel kernel)
 void Work::copyModules(const QString &to, const QString &kernel)
 {
-    shell.run(QString(R"(/usr/share/%1/scripts/copy-initrd-modules -t="%2" -k="%3")")
+    shell.run(QString(R"(/usr/share/%1/scripts/copy-initrd-modules -e -t="%2" -k="%3")")
                   .arg(qApp->applicationName(), to, kernel));
     shell.runAsRoot(QString("/usr/share/%1/scripts/copy-initrd-programs --to=\"%2\"").arg(qApp->applicationName(), to));
     shell.runAsRoot("chown -R $(logname): " + to);
@@ -395,7 +394,8 @@ void Work::replaceMenuStrings()
     QDir themeDir(settings->work_dir + "/iso-template/boot/grub/theme");
     for (const QFileInfo &themeFile : themeDir.entryInfoList({"*.txt"}, QDir::Files)) {
         replaceStringInFile("%ASCII_CODE_NAME%", settings->codename, themeFile.absoluteFilePath());
-        replaceStringInFile("%DISTRO%", settings->project_name + "-" + settings->distro_version, themeFile.absoluteFilePath());
+        replaceStringInFile("%DISTRO%", settings->project_name + "-" + settings->distro_version,
+                            themeFile.absoluteFilePath());
     }
 }
 
@@ -582,7 +582,7 @@ quint64 Work::getRequiredSpace()
     }
     qDebug() << "SIZE ROOT    " << root_size;
     qDebug() << "SIZE EXCLUDES" << excl_size;
-    uint c_factor = compression_factor.value(settings->compression);
+    uint c_factor = settings->compression_factor.value(settings->compression);
     qDebug() << "COMPRESSION  " << c_factor;
     qDebug() << "SIZE NEEDED  " << (root_size - excl_size) * c_factor / 100;
     qDebug() << "SIZE FREE    " << settings->free_space << "\n";

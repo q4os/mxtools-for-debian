@@ -1,0 +1,15 @@
+Source: mx-locale
+Section: admin
+Priority: optional
+Maintainer: Dolphin Oracle <dolphinoracle@gmail.com>
+Build-Depends: debhelper (>=10), qtbase5-dev, qttools5-dev-tools
+Standards-Version: 3.9.8
+
+Package: mx-locale
+Architecture: any
+Depends: locales, mx-viewer | antix-viewer| xdg-utils,
+         ${misc:Depends},
+         ${shlibs:Depends}
+Recommends: mx-launcher-l10n, gksu | pkexec
+Description: set system language and locale variables
+ gui front end to update-locales to set system language and locale variables

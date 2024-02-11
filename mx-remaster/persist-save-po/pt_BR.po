@@ -1,0 +1,121 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# Danylo Sa <kaiserblast@gmail.com>, 2018
+# marcelo cripe <marcelocripe@gmail.com>, 2020-2021
+# ric, 2017
+msgid ""
+msgstr ""
+"Project-Id-Version: antix-development\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-10-06 10:59-0600\n"
+"PO-Revision-Date: 2012-01-01 11:17+0000\n"
+"Last-Translator: marcelo cripe <marcelocripe@gmail.com>, 2020-2021\n"
+"Language-Team: Portuguese (Brazil) (http://www.transifex.com/anticapitalista/antix-development/language/pt_BR/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: pt_BR\n"
+"Plural-Forms: nplurals=3; plural=(n == 0 || n == 1) ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
+
+#: bin/persist-save:14
+msgid "antiX Save Persistent Root"
+msgstr "Salvar a Persistência de Root do antiX"
+
+#: bin/persist-save:17
+msgid "Manually save filesystem changes in %s file for persistent root."
+msgstr "Salvar manualmente as alterações no arquivo %s do sistema de arquivos para a persistência de root."
+
+#: bin/persist-save:18
+msgid "You MUST run a program like this to save your filesystem changes."
+msgstr "Você TEM que executar um programa como este para salvar as alterações do sistema de arquivos."
+
+#: bin/persist-save:43
+msgid "%s was not enabled.  Cannot %s"
+msgstr "%s não foi ativado. Não é possível %s"
+
+#: bin/persist-save:46 bin/persist-save:138
+msgid "Shall we begin?"
+msgstr "Você quer começar agora?"
+
+#: bin/persist-save:47 bin/persist-save:139
+msgid "Stopping at user's request"
+msgstr "Parando a pedido do usuário"
+
+#: bin/persist-save:55
+msgid "The persistence device with UUID %s was not found"
+msgstr "O dispositivo de persistência com o UUID %s não foi encontrado"
+
+#: bin/persist-save:56
+msgid "Please plug in the persistence device and try again"
+msgstr "Por favor, conecte o dispositivo de persistência e tente novamente"
+
+#: bin/persist-save:74
+msgid "On VID error"
+msgstr "Erro em VID"
+
+#: bin/persist-save:82
+msgid "Checking for existing files and"
+msgstr "Verificando arquivos existentes e"
+
+#: bin/persist-save:83
+msgid "Checking if there is enough room ..."
+msgstr "Verificando se há espaço suficiente ..."
+
+#: bin/persist-save:113
+msgid "persist device"
+msgstr "dispositivo de persistência"
+
+#: bin/persist-save:114
+msgid "mounted at"
+msgstr "montado em"
+
+#: bin/persist-save:127
+msgid "Available space, %s, is smaller than the margin of %s."
+msgstr "O espaço disponível, %s, é menor do que a margem de %s."
+
+#: bin/persist-save:131
+msgid "Insufficient space.  Have: %s. Need: %s."
+msgstr "O espaço não é suficiente. Existente: %s. Necessário: %s."
+
+#: bin/persist-save:134
+msgid "Ready to sync file system changes"
+msgstr "Pronto para sincronizar as alterações do sistema de arquivos"
+
+#: bin/persist-save:142
+msgid "Performing rsync ... please be patient"
+msgstr "Executando o rsync ... por favor, aguarde"
+
+#: bin/persist-save:178
+msgid "%s The rsync command failed Failed! %s"
+msgstr "%s O comando rsync falhou. Falha! %s"
+
+#: bin/persist-save:180
+msgid "It returned an exit code of %s"
+msgstr "Retornou um código de saída de %s"
+
+#: bin/persist-save:181
+msgid "See the rsync man page to look up its meaning."
+msgstr "Consulte a página do manual do rsync para verificar o seu significado."
+
+#: bin/persist-save:185 bin/persist-save:192
+msgid "%s succeeded"
+msgstr "%s bem-sucedido."
+
+#: bin/persist-save:194
+msgid "    Your changes were saved in:"
+msgstr "As suas alterações foram salvas em:"
+
+#: bin/persist-save:217
+msgid "Missing rootfs version file %s"
+msgstr "Falta a versão do arquivo do rootfs %s"
+
+#: bin/persist-save:220
+msgid "Missing version ID in rootfs file system"
+msgstr "Falta o ID da versão no arquivo do sistema de arquivos do rootfs"
+
+#: bin/persist-save:223
+msgid "Version id inside of %s file does not match"
+msgstr "O ID da versão dentro do arquivo %s não corresponde"

@@ -1,0 +1,77 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# BALLOON a.k.a. Fu-sen., 2014
+# 🎈 BALLOON | FU-SEN, 2014-2015
+# Green, 2020
+msgid ""
+msgstr ""
+"Project-Id-Version: antix-development\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-06-29 15:33-0600\n"
+"PO-Revision-Date: 2012-01-01 11:19+0000\n"
+"Last-Translator: Green, 2020\n"
+"Language-Team: Japanese (http://www.transifex.com/anticapitalista/antix-development/language/ja/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: ja\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: bin/toram-eject:14
+msgid "Eject LiveCD/DVD via a simple GUI if %s is enabled."
+msgstr "%s が有効になっている場合は、簡単なGUIを使用してライブCD/DVD を取り出します。"
+
+#: bin/toram-eject:16
+msgid "Automatic toram Eject"
+msgstr "自動 toram 取り出し"
+
+#: bin/toram-eject:24
+msgid "no BOOT_DEV given!"
+msgstr "BOOT_DEV がありません！"
+
+#: bin/toram-eject:33
+msgid "boot device: %s is not removable."
+msgstr "起動デバイス %s はリブバーブルではありません"
+
+#: bin/toram-eject:39
+msgid "boot device: %s is still mounted!"
+msgstr "起動デバイス %s は現在マウントされています！"
+
+#: bin/toram-eject:46
+msgid "The %s boot option succeeded."
+msgstr "%s 起動オプションは無事実行されました。"
+
+#: bin/toram-eject:47
+msgid "The boot media is no longer needed."
+msgstr "起動メディアは全く必要ありません。"
+
+#: bin/toram-eject:49
+msgid "Do you want the LiveCD/DVD ejected?"
+msgstr "ライブCD・DVD を取り出しますか？"
+
+#: bin/toram-eject:50
+msgid "did not eject as per user request."
+msgstr "要求通りに取り出せませんでした。"
+
+#: bin/toram-eject:52
+msgid "Could not eject %s"
+msgstr "%s を取り出す事ができません"
+
+#: bin/toram-eject:57
+msgid "Feel free to remove the CD or DVD."
+msgstr "CD・DVD は自由に取り出せます。"
+
+#: bin/toram-eject:59
+msgid "Do you want the drive closed now?"
+msgstr "今すぐドライブを閉じますか？"
+
+#: bin/toram-eject:60
+msgid "did not closing drive as per user request."
+msgstr "要求に従いドライブは閉じていません。"
+
+#: bin/toram-eject:62
+msgid "Could not close %s"
+msgstr "%s を閉じる事ができません"

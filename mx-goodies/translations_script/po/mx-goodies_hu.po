@@ -3,6 +3,9 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
+# Translators:
+# Kempelen <antixhu@netengine.hu>, 2022
+# 
 #, fuzzy
 msgid ""
 msgstr ""
@@ -10,7 +13,8 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-02-21 11:35-0600\n"
 "PO-Revision-Date: 2017-12-31 03:14+0000\n"
-"Language-Team: Hungarian (https://www.transifex.com/anticapitalista/teams/10162/hu/)\n"
+"Last-Translator: Kempelen <antixhu@netengine.hu>, 2022\n"
+"Language-Team: Hungarian (https://app.transifex.com/anticapitalista/teams/10162/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -19,40 +23,40 @@ msgstr ""
 
 #: system-locales-mx:13 archive/system-keyboard-mx:12
 msgid "canceled"
-msgstr ""
+msgstr "elvetve"
 
 #: system-locales-mx:14
 msgid "Configure System Locales"
-msgstr ""
+msgstr "Területi beállítások beállítása"
 
 #: system-locales-mx:15
 msgid "System locale"
-msgstr ""
+msgstr "Területi beállítás"
 
 #: quick-system-info/quick-system-info-mx:15
 msgid "Required inxi app not found"
-msgstr ""
+msgstr "A szükséges inxi alkalmazás nem található"
 
 #: quick-system-info/quick-system-info-mx:16
 msgid "Report copied to system clipboard"
-msgstr ""
+msgstr "A jelentés a vágólapra másolva"
 
 #: quick-system-info/quick-system-info-mx:17
 msgid "Report is already formatted for forum."
-msgstr ""
+msgstr "A jelentés már a fórumhoz megfelelő formátumú."
 
 #: quick-system-info/quick-system-info-mx:18
 msgid "Paste directly into forum post."
-msgstr ""
+msgstr "Másolja be közvetlenül a fórumbejegyzésbe."
 
 #: quick-system-info/quick-system-info-mx:19
 msgid "Press any key to close"
-msgstr ""
+msgstr "Nyomjon meg egy billentyűt a bezáráshoz"
 
 #: quick-system-info/quick-system-info-mx:20
 msgid "Do not show this message in future"
-msgstr ""
+msgstr "Ne jelen meg újra ez az üzenet"
 
 #: archive/system-keyboard-mx:13
 msgid "System Keyboard Configuration"
-msgstr ""
+msgstr "Rendszer billentyűzet beállítása"

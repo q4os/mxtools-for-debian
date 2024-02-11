@@ -1,0 +1,160 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# Andrei Stepanov, 2022
+# Вячеслав Волошин <vol_vel@mail.ru>, 2015
+msgid ""
+msgstr ""
+"Project-Id-Version: antix-development\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-04-03 12:45-0600\n"
+"PO-Revision-Date: 2012-01-01 11:16+0000\n"
+"Last-Translator: Andrei Stepanov, 2022\n"
+"Language-Team: Russian (http://www.transifex.com/anticapitalista/antix-development/language/ru/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: ru\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%100>=11 && n%100<=14)? 2 : 3);\n"
+
+#: bin/persist-config:12
+msgid "antiX Root Persistence Auto-Save Configuration"
+msgstr "antiX Настройки автосохранения корневой папки"
+
+#: bin/persist-config:20
+msgid "Automatic"
+msgstr "Автоматически"
+
+#: bin/persist-config:21
+msgid "Semi-Automatic"
+msgstr "Полуавтоматически"
+
+#: bin/persist-config:22
+msgid "Manual"
+msgstr "Вручную"
+
+#: bin/persist-config:23
+msgid "Quit"
+msgstr "Выход"
+
+#: bin/persist-config:29
+msgid "Configure root persistence saves to run either:"
+msgstr "Настройка сохранения корневой папки позволяет:"
+
+#: bin/persist-config:31
+msgid "at shutdown/reboot, no asking"
+msgstr "при выключении/перезагрузке, не спрашивать"
+
+#: bin/persist-config:32
+msgid "ask at shutdown/reboot"
+msgstr "спрашивать при выключении/перезагрузке"
+
+#: bin/persist-config:33
+msgid "you snooze, you lose"
+msgstr "с выбором, что сохранять"
+
+#: bin/persist-config:35
+msgid ""
+"This program should be called with the %s option in a startup script to "
+"ensure a config file is created."
+msgstr "Эта программа должна быть вызвана с опцией %s в стартовом скрипте для обеспечения создния конфигурационного файла."
+
+#: bin/persist-config:37
+msgid ""
+"It should be called with the %s option in shutdown scripts so your changes "
+"can be saved before shutting down."
+msgstr "Она должна быть вызвана с опцией %s в скриптах выключения, чтобы ваши изменения могли быть сохранены перед выключением."
+
+#: bin/persist-config:45
+msgid "%s specific options"
+msgstr "%s определенных опций"
+
+#: bin/persist-config:46
+msgid "Create a %s file if one is missing."
+msgstr "Создать файл %s, если одного не хватает."
+
+#: bin/persist-config:47
+msgid "Run persist-save as directed by %s file."
+msgstr "Выполнить сохранение, как указано в файле %s."
+
+#: bin/persist-config:48
+msgid "Run %s if %s succeeded."
+msgstr "Выполнить %s, если %s удалось."
+
+#: bin/persist-config:49
+msgid "If %s fails prompt user before running %s."
+msgstr "Если %s не приглашает пользователя перед выполнением %s."
+
+#: bin/persist-config:50
+msgid "implies %s"
+msgstr "следует %s"
+
+#: bin/persist-config:52
+msgid "Config file is located at: %s"
+msgstr "Конфигурационный файл находится в: %s"
+
+#: bin/persist-config:90
+msgid "Current mode is: %s"
+msgstr "Текущий режим: %s"
+
+#: bin/persist-config:92
+msgid "There is no current auto-save mode.  The default is: %s."
+msgstr "Это не режим автосохранения.  По умолчанию: %s."
+
+#: bin/persist-config:102
+msgid "save on shutdown/reboot automatically.  No asking."
+msgstr "сохранить автоматически при выключении/перезагрузке. Без подтверждения."
+
+#: bin/persist-config:103
+msgid "ask to save on shutdown/reboot."
+msgstr "спрашивать о сохранении при при выключении/перезагрузке."
+
+#: bin/persist-config:104
+msgid "only save changes manually (you snooze, you lose)."
+msgstr "сохранить изменения только вручную (можете потерять что-нибудь)."
+
+#: bin/persist-config:105
+msgid "use current default."
+msgstr "использовать текущее значение по умолчанию."
+
+#: bin/persist-config:117
+msgid "Auto-save mode set to %s in %s."
+msgstr "Режим автосохранения установлен на %s в %s."
+
+#: bin/persist-config:123
+msgid "It looks like root persistence was just enabled."
+msgstr "Похоже, сохранение корневой папки уже включено."
+
+#: bin/persist-config:124
+msgid "Please set the save-mode for root persistence."
+msgstr "Пожалуйста, установите режим сохранения для корневой папки."
+
+#: bin/persist-config:125
+msgid "You will only have to do this once."
+msgstr "Вы должны сделать это только один раз."
+
+#: bin/persist-config:127
+msgid "You can change your choice later with %s."
+msgstr "Вы можете изменить свой выбор позже с %s."
+
+#: bin/persist-config:159
+msgid "Already saved less than %s seconds ago"
+msgstr "Уже сохранено %s секунд назад"
+
+#: bin/persist-config:160
+msgid "Won't autosave within %s seconds of a previous save"
+msgstr "Не будет автосохранения в течение %s секунд после предыдущего"
+
+#: bin/persist-config:199
+msgid "CONFIRM"
+msgstr "ПОДТВЕРДИТЬ"
+
+#: bin/persist-config:200
+msgid "There was an error saving your changes."
+msgstr "Произошла ошибка сохранения Ваших изменений."
+
+#: bin/persist-config:202
+msgid "Do you still want to %s?"
+msgstr "Вы все еще хотите %s?"

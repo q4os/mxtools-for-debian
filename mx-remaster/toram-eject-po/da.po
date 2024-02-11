@@ -1,0 +1,75 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# scootergrisen, 2018
+msgid ""
+msgstr ""
+"Project-Id-Version: antix-development\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-06-29 15:33-0600\n"
+"PO-Revision-Date: 2012-01-01 11:19+0000\n"
+"Last-Translator: scootergrisen, 2018\n"
+"Language-Team: Danish (http://www.transifex.com/anticapitalista/antix-development/language/da/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: da\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: bin/toram-eject:14
+msgid "Eject LiveCD/DVD via a simple GUI if %s is enabled."
+msgstr "Skub LiveCD/-DVD ud via en simpel brugerflade hvis %s er aktiveret."
+
+#: bin/toram-eject:16
+msgid "Automatic toram Eject"
+msgstr "Automatisk toram skub ud"
+
+#: bin/toram-eject:24
+msgid "no BOOT_DEV given!"
+msgstr "no BOOT_DEV givet!"
+
+#: bin/toram-eject:33
+msgid "boot device: %s is not removable."
+msgstr "opstartsenhed: %s er ikke flytbar."
+
+#: bin/toram-eject:39
+msgid "boot device: %s is still mounted!"
+msgstr "opstartsenhed: %s er stadig monteret!"
+
+#: bin/toram-eject:46
+msgid "The %s boot option succeeded."
+msgstr "%s-opstartstilvalget lykkedes."
+
+#: bin/toram-eject:47
+msgid "The boot media is no longer needed."
+msgstr "Opstartsmediet behøves ikke længere."
+
+#: bin/toram-eject:49
+msgid "Do you want the LiveCD/DVD ejected?"
+msgstr "Vil du have LiveCD/-DVD'en skubbet ud?"
+
+#: bin/toram-eject:50
+msgid "did not eject as per user request."
+msgstr "blev ikke skubbet ud som brugeren anmodede."
+
+#: bin/toram-eject:52
+msgid "Could not eject %s"
+msgstr "Kunne ikke skubbe %s ud"
+
+#: bin/toram-eject:57
+msgid "Feel free to remove the CD or DVD."
+msgstr "Hvis du vil kan du fjerne CD'en eller DVD'en."
+
+#: bin/toram-eject:59
+msgid "Do you want the drive closed now?"
+msgstr "Vil du have lukket drevet nu?"
+
+#: bin/toram-eject:60
+msgid "did not closing drive as per user request."
+msgstr "lukkede ikke drevet som brugeren anmodede."
+
+#: bin/toram-eject:62
+msgid "Could not close %s"
+msgstr "Kunne ikke lukke %s"

@@ -1,0 +1,124 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# BALLOON a.k.a. Fu-sen., 2016
+# 🎈 BALLOON | FU-SEN, 2016
+# 🎈 BALLOON | FU-SEN, 2014-2015
+# ふうせん Fu-sen. | BALLOON a.k.a. Fu-sen., 2016
+# Green <usergreen@users.osdn.me>, 2023
+# Green <usergreen@users.osdn.me>, 2020
+msgid ""
+msgstr ""
+"Project-Id-Version: antix-development\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-10-06 10:59-0600\n"
+"PO-Revision-Date: 2012-01-01 11:17+0000\n"
+"Last-Translator: Green <usergreen@users.osdn.me>, 2023\n"
+"Language-Team: Japanese (http://app.transifex.com/anticapitalista/antix-development/language/ja/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: ja\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: bin/persist-save:14
+msgid "antiX Save Persistent Root"
+msgstr "antiX パーシステント ルートの保存"
+
+#: bin/persist-save:17
+msgid "Manually save filesystem changes in %s file for persistent root."
+msgstr "手動でパーシステント root ファイル %s のファイルシステム変更を保存します。"
+
+#: bin/persist-save:18
+msgid "You MUST run a program like this to save your filesystem changes."
+msgstr "ファイルシステムの変更を保存するには、こうしたプログラムを実行する必要があります。"
+
+#: bin/persist-save:43
+msgid "%s was not enabled.  Cannot %s"
+msgstr "%s を有効にできません。%s は使用できません。"
+
+#: bin/persist-save:46 bin/persist-save:138
+msgid "Shall we begin?"
+msgstr "開始しますか？"
+
+#: bin/persist-save:47 bin/persist-save:139
+msgid "Stopping at user's request"
+msgstr "ユーザーの指示で停止しています"
+
+#: bin/persist-save:55
+msgid "The persistence device with UUID %s was not found"
+msgstr "パーシステンス デバイスの UUIS %s は見つかりません"
+
+#: bin/persist-save:56
+msgid "Please plug in the persistence device and try again"
+msgstr "パーシステンス デバイスを差し込み、再実行してください"
+
+#: bin/persist-save:74
+msgid "On VID error"
+msgstr "On VID エラー"
+
+#: bin/persist-save:82
+msgid "Checking for existing files and"
+msgstr "既存のファイルの確認"
+
+#: bin/persist-save:83
+msgid "Checking if there is enough room ..."
+msgstr "十分な空きがあるかどうかを確認中..."
+
+#: bin/persist-save:113
+msgid "persist device"
+msgstr "persist デバイス"
+
+#: bin/persist-save:114
+msgid "mounted at"
+msgstr "マウント先"
+
+#: bin/persist-save:127
+msgid "Available space, %s, is smaller than the margin of %s."
+msgstr "利用可能な空き容量 %s は %s の領域よりも小さいです。"
+
+#: bin/persist-save:131
+msgid "Insufficient space.  Have: %s. Need: %s."
+msgstr "空き容量が不十分です。現在: %s 必要容量: %s"
+
+#: bin/persist-save:134
+msgid "Ready to sync file system changes"
+msgstr "ファイルシステムの変更を同期する準備ができました"
+
+#: bin/persist-save:142
+msgid "Performing rsync ... please be patient"
+msgstr "rsync の実行中...しばらくお待ちください"
+
+#: bin/persist-save:178
+msgid "%s The rsync command failed Failed! %s"
+msgstr "%s rsync コマンドは失敗しました！ %s"
+
+#: bin/persist-save:180
+msgid "It returned an exit code of %s"
+msgstr "%s の終了コードが返りました"
+
+#: bin/persist-save:181
+msgid "See the rsync man page to look up its meaning."
+msgstr "その意味を調べるには、rsync のマニュアルページを見てください。"
+
+#: bin/persist-save:185 bin/persist-save:192
+msgid "%s succeeded"
+msgstr "%s完了です"
+
+#: bin/persist-save:194
+msgid "    Your changes were saved in:"
+msgstr "変更した保存先："
+
+#: bin/persist-save:217
+msgid "Missing rootfs version file %s"
+msgstr "rootfs バージョンファイル %s に問題があります"
+
+#: bin/persist-save:220
+msgid "Missing version ID in rootfs file system"
+msgstr "rootfs ファイルシステムのバージョン ID に問題があります"
+
+#: bin/persist-save:223
+msgid "Version id inside of %s file does not match"
+msgstr "ファイル %s の内部バージョン ID が一致しません"

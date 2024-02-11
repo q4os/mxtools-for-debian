@@ -196,7 +196,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="315"/>
         <source>Invalid Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nome non valido</translation>
     </message>
 </context>
 <context>

@@ -1,0 +1,278 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# José Vieira <jvieira33@sapo.pt>, 2016,2019,2021
+# 9dc2486d5858e5a4d192f5ce124b5be4_cf18c09, 2017
+msgid ""
+msgstr ""
+"Project-Id-Version: antix-development\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-10-22 19:22-0600\n"
+"PO-Revision-Date: 2015-05-07 19:18+0000\n"
+"Last-Translator: José Vieira <jvieira33@sapo.pt>, 2016,2019,2021\n"
+"Language-Team: Portuguese (http://www.transifex.com/anticapitalista/antix-development/language/pt/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: pt\n"
+"Plural-Forms: nplurals=3; plural=(n == 0 || n == 1) ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
+
+#: bin/live-remaster:29
+msgid ""
+"Create a new compressed file system saving all of the changes you have made "
+"to the system."
+msgstr "Criar um novo sistema de ficheiros comprimido, guardando todas as alterações efectuadas ao sistema."
+
+#: bin/live-remaster:35
+msgid "Extra options for"
+msgstr "Opções extra para"
+
+#: bin/live-remaster:36
+msgid "Make a smaller linuxfs.new.  NOT deleted when done."
+msgstr "Gerar um ficheiro linuxfs.new mais pequeno. NÂO eliminado quando feito."
+
+#: bin/live-remaster:37
+msgid "Use %s instead of prompting user for title."
+msgstr "Usar %s em vez de solicitar um título ao utilizador."
+
+#: bin/live-remaster:38
+msgid "Make a general-purpose remaster."
+msgstr "Efectuar uma recomposição padrão."
+
+#: bin/live-remaster:39
+msgid "Make a personalized remaster."
+msgstr "Efectuar uma recomposição personalizada."
+
+#: bin/live-remaster:71
+msgid "The live file system is read-only.  Cannot remaster."
+msgstr "O sistema de ficheiros é só de leitura. Não é possível recompor."
+
+#: bin/live-remaster:73
+msgid "General"
+msgstr "Geral"
+
+#: bin/live-remaster:74
+msgid "Personal"
+msgstr "Pessoal"
+
+#: bin/live-remaster:81
+msgid "%s uses your personal settings."
+msgstr "%s usa as configurações pessoais"
+
+#: bin/live-remaster:82
+msgid "%s does not."
+msgstr "%s não usa."
+
+#: bin/live-remaster:95
+msgid "Do you want to save files under %s in the new remaster?"
+msgstr "Guardar ficheiros em %s na nova recomposição?"
+
+#: bin/live-remaster:101
+msgid "Checking for existing files and"
+msgstr "Procurando ficheiros existentes e"
+
+#: bin/live-remaster:102
+msgid "Checking if there is enough room ..."
+msgstr "Verificando se há espaço suficiente ..."
+
+#: bin/live-remaster:113
+msgid "The %s program was unable to start"
+msgstr "Não foi possível iniciar o programa %s "
+
+#: bin/live-remaster:165
+msgid "current linuxfs size"
+msgstr "tamanho actual do linuxfs"
+
+#: bin/live-remaster:166
+msgid "excluded files est."
+msgstr "ficheiros excluídos estimados"
+
+#: bin/live-remaster:167 bin/live-remaster:168
+msgid "estimated new size"
+msgstr "novo tamanho estimado"
+
+#: bin/live-remaster:174
+msgid "boot device total"
+msgstr "total do dispositivo de arranque"
+
+#: bin/live-remaster:175
+msgid "boot device free"
+msgstr "livres no dispositivo de arranque"
+
+#: bin/live-remaster:176 bin/live-remaster:177
+msgid "est. remaining"
+msgstr "restante estimado"
+
+#: bin/live-remaster:194
+msgid "Have: %s megs available.  Need: %s."
+msgstr "Há %s megs disponíveis. São necessários: %s."
+
+#: bin/live-remaster:198
+msgid "Leftover files found"
+msgstr "Ficheiros remanescentes encontrados"
+
+#: bin/live-remaster:200
+msgid "The following file(s) already exist"
+msgstr "Os seguintes ficheiros já existem"
+
+#: bin/live-remaster:201
+msgid "in the %s directory:"
+msgstr "no directório %s:"
+
+#: bin/live-remaster:205
+msgid "They may be left over from a previous remastering."
+msgstr "Podem ser remanescentes de uma recomposição anterior."
+
+#: bin/live-remaster:206
+msgid "Do you want to fix this problem now?"
+msgstr "Resolver este problema agora?"
+
+#: bin/live-remaster:207
+msgid "(the alternative is to quit now)"
+msgstr "(a alternativa é sair agora)"
+
+#: bin/live-remaster:221
+msgid "Ready to create a new linuxfs file"
+msgstr "Pronto para criar um novo ficheiro linuxfs"
+
+#: bin/live-remaster:225
+msgid "Shall we begin?"
+msgstr "Começar?"
+
+#: bin/live-remaster:235
+msgid "(compresses faster, boots faster)"
+msgstr "(comprime mais rápido, inicia mais rápido)"
+
+#: bin/live-remaster:236
+msgid "(compresses better)"
+msgstr "(comprime melhor)"
+
+#: bin/live-remaster:242
+msgid "Please choose the type of compression to use"
+msgstr "Escolher o tipo de compressão a usar"
+
+#: bin/live-remaster:243
+msgid "%s will take less time"
+msgstr "%s demorará menos"
+
+#: bin/live-remaster:244
+msgid "%s will result in a smaller file"
+msgstr "%s resultará num ficheiro menor"
+
+#: bin/live-remaster:260
+msgid "Do you want remaster to use all of the CPUs?"
+msgstr "A recomposição deverá usar todos os processadores (CPUs)?"
+
+#: bin/live-remaster:262
+msgid "This will make the remaster process run as fast as possible."
+msgstr "Isto fará o processo de recomposição ser executado tão rapidamente quanto possível."
+
+#: bin/live-remaster:263
+msgid "But there is more of a chance your computer will overheat."
+msgstr "Mas a probabilidade de o computador sobreaquecer é maior."
+
+#: bin/live-remaster:272
+msgid "Remaster Version Identification"
+msgstr "Identificação da Versão Recomposta"
+
+#: bin/live-remaster:274
+msgid "Please enter an (optional) title for this remaster"
+msgstr "Introduzir um título para esta recomposição (opcional)"
+
+#: bin/live-remaster:295
+msgid "The %s program failed to work"
+msgstr "O programa %s falhou"
+
+#: bin/live-remaster:335
+msgid "Remastering -- DO NOT CLOSE"
+msgstr "A recompor -- NÃO FECHAR"
+
+#: bin/live-remaster:351
+msgid "Remaster in Progress"
+msgstr "Recomposição em progresso"
+
+#: bin/live-remaster:352
+msgid "Do you REALLY want to stop midway?"
+msgstr "Parar EFECTIVAMENTE a meio?"
+
+#: bin/live-remaster:379
+msgid "Created new compressed filesystem file:"
+msgstr "Criado novo ficheiro comprimido filesystem"
+
+#: bin/live-remaster:384
+msgid "The new file should be used automatically the next time you boot."
+msgstr "O novo ficheiro deverá ser usado automaticamente no próximo arranque."
+
+#: bin/live-remaster:386
+msgid "If there is a problem with the new system:"
+msgstr "Se houver algum problema com o novo sistema:"
+
+#: bin/live-remaster:387
+msgid "Use the %s  boot option to return to the current system."
+msgstr "Usar a opção de arranque %s para voltar ao sistema agora em uso."
+
+#: bin/live-remaster:411
+msgid "Root persistence is enabled"
+msgstr "Está activada a persistência em root"
+
+#: bin/live-remaster:413
+msgid "Do you want to make a new %s file now?"
+msgstr "Gerar um novo ficheiro %s agora?"
+
+#: bin/live-remaster:421
+msgid "Remaster in progress"
+msgstr "Recomposição em progresso"
+
+#: bin/live-remaster:423
+msgid "please be patient"
+msgstr "aguardar"
+
+#: bin/live-remaster:424
+msgid "(even after it says it is 100% done)"
+msgstr "(mesmo depois da informação de 100% executado)"
+
+#: bin/live-remaster:429
+msgid "antiX Remaster in Progress"
+msgstr "Recomposição do antiX em progresso"
+
+#: bin/live-remaster:445
+msgid "Remastering Terminated Early"
+msgstr "A recomposição terminou antes de completa"
+
+#: bin/live-remaster:450
+msgid "Remastering Failed"
+msgstr "A recomposição falhou"
+
+#: bin/live-remaster:452
+msgid "New linuxfs file was not created!"
+msgstr "O novo ficheiro linuxfs não foi criado!"
+
+#: bin/live-remaster:456
+msgid "Could not mount new file as %s!"
+msgstr "Não foi possível montar o novo ficheiro como %s!"
+
+#: bin/live-remaster:467
+msgid "linuxfs size"
+msgstr "tamanho de linuxfs"
+
+#: bin/live-remaster:468
+msgid "elapsed time"
+msgstr "tempo decorrido"
+
+#: bin/live-remaster:469
+msgid "processors"
+msgstr "processadores"
+
+#: bin/live-remaster:470
+msgid "compression"
+msgstr "compressão"
+
+#: bin/live-remaster:484
+msgid "Error"
+msgstr "Erro"
+
+#: bin/live-remaster:489
+msgid "Do you want to save the incomplete file?"
+msgstr "Guardar o ficheiro incompleto?"

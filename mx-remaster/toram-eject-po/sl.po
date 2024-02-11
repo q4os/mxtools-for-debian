@@ -1,0 +1,75 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# Arnold Marko <arnold.marko@gmail.com>, 2019
+msgid ""
+msgstr ""
+"Project-Id-Version: antix-development\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-06-29 15:33-0600\n"
+"PO-Revision-Date: 2012-01-01 11:19+0000\n"
+"Last-Translator: Arnold Marko <arnold.marko@gmail.com>, 2019\n"
+"Language-Team: Slovenian (http://www.transifex.com/anticapitalista/antix-development/language/sl/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: sl\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3);\n"
+
+#: bin/toram-eject:14
+msgid "Eject LiveCD/DVD via a simple GUI if %s is enabled."
+msgstr "Izvrzi živi CD/DVD preko preprostega grafičnega vmesnika, če je %s omogočen."
+
+#: bin/toram-eject:16
+msgid "Automatic toram Eject"
+msgstr "Samodejno izvrzi toram"
+
+#: bin/toram-eject:24
+msgid "no BOOT_DEV given!"
+msgstr "zagonska naprava BOOT_DEV ni bila podana!"
+
+#: bin/toram-eject:33
+msgid "boot device: %s is not removable."
+msgstr "zagonska naprava: %s ni izmenljiva."
+
+#: bin/toram-eject:39
+msgid "boot device: %s is still mounted!"
+msgstr "zagonska naprava: %s je še vedno priklopljena!"
+
+#: bin/toram-eject:46
+msgid "The %s boot option succeeded."
+msgstr "Zagonska opcija %s se je uspešno izvedla."
+
+#: bin/toram-eject:47
+msgid "The boot media is no longer needed."
+msgstr "Zagnoski nosilec ni več potreben."
+
+#: bin/toram-eject:49
+msgid "Do you want the LiveCD/DVD ejected?"
+msgstr "Ali bi radi izvrgli živi CD/DVD?"
+
+#: bin/toram-eject:50
+msgid "did not eject as per user request."
+msgstr "ni bil izvržen, kot je zahteval uporabnik."
+
+#: bin/toram-eject:52
+msgid "Could not eject %s"
+msgstr "Nisem mogel izvreči %s"
+
+#: bin/toram-eject:57
+msgid "Feel free to remove the CD or DVD."
+msgstr "Nisem mogel izvreči CD ali DVD."
+
+#: bin/toram-eject:59
+msgid "Do you want the drive closed now?"
+msgstr "Ai želite zapreti vrata pogona?"
+
+#: bin/toram-eject:60
+msgid "did not closing drive as per user request."
+msgstr "vrata se niso zaprla, kot je zahteval uporabnik."
+
+#: bin/toram-eject:62
+msgid "Could not close %s"
+msgstr "Nisem mogel zapreti %s"

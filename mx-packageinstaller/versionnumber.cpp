@@ -33,10 +33,12 @@ QString VersionNumber::toString() const
 
 void VersionNumber::setStrings(const QString &value)
 {
+    // Initialize epoch, upstream, and debian strings
     str = value;
     QString upstream_str;
     QString debian_str;
 
+    // Parse epoch and upstream_version
     if (value.contains(QLatin1Char(':'))) {
         epoch = value.section(QLatin1Char(':'), 0, 0).toInt();
         upstream_str = value.section(QLatin1Char(':'), 1);
@@ -44,6 +46,8 @@ void VersionNumber::setStrings(const QString &value)
         epoch = 0;
         upstream_str = value;
     }
+
+    // Parse debian_revision
     if (upstream_str.contains(QLatin1Char('-'))) {
         debian_str = upstream_str.section(QLatin1Char('-'), -1);
         upstream_str = upstream_str.remove(QLatin1Char('-') + debian_str);
@@ -61,7 +65,7 @@ VersionNumber &VersionNumber::operator=(const QString &value)
 
 bool VersionNumber::operator<(const VersionNumber &value) const
 {
-    return (compare(*this, value) == 1);
+    return compare(*this, value) == 1;
 }
 
 bool VersionNumber::operator<=(const VersionNumber &value) const
@@ -71,7 +75,7 @@ bool VersionNumber::operator<=(const VersionNumber &value) const
 
 bool VersionNumber::operator>(const VersionNumber &value) const
 {
-    return (compare(*this, value) == -1);
+    return compare(*this, value) == -1;
 }
 
 bool VersionNumber::operator>=(const VersionNumber &value) const
@@ -81,7 +85,7 @@ bool VersionNumber::operator>=(const VersionNumber &value) const
 
 bool VersionNumber::operator==(const VersionNumber &value) const
 {
-    return (this->str == value.str);
+    return str == value.str;
 }
 
 bool VersionNumber::operator!=(const VersionNumber &value) const
@@ -92,23 +96,24 @@ bool VersionNumber::operator!=(const VersionNumber &value) const
 // Transform QString into QStringList with digits grouped together
 QStringList VersionNumber::groupDigits(const QString &value)
 {
-    QStringList result = QStringList();
-    QString cache = QLatin1String("");
+    QStringList result;
+    QString cache;
 
     for (int i = 0; i < value.length(); ++i) {
         if (value.at(i).isDigit()) {
             cache.append(value.at(i));
-            if (value.length() - 1 == i) {
+            if (i == value.length() - 1) {
                 result.append(cache);
             }
         } else {
-            if (!cache.isEmpty()) { // add accumulated digits
+            if (!cache.isEmpty()) { // Add accumulated digits
                 result.append(cache);
                 cache.clear();
             }
             result.append(value.at(i));
         }
     }
+
     return result;
 }
 
@@ -120,12 +125,11 @@ int VersionNumber::compare(const VersionNumber &first, const VersionNumber &seco
     } else if (second.epoch < first.epoch) {
         return -1;
     }
-    int res = compare(first.upstream_version, second.upstream_version);
-    if (res == 1) {
-        return 1;
-    } else if (res == -1) {
-        return -1;
-    } else if (!debian_revision.isEmpty()) {
+    int upstreamComparison = compare(first.upstream_version, second.upstream_version);
+    if (upstreamComparison != 0) {
+        return upstreamComparison;
+    }
+    if (!first.debian_revision.isEmpty() || !second.debian_revision.isEmpty()) {
         return compare(first.debian_revision, second.debian_revision);
     }
     return 0;
@@ -134,20 +138,18 @@ int VersionNumber::compare(const VersionNumber &first, const VersionNumber &seco
 // Return 1 if second > first, -1 if second < first, 0 if equal
 int VersionNumber::compare(const QStringList &first, const QStringList &second)
 {
+    // Compare QStringList versions
     for (int i = 0; i < first.length() && i < second.length(); ++i) {
-        // Check if equal
         if (first.at(i) == second.at(i)) {
-            continue; // Continue till it finds difference
+            continue;
         }
 
-        // ~ sorts lowest
-        if (first.at(i).at(0) == '~' && second.at(i).at(0) != '~') {
+        if (first.at(i).startsWith('~') && !second.at(i).startsWith('~')) {
             return 1;
-        } else if (second.at(i).at(0) == '~' && first.at(i).at(0) != '~') {
+        } else if (second.at(i).startsWith('~') && !first.at(i).startsWith('~')) {
             return -1;
         }
 
-        // If one char length check which one is larger
         if (first.at(i).length() == 1 && second.at(i).length() == 1) {
             int res = compare(first.at(i).at(0), second.at(i).at(0));
             if (res == 0) {
@@ -155,14 +157,12 @@ int VersionNumber::compare(const QStringList &first, const QStringList &second)
             } else {
                 return res;
             }
-            // One char (not-number) vs. multiple (digits)
         } else if (first.at(i).length() > 1 && second.at(i).length() == 1 && !second.at(i).at(0).isDigit()) {
             return 1;
         } else if (first.at(i).length() == 1 && !first.at(i).at(0).isDigit() && second.at(i).length() > 1) {
             return -1;
         }
 
-        // Compare remaining digits
         if (second.at(i).toInt() > first.at(i).toInt()) {
             return 1;
         } else {
@@ -173,18 +173,11 @@ int VersionNumber::compare(const QStringList &first, const QStringList &second)
     // If equal till the end of one of the lists, compare list size
     // if the larger list doesn't have "~" it's the bigger version
     if (second.length() > first.length()) {
-        if (second.at(first.length()) != QLatin1String("~")) {
-            return 1;
-        } else {
-            return -1;
-        }
+        return second.at(first.length()).startsWith('~') ? -1 : 1;
     } else if (second.length() < first.length()) {
-        if (first.at(second.length()) != QLatin1String("~")) {
-            return -1;
-        } else {
-            return 1;
-        }
+        return first.at(second.length()).startsWith('~') ? 1 : -1;
     }
+
     return 0;
 }
 
@@ -192,6 +185,7 @@ int VersionNumber::compare(const QStringList &first, const QStringList &second)
 // letters and number sort before special chars
 int VersionNumber::compare(QChar first, QChar second)
 {
+    // Compare QChars
     if (first == second) {
         return 0;
     }
@@ -203,10 +197,5 @@ int VersionNumber::compare(QChar first, QChar second)
         return -1;
     }
 
-    if (first < second) {
-        return 1;
-    } else if (first > second) {
-        return -1;
-    }
-    return 0;
+    return first < second ? 1 : -1;
 }

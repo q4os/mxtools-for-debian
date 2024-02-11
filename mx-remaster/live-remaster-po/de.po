@@ -1,0 +1,279 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# Eugen Brodski <eugen.brodski@web.de>, 2015
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2012
+# q a, 2016
+msgid ""
+msgstr ""
+"Project-Id-Version: antix-development\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-10-22 19:22-0600\n"
+"PO-Revision-Date: 2015-05-07 19:18+0000\n"
+"Last-Translator: q a, 2016\n"
+"Language-Team: German (http://www.transifex.com/anticapitalista/antix-development/language/de/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: de\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: bin/live-remaster:29
+msgid ""
+"Create a new compressed file system saving all of the changes you have made "
+"to the system."
+msgstr "Erstelle ein neues Dateisystem (komplette Kopie) und speichere darin alle Änderungen, welche an deiner MX-Installation vorgenommen wurden."
+
+#: bin/live-remaster:35
+msgid "Extra options for"
+msgstr "Zusätliche Optionen für"
+
+#: bin/live-remaster:36
+msgid "Make a smaller linuxfs.new.  NOT deleted when done."
+msgstr "Ein kleineres linuxfs.new erstellen und NICHT löschen wenn fertig."
+
+#: bin/live-remaster:37
+msgid "Use %s instead of prompting user for title."
+msgstr "Benutze %s anstelle des Benutzernamens als Titel"
+
+#: bin/live-remaster:38
+msgid "Make a general-purpose remaster."
+msgstr "Erstelle einen allgemeinen Remaster (mit user account reset auf Vorgabewerte)."
+
+#: bin/live-remaster:39
+msgid "Make a personalized remaster."
+msgstr "Erstelle einen personalisierten Remaster ohne user account reset auf Vorgabewerte. Alle momentanen Einstellungen des users \"demo\" bleiben dabei erhalten. "
+
+#: bin/live-remaster:71
+msgid "The live file system is read-only.  Cannot remaster."
+msgstr "Das live Dateisystem (der Speicher) ist im Nur-Lese-Modus, deshalb REMASTER nicht möglich."
+
+#: bin/live-remaster:73
+msgid "General"
+msgstr "Allgemein"
+
+#: bin/live-remaster:74
+msgid "Personal"
+msgstr "Persönlich"
+
+#: bin/live-remaster:81
+msgid "%s uses your personal settings."
+msgstr "%s benutzt Ihre persönlichen Einstellungen."
+
+#: bin/live-remaster:82
+msgid "%s does not."
+msgstr "%s tut das nicht."
+
+#: bin/live-remaster:95
+msgid "Do you want to save files under %s in the new remaster?"
+msgstr "Möchten Sie die Dateien im neuen Remaster in %s speichern?"
+
+#: bin/live-remaster:101
+msgid "Checking for existing files and"
+msgstr "Überprüfung auf vorhandene Dateien und"
+
+#: bin/live-remaster:102
+msgid "Checking if there is enough room ..."
+msgstr "Überprüfe, ob genügend Platz vorhanden ist ..."
+
+#: bin/live-remaster:113
+msgid "The %s program was unable to start"
+msgstr "Programm %s konnte nicht starten"
+
+#: bin/live-remaster:165
+msgid "current linuxfs size"
+msgstr "aktuelle Größe von linuxfs"
+
+#: bin/live-remaster:166
+msgid "excluded files est."
+msgstr "ausgeschlossene Dateien, geschätzt"
+
+#: bin/live-remaster:167 bin/live-remaster:168
+msgid "estimated new size"
+msgstr "geschätzte neue Größe"
+
+#: bin/live-remaster:174
+msgid "boot device total"
+msgstr "Boot-Laufwerk gesamt"
+
+#: bin/live-remaster:175
+msgid "boot device free"
+msgstr "Boot-Laufwerk frei"
+
+#: bin/live-remaster:176 bin/live-remaster:177
+msgid "est. remaining"
+msgstr "verbleibend ca."
+
+#: bin/live-remaster:194
+msgid "Have: %s megs available.  Need: %s."
+msgstr "Habe: %s MB verfügbar. Brauche: %s MB."
+
+#: bin/live-remaster:198
+msgid "Leftover files found"
+msgstr "Übrig gebliebene Dateien gefunden."
+
+#: bin/live-remaster:200
+msgid "The following file(s) already exist"
+msgstr "Folgende Dateien existieren bereits"
+
+#: bin/live-remaster:201
+msgid "in the %s directory:"
+msgstr "im Ordner %s"
+
+#: bin/live-remaster:205
+msgid "They may be left over from a previous remastering."
+msgstr "Sie könnten vom vorherigen Remastering übrig geblieben sein."
+
+#: bin/live-remaster:206
+msgid "Do you want to fix this problem now?"
+msgstr "Möchten Sie das Problem jetzt beheben?"
+
+#: bin/live-remaster:207
+msgid "(the alternative is to quit now)"
+msgstr "(Die Alternative wäre, das Program jetzt zu verlassen.)"
+
+#: bin/live-remaster:221
+msgid "Ready to create a new linuxfs file"
+msgstr "Bereit, eine neue linuxfs Datei zu erstellen"
+
+#: bin/live-remaster:225
+msgid "Shall we begin?"
+msgstr "Sollen wir anfangen?"
+
+#: bin/live-remaster:235
+msgid "(compresses faster, boots faster)"
+msgstr "(schnellere Komprimierung, schnelleres Booten)"
+
+#: bin/live-remaster:236
+msgid "(compresses better)"
+msgstr "(bessere Komprimierung)"
+
+#: bin/live-remaster:242
+msgid "Please choose the type of compression to use"
+msgstr "Bitte wählen Sie die Kompressionsart"
+
+#: bin/live-remaster:243
+msgid "%s will take less time"
+msgstr "%s wird weniger Zeit in Anspruch nehmen"
+
+#: bin/live-remaster:244
+msgid "%s will result in a smaller file"
+msgstr "%s wird eine kleinere Dateigröße erzeugen"
+
+#: bin/live-remaster:260
+msgid "Do you want remaster to use all of the CPUs?"
+msgstr "Wollen Sie alle CPU-Kerne zwecks Beschleunigung zum Remastern nutzen?"
+
+#: bin/live-remaster:262
+msgid "This will make the remaster process run as fast as possible."
+msgstr "Dies beschleunigt das Remastern maximal."
+
+#: bin/live-remaster:263
+msgid "But there is more of a chance your computer will overheat."
+msgstr "Aber die Wahrscheinlichkeit, dass der Computer überhitzt, erhöht sich."
+
+#: bin/live-remaster:272
+msgid "Remaster Version Identification"
+msgstr "Remaster Versionsnummer"
+
+#: bin/live-remaster:274
+msgid "Please enter an (optional) title for this remaster"
+msgstr "Bitte geben Sie einen (optionalen) Titel für diesen Remaster"
+
+#: bin/live-remaster:295
+msgid "The %s program failed to work"
+msgstr "Programm %s funktionierte nicht."
+
+#: bin/live-remaster:335
+msgid "Remastering -- DO NOT CLOSE"
+msgstr "Remaster wird durchgeführt -- BITTE NICHT SCHLIEßEN"
+
+#: bin/live-remaster:351
+msgid "Remaster in Progress"
+msgstr "Remaster wird durchgeführt"
+
+#: bin/live-remaster:352
+msgid "Do you REALLY want to stop midway?"
+msgstr "Wollen Sie WIRKLICH mittendrin abbrechen?"
+
+#: bin/live-remaster:379
+msgid "Created new compressed filesystem file:"
+msgstr "Neue komprimierte Dateisystem-Datei erstellt:"
+
+#: bin/live-remaster:384
+msgid "The new file should be used automatically the next time you boot."
+msgstr "Die neue Datei \"linuxfs.new\" sollte automatisch beim nächsten Neustart verwendet werden."
+
+#: bin/live-remaster:386
+msgid "If there is a problem with the new system:"
+msgstr "Wenn es ein Problem mit dem neuen System gibt:"
+
+#: bin/live-remaster:387
+msgid "Use the %s  boot option to return to the current system."
+msgstr "Benutze die %s Boot-Option, um zum aktuellen System zurückzukehren."
+
+#: bin/live-remaster:411
+msgid "Root persistence is enabled"
+msgstr "Root-Persistenz ist aktiviert"
+
+#: bin/live-remaster:413
+msgid "Do you want to make a new %s file now?"
+msgstr "Möchten Sie jetzt eine neue %s Datei erstellen?"
+
+#: bin/live-remaster:421
+msgid "Remaster in progress"
+msgstr "Remaster wird durchgeführt"
+
+#: bin/live-remaster:423
+msgid "please be patient"
+msgstr "Bitte haben Sie etwas Geduld!"
+
+#: bin/live-remaster:424
+msgid "(even after it says it is 100% done)"
+msgstr "(selbst kurz nachdem es 100% abgeschlossen ist wird noch ein weiteres Fenster erscheinen)"
+
+#: bin/live-remaster:429
+msgid "antiX Remaster in Progress"
+msgstr "antiX Remaster wird durchgeführt"
+
+#: bin/live-remaster:445
+msgid "Remastering Terminated Early"
+msgstr "Remastering vorzeitig abgebrochen"
+
+#: bin/live-remaster:450
+msgid "Remastering Failed"
+msgstr "Remastering ist gescheitert"
+
+#: bin/live-remaster:452
+msgid "New linuxfs file was not created!"
+msgstr "Neue linuxfs Datei ist nicht erstellt worden"
+
+#: bin/live-remaster:456
+msgid "Could not mount new file as %s!"
+msgstr "Konnte die neue Datei nicht als %s einhängen."
+
+#: bin/live-remaster:467
+msgid "linuxfs size"
+msgstr "Größe von linuxfs"
+
+#: bin/live-remaster:468
+msgid "elapsed time"
+msgstr "verstrichene Zeit"
+
+#: bin/live-remaster:469
+msgid "processors"
+msgstr "Prozessoren"
+
+#: bin/live-remaster:470
+msgid "compression"
+msgstr "Kompression"
+
+#: bin/live-remaster:484
+msgid "Error"
+msgstr "Fehler"
+
+#: bin/live-remaster:489
+msgid "Do you want to save the incomplete file?"
+msgstr "Wollen Sie die unvollständige Datei speichern?"

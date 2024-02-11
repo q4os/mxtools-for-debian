@@ -1,0 +1,279 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# Eduard Selma <selma@tinet.cat>, 2015-2016
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2012
+# marcmetallextrem <marcmetallextrem@gmail.com>, 2014
+msgid ""
+msgstr ""
+"Project-Id-Version: antix-development\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-10-22 19:22-0600\n"
+"PO-Revision-Date: 2015-05-07 19:18+0000\n"
+"Last-Translator: Eduard Selma <selma@tinet.cat>, 2015-2016\n"
+"Language-Team: Catalan (http://www.transifex.com/anticapitalista/antix-development/language/ca/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: ca\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: bin/live-remaster:29
+msgid ""
+"Create a new compressed file system saving all of the changes you have made "
+"to the system."
+msgstr "Crea un nou sistema de fitxers comprimits desant tots els canvis que heu fet al sistema."
+
+#: bin/live-remaster:35
+msgid "Extra options for"
+msgstr "Opcions addicionals per"
+
+#: bin/live-remaster:36
+msgid "Make a smaller linuxfs.new.  NOT deleted when done."
+msgstr "Fes un linuxfs.new més petit: NO s'esborra en acabar"
+
+#: bin/live-remaster:37
+msgid "Use %s instead of prompting user for title."
+msgstr "Usa %s en llo de demanar el títol a l'usuari."
+
+#: bin/live-remaster:38
+msgid "Make a general-purpose remaster."
+msgstr "Fes un remasteritzat de propòsit general."
+
+#: bin/live-remaster:39
+msgid "Make a personalized remaster."
+msgstr "Fes un remasteritzat personalitzat."
+
+#: bin/live-remaster:71
+msgid "The live file system is read-only.  Cannot remaster."
+msgstr "El sistema autònom és de només lectura. No es pot remasteritzar. "
+
+#: bin/live-remaster:73
+msgid "General"
+msgstr "General"
+
+#: bin/live-remaster:74
+msgid "Personal"
+msgstr "Personal"
+
+#: bin/live-remaster:81
+msgid "%s uses your personal settings."
+msgstr "%s usa els vostres paràmetres personals. "
+
+#: bin/live-remaster:82
+msgid "%s does not."
+msgstr "%s no els usa."
+
+#: bin/live-remaster:95
+msgid "Do you want to save files under %s in the new remaster?"
+msgstr "Voleu desar els fitxers a %s al nou rmaster?"
+
+#: bin/live-remaster:101
+msgid "Checking for existing files and"
+msgstr "Verificant els fitxers existents i"
+
+#: bin/live-remaster:102
+msgid "Checking if there is enough room ..."
+msgstr "Comprovant si hi prou espai..."
+
+#: bin/live-remaster:113
+msgid "The %s program was unable to start"
+msgstr "El programa %s no ha pogut arrencar "
+
+#: bin/live-remaster:165
+msgid "current linuxfs size"
+msgstr "mida actual de linuxfs "
+
+#: bin/live-remaster:166
+msgid "excluded files est."
+msgstr "est. de fitxers exclosos "
+
+#: bin/live-remaster:167 bin/live-remaster:168
+msgid "estimated new size"
+msgstr "nova mida estimada "
+
+#: bin/live-remaster:174
+msgid "boot device total"
+msgstr "dispositiu d'arrencada, total "
+
+#: bin/live-remaster:175
+msgid "boot device free"
+msgstr "dispositiu d'arrencada, lliure "
+
+#: bin/live-remaster:176 bin/live-remaster:177
+msgid "est. remaining"
+msgstr "est. de la resta "
+
+#: bin/live-remaster:194
+msgid "Have: %s megs available.  Need: %s."
+msgstr "Teniu: %s MB lliures. En cal: %s."
+
+#: bin/live-remaster:198
+msgid "Leftover files found"
+msgstr "Trobat fitxers abandonats"
+
+#: bin/live-remaster:200
+msgid "The following file(s) already exist"
+msgstr "Aquest(s) fitxers ja hi son"
+
+#: bin/live-remaster:201
+msgid "in the %s directory:"
+msgstr "al directori %s."
+
+#: bin/live-remaster:205
+msgid "They may be left over from a previous remastering."
+msgstr "Poden haver-se deixat d'una remasterització anterior."
+
+#: bin/live-remaster:206
+msgid "Do you want to fix this problem now?"
+msgstr "Voleu arranjar aquest problema ara?"
+
+#: bin/live-remaster:207
+msgid "(the alternative is to quit now)"
+msgstr "(l'alternativa és sortir ara)"
+
+#: bin/live-remaster:221
+msgid "Ready to create a new linuxfs file"
+msgstr "A punt per crear un nou fitxer linuxfs"
+
+#: bin/live-remaster:225
+msgid "Shall we begin?"
+msgstr "Cal començar?"
+
+#: bin/live-remaster:235
+msgid "(compresses faster, boots faster)"
+msgstr "(comprimeix més ràpid, arrenca més ràpid) "
+
+#: bin/live-remaster:236
+msgid "(compresses better)"
+msgstr "(comprimeix millor) "
+
+#: bin/live-remaster:242
+msgid "Please choose the type of compression to use"
+msgstr "Seleccioneu el tipus de compressió que cal usar "
+
+#: bin/live-remaster:243
+msgid "%s will take less time"
+msgstr "%s trigarà menys "
+
+#: bin/live-remaster:244
+msgid "%s will result in a smaller file"
+msgstr "%s crearà un fitxer més petit "
+
+#: bin/live-remaster:260
+msgid "Do you want remaster to use all of the CPUs?"
+msgstr "Voleu remasteritzar usant totes les CPUs?"
+
+#: bin/live-remaster:262
+msgid "This will make the remaster process run as fast as possible."
+msgstr "Això farà que el procés de remasterització vagi el més ràpid possible. "
+
+#: bin/live-remaster:263
+msgid "But there is more of a chance your computer will overheat."
+msgstr "Però també és possible que l'ordinador se sobreescalfi. "
+
+#: bin/live-remaster:272
+msgid "Remaster Version Identification"
+msgstr "Identificació de Versió de Remaster"
+
+#: bin/live-remaster:274
+msgid "Please enter an (optional) title for this remaster"
+msgstr "Si us plau, entreu un tol opcional per aquest remaster"
+
+#: bin/live-remaster:295
+msgid "The %s program failed to work"
+msgstr "El programa %s no ha funcionat "
+
+#: bin/live-remaster:335
+msgid "Remastering -- DO NOT CLOSE"
+msgstr "Remasteritzant -- NO HO TANQUEU"
+
+#: bin/live-remaster:351
+msgid "Remaster in Progress"
+msgstr "Remaster en curs"
+
+#: bin/live-remaster:352
+msgid "Do you REALLY want to stop midway?"
+msgstr "De debò voleu aturar-ho a mig fer?"
+
+#: bin/live-remaster:379
+msgid "Created new compressed filesystem file:"
+msgstr "Creat el nou sistema de fitxers comprimit:"
+
+#: bin/live-remaster:384
+msgid "The new file should be used automatically the next time you boot."
+msgstr "El nou fitxer s'hauria d'usar automàticament la propera vegada que arrenqueu."
+
+#: bin/live-remaster:386
+msgid "If there is a problem with the new system:"
+msgstr "Si hi ha problemes amb el nou sistema:"
+
+#: bin/live-remaster:387
+msgid "Use the %s  boot option to return to the current system."
+msgstr "Useu l'opció d'arrencada %s per tornar al sistema actual."
+
+#: bin/live-remaster:411
+msgid "Root persistence is enabled"
+msgstr "Persistència de root activada "
+
+#: bin/live-remaster:413
+msgid "Do you want to make a new %s file now?"
+msgstr "Voleu fer un fitxer nou %s ara?"
+
+#: bin/live-remaster:421
+msgid "Remaster in progress"
+msgstr "Remasterització en progrés"
+
+#: bin/live-remaster:423
+msgid "please be patient"
+msgstr "tingueu peciència, si us plau"
+
+#: bin/live-remaster:424
+msgid "(even after it says it is 100% done)"
+msgstr "(fins i tot si diu que s'ha fet el 100%)"
+
+#: bin/live-remaster:429
+msgid "antiX Remaster in Progress"
+msgstr "Remaster d'antiX en curs"
+
+#: bin/live-remaster:445
+msgid "Remastering Terminated Early"
+msgstr "Remasteritzat aturat abans d'hora"
+
+#: bin/live-remaster:450
+msgid "Remastering Failed"
+msgstr "Ha fallat el remasteritzat"
+
+#: bin/live-remaster:452
+msgid "New linuxfs file was not created!"
+msgstr "No s'ha creat el fitxer linuxfs nou!"
+
+#: bin/live-remaster:456
+msgid "Could not mount new file as %s!"
+msgstr "No s'ha pogut muntar el nou fitxer com a %s!"
+
+#: bin/live-remaster:467
+msgid "linuxfs size"
+msgstr "mida de linuxfs "
+
+#: bin/live-remaster:468
+msgid "elapsed time"
+msgstr "temps transcorregut "
+
+#: bin/live-remaster:469
+msgid "processors"
+msgstr "processadors "
+
+#: bin/live-remaster:470
+msgid "compression"
+msgstr "compressió "
+
+#: bin/live-remaster:484
+msgid "Error"
+msgstr "S'ha produït un error"
+
+#: bin/live-remaster:489
+msgid "Do you want to save the incomplete file?"
+msgstr "Voleu desar el fitxer incomplet?"

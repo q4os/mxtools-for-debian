@@ -1,0 +1,278 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# Andrei Stepanov, 2022-2023
+# Вячеслав Волошин <vol_vel@mail.ru>, 2015-2016
+msgid ""
+msgstr ""
+"Project-Id-Version: antix-development\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-10-22 19:22-0600\n"
+"PO-Revision-Date: 2015-05-07 19:18+0000\n"
+"Last-Translator: Andrei Stepanov, 2022-2023\n"
+"Language-Team: Russian (http://app.transifex.com/anticapitalista/antix-development/language/ru/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: ru\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%100>=11 && n%100<=14)? 2 : 3);\n"
+
+#: bin/live-remaster:29
+msgid ""
+"Create a new compressed file system saving all of the changes you have made "
+"to the system."
+msgstr "Создать новую сжатую файловую систему с сохранением всех изменений, внесенных в систему."
+
+#: bin/live-remaster:35
+msgid "Extra options for"
+msgstr "Дополнительные опции для"
+
+#: bin/live-remaster:36
+msgid "Make a smaller linuxfs.new.  NOT deleted when done."
+msgstr "Сделать меньше linuxfs.new.  НЕ удаляется, когда будет готово."
+
+#: bin/live-remaster:37
+msgid "Use %s instead of prompting user for title."
+msgstr "Использовать %s вместо упоминания пользователя по названию."
+
+#: bin/live-remaster:38
+msgid "Make a general-purpose remaster."
+msgstr "Сделать ремастеринг общего назначения."
+
+#: bin/live-remaster:39
+msgid "Make a personalized remaster."
+msgstr "Сделать персональный ремастеринг."
+
+#: bin/live-remaster:71
+msgid "The live file system is read-only.  Cannot remaster."
+msgstr "Файловая live система только для чтения. Ремастеринг невозможен."
+
+#: bin/live-remaster:73
+msgid "General"
+msgstr "Общее"
+
+#: bin/live-remaster:74
+msgid "Personal"
+msgstr "Личное"
+
+#: bin/live-remaster:81
+msgid "%s uses your personal settings."
+msgstr "%s использует ваши личные настройки."
+
+#: bin/live-remaster:82
+msgid "%s does not."
+msgstr "%s нет."
+
+#: bin/live-remaster:95
+msgid "Do you want to save files under %s in the new remaster?"
+msgstr "Вы хотите сохранить файлы согласно %s в новом ремастеринге?"
+
+#: bin/live-remaster:101
+msgid "Checking for existing files and"
+msgstr "Проверка существующих файлов и"
+
+#: bin/live-remaster:102
+msgid "Checking if there is enough room ..."
+msgstr "Проверка доступного места..."
+
+#: bin/live-remaster:113
+msgid "The %s program was unable to start"
+msgstr "Программа %s не смогла запуститься"
+
+#: bin/live-remaster:165
+msgid "current linuxfs size"
+msgstr "текущий размер linuxfs"
+
+#: bin/live-remaster:166
+msgid "excluded files est."
+msgstr "оценка исключенных файлов"
+
+#: bin/live-remaster:167 bin/live-remaster:168
+msgid "estimated new size"
+msgstr "предполагаемый новый размер"
+
+#: bin/live-remaster:174
+msgid "boot device total"
+msgstr "всего на загрузочном устройстве"
+
+#: bin/live-remaster:175
+msgid "boot device free"
+msgstr "свободно на загрузочном устройстве"
+
+#: bin/live-remaster:176 bin/live-remaster:177
+msgid "est. remaining"
+msgstr "оценка остающегося по окончании"
+
+#: bin/live-remaster:194
+msgid "Have: %s megs available.  Need: %s."
+msgstr "Имеем: %s MB доступно. Нужно: %s."
+
+#: bin/live-remaster:198
+msgid "Leftover files found"
+msgstr "Оставшиеся файлы найдены"
+
+#: bin/live-remaster:200
+msgid "The following file(s) already exist"
+msgstr "Следующие файл(ы) уже существуют"
+
+#: bin/live-remaster:201
+msgid "in the %s directory:"
+msgstr "в %s папке:"
+
+#: bin/live-remaster:205
+msgid "They may be left over from a previous remastering."
+msgstr "Возможно, они остались от предыдущего ремастеринга."
+
+#: bin/live-remaster:206
+msgid "Do you want to fix this problem now?"
+msgstr "Вы хотите решить эту проблему сейчас?"
+
+#: bin/live-remaster:207
+msgid "(the alternative is to quit now)"
+msgstr "(в другом случае, можно сейчас выйти)"
+
+#: bin/live-remaster:221
+msgid "Ready to create a new linuxfs file"
+msgstr "Все готово для создания нового файла linuxfs"
+
+#: bin/live-remaster:225
+msgid "Shall we begin?"
+msgstr "Приступить?"
+
+#: bin/live-remaster:235
+msgid "(compresses faster, boots faster)"
+msgstr "(сжатие быстрее, загрузка быстрее)"
+
+#: bin/live-remaster:236
+msgid "(compresses better)"
+msgstr "(сжатие лучше)"
+
+#: bin/live-remaster:242
+msgid "Please choose the type of compression to use"
+msgstr "Пожалуйста, выберите тип сжатия для использования"
+
+#: bin/live-remaster:243
+msgid "%s will take less time"
+msgstr "%s займёт меньше времени"
+
+#: bin/live-remaster:244
+msgid "%s will result in a smaller file"
+msgstr "%s даст в результате меньший файл"
+
+#: bin/live-remaster:260
+msgid "Do you want remaster to use all of the CPUs?"
+msgstr "Хотите использовать все ЦП для ремастеринга?"
+
+#: bin/live-remaster:262
+msgid "This will make the remaster process run as fast as possible."
+msgstr "Это сделает процесс ремастеринга быстрее, насколько возможно."
+
+#: bin/live-remaster:263
+msgid "But there is more of a chance your computer will overheat."
+msgstr "Но больше шансов, что Ваш компьютер будет перегреваться."
+
+#: bin/live-remaster:272
+msgid "Remaster Version Identification"
+msgstr "Идентификация версии ремастеринга"
+
+#: bin/live-remaster:274
+msgid "Please enter an (optional) title for this remaster"
+msgstr "Пожалуйста, введите (опционально) название для этого ремастеринга"
+
+#: bin/live-remaster:295
+msgid "The %s program failed to work"
+msgstr "Программа %s сработала неудачно"
+
+#: bin/live-remaster:335
+msgid "Remastering -- DO NOT CLOSE"
+msgstr "Ремастеринг - НЕ ЗАКРЫВАЙТЕ"
+
+#: bin/live-remaster:351
+msgid "Remaster in Progress"
+msgstr "Идет процесс ремастеринга"
+
+#: bin/live-remaster:352
+msgid "Do you REALLY want to stop midway?"
+msgstr "Вы ДЕЙСТВИТЕЛЬНО хотите остановить на полпути?"
+
+#: bin/live-remaster:379
+msgid "Created new compressed filesystem file:"
+msgstr "Создан новый файл сжатой файловой системы:"
+
+#: bin/live-remaster:384
+msgid "The new file should be used automatically the next time you boot."
+msgstr "Новый файл будет использован автоматически в следующий раз при загрузке."
+
+#: bin/live-remaster:386
+msgid "If there is a problem with the new system:"
+msgstr "Если здесь существует проблема с новой системой:"
+
+#: bin/live-remaster:387
+msgid "Use the %s  boot option to return to the current system."
+msgstr "Использовать опцию загрузки %s для возврата к текущей системе."
+
+#: bin/live-remaster:411
+msgid "Root persistence is enabled"
+msgstr "Сохранение корневой папки включено"
+
+#: bin/live-remaster:413
+msgid "Do you want to make a new %s file now?"
+msgstr "Вы хотите сделать новый файл %s сейчас?"
+
+#: bin/live-remaster:421
+msgid "Remaster in progress"
+msgstr "Идет процесс ремастеринга"
+
+#: bin/live-remaster:423
+msgid "please be patient"
+msgstr "пожалуйста, подождите"
+
+#: bin/live-remaster:424
+msgid "(even after it says it is 100% done)"
+msgstr "(даже после сообщения о 100% готовности)"
+
+#: bin/live-remaster:429
+msgid "antiX Remaster in Progress"
+msgstr "antiX Remaster в работе"
+
+#: bin/live-remaster:445
+msgid "Remastering Terminated Early"
+msgstr "Ремастеринг досрочно прерван"
+
+#: bin/live-remaster:450
+msgid "Remastering Failed"
+msgstr "Ремастеринг не удался"
+
+#: bin/live-remaster:452
+msgid "New linuxfs file was not created!"
+msgstr "Новый файл linuxfs не был создан!"
+
+#: bin/live-remaster:456
+msgid "Could not mount new file as %s!"
+msgstr "Не удалось установить новый файл как %s!"
+
+#: bin/live-remaster:467
+msgid "linuxfs size"
+msgstr "размер linuxfs"
+
+#: bin/live-remaster:468
+msgid "elapsed time"
+msgstr "прошло времени"
+
+#: bin/live-remaster:469
+msgid "processors"
+msgstr "процессоры"
+
+#: bin/live-remaster:470
+msgid "compression"
+msgstr "сжатие"
+
+#: bin/live-remaster:484
+msgid "Error"
+msgstr "Ошибка"
+
+#: bin/live-remaster:489
+msgid "Do you want to save the incomplete file?"
+msgstr "Вы хотите сохранить неполный файл?"

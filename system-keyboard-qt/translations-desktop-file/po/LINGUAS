@@ -5,7 +5,6 @@ system-keyboard-qt-desktop_be
 system-keyboard-qt-desktop_bg
 system-keyboard-qt-desktop_bn
 system-keyboard-qt-desktop_bs
-system-keyboard-qt-desktop_bs_BA
 system-keyboard-qt-desktop_ca
 system-keyboard-qt-desktop_ceb
 system-keyboard-qt-desktop_co
@@ -14,8 +13,6 @@ system-keyboard-qt-desktop_cy
 system-keyboard-qt-desktop_da
 system-keyboard-qt-desktop_de
 system-keyboard-qt-desktop_el
-system-keyboard-qt-desktop_en_GB
-system-keyboard-qt-desktop_en_US
 system-keyboard-qt-desktop_eo
 system-keyboard-qt-desktop_es
 system-keyboard-qt-desktop_es_ES
@@ -23,12 +20,9 @@ system-keyboard-qt-desktop_et
 system-keyboard-qt-desktop_eu
 system-keyboard-qt-desktop_fa
 system-keyboard-qt-desktop_fi
-system-keyboard-qt-desktop_fi_FI
 system-keyboard-qt-desktop_fil
-system-keyboard-qt-desktop_fil_PH
 system-keyboard-qt-desktop_fr
 system-keyboard-qt-desktop_fr_BE
-system-keyboard-qt-desktop_fr_FR
 system-keyboard-qt-desktop_fy
 system-keyboard-qt-desktop_ga
 system-keyboard-qt-desktop_gd
@@ -70,7 +64,6 @@ system-keyboard-qt-desktop_ms
 system-keyboard-qt-desktop_mt
 system-keyboard-qt-desktop_my
 system-keyboard-qt-desktop_nb
-system-keyboard-qt-desktop_nb_NO
 system-keyboard-qt-desktop_ne
 system-keyboard-qt-desktop_nl
 system-keyboard-qt-desktop_nl_BE
@@ -84,7 +77,6 @@ system-keyboard-qt-desktop_pt_BR
 system-keyboard-qt-desktop_ro
 system-keyboard-qt-desktop_ru
 system-keyboard-qt-desktop_ru_RU
-system-keyboard-qt-desktop_rue
 system-keyboard-qt-desktop_rw
 system-keyboard-qt-desktop_sd
 system-keyboard-qt-desktop_si
@@ -114,7 +106,5 @@ system-keyboard-qt-desktop_vi
 system-keyboard-qt-desktop_xh
 system-keyboard-qt-desktop_yi
 system-keyboard-qt-desktop_yo
-system-keyboard-qt-desktop_yue_CN
 system-keyboard-qt-desktop_zh_CN
-system-keyboard-qt-desktop_zh_HK
 system-keyboard-qt-desktop_zh_TW

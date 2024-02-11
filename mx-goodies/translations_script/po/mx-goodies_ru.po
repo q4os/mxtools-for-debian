@@ -4,8 +4,9 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Владимир Н <ua3elr@gmail.com>, 2018
+# Vedun <ua3elr@gmail.com>, 2018
 # Vladimir O <vldoduv@yandex.ru>, 2019
+# Andrei Stepanov, 2022
 # 
 #, fuzzy
 msgid ""
@@ -14,8 +15,8 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-02-21 11:35-0600\n"
 "PO-Revision-Date: 2017-12-31 03:14+0000\n"
-"Last-Translator: Vladimir O <vldoduv@yandex.ru>, 2019\n"
-"Language-Team: Russian (https://www.transifex.com/anticapitalista/teams/10162/ru/)\n"
+"Last-Translator: Andrei Stepanov, 2022\n"
+"Language-Team: Russian (https://app.transifex.com/anticapitalista/teams/10162/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -40,15 +41,15 @@ msgstr "Требуемое приложение inxi не найдено"
 
 #: quick-system-info/quick-system-info-mx:16
 msgid "Report copied to system clipboard"
-msgstr "Отчет скопирован в системный буфер обмена"
+msgstr "Отчёт скопирован в системный буфер обмена"
 
 #: quick-system-info/quick-system-info-mx:17
 msgid "Report is already formatted for forum."
-msgstr ""
+msgstr "Отчёт уже отформатирован для форума."
 
 #: quick-system-info/quick-system-info-mx:18
 msgid "Paste directly into forum post."
-msgstr ""
+msgstr "Вставить непосредственно в сообщение форума."
 
 #: quick-system-info/quick-system-info-mx:19
 msgid "Press any key to close"
@@ -56,7 +57,7 @@ msgstr "Нажмите любую клавишу, чтобы закрыть"
 
 #: quick-system-info/quick-system-info-mx:20
 msgid "Do not show this message in future"
-msgstr ""
+msgstr "Больше не показывать это сообщение в будущем"
 
 #: archive/system-keyboard-mx:13
 msgid "System Keyboard Configuration"

@@ -1,0 +1,159 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# heskjestad <cato@heskjestad.xyz>, 2020
+msgid ""
+msgstr ""
+"Project-Id-Version: antix-development\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-04-03 12:45-0600\n"
+"PO-Revision-Date: 2012-01-01 11:16+0000\n"
+"Last-Translator: heskjestad <cato@heskjestad.xyz>, 2020\n"
+"Language-Team: Norwegian Bokmål (http://www.transifex.com/anticapitalista/antix-development/language/nb/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: nb\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: bin/persist-config:12
+msgid "antiX Root Persistence Auto-Save Configuration"
+msgstr "Oppsett av varig lagring av systemdata for antiX"
+
+#: bin/persist-config:20
+msgid "Automatic"
+msgstr "Automatisk"
+
+#: bin/persist-config:21
+msgid "Semi-Automatic"
+msgstr "Halvautomatisk"
+
+#: bin/persist-config:22
+msgid "Manual"
+msgstr "Manuell"
+
+#: bin/persist-config:23
+msgid "Quit"
+msgstr "Avslutt"
+
+#: bin/persist-config:29
+msgid "Configure root persistence saves to run either:"
+msgstr "La varig lagring av systemdata kjøre enten:"
+
+#: bin/persist-config:31
+msgid "at shutdown/reboot, no asking"
+msgstr "ved systemavslutning/omstart, ikke spør"
+
+#: bin/persist-config:32
+msgid "ask at shutdown/reboot"
+msgstr "spør ved systemavslutning/omstart"
+
+#: bin/persist-config:33
+msgid "you snooze, you lose"
+msgstr "forkast endringer hvis de ikke lagres manuelt"
+
+#: bin/persist-config:35
+msgid ""
+"This program should be called with the %s option in a startup script to "
+"ensure a config file is created."
+msgstr "Dette programmet må kalles med parameteren %s i et oppstartsskript for å sikre at en oppsettsfil lages."
+
+#: bin/persist-config:37
+msgid ""
+"It should be called with the %s option in shutdown scripts so your changes "
+"can be saved before shutting down."
+msgstr "Må kalles med parameteren %s i avslutningsskript slik at endringene kan lagres før avslutning."
+
+#: bin/persist-config:45
+msgid "%s specific options"
+msgstr "%s-spesifikke alternativer"
+
+#: bin/persist-config:46
+msgid "Create a %s file if one is missing."
+msgstr "Lag en %s-fil hvis den mangler."
+
+#: bin/persist-config:47
+msgid "Run persist-save as directed by %s file."
+msgstr "La varig lagring foregå i henhold til %s-fila."
+
+#: bin/persist-config:48
+msgid "Run %s if %s succeeded."
+msgstr "Kjør %s hvis %s fullføres."
+
+#: bin/persist-config:49
+msgid "If %s fails prompt user before running %s."
+msgstr "Hvis %s mislykkes: Spør bruker før %s kjøres"
+
+#: bin/persist-config:50
+msgid "implies %s"
+msgstr "medfører %s"
+
+#: bin/persist-config:52
+msgid "Config file is located at: %s"
+msgstr "Oppsettsfila ligger på: %s"
+
+#: bin/persist-config:90
+msgid "Current mode is: %s"
+msgstr "Gjeldende modus er: %s"
+
+#: bin/persist-config:92
+msgid "There is no current auto-save mode.  The default is: %s."
+msgstr "Det er ingen aktiv autolagringsmodus. Forvalget er: %s."
+
+#: bin/persist-config:102
+msgid "save on shutdown/reboot automatically.  No asking."
+msgstr "lagre automatisk ved systemavslutning/omstart uten å spørre."
+
+#: bin/persist-config:103
+msgid "ask to save on shutdown/reboot."
+msgstr "spør om å lagre ved systemavslutning/omstart."
+
+#: bin/persist-config:104
+msgid "only save changes manually (you snooze, you lose)."
+msgstr "lagre kun manuelt (forkast hvis ikke)."
+
+#: bin/persist-config:105
+msgid "use current default."
+msgstr "bruk aktivt forvalg."
+
+#: bin/persist-config:117
+msgid "Auto-save mode set to %s in %s."
+msgstr "Autolagringsmodus er valgt til %s i %s."
+
+#: bin/persist-config:123
+msgid "It looks like root persistence was just enabled."
+msgstr "Det ser ut som om varig lagring av systemdata nylig ble slått på."
+
+#: bin/persist-config:124
+msgid "Please set the save-mode for root persistence."
+msgstr "Velg lagringsmodus for varig lagring av systemdata."
+
+#: bin/persist-config:125
+msgid "You will only have to do this once."
+msgstr "Dette må kun gjøres én gang."
+
+#: bin/persist-config:127
+msgid "You can change your choice later with %s."
+msgstr "Valget kan endres senere med %s."
+
+#: bin/persist-config:159
+msgid "Already saved less than %s seconds ago"
+msgstr "Ble allerede lagret for mindre enn %s sekunder siden"
+
+#: bin/persist-config:160
+msgid "Won't autosave within %s seconds of a previous save"
+msgstr "Vil ikke autolagre før %s sekunder etter forrige lagring"
+
+#: bin/persist-config:199
+msgid "CONFIRM"
+msgstr "BEKREFT"
+
+#: bin/persist-config:200
+msgid "There was an error saving your changes."
+msgstr "Det oppstod en feil under lagring av endringene dine."
+
+#: bin/persist-config:202
+msgid "Do you still want to %s?"
+msgstr "Vil du fortsatt %s?"

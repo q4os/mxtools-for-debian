@@ -1,0 +1,277 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# Arnold Marko <arnold.marko@gmail.com>, 2019-2020,2023
+msgid ""
+msgstr ""
+"Project-Id-Version: antix-development\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-10-22 19:22-0600\n"
+"PO-Revision-Date: 2015-05-07 19:18+0000\n"
+"Last-Translator: Arnold Marko <arnold.marko@gmail.com>, 2019-2020,2023\n"
+"Language-Team: Slovenian (http://www.transifex.com/anticapitalista/antix-development/language/sl/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: sl\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3);\n"
+
+#: bin/live-remaster:29
+msgid ""
+"Create a new compressed file system saving all of the changes you have made "
+"to the system."
+msgstr "Ustvari nov kompresiran datotečni sistem in shrani vse spremembe, ki so bile opravljene v sistemu."
+
+#: bin/live-remaster:35
+msgid "Extra options for"
+msgstr "Posebne opcije za"
+
+#: bin/live-remaster:36
+msgid "Make a smaller linuxfs.new.  NOT deleted when done."
+msgstr "Naredi manjši linuxfs.new. NE BO izbrisan, ko konča."
+
+#: bin/live-remaster:37
+msgid "Use %s instead of prompting user for title."
+msgstr "Uporabi %s namesto uporabnikovega vnosa imena"
+
+#: bin/live-remaster:38
+msgid "Make a general-purpose remaster."
+msgstr "Ustvari predelavo za splošno uporabo."
+
+#: bin/live-remaster:39
+msgid "Make a personalized remaster."
+msgstr "Ustvari predelavo za osebno rabo"
+
+#: bin/live-remaster:71
+msgid "The live file system is read-only.  Cannot remaster."
+msgstr "Živi datotečni sistem je zgolj berljiv in ga ni mogoče predelati"
+
+#: bin/live-remaster:73
+msgid "General"
+msgstr "Splošno"
+
+#: bin/live-remaster:74
+msgid "Personal"
+msgstr "Osebno"
+
+#: bin/live-remaster:81
+msgid "%s uses your personal settings."
+msgstr "%s uporablja vaše osebne nastavitve."
+
+#: bin/live-remaster:82
+msgid "%s does not."
+msgstr "%s jih ne."
+
+#: bin/live-remaster:95
+msgid "Do you want to save files under %s in the new remaster?"
+msgstr "Ali bi v predelavi radi shranili datoteke pod %s?"
+
+#: bin/live-remaster:101
+msgid "Checking for existing files and"
+msgstr "Preverjam obstoječe datoteke in "
+
+#: bin/live-remaster:102
+msgid "Checking if there is enough room ..."
+msgstr "Preverjam ali je na voljo dovolj prostora ..."
+
+#: bin/live-remaster:113
+msgid "The %s program was unable to start"
+msgstr "%s program ni bilo mogoče zagnati"
+
+#: bin/live-remaster:165
+msgid "current linuxfs size"
+msgstr "trenutno veliksot linuxfs "
+
+#: bin/live-remaster:166
+msgid "excluded files est."
+msgstr "ocena izključenih datotek"
+
+#: bin/live-remaster:167 bin/live-remaster:168
+msgid "estimated new size"
+msgstr "ocena nove velikosti"
+
+#: bin/live-remaster:174
+msgid "boot device total"
+msgstr "skupaj za zagonsko napravo"
+
+#: bin/live-remaster:175
+msgid "boot device free"
+msgstr "prosto na zagonski napravi"
+
+#: bin/live-remaster:176 bin/live-remaster:177
+msgid "est. remaining"
+msgstr "ocena preostanka"
+
+#: bin/live-remaster:194
+msgid "Have: %s megs available.  Need: %s."
+msgstr "Na voljo: %s MB. Potrebno: %s."
+
+#: bin/live-remaster:198
+msgid "Leftover files found"
+msgstr "Najdeni so bili preostanki datotek"
+
+#: bin/live-remaster:200
+msgid "The following file(s) already exist"
+msgstr "Te datoteke že obstajajo"
+
+#: bin/live-remaster:201
+msgid "in the %s directory:"
+msgstr "v  direktoriju%s:"
+
+#: bin/live-remaster:205
+msgid "They may be left over from a previous remastering."
+msgstr "Lahko gre za ostanke prejšnjih predelav."
+
+#: bin/live-remaster:206
+msgid "Do you want to fix this problem now?"
+msgstr "Ali bi radi sedaj odpravili to težavo?"
+
+#: bin/live-remaster:207
+msgid "(the alternative is to quit now)"
+msgstr "(druga možnost je, da končam)"
+
+#: bin/live-remaster:221
+msgid "Ready to create a new linuxfs file"
+msgstr "Pripravljen za ustvarjanje nove linuxfs datoteke"
+
+#: bin/live-remaster:225
+msgid "Shall we begin?"
+msgstr "Naj začnemo?"
+
+#: bin/live-remaster:235
+msgid "(compresses faster, boots faster)"
+msgstr "(hitreje kompresira, hitreje se zaganja)"
+
+#: bin/live-remaster:236
+msgid "(compresses better)"
+msgstr "(bolje kompresira)"
+
+#: bin/live-remaster:242
+msgid "Please choose the type of compression to use"
+msgstr "Prosimo, izberite vrsto kompresije"
+
+#: bin/live-remaster:243
+msgid "%s will take less time"
+msgstr "%s bo rabila manj časa"
+
+#: bin/live-remaster:244
+msgid "%s will result in a smaller file"
+msgstr "%s bo ustvarila manjšo datoteko"
+
+#: bin/live-remaster:260
+msgid "Do you want remaster to use all of the CPUs?"
+msgstr "Ali bi radi da predelava uporablja vse procesorje?"
+
+#: bin/live-remaster:262
+msgid "This will make the remaster process run as fast as possible."
+msgstr "To bo povzročilo, da se bo proces predelave izvajal z maksimalno hitrostjo."
+
+#: bin/live-remaster:263
+msgid "But there is more of a chance your computer will overheat."
+msgstr "Vendar obstaja večja možnost, da se bo vaš računalnik pregreval."
+
+#: bin/live-remaster:272
+msgid "Remaster Version Identification"
+msgstr "Identifikacija različice predelave"
+
+#: bin/live-remaster:274
+msgid "Please enter an (optional) title for this remaster"
+msgstr "Vnesite ime te predelave (izbirno)."
+
+#: bin/live-remaster:295
+msgid "The %s program failed to work"
+msgstr "%s ni uspešno deloval"
+
+#: bin/live-remaster:335
+msgid "Remastering -- DO NOT CLOSE"
+msgstr "Predelava - NE ZAPIRAJTE"
+
+#: bin/live-remaster:351
+msgid "Remaster in Progress"
+msgstr "Predelava poteka"
+
+#: bin/live-remaster:352
+msgid "Do you REALLY want to stop midway?"
+msgstr "Ali bi RES radi prenehali na sredi dela?"
+
+#: bin/live-remaster:379
+msgid "Created new compressed filesystem file:"
+msgstr "Ustvarjna je bil nova kompresirana datoteka datotečnega sistema:"
+
+#: bin/live-remaster:384
+msgid "The new file should be used automatically the next time you boot."
+msgstr "Nova datoteka bi morala biti samodejno uporabljena ob naslednjem zagonu."
+
+#: bin/live-remaster:386
+msgid "If there is a problem with the new system:"
+msgstr "Če obstaja težava z novim sistemom:"
+
+#: bin/live-remaster:387
+msgid "Use the %s  boot option to return to the current system."
+msgstr "Uporabite %s zagonsko opcijo, da se vrnete v trenutni sistem."
+
+#: bin/live-remaster:411
+msgid "Root persistence is enabled"
+msgstr "Vklopljena je korenska obstojnost"
+
+#: bin/live-remaster:413
+msgid "Do you want to make a new %s file now?"
+msgstr "Ali bi radi naredili novo %s datoteko zdaj?"
+
+#: bin/live-remaster:421
+msgid "Remaster in progress"
+msgstr "Predelava poteka"
+
+#: bin/live-remaster:423
+msgid "please be patient"
+msgstr "prosimo za potrpežljivost"
+
+#: bin/live-remaster:424
+msgid "(even after it says it is 100% done)"
+msgstr "(tudi potem, ko je status na 100%)"
+
+#: bin/live-remaster:429
+msgid "antiX Remaster in Progress"
+msgstr "antiX predelava poteka"
+
+#: bin/live-remaster:445
+msgid "Remastering Terminated Early"
+msgstr "Predelava je bila prehitro prekinjena"
+
+#: bin/live-remaster:450
+msgid "Remastering Failed"
+msgstr "Predelava ni uspela"
+
+#: bin/live-remaster:452
+msgid "New linuxfs file was not created!"
+msgstr "Nova linuxfs datoteka ni bila ustvarjena!"
+
+#: bin/live-remaster:456
+msgid "Could not mount new file as %s!"
+msgstr "Nisem mogel priklopiti nove datoteke kot %s!"
+
+#: bin/live-remaster:467
+msgid "linuxfs size"
+msgstr "velikost linuxfs"
+
+#: bin/live-remaster:468
+msgid "elapsed time"
+msgstr "porabljen čas"
+
+#: bin/live-remaster:469
+msgid "processors"
+msgstr "procesorij"
+
+#: bin/live-remaster:470
+msgid "compression"
+msgstr "kompresij"
+
+#: bin/live-remaster:484
+msgid "Error"
+msgstr "Napaka"
+
+#: bin/live-remaster:489
+msgid "Do you want to save the incomplete file?"
+msgstr "Ali bi radi shranili nepopolno datoteko?"

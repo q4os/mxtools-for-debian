@@ -30,13 +30,17 @@ xgettext --language Desktop --join --add-comments -o pot/$RESOURCE.pot ../xdg/dd
 
 make_mo()
 {
-    for val in $lang; do
-        if [ ! -e "mo/$val/$RESOURCE.mo" ]; then
-        	if [ -e po/"${RESOURCE}_${val}.po" ]; then
-            	mkdir -p mo/$val
-            	msgfmt --output-file=mo/$val/"$RESOURCE".mo po/"${RESOURCE}_${val}.po"
-            fi
-        fi
+	if [ -d mo ]; then
+		rm -R mo
+	fi
+    for i in $(ls -1 po/*.po); do
+    	val=$(basename $i |cut -d"." -f1 |cut -d"_" -f2-3)
+    	echo $val
+        if [ -e $i ]; then
+            echo $i
+            mkdir -p mo/usr/share/locale/$val/LC_MESSAGES
+            msgfmt --output-file=mo/usr/share/locale/$val/LC_MESSAGES/"$RESOURCE".mo "$i"
+         fi
     done
 }
 

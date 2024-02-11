@@ -1,3 +1,9 @@
+mx23-artwork (24.01.01) mx; urgency=medium
+
+  * add MX_Linux_Desert_Landscape.jpg
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 17 Jan 2024 19:45:21 -0500
+
 mx23-artwork (23.07.02) mx; urgency=medium
 
   * fix mount shasta symlink

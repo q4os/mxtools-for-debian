@@ -1,3 +1,16 @@
+mx-remaster (24.01.01mx23) mx; urgency=medium
+
+  * catchup to remaster-antix 0.8.15
+  * update translations
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 17 Jan 2024 19:33:52 -0500
+
+mx-remaster (23.12.01mx23) mx; urgency=medium
+
+  * set papersize in rc.local
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 10 Dec 2023 23:47:54 -0500
+
 mx-remaster (23.10.01mx23) mx; urgency=medium
 
   * update default grub file

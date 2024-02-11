@@ -1,3 +1,22 @@
+mx-docs (20240117) mx; urgency=medium
+
+  * updated MX-Tools
+  * updated Installer > Swap screen and comments
+  * rewrote Firewall and Samba sections
+  * removed faulty script
+  * replaced dark images with light ones
+  * corrected format errors
+  * corrected multiple small errors
+  * pagination error starting Section 5 remains unfixed
+
+ -- Dolphin Oracle <mxdevs@mx>  Wed, 17 Jan 2024 21:36:02 -0500
+
+mx-docs (20240109) mx; urgency=medium
+
+  * update launcher translations
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Tue, 09 Jan 2024 23:08:11 -0500
+
 mx-docs (20230728+1) mx; urgency=medium
 
   * update translations for files (jerry)

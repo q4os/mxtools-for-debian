@@ -1,0 +1,159 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# scootergrisen, 2018
+msgid ""
+msgstr ""
+"Project-Id-Version: antix-development\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-04-03 12:45-0600\n"
+"PO-Revision-Date: 2012-01-01 11:16+0000\n"
+"Last-Translator: scootergrisen, 2018\n"
+"Language-Team: Danish (http://www.transifex.com/anticapitalista/antix-development/language/da/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: da\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: bin/persist-config:12
+msgid "antiX Root Persistence Auto-Save Configuration"
+msgstr "antiX rodvedvarenhed automatisk gem-konfiguration"
+
+#: bin/persist-config:20
+msgid "Automatic"
+msgstr "Automatisk"
+
+#: bin/persist-config:21
+msgid "Semi-Automatic"
+msgstr "Halvautomatisk"
+
+#: bin/persist-config:22
+msgid "Manual"
+msgstr "Manuelt"
+
+#: bin/persist-config:23
+msgid "Quit"
+msgstr "Afslut"
+
+#: bin/persist-config:29
+msgid "Configure root persistence saves to run either:"
+msgstr "Konfigurer gemte rodvedvarenhed til at køre enten:"
+
+#: bin/persist-config:31
+msgid "at shutdown/reboot, no asking"
+msgstr "ved luk ned/genstart, uden at spørge"
+
+#: bin/persist-config:32
+msgid "ask at shutdown/reboot"
+msgstr "spørg ved luk ned/genstart"
+
+#: bin/persist-config:33
+msgid "you snooze, you lose"
+msgstr "gab og tab"
+
+#: bin/persist-config:35
+msgid ""
+"This program should be called with the %s option in a startup script to "
+"ensure a config file is created."
+msgstr "Programmet bør kaldes med %s-valgmuligheden i et opstartsscript for at sikre at der er oprettet en konfigurationsfil."
+
+#: bin/persist-config:37
+msgid ""
+"It should be called with the %s option in shutdown scripts so your changes "
+"can be saved before shutting down."
+msgstr "Programmet bør kaldes med %s-valgmuligheden i nedlukningsscripter så dine ændringer gemmes inden der lukkes ned."
+
+#: bin/persist-config:45
+msgid "%s specific options"
+msgstr "%s-bestemte valgmuligheder"
+
+#: bin/persist-config:46
+msgid "Create a %s file if one is missing."
+msgstr "Opret en %s-fil hvis den mangler."
+
+#: bin/persist-config:47
+msgid "Run persist-save as directed by %s file."
+msgstr "Kør persist-save som instrueret af %s-filen."
+
+#: bin/persist-config:48
+msgid "Run %s if %s succeeded."
+msgstr "Kør %s hvis %s lykkes."
+
+#: bin/persist-config:49
+msgid "If %s fails prompt user before running %s."
+msgstr "Hvis %s mislykkedes, så spørg brugeren inden %s køres."
+
+#: bin/persist-config:50
+msgid "implies %s"
+msgstr "betyder %s"
+
+#: bin/persist-config:52
+msgid "Config file is located at: %s"
+msgstr "Konfigurationsfilen findes i: %s"
+
+#: bin/persist-config:90
+msgid "Current mode is: %s"
+msgstr "Nuværende tilstand er: %s"
+
+#: bin/persist-config:92
+msgid "There is no current auto-save mode.  The default is: %s."
+msgstr "Der er ikke nogen nuværende automatisk gem-tilstand. Standarden er: %s."
+
+#: bin/persist-config:102
+msgid "save on shutdown/reboot automatically.  No asking."
+msgstr "gem automatisk ved luk ned/genstart. Uden at spørge."
+
+#: bin/persist-config:103
+msgid "ask to save on shutdown/reboot."
+msgstr "spørg om at gemme ved luk ned/genstart."
+
+#: bin/persist-config:104
+msgid "only save changes manually (you snooze, you lose)."
+msgstr "gem kun ændringer manuelt (gab og tab)."
+
+#: bin/persist-config:105
+msgid "use current default."
+msgstr "brug nuværende standard."
+
+#: bin/persist-config:117
+msgid "Auto-save mode set to %s in %s."
+msgstr "Automatisk gem-tilstand er indstillet til %s i %s."
+
+#: bin/persist-config:123
+msgid "It looks like root persistence was just enabled."
+msgstr "Det ser ud til at rodvedvarenhed lige blev aktiveret."
+
+#: bin/persist-config:124
+msgid "Please set the save-mode for root persistence."
+msgstr "Indstil venligst gem-tilstanden for rodvedvarenhed."
+
+#: bin/persist-config:125
+msgid "You will only have to do this once."
+msgstr "Du behøver kun at gøre det én gang."
+
+#: bin/persist-config:127
+msgid "You can change your choice later with %s."
+msgstr "Du kan ændre dit valg senere med %s."
+
+#: bin/persist-config:159
+msgid "Already saved less than %s seconds ago"
+msgstr "Allerede gemt for mindre end %s sekunder siden"
+
+#: bin/persist-config:160
+msgid "Won't autosave within %s seconds of a previous save"
+msgstr "Vil ikke gemme automatisk indenfor %s sekunder af forrige gem"
+
+#: bin/persist-config:199
+msgid "CONFIRM"
+msgstr "BEKRÆFT"
+
+#: bin/persist-config:200
+msgid "There was an error saving your changes."
+msgstr "Der opstod en fejl da dine ændringer skulle gemmes."
+
+#: bin/persist-config:202
+msgid "Do you still want to %s?"
+msgstr "Vil du stadig %s?"

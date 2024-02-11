@@ -143,7 +143,7 @@ private slots:
     void on_checkHideLibsBP_clicked(bool checked);
     void on_checkHideLibsMX_clicked(bool checked);
     void on_checkHideLibs_toggled(bool checked);
-    void on_comboRemote_activated();
+    void on_comboRemote_activated(int index = 0);
     void on_comboUser_activated(int index);
     void on_lineEdit_returnPressed();
     void on_pushAbout_clicked();

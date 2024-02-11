@@ -1,0 +1,75 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# anticapitalista <anticapitalista@riseup.net>, 2016
+msgid ""
+msgstr ""
+"Project-Id-Version: antix-development\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-06-29 15:33-0600\n"
+"PO-Revision-Date: 2012-01-01 11:19+0000\n"
+"Last-Translator: anticapitalista <anticapitalista@riseup.net>, 2016\n"
+"Language-Team: Greek (http://www.transifex.com/anticapitalista/antix-development/language/el/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: el\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: bin/toram-eject:14
+msgid "Eject LiveCD/DVD via a simple GUI if %s is enabled."
+msgstr "Εξαγωγή LiveCD/DVD με ένα απλό GUI εάν έχει ενεργοποιηθεί η %s."
+
+#: bin/toram-eject:16
+msgid "Automatic toram Eject"
+msgstr "Αυτόματη Εξαγωγή toram"
+
+#: bin/toram-eject:24
+msgid "no BOOT_DEV given!"
+msgstr "Δεν υπάρχει BOOT_DEV"
+
+#: bin/toram-eject:33
+msgid "boot device: %s is not removable."
+msgstr "συσκευή εκκίνησης: %s δεν είναι αφαιρούμενο."
+
+#: bin/toram-eject:39
+msgid "boot device: %s is still mounted!"
+msgstr "συσκευή εκκίνησης: %s είναι ακόμα τοποθετημένη!"
+
+#: bin/toram-eject:46
+msgid "The %s boot option succeeded."
+msgstr "επιλογή εκκίνησης του %s πέτυχε."
+
+#: bin/toram-eject:47
+msgid "The boot media is no longer needed."
+msgstr "Το μέσο εκκίνησης δεν είναι πλέον απαραίτητη."
+
+#: bin/toram-eject:49
+msgid "Do you want the LiveCD/DVD ejected?"
+msgstr "Θέλετε να βγάλετε το Live CD/DVD;"
+
+#: bin/toram-eject:50
+msgid "did not eject as per user request."
+msgstr "δεν εξάγετε ως ανά αίτηση του χρήστη."
+
+#: bin/toram-eject:52
+msgid "Could not eject %s"
+msgstr "Δεν ήταν δυνατή η εξαγωγή του %s"
+
+#: bin/toram-eject:57
+msgid "Feel free to remove the CD or DVD."
+msgstr "Μη διστάσετε να αφαιρέσετε το CD ή DVD."
+
+#: bin/toram-eject:59
+msgid "Do you want the drive closed now?"
+msgstr "Θέλετε να κλείσετε το δίσκο τώρα;"
+
+#: bin/toram-eject:60
+msgid "did not closing drive as per user request."
+msgstr "δεν έκλεισε το δίσκο ως ανά αίτηση του χρήστη."
+
+#: bin/toram-eject:62
+msgid "Could not close %s"
+msgstr "δεν θα μπορούσε να κλείσει %s"

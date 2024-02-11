@@ -1,0 +1,57 @@
+/******************
+ ! Whisker Menu *
+*******************/
+/*set custom gtk3/css code below */
+/* Background is top bar except behind toolbuttons*/
+/* color is cursor, corner triangle, and user name*/
+window#whiskermenu-window {
+  background-color: #1D2324;
+  	color: #b5babc;
+}
+
+/* Set colour of whisker perimeter border to match background of menu*/
+#whiskermenu-window border {
+	background-color: #1D2324;
+	border-color: #1D2324;
+	color: #1D2324;
+}
+
+/* Make sidebar buttons match */
+/* Background is area behind category icons and tool bars*/
+/* color is category text*/
+#whiskermenu-window button {
+	background-color: #1D2324;
+	color: #FFFFFF;
+}
+/* Background color is selection cursor upon mouseover*/
+#whiskermenu-window button:hover {
+	background-color: #0f56d9;
+	color: #FFFFFF;
+}
+/* Background color is selection cursor upon clicking*/
+#whiskermenu-window button:checked {
+	background-color: #0f56d9;
+	color: #FFFFFF;
+}
+
+/* Background is area where applications appear */
+/* color is the application text*/
+/* Make treeview match */
+/*
+#whiskermenu-window treeview {
+	background-color: #dedfe3;
+	color:  #000000;
+}
+*/
+/* Background is selection box color in tree view*/
+/* color is the selected application text*/
+/* this setting appears needed despite line 8281 settings */
+#whiskermenu-window treeview:hover {
+	background-color: #0f56d9;
+	color: #FFFFFF;
+}
+@import url("resource:///org/numixproject/gtk-3.20/dist/gtk-dark.css");
+wnck-pager:selected {
+    background-color: #0f56d9; }
+  wnck-pager:hover {
+    background-color: #DEDFE3; }

@@ -1,0 +1,76 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# En Kerro <inactive+ekeimaja@transifex.com>, 2018
+# Oi Suomi On! <oisuomion@protonmail.com>, 2020
+msgid ""
+msgstr ""
+"Project-Id-Version: antix-development\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-06-29 15:33-0600\n"
+"PO-Revision-Date: 2012-01-01 11:19+0000\n"
+"Last-Translator: Oi Suomi On! <oisuomion@protonmail.com>, 2020\n"
+"Language-Team: Finnish (http://www.transifex.com/anticapitalista/antix-development/language/fi/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: fi\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: bin/toram-eject:14
+msgid "Eject LiveCD/DVD via a simple GUI if %s is enabled."
+msgstr "Sylje ulos LiveCD/DVD yksinkertaisen graafisen käyttöliittymän kautta jos %son käytössä."
+
+#: bin/toram-eject:16
+msgid "Automatic toram Eject"
+msgstr "Automaattinen toram-ulossylky"
+
+#: bin/toram-eject:24
+msgid "no BOOT_DEV given!"
+msgstr "BOOT_DEV ei määritettynä!"
+
+#: bin/toram-eject:33
+msgid "boot device: %s is not removable."
+msgstr "käynnistettävä laite: %s ei ole irrotettavissa."
+
+#: bin/toram-eject:39
+msgid "boot device: %s is still mounted!"
+msgstr "käynnistettävä laite: %s on yhä liitettynä!"
+
+#: bin/toram-eject:46
+msgid "The %s boot option succeeded."
+msgstr "%skäynnistysvalinta onnistui."
+
+#: bin/toram-eject:47
+msgid "The boot media is no longer needed."
+msgstr "Käynnistysmediaa ei enää tarvita."
+
+#: bin/toram-eject:49
+msgid "Do you want the LiveCD/DVD ejected?"
+msgstr "Haluatko toteuttaa LiveCD/DVD ulossylkemisen?"
+
+#: bin/toram-eject:50
+msgid "did not eject as per user request."
+msgstr "Ulossylky ei onnistunut käyttäjätoiveen mukaisesti."
+
+#: bin/toram-eject:52
+msgid "Could not eject %s"
+msgstr "Ei voinut ulossylkeä %s"
+
+#: bin/toram-eject:57
+msgid "Feel free to remove the CD or DVD."
+msgstr "Voit nyt poistaa CD:n tai DVD:n."
+
+#: bin/toram-eject:59
+msgid "Do you want the drive closed now?"
+msgstr "Haluatko että CD-asema suljetaan nyt?"
+
+#: bin/toram-eject:60
+msgid "did not closing drive as per user request."
+msgstr "asemaa ei suljettu käyttäjän pyynnöstä."
+
+#: bin/toram-eject:62
+msgid "Could not close %s"
+msgstr "Ei voitu sulkea %s"

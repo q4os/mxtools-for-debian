@@ -1,0 +1,159 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# anticapitalista <anticapitalista@riseup.net>, 2015
+msgid ""
+msgstr ""
+"Project-Id-Version: antix-development\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-04-03 12:45-0600\n"
+"PO-Revision-Date: 2012-01-01 11:16+0000\n"
+"Last-Translator: anticapitalista <anticapitalista@riseup.net>, 2015\n"
+"Language-Team: Greek (http://www.transifex.com/anticapitalista/antix-development/language/el/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: el\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: bin/persist-config:12
+msgid "antiX Root Persistence Auto-Save Configuration"
+msgstr "Διαμόρφωση Root Persistence Auto-Save"
+
+#: bin/persist-config:20
+msgid "Automatic"
+msgstr "Αυτόματο"
+
+#: bin/persist-config:21
+msgid "Semi-Automatic"
+msgstr "Ημι-Αυτόματο"
+
+#: bin/persist-config:22
+msgid "Manual"
+msgstr "Εγχειρίδιο"
+
+#: bin/persist-config:23
+msgid "Quit"
+msgstr "Έξοδος "
+
+#: bin/persist-config:29
+msgid "Configure root persistence saves to run either:"
+msgstr "Διαμορφώστε αποθήκευση του root persistence να λειτουργεί είτε:"
+
+#: bin/persist-config:31
+msgid "at shutdown/reboot, no asking"
+msgstr "στο τερματισμός/επανεκκίνηση αυτόματα. Καμία ερώτηση."
+
+#: bin/persist-config:32
+msgid "ask at shutdown/reboot"
+msgstr "ρωτήστε στο τερματισμός/επανεκκίνηση"
+
+#: bin/persist-config:33
+msgid "you snooze, you lose"
+msgstr "προσοχή"
+
+#: bin/persist-config:35
+msgid ""
+"This program should be called with the %s option in a startup script to "
+"ensure a config file is created."
+msgstr "Το πρόγραμμα αυτό θα πρέπει να κληθεί με την επιλογή του %s σε μια δέσμη ενεργειών εκκίνησης για να εξασφαλίσει οτι ένα αρχείο ρυθμίσεων δημιουργείται."
+
+#: bin/persist-config:37
+msgid ""
+"It should be called with the %s option in shutdown scripts so your changes "
+"can be saved before shutting down."
+msgstr "Θα πρέπει να κληθεί με την επιλογή του %s σε σενάρια τερματισμού, ώστε οι αλλαγές σας μπορεί να αποθηκευτεί πριν από το κλείσιμο του."
+
+#: bin/persist-config:45
+msgid "%s specific options"
+msgstr "συγκεκριμένες επιλογές %s"
+
+#: bin/persist-config:46
+msgid "Create a %s file if one is missing."
+msgstr "Δημιουργία αρχείου %s αν λείπει."
+
+#: bin/persist-config:47
+msgid "Run persist-save as directed by %s file."
+msgstr "Τρέξτε το persist-save σύμφωνα με τις οδηγίες του αρχείου %s."
+
+#: bin/persist-config:48
+msgid "Run %s if %s succeeded."
+msgstr "Εκτελέστε %s αν πέτυχε το %s."
+
+#: bin/persist-config:49
+msgid "If %s fails prompt user before running %s."
+msgstr "Αν %s αποτύχει, προτροπή του χρήστη πριν από την εκτέλεση του %s."
+
+#: bin/persist-config:50
+msgid "implies %s"
+msgstr "συνεπάγεται %s"
+
+#: bin/persist-config:52
+msgid "Config file is located at: %s"
+msgstr "Το αρχείο ρυθμίσεων βρίσκεται στη διεύθυνση: %s"
+
+#: bin/persist-config:90
+msgid "Current mode is: %s"
+msgstr "Τρέχουσα λειτουργία είναι: %s"
+
+#: bin/persist-config:92
+msgid "There is no current auto-save mode.  The default is: %s."
+msgstr "Δεν υπάρχει καμία τρέχουσα λειτουργία αυτόματης αποθήκευσης. Η προεπιλογή είναι: %s."
+
+#: bin/persist-config:102
+msgid "save on shutdown/reboot automatically.  No asking."
+msgstr "αποθήκευση στο τερματισμός/επανεκκίνηση αυτόματα. Καμία ερώτηση."
+
+#: bin/persist-config:103
+msgid "ask to save on shutdown/reboot."
+msgstr "ρωτήστε να αποθήκευσετε στο τερματισμός/επανεκκίνηση"
+
+#: bin/persist-config:104
+msgid "only save changes manually (you snooze, you lose)."
+msgstr "μόνο να αποθηκεύσετε τις αλλαγές χειροκίνητα (προσοχή)."
+
+#: bin/persist-config:105
+msgid "use current default."
+msgstr "χρησιμοποιήσετε το τρέχον προεπιλεγμένο."
+
+#: bin/persist-config:117
+msgid "Auto-save mode set to %s in %s."
+msgstr "Αυτόματη λειτουργία εξοικονόμησης οριστηκε στο %s σε %s."
+
+#: bin/persist-config:123
+msgid "It looks like root persistence was just enabled."
+msgstr "Φαίνεται ότι η ενεργοποίηση της root persistence μόλις έγινε"
+
+#: bin/persist-config:124
+msgid "Please set the save-mode for root persistence."
+msgstr "Παρακαλούμε να ορίσετε τη save-mode για το ."
+
+#: bin/persist-config:125
+msgid "You will only have to do this once."
+msgstr "Θα πρέπει να το κάνετε μόνο μία φορά."
+
+#: bin/persist-config:127
+msgid "You can change your choice later with %s."
+msgstr "Μπορείτε να αλλάξετε την επιλογή σας αργότερα με το %s."
+
+#: bin/persist-config:159
+msgid "Already saved less than %s seconds ago"
+msgstr "Η αποθήκευση εγινε πριν απο %s δευτερόλεπτα"
+
+#: bin/persist-config:160
+msgid "Won't autosave within %s seconds of a previous save"
+msgstr "Δεν θα γινει αυτόματη αποθήκευση εντός %s δευτερόλεπτα του προηγούμενου"
+
+#: bin/persist-config:199
+msgid "CONFIRM"
+msgstr "ΕΠΙΒΕΒΑΙΩΣΤΕ"
+
+#: bin/persist-config:200
+msgid "There was an error saving your changes."
+msgstr "Υπήρξε ένα σφάλμα κατά την αποθήκευση των αλλαγών σας."
+
+#: bin/persist-config:202
+msgid "Do you still want to %s?"
+msgstr "Θέλετε ακόμα να %s;"

@@ -1,0 +1,159 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# joyinko <joyinko@azet.sk>, 2017
+msgid ""
+msgstr ""
+"Project-Id-Version: antix-development\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-04-03 12:45-0600\n"
+"PO-Revision-Date: 2012-01-01 11:16+0000\n"
+"Last-Translator: joyinko <joyinko@azet.sk>, 2017\n"
+"Language-Team: Slovak (http://www.transifex.com/anticapitalista/antix-development/language/sk/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: sk\n"
+"Plural-Forms: nplurals=4; plural=(n % 1 == 0 && n == 1 ? 0 : n % 1 == 0 && n >= 2 && n <= 4 ? 1 : n % 1 != 0 ? 2: 3);\n"
+
+#: bin/persist-config:12
+msgid "antiX Root Persistence Auto-Save Configuration"
+msgstr "Nastavenia automatického ukladania Root Persistencie"
+
+#: bin/persist-config:20
+msgid "Automatic"
+msgstr "Automaticky"
+
+#: bin/persist-config:21
+msgid "Semi-Automatic"
+msgstr "Poloautomaticky"
+
+#: bin/persist-config:22
+msgid "Manual"
+msgstr "Manuálne"
+
+#: bin/persist-config:23
+msgid "Quit"
+msgstr "Zatvoriť"
+
+#: bin/persist-config:29
+msgid "Configure root persistence saves to run either:"
+msgstr "Nastaviť ukladanie Root persistencie buď:"
+
+#: bin/persist-config:31
+msgid "at shutdown/reboot, no asking"
+msgstr "pri vypnutí/reštartovaní, bez výzvy"
+
+#: bin/persist-config:32
+msgid "ask at shutdown/reboot"
+msgstr "pri vypnutí/reštartovaní, spýtať sa"
+
+#: bin/persist-config:33
+msgid "you snooze, you lose"
+msgstr "strata zmien pri vypnutí"
+
+#: bin/persist-config:35
+msgid ""
+"This program should be called with the %s option in a startup script to "
+"ensure a config file is created."
+msgstr "Tento program by mal byť vyvolaný s %s voľbou pri štartovaní aby sa zaistilo, že konfiguračný súbor bude vytvorený."
+
+#: bin/persist-config:37
+msgid ""
+"It should be called with the %s option in shutdown scripts so your changes "
+"can be saved before shutting down."
+msgstr "Tento program by mal byť vyvolaný s %s voľbou pri vypínaní aby sa zaistilo, že zmeny budú uložené."
+
+#: bin/persist-config:45
+msgid "%s specific options"
+msgstr "%s špecifické nastavenia"
+
+#: bin/persist-config:46
+msgid "Create a %s file if one is missing."
+msgstr "Vytvoriť %s súbor pokiaľ chýba."
+
+#: bin/persist-config:47
+msgid "Run persist-save as directed by %s file."
+msgstr "Spustiť persist-save, riadené %s súborom."
+
+#: bin/persist-config:48
+msgid "Run %s if %s succeeded."
+msgstr "Spustiť %s ak %s uspelo."
+
+#: bin/persist-config:49
+msgid "If %s fails prompt user before running %s."
+msgstr "Ak %s zlyhalo, spýtať sa pred sputením %s."
+
+#: bin/persist-config:50
+msgid "implies %s"
+msgstr "zahrnuje %s"
+
+#: bin/persist-config:52
+msgid "Config file is located at: %s"
+msgstr "Konfiguračný súbor je umiestnený: %s "
+
+#: bin/persist-config:90
+msgid "Current mode is: %s"
+msgstr "Režim ukladania je: %s"
+
+#: bin/persist-config:92
+msgid "There is no current auto-save mode.  The default is: %s."
+msgstr "Režim ukladania nebol nastavený. Predvolený je: %s."
+
+#: bin/persist-config:102
+msgid "save on shutdown/reboot automatically.  No asking."
+msgstr "automaticky uložiť pri vypnutí/reštartovaní. Bez výzvy."
+
+#: bin/persist-config:103
+msgid "ask to save on shutdown/reboot."
+msgstr "pri vypnutí/reštartovaní sa spýtať na uloženie."
+
+#: bin/persist-config:104
+msgid "only save changes manually (you snooze, you lose)."
+msgstr "manuálne ukladanie zmien (strata zmien pri vypnutí)."
+
+#: bin/persist-config:105
+msgid "use current default."
+msgstr "použiť aktuálne nastavené."
+
+#: bin/persist-config:117
+msgid "Auto-save mode set to %s in %s."
+msgstr "Automatické ukladanie je nastavené na %s v %s."
+
+#: bin/persist-config:123
+msgid "It looks like root persistence was just enabled."
+msgstr "Zdá sa, že Root persistencia bola práve spustená."
+
+#: bin/persist-config:124
+msgid "Please set the save-mode for root persistence."
+msgstr "Prosím nastavte spôsob ukladania pre Root persistenciu."
+
+#: bin/persist-config:125
+msgid "You will only have to do this once."
+msgstr "Toto budete musieť spraviť iba raz."
+
+#: bin/persist-config:127
+msgid "You can change your choice later with %s."
+msgstr "Neskôr môžete svoju voľbu zmeniť s %s."
+
+#: bin/persist-config:159
+msgid "Already saved less than %s seconds ago"
+msgstr "Už uložené pred menej ako %s sekundami"
+
+#: bin/persist-config:160
+msgid "Won't autosave within %s seconds of a previous save"
+msgstr "Automatické ukladanie neprebehne skôr ako %s sekúnd od predchodzieho"
+
+#: bin/persist-config:199
+msgid "CONFIRM"
+msgstr "POTVRDIŤ"
+
+#: bin/persist-config:200
+msgid "There was an error saving your changes."
+msgstr "Pri ukladaní zmien sa vyskytla chyba."
+
+#: bin/persist-config:202
+msgid "Do you still want to %s?"
+msgstr "Určite chcete %s?"

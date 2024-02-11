@@ -21,17 +21,17 @@
     <message>
         <location filename="../mainwindow.ui" line="54"/>
         <source>Defaults</source>
-        <translation type="unfinished"></translation>
+        <translation>Numatytosios reikšmės</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="59"/>
         <source>msdos</source>
-        <translation type="unfinished"></translation>
+        <translation>msdos</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="64"/>
         <source>gpt</source>
-        <translation type="unfinished"></translation>
+        <translation>gpt</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="72"/>
@@ -61,7 +61,7 @@
     <message>
         <location filename="../mainwindow.ui" line="166"/>
         <source>Partition Table Type</source>
-        <translation type="unfinished"></translation>
+        <translation>Skaidinių lentelės tipas</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="225"/>
@@ -196,7 +196,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="315"/>
         <source>Invalid Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Neteisingas pavadinimas</translation>
     </message>
 </context>
 <context>

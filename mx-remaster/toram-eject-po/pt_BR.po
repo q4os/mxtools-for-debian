@@ -1,0 +1,78 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# Danylo Sa <kaiserblast@gmail.com>, 2018
+# José Vieira <jvieira33@sapo.pt>, 2016
+# marcelo cripe <marcelocripe@gmail.com>, 2020-2021,2023
+# ric, 2017
+msgid ""
+msgstr ""
+"Project-Id-Version: antix-development\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-06-29 15:33-0600\n"
+"PO-Revision-Date: 2012-01-01 11:19+0000\n"
+"Last-Translator: marcelo cripe <marcelocripe@gmail.com>, 2020-2021,2023\n"
+"Language-Team: Portuguese (Brazil) (http://app.transifex.com/anticapitalista/antix-development/language/pt_BR/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: pt_BR\n"
+"Plural-Forms: nplurals=3; plural=(n == 0 || n == 1) ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
+
+#: bin/toram-eject:14
+msgid "Eject LiveCD/DVD via a simple GUI if %s is enabled."
+msgstr "Ejetar o dispositivo de instalação externa executável através de uma interface gráfica GUI, se %s estiver ativado."
+
+#: bin/toram-eject:16
+msgid "Automatic toram Eject"
+msgstr "Ejetar o ‘toram’ automaticamente"
+
+#: bin/toram-eject:24
+msgid "no BOOT_DEV given!"
+msgstr "Não foi indicado nenhum dispositivo de inicialização (BOOT_DEV)!"
+
+#: bin/toram-eject:33
+msgid "boot device: %s is not removable."
+msgstr "o dispositivo de inicialização: %s não é removível."
+
+#: bin/toram-eject:39
+msgid "boot device: %s is still mounted!"
+msgstr "o dispositivo de inicialização: %s ainda está montado!"
+
+#: bin/toram-eject:46
+msgid "The %s boot option succeeded."
+msgstr "A inicialização pela opção %s foi bem-sucedida."
+
+#: bin/toram-eject:47
+msgid "The boot media is no longer needed."
+msgstr "O dispositivo de inicialização não é mais necessário."
+
+#: bin/toram-eject:49
+msgid "Do you want the LiveCD/DVD ejected?"
+msgstr "Você quer ejetar o dispositivo de instalação externa executável (LiveCD/DVD)?"
+
+#: bin/toram-eject:50
+msgid "did not eject as per user request."
+msgstr "não foi ejetado de acordo com a solicitação do usuário."
+
+#: bin/toram-eject:52
+msgid "Could not eject %s"
+msgstr "Não foi possível ejetar %s"
+
+#: bin/toram-eject:57
+msgid "Feel free to remove the CD or DVD."
+msgstr "Você já pode remover o CD ou o DVD."
+
+#: bin/toram-eject:59
+msgid "Do you want the drive closed now?"
+msgstr "Você quer fechar o dispositivo agora?"
+
+#: bin/toram-eject:60
+msgid "did not closing drive as per user request."
+msgstr "o dispositivo não foi fechado como solicitado."
+
+#: bin/toram-eject:62
+msgid "Could not close %s"
+msgstr "Não foi possível fechar %s"

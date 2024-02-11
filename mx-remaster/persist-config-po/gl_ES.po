@@ -1,0 +1,159 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# David Rebolo Magariños <drgaga345@gmail.com>, 2020
+msgid ""
+msgstr ""
+"Project-Id-Version: antix-development\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-04-03 12:45-0600\n"
+"PO-Revision-Date: 2012-01-01 11:16+0000\n"
+"Last-Translator: David Rebolo Magariños <drgaga345@gmail.com>, 2020\n"
+"Language-Team: Galician (Spain) (http://www.transifex.com/anticapitalista/antix-development/language/gl_ES/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: gl_ES\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: bin/persist-config:12
+msgid "antiX Root Persistence Auto-Save Configuration"
+msgstr "Configuración de gardar automaticamente a persistencia como administrador antiX"
+
+#: bin/persist-config:20
+msgid "Automatic"
+msgstr "Automático"
+
+#: bin/persist-config:21
+msgid "Semi-Automatic"
+msgstr "Semi-automático"
+
+#: bin/persist-config:22
+msgid "Manual"
+msgstr "Manual"
+
+#: bin/persist-config:23
+msgid "Quit"
+msgstr "Saír"
+
+#: bin/persist-config:29
+msgid "Configure root persistence saves to run either:"
+msgstr "Configurar a persistencia como administrador gardada para ser executada:"
+
+#: bin/persist-config:31
+msgid "at shutdown/reboot, no asking"
+msgstr "ao apagar/reiniciar, sen preguntar"
+
+#: bin/persist-config:32
+msgid "ask at shutdown/reboot"
+msgstr "preguntar ao apagar/reiniciar"
+
+#: bin/persist-config:33
+msgid "you snooze, you lose"
+msgstr "gardar cambios só manualmente"
+
+#: bin/persist-config:35
+msgid ""
+"This program should be called with the %s option in a startup script to "
+"ensure a config file is created."
+msgstr "Este programa deberá ser activado a través da opción %s nun script de inicio para asegurar que é creado un ficheiro de configuración."
+
+#: bin/persist-config:37
+msgid ""
+"It should be called with the %s option in shutdown scripts so your changes "
+"can be saved before shutting down."
+msgstr "Deberá ser activado a través da opción %s en scripts de apagar para que os cambios sexan gardadas antes de que o computador ser apagado."
+
+#: bin/persist-config:45
+msgid "%s specific options"
+msgstr "%s opcións específicas"
+
+#: bin/persist-config:46
+msgid "Create a %s file if one is missing."
+msgstr "Crear un ficheiro %s se estiver en falta."
+
+#: bin/persist-config:47
+msgid "Run persist-save as directed by %s file."
+msgstr "Executar gardar persistencia como indicado polo ficheiro %s."
+
+#: bin/persist-config:48
+msgid "Run %s if %s succeeded."
+msgstr "Executar %s se %s tivese éxito."
+
+#: bin/persist-config:49
+msgid "If %s fails prompt user before running %s."
+msgstr "Se %s fallar alertar o usuario antes de executar %s."
+
+#: bin/persist-config:50
+msgid "implies %s"
+msgstr "implica %s"
+
+#: bin/persist-config:52
+msgid "Config file is located at: %s"
+msgstr "Ficheiro config localizado en: %s"
+
+#: bin/persist-config:90
+msgid "Current mode is: %s"
+msgstr "O modo actual é: %s"
+
+#: bin/persist-config:92
+msgid "There is no current auto-save mode.  The default is: %s."
+msgstr "Non hai ningún modo de gardar automático. A predeterminada é: %s."
+
+#: bin/persist-config:102
+msgid "save on shutdown/reboot automatically.  No asking."
+msgstr "gardar automaticamente ao apagar/reiniciar, sen preguntar."
+
+#: bin/persist-config:103
+msgid "ask to save on shutdown/reboot."
+msgstr "preguntar se é para gardar ao apagar/reiniciar."
+
+#: bin/persist-config:104
+msgid "only save changes manually (you snooze, you lose)."
+msgstr "gardar cambios só manualmente (se non for activada, pérdense)."
+
+#: bin/persist-config:105
+msgid "use current default."
+msgstr "usar a que está por defecto agora."
+
+#: bin/persist-config:117
+msgid "Auto-save mode set to %s in %s."
+msgstr "Modo de gardar automaticamente establecido para %s en %s."
+
+#: bin/persist-config:123
+msgid "It looks like root persistence was just enabled."
+msgstr "Parece que a persistencia como administrador acabou de ser activada."
+
+#: bin/persist-config:124
+msgid "Please set the save-mode for root persistence."
+msgstr "Establece o modo de gardar para a persistencia como administrador"
+
+#: bin/persist-config:125
+msgid "You will only have to do this once."
+msgstr "Efectuándose só unha vez."
+
+#: bin/persist-config:127
+msgid "You can change your choice later with %s."
+msgstr "A escolla pode ser cambiada mási tarde con %s."
+
+#: bin/persist-config:159
+msgid "Already saved less than %s seconds ago"
+msgstr "Gardouse xa hai menos de %s segundos"
+
+#: bin/persist-config:160
+msgid "Won't autosave within %s seconds of a previous save"
+msgstr "Non gardará automaticamente nos %s segundos despois de ter gardado"
+
+#: bin/persist-config:199
+msgid "CONFIRM"
+msgstr "CONFIRMAR"
+
+#: bin/persist-config:200
+msgid "There was an error saving your changes."
+msgstr "Houbo un erro ao gardar os cambios."
+
+#: bin/persist-config:202
+msgid "Do you still want to %s?"
+msgstr "Aínda pretendes %s?"

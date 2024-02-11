@@ -19,9 +19,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this package. If not, see <http://www.gnu.org/licenses/>.
  **********************************************************************/
-
-#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
+#pragma once
 
 #include <QButtonGroup>
 #include <QMessageBox>
@@ -56,6 +54,7 @@ private slots:
     void pushApply_clicked();
     void pushHelp_clicked();
     void pushKernel_clicked();
+    void pushRTLremove_clicked();
     static void pushUsageAnalyzer_clicked();
 
 private:
@@ -65,5 +64,3 @@ private:
     QString cmdOut(const QString &cmd, bool asRoot = false);
     QString cmdOutAsRoot(const QString &cmd);
 };
-
-#endif

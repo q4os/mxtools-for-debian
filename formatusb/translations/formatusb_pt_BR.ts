@@ -132,7 +132,7 @@
         <location filename="../mainwindow.cpp" line="186"/>
         <location filename="../mainwindow.cpp" line="315"/>
         <source>Failure</source>
-        <translation>Falha</translation>
+        <translation>Ocorreu uma Falha</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="186"/>
@@ -154,7 +154,7 @@
         <source>These actions will destroy all data on 
 
 </source>
-        <translation>Estas ações irão destruir (apagar) todos os dados no dispositivo
+        <translation>Estas ações irão apagar todos os dados do seu dispositivo
 
 </translation>
     </message>
@@ -196,7 +196,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="315"/>
         <source>Invalid Name</source>
-        <translation type="unfinished"></translation>
+        <translation>O nome não é válido</translation>
     </message>
 </context>
 <context>

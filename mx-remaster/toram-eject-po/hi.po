@@ -1,0 +1,75 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# Panwar108 <caspian7pena@gmail.com>, 2021
+msgid ""
+msgstr ""
+"Project-Id-Version: antix-development\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-06-29 15:33-0600\n"
+"PO-Revision-Date: 2012-01-01 11:19+0000\n"
+"Last-Translator: Panwar108 <caspian7pena@gmail.com>, 2021\n"
+"Language-Team: Hindi (http://www.transifex.com/anticapitalista/antix-development/language/hi/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: hi\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: bin/toram-eject:14
+msgid "Eject LiveCD/DVD via a simple GUI if %s is enabled."
+msgstr "%s सक्रिय होने पर ग्राफिकल अंतरफलक द्वारा लाइव सीडी/डीवीडी हटाएँ।"
+
+#: bin/toram-eject:16
+msgid "Automatic toram Eject"
+msgstr "स्वतः toram हटाएँ"
+
+#: bin/toram-eject:24
+msgid "no BOOT_DEV given!"
+msgstr "कोई BOOT_DEV निर्दिष्ट नहीं!"
+
+#: bin/toram-eject:33
+msgid "boot device: %s is not removable."
+msgstr "बूट उपकरण : %s  हटाना संभव नहीं है।"
+
+#: bin/toram-eject:39
+msgid "boot device: %s is still mounted!"
+msgstr "बूट उपकरण : %s अभी भी माउंट है!"
+
+#: bin/toram-eject:46
+msgid "The %s boot option succeeded."
+msgstr "%s बूट विकल्प सफल।"
+
+#: bin/toram-eject:47
+msgid "The boot media is no longer needed."
+msgstr "अब बूट मीडिया अनावश्यक है।"
+
+#: bin/toram-eject:49
+msgid "Do you want the LiveCD/DVD ejected?"
+msgstr "क्या आप लाइव सीडी/डीवीडी हटाना चाहते हैं?"
+
+#: bin/toram-eject:50
+msgid "did not eject as per user request."
+msgstr "उपयोक्ता अनुरोध अनुरूप हटाई नहीं गई।"
+
+#: bin/toram-eject:52
+msgid "Could not eject %s"
+msgstr "%s हटाना विफल"
+
+#: bin/toram-eject:57
+msgid "Feel free to remove the CD or DVD."
+msgstr "अब आप सीडी या डीवीडी हटा सकते हैं।"
+
+#: bin/toram-eject:59
+msgid "Do you want the drive closed now?"
+msgstr "क्या आप अब ड्राइव को बंद करना चाहते हैं?"
+
+#: bin/toram-eject:60
+msgid "did not closing drive as per user request."
+msgstr "उपयोक्ता अनुरोध अनुरूप ड्राइव बंद नहीं हुई।"
+
+#: bin/toram-eject:62
+msgid "Could not close %s"
+msgstr "%s बंद करना विफल"

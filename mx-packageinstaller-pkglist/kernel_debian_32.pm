@@ -6,55 +6,54 @@ Kernels
 </category>
 
 <name>
-Debian 32 bit no-pae single core
-</name>
+Debian 32 bit no-pae single core updates package</name>
 
 <description>
-   <am>የዴቢያን ነባሪ ከርነል</am>
-<ar>ﺔﻴﺿﺍﺮﺘﻓﻻ﻿ﺍ ﻥﺎﻴﺑﺩ ﺓﺍﻮﻧ</ar>
-<bg>Ядрото по подразбиране на Debian</bg>
-<bn>ডেবিয়ান ডিফল্ট কার্নেল</bn>
-<ca>Nucli predeterminat de Debian</ca>
-<cs>Výchozí jádro Debianu</cs>
-<da>Debians standardkerne</da>
-<de>Debian-Standardkernel</de>
-<el>Προεπιλεγμένος πυρήνας του Debian</el>
-<es>Núcleo predeterminado de Debian</es>
-<et>Debiani vaiketuum</et>
-<eu>Debian kernel lehenetsia</eu>
-<en>Debian default kernel</en>
-<fa>ﻥﺎﯿﺑﺩ ﺽﺮﻓ ﺶﯿﭘ ﻪﺘﺴﻫ</fa>
-<fil_PH>Debian na default na kernel</fil_PH>
-<fi>Debianin oletusydin</fi>
-<fr>Noyau par défaut de Debian</fr>
-<he_IL>ןאיבד לש לדחמה תרירב תביל</he_IL>
-<hi>डेबियन डिफ़ॉल्ट कर्नेल</hi>
-<hr>Zadana jezgra Debiana</hr>
-<hu>Debian alapértelmezett kernel</hu>
-<id>Kernel bawaan Debian</id>
-<is>Debian sjálfgefinn kjarni</is>
-<it>Kernel predefinito Debian</it>
-<ja>Debian のデフォルトのカーネル</ja>
-<kk>Debian әдепкі ядросы</kk>
-<ko>데비안 기본 커널</ko>
-<lt>Debian'o numatytasis branduolys</lt>
-<mk>Стандардно јадро на Debian</mk>
-<mr>डेबियन डीफॉल्ट कर्नल</mr>
-<nb>Debians standard kjerne</nb>
-<nl>Standaard kernel van Debian</nl>
-<pl>Domyślne jądro Debiana</pl>
-<pt_BR>Kernel padrão do Debian</pt_BR>
-<pt>Kernel padrão do Debian</pt>
-<ro>Nucleul implicit Debian</ro>
-<ru>Ядро Debian по умолчанию</ru>
-<sk>Predvolené jadro Debianu</sk>
-<sl>Privzeto jedro Debian</sl>
-<sq>Kerneli i paracaktuar i Debian</sq>
-<sr>Дебиан подразумевано језгро</sr>
-<sv>Debians standardkärna</sv>
-<tr>Debian varsayılan çekirdeği</tr>
-<uk>Стандартне ядро Debian</uk>
-<vi>Hạt nhân mặc định của Debian</vi>
+<am>የዴቢያን ነባሪ የከርነል ራስ-ዝማኔዎች ጥቅል</am>
+<ar>ﻥﺎﻴﺒﻳﺪﻟ ﺔﻴﺿﺍﺮﺘﻓﻻ﻿ﺍ ﺓﺍﻮﻨﻠﻟ ﺔﻴﺋﺎﻘﻠﺘﻟﺍ ﺕﺎﺜﻳﺪﺤﺘﻟﺍ ﺔﻣﺰﺣ</ar>
+<bg>Пакет за автоматични актуализации на ядрото по подразбиране на Debian</bg>
+<bn>ডেবিয়ান ডিফল্ট কার্নেল স্বয়ংক্রিয় আপডেট প্যাকেজ</bn>
+<ca>Paquet d'actualitzacions automàtiques del nucli predeterminat de Debian</ca>
+<cs>Výchozí balíček automatických aktualizací jádra Debianu</cs>
+<da>Debians standard kerne autoopdateringspakke</da>
+<de>Debian-Standardpaket für automatische Kernel-Updates</de>
+<el>Το προεπιλεγμένο πακέτο αυτόματων ενημερώσεων πυρήνα του Debian</el>
+<es>Paquete de actualizaciones automáticas del kernel predeterminado de Debian</es>
+<et>Debiani vaikimisi kerneli automaatsete värskenduste pakett</et>
+<eu>Debian kernel lehenetsitako eguneratze automatikoen paketea</eu>
+<en>Debian default kernel auto updates package</en>
+<fa> ﻥﺎﯿﺑﺩ ﺽﺮﻓu200cﺶﯿﭘ ﻪﺘﺴﻫ ﺭﺎﮐﺩﻮﺧ ﯽﻧﺎﺳﺭﺯﻭﺭu200cﻪﺑ ﻪﺘﺴﺑ</fa>
+<fil_PH>Debian default na kernel auto updates package</fil_PH>
+<fi>Debianin oletusytimen automaattiset päivityspaketit</fi>
+<fr>Paquet de mises à jour automatiques du noyau Debian par défaut</fr>
+<he_IL>לדחמה תרירב Debian תביל לש םייטמוטואה םינוכדעה תליבח</he_IL>
+<hi>डेबियन डिफ़ॉल्ट कर्नेल ऑटो अपडेट पैकेज</hi>
+<hr>Debianov zadani paket za automatsko ažuriranje jezgre</hr>
+<hu>Debian alapértelmezett kernel automatikus frissítési csomagja</hu>
+<id>Paket pembaruan otomatis kernel default Debian</id>
+<is>Debian sjálfgefinn kjarna sjálfvirkur uppfærslupakki</is>
+<it>Pacchetto di aggiornamenti automatici del kernel Debian predefinito</it>
+<ja>Debian のデフォルトのカーネル自動更新パッケージ</ja>
+<kk>Debian ядросының әдепкі автоматты жаңарту пакеті</kk>
+<ko>Debian 기본 커널 자동 업데이트 패키지</ko>
+<lt>Debian'o numatytasis branduolio automatinių naujinimų paketas</lt>
+<mk>Стандардниот пакет за автоматско ажурирање на кернелот на Debian</mk>
+<mr>डेबियन डीफॉल्ट कर्नल ऑटो अपडेट्स पॅकेज</mr>
+<nb>Debians standard kjerneoppdateringspakke</nb>
+<nl>Debian standaardpakket voor automatische kernelupdates</nl>
+<pl>Domyślny pakiet automatycznych aktualizacji jądra Debiana</pl>
+<pt_BR>Pacote de atualizações automáticas do kernel padrão do Debian</pt_BR>
+<pt>Pacote de atualizações automáticas do kernel padrão do Debian</pt>
+<ro>Pachetul Debian de actualizări automate a nucleului implicit</ro>
+<ru>Пакет автоматических обновлений ядра Debian по умолчанию</ru>
+<sk>Predvolený balík automatických aktualizácií jadra Debianu</sk>
+<sl>Privzeti paket samodejnih posodobitev jedra Debian</sl>
+<sq>Paketa e përditësimeve automatike të kernelit të paracaktuar të Debian</sq>
+<sr>Дебиан подразумевани пакет аутоматских ажурирања кернела</sr>
+<sv>Debians standardpaket för automatisk uppdatering av kärnan</sv>
+<tr>Debian varsayılan çekirdek otomatik güncelleme paketi</tr>
+<uk>Пакет автоматичних оновлень ядра Debian за замовчуванням</uk>
+<vi>Gói cập nhật tự động kernel mặc định của Debian</vi>
 </description>
 
 <installable>

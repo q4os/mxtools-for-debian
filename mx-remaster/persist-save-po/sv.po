@@ -1,0 +1,119 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# Henry Oquist <henryoquist@nomalm.se>, 2015-2016
+msgid ""
+msgstr ""
+"Project-Id-Version: antix-development\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-10-06 10:59-0600\n"
+"PO-Revision-Date: 2012-01-01 11:17+0000\n"
+"Last-Translator: Henry Oquist <henryoquist@nomalm.se>, 2015-2016\n"
+"Language-Team: Swedish (http://www.transifex.com/anticapitalista/antix-development/language/sv/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: sv\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: bin/persist-save:14
+msgid "antiX Save Persistent Root"
+msgstr "antiX Spara Persistent Root"
+
+#: bin/persist-save:17
+msgid "Manually save filesystem changes in %s file for persistent root."
+msgstr "Spara ändringar i filsystem manuellt i %s fil för persistent root."
+
+#: bin/persist-save:18
+msgid "You MUST run a program like this to save your filesystem changes."
+msgstr "Du MÅSTE köra ett program som detta för att spara dina ändringar av filsystemet."
+
+#: bin/persist-save:43
+msgid "%s was not enabled.  Cannot %s"
+msgstr "%s var inte möjliggjord. Kan inte %s"
+
+#: bin/persist-save:46 bin/persist-save:138
+msgid "Shall we begin?"
+msgstr "Ska vi börja?"
+
+#: bin/persist-save:47 bin/persist-save:139
+msgid "Stopping at user's request"
+msgstr "Stoppar på användarens begäran"
+
+#: bin/persist-save:55
+msgid "The persistence device with UUID %s was not found"
+msgstr "Persistens-enheten med  UUID %s kunde inte hittas"
+
+#: bin/persist-save:56
+msgid "Please plug in the persistence device and try again"
+msgstr "Var vänlig koppla in persistens-enheten och försök igen"
+
+#: bin/persist-save:74
+msgid "On VID error"
+msgstr "Om VID-fel"
+
+#: bin/persist-save:82
+msgid "Checking for existing files and"
+msgstr "Söker efter existerande filer och"
+
+#: bin/persist-save:83
+msgid "Checking if there is enough room ..."
+msgstr "Kontrollerar om det finns tillräckligt mycket utrymme..."
+
+#: bin/persist-save:113
+msgid "persist device"
+msgstr "persist-enhet"
+
+#: bin/persist-save:114
+msgid "mounted at"
+msgstr "monterad vid"
+
+#: bin/persist-save:127
+msgid "Available space, %s, is smaller than the margin of %s."
+msgstr "Tillgängligt utrymme, %s, är mindre än %s gräns."
+
+#: bin/persist-save:131
+msgid "Insufficient space.  Have: %s. Need: %s."
+msgstr "Otillräckligt utrymme. Har: %s. Behöver:%s."
+
+#: bin/persist-save:134
+msgid "Ready to sync file system changes"
+msgstr "Klar att synkronisera filsystemsändringar"
+
+#: bin/persist-save:142
+msgid "Performing rsync ... please be patient"
+msgstr "Utför rsync...var vänlig ha tålamod"
+
+#: bin/persist-save:178
+msgid "%s The rsync command failed Failed! %s"
+msgstr "%s rsync-kommandot misslyckades Misslyckades! %s"
+
+#: bin/persist-save:180
+msgid "It returned an exit code of %s"
+msgstr "Det gav en exit-kod %s"
+
+#: bin/persist-save:181
+msgid "See the rsync man page to look up its meaning."
+msgstr "Se rsync man page för att kolla upp dess betydelse"
+
+#: bin/persist-save:185 bin/persist-save:192
+msgid "%s succeeded"
+msgstr "%s lyckades"
+
+#: bin/persist-save:194
+msgid "    Your changes were saved in:"
+msgstr "Dina ändringar sparades i:"
+
+#: bin/persist-save:217
+msgid "Missing rootfs version file %s"
+msgstr "Saknar rootfs versions-fil %s"
+
+#: bin/persist-save:220
+msgid "Missing version ID in rootfs file system"
+msgstr "Saknar version ID i rootfs filsystem"
+
+#: bin/persist-save:223
+msgid "Version id inside of %s file does not match"
+msgstr "Versions-id inuti %s filen matchar inte"

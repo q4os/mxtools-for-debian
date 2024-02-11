@@ -1,7 +1,7 @@
 /**********************************************************************
  *  work.h
  **********************************************************************
- * Copyright (C) 2020 MX Authors
+ * Copyright (C) 2020-2024 MX Authors
  *
  * Authors: Adrian
  *          MX Linux <http://mxlinux.org>
@@ -38,14 +38,10 @@ public:
     Q_ENUM(HashType)
 
     explicit Work(Settings *settings, QObject *parent = nullptr);
+    friend class Settings;
+    friend class Batchprocessing;
+    friend class MainWindow;
 
-    Cmd shell;
-
-    QElapsedTimer e_timer;
-    bool done = false;
-    bool started = false;
-
-    QTemporaryDir initrd_dir;
     [[noreturn]] void cleanUp();
     bool checkAndMoveWorkDir(const QString &dir, quint64 req_size);
     static bool checkInstalled(const QString &package);
@@ -75,4 +71,9 @@ signals:
 private:
     Settings *settings;
     QString elevate {QFile::exists("/usr/bin/pkexec") ? "/usr/bin/pkexec" : "/usr/bin/gksu"};
+    Cmd shell;
+    QElapsedTimer e_timer;
+    QTemporaryDir initrd_dir;
+    bool done = false;
+    bool started = false;
 };

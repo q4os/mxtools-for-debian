@@ -1,5 +1,5 @@
 # **********************************************************************
-# * Copyright (C) 2015 MX Authors
+# * Copyright (C) 2015-2024 MX Authors
 # *
 # * Authors: Adrian
 # *          MX Linux <http://mxlinux.org>
@@ -20,12 +20,6 @@
 # * along with MX Tools.  If not, see <http://www.gnu.org/licenses/>.
 # **********************************************************************
 
-#-------------------------------------------------
-#
-# Project created by QtCreator 2014-12-14
-#
-#-------------------------------------------------
-
 QT       += core gui widgets
 CONFIG   += c++1z
 
@@ -39,6 +33,7 @@ TEMPLATE = app
 DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
+    log.cpp \
     main.cpp \
     mainwindow.cpp \
     about.cpp \
@@ -48,8 +43,9 @@ SOURCES += \
     work.cpp
 
 HEADERS  += \
+    common.h \
+    log.h \
     mainwindow.h \
-    version.h \
     about.h \
     cmd.h \
     settings.h \
@@ -61,6 +57,6 @@ FORMS    += \
 
 TRANSLATIONS += \
     translations/mx-snapshot_en.ts
-                 
+
 RESOURCES += \
     images.qrc

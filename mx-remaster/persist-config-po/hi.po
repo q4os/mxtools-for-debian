@@ -1,0 +1,159 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# Panwar108 <caspian7pena@gmail.com>, 2021
+msgid ""
+msgstr ""
+"Project-Id-Version: antix-development\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-04-03 12:45-0600\n"
+"PO-Revision-Date: 2012-01-01 11:16+0000\n"
+"Last-Translator: Panwar108 <caspian7pena@gmail.com>, 2021\n"
+"Language-Team: Hindi (http://www.transifex.com/anticapitalista/antix-development/language/hi/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: hi\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: bin/persist-config:12
+msgid "antiX Root Persistence Auto-Save Configuration"
+msgstr "एंटी-एक्स रूट संरक्षण स्वतः संचय विन्यास"
+
+#: bin/persist-config:20
+msgid "Automatic"
+msgstr "स्वतः"
+
+#: bin/persist-config:21
+msgid "Semi-Automatic"
+msgstr "आंशिक-स्वतः "
+
+#: bin/persist-config:22
+msgid "Manual"
+msgstr "सहायता गाइड"
+
+#: bin/persist-config:23
+msgid "Quit"
+msgstr "छोड़ें"
+
+#: bin/persist-config:29
+msgid "Configure root persistence saves to run either:"
+msgstr "रूट संरक्षण संचय के निष्पादन हेतु समय चुनें :"
+
+#: bin/persist-config:31
+msgid "at shutdown/reboot, no asking"
+msgstr "कंप्यूटर बंद/पुनः आरंभ पर, पुष्टिकरण रहित"
+
+#: bin/persist-config:32
+msgid "ask at shutdown/reboot"
+msgstr "कंप्यूटर बंद/पुनः आरंभ पर, पुष्टिकरण सहित"
+
+#: bin/persist-config:33
+msgid "you snooze, you lose"
+msgstr "स्वतः संचय निष्क्रिय"
+
+#: bin/persist-config:35
+msgid ""
+"This program should be called with the %s option in a startup script to "
+"ensure a config file is created."
+msgstr "विन्यास फाइल का सृजन सुनिश्चित करने के लिए प्रोग्राम हेतु अनुरोध की आरंभिकरण स्क्रिप्ट में %s विकल्प संलग्न अवश्य करें।"
+
+#: bin/persist-config:37
+msgid ""
+"It should be called with the %s option in shutdown scripts so your changes "
+"can be saved before shutting down."
+msgstr "सिस्टम बंद होने से पहले परिवर्तन संचय सुनिश्चित करने के लिए इस हेतु अनुरोध की सिस्टम बंद स्क्रिप्ट में %s विकल्प संलग्न अवश्य करें।"
+
+#: bin/persist-config:45
+msgid "%s specific options"
+msgstr "%s विशिष्ट विकल्प"
+
+#: bin/persist-config:46
+msgid "Create a %s file if one is missing."
+msgstr "अनुपलब्ध होने पर %s फाइल का सृजन करें।"
+
+#: bin/persist-config:47
+msgid "Run persist-save as directed by %s file."
+msgstr "%s फाइल द्वारा निर्देशित संरक्षण-संचय का निष्पादन करें।"
+
+#: bin/persist-config:48
+msgid "Run %s if %s succeeded."
+msgstr "%s को निष्पादित करें यदि सफल %s हो तो।"
+
+#: bin/persist-config:49
+msgid "If %s fails prompt user before running %s."
+msgstr "%s के विफल होने पर %s के निष्पादन से पहले उपयोक्ता को सूचित करें।"
+
+#: bin/persist-config:50
+msgid "implies %s"
+msgstr "का तात्पर्य %s है"
+
+#: bin/persist-config:52
+msgid "Config file is located at: %s"
+msgstr "विन्यास फाइल स्थान : %s"
+
+#: bin/persist-config:90
+msgid "Current mode is: %s"
+msgstr "वर्तमान मोड : %s"
+
+#: bin/persist-config:92
+msgid "There is no current auto-save mode.  The default is: %s."
+msgstr "कोई वर्तमान स्वतः संचय मोड नहीं है। यह है डिफ़ॉल्ट :%s।"
+
+#: bin/persist-config:102
+msgid "save on shutdown/reboot automatically.  No asking."
+msgstr "कंप्यूटर बंद/पुनः आरंभ पर स्वतः संचय। पुष्टिकरण रहित।"
+
+#: bin/persist-config:103
+msgid "ask to save on shutdown/reboot."
+msgstr "कंप्यूटर बंद/पुनः आरंभ पर पर संचय हेतु सूचित करें।"
+
+#: bin/persist-config:104
+msgid "only save changes manually (you snooze, you lose)."
+msgstr "केवल स्वयं द्वारा किए परिवर्तन संचित करें (स्वतः संचय निष्क्रिय)।"
+
+#: bin/persist-config:105
+msgid "use current default."
+msgstr "वर्तमान डिफ़ॉल्ट उपयोग करें।"
+
+#: bin/persist-config:117
+msgid "Auto-save mode set to %s in %s."
+msgstr "स्वतः संचय मोड %s पर सेट, %s हेतु।"
+
+#: bin/persist-config:123
+msgid "It looks like root persistence was just enabled."
+msgstr "प्रतीत होता है कि रूट संरक्षण को अभी सक्रिय किया गया है।"
+
+#: bin/persist-config:124
+msgid "Please set the save-mode for root persistence."
+msgstr "कृपया रूट संरक्षण हेतु संचय-मोड सेट करें।"
+
+#: bin/persist-config:125
+msgid "You will only have to do this once."
+msgstr "इसे केवल एक ही बार सेट करना होता है।"
+
+#: bin/persist-config:127
+msgid "You can change your choice later with %s."
+msgstr "%s द्वारा चयन परिवर्तन संभव है।"
+
+#: bin/persist-config:159
+msgid "Already saved less than %s seconds ago"
+msgstr "%s सेकंड से भी कम समय पहले ही संचित किया गया"
+
+#: bin/persist-config:160
+msgid "Won't autosave within %s seconds of a previous save"
+msgstr "पूर्व संचय के %s सेकंड उपरांत तक स्वतः संचय नहीं होगा"
+
+#: bin/persist-config:199
+msgid "CONFIRM"
+msgstr "पुष्टि करें"
+
+#: bin/persist-config:200
+msgid "There was an error saving your changes."
+msgstr "आपके परिवर्तन संचित करते समय त्रुटि।"
+
+#: bin/persist-config:202
+msgid "Do you still want to %s?"
+msgstr "क्या आप निश्चित ही %s करना चाहते हैं?"

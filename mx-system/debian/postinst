@@ -32,17 +32,19 @@ if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-remov
 #update mx-version to latest for MX21, beta, and RC and later
     if [ -e /etc/mx-version ]; then
 
-    sed -i s/'Wildflower'/'Libretto'/ /etc/mx-version
-    sed -i s/'Next'/'Libretto'/ /etc/mx-version
-    sed -i s/"MX-21.._"/"MX-23_"/ /etc/mx-version
+    sed -i 's/Wildflower'/'Libretto/' /etc/mx-version
+    sed -i 's/Next/Libretto/' /etc/mx-version
+    sed -i "s/MX-21.*_/MX-23_/" /etc/mx-version
     #handle update from beta and rc users
     sed -i s/_beta.*_/_/ /etc/mx-version
     sed -i s/_RC.*_/_/ /etc/mx-version
     sed -i s/_rc.*_/_/ /etc/mx-version
     #handle mx23 to mx23.1
-    sed -i s/"MX-23_"/"MX-23.1_"/ /etc/mx-version
+    sed -i 's/MX-23_/MX-23.1_/' /etc/mx-version
+    #handle mx23.1 to mx23.2
+    sed -i 's/MX-23.1_/MX-23.2_/' /etc/mx-version
     fi
-    
+
     ##add vmd to /etc/initramfs-tools/modules if its not already there
     VMD_CHECK=$(sed '/\<vmd\>/!d' /etc/initramfs-tools/modules)
     if [ ! -n "$VMD_CHECK" ]; then

@@ -1,0 +1,161 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# anticapitalista <anticapitalista@riseup.net>, 2016
+# Eduard Selma <selma@tinet.cat>, 2015,2021
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2012
+msgid ""
+msgstr ""
+"Project-Id-Version: antix-development\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-04-03 12:45-0600\n"
+"PO-Revision-Date: 2012-01-01 11:16+0000\n"
+"Last-Translator: Eduard Selma <selma@tinet.cat>, 2015,2021\n"
+"Language-Team: Catalan (http://www.transifex.com/anticapitalista/antix-development/language/ca/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: ca\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: bin/persist-config:12
+msgid "antiX Root Persistence Auto-Save Configuration"
+msgstr "Configuració  d'auto desat de l'antiX Root Persistence"
+
+#: bin/persist-config:20
+msgid "Automatic"
+msgstr "Automàtica"
+
+#: bin/persist-config:21
+msgid "Semi-Automatic"
+msgstr "Semi-automàtica"
+
+#: bin/persist-config:22
+msgid "Manual"
+msgstr "Manual"
+
+#: bin/persist-config:23
+msgid "Quit"
+msgstr "Surt"
+
+#: bin/persist-config:29
+msgid "Configure root persistence saves to run either:"
+msgstr "Configura el desat de Root Persistence com a:"
+
+#: bin/persist-config:31
+msgid "at shutdown/reboot, no asking"
+msgstr "En apagar o tornar a arrencar, sense preguntar"
+
+#: bin/persist-config:32
+msgid "ask at shutdown/reboot"
+msgstr "Pregunta en apagar o tornar a rrencar"
+
+#: bin/persist-config:33
+msgid "you snooze, you lose"
+msgstr "Si badeu, perdeu"
+
+#: bin/persist-config:35
+msgid ""
+"This program should be called with the %s option in a startup script to "
+"ensure a config file is created."
+msgstr "Aquest programa s'hauria d'executar amb l'opció %s en un script d'arrencada per assegurar que es crea un fitxer de configuració."
+
+#: bin/persist-config:37
+msgid ""
+"It should be called with the %s option in shutdown scripts so your changes "
+"can be saved before shutting down."
+msgstr "S'hauria d'executar amb l'opció %s als scripts d'apagada per assegurar que es desen els canvis abans d'apagar."
+
+#: bin/persist-config:45
+msgid "%s specific options"
+msgstr "Opcions específiques %s"
+
+#: bin/persist-config:46
+msgid "Create a %s file if one is missing."
+msgstr "Creant un fitxer %s si no n'hi ha"
+
+#: bin/persist-config:47
+msgid "Run persist-save as directed by %s file."
+msgstr "Executa desat persistent tal com s'indica al fitxer %s."
+
+#: bin/persist-config:48
+msgid "Run %s if %s succeeded."
+msgstr "Executa %s i %s té èxit."
+
+#: bin/persist-config:49
+msgid "If %s fails prompt user before running %s."
+msgstr "Si %s falla, pregunta a l'usuari abans d'executar %s."
+
+#: bin/persist-config:50
+msgid "implies %s"
+msgstr "implica %s"
+
+#: bin/persist-config:52
+msgid "Config file is located at: %s"
+msgstr "El fitxer de configuració està ubicat a: %s"
+
+#: bin/persist-config:90
+msgid "Current mode is: %s"
+msgstr "El mode actual és: %s"
+
+#: bin/persist-config:92
+msgid "There is no current auto-save mode.  The default is: %s."
+msgstr "No hi ha mode d'autodesat ara. Per omissió és: %s."
+
+#: bin/persist-config:102
+msgid "save on shutdown/reboot automatically.  No asking."
+msgstr "desa automàticament en apagar/tornar a arrencar. Sense preguntar."
+
+#: bin/persist-config:103
+msgid "ask to save on shutdown/reboot."
+msgstr "pregunta per desar en apagar/tornar a arrencar."
+
+#: bin/persist-config:104
+msgid "only save changes manually (you snooze, you lose)."
+msgstr "Desa només els canvis manualment (qui bada, perd)."
+
+#: bin/persist-config:105
+msgid "use current default."
+msgstr "usa els valors per omissió."
+
+#: bin/persist-config:117
+msgid "Auto-save mode set to %s in %s."
+msgstr "Mode d'auto desat establert a %s en %s."
+
+#: bin/persist-config:123
+msgid "It looks like root persistence was just enabled."
+msgstr "Sembla com si s'haqgués acabat d'activar la persistència de root."
+
+#: bin/persist-config:124
+msgid "Please set the save-mode for root persistence."
+msgstr "Si us plau, establiu el mode de desat per a persistència de root."
+
+#: bin/persist-config:125
+msgid "You will only have to do this once."
+msgstr "Només ho haureu de fer un sol cop."
+
+#: bin/persist-config:127
+msgid "You can change your choice later with %s."
+msgstr "Pode canviar la vostra opció després amb %s."
+
+#: bin/persist-config:159
+msgid "Already saved less than %s seconds ago"
+msgstr "Ja s'ha desat fa menys de %s segons "
+
+#: bin/persist-config:160
+msgid "Won't autosave within %s seconds of a previous save"
+msgstr "No es desarà després de menys de %s segons de l'anterior "
+
+#: bin/persist-config:199
+msgid "CONFIRM"
+msgstr "CONFIRMEU"
+
+#: bin/persist-config:200
+msgid "There was an error saving your changes."
+msgstr "Hi ha hagut un error en desar els canvis."
+
+#: bin/persist-config:202
+msgid "Do you still want to %s?"
+msgstr "Encara voleu %s?"

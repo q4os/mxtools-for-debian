@@ -1,3 +1,21 @@
+mx-welcome (24.12.03) mx; urgency=medium
+
+  * make sure /etc/mx-welcome/mx-welcome.conf is processed if it exists
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 05 Jan 2024 17:11:52 -0500
+
+mx-welcome (24.12.02) mx; urgency=medium
+
+  * use word wrap on about screen labels
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 04 Jan 2024 20:46:15 -0500
+
+mx-welcome (24.12.01) mx; urgency=medium
+
+  * fix TOS text setting
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 03 Jan 2024 23:26:14 -0500
+
 mx-welcome (23.11.01) mx; urgency=medium
 
   * update mx-packageinstaller link

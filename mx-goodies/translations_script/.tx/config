@@ -1,0 +1,9 @@
+[main]
+host = https://www.transifex.com
+
+[o:anticapitalista:p:antix-development:r:mx-goodies]
+file_filter = po/mx-goodies_<lang>.po
+source_file = mx-goodies.pot
+source_lang = en
+type = po
+minimum_perc = 25

@@ -1,0 +1,120 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2012
+# joyinko <joyinko@azet.sk>, 2017
+msgid ""
+msgstr ""
+"Project-Id-Version: antix-development\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-10-06 10:59-0600\n"
+"PO-Revision-Date: 2012-01-01 11:17+0000\n"
+"Last-Translator: joyinko <joyinko@azet.sk>, 2017\n"
+"Language-Team: Czech (http://www.transifex.com/anticapitalista/antix-development/language/cs/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: cs\n"
+"Plural-Forms: nplurals=4; plural=(n == 1 && n % 1 == 0) ? 0 : (n >= 2 && n <= 4 && n % 1 == 0) ? 1: (n % 1 != 0 ) ? 2 : 3;\n"
+
+#: bin/persist-save:14
+msgid "antiX Save Persistent Root"
+msgstr "antiX uložení Persistentní Root"
+
+#: bin/persist-save:17
+msgid "Manually save filesystem changes in %s file for persistent root."
+msgstr "Ručně uložit změny souborového systému v souboru %s pro persistentní root."
+
+#: bin/persist-save:18
+msgid "You MUST run a program like this to save your filesystem changes."
+msgstr "Pro uložení změn souborového systému MUSÍTE spustit program tímto způsobem. "
+
+#: bin/persist-save:43
+msgid "%s was not enabled.  Cannot %s"
+msgstr "%s Nebylo aktivováno. Nelze %s"
+
+#: bin/persist-save:46 bin/persist-save:138
+msgid "Shall we begin?"
+msgstr "Můžeme začít?"
+
+#: bin/persist-save:47 bin/persist-save:139
+msgid "Stopping at user's request"
+msgstr "Zastavuji na požádání uživatele"
+
+#: bin/persist-save:55
+msgid "The persistence device with UUID %s was not found"
+msgstr "Persistentní jednotka s UUID %s nebyla nalezena"
+
+#: bin/persist-save:56
+msgid "Please plug in the persistence device and try again"
+msgstr "Prosím zapojte persistentní jednotku a zkuste znovu"
+
+#: bin/persist-save:74
+msgid "On VID error"
+msgstr "VID chyba"
+
+#: bin/persist-save:82
+msgid "Checking for existing files and"
+msgstr "Kontrola stávajících souborů a"
+
+#: bin/persist-save:83
+msgid "Checking if there is enough room ..."
+msgstr "Kontrola, zdali je dostatek místa ..."
+
+#: bin/persist-save:113
+msgid "persist device"
+msgstr "persistentní jednotka"
+
+#: bin/persist-save:114
+msgid "mounted at"
+msgstr "připojeno na"
+
+#: bin/persist-save:127
+msgid "Available space, %s, is smaller than the margin of %s."
+msgstr "Dostupné místo, %s, je menší,  než mez %s"
+
+#: bin/persist-save:131
+msgid "Insufficient space.  Have: %s. Need: %s."
+msgstr "Nedostatek místa. Máte: %s. Je potřeba: %s."
+
+#: bin/persist-save:134
+msgid "Ready to sync file system changes"
+msgstr "Připraveno na synchronizaci změn souborového systému"
+
+#: bin/persist-save:142
+msgid "Performing rsync ... please be patient"
+msgstr "Provádění rsync... mějte strpení"
+
+#: bin/persist-save:178
+msgid "%s The rsync command failed Failed! %s"
+msgstr "%s Příkaz rsync selhal Selhal! %s"
+
+#: bin/persist-save:180
+msgid "It returned an exit code of %s"
+msgstr "Vrátil kód ukončení %s"
+
+#: bin/persist-save:181
+msgid "See the rsync man page to look up its meaning."
+msgstr "Podívejte se na stránku manuálu rsync pro jeho význam."
+
+#: bin/persist-save:185 bin/persist-save:192
+msgid "%s succeeded"
+msgstr "%s bylo úspěšné"
+
+#: bin/persist-save:194
+msgid "    Your changes were saved in:"
+msgstr "    Vaše změny byly uloženy do:"
+
+#: bin/persist-save:217
+msgid "Missing rootfs version file %s"
+msgstr "Chybí rootfs version soubor %s"
+
+#: bin/persist-save:220
+msgid "Missing version ID in rootfs file system"
+msgstr "Chybí ID verze v souborovém systému rootfs"
+
+#: bin/persist-save:223
+msgid "Version id inside of %s file does not match"
+msgstr "Verze ID, která se nachází v %s souboru nesouhlasí"

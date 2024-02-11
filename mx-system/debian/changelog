@@ -1,3 +1,21 @@
+mx-system (24.02.01mx23) mx; urgency=medium
+
+  * Fix redirect echo to stderr in dkms
+
+ -- fehlix <fehlix@mxlinux.org>  Fri, 02 Feb 2024 20:00:21 -0500
+
+mx-system (24.01.02mx23) mx; urgency=medium
+
+  * fixed wrongly formated strings in /etc/initrd_release
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 25 Jan 2024 13:31:05 -0500
+
+mx-system (24.01.01mx23) mx; urgency=medium
+
+  * mx23.2
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 17 Jan 2024 20:02:42 -0500
+
 mx-system (23.12.01mx23) mx; urgency=medium
 
   * handle rc* strings (lowercase)

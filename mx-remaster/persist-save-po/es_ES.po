@@ -1,0 +1,121 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# German Lancheros <glancheros2015@gmail.com>, 2019
+# Richard  Holt <richard.holt@gmail.com>, 2016
+# Roberto Saravia <saravia.jroberto@gmail.com>, 2012,2015
+msgid ""
+msgstr ""
+"Project-Id-Version: antix-development\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-10-06 10:59-0600\n"
+"PO-Revision-Date: 2012-01-01 11:17+0000\n"
+"Last-Translator: Roberto Saravia <saravia.jroberto@gmail.com>, 2012,2015\n"
+"Language-Team: Spanish (Spain) (http://www.transifex.com/anticapitalista/antix-development/language/es_ES/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: es_ES\n"
+"Plural-Forms: nplurals=3; plural=n == 1 ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
+
+#: bin/persist-save:14
+msgid "antiX Save Persistent Root"
+msgstr "antiX Guardar Root persistente"
+
+#: bin/persist-save:17
+msgid "Manually save filesystem changes in %s file for persistent root."
+msgstr "Guarde manualmente los cambios del sistema de archivos en el archivo %s para la sesión root persistente."
+
+#: bin/persist-save:18
+msgid "You MUST run a program like this to save your filesystem changes."
+msgstr "DEBE ejecutar un programa como este para guardar los cambios en su sistema de archivos."
+
+#: bin/persist-save:43
+msgid "%s was not enabled.  Cannot %s"
+msgstr "%s no estaba habilitado.  %S no puede"
+
+#: bin/persist-save:46 bin/persist-save:138
+msgid "Shall we begin?"
+msgstr "¿Deberíamos empezar?"
+
+#: bin/persist-save:47 bin/persist-save:139
+msgid "Stopping at user's request"
+msgstr "Deteniendo a petición del usuario"
+
+#: bin/persist-save:55
+msgid "The persistence device with UUID %s was not found"
+msgstr "El dispositivo con persistencia UUID %s no se encontró"
+
+#: bin/persist-save:56
+msgid "Please plug in the persistence device and try again"
+msgstr "Por favor conecta el dispositivo de persistencia e inténtalo de nuevo"
+
+#: bin/persist-save:74
+msgid "On VID error"
+msgstr "Error VID activado"
+
+#: bin/persist-save:82
+msgid "Checking for existing files and"
+msgstr "Comprobando archivos existentes y"
+
+#: bin/persist-save:83
+msgid "Checking if there is enough room ..."
+msgstr "Comprobando si hay suficiente espacio ..."
+
+#: bin/persist-save:113
+msgid "persist device"
+msgstr "dispositivo persistente"
+
+#: bin/persist-save:114
+msgid "mounted at"
+msgstr "montado en"
+
+#: bin/persist-save:127
+msgid "Available space, %s, is smaller than the margin of %s."
+msgstr "Espacio disponible, %s, es menor que el margen de %s."
+
+#: bin/persist-save:131
+msgid "Insufficient space.  Have: %s. Need: %s."
+msgstr "Espacio insuficiente.  Tiene: %s.  Necesita: %s."
+
+#: bin/persist-save:134
+msgid "Ready to sync file system changes"
+msgstr "Listo para sincronizar los cambios del sistema de archivos"
+
+#: bin/persist-save:142
+msgid "Performing rsync ... please be patient"
+msgstr "Ejecutando rsync ... sea paciente, por favor"
+
+#: bin/persist-save:178
+msgid "%s The rsync command failed Failed! %s"
+msgstr "%s El comando rsync falló. %s falló"
+
+#: bin/persist-save:180
+msgid "It returned an exit code of %s"
+msgstr "Devolvió un código de salida de %s"
+
+#: bin/persist-save:181
+msgid "See the rsync man page to look up its meaning."
+msgstr "Vea la página del manual (man) de rsync para indagar sobre su significado."
+
+#: bin/persist-save:185 bin/persist-save:192
+msgid "%s succeeded"
+msgstr "%s funcionó"
+
+#: bin/persist-save:194
+msgid "    Your changes were saved in:"
+msgstr "    Sus cambios se guardaron en:"
+
+#: bin/persist-save:217
+msgid "Missing rootfs version file %s"
+msgstr "Falta el archivo de versión rootfs %s"
+
+#: bin/persist-save:220
+msgid "Missing version ID in rootfs file system"
+msgstr "Falta el ID de la versión en el sistema de archivos rootfs"
+
+#: bin/persist-save:223
+msgid "Version id inside of %s file does not match"
+msgstr "El ID de la versión dentro del archivo %s no coincide"

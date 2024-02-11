@@ -1,0 +1,35 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+# Translators:
+# marcelo cripe <marcelocripe@gmail.com>, 2024
+# 
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-01-15 19:59-0500\n"
+"PO-Revision-Date: 2024-01-16 01:00+0000\n"
+"Last-Translator: marcelo cripe <marcelocripe@gmail.com>, 2024\n"
+"Language-Team: Portuguese (Brazil) (https://app.transifex.com/anticapitalista/teams/10162/pt_BR/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: pt_BR\n"
+"Plural-Forms: nplurals=3; plural=(n == 0 || n == 1) ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
+
+#. Translator comment:  name of application in menu
+#: desktop-in/mx-locale.desktop.in:5
+msgid "MX Locale"
+msgstr "Configurações de Idioma do Sistema Operacional"
+
+#. Translator comment:  description comment of application in menu
+#: desktop-in/mx-locale.desktop.in:7
+msgid "Set language and locale categories"
+msgstr ""
+"O ‘MX Locale’ permite definir o idioma e os padrões das categorias "
+"referentes ao local ou região, como por exemplo, horário, moeda, numérico, "
+"tamanho do papel, etc."

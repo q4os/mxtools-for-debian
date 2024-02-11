@@ -25,8 +25,10 @@ if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-remov
  mx-viewer \
  mx-welcome \
  live-kernel-updater \
+ mx-locale \
  mx-live-usb-maker \
  live-usb-maker \
+ papirus-folder-colors \
  quick-system-info-gui \
  conky-toggle-mx \
  ddm-mx \

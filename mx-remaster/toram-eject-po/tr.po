@@ -1,0 +1,76 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# e0360fc3c0afcd70e5aed1cfc885bac6, 2019
+# mahmut özcan <mahmutozcan@protonmail.com>, 2016,2018
+msgid ""
+msgstr ""
+"Project-Id-Version: antix-development\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-06-29 15:33-0600\n"
+"PO-Revision-Date: 2012-01-01 11:19+0000\n"
+"Last-Translator: e0360fc3c0afcd70e5aed1cfc885bac6, 2019\n"
+"Language-Team: Turkish (http://www.transifex.com/anticapitalista/antix-development/language/tr/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: tr\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: bin/toram-eject:14
+msgid "Eject LiveCD/DVD via a simple GUI if %s is enabled."
+msgstr "%s etkinse Canlı-CD/DVD 'yi basit bir Grafiksel Kullanıcı Arayüzü kullanarak çıkar "
+
+#: bin/toram-eject:16
+msgid "Automatic toram Eject"
+msgstr "Otomatik toram Çıkarma"
+
+#: bin/toram-eject:24
+msgid "no BOOT_DEV given!"
+msgstr "BOOT_DEV verilmemiştir!"
+
+#: bin/toram-eject:33
+msgid "boot device: %s is not removable."
+msgstr "önyükleme aygıtı: %s çıkarılabilir değil."
+
+#: bin/toram-eject:39
+msgid "boot device: %s is still mounted!"
+msgstr "önyükleme aygıtı: %s hala takılı!"
+
+#: bin/toram-eject:46
+msgid "The %s boot option succeeded."
+msgstr "%s önyükleme seçeneği başarılı oldu."
+
+#: bin/toram-eject:47
+msgid "The boot media is no longer needed."
+msgstr "Önyükleme ortamı artık gerekmiyor."
+
+#: bin/toram-eject:49
+msgid "Do you want the LiveCD/DVD ejected?"
+msgstr "LiveCD / DVD'nin çıkarılmasını istiyor musunuz?"
+
+#: bin/toram-eject:50
+msgid "did not eject as per user request."
+msgstr "kullanıcı isteği üzerine çıkarılmadı."
+
+#: bin/toram-eject:52
+msgid "Could not eject %s"
+msgstr "%s çıkarılamadı"
+
+#: bin/toram-eject:57
+msgid "Feel free to remove the CD or DVD."
+msgstr "CD veya DVD'yi çıkarmaktan çekinmeyin."
+
+#: bin/toram-eject:59
+msgid "Do you want the drive closed now?"
+msgstr "Sürücüyü şimdi kapatmak istiyor musun?"
+
+#: bin/toram-eject:60
+msgid "did not closing drive as per user request."
+msgstr "Sürücü, kullanıcı isteği üzerine kapatılmadı."
+
+#: bin/toram-eject:62
+msgid "Could not close %s"
+msgstr "%s kapatılamadı"

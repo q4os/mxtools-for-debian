@@ -1,3 +1,10 @@
+mx-apps-kde (24.01.01) mx; urgency=medium
+
+  * add mx-locale
+  * add papirus-folder-colors
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 17 Jan 2024 23:55:35 -0500
+
 mx-apps-kde (23.09.01) mx; urgency=medium
 
   * add mx-service-manager
