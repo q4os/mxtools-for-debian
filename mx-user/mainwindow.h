@@ -17,9 +17,7 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-
-#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
+#pragma once
 
 #include "ui_mainwindow.h"
 
@@ -28,6 +26,11 @@
 #include <QSettings>
 
 #include "cmd.h"
+
+namespace Tab
+{
+enum { Administration, Options, Copy, AddRemoveGroup, GroupMembership, MAX };
+}
 
 class MainWindow : public QDialog, public Ui::MEConfig
 {
@@ -58,45 +61,43 @@ public:
     void refreshRename();
 
 public slots:
-    void progress();
     void syncDone(bool success);
 
 protected:
     void keyPressEvent(QKeyEvent *event) override;
 
 private slots:
+    void buttonAbout_clicked();
+    void buttonApply_clicked();
+    void buttonCancel_clicked();
+    void buttonHelp_clicked();
+    void checkGroups_stateChanged(int);
+    void checkMozilla_stateChanged(int);
     void closeApp();
-    void on_buttonAbout_clicked();
-    void on_buttonApply_clicked();
-    void on_buttonCancel_clicked();
-    void on_buttonHelp_clicked();
-    void on_checkGroups_stateChanged(int);
-    void on_checkMozilla_stateChanged(int);
-    void on_comboChangePass_activated(const QString &);
-    void on_comboDeleteUser_activated(const QString &);
-    void on_comboRenameUser_activated(const QString &);
-    void on_copyRadioButton_clicked();
-    void on_docsRadioButton_clicked();
-    void on_entireRadioButton_clicked();
-    void on_fromUserComboBox_activated(const QString &);
-    void on_groupNameEdit_textEdited();
-    void on_mozillaRadioButton_clicked();
-    void on_radioAutologinNo_clicked();
-    void on_radioAutologinYes_clicked();
-    void on_sharedRadioButton_clicked();
-    void on_syncRadioButton_clicked();
-    void on_tabWidget_currentChanged();
-    void on_toUserComboBox_activated(const QString &arg1);
-    void on_userComboBox_activated(const QString &);
-    void on_userComboMembership_activated(const QString &);
-    void on_userNameEdit_textEdited();
+    void comboChangePass_activated(const QString &);
+    void comboDeleteUser_activated(const QString &);
+    void comboRenameUser_activated(const QString &);
+    void copyRadioButton_clicked();
+    void docsRadioButton_clicked();
+    void entireRadioButton_clicked();
+    void fromUserComboBox_activated(const QString &);
+    void groupNameEdit_textEdited();
+    void mozillaRadioButton_clicked();
+    void radioAutologinNo_clicked();
+    void radioAutologinYes_clicked();
+    void sharedRadioButton_clicked();
+    void syncRadioButton_clicked();
+    void tabWidget_currentChanged();
+    void toUserComboBox_activated(const QString &arg1);
+    void userComboBox_activated(const QString &);
+    void userComboMembership_activated(const QString &);
+    void userNameEdit_textEdited();
 
 private:
     Cmd *shell;
     QSettings settings;
     QStringList users;
-    class PassEdit *passUser;
     class PassEdit *passChange;
+    class PassEdit *passUser;
+    void setConnections();
 };
-
-#endif

@@ -1,8 +1,8 @@
 [Unit]
 Description=antiX live-USB static persistence shutdown
 After=umount.target
-ConditionPathExists=/live/linux
-RequiresMountsFor=/ /live
+ConditionPathExists=/live/config/static-rootfs
+RequiresMountsFor=/
 
 [Service]
 ExecStart=/bin/true

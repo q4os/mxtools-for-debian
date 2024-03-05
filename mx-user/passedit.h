@@ -16,8 +16,7 @@
  *
  * This file is part of the gazelle-installer.
  ***************************************************************************/
-#ifndef PASSEDIT_H
-#define PASSEDIT_H
+#pragma once
 
 #include <QLineEdit>
 
@@ -43,13 +42,26 @@ private:
 
 public:
     PassEdit(QLineEdit *master, QLineEdit *slave, int min = 0, QObject *parent = nullptr) noexcept;
-    [[nodiscard]] inline int minimum() const { return min; }
-    [[nodiscard]] inline bool valid() const noexcept { return lastValid; }
-    [[nodiscard]] inline bool confirmed() const noexcept { return (slave->text() == master->text()); }
-    [[nodiscard]] inline bool lengthOK() const noexcept { return (master->text().length() >= min); }
-    inline int length() { return master->text().length(); }
+    [[nodiscard]] inline int minimum() const
+    {
+        return min;
+    }
+    [[nodiscard]] inline bool valid() const noexcept
+    {
+        return lastValid;
+    }
+    [[nodiscard]] inline bool confirmed() const noexcept
+    {
+        return (slave->text() == master->text());
+    }
+    [[nodiscard]] inline bool lengthOK() const noexcept
+    {
+        return (master->text().length() >= min);
+    }
+    inline int length()
+    {
+        return master->text().length();
+    }
 signals:
     void validationChanged(bool valid);
 };
-
-#endif // PASSEDIT_H

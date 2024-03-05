@@ -1,3 +1,9 @@
+mx-repo-list (24.2) mx; urgency=medium
+
+  * Remove inactive mirrors: tds.net, vpsnet.com
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 23 Feb 2024 10:38:06 -0500
+
 mx-repo-list (24.1) mx; urgency=medium
 
   * Fixed typo

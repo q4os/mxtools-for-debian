@@ -1,3 +1,10 @@
+mx-remastercc (24.2) mx; urgency=medium
+
+  * Help window starts detached to keep app GUI active
+  * Update translations
+
+ -- Adrian <adrian@mxlinux.org>  Sat, 17 Feb 2024 11:43:44 -0500
+
 mx-remastercc (23.7) mx; urgency=medium
 
   * update translations 

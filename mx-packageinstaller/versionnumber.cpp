@@ -39,18 +39,18 @@ void VersionNumber::setStrings(const QString &value)
     QString debian_str;
 
     // Parse epoch and upstream_version
-    if (value.contains(QLatin1Char(':'))) {
-        epoch = value.section(QLatin1Char(':'), 0, 0).toInt();
-        upstream_str = value.section(QLatin1Char(':'), 1);
+    if (value.contains(':')) {
+        epoch = value.section(':', 0, 0).toInt();
+        upstream_str = value.section(':', 1);
     } else {
         epoch = 0;
         upstream_str = value;
     }
 
     // Parse debian_revision
-    if (upstream_str.contains(QLatin1Char('-'))) {
-        debian_str = upstream_str.section(QLatin1Char('-'), -1);
-        upstream_str = upstream_str.remove(QLatin1Char('-') + debian_str);
+    if (upstream_str.contains('-')) {
+        debian_str = upstream_str.section('-', -1);
+        upstream_str = upstream_str.remove('-' + debian_str);
     }
 
     upstream_version = groupDigits(upstream_str);
@@ -150,6 +150,7 @@ int VersionNumber::compare(const QStringList &first, const QStringList &second)
             return -1;
         }
 
+        // if one char length check which one is larger
         if (first.at(i).length() == 1 && second.at(i).length() == 1) {
             int res = compare(first.at(i).at(0), second.at(i).at(0));
             if (res == 0) {
@@ -157,12 +158,14 @@ int VersionNumber::compare(const QStringList &first, const QStringList &second)
             } else {
                 return res;
             }
+            // one char (not-number) vs. multiple (digits)
         } else if (first.at(i).length() > 1 && second.at(i).length() == 1 && !second.at(i).at(0).isDigit()) {
             return 1;
         } else if (first.at(i).length() == 1 && !first.at(i).at(0).isDigit() && second.at(i).length() > 1) {
             return -1;
         }
 
+        // Compare remaining digits
         if (second.at(i).toInt() > first.at(i).toInt()) {
             return 1;
         } else {

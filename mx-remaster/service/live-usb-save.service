@@ -1,8 +1,8 @@
 [Unit]
 Description=antiX live-USB save-state
 After=umount.target
-ConditionPathExists=/live/linux
-RequiresMountsFor=/ /live
+ConditionPathExists=/live/config/remasterable
+RequiresMountsFor=/
 
 [Service]
 ExecStart=/bin/true

@@ -1,3 +1,10 @@
+mx-user (24.2) mx; urgency=medium
+
+  * Show percentage on progress bar when copying/syncing home
+  * Update translations
+
+ -- Adrian <adrian@mxlinux.org>  Sat, 17 Feb 2024 15:30:34 -0500
+
 mx-user (23.11) mx; urgency=medium
 
   * Run program as normal user and elevate only when needed

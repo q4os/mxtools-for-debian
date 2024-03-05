@@ -78,6 +78,8 @@ dh-make
 fakeroot
 build-essential
 dpkg-dev
+binfmt-support
+qemu-user-static
 </install_package_names>
 
 
@@ -94,5 +96,6 @@ devscripts
 dh-make
 fakeroot
 dpkg-dev
+binfmt-support
 </uninstall_package_names>
 </app>

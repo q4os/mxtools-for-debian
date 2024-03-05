@@ -227,8 +227,9 @@ bool Work::createIso(const QString &filename)
         = (Settings::getDebianVerNum() < Version::Bookworm) ? "" : " -throttle " + QString::number(settings->throttle);
     QString cmd = unbuffer + "mksquashfs /.bind-root \"" + settings->work_dir + "/iso-template/antiX/linuxfs\" -comp "
                   + settings->compression + " -processors " + QString::number(settings->cores) + throttle
-                  + ((settings->mksq_opt.isEmpty()) ? "" : " " + settings->mksq_opt) + " -wildcards -ef "
-                  + settings->snapshot_excludes.fileName() + " " + settings->session_excludes;
+                  + (settings->mksq_opt.isEmpty() ? "" : " " + settings->mksq_opt) + " -wildcards -ef "
+                  + settings->snapshot_excludes.fileName()
+                  + (settings->session_excludes.isEmpty() ? "" : " -e " + settings->session_excludes);
 
     emit message(tr("Squashing filesystem..."));
     if (!shell.runAsRoot(cmd)) {
@@ -274,17 +275,16 @@ bool Work::createIso(const QString &filename)
         makeChecksum(HashType::sha512, settings->snapshot_dir, filename);
     }
 
-    QTime time(0, 0);
-    time = time.addMSecs(static_cast<int>(e_timer.elapsed()));
+    auto elapsedTime = QTime(0, 0).addMSecs(e_timer.elapsed());
     emit message(tr("Done"));
     if (settings->shutdown) {
         done = true;
         cleanUp();
     }
     emit messageBox(BoxType::information, tr("Success"),
-                    tr("Debian Snapshot completed sucessfully!") + "\n"
-                        + tr("Snapshot took %1 to finish.").arg(time.toString("hh:mm:ss")) + "\n\n"
-                        + tr("Thanks for using Debian Snapshot, run Debian Live USB Maker next!"));
+                    tr("Debian Snapshot completed sucessfully!") + '\n'
+                        + tr("Snapshot took %1 to finish.").arg(elapsedTime.toString("hh:mm:ss")) + "\n\n"
+                        + tr("Thanks for using Debian Snapshot, run Live USB Maker next!"));
     done = true;
     return true;
 }
@@ -482,14 +482,7 @@ void Work::writeLsbRelease()
 // Write date of the snapshot in a "snapshot_created" file
 void Work::writeSnapshotInfo()
 {
-    QFile file("/usr/local/share/live-files/files/etc/snapshot_created");
-    if (!file.open(QFile::WriteOnly | QFile::Truncate)) {
-        return;
-    }
-
-    QTextStream stream(&file);
-    stream << QDateTime::currentDateTime().toString("yyyyMMdd_HHmm");
-    file.close();
+    Cmd().run(elevate + " /usr/lib/" + QCoreApplication::applicationName() + "/snapshot-lib datetime_log", true);
 }
 
 void Work::writeVersionFile()
@@ -522,8 +515,8 @@ quint64 Work::getRequiredSpace()
     }
     while (!file->atEnd()) {
         QString line = file->readLine().trimmed();
-        if (!line.startsWith(QLatin1String("#")) && !line.isEmpty() && !line.startsWith(QLatin1String(".bind-root"))) {
-            excludes << line.trimmed();
+        if (!line.startsWith('#') && !line.isEmpty() && !line.startsWith(".bind-root")) {
+            excludes << line;
         }
     }
     file->close();
@@ -531,31 +524,27 @@ quint64 Work::getRequiredSpace()
     // Add session excludes
     if (!settings->session_excludes.isEmpty()) {
         QString sessionExcludes = settings->session_excludes;
-        sessionExcludes.remove(0, 3); // Remove "-e "
-
         QStringList excludeList = sessionExcludes.split("\" \"");
         excludes.reserve(excludeList.size());
         for (QString exclude : excludeList) {
-            exclude = exclude.replace("\"", "").trimmed();
+            exclude = exclude.replace('"', "").trimmed();
             excludes << exclude;
         }
     }
-
     QString root_dev = Cmd().getOut("df /.bind-root --output=target |tail -1", true);
     QMutableStringListIterator it(excludes);
     while (it.hasNext()) {
         it.next();
-        if (it.value().indexOf(QLatin1String("!")) != -1) { // remove things like "!(minstall.desktop)"
-            it.value().truncate(it.value().indexOf(QLatin1String("!")));
+        if (it.value().indexOf('!') != -1) { // Truncate things like "!(minstall.desktop)"
+            it.value().truncate(it.value().indexOf('!'));
         }
-        it.value().replace(QLatin1String(" "),
-                           QLatin1String("\\ ")); // escape special bash characters, might need to expand this
-        it.value().replace(QLatin1String("("), QLatin1String("\\("));
-        it.value().replace(QLatin1String(")"), QLatin1String("\\)"));
-        it.value().replace(QLatin1String("|"), QLatin1String("\\|"));
-        it.value().prepend("/.bind-root/");            // check size occupied by excluded files on /.bind-root only
-        it.value().remove(QRegularExpression("\\*$")); // chop last *
-        // Remove from list if files not on the same volume
+        it.value().replace(' ', "\\ "); // Escape special bash characters, might need to expand this
+        it.value().replace('(', "\\(");
+        it.value().replace(')', "\\)");
+        it.value().replace('|', "\\|");
+        it.value().prepend("/.bind-root/"); // Check size occupied by excluded files on /.bind-root only
+        it.value().replace(QRegularExpression("/\\*$"), "/"); // Remove last *
+        //  Remove from list if files not on the same volume
         if (root_dev != Cmd().getOut("df " + it.value() + " --output=target 2>/dev/null |tail -1", true)) {
             it.remove();
         }
@@ -564,8 +553,7 @@ quint64 Work::getRequiredSpace()
     bool ok = false;
     QString cmd = settings->live ? "du -sc" : "du -sxc";
     quint64 excl_size
-        = shell.getOutAsRoot(cmd + " {" + excludes.join(",").remove("/.bind-root,") + "} 2>/dev/null |tail -1 |cut -f1")
-              .toULongLong(&ok);
+        = shell.getOutAsRoot(cmd + " {" + excludes.join(',') + "} 2>/dev/null |tail -1 |cut -f1").toULongLong(&ok);
     if (!ok) {
         qDebug() << "Error: calculating size of excluded files\n"
                     "If you are sure you have enough free space rerun the program with -o/--override-size option";
@@ -585,7 +573,7 @@ quint64 Work::getRequiredSpace()
     uint c_factor = settings->compression_factor.value(settings->compression);
     qDebug() << "COMPRESSION  " << c_factor;
     qDebug() << "SIZE NEEDED  " << (root_size - excl_size) * c_factor / 100;
-    qDebug() << "SIZE FREE    " << settings->free_space << "\n";
+    qDebug() << "SIZE FREE    " << settings->free_space << '\n';
 
     if (excl_size > root_size) {
         qDebug() << "Error: calculating excluded file size.\n"

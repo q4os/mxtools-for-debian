@@ -291,7 +291,7 @@ void MainWindow::listSizeInstalledFP()
     qDebug() << "+++" << __PRETTY_FUNCTION__ << "+++";
 
     QStringList list;
-    if (fp_ver < VersionNumber("1.0.1")) { // older version doesn't display all apps
+    if (fp_ver < VersionNumber("1.0.1")) { // Older version doesn't display all apps
                                            // and runtimes without specifying them
         list = cmd.getOut("flatpak -d list  " + FPuser + "--app |tr -s ' ' |cut -f1,5,6 -d' '").split('\n');
         QStringList runtimes
@@ -426,8 +426,7 @@ QString MainWindow::getDebianVerName()
 QString MainWindow::getLocalizedName(const QDomElement &element) const
 {
     const QString &localeName = locale.name();
-    QStringList tagCandidates
-        = {localeName, localeName.section('_', 0, 0), QStringLiteral("en"), QStringLiteral("en_US")};
+    QStringList tagCandidates = {localeName, localeName.section('_', 0, 0), "en", "en_US"};
 
     for (const auto &tag : tagCandidates) {
         for (auto child = element.firstChildElement(); !child.isNull(); child = child.nextSiblingElement()) {
@@ -443,7 +442,7 @@ QString MainWindow::getLocalizedName(const QDomElement &element) const
 
 QString MainWindow::categoryTranslation(const QString &item)
 {
-    if (locale.name() == QLatin1String("en_US")) {
+    if (locale.name() == "en_US") {
         return item; // No need for translation
     }
     QStringList tagCandidates = {locale.name(), locale.name().section('_', 0, 0)};
@@ -577,7 +576,7 @@ QString MainWindow::mapArchToFormat(const QString &arch) const
 
 bool MainWindow::isPackageInstallable(const QString &installable, const QString &modArch) const
 {
-    return installable.contains(modArch) || installable == QLatin1String("all");
+    return installable.split(',').contains(modArch) || installable == "all";
 }
 
 void MainWindow::refreshPopularApps()
@@ -1352,12 +1351,19 @@ bool MainWindow::installSelected()
                                                        // version name for newer versions
                 suite = "mx15";
             }
-            cmd.runAsRoot("apt-get update --print-uris | tac | "
-                          "grep -m1 -oE 'https?://.*/mx/repo/dists/"
-                          + suite
-                          + "/main' | sed 's:^:deb [arch='$(dpkg --print-architecture)'] :; "
-                            "s:/repo/dists/:/testrepo :; s:/main: test:' > "
-                          + temp_list);
+            if (arch == "amd64") {
+                cmd.runAsRoot("apt-get update --print-uris | tac | "
+                              "grep -m1 -oE 'https?://.*/mx/repo/dists/"
+                              + suite + "/main' | sed 's:^:deb :; s:/repo/dists/:/testrepo :; s:/main: test:' > "
+                              + temp_list);
+            } else {
+                cmd.runAsRoot("apt-get update --print-uris | tac | "
+                              "grep -m1 -oE 'https?://.*/mx/repo/dists/"
+                              + suite
+                              + "/main' | sed 's:^:deb [arch='$(dpkg --print-architecture)'] :; "
+                                "s:/repo/dists/:/testrepo :; s:/main: test:' > "
+                              + temp_list);
+            }
         }
         updateApt();
     } else if (currentTree == ui->treeBackports) {
@@ -2292,7 +2298,7 @@ void MainWindow::on_pushAbout_clicked()
             + tr("Package Installer for Debian")
             + R"(</h3></p><p align="center"><a href="http://debian.org">http://debian.org</a><br /></p><p align="center">)"
             + tr("Copyright (c) MX Linux") + "<br /><br /></p>",
-        QStringLiteral("/usr/share/doc/mx-packageinstaller/license.html"), tr("%1 License").arg(windowTitle()));
+        "/usr/share/doc/mx-packageinstaller/license.html", tr("%1 License").arg(windowTitle()));
     show();
 }
 

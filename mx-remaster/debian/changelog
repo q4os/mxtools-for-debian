@@ -1,3 +1,10 @@
+mx-remaster (24.02.01mx23) mx; urgency=medium
+
+  * simplify systemd service work-around trigger conditions
+  * make sure rc.local exits under system before switching to tty 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 29 Feb 2024 20:01:42 -0500
+
 mx-remaster (24.01.01mx23) mx; urgency=medium
 
   * catchup to remaster-antix 0.8.15

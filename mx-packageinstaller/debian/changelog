@@ -1,3 +1,16 @@
+mx-packageinstaller (24.3.01) mx; urgency=medium
+
+  * Fix: remove architecture from testrepo for amd64, since it would stop installing wine and other programs that need i386 arch
+
+ -- Adrian <adrian@mxlinux.org>  Sun, 03 Mar 2024 10:06:07 -0500
+
+mx-packageinstaller (24.2) mx; urgency=medium
+
+  * Update translations
+  * Fix: showing wrong arch in Popular section
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 01 Mar 2024 21:14:04 -0500
+
 mx-packageinstaller (24.1) mx; urgency=medium
 
   * Increase timeout for online check

@@ -105,11 +105,23 @@ edit_config() {
     if [ "$AUTOSAVE_MODE" ]; then
         mode_str="$(pfgt "Current mode is: %s" "[f]$AUTOSAVE_MODE[/]")"
     else
-        mode_str="$(pfgt "There is no current auto-save mode.  The default is: %s." "[b]$_Semi_Automatic_[/]")"
+        mode_str="$(pfgt "There is no current auto-save mode.  The default is: %s." "[b]$_Automatic_[/]")"
     fi
 
     fmt="[fixed][b]%15s:[/][/] %s   "
-    combo_box save-mode "1 $_Automatic_!2 $_Semi_Automatic_!3 $_Manual_!4 $_Quit_" -n \
+    if [ -e "/live/config/systemd" ]; then
+    combo_box save-mode "1 $_Automatic_!3 $_Manual_!4 $_Quit_" -n \
+        "$TITLE" ""                                                    \
+        "$(gt "Please choose auto-save mode.")"                                \
+        ""                                                             \
+        "$mode_str"                                                    \
+        ""                                                             \
+        "$(pf "$fmt" "$_Automatic_"      "`gt "save on shutdown/reboot automatically.  No asking."`")"   \
+        "$(pf "$fmt" "$_Manual_"         "`gt "only save changes manually (you snooze, you lose)."`")"   \
+        "$(pf "$fmt" "$_Quit_"           "`gt "use current default."`")"                                 \
+        ""
+    else
+		combo_box save-mode "1 $_Automatic_!2 $_Semi_Automatic_!3 $_Manual_!4 $_Quit_" -n \
         "$TITLE" ""                                                    \
         "$(gt "Please choose auto-save mode.")"                                \
         ""                                                             \
@@ -120,6 +132,7 @@ edit_config() {
         "$(pf "$fmt" "$_Manual_"         "`gt "only save changes manually (you snooze, you lose)."`")"   \
         "$(pf "$fmt" "$_Quit_"           "`gt "use current default."`")"                                 \
         ""
+    fi
 
     AUTOSAVE_MODE=$UI_RESULT
 

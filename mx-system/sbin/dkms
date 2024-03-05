@@ -20,6 +20,9 @@ dkms_kernel_option=""
 kernel_option=""
 
 for kernel_version in $(find /lib/modules -mindepth 1 -maxdepth 1 -type d  -printf ' %f'); do 
+    [ -d /lib/modules/"${kernel_version}"/kernel    ] || continue
+    [ -f /boot/vmlinuz-"${kernel_version}"          ] || continue
+    [ -d /usr/src/linux-headers-"${kernel_version}" ] || continue
     kernel_option+=" -k $kernel_version"
 done
 

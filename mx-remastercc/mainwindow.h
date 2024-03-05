@@ -21,9 +21,7 @@
  * You should have received a copy of the GNU General Public License
  * along with mx-remastercc.  If not, see <http://www.gnu.org/licenses/>.
  **********************************************************************/
-
-#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
+#pragma once
 
 #include <QMessageBox>
 #include <QProcess>
@@ -46,22 +44,18 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow() override;
 
-    Result runCmd(const QString &cmd);
-
     static void displayDoc(const QString &url);
     void setConnections();
     void setup();
 
 private slots:
-    void pushAbout_clicked();
     static void pushHelp_clicked();
-    void pushSetupPersistence_clicked();
+    void pushAbout_clicked();
     void pushConfigPersistence_clicked();
-    void pushSaveRootPersist_clicked();
     void pushRemaster_clicked();
+    void pushSaveRootPersist_clicked();
+    void pushSetupPersistence_clicked();
 
 private:
     Ui::MainWindow *ui;
 };
-
-#endif // MXSNAPSHOT_H

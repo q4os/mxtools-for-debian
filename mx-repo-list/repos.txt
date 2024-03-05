@@ -57,7 +57,6 @@ Kazakhstan, Almaty - http://mirror.neolabs.kz/mx/packages
 Kazakhstan, Almaty - https://mirror.ps.kz/mx/packages
 Kenya, Nairobi - https://mxlinux.mirror.liquidtelecom.com/packages
 Latvia, Riga - http://ftp.linux.edu.lv/mxlinux
-Lithuania, Vilnius - http://mirror.vpsnet.com/workspace
 Netherlands, Alblasserdam - http://nl.mxrepo.com
 Netherlands, Amsterdam - https://mirror.koddos.net/mxlinux
 Netherlands, Ede - https://ftp.nluug.nl/os/Linux/distr/mxlinux
@@ -95,7 +94,6 @@ United States, Berkeley, CA - https://mirrors.ocf.berkeley.edu/mx-packages
 United States, Herndon, VA - http://mirror.cogentco.com/pub/linux/mxlinux
 United States, Lenexa KA - https://mirror.us.oneandone.net/linux/distributions/mx/packages
 United States, Los Angeles CA - http://la.mxrepo.com
-United States, Madison WI - http://mxlinux.mirrors.tds.net/mxlinux
 United States, Maryland MD - http://mirror.umd.edu/mxlinux
 United States, OR, IL, NY - http://ftp.osuosl.org/pub/mxlinux
 United States, Princeton NJ - http://mirror.math.princeton.edu/pub/mxlinux

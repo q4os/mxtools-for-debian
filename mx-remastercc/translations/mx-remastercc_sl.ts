@@ -1,10 +1,12 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="sl">
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.1" language="sl">
 <context>
     <name>MainWindow</name>
     <message>
         <location filename="../mainwindow.ui" line="14"/>
         <source>MX Remastercc</source>
-        <translation>MX Predelava</translation>
+        <translation>MX NCpredelav</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="64"/>
@@ -87,53 +89,53 @@
         <translation>Konfiguriraj živo obstojnost</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="54"/>
-        <location filename="../mainwindow.cpp" line="103"/>
+        <location filename="../mainwindow.cpp" line="53"/>
+        <location filename="../mainwindow.cpp" line="88"/>
         <source>MX Remaster Control Center</source>
-        <translation>MX nadzorni center za predelavo</translation>
+        <translation>MX nadzorni center za predelave</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="82"/>
+        <location filename="../mainwindow.cpp" line="66"/>
         <source>MX RemasterCC</source>
-        <translation>MX PredelavaCC</translation>
+        <translation>MX NCpredelav</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="102"/>
+        <location filename="../mainwindow.cpp" line="87"/>
         <source>About MX Remaster Control Center</source>
-        <translation>O programu MX nadzorni center za predelavo</translation>
+        <translation>O programu MX nadzorni center za predelave</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="104"/>
+        <location filename="../mainwindow.cpp" line="89"/>
         <source>Version: </source>
         <translation>Različica:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="105"/>
+        <location filename="../mainwindow.cpp" line="90"/>
         <source>This program provides access to different remaster and persistence tools in MX Linux</source>
         <translation>Ta program omogoča dostop do različnih orodji za predelavo in obstojnost sistema MX Linux</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="107"/>
+        <location filename="../mainwindow.cpp" line="92"/>
         <source>Copyright (c) MX Linux</source>
         <translation>Copyright (c) MX Linux</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="108"/>
+        <location filename="../mainwindow.cpp" line="93"/>
         <source>License</source>
         <translation>Licenca</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="109"/>
+        <location filename="../mainwindow.cpp" line="94"/>
         <source>Changelog</source>
         <translation>Dnevnik sprememb</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="110"/>
+        <location filename="../mainwindow.cpp" line="95"/>
         <source>Cancel</source>
         <translation>Prekliči</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="128"/>
+        <location filename="../mainwindow.cpp" line="120"/>
         <source>&amp;Close</source>
         <translation>&amp;Zapri</translation>
     </message>

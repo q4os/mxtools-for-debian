@@ -6,157 +6,157 @@
     <message>
         <location filename="../mainwindow.ui" line="26"/>
         <source>MX User Manager</source>
-        <translation type="unfinished"></translation>
+        <translation>MX Менеджер пользователей</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="62"/>
         <source>Administration</source>
-        <translation type="unfinished"></translation>
+        <translation>Администрирование</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="65"/>
         <source>Add a new user</source>
-        <translation type="unfinished"></translation>
+        <translation>Добавить нового пользователя</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="105"/>
         <source>Add User Account</source>
-        <translation type="unfinished"></translation>
+        <translation>Добавить учетную запись пользователя</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="132"/>
         <source>Enter password for new user</source>
-        <translation type="unfinished"></translation>
+        <translation>Введите пароль нового пользователя</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="141"/>
         <source>password</source>
-        <translation type="unfinished"></translation>
+        <translation>пароль</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="173"/>
         <source>Reenter password for new user</source>
-        <translation type="unfinished"></translation>
+        <translation>Введите повторно пароль нового пользователя</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="182"/>
         <source>confirm password</source>
-        <translation type="unfinished"></translation>
+        <translation>подтверждение пароля</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="198"/>
         <source>Username of new user</source>
-        <translation type="unfinished"></translation>
+        <translation>Имя нового пользователя</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="201"/>
         <source>User login name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Логин пользователя:</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="217"/>
         <location filename="../mainwindow.ui" line="466"/>
         <source>Enter username of new user</source>
-        <translation type="unfinished"></translation>
+        <translation>Введите имя нового пользователя</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="223"/>
         <location filename="../mainwindow.ui" line="472"/>
         <source>username</source>
-        <translation type="unfinished"></translation>
+        <translation>Имя пользователя</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="239"/>
         <location filename="../mainwindow.ui" line="258"/>
         <source>Password for new user</source>
-        <translation type="unfinished"></translation>
+        <translation>Пароль нового пользователя</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="242"/>
         <source>Confirm user password:</source>
-        <translation type="unfinished"></translation>
+        <translation>Подтвердите пароль пользователя:</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="261"/>
         <source>User password:</source>
-        <translation type="unfinished"></translation>
+        <translation>Пароль пользователя:</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="271"/>
         <source>Grant this user administrative rights to the system (sudo)</source>
-        <translation type="unfinished"></translation>
+        <translation>Предоставьте этому пользователю административные права в системе (sudo)</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="290"/>
         <source>Delete User Account</source>
-        <translation type="unfinished"></translation>
+        <translation>Удалить профиль пользователя</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="333"/>
         <source>Select user</source>
-        <translation type="unfinished"></translation>
+        <translation>Выберите пользователя</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="349"/>
         <location filename="../mainwindow.ui" line="1436"/>
         <source>Select user to delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Выберите пользователя для удаления</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="358"/>
         <source>User to delete:</source>
-        <translation type="unfinished"></translation>
+        <translation>Пользователь для удаления:</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="374"/>
         <source>Also delete the user&apos;s home directory</source>
-        <translation type="unfinished"></translation>
+        <translation>Также удалить домашний каталог пользователя</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="377"/>
         <source>Delete user home directory</source>
-        <translation type="unfinished"></translation>
+        <translation>Удалить домашнюю папку пользователя</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="396"/>
         <source>Rename User Account</source>
-        <translation type="unfinished"></translation>
+        <translation>Переименовать профиль пользователя</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="408"/>
         <location filename="../mainwindow.ui" line="570"/>
         <source>Select user to modify:</source>
-        <translation type="unfinished"></translation>
+        <translation>Выберите пользователя для изменения:</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="450"/>
         <source>New user name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Новое имя пользователя:</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="491"/>
         <source>Change User Password</source>
-        <translation type="unfinished"></translation>
+        <translation>Изменить пароль пользователя</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="519"/>
         <source>new password</source>
-        <translation type="unfinished"></translation>
+        <translation>новый пароль</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="535"/>
         <source>Confirm new password:</source>
-        <translation type="unfinished"></translation>
+        <translation>Подтвердите новый пароль:</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="554"/>
         <source>confirm new password</source>
-        <translation type="unfinished"></translation>
+        <translation>подтверждение нового пароля</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="586"/>
         <source>New user password:</source>
-        <translation type="unfinished"></translation>
+        <translation>Новый пароль пользователя:</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="620"/>
@@ -166,278 +166,278 @@
     <message>
         <location filename="../mainwindow.ui" line="623"/>
         <source>Repair a user configuration</source>
-        <translation type="unfinished"></translation>
+        <translation>Восстановление конфигурации пользователя</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="657"/>
         <location filename="../mainwindow.ui" line="1393"/>
         <source>Modify User Account</source>
-        <translation type="unfinished"></translation>
+        <translation>Изменить учетную запись пользователя</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="669"/>
         <location filename="../mainwindow.ui" line="685"/>
         <source>Select user to repair</source>
-        <translation type="unfinished"></translation>
+        <translation>Выберите пользователя для восстановления</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="672"/>
         <location filename="../mainwindow.ui" line="1445"/>
         <source>User to change:</source>
-        <translation type="unfinished"></translation>
+        <translation>Пользователь для изменений:</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="717"/>
         <source>Restore Defaults</source>
-        <translation type="unfinished"></translation>
+        <translation>Восстановить по умолчанию</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="738"/>
         <source>Restore browser configs to MX defaults</source>
-        <translation type="unfinished"></translation>
+        <translation>Восстановить конфигурацию браузера MX по умолчанию</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="744"/>
         <source>Mozilla (Iceweasel or Firefox) configs</source>
-        <translation type="unfinished"></translation>
+        <translation>Конфигурация Mozilla (Iceweasel или Firefox)</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="747"/>
         <source>Alt+X</source>
-        <translation type="unfinished"></translation>
+        <translation>Alt+X</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="754"/>
         <source>Restore group memberships to MX defaults</source>
-        <translation type="unfinished"></translation>
+        <translation>Восстановить членство в группах MX по умолчанию</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="760"/>
         <source>Group memberships</source>
-        <translation type="unfinished"></translation>
+        <translation>Членство в группах</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="763"/>
         <source>Alt+G</source>
-        <translation type="unfinished"></translation>
+        <translation>Alt+G</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="773"/>
         <source>Change Autologin Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Изменить настройки автоматического входа</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="779"/>
         <source>Log in automatically</source>
-        <translation type="unfinished"></translation>
+        <translation>Входить автоматически</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="786"/>
         <source>Require password to log in</source>
-        <translation type="unfinished"></translation>
+        <translation>Требовать пароль для входа</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="801"/>
         <source>Copy/Sync</source>
-        <translation type="unfinished"></translation>
+        <translation>Копирование/Синхронизация</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="828"/>
         <source>Copy Between Desktops</source>
-        <translation type="unfinished"></translation>
+        <translation>Копирование между рабочими столами</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="855"/>
         <location filename="../mainwindow.ui" line="922"/>
         <source>Select desktop to copy from</source>
-        <translation type="unfinished"></translation>
+        <translation>Выберите рабочий стол для копирования из него</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="868"/>
         <source>Select to only copy files</source>
-        <translation type="unfinished"></translation>
+        <translation>Выбор только копирования файлов</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="871"/>
         <source>Copy only</source>
-        <translation type="unfinished"></translation>
+        <translation>Только копировать</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="887"/>
         <location filename="../mainwindow.ui" line="900"/>
         <source>Select desktop to copy to</source>
-        <translation type="unfinished"></translation>
+        <translation>Выберите рабочий стол для копирования на него</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="909"/>
         <source>Copy to:</source>
-        <translation type="unfinished"></translation>
+        <translation>Копировать в:</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="931"/>
         <source>Copy from:</source>
-        <translation type="unfinished"></translation>
+        <translation>Копировать из:</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="944"/>
         <source>Select to copy and then delete differences</source>
-        <translation type="unfinished"></translation>
+        <translation>Выбор для копирования с последующим удалением различий</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="947"/>
         <source>Sync</source>
-        <translation type="unfinished"></translation>
+        <translation>Синхронизация</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="993"/>
         <source>Select to copy/sync Shared</source>
-        <translation type="unfinished"></translation>
+        <translation>Выбор папки Shared</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="996"/>
         <source>Shared folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Общая папка</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1009"/>
         <source>Select to copy/sync entire home</source>
-        <translation type="unfinished"></translation>
+        <translation>Выбор всей домашней папки для копирования/синхронизации</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1012"/>
         <source>Entire home</source>
-        <translation type="unfinished"></translation>
+        <translation>Домашняя папка</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1028"/>
         <source>Select to copy/sync the browser configuration</source>
-        <translation type="unfinished"></translation>
+        <translation>Выбор конфигурации браузера</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1031"/>
         <source>Mozilla (Firefox or Iceweasel) configs</source>
-        <translation type="unfinished"></translation>
+        <translation>Конфигурация Mozilla (Firefox или Iceweasel)</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1044"/>
         <source>Select to copy/sync Documents</source>
-        <translation type="unfinished"></translation>
+        <translation>Выбор папки Документы для копирования/синхронизации</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1047"/>
         <source>Documents folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Папка Документы</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1054"/>
         <source>What to copy/sync:</source>
-        <translation type="unfinished"></translation>
+        <translation>Что копировать/синхронизировать:</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1070"/>
         <source>Progress</source>
-        <translation type="unfinished"></translation>
+        <translation>Прогресс</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1100"/>
         <location filename="../mainwindow.ui" line="1116"/>
         <source>Status of the changes</source>
-        <translation type="unfinished"></translation>
+        <translation>Статус изменений</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1119"/>
         <source>Status:</source>
-        <translation type="unfinished"></translation>
+        <translation>Статус:</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1135"/>
         <source>Progress of the changes</source>
-        <translation type="unfinished"></translation>
+        <translation>Ход изменений</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1172"/>
         <source>Add/Remove Groups</source>
-        <translation type="unfinished"></translation>
+        <translation>Добавить/Удалить группы</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1184"/>
         <source>Add Group</source>
-        <translation type="unfinished"></translation>
+        <translation>Добавить группу</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1211"/>
         <source>Enter name of new group</source>
-        <translation type="unfinished"></translation>
+        <translation>Имя новой группы</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1217"/>
         <source>groupname</source>
-        <translation type="unfinished"></translation>
+        <translation>groupname</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1227"/>
         <source>Create a group with GID &gt; 1000</source>
-        <translation type="unfinished"></translation>
+        <translation>Создать группу с GID &gt; 1000</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1230"/>
         <source>Create a user-level group</source>
-        <translation type="unfinished"></translation>
+        <translation>Создать группу пользовательского уровня</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1259"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Enter name of new group&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Введите имя новой группы&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1262"/>
         <source>Group name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Имя группы:</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1281"/>
         <source>Delete Group</source>
-        <translation type="unfinished"></translation>
+        <translation>Удалить группу</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1350"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Select group to delete&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Выберите удаляемую группу&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1359"/>
         <source>Select group to delete:</source>
-        <translation type="unfinished"></translation>
+        <translation>Выберите удаляемую группу:</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1366"/>
         <source>*Please doublecheck your selections before applying, removing a wrong group can break your system.</source>
-        <translation type="unfinished"></translation>
+        <translation>*Пожалуйста, перепроверьте свой выбор перед применением, удаление неправильной группы может сломать вашу систему.</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1381"/>
         <source>Group Membership</source>
-        <translation type="unfinished"></translation>
+        <translation>Членство в группах</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1455"/>
         <source>Groups user belongs to (change the groups by selecting/deselecting the appropriate boxes):</source>
-        <translation type="unfinished"></translation>
+        <translation>Пользователь принадлежит к группам (измените, выбрав / сняв соответствующие флажки):</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1478"/>
         <source>*Please doublecheck your selections before applying, assigning wrong group memberships can break your system. If you made a mistake, use restore group membership in Options tab to restore the defaults.</source>
-        <translation type="unfinished"></translation>
+        <translation>*Пожалуйста, перепроверьте свой выбор перед применением, назначая неправильное членство в группах может привести к поломке вашей системы. Если вы допустили ошибку, используйте восстановить членство в группе на вкладке Параметры, чтобы восстановить значения по умолчанию.</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1507"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Select user to change&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Выберите изменяемого пользователя&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1583"/>
         <source>Cancel any changes then quit</source>
-        <translation type="unfinished"></translation>
+        <translation>Отменить все изменения, затем выйти</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1586"/>
@@ -447,12 +447,12 @@
     <message>
         <location filename="../mainwindow.ui" line="1593"/>
         <source>Alt+N</source>
-        <translation type="unfinished"></translation>
+        <translation>Alt+N</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1634"/>
         <source>Display help </source>
-        <translation type="unfinished"></translation>
+        <translation>Показать справку</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1637"/>
@@ -462,12 +462,12 @@
     <message>
         <location filename="../mainwindow.ui" line="1644"/>
         <source>Alt+H</source>
-        <translation type="unfinished"></translation>
+        <translation>Alt+H</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1651"/>
         <source>Apply any changes</source>
-        <translation type="unfinished"></translation>
+        <translation>Применить все изменения</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1654"/>
@@ -477,333 +477,337 @@
     <message>
         <location filename="../mainwindow.ui" line="1661"/>
         <source>Alt+A</source>
-        <translation type="unfinished"></translation>
+        <translation>Alt+A</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1668"/>
         <source>About this application</source>
-        <translation type="unfinished"></translation>
+        <translation>Об этом приложении</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1671"/>
         <source>About...</source>
-        <translation type="unfinished"></translation>
+        <translation>О программе...</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1678"/>
         <source>Alt+B</source>
-        <translation type="unfinished"></translation>
+        <translation>Alt+B</translation>
     </message>
 </context>
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../mainwindow.cpp" line="109"/>
-        <location filename="../mainwindow.cpp" line="156"/>
-        <location filename="../mainwindow.cpp" line="164"/>
-        <location filename="../mainwindow.cpp" line="182"/>
-        <location filename="../mainwindow.cpp" line="191"/>
-        <location filename="../mainwindow.cpp" line="199"/>
-        <location filename="../mainwindow.cpp" line="719"/>
-        <location filename="../mainwindow.cpp" line="745"/>
-        <location filename="../mainwindow.cpp" line="775"/>
-        <location filename="../mainwindow.cpp" line="939"/>
-        <location filename="../mainwindow.cpp" line="1006"/>
-        <location filename="../mainwindow.cpp" line="1013"/>
-        <location filename="../mainwindow.cpp" line="1018"/>
-        <location filename="../mainwindow.cpp" line="1023"/>
-        <location filename="../mainwindow.cpp" line="1028"/>
+        <location filename="../mainwindow.cpp" line="108"/>
+        <location filename="../mainwindow.cpp" line="155"/>
+        <location filename="../mainwindow.cpp" line="163"/>
+        <location filename="../mainwindow.cpp" line="181"/>
+        <location filename="../mainwindow.cpp" line="190"/>
+        <location filename="../mainwindow.cpp" line="198"/>
+        <location filename="../mainwindow.cpp" line="757"/>
+        <location filename="../mainwindow.cpp" line="783"/>
+        <location filename="../mainwindow.cpp" line="813"/>
+        <location filename="../mainwindow.cpp" line="970"/>
+        <location filename="../mainwindow.cpp" line="1037"/>
+        <location filename="../mainwindow.cpp" line="1044"/>
+        <location filename="../mainwindow.cpp" line="1049"/>
+        <location filename="../mainwindow.cpp" line="1054"/>
+        <location filename="../mainwindow.cpp" line="1059"/>
         <source>none</source>
-        <translation type="unfinished"></translation>
+        <translation>нет</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="141"/>
-        <location filename="../mainwindow.cpp" line="706"/>
-        <location filename="../mainwindow.cpp" line="946"/>
-        <location filename="../mainwindow.cpp" line="955"/>
+        <location filename="../mainwindow.cpp" line="140"/>
+        <location filename="../mainwindow.cpp" line="744"/>
+        <location filename="../mainwindow.cpp" line="977"/>
+        <location filename="../mainwindow.cpp" line="986"/>
         <source>browse...</source>
-        <translation type="unfinished"></translation>
+        <translation>просмотр...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="210"/>
+        <location filename="../mainwindow.cpp" line="209"/>
         <source>The user configuration will be repaired. Please close all other applications now. When finished, please logout or reboot. Are you sure you want to repair now?</source>
-        <translation type="unfinished"></translation>
+        <translation>Конфигурация пользователя будет восстановлена. Пожалуйста, закройте сейчас все другие приложения. Когда закончите, пожалуйста, сделайте выход из сеанса или перезагрузку. Вы уверены, что хотите восстановить конфигурацию?</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="232"/>
+        <location filename="../mainwindow.cpp" line="231"/>
         <source>User group membership was restored.</source>
-        <translation type="unfinished"></translation>
+        <translation>Членство в группе пользователей было восстановлено.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="237"/>
+        <location filename="../mainwindow.cpp" line="236"/>
         <source>Mozilla settings were reset.</source>
-        <translation type="unfinished"></translation>
+        <translation>Настройки Mozilla были сброшены.</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="247"/>
+        <location filename="../mainwindow.cpp" line="263"/>
+        <source>Autologin options</source>
+        <translation>Параметры автоматического входа</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="248"/>
-        <location filename="../mainwindow.cpp" line="264"/>
-        <source>Autologin options</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="249"/>
         <source>Autologin has been disabled for the &apos;%1&apos; account.</source>
-        <translation type="unfinished"></translation>
+        <translation>Автовход был отключён для пользователя &apos;%1&apos;.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="265"/>
+        <location filename="../mainwindow.cpp" line="264"/>
         <source>Autologin has been enabled for the &apos;%1&apos; account.</source>
-        <translation type="unfinished"></translation>
+        <translation>Автовход был включён для пользователя &apos;%1&apos;.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="277"/>
+        <location filename="../mainwindow.cpp" line="276"/>
         <source>You must specify a &apos;copy to&apos; destination. You cannot copy to the desktop you are logged in to.</source>
-        <translation type="unfinished"></translation>
+        <translation>Вы должны указать место назначения для копирования. Вы не можете копировать на рабочий стол, на котором вы вошли в систему.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="284"/>
+        <location filename="../mainwindow.cpp" line="282"/>
         <source>Before copying, close all other applications. Be sure the copy to destination is large enough to contain the files you are copying. Copying between desktops may overwrite or delete your files or preferences on the destination desktop. Are you sure you want to proceed?</source>
-        <translation type="unfinished"></translation>
+        <translation>Перед началом копирования закройте все другие приложения. Учтите, что копия будет достаточно большой, чтобы содержать файлы, которые вы копируете. Копирование между рабочими столами может перезаписать или удалить файлы или предпочтения на рабочем столе назначения. Вы уверены, что хотите продолжить?</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="308"/>
+        <source>Synchronizing desktop...</source>
+        <translation>Синхронизация рабочего стола...</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="310"/>
-        <source>Synchronizing desktop...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="312"/>
         <source>Copying desktop...</source>
-        <translation type="unfinished"></translation>
+        <translation>Копирование рабочего стола...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="344"/>
-        <location filename="../mainwindow.cpp" line="571"/>
+        <location filename="../mainwindow.cpp" line="347"/>
+        <location filename="../mainwindow.cpp" line="574"/>
         <source>The user name needs to be at least 2 characters long. Please select a longer name before proceeding.</source>
-        <translation type="unfinished"></translation>
+        <translation>Имя пользователя должно иметь не менее 2 символов. Пожалуйста, выберите более длинное название, прежде чем продолжить.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="348"/>
+        <location filename="../mainwindow.cpp" line="352"/>
         <source>The user name cannot contain special characters or spaces.
 Please choose another name before proceeding.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="354"/>
-        <source>Sorry, this name is in use. Please enter a different name.</source>
-        <translation type="unfinished"></translation>
+        <translation>Имя пользователя не должно содержать специальных символов или пробелов. Выберите другое имя перед продолжением.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="358"/>
-        <location filename="../mainwindow.cpp" line="413"/>
+        <source>Sorry, this name is in use. Please enter a different name.</source>
+        <translation>Извините, это имя уже используется. Пожалуйста, выберите другое имя.</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="362"/>
+        <location filename="../mainwindow.cpp" line="417"/>
         <source>Password entries do not match. Please try again.</source>
-        <translation type="unfinished"></translation>
+        <translation>Записи пароля не совпадают. Пожалуйста, попробуйте еще раз.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="364"/>
-        <location filename="../mainwindow.cpp" line="419"/>
+        <location filename="../mainwindow.cpp" line="367"/>
+        <location filename="../mainwindow.cpp" line="422"/>
         <source>Password needs to be at least 2 characters long. Please enter a longer password before proceeding.</source>
-        <translation type="unfinished"></translation>
+        <translation>Пароль должен иметь, по крайней мере, 2 символa. Пожалуйста, выбeритe более длинный пароль, прежде чем продолжить.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="402"/>
+        <location filename="../mainwindow.cpp" line="406"/>
         <source>The user was added ok.</source>
-        <translation type="unfinished"></translation>
+        <translation>Пользователь был успешно добавлен.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="405"/>
+        <location filename="../mainwindow.cpp" line="409"/>
         <source>Failed to add the user.</source>
-        <translation type="unfinished"></translation>
+        <translation>Не удалось добавить пользователя.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="433"/>
+        <location filename="../mainwindow.cpp" line="437"/>
         <source>Password successfully changed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Пароль успешно изменён.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="436"/>
+        <location filename="../mainwindow.cpp" line="440"/>
         <source>Failed to change password.</source>
-        <translation type="unfinished"></translation>
+        <translation>Не удалось изменить пароль.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="442"/>
+        <location filename="../mainwindow.cpp" line="446"/>
         <source>This action cannot be undone. Are you sure you want to delete user %1?</source>
-        <translation type="unfinished"></translation>
+        <translation>Это действие не может быть отменено. Вы уверены, что хотите удалить пользователя %1?</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="460"/>
+        <location filename="../mainwindow.cpp" line="464"/>
         <source>The user has been deleted.</source>
-        <translation type="unfinished"></translation>
+        <translation>Пользователь был удален.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="462"/>
+        <location filename="../mainwindow.cpp" line="466"/>
         <source>Failed to delete the user.</source>
-        <translation type="unfinished"></translation>
+        <translation>Не удалось удалить пользователя.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="476"/>
+        <location filename="../mainwindow.cpp" line="480"/>
         <source>The group name needs to be at least 2 characters long. Please select a longer name before proceeding.</source>
-        <translation type="unfinished"></translation>
+        <translation>Имя группы должно иметь не менее 2 символов. Пожалуйста, выберите более длинное название, прежде чем продолжить.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="481"/>
+        <location filename="../mainwindow.cpp" line="485"/>
         <source>The group name needs to be lower case and it 
 cannot contain special characters or spaces.
 Please choose another name before proceeding.</source>
-        <translation type="unfinished"></translation>
+        <translation>Имя группы должно быть в нижнем регистре и оно
+не может содержать специальные символы или пробелы.
+Пожалуйста, выберите другое имя, прежде чем приступить.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="489"/>
+        <location filename="../mainwindow.cpp" line="493"/>
         <source>Sorry, that group name already exists. Please enter a different name.</source>
-        <translation type="unfinished"></translation>
+        <translation>Извините, это имя группы уже используется. Пожалуйста, выберите другое имя.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="497"/>
+        <location filename="../mainwindow.cpp" line="501"/>
         <source>The system group was added ok.</source>
-        <translation type="unfinished"></translation>
+        <translation>Системная группа была успешно добавлена.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="499"/>
+        <location filename="../mainwindow.cpp" line="503"/>
         <source>Failed to add the system group.</source>
-        <translation type="unfinished"></translation>
+        <translation>Не удалось добавить системную группу.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="514"/>
+        <location filename="../mainwindow.cpp" line="518"/>
         <source>This action cannot be undone. Are you sure you want to delete group %1?</source>
-        <translation type="unfinished"></translation>
+        <translation>Это действие не может быть отменено. Вы уверены, что хотите удалить группу %1?</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="515"/>
+        <location filename="../mainwindow.cpp" line="519"/>
         <source>This action cannot be undone. Are you sure you want to delete the following groups: %1?</source>
-        <translation type="unfinished"></translation>
+        <translation>Это действие нельзя отменить. Уверены, что хотите удалить следующие группы: %1?</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="524"/>
+        <location filename="../mainwindow.cpp" line="528"/>
         <source>Failed to delete the group.</source>
-        <translation type="unfinished"></translation>
+        <translation>Не удалось удалить группу.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="524"/>
+        <location filename="../mainwindow.cpp" line="528"/>
         <source>Group: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Группа: %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="528"/>
+        <location filename="../mainwindow.cpp" line="532"/>
         <source>The group has been deleted.</source>
-        <translation type="unfinished"></translation>
+        <translation>Группа была удалена.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="528"/>
+        <location filename="../mainwindow.cpp" line="532"/>
         <source>The groups have been deleted.</source>
-        <translation type="unfinished"></translation>
+        <translation>Группы были удалены.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="545"/>
+        <location filename="../mainwindow.cpp" line="549"/>
         <source>The changes have been applied.</source>
-        <translation type="unfinished"></translation>
+        <translation>Изменения были применены.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="547"/>
+        <location filename="../mainwindow.cpp" line="551"/>
         <source>Failed to apply group changes</source>
-        <translation type="unfinished"></translation>
+        <translation>Не удалось применить изменения групп.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="561"/>
+        <location filename="../mainwindow.cpp" line="565"/>
         <source>The selected user name is currently in use.</source>
-        <translation type="unfinished"></translation>
+        <translation>Выбранное имя пользователя в настоящий момент используется.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="562"/>
+        <location filename="../mainwindow.cpp" line="566"/>
         <source>To rename this user, please log out and log back in using another user account.</source>
-        <translation type="unfinished"></translation>
+        <translation>Чтобы переименовать этого пользователя, пожалуйста, завершите сеанс и снова зайдите под другим пользователем.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="575"/>
+        <location filename="../mainwindow.cpp" line="579"/>
         <source>The user name needs to be lower case and it
 cannot contain special characters or spaces.
 Please choose another name before proceeding.</source>
-        <translation type="unfinished"></translation>
+        <translation>Имя пользователя должно быть в нижнем регистре и оно
+не может содержать специальные символы или пробелы.
+Пожалуйста, выберите другое имя, прежде чем приступить.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="582"/>
+        <location filename="../mainwindow.cpp" line="586"/>
         <source>Sorry, this name already exists on your system. Please enter a different name.</source>
-        <translation type="unfinished"></translation>
+        <translation>Извините, в вашей системе это имя уже используется. Пожалуйста, выберите другое имя.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="591"/>
+        <location filename="../mainwindow.cpp" line="595"/>
         <source>Failed to rename the user. Please make sure that the user is not logged in, you might need to restart</source>
-        <translation type="unfinished"></translation>
+        <translation>Не удалось переименовать пользователя. Пожалуйста, убедитесь, что пользователь вышел из сеанса, может потребоваться перезагрузка.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="615"/>
+        <location filename="../mainwindow.cpp" line="619"/>
         <source>The user was renamed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Пользователь успешно переименован.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="627"/>
-        <location filename="../mainwindow.cpp" line="656"/>
+        <location filename="../mainwindow.cpp" line="631"/>
+        <location filename="../mainwindow.cpp" line="659"/>
         <source>Synchronizing desktop...ok</source>
-        <translation type="unfinished"></translation>
+        <translation>Синхронизация рабочего стола...ОК</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="629"/>
-        <location filename="../mainwindow.cpp" line="658"/>
+        <location filename="../mainwindow.cpp" line="633"/>
+        <location filename="../mainwindow.cpp" line="661"/>
         <source>Copying desktop...ok</source>
-        <translation type="unfinished"></translation>
+        <translation>Копирование рабочего стола...ОК</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="662"/>
+        <location filename="../mainwindow.cpp" line="665"/>
         <source>Synchronizing desktop...failed</source>
-        <translation type="unfinished"></translation>
+        <translation>Синхронизация рабочего стола...НЕ удалась</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="664"/>
+        <location filename="../mainwindow.cpp" line="667"/>
         <source>Copying desktop...failed</source>
-        <translation type="unfinished"></translation>
+        <translation>Копирование рабочего стола...НЕ удалось</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="683"/>
+        <location filename="../mainwindow.cpp" line="686"/>
         <source>Confirmation</source>
-        <translation type="unfinished"></translation>
+        <translation>Подтверждение</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="684"/>
+        <location filename="../mainwindow.cpp" line="687"/>
         <source>Process not done. Are you sure you want to quit the application?</source>
-        <translation type="unfinished"></translation>
+        <translation>Процесс еще не завершен. Выйти из приложения?</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="910"/>
+        <location filename="../mainwindow.cpp" line="942"/>
         <source>About %1</source>
-        <translation type="unfinished"></translation>
+        <translation>О %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="911"/>
+        <location filename="../mainwindow.cpp" line="943"/>
         <source>Version: </source>
-        <translation type="unfinished"></translation>
+        <translation>Версия: </translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="912"/>
+        <location filename="../mainwindow.cpp" line="944"/>
         <source>Simple user configuration for MX Linux</source>
-        <translation type="unfinished"></translation>
+        <translation>Простой конфигуратор пользователей для MX Linux</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="914"/>
+        <location filename="../mainwindow.cpp" line="946"/>
         <source>Copyright (c) MX Linux</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="915"/>
-        <source>%1 License</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="930"/>
-        <source>%1 Help</source>
-        <translation type="unfinished"></translation>
+        <translation>Copyright (c) MX Linux</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="947"/>
+        <source>%1 License</source>
+        <translation>%1 Лицензия</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="961"/>
+        <source>%1 Help</source>
+        <translation>%1 Справка</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="978"/>
         <source>Select folder to copy to</source>
-        <translation type="unfinished"></translation>
+        <translation>Выберите папку для копирования</translation>
     </message>
 </context>
 <context>
@@ -811,71 +815,71 @@ Please choose another name before proceeding.</source>
     <message>
         <location filename="../passedit.cpp" line="162"/>
         <source>Negligible</source>
-        <translation type="unfinished"></translation>
+        <translation>Незначительный</translation>
     </message>
     <message>
         <location filename="../passedit.cpp" line="162"/>
         <source>Very weak</source>
-        <translation type="unfinished"></translation>
+        <translation>Очень слабый</translation>
     </message>
     <message>
         <location filename="../passedit.cpp" line="162"/>
         <source>Weak</source>
-        <translation type="unfinished"></translation>
+        <translation>Слабый</translation>
     </message>
     <message>
         <location filename="../passedit.cpp" line="163"/>
         <source>Moderate</source>
-        <translation type="unfinished"></translation>
+        <translation>Средний</translation>
     </message>
     <message>
         <location filename="../passedit.cpp" line="163"/>
         <source>Strong</source>
-        <translation type="unfinished"></translation>
+        <translation>Сильный</translation>
     </message>
     <message>
         <location filename="../passedit.cpp" line="163"/>
         <source>Very strong</source>
-        <translation type="unfinished"></translation>
+        <translation>Очень сильный</translation>
     </message>
     <message>
         <location filename="../passedit.cpp" line="164"/>
         <source>Password strength: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Надёжность пароля: %1</translation>
     </message>
     <message>
         <location filename="../passedit.cpp" line="200"/>
         <source>Hide the password</source>
-        <translation type="unfinished"></translation>
+        <translation>Скрыть пароль</translation>
     </message>
     <message>
         <location filename="../passedit.cpp" line="200"/>
         <source>Show the password</source>
-        <translation type="unfinished"></translation>
+        <translation>Отображать пароль</translation>
     </message>
 </context>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../about.cpp" line="51"/>
+        <location filename="../about.cpp" line="50"/>
         <source>License</source>
-        <translation type="unfinished"></translation>
+        <translation>Лицензия</translation>
+    </message>
+    <message>
+        <location filename="../about.cpp" line="51"/>
+        <location filename="../about.cpp" line="61"/>
+        <source>Changelog</source>
+        <translation>Список изменений</translation>
     </message>
     <message>
         <location filename="../about.cpp" line="52"/>
-        <location filename="../about.cpp" line="62"/>
-        <source>Changelog</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../about.cpp" line="53"/>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Отмена</translation>
     </message>
     <message>
-        <location filename="../about.cpp" line="75"/>
+        <location filename="../about.cpp" line="74"/>
         <source>&amp;Close</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Закрыть</translation>
     </message>
     <message>
         <location filename="../main.cpp" line="61"/>
@@ -886,12 +890,12 @@ Please choose another name before proceeding.</source>
     <message>
         <location filename="../main.cpp" line="62"/>
         <source>You seem to be logged in as root, please log out and log in as normal user to use this program.</source>
-        <translation type="unfinished"></translation>
+        <translation>Программа запущена суперпользователем. Для использования программы войдите в систему как обычный пользователь.</translation>
     </message>
     <message>
         <location filename="../main.cpp" line="69"/>
         <source>You must run this program with admin access.</source>
-        <translation type="unfinished"></translation>
+        <translation>Вы должны запустить эту программу с правами администратора.</translation>
     </message>
 </context>
 </TS>

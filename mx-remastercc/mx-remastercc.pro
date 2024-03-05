@@ -36,13 +36,13 @@ SOURCES += main.cpp \
     mainwindow.cpp
 
 HEADERS  += \
-    version.h \
     mainwindow.h
 
 FORMS    += \
     mainwindow.ui
 
-    TRANSLATIONS += translations/mx-remastercc_en.ts
+TRANSLATIONS += \
+    translations/mx-remastercc_en.ts
 
 RESOURCES += \
     images.qrc

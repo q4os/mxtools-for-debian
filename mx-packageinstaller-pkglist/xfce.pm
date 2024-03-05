@@ -14,7 +14,7 @@ Xfce (MX Linux)
 </description>
 
 <installable>
-all
+64,32
 </installable>
 
 <screenshot></screenshot>
@@ -24,7 +24,8 @@ all
 </preinstall>
 
 <install_package_names>
-desktop-defaults-mx-xfce
+desktop-defaults-mx-xfce-desktop
+desktop-defaults-mx-xfce-system
 mx23-artwork
 xfce-superkey-mx
 xfce4-appfinder
@@ -68,6 +69,7 @@ xfdesktop4
 xfdesktop4-data
 thunar-archive-plugin
 thunar-shares-plugin
+thunar-modified-desktop-file
 thunar-data
 thunar-gtkhash
 thunar-volman
@@ -82,7 +84,7 @@ mx-comfort-themes
 
 <uninstall_package_names>
 desktop-defaults-mx-xfce-desktop
-desktop-defaultx-mx-xfce-system
+desktop-defaults-mx-xfce-system
 xfce-superkey-mx
 xfce4-appfinder
 xfce4-battery-plugin
