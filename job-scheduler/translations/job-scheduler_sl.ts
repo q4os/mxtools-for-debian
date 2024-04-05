@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="sl">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="sl">
 <context>
     <name>CronModel</name>
     <message>
@@ -259,7 +257,7 @@ Are you OK to exit?</source>
     <message>
         <location filename="../MainWindow.cpp" line="347"/>
         <source>MX project page: %1</source>
-        <translation>Stran z MX projektom: %1</translation>
+        <translation>MX projektna stran: %1</translation>
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="352"/>

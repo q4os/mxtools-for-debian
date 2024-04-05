@@ -30,12 +30,12 @@
 #include <QStandardPaths>
 #include <QTranslator>
 
+#include "common.h"
 #include "mainwindow.h"
 #include <unistd.h>
 #include <version.h>
 
 static QFile logFile;
-extern const QString starting_home = qEnvironmentVariable("HOME");
 void messageHandler(QtMsgType type, const QMessageLogContext &context, const QString &msg);
 
 int main(int argc, char *argv[])
@@ -62,8 +62,7 @@ int main(int argc, char *argv[])
     QApplication::setWindowIcon(QIcon::fromTheme(QApplication::applicationName()));
 
     QTranslator qtTran;
-    if (qtTran.load(QLocale::system(), QStringLiteral("qt"), QStringLiteral("_"),
-                    QLibraryInfo::location(QLibraryInfo::TranslationsPath))) {
+    if (qtTran.load(QLocale::system(), "qt", "_", QLibraryInfo::location(QLibraryInfo::TranslationsPath))) {
         QApplication::installTranslator(&qtTran);
     }
 
@@ -116,30 +115,29 @@ int main(int argc, char *argv[])
     return QApplication::exec();
 }
 
-// The implementation of the handler
 void messageHandler(QtMsgType type, const QMessageLogContext &context, const QString &msg)
 {
     QTextStream term_out(stdout);
-    term_out << msg << QStringLiteral("\n");
+    term_out << msg << '\n';
 
     QTextStream out(&logFile);
-    out << QDateTime::currentDateTime().toString(QStringLiteral("yyyy-MM-dd hh:mm:ss.zzz "));
+    out << QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss.zzz ");
     switch (type) {
     case QtInfoMsg:
-        out << QStringLiteral("INF ");
+        out << "INF ";
         break;
     case QtDebugMsg:
-        out << QStringLiteral("DBG ");
+        out << "DBG ";
         break;
     case QtWarningMsg:
-        out << QStringLiteral("WRN ");
+        out << "WRN ";
         break;
     case QtCriticalMsg:
-        out << QStringLiteral("CRT ");
+        out << "CRT ";
         break;
     case QtFatalMsg:
-        out << QStringLiteral("FTL ");
+        out << "FTL ";
         break;
     }
-    out << context.category << QStringLiteral(": ") << msg << QStringLiteral("\n");
+    out << context.category << ": " << msg << '\n';
 }

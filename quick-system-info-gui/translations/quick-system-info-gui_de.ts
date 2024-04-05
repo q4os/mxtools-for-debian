@@ -26,7 +26,7 @@
     <message>
         <location filename="../mainwindow.ui" line="71"/>
         <source>Copy the displayed system information to the clipboard, encased in [CODE][/CODE] tags ready to use in a forum post.</source>
-        <translation>Kopieren sie die angezeigten Systeminformationen in die Zwischenablage, verpackt in [CODE][/CODE]-Tags, um sie in einem Forumsbeitrag zu verwenden.</translation>
+        <translation>Kopieren Sie die angezeigten Systeminformationen in die Zwischenablage, verpackt in [CODE][/CODE]-Tags, um sie in einem Forumsbeitrag zu verwenden.</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="57"/>

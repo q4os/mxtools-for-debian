@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="sq">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="sq">
 <context>
     <name>CronModel</name>
     <message>
@@ -24,7 +22,7 @@
     <message>
         <location filename="../ExecuteList.cpp" line="39"/>
         <source>Max Item</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../ExecuteList.cpp" line="41"/>
@@ -412,12 +410,12 @@ Jeni dakord të dilet?</translation>
     <message>
         <location filename="../TimeDialog.cpp" line="167"/>
         <source>Enable Literal</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../TimeDialog.cpp" line="169"/>
         <source>&amp;Reset</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../TimeDialog.cpp" line="170"/>

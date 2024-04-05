@@ -855,7 +855,7 @@ Close the program, or wait until it is done processing and try again.</source>
 关闭该程序，或等待其处理完毕后再试。</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="77"/>
+        <location filename="../main.cpp" line="78"/>
         <source>MX Package Installer is a tool used for managing packages on MX Linux
     - installs popular programs from different sources
     - installs programs from the MX Test repo
@@ -868,23 +868,23 @@ Close the program, or wait until it is done processing and try again.</source>
 - 安装 Flatpak 格式程序</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="85"/>
+        <location filename="../main.cpp" line="86"/>
         <source>Skip online check if it falsely reports lack of internet access.</source>
         <translation>如果在线检查误报无法上网，则跳过在线检查。</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="95"/>
-        <location filename="../main.cpp" line="103"/>
+        <location filename="../main.cpp" line="96"/>
+        <location filename="../main.cpp" line="104"/>
         <source>Error</source>
         <translation>错误</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="96"/>
+        <location filename="../main.cpp" line="97"/>
         <source>You seem to be logged in as root, please log out and log in as normal user to use this program.</source>
         <translation>您似乎是以 root 身份登录的，请注销并以普通用户身份登录以使用此程序。</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="104"/>
+        <location filename="../main.cpp" line="105"/>
         <source>You must run this program with admin access.</source>
         <translation>您必须以管理员权限运行此程序。</translation>
     </message>

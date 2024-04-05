@@ -14,3 +14,6 @@ It provides an interface that allows users to setup up Samba shares for folders 
 Translation for mx-samba-config takes place on Transifex.
 
 https://www.transifex.com/anticapitalista/signin/?next=/anticapitalista/antix-development/mx-samba-config/
+
+![image](https://github.com/MX-Linux/mx-samba-config/assets/418436/fb96f996-0287-40f8-831e-ed6438fd2f24)
+

@@ -19,14 +19,15 @@
  * You should have received a copy of the GNU General Public License
  * along with this package. If not, see <http://www.gnu.org/licenses/>.
  **********************************************************************/
-#ifndef SERVICE_H
-#define SERVICE_H
+#pragma once
 
 #include <QObject>
 #include <QString>
 
 class Service
 {
+    Q_DISABLE_COPY(Service)
+
 public:
     Service() = default;
     explicit Service(QString name, bool running);
@@ -52,5 +53,3 @@ private:
 };
 
 Q_DECLARE_METATYPE(Service *)
-
-#endif // SERVICE_H

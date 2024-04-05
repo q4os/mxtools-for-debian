@@ -1,6 +1,6 @@
 /*
    Copyright (C) 2003-2010 by Warren Woodford
-   Copyright (C) 2014 by Adrian adrian@mxlinux.org
+   Copyright (C) 2014-2023 Heavily modified by Adrian <adrian@mxlinux.org>
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -14,8 +14,7 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 
-
-   With big modifications made by Adrian adrian@mxlinux.org
+   Heavily modified by Adrian <adrian@mxlinux.org>
 */
 
 #include "mainwindow.h"
@@ -30,9 +29,9 @@
 #include <QScreen>
 #include <QTemporaryFile>
 
+#include "about.h"
 #include "version.h"
 
-#include <about.h>
 #include <unistd.h>
 
 MainWindow::MainWindow(QWidget *parent)
@@ -40,7 +39,7 @@ MainWindow::MainWindow(QWidget *parent)
 {
     qDebug() << "Program Version:" << VERSION;
     setupUi(this);
-    this->setMinimumSize(400, 600);
+    setMinimumSize(400, 600);
     setWindowFlags(Qt::Window); // for the close, min and max buttons
     setWindowIcon(QApplication::windowIcon());
 
@@ -448,7 +447,7 @@ void MainWindow::on_linuxDrvDiagnosePushButton_clicked()
         new QListWidgetItem(mod, linuxDrvList);
     }
 
-    // list unloaded modules
+    // List unloaded modules
     for (int i = 0; i < unloadedModules.size(); ++i) {
         QString mod = unloadedModules.at(i);
         if (i == 0) {
@@ -463,7 +462,7 @@ void MainWindow::on_linuxDrvDiagnosePushButton_clicked()
 
     QString driver;
     QString s;
-    // add blocklisted modules to the list
+    // Add blocklisted modules to the list
     while (!inputBlockList.atEnd()) {
         if (inputBlockList.pos() == 0) {
             new QListWidgetItem("---------" + tr("Blocked Drivers") + " --------", linuxDrvList);
@@ -481,7 +480,7 @@ void MainWindow::on_linuxDrvDiagnosePushButton_clicked()
     }
     inputBlockList.close();
 
-    // add blocklisted modules from /etc/modprobe.d/broadcom-sta-dkms.conf
+    // Add blocklisted modules from /etc/modprobe.d/broadcom-sta-dkms.conf
     QFile inputBroadcomBlocklist("/etc/modprobe.d/broadcom-sta-dkms.conf");
     inputBroadcomBlocklist.open(QFile::ReadOnly | QFile::Text);
     while (!inputBroadcomBlocklist.atEnd()) {
@@ -695,7 +694,7 @@ bool MainWindow::installModule(const QString &module)
     return true;
 }
 
-// run apt-get update and at the end start installNDIS
+// Run apt-get update and at the end start installNDIS
 void MainWindow::on_installNdiswrapper_clicked()
 {
     setCursor(QCursor(Qt::BusyCursor));
@@ -711,7 +710,7 @@ void MainWindow::on_installNdiswrapper_clicked()
     const int y = (screenGeometry.height() - installOutputEdit->height()) / 2;
     installOutputEdit->move(x, y);
     // hide main window
-    this->hide();
+    hide();
     installOutputEdit->raise();
     disconnect(&cmd, &QProcess::readyReadStandardOutput, nullptr, nullptr);
     connect(&cmd, &QProcess::readyReadStandardOutput, this, &MainWindow::writeInstallOutput);
@@ -735,7 +734,7 @@ void MainWindow::on_uninstallNdiswrapper_clicked()
     const int y = (screenGeometry.height() - installOutputEdit->height()) / 2;
     installOutputEdit->move(x, y);
     // hide main window
-    this->hide();
+    hide();
     installOutputEdit->raise();
     disconnect(&cmd, &QProcess::readyReadStandardOutput, nullptr, nullptr);
     connect(&cmd, &QProcess::readyReadStandardOutput, this, &MainWindow::writeInstallOutput);
@@ -756,7 +755,7 @@ void MainWindow::aptUpdateFinished()
 void MainWindow::installFinished(int errorCode)
 {
     installOutputEdit->close();
-    this->show();
+    show();
     setCursor(QCursor(Qt::ArrowCursor));
     if (errorCode == 0) {
         if (installModule("ndiswrapper")) {
@@ -773,7 +772,7 @@ void MainWindow::installFinished(int errorCode)
 void MainWindow::uninstallNdisFinished(int errorCode)
 {
     installOutputEdit->close();
-    this->show();
+    show();
     setCursor(QCursor(Qt::ArrowCursor));
     if (errorCode == 0) {
         removeStart("ndiswrapper");
@@ -893,7 +892,7 @@ void MainWindow::on_windowsDrvAddPushButton_clicked()
                 s = s.remove('\\');
                 s = s.remove('\n');
                 found = true;
-                if (this->checkSysFileExists(sysDir, s, Qt::CaseInsensitive)) {
+                if (checkSysFileExists(sysDir, s, Qt::CaseInsensitive)) {
                     exist = true;
                 } else {
                     foundSysFiles << s;
@@ -943,7 +942,7 @@ void MainWindow::on_windowsDrvRemovePushButton_clicked()
 void MainWindow::on_generalHelpPushButton_clicked()
 {
     const QString url {"/usr/share/doc/mx-network-assistant/mx-network-assistant.html"};
-    displayDoc(url, tr("%1 Help").arg(this->windowTitle()));
+    displayDoc(url, tr("%1 Help").arg(windowTitle()));
 }
 
 void MainWindow::on_tabWidget_currentChanged()
@@ -962,7 +961,7 @@ void MainWindow::on_hwUnblock_clicked()
     checkWifiEnabled();
 }
 
-// close but do not apply
+// Close but do not apply
 void MainWindow::on_buttonCancel_clicked()
 {
     close();
@@ -970,16 +969,15 @@ void MainWindow::on_buttonCancel_clicked()
 
 void MainWindow::on_buttonAbout_clicked()
 {
-    this->hide();
+    hide();
     displayAboutMsgBox(
-        tr("About %1").arg(this->windowTitle()),
-        "<p align=\"center\"><b><h2>" + this->windowTitle() + "</h2></b></p><p align=\"center\">" + tr("Version: ")
-            + VERSION + "</p><p align=\"center\"><h3>"
-            + tr("Program for troubleshooting and configuring network for MX Linux")
+        tr("About %1").arg(windowTitle()),
+        "<p align=\"center\"><b><h2>" + windowTitle() + "</h2></b></p><p align=\"center\">" + tr("Version: ") + VERSION
+            + "</p><p align=\"center\"><h3>" + tr("Program for troubleshooting and configuring network for MX Linux")
             + R"(</h3></p><p align="center"><a href="http://mxlinux.org">http://mxlinux.org</a><br /></p><p align="center">)"
             + tr("Copyright (c) MEPIS LLC and MX Linux") + "<br /><br /></p>",
-        "/usr/share/doc/mx-network-assistant/license.html", tr("%1 License").arg(this->windowTitle()));
-    this->show();
+        "/usr/share/doc/mx-network-assistant/license.html", tr("%1 License").arg(windowTitle()));
+    show();
 }
 
 QString MainWindow::getIP()

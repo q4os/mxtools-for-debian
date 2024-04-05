@@ -5,39 +5,39 @@
     <name>MainWindow</name>
     <message>
         <source>MX Welcome</source>
-        <translation type="vanished">MX Tervetulo-ohjelma</translation>
+        <translation type="vanished">MX Tervetuloa</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="74"/>
         <source>&amp;Copy for forum</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Kopioi foorumiin</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="43"/>
         <source>Save the displayed system information to a text file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tallenna järjestelmätiedot tekstitiedostoon.</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="46"/>
         <location filename="../mainwindow.cpp" line="91"/>
         <source>Save text...</source>
-        <translation type="unfinished"></translation>
+        <translation>Tallenna teksti...</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="71"/>
         <source>Copy the displayed system information to the clipboard, encased in [CODE][/CODE] tags ready to use in a forum post.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopioi järjestelmätiedot leikepöydälle [CODE][/CODE] tunnistein koteloituina. Valmis käytettäväksi vaikka foorumilla.</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="57"/>
         <source>Save the system information selected from the list to an archive file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tallenna listalta valitut järjestelmätiedot arkistotiedostoon.</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="60"/>
         <location filename="../mainwindow.cpp" line="126"/>
         <source>&amp;Save...</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Tallenna...</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="129"/>
@@ -100,33 +100,33 @@
     <message>
         <location filename="../mainwindow.cpp" line="186"/>
         <source>About Quick-System-Info-gui</source>
-        <translation type="unfinished"></translation>
+        <translation>Tietoja Quick-System-Info-gui</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="95"/>
         <source>&amp;Find...</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Etsi...</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="99"/>
         <location filename="../mainwindow.cpp" line="481"/>
         <source>Find &amp;Next</source>
-        <translation type="unfinished"></translation>
+        <translation>Etsi &amp;seuraava</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="115"/>
         <source>Select &amp;All</source>
-        <translation type="unfinished"></translation>
+        <translation>Valitse &amp;kaikki</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="121"/>
         <source>Revert Selection</source>
-        <translation type="unfinished"></translation>
+        <translation>Palauta valinta</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="188"/>
         <source>Program for displaying a quick system info report</source>
-        <translation type="unfinished"></translation>
+        <translation>Ohjelma järjestelmätietoraportin näyttämiseen</translation>
     </message>
     <message>
         <source>License</source>
@@ -150,7 +150,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="440"/>
         <source>&amp;Save (×%1)...</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Tallenna (×%1)...</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="474"/>
@@ -160,37 +160,37 @@
     <message>
         <location filename="../mainwindow.cpp" line="477"/>
         <source>&amp;Find what:</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Mitä etsit:</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="487"/>
         <source>Match c&amp;ase</source>
-        <translation type="unfinished"></translation>
+        <translation>Osum&amp;at</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="488"/>
         <source>Match &amp;whole word only</source>
-        <translation type="unfinished"></translation>
+        <translation>Täsmää vain &amp;koko sanaa</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="491"/>
         <source>Direction</source>
-        <translation type="unfinished"></translation>
+        <translation>Suunta</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="493"/>
         <source>&amp;Up</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Ylös</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="494"/>
         <source>&amp;Down</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Alas</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="536"/>
         <source>Cannot find &quot;%1&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>Ei löytynyt &quot;%1&quot;</translation>
     </message>
     <message>
         <source>Changelog</source>
@@ -208,37 +208,41 @@
     <message>
         <location filename="../mainwindow.cpp" line="223"/>
         <source>Save System Information</source>
-        <translation type="unfinished"></translation>
+        <translation>Tallenna järjestelmätiedot</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="279"/>
         <source>System information saved.</source>
-        <translation type="unfinished"></translation>
+        <translation>Järjestelmätiedot tallennettu.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="287"/>
         <source>Could not save system information.</source>
-        <translation type="unfinished"></translation>
+        <translation>Järjestelmätietoja ei voitu tallentaa.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="332"/>
         <source>history</source>
-        <translation type="unfinished"></translation>
+        <translation>historia</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="354"/>
         <source>%1 Help</source>
-        <translation>%1 Apuopas</translation>
+        <translation>%1 ohje</translation>
+    </message>
+    <message>
+        <source>Quick System Info (gui)</source>
+        <translation type="vanished">Järjestelmätiedot (gui)</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="81"/>
         <source>Copy for forum</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopioi foorumille</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="86"/>
         <source>Plain text copy</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopioi pelkkä teksti</translation>
     </message>
 </context>
 <context>
@@ -254,7 +258,7 @@
     <message>
         <location filename="../main.cpp" line="43"/>
         <source>This tool displays a the quick system info report in a gui.</source>
-        <translation type="unfinished"></translation>
+        <translation>Työkalu näyttää järjestelmän tietoraportin ikkunassa.</translation>
     </message>
     <message>
         <location filename="../main.cpp" line="66"/>

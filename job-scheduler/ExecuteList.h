@@ -7,8 +7,7 @@
    as published by the Free Software Foundation; either version 2
    of the License, or (at your option) any later version.
 */
-#ifndef EXECUTELIST_H
-#define EXECUTELIST_H
+#pragma once
 
 #include <QWidget>
 
@@ -24,7 +23,7 @@ class ExecuteList : public QWidget
     Q_OBJECT
 
 public:
-    ExecuteList(int maxN, int maxD, QList<Crontab *> *cron);
+    ExecuteList(int maxN, int maxD, QList<Crontab *> *cron, QWidget *parent = nullptr);
 
     QList<Execute *> executes;
 
@@ -38,7 +37,7 @@ public slots:
     void changeCurrent(Crontab *cron, TCommand *cmnd);
     void numChanged(int num);
     void dateChanged(int num);
-    void setVisible(bool flag);
+    void setVisible(bool flag) override;
 
 private:
     int itemCount {};
@@ -48,5 +47,3 @@ private:
     Crontab *curCrontab;
     TCommand *curTCommand;
 };
-
-#endif

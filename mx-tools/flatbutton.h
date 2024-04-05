@@ -19,9 +19,7 @@
  * You should have received a copy of the GNU General Public License
  * along with MX Tools.  If not, see <http://www.gnu.org/licenses/>.
  **********************************************************************/
-
-#ifndef FLATBUTTON_H
-#define FLATBUTTON_H
+#pragma once
 
 #include <QEvent>
 #include <QPushButton>
@@ -39,5 +37,3 @@ protected:
     void enterEvent(QEvent *e) override;
     void leaveEvent(QEvent *e) override;
 };
-
-#endif // FLATBUTTON_H

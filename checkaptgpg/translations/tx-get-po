@@ -7,7 +7,7 @@ PACKAGE="mx-checkaptgpg"
 RESOURCE=$PACKAGE
 POTFILE=${RESOURCE}.pot
 PODIR=po
-MINIMUM_PERC=5
+MINIMUM_PERC=10
 
 # need 'latest' transifex client
 : ${TXBIN:=$(which tx)}

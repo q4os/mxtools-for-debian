@@ -4,12 +4,13 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# ふうせん Fu-sen. | BALLOON a.k.a. Fu-sen., 2022
-# Roy Avrett <avrett@cs.fsu.edu>, 2022
+# 🎈 BALLOON | FU-SEN, 2022
+# Roy Avrett <rjavrett@gmail.com>, 2022
 # Transifex Bot <>, 2022
 # anticapitalista <anticapitalista@riseup.net>, 2022
 # Geoff Gigg <geoffgigg@hotmail.com>, 2022
 # night1ynx <night1ynxd@gmail.com>, 2022
+# Green <usergreen@users.osdn.me>, 2022
 # 
 #, fuzzy
 msgid ""
@@ -18,8 +19,8 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-01-16 00:46+0100\n"
 "PO-Revision-Date: 2022-01-21 17:21+0000\n"
-"Last-Translator: night1ynx <night1ynxd@gmail.com>, 2022\n"
-"Language-Team: Japanese (https://www.transifex.com/anticapitalista/teams/10162/ja/)\n"
+"Last-Translator: Green <usergreen@users.osdn.me>, 2022\n"
+"Language-Team: Japanese (https://app.transifex.com/anticapitalista/teams/10162/ja/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -28,23 +29,23 @@ msgstr ""
 
 #: ../disk-manager.in:66
 msgid "Insufficient rights"
-msgstr ""
+msgstr "権限がありません"
 
 #: ../disk-manager.in:67
 msgid "You need administrative rights to start this application."
-msgstr ""
+msgstr "このアプリケーションを起動するには管理者権限が必要です。"
 
 #: ../data/disk-manager.glade.h:1
 msgid "<b>Driver</b>"
-msgstr ""
+msgstr "<b>ドライバ</b>"
 
 #: ../data/disk-manager.glade.h:2
 msgid "This driver seems to not be available for this type."
-msgstr ""
+msgstr "ドライバはこのタイプでは使用できないようです。"
 
 #: ../data/disk-manager.glade.h:3
 msgid "<b>Mount point</b>"
-msgstr ""
+msgstr "<b>マウントポイント</b>"
 
 #: ../data/disk-manager.glade.h:4
 msgid "<b>Options</b>"
@@ -52,56 +53,56 @@ msgstr "<b>オプション</b>"
 
 #: ../data/disk-manager.glade.h:5
 msgid "Check device every 30 boots"
-msgstr ""
+msgstr "デバイスを30回起動する毎にチェックします"
 
 #: ../data/disk-manager.glade.h:6
 msgid "<big><b>Configuration file:</b></big>"
-msgstr ""
+msgstr "<big><b>設定ファイル:</b></big>"
 
 #: ../data/disk-manager.glade.h:7
 msgid "<b>Vendor:</b>"
-msgstr ""
+msgstr "<b>ベンダ:</b>"
 
 #: ../data/disk-manager.glade.h:8
 msgid "<b>Model:</b>"
-msgstr ""
+msgstr "<b>モデル:</b>"
 
 #: ../data/disk-manager.glade.h:9
 msgid "<b>Serial:</b>"
-msgstr ""
+msgstr "<b>シリアル:</b>"
 
 #: ../data/disk-manager.glade.h:10
 msgid "<b>bus:</b>"
-msgstr ""
+msgstr "<b>バス:</b>"
 
 #: ../data/disk-manager.glade.h:11 ../DiskManager/Dialogs.py:372
 #: ../DiskManager/Dialogs.py:373 ../DiskManager/Dialogs.py:374
 msgid "Not available"
-msgstr ""
+msgstr "利用不可"
 
 #: ../data/disk-manager.glade.h:12
 msgid "Drive"
-msgstr ""
+msgstr "ドライブ"
 
 #: ../data/disk-manager.glade.h:13
 msgid "<b>Device:</b>"
-msgstr ""
+msgstr "<b>デバイス:</b>"
 
 #: ../data/disk-manager.glade.h:14
 msgid "<b>Type:</b>"
-msgstr ""
+msgstr "<b>タイプ:</b>"
 
 #: ../data/disk-manager.glade.h:15
 msgid "<b>Label:</b>"
-msgstr ""
+msgstr "<b>ラベル:</b>"
 
 #: ../data/disk-manager.glade.h:16
 msgid "<b>Mount point:</b>"
-msgstr ""
+msgstr "<b>マウントポイント:</b>"
 
 #: ../data/disk-manager.glade.h:17
 msgid "<b>Options:</b>"
-msgstr ""
+msgstr "<b>オプション:</b>"
 
 #: ../data/disk-manager.glade.h:18
 msgid "Volume"
@@ -109,19 +110,19 @@ msgstr "ボリューム名"
 
 #: ../data/disk-manager.glade.h:19
 msgid "<b>Total size:</b>"
-msgstr ""
+msgstr "<b>合計サイズ:</b>"
 
 #: ../data/disk-manager.glade.h:20
 msgid "<b>Free space:</b>"
-msgstr ""
+msgstr "<b>空き容量:</b>"
 
 #: ../data/disk-manager.glade.h:21
 msgid "<b>Available space:</b>"
-msgstr ""
+msgstr "利用可能な容量"
 
 #: ../data/disk-manager.glade.h:22
 msgid "<b>Used space:</b>"
-msgstr ""
+msgstr "<b>使用済み容量:</b>"
 
 #: ../data/disk-manager.glade.h:23
 msgid "Size"
@@ -132,28 +133,30 @@ msgid ""
 "Applying changes.\n"
 "Please wait until the process finishes."
 msgstr ""
+"変更を適用中です。\n"
+"処理が終了するまでお待ちください。"
 
 #: ../data/disk-manager.desktop.in.in.h:1 ../DiskManager/Dialogs.py:489
 #: ../DiskManager/DiskManager.py:78
 msgid "Disk Manager"
-msgstr ""
+msgstr "ディスクマネージャ"
 
 #: ../data/disk-manager.desktop.in.in.h:2
 msgid "Manage filesystem configuration"
-msgstr ""
+msgstr "ファイルシステム構成の管理をします"
 
 #: ../DiskManager/Dialogs.py:127 ../DiskManager/Fstab/Mounter.py:206
 #, python-format
 msgid "No driver is available for this type of filesystem : '%s'"
-msgstr ""
+msgstr "このタイプのファイルシステムに使用できるドライバはありません: '%s'"
 
 #: ../DiskManager/Dialogs.py:162
 msgid "Select a directory"
-msgstr ""
+msgstr "ディレクトリの選択"
 
 #: ../DiskManager/Dialogs.py:231
 msgid "Wrong mount point"
-msgstr ""
+msgstr "マウントポイントが正しくありません"
 
 #: ../DiskManager/Dialogs.py:232
 #, python-format
@@ -161,10 +164,12 @@ msgid ""
 "<i>%s</i> is currently in use.\n"
 "You should try another one."
 msgstr ""
+"<i>%s</i> は使用中です。\n"
+"別のものを使用してください。"
 
 #: ../DiskManager/Dialogs.py:243
 msgid "Options formatting error"
-msgstr ""
+msgstr "オプションの初期化エラー"
 
 #: ../DiskManager/Dialogs.py:244
 #, python-format
@@ -172,41 +177,43 @@ msgid ""
 "<i>%s</i> is not formatted correctly.\n"
 "Options should be separated by comma (,)"
 msgstr ""
+"<i>%s</i> は正しく初期化されていません。\n"
+"オプションはコンマ ( , ) で区切る必要があります。"
 
 #: ../DiskManager/Dialogs.py:427
 msgid ""
 "Removing unknown devices from\n"
 "the configuration file?"
-msgstr ""
+msgstr "設定ファイルから不明なデバイスを削除しますか?"
 
 #: ../DiskManager/Dialogs.py:428
 msgid ""
 "I can not find any existing block devices\n"
 "corresponding to the following devices:"
-msgstr ""
+msgstr "次のデバイスに対応する既存のブロックデバイスが見つかりません:"
 
 #: ../DiskManager/Dialogs.py:430
 msgid ""
 "It is advisable to remove them in order to avoid failed mount\n"
 "at start-up. Select the ones you want to remove."
-msgstr ""
+msgstr "起動時のマウントの失敗を避けるために、これらを削除することをお薦めします。削除したいものを選択してください。"
 
 #: ../DiskManager/Dialogs.py:433
 msgid "Remove selected"
-msgstr ""
+msgstr "選択したものを削除します"
 
 #: ../DiskManager/Dialogs.py:433
 msgid "Don't show me this warning in the future."
-msgstr ""
+msgstr "今後この警告を表示しません。"
 
 #: ../DiskManager/Dialogs.py:468
 msgid "Duplicate entry detected"
-msgstr ""
+msgstr "重複したエントリが検出されました"
 
 #: ../DiskManager/Dialogs.py:469
 msgid ""
 "The following entries of your configuration file use the same mount point:"
-msgstr ""
+msgstr "以下の設定ファイルのエントリーは、同じマウントポイントを使用します。"
 
 #: ../DiskManager/Dialogs.py:470
 msgid ""
@@ -214,18 +221,19 @@ msgid ""
 "You should select the one you want, and the others will be commented.\n"
 "They will be kept in the configuration file, but will be disabled."
 msgstr ""
+"2つの異なるデバイスが同じマウントポイントを共有することはできません。必要なデバイスを選択すると、他のデバイスはコメントされます。これらは設定ファイルに保持されますが、無効になります。"
 
 #: ../DiskManager/Dialogs.py:473
 msgid "Keep selected"
-msgstr ""
+msgstr "選択項目を保持"
 
 #: ../DiskManager/Dialogs.py:506
 msgid "Easily manage your filesystem configuration"
-msgstr ""
+msgstr "ファイルシステムの構成を簡単に管理できます"
 
 #: ../DiskManager/Dialogs.py:510
 msgid "translator-credits"
-msgstr ""
+msgstr "翻訳者クレジット"
 
 #: ../DiskManager/DiskManager.py:132
 msgid "Enable"
@@ -237,7 +245,7 @@ msgstr "デバイス"
 
 #: ../DiskManager/DiskManager.py:151
 msgid "Mount point"
-msgstr ""
+msgstr "マウントポイント"
 
 #: ../DiskManager/DiskManager.py:158
 msgid "Type"
@@ -257,7 +265,7 @@ msgstr "使用中"
 
 #: ../DiskManager/DiskManager.py:292
 msgid "Editing system partition?"
-msgstr ""
+msgstr "システムパーティションを編集しますか？"
 
 #: ../DiskManager/DiskManager.py:294
 #, python-format
@@ -266,6 +274,7 @@ msgid ""
 "Be really careful when editing it, or you may have\n"
 "serious problems. Do you want to continue?"
 msgstr ""
+"%s は重要なシステムパーティションです。編集する際は十分注意してください。そうしないと深刻な問題が発生する可能性があります。続行しますか？"
 
 #: ../DiskManager/DiskManager.py:399
 msgid "Unmount"
@@ -277,11 +286,11 @@ msgstr "マウント"
 
 #: ../DiskManager/DiskManager.py:407
 msgid "Reverting to an older version?"
-msgstr ""
+msgstr "古いバージョンへに戻しますか？"
 
 #: ../DiskManager/DiskManager.py:408
 msgid "This will apply the following changes:"
-msgstr ""
+msgstr "これによって、以下の変更が適用されます。"
 
 #: ../DiskManager/DiskManager.py:408
 msgid "Do you want to continue?"
@@ -289,7 +298,7 @@ msgstr "作業を続けてもよろしいですか？"
 
 #: ../DiskManager/Utility.py:45
 msgid "KB"
-msgstr ""
+msgstr "KB"
 
 #: ../DiskManager/Utility.py:45
 msgid "MB"
@@ -301,150 +310,150 @@ msgstr "GB"
 
 #: ../DiskManager/Utility.py:45
 msgid "TB"
-msgstr ""
+msgstr "TB"
 
 #: ../DiskManager/Fstab/FstabHandler.py:435
 msgid "Unmounting disabled devices?"
-msgstr ""
+msgstr "無効なデバイスをアンマウントしますか？"
 
 #: ../DiskManager/Fstab/FstabHandler.py:436
 msgid "You disabled the following devices:"
-msgstr ""
+msgstr "次のデバイスが無効になりました。"
 
 #: ../DiskManager/Fstab/FstabHandler.py:436
 msgid "Do you want to unmount them?"
-msgstr ""
+msgstr "アンマウントしますか？"
 
 #: ../DiskManager/Fstab/FstabHandler.py:438
 msgid "Unmount selected"
-msgstr ""
+msgstr "選択した項目をアンマウント"
 
 #: ../DiskManager/Fstab/FstabHandler.py:447
 msgid "Reboot required"
-msgstr ""
+msgstr "再起動が必要です"
 
 #: ../DiskManager/Fstab/FstabHandler.py:448
 msgid ""
 "In order to apply all your changes,\n"
 "you'll need to reboot your computer."
-msgstr ""
+msgstr "すべての変更を適用するにはコンピュータを再起動する必要があります。"
 
 #: ../DiskManager/Fstab/Mounter.py:56
 msgid "Mounting partition"
-msgstr ""
+msgstr "パーティションのマウント中です"
 
 #: ../DiskManager/Fstab/Mounter.py:58
 msgid "Unmounting partition"
-msgstr ""
+msgstr "パーティションをアンマウントしています"
 
 #: ../DiskManager/Fstab/Mounter.py:60
 msgid "Applying changes"
-msgstr ""
+msgstr "変更を適用中です"
 
 #: ../DiskManager/Fstab/Mounter.py:66
 #, python-format
 msgid "Unmounting %s"
-msgstr ""
+msgstr "%s をアンマウントしています"
 
 #: ../DiskManager/Fstab/Mounter.py:80
 #, python-format
 msgid "Mounting %s"
-msgstr ""
+msgstr "%s をマウントしています"
 
 #: ../DiskManager/Fstab/Mounter.py:115
 msgid "Unmounting failed"
-msgstr ""
+msgstr "アンマウントに失敗しました"
 
 #: ../DiskManager/Fstab/Mounter.py:116
 #, python-format
 msgid "Unmounting <i>%s</i> failed because of the following error:"
-msgstr ""
+msgstr "次のエラーのため、<i>%s</i>のアンマウントに失敗しました:"
 
 #. TRANSLATORS:
 #. Keep the English term 'lazy' for the 'lazy' unmount option
 #: ../DiskManager/Fstab/Mounter.py:122
 msgid "You can also use the 'lazy' options to detach the filesystem now."
-msgstr ""
+msgstr "'lazy' オプションを使うと、ファイルシステムを切り離すことも可能です。"
 
 #: ../DiskManager/Fstab/Mounter.py:127
 #, python-format
 msgid ""
 "Unmounting <i>%s</i> failed, because\n"
 "it is currently used by the following applications:"
-msgstr ""
+msgstr "<i>%s</i>のアンマウントに失敗しました。なぜなら現在、次のアプリケーションで使用されているからです。"
 
 #: ../DiskManager/Fstab/Mounter.py:129
 msgid "Close all applications that use it and retry to unmount."
-msgstr ""
+msgstr "それを使用するすべてのアプリケーションを終了して、再度アンマウントを試行します。"
 
 #: ../DiskManager/Fstab/Mounter.py:132
 msgid "The filesystem might be temporarily busy. Wait few seconds and retry."
-msgstr ""
+msgstr "ファイルシステムが一時的に切迫状態になっている可能性があります。数秒待ってから再試行してください。"
 
 #. TRANSLATORS:
 #. Keep the English term 'lazy' for the 'lazy' unmount option
 #: ../DiskManager/Fstab/Mounter.py:137
 msgid "Unmount with the 'lazy' option"
-msgstr ""
+msgstr "'lazy' オプションでアンマウントします"
 
 #: ../DiskManager/Fstab/Mounter.py:138
 msgid "Retry unmount"
-msgstr ""
+msgstr "アンマウントの再実行"
 
 #. TRANSLATORS:
 #. Keep the English term 'lazy' for the 'lazy' unmount option
 #: ../DiskManager/Fstab/Mounter.py:143
 msgid "Even with the lazy option, unmounting failed."
-msgstr ""
+msgstr "lazy オプションを使用しても、アンマウントは失敗しました。"
 
 #: ../DiskManager/Fstab/Mounter.py:155
 msgid "Mounting failed"
-msgstr ""
+msgstr "マウントに失敗しました"
 
 #: ../DiskManager/Fstab/Mounter.py:156
 #, python-format
 msgid "Mounting <i>%s</i> failed because of the following error:"
-msgstr ""
+msgstr "以下の理由によって <i>%s</i> のマウントは失敗しました。"
 
 #: ../DiskManager/Fstab/Mounter.py:159
 msgid "Retry mount"
-msgstr ""
+msgstr "マウントの再実行"
 
 #: ../DiskManager/Fstab/Mounter.py:190
 msgid "You can try one of the following actions:"
-msgstr ""
+msgstr "次のいずれかの操作を実行できます。"
 
 #: ../DiskManager/Fstab/Mounter.py:193
 #, python-format
 msgid "It seems that option '%s' is not allowed."
-msgstr ""
+msgstr "'%s' オプションは許可されていないようです。"
 
 #: ../DiskManager/Fstab/Mounter.py:195
 msgid "Return options to defaults"
-msgstr ""
+msgstr "オプションを既定へ戻します"
 
 #: ../DiskManager/Fstab/Mounter.py:197
 #, python-format
 msgid "Don't use the '%s' option"
-msgstr ""
+msgstr "'%s' オプションは使用しません"
 
 #: ../DiskManager/Fstab/Mounter.py:199
 #, python-format
 msgid "It seems that fs type '%s' is not valid."
-msgstr ""
+msgstr "fs タイプ '%s' は無効になっているようです。"
 
 #: ../DiskManager/Fstab/Mounter.py:203
 #, python-format
 msgid "Using driver '%s' (%s)"
-msgstr ""
+msgstr "'%s' (%s) ドライバを使用します"
 
 #. TRANSLATORS:
 #. Keep the English term 'force' for the 'force' unmount option
 #: ../DiskManager/Fstab/Mounter.py:211
 msgid ""
 "You can try to use the 'force' option. Be aware that this could be risky."
-msgstr ""
+msgstr "'force' オプションの使用が可能です。ただしこれは危険であることに注意してください。"
 
 #: ../DiskManager/Fstab/Mounter.py:212
 msgid "Use the 'force' option"
-msgstr ""
+msgstr "'force' オプションを使用します"

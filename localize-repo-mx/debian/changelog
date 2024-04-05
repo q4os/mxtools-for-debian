@@ -1,3 +1,9 @@
+localize-repo-mx (24.03.01) mx; urgency=medium
+
+  * update default mirrors
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 23 Mar 2024 23:03:10 -0400
+
 localize-repo-mx (23.11.01) mx; urgency=medium
 
   * update default mirrors

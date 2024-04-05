@@ -134,18 +134,20 @@ void TCommandEdit::setExecuteList(const QString &time)
     QDateTime dt = cur;
     QString str;
     for (int i = 0; i < 7; ++i) {
-        if (!str.isEmpty())
+        if (!str.isEmpty()) {
             str += '\n';
+        }
         dt = cronTime.getNextTime(dt);
         qint64 sec = cur.secsTo(dt);
         str += QStringLiteral("%1 - %2:%3 later")
                    .arg(dt.toString(QStringLiteral("yyyy-MM-dd(ddd) hh:mm")))
                    .arg(sec / (60 * 60))
                    .arg((sec / 60) % 60, 2, 10, QChar('0'));
-        if (dt.date() == today)
+        if (dt.date() == today) {
             str += " - " + tr("Today");
-        else if (dt.date() == tommorow)
+        } else if (dt.date() == tommorow) {
             str += " - " + tr("Tomorrow");
+        }
     }
     exeLabel->setText(str);
 }
@@ -180,8 +182,9 @@ void TCommandEdit::userChanged(int index)
 
 void TCommandEdit::resetExeTime()
 {
-    if (timeEdit->text().isEmpty())
+    if (timeEdit->text().isEmpty()) {
         return;
+    }
     setExecuteList(timeEdit->text());
 }
 

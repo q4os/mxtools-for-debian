@@ -7,8 +7,7 @@
    as published by the Free Software Foundation; either version 2
    of the License, or (at your option) any later version.
 */
-#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
+#pragma once
 
 #include <QMainWindow>
 #include <QSettings>
@@ -27,7 +26,7 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    MainWindow();
+    MainWindow(QWidget *parent = nullptr);
 
 private slots:
     void changeUser();
@@ -50,7 +49,7 @@ private:
     void readSettings();
     void writeSettings();
 
-    void closeEvent(QCloseEvent *event);
+    void closeEvent(QCloseEvent *event) override;
 
     QAction *aboutAction {};
     QAction *aboutQtAction {};
@@ -78,5 +77,3 @@ private:
 
     QList<Crontab *> crontabs;
 };
-
-#endif

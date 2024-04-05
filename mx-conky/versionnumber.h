@@ -18,9 +18,7 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-
-#ifndef VERSIONNUMBER_H
-#define VERSIONNUMBER_H
+#pragma once
 
 #include <QMetaType>
 #include <QStringList>
@@ -83,28 +81,27 @@ public:
     VersionNumber &operator=(const VersionNumber &value) = default;
     VersionNumber &operator=(const QString &value);
 
-    bool operator<(const VersionNumber &value) const;
-    bool operator<=(const VersionNumber &value) const;
-    bool operator>(const VersionNumber &value) const;
-    bool operator>=(const VersionNumber &value) const;
-    bool operator==(const VersionNumber &value) const;
-    bool operator!=(const VersionNumber &value) const;
+    [[nodiscard]] bool operator<(const VersionNumber &value) const;
+    [[nodiscard]] bool operator<=(const VersionNumber &value) const;
+    [[nodiscard]] bool operator>(const VersionNumber &value) const;
+    [[nodiscard]] bool operator>=(const VersionNumber &value) const;
+    [[nodiscard]] bool operator==(const VersionNumber &value) const;
+    [[nodiscard]] bool operator!=(const VersionNumber &value) const;
 
 private:
-    QString str; // full version string
+    QString str; // Full version string
     int epoch {};
-    QStringList upstream_version; // a string list of characters, numbers are grouped together
+    QStringList upstream_version; // A string list of characters, numbers are grouped together
     QStringList debian_revision;
 
-    static QStringList groupDigits(const QString &value); // add characters to separate elements, groups digits together
+    // Add characters to separate elements, groups digits together
+    [[nodiscard]] static QStringList groupDigits(const QString &value);
     void setStrings(const QString &value);
 
-    [[nodiscard]] int compare(const VersionNumber &first,
-                              const VersionNumber &second) const; // 1 for >second, -1 for <second, 0 for equal
-    static int compare(const QStringList &first, const QStringList &second);
-    static int compare(QChar first, QChar second);
+    // 1 for > second, -1 for < second, 0 for equal
+    [[nodiscard]] int compare(const VersionNumber &first, const VersionNumber &second) const;
+    [[nodiscard]] static int compare(const QStringList &first, const QStringList &second);
+    [[nodiscard]] static int compare(QChar first, QChar second);
 };
 
 Q_DECLARE_METATYPE(VersionNumber)
-
-#endif

@@ -25,7 +25,7 @@ msgstr ""
 #. The desktop entry name will be displayed within the menu.
 #: desktop-in/mx-remastercc.desktop.in:5
 msgid "MX RemasterCC"
-msgstr "MX NCpredelav"
+msgstr "MX središče za remasterizacijo"
 
 #. # The desktop entry comment will be shown within the menu.
 #: desktop-in/mx-remastercc.desktop.in:7

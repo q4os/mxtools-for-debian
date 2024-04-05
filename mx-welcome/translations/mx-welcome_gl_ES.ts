@@ -5,8 +5,8 @@
     <name>MainWindow</name>
     <message>
         <location filename="../mainwindow.ui" line="14"/>
-        <location filename="../mainwindow.cpp" line="64"/>
-        <location filename="../mainwindow.cpp" line="434"/>
+        <location filename="../mainwindow.cpp" line="68"/>
+        <location filename="../mainwindow.cpp" line="289"/>
         <source>MX Welcome</source>
         <translation>MX Dámosche a benvida</translation>
     </message>
@@ -43,12 +43,12 @@
     <message>
         <location filename="../mainwindow.ui" line="203"/>
         <source>Welcome</source>
-        <translation type="unfinished"></translation>
+        <translation>Benvido</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="484"/>
         <source>Install MX Linux</source>
-        <translation type="unfinished"></translation>
+        <translation>Instalar MX Linux</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="510"/>
@@ -78,7 +78,7 @@
     <message>
         <location filename="../mainwindow.ui" line="652"/>
         <source>Tour</source>
-        <translation type="unfinished"></translation>
+        <translation>Visita</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="674"/>
@@ -120,17 +120,17 @@ li.checked::marker { content: &quot;\2612&quot;; }
     <message>
         <location filename="../mainwindow.ui" line="923"/>
         <source>SHORT SYSTEM REPORT:</source>
-        <translation type="unfinished"></translation>
+        <translation>INFORME CURTO DO SISTEMA:</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="798"/>
         <source>DESKTOP</source>
-        <translation type="unfinished"></translation>
+        <translation>ESCRITORIO</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="815"/>
         <source>Quick-System-Info Full Report</source>
-        <translation type="unfinished"></translation>
+        <translation>Informe completo de Quick-System-Info</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="825"/>
@@ -140,22 +140,22 @@ li.checked::marker { content: &quot;\2612&quot;; }
     <message>
         <location filename="../mainwindow.ui" line="845"/>
         <source>The name “MX Linux” is covered by Linux Foundation Sublicense No. 20140605-0483. We develop software that is covered by a free license that can be examined in the Wiki list. We also include software developed by others that is under a free license.</source>
-        <translation type="unfinished"></translation>
+        <translation>O nome &quot;MX Linux&quot; está cuberto pola sublicenza da Linux Foundation No. 20140605-0483. Desenvolvemos software que está cuberto por unha licenza libre que pode ser examinada na lista da Wiki. Tamén incluímos software desenvolvido por outros que está baixo unha licenza libre.</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="855"/>
         <source>MX VERSION</source>
-        <translation type="unfinished"></translation>
+        <translation>Versión MX</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="862"/>
         <source>DEBIAN VERSION:</source>
-        <translation type="unfinished"></translation>
+        <translation>DEBIAN VERSIÓN:</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="869"/>
         <source>SUPPORTED UNTIL:</source>
-        <translation type="unfinished"></translation>
+        <translation>SOPORTADO ATÉ:</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="939"/>
@@ -163,48 +163,48 @@ li.checked::marker { content: &quot;\2612&quot;; }
         <translation>Amosar esta lapela ao iniciar</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="317"/>
+        <location filename="../mainwindow.cpp" line="176"/>
         <source>User demo, password:</source>
         <translation>Usuario demo, contrasinal:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="318"/>
+        <location filename="../mainwindow.cpp" line="177"/>
         <source>Superuser root, password:</source>
         <translation>Superusuario, contrasinal:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="355"/>
-        <location filename="../mainwindow.cpp" line="373"/>
+        <location filename="../mainwindow.cpp" line="205"/>
+        <location filename="../mainwindow.cpp" line="223"/>
         <source>Error</source>
         <translation>Erro</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="386"/>
+        <location filename="../mainwindow.cpp" line="238"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:14pt; font-weight:600;&quot;&gt;%1 &amp;quot;%2&amp;quot;&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="433"/>
+        <location filename="../mainwindow.cpp" line="288"/>
         <source>About MX Welcome</source>
         <translation>Sobre MX Dámosche a benvida</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="434"/>
+        <location filename="../mainwindow.cpp" line="289"/>
         <source>Version: </source>
         <translation>Versión</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="435"/>
+        <location filename="../mainwindow.cpp" line="290"/>
         <source>Program for displaying a welcome screen in MX Linux</source>
         <translation>Programa para amosar unha pantalla de benvida no MX Linux</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="438"/>
+        <location filename="../mainwindow.cpp" line="293"/>
         <source>Copyright (c) MX Linux</source>
         <translation>Copyright (c) MX Linux</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="439"/>
+        <location filename="../mainwindow.cpp" line="294"/>
         <source>%1 License</source>
         <translation type="unfinished"></translation>
     </message>
@@ -237,46 +237,46 @@ li.checked::marker { content: &quot;\2612&quot;; }
     <message>
         <location filename="../main.cpp" line="44"/>
         <source>This tool displays a welcome screen with two tabs.</source>
-        <translation type="unfinished"></translation>
+        <translation>Esta ferramenta mostra unha pantalla de benvida con dúas lapelas.</translation>
     </message>
     <message>
         <location filename="../main.cpp" line="48"/>
         <source>Start with About tab selected. The About tab provides basic information about the current MX Linux version, the user&apos;s hardware, and access to a full system report.</source>
-        <translation type="unfinished"></translation>
+        <translation>Comeza coa lapela &quot;Sobre&quot; seleccionada. A lapela &quot;Sobre&quot; proporciona información básica sobre a versión actual de MX Linux, o hardware do usuario e acceso a un informe completo do sistema.</translation>
     </message>
     <message>
         <location filename="../main.cpp" line="51"/>
         <source>Run a test mode.</source>
-        <translation type="unfinished"></translation>
+        <translation>Executar un modo de proba.</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="73"/>
+        <location filename="../main.cpp" line="76"/>
         <source>Error</source>
         <translation>Erro</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="73"/>
+        <location filename="../main.cpp" line="76"/>
         <source>You must run this program as normal user.</source>
         <translation type="unfinished">Dbeeb executar este programa como usuario normal.</translation>
     </message>
     <message>
-        <location filename="../about.cpp" line="39"/>
+        <location filename="../about.cpp" line="61"/>
         <source>License</source>
         <translation type="unfinished">Licenza</translation>
     </message>
     <message>
-        <location filename="../about.cpp" line="40"/>
-        <location filename="../about.cpp" line="50"/>
+        <location filename="../about.cpp" line="62"/>
+        <location filename="../about.cpp" line="72"/>
         <source>Changelog</source>
         <translation type="unfinished">Rexistro dos cambios</translation>
     </message>
     <message>
-        <location filename="../about.cpp" line="41"/>
+        <location filename="../about.cpp" line="63"/>
         <source>Cancel</source>
         <translation type="unfinished">Cancelar</translation>
     </message>
     <message>
-        <location filename="../about.cpp" line="63"/>
+        <location filename="../about.cpp" line="85"/>
         <source>&amp;Close</source>
         <translation type="unfinished">&amp;Cerrar</translation>
     </message>

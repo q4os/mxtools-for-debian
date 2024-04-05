@@ -4,10 +4,10 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Csokán András, 2022
-# Kisbenedek Márton <kmarton815@gmail.com>, 2022
 # anticapitalista <anticapitalista@riseup.net>, 2022
 # Tamás Szekeres <szekeres.tamas@icloud.com>, 2022
+# Pál András Ciocan (Andris) <csokan.andras87@protonmail.ch>, 2022
+# Kempelen <antixhu@netengine.hu>, 2022
 # 
 #, fuzzy
 msgid ""
@@ -16,8 +16,8 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-01-16 00:46+0100\n"
 "PO-Revision-Date: 2022-01-21 17:21+0000\n"
-"Last-Translator: Tamás Szekeres <szekeres.tamas@icloud.com>, 2022\n"
-"Language-Team: Hungarian (https://www.transifex.com/anticapitalista/teams/10162/hu/)\n"
+"Last-Translator: Kempelen <antixhu@netengine.hu>, 2022\n"
+"Language-Team: Hungarian (https://app.transifex.com/anticapitalista/teams/10162/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -26,100 +26,100 @@ msgstr ""
 
 #: ../disk-manager.in:66
 msgid "Insufficient rights"
-msgstr ""
+msgstr "Elégtelen jogosultság"
 
 #: ../disk-manager.in:67
 msgid "You need administrative rights to start this application."
-msgstr ""
+msgstr "Adminisztratív jogosultságra van szükség az alkalmazás elindításához."
 
 #: ../data/disk-manager.glade.h:1
 msgid "<b>Driver</b>"
-msgstr ""
+msgstr "<b>Meghajtó</b>"
 
 #: ../data/disk-manager.glade.h:2
 msgid "This driver seems to not be available for this type."
-msgstr ""
+msgstr "Úgy tűnik, ez az illesztőprogram nem érhető el ehhez a típushoz."
 
 #: ../data/disk-manager.glade.h:3
 msgid "<b>Mount point</b>"
-msgstr ""
+msgstr "<b>Csatolási pont</b>"
 
 #: ../data/disk-manager.glade.h:4
 msgid "<b>Options</b>"
-msgstr ""
+msgstr "<b>Opciók</b>"
 
 #: ../data/disk-manager.glade.h:5
 msgid "Check device every 30 boots"
-msgstr ""
+msgstr "Eszköz ellenőrzése minden 30 rendszerindítás után"
 
 #: ../data/disk-manager.glade.h:6
 msgid "<big><b>Configuration file:</b></big>"
-msgstr ""
+msgstr "<big><b>Beállítás fájl:</b></big>"
 
 #: ../data/disk-manager.glade.h:7
 msgid "<b>Vendor:</b>"
-msgstr ""
+msgstr "<b>Gyártó:</b>"
 
 #: ../data/disk-manager.glade.h:8
 msgid "<b>Model:</b>"
-msgstr ""
+msgstr "<b>Modell:</b>"
 
 #: ../data/disk-manager.glade.h:9
 msgid "<b>Serial:</b>"
-msgstr ""
+msgstr "<b>Sorozatszám:</b>"
 
 #: ../data/disk-manager.glade.h:10
 msgid "<b>bus:</b>"
-msgstr ""
+msgstr "<b>busz:</b>"
 
 #: ../data/disk-manager.glade.h:11 ../DiskManager/Dialogs.py:372
 #: ../DiskManager/Dialogs.py:373 ../DiskManager/Dialogs.py:374
 msgid "Not available"
-msgstr ""
+msgstr "Nem elérhető"
 
 #: ../data/disk-manager.glade.h:12
 msgid "Drive"
-msgstr ""
+msgstr "Meghajtó"
 
 #: ../data/disk-manager.glade.h:13
 msgid "<b>Device:</b>"
-msgstr ""
+msgstr "<b>Eszköz:</b>"
 
 #: ../data/disk-manager.glade.h:14
 msgid "<b>Type:</b>"
-msgstr ""
+msgstr "<b>Típus:</b>"
 
 #: ../data/disk-manager.glade.h:15
 msgid "<b>Label:</b>"
-msgstr ""
+msgstr "<b>Címke:</b>"
 
 #: ../data/disk-manager.glade.h:16
 msgid "<b>Mount point:</b>"
-msgstr ""
+msgstr "<b>Csatolási pont:</b>"
 
 #: ../data/disk-manager.glade.h:17
 msgid "<b>Options:</b>"
-msgstr ""
+msgstr "<b>Opciók:</b>"
 
 #: ../data/disk-manager.glade.h:18
 msgid "Volume"
-msgstr ""
+msgstr "Kötet"
 
 #: ../data/disk-manager.glade.h:19
 msgid "<b>Total size:</b>"
-msgstr ""
+msgstr "<b>Teljes méret:</b>"
 
 #: ../data/disk-manager.glade.h:20
 msgid "<b>Free space:</b>"
-msgstr ""
+msgstr "<b>Szabad tárhely:</b>"
 
 #: ../data/disk-manager.glade.h:21
 msgid "<b>Available space:</b>"
-msgstr ""
+msgstr "<b>Elérhető tárhely:</b>"
 
 #: ../data/disk-manager.glade.h:22
 msgid "<b>Used space:</b>"
-msgstr ""
+msgstr "<b>Felhasznált tárhely:</b>"
 
 #: ../data/disk-manager.glade.h:23
 msgid "Size"
@@ -130,28 +130,30 @@ msgid ""
 "Applying changes.\n"
 "Please wait until the process finishes."
 msgstr ""
+"Változások alkalmazása.\n"
+"Várja meg a folyamat befejezését."
 
 #: ../data/disk-manager.desktop.in.in.h:1 ../DiskManager/Dialogs.py:489
 #: ../DiskManager/DiskManager.py:78
 msgid "Disk Manager"
-msgstr ""
+msgstr "Lemezkezelő"
 
 #: ../data/disk-manager.desktop.in.in.h:2
 msgid "Manage filesystem configuration"
-msgstr ""
+msgstr "Fájlrendszer beállítások kezelése"
 
 #: ../DiskManager/Dialogs.py:127 ../DiskManager/Fstab/Mounter.py:206
 #, python-format
 msgid "No driver is available for this type of filesystem : '%s'"
-msgstr ""
+msgstr "Nincs illesztőprogram ehhez a fájlrendszer típushoz : '%s'"
 
 #: ../DiskManager/Dialogs.py:162
 msgid "Select a directory"
-msgstr ""
+msgstr "Mappa kiválasztása"
 
 #: ../DiskManager/Dialogs.py:231
 msgid "Wrong mount point"
-msgstr ""
+msgstr "Hibás csatolási pont"
 
 #: ../DiskManager/Dialogs.py:232
 #, python-format
@@ -159,10 +161,12 @@ msgid ""
 "<i>%s</i> is currently in use.\n"
 "You should try another one."
 msgstr ""
+"<i>%s</i> jelenleg használatban van.\n"
+"Próbálkozzon egy másikkal."
 
 #: ../DiskManager/Dialogs.py:243
 msgid "Options formatting error"
-msgstr ""
+msgstr "Az opciók formátuma hibás"
 
 #: ../DiskManager/Dialogs.py:244
 #, python-format
@@ -170,41 +174,51 @@ msgid ""
 "<i>%s</i> is not formatted correctly.\n"
 "Options should be separated by comma (,)"
 msgstr ""
+"<i>%s</i> hibásan formátumú.\n"
+"Az opciókat vesszővel (,) kell elválasztani"
 
 #: ../DiskManager/Dialogs.py:427
 msgid ""
 "Removing unknown devices from\n"
 "the configuration file?"
 msgstr ""
+"Ismeretlen eszközök eltávolítása\n"
+"a beállítás fájlból?"
 
 #: ../DiskManager/Dialogs.py:428
 msgid ""
 "I can not find any existing block devices\n"
 "corresponding to the following devices:"
 msgstr ""
+"Nem találok egyetlen blokk eszközt sem\n"
+"amely a következő eszközökhöz tartozik:"
 
 #: ../DiskManager/Dialogs.py:430
 msgid ""
 "It is advisable to remove them in order to avoid failed mount\n"
 "at start-up. Select the ones you want to remove."
 msgstr ""
+"Ajánlatos eltávolítani ezeket az indításnál hibás csatolások elkerülése "
+"végett. Válassza ki azokat, amelyeket eltávolítja."
 
 #: ../DiskManager/Dialogs.py:433
 msgid "Remove selected"
-msgstr ""
+msgstr "Kijelölt eltávolítása"
 
 #: ../DiskManager/Dialogs.py:433
 msgid "Don't show me this warning in the future."
-msgstr ""
+msgstr "A jövőben ne mutassa ezt a figyelmeztetést."
 
 #: ../DiskManager/Dialogs.py:468
 msgid "Duplicate entry detected"
-msgstr ""
+msgstr "Duplikált elem található"
 
 #: ../DiskManager/Dialogs.py:469
 msgid ""
 "The following entries of your configuration file use the same mount point:"
 msgstr ""
+"A következő bejegyzések a beállítás fájlban ugyanazt a csatolási pontot "
+"használják:"
 
 #: ../DiskManager/Dialogs.py:470
 msgid ""
@@ -212,22 +226,25 @@ msgid ""
 "You should select the one you want, and the others will be commented.\n"
 "They will be kept in the configuration file, but will be disabled."
 msgstr ""
+"Két különböző eszköz nem használhatja ugyanazt a csatolási pontot.\n"
+"Válassza az amelyiket szeretné és a többi ki lesz kommentelve.\n"
+"Továbbra is a beállítás fájlban lesznek, de kikapcsolva."
 
 #: ../DiskManager/Dialogs.py:473
 msgid "Keep selected"
-msgstr ""
+msgstr "Kijelölt megtartása"
 
 #: ../DiskManager/Dialogs.py:506
 msgid "Easily manage your filesystem configuration"
-msgstr ""
+msgstr "Kezelje könnyen a fájlrendszer beállításait"
 
 #: ../DiskManager/Dialogs.py:510
 msgid "translator-credits"
-msgstr ""
+msgstr "fordítók"
 
 #: ../DiskManager/DiskManager.py:132
 msgid "Enable"
-msgstr ""
+msgstr "Engedélyezés"
 
 #: ../DiskManager/DiskManager.py:138
 msgid "Device"
@@ -235,15 +252,15 @@ msgstr "Eszköz"
 
 #: ../DiskManager/DiskManager.py:151
 msgid "Mount point"
-msgstr ""
+msgstr "Csatolási pont"
 
 #: ../DiskManager/DiskManager.py:158
 msgid "Type"
-msgstr "típus"
+msgstr "Típus"
 
 #: ../DiskManager/DiskManager.py:165
 msgid "Total"
-msgstr ""
+msgstr "Teljes"
 
 #: ../DiskManager/DiskManager.py:172
 msgid "Free"
@@ -251,11 +268,11 @@ msgstr "Szabad"
 
 #: ../DiskManager/DiskManager.py:179
 msgid "Used"
-msgstr ""
+msgstr "Felhasznált"
 
 #: ../DiskManager/DiskManager.py:292
 msgid "Editing system partition?"
-msgstr ""
+msgstr "Rendszer partíció módosítása?"
 
 #: ../DiskManager/DiskManager.py:294
 #, python-format
@@ -264,10 +281,13 @@ msgid ""
 "Be really careful when editing it, or you may have\n"
 "serious problems. Do you want to continue?"
 msgstr ""
+"%s fontos rendszer partíció.\n"
+"Legyen nagyon óvatos a módosítással, mert\n"
+"komoly problémákba ütközhet. Kívánja folytatni?"
 
 #: ../DiskManager/DiskManager.py:399
 msgid "Unmount"
-msgstr "Lecsatlakoztatás"
+msgstr "Leválasztás"
 
 #: ../DiskManager/DiskManager.py:402
 msgid "Mount"
@@ -275,19 +295,19 @@ msgstr "Csatolás"
 
 #: ../DiskManager/DiskManager.py:407
 msgid "Reverting to an older version?"
-msgstr ""
+msgstr "Visszatér egy korábbi változathoz?"
 
 #: ../DiskManager/DiskManager.py:408
 msgid "This will apply the following changes:"
-msgstr ""
+msgstr "A következő változásokat fogja alkalmazni:"
 
 #: ../DiskManager/DiskManager.py:408
 msgid "Do you want to continue?"
-msgstr "Szeretnéd folytatni? "
+msgstr "Szeretné folytatni? "
 
 #: ../DiskManager/Utility.py:45
 msgid "KB"
-msgstr ""
+msgstr "KB"
 
 #: ../DiskManager/Utility.py:45
 msgid "MB"
@@ -299,70 +319,72 @@ msgstr "GB"
 
 #: ../DiskManager/Utility.py:45
 msgid "TB"
-msgstr ""
+msgstr "TB"
 
 #: ../DiskManager/Fstab/FstabHandler.py:435
 msgid "Unmounting disabled devices?"
-msgstr ""
+msgstr "A kikapcsolt eszközök leválasztása?"
 
 #: ../DiskManager/Fstab/FstabHandler.py:436
 msgid "You disabled the following devices:"
-msgstr ""
+msgstr "A következő eszközöket kapcsolta ki:"
 
 #: ../DiskManager/Fstab/FstabHandler.py:436
 msgid "Do you want to unmount them?"
-msgstr ""
+msgstr "Szeretné leválasztani őket?"
 
 #: ../DiskManager/Fstab/FstabHandler.py:438
 msgid "Unmount selected"
-msgstr ""
+msgstr "Kijelöltek leválasztása"
 
 #: ../DiskManager/Fstab/FstabHandler.py:447
 msgid "Reboot required"
-msgstr ""
+msgstr "Újraindítás szükséges"
 
 #: ../DiskManager/Fstab/FstabHandler.py:448
 msgid ""
 "In order to apply all your changes,\n"
 "you'll need to reboot your computer."
 msgstr ""
+"A változások alkalmazásához,\n"
+"újra kell indítania számítógépét."
 
 #: ../DiskManager/Fstab/Mounter.py:56
 msgid "Mounting partition"
-msgstr ""
+msgstr "Partíció csatolása"
 
 #: ../DiskManager/Fstab/Mounter.py:58
 msgid "Unmounting partition"
-msgstr ""
+msgstr "Partíció leválasztása"
 
 #: ../DiskManager/Fstab/Mounter.py:60
 msgid "Applying changes"
-msgstr ""
+msgstr "Változások alkalmazása"
 
 #: ../DiskManager/Fstab/Mounter.py:66
 #, python-format
 msgid "Unmounting %s"
-msgstr ""
+msgstr "%s leválasztása"
 
 #: ../DiskManager/Fstab/Mounter.py:80
 #, python-format
 msgid "Mounting %s"
-msgstr ""
+msgstr "%s csatolása"
 
 #: ../DiskManager/Fstab/Mounter.py:115
 msgid "Unmounting failed"
-msgstr ""
+msgstr "Leválasztás sikertelen"
 
 #: ../DiskManager/Fstab/Mounter.py:116
 #, python-format
 msgid "Unmounting <i>%s</i> failed because of the following error:"
-msgstr ""
+msgstr "<i>%s</i> leválasztása sikertelen a következő hibából kifolyólag:"
 
 #. TRANSLATORS:
 #. Keep the English term 'lazy' for the 'lazy' unmount option
 #: ../DiskManager/Fstab/Mounter.py:122
 msgid "You can also use the 'lazy' options to detach the filesystem now."
-msgstr ""
+msgstr "Használhat 'lazy' opciókat, hogy most leválassza a fájlrendszert."
 
 #: ../DiskManager/Fstab/Mounter.py:127
 #, python-format
@@ -370,71 +392,77 @@ msgid ""
 "Unmounting <i>%s</i> failed, because\n"
 "it is currently used by the following applications:"
 msgstr ""
+"<i>%s</i> leválasztása sikertelen, mert\n"
+"a következő alkalmazások használják:"
 
 #: ../DiskManager/Fstab/Mounter.py:129
 msgid "Close all applications that use it and retry to unmount."
 msgstr ""
+"Zárjon be minden alkalmazást amely használja és próbálja újra a "
+"leválasztást."
 
 #: ../DiskManager/Fstab/Mounter.py:132
 msgid "The filesystem might be temporarily busy. Wait few seconds and retry."
 msgstr ""
+"A fájlrendszer ideiglenesen elfoglalt lehet. Várjon néhány másodpercet és "
+"próbálja újra."
 
 #. TRANSLATORS:
 #. Keep the English term 'lazy' for the 'lazy' unmount option
 #: ../DiskManager/Fstab/Mounter.py:137
 msgid "Unmount with the 'lazy' option"
-msgstr ""
+msgstr "Leválasztás 'lazy' opcióval"
 
 #: ../DiskManager/Fstab/Mounter.py:138
 msgid "Retry unmount"
-msgstr ""
+msgstr "Leválasztás újra"
 
 #. TRANSLATORS:
 #. Keep the English term 'lazy' for the 'lazy' unmount option
 #: ../DiskManager/Fstab/Mounter.py:143
 msgid "Even with the lazy option, unmounting failed."
-msgstr ""
+msgstr "Még 'lazy' opcióval sem sikerült a leválasztás."
 
 #: ../DiskManager/Fstab/Mounter.py:155
 msgid "Mounting failed"
-msgstr ""
+msgstr "Csatolás sikertelen"
 
 #: ../DiskManager/Fstab/Mounter.py:156
 #, python-format
 msgid "Mounting <i>%s</i> failed because of the following error:"
-msgstr ""
+msgstr "<i>%s</i> csatolása sikertelen, a következő hibából kifolyólag:"
 
 #: ../DiskManager/Fstab/Mounter.py:159
 msgid "Retry mount"
-msgstr ""
+msgstr "Csatolás újra"
 
 #: ../DiskManager/Fstab/Mounter.py:190
 msgid "You can try one of the following actions:"
-msgstr ""
+msgstr "Kipróbálhatja a következő műveleteket:"
 
 #: ../DiskManager/Fstab/Mounter.py:193
 #, python-format
 msgid "It seems that option '%s' is not allowed."
-msgstr ""
+msgstr "Úgy tűnik a(z) '%s' opció nem engedélyezett."
 
 #: ../DiskManager/Fstab/Mounter.py:195
 msgid "Return options to defaults"
-msgstr ""
+msgstr "Állítsa vissza az opciókat alapértékre"
 
 #: ../DiskManager/Fstab/Mounter.py:197
 #, python-format
 msgid "Don't use the '%s' option"
-msgstr ""
+msgstr "Ne használja a(z) '%s' opciót"
 
 #: ../DiskManager/Fstab/Mounter.py:199
 #, python-format
 msgid "It seems that fs type '%s' is not valid."
-msgstr ""
+msgstr "Úgy tűnik a(z) '%s' fájlrendszer típus érvénytelen."
 
 #: ../DiskManager/Fstab/Mounter.py:203
 #, python-format
 msgid "Using driver '%s' (%s)"
-msgstr ""
+msgstr "'%s' (%s) illesztőprogram használata"
 
 #. TRANSLATORS:
 #. Keep the English term 'force' for the 'force' unmount option
@@ -442,7 +470,8 @@ msgstr ""
 msgid ""
 "You can try to use the 'force' option. Be aware that this could be risky."
 msgstr ""
+"Próbálkozhat a 'force' opcióval. Vegye figyelembe, hogy ez kockázatos lehet."
 
 #: ../DiskManager/Fstab/Mounter.py:212
 msgid "Use the 'force' option"
-msgstr ""
+msgstr "A 'force' opció használata"

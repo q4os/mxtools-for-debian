@@ -27,12 +27,12 @@ class ClockFace : public QWidget
 {
     Q_OBJECT
 public:
-    ClockFace(QWidget *parent = nullptr);
+    explicit ClockFace(QWidget *parent = nullptr);
     void setTime(QTime newtime);
 
 private:
     QTime time;
-    void paintEvent(QPaintEvent *event);
+    void paintEvent(QPaintEvent *event) override;
 };
 
 #endif // CLOCKFACE_H

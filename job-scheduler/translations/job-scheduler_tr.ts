@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="tr">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="tr">
 <context>
     <name>CronModel</name>
     <message>
@@ -264,7 +262,7 @@ Are you OK to exit?</source>
     <message>
         <location filename="../MainWindow.cpp" line="352"/>
         <source>%1 License</source>
-        <translation>%1 Ruhsat</translation>
+        <translation>%1 Lisans</translation>
     </message>
 </context>
 <context>
@@ -272,7 +270,7 @@ Are you OK to exit?</source>
     <message>
         <location filename="../about.cpp" line="52"/>
         <source>License</source>
-        <translation>Ruhsat</translation>
+        <translation>Lisans</translation>
     </message>
     <message>
         <location filename="../about.cpp" line="53"/>

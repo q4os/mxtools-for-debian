@@ -10,34 +10,34 @@
     <message>
         <location filename="../mainwindow.ui" line="74"/>
         <source>&amp;Copy for forum</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Copia para o foro</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="43"/>
         <source>Save the displayed system information to a text file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Garde a información do sistema mostrada nun ficheiro de texto.</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="46"/>
         <location filename="../mainwindow.cpp" line="91"/>
         <source>Save text...</source>
-        <translation type="unfinished"></translation>
+        <translation>Gardar texto...</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="71"/>
         <source>Copy the displayed system information to the clipboard, encased in [CODE][/CODE] tags ready to use in a forum post.</source>
-        <translation type="unfinished"></translation>
+        <translation>Copie a información do sistema mostrada ao portapapeis, encerrada entre as etiquetas [CODE][/CODE] lista para usar nunha publicación do foro.</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="57"/>
         <source>Save the system information selected from the list to an archive file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Garde a información do sistema seleccionada da lista nun ficheiro de arquivo.</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="60"/>
         <location filename="../mainwindow.cpp" line="126"/>
         <source>&amp;Save...</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Gardar...</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="129"/>
@@ -85,7 +85,7 @@
         <location filename="../mainwindow.cpp" line="325"/>
         <location filename="../mainwindow.cpp" line="354"/>
         <source>Quick System Info</source>
-        <translation type="unfinished"></translation>
+        <translation>Información rápida do sistema</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="61"/>
@@ -100,33 +100,33 @@
     <message>
         <location filename="../mainwindow.cpp" line="186"/>
         <source>About Quick-System-Info-gui</source>
-        <translation type="unfinished"></translation>
+        <translation>Sobre Quick-System-Info-gui</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="95"/>
         <source>&amp;Find...</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Encontrar...</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="99"/>
         <location filename="../mainwindow.cpp" line="481"/>
         <source>Find &amp;Next</source>
-        <translation type="unfinished"></translation>
+        <translation>Atopar &amp;Seguinte</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="115"/>
         <source>Select &amp;All</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleccionar &amp;Todo</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="121"/>
         <source>Revert Selection</source>
-        <translation type="unfinished"></translation>
+        <translation>Reverter Selección</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="188"/>
         <source>Program for displaying a quick system info report</source>
-        <translation type="unfinished"></translation>
+        <translation>Programa para mostrar un informe rápido de información del sistema</translation>
     </message>
     <message>
         <source>License</source>
@@ -140,7 +140,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="280"/>
         <source>Open folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Abrir Carpeta</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="282"/>
@@ -150,7 +150,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="440"/>
         <source>&amp;Save (×%1)...</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Gardar (×%1)...</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="474"/>
@@ -160,37 +160,37 @@
     <message>
         <location filename="../mainwindow.cpp" line="477"/>
         <source>&amp;Find what:</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Atopar:</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="487"/>
         <source>Match c&amp;ase</source>
-        <translation type="unfinished"></translation>
+        <translation>Coincide m&amp;aiúsculas</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="488"/>
         <source>Match &amp;whole word only</source>
-        <translation type="unfinished"></translation>
+        <translation>Coincide só palabra completa</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="491"/>
         <source>Direction</source>
-        <translation type="unfinished"></translation>
+        <translation>Dirección</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="493"/>
         <source>&amp;Up</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Arriba</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="494"/>
         <source>&amp;Down</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Abaixo</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="536"/>
         <source>Cannot find &quot;%1&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>Non se pode atopar &quot;%1&quot;</translation>
     </message>
     <message>
         <source>Changelog</source>
@@ -208,22 +208,22 @@
     <message>
         <location filename="../mainwindow.cpp" line="223"/>
         <source>Save System Information</source>
-        <translation type="unfinished"></translation>
+        <translation>Gardar Información do Sistema</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="279"/>
         <source>System information saved.</source>
-        <translation type="unfinished"></translation>
+        <translation>Información do sistema gardada.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="287"/>
         <source>Could not save system information.</source>
-        <translation type="unfinished"></translation>
+        <translation>Non se puido gardar a información do sistema.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="332"/>
         <source>history</source>
-        <translation type="unfinished"></translation>
+        <translation>Historial</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="354"/>
@@ -231,14 +231,18 @@
         <translation>Axuda para %1</translation>
     </message>
     <message>
+        <source>Quick System Info (gui)</source>
+        <translation type="vanished">Información rápida do sistema (gui)</translation>
+    </message>
+    <message>
         <location filename="../mainwindow.cpp" line="81"/>
         <source>Copy for forum</source>
-        <translation type="unfinished"></translation>
+        <translation>Copia para o foro</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="86"/>
         <source>Plain text copy</source>
-        <translation type="unfinished"></translation>
+        <translation>Texto simple copia</translation>
     </message>
 </context>
 <context>
@@ -254,7 +258,7 @@
     <message>
         <location filename="../main.cpp" line="43"/>
         <source>This tool displays a the quick system info report in a gui.</source>
-        <translation type="unfinished"></translation>
+        <translation>Esta ferramenta mostra un informe rápido do sistema nunha interface gráfica.</translation>
     </message>
     <message>
         <location filename="../main.cpp" line="66"/>

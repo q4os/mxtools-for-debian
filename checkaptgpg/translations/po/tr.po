@@ -56,11 +56,11 @@ msgstr "Anahtar sunucusunda bulunmayan anahtarlar:"
 
 msgid "Press 'H' for online help, press any other key to close this window."
 msgstr ""
-"Çevrimiçi yardım için 'H'ye basın, bu pencereyi kapatmak için herhangi bir "
+"Çevrimiçi yardım için ‘H’ye basın, bu pencereyi kapatmak için herhangi bir "
 "tuşa basın."
 
 msgid "Please wait while the link '%s' opens ..."
-msgstr "'%s' bağlantısı açılırken lütfen bekleyiniz..."
+msgstr "‘%s’ bağlantısı açılırken lütfen bekleyiniz..."
 
 msgid "Press any key to close this window."
 msgstr "Bu pencereyi kapatmak için herhangi bir tuşa basın."

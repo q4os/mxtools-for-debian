@@ -28,11 +28,11 @@
 #include <QLocale>
 #include <QTranslator>
 
+#include "common.h"
 #include "mainwindow.h"
 #include "version.h"
-#include <unistd.h>
 
-extern const QString starting_home = qEnvironmentVariable("HOME");
+#include <unistd.h>
 
 int main(int argc, char *argv[])
 {
@@ -44,7 +44,7 @@ int main(int argc, char *argv[])
     if (getuid() == 0) {
         qputenv("HOME", "/root");
     }
-    QApplication::setOrganizationName(QStringLiteral("MX-Linux"));
+    QApplication::setOrganizationName("MX-Linux");
     QApplication::setWindowIcon(QIcon::fromTheme(QApplication::applicationName()));
     QApplication::setApplicationVersion(VERSION);
 

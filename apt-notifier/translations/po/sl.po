@@ -7,7 +7,7 @@
 # Mario <al.manja@gmx.com>, 2022
 # Dolphin Oracle <dolphinoracle@gmail.com>, 2022
 # fehlix, 2023
-# Arnold Marko <arnold.marko@gmail.com>, 2023
+# Arnold Marko <arnold.marko@gmail.com>, 2024
 # 
 #, fuzzy
 msgid ""
@@ -16,7 +16,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-01-28 02:38+0100\n"
 "PO-Revision-Date: 2017-05-11 01:14+0000\n"
-"Last-Translator: Arnold Marko <arnold.marko@gmail.com>, 2023\n"
+"Last-Translator: Arnold Marko <arnold.marko@gmail.com>, 2024\n"
 "Language-Team: Slovenian (https://app.transifex.com/anticapitalista/teams/10162/sl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -37,7 +37,7 @@ msgid "About"
 msgstr "O programu"
 
 msgid "About MX Updater"
-msgstr "O MX posodobitvi"
+msgstr "O MX posodobitev"
 
 msgid "Auto-update"
 msgstr "Samodejna posodobitev"
@@ -96,7 +96,7 @@ msgid "MX Auto-update  --  unattended-upgrades log viewer"
 msgstr "MX samodejna posodobitev - ogled dnevnika za nenadzorovane nadgradnje"
 
 msgid "MX Package Installer"
-msgstr "MX Namestilnik paketov"
+msgstr "MX namestilnik paketov"
 
 #. The autostart desktop entry name will be shown within the list of autostart
 #. entries.
@@ -105,16 +105,16 @@ msgid "MX Updater"
 msgstr "MX posodobitev"
 
 msgid "MX Updater Help"
-msgstr "MX nadgradnja pomoč"
+msgstr "MX pomoč za nadgradnjo"
 
 msgid "MX Updater preferences"
 msgstr "Nastavitve za MX posodobitev"
 
 msgid "MX Updater--View and Upgrade, previewing: basic upgrade"
-msgstr "MX Posodobitev--Oglej in nadgradi, predogled: osnovna nadgradnja"
+msgstr "MX posodobitev--Oglej in nadgradi, predogled: osnovna nadgradnja"
 
 msgid "MX Updater--View and Upgrade, previewing: full upgrade"
-msgstr "MX Posodobitev--Oglej in nadgradi, predogled: celotna nadgradnja"
+msgstr "MX posodobitev--Oglej in nadgradi, predogled: celotna nadgradnja"
 
 msgid "No logs found."
 msgstr "Noben dnevnik ni bil najden."
@@ -249,7 +249,7 @@ msgid "press any key to close"
 msgstr "pritisnite poljubno tipko za izhod"
 
 msgid "press any key to stop automatic closing"
-msgstr "pritisnite poljubno tipko, da zaustavitve samodejno zapiranje"
+msgstr "pritisnite poljubno tipko, da preprečite samodejno zapiranje"
 
 msgid "pulse"
 msgstr "pulz"
@@ -311,4 +311,4 @@ msgid "Enable Auto-update"
 msgstr "Omogoči samodejno posodabljanje"
 
 msgid "Disable Auto-update"
-msgstr "Onemogoči samodejno posodabljanje"
+msgstr "Izklopi samodejno posodabljanje"

@@ -4,7 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# erned98, 2023
+# Erne D, 2023
 # 
 #, fuzzy
 msgid ""
@@ -13,8 +13,8 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-12-09 23:41-0500\n"
 "PO-Revision-Date: 2022-12-10 04:42+0000\n"
-"Last-Translator: erned98, 2023\n"
-"Language-Team: Polish (https://www.transifex.com/anticapitalista/teams/10162/pl/)\n"
+"Last-Translator: Erne D, 2023\n"
+"Language-Team: Polish (https://app.transifex.com/anticapitalista/teams/10162/pl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"

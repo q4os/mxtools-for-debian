@@ -855,7 +855,7 @@ Close the program, or wait until it is done processing and try again.</source>
 Chiudi il programma o attendi il completamento dell&apos;elaborazione e riprova.</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="77"/>
+        <location filename="../main.cpp" line="78"/>
         <source>MX Package Installer is a tool used for managing packages on MX Linux
     - installs popular programs from different sources
     - installs programs from the MX Test repo
@@ -868,23 +868,23 @@ Chiudi il programma o attendi il completamento dell&apos;elaborazione e riprova.
     - installa flatpaks</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="85"/>
+        <location filename="../main.cpp" line="86"/>
         <source>Skip online check if it falsely reports lack of internet access.</source>
         <translation>Salta il controllo online se segnala erroneamente la mancanza di accesso a Internet.</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="95"/>
-        <location filename="../main.cpp" line="103"/>
+        <location filename="../main.cpp" line="96"/>
+        <location filename="../main.cpp" line="104"/>
         <source>Error</source>
         <translation>Errore</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="96"/>
+        <location filename="../main.cpp" line="97"/>
         <source>You seem to be logged in as root, please log out and log in as normal user to use this program.</source>
         <translation>Sembra che tu sia loggato come root, fai il log out e poi il log in come utente normale per usare questo programma.</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="104"/>
+        <location filename="../main.cpp" line="105"/>
         <source>You must run this program with admin access.</source>
         <translation>Devi eseguire questo programma come amministratore.</translation>
     </message>

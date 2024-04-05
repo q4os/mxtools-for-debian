@@ -1,5 +1,4 @@
-#ifndef DIALOG_H
-#define DIALOG_H
+#pragma once
 
 #include <QComboBox>
 #include <QDialog>
@@ -19,5 +18,3 @@ public slots:
 private:
     QComboBox *box;
 };
-
-#endif // DIALOG_H

@@ -17,10 +17,11 @@
  * This file is part of mx-datetime.
  **********************************************************************/
 
-#include <QPainter>
 #include "clockface.h"
+#include <QPainter>
 
-ClockFace::ClockFace(QWidget *parent) : QWidget(parent)
+ClockFace::ClockFace(QWidget *parent)
+    : QWidget(parent)
 {
 }
 
@@ -30,29 +31,14 @@ void ClockFace::setTime(QTime newtime)
     update();
 }
 
-void ClockFace::paintEvent(QPaintEvent *)
+void ClockFace::paintEvent(QPaintEvent * /*event*/)
 {
     // Polygon points for hands and marks.
-    static const QPoint handHour[] = {
-        QPoint(7, 0), QPoint(0, 12),
-        QPoint(-7, 0), QPoint(0, -60)
-    };
-    static const QPoint handMinute[] = {
-        QPoint(3, 0), QPoint(0, 6),
-        QPoint(-3, 0), QPoint(0, -80)
-    };
-    static const QPoint handSecond[] = {
-        QPoint(1, 0), QPoint(0, 3),
-        QPoint(-1, 0), QPoint(0, -95)
-    };
-    static const QPoint markMinute[] = {
-        QPoint(0, -94), QPoint(1, -97),
-        QPoint(0, -98), QPoint(-1, -97)
-    };
-    static const QPoint markHour[] = {
-        QPoint(0, -91), QPoint(2, -96),
-        QPoint(0, -98), QPoint(-2, -96)
-    };
+    static const std::array<QPoint, 4> handHour {QPoint(7, 0), QPoint(0, 12), QPoint(-7, 0), QPoint(0, -60)};
+    static const std::array<QPoint, 4> handMinute {QPoint(3, 0), QPoint(0, 6), QPoint(-3, 0), QPoint(0, -80)};
+    static const std::array<QPoint, 4> handSecond {QPoint(1, 0), QPoint(0, 3), QPoint(-1, 0), QPoint(0, -95)};
+    static const std::array<QPoint, 4> markMinute {QPoint(0, -94), QPoint(1, -97), QPoint(0, -98), QPoint(-1, -97)};
+    static const std::array<QPoint, 4> markHour {QPoint(0, -91), QPoint(2, -96), QPoint(0, -98), QPoint(-2, -96)};
     // Colour calculations.
     QColor colNumbers = palette().text().color();
     colNumbers.setAlpha(150);
@@ -66,19 +52,17 @@ void ClockFace::paintEvent(QPaintEvent *)
     // Paint the clock.
     QPainter painter(this);
     painter.setRenderHints(QPainter::Antialiasing | QPainter::TextAntialiasing);
-    painter.translate(width() / 2, height() / 2);
+    painter.translate(static_cast<int>(width() / 2), static_cast<int>(height() / 2));
     const int side = qMin(width(), height());
     painter.scale(side / 200.0, side / 200.0);
     // Numbers.
     painter.save();
     painter.setBrush(colNumbers);
     for (int ixi = 0; ixi < 12; ++ixi) {
-        static const char *numerals[] = {
-            "I", "II", "III", "IIII", "V", "VI",
-            "VII", "VIII", "IX", "X", "XI", "XII"
-        };
+        static const std::array<QString, 12> numerals {"I",   "II",   "III", "IIII", "V",  "VI",
+                                                       "VII", "VIII", "IX",  "X",    "XI", "XII"};
         painter.rotate(30.0);
-        painter.drawText(-12, -87, 24, 12, Qt::AlignCenter, numerals[ixi]);
+        painter.drawText(-12, -87, 24, 12, Qt::AlignCenter, numerals.at(ixi));
     }
     painter.restore();
     // Hour hand.
@@ -86,38 +70,43 @@ void ClockFace::paintEvent(QPaintEvent *)
     painter.setPen(colHour.darker());
     painter.save();
     painter.rotate(30.0 * (time.hour() + (time.minute() / 60.0)));
-    painter.drawConvexPolygon(handHour, 4);
+    painter.drawConvexPolygon(handHour.data(), 4);
     painter.restore();
     // Minute hand.
     painter.setBrush(colMinute);
     painter.setPen(colMinute.darker());
     painter.save();
     painter.rotate(6.0 * (time.minute() + (time.second() / 60.0)));
-    painter.drawConvexPolygon(handMinute, 4);
+    painter.drawConvexPolygon(handMinute.data(), 4);
     painter.restore();
     // Second hand.
     painter.setBrush(colSecond);
     painter.setPen(colSecond.darker());
     painter.save();
     painter.rotate(6.0 * time.second());
-    painter.drawConvexPolygon(handSecond, 4);
+    painter.drawConvexPolygon(handSecond.data(), 4);
     colNumbers.setAlpha(255);
     painter.setBrush(colNumbers);
     painter.setPen(Qt::NoPen);
-    if ((time.second() % 5) == 0) painter.drawConvexPolygon(markHour, 4);
-    else painter.drawConvexPolygon(markMinute, 4);
+    if ((time.second() % 5) == 0) {
+        painter.drawConvexPolygon(markHour.data(), 4);
+    } else {
+        painter.drawConvexPolygon(markMinute.data(), 4);
+    }
     painter.restore();
     // Marks around the circumference.
     painter.setPen(colHour.darker());
     painter.setBrush(colHour);
     for (int ixi = 0; ixi < 12; ++ixi) {
-        painter.drawConvexPolygon(markHour, 4);
+        painter.drawConvexPolygon(markHour.data(), 4);
         painter.rotate(30.0);
     }
     painter.setPen(colMinute.darker());
     painter.setBrush(colMinute);
     for (int ixi = 0; ixi < 60; ++ixi) {
-        if ((ixi % 5) != 0) painter.drawConvexPolygon(markMinute, 4);
+        if ((ixi % 5) != 0) {
+            painter.drawConvexPolygon(markMinute.data(), 4);
+        }
         painter.rotate(6.0);
     }
 }

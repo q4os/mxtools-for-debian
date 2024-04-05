@@ -5,7 +5,7 @@
     <name>MainWindow</name>
     <message>
         <source>MX Welcome</source>
-        <translation type="vanished">MX dobrodošli</translation>
+        <translation type="vanished">MX pozdrav</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="74"/>
@@ -95,7 +95,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="191"/>
         <source>Copyright (c) MX Linux</source>
-        <translation>Copyright (c) MX Linux</translation>
+        <translation>Avtorska zaščita (c) MX Linux</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="186"/>

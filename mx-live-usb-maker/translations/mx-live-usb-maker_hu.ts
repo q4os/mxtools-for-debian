@@ -6,7 +6,7 @@
     <message>
         <location filename="../mainwindow.ui" line="14"/>
         <source>Program_Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Program_Name</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="46"/>
@@ -88,7 +88,7 @@
     <message>
         <location filename="../mainwindow.ui" line="309"/>
         <source>Advanced Options</source>
-        <translation>Haladó lehetőségek</translation>
+        <translation>Speciális lehetőségek</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="327"/>
@@ -153,7 +153,7 @@
     <message>
         <location filename="../mainwindow.ui" line="438"/>
         <source>Verbosity (less to more):</source>
-        <translation>Bőbeszédűség (kevesebb vagy több)</translation>
+        <translation>Üzenetek részletessége:</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="477"/>
@@ -194,7 +194,7 @@
         <location filename="../mainwindow.ui" line="547"/>
         <location filename="../mainwindow.cpp" line="493"/>
         <source>Show advanced options</source>
-        <translation>Haladó lehetőségek megjelenítése</translation>
+        <translation>Speciális lehetőségek megjelenítése</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="567"/>
@@ -272,61 +272,63 @@
         <translation>A jelenleg futó Live rendszer klónozása</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="81"/>
+        <location filename="../mainwindow.cpp" line="79"/>
         <source>Confirmation</source>
         <translation>Jóváhagyás</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="82"/>
+        <location filename="../mainwindow.cpp" line="80"/>
         <source>Target device %1 is larger than %2 GB. Do you wish to proceed?</source>
         <translation>A cél eszköz %1 nagyobb, mint %2 GB. Kívánja folytatni?</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="126"/>
-        <location filename="../mainwindow.cpp" line="343"/>
+        <location filename="../mainwindow.cpp" line="124"/>
+        <location filename="../mainwindow.cpp" line="341"/>
         <location filename="../mainwindow.cpp" line="477"/>
         <source>Failure</source>
         <translation>Hiba</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="127"/>
+        <location filename="../mainwindow.cpp" line="125"/>
         <source>Source and destination are on the same device, please select again.</source>
         <translation>A forrás és a cél ugyanazon az eszközön van. Válassza ki újra.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="163"/>
+        <location filename="../mainwindow.cpp" line="161"/>
         <source>Writing %1 using &apos;dd&apos; command to /dev/%2,
 
 Please wait until the process is completed</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 írása &apos;dd&apos; parancs használatával ide: /dev/%2,
+
+Várja meg a folyamat befejeződését</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="336"/>
+        <location filename="../mainwindow.cpp" line="334"/>
         <source>Success</source>
         <translation>Sikeres</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="336"/>
+        <location filename="../mainwindow.cpp" line="334"/>
         <source>LiveUSB creation successful!</source>
         <translation>LiveUSB készítése sikeres!</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="343"/>
+        <location filename="../mainwindow.cpp" line="341"/>
         <source>Error encountered in the LiveUSB creation process</source>
         <translation>Hiba történt a LiveUSB létrehozása közben</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="399"/>
+        <location filename="../mainwindow.cpp" line="397"/>
         <source>Error</source>
         <translation>Hiba</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="399"/>
+        <location filename="../mainwindow.cpp" line="397"/>
         <source>Please select a USB device to write to</source>
         <translation>Válasszon egy USB eszközt amelyre írni szeretne</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="402"/>
+        <location filename="../mainwindow.cpp" line="400"/>
         <source>These actions will destroy all data on 
 
 </source>
@@ -335,52 +337,52 @@ Please wait until the process is completed</source>
 </translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="403"/>
+        <location filename="../mainwindow.cpp" line="401"/>
         <source>Do you wish to continue?</source>
         <translation>Szeretné folytatni?</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="437"/>
+        <location filename="../mainwindow.cpp" line="435"/>
         <source>About %1</source>
         <translation>%1 névjegye</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="438"/>
+        <location filename="../mainwindow.cpp" line="436"/>
         <source>Version: </source>
         <translation>Verzió:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="440"/>
+        <location filename="../mainwindow.cpp" line="438"/>
         <source>Program for creating a live-usb from an iso-file, another live-usb, a live-cd/dvd, or a running live system.</source>
         <translation>LiveUSB létrehozására szolgáló program, egy ISO fájlból, másik LiveUSB-ről, Live CD/DVD-ről, vagy a futó Live rendszerről.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="443"/>
+        <location filename="../mainwindow.cpp" line="441"/>
         <source>Copyright (c) MX Linux</source>
         <translation>Copyright (c) MX Linux</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="444"/>
+        <location filename="../mainwindow.cpp" line="442"/>
         <source>%1 License</source>
         <translation>%1 licenc</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="451"/>
+        <location filename="../mainwindow.cpp" line="449"/>
         <source>%1 Help</source>
         <translation>%1 Súgó</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="459"/>
+        <location filename="../mainwindow.cpp" line="457"/>
         <source>Select an ISO file to write to the USB drive</source>
         <translation>Válassza ki az ISO fájlt amelyet az USB eszközre kiír</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="460"/>
+        <location filename="../mainwindow.cpp" line="458"/>
         <source>ISO Files (*.iso);;All Files (*.*)</source>
         <translation>ISO fájlok (*.iso);Minden fájl (*.*)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="470"/>
+        <location filename="../mainwindow.cpp" line="468"/>
         <location filename="../mainwindow.cpp" line="527"/>
         <source>Select Source Directory</source>
         <translation>Válassza ki a forrás könyvtárat</translation>
@@ -393,7 +395,7 @@ Please wait until the process is completed</source>
     <message>
         <location filename="../mainwindow.cpp" line="499"/>
         <source>Hide advanced options</source>
-        <translation>Haladó lehetőségek elrejtése</translation>
+        <translation>Speciális lehetőségek elrejtése</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="526"/>
@@ -421,23 +423,23 @@ Please wait until the process is completed</source>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../about.cpp" line="54"/>
+        <location filename="../about.cpp" line="70"/>
         <source>License</source>
         <translation>Licenc</translation>
     </message>
     <message>
-        <location filename="../about.cpp" line="55"/>
-        <location filename="../about.cpp" line="64"/>
+        <location filename="../about.cpp" line="71"/>
+        <location filename="../about.cpp" line="81"/>
         <source>Changelog</source>
         <translation>Változások listája</translation>
     </message>
     <message>
-        <location filename="../about.cpp" line="56"/>
+        <location filename="../about.cpp" line="72"/>
         <source>Cancel</source>
         <translation>Mégsem</translation>
     </message>
     <message>
-        <location filename="../about.cpp" line="76"/>
+        <location filename="../about.cpp" line="94"/>
         <source>&amp;Close</source>
         <translation>&amp;Bezárás</translation>
     </message>
@@ -462,23 +464,23 @@ Please wait until the process is completed</source>
         <translation>[fájlnév]</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="88"/>
-        <location filename="../main.cpp" line="97"/>
+        <location filename="../main.cpp" line="87"/>
+        <location filename="../main.cpp" line="96"/>
         <source>Error</source>
         <translation>Hiba</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="89"/>
+        <location filename="../main.cpp" line="88"/>
         <source>You seem to be logged in as root, please log out and log in as normal user to use this program.</source>
         <translation>Úgy tűnik, hogy root felhasználóként van bejelentkezve. Jelentkezzen ki és jelentkezzen be egyszerű felhasználóként a program használatához.</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="97"/>
+        <location filename="../main.cpp" line="96"/>
         <source>You must run this program as root.</source>
-        <translation type="unfinished"></translation>
+        <translation>Root felhasználóként kell futtatnia ezt a programot.</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="112"/>
+        <location filename="../main.cpp" line="111"/>
         <source>version:</source>
         <translation>verzió:</translation>
     </message>

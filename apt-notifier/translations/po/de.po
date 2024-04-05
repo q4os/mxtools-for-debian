@@ -4,14 +4,13 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# alfredmale <maledora4@googlemail.com>, 2022
 # Geoff Gigg <geoffgigg@hotmail.com>, 2022
 # Jerry Bond, 2022
 # Vinzenz Vietzke <vinz@vinzv.de>, 2022
 # fehlix, 2022
 # delix02, 2022
 # Dolphin Oracle <dolphinoracle@gmail.com>, 2022
-# aer, 2023
+# aer, 2024
 # 
 #, fuzzy
 msgid ""
@@ -20,7 +19,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-01-28 02:38+0100\n"
 "PO-Revision-Date: 2017-05-11 01:14+0000\n"
-"Last-Translator: aer, 2023\n"
+"Last-Translator: aer, 2024\n"
 "Language-Team: German (https://app.transifex.com/anticapitalista/teams/10162/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -103,7 +102,7 @@ msgstr ""
 "MX Auto-Update  --  Protokollanzeige der unbeaufsichtigten Aktualisierungen"
 
 msgid "MX Package Installer"
-msgstr "MX Paket-Installer"
+msgstr "MX-Paketinstallation"
 
 #. The autostart desktop entry name will be shown within the list of autostart
 #. entries.
@@ -142,7 +141,7 @@ msgid "Preferences"
 msgstr "Einstellungen"
 
 msgid "Press 'h' for help, 'q' to quit"
-msgstr "Drücken sie 'h' für Hilfe und 'q' zum beenden"
+msgstr "Drücken Sie 'h' für Hilfe und 'q' zum beenden"
 
 msgid "Quit"
 msgstr "Beenden"
@@ -161,7 +160,8 @@ msgid "Restart MX Updater"
 msgstr "MX Updater neu starten"
 
 msgid "Running apt-get autoremove, if you are unsure type 'n'."
-msgstr "Apt-get autoremove wird ausgeführt, tippen sie 'n' wenn unsicher."
+msgstr ""
+"apt-get autoremove wird ausgeführt, tippen Sie 'n' wenn Sie unsicher sind."
 
 msgid ""
 "Switches the type of Upgrade that will be performed, alternating back and "

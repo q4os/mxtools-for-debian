@@ -7,9 +7,9 @@
 # Geoff Gigg <geoffgigg@hotmail.com>, 2022
 # anticapitalista <anticapitalista@riseup.net>, 2022
 # Roberto Saravia <saravia.jroberto@gmail.com>, 2022
-# Roy Avrett <avrett@cs.fsu.edu>, 2022
-# Pedro Delgado, 2022
-# Senpai <senpai99@hotmail.com>, 2022
+# Roy Avrett <rjavrett@gmail.com>, 2022
+# Manuel <senpai99@hotmail.com>, 2022
+# Amigo, 2022
 # 
 #, fuzzy
 msgid ""
@@ -18,13 +18,13 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-01-16 00:46+0100\n"
 "PO-Revision-Date: 2022-01-21 17:21+0000\n"
-"Last-Translator: Senpai <senpai99@hotmail.com>, 2022\n"
-"Language-Team: Spanish (https://www.transifex.com/anticapitalista/teams/10162/es/)\n"
+"Last-Translator: Amigo, 2022\n"
+"Language-Team: Spanish (https://app.transifex.com/anticapitalista/teams/10162/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: es\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=3; plural=n == 1 ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
 
 #: ../disk-manager.in:66
 msgid "Insufficient rights"
@@ -138,7 +138,7 @@ msgstr ""
 #: ../data/disk-manager.desktop.in.in.h:1 ../DiskManager/Dialogs.py:489
 #: ../DiskManager/DiskManager.py:78
 msgid "Disk Manager"
-msgstr "Administrador de disco"
+msgstr "Gestor de disco"
 
 #: ../data/disk-manager.desktop.in.in.h:2
 msgid "Manage filesystem configuration"

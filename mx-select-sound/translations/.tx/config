@@ -6,3 +6,4 @@ file_filter = ./mx-select-sound_<lang>.ts
 source_file = mx-select-sound_en.ts
 source_lang = en
 type = ts
+minimum_perc = 25

@@ -7,8 +7,8 @@
 # José Vieira <jvieira33@sapo.pt>, 2022
 # anticapitalista <anticapitalista@riseup.net>, 2022
 # cmenemrs <cmenemrs@gmail.com>, 2022
-# Roy Avrett <avrett@cs.fsu.edu>, 2022
-# marcelo cripe <marcelocripe@gmail.com>, 2022
+# Roy Avrett <rjavrett@gmail.com>, 2022
+# marcelo cripe <marcelocripe@gmail.com>, 2023
 # 
 #, fuzzy
 msgid ""
@@ -17,13 +17,13 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-01-16 00:46+0100\n"
 "PO-Revision-Date: 2022-01-21 17:21+0000\n"
-"Last-Translator: marcelo cripe <marcelocripe@gmail.com>, 2022\n"
-"Language-Team: Portuguese (Brazil) (https://www.transifex.com/anticapitalista/teams/10162/pt_BR/)\n"
+"Last-Translator: marcelo cripe <marcelocripe@gmail.com>, 2023\n"
+"Language-Team: Portuguese (Brazil) (https://app.transifex.com/anticapitalista/teams/10162/pt_BR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: pt_BR\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Plural-Forms: nplurals=3; plural=(n == 0 || n == 1) ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
 
 #: ../disk-manager.in:66
 msgid "Insufficient rights"
@@ -150,7 +150,7 @@ msgstr "Gerenciar as configurações do sistema de arquivos com o Disk Manager"
 msgid "No driver is available for this type of filesystem : '%s'"
 msgstr ""
 "Nenhum controlador está disponível para este tipo de sistema de arquivos: "
-"'%s'"
+"‘%s’"
 
 #: ../DiskManager/Dialogs.py:162
 msgid "Select a directory"
@@ -392,7 +392,7 @@ msgstr "A desmontagem de <i>%s</i> falhou por causa dos seguintes erros:"
 #: ../DiskManager/Fstab/Mounter.py:122
 msgid "You can also use the 'lazy' options to detach the filesystem now."
 msgstr ""
-"Você também pode utilizar a opção 'lazy' (lento) para separar o sistema de "
+"Você também pode utilizar a opção ‘lazy’ (lento) para separar o sistema de "
 "arquivos agora."
 
 #: ../DiskManager/Fstab/Mounter.py:127
@@ -419,7 +419,7 @@ msgstr ""
 #. Keep the English term 'lazy' for the 'lazy' unmount option
 #: ../DiskManager/Fstab/Mounter.py:137
 msgid "Unmount with the 'lazy' option"
-msgstr "Desmontar utilizando a opção 'lazy' (lento)"
+msgstr "Desmontar utilizando a opção ‘lazy’ (lento)"
 
 #: ../DiskManager/Fstab/Mounter.py:138
 msgid "Retry unmount"
@@ -429,7 +429,7 @@ msgstr "Tentar desmontar novamente"
 #. Keep the English term 'lazy' for the 'lazy' unmount option
 #: ../DiskManager/Fstab/Mounter.py:143
 msgid "Even with the lazy option, unmounting failed."
-msgstr "Mesmo utilizando a opção 'lazy' (lento), a desmontagem falhou."
+msgstr "Mesmo utilizando a opção ‘lazy’ (lento), a desmontagem falhou."
 
 #: ../DiskManager/Fstab/Mounter.py:155
 msgid "Mounting failed"
@@ -451,7 +451,7 @@ msgstr "Você pode tentar uma das seguintes ações:"
 #: ../DiskManager/Fstab/Mounter.py:193
 #, python-format
 msgid "It seems that option '%s' is not allowed."
-msgstr "Parece que a opção '%s' não é permitida."
+msgstr "Parece que a opção ‘%s’ não é permitida."
 
 #: ../DiskManager/Fstab/Mounter.py:195
 msgid "Return options to defaults"
@@ -460,17 +460,17 @@ msgstr "Retornar para as opções padrões"
 #: ../DiskManager/Fstab/Mounter.py:197
 #, python-format
 msgid "Don't use the '%s' option"
-msgstr "Não utilizar a opção '%s'"
+msgstr "Não utilizar a opção ‘%s’"
 
 #: ../DiskManager/Fstab/Mounter.py:199
 #, python-format
 msgid "It seems that fs type '%s' is not valid."
-msgstr "Parece que o tipo do sistema de arquivos '%s' não é válido."
+msgstr "Parece que o tipo do sistema de arquivos ‘%s’ não é válido."
 
 #: ../DiskManager/Fstab/Mounter.py:203
 #, python-format
 msgid "Using driver '%s' (%s)"
-msgstr "Utilizando o controlador '%s' (%s)"
+msgstr "Utilizando o controlador ‘%s’ (%s)"
 
 #. TRANSLATORS:
 #. Keep the English term 'force' for the 'force' unmount option
@@ -478,9 +478,9 @@ msgstr "Utilizando o controlador '%s' (%s)"
 msgid ""
 "You can try to use the 'force' option. Be aware that this could be risky."
 msgstr ""
-"Você pode tentar utilizar a opção 'force' (forçar). Mas esteja ciente de que"
-" isso pode ser arriscado."
+"Você pode tentar utilizar a opção ‘force’ (forçar). Mas esteja ciente de que"
+" esta opção pode ser arriscada."
 
 #: ../DiskManager/Fstab/Mounter.py:212
 msgid "Use the 'force' option"
-msgstr "Utilizar a opção 'force' (forçar)"
+msgstr "Utilizar a opção ‘force’ (forçar)"

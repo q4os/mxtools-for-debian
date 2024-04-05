@@ -250,7 +250,7 @@
     <message>
         <location filename="../main.cpp" line="66"/>
         <source>You must run this program as normal user.</source>
-        <translation>このプログラムは標準ユーザーで実行して下さい。</translation>
+        <translation>このプログラムは通常のユーザで実行してください。</translation>
     </message>
 </context>
 <context>

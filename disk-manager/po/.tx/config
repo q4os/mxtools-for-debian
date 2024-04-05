@@ -1,9 +1,0 @@
-[main]
-host = https://www.transifex.com
-
-[antix-development.disk-manager]
-file_filter = <lang>.po
-minimum_perc = 1
-source_file = en.pot
-source_lang = en
-type = PO

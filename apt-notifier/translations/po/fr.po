@@ -30,7 +30,7 @@ msgid "$count new updates available"
 msgstr "$count nouvelles mises à jour disponibles"
 
 msgid "0 updates available"
-msgstr "0 mises à jour disponibles"
+msgstr "0 mise à jour disponible"
 
 msgid "1 new update available"
 msgstr "1 nouvelle mise à jour disponible"
@@ -226,7 +226,7 @@ msgstr[2] "Vous avez {num} nouvelles mises à jour disponibles"
 
 msgid "automatically close terminal window when full/basic upgrade complete"
 msgstr ""
-"fermer automatiquement le terminal après la mise à niveau complète ou "
+"Fermer automatiquement le terminal après la mise à niveau complète ou "
 "basique"
 
 msgid "automatically close terminal window when upgrade complete"
@@ -265,13 +265,13 @@ msgid "press any key to close"
 msgstr "Appuyez sur une touche pour fermer"
 
 msgid "press any key to stop automatic closing"
-msgstr "Appuyer sur une touche pour arrêter la fermeture automatique"
+msgstr "Appuyez sur une touche pour arrêter la fermeture automatique."
 
 msgid "pulse"
 msgstr "pulsation"
 
 msgid "start MX Updater at login"
-msgstr "lancer MX Mise à jour apt-notifier au démarrage"
+msgstr "Lancer MX Mise à jour apt-notifier au démarrage"
 
 msgid "switch to basic upgrade"
 msgstr "Basculer vers à la mise à jour basique"
@@ -289,11 +289,11 @@ msgid "upgrade"
 msgstr "Mettre à niveau"
 
 msgid "use desktop notifications"
-msgstr "utiliser les notifications du bureau"
+msgstr "Utiliser les notifications du bureau"
 
 msgid "use transparent interior for no-updates wireframe"
 msgstr ""
-"utiliser un intérieur transparent pour la boîte filaire (cas où il n’y a pas"
+"Utiliser un intérieur transparent pour la boîte filaire (cas où il n’y a pas"
 " de mise à niveau disponible)"
 
 msgid "wireframe"

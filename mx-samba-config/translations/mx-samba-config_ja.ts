@@ -46,10 +46,10 @@
     <message>
         <location filename="../editshare.ui" line="111"/>
         <source>Access rights for valid users</source>
-        <translation>有効なユーザーのアクセス権</translation>
+        <translation>有効なユーザのアクセス権</translation>
     </message>
     <message>
-        <location filename="../editshare.cpp" line="48"/>
+        <location filename="../editshare.cpp" line="52"/>
         <source>Select directory to share</source>
         <translation>共有するディレクトリの選択</translation>
     </message>
@@ -69,7 +69,7 @@
     <message>
         <location filename="../mainwindow.ui" line="41"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;No samba user shares found&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Samba ユーザー共有が見つかりません&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Samba ユーザ共有が見つかりません&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="50"/>
@@ -116,7 +116,7 @@
     <message>
         <location filename="../mainwindow.ui" line="142"/>
         <source>&amp;Users</source>
-        <translation>ユーザー(&amp;U)</translation>
+        <translation>ユーザ(&amp;U)</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="150"/>
@@ -131,19 +131,19 @@
     <message>
         <location filename="../mainwindow.ui" line="194"/>
         <source>Users</source>
-        <translation>ユーザー</translation>
+        <translation>ユーザ</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="219"/>
-        <location filename="../mainwindow.cpp" line="327"/>
-        <location filename="../mainwindow.cpp" line="353"/>
+        <location filename="../mainwindow.cpp" line="326"/>
+        <location filename="../mainwindow.cpp" line="352"/>
         <source>E&amp;nable Automatic Samba Startup</source>
         <translation>Samba の自動起動を有効にする(&amp;E)</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="226"/>
-        <location filename="../mainwindow.cpp" line="302"/>
-        <location filename="../mainwindow.cpp" line="363"/>
+        <location filename="../mainwindow.cpp" line="301"/>
+        <location filename="../mainwindow.cpp" line="362"/>
         <source>Star&amp;t Samba</source>
         <translation>Samba を起動(&amp;T)</translation>
     </message>
@@ -154,7 +154,7 @@
     </message>
     <message>
         <location filename="../mainwindow.ui" line="285"/>
-        <location filename="../mainwindow.cpp" line="300"/>
+        <location filename="../mainwindow.cpp" line="299"/>
         <source>Samba is running</source>
         <translation>Samba は起動中です</translation>
     </message>
@@ -209,20 +209,20 @@
         <location filename="../mainwindow.cpp" line="129"/>
         <location filename="../mainwindow.cpp" line="141"/>
         <location filename="../mainwindow.cpp" line="216"/>
-        <location filename="../mainwindow.cpp" line="288"/>
-        <location filename="../mainwindow.cpp" line="306"/>
-        <location filename="../mainwindow.cpp" line="404"/>
-        <location filename="../mainwindow.cpp" line="432"/>
-        <location filename="../mainwindow.cpp" line="436"/>
-        <location filename="../mainwindow.cpp" line="442"/>
-        <location filename="../mainwindow.cpp" line="448"/>
-        <location filename="../mainwindow.cpp" line="479"/>
-        <location filename="../mainwindow.cpp" line="485"/>
-        <location filename="../mainwindow.cpp" line="501"/>
-        <location filename="../mainwindow.cpp" line="513"/>
-        <location filename="../mainwindow.cpp" line="538"/>
-        <location filename="../mainwindow.cpp" line="556"/>
-        <location filename="../mainwindow.cpp" line="569"/>
+        <location filename="../mainwindow.cpp" line="287"/>
+        <location filename="../mainwindow.cpp" line="305"/>
+        <location filename="../mainwindow.cpp" line="403"/>
+        <location filename="../mainwindow.cpp" line="431"/>
+        <location filename="../mainwindow.cpp" line="435"/>
+        <location filename="../mainwindow.cpp" line="441"/>
+        <location filename="../mainwindow.cpp" line="447"/>
+        <location filename="../mainwindow.cpp" line="478"/>
+        <location filename="../mainwindow.cpp" line="484"/>
+        <location filename="../mainwindow.cpp" line="500"/>
+        <location filename="../mainwindow.cpp" line="512"/>
+        <location filename="../mainwindow.cpp" line="537"/>
+        <location filename="../mainwindow.cpp" line="555"/>
+        <location filename="../mainwindow.cpp" line="568"/>
         <source>Error</source>
         <translation>エラー</translation>
     </message>
@@ -253,7 +253,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="141"/>
         <source>Error listing users</source>
-        <translation>エラーのあるユーザー一覧</translation>
+        <translation>エラーのあるユーザリスト</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="169"/>
@@ -276,137 +276,137 @@
         <translation>共有の一覧表示中にエラー発生</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="289"/>
+        <location filename="../mainwindow.cpp" line="288"/>
         <source>Your user doesn&apos;t belong to &apos;sambashare&apos; group  if you just installed the app you might need to restart the system first.</source>
         <translation>アプリケーションをインストールしただけでは、ユーザは &apos;sambashare&apos; グループに属していません。まずシステムを再起動する必要があるでしょう。</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="299"/>
+        <location filename="../mainwindow.cpp" line="298"/>
         <source>Sto&amp;p Samba</source>
         <translation>Samba を終了(&amp;P)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="303"/>
+        <location filename="../mainwindow.cpp" line="302"/>
         <source>Samba is not running</source>
         <translation>Samba は起動していません</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="306"/>
+        <location filename="../mainwindow.cpp" line="305"/>
         <source>Samba not installed</source>
         <translation>Samba はインストールされていません</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="324"/>
+        <location filename="../mainwindow.cpp" line="323"/>
         <source>&amp;Disable Automatic Samba Startup</source>
         <translation>Samba の自動スタートアップを無効化(&amp;D)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="378"/>
+        <location filename="../mainwindow.cpp" line="377"/>
         <source>About %1</source>
         <translation> %1 について</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="378"/>
+        <location filename="../mainwindow.cpp" line="377"/>
         <source>MX Samba Config</source>
         <translation>MX Samba 設定</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="379"/>
+        <location filename="../mainwindow.cpp" line="378"/>
         <source>Version: </source>
         <translation>バージョン：</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="381"/>
+        <location filename="../mainwindow.cpp" line="380"/>
         <source>Program for configuring Samba shares and users.</source>
         <translation>Samba 共有とユーザを設定するプログラムです。</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="383"/>
+        <location filename="../mainwindow.cpp" line="382"/>
         <source>Copyright (c) MX Linux</source>
         <translation>Copyright (c) MX Linux</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="384"/>
+        <location filename="../mainwindow.cpp" line="383"/>
         <source>%1 License</source>
         <translation>%1 ライセンス</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="391"/>
+        <location filename="../mainwindow.cpp" line="390"/>
         <source>%1 Help</source>
         <translation>%1 のヘルプ</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="404"/>
+        <location filename="../mainwindow.cpp" line="403"/>
         <source>Cannot delete user: </source>
-        <translation>次のユーザーを削除できません:</translation>
+        <translation>次のユーザを削除できません:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="413"/>
+        <location filename="../mainwindow.cpp" line="412"/>
         <source>Enter the username and password:</source>
         <translation>ユーザ名とパスワードを入力してください</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="420"/>
+        <location filename="../mainwindow.cpp" line="419"/>
         <source>Username:</source>
         <translation>ユーザ名</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="421"/>
-        <location filename="../mainwindow.cpp" line="468"/>
+        <location filename="../mainwindow.cpp" line="420"/>
+        <location filename="../mainwindow.cpp" line="467"/>
         <source>Password:</source>
         <translation>パスワード</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="422"/>
-        <location filename="../mainwindow.cpp" line="469"/>
+        <location filename="../mainwindow.cpp" line="421"/>
+        <location filename="../mainwindow.cpp" line="468"/>
         <source>Confirm password:</source>
         <translation>パスワードの確認:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="432"/>
+        <location filename="../mainwindow.cpp" line="431"/>
         <source>Empty username, please enter a name.</source>
-        <translation>ユーザー名が空欄です。名前を入力してください。</translation>
+        <translation>ユーザ名が空欄です。名前を入力してください。</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="437"/>
+        <location filename="../mainwindow.cpp" line="436"/>
         <source>Matching linux user not found on system, make sure you enter a valid username.</source>
-        <translation>一致する Linux ユーザーがシステムに見つかりません。有効なユーザー名を入力してください。</translation>
+        <translation>一致する Linux ユーザがシステムに見つかりません。有効なユーザ名を入力してください。</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="442"/>
-        <location filename="../mainwindow.cpp" line="479"/>
+        <location filename="../mainwindow.cpp" line="441"/>
+        <location filename="../mainwindow.cpp" line="478"/>
         <source>Passwords don&apos;t match, please enter again.</source>
         <translation>パスワードが一致しません。再度入力してください。</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="448"/>
+        <location filename="../mainwindow.cpp" line="447"/>
         <source>Could not add user.</source>
-        <translation>ユーザーを追加できませんでした。</translation>
+        <translation>ユーザを追加できませんでした。</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="462"/>
+        <location filename="../mainwindow.cpp" line="461"/>
         <source>Change the password for &apos;%1&apos;</source>
         <translation>&apos;%1&apos; のパスワードを変更</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="485"/>
+        <location filename="../mainwindow.cpp" line="484"/>
         <source>Could not change password.</source>
         <translation>パスワードを変更できませんでした。</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="501"/>
+        <location filename="../mainwindow.cpp" line="500"/>
         <source>Cannot delete share: </source>
         <translation>次の共有を削除できません。</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="514"/>
-        <location filename="../mainwindow.cpp" line="570"/>
+        <location filename="../mainwindow.cpp" line="513"/>
+        <location filename="../mainwindow.cpp" line="569"/>
         <source>Samba service is not running. Please start Samba before adding or editing shares</source>
         <translation>Samba サービスが実行されていません。共有を追加または編集する前に Samba を起動してください。</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="538"/>
-        <location filename="../mainwindow.cpp" line="556"/>
+        <location filename="../mainwindow.cpp" line="537"/>
+        <location filename="../mainwindow.cpp" line="555"/>
         <source>Error: trying to process permissions: </source>
         <translation>エラー: 権限を処理しようとしています:</translation>
     </message>
@@ -435,9 +435,9 @@
         <translation>閉じる(&amp;C)</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="61"/>
+        <location filename="../main.cpp" line="64"/>
         <source>You must run this program as normal user.</source>
-        <translation>このプログラムは標準ユーザーで実行して下さい。</translation>
+        <translation>このプログラムは通常のユーザで実行して下さい。</translation>
     </message>
 </context>
 </TS>

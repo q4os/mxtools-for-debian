@@ -6,6 +6,7 @@
 # Translators:
 # En Kerro <inactive+ekeimaja@transifex.com>, 2022
 # asd asd <ekeimaja@gmail.com>, 2022
+# Kimmo Kujansuu <mrkujansuu@gmail.com>, 2023
 # 
 #, fuzzy
 msgid ""
@@ -14,8 +15,8 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-01-16 00:46+0100\n"
 "PO-Revision-Date: 2022-01-21 17:21+0000\n"
-"Last-Translator: asd asd <ekeimaja@gmail.com>, 2022\n"
-"Language-Team: Finnish (https://www.transifex.com/anticapitalista/teams/10162/fi/)\n"
+"Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>, 2023\n"
+"Language-Team: Finnish (https://app.transifex.com/anticapitalista/teams/10162/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -36,7 +37,7 @@ msgstr "<b>Ajuri</b>"
 
 #: ../data/disk-manager.glade.h:2
 msgid "This driver seems to not be available for this type."
-msgstr ""
+msgstr "Tämä ohjain ei näytä olevan saatavilla tälle tyypille."
 
 #: ../data/disk-manager.glade.h:3
 msgid "<b>Mount point</b>"
@@ -44,7 +45,7 @@ msgstr "<b>Liitospiste</b>"
 
 #: ../data/disk-manager.glade.h:4
 msgid "<b>Options</b>"
-msgstr ""
+msgstr "<b>Valinnat</b>"
 
 #: ../data/disk-manager.glade.h:5
 msgid "Check device every 30 boots"
@@ -56,7 +57,7 @@ msgstr "<big><b>Määritystiedosto:</b></big>"
 
 #: ../data/disk-manager.glade.h:7
 msgid "<b>Vendor:</b>"
-msgstr ""
+msgstr "<b>Toimittaja:</b>"
 
 #: ../data/disk-manager.glade.h:8
 msgid "<b>Model:</b>"
@@ -89,7 +90,7 @@ msgstr "<b>Tyyppi:</b>"
 
 #: ../data/disk-manager.glade.h:15
 msgid "<b>Label:</b>"
-msgstr ""
+msgstr "<b>Nimi:</b>"
 
 #: ../data/disk-manager.glade.h:16
 msgid "<b>Mount point:</b>"
@@ -97,15 +98,15 @@ msgstr "<b>Liitospiste:</b>"
 
 #: ../data/disk-manager.glade.h:17
 msgid "<b>Options:</b>"
-msgstr ""
+msgstr "<b>Valinnat:</b>"
 
 #: ../data/disk-manager.glade.h:18
 msgid "Volume"
-msgstr ""
+msgstr "Asema"
 
 #: ../data/disk-manager.glade.h:19
 msgid "<b>Total size:</b>"
-msgstr "<b>Kokonaiskoko:</b>"
+msgstr "<b>Koko yhteensä:</b>"
 
 #: ../data/disk-manager.glade.h:20
 msgid "<b>Free space:</b>"
@@ -113,7 +114,7 @@ msgstr "<b>Vapaata tilaa:</b>"
 
 #: ../data/disk-manager.glade.h:21
 msgid "<b>Available space:</b>"
-msgstr "<b>Saatavilla oleva tila:</b>"
+msgstr "<b>Tilaa saatavilla:</b>"
 
 #: ../data/disk-manager.glade.h:22
 msgid "<b>Used space:</b>"
@@ -144,6 +145,7 @@ msgstr "Hallinnoi tiedostojärjestelmän määrityksiä"
 #, python-format
 msgid "No driver is available for this type of filesystem : '%s'"
 msgstr ""
+"Tämän tyyppiselle tiedostojärjestelmälle ei ole saatavilla ohjainta : '%s'"
 
 #: ../DiskManager/Dialogs.py:162
 msgid "Select a directory"
@@ -159,10 +161,12 @@ msgid ""
 "<i>%s</i> is currently in use.\n"
 "You should try another one."
 msgstr ""
+"<i>%s</i> on käytössä.\n"
+"Kokeile toista."
 
 #: ../DiskManager/Dialogs.py:243
 msgid "Options formatting error"
-msgstr ""
+msgstr "Valintojen muotoiluvirhe"
 
 #: ../DiskManager/Dialogs.py:244
 #, python-format
@@ -170,24 +174,32 @@ msgid ""
 "<i>%s</i> is not formatted correctly.\n"
 "Options should be separated by comma (,)"
 msgstr ""
+"<i>%s</i> ei ole muotoiltu oikein.\n"
+"Valinnat tulee erottaa pilkulla (,)"
 
 #: ../DiskManager/Dialogs.py:427
 msgid ""
 "Removing unknown devices from\n"
 "the configuration file?"
 msgstr ""
+"Poistetaanko tuntemattomat laitteet\n"
+"määritystiedostosta?"
 
 #: ../DiskManager/Dialogs.py:428
 msgid ""
 "I can not find any existing block devices\n"
 "corresponding to the following devices:"
 msgstr ""
+"En löydä olemassa olevia laitteita,\n"
+"jotka vastaavat seuraavia laitteita:"
 
 #: ../DiskManager/Dialogs.py:430
 msgid ""
 "It is advisable to remove them in order to avoid failed mount\n"
 "at start-up. Select the ones you want to remove."
 msgstr ""
+"Suositeltavaa on poistaa ne, jotta vältytään epäonnistuneelta\n"
+"kiinnitykseltä käynnistyksen aikana. Valitse poistettavat."
 
 #: ../DiskManager/Dialogs.py:433
 msgid "Remove selected"
@@ -199,12 +211,12 @@ msgstr "Älä näytä tätä varoitusta jatkossa."
 
 #: ../DiskManager/Dialogs.py:468
 msgid "Duplicate entry detected"
-msgstr ""
+msgstr "Päällekkäinen merkintä havaittu"
 
 #: ../DiskManager/Dialogs.py:469
 msgid ""
 "The following entries of your configuration file use the same mount point:"
-msgstr ""
+msgstr "Seuraavat määritystiedoston kohdat käyttävät samaa liitoskohtaa:"
 
 #: ../DiskManager/Dialogs.py:470
 msgid ""
@@ -212,6 +224,9 @@ msgid ""
 "You should select the one you want, and the others will be commented.\n"
 "They will be kept in the configuration file, but will be disabled."
 msgstr ""
+"Kaksi eri laitetta ei voi jakaa samaa liitoskohtaa. Valitse haluamasi,\n"
+"niin muut kommentoidaan käytöstä. Ne säilyvät asetustiedostossa,\n"
+"mutta eivät ole käytössä."
 
 #: ../DiskManager/Dialogs.py:473
 msgid "Keep selected"
@@ -219,11 +234,11 @@ msgstr "Pidä valittuna"
 
 #: ../DiskManager/Dialogs.py:506
 msgid "Easily manage your filesystem configuration"
-msgstr ""
+msgstr "Hallitse tiedostojärjestelmän asetuksia"
 
 #: ../DiskManager/Dialogs.py:510
 msgid "translator-credits"
-msgstr ""
+msgstr "Kimmo Kujansuu 2023"
 
 #: ../DiskManager/DiskManager.py:132
 msgid "Enable"
@@ -255,7 +270,7 @@ msgstr "Käytettynä"
 
 #: ../DiskManager/DiskManager.py:292
 msgid "Editing system partition?"
-msgstr ""
+msgstr "Muokataanko järjestelmän osiota?"
 
 #: ../DiskManager/DiskManager.py:294
 #, python-format
@@ -282,7 +297,7 @@ msgstr "Palautetaanko takaisin aiempaan versioon?"
 
 #: ../DiskManager/DiskManager.py:408
 msgid "This will apply the following changes:"
-msgstr ""
+msgstr "Tämä ottaa käyttöön seuraavat muutokset:"
 
 #: ../DiskManager/DiskManager.py:408
 msgid "Do you want to continue?"
@@ -290,45 +305,47 @@ msgstr "Haluatko jatkaa?"
 
 #: ../DiskManager/Utility.py:45
 msgid "KB"
-msgstr ""
+msgstr "KB"
 
 #: ../DiskManager/Utility.py:45
 msgid "MB"
-msgstr ""
+msgstr "MB"
 
 #: ../DiskManager/Utility.py:45
 msgid "GB"
-msgstr ""
+msgstr "GB"
 
 #: ../DiskManager/Utility.py:45
 msgid "TB"
-msgstr ""
+msgstr "TB"
 
 #: ../DiskManager/Fstab/FstabHandler.py:435
 msgid "Unmounting disabled devices?"
-msgstr ""
+msgstr "Irrotetaanko käytöstä poistettuja laitteita?"
 
 #: ../DiskManager/Fstab/FstabHandler.py:436
 msgid "You disabled the following devices:"
-msgstr ""
+msgstr "Poistit seuraavat laitteet:"
 
 #: ../DiskManager/Fstab/FstabHandler.py:436
 msgid "Do you want to unmount them?"
-msgstr ""
+msgstr "Haluatko irrottaa ne?"
 
 #: ../DiskManager/Fstab/FstabHandler.py:438
 msgid "Unmount selected"
-msgstr ""
+msgstr "Irrota valittu"
 
 #: ../DiskManager/Fstab/FstabHandler.py:447
 msgid "Reboot required"
-msgstr ""
+msgstr "Käynnistys uudellen vaaditaan"
 
 #: ../DiskManager/Fstab/FstabHandler.py:448
 msgid ""
 "In order to apply all your changes,\n"
 "you'll need to reboot your computer."
 msgstr ""
+"Jotta voit ottaa muutokset käyttöön,\n"
+"sinun on käynnistettävä tietokone uudelleen."
 
 #: ../DiskManager/Fstab/Mounter.py:56
 msgid "Mounting partition"
@@ -340,7 +357,7 @@ msgstr "Irrotetaan osio"
 
 #: ../DiskManager/Fstab/Mounter.py:60
 msgid "Applying changes"
-msgstr ""
+msgstr "Muutoksia otetaan käyttöön"
 
 #: ../DiskManager/Fstab/Mounter.py:66
 #, python-format
@@ -359,13 +376,13 @@ msgstr "Irrotus epäonnistui"
 #: ../DiskManager/Fstab/Mounter.py:116
 #, python-format
 msgid "Unmounting <i>%s</i> failed because of the following error:"
-msgstr ""
+msgstr "Irrottaminen <i>%s</i> epäonnistui virheen vuoksi:"
 
 #. TRANSLATORS:
 #. Keep the English term 'lazy' for the 'lazy' unmount option
 #: ../DiskManager/Fstab/Mounter.py:122
 msgid "You can also use the 'lazy' options to detach the filesystem now."
-msgstr ""
+msgstr "Voit käyttää myös \"lazy\" valintaa tiedostojärjestelmän irroittamiseen."
 
 #: ../DiskManager/Fstab/Mounter.py:127
 #, python-format
@@ -373,30 +390,34 @@ msgid ""
 "Unmounting <i>%s</i> failed, because\n"
 "it is currently used by the following applications:"
 msgstr ""
+"Irrottaminen <i>%s</i> epäonnistui, koska\n"
+"se on seuraavien sovellusten käytössä:"
 
 #: ../DiskManager/Fstab/Mounter.py:129
 msgid "Close all applications that use it and retry to unmount."
-msgstr ""
+msgstr "Sulje sovellukset, jotka käyttävät sitä ja yritä irroita uudelleen."
 
 #: ../DiskManager/Fstab/Mounter.py:132
 msgid "The filesystem might be temporarily busy. Wait few seconds and retry."
 msgstr ""
+"Tiedostojärjestelmä saattaa olla tilapäisesti varattu. Odota muutama sekunti"
+" ja yritä uudelleen."
 
 #. TRANSLATORS:
 #. Keep the English term 'lazy' for the 'lazy' unmount option
 #: ../DiskManager/Fstab/Mounter.py:137
 msgid "Unmount with the 'lazy' option"
-msgstr ""
+msgstr "Irrota \"lazy\" valinnalla"
 
 #: ../DiskManager/Fstab/Mounter.py:138
 msgid "Retry unmount"
-msgstr ""
+msgstr "Yritä irroitusta uudelleen"
 
 #. TRANSLATORS:
 #. Keep the English term 'lazy' for the 'lazy' unmount option
 #: ../DiskManager/Fstab/Mounter.py:143
 msgid "Even with the lazy option, unmounting failed."
-msgstr ""
+msgstr "Jopa lazy valinnalla irrottaminen epäonnistui."
 
 #: ../DiskManager/Fstab/Mounter.py:155
 msgid "Mounting failed"
@@ -405,7 +426,7 @@ msgstr "Liittäminen epäonnistui"
 #: ../DiskManager/Fstab/Mounter.py:156
 #, python-format
 msgid "Mounting <i>%s</i> failed because of the following error:"
-msgstr ""
+msgstr "Liitos <i>%s</i> epäonnistui virheen vuoksi:"
 
 #: ../DiskManager/Fstab/Mounter.py:159
 msgid "Retry mount"
@@ -413,31 +434,31 @@ msgstr "Yritä liittämistä uudelleen"
 
 #: ../DiskManager/Fstab/Mounter.py:190
 msgid "You can try one of the following actions:"
-msgstr ""
+msgstr "Voit kokeilla jotakin seuraavista:"
 
 #: ../DiskManager/Fstab/Mounter.py:193
 #, python-format
 msgid "It seems that option '%s' is not allowed."
-msgstr ""
+msgstr "Vaikuttaa siltä, että vaihtoehto \"%s\" ei ole sallittu."
 
 #: ../DiskManager/Fstab/Mounter.py:195
 msgid "Return options to defaults"
-msgstr ""
+msgstr "Palauta asetukset oletuksiin"
 
 #: ../DiskManager/Fstab/Mounter.py:197
 #, python-format
 msgid "Don't use the '%s' option"
-msgstr ""
+msgstr "Älä käytä \"%s\" vaihtoehtoa"
 
 #: ../DiskManager/Fstab/Mounter.py:199
 #, python-format
 msgid "It seems that fs type '%s' is not valid."
-msgstr ""
+msgstr "Näyttää siltä, että fs-tyyppi \"%s\" ei kelpaa."
 
 #: ../DiskManager/Fstab/Mounter.py:203
 #, python-format
 msgid "Using driver '%s' (%s)"
-msgstr ""
+msgstr "Käytetään ajuria \"%s\" (%s)"
 
 #. TRANSLATORS:
 #. Keep the English term 'force' for the 'force' unmount option
@@ -445,7 +466,9 @@ msgstr ""
 msgid ""
 "You can try to use the 'force' option. Be aware that this could be risky."
 msgstr ""
+"Voit yrittää käyttää \"force\" vahtoehtoa. Muista, että tämä voi olla "
+"riskialtista."
 
 #: ../DiskManager/Fstab/Mounter.py:212
 msgid "Use the 'force' option"
-msgstr ""
+msgstr "Käytä \"force\" vaihtoehtoa"

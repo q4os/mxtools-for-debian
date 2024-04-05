@@ -31,12 +31,12 @@
     <message>
         <location filename="../mainwindow.ui" line="141"/>
         <source>password</source>
-        <translation>κωδικός του νέου χρήστη</translation>
+        <translation>κωδικός νέου χρήστη</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="173"/>
         <source>Reenter password for new user</source>
-        <translation>Επανάληψη κωδικού του νέου χρήστη</translation>
+        <translation>Επανάληψη του κωδικού νέου χρήστη</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="182"/>
@@ -69,7 +69,7 @@
         <location filename="../mainwindow.ui" line="239"/>
         <location filename="../mainwindow.ui" line="258"/>
         <source>Password for new user</source>
-        <translation>Κωδικός του νέου χρήστη</translation>
+        <translation>Κωδικός νέου χρήστη</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="242"/>
@@ -623,7 +623,7 @@ Please choose another name before proceeding.</source>
     <message>
         <location filename="../mainwindow.cpp" line="440"/>
         <source>Failed to change password.</source>
-        <translation>Απέτυχε η αλλαγή του κωδικού.</translation>
+        <translation>Απέτυχε η αλλαγή κωδικού.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="446"/>
@@ -758,7 +758,7 @@ Please choose another name before proceeding.</source>
     <message>
         <location filename="../mainwindow.cpp" line="665"/>
         <source>Synchronizing desktop...failed</source>
-        <translation>Συγχρονισμός υπολογιστών   απέτυχε</translation>
+        <translation>Συγχρονισμός υπολογιστών...απέτυχε</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="667"/>
@@ -851,12 +851,12 @@ Please choose another name before proceeding.</source>
     <message>
         <location filename="../passedit.cpp" line="200"/>
         <source>Hide the password</source>
-        <translation>Απόκρυψη του κωδικού πρόσβασης </translation>
+        <translation>Απόκρυψη κωδικού πρόσβασης</translation>
     </message>
     <message>
         <location filename="../passedit.cpp" line="200"/>
         <source>Show the password</source>
-        <translation>Εμφάνιση κωδικού πρόσβασης </translation>
+        <translation>Εμφάνιση κωδικού πρόσβασης</translation>
     </message>
 </context>
 <context>

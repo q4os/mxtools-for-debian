@@ -5,7 +5,7 @@
 # 
 # Translators:
 # Mario <al.manja@gmx.com>, 2022
-# Arnold Marko <arnold.marko@gmail.com>, 2022
+# Arnold Marko <arnold.marko@gmail.com>, 2024
 # 
 #, fuzzy
 msgid ""
@@ -14,8 +14,8 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-01-16 00:46+0100\n"
 "PO-Revision-Date: 2022-01-21 17:21+0000\n"
-"Last-Translator: Arnold Marko <arnold.marko@gmail.com>, 2022\n"
-"Language-Team: Slovenian (https://www.transifex.com/anticapitalista/teams/10162/sl/)\n"
+"Last-Translator: Arnold Marko <arnold.marko@gmail.com>, 2024\n"
+"Language-Team: Slovenian (https://app.transifex.com/anticapitalista/teams/10162/sl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -24,80 +24,80 @@ msgstr ""
 
 #: ../disk-manager.in:66
 msgid "Insufficient rights"
-msgstr ""
+msgstr "Ni dovolj pravic"
 
 #: ../disk-manager.in:67
 msgid "You need administrative rights to start this application."
-msgstr ""
+msgstr "Za zagon tega programa potrebujete skrbniške pravice"
 
 #: ../data/disk-manager.glade.h:1
 msgid "<b>Driver</b>"
-msgstr ""
+msgstr "<b>Gonilnik</b>"
 
 #: ../data/disk-manager.glade.h:2
 msgid "This driver seems to not be available for this type."
-msgstr ""
+msgstr "Zdi se, da ta gonilnik ni na voljo za to vrsto."
 
 #: ../data/disk-manager.glade.h:3
 msgid "<b>Mount point</b>"
-msgstr ""
+msgstr "<b>Točka priklopa</b>"
 
 #: ../data/disk-manager.glade.h:4
 msgid "<b>Options</b>"
-msgstr ""
+msgstr "<b>Možnosti</b>"
 
 #: ../data/disk-manager.glade.h:5
 msgid "Check device every 30 boots"
-msgstr ""
+msgstr "Preveri napravo na vsakih 30 zagonov"
 
 #: ../data/disk-manager.glade.h:6
 msgid "<big><b>Configuration file:</b></big>"
-msgstr ""
+msgstr "<big><b>Nastavitvena datoteka:</b></big>"
 
 #: ../data/disk-manager.glade.h:7
 msgid "<b>Vendor:</b>"
-msgstr ""
+msgstr "<b>Proizvajalec:</b>"
 
 #: ../data/disk-manager.glade.h:8
 msgid "<b>Model:</b>"
-msgstr ""
+msgstr "<b>Model:</b>"
 
 #: ../data/disk-manager.glade.h:9
 msgid "<b>Serial:</b>"
-msgstr ""
+msgstr "<b>Serijska:</b>"
 
 #: ../data/disk-manager.glade.h:10
 msgid "<b>bus:</b>"
-msgstr ""
+msgstr "<b>vodilo:</b>"
 
 #: ../data/disk-manager.glade.h:11 ../DiskManager/Dialogs.py:372
 #: ../DiskManager/Dialogs.py:373 ../DiskManager/Dialogs.py:374
 msgid "Not available"
-msgstr ""
+msgstr "Ni na voljo"
 
 #: ../data/disk-manager.glade.h:12
 msgid "Drive"
-msgstr ""
+msgstr "Pogon"
 
 #: ../data/disk-manager.glade.h:13
 msgid "<b>Device:</b>"
-msgstr ""
+msgstr "<b>Naprava:</b>"
 
 #: ../data/disk-manager.glade.h:14
 msgid "<b>Type:</b>"
-msgstr ""
+msgstr "<b>Vrsta:</b>"
 
 #: ../data/disk-manager.glade.h:15
 msgid "<b>Label:</b>"
-msgstr ""
+msgstr "<b>Oznaka:</b>"
 
 #: ../data/disk-manager.glade.h:16
 msgid "<b>Mount point:</b>"
-msgstr ""
+msgstr "<b>Točka priklopa:</b>"
 
 #: ../data/disk-manager.glade.h:17
 msgid "<b>Options:</b>"
-msgstr ""
+msgstr "<b>Možnosti:</b>"
 
 #: ../data/disk-manager.glade.h:18
 msgid "Volume"
@@ -105,19 +105,19 @@ msgstr "Nosilec"
 
 #: ../data/disk-manager.glade.h:19
 msgid "<b>Total size:</b>"
-msgstr ""
+msgstr "<b>Celotna velikost:</b>"
 
 #: ../data/disk-manager.glade.h:20
 msgid "<b>Free space:</b>"
-msgstr ""
+msgstr "<b>Prazen prostor:</b>"
 
 #: ../data/disk-manager.glade.h:21
 msgid "<b>Available space:</b>"
-msgstr ""
+msgstr "<b>Razpoložljiv prostor:</b>"
 
 #: ../data/disk-manager.glade.h:22
 msgid "<b>Used space:</b>"
-msgstr ""
+msgstr "<b>Zaseden prostor:</b>"
 
 #: ../data/disk-manager.glade.h:23
 msgid "Size"
@@ -128,28 +128,30 @@ msgid ""
 "Applying changes.\n"
 "Please wait until the process finishes."
 msgstr ""
+"Uveljavljanje sprememb.\n"
+"Počakajte, da se postopek konča."
 
 #: ../data/disk-manager.desktop.in.in.h:1 ../DiskManager/Dialogs.py:489
 #: ../DiskManager/DiskManager.py:78
 msgid "Disk Manager"
-msgstr ""
+msgstr "Upravljalnik diskov"
 
 #: ../data/disk-manager.desktop.in.in.h:2
 msgid "Manage filesystem configuration"
-msgstr ""
+msgstr "Upravljanje konfiguracije datotečnega sistema"
 
 #: ../DiskManager/Dialogs.py:127 ../DiskManager/Fstab/Mounter.py:206
 #, python-format
 msgid "No driver is available for this type of filesystem : '%s'"
-msgstr ""
+msgstr "Za to vrsto datotečnega sistema ni gonilnika: '%s'"
 
 #: ../DiskManager/Dialogs.py:162
 msgid "Select a directory"
-msgstr ""
+msgstr "Izberite direktorij"
 
 #: ../DiskManager/Dialogs.py:231
 msgid "Wrong mount point"
-msgstr ""
+msgstr "Napačna točka priklopa"
 
 #: ../DiskManager/Dialogs.py:232
 #, python-format
@@ -157,10 +159,12 @@ msgid ""
 "<i>%s</i> is currently in use.\n"
 "You should try another one."
 msgstr ""
+"<i>%s</i> je trenutno v rabi.\n"
+"Poskusite z drugo."
 
 #: ../DiskManager/Dialogs.py:243
 msgid "Options formatting error"
-msgstr ""
+msgstr "Napaka v zapisu možnosti"
 
 #: ../DiskManager/Dialogs.py:244
 #, python-format
@@ -168,41 +172,50 @@ msgid ""
 "<i>%s</i> is not formatted correctly.\n"
 "Options should be separated by comma (,)"
 msgstr ""
+"<i>%s</i> ni pravilno oblikovan.\n"
+"Opcije naj bodo ločene z vejico (,)"
 
 #: ../DiskManager/Dialogs.py:427
 msgid ""
 "Removing unknown devices from\n"
 "the configuration file?"
 msgstr ""
+"Odstranim neznane naprave iz\n"
+"nastavitvene datoteke?"
 
 #: ../DiskManager/Dialogs.py:428
 msgid ""
 "I can not find any existing block devices\n"
 "corresponding to the following devices:"
 msgstr ""
+"Ne najdem obstoječih bločnih naprav,\n"
+"ki bi ustrezale naslednjim napravam:"
 
 #: ../DiskManager/Dialogs.py:430
 msgid ""
 "It is advisable to remove them in order to avoid failed mount\n"
 "at start-up. Select the ones you want to remove."
 msgstr ""
+"V izogib neuspelemu priklapljanju ob zagonu\n"
+"jih je priporočljivo odstraniti. Označite tiste, ki naj se odstranijo."
 
 #: ../DiskManager/Dialogs.py:433
 msgid "Remove selected"
-msgstr ""
+msgstr "Odstrani izbrane"
 
 #: ../DiskManager/Dialogs.py:433
 msgid "Don't show me this warning in the future."
-msgstr ""
+msgstr "Teka več ne prikaži."
 
 #: ../DiskManager/Dialogs.py:468
 msgid "Duplicate entry detected"
-msgstr ""
+msgstr "Zaznan je bil podvojen vnos"
 
 #: ../DiskManager/Dialogs.py:469
 msgid ""
 "The following entries of your configuration file use the same mount point:"
 msgstr ""
+"Naslednji vnosi v nastavitveni datoteki uporabljajo isto točko priklopa:"
 
 #: ../DiskManager/Dialogs.py:470
 msgid ""
@@ -210,22 +223,25 @@ msgid ""
 "You should select the one you want, and the others will be commented.\n"
 "They will be kept in the configuration file, but will be disabled."
 msgstr ""
+"Različni napravi ne moreta uporabljati iste točke priklopa.\n"
+"Izberite željeno, druga pa bo označena kot komentar\n"
+"in bo s tem v nastavitveni datoteki onemogočena."
 
 #: ../DiskManager/Dialogs.py:473
 msgid "Keep selected"
-msgstr ""
+msgstr "Obdrži izbrano"
 
 #: ../DiskManager/Dialogs.py:506
 msgid "Easily manage your filesystem configuration"
-msgstr ""
+msgstr "Enostavno upravljanje konfiguracije datotečnega sistema"
 
 #: ../DiskManager/Dialogs.py:510
 msgid "translator-credits"
-msgstr ""
+msgstr "Arnold Marko"
 
 #: ../DiskManager/DiskManager.py:132
 msgid "Enable"
-msgstr "Vključi"
+msgstr "Vklopi"
 
 #: ../DiskManager/DiskManager.py:138
 msgid "Device"
@@ -233,7 +249,7 @@ msgstr "Naprava"
 
 #: ../DiskManager/DiskManager.py:151
 msgid "Mount point"
-msgstr ""
+msgstr "Točka priklopa"
 
 #: ../DiskManager/DiskManager.py:158
 msgid "Type"
@@ -253,7 +269,7 @@ msgstr "Porabljeno"
 
 #: ../DiskManager/DiskManager.py:292
 msgid "Editing system partition?"
-msgstr ""
+msgstr "Urejanje sistemskega razdelka?"
 
 #: ../DiskManager/DiskManager.py:294
 #, python-format
@@ -262,6 +278,9 @@ msgid ""
 "Be really careful when editing it, or you may have\n"
 "serious problems. Do you want to continue?"
 msgstr ""
+"%s je pomemben sistemski razdelek.\n"
+"Bodite res previdni, ko ga urejate, sicer lahko\n"
+"imate resne težave. Ali želite nadaljevati?"
 
 #: ../DiskManager/DiskManager.py:399
 msgid "Unmount"
@@ -273,11 +292,11 @@ msgstr "Priklop"
 
 #: ../DiskManager/DiskManager.py:407
 msgid "Reverting to an older version?"
-msgstr ""
+msgstr "Povrnitev na starejšo različico?"
 
 #: ../DiskManager/DiskManager.py:408
 msgid "This will apply the following changes:"
-msgstr ""
+msgstr "To bo uveljavilo naslednje spremembe:"
 
 #: ../DiskManager/DiskManager.py:408
 msgid "Do you want to continue?"
@@ -285,82 +304,84 @@ msgstr "Želite nadaljevati?"
 
 #: ../DiskManager/Utility.py:45
 msgid "KB"
-msgstr ""
+msgstr "KB"
 
 #: ../DiskManager/Utility.py:45
 msgid "MB"
-msgstr ""
+msgstr "MB"
 
 #: ../DiskManager/Utility.py:45
 msgid "GB"
-msgstr ""
+msgstr "GB"
 
 #: ../DiskManager/Utility.py:45
 msgid "TB"
-msgstr ""
+msgstr "TB"
 
 #: ../DiskManager/Fstab/FstabHandler.py:435
 msgid "Unmounting disabled devices?"
-msgstr ""
+msgstr "Odklop onemogočenih naprav?"
 
 #: ../DiskManager/Fstab/FstabHandler.py:436
 msgid "You disabled the following devices:"
-msgstr ""
+msgstr "Naslednje naprave so bile onemogočene:"
 
 #: ../DiskManager/Fstab/FstabHandler.py:436
 msgid "Do you want to unmount them?"
-msgstr ""
+msgstr "Jih želite odklopiti?"
 
 #: ../DiskManager/Fstab/FstabHandler.py:438
 msgid "Unmount selected"
-msgstr ""
+msgstr "Odklopi izbrane"
 
 #: ../DiskManager/Fstab/FstabHandler.py:447
 msgid "Reboot required"
-msgstr ""
+msgstr "Potreben je ponovni zagon"
 
 #: ../DiskManager/Fstab/FstabHandler.py:448
 msgid ""
 "In order to apply all your changes,\n"
 "you'll need to reboot your computer."
 msgstr ""
+"Da bi uveljavili spremembe,\n"
+"morate znova zagnati računalnik."
 
 #: ../DiskManager/Fstab/Mounter.py:56
 msgid "Mounting partition"
-msgstr ""
+msgstr "Priklapljanje razdelkov"
 
 #: ../DiskManager/Fstab/Mounter.py:58
 msgid "Unmounting partition"
-msgstr ""
+msgstr "Odklapljanje razdelkov"
 
 #: ../DiskManager/Fstab/Mounter.py:60
 msgid "Applying changes"
-msgstr ""
+msgstr "Uveljavljanje sprememb"
 
 #: ../DiskManager/Fstab/Mounter.py:66
 #, python-format
 msgid "Unmounting %s"
-msgstr ""
+msgstr "Odklapljanje %s"
 
 #: ../DiskManager/Fstab/Mounter.py:80
 #, python-format
 msgid "Mounting %s"
-msgstr ""
+msgstr "Priklapljanje %s"
 
 #: ../DiskManager/Fstab/Mounter.py:115
 msgid "Unmounting failed"
-msgstr ""
+msgstr "Odklop ni uspel"
 
 #: ../DiskManager/Fstab/Mounter.py:116
 #, python-format
 msgid "Unmounting <i>%s</i> failed because of the following error:"
-msgstr ""
+msgstr "Odklop <i>%s</i> ni uspel zaradi naslednje napake:"
 
 #. TRANSLATORS:
 #. Keep the English term 'lazy' for the 'lazy' unmount option
 #: ../DiskManager/Fstab/Mounter.py:122
 msgid "You can also use the 'lazy' options to detach the filesystem now."
-msgstr ""
+msgstr "Za odklop datotečnega sistema lahko uporabite tudi opcijo 'lazy'."
 
 #: ../DiskManager/Fstab/Mounter.py:127
 #, python-format
@@ -368,71 +389,75 @@ msgid ""
 "Unmounting <i>%s</i> failed, because\n"
 "it is currently used by the following applications:"
 msgstr ""
+"Odklop <i>%s</i> ni uspel, ker ga trenutno uporablja naslednja aplikacija:"
 
 #: ../DiskManager/Fstab/Mounter.py:129
 msgid "Close all applications that use it and retry to unmount."
 msgstr ""
+"Zapri vse aplikacije, ki napravo uporabljajo in poskusi znova z odklopom."
 
 #: ../DiskManager/Fstab/Mounter.py:132
 msgid "The filesystem might be temporarily busy. Wait few seconds and retry."
 msgstr ""
+"Datotečni sistem je trenutno zaposlen. Počakajte nekaj sekund in poskusite "
+"znova."
 
 #. TRANSLATORS:
 #. Keep the English term 'lazy' for the 'lazy' unmount option
 #: ../DiskManager/Fstab/Mounter.py:137
 msgid "Unmount with the 'lazy' option"
-msgstr ""
+msgstr "Odklop z opcijo 'lazy'"
 
 #: ../DiskManager/Fstab/Mounter.py:138
 msgid "Retry unmount"
-msgstr ""
+msgstr "Ponovi poskus odklopa"
 
 #. TRANSLATORS:
 #. Keep the English term 'lazy' for the 'lazy' unmount option
 #: ../DiskManager/Fstab/Mounter.py:143
 msgid "Even with the lazy option, unmounting failed."
-msgstr ""
+msgstr "Odklop ni uspel celo ob rabi opcije 'lazy'"
 
 #: ../DiskManager/Fstab/Mounter.py:155
 msgid "Mounting failed"
-msgstr ""
+msgstr "Priklop ni uspel"
 
 #: ../DiskManager/Fstab/Mounter.py:156
 #, python-format
 msgid "Mounting <i>%s</i> failed because of the following error:"
-msgstr ""
+msgstr "Priklop <i>%s</i> ni uspel zaradi naslednje napake:"
 
 #: ../DiskManager/Fstab/Mounter.py:159
 msgid "Retry mount"
-msgstr ""
+msgstr "Ponovi poskus priklopa"
 
 #: ../DiskManager/Fstab/Mounter.py:190
 msgid "You can try one of the following actions:"
-msgstr ""
+msgstr "Lahko poskusite z enim od naslednjih dejanj:"
 
 #: ../DiskManager/Fstab/Mounter.py:193
 #, python-format
 msgid "It seems that option '%s' is not allowed."
-msgstr ""
+msgstr "Videti je, da opcija '%s' ni dovoljena."
 
 #: ../DiskManager/Fstab/Mounter.py:195
 msgid "Return options to defaults"
-msgstr ""
+msgstr "Povrni opcije na privzete"
 
 #: ../DiskManager/Fstab/Mounter.py:197
 #, python-format
 msgid "Don't use the '%s' option"
-msgstr ""
+msgstr "Ne uporabite opcije '%s'"
 
 #: ../DiskManager/Fstab/Mounter.py:199
 #, python-format
 msgid "It seems that fs type '%s' is not valid."
-msgstr ""
+msgstr "Videti je, da vrsta datotečnega sistema '%s' ni ustrezna."
 
 #: ../DiskManager/Fstab/Mounter.py:203
 #, python-format
 msgid "Using driver '%s' (%s)"
-msgstr ""
+msgstr "Uporabljen gonilnik '%s'(%s)"
 
 #. TRANSLATORS:
 #. Keep the English term 'force' for the 'force' unmount option
@@ -440,7 +465,9 @@ msgstr ""
 msgid ""
 "You can try to use the 'force' option. Be aware that this could be risky."
 msgstr ""
+"Lahko poskusite uporabiti opcijo 'force'. Zavedajte se, da je to lahko "
+"tvegano."
 
 #: ../DiskManager/Fstab/Mounter.py:212
 msgid "Use the 'force' option"
-msgstr ""
+msgstr "Uporabi opcijo 'force'"

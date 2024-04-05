@@ -472,7 +472,7 @@
     <message>
         <location filename="../mainwindow.ui" line="1654"/>
         <source>Apply</source>
-        <translation>Potrdi</translation>
+        <translation>Uveljavi</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1661"/>
@@ -763,7 +763,7 @@ Izberite drugo ime.</translation>
     <message>
         <location filename="../mainwindow.cpp" line="667"/>
         <source>Copying desktop...failed</source>
-        <translation>Kopiranje namizia... neuspešno!</translation>
+        <translation>Kopiranje namizja... ni uspelo!</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="686"/>

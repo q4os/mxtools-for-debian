@@ -1,7 +1,7 @@
 /**********************************************************************
  *  mainwindow.h
  **********************************************************************
- * Copyright (C) 2015 MX Authors
+ * Copyright (C) 2015-2024 MX Authors
  *
  * Authors: Adrian
  *          MX Linux <http://mxlinux.org>
@@ -21,9 +21,7 @@
  * You should have received a copy of the GNU General Public License
  * along with mx-repo-manager.  If not, see <http://www.gnu.org/licenses/>.
  **********************************************************************/
-
-#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
+#pragma once
 
 #include <QDir>
 #include <QListWidgetItem>
@@ -104,5 +102,3 @@ private:
     static bool checkRepo(const QString &repo);
     bool downloadFile(const QString &url, QFile *file);
 };
-
-#endif // MAINWINDOW_H

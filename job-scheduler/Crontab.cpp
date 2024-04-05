@@ -13,21 +13,24 @@
 #include "Crontab.h"
 
 Crontab::Crontab(const QString &user)
-    : CronType(CronType::CRON)
-    , cronOwner(user)
-    , changed(false)
+    : CronType(CronType::CRON),
+      cronOwner(user),
+      changed(false)
 {
     QString str = getCrontab(user);
-    if (!str.isEmpty())
+    if (!str.isEmpty()) {
         setup(str);
+    }
 }
 
 Crontab::~Crontab()
 {
-    for (auto &c : tCommands)
+    for (auto &c : tCommands) {
         delete c;
-    for (auto &v : variables)
+    }
+    for (auto &v : variables) {
         delete v;
+    }
 }
 
 QString Crontab::getCrontab(const QString &user)
@@ -44,10 +47,11 @@ QString Crontab::getCrontab(const QString &user)
 
     } else {
         QProcess p;
-        if (user == Clib::uName())
+        if (user == Clib::uName()) {
             p.start(QStringLiteral("crontab"), QStringList() << QStringLiteral("-l"));
-        else
+        } else {
             p.start(QStringLiteral("crontab"), QStringList() << QStringLiteral("-u") << user << QStringLiteral("-l"));
+        }
 
         if (!p.waitForStarted()) {
             estr = "can't get crontab\n\nQProcess::waitForStarted():" + QString::number(p.error());
@@ -76,14 +80,14 @@ QString Crontab::writeTempFile(const QString &text, const QString &tmp)
     if (!QFileInfo::exists(fdir)) {
         if (!QDir(fdir).mkdir(fdir)) {
             estr = "can't create directory " + fdir;
-            return QString();
+            return {};
         }
     }
     QTemporaryFile f(fdir + "/" + tmp);
     f.setAutoRemove(false);
     if (!f.open()) {
         estr = "can't open temporary file\n\n" + f.errorString();
-        return QString();
+        return {};
     }
     QTextStream t(&f);
     t << text;
@@ -105,14 +109,16 @@ bool Crontab::putCrontab(const QString &text)
         t << text;
     } else {
         QString fname = writeTempFile(text, cronOwner);
-        if (fname.isEmpty())
+        if (fname.isEmpty()) {
             return false;
+        }
 
         QProcess p;
-        if (Clib::uId() == 0)
+        if (Clib::uId() == 0) {
             p.start(QStringLiteral("crontab"), QStringList() << QStringLiteral("-u") << cronOwner << fname);
-        else
+        } else {
             p.start(QStringLiteral("crontab"), QStringList() << fname);
+        }
 
         if (!p.waitForStarted()) {
             estr = "can't update crontab\n\nQProcess::waitForStarted():" + QString::number(p.error());
@@ -145,21 +151,24 @@ QString Crontab::cronText()
     }
 
     for (Variable *v : qAsConst(variables)) {
-        if (!v->comment.isEmpty())
+        if (!v->comment.isEmpty()) {
             ret += "# " + v->comment.replace('\n', QLatin1String("\n# ")) + '\n';
+        }
 
         ret += v->name + "=" + v->value + '\n';
     }
 
     ret += QLatin1String("\n");
     for (TCommand *c : qAsConst(tCommands)) {
-        if (!c->comment.isEmpty())
+        if (!c->comment.isEmpty()) {
             ret += "# " + c->comment.replace('\n', QLatin1String("\n# ")) + '\n';
+        }
 
-        if (cronOwner == QLatin1String("/etc/crontab"))
+        if (cronOwner == QLatin1String("/etc/crontab")) {
             ret += c->time + " " + c->user + " " + c->command + '\n';
-        else
+        } else {
             ret += c->time + " " + c->command + '\n';
+        }
     }
 
     return ret;
@@ -184,18 +193,20 @@ void Crontab::setup(const QString &str)
         s = s.simplified();
         if (s.isEmpty()) {
             if (headflag == 0) {
-                if (head.count() > 0)
+                if (head.count() > 0) {
                     head << s;
+                }
                 head << cmnt;
                 cmnt.clear();
             } else {
                 cmnt << s;
             }
         } else if (s.at(0) == '#') {
-            if (s.size() > 1 && s.at(1) == ' ')
+            if (s.size() > 1 && s.at(1) == ' ') {
                 cmnt << s.mid(2);
-            else
+            } else {
                 cmnt << s.mid(1);
+            }
 
         } else {
             if (headflag == 0) {
@@ -215,10 +226,11 @@ void Crontab::setup(const QString &str)
                 // Command
                 QRegularExpression sep(QStringLiteral("\\s+"));
                 int n = 0;
-                if (s.at(0) == '@')
+                if (s.at(0) == '@') {
                     n = 0;
-                else
+                } else {
                     n = 4;
+                }
 
                 QString time = s.section(sep, 0, n);
                 QString user = cronOwner;
@@ -242,8 +254,9 @@ QString Crontab::list2String(const QStringList &list)
     bool flag = false;
 
     for (const QString &s : list) {
-        if (flag)
+        if (flag) {
             ret += '\n';
+        }
         ret += s;
         flag = true;
     }

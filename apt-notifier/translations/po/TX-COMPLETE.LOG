@@ -1,5 +1,5 @@
 # Languages codes with translation completness  >= 5%
-# generated with tx-complete.sh at Sat, 01 Jul 2023 20:06:47 -0500
+# generated with tx-complete.sh at Mon, 25 Mar 2024 17:31:02 -0500
    Nr.		Cnt.	 Compl.		Code		Language
    ---		----	 ------		----		--------
      1		  83	   100%    	ca      	ca	Catalan; Valencian
@@ -11,39 +11,40 @@
      7		  83	   100%    	fi      	fi	Finnish
      8		  83	   100%    	fr      	fr	French
      9		  83	   100%    	fr_BE   	fr	French @ Belgium
-    10		  83	   100%    	hi      	hi	Hindi
-    11		  83	   100%    	hu      	hu	Hungarian
-    12		  83	   100%    	it      	it	Italian
-    13		  83	   100%    	ja      	ja	Japanese
-    14		  83	   100%    	nb      	nb	Bokmål, Norwegian; Norwegian Bokmål
-    15		  83	   100%    	nl      	nl	Dutch; Flemish
-    16		  83	   100%    	pl      	pl	Polish
-    17		  83	   100%    	pt      	pt	Portuguese
-    18		  83	   100%    	pt_BR   	pt	Portuguese @ Brazil
-    19		  83	   100%    	ru      	ru	Russian
-    20		  83	   100%    	sl      	sl	Slovenian
-    21		  83	   100%    	sv      	sv	Swedish
-    22		  83	   100%    	tr      	tr	Turkish
-    23		  80	    96%    	sq      	sq	Albanian
-    24		  79	    95%    	nl_BE   	nl	Dutch; Flemish @ Belgium
-    25		  77	    92%    	gl_ES   	gl	Galician @ Spain
-    26		  72	    86%    	da      	da	Danish
-    27		  69	    83%    	fil_PH  		Filipino @ Philippines
-    28		  52	    62%    	fa      	fa	Persian
-    29		  48	    57%    	sk      	sk	Slovak
-    30		  44	    53%    	am      	am	Amharic
-    31		  44	    53%    	hr      	hr	Croatian
-    32		  44	    53%    	lt      	lt	Lithuanian
-    33		  35	    42%    	th      	th	Thai
-    34		  30	    36%    	zh_TW   	zh	Chinese @ Taiwan, Province of China
-    35		  26	    31%    	zh_CN   	zh	Chinese @ China
-    36		  18	    21%    	he_IL   	he	Hebrew @ Israel
-    37		   9	    10%    	ro      	ro	Romanian; Moldavian; Moldovan
-    38		   9	    10%    	uk      	uk	Ukrainian
-    39		   8	     9%    	nb_NO   	nb	Bokmål, Norwegian; Norwegian Bokmål @ Norway
-    40		   7	     8%    	is      	is	Icelandic
-    41		   6	     7%    	bg      	bg	Bulgarian
-    42		   6	     7%    	vi      	vi	Vietnamese
-    43		   5	     6%    	ar      	ar	Arabic
-    44		   5	     6%    	id      	id	Indonesian
-    45		   5	     6%    	kk      	kk	Kazakh
+    10		  83	   100%    	gl_ES   	gl	Galician @ Spain
+    11		  83	   100%    	hi      	hi	Hindi
+    12		  83	   100%    	hu      	hu	Hungarian
+    13		  83	   100%    	it      	it	Italian
+    14		  83	   100%    	ja      	ja	Japanese
+    15		  83	   100%    	nb      	nb	Bokmål, Norwegian; Norwegian Bokmål
+    16		  83	   100%    	nl      	nl	Dutch; Flemish
+    17		  83	   100%    	pl      	pl	Polish
+    18		  83	   100%    	pt      	pt	Portuguese
+    19		  83	   100%    	pt_BR   	pt	Portuguese @ Brazil
+    20		  83	   100%    	ru      	ru	Russian
+    21		  83	   100%    	sl      	sl	Slovenian
+    22		  83	   100%    	sv      	sv	Swedish
+    23		  83	   100%    	tr      	tr	Turkish
+    24		  82	    98%    	ru_RU   	ru	Russian @ Russian Federation
+    25		  80	    96%    	sq      	sq	Albanian
+    26		  79	    95%    	nl_BE   	nl	Dutch; Flemish @ Belgium
+    27		  72	    86%    	da      	da	Danish
+    28		  69	    83%    	fil_PH  		Filipino @ Philippines
+    29		  52	    62%    	fa      	fa	Persian
+    30		  48	    57%    	sk      	sk	Slovak
+    31		  44	    53%    	am      	am	Amharic
+    32		  44	    53%    	hr      	hr	Croatian
+    33		  44	    53%    	lt      	lt	Lithuanian
+    34		  35	    42%    	th      	th	Thai
+    35		  30	    36%    	zh_TW   	zh	Chinese @ Taiwan, Province of China
+    36		  26	    31%    	zh_CN   	zh	Chinese @ China
+    37		  24	    28%    	he_IL   	he	Hebrew @ Israel
+    38		   9	    10%    	ro      	ro	Romanian; Moldavian; Moldovan
+    39		   9	    10%    	uk      	uk	Ukrainian
+    40		   8	     9%    	nb_NO   	nb	Bokmål, Norwegian; Norwegian Bokmål @ Norway
+    41		   7	     8%    	is      	is	Icelandic
+    42		   6	     7%    	bg      	bg	Bulgarian
+    43		   6	     7%    	vi      	vi	Vietnamese
+    44		   5	     6%    	ar      	ar	Arabic
+    45		   5	     6%    	id      	id	Indonesian
+    46		   5	     6%    	kk      	kk	Kazakh

@@ -47,7 +47,7 @@ void DownloadWidget::downloadRequested(QWebEngineDownloadItem* download)
     QWebEngineProfile::defaultProfile()->setDownloadPath(download->downloadDirectory());
     download->setDownloadFileName(QFileInfo(path).fileName());
     auto* downloadLabel = new QLabel;
-    auto* pushButton = new QPushButton(QIcon::fromTheme(QStringLiteral("cancel")), tr("cancel"));
+    auto* pushButton = new QPushButton(QIcon::fromTheme("cancel"), tr("cancel"));
     auto* progressBar = new QProgressBar(this);
     downloadLabel->setText(download->downloadFileName());
     int row = ui->gridLayout->rowCount();
@@ -58,7 +58,7 @@ void DownloadWidget::downloadRequested(QWebEngineDownloadItem* download)
     ui->gridLayout->addItem(ui->verticalSpacer, row + 1, 1);
 
     if (!isVisible()) {
-        restoreGeometry(settings.value(QStringLiteral("DownloadGeometry")).toByteArray());
+        restoreGeometry(settings.value("DownloadGeometry").toByteArray());
         show();
     }
     raise();
@@ -151,11 +151,11 @@ void DownloadWidget::updateDownload(QWebEngineDownloadItem* download, QPushButto
     }
 
     if (state == QWebEngineDownloadItem::DownloadInProgress) {
-        pushButton->setIcon(QIcon::fromTheme(QStringLiteral("process-stop")));
+        pushButton->setIcon(QIcon::fromTheme("process-stop"));
         pushButton->setText(tr("Cancel"));
         pushButton->setToolTip(tr("Cancel downloading"));
     } else {
-        pushButton->setIcon(QIcon::fromTheme(QStringLiteral("edit-clear")));
+        pushButton->setIcon(QIcon::fromTheme("edit-clear"));
         pushButton->setText(tr("Remove"));
         pushButton->setToolTip(tr("Remove from list"));
     }
@@ -164,5 +164,5 @@ void DownloadWidget::updateDownload(QWebEngineDownloadItem* download, QPushButto
 void DownloadWidget::closeEvent(QCloseEvent* event)
 {
     event->accept();
-    settings.setValue(QStringLiteral("DownloadGeometry"), saveGeometry());
+    settings.setValue("DownloadGeometry", saveGeometry());
 }

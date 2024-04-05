@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-09-04 12:16-0400\n"
+"POT-Creation-Date: 2023-09-04 16:09-0400\n"
 "PO-Revision-Date: 2022-12-10 04:09+0000\n"
 "Last-Translator: Krzesimir Chrząstowicz <golemiko@gmail.com>, 2023\n"
 "Language-Team: Polish (https://app.transifex.com/anticapitalista/teams/10162/pl/)\n"
@@ -32,6 +32,8 @@ msgstr "Szybka Informacja o systemie"
 msgid "inxi -Fxxxrza"
 msgstr "inxi -Fxxxrza"
 
-#: desktop-in/Quick_System_Info.desktop.in:16
+#. Translator note:  please add translated keywords to the list but keep the
+#. english ones as well
+#: desktop-in/Quick_System_Info.desktop.in:17
 msgid "qsi;quick;system;info;"
 msgstr ""

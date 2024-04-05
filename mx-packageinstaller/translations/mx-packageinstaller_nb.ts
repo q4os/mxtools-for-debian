@@ -855,7 +855,7 @@ Close the program, or wait until it is done processing and try again.</source>
 Lukk dette programmet, eller vent til det er ferdig, og forsøk igjen.</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="77"/>
+        <location filename="../main.cpp" line="78"/>
         <source>MX Package Installer is a tool used for managing packages on MX Linux
     - installs popular programs from different sources
     - installs programs from the MX Test repo
@@ -868,23 +868,23 @@ Lukk dette programmet, eller vent til det er ferdig, og forsøk igjen.</translat
 – kan installere flatpaks</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="85"/>
+        <location filename="../main.cpp" line="86"/>
         <source>Skip online check if it falsely reports lack of internet access.</source>
         <translation>Hopp over nettsjekk hvis den feilaktig sier at internett-tilgang mangler.</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="95"/>
-        <location filename="../main.cpp" line="103"/>
+        <location filename="../main.cpp" line="96"/>
+        <location filename="../main.cpp" line="104"/>
         <source>Error</source>
         <translation>Feil</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="96"/>
+        <location filename="../main.cpp" line="97"/>
         <source>You seem to be logged in as root, please log out and log in as normal user to use this program.</source>
         <translation>Du er innlogget som root. Vennligst logg ut, og logg inn igjen som en vanlig bruker for å bruke dette programmet.</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="104"/>
+        <location filename="../main.cpp" line="105"/>
         <source>You must run this program with admin access.</source>
         <translation>Dette programmet må kjøres med administratorrettigheter.</translation>
     </message>

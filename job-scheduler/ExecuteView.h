@@ -7,8 +7,7 @@
    as published by the Free Software Foundation; either version 2
    of the License, or (at your option) any later version.
 */
-#ifndef EXECUTEVIEW_H
-#define EXECUTEVIEW_H
+#pragma once
 
 #include <QTreeView>
 
@@ -20,9 +19,12 @@ class ExecuteView : public QTreeView
 {
     Q_OBJECT
 public:
-    ExecuteView(ExecuteModel *model);
+    explicit ExecuteView(ExecuteModel *model, QWidget *parent = nullptr);
     void resetView();
-    void hideUser(bool flag) { setColumnHidden(2, flag); }
+    void hideUser(bool flag)
+    {
+        setColumnHidden(2, flag);
+    }
 
 public slots:
     void selectChanged(const QModelIndex &idx, const QModelIndex &prev);
@@ -31,9 +33,7 @@ signals:
     void viewSelected(TCommand *cmnd);
 
 private:
-    void scrollTo(const QModelIndex &, ScrollHint);
+    void scrollTo(const QModelIndex & /*index*/, ScrollHint /*hint*/) override;
 
     ExecuteModel *executeModel;
 };
-
-#endif

@@ -11,3 +11,4 @@ Terminal=false
 StartupNotify=false
 Categories=System;Qt;KDE;Utility;X-KDE-Utilities-Desktop;
 StartupWMClass=apt-notifier
+Keywords=apt;update;upgrade;notifier;

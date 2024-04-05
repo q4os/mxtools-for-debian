@@ -1,5 +1,5 @@
 # **********************************************************************
-# * Copyright (C) 2015 MX Authors
+# * Copyright (C) 2015-2024 MX Authors
 # *
 # * Authors: Adrian
 # *          Paul David Callahan

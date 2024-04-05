@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="fr">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="fr">
 <context>
     <name>CronModel</name>
     <message>
@@ -210,12 +208,12 @@
         <location filename="../MainWindow.cpp" line="178"/>
         <location filename="../MainWindow.cpp" line="180"/>
         <source>&amp;Help</source>
-        <translation>Aide &amp;?</translation>
+        <translation>A&amp;ide</translation>
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="179"/>
         <source>&amp;About</source>
-        <translation>A propos &amp;de</translation>
+        <translation>À propos &amp;de</translation>
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="237"/>

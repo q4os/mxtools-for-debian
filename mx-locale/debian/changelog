@@ -1,3 +1,9 @@
+mx-locale (24.3) mx; urgency=medium
+
+  * Update translations
+
+ -- Adrian <adrian@mxlinux.org>  Sat, 23 Mar 2024 12:52:18 -0400
+
 mx-locale (24.1.15) mx; urgency=medium
 
   * Use "UTF-8" instead of "utf8" to avoid locale warnings

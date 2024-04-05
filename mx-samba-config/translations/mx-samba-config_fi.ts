@@ -11,7 +11,7 @@
     <message>
         <location filename="../editshare.ui" line="20"/>
         <source>&amp;Name</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Nimi</translation>
     </message>
     <message>
         <location filename="../editshare.ui" line="30"/>
@@ -21,7 +21,7 @@
     <message>
         <location filename="../editshare.ui" line="37"/>
         <source>&amp;Path</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Polku</translation>
     </message>
     <message>
         <location filename="../editshare.ui" line="51"/>
@@ -36,22 +36,22 @@
     <message>
         <location filename="../editshare.ui" line="64"/>
         <source>&amp;Comment</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Kommentti</translation>
     </message>
     <message>
         <location filename="../editshare.ui" line="77"/>
         <source>&amp;Guest OK</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Vierailia OK</translation>
     </message>
     <message>
         <location filename="../editshare.ui" line="111"/>
         <source>Access rights for valid users</source>
-        <translation type="unfinished"></translation>
+        <translation>Pääsyoikeudet voimassa oleville käyttäjille</translation>
     </message>
     <message>
-        <location filename="../editshare.cpp" line="48"/>
+        <location filename="../editshare.cpp" line="52"/>
         <source>Select directory to share</source>
-        <translation type="unfinished"></translation>
+        <translation>Valitse jaettava hakemisto</translation>
     </message>
 </context>
 <context>
@@ -59,7 +59,7 @@
     <message>
         <location filename="../mainwindow.ui" line="24"/>
         <source>&amp;Shares</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Jakaminen</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="32"/>
@@ -69,7 +69,7 @@
     <message>
         <location filename="../mainwindow.ui" line="41"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;No samba user shares found&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Samban jakoja ei löytynyt&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="50"/>
@@ -96,7 +96,7 @@
     <message>
         <location filename="../mainwindow.ui" line="85"/>
         <source>Path</source>
-        <translation type="unfinished"></translation>
+        <translation>Polku</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="90"/>
@@ -111,7 +111,7 @@
     <message>
         <location filename="../mainwindow.ui" line="100"/>
         <source>Guest OK</source>
-        <translation type="unfinished"></translation>
+        <translation>Vierailia OK</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="142"/>
@@ -121,7 +121,7 @@
     <message>
         <location filename="../mainwindow.ui" line="150"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;No samba users found&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Samba käyttäjiä ei löydy&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="171"/>
@@ -135,28 +135,28 @@
     </message>
     <message>
         <location filename="../mainwindow.ui" line="219"/>
-        <location filename="../mainwindow.cpp" line="327"/>
-        <location filename="../mainwindow.cpp" line="353"/>
+        <location filename="../mainwindow.cpp" line="326"/>
+        <location filename="../mainwindow.cpp" line="352"/>
         <source>E&amp;nable Automatic Samba Startup</source>
-        <translation type="unfinished"></translation>
+        <translation>Samban käy&amp;nnistyy automaattisesti</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="226"/>
-        <location filename="../mainwindow.cpp" line="302"/>
-        <location filename="../mainwindow.cpp" line="363"/>
+        <location filename="../mainwindow.cpp" line="301"/>
+        <location filename="../mainwindow.cpp" line="362"/>
         <source>Star&amp;t Samba</source>
-        <translation type="unfinished"></translation>
+        <translation>Käynnis&amp;tä Samba</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="254"/>
         <source>Samba autostart service is disabled</source>
-        <translation type="unfinished"></translation>
+        <translation>Samba automaattinen käynnistyspalvelu ei ole käytössä</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="285"/>
-        <location filename="../mainwindow.cpp" line="300"/>
+        <location filename="../mainwindow.cpp" line="299"/>
         <source>Samba is running</source>
-        <translation type="unfinished"></translation>
+        <translation>Samba on käynnissä</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="324"/>
@@ -166,7 +166,7 @@
     <message>
         <location filename="../mainwindow.ui" line="327"/>
         <source>A&amp;bout...</source>
-        <translation type="unfinished"></translation>
+        <translation>T&amp;ietoja...</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="334"/>
@@ -209,32 +209,32 @@
         <location filename="../mainwindow.cpp" line="129"/>
         <location filename="../mainwindow.cpp" line="141"/>
         <location filename="../mainwindow.cpp" line="216"/>
-        <location filename="../mainwindow.cpp" line="288"/>
-        <location filename="../mainwindow.cpp" line="306"/>
-        <location filename="../mainwindow.cpp" line="404"/>
-        <location filename="../mainwindow.cpp" line="432"/>
-        <location filename="../mainwindow.cpp" line="436"/>
-        <location filename="../mainwindow.cpp" line="442"/>
-        <location filename="../mainwindow.cpp" line="448"/>
-        <location filename="../mainwindow.cpp" line="479"/>
-        <location filename="../mainwindow.cpp" line="485"/>
-        <location filename="../mainwindow.cpp" line="501"/>
-        <location filename="../mainwindow.cpp" line="513"/>
-        <location filename="../mainwindow.cpp" line="538"/>
-        <location filename="../mainwindow.cpp" line="556"/>
-        <location filename="../mainwindow.cpp" line="569"/>
+        <location filename="../mainwindow.cpp" line="287"/>
+        <location filename="../mainwindow.cpp" line="305"/>
+        <location filename="../mainwindow.cpp" line="403"/>
+        <location filename="../mainwindow.cpp" line="431"/>
+        <location filename="../mainwindow.cpp" line="435"/>
+        <location filename="../mainwindow.cpp" line="441"/>
+        <location filename="../mainwindow.cpp" line="447"/>
+        <location filename="../mainwindow.cpp" line="478"/>
+        <location filename="../mainwindow.cpp" line="484"/>
+        <location filename="../mainwindow.cpp" line="500"/>
+        <location filename="../mainwindow.cpp" line="512"/>
+        <location filename="../mainwindow.cpp" line="537"/>
+        <location filename="../mainwindow.cpp" line="555"/>
+        <location filename="../mainwindow.cpp" line="568"/>
         <source>Error</source>
         <translation>Virhe</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="94"/>
         <source>Error, could not add share. Empty share name</source>
-        <translation type="unfinished"></translation>
+        <translation>Virhe, jakoa ei voitu lisätä. Jakonimi on tyhjä</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="99"/>
         <source>Path: %1 doesn&apos;t exist.</source>
-        <translation type="unfinished"></translation>
+        <translation>Polkua: %1 ei ole olemassa.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="126"/>
@@ -246,12 +246,14 @@
         <source>Could not add share. Error message:
 
 %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Jakoa ei voitu lisätä. Virhe:
+
+%1</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="141"/>
         <source>Error listing users</source>
-        <translation type="unfinished"></translation>
+        <translation>Virhe käyttäjien luettelossa</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="169"/>
@@ -261,7 +263,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="180"/>
         <source>&amp;Read Only</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Vain luku</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="191"/>
@@ -271,142 +273,142 @@
     <message>
         <location filename="../mainwindow.cpp" line="216"/>
         <source>Error listing shares</source>
-        <translation type="unfinished"></translation>
+        <translation>Virhe jakojen luettelossa</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="289"/>
+        <location filename="../mainwindow.cpp" line="288"/>
         <source>Your user doesn&apos;t belong to &apos;sambashare&apos; group  if you just installed the app you might need to restart the system first.</source>
-        <translation type="unfinished"></translation>
+        <translation>Käyttäjä ei kuulu &quot;sambashare&quot;-ryhmään, jos olet juuri asentanut sovelluksen, käynnistä järjestelmä ensin uudelleen.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="299"/>
+        <location filename="../mainwindow.cpp" line="298"/>
         <source>Sto&amp;p Samba</source>
-        <translation type="unfinished"></translation>
+        <translation>P&amp;ysäytä Samba</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="303"/>
+        <location filename="../mainwindow.cpp" line="302"/>
         <source>Samba is not running</source>
-        <translation type="unfinished"></translation>
+        <translation>Samba ei ole käynnissä</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="306"/>
+        <location filename="../mainwindow.cpp" line="305"/>
         <source>Samba not installed</source>
-        <translation type="unfinished"></translation>
+        <translation>Samba ei ole asennettuna</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="324"/>
+        <location filename="../mainwindow.cpp" line="323"/>
         <source>&amp;Disable Automatic Samba Startup</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Poista Samba automaattinen käynnistys</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="378"/>
+        <location filename="../mainwindow.cpp" line="377"/>
         <source>About %1</source>
         <translation>%1 lisätietoja</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="378"/>
+        <location filename="../mainwindow.cpp" line="377"/>
         <source>MX Samba Config</source>
-        <translation type="unfinished"></translation>
+        <translation>MX Samba Config</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="379"/>
+        <location filename="../mainwindow.cpp" line="378"/>
         <source>Version: </source>
         <translation>Versio: </translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="381"/>
+        <location filename="../mainwindow.cpp" line="380"/>
         <source>Program for configuring Samba shares and users.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ohjelma Samban ja sen käyttäjien määrittämiseen.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="383"/>
+        <location filename="../mainwindow.cpp" line="382"/>
         <source>Copyright (c) MX Linux</source>
         <translation>Copyright (c) MX Linux</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="384"/>
+        <location filename="../mainwindow.cpp" line="383"/>
         <source>%1 License</source>
         <translation>%1 lupa</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="391"/>
+        <location filename="../mainwindow.cpp" line="390"/>
         <source>%1 Help</source>
         <translation>%1 Apuopas</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="404"/>
+        <location filename="../mainwindow.cpp" line="403"/>
         <source>Cannot delete user: </source>
-        <translation type="unfinished"></translation>
+        <translation>Käyttäjää ei voi poistaa:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="413"/>
+        <location filename="../mainwindow.cpp" line="412"/>
         <source>Enter the username and password:</source>
-        <translation type="unfinished"></translation>
+        <translation>Anna käyttäjätunnus ja salasana:</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="419"/>
+        <source>Username:</source>
+        <translation>Käyttäjätunnus:</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="420"/>
-        <source>Username:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="421"/>
-        <location filename="../mainwindow.cpp" line="468"/>
+        <location filename="../mainwindow.cpp" line="467"/>
         <source>Password:</source>
         <translation>Salasana:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="422"/>
-        <location filename="../mainwindow.cpp" line="469"/>
+        <location filename="../mainwindow.cpp" line="421"/>
+        <location filename="../mainwindow.cpp" line="468"/>
         <source>Confirm password:</source>
         <translation>Vahvista salasana:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="432"/>
+        <location filename="../mainwindow.cpp" line="431"/>
         <source>Empty username, please enter a name.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tyhjä käyttäjätunnus, anna nimi ensin.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="437"/>
+        <location filename="../mainwindow.cpp" line="436"/>
         <source>Matching linux user not found on system, make sure you enter a valid username.</source>
-        <translation type="unfinished"></translation>
+        <translation>Vastaavaa linux-käyttäjää ei löydy järjestelmästä. Varmista, että annat kelvollisen käyttäjätunnuksen.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="442"/>
-        <location filename="../mainwindow.cpp" line="479"/>
+        <location filename="../mainwindow.cpp" line="441"/>
+        <location filename="../mainwindow.cpp" line="478"/>
         <source>Passwords don&apos;t match, please enter again.</source>
-        <translation type="unfinished"></translation>
+        <translation>Salasanat eivät täsmää, yritä uudelleen.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="448"/>
+        <location filename="../mainwindow.cpp" line="447"/>
         <source>Could not add user.</source>
         <translation>Ei voitu lisätä käyttäjää.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="462"/>
+        <location filename="../mainwindow.cpp" line="461"/>
         <source>Change the password for &apos;%1&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>Vaihda salasana &quot;%1&quot;</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="485"/>
+        <location filename="../mainwindow.cpp" line="484"/>
         <source>Could not change password.</source>
-        <translation type="unfinished"></translation>
+        <translation>Salasanaa ei voitu vaihtaa.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="501"/>
+        <location filename="../mainwindow.cpp" line="500"/>
         <source>Cannot delete share: </source>
-        <translation type="unfinished"></translation>
+        <translation>Jakoa ei voi poistaa:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="514"/>
-        <location filename="../mainwindow.cpp" line="570"/>
+        <location filename="../mainwindow.cpp" line="513"/>
+        <location filename="../mainwindow.cpp" line="569"/>
         <source>Samba service is not running. Please start Samba before adding or editing shares</source>
-        <translation type="unfinished"></translation>
+        <translation>Samba-palvelu ei ole käynnissä. Käynnistä Samba ensin jakamisen lisäämistä tai muokkaamista varten</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="538"/>
-        <location filename="../mainwindow.cpp" line="556"/>
+        <location filename="../mainwindow.cpp" line="537"/>
+        <location filename="../mainwindow.cpp" line="555"/>
         <source>Error: trying to process permissions: </source>
-        <translation type="unfinished"></translation>
+        <translation>Virhe: yrittäessä käsitellä käyttöoikeuksia:</translation>
     </message>
 </context>
 <context>
@@ -433,7 +435,7 @@
         <translation>&amp;Sulje</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="61"/>
+        <location filename="../main.cpp" line="64"/>
         <source>You must run this program as normal user.</source>
         <translation>Sinun täytyy suorittaa tämä ohjelma tavallisena käyttäjänä.</translation>
     </message>

@@ -6,10 +6,10 @@
 # Translators:
 # Caner Başaran <basaran.caner@gmail.com>, 2022
 # Butterfly <gokhanlnx@gmail.com>, 2022
-# mahmut özcan <faradundamarti@yandex.com>, 2022
 # e0360fc3c0afcd70e5aed1cfc885bac6, 2022
 # mahmut özcan <mahmutozcan@protonmail.com>, 2022
 # Dolphin Oracle <dolphinoracle@gmail.com>, 2022
+# Mehmet Akif 9oglu, 2023
 # 
 #, fuzzy
 msgid ""
@@ -18,7 +18,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-01-28 02:38+0100\n"
 "PO-Revision-Date: 2017-05-11 01:14+0000\n"
-"Last-Translator: Dolphin Oracle <dolphinoracle@gmail.com>, 2022\n"
+"Last-Translator: Mehmet Akif 9oglu, 2023\n"
 "Language-Team: Turkish (https://app.transifex.com/anticapitalista/teams/10162/tr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -52,11 +52,11 @@ msgstr "Otomatik güncelleme günlüğü(leri)"
 
 msgid "Automatically answer 'yes' to all prompts during full/basic upgrade"
 msgstr ""
-"Tam / temel yükseltme sırasında tüm komutlara otomatik olarak 'evet' yanıtı "
+"Tam/temel yükseltme sırasında tüm komutlara otomatik olarak ‘evet’ yanıtı "
 "verin"
 
 msgid "Automatically answer 'yes' to all prompts during upgrade"
-msgstr "Yükseltme sırasında bütün sorulara otomatik olarak 'evet' yanıtı ver"
+msgstr "Yükseltme sırasında bütün sorulara otomatik olarak ‘evet’ yanıtı ver"
 
 msgid "Cancel"
 msgstr "İptal"
@@ -72,8 +72,8 @@ msgstr "Kapat"
 
 msgid "For a less detailed view see 'Auto-update dpkg log(s)' or 'History'."
 msgstr ""
-"Daha az ayrıntılı görünüm için 'dpkg günlüklerini otomatik güncelleme' veya "
-"'Geçmiş'e bakın."
+"Daha az ayrıntılı görünüm için ‘dpkg günlüklerini otomatik güncelleme’ veya "
+"‘Geçmiş’e bakın."
 
 msgid "Hide until updates available"
 msgstr "Kullanılabilir güncellemelere kadar gizle"
@@ -88,7 +88,7 @@ msgid "Left-click behaviour   (when updates are available)"
 msgstr "Sol tık davranışı   (güncellemeler bulunduğunda)"
 
 msgid "License"
-msgstr "Ruhsat"
+msgstr "Lisans"
 
 msgid "MX Auto-update  --  unattended-upgrades dpkg log viewer"
 msgstr ""
@@ -134,7 +134,7 @@ msgid "Preferences"
 msgstr "Tercihler"
 
 msgid "Press 'h' for help, 'q' to quit"
-msgstr "Yardım için 'h' ye, çıkmak için 'q' ya basın"
+msgstr "Yardım için ‘h’ ye, çıkmak için ‘q’ ya basın"
 
 msgid "Quit"
 msgstr "Vazgeç"
@@ -153,7 +153,7 @@ msgid "Restart MX Updater"
 msgstr "MX Güncelleyiciyi yeniden başlatın"
 
 msgid "Running apt-get autoremove, if you are unsure type 'n'."
-msgstr "apt-get autoremove kullanarak, emin değilseniz 'n' yazın."
+msgstr "apt-get autoremove çalıştırılacak, emin değilseniz ‘h’ yazın."
 
 msgid ""
 "Switches the type of Upgrade that will be performed, alternating back and "
@@ -240,7 +240,7 @@ msgid "full upgrade complete (or was canceled)"
 msgstr "tam yükseltme tamamlandı (veya iptal edildi)"
 
 msgid "opens MX Updater 'View and Upgrade' window"
-msgstr "MX Güncelleyici 'Görünüm ve Yükseltme' penceresini açar"
+msgstr "MX Güncelleyici ‘Göster ve Yükselt’ penceresini açar"
 
 msgid "opens Synaptic"
 msgstr "Synaptic açıyor"
@@ -255,7 +255,7 @@ msgid "pulse"
 msgstr "sinyal"
 
 msgid "start MX Updater at login"
-msgstr "girişte MX Updater'ı başlat"
+msgstr "girişte MX Updater’ı başlat"
 
 msgid "switch to basic upgrade"
 msgstr "temel yükseltmeye geç"

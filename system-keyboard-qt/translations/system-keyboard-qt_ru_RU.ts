@@ -14,22 +14,22 @@
     <message>
         <location filename="../selectlayoutdialog.ui" line="14"/>
         <source>Select Keyboard Layout and Variant</source>
-        <translation type="unfinished"></translation>
+        <translation>Выберите раскладку клавиатуры и вариант</translation>
     </message>
     <message>
         <location filename="../selectlayoutdialog.ui" line="29"/>
         <source>Layout</source>
-        <translation type="unfinished"></translation>
+        <translation>Размещение</translation>
     </message>
     <message>
         <location filename="../selectlayoutdialog.ui" line="47"/>
         <source>Variants</source>
-        <translation type="unfinished"></translation>
+        <translation>Варианты</translation>
     </message>
     <message>
         <location filename="../selectlayoutdialog.cpp" line="57"/>
         <source>No Variant</source>
-        <translation type="unfinished"></translation>
+        <translation>Нет вариантов</translation>
     </message>
 </context>
 <context>
@@ -44,12 +44,12 @@
     <message>
         <location filename="../window.ui" line="28"/>
         <source>Layouts</source>
-        <translation type="unfinished"></translation>
+        <translation>Раскладки</translation>
     </message>
     <message>
         <location filename="../window.ui" line="34"/>
         <source>Keyboard Model</source>
-        <translation type="unfinished"></translation>
+        <translation>Модель клавиатуры</translation>
     </message>
     <message>
         <source>search</source>
@@ -58,12 +58,12 @@
     <message>
         <location filename="../window.ui" line="46"/>
         <source>Keyboard Layouts</source>
-        <translation type="unfinished"></translation>
+        <translation>Раскладки клавиатуры</translation>
     </message>
     <message>
         <location filename="../window.ui" line="136"/>
         <source>Hotkeys</source>
-        <translation type="unfinished"></translation>
+        <translation>Горячие клавиши</translation>
     </message>
     <message>
         <location filename="../window.ui" line="159"/>
@@ -87,12 +87,16 @@
         <location filename="../window.cpp" line="212"/>
         <location filename="../window.cpp" line="238"/>
         <source>Failed to open file: </source>
-        <translation type="unfinished"></translation>
+        <translation>Не удалось открыть файл:</translation>
     </message>
     <message>
         <location filename="../window.cpp" line="238"/>
         <source>Most settings will not be loaded</source>
-        <translation type="unfinished"></translation>
+        <translation>Большинство настроек не будут загружены</translation>
+    </message>
+    <message>
+        <source>Disabled</source>
+        <translation type="vanished">Отключено</translation>
     </message>
 </context>
 </TS>

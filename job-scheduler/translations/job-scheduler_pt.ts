@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="pt">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="pt">
 <context>
     <name>CronModel</name>
     <message>
@@ -24,22 +22,22 @@
     <message>
         <location filename="../ExecuteList.cpp" line="39"/>
         <source>Max Item</source>
-        <translation>Itens (max)</translation>
+        <translation>Item máximo</translation>
     </message>
     <message>
         <location filename="../ExecuteList.cpp" line="41"/>
         <source>Max Date</source>
-        <translation>Dias (max)</translation>
+        <translation>Data máxima</translation>
     </message>
     <message>
         <location filename="../ExecuteList.cpp" line="43"/>
         <source>Select</source>
-        <translation>Seleccionar</translation>
+        <translation>Selecionar</translation>
     </message>
     <message>
         <location filename="../ExecuteList.cpp" line="48"/>
         <source>&amp;Update</source>
-        <translation>&amp;Actualizar</translation>
+        <translation>&amp;Atualizar</translation>
     </message>
 </context>
 <context>
@@ -89,7 +87,7 @@
         <location filename="../MainWindow.cpp" line="256"/>
         <location filename="../MainWindow.cpp" line="325"/>
         <source>Job Scheduler</source>
-        <translation>Agendador de Tarefas [job-scheduler]</translation>
+        <translation>Agendador de Tarefas</translation>
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="124"/>
@@ -234,7 +232,7 @@ Sair?</translation>
     <message>
         <location filename="../MainWindow.cpp" line="338"/>
         <source>About Job Scheduler</source>
-        <translation>Sobre o &apos;Agendador de Tarefas&apos;</translation>
+        <translation>Sobre o Agendador de Tarefas</translation>
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="339"/>
@@ -301,7 +299,7 @@ Sair?</translation>
     <message>
         <location filename="../SaveDialog.cpp" line="32"/>
         <source>User:</source>
-        <translation>Utilizador: </translation>
+        <translation>Utilizador:</translation>
     </message>
     <message>
         <location filename="../SaveDialog.cpp" line="40"/>
@@ -319,7 +317,7 @@ Sair?</translation>
     <message>
         <location filename="../TCommandEdit.cpp" line="41"/>
         <source>User:</source>
-        <translation>Utilizador: </translation>
+        <translation>Utilizador:</translation>
     </message>
     <message>
         <location filename="../TCommandEdit.cpp" line="49"/>
@@ -334,12 +332,12 @@ Sair?</translation>
     <message>
         <location filename="../TCommandEdit.cpp" line="57"/>
         <source>Command:</source>
-        <translation>Comando: </translation>
+        <translation>Comando:</translation>
     </message>
     <message>
         <location filename="../TCommandEdit.cpp" line="63"/>
         <source>Comment:</source>
-        <translation>Comentário: </translation>
+        <translation>Comentário:</translation>
     </message>
     <message>
         <location filename="../TCommandEdit.cpp" line="66"/>
@@ -367,7 +365,7 @@ Sair?</translation>
     <message>
         <location filename="../TimeDialog.cpp" line="76"/>
         <source>time</source>
-        <translation>Horário</translation>
+        <translation>horário</translation>
     </message>
     <message>
         <location filename="../TimeDialog.cpp" line="81"/>
@@ -412,12 +410,12 @@ Sair?</translation>
     <message>
         <location filename="../TimeDialog.cpp" line="167"/>
         <source>Enable Literal</source>
-        <translation>Activar Literal</translation>
+        <translation>Ativar Literal</translation>
     </message>
     <message>
         <location filename="../TimeDialog.cpp" line="169"/>
         <source>&amp;Reset</source>
-        <translation>&amp;Restabelecer</translation>
+        <translation>&amp;Repor</translation>
     </message>
     <message>
         <location filename="../TimeDialog.cpp" line="170"/>
@@ -440,7 +438,7 @@ Sair?</translation>
     <message>
         <location filename="../VariableEdit.cpp" line="52"/>
         <source>Mail:</source>
-        <translation>Enviar: </translation>
+        <translation>Correio:</translation>
     </message>
     <message>
         <location filename="../VariableEdit.cpp" line="53"/>

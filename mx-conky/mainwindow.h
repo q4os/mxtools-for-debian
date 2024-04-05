@@ -21,9 +21,7 @@
  * You should have received a copy of the GNU General Public License
  * along with mx-conky.  If not, see <http://www.gnu.org/licenses/>.
  **********************************************************************/
-
-#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
+#pragma once
 
 #include <QDir>
 #include <QMessageBox>
@@ -46,34 +44,6 @@ public:
     explicit MainWindow(QWidget *parent = nullptr, const QString &file = QLatin1String(""));
     ~MainWindow() override;
 
-    QString file_name;
-    bool modified {};
-
-    bool is_lua_format {};
-    bool conky_format_detected = false;
-    bool debug = false;
-
-    // regexp pattern
-    QString lua_config;
-    QString lua_format;
-    QString old_format;
-    QString lua_comment_line;
-    QString old_comment_line;
-    QString lua_comment_start;
-    QString lua_comment_end;
-
-    QString capture_lua_owh = QStringLiteral("^(?<before>(?:.*\\]\\])?\\s*(?<item>own_window_hints)(?:\\s*=\\s*[\\\"\\'"
-                                             "]))(?<value>[[:alnum:],_]*)(?<after>(?:[\\\"\\']\\s*,).*)");
-    QString capture_old_owh = QStringLiteral(
-        "^(?<before>(?:.*\\]\\])?\\s*(?<item>own_window_hints)(?:\\s+))(?<value>[[:alnum:],_]*)(?<after>.*)");
-
-    QString block_comment_start = QStringLiteral("--[[");
-    QString block_comment_end = QStringLiteral("]]");
-
-    QString capture_lua_color;
-    QString capture_old_color;
-    QRegularExpression regexp_lua_color(QString);
-
     void parseContent();
     void detectConkyFormat();
     void pickColor(QWidget *widget);
@@ -81,7 +51,7 @@ public:
     void saveBackup();
     void setColor(QWidget *widget, const QColor &color);
     void writeColor(QWidget *widget, const QColor &color);
-    void writeFile(const QString &file_name, const QString &content);
+    void writeFile(QFile file, const QString &content);
 
     bool checkConkyRunning();
     bool readFile(const QString &file_name);
@@ -93,7 +63,7 @@ public slots:
 private slots:
     static void on_pushHelp_clicked();
     void cleanup();
-    void closeEvent(QCloseEvent *event);
+    void closeEvent(QCloseEvent *event) override;
     void on_pushAbout_clicked();
     void on_pushCM_clicked();
     void on_pushChange_clicked();
@@ -124,6 +94,30 @@ private:
     QTimer *timer {};
     QSettings settings;
     QString file_content;
-};
+    QString file_name;
+    bool modified {};
 
-#endif
+    bool is_lua_format {};
+    bool conky_format_detected = false;
+    bool debug = false;
+
+    // Regexp pattern
+    QString capture_lua_color;
+    QString capture_old_color;
+    QString lua_comment_end;
+    QString lua_comment_line;
+    QString lua_comment_start;
+    QString lua_config;
+    QString lua_format;
+    QString old_comment_line;
+    QString old_format;
+
+    QString capture_lua_owh = QStringLiteral("^(?<before>(?:.*\\]\\])?\\s*(?<item>own_window_hints)(?:\\s*=\\s*[\\\"\\'"
+                                             "]))(?<value>[[:alnum:],_]*)(?<after>(?:[\\\"\\']\\s*,).*)");
+    QString capture_old_owh = QStringLiteral(
+        "^(?<before>(?:.*\\]\\])?\\s*(?<item>own_window_hints)(?:\\s+))(?<value>[[:alnum:],_]*)(?<after>.*)");
+
+    QString block_comment_start = QStringLiteral("--[[");
+    QString block_comment_end = QStringLiteral("]]");
+    QRegularExpression regexp_lua_color(QString);
+};

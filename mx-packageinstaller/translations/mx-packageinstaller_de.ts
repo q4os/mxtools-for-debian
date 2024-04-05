@@ -63,7 +63,7 @@
     <message>
         <location filename="../mainwindow.ui" line="173"/>
         <source>Enabled Repos</source>
-        <translation>Aktivierte Repositorys</translation>
+        <translation>Aktivierte Paketquellen</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="237"/>
@@ -741,7 +741,7 @@ Bitte überprüfen Sie sorgfältig die Liste der zum Entfernen vorgesehenen Pake
     <message>
         <location filename="../remotes.cpp" line="13"/>
         <source>Manage Flatpak Remotes</source>
-        <translation>Verwalten von Flatpak Repositorien.</translation>
+        <translation>Flatpak-Paketquellen verwalten</translation>
     </message>
     <message>
         <location filename="../remotes.cpp" line="22"/>
@@ -756,7 +756,7 @@ Bitte überprüfen Sie sorgfältig die Liste der zum Entfernen vorgesehenen Pake
     <message>
         <location filename="../remotes.cpp" line="29"/>
         <source>enter Flatpak remote URL</source>
-        <translation>Flatpak Repository URL eingeben</translation>
+        <translation>Flatpak-Paketquellen-URL eingeben</translation>
     </message>
     <message>
         <location filename="../remotes.cpp" line="32"/>
@@ -771,12 +771,12 @@ Bitte überprüfen Sie sorgfältig die Liste der zum Entfernen vorgesehenen Pake
     <message>
         <location filename="../remotes.cpp" line="43"/>
         <source>Remove remote</source>
-        <translation>Entfernen des Flatpak-Repos</translation>
+        <translation>Flatpak-Paketquelle entfernen</translation>
     </message>
     <message>
         <location filename="../remotes.cpp" line="48"/>
         <source>Add remote</source>
-        <translation>Hinzufügen des Flatpak-Repos</translation>
+        <translation>Flatpak-Paketquelle hinzufügen</translation>
     </message>
     <message>
         <location filename="../remotes.cpp" line="53"/>
@@ -796,17 +796,17 @@ Bitte überprüfen Sie sorgfältig die Liste der zum Entfernen vorgesehenen Pake
     <message>
         <location filename="../remotes.cpp" line="76"/>
         <source>Flathub is the main Flatpak remote and won&apos;t be removed</source>
-        <translation>Flathub ist das Flatpak Haupt-Repositorium und kann nicht entfernt werden</translation>
+        <translation>Flathub ist die Flatpak-Haupt-Paketquelle und kann nicht entfernt werden</translation>
     </message>
     <message>
         <location filename="../remotes.cpp" line="95"/>
         <source>Error adding remote</source>
-        <translation>Fehler beim Hinzufügen des Repos</translation>
+        <translation>Fehler beim Hinzufügen der Paketquelle</translation>
     </message>
     <message>
         <location filename="../remotes.cpp" line="96"/>
         <source>Could not add remote - command returned an error. Please double-check the remote address and try again</source>
-        <translation>Konnte das Repository nicht hinzufügen - der Befehl endete mit einem Fehler. Bitte die Repository-URL überprüfen und nochmal versuchen.</translation>
+        <translation>Konnte die Paketquelle nicht hinzufügen - der Befehl endete mit einem Fehler. Bitte die Paketquellen-URL überprüfen und nochmal versuchen.</translation>
     </message>
     <message>
         <location filename="../remotes.cpp" line="101"/>
@@ -816,7 +816,7 @@ Bitte überprüfen Sie sorgfältig die Liste der zum Entfernen vorgesehenen Pake
     <message>
         <location filename="../remotes.cpp" line="101"/>
         <source>Remote added successfully</source>
-        <translation>Flatpak Repository erfolgreich hinzugefügt.</translation>
+        <translation>Flatpak-Paketquelle erfolgreich hinzugefügt</translation>
     </message>
 </context>
 <context>
@@ -855,7 +855,7 @@ Close the program, or wait until it is done processing and try again.</source>
 Bitte das Programm schließen oder warten, bis es fertig ist und es dann erneut versuchen.</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="77"/>
+        <location filename="../main.cpp" line="78"/>
         <source>MX Package Installer is a tool used for managing packages on MX Linux
     - installs popular programs from different sources
     - installs programs from the MX Test repo
@@ -868,23 +868,23 @@ Bitte das Programm schließen oder warten, bis es fertig ist und es dann erneut 
     - installiert Flatpak-Dateien</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="85"/>
+        <location filename="../main.cpp" line="86"/>
         <source>Skip online check if it falsely reports lack of internet access.</source>
         <translation>Den Online-Check überspringen, wenn fälschlicherweise gemeldet wird, dass kein Internetzugang vorhanden ist.</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="95"/>
-        <location filename="../main.cpp" line="103"/>
+        <location filename="../main.cpp" line="96"/>
+        <location filename="../main.cpp" line="104"/>
         <source>Error</source>
         <translation>Fehler</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="96"/>
+        <location filename="../main.cpp" line="97"/>
         <source>You seem to be logged in as root, please log out and log in as normal user to use this program.</source>
         <translation>Sie sind als Administrator am System angemeldet. Bitte melden Sie sich ab und dann als normaler Benutzer wieder an, um dieses Programm zu verwenden.</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="104"/>
+        <location filename="../main.cpp" line="105"/>
         <source>You must run this program with admin access.</source>
         <translation>Diese Anwendung muss mit Administratorrechten ausgeführt werden.</translation>
     </message>

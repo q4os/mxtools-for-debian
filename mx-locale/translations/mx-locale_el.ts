@@ -62,7 +62,7 @@
     <message>
         <location filename="../mainwindow.ui" line="190"/>
         <source>PushButton</source>
-        <translation type="unfinished"></translation>
+        <translation>Κουμπί</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="197"/>

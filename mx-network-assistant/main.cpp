@@ -1,6 +1,6 @@
 /*
    Copyright (C) 2003-2010 by Warren Woodford
-   Copyright (C) 2014 by Adrian adrian@mxlinux.org
+   Copyright (C) 2014-2023 by Adrian <adrian@mxlinux.org>
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -14,8 +14,7 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 
-
-   With big modifications made by Adrian adrian@mxlinux.org
+    Heavily modified by Adrian <adrian@mxlinux.org>
 */
 
 #include <QApplication>
@@ -23,11 +22,11 @@
 #include <QLocale>
 #include <QTranslator>
 
+#include "common.h"
 #include "mainwindow.h"
+
 #include <unistd.h>
 #include <version.h>
-
-extern const QString starting_home = qEnvironmentVariable("HOME");
 
 int main(int argc, char *argv[])
 {

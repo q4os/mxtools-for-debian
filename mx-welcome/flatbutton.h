@@ -1,5 +1,5 @@
 /**********************************************************************
- * Copyright (C) 2014 MX Authors
+ * Copyright (C) 2014-2024 MX Authors
  *
  * Authors: Adrian
  *          Paul David Callahan
@@ -20,23 +20,18 @@
  * You should have received a copy of the GNU General Public License
  * along with MX Tools.  If not, see <http://www.gnu.org/licenses/>.
  **********************************************************************/
+#pragma once
 
-#ifndef FLATBUTTON_H
-#define FLATBUTTON_H
-
-
-#include <QPushButton>
 #include <QEvent>
+#include <QPushButton>
 
 class FlatButton : public QPushButton
 {
-	Q_OBJECT
+    Q_OBJECT
 public:
     explicit FlatButton(QWidget *parent = nullptr);
+
 protected:
     void enterEvent(QEvent *e) override;
     void leaveEvent(QEvent *e) override;
 };
-
-#endif // FLATBUTTON_H
-

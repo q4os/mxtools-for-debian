@@ -26,8 +26,7 @@
       <string>Close</string>
      </property>
      <property name="icon">
-      <iconset theme="window-close">
-       <normaloff>.</normaloff>.</iconset>
+      <iconset theme="window-close"/>
      </property>
      <property name="autoDefault">
       <bool>false</bool>
@@ -40,8 +39,7 @@
       <string>Help</string>
      </property>
      <property name="icon">
-      <iconset theme="help-contents">
-       <normaloff>.</normaloff>.</iconset>
+      <iconset theme="help-contents"/>
      </property>
      <property name="autoDefault">
       <bool>false</bool>
@@ -73,8 +71,7 @@
       <string>Apply</string>
      </property>
      <property name="icon">
-      <iconset theme="dialog-ok">
-       <normaloff>.</normaloff>.</iconset>
+      <iconset theme="dialog-ok"/>
      </property>
      <property name="autoDefault">
       <bool>false</bool>
@@ -94,8 +91,7 @@
       <string>About...</string>
      </property>
      <property name="icon">
-      <iconset theme="help-about">
-       <normaloff>.</normaloff>.</iconset>
+      <iconset theme="help-about"/>
      </property>
      <property name="autoDefault">
       <bool>false</bool>
@@ -408,17 +404,41 @@
        <string>Network Time</string>
       </attribute>
       <layout class="QGridLayout">
-       <item row="5" column="1">
-        <widget class="QToolButton" name="pushServerMoveDown">
+       <item row="3" column="2">
+        <widget class="QToolButton" name="pushServerAdd">
          <property name="toolTip">
-          <string>Move the selected item down</string>
+          <string>Add an item to the list</string>
          </property>
          <property name="icon">
-          <iconset theme="go-down"/>
+          <iconset theme="list-add"/>
          </property>
         </widget>
        </item>
-       <item row="4" column="1">
+       <item row="1" column="0">
+        <widget class="QCheckBox" name="checkAutoSync">
+         <property name="text">
+          <string>Automatically update the System Clock with NTP servers:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="7" column="2">
+        <spacer>
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+        </spacer>
+       </item>
+       <item row="4" column="2">
+        <widget class="QToolButton" name="pushServerRemove">
+         <property name="toolTip">
+          <string>Remove the current item from the list</string>
+         </property>
+         <property name="icon">
+          <iconset theme="list-remove"/>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="2">
         <widget class="QToolButton" name="pushServerMoveUp">
          <property name="toolTip">
           <string>Move the selected item up</string>
@@ -428,60 +448,7 @@
          </property>
         </widget>
        </item>
-       <item row="3" column="1">
-        <widget class="QToolButton" name="pushServerRemove">
-         <property name="toolTip">
-          <string>Remove the current item from the list</string>
-         </property>
-         <property name="icon">
-          <iconset theme="list-remove">
-           <normaloff>.</normaloff>.</iconset>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="1">
-        <widget class="QToolButton" name="pushServerAdd">
-         <property name="toolTip">
-          <string>Add an item to the list</string>
-         </property>
-         <property name="icon">
-          <iconset theme="list-add">
-           <normaloff>.</normaloff>.</iconset>
-         </property>
-        </widget>
-       </item>
-       <item row="6" column="1">
-        <spacer>
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-        </spacer>
-       </item>
-       <item row="1" column="0" colspan="2">
-        <layout class="QHBoxLayout">
-         <item>
-          <widget class="QCheckBox" name="checkAutoSync">
-           <property name="text">
-            <string>Automatically update the System Clock with NTP servers:</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QPushButton" name="pushSyncNow">
-           <property name="toolTip">
-            <string>Immediately update the system clock with NTP servers.</string>
-           </property>
-           <property name="text">
-            <string>Update Now</string>
-           </property>
-           <property name="autoDefault">
-            <bool>false</bool>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </item>
-       <item row="2" column="0" rowspan="5">
+       <item row="3" column="0" rowspan="5" colspan="2">
         <widget class="QTableWidget" name="tableServers">
          <property name="toolTip">
           <string>List of NTP servers to use.</string>
@@ -513,6 +480,29 @@
            <string>Options</string>
           </property>
          </column>
+        </widget>
+       </item>
+       <item row="1" column="1" colspan="2">
+        <widget class="QPushButton" name="pushSyncNow">
+         <property name="toolTip">
+          <string>Immediately update the system clock with NTP servers.</string>
+         </property>
+         <property name="text">
+          <string>Update Now</string>
+         </property>
+         <property name="autoDefault">
+          <bool>false</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="2">
+        <widget class="QToolButton" name="pushServerMoveDown">
+         <property name="toolTip">
+          <string>Move the selected item down</string>
+         </property>
+         <property name="icon">
+          <iconset theme="go-down"/>
+         </property>
         </widget>
        </item>
       </layout>
@@ -555,12 +545,12 @@
   <tabstop>pushReadHardware</tabstop>
   <tabstop>textHardwareClock</tabstop>
   <tabstop>checkAutoSync</tabstop>
+  <tabstop>pushSyncNow</tabstop>
+  <tabstop>tableServers</tabstop>
   <tabstop>pushServerAdd</tabstop>
+  <tabstop>pushServerRemove</tabstop>
   <tabstop>pushServerMoveUp</tabstop>
   <tabstop>pushServerMoveDown</tabstop>
-  <tabstop>pushServerRemove</tabstop>
-  <tabstop>tableServers</tabstop>
-  <tabstop>pushSyncNow</tabstop>
   <tabstop>pushAbout</tabstop>
   <tabstop>pushHelp</tabstop>
   <tabstop>pushApply</tabstop>

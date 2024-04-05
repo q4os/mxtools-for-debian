@@ -10,53 +10,51 @@ Thunderbird
 </name>
 
 <description>
-   <am>Latest Thunderbird email client from MX Community</am>
-   <ar>Latest Thunderbird email client from MX Community</ar>
-   <bg>Latest Thunderbird email client from MX Community</bg>
-   <bn>Latest Thunderbird email client from MX Community</bn>
-   <ca>Darrer client de correu Thunderbird de la Comunitat MX</ca>
-   <cs>Latest Thunderbird email client from MX Community</cs>
-   <da>Seneste Thunderbird e-mailklient fra MX-fællesskabet</da>
-   <de>Neuester Thunderbird E-Mail-Client von MX Community</de>
-   <el>Το τελευταίο πρόγραμμα ηλεκτρονικού ταχυδρομείου Thunderbird από την κοινότητα MX</el>
-   <en>Latest Thunderbird email client from MX Community</en>
-   <es>El último Thunderbird (cliente de correo) de la comunidad MX</es>
-   <et>Latest Thunderbird email client from MX Community</et>
-   <eu>Latest Thunderbird email client from MX Community</eu>
-   <fa>Latest Thunderbird email client from MX Community</fa>
-   <fil_PH>Latest Thunderbird email client from MX Community</fil_PH>
-   <fi>Viimeisin MX-yhteisön Thunderbird sähköpostiohjelma</fi>
-   <fr>La dernière version du client mail Thunderbird par la Communauté MX</fr>
-   <he_IL>Latest Thunderbird email client from MX Community</he_IL>
-   <hi>एमएक्स समुदाय द्वारा नवीनतम थंडरबर्ड ईमेल साधन</hi>
-   <hr>Latest Thunderbird email client from MX Community</hr>
-   <hu>Latest Thunderbird email client from MX Community</hu>
-   <id>Latest Thunderbird email client from MX Community</id>
-   <is>Latest Thunderbird email client from MX Community</is>
-   <it>l'ultima versione di client email Thunderbird dalla MX Community</it>
-   <ja>最新の Thunderbird メールソフト（MXコミュニティからの）</ja>
-   <kk>Latest Thunderbird email client from MX Community</kk>
-   <ko>Latest Thunderbird email client from MX Community</ko>
-   <lt>Latest Thunderbird email client from MX Community</lt>
-   <mk>Latest Thunderbird email client from MX Community</mk>
-   <mr>Latest Thunderbird email client from MX Community</mr>
-   <nb>Seneste Thunderbird e-postklient fra MX-fellesskapet</nb>
-   <nl>Meest recente Thunderbird email programma vanuit MX Community</nl>
-   <pl>najnowszy klient poczty e-mail Thunderbird od społeczności MX</pl>
-   <pt_BR>Thunderbird - Versão mais recente do cliente de e-mail da Comunidade MX</pt_BR>
-   <pt>Thunderbird (cliente de correio-electrónico) mais recente da comunidade MX</pt>
-   <ro>Latest Thunderbird email client from MX Community</ro>
-   <ru>Почтовый клиент Thunderbird последней версии из MX Community</ru>
-   <sk>Latest Thunderbird email client from MX Community</sk>
-   <sl>Zadnja različica poštnega odjemalca Thunderbird iz MX skupnosti</sl>
-   <sq>Klienti më i ri email Thunderbird nga Bashkësia MX</sq>
-   <sr>Latest Thunderbird email client from MX Community</sr>
-   <sv>Senaste Thunderbird mejlklient från MX Community</sv>
-   <tr>MX Topluluğundan En son Thunderbird e-posta istemcisi</tr>
-   <uk>Latest Thunderbird email client from MX Community</uk>
-   <vi>Latest Thunderbird email client from MX Community</vi>
-   <zh_CN>Latest Thunderbird email client from MX Community</zh_CN>
-   <zh_TW>Latest Thunderbird email client from MX Community</zh_TW>
+   <am>የተንደርበርድ ኢሜይል ደንበኛ</am>
+<ar> عميل البريد الإلكتروني ثندربيرد</ar>
+<bg>Имейл клиент Thunderbird</bg>
+<bn>থান্ডারবার্ড ইমেল ক্লায়েন্ট</bn>
+<ca>Client de correu electrònic Thunderbird</ca>
+<cs>E-mailový klient Thunderbird</cs>
+<da>Thunderbird e-mail-klient</da>
+<de>Thunderbird-E-Mail-Client</de>
+<el>Πελάτης email Thunderbird</el>
+<es>Cliente de correo electrónico Thunderbird</es>
+<et>Thunderbirdi e-posti klient</et>
+<eu>Thunderbird posta-bezeroa</eu>
+<en>Thunderbird email client</en>
+<fa> سرویس گیرنده ایمیل تاندربرد</fa>
+<fil_PH>Thunderbird email client</fil_PH>
+<fi>Thunderbird sähköpostiohjelma</fi>
+<fr>Client de messagerie Thunderbird</fr>
+<he_IL> לקוח דוא"ל Thunderbird</he_IL>
+<hi>थंडरबर्ड ईमेल क्लाइंट</hi>
+<hr>Thunderbird klijent e-pošte</hr>
+<hu>Thunderbird e-mail kliens</hu>
+<id>Klien email Thunderbird</id>
+<is>Thunderbird tölvupóstforrit</is>
+<it>Client di posta elettronica Thunderbird</it>
+<ja>Thunderbirdメールクライアント</ja>
+<kk>Thunderbird электрондық пошта клиенті</kk>
+<ko>썬더버드 이메일 클라이언트</ko>
+<lt>„Thunderbird“ el. pašto klientas</lt>
+<mk>Клиент за е-пошта на Thunderbird</mk>
+<mr>थंडरबर्ड ईमेल क्लायंट</mr>
+<nb>Thunderbird e-postklient</nb>
+<nl>Thunderbird e-mailclient</nl>
+<pl>Klient poczty elektronicznej Thunderbird</pl>
+<pt_BR>Cliente de e-mail Thunderbird</pt_BR>
+<pt>Cliente de e-mail Thunderbird</pt>
+<ro>Client de e-mail Thunderbird</ro>
+<ru>Почтовый клиент Thunderbird</ru>
+<sk>E-mailový klient Thunderbird</sk>
+<sl>E-poštni odjemalec Thunderbird</sl>
+<sq>Klient i emailit Thunderbird</sq>
+<sr>Тхундербирд е-маил клијент</sr>
+<sv>Thunderbird e-postklient</sv>
+<tr>Thunderbird e-posta istemcisi</tr>
+<uk>Поштовий клієнт Thunderbird</uk>
+<vi>Ứng dụng email Thunderbird</vi>
 </description>
 
 <installable>

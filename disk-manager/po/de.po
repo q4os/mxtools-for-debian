@@ -9,8 +9,9 @@
 # Vinzenz Vietzke <vinz@vinzv.de>, 2022
 # Jerry Bond, 2022
 # delix02, 2022
-# Roy Avrett <avrett@cs.fsu.edu>, 2022
+# Roy Avrett <rjavrett@gmail.com>, 2022
 # fehlix, 2022
+# aer, 2024
 # 
 #, fuzzy
 msgid ""
@@ -19,8 +20,8 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-01-16 00:46+0100\n"
 "PO-Revision-Date: 2022-01-21 17:21+0000\n"
-"Last-Translator: fehlix, 2022\n"
-"Language-Team: German (https://www.transifex.com/anticapitalista/teams/10162/de/)\n"
+"Last-Translator: aer, 2024\n"
+"Language-Team: German (https://app.transifex.com/anticapitalista/teams/10162/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -98,7 +99,7 @@ msgstr "<b>Label:</b>"
 
 #: ../data/disk-manager.glade.h:16
 msgid "<b>Mount point:</b>"
-msgstr "<b>Mountpunkt:</b>"
+msgstr "<b>Einhängepunkt:</b>"
 
 #: ../data/disk-manager.glade.h:17
 msgid "<b>Options:</b>"
@@ -139,11 +140,11 @@ msgstr ""
 #: ../data/disk-manager.desktop.in.in.h:1 ../DiskManager/Dialogs.py:489
 #: ../DiskManager/DiskManager.py:78
 msgid "Disk Manager"
-msgstr "Disk Manager"
+msgstr "Festplattenverwaltung"
 
 #: ../data/disk-manager.desktop.in.in.h:2
 msgid "Manage filesystem configuration"
-msgstr "Verwalte Dateisystem Konfiguration"
+msgstr "Dateisystem-Konfiguration verwalten"
 
 #: ../DiskManager/Dialogs.py:127 ../DiskManager/Fstab/Mounter.py:206
 #, python-format
@@ -152,7 +153,7 @@ msgstr "Für diesen Dateisystemtyp ist kein Treiber verfügbar: '%s'"
 
 #: ../DiskManager/Dialogs.py:162
 msgid "Select a directory"
-msgstr "Wählen Sie ein Verzeichnis aus"
+msgstr "Ein Verzeichnis auswählen"
 
 #: ../DiskManager/Dialogs.py:231
 msgid "Wrong mount point"
@@ -165,7 +166,7 @@ msgid ""
 "You should try another one."
 msgstr ""
 "<i>%s</i> wird bereits benutzt.\n"
-"Versuchen Sie einen anderen."
+"Probieren Sie einen anderen."
 
 #: ../DiskManager/Dialogs.py:243
 msgid "Options formatting error"
@@ -214,7 +215,7 @@ msgstr "Diese Warnung in Zukunft nicht mehr anzeigen."
 
 #: ../DiskManager/Dialogs.py:468
 msgid "Duplicate entry detected"
-msgstr "Duplizierter Eintrag erkannt"
+msgstr "Doppelter Eintrag erkannt"
 
 #: ../DiskManager/Dialogs.py:469
 msgid ""
@@ -230,7 +231,7 @@ msgid ""
 "They will be kept in the configuration file, but will be disabled."
 msgstr ""
 "Zwei verschiedene Geräte können sich nicht denselben Einhängepunkt teilen.\n"
-"Wählen Sie das gewünschte Gerät aus, und die anderen werden auskommentiert.\n"
+"Wählen Sie das gewünschte Gerät aus und die anderen werden auskommentiert.\n"
 "Sie bleiben in der Konfigurationsdatei erhalten, werden aber deaktiviert."
 
 #: ../DiskManager/Dialogs.py:473
@@ -239,11 +240,11 @@ msgstr "Ausgewählte behalten"
 
 #: ../DiskManager/Dialogs.py:506
 msgid "Easily manage your filesystem configuration"
-msgstr "Einfache Verwaltung der Konfiguration Ihres Dateisystems"
+msgstr "Einfache Verwaltung der Konfiguration des Dateisystems"
 
 #: ../DiskManager/Dialogs.py:510
 msgid "translator-credits"
-msgstr "translator-credits"
+msgstr "Übersetzung erstellt von"
 
 #: ../DiskManager/DiskManager.py:132
 msgid "Enable"
@@ -255,7 +256,7 @@ msgstr "Laufwerk"
 
 #: ../DiskManager/DiskManager.py:151
 msgid "Mount point"
-msgstr "Mountpunkt"
+msgstr "Einhängepunkt"
 
 #: ../DiskManager/DiskManager.py:158
 msgid "Type"
@@ -285,8 +286,8 @@ msgid ""
 "serious problems. Do you want to continue?"
 msgstr ""
 "%s ist eine wichtige Systempartition.\n"
-"Seien Sie sehr vorsichtig, wenn Sie sie bearbeiten, sonst\n"
-"könnten Sie ernsthafte Probleme bekommen. Möchten Sie fortfahren?"
+"Seien Sie sehr vorsichtig bei der Bearbeitung, sonst\n"
+"könnten ernsthafte Probleme auftreten. Möchten Sie fortfahren?"
 
 #: ../DiskManager/DiskManager.py:399
 msgid "Unmount"
@@ -298,7 +299,7 @@ msgstr "Einhängen"
 
 #: ../DiskManager/DiskManager.py:407
 msgid "Reverting to an older version?"
-msgstr "Eine ältere Version übernehmen?"
+msgstr "Auf eine ältere Version zurückgreifen?"
 
 #: ../DiskManager/DiskManager.py:408
 msgid "This will apply the following changes:"
@@ -349,8 +350,8 @@ msgid ""
 "In order to apply all your changes,\n"
 "you'll need to reboot your computer."
 msgstr ""
-"Um alle Ihre Änderungen zu übernehmen,\n"
-"müssen Sie Ihren Computer neu starten."
+"Um alle Änderungen zu übernehmen,\n"
+"muß der Computer neugestartet werden."
 
 #: ../DiskManager/Fstab/Mounter.py:56
 msgid "Mounting partition"
@@ -403,13 +404,13 @@ msgstr ""
 
 #: ../DiskManager/Fstab/Mounter.py:129
 msgid "Close all applications that use it and retry to unmount."
-msgstr "Alle Anwendungen schließen und erneut versuchen auszuhängen."
+msgstr "Alle Anwendungen schließen und erneut versuchen, auszuhängen."
 
 #: ../DiskManager/Fstab/Mounter.py:132
 msgid "The filesystem might be temporarily busy. Wait few seconds and retry."
 msgstr ""
-"Das Dateisystem ist möglicherweise vorübergehend überlastet. Warten Sie "
-"einige Sekunden und versuchen Sie es erneut."
+"Das Dateisystem ist möglicherweise gerade überlastet. Warten Sie einige "
+"Sekunden und versuchen Sie es erneut."
 
 #. TRANSLATORS:
 #. Keep the English term 'lazy' for the 'lazy' unmount option

@@ -4,8 +4,9 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
+# Roy Avrett <rjavrett@gmail.com>, 2022
 # anticapitalista <anticapitalista@riseup.net>, 2022
-# Roy Avrett <avrett@cs.fsu.edu>, 2022
+# Ioannis LM, 2024
 # 
 #, fuzzy
 msgid ""
@@ -14,8 +15,8 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-01-16 00:46+0100\n"
 "PO-Revision-Date: 2022-01-21 17:21+0000\n"
-"Last-Translator: Roy Avrett <avrett@cs.fsu.edu>, 2022\n"
-"Language-Team: Greek (https://www.transifex.com/anticapitalista/teams/10162/el/)\n"
+"Last-Translator: Ioannis LM, 2024\n"
+"Language-Team: Greek (https://app.transifex.com/anticapitalista/teams/10162/el/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -28,16 +29,15 @@ msgstr "Ελλιπή δικαιώματα"
 
 #: ../disk-manager.in:67
 msgid "You need administrative rights to start this application."
-msgstr ""
-"Χρειάζεστε δικαιώματα διαχειριστή για να εκκινήσετε αυτή την εφαρμογή."
+msgstr "Χρειάζονται δικαιώματα διαχειριστή για να εκκινηθεί αυτή η εφαρμογή."
 
 #: ../data/disk-manager.glade.h:1
 msgid "<b>Driver</b>"
-msgstr "<b>Οδηγός</b>"
+msgstr "<b>Πρόγραμμα οδήγησης</b>"
 
 #: ../data/disk-manager.glade.h:2
 msgid "This driver seems to not be available for this type."
-msgstr ""
+msgstr "Αυτό το πρόγραμμα οδήγησης φαίνεται να μην είναι διαθέσιμο."
 
 #: ../data/disk-manager.glade.h:3
 msgid "<b>Mount point</b>"
@@ -49,11 +49,11 @@ msgstr "<b>Επιλογές</b>"
 
 #: ../data/disk-manager.glade.h:5
 msgid "Check device every 30 boots"
-msgstr ""
+msgstr "Έλεγχος συσκευής κάθε 30 εκκινήσεις"
 
 #: ../data/disk-manager.glade.h:6
 msgid "<big><b>Configuration file:</b></big>"
-msgstr "<big><b>Αρχείο παραμετροποίησης:</b></big>"
+msgstr "<big><b>Αρχείο ρυθμίσεων:</b></big>"
 
 #: ../data/disk-manager.glade.h:7
 msgid "<b>Vendor:</b>"
@@ -74,7 +74,7 @@ msgstr "<b>δίαυλος:</b>"
 #: ../data/disk-manager.glade.h:11 ../DiskManager/Dialogs.py:372
 #: ../DiskManager/Dialogs.py:373 ../DiskManager/Dialogs.py:374
 msgid "Not available"
-msgstr "Μη διαθέσιμο"
+msgstr "Μη διαθέσιμος"
 
 #: ../data/disk-manager.glade.h:12
 msgid "Drive"
@@ -106,7 +106,7 @@ msgstr "Τόμος"
 
 #: ../data/disk-manager.glade.h:19
 msgid "<b>Total size:</b>"
-msgstr "<b>Μέγιστο μέγεθος:</b>"
+msgstr "<b>Συνολικό μέγεθος:</b>"
 
 #: ../data/disk-manager.glade.h:20
 msgid "<b>Free space:</b>"
@@ -118,7 +118,7 @@ msgstr "<b>Διαθέσιμος χώρος:</b>"
 
 #: ../data/disk-manager.glade.h:22
 msgid "<b>Used space:</b>"
-msgstr "<b>Χρησιμοποιούμενος χώρος:</b>"
+msgstr "<b>Χώρος σε χρήση:</b>"
 
 #: ../data/disk-manager.glade.h:23
 msgid "Size"
@@ -135,20 +135,20 @@ msgstr ""
 #: ../data/disk-manager.desktop.in.in.h:1 ../DiskManager/Dialogs.py:489
 #: ../DiskManager/DiskManager.py:78
 msgid "Disk Manager"
-msgstr ""
+msgstr "Διαχείριση δίσκων"
 
 #: ../data/disk-manager.desktop.in.in.h:2
 msgid "Manage filesystem configuration"
-msgstr ""
+msgstr "Διαχείριση δίσκων του συστήματος"
 
 #: ../DiskManager/Dialogs.py:127 ../DiskManager/Fstab/Mounter.py:206
 #, python-format
 msgid "No driver is available for this type of filesystem : '%s'"
-msgstr ""
+msgstr "Δεν υπάρχει διαθέσιμο πρόγραμμα οδήγησης για το τύπο : '%s'"
 
 #: ../DiskManager/Dialogs.py:162
 msgid "Select a directory"
-msgstr "Επιλέξτε κατάλογο"
+msgstr "Επιλογή καταλόγου"
 
 #: ../DiskManager/Dialogs.py:231
 msgid "Wrong mount point"
@@ -160,10 +160,12 @@ msgid ""
 "<i>%s</i> is currently in use.\n"
 "You should try another one."
 msgstr ""
+"Το <i>%s</i> χρησιμοποιείται.\n"
+"Θα πρέπει να δοκιμάσετε άλλο."
 
 #: ../DiskManager/Dialogs.py:243
 msgid "Options formatting error"
-msgstr ""
+msgstr "Σφάλμα στη μορφοποίηση επιλογών"
 
 #: ../DiskManager/Dialogs.py:244
 #, python-format
@@ -171,32 +173,40 @@ msgid ""
 "<i>%s</i> is not formatted correctly.\n"
 "Options should be separated by comma (,)"
 msgstr ""
+"Το <i>%s</i> δεν έχει μορφοποιηθεί σωστά.\n"
+"Οι επιλογές πρέπει να διαχωρίζονται με κόμμα (,)"
 
 #: ../DiskManager/Dialogs.py:427
 msgid ""
 "Removing unknown devices from\n"
 "the configuration file?"
 msgstr ""
+"Να αφαιρεθούν οι άγνωστες συσκευές\n"
+"από το αρχείο ρυθμίσεων;"
 
 #: ../DiskManager/Dialogs.py:428
 msgid ""
 "I can not find any existing block devices\n"
 "corresponding to the following devices:"
 msgstr ""
+"Δεν εντοπίζονται συσκευές μπλοκ\n"
+"που αντιστοιχούν στις ακόλουθες συσκευές:"
 
 #: ../DiskManager/Dialogs.py:430
 msgid ""
 "It is advisable to remove them in order to avoid failed mount\n"
 "at start-up. Select the ones you want to remove."
 msgstr ""
+"Συνιστάται η αφαίρεση τους για την αποφυγή αποτυχημένης προσάρτησης\n"
+"στην εκκίνηση. Επιλέξτε αυτά που θέλετε να αφαιρέσετε."
 
 #: ../DiskManager/Dialogs.py:433
 msgid "Remove selected"
-msgstr "Αφαίρεση επιλεγμένων"
+msgstr "Αφαίρεση"
 
 #: ../DiskManager/Dialogs.py:433
 msgid "Don't show me this warning in the future."
-msgstr ""
+msgstr "Να μην εμφανίζεται αυτή η προειδοποίηση στο μέλλον."
 
 #: ../DiskManager/Dialogs.py:468
 msgid "Duplicate entry detected"
@@ -206,6 +216,8 @@ msgstr "Βρέθηκε διπλή καταχώρηση"
 msgid ""
 "The following entries of your configuration file use the same mount point:"
 msgstr ""
+"Οι ακόλουθες καταχωρήσεις στο αρχείο ρυθμίσεων, χρησιμοποιούν το ίδιο σημείο"
+" προσάρτησης:"
 
 #: ../DiskManager/Dialogs.py:470
 msgid ""
@@ -213,18 +225,21 @@ msgid ""
 "You should select the one you want, and the others will be commented.\n"
 "They will be kept in the configuration file, but will be disabled."
 msgstr ""
+"Δεν μπορούν να μοιράζονται το ίδιο σημείο προσάρτησης δύο διαφορετικές συσκευές.\n"
+"Θα πρέπει να επιλέξετε αυτή που θέλετε και η άλλη θα απενεργοποιηθεί.\n"
+"Θα διατηρηθεί όμως στο αρχείο ρυθμίσεων."
 
 #: ../DiskManager/Dialogs.py:473
 msgid "Keep selected"
-msgstr ""
+msgstr "Διατήρηση"
 
 #: ../DiskManager/Dialogs.py:506
 msgid "Easily manage your filesystem configuration"
-msgstr ""
+msgstr "Εύκολη διαχείρηση του συστήματος των δίσκων σας"
 
 #: ../DiskManager/Dialogs.py:510
 msgid "translator-credits"
-msgstr ""
+msgstr "Ιωάννης"
 
 #: ../DiskManager/DiskManager.py:132
 msgid "Enable"
@@ -240,7 +255,7 @@ msgstr "Σημείο προσάρτησης"
 
 #: ../DiskManager/DiskManager.py:158
 msgid "Type"
-msgstr "Τύπος:"
+msgstr "Τύπος"
 
 #: ../DiskManager/DiskManager.py:165
 msgid "Total"
@@ -248,15 +263,15 @@ msgstr "Σύνολο"
 
 #: ../DiskManager/DiskManager.py:172
 msgid "Free"
-msgstr "Ελεύθερο"
+msgstr "Ελεύθερα"
 
 #: ../DiskManager/DiskManager.py:179
 msgid "Used"
-msgstr "Χρησιμοποιημένο"
+msgstr "Σε χρήση"
 
 #: ../DiskManager/DiskManager.py:292
 msgid "Editing system partition?"
-msgstr ""
+msgstr "Να γίνει επεξεργασία της κατάτμησης;"
 
 #: ../DiskManager/DiskManager.py:294
 #, python-format
@@ -265,10 +280,13 @@ msgid ""
 "Be really careful when editing it, or you may have\n"
 "serious problems. Do you want to continue?"
 msgstr ""
+"Το %s είναι μια σημαντική κατάτμηση του συστήματος.\n"
+"Να είστε πολύ προσεκτικοί στην επεξεργασία, διαφορετικά μπορεί να έχετε\n"
+"σοβαρά προβλήματα. Θέλετε να συνεχίσετε; "
 
 #: ../DiskManager/DiskManager.py:399
 msgid "Unmount"
-msgstr "αποπροσάρτηση"
+msgstr "Αποπροσάρτηση"
 
 #: ../DiskManager/DiskManager.py:402
 msgid "Mount"
@@ -276,11 +294,11 @@ msgstr "Προσάρτηση"
 
 #: ../DiskManager/DiskManager.py:407
 msgid "Reverting to an older version?"
-msgstr ""
+msgstr "Να γίνει επαναφορά σε παλαιότερη έκδοση;"
 
 #: ../DiskManager/DiskManager.py:408
 msgid "This will apply the following changes:"
-msgstr ""
+msgstr "Πρόκειται να εφαρμοστούν οι ακόλουθες αλλαγές:"
 
 #: ../DiskManager/DiskManager.py:408
 msgid "Do you want to continue?"
@@ -304,66 +322,70 @@ msgstr "TB"
 
 #: ../DiskManager/Fstab/FstabHandler.py:435
 msgid "Unmounting disabled devices?"
-msgstr ""
+msgstr "Να γίνει αποπροσάρτηση των απενεργοποιημένων συσκευών;"
 
 #: ../DiskManager/Fstab/FstabHandler.py:436
 msgid "You disabled the following devices:"
-msgstr "Απενεργοποιήσατε τις ακόλουθες συσκευές:"
+msgstr "Απενεργοποίηση των ακόλουθων συσκευών:"
 
 #: ../DiskManager/Fstab/FstabHandler.py:436
 msgid "Do you want to unmount them?"
-msgstr ""
+msgstr "Θέλετε να γίνει αποπροσάρτηση;"
 
 #: ../DiskManager/Fstab/FstabHandler.py:438
 msgid "Unmount selected"
-msgstr ""
+msgstr "Αποπροσάρτηση"
 
 #: ../DiskManager/Fstab/FstabHandler.py:447
 msgid "Reboot required"
-msgstr ""
+msgstr "Απαιτείται επανεκκίνηση"
 
 #: ../DiskManager/Fstab/FstabHandler.py:448
 msgid ""
 "In order to apply all your changes,\n"
 "you'll need to reboot your computer."
 msgstr ""
+"Για να εφαρμοστούν όλες τις αλλαγές,\n"
+"θα χρειαστεί επανεκκίνηση του υπολογιστή σας."
 
 #: ../DiskManager/Fstab/Mounter.py:56
 msgid "Mounting partition"
-msgstr ""
+msgstr "Προσάρτηση κατάτμησης"
 
 #: ../DiskManager/Fstab/Mounter.py:58
 msgid "Unmounting partition"
-msgstr ""
+msgstr "Αποπροσάρτηση κατάτμησης"
 
 #: ../DiskManager/Fstab/Mounter.py:60
 msgid "Applying changes"
-msgstr ""
+msgstr "Εφαρμογή αλλαγών"
 
 #: ../DiskManager/Fstab/Mounter.py:66
 #, python-format
 msgid "Unmounting %s"
-msgstr ""
+msgstr "Αποπροσάρτηση του %s"
 
 #: ../DiskManager/Fstab/Mounter.py:80
 #, python-format
 msgid "Mounting %s"
-msgstr ""
+msgstr "Προσάρτηση του %s"
 
 #: ../DiskManager/Fstab/Mounter.py:115
 msgid "Unmounting failed"
-msgstr ""
+msgstr "Απέτυχε η αποπροσάρτηση"
 
 #: ../DiskManager/Fstab/Mounter.py:116
 #, python-format
 msgid "Unmounting <i>%s</i> failed because of the following error:"
-msgstr ""
+msgstr "Απέτυχε η αποπροσάρτηση του <i>%s</i> λόγω του σφάλματος:"
 
 #. TRANSLATORS:
 #. Keep the English term 'lazy' for the 'lazy' unmount option
 #: ../DiskManager/Fstab/Mounter.py:122
 msgid "You can also use the 'lazy' options to detach the filesystem now."
 msgstr ""
+"Μπορείτε επίσης να χρησιμοποιήσετε την επιλογή \"lazy\" για να το "
+"αποσυνδέσετε τώρα."
 
 #: ../DiskManager/Fstab/Mounter.py:127
 #, python-format
@@ -371,56 +393,60 @@ msgid ""
 "Unmounting <i>%s</i> failed, because\n"
 "it is currently used by the following applications:"
 msgstr ""
+"Απέτυχε η αποπροσάρτηση του <i>%s</i>\n"
+"Χρησιμοποιείται από τις εφαρμογές:"
 
 #: ../DiskManager/Fstab/Mounter.py:129
 msgid "Close all applications that use it and retry to unmount."
-msgstr ""
+msgstr "Κλείστε όλες τις εφαρμογές που το χρησιμοποιούν και προσπαθήστε πάλι."
 
 #: ../DiskManager/Fstab/Mounter.py:132
 msgid "The filesystem might be temporarily busy. Wait few seconds and retry."
 msgstr ""
+"Το σύστημα ενδέχεται να είναι προσωρινά απασχολημένο. Περιμένετε λίγα "
+"δευτερόλεπτα και δοκιμάστε πάλι."
 
 #. TRANSLATORS:
 #. Keep the English term 'lazy' for the 'lazy' unmount option
 #: ../DiskManager/Fstab/Mounter.py:137
 msgid "Unmount with the 'lazy' option"
-msgstr ""
+msgstr "Αποπροσάρτηση με την επιλογή 'lazy'"
 
 #: ../DiskManager/Fstab/Mounter.py:138
 msgid "Retry unmount"
-msgstr ""
+msgstr "Επανάληψη αποπροσάρτησης"
 
 #. TRANSLATORS:
 #. Keep the English term 'lazy' for the 'lazy' unmount option
 #: ../DiskManager/Fstab/Mounter.py:143
 msgid "Even with the lazy option, unmounting failed."
-msgstr ""
+msgstr "Απέτυχε η αποπροσάρτηση, ακόμη και με την επιλογή lazy."
 
 #: ../DiskManager/Fstab/Mounter.py:155
 msgid "Mounting failed"
-msgstr ""
+msgstr "Απέτυχε η προσάρτηση"
 
 #: ../DiskManager/Fstab/Mounter.py:156
 #, python-format
 msgid "Mounting <i>%s</i> failed because of the following error:"
-msgstr ""
+msgstr "Απέτυχε η προσάρτηση του <i>%s</i> λόγω του σφάλματος:"
 
 #: ../DiskManager/Fstab/Mounter.py:159
 msgid "Retry mount"
-msgstr ""
+msgstr "Επανάληψη προσάρτησης"
 
 #: ../DiskManager/Fstab/Mounter.py:190
 msgid "You can try one of the following actions:"
-msgstr ""
+msgstr "Μπορείτε να δοκιμάσετε μία από τις παρακάτω ενέργειες:"
 
 #: ../DiskManager/Fstab/Mounter.py:193
 #, python-format
 msgid "It seems that option '%s' is not allowed."
-msgstr ""
+msgstr "Φαίνεται ότι δεν επιτρέπεται η επιλογή '%s'."
 
 #: ../DiskManager/Fstab/Mounter.py:195
 msgid "Return options to defaults"
-msgstr ""
+msgstr "Επιστροφή επιλογών στις προεπιλογές"
 
 #: ../DiskManager/Fstab/Mounter.py:197
 #, python-format
@@ -430,12 +456,12 @@ msgstr "Μη χρησιμοποιείτε την επιλογή '%s'"
 #: ../DiskManager/Fstab/Mounter.py:199
 #, python-format
 msgid "It seems that fs type '%s' is not valid."
-msgstr ""
+msgstr "Φαίνεται ότι ο τύπος fs '%s' δεν είναι έγκυρος."
 
 #: ../DiskManager/Fstab/Mounter.py:203
 #, python-format
 msgid "Using driver '%s' (%s)"
-msgstr ""
+msgstr "Χρήση του προγράμματος οδήγησης '%s' (%s )"
 
 #. TRANSLATORS:
 #. Keep the English term 'force' for the 'force' unmount option
@@ -443,7 +469,9 @@ msgstr ""
 msgid ""
 "You can try to use the 'force' option. Be aware that this could be risky."
 msgstr ""
+"Δοκιμαστικά μπορείται να χρησιμοποιήσετε την επιλογή 'force'. Να γνωρίζετε "
+"ότι αυτό μπορεί να είναι επικίνδυνο."
 
 #: ../DiskManager/Fstab/Mounter.py:212
 msgid "Use the 'force' option"
-msgstr ""
+msgstr "Χρήση της επιλογής 'force'."

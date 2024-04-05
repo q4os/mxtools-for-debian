@@ -21,9 +21,7 @@
  * You should have received a copy of the GNU General Public License
  * along with mx-select-sound.  If not, see <http://www.gnu.org/licenses/>.
  **********************************************************************/
-
-#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
+#pragma once
 
 #include <QMessageBox>
 #include <QProcess>
@@ -63,5 +61,3 @@ private:
     QProcess *proc {};
     QString output;
 };
-
-#endif // MXSNAPSHOT_H

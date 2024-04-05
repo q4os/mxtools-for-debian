@@ -7,6 +7,7 @@
 # En Kerro <inactive+ekeimaja@transifex.com>, 2022
 # asd asd <ekeimaja@gmail.com>, 2022
 # Robin, 2023
+# Kimmo Kujansuu <mrkujansuu@gmail.com>, 2023
 # 
 #, fuzzy
 msgid ""
@@ -15,7 +16,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-12-08 21:33-0500\n"
 "PO-Revision-Date: 2022-12-09 02:56+0000\n"
-"Last-Translator: Robin, 2023\n"
+"Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>, 2023\n"
 "Language-Team: Finnish (https://app.transifex.com/anticapitalista/teams/10162/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -31,7 +32,7 @@ msgstr "Työn vuorontaja"
 #. # The desktop entry comment will be shown within the menu.
 #: desktop-in/job-scheduler.desktop.in:6
 msgid "Job scheduling utility which uses crontab as the backend"
-msgstr ""
+msgstr "Työiden ajastusapuohjelma, joka käyttää crontab taustapalveluna"
 
 #. The desktop entry name will be displayed within the menu.
 #. The desktop entry name will be displayed within the menu.

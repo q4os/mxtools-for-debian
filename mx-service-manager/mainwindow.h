@@ -19,9 +19,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this package. If not, see <http://www.gnu.org/licenses/>.
  **********************************************************************/
-
-#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
+#pragma once
 
 #include <QListWidgetItem>
 #include <QMessageBox>
@@ -44,8 +42,6 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow() override;
     void centerWindow();
-
-public slots:
 
 private slots:
     void cmdDone();
@@ -73,5 +69,3 @@ private:
     void displayServices();
     void listServices();
 };
-
-#endif

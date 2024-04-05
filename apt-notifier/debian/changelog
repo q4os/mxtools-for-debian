@@ -1,3 +1,10 @@
+apt-notifier (24.03.01) mx; urgency=medium
+
+  * generate svg iconset with rsvg-convert instead of inkscape
+  * translations refresh
+
+ -- fehlix <fehlix@mxlinux.org>  Mon, 25 Mar 2024 17:59:12 -0400
+
 apt-notifier (23.07.02) mx; urgency=medium
 
   * update pulse icons [MelBer]

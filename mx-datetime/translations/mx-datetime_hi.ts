@@ -5,7 +5,7 @@
     <name>MXDateTime</name>
     <message>
         <location filename="../datetime.ui" line="20"/>
-        <location filename="../datetime.cpp" line="746"/>
+        <location filename="../datetime.cpp" line="749"/>
         <source>MX Date &amp; Time</source>
         <translation>एमएक्स दिनांक व समय</translation>
     </message>
@@ -15,134 +15,134 @@
         <translation>बंद करें</translation>
     </message>
     <message>
-        <location filename="../datetime.ui" line="40"/>
+        <location filename="../datetime.ui" line="39"/>
         <source>Help</source>
         <translation>सहायता</translation>
     </message>
     <message>
-        <location filename="../datetime.ui" line="73"/>
+        <location filename="../datetime.ui" line="71"/>
         <source>Apply</source>
         <translation>लागू करें</translation>
     </message>
     <message>
-        <location filename="../datetime.ui" line="94"/>
+        <location filename="../datetime.ui" line="91"/>
         <source>About...</source>
         <translation>बारे में...</translation>
     </message>
     <message>
-        <location filename="../datetime.ui" line="115"/>
+        <location filename="../datetime.ui" line="111"/>
         <source>Date &amp;&amp; Time</source>
         <translation>दिनांक व समय</translation>
     </message>
     <message>
-        <location filename="../datetime.ui" line="181"/>
+        <location filename="../datetime.ui" line="177"/>
         <source>H:mm:ss</source>
         <translation>H:mm:ss</translation>
     </message>
     <message>
-        <location filename="../datetime.ui" line="265"/>
+        <location filename="../datetime.ui" line="261"/>
         <location filename="../datetime.cpp" line="360"/>
         <location filename="../datetime.cpp" line="367"/>
         <source>Hardware Clock</source>
         <translation>हार्डवेयर घड़ी</translation>
     </message>
     <message>
-        <location filename="../datetime.ui" line="271"/>
+        <location filename="../datetime.ui" line="267"/>
         <source>Hardware Clock tools</source>
         <translation>हार्डवेयर घड़ी साधन</translation>
     </message>
     <message>
-        <location filename="../datetime.ui" line="277"/>
+        <location filename="../datetime.ui" line="273"/>
         <source>Obtain information from the Hardware Clock and present it in the box below.</source>
         <translation>हार्डवेयर घड़ी से सूचना प्राप्त कर नीचे दिए स्थान में दर्ज करें।</translation>
     </message>
     <message>
-        <location filename="../datetime.ui" line="280"/>
+        <location filename="../datetime.ui" line="276"/>
         <source>Read the Hardware Clock</source>
         <translation>हार्डवेयर घड़ी रीड करें</translation>
     </message>
     <message>
-        <location filename="../datetime.ui" line="290"/>
+        <location filename="../datetime.ui" line="286"/>
         <source>Apply systematic drift corrections to the Hardware Clock.</source>
         <translation>हार्डवेयर घड़ी हेतु व्यवस्थित समन्वय सुधार लागू करें।</translation>
     </message>
     <message>
-        <location filename="../datetime.ui" line="293"/>
+        <location filename="../datetime.ui" line="289"/>
         <source>Drift Adjust</source>
         <translation>समन्वय सुधार</translation>
     </message>
     <message>
-        <location filename="../datetime.ui" line="316"/>
+        <location filename="../datetime.ui" line="312"/>
         <source>Time transfer</source>
         <translation>समय अंतरण</translation>
     </message>
     <message>
-        <location filename="../datetime.ui" line="322"/>
+        <location filename="../datetime.ui" line="318"/>
         <source>Immediately set the System Clock to match the current time registered by the Hardware Clock.</source>
         <translation>हार्डवेयर घड़ी द्वारा दर्ज वर्तमान समय को ही सिस्टम घड़ी हेतु तुरंत सेट करें।</translation>
     </message>
     <message>
-        <location filename="../datetime.ui" line="325"/>
+        <location filename="../datetime.ui" line="321"/>
         <source>Hardware Clock to System Clock</source>
         <translation>हार्डवेयर घड़ी से सिस्टम घड़ी</translation>
     </message>
     <message>
-        <location filename="../datetime.ui" line="335"/>
+        <location filename="../datetime.ui" line="331"/>
         <source>Immediately set the Hardware Clock to match the current time registered by the System Clock.</source>
         <translation>सिस्टम घड़ी द्वारा दर्ज वर्तमान समय को ही हार्डवेयर घड़ी हेतु तुरंत सेट करें।</translation>
     </message>
     <message>
-        <location filename="../datetime.ui" line="338"/>
+        <location filename="../datetime.ui" line="334"/>
         <source>System Clock to Hardware Clock</source>
         <translation>सिस्टम घड़ी से हार्डवेयर घड़ी</translation>
     </message>
     <message>
-        <location filename="../datetime.ui" line="348"/>
+        <location filename="../datetime.ui" line="344"/>
         <source>Update the drift factor for the Hardware Clock when it is being set.</source>
         <translation>हार्डवेयर घड़ी सेट करते समय समन्वय गुणक भी अपडेट करें।</translation>
     </message>
     <message>
-        <location filename="../datetime.ui" line="351"/>
+        <location filename="../datetime.ui" line="347"/>
         <source>Update the drift</source>
         <translation>समन्वय अपडेट करें</translation>
     </message>
     <message>
-        <location filename="../datetime.ui" line="361"/>
+        <location filename="../datetime.ui" line="357"/>
         <source>Time zone for the Hardware Clock</source>
         <translation>हार्डवेयर घड़ी हेतु समय क्षेत्र</translation>
     </message>
     <message>
-        <location filename="../datetime.ui" line="367"/>
+        <location filename="../datetime.ui" line="363"/>
         <source>Local time</source>
         <translation>स्थानीय समय</translation>
     </message>
     <message>
-        <location filename="../datetime.ui" line="370"/>
+        <location filename="../datetime.ui" line="366"/>
         <source>Local</source>
         <translation>स्थानीय</translation>
     </message>
     <message>
-        <location filename="../datetime.ui" line="377"/>
+        <location filename="../datetime.ui" line="373"/>
         <source>Universally Coordinated Time (or Greenwich Meridian Time)</source>
         <translation>समन्वित सार्वत्रिक समय (या ग्रीनिच माध्य समय)</translation>
     </message>
     <message>
-        <location filename="../datetime.ui" line="380"/>
+        <location filename="../datetime.ui" line="376"/>
         <source>UTC</source>
         <translation>UTC</translation>
     </message>
     <message>
-        <location filename="../datetime.ui" line="408"/>
+        <location filename="../datetime.ui" line="404"/>
         <source>Network Time</source>
         <translation>नेटवर्क समय</translation>
     </message>
     <message>
-        <location filename="../datetime.ui" line="414"/>
+        <location filename="../datetime.ui" line="501"/>
         <source>Move the selected item down</source>
         <translation>चयनित वस्तु को नीचे लाएं</translation>
     </message>
     <message>
-        <location filename="../datetime.ui" line="424"/>
+        <location filename="../datetime.ui" line="444"/>
         <source>Move the selected item up</source>
         <translation>चयनित वस्तु को ऊपर करें</translation>
     </message>
@@ -152,42 +152,42 @@
         <translation>वर्तमान वस्तु को सूची से हटाएँ</translation>
     </message>
     <message>
-        <location filename="../datetime.ui" line="445"/>
+        <location filename="../datetime.ui" line="410"/>
         <source>Add an item to the list</source>
         <translation>सूची में वस्तु जोड़ें</translation>
     </message>
     <message>
-        <location filename="../datetime.ui" line="465"/>
+        <location filename="../datetime.ui" line="420"/>
         <source>Automatically update the System Clock with NTP servers:</source>
         <translation>सिस्टम घड़ी को एनटीपी सर्वर द्वारा स्वतः अपडेट करें :</translation>
     </message>
     <message>
-        <location filename="../datetime.ui" line="472"/>
+        <location filename="../datetime.ui" line="488"/>
         <source>Immediately update the system clock with NTP servers.</source>
         <translation>सिस्टम घड़ी को एनटीपी सर्वर द्वारा तुरंत अपडेट करें।</translation>
     </message>
     <message>
-        <location filename="../datetime.ui" line="475"/>
+        <location filename="../datetime.ui" line="491"/>
         <source>Update Now</source>
         <translation>अभी अपडेट करें</translation>
     </message>
     <message>
-        <location filename="../datetime.ui" line="487"/>
+        <location filename="../datetime.ui" line="454"/>
         <source>List of NTP servers to use.</source>
         <translation>उपयोग हेतु एनटीपी सर्वर।</translation>
     </message>
     <message>
-        <location filename="../datetime.ui" line="503"/>
+        <location filename="../datetime.ui" line="470"/>
         <source>Type</source>
         <translation>प्रकार</translation>
     </message>
     <message>
-        <location filename="../datetime.ui" line="508"/>
+        <location filename="../datetime.ui" line="475"/>
         <source>Address</source>
         <translation>पता</translation>
     </message>
     <message>
-        <location filename="../datetime.ui" line="513"/>
+        <location filename="../datetime.ui" line="480"/>
         <source>Options</source>
         <translation>विकल्प</translation>
     </message>
@@ -218,7 +218,7 @@
         <translation>%1 समय का %2 में अंतरण विफल।</translation>
     </message>
     <message>
-        <location filename="../datetime.cpp" line="752"/>
+        <location filename="../datetime.cpp" line="755"/>
         <source>%1 License</source>
         <translation type="unfinished"></translation>
     </message>
@@ -241,22 +241,22 @@
         <translation type="vanished">सूची में मौजूद कोई भी एनटीपी सर्वर सक्रिय नहीं है।</translation>
     </message>
     <message>
-        <location filename="../datetime.cpp" line="745"/>
+        <location filename="../datetime.cpp" line="748"/>
         <source>About MX Date &amp; Time</source>
         <translation>एमएक्स दिनांक व समय के बारे में</translation>
     </message>
     <message>
-        <location filename="../datetime.cpp" line="747"/>
+        <location filename="../datetime.cpp" line="750"/>
         <source>Version: </source>
         <translation>संस्करण :</translation>
     </message>
     <message>
-        <location filename="../datetime.cpp" line="748"/>
+        <location filename="../datetime.cpp" line="751"/>
         <source>GUI program for setting the time and date in MX Linux</source>
         <translation>एमएक्स लिनक्स में दिनांक व समय सेट करने हेतु ग्राफ़िकल अंतरफलक प्रोग्राम</translation>
     </message>
     <message>
-        <location filename="../datetime.cpp" line="751"/>
+        <location filename="../datetime.cpp" line="754"/>
         <source>Copyright (c) MX Linux</source>
         <translation>कॉपीराइट (c) एमएक्स लिनक्स</translation>
     </message>
@@ -277,7 +277,7 @@
         <translation type="vanished">बंद करें (&amp;C)</translation>
     </message>
     <message>
-        <location filename="../datetime.cpp" line="756"/>
+        <location filename="../datetime.cpp" line="759"/>
         <source>MX Date &amp; Time Help</source>
         <translation>एमएक्स दिनांक व समय सहायता</translation>
     </message>

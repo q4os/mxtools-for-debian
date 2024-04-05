@@ -4,8 +4,8 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Ioannis LM, 2023
 # anticapitalista <anticapitalista@riseup.net>, 2023
+# Ioannis LM, 2024
 # 
 #, fuzzy
 msgid ""
@@ -14,7 +14,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-12-14 20:02-0500\n"
 "PO-Revision-Date: 2016-11-29 14:08+0000\n"
-"Last-Translator: anticapitalista <anticapitalista@riseup.net>, 2023\n"
+"Last-Translator: Ioannis LM, 2024\n"
 "Language-Team: Greek (https://app.transifex.com/anticapitalista/teams/10162/el/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -32,7 +32,7 @@ msgstr "Άγνωστο σφάλμα"
 #: ../ddm-mx:45
 #, sh-format
 msgid "Option-"
-msgstr "Επιλογή- "
+msgstr "Η επιλογή- "
 
 #. tell that option needs an arguement
 #: ../ddm-mx:47
@@ -56,14 +56,16 @@ msgstr "Εγκατάσταση προγραμμάτων οδήγησης για:
 #. The desktop entry name will be displayed within the menu.
 #: ../ddm-mx:58 ../xdg/ddm-nvidia.desktop.in:4
 msgid "Nvidia driver installer"
-msgstr "Εγκατάσταση προγράμματος οδήγησης κάρτας γραφικών Nvidia"
+msgstr "Εγκατάσταση προγράμματος οδήγησης Nvidia"
 
 #. desktop comment
 #. TRANSLATORS:
 #. The desktop entry comment will be shown within the menu.
 #: ../ddm-mx:60 ../xdg/ddm-nvidia.desktop.in:7
 msgid "Install proprietary nvidia driver from repo"
-msgstr "Εγκατάσταση ιδιόκτητου προγράμματος οδήγησης nvidia"
+msgstr ""
+"Εγκατάσταση ιδιόκτητου προγράμματος οδήγησης κάρτας γραφικών nvidia από "
+"αποθετήριο"
 
 #. Invalid option: start GUI
 #. launch_gui $@
@@ -119,7 +121,7 @@ msgstr "Εναλλακτικά από to debian-backports"
 
 #: ../ddm-mx:262
 msgid "Offer Nvidia developer repo alternative"
-msgstr ""
+msgstr "Εναλλακτικά από το αποθετήριο Nvidia"
 
 #: ../ddm-mx:263
 msgid "Create 20-nvidia.conf"
@@ -170,7 +172,7 @@ msgstr ""
 #: ../ddm-mx:379
 #, sh-format
 msgid "Need driver: "
-msgstr "Χρειάζεται πρόγραμμα οδήγησης: "
+msgstr "Χρειάζεται το πρόγραμμα οδήγησης: "
 
 #. we are going to install this package
 #: ../ddm-mx:384
@@ -255,7 +257,7 @@ msgstr "Εκτελείται η εντολή apt-get update ... "
 #: ../ddm-mx:583 ../ddm-mx:599 ../ddm-mx:1194
 #, sh-format
 msgid "Installing latest nvidia-detect package"
-msgstr "Εγκατάσταση του πακέτου nvidia-detect"
+msgstr "Εγκατάσταση του τελευταίου πακέτου nvidia-detect"
 
 #. enabling mx_test_repo
 #: ../ddm-mx:593
@@ -267,26 +269,25 @@ msgstr "Ενεργοποίηση του αποθετηρίου MX Test"
 #: ../ddm-mx:609
 #, sh-format
 msgid "Enabling Nvidia developer repo"
-msgstr ""
+msgstr "Ενεργοποίηση του αποθετηρίου Nvidia"
 
 #. getting the nvidia gpg archive key
 #: ../ddm-mx:611
 #, sh-format
 msgid "Getting Nvidia repo signing key"
-msgstr ""
+msgstr "Λήψη κλειδιού υπογραφής του αποθετηρίου Nvidia"
 
 #. problem downloading and installing the nvidia gpg key package
 #: ../ddm-mx:621
 #, sh-format
 msgid "Error downloading nvidia direct repo key"
-msgstr ""
+msgstr "Σφάλμα λήψης κλειδιού του αποθετηρίου nvidia"
 
 #: ../ddm-mx:639
 #, sh-format
 msgid "Would you like to check debian-backports for a later version?"
 msgstr ""
-"Θέλετε να ελέγξετε στο αποθετήριο debian-backports για μια πιο πρόσφατη "
-"έκδοση;"
+"Θέλετε να ελέγξετε για νεότερη έκδοση στο αποθετήριο debian-backports;"
 
 #: ../ddm-mx:641
 #, sh-format
@@ -333,13 +334,12 @@ msgstr "έξοδος"
 #: ../ddm-mx:663 ../ddm-mx:664
 #, sh-format
 msgid "Would you like to check MX Test Repo for a later version?"
-msgstr ""
-"Θέλετε να ελέγξετε στο αποθετήριο του MX Test για μια πιο πρόσφατη έκδοση;"
+msgstr "Θέλετε να ελέγξετε για νεότερη έκδοση στο αποθετήριο του MX Test;"
 
 #: ../ddm-mx:680 ../ddm-mx:681
 #, sh-format
 msgid "Would you like to check the Nvidia developer repo for a later version?"
-msgstr ""
+msgstr "Θέλετε να ελέγξετε για νεότερη έκδοση στο αποθετήριο Nvidia;"
 
 #. a choice of driver versions is being offerred
 #: ../ddm-mx:699 ../ddm-mx:738 ../ddm-mx:778
@@ -381,12 +381,12 @@ msgstr "MX Test"
 #: ../ddm-mx:780
 #, sh-format
 msgid "Main repos or Nvidia direct repo"
-msgstr ""
+msgstr "Βασικά αποθετήρια ή αποθετήριο Nvidia"
 
 #: ../ddm-mx:784
 #, sh-format
 msgid "Nvidia Direct"
-msgstr ""
+msgstr "Αποθετήριο Nvidia"
 
 #: ../ddm-mx:826
 #, sh-format
@@ -542,7 +542,7 @@ msgstr "Στο αποθετήριο MX Test:  "
 #: ../ddm-mx:1139
 #, sh-format
 msgid "Nvidia developer repo candidate is:  "
-msgstr ""
+msgstr "Στο αποθετήριο Nvidia:  "
 
 #: ../ddm-mx:1150
 #, sh-format
@@ -579,7 +579,7 @@ msgstr "Δεν βρέθηκε κάρτα γραφικών της nvidia - έξο
 #: ../ddm-mx:1249
 #, sh-format
 msgid "Try latest nvidia-driver?"
-msgstr "Δοκιμάστε το πιο πρόσφατο πρόγραμμα οδήγησης nvidia;"
+msgstr "Θέλετε το τελευταίο πρόγραμμα οδήγησης της nvidia;"
 
 #: ../nvidia-detect-mx:33
 msgid ""

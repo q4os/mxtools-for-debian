@@ -20,9 +20,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this package. If not, see <http://www.gnu.org/licenses/>.
  **********************************************************************/
-
-#ifndef EDITSHARE_H
-#define EDITSHARE_H
+#pragma once
 
 #include <QDialog>
 
@@ -42,5 +40,3 @@ public:
 private slots:
     void pushChooseDirectory_clicked();
 };
-
-#endif // EDITSHARE_H

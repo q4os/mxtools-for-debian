@@ -1,5 +1,5 @@
 /**********************************************************************
- * Copyright (C) 2014 MX Authors
+ * Copyright (C) 2014-2024 MX Authors
  *
  * Authors: Adrian
  *          Paul David Callahan
@@ -27,20 +27,19 @@ FlatButton::FlatButton(QWidget *parent)
     : QPushButton(parent)
 {
     setFlat(true);
-    setStyleSheet(QStringLiteral("text-align:left;"));
+    setStyleSheet("text-align:left;");
 }
 
 void FlatButton::leaveEvent(QEvent *e)
 {
     // setFlat(true);
-    setStyleSheet(QStringLiteral("text-align:left; text-decoration: none;"));
+    setStyleSheet("text-align:left; text-decoration: none;");
     QPushButton::leaveEvent(e);
 }
 
 void FlatButton::enterEvent(QEvent *e)
 {
     // setFlat(false);
-    setStyleSheet(QStringLiteral(
-        "QPushButton { text-align:left; text-decoration: underline;}; QToolTip { text-decoration: none; }"));
+    setStyleSheet("QPushButton { text-align:left; text-decoration: underline;}; QToolTip { text-decoration: none; }");
     QPushButton::enterEvent(e);
 }

@@ -5,8 +5,9 @@
 # 
 # Translators:
 # el Presidento, 2022
-# joyinko <joyinko@azet.sk>, 2022
 # anticapitalista <anticapitalista@riseup.net>, 2022
+# joyinko <joyinko@azet.sk>, 2023
+# creativefingers, 2024
 # 
 #, fuzzy
 msgid ""
@@ -15,8 +16,8 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-01-16 00:46+0100\n"
 "PO-Revision-Date: 2022-01-21 17:21+0000\n"
-"Last-Translator: anticapitalista <anticapitalista@riseup.net>, 2022\n"
-"Language-Team: Czech (https://www.transifex.com/anticapitalista/teams/10162/cs/)\n"
+"Last-Translator: creativefingers, 2024\n"
+"Language-Team: Czech (https://app.transifex.com/anticapitalista/teams/10162/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -133,11 +134,11 @@ msgstr ""
 #: ../data/disk-manager.desktop.in.in.h:1 ../DiskManager/Dialogs.py:489
 #: ../DiskManager/DiskManager.py:78
 msgid "Disk Manager"
-msgstr ""
+msgstr "Správce disků"
 
 #: ../data/disk-manager.desktop.in.in.h:2
 msgid "Manage filesystem configuration"
-msgstr ""
+msgstr "Správa konfigurace souborového systému"
 
 #: ../DiskManager/Dialogs.py:127 ../DiskManager/Fstab/Mounter.py:206
 #, python-format
@@ -190,7 +191,7 @@ msgstr ""
 
 #: ../DiskManager/Dialogs.py:433
 msgid "Remove selected"
-msgstr ""
+msgstr "Odberat označené"
 
 #: ../DiskManager/Dialogs.py:433
 msgid "Don't show me this warning in the future."

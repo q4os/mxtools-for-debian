@@ -291,12 +291,12 @@
     <message>
         <location filename="../mainwindow.ui" line="993"/>
         <source>Select to copy/sync Shared</source>
-        <translation>Gemeinsame Ordner kopieren /synchronisieren</translation>
+        <translation>Freigegebene Ordner kopieren /synchronisieren</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="996"/>
         <source>Shared folder</source>
-        <translation>Gemeinsamer Ordner</translation>
+        <translation>Freigegebene Ordner</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1009"/>
@@ -851,12 +851,12 @@ Bitte wählen Sie einen anderen Namen, bevor Sie weitermachen.</translation>
     <message>
         <location filename="../passedit.cpp" line="200"/>
         <source>Hide the password</source>
-        <translation>Paßwort verbergen</translation>
+        <translation>Passwort verbergen</translation>
     </message>
     <message>
         <location filename="../passedit.cpp" line="200"/>
         <source>Show the password</source>
-        <translation>Paßwort anzeigen</translation>
+        <translation>Passwort anzeigen</translation>
     </message>
 </context>
 <context>

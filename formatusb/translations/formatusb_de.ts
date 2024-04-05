@@ -161,7 +161,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="222"/>
         <source>Do you wish to continue?</source>
-        <translation>Möchten sie fortfahren?</translation>
+        <translation>Möchten Sie fortfahren?</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="258"/>

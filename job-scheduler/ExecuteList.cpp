@@ -20,10 +20,11 @@
 #include "ExecuteModel.h"
 #include "ExecuteView.h"
 
-ExecuteList::ExecuteList(int maxN, int maxD, QList<Crontab *> *cron)
-    : maxNum(maxN)
-    , maxDate(maxD)
-    , crontabs(cron)
+ExecuteList::ExecuteList(int maxN, int maxD, QList<Crontab *> *cron, QWidget *parent)
+    : QWidget(parent),
+      maxNum(maxN),
+      maxDate(maxD),
+      crontabs(cron)
 {
     executeModel = new ExecuteModel(&executes);
     QHBoxLayout *h = nullptr;
@@ -69,14 +70,16 @@ ExecuteList::ExecuteList(int maxN, int maxD, QList<Crontab *> *cron)
 void ExecuteList::dataChanged()
 {
 
-    if (!isVisible())
+    if (!isVisible()) {
         return;
+    }
 
     QDateTime stopTime = QDateTime::currentDateTime().addDays(maxDate);
 
     executeView->clearSelection();
-    for (auto *e : qAsConst(executes))
+    for (auto *e : qAsConst(executes)) {
         delete e;
+    }
     executes.clear();
     QList<TCommand *> cmnd;
     QList<QDateTime> date;
@@ -102,8 +105,9 @@ void ExecuteList::dataChanged()
                     p = j;
                 }
             }
-            if (cur > stopTime)
+            if (cur > stopTime) {
                 break;
+            }
             executes << new Execute(cmnd.at(p), cur.toString(QStringLiteral("yyyy-MM-dd(ddd) hh:mm")));
             itemCount++;
             date[p] = CronTime(cmnd.at(p)->time).getNextTime(cur);
@@ -120,37 +124,51 @@ void ExecuteList::changeCurrent(Crontab *cron, TCommand *cmnd)
 {
     curCrontab = cron;
     curTCommand = cmnd;
-    if (!isVisible())
+    if (!isVisible()) {
         return;
+    }
 
-    for (auto &e : executes)
+    for (auto &e : executes) {
         e->sel = 0;
+    }
 
     int sel = 0;
-    if (crontabs->count() > 1 && cron != nullptr)
-        for (auto &e : executes)
-            if (reinterpret_cast<uintptr_t>(e->tCommands->parent) == reinterpret_cast<uintptr_t>(cron))
+    if (crontabs->count() > 1 && cron != nullptr) {
+        for (auto &e : executes) {
+            if (reinterpret_cast<uintptr_t>(e->tCommands->parent) == reinterpret_cast<uintptr_t>(cron)) {
                 e->sel = 1;
+            }
+        }
+    }
 
-    if (cmnd != nullptr)
-        for (auto &e : executes)
+    if (cmnd != nullptr) {
+        for (auto &e : executes) {
             if (reinterpret_cast<uintptr_t>(e->tCommands) == reinterpret_cast<uintptr_t>(cmnd)) {
                 e->sel = 2;
                 sel++;
             }
+        }
+    }
 
     countLabel->setText(QStringLiteral("%1/%2").arg(sel).arg(itemCount));
     executeModel->doSort();
 }
 
-void ExecuteList::numChanged(int num) { maxNum = num; }
+void ExecuteList::numChanged(int num)
+{
+    maxNum = num;
+}
 
-void ExecuteList::dateChanged(int num) { maxDate = num; }
+void ExecuteList::dateChanged(int num)
+{
+    maxDate = num;
+}
 
 void ExecuteList::setVisible(bool flag)
 {
     QWidget::setVisible(flag);
 
-    if (flag)
+    if (flag) {
         dataChanged();
+    }
 }

@@ -6,6 +6,9 @@
 # Translators:
 # anticapitalista <anticapitalista@riseup.net>, 2022
 # prolinux ukrainian <prolinux@ukr.net>, 2022
+# Tymofii Lytvynenko <till.svit@gmail.com>, 2022
+# Максим Пличко, 2022
+# bogos Bogos, 2023
 # 
 #, fuzzy
 msgid ""
@@ -14,8 +17,8 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-01-16 00:46+0100\n"
 "PO-Revision-Date: 2022-01-21 17:21+0000\n"
-"Last-Translator: prolinux ukrainian <prolinux@ukr.net>, 2022\n"
-"Language-Team: Ukrainian (https://www.transifex.com/anticapitalista/teams/10162/uk/)\n"
+"Last-Translator: bogos Bogos, 2023\n"
+"Language-Team: Ukrainian (https://app.transifex.com/anticapitalista/teams/10162/uk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -136,7 +139,7 @@ msgstr ""
 
 #: ../data/disk-manager.desktop.in.in.h:2
 msgid "Manage filesystem configuration"
-msgstr ""
+msgstr "Менеджер конфігурації файлової системки"
 
 #: ../DiskManager/Dialogs.py:127 ../DiskManager/Fstab/Mounter.py:206
 #, python-format
@@ -237,7 +240,7 @@ msgstr ""
 
 #: ../DiskManager/DiskManager.py:158
 msgid "Type"
-msgstr ""
+msgstr "Тип"
 
 #: ../DiskManager/DiskManager.py:165
 msgid "Total"
@@ -245,11 +248,11 @@ msgstr ""
 
 #: ../DiskManager/DiskManager.py:172
 msgid "Free"
-msgstr ""
+msgstr "Вільно"
 
 #: ../DiskManager/DiskManager.py:179
 msgid "Used"
-msgstr ""
+msgstr "Використано"
 
 #: ../DiskManager/DiskManager.py:292
 msgid "Editing system partition?"
@@ -265,7 +268,7 @@ msgstr ""
 
 #: ../DiskManager/DiskManager.py:399
 msgid "Unmount"
-msgstr ""
+msgstr "Від'єднати"
 
 #: ../DiskManager/DiskManager.py:402
 msgid "Mount"

@@ -1,0 +1,318 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the apt-notifier package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+# Translators:
+# Dolgopova irina, 2023
+# Victor Red, 2024
+# 
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: apt-notifier\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-01-28 02:38+0100\n"
+"PO-Revision-Date: 2017-05-11 01:14+0000\n"
+"Last-Translator: Victor Red, 2024\n"
+"Language-Team: Russian (Russia) (https://app.transifex.com/anticapitalista/teams/10162/ru_RU/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: ru_RU\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%100>=11 && n%100<=14)? 2 : 3);\n"
+
+msgid "$count new updates available"
+msgstr "доступно $count свежих обновлений"
+
+msgid "0 updates available"
+msgstr "0 обновлений доступно"
+
+msgid "1 new update available"
+msgstr "1 обновление доступно"
+
+msgid "About"
+msgstr "О"
+
+msgid "About MX Updater"
+msgstr "О MX Updater"
+
+msgid "Auto-update"
+msgstr "Авто-обновление"
+
+msgid "Auto-update dpkg log(s)"
+msgstr "Лог(и) dpkg авто-обновления"
+
+msgid "Auto-update log(s)"
+msgstr "Лог(и) авто-обновления"
+
+msgid "Automatically answer 'yes' to all prompts during full/basic upgrade"
+msgstr ""
+"Автоматически отвечать «да» на все запросы во время полного/базового "
+"обновления"
+
+msgid "Automatically answer 'yes' to all prompts during upgrade"
+msgstr "Автоматически отвечать «да» на все запросы во время обновления"
+
+msgid "Cancel"
+msgstr "Отмена"
+
+msgid "Changelog"
+msgstr "Список изменений"
+
+msgid "Check for Updates"
+msgstr "Проверить обновления"
+
+msgid "Close"
+msgstr "Закрыть"
+
+msgid "For a less detailed view see 'Auto-update dpkg log(s)' or 'History'."
+msgstr ""
+"Для менее детализированного отображения смотрите 'Лог(и) dpkg авто-"
+"обновления' или 'Историю'."
+
+msgid "Hide until updates available"
+msgstr "Скрыть до появления обновлений"
+
+msgid "History"
+msgstr "История"
+
+msgid "Icons"
+msgstr "Значки"
+
+msgid "Left-click behaviour   (when updates are available)"
+msgstr "Поведение при нажатии левой кнопки мыши (когда доступны обновления)"
+
+msgid "License"
+msgstr "Лицензия"
+
+msgid "MX Auto-update  --  unattended-upgrades dpkg log viewer"
+msgstr ""
+"MX Авто-обновление - просмотрщик логов dpkg не сопровождаемого обновления"
+
+msgid "MX Auto-update  --  unattended-upgrades log viewer"
+msgstr "MX Авто-обновление - просмотрщик логов не сопровождаемого обновления"
+
+msgid "MX Package Installer"
+msgstr "MX Установщик пакетов"
+
+#. The autostart desktop entry name will be shown within the list of autostart
+#. entries.
+#. The desktop entry name will be displayed within the menu.
+msgid "MX Updater"
+msgstr "MX Центр обновления"
+
+msgid "MX Updater Help"
+msgstr "Справка MX Центра обновления"
+
+msgid "MX Updater preferences"
+msgstr "Настройки MX Центра обновления"
+
+msgid "MX Updater--View and Upgrade, previewing: basic upgrade"
+msgstr ""
+"MX Центр обновления - Просмотр и обновление, предпросмотр: базовое "
+"обновление"
+
+msgid "MX Updater--View and Upgrade, previewing: full upgrade"
+msgstr ""
+"MX Центр обновления - Просмотр и обновление, предпросмотр: полное обновление"
+
+msgid "No logs found."
+msgstr "Нет найденных логов."
+
+msgid "No unattended-upgrades dpkg log(s) found."
+msgstr "Не найдено логов dpkg для несопровождаемых обновлений."
+
+msgid "No updates available"
+msgstr "Нет доступных обновлений"
+
+msgid "Other options"
+msgstr "Другие опции"
+
+msgid "Preferences"
+msgstr "Предпочтения"
+
+msgid "Press 'h' for help, 'q' to quit"
+msgstr "Нажмите 'h' для помощи, 'q' чтобы выйти"
+
+msgid "Quit"
+msgstr "Выход"
+
+msgid "Reload"
+msgstr "Перезагрузить"
+
+msgid ""
+"Reload the package information to become informed about new, removed or "
+"upgraded software packages. (apt-get update)"
+msgstr ""
+"Обновить информацию о пакетах, чтобы получить информацию о новых, удаленных "
+"или обновленных пакетах программного обеспечения. (apt-get update)"
+
+msgid "Restart MX Updater"
+msgstr "Перезапустить MX Центр обновления"
+
+msgid "Running apt-get autoremove, if you are unsure type 'n'."
+msgstr ""
+"Выполнение команды apt-get autoremove, если Вы не уверены, нажмите 'n'."
+
+msgid ""
+"Switches the type of Upgrade that will be performed, alternating back and "
+"forth between 'full upgrade' and 'basic upgrade'."
+msgstr ""
+"Переключает тип выполняемого обновления между 'полным обновлением' и "
+"'базовым обновлением'"
+
+msgid "Synaptic Help"
+msgstr "Справка по Synaptic"
+
+msgid "Tray applet to notify of system and application updates"
+msgstr "Апплет для уведомления о наличии обновлений системы и приложений"
+
+msgid "Unattended-upgrades"
+msgstr "Автоматические обновления"
+
+msgid "Unneeded packages are installed that can be removed."
+msgstr "Установлены ненужные пакеты, которые можно удалить."
+
+msgid "Updates"
+msgstr "Обновления"
+
+msgid "Upgrade mode"
+msgstr "Режим обновления"
+
+msgid "Upgrade using Synaptic"
+msgstr "Обновить с помощью Synaptic"
+
+msgid "Using basic upgrade (not recommended)"
+msgstr "Применять базовое обновление (не рекомендуется)"
+
+msgid "Using full upgrade"
+msgstr "Применять полное обновление"
+
+msgid "View and Upgrade"
+msgstr "Просмотр и обновление"
+
+msgid "You have $count new updates available"
+msgstr "Вам доступны свежие обновления: $count"
+
+msgid "You have 1 new update available"
+msgstr "Вам доступно 1 обновление"
+
+#. TRANSLATORS: Fill in all plural forms. The parenthesized expression '{num}'
+#. is replaced by the actual number of updates available at runtime.
+#. For the singular form, you can replace '{num}' with 'one'.
+#. Example with 2 plural forms:
+#. msgstr[0] -> singular form: use 'one new update' or '{num} new update'.
+#. msgstr[1] -> plural form: use '{num} new updates'.
+#, python-brace-format
+msgid "You have {num} new update available"
+msgid_plural "You have {num} new updates available"
+msgstr[0] "Вам доступно {num} обновление"
+msgstr[1] "Вам доступно {num} обновления"
+msgstr[2] "Вам доступно {num} обновлений"
+msgstr[3] "Вам доступно {num} обновлений"
+
+msgid "automatically close terminal window when full/basic upgrade complete"
+msgstr ""
+"Автоматически закрыть окно терминала по завершении полного/базового "
+"обновления"
+
+msgid "automatically close terminal window when upgrade complete"
+msgstr "Автоматически закрыть окно терминала по завершении обновления"
+
+msgid "basic upgrade"
+msgstr "базовое обновление"
+
+msgid "basic upgrade complete (or was canceled)"
+msgstr "базовое обновление завершено (или было отменено)"
+
+msgid "check for autoremovable packages after full/basic upgrade"
+msgstr ""
+"проверить наличие автоудаляемых пакетов после полного/базового обновления"
+
+msgid "classic"
+msgstr "классические"
+
+msgid "full upgrade"
+msgstr "полное обновление"
+
+msgid "full upgrade   (recommended)"
+msgstr "Полное обновление (рекомендовано)"
+
+msgid "full upgrade complete (or was canceled)"
+msgstr "Полное обновление было завершено (или отменено)"
+
+msgid "opens MX Updater 'View and Upgrade' window"
+msgstr "открывает окно MX Центра обновления «Обзор и обновление»"
+
+msgid "opens Synaptic"
+msgstr "открыть Synaptic"
+
+msgid "press any key to close"
+msgstr "нажмите любую клавишу для выхода"
+
+msgid "press any key to stop automatic closing"
+msgstr "нажмите любую клавишу для остановки автоматического закрытия"
+
+msgid "pulse"
+msgstr "pulse"
+
+msgid "start MX Updater at login"
+msgstr "Запускать MX Центр обновления при входе в систему"
+
+msgid "switch to basic upgrade"
+msgstr "переключить на базовое обновление"
+
+msgid "switch to full upgrade"
+msgstr "переключить на полное обновление"
+
+msgid "this terminal window can now be closed"
+msgstr "Это окно терминала теперь можно закрыть"
+
+msgid "update automatically   (will not add new or remove existing packages)"
+msgstr ""
+"Автообновление (не будет добавлять новые пакеты или удалять существующие)"
+
+msgid "upgrade"
+msgstr "Обновить"
+
+msgid "use desktop notifications"
+msgstr "Использовать уведомления рабочего стола"
+
+msgid "use transparent interior for no-updates wireframe"
+msgstr "использовать прозрачный интерьер для каркаса без обновлений"
+
+msgid "wireframe"
+msgstr "каркас"
+
+#. TRANSLATORS: Fill in all plural forms. The parenthesized expression '{num}'
+#. is replaced by the actual number of updates available at runtime.
+#. For the singular form, you can replace '{num}' with 'one'.
+#. Example with 2 plural forms:
+#. msgstr[0] -> singular form: use 'one new update' or '{num} new update'.
+#. msgstr[1] -> plural form: use '{num} new updates'.
+#, python-brace-format
+msgid "{num} new update available"
+msgid_plural "{num} new updates available"
+msgstr[0] "Доступно {num} свежее обновление"
+msgstr[1] "Доступно {num} свежих обновления"
+msgstr[2] "Доступно {num} свежих обновлений"
+msgstr[3] "Доступно {num} свежих обновлений"
+
+#. TRANSLATORS:
+#. This autostart desktop entry comment will be shown within 'Session and
+#. Startup' (Autostart).
+msgid "An applet to show updates"
+msgstr "Приложение для показа обновлений"
+
+#. TRANSLATORS:
+#. This desktop entry comment will be shown within the menu.
+msgid "Re-enable MX Updater icon even if no updates available"
+msgstr ""
+"Повторно включить значок MX Центра обновления в случае, когда нет обновлений"
+
+msgid "Enable Auto-update"
+msgstr "Включить автообновление"
+
+msgid "Disable Auto-update"
+msgstr "Отключить автообновление"

@@ -527,7 +527,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="209"/>
         <source>The user configuration will be repaired. Please close all other applications now. When finished, please logout or reboot. Are you sure you want to repair now?</source>
-        <translation>La configuration de l’utilisateur va être modifiée. Veuillez fermer toutes les applications ouvertes. Après exécution, veuillez fermer votre session ou redémarrer votre machine. Êtes-vous sûr de vouloir modifier cette configuration maintenant?</translation>
+        <translation>La configuration de l’utilisateur va être modifiée. Veuillez fermer toutes les applications ouvertes. Après exécution, veuillez fermer votre session ou redémarrer votre machine. Êtes-vous sûr•e de vouloir modifier cette configuration maintenant?</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="231"/>
@@ -563,7 +563,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="282"/>
         <source>Before copying, close all other applications. Be sure the copy to destination is large enough to contain the files you are copying. Copying between desktops may overwrite or delete your files or preferences on the destination desktop. Are you sure you want to proceed?</source>
-        <translation>Avant de débuter la copie, veuillez fermer toutes les applications ouvertes. Assurez-vous que le répertoire de destination a une taille suffisante pour contenir les fichiers que vous désirez copier. Le processus peut effacer ou écraser vos fichiers ou configurations du bureau de destination. Êtes-vous certain de vouloir continuer?</translation>
+        <translation>Avant de débuter la copie, veuillez fermer toutes les applications ouvertes. Assurez-vous que le répertoire de destination a une taille suffisante pour contenir les fichiers que vous désirez copier. Le processus peut effacer ou écraser vos fichiers ou configurations du bureau de destination. Êtes-vous certain•e de vouloir continuer?</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="308"/>
@@ -628,7 +628,7 @@ Veuillez choisir un autre nom avant de poursuivre.</translation>
     <message>
         <location filename="../mainwindow.cpp" line="446"/>
         <source>This action cannot be undone. Are you sure you want to delete user %1?</source>
-        <translation>Cette action est irréversible. Êtes-vous sûr de vouloir supprimer l’utilisateur %1?</translation>
+        <translation>Cette action est irréversible. Êtes-vous sûr•e de vouloir supprimer l’utilisateur %1?</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="464"/>
@@ -672,12 +672,12 @@ Veuillez choisir un autre nom avant de poursuivre.</translation>
     <message>
         <location filename="../mainwindow.cpp" line="518"/>
         <source>This action cannot be undone. Are you sure you want to delete group %1?</source>
-        <translation>Cette action est irréversible. Êtes-vous sûr de vouloir supprimer le groupe %1?</translation>
+        <translation>Cette action est irréversible. Êtes-vous sûr•e de vouloir supprimer le groupe %1?</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="519"/>
         <source>This action cannot be undone. Are you sure you want to delete the following groups: %1?</source>
-        <translation>Cette action ne peut pas être annulée. Êtes-vous certain de vouloir supprimer les groupes suivants: %1?</translation>
+        <translation>Cette action ne peut pas être annulée. Êtes-vous certain•e de vouloir supprimer les groupes suivants: %1?</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="528"/>
@@ -773,7 +773,7 @@ Veuillez choisir un autre nom avant de poursuivre.</translation>
     <message>
         <location filename="../mainwindow.cpp" line="687"/>
         <source>Process not done. Are you sure you want to quit the application?</source>
-        <translation>Le processus n’est pas terminé. Êtes-vous sûr de vouloir quitter l’application?</translation>
+        <translation>Le processus n’est pas terminé. Êtes-vous sûr•e de vouloir quitter l’application?</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="942"/>

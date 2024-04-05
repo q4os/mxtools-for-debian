@@ -42,14 +42,14 @@ MainWindow::MainWindow(QWidget *parent)
       ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    setWindowFlags(Qt::Window); // for the close, min and max buttons
+    setWindowFlags(Qt::Window); // For the close, min and max buttons
     setConnections();
 
     const QSize &size = this->size();
     if (settings.contains(QStringLiteral("geometry"))) {
         restoreGeometry(settings.value(QStringLiteral("geometry")).toByteArray());
-        if (this->isMaximized()) { // add option to resize if maximized
-            this->resize(size);
+        if (isMaximized()) { // Add option to resize if maximized
+            resize(size);
             centerWindow();
         }
     }
@@ -68,9 +68,9 @@ MainWindow::~MainWindow()
 void MainWindow::centerWindow()
 {
     QRect screenGeometry = QApplication::primaryScreen()->geometry();
-    int x = (screenGeometry.width() - this->width()) / 2;
-    int y = (screenGeometry.height() - this->height()) / 2;
-    this->move(x, y);
+    int x = (screenGeometry.width() - width()) / 2;
+    int y = (screenGeometry.height() - height()) / 2;
+    move(x, y);
 }
 
 void MainWindow::setConnections()
@@ -228,7 +228,6 @@ void MainWindow::refreshShareList()
         if (list.isEmpty()) {
             continue;
         }
-        QStringList fixed_list;
         list.first()
             .remove(QRegularExpression(QStringLiteral("^\\[")))
             .remove(QRegularExpression(QStringLiteral("]$")));
@@ -373,7 +372,7 @@ void MainWindow::pushStartStopSamba_clicked()
 
 void MainWindow::pushAbout_clicked()
 {
-    this->hide();
+    hide();
     displayAboutMsgBox(
         tr("About %1").arg(tr("MX Samba Config")),
         R"(<p align="center"><b><h2>MX Samba Config</h2></b></p><p align="center">)" + tr("Version: ")
@@ -381,14 +380,14 @@ void MainWindow::pushAbout_clicked()
             + tr("Program for configuring Samba shares and users.")
             + R"(</h3></p><p align="center"><a href="http://mxlinux.org">http://mxlinux.org</a><br /></p><p align="center">)"
             + tr("Copyright (c) MX Linux") + "<br /><br /></p>",
-        QStringLiteral("/usr/share/doc/mx-samba-config/license.html"), tr("%1 License").arg(this->windowTitle()));
-    this->show();
+        QStringLiteral("/usr/share/doc/mx-samba-config/license.html"), tr("%1 License").arg(windowTitle()));
+    show();
 }
 
 void MainWindow::pushHelp_clicked()
 {
     const QString &url = QStringLiteral("https://mxlinux.org/wiki/help-files/help-mx-samba-config/");
-    displayDoc(url, tr("%1 Help").arg(this->windowTitle()));
+    displayDoc(url, tr("%1 Help").arg(windowTitle()));
 }
 
 void MainWindow::pushRemoveUser_clicked()

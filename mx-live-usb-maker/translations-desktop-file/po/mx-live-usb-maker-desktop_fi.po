@@ -5,6 +5,7 @@
 # 
 # Translators:
 # Robin, 2023
+# Kimmo Kujansuu <mrkujansuu@gmail.com>, 2023
 # 
 #, fuzzy
 msgid ""
@@ -13,7 +14,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-12-04 21:41-0500\n"
 "PO-Revision-Date: 2022-12-09 03:57+0000\n"
-"Last-Translator: Robin, 2023\n"
+"Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>, 2023\n"
 "Language-Team: Finnish (https://app.transifex.com/anticapitalista/teams/10162/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -24,7 +25,7 @@ msgstr ""
 #. The desktop entry name will be displayed within the menu.
 #: desktop-in/mx-live-usb-maker.desktop.in:5
 msgid "MX Live USB Maker"
-msgstr ""
+msgstr "MX Live USB Maker"
 
 #. # The desktop entry comment will be shown within the menu.
 #: desktop-in/mx-live-usb-maker.desktop.in:7

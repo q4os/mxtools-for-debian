@@ -5,12 +5,7 @@ if [ -d po ]; then
 else
     DIR=.
 fi
-
-if [ -f po/en.pot ]; then
-    POT=po/en.pot 
-else
-    POT=en.pot 
-fi
+POT=$DIR/en.pot 
 
 sed -i 's/charset=CHARSET/charset=UTF-8/' $POT
 
@@ -40,9 +35,9 @@ for P in $DIR/*.po ; do
         "${rr:+ @ $(isoquery -i 3166-1 $rr | cut -f4 )}"; 
 done | sort -t $'\t' -k2nr,2 -k4,4 | cat -n | tee -a $LOG
 
-# create LINGUAS with translations completness >= 1%
+# create LINGUAS with translations completness >= 5%
 #
-echo "# languages codes with translation completness  >= 1%"   >  $LINGUAS
+echo "# languages codes with translation completness  >= 5%"   >  $LINGUAS
 echo "# generated with tx-complete.sh at $(TZ=UTC date -R)"    >> $LINGUAS 
 echo "# "                                                      >> $LINGUAS
 grep -E '([1-9]|[0-9]{2})%' $LOG  | awk '{print $4}' | sort -u >> $LINGUAS

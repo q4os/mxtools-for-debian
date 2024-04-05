@@ -146,8 +146,8 @@ ph_AX_HOST=http://mirror.rise.ph/mxlinux-pkg/antix
 ph_MX_HOST=http://mirror.rise.ph/mxlinux-pkg/mx
 ph_LOCATION="Phillipines"
 
-pk_AX_HOST=http://mx-pkg.mirror.net.in/MX-Linux/antix
-pk_MX_HOST=http://mx-pkg.mirror.net.in/MX-Linux/mx
+pk_AX_HOST=http://mirror.dc.uz/mxlinux/antix
+pk_MX_HOST=http://mirror.dc.uz/mxlinux/mx
 pk_LOCATION="Pakistan"
 
 pl_AX_HOST=http://ftp.icm.edu.pl/pub/Linux/dist/antix-workspace/antix

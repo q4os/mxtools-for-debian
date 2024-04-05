@@ -45,7 +45,7 @@ MainWindow::MainWindow(const QCommandLineParser &arg_parser, QWidget *parent)
     addActions();
     setConnections();
 
-    if (arg_parser.isSet(QStringLiteral("full-screen"))) {
+    if (arg_parser.isSet("full-screen")) {
         showFullScreen();
         toolBar->hide();
     }
@@ -81,7 +81,7 @@ MainWindow::MainWindow(const QUrl &url, QWidget *parent)
 
 MainWindow::~MainWindow()
 {
-    settings.setValue(QStringLiteral("Geometry"), saveGeometry());
+    settings.setValue("Geometry", saveGeometry());
     listHistory();
     saveMenuItems(history, 2);
     saveMenuItems(bookmarks, 2);
@@ -105,7 +105,7 @@ void MainWindow::addBookmarksSubmenu()
         QPoint globalPos = bookmarks->mapToGlobal(pos);
         QMenu submenu;
         if (bookmarks->actionAt(pos) != bookmarks->actions().at(1)) {
-            submenu.addAction(QIcon::fromTheme(QStringLiteral("arrow-up")), tr("Move up"), bookmarks, [this, pos] {
+            submenu.addAction(QIcon::fromTheme("arrow-up"), tr("Move up"), bookmarks, [this, pos] {
                 for (int i = 2; i < bookmarks->actions().count();
                      ++i) { // starting from third action (ignoring "Add bookmark" and first bookmark we cannot move up)
                     if (bookmarks->actions().at(i) == bookmarks->actionAt(pos)) {
@@ -115,7 +115,7 @@ void MainWindow::addBookmarksSubmenu()
             });
         }
         if (bookmarks->actionAt(pos) != bookmarks->actions().at(bookmarks->actions().count() - 1)) {
-            submenu.addAction(QIcon::fromTheme(QStringLiteral("arrow-down")), tr("Move down"), bookmarks, [this, pos] {
+            submenu.addAction(QIcon::fromTheme("arrow-down"), tr("Move down"), bookmarks, [this, pos] {
                 for (int i = 1; i < bookmarks->actions().count();
                      ++i) { // starting from second action (ignoring "Add bookmark")
                     if (bookmarks->actions().at(i) == bookmarks->actionAt(pos)) {
@@ -124,7 +124,7 @@ void MainWindow::addBookmarksSubmenu()
                 }
             });
         }
-        submenu.addAction(QIcon::fromTheme(QStringLiteral("edit-symbolic")), tr("Rename"), bookmarks, [this, pos] {
+        submenu.addAction(QIcon::fromTheme("edit-symbolic"), tr("Rename"), bookmarks, [this, pos] {
             auto *edit = new QInputDialog(this);
             edit->setInputMode(QInputDialog::TextInput);
             edit->setOkButtonText(tr("Save"));
@@ -135,7 +135,7 @@ void MainWindow::addBookmarksSubmenu()
                 bookmarks->actionAt(pos)->setText(edit->textValue());
             }
         });
-        submenu.addAction(QIcon::fromTheme(QStringLiteral("user-trash")), tr("Delete"), bookmarks,
+        submenu.addAction(QIcon::fromTheme("user-trash"), tr("Delete"), bookmarks,
                           [this, pos] { bookmarks->removeAction(bookmarks->actionAt(pos)); });
         submenu.exec(globalPos);
     });
@@ -150,7 +150,7 @@ void MainWindow::addHistorySubmenu()
         }
         QPoint globalPos = history->mapToGlobal(pos);
         QMenu submenu;
-        submenu.addAction(QIcon::fromTheme(QStringLiteral("user-trash")), tr("Delete"), history, [this, pos] {
+        submenu.addAction(QIcon::fromTheme("user-trash"), tr("Delete"), history, [this, pos] {
             history->removeAction(history->actionAt(pos));
             saveMenuItems(history, 3); // skip "clear history", separator, and first item added at menu refresh
         });
@@ -168,7 +168,7 @@ void MainWindow::addNewTab(const QString &url)
 void MainWindow::listHistory()
 {
     history->clear();
-    auto *deleteHistory = new QAction(QIcon::fromTheme(QStringLiteral("user-trash")), tr("&Clear history"));
+    auto *deleteHistory = new QAction(QIcon::fromTheme("user-trash"), tr("&Clear history"));
     connect(deleteHistory, &QAction::triggered, this, [this] {
         history->clear();
         saveMenuItems(history, 2);
@@ -187,13 +187,10 @@ void MainWindow::addToolbar()
     auto *forward = pageAction(QWebEnginePage::Forward);
     auto *reload = pageAction(QWebEnginePage::Reload);
     auto *stop = pageAction(QWebEnginePage::Stop);
-    auto *home {new QAction(QIcon::fromTheme(QStringLiteral("go-home"), QIcon(QStringLiteral(":/icons/go-home.svg"))),
-                            tr("Home"))};
-    auto *zoomin {new QAction(QIcon::fromTheme(QStringLiteral("zoom-in"), QIcon(QStringLiteral(":/icons/zoom-in.svg"))),
-                              tr("Zoom In"))};
-    auto *zoompercent {new QAction(QStringLiteral("100%"))};
-    auto *zoomout {new QAction(
-        QIcon::fromTheme(QStringLiteral("zoom-out"), QIcon(QStringLiteral(":/icons/zoom-out.svg"))), tr("Zoom out"))};
+    auto *home {new QAction(QIcon::fromTheme("go-home", QIcon(":/icons/go-home.svg")), tr("Home"))};
+    auto *zoomin {new QAction(QIcon::fromTheme("zoom-in", QIcon(":/icons/zoom-in.svg")), tr("Zoom In"))};
+    auto *zoompercent {new QAction("100%")};
+    auto *zoomout {new QAction(QIcon::fromTheme("zoom-out", QIcon(":/icons/zoom-out.svg")), tr("Zoom out"))};
 
     toolBar->addAction(back);
     toolBar->addAction(forward);
@@ -212,16 +209,14 @@ void MainWindow::addToolbar()
     searchBox->setClearButtonEnabled(true);
     searchBox->setMaximumWidth(searchWidth);
     searchBox->setClearButtonEnabled(true);
-    searchBox->addAction(QIcon::fromTheme(QStringLiteral("search"), QIcon(QStringLiteral(":/icons/system-search.png"))),
-                         QLineEdit::LeadingPosition);
+    searchBox->addAction(QIcon::fromTheme("search", QIcon(":/icons/system-search.png")), QLineEdit::LeadingPosition);
     connect(searchBox, &QLineEdit::textChanged, this, &MainWindow::findForward);
     connect(searchBox, &QLineEdit::returnPressed, this, &MainWindow::findForward);
     addressBar = new AddressBar(this);
     addressBar->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
     addressBar->setClearButtonEnabled(true);
-    addBookmark = addressBar->addAction(
-        QIcon::fromTheme(QStringLiteral("emblem-favorite"), QIcon(QStringLiteral(":/icons/emblem-favorite.png"))),
-        QLineEdit::TrailingPosition);
+    addBookmark = addressBar->addAction(QIcon::fromTheme("emblem-favorite", QIcon(":/icons/emblem-favorite.png")),
+                                        QLineEdit::TrailingPosition);
     addBookmark->setToolTip(tr("Add bookmark"));
     connect(addressBar, &QLineEdit::returnPressed, this, [this] { displaySite(addressBar->text()); });
     toolBar->addWidget(addressBar);
@@ -229,9 +224,8 @@ void MainWindow::addToolbar()
     toolBar->addAction(zoomout);
     toolBar->addAction(zoompercent);
     toolBar->addAction(zoomin);
-    toolBar->addAction(menuButton = new QAction(QIcon::fromTheme(QStringLiteral("open-menu"),
-                                                                 QIcon(QStringLiteral(":/icons/open-menu.png"))),
-                                                tr("Settings")));
+    toolBar->addAction(menuButton
+                       = new QAction(QIcon::fromTheme("open-menu", QIcon(":/icons/open-menu.png")), tr("Settings")));
     const auto step = 0.1;
     zoomin->setShortcuts({QKeySequence::ZoomIn, Qt::CTRL + Qt::Key_Equal});
     zoomout->setShortcut(QKeySequence::ZoomOut);
@@ -247,7 +241,7 @@ void MainWindow::addToolbar()
     });
     connect(zoompercent, &QAction::triggered, this, [this, zoompercent] {
         currentWebView()->setZoomFactor(1);
-        zoompercent->setText(QStringLiteral("100%"));
+        zoompercent->setText("100%");
     });
     menuButton->setShortcut(Qt::Key_F10);
     buildMenu();
@@ -292,13 +286,13 @@ void MainWindow::displaySite(QString url, const QString &title)
 
 void MainWindow::loadBookmarks()
 {
-    int size = settings.beginReadArray(QStringLiteral("Bookmarks"));
+    int size = settings.beginReadArray("Bookmarks");
     for (int i = 0; i < size; ++i) {
         settings.setArrayIndex(i);
         QAction *bookmark {nullptr};
-        bookmarks->addAction(bookmark = new QAction(settings.value(QStringLiteral("icon")).value<QIcon>(),
-                                                    settings.value(QStringLiteral("title")).toString()));
-        bookmark->setProperty("url", settings.value(QStringLiteral("url")));
+        bookmarks->addAction(bookmark
+                             = new QAction(settings.value("icon").value<QIcon>(), settings.value("title").toString()));
+        bookmark->setProperty("url", settings.value("url"));
         connectAddress(bookmark, bookmarks);
     }
     settings.endArray();
@@ -306,17 +300,17 @@ void MainWindow::loadBookmarks()
 
 void MainWindow::loadHistory()
 {
-    int size = settings.beginReadArray(QStringLiteral("History"));
+    int size = settings.beginReadArray("History");
     for (int i = 0; i < size; ++i) {
         settings.setArrayIndex(i);
         QAction *histItem {nullptr};
-        QByteArray iconByteArray = settings.value(QStringLiteral("icon")).toByteArray();
+        QByteArray iconByteArray = settings.value("icon").toByteArray();
         QPixmap restoredIconPixmap;
         restoredIconPixmap.loadFromData(iconByteArray);
         QIcon restoredIcon;
         restoredIcon.addPixmap(restoredIconPixmap);
-        history->addAction(histItem = new QAction(restoredIcon, settings.value(QStringLiteral("title")).toString()));
-        histItem->setProperty("url", settings.value(QStringLiteral("url")));
+        history->addAction(histItem = new QAction(restoredIcon, settings.value("title").toString()));
+        histItem->setProperty("url", settings.value("url"));
         connectAddress(histItem, history);
     }
     settings.endArray();
@@ -329,30 +323,28 @@ void MainWindow::loadSettings()
     websettings->setAttribute(QWebEngineSettings::DnsPrefetchEnabled, true);
     QWebEngineProfile::defaultProfile()->setUseForGlobalCertificateVerification();
 
-    homeAddress = settings.value(QStringLiteral("Home"), QStringLiteral("https://duckduckgo.com")).toString();
-    showProgress = settings.value(QStringLiteral("ShowProgressBar"), false).toBool();
+    homeAddress = settings.value("Home", "https://duckduckgo.com").toString();
+    showProgress = settings.value("ShowProgressBar", false).toBool();
 
     websettings->setAttribute(QWebEngineSettings::SpatialNavigationEnabled,
-                              settings.value(QStringLiteral("SpatialNavigation"), false).toBool());
-    websettings->setAttribute(QWebEngineSettings::JavascriptEnabled,
-                              !settings.value(QStringLiteral("DisableJava"), false).toBool());
-    websettings->setAttribute(QWebEngineSettings::AutoLoadImages,
-                              settings.value(QStringLiteral("LoadImages"), true).toBool());
+                              settings.value("SpatialNavigation", false).toBool());
+    websettings->setAttribute(QWebEngineSettings::JavascriptEnabled, !settings.value("DisableJava", false).toBool());
+    websettings->setAttribute(QWebEngineSettings::AutoLoadImages, settings.value("LoadImages", true).toBool());
 
-    if (args.isSet(QStringLiteral("enable-spatial-navigation"))) {
+    if (args.isSet("enable-spatial-navigation")) {
         websettings->setAttribute(QWebEngineSettings::SpatialNavigationEnabled, true);
     }
-    if (args.isSet(QStringLiteral("disable-js"))) {
+    if (args.isSet("disable-js")) {
         websettings->setAttribute(QWebEngineSettings::JavascriptEnabled, false);
     }
-    if (args.isSet(QStringLiteral("disable-images"))) {
+    if (args.isSet("disable-images")) {
         websettings->setAttribute(QWebEngineSettings::AutoLoadImages, false);
     }
 
     QSize size {defaultWidth, defaultHeight};
     resize(size);
-    if (settings.contains(QStringLiteral("Geometry")) && !args.isSet(QStringLiteral("full-screen"))) {
-        restoreGeometry(settings.value(QStringLiteral("Geometry")).toByteArray());
+    if (settings.contains("Geometry") && !args.isSet("full-screen")) {
+        restoreGeometry(settings.value("Geometry").toByteArray());
         if (isMaximized()) { // add option to resize if maximized
             resize(size);
             centerWindow();
@@ -362,7 +354,6 @@ void MainWindow::loadSettings()
     }
 }
 
-// center main window
 void MainWindow::centerWindow()
 {
     QRect screenGeometry = QApplication::primaryScreen()->geometry();
@@ -387,18 +378,18 @@ void MainWindow::saveMenuItems(const QMenu *menu, int offset)
     settings.beginWriteArray(menu->objectName());
     for (int i = offset; i < menu->actions().count(); ++i) {
         settings.setArrayIndex(i - offset);
-        settings.setValue(QStringLiteral("title"), menu->actions().at(i)->text());
-        settings.setValue(QStringLiteral("url"), menu->actions().at(i)->property("url").toString());
+        settings.setValue("title", menu->actions().at(i)->text());
+        settings.setValue("url", menu->actions().at(i)->property("url").toString());
 
         if (menu->objectName() == "Bookmarks") {
-            settings.setValue(QStringLiteral("icon"), menu->actions().at(i)->icon());
+            settings.setValue("icon", menu->actions().at(i)->icon());
         } else {
             QPixmap iconPixmap = menu->actions().at(i)->icon().pixmap(QSize(16, 16));
             QByteArray iconByteArray;
             QBuffer buffer(&iconByteArray);
             buffer.open(QIODevice::WriteOnly);
             iconPixmap.save(&buffer, "PNG");
-            settings.setValue(QStringLiteral("icon"), iconByteArray);
+            settings.setValue("icon", iconByteArray);
         }
     }
     settings.endArray();
@@ -435,7 +426,7 @@ void MainWindow::showFullScreenNotification()
     auto *label = new QLabel(this);
     auto *effect = new QGraphicsOpacityEffect;
     label->setGraphicsEffect(effect);
-    label->setStyleSheet(QStringLiteral("padding: 15px; background-color:#787878; color:white"));
+    label->setStyleSheet("padding: 15px; background-color:#787878; color:white");
     label->setText(tr("Press [F11] to exit full screen"));
     label->adjustSize();
     label->move(QApplication::primaryScreen()->geometry().width() / 2 - label->width() / 2, distance_top);
@@ -507,9 +498,9 @@ void MainWindow::buildMenu()
     history = new QMenu(menu);
     bookmarks = new QMenu(menu);
     bookmarks->setObjectName("Bookmarks");
-    history->setStyleSheet(QStringLiteral("QMenu { menu-scrollable: 1; }"));
+    history->setStyleSheet("QMenu { menu-scrollable: 1; }");
     history->setObjectName("History");
-    bookmarks->setStyleSheet(QStringLiteral("QMenu { menu-scrollable: 1; }"));
+    bookmarks->setStyleSheet("QMenu { menu-scrollable: 1; }");
     QAction *newTab {nullptr};
     QAction *fullScreen {nullptr};
     QAction *about {nullptr};
@@ -520,28 +511,26 @@ void MainWindow::buildMenu()
     QAction *historyAction {nullptr};
     menuButton->setMenu(menu);
 
-    menu->addAction(newTab = new QAction(QIcon::fromTheme(QStringLiteral("tab-new")), tr("&New tab")));
+    menu->addAction(newTab = new QAction(QIcon::fromTheme("tab-new"), tr("&New tab")));
     newTab->setShortcut(Qt::CTRL + Qt::Key_T);
     menu->addSeparator();
-    menu->addAction(fullScreen = new QAction(QIcon::fromTheme(QStringLiteral("view-fullscreen")), tr("&Full screen")));
+    menu->addAction(fullScreen = new QAction(QIcon::fromTheme("view-fullscreen"), tr("&Full screen")));
     menu->addSeparator();
-    menu->addAction(historyAction = new QAction(QIcon::fromTheme(QStringLiteral("history")), tr("H&istory")));
+    menu->addAction(historyAction = new QAction(QIcon::fromTheme("history"), tr("H&istory")));
     historyAction->setMenu(history);
-    menu->addAction(downloadAction
-                    = new QAction(QIcon::fromTheme(QStringLiteral("folder-download")), tr("&Downloads")));
+    menu->addAction(downloadAction = new QAction(QIcon::fromTheme("folder-download"), tr("&Downloads")));
     downloadAction->setShortcut(Qt::CTRL + Qt::Key_J);
-    menu->addAction(bookmarkAction
-                    = new QAction(QIcon::fromTheme(QStringLiteral("emblem-favorite")), tr("&Bookmarks")));
+    menu->addAction(bookmarkAction = new QAction(QIcon::fromTheme("emblem-favorite"), tr("&Bookmarks")));
     bookmarkAction->setMenu(bookmarks);
     bookmarks->addAction(addBookmark);
     addBookmark->setText(tr("Bookmark current address"));
     addBookmark->setShortcut(Qt::CTRL + Qt::Key_D);
     bookmarks->addSeparator();
     menu->addSeparator();
-    menu->addAction(help = new QAction(QIcon::fromTheme(QStringLiteral("help-contents")), tr("&Help")));
-    menu->addAction(about = new QAction(QIcon::fromTheme(QStringLiteral("help-about")), tr("&About")));
+    menu->addAction(help = new QAction(QIcon::fromTheme("help-contents"), tr("&Help")));
+    menu->addAction(about = new QAction(QIcon::fromTheme("help-about"), tr("&About")));
     menu->addSeparator();
-    menu->addAction(quit = new QAction(QIcon::fromTheme(QStringLiteral("window-close")), tr("&Exit")));
+    menu->addAction(quit = new QAction(QIcon::fromTheme("window-close"), tr("&Exit")));
 
     loadBookmarks();
     addBookmarksSubmenu();

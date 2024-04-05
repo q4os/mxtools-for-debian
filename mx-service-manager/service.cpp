@@ -20,7 +20,6 @@
  * along with this package. If not, see <http://www.gnu.org/licenses/>.
  **********************************************************************/
 #include "service.h"
-#include "cmd.h"
 
 #include <QDebug>
 #include <QFile>
@@ -28,7 +27,9 @@
 #include <QProcess>
 #include <QRegularExpression>
 
-extern const QString init = Service::getInit();
+#include "cmd.h"
+
+inline const QString initSystem {Service::getInit()};
 
 Service::Service(QString name, bool running)
     : name {std::move(name)},
@@ -43,7 +44,7 @@ QString Service::getName() const
 
 QString Service::getInfo() const
 {
-    if (init == "systemd") {
+    if (initSystem == "systemd") {
         QString info = Cmd().getOutAsRoot("/sbin/service " + name + " status").trimmed();
         if (!isEnabled()) {
             info.append("\nDescription:" + getDescription());
@@ -56,14 +57,13 @@ QString Service::getInfo() const
 
 bool Service::isEnabled(const QString &name)
 {
-    if (init == "systemd") {
+    if (initSystem == "systemd") {
         return (QProcess::execute("systemctl", {"-q", "is-enabled", name}) == 0);
     } else {
         return (QProcess::execute("/bin/bash",
                                   {"-c", R"([[ -e /etc/rc5.d/S*"$file_name" || -e /etc/rcS.d/S*"$file_name" ]])"})
                 == 0);
     }
-    return false;
 }
 
 QString Service::getInit()
@@ -81,7 +81,7 @@ bool Service::isRunning() const
 
 QString Service::getDescription() const
 {
-    if (init != "systemd") {
+    if (initSystem != "systemd") {
         QRegularExpression regex("\nShort-Description:([^\n]*)");
         QString info = getInfo();
         QRegularExpressionMatch match = regex.match(info);
@@ -186,7 +186,7 @@ QString Service::getInfoFromFile(const QString &name)
 
 bool Service::enable()
 {
-    if (init == "systemd") {
+    if (initSystem == "systemd") {
         Cmd().runAsRoot("systemctl unmask " + name);
         if (Cmd().runAsRoot("systemctl enable " + name)) {
             setEnabled(true);
@@ -204,7 +204,7 @@ bool Service::enable()
 
 bool Service::disable()
 {
-    if (init == "systemd") {
+    if (initSystem == "systemd") {
         if (Cmd().runAsRoot("systemctl disable " + name)) {
             Cmd().runAsRoot("systemctl mask " + name);
             setEnabled(false);

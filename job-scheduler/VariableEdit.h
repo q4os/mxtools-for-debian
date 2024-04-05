@@ -7,8 +7,7 @@
    as published by the Free Software Foundation; either version 2
    of the License, or (at your option) any later version.
 */
-#ifndef VARIABLEEDIT_H
-#define VARIABLEEDIT_H
+#pragma once
 
 #include <QWidget>
 
@@ -27,7 +26,7 @@ class VariableEdit : public QWidget
 {
     Q_OBJECT
 public:
-    VariableEdit(QWidget *parent = nullptr);
+    explicit VariableEdit(QWidget *parent = nullptr);
 
 public slots:
     void changeCurrent(Crontab *cron, TCommand *cmnd);
@@ -69,5 +68,3 @@ private:
     Variable *variable {};
     VariableModel *variableModel;
 };
-
-#endif

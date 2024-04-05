@@ -1,3 +1,10 @@
+disk-manager (24.03.01) mx; urgency=medium
+
+  * fix: show translatable strings from glade
+  * translations refresh
+
+ -- fehlix <fehlix@mxlinux.org>  Tue, 26 Mar 2024 14:43:37 -0400
+
 disk-manager (23.10.01) mx; urgency=medium
 
   * fix UnicodeDecodeError due to UTF-16 encoding of partition label

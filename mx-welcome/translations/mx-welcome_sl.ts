@@ -5,8 +5,8 @@
     <name>MainWindow</name>
     <message>
         <location filename="../mainwindow.ui" line="14"/>
-        <location filename="../mainwindow.cpp" line="64"/>
-        <location filename="../mainwindow.cpp" line="434"/>
+        <location filename="../mainwindow.cpp" line="68"/>
+        <location filename="../mainwindow.cpp" line="289"/>
         <source>MX Welcome</source>
         <translation>MX pozdrav</translation>
     </message>
@@ -140,7 +140,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
     <message>
         <location filename="../mainwindow.ui" line="845"/>
         <source>The name “MX Linux” is covered by Linux Foundation Sublicense No. 20140605-0483. We develop software that is covered by a free license that can be examined in the Wiki list. We also include software developed by others that is under a free license.</source>
-        <translation>Ime “MX Linux” je pokrito preko podlicence Linux fundacije št. 20140605-0483. Razvijamo programsko opremo, ki je pokrita preko brezplačne licence, ki se jo da preveriti na Wiki seznamu. Vključimo tudi programsko opremo, ki  jo razvijajo drugi po brezplačno licenco.</translation>
+        <translation>Ime “MX Linux” je pokrito po podlicenci Linux fundacije št. 20140605-0483. Razvijamo programsko opremo, ki je pokrita z brezplačno licenco, ki se jo da preveriti na Wiki seznamu. Dodajamo tudi programsko opremo, ki  jo razvijajo drugi po brezplačni licenci.</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="855"/>
@@ -163,48 +163,48 @@ li.checked::marker { content: &quot;\2612&quot;; }
         <translation>Ob zagonu prikaži ta dialog</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="317"/>
+        <location filename="../mainwindow.cpp" line="176"/>
         <source>User demo, password:</source>
         <translation>Uporabnik demo, geslo:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="318"/>
+        <location filename="../mainwindow.cpp" line="177"/>
         <source>Superuser root, password:</source>
         <translation>Korenski superuporabnik, geslo:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="355"/>
-        <location filename="../mainwindow.cpp" line="373"/>
+        <location filename="../mainwindow.cpp" line="205"/>
+        <location filename="../mainwindow.cpp" line="223"/>
         <source>Error</source>
         <translation>Napaka</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="386"/>
+        <location filename="../mainwindow.cpp" line="238"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:14pt; font-weight:600;&quot;&gt;%1 &amp;quot;%2&amp;quot;&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="433"/>
+        <location filename="../mainwindow.cpp" line="288"/>
         <source>About MX Welcome</source>
         <translation>O MX pozdrav</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="434"/>
+        <location filename="../mainwindow.cpp" line="289"/>
         <source>Version: </source>
         <translation>Različica:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="435"/>
+        <location filename="../mainwindow.cpp" line="290"/>
         <source>Program for displaying a welcome screen in MX Linux</source>
         <translation>Program za prikaz dobrodošlice v MX Linuxu</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="438"/>
+        <location filename="../mainwindow.cpp" line="293"/>
         <source>Copyright (c) MX Linux</source>
         <translation>Copyright (c) MX Linux</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="439"/>
+        <location filename="../mainwindow.cpp" line="294"/>
         <source>%1 License</source>
         <translation type="unfinished"></translation>
     </message>
@@ -250,33 +250,33 @@ li.checked::marker { content: &quot;\2612&quot;; }
         <translation>Zaženi preizkusni način</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="73"/>
+        <location filename="../main.cpp" line="76"/>
         <source>Error</source>
         <translation>Napaka</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="73"/>
+        <location filename="../main.cpp" line="76"/>
         <source>You must run this program as normal user.</source>
         <translation type="unfinished">Ta program morate zagnati kor navaden uporabnik.</translation>
     </message>
     <message>
-        <location filename="../about.cpp" line="39"/>
+        <location filename="../about.cpp" line="61"/>
         <source>License</source>
         <translation type="unfinished">Licenca</translation>
     </message>
     <message>
-        <location filename="../about.cpp" line="40"/>
-        <location filename="../about.cpp" line="50"/>
+        <location filename="../about.cpp" line="62"/>
+        <location filename="../about.cpp" line="72"/>
         <source>Changelog</source>
         <translation type="unfinished">Dnevnik sprememb</translation>
     </message>
     <message>
-        <location filename="../about.cpp" line="41"/>
+        <location filename="../about.cpp" line="63"/>
         <source>Cancel</source>
         <translation type="unfinished">Prekliči</translation>
     </message>
     <message>
-        <location filename="../about.cpp" line="63"/>
+        <location filename="../about.cpp" line="85"/>
         <source>&amp;Close</source>
         <translation type="unfinished">&amp;Zapri</translation>
     </message>

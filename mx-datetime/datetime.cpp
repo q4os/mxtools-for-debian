@@ -386,7 +386,7 @@ void MXDateTime::saveHardwareClock()
             executeAsRoot("timedatectl", {"set-local-rtc", rtcUTC ? "0" : "1"});
         } else {
             if (sysInit == OpenRC && QFile::exists("/etc/conf.d/hwclock")) {
-                const char *sed = rtcUTC ? "s/clock=.*/clock=\\\"UTC\\\"/" : "s/clock=.*/clock=\\\"local\\\"/";
+                const char *sed = rtcUTC ? R"(s/clock=.*/clock=\"UTC\"/)" : R"(s/clock=.*/clock=\"local\"/)";
                 executeAsRoot("sed", {"-i", sed, "/etc/conf.d/hwclock"});
             }
             executeAsRoot("hwclock", {"--systohc", rtcUTC ? "--utc" : "--localtime"});
@@ -438,7 +438,9 @@ void MXDateTime::on_pushSyncNow_clicked()
 void MXDateTime::on_tableServers_itemSelectionChanged()
 {
     const QList<QTableWidgetSelectionRange> &ranges = tableServers->selectedRanges();
-    bool remove = false, up = false, down = false;
+    bool remove = false;
+    bool up = false;
+    bool down = false;
     if (ranges.count() == 1) {
         const QTableWidgetSelectionRange &range = ranges.at(0);
         remove = true;
@@ -474,9 +476,9 @@ void MXDateTime::on_pushServerRemove_clicked()
 QTableWidgetItem *MXDateTime::addServerRow(bool enabled, const QString &type, const QString &address,
                                            const QString &options)
 {
-    QComboBox *itemComboType = new QComboBox(tableServers);
-    QTableWidgetItem *item = new QTableWidgetItem(address);
-    QTableWidgetItem *itemOptions = new QTableWidgetItem(options);
+    auto *itemComboType = new QComboBox(tableServers);
+    auto *item = new QTableWidgetItem(address);
+    auto *itemOptions = new QTableWidgetItem(options);
     itemComboType->addItem("Pool", QVariant("pool"));
     itemComboType->addItem("Server", QVariant("server"));
     itemComboType->addItem("Peer", QVariant("peer"));
@@ -496,7 +498,8 @@ void MXDateTime::moveServerRow(int movement)
     const QList<QTableWidgetSelectionRange> &ranges = tableServers->selectedRanges();
     if (ranges.count() == 1) {
         const QTableWidgetSelectionRange &range = ranges.at(0);
-        int end, row;
+        int end;
+        int row;
         if (movement < 0) {
             row = range.topRow();
             end = range.bottomRow();
@@ -603,7 +606,7 @@ void MXDateTime::saveNetworkTime()
             file.write(QDateTime::currentDateTime().toString("yyyy-MM-dd H:mm:ss t").toUtf8());
             file.write("\n");
             for (int ixi = 0; ixi < tableServers->rowCount(); ++ixi) {
-                QComboBox *comboType = qobject_cast<QComboBox *>(tableServers->cellWidget(ixi, 0));
+                auto *comboType = qobject_cast<QComboBox *>(tableServers->cellWidget(ixi, 0));
                 QTableWidgetItem *item = tableServers->item(ixi, 1);
                 if (item->checkState() != Qt::Checked) {
                     file.write("#");

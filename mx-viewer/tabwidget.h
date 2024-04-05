@@ -19,8 +19,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this package. If not, see <http://www.gnu.org/licenses/>.
  **********************************************************************/
-#ifndef TABWIDGET_H
-#define TABWIDGET_H
+#pragma once
 
 #include <QTabWidget>
 #include <webview.h>
@@ -28,6 +27,7 @@
 class TabWidget : public QTabWidget
 {
     Q_OBJECT
+
 public:
     explicit TabWidget(QWidget *parent = nullptr);
     WebView *currentWebView();
@@ -43,4 +43,3 @@ protected:
 private:
     void handleCurrentChanged(int index);
 };
-#endif // TABWIDGET_H

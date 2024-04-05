@@ -1,3 +1,15 @@
+mx-service-manager (24.3.02) mx; urgency=medium
+
+  * Fix running commands as root
+
+ -- Adrian <adrian@mxlinux.org>  Sat, 23 Mar 2024 20:30:31 -0400
+
+mx-service-manager (24.3) mx; urgency=medium
+
+  * Update translations 
+
+ -- Adrian <adrian@mxlinux.org>  Sat, 23 Mar 2024 13:08:55 -0400
+
 mx-service-manager (23.11.02) mx; urgency=medium
 
   * Fix: run 'service' command with full path instead of running it as root

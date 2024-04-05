@@ -10,8 +10,8 @@
 # anticapitalista <anticapitalista@riseup.net>, 2022
 # Geoff Gigg <geoffgigg@hotmail.com>, 2022
 # sombreros <sebastiendebierre@gmail.com>, 2022
-# Roy Avrett <avrett@cs.fsu.edu>, 2022
-# Wallon Wallon, 2022
+# Roy Avrett <rjavrett@gmail.com>, 2022
+# Wallon Wallon, 2024
 # 
 #, fuzzy
 msgid ""
@@ -20,13 +20,13 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-01-16 00:46+0100\n"
 "PO-Revision-Date: 2022-01-21 17:21+0000\n"
-"Last-Translator: Wallon Wallon, 2022\n"
-"Language-Team: French (https://www.transifex.com/anticapitalista/teams/10162/fr/)\n"
+"Last-Translator: Wallon Wallon, 2024\n"
+"Language-Team: French (https://app.transifex.com/anticapitalista/teams/10162/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: fr\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Plural-Forms: nplurals=3; plural=(n == 0 || n == 1) ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
 
 #: ../disk-manager.in:66
 msgid "Insufficient rights"
@@ -35,7 +35,7 @@ msgstr "Droits insuffisants"
 #: ../disk-manager.in:67
 msgid "You need administrative rights to start this application."
 msgstr ""
-"Vous devez disposer des droits d'administrateur pour lancer cette "
+"Vous devez disposer des droits d’administrateur pour lancer cette "
 "application."
 
 #: ../data/disk-manager.glade.h:1
@@ -97,7 +97,7 @@ msgstr "<b>Type :</b>"
 
 #: ../data/disk-manager.glade.h:15
 msgid "<b>Label:</b>"
-msgstr "<b>Label :</b>"
+msgstr "<b>Étiquette :</b>"
 
 #: ../data/disk-manager.glade.h:16
 msgid "<b>Mount point:</b>"
@@ -142,7 +142,7 @@ msgstr ""
 #: ../data/disk-manager.desktop.in.in.h:1 ../DiskManager/Dialogs.py:489
 #: ../DiskManager/DiskManager.py:78
 msgid "Disk Manager"
-msgstr "Gestionnaire de disque"
+msgstr "Disk Manager gestionnaire de disques"
 
 #: ../data/disk-manager.desktop.in.in.h:2
 msgid "Manage filesystem configuration"
@@ -152,7 +152,7 @@ msgstr "Gérer la configuration du système de fichiers"
 #, python-format
 msgid "No driver is available for this type of filesystem : '%s'"
 msgstr ""
-"Aucun pilote n'est disponible pour ce type de système de fichiers : '%s'"
+"Aucun pilote n’est disponible pour ce type de système de fichiers : « %s »"
 
 #: ../DiskManager/Dialogs.py:162
 msgid "Select a directory"
@@ -181,7 +181,7 @@ msgid ""
 "<i>%s</i> is not formatted correctly.\n"
 "Options should be separated by comma (,)"
 msgstr ""
-"<i>%s</i> n'est pas formaté correctement.\n"
+"<i>%s</i> n’est pas formaté correctement.\n"
 "Les options doivent être séparées par une virgule (,)"
 
 #: ../DiskManager/Dialogs.py:427
@@ -205,7 +205,7 @@ msgid ""
 "It is advisable to remove them in order to avoid failed mount\n"
 "at start-up. Select the ones you want to remove."
 msgstr ""
-"Il est recommandé de les supprimer afin d'éviter des échecs de montage\n"
+"Il est recommandé de les supprimer afin d’éviter des échecs de montage\n"
 "au démarrage. Sélectionnez ceux que vous voulez supprimer."
 
 #: ../DiskManager/Dialogs.py:433
@@ -214,7 +214,7 @@ msgstr "Supprimer sélectionné"
 
 #: ../DiskManager/Dialogs.py:433
 msgid "Don't show me this warning in the future."
-msgstr "Ne plus afficher cet avertissement à l'avenir."
+msgstr "Ne plus afficher cet avertissement à l’avenir."
 
 #: ../DiskManager/Dialogs.py:468
 msgid "Duplicate entry detected"
@@ -251,7 +251,7 @@ msgstr "Wallon and Mertens Florent <flomertens AT gmail.com>"
 
 #: ../DiskManager/DiskManager.py:132
 msgid "Enable"
-msgstr "Active"
+msgstr "Activer"
 
 #: ../DiskManager/DiskManager.py:138
 msgid "Device"
@@ -289,7 +289,7 @@ msgid ""
 "serious problems. Do you want to continue?"
 msgstr ""
 "%s est une partition importante du système.\n"
-"Faite très attention en l'éditant ou vous pourriez avoir de\n"
+"Faite très attention en l’éditant ou vous pourriez avoir de\n"
 "sérieux problèmes. Voulez-vous continuer ?"
 
 #: ../DiskManager/DiskManager.py:399
@@ -353,7 +353,7 @@ msgid ""
 "In order to apply all your changes,\n"
 "you'll need to reboot your computer."
 msgstr ""
-"Afin d'appliquer tous vos changements,\n"
+"Afin d’appliquer tous vos changements,\n"
 "vous devrez redémarrer votre ordinateur."
 
 #: ../DiskManager/Fstab/Mounter.py:56
@@ -385,14 +385,14 @@ msgstr "Le démontage a échoué"
 #: ../DiskManager/Fstab/Mounter.py:116
 #, python-format
 msgid "Unmounting <i>%s</i> failed because of the following error:"
-msgstr "Le démontage de <i>%s</i> a échoué à cause de l'erreur suivante :"
+msgstr "Le démontage de <i>%s</i> a échoué à cause de l’erreur suivante :"
 
 #. TRANSLATORS:
 #. Keep the English term 'lazy' for the 'lazy' unmount option
 #: ../DiskManager/Fstab/Mounter.py:122
 msgid "You can also use the 'lazy' options to detach the filesystem now."
 msgstr ""
-"Vous pouvez aussi utiliser l'option 'lazy' pour détacher le système de "
+"Vous pouvez aussi utiliser l’option « lazy » pour détacher le système de "
 "fichiers maintenant."
 
 #: ../DiskManager/Fstab/Mounter.py:127
@@ -407,7 +407,7 @@ msgstr ""
 #: ../DiskManager/Fstab/Mounter.py:129
 msgid "Close all applications that use it and retry to unmount."
 msgstr ""
-"Fermez toutes les applications qui l'utilisent et réessayez de démonter."
+"Fermez toutes les applications qui l’utilisent et réessayez de démonter."
 
 #: ../DiskManager/Fstab/Mounter.py:132
 msgid "The filesystem might be temporarily busy. Wait few seconds and retry."
@@ -419,7 +419,7 @@ msgstr ""
 #. Keep the English term 'lazy' for the 'lazy' unmount option
 #: ../DiskManager/Fstab/Mounter.py:137
 msgid "Unmount with the 'lazy' option"
-msgstr "Démonter avec l'option 'lazy'"
+msgstr "Démonter avec l’option « lazy »"
 
 #: ../DiskManager/Fstab/Mounter.py:138
 msgid "Retry unmount"
@@ -429,16 +429,16 @@ msgstr "Réessayer de démonter"
 #. Keep the English term 'lazy' for the 'lazy' unmount option
 #: ../DiskManager/Fstab/Mounter.py:143
 msgid "Even with the lazy option, unmounting failed."
-msgstr "Même avec l'option lazy, le démontage a échoué."
+msgstr "Même avec l’option lazy, le démontage a échoué."
 
 #: ../DiskManager/Fstab/Mounter.py:155
 msgid "Mounting failed"
-msgstr "Le montage à échoué"
+msgstr "Le montage a échoué"
 
 #: ../DiskManager/Fstab/Mounter.py:156
 #, python-format
 msgid "Mounting <i>%s</i> failed because of the following error:"
-msgstr "Le montage de <i>%s</i> a échoué à cause de l'erreur suivante :"
+msgstr "Le montage de <i>%s</i> a échoué à cause de l’erreur suivante :"
 
 #: ../DiskManager/Fstab/Mounter.py:159
 msgid "Retry mount"
@@ -446,12 +446,12 @@ msgstr "Réessayer de monter"
 
 #: ../DiskManager/Fstab/Mounter.py:190
 msgid "You can try one of the following actions:"
-msgstr "Vous pouvez essayer l'une des actions suivantes :"
+msgstr "Vous pouvez essayer l’une des actions suivantes :"
 
 #: ../DiskManager/Fstab/Mounter.py:193
 #, python-format
 msgid "It seems that option '%s' is not allowed."
-msgstr "Il semble que l'option '%s' ne soit pas autorisée."
+msgstr "Il semble que l’option « %s » ne soit pas autorisée."
 
 #: ../DiskManager/Fstab/Mounter.py:195
 msgid "Return options to defaults"
@@ -460,19 +460,19 @@ msgstr "Revenir aux options par default"
 #: ../DiskManager/Fstab/Mounter.py:197
 #, python-format
 msgid "Don't use the '%s' option"
-msgstr "Ne pas utiliser l'option '%s'"
+msgstr "Ne pas utiliser l’option « %s »"
 
 #: ../DiskManager/Fstab/Mounter.py:199
 #, python-format
 msgid "It seems that fs type '%s' is not valid."
 msgstr ""
-"Il semble que le type de système de fichiers (fs type) '%s' ne soit pas "
+"Il semble que le type de système de fichiers - fs type - « %s » ne soit pas "
 "valide."
 
 #: ../DiskManager/Fstab/Mounter.py:203
 #, python-format
 msgid "Using driver '%s' (%s)"
-msgstr "Utiliser le pilote '%s' (%s)"
+msgstr "Utiliser le pilote « %s » (%s)"
 
 #. TRANSLATORS:
 #. Keep the English term 'force' for the 'force' unmount option
@@ -480,9 +480,9 @@ msgstr "Utiliser le pilote '%s' (%s)"
 msgid ""
 "You can try to use the 'force' option. Be aware that this could be risky."
 msgstr ""
-"Vous pouvez essayer d'utiliser l'option \"force\". Sachez que cela peut être"
+"Vous pouvez essayer d’utiliser l’option « force ». Sachez que cela peut être"
 " risqué."
 
 #: ../DiskManager/Fstab/Mounter.py:212
 msgid "Use the 'force' option"
-msgstr "Utiliser l'option \"force\""
+msgstr "Utiliser l’option « force »"

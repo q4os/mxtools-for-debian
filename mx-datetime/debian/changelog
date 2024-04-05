@@ -1,3 +1,9 @@
+mx-datetime (24.3mx23) mx; urgency=medium
+
+  * Update translations
+
+ -- Adrian <adrian@mxlinux.org>  Sat, 23 Mar 2024 12:37:58 -0400
+
 mx-datetime (23.11.01mx23) mx; urgency=medium
 
   * Fix: set correct ownership and rights .sources and .conf files

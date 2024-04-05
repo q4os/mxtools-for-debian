@@ -72,18 +72,18 @@
     <message>
         <location filename="../mainwindow.ui" line="217"/>
         <source>Set all locale categories to current language</source>
-        <translation>Nastavi vse krajevne kategorije na trenutni jezik</translation>
+        <translation>Nastavi vse krajevne nastavitve na trenutni jezik</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="225"/>
         <source>Locale Categories</source>
         <extracomment>defines individual subvariables for locale</extracomment>
-        <translation>Krajevne kategorije</translation>
+        <translation>Krajevne nastavitve</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="251"/>
         <source>Numeric</source>
-        <translation>Številsko</translation>
+        <translation>Števila</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="265"/>
@@ -113,7 +113,7 @@
     <message>
         <location filename="../mainwindow.ui" line="335"/>
         <source>Name Style</source>
-        <translation>Slog imena</translation>
+        <translation>Slog imen</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="349"/>
@@ -128,7 +128,7 @@
     <message>
         <location filename="../mainwindow.ui" line="377"/>
         <source>Measurement</source>
-        <translation>Merila</translation>
+        <translation>Mere</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="409"/>
@@ -195,7 +195,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="145"/>
         <source>Program for changing language and locale categories</source>
-        <translation>Program za spreminjanje jezika in krajevnih kateogrij</translation>
+        <translation>Program za spreminjanje jezika in krajevnih nastavitev</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="148"/>
@@ -294,7 +294,7 @@
     <message>
         <location filename="../main.cpp" line="61"/>
         <source>Show all locale categories.</source>
-        <translation>Prikaži vse krajevne kategorije.</translation>
+        <translation>Prikaži vse krajevne nastavitve</translation>
     </message>
     <message>
         <location filename="../main.cpp" line="71"/>

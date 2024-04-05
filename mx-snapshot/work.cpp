@@ -23,7 +23,6 @@
  **********************************************************************/
 
 #include "work.h"
-#include "common.h"
 
 #include <QDate>
 #include <QDebug>
@@ -93,7 +92,8 @@ void Work::cleanUp()
         emit message(tr("Done"));
         Cmd().run(elevate + " /usr/lib/" + QCoreApplication::applicationName() + "/snapshot-lib copy_log", true);
         if (settings->shutdown) {
-            QFile::copy(logFile.fileName(), settings->snapshot_dir + "/" + settings->snapshot_name + ".log");
+            QFile::copy("/tmp/" + QCoreApplication::applicationName() + ".log",
+                        settings->snapshot_dir + "/" + settings->snapshot_name + ".log");
             Cmd().run("sync");
             Cmd().run("dbus-send --system --print-reply --dest=org.freedesktop.login1 /org/freedesktop/login1 "
                       "'org.freedesktop.login1.Manager.PowerOff' boolean:true");
@@ -230,7 +230,9 @@ bool Work::createIso(const QString &filename)
                   + (settings->mksq_opt.isEmpty() ? "" : " " + settings->mksq_opt) + " -wildcards -ef "
                   + settings->snapshot_excludes.fileName()
                   + (settings->session_excludes.isEmpty() ? "" : " -e " + settings->session_excludes);
-
+    if (Cmd().getOut("umask", true) != "0022") {
+        cmd.prepend("umask 022; ");
+    }
     emit message(tr("Squashing filesystem..."));
     if (!shell.runAsRoot(cmd)) {
         emit messageBox(BoxType::critical, tr("Error"),
@@ -416,9 +418,7 @@ void Work::savePackageList(const QString &file_name)
                         tr("Could not create working directory. ") + dir.absolutePath());
     }
     QString full_name = settings->work_dir + "/iso-template/" + fi.completeBaseName() + "/package_list";
-    QString cmd
-        = R"(dpkg -l |grep ^ii\ \ |awk '{print $2,$3}' |sed 's/:'$(dpkg --print-architecture)'//' |column -t >")"
-          + full_name + "\"";
+    QString cmd = R"(dpkg -l |awk '/^ii /{print $2,$3}' |column -t >")" + full_name + "\"";
     shell.run(cmd);
 }
 

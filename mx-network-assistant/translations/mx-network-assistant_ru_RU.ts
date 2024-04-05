@@ -6,12 +6,12 @@
     <message>
         <location filename="../mainwindow.ui" line="26"/>
         <source>MX Network Assistant</source>
-        <translation type="unfinished"></translation>
+        <translation>MX Network Assistant</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="86"/>
         <source>About...</source>
-        <translation type="unfinished"></translation>
+        <translation>О программе...</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="109"/>
@@ -21,552 +21,553 @@
     <message>
         <location filename="../mainwindow.ui" line="177"/>
         <source>&amp;Close</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Закрыть</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="184"/>
         <source>Alt+C</source>
-        <translation type="unfinished"></translation>
+        <translation>Alt+C</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="219"/>
         <source>Status</source>
-        <translation type="unfinished"></translation>
+        <translation>Статус</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="225"/>
         <source>IP address</source>
-        <translation type="unfinished"></translation>
+        <translation>IP-адрес</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="261"/>
         <source>Hardware detected</source>
-        <translation type="unfinished"></translation>
+        <translation>Оборудование обнаружено</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="280"/>
         <source>Enable</source>
-        <translation type="unfinished"></translation>
+        <translation>Включить</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="303"/>
         <location filename="../mainwindow.ui" line="593"/>
         <location filename="../mainwindow.ui" line="706"/>
         <source>Re-scan</source>
-        <translation type="unfinished"></translation>
+        <translation>Повторить сканирование</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="372"/>
         <source>Enabled</source>
-        <translation type="unfinished"></translation>
+        <translation>Включено</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="377"/>
         <source>Interface</source>
-        <translation type="unfinished"></translation>
+        <translation>Интерфейс</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="382"/>
         <source>Driver</source>
-        <translation type="unfinished"></translation>
+        <translation>Драйвер</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="387"/>
         <source>Description</source>
-        <translation type="unfinished"></translation>
+        <translation>Описание</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="392"/>
         <source>Vendor</source>
-        <translation type="unfinished"></translation>
+        <translation>Производитель</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="397"/>
         <source>Product</source>
-        <translation type="unfinished"></translation>
+        <translation>Продукт</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="405"/>
         <source>Disable</source>
-        <translation type="unfinished"></translation>
+        <translation>Отключить</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="419"/>
         <source>Active interface</source>
-        <translation type="unfinished"></translation>
+        <translation>Активный интерфейс</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="435"/>
         <source>WiFi status</source>
-        <translation type="unfinished"></translation>
+        <translation>Статус WiFi</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="457"/>
         <source>Unblocks all soft/hard blocked wireless devices</source>
-        <translation type="unfinished"></translation>
+        <translation>Разблокирует все программно/аппаратно заблокированные беспроводные устройства</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="460"/>
         <source>Unblock WiFi Devices</source>
-        <translation type="unfinished"></translation>
+        <translation>Разблокировать устройства WiFi</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="492"/>
         <source>Linux drivers</source>
-        <translation type="unfinished"></translation>
+        <translation>Linux драйверы</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="504"/>
         <source>Associated Linux drivers</source>
-        <translation type="unfinished"></translation>
+        <translation>Ассоциированные Linux драйверы</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="513"/>
         <source>Load Driver</source>
-        <translation type="unfinished"></translation>
+        <translation>Загрузить драйвер</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="576"/>
         <source>Unload Driver</source>
-        <translation type="unfinished"></translation>
+        <translation>Выгрузить драйвер</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="613"/>
-        <location filename="../mainwindow.cpp" line="834"/>
+        <location filename="../mainwindow.cpp" line="833"/>
         <source>Block Driver</source>
-        <translation type="unfinished"></translation>
+        <translation>Заблокировать драйвер</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="632"/>
         <source>Windows drivers</source>
-        <translation type="unfinished"></translation>
+        <translation>Windows драйверы</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="638"/>
         <source>Available Windows drivers</source>
-        <translation type="unfinished"></translation>
+        <translation>Доступные драйвера под Windows</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="672"/>
         <source>Remove Driver</source>
-        <translation type="unfinished"></translation>
+        <translation>Удалить драйвер</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="683"/>
         <source>Add Driver</source>
-        <translation type="unfinished"></translation>
+        <translation>Добавить драйвер</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="724"/>
         <source>About NDISwrapper</source>
-        <translation type="unfinished"></translation>
+        <translation>О программе NDISwrapper</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="736"/>
         <source>Install NDISwrapper</source>
-        <translation type="unfinished"></translation>
+        <translation>Установить NDISwrapper</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="747"/>
         <source>In order to use Windows drivers you need first to install NDISwrapper</source>
-        <translation type="unfinished"></translation>
+        <translation>Для использования драйверов под Windows необходимо сначала установить NDISwrapper</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="763"/>
         <source>Uninstall NDISwrapper</source>
-        <translation type="unfinished"></translation>
+        <translation>Удалить NDISwrapper</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="795"/>
         <source>Net diagnostics</source>
-        <translation type="unfinished"></translation>
+        <translation>Диагностика сети</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="807"/>
         <source>Ping</source>
-        <translation type="unfinished"></translation>
+        <translation>Пинг</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="813"/>
         <location filename="../mainwindow.ui" line="933"/>
         <source>Target URL:</source>
-        <translation type="unfinished"></translation>
+        <translation>URL назначения:</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="823"/>
         <source>Packets</source>
-        <translation type="unfinished"></translation>
+        <translation>Пакеты</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="868"/>
         <location filename="../mainwindow.ui" line="991"/>
         <source>Start</source>
-        <translation type="unfinished"></translation>
+        <translation>Старт</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="885"/>
         <location filename="../mainwindow.ui" line="1008"/>
         <source>Clear</source>
-        <translation type="unfinished"></translation>
+        <translation>Очистить</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="899"/>
         <location filename="../mainwindow.ui" line="1022"/>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Отмена</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="927"/>
         <source>Traceroute</source>
-        <translation type="unfinished"></translation>
+        <translation>Трассировка</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="943"/>
         <source>Hops</source>
-        <translation type="unfinished"></translation>
+        <translation>Прыжки</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="86"/>
+        <source>IP address from router:</source>
+        <translation>IP-адрес от маршрутизатора:</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="87"/>
-        <source>IP address from router:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="88"/>
         <source>External IP address:</source>
-        <translation type="unfinished"></translation>
+        <translation>Внешний IP=адрес:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="125"/>
-        <location filename="../mainwindow.cpp" line="138"/>
+        <location filename="../mainwindow.cpp" line="124"/>
+        <location filename="../mainwindow.cpp" line="137"/>
         <source>Interface: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Интерфейс: %1</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="124"/>
+        <location filename="../mainwindow.cpp" line="138"/>
+        <source>Driver: %1</source>
+        <translation>Драйвер: %1</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="125"/>
         <location filename="../mainwindow.cpp" line="139"/>
-        <source>Driver: %1</source>
-        <translation type="unfinished"></translation>
+        <source>Description: %1</source>
+        <translation>Описание: %1</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="126"/>
         <location filename="../mainwindow.cpp" line="140"/>
-        <source>Description: %1</source>
-        <translation type="unfinished"></translation>
+        <source>Product: %1</source>
+        <translation>Продукт: %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="127"/>
+        <location filename="../mainwindow.cpp" line="126"/>
         <location filename="../mainwindow.cpp" line="141"/>
-        <source>Product: %1</source>
-        <translation type="unfinished"></translation>
+        <source>Vendor: %1</source>
+        <translation>Производитель: %1</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="127"/>
         <location filename="../mainwindow.cpp" line="142"/>
-        <source>Vendor: %1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="128"/>
-        <location filename="../mainwindow.cpp" line="143"/>
         <source>Enabled: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Включено: %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="196"/>
-        <location filename="../mainwindow.cpp" line="210"/>
-        <location filename="../mainwindow.cpp" line="224"/>
+        <location filename="../mainwindow.cpp" line="195"/>
+        <location filename="../mainwindow.cpp" line="209"/>
+        <location filename="../mainwindow.cpp" line="223"/>
         <source>&amp;Copy</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Копировать</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="197"/>
+        <location filename="../mainwindow.cpp" line="211"/>
+        <location filename="../mainwindow.cpp" line="225"/>
+        <source>Ctrl+C</source>
+        <translation>Ctrl+C</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="198"/>
         <location filename="../mainwindow.cpp" line="212"/>
         <location filename="../mainwindow.cpp" line="226"/>
-        <source>Ctrl+C</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="199"/>
-        <location filename="../mainwindow.cpp" line="213"/>
-        <location filename="../mainwindow.cpp" line="227"/>
         <source>Copy &amp;All</source>
-        <translation type="unfinished"></translation>
+        <translation>Копировать &amp;Все</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="201"/>
-        <location filename="../mainwindow.cpp" line="215"/>
-        <location filename="../mainwindow.cpp" line="229"/>
+        <location filename="../mainwindow.cpp" line="200"/>
+        <location filename="../mainwindow.cpp" line="214"/>
+        <location filename="../mainwindow.cpp" line="228"/>
         <source>Ctrl+A</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+A</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="260"/>
+        <location filename="../mainwindow.cpp" line="277"/>
+        <source>Traceroute not installed</source>
+        <translation>Программа traceroute не установлена</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="261"/>
-        <location filename="../mainwindow.cpp" line="278"/>
-        <source>Traceroute not installed</source>
-        <translation type="unfinished"></translation>
+        <source>Traceroute is not installed, do you want to install it now?</source>
+        <translation>Программа traceroute не установлена, вы хотите установить ее сейчас?</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="262"/>
-        <source>Traceroute is not installed, do you want to install it now?</source>
-        <translation type="unfinished"></translation>
+        <location filename="../mainwindow.cpp" line="267"/>
+        <source>Traceroute hasn&apos;t been installed</source>
+        <translation>Программа traceroute не была установлена</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="268"/>
-        <source>Traceroute hasn&apos;t been installed</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="269"/>
         <source>Traceroute cannot be installed. This may mean you are using the LiveCD or you are unable to reach the software repository,</source>
-        <translation type="unfinished"></translation>
+        <translation>Программа traceroute не может быть установлена. Возможно, Вы используете LiveCD, или Вам не удалось подключиться к репозиторию.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="279"/>
+        <location filename="../mainwindow.cpp" line="278"/>
         <source>Traceroute is not installed and no Internet connection could be detected so it cannot be installed</source>
-        <translation type="unfinished"></translation>
+        <translation>Программа traceroute не установлена, и не обнаружено подключение к Интернету, поэтому она не может быть установлена</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="286"/>
-        <location filename="../mainwindow.cpp" line="331"/>
+        <location filename="../mainwindow.cpp" line="285"/>
+        <location filename="../mainwindow.cpp" line="330"/>
         <source>No destination host</source>
-        <translation type="unfinished"></translation>
+        <translation>Нет компьютера назначения</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="286"/>
-        <location filename="../mainwindow.cpp" line="331"/>
+        <location filename="../mainwindow.cpp" line="285"/>
+        <location filename="../mainwindow.cpp" line="330"/>
         <source>Please fill in the destination host field</source>
-        <translation type="unfinished"></translation>
+        <translation>Пожалуйста, заполните поле компьютера назначения</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="446"/>
+        <location filename="../mainwindow.cpp" line="445"/>
         <source>Loaded Drivers</source>
-        <translation type="unfinished"></translation>
+        <translation>Загруженные драйвера</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="455"/>
+        <location filename="../mainwindow.cpp" line="454"/>
         <source>Unloaded Drivers</source>
-        <translation type="unfinished"></translation>
+        <translation>Выгруженные драйвера</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="469"/>
+        <location filename="../mainwindow.cpp" line="468"/>
         <source>Blocked Drivers</source>
-        <translation type="unfinished"></translation>
+        <translation>Заблокированные драйвера</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="489"/>
+        <location filename="../mainwindow.cpp" line="488"/>
         <source>Blocked Broadcom Drivers</source>
-        <translation type="unfinished"></translation>
+        <translation>Заблокированные драйвера Broadcom</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="511"/>
+        <location filename="../mainwindow.cpp" line="510"/>
         <source>Ndiswrapper is not installed</source>
-        <translation type="unfinished"></translation>
+        <translation>Ndiswrapper не установлена</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="524"/>
+        <location filename="../mainwindow.cpp" line="523"/>
         <source>driver installed</source>
-        <translation type="unfinished"></translation>
+        <translation>драйвер установлен</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="533"/>
+        <location filename="../mainwindow.cpp" line="532"/>
         <source> and in use by </source>
-        <translation type="unfinished"></translation>
+        <translation>и используется</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="540"/>
+        <location filename="../mainwindow.cpp" line="539"/>
         <source>. Alternate driver: </source>
-        <translation type="unfinished"></translation>
+        <translation>. Альтернативный драйвер:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="604"/>
+        <location filename="../mainwindow.cpp" line="603"/>
         <source>Driver removed from blocklist</source>
-        <translation type="unfinished"></translation>
+        <translation>Драйвер извлечен из блокировки</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="604"/>
+        <location filename="../mainwindow.cpp" line="603"/>
         <source>Driver removed from blocklist.</source>
-        <translation type="unfinished"></translation>
+        <translation>Драйвер извлечен из блокировки.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="610"/>
+        <location filename="../mainwindow.cpp" line="609"/>
         <source>Module blocked</source>
-        <translation type="unfinished"></translation>
+        <translation>Модуль заблокирован</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="764"/>
+        <location filename="../mainwindow.cpp" line="763"/>
         <source>Installation successful</source>
-        <translation type="unfinished"></translation>
+        <translation>Установка завершилась успешно</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="766"/>
+        <location filename="../mainwindow.cpp" line="765"/>
         <source>Error detected, could not compile ndiswrapper driver.</source>
-        <translation type="unfinished"></translation>
+        <translation>Обнаружена ошибка, невозможно скомпилировать драйвер NdisWrapper.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="769"/>
+        <location filename="../mainwindow.cpp" line="768"/>
         <source>Error detected, could not install ndiswrapper.</source>
-        <translation type="unfinished"></translation>
+        <translation>Обнаружена ошибка, невозможно установить драйвер NdisWrapper.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="781"/>
+        <location filename="../mainwindow.cpp" line="780"/>
         <source>Error encountered while removing Ndiswrapper</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка при удалении Ndiswrapper</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="831"/>
+        <location filename="../mainwindow.cpp" line="830"/>
         <source>Unblock Driver</source>
-        <translation type="unfinished"></translation>
+        <translation>Разблокировать драйвер</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="863"/>
+        <location filename="../mainwindow.cpp" line="862"/>
         <source>enabled</source>
-        <translation type="unfinished"></translation>
+        <translation>активирован</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="866"/>
+        <location filename="../mainwindow.cpp" line="865"/>
         <source>disabled</source>
-        <translation type="unfinished"></translation>
+        <translation>отключен</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="869"/>
+        <location filename="../mainwindow.cpp" line="868"/>
         <source>WiFi hardware switch is off</source>
-        <translation type="unfinished"></translation>
+        <translation>WiFi отключен аппаратным переключателем</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="875"/>
+        <source>Locate the Windows driver you want to add</source>
+        <translation>Найдите Windows драйвер, который Вы хотите добавить</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="876"/>
-        <source>Locate the Windows driver you want to add</source>
-        <translation type="unfinished"></translation>
+        <source>Windows installation information file (*.inf)</source>
+        <translation>Файл установочной информации Windows (*.inf)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="877"/>
-        <source>Windows installation information file (*.inf)</source>
-        <translation type="unfinished"></translation>
+        <location filename="../mainwindow.cpp" line="907"/>
+        <source>*.sys file not found</source>
+        <translation>*.sys файл не найден</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="908"/>
-        <source>*.sys file not found</source>
-        <translation type="unfinished"></translation>
+        <source>The *.sys files must be in the same location as the *.inf file. %1 cannot be found</source>
+        <translation>Файл *.sys должен быть в том же местоположении, что и *.inf файл. %1 не может быть найден</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="909"/>
-        <source>The *.sys files must be in the same location as the *.inf file. %1 cannot be found</source>
-        <translation type="unfinished"></translation>
+        <location filename="../mainwindow.cpp" line="919"/>
+        <source>sys file reference not found</source>
+        <translation>Ссылка на sys файл не найдена</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="920"/>
-        <source>sys file reference not found</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="921"/>
         <source>The sys file for the given driver cannot be determined after parsing the inf file</source>
-        <translation type="unfinished"></translation>
+        <translation>Файл sys для этого драйвера не может быть определен после анализа inf файла</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="938"/>
+        <location filename="../mainwindow.cpp" line="937"/>
         <source>Ndiswrapper driver removed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ndiswrapper драйвер удален.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="946"/>
+        <location filename="../mainwindow.cpp" line="945"/>
         <source>%1 Help</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Справка</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="958"/>
+        <location filename="../mainwindow.cpp" line="957"/>
         <source>Could not unlock devices.
 WiFi device(s) might already be unlocked.</source>
-        <translation type="unfinished"></translation>
+        <translation>Не удалось разблокировать устройства.
+Wi-Fi устройство(а) может быть уже разблокировано.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="960"/>
+        <location filename="../mainwindow.cpp" line="959"/>
         <source>WiFi devices unlocked.</source>
-        <translation type="unfinished"></translation>
+        <translation>WiFi устройства разблокированы.</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="974"/>
+        <source>About %1</source>
+        <translation>О %1</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="975"/>
-        <source>About %1</source>
-        <translation type="unfinished"></translation>
+        <source>Version: </source>
+        <translation>Версия: </translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="976"/>
-        <source>Version: </source>
-        <translation type="unfinished"></translation>
+        <source>Program for troubleshooting and configuring network for MX Linux</source>
+        <translation>Программа для поиска и устранения неисправностей и конфигурации сети.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="978"/>
-        <source>Program for troubleshooting and configuring network for MX Linux</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="980"/>
         <source>Copyright (c) MEPIS LLC and MX Linux</source>
-        <translation type="unfinished"></translation>
+        <translation>Авторское право (c) MEPIS LLC и MX Linux</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="981"/>
+        <location filename="../mainwindow.cpp" line="979"/>
         <source>%1 License</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Лицензия</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1007"/>
+        <location filename="../mainwindow.cpp" line="1005"/>
         <source>Driver loaded successfully</source>
-        <translation type="unfinished"></translation>
+        <translation>Драйвер загружен успешно</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1022"/>
+        <location filename="../mainwindow.cpp" line="1020"/>
         <source>Driver unloaded successfully</source>
-        <translation type="unfinished"></translation>
+        <translation>Драйвер выгружен успешно</translation>
     </message>
 </context>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../about.cpp" line="51"/>
-        <source>License</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../about.cpp" line="52"/>
-        <location filename="../about.cpp" line="62"/>
-        <source>Changelog</source>
-        <translation type="unfinished"></translation>
+        <source>License</source>
+        <translation>Лицензия</translation>
     </message>
     <message>
         <location filename="../about.cpp" line="53"/>
+        <location filename="../about.cpp" line="63"/>
+        <source>Changelog</source>
+        <translation>Список изменений</translation>
+    </message>
+    <message>
+        <location filename="../about.cpp" line="54"/>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Отмена</translation>
     </message>
     <message>
-        <location filename="../about.cpp" line="75"/>
+        <location filename="../about.cpp" line="76"/>
         <source>&amp;Close</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Закрыть</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="71"/>
-        <location filename="../main.cpp" line="79"/>
+        <location filename="../main.cpp" line="70"/>
+        <location filename="../main.cpp" line="78"/>
         <source>Error</source>
         <translation>Ошибка</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="72"/>
+        <location filename="../main.cpp" line="71"/>
         <source>You seem to be logged in as root, please log out and log in as normal user to use this program.</source>
-        <translation type="unfinished"></translation>
+        <translation>Программа запущена суперпользователем. Для использования программы войдите в систему как обычный пользователь.</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="80"/>
+        <location filename="../main.cpp" line="79"/>
         <source>You must run this program with admin access.</source>
-        <translation type="unfinished"></translation>
+        <translation>Вы должны запустить эту программу с правами администратора.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="625"/>
+        <location filename="../mainwindow.cpp" line="624"/>
         <source>Could not load </source>
-        <translation type="unfinished"></translation>
+        <translation>Невозможно загрузить</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="650"/>
+        <location filename="../mainwindow.cpp" line="649"/>
         <source>Could not unload </source>
-        <translation type="unfinished"></translation>
+        <translation>Невозможно выгрузить</translation>
     </message>
 </context>
 </TS>

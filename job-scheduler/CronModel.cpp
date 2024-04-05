@@ -14,8 +14,9 @@ void dumpIndex(const QModelIndex &idx, QString h);
 
 QVariant CronModel::data(const QModelIndex &idx, int role) const
 {
-    if (!idx.isValid() || role != Qt::DisplayRole)
-        return QVariant();
+    if (!idx.isValid() || role != Qt::DisplayRole) {
+        return {};
+    }
 
     if (idx.parent().isValid() || isOneUser()) {
         auto *cmnd = getTCommand(idx);
@@ -28,17 +29,19 @@ QVariant CronModel::data(const QModelIndex &idx, int role) const
             return cmnd->command;
         }
     } else {
-        if (idx.column() == 0)
+        if (idx.column() == 0) {
             return getCrontab(idx)->cronOwner;
+        }
     }
 
-    return QVariant();
+    return {};
 }
 
 QModelIndex CronModel::parent(const QModelIndex &index) const
 {
-    if (!index.isValid())
-        return QModelIndex();
+    if (!index.isValid()) {
+        return {};
+    }
 
     if (crontabs->count() > 1) {
         auto *t = static_cast<CronType *>(index.internalPointer());
@@ -49,7 +52,7 @@ QModelIndex CronModel::parent(const QModelIndex &index) const
         }
     }
 
-    return QModelIndex();
+    return {};
 }
 
 QModelIndex CronModel::index(int row, int column, const QModelIndex &parent) const
@@ -57,32 +60,37 @@ QModelIndex CronModel::index(int row, int column, const QModelIndex &parent) con
 
     if (!parent.isValid()) {
         if (isOneUser()) {
-            if (row < (*crontabs).at(0)->tCommands.count())
+            if (row < (*crontabs).at(0)->tCommands.count()) {
                 return createIndex(row, column, (*crontabs).at(0)->tCommands.at(row));
+            }
         } else {
-            if (row >= 0 && row < crontabs->count())
+            if (row >= 0 && row < crontabs->count()) {
                 return createIndex(row, column, (*crontabs).at(row));
+            }
         }
     } else {
         if (!isOneUser()) {
             auto *cron = getCrontab(parent);
-            if (row < cron->tCommands.count())
+            if (row < cron->tCommands.count()) {
                 return createIndex(row, column, cron->tCommands.at(row));
+            }
         }
     }
 
-    return QModelIndex();
+    return {};
 }
 
 Qt::ItemFlags CronModel::flags(const QModelIndex &idx) const
 {
-    if (!idx.isValid())
-        return Qt::ItemFlags();
+    if (!idx.isValid()) {
+        return {};
+    }
 
-    if (isOneUser() || idx.parent().isValid())
+    if (isOneUser() || idx.parent().isValid()) {
         return Qt::ItemIsSelectable | Qt::ItemIsEnabled | Qt::ItemIsDragEnabled | Qt::ItemIsDropEnabled;
-    else
+    } else {
         return Qt::ItemIsSelectable | Qt::ItemIsEnabled | Qt::ItemIsDropEnabled;
+    }
 }
 
 int CronModel::rowCount(const QModelIndex &parent) const
@@ -90,14 +98,16 @@ int CronModel::rowCount(const QModelIndex &parent) const
 
     if (parent.isValid()) {
         if (!parent.parent().isValid()) {
-            if (!isOneUser())
+            if (!isOneUser()) {
                 return getCrontab(parent)->tCommands.count();
+            }
         }
     } else {
-        if (isOneUser())
+        if (isOneUser()) {
             return (*crontabs).at(0)->tCommands.count();
-        else
+        } else {
             return crontabs->count();
+        }
     }
 
     return 0;
@@ -117,14 +127,15 @@ QVariant CronModel::headerData(int section, Qt::Orientation orientation, int rol
         }
     }
 
-    return QVariant();
+    return {};
 }
 
 QModelIndex CronModel::removeCComand(const QModelIndex &idx)
 {
 
-    if (!idx.isValid())
-        return QModelIndex();
+    if (!idx.isValid()) {
+        return {};
+    }
 
     int cronPos = 0;
     int cmndPos = 0;
@@ -146,12 +157,13 @@ QModelIndex CronModel::removeCComand(const QModelIndex &idx)
 
     endRemoveRows();
 
-    if (rowCount(del) > 0)
+    if (rowCount(del) > 0) {
         return index(0, 0, del);
-    else if (!isOneUser())
+    } else if (!isOneUser()) {
         return del;
+    }
 
-    return QModelIndex();
+    return {};
 }
 
 QModelIndex CronModel::insertTCommand(const QModelIndex &idx, TCommand *cmnd)
@@ -206,28 +218,34 @@ void CronModel::tCommandChanged(const QModelIndex &idx)
 
 TCommand *CronModel::getTCommand(const QModelIndex &idx) const
 {
-    if (!idx.isValid())
+    if (!idx.isValid()) {
         return nullptr;
+    }
 
-    if (isOneUser())
+    if (isOneUser()) {
         return static_cast<TCommand *>(idx.internalPointer());
+    }
 
-    if (idx.parent().isValid())
+    if (idx.parent().isValid()) {
         return static_cast<TCommand *>(idx.internalPointer());
+    }
 
     return nullptr;
 }
 
 Crontab *CronModel::getCrontab(const QModelIndex &idx) const
 {
-    if (!idx.isValid() && crontabs->count() == 0)
+    if (!idx.isValid() && crontabs->count() == 0) {
         return nullptr;
+    }
 
-    if (isOneUser())
+    if (isOneUser()) {
         return (*crontabs)[0];
+    }
 
-    if (idx.parent().isValid())
+    if (idx.parent().isValid()) {
         return static_cast<Crontab *>(idx.parent().internalPointer());
+    }
 
     return static_cast<Crontab *>(idx.internalPointer());
 }
@@ -238,20 +256,22 @@ QModelIndex CronModel::searchTCommand(TCommand *cmnd) const
     if (isOneUser()) {
         for (int i = 0; i < rowCount(QModelIndex()); ++i) {
             QModelIndex idx = index(i, 0, QModelIndex());
-            if (reinterpret_cast<uintptr_t>(getTCommand(idx)) == reinterpret_cast<uintptr_t>(cmnd))
+            if (reinterpret_cast<uintptr_t>(getTCommand(idx)) == reinterpret_cast<uintptr_t>(cmnd)) {
                 return idx;
+            }
         }
     } else {
         for (int i = 0; i < rowCount(QModelIndex()); ++i) {
             QModelIndex pidx = index(i, 0, QModelIndex());
             for (int j = 0; j < rowCount(pidx); j++) {
                 QModelIndex idx = index(j, 0, pidx);
-                if (reinterpret_cast<uintptr_t>(getTCommand(idx)) == reinterpret_cast<uintptr_t>(cmnd))
+                if (reinterpret_cast<uintptr_t>(getTCommand(idx)) == reinterpret_cast<uintptr_t>(cmnd)) {
                     return idx;
+                }
             }
         }
     }
-    return QModelIndex();
+    return {};
 }
 
 bool CronModel::dropMimeData(const QMimeData * /*data*/, Qt::DropAction /*action*/, int row, int /*column*/,
@@ -283,21 +303,24 @@ bool CronModel::dropMimeData(const QMimeData * /*data*/, Qt::DropAction /*action
     //	qDebug() << "CronModel::dropMimeData:row=" << row;
     //	dumpIndex(parent, "CronModel::dropMimeData");
     if (isOneUser()) {
-        if (row < 0 && !parent.isValid())
+        if (row < 0 && !parent.isValid()) {
             return false;
+        }
     } else {
-        if (!parent.isValid())
+        if (!parent.isValid()) {
             return false;
+        }
     }
 
     QModelIndex ins;
     QModelIndex next;
     if (row <= 0) {
         ins = parent;
-        if (ins.isValid() && (isOneUser() || ins.parent().isValid()))
+        if (ins.isValid() && (isOneUser() || ins.parent().isValid())) {
             next = index(ins.row() + 1, 0, ins.parent());
-        else
+        } else {
             next = index(0, 0, ins);
+        }
     } else {
         ins = index(row - 1, 0, parent);
         next = index(row, 0, parent);
@@ -305,14 +328,16 @@ bool CronModel::dropMimeData(const QMimeData * /*data*/, Qt::DropAction /*action
     //	dumpIndex(ins, "CronModel::dropMimeData insert : ");
 
     if (reinterpret_cast<uintptr_t>(getTCommand(ins)) == reinterpret_cast<uintptr_t>(drag)
-        || reinterpret_cast<uintptr_t>(getTCommand(next)) == reinterpret_cast<uintptr_t>(drag))
+        || reinterpret_cast<uintptr_t>(getTCommand(next)) == reinterpret_cast<uintptr_t>(drag)) {
         return false;
+    }
 
     auto *t = new TCommand();
     *t = *drag;
     Crontab *c = getCrontab(ins);
-    if (c->cronOwner != QLatin1String("/etc/crontab"))
+    if (c->cronOwner != QLatin1String("/etc/crontab")) {
         t->user = c->cronOwner;
+    }
     t->parent = c;
 
     insertTCommand(ins, t);
@@ -327,4 +352,7 @@ bool CronModel::dropMimeData(const QMimeData * /*data*/, Qt::DropAction /*action
     return false;
 }
 
-void CronModel::dragTCommand(const QModelIndex &idx) { drag = getTCommand(idx); }
+void CronModel::dragTCommand(const QModelIndex &idx)
+{
+    drag = getTCommand(idx);
+}

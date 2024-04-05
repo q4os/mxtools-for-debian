@@ -38,56 +38,61 @@
 #include "versionnumber.h"
 #include <unistd.h>
 
-// return the config file used for the newest conky process
+// Return the config file used for the newest conky process
 QString getRunningConky()
 {
-    Cmd cmd;
-
-    QString pid = cmd.getCmdOut(QStringLiteral("pgrep -u $(id -nu) -nx conky"), true);
-    if (pid.isEmpty())
-        return QString();
-    QString conkyrc = cmd.getCmdOutUntrimmed(
+    const QString pid = Cmd().getCmdOut("pgrep -u $(id -nu) -nx conky", true);
+    if (pid.isEmpty()) {
+        return {};
+    }
+    const QString conkyrc = Cmd().getCmdOutUntrimmed(
         QString("sed -nrz '/^--config=/s///p; /^(-c|--config)/{n;p;}' /proc/%1/cmdline").arg(pid), true);
-    if (conkyrc.startsWith("/"))
+    if (conkyrc.startsWith("/")) {
         return conkyrc;
-    QString conkywd = cmd.getCmdOutUntrimmed(QString("sed -nrz '/^PWD=/s///p' /proc/%1/environ").arg(pid), true);
+    }
+    const QString conkywd
+        = Cmd().getCmdOutUntrimmed(QString("sed -nrz '/^PWD=/s///p' /proc/%1/environ").arg(pid), true);
     return conkywd + "/" + conkyrc;
 }
 
 QString openFile(const QDir &dir)
 {
-    QString file_name = getRunningConky();
-
-    if (not file_name.isEmpty())
+    const QString file_name = getRunningConky();
+    if (!file_name.isEmpty()) {
         return file_name;
+    }
 
-    QString selected
+    const QString selected
         = QFileDialog::getOpenFileName(nullptr, QObject::tr("Select Conky Manager config file"), dir.path());
-    if (not selected.isEmpty())
+    if (!selected.isEmpty()) {
         return selected;
-    return QString();
+    }
+    return {};
 }
 
-void messageUpdate()
+void updateThemes()
 {
-    Cmd cmd;
-    VersionNumber current_version {
-        cmd.getCmdOut(QStringLiteral("dpkg -l mx-conky-data | awk 'NR==6 {print $3}'"), true)};
+    const VersionNumber current_version {Cmd().getCmdOut("dpkg -l mx-conky-data | awk 'NR==6 {print $3}'", true)};
 
     QSettings settings;
+    const QString version = settings.value("data-version").toString();
+    VersionNumber recorded_version {version};
 
-    QString ver = settings.value(QStringLiteral("data-version")).toByteArray();
-    VersionNumber recorded_version {ver};
-
-    QString title = QObject::tr("Conky Data Update");
-    QString message = QObject::tr("The MX Conky data set has been updated. <p><p>\
+    const QString title = QObject::tr("Conky Data Update");
+    const QString message = QObject::tr("The MX Conky data set has been updated. <p><p>\
                                   Copy from the folder where it is located <a href=\"/usr/share/mx-conky-data/themes\">/usr/share/mx-conky-data/themes</a> \
                                   whatever you wish to your Home hidden conky folder <a href=\"%1/.conky\">~/.conky</a>. \
                                   Be careful not to overwrite any conkies you have changed.")
-                          .arg(QDir::homePath());
+                                .arg(QDir::homePath());
 
     if (recorded_version.toString().isEmpty() || current_version > recorded_version) {
-        settings.setValue(QStringLiteral("data-version"), current_version.toString());
+        QDir dir {QDir::homePath() + "/.conky"};
+        if (!dir.exists()) {
+            dir.mkdir(dir.path());
+        }
+        // Copy the mx-conky-data themes to the default folder
+        system("cp -rn /usr/share/mx-conky-data/themes/* " + dir.path().toUtf8());
+        settings.setValue("data-version", current_version.toString());
         QMessageBox::information(nullptr, title, message);
     }
 }
@@ -96,21 +101,24 @@ int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
     QApplication::setWindowIcon(QIcon::fromTheme(QApplication::applicationName()));
-    QApplication::setOrganizationName(QStringLiteral("MX-Linux"));
+    QApplication::setOrganizationName("MX-Linux");
     QApplication::setApplicationVersion(VERSION);
 
     QTranslator qtTran;
-    if (qtTran.load("qt_" + QLocale().name(), QLibraryInfo::location(QLibraryInfo::TranslationsPath)))
+    if (qtTran.load("qt_" + QLocale().name(), QLibraryInfo::location(QLibraryInfo::TranslationsPath))) {
         QApplication::installTranslator(&qtTran);
+    }
 
     QTranslator qtBaseTran;
-    if (qtBaseTran.load("qtbase_" + QLocale().name(), QLibraryInfo::location(QLibraryInfo::TranslationsPath)))
+    if (qtBaseTran.load("qtbase_" + QLocale().name(), QLibraryInfo::location(QLibraryInfo::TranslationsPath))) {
         QApplication::installTranslator(&qtBaseTran);
+    }
 
     QTranslator appTran;
     if (appTran.load(QApplication::applicationName() + "_" + QLocale().name(),
-                     "/usr/share/" + QApplication::applicationName() + "/locale"))
+                     "/usr/share/" + QApplication::applicationName() + "/locale")) {
         QApplication::installTranslator(&appTran);
+    }
 
     if (system("dpkg -s conky-manager | grep -q 'Status: install ok installed'") != 0
         && system("dpkg -s conky-manager2 | grep -q 'Status: install ok installed'") != 0) {
@@ -121,23 +129,15 @@ int main(int argc, char *argv[])
 
     if (getuid() != 0) {
 
-        QString dir = QDir::homePath() + "/.conky";
-        if (!QFile::exists(dir))
-            QDir().mkdir(dir);
+        updateThemes();
 
-        messageUpdate();
+        const QString file = QApplication::arguments().length() >= 2 && QFile::exists(QApplication::arguments().at(1))
+                                 ? QApplication::arguments().at(1)
+                                 : openFile(QDir::homePath() + "/.conky");
 
-        // copy the mx-conky-data themes to the default folder
-        system("cp -rn /usr/share/mx-conky-data/themes/* " + dir.toUtf8());
-
-        QString file;
-        if (QApplication::arguments().length() >= 2 && QFile::exists(QApplication::arguments().at(1)))
-            file = QApplication::arguments().at(1);
-        else
-            file = openFile(dir);
-
-        if (file.isEmpty())
+        if (file.isEmpty()) {
             return EXIT_FAILURE;
+        }
 
         MainWindow w(nullptr, file);
         w.show();

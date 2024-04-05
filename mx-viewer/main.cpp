@@ -84,33 +84,29 @@ int main(int argc, char *argv[])
     QApplication app(argc, argv);
     QApplication::setWindowIcon(QIcon::fromTheme(QApplication::applicationName()));
     QApplication::setApplicationVersion(VERSION);
-    QApplication::setOrganizationName(QStringLiteral("MX-Linux"));
+    QApplication::setOrganizationName("MX-Linux");
 
     QCommandLineParser parser;
     parser.setApplicationDescription(
         QObject::tr("This tool will display the URL content in a window, window title is optional"));
     parser.addHelpOption();
     parser.addVersionOption();
-    parser.addOption(
-        {{QStringLiteral("f"), QStringLiteral("full-screen")}, QObject::tr("Start program in full-screen mode")});
-    parser.addOption({{QStringLiteral("i"), QStringLiteral("disable-images")},
-                      QObject::tr("Disable load images automatically from websites")});
-    parser.addOption({{QStringLiteral("j"), QStringLiteral("disable-js")}, QObject::tr("Disable JavaScript")});
+    parser.addOption({{"f", "full-screen"}, QObject::tr("Start program in full-screen mode")});
+    parser.addOption({{"i", "disable-images"}, QObject::tr("Disable load images automatically from websites")});
+    parser.addOption({{"j", "disable-js"}, QObject::tr("Disable JavaScript")});
     if (getuid() == 0 || geteuid() == 0) {
         parser.addOption(
-            {{QStringLiteral("n"), QStringLiteral("force-nobody")},
+            {{"n", "force-nobody"},
              QObject::tr("Drop program's rights to 'nobody'. By default, if run as root, the rights are "
                          "dropped to normal user. This option might provide additional protection, but the program "
                          "would not be able to write its cache and cookies to the user directory, so it might break "
                          "some functionality.")});
     }
-    parser.addOption({{QStringLiteral("s"), QStringLiteral("enable-spatial-navigation")},
-                      QObject::tr("Enable spatial navigation with keyboard")});
+    parser.addOption({{"s", "enable-spatial-navigation"}, QObject::tr("Enable spatial navigation with keyboard")});
     parser.addPositionalArgument(QObject::tr("URL"),
                                  QObject::tr("URL of the page you want to load")
                                      + "\ne.g., https://google.com, google.com, file:///home/user/file.html");
-    parser.addPositionalArgument(QObject::tr("Title"), QObject::tr("Window title for the viewer"),
-                                 QStringLiteral("[title]"));
+    parser.addPositionalArgument(QObject::tr("Title"), QObject::tr("Window title for the viewer"), "[title]");
     parser.process(app);
 
     bool force_nobody = (getuid() == 0 || geteuid() == 0) ? parser.isSet("force-nobody") : false;
@@ -120,8 +116,7 @@ int main(int argc, char *argv[])
     }
 
     QTranslator qtTran;
-    if (qtTran.load(QLocale::system(), QStringLiteral("qt"), QStringLiteral("_"),
-                    QLibraryInfo::location(QLibraryInfo::TranslationsPath))) {
+    if (qtTran.load(QLocale::system(), "qt", "_", QLibraryInfo::location(QLibraryInfo::TranslationsPath))) {
         QApplication::installTranslator(&qtTran);
     }
 

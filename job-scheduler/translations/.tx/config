@@ -6,3 +6,4 @@ file_filter = ./job-scheduler_<lang>.ts
 source_file = job-scheduler_en.ts
 source_lang = en
 type = ts
+minimum_perc = 25

@@ -1,8 +1,7 @@
-# languages codes with translation completness  >= 1%
-# generated with tx-complete.sh at Sat, 29 Jan 2022 17:11:36 +0000
+# languages codes with translation completness  >= 5%
+# generated with tx-complete.sh at Tue, 26 Mar 2024 19:03:03 +0000
 # 
 am
-ar
 bg
 ca
 cs
@@ -11,7 +10,6 @@ de
 el
 es
 es_ES
-fa
 fi
 fil_PH
 fr
@@ -24,25 +22,22 @@ hu
 is
 it
 ja
-kk
-ko
 lt
 nb
-nb_NO
 nl
+nl_BE
 pl
 pt
 pt_BR
 ro
 ru
+ru_RU
 sk
 sl
 sq
 sr
 sv
-th
 tr
 uk
-vi
 zh_CN
 zh_TW

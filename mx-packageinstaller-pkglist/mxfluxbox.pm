@@ -79,6 +79,7 @@ lxappearance
 rofi-calc
 custom-toolbox
 roxterm
+feh
 </install_package_names>
 
 

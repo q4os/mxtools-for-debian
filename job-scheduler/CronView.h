@@ -7,8 +7,7 @@
    as published by the Free Software Foundation; either version 2
    of the License, or (at your option) any later version.
 */
-#ifndef CRONVIEW_H
-#define CRONVIEW_H
+#pragma once
 
 #include <QTreeView>
 
@@ -22,15 +21,18 @@ class CronView : public QTreeView
     Q_OBJECT
 
 public:
-    CronView(CronModel *model);
+    explicit CronView(CronModel *model, QWidget *parent = nullptr);
 
     void resetView();
-    void hideUser(bool flag = true) { setColumnHidden(1, flag); }
+    void hideUser(bool flag = true)
+    {
+        setColumnHidden(1, flag);
+    }
     Crontab *getCurrentCrontab();
     TCommand *getCurrentTCommand();
 
 protected:
-    void startDrag(Qt::DropActions supportedActions);
+    void startDrag(Qt::DropActions supportedActions) override;
 
 public slots:
     void changeCurrent(TCommand *cmnd);
@@ -52,10 +54,8 @@ signals:
     void dataChanged();
 
 private:
-    void scrollTo(const QModelIndex &idx, ScrollHint hint);
+    void scrollTo(const QModelIndex &idx, ScrollHint hint) override;
 
     TCommand *pasteData;
     CronModel *cronModel;
 };
-
-#endif

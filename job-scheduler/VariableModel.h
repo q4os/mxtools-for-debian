@@ -7,8 +7,7 @@
    as published by the Free Software Foundation; either version 2
    of the License, or (at your option) any later version.
 */
-#ifndef VARIABLEMODEL_H
-#define VARIABLEMODEL_H
+#pragma once
 
 #include <QAbstractItemModel>
 
@@ -21,23 +20,38 @@ class VariableModel : public QAbstractItemModel
     Q_OBJECT
 
 public:
-    VariableModel(QObject *parent = nullptr)
+    explicit VariableModel(QObject *parent = nullptr)
         : QAbstractItemModel(parent)
     {
         variables = &dummy;
     }
 
-    ~VariableModel() { }
+    ~VariableModel() override = default;
 
-    Qt::ItemFlags flags(const QModelIndex &) const { return Qt::ItemIsSelectable | Qt::ItemIsEnabled; }
-    QModelIndex parent(const QModelIndex &) const { return QModelIndex(); }
-    QModelIndex index(int row, int column, const QModelIndex &) const
+    [[nodiscard]] Qt::ItemFlags flags(const QModelIndex & /*index*/) const override
+    {
+        return Qt::ItemIsSelectable | Qt::ItemIsEnabled;
+    }
+    [[nodiscard]] QModelIndex parent(const QModelIndex & /*child*/) const override
+    {
+        return {};
+    }
+    [[nodiscard]] QModelIndex index(int row, int column, const QModelIndex & /*parent*/) const override
     {
         return createIndex(row, column, (*variables)[row]);
     }
-    int columnCount(const QModelIndex &) const { return 3; }
-    void resetData(QList<Variable *> *var) { variables = var; }
-    int rowCount(const QModelIndex &parent) const { return (parent.isValid() ? 0 : variables->count()); }
+    [[nodiscard]] int columnCount(const QModelIndex & /*parent*/) const override
+    {
+        return 3;
+    }
+    void resetData(QList<Variable *> *var)
+    {
+        variables = var;
+    }
+    [[nodiscard]] int rowCount(const QModelIndex &parent) const override
+    {
+        return (parent.isValid() ? 0 : variables->count());
+    }
 
     void varDataChanged(const QModelIndex &idx);
     static Variable *getVariable(const QModelIndex &idx);
@@ -48,8 +62,6 @@ public:
     QList<Variable *> dummy;
 
 private:
-    QVariant headerData(int section, Qt::Orientation orientation, int role) const;
-    QVariant data(const QModelIndex &idx, int role) const;
+    [[nodiscard]] QVariant headerData(int section, Qt::Orientation orientation, int role) const override;
+    [[nodiscard]] QVariant data(const QModelIndex &idx, int role) const override;
 };
-
-#endif

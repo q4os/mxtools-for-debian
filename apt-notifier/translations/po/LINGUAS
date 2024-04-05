@@ -1,5 +1,5 @@
 # languages codes with translation completness  >= 5%
-# generated with tx-complete.sh at Sat, 01 Jul 2023 20:06:48 -0500
+# generated with tx-complete.sh at Mon, 25 Mar 2024 17:31:03 -0500
 # 
 am
 ar
@@ -36,6 +36,7 @@ pt
 pt_BR
 ro
 ru
+ru_RU
 sk
 sl
 sq

@@ -4,7 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Green <usergreen@users.osdn.me>, 2022
+# Green <usergreen@users.osdn.me>, 2024
 # 
 #, fuzzy
 msgid ""
@@ -13,7 +13,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-12-04 21:30-0500\n"
 "PO-Revision-Date: 2022-12-09 04:06+0000\n"
-"Last-Translator: Green <usergreen@users.osdn.me>, 2022\n"
+"Last-Translator: Green <usergreen@users.osdn.me>, 2024\n"
 "Language-Team: Japanese (https://app.transifex.com/anticapitalista/teams/10162/ja/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -29,4 +29,4 @@ msgstr "MX Samba 設定"
 #. # The desktop entry comment will be shown within the menu.
 #: desktop-in/mx-samba-config.desktop.in:7
 msgid "Manage user Samba shares"
-msgstr "ユーザーの Samba 共有を管理します"
+msgstr "ユーザの Samba 共有を管理します"

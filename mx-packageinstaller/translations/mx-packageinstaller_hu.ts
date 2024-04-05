@@ -564,7 +564,7 @@
         <location filename="../mainwindow.cpp" line="1812"/>
         <location filename="../mainwindow.cpp" line="1936"/>
         <source>dpkg command returned an error, please run &apos;dpkg --list&apos; in terminal and check the output.</source>
-        <translation type="unfinished"></translation>
+        <translation>dpkg parancs hibát adott vissza, kérem futtassa a &apos;dpkg --list&apos; parancsot a terminálban és ellenőrizze a kimenetet</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="2011"/>
@@ -855,7 +855,7 @@ Close the program, or wait until it is done processing and try again.</source>
 Zárja be a programot vagy várja meg amíg befejezi a műveletet, majd próbálja meg újra.</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="77"/>
+        <location filename="../main.cpp" line="78"/>
         <source>MX Package Installer is a tool used for managing packages on MX Linux
     - installs popular programs from different sources
     - installs programs from the MX Test repo
@@ -868,23 +868,23 @@ Zárja be a programot vagy várja meg amíg befejezi a műveletet, majd próbál
    - flatpak csomagokat telepít</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="85"/>
+        <location filename="../main.cpp" line="86"/>
         <source>Skip online check if it falsely reports lack of internet access.</source>
         <translation>Az online ellenőrzés kihagyása, ha hibásan az internetelérés hiányát jelzi.</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="95"/>
-        <location filename="../main.cpp" line="103"/>
+        <location filename="../main.cpp" line="96"/>
+        <location filename="../main.cpp" line="104"/>
         <source>Error</source>
         <translation>Hiba</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="96"/>
+        <location filename="../main.cpp" line="97"/>
         <source>You seem to be logged in as root, please log out and log in as normal user to use this program.</source>
         <translation>Úgy tűnik, hogy root felhasználóként van bejelentkezve. Jelentkezzen ki és jelentkezzen be normál felhasználóként a program használatához.</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="104"/>
+        <location filename="../main.cpp" line="105"/>
         <source>You must run this program with admin access.</source>
         <translation>Ezt a programot adminisztrátorként kell futtatnia.</translation>
     </message>

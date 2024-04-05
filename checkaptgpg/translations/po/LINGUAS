@@ -1,6 +1,6 @@
 # LINGUAS for mx-checkaptgpg
-# with minimum completion percent 5%
-# generated at Sun, 02 Jul 2023 14:03:02 -0500
+# with minimum completion percent 10%
+# generated at Sun, 24 Mar 2024 07:29:22 -0500
 #
 ca
 da
@@ -11,6 +11,9 @@ es
 fi
 fr_BE
 fr
+gl_ES
+he_IL
+hu
 it
 ja
 nb
@@ -18,6 +21,8 @@ nl
 pl
 pt_BR
 pt
+ru
+ru_RU
 sl
 sq
 sv

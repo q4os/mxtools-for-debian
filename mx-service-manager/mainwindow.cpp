@@ -33,34 +33,35 @@
 #include <QTimer>
 
 #include "about.h"
+#include "common.h"
 #include "service.h"
+
 #include <chrono>
 
 using namespace std::chrono_literals;
-
-extern const QString init;
 
 MainWindow::MainWindow(QWidget *parent)
     : QDialog(parent),
       ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    setWindowFlags(Qt::Window); // for the close, min and max buttons
+    setWindowFlags(Qt::Window); // For the close, min and max buttons
     setGeneralConnections();
 
-    QSize size = this->size();
-    if (settings.contains(QStringLiteral("geometry"))) {
-        restoreGeometry(settings.value(QStringLiteral("geometry")).toByteArray());
-        if (this->isMaximized()) { // add option to resize if maximized
-            this->resize(size);
+    const auto size = this->size();
+    if (settings.contains("geometry")) {
+        restoreGeometry(settings.value("geometry").toByteArray());
+        if (isMaximized()) { // Add option to resize if maximized
+            resize(size);
             centerWindow();
         }
     }
-    if (init != "systemd" && !init.startsWith("init")) { // can be "init(mxlinux)" when running in WSL for example
+    if (initSystem != "systemd"
+        && !initSystem.startsWith("init")) { // Can be "init(mxlinux)" when running in WSL for example
         QMessageBox::warning(
             this, tr("Error"),
             tr("Could not determine the init system. This program is supposed to run either with systemd or sysvinit")
-                + "\nINIT:" + init);
+                + "\nINIT:" + initSystem);
     }
     QPalette palette = ui->listServices->palette();
     defaultForeground = palette.color(QPalette::Text);
@@ -101,16 +102,16 @@ MainWindow::MainWindow(QWidget *parent)
 
 MainWindow::~MainWindow()
 {
-    settings.setValue(QStringLiteral("geometry"), saveGeometry());
+    settings.setValue("geometry", saveGeometry());
     delete ui;
 }
 
 void MainWindow::centerWindow()
 {
-    QRect screenGeometry = QApplication::primaryScreen()->geometry();
-    int x = (screenGeometry.width() - this->width()) / 2;
-    int y = (screenGeometry.height() - this->height()) / 2;
-    this->move(x, y);
+    const auto screenGeometry = QApplication::primaryScreen()->geometry();
+    const int x = (screenGeometry.width() - width()) / 2;
+    const int y = (screenGeometry.height() - height()) / 2;
+    move(x, y);
 }
 
 void MainWindow::cmdStart()
@@ -185,25 +186,20 @@ QString MainWindow::getHtmlColor(const QColor &color)
 void MainWindow::listServices()
 {
     services.clear();
-    if (init != "systemd") {
+    if (initSystem != "systemd") {
         const auto list = cmd.getOut("/sbin/service --status-all", true).trimmed().split("\n");
-        services.reserve(list.count());
         QRegularExpression re("dpkg-.*$");
-        QString name;
         for (const auto &item : list) {
-            if (item.trimmed().contains(re)) {
+            if (item.trimmed().contains(re) || item.section("]  ", 1) == "debian") {
                 continue;
             }
-            name = item.section("]  ", 1);
-            if (name == "debian") {
+            QString name = item.section("]  ", 1);
+            if (name.isEmpty()) {
                 continue;
             }
-            auto *service = new Service(name, item.trimmed().startsWith("[ + ]"));
-            service->setEnabled(Service::isEnabled(name));
-            if (dependTargets.contains(name)) {
-                service->setEnabled(true);
-            }
-            services << QSharedPointer<Service>(service);
+            QSharedPointer<Service> service = QSharedPointer<Service>::create(name, item.trimmed().startsWith("[ + ]"));
+            service->setEnabled(Service::isEnabled(name) || dependTargets.contains(name));
+            services << service;
         }
     } else {
         const auto list = cmd.getOutAsRoot("systemctl list-units --type=service --all -o json").trimmed();
@@ -216,22 +212,19 @@ void MainWindow::listServices()
         QStringList names;
         names.reserve(jsonArray.size() * 2);
         for (const auto &value : jsonArray) {
-            auto obj = value.toObject();
-            if (value.isObject()) {
-                QString name = obj.value("unit").toString().section(".", 0, 0);
-                QString status = obj.value("sub").toString();
-                QString load = obj.value("load").toString();
-                if (!names.contains(name) && load != "not-found") {
-                    auto *service = new Service(name, status == "running");
-                    names << name;
-
-                    service->setEnabled(Service::isEnabled(name));
-                    if (dependTargets.contains(name)) {
-                        service->setEnabled(true);
-                    }
-                    services << QSharedPointer<Service>(service);
-                }
+            if (!value.isObject()) {
+                continue;
             }
+            auto obj = value.toObject();
+            QString name = obj.value("unit").toString().section(".", 0, 0);
+            if (name.isEmpty() || names.contains(name) || obj.value("load").toString() == "not-found") {
+                continue;
+            }
+            QSharedPointer<Service> service
+                = QSharedPointer<Service>::create(name, obj.value("sub").toString() == "running");
+            names << name;
+            service->setEnabled(Service::isEnabled(name) || dependTargets.contains(name));
+            services << service;
         }
         const auto masked
             = cmd.getOutAsRoot("systemctl list-unit-files --type=service --state=masked -o json").trimmed();
@@ -242,16 +235,18 @@ void MainWindow::listServices()
         }
         jsonArray = doc.array();
         for (const auto &value : jsonArray) {
-            auto obj = value.toObject();
-            if (value.isObject()) {
-                QString name = obj.value("unit_file").toString().section(".", 0, 0);
-                if (!names.contains(name)) {
-                    auto *service = new Service(name, false);
-                    names << name;
-                    service->setEnabled(false);
-                    services << QSharedPointer<Service>(service);
-                }
+            if (!value.isObject()) {
+                continue;
             }
+            auto obj = value.toObject();
+            QString name = obj.value("unit_file").toString().section(".", 0, 0);
+            if (name.isEmpty() || names.contains(name)) {
+                continue;
+            }
+            QSharedPointer<Service> service = QSharedPointer<Service>::create(name, false);
+            names << name;
+            service->setEnabled(false);
+            services << service;
         }
     }
 }
@@ -262,66 +257,56 @@ void MainWindow::displayServices()
     ui->listServices->clear();
     uint countActive = 0;
     uint countEnabled = 0;
+    const QString searchText = ui->lineSearch->text().toLower();
+    const QStringList incrementalSearchPatterns = {"s", "sa", "sam", "samb", "samba"};
     for (const auto &service : services) {
-        QString serviceName = service->getName();
-        QString searchText = ui->lineSearch->text();
+        const QString serviceName = service->getName().toLower();
         if (!searchText.isEmpty() && !serviceName.startsWith(searchText)
-            && !(serviceName == "smbd"
-                 && (searchText == "s" || searchText == "sa" || searchText == "sam" || searchText == "samb"
-                     || searchText == "samba"))) {
+            && !(serviceName == "smbd" && incrementalSearchPatterns.contains(searchText))) {
             continue;
         }
-        auto *item = new QListWidgetItem(service->getName(), ui->listServices);
+        auto *item = new QListWidgetItem(serviceName, ui->listServices);
         item->setData(Qt::UserRole, QVariant::fromValue(service.get()));
         if (service->isRunning()) {
             ++countActive;
             item->setForeground(runningColor);
-        } else {
-            if (service->isEnabled()) {
-                ++countEnabled;
-                item->setForeground(enabledColor);
-            }
-            if (ui->comboFilter->currentText() == tr("Running services")) {
-                delete item;
-                continue;
-            }
+        } else if (service->isEnabled()) {
+            ++countEnabled;
+            item->setForeground(enabledColor);
         }
-        if ((!service->isEnabled() && (ui->comboFilter->currentText() == tr("Services enabled at boot")))
+        if ((!service->isRunning() && (ui->comboFilter->currentText() == tr("Running services")))
+            || (!service->isEnabled() && (ui->comboFilter->currentText() == tr("Services enabled at boot")))
             || (service->isEnabled() && (ui->comboFilter->currentText() == tr("Services disabled at boot")))) {
             delete item;
         } else {
             ui->listServices->addItem(item);
         }
     }
-
-    QString fontTagStart = QString("<font color='%1'>").arg(getHtmlColor(runningColor));
-    const QString fontTagEnd = "</font>";
-    ui->labelCount->setText(
-        tr("%1 total services, %2 currently %3running%4")
-            .arg(QString::number(services.count()), QString::number(countActive), fontTagStart, fontTagEnd));
-    fontTagStart = QString("<font color='%1'>").arg(getHtmlColor(enabledColor));
-    ui->labelEnabledAtBoot->setText(
-        tr("%1 %2enabled%3 at boot, but not running").arg(QString::number(countEnabled), fontTagStart, fontTagEnd));
+    const QString totalServicesText
+        = tr("%1 total services, %2 currently <font color='%3'>running</font>")
+              .arg(QString::number(services.count()), QString::number(countActive), getHtmlColor(runningColor));
+    const QString enabledAtBootText = tr("%1 <font color='%2'>enabled</font> at boot, but not running")
+                                          .arg(QString::number(countEnabled), getHtmlColor(enabledColor));
+    ui->labelCount->setText(totalServicesText);
+    ui->labelEnabledAtBoot->setText(enabledAtBootText);
     ui->listServices->blockSignals(false);
     ui->listServices->sortItems();
-    if (savedRow >= ui->listServices->count()) {
-        savedRow = ui->listServices->count() - 1;
-    }
+    savedRow = qBound(0, savedRow, ui->listServices->count() - 1);
     ui->listServices->setCurrentRow(savedRow);
 }
 
 void MainWindow::pushAbout_clicked()
 {
-    this->hide();
+    hide();
     displayAboutMsgBox(
         tr("About %1") + tr("MX Service Manager"),
         R"(<p align="center"><b><h2>MX Service Manager</h2></b></p><p align="center">)" + tr("Version: ")
             + QApplication::applicationVersion() + "</p><p align=\"center\"><h3>" + tr("Service and daemon manager")
             + R"(</h3></p><p align="center"><a href="http://mxlinux.org">http://mxlinux.org</a><br /></p><p align="center">)"
             + tr("Copyright (c) MX Linux") + "<br /><br /></p>",
-        QStringLiteral("/usr/share/doc/mx-service-manager/license.html"), tr("%1 License").arg(this->windowTitle()));
+        "/usr/share/doc/mx-service-manager/license.html", tr("%1 License").arg(windowTitle()));
 
-    this->show();
+    show();
 }
 
 void MainWindow::pushEnableDisable_clicked()
@@ -346,11 +331,10 @@ void MainWindow::pushEnableDisable_clicked()
     }
 }
 
-// Help button clicked
 void MainWindow::pushHelp_clicked()
 {
-    const QString url = QStringLiteral("https://mxlinux.org/wiki/help-service-manager/");
-    displayDoc(url, tr("%1 Help").arg(this->windowTitle()));
+    const QString url = "https://mxlinux.org/wiki/help-service-manager/";
+    displayDoc(url, tr("%1 Help").arg(windowTitle()));
 }
 
 void MainWindow::pushStartStop_clicked()

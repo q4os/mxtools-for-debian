@@ -1,3 +1,9 @@
+mx-boot-options (24.3) mx; urgency=medium
+
+  * Update translations
+
+ -- Adrian <adrian@mxlinux.org>  Sat, 23 Mar 2024 12:27:38 -0400
+
 mx-boot-options (23.11.07) mx; urgency=medium
 
   * Fix: trimm trailing line breaks from the shell command output

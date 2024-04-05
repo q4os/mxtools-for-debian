@@ -20,11 +20,12 @@ source_file = ${APPNAME}.pot
 source_lang = en
 type = po
 EOF
+minimum_perc = 25
 fi    
 
 
 #remove existing translations
-#rm po/* 
+rm po/* 
 
 
 # get all translations

@@ -1,6 +1,4 @@
-
-#ifndef CMD_H
-#define CMD_H
+#pragma once
 
 #include <QProcess>
 
@@ -24,5 +22,3 @@ private:
     QString elevate;
     QString helper;
 };
-
-#endif // CMD_H

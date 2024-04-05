@@ -36,7 +36,7 @@ pngs:
 svg2png:
 	@for SIZE in $(SIZES); do for ICON in $(ICONS); do \
 		echo "  " $(APPS_DIR)/$${ICON}.png; \
-		inkscape -h $${SIZE} -w $${SIZE} -o $(APPS_DIR)/$${ICON}.png $(SVG_DIR)/$${ICON}.svg 2>/dev/null; \
+		rsvg-convert -a -f png -h $${SIZE} -w $${SIZE} -o $(APPS_DIR)/$${ICON}.png $(SVG_DIR)/$${ICON}.svg 2>/dev/null; \
 		done; done
 
 links:

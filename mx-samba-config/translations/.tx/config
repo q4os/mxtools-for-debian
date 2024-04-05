@@ -6,3 +6,4 @@ file_filter = ./mx-samba-config_<lang>.ts
 source_file = mx-samba-config_en.ts
 source_lang = en
 type = ts
+minimum_perc = 25

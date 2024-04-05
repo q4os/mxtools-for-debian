@@ -32,7 +32,8 @@
 #include "Version.h"
 #include "about.h"
 
-MainWindow::MainWindow()
+MainWindow::MainWindow(QWidget *parent)
+    : QMainWindow(parent)
 {
     readSettings();
     createActions();
@@ -92,8 +93,9 @@ MainWindow::MainWindow()
 
     initCron();
 
-    if (this->isMaximized())
-        this->resize(QSize(670, 480)); // reset size if started maximized
+    if (isMaximized()) {
+        resize(QSize(670, 480)); // reset size if started maximized
+    }
     cronView->resize(viewSize);
 
     setWindowTitle(Clib::uName() + " - " + tr("Job Scheduler"));
@@ -115,7 +117,7 @@ void MainWindow::changeUser()
         QProcess::startDetached(QStringLiteral("runuser"),
                                 {QStringLiteral("-u"), user, QStringLiteral("job-scheduler")});
     }
-    qApp->quit();
+    QApplication::quit();
 }
 
 void MainWindow::createActions()
@@ -135,10 +137,11 @@ void MainWindow::createActions()
                                      tr("&Save"));
     saveAction->setShortcut(QKeySequence(tr("Ctrl+S")));
     fileMenu->addSeparator();
-    if (Clib::uId() != 0)
+    if (Clib::uId() != 0) {
         chuserAction = fileMenu->addAction(QIcon::fromTheme(QStringLiteral("go-up")), tr("Start as &Root"));
-    else
+    } else {
         chuserAction = fileMenu->addAction(QIcon::fromTheme(QStringLiteral("go-down")), tr("Start as &Regular user"));
+    }
     chuserAction->setShortcut(QKeySequence(tr("Ctrl+U")));
     fileMenu->addSeparator();
 
@@ -193,8 +196,9 @@ void MainWindow::displayHelp()
 
 void MainWindow::initCron()
 {
-    for (auto *d : qAsConst(crontabs))
+    for (auto *d : qAsConst(crontabs)) {
         delete d;
+    }
     crontabs.clear();
 
     QString user = Clib::uName();
@@ -210,14 +214,16 @@ void MainWindow::initCron()
         cron = new Crontab(QStringLiteral("/etc/crontab"));
         crontabs << cron;
         for (const auto &s : Clib::allUsers()) {
-            if (s == user)
+            if (s == user) {
                 continue;
+            }
 
             cron = new Crontab(s);
-            if (cron->tCommands.count() == 0)
+            if (cron->tCommands.count() == 0) {
                 delete cron;
-            else
+            } else {
                 crontabs << cron;
+            }
         }
     } else {
         cronView->hideUser();
@@ -334,7 +340,7 @@ void MainWindow::closeEvent(QCloseEvent *event)
 
 void MainWindow::AboutJobScheduler()
 {
-    this->hide();
+    hide();
     displayAboutMsgBox(tr("About Job Scheduler"),
                        tr("<b>Job Scheduler</b>") + " - " + tr("Version: %1").arg(VERSION) + "<p>"
                            + tr("Job Scheduler is based upon qroneko 0.5.4, released in 2005 by korewaisai (<a "
@@ -349,6 +355,6 @@ void MainWindow::AboutJobScheduler()
                                                      "href=\"https://github.com/mx-linux/job-scheduler\">https://"
                                                      "github.com/mx-linux/job-scheduler</a>")),
                        QStringLiteral("/usr/share/doc/job-scheduler/license.html"),
-                       tr("%1 License").arg(this->windowTitle()));
-    this->show();
+                       tr("%1 License").arg(windowTitle()));
+    show();
 }

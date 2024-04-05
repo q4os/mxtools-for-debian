@@ -7,7 +7,7 @@
 # James Bowlin <BitJam@gmail.com>, 2022
 # anticapitalista <anticapitalista@riseup.net>, 2022
 # xmaus <49bolgen@gmail.com>, 2022
-# heskjestad <cato@heskjestad.xyz>, 2022
+# Kaci Heskjestad, 2022
 # Dolphin Oracle <dolphinoracle@gmail.com>, 2022
 # 
 #, fuzzy

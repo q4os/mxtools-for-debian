@@ -58,8 +58,8 @@ const QStringList WeekName = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thurs
 const QStringList SimpleName = {"@hourly", "@daily", "@weekly", "@monthly", "@yearly", "@reboot"};
 
 TimeDialog::TimeDialog(QString time, QWidget *parent)
-    : QDialog(parent)
-    , inTime(std::move(time))
+    : QDialog(parent),
+      inTime(std::move(time))
 {
     QHBoxLayout *h = nullptr;
     QGridLayout *g = nullptr;
@@ -207,44 +207,59 @@ void TimeDialog::initButtons(const QString &time)
 {
     CronTime ctime(time);
     auto btn = minuteBGroup->buttons();
-    if (CronTime::isFill(ctime.minute))
-        for (auto *i : btn)
+    if (CronTime::isFill(ctime.minute)) {
+        for (auto *i : btn) {
             i->setChecked(false);
-    else
-        for (int i = 0; i < btn.size(); ++i)
+        }
+    } else {
+        for (int i = 0; i < btn.size(); ++i) {
             btn.at(i)->setChecked(ctime.minute.at(i));
+        }
+    }
 
     btn = hourBGroup->buttons();
-    if (CronTime::isFill(ctime.hour))
-        for (auto *i : qAsConst(btn))
+    if (CronTime::isFill(ctime.hour)) {
+        for (auto *i : qAsConst(btn)) {
             i->setChecked(false);
-    else
-        for (int i = 0; i < btn.size(); ++i)
+        }
+    } else {
+        for (int i = 0; i < btn.size(); ++i) {
             btn.at(i)->setChecked(ctime.hour.at(i));
+        }
+    }
 
     btn = dayBGroup->buttons();
-    if (CronTime::isFill(ctime.day))
-        for (auto *i : qAsConst(btn))
+    if (CronTime::isFill(ctime.day)) {
+        for (auto *i : qAsConst(btn)) {
             i->setChecked(false);
-    else
-        for (int i = 0; i < btn.size(); ++i)
+        }
+    } else {
+        for (int i = 0; i < btn.size(); ++i) {
             btn.at(i)->setChecked(ctime.day.at(i));
+        }
+    }
 
     btn = monthBGroup->buttons();
-    if (CronTime::isFill(ctime.month))
-        for (auto *i : qAsConst(btn))
+    if (CronTime::isFill(ctime.month)) {
+        for (auto *i : qAsConst(btn)) {
             i->setChecked(false);
-    else
-        for (int i = 0; i < btn.size(); ++i)
+        }
+    } else {
+        for (int i = 0; i < btn.size(); ++i) {
             btn.at(i)->setChecked(ctime.month.at(i));
+        }
+    }
 
     btn = weekBGroup->buttons();
-    if (CronTime::isFill(ctime.week))
-        for (auto *i : qAsConst(btn))
+    if (CronTime::isFill(ctime.week)) {
+        for (auto *i : qAsConst(btn)) {
             i->setChecked(false);
-    else
-        for (int i = 0; i < btn.size(); ++i)
+        }
+    } else {
+        for (int i = 0; i < btn.size(); ++i) {
             btn.at(i)->setChecked(ctime.week.at(i));
+        }
+    }
 }
 
 void TimeDialog::minuteButtonClicked(QAbstractButton * /*unused*/)
@@ -252,19 +267,23 @@ void TimeDialog::minuteButtonClicked(QAbstractButton * /*unused*/)
     CronTime ctime(outTime);
     auto btn = minuteBGroup->buttons();
     int cnt = 0;
-    for (auto *i : btn)
-        if (i->isChecked())
+    for (auto *i : btn) {
+        if (i->isChecked()) {
             cnt++;
+        }
+    }
     for (int i = 0; i < btn.size(); ++i) {
-        if (cnt == 0)
+        if (cnt == 0) {
             ctime.minute[i] = true;
-        else
+        } else {
             ctime.minute[i] = btn.at(i)->isChecked();
+        }
     }
 
     btn = simpleBGroup->buttons();
-    for (auto *i : qAsConst(btn))
+    for (auto *i : qAsConst(btn)) {
         i->setChecked(false);
+    }
 
     outTime = ctime.toString(useLiteral);
     timeEdit->setText(outTime);
@@ -274,19 +293,25 @@ void TimeDialog::hourButtonClicked(QAbstractButton * /*unused*/)
     CronTime ctime(outTime);
     auto btn = hourBGroup->buttons();
     int cnt = 0;
-    for (auto *i : btn)
-        if (i->isChecked())
+    for (auto *i : btn) {
+        if (i->isChecked()) {
             cnt++;
-    for (int i = 0; i < btn.size(); ++i)
-        if (cnt == 0)
+        }
+    }
+    for (int i = 0; i < btn.size(); ++i) {
+        if (cnt == 0) {
             ctime.hour[i] = true;
-        else
+        } else {
             ctime.hour[i] = btn.at(i)->isChecked();
+        }
+    }
 
     btn = simpleBGroup->buttons();
-    for (auto *i : qAsConst(btn))
-        if (i->isChecked())
+    for (auto *i : qAsConst(btn)) {
+        if (i->isChecked()) {
             i->setChecked(false);
+        }
+    }
 
     outTime = ctime.toString(useLiteral);
     timeEdit->setText(outTime);
@@ -296,19 +321,25 @@ void TimeDialog::dayButtonClicked(QAbstractButton * /*unused*/)
     CronTime ctime(outTime);
     auto btn = dayBGroup->buttons();
     int cnt = 0;
-    for (auto *i : btn)
-        if (i->isChecked())
+    for (auto *i : btn) {
+        if (i->isChecked()) {
             cnt++;
-    for (int i = 0; i < btn.size(); ++i)
-        if (cnt == 0)
+        }
+    }
+    for (int i = 0; i < btn.size(); ++i) {
+        if (cnt == 0) {
             ctime.day[i] = true;
-        else
+        } else {
             ctime.day[i] = btn.at(i)->isChecked();
+        }
+    }
 
     btn = simpleBGroup->buttons();
-    for (auto *i : qAsConst(btn))
-        if (i->isChecked())
+    for (auto *i : qAsConst(btn)) {
+        if (i->isChecked()) {
             i->setChecked(false);
+        }
+    }
 
     outTime = ctime.toString(useLiteral);
     timeEdit->setText(outTime);
@@ -318,19 +349,25 @@ void TimeDialog::monthButtonClicked(QAbstractButton * /*unused*/)
     CronTime ctime(outTime);
     auto btn = monthBGroup->buttons();
     int cnt = 0;
-    for (auto *i : btn)
-        if (i->isChecked())
+    for (auto *i : btn) {
+        if (i->isChecked()) {
             cnt++;
-    for (int i = 0; i < btn.size(); ++i)
-        if (cnt == 0)
+        }
+    }
+    for (int i = 0; i < btn.size(); ++i) {
+        if (cnt == 0) {
             ctime.month[i] = true;
-        else
+        } else {
             ctime.month[i] = btn.at(i)->isChecked();
+        }
+    }
 
     btn = simpleBGroup->buttons();
-    for (auto *i : qAsConst(btn))
-        if (i->isChecked())
+    for (auto *i : qAsConst(btn)) {
+        if (i->isChecked()) {
             i->setChecked(false);
+        }
+    }
 
     outTime = ctime.toString(useLiteral);
     timeEdit->setText(outTime);
@@ -340,22 +377,29 @@ void TimeDialog::weekButtonClicked(QAbstractButton * /*unused*/)
     CronTime ctime(outTime);
     auto btn = weekBGroup->buttons();
     int cnt = 0;
-    for (auto *i : btn)
-        if (i->isChecked())
+    for (auto *i : btn) {
+        if (i->isChecked()) {
             cnt++;
-    for (int i = 0; i < btn.size(); ++i)
-        if (cnt == 0)
+        }
+    }
+    for (int i = 0; i < btn.size(); ++i) {
+        if (cnt == 0) {
             ctime.week[i] = true;
-        else
+        } else {
             ctime.week[i] = btn.at(i)->isChecked();
+        }
+    }
 
-    if (ctime.week.at(0))
+    if (ctime.week.at(0)) {
         ctime.week[7] = true;
+    }
 
     btn = simpleBGroup->buttons();
-    for (auto *i : qAsConst(btn))
-        if (i->isChecked())
+    for (auto *i : qAsConst(btn)) {
+        if (i->isChecked()) {
             i->setChecked(false);
+        }
+    }
 
     outTime = ctime.toString(useLiteral);
     timeEdit->setText(outTime);
@@ -363,11 +407,13 @@ void TimeDialog::weekButtonClicked(QAbstractButton * /*unused*/)
 void TimeDialog::simpleButtonClicked(QAbstractButton *b)
 {
     auto btn = simpleBGroup->buttons();
-    for (auto *i : btn)
-        if (i == b)
+    for (auto *i : btn) {
+        if (i == b) {
             outTime = i->text();
-        else
+        } else {
             i->setChecked(false);
+        }
+    }
 
     //	QString numeric;
     //	if ( outTime == "@Hourly" ) numeric = "0 * * * *";
@@ -381,8 +427,9 @@ void TimeDialog::simpleButtonClicked(QAbstractButton *b)
     //	if (!useLiteral) {
     //		outTime = numeric;
     //	}
-    if (!useLiteral)
+    if (!useLiteral) {
         outTime = CronTime(outTime).toString(false);
+    }
     initButtons(outTime);
 
     timeEdit->setText(outTime);
@@ -400,6 +447,7 @@ void TimeDialog::resetClicked()
     initButtons(outTime);
 
     auto btn = simpleBGroup->buttons();
-    for (auto *i : btn)
+    for (auto *i : btn) {
         i->setChecked(false);
+    }
 }

@@ -1,9 +1,9 @@
 #!/bin/bash
 
-#root level functions requiring password for mx-samba-config
+# Root level functions requiring password for mx-samba-config
 
-#disable/enable on both systemd and sysV
-
+# Disable/enable on both systemd and sysV
+# Need to run both update-rc.d and systemctl on MX because we have two init systems
 enablesamba()
 {
 if [ -x /usr/sbin/update-rc.d ]; then
@@ -16,10 +16,9 @@ if [ -x /usr/bin/systemctl ]; then
     systemctl unmask smbd
     systemctl unmask nmbd
     systemctl enable smbd
-    systemctl enable nmbd	
+    systemctl enable nmbd
 fi
 }
-
 
 disablesamba()
 {
@@ -27,7 +26,7 @@ if [ -x /usr/sbin/update-rc.d ]; then
     update-rc.d smbd remove
     update-rc.d nmbd remove
 fi
-if [ -x /usr/bin/systemctl ]; then    
+if [ -x /usr/bin/systemctl ]; then
     systemctl disable smbd
     systemctl disable nmbd
     systemctl mask smbd
@@ -37,57 +36,59 @@ fi
 
 addsambauser()
 {
-	
 echo -ne "$pass\n$pass" | smbpasswd -as "$user"
 exit $?
-
 }
 
 removesambauser()
 {
-
 pdbedit --delete "$user"
 exit $?
-	
 }
 
 changesambapasswd()
 {
-	
 echo -ne "$pass\n$pass" | smbpasswd -U "$user"
 exit $?
-	
 }
 
-
-#service works for starting and stopping on both sysV and systemd
+# service works for starting and stopping on both sysV and systemd
 startsamba()
 {
-
 if [ -x /usr/bin/systemctl ]; then
     MASKED=$(systemctl is-enabled smbd)
     systemctl unmask smbd
     systemctl unmask nmbd
 fi
-service smbd start
-service nmbd start	
+
+if [ -x /usr/sbin/service ]; then
+    service smbd start
+    service nmbd start
+elif [ -x /usr/bin/systemctl ]; then
+    systemctl start smbd
+    systemctl start nmbd
+fi
+
 if [[ -x /usr/bin/systemctl && $MASKED == "masked" ]]; then
     systemctl mask smbd
     systemctl mask nmbd
-fi 
+fi
 
 exit $?
-	
 }
 
 stopsamba()
 {
-service smbd stop
-service nmbd stop
+if [ -x /usr/sbin/service ]; then
+    service smbd stop
+    service nmbd stop
+elif [ -x /usr/bin/systemctl ]; then
+    systemctl stop smbd
+    systemctl stop nmbd
+fi
+
 exit $?
-
 }
-
 
 main()
 {
@@ -97,20 +98,20 @@ case $1 in
     stopsamba)  stopsamba
                  ;;
     enablesamba)  enablesamba
-                 ;;      
+                 ;;
     disablesamba)  disablesamba
                  ;;
     addsambauser)  user="$3"
                    pass="$2"
-                   addsambauser   
-                   ;;  
+                   addsambauser
+                   ;;
     removesambauser)  user="$2"
-                      removesambauser   
-                   ;;    
+                      removesambauser
+                   ;;
     changesambapasswd)  user="$3"
                    pass="$2"
-                   changesambapasswd   
-                   ;;  
+                   changesambapasswd
+                   ;;
 esac
 }
 

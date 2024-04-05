@@ -52,8 +52,8 @@ void WebView::handleLoadFinished()
     index = historyLog.value("History/size", 0).toInt();
     historyLog.beginWriteArray("History");
     historyLog.setArrayIndex(index);
-    historyLog.setValue(QStringLiteral("title"), title());
-    historyLog.setValue(QStringLiteral("url"), url().toString());
+    historyLog.setValue("title", title());
+    historyLog.setValue("url", url().toString());
     historyLog.endArray();
 }
 
@@ -72,7 +72,7 @@ void WebView::handleIconChanged()
     QBuffer buffer(&iconByteArray);
     buffer.open(QIODevice::WriteOnly);
     iconPixmap.save(&buffer, "PNG");
-    historyLog.setValue(QStringLiteral("icon"), iconByteArray);
+    historyLog.setValue("icon", iconByteArray);
     historyLog.endArray();
 }
 

@@ -7,8 +7,7 @@
    as published by the Free Software Foundation; either version 2
    of the License, or (at your option) any later version.
 */
-#ifndef VARIABLEVIEW_H
-#define VARIABLEVIEW_H
+#pragma once
 
 #include <QTreeView>
 
@@ -20,7 +19,7 @@ class VariableView : public QTreeView
 {
     Q_OBJECT
 public:
-    VariableView(VariableModel *model);
+    explicit VariableView(VariableModel *model, QWidget *parent = nullptr);
     void resetView();
     void varDataChanged();
     void insertVariable();
@@ -35,6 +34,5 @@ signals:
     void changeVar(Variable *var);
 
 private:
-    void scrollTo(const QModelIndex &, ScrollHint);
+    void scrollTo(const QModelIndex & /*index*/, ScrollHint /*hint*/) override;
 };
-#endif

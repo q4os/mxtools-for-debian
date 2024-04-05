@@ -5,6 +5,7 @@
 # 
 # Translators:
 # fehlix, 2023
+# Krzesimir Chrząstowicz <golemiko@gmail.com>, 2023
 # 
 #, fuzzy
 msgid ""
@@ -13,7 +14,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://forum.mxlinux.org/viewforum.php?f=96\n"
 "POT-Creation-Date: 2023-05-24 13:31+0200\n"
 "PO-Revision-Date: 2023-05-24 14:42+0000\n"
-"Last-Translator: fehlix, 2023\n"
+"Last-Translator: Krzesimir Chrząstowicz <golemiko@gmail.com>, 2023\n"
 "Language-Team: Polish (https://app.transifex.com/anticapitalista/teams/10162/pl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -41,36 +42,38 @@ msgstr "Sprawdź i zainstaluj brakujące klucze GPG dla APT i Synaptic"
 #. apt=the debian package manager; fix=repair; check=verify; gpg=the signing
 #. and verfication tool; keys=the public signing keys
 msgid "apt;fix;check;gpg;keys;"
-msgstr ""
+msgstr "apt;napraw;sprawdź;gpg;klucze;"
 
 #. TRANSLATORS:
 #. The GPG signature of the repository release file was successfully verified.
 msgid "Good GPG signature found."
-msgstr ""
+msgstr "Znaleziono dobrą sygnaturę GPG."
 
 #. TRANSLATORS:
 #. The missing public GPG signing keys could not be found on any key server.
 #. Keys not found on keyserver: 0xABCDEFGH12345678
 msgid "Keys not found on keyserver:"
-msgstr ""
+msgstr "Nie znaleziono kluczy na serwerze kluczy:"
 
 msgid "Press 'H' for online help, press any other key to close this window."
 msgstr ""
+"Naciśnij „H”, aby uzyskać pomoc online, naciśnij dowolny inny klawisz, aby "
+"zamknąć to okno."
 
 msgid "Please wait while the link '%s' opens ..."
-msgstr ""
+msgstr "Proszę czekać, aż link „%s” się otworzy…"
 
 msgid "Press any key to close this window."
-msgstr ""
+msgstr "Naciśnij dowolny klawisz, aby zamknąć to okno."
 
 #. TRANSLATORS:
 #. The GPG signature of the signed repository release file is verified:
 #. "Checking mxrepo.com_mx_repo_dists_bookworm_InRelease"
 msgid "Checking"
-msgstr ""
+msgstr "Sprawdzanie"
 
 #. TRANSLATORS:
 #. The user must run this command as 'root'.
 #. This command needs 'root' privileges to be executed.
 msgid "This command needs %s privileges to be executed.\\n"
-msgstr ""
+msgstr "To polecenie wymaga uprawnień %s do wykonania.\\n"

@@ -56,7 +56,7 @@
     <message>
         <location filename="../mainwindow.ui" line="159"/>
         <source>File System Label</source>
-        <translation>Descrição do Sistema de Arquivos</translation>
+        <translation>Descrição no Sistema de Arquivos</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="166"/>

@@ -30,7 +30,7 @@ msgstr "Razpored opravil"
 #. # The desktop entry comment will be shown within the menu.
 #: desktop-in/job-scheduler.desktop.in:6
 msgid "Job scheduling utility which uses crontab as the backend"
-msgstr "Orodje za časovno razporejanje opravil, kiuporablja crontab"
+msgstr "Orodje za časovno razporejanje opravil, ki uporablja crontab"
 
 #. The desktop entry name will be displayed within the menu.
 #. The desktop entry name will be displayed within the menu.

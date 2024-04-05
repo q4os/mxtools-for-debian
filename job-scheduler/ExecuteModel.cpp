@@ -39,19 +39,20 @@ QVariant ExecuteModel::data(const QModelIndex &index, int role) const
             }
         } else if (role == Qt::TextColorRole) {
             auto *e = static_cast<Execute *>(index.internalPointer());
-            if (index.column() == 0 && e->flag != 0)
+            if (index.column() == 0 && e->flag != 0) {
                 return QColor(189, 55, 44);
-            else
+            } else {
                 switch (e->sel) {
                 case 1:
                     return QColor(0, 25, 0);
                 case 2:
                     return QColor(35, 0, 0);
                 }
+            }
         }
     }
 
-    return QVariant();
+    return {};
 }
 
 QVariant ExecuteModel::headerData(int section, Qt::Orientation orientation, int role) const
@@ -69,7 +70,7 @@ QVariant ExecuteModel::headerData(int section, Qt::Orientation orientation, int 
         }
     }
 
-    return QVariant();
+    return {};
 }
 void ExecuteModel::sort(int column, Qt::SortOrder order)
 {
@@ -78,14 +79,38 @@ void ExecuteModel::sort(int column, Qt::SortOrder order)
     doSort();
 }
 
-bool ltExeTime(Execute *e1, Execute *e2) { return e1->exeTime < e2->exeTime; }
-bool ltCronTime(Execute *e1, Execute *e2) { return e1->tCommands->time < e2->tCommands->time; }
-bool ltUser(Execute *e1, Execute *e2) { return e1->tCommands->user < e2->tCommands->user; }
-bool ltCommand(Execute *e1, Execute *e2) { return e1->tCommands->command < e2->tCommands->command; }
-bool gtExeTime(Execute *e1, Execute *e2) { return e1->exeTime > e2->exeTime; }
-bool gtCronTime(Execute *e1, Execute *e2) { return e1->tCommands->time > e2->tCommands->time; }
-bool gtUser(Execute *e1, Execute *e2) { return e1->tCommands->user > e2->tCommands->user; }
-bool gtCommand(Execute *e1, Execute *e2) { return e1->tCommands->command > e2->tCommands->command; }
+bool ltExeTime(Execute *e1, Execute *e2)
+{
+    return e1->exeTime < e2->exeTime;
+}
+bool ltCronTime(Execute *e1, Execute *e2)
+{
+    return e1->tCommands->time < e2->tCommands->time;
+}
+bool ltUser(Execute *e1, Execute *e2)
+{
+    return e1->tCommands->user < e2->tCommands->user;
+}
+bool ltCommand(Execute *e1, Execute *e2)
+{
+    return e1->tCommands->command < e2->tCommands->command;
+}
+bool gtExeTime(Execute *e1, Execute *e2)
+{
+    return e1->exeTime > e2->exeTime;
+}
+bool gtCronTime(Execute *e1, Execute *e2)
+{
+    return e1->tCommands->time > e2->tCommands->time;
+}
+bool gtUser(Execute *e1, Execute *e2)
+{
+    return e1->tCommands->user > e2->tCommands->user;
+}
+bool gtCommand(Execute *e1, Execute *e2)
+{
+    return e1->tCommands->command > e2->tCommands->command;
+}
 
 void ExecuteModel::doSort()
 {
@@ -133,8 +158,9 @@ void ExecuteModel::doSort()
 Execute *ExecuteModel::getExecute(const QModelIndex &idx)
 {
 
-    if (idx.isValid())
+    if (idx.isValid()) {
         return static_cast<Execute *>(idx.internalPointer());
-    else
+    } else {
         return nullptr;
+    }
 }

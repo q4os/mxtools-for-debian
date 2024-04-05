@@ -194,21 +194,27 @@ void VariableEdit::newClicked()
 
 void VariableEdit::mailOnClicked(bool state)
 {
-    if (state)
+    if (state) {
         setMailVar(0);
+    }
 }
 
 void VariableEdit::mailOffClicked(bool state)
 {
-    if (state)
+    if (state) {
         setMailVar(1);
+    }
 }
 void VariableEdit::mailToClicked(bool state)
 {
-    if (state)
+    if (state) {
         setMailVar(2);
+    }
 }
-void VariableEdit::userActivated(int /*unused*/) { setMailVar(-1); }
+void VariableEdit::userActivated(int /*unused*/)
+{
+    setMailVar(-1);
+}
 
 void VariableEdit::setMailVar(int flag)
 {
@@ -223,11 +229,13 @@ void VariableEdit::setMailVar(int flag)
         }
     }
     if (flag != -1) {
-        if (curFlag == flag)
+        if (curFlag == flag) {
             return;
+        }
     } else {
-        if (curFlag != 2)
+        if (curFlag != 2) {
             return;
+        }
         flag = 2;
     }
     if (flag == 0) {

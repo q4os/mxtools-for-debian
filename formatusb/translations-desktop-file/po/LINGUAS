@@ -1,12 +1,10 @@
 formatusb-desktop_af
 formatusb-desktop_am
 formatusb-desktop_ar
-formatusb-desktop_ast
 formatusb-desktop_be
 formatusb-desktop_bg
 formatusb-desktop_bn
 formatusb-desktop_bs
-formatusb-desktop_bs_BA
 formatusb-desktop_ca
 formatusb-desktop_ceb
 formatusb-desktop_co
@@ -15,8 +13,6 @@ formatusb-desktop_cy
 formatusb-desktop_da
 formatusb-desktop_de
 formatusb-desktop_el
-formatusb-desktop_en_GB
-formatusb-desktop_en_US
 formatusb-desktop_eo
 formatusb-desktop_es
 formatusb-desktop_es_ES
@@ -24,12 +20,9 @@ formatusb-desktop_et
 formatusb-desktop_eu
 formatusb-desktop_fa
 formatusb-desktop_fi
-formatusb-desktop_fi_FI
 formatusb-desktop_fil
-formatusb-desktop_fil_PH
 formatusb-desktop_fr
 formatusb-desktop_fr_BE
-formatusb-desktop_fr_FR
 formatusb-desktop_fy
 formatusb-desktop_ga
 formatusb-desktop_gd
@@ -45,8 +38,6 @@ formatusb-desktop_hr
 formatusb-desktop_ht
 formatusb-desktop_hu
 formatusb-desktop_hy
-formatusb-desktop_hy_AM
-formatusb-desktop_hye
 formatusb-desktop_id
 formatusb-desktop_ie
 formatusb-desktop_is
@@ -54,7 +45,6 @@ formatusb-desktop_it
 formatusb-desktop_ja
 formatusb-desktop_jv
 formatusb-desktop_ka
-formatusb-desktop_kab
 formatusb-desktop_kk
 formatusb-desktop_km
 formatusb-desktop_kn
@@ -75,13 +65,10 @@ formatusb-desktop_ms
 formatusb-desktop_mt
 formatusb-desktop_my
 formatusb-desktop_nb
-formatusb-desktop_nb_NO
 formatusb-desktop_ne
 formatusb-desktop_nl
 formatusb-desktop_nl_BE
-formatusb-desktop_nn
 formatusb-desktop_ny
-formatusb-desktop_oc
 formatusb-desktop_or
 formatusb-desktop_pa
 formatusb-desktop_pl
@@ -91,7 +78,6 @@ formatusb-desktop_pt_BR
 formatusb-desktop_ro
 formatusb-desktop_ru
 formatusb-desktop_ru_RU
-formatusb-desktop_rue
 formatusb-desktop_rw
 formatusb-desktop_sd
 formatusb-desktop_si
@@ -121,7 +107,5 @@ formatusb-desktop_vi
 formatusb-desktop_xh
 formatusb-desktop_yi
 formatusb-desktop_yo
-formatusb-desktop_yue_CN
 formatusb-desktop_zh_CN
-formatusb-desktop_zh_HK
 formatusb-desktop_zh_TW

@@ -14,7 +14,8 @@
 #include <QPushButton>
 #include <QtGui>
 
-SaveDialog::SaveDialog(const QString &user, const QString &text)
+SaveDialog::SaveDialog(const QString &user, const QString &text, QWidget *parent)
+    : QDialog(parent)
 {
     setWindowTitle(tr("Save New Schedule"));
     setWindowIcon(QIcon(":/images/job-scheduler.svg"));

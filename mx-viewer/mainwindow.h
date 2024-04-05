@@ -19,9 +19,7 @@
  * You should have received a copy of the GNU General Public License
  * along with MX Viewer.  If not, see <http://www.gnu.org/licenses/>.
  ****************************************************************************/
-
-#ifndef MXVIEW_H
-#define MXVIEW_H
+#pragma once
 
 #include "addressbar.h"
 #include "downloadwidget.h"
@@ -98,5 +96,3 @@ private:
     void toggleFullScreen();
     void updateUrl();
 };
-
-#endif // MXVIEW_H

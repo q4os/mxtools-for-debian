@@ -35,20 +35,24 @@
 #include "version.h"
 
 MainWindow::MainWindow(QWidget *parent)
-    : QDialog(parent)
-    , ui(new Ui::MainWindow)
+    : QDialog(parent),
+      ui(new Ui::MainWindow)
 {
     qDebug().noquote() << QCoreApplication::applicationName() << "version:" << VERSION;
     ui->setupUi(this);
     setConnections();
     setWindowFlags(Qt::Window); // for the close, min and max buttons
-    if (ui->pushApply->icon().isNull())
+    if (ui->pushApply->icon().isNull()) {
         ui->pushApply->setIcon(QIcon(":/icons/dialog-ok.svg"));
-    this->setWindowTitle(tr("MX Select Sound"));
-    this->adjustSize();
+    }
+    setWindowTitle(tr("MX Select Sound"));
+    adjustSize();
 }
 
-MainWindow::~MainWindow() { delete ui; }
+MainWindow::~MainWindow()
+{
+    delete ui;
+}
 
 // Util function for getting bash command output and error code
 Result MainWindow::runCmd(const QString &cmd)
@@ -90,9 +94,11 @@ QString MainWindow::getDefault()
     if (cmd.exitCode == 0) {
         prev_card = cmd.output.toUtf8();
 
-        for (int i = 0; i < ui->comboBox->count(); i++)
-            if (prev_card == ui->comboBox->itemText(i).section(QStringLiteral(":"), 0, 0).toUtf8())
+        for (int i = 0; i < ui->comboBox->count(); i++) {
+            if (prev_card == ui->comboBox->itemText(i).section(QStringLiteral(":"), 0, 0).toUtf8()) {
                 default_card = prev_card;
+            }
+        }
     }
     qDebug() << "Default sound card:" << default_card;
     ui->pushTest->setDisabled(default_card == tr("none"));
@@ -123,7 +129,7 @@ void MainWindow::pushApply_clicked()
 
 void MainWindow::pushAbout_clicked()
 {
-    this->hide();
+    hide();
     displayAboutMsgBox(
         tr("About MX Select Sound"),
         "<p align=\"center\"><b><h2>" + tr("MX Select Sound") + "</h2></b></p><p align=\"center\">" + tr("Version: ")
@@ -131,8 +137,8 @@ void MainWindow::pushAbout_clicked()
             + "</h3></p><p align=\"center\"><a href=\"http://mxlinux.org\">http://mxlinux.org</a><br /></p>"
               "<p align=\"center\">"
             + tr("Copyright (c) MX Linux") + "<br /><br /></p>",
-        QStringLiteral("/usr/share/doc/mx-select-sound/license.html"), tr("%1 License").arg(this->windowTitle()));
-    this->show();
+        QStringLiteral("/usr/share/doc/mx-select-sound/license.html"), tr("%1 License").arg(windowTitle()));
+    show();
 }
 
 void MainWindow::pushHelp_clicked()
@@ -142,8 +148,9 @@ void MainWindow::pushHelp_clicked()
 
     QString url = QStringLiteral("/usr/share/doc/mx-select-sound/mx-select-sound.html");
 
-    if (lang.startsWith(QLatin1String("fr")))
+    if (lang.startsWith(QLatin1String("fr"))) {
         url = QStringLiteral("https://mxlinux.org/wiki/help-files/help-mx-carte-son");
+    }
 
     displayDoc(url, tr("%1 Help").arg(tr("MX Select Sound")));
 }
@@ -152,6 +159,7 @@ void MainWindow::pushHelp_clicked()
 void MainWindow::pushTest_clicked()
 {
     const int exitCode = runCmd(QStringLiteral("speaker-test -c 2 -t wav -l 2")).exitCode;
-    if (exitCode != 0)
+    if (exitCode != 0) {
         QMessageBox::critical(this, tr("MX Select Sound"), tr("Could not play test sound."));
+    }
 }

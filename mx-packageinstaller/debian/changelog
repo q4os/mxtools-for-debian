@@ -1,3 +1,15 @@
+mx-packageinstaller (24.3.03) mx; urgency=medium
+
+  * Update translations
+
+ -- Adrian <adrian@mxlinux.org>  Sat, 23 Mar 2024 12:55:08 -0400
+
+mx-packageinstaller (24.3.02) mx; urgency=medium
+
+  * Set TERM=dumb to fix some potential issues when TERM is not set
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 07 Mar 2024 03:32:05 -0500
+
 mx-packageinstaller (24.3.01) mx; urgency=medium
 
   * Fix: remove architecture from testrepo for amd64, since it would stop installing wine and other programs that need i386 arch

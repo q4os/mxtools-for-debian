@@ -19,8 +19,7 @@
  * You should have received a copy of the GNU General Public License
  * along with MX Viewer.  If not, see <http://www.gnu.org/licenses/>.
  ****************************************************************************/
-#ifndef ADDRESSBAR_H
-#define ADDRESSBAR_H
+#pragma once
 
 #include <QLineEdit>
 
@@ -34,5 +33,3 @@ public:
 private slots:
     void focusInEvent(QFocusEvent *event) override;
 };
-
-#endif // ADDRESSBAR_H

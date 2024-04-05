@@ -7,11 +7,11 @@
    as published by the Free Software Foundation; either version 2
    of the License, or (at your option) any later version.
 */
-#ifndef CRONTAB_H
-#define CRONTAB_H
+#pragma once
 
 #include <QList>
 #include <QString>
+#include <utility>
 
 class Crontab;
 
@@ -19,8 +19,8 @@ class CronType
 {
 public:
     enum DataType { CRON, COMMAND };
-    CronType() { }
-    CronType(const int t)
+    CronType() = default;
+    explicit CronType(const int t)
         : type(t)
     {
     }
@@ -30,36 +30,36 @@ public:
 class TCommand : public CronType
 {
 public:
-    TCommand() { }
-    TCommand(const QString &t, const QString &u, const QString &cmnd, const QString &cmnt, Crontab *p)
-        : CronType(CronType::COMMAND)
-        , time(t)
-        , user(u)
-        , command(cmnd)
-        , comment(cmnt)
-        , parent(p)
+    TCommand() = default;
+    TCommand(QString t, QString u, QString cmnd, QString cmnt, Crontab *p)
+        : CronType(CronType::COMMAND),
+          time(std::move(t)),
+          user(std::move(u)),
+          command(std::move(cmnd)),
+          comment(std::move(cmnt)),
+          parent(p)
     {
     }
-    ~TCommand() { }
+    ~TCommand() = default;
 
     // private:
     QString time;
     QString user;
     QString command;
     QString comment;
-    Crontab *parent;
+    Crontab *parent {};
 };
 
 class Variable
 {
 public:
-    Variable(const QString &n, const QString &v, const QString &c)
-        : name(n)
-        , value(v)
-        , comment(c)
+    Variable(QString n, QString v, QString c)
+        : name(std::move(n)),
+          value(std::move(v)),
+          comment(std::move(c))
     {
     }
-    ~Variable() { }
+    ~Variable() = default;
 
     QString name;
     QString value;
@@ -69,16 +69,19 @@ public:
 class Crontab : public CronType
 {
 public:
-    Crontab() { }
-    Crontab(const QString &user);
+    Crontab() = default;
+    explicit Crontab(const QString &user);
     ~Crontab();
 
     QString getCrontab(const QString &user);
     bool putCrontab(const QString &text);
-    bool putCrontab() { return putCrontab(cronText()); }
+    bool putCrontab()
+    {
+        return putCrontab(cronText());
+    }
 
     void setup(const QString &str);
-    QString writeTempFile(const QString &test, const QString &tmp);
+    QString writeTempFile(const QString &text, const QString &tmp);
     static QString list2String(const QStringList &list);
     QString cronText();
 
@@ -91,5 +94,3 @@ public:
     QList<Variable *> variables;
     QList<TCommand *> tCommands;
 };
-
-#endif

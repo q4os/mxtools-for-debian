@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="ja">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="ja">
 <context>
     <name>CronModel</name>
     <message>
@@ -11,7 +9,7 @@
     <message>
         <location filename="../CronModel.cpp" line="114"/>
         <source>User</source>
-        <translation>ユーザー</translation>
+        <translation>ユーザ</translation>
     </message>
     <message>
         <location filename="../CronModel.cpp" line="116"/>
@@ -57,7 +55,7 @@
     <message>
         <location filename="../ExecuteModel.cpp" line="66"/>
         <source>User</source>
-        <translation>ユーザー</translation>
+        <translation>ユーザ</translation>
     </message>
     <message>
         <location filename="../ExecuteModel.cpp" line="68"/>
@@ -139,7 +137,7 @@
     <message>
         <location filename="../MainWindow.cpp" line="141"/>
         <source>Start as &amp;Regular user</source>
-        <translation>通常ユーザーで開始(&amp;R)</translation>
+        <translation>通常のユーザで開始(&amp;R)</translation>
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="142"/>
@@ -301,7 +299,7 @@ Are you OK to exit?</source>
     <message>
         <location filename="../SaveDialog.cpp" line="32"/>
         <source>User:</source>
-        <translation>ユーザー:</translation>
+        <translation>ユーザ:</translation>
     </message>
     <message>
         <location filename="../SaveDialog.cpp" line="40"/>
@@ -319,7 +317,7 @@ Are you OK to exit?</source>
     <message>
         <location filename="../TCommandEdit.cpp" line="41"/>
         <source>User:</source>
-        <translation>ユーザー:</translation>
+        <translation>ユーザ:</translation>
     </message>
     <message>
         <location filename="../TCommandEdit.cpp" line="49"/>

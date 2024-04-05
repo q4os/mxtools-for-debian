@@ -14,7 +14,7 @@
     <message>
         <location filename="../selectlayoutdialog.ui" line="14"/>
         <source>Select Keyboard Layout and Variant</source>
-        <translation>Izberite razporeditev in varianto tipkovnice</translation>
+        <translation>Izberite razpored in različico tipkovnice</translation>
     </message>
     <message>
         <location filename="../selectlayoutdialog.ui" line="29"/>
@@ -58,7 +58,7 @@
     <message>
         <location filename="../window.ui" line="46"/>
         <source>Keyboard Layouts</source>
-        <translation>Razporeditve tipkovnice</translation>
+        <translation>Razpored tipkovnice</translation>
     </message>
     <message>
         <location filename="../window.ui" line="136"/>

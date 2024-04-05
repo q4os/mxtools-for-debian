@@ -5,11 +5,11 @@
     <name>MainWindow</name>
     <message>
         <location filename="../mainwindow.ui" line="14"/>
-        <location filename="../mainwindow.cpp" line="47"/>
-        <location filename="../mainwindow.cpp" line="75"/>
-        <location filename="../mainwindow.cpp" line="129"/>
-        <location filename="../mainwindow.cpp" line="148"/>
-        <location filename="../mainwindow.cpp" line="156"/>
+        <location filename="../mainwindow.cpp" line="48"/>
+        <location filename="../mainwindow.cpp" line="79"/>
+        <location filename="../mainwindow.cpp" line="135"/>
+        <location filename="../mainwindow.cpp" line="155"/>
+        <location filename="../mainwindow.cpp" line="163"/>
         <source>MX Select Sound</source>
         <translation type="unfinished">MX Ses Seçimi</translation>
     </message>
@@ -84,48 +84,48 @@
         <translation type="unfinished">Şu anki ses kartını dene</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="75"/>
+        <location filename="../mainwindow.cpp" line="79"/>
         <source>No sound cards/devices were found.</source>
         <translation type="unfinished">Hiçbir ses kartı / cihazı bulunamadı.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="87"/>
-        <location filename="../mainwindow.cpp" line="98"/>
+        <location filename="../mainwindow.cpp" line="91"/>
+        <location filename="../mainwindow.cpp" line="104"/>
         <source>none</source>
         <translation type="unfinished">hiçbiri</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="128"/>
+        <location filename="../mainwindow.cpp" line="134"/>
         <source>About MX Select Sound</source>
         <translation type="unfinished">MX Ses Seçimi Hakkında</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="129"/>
+        <location filename="../mainwindow.cpp" line="135"/>
         <source>Version: </source>
         <translation type="unfinished">Sürüm:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="130"/>
+        <location filename="../mainwindow.cpp" line="136"/>
         <source>Program for selecting the default sound card in MX Linux</source>
         <translation type="unfinished">MX Linux’ta öntanımlı ses kartı seçme programı</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="133"/>
+        <location filename="../mainwindow.cpp" line="139"/>
         <source>Copyright (c) MX Linux</source>
         <translation type="unfinished">Copyright (c) MX Linux</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="134"/>
+        <location filename="../mainwindow.cpp" line="140"/>
         <source>%1 License</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="148"/>
+        <location filename="../mainwindow.cpp" line="155"/>
         <source>%1 Help</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="156"/>
+        <location filename="../mainwindow.cpp" line="163"/>
         <source>Could not play test sound.</source>
         <translation type="unfinished">Deneme sesi çalınamıyor.</translation>
     </message>
@@ -135,7 +135,7 @@
     <message>
         <location filename="../about.cpp" line="40"/>
         <source>License</source>
-        <translation type="unfinished">Ruhsat</translation>
+        <translation type="unfinished">Lisans</translation>
     </message>
     <message>
         <location filename="../about.cpp" line="41"/>
@@ -242,7 +242,7 @@
     </message>
     <message>
         <source>License</source>
-        <translation type="vanished">Ruhsat</translation>
+        <translation type="vanished">Lisans</translation>
     </message>
     <message>
         <source>Changelog</source>

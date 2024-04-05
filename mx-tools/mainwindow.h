@@ -19,13 +19,10 @@
  * You should have received a copy of the GNU General Public License
  * along with MX Tools.  If not, see <http://www.gnu.org/licenses/>.
  **********************************************************************/
-
-#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
+#pragma once
 
 #include <QMessageBox>
 #include <QMultiMap>
-#include <QProcess>
 #include <QSettings>
 
 #include <flatbutton.h>
@@ -43,11 +40,9 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow() override;
 
-    enum Info { Name, Comment, IconName, Exec, Category, Terminal };
-
-    QIcon findIcon(QString icon_name);
-    QString getCmdOut(const QString &cmd);
-    QStringList listDesktopFiles(const QString &search_string, const QString &location);
+    [[nodiscard]] QIcon findIcon(QString icon_name);
+    [[nodiscard]] QString getCmdOut(const QString &cmd);
+    [[nodiscard]] QStringList listDesktopFiles(const QString &search_string, const QString &location);
     static void hideShowIcon(const QString &file_name, bool hide);
     void addButtons(const QMultiMap<QString, QMultiMap<QString, QStringList>> &info_map);
     void readInfo(const QMultiMap<QString, QStringList> &category_map);
@@ -64,22 +59,23 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
-    QSettings settings;
     FlatButton *btn {};
     QMultiMap<QString, QMultiMap<QString, QStringList>> info_map;
     QMultiMap<QString, QStringList> category_map;
-    QProcess *proc {};
+    QSettings settings;
     QStringList live_list;
     QStringList maintenance_list;
     QStringList setup_list;
     QStringList software_list;
     QStringList utilities_list;
+    [[nodiscard]] QString getTranslation(const QString &text, const QString &key, const QString &lang_region,
+                                         const QString &lang);
+    [[nodiscard]] QString getValueFromText(const QString &text, const QString &key);
+    enum Info { Name, Comment, IconName, Exec, Category, Terminal };
     int col_count = 0;
     int icon_size = 32;
     int max_col = 0;
     int max_elements = 0;
-    static void removeEnvExclusive(QStringList *list, const QStringList &termsToRemove);
     static void fixExecItem(QString *item);
+    static void removeEnvExclusive(QStringList *list, const QStringList &termsToRemove);
 };
-
-#endif // MAINWINDOW_H

@@ -94,7 +94,10 @@ exit_command() {
 
     # chvt so we see shutdown messages on tty1
     case $OPT_COMMAND in
-        reboot|poweroff) sync; chvt 1 2>/dev/null ;;
+        reboot|poweroff)
+            sync
+            [ -e "/live/config/systemd" ] || chvt 1 2>/dev/null
+            ;;
     esac
     exec $OPT_COMMAND
 }
@@ -103,7 +106,7 @@ edit_config() {
     [ -f $CONF_FILE ] && source $CONF_FILE
 
     if [ "$AUTOSAVE_MODE" ]; then
-        mode_str="$(pfgt "Current mode is: %s" "[f]$AUTOSAVE_MODE[/]")"
+        mode_str="$(pfgt "Current mode is: %s" "[f]${AUTOSAVE_MODE#? }[/]")"
     else
         mode_str="$(pfgt "There is no current auto-save mode.  The default is: %s." "[b]$_Automatic_[/]")"
     fi
@@ -112,7 +115,7 @@ edit_config() {
     if [ -e "/live/config/systemd" ]; then
     combo_box save-mode "1 $_Automatic_!3 $_Manual_!4 $_Quit_" -n \
         "$TITLE" ""                                                    \
-        "$(gt "Please choose auto-save mode.")"                                \
+        "$(gt "Please choose auto-save mode.")"                        \
         ""                                                             \
         "$mode_str"                                                    \
         ""                                                             \
@@ -121,9 +124,9 @@ edit_config() {
         "$(pf "$fmt" "$_Quit_"           "`gt "use current default."`")"                                 \
         ""
     else
-		combo_box save-mode "1 $_Automatic_!2 $_Semi_Automatic_!3 $_Manual_!4 $_Quit_" -n \
+        combo_box save-mode "1 $_Automatic_!2 $_Semi_Automatic_!3 $_Manual_!4 $_Quit_" -n \
         "$TITLE" ""                                                    \
-        "$(gt "Please choose auto-save mode.")"                                \
+        "$(gt "Please choose auto-save mode.")"                        \
         ""                                                             \
         "$mode_str"                                                    \
         ""                                                             \

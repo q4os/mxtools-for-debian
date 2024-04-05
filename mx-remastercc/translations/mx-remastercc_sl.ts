@@ -6,7 +6,7 @@
     <message>
         <location filename="../mainwindow.ui" line="14"/>
         <source>MX Remastercc</source>
-        <translation>MX NCpredelav</translation>
+        <translation>MX remasterizacija</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="64"/>
@@ -16,7 +16,7 @@
     <message>
         <location filename="../mainwindow.ui" line="81"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;This tool allows you to rework an ISO while running Live. &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Remaster&lt;/span&gt; allows you to change files, applications and settings with the goal of producing a new master copy for storage or distribution. &lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Persistence&lt;/span&gt; allows you to retain data, settings and installed programs when the machine gets switched off for personal use.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;To orodje omogoča predelavo za ISO, medtem ko je Linux zagnan. &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Predelava&lt;/span&gt; omogoča spreminjanje datotek, aplikacij in nastavitev z namenom ustvarjanja nove glavne kopije za shranjevanje ali distribucijo. &lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Obstojnost&lt;/span&gt; omogoča ohranjanje podatkov, nastavitev in nameščenih programov po izklopu računalnika.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;To orodje omogoča remasterizacijo ISO posnetka, medtem ko se Linux izvaja. &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Remasterizacija&lt;/span&gt; omogoča spreminjanje datotek, aplikacij in nastavitev z namenom ustvarjanja nove glavne kopije za shranjevanje ali distribucijo. &lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Obstojnost&lt;/span&gt; omogoča ohranitev podatkov, nastavitev in nameščenih programov tudi po izklopu računalnika.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="133"/>
@@ -71,12 +71,12 @@
     <message>
         <location filename="../mainwindow.ui" line="274"/>
         <source>Remaster</source>
-        <translation>Predelava</translation>
+        <translation>Remasterizacija</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="301"/>
         <source>Save root persistence</source>
-        <translation>Shrani koresnko obstojnost</translation>
+        <translation>Shrani korensko obstojnost</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="315"/>
@@ -92,17 +92,17 @@
         <location filename="../mainwindow.cpp" line="53"/>
         <location filename="../mainwindow.cpp" line="88"/>
         <source>MX Remaster Control Center</source>
-        <translation>MX nadzorni center za predelave</translation>
+        <translation>MX središče za remasterizacijo</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="66"/>
         <source>MX RemasterCC</source>
-        <translation>MX NCpredelav</translation>
+        <translation>MX remasterizacija</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="87"/>
         <source>About MX Remaster Control Center</source>
-        <translation>O programu MX nadzorni center za predelave</translation>
+        <translation>O programu MX središče za remasterizacijo</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="89"/>
@@ -112,7 +112,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="90"/>
         <source>This program provides access to different remaster and persistence tools in MX Linux</source>
-        <translation>Ta program omogoča dostop do različnih orodji za predelavo in obstojnost sistema MX Linux</translation>
+        <translation>Ta program omogoča dostop do različnih orodji za remasterizacijo in obstojnost sistema MX Linux</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="92"/>

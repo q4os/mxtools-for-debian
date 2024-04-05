@@ -5,13 +5,13 @@
     <name>MainWindow</name>
     <message>
         <location filename="../mainwindow.ui" line="14"/>
-        <location filename="../mainwindow.cpp" line="47"/>
-        <location filename="../mainwindow.cpp" line="75"/>
-        <location filename="../mainwindow.cpp" line="129"/>
-        <location filename="../mainwindow.cpp" line="148"/>
-        <location filename="../mainwindow.cpp" line="156"/>
+        <location filename="../mainwindow.cpp" line="48"/>
+        <location filename="../mainwindow.cpp" line="79"/>
+        <location filename="../mainwindow.cpp" line="135"/>
+        <location filename="../mainwindow.cpp" line="155"/>
+        <location filename="../mainwindow.cpp" line="163"/>
         <source>MX Select Sound</source>
-        <translation type="unfinished">MX izberi zvok</translation>
+        <translation type="unfinished">MX izbira zvoka</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="28"/>
@@ -66,7 +66,7 @@
     <message>
         <location filename="../mainwindow.ui" line="196"/>
         <source>Apply</source>
-        <translation type="unfinished">Potrdi</translation>
+        <translation type="unfinished">Uveljavi</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="218"/>
@@ -84,50 +84,50 @@
         <translation type="unfinished">Preizkus trenutne zvočne kartice</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="75"/>
+        <location filename="../mainwindow.cpp" line="79"/>
         <source>No sound cards/devices were found.</source>
         <translation type="unfinished">Zvočnih kartic ali naprav ni bilo mogoče najti</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="87"/>
-        <location filename="../mainwindow.cpp" line="98"/>
+        <location filename="../mainwindow.cpp" line="91"/>
+        <location filename="../mainwindow.cpp" line="104"/>
         <source>none</source>
         <translation type="unfinished">brez</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="128"/>
+        <location filename="../mainwindow.cpp" line="134"/>
         <source>About MX Select Sound</source>
-        <translation type="unfinished">O programu MX Izberi zvok</translation>
+        <translation type="unfinished">O programu MX Izbira zvoka</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="129"/>
+        <location filename="../mainwindow.cpp" line="135"/>
         <source>Version: </source>
         <translation type="unfinished">Različica:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="130"/>
+        <location filename="../mainwindow.cpp" line="136"/>
         <source>Program for selecting the default sound card in MX Linux</source>
         <translation type="unfinished">Program za določitev privzete zvočne kartice v MX Linuxu</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="133"/>
+        <location filename="../mainwindow.cpp" line="139"/>
         <source>Copyright (c) MX Linux</source>
         <translation type="unfinished">Copyright (c) MX Linux</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="134"/>
+        <location filename="../mainwindow.cpp" line="140"/>
         <source>%1 License</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="148"/>
+        <location filename="../mainwindow.cpp" line="155"/>
         <source>%1 Help</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="156"/>
+        <location filename="../mainwindow.cpp" line="163"/>
         <source>Could not play test sound.</source>
-        <translation type="unfinished">Testnega zvoka ni bilo mogoče predvajati.</translation>
+        <translation type="unfinished">Preizkusnega zvoka ni bilo mogoče predvajati.</translation>
     </message>
 </context>
 <context>
@@ -158,7 +158,7 @@
     <name>mxselectsound</name>
     <message>
         <source>MX Select Sound</source>
-        <translation type="vanished">MX izberi zvok</translation>
+        <translation type="vanished">MX izbira zvoka</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Your current default sound card is:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -202,7 +202,7 @@
     </message>
     <message>
         <source>Apply</source>
-        <translation type="vanished">Potrdi</translation>
+        <translation type="vanished">Uveljavi</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Select another sound card if necessary:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -226,7 +226,7 @@
     </message>
     <message>
         <source>About MX Select Sound</source>
-        <translation type="vanished">O programu MX Izberi zvok</translation>
+        <translation type="vanished">O programu MX Izbira zvoka</translation>
     </message>
     <message>
         <source>Version: </source>
@@ -258,7 +258,7 @@
     </message>
     <message>
         <source>Could not play test sound.</source>
-        <translation type="vanished">Testnega zvoka ni bilo mogoče predvajati.</translation>
+        <translation type="vanished">Preizkusnega zvoka ni bilo mogoče predvajati.</translation>
     </message>
 </context>
 </TS>

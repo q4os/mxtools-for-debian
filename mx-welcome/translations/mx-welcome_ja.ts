@@ -5,8 +5,8 @@
     <name>MainWindow</name>
     <message>
         <location filename="../mainwindow.ui" line="14"/>
-        <location filename="../mainwindow.cpp" line="64"/>
-        <location filename="../mainwindow.cpp" line="434"/>
+        <location filename="../mainwindow.cpp" line="68"/>
+        <location filename="../mainwindow.cpp" line="289"/>
         <source>MX Welcome</source>
         <translation>MX ウェルカム</translation>
     </message>
@@ -58,7 +58,7 @@
     <message>
         <location filename="../mainwindow.ui" line="536"/>
         <source>Tools</source>
-        <translation>各種設定ツール</translation>
+        <translation>MX ツール</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="568"/>
@@ -68,7 +68,7 @@
     <message>
         <location filename="../mainwindow.ui" line="600"/>
         <source>Users Manual</source>
-        <translation>ユーザーマニュアル</translation>
+        <translation>ユーザマニュアル</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="626"/>
@@ -163,48 +163,48 @@ li.checked::marker { content: &quot;\2612&quot;; }
         <translation>起動時にこのダイヤログを表示する</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="317"/>
+        <location filename="../mainwindow.cpp" line="176"/>
         <source>User demo, password:</source>
-        <translation>demo, パスワード:</translation>
+        <translation>demo、パスワード：</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="318"/>
+        <location filename="../mainwindow.cpp" line="177"/>
         <source>Superuser root, password:</source>
-        <translation>root, パスワード:</translation>
+        <translation>管理者、パスワード：</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="355"/>
-        <location filename="../mainwindow.cpp" line="373"/>
+        <location filename="../mainwindow.cpp" line="205"/>
+        <location filename="../mainwindow.cpp" line="223"/>
         <source>Error</source>
         <translation>エラー</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="386"/>
+        <location filename="../mainwindow.cpp" line="238"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:14pt; font-weight:600;&quot;&gt;%1 &amp;quot;%2&amp;quot;&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="433"/>
+        <location filename="../mainwindow.cpp" line="288"/>
         <source>About MX Welcome</source>
         <translation>MX ウェルカムについて</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="434"/>
+        <location filename="../mainwindow.cpp" line="289"/>
         <source>Version: </source>
         <translation>バージョン: </translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="435"/>
+        <location filename="../mainwindow.cpp" line="290"/>
         <source>Program for displaying a welcome screen in MX Linux</source>
         <translation>MX Linux のウェルカム画面を表示するプログラム</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="438"/>
+        <location filename="../mainwindow.cpp" line="293"/>
         <source>Copyright (c) MX Linux</source>
         <translation>Copyright (c) MX Linux</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="439"/>
+        <location filename="../mainwindow.cpp" line="294"/>
         <source>%1 License</source>
         <translation type="unfinished"></translation>
     </message>
@@ -229,7 +229,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
     <name>QApplication</name>
     <message>
         <source>You must run this program as normal user.</source>
-        <translation type="vanished">このプログラムは一般ユーザーで実行して下さい。</translation>
+        <translation type="vanished">このプログラムは通常のユーザで実行してください。</translation>
     </message>
 </context>
 <context>
@@ -242,7 +242,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
     <message>
         <location filename="../main.cpp" line="48"/>
         <source>Start with About tab selected. The About tab provides basic information about the current MX Linux version, the user&apos;s hardware, and access to a full system report.</source>
-        <translation>バージョン情報のタブが選択された状態で開始します。このタブには、現在の MX Linux バージョン、ユーザーのハードウェア、およびフルシステムレポートへのアクセスに関する基本情報が表示されます。</translation>
+        <translation>バージョン情報のタブが選択された状態で開始します。このタブには、現在の MX Linux バージョン、ユーザのハードウェア、およびフルシステムレポートへのアクセスに関する基本情報が表示されます。</translation>
     </message>
     <message>
         <location filename="../main.cpp" line="51"/>
@@ -250,33 +250,33 @@ li.checked::marker { content: &quot;\2612&quot;; }
         <translation>テストモードを実行します。</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="73"/>
+        <location filename="../main.cpp" line="76"/>
         <source>Error</source>
         <translation>エラー</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="73"/>
+        <location filename="../main.cpp" line="76"/>
         <source>You must run this program as normal user.</source>
-        <translation type="unfinished">このプログラムは一般ユーザーで実行して下さい。</translation>
+        <translation type="unfinished">このプログラムは通常のユーザで実行してください。</translation>
     </message>
     <message>
-        <location filename="../about.cpp" line="39"/>
+        <location filename="../about.cpp" line="61"/>
         <source>License</source>
         <translation type="unfinished">ライセンス</translation>
     </message>
     <message>
-        <location filename="../about.cpp" line="40"/>
-        <location filename="../about.cpp" line="50"/>
+        <location filename="../about.cpp" line="62"/>
+        <location filename="../about.cpp" line="72"/>
         <source>Changelog</source>
         <translation type="unfinished">更新履歴</translation>
     </message>
     <message>
-        <location filename="../about.cpp" line="41"/>
+        <location filename="../about.cpp" line="63"/>
         <source>Cancel</source>
         <translation type="unfinished">キャンセル</translation>
     </message>
     <message>
-        <location filename="../about.cpp" line="63"/>
+        <location filename="../about.cpp" line="85"/>
         <source>&amp;Close</source>
         <translation type="unfinished">閉じる(&amp;C)</translation>
     </message>

@@ -5,10 +5,13 @@ ConditionPathExists=/live/config/save-persist
 RequiresMountsFor=/
 
 [Service]
-ExecStart=/bin/true
-ExecStop=/live/etc/init.d/persist-autosave stop
 Type=oneshot
+ExecStart=
+ExecStop=/bin/sh -c "grep -q [12] /etc/live/persist-config.conf 2>/dev/null || exit 0; sleep 1; echo; /live/etc/init.d/persist-autosave stop; echo; echo Power Off/Reboot Now ... ; sleep 3"
 RemainAfterExit=yes
+StandardInput=tty
+StandardOutput=tty
+TTYPath=/dev/console
 
 [Install]
 WantedBy=multi-user.target

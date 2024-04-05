@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="de">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="de">
 <context>
     <name>CronModel</name>
     <message>
@@ -222,14 +220,14 @@
         <source>Not saved since last change.
 Are you OK to reload?</source>
         <translation>Nicht gespeichert seit der letzten Änderung.
-Sind sie bereit, neu zu laden?</translation>
+Sind Sie bereit, neu zu laden?</translation>
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="325"/>
         <source>Not saved since last change.
 Are you OK to exit?</source>
         <translation>Nicht gespeichert seit der letzten Änderung.
-Sind sie bereit zum Verlassen?</translation>
+Sind Sie bereit zum Verlassen?</translation>
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="338"/>

@@ -1,6 +1,6 @@
 /*
    Copyright (C) 2003-2010 by Warren Woodford
-   Copyright (C) 2014 by Adrian adrian@mxlinux.org
+   Copyright (C) 2014-2023 by Adrian <adrian@mxlinux.org>
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -14,12 +14,9 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 
-
-   With big modifications made by Adrian adrian@mxlinux.org
+   Heavily modified by Adrian <adrian@mxlinux.org>
 */
-
-#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
+#pragma once
 
 #include "ui_mainwindow.h"
 
@@ -37,7 +34,6 @@ class MainWindow : public QDialog, public Ui::MainWindow
     Q_OBJECT
 public:
     explicit MainWindow(QWidget* parent = nullptr);
-    ~MainWindow() override = default;
 
     QString getIP();
     static QString getIPfromRouter();
@@ -116,5 +112,3 @@ private:
     bool internetConnection {};
     bool ndiswrapBlocklisted {};
 };
-
-#endif

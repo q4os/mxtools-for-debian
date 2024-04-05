@@ -21,8 +21,8 @@ CustomDialog::CustomDialog(const QStringList &items, QDialog *parent)
 
     auto *ok = new QPushButton(tr("OK"));
     auto *cancel = new QPushButton(tr("Cancel"));
-    ok->setIcon(QIcon::fromTheme(QStringLiteral("dialog-ok")));
-    cancel->setIcon(QIcon::fromTheme(QStringLiteral("window-close")));
+    ok->setIcon(QIcon::fromTheme("dialog-ok"));
+    cancel->setIcon(QIcon::fromTheme("window-close"));
 
     layout->addWidget(ok, 2, 1, 1, 1);
     layout->addWidget(cancel, 2, 2, 1, 1);

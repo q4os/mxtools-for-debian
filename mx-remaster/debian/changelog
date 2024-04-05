@@ -1,3 +1,11 @@
+mx-remaster (24.03.01mx23) mx; urgency=medium
+
+  * systemd workaround adjustments
+  * persist-save
+  * persist-config
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 21 Mar 2024 20:52:40 -0400
+
 mx-remaster (24.02.01mx23) mx; urgency=medium
 
   * simplify systemd service work-around trigger conditions

@@ -7,8 +7,7 @@
    as published by the Free Software Foundation; either version 2
    of the License, or (at your option) any later version.
 */
-#ifndef CRONTIME_H
-#define CRONTIME_H
+#pragma once
 
 #include <QBitArray>
 #include <QDateTime>
@@ -16,11 +15,11 @@
 class CronTime
 {
 public:
-    CronTime(const QString &tstr);
+    explicit CronTime(const QString &tstr);
 
-    QDateTime getNextTime(const QDateTime &dtime) const;
-    bool isValid() const;
-    QString toString(bool literal = false) const;
+    [[nodiscard]] QDateTime getNextTime(const QDateTime &dtime) const;
+    [[nodiscard]] bool isValid() const;
+    [[nodiscard]] QString toString(bool literal = false) const;
 
     QBitArray minute;
     QBitArray hour;
@@ -38,5 +37,3 @@ private:
     static QString toWeekLiteral(const QString &str);
     static QString toMonthLiteral(const QString &str);
 };
-
-#endif

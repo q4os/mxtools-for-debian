@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-09-04 12:16-0400\n"
+"POT-Creation-Date: 2023-09-04 16:09-0400\n"
 "PO-Revision-Date: 2022-12-10 04:09+0000\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>, 2023\n"
 "Language-Team: Hebrew (Israel) (https://app.transifex.com/anticapitalista/teams/10162/he_IL/)\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: he_IL\n"
-"Plural-Forms: nplurals=4; plural=(n == 1 && n % 1 == 0) ? 0 : (n == 2 && n % 1 == 0) ? 1: (n % 10 == 0 && n % 1 == 0 && n > 10) ? 2 : 3;\n"
+"Plural-Forms: nplurals=3; plural=(n == 1 && n % 1 == 0) ? 0 : (n == 2 && n % 1 == 0) ? 1: 2;\n"
 
 #. The desktop entry name will be displayed within the menu.
 #: desktop-in/Quick_System_Info.desktop.in:6
@@ -31,6 +31,8 @@ msgstr "פרטים מהירים על המערכת"
 msgid "inxi -Fxxxrza"
 msgstr "inxi -Fxxxrza"
 
-#: desktop-in/Quick_System_Info.desktop.in:16
+#. Translator note:  please add translated keywords to the list but keep the
+#. english ones as well
+#: desktop-in/Quick_System_Info.desktop.in:17
 msgid "qsi;quick;system;info;"
 msgstr ""

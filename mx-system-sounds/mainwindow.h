@@ -21,9 +21,7 @@
  * You should have received a copy of the GNU General Public License
  * along with mx-system-sounds.  If not, see <http://www.gnu.org/licenses/>.
  **********************************************************************/
-
-#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
+#pragma once
 
 #include <QMessageBox>
 #include <QProcess>
@@ -79,5 +77,3 @@ private:
     bool theme_login_flag {};
     bool theme_logout_flag {};
 };
-
-#endif // MXSNAPSHOT_H

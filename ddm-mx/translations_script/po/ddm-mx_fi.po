@@ -6,10 +6,9 @@
 # Translators:
 # anticapitalista <anticapitalista@riseup.net>, 2017
 # Kalevipoeg <linux@disroot.org>, 2018
-# Kimmo Kujansuu <mrkujansuu@gmail.com>, 2021
+# Oi Suomi On! <oisuomion@protonmail.com>, 2020
 # En Kerro <inactive+ekeimaja@transifex.com>, 2022
-# Oi Suomi On! <oisuomion@protonmail.com>, 2022
-# Robin, 2023
+# Kimmo Kujansuu <mrkujansuu@gmail.com>, 2024
 # 
 #, fuzzy
 msgid ""
@@ -18,7 +17,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-12-14 20:02-0500\n"
 "PO-Revision-Date: 2016-11-29 14:08+0000\n"
-"Last-Translator: Robin, 2023\n"
+"Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>, 2024\n"
 "Language-Team: Finnish (https://app.transifex.com/anticapitalista/teams/10162/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -60,14 +59,14 @@ msgstr "Asenna ajurit laitteelle:"
 #. The desktop entry name will be displayed within the menu.
 #: ../ddm-mx:58 ../xdg/ddm-nvidia.desktop.in:4
 msgid "Nvidia driver installer"
-msgstr ""
+msgstr "Nvidian ajurien asennus"
 
 #. desktop comment
 #. TRANSLATORS:
 #. The desktop entry comment will be shown within the menu.
 #: ../ddm-mx:60 ../xdg/ddm-nvidia.desktop.in:7
 msgid "Install proprietary nvidia driver from repo"
-msgstr "Asenna oma nvidia-ohjain reposta"
+msgstr "Asenna nvidian oma ajuri reposta"
 
 #. Invalid option: start GUI
 #. launch_gui $@
@@ -119,47 +118,47 @@ msgstr "Seuraavat vaihtoehdot sallitaan:"
 
 #: ../ddm-mx:261
 msgid "Offer debian-backports alternative"
-msgstr ""
+msgstr "Tarjoaa debian-backports vaihtoehdon"
 
 #: ../ddm-mx:262
 msgid "Offer Nvidia developer repo alternative"
-msgstr ""
+msgstr "Tarjoaa nvidian kehittäjien repo vaihtoehdon"
 
 #: ../ddm-mx:263
 msgid "Create 20-nvidia.conf"
-msgstr ""
+msgstr "Luo 20-nvidia.conf"
 
 #: ../ddm-mx:265
 msgid "Install given driver."
-msgstr ""
+msgstr "Asenna annettu ajuri."
 
 #: ../ddm-mx:266
 msgid "drivers: nvidia, open, fixbumblebee"
-msgstr ""
+msgstr "ajurit: nvidia, avoin, fixbumblebee"
 
 #: ../ddm-mx:268
 msgid "Purge given driver."
-msgstr ""
+msgstr "Pura annettu ajuri."
 
 #: ../ddm-mx:269
 msgid "driver: nvidia"
-msgstr ""
+msgstr "ajuri: nvidia"
 
 #: ../ddm-mx:271
 msgid "force specific nvidia driver package."
-msgstr ""
+msgstr "pakottaa tietyn nvidia-ajuripaketin."
 
 #: ../ddm-mx:276
 msgid "For development testing only!  simulate installs"
-msgstr ""
+msgstr "Vain kehittäjien testauksessa! Simuloi asennuksen"
 
 #: ../ddm-mx:277
 msgid "This will install drivers for pre-defined hardware."
-msgstr ""
+msgstr "Tämä asentaa ajurit ennalta määritetyille laitteille."
 
 #: ../ddm-mx:278
 msgid "Use with -i."
-msgstr ""
+msgstr "Käytä -i:n kanssa."
 
 #. error message about when bumblebee drivers can be used
 #: ../ddm-mx:348
@@ -167,6 +166,8 @@ msgstr ""
 msgid ""
 "Unsupported configuration.  bumblebee only works with 390xx drivers and up."
 msgstr ""
+"Määritystä ei tueta. Bumblebee toimii vain 390xx-ajureiden ja sitä uudempien"
+" kanssa."
 
 #. installed hardware requires this driver
 #: ../ddm-mx:379
@@ -269,26 +270,24 @@ msgstr "Kytketään päälle MX Testi-ohjelmavarasto"
 #: ../ddm-mx:609
 #, sh-format
 msgid "Enabling Nvidia developer repo"
-msgstr ""
+msgstr "Otetaan Nvidia-kehittäjärepo käyttöön"
 
 #. getting the nvidia gpg archive key
 #: ../ddm-mx:611
 #, sh-format
 msgid "Getting Nvidia repo signing key"
-msgstr ""
+msgstr "Haetaan nvidia repon allekirjoitusavainta"
 
 #. problem downloading and installing the nvidia gpg key package
 #: ../ddm-mx:621
 #, sh-format
 msgid "Error downloading nvidia direct repo key"
-msgstr ""
+msgstr "Virhe ladattaessa suoraa nvidia repon allekirjoitusavainta"
 
 #: ../ddm-mx:639
 #, sh-format
 msgid "Would you like to check debian-backports for a later version?"
-msgstr ""
-"Haluatko käydä läpi Debian:in takaporttiohjelmistolähteet etsien uudempaa "
-"versiota?"
+msgstr "Haluatko tarkistaa debian-backports uudemman version?"
 
 #: ../ddm-mx:641
 #, sh-format
@@ -335,13 +334,12 @@ msgstr "poistutaan"
 #: ../ddm-mx:663 ../ddm-mx:664
 #, sh-format
 msgid "Would you like to check MX Test Repo for a later version?"
-msgstr ""
-"Haluatko käydä läpi MX Testi-ohjelmistolähteen etsien uudempaa versiota?"
+msgstr "Haluatko tarkistaa MX Test reposta uudemman version?"
 
 #: ../ddm-mx:680 ../ddm-mx:681
 #, sh-format
 msgid "Would you like to check the Nvidia developer repo for a later version?"
-msgstr ""
+msgstr "Haluatko tarkistaa nvidia-kehittäjien reposta uudemman version?"
 
 #. a choice of driver versions is being offerred
 #: ../ddm-mx:699 ../ddm-mx:738 ../ddm-mx:778
@@ -352,12 +350,12 @@ msgstr "Minkä ajurin haluat asentaa"
 #: ../ddm-mx:701
 #, sh-format
 msgid "Main repos or debian-backports?"
-msgstr "Pää-ohjelmalähteet vaiko Debian:in takaporttiohjelmistolähteet?"
+msgstr "Päärepot vai debian-backports?"
 
 #: ../ddm-mx:703 ../ddm-mx:742 ../ddm-mx:782
 #, sh-format
 msgid "Main"
-msgstr "Päälähteet"
+msgstr "Päärepot"
 
 #: ../ddm-mx:707 ../ddm-mx:746 ../ddm-mx:786
 #, sh-format
@@ -368,27 +366,27 @@ msgstr "Lopeta"
 #: ../ddm-mx:723 ../ddm-mx:761 ../ddm-mx:801
 #, sh-format
 msgid "Reset nvidia-detect"
-msgstr ""
+msgstr "Nollaa nvidia-detect"
 
 #: ../ddm-mx:740
 #, sh-format
 msgid "Main repos or MX Test"
-msgstr "Pää-ohjelmavarastot vaiko MX Testi"
+msgstr "Päärepot vai MX Test"
 
 #: ../ddm-mx:744
 #, sh-format
 msgid "MX Test"
-msgstr ""
+msgstr "MX Test"
 
 #: ../ddm-mx:780
 #, sh-format
 msgid "Main repos or Nvidia direct repo"
-msgstr ""
+msgstr "Päärepot tai nvidia-direct repo"
 
 #: ../ddm-mx:784
 #, sh-format
 msgid "Nvidia Direct"
-msgstr ""
+msgstr "Nvidia Direct"
 
 #: ../ddm-mx:826
 #, sh-format
@@ -483,7 +481,7 @@ msgstr "Voit käyttää uutta nvidiaan sisäänrakennettua PRIMUS-ohjainta."
 msgid ""
 "Use \"nvidia-run-mx\" followed by your application command to use the nvidia"
 " graphics"
-msgstr ""
+msgstr "Käytä \"nvidia-run-mx\" komentoa käyttääksesi nvidia-grafiikkaa"
 
 #: ../ddm-mx:988
 #, sh-format
@@ -491,16 +489,18 @@ msgid ""
 "If you want to force the older bumblebee optimus drivers,\\n quit and "
 "restart with sudo ddm-mx -i nvidia -f bumblebee-nvidia"
 msgstr ""
+"Jos haluat pakottaa vanhemmat bumblebee optimus ajurit,\\n lopeta ja aloita "
+"uudelleen komennolla sudo ddm-mx -i nvidia -f bumblebee-nvidia"
 
 #: ../ddm-mx:991 ../ddm-mx:997
 #, sh-format
 msgid "You need to use the bumblebee-nvidia driver."
-msgstr ""
+msgstr "Sinun on käytettävä bumblebee-nvidia ajuria."
 
 #: ../ddm-mx:1010
 #, sh-format
 msgid "nvidia driver not available, check your repo sources"
-msgstr "nvidia-ajuri ei ole saatavilla, tarkista ohjelmavarastolähteet"
+msgstr "nvidia-ajuri ei ole saatavilla, tarkista ohjelmistolähteet"
 
 #: ../ddm-mx:1015
 #, sh-format
@@ -515,30 +515,30 @@ msgstr ""
 #: ../ddm-mx:1117 ../ddm-mx:1128 ../ddm-mx:1137
 #, sh-format
 msgid "Main repo candidate is:  "
-msgstr "Pääohjelmavarastoehdokas on:"
+msgstr "Päärepo ehdokas on:"
 
 #. candidate from debian backports repo
 #: ../ddm-mx:1119
 #, sh-format
 msgid "Debian backports candidate is:  "
-msgstr "Debian:in takaporttiohjelmistolähde-ehdokas on:"
+msgstr "Debian backports ehdokas on:"
 
 #. test repo candidate
 #: ../ddm-mx:1130
 #, sh-format
 msgid "MX Test repo candidate is:  "
-msgstr "MX Testi-ohjelmavarastoehdokas on:"
+msgstr "MX Test ehdokas on:"
 
 #. Nvidia developer repo candidate here
 #: ../ddm-mx:1139
 #, sh-format
 msgid "Nvidia developer repo candidate is:  "
-msgstr ""
+msgstr "Nvidia kehittäjärepo ehdokas on:"
 
 #: ../ddm-mx:1150
 #, sh-format
 msgid "nvidia driver already installed"
-msgstr "Nvidia-ajuri on jo asennettu"
+msgstr "nvidia-ajuri on jo asennettu"
 
 #: ../ddm-mx:1152
 #, sh-format
@@ -570,22 +570,24 @@ msgstr "Nvidia ohjainta ei löytynyt - poistutaan"
 #: ../ddm-mx:1249
 #, sh-format
 msgid "Try latest nvidia-driver?"
-msgstr ""
+msgstr "Kokeile uusinta nvidia-ajuria?"
 
 #: ../nvidia-detect-mx:33
 msgid ""
 "Reports the Debian packages supporting the NVIDIA GPU that is installed on "
 "the local system (or given as a PCIID parameter)."
 msgstr ""
+"Raportoi debian-paketit, jotka tukevat järjestelmääsi asennettua (tai PCIID-"
+"parametrilla annettua) NVIDIA-näytönohjainta."
 
 #: ../nvidia-detect-mx:60
 msgid "Latest"
-msgstr ""
+msgstr "Uusin"
 
 #: ../nvidia-detect-mx:168
 #, sh-format
 msgid "A newer driver may add support for your card."
-msgstr ""
+msgstr "Uudempi ajuri voi lisätä tukea sinun näytönohjaimelle."
 
 #: ../nvidia-detect-mx:169
 #, sh-format
@@ -593,6 +595,8 @@ msgid ""
 "Newer driver releases may be available in the MX testing repository or "
 "debian-backports."
 msgstr ""
+"Uudemmat ajurijulkaisut voivat olla saatavilla MX-testing tai debian-"
+"backports varastosta."
 
 #: ../nvidia-detect-mx:178 ../nvidia-detect-mx:186 ../nvidia-detect-mx:194
 #: ../nvidia-detect-mx:202 ../nvidia-detect-mx:210 ../nvidia-detect-mx:218
@@ -600,7 +604,7 @@ msgstr ""
 #: ../nvidia-detect-mx:250
 #, sh-format
 msgid "Your card is supported by the nvidia %s drivers series. %s"
-msgstr ""
+msgstr "Sinun näytönohjainta tukee nvidia %s ajurisarjaa. %s"
 
 #. . inform which driver series are totally unsupported
 #: ../nvidia-detect-mx:258 ../nvidia-detect-mx:261 ../nvidia-detect-mx:264
@@ -610,18 +614,20 @@ msgid ""
 "Uh oh. Your card is only supported by the %s legacy drivers series, which is"
 " not in any current Debian suite."
 msgstr ""
+"Voi ei. Sinun näytönohjainta tukevat vain %s vanhat ajurit, joita ei ole "
+"missään nykyisessä debian-paketissa."
 
 #: ../nvidia-detect-mx:270
 #, sh-format
 msgid "Oops. Supported driver not found"
-msgstr ""
+msgstr "Voi ei. Tuettua ajuria ei löydy"
 
 #: ../nvidia-detect-mx:278
 #, sh-format
 msgid "It is recommended to install the following:"
-msgstr ""
+msgstr "Suositeltavaa asentaa seuraavat:"
 
 #: ../nvidia-detect-mx:281
 #, sh-format
 msgid "To install alternate driver packages, use"
-msgstr ""
+msgstr "Asenna vaihtoehtoiset ajuripaketit käyttämällä"

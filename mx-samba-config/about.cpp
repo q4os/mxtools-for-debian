@@ -11,7 +11,7 @@
 #include "version.h"
 #include <unistd.h>
 
-// display doc as nomal user when run as root
+// Display doc as nomal user when run as root
 void displayDoc(const QString &url, const QString &title)
 {
     // prefer mx-viewer otherwise use xdg-open (use runuser to run that as logname user) "gio open" would also work here
@@ -70,6 +70,5 @@ void displayAboutMsgBox(const QString &title, const QString &message, const QStr
         layout->addWidget(btnClose);
         changelog->setLayout(layout);
         changelog->exec();
-        delete changelog;
     }
 }

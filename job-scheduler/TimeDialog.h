@@ -7,8 +7,7 @@
    as published by the Free Software Foundation; either version 2
    of the License, or (at your option) any later version.
 */
-#ifndef TIMEDIALOG_H
-#define TIMEDIALOG_H
+#pragma once
 
 #include <QDialog>
 #include <QPushButton>
@@ -21,8 +20,8 @@ class TimeButton : public QPushButton
 {
     Q_OBJECT
 public:
-    TimeButton(const QString &label, QWidget *parent = nullptr);
-    TimeButton(int label, QWidget *parent = nullptr);
+    explicit TimeButton(const QString &label, QWidget *parent = nullptr);
+    explicit TimeButton(int label, QWidget *parent = nullptr);
     void init();
 
 public slots:
@@ -33,8 +32,11 @@ class TimeDialog : public QDialog
 {
     Q_OBJECT
 public:
-    TimeDialog(QString time, QWidget *parent = nullptr);
-    QString time() { return outTime; }
+    explicit TimeDialog(QString time, QWidget *parent = nullptr);
+    QString time()
+    {
+        return outTime;
+    }
 
 private slots:
     void minuteButtonClicked(QAbstractButton *b);
@@ -63,5 +65,3 @@ private:
 
     QLineEdit *timeEdit;
 };
-
-#endif

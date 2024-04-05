@@ -1,3 +1,24 @@
+/**********************************************************************
+ *
+ **********************************************************************
+ * Copyright (C) 2023-2024 MX Authors
+ *
+ * Authors: Adrian <adrian@mxlinux.org>
+ *          MX Linux <http://mxlinux.org>
+ *
+ * This is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this package. If not, see <http://www.gnu.org/licenses/>.
+ **********************************************************************/
 #include "about.h"
 
 #include <QApplication>
@@ -5,42 +26,37 @@
 #include <QMessageBox>
 #include <QProcess>
 #include <QPushButton>
+#include <QStandardPaths>
 #include <QTextEdit>
 #include <QVBoxLayout>
 
-#include "version.h"
+#include "common.h"
 #include <unistd.h>
 
-extern const QString starting_home;
-
-// display doc as nomal user when run as root
+// Display doc as nomal user when run as root
 void displayDoc(const QString &url, const QString &title)
 {
-    qputenv("HOME", starting_home.toUtf8());
-    // prefer mx-viewer otherwise use xdg-open (use runuser to run that as logname user) "gio open" would also work here
-    if (QFile::exists(QStringLiteral("/usr/bin/mx-viewer"))) {
-        QProcess::startDetached(QStringLiteral("mx-viewer"), {url, title});
+    bool started_as_root = false;
+    if (qEnvironmentVariable("HOME") == "root") {
+        started_as_root = true;
+        qputenv("HOME", starting_home.toUtf8()); // Use original home for theming purposes
+    }
+    // Prefer mx-viewer otherwise use xdg-open (use runuser to run that as logname user)
+    QString executablePath = QStandardPaths::findExecutable("mx-viewer");
+    if (!executablePath.isEmpty()) {
+        QProcess::startDetached("mx-viewer", {url, title});
     } else {
         if (getuid() != 0) {
-            QProcess::startDetached(QStringLiteral("xdg-open"), {url});
-            return;
+            QProcess::startDetached("xdg-open", {url});
         } else {
             QProcess proc;
-            proc.start(QStringLiteral("logname"), {}, QIODevice::ReadOnly);
+            proc.start("logname", {}, QIODevice::ReadOnly);
             proc.waitForFinished();
-            QByteArray user = proc.readAllStandardOutput().trimmed();
-            proc.start(QStringLiteral("id"), {"-u", user});
-            proc.waitForFinished();
-            QByteArray id = proc.readAllStandardOutput().trimmed();
-
-            qunsetenv("KDE_FULL_SESSION");
-            qunsetenv("XDG_CURRENT_DESKTOP");
-            qputenv("XDG_RUNTIME_DIR", "/run/user/" + id);
-            QProcess::startDetached(QStringLiteral("runuser"), {"-u", user, "--", "xdg-open", url});
-            qputenv("XDG_RUNTIME_DIR", "/run/user/0");
+            QString user = QString::fromUtf8(proc.readAllStandardOutput()).trimmed();
+            QProcess::startDetached("runuser", {"-u", user, "--", "xdg-open", url});
         }
     }
-    if (getuid() == 0) {
+    if (started_as_root) {
         qputenv("HOME", "/root");
     }
 }
@@ -54,9 +70,10 @@ void displayAboutMsgBox(const QString &title, const QString &message, const QStr
     auto *btnLicense = msgBox.addButton(QObject::tr("License"), QMessageBox::HelpRole);
     auto *btnChangelog = msgBox.addButton(QObject::tr("Changelog"), QMessageBox::HelpRole);
     auto *btnCancel = msgBox.addButton(QObject::tr("Cancel"), QMessageBox::NoRole);
-    btnCancel->setIcon(QIcon::fromTheme(QStringLiteral("window-close")));
+    btnCancel->setIcon(QIcon::fromTheme("window-close"));
 
     msgBox.exec();
+
     if (msgBox.clickedButton() == btnLicense) {
         displayDoc(licence_url, license_title);
     } else if (msgBox.clickedButton() == btnChangelog) {
@@ -68,13 +85,14 @@ void displayAboutMsgBox(const QString &title, const QString &message, const QStr
         text->setReadOnly(true);
         QProcess proc;
         proc.start(
-            QStringLiteral("zless"),
-            {"/usr/share/doc/" + QFileInfo(QCoreApplication::applicationFilePath()).fileName() + "/changelog.gz"});
+            "zless",
+            {"/usr/share/doc/" + QFileInfo(QCoreApplication::applicationFilePath()).fileName() + "/changelog.gz"},
+            QIODevice::ReadOnly);
         proc.waitForFinished();
-        text->setText(QString::fromLatin1(proc.readAllStandardOutput()));
+        text->setText(proc.readAllStandardOutput());
 
         auto *btnClose = new QPushButton(QObject::tr("&Close"), changelog);
-        btnClose->setIcon(QIcon::fromTheme(QStringLiteral("window-close")));
+        btnClose->setIcon(QIcon::fromTheme("window-close"));
         QObject::connect(btnClose, &QPushButton::clicked, changelog, &QDialog::close);
 
         auto *layout = new QVBoxLayout(changelog);
@@ -82,6 +100,5 @@ void displayAboutMsgBox(const QString &title, const QString &message, const QStr
         layout->addWidget(btnClose);
         changelog->setLayout(layout);
         changelog->exec();
-        delete changelog;
     }
 }

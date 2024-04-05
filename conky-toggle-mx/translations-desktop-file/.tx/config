@@ -6,4 +6,5 @@ file_filter = po/conky-toggle-mx-desktop_<lang>.po
 source_file = conky-toggle-mx-desktop.pot
 source_lang = en
 type        = po
+minimum_perc = 25
 
