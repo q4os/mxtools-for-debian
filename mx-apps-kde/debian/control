@@ -15,7 +15,6 @@ Depends:
  mx-boot-options,
  mx-conky,
  mx-datetime,
- mx-docs,
  mx-network-assistant,
  mx-packageinstaller,
  mx-remaster,

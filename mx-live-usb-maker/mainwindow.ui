@@ -49,8 +49,7 @@
         <string>Close</string>
        </property>
        <property name="icon">
-        <iconset theme="window-close">
-         <normaloff>.</normaloff>.</iconset>
+        <iconset theme="window-close"/>
        </property>
        <property name="shortcut">
         <string>Alt+N</string>
@@ -91,8 +90,7 @@
         <string>Help</string>
        </property>
        <property name="icon">
-        <iconset theme="help-contents">
-         <normaloff>.</normaloff>.</iconset>
+        <iconset theme="help-contents"/>
        </property>
        <property name="shortcut">
         <string>Alt+H</string>
@@ -114,8 +112,7 @@
         <string>Back</string>
        </property>
        <property name="icon">
-        <iconset theme="go-previous">
-         <normaloff>.</normaloff>.</iconset>
+        <iconset theme="go-previous"/>
        </property>
        <property name="autoDefault">
         <bool>false</bool>
@@ -172,8 +169,7 @@
         <string>Next</string>
        </property>
        <property name="icon">
-        <iconset theme="go-next">
-         <normaloff>.</normaloff>.</iconset>
+        <iconset theme="go-next"/>
        </property>
        <property name="shortcut">
         <string/>
@@ -201,8 +197,7 @@
         <string>About...</string>
        </property>
        <property name="icon">
-        <iconset theme="help-about">
-         <normaloff>.</normaloff>.</iconset>
+        <iconset theme="help-about"/>
        </property>
        <property name="shortcut">
         <string>Alt+B</string>
@@ -224,8 +219,7 @@
         <string>View Log</string>
        </property>
        <property name="icon">
-        <iconset theme="emblem-documents">
-         <normaloff>.</normaloff>.</iconset>
+        <iconset theme="emblem-documents"/>
        </property>
        <property name="autoDefault">
         <bool>false</bool>
@@ -259,8 +253,7 @@
           <string>Select ISO</string>
          </property>
          <property name="icon">
-          <iconset theme="user-home">
-           <normaloff>.</normaloff>.</iconset>
+          <iconset theme="user-home"/>
          </property>
         </widget>
        </item>
@@ -533,8 +526,7 @@
           <string>Refresh drive list</string>
          </property>
          <property name="icon">
-          <iconset theme="view-refresh">
-           <normaloff>.</normaloff>.</iconset>
+          <iconset theme="view-refresh"/>
          </property>
          <property name="autoDefault">
           <bool>false</bool>
@@ -547,8 +539,7 @@
           <string>Show advanced options</string>
          </property>
          <property name="icon">
-          <iconset theme="go-down">
-           <normaloff>.</normaloff>.</iconset>
+          <iconset theme="go-down"/>
          </property>
          <property name="autoDefault">
           <bool>false</bool>
@@ -600,7 +591,6 @@
               <widget class="QLabel" name="label_4">
                <property name="font">
                 <font>
-                 <weight>50</weight>
                  <bold>false</bold>
                  <kerning>true</kerning>
                 </font>
@@ -760,7 +750,7 @@
                 <string>clone from a mounted live-usb or iso-file.</string>
                </property>
                <property name="text">
-                <string>Clone an existing live system</string>
+                <string>Clone a mounted live system</string>
                </property>
               </widget>
              </item>

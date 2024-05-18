@@ -5,7 +5,7 @@
     <name>MXDateTime</name>
     <message>
         <location filename="../datetime.ui" line="20"/>
-        <location filename="../datetime.cpp" line="749"/>
+        <location filename="../datetime.cpp" line="754"/>
         <source>MX Date &amp; Time</source>
         <translation>MX 日付と時刻の設定</translation>
     </message>
@@ -41,8 +41,8 @@
     </message>
     <message>
         <location filename="../datetime.ui" line="261"/>
-        <location filename="../datetime.cpp" line="360"/>
-        <location filename="../datetime.cpp" line="367"/>
+        <location filename="../datetime.cpp" line="365"/>
+        <location filename="../datetime.cpp" line="372"/>
         <source>Hardware Clock</source>
         <translation>ハードウェアクロック</translation>
     </message>
@@ -192,33 +192,33 @@
         <translation>オプション</translation>
     </message>
     <message>
-        <location filename="../datetime.cpp" line="329"/>
+        <location filename="../datetime.cpp" line="334"/>
         <source>Reading...</source>
         <translation>読み込み中...</translation>
     </message>
     <message>
-        <location filename="../datetime.cpp" line="346"/>
+        <location filename="../datetime.cpp" line="351"/>
         <source>Adjusting...</source>
         <translation>調整中...</translation>
     </message>
     <message>
-        <location filename="../datetime.cpp" line="360"/>
-        <location filename="../datetime.cpp" line="367"/>
+        <location filename="../datetime.cpp" line="365"/>
+        <location filename="../datetime.cpp" line="372"/>
         <source>System Clock</source>
         <translation>システムクロック</translation>
     </message>
     <message>
-        <location filename="../datetime.cpp" line="373"/>
+        <location filename="../datetime.cpp" line="378"/>
         <source>The %1 time was transferred to the %2.</source>
         <translation>%1 の時刻を %2 に転送しました。</translation>
     </message>
     <message>
-        <location filename="../datetime.cpp" line="376"/>
+        <location filename="../datetime.cpp" line="381"/>
         <source>The %1 time could not be transferred to the %2.</source>
         <translation>%1 の時刻を %2 に転送できません。</translation>
     </message>
     <message>
-        <location filename="../datetime.cpp" line="755"/>
+        <location filename="../datetime.cpp" line="760"/>
         <source>%1 License</source>
         <translation type="unfinished"></translation>
     </message>
@@ -227,12 +227,12 @@
         <translation type="vanished">更新中...</translation>
     </message>
     <message>
-        <location filename="../datetime.cpp" line="430"/>
+        <location filename="../datetime.cpp" line="435"/>
         <source>The system clock was updated successfully.</source>
         <translation>システムクロックの更新に成功しました。</translation>
     </message>
     <message>
-        <location filename="../datetime.cpp" line="433"/>
+        <location filename="../datetime.cpp" line="438"/>
         <source>The system clock could not be updated.</source>
         <translation>システムクロックは更新されませんでした。</translation>
     </message>
@@ -241,22 +241,22 @@
         <translation type="vanished">リスト上の NTP サーバーは現在有効ではありません。</translation>
     </message>
     <message>
-        <location filename="../datetime.cpp" line="748"/>
+        <location filename="../datetime.cpp" line="753"/>
         <source>About MX Date &amp; Time</source>
         <translation>MX 日付と時刻の設定について</translation>
     </message>
     <message>
-        <location filename="../datetime.cpp" line="750"/>
+        <location filename="../datetime.cpp" line="755"/>
         <source>Version: </source>
         <translation>バージョン: </translation>
     </message>
     <message>
-        <location filename="../datetime.cpp" line="751"/>
+        <location filename="../datetime.cpp" line="756"/>
         <source>GUI program for setting the time and date in MX Linux</source>
         <translation>MX Linux で時刻と日付の設定を行えるグラフィカルなプログラム</translation>
     </message>
     <message>
-        <location filename="../datetime.cpp" line="754"/>
+        <location filename="../datetime.cpp" line="759"/>
         <source>Copyright (c) MX Linux</source>
         <translation>Copyright (c) MX Linux</translation>
     </message>
@@ -277,7 +277,7 @@
         <translation type="vanished">閉じる(&amp;C)</translation>
     </message>
     <message>
-        <location filename="../datetime.cpp" line="759"/>
+        <location filename="../datetime.cpp" line="764"/>
         <source>MX Date &amp; Time Help</source>
         <translation>MX 日付と時刻の設定ヘルプ</translation>
     </message>

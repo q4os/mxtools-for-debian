@@ -1,3 +1,15 @@
+antix-archive-keyring (20019.5.0) unstable; urgency=medium
+
+  * put antix-archive-keyring.gpg into  etc/apt/keyrings
+  
+ -- anticapitalista <antix@operamail.com>  Thu, 25 Apr 2024 12:41:39 +0300
+
+antix-archive-keyring (20019.4.0) unstable; urgency=medium
+
+  * updated keyring to expire on 2027-04-06
+
+ -- anticapitalista <antix@operamail.com>  Sat, 06 Apr 2024 15:35:34 +0300
+
 antix-archive-keyring (20019.3.14) unstable; urgency=medium
 
   * updated keyring to expire in 2024

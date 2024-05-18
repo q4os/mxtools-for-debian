@@ -5,7 +5,7 @@
     <name>MXDateTime</name>
     <message>
         <location filename="../datetime.ui" line="20"/>
-        <location filename="../datetime.cpp" line="749"/>
+        <location filename="../datetime.cpp" line="754"/>
         <source>MX Date &amp; Time</source>
         <translation>एमएक्स दिनांक व समय</translation>
     </message>
@@ -41,8 +41,8 @@
     </message>
     <message>
         <location filename="../datetime.ui" line="261"/>
-        <location filename="../datetime.cpp" line="360"/>
-        <location filename="../datetime.cpp" line="367"/>
+        <location filename="../datetime.cpp" line="365"/>
+        <location filename="../datetime.cpp" line="372"/>
         <source>Hardware Clock</source>
         <translation>हार्डवेयर घड़ी</translation>
     </message>
@@ -192,33 +192,33 @@
         <translation>विकल्प</translation>
     </message>
     <message>
-        <location filename="../datetime.cpp" line="329"/>
+        <location filename="../datetime.cpp" line="334"/>
         <source>Reading...</source>
         <translation>रीड करना जारी...</translation>
     </message>
     <message>
-        <location filename="../datetime.cpp" line="346"/>
+        <location filename="../datetime.cpp" line="351"/>
         <source>Adjusting...</source>
         <translation>सेट करना जारी...</translation>
     </message>
     <message>
-        <location filename="../datetime.cpp" line="360"/>
-        <location filename="../datetime.cpp" line="367"/>
+        <location filename="../datetime.cpp" line="365"/>
+        <location filename="../datetime.cpp" line="372"/>
         <source>System Clock</source>
         <translation>सिस्टम घड़ी</translation>
     </message>
     <message>
-        <location filename="../datetime.cpp" line="373"/>
+        <location filename="../datetime.cpp" line="378"/>
         <source>The %1 time was transferred to the %2.</source>
         <translation>%1 समय का %2 में अंतरण सफल।</translation>
     </message>
     <message>
-        <location filename="../datetime.cpp" line="376"/>
+        <location filename="../datetime.cpp" line="381"/>
         <source>The %1 time could not be transferred to the %2.</source>
         <translation>%1 समय का %2 में अंतरण विफल।</translation>
     </message>
     <message>
-        <location filename="../datetime.cpp" line="755"/>
+        <location filename="../datetime.cpp" line="760"/>
         <source>%1 License</source>
         <translation type="unfinished"></translation>
     </message>
@@ -227,12 +227,12 @@
         <translation type="vanished">अपडेट करना जारी...</translation>
     </message>
     <message>
-        <location filename="../datetime.cpp" line="430"/>
+        <location filename="../datetime.cpp" line="435"/>
         <source>The system clock was updated successfully.</source>
         <translation>सिस्टम घड़ी अपडेट सफल।</translation>
     </message>
     <message>
-        <location filename="../datetime.cpp" line="433"/>
+        <location filename="../datetime.cpp" line="438"/>
         <source>The system clock could not be updated.</source>
         <translation>सिस्टम घड़ी अपडेट विफल।</translation>
     </message>
@@ -241,22 +241,22 @@
         <translation type="vanished">सूची में मौजूद कोई भी एनटीपी सर्वर सक्रिय नहीं है।</translation>
     </message>
     <message>
-        <location filename="../datetime.cpp" line="748"/>
+        <location filename="../datetime.cpp" line="753"/>
         <source>About MX Date &amp; Time</source>
         <translation>एमएक्स दिनांक व समय के बारे में</translation>
     </message>
     <message>
-        <location filename="../datetime.cpp" line="750"/>
+        <location filename="../datetime.cpp" line="755"/>
         <source>Version: </source>
         <translation>संस्करण :</translation>
     </message>
     <message>
-        <location filename="../datetime.cpp" line="751"/>
+        <location filename="../datetime.cpp" line="756"/>
         <source>GUI program for setting the time and date in MX Linux</source>
         <translation>एमएक्स लिनक्स में दिनांक व समय सेट करने हेतु ग्राफ़िकल अंतरफलक प्रोग्राम</translation>
     </message>
     <message>
-        <location filename="../datetime.cpp" line="754"/>
+        <location filename="../datetime.cpp" line="759"/>
         <source>Copyright (c) MX Linux</source>
         <translation>कॉपीराइट (c) एमएक्स लिनक्स</translation>
     </message>
@@ -277,7 +277,7 @@
         <translation type="vanished">बंद करें (&amp;C)</translation>
     </message>
     <message>
-        <location filename="../datetime.cpp" line="759"/>
+        <location filename="../datetime.cpp" line="764"/>
         <source>MX Date &amp; Time Help</source>
         <translation>एमएक्स दिनांक व समय सहायता</translation>
     </message>

@@ -67,7 +67,7 @@ void MainWindow::addGroupCheckbox(QLayout *layout, const QString &package, const
         vBox->addWidget(btn);
         connect(btn, &QCheckBox::toggled, [btn, list]() {
             if (btn->isChecked()) {
-                *list << btn->text();
+                list->append(btn->text());
             } else {
                 list->removeAll(btn->text());
             }
@@ -82,7 +82,7 @@ void MainWindow::setup()
     this->setWindowTitle(tr("MX Cleanup"));
     this->adjustSize();
 
-    current_user = cmdOut("logname");
+    current_user = cmdOut("logname", false, true);
 
     ui->pushApply->setDisabled(true);
     ui->checkCache->setChecked(true);
@@ -91,9 +91,7 @@ void MainWindow::setup()
     ui->radioOldLogs->setChecked(true);
     ui->radioSelectedUser->setChecked(true);
 
-    const QString users = cmdOut("lslogins --noheadings -u -o user | grep -vw root").trimmed();
-
-    qDebug() << users;
+    const QString users = cmdOut("lslogins --noheadings -u -o user | grep -vw root", false, true).trimmed();
     ui->comboUserClean->addItems(users.split('\n'));
 
     ui->comboUserClean->setCurrentIndex(ui->comboUserClean->findText(current_user));
@@ -187,10 +185,10 @@ void MainWindow::removeKernelPackages(const QStringList &list)
                                 + "| grep 'Depends:' | grep -oE 'linux-headers-[0-9][^[:space:]]+' | sort -u");
         if (!headers_common.toUtf8().trimmed().isEmpty()) {
             image_pattern = headers_common;
-            image_pattern.replace(QLatin1String("-common"), QLatin1String(""));
-            image_pattern.replace(QLatin1String("headers"), QLatin1String("image"));
+            image_pattern.remove("-common");
+            image_pattern.replace("headers", "image");
             if (system("dpkg -l 'linux-image-[0-9]*' | grep ^ii | cut -d ' ' -f3  | grep -v -E '"
-                       + list.join("|").toUtf8() + "' | grep -q " + image_pattern.toUtf8())
+                       + list.join('|').toUtf8() + "' | grep -q " + image_pattern.toUtf8())
                 != 0) {
                 headers_depends << headers_common;
             }
@@ -198,13 +196,13 @@ void MainWindow::removeKernelPackages(const QStringList &list)
     }
     QString common;
     if (!headers_depends.isEmpty()) {
-        QString filter = "| grep -oE '" + headers_depends.join("|") + "'";
-        common = cmdOut("apt-get remove -s " + headers_installed.join(" ") + " | grep '^  ' " + filter
+        QString filter = "| grep -oE '" + headers_depends.join('|') + "'";
+        common = cmdOut("apt-get remove -s " + headers_installed.join(' ') + " | grep '^  ' " + filter
                         + R"( | tr '\n' ' ')");
     }
     QString helper {"/usr/lib/" + QApplication::applicationName() + "/helper-terminal"};
     system("x-terminal-emulator -e pkexec " + helper.toUtf8() + " '" + rmOldVersions.toUtf8() + " apt purge "
-           + headers_installed.join(" ").toUtf8() + " " + list.join(" ").toUtf8() + " " + common.toUtf8()
+           + headers_installed.join(' ').toUtf8() + ' ' + list.join(' ').toUtf8() + ' ' + common.toUtf8()
            + "; apt-get install -f; read -n1 -srp \"" + tr("Press any key to close").toUtf8() + "\"'");
     setCursor(QCursor(Qt::ArrowCursor));
 }
@@ -227,18 +225,17 @@ void MainWindow::loadOptions()
         return;
     }
 
-    if (period != QLatin1String("reboot")) {
+    if (period != "reboot") {
         file_name = "/etc/cron." + period + "/mx-cleanup";
     }
-
     // Folders
-    ui->checkThumbs->setChecked(system(R"(grep -q '\.thumbnails' )" + file_name.toUtf8()) == 0);
-    if (system(R"(grep -q '\.cache' )" + file_name.toUtf8()) == 0) {
+    ui->checkThumbs->setChecked(system(R"(grep -q 'rm -r.*\.cache/thumbnails' )" + file_name.toUtf8()) == 0);
+    if (system(R"(grep -qE 'find \/home\/.*\/\.cache(\s|/\*)' )" + file_name.toUtf8()) == 0) {
         ui->checkCache->setChecked(true);
-        if (system("grep -q 'rm.*cache' " + file_name.toUtf8()) == 0) {
-            ui->radioAllCache->setChecked(true);
-        } else {
+        if (system(R"(grep -q 'find.*cache.*-atime' )" + file_name.toUtf8()) == 0) {
             ui->radioSaferCache->setChecked(true);
+        } else {
+            ui->radioAllCache->setChecked(true);
         }
     } else {
         ui->checkCache->setChecked(false);
@@ -252,7 +249,6 @@ void MainWindow::loadOptions()
     } else {
         ui->radioNoCleanApt->setChecked(true);
     }
-
     // Flatpak: remove unused runtiles
     ui->checkFlatpak->setChecked(system("grep -q 'flatpak uninstall --unused' " + file_name.toUtf8()) == 0);
 
@@ -266,8 +262,8 @@ void MainWindow::loadOptions()
     }
 
     // Logs older than...
-    QString ctime
-        = cmdOut("grep 'find /var/log' " + file_name + R"( | grep -Eo '\-ctime \+[0-9]{1,3}' | cut -f2 -d' ')");
+    QString ctime = cmdOut(
+        "grep 'find /var/log' " + file_name + R"( | grep -Eo '\-ctime \+[0-9]{1,3}' | cut -f2 -d' ')", false, true);
     ui->spinBoxLogs->setValue(ctime.toInt());
 
     // Trash
@@ -280,7 +276,8 @@ void MainWindow::loadOptions()
     }
 
     // Trash older than...
-    ctime = cmdOut("grep 'find /home/' " + file_name + R"( | grep -Eo '\-ctime \+[0-9]{1,3}' | cut -f2 -d' ')");
+    ctime = cmdOut("grep 'find /home/' " + file_name + R"( | grep -Eo '\-ctime \+[0-9]{1,3}' | cut -f2 -d' ')", false,
+                   true);
     ui->spinBoxTrash->setValue(ctime.toInt());
 }
 
@@ -288,14 +285,14 @@ void MainWindow::loadOptions()
 void MainWindow::saveSchedule(const QString &cmd_str, const QString &period)
 {
     QString fileName;
-    if (period == QLatin1String("@reboot")) {
+    if (period == "@reboot") {
         fileName = "/usr/bin/mx-cleanup-script";
         QString cronFile {"/etc/cron.d/mx-cleanup"};
         QTemporaryFile tempCron;
         tempCron.open();
         tempCron.write("@reboot root /usr/bin/mx-cleanup-script\n");
         tempCron.close();
-        cmdOutAsRoot("mv " + tempCron.fileName() + " " + cronFile);
+        cmdOutAsRoot("mv " + tempCron.fileName() + ' ' + cronFile);
         cmdOutAsRoot("chown root: " + cronFile);
         cmdOutAsRoot("chmod +r " + cronFile);
     } else {
@@ -346,11 +343,9 @@ void MainWindow::saveSettings()
 void MainWindow::selectRadioButton(const QButtonGroup *group, int id)
 {
     if (id != -1) {
-        for (auto *button : group->buttons()) {
-            if (group->id(button) == id) {
-                button->setChecked(true);
-                break;
-            }
+        auto *selectedButton = group->button(id);
+        if (selectedButton) {
+            selectedButton->setChecked(true);
         }
     }
 }
@@ -381,39 +376,38 @@ void MainWindow::setConnections()
 
 void MainWindow::pushApply_clicked()
 {
-    quint64 total = 0;
     setCursor(QCursor(Qt::BusyCursor));
 
-    QString apt;
+    quint64 total {};
     QString cache;
-    QString flatpak;
-    QString logs;
+    if (ui->checkCache->isChecked()) {
+        QString period = ui->radioSaferCache->isChecked()
+                             ? QString(" -atime +%1 -mtime +%1").arg(ui->spinCache->value())
+                             : QString();
+        total
+            = cmdOut(QString("find /home/%1/.cache -type d -name 'thumbnails' -prune -o -type f%2 -exec du -sc '{}' + "
+                             "| awk '{field = $1} END {print field}'")
+                         .arg(ui->comboUserClean->currentText(), period))
+                  .toULongLong();
+        cache = QString("find /home/%1/.cache -mindepth 1 ! -path '/home/%1/.cache/thumbnails*'%2 -delete")
+                    .arg(ui->comboUserClean->currentText(), period);
+        if (!ui->radioReboot->isChecked()) {
+            cmdOut(cache);
+        }
+    }
+
     QString thumbnails;
-    QString trash;
-
-    if (ui->checkCache->isChecked() && ui->radioAllCache->isChecked()) {
-        total += cmdOut("du -c /home/" + ui->comboUserClean->currentText().toUtf8() + "/.cache/* | tail -1 | cut -f1")
-                     .toULongLong();
-        cache = "rm -r /home/" + ui->comboUserClean->currentText().toUtf8() + "/.cache/* 2>/dev/null";
-        system(cache.toUtf8());
-    } else if (ui->checkCache->isChecked() && ui->radioSaferCache->isChecked()) {
-        QString days = QString::number(ui->spinCache->value());
-        total += cmdOut("find /home/" + ui->comboUserClean->currentText().toUtf8() + "/.cache/ -type f -atime +" + days
-                        + " -mtime +" + days + " -exec du -sc '{}' + | tail -1 | cut -f1")
-                     .toULongLong();
-        cache = "find /home/" + ui->comboUserClean->currentText().toUtf8() + "/.cache/ -type f -atime +" + days
-                + " -mtime +" + days + " -delete";
-        system(cache.toUtf8());
-    }
-
     if (ui->checkThumbs->isChecked()) {
-        total += cmdOut("du -c /home/" + ui->comboUserClean->currentText().toUtf8()
-                        + "/.thumbnails/* | tail -1 | cut -f1")
+        total += cmdOut(QString("du -c /home/%1/.cache/thumbnails/* | awk '{field = $1} END {print field}'")
+                            .arg(ui->comboUserClean->currentText()))
                      .toULongLong();
-        thumbnails = "rm -r /home/" + ui->comboUserClean->currentText().toUtf8() + "/.thumbnails/* 2>/dev/null";
-        system(thumbnails.toUtf8());
+        thumbnails = QString("rm -r /home/%1/.cache/thumbnails/* 2>/dev/null").arg(ui->comboUserClean->currentText());
+        if (!ui->radioReboot->isChecked()) {
+            cmdOut(thumbnails);
+        }
     }
 
+    QString flatpak;
     if (ui->checkFlatpak->isChecked()) {
         flatpak = "pgrep -a flatpak | grep -v flatpak-s || flatpak uninstall --unused --noninteractive";
         QString user_size = "du -s /home/$(logname)/.local/share/flatpak/ | cut -f1";
@@ -424,7 +418,9 @@ void MainWindow::pushApply_clicked()
         if (ok) {
             total += system_size_num;
         }
-        system(flatpak.toUtf8());
+        if (!ui->radioReboot->isChecked()) {
+            cmdOut(flatpak);
+        }
         total -= cmdOut(user_size).toULongLong();
         system_size_num = cmdOutAsRoot(system_size).toULongLong(&ok);
         if (ok) {
@@ -432,6 +428,7 @@ void MainWindow::pushApply_clicked()
         }
     }
 
+    QString apt;
     if (ui->radioAutoClean->isChecked()) {
         apt = "apt-get autoclean";
     } else if (ui->radioClean->isChecked()) {
@@ -439,42 +436,46 @@ void MainWindow::pushApply_clicked()
     }
 
     total += cmdOutAsRoot("du -s /var/cache/apt/archives/ | cut -f1").toULongLong();
-    cmdOutAsRoot(apt);
+    if (!ui->radioReboot->isChecked()) {
+        cmdOutAsRoot(apt);
+    }
     total -= cmdOutAsRoot("du -s /var/cache/apt/archives/ | cut -f1").toULongLong();
 
-    QString time = " ";
-    int logRetentionDays = ui->spinBoxLogs->value();
-    if (logRetentionDays > 0) {
-        time = QString(" -ctime +%1 -atime +%1 ").arg(logRetentionDays);
-    }
-
+    QString time
+        = ui->spinBoxLogs->value() > 0 ? QString(" -ctime +%1 -atime +%1").arg(ui->spinBoxLogs->value()) : QString();
+    QString logs;
     if (ui->radioOldLogs->isChecked()) {
         total
             += cmdOutAsRoot(
                    R"(find /var/log \( -name "*.gz" -o -name "*.old" -o -name "*.[0-9]" -o -name "*.[0-9].log" \) -type f)"
-                   + time + "-exec du -sc '{}' + | tail -1 | cut -f1")
+                   + time + " -exec du -sc '{}' + | awk '{field = $1} END {print field}'")
                    .toULongLong();
         logs = R"(find /var/log \( -name "*.gz" -o -name "*.old" -o -name "*.[0-9]" -o -name "*.[0-9].log" \))" + time
-               + "-type f -delete 2>/dev/null";
+               + " -type f -delete 2>/dev/null";
         cmdOutAsRoot(logs);
     } else if (ui->radioAllLogs->isChecked()) {
-        total += cmdOutAsRoot("find /var/log -type f" + time + "-exec du -sc '{}' + | tail -1 | cut -f1").toULongLong();
-        logs = "find /var/log -type f" + time + R"(-exec sh -c "echo > '{}'" \;)"; // empty the logs
+        total += cmdOutAsRoot(
+                     QString("find /var/log -type f%1 -exec du -sc '{}' + | awk '{field = $1} END {print field}'")
+                         .arg(time))
+                     .toULongLong();
+        logs = "find /var/log -type f" + time + R"( -exec sh -c "echo > '{}'" \;)"; // empty the logs
         cmdOutAsRoot(logs);
     }
 
+    QString trash;
     if (ui->radioSelectedUser->isChecked() || ui->radioAllUsers->isChecked()) {
         QString user = ui->radioAllUsers->isChecked() ? "*" : ui->comboUserClean->currentText();
-        QString timeTrash = " ";
-        int trashRetentionDays = ui->spinBoxTrash->value();
-        if (trashRetentionDays > 0) {
-            timeTrash = QString(" -ctime +%1 -atime +%1 ").arg(trashRetentionDays);
-        }
-        total += cmdOut("find /home/" + user + "/.local/share/Trash -mindepth 1" + timeTrash
-                        + "-exec du -sc '{}' + | tail -1 | cut -f1")
+        QString timeTrash = ui->spinBoxTrash->value() > 0
+                                ? QString(" -ctime +%1 -atime +%1").arg(ui->spinBoxTrash->value())
+                                : QString();
+        total += cmdOut(QString("find /home/%1/.local/share/Trash -mindepth 1%2 -exec du -sc '{}' + | awk '{field = "
+                                "$1} END {print field}'")
+                            .arg(user, timeTrash))
                      .toULongLong();
-        trash = "find /home/" + user + "/.local/share/Trash -mindepth 1" + timeTrash + "-delete";
-        system(trash.toUtf8());
+        trash = QString("find /home/%1/.local/share/Trash -mindepth 1%2 -delete").arg(user, timeTrash);
+        if (!ui->radioReboot->isChecked()) {
+            cmdOut(trash);
+        }
     }
 
     // Cleanup schedule
@@ -484,26 +485,31 @@ void MainWindow::pushApply_clicked()
     cmdOutAsRoot("rm /etc/cron.d/mx-cleanup");
     // Add schedule file
     if (!ui->radioNone->isChecked()) {
-        QString period;
-        QString cmd_str = cache + '\n' + thumbnails + '\n' + logs + '\n' + apt + '\n' + trash + '\n' + flatpak;
+        QStringList parts {cache, thumbnails, logs, apt, trash, flatpak};
+        QString cmd_str = parts.join("\n");
         qDebug() << "CMD STR" << cmd_str;
+        QString schedule;
         if (ui->radioDaily->isChecked()) {
-            period = "daily";
+            schedule = "daily";
         } else if (ui->radioWeekly->isChecked()) {
-            period = "weekly";
+            schedule = "weekly";
         } else if (ui->radioMonthly->isChecked()) {
-            period = "monthly";
+            schedule = "monthly";
         } else if (ui->radioReboot->isChecked()) {
-            period = "@reboot";
+            schedule = "@reboot";
         }
-        saveSchedule(cmd_str, period);
+        saveSchedule(cmd_str, schedule);
     }
 
     saveSettings();
 
     setCursor(QCursor(Qt::ArrowCursor));
-    QMessageBox::information(this, tr("Done"),
-                             tr("Cleanup command done") + '\n' + tr("%1 MiB were freed").arg(total / 1024));
+    if (ui->radioReboot->isChecked()) {
+        QMessageBox::information(this, tr("Done"), tr("Cleanup script will run at reboot"));
+    } else {
+        QMessageBox::information(this, tr("Done"),
+                                 tr("Cleanup command done") + '\n' + tr("%1 MiB were freed").arg(total / 1024));
+    }
 }
 
 void MainWindow::pushAbout_clicked()
@@ -529,49 +535,46 @@ void MainWindow::pushHelp_clicked()
 void MainWindow::pushUsageAnalyzer_clicked()
 {
     const QString desktop = qgetenv("XDG_CURRENT_DESKTOP");
-    // Try filelight, qdirstat for Qt based DEs, otherwise baobab
     if (desktop == "KDE" || desktop == "LXQt") {
-        if (!QStandardPaths::findExecutable("filelight").isEmpty()) {
-            QProcess::startDetached("filelight", {});
-        } else if (!QStandardPaths::findExecutable("qdirstat").isEmpty()) {
-            QProcess::startDetached("qdirstat", {});
-        } else {
-            QProcess::startDetached("baobab", {});
-        }
+        startPreferredApp({"filelight", "qdirstat", "baobab"});
     } else {
-        if (!QStandardPaths::findExecutable("baobab").isEmpty()) {
-            QProcess::startDetached("baobab", {});
-        } else if (!QStandardPaths::findExecutable("filelight").isEmpty()) {
-            QProcess::startDetached("filelight", {});
-        } else {
-            QProcess::startDetached("qdirstat", {});
+        startPreferredApp({"baobab", "filelight", "qdirstat"});
+    }
+}
+
+void MainWindow::startPreferredApp(const QStringList &apps)
+{
+    for (const auto &app : apps) {
+        if (!QStandardPaths::findExecutable(app).isEmpty()) {
+            QProcess::startDetached(app, {});
+            break;
         }
     }
 }
 
-QString MainWindow::cmdOut(const QString &cmd, bool asRoot)
+QString MainWindow::cmdOut(const QString &cmd, bool asRoot, bool quiet)
 {
-    qDebug().noquote() << cmd;
-    auto *proc = new QProcess(this);
+    if (!quiet) {
+        qDebug().noquote() << cmd;
+    }
+    QProcess proc;
     QEventLoop loop;
-    connect(proc, QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished), &loop, &QEventLoop::quit);
-    proc->setProcessChannelMode(QProcess::MergedChannels);
+    connect(&proc, QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished), &loop, &QEventLoop::quit);
+    proc.setProcessChannelMode(QProcess::MergedChannels);
     if (asRoot && getuid() != 0) {
         QString elevate {QFile::exists("/usr/bin/pkexec") ? "/usr/bin/pkexec" : "/usr/bin/gksu"};
         QString helper {"/usr/lib/" + QApplication::applicationName() + "/helper"};
-        proc->start(elevate, {helper, cmd});
+        proc.start(elevate, {helper, cmd});
     } else {
-        proc->start("/bin/bash", {"-c", cmd});
+        proc.start("/bin/bash", {"-c", cmd});
     }
     loop.exec();
-    QString out = proc->readAll().trimmed();
-    delete proc;
-    return out;
+    return proc.readAll().trimmed();
 }
 
-QString MainWindow::cmdOutAsRoot(const QString &cmd)
+QString MainWindow::cmdOutAsRoot(const QString &cmd, bool quiet)
 {
-    return cmdOut(cmd, true);
+    return cmdOut(cmd, true, quiet);
 }
 
 void MainWindow::pushKernel_clicked()

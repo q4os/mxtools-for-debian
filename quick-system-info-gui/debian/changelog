@@ -1,3 +1,9 @@
+quick-system-info-gui (24.04.01) mx; urgency=medium
+
+  * remove redundant file check so that logs in elevated directories can be read
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 05 Apr 2024 19:52:37 -0400
+
 quick-system-info-gui (24.03.01) mx; urgency=medium
 
   * update translations

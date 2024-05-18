@@ -5,7 +5,7 @@
     <name>MXDateTime</name>
     <message>
         <location filename="../datetime.ui" line="20"/>
-        <location filename="../datetime.cpp" line="749"/>
+        <location filename="../datetime.cpp" line="754"/>
         <source>MX Date &amp; Time</source>
         <translation>MX dátum és idő</translation>
     </message>
@@ -41,8 +41,8 @@
     </message>
     <message>
         <location filename="../datetime.ui" line="261"/>
-        <location filename="../datetime.cpp" line="360"/>
-        <location filename="../datetime.cpp" line="367"/>
+        <location filename="../datetime.cpp" line="365"/>
+        <location filename="../datetime.cpp" line="372"/>
         <source>Hardware Clock</source>
         <translation>A számítógép órája</translation>
     </message>
@@ -192,33 +192,33 @@
         <translation>Beállítások</translation>
     </message>
     <message>
-        <location filename="../datetime.cpp" line="329"/>
+        <location filename="../datetime.cpp" line="334"/>
         <source>Reading...</source>
         <translation>Olvasás...</translation>
     </message>
     <message>
-        <location filename="../datetime.cpp" line="346"/>
+        <location filename="../datetime.cpp" line="351"/>
         <source>Adjusting...</source>
         <translation>Igazítás...</translation>
     </message>
     <message>
-        <location filename="../datetime.cpp" line="360"/>
-        <location filename="../datetime.cpp" line="367"/>
+        <location filename="../datetime.cpp" line="365"/>
+        <location filename="../datetime.cpp" line="372"/>
         <source>System Clock</source>
         <translation>Rendszeróra</translation>
     </message>
     <message>
-        <location filename="../datetime.cpp" line="373"/>
+        <location filename="../datetime.cpp" line="378"/>
         <source>The %1 time was transferred to the %2.</source>
         <translation>A %1 szerinti idő átmásolásra került a %2 értékébe.</translation>
     </message>
     <message>
-        <location filename="../datetime.cpp" line="376"/>
+        <location filename="../datetime.cpp" line="381"/>
         <source>The %1 time could not be transferred to the %2.</source>
         <translation>A %1 szerinti idő átmásolásra nem sikerült a %2 értékébe.</translation>
     </message>
     <message>
-        <location filename="../datetime.cpp" line="755"/>
+        <location filename="../datetime.cpp" line="760"/>
         <source>%1 License</source>
         <translation type="unfinished"></translation>
     </message>
@@ -227,12 +227,12 @@
         <translation type="vanished">Frissítés...</translation>
     </message>
     <message>
-        <location filename="../datetime.cpp" line="430"/>
+        <location filename="../datetime.cpp" line="435"/>
         <source>The system clock was updated successfully.</source>
         <translation>A rendszeróra frissítése sikeres.</translation>
     </message>
     <message>
-        <location filename="../datetime.cpp" line="433"/>
+        <location filename="../datetime.cpp" line="438"/>
         <source>The system clock could not be updated.</source>
         <translation>A rendszeróra frissítése nem sikerült.</translation>
     </message>
@@ -241,22 +241,22 @@
         <translation type="vanished">A listán szereplő egyik NTP kiszolgáló sincs engedélyezve.</translation>
     </message>
     <message>
-        <location filename="../datetime.cpp" line="748"/>
+        <location filename="../datetime.cpp" line="753"/>
         <source>About MX Date &amp; Time</source>
         <translation>Az MX dátum és idő alkalmazásról</translation>
     </message>
     <message>
-        <location filename="../datetime.cpp" line="750"/>
+        <location filename="../datetime.cpp" line="755"/>
         <source>Version: </source>
         <translation>Verzió:</translation>
     </message>
     <message>
-        <location filename="../datetime.cpp" line="751"/>
+        <location filename="../datetime.cpp" line="756"/>
         <source>GUI program for setting the time and date in MX Linux</source>
         <translation>Grafikus felület a dátum és idő beállítására az MX Linuxban</translation>
     </message>
     <message>
-        <location filename="../datetime.cpp" line="754"/>
+        <location filename="../datetime.cpp" line="759"/>
         <source>Copyright (c) MX Linux</source>
         <translation>Copyright (c) MX Linux</translation>
     </message>
@@ -277,7 +277,7 @@
         <translation type="vanished">&amp;Bezárás</translation>
     </message>
     <message>
-        <location filename="../datetime.cpp" line="759"/>
+        <location filename="../datetime.cpp" line="764"/>
         <source>MX Date &amp; Time Help</source>
         <translation>MX dátum és idő segítség</translation>
     </message>

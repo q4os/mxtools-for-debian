@@ -9,6 +9,7 @@ conf/51unattended-upgrades-origins                                usr/share/apt-
 icons/build/icons                                                 usr/share
 lib/actions/auto-update                                           usr/lib/apt-notifier/actions
 lib/actions/updater_action                                        usr/lib/apt-notifier/actions
+lib/actions/unattended_upgrades_log                               usr/lib/apt-notifier/actions
 lib/bin/updater_config                                            usr/lib/apt-notifier/bin
 lib/bin/updater_count                                             usr/lib/apt-notifier/bin
 lib/bin/updater_list                                              usr/lib/apt-notifier/bin
@@ -38,6 +39,8 @@ lib/policy/org.mxlinux.apt-notifier.full-upgrade_run.policy       usr/share/polk
 lib/policy/org.mxlinux.apt-notifier.reload.policy                 usr/share/polkit-1/actions
 lib/policy/org.mxlinux.apt-notifier.reload_run.policy             usr/share/polkit-1/actions
 lib/policy/org.mxlinux.apt-notifier.lslocks.policy                usr/share/polkit-1/actions
+lib/policy/org.mxlinux.apt-notifier.unattended_upgrades_dpkg_log_view.policy   usr/share/polkit-1/actions
+lib/policy/org.mxlinux.apt-notifier.unattended_upgrades_log_view.policy        usr/share/polkit-1/actions
 lib/shlib/updater_aptpref                                         usr/lib/apt-notifier/shlib
 lib/shlib/updater_shlib                                           usr/lib/apt-notifier/shlib
 license.html                                                      usr/share/doc/apt-notifier

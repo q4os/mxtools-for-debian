@@ -32,13 +32,12 @@ void chooseDialog::buildLocaleList()
 {
     QFile libFile("/usr/lib/mx-locale/locale.lib");
     QString locales = Cmd().getOut(R"(locale --all-locales)");
-    QStringList availableLocales = locales
-                                   .split(QRegularExpression(R"((\r\n)|(\n\r)|\r|\n)"), Qt::SkipEmptyParts)
-                                   .filter(QRegularExpression(R"([.](utf8|UTF-8))"))
-                                   .replaceInStrings(".utf8", ".UTF-8", Qt::CaseInsensitive);
+    QStringList availableLocales = locales.split(QRegularExpression(R"((\r\n)|(\n\r)|\r|\n)"), Qt::SkipEmptyParts)
+                                       .filter(QRegularExpression(R"([.](utf8|UTF-8))"))
+                                       .replaceInStrings(".utf8", ".UTF-8", Qt::CaseInsensitive);
 
     if (!libFile.open(QIODevice::ReadOnly)) {
-        QMessageBox::critical(nullptr, tr("Error"),
+        QMessageBox::critical(this, tr("Error"),
                               tr("Could not open %1", "message that a file could not be open, file takes place of %1")
                                   .arg(libFile.fileName()));
         return;
@@ -54,13 +53,13 @@ void chooseDialog::buildLocaleList()
     }
     libFile.close();
 
-    for (const auto &locale : availableLocales) {
+    for (const auto &locale : qAsConst(availableLocales)) {
         QString item = locale;
         item.remove(QRegularExpression("\\..*$"));
         QString line = locale;
         if (localeLib.contains(item)) {
             line = line.leftJustified(20, ' ');
-            line.append("\t" + localeLib.value(item));
+            line.append('\t' + localeLib.value(item));
         }
         ui->listWidgetAvailableLocales->addItem(line);
     }

@@ -1,3 +1,10 @@
+mx-datetime (24.4mx23) mx; urgency=medium
+
+  * Fix: Allow timezone selection within same localtime
+  * Fix: Always sync /etc/timezone with /etc/localtime
+
+ -- fehlix <fehlix@mxlinux.org>  Sun, 07 Apr 2024 19:44:40 -0400
+
 mx-datetime (24.3mx23) mx; urgency=medium
 
   * Update translations

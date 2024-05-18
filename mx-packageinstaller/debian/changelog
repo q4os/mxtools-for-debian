@@ -1,3 +1,9 @@
+mx-packageinstaller (24.4.01) mx; urgency=medium
+
+  * Ensure mxpitemp.list file is removed after installation and when MXPI exits
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 29 Apr 2024 13:34:45 -0400
+
 mx-packageinstaller (24.3.03) mx; urgency=medium
 
   * Update translations

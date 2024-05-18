@@ -88,11 +88,19 @@ main() {
     done
 
     LO_ADD_PKGS=()
+    LO_ADD_HM_PKGS=()
     LO_HELPER=()
     for p in "${CLP[@]}"; do
         [[ $p =~ libreoffice-*       ]] && LO_ADD_PKGS+=( $p )
         [[ $p == lo-main-helper      ]] && LO_HELPER+=( $p )
         [[ $p == lo-backports-helper ]] && LO_HELPER+=( $p )
+        [[ $p =~ hyphen-*            ]] && LO_ADD_HM_PKGS+=( $p )
+        [[ $p =~ mythes-*            ]] && LO_ADD_HM_PKGS+=( $p )
+        if [[ $p =~ libreoffice-l10n-*  ]]; then
+           lp="${p#libreoffice-l10n-}"
+           [ "$lp" = "pt" ] && lp="pt-pt"
+           LO_ADD_HM_PKGS+=( hyphen-$lp mythes-$lp )
+         fi
     done
 
     # default list of libreoffice installed packages
@@ -254,8 +262,15 @@ main() {
     [[ $MYDEBUG ]] && echo LO_BACKPORTS_VERSION  $(lo_backports_version)
     [[ $MYDEBUG ]] && echo APT_CFG=$APT_CFG
 
+    #LO_ADD_HM_PKGS - hyphen mythes packages
+    HMP=""
+    for hmp in "${LO_ADD_HM_PKGS[@]}"; do
+        HMP+=" ";
+        HMP+=$(apt-cache $APT_CFG search -n "^$hmp(-[a-z]+)?" | cut -d " " -f1);
+    done
+
     [[ $MYDEBUG ]] && set -xv
-    $SUDO apt-get $SIMULATE $APT_CFG install $REINSTALL $(apt-cache $APT_CFG madison "${LO_INSTALL_PACKAGES[@]}" | grep "${LO_CANDIDATE_VERSION#*:}"  | grep "$(debian_architecture)" | grep "$(debian_codename)"  | cut -d'|' -f1) ${LO_HELPER[*]}
+    $SUDO apt-get $SIMULATE $APT_CFG install $REINSTALL $(apt-cache $APT_CFG madison "${LO_INSTALL_PACKAGES[@]}" | grep "${LO_CANDIDATE_VERSION#*:}"  | grep "$(debian_architecture)" | grep "$(debian_codename)"  | cut -d'|' -f1) ${LO_HELPER[*]} $HMP
 
     #APT_OPTS="-o=Dpkg::Use-Pty=0 -o Acquire::http:Timeout=10 -o Acquire::https:Timeout=10 -o Acquire::ftp:Timeout=10"
     #$SUDO apt-get $APT_OPTS  update

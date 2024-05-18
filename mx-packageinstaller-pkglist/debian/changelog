@@ -1,3 +1,46 @@
+mx-packageinstaller-pkglist (24.05.04mx23) mx; urgency=medium
+
+  * update brave.pm
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 13 May 2024 21:22:35 -0400
+
+mx-packageinstaller-pkglist (24.05.03mx23) mx; urgency=medium
+
+  * update liq. 6.8 kernel
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 12 May 2024 12:53:30 -0400
+
+mx-packageinstaller-pkglist (24.05.02mx23) mx; urgency=medium
+
+  [ fehlix ]
+  * add hyphenation-patterns and mythes-thesaurus (synonym dictionary)
+    to libreoffice language-pack installer
+
+  [ Dolphin Oracle ]
+  * update 6.8 kernel
+  * 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 09 May 2024 16:09:58 -0400
+
+mx-packageinstaller-pkglist (24.05.01mx24) mx; urgency=medium
+
+  * add liquorix 6.8 kernel
+  * add catfish to xfce entries
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 01 May 2024 23:45:54 -0400
+
+mx-packageinstaller-pkglist (24.04.02mx23) mx; urgency=medium
+
+  * make xfce entries match official installes
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 13 Apr 2024 12:03:28 -0400
+
+mx-packageinstaller-pkglist (24.04.01mx23) mx; urgency=medium
+
+  * update liquorix 6.7.12-1
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 07 Apr 2024 14:26:23 -0400
+
 mx-packageinstaller-pkglist (24.03.08mx23) mx; urgency=medium
 
   * update liquorix 6.7.11-1

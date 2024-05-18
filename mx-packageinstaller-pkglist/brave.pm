@@ -66,24 +66,8 @@ Brave
 <screenshot> </screenshot>
 
 <preinstall>
-URL="https://brave-browser-apt-release.s3.brave.com"
-ASC="${URL}/brave-core.asc"
-TKR="/etc/apt/trusted.gpg.d/brave-browser-release.gpg"
-SRC="/etc/apt/sources.list.d/brave-browser-release.list"
-VER="$(sed -n  's/^VERSION_CODENAME=//p' /etc/os-release)"
-case $(cat /etc/debian_version) in
-8*) VER=jessie   ;;
-9*) VER=stretch  ;;
-10*) VER=buster   ;;
-11*) VER=bullseye ;;
-12*) VER=stable ;;
-*) VER=stable ;;
-esac
-
-DEB="deb [arch=amd64] ${URL}/ $VER main"
-
-curl -s $ASC | ( apt-key --keyring $TKR add - 2>/dev/null )
-echo "$DEB" | tee $SRC
+curl -fsSLo /usr/share/keyrings/brave-browser-archive-keyring.gpg https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
+echo "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg] https://brave-browser-apt-release.s3.brave.com/ stable main" | tee /etc/apt/sources.list.d/brave-browser-release.list
 apt-get update
 
 </preinstall>
@@ -93,11 +77,6 @@ brave-browser
 </install_package_names>
 
 <postinstall>
-# fix sandbox
-
-SYSCTL=/etc/sysctl.d/10-securized-yama-scope.conf
-echo "kernel.yama.ptrace_scope = 1" > $SYSCTL
-if [ -f $SYSCTL ]; then  sysctl --load $SYSCTL; fi
 
 </postinstall>
 
@@ -108,12 +87,6 @@ brave-keyring
 
 <postuninstall>
 
-apt-get -y remove --purge brave-browser brave-browser
-SRC=/etc/apt/sources.list.d/brave-browser-release.list
-TKR="/etc/apt/trusted.gpg.d/brave-browser-release.gpg"
-rm -f $SRC 2>/dev/null
-rm -f $TKR 2>/dev/null
-apt-get update
 </postuninstall>
 
 </app>

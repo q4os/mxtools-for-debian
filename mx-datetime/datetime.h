@@ -74,6 +74,7 @@ private:
     int dateDelta = 0;
     qint64 timeDelta = 0;
     int zoneDelta = 0;
+    bool zoneIdChanged = false;
     enum InitSystem { SystemV, OpenRC, SystemD } sysInit = SystemV;
     QList<QByteArray> zones;
     bool enabledNTP {};

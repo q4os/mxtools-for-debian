@@ -12,7 +12,7 @@ tmp/.*
 tmpdir
 dev/*
 cdrom/*
-live/*
+live
 media/*
 mnt/*
 sys/*
@@ -97,6 +97,7 @@ home/*/.cachetde/mozilla/firefox/*/cache2/*
 home/*/.cachetde/mozilla/firefox/*/thumbnails/*
 home/*/.cachetde/thumbnails/*
 home/*/.cache/vivaldi/Default/Cache/*
+home/*/.cache/xfce4/clipman/textsrc*
 home/*/.mozilla/firefox/*/Cache/*
 home/*/.mozilla/firefox/*/cache2/*
 home/*/.mozilla/seamonkey/*/Cache/*

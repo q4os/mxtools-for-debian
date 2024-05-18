@@ -19,6 +19,7 @@ signals:
     void done();
 
 private:
+    QString cmdStr;
     QString elevate;
     QString helper;
 };

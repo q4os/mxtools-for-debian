@@ -2,6 +2,10 @@
 
 # Root level functions requiring password for mx-packageinstaller
 
+cleanup_temp() {
+    rm /etc/apt/sources.list.d/mxpitemp.list
+}
+
 copy_log() {
     echo -e "-----------------------------------------------------------\nMXPI SESSION\n-----------------------------------------------------------\n" >> /var/log/mxpi.log.old
     cat /var/log/mxpi.log >> /var/log/mxpi.log.old
@@ -12,6 +16,8 @@ main() {
 case "$1" in 
     copy_log) 
         copy_log;;
+    cleanup_temp)
+        cleanup_temp;;
 esac
 }
 

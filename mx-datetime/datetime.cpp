@@ -228,6 +228,14 @@ void MXDateTime::on_comboTimeZone_currentIndexChanged(int index)
     const QDateTime &current = QDateTime::currentDateTime();
     zoneDelta = QTimeZone(comboTimeZone->itemData(index).toByteArray()).offsetFromUtc(current)
                 - QTimeZone::systemTimeZone().offsetFromUtc(current); // Delta = new - old
+    // Check IANA-zone id differ
+    const QByteArray &currentTimeZone = QTimeZone::systemTimeZoneId();
+    const QByteArray &selectedTimeZone = QTimeZone(comboTimeZone->itemData(index).toByteArray()).id();
+    if (QLatin1String(currentTimeZone) != QLatin1String(selectedTimeZone)) {
+        zoneIdChanged = true;
+    } else {
+        zoneIdChanged = false;
+    }
     update();                                                         // Make the change immediately visible
 }
 void MXDateTime::on_calendar_selectionChanged()
@@ -267,29 +275,26 @@ void MXDateTime::loadDateTime()
     index = comboTimeZone->findData(QVariant(zone));
     comboTimeZone->setCurrentIndex(index);
     zoneDelta = 0;
+    zoneIdChanged = false;
     comboTimeZone->blockSignals(false);
 }
 void MXDateTime::saveDateTime(const QDateTime &driftStart)
 {
     // Stop display updates while setting the system clock.
-    if (zoneDelta || dateDelta || timeDelta) {
+    if (zoneDelta || dateDelta || timeDelta || zoneIdChanged) {
         updater.stop();
     }
 
     // Set the time zone (if changed) before setting the time.
-    if (zoneDelta) {
+    if (zoneDelta || zoneIdChanged) {
         const QString newzone(comboTimeZone->currentData().toByteArray());
         if (sysInit == SystemD) {
-            executeAsRoot("timedatectl", {"set-timezone", newzone});
+            executeAsRoot("timedatectl", {"set-timezone", newzone, "&&", "echo", newzone, ">", "/etc/timezone"});
         } else {
-            executeAsRoot("ln", {"-nfs", "/usr/share/zoneinfo/" + newzone, "/etc/localtime"});
-            QFile file("/etc/timezone");
-            if (file.open(QFile::WriteOnly | QFile::Text)) {
-                file.write(newzone.toUtf8());
-                file.close();
-            }
+            executeAsRoot("ln", {"-nfs", "/usr/share/zoneinfo/" + newzone, "/etc/localtime",  "&&", "echo", newzone, ">", "/etc/timezone"});
         }
         zoneDelta = 0;
+        zoneIdChanged = false;
     }
 
     // Set the date and time if their controls have been altered.

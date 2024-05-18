@@ -147,45 +147,59 @@ main() {
 
     local old_comp=$(sqfs_comp_type $(readlink -f $SQFILE_FULL))
     vmsg "Previous compression type: $old_comp"
-    local lz4_factor gz_factor xz_factor
+    local lz4_factor gz_factor xz_factor zstd_factor
     case $old_comp in
-        xz) lz4_factor=167
-            gz_factor=121
-            xz_factor=100
+        xz)  lz4_factor=168
+              gz_factor=120
+              xz_factor=100
+            zstd_factor=113
             if [ $old_rat1000 -gt 345 ]; then
                 qmsg 'Strange, we detected xz compression but the ratio was $old_rat1000/1000 > .345'
             fi ;;
 
-      gzip) lz4_factor=138
-            gz_factor=100
-            xz_factor=83
+      gzip)  lz4_factor=140
+              gz_factor=100
+              xz_factor=84
+            zstd_factor=95
             if [ $old_rat1000 -lt 345 ]; then
                 qmsg 'Strange, we detected gzip compression but the ratio was $old_rat1000/1000 < .345'
             fi;;
 
-       lz4) lz4_factor=100
-            gz_factor=72
-            xz_factor=60
+       lz4)  lz4_factor=100
+              gz_factor=71
+              xz_factor=60
+            zstd_factor=67
+            ;;
+
+       zstd) lz4_factor=149
+              gz_factor=106
+              xz_factor=89
+            zstd_factor=100
             ;;
 
         # This is a little lame
-        *)  lz4_factor=$((52 * $fs_old_size / $sq_old_size))
-             gz_factor=$((37 * $fs_old_size / $sq_old_size))
-             xz_factor=$((31 * $fs_old_size / $sq_old_size)) ;;
+        *)   lz4_factor=$((52 * $fs_old_size / $sq_old_size))
+              gz_factor=$((37 * $fs_old_size / $sq_old_size))
+              xz_factor=$((31 * $fs_old_size / $sq_old_size))
+            zstd_factor=$((35 * $fs_old_size / $sq_old_size))
+            ;;
     esac
 
-    sq_new_size_est=$(( $fs_new_size * $sq_old_size / $fs_old_size))
-    gz_new_size_est=$((sq_new_size_est  *  gz_factor / 100))
-    xz_new_size_est=$((sq_new_size_est  *  xz_factor / 100))
-    lz4_new_size_est=$((sq_new_size_est * lz4_factor / 100))
+      sq_new_size_est=$(( $fs_new_size * $sq_old_size / $fs_old_size))
+      gz_new_size_est=$((sq_new_size_est * gz_factor / 100))
+      xz_new_size_est=$((sq_new_size_est * xz_factor / 100))
+     lz4_new_size_est=$((sq_new_size_est * lz4_factor / 100))
+    zstd_new_size_est=$((sq_new_size_est * zstd_factor / 100))
 
-    safe_estimate_gz=$(($gz_new_size_est + $SAFETY_MARGIN))
-    safe_estimate_xz=$(($xz_new_size_est + $SAFETY_MARGIN))
-    safe_estimate_lz4=$(($lz4_new_size_est + $SAFETY_MARGIN))
+      safe_estimate_gz=$(($gz_new_size_est   + $SAFETY_MARGIN))
+      safe_estimate_xz=$(($xz_new_size_est   + $SAFETY_MARGIN))
+     safe_estimate_lz4=$(($lz4_new_size_est  + $SAFETY_MARGIN))
+    safe_estimate_zstd=$(($zstd_new_size_est + $SAFETY_MARGIN))
 
-    boot_remain_gz=$(($boot_avail - $gz_new_size_est))
-    boot_remain_xz=$(($boot_avail - $xz_new_size_est))
-    boot_remain_lz4=$(($boot_avail - $lz4_new_size_est))
+      boot_remain_gz=$(($boot_avail - $gz_new_size_est))
+      boot_remain_xz=$(($boot_avail - $xz_new_size_est))
+     boot_remain_lz4=$(($boot_avail - $lz4_new_size_est))
+    boot_remain_zstd=$(($boot_avail - $zstd_new_size_est))
 
     exclude_size_est=$(( $exclude_size * $sq_old_size / $fs_old_size))
     main_text=(
@@ -194,6 +208,7 @@ main() {
         "$(fmt_size "estimated new size"   $lz4_new_size_est) (lz4)"
         "$(fmt_size "estimated new size"   $gz_new_size_est) (gzip)"
         "$(fmt_size "estimated new size"   $xz_new_size_est) (xz)"
+        "$(fmt_size "estimated new size"   $zstd_new_size_est) (zstd)"
         ""
         "boot device: [f]$BOOT_DEV[/f]"
         " mounted at: [f]$BOOT_MP[/f]"
@@ -204,6 +219,7 @@ main() {
         "$(fmt_size "est. remaining"    $boot_remain_lz4) (lz4)"
         "$(fmt_size "est. remaining"    $boot_remain_gz) (gzip)"
         "$(fmt_size "est. remaining"    $boot_remain_xz) (xz)"
+        "$(fmt_size "est. remaining"    $boot_remain_zstd) (zstd)"
     )
 
     for t in "${main_text[@]}"; do
@@ -262,17 +278,20 @@ main() {
     # Make sure the running kernel supports the compression type
     COMP_TYPE=gzip
     local   lz4_option="lz4 $(gt "(compresses MUCH faster, boots faster)")"
+    local  zstd_option="zstd $(gt "(good compression, fast boot)")"
     local  gzip_option="gzip $(gt "(compresses faster, boots faster)")"
     local    xz_option="xz $(gt "(compresses better)")"
 
+    local zstd_lab="$(pfgt "%s is not supported by this kernel" "[b]zstd[/b]")"
     local  lz4_lab="$(pfgt "%s is not supported by this kernel" "[b]lz4[/b]")"
     local gzip_lab="$(pfgt "%s will take less time" "[b]gzip[/b]")"
     local   xz_lab="$(pfgt "%s is not supported by this kernel" "[b]xz[/b]")"
 
-    local have_lz4=true  have_xz=true  k_config=/boot/config-$(uname -r)
+    local have_lz4=true  have_xz=true  have_zstd=true k_config=/boot/config-$(uname -r)
     if test -r $k_config; then
-        grep -q "^CONFIG_SQUASHFS_LZ4=y" $k_config || have_lz4=
-        grep -q "^CONFIG_SQUASHFS_XZ=y"  $k_config || have_xz=
+        grep -q "^CONFIG_SQUASHFS_LZ4=y"  $k_config || have_lz4=
+        grep -q "^CONFIG_SQUASHFS_XZ=y"   $k_config || have_xz=
+        grep -q "^CONFIG_SQUASHFS_ZSTD=y" $k_config || have_zstd=
     fi
 
     local option_list=$gzip_option
@@ -288,13 +307,19 @@ main() {
         COMP_TYPE=lz4
     fi
 
+    if [ "$have_zstd" ]; then
+        option_list="$zstd_option!$option_list"
+        zstd_lab="$(pfgt "%s will provide a good time/compression trade-off" "[b]zstd[/b]")"
+        COMP_TYPE=zstd
+    fi
+
     if [ "$have_xz" ]; then
         option_list="$option_list!$xz_option"
         xz_lab="$(pfgt "%s will result in a smaller file" "[b]xz[/b]")"
     fi
 
     if [ $boot_avail -ge $safe_estimate_gz ]; then
-        if [ -z "$have_lz4$have_xz" ]; then
+        if [ -z "$have_lz4" ] && [ -z "$have_xz" ] && [ -z "$have_zstd" ]; then
             info_box -c "$(pfgt "This kernel only supports %s compression" "[b]gzip[/b]")"
             COMP_TYPE=gzip
         else
@@ -302,17 +327,19 @@ main() {
                 "$TITLE" ""                                             \
                 "$(gt "Please choose the type of compression to use")"  \
                     "$lz4_lab" \
+                    "$zstd_lab" \
                     "$gzip_lab" \
                     "$xz_lab"
 
             #UI_RESULT=xz
             case $UI_RESULT in
+                zstd*) COMP_TYPE="zstd" ;;
                 gzip*) COMP_TYPE="gzip" ;;
                   xz*) COMP_TYPE="xz"   ;;
                  lz4*) COMP_TYPE="lz4"  ;;
             esac
         fi
-    elif [ $boot_avail -ge $safe_estimate_zx ]; then
+    elif [ $boot_avail -ge $safe_estimate_xz ]; then
         info_box -c "Must use %s compression due to size constraints" "[b]xz[/b]"
         COMP_TYPE="xz"
     else
@@ -501,14 +528,14 @@ Version_Info_End
     #    "" ""                                                                                  \
 
     if [ -e $LIVE_DIR/config/persist-save.conf \
-        -o -e $LIVE_DIR/config/persist-root ] && 
+        -o -e $LIVE_DIR/config/persist-root ] &&
         which persist-makefs &>/dev/null      ; then
 
 	    opts=
 	    [ "$SET_QUIET"  ] && opts=--quit
 	    [ "$SET_NO_LOG" ] && opts="$opts --nolog"
 	    [ "$SET_GUI"    ] || opts="$opts --cli"
-	
+
 	    if yes_no_box \
 	       "$(gt "Root persistence is enabled")"                \
 	       ""                                                   \
@@ -520,7 +547,7 @@ Version_Info_End
     LUKS_CLOSE="$CLOSE_LUKS"
     clean_up
     exit 0
-    
+
 }
 
 send_sig() {
@@ -593,10 +620,10 @@ finish_remaster() {
     local_clean_up && trap EXIT
 
     main_text=(
-        "$(fmt_size "linuxfs size"  $sq_new_size)"
-        "$(fmt_any  "elapsed time"  "$elapsed")"
-        "$(fmt_any  "processors"    $cpu_ratio)"
-        "$(fmt_any  "compression"   $COMP_TYPE)"
+        "$(fmt_size "linuxfs size" $sq_new_size)"
+        "$(fmt_any  "elapsed time" "$elapsed")"
+        "$(fmt_any  "processors"   $cpu_ratio)"
+        "$(fmt_any  "compression"  $COMP_TYPE)"
     )
 
     for t in "${main_text[@]}"; do
@@ -648,6 +675,7 @@ sqfs_comp_type() {
         3) echo lzo     ;;
         4) echo xz      ;;
         5) echo lz4     ;;
+        6) echo zstd    ;;
         *) echo unknown ;;
     esac
 }
@@ -661,6 +689,7 @@ sqfs_comp_type() {
 #  ║ 3 ║ lzo                ║ 4.1 and newer      ║
 #  ║ 4 ║ xz                 ║ 4.2 and newer      ║
 #  ║ 5 ║ lz4                ║ 4.3 and newer      ║
+#  ║ 6 ║ zstd               ║ 4.4 and newer      ║
 #  ╚═══╩════════════════════╩════════════════════╝
 
 to_mins_secs() {

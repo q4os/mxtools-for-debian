@@ -27,6 +27,7 @@ QString Cmd::getOutAsRoot(const QString &cmd, bool quiet)
 
 bool Cmd::run(const QString &cmd, bool quiet, bool asRoot)
 {
+    cmdStr = cmd;
     if (state() != QProcess::NotRunning) {
         qDebug() << "Process already running:" << program() << arguments();
         return false;

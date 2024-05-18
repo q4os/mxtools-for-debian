@@ -1,3 +1,36 @@
+mx-docs (20240411) mx; urgency=medium
+
+  * divide up mx-docs into language specific packages
+  * allows for removal of any or all languages
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 10 May 2024 22:27:17 -0400
+
+mx-docs (20240410) mx; urgency=medium
+
+  * Reformatted and revised Japanese version
+  * Detailed changelog: https://forum.mxlinux.org/viewtopic.php?t=80375
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 05 May 2024 14:02:19 -0400
+
+mx-docs (20240409) mx; urgency=medium
+
+  * replaced en pdf with correct version
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 07 Apr 2024 07:24:41 -0400
+
+mx-docs (20240408) mx; urgency=medium
+
+  * updated images 
+  * added new Tools
+  * reviewed and updated text
+  * added various small additions and corrections
+  * added cursor size to Accessibility
+  * updated PDFs of mxum
+  * created new experimental ar version of mxum (partial)
+  * created experimental ar translation of FAQ
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 05 Apr 2024 12:20:18 -0400
+
 mx-docs (20240117) mx; urgency=medium
 
   * updated MX-Tools

@@ -143,7 +143,8 @@ void MainWindow::aboutClicked()
                        "<p align=\"center\"><b><h2>" + this->windowTitle() + "</h2></b></p><p align=\"center\">"
                            + tr("Version: ") + VERSION + "</p><p align=\"center\"><h3>"
                            + tr("Program for changing language and locale categories")
-                           + "</h3></p><p align=\"center\"><a href=\"http://mxlinux.org\">http://mxlinux.org</a><br "
+                           + "</h3></p><p align=\"center\"><a "
+                             "href=\"http://mxlinux.org\">http://mxlinux.org</a><br "
                              "/></p><p align=\"center\">"
                            + tr("Copyright (c) MX Linux") + "<br /><br /></p>",
                        "/usr/share/doc/mx-locale/license.html", tr("%1 License").arg(this->windowTitle()), true);
@@ -250,6 +251,7 @@ void MainWindow::setConnections()
     connect(ui->pushResetSubvar, &QPushButton::clicked, this, &MainWindow::resetSubvariables);
     connect(ui->tabWidget, &QTabWidget::currentChanged, this, &MainWindow::tabWidgetCurrentChanged);
     connect(ui->textSearch, &QLineEdit::textChanged, this, &MainWindow::textSearch_textChanged);
+    connect(ui->pushRemoveManuals, &QPushButton::clicked, this, &MainWindow::removeManuals);
 }
 
 void MainWindow::tabWidgetCurrentChanged()
@@ -302,8 +304,8 @@ void MainWindow::listItemChanged(QListWidgetItem *item)
         if (item->text().section(' ', 0, 0) == getCurrentLang()
             || item->text().section(' ', 0, 0) == getCurrentSessionLang()) {
             QMessageBox::warning(this, tr("Error"),
-                                 tr("Can't disable locale in use",
-                                    "message that the chosen locale cannot be disabled because it is in active usage"));
+                                 tr("Can't disable locale in use", "message that the chosen locale cannot be "
+                                                                   "disabled because it is in active usage"));
             onFilterChanged(ui->comboFilter->currentText());
             return;
         }
@@ -316,8 +318,9 @@ void MainWindow::listItemChanged(QListWidgetItem *item)
         if (!exists) {
             Cmd().runAsRoot("echo " + text + " >>/etc/locale.gen");
         } else {
-            Cmd().runAsRoot(
-                QString("sed -i -e 's/^[[:space:]]*//; 0,/%1/{//s/.*/%1/};' -e '/#.*%1/d' /etc/locale.gen").arg(text));
+            Cmd().runAsRoot(QString("sed -i -e 's/^[[:space:]]*//; 0,/%1/{//s/.*/%1/};' -e "
+                                    "'/#.*%1/d' /etc/locale.gen")
+                                .arg(text));
         }
         ++countEnabled;
     } else {
@@ -393,12 +396,13 @@ while read LINE; do printf "$LINE\n"; done)",
 void MainWindow::localeGen()
 {
     ui->tabWidget->setDisabled(true);
-    // Total number of output lines = no_items * 2 (for locale + locale... done) + 2 for header and footer
-    QProgressDialog prog("Updating locales, please wait", nullptr, 0, countEnabled * 2 + 2);
-    cmd = new Cmd(this);
-    connect(cmd, &Cmd::outputAvailable, this, [&prog] { prog.setValue(prog.value() + 1); });
+    // Total number of output lines = no_items * 2 (for locale + locale... done) +
+    // 2 for header and footer
+    QProgressDialog prog(tr("Updating locales, please wait"), nullptr, 0, countEnabled * 2 + 2);
+    Cmd cmd;
+    connect(&cmd, &Cmd::outputAvailable, this, [&prog] { prog.setValue(prog.value() + 1); });
     prog.show();
-    cmd->runAsRoot("locale-gen");
+    cmd.runAsRoot("locale-gen");
     localeGenChanged = false;
     ui->tabWidget->setDisabled(false);
 }
@@ -417,10 +421,34 @@ void MainWindow::readLocaleFile(QFile &file, const QStringList &enabledLocale)
                 item->setCheckState(Qt::Unchecked);
             }
             line = line.leftJustified(20, ' ');
-            item->setText(line + "\t" + hashLocale.value(line.section(QRegularExpression(R"(\s|\.)"), 0, 0)));
+            item->setText(line + '\t' + hashLocale.value(line.section(QRegularExpression(R"(\s|\.)"), 0, 0)));
             ui->listWidget->addItem(item);
         }
     }
+}
+
+void MainWindow::removeManuals()
+{
+    QString lang = ui->buttonLang->text().section('.', 0, 0).section('_', 0, 0);
+    if (lang.isEmpty()) {
+        return;
+    }
+
+    QString exclusionPattern
+        = QString("mx-(docs|faq)-(en|common%1)").arg(lang == "en" || lang == "C" ? "" : QString("|%1").arg(lang));
+    QString listCmd = QString("dpkg-query -W 'mx-docs-*' 'mx-faq-*' | grep -vE '%1'").arg(exclusionPattern);
+    QString countCmd = QString("echo $(%1 | wc -l)").arg(listCmd);
+
+    Cmd cmd;
+    auto count = cmd.getOut(countCmd, true).trimmed().toInt();
+    QString purgeCmd = QString("%1 | awk '{print $1}' | xargs apt-get purge -y").arg(listCmd);
+
+    ui->tabWidget->setDisabled(true);
+    QProgressDialog prog(tr("Removing packages, please wait"), nullptr, 0, count);
+    connect(&cmd, &Cmd::outputAvailable, this, [&prog](const QString &) { prog.setValue(prog.value() + 1); });
+    prog.show();
+    cmd.runAsRoot(purgeCmd, true);
+    ui->tabWidget->setDisabled(false);
 }
 
 void MainWindow::resetLocaleGen()

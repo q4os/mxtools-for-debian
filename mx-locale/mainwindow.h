@@ -81,7 +81,6 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
-    Cmd *cmd;
     QButtonGroup *buttonGroup;
     QHash<QString, QString> hashLocale;
     bool localeGenChanged {false};
@@ -96,6 +95,7 @@ private:
     void displayLocalesGen();
     void localeGen();
     void readLocaleFile(QFile &file, const QStringList &enabledLocale);
+    void removeManuals();
     void resetLocaleGen();
     void setButtons();
     void setConnections();

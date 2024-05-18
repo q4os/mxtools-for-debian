@@ -24,6 +24,7 @@ Xfce (MX Linux)
 </preinstall>
 
 <install_package_names>
+catfish
 desktop-defaults-mx-xfce-desktop
 desktop-defaults-mx-xfce-system
 mx23-artwork
@@ -83,6 +84,7 @@ mx-comfort-themes
 </postinstall>
 
 <uninstall_package_names>
+catfish
 desktop-defaults-mx-xfce-desktop
 desktop-defaults-mx-xfce-system
 xfce-superkey-mx

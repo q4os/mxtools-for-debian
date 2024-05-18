@@ -24,6 +24,7 @@ armsixtyfour
 </preinstall>
 
 <install_package_names>
+catfish
 desktop-defaults-mx-xfce-desktop-rpi
 desktop-defaults-mx-xfce-system
 mx23-artwork
@@ -40,8 +41,6 @@ xfce4-fsguard-plugin
 xfce4-genmon-plugin
 xfce4-mount-plugin
 xfce4-netload-plugin
-xfce4-notes
-xfce4-notes-plugin
 xfce4-notifyd
 xfce4-panel
 xfce4-places-plugin
@@ -68,7 +67,6 @@ xfconf
 xfdesktop4
 xfdesktop4-data
 thunar-archive-plugin
-thunar-shares-plugin
 thunar-modified-desktop-file
 thunar-data
 thunar-gtkhash
@@ -83,6 +81,7 @@ mx-comfort-themes
 </postinstall>
 
 <uninstall_package_names>
+catfish
 desktop-defaults-mx-xfce-desktop-rpi
 desktop-defaults-mx-xfce-system
 xfce-superkey-mx
@@ -98,8 +97,6 @@ xfce4-fsguard-plugin
 xfce4-genmon-plugin
 xfce4-mount-plugin
 xfce4-netload-plugin
-xfce4-notes
-xfce4-notes-plugin
 xfce4-notifyd
 xfce4-panel
 xfce4-places-plugin

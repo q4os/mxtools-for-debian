@@ -1,1 +1,1 @@
-const QString VERSION {"24.3mx23"};
+const QString VERSION {"24.4mx23"};

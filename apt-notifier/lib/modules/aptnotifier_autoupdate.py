@@ -143,7 +143,7 @@ class UnattendedUpgrade:
         yad = yad.splitlines()
         yad = [ x.strip().format(**self.__tokens) for x in yad ]
 
-        cmd  = "apt-notifier_unattended_upgrades_log_view"
+        cmd  = "/usr/lib/apt-notifier/actions/unattended_upgrades_log"
         pipe1 = Popen(cmd, stdout=PIPE, text=True)
         pipe2 = Popen(yad, stdin=pipe1.stdout, stdout=PIPE, stderr=PIPE, text=True)
         pipe1.stdout.close()  # if pipe2 exits before pipe1, send SIGPIPE to pipe1 to close
@@ -173,7 +173,7 @@ class UnattendedUpgrade:
         yad = yad.splitlines()
         yad = [ x.strip().format(**self.__tokens) for x in yad ]
 
-        cmd  = "apt-notifier_unattended_upgrades_dpkg_log_view"
+        cmd  = "/usr/lib/apt-notifier/actions/unattended_upgrades_dpkg_log"
         pipe1 = Popen(cmd, stdout=PIPE, text=True)
         pipe2 = Popen(yad, stdin=pipe1.stdout, stdout=PIPE, stderr=PIPE, text=True)
         pipe1.stdout.close()  # if pipe2 exits before pipe1, send SIGPIPE to pipe1 to close

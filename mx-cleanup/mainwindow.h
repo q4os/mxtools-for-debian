@@ -48,6 +48,7 @@ public:
     void saveSettings();
     void setConnections();
     void setup();
+    void startPreferredApp(const QStringList &apps);
 
 private slots:
     void pushAbout_clicked();
@@ -55,12 +56,12 @@ private slots:
     void pushHelp_clicked();
     void pushKernel_clicked();
     void pushRTLremove_clicked();
-    static void pushUsageAnalyzer_clicked();
+    void pushUsageAnalyzer_clicked();
 
 private:
     Ui::MainWindow *ui;
     QSettings settings;
     QString current_user;
-    QString cmdOut(const QString &cmd, bool asRoot = false);
-    QString cmdOutAsRoot(const QString &cmd);
+    QString cmdOut(const QString &cmd, bool asRoot = false, bool quiet = false);
+    QString cmdOutAsRoot(const QString &cmd, bool quiet = false);
 };

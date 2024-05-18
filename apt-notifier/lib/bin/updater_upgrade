@@ -132,6 +132,14 @@ else
        touch /var/lib/apt/periodic/update-stamp
     fi
     echo apt $UpgradeType
+	if [ "$UpgradeType" = "upgrade" ]
+	  then
+	    AptPref_Opts+=" -o APT::Get::Upgrade-Allow-New=false"
+	    AptPref_Opts+=" -o Binary::apt::APT::Get::Upgrade-Allow-New=false"
+	  else
+	    AptPref_Opts+=" -o APT::Get::Upgrade-Allow-New=true"
+	    AptPref_Opts+=" -o Binary::apt::APT::Get::Upgrade-Allow-New=true"
+	fi
     apt --verbose-versions $AssumeYes $AptPref_Opts $UpgradeType
 fi
 

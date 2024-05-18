@@ -9,7 +9,6 @@
 # this bash scripted is meant to be "sourced"
 # at /usr/lib/apt-notifier/lib/updater_shlib
 
-
 press_any_key_stop_auto_close() {
 
     local default_timeout=10
@@ -40,6 +39,10 @@ press_any_key_stop_auto_close() {
     local cntd_line
     local cntd_space_line
 
+    local break_line="false"
+    (( count_len + 3 + ${#anykey_to_stop} + 20 >= cols )) && break_line="true"
+
+    if $break_line; then  echo "$anykey_to_stop"; fi
     i=0
     (( count_timeout < 1 )) &&  count_timeout=1
     while (( i++ <  count_timeout+1)); do
@@ -47,7 +50,12 @@ press_any_key_stop_auto_close() {
         (( spc_len = count_len - count_str_len ))
         cntd_line="${count_line:0:$count_str_len}";
         cntd_done_line="${done_line:0:$spc_len}"
-        printf $'\r'"%${length_timeout}i ${cntd_line}${cntd_done_line}: $anykey_to_stop" $count_down;
+        if $break_line; then
+           printf $'\r'"${cntd_line}${cntd_done_line}: %${length_timeout}i" $count_down;
+        else
+           printf $'\r'"%${length_timeout}i ${cntd_line}${cntd_done_line}: $anykey_to_stop" $count_down;
+        fi
+
         (( count_down = count_timeout-i))
         read -sr -t1 -n1 && break;
     done && printf $'\r'"$space_line" || return 0
@@ -63,10 +71,9 @@ press_any_key_to_close() {
     cls_msg=${cls_msg^}
     # add ellipses
     cls_msg="${cls_msg^}..."
-    read -rsn 1 -p $'\r'"$cls_msg" -t 999999999
+    read -rsn 1 -p $'\r'"$cls_msg" -t 999999
     return 0
 }
-
 
 translate() {
     local text="$1"
@@ -110,7 +117,7 @@ updater_show() {
     if ((DW >= 1600)); then
         TW=$(( 1600 * 3 / 5 ))
         TH=$((  900 * 2 / 3 ))
-    fi 
+    fi
     read -r XOFF YOFF < <(xrandr | sed -n -r '/connected primary/{/.*[0-9]+x[0-9]+\+([0-9]+)\+([0-9]+).*/{s::\1 \2:p;q}}')
 
     : ${XOFF:=0}
@@ -118,7 +125,6 @@ updater_show() {
 
     TX=$(((DW-TW)/2 + XOFF))
     TY=$(((DH-TH)/2 + YOFF))
-
 
     XSEARCH="xdotool sleep 0.2 search --onlyvisible --name '$T'"
     XSIZE="windowsize $TW $TH"
@@ -128,23 +134,41 @@ updater_show() {
 
     XDO="$XSEARCH $XSIZE $XMOVE $XCLASS"
 
-
     CW=10 # char width - rough default
     CH=20 # char hight - rough default
 
-    #G="--geometry=$(($TW/$CW))x$(($TH/$CH))+$TX+$TY"
     G="$(($TW/$CW))x$(($TH/$CH))+$TX+$TY"
 
     SLEEP=0.3 # sleep
 
-    C='bash -c "echo '"$msg"'; sleep 0.5;'" $XDO;"' '"$RUN"'"'
-    K='bash -c "echo '"$msg"'; sleep 1; '"$RUN"'"'
+    C='bash -c "test -n '"'${msg}'"' && echo '"'$msg'"'; sleep 0.5;'" $XDO;"' '"${cmd}"'"'
+    K='bash -c "test -n '"'${msg}'"' && echo '"'$msg'"'; sleep 1; '"${cmd}"'"'
 
+    XTE=$(readlink -e /usr/bin/x-terminal-emulator)
 
-    case $(readlink -e /usr/bin/x-terminal-emulator) in
+    # check whether the installed qterminal version is up-to-date enough
+    if [ -z "${XTE##*qterminal*}" ]; then
+       CUR_QTV=$(dpkg-query -f '${Version}' -W qterminal 2>/dev/null)
+       MIN_QTV="1.2.0"
+       # compare versions
+       if dpkg --compare-versions "$CUR_QTV" lt  "$MIN_QTV"; then
+            if [ -x /usr/bin/xfce4-terminal ]; then
+                # use xfce4-terminal if installed
+                XTE=usr/bin/xfce4-terminal
+            else
+                # use best alternative
+                XTE=$(update-alternatives --display x-terminal-emulator | \
+                    grep '^/' | cut -d ' ' -f4,1 |  grep -v qterminal | \
+                    sort -k2nr  |  head -1 | cut -d ' ' -f1)
+            fi
+       fi
+    fi
 
-      *gnome-terminal.wrapper)
-            gnome-terminal.wrapper $G -T "$T" -e "$C"
+    case "$XTE" in
+
+      *gnome-terminal.wrapper|*gnome-terminal)
+            CMD="test -n '${msg}' && echo '$msg'; sleep 0.5; $XDO; $cmd"
+            gnome-terminal --wait --hide-menubar --geometry "$G" --title "$T" -- bash -c "$CMD"
             ;;
       *konsole)
             if pgrep -x plasmashell >/dev/null; then
@@ -154,20 +178,36 @@ updater_show() {
                sleep 5
             fi
             ;;
+      *lxterminal)
+            lxterminal --no-remote -T "$T" -e "$C"
+            ;;
+      *mate-terminal|*mate-terminal.wrapper)
+            mate-terminal --hide-menubar --geometry="$G" --class="${CLASS_NAME}" --role="${CLASS_NAME}" --title="$T" --sm-client-disable --disable-factory  -- sh -c "$C" 2>&1
+            ;;
+      *qterminal)
+               qterminal -qwindowgeometry "${TW}x${TH}+$TX+$TY" -qwindowicon "$icon" -qwindowtitle "$T" -e "$C"
+            ;;
       *roxterm)
             roxterm --hide-menubar --separate "--geometry=$G" -T "$T" -e "$C" 2>/dev/null
             ;;
-      *urxvt)
-            urxvt  -geometry "$G" -icon "$icon" -title "$T"  -e sh -c "echo '$msg'; sleep 1; $XDO; $RUN"
+      *terminator)
+            terminator --no-dbus --icon=""$icon -T "$T" -e "$C" 2>/dev/null
             ;;
-      *xfce4-terminal.wrapper | *xfce4-terminal)
-
-            xfce4-terminal --disable-server --hide-menubar  "--geometry=$G"  "--icon=$icon"  -T "$T" -e "$C" 2>&1 | grep -v 'SESSION_MANAGER environment variable not defined'
+      *urxvt)
+            urxvt  -geometry "$G" -icon "$icon" -title "$T"  -e sh -c "echo '$msg'; sleep 1; $XDO; ${cmd}"
             ;;
       *xterm)
             xterm  -fa monaco -fs 12 -bg black -fg white  -xrm 'XTerm.vt100.allowTitleOps: false' -T "$T"  -e "$C"
             ;;
-      *) x-terminal-emulator -T "$T" -e "$C"
+      *zutty)
+            export EGL_LOG_LEVEL=fatal
+            zutty -title "$T" -geometry "$(($TW/$CW))x$(($TH/$CH))" -e sh -c "$C"
+            ;;
+      *)    if [ -x /usr/bin/xfce4-terminal ]; then
+                xfce4-terminal --disable-server --hide-menubar --geometry="$G"  --icon="$icon"  -T "$T" -e "$C" 2>&1 | grep -v 'SESSION_MANAGER environment variable not defined'
+            else
+                x-terminal-emulator -T "$T" -e "$C"
+            fi
             ;;
     esac
 }

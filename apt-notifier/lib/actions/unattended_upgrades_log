@@ -1,0 +1,12 @@
+#!/bin/bash
+
+ME=$0
+
+LOG_VIEW=/usr/bin/apt-notifier_"${ME##*/}"_view
+
+# switch to root
+(( $(id -u) )) && exec pkexec "$LOG_VIEW" 
+
+$LOG_VIEW
+
+exit 0

@@ -28,7 +28,8 @@ void displayDoc(const QString &url, const QString &title, bool runned_as_root)
     }
 }
 
-void displayAboutMsgBox(const QString &title, const QString &message, const QString &licence_url, const QString &license_title, bool runned_as_root)
+void displayAboutMsgBox(const QString &title, const QString &message, const QString &licence_url,
+                        const QString &license_title, bool runned_as_root)
 {
     QMessageBox msgBox(QMessageBox::NoIcon, title, message);
     QPushButton *btnLicense = msgBox.addButton(QObject::tr("License"), QMessageBox::HelpRole);

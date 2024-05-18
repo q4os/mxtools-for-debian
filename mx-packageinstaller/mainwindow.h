@@ -203,7 +203,7 @@ private:
     QString arch;
     QString FPuser;
     QString ver_name;
-    QString temp_list {"/etc/apt/sources.list.d/mxpm-temp.list"};
+    QString temp_list {"/etc/apt/sources.list.d/mxpitemp.list"};
     QStringList change_list;
     QStringList flatpaks;
     QStringList flatpaks_apps;

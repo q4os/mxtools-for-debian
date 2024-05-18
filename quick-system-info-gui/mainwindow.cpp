@@ -403,7 +403,7 @@ QByteArray MainWindow::readReport(int row)
                 if (!file.open(QIODevice::ReadOnly)) throw file.errorString();
                 output = file.readAll().trimmed();
                 file.close();
-            } else if (qfi.isFile()) {
+            } else {
                 execrc = run("pkexec", {"/usr/lib/quick-system-info-gui/qsig-lib",
                     "readadminfile", qfi.absoluteFilePath()}, &output);
             }
