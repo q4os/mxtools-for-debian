@@ -18,8 +18,8 @@
     <name>MainWindow</name>
     <message>
         <location filename="../mainwindow.ui" line="14"/>
-        <location filename="../mainwindow.cpp" line="170"/>
-        <location filename="../mainwindow.cpp" line="468"/>
+        <location filename="../mainwindow.cpp" line="173"/>
+        <location filename="../mainwindow.cpp" line="450"/>
         <source>MX Snapshot</source>
         <translation>MX Instantané - MX Snapshot</translation>
     </message>
@@ -265,37 +265,37 @@
         <translation>Alt+H</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="176"/>
+        <location filename="../mainwindow.cpp" line="179"/>
         <source>fastest, worst compression</source>
         <translation>compression la plus rapide et la plus mauvaise</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="176"/>
+        <location filename="../mainwindow.cpp" line="179"/>
         <source>fast, worse compression</source>
         <translation>compression rapide et moins bonne</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="177"/>
+        <location filename="../mainwindow.cpp" line="180"/>
         <source>slow, better compression</source>
         <translation>compression lente et bonne</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="177"/>
+        <location filename="../mainwindow.cpp" line="180"/>
         <source>best compromise</source>
         <translation>meilleur compromis</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="178"/>
+        <location filename="../mainwindow.cpp" line="181"/>
         <source>slowest, best compression</source>
         <translation>compression la plus lente et la meilleure</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="207"/>
+        <location filename="../mainwindow.cpp" line="210"/>
         <source>Free space on %1, where snapshot folder is placed: </source>
         <translation>Espace libre disponible dans %1 où sera mis le dossier de l’instantané : </translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="210"/>
+        <location filename="../mainwindow.cpp" line="213"/>
         <source>The free space should be sufficient to hold the compressed data from / and /home
 
       If necessary, you can create more available space by removing previous snapshots and saved copies: %1 snapshots are taking up %2 of disk space.</source>
@@ -304,8 +304,8 @@
       Si nécessaire, vous pouvez créer plus d’espace disponible en supprimant les instantanés précédents et les copies sauvegardées&#xa0;: les instantanés « snapshots » %1 occupent %2 de l’espace disque.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="222"/>
-        <location filename="../mainwindow.cpp" line="223"/>
+        <location filename="../mainwindow.cpp" line="225"/>
+        <location filename="../mainwindow.cpp" line="226"/>
         <source>Installing </source>
         <translation>Installation </translation>
     </message>
@@ -393,72 +393,72 @@
         <translation>Impossible de créer un répertoire temporaire. </translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="424"/>
+        <location filename="../mainwindow.cpp" line="406"/>
         <source>Output</source>
         <translation>Résultats</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="437"/>
+        <location filename="../mainwindow.cpp" line="419"/>
         <source>Edit Boot Menu</source>
         <translation>Éditer le menu de démarrage</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="438"/>
+        <location filename="../mainwindow.cpp" line="420"/>
         <source>The program will now pause to allow you to edit any files in the work directory. Select Yes to edit the boot menu or select No to bypass this step and continue creating the snapshot.</source>
         <translation>Le programme va se mettre en pause afin de vous permettre d’éditer les fichiers du répertoire de travail. Veuillez choisir Yes pour éditer le menu de démarrage, ou No pour passer cette étape et continuer la création de l’instantané.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="451"/>
+        <location filename="../mainwindow.cpp" line="433"/>
         <source>Close</source>
         <translation>Quitter</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="459"/>
+        <location filename="../mainwindow.cpp" line="441"/>
         <source>Select kernel</source>
         <translation>Choisir le noyau</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="544"/>
+        <location filename="../mainwindow.cpp" line="526"/>
         <source>About %1</source>
         <translation>À propos %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="546"/>
+        <location filename="../mainwindow.cpp" line="528"/>
         <source>Version: </source>
         <translation>Version : </translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="547"/>
+        <location filename="../mainwindow.cpp" line="529"/>
         <source>Program for creating a live-CD from the running system for MX Linux</source>
         <translation>Programme créant un instantané du système MX Linux en fonctionnement sous forme d’un live CD.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="549"/>
+        <location filename="../mainwindow.cpp" line="531"/>
         <source>Copyright (c) MX Linux</source>
         <translation>Copyright (c) MX Linux</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="551"/>
+        <location filename="../mainwindow.cpp" line="533"/>
         <source>%1 License</source>
         <translation>%1 Licence</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="565"/>
+        <location filename="../mainwindow.cpp" line="547"/>
         <source>%1 Help</source>
         <translation>%1 Aide</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="570"/>
+        <location filename="../mainwindow.cpp" line="552"/>
         <source>Select Snapshot Directory</source>
         <translation>Choisissez un répertoire pour l’instantané</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="591"/>
+        <location filename="../mainwindow.cpp" line="573"/>
         <source>Confirmation</source>
         <translation>Confirmation</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="591"/>
+        <location filename="../mainwindow.cpp" line="573"/>
         <source>Are you sure you want to quit the application?</source>
         <translation>Êtes-vous sûr de vouloir quitter l’application&#xa0;?</translation>
     </message>
@@ -471,231 +471,216 @@
         <translation>Le programme mettra en pause la compilation et ouvrira le menu de démarrage dans votre éditeur de texte.</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="73"/>
+        <location filename="../main.cpp" line="70"/>
         <source>Tool used for creating a live-CD from the running system</source>
         <translation>Outil de création d’un live-CD à partir d’un système en cours de fonctionnement</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="77"/>
+        <location filename="../main.cpp" line="74"/>
         <source>Use CLI only</source>
         <translation>Utiliser seulement CLI</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="79"/>
+        <location filename="../main.cpp" line="77"/>
         <source>Number of CPU cores to be used.</source>
         <translation>Nombre de cœurs du processeur devant être utilisés.</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="79"/>
-        <location filename="../main.cpp" line="108"/>
         <source>number</source>
-        <translation>nombre</translation>
+        <translation type="vanished">nombre</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="80"/>
+        <location filename="../main.cpp" line="78"/>
         <source>Output directory</source>
         <translation>Répertoire de destination</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="80"/>
-        <location filename="../main.cpp" line="109"/>
         <source>path</source>
-        <translation>chemin</translation>
+        <translation type="vanished">chemin</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="81"/>
+        <location filename="../main.cpp" line="79"/>
         <source>Output filename</source>
         <translation>Nom du fichier de destination</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="81"/>
         <source>name</source>
-        <translation>nom</translation>
+        <translation type="vanished">nom</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="83"/>
+        <location filename="../main.cpp" line="81"/>
         <source>Name a different kernel to use other than the default running kernel, use format returned by &apos;uname -r&apos;</source>
         <translation>Désigne un noyau différent devant être utilisé à la place du noyau fonctionnant par défaut, en utilisant le format renvoyé par « uname -r »</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="85"/>
+        <location filename="../main.cpp" line="83"/>
         <source>Or the full path: %1</source>
         <translation>Ou le chemin entier : %1</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="86"/>
         <source>version, or path</source>
-        <translation>version ou chemin</translation>
+        <translation type="vanished">version ou chemin</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="88"/>
+        <location filename="../main.cpp" line="86"/>
         <source>Compression level options.</source>
         <translation>Options du niveau de compression.</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="89"/>
+        <location filename="../main.cpp" line="87"/>
         <source>Use quotes: &quot;-Xcompression-level &lt;level&gt;&quot;, or &quot;-Xalgorithm &lt;algorithm&gt;&quot;, or &quot;-Xhc&quot;, see mksquashfs man page</source>
         <translation>Utilisez les expressions&#xa0;: « -Xcompression-level &lt;level&gt; » ou « -Xalgorithm &lt;algorithm&gt; », ou « -Xhc », voir mksquashfs man page</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="91"/>
         <source>&quot;option&quot;</source>
-        <translation>« option »</translation>
+        <translation type="vanished">« option »</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="94"/>
+        <location filename="../main.cpp" line="91"/>
         <source>Create a monthly snapshot, add &apos;Month&apos; name in the ISO name, skip used space calculation</source>
         <translation>Crée un instantané mensuel, ajoute le nom du « Mois » au nom de l’ISO, ignore le calcul de l’espace utilisé</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="95"/>
+        <location filename="../main.cpp" line="92"/>
         <source>This option sets reset-accounts and compression to defaults, arguments changing those items will be ignored</source>
         <translation>Cette option définit les comptes de réinitialisation et la compression par défaut, les arguments modifiant ces éléments seront ignorés</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="98"/>
+        <location filename="../main.cpp" line="95"/>
         <source>Don&apos;t calculate checksums for resulting ISO file</source>
         <translation>Ne pas calculer les sommes de contrôle pour le fichier ISO obtenu</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="100"/>
+        <location filename="../main.cpp" line="96"/>
         <source>Skip calculating free space to see if the resulting ISO will fit</source>
         <translation>Ne pas calculer l’espace libre pour voir si l’ISO qui en résulte tiendra dans l’espace.</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="102"/>
+        <location filename="../main.cpp" line="97"/>
         <source>Option to fix issue with calculating checksums on preempt_rt kernels</source>
         <translation>Option permettant de régler les problèmes lors du calcul de la somme de contrôle des noyaux preempt_rt</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="103"/>
+        <location filename="../main.cpp" line="98"/>
         <source>Resetting accounts (for distribution to others)</source>
         <translation>Réinitialisation des comptes (pour distribuer à d’autres personnes)</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="104"/>
+        <location filename="../main.cpp" line="99"/>
         <source>Calculate checksums for resulting ISO file</source>
         <translation>Calculer les sommes de contrôle pour le fichier ISO obtenu</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="106"/>
+        <location filename="../main.cpp" line="101"/>
         <source>Throttle the I/O input rate by the given percentage. This can be used to reduce the I/O and CPU consumption of Mksquashfs.</source>
         <translation>Réduire le taux d’entrée des I/O - Entrées/Sorties - selon le pourcentage donné. Cela peut être utilisé pour réduire les I/O et la consommation du CPU de Mksquashfs.</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="109"/>
+        <location filename="../main.cpp" line="104"/>
         <source>Work directory</source>
         <translation>Répertoire de travail</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="111"/>
+        <location filename="../main.cpp" line="106"/>
         <source>Exclude main folders, valid choices: </source>
         <translation>Exclure les dossiers principaux, choix valables : </translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="113"/>
+        <location filename="../main.cpp" line="108"/>
         <source>Use the option one time for each item you want to exclude</source>
         <translation>Utilisez l’option une fois pour chaque élément que vous souhaitez exclure</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="114"/>
         <source>one item</source>
-        <translation>un élément</translation>
+        <translation type="vanished">un élément</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="116"/>
+        <location filename="../main.cpp" line="111"/>
         <source>Compression format, valid choices: </source>
         <translation>Format de compression, choix valables : </translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="117"/>
         <source>format</source>
-        <translation>format</translation>
+        <translation type="vanished">format</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="118"/>
+        <location filename="../main.cpp" line="113"/>
         <source>Shutdown computer when done.</source>
         <translation>Arrêtez l’ordinateur lorsque vous avez fini.</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="136"/>
-        <location filename="../main.cpp" line="146"/>
-        <location filename="../main.cpp" line="187"/>
+        <location filename="../main.cpp" line="141"/>
         <source>You seem to be logged in as root, please log out and log in as normal user to use this program.</source>
-        <translation>Vous semblez être connecté en tant qu’administrateur, veuillez vous déconnecter et vous connecter en tant qu’utilisateur normal pour utiliser ce programme.</translation>
+        <translation>Vous êtes apparemment connecté en tant que root, veuillez vous déconnecter et vous connecter en tant qu’utilisateur normal pour utiliser ce programme.</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="159"/>
-        <location filename="../main.cpp" line="199"/>
+        <location filename="../main.cpp" line="163"/>
         <source>version:</source>
         <translation>version :</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="168"/>
-        <location filename="../main.cpp" line="194"/>
+        <location filename="../main.cpp" line="159"/>
         <source>You must run this program with sudo or pkexec.</source>
         <translation>Vous devez exécuter ce programme avec sudo ou pkexec.</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="178"/>
+        <location filename="../main.cpp" line="137"/>
         <source>MX Snapshot</source>
         <translation>MX Instantané - MX Snapshot</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="186"/>
-        <location filename="../main.cpp" line="193"/>
-        <location filename="../main.cpp" line="252"/>
-        <location filename="../settings.cpp" line="250"/>
-        <location filename="../settings.cpp" line="265"/>
-        <location filename="../settings.cpp" line="735"/>
-        <location filename="../settings.cpp" line="834"/>
+        <location filename="../main.cpp" line="145"/>
+        <location filename="../main.cpp" line="209"/>
+        <location filename="../settings.cpp" line="268"/>
+        <location filename="../settings.cpp" line="283"/>
+        <location filename="../settings.cpp" line="758"/>
+        <location filename="../settings.cpp" line="857"/>
         <source>Error</source>
         <translation>Erreur</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="246"/>
-        <location filename="../main.cpp" line="248"/>
-        <location filename="../settings.cpp" line="259"/>
+        <location filename="../main.cpp" line="206"/>
+        <location filename="../settings.cpp" line="277"/>
         <source>Current kernel doesn&apos;t support Squashfs, cannot continue.</source>
         <translation>Le noyau actuel ne supporte pas Squashfs, impossible de continuer.</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="86"/>
+        <location filename="../settings.cpp" line="88"/>
         <source>Could not create working directory. </source>
         <translation>Impossible de créer le répertoire de travail. </translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="111"/>
+        <location filename="../settings.cpp" line="117"/>
         <source>Could not create temp directory. </source>
         <translation>Impossible de créer le répertoire temporaire. </translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="244"/>
+        <location filename="../settings.cpp" line="262"/>
         <source>Could not find a usable kernel</source>
         <translation>Impossible de trouver un noyau utilisable</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="368"/>
+        <location filename="../settings.cpp" line="386"/>
         <source>Used space on / (root): </source>
         <translation>Espace utilisé dans /(root) : </translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="371"/>
+        <location filename="../settings.cpp" line="389"/>
         <source>estimated</source>
         <translation>estimé</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="384"/>
+        <location filename="../settings.cpp" line="398"/>
         <source>Used space on /home: </source>
         <translation>Espace utilisé dans /home : </translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="470"/>
+        <location filename="../settings.cpp" line="484"/>
         <source>Free space on %1, where snapshot folder is placed: </source>
         <translation>Espace libre disponible dans %1 où sera mis le dossier de l’instantané : </translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="474"/>
+        <location filename="../settings.cpp" line="488"/>
         <source>The free space should be sufficient to hold the compressed data from / and /home
 
       If necessary, you can create more available space
@@ -709,43 +694,43 @@ Les instantanés « snapshots » %1 occupent %2 de l’espace disque.
 </translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="492"/>
+        <location filename="../settings.cpp" line="506"/>
         <source>Desktop</source>
         <translation>Bureau</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="493"/>
+        <location filename="../settings.cpp" line="507"/>
         <source>Documents</source>
         <translation>Documents</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="494"/>
+        <location filename="../settings.cpp" line="508"/>
         <source>Downloads</source>
         <translation>Téléchargements</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="495"/>
+        <location filename="../settings.cpp" line="509"/>
         <source>Music</source>
         <translation>Musique</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="496"/>
+        <location filename="../settings.cpp" line="510"/>
         <source>Networks</source>
         <translation>Réseaux</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="497"/>
+        <location filename="../settings.cpp" line="511"/>
         <source>Pictures</source>
         <translation>Photos</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="499"/>
+        <location filename="../settings.cpp" line="513"/>
         <source>Videos</source>
         <translation>Vidéos</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="728"/>
-        <location filename="../settings.cpp" line="827"/>
+        <location filename="../settings.cpp" line="751"/>
+        <location filename="../settings.cpp" line="850"/>
         <source>Output file %1 already exists. Please use another file name, or delete the existent file.</source>
         <translation>Le nom de fichier %1 existe déjà. Veuillez utiliser un autre nom de fichier ou supprimer le fichier existant.</translation>
     </message>
@@ -774,132 +759,132 @@ Les instantanés « snapshots » %1 occupent %2 de l’espace disque.
 <context>
     <name>Work</name>
     <message>
-        <location filename="../work.cpp" line="80"/>
+        <location filename="../work.cpp" line="82"/>
         <source>Cleaning...</source>
         <translation>Nettoyage...</translation>
     </message>
     <message>
-        <location filename="../work.cpp" line="91"/>
-        <location filename="../work.cpp" line="280"/>
+        <location filename="../work.cpp" line="93"/>
+        <location filename="../work.cpp" line="283"/>
         <source>Done</source>
         <translation>Terminé</translation>
     </message>
     <message>
-        <location filename="../work.cpp" line="102"/>
+        <location filename="../work.cpp" line="105"/>
         <source>Interrupted or failed to complete</source>
         <translation>Interrompu ou non terminé</translation>
     </message>
     <message>
-        <location filename="../work.cpp" line="135"/>
-        <location filename="../work.cpp" line="238"/>
-        <location filename="../work.cpp" line="260"/>
-        <location filename="../work.cpp" line="298"/>
-        <location filename="../work.cpp" line="410"/>
+        <location filename="../work.cpp" line="138"/>
+        <location filename="../work.cpp" line="241"/>
+        <location filename="../work.cpp" line="263"/>
+        <location filename="../work.cpp" line="301"/>
+        <location filename="../work.cpp" line="415"/>
         <source>Error</source>
         <translation>Erreur</translation>
     </message>
     <message>
-        <location filename="../work.cpp" line="136"/>
+        <location filename="../work.cpp" line="139"/>
         <source>There&apos;s not enough free space on your target disk, you need at least %1</source>
         <translation>Il n’y a pas assez d’espace libre sur votre disque cible, vous avez besoin d’au moins %1</translation>
     </message>
     <message>
-        <location filename="../work.cpp" line="139"/>
+        <location filename="../work.cpp" line="142"/>
         <source>You have %1 free space on %2</source>
         <translation>Vous avez %1 d’espace libre sur %2</translation>
     </message>
     <message>
-        <location filename="../work.cpp" line="142"/>
+        <location filename="../work.cpp" line="145"/>
         <source>If you are sure you have enough free space rerun the program with -o/--override-size option</source>
         <translation>Si vous êtes certain d’avoir assez d’espace libre, relancez le programme avec -o/--override-size option</translation>
     </message>
     <message>
-        <location filename="../work.cpp" line="167"/>
+        <location filename="../work.cpp" line="170"/>
         <source>Copying the new-iso filesystem...</source>
         <translation>Copie du nouveau système de fichiers iso en cours... </translation>
     </message>
     <message>
-        <location filename="../work.cpp" line="179"/>
+        <location filename="../work.cpp" line="182"/>
         <source>Could not create temp directory. </source>
         <translation>Impossible de créer le répertoire temporaire. </translation>
     </message>
     <message>
-        <location filename="../work.cpp" line="235"/>
+        <location filename="../work.cpp" line="238"/>
         <source>Squashing filesystem...</source>
         <translation>Écrasement du système de fichiers...</translation>
     </message>
     <message>
-        <location filename="../work.cpp" line="239"/>
+        <location filename="../work.cpp" line="242"/>
         <source>Could not create linuxfs file, please check /var/log/%1.log</source>
         <translation>Impossible de créer un fichier linuxfs, veuillez vérifier /var/log/%1.log</translation>
     </message>
     <message>
-        <location filename="../work.cpp" line="257"/>
+        <location filename="../work.cpp" line="260"/>
         <source>Creating CD/DVD image file...</source>
         <translation>Création du fichier image pour CD/DVD...</translation>
     </message>
     <message>
-        <location filename="../work.cpp" line="261"/>
+        <location filename="../work.cpp" line="264"/>
         <source>Could not create ISO file, please check whether you have enough space on the destination partition.</source>
         <translation>Impossible de créer le fichier ISO. Veuillez vérifier que l’espace sur la partition de destination est suffisant.</translation>
     </message>
     <message>
-        <location filename="../work.cpp" line="267"/>
+        <location filename="../work.cpp" line="270"/>
         <source>Making hybrid iso</source>
         <translation> Création d’une image ISO hybride</translation>
     </message>
     <message>
-        <location filename="../work.cpp" line="285"/>
+        <location filename="../work.cpp" line="288"/>
         <source>Success</source>
         <translation>Installation réussie</translation>
     </message>
     <message>
-        <location filename="../work.cpp" line="286"/>
+        <location filename="../work.cpp" line="289"/>
         <source>MX Snapshot completed sucessfully!</source>
         <translation>Instantané MX terminé avec succès&#xa0;!</translation>
     </message>
     <message>
-        <location filename="../work.cpp" line="287"/>
+        <location filename="../work.cpp" line="290"/>
         <source>Snapshot took %1 to finish.</source>
         <translation>Instantané a pris %1 pour terminer.</translation>
     </message>
     <message>
-        <location filename="../work.cpp" line="288"/>
+        <location filename="../work.cpp" line="291"/>
         <source>Thanks for using MX Snapshot, run MX Live USB Maker next!</source>
         <translation>Merci d’utiliser MX Snapshot, lancez ensuite MX Live USB Création&#xa0;!</translation>
     </message>
     <message>
-        <location filename="../work.cpp" line="295"/>
+        <location filename="../work.cpp" line="298"/>
         <source>Installing </source>
         <translation>Installation </translation>
     </message>
     <message>
-        <location filename="../work.cpp" line="298"/>
+        <location filename="../work.cpp" line="301"/>
         <source>Could not install </source>
         <translation>Installation impossible </translation>
     </message>
     <message>
-        <location filename="../work.cpp" line="308"/>
+        <location filename="../work.cpp" line="311"/>
         <source>Calculating checksum...</source>
         <translation>Calculer la somme de contrôle...</translation>
     </message>
     <message>
-        <location filename="../work.cpp" line="347"/>
+        <location filename="../work.cpp" line="350"/>
         <source>Building new initrd...</source>
         <translation>Nouvel initrd en cours de création...</translation>
     </message>
     <message>
-        <location filename="../work.cpp" line="411"/>
+        <location filename="../work.cpp" line="416"/>
         <source>Could not create working directory. </source>
         <translation>Impossible de créer le répertoire de travail. </translation>
     </message>
     <message>
-        <location filename="../work.cpp" line="541"/>
+        <location filename="../work.cpp" line="546"/>
         <source>Calculating total size of excluded files...</source>
         <translation>Calcul de la taille totale des fichiers exclus...</translation>
     </message>
     <message>
-        <location filename="../work.cpp" line="551"/>
+        <location filename="../work.cpp" line="556"/>
         <source>Calculating size of root...</source>
         <translation>Calcul de la taille de root...</translation>
     </message>

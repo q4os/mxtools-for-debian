@@ -71,23 +71,43 @@ calibre-helper
 </install_package_names>
 
 <postinstall>
+set -o pipefail
+if ! dpkg-query -f '${db:Status-Abbrev}' -W calibre-helper 2>/dev/null | grep -q '^ii'; then
+exit 0
+fi
 echo "Installing calibre ..."
-TMP=$(mktemp -d /tmp/tmpdir-calibre-installer.XXXXXXXXXXXXX)
+TMP=$(mktemp -d /tmp/mxpi-tmpdir-calibre-installer.XXXXXXXXXXXXX)
 # prepare tidy-up
-tidy_up() { rm -r /tmp/tmpdir-calibre-installer.* 2>/dev/null ; }
+tidy_up() { rm -r /tmp/mxpi-tmpdir-calibre-installer.* 2>/dev/null ; }
 trap tidy_up EXIT
 INS=$TMP/linux-installer.sh
 curl -o $INS -RLJ  https://download.calibre-ebook.com/linux-installer.sh
+if [ -e $INS ]; then
+if apt-cache -n search libopengl0 | grep -q  ^libopengl0; then
+if ! dpkg-query -f '${db:Status-Abbrev}' -W libopengl0 2>/dev/null | grep -q '^ii'; then
+apt-get install libopengl0  -o=Dpkg::Use-Pty=0
+fi
+fi
+if apt-cache -n search libxcb-cursor0 | grep -q  ^libxcb-cursor0; then
+if ! dpkg-query -f '${db:Status-Abbrev}' -W libxcb-cursor0 2>/dev/null | grep -q '^ii'; then
+apt-get install libxcb-cursor0  -o=Dpkg::Use-Pty=0
+fi
+fi
+
 chmod +x $INS
 $INS
 echo "Fixing calibre-uninstaller to work with MXPI..."
 # fix calibre uninstaller to work with MXPI
 # by "removing" raw_input on /dev/tty to disable blocking keyboard
 if [ -x /usr/bin/calibre-uninstall ]; then
-    sed -i -r  -e "\:^sys.stdin = open[(]'/dev/tty'[)].*:s:^:#:" \
-               -e "s/raw_input[(][^)]+[)]/'y'/" /usr/bin/calibre-uninstall
+sed -i -r  -e "\:^sys.stdin = open[(]'/dev/tty'[)].*:s:^:#:" \
+           -e "s/raw_input[(][^)]+[)]/'y'/" /usr/bin/calibre-uninstall
 fi
-echo "DONE!"
+echo "...$(gettext -d apt -s ' Done')"
+else
+echo "Error downloading calibre installer"
+exit 1
+fi
 </postinstall>
 
 <uninstall_package_names>
@@ -95,11 +115,15 @@ calibre-helper
 </uninstall_package_names>
 
 <postuninstall>
+set -o pipefail
+if dpkg-query -f '${db:Status-Abbrev}' -W calibre-helper 2>/dev/null | grep  -q '^ii'; then
+exit 0
+fi
 if [ -x /usr/bin/calibre-uninstall ]; then
    echo "Removing calibre ..."
    echo "y" | /usr/bin/calibre-uninstall
 fi
-echo "DONE!"
+echo "...$(gettext -d apt -s ' Done')"
 </postuninstall>
 
 </app>

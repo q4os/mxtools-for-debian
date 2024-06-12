@@ -29,6 +29,7 @@
 #include <QDirIterator>
 #include <QRegularExpression>
 #include <QSettings>
+#include <QStorageInfo>
 
 Work::Work(Settings *settings, QObject *parent)
     : QObject(parent),
@@ -48,7 +49,7 @@ void Work::checkEnoughSpace()
      * If both TMP work_dir and ISO don't fit on snapshot_dir, see if work_dir can be put on /home or /tmp
      * we already checked that ISO can fit on snapshot_dir so if TMP work fits on /home or /tmp move
      * the work_dir to the appropriate place and return */
-    if (Cmd().getOut("stat -c '%d' " + settings->work_dir) == Cmd().getOut("stat -c '%d' " + settings->snapshot_dir)) {
+    if (QStorageInfo(settings->work_dir + "/").device() == QStorageInfo(settings->snapshot_dir + "/").device()) {
         if (settings->free_space < required_space * 2) {
             if (checkAndMoveWorkDir("/tmp", required_space)) {
                 return;
@@ -67,11 +68,12 @@ void Work::checkEnoughSpace()
 bool Work::checkInstalled(const QString &package)
 {
     qDebug() << "+++" << __PRETTY_FUNCTION__ << "+++";
-    return (Cmd().run(QString("dpkg -s %1 |grep '^Status: install ok installed'").arg(package)));
+    return (Cmd().run(QString("dpkg-query -W -f='${Status}' %1 | grep 'install ok installed'").arg(package)));
 }
 
 void Work::cleanUp()
 {
+    Cmd().run(elevate + " /usr/lib/" + QCoreApplication::applicationName() + "/snapshot-lib chown_conf", true);
     if (!started) {
         shell.close();
         initrd_dir.remove();
@@ -80,7 +82,7 @@ void Work::cleanUp()
     emit message(tr("Cleaning..."));
     Cmd().run(elevate + " /usr/lib/" + QCoreApplication::applicationName() + "/snapshot-lib kill_mksquashfs", true);
     shell.close();
-    Cmd().run("sync");
+    QProcess::execute("sync", {});
     QDir::setCurrent("/");
     if (QFileInfo::exists("/tmp/installed-to-live/cleanup.conf")) {
         Cmd().run(elevate + " /usr/lib/" + QCoreApplication::applicationName() + "/snapshot-lib cleanup");
@@ -94,9 +96,10 @@ void Work::cleanUp()
         if (settings->shutdown) {
             QFile::copy("/tmp/" + QCoreApplication::applicationName() + ".log",
                         settings->snapshot_dir + "/" + settings->snapshot_name + ".log");
-            Cmd().run("sync");
-            Cmd().run("dbus-send --system --print-reply --dest=org.freedesktop.login1 /org/freedesktop/login1 "
-                      "'org.freedesktop.login1.Manager.PowerOff' boolean:true");
+            QProcess::execute("sync", {});
+            QProcess::execute("dbus-send",
+                              {"--system", "--print-reply", "--dest=org.freedesktop.login1", "/org/freedesktop/login1",
+                               "org.freedesktop.login1.Manager.PowerOff", "boolean:true"});
         }
         exit(EXIT_SUCCESS);
     } else {
@@ -110,7 +113,7 @@ void Work::cleanUp()
 bool Work::checkAndMoveWorkDir(const QString &dir, quint64 req_size)
 {
     // See first if the dir is on different partition otherwise it's irrelevant
-    if (Cmd().getOut("stat -c '%d' " + dir) != Cmd().getOut("stat -c '%d' " + settings->snapshot_dir)
+    if (QStorageInfo(dir + "/").device() != QStorageInfo(settings->snapshot_dir + "/").device()
         && Settings::getFreeSpace(dir) > req_size) {
         if (QFileInfo::exists("/tmp/installed-to-live/cleanup.conf")) {
             Cmd().run(elevate + " /usr/lib/" + QCoreApplication::applicationName() + "/snapshot-lib cleanup");
@@ -375,8 +378,10 @@ void Work::replaceMenuStrings()
     const QString boot_pararameter_regexp {"(lang|kbd|kbvar|kbopt|tz)=[^[:space:]]*"};
     shell.run(QString("printf '%s\\n' %1 | grep -E '^%2' >> '%3'")
                   .arg(settings->boot_options, boot_pararameter_regexp, settings->work_dir + grubenv_cfg));
-    shell.run(QString(R"(sed -i "s|%OPTIONS%|$(sed -r 's/[[:space:]]%2/ /g; s/^[[:space:]]+//; s/[[:space:]]+/ /g'<<<' %1')|" '%3')")
-                  .arg(settings->boot_options, boot_pararameter_regexp, settings->work_dir + grub_cfg));
+    shell.run(
+        QString(
+            R"(sed -i "s|%OPTIONS%|$(sed -r 's/[[:space:]]%2/ /g; s/^[[:space:]]+//; s/[[:space:]]+/ /g'<<<' %1')|" '%3')")
+            .arg(settings->boot_options, boot_pararameter_regexp, settings->work_dir + grub_cfg));
     const QString syslinux_cfg {"/iso-template/boot/syslinux/syslinux.cfg"};
     const QString isolinux_cfg {"/iso-template/boot/isolinux/isolinux.cfg"};
     for (const QString &file : {syslinux_cfg, isolinux_cfg}) {

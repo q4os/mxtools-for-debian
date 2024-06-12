@@ -32,6 +32,8 @@
 #include <QStandardPaths>
 #include <QStorageInfo>
 
+#include <unistd.h>
+
 #ifndef CLI_BUILD
 #include <QMessageBox>
 #endif
@@ -104,7 +106,11 @@ bool Settings::checkTempDir()
         }
     }
     if (tempdir_parent == "/home") { // Replace /home with user home path
-        tempdir_parent = "/home/" + Cmd().getOut("logname", true).trimmed();
+        QString userName = QString::fromUtf8(qgetenv("SUDO_USER")).trimmed();
+        if (userName.isEmpty()) {
+            userName = QString::fromUtf8(qgetenv("LOGNAME")).trimmed();
+        }
+        tempdir_parent = "/home/" + userName;
     }
     tmpdir.reset(new QTemporaryDir(tempdir_parent + "/mx-snapshot-XXXXXXXX"));
     if (!tmpdir->isValid()) {
@@ -145,13 +151,17 @@ QString Settings::getEditor() const
             editor = "nano";
         }
     }
-    bool isEditorThatElevates = QRegularExpression("(kate|kwrite|featherpad)$").match(editor).hasMatch();
-    bool isElectronBased = QRegularExpression("(atom\\.desktop|code\\.desktop)$").match(desktop_file).hasMatch();
-    bool isCliEditor = QRegularExpression("nano|vi|vim|nvim|micro|emacs").match(editor).hasMatch();
+
+    const bool isRoot = getuid() == 0;
+    const bool isEditorThatElevates
+        = QRegularExpression(R"((kate|kwrite|featherpad|code|codium)$)").match(editor).hasMatch();
+    const bool isCliEditor = QRegularExpression(R"(nano|vi|vim|nvim|micro|emacs)").match(editor).hasMatch();
 
     QString elevate {QFile::exists("/usr/bin/pkexec") ? "/usr/bin/pkexec" : "/usr/bin/gksu"};
-    if (isEditorThatElevates || isElectronBased) {
+    if (isEditorThatElevates && !isRoot) {
         return editor;
+    } else if (isRoot && isEditorThatElevates) {
+        elevate += " --user $(logname)";
     }
     if (isCliEditor) {
         return "x-terminal-emulator -e " + elevate + " " + editor;
@@ -159,18 +169,18 @@ QString Settings::getEditor() const
     return elevate + " env DISPLAY=$DISPLAY XAUTHORITY=$XAUTHORITY " + editor;
 }
 
-// Return the size of the snapshot folder
+// Return the size of the snapshot folder in MiB
 QString Settings::getSnapshotSize() const
 {
+    qint64 totalSize = 0;
     if (QFileInfo::exists(snapshot_dir)) {
-        QString cmd = QString("find \"%1\" -maxdepth 1 -type f -name '*.iso' -exec du -shc {} + |awk 'END {print $1}'")
-                          .arg(snapshot_dir);
-        auto size = Cmd().getOut(cmd);
-        if (!size.isEmpty()) {
-            return size;
+        QDir directory(snapshot_dir);
+        QStringList isoFiles = directory.entryList(QStringList() << "*.iso", QDir::Files);
+        for (const QString &file : isoFiles) {
+            totalSize += QFileInfo(directory.absoluteFilePath(file)).size();
         }
     }
-    return "0";
+    return QString::number(totalSize / (1024 * 1024)) + "MiB";
 }
 
 // Number of snapshots in snapshot_dir
@@ -186,7 +196,7 @@ int Settings::getSnapshotCount() const
 // Return KiB available space on the device
 quint64 Settings::getFreeSpace(const QString &path)
 {
-    QStorageInfo storage(path);
+    QStorageInfo storage(path + "/");
     if (!storage.isReady()) {
         qDebug() << "Cannot determine free space for" << path << ": Drive not ready or does not exist.";
         return 0;
@@ -203,6 +213,11 @@ QString Settings::getXdgUserDirs(const QString &folder)
 {
     QStringList resultParts;
     resultParts.reserve(18); // For 3 users x 6 folders, not worth getting the number of users on the system
+
+    const static QHash<QString, QString> englishDirs {
+        {"DOCUMENTS", "Documents"}, {"DOWNLOAD", "Downloads"}, {"DESKTOP", "Desktop"},
+        {"MUSIC", "Music"},         {"PICTURES", "Pictures"},  {"VIDEOS", "Videos"},
+    };
 
     for (const QString &user : qAsConst(users)) {
         QString dir = Cmd().getOutAsRoot("runuser " + user + " -c \"xdg-user-dir " + folder + '"');
@@ -238,8 +253,11 @@ void Settings::selectKernel()
         if (!QFileInfo::exists(
                 "/boot/vmlinuz-"
                 + kernel)) { // If current kernel doesn't exist for some reason (e.g. WSL) in /boot pick latest kernel
-            kernel
-                = Cmd().getOut("ls -1 /boot/vmlinuz-* |sort |tail -n1").remove(QRegularExpression("^/boot/vmlinuz-"));
+            QDir directory("/boot");
+            QStringList vmlinuzFiles = directory.entryList(QStringList() << "vmlinuz-*", QDir::Files, QDir::Name);
+            if (!vmlinuzFiles.isEmpty()) {
+                kernel = vmlinuzFiles.last().remove(QRegularExpression("^vmlinuz-"));
+            }
             if (!QFileInfo::exists("/boot/vmlinuz-" + kernel)) {
                 QString message = QObject::tr("Could not find a usable kernel");
                 if (qApp->metaObject()->className() != QLatin1String("QApplication")) {
@@ -271,11 +289,6 @@ void Settings::selectKernel()
 
 void Settings::setVariables()
 {
-    englishDirs = {
-        {"DOCUMENTS", "Documents"}, {"DOWNLOAD", "Downloads"}, {"DESKTOP", "Desktop"},
-        {"MUSIC", "Music"},         {"PICTURES", "Pictures"},  {"VIDEOS", "Videos"},
-    };
-
     live = isLive();
     users = listUsers();
     x86 = isi386();
@@ -355,6 +368,12 @@ quint64 Settings::getLiveRootSpace()
     // Load some live variables
     QSettings livesettings("/live/config/initrd.out", QSettings::NativeFormat);
     QString sqfile_full = livesettings.value("SQFILE_FULL", "/live/boot-dev/antiX/linuxfs").toString();
+    QString toram_mp = livesettings.value("TORAM_MP", "/live/to-ram").toString();
+    QString sqfile_path = livesettings.value("SQFILE_PATH", "antiX").toString().remove(QRegularExpression("^/+"));
+    QString sqfile_name = livesettings.value("SQFILE_NAME", "linuxfs").toString();
+    if (!toram_mp.isEmpty() && QFileInfo::exists(toram_mp + "/" + sqfile_path  + "/" + sqfile_name)) {
+        sqfile_full = toram_mp + "/" + sqfile_path  + "/" + sqfile_name;
+    }
 
     // Get compression factor by reading the linuxfs squasfs file, if available
     QString linuxfs_compression_type
@@ -370,10 +389,9 @@ quint64 Settings::getLiveRootSpace()
         qWarning() << "Unknown compression type:" << linuxfs_compression_type;
     }
     quint64 rootfs_file_size = 0;
-    quint64 linuxfs_file_size
-        = Cmd().getOut("df -k /live/linux --output=used --total |tail -n1").toULongLong() * 100 / c_factor;
+    quint64 linuxfs_file_size = QStorageInfo("/live/linux/").bytesTotal() * 100 / c_factor;
     if (QFileInfo::exists("/live/persist-root")) {
-        rootfs_file_size = Cmd().getOut("df -k /live/persist-root --output=used --total |tail -n1").toULongLong();
+        rootfs_file_size = QStorageInfo("/live/persist-root/").bytesTotal();
     }
 
     // Add rootfs file size to the calculated linuxfs file size.  probaby conservative, as rootfs will likely have some
@@ -383,23 +401,19 @@ quint64 Settings::getLiveRootSpace()
 
 QString Settings::getUsedSpace()
 {
-    constexpr float factor = 1024 * 1024;
+    constexpr double factor = 1024 * 1024 * 1024;
     QString out = "\n- " + QObject::tr("Used space on / (root): ");
-    if (bool ok = false; live) {
+    if (live) {
         root_size = getLiveRootSpace();
         out += QString::number(static_cast<double>(root_size) / factor, 'f', 2) + "GiB -- " + QObject::tr("estimated");
     } else {
-        root_size = Cmd().getOut("df -k --output=used / |tail -n1").toULongLong(&ok);
-        if (!ok) {
-            return "Can't calculate free space on root";
-        }
+        QStorageInfo rootInfo("/");
+        root_size = rootInfo.bytesTotal() - rootInfo.bytesFree();
         out += QString::number(static_cast<double>(root_size) / factor, 'f', 2) + "GiB";
     }
-    if (bool ok = false; Cmd().run("mountpoint -q /home")) {
-        home_size = Cmd().getOut("df -k --output=used /home |tail -n1").toULongLong(&ok);
-        if (!ok) {
-            return "Can't calculate free space on /home";
-        }
+    QStorageInfo homeInfo("/home/");
+    if (homeInfo.isValid() && homeInfo.isRoot()) {
+        home_size = homeInfo.bytesTotal() - homeInfo.bytesFree();
         out.append("\n- " + QObject::tr("Used space on /home: ")
                    + QString::number(static_cast<double>(home_size) / factor, 'f', 2) + "GiB");
     } else {
@@ -455,8 +469,8 @@ bool Settings::isOnSupportedPart(const QString &dir)
 {
     qDebug() << "+++" << __PRETTY_FUNCTION__ << "+++";
     // Supported partition types (NTFS returns fuseblk)
-    QStringList supported_partitions {"ext2/ext3", "btrfs", "jfs", "reiserfs", "xfs", "fuseblk", "ramfs", "tmpfs"};
-    QString part_type = Cmd().getOut("stat --file-system --format=%T \"" + dir + '"');
+    QStringList supported_partitions {"ext3", "ext4", "btrfs", "jfs", "xfs", "overlay", "fuseblk", "ramfs", "tmpfs"};
+    QString part_type = QStorageInfo(dir + "/").fileSystemType();
     qDebug() << "detected partition" << part_type << "supported part:" << supported_partitions.contains(part_type);
     return supported_partitions.contains(part_type);
 }
@@ -465,7 +479,7 @@ bool Settings::isOnSupportedPart(const QString &dir)
 QString Settings::largerFreeSpace(const QString &dir1, const QString &dir2)
 {
     qDebug() << "+++" << __PRETTY_FUNCTION__ << "+++";
-    if (Cmd().getOut("stat -c '%d' " + dir1) == Cmd().getOut("stat -c '%d' " + dir2)) {
+    if (QStorageInfo(dir1 + "/").device() == QStorageInfo(dir2 + "/").device()) {
         return dir1;
     }
     quint64 dir1_free = getFreeSpace(dir1);
@@ -507,20 +521,20 @@ QStringList Settings::listUsers()
 
 void Settings::excludeItem(const QString &item)
 {
-    QMap<QString, std::function<void(bool)>> itemExclusions {
-        {QObject::tr("Desktop"), [this](bool value) { excludeDesktop(value); }},
-        {QObject::tr("Documents"), [this](bool value) { excludeDocuments(value); }},
-        {QObject::tr("Downloads"), [this](bool value) { excludeDownloads(value); }},
-        {QObject::tr("Music"), [this](bool value) { excludeMusic(value); }},
-        {QObject::tr("Networks"), [this](bool value) { excludeNetworks(value); }},
-        {QObject::tr("Pictures"), [this](bool value) { excludePictures(value); }},
-        {"Steam", [this](bool value) { excludeSteam(value); }},
-        {QObject::tr("Videos"), [this](bool value) { excludeVideos(value); }},
-        {"VirtualBox", [this](bool value) { excludeVirtualBox(value); }}};
+    static const QMap<QString, void (Settings::*)(bool)> itemExclusions {
+        {QObject::tr("Desktop"), &Settings::excludeDesktop},
+        {QObject::tr("Documents"), &Settings::excludeDocuments},
+        {QObject::tr("Downloads"), &Settings::excludeDownloads},
+        {QObject::tr("Music"), &Settings::excludeMusic},
+        {QObject::tr("Networks"), &Settings::excludeNetworks},
+        {QObject::tr("Pictures"), &Settings::excludePictures},
+        {"Steam", &Settings::excludeSteam},
+        {QObject::tr("Videos"), &Settings::excludeVideos},
+        {"VirtualBox", &Settings::excludeVirtualBox}};
 
     auto it = itemExclusions.find(item);
     if (it != itemExclusions.end()) {
-        it.value()(true);
+        (this->*(it.value()))(true);
     }
 }
 
@@ -714,8 +728,17 @@ void Settings::otherExclusions()
     if (reset_accounts) {
         addRemoveExclusion(true, QStringLiteral("/etc/minstall.conf"));
         // Exclude /etc/localtime if link and timezone not America/New_York
-        if (Cmd().run("test -L /etc/localtime") && Cmd().getOut("cat /etc/timezone") != "America/New_York") {
-            addRemoveExclusion(true, "/etc/localtime");
+        QFileInfo localtimeInfo("/etc/localtime");
+        QFile timezoneFile("/etc/timezone");
+        if (localtimeInfo.isSymLink()) {
+            if (timezoneFile.open(QIODevice::ReadOnly | QIODevice::Text)) {
+                QTextStream in(&timezoneFile);
+                QString timezone = in.readLine();
+                if (timezone != "America/New_York") {
+                    addRemoveExclusion(true, "/etc/localtime");
+                }
+                timezoneFile.close();
+            }
         }
     }
     excludeSwapFile();

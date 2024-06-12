@@ -118,9 +118,9 @@ la_AX_HOST=http://la.mxrepo.com/antix
 la_MX_HOST=http://la.mxrepo.com/mx
 la_LOCATION="Los Angeles, USA"
 
-lt_AX_HOST=http://mirror.vpsnet.com/workspace/antix
-lt_MX_HOST=http://mirror.vpsnet.com/workspace/mx
-lt_LOCATION="Lithuania"
+lt_AX_HOST=http://ftp.linux.edu.lv/mxlinux/antix
+lt_MX_HOST=http://ftp.linux.edu.lv/mxlinux/mx
+lt_LOCATION="Latvia"
 
 my_AX_HOST=https://mirror.jingk.ai/mxlinux/mx-packages
 my_MX_HOST=https://mirror.jingk.ai/mxlinux/mx-packages
@@ -130,9 +130,9 @@ nl_AX_HOST=http://nl.mxrepo.com/antix
 nl_MX_HOST=http://nl.mxrepo.com/mx
 nl_LOCATION="The Netherlands"
 
-ny_AX_HOST=http://mirrors.rit.edu/mxlinux/mx-packages/antix
-ny_MX_HOST=http://mirrors.rit.edu/mxlinux/mx-packages/mx
-ny_LOCATION="United States, Rochester NY"
+ny_AX_HOST=http://mirror.math.princeton.edu/pub/mxlinux/antix
+ny_MX_HOST=http://mirror.math.princeton.edu/pub/mxlinux/mx
+ny_LOCATION="United States, Princeton NJ"
 
 nz_AX_HOST=http://mx.debian.nz/antix
 nz_MX_HOST=http://mx.debian.nz/mx
@@ -158,8 +158,8 @@ ru_AX_HOST=http://mirror.truenetwork.ru/mxlinux/antix
 ru_MX_HOST=http://mirror.truenetwork.ru/mxlinux/mx
 ru_LOCATION="Russia"
 
-se_AX_HOST=http://ftp.acc.umu.se/mirror/mxlinux.org/packages/antix
-se_MX_HOST=http://ftp.acc.umu.se/mirror/mxlinux.org/packages/mx
+se_AX_HOST=http://mirror.accum.se/mirror/mxlinux.org/packages/antix
+se_MX_HOST=http://mirror.accum.se/mirror/mxlinux.org/packages/mx
 se_LOCATION="Sweden"
 
 sg_AX_HOST=https://mirror.jingk.ai/mxlinux/mx-packages/antix
@@ -194,9 +194,9 @@ ut_AX_HOST=http://la.mxrepo.com/antix
 ut_MX_HOST=https://mxrepo.com/mx
 ut_LOCATION="Utah, USA"
 
-uy_AX_HOST=https://espejito.fder.edu.uy/mxlinux/packages/antix
-uy_MX_HOST=https://espejito.fder.edu.uy/mxlinux/packages/mx
-uy_LOCATION="Uruguay"
+uy_AX_HOST=http://mirror.netlinux.cl/mxlinux/antix
+uy_MX_HOST=http://mirror.netlinux.cl/mxlinux/mx
+uy_LOCATION="Chile"
 
 vn_AX_HOST=https://mirror.kku.ac.th/mx-packages/antix
 vn_MX_HOST=https://mirror.kku.ac.th/mx-packages/mx

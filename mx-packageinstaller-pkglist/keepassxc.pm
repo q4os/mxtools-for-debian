@@ -70,7 +70,7 @@ all
 </preinstall>
 
 <install_package_names>
-keepassxc
+keepassxc-full
 </install_package_names>
 
 
@@ -80,6 +80,6 @@ keepassxc
 
 
 <uninstall_package_names>
-keepassxc
+keepassxc-full
 </uninstall_package_names>
 </app>

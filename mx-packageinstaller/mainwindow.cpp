@@ -165,7 +165,7 @@ void MainWindow::setup()
 
     // Check/uncheck tree items spacebar press or double-click
     auto *shortcutToggle = new QShortcut(Qt::Key_Space, this);
-    connect(shortcutToggle, &QShortcut::activated, this, &MainWindow::checkUnckeckItem);
+    connect(shortcutToggle, &QShortcut::activated, this, &MainWindow::checkUncheckItem);
 
     QList listTree {ui->treePopularApps, ui->treeEnabled, ui->treeMXtest, ui->treeBackports, ui->treeFlatpak};
     for (const auto &tree : listTree) {
@@ -173,7 +173,7 @@ void MainWindow::setup()
             tree->setContextMenuPolicy(Qt::CustomContextMenu);
         }
         connect(tree, &QTreeWidget::itemDoubleClicked, [tree](QTreeWidgetItem *item) { tree->setCurrentItem(item); });
-        connect(tree, &QTreeWidget::itemDoubleClicked, this, &MainWindow::checkUnckeckItem);
+        connect(tree, &QTreeWidget::itemDoubleClicked, this, &MainWindow::checkUncheckItem);
         connect(tree, &QTreeWidget::customContextMenuRequested, this,
                 [this, tree](QPoint pos) { displayPackageInfo(tree, pos); });
     }
@@ -412,15 +412,23 @@ uchar MainWindow::getDebianVerNum()
 
 QString MainWindow::getDebianVerName()
 {
-    uchar ver = getDebianVerNum();
-    QMap<uchar, QString> releaseNames {{Release::Jessie, "jessie"},     {Release::Stretch, "stretch"},
-                                       {Release::Buster, "buster"},     {Release::Bullseye, "bullseye"},
-                                       {Release::Bookworm, "bookworm"}, {Release::Trixie, "trixie"}};
-    if (!releaseNames.contains(ver)) {
+    switch (getDebianVerNum()) {
+    case Release::Jessie:
+        return "jessie";
+    case Release::Stretch:
+        return "stretch";
+    case Release::Buster:
+        return "buster";
+    case Release::Bullseye:
+        return "bullseye";
+    case Release::Bookworm:
+        return "bookworm";
+    case Release::Trixie:
+        return "trixie";
+    default:
         qWarning() << "Error: Invalid Debian version, assumes Bullseye";
         return "bullseye";
     }
-    return releaseNames.value(ver);
 }
 
 QString MainWindow::getLocalizedName(const QDomElement &element) const
@@ -471,7 +479,7 @@ void MainWindow::updateBar()
     bar->setValue((bar->value() + 1) % bar->maximum() + 1);
 }
 
-void MainWindow::checkUnckeckItem()
+void MainWindow::checkUncheckItem()
 {
     auto *currentTreeWidget = qobject_cast<QTreeWidget *>(focusWidget());
 
@@ -489,7 +497,7 @@ void MainWindow::checkUnckeckItem()
 void MainWindow::outputAvailable(const QString &output)
 {
     ui->outputBox->moveCursor(QTextCursor::End);
-    if (output.contains(QLatin1String("\r"))) {
+    if (output.contains('\r')) {
         ui->outputBox->moveCursor(QTextCursor::Up, QTextCursor::KeepAnchor);
         ui->outputBox->moveCursor(QTextCursor::EndOfLine, QTextCursor::KeepAnchor);
     }
@@ -530,27 +538,27 @@ void MainWindow::processDoc(const QDomDocument &doc)
         const QString tagName = element.tagName();
         QString trimmedText = element.text().trimmed();
 
-        if (tagName == QLatin1String("category")) {
+        if (tagName == "category") {
             info.category = categoryTranslation(trimmedText);
-        } else if (tagName == QLatin1String("name")) {
+        } else if (tagName == "name") {
             info.name = trimmedText;
-        } else if (tagName == QLatin1String("description")) {
+        } else if (tagName == "description") {
             info.description = getLocalizedName(element);
-        } else if (tagName == QLatin1String("installable")) {
+        } else if (tagName == "installable") {
             info.installable = trimmedText;
-        } else if (tagName == QLatin1String("screenshot")) {
+        } else if (tagName == "screenshot") {
             info.screenshot = trimmedText;
-        } else if (tagName == QLatin1String("preinstall")) {
+        } else if (tagName == "preinstall") {
             info.preInstall = trimmedText;
-        } else if (tagName == QLatin1String("install_package_names")) {
+        } else if (tagName == "install_package_names") {
             info.installNames = trimmedText.replace('\n', ' ');
-        } else if (tagName == QLatin1String("postinstall")) {
+        } else if (tagName == "postinstall") {
             info.postInstall = trimmedText;
-        } else if (tagName == QLatin1String("uninstall_package_names")) {
+        } else if (tagName == "uninstall_package_names") {
             info.uninstallNames = trimmedText;
-        } else if (tagName == QLatin1String("postuninstall")) {
+        } else if (tagName == "postuninstall") {
             info.postUninstall = trimmedText;
-        } else if (tagName == QLatin1String("preuninstall")) {
+        } else if (tagName == "preuninstall") {
             info.preUninstall = trimmedText;
         } else if (tagName == QLatin1String("qdistro")) {
             info.qDistro = trimmedText;
@@ -561,9 +569,7 @@ void MainWindow::processDoc(const QDomDocument &doc)
     if (!isPackageInstallable(info.installable, modArch)) {
         return;
     }
-    popular_apps.append({info.category, info.name, info.description, info.installable, info.screenshot, info.preInstall,
-                         info.postInstall, info.installNames, info.uninstallNames, info.postUninstall,
-                         info.preUninstall, info.qDistro});
+    popular_apps.append(info);
 }
 
 QString MainWindow::mapArchToFormat(const QString &arch) const
@@ -682,24 +688,29 @@ void MainWindow::setSearchFocus() const
 void MainWindow::displayPopularApps() const
 {
     qDebug() << "+++" << __PRETTY_FUNCTION__ << "+++";
-    QTreeWidgetItem *topLevelItem {nullptr};
+
+    QMap<QString, QTreeWidgetItem *> categoryMap;
 
     for (const auto &item : popular_apps) {
-        // Add package category if treePopularApps doesn't already have it
-        if (ui->treePopularApps->findItems(item.category, Qt::MatchFixedString, PopCol::Icon).isEmpty()) {
+        QTreeWidgetItem *topLevelItem = nullptr;
+
+        // Check if the category already exists, if not, create it
+        if (!categoryMap.contains(item.category)) {
             topLevelItem = new QTreeWidgetItem();
             topLevelItem->setText(PopCol::Icon, item.category);
             ui->treePopularApps->addTopLevelItem(topLevelItem);
-            // topLevelItem look
+
             QFont font;
             font.setBold(true);
             topLevelItem->setFont(PopCol::Icon, font);
             topLevelItem->setIcon(PopCol::Icon, QIcon::fromTheme("folder"));
             topLevelItem->setFirstColumnSpanned(true);
+
+            categoryMap.insert(item.category, topLevelItem);
         } else {
-            topLevelItem = ui->treePopularApps->findItems(item.category, Qt::MatchFixedString, PopCol::Icon)
-                               .at(0); // find first match; add the child there
+            topLevelItem = categoryMap.value(item.category);
         }
+
         // Add package name as childItem to treePopularApps
         auto *childItem = new QTreeWidgetItem(topLevelItem);
         childItem->setText(PopCol::Name, item.name);
@@ -720,6 +731,7 @@ void MainWindow::displayPopularApps() const
                                                                QIcon(":/icons/package-installed-updated.png")));
         }
     }
+
     for (uchar i = 0; i < ui->treePopularApps->columnCount(); ++i) {
         ui->treePopularApps->resizeColumnToContents(i);
     }
@@ -1391,10 +1403,10 @@ bool MainWindow::installSelected()
 
 bool MainWindow::isFilteredName(const QString &name)
 {
-    return ((name.startsWith(QLatin1String("lib")) && !name.startsWith(QLatin1String("libreoffice"))
-             && !name.startsWith(QLatin1String("librewolf")))
-            || name.endsWith(QLatin1String("-dev")) || name.endsWith(QLatin1String("-dbg"))
-            || name.endsWith(QLatin1String("-dbgsym")) || name.endsWith(QLatin1String("-libs")));
+    static const QRegularExpression filterRegex(R"((^lib(?!reoffice|rewolf))|(-dev$)|(-dbg$)|(-dbgsym$)|(-libs$))",
+                                                QRegularExpression::CaseInsensitiveOption);
+
+    return filterRegex.match(name).hasMatch();
 }
 
 bool MainWindow::isOnline()
@@ -1670,49 +1682,50 @@ bool MainWindow::readPackageList(bool force_download)
 {
     qDebug() << "+++" << __PRETTY_FUNCTION__ << "+++";
     pushCancel->setDisabled(true);
-    // Don't process if the lists are already populated
-    if (!((currentTree == ui->treeEnabled && enabled_list.isEmpty())
-          || (currentTree == ui->treeMXtest && mx_list.isEmpty())
-          || (currentTree == ui->treeBackports && backports_list.isEmpty()) || force_download)) {
+
+    // Early return if lists are already populated and not forced to download
+    if (!force_download
+        && ((currentTree == ui->treeEnabled && !enabled_list.isEmpty())
+            || (currentTree == ui->treeMXtest && !mx_list.isEmpty())
+            || (currentTree == ui->treeBackports && !backports_list.isEmpty()))) {
         return true;
     }
 
-    QFile file;
-    if (currentTree == ui->treeMXtest) { // read MX Test list
-        file.setFileName(tmp_dir.path() + "/mxPackages");
-        if (!file.open(QFile::ReadOnly)) {
-            qDebug() << "Could not open file: " << file.fileName();
-            return false;
-        }
-    } else if (currentTree == ui->treeBackports) { // Read Backports list
-        file.setFileName(tmp_dir.path() + "/allPackages");
-        if (!file.open(QFile::ReadOnly)) {
-            qDebug() << "Could not open file: " << file.fileName();
-            return false;
-        }
-    } else if (currentTree == ui->treeEnabled) { // treeEnabled is updated at downloadPackageList
+    // Determine the file name based on the current tree
+    QString fileName;
+    if (currentTree == ui->treeMXtest) {
+        fileName = tmp_dir.path() + "/mxPackages";
+    } else if (currentTree == ui->treeBackports) {
+        fileName = tmp_dir.path() + "/allPackages";
+    } else if (currentTree == ui->treeEnabled) {
+        // treeEnabled is updated at downloadPackageList
         return true;
     }
 
+    // Read the content of the file
+    QFile file(fileName);
+    if (!file.open(QFile::ReadOnly)) {
+        qDebug() << "Could not open file: " << file.fileName();
+        return false;
+    }
     QString file_content = file.readAll();
     file.close();
 
-    QMap<QString, PackageInfo> *map {};
-    map = (currentTree == ui->treeMXtest) ? &mx_list : &backports_list;
-    map->clear();
-    QString package;
-    QString version;
-    QString description;
+    // Select the appropriate list to populate
+    QMap<QString, PackageInfo> *packageMap = (currentTree == ui->treeMXtest) ? &mx_list : &backports_list;
+    packageMap->clear();
 
-    const QStringList list = file_content.split('\n');
-    for (const QString &line : list) {
-        if (line.startsWith(QLatin1String("Package: "))) {
-            package = line.mid(9);
-        } else if (line.startsWith(QLatin1String("Version: "))) {
-            version = line.mid(9);
-        } else if (line.startsWith(QLatin1String("Description: "))) {
-            description = line.mid(13);
-            map->insert(package, {version, description});
+    // Parse the file content and populate the map
+    QStringList lines = file_content.split('\n');
+    QString package, version, description;
+    for (const QString &line : lines) {
+        if (line.startsWith("Package: ")) {
+            package = line.section(' ', 1);
+        } else if (line.startsWith("Version: ")) {
+            version = line.section(' ', 1);
+        } else if (line.startsWith("Description: ")) {
+            description = line.section(' ', 1);
+            packageMap->insert(package, {version, description});
             package.clear();
             version.clear();
             description.clear();
@@ -2213,16 +2226,13 @@ void MainWindow::findPopular() const
 
 void MainWindow::findPackageOther()
 {
-    QString word;
-    if (currentTree == ui->treeEnabled) {
-        word = ui->searchBoxEnabled->text();
-    } else if (currentTree == ui->treeMXtest) {
-        word = ui->searchBoxMX->text();
-    } else if (currentTree == ui->treeBackports) {
-        word = ui->searchBoxBP->text();
-    } else if (currentTree == ui->treeFlatpak) {
-        word = ui->searchBoxFlatpak->text();
-    }
+    // Retrieve the search word from the appropriate search box based on the current tree
+    QString word = currentTree == ui->treeEnabled     ? ui->searchBoxEnabled->text()
+                   : currentTree == ui->treeMXtest    ? ui->searchBoxMX->text()
+                   : currentTree == ui->treeBackports ? ui->searchBoxBP->text()
+                                                      : ui->searchBoxFlatpak->text(); // Default to flatpak
+
+    // Return early if the search word is a single character
     if (word.length() == 1) {
         return;
     }

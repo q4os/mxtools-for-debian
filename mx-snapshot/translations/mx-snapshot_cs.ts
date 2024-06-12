@@ -18,8 +18,8 @@
     <name>MainWindow</name>
     <message>
         <location filename="../mainwindow.ui" line="14"/>
-        <location filename="../mainwindow.cpp" line="170"/>
-        <location filename="../mainwindow.cpp" line="468"/>
+        <location filename="../mainwindow.cpp" line="173"/>
+        <location filename="../mainwindow.cpp" line="450"/>
         <source>MX Snapshot</source>
         <translation>MX Snapshot</translation>
     </message>
@@ -265,45 +265,45 @@
         <translation>Alt+H</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="176"/>
+        <location filename="../mainwindow.cpp" line="179"/>
         <source>fastest, worst compression</source>
         <translation>nejrychlejší, nejnižší komprese</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="176"/>
+        <location filename="../mainwindow.cpp" line="179"/>
         <source>fast, worse compression</source>
         <translation>rychlý, nízká komprese</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="177"/>
+        <location filename="../mainwindow.cpp" line="180"/>
         <source>slow, better compression</source>
         <translation>pomalý, lepší komprese</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="177"/>
+        <location filename="../mainwindow.cpp" line="180"/>
         <source>best compromise</source>
         <translation>Nejlepší kompromis</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="178"/>
+        <location filename="../mainwindow.cpp" line="181"/>
         <source>slowest, best compression</source>
         <translation>nejpomalejší, nejvyšší komprese</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="207"/>
+        <location filename="../mainwindow.cpp" line="210"/>
         <source>Free space on %1, where snapshot folder is placed: </source>
         <translation>Volné místo na %1, kam bude obraz umístněn:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="210"/>
+        <location filename="../mainwindow.cpp" line="213"/>
         <source>The free space should be sufficient to hold the compressed data from / and /home
 
       If necessary, you can create more available space by removing previous snapshots and saved copies: %1 snapshots are taking up %2 of disk space.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="222"/>
-        <location filename="../mainwindow.cpp" line="223"/>
+        <location filename="../mainwindow.cpp" line="225"/>
+        <location filename="../mainwindow.cpp" line="226"/>
         <source>Installing </source>
         <translation>Instalace</translation>
     </message>
@@ -391,72 +391,72 @@
         <translation>Nebylo možné vytvořít dočasnou složku.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="424"/>
+        <location filename="../mainwindow.cpp" line="406"/>
         <source>Output</source>
         <translation>Výstup</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="437"/>
+        <location filename="../mainwindow.cpp" line="419"/>
         <source>Edit Boot Menu</source>
         <translation>Upravit nabídku zavaděče</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="438"/>
+        <location filename="../mainwindow.cpp" line="420"/>
         <source>The program will now pause to allow you to edit any files in the work directory. Select Yes to edit the boot menu or select No to bypass this step and continue creating the snapshot.</source>
         <translation>Program se teď pozastaví a umožní Vám upravit soubory v pracovní složce. Zvolte ANO pro editaci nabídky zavaděče, volbou NE přeskočíte tento krok a přejděte k tvorbě obrazu. </translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="451"/>
+        <location filename="../mainwindow.cpp" line="433"/>
         <source>Close</source>
         <translation>Zavřít</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="459"/>
+        <location filename="../mainwindow.cpp" line="441"/>
         <source>Select kernel</source>
         <translation>Vybrat jádro</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="544"/>
+        <location filename="../mainwindow.cpp" line="526"/>
         <source>About %1</source>
         <translation>O programu %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="546"/>
+        <location filename="../mainwindow.cpp" line="528"/>
         <source>Version: </source>
         <translation>Verze:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="547"/>
+        <location filename="../mainwindow.cpp" line="529"/>
         <source>Program for creating a live-CD from the running system for MX Linux</source>
         <translation>Program pro tvorbu LIVE CD z běžícího systému MX Linux</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="549"/>
+        <location filename="../mainwindow.cpp" line="531"/>
         <source>Copyright (c) MX Linux</source>
         <translation>Vlastnická práva (c) MX Linux</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="551"/>
+        <location filename="../mainwindow.cpp" line="533"/>
         <source>%1 License</source>
         <translation>Licence %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="565"/>
+        <location filename="../mainwindow.cpp" line="547"/>
         <source>%1 Help</source>
         <translation>Nápověda %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="570"/>
+        <location filename="../mainwindow.cpp" line="552"/>
         <source>Select Snapshot Directory</source>
         <translation>Vyberte složku pro umístnění obrazu</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="591"/>
+        <location filename="../mainwindow.cpp" line="573"/>
         <source>Confirmation</source>
         <translation>Potvrzení</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="591"/>
+        <location filename="../mainwindow.cpp" line="573"/>
         <source>Are you sure you want to quit the application?</source>
         <translation>Jste si jistí, že chcete ukončit aplikaci? </translation>
     </message>
@@ -469,231 +469,212 @@
         <translation>Program teď pozastaví sestavování obrazu, v textovém editoru otevře bootovací menu.</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="73"/>
+        <location filename="../main.cpp" line="70"/>
         <source>Tool used for creating a live-CD from the running system</source>
         <translation>Program pro tvorbu LIVE CD z běžícího systému</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="77"/>
+        <location filename="../main.cpp" line="74"/>
         <source>Use CLI only</source>
         <translation>Použít pouze CLI</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="79"/>
+        <location filename="../main.cpp" line="77"/>
         <source>Number of CPU cores to be used.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="79"/>
-        <location filename="../main.cpp" line="108"/>
-        <source>number</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../main.cpp" line="80"/>
+        <location filename="../main.cpp" line="78"/>
         <source>Output directory</source>
         <translation>Cílová složka</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="80"/>
-        <location filename="../main.cpp" line="109"/>
         <source>path</source>
-        <translation>umístnění</translation>
+        <translation type="vanished">umístnění</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="81"/>
+        <location filename="../main.cpp" line="79"/>
         <source>Output filename</source>
         <translation>Název cílového souboru</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="81"/>
         <source>name</source>
-        <translation>název</translation>
+        <translation type="vanished">název</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="83"/>
+        <location filename="../main.cpp" line="81"/>
         <source>Name a different kernel to use other than the default running kernel, use format returned by &apos;uname -r&apos;</source>
         <translation>Uveďte verzi jádra, které se má použít navíc s právě používaným. Použijte formát, který se objeví po zadání příkazu  &apos;uname -r&apos;</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="85"/>
+        <location filename="../main.cpp" line="83"/>
         <source>Or the full path: %1</source>
         <translation>Nebo celé umístnění: %1</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="86"/>
         <source>version, or path</source>
-        <translation>verze, nebo umístnění</translation>
+        <translation type="vanished">verze, nebo umístnění</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="88"/>
+        <location filename="../main.cpp" line="86"/>
         <source>Compression level options.</source>
         <translation>Volby úrovně komprese.</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="89"/>
+        <location filename="../main.cpp" line="87"/>
         <source>Use quotes: &quot;-Xcompression-level &lt;level&gt;&quot;, or &quot;-Xalgorithm &lt;algorithm&gt;&quot;, or &quot;-Xhc&quot;, see mksquashfs man page</source>
         <translation>Použijte: &quot;-Xcompression-level &lt;level&gt;&quot;, or &quot;-Xalgorithm &lt;algorithm&gt;&quot;, or &quot;-Xhc&quot;, viz mksquashfs manuál</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="91"/>
         <source>&quot;option&quot;</source>
-        <translation>&quot;volba&quot;</translation>
+        <translation type="vanished">&quot;volba&quot;</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="94"/>
+        <location filename="../main.cpp" line="91"/>
         <source>Create a monthly snapshot, add &apos;Month&apos; name in the ISO name, skip used space calculation</source>
         <translation>Pro vytvoření měsíční zálohy přidejte do názvu ISO souboru název aktuálního měsíce a zrušte kontrolu volného místa</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="95"/>
+        <location filename="../main.cpp" line="92"/>
         <source>This option sets reset-accounts and compression to defaults, arguments changing those items will be ignored</source>
         <translation>Tahle volba nastavení zresetuje uživatelské účty a kompresi na předvolené hodnoty, argumenty určují které položky budou ingnorovány.</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="98"/>
+        <location filename="../main.cpp" line="95"/>
         <source>Don&apos;t calculate checksums for resulting ISO file</source>
         <translation>Pro výsledný ISO soubor nepočítat kontrolní součty</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="100"/>
+        <location filename="../main.cpp" line="96"/>
         <source>Skip calculating free space to see if the resulting ISO will fit</source>
         <translation>Vynechat propocet volného místa</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="102"/>
+        <location filename="../main.cpp" line="97"/>
         <source>Option to fix issue with calculating checksums on preempt_rt kernels</source>
         <translation>Možnost opravit problém s propočtem kontrolních součtů na preempt_rt jádrech</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="103"/>
+        <location filename="../main.cpp" line="98"/>
         <source>Resetting accounts (for distribution to others)</source>
         <translation>Resetovat uživatelské účty (pro distribuci jiným)</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="104"/>
+        <location filename="../main.cpp" line="99"/>
         <source>Calculate checksums for resulting ISO file</source>
         <translation>Pro výsledný ISO soubor propočítat kontrolní součty</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="106"/>
+        <location filename="../main.cpp" line="101"/>
         <source>Throttle the I/O input rate by the given percentage. This can be used to reduce the I/O and CPU consumption of Mksquashfs.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="109"/>
+        <location filename="../main.cpp" line="104"/>
         <source>Work directory</source>
         <translation>Pracovní adresář</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="111"/>
+        <location filename="../main.cpp" line="106"/>
         <source>Exclude main folders, valid choices: </source>
         <translation>Nezahrnout hlavní složky, platné volby:</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="113"/>
+        <location filename="../main.cpp" line="108"/>
         <source>Use the option one time for each item you want to exclude</source>
         <translation>Použijte tuto volbu pro každou položku, kterou chcete vynechat.</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="114"/>
         <source>one item</source>
-        <translation>jedna položka</translation>
+        <translation type="vanished">jedna položka</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="116"/>
+        <location filename="../main.cpp" line="111"/>
         <source>Compression format, valid choices: </source>
         <translation>Formát komprese, platné volby:</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="117"/>
         <source>format</source>
-        <translation>formát</translation>
+        <translation type="vanished">formát</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="118"/>
+        <location filename="../main.cpp" line="113"/>
         <source>Shutdown computer when done.</source>
         <translation>Po dokončení vypnout počítač.</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="136"/>
-        <location filename="../main.cpp" line="146"/>
-        <location filename="../main.cpp" line="187"/>
+        <location filename="../main.cpp" line="141"/>
         <source>You seem to be logged in as root, please log out and log in as normal user to use this program.</source>
         <translation>Spuštěno pod účtem root-a, odhlašte se a přihlašte jako bězný uživatel.</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="159"/>
-        <location filename="../main.cpp" line="199"/>
+        <location filename="../main.cpp" line="163"/>
         <source>version:</source>
         <translation>verze:</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="168"/>
-        <location filename="../main.cpp" line="194"/>
+        <location filename="../main.cpp" line="159"/>
         <source>You must run this program with sudo or pkexec.</source>
         <translation>Tento program musíte spustit s příkazem sudo nebo pkexec.</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="178"/>
+        <location filename="../main.cpp" line="137"/>
         <source>MX Snapshot</source>
         <translation>MX Snapshot</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="186"/>
-        <location filename="../main.cpp" line="193"/>
-        <location filename="../main.cpp" line="252"/>
-        <location filename="../settings.cpp" line="250"/>
-        <location filename="../settings.cpp" line="265"/>
-        <location filename="../settings.cpp" line="735"/>
-        <location filename="../settings.cpp" line="834"/>
+        <location filename="../main.cpp" line="145"/>
+        <location filename="../main.cpp" line="209"/>
+        <location filename="../settings.cpp" line="268"/>
+        <location filename="../settings.cpp" line="283"/>
+        <location filename="../settings.cpp" line="758"/>
+        <location filename="../settings.cpp" line="857"/>
         <source>Error</source>
         <translation>Chyba</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="246"/>
-        <location filename="../main.cpp" line="248"/>
-        <location filename="../settings.cpp" line="259"/>
+        <location filename="../main.cpp" line="206"/>
+        <location filename="../settings.cpp" line="277"/>
         <source>Current kernel doesn&apos;t support Squashfs, cannot continue.</source>
         <translation>Současné jádro nepodporuje Squashfs, nelze pokračovat.</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="86"/>
+        <location filename="../settings.cpp" line="88"/>
         <source>Could not create working directory. </source>
         <translation>Nebylo možné vytvořít pracovní složku.</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="111"/>
+        <location filename="../settings.cpp" line="117"/>
         <source>Could not create temp directory. </source>
         <translation>Nebylo možné vytvořít dočasnou složku.</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="244"/>
+        <location filename="../settings.cpp" line="262"/>
         <source>Could not find a usable kernel</source>
         <translation>Nepovedlo se najít použitelné jádro</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="368"/>
+        <location filename="../settings.cpp" line="386"/>
         <source>Used space on / (root): </source>
         <translation>Zabrané místo na disku / (root):</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="371"/>
+        <location filename="../settings.cpp" line="389"/>
         <source>estimated</source>
         <translation>odhad</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="384"/>
+        <location filename="../settings.cpp" line="398"/>
         <source>Used space on /home: </source>
         <translation>Zabrané místo na disku /home: </translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="470"/>
+        <location filename="../settings.cpp" line="484"/>
         <source>Free space on %1, where snapshot folder is placed: </source>
         <translation>Volné místo na %1, kde je snapshot umístněn:</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="474"/>
+        <location filename="../settings.cpp" line="488"/>
         <source>The free space should be sufficient to hold the compressed data from / and /home
 
       If necessary, you can create more available space
@@ -708,43 +689,43 @@
 </translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="492"/>
+        <location filename="../settings.cpp" line="506"/>
         <source>Desktop</source>
         <translation>Pracovní plocha</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="493"/>
+        <location filename="../settings.cpp" line="507"/>
         <source>Documents</source>
         <translation>Dokumenty</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="494"/>
+        <location filename="../settings.cpp" line="508"/>
         <source>Downloads</source>
         <translation>Stažené soubory</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="495"/>
+        <location filename="../settings.cpp" line="509"/>
         <source>Music</source>
         <translation>Hudba</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="496"/>
+        <location filename="../settings.cpp" line="510"/>
         <source>Networks</source>
         <translation>Sítě</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="497"/>
+        <location filename="../settings.cpp" line="511"/>
         <source>Pictures</source>
         <translation>Obrázky</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="499"/>
+        <location filename="../settings.cpp" line="513"/>
         <source>Videos</source>
         <translation>Videa</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="728"/>
-        <location filename="../settings.cpp" line="827"/>
+        <location filename="../settings.cpp" line="751"/>
+        <location filename="../settings.cpp" line="850"/>
         <source>Output file %1 already exists. Please use another file name, or delete the existent file.</source>
         <translation>Výstupní soubor %1 již existuje. Prosím vyberte jiný název, nebo vymažte stávající soubor.</translation>
     </message>
@@ -773,132 +754,132 @@
 <context>
     <name>Work</name>
     <message>
-        <location filename="../work.cpp" line="80"/>
+        <location filename="../work.cpp" line="82"/>
         <source>Cleaning...</source>
         <translation>Čištění...</translation>
     </message>
     <message>
-        <location filename="../work.cpp" line="91"/>
-        <location filename="../work.cpp" line="280"/>
+        <location filename="../work.cpp" line="93"/>
+        <location filename="../work.cpp" line="283"/>
         <source>Done</source>
         <translation>Hotovo</translation>
     </message>
     <message>
-        <location filename="../work.cpp" line="102"/>
+        <location filename="../work.cpp" line="105"/>
         <source>Interrupted or failed to complete</source>
         <translation>Přerušeno anebo dokončení zlyhalo</translation>
     </message>
     <message>
-        <location filename="../work.cpp" line="135"/>
-        <location filename="../work.cpp" line="238"/>
-        <location filename="../work.cpp" line="260"/>
-        <location filename="../work.cpp" line="298"/>
-        <location filename="../work.cpp" line="410"/>
+        <location filename="../work.cpp" line="138"/>
+        <location filename="../work.cpp" line="241"/>
+        <location filename="../work.cpp" line="263"/>
+        <location filename="../work.cpp" line="301"/>
+        <location filename="../work.cpp" line="415"/>
         <source>Error</source>
         <translation>Chyba</translation>
     </message>
     <message>
-        <location filename="../work.cpp" line="136"/>
+        <location filename="../work.cpp" line="139"/>
         <source>There&apos;s not enough free space on your target disk, you need at least %1</source>
         <translation>Na vybraném disku není dostatek volného místa, je potřeba nejméně %1</translation>
     </message>
     <message>
-        <location filename="../work.cpp" line="139"/>
+        <location filename="../work.cpp" line="142"/>
         <source>You have %1 free space on %2</source>
         <translation>Máte %1 volného místa na %2</translation>
     </message>
     <message>
-        <location filename="../work.cpp" line="142"/>
+        <location filename="../work.cpp" line="145"/>
         <source>If you are sure you have enough free space rerun the program with -o/--override-size option</source>
         <translation>Pokud jste si jistí, že máte dostatek volného místa, tak spusťte program znovu a použijte volbu -o/--override-size</translation>
     </message>
     <message>
-        <location filename="../work.cpp" line="167"/>
+        <location filename="../work.cpp" line="170"/>
         <source>Copying the new-iso filesystem...</source>
         <translation>Kopírování nového ISO souborového systému...</translation>
     </message>
     <message>
-        <location filename="../work.cpp" line="179"/>
+        <location filename="../work.cpp" line="182"/>
         <source>Could not create temp directory. </source>
         <translation>Nebylo možné vytvořít dočasnou složku.</translation>
     </message>
     <message>
-        <location filename="../work.cpp" line="235"/>
+        <location filename="../work.cpp" line="238"/>
         <source>Squashing filesystem...</source>
         <translation>Rušení souborového systému...</translation>
     </message>
     <message>
-        <location filename="../work.cpp" line="239"/>
+        <location filename="../work.cpp" line="242"/>
         <source>Could not create linuxfs file, please check /var/log/%1.log</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../work.cpp" line="257"/>
+        <location filename="../work.cpp" line="260"/>
         <source>Creating CD/DVD image file...</source>
         <translation>Vytváření obrazu CD/DVD... </translation>
     </message>
     <message>
-        <location filename="../work.cpp" line="261"/>
+        <location filename="../work.cpp" line="264"/>
         <source>Could not create ISO file, please check whether you have enough space on the destination partition.</source>
         <translation>Nelze vytvořit ISO soubor, prosím zkontrolujte zdali je dostatek místa na vybraném oddílu.</translation>
     </message>
     <message>
-        <location filename="../work.cpp" line="267"/>
+        <location filename="../work.cpp" line="270"/>
         <source>Making hybrid iso</source>
         <translation>Vytváření hybridního ISO</translation>
     </message>
     <message>
-        <location filename="../work.cpp" line="285"/>
+        <location filename="../work.cpp" line="288"/>
         <source>Success</source>
         <translation>Úspěch!</translation>
     </message>
     <message>
-        <location filename="../work.cpp" line="286"/>
+        <location filename="../work.cpp" line="289"/>
         <source>MX Snapshot completed sucessfully!</source>
         <translation>MX Snapshot úspěšně dokončen!</translation>
     </message>
     <message>
-        <location filename="../work.cpp" line="287"/>
+        <location filename="../work.cpp" line="290"/>
         <source>Snapshot took %1 to finish.</source>
         <translation>Obraz dokončen za %1.</translation>
     </message>
     <message>
-        <location filename="../work.cpp" line="288"/>
+        <location filename="../work.cpp" line="291"/>
         <source>Thanks for using MX Snapshot, run MX Live USB Maker next!</source>
         <translation>Díky za použití MX Snapshot, zkuste taky MX Tvůrce Live-USB!</translation>
     </message>
     <message>
-        <location filename="../work.cpp" line="295"/>
+        <location filename="../work.cpp" line="298"/>
         <source>Installing </source>
         <translation>Instalace</translation>
     </message>
     <message>
-        <location filename="../work.cpp" line="298"/>
+        <location filename="../work.cpp" line="301"/>
         <source>Could not install </source>
         <translation>Nelze nainstalovat</translation>
     </message>
     <message>
-        <location filename="../work.cpp" line="308"/>
+        <location filename="../work.cpp" line="311"/>
         <source>Calculating checksum...</source>
         <translation>Počítání kontrolních součtů...</translation>
     </message>
     <message>
-        <location filename="../work.cpp" line="347"/>
+        <location filename="../work.cpp" line="350"/>
         <source>Building new initrd...</source>
         <translation>Vytváření nového initrd...</translation>
     </message>
     <message>
-        <location filename="../work.cpp" line="411"/>
+        <location filename="../work.cpp" line="416"/>
         <source>Could not create working directory. </source>
         <translation>Nebylo možné vytvořít pracovní složku.</translation>
     </message>
     <message>
-        <location filename="../work.cpp" line="541"/>
+        <location filename="../work.cpp" line="546"/>
         <source>Calculating total size of excluded files...</source>
         <translation>Výpočet celkové velikosti vyloučených souborů...</translation>
     </message>
     <message>
-        <location filename="../work.cpp" line="551"/>
+        <location filename="../work.cpp" line="556"/>
         <source>Calculating size of root...</source>
         <translation>Výpoćet velikosti root...</translation>
     </message>

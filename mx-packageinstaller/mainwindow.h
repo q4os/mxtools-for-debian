@@ -123,7 +123,7 @@ protected:
     void keyPressEvent(QKeyEvent *event) override;
 
 private slots:
-    void checkUnckeckItem();
+    void checkUncheckItem();
     void cleanup();
     void cmdDone();
     void cmdStart();

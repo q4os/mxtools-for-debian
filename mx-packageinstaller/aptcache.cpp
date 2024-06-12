@@ -47,39 +47,38 @@ QString AptCache::getArch()
 
 void AptCache::parseContent()
 {
-    const QStringList list = files_content.split('\n');
+    QTextStream stream(&files_content);
+    QString line;
 
-    QStringRef package;
-    QStringRef version;
-    QStringRef description;
-    QStringRef architecture;
+    QString package;
+    QString version;
+    QString description;
+    QString architecture;
 
     const QRegularExpression re_arch(".*(" + getArch() + "|all).*");
     bool match_arch = false;
 
     // Code assumes Description: is the last matched line
-    for (const QString &line : list) {
+    while (stream.readLineInto(&line)) {
         if (line.startsWith(QLatin1String("Package:"))) {
-            package = line.midRef(9);
+            package = line.mid(9);
         } else if (line.startsWith(QLatin1String("Architecture:"))) {
-            architecture = line.midRef(14).trimmed();
+            architecture = line.mid(14).trimmed();
             match_arch = re_arch.match(architecture).hasMatch();
         } else if (line.startsWith(QLatin1String("Version:"))) {
-            version = line.midRef(9);
+            version = line.mid(9);
         } else if (line.startsWith(QLatin1String("Description:"))) {
-            description = line.midRef(13).trimmed();
+            description = line.mid(13).trimmed();
             if (match_arch) {
-                if (candidates.constFind(package.toString()) == candidates.constEnd()
-                    || VersionNumber(candidates.value(package.toString()).version)
-                           < VersionNumber(version.toString())) {
-                    candidates.insert(package.toString(), {version.toString(), description.toString()});
+                auto it = candidates.constFind(package);
+                if (it == candidates.constEnd() || VersionNumber(it.value().version) < VersionNumber(version)) {
+                    candidates.insert(package, {version, description});
                 }
             }
         }
     }
     files_content.clear();
 }
-
 bool AptCache::readFile(const QString &file_name)
 {
     QFile file(dir.absoluteFilePath(file_name));

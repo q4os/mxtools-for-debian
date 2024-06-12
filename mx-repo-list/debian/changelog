@@ -1,3 +1,15 @@
+mx-repo-list (24.6) mx; urgency=medium
+
+  * New repo: Bulgaria
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 06 Jun 2024 18:41:10 -0400
+
+mx-repo-list (24.5.02) mx; urgency=medium
+
+  * Update host name
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 23 May 2024 10:29:13 -0400
+
 mx-repo-list (24.5.01) mx; urgency=medium
 
   * Remove inactive mirror: cvut.cz

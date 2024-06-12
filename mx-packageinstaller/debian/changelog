@@ -1,3 +1,10 @@
+mx-packageinstaller (24.5) mx; urgency=medium
+
+  * Reduce memory usage
+  * Update translations
+
+ -- Adrian <adrian@mxlinux.org>  Tue, 21 May 2024 17:14:59 -0400
+
 mx-packageinstaller (24.4.01) mx; urgency=medium
 
   * Ensure mxpitemp.list file is removed after installation and when MXPI exits
