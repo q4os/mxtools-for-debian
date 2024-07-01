@@ -1,3 +1,9 @@
+mx-boot-options (24.6) mx; urgency=medium
+
+  * Fix: setting GRUB background photo
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 12 Jun 2024 18:27:11 -0400
+
 mx-boot-options (24.3) mx; urgency=medium
 
   * Update translations

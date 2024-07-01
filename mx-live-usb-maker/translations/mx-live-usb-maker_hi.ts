@@ -257,10 +257,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Clone an existing live system</source>
-        <translation type="vanished">मौजूदा लाइव सिस्टम प्रतिरूपित करें</translation>
-    </message>
-    <message>
         <location filename="../mainwindow.ui" line="760"/>
         <source>Set up to boot from an encrypted partition, will prompt for pass phrase on first boot</source>
         <translation>एन्क्रिप्टेड विभाजन से ही बूट करें, प्रथम बूट पर कूटशब्द प्रमाणीकरण आवश्यक होगा</translation>

@@ -254,11 +254,7 @@
     <message>
         <location filename="../mainwindow.ui" line="753"/>
         <source>Clone a mounted live system</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Clone an existing live system</source>
-        <translation type="vanished">Κλωνοποίηση υπάρχοντος συστήματος live</translation>
+        <translation>Κλωνοποίηση προσαρτημένου συστήματος live</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="760"/>
@@ -309,7 +305,7 @@ Please wait until the process is completed</source>
     <message>
         <location filename="../mainwindow.cpp" line="162"/>
         <source>MX Live Usb Maker</source>
-        <translation type="unfinished"></translation>
+        <translation>MX Δημιουργία Live usb</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="333"/>

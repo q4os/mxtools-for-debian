@@ -219,7 +219,7 @@
     <message>
         <location filename="../mainwindow.ui" line="599"/>
         <source>For distros other than antiX/MX use image mode (dd).</source>
-        <translation>Pour une distribution autre que antiX/MX, utilisez le mode image (dd).</translation>
+        <translation>Pour une distribution autre qu’antiX ou MX, utilisez le mode image (dd).</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="647"/>
@@ -254,11 +254,7 @@
     <message>
         <location filename="../mainwindow.ui" line="753"/>
         <source>Clone a mounted live system</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Clone an existing live system</source>
-        <translation type="vanished">Cloner un système live existant</translation>
+        <translation>Cloner un système live monté</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="760"/>
@@ -302,14 +298,14 @@
         <source>Writing %1 using &apos;dd&apos; command to /dev/%2,
 
 Please wait until the process is completed</source>
-        <translation>Écriture de %1 à l’aide de la commande « dd » sur /dev/%2.
+        <translation>Écriture de %1 à l’aide de la commande «&#xa0;dd&#xa0;» sur /dev/%2.
 
 Veuillez patienter jusqu’à la fin de la procédure.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="162"/>
         <source>MX Live Usb Maker</source>
-        <translation type="unfinished"></translation>
+        <translation>MX Live USB Création - MX Live USB Maker</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="333"/>
@@ -481,12 +477,12 @@ Veuillez patienter jusqu’à la fin de la procédure.</translation>
     <message>
         <location filename="../main.cpp" line="88"/>
         <source>You seem to be logged in as root, please log out and log in as normal user to use this program.</source>
-        <translation>Vous semblez être connecté en tant qu’administrateur, veuillez vous déconnecter et vous connecter en tant qu’utilisateur normal pour utiliser ce programme.</translation>
+        <translation>Vous êtes apparemment connecté en tant que root, veuillez vous déconnecter et vous connecter en tant qu’utilisateur•rice normal•e pour utiliser ce programme.</translation>
     </message>
     <message>
         <location filename="../main.cpp" line="96"/>
         <source>You must run this program as root.</source>
-        <translation>Vous devez exécuter cette application en tant qu’administrateur.</translation>
+        <translation>Vous devez exécuter cette application en tant que root.</translation>
     </message>
     <message>
         <location filename="../main.cpp" line="111"/>

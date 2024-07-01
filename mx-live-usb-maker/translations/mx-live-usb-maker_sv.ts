@@ -254,11 +254,7 @@
     <message>
         <location filename="../mainwindow.ui" line="753"/>
         <source>Clone a mounted live system</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Clone an existing live system</source>
-        <translation type="vanished">Klona ett existerande live-system</translation>
+        <translation>Klona ett monterat live system</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="760"/>
@@ -309,7 +305,7 @@ Var vänlig vänta tills processen är klar</translation>
     <message>
         <location filename="../mainwindow.cpp" line="162"/>
         <source>MX Live Usb Maker</source>
-        <translation type="unfinished"></translation>
+        <translation>MX Live Usb Maker</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="333"/>

@@ -186,7 +186,7 @@ void MainWindow::setup()
     ui->checkCloneLive->setEnabled(isRunningLive() && !isEncrypted);
 
     // Dynamically show or hide data format options based on availability
-    bool dataFirstAvailable = !cmd.run(LUM + " --help | grep -q -- --data-first", true);
+    bool dataFirstAvailable = cmd.run(LUM + " --help | grep -q -- --data-first", true);
     ui->comboBoxDataFormat->setVisible(dataFirstAvailable);
     ui->checkDataFirst->setVisible(dataFirstAvailable);
     ui->spinBoxDataSize->setVisible(dataFirstAvailable);

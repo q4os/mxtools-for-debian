@@ -98,7 +98,7 @@
     <message>
         <location filename="../mainwindow.ui" line="327"/>
         <source>Save the original boot directory when updating a live-usb</source>
-        <translation>Live-USB 更新時に元の boot ディレクトリを保存</translation>
+        <translation>Live USB 更新時に元の boot ディレクトリを保存</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="334"/>
@@ -113,7 +113,7 @@
     <message>
         <location filename="../mainwindow.ui" line="344"/>
         <source>Update (only update an existing live-usb)</source>
-        <translation>更新（既存の Live-USB 更新のみ）</translation>
+        <translation>更新（既存の Live USB 更新のみ）</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="351"/>
@@ -204,7 +204,7 @@
     <message>
         <location filename="../mainwindow.ui" line="573"/>
         <source>Full-featured mode - writable Li&amp;veUSB</source>
-        <translation>フル機能モード - 書き込み可能な LiveUSB(&amp;V)</translation>
+        <translation>フル機能モード - 書き込み可能な Live USB(&amp;V)</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="583"/>
@@ -214,7 +214,7 @@
     <message>
         <location filename="../mainwindow.ui" line="586"/>
         <source>Image &amp;mode - read-only LiveUSB (dd)</source>
-        <translation>イメージモード - 読み取り専用の Live-USB (dd)(&amp;M)</translation>
+        <translation>イメージモード - 読み取り専用の Live USB (dd)(&amp;M)</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="599"/>
@@ -249,16 +249,12 @@
     <message>
         <location filename="../mainwindow.ui" line="750"/>
         <source>clone from a mounted live-usb or iso-file.</source>
-        <translation>マウントされた Live-USB や ISO ファイルからクローンを作成します。</translation>
+        <translation>マウントされた Live USB や ISO ファイルからクローンを作成します。</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="753"/>
         <source>Clone a mounted live system</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Clone an existing live system</source>
-        <translation type="vanished">既存のライブシステムをクローン</translation>
+        <translation>マウントしたライブシステムのクローンを作成</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="760"/>
@@ -309,7 +305,7 @@ Please wait until the process is completed</source>
     <message>
         <location filename="../mainwindow.cpp" line="162"/>
         <source>MX Live Usb Maker</source>
-        <translation type="unfinished"></translation>
+        <translation>MX Live USB メーカ</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="333"/>
@@ -319,12 +315,12 @@ Please wait until the process is completed</source>
     <message>
         <location filename="../mainwindow.cpp" line="333"/>
         <source>LiveUSB creation successful!</source>
-        <translation>Live-USB の作成が完了しました！</translation>
+        <translation>Live USB の作成が完了しました！</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="336"/>
         <source>Error encountered in the LiveUSB creation process</source>
-        <translation>Live-USB の作成プロセスでエラーが発生しました</translation>
+        <translation>Live USB の作成プロセスでエラーが発生しました</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="394"/>
@@ -363,7 +359,7 @@ Please wait until the process is completed</source>
     <message>
         <location filename="../mainwindow.cpp" line="433"/>
         <source>Program for creating a live-usb from an iso-file, another live-usb, a live-cd/dvd, or a running live system.</source>
-        <translation>ISO ファイルや別の Live-USB、Live-CD/DVD または実行中のライブシステムから Live-USB を作成するためのプログラム。</translation>
+        <translation>ISO ファイルや別の Live USB、Live CD/DVD または実行中のライブシステムから Live USB を作成するためのプログラム。</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="436"/>
@@ -455,7 +451,7 @@ Please wait until the process is completed</source>
     <message>
         <location filename="../main.cpp" line="54"/>
         <source>Program for creating a live-usb from an iso-file, another live-usb, a live-cd/dvd, or a running live system.</source>
-        <translation>ISO ファイルや別の Live-USB、Live-CD/DVD または実行中のライブシステムから Live-USB を作成するためのプログラム。</translation>
+        <translation>ISO ファイルや別の Live USB、Live CD/DVD または実行中のライブシステムから Live USB を作成するためのプログラム。</translation>
     </message>
     <message>
         <location filename="../main.cpp" line="58"/>

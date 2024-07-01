@@ -79,6 +79,7 @@ void AptCache::parseContent()
     }
     files_content.clear();
 }
+
 bool AptCache::readFile(const QString &file_name)
 {
     QFile file(dir.absoluteFilePath(file_name));

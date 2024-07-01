@@ -1,0 +1,9 @@
+{
+    "files.trimTrailingWhitespace": true,
+    "terminal.integrated.fontFamily": "CaskaydiaCove NF",
+    "terminal.integrated.defaultProfile.osx": "fish",
+    "files.associations": {
+        "qmessagebox": "cpp"
+    },
+    "C_Cpp.default.compilerPath": "/usr/bin/clang-16"
+}

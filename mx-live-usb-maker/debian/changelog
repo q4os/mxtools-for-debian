@@ -1,3 +1,9 @@
+mx-live-usb-maker (24.6) mx; urgency=medium
+
+  * Fix: enabling creating extra partition
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 20 Jun 2024 09:44:18 -0400
+
 mx-live-usb-maker (24.5) mx; urgency=medium
 
   * Fix: clone from mounted live system

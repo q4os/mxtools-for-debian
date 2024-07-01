@@ -35,6 +35,7 @@
 #include <QTemporaryDir>
 #include <QTemporaryFile>
 #include <QTextEdit>
+#include <QThread>
 
 #include "about.h"
 #include <chrono>
@@ -68,13 +69,12 @@ MainWindow::MainWindow(QWidget *parent)
 
     setProgressBar();
 
-    ui->pb_restoreSources->hide(); //permanently hide restore original repositories button
+    ui->pushRestoreSources->hide(); //permanently hide restore original repositories button
     ui->pushOk->setDisabled(true);
 
     setWindowTitle(tr("MX Repo Manager"));
     ui->tabWidget->setCurrentWidget(ui->tabMX);
-    refresh();
-    displayMXRepos(readMXRepos(), QString());
+    refresh(true);
 
     QSize size = this->size();
     if (settings.contains("geometry")) {
@@ -95,9 +95,10 @@ MainWindow::~MainWindow()
 }
 
 // Refresh repo info
-void MainWindow::refresh()
+void MainWindow::refresh(bool force)
 {
-    getCurrentRepo();
+    getCurrentRepo(force);
+    displayMXRepos(repos, {});
     displayAllRepos(listAptFiles());
     ui->lineSearch->clear();
     ui->lineSearch->setFocus();
@@ -171,16 +172,21 @@ void MainWindow::replaceDebianRepos(QString url)
 // List available repos
 QStringList MainWindow::readMXRepos()
 {
-    QFile file("/usr/share/mx-repo-list/repos.txt");
-    if (!file.open(QIODevice::ReadOnly)) {
-        qWarning() << "Count not open file: " << file.fileName() << file.errorString();
+    QTemporaryDir tmpdir;
+    QFile file(tmpdir.path() + "/repos.txt");
+    if (!downloadFile("https://raw.githubusercontent.com/MX-Linux/mx-repo-list/master/repos.txt", &file, 3s)) {
+        qWarning() << "Could not download 'repos.txt' from github";
+        file.setFileName("/usr/share/mx-repo-list/repos.txt");
     }
-
+    if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+        qWarning() << "Could not open local file: " << file.fileName() << file.errorString();
+        return QStringList();
+    }
     QString file_content = file.readAll().trimmed();
     file.close();
 
     QStringList file_content_list = file_content.split('\n');
-    file_content_list.sort();
+    file_content_list.sort(Qt::CaseInsensitive);
 
     QStringList list;
     std::remove_copy_if(file_content_list.begin(), file_content_list.end(), std::back_inserter(list),
@@ -191,7 +197,7 @@ QStringList MainWindow::readMXRepos()
 }
 
 // List current repo
-void MainWindow::getCurrentRepo()
+void MainWindow::getCurrentRepo(bool force)
 {
     QFile file("/etc/apt/sources.list.d/mx.list");
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
@@ -212,7 +218,9 @@ void MainWindow::getCurrentRepo()
     }
     file.close();
 
-    readMXRepos();
+    if (force) {
+        readMXRepos();
+    }
     bool containsRepo = std::any_of(repos.cbegin(), repos.cend(),
                                     [this](const QString &item) { return item.contains(current_repo); });
     if (!containsRepo) {
@@ -232,7 +240,7 @@ int MainWindow::getDebianVerNum()
     if (file.open(QIODevice::ReadOnly | QIODevice::Text)) {
         QTextStream in(&file);
         QString line = in.readLine();
-        list = line.split(".");
+        list = line.split('.');
         file.close();
     } else {
         qCritical() << "Could not open /etc/debian_version:" << file.errorString() << "Assumes Bullseye";
@@ -376,7 +384,7 @@ QStringList MainWindow::loadAptFile(const QString &file)
 void MainWindow::cancelOperation()
 {
     Cmd().runAsRoot("kill " + QString::number(shell->processId()));
-    Cmd().run("sleep 1", true);
+    QThread::sleep(1);
     if (shell->state() != QProcess::NotRunning) {
         Cmd().runAsRoot("kill -9 " + QString::number(shell->processId()));
     }
@@ -477,7 +485,7 @@ bool MainWindow::replaceRepos(const QString &url, bool quiet)
 void MainWindow::setConnections()
 {
     connect(ui->lineSearch, &QLineEdit::textChanged, this, &MainWindow::lineSearch_textChanged);
-    connect(ui->pb_restoreSources, &QPushButton::clicked, this, &MainWindow::pb_restoreSources_clicked);
+    connect(ui->pushRestoreSources, &QPushButton::clicked, this, &MainWindow::pushRestoreSources_clicked);
     connect(ui->pushAbout, &QPushButton::clicked, this, &MainWindow::pushAbout_clicked);
     connect(ui->pushCancel, &QPushButton::clicked, this, &MainWindow::close);
     connect(ui->pushFastestDebian, &QPushButton::clicked, this, &MainWindow::pushFastestDebian_clicked);
@@ -708,7 +716,7 @@ void MainWindow::lineSearch_textChanged(const QString &arg1)
     displayMXRepos(repos, arg1);
 }
 
-void MainWindow::pb_restoreSources_clicked()
+void MainWindow::pushRestoreSources_clicked()
 {
     // Check if running on antiX/MX
     if (!QFileInfo::exists("/etc/antix-version") && !QFileInfo::exists("/etc/mx-version")) {
@@ -757,8 +765,7 @@ void MainWindow::pb_restoreSources_clicked()
             shell->runAsRoot(R"(sed -i '/^\s*#*\s*deb.*ahs\s*/s/^#*\s*//' /etc/apt/sources.list.d/mx.list)", true);
         }
     }
-    refresh();
-    displayMXRepos(readMXRepos(), QString());
+    refresh(true);
     QMessageBox::information(this, tr("Success"),
                              tr("Original APT sources have been restored to the release status. User added source "
                                 "files in /etc/apt/sources.list.d/ have not been touched.")
@@ -784,9 +791,8 @@ bool MainWindow::checkRepo(const QString &repo)
 
     auto error {QNetworkReply::NoError};
     QEventLoop loop;
-    connect(reply, QOverload<QNetworkReply::NetworkError>::of(&QNetworkReply::error),
-            [&error](QNetworkReply::NetworkError err) { error = err; }); // errorOccured only in Qt >= 5.15
-    connect(reply, QOverload<QNetworkReply::NetworkError>::of(&QNetworkReply::error), &loop, &QEventLoop::quit);
+    connect(reply, &QNetworkReply::errorOccurred, [&error](QNetworkReply::NetworkError err) { error = err; });
+    connect(reply, &QNetworkReply::errorOccurred, &loop, &QEventLoop::quit);
     connect(reply, &QNetworkReply::finished, &loop, &QEventLoop::quit);
     QTimer::singleShot(5s, &loop, [&loop, &error]() {
         error = QNetworkReply::TimeoutError;
@@ -800,7 +806,7 @@ bool MainWindow::checkRepo(const QString &repo)
     return false;
 }
 
-bool MainWindow::downloadFile(const QString &url, QFile *file)
+bool MainWindow::downloadFile(const QString &url, QFile *file, std::chrono::seconds timeout)
 {
     if (!file->open(QIODevice::WriteOnly)) {
         qWarning() << "Could not open file:" << file->fileName() << file->errorString();
@@ -826,14 +832,18 @@ bool MainWindow::downloadFile(const QString &url, QFile *file)
     connect(reply, &QNetworkReply::readyRead, this,
             [&reply, file, &success]() { success = file->write(reply->readAll()) > 0; });
     connect(reply, &QNetworkReply::finished, &loop, &QEventLoop::quit);
+    QTimer::singleShot(timeout, &loop, [&loop, &reply]() {
+        reply->abort();
+        loop.quit();
+    });
     loop.exec();
-
     if (!success) {
         QMessageBox::warning(this, tr("Error"),
                              tr("There was an error writing file: %1. Please check if you have "
                                 "enough free space on your drive")
                                  .arg(file->fileName()));
-        exit(EXIT_FAILURE);
+        file->close();
+        return false;
     }
 
     file->close();

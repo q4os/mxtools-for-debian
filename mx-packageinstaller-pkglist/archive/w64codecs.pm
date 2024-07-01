@@ -6,7 +6,7 @@ Video
 </category>
 
 <name>
-w32codecs
+w64codecs
 </name>
 
 <description>

@@ -257,10 +257,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Clone an existing live system</source>
-        <translation type="vanished">Klonuj istniejący system live</translation>
-    </message>
-    <message>
         <location filename="../mainwindow.ui" line="760"/>
         <source>Set up to boot from an encrypted partition, will prompt for pass phrase on first boot</source>
         <translation>Ustawienie rozruchu z zaszyfrowanej partycji spowoduje wyświetlenie prośby o podanie hasła przy pierwszym uruchomieniu</translation>

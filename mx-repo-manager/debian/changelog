@@ -1,3 +1,17 @@
+mx-repo-manager (24.6.01) mx; urgency=medium
+
+  * Set a 3 sec. timeout for the download of repos.txt
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 12 Jun 2024 09:42:06 -0400
+
+mx-repo-manager (24.6) mx; urgency=medium
+
+  * Download repos.txt from github (no need to rebuild program to update
+    repos), use local file as a backup in case there's no internet connection
+  * Read repos.txt only once when program starts
+
+ -- Adrian <adrian@mxlinux.org>  Tue, 11 Jun 2024 23:48:00 -0400
+
 mx-repo-manager (24.3) mx; urgency=medium
 
   * Update translations 

@@ -73,7 +73,7 @@
         <location filename="../mainwindow.cpp" line="527"/>
         <location filename="../mainwindow.cpp" line="550"/>
         <source>Select ISO</source>
-        <translation>Selecionar o arquivo ISO</translation>
+        <translation>Selecionar o arquivo da imagem ISO</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="263"/>
@@ -83,7 +83,7 @@
     <message>
         <location filename="../mainwindow.ui" line="273"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Select ISO file&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Selecionar o arquivo ISO&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Selecionar o Arquivo da Imagem ISO&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="302"/>
@@ -93,7 +93,7 @@
     <message>
         <location filename="../mainwindow.ui" line="320"/>
         <source>Make the ext4 filesystem even if one exists</source>
-        <translation>Formatar em ext4 mesmo que já esteja formatado neste sistema de arquivos</translation>
+        <translation>Formatar em ‘ext4’ mesmo que já esteja formatado neste sistema de arquivos</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="327"/>
@@ -103,7 +103,7 @@
     <message>
         <location filename="../mainwindow.ui" line="334"/>
         <source>Use gpt partitioning instead of msdos</source>
-        <translation>Utilizar o particionamento GPT em vez de MSDOS</translation>
+        <translation>Utilizar o particionamento GPT em vez do MSDOS</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="337"/>
@@ -118,17 +118,17 @@
     <message>
         <location filename="../mainwindow.ui" line="351"/>
         <source>Don&apos;t replace syslinux files</source>
-        <translation>Não substituir os arquivos syslinux</translation>
+        <translation>Não substituir os arquivos ‘syslinux’</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="354"/>
         <source>Keep syslinux files</source>
-        <translation>Manter os arquivos syslinux</translation>
+        <translation>Manter os arquivos ‘syslinux’</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="361"/>
         <source>Ignore USB/removable check</source>
-        <translation>Ignorar a verificação USB/removível</translation>
+        <translation>Ignorar a verificação do dispositivo USB</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="368"/>
@@ -138,13 +138,12 @@
     <message>
         <location filename="../mainwindow.ui" line="378"/>
         <source>Set pmbr_boot disk flag (won&apos;t boot via UEFI)</source>
-        <translation>Definir o marcador (flag) de disco ‘pmbr_boot’ (não inicializa via UEFI)
-</translation>
+        <translation>Definir o marcador (flag) de disco ‘pmbr_boot’ (não inicializa via UEFI)</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="385"/>
         <source>Don&apos;t use fuseiso to mount iso files</source>
-        <translation>Não utilizar fuseiso para montar os arquivos ISO</translation>
+        <translation>Não utilizar o ‘fuseiso’ para montar os arquivos das imagens ISO</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="411"/>
@@ -179,7 +178,7 @@
     <message>
         <location filename="../mainwindow.ui" line="509"/>
         <source>Make separate data partition (percent)</source>
-        <translation>Criar a partição de dados separada (em porcentagem)</translation>
+        <translation>Criar uma partição de dados separada (em porcentagem)</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="516"/>
@@ -205,23 +204,22 @@
     <message>
         <location filename="../mainwindow.ui" line="573"/>
         <source>Full-featured mode - writable Li&amp;veUSB</source>
-        <translation>Modo completo, com o USB Executável gravável</translation>
+        <translation>Modo completo, com o USB Executável do tipo gravável</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="583"/>
         <source>Read-only, cannot be used with persistency</source>
-        <translation>Somente leitura, não pode ser utilizado com ‘persistência’</translation>
+        <translation>Somente leitura, não pode ser utilizado com a ‘persistência’</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="586"/>
         <source>Image &amp;mode - read-only LiveUSB (dd)</source>
-        <translation>Modo de imagem, com o USB Executável somente leitura (dd)
-</translation>
+        <translation>Modo de imagem, com o USB Executável do tipo somente leitura (dd)</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="599"/>
         <source>For distros other than antiX/MX use image mode (dd).</source>
-        <translation>Para distribuições (distros) que não sejam o antiX ou o MX Linux, utilizar o modo de imagem (dd).</translation>
+        <translation>Para as distribuições GNU/Linux que não sejam o antiX ou o MX Linux, utilizar o modo de imagem (dd).</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="647"/>
@@ -236,7 +234,7 @@
     <message>
         <location filename="../mainwindow.ui" line="692"/>
         <source>Label ext partition:</source>
-        <translation>Rotular a partição ext</translation>
+        <translation>Rotular a partição ‘ext’</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="740"/>
@@ -251,21 +249,17 @@
     <message>
         <location filename="../mainwindow.ui" line="750"/>
         <source>clone from a mounted live-usb or iso-file.</source>
-        <translation>Clonar a partir do USB Executável (LiveUSB) ou do arquivo ISO montado.</translation>
+        <translation>Clonar a partir do USB Executável ou do arquivo da imagem ISO que estiver montada.</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="753"/>
         <source>Clone a mounted live system</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Clone an existing live system</source>
-        <translation type="vanished">Clonar um sistema externo existente</translation>
+        <translation>Clonar um sistema externo existente</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="760"/>
         <source>Set up to boot from an encrypted partition, will prompt for pass phrase on first boot</source>
-        <translation>Configurar para inicializar a partir de uma partição criptografada/encriptada, solicitará a frase-senha na primeira inicialização</translation>
+        <translation>Configurar para inicializar a partir de uma partição criptografada/encriptada, solicitará a frase-senha (senha) na primeira inicialização</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="763"/>
@@ -292,12 +286,12 @@
         <location filename="../mainwindow.cpp" line="336"/>
         <location filename="../mainwindow.cpp" line="472"/>
         <source>Failure</source>
-        <translation>Falha</translation>
+        <translation>Ocorreu um falha</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="119"/>
         <source>Source and destination are on the same device, please select again.</source>
-        <translation>A origem e o destino estão no mesmo dispositivo, selecione novamente.</translation>
+        <translation>A origem e o destino estão no mesmo dispositivo. Por favor, selecione novamente.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="150"/>
@@ -311,7 +305,7 @@ Por favor, aguarde até que o processo seja finalizado</translation>
     <message>
         <location filename="../mainwindow.cpp" line="162"/>
         <source>MX Live Usb Maker</source>
-        <translation type="unfinished"></translation>
+        <translation>Criador de Dispositivo USB Executável do MX</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="333"/>
@@ -326,7 +320,7 @@ Por favor, aguarde até que o processo seja finalizado</translation>
     <message>
         <location filename="../mainwindow.cpp" line="336"/>
         <source>Error encountered in the LiveUSB creation process</source>
-        <translation>Erro no processo de criação da instalação externa do USB Executável</translation>
+        <translation>Ocorreu um erro no processo de criação da instalação externa do USB Executável</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="394"/>
@@ -365,7 +359,7 @@ Por favor, aguarde até que o processo seja finalizado</translation>
     <message>
         <location filename="../mainwindow.cpp" line="433"/>
         <source>Program for creating a live-usb from an iso-file, another live-usb, a live-cd/dvd, or a running live system.</source>
-        <translation>Programa para criar instalações externas em Dispositivo USB Executável (Live USB), a partir de arquivos ISO, de outra instalação externa USB Executável, de CD/DVD Executável (Live CD/DVD) ou de um sistema externo em execução (Live).</translation>
+        <translation>Programa para criar instalações externas em Dispositivo USB Executável (Live USB), seja a partir dos arquivos de imagem ISO, ou de outra instalação externa USB Executável, ou de mídias de CD/DVD Executável (Live CD/DVD) ou de um sistema externo em execução (Live).</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="436"/>
@@ -418,7 +412,7 @@ Por favor, aguarde até que o processo seja finalizado</translation>
         <location filename="../mainwindow.cpp" line="526"/>
         <location filename="../mainwindow.cpp" line="548"/>
         <source>Select ISO file</source>
-        <translation>Selecionar o arquivo ISO</translation>
+        <translation>Selecionar o arquivo da imagem ISO</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="542"/>
@@ -428,7 +422,7 @@ Por favor, aguarde até que o processo seja finalizado</translation>
     <message>
         <location filename="../mainwindow.cpp" line="609"/>
         <source>Could not find a log file at: </source>
-        <translation>Não foi possível encontrar um arquivo de registro em:</translation>
+        <translation>Não foi possível encontrar um arquivo de registro em</translation>
     </message>
 </context>
 <context>
@@ -467,7 +461,7 @@ Por favor, aguarde até que o processo seja finalizado</translation>
     <message>
         <location filename="../main.cpp" line="58"/>
         <source>Name of .iso file to open</source>
-        <translation>Nome do arquivo .iso ou .ISO a ser aberto</translation>
+        <translation>Nome do arquivo ‘.iso’ ou ‘.ISO’ a ser aberto</translation>
     </message>
     <message>
         <location filename="../main.cpp" line="59"/>
@@ -483,7 +477,7 @@ Por favor, aguarde até que o processo seja finalizado</translation>
     <message>
         <location filename="../main.cpp" line="88"/>
         <source>You seem to be logged in as root, please log out and log in as normal user to use this program.</source>
-        <translation>Ao que parece, você está acessando a sessão com o usuário root. Por favor, saia da sessão atual e entre novamente com o usuário normal para utilizar este programa.</translation>
+        <translation>Ao que parece, você está acessando a sessão com o usuário administrador (root). Por favor, saia da sessão atual e entre novamente com o usuário normal para utilizar este programa.</translation>
     </message>
     <message>
         <location filename="../main.cpp" line="96"/>

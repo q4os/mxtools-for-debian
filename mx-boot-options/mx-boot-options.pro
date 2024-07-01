@@ -19,7 +19,7 @@
 # **********************************************************************/
 
 QT       += widgets
-CONFIG   += c++1z warn_on
+CONFIG   += c++17 warn_on
 
 TARGET = mx-boot-options
 TEMPLATE = app

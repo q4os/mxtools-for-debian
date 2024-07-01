@@ -254,11 +254,7 @@
     <message>
         <location filename="../mainwindow.ui" line="753"/>
         <source>Clone a mounted live system</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Clone an existing live system</source>
-        <translation type="vanished">Clonar um sistema externo existente</translation>
+        <translation>Clonar um sistema Live</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="760"/>
@@ -309,7 +305,7 @@ Aguarde até que o processo esteja concluído</translation>
     <message>
         <location filename="../mainwindow.cpp" line="162"/>
         <source>MX Live Usb Maker</source>
-        <translation type="unfinished"></translation>
+        <translation>Criador de Dispositivos USB Executáveis do MX</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="333"/>

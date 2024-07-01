@@ -4,7 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Kaci Heskjestad, 2022
+# heskjestad, 2022
 # Dolphin Oracle <dolphinoracle@gmail.com>, 2022
 # 
 #, fuzzy

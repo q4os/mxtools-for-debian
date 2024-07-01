@@ -257,10 +257,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Clone an existing live system</source>
-        <translation type="vanished">複製既有的現場系統</translation>
-    </message>
-    <message>
         <location filename="../mainwindow.ui" line="760"/>
         <source>Set up to boot from an encrypted partition, will prompt for pass phrase on first boot</source>
         <translation>進行設定，以從加密的磁碟區開機；首次開機時，會請你輸入密碼（pass phrase）</translation>

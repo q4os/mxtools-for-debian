@@ -1,3 +1,35 @@
+mx-packageinstaller (24.6.07.1) mx; urgency=medium
+
+  * Fix my repo mistake
+
+ -- Timothy E. Harris <maintainer@mxrepo.com>  Tue, 25 Jun 2024 10:25:04 -0400
+
+mx-packageinstaller (24.6.07) mx; urgency=medium
+
+  * Update backup icons
+
+ -- Adrian <adrian@mxlinux.org>  Sun, 23 Jun 2024 22:49:49 -0400
+
+mx-packageinstaller (24.6.06) mx; urgency=medium
+
+  * Fix: revert back to property comparison of qicon name() instead of cacheKey()
+
+ -- fehlix <fehlix@mxlinux.org>  Fri, 21 Jun 2024 05:27:32 -0400
+
+mx-packageinstaller (24.6.05) mx; urgency=medium
+
+  * Fix: fallback for identical theme icons for installed and upgradable packages
+
+ -- fehlix <fehlix@mxlinux.org>  Thu, 20 Jun 2024 14:39:54 -0400
+
+mx-packageinstaller (24.6.02) mx; urgency=medium
+
+  * Add flatpak-verified repo
+  * Fix: changing flatpak repo from the combo box
+  * Fix: testing if flatpak is setup for system
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 12 Jun 2024 11:15:41 -0400
+
 mx-packageinstaller (24.5) mx; urgency=medium
 
   * Reduce memory usage

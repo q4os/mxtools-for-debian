@@ -257,10 +257,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Clone an existing live system</source>
-        <translation type="vanished">Clonare a unui sistem live</translation>
-    </message>
-    <message>
         <location filename="../mainwindow.ui" line="760"/>
         <source>Set up to boot from an encrypted partition, will prompt for pass phrase on first boot</source>
         <translation>Configurare pentru a porni de pe o partiție criptată, va solicita o parola la prima încărcare</translation>

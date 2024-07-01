@@ -77,9 +77,13 @@ MainWindow::MainWindow(const QCommandLineParser &arg_parser, QWidget *parent)
             displayPackages();
         }
         if (arch != "i386" && checkInstalled("flatpak")) {
-            if (!Cmd().run("flatpak remote-list --columns=name | grep -q flathub", true)) {
+            if (!Cmd().run("flatpak remote-list --system --columns=name | grep -qw flathub", true)) {
                 Cmd().runAsRoot(
                     "flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo");
+            }
+            if (!Cmd().run("flatpak remote-list --system --columns=name | grep -qw flathub-verified", true)) {
+                Cmd().runAsRoot("flatpak remote-add --if-not-exists --subset=verified flathub-verified "
+                                "https://flathub.org/repo/flathub.flatpakrepo");
             }
             displayFlatpaks();
         }
@@ -725,10 +729,8 @@ void MainWindow::displayPopularApps() const
         childItem->setData(PopCol::PostUninstall, Qt::UserRole, item.postUninstall);
         childItem->setData(PopCol::PreUninstall, Qt::UserRole, item.preUninstall);
         childItem->setData(PopCol::QDistro, Qt::UserRole, item.qDistro);
-
         if (checkInstalled(item.uninstallNames)) {
-            childItem->setIcon(PopCol::Check, QIcon::fromTheme("package-installed-updated",
-                                                               QIcon(":/icons/package-installed-updated.png")));
+            childItem->setIcon(PopCol::Check, qicon_installed);
         }
     }
 
@@ -796,6 +798,7 @@ void MainWindow::displayFilteredFP(QStringList list, bool raw)
 void MainWindow::displayPackages()
 {
     qDebug() << "+++" << __PRETTY_FUNCTION__ << "+++";
+
     displayPackagesIsRunning = true;
 
     QTreeWidget *newtree {nullptr};
@@ -867,15 +870,13 @@ void MainWindow::displayPackages()
         } else {
             ++inst_count;
             if (installed >= repo_candidate) {
-                (*it)->setIcon(TreeCol::Check, QIcon::fromTheme("package-installed-updated",
-                                                                QIcon(":/icons/package-installed-updated.png")));
+                (*it)->setIcon(TreeCol::Check, qicon_installed);
                 for (int i = 0; i < newtree->columnCount(); ++i) {
                     (*it)->setToolTip(i, tr("Latest version ") + installed.toString() + tr(" already installed"));
                 }
                 (*it)->setData(TreeCol::Status, Qt::UserRole, Status::Installed);
             } else {
-                (*it)->setIcon(TreeCol::Check, QIcon::fromTheme("package-installed-outdated",
-                                                                QIcon(":/icons/package-installed-outdated.png")));
+                (*it)->setIcon(TreeCol::Check, qicon_upgradable);
                 for (int i = 0; i < newtree->columnCount(); ++i) {
                     (*it)->setToolTip(i, tr("Version ") + installed.toString() + tr(" installed"));
                 }
@@ -1050,12 +1051,12 @@ void MainWindow::ifDownloadFailed() const
 void MainWindow::listFlatpakRemotes() const
 {
     qDebug() << "+++" << __PRETTY_FUNCTION__ << "+++";
+    QString currentRemote = ui->comboRemote->currentText();
     ui->comboRemote->blockSignals(true);
     ui->comboRemote->clear();
     QStringList list = Cmd().getOut("flatpak remote-list " + FPuser + "| cut -f1").remove(' ').split('\n');
     ui->comboRemote->addItems(list);
-    // Set flathub default
-    ui->comboRemote->setCurrentIndex(ui->comboRemote->findText("flathub"));
+    ui->comboRemote->setCurrentText(currentRemote.isEmpty() ? "flathub" : currentRemote);
     ui->comboRemote->blockSignals(false);
 }
 
@@ -1432,9 +1433,8 @@ bool MainWindow::isOnline()
         reply = manager.head(request);
         QEventLoop loop;
         connect(reply, &QNetworkReply::finished, &loop, &QEventLoop::quit);
-        connect(reply, QOverload<QNetworkReply::NetworkError>::of(&QNetworkReply::error),
-                [&error](QNetworkReply::NetworkError err) { error = err; }); // errorOccured only in Qt >= 5.15
-        connect(reply, QOverload<QNetworkReply::NetworkError>::of(&QNetworkReply::error), &loop, &QEventLoop::quit);
+        connect(reply, &QNetworkReply::errorOccurred, [&error](QNetworkReply::NetworkError err) { error = err; });
+        connect(reply, &QNetworkReply::errorOccurred, &loop, &QEventLoop::quit);
         auto timeout = settings.value("timeout", 7000).toUInt();
         QTimer::singleShot(timeout, &loop, [&loop, &error] {
             error = QNetworkReply::TimeoutError;
@@ -1951,16 +1951,27 @@ void MainWindow::setDirty()
     dirtyBackports = dirtyEnabledRepos = dirtyTest = true;
 }
 
-void MainWindow::setIcons() const
+void MainWindow::setIcons()
 {
+
     const QString icon_upgradable {"package-installed-outdated"};
-    const QIcon backup_icon_upgradable = QIcon(":/icons/package-installed-outdated.png");
-    ui->iconUpgradable->setIcon(QIcon::fromTheme(icon_upgradable, backup_icon_upgradable));
+    const QString icon_installed {"package-installed-updated"};
+
+    const QIcon backup_icon_upgradable(":/icons/package-installed-outdated.png");
+    const QIcon backup_icon_installed(":/icons/package-installed-updated.png");
+
+    const QIcon theme_icon_upgradable = QIcon::fromTheme(icon_upgradable, backup_icon_upgradable);
+    const QIcon theme_icon_installed = QIcon::fromTheme(icon_installed, backup_icon_installed);
+
+    const bool force_backup_icon = (theme_icon_upgradable.name() == theme_icon_installed.name());
+
+    qicon_installed = force_backup_icon ? backup_icon_installed : theme_icon_installed;
+    qicon_upgradable = force_backup_icon ? backup_icon_upgradable : theme_icon_upgradable;
+
+    ui->iconUpgradable->setIcon(qicon_upgradable);
     ui->iconUpgradable_2->setIcon(ui->iconUpgradable->icon());
     ui->iconUpgradable_3->setIcon(ui->iconUpgradable->icon());
-    const QString icon_installed {"package-installed-updated"};
-    const QIcon backup_icon_installed = QIcon(":/icons/package-installed-updated.png");
-    ui->iconInstalledPackages->setIcon(QIcon::fromTheme(icon_installed, backup_icon_installed));
+    ui->iconInstalledPackages->setIcon(qicon_installed);
     ui->iconInstalledPackages_2->setIcon(ui->iconInstalledPackages->icon());
     ui->iconInstalledPackages_3->setIcon(ui->iconInstalledPackages->icon());
     ui->iconInstalledPackages_4->setIcon(ui->iconInstalledPackages->icon());
@@ -2588,6 +2599,8 @@ void MainWindow::on_tabWidget_currentChanged(int index)
             }
             fp_ver = getVersion("flatpak");
             Cmd().runAsRoot("flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo");
+            Cmd().runAsRoot("flatpak remote-add --if-not-exists --subset=verified flathub-verified "
+                            "https://flathub.org/repo/flathub.flatpakrepo");
             enableOutput();
             listFlatpakRemotes();
             if (displayFlatpaksIsRunning) {
@@ -3017,6 +3030,8 @@ void MainWindow::on_comboUser_activated(int index)
             setCursor(QCursor(Qt::BusyCursor));
             enableOutput();
             cmd.run("flatpak --user remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo");
+            cmd.run("flatpak --user remote-add --if-not-exists --subset=verified flathub-verified "
+                    "https://flathub.org/repo/flathub.flatpakrepo");
             if (fp_ver >= VersionNumber("1.2.4")) {
                 cmd.run("flatpak update --appstream");
             }

@@ -190,6 +190,8 @@ private:
     Cmd cmd;
     LockFile *lock_file {};
     QHash<QString, VersionNumber> listInstalledVersions();
+    QIcon qicon_installed;
+    QIcon qicon_upgradable;
     QList<PopularInfo> popular_apps;
     QLocale locale;
     QMap<QString, PackageInfo> backports_list;
@@ -278,7 +280,7 @@ private:
     void setConnections() const;
     void setCurrentTree();
     void setDirty();
-    void setIcons() const;
+    void setIcons();
     void setProgressDialog();
     void setSearchFocus() const;
     void setup();

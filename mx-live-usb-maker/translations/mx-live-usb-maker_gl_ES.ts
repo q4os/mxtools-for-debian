@@ -257,10 +257,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Clone an existing live system</source>
-        <translation type="vanished">Clonar un sistema externo existente</translation>
-    </message>
-    <message>
         <location filename="../mainwindow.ui" line="760"/>
         <source>Set up to boot from an encrypted partition, will prompt for pass phrase on first boot</source>
         <translation>Definir para arrancar de partición encriptada; pedirá unha frase-contrasinal no primeiro arranque</translation>

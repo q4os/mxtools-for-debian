@@ -450,15 +450,10 @@ void MainWindow::writeDefaultGrub()
 
 QStringList MainWindow::getLinuxPartitions()
 {
-#if (QT_VERSION < QT_VERSION_CHECK(5, 14, 0))
-#define SKIPEMPTYPARTS QString::SkipEmptyParts
-#else
-#define SKIPEMPTYPARTS Qt::SkipEmptyParts
-#endif
     const QStringList partitions
         = cmd.getOutAsRoot("lsblk -ln -o NAME,SIZE,FSTYPE,MOUNTPOINT,LABEL -e 2,11 -x NAME | "
                            "grep -E '^x?[h,s,v].[a-z][0-9]|^mmcblk[0-9]+p|^nvme[0-9]+n[0-9]+p'")
-              .split('\n', SKIPEMPTYPARTS);
+              .split('\n', Qt::SkipEmptyParts);
     QStringList new_list;
     qDebug() << "PARTITIONS" << partitions;
     for (const QString &part_info : partitions) {
@@ -833,7 +828,10 @@ void MainWindow::pushApply_clicked()
     if (options_changed) {
         cmd.runAsRoot("grub-editenv /boot/grub/grubenv unset next_entry"); // uset the saved entry from grubenv
         if (ui->pushBgFile->isEnabled() && QFile::exists(ui->pushBgFile->property("file").toString())) {
-            replaceGrubArg("export GRUB_MENU_PICTURE", "\"" + ui->pushBgFile->property("file").toString() + "\"");
+            if (!replaceGrubArg("export GRUB_MENU_PICTURE",
+                                "\"" + ui->pushBgFile->property("file").toString() + "\"")) {
+                addGrubLine("export GRUB_MENU_PICTURE=\"" + ui->pushBgFile->property("file").toString() + "\"");
+            }
         } else if (ui->checkGrubTheme->isChecked() && QFile::exists(ui->pushThemeFile->property("file").toString())) {
             disableGrubLine("export GRUB_MENU_PICTURE");
             if (!replaceGrubArg("GRUB_THEME", "\"" + ui->pushThemeFile->property("file").toString() + "\"")) {

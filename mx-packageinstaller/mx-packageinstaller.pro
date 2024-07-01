@@ -22,7 +22,7 @@
 # **********************************************************************/
 
 QT       += core gui xml network widgets
-CONFIG   += c++1z
+CONFIG   += c++17
 
 TARGET = mx-packageinstaller
 TEMPLATE = app

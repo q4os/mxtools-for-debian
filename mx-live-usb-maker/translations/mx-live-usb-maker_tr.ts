@@ -258,10 +258,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Clone an existing live system</source>
-        <translation type="vanished">Mevcut bir canlı sistemi kopyalayın</translation>
-    </message>
-    <message>
         <location filename="../mainwindow.ui" line="760"/>
         <source>Set up to boot from an encrypted partition, will prompt for pass phrase on first boot</source>
         <translation>Şifrelenmiş bir bölümden önyükleme yapmak için ayarlayın, ilk önyüklemede şifre isteyecektir</translation>

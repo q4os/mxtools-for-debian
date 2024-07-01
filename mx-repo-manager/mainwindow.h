@@ -38,6 +38,8 @@ namespace Ui
 class MainWindow;
 }
 
+using namespace std::chrono_literals;
+
 class MainWindow : public QDialog
 {
     Q_OBJECT
@@ -60,8 +62,8 @@ public:
     void displayMXRepos(const QStringList &repos, const QString &filter);
     void displaySelected(const QString &repo);
     void extractUrls(const QStringList &repos);
-    void getCurrentRepo();
-    void refresh();
+    void getCurrentRepo(bool force = false);
+    void refresh(bool force = false);
     void replaceDebianRepos(QString url);
     void setConnections();
     void setProgressBar();
@@ -75,7 +77,7 @@ private slots:
     void procStart();
 
     void lineSearch_textChanged(const QString &arg1);
-    void pb_restoreSources_clicked();
+    void pushRestoreSources_clicked();
     void pushAbout_clicked();
     void pushFastestDebian_clicked();
     void pushFastestMX_clicked();
@@ -100,5 +102,5 @@ private:
     bool sources_changed {};
 
     static bool checkRepo(const QString &repo);
-    bool downloadFile(const QString &url, QFile *file);
+    bool downloadFile(const QString &url, QFile *file, std::chrono::seconds timeout = 10s);
 };

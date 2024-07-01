@@ -52,7 +52,7 @@
    <item>
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>0</number>
+      <number>2</number>
      </property>
      <widget class="QWidget" name="tabMX">
       <attribute name="title">
@@ -243,13 +243,12 @@
         </spacer>
        </item>
        <item row="1" column="1">
-        <widget class="QPushButton" name="pb_restoreSources">
+        <widget class="QPushButton" name="pushRestoreSources">
          <property name="text">
           <string>Restore original APT sources</string>
          </property>
          <property name="icon">
-          <iconset theme="undo">
-           <normaloff>.</normaloff>.</iconset>
+          <iconset theme="undo"/>
          </property>
          <property name="autoDefault">
           <bool>false</bool>
@@ -333,8 +332,7 @@
         <string>Help</string>
        </property>
        <property name="icon">
-        <iconset theme="help-contents">
-         <normaloff>.</normaloff>.</iconset>
+        <iconset theme="help-contents"/>
        </property>
        <property name="shortcut">
         <string>Alt+H</string>
@@ -388,8 +386,7 @@
         <string>About...</string>
        </property>
        <property name="icon">
-        <iconset theme="help-about">
-         <normaloff>.</normaloff>.</iconset>
+        <iconset theme="help-about"/>
        </property>
        <property name="shortcut">
         <string>Alt+B</string>
@@ -414,8 +411,7 @@
         <string>Close</string>
        </property>
        <property name="icon">
-        <iconset theme="window-close">
-         <normaloff>.</normaloff>.</iconset>
+        <iconset theme="window-close"/>
        </property>
        <property name="shortcut">
         <string>Alt+N</string>

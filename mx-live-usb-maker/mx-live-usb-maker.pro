@@ -19,7 +19,7 @@
 # **********************************************************************/
 
 QT       += widgets
-CONFIG   += release warn_on c++1z
+CONFIG   += release warn_on c++17
 
 TARGET = mx-live-usb-maker
 TEMPLATE = app
