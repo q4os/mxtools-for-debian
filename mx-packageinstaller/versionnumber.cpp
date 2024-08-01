@@ -39,18 +39,20 @@ void VersionNumber::setStrings(const QString &value)
     QString debian_str;
 
     // Parse epoch and upstream_version
-    if (value.contains(':')) {
-        epoch = value.section(':', 0, 0).toInt();
-        upstream_str = value.section(':', 1);
+    int colonIndex = value.indexOf(':');
+    if (colonIndex != -1) {
+        epoch = value.leftRef(colonIndex).toInt();
+        upstream_str = value.mid(colonIndex + 1);
     } else {
         epoch = 0;
         upstream_str = value;
     }
 
     // Parse debian_revision
-    if (upstream_str.contains('-')) {
-        debian_str = upstream_str.section('-', -1);
-        upstream_str = upstream_str.remove('-' + debian_str);
+    int dashIndex = upstream_str.lastIndexOf('-');
+    if (dashIndex != -1) {
+        debian_str = upstream_str.mid(dashIndex + 1);
+        upstream_str = upstream_str.left(dashIndex);
     }
 
     upstream_version = groupDigits(upstream_str);
@@ -97,12 +99,15 @@ bool VersionNumber::operator!=(const VersionNumber &value) const
 QStringList VersionNumber::groupDigits(const QString &value)
 {
     QStringList result;
+    int length = value.length();
+    result.reserve(length);
     QString cache;
 
-    for (int i = 0; i < value.length(); ++i) {
-        if (value.at(i).isDigit()) {
-            cache.append(value.at(i));
-            if (i == value.length() - 1) {
+    for (int i = 0; i < length; ++i) {
+        QChar currentChar = value.at(i);
+        if (currentChar.isDigit()) {
+            cache.append(currentChar);
+            if (i == length - 1) {
                 result.append(cache);
             }
         } else {
@@ -110,7 +115,7 @@ QStringList VersionNumber::groupDigits(const QString &value)
                 result.append(cache);
                 cache.clear();
             }
-            result.append(value.at(i));
+            result.append(currentChar);
         }
     }
 
@@ -139,7 +144,8 @@ int VersionNumber::compare(const VersionNumber &first, const VersionNumber &seco
 int VersionNumber::compare(const QStringList &first, const QStringList &second)
 {
     // Compare QStringList versions
-    for (int i = 0; i < first.length() && i < second.length(); ++i) {
+    int minLength = qMin(first.length(), second.length());
+    for (int i = 0; i < minLength; ++i) {
         if (first.at(i) == second.at(i)) {
             continue;
         }

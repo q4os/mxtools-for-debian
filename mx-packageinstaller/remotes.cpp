@@ -7,13 +7,14 @@
 #include <QMessageBox>
 #include <QPushButton>
 
-ManageRemotes::ManageRemotes(QWidget *parent)
-    : QDialog(parent)
+#include "cmd.h"
+
+ManageRemotes::ManageRemotes(QWidget *parent, const QString &user)
+    : QDialog(parent),
+      user(user)
 {
     setWindowTitle(tr("Manage Flatpak Remotes"));
     changed = false;
-    cmd = new Cmd(this);
-    user = "--system ";
 
     auto *layout = new QGridLayout();
     setLayout(layout);
@@ -21,6 +22,11 @@ ManageRemotes::ManageRemotes(QWidget *parent)
     comboUser = new QComboBox(this);
     comboUser->addItem(tr("For all users"));
     comboUser->addItem(tr("For current user"));
+    if (user == "--system ") {
+        comboUser->setCurrentIndex(0);
+    } else {
+        comboUser->setCurrentIndex(1);
+    }
 
     comboRemote = new QComboBox(this);
 
@@ -77,10 +83,10 @@ void ManageRemotes::removeItem()
         return;
     }
     changed = true;
-    const QString remote = comboRemote->currentText().section('\t', 0, 0);
-    QString user = comboRemote->currentText().section('\t', 1, 1);
+    const QString remote = comboRemote->currentText().section(" -- ", 0, 0);
+    QString user = comboRemote->currentText().section(" -- ", 1, 1);
     user = user.isEmpty() ? "" : user.prepend("--");
-    cmd->run("flatpak remote-delete " + remote + ' ' + user);
+    Cmd().run("flatpak remote-delete " + remote + ' ' + user);
     comboRemote->removeItem(comboRemote->currentIndex());
 }
 
@@ -90,7 +96,7 @@ void ManageRemotes::addItem()
     QString location = editAddRemote->text();
     QString name = editAddRemote->text().section('/', -1).section('.', 0, 0); // obtain the name before .flatpakremo
 
-    if (!cmd->run("flatpak remote-add " + user + "--if-not-exists " + name + ' ' + location)) {
+    if (!Cmd().run("flatpak remote-add " + user + "--if-not-exists " + name + ' ' + location)) {
         setCursor(QCursor(Qt::ArrowCursor));
         QMessageBox::critical(this, tr("Error adding remote"),
                               tr("Could not add remote - command returned an error. Please double-check the remote "
@@ -117,7 +123,7 @@ void ManageRemotes::userSelected(int index)
     } else {
         user = QStringLiteral("--user ");
         setCursor(QCursor(Qt::BusyCursor));
-        cmd->run("flatpak --user remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo");
+        Cmd().run("flatpak --user remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo");
         setCursor(QCursor(Qt::ArrowCursor));
     }
     listFlatpakRemotes();
@@ -128,6 +134,6 @@ void ManageRemotes::listFlatpakRemotes() const
 {
     qDebug() << "+++" << __PRETTY_FUNCTION__ << "+++";
     comboRemote->clear();
-    QStringList list = cmd->getOut("flatpak remote-list").split('\n');
+    QStringList list = Cmd().getOut("flatpak remote-list").replace('\t', " -- ").split('\n');
     comboRemote->addItems(list);
 }

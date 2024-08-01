@@ -499,154 +499,154 @@
     <name>MainWindow</name>
     <message>
         <location filename="../mainwindow.cpp" line="108"/>
-        <location filename="../mainwindow.cpp" line="155"/>
-        <location filename="../mainwindow.cpp" line="163"/>
-        <location filename="../mainwindow.cpp" line="181"/>
-        <location filename="../mainwindow.cpp" line="190"/>
-        <location filename="../mainwindow.cpp" line="198"/>
-        <location filename="../mainwindow.cpp" line="757"/>
-        <location filename="../mainwindow.cpp" line="783"/>
-        <location filename="../mainwindow.cpp" line="813"/>
-        <location filename="../mainwindow.cpp" line="970"/>
-        <location filename="../mainwindow.cpp" line="1037"/>
-        <location filename="../mainwindow.cpp" line="1044"/>
-        <location filename="../mainwindow.cpp" line="1049"/>
-        <location filename="../mainwindow.cpp" line="1054"/>
-        <location filename="../mainwindow.cpp" line="1059"/>
+        <location filename="../mainwindow.cpp" line="158"/>
+        <location filename="../mainwindow.cpp" line="166"/>
+        <location filename="../mainwindow.cpp" line="184"/>
+        <location filename="../mainwindow.cpp" line="193"/>
+        <location filename="../mainwindow.cpp" line="201"/>
+        <location filename="../mainwindow.cpp" line="761"/>
+        <location filename="../mainwindow.cpp" line="787"/>
+        <location filename="../mainwindow.cpp" line="817"/>
+        <location filename="../mainwindow.cpp" line="974"/>
+        <location filename="../mainwindow.cpp" line="1041"/>
+        <location filename="../mainwindow.cpp" line="1048"/>
+        <location filename="../mainwindow.cpp" line="1053"/>
+        <location filename="../mainwindow.cpp" line="1058"/>
+        <location filename="../mainwindow.cpp" line="1063"/>
         <source>none</source>
         <translation>ei mitään</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="140"/>
-        <location filename="../mainwindow.cpp" line="744"/>
-        <location filename="../mainwindow.cpp" line="977"/>
-        <location filename="../mainwindow.cpp" line="986"/>
+        <location filename="../mainwindow.cpp" line="143"/>
+        <location filename="../mainwindow.cpp" line="748"/>
+        <location filename="../mainwindow.cpp" line="981"/>
+        <location filename="../mainwindow.cpp" line="990"/>
         <source>browse...</source>
         <translation>selaa...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="209"/>
+        <location filename="../mainwindow.cpp" line="212"/>
         <source>The user configuration will be repaired. Please close all other applications now. When finished, please logout or reboot. Are you sure you want to repair now?</source>
         <translation>Käyttäjän konfiguraatio korjataan. Ole hyvä ja sulje kaikki muut sovellukset nyt. Korjauksen valmistuttua ole hyvä ja kirjaudu ulos, tai käynnistä kone uudelleen.Haluatko varmasti korjata nyt?</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="231"/>
+        <location filename="../mainwindow.cpp" line="234"/>
         <source>User group membership was restored.</source>
         <translation>Käyttäjäryhmän jäsenyys palautettiin.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="236"/>
+        <location filename="../mainwindow.cpp" line="239"/>
         <source>Mozilla settings were reset.</source>
         <translation>Mozilla-asetukset nollattiin.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="247"/>
-        <location filename="../mainwindow.cpp" line="263"/>
+        <location filename="../mainwindow.cpp" line="250"/>
+        <location filename="../mainwindow.cpp" line="265"/>
         <source>Autologin options</source>
         <translation>Automaattikirjautumisen asetukset</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="248"/>
+        <location filename="../mainwindow.cpp" line="251"/>
         <source>Autologin has been disabled for the &apos;%1&apos; account.</source>
         <translation>Automaattikirjautuminen on poistettu käytöstä käyttäjältililtä &apos;%1&apos;.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="264"/>
+        <location filename="../mainwindow.cpp" line="266"/>
         <source>Autologin has been enabled for the &apos;%1&apos; account.</source>
         <translation>Automaattikirjautuminen on otettu käyttöön käyttäjältilille &apos;%1&apos;.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="276"/>
+        <location filename="../mainwindow.cpp" line="278"/>
         <source>You must specify a &apos;copy to&apos; destination. You cannot copy to the desktop you are logged in to.</source>
         <translation>Sinun täytyy määrittää kohde kopioinnille. Et voi kopioida työpöydälle jolle olet kirjautunut.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="282"/>
+        <location filename="../mainwindow.cpp" line="284"/>
         <source>Before copying, close all other applications. Be sure the copy to destination is large enough to contain the files you are copying. Copying between desktops may overwrite or delete your files or preferences on the destination desktop. Are you sure you want to proceed?</source>
         <translation>Sulje muut sovellukset ennen kopiointia. Varmista, että kohteessa kopioitaville tiedostoille on tarpeeksi vapaata tilaa. Työpöytien välinen kopiointi saattaa muokata tai tuhota tiedostojasi tai asetuksiasi kohdetyöpöydällä. Haluatko varmasti jatkaa?</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="308"/>
+        <location filename="../mainwindow.cpp" line="310"/>
         <source>Synchronizing desktop...</source>
         <translation>Synkronoidaan työpöytää...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="310"/>
+        <location filename="../mainwindow.cpp" line="312"/>
         <source>Copying desktop...</source>
         <translation>Kopioidaan työpöytää...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="347"/>
-        <location filename="../mainwindow.cpp" line="574"/>
+        <location filename="../mainwindow.cpp" line="349"/>
+        <location filename="../mainwindow.cpp" line="581"/>
         <source>The user name needs to be at least 2 characters long. Please select a longer name before proceeding.</source>
         <translation>Käyttäjänimen on oltava ainakin 2 merkkiä pitkä. Ole hyvä, ja valitse pidempi nimi ennen jatkamista.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="352"/>
+        <location filename="../mainwindow.cpp" line="354"/>
         <source>The user name cannot contain special characters or spaces.
 Please choose another name before proceeding.</source>
         <translation>Käyttäjänimi ei voi sisältää erikoismerkkejä tai välilyöntejä.
 Valitse toisenlainen nimi jatkaaksesi.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="358"/>
+        <location filename="../mainwindow.cpp" line="360"/>
         <source>Sorry, this name is in use. Please enter a different name.</source>
         <translation>Pahoittelut, tämä nimi on varattu. Anna jokin toinen nimi.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="362"/>
-        <location filename="../mainwindow.cpp" line="417"/>
+        <location filename="../mainwindow.cpp" line="364"/>
+        <location filename="../mainwindow.cpp" line="419"/>
         <source>Password entries do not match. Please try again.</source>
         <translation>Salasanat eivät täsmää. Yritä uudelleen, ole hyvä.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="367"/>
-        <location filename="../mainwindow.cpp" line="422"/>
+        <location filename="../mainwindow.cpp" line="369"/>
+        <location filename="../mainwindow.cpp" line="424"/>
         <source>Password needs to be at least 2 characters long. Please enter a longer password before proceeding.</source>
         <translation>Salasanan tulee olla ainakin 2 merkkiä pitkä. Anna pidempi salasana ennen jatkamista.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="406"/>
+        <location filename="../mainwindow.cpp" line="408"/>
         <source>The user was added ok.</source>
         <translation>Käyttäjän lisääminen onnistui.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="409"/>
+        <location filename="../mainwindow.cpp" line="411"/>
         <source>Failed to add the user.</source>
         <translation>Käyttäjän lisääminen epäonnistui.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="437"/>
+        <location filename="../mainwindow.cpp" line="439"/>
         <source>Password successfully changed.</source>
         <translation>Salasanan vaihtaminen onnistui.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="440"/>
+        <location filename="../mainwindow.cpp" line="442"/>
         <source>Failed to change password.</source>
         <translation>Salasanan vaihtaminen epäonnistui.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="446"/>
+        <location filename="../mainwindow.cpp" line="448"/>
         <source>This action cannot be undone. Are you sure you want to delete user %1?</source>
         <translation>Tätä toimintoa ei voi perua. Haluatko varmasti poistaa käyttäjän %1?</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="464"/>
+        <location filename="../mainwindow.cpp" line="467"/>
         <source>The user has been deleted.</source>
         <translation>Käyttäjä on poistettu.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="466"/>
+        <location filename="../mainwindow.cpp" line="469"/>
         <source>Failed to delete the user.</source>
         <translation>Käyttäjän poistaminen epäonnistui.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="480"/>
+        <location filename="../mainwindow.cpp" line="483"/>
         <source>The group name needs to be at least 2 characters long. Please select a longer name before proceeding.</source>
         <translation>Ryhmän nimen tulee olla vähintään 2 merkkiä pitkä. Valitse pidempi nimi ennen jatkamista.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="485"/>
+        <location filename="../mainwindow.cpp" line="488"/>
         <source>The group name needs to be lower case and it 
 cannot contain special characters or spaces.
 Please choose another name before proceeding.</source>
@@ -655,72 +655,72 @@ ei voi sisältää erikoismerkkejä tai välilyöntejä.
 Valitse eri nimi ennen jatkamista.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="493"/>
+        <location filename="../mainwindow.cpp" line="496"/>
         <source>Sorry, that group name already exists. Please enter a different name.</source>
         <translation>Pahoittelut, tuo ryhmä nimi on jo varattu. Anna jokin toinen nimi.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="501"/>
+        <location filename="../mainwindow.cpp" line="504"/>
         <source>The system group was added ok.</source>
         <translation>Järjestelmäryhmä lisättiin onnistuneesti.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="503"/>
+        <location filename="../mainwindow.cpp" line="506"/>
         <source>Failed to add the system group.</source>
         <translation>Järjestelmäryhmän lisääminen epäonnistui.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="518"/>
+        <location filename="../mainwindow.cpp" line="521"/>
         <source>This action cannot be undone. Are you sure you want to delete group %1?</source>
         <translation>Tätä toimintoa ei voida perua. Oletko varma että haluat poistaa ryhmän %1?</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="519"/>
+        <location filename="../mainwindow.cpp" line="522"/>
         <source>This action cannot be undone. Are you sure you want to delete the following groups: %1?</source>
         <translation>Tätä toimintoa ei voi kumota. Haluatko varmasti poistaa seuraavat ryhmät: %1?</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="528"/>
+        <location filename="../mainwindow.cpp" line="531"/>
         <source>Failed to delete the group.</source>
         <translation>Ryhmän poistaminen epäonnistui.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="528"/>
+        <location filename="../mainwindow.cpp" line="531"/>
         <source>Group: %1</source>
         <translation>Ryhmä: %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="532"/>
+        <location filename="../mainwindow.cpp" line="535"/>
         <source>The group has been deleted.</source>
         <translation>Ryhmä on poistettu.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="532"/>
+        <location filename="../mainwindow.cpp" line="535"/>
         <source>The groups have been deleted.</source>
         <translation>Ryhmät on poistettu.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="549"/>
+        <location filename="../mainwindow.cpp" line="552"/>
         <source>The changes have been applied.</source>
         <translation>Muutokset ovat otettu käyttöön.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="551"/>
+        <location filename="../mainwindow.cpp" line="554"/>
         <source>Failed to apply group changes</source>
         <translation>Ryhmän muutoksia ei voitu ottaa käyttöön</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="565"/>
+        <location filename="../mainwindow.cpp" line="572"/>
         <source>The selected user name is currently in use.</source>
         <translation>Valittu käyttäjänimi on jo varattu.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="566"/>
+        <location filename="../mainwindow.cpp" line="573"/>
         <source>To rename this user, please log out and log back in using another user account.</source>
         <translation>Kyseisen käyttäjän uudelleennimeämistä varten, kirjaudu ulos sekä takaisin sisään käyttäen toista tiliä.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="579"/>
+        <location filename="../mainwindow.cpp" line="586"/>
         <source>The user name needs to be lower case and it
 cannot contain special characters or spaces.
 Please choose another name before proceeding.</source>
@@ -729,84 +729,84 @@ ei voi sisältää erikoismerkkejä tai vililyöntejä.
 Ole hyvä ja valitse toinen ennen kuin jatkat.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="586"/>
+        <location filename="../mainwindow.cpp" line="593"/>
         <source>Sorry, this name already exists on your system. Please enter a different name.</source>
         <translation>Pahoittelut, tämä nimi on jo olemassa järjestelmässäsi. Anna jokin toinen nimi.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="595"/>
+        <location filename="../mainwindow.cpp" line="602"/>
         <source>Failed to rename the user. Please make sure that the user is not logged in, you might need to restart</source>
         <translation>Käyttäjän uudelleennimeäminen epäonnistui. Varmista että käyttäjä ei ole kirjautuneena sisään, voi olla että tarvitaan uudelleenkäynnistys.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="619"/>
+        <location filename="../mainwindow.cpp" line="626"/>
         <source>The user was renamed.</source>
         <translation>Käyttäjä nimettiin uudelleen.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="631"/>
-        <location filename="../mainwindow.cpp" line="659"/>
+        <location filename="../mainwindow.cpp" line="638"/>
+        <location filename="../mainwindow.cpp" line="666"/>
         <source>Synchronizing desktop...ok</source>
         <translation>Synkronoidaan työpöytää...ok</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="633"/>
-        <location filename="../mainwindow.cpp" line="661"/>
+        <location filename="../mainwindow.cpp" line="640"/>
+        <location filename="../mainwindow.cpp" line="668"/>
         <source>Copying desktop...ok</source>
         <translation>Kopioidaat työpöytää...ok</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="665"/>
+        <location filename="../mainwindow.cpp" line="672"/>
         <source>Synchronizing desktop...failed</source>
         <translation>Synkronoidaan työpöytää...epäonnistui</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="667"/>
+        <location filename="../mainwindow.cpp" line="674"/>
         <source>Copying desktop...failed</source>
         <translation>Kopioidaan työpöytää...epäonnistui</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="686"/>
+        <location filename="../mainwindow.cpp" line="693"/>
         <source>Confirmation</source>
         <translation>Vahvistus</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="687"/>
+        <location filename="../mainwindow.cpp" line="694"/>
         <source>Process not done. Are you sure you want to quit the application?</source>
         <translation>Prosessia ei ole valmis. Haluatko varmasti lopettaa sovelluksen?</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="942"/>
+        <location filename="../mainwindow.cpp" line="946"/>
         <source>About %1</source>
         <translation>%1 lisätietoja</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="943"/>
+        <location filename="../mainwindow.cpp" line="947"/>
         <source>Version: </source>
         <translation>Versio: </translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="944"/>
+        <location filename="../mainwindow.cpp" line="948"/>
         <source>Simple user configuration for MX Linux</source>
         <translation>Helppo käyttäjien konfiguraatio MX Linuxille</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="946"/>
+        <location filename="../mainwindow.cpp" line="950"/>
         <source>Copyright (c) MX Linux</source>
         <translation>Copyright (c) MX Linux</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="947"/>
+        <location filename="../mainwindow.cpp" line="951"/>
         <source>%1 License</source>
         <translation>%1 lupa</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="961"/>
+        <location filename="../mainwindow.cpp" line="965"/>
         <source>%1 Help</source>
         <translation>%1 Apuopas</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="978"/>
+        <location filename="../mainwindow.cpp" line="982"/>
         <source>Select folder to copy to</source>
         <translation>Valitse kansio johon kopioidaan</translation>
     </message>
@@ -883,18 +883,18 @@ Ole hyvä ja valitse toinen ennen kuin jatkat.</translation>
         <translation>&amp;Sulje</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="61"/>
-        <location filename="../main.cpp" line="68"/>
+        <location filename="../main.cpp" line="65"/>
+        <location filename="../main.cpp" line="73"/>
         <source>Error</source>
         <translation>Virhe</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="62"/>
+        <location filename="../main.cpp" line="66"/>
         <source>You seem to be logged in as root, please log out and log in as normal user to use this program.</source>
         <translation>Olet kirjautunut sisään pääkäyttäjänä. Kirjaudu sisään normaalina käyttäjänä käyttääksesi tätä ohjelmaa.</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="69"/>
+        <location filename="../main.cpp" line="74"/>
         <source>You must run this program with admin access.</source>
         <translation>Tämä ohjelma on suoritettava järjestelmänvalvojan oikeuksilla.</translation>
     </message>

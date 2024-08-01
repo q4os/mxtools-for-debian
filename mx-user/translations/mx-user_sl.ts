@@ -437,7 +437,7 @@
     <message>
         <location filename="../mainwindow.ui" line="1583"/>
         <source>Cancel any changes then quit</source>
-        <translation>Zavrzi vse spremembe in izstopi</translation>
+        <translation>Zavrzi vse spremembe in končaj</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1586"/>
@@ -499,154 +499,154 @@
     <name>MainWindow</name>
     <message>
         <location filename="../mainwindow.cpp" line="108"/>
-        <location filename="../mainwindow.cpp" line="155"/>
-        <location filename="../mainwindow.cpp" line="163"/>
-        <location filename="../mainwindow.cpp" line="181"/>
-        <location filename="../mainwindow.cpp" line="190"/>
-        <location filename="../mainwindow.cpp" line="198"/>
-        <location filename="../mainwindow.cpp" line="757"/>
-        <location filename="../mainwindow.cpp" line="783"/>
-        <location filename="../mainwindow.cpp" line="813"/>
-        <location filename="../mainwindow.cpp" line="970"/>
-        <location filename="../mainwindow.cpp" line="1037"/>
-        <location filename="../mainwindow.cpp" line="1044"/>
-        <location filename="../mainwindow.cpp" line="1049"/>
-        <location filename="../mainwindow.cpp" line="1054"/>
-        <location filename="../mainwindow.cpp" line="1059"/>
+        <location filename="../mainwindow.cpp" line="158"/>
+        <location filename="../mainwindow.cpp" line="166"/>
+        <location filename="../mainwindow.cpp" line="184"/>
+        <location filename="../mainwindow.cpp" line="193"/>
+        <location filename="../mainwindow.cpp" line="201"/>
+        <location filename="../mainwindow.cpp" line="761"/>
+        <location filename="../mainwindow.cpp" line="787"/>
+        <location filename="../mainwindow.cpp" line="817"/>
+        <location filename="../mainwindow.cpp" line="974"/>
+        <location filename="../mainwindow.cpp" line="1041"/>
+        <location filename="../mainwindow.cpp" line="1048"/>
+        <location filename="../mainwindow.cpp" line="1053"/>
+        <location filename="../mainwindow.cpp" line="1058"/>
+        <location filename="../mainwindow.cpp" line="1063"/>
         <source>none</source>
         <translation>brez</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="140"/>
-        <location filename="../mainwindow.cpp" line="744"/>
-        <location filename="../mainwindow.cpp" line="977"/>
-        <location filename="../mainwindow.cpp" line="986"/>
+        <location filename="../mainwindow.cpp" line="143"/>
+        <location filename="../mainwindow.cpp" line="748"/>
+        <location filename="../mainwindow.cpp" line="981"/>
+        <location filename="../mainwindow.cpp" line="990"/>
         <source>browse...</source>
         <translation>brskanje...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="209"/>
+        <location filename="../mainwindow.cpp" line="212"/>
         <source>The user configuration will be repaired. Please close all other applications now. When finished, please logout or reboot. Are you sure you want to repair now?</source>
         <translation>Uporabniška konfiguracija bo popravljena. Prosimo, zaprite vse aplikacije. Po zaključku se odjavite ali ponovno zaženite sistem. Ste prepričani, da želite pričeti s popravilom?</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="231"/>
+        <location filename="../mainwindow.cpp" line="234"/>
         <source>User group membership was restored.</source>
         <translation>Članstvo upoabnika v skupini je bilo obnovljeno.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="236"/>
+        <location filename="../mainwindow.cpp" line="239"/>
         <source>Mozilla settings were reset.</source>
         <translation>Mozilla nastavitve so bile ponastavljene.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="247"/>
-        <location filename="../mainwindow.cpp" line="263"/>
+        <location filename="../mainwindow.cpp" line="250"/>
+        <location filename="../mainwindow.cpp" line="265"/>
         <source>Autologin options</source>
         <translation>Nastavitve za samodejno prijavo</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="248"/>
+        <location filename="../mainwindow.cpp" line="251"/>
         <source>Autologin has been disabled for the &apos;%1&apos; account.</source>
         <translation>Samodejna prijava je oneomogočena za račun &apos;%1&apos;.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="264"/>
+        <location filename="../mainwindow.cpp" line="266"/>
         <source>Autologin has been enabled for the &apos;%1&apos; account.</source>
         <translation>Samodejna prijava je vklopljena za račun &apos;%1&apos;.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="276"/>
+        <location filename="../mainwindow.cpp" line="278"/>
         <source>You must specify a &apos;copy to&apos; destination. You cannot copy to the desktop you are logged in to.</source>
         <translation>Določiti morate cilj za &apos;kopiranje v&apos;. Ne morete kopirati na namizje na katerega ste prijavljeni.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="282"/>
+        <location filename="../mainwindow.cpp" line="284"/>
         <source>Before copying, close all other applications. Be sure the copy to destination is large enough to contain the files you are copying. Copying between desktops may overwrite or delete your files or preferences on the destination desktop. Are you sure you want to proceed?</source>
         <translation>Pred kopiranjem zaprite vse ostale aplikacije. Preverite, da je cilj kopiranja dovolj velik za datoteke, ki jih kopirate. Kopiranje med namizji lahko prepiše ali izbriše datoteke in nastavitve na ciljnem namizju. Ste prepričani, da želite nadaljevati?</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="308"/>
+        <location filename="../mainwindow.cpp" line="310"/>
         <source>Synchronizing desktop...</source>
         <translation>Sinhronizacija namizij ...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="310"/>
+        <location filename="../mainwindow.cpp" line="312"/>
         <source>Copying desktop...</source>
         <translation>Kopiranje namizij ...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="347"/>
-        <location filename="../mainwindow.cpp" line="574"/>
+        <location filename="../mainwindow.cpp" line="349"/>
+        <location filename="../mainwindow.cpp" line="581"/>
         <source>The user name needs to be at least 2 characters long. Please select a longer name before proceeding.</source>
         <translation>Uporabniško imeti dolžino vsaj dveh znakov. Izberite daljše ime za nadaljevanje.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="352"/>
+        <location filename="../mainwindow.cpp" line="354"/>
         <source>The user name cannot contain special characters or spaces.
 Please choose another name before proceeding.</source>
         <translation>Uporabniško ime ne more vsebovati posebnih znakov ali presledkov.
 Prosimo, izberite drugo ime pred nadaljevanjem.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="358"/>
+        <location filename="../mainwindow.cpp" line="360"/>
         <source>Sorry, this name is in use. Please enter a different name.</source>
         <translation>Oprostite, to ime se že uporablja. Izberite drugo ime.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="362"/>
-        <location filename="../mainwindow.cpp" line="417"/>
+        <location filename="../mainwindow.cpp" line="364"/>
+        <location filename="../mainwindow.cpp" line="419"/>
         <source>Password entries do not match. Please try again.</source>
         <translation>Gesli se ne ujemata. Poskusite znova.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="367"/>
-        <location filename="../mainwindow.cpp" line="422"/>
+        <location filename="../mainwindow.cpp" line="369"/>
+        <location filename="../mainwindow.cpp" line="424"/>
         <source>Password needs to be at least 2 characters long. Please enter a longer password before proceeding.</source>
         <translation>Gesli morata imeti dolžino vsaj dveh znakov. Vnesite daljše geslo.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="406"/>
+        <location filename="../mainwindow.cpp" line="408"/>
         <source>The user was added ok.</source>
         <translation>Uporabnik je bil uspešno dodan.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="409"/>
+        <location filename="../mainwindow.cpp" line="411"/>
         <source>Failed to add the user.</source>
         <translation>Uporabnik ni bil uspešno dodan.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="437"/>
+        <location filename="../mainwindow.cpp" line="439"/>
         <source>Password successfully changed.</source>
         <translation>Geslo je bilo uspešno spremenjeno.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="440"/>
+        <location filename="../mainwindow.cpp" line="442"/>
         <source>Failed to change password.</source>
         <translation>Neuspel poskus spremembe gesla.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="446"/>
+        <location filename="../mainwindow.cpp" line="448"/>
         <source>This action cannot be undone. Are you sure you want to delete user %1?</source>
         <translation>Te akcije ni mogoče razaveljaviti. Ali ste prepričani, da želite izbrisati uporabnika %1?</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="464"/>
+        <location filename="../mainwindow.cpp" line="467"/>
         <source>The user has been deleted.</source>
         <translation>Uporabnik je bil izbrisan.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="466"/>
+        <location filename="../mainwindow.cpp" line="469"/>
         <source>Failed to delete the user.</source>
         <translation>Uporabnika ni bilo mogoče izbrisati.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="480"/>
+        <location filename="../mainwindow.cpp" line="483"/>
         <source>The group name needs to be at least 2 characters long. Please select a longer name before proceeding.</source>
         <translation>Ime skupine mora imeti dolžino vsaj dveh znakov. Izberite daljše ime za nadaljevanje.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="485"/>
+        <location filename="../mainwindow.cpp" line="488"/>
         <source>The group name needs to be lower case and it 
 cannot contain special characters or spaces.
 Please choose another name before proceeding.</source>
@@ -655,72 +655,72 @@ mora biti brez posebnih znakov ali presledkov.
 Izberite drugo ime.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="493"/>
+        <location filename="../mainwindow.cpp" line="496"/>
         <source>Sorry, that group name already exists. Please enter a different name.</source>
         <translation>Oprostite, to ime skupine  je že v rabi. Prosimo, izberite drugo ime.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="501"/>
+        <location filename="../mainwindow.cpp" line="504"/>
         <source>The system group was added ok.</source>
         <translation>Skupina je bila uspešno dodana.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="503"/>
+        <location filename="../mainwindow.cpp" line="506"/>
         <source>Failed to add the system group.</source>
         <translation>Neuspešno dodajanje skupine.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="518"/>
+        <location filename="../mainwindow.cpp" line="521"/>
         <source>This action cannot be undone. Are you sure you want to delete group %1?</source>
         <translation>Tega ni mogoče razveljaviti. Ali ste prepričani, da želite izbrisati skupino %1?</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="519"/>
+        <location filename="../mainwindow.cpp" line="522"/>
         <source>This action cannot be undone. Are you sure you want to delete the following groups: %1?</source>
         <translation>Tega dejanja ni mogoče razveljaviti. Ali ste prepričani,d a želite izbrisati skupine: %1?</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="528"/>
+        <location filename="../mainwindow.cpp" line="531"/>
         <source>Failed to delete the group.</source>
         <translation>Skupine ni bilo mogoče izbrisati.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="528"/>
+        <location filename="../mainwindow.cpp" line="531"/>
         <source>Group: %1</source>
         <translation>Skupina: %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="532"/>
+        <location filename="../mainwindow.cpp" line="535"/>
         <source>The group has been deleted.</source>
         <translation>Skupina je bila izbrisana.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="532"/>
+        <location filename="../mainwindow.cpp" line="535"/>
         <source>The groups have been deleted.</source>
         <translation>Skupine so bile izbrisane.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="549"/>
+        <location filename="../mainwindow.cpp" line="552"/>
         <source>The changes have been applied.</source>
         <translation>Spremembe so bile uspešno izvedene.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="551"/>
+        <location filename="../mainwindow.cpp" line="554"/>
         <source>Failed to apply group changes</source>
         <translation>Potrjevanje sprememb skupin ni bilo uspešno</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="565"/>
+        <location filename="../mainwindow.cpp" line="572"/>
         <source>The selected user name is currently in use.</source>
         <translation>Izbrano uporabniško ime se že uporablja.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="566"/>
+        <location filename="../mainwindow.cpp" line="573"/>
         <source>To rename this user, please log out and log back in using another user account.</source>
         <translation>Za preimenovanje tega uporabnika se odjavite in ponovno prijavite z drugim uporabniškim računom.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="579"/>
+        <location filename="../mainwindow.cpp" line="586"/>
         <source>The user name needs to be lower case and it
 cannot contain special characters or spaces.
 Please choose another name before proceeding.</source>
@@ -729,84 +729,84 @@ mora biti brez posebnih znakov ali presledkov.
 Izberite drugo ime.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="586"/>
+        <location filename="../mainwindow.cpp" line="593"/>
         <source>Sorry, this name already exists on your system. Please enter a different name.</source>
         <translation>Oprostite, to ime je na vašem sistemu že v rabi. Izberite drugo ime.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="595"/>
+        <location filename="../mainwindow.cpp" line="602"/>
         <source>Failed to rename the user. Please make sure that the user is not logged in, you might need to restart</source>
         <translation>Neuspešno preimenovanje uporabnika. Prepričajte se, da uporabnik ni prijavljen. Morda bo potreben ponoven zagon.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="619"/>
+        <location filename="../mainwindow.cpp" line="626"/>
         <source>The user was renamed.</source>
         <translation>Uporabnik je bil preimenovan.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="631"/>
-        <location filename="../mainwindow.cpp" line="659"/>
+        <location filename="../mainwindow.cpp" line="638"/>
+        <location filename="../mainwindow.cpp" line="666"/>
         <source>Synchronizing desktop...ok</source>
         <translation>Sinhronizacija namizja... uspela!</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="633"/>
-        <location filename="../mainwindow.cpp" line="661"/>
+        <location filename="../mainwindow.cpp" line="640"/>
+        <location filename="../mainwindow.cpp" line="668"/>
         <source>Copying desktop...ok</source>
         <translation>Kopiranje namizja... uspelo!</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="665"/>
+        <location filename="../mainwindow.cpp" line="672"/>
         <source>Synchronizing desktop...failed</source>
         <translation>Sinhronizacija namizja... neuspešno!</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="667"/>
+        <location filename="../mainwindow.cpp" line="674"/>
         <source>Copying desktop...failed</source>
         <translation>Kopiranje namizja... ni uspelo!</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="686"/>
+        <location filename="../mainwindow.cpp" line="693"/>
         <source>Confirmation</source>
         <translation>Potrditev</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="687"/>
+        <location filename="../mainwindow.cpp" line="694"/>
         <source>Process not done. Are you sure you want to quit the application?</source>
         <translation>Proces ni bil zaključen. Želite vseeno končati program?</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="942"/>
+        <location filename="../mainwindow.cpp" line="946"/>
         <source>About %1</source>
         <translation>O %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="943"/>
+        <location filename="../mainwindow.cpp" line="947"/>
         <source>Version: </source>
         <translation>Različica:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="944"/>
+        <location filename="../mainwindow.cpp" line="948"/>
         <source>Simple user configuration for MX Linux</source>
         <translation>Preprosto konfiguriranje uporabnikov za MX Linux</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="946"/>
+        <location filename="../mainwindow.cpp" line="950"/>
         <source>Copyright (c) MX Linux</source>
         <translation>Copyright (c) MX Linux</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="947"/>
+        <location filename="../mainwindow.cpp" line="951"/>
         <source>%1 License</source>
         <translation>%1 licenca</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="961"/>
+        <location filename="../mainwindow.cpp" line="965"/>
         <source>%1 Help</source>
         <translation>%1 pomoč</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="978"/>
+        <location filename="../mainwindow.cpp" line="982"/>
         <source>Select folder to copy to</source>
         <translation>Izberite ciljno mapo za kopiranje</translation>
     </message>
@@ -883,18 +883,18 @@ Izberite drugo ime.</translation>
         <translation>&amp;Zapri</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="61"/>
-        <location filename="../main.cpp" line="68"/>
+        <location filename="../main.cpp" line="65"/>
+        <location filename="../main.cpp" line="73"/>
         <source>Error</source>
         <translation>Napaka</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="62"/>
+        <location filename="../main.cpp" line="66"/>
         <source>You seem to be logged in as root, please log out and log in as normal user to use this program.</source>
         <translation>Prijavljeni ste kot korenski (root) uporabnik. Odjavite se in se ponovno prijavite kot običajen uporabnik, če želite uporabljati ta program.</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="69"/>
+        <location filename="../main.cpp" line="74"/>
         <source>You must run this program with admin access.</source>
         <translation>Ta program je potrebno zagnati s skrbniškim dostopom</translation>
     </message>

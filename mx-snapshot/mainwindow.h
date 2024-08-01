@@ -45,18 +45,6 @@ public:
     explicit MainWindow(const QCommandLineParser &arg_parser = QCommandLineParser(), QWidget *parent = nullptr);
     ~MainWindow() override;
 
-    [[noreturn]] void cleanUp();
-    bool installPackage(const QString &package);
-    void checkSaveWork();
-    void closeApp();
-    void listFreeSpace();
-    void listUsedSpace();
-    void loadSettings();
-    void setConnections();
-    void setExclusions();
-    void setOtherOptions();
-    void setup();
-
 protected:
     void keyPressEvent(QKeyEvent *event) override;
 
@@ -101,4 +89,25 @@ private:
     QTimer timer;
     Work work;
     QSettings settings;
+
+    [[nodiscard]] bool confirmStart();
+    [[noreturn]] void cleanUp();
+    bool installPackage(const QString &package);
+    void appendIsoExtension(QString &file_name) const;
+    void applyExclusions();
+    void checkNvidiaGraphicsCard();
+    void checkSaveWork();
+    void closeApp();
+    void editBootMenu();
+    void handleSelectionPage(const QString &file_name);
+    void handleSettingsPage(const QString &file_name);
+    void listFreeSpace();
+    void listUsedSpace();
+    void loadSettings();
+    void prepareForOutput(const QString &file_name);
+    void setConnections();
+    void setExclusions();
+    void setOtherOptions();
+    void setup();
+    void showErrorMessageBox(const QString &file_path);
 };

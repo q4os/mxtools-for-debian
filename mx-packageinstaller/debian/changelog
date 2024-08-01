@@ -1,8 +1,31 @@
-mx-packageinstaller (24.6.07.1) mx; urgency=medium
+mx-packageinstaller (24.7.07) mx; urgency=medium
 
-  * Fix my repo mistake
+  * Fix: displaying installed packages in the Popular tab
 
- -- Timothy E. Harris <maintainer@mxrepo.com>  Tue, 25 Jun 2024 10:25:04 -0400
+ -- Adrian <adrian@mxlinux.org>  Sat, 20 Jul 2024 12:19:55 -0400
+
+mx-packageinstaller (24.7.05) mx; urgency=medium
+
+  * Wait for displayPackages to finish before updating the interface
+  * Selected user by default when managing remotes
+
+ -- Adrian <adrian@mxlinux.org>  Sun, 14 Jul 2024 18:11:12 -0400
+
+mx-packageinstaller (24.7.04) mx; urgency=medium
+
+  * Performance improvements for search and filter change
+  * Save and restore flatpak repo and user choice
+  * Make sure all checkboxes are cleared when switching filters for flatpaks
+  * Fix: don't update interface when loading Enabled repos in the background
+
+ -- Adrian <adrian@mxlinux.org>  Sat, 13 Jul 2024 20:46:10 -0400
+
+mx-packageinstaller (24.7.02) mx; urgency=medium
+
+  * List all installed packages (even if not available in the selected
+    repo) to make it easier to remove them
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 08 Jul 2024 11:59:26 -0400
 
 mx-packageinstaller (24.6.07) mx; urgency=medium
 

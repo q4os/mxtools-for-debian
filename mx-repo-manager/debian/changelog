@@ -1,3 +1,9 @@
+mx-repo-manager (24.7) mx; urgency=medium
+
+  * Fix replaceDebianRepos deb-src substitution
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 05 Jul 2024 15:30:25 -0400
+
 mx-repo-manager (24.6.01) mx; urgency=medium
 
   * Set a 3 sec. timeout for the download of repos.txt

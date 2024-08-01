@@ -56,12 +56,17 @@ int main(int argc, char *argv[])
     }
 
     // root guard
-    if (QProcess::execute("/bin/bash", {"-c", "logname |grep -q ^root$"}) == 0) {
-        QMessageBox::critical(
-            nullptr, QObject::tr("Error"),
-            QObject::tr(
-                "You seem to be logged in as root, please log out and log in as normal user to use this program."));
-        exit(EXIT_FAILURE);
+    QFile loginUidFile {"/proc/self/loginuid"};
+    if (loginUidFile.open(QIODevice::ReadOnly)) {
+        QString loginUid = QString(loginUidFile.readAll()).trimmed();
+        loginUidFile.close();
+        if (loginUid == "0") {
+            QMessageBox::critical(
+                nullptr, QObject::tr("Error"),
+                QObject::tr(
+                    "You seem to be logged in as root, please log out and log in as normal user to use this program."));
+            exit(EXIT_FAILURE);
+        }
     }
     if (getuid() != 0) {
         if (!QFile::exists("/usr/bin/pkexec") && !QFile::exists("/usr/bin/gksu")) {

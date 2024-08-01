@@ -122,6 +122,9 @@ public:
 protected:
     void keyPressEvent(QKeyEvent *event) override;
 
+signals:
+    void displayPackagesFinished();
+
 private slots:
     void checkUncheckItem();
     void cleanup();
@@ -134,42 +137,42 @@ private slots:
     void displayPopularInfo(const QTreeWidgetItem *item, int column);
     void enableOutput();
     void filterChanged(const QString &arg1);
-    void findPackageOther();
+    void findPackage();
     void findPopular() const;
     void outputAvailable(const QString &output);
     void showOutput();
     void updateBar();
 
-    void on_checkHideLibsBP_clicked(bool checked);
-    void on_checkHideLibsMX_clicked(bool checked);
-    void on_checkHideLibs_toggled(bool checked);
-    void on_comboRemote_activated(int index = 0);
-    void on_comboUser_activated(int index);
-    void on_lineEdit_returnPressed();
-    void on_pushAbout_clicked();
-    void on_pushCancel_clicked();
-    void on_pushEnter_clicked();
-    void on_pushForceUpdateBP_clicked();
-    void on_pushForceUpdateMX_clicked();
-    void on_pushForceUpdateEnabled_clicked();
-    void on_pushHelp_clicked();
-    void on_pushInstall_clicked();
-    void on_pushRemotes_clicked();
-    void on_pushRemoveOrphan_clicked();
-    void on_pushRemoveUnused_clicked();
-    void on_pushUninstall_clicked();
-    void on_pushUpgradeAll_clicked();
-    void on_pushUpgradeFP_clicked();
-    void on_tabWidget_currentChanged(int index);
-    void on_treeBackports_itemChanged(QTreeWidgetItem *item);
-    void on_treeFlatpak_itemChanged(QTreeWidgetItem *item);
-    void on_treeMXtest_itemChanged(QTreeWidgetItem *item);
-    void on_treePopularApps_customContextMenuRequested(QPoint pos);
-    void on_treePopularApps_expanded();
-    void on_treePopularApps_itemChanged(QTreeWidgetItem *item);
-    void on_treePopularApps_itemCollapsed(QTreeWidgetItem *item);
-    void on_treePopularApps_itemExpanded(QTreeWidgetItem *item);
-    void on_treeEnabled_itemChanged(QTreeWidgetItem *item);
+    void checkHideLibsBP_clicked(bool checked);
+    void checkHideLibsMX_clicked(bool checked);
+    void checkHideLibs_toggled(bool checked);
+    void comboRemote_activated(int index = 0);
+    void comboUser_currentIndexChanged(int index);
+    void lineEdit_returnPressed();
+    void pushAbout_clicked();
+    void pushCancel_clicked();
+    void pushEnter_clicked();
+    void pushForceUpdateBP_clicked();
+    void pushForceUpdateEnabled_clicked();
+    void pushForceUpdateMX_clicked();
+    void pushHelp_clicked();
+    void pushInstall_clicked();
+    void pushRemotes_clicked();
+    void pushRemoveOrphan_clicked();
+    void pushRemoveUnused_clicked();
+    void pushUninstall_clicked();
+    void pushUpgradeAll_clicked();
+    void pushUpgradeFP_clicked();
+    void tabWidget_currentChanged(int index);
+    void treeBackports_itemChanged(QTreeWidgetItem *item);
+    void treeEnabled_itemChanged(QTreeWidgetItem *item);
+    void treeFlatpak_itemChanged(QTreeWidgetItem *item);
+    void treeMXtest_itemChanged(QTreeWidgetItem *item);
+    void treePopularApps_customContextMenuRequested(QPoint pos);
+    void treePopularApps_expanded();
+    void treePopularApps_itemChanged(QTreeWidgetItem *item);
+    void treePopularApps_itemCollapsed(QTreeWidgetItem *item);
+    void treePopularApps_itemExpanded(QTreeWidgetItem *item);
 
 private:
     Ui::MainWindow *ui;
@@ -188,59 +191,64 @@ private:
     bool warning_test {false};
 
     Cmd cmd;
-    LockFile *lock_file {};
+    LockFile lock_file {"/var/lib/dpkg/lock"};
     QHash<QString, VersionNumber> listInstalledVersions();
     QIcon qicon_installed;
     QIcon qicon_upgradable;
     QList<PopularInfo> popular_apps;
     QLocale locale;
     QMap<QString, PackageInfo> backports_list;
-    QMap<QString, PackageInfo> mx_list;
     QMap<QString, PackageInfo> enabled_list;
+    QMap<QString, PackageInfo> installed_packages;
+    QMap<QString, PackageInfo> mx_list;
     QProgressBar *bar {};
     QProgressDialog *progress {};
     QPushButton *pushCancel {};
     QSettings dictionary;
     QSettings settings;
-    QString arch;
     QString FPuser;
-    QString ver_name;
+    QString arch;
     QString temp_list {"/etc/apt/sources.list.d/mxpitemp.list"};
+    QString ver_name;
     QStringList change_list;
     QStringList flatpaks;
     QStringList flatpaks_apps;
     QStringList flatpaks_runtimes;
     QStringList installed_apps_fp;
-    QStringList installed_packages;
     QStringList installed_runtimes_fp;
     QTemporaryDir tmp_dir;
     QTimer timer;
     QTreeWidget *currentTree {}; // current/calling tree
     QTreeWidgetItem *lastItemClicked {};
-    VersionNumber fp_ver;
     const QCommandLineParser &args;
 
     QNetworkAccessManager manager;
     QNetworkReply *reply;
 
+    [[nodiscard]] QMap<QString, PackageInfo> listInstalled() const;
     [[nodiscard]] QString categoryTranslation(const QString &item);
     [[nodiscard]] QString getArchOption() const;
     [[nodiscard]] QString getLocalizedName(const QDomElement &element) const;
     [[nodiscard]] QString getVersion(const QString &name) const;
     [[nodiscard]] QString mapArchToFormat(const QString &arch) const;
     [[nodiscard]] QStringList listFlatpaks(const QString &remote, const QString &type = QLatin1String("")) const;
-    [[nodiscard]] QStringList listInstalled() const;
     [[nodiscard]] QStringList listInstalledFlatpaks(const QString &type = QLatin1String(""));
-    [[nodiscard]] bool checkInstalled(const QString &names) const;
-    [[nodiscard]] bool checkInstalled(const QStringList &name_list) const;
+    [[nodiscard]] QTreeWidgetItem *createTreeItem(const QString &name, const QString &version,
+                                                  const QString &description) const;
+    [[nodiscard]] bool checkInstalled(const QVariant &names) const;
     [[nodiscard]] bool checkUpgradable(const QStringList &name_list) const;
     [[nodiscard]] bool isOnline();
     [[nodiscard]] bool isPackageInstallable(const QString &installable, const QString &modArch) const;
     [[nodiscard]] static QString getDebianVerName();
     [[nodiscard]] static bool isFilteredName(const QString &name);
     [[nodiscard]] static uchar getDebianVerNum();
+    [[nodiscard]] QList<QTreeWidgetItem *> createTreeItems(QMap<QString, PackageInfo> *list) const;
+    [[nodiscard]] QMap<QString, PackageInfo> *getCurrentList();
+    [[nodiscard]] QTreeWidget *getCurrentTree();
+
     bool buildPackageLists(bool force_download = false);
     bool confirmActions(const QString &names, const QString &action);
+
     bool downloadAndUnzip(const QString &url, QFile &file);
     bool downloadAndUnzip(const QString &url, const QString &repo_name, const QString &branch, const QString &format,
                           QFile &file);
@@ -257,34 +265,48 @@ private:
     bool updateApt();
     static QString convert(quint64 bytes);
     static quint64 convert(const QString &size);
+    void addInstalledAppsToItems(QList<QTreeWidgetItem *> &items, QMap<QString, PackageInfo> *list) const;
     void blockInterfaceFP(bool block);
     void buildChangeList(QTreeWidgetItem *item);
     void cancelDownload();
     void centerWindow();
     void clearUi();
+    void displayAutoRemoveOrphans(const QTreeWidget *newtree) const;
     void displayFilteredFP(QStringList list, bool raw = false);
     void displayFlatpaks(bool force_update = false);
     void displayPackages();
     void displayPopularApps() const;
     void displayWarning(const QString &repo);
     void enableTabs(bool enable) const;
+    void handleEnabledReposTab(const QString &search_str, int filter_idx);
+    void handleFlatpakTab(const QString &search_str);
+    void handleOutputTab();
+    void handleTab(const QString &search_str, int filter_idx, QComboBox *filterCombo, QLineEdit *searchBox,
+                   const QString &warningMessage, bool &dirtyFlag);
     void hideColumns() const;
     void hideLibs() const;
     void ifDownloadFailed() const;
+    void installFlatpak();
     void listFlatpakRemotes() const;
     void listSizeInstalledFP();
     void loadPmFiles();
     void processDoc(const QDomDocument &doc);
     void refreshPopularApps();
     void removeDuplicatesFP() const;
+    void resetCheckboxes();
+    void saveSearchText(QString &search_str, int &filter_idx);
     void setConnections() const;
     void setCurrentTree();
     void setDirty();
     void setIcons();
     void setProgressDialog();
     void setSearchFocus() const;
+    void setToolTipForInstalled(QTreeWidgetItem *item, const VersionNumber &installed) const;
+    void setToolTipForNotInstalled(QTreeWidgetItem *item, const QString &app_name) const;
+    void setToolTipForUpgradable(QTreeWidgetItem *item, const VersionNumber &installed) const;
     void setup();
     void updateInterface() const;
+    void updateTreeItems(QTreeWidget *tree);
 
     PMFiles pm_files;
 };

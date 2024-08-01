@@ -4,13 +4,11 @@
 #include <QComboBox>
 #include <QDialog>
 
-#include <cmd.h>
-
 class ManageRemotes : public QDialog
 {
     Q_OBJECT
 public:
-    explicit ManageRemotes(QWidget *parent = nullptr);
+    explicit ManageRemotes(QWidget *parent = nullptr, const QString &user = "--system ");
     [[nodiscard]] bool isChanged() const
     {
         return changed;
@@ -35,7 +33,6 @@ public slots:
 
 private:
     bool changed;
-    Cmd *cmd;
     QComboBox *comboRemote;
     QComboBox *comboUser;
     QLineEdit *editAddRemote;

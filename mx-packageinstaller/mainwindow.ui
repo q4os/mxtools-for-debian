@@ -35,7 +35,7 @@
       </sizepolicy>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>4</number>
      </property>
      <property name="documentMode">
       <bool>false</bool>
@@ -149,8 +149,7 @@
           <string>= Installed packages</string>
          </property>
          <property name="icon">
-          <iconset theme="package-installed-updated">
-           <normaloff>.</normaloff>.</iconset>
+          <iconset theme="package-installed-updated"/>
          </property>
          <property name="autoDefault">
           <bool>false</bool>
@@ -204,8 +203,7 @@
           <string>= Installed packages</string>
          </property>
          <property name="icon">
-          <iconset theme="package-installed-updated">
-           <normaloff>.</normaloff>.</iconset>
+          <iconset theme="package-installed-updated"/>
          </property>
          <property name="autoDefault">
           <bool>false</bool>
@@ -237,8 +235,7 @@
              <string>Remove orphan packages</string>
             </property>
             <property name="icon">
-             <iconset theme="remove">
-              <normaloff>.</normaloff>.</iconset>
+             <iconset theme="remove"/>
             </property>
            </widget>
           </item>
@@ -264,8 +261,7 @@
              <string>Upgrade All</string>
             </property>
             <property name="icon">
-             <iconset theme="system-upgrade">
-              <normaloff>.</normaloff>.</iconset>
+             <iconset theme="system-upgrade"/>
             </property>
             <property name="autoDefault">
              <bool>false</bool>
@@ -351,8 +347,7 @@
              <string>Refresh list</string>
             </property>
             <property name="icon">
-             <iconset theme="reload">
-              <normaloff>.</normaloff>.</iconset>
+             <iconset theme="reload"/>
             </property>
             <property name="autoDefault">
              <bool>false</bool>
@@ -432,8 +427,7 @@
           <string>= Upgradable package. Newer version available in selected repository.</string>
          </property>
          <property name="icon">
-          <iconset theme="package-installed-outdated">
-           <normaloff>.</normaloff>.</iconset>
+          <iconset theme="package-installed-outdated"/>
          </property>
          <property name="autoDefault">
           <bool>false</bool>
@@ -544,8 +538,7 @@
              <string>Refresh list</string>
             </property>
             <property name="icon">
-             <iconset theme="reload">
-              <normaloff>.</normaloff>.</iconset>
+             <iconset theme="reload"/>
             </property>
             <property name="autoDefault">
              <bool>false</bool>
@@ -752,8 +745,7 @@
           <string>= Upgradable package. Newer version available in selected repository.</string>
          </property>
          <property name="icon">
-          <iconset theme="package-installed-outdated">
-           <normaloff>.</normaloff>.</iconset>
+          <iconset theme="package-installed-outdated"/>
          </property>
          <property name="autoDefault">
           <bool>false</bool>
@@ -772,8 +764,7 @@
           <string>= Installed packages</string>
          </property>
          <property name="icon">
-          <iconset theme="package-installed-updated">
-           <normaloff>.</normaloff>.</iconset>
+          <iconset theme="package-installed-updated"/>
          </property>
          <property name="autoDefault">
           <bool>false</bool>
@@ -814,8 +805,7 @@
           <string>= Upgradable package. Newer version available in selected repository.</string>
          </property>
          <property name="icon">
-          <iconset theme="package-installed-outdated">
-           <normaloff>.</normaloff>.</iconset>
+          <iconset theme="package-installed-outdated"/>
          </property>
          <property name="autoDefault">
           <bool>false</bool>
@@ -966,8 +956,7 @@
                <string>Refresh list</string>
               </property>
               <property name="icon">
-               <iconset theme="reload">
-                <normaloff>.</normaloff>.</iconset>
+               <iconset theme="reload"/>
               </property>
               <property name="autoDefault">
                <bool>false</bool>
@@ -1118,8 +1107,7 @@
           <string>= Installed packages</string>
          </property>
          <property name="icon">
-          <iconset theme="package-installed-updated">
-           <normaloff>.</normaloff>.</iconset>
+          <iconset theme="package-installed-updated"/>
          </property>
          <property name="autoDefault">
           <bool>false</bool>
@@ -1159,7 +1147,7 @@
          </item>
         </widget>
        </item>
-       <item row="0" column="1">
+       <item row="0" column="1" alignment="Qt::AlignRight">
         <widget class="QLabel" name="labelRepo">
          <property name="text">
           <string>Remote (repo):</string>
@@ -1245,8 +1233,7 @@
           <string>= Installed packages</string>
          </property>
          <property name="icon">
-          <iconset theme="package-installed-updated">
-           <normaloff>.</normaloff>.</iconset>
+          <iconset theme="package-installed-updated"/>
          </property>
          <property name="autoDefault">
           <bool>false</bool>
@@ -1337,8 +1324,7 @@
              <string>Upgrade All</string>
             </property>
             <property name="icon">
-             <iconset theme="system-upgrade">
-              <normaloff>.</normaloff>.</iconset>
+             <iconset theme="system-upgrade"/>
             </property>
             <property name="autoDefault">
              <bool>false</bool>
@@ -1383,8 +1369,7 @@
              <string>Advanced</string>
             </property>
             <property name="icon">
-             <iconset theme="configure">
-              <normaloff>.</normaloff>.</iconset>
+             <iconset theme="configure"/>
             </property>
             <property name="autoDefault">
              <bool>false</bool>
@@ -1427,8 +1412,7 @@
              <string>Remove unused runtimes</string>
             </property>
             <property name="icon">
-             <iconset theme="sweeper">
-              <normaloff>.</normaloff>.</iconset>
+             <iconset theme="sweeper"/>
             </property>
             <property name="autoDefault">
              <bool>false</bool>
@@ -1510,8 +1494,7 @@
           <string>Enter</string>
          </property>
          <property name="icon">
-          <iconset theme="key-enter">
-           <normaloff>.</normaloff>.</iconset>
+          <iconset theme="key-enter"/>
          </property>
         </widget>
        </item>
@@ -1580,8 +1563,7 @@
         <string>Install</string>
        </property>
        <property name="icon">
-        <iconset theme="run-install">
-         <normaloff>.</normaloff>.</iconset>
+        <iconset theme="run-install"/>
        </property>
        <property name="shortcut">
         <string>Alt+I</string>
@@ -1609,8 +1591,7 @@
         <string>Close</string>
        </property>
        <property name="icon">
-        <iconset theme="window-close">
-         <normaloff>.</normaloff>.</iconset>
+        <iconset theme="window-close"/>
        </property>
        <property name="shortcut">
         <string>Alt+C</string>
@@ -1651,8 +1632,7 @@
         <string>About...</string>
        </property>
        <property name="icon">
-        <iconset theme="help-about">
-         <normaloff>.</normaloff>.</iconset>
+        <iconset theme="help-about"/>
        </property>
        <property name="shortcut">
         <string>Alt+B</string>
@@ -1699,8 +1679,7 @@
         <string>Help</string>
        </property>
        <property name="icon">
-        <iconset theme="help-contents">
-         <normaloff>.</normaloff>.</iconset>
+        <iconset theme="help-contents"/>
        </property>
        <property name="shortcut">
         <string>Alt+H</string>
@@ -1722,8 +1701,7 @@
         <string>Uninstall</string>
        </property>
        <property name="icon">
-        <iconset theme="archive-remove">
-         <normaloff>.</normaloff>.</iconset>
+        <iconset theme="archive-remove"/>
        </property>
        <property name="shortcut">
         <string>Alt+U</string>

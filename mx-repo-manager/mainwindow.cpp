@@ -106,7 +106,7 @@ void MainWindow::refresh(bool force)
 }
 
 // Replace default Debian repos
-void MainWindow::replaceDebianRepos(QString url)
+void MainWindow::replaceDebianRepos(const QString &url)
 {
     // Apt source files that are present by default in MX and /etc/apt/sources.list
     // which might be the default in some Debian releases
@@ -132,35 +132,35 @@ void MainWindow::replaceDebianRepos(QString url)
         }
         QFile file(filePath);
         if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
-            qWarning() << "Count not open file: " << file.fileName() << file.errorString();
+            qWarning() << "Could not open file:" << file.fileName() << file.errorString();
             continue;
         }
 
-        url.remove(QRegularExpression("/$"));
         QRegularExpression re {"(ftp|http[s]?://.*/debian)"};
+        QString trimmedUrl = url;
+        trimmedUrl.remove(QRegularExpression("/$"));
 
         QString content;
         QTextStream in(&file);
         while (!in.atEnd()) {
             QString line = in.readLine().trimmed();
-            QRegularExpressionMatch match = re.match(line);
             // Don't replace security line since it might not be available on the mirror
-            if (!line.contains("security") && match.hasMatch()) {
-                line.replace(match.captured(1), url);
+            if (!line.contains("security")) {
+                line.replace(re, trimmedUrl);
             }
-            content.append(line).append("\n");
+            content.append(line).append('\n');
         }
         file.close();
 
         QTemporaryFile tmpFile;
         if (!tmpFile.open()) {
-            qWarning() << "Count not open file: " << tmpFile.fileName() << tmpFile.errorString();
+            qWarning() << "Could not open temporary file:" << tmpFile.fileName() << tmpFile.errorString();
             continue;
         }
         QTextStream out(&tmpFile);
         out << content;
-        file.close();
-        shell->runAsRoot("mv " + tmpFile.fileName() + " " + filePath);
+        tmpFile.close();
+        shell->runAsRoot("mv -f " + tmpFile.fileName() + " " + filePath);
         shell->runAsRoot("chown root: " + filePath);
         shell->runAsRoot("chmod +r " + filePath);
     }
@@ -470,8 +470,8 @@ void MainWindow::procDone()
 bool MainWindow::replaceRepos(const QString &url, bool quiet)
 {
     QString mx_file {"/etc/apt/sources.list.d/mx.list"};
-    QString cmd_mx
-        = QString(R"(sed -i -E 's;deb\s(\[.*\]\s)?.*(/mx/repo/|/mx/testrepo);deb \1%1\2;' %2)").arg(url, mx_file);
+    QString cmd_mx = QString(R"(sed -i -E 's;(deb|deb-src)\s(\[.*\]\s)?.*(/mx/repo/|/mx/testrepo);\1 \2%1\3;' %2)")
+                         .arg(url, mx_file);
     sources_changed = true;
     if (quiet) {
         return shell->runAsRoot(cmd_mx);

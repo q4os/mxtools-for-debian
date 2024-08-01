@@ -64,7 +64,7 @@ public:
     void extractUrls(const QStringList &repos);
     void getCurrentRepo(bool force = false);
     void refresh(bool force = false);
-    void replaceDebianRepos(QString url);
+    void replaceDebianRepos(const QString &url);
     void setConnections();
     void setProgressBar();
     void setSelected();

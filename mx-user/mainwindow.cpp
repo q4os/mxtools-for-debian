@@ -124,7 +124,10 @@ void MainWindow::refreshCopy()
 {
     fromUserComboBox->clear();
     fromUserComboBox->addItems(users);
-    const QString logname = shell->getOut("logname", true);
+    QString logname = QString::fromUtf8(qgetenv("SUDO_USER")).trimmed();
+    if (logname.isEmpty()) {
+        logname = QString::fromUtf8(qgetenv("LOGNAME")).trimmed();
+    }
     fromUserComboBox->setCurrentIndex(fromUserComboBox->findText(logname));
     copyRadioButton->setChecked(true);
     entireRadioButton->setChecked(true);
@@ -254,11 +257,10 @@ void MainWindow::applyOptions()
                              + " /etc/lightdm/lightdm.conf");
         }
         if (QFile::exists("/etc/sddm.conf")) {
-            QSettings sddm_settings("/etc/sddm.conf", QSettings::NativeFormat);
+            shell->runAsRoot(QString("sed -i 's/^User=.*/User=%1/' /etc/sddm.conf").arg(user));
             if (qEnvironmentVariable("XDG_CURRENT_DESKTOP") == "KDE") {
-                sddm_settings.setValue("Autologin/Session", "plasma.desktop");
+                shell->runAsRoot("sed -i 's/^Session=.*/Session=plasma.desktop/' /etc/sddm.conf");
             }
-            sddm_settings.setValue("Autologin/User", user);
         }
         QMessageBox::information(this, tr("Autologin options"),
                                  (tr("Autologin has been enabled for the '%1' account.").arg(user)));
@@ -448,7 +450,8 @@ void MainWindow::applyDelete()
     if (QMessageBox::Yes == QMessageBox::warning(this, windowTitle(), msg, QMessageBox::Yes, QMessageBox::No)) {
         QString cmd;
         if (deleteHomeCheckBox->isChecked()) {
-            shell->runAsRoot("killall -u " + comboDeleteUser->currentText());
+            shell->runAsRoot("timeout 5s killall -w -u " + comboDeleteUser->currentText()
+                             + "; timeout 5s killall -9 -w -u " + comboDeleteUser->currentText());
             cmd = QString("deluser --remove-home %1").arg(comboDeleteUser->currentText());
         } else {
             cmd = QString("deluser %1").arg(comboDeleteUser->currentText());
@@ -559,7 +562,11 @@ void MainWindow::applyRename()
 
     // Validate data before proceeding
     // Check if selected user is in use
-    if (shell->getOut("logname", true) == old_name) {
+    QString logname = QString::fromUtf8(qgetenv("SUDO_USER")).trimmed();
+    if (logname.isEmpty()) {
+        logname = QString::fromUtf8(qgetenv("LOGNAME")).trimmed();
+    }
+    if (logname == old_name) {
         QMessageBox::critical(
             this, windowTitle(),
             tr("The selected user name is currently in use.") + "\n\n"
@@ -701,17 +708,13 @@ void MainWindow::setConnections()
     connect(buttonHelp, &QPushButton::clicked, this, &MainWindow::buttonHelp_clicked);
     connect(checkGroups, &QCheckBox::stateChanged, this, &MainWindow::checkGroups_stateChanged);
     connect(checkMozilla, &QCheckBox::stateChanged, this, &MainWindow::checkMozilla_stateChanged);
-    connect(comboChangePass, QOverload<const QString &>::of(&QComboBox::activated), this,
-            &MainWindow::comboChangePass_activated);
-    connect(comboDeleteUser, QOverload<const QString &>::of(&QComboBox::activated), this,
-            &MainWindow::comboDeleteUser_activated);
-    connect(comboRenameUser, QOverload<const QString &>::of(&QComboBox::activated), this,
-            &MainWindow::comboRenameUser_activated);
+    connect(comboChangePass, &QComboBox::textActivated, this, &MainWindow::comboChangePass_activated);
+    connect(comboDeleteUser, &QComboBox::textActivated, this, &MainWindow::comboDeleteUser_activated);
+    connect(comboRenameUser, &QComboBox::textActivated, this, &MainWindow::comboRenameUser_activated);
     connect(copyRadioButton, &QRadioButton::clicked, this, &MainWindow::copyRadioButton_clicked);
     connect(docsRadioButton, &QRadioButton::clicked, this, &MainWindow::docsRadioButton_clicked);
     connect(entireRadioButton, &QRadioButton::clicked, this, &MainWindow::entireRadioButton_clicked);
-    connect(fromUserComboBox, QOverload<const QString &>::of(&QComboBox::activated), this,
-            &MainWindow::fromUserComboBox_activated);
+    connect(fromUserComboBox, &QComboBox::textActivated, this, &MainWindow::fromUserComboBox_activated);
     connect(groupNameEdit, &QLineEdit::textEdited, this, &MainWindow::groupNameEdit_textEdited);
     connect(mozillaRadioButton, &QRadioButton::clicked, this, &MainWindow::mozillaRadioButton_clicked);
     connect(radioAutologinNo, &QRadioButton::clicked, this, &MainWindow::radioAutologinNo_clicked);
@@ -719,12 +722,9 @@ void MainWindow::setConnections()
     connect(sharedRadioButton, &QRadioButton::clicked, this, &MainWindow::sharedRadioButton_clicked);
     connect(syncRadioButton, &QRadioButton::clicked, this, &MainWindow::syncRadioButton_clicked);
     connect(tabWidget, &QTabWidget::currentChanged, this, &MainWindow::tabWidget_currentChanged);
-    connect(toUserComboBox, QOverload<const QString &>::of(&QComboBox::activated), this,
-            &MainWindow::toUserComboBox_activated);
-    connect(userComboBox, QOverload<const QString &>::of(&QComboBox::activated), this,
-            &MainWindow::userComboBox_activated);
-    connect(userComboMembership, QOverload<const QString &>::of(&QComboBox::activated), this,
-            &MainWindow::userComboMembership_activated);
+    connect(toUserComboBox, &QComboBox::textActivated, this, &MainWindow::toUserComboBox_activated);
+    connect(userComboBox, &QComboBox::textActivated, this, &MainWindow::userComboBox_activated);
+    connect(userComboMembership, &QComboBox::textActivated, this, &MainWindow::userComboMembership_activated);
     connect(userNameEdit, &QLineEdit::textEdited, this, &MainWindow::userNameEdit_textEdited);
 }
 
@@ -733,7 +733,11 @@ void MainWindow::fromUserComboBox_activated(const QString & /*unused*/)
     buttonApply->setEnabled(true);
     syncProgressBar->setValue(0);
     QStringList items = users;
-    items.removeAll(shell->getOut("logname", true));
+    QString logname = QString::fromUtf8(qgetenv("SUDO_USER")).trimmed();
+    if (logname.isEmpty()) {
+        logname = QString::fromUtf8(qgetenv("LOGNAME")).trimmed();
+    }
+    items.removeAll(logname);
     items.removeAll(fromUserComboBox->currentText());
     items.sort();
     toUserComboBox->clear();
