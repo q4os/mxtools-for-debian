@@ -75,6 +75,8 @@ MainWindow::MainWindow(const QCommandLineParser &arg_parser, QWidget *parent)
             AptCache cache;
             enabled_list = cache.getCandidates();
             displayPackages();
+            ui->tabWidget->setTabEnabled(Tab::Test, true);
+            ui->tabWidget->setTabEnabled(Tab::Backports, true);
         }
         if (arch != "i386" && checkInstalled("flatpak")) {
             if (!Cmd().run("flatpak remote-list --system --columns=name | grep -qw flathub", true)) {
@@ -118,7 +120,9 @@ void MainWindow::setup()
 
     ui->tabWidget->blockSignals(true);
     ui->tabWidget->setCurrentWidget(ui->tabPopular);
-    ui->pushRemoveOrphan->setHidden(true);
+    ui->tabWidget->setTabEnabled(Tab::Test, false);
+    ui->tabWidget->setTabEnabled(Tab::Backports, false);
+    ui->pushRemoveAutoremovable->setHidden(true);
 
     QFont font("monospace");
     font.setStyleHint(QFont::Monospace);
@@ -149,7 +153,7 @@ void MainWindow::setup()
     ui->searchPopular->setFocus();
     currentTree = ui->treePopularApps;
 
-    ui->tabWidget->setTabEnabled(ui->tabWidget->indexOf(ui->tabOutput), false);
+    ui->tabWidget->setTabEnabled(Tab::Output, false);
     ui->tabWidget->blockSignals(false);
     ui->pushUpgradeAll->setVisible(false);
 
@@ -190,12 +194,12 @@ bool MainWindow::uninstall(const QString &names, const QString &preuninstall, co
         return true;
     }
 
-    ui->tabWidget->setTabText(ui->tabWidget->indexOf(ui->tabOutput), tr("Uninstalling packages..."));
+    ui->tabWidget->setTabText(Tab::Output, tr("Uninstalling packages..."));
     enableOutput();
 
     if (!preuninstall.isEmpty()) {
         qDebug() << "Pre-uninstall";
-        ui->tabWidget->setTabText(ui->tabWidget->indexOf(ui->tabOutput), tr("Running pre-uninstall operations..."));
+        ui->tabWidget->setTabText(Tab::Output, tr("Running pre-uninstall operations..."));
         enableOutput();
         if (lock_file.isLockedGUI()) {
             return false;
@@ -215,7 +219,7 @@ bool MainWindow::uninstall(const QString &names, const QString &preuninstall, co
 
     if (success && !postuninstall.isEmpty()) {
         qDebug() << "Post-uninstall";
-        ui->tabWidget->setTabText(ui->tabWidget->indexOf(ui->tabOutput), tr("Running post-uninstall operations..."));
+        ui->tabWidget->setTabText(Tab::Output, tr("Running post-uninstall operations..."));
         enableOutput();
         if (lock_file.isLockedGUI()) {
             return false;
@@ -232,7 +236,7 @@ bool MainWindow::updateApt()
         return false;
     }
     ui->tabOutput->isVisible() // Don't display in output if calling to refresh from tabs
-        ? ui->tabWidget->setTabText(ui->tabWidget->indexOf(ui->tabOutput), tr("Refreshing sources..."))
+        ? ui->tabWidget->setTabText(Tab::Output, tr("Refreshing sources..."))
         : progress->show();
     if (!timer.isActive()) {
         timer.start(100ms);
@@ -651,7 +655,7 @@ void MainWindow::setConnections() const
     connect(ui->pushHelp, &QPushButton::clicked, this, &MainWindow::pushHelp_clicked);
     connect(ui->pushInstall, &QPushButton::clicked, this, &MainWindow::pushInstall_clicked);
     connect(ui->pushRemotes, &QPushButton::clicked, this, &MainWindow::pushRemotes_clicked);
-    connect(ui->pushRemoveOrphan, &QPushButton::clicked, this, &MainWindow::pushRemoveOrphan_clicked);
+    connect(ui->pushRemoveAutoremovable, &QPushButton::clicked, this, &MainWindow::pushRemoveAutoremovable_clicked);
     connect(ui->pushRemoveUnused, &QPushButton::clicked, this, &MainWindow::pushRemoveUnused_clicked);
     connect(ui->pushUninstall, &QPushButton::clicked, this, &MainWindow::pushUninstall_clicked);
     connect(ui->pushUpgradeAll, &QPushButton::clicked, this, &MainWindow::pushUpgradeAll_clicked);
@@ -835,14 +839,13 @@ void MainWindow::displayPackages()
     newtree->setUpdatesEnabled(false);
     newtree->clear();
 
-    auto items = createTreeItems(list);
-    addInstalledAppsToItems(items, list);
+    auto items = createTreeItemsList(list);
 
     newtree->addTopLevelItems(items);
     newtree->sortItems(TreeCol::Name, Qt::AscendingOrder);
 
     updateTreeItems(newtree);
-    displayAutoRemoveOrphans(newtree);
+    displayAutoremovable(newtree);
 
     newtree->blockSignals(false);
     newtree->setUpdatesEnabled(true);
@@ -850,11 +853,22 @@ void MainWindow::displayPackages()
     emit displayPackagesFinished();
 }
 
-void MainWindow::displayAutoRemoveOrphans(const QTreeWidget *newtree) const
+void MainWindow::displayAutoremovable(const QTreeWidget *newtree)
 {
-    if (newtree == ui->treeEnabled) {
-        ui->pushRemoveOrphan->setVisible(
-            Cmd().run(R"lit(test -n "$(apt-get --dry-run autoremove |grep -Po '^Remv \K[^ ]+' )")lit"));
+    if (newtree != ui->treePopularApps && newtree != ui->treeFlatpak) {
+        QStringList names = cmd.getOut(R"(apt-get --dry-run autoremove | grep -Po '^Remv \K[^ ]+' | tr '\n' ' ')")
+                                .split(' ', Qt::SkipEmptyParts);
+        if (!names.isEmpty()) {
+            ui->pushRemoveAutoremovable->setVisible(true);
+            for (const QString &name : names) {
+                auto matchingItems = newtree->findItems(name, Qt::MatchExactly | Qt::MatchRecursive, TreeCol::Name);
+                for (QTreeWidgetItem *item : matchingItems) {
+                    item->setData(TreeCol::Status, Qt::UserRole, Status::Autoremovable);
+                }
+            }
+        } else {
+            ui->pushRemoveAutoremovable->setVisible(false);
+        }
     }
 }
 
@@ -892,7 +906,7 @@ QMap<QString, PackageInfo> *MainWindow::getCurrentList()
     }
 }
 
-QList<QTreeWidgetItem *> MainWindow::createTreeItems(QMap<QString, PackageInfo> *list) const
+QList<QTreeWidgetItem *> MainWindow::createTreeItemsList(QMap<QString, PackageInfo> *list) const
 {
     QList<QTreeWidgetItem *> items;
     items.reserve(list->size() + installed_packages.size());
@@ -901,16 +915,13 @@ QList<QTreeWidgetItem *> MainWindow::createTreeItems(QMap<QString, PackageInfo> 
         items.append(createTreeItem(it.key(), it.value().version, it.value().description));
     }
 
-    return items;
-}
-
-void MainWindow::addInstalledAppsToItems(QList<QTreeWidgetItem *> &items, QMap<QString, PackageInfo> *list) const
-{
     for (auto it = installed_packages.constBegin(); it != installed_packages.constEnd(); ++it) {
         if (!list->contains(it.key())) {
-            items.append(createTreeItem(it.key(), it.value().version, it.value().description));
+            items.append(createTreeItem(it.key(), QString(), it.value().description));
         }
     }
+
+    return items;
 }
 
 void MainWindow::updateTreeItems(QTreeWidget *tree)
@@ -925,23 +936,23 @@ void MainWindow::updateTreeItems(QTreeWidget *tree)
         if (ui->checkHideLibs->isChecked() && isFilteredName(app_name)) {
             (*it)->setHidden(true);
         }
-        const QString app_ver = (*it)->text(TreeCol::Version);
+        const QString app_ver = (*it)->text(TreeCol::RepoVersion);
         const VersionNumber installed = hashInstalled.value(app_name);
-        const VersionNumber repo_candidate(app_ver);
+        (*it)->setText(TreeCol::InstalledVersion, installed.toString());
+        const VersionNumber repo_candidate {app_ver};
 
         (*it)->setIcon(TreeCol::Check, QIcon());
 
         if (installed.toString().isEmpty()) {
-            setToolTipForNotInstalled(*it, app_name);
             (*it)->setData(TreeCol::Status, Qt::UserRole, Status::NotInstalled);
         } else {
             ++inst_count;
             if (installed >= repo_candidate) {
-                setToolTipForInstalled(*it, installed);
+                (*it)->setIcon(TreeCol::Check, qicon_installed);
                 (*it)->setData(TreeCol::Status, Qt::UserRole, Status::Installed);
             } else {
-                setToolTipForUpgradable(*it, installed);
                 ++upgr_count;
+                (*it)->setIcon(TreeCol::Check, qicon_upgradable);
                 (*it)->setData(TreeCol::Status, Qt::UserRole, Status::Upgradable);
             }
         }
@@ -949,33 +960,6 @@ void MainWindow::updateTreeItems(QTreeWidget *tree)
 
     for (int i = 0; i < tree->columnCount(); ++i) {
         tree->resizeColumnToContents(i);
-    }
-}
-
-void MainWindow::setToolTipForNotInstalled(QTreeWidgetItem *item, const QString &app_name) const
-{
-    for (int i = 0; i < item->treeWidget()->columnCount(); ++i) {
-        if (enabled_list.contains(app_name)) {
-            item->setToolTip(i, tr("Version ") + enabled_list.value(app_name).version + tr(" in the enabled repos"));
-        } else {
-            item->setToolTip(i, tr("Not available in the enabled repos"));
-        }
-    }
-}
-
-void MainWindow::setToolTipForInstalled(QTreeWidgetItem *item, const VersionNumber &installed) const
-{
-    item->setIcon(TreeCol::Check, qicon_installed);
-    for (int i = 0; i < item->treeWidget()->columnCount(); ++i) {
-        item->setToolTip(i, tr("Latest version ") + installed.toString() + tr(" already installed"));
-    }
-}
-
-void MainWindow::setToolTipForUpgradable(QTreeWidgetItem *item, const VersionNumber &installed) const
-{
-    item->setIcon(TreeCol::Check, qicon_upgradable);
-    for (int i = 0; i < item->treeWidget()->columnCount(); ++i) {
-        item->setToolTip(i, tr("Version ") + installed.toString() + tr(" installed"));
     }
 }
 
@@ -1266,7 +1250,7 @@ bool MainWindow::install(const QString &names)
                               tr("Internet is not available, won't be able to download the list of packages"));
         return false;
     }
-    ui->tabWidget->setTabText(ui->tabWidget->indexOf(ui->tabOutput), tr("Installing packages..."));
+    ui->tabWidget->setTabText(Tab::Output, tr("Installing packages..."));
 
     // Simulate install of selections and present for confirmation
     // if user selects cancel, break routine but return success to avoid error message
@@ -1321,7 +1305,7 @@ bool MainWindow::installBatch(const QStringList &name_list)
 
     if (postinstall != '\n') {
         qDebug() << "Post-install";
-        ui->tabWidget->setTabText(ui->tabWidget->indexOf(ui->tabOutput), tr("Post-processing..."));
+        ui->tabWidget->setTabText(Tab::Output, tr("Post-processing..."));
         if (lock_file.isLockedGUI()) {
             return false;
         }
@@ -1353,7 +1337,7 @@ bool MainWindow::installPopularApp(const QString &name)
     // Preinstall
     if (!preinstall.isEmpty()) {
         qDebug() << "Pre-install";
-        ui->tabWidget->setTabText(ui->tabWidget->indexOf(ui->tabOutput), tr("Pre-processing for ") + name);
+        ui->tabWidget->setTabText(Tab::Output, tr("Pre-processing for ") + name);
         if (lock_file.isLockedGUI()) {
             return false;
         }
@@ -1368,14 +1352,14 @@ bool MainWindow::installPopularApp(const QString &name)
     }
     // Install
     if (!install_names.isEmpty()) {
-        ui->tabWidget->setTabText(ui->tabWidget->indexOf(ui->tabOutput), tr("Installing ") + name);
+        ui->tabWidget->setTabText(Tab::Output, tr("Installing ") + name);
         result = install(install_names);
     }
     enableOutput();
     // Postinstall
     if (!postinstall.isEmpty()) {
         qDebug() << "Post-install";
-        ui->tabWidget->setTabText(ui->tabWidget->indexOf(ui->tabOutput), tr("Post-processing for ") + name);
+        ui->tabWidget->setTabText(Tab::Output, tr("Post-processing for ") + name);
         if (lock_file.isLockedGUI()) {
             return false;
         }
@@ -1438,7 +1422,7 @@ bool MainWindow::installPopularApps()
 bool MainWindow::installSelected()
 {
     qDebug() << "+++" << __PRETTY_FUNCTION__ << "+++";
-    ui->tabWidget->setTabEnabled(ui->tabWidget->indexOf(ui->tabOutput), true);
+    ui->tabWidget->setTabEnabled(Tab::Output, true);
     QString names = change_list.join(' ');
 
     // Change sources as needed
@@ -1446,10 +1430,6 @@ bool MainWindow::installSelected()
         // Add testrepo unless already enabled
         if (!test_initially_enabled) {
             QString suite = ver_name;
-            if (ver_name == "jessie") { // use 'mx15' for Stretch based MX, user
-                                        // version name for newer versions
-                suite = "mx15";
-            }
             if (arch == "amd64") {
                 cmd.runAsRoot("apt-get update --print-uris | tac | "
                               "grep -m1 -oE 'https?://.*/mx/repo/dists/"
@@ -1481,6 +1461,15 @@ bool MainWindow::installSelected()
     change_list.clear();
     installed_packages = listInstalled();
     return result;
+}
+
+bool MainWindow::markKeep()
+{
+    qDebug() << "+++" << __PRETTY_FUNCTION__ << "+++";
+    ui->tabWidget->setTabEnabled(Tab::Output, true);
+    QString names = change_list.join(' ');
+    enableOutput();
+    return cmd.runAsRoot("apt-mark manual " + names);
 }
 
 bool MainWindow::isFilteredName(const QString &name)
@@ -1850,10 +1839,10 @@ void MainWindow::clearUi()
         ui->labelNumUpgrBP->clear();
         ui->treeBackports->clear();
     }
-    ui->comboFilterBP->setCurrentIndex(0);
+    ui->comboFilterBP->setCurrentIndex(savedComboIndex);
+    ui->comboFilterMX->setCurrentIndex(savedComboIndex);
+    ui->comboFilterEnabled->setCurrentIndex(savedComboIndex);
     ui->comboFilterFlatpak->setCurrentIndex(0);
-    ui->comboFilterMX->setCurrentIndex(0);
-    ui->comboFilterEnabled->setCurrentIndex(0);
     blockSignals(false);
 }
 
@@ -1882,8 +1871,8 @@ QString MainWindow::getVersion(const QString &name) const
 // Return true if all the packages listed are installed
 bool MainWindow::checkInstalled(const QVariant &names) const
 {
-    QStringList name_list = names.canConvert<QString>() ? names.toString().split('\n', Qt::SkipEmptyParts)
-                                                         : names.toStringList();
+    QStringList name_list
+        = names.canConvert<QString>() ? names.toString().split('\n', Qt::SkipEmptyParts) : names.toStringList();
 
     return !name_list.isEmpty() && std::all_of(name_list.cbegin(), name_list.cend(), [this](const QString &name) {
         return installed_packages.contains(name.trimmed());
@@ -1997,7 +1986,7 @@ QTreeWidgetItem *MainWindow::createTreeItem(const QString &name, const QString &
     auto *widget_item = new QTreeWidgetItem();
     widget_item->setCheckState(TreeCol::Check, Qt::Unchecked);
     widget_item->setText(TreeCol::Name, name);
-    widget_item->setText(TreeCol::Version, version);
+    widget_item->setText(TreeCol::RepoVersion, version);
     widget_item->setText(TreeCol::Description, description);
     widget_item->setData(0, Qt::UserRole, true); // All items are displayed till filtered
     return widget_item;
@@ -2356,7 +2345,7 @@ void MainWindow::findPackage()
 void MainWindow::showOutput()
 {
     ui->outputBox->clear();
-    ui->tabWidget->setTabEnabled(ui->tabWidget->indexOf(ui->tabOutput), true);
+    ui->tabWidget->setTabEnabled(Tab::Output, true);
     ui->tabWidget->setCurrentWidget(ui->tabOutput);
     enableTabs(false);
 }
@@ -2391,7 +2380,14 @@ void MainWindow::pushInstall_clicked()
                                   tr("Problem detected while installing, please inspect the console output."));
         }
     } else {
-        bool success = currentTree == ui->treePopularApps ? installPopularApps() : installSelected();
+        bool success = false;
+        if (currentTree == ui->treePopularApps) {
+            success = installPopularApps();
+        } else if (ui->comboFilterEnabled->currentText() == tr("Autoremovable")) {
+            success = markKeep();
+        } else {
+            success = installSelected();
+        }
         setDirty();
         buildPackageLists();
         refreshPopularApps();
@@ -2529,29 +2525,37 @@ void MainWindow::pushUninstall_clicked()
 void MainWindow::tabWidget_currentChanged(int index)
 {
     qDebug() << "+++" << __PRETTY_FUNCTION__ << "+++";
-    ui->tabWidget->setTabText(ui->tabWidget->indexOf(ui->tabOutput), tr("Console Output"));
+    ui->tabWidget->setTabText(Tab::Output, tr("Console Output"));
     ui->pushInstall->setEnabled(false);
     ui->pushUninstall->setEnabled(false);
     currentTree->blockSignals(true);
 
     resetCheckboxes();
     QString search_str;
-    int filter_idx = 0;
-    saveSearchText(search_str, filter_idx);
+    saveSearchText(search_str, savedComboIndex);
 
+    auto setTabsEnabled = [this](bool enable) {
+        for (auto tab : {Tab::Popular, Tab::EnabledRepos, Tab::Test, Tab::Backports, Tab::Flatpak}) {
+            if (tab != ui->tabWidget->currentIndex()) {
+                ui->tabWidget->setTabEnabled(tab, enable);
+            }
+        }
+    };
+
+    setTabsEnabled(false);
     switch (index) {
     case Tab::Popular: {
         bool tempFlag = false;
-        handleTab(search_str, filter_idx, nullptr, ui->searchPopular, "", tempFlag);
+        handleTab(search_str, ui->searchPopular, "", tempFlag);
     } break;
     case Tab::EnabledRepos:
-        handleEnabledReposTab(search_str, filter_idx);
+        handleEnabledReposTab(search_str);
         break;
     case Tab::Test:
-        handleTab(search_str, filter_idx, ui->comboFilterMX, ui->searchBoxMX, "test", dirtyTest);
+        handleTab(search_str, ui->searchBoxMX, "test", dirtyTest);
         break;
     case Tab::Backports:
-        handleTab(search_str, filter_idx, ui->comboFilterBP, ui->searchBoxBP, "backports", dirtyBackports);
+        handleTab(search_str, ui->searchBoxBP, "backports", dirtyBackports);
         break;
     case Tab::Flatpak:
         handleFlatpakTab(search_str);
@@ -2560,6 +2564,7 @@ void MainWindow::tabWidget_currentChanged(int index)
         handleOutputTab();
         break;
     }
+    setTabsEnabled(true);
     ui->pushUpgradeAll->setVisible((currentTree == ui->treeEnabled) && (ui->labelNumUpgr->text().toInt() > 0));
 }
 
@@ -2591,10 +2596,10 @@ void MainWindow::saveSearchText(QString &search_str, int &filter_idx)
     }
 }
 
-void MainWindow::handleEnabledReposTab(const QString &search_str, int filter_idx)
+void MainWindow::handleEnabledReposTab(const QString &search_str)
 {
     ui->searchBoxEnabled->setText(search_str);
-    enableTabs(true);
+    // enableTabs(true);
     setCurrentTree();
     change_list.clear();
     if (displayPackagesIsRunning) {
@@ -2610,7 +2615,12 @@ void MainWindow::handleEnabledReposTab(const QString &search_str, int filter_idx
             return;
         }
     }
-    ui->comboFilterEnabled->setCurrentIndex(filter_idx);
+    if (!displayPackagesIsRunning) {
+        ui->comboFilterEnabled->setCurrentIndex(savedComboIndex);
+        ui->comboFilterMX->setCurrentIndex(savedComboIndex);
+        ui->comboFilterBP->setCurrentIndex(savedComboIndex);
+        filterChanged(ui->comboFilterEnabled->currentText());
+    }
     if (!ui->searchBoxEnabled->text().isEmpty()) {
         findPackage();
     }
@@ -2619,14 +2629,12 @@ void MainWindow::handleEnabledReposTab(const QString &search_str, int filter_idx
     }
 }
 
-void MainWindow::handleTab(const QString &search_str, int filter_idx, QComboBox *filterCombo, QLineEdit *searchBox,
-                           const QString &warningMessage, bool &dirtyFlag)
+void MainWindow::handleTab(const QString &search_str, QLineEdit *searchBox, const QString &warningMessage,
+                           bool dirtyFlag)
 {
-    if (filterCombo) {
-        filterCombo->setCurrentIndex(filter_idx);
+    if (searchBox) {
+        searchBox->setText(search_str);
     }
-    searchBox->setText(search_str);
-    enableTabs(true);
     setCurrentTree();
     if (!warningMessage.isEmpty()) {
         displayWarning(warningMessage);
@@ -2640,6 +2648,12 @@ void MainWindow::handleTab(const QString &search_str, int filter_idx, QComboBox 
             return;
         }
     }
+    if (Tab::Popular != ui->tabWidget->currentIndex()) {
+        ui->comboFilterEnabled->setCurrentIndex(savedComboIndex);
+        ui->comboFilterMX->setCurrentIndex(savedComboIndex);
+        ui->comboFilterBP->setCurrentIndex(savedComboIndex);
+        filterChanged(ui->comboFilterEnabled->currentText());
+    }
     if (!search_str.isEmpty()) {
         currentTree == ui->treePopularApps ? findPopular() : findPackage();
     }
@@ -2650,7 +2664,6 @@ void MainWindow::handleFlatpakTab(const QString &search_str)
 {
     lastItemClicked = nullptr;
     ui->searchBoxFlatpak->setText(search_str);
-    enableTabs(true);
     setCurrentTree();
     displayWarning("flatpaks");
     ui->searchBoxFlatpak->setFocus();
@@ -2699,7 +2712,7 @@ void MainWindow::handleFlatpakTab(const QString &search_str)
 
 void MainWindow::installFlatpak()
 {
-    ui->tabWidget->setTabEnabled(ui->tabWidget->indexOf(ui->tabOutput), true);
+    ui->tabWidget->setTabEnabled(Tab::Output, true);
     ui->tabWidget->setCurrentWidget(ui->tabOutput);
     setCursor(QCursor(Qt::BusyCursor));
     showOutput();
@@ -2728,7 +2741,7 @@ void MainWindow::installFlatpak()
         }
     }
     setCursor(QCursor(Qt::ArrowCursor));
-    ui->tabWidget->setTabText(ui->tabWidget->indexOf(ui->tabOutput), tr("Console Output"));
+    ui->tabWidget->setTabText(Tab::Output, tr("Console Output"));
     ui->tabWidget->blockSignals(true);
     displayFlatpaks(true);
     ui->tabWidget->blockSignals(false);
@@ -2787,6 +2800,14 @@ void MainWindow::filterChanged(const QString &arg1)
         change_list.clear();
     };
 
+    auto blockSignalsForAll = [this](bool block) {
+        ui->checkHideLibs->blockSignals(block);
+        ui->checkHideLibsBP->blockSignals(block);
+        ui->checkHideLibsMX->blockSignals(block);
+    };
+
+    bool isAutoremovable = (arg1 == tr("Autoremovable"));
+    bool shouldHideLibs = !isAutoremovable && hideLibsChecked;
     if (currentTree == ui->treeFlatpak) {
         if (arg1 == tr("Installed runtimes")) {
             handleFlatpakFilter(installed_runtimes_fp, false);
@@ -2827,15 +2848,33 @@ void MainWindow::filterChanged(const QString &arg1)
         findPackage();
         setSearchFocus();
     } else if (arg1 == tr("All packages")) {
+        savedComboIndex = 0;
+        blockSignalsForAll(true);
+
+        ui->checkHideLibs->setChecked(shouldHideLibs);
+        ui->checkHideLibsMX->setChecked(shouldHideLibs);
+        ui->checkHideLibsBP->setChecked(shouldHideLibs);
+        blockSignalsForAll(false);
         resetTree();
         clearChangeListAndButtons();
+        ui->pushInstall->setText(isAutoremovable ? tr("Mark keep") : tr("Install"));
     } else {
-        const QMap<QString, int> statusMap {{tr("Upgradable"), Status::Upgradable},
-                                            {tr("Installed"), Status::Installed},
-                                            {tr("Not installed"), Status::NotInstalled}};
+        blockSignalsForAll(true);
+        ui->checkHideLibs->setChecked(shouldHideLibs);
+        ui->checkHideLibsMX->setChecked(shouldHideLibs);
+        ui->checkHideLibsBP->setChecked(shouldHideLibs);
+        blockSignalsForAll(false);
+
+        ui->pushInstall->setText(isAutoremovable ? tr("Mark keep") : tr("Install"));
+
+        const QHash<QString, int> statusMap {{tr("Installed"), Status::Installed},
+                                             {tr("Upgradable"), Status::Upgradable},
+                                             {tr("Not installed"), Status::NotInstalled},
+                                             {tr("Autoremovable"), Status::Autoremovable}};
 
         auto itStatus = statusMap.find(arg1);
         if (itStatus != statusMap.end()) {
+            savedComboIndex = itStatus.value();
             for (QTreeWidgetItemIterator it(currentTree); (*it) != nullptr; ++it) {
                 int itemStatus = (*it)->data(TreeCol::Status, Qt::UserRole).toInt();
                 bool shouldShow = (itStatus.value() == Status::Installed && itemStatus == Status::Upgradable)
@@ -2917,6 +2956,9 @@ void MainWindow::buildChangeList(QTreeWidgetItem *item)
     if (currentTree != ui->treeFlatpak) {
         ui->pushUninstall->setEnabled(checkInstalled(change_list));
         ui->pushInstall->setText(checkUpgradable(change_list) ? tr("Upgrade") : tr("Install"));
+        if (ui->comboFilterEnabled->currentText() == tr("Autoremovable")) {
+            ui->pushInstall->setText(tr("Mark keep"));
+        }
     } else { // For Flatpaks allow selection only of installed or not installed items so one clicks
              // on an installed item only installed items should be displayed and the other way round
         ui->pushInstall->setText(tr("Install"));
@@ -2977,6 +3019,7 @@ void MainWindow::pushForceUpdateBP_clicked()
 void MainWindow::checkHideLibs_toggled(bool checked)
 {
     ui->treeEnabled->setUpdatesEnabled(false);
+    hideLibsChecked = checked;
     ui->checkHideLibsMX->setChecked(checked);
     ui->checkHideLibsBP->setChecked(checked);
 
@@ -3055,12 +3098,14 @@ void MainWindow::pushCancel_clicked()
 
 void MainWindow::checkHideLibsMX_clicked(bool checked)
 {
+    hideLibsChecked = checked;
     ui->checkHideLibs->setChecked(checked);
     ui->checkHideLibsBP->setChecked(checked);
 }
 
 void MainWindow::checkHideLibsBP_clicked(bool checked)
 {
+    hideLibsChecked = checked;
     ui->checkHideLibs->setChecked(checked);
     ui->checkHideLibsMX->setChecked(checked);
 }
@@ -3213,7 +3258,7 @@ void MainWindow::pushRemoveUnused_clicked()
     enableTabs(true);
 }
 
-void MainWindow::pushRemoveOrphan_clicked()
+void MainWindow::pushRemoveAutoremovable_clicked()
 {
     QString names = cmd.getOutAsRoot(R"(apt-get --dry-run autoremove |grep -Po '^Remv \K[^ ]+' |tr '\n' ' ')");
     QMessageBox::warning(this, tr("Warning"),

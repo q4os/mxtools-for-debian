@@ -24,7 +24,7 @@ c=${b%span*}
 version=$(echo $c |cut -d"<" -f1)
 
 #get slack desktop deb
-wget https://downloads.slack-edge.com/releases/linux/$version/prod/x64/slack-desktop-$version-amd64.deb -O /tmp/slack-desktop.deb
+wget wget https://downloads.slack-edge.com/desktop-releases/linux/x64/$version/slack-desktop-$version-amd64.deb -O /tmp/slack-desktop.deb
 if [ -e /tmp/slack-desktop.deb ]; then
 	apt-get install /tmp/slack-desktop.deb
 	rm /tmp/slack-desktop.deb

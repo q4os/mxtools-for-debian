@@ -1,3 +1,25 @@
+mx-snapshot (24.8.02) mx; urgency=medium
+
+  * Fix terminal output for progress bar and pulsing "Progress ..."
+  * Minor: replaced use of "column" with printf to avoid bsdextrautils
+    dependency
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 15 Aug 2024 19:12:42 -0400
+
+mx-snapshot (24.8.01) mx; urgency=medium
+
+  * Use QCalendarWidget to select release date and combobox to select
+    the kernel
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 14 Aug 2024 22:23:48 -0400
+
+mx-snapshot (24.8) mx; urgency=medium
+
+  * Add support for ext2 and zfs for temporary work directory
+  * Update translations
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 05 Aug 2024 12:02:33 -0400
+
 mx-snapshot (24.7.03) mx; urgency=medium
 
   * Remove the nvidia boot option that may have been added with a

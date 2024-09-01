@@ -1,3 +1,9 @@
+ddm-mx (24.08.01) mx; urgency=medium
+
+  * do not remove nvidia firmware while purge operation
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 24 Aug 2024 14:36:45 -0400
+
 ddm-mx (24.03.01) mx; urgency=medium
 
   * update translations

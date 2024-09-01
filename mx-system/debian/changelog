@@ -1,3 +1,9 @@
+mx-system (24.08.01mx23) mx; urgency=medium
+
+  * add depends on mx-debian-firmware or linux-firmware metapackages
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 10 Aug 2024 16:01:38 -0400
+
 mx-system (24.05.01mx23) mx; urgency=medium
 
   * mx23.3 strings

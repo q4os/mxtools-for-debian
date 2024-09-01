@@ -4,7 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# marcelo cripe <marcelocripe@gmail.com>, 2022
+# marcelo cripe <marcelocripe@gmail.com>, 2024
 # 
 #, fuzzy
 msgid ""
@@ -13,7 +13,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-12-04 21:28-0500\n"
 "PO-Revision-Date: 2022-12-09 04:01+0000\n"
-"Last-Translator: marcelo cripe <marcelocripe@gmail.com>, 2022\n"
+"Last-Translator: marcelo cripe <marcelocripe@gmail.com>, 2024\n"
 "Language-Team: Portuguese (Brazil) (https://app.transifex.com/anticapitalista/teams/10162/pt_BR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -30,5 +30,6 @@ msgstr "Instalador e Desinstalador de Programas do MX"
 #: desktop-in/mx-packageinstaller.desktop.in:6
 msgid "Simple Software Application Package Installer"
 msgstr ""
-"Instalar e desinstalar programas aplicativos ou pacotes com o MX Package "
-"Installer"
+"O ‘MX Package Installer’ ou ‘Instalador de Pacotes do MX’ é uma ferramenta "
+"por interface gráfica do MX Linux que permite instalar e desinstalar "
+"programas, aplicativos, aplicações ou pacotes"

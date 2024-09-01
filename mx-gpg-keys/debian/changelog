@@ -1,3 +1,9 @@
+mx-gpg-keys (24.08.01) mx; urgency=medium
+
+  * Update Adrian's key
+
+ -- Timothy E. Harris <maintainer@mxrepo.com>  Sat, 31 Aug 2024 16:02:28 +0000
+
 mx-gpg-keys (23.09.04) mx; urgency=medium
 
   * Updated Adrian's key

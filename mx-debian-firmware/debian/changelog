@@ -1,9 +1,16 @@
-mx-debian-firmware (23.03.01mx23) mx; urgency=medium
+mx-debian-firmware (24.08.10mx23) mx; urgency=medium
 
-  * initial mx23 build
-  * remove firmware-intelwimax from depends
+  * Drop Intel WiMax package (unsupported since 5.10+)
 
- -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 27 Mar 2023 08:04:21 -0400
+ -- Steven Pusser <stevep@mxlinux.org>  Fri, 09 Aug 2024 23:32:51 -0700
+
+mx-debian-firmware (24.08.09mx23) mx; urgency=medium
+
+  * Add dependencies for new intel-graphics, intel-misc, nvidia-graphics, and
+    mediatek if the newer firmware is in repos.
+  * Add microcode packages as dependencies.
+
+ -- Steven Pusser <stevep@mxlinux.org>  Fri, 09 Aug 2024 12:59:09 -0700
 
 mx-debian-firmware (20.10.11mx21) mx; urgency=medium
 

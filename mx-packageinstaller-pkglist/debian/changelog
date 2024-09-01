@@ -1,3 +1,46 @@
+mx-packageinstaller-pkglist (24.08.07mx23) mx; urgency=medium
+
+  * liquorix kernel 6.10.7 update
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 31 Aug 2024 21:26:11 -0400
+
+mx-packageinstaller-pkglist (24.08.06mx23) mx; urgency=medium
+
+  * add kapow from obs build service
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 29 Aug 2024 20:36:10 -0400
+
+mx-packageinstaller-pkglist (24.08.05mx23) mx; urgency=medium
+
+  * ahs/debian 6.10.6 kernel
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 26 Aug 2024 18:42:28 -0400
+
+mx-packageinstaller-pkglist (24.08.04mx23) mx; urgency=medium
+
+  * update brave repo
+  * update add 6.10 kernels
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 22 Aug 2024 20:06:19 -0400
+
+mx-packageinstaller-pkglist (24.08.03mx23) mx; urgency=medium
+
+  * update slack download url
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 11 Aug 2024 15:15:30 -0400
+
+mx-packageinstaller-pkglist (24.08.02mx23) mx; urgency=medium
+
+  * liquorix kernel 6.9.12-2
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 05 Aug 2024 19:15:37 -0400
+
+mx-packageinstaller-pkglist (24.08.01mx23) mx; urgency=medium
+
+  * update 6.9 kernels (liquorix and debian)
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 02 Aug 2024 18:45:59 -0400
+
 mx-packageinstaller-pkglist (24.07.06mx23) mx; urgency=medium
 
   * add debian ahs kernels 6.8, 6.9

@@ -108,7 +108,7 @@ ORDERED_CMDS="$ORDERED_CMDS copy-main check-usb-md5 copy-bios copy-uefi uuids"
 ORDERED_CMDS="$ORDERED_CMDS cheats cheats-syslinux cheats-grub install encrypt-main encryption-initrd"
     ALL_CMDS="sizes all partition makefs copy cheats $ORDERED_CMDS"
 
-   ALL_FORCE="automount,flock,makefs,ultra-fit,usb,nofuse,fuse,uuids,nomd5,debug-copy,check-sh,luks2"
+   ALL_FORCE="automount,flock,makefs,ultra-fit,usb,nofuse,fuse,uuids,nomd5,debug-copy,check-sh,luks1"
    ALL_PAUSE="exit,initrd,copy,uuids"
 
     LIB_PATH="$MY_LIB_DIR:$LIB_DIR"
@@ -124,7 +124,7 @@ SYSLINUX_FILES="$SYSLINUX_FILES libmenu.c32 libutil.c32 linux.c32 menu.c32"
 
         SWEARS="asshole|bastard|bitch|cock|crap|cunt|damn|dick|douche|fag|fuck|piss|pussy|shit|slut"
 
-     LUKS_TYPE="luks1"
+     LUKS_TYPE="luks2"
 
 #------------------------------------------------------------------------------
 # Show usage and exit
@@ -197,6 +197,7 @@ Options:
                             nomd5:      don't check md5 of files copied to live-usb
                             ultra-fit:  don't warn about SanDisk utra-fit devices
                             usb: Ignore usb/removable check
+                            luks1:  use luks1 encryption instead of default luks2
 
   -- --gui-progress           All remaining args are used as a gui progress bar program
                               Example: --gui-progress yad --progress --auto-close
@@ -758,20 +759,22 @@ main() {
         local linuxfs_full=$ISO_DIR/$DEF_BOOT_DIR/$LINUXFS_NAME
         my_mount "$linuxfs_full" "$LINUX_DIR" -t squashfs -o loop,ro
 
-        if force luks2; then
+        if force luks1; then
 
-            local host_cs=$(cryptsetup --version | cryptsetup_major_version)
-            local targ_cs=$(chroot $LINUX_DIR /sbin/cryptsetup --version | cryptsetup_major_version)
-            : ${host_cs:=0}
-            : ${targ_cs:=0}
-            msg "Host using cryptsetup version %s" "$(pq $host_cs.x)"
-            msg "Target using cryptsetup version %s" "$(pq $targ_cs.x)"
-            if [ $host_cs -ge 2 -a $targ_cs -ge 2 ]; then
-                LUKS_TYPE="luks2"
-                msg "Using Luks version %s" "$(nq $LUKS_TYPE)"
-            else
-                msg "Leaving Luks version at %s" "$(nq $LUKS_TYPE)"
-            fi
+            LUKS_TYPE="luks1"
+            msg "Using Luks version %s" "$(nq $LUKS_TYPE)"
+            #local host_cs=$(cryptsetup --version | cryptsetup_major_version)
+            #local targ_cs=$(chroot $LINUX_DIR /sbin/cryptsetup --version | cryptsetup_major_version)
+            #: ${host_cs:=0}
+            #: ${targ_cs:=0}
+            #msg "Host using cryptsetup version %s" "$(pq $host_cs.x)"
+            #msg "Target using cryptsetup version %s" "$(pq $targ_cs.x)"
+            #if [ $host_cs -ge 2 -a $targ_cs -ge 2 ]; then
+                #LUKS_TYPE="luks2"
+                #msg "Using Luks version %s" "$(nq $LUKS_TYPE)"
+            #else
+             #   msg "Leaving Luks version at %s" "$(nq $LUKS_TYPE)"
+            #fi
         fi
         local initrd_file=$ISO_DIR/$DEF_BOOT_DIR/initrd.gz
         start_initrd_encryption "$initrd_file" "$INITRD_DIR" "$LINUX_DIR"

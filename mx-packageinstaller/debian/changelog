@@ -1,3 +1,35 @@
+mx-packageinstaller (24.8.10) mx; urgency=medium
+
+  * Remove tooltips that show version since we display them in a separate
+    column (reduces CPU and RAM utilization)
+
+ -- Adrian <adrian@mxlinux.org>  Sun, 18 Aug 2024 12:55:29 -0400
+
+mx-packageinstaller (24.8.09) mx; urgency=medium
+
+  * Add an Installed Version alongside Repo Version column
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 16 Aug 2024 22:47:13 -0400
+
+mx-packageinstaller (24.8.07) mx; urgency=medium
+
+  * Run apt-get --dry-run autoremove as normal user
+
+ -- Adrian <adrian@mxlinux.org>  Sat, 03 Aug 2024 11:42:27 -0400
+
+mx-packageinstaller (24.8.05) mx; urgency=medium
+
+  * Added an "Autoremovable" item in combo box filter to list autoremovable
+    packages in the "Enabled" tab
+  * Added option to mark autoremovable packages as "manually installed" to
+    prevent them from being autoremoved
+  * Renamed "remove orphan packages" to "autoremove packages"
+  * Save combo box filter selection when changing tabs
+  * Disable MX test and Backports while loading Enabled sources at startup
+  * Disable other tabs while a tab is loading
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 31 Jul 2024 22:45:23 -0400
+
 mx-packageinstaller (24.7.07) mx; urgency=medium
 
   * Fix: displaying installed packages in the Popular tab

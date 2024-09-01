@@ -14,17 +14,23 @@ Depends: atmel-firmware,
          firmware-bnx2,
          firmware-bnx2x,
          firmware-brcm80211,
+         firmware-intel-graphics | firmware-misc-non-free ( << 20240610),
+         firmware-intel-misc | firmware-misc-non-free ( << 20240610),
          firmware-intel-sound,
          firmware-ipw2x00,
          firmware-iwlwifi,
          firmware-libertas,
          firmware-linux,
+         firmware-marvell-prestera,
+         firmware-mediatek | firmware-ralink ( << 20240610),
          firmware-myricom,
          firmware-netxen,
+         firmware-nvidia-graphics | firmware-misc-non-free ( << 20240610),
          firmware-qlogic,
-         firmware-ralink,
          firmware-realtek,
-         firmware-zd1211
+         firmware-zd1211,
+         intel-microcode,
+         amd64-microcode
 Conflicts: linux-firmware
 Replaces: linux-firmware
 Description: metapackage that depends on Debian firmware shipped with MX Linux

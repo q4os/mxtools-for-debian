@@ -79,7 +79,7 @@ void Work::cleanUp()
         initrd_dir.remove();
         exit(EXIT_SUCCESS);
     }
-    emit message(tr("Cleaning..."));
+    emit message(tr("Cleaning...") + "\033[?25h"); // Restore the cursor visibility
     Cmd().run(elevate + " /usr/lib/" + QCoreApplication::applicationName() + "/snapshot-lib kill_mksquashfs", true);
     shell.close();
     QProcess::execute("sync", {});
@@ -420,8 +420,8 @@ void Work::savePackageList(const QString &file_name)
         emit messageBox(BoxType::critical, tr("Error"),
                         tr("Could not create working directory. ") + dir.absolutePath());
     }
-    QString full_name = settings->work_dir + "/iso-template/" + fi.completeBaseName() + "/package_list";
-    QString cmd = QString(R"(dpkg -l |awk '/^ii /{print $2,$3}' |column -t >")" + full_name + "\"");
+    QString full_name = QString("%1/iso-template/%2/package_list").arg(settings->work_dir, fi.completeBaseName());
+    QString cmd = QString(R"(dpkg -l | awk '/^ii /{printf "%-41s %s\n", $2, $3}' > '%1')").arg(full_name);
     shell.run(cmd);
 }
 

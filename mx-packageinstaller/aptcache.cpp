@@ -68,8 +68,8 @@ void AptCache::parseContent()
         } else if (line.startsWith(QLatin1String("Description:"))) {
             description = line.mid(13).trimmed();
             if (match_arch) {
-                auto it = candidates.find(package);
-                if (it == candidates.end() || VersionNumber(it->version) < VersionNumber(version)) {
+                auto it = candidates.constFind(package);
+                if (it == candidates.constEnd() || VersionNumber(it->version) < VersionNumber(version)) {
                     candidates[package] = {version, description};
                 }
             }

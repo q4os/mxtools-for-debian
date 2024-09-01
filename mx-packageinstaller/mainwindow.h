@@ -51,7 +51,7 @@ class MainWindow;
 
 namespace Status
 {
-enum { NotInstalled, Installed, Upgradable };
+enum { Installed = 1, Upgradable, NotInstalled, Autoremovable }; // Also used for filter combo index
 }
 
 namespace Tab
@@ -75,11 +75,11 @@ enum {
     QDistro,
     MAX
 };
-} // namespace PopCol
+} // Namespace PopCol
 
 namespace TreeCol
 {
-enum { Check, Name, Version, Description, Status };
+enum { Check, Name, RepoVersion, InstalledVersion, Description, Status };
 }
 
 namespace FlatCol
@@ -158,7 +158,7 @@ private slots:
     void pushHelp_clicked();
     void pushInstall_clicked();
     void pushRemotes_clicked();
-    void pushRemoveOrphan_clicked();
+    void pushRemoveAutoremovable_clicked();
     void pushRemoveUnused_clicked();
     void pushUninstall_clicked();
     void pushUpgradeAll_clicked();
@@ -184,11 +184,13 @@ private:
     bool displayFlatpaksIsRunning {false};
     bool displayPackagesIsRunning {false};
     bool firstRunFP {true};
+    bool hideLibsChecked {true};
     bool test_initially_enabled {false};
     bool updated_once {false};
     bool warning_backports {false};
     bool warning_flatpaks {false};
     bool warning_test {false};
+    int savedComboIndex {0};
 
     Cmd cmd;
     LockFile lock_file {"/var/lib/dpkg/lock"};
@@ -242,7 +244,7 @@ private:
     [[nodiscard]] static QString getDebianVerName();
     [[nodiscard]] static bool isFilteredName(const QString &name);
     [[nodiscard]] static uchar getDebianVerNum();
-    [[nodiscard]] QList<QTreeWidgetItem *> createTreeItems(QMap<QString, PackageInfo> *list) const;
+    [[nodiscard]] QList<QTreeWidgetItem *> createTreeItemsList(QMap<QString, PackageInfo> *list) const;
     [[nodiscard]] QMap<QString, PackageInfo> *getCurrentList();
     [[nodiscard]] QTreeWidget *getCurrentTree();
 
@@ -259,30 +261,29 @@ private:
     bool installPopularApp(const QString &name);
     bool installPopularApps();
     bool installSelected();
+    bool markKeep();
     bool readPackageList(bool force_download = false);
     bool uninstall(const QString &names, const QString &preuninstall = QLatin1String(""),
                    const QString &postuninstall = QLatin1String(""));
     bool updateApt();
     static QString convert(quint64 bytes);
     static quint64 convert(const QString &size);
-    void addInstalledAppsToItems(QList<QTreeWidgetItem *> &items, QMap<QString, PackageInfo> *list) const;
     void blockInterfaceFP(bool block);
     void buildChangeList(QTreeWidgetItem *item);
     void cancelDownload();
     void centerWindow();
     void clearUi();
-    void displayAutoRemoveOrphans(const QTreeWidget *newtree) const;
+    void displayAutoremovable(const QTreeWidget *newtree);
     void displayFilteredFP(QStringList list, bool raw = false);
     void displayFlatpaks(bool force_update = false);
     void displayPackages();
     void displayPopularApps() const;
     void displayWarning(const QString &repo);
     void enableTabs(bool enable) const;
-    void handleEnabledReposTab(const QString &search_str, int filter_idx);
+    void handleEnabledReposTab(const QString &search_str);
     void handleFlatpakTab(const QString &search_str);
     void handleOutputTab();
-    void handleTab(const QString &search_str, int filter_idx, QComboBox *filterCombo, QLineEdit *searchBox,
-                   const QString &warningMessage, bool &dirtyFlag);
+    void handleTab(const QString &search_str, QLineEdit *searchBox, const QString &warningMessage, bool dirtyFlag);
     void hideColumns() const;
     void hideLibs() const;
     void ifDownloadFailed() const;
@@ -301,9 +302,6 @@ private:
     void setIcons();
     void setProgressDialog();
     void setSearchFocus() const;
-    void setToolTipForInstalled(QTreeWidgetItem *item, const VersionNumber &installed) const;
-    void setToolTipForNotInstalled(QTreeWidgetItem *item, const QString &app_name) const;
-    void setToolTipForUpgradable(QTreeWidgetItem *item, const VersionNumber &installed) const;
     void setup();
     void updateInterface() const;
     void updateTreeItems(QTreeWidget *tree);

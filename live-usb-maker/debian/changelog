@@ -1,3 +1,9 @@
+live-usb-maker (0.4.13) mx; urgency=medium
+
+  * default to luks2, add force=luks1 parameter
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 26 Aug 2024 19:11:16 -0400
+
 live-usb-maker (0.4.12) unstable; urgency=medium
 
   * Copy initrd_release if exists
