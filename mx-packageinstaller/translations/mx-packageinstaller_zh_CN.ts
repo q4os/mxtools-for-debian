@@ -472,30 +472,6 @@
         <translation>请稍等……</translation>
     </message>
     <message>
-        <source>Version </source>
-        <translation type="vanished">版本</translation>
-    </message>
-    <message>
-        <source> in the enabled repos</source>
-        <translation type="vanished">在启用的仓库中</translation>
-    </message>
-    <message>
-        <source>Not available in the enabled repos</source>
-        <translation type="vanished">在已启用的仓库中不存在</translation>
-    </message>
-    <message>
-        <source>Latest version </source>
-        <translation type="vanished">最新版本</translation>
-    </message>
-    <message>
-        <source> already installed</source>
-        <translation type="vanished">已安装</translation>
-    </message>
-    <message>
-        <source> installed</source>
-        <translation type="vanished">已安装</translation>
-    </message>
-    <message>
         <location filename="../mainwindow.cpp" line="1046"/>
         <source>You are about to use the MX Test repository, whose packages are provided for testing purposes only. It is possible that they might break your system, so it is suggested that you back up your system and install or update only one package at a time. Please provide feedback in the Forum so the package can be evaluated before moving up to Main.</source>
         <translation>您将要使用 MX 测试软件仓库，其中软件包仅为测试目的提供。它们有可能破坏您的系统，故我们谨以您备份您的系统，并一次只安装或升级一个软件包。请在论坛中进行反馈，以便在这些软件包移至主仓库之前进行评估。</translation>

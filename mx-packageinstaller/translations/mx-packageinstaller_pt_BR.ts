@@ -472,30 +472,6 @@
         <translation>Por favor, espere...</translation>
     </message>
     <message>
-        <source>Version </source>
-        <translation type="vanished">Versão</translation>
-    </message>
-    <message>
-        <source> in the enabled repos</source>
-        <translation type="vanished">nos repositórios ativados</translation>
-    </message>
-    <message>
-        <source>Not available in the enabled repos</source>
-        <translation type="vanished">Não está disponível nos repositórios que estão ativados</translation>
-    </message>
-    <message>
-        <source>Latest version </source>
-        <translation type="vanished">Última versão </translation>
-    </message>
-    <message>
-        <source> already installed</source>
-        <translation type="vanished">já está instalado</translation>
-    </message>
-    <message>
-        <source> installed</source>
-        <translation type="vanished">instalado</translation>
-    </message>
-    <message>
         <location filename="../mainwindow.cpp" line="1046"/>
         <source>You are about to use the MX Test repository, whose packages are provided for testing purposes only. It is possible that they might break your system, so it is suggested that you back up your system and install or update only one package at a time. Please provide feedback in the Forum so the package can be evaluated before moving up to Main.</source>
         <translation>Você está prestes a utilizar o Repositório de Testes do MX que disponibiliza os pacotes apenas para teste. É possível que eles quebrem/danifiquem o seu sistema operacional. Por isso, é recomendado que você faça uma cópia de segurança (backup) do seu sistema operacional e instale ou atualize apenas um pacote de cada vez. Se for possível, nos informe no fórum, como foi a sua experiência com o pacote, para que ele seja avaliado e encaminhado para o repositório principal (estável) se for qualificado.</translation>

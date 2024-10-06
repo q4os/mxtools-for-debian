@@ -472,22 +472,6 @@
         <translation>Prosím vyčkejte...</translation>
     </message>
     <message>
-        <source>Version </source>
-        <translation type="vanished">Verze</translation>
-    </message>
-    <message>
-        <source>Latest version </source>
-        <translation type="vanished">Nejnovější verze</translation>
-    </message>
-    <message>
-        <source> already installed</source>
-        <translation type="vanished">již nainstalováno</translation>
-    </message>
-    <message>
-        <source> installed</source>
-        <translation type="vanished">nainstalováno</translation>
-    </message>
-    <message>
         <location filename="../mainwindow.cpp" line="1046"/>
         <source>You are about to use the MX Test repository, whose packages are provided for testing purposes only. It is possible that they might break your system, so it is suggested that you back up your system and install or update only one package at a time. Please provide feedback in the Forum so the package can be evaluated before moving up to Main.</source>
         <translation>Chystáte se použít zdroj Testovací repozitář, který obsahuje softvérové balíky určené pouze pro jejich testování. Je možné, že tyto ovlivní stabilitu vášho systému. Je proto doporučeno zazálohovat systémová nastavení a instalovat nebo aktualizovat balíky jenotlivě.  Prosíme o poskytnutí zpětné vazby ve fóru aby mohli být jednotlivé balíky správně vyhodnocené před jejich přesunem do Hlavního repozitáře.</translation>

@@ -472,30 +472,6 @@
         <translation>Agarda...</translation>
     </message>
     <message>
-        <source>Version </source>
-        <translation type="vanished">Versión </translation>
-    </message>
-    <message>
-        <source> in the enabled repos</source>
-        <translation type="vanished">nos repos habilitados</translation>
-    </message>
-    <message>
-        <source>Not available in the enabled repos</source>
-        <translation type="vanished">Non dispoñible nos repositorios habilitados</translation>
-    </message>
-    <message>
-        <source>Latest version </source>
-        <translation type="vanished">última versión</translation>
-    </message>
-    <message>
-        <source> already installed</source>
-        <translation type="vanished">Xa está instalado</translation>
-    </message>
-    <message>
-        <source> installed</source>
-        <translation type="vanished">instalado</translation>
-    </message>
-    <message>
         <location filename="../mainwindow.cpp" line="1046"/>
         <source>You are about to use the MX Test repository, whose packages are provided for testing purposes only. It is possible that they might break your system, so it is suggested that you back up your system and install or update only one package at a time. Please provide feedback in the Forum so the package can be evaluated before moving up to Main.</source>
         <translation>O repositório MX Test, cuxos paquetes son dispoñibilizados só para efecto de probar, está para ser usado. Os paquetes deste repositorio poden damnificar o sistema, polo que se suxire que sexa feita unha copia de seguranza do mesmo e que sexa instalado ou actualizado só un paquete de cada vez. Agradécese que os resultados sexan comunicados no foro, para que haxa unha avalición dos paquetes antes de seren movidos para o repositorio principal.</translation>

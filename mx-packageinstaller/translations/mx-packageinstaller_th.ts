@@ -472,18 +472,6 @@
         <translation>กรุณารอสักครู่...</translation>
     </message>
     <message>
-        <source>Latest version </source>
-        <translation type="vanished">เวอร์ชันล่าสุด</translation>
-    </message>
-    <message>
-        <source> already installed</source>
-        <translation type="vanished">ติดตั้งแล้ว</translation>
-    </message>
-    <message>
-        <source> installed</source>
-        <translation type="vanished">ติดตั้งแล้ว</translation>
-    </message>
-    <message>
         <location filename="../mainwindow.cpp" line="1046"/>
         <source>You are about to use the MX Test repository, whose packages are provided for testing purposes only. It is possible that they might break your system, so it is suggested that you back up your system and install or update only one package at a time. Please provide feedback in the Forum so the package can be evaluated before moving up to Main.</source>
         <translation type="unfinished"></translation>

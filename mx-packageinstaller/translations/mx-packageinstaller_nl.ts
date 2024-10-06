@@ -472,30 +472,6 @@
         <translation>Even wachten aub...</translation>
     </message>
     <message>
-        <source>Version </source>
-        <translation type="vanished">Versie</translation>
-    </message>
-    <message>
-        <source> in the enabled repos</source>
-        <translation type="vanished">in de ingeschakelde repo&apos;s</translation>
-    </message>
-    <message>
-        <source>Not available in the enabled repos</source>
-        <translation type="vanished">Niet beschikbaar in de ingeschakelde repo&apos;s</translation>
-    </message>
-    <message>
-        <source>Latest version </source>
-        <translation type="vanished">Laatste versie</translation>
-    </message>
-    <message>
-        <source> already installed</source>
-        <translation type="vanished">reeds geïnstalleerd</translation>
-    </message>
-    <message>
-        <source> installed</source>
-        <translation type="vanished">geïnstalleerd</translation>
-    </message>
-    <message>
         <location filename="../mainwindow.cpp" line="1046"/>
         <source>You are about to use the MX Test repository, whose packages are provided for testing purposes only. It is possible that they might break your system, so it is suggested that you back up your system and install or update only one package at a time. Please provide feedback in the Forum so the package can be evaluated before moving up to Main.</source>
         <translation>Je staat op het punt de MX Test pakketbron te gebruiken, welke pakketten enkel voor testdoeleinden aangeleverd worden. Het is mogelijk dat je je systeem breekt, dus het is aan te raden dat je een backup maakt van je systeem en installatie of een pakket tegelijk update. Geef alstublieft feedback in het FOrum zodat het pakket geëvalueerd kan worden voor het naar Main verhuist.</translation>

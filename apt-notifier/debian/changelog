@@ -1,3 +1,9 @@
+apt-notifier (24.09.01) mx; urgency=medium
+
+  * Fix: Close only current window with clicking on [x], not MX Updater.
+
+ -- fehlix <fehlix@mxlinux.org>  Wed, 18 Sep 2024 14:46:16 -0400
+
 apt-notifier (24.05.01) mx; urgency=medium
 
   * Fix: basic upgrade with APT::Get::Upgrade-Allow-New=false

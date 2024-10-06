@@ -1,3 +1,9 @@
+formatusb (24.09.01) mx; urgency=medium
+
+  * use LBA (parttype c) for vfat formated partitions
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 19 Sep 2024 22:50:07 -0400
+
 formatusb (24.03.01) mx; urgency=medium
 
   * update translations

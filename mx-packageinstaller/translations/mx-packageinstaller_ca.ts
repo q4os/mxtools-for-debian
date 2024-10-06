@@ -129,7 +129,7 @@
         <location filename="../mainwindow.ui" line="1129"/>
         <location filename="../mainwindow.ui" line="1245"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Filter packages according to their status.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Filtra els paquets d&apos;acord amb el seu estat..&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Filtra els paquets d&apos;acord amb el seu estat.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="484"/>
@@ -341,7 +341,7 @@
     <message>
         <location filename="../mainwindow.ui" line="1564"/>
         <source>Respond here, or just press Enter</source>
-        <translation>Contesteu aquí, o bé premeu Enter</translation>
+        <translation>Contesteu aquí, o bé premeu Intro</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1623"/>
@@ -459,7 +459,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="236"/>
         <source>There was a problem updating sources. Some sources may not have provided updates. For more info check: </source>
-        <translation>Hi ha hagut un problema refrescant les fonts. Algunes poden no haver subministrat actualitzacions. Per més informació comproveu:</translation>
+        <translation>Hi ha hagut un problema refrescant les fonts. Algunes poden no haver subministrat actualitzacions. Per a més informació comproveu:</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="660"/>
@@ -472,30 +472,6 @@
         <translation>Si us plau espereu...</translation>
     </message>
     <message>
-        <source>Version </source>
-        <translation type="vanished">Versió</translation>
-    </message>
-    <message>
-        <source> in the enabled repos</source>
-        <translation type="vanished">als dipòsits actius</translation>
-    </message>
-    <message>
-        <source>Not available in the enabled repos</source>
-        <translation type="vanished">No disponible als dipòsits actius</translation>
-    </message>
-    <message>
-        <source>Latest version </source>
-        <translation type="vanished">Darrera versió</translation>
-    </message>
-    <message>
-        <source> already installed</source>
-        <translation type="vanished">ja instal·lat</translation>
-    </message>
-    <message>
-        <source> installed</source>
-        <translation type="vanished">instal·lat</translation>
-    </message>
-    <message>
         <location filename="../mainwindow.cpp" line="1046"/>
         <source>You are about to use the MX Test repository, whose packages are provided for testing purposes only. It is possible that they might break your system, so it is suggested that you back up your system and install or update only one package at a time. Please provide feedback in the Forum so the package can be evaluated before moving up to Main.</source>
         <translation>Esteu a punt d&apos;usar el dipòsit MX Test, els paquets del qual es faciliten només a efectes de prova. És possible que puguin trencar el sistema, de manera que es recomana fer una còpia de seguretat de tot el sistema, a més d&apos;instal·lar o actualitzar només un paquet cada vegada. Si us plau, comenteu els resultats al Fòrum per tal que el paquet es pugui avaluar abans de moure&apos;l al dipòsit principal.</translation>
@@ -503,7 +479,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="1055"/>
         <source>You are about to use Debian Backports, which contains packages taken from the next Debian release (called &apos;testing&apos;), adjusted and recompiled for usage on Debian stable. They cannot be tested as extensively as in the stable releases of Debian and MX Linux, and are provided on an as-is basis, with risk of incompatibilities with other components in Debian stable. Use with care!</source>
-        <translation>Aneu a usar els Backports de Debian, on hi ha paquets agafats de la propera edició de Debian (anomenada &apos;testing&apos;) ajustats i recompilats per a ser usats a la versió Debian estable. No es poden comprovar tan exhaustivament com a les edicions estables de Debian i MX Linux, i es faciliten &apos;tal qual&apos;, amb el risc de que hi hagi alguna incompatibilitat amb altres components de Debian estable. Useu-ho amb compte!</translation>
+        <translation>Usareu els Backports de Debian, on hi ha paquets agafats de la pròxima edició de Debian (anomenada &apos;testing&apos;) ajustats i recompilats per a ser usats a la versió Debian estable. No es poden comprovar tan exhaustivament com a les edicions estables de Debian i MX Linux, i es faciliten &apos;tal qual&apos;, amb el risc que hi hagi alguna incompatibilitat amb altres components de Debian estable. Useu-ho amb compte!</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1063"/>
@@ -529,7 +505,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="1191"/>
         <source>The following packages were selected. Click Show Details for list of changes.</source>
-        <translation>S&apos;ha seleccionat els següents paquets. Cliqueu Mostra Detalls per veure la llista de canvis.</translation>
+        <translation>S&apos;han seleccionat els següents paquets. Cliqueu Mostra Detalls per veure la llista de canvis.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1227"/>
@@ -804,7 +780,7 @@ Si us plau, reviseu amb cura la llista de paquets a eliminar.</translation>
     <message>
         <location filename="../remotes.cpp" line="59"/>
         <source>Install app</source>
-        <translation>Instal·la aplicació</translation>
+        <translation>Instal·la l&apos;aplicació</translation>
     </message>
     <message>
         <location filename="../remotes.cpp" line="64"/>

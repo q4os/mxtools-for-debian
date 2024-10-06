@@ -203,9 +203,8 @@ QString Settings::getXdgUserDirs(const QString &folder)
         {"DOCUMENTS", "Documents"}, {"DOWNLOAD", "Downloads"}, {"DESKTOP", "Desktop"},
         {"MUSIC", "Music"},         {"PICTURES", "Pictures"},  {"VIDEOS", "Videos"},
     };
-
     for (const QString &user : qAsConst(users)) {
-        QString dir = Cmd().getOutAsRoot("runuser " + user + " -c \"xdg-user-dir " + folder + '"');
+        QString dir = Cmd().getOutAsRoot("runuser " + user + " -c \"xdg-user-dir " + folder + "\" 2>/dev/null");
         if (!dir.isEmpty() && englishDirs.value(folder) != dir.section('/', -1) && dir != "/home/" + user
             && dir != "/home/" + user + '/') {
             dir.remove(QRegularExpression("^/"));
@@ -499,6 +498,7 @@ void Settings::excludeItem(const QString &item)
         {QObject::tr("Desktop"), &Settings::excludeDesktop},
         {QObject::tr("Documents"), &Settings::excludeDocuments},
         {QObject::tr("Downloads"), &Settings::excludeDownloads},
+        {QObject::tr("Flatpaks"), &Settings::excludeFlatpaks},
         {QObject::tr("Music"), &Settings::excludeMusic},
         {QObject::tr("Networks"), &Settings::excludeNetworks},
         {QObject::tr("Pictures"), &Settings::excludePictures},
@@ -543,6 +543,18 @@ void Settings::excludeDownloads(bool exclude)
     QString folder {"home/*/Downloads/"};
     QString xdg_name {"DOWNLOAD"};
     QString exclusion = folder + "*\" \"" + folder + ".*" + getXdgUserDirs(xdg_name);
+    addRemoveExclusion(exclude, exclusion);
+}
+
+void Settings::excludeFlatpaks(bool exclude)
+{
+    qDebug() << "+++" << __PRETTY_FUNCTION__ << "+++";
+    if (exclude) {
+        exclusions.setFlag(Exclude::Flatpaks);
+    }
+    QString exclusion = "home/*/.local/share/flatpak/*\" \"home/*/.local/share/flatpak/.*\" "
+                        "\"var/lib/flatpak/*\" \"var/lib/flatpak/.*\" "
+                        "\"home/*/.var/app/*\" \"home/*/.var/app/.*";
     addRemoveExclusion(exclude, exclusion);
 }
 
@@ -684,6 +696,7 @@ void Settings::excludeAll()
     excludeDesktop(true);
     excludeDocuments(true);
     excludeDownloads(true);
+    excludeFlatpaks(true);
     excludeMusic(true);
     excludeNetworks(true);
     excludePictures(true);
@@ -799,8 +812,8 @@ void Settings::processArgs(const QCommandLineParser &arg_parser)
 
 void Settings::processExclArgs(const QCommandLineParser &arg_parser)
 {
-    static const QSet<QString> valid_options {"Desktop",  "Documents", "Downloads", "Music",     "Networks",
-                                              "Pictures", "Steam",     "Videos",    "VirtualBox"};
+    static const QSet<QString> valid_options {"Desktop",  "Documents", "Downloads", "Flatpaks", "Music",
+                                              "Networks", "Pictures",  "Steam",     "Videos",   "VirtualBox"};
     if (arg_parser.isSet("exclude")) {
         QStringList options = arg_parser.values("exclude");
         for (const QString &option : options) {

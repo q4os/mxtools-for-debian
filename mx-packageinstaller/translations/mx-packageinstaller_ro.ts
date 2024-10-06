@@ -472,22 +472,6 @@
         <translation>Așteptați vă rugăm...</translation>
     </message>
     <message>
-        <source>Version </source>
-        <translation type="vanished">Versiune</translation>
-    </message>
-    <message>
-        <source>Latest version </source>
-        <translation type="vanished">Ultima versiune</translation>
-    </message>
-    <message>
-        <source> already installed</source>
-        <translation type="vanished">deja instalat</translation>
-    </message>
-    <message>
-        <source> installed</source>
-        <translation type="vanished">Instalat</translation>
-    </message>
-    <message>
         <location filename="../mainwindow.cpp" line="1046"/>
         <source>You are about to use the MX Test repository, whose packages are provided for testing purposes only. It is possible that they might break your system, so it is suggested that you back up your system and install or update only one package at a time. Please provide feedback in the Forum so the package can be evaluated before moving up to Main.</source>
         <translation>Sunteți pe cale să utilizați depozitul (repo) de testare MX, ale cărei pachete sunt furnizate numai pentru scopuri de testare. Este posibil ca acestea să vă strice sistemul, de aceea este sugerat să creați copii ale sistemului dvs. și să instalați sau să actualizați un singur pachet deodată. Oferiți feedback în forum astfel încât pachetul să poată fi evaluat înainte de a fi mutat in depozitul central (main).</translation>

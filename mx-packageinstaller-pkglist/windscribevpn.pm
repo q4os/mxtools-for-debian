@@ -92,13 +92,12 @@ if [ ! -r "$DEB" ]; then
 fi
 
 HLP_SVC=$(dpkg --fsys-tarfile "$DEB" | 
-          tar t | grep etc/systemd/system/windscribe-helper.service)
+          tar t | grep /systemd/system/windscribe-helper.service)
 if [ -z "${HLP_SVC##*.service}" ]; then
    dpkg --fsys-tarfile $DEB | 
    tar -x "$HLP_SVC" -O     | 
    sysd2v.sh -n windscribe-helper  | 
    sed s/windscribe-helper-sysd2v.pid/windscribe-helper.pid/ > windscribe-helper
-   chmod 755 /etc/init.d/windscribe-helper
    cp windscribe-helper /etc/init.d/windscribe-helper 
    chmod 755 /etc/init.d/windscribe-helper
 fi
@@ -145,6 +144,7 @@ tar $CMP -cf  ../$CNTRL ./
 popd >/dev/null
 cp $DEB ${DEB%.deb}.orig.deb
 ar r $DEB $CNTRL
+apt-get install --reinstall libopengl0 libxcb-cursor0  || :
 dpkg --unpack $DEB
 cp windscribe-helper /etc/init.d/windscribe-helper 
 chmod 755 /etc/init.d/windscribe-helper

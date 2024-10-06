@@ -472,30 +472,6 @@
         <translation>Prosimo, počakajte...</translation>
     </message>
     <message>
-        <source>Version </source>
-        <translation type="vanished">Različica</translation>
-    </message>
-    <message>
-        <source> in the enabled repos</source>
-        <translation type="vanished">v omogočenih skladiščih</translation>
-    </message>
-    <message>
-        <source>Not available in the enabled repos</source>
-        <translation type="vanished">Ni na voljo v omogočenih skladiščih</translation>
-    </message>
-    <message>
-        <source>Latest version </source>
-        <translation type="vanished">Zadnja različica</translation>
-    </message>
-    <message>
-        <source> already installed</source>
-        <translation type="vanished">je že nameščena</translation>
-    </message>
-    <message>
-        <source> installed</source>
-        <translation type="vanished">nameščena</translation>
-    </message>
-    <message>
         <location filename="../mainwindow.cpp" line="1046"/>
         <source>You are about to use the MX Test repository, whose packages are provided for testing purposes only. It is possible that they might break your system, so it is suggested that you back up your system and install or update only one package at a time. Please provide feedback in the Forum so the package can be evaluated before moving up to Main.</source>
         <translation>Ste na tem, da bi uporabljali testna skladišča, katerih paketi so namenjeni zgolj preizkušanju. Obstaja možnost, da bodo ti pokvarili vaš sistem, zato svetujemo, da naredite varnostno kopijo svojega sistema in da naenkrat namestite ali posodobite le po en paket. Prosimo, da posredujete povratne informacije na forumu, zato da bo lahko paket ovrednoten in prestavljen v glavno skladišče.</translation>

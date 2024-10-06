@@ -1914,7 +1914,7 @@ QMap<QString, PackageInfo> MainWindow::listInstalled() const
     for (const QString &line : lines) {
         if (line.startsWith(statusPrefix)) {
             QStringList parts = line.mid(statusPrefix.length()).split(' ', Qt::SkipEmptyParts);
-            if (parts.size() >= 3) {
+            if (parts.size() >= 2) {
                 QString packageName = parts.takeFirst();
                 QString version = parts.takeFirst();
                 QString description = parts.join(' ');

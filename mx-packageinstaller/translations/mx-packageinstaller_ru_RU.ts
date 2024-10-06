@@ -472,30 +472,6 @@
         <translation>Пожалуйста, ждите...</translation>
     </message>
     <message>
-        <source>Version </source>
-        <translation type="vanished">Версия </translation>
-    </message>
-    <message>
-        <source> in the enabled repos</source>
-        <translation type="vanished">во включенных репозиториях</translation>
-    </message>
-    <message>
-        <source>Not available in the enabled repos</source>
-        <translation type="vanished">Отсутствует во включенных репозиториях</translation>
-    </message>
-    <message>
-        <source>Latest version </source>
-        <translation type="vanished">Последняя версия </translation>
-    </message>
-    <message>
-        <source> already installed</source>
-        <translation type="vanished"> уже установлено</translation>
-    </message>
-    <message>
-        <source> installed</source>
-        <translation type="vanished">установлено</translation>
-    </message>
-    <message>
         <location filename="../mainwindow.cpp" line="1046"/>
         <source>You are about to use the MX Test repository, whose packages are provided for testing purposes only. It is possible that they might break your system, so it is suggested that you back up your system and install or update only one package at a time. Please provide feedback in the Forum so the package can be evaluated before moving up to Main.</source>
         <translation>Вы собираетесь использовать репозиторий MX Test, пакеты которого предоставляются только для тестирования. Возможно, они могут повредить вашу систему, поэтому рекомендуется создать резервную копию системы и устанавливать или обновлять только один пакет за раз. Пожалуйста, оставьте отзыв на Форуме, чтобы пакет мог быть оценен перед переносом в основной репозиторий.</translation>

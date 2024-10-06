@@ -210,14 +210,14 @@
         <location filename="../mainwindow.ui" line="807"/>
         <location filename="../mainwindow.ui" line="1064"/>
         <source>Repo Version</source>
-        <translation type="unfinished"></translation>
+        <translation>Versjon i pakkearkiv</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="415"/>
         <location filename="../mainwindow.ui" line="812"/>
         <location filename="../mainwindow.ui" line="1069"/>
         <source>Installed Version</source>
-        <translation type="unfinished"></translation>
+        <translation>Installert versjon</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="837"/>
@@ -470,30 +470,6 @@
         <location filename="../mainwindow.cpp" line="667"/>
         <source>Please wait...</source>
         <translation>Vennligst vent …</translation>
-    </message>
-    <message>
-        <source>Version </source>
-        <translation type="vanished">Versjon</translation>
-    </message>
-    <message>
-        <source> in the enabled repos</source>
-        <translation type="vanished">i de aktiverte pakkearkivene</translation>
-    </message>
-    <message>
-        <source>Not available in the enabled repos</source>
-        <translation type="vanished">Ikke tilgjengelig i de aktiverte pakkearkivene</translation>
-    </message>
-    <message>
-        <source>Latest version </source>
-        <translation type="vanished">Nyeste versjon</translation>
-    </message>
-    <message>
-        <source> already installed</source>
-        <translation type="vanished">allerede installert</translation>
-    </message>
-    <message>
-        <source> installed</source>
-        <translation type="vanished">installert</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1046"/>

@@ -472,22 +472,6 @@
         <translation>Vent venligst...</translation>
     </message>
     <message>
-        <source>Version </source>
-        <translation type="vanished">Version </translation>
-    </message>
-    <message>
-        <source>Latest version </source>
-        <translation type="vanished">Seneste version</translation>
-    </message>
-    <message>
-        <source> already installed</source>
-        <translation type="vanished">allerede installeret</translation>
-    </message>
-    <message>
-        <source> installed</source>
-        <translation type="vanished">installeret</translation>
-    </message>
-    <message>
         <location filename="../mainwindow.cpp" line="1046"/>
         <source>You are about to use the MX Test repository, whose packages are provided for testing purposes only. It is possible that they might break your system, so it is suggested that you back up your system and install or update only one package at a time. Please provide feedback in the Forum so the package can be evaluated before moving up to Main.</source>
         <translation>Du er ved at bruge MX test-softwarekilden, med pakker som kun leveres til testformål. Der er mulighed for at de kan gøre dit system ubrugeligt, så det foreslås at du sikkerhedskopierer dit system og kun installerer én pakke af gangen. Giv venligst feedback i forummet så pakken kan evalueres inden den flyttes til Main.</translation>

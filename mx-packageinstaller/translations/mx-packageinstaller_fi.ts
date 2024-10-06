@@ -100,7 +100,7 @@
         <location filename="../mainwindow.ui" line="662"/>
         <location filename="../mainwindow.ui" line="987"/>
         <source>Also Install &quot;Recommended&quot; Packages</source>
-        <translation>Asenna myös &quot;Suositellut&quot; paketit</translation>
+        <translation>Asenna myös &quot;suositellut&quot; paketit</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="314"/>
@@ -203,26 +203,26 @@
     <message>
         <location filename="../mainwindow.ui" line="523"/>
         <source>MX Test Repo</source>
-        <translation>MX Testirepo</translation>
+        <translation>MX Test Repo</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="410"/>
         <location filename="../mainwindow.ui" line="807"/>
         <location filename="../mainwindow.ui" line="1064"/>
         <source>Repo Version</source>
-        <translation type="unfinished"></translation>
+        <translation>Repon versio</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="415"/>
         <location filename="../mainwindow.ui" line="812"/>
         <location filename="../mainwindow.ui" line="1069"/>
         <source>Installed Version</source>
-        <translation type="unfinished"></translation>
+        <translation>Asennettu versio</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="837"/>
         <source>Debian Backports</source>
-        <translation>Debian:in Takaporttiohjelmistolähde </translation>
+        <translation>Debian Backports</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1190"/>
@@ -299,12 +299,12 @@
     <message>
         <location filename="../mainwindow.ui" line="1429"/>
         <source>Advanced</source>
-        <translation>Edistyneet toiminnot</translation>
+        <translation>Lisäasetukset</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1458"/>
         <source>Total installed size:</source>
-        <translation>Koko asennettuna yhteensä:</translation>
+        <translation>Koko asennettuna:</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1472"/>
@@ -319,7 +319,7 @@
     <message>
         <location filename="../mainwindow.ui" line="1508"/>
         <source>Full Package Name</source>
-        <translation>Paketin nimi kokonaisuudessaan</translation>
+        <translation>Koko paketin nimi</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1518"/>
@@ -470,30 +470,6 @@
         <location filename="../mainwindow.cpp" line="667"/>
         <source>Please wait...</source>
         <translation>Odota, ole hyvä...</translation>
-    </message>
-    <message>
-        <source>Version </source>
-        <translation type="vanished">Versio</translation>
-    </message>
-    <message>
-        <source> in the enabled repos</source>
-        <translation type="vanished">käytössä olevissa repoissa</translation>
-    </message>
-    <message>
-        <source>Not available in the enabled repos</source>
-        <translation type="vanished">Ei saatavilla käytössä olevissa repoissa</translation>
-    </message>
-    <message>
-        <source>Latest version </source>
-        <translation type="vanished">Viimeisin versio</translation>
-    </message>
-    <message>
-        <source> already installed</source>
-        <translation type="vanished">on jo asennettu</translation>
-    </message>
-    <message>
-        <source> installed</source>
-        <translation type="vanished">asennettu</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1046"/>
@@ -651,7 +627,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="2389"/>
         <source>Package Installer for MX Linux</source>
-        <translation>Pakettien asennusohjelma MX Linuxille</translation>
+        <translation>Pakettien asennus MX Linux:lle</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="2391"/>
@@ -661,12 +637,12 @@
     <message>
         <location filename="../mainwindow.cpp" line="2392"/>
         <source>%1 License</source>
-        <translation>%1 lupa</translation>
+        <translation>%1 lisenssi</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="2404"/>
         <source>%1 Help</source>
-        <translation>%1 Apuopas</translation>
+        <translation>%1 ohje</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="2481"/>
@@ -707,17 +683,17 @@ Onko OK jatkaa eteenpäin asentaen sen?</translation>
     <message>
         <location filename="../mainwindow.cpp" line="2702"/>
         <source>Flatpak was not installed</source>
-        <translation>Flatpak:ia ei asennettu</translation>
+        <translation>Flatpak ei ole asennettuna</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="2725"/>
         <source>Needs re-login</source>
-        <translation>Uudelleenkirjautuminen tarvitaan</translation>
+        <translation>Kirjautuminen uudelleen tarvitaan</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="2726"/>
         <source>You might need to logout/login to see installed items in the menu</source>
-        <translation>Sinun tulee luultavasti suorittaa uloskirjautuminen/takaisin sisäänkirjautuminen jotta asennetut kohteet ilmestyvät valikkoon</translation>
+        <translation>Sinun tulee kirjautua ulos ja takaisin sisään, jotta asennetut kohteet ilmestyvät valikkoon</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="2837"/>
@@ -739,7 +715,7 @@ Onko OK jatkaa eteenpäin asentaen sen?</translation>
     <message>
         <location filename="../mainwindow.cpp" line="3065"/>
         <source>Process still running, quitting might leave the system in an unstable state.&lt;p&gt;&lt;b&gt;Are you sure you want to exit MX Package Installer?&lt;/b&gt;</source>
-        <translation>Prosessi on edelleen käynnissä, lopettaminen saattaa jättää järjestelmän epävakaaseen tilaan. &lt;p&gt;&lt;b&gt; Oletko varma että haluat poistua MX paketinasennusohjelmasta?&lt;/b&gt;</translation>
+        <translation>Prosessi on edelleen käynnissä, lopettaminen saattaa jättää järjestelmän epävakaaseen tilaan. &lt;p&gt;&lt;b&gt; Haluatko poistua MX Package Installer-ohjelmasta?&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="3213"/>
@@ -764,7 +740,7 @@ Varmista, että tarkistat huolellisesti poistettavien pakettien luettelo.</trans
     <message>
         <location filename="../remotes.cpp" line="16"/>
         <source>Manage Flatpak Remotes</source>
-        <translation>Hallinnoi Flatpak-etäohjelmalähteitä</translation>
+        <translation>Hallinnoi flatpak-ohjelmalähteitä</translation>
     </message>
     <message>
         <location filename="../remotes.cpp" line="23"/>
@@ -779,12 +755,12 @@ Varmista, että tarkistat huolellisesti poistettavien pakettien luettelo.</trans
     <message>
         <location filename="../remotes.cpp" line="35"/>
         <source>enter Flatpak remote URL</source>
-        <translation>syötä Flatpak-etäohjelmalähteen URL-osoite</translation>
+        <translation>kirjoita flatpak-ohjelmalähteen URL-osoite</translation>
     </message>
     <message>
         <location filename="../remotes.cpp" line="38"/>
         <source>enter Flatpakref location to install app</source>
-        <translation>syötä Flatpakref-sijainti asentaaksesi sovelluksen</translation>
+        <translation>kirjoita flatpakref-sijainti asentaaksesi sovelluksen</translation>
     </message>
     <message>
         <location filename="../remotes.cpp" line="40"/>
@@ -794,12 +770,12 @@ Varmista, että tarkistat huolellisesti poistettavien pakettien luettelo.</trans
     <message>
         <location filename="../remotes.cpp" line="49"/>
         <source>Remove remote</source>
-        <translation>Poista etäohjelmalähde</translation>
+        <translation>Poista ohjelmalähde</translation>
     </message>
     <message>
         <location filename="../remotes.cpp" line="54"/>
         <source>Add remote</source>
-        <translation>Lisää etäohjelmalähde</translation>
+        <translation>Lisää ohjelmalähde</translation>
     </message>
     <message>
         <location filename="../remotes.cpp" line="59"/>
@@ -819,17 +795,17 @@ Varmista, että tarkistat huolellisesti poistettavien pakettien luettelo.</trans
     <message>
         <location filename="../remotes.cpp" line="82"/>
         <source>Flathub is the main Flatpak remote and won&apos;t be removed</source>
-        <translation>Flathub on ensisijainen Flatpak-etäohjelmalähde ja sitä ei voida poistaa</translation>
+        <translation>Flathub on ensisijainen flatpak-ohjelmalähde ja sitä ei voi poistaa</translation>
     </message>
     <message>
         <location filename="../remotes.cpp" line="101"/>
         <source>Error adding remote</source>
-        <translation>Virhe lisättäessä etäohjelmalähdettä</translation>
+        <translation>Virhe lisättäessä ohjelmalähdettä</translation>
     </message>
     <message>
         <location filename="../remotes.cpp" line="102"/>
         <source>Could not add remote - command returned an error. Please double-check the remote address and try again</source>
-        <translation>Etäohjelmalähdettä ei voitu lisätä - käsky palautti virheen. Tarkista etäohjelmalähteen osoite ja yritä uudelleen</translation>
+        <translation>Ohjelmalähdettä ei voitu lisätä - käsky palautti virheen. Tarkista ohjelmalähteen osoite ja yritä uudelleen</translation>
     </message>
     <message>
         <location filename="../remotes.cpp" line="107"/>
@@ -839,7 +815,7 @@ Varmista, että tarkistat huolellisesti poistettavien pakettien luettelo.</trans
     <message>
         <location filename="../remotes.cpp" line="107"/>
         <source>Remote added successfully</source>
-        <translation>Etäohjelmalähde lisätty onnistuneesti</translation>
+        <translation>Ohjelmalähde lisätty onnistuneesti</translation>
     </message>
 </context>
 <context>

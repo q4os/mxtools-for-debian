@@ -28,7 +28,7 @@ class ViewAndUpgrade:
 
         from aptnotifier_rc import AptNotifierRC
         apt_notifier_rc = AptNotifierRC()
-        
+
         self.__tokens = {}
         cmd = ['xdotool', 'getdisplaygeometry']
         res = run(cmd, capture_output=True, text=True).stdout
@@ -68,7 +68,7 @@ class ViewAndUpgrade:
             self.__tokens['upgrade'] = xlate.get('full_upgrade')
 
         self.__apt_list = self.apt_list_run
-        
+
 
     @property
     def apt_list(self):
@@ -77,7 +77,7 @@ class ViewAndUpgrade:
     @property
     def apt_list_run(self):
         from subprocess import run, PIPE
-        self.__apt_list = run(['/usr/lib/apt-notifier/bin/updater_list'], 
+        self.__apt_list = run(['/usr/lib/apt-notifier/bin/updater_list'],
                                 capture_output=True, text=True).stdout
         return self.__apt_list
 
@@ -97,7 +97,7 @@ class ViewAndUpgrade:
     @property
     def window_icon(self):
         return self.__tokens['icon']
-        
+
     @property
     def upgrade_auto_close(self):
         x = self.__tokens['upgrade_auto_close']
@@ -105,16 +105,16 @@ class ViewAndUpgrade:
             self.__tokens['upgrade_auto_close'] = 'true'
         else:
             self.__tokens['upgrade_auto_close'] = 'false'
-        return self.__tokens['upgrade_auto_close'] 
-        
+        return self.__tokens['upgrade_auto_close']
+
     @upgrade_auto_close.setter
     def upgrade_auto_close(self,x):
         if str(x).lower() == 'true':
             self.__tokens['upgrade_auto_close'] = 'true'
         else:
             self.__tokens['upgrade_auto_close'] = 'false'
-        return self.__tokens['upgrade_auto_close'] 
-        
+        return self.__tokens['upgrade_auto_close']
+
     @property
     def upgrade_assume_yes(self):
         x = self.__tokens['upgrade_assume_yes']
@@ -143,7 +143,7 @@ class ViewAndUpgrade:
     @property
     def yad_stderr(self):
         return self.__yad_stderr
-        
+
     @property
     def yad(self):
         from subprocess import run
@@ -171,20 +171,20 @@ class ViewAndUpgrade:
             --title={title}
             --form
             --field=:TXT
-            --field={use_apt_get_dash_dash_yes}:CHK 
-            --field={auto_close_window}:CHK 
+            --field={use_apt_get_dash_dash_yes}:CHK
+            --field={auto_close_window}:CHK
             --button={reload_button}!gtk-refresh!{reload_tooltip}:8
             --button={upgrade_label}!{icon}!{upgrade_tooltip}:0
             --button={close}!gtk-close:2
             --buttons-layout=spread
             --margins=7
             --borders=5
-            --escape-ok 
+            --escape-ok
             --response=2
         """
 
-        yad = yad.strip()    
-        yad = yad.splitlines()    
+        yad = yad.strip()
+        yad = yad.splitlines()
         yad = [ x.strip().format(**self.__tokens) for x in yad ]
 
         yad = subprocess.run(yad, capture_output=True, text=True, input=text)
@@ -192,9 +192,10 @@ class ViewAndUpgrade:
         self.__yad_stderr = yad.stderr
         self.__yad_returncode = yad.returncode
 
-        yes, close = self.yad_stdout.split('|')[1:3]
-        self.upgrade_assume_yes  = yes.lower()
-        self.upgrade_auto_close  = close.lower()
+        if len(yad.stdout.split('|')) == 4 :
+            yes, close = yad.stdout.split('|')[1:3]
+            self.upgrade_assume_yes  = yes.lower()
+            self.upgrade_auto_close  = close.lower()
         return yad.stdout
 
 def __run():
@@ -213,8 +214,8 @@ def __run():
         apt_notifier_rc = AptNotifierRC()
 
     vau = ViewAndUpgrade()
-    
-    while True:    
+
+    while True:
         vau.yad
         if vau.yad_returncode not in [ 0, 8]:
             break
@@ -224,13 +225,13 @@ def __run():
             apt_notifier_rc.update
 
         if vau.yad_returncode == 0:
-            run('/usr/lib/apt-notifier/bin/updater_upgrade_run')  
+            run('/usr/lib/apt-notifier/bin/updater_upgrade_run')
             break
-        
+
         if vau.yad_returncode == 8:
             run('/usr/lib/apt-notifier/bin/updater_reload_run')
-            vau.apt_list_run  
-        
+            vau.apt_list_run
+
 # General application code
 def main():
     __run()

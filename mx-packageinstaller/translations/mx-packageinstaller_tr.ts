@@ -472,30 +472,6 @@
         <translation>Lütfen bekleyin...</translation>
     </message>
     <message>
-        <source>Version </source>
-        <translation type="vanished">Sürüm</translation>
-    </message>
-    <message>
-        <source> in the enabled repos</source>
-        <translation type="vanished">etkin depolarda</translation>
-    </message>
-    <message>
-        <source>Not available in the enabled repos</source>
-        <translation type="vanished">Etkin depolarda mevcut değil</translation>
-    </message>
-    <message>
-        <source>Latest version </source>
-        <translation type="vanished">En son sürüm</translation>
-    </message>
-    <message>
-        <source> already installed</source>
-        <translation type="vanished">zaten kurulu</translation>
-    </message>
-    <message>
-        <source> installed</source>
-        <translation type="vanished">kuruldu</translation>
-    </message>
-    <message>
         <location filename="../mainwindow.cpp" line="1046"/>
         <source>You are about to use the MX Test repository, whose packages are provided for testing purposes only. It is possible that they might break your system, so it is suggested that you back up your system and install or update only one package at a time. Please provide feedback in the Forum so the package can be evaluated before moving up to Main.</source>
         <translation>Paketleri yalnızca deneme amacıyla sağlanan MX Test deposunu kullanmak üzeresiniz. Sisteminizi bozma olasılığı vardır, bu nedenle sisteminizi yedeklemeniz ve bir seferde yalnızca bir paketi yüklemeniz veya güncellemeniz önerilir. Lütfen Forum’da geri bildirimde bulunun, böylece paket Ana Depoya geçmeden önce değerlendirilebilir.</translation>

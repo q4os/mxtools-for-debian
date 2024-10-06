@@ -234,7 +234,7 @@ fi
 if [ -n "$(blkid /dev/$refreshdevice | grep PTTYPE=\"dos\")" ]; then
 	case $format in 
 
-	      vfat) mark="b"  ;;
+	      vfat) mark="c"  ;;
 	
 	exfat | ntfs) mark="7"  ;;
 	

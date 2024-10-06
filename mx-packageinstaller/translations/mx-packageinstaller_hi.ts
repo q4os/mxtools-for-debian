@@ -472,22 +472,6 @@
         <translation>प्रतीक्षा करें...</translation>
     </message>
     <message>
-        <source>Version </source>
-        <translation type="vanished">संस्करण</translation>
-    </message>
-    <message>
-        <source>Latest version </source>
-        <translation type="vanished">नवीनतम संस्करण</translation>
-    </message>
-    <message>
-        <source> already installed</source>
-        <translation type="vanished">पहले से इंस्टॉल है</translation>
-    </message>
-    <message>
-        <source> installed</source>
-        <translation type="vanished">इंस्टॉल है</translation>
-    </message>
-    <message>
         <location filename="../mainwindow.cpp" line="1046"/>
         <source>You are about to use the MX Test repository, whose packages are provided for testing purposes only. It is possible that they might break your system, so it is suggested that you back up your system and install or update only one package at a time. Please provide feedback in the Forum so the package can be evaluated before moving up to Main.</source>
         <translation>अब आप एमएक्स परीक्षण पैकेज-संग्रह उपयोग करेंगे जिसमें सम्मिलित पैकेज का उद्देश्य केवल परीक्षण है। इससे सिस्टम को हानि संभव है अतः सिस्टम बैकअप कर लें व एक बार में एक ही पैकेज इंस्टॉल या अपडेट करें। मुख्य संग्रह में अंतरण हेतु पैकेज परीक्षण प्रक्रिया में सहायता करने हेतु कृपया पैकेज संबंधी प्रतिक्रिया व अनुभव चर्चा-मंच पर पोस्ट करें।</translation>

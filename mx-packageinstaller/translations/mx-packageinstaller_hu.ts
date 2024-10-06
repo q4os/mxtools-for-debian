@@ -472,30 +472,6 @@
         <translation>Kérem várjon...</translation>
     </message>
     <message>
-        <source>Version </source>
-        <translation type="vanished">Verzió</translation>
-    </message>
-    <message>
-        <source> in the enabled repos</source>
-        <translation type="vanished">a bekapcsolt forrásokban</translation>
-    </message>
-    <message>
-        <source>Not available in the enabled repos</source>
-        <translation type="vanished">Nem érhető el a bekapcsolt forrásokban</translation>
-    </message>
-    <message>
-        <source>Latest version </source>
-        <translation type="vanished">Legfrissebb verzió</translation>
-    </message>
-    <message>
-        <source> already installed</source>
-        <translation type="vanished">már telepítve van</translation>
-    </message>
-    <message>
-        <source> installed</source>
-        <translation type="vanished">telepítve</translation>
-    </message>
-    <message>
         <location filename="../mainwindow.cpp" line="1046"/>
         <source>You are about to use the MX Test repository, whose packages are provided for testing purposes only. It is possible that they might break your system, so it is suggested that you back up your system and install or update only one package at a time. Please provide feedback in the Forum so the package can be evaluated before moving up to Main.</source>
         <translation>Ön az MX Teszt csomagforrást fogja használni, amelynek csomagjai csak tesztelési célokra szolgálnak. Lehetséges, hogy ezek tönkretehetik a rendszerét, ezért javasoljuk, hogy készítsen biztonsági mentést, és egyszerre csak egy csomagot telepítsen vagy frissítsen. Kérjük, küldjön visszajelzést a Fórumban, hogy a csomagot kiértékelhessük, mielőtt a fő csomagforrásba kerülne.</translation>

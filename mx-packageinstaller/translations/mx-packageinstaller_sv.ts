@@ -472,30 +472,6 @@
         <translation>Var vänlig vänta...</translation>
     </message>
     <message>
-        <source>Version </source>
-        <translation type="vanished">Version</translation>
-    </message>
-    <message>
-        <source> in the enabled repos</source>
-        <translation type="vanished">i de aktiverade förråden</translation>
-    </message>
-    <message>
-        <source>Not available in the enabled repos</source>
-        <translation type="vanished">Inte tillgänglig i de aktiverade förråden</translation>
-    </message>
-    <message>
-        <source>Latest version </source>
-        <translation type="vanished">Senaste version</translation>
-    </message>
-    <message>
-        <source> already installed</source>
-        <translation type="vanished">redan installerad</translation>
-    </message>
-    <message>
-        <source> installed</source>
-        <translation type="vanished">installerad</translation>
-    </message>
-    <message>
         <location filename="../mainwindow.cpp" line="1046"/>
         <source>You are about to use the MX Test repository, whose packages are provided for testing purposes only. It is possible that they might break your system, so it is suggested that you back up your system and install or update only one package at a time. Please provide feedback in the Forum so the package can be evaluated before moving up to Main.</source>
         <translation>Du kommer att använda MX Test-förråd, vars paket enbart är avsedda för testning. Det är möjligt att de får ditt system att sluta fungera, så du uppmanas att göra backup av systemet och enbart installera eller uppdatera ett paket i taget. Var vänlig ge feedback på forumet så paketet kan utvärderas innan det flyttas till Main.</translation>

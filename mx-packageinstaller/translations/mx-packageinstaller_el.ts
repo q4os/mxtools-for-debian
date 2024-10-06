@@ -472,30 +472,6 @@
         <translation>Παρακαλώ περιμένετε...</translation>
     </message>
     <message>
-        <source>Version </source>
-        <translation type="vanished">Έκδοση </translation>
-    </message>
-    <message>
-        <source> in the enabled repos</source>
-        <translation type="vanished"> στα ενεργοποιημένα αποθετήρια</translation>
-    </message>
-    <message>
-        <source>Not available in the enabled repos</source>
-        <translation type="vanished">Δεν υπάρχει στα ενεργοποιημένα αποθετήρια</translation>
-    </message>
-    <message>
-        <source>Latest version </source>
-        <translation type="vanished">Τελευταία έκδοση </translation>
-    </message>
-    <message>
-        <source> already installed</source>
-        <translation type="vanished"> ήδη εγκατεστημένη</translation>
-    </message>
-    <message>
-        <source> installed</source>
-        <translation type="vanished"> εγκατεστημένη</translation>
-    </message>
-    <message>
         <location filename="../mainwindow.cpp" line="1046"/>
         <source>You are about to use the MX Test repository, whose packages are provided for testing purposes only. It is possible that they might break your system, so it is suggested that you back up your system and install or update only one package at a time. Please provide feedback in the Forum so the package can be evaluated before moving up to Main.</source>
         <translation>Πρόκειται να χρησιμοποιήσετε το αποθετήριο MX Test, τα πακέτα του παρέχονται μόνο για σκοπούς δοκιμής. Είναι πιθανό να σπάσει το σύστημα σας γι &apos;αυτό, προτείνεται η δημιουργία αντιγράφου ασφαλείας και εγκατάσταση ή ενημέρωση μόνο ενός πακέτου τη φορά. Παρακαλούμε δώστε τα σχόλια σας στο Φόρουμ, ώστε το πακέτο να αξιολογηθεί πριν μετακινηθεί στο κύριο αποθετήριο.</translation>

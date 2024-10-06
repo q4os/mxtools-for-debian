@@ -210,14 +210,14 @@
         <location filename="../mainwindow.ui" line="807"/>
         <location filename="../mainwindow.ui" line="1064"/>
         <source>Repo Version</source>
-        <translation type="unfinished"></translation>
+        <translation>Versión del Repositorio</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="415"/>
         <location filename="../mainwindow.ui" line="812"/>
         <location filename="../mainwindow.ui" line="1069"/>
         <source>Installed Version</source>
-        <translation type="unfinished"></translation>
+        <translation>Versión Instalada</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="837"/>
@@ -470,30 +470,6 @@
         <location filename="../mainwindow.cpp" line="667"/>
         <source>Please wait...</source>
         <translation>Por favor, espere...</translation>
-    </message>
-    <message>
-        <source>Version </source>
-        <translation type="vanished">Versión </translation>
-    </message>
-    <message>
-        <source> in the enabled repos</source>
-        <translation type="vanished">en los repositorios habilitados</translation>
-    </message>
-    <message>
-        <source>Not available in the enabled repos</source>
-        <translation type="vanished">No disponible en los repositorios habilitados</translation>
-    </message>
-    <message>
-        <source>Latest version </source>
-        <translation type="vanished">Ultima versión </translation>
-    </message>
-    <message>
-        <source> already installed</source>
-        <translation type="vanished"> ya instalada</translation>
-    </message>
-    <message>
-        <source> installed</source>
-        <translation type="vanished"> instalada</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1046"/>

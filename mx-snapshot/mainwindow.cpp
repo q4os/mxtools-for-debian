@@ -125,6 +125,7 @@ void MainWindow::setConnections()
     connect(ui->excludeAll, &QCheckBox::clicked, ui->excludeDesktop, &QCheckBox::setChecked);
     connect(ui->excludeAll, &QCheckBox::clicked, ui->excludeDocuments, &QCheckBox::setChecked);
     connect(ui->excludeAll, &QCheckBox::clicked, ui->excludeDownloads, &QCheckBox::setChecked);
+    connect(ui->excludeAll, &QCheckBox::clicked, ui->excludeFlatpaks, &QCheckBox::setChecked);
     connect(ui->excludeAll, &QCheckBox::clicked, ui->excludeMusic, &QCheckBox::setChecked);
     connect(ui->excludeAll, &QCheckBox::clicked, ui->excludeNetworks, &QCheckBox::setChecked);
     connect(ui->excludeAll, &QCheckBox::clicked, ui->excludePictures, &QCheckBox::setChecked);
@@ -134,6 +135,7 @@ void MainWindow::setConnections()
     connect(ui->excludeDesktop, &QCheckBox::toggled, this, &MainWindow::excludeDesktop_toggled);
     connect(ui->excludeDocuments, &QCheckBox::toggled, this, &MainWindow::excludeDocuments_toggled);
     connect(ui->excludeDownloads, &QCheckBox::toggled, this, &MainWindow::excludeDownloads_toggled);
+    connect(ui->excludeFlatpaks, &QCheckBox::toggled, this, &MainWindow::excludeFlatpaks_toggled);
     connect(ui->excludeMusic, &QCheckBox::toggled, this, &MainWindow::excludeMusic_toggled);
     connect(ui->excludeNetworks, &QCheckBox::toggled, this, &MainWindow::excludeNetworks_toggled);
     connect(ui->excludePictures, &QCheckBox::toggled, this, &MainWindow::excludePictures_toggled);
@@ -160,11 +162,11 @@ void MainWindow::setConnections()
 void MainWindow::setExclusions()
 {
     QVector<QPair<QCheckBox *, Exclude>> exclusionPairs
-        = {{ui->excludeDesktop, Exclude::Desktop},      {ui->excludeDocuments, Exclude::Documents},
-           {ui->excludeDownloads, Exclude::Downloads},  {ui->excludeMusic, Exclude::Music},
-           {ui->excludeNetworks, Exclude::Networks},    {ui->excludePictures, Exclude::Pictures},
-           {ui->excludeSteam, Exclude::Steam},          {ui->excludeVideos, Exclude::Videos},
-           {ui->excludeVirtualBox, Exclude::VirtualBox}};
+        = {{ui->excludeDesktop, Exclude::Desktop},     {ui->excludeDocuments, Exclude::Documents},
+           {ui->excludeDownloads, Exclude::Downloads}, {ui->excludeFlatpaks, Exclude::Flatpaks},
+           {ui->excludeMusic, Exclude::Music},         {ui->excludeNetworks, Exclude::Networks},
+           {ui->excludePictures, Exclude::Pictures},   {ui->excludeSteam, Exclude::Steam},
+           {ui->excludeVideos, Exclude::Videos},       {ui->excludeVirtualBox, Exclude::VirtualBox}};
 
     for (const auto &pair : exclusionPairs) {
         pair.first->setChecked(exclusions.testFlag(pair.second));
@@ -460,14 +462,15 @@ bool MainWindow::confirmStart()
 
 void MainWindow::applyExclusions()
 {
+    excludeDesktop(ui->excludeDesktop->isChecked());
     excludeDocuments(ui->excludeDocuments->isChecked());
     excludeDownloads(ui->excludeDownloads->isChecked());
-    excludePictures(ui->excludePictures->isChecked());
+    excludeFlatpaks(ui->excludeFlatpaks->isChecked());
     excludeMusic(ui->excludeMusic->isChecked());
-    excludeVideos(ui->excludeVideos->isChecked());
-    excludeDesktop(ui->excludeDesktop->isChecked());
     excludeNetworks(ui->excludeNetworks->isChecked());
+    excludePictures(ui->excludePictures->isChecked());
     excludeSteam(ui->excludeSteam->isChecked());
+    excludeVideos(ui->excludeVideos->isChecked());
     excludeVirtualBox(ui->excludeVirtualBox->isChecked());
     otherExclusions();
 }
@@ -536,6 +539,13 @@ void MainWindow::excludeDocuments_toggled(bool checked)
 }
 
 void MainWindow::excludeDownloads_toggled(bool checked)
+{
+    if (!checked) {
+        ui->excludeAll->setChecked(false);
+    }
+}
+
+void MainWindow::excludeFlatpaks_toggled(bool checked)
 {
     if (!checked) {
         ui->excludeAll->setChecked(false);

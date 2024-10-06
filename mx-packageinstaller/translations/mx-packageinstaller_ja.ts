@@ -472,30 +472,6 @@
         <translation>お待ちください...</translation>
     </message>
     <message>
-        <source>Version </source>
-        <translation type="vanished">バージョン</translation>
-    </message>
-    <message>
-        <source> in the enabled repos</source>
-        <translation type="vanished">有効にしたリポジトリで</translation>
-    </message>
-    <message>
-        <source>Not available in the enabled repos</source>
-        <translation type="vanished">有効なリポジトリ内からは利用できません</translation>
-    </message>
-    <message>
-        <source>Latest version </source>
-        <translation type="vanished">最新バージョン</translation>
-    </message>
-    <message>
-        <source> already installed</source>
-        <translation type="vanished">インストール済みです</translation>
-    </message>
-    <message>
-        <source> installed</source>
-        <translation type="vanished">インストール済み</translation>
-    </message>
-    <message>
         <location filename="../mainwindow.cpp" line="1046"/>
         <source>You are about to use the MX Test repository, whose packages are provided for testing purposes only. It is possible that they might break your system, so it is suggested that you back up your system and install or update only one package at a time. Please provide feedback in the Forum so the package can be evaluated before moving up to Main.</source>
         <translation>あなたは MX テスト版リポジトリを使おうとしていますが、そのパッケージはテストのみを目的として提供されています。システムを壊す可能性があるので、システムをバックアップして、一度につき一つのパッケージだけをインストールしたりアップデートすることをお勧めします。Main に移行する前にそのパッケージが評価できるように、フォーラムでフィードバックを提供してください。</translation>
@@ -508,7 +484,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="1063"/>
         <source>MX Linux includes this repository of flatpaks for the users&apos; convenience only, and is not responsible for the functionality of the individual flatpaks themselves. For more, consult flatpaks in the Wiki.</source>
-        <translation>MX Linux は、ユーザが便利なようにとの目的のみで、この flatpaks のリポジトリを提供しているので、個々のflatpaks自体が機能するかどうかについては責任を負いません。詳しくは、Flatpak の Wikiページを参照してください。</translation>
+        <translation>MX Linux は、ユーザが便利なようにとの目的のみで、この flatpaks のリポジトリを提供しているので、個々の flatpaks 自体が機能するかどうかについては責任を負いません。詳しくは、Flatpak の Wiki ページをご覧ください。</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1071"/>

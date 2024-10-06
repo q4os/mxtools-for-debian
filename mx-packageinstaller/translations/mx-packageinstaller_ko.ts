@@ -472,30 +472,6 @@
         <translation>기다려 주세요...</translation>
     </message>
     <message>
-        <source>Version </source>
-        <translation type="vanished">버전</translation>
-    </message>
-    <message>
-        <source> in the enabled repos</source>
-        <translation type="vanished">활성화된 저장소 내</translation>
-    </message>
-    <message>
-        <source>Not available in the enabled repos</source>
-        <translation type="vanished">설치된 저장소에 없습니다</translation>
-    </message>
-    <message>
-        <source>Latest version </source>
-        <translation type="vanished">최신 버전</translation>
-    </message>
-    <message>
-        <source> already installed</source>
-        <translation type="vanished">이미 설치됨</translation>
-    </message>
-    <message>
-        <source> installed</source>
-        <translation type="vanished">설치</translation>
-    </message>
-    <message>
         <location filename="../mainwindow.cpp" line="1046"/>
         <source>You are about to use the MX Test repository, whose packages are provided for testing purposes only. It is possible that they might break your system, so it is suggested that you back up your system and install or update only one package at a time. Please provide feedback in the Forum so the package can be evaluated before moving up to Main.</source>
         <translation>MX Test 저장소 사용을 선택하셨습니다. MX Test 저장소의 패키지는 테스트 목적으로만 제공됩니다. 여기서 설치되는 패키지는 사용자의 시스템을 손상시킬 수 있습니다. 따라서 설치 전 시스템 백업을 권장하며, 한 번에 하나의 패키지만 설치하거나 업데이트 하시길 권장합니다. 메인 저장소로 이동되기 전에 검증될 수 있도록 포럼에 피드백을 제공해 주시길 바랍니다.</translation>
