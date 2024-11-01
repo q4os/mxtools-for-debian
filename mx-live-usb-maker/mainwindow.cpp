@@ -34,10 +34,12 @@ using namespace std::chrono_literals;
 
 MainWindow::MainWindow(const QStringList &args, QDialog *parent)
     : QDialog(parent),
-      ui(new Ui::MainWindow)
+      ui(new Ui::MainWindow),
+      advancedOptions(false)
 {
     ui->setupUi(this);
     setGeneralConnections();
+
     // Setup options
     LUM = "/usr/local/bin/";
     QSettings settings("/etc/mx-live-usb-maker/mx-live-usb-maker.conf", QSettings::NativeFormat);
@@ -48,15 +50,11 @@ MainWindow::MainWindow(const QStringList &args, QDialog *parent)
     setWindowFlags(Qt::Window); // for the close, min, and max buttons
     setup();
     ui->comboUsb->addItems(buildUsbList());
+
     if (args.size() > 1 && args.at(1) != "%f") {
         QString fileName = QFileInfo(args.at(1)).absoluteFilePath();
         if (QFileInfo(fileName).isFile()) {
-            ui->pushSelectSource->setText(fileName);
-            ui->pushSelectSource->setProperty("filename", fileName);
-            ui->pushSelectSource->setToolTip(fileName);
-            ui->pushSelectSource->setIcon(QIcon::fromTheme("media-cdrom"));
-            ui->pushSelectSource->setStyleSheet("text-align: left;");
-            setDefaultMode(fileName);
+            setSourceFile(fileName);
         }
     }
     adjustSize();
@@ -69,10 +67,9 @@ MainWindow::~MainWindow()
 
 bool MainWindow::checkDestSize()
 {
-
     const quint64 disk_size
         = cmd.getOut("lsblk --output SIZE -n --bytes /dev/" + device + " | head -1", true).toULongLong()
-          / static_cast<quint64>(1024 * 1024 * 1024);
+          / (1024 * 1024 * 1024);
 
     if (disk_size > size_check) { // When writing on large drives (potentially unintended)
         return (QMessageBox::Yes
@@ -80,9 +77,8 @@ bool MainWindow::checkDestSize()
                     this, tr("Confirmation"),
                     tr("Target device %1 is larger than %2 GB. Do you wish to proceed?").arg(device).arg(size_check),
                     QMessageBox::No | QMessageBox::Yes, QMessageBox::No));
-    } else {
-        return true;
     }
+    return true;
 }
 
 bool MainWindow::isRunningLive()
@@ -93,8 +89,7 @@ bool MainWindow::isRunningLive()
     QString output = process.readAllStandardOutput();
     QRegularExpression re(R"(.*\n\S+\s+(\S+)\s+)");
     QRegularExpressionMatch match = re.match(output);
-    QString fileSystemType = match.captured(1);
-    return (fileSystemType == "aufs" || fileSystemType == "overlay");
+    return (match.hasMatch() && (match.captured(1) == "aufs" || match.captured(1) == "overlay"));
 }
 
 bool MainWindow::isToRam()
@@ -105,9 +100,9 @@ bool MainWindow::isToRam()
 void MainWindow::makeUsb(const QString &options)
 {
     device = ui->comboUsb->currentText().split(' ').first();
-
     QString source = '"' + ui->pushSelectSource->property("filename").toString() + '"';
     QString source_size;
+
     if (!ui->checkCloneLive->isChecked() && !ui->checkCloneMode->isChecked()) {
         source_size = cmd.getOut("du -m " + source + " 2>/dev/null | cut -f1", true);
     } else if (ui->checkCloneMode->isChecked()) {
@@ -115,11 +110,7 @@ void MainWindow::makeUsb(const QString &options)
         QString root_partition = cmd.getOut("df --output=source " + source + " | awk 'END{print $1}'");
         source = "clone=" + source.remove('"');
         if ("/dev/" + device == cmd.getOut(cli_utils + "get_drive " + root_partition)) {
-            QMessageBox::critical(this, tr("Failure"),
-                                  tr("Source and destination are on the same device, please select again."));
-            ui->stackedWidget->setCurrentWidget(ui->selectionPage);
-            ui->pushNext->setEnabled(true);
-            setCursor(Qt::ArrowCursor);
+            showErrorAndReset(tr("Source and destination are on the same device, please select again."));
             return;
         }
     } else if (ui->checkCloneLive->isChecked()) {
@@ -129,13 +120,11 @@ void MainWindow::makeUsb(const QString &options)
     }
 
     if (!checkDestSize()) {
-        ui->stackedWidget->setCurrentWidget(ui->selectionPage);
-        ui->pushNext->setEnabled(true);
-        setCursor(Qt::ArrowCursor);
+        showErrorAndReset();
         return;
     }
 
-    // Check amount of io on device before copy, this is in sectors
+    // Check amount of IO on device before copy, this is in sectors
     const quint64 start_io = cmd.getOut("awk '{print $7}' /sys/block/" + device + "/stat", true).toULongLong();
     ui->progBar->setMinimum(static_cast<int>(start_io));
     const quint64 iso_sectors = source_size.toULongLong() * 2048; // source_size * 1024 / 512 * 1024
@@ -165,14 +154,15 @@ void MainWindow::setup()
     font.setStyleHint(QFont::Monospace);
     ui->outputBox->setFont(font);
 
+    defaultHeight = geometry().height();
     ui->groupAdvOptions->setVisible(false);
-    advancedOptions = false;
     ui->pushBack->setVisible(false);
     ui->stackedWidget->setCurrentIndex(0);
     ui->pushCancel->setEnabled(true);
     ui->pushNext->setEnabled(true);
     ui->outputBox->setCursorWidth(0);
-    height = heightMM();
+    adjustSize();
+    height = geometry().height();
 
     QRegularExpression rx("\\w*");
     QValidator *validator = new QRegularExpressionValidator(rx, this);
@@ -182,15 +172,19 @@ void MainWindow::setup()
     ui->checkSaveBoot->setEnabled(false);
 
     // Enable clone live option only if running live and not encrypted
-    bool isEncrypted = QFile::exists("/live/config/encrypted");
-    ui->checkCloneLive->setEnabled(isRunningLive() && !isEncrypted);
+    ui->checkCloneLive->setEnabled(isRunningLive() && !QFile::exists("/live/config/encrypted"));
 
     // Dynamically show or hide data format options based on availability
     bool dataFirstAvailable = cmd.run(LUM + " --help | grep -q -- --data-first", true);
-    ui->comboBoxDataFormat->setVisible(dataFirstAvailable);
     ui->checkDataFirst->setVisible(dataFirstAvailable);
-    ui->spinBoxDataSize->setVisible(dataFirstAvailable);
+    ui->comboBoxDataFormat->setVisible(dataFirstAvailable);
     ui->labelFormat->setVisible(dataFirstAvailable);
+    ui->spinBoxDataSize->setVisible(dataFirstAvailable);
+
+    // Disable by default and enable only when checking the box
+    ui->comboBoxDataFormat->setEnabled(false);
+    ui->labelFormat->setEnabled(false);
+    ui->spinBoxDataSize->setEnabled(false);
 }
 
 void MainWindow::setGeneralConnections()
@@ -235,7 +229,7 @@ QString MainWindow::buildOptionList()
     };
 
     // Add options for the checked checkboxes
-    for (auto [checkBox, option] : checkboxOptions) {
+    for (const auto &[checkBox, option] : checkboxOptions) {
         if (checkBox->isChecked()) {
             optionsList.append(option);
         }
@@ -452,12 +446,7 @@ void MainWindow::pushSelectSource_clicked()
         selected = QFileDialog::getOpenFileName(this, tr("Select an ISO file to write to the USB drive"), home,
                                                 tr("ISO Files (*.iso);;All Files (*.*)"));
         if (!selected.isEmpty()) {
-            ui->pushSelectSource->setText(selected);
-            ui->pushSelectSource->setProperty("filename", selected);
-            ui->pushSelectSource->setToolTip(selected);
-            ui->pushSelectSource->setIcon(QIcon::fromTheme("media-cdrom"));
-            ui->pushSelectSource->setStyleSheet("text-align: left;");
-            setDefaultMode(selected); // Set proper default mode based on iso contents
+            setSourceFile(selected);
         }
     } else if (ui->checkCloneMode->isChecked()) {
         selected = QFileDialog::getExistingDirectory(this, tr("Select Source Directory"), QDir::rootPath(),
@@ -469,9 +458,7 @@ void MainWindow::pushSelectSource_clicked()
             if (selected == '/') {
                 selected.clear();
             }
-            QMessageBox::critical(this, tr("Failure"),
-                                  tr("Could not find %1/antiX/linuxfs file")
-                                      .arg(selected)); // TODO: -- the file might be in %/linuxfs too for frugal
+            QMessageBox::critical(this, tr("Failure"), tr("Could not find linuxfs file").arg(selected));
         }
     }
 }
@@ -484,18 +471,11 @@ void MainWindow::pushRefresh_clicked()
 
 void MainWindow::pushOptions_clicked()
 {
-    if (advancedOptions) {
-        ui->pushOptions->setText(tr("Show advanced options"));
-        ui->groupAdvOptions->hide();
-        advancedOptions = false;
-        ui->pushOptions->setIcon(QIcon::fromTheme("go-down"));
-        setMaximumHeight(height);
-    } else {
-        ui->pushOptions->setText(tr("Hide advanced options"));
-        ui->groupAdvOptions->show();
-        advancedOptions = true;
-        ui->pushOptions->setIcon(QIcon::fromTheme("go-up"));
-    }
+    advancedOptions = !advancedOptions;
+    ui->groupAdvOptions->setVisible(advancedOptions);
+    ui->pushOptions->setText(advancedOptions ? tr("Hide advanced options") : tr("Show advanced options"));
+    ui->pushOptions->setIcon(QIcon::fromTheme(advancedOptions ? "go-up" : "go-down"));
+    setFixedHeight(advancedOptions ? defaultHeight : height);
 }
 
 void MainWindow::textLabel_textChanged(QString arg1)
@@ -628,4 +608,27 @@ void MainWindow::spinBoxSize_valueChanged(int arg1)
 void MainWindow::checkDataFirst_clicked(bool checked)
 {
     ui->spinBoxSize->setDisabled(checked);
+    ui->comboBoxDataFormat->setEnabled(checked);
+    ui->labelFormat->setEnabled(checked);
+    ui->spinBoxDataSize->setEnabled(checked);
+}
+
+void MainWindow::setSourceFile(const QString &fileName)
+{
+    ui->pushSelectSource->setText(fileName);
+    ui->pushSelectSource->setProperty("filename", fileName);
+    ui->pushSelectSource->setToolTip(fileName);
+    ui->pushSelectSource->setIcon(QIcon::fromTheme("media-cdrom"));
+    ui->pushSelectSource->setStyleSheet("text-align: left;");
+    setDefaultMode(fileName); // Set proper default mode based on iso contents
+}
+
+void MainWindow::showErrorAndReset(const QString &message)
+{
+    if (!message.isEmpty()) {
+        QMessageBox::critical(this, tr("Failure"), message);
+    }
+    ui->stackedWidget->setCurrentWidget(ui->selectionPage);
+    ui->pushNext->setEnabled(true);
+    setCursor(Qt::ArrowCursor);
 }

@@ -1,3 +1,49 @@
+mx-packageinstaller-pkglist (24.10.07mx23) mx; urgency=medium
+
+  * update liquorix 6.11
+  * update mate install/remove routine
+  * update budgie install/remove routine
+  * update gnome remove routine
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 26 Oct 2024 15:43:02 -0400
+
+mx-packageinstaller-pkglist (24.10.06mx23) mx; urgency=medium
+
+  * update debian 6.11.4-2 kernel 
+  * add sddm-modified-init to kde standard routine
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 25 Oct 2024 18:20:09 -0400
+
+mx-packageinstaller-pkglist (24.10.05mx23) mx; urgency=medium
+
+  * update liqourix 6.11.4-2
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Tue, 22 Oct 2024 19:25:17 -0400
+
+mx-packageinstaller-pkglist (24.10.04mx23) mx; urgency=medium
+
+  * update liquorix 6.11 kernel
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Tue, 15 Oct 2024 20:40:35 -0400
+
+mx-packageinstaller-pkglist (24.10.03mx23) mx; urgency=medium
+
+  * add 6.11 kernels
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 12 Oct 2024 00:05:37 -0400
+
+mx-packageinstaller-pkglist (24.10.02mx23) mx; urgency=medium
+
+  * update librewolf
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 04 Oct 2024 22:18:01 -0400
+
+mx-packageinstaller-pkglist (24.10.01mx23) mx; urgency=medium
+
+  * bump liquorix 6.10 kernel
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 03 Oct 2024 22:55:09 -0400
+
 mx-packageinstaller-pkglist (24.09.07mx23) mx; urgency=medium
 
   * update ahs 6.10 kernel

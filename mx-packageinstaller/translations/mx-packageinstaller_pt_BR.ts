@@ -540,9 +540,13 @@
         <translation>Pós-processamento para</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1527"/>
         <source>There was an error writing file: %1. Please check if you have enough free space on your drive</source>
-        <translation>Ocorreu um erro ao escrever ou gravar o arquivo %1. Por favor, verifique se você tem espaço livre suficiente no seu dispositivo de armazenamento</translation>
+        <translation type="vanished">Ocorreu um erro ao escrever ou gravar o arquivo %1. Por favor, verifique se você tem espaço livre suficiente no seu dispositivo de armazenamento</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="1527"/>
+        <source>There was an error downloading or writing the file: %1. Please check your internet connection and free space on your drive</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1592"/>

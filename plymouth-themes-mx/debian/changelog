@@ -1,3 +1,11 @@
+plymouth-themes-mx (24.10.01) mx; urgency=medium
+
+  [CharlesV]
+  * update MXLiveLogo Fixed a logic error in image display which may have contributed to issues at plymouth shutdown
+  * add new theme MXImagine (freja)
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 05 Oct 2024 17:50:46 -0400
+
 plymouth-themes-mx (23.07.01) mx; urgency=medium
 
   * fix border color around logo

@@ -1,3 +1,11 @@
+mx-live-usb-maker (24.10.01) mx; urgency=medium
+
+  * Fix window resizing when showing/hiding advanced options
+  * Clarify that size of ESP is expressed in MB
+  * Enable/disable relevant boxes when selecting checkbox
+
+ -- Adrian <adrian@mxlinux.org>  Tue, 22 Oct 2024 17:41:24 -0400
+
 mx-live-usb-maker (24.6) mx; urgency=medium
 
   * Fix: enabling creating extra partition

@@ -1,0 +1,10 @@
+[Plymouth Theme]
+Name=MXImagine
+Description=MXImagine
+Comment=created By CharlesV
+ModuleName=script
+
+[script]
+ImageDir=/usr/share/plymouth/themes/MXImagine
+ScriptFile=/usr/share/plymouth/themes/MXImagine/MXImagine.script
+

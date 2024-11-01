@@ -48,27 +48,6 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow() override;
 
-    enum Version { Jessie = 8, Stretch, Buster, Bullseye, Bookworm, Trixie };
-
-    QStringList readMXRepos();
-    bool replaceRepos(const QString &url, bool quiet = false);
-    static QFileInfoList listAptFiles();
-    static QIcon getFlag(QString country);
-    static QString getDebianVerName(int ver);
-    static QStringList loadAptFile(const QString &file);
-    static int getDebianVerNum();
-    void centerWindow();
-    void displayAllRepos(const QFileInfoList &apt_files);
-    void displayMXRepos(const QStringList &repos, const QString &filter);
-    void displaySelected(const QString &repo);
-    void extractUrls(const QStringList &repos);
-    void getCurrentRepo(bool force = false);
-    void refresh(bool force = false);
-    void replaceDebianRepos(const QString &url);
-    void setConnections();
-    void setProgressBar();
-    void setSelected();
-
 private slots:
     void cancelOperation();
     void closeEvent(QCloseEvent * /*unused*/) override;
@@ -101,6 +80,29 @@ private:
     QTimer timer;
     bool sources_changed {};
 
-    static bool checkRepo(const QString &repo);
+    QStringList readMXRepos();
     bool downloadFile(const QString &url, QFile *file, std::chrono::seconds timeout = 10s);
+    bool replaceRepos(const QString &url, bool quiet = false);
+    bool writeUpdatedFile(const QString &filePath, const QString &content);
+    enum Version { Bullseye = 11, Bookworm, Trixie };
+    static QFileInfoList listAptFiles();
+    static QIcon getFlag(QString country);
+    static QString getDebianVerName(int ver);
+    static QStringList loadAptFile(const QString &file);
+    static bool checkRepo(const QString &repo);
+    static int getDebianVerNum();
+    void centerWindow();
+    void displayAllRepos(const QFileInfoList &apt_files);
+    void displayMXRepos(const QStringList &repos, const QString &filter);
+    void displaySelected(const QString &repo);
+    void extractUrls(const QStringList &repos);
+    void getCurrentRepo(bool force = false);
+    void initializeIcons();
+    void refresh(bool force = false);
+    void replaceDebianRepos(const QString &url);
+    void restoreWindowGeometry();
+    void setConnections();
+    void setIconIfNull(QPushButton *button, const QString &themeIcon, const QString &fallbackIcon);
+    void setProgressBar();
+    void setSelected();
 };

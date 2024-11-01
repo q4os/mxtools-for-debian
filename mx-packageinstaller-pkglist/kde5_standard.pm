@@ -151,6 +151,7 @@ kde-plasma-desktop
 plasma-modified-defaults-mx
 desktop-defaults-mx-kde
 plasma-look-and-feel-theme-mx
+sddm-modified-init
 </install_package_names>
 
 <postinstall>
@@ -237,6 +238,7 @@ ksystemstats
 qml-module-org-kde-pipewire 
 kdeconnect
 kde-plasma-desktop
+sddm-modified-init
 </uninstall_package_names>
 
 </app>

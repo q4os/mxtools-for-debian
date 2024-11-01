@@ -540,9 +540,13 @@
         <translation>Pas-përpunim për </translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1527"/>
         <source>There was an error writing file: %1. Please check if you have enough free space on your drive</source>
-        <translation>Pati një gabim në shkrim kartele: %1. Ju lutemi, kontrolloni nëse keni hapësirë të lirë të mjaftueshme në diskun tuaj</translation>
+        <translation type="vanished">Pati një gabim në shkrim kartele: %1. Ju lutemi, kontrolloni nëse keni hapësirë të lirë të mjaftueshme në diskun tuaj</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="1527"/>
+        <source>There was an error downloading or writing the file: %1. Please check your internet connection and free space on your drive</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1592"/>

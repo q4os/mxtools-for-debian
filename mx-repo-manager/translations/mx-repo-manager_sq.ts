@@ -5,13 +5,13 @@
     <name>MainWindow</name>
     <message>
         <location filename="../mainwindow.ui" line="17"/>
-        <location filename="../mainwindow.cpp" line="74"/>
+        <location filename="../mainwindow.cpp" line="63"/>
         <source>MX Repo Manager</source>
         <translation>Përgjegjës MX Deposh</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="32"/>
-        <location filename="../mainwindow.cpp" line="627"/>
+        <location filename="../mainwindow.cpp" line="642"/>
         <source>Select the APT repository that you want to use:</source>
         <translation>Përzgjidhni depon APT që doni të përdoret:</translation>
     </message>
@@ -101,155 +101,155 @@
         <translation>Zbatoje</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="167"/>
-        <location filename="../mainwindow.cpp" line="479"/>
-        <location filename="../mainwindow.cpp" line="768"/>
+        <location filename="../mainwindow.cpp" line="165"/>
+        <location filename="../mainwindow.cpp" line="495"/>
+        <location filename="../mainwindow.cpp" line="812"/>
         <source>Success</source>
         <translation>Sukses</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="168"/>
-        <location filename="../mainwindow.cpp" line="479"/>
-        <location filename="../mainwindow.cpp" line="772"/>
+        <location filename="../mainwindow.cpp" line="166"/>
+        <location filename="../mainwindow.cpp" line="496"/>
+        <location filename="../mainwindow.cpp" line="816"/>
         <source>Your new selection will take effect the next time sources are updated.</source>
         <translation>Përzgjedhja juaj e re do të hyjë në fuqi herës tjetër që përditësohen burimet.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="305"/>
+        <location filename="../mainwindow.cpp" line="330"/>
         <source>Lists</source>
         <translation>Lista</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="305"/>
+        <location filename="../mainwindow.cpp" line="330"/>
         <source>Sources (checked sources are enabled)</source>
         <translation>Burime (burimet e kontrolluara janë të aktivizuara)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="480"/>
-        <location filename="../mainwindow.cpp" line="682"/>
-        <location filename="../mainwindow.cpp" line="692"/>
-        <location filename="../mainwindow.cpp" line="709"/>
-        <location filename="../mainwindow.cpp" line="722"/>
-        <location filename="../mainwindow.cpp" line="729"/>
-        <location filename="../mainwindow.cpp" line="746"/>
-        <location filename="../mainwindow.cpp" line="752"/>
-        <location filename="../mainwindow.cpp" line="840"/>
+        <location filename="../mainwindow.cpp" line="498"/>
+        <location filename="../mainwindow.cpp" line="700"/>
+        <location filename="../mainwindow.cpp" line="710"/>
+        <location filename="../mainwindow.cpp" line="727"/>
+        <location filename="../mainwindow.cpp" line="740"/>
+        <location filename="../mainwindow.cpp" line="747"/>
+        <location filename="../mainwindow.cpp" line="763"/>
+        <location filename="../mainwindow.cpp" line="770"/>
+        <location filename="../mainwindow.cpp" line="891"/>
         <source>Error</source>
         <translation>Gabim</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="480"/>
+        <location filename="../mainwindow.cpp" line="498"/>
         <source>Could not change the repo.</source>
         <translation>S’u ndryshua dot depoja.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="503"/>
+        <location filename="../mainwindow.cpp" line="523"/>
         <source>Cancel</source>
         <translation>Anuloje</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="509"/>
+        <location filename="../mainwindow.cpp" line="529"/>
         <source>Please wait...</source>
         <translation>Ju lutemi, pritni…</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="562"/>
+        <location filename="../mainwindow.cpp" line="580"/>
         <source>About %1</source>
         <translation>Mbi %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="563"/>
+        <location filename="../mainwindow.cpp" line="581"/>
         <source>Version: </source>
         <translation>Version:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="565"/>
+        <location filename="../mainwindow.cpp" line="583"/>
         <source>Program for choosing the default APT repository</source>
         <translation>Program për zgjedhjen e depos APT parazgjedhje</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="567"/>
+        <location filename="../mainwindow.cpp" line="585"/>
         <source>Copyright (c) MX Linux</source>
         <translation>Të drejta kopjimi (c) MX Linux</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="568"/>
+        <location filename="../mainwindow.cpp" line="586"/>
         <source>%1 License</source>
         <translation>Licencë %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="582"/>
+        <location filename="../mainwindow.cpp" line="600"/>
         <source>%1 Help</source>
         <translation>Ndihmë për %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="591"/>
+        <location filename="../mainwindow.cpp" line="617"/>
         <source>Warning</source>
         <translation>Kujdes</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="592"/>
+        <location filename="../mainwindow.cpp" line="618"/>
         <source>You have selected MX Test Repo. It&apos;s not recommended to leave it enabled or to upgrade all the packages from it.</source>
         <translation>Keni përzgjedhur Depon MX Test. Nuk rekomandohet të lihet e aktivizuar, ose të përditësohen krejt paketat prej saj.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="595"/>
+        <location filename="../mainwindow.cpp" line="621"/>
         <source>A safer option is to install packages individually with MX Package Installer.</source>
         <translation>Një mundësi më e parrezik është të instalohet paketa individualisht me Instaluesin MX të Paketave.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="629"/>
+        <location filename="../mainwindow.cpp" line="644"/>
         <source>Select the APT repository and sources that you want to use:</source>
         <translation>Përzgjidhni depon dhe burimet APT që doni të përdoren:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="682"/>
+        <location filename="../mainwindow.cpp" line="700"/>
         <source>netselect-apt could not detect fastest repo.</source>
         <translation>netselect-apt s’pikasi dot depon më të shpejtë.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="692"/>
-        <location filename="../mainwindow.cpp" line="709"/>
+        <location filename="../mainwindow.cpp" line="710"/>
+        <location filename="../mainwindow.cpp" line="727"/>
         <source>Could not detect fastest repo.</source>
         <translation>S’u pikas dot depoja më e shpejtë.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="722"/>
+        <location filename="../mainwindow.cpp" line="740"/>
         <source>Can&apos;t figure out if this app is running on antiX or MX</source>
         <translation>S’kuptohet dot nëse ky aplikacion po xhiron në antiX, apo në MX</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="730"/>
+        <location filename="../mainwindow.cpp" line="748"/>
         <source>MX version not detected or out of range: </source>
         <translation>S’u pikas version MX-i, ose është jashtë intervali: </translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="746"/>
+        <location filename="../mainwindow.cpp" line="763"/>
         <source>Could not download original APT files.</source>
         <translation>S’u shkarkuan dot kartelat origjinale APT.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="752"/>
+        <location filename="../mainwindow.cpp" line="770"/>
         <source>Could not unzip downloaded file.</source>
         <translation>S’u çngjesh dot kartela e shkarkuar.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="763"/>
+        <location filename="../mainwindow.cpp" line="799"/>
         <source>Enabling AHS</source>
         <translation>Po aktivizohet AHS</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="763"/>
+        <location filename="../mainwindow.cpp" line="799"/>
         <source>Do you use AHS (Advanced Hardware Stack) repo?</source>
         <translation>A përdorni depon AHS (Advanced Hardware Stack)?</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="769"/>
+        <location filename="../mainwindow.cpp" line="813"/>
         <source>Original APT sources have been restored to the release status. User added source files in /etc/apt/sources.list.d/ have not been touched.</source>
         <translation>Burimet origjinale APT janë rikthyer në gjendjen e hedhjes në qarkullim. Kartela burim të shtuara nga përdoruesi te /etc/apt/sources.list.d/ nuk u prekën.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="841"/>
+        <location filename="../mainwindow.cpp" line="892"/>
         <source>There was an error writing file: %1. Please check if you have enough free space on your drive</source>
         <translation>Pati një gabim në shkrim kartele: %1. Ju lutemi, kontrolloni nëse keni hapësirë të lirë të mjaftueshme në diskun tuaj</translation>
     </message>

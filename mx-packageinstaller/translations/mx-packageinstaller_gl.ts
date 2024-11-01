@@ -27,7 +27,7 @@
     <message>
         <location filename="../mainwindow.ui" line="88"/>
         <source>Info</source>
-        <translation type="unfinished"></translation>
+        <translation>Información</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="93"/>
@@ -35,7 +35,7 @@
         <location filename="../mainwindow.ui" line="817"/>
         <location filename="../mainwindow.ui" line="1074"/>
         <source>Description</source>
-        <translation type="unfinished"></translation>
+        <translation>Descrición</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="101"/>
@@ -324,7 +324,7 @@
     <message>
         <location filename="../mainwindow.ui" line="1518"/>
         <source>Size</source>
-        <translation type="unfinished"></translation>
+        <translation>Tamaño</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1548"/>
@@ -352,7 +352,7 @@
         <location filename="../mainwindow.cpp" line="2941"/>
         <location filename="../mainwindow.cpp" line="3215"/>
         <source>Install</source>
-        <translation type="unfinished"></translation>
+        <translation>Instalar</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1629"/>
@@ -362,7 +362,7 @@
     <message>
         <location filename="../mainwindow.ui" line="1648"/>
         <source>Quit application</source>
-        <translation type="unfinished"></translation>
+        <translation>Saír do aplicativo</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1651"/>
@@ -377,12 +377,12 @@
     <message>
         <location filename="../mainwindow.ui" line="1689"/>
         <source>About this application</source>
-        <translation type="unfinished"></translation>
+        <translation>Sobre esta aplicación</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1692"/>
         <source>About...</source>
-        <translation type="unfinished"></translation>
+        <translation>Sobre...</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1698"/>
@@ -392,7 +392,7 @@
     <message>
         <location filename="../mainwindow.ui" line="1736"/>
         <source>Display help </source>
-        <translation type="unfinished"></translation>
+        <translation>Amosar axuda</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1739"/>
@@ -540,9 +540,13 @@
         <translation>Posprocesando para</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1527"/>
         <source>There was an error writing file: %1. Please check if you have enough free space on your drive</source>
-        <translation>Produciuse un erro ao escribir o ficheiro: %1. Comproba se tes espazo libre suficiente na túa unidade</translation>
+        <translation type="vanished">Produciuse un erro ao escribir o ficheiro: %1. Comproba se tes espazo libre suficiente na túa unidade</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="1527"/>
+        <source>There was an error downloading or writing the file: %1. Please check your internet connection and free space on your drive</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1592"/>
@@ -873,7 +877,7 @@ Close the program, or wait until it is done processing and try again.</source>
     <message>
         <location filename="../main.cpp" line="97"/>
         <source>You seem to be logged in as root, please log out and log in as normal user to use this program.</source>
-        <translation type="unfinished"></translation>
+        <translation>O usuario parece ser root; para usar este programa, pechar a sesión e iniciar sesión como usuario normal.</translation>
     </message>
     <message>
         <location filename="../main.cpp" line="105"/>

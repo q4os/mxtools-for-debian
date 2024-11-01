@@ -540,9 +540,13 @@
         <translation>Efterbehandlar för</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1527"/>
         <source>There was an error writing file: %1. Please check if you have enough free space on your drive</source>
-        <translation>Ett fel uppstod vid skrivande av fil: %1. Var vänlig kontrollera att du har tillräckligt mycket ledigt utrymme på disken.</translation>
+        <translation type="vanished">Ett fel uppstod vid skrivande av fil: %1. Var vänlig kontrollera att du har tillräckligt mycket ledigt utrymme på disken.</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="1527"/>
+        <source>There was an error downloading or writing the file: %1. Please check your internet connection and free space on your drive</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1592"/>

@@ -94,8 +94,8 @@ id_AX_HOST=http://kartolo.sby.datautama.net.id/mx-packages/antix
 id_MX_HOST=http://kartolo.sby.datautama.net.id/mx-packages/mx
 id_LOCATION="Indonesia"
 
-in_AX_HOST=https://mirror.kku.ac.th/mx-packages/antix/
-in_MX_HOST=https://mirror.kku.ac.th/mx-packages/mx/
+in_AX_HOST=https://mirror.kku.ac.th/mx-packages/antix
+in_MX_HOST=https://mirror.kku.ac.th/mx-packages/mx
 in_LOCATION="India"
 
 it_AX_HOST=http://it.mxrepo.com/antix

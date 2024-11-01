@@ -7,7 +7,8 @@ if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-remov
     if [ "$LIVE_CHECK" = "overlay" ] || [ "$LIVE_CHECK" = "aufs" ]; then
         echo "running live, do not rebuild initramfs"
     else
-    	if [ -n "$(grep MXLiveLogo /etc/plymouth/plymouthd.conf)" ]; then
+		#update initramfs if one of changed themes is in use
+    	if [ -n "$(grep -E 'MXLiveLogo|MXImagine' /etc/plymouth/plymouthd.conf)" ]; then
 		    update-initramfs -u -k all
 		fi  
 	fi  

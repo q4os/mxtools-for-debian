@@ -1,3 +1,10 @@
+mx-packageinstaller (24.10) mx; urgency=medium
+
+  * Fix: use https for downloading from mxrepo server
+  * Clarify error message
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 18 Oct 2024 10:06:18 -0400
+
 mx-packageinstaller (24.9) mx; urgency=medium
 
   * Fix: packages with no description were not listed as installed

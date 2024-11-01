@@ -43,17 +43,6 @@ public:
     explicit MainWindow(const QStringList &args, QDialog *parent = nullptr);
     ~MainWindow() override;
 
-    QString buildOptionList();
-    QStringList buildUsbList();
-    QStringList removeUnsuitable(const QStringList &devices); // remove unsuitable disks (live and unremovable)
-    bool checkDestSize();
-    static bool isRunningLive();
-    static bool isToRam();
-    void makeUsb(const QString &options);
-    void progress();
-    void setGeneralConnections();
-    void setup();
-
 public slots:
 
 private slots:
@@ -93,5 +82,19 @@ private:
     bool advancedOptions {};
     const QString cli_utils {". /usr/local/lib/cli-shell-utils/cli-shell-utils.bash;"};
     int height {};
+    int defaultHeight {};
     uint size_check;
+
+    [[nodiscard]] QString buildOptionList();
+    [[nodiscard]] QStringList buildUsbList();
+    [[nodiscard]] QStringList removeUnsuitable(const QStringList &devices); // remove live or unremovable
+    [[nodiscard]] bool checkDestSize();
+    [[nodiscard]] static bool isRunningLive();
+    [[nodiscard]] static bool isToRam();
+    void makeUsb(const QString &options);
+    void progress();
+    void setGeneralConnections();
+    void setSourceFile(const QString &fileName);
+    void setup();
+    void showErrorAndReset(const QString &message = QString());
 };

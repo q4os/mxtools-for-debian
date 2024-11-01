@@ -90,5 +90,6 @@ gnome-session
 gnome-control-center
 gnome-panel
 gnome-shell-extensions
+nautilus
 </uninstall_package_names>
 </app>

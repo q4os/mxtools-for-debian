@@ -540,9 +540,13 @@
         <translation>Post-processo per</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1527"/>
         <source>There was an error writing file: %1. Please check if you have enough free space on your drive</source>
-        <translation>Si è verificato un errore nella scrittura del file 1%. Controlla di avere abbastanza spazio su disco</translation>
+        <translation type="vanished">Si è verificato un errore nella scrittura del file 1%. Controlla di avere abbastanza spazio su disco</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="1527"/>
+        <source>There was an error downloading or writing the file: %1. Please check your internet connection and free space on your drive</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1592"/>

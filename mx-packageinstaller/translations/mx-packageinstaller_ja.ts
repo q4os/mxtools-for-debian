@@ -540,9 +540,13 @@
         <translation>次の後処理中です：</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1527"/>
         <source>There was an error writing file: %1. Please check if you have enough free space on your drive</source>
-        <translation>ファイル %1 の書き込み中にエラー発生。ドライブに十分な空き領域があるか確認してください。</translation>
+        <translation type="vanished">ファイル %1 の書き込み中にエラー発生。ドライブに十分な空き領域があるか確認してください。</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="1527"/>
+        <source>There was an error downloading or writing the file: %1. Please check your internet connection and free space on your drive</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1592"/>

@@ -540,9 +540,13 @@
         <translation>Обработка для</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1527"/>
         <source>There was an error writing file: %1. Please check if you have enough free space on your drive</source>
-        <translation>Ошибка при записи файла: %1. Проверьте наличие свободного места на диске.</translation>
+        <translation type="vanished">Ошибка при записи файла: %1. Проверьте наличие свободного места на диске.</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="1527"/>
+        <source>There was an error downloading or writing the file: %1. Please check your internet connection and free space on your drive</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1592"/>

@@ -540,9 +540,13 @@
         <translation>Jälkikäsittely kohteelle</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1527"/>
         <source>There was an error writing file: %1. Please check if you have enough free space on your drive</source>
-        <translation>Virhe kirjoitettaessa tiedostoa: %1. Tarkista, onko levyllä tarpeeksi vapaata tilaa</translation>
+        <translation type="vanished">Virhe kirjoitettaessa tiedostoa: %1. Tarkista, onko levyllä tarpeeksi vapaata tilaa</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="1527"/>
+        <source>There was an error downloading or writing the file: %1. Please check your internet connection and free space on your drive</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1592"/>

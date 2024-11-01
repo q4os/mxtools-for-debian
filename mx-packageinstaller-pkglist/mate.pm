@@ -72,6 +72,20 @@ all
 <install_package_names>
 mate-core
 mate-desktop-environment
+mate-desktop-environment-core
+caja
+marco
+mate-control-center
+mate-desktop
+mate-icon-theme
+mate-menus
+mate-notification-daemon
+mate-panel
+mate-polkit
+mate-session-manager
+mate-settings-daemon
+mate-terminal
+mate-themes
 </install_package_names>
 
 
@@ -83,5 +97,19 @@ mate-desktop-environment
 <uninstall_package_names>
 mate-core
 mate-desktop-environment
+mate-desktop-environment-core
+caja
+marco
+mate-control-center
+mate-desktop
+mate-icon-theme
+mate-menus
+mate-notification-daemon
+mate-panel
+mate-polkit
+mate-session-manager
+mate-settings-daemon
+mate-terminal
+mate-themes
 </uninstall_package_names>
 </app>

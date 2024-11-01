@@ -1,7 +1,7 @@
 ## Script : CharlesV
 ## Artwork: Freja
 ## Mail : 
-## Version: 230706ab
+## Version: 241003aa
 ##
 ## 1) Create and copy all of these files to 
 ##    /usr/share/plymouth/themes/MXLiveLogo
@@ -23,7 +23,7 @@ Window.SetBackgroundBottomColor(0.14, 0.14, 0.14);
 //--------------------------------- Refresh (Logo animation) --------------------------
 
 // Number of shutdown images and max times through the call back ( stops displaying again ) 
-numShutdownImages = 71;
+numShutdownImages = 36;
 maxCallBackShutdown = 160;
 
 // Number of startup images and max times through the call back ( stops displaying again ) 
@@ -36,13 +36,13 @@ maxCallBackStartup = 160;
 //scaleFactor = 0.7;   // Image at 70%
 scaleFactor = 1.0;   // Image at 100% 
 
-iDisplayPerImage = 2;
+iDisplayPerImage = 1;
 
 
 // Get the first image size for scaling 
 // - We use the first image, assuming ALL are the same size!
 
-rawImage = Image("startup-0.png");
+rawImage = Image("startup-1.png");
 iImageWidth = rawImage.GetWidth();
 iImageHeight = rawImage.GetHeight();
 
@@ -115,9 +115,9 @@ fun refresh_callback ()
   {
     if (Plymouth.GetMode () == "boot")
       {
-        if ( progress <= maxCallBackStartup )
+        if ( progress < numStartupImages )
         {
-          flyingman_sprite.SetImage(scaledImage[Math.Int(progress / iDisplayPerImage) % maxCallBackStartup]);
+          flyingman_sprite.SetImage(scaledImage[Math.Int(progress / iDisplayPerImage) % numStartupImages]);
         } 
          
         progress++;
@@ -125,9 +125,9 @@ fun refresh_callback ()
 
     if (Plymouth.GetMode () == "shutdown")
       {
-        if ( progress <= maxCallBackShutdown )
+        if ( progress < numShutdownImages )
         {
-          flyingman_sprite.SetImage(scaledImage[Math.Int(progress / iDisplayPerImage) % maxCallBackShutdown]);
+          flyingman_sprite.SetImage(scaledImage[Math.Int(progress / iDisplayPerImage) % numShutdownImages]);
         }
         progress++;
       }

@@ -540,9 +540,13 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1527"/>
         <source>There was an error writing file: %1. Please check if you have enough free space on your drive</source>
-        <translation>Er is een fout opgetreden bij het schrijven van bestand: %1. Controleer of u voldoende vrije ruimte op uw schijf heeft</translation>
+        <translation type="vanished">Er is een fout opgetreden bij het schrijven van bestand: %1. Controleer of u voldoende vrije ruimte op uw schijf heeft</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="1527"/>
+        <source>There was an error downloading or writing the file: %1. Please check your internet connection and free space on your drive</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1592"/>

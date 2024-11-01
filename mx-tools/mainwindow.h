@@ -40,14 +40,6 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow() override;
 
-    [[nodiscard]] QIcon findIcon(QString icon_name);
-    [[nodiscard]] QString getCmdOut(const QString &cmd);
-    [[nodiscard]] QStringList listDesktopFiles(const QString &search_string, const QString &location);
-    static void hideShowIcon(const QString &file_name, bool hide);
-    void addButtons(const QMultiMap<QString, QMultiMap<QString, QStringList>> &info_map);
-    void readInfo(const QMultiMap<QString, QStringList> &category_map);
-    void setConnections();
-
 private slots:
     static void pushHelp_clicked();
     void btn_clicked();
@@ -68,14 +60,33 @@ private:
     QStringList setup_list;
     QStringList software_list;
     QStringList utilities_list;
-    [[nodiscard]] QString getTranslation(const QString &text, const QString &key, const QString &lang_region,
-                                         const QString &lang);
-    [[nodiscard]] QString getValueFromText(const QString &text, const QString &key);
+    const QMap<QString, QStringList *> categories {{"MX-Live", &live_list},
+                                                   {"MX-Maintenance", &maintenance_list},
+                                                   {"MX-Setup", &setup_list},
+                                                   {"MX-Software", &software_list},
+                                                   {"MX-Utilities", &utilities_list}};
     enum Info { Name, Comment, IconName, Exec, Category, Terminal };
     int col_count = 0;
     int icon_size = 32;
     int max_col = 0;
     int max_elements = 0;
+
+    [[nodiscard]] QString getTranslation(const QString &text, const QString &key, const QString &langRegion,
+                                         const QString &lang);
+    [[nodiscard]] QString getValueFromText(const QString &text, const QString &key);
+    [[nodiscard]] QIcon findIcon(const QString &iconName);
+    [[nodiscard]] QStringList listDesktopFiles(const QString &searchString, const QString &location);
     static void fixExecItem(QString *item);
+    static void hideShowIcon(const QString &fileName, bool hide);
     static void removeEnvExclusive(QStringList *list, const QStringList &termsToRemove);
+    void addButtons(const QMultiMap<QString, QMultiMap<QString, QStringList>> &info_map);
+    void checkHideToolsInMenu();
+    void clearGrid();
+    void filterDesktopEnvironmentItems();
+    void filterLiveEnvironmentItems();
+    void initializeCategoryLists();
+    void populateCategoryMap();
+    void readInfo(const QMultiMap<QString, QStringList> &category_map);
+    void restoreWindowGeometry();
+    void setConnections();
 };

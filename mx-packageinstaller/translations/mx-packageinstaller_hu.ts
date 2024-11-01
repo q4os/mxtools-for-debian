@@ -68,12 +68,12 @@
     <message>
         <location filename="../mainwindow.ui" line="230"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Remove all the packages that are marked as &amp;quot;autoremovable&amp;quot;. If you want to manage them, select Autoremovable from drop-down selection box.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Eltávolítja az összes olyan csomagot, amely &amp;quot;automatikusan eltávolítható&amp;quot;. Ha meg szeretné vizsgálni a csomagokat, válassza a lenyílómezőből az Automatikusan eltávolítható elemet.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="233"/>
         <source>Autoremove packages</source>
-        <translation type="unfinished"></translation>
+        <translation>Automatikus eltávolítás</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="341"/>
@@ -179,7 +179,7 @@
         <location filename="../mainwindow.cpp" line="2850"/>
         <location filename="../mainwindow.cpp" line="2936"/>
         <source>Autoremovable</source>
-        <translation type="unfinished"></translation>
+        <translation>Automatikusan eltávolítható</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="450"/>
@@ -210,14 +210,14 @@
         <location filename="../mainwindow.ui" line="807"/>
         <location filename="../mainwindow.ui" line="1064"/>
         <source>Repo Version</source>
-        <translation type="unfinished"></translation>
+        <translation>Csomagforrás verzió</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="415"/>
         <location filename="../mainwindow.ui" line="812"/>
         <location filename="../mainwindow.ui" line="1069"/>
         <source>Installed Version</source>
-        <translation type="unfinished"></translation>
+        <translation>Telepített verzió</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="837"/>
@@ -540,9 +540,13 @@
         <translation>Utófeldolgozás ehhez:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1527"/>
         <source>There was an error writing file: %1. Please check if you have enough free space on your drive</source>
-        <translation>Hiba történt a fájl írása során: %1. Ellenőrizze, hogy van-e elég szabad hely a meghajtón.</translation>
+        <translation type="vanished">Hiba történt a fájl írása során: %1. Ellenőrizze, hogy van-e elég szabad hely a meghajtón.</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="1527"/>
+        <source>There was an error downloading or writing the file: %1. Please check your internet connection and free space on your drive</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1592"/>
@@ -700,7 +704,7 @@ Indulhat a telepítése?</translation>
         <location filename="../mainwindow.cpp" line="2845"/>
         <location filename="../mainwindow.cpp" line="2937"/>
         <source>Mark keep</source>
-        <translation type="unfinished"></translation>
+        <translation>Megtartás</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="2935"/>

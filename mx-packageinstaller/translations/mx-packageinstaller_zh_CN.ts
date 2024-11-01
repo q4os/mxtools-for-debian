@@ -540,9 +540,13 @@
         <translation>正在安装后设置</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1527"/>
         <source>There was an error writing file: %1. Please check if you have enough free space on your drive</source>
-        <translation>写入文件时出错：%1。请检查您的驱动器上是否有足够的可用空间</translation>
+        <translation type="vanished">写入文件时出错：%1。请检查您的驱动器上是否有足够的可用空间</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="1527"/>
+        <source>There was an error downloading or writing the file: %1. Please check your internet connection and free space on your drive</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1592"/>

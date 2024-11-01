@@ -1547,7 +1547,7 @@ bool MainWindow::downloadFile(const QString &url, QFile &file)
     if (reply->error() != QNetworkReply::NoError) {
         QMessageBox::warning(
             this, tr("Error"),
-            tr("There was an error writing file: %1. Please check if you have enough free space on your drive")
+            tr("There was an error downloading or writing the file: %1. Please check your internet connection and free space on your drive")
                 .arg(file.fileName()));
         qDebug() << "There was an error downloading the file:" << url << "Error:" << reply->errorString();
         file.remove();
@@ -1642,7 +1642,7 @@ bool MainWindow::downloadPackageList(bool force_download)
             }
 
             QFile file(tmp_dir.path() + "/mxPackages.gz");
-            QString url {"http://mxrepo.com/mx/testrepo/dists/"};
+            QString url {"https://mxrepo.com/mx/testrepo/dists/"};
             if (!cmd.run("apt-get update --print-uris | tac | grep -m1 -oP 'https?://.*/mx/testrepo/dists/(?="
                          + ver_name + "/test/)'")) {
                 cmd.run("apt-get update --print-uris | tac | grep -m1 -oE 'https?://.*/mx/repo/dists/" + ver_name

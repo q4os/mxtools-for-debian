@@ -68,12 +68,12 @@
     <message>
         <location filename="../mainwindow.ui" line="230"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Remove all the packages that are marked as &amp;quot;autoremovable&amp;quot;. If you want to manage them, select Autoremovable from drop-down selection box.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Usuń wszystkie pakiety oznaczone jako &amp;quot;automatycznie usuwalne&amp;quot;. Jeśli chcesz nimi zarządzać, wybierz opcję Automatycznie usuwalne z rozwijanego menu wyboru.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="233"/>
         <source>Autoremove packages</source>
-        <translation type="unfinished"></translation>
+        <translation>Usuń pakiety automatycznie</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="341"/>
@@ -179,7 +179,7 @@
         <location filename="../mainwindow.cpp" line="2850"/>
         <location filename="../mainwindow.cpp" line="2936"/>
         <source>Autoremovable</source>
-        <translation type="unfinished"></translation>
+        <translation>Automatycznie usuwalne</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="450"/>
@@ -210,14 +210,14 @@
         <location filename="../mainwindow.ui" line="807"/>
         <location filename="../mainwindow.ui" line="1064"/>
         <source>Repo Version</source>
-        <translation type="unfinished"></translation>
+        <translation>Wersja repozytorium</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="415"/>
         <location filename="../mainwindow.ui" line="812"/>
         <location filename="../mainwindow.ui" line="1069"/>
         <source>Installed Version</source>
-        <translation type="unfinished"></translation>
+        <translation>Zainstalowana wersja</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="837"/>
@@ -540,9 +540,13 @@
         <translation>Przetwarzanie końcowe dla</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1527"/>
         <source>There was an error writing file: %1. Please check if you have enough free space on your drive</source>
-        <translation>Wystąpił błąd podczas zapisu pliku: %1. Sprawdź, czy masz wystarczająco dużo wolnego miejsca na dysku</translation>
+        <translation type="vanished">Wystąpił błąd podczas zapisu pliku: %1. Sprawdź, czy masz wystarczająco dużo wolnego miejsca na dysku</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="1527"/>
+        <source>There was an error downloading or writing the file: %1. Please check your internet connection and free space on your drive</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1592"/>
@@ -552,7 +556,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="1882"/>
         <source>dpkg-query command returned an error. Please run &apos;dpkg-query -W&apos; in terminal and check the output.</source>
-        <translation type="unfinished"></translation>
+        <translation>Polecenie dpkg-query zwróciło błąd. Proszę uruchomić &apos;dpkg-query -W&apos; w terminalu i sprawdzić wynik.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="2026"/>
@@ -700,7 +704,7 @@ Czy kontynuować i zainstalować go?</translation>
         <location filename="../mainwindow.cpp" line="2845"/>
         <location filename="../mainwindow.cpp" line="2937"/>
         <source>Mark keep</source>
-        <translation type="unfinished"></translation>
+        <translation>Zachowaj pakiet</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="2935"/>

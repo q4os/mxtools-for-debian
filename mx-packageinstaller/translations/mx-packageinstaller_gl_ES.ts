@@ -68,12 +68,12 @@
     <message>
         <location filename="../mainwindow.ui" line="230"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Remove all the packages that are marked as &amp;quot;autoremovable&amp;quot;. If you want to manage them, select Autoremovable from drop-down selection box.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Elimina todos os paquetes marcados como &amp;quot;autoremovable&amp;quot;. Se queres xestionalos, selecciona Autoremovable no cadro de selección despregable.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="233"/>
         <source>Autoremove packages</source>
-        <translation type="unfinished"></translation>
+        <translation>Eliminar automaticamente paquetes</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="341"/>
@@ -179,7 +179,7 @@
         <location filename="../mainwindow.cpp" line="2850"/>
         <location filename="../mainwindow.cpp" line="2936"/>
         <source>Autoremovable</source>
-        <translation type="unfinished"></translation>
+        <translation>Autoextraíble</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="450"/>
@@ -210,14 +210,14 @@
         <location filename="../mainwindow.ui" line="807"/>
         <location filename="../mainwindow.ui" line="1064"/>
         <source>Repo Version</source>
-        <translation type="unfinished"></translation>
+        <translation>Versión de repositorio</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="415"/>
         <location filename="../mainwindow.ui" line="812"/>
         <location filename="../mainwindow.ui" line="1069"/>
         <source>Installed Version</source>
-        <translation type="unfinished"></translation>
+        <translation>Versión Instalada</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="837"/>
@@ -540,9 +540,13 @@
         <translation>Posprocesando para</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1527"/>
         <source>There was an error writing file: %1. Please check if you have enough free space on your drive</source>
-        <translation>Produciuse un erro ao escribir o ficheiro: %1. Comproba se tes espazo libre suficiente na túa unidade</translation>
+        <translation type="vanished">Produciuse un erro ao escribir o ficheiro: %1. Comproba se tes espazo libre suficiente na túa unidade</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="1527"/>
+        <source>There was an error downloading or writing the file: %1. Please check your internet connection and free space on your drive</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1592"/>
@@ -552,7 +556,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="1882"/>
         <source>dpkg-query command returned an error. Please run &apos;dpkg-query -W&apos; in terminal and check the output.</source>
-        <translation type="unfinished"></translation>
+        <translation>O comando dpkg devolveu un erro, por favor executa  &apos;dpkg-query -W&apos;  no terminal e verifica a saída.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="2026"/>
@@ -700,7 +704,7 @@ Continuar e instalar o paquete?</translation>
         <location filename="../mainwindow.cpp" line="2845"/>
         <location filename="../mainwindow.cpp" line="2937"/>
         <source>Mark keep</source>
-        <translation type="unfinished"></translation>
+        <translation>Marca para conservar</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="2935"/>

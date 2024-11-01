@@ -66,9 +66,16 @@ LibreWolf
 <screenshot></screenshot>
 
 <preinstall>
-wget https://deb.librewolf.net/keyring.gpg -O /etc/apt/trusted.gpg.d/librewolf.gpg
-echo "deb [arch=amd64] http://deb.librewolf.net bookworm main">/etc/apt/sources.list.d/librewolf.list
+rm -f /etc/apt/sources.list.d/librewolf.sources
+rm -f /etc/apt/keyrings/librewolf.gpg
+rm -f /etc/apt/preferences.d/librewolf.pref
+rm -f /etc/apt/sources.list.d/librewolf.list
+rm -f /etc/apt/trusted.gpg.d/librewolf.gpg
 apt-get update
+apt-get install extrepo -y
+extrepo enable librewolf
+apt-get update
+
 </preinstall>
 
 <install_package_names>
@@ -108,8 +115,7 @@ librewolf
 if [ -f /usr/share/xfce4/helpers/librewolf.desktop ]; then
 rm /usr/share/xfce4/helpers/librewolf.desktop
 fi
-rm /etc/apt/sources.list.d/librewolf.list
-rm /etc/apt/trusted.gpg.d/librewolf.gpg
+extrepo disable librewolf
 apt-get update
 </postuninstall>
 </app>

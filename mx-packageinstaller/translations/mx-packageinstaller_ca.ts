@@ -540,9 +540,13 @@
         <translation>Post-processant per </translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1527"/>
         <source>There was an error writing file: %1. Please check if you have enough free space on your drive</source>
-        <translation>Hi ha hagut un error escrivint al fitxer: %1. Si us plau, comproveu si hi ha prou espai a la unitat</translation>
+        <translation type="vanished">Hi ha hagut un error escrivint al fitxer: %1. Si us plau, comproveu si hi ha prou espai a la unitat</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="1527"/>
+        <source>There was an error downloading or writing the file: %1. Please check your internet connection and free space on your drive</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1592"/>

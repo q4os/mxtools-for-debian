@@ -21,12 +21,14 @@ echo
 read -p "Build all packages, press Enter to continue ..." XYZ
 cd $MX_BUILD_DIR/
 mkdir -p $MX_BUILD_DIR/.logs/
+set -e
 for SRCDIR1 in * ; do
   echo
   echo "Building in : $SRCDIR1/"
   cd $MX_BUILD_DIR/$SRCDIR1/
   dpkg-buildpackage -rfakeroot -uc -b 2>&1 | tee $MX_BUILD_DIR/.logs/${SRCDIR1}.log
 done
+set +e
 echo "Saving packages ..."
 mkdir -p $MX_BUILD_DIR/.builtout/
 mv $MX_BUILD_DIR/*.deb $MX_BUILD_DIR/.builtout/
