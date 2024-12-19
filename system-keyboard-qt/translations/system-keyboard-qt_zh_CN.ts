@@ -76,21 +76,21 @@
         <translation>帮助</translation>
     </message>
     <message>
-        <location filename="../window.cpp" line="187"/>
-        <location filename="../window.cpp" line="212"/>
-        <location filename="../window.cpp" line="238"/>
+        <location filename="../window.cpp" line="189"/>
+        <location filename="../window.cpp" line="214"/>
+        <location filename="../window.cpp" line="240"/>
         <source>Error</source>
         <translation>错误</translation>
     </message>
     <message>
-        <location filename="../window.cpp" line="187"/>
-        <location filename="../window.cpp" line="212"/>
-        <location filename="../window.cpp" line="238"/>
+        <location filename="../window.cpp" line="189"/>
+        <location filename="../window.cpp" line="214"/>
+        <location filename="../window.cpp" line="240"/>
         <source>Failed to open file: </source>
         <translation>无法打开文件：</translation>
     </message>
     <message>
-        <location filename="../window.cpp" line="238"/>
+        <location filename="../window.cpp" line="240"/>
         <source>Most settings will not be loaded</source>
         <translation>大多数设置不会被加载</translation>
     </message>

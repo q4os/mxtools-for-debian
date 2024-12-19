@@ -275,6 +275,42 @@ sed -i "s/$original/$new/" /etc/bluetooth/main.conf
 
 }
 
+change_display_manager(){
+local installed_dm newdm="$1" DEFAULT_DISPLAY_MANAGER_FILE=/etc/X11/default-display-manager
+
+#get list of display managers installed
+installed_dm=$(dpkg --list sddm gdm3 lightdm slim slimski xdm wdm lxdm nodm 2>/dev/null |grep ii | awk '{print $2}')
+echo "installed dm are " $installed_dm
+
+##set default x display manager file
+echo "$(which $newdm)" | tee /etc/X11/default-display-manager
+
+##loop to PRESEED debconf selections since we will use noninteractive mode to set new displaymanager choice
+for i in $installed_dm
+	do
+	echo "$i shared/default-x-display-manager        select  $newdm" | /usr/bin/debconf-set-selections
+	done
+
+#use dpkg-reconfigure in non-interactive move to set windowmanager.
+DEBIAN_FRONTEND=noninteractive /usr/sbin/dpkg-reconfigure $newdm
+}
+
+kvm_early_switch(){
+	local action="$1" file="$2"
+
+	#clear out existing switches
+	if [ -f "$file" ]; then
+		sed -i "/option added by mx-tweak/d" "$file"
+		sed -i "/enable_virt_at_load/d" "$file"
+	fi
+
+	#if "on" enable option, else option already removed by cleanup
+	if [ "$action" = "on" ]; then
+		echo "#option added by mx-tweak" >> "$file"
+		echo "options kvm enable_virt_at_load=0" >> "$file"
+	fi
+}
+
 main()
 {
 $CMD1
@@ -302,6 +338,10 @@ case "$CMD1" in
 	hostname) change_hostname "$CMD2"
 	;;
 	bluetooth_battery) bluetooth_battery "$CMD2"
+	;;
+	displaymanager) change_display_manager "$CMD2"
+	;;
+	kvm_early_switch) kvm_early_switch "$CMD2" "$CMD3"
 	;;
 	*) main
 	;;

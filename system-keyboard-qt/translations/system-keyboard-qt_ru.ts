@@ -76,21 +76,21 @@
         <translation>Справка</translation>
     </message>
     <message>
-        <location filename="../window.cpp" line="187"/>
-        <location filename="../window.cpp" line="212"/>
-        <location filename="../window.cpp" line="238"/>
+        <location filename="../window.cpp" line="189"/>
+        <location filename="../window.cpp" line="214"/>
+        <location filename="../window.cpp" line="240"/>
         <source>Error</source>
         <translation>Ошибка</translation>
     </message>
     <message>
-        <location filename="../window.cpp" line="187"/>
-        <location filename="../window.cpp" line="212"/>
-        <location filename="../window.cpp" line="238"/>
+        <location filename="../window.cpp" line="189"/>
+        <location filename="../window.cpp" line="214"/>
+        <location filename="../window.cpp" line="240"/>
         <source>Failed to open file: </source>
         <translation>Не удалось открыть файл:</translation>
     </message>
     <message>
-        <location filename="../window.cpp" line="238"/>
+        <location filename="../window.cpp" line="240"/>
         <source>Most settings will not be loaded</source>
         <translation>Большинство настроек не будут загружены</translation>
     </message>

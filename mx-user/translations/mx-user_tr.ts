@@ -498,155 +498,151 @@
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../mainwindow.cpp" line="108"/>
-        <location filename="../mainwindow.cpp" line="158"/>
-        <location filename="../mainwindow.cpp" line="166"/>
-        <location filename="../mainwindow.cpp" line="184"/>
-        <location filename="../mainwindow.cpp" line="193"/>
-        <location filename="../mainwindow.cpp" line="201"/>
-        <location filename="../mainwindow.cpp" line="761"/>
-        <location filename="../mainwindow.cpp" line="787"/>
-        <location filename="../mainwindow.cpp" line="817"/>
-        <location filename="../mainwindow.cpp" line="974"/>
-        <location filename="../mainwindow.cpp" line="1041"/>
-        <location filename="../mainwindow.cpp" line="1048"/>
-        <location filename="../mainwindow.cpp" line="1053"/>
-        <location filename="../mainwindow.cpp" line="1058"/>
-        <location filename="../mainwindow.cpp" line="1063"/>
+        <location filename="../mainwindow.cpp" line="157"/>
+        <location filename="../mainwindow.cpp" line="165"/>
+        <location filename="../mainwindow.cpp" line="192"/>
+        <location filename="../mainwindow.cpp" line="781"/>
+        <location filename="../mainwindow.cpp" line="811"/>
+        <location filename="../mainwindow.cpp" line="968"/>
+        <location filename="../mainwindow.cpp" line="1035"/>
+        <location filename="../mainwindow.cpp" line="1042"/>
+        <location filename="../mainwindow.cpp" line="1047"/>
+        <location filename="../mainwindow.cpp" line="1052"/>
+        <location filename="../mainwindow.cpp" line="1057"/>
         <source>none</source>
         <translation>hiçbiri</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="143"/>
-        <location filename="../mainwindow.cpp" line="748"/>
-        <location filename="../mainwindow.cpp" line="981"/>
-        <location filename="../mainwindow.cpp" line="990"/>
+        <location filename="../mainwindow.cpp" line="142"/>
+        <location filename="../mainwindow.cpp" line="745"/>
+        <location filename="../mainwindow.cpp" line="975"/>
+        <location filename="../mainwindow.cpp" line="984"/>
         <source>browse...</source>
         <translation>gözat...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="212"/>
+        <location filename="../mainwindow.cpp" line="208"/>
         <source>The user configuration will be repaired. Please close all other applications now. When finished, please logout or reboot. Are you sure you want to repair now?</source>
         <translation>Kullanıcı yapılandırması onarılacak.Lütfen şimdi bütün diğer  uygulamaları kapatın. Bittiğinde çıkış yapın veya yeniden başlatın.Şimdi onarmak istediğinizden emin misiniz?</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="234"/>
+        <location filename="../mainwindow.cpp" line="230"/>
         <source>User group membership was restored.</source>
         <translation>Kullanıcı grup üyeliği geri yüklendi.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="239"/>
+        <location filename="../mainwindow.cpp" line="235"/>
         <source>Mozilla settings were reset.</source>
         <translation>Mozilla ayarları sıfırlandı.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="250"/>
-        <location filename="../mainwindow.cpp" line="265"/>
+        <location filename="../mainwindow.cpp" line="246"/>
+        <location filename="../mainwindow.cpp" line="261"/>
         <source>Autologin options</source>
         <translation>Otomatik giriş seçenekleri</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="251"/>
+        <location filename="../mainwindow.cpp" line="247"/>
         <source>Autologin has been disabled for the &apos;%1&apos; account.</source>
         <translation>‘%1’ hesabı için otomatik giriş devre dışı bırakıldı.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="266"/>
+        <location filename="../mainwindow.cpp" line="262"/>
         <source>Autologin has been enabled for the &apos;%1&apos; account.</source>
         <translation>‘%1’ hesabı için otomatik giriş etkinleştirildi.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="278"/>
+        <location filename="../mainwindow.cpp" line="274"/>
         <source>You must specify a &apos;copy to&apos; destination. You cannot copy to the desktop you are logged in to.</source>
         <translation>Kopyalanacak yeri belirtmelisiniz. Giriş yaptığınız için masaüstüne kopyalayamazsınız.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="284"/>
+        <location filename="../mainwindow.cpp" line="280"/>
         <source>Before copying, close all other applications. Be sure the copy to destination is large enough to contain the files you are copying. Copying between desktops may overwrite or delete your files or preferences on the destination desktop. Are you sure you want to proceed?</source>
         <translation>Kopyalamadan önce, diğer tüm uygulamaları kapatın. Kopyalanacak hedefin, kopyaladığınız dosyaları içerecek kadar büyük olduğundan emin olun. Masaüstleri arasında kopyalama yapmak, hedef masaüstündeki dosyalarınızı veya tercihlerinizi geçersiz kılabilir veya silebilir. İşleme devam etmek istediğinizden emin misiniz?</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="310"/>
+        <location filename="../mainwindow.cpp" line="306"/>
         <source>Synchronizing desktop...</source>
         <translation>Masaüstü eşitleniyor...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="312"/>
+        <location filename="../mainwindow.cpp" line="308"/>
         <source>Copying desktop...</source>
         <translation>Masaüstü kopyalanıyor...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="349"/>
-        <location filename="../mainwindow.cpp" line="581"/>
+        <location filename="../mainwindow.cpp" line="345"/>
+        <location filename="../mainwindow.cpp" line="577"/>
         <source>The user name needs to be at least 2 characters long. Please select a longer name before proceeding.</source>
         <translation>Kullanıcı adı en az 2 karakter uzunluğunda olmalıdır. Devam etmeden önce lütfen daha uzun bir ad seçin.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="354"/>
+        <location filename="../mainwindow.cpp" line="350"/>
         <source>The user name cannot contain special characters or spaces.
 Please choose another name before proceeding.</source>
         <translation>Kullanıcı adı özel karakterler veya boşluk içeremez.
 Lütfen devam etmeden önce başka bir ad seçin.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="360"/>
+        <location filename="../mainwindow.cpp" line="356"/>
         <source>Sorry, this name is in use. Please enter a different name.</source>
         <translation>Üzgünüm bu ad kullanılıyor. Lütfen farklı bir ad girin.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="364"/>
-        <location filename="../mainwindow.cpp" line="419"/>
+        <location filename="../mainwindow.cpp" line="360"/>
+        <location filename="../mainwindow.cpp" line="415"/>
         <source>Password entries do not match. Please try again.</source>
         <translation>Parola girdileri uyuşmuyor. Lütfen tekrar deneyin.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="369"/>
-        <location filename="../mainwindow.cpp" line="424"/>
+        <location filename="../mainwindow.cpp" line="365"/>
+        <location filename="../mainwindow.cpp" line="420"/>
         <source>Password needs to be at least 2 characters long. Please enter a longer password before proceeding.</source>
         <translation>Parola en az 2 karakter uzunluğunda olmalıdır.Devam etmeden önce daha uzun bir parola girin.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="408"/>
+        <location filename="../mainwindow.cpp" line="404"/>
         <source>The user was added ok.</source>
         <translation>Kullanıcı eklendi.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="411"/>
+        <location filename="../mainwindow.cpp" line="407"/>
         <source>Failed to add the user.</source>
         <translation>Kullanıcı ekleme başarısız oldu.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="439"/>
+        <location filename="../mainwindow.cpp" line="435"/>
         <source>Password successfully changed.</source>
         <translation>Parola başarıyla değiştirildi.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="442"/>
+        <location filename="../mainwindow.cpp" line="438"/>
         <source>Failed to change password.</source>
         <translation>Parola değiştirme başarısız oldu.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="448"/>
+        <location filename="../mainwindow.cpp" line="444"/>
         <source>This action cannot be undone. Are you sure you want to delete user %1?</source>
         <translation>Bu işlem geri alınamaz. % 1 kullanıcısını silmek istediğinizden emin misiniz?</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="467"/>
+        <location filename="../mainwindow.cpp" line="463"/>
         <source>The user has been deleted.</source>
         <translation>Kullanıcı silindi.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="469"/>
+        <location filename="../mainwindow.cpp" line="465"/>
         <source>Failed to delete the user.</source>
         <translation>Kullanıcı silme başarısız oldu.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="483"/>
+        <location filename="../mainwindow.cpp" line="479"/>
         <source>The group name needs to be at least 2 characters long. Please select a longer name before proceeding.</source>
         <translation>Grup adı en az 2 karakter uzunluğunda olmalıdır.  Devam etmeden önce lütfen daha uzun bir ad seçin.&#xa0;</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="488"/>
+        <location filename="../mainwindow.cpp" line="484"/>
         <source>The group name needs to be lower case and it 
 cannot contain special characters or spaces.
 Please choose another name before proceeding.</source>
@@ -655,72 +651,72 @@ Please choose another name before proceeding.</source>
 Devam etmeden önce lütfen başka bir ad seçin.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="496"/>
+        <location filename="../mainwindow.cpp" line="492"/>
         <source>Sorry, that group name already exists. Please enter a different name.</source>
         <translation>Üzgünüm bu grup adı zaten var. Lütfen farklı bir ad girin.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="504"/>
+        <location filename="../mainwindow.cpp" line="500"/>
         <source>The system group was added ok.</source>
         <translation>Sistem grubu eklendi.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="506"/>
+        <location filename="../mainwindow.cpp" line="502"/>
         <source>Failed to add the system group.</source>
         <translation>Sistem grubu ekleme başarısız oldu.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="521"/>
+        <location filename="../mainwindow.cpp" line="517"/>
         <source>This action cannot be undone. Are you sure you want to delete group %1?</source>
         <translation>Bu işlem geri alınamaz. % 1 kullanıcısını silmek istediğinizden emin misiniz?</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="522"/>
+        <location filename="../mainwindow.cpp" line="518"/>
         <source>This action cannot be undone. Are you sure you want to delete the following groups: %1?</source>
         <translation>Bu işlem geri alınamaz. Şu grupları silmek istediğinizden emin misiniz: %1?</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="531"/>
+        <location filename="../mainwindow.cpp" line="527"/>
         <source>Failed to delete the group.</source>
         <translation>Grup silme başarısız oldu.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="531"/>
+        <location filename="../mainwindow.cpp" line="527"/>
         <source>Group: %1</source>
         <translation>Grup: %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="535"/>
+        <location filename="../mainwindow.cpp" line="531"/>
         <source>The group has been deleted.</source>
         <translation>Grup silindi.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="535"/>
+        <location filename="../mainwindow.cpp" line="531"/>
         <source>The groups have been deleted.</source>
         <translation>Gruplar silindi.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="552"/>
+        <location filename="../mainwindow.cpp" line="548"/>
         <source>The changes have been applied.</source>
         <translation>Dwğişiklikler uygulandı.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="554"/>
+        <location filename="../mainwindow.cpp" line="550"/>
         <source>Failed to apply group changes</source>
         <translation>Grup değişiklikleri uygulanamadı</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="572"/>
+        <location filename="../mainwindow.cpp" line="568"/>
         <source>The selected user name is currently in use.</source>
         <translation>Seçilen kullanıcı adı şu an kullanılıyor.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="573"/>
+        <location filename="../mainwindow.cpp" line="569"/>
         <source>To rename this user, please log out and log back in using another user account.</source>
         <translation>Bu kullanıcıyı yeniden adlandırmak için, lütfen oturumu kapatın ve başka bir kullanıcı hesabı kullanarak tekrar oturum açın.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="586"/>
+        <location filename="../mainwindow.cpp" line="582"/>
         <source>The user name needs to be lower case and it
 cannot contain special characters or spaces.
 Please choose another name before proceeding.</source>
@@ -729,84 +725,84 @@ Please choose another name before proceeding.</source>
 Devam etmeden önce lütfen başka bir ad seçin.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="593"/>
+        <location filename="../mainwindow.cpp" line="589"/>
         <source>Sorry, this name already exists on your system. Please enter a different name.</source>
         <translation>Üzgünüm, bu ad sisteminizde zaten var. Lütfen farklı bir ad girin.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="602"/>
+        <location filename="../mainwindow.cpp" line="598"/>
         <source>Failed to rename the user. Please make sure that the user is not logged in, you might need to restart</source>
         <translation>Kullanıcı yeniden adlandırılamadı. Lütfen kullanıcının giriş yapmadığından emin olun, yeniden başlatmanız gerekebilir</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="626"/>
+        <location filename="../mainwindow.cpp" line="622"/>
         <source>The user was renamed.</source>
         <translation>Kullanıcı yeniden adlandırıldı.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="638"/>
-        <location filename="../mainwindow.cpp" line="666"/>
+        <location filename="../mainwindow.cpp" line="634"/>
+        <location filename="../mainwindow.cpp" line="662"/>
         <source>Synchronizing desktop...ok</source>
         <translation>Masaüstü eşitleniyor...tamam</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="640"/>
-        <location filename="../mainwindow.cpp" line="668"/>
+        <location filename="../mainwindow.cpp" line="636"/>
+        <location filename="../mainwindow.cpp" line="664"/>
         <source>Copying desktop...ok</source>
         <translation>Masaüstü kopyalanıyor...tamam</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="672"/>
+        <location filename="../mainwindow.cpp" line="668"/>
         <source>Synchronizing desktop...failed</source>
         <translation>Masaüstü eşitleniyor...başarısız oldu</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="674"/>
+        <location filename="../mainwindow.cpp" line="670"/>
         <source>Copying desktop...failed</source>
         <translation>Masaüstü kopyalanıyor...başarısız oldu</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="693"/>
+        <location filename="../mainwindow.cpp" line="689"/>
         <source>Confirmation</source>
         <translation>Onay</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="694"/>
+        <location filename="../mainwindow.cpp" line="690"/>
         <source>Process not done. Are you sure you want to quit the application?</source>
         <translation>İşlem gerçekleşmedi. Uygulamayı terketmek istediğinizden emin misiniz?</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="946"/>
+        <location filename="../mainwindow.cpp" line="940"/>
         <source>About %1</source>
         <translation>Hakkında %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="947"/>
+        <location filename="../mainwindow.cpp" line="941"/>
         <source>Version: </source>
         <translation>Sürüm:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="948"/>
+        <location filename="../mainwindow.cpp" line="942"/>
         <source>Simple user configuration for MX Linux</source>
         <translation>MX Linux için basit kullanıcı yapılandırması</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="950"/>
+        <location filename="../mainwindow.cpp" line="944"/>
         <source>Copyright (c) MX Linux</source>
         <translation>Copyright (c) MX Linux</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="951"/>
+        <location filename="../mainwindow.cpp" line="945"/>
         <source>%1 License</source>
         <translation>%1 Telif Hakkı</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="965"/>
+        <location filename="../mainwindow.cpp" line="959"/>
         <source>%1 Help</source>
         <translation>%1 Yardım</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="982"/>
+        <location filename="../mainwindow.cpp" line="976"/>
         <source>Select folder to copy to</source>
         <translation>Kopyalanacak klasörü seçin</translation>
     </message>

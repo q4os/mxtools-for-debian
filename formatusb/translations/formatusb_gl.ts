@@ -66,7 +66,7 @@
     <message>
         <location filename="../mainwindow.ui" line="225"/>
         <source>Quit application</source>
-        <translation type="unfinished"></translation>
+        <translation>Saír do aplicativo</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="228"/>
@@ -76,12 +76,12 @@
     <message>
         <location filename="../mainwindow.ui" line="235"/>
         <source>Alt+N</source>
-        <translation type="unfinished"></translation>
+        <translation>Alt+N</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="273"/>
         <source>Display help </source>
-        <translation type="unfinished"></translation>
+        <translation>Amosar axuda</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="276"/>
@@ -96,12 +96,12 @@
     <message>
         <location filename="../mainwindow.ui" line="315"/>
         <source>About this application</source>
-        <translation type="unfinished"></translation>
+        <translation>Sobre esta aplicación</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="318"/>
         <source>About...</source>
-        <translation type="unfinished"></translation>
+        <translation>Sobre...</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="325"/>
@@ -111,12 +111,12 @@
     <message>
         <location filename="../mainwindow.ui" line="357"/>
         <source>Next</source>
-        <translation type="unfinished"></translation>
+        <translation>Seguinte</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="383"/>
         <source>Back</source>
-        <translation type="unfinished"></translation>
+        <translation>Volver atrás</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="184"/>
@@ -200,23 +200,23 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../about.cpp" line="34"/>
+        <location filename="../about.cpp" line="37"/>
         <source>License</source>
         <translation>Licenza</translation>
     </message>
     <message>
-        <location filename="../about.cpp" line="35"/>
-        <location filename="../about.cpp" line="45"/>
+        <location filename="../about.cpp" line="38"/>
+        <location filename="../about.cpp" line="48"/>
         <source>Changelog</source>
         <translation>Rexistro dos cambios</translation>
     </message>
     <message>
-        <location filename="../about.cpp" line="36"/>
+        <location filename="../about.cpp" line="39"/>
         <source>Cancel</source>
         <translation>Cancelar</translation>
     </message>
     <message>
-        <location filename="../about.cpp" line="53"/>
+        <location filename="../about.cpp" line="56"/>
         <source>&amp;Close</source>
         <translation>&amp;Cerrar</translation>
     </message>

@@ -155,6 +155,7 @@ private slots:
     void pushForceUpdateBP_clicked();
     void pushForceUpdateEnabled_clicked();
     void pushForceUpdateMX_clicked();
+    void pushForceUpdateFP_clicked();
     void pushHelp_clicked();
     void pushInstall_clicked();
     void pushRemotes_clicked();
@@ -222,19 +223,22 @@ private:
     QTimer timer;
     QTreeWidget *currentTree {}; // current/calling tree
     QTreeWidgetItem *lastItemClicked {};
+    QUrl getScreenshotUrl(const QString &name);
     const QCommandLineParser &args;
 
     QNetworkAccessManager manager;
     QNetworkReply *reply;
 
-    [[nodiscard]] QMap<QString, PackageInfo> listInstalled() const;
+    [[nodiscard]] QMap<QString, PackageInfo> listInstalled();
     [[nodiscard]] QString categoryTranslation(const QString &item);
+    [[nodiscard]] QString getMXTestRepoUrl();
     [[nodiscard]] QString getArchOption() const;
     [[nodiscard]] QString getLocalizedName(const QDomElement &element) const;
     [[nodiscard]] QString getVersion(const QString &name) const;
     [[nodiscard]] QString mapArchToFormat(const QString &arch) const;
     [[nodiscard]] QStringList listFlatpaks(const QString &remote, const QString &type = QLatin1String("")) const;
     [[nodiscard]] QStringList listInstalledFlatpaks(const QString &type = QLatin1String(""));
+    [[nodiscard]] QTreeWidgetItem *createFlatpakItem(const QString &item, const QStringList &installed_all) const;
     [[nodiscard]] QTreeWidgetItem *createTreeItem(const QString &name, const QString &version,
                                                   const QString &description) const;
     [[nodiscard]] bool checkInstalled(const QVariant &names) const;
@@ -279,7 +283,9 @@ private:
     void displayPackages();
     void displayPopularApps() const;
     void displayWarning(const QString &repo);
-    void enableTabs(bool enable) const;
+    void enableTabs(bool enable);
+    void finalizeFlatpakDisplay();
+    void formatFlatpakTree() const;
     void handleEnabledReposTab(const QString &search_str);
     void handleFlatpakTab(const QString &search_str);
     void handleOutputTab();
@@ -290,7 +296,9 @@ private:
     void installFlatpak();
     void listFlatpakRemotes() const;
     void listSizeInstalledFP();
+    void loadFlatpakData();
     void loadPmFiles();
+    void populateFlatpakTree();
     void processDoc(const QDomDocument &doc);
     void refreshPopularApps();
     void removeDuplicatesFP() const;
@@ -303,6 +311,8 @@ private:
     void setProgressDialog();
     void setSearchFocus() const;
     void setup();
+    void setupFlatpakDisplay();
+    void updateFlatpakCounts(uint total_count);
     void updateInterface() const;
     void updateTreeItems(QTreeWidget *tree);
 

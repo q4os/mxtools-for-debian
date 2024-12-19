@@ -74,6 +74,7 @@ public:
     QString plugintasklist;
     QString originalhostname;
     QStringList undotheme;
+    QString currentdisplaymanager;
     bool verbose = false;
     bool panelflag{};
     bool hibernate_flag{};
@@ -113,9 +114,14 @@ public:
     bool isXfce = false;
     bool isFluxbox = false;
     bool isKDE = false;
+    bool isLightdm = false;
+    bool isSuperkey = false;
     bool liqKernelUpdateFlag = false;
     bool debianKernelUpdateFlag = false;
     bool plasmadisoverautostartflag = false;
+    bool graphicssetupflag=true;
+    bool kvmflag=false;
+    QString kvmconffile;
 
 
 
@@ -149,6 +155,7 @@ public:
     void message() const;
     bool checkXFCE() const;
     bool checkFluxbox() const;
+    void checkSession();
     static bool checklightdm();
     bool checkPlasma() const;
     void CheckComptonRunning();
@@ -187,6 +194,8 @@ public:
     void fluxboxchangedock() const;
     void changecomputername(QString hostname);
     bool validatecomputername(QString hostname);
+    void changedisplaymanager(QString dm);
+    void kvm_early_switch(QString action, QString file);
 
 private slots:
     static void on_buttonCancel_clicked();
@@ -322,6 +331,10 @@ private slots:
     void on_checkBoxComputerName_clicked();
 
     void on_checkBoxBluetoothBattery_clicked();
+
+    void on_checkBoxDisplayManager_clicked();
+
+    void on_checkBoxKVMVirtLoad_clicked();
 
 private:
     Ui::defaultlook *ui;

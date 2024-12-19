@@ -76,21 +76,21 @@
         <translation>도움말</translation>
     </message>
     <message>
-        <location filename="../window.cpp" line="187"/>
-        <location filename="../window.cpp" line="212"/>
-        <location filename="../window.cpp" line="238"/>
+        <location filename="../window.cpp" line="189"/>
+        <location filename="../window.cpp" line="214"/>
+        <location filename="../window.cpp" line="240"/>
         <source>Error</source>
         <translation>에러</translation>
     </message>
     <message>
-        <location filename="../window.cpp" line="187"/>
-        <location filename="../window.cpp" line="212"/>
-        <location filename="../window.cpp" line="238"/>
+        <location filename="../window.cpp" line="189"/>
+        <location filename="../window.cpp" line="214"/>
+        <location filename="../window.cpp" line="240"/>
         <source>Failed to open file: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../window.cpp" line="238"/>
+        <location filename="../window.cpp" line="240"/>
         <source>Most settings will not be loaded</source>
         <translation type="unfinished"></translation>
     </message>

@@ -47,7 +47,7 @@
         <location filename="../mainwindow.ui" line="190"/>
         <location filename="../mainwindow.ui" line="686"/>
         <location filename="../mainwindow.ui" line="1099"/>
-        <location filename="../mainwindow.ui" line="1321"/>
+        <location filename="../mainwindow.ui" line="1208"/>
         <source>search</source>
         <translation>hae</translation>
     </message>
@@ -56,7 +56,7 @@
         <location filename="../mainwindow.ui" line="203"/>
         <location filename="../mainwindow.ui" line="699"/>
         <location filename="../mainwindow.ui" line="1167"/>
-        <location filename="../mainwindow.ui" line="1293"/>
+        <location filename="../mainwindow.ui" line="1431"/>
         <source>= Installed packages</source>
         <translation>= Asennetut paketit</translation>
     </message>
@@ -77,7 +77,7 @@
     </message>
     <message>
         <location filename="../mainwindow.ui" line="341"/>
-        <location filename="../mainwindow.ui" line="1384"/>
+        <location filename="../mainwindow.ui" line="1324"/>
         <source>Upgrade All</source>
         <translation>Päivitä kaikki</translation>
     </message>
@@ -120,6 +120,7 @@
         <location filename="../mainwindow.ui" line="265"/>
         <location filename="../mainwindow.ui" line="633"/>
         <location filename="../mainwindow.ui" line="1006"/>
+        <location filename="../mainwindow.ui" line="1524"/>
         <source>Refresh list</source>
         <translation>Päivitä luettelo</translation>
     </message>
@@ -127,7 +128,7 @@
         <location filename="../mainwindow.ui" line="481"/>
         <location filename="../mainwindow.ui" line="758"/>
         <location filename="../mainwindow.ui" line="1129"/>
-        <location filename="../mainwindow.ui" line="1245"/>
+        <location filename="../mainwindow.ui" line="1479"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Filter packages according to their status.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Suodata paketit niiden tilan suhteen.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
@@ -138,7 +139,7 @@
         <location filename="../mainwindow.ui" line="765"/>
         <location filename="../mainwindow.ui" line="1132"/>
         <location filename="../mainwindow.ui" line="1136"/>
-        <location filename="../mainwindow.cpp" line="2827"/>
+        <location filename="../mainwindow.cpp" line="2958"/>
         <source>All packages</source>
         <translation>Kaikki paketit</translation>
     </message>
@@ -146,7 +147,7 @@
         <location filename="../mainwindow.ui" line="493"/>
         <location filename="../mainwindow.ui" line="770"/>
         <location filename="../mainwindow.ui" line="1141"/>
-        <location filename="../mainwindow.cpp" line="2847"/>
+        <location filename="../mainwindow.cpp" line="2978"/>
         <source>Installed</source>
         <translation>Asennettu</translation>
     </message>
@@ -154,7 +155,7 @@
         <location filename="../mainwindow.ui" line="498"/>
         <location filename="../mainwindow.ui" line="775"/>
         <location filename="../mainwindow.ui" line="1146"/>
-        <location filename="../mainwindow.cpp" line="2848"/>
+        <location filename="../mainwindow.cpp" line="2979"/>
         <source>Upgradable</source>
         <translation>Päivitettävissä</translation>
     </message>
@@ -162,11 +163,11 @@
         <location filename="../mainwindow.ui" line="503"/>
         <location filename="../mainwindow.ui" line="780"/>
         <location filename="../mainwindow.ui" line="1151"/>
-        <location filename="../mainwindow.ui" line="1282"/>
-        <location filename="../mainwindow.cpp" line="2813"/>
-        <location filename="../mainwindow.cpp" line="2849"/>
-        <location filename="../mainwindow.cpp" line="2951"/>
-        <location filename="../mainwindow.cpp" line="2952"/>
+        <location filename="../mainwindow.ui" line="1516"/>
+        <location filename="../mainwindow.cpp" line="2944"/>
+        <location filename="../mainwindow.cpp" line="2980"/>
+        <location filename="../mainwindow.cpp" line="3081"/>
+        <location filename="../mainwindow.cpp" line="3082"/>
         <source>Not installed</source>
         <translation>Ei asennettu</translation>
     </message>
@@ -174,10 +175,10 @@
         <location filename="../mainwindow.ui" line="508"/>
         <location filename="../mainwindow.ui" line="785"/>
         <location filename="../mainwindow.ui" line="1156"/>
-        <location filename="../mainwindow.cpp" line="2363"/>
-        <location filename="../mainwindow.cpp" line="2786"/>
-        <location filename="../mainwindow.cpp" line="2850"/>
-        <location filename="../mainwindow.cpp" line="2936"/>
+        <location filename="../mainwindow.cpp" line="2489"/>
+        <location filename="../mainwindow.cpp" line="2915"/>
+        <location filename="../mainwindow.cpp" line="2981"/>
+        <location filename="../mainwindow.cpp" line="3066"/>
         <source>Autoremovable</source>
         <translation>Autom. poistettavat</translation>
     </message>
@@ -196,7 +197,7 @@
         <translation>Paketin nimi</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="1513"/>
+        <location filename="../mainwindow.ui" line="1259"/>
         <source>Version</source>
         <translation>Versio</translation>
     </message>
@@ -230,234 +231,234 @@
         <translation>Flatpakit</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="1196"/>
-        <location filename="../mainwindow.ui" line="1200"/>
+        <location filename="../mainwindow.ui" line="1447"/>
+        <location filename="../mainwindow.ui" line="1451"/>
         <location filename="../mainwindow.cpp" line="113"/>
         <location filename="../mainwindow.cpp" line="114"/>
         <source>For all users</source>
         <translation>Kaikille käyttäjille</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="1205"/>
+        <location filename="../mainwindow.ui" line="1456"/>
         <source>For current user</source>
         <translation>Nykyiselle käyttäjälle</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="1213"/>
+        <location filename="../mainwindow.ui" line="1541"/>
         <source>Remote (repo):</source>
         <translation>Ulkopuolinen (repo):</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="1248"/>
-        <location filename="../mainwindow.ui" line="1252"/>
-        <location filename="../mainwindow.cpp" line="2795"/>
+        <location filename="../mainwindow.ui" line="1482"/>
+        <location filename="../mainwindow.ui" line="1486"/>
+        <location filename="../mainwindow.cpp" line="2926"/>
         <source>All apps</source>
         <translation>Kaikki sovellukset</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="1257"/>
-        <location filename="../mainwindow.cpp" line="2801"/>
+        <location filename="../mainwindow.ui" line="1491"/>
+        <location filename="../mainwindow.cpp" line="2932"/>
         <source>All runtimes</source>
         <translation>Kaikki ajettavat</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="1262"/>
-        <location filename="../mainwindow.cpp" line="2807"/>
+        <location filename="../mainwindow.ui" line="1496"/>
+        <location filename="../mainwindow.cpp" line="2938"/>
         <source>All available</source>
         <translation>Kaikki saatavilla olevat</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="1267"/>
-        <location filename="../mainwindow.cpp" line="2792"/>
+        <location filename="../mainwindow.ui" line="1501"/>
+        <location filename="../mainwindow.cpp" line="2923"/>
         <source>Installed apps</source>
         <translation>Asennetut sovellukset</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="1272"/>
-        <location filename="../mainwindow.cpp" line="2789"/>
+        <location filename="../mainwindow.ui" line="1506"/>
+        <location filename="../mainwindow.cpp" line="2920"/>
         <source>Installed runtimes</source>
         <translation>Asennetut ajettavat</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="1277"/>
-        <location filename="../mainwindow.cpp" line="2811"/>
-        <location filename="../mainwindow.cpp" line="2944"/>
-        <location filename="../mainwindow.cpp" line="2945"/>
+        <location filename="../mainwindow.ui" line="1511"/>
+        <location filename="../mainwindow.cpp" line="2942"/>
+        <location filename="../mainwindow.cpp" line="3074"/>
+        <location filename="../mainwindow.cpp" line="3075"/>
         <source>All installed</source>
         <translation>Kaikki asennettu</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="1363"/>
+        <location filename="../mainwindow.ui" line="1303"/>
         <source>Total items </source>
         <translation>Kohteita yhteensä</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="1377"/>
+        <location filename="../mainwindow.ui" line="1317"/>
         <source>Installed apps:</source>
         <translation>Asennetut sovellukset:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="1429"/>
+        <location filename="../mainwindow.ui" line="1369"/>
         <source>Advanced</source>
         <translation>Lisäasetukset</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="1458"/>
+        <location filename="../mainwindow.ui" line="1398"/>
         <source>Total installed size:</source>
         <translation>Koko asennettuna:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="1472"/>
+        <location filename="../mainwindow.ui" line="1412"/>
         <source>Remove unused runtimes</source>
         <translation>Poista käyttämättömät suoritusajat</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="1503"/>
+        <location filename="../mainwindow.ui" line="1249"/>
         <source>Short Name</source>
         <translation>Lyhyt nimi</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="1508"/>
+        <location filename="../mainwindow.ui" line="1254"/>
         <source>Full Package Name</source>
         <translation>Koko paketin nimi</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="1518"/>
+        <location filename="../mainwindow.ui" line="1264"/>
         <source>Size</source>
         <translation>Koko</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="1548"/>
-        <location filename="../mainwindow.cpp" line="2505"/>
-        <location filename="../mainwindow.cpp" line="2721"/>
+        <location filename="../mainwindow.ui" line="1558"/>
+        <location filename="../mainwindow.cpp" line="2631"/>
+        <location filename="../mainwindow.cpp" line="2848"/>
         <source>Console Output</source>
         <translation>Konsoliulostulo</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="1554"/>
+        <location filename="../mainwindow.ui" line="1564"/>
         <source>Enter</source>
         <translation>Enter</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="1564"/>
+        <location filename="../mainwindow.ui" line="1574"/>
         <source>Respond here, or just press Enter</source>
         <translation>Vastaa tähän, tai paina vain Enter</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="1623"/>
-        <location filename="../mainwindow.cpp" line="1178"/>
-        <location filename="../mainwindow.cpp" line="2837"/>
-        <location filename="../mainwindow.cpp" line="2845"/>
-        <location filename="../mainwindow.cpp" line="2935"/>
-        <location filename="../mainwindow.cpp" line="2941"/>
-        <location filename="../mainwindow.cpp" line="3215"/>
+        <location filename="../mainwindow.ui" line="1633"/>
+        <location filename="../mainwindow.cpp" line="1217"/>
+        <location filename="../mainwindow.cpp" line="2968"/>
+        <location filename="../mainwindow.cpp" line="2976"/>
+        <location filename="../mainwindow.cpp" line="3065"/>
+        <location filename="../mainwindow.cpp" line="3071"/>
+        <location filename="../mainwindow.cpp" line="3356"/>
         <source>Install</source>
         <translation>Asenna</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="1629"/>
+        <location filename="../mainwindow.ui" line="1639"/>
         <source>Alt+I</source>
         <translation>Alt+I</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="1648"/>
+        <location filename="../mainwindow.ui" line="1658"/>
         <source>Quit application</source>
         <translation>Sulje sovellus</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="1651"/>
+        <location filename="../mainwindow.ui" line="1661"/>
         <source>Close</source>
         <translation>Sulje</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="1657"/>
+        <location filename="../mainwindow.ui" line="1667"/>
         <source>Alt+C</source>
         <translation>Alt+C</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="1689"/>
+        <location filename="../mainwindow.ui" line="1699"/>
         <source>About this application</source>
         <translation>Tietoja tästä sovelluksesta</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="1692"/>
+        <location filename="../mainwindow.ui" line="1702"/>
         <source>About...</source>
         <translation>Tietoja...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="1698"/>
+        <location filename="../mainwindow.ui" line="1708"/>
         <source>Alt+B</source>
         <translation>Alt+B</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="1736"/>
+        <location filename="../mainwindow.ui" line="1746"/>
         <source>Display help </source>
         <translation>Näytä ohje</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="1739"/>
+        <location filename="../mainwindow.ui" line="1749"/>
         <source>Help</source>
         <translation>Ohje</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="1745"/>
+        <location filename="../mainwindow.ui" line="1755"/>
         <source>Alt+H</source>
         <translation>Alt+H</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="1761"/>
+        <location filename="../mainwindow.ui" line="1771"/>
         <source>Uninstall</source>
         <translation>Poista</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="1767"/>
+        <location filename="../mainwindow.ui" line="1777"/>
         <source>Alt+U</source>
         <translation>Alt+U</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="179"/>
+        <location filename="../mainwindow.cpp" line="183"/>
         <source>Uninstalling packages...</source>
         <translation>Poistetaan paketteja...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="184"/>
+        <location filename="../mainwindow.cpp" line="188"/>
         <source>Running pre-uninstall operations...</source>
         <translation>Suoritetaan asennusta edeltäviä poistoja...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="204"/>
+        <location filename="../mainwindow.cpp" line="208"/>
         <source>Running post-uninstall operations...</source>
         <translation>Ajetaan jälkiasennuksen toimia...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="221"/>
+        <location filename="../mainwindow.cpp" line="225"/>
         <source>Refreshing sources...</source>
         <translation>Päivitetään lähdeluetteloita...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="235"/>
-        <location filename="../mainwindow.cpp" line="1226"/>
-        <location filename="../mainwindow.cpp" line="1360"/>
-        <location filename="../mainwindow.cpp" line="1526"/>
-        <location filename="../mainwindow.cpp" line="1583"/>
-        <location filename="../mainwindow.cpp" line="1881"/>
-        <location filename="../mainwindow.cpp" line="2025"/>
-        <location filename="../mainwindow.cpp" line="2356"/>
-        <location filename="../mainwindow.cpp" line="2375"/>
-        <location filename="../mainwindow.cpp" line="2481"/>
-        <location filename="../mainwindow.cpp" line="2497"/>
-        <location filename="../mainwindow.cpp" line="2589"/>
-        <location filename="../mainwindow.cpp" line="2622"/>
-        <location filename="../mainwindow.cpp" line="3035"/>
-        <location filename="../mainwindow.cpp" line="3111"/>
-        <location filename="../mainwindow.cpp" line="3141"/>
-        <location filename="../mainwindow.cpp" line="3232"/>
-        <location filename="../mainwindow.cpp" line="3253"/>
+        <location filename="../mainwindow.cpp" line="239"/>
+        <location filename="../mainwindow.cpp" line="1265"/>
+        <location filename="../mainwindow.cpp" line="1402"/>
+        <location filename="../mainwindow.cpp" line="1567"/>
+        <location filename="../mainwindow.cpp" line="1632"/>
+        <location filename="../mainwindow.cpp" line="1937"/>
+        <location filename="../mainwindow.cpp" line="2077"/>
+        <location filename="../mainwindow.cpp" line="2482"/>
+        <location filename="../mainwindow.cpp" line="2501"/>
+        <location filename="../mainwindow.cpp" line="2607"/>
+        <location filename="../mainwindow.cpp" line="2623"/>
+        <location filename="../mainwindow.cpp" line="2715"/>
+        <location filename="../mainwindow.cpp" line="2748"/>
+        <location filename="../mainwindow.cpp" line="3174"/>
+        <location filename="../mainwindow.cpp" line="3250"/>
+        <location filename="../mainwindow.cpp" line="3280"/>
+        <location filename="../mainwindow.cpp" line="3372"/>
+        <location filename="../mainwindow.cpp" line="3412"/>
         <source>Error</source>
         <translation>Virhe</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="236"/>
+        <location filename="../mainwindow.cpp" line="240"/>
         <source>There was a problem updating sources. Some sources may not have provided updates. For more info check: </source>
         <translation>Lähteitä päivitettäessä kohdattiin ongelma. Jotkut lähteet eivät ehkä tuottaneet näytille päivityksiä. Lisätietoja varten:</translation>
     </message>
@@ -472,267 +473,263 @@
         <translation>Odota, ole hyvä...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1046"/>
+        <location filename="../mainwindow.cpp" line="1081"/>
         <source>You are about to use the MX Test repository, whose packages are provided for testing purposes only. It is possible that they might break your system, so it is suggested that you back up your system and install or update only one package at a time. Please provide feedback in the Forum so the package can be evaluated before moving up to Main.</source>
         <translation>Olet aikeissa käyttää MX Testirepoa, jonka paketit on tarkoitettu vain testikäyttöön. Ne saattavat rikkoa järjestelmäsi, joten on suositeltavaa että varmuuskopioit järjestelmäsi sekä asennat tai päivität vain yhden paketin kerrallaan. Anna palautetta paketista ja sen toimivuudesta keskustelufoorumilla, jotta paketti voidaan arvioida ennen sen siirtämistä Main repo pakettivarastoon.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1055"/>
+        <location filename="../mainwindow.cpp" line="1090"/>
         <source>You are about to use Debian Backports, which contains packages taken from the next Debian release (called &apos;testing&apos;), adjusted and recompiled for usage on Debian stable. They cannot be tested as extensively as in the stable releases of Debian and MX Linux, and are provided on an as-is basis, with risk of incompatibilities with other components in Debian stable. Use with care!</source>
         <translation>Olet aikomuksessa käyttää Debian:in Takaporttiohjelmistolähdettä, joka sisältää paketteja, jotka ovat otetut tulevasta Debian:in julkaisusta (nimeltään &apos;testing&apos;), säädettynä ja uudelleenkoottuna käytettäväksi sitten Debian:in vakaassa julkaisussa myöhemmin. Niitä ei ole voitu testata yhtä läpikotaisesti kuten Debian:in ja antiX:in vakaiden julkaisujen suhteen ja ne on annettu tarjolle sellaisena kuin ne sillä hetkellä ovat, sisältäen yhteensopivuusriskejä Debian:in vakaaseenjulkaisuun verrattuna. Käytä siis varauksella! </translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1063"/>
+        <location filename="../mainwindow.cpp" line="1098"/>
         <source>MX Linux includes this repository of flatpaks for the users&apos; convenience only, and is not responsible for the functionality of the individual flatpaks themselves. For more, consult flatpaks in the Wiki.</source>
         <translation>MX Linux sisällyttää tämän flatpak repon vain käyttäjämukavuutta tavoitellen, eikä ole itse vastuussa yksittäisten flatpakien toimivuudesta. Lisätietoja, lue Wiki-sivujen flatpak-osio.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1071"/>
-        <location filename="../mainwindow.cpp" line="3241"/>
+        <location filename="../mainwindow.cpp" line="1106"/>
+        <location filename="../mainwindow.cpp" line="3400"/>
         <source>Warning</source>
         <translation>Varoitus</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1075"/>
+        <location filename="../mainwindow.cpp" line="1110"/>
         <source>Do not show this message again</source>
         <translation>Älä näytä tätä viestiä uudelleen</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1175"/>
+        <location filename="../mainwindow.cpp" line="1214"/>
         <source>Remove</source>
         <translation>Poista</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1191"/>
+        <location filename="../mainwindow.cpp" line="1230"/>
         <source>The following packages were selected. Click Show Details for list of changes.</source>
         <translation>Seuraavat paketit valittiin. Painike &quot;Näytä tiedot&quot; näyttää luettelon muutoksista.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1227"/>
-        <location filename="../mainwindow.cpp" line="1361"/>
-        <location filename="../mainwindow.cpp" line="1584"/>
+        <location filename="../mainwindow.cpp" line="1266"/>
+        <location filename="../mainwindow.cpp" line="1403"/>
+        <location filename="../mainwindow.cpp" line="1633"/>
         <source>Internet is not available, won&apos;t be able to download the list of packages</source>
         <translation>Internet ei ole käytettävissä, pakettilistauksen lataaminen ei onnistu.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1230"/>
+        <location filename="../mainwindow.cpp" line="1269"/>
         <source>Installing packages...</source>
         <translation>Asennetaan paketteja...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1285"/>
+        <location filename="../mainwindow.cpp" line="1327"/>
         <source>Post-processing...</source>
         <translation>Esikäsittely käynnissä...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1317"/>
+        <location filename="../mainwindow.cpp" line="1359"/>
         <source>Pre-processing for </source>
         <translation>Esikäsittely kohteelle</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1332"/>
+        <location filename="../mainwindow.cpp" line="1374"/>
         <source>Installing </source>
         <translation>Asennetaan</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1339"/>
+        <location filename="../mainwindow.cpp" line="1381"/>
         <source>Post-processing for </source>
         <translation>Jälkikäsittely kohteelle</translation>
     </message>
     <message>
-        <source>There was an error writing file: %1. Please check if you have enough free space on your drive</source>
-        <translation type="vanished">Virhe kirjoitettaessa tiedostoa: %1. Tarkista, onko levyllä tarpeeksi vapaata tilaa</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="1527"/>
+        <location filename="../mainwindow.cpp" line="1568"/>
         <source>There was an error downloading or writing the file: %1. Please check your internet connection and free space on your drive</source>
-        <translation type="unfinished"></translation>
+        <translation>Virhe ladattaessa tai kirjoitettaessa: %1. Tarkista Internet-yhteys ja aseman vapaa tila</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1592"/>
+        <location filename="../mainwindow.cpp" line="1641"/>
         <source>Downloading package info...</source>
         <translation>Paketin tietoja ladataan...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1882"/>
+        <location filename="../mainwindow.cpp" line="1938"/>
         <source>dpkg-query command returned an error. Please run &apos;dpkg-query -W&apos; in terminal and check the output.</source>
         <translation>dpkg-komento palautti virheen, suorita &quot;dpkg-query -W&quot; terminaalissa ja tarkista tulos.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="2026"/>
-        <source>dpkg command returned an error, please run &apos;dpkg --list&apos; in terminal and check the output.</source>
-        <translation>dpkg-komento palautti virheen, suorita &quot;dpkg --list&quot; terminaalissa ja tarkista tulos.</translation>
+        <location filename="../mainwindow.cpp" line="2078"/>
+        <source>dpkg-query command returned an error, please run &apos;dpkg-query -W&apos; in terminal and check the output.</source>
+        <translation>dpkg-kysely palautti virheen, suorita terminaalissa &quot;dpkg-query -W&quot; ja tarkista tulos.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="2104"/>
-        <location filename="../mainwindow.cpp" line="2191"/>
-        <location filename="../mainwindow.cpp" line="2214"/>
+        <location filename="../mainwindow.cpp" line="2199"/>
+        <location filename="../mainwindow.cpp" line="2301"/>
+        <location filename="../mainwindow.cpp" line="2324"/>
         <source>Package info</source>
         <translation>Paketin tiedot</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="2121"/>
-        <location filename="../mainwindow.cpp" line="3179"/>
+        <location filename="../mainwindow.cpp" line="2216"/>
+        <location filename="../mainwindow.cpp" line="3317"/>
         <source>More &amp;info...</source>
         <translation>&amp;Lisätietoja...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="2152"/>
+        <location filename="../mainwindow.cpp" line="2247"/>
         <source>Packages to be installed: </source>
         <translation>Paketit, jotka tullaan asentamaan:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="2340"/>
-        <location filename="../mainwindow.cpp" line="2352"/>
-        <location filename="../mainwindow.cpp" line="2372"/>
-        <location filename="../mainwindow.cpp" line="2456"/>
+        <location filename="../mainwindow.cpp" line="2466"/>
         <location filename="../mainwindow.cpp" line="2478"/>
-        <location filename="../mainwindow.cpp" line="3032"/>
-        <location filename="../mainwindow.cpp" line="3107"/>
-        <location filename="../mainwindow.cpp" line="3135"/>
-        <location filename="../mainwindow.cpp" line="3228"/>
+        <location filename="../mainwindow.cpp" line="2498"/>
+        <location filename="../mainwindow.cpp" line="2582"/>
+        <location filename="../mainwindow.cpp" line="2604"/>
+        <location filename="../mainwindow.cpp" line="3171"/>
+        <location filename="../mainwindow.cpp" line="3246"/>
+        <location filename="../mainwindow.cpp" line="3274"/>
+        <location filename="../mainwindow.cpp" line="3368"/>
         <source>Done</source>
         <translation>Valmis</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="2340"/>
-        <location filename="../mainwindow.cpp" line="2352"/>
-        <location filename="../mainwindow.cpp" line="2372"/>
-        <location filename="../mainwindow.cpp" line="2456"/>
+        <location filename="../mainwindow.cpp" line="2466"/>
         <location filename="../mainwindow.cpp" line="2478"/>
-        <location filename="../mainwindow.cpp" line="2494"/>
-        <location filename="../mainwindow.cpp" line="3032"/>
-        <location filename="../mainwindow.cpp" line="3107"/>
-        <location filename="../mainwindow.cpp" line="3135"/>
-        <location filename="../mainwindow.cpp" line="3228"/>
-        <location filename="../mainwindow.cpp" line="3250"/>
+        <location filename="../mainwindow.cpp" line="2498"/>
+        <location filename="../mainwindow.cpp" line="2582"/>
+        <location filename="../mainwindow.cpp" line="2604"/>
+        <location filename="../mainwindow.cpp" line="2620"/>
+        <location filename="../mainwindow.cpp" line="3171"/>
+        <location filename="../mainwindow.cpp" line="3246"/>
+        <location filename="../mainwindow.cpp" line="3274"/>
+        <location filename="../mainwindow.cpp" line="3368"/>
+        <location filename="../mainwindow.cpp" line="3409"/>
         <source>Processing finished successfully.</source>
         <translation>Käsittely päättyi onnistuneesti.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="2357"/>
-        <location filename="../mainwindow.cpp" line="2376"/>
-        <location filename="../mainwindow.cpp" line="3036"/>
-        <location filename="../mainwindow.cpp" line="3112"/>
-        <location filename="../mainwindow.cpp" line="3142"/>
+        <location filename="../mainwindow.cpp" line="2483"/>
+        <location filename="../mainwindow.cpp" line="2502"/>
+        <location filename="../mainwindow.cpp" line="3175"/>
+        <location filename="../mainwindow.cpp" line="3251"/>
+        <location filename="../mainwindow.cpp" line="3281"/>
         <source>Problem detected while installing, please inspect the console output.</source>
         <translation>Asennuksen aikana havaittiin ongelma, tutki konsolitulostetta.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="2386"/>
+        <location filename="../mainwindow.cpp" line="2512"/>
         <source>About %1</source>
         <translation>%1 lisätietoja</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="2387"/>
+        <location filename="../mainwindow.cpp" line="2513"/>
         <source>Version: </source>
         <translation>Versio: </translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="2389"/>
+        <location filename="../mainwindow.cpp" line="2515"/>
         <source>Package Installer for MX Linux</source>
         <translation>Pakettien asennus MX Linux:lle</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="2391"/>
+        <location filename="../mainwindow.cpp" line="2517"/>
         <source>Copyright (c) MX Linux</source>
         <translation>Copyright (c) MX Linux</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="2392"/>
+        <location filename="../mainwindow.cpp" line="2518"/>
         <source>%1 License</source>
         <translation>%1 lisenssi</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="2404"/>
+        <location filename="../mainwindow.cpp" line="2530"/>
         <source>%1 Help</source>
         <translation>%1 ohje</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="2481"/>
+        <location filename="../mainwindow.cpp" line="2607"/>
         <source>We encountered a problem uninstalling, please check output</source>
         <translation>Poistamisen aikana kohdattiin ongelma, tarkista tuloste.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="2494"/>
-        <location filename="../mainwindow.cpp" line="3250"/>
+        <location filename="../mainwindow.cpp" line="2620"/>
+        <location filename="../mainwindow.cpp" line="3409"/>
         <source>Success</source>
         <translation>Onnistui</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="2497"/>
-        <location filename="../mainwindow.cpp" line="3253"/>
+        <location filename="../mainwindow.cpp" line="2623"/>
+        <location filename="../mainwindow.cpp" line="3412"/>
         <source>We encountered a problem uninstalling the program</source>
         <translation>Ohjelman poistamisen aikana kohdattiin ongelma</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="2590"/>
-        <location filename="../mainwindow.cpp" line="2623"/>
+        <location filename="../mainwindow.cpp" line="2716"/>
+        <location filename="../mainwindow.cpp" line="2749"/>
         <source>Could not download the list of packages. Please check your APT sources.</source>
         <translation>Ei voitu ladata pakettiluetteloa. Tarkista APT-lähteet.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="2662"/>
-        <location filename="../mainwindow.cpp" line="2702"/>
+        <location filename="../mainwindow.cpp" line="2788"/>
+        <location filename="../mainwindow.cpp" line="2829"/>
         <source>Flatpak not installed</source>
         <translation>Flatpak ei ole asennettuna</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="2663"/>
+        <location filename="../mainwindow.cpp" line="2789"/>
         <source>Flatpak is not currently installed.
 OK to go ahead and install it?</source>
         <translation>Flatpak ei ole tällä hetkellä asennettuna.
 Onko OK jatkaa eteenpäin asentaen sen?</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="2702"/>
+        <location filename="../mainwindow.cpp" line="2829"/>
         <source>Flatpak was not installed</source>
         <translation>Flatpak ei ole asennettuna</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="2725"/>
+        <location filename="../mainwindow.cpp" line="2852"/>
         <source>Needs re-login</source>
         <translation>Kirjautuminen uudelleen tarvitaan</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="2726"/>
+        <location filename="../mainwindow.cpp" line="2853"/>
         <source>You might need to logout/login to see installed items in the menu</source>
         <translation>Sinun tulee kirjautua ulos ja takaisin sisään, jotta asennetut kohteet ilmestyvät valikkoon</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="2837"/>
-        <location filename="../mainwindow.cpp" line="2845"/>
-        <location filename="../mainwindow.cpp" line="2937"/>
+        <location filename="../mainwindow.cpp" line="2968"/>
+        <location filename="../mainwindow.cpp" line="2976"/>
+        <location filename="../mainwindow.cpp" line="3067"/>
         <source>Mark keep</source>
         <translation>Merkitse pidä</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="2935"/>
+        <location filename="../mainwindow.cpp" line="3065"/>
         <source>Upgrade</source>
         <translation>Päivitä</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="3064"/>
+        <location filename="../mainwindow.cpp" line="3203"/>
         <source>Quit?</source>
         <translation>Lopeta?</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="3065"/>
+        <location filename="../mainwindow.cpp" line="3204"/>
         <source>Process still running, quitting might leave the system in an unstable state.&lt;p&gt;&lt;b&gt;Are you sure you want to exit MX Package Installer?&lt;/b&gt;</source>
         <translation>Prosessi on edelleen käynnissä, lopettaminen saattaa jättää järjestelmän epävakaaseen tilaan. &lt;p&gt;&lt;b&gt; Haluatko poistua MX Package Installer-ohjelmasta?&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="3213"/>
+        <location filename="../mainwindow.cpp" line="3356"/>
         <source>Reinstall</source>
         <translation>Asenna uudelleen</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="3233"/>
+        <location filename="../mainwindow.cpp" line="3373"/>
         <source>Problem detected during last operation, please inspect the console output.</source>
         <translation>Ongelma havaittiin viimeisen toiminnon aikana, tarkista mitä konsolissa sanotaan.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="3242"/>
+        <location filename="../mainwindow.cpp" line="3401"/>
         <source>Potentially dangerous operation.
 Please make sure you check carefully the list of packages to be removed.</source>
         <translation>Mahdollisesti vaarallista.

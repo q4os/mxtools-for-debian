@@ -498,311 +498,307 @@
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../mainwindow.cpp" line="108"/>
-        <location filename="../mainwindow.cpp" line="158"/>
-        <location filename="../mainwindow.cpp" line="166"/>
-        <location filename="../mainwindow.cpp" line="184"/>
-        <location filename="../mainwindow.cpp" line="193"/>
-        <location filename="../mainwindow.cpp" line="201"/>
-        <location filename="../mainwindow.cpp" line="761"/>
-        <location filename="../mainwindow.cpp" line="787"/>
-        <location filename="../mainwindow.cpp" line="817"/>
-        <location filename="../mainwindow.cpp" line="974"/>
-        <location filename="../mainwindow.cpp" line="1041"/>
-        <location filename="../mainwindow.cpp" line="1048"/>
-        <location filename="../mainwindow.cpp" line="1053"/>
-        <location filename="../mainwindow.cpp" line="1058"/>
-        <location filename="../mainwindow.cpp" line="1063"/>
+        <location filename="../mainwindow.cpp" line="157"/>
+        <location filename="../mainwindow.cpp" line="165"/>
+        <location filename="../mainwindow.cpp" line="192"/>
+        <location filename="../mainwindow.cpp" line="781"/>
+        <location filename="../mainwindow.cpp" line="811"/>
+        <location filename="../mainwindow.cpp" line="968"/>
+        <location filename="../mainwindow.cpp" line="1035"/>
+        <location filename="../mainwindow.cpp" line="1042"/>
+        <location filename="../mainwindow.cpp" line="1047"/>
+        <location filename="../mainwindow.cpp" line="1052"/>
+        <location filename="../mainwindow.cpp" line="1057"/>
         <source>none</source>
         <translation>wala</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="143"/>
-        <location filename="../mainwindow.cpp" line="748"/>
-        <location filename="../mainwindow.cpp" line="981"/>
-        <location filename="../mainwindow.cpp" line="990"/>
+        <location filename="../mainwindow.cpp" line="142"/>
+        <location filename="../mainwindow.cpp" line="745"/>
+        <location filename="../mainwindow.cpp" line="975"/>
+        <location filename="../mainwindow.cpp" line="984"/>
         <source>browse...</source>
         <translation>maghanap...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="212"/>
+        <location filename="../mainwindow.cpp" line="208"/>
         <source>The user configuration will be repaired. Please close all other applications now. When finished, please logout or reboot. Are you sure you want to repair now?</source>
         <translation>Ang  configuration ng gumagamit ay makukumpuni. Isara ang lahat ng applications ngayon. Sa pagtatapos ay lumabas muna at muling magsimula. Nakakatiyak ka bang gusto mong kumpunihin ngayon?</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="234"/>
+        <location filename="../mainwindow.cpp" line="230"/>
         <source>User group membership was restored.</source>
         <translation>Ang pagkakasapi ng group ng Gumagamit ay naibalik sa ayos.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="239"/>
+        <location filename="../mainwindow.cpp" line="235"/>
         <source>Mozilla settings were reset.</source>
         <translation>Ang settings ng Mozilla ay naibalik muli</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="250"/>
-        <location filename="../mainwindow.cpp" line="265"/>
+        <location filename="../mainwindow.cpp" line="246"/>
+        <location filename="../mainwindow.cpp" line="261"/>
         <source>Autologin options</source>
         <translation>Mga pagpipilian sa kusang pagpasok </translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="251"/>
+        <location filename="../mainwindow.cpp" line="247"/>
         <source>Autologin has been disabled for the &apos;%1&apos; account.</source>
         <translation>Ang kusang pagpasok ay nakapatay  &apos;%1&apos; kuwente</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="266"/>
+        <location filename="../mainwindow.cpp" line="262"/>
         <source>Autologin has been enabled for the &apos;%1&apos; account.</source>
         <translation>Ang kusang pagpasok ay nakasindi para sa kuwenta  &apos;%1&apos;.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="278"/>
+        <location filename="../mainwindow.cpp" line="274"/>
         <source>You must specify a &apos;copy to&apos; destination. You cannot copy to the desktop you are logged in to.</source>
         <translation>Dapat mong pangalanan ang &apos;paglalagyang&apos; lugar. Hindi mo maaring kopyahin sa desktop kung saan ka nakapasok.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="284"/>
+        <location filename="../mainwindow.cpp" line="280"/>
         <source>Before copying, close all other applications. Be sure the copy to destination is large enough to contain the files you are copying. Copying between desktops may overwrite or delete your files or preferences on the destination desktop. Are you sure you want to proceed?</source>
         <translation>Isara muna ang lahat ngibang applications bago kopyahin. Tiyaking ang kopya</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="310"/>
+        <location filename="../mainwindow.cpp" line="306"/>
         <source>Synchronizing desktop...</source>
         <translation>Isinasabay ang desktop...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="312"/>
+        <location filename="../mainwindow.cpp" line="308"/>
         <source>Copying desktop...</source>
         <translation>Kinokopya ang desktop...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="349"/>
-        <location filename="../mainwindow.cpp" line="581"/>
+        <location filename="../mainwindow.cpp" line="345"/>
+        <location filename="../mainwindow.cpp" line="577"/>
         <source>The user name needs to be at least 2 characters long. Please select a longer name before proceeding.</source>
         <translation>Ang pangalan ng gumagamit ay dapat 2 characters ang haba. Pumili ng mas mahabang pangalan bago magpatuloy.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="354"/>
+        <location filename="../mainwindow.cpp" line="350"/>
         <source>The user name cannot contain special characters or spaces.
 Please choose another name before proceeding.</source>
         <translation>Ang pangalan ng gumagamit ay hindi maaring maglamang ng mga espesyal na character maging ng espasyo.
 Pumili ng ibang pangalan bago magpatuloy.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="360"/>
+        <location filename="../mainwindow.cpp" line="356"/>
         <source>Sorry, this name is in use. Please enter a different name.</source>
         <translation>Paumanhin, ang pangalan na ito ay nagamit na. Magpasok ng ibang pangalan.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="364"/>
-        <location filename="../mainwindow.cpp" line="419"/>
+        <location filename="../mainwindow.cpp" line="360"/>
+        <location filename="../mainwindow.cpp" line="415"/>
         <source>Password entries do not match. Please try again.</source>
         <translation>Ang mga ipinasok na Password ay di magkatugma. Subuking muli.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="369"/>
-        <location filename="../mainwindow.cpp" line="424"/>
+        <location filename="../mainwindow.cpp" line="365"/>
+        <location filename="../mainwindow.cpp" line="420"/>
         <source>Password needs to be at least 2 characters long. Please enter a longer password before proceeding.</source>
         <translation>Ang password ay dapat mahigit sa 2 characters ang biling Magpasok ng mas mahabang password bago magpatuloy.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="408"/>
+        <location filename="../mainwindow.cpp" line="404"/>
         <source>The user was added ok.</source>
         <translation>Ang idinagdag na gumagamit maayos.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="411"/>
+        <location filename="../mainwindow.cpp" line="407"/>
         <source>Failed to add the user.</source>
         <translation>Bigo sa pagdaragdag ng gumagamit.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="439"/>
+        <location filename="../mainwindow.cpp" line="435"/>
         <source>Password successfully changed.</source>
         <translation>Ang Password ay matagumpay na nabago.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="442"/>
+        <location filename="../mainwindow.cpp" line="438"/>
         <source>Failed to change password.</source>
         <translation>Bigo sa pagpapalit ng password.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="448"/>
+        <location filename="../mainwindow.cpp" line="444"/>
         <source>This action cannot be undone. Are you sure you want to delete user %1?</source>
         <translation>Ang aksyon na ito ay di maaring bawiin. Gusto mo bang tanggalin ang gumagamit %1?</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="467"/>
+        <location filename="../mainwindow.cpp" line="463"/>
         <source>The user has been deleted.</source>
         <translation>Natanggal na ang gumagamit.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="469"/>
+        <location filename="../mainwindow.cpp" line="465"/>
         <source>Failed to delete the user.</source>
         <translation>Bigo sa pagtanggal ng gumagamit.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="483"/>
+        <location filename="../mainwindow.cpp" line="479"/>
         <source>The group name needs to be at least 2 characters long. Please select a longer name before proceeding.</source>
         <translation>Ang pangalan ng group ay dapat mahigit sa 2 character. Pumili ng mas mahabang pangalan bago magpatuloy.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="488"/>
+        <location filename="../mainwindow.cpp" line="484"/>
         <source>The group name needs to be lower case and it 
 cannot contain special characters or spaces.
 Please choose another name before proceeding.</source>
         <translation>Ang pangalan ng group ay dapat maliit na titik at hindi dapat maglaman ng espesyal na character. Pumili ng ibang pangalan bago magpatuloy.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="496"/>
+        <location filename="../mainwindow.cpp" line="492"/>
         <source>Sorry, that group name already exists. Please enter a different name.</source>
         <translation>Paumanhin. ang pangalan ng group ay umiiral na. Pumili ng ibang pangalan.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="504"/>
+        <location filename="../mainwindow.cpp" line="500"/>
         <source>The system group was added ok.</source>
         <translation>Ang grupo para sa sistema ay naidagdag na magatumpay.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="506"/>
+        <location filename="../mainwindow.cpp" line="502"/>
         <source>Failed to add the system group.</source>
         <translation>Bigo sa pagdaragdag ng group para sa sistema.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="521"/>
+        <location filename="../mainwindow.cpp" line="517"/>
         <source>This action cannot be undone. Are you sure you want to delete group %1?</source>
         <translation>Ang aksyon na ito ay di maaring bawiin. Nakakatiyak ka bang gusto mong tanggalin ang group %1? </translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="522"/>
+        <location filename="../mainwindow.cpp" line="518"/>
         <source>This action cannot be undone. Are you sure you want to delete the following groups: %1?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="531"/>
+        <location filename="../mainwindow.cpp" line="527"/>
         <source>Failed to delete the group.</source>
         <translation>Bigo ang pagtatanggal ng group.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="531"/>
+        <location filename="../mainwindow.cpp" line="527"/>
         <source>Group: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="535"/>
+        <location filename="../mainwindow.cpp" line="531"/>
         <source>The group has been deleted.</source>
         <translation>Ang group ay natanggal na.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="535"/>
+        <location filename="../mainwindow.cpp" line="531"/>
         <source>The groups have been deleted.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="552"/>
+        <location filename="../mainwindow.cpp" line="548"/>
         <source>The changes have been applied.</source>
         <translation>Ang mga pagbabago ay natanggap.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="554"/>
+        <location filename="../mainwindow.cpp" line="550"/>
         <source>Failed to apply group changes</source>
         <translation>Bigo sa paglalapat ng pagbabago sa group</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="572"/>
+        <location filename="../mainwindow.cpp" line="568"/>
         <source>The selected user name is currently in use.</source>
         <translation>Ang pangalan ng user na napili ay kasalukuyang ginagamit.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="573"/>
+        <location filename="../mainwindow.cpp" line="569"/>
         <source>To rename this user, please log out and log back in using another user account.</source>
         <translation>Para baguhin ang pangalan ng gumagamit na ito, mangyaring lumabas at pumasok muli gamit ang ibang gumagamit na kuwenta.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="586"/>
+        <location filename="../mainwindow.cpp" line="582"/>
         <source>The user name needs to be lower case and it
 cannot contain special characters or spaces.
 Please choose another name before proceeding.</source>
         <translation>Ang pangalan ng gumagamit ay dapat mga maliit na titik at di maaring maglaman ng mga special character o ng espasyo. Pumili ng ibang pangalan bago magpatuloy.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="593"/>
+        <location filename="../mainwindow.cpp" line="589"/>
         <source>Sorry, this name already exists on your system. Please enter a different name.</source>
         <translation>Paumanhin, ang pangalan na ito ay umiiral na sa iyong sistema. Pumili ng ibang pangalan.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="602"/>
+        <location filename="../mainwindow.cpp" line="598"/>
         <source>Failed to rename the user. Please make sure that the user is not logged in, you might need to restart</source>
         <translation>Bigo sa pagpapalit ng pangalan ng gumagamit Tiyaking ang  gumagamit ay hindi nakapasok. Maaring mangangailangan kang muling magsimula.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="626"/>
+        <location filename="../mainwindow.cpp" line="622"/>
         <source>The user was renamed.</source>
         <translation>Hindi napalitan ang pangalan ng gumagamit.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="638"/>
-        <location filename="../mainwindow.cpp" line="666"/>
+        <location filename="../mainwindow.cpp" line="634"/>
+        <location filename="../mainwindow.cpp" line="662"/>
         <source>Synchronizing desktop...ok</source>
         <translation>Maayos ang pagsasabay ng desktop...ok</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="640"/>
-        <location filename="../mainwindow.cpp" line="668"/>
+        <location filename="../mainwindow.cpp" line="636"/>
+        <location filename="../mainwindow.cpp" line="664"/>
         <source>Copying desktop...ok</source>
         <translation>Kumokopya ng desktop...ok</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="672"/>
+        <location filename="../mainwindow.cpp" line="668"/>
         <source>Synchronizing desktop...failed</source>
         <translation>Pagsasabay ng desktop...ay bigo</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="674"/>
+        <location filename="../mainwindow.cpp" line="670"/>
         <source>Copying desktop...failed</source>
         <translation>Ang pagkokopya ng desktop...ay bigo</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="693"/>
+        <location filename="../mainwindow.cpp" line="689"/>
         <source>Confirmation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="694"/>
+        <location filename="../mainwindow.cpp" line="690"/>
         <source>Process not done. Are you sure you want to quit the application?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="946"/>
+        <location filename="../mainwindow.cpp" line="940"/>
         <source>About %1</source>
         <translation>Patungkol sa %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="947"/>
+        <location filename="../mainwindow.cpp" line="941"/>
         <source>Version: </source>
         <translation>Bersyon: </translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="948"/>
+        <location filename="../mainwindow.cpp" line="942"/>
         <source>Simple user configuration for MX Linux</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="950"/>
+        <location filename="../mainwindow.cpp" line="944"/>
         <source>Copyright (c) MX Linux</source>
         <translation>Karapatan (c) MX Linux</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="951"/>
+        <location filename="../mainwindow.cpp" line="945"/>
         <source>%1 License</source>
         <translation>%1 Pahintulot</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="965"/>
+        <location filename="../mainwindow.cpp" line="959"/>
         <source>%1 Help</source>
         <translation>%1 Tulong</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="982"/>
+        <location filename="../mainwindow.cpp" line="976"/>
         <source>Select folder to copy to</source>
         <translation>Pumili ng folder na kokopyahin</translation>
     </message>

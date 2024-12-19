@@ -18,7 +18,7 @@ public:
     explicit chooseDialog(QWidget *parent = nullptr);
     ~chooseDialog();
 
-    QString selection();
+    QString selection() const;
 
 private slots:
     void textSearch_textChanged();

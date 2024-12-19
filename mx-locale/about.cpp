@@ -7,6 +7,7 @@
 #include <QPushButton>
 #include <QTextEdit>
 #include <QVBoxLayout>
+#include <unistd.h>
 
 // Display doc as nomal user when run as root
 void displayDoc(const QString &url, const QString &title, bool runned_as_root)
@@ -21,8 +22,9 @@ void displayDoc(const QString &url, const QString &title, bool runned_as_root)
         return;
     }
 
-    if (!runned_as_root) {
-        system("xdg-open " + url.toUtf8());
+    if (getuid() != 0) {
+        QString cmd = "xdg-open " + url;
+        system(cmd.toUtf8());
     } else {
         system("su $(logname) -c \"env XDG_RUNTIME_DIR=/run/user/$(id -u $(logname)) xdg-open " + url.toUtf8() + "\"&");
     }

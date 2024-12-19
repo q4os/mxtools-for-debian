@@ -202,23 +202,23 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../about.cpp" line="34"/>
+        <location filename="../about.cpp" line="37"/>
         <source>License</source>
         <translation>Licencija</translation>
     </message>
     <message>
-        <location filename="../about.cpp" line="35"/>
-        <location filename="../about.cpp" line="45"/>
+        <location filename="../about.cpp" line="38"/>
+        <location filename="../about.cpp" line="48"/>
         <source>Changelog</source>
         <translation>Keitinių žurnalas</translation>
     </message>
     <message>
-        <location filename="../about.cpp" line="36"/>
+        <location filename="../about.cpp" line="39"/>
         <source>Cancel</source>
         <translation>Atsisakyti</translation>
     </message>
     <message>
-        <location filename="../about.cpp" line="53"/>
+        <location filename="../about.cpp" line="56"/>
         <source>&amp;Close</source>
         <translation>&amp;Užverti</translation>
     </message>

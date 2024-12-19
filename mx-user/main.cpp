@@ -55,7 +55,7 @@ int main(int argc, char *argv[])
         QApplication::installTranslator(&appTran);
     }
 
-    // root guard
+    // Root guard
     QFile loginUidFile {"/proc/self/loginuid"};
     if (loginUidFile.open(QIODevice::ReadOnly)) {
         QString loginUid = QString(loginUidFile.readAll()).trimmed();

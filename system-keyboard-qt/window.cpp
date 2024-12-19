@@ -118,10 +118,12 @@ Window::Window(QWidget *parent) :
             cmd = QString("antix-viewer %1 '%2' &").arg(url).arg(tr("System Keyboard"));
         }
         else
-        {
-            cmd = QString(rootrunoption + "\"DISPLAY=$DISPLAY xdg-open %1\" &").arg(url);
-
-}
+        {   if (rootrunoption.isEmpty()){
+                cmd = QString("xdg-open %1").arg(url);
+            } else {
+                cmd = QString(rootrunoption + "\"DISPLAY=$DISPLAY xdg-open %1\" &").arg(url);
+            }
+        }
         system(cmd.toUtf8());
     });
 

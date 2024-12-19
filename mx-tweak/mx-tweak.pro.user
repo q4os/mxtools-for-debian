@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 9.0.2, 2024-10-13T16:42:07. -->
+<!-- Written by QtCreator 9.0.2, 2024-12-12T06:46:51. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
-  <value type="QByteArray">{a50938c4-7aff-4b5f-81ad-b0afb9614aae}</value>
+  <value type="QByteArray">{205bdf84-16e0-4da1-9058-12914d7b69c5}</value>
  </data>
  <data>
   <variable>ProjectExplorer.Project.ActiveTarget</variable>
@@ -89,7 +89,7 @@
    <value type="QString" key="DeviceType">Desktop</value>
    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName">Desktop</value>
    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">Desktop</value>
-   <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">{9f2b85bf-3226-4e98-b1cd-be6fc855c64e}</value>
+   <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">{5ca47ded-4580-4051-ac18-0f84282a2538}</value>
    <value type="qlonglong" key="ProjectExplorer.Target.ActiveBuildConfiguration">0</value>
    <value type="qlonglong" key="ProjectExplorer.Target.ActiveDeployConfiguration">0</value>
    <value type="qlonglong" key="ProjectExplorer.Target.ActiveRunConfiguration">0</value>
@@ -234,9 +234,8 @@
     <valuelist type="QVariantList" key="CustomOutputParsers"/>
     <value type="int" key="PE.EnvironmentAspect.Base">2</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">mx-tweak2</value>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:/media/dataext/development/mx-tweak/mx-tweak.pro</value>
-    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">/media/dataext/development/mx-tweak/mx-tweak.pro</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:/home/dolphin/development/mx-tweak/mx-tweak.pro</value>
+    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">/home/dolphin/development/mx-tweak/mx-tweak.pro</value>
     <value type="bool" key="RunConfiguration.UseCppDebugger">false</value>
     <value type="bool" key="RunConfiguration.UseCppDebuggerAuto">true</value>
     <value type="bool" key="RunConfiguration.UseLibrarySearchPath">true</value>

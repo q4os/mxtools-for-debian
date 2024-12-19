@@ -76,21 +76,21 @@
         <translation>Súgó</translation>
     </message>
     <message>
-        <location filename="../window.cpp" line="187"/>
-        <location filename="../window.cpp" line="212"/>
-        <location filename="../window.cpp" line="238"/>
+        <location filename="../window.cpp" line="189"/>
+        <location filename="../window.cpp" line="214"/>
+        <location filename="../window.cpp" line="240"/>
         <source>Error</source>
         <translation>Hiba</translation>
     </message>
     <message>
-        <location filename="../window.cpp" line="187"/>
-        <location filename="../window.cpp" line="212"/>
-        <location filename="../window.cpp" line="238"/>
+        <location filename="../window.cpp" line="189"/>
+        <location filename="../window.cpp" line="214"/>
+        <location filename="../window.cpp" line="240"/>
         <source>Failed to open file: </source>
         <translation>Fájl megnyitása nem sikerült:</translation>
     </message>
     <message>
-        <location filename="../window.cpp" line="238"/>
+        <location filename="../window.cpp" line="240"/>
         <source>Most settings will not be loaded</source>
         <translation>A beállítások nagy része nem lesz betöltve</translation>
     </message>

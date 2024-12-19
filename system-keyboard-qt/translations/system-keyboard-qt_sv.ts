@@ -76,21 +76,21 @@
         <translation>Hjälp</translation>
     </message>
     <message>
-        <location filename="../window.cpp" line="187"/>
-        <location filename="../window.cpp" line="212"/>
-        <location filename="../window.cpp" line="238"/>
+        <location filename="../window.cpp" line="189"/>
+        <location filename="../window.cpp" line="214"/>
+        <location filename="../window.cpp" line="240"/>
         <source>Error</source>
         <translation>Fel</translation>
     </message>
     <message>
-        <location filename="../window.cpp" line="187"/>
-        <location filename="../window.cpp" line="212"/>
-        <location filename="../window.cpp" line="238"/>
+        <location filename="../window.cpp" line="189"/>
+        <location filename="../window.cpp" line="214"/>
+        <location filename="../window.cpp" line="240"/>
         <source>Failed to open file: </source>
         <translation>Kunde inte öppna fil:</translation>
     </message>
     <message>
-        <location filename="../window.cpp" line="238"/>
+        <location filename="../window.cpp" line="240"/>
         <source>Most settings will not be loaded</source>
         <translation>De flesta inställningar kommer inte att användas</translation>
     </message>

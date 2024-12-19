@@ -16,16 +16,21 @@ void AptCache::loadCacheFiles()
 {
     // Exclude Debian backports and MX testrepo and temp repos
     const QString arch = getArch();
-    const QRegularExpression packagesFilter("(.*binary-" + arch
-                                            + "_Packages)|"
-                                              "(.*binary-.*_Packages(?!.*debian_.*-backports_.*_Packages)"
-                                              "(?!.*mx_testrepo.*_test_.*_Packages)"
-                                              "(?!.*mx_repo.*_temp_.*_Packages))");
+
+    // Define include and exclude regex patterns
+    const QRegularExpression includeRegex(QString(R"(^.*binary-%1_Packages$)").arg(arch));
+    const QRegularExpression secondaryRegex(R"(^.*binary-.*_Packages$)");
+    const QRegularExpression excludeRegex(
+        R"((debian_.*-backports_.*_Packages)|(mx_testrepo.*_test_.*_Packages)|(mx_repo.*_temp_.*_Packages))");
+
     QDirIterator it(dir.path(), QDir::Files);
     while (it.hasNext()) {
         const QString fileName = it.next();
-        if (packagesFilter.match(fileName).hasMatch() && !readFile(fileName)) {
-            qWarning() << "Error reading cache file:" << fileName;
+        if ((includeRegex.match(fileName).hasMatch() || secondaryRegex.match(fileName).hasMatch())
+            && !excludeRegex.match(fileName).hasMatch()) {
+            if (!readFile(fileName)) {
+                qWarning() << "Error reading cache file:" << fileName;
+            }
         }
     }
 }
@@ -46,31 +51,46 @@ void AptCache::parseContent()
 {
     QTextStream stream(&files_content);
     QString line;
-
     QString package;
     QString version;
     QString description;
     QString architecture;
 
     const QString arch = getArch();
-    const QRegularExpression re_arch(".*(" + arch + "|all).*");
+    static const QRegularExpression re_arch(QStringLiteral(".*(%1|all).*").arg(arch));
     bool match_arch = false;
+
+    static const QLatin1String packageStr("Package:");
+    static const QLatin1String archStr("Architecture:");
+    static const QLatin1String versionStr("Version:");
+    static const QLatin1String descStr("Description:");
+    static constexpr int packageSize = packageStr.size();
+    static constexpr int archSize = archStr.size();
+    static constexpr int versionSize = versionStr.size();
+    static constexpr int descSize = descStr.size();
 
     // Code assumes Description: is the last matched line
     while (stream.readLineInto(&line)) {
-        if (line.startsWith(QLatin1String("Package:"))) {
-            package = line.mid(9);
-        } else if (line.startsWith(QLatin1String("Architecture:"))) {
-            architecture = line.mid(14).trimmed();
+        if (line.startsWith(packageStr)) {
+            package = line.mid(packageSize).trimmed();
+            // Reset state for new package
+            version.clear();
+            description.clear();
+            match_arch = false;
+        } else if (line.startsWith(archStr)) {
+            architecture = line.mid(archSize).trimmed();
             match_arch = re_arch.match(architecture).hasMatch();
-        } else if (line.startsWith(QLatin1String("Version:"))) {
-            version = line.mid(9);
-        } else if (line.startsWith(QLatin1String("Description:"))) {
-            description = line.mid(13).trimmed();
-            if (match_arch) {
-                auto it = candidates.constFind(package);
-                if (it == candidates.constEnd() || VersionNumber(it->version) < VersionNumber(version)) {
-                    candidates[package] = {version, description};
+        } else if (line.startsWith(versionStr)) {
+            version = line.mid(versionSize).trimmed();
+        } else if (line.startsWith(descStr)) {
+            description = line.mid(descSize).trimmed();
+            if (match_arch && !package.isEmpty() && !version.isEmpty()) {
+                auto it = candidates.find(package);
+                if (it == candidates.end()) {
+                    candidates.insert(package, {version, description});
+                } else if (VersionNumber(it->version) < VersionNumber(version)) {
+                    it->version = version;
+                    it->description = description;
                 }
             }
         }

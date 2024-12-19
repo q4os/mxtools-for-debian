@@ -1,3 +1,45 @@
+mx-packageinstaller (24.12) mx; urgency=medium
+
+  * Display snapshots from screenshot.debian.net when clicking info icon in
+    popular apps tab
+
+ -- Adrian <adrian@mxlinux.org>  Sat, 14 Dec 2024 12:10:31 -0500
+
+mx-packageinstaller (24.11.06) mx; urgency=medium
+
+  * Fix deselecting checkboxes before installing the selected programs
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 14 Nov 2024 19:01:50 -0500
+
+mx-packageinstaller (24.11.05) mx; urgency=medium
+
+  * Fix crash when switching tabs when there's text in the search field
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 14 Nov 2024 08:38:06 -0500
+
+mx-packageinstaller (24.11.04) mx; urgency=medium
+
+  * Update flatpaks only if manually refreshed (list might show blank if flatpaks
+    were never used on the system, but it's worth the time saving)
+  * Fix displaying tab when rejecting flatpak installation
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 13 Nov 2024 16:12:21 -0500
+
+mx-packageinstaller (24.11.01) mx; urgency=medium
+
+  * Fix: displaying number of packages when switching tabs
+  * Fix: dispay info for packages from Enabled repos when browsing Test or
+    Backport tabs
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 11 Nov 2024 02:02:31 -0500
+
+mx-packageinstaller (24.11) mx; urgency=medium
+
+  * Check install recommended depends according to global settings
+  * Update translations
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 08 Nov 2024 14:32:35 -0500
+
 mx-packageinstaller (24.10) mx; urgency=medium
 
   * Fix: use https for downloading from mxrepo server

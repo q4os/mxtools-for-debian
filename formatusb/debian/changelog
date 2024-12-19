@@ -1,3 +1,10 @@
+formatusb (24.11.01) mx; urgency=medium
+
+  * fix help display when not running root
+  * update translations 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 23 Nov 2024 09:42:27 -0500
+
 formatusb (24.09.01) mx; urgency=medium
 
   * use LBA (parttype c) for vfat formated partitions

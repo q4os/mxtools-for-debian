@@ -21,17 +21,17 @@
     <message>
         <location filename="../mainwindow.ui" line="54"/>
         <source>Defaults</source>
-        <translation type="unfinished"></translation>
+        <translation>Standaard</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="59"/>
         <source>msdos</source>
-        <translation type="unfinished"></translation>
+        <translation>msdos</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="64"/>
         <source>gpt</source>
-        <translation type="unfinished"></translation>
+        <translation>gpt</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="72"/>
@@ -61,7 +61,7 @@
     <message>
         <location filename="../mainwindow.ui" line="166"/>
         <source>Partition Table Type</source>
-        <translation type="unfinished"></translation>
+        <translation>Partitietabel Type</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="225"/>
@@ -196,29 +196,29 @@
     <message>
         <location filename="../mainwindow.cpp" line="315"/>
         <source>Invalid Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Ongeldige Naam</translation>
     </message>
 </context>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../about.cpp" line="34"/>
+        <location filename="../about.cpp" line="37"/>
         <source>License</source>
         <translation>Licentie</translation>
     </message>
     <message>
-        <location filename="../about.cpp" line="35"/>
-        <location filename="../about.cpp" line="45"/>
+        <location filename="../about.cpp" line="38"/>
+        <location filename="../about.cpp" line="48"/>
         <source>Changelog</source>
         <translation>Changelog</translation>
     </message>
     <message>
-        <location filename="../about.cpp" line="36"/>
+        <location filename="../about.cpp" line="39"/>
         <source>Cancel</source>
         <translation>Ongedaan maken</translation>
     </message>
     <message>
-        <location filename="../about.cpp" line="53"/>
+        <location filename="../about.cpp" line="56"/>
         <source>&amp;Close</source>
         <translation>&amp;Sluiten</translation>
     </message>

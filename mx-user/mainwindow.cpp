@@ -105,7 +105,6 @@ void MainWindow::refresh()
 void MainWindow::refreshOptions()
 {
     userComboBox->clear();
-    userComboBox->addItem(tr("none"));
     userComboBox->addItems(users);
     checkGroups->setChecked(false);
     checkMozilla->setChecked(false);
@@ -181,9 +180,9 @@ void MainWindow::refreshGroups()
 void MainWindow::refreshMembership()
 {
     userComboMembership->clear();
-    userComboMembership->addItem(tr("none"));
     listGroups->clear();
     userComboMembership->addItems(users);
+    buildListGroups();
 }
 
 void MainWindow::refreshRename()
@@ -198,9 +197,6 @@ void MainWindow::refreshRename()
 void MainWindow::applyOptions()
 {
     const QString user = userComboBox->currentText();
-    if (user == (tr("none"))) { // No user selected
-        return;
-    }
     QString home = user;
     if (user != "root") {
         home = QString("/home/%1").arg(user);
@@ -716,6 +712,7 @@ void MainWindow::setConnections()
     connect(entireRadioButton, &QRadioButton::clicked, this, &MainWindow::entireRadioButton_clicked);
     connect(fromUserComboBox, &QComboBox::textActivated, this, &MainWindow::fromUserComboBox_activated);
     connect(groupNameEdit, &QLineEdit::textEdited, this, &MainWindow::groupNameEdit_textEdited);
+    connect(listGroups, &QListWidget::itemChanged, this, [this] { buttonApply->setEnabled(true); });
     connect(mozillaRadioButton, &QRadioButton::clicked, this, &MainWindow::mozillaRadioButton_clicked);
     connect(radioAutologinNo, &QRadioButton::clicked, this, &MainWindow::radioAutologinNo_clicked);
     connect(radioAutologinYes, &QRadioButton::clicked, this, &MainWindow::radioAutologinYes_clicked);
@@ -758,9 +755,6 @@ void MainWindow::userComboBox_activated(const QString & /*unused*/)
     radioAutologinYes->setChecked(false);
     radioAutologinYes->setAutoExclusive(true);
     QString user = userComboBox->currentText();
-    if (user == (tr("none"))) {
-        return;
-    }
     if (QProcess::execute("pgrep", {"lightdm"}) == 0) {
         const QString cmd = QString("grep -qw ^autologin-user=%1 /etc/lightdm/lightdm.conf").arg(user);
         if (shell->run(cmd, true)) {

@@ -1,3 +1,52 @@
+mx-packageinstaller-pkglist (24.11.08mx23) mx; urgency=medium
+
+  * liquorix 6.11.10
+  * archive 1-to-1-assistance
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 28 Nov 2024 22:55:23 -0500
+
+mx-packageinstaller-pkglist (24.11.07mx23) mx; urgency=medium
+
+  * debian 6.11.9
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 22 Nov 2024 21:17:55 -0500
+
+mx-packageinstaller-pkglist (24.11.06mx23) mx; urgency=medium
+
+  * liquorix 6.11.9 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Tue, 19 Nov 2024 19:52:42 -0500
+
+mx-packageinstaller-pkglist (24.11.05mx23) mx; urgency=medium
+
+  * 6.11.8 liquorix kernel
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 15 Nov 2024 18:47:04 -0500
+
+mx-packageinstaller-pkglist (24.11.04mx23) mx; urgency=medium
+
+  * debian 6.11.7 kernel
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Tue, 12 Nov 2024 22:32:51 -0500
+
+mx-packageinstaller-pkglist (24.11.03mx23) mx; urgency=medium
+
+  * liquorix kernel 6.11.7
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 10 Nov 2024 09:54:17 -0500
+
+mx-packageinstaller-pkglist (24.11.02mx23) mx; urgency=medium
+
+  * update liquorix 6.11.6
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Tue, 05 Nov 2024 18:06:47 -0500
+
+mx-packageinstaller-pkglist (24.11.01mx23) mx; urgency=medium
+
+  * update debian 6.11 kernel (btusb bugfix)
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 01 Nov 2024 20:02:47 -0400
+
 mx-packageinstaller-pkglist (24.10.07mx23) mx; urgency=medium
 
   * update liquorix 6.11

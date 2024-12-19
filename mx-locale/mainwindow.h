@@ -88,12 +88,17 @@ private:
 
     [[nodiscard]] QString getCurrentLang() const;
     [[nodiscard]] QString getCurrentSessionLang() const;
-    [[nodiscard]] QString getLocaleDescription(const QString &locale) const;
+    [[nodiscard]] QString replaceUnicodeSequences(const QString &title) const;
+    [[nodiscard]] QStringList getLocaleFiles(const QStringList &directories) const;
+    [[nodiscard]] QStringList readEnabledLocales(const QString &filePath);
     [[nodiscard]] bool anyDifferentSubvars() const;
-    void disableGUI(bool disable);
+    void configureCategories(const QCommandLineParser &args);
+    void configureTabs(const QCommandLineParser &args);
     void disableAllButCurrent();
+    void disableGUI(bool disable);
     void displayLocalesGen();
     void localeGen();
+    void processLocaleFiles(const QStringList &localeFiles);
     void readLocaleFile(QFile &file, const QStringList &enabledLocale);
     void removeManuals();
     void resetLocaleGen();
@@ -101,4 +106,5 @@ private:
     void setConnections();
     void setSubvariables();
     void setup();
+    void updateLocaleListUI();
 };

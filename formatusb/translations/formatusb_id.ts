@@ -200,23 +200,23 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../about.cpp" line="34"/>
+        <location filename="../about.cpp" line="37"/>
         <source>License</source>
         <translation>Lisensi</translation>
     </message>
     <message>
-        <location filename="../about.cpp" line="35"/>
-        <location filename="../about.cpp" line="45"/>
+        <location filename="../about.cpp" line="38"/>
+        <location filename="../about.cpp" line="48"/>
         <source>Changelog</source>
         <translation>Changelog</translation>
     </message>
     <message>
-        <location filename="../about.cpp" line="36"/>
+        <location filename="../about.cpp" line="39"/>
         <source>Cancel</source>
         <translation>Batal</translation>
     </message>
     <message>
-        <location filename="../about.cpp" line="53"/>
+        <location filename="../about.cpp" line="56"/>
         <source>&amp;Close</source>
         <translation>&amp;Tutup</translation>
     </message>

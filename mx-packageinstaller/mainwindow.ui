@@ -35,7 +35,7 @@
       </sizepolicy>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>4</number>
      </property>
      <property name="documentMode">
       <bool>false</bool>
@@ -982,7 +982,7 @@
              </spacer>
             </item>
             <item row="1" column="7" colspan="2">
-             <widget class="QCheckBox" name="checkBoxInstallRecommendsMXBP">
+             <widget class="QCheckBox" name="checkBoxInstallRecommendsBP">
               <property name="text">
                <string>Also Install &quot;Recommended&quot; Packages</string>
               </property>
@@ -1190,120 +1190,7 @@
        <string>Flatpaks</string>
       </attribute>
       <layout class="QGridLayout" name="gridLayout_8">
-       <item row="0" column="0">
-        <widget class="QComboBox" name="comboUser">
-         <property name="currentText">
-          <string>For all users</string>
-         </property>
-         <item>
-          <property name="text">
-           <string>For all users</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>For current user</string>
-          </property>
-         </item>
-        </widget>
-       </item>
-       <item row="0" column="1" alignment="Qt::AlignmentFlag::AlignRight">
-        <widget class="QLabel" name="labelRepo">
-         <property name="text">
-          <string>Remote (repo):</string>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="2">
-        <widget class="QComboBox" name="comboRemote">
-         <property name="minimumSize">
-          <size>
-           <width>150</width>
-           <height>0</height>
-          </size>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="3">
-        <widget class="QComboBox" name="comboFilterFlatpak">
-         <property name="enabled">
-          <bool>true</bool>
-         </property>
-         <property name="minimumSize">
-          <size>
-           <width>150</width>
-           <height>0</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>200</width>
-           <height>16777215</height>
-          </size>
-         </property>
-         <property name="toolTip">
-          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Filter packages according to their status.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-         </property>
-         <property name="currentText">
-          <string>All apps</string>
-         </property>
-         <item>
-          <property name="text">
-           <string>All apps</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>All runtimes</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>All available</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Installed apps</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Installed runtimes</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>All installed</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Not installed</string>
-          </property>
-         </item>
-        </widget>
-       </item>
-       <item row="1" column="0" colspan="3">
-        <widget class="QPushButton" name="iconInstalledPackages_4">
-         <property name="styleSheet">
-          <string notr="true">text-align: left</string>
-         </property>
-         <property name="text">
-          <string>= Installed packages</string>
-         </property>
-         <property name="icon">
-          <iconset theme="package-installed-updated"/>
-         </property>
-         <property name="autoDefault">
-          <bool>false</bool>
-         </property>
-         <property name="flat">
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="3">
+       <item row="1" column="4">
         <widget class="QLineEdit" name="searchBoxFlatpak">
          <property name="minimumSize">
           <size>
@@ -1341,7 +1228,60 @@
          </property>
         </spacer>
        </item>
-       <item row="4" column="0" colspan="4">
+       <item row="3" column="0" colspan="5">
+        <widget class="QTreeWidget" name="treeFlatpak">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="sortingEnabled">
+          <bool>false</bool>
+         </property>
+         <column>
+          <property name="text">
+           <string notr="true"/>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Short Name</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Full Package Name</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Version</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Size</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string notr="true">Status</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string notr="true">Duplication</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string notr="true">Full string</string>
+          </property>
+         </column>
+        </widget>
+       </item>
+       <item row="4" column="0" colspan="5">
         <widget class="QFrame" name="frameFP">
          <property name="frameShape">
           <enum>QFrame::Shape::StyledPanel</enum>
@@ -1482,57 +1422,127 @@
          </layout>
         </widget>
        </item>
-       <item row="3" column="0" colspan="4">
-        <widget class="QTreeWidget" name="treeFlatpak">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
+       <item row="1" column="0" colspan="3">
+        <widget class="QPushButton" name="iconInstalledPackages_4">
+         <property name="styleSheet">
+          <string notr="true">text-align: left</string>
          </property>
-         <property name="sortingEnabled">
+         <property name="text">
+          <string>= Installed packages</string>
+         </property>
+         <property name="icon">
+          <iconset theme="package-installed-updated"/>
+         </property>
+         <property name="autoDefault">
           <bool>false</bool>
          </property>
-         <column>
+         <property name="flat">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="0">
+        <widget class="QComboBox" name="comboUser">
+         <property name="currentText">
+          <string>For all users</string>
+         </property>
+         <item>
           <property name="text">
-           <string notr="true"/>
+           <string>For all users</string>
           </property>
-         </column>
-         <column>
+         </item>
+         <item>
           <property name="text">
-           <string>Short Name</string>
+           <string>For current user</string>
           </property>
-         </column>
-         <column>
+         </item>
+        </widget>
+       </item>
+       <item row="0" column="4">
+        <widget class="QComboBox" name="comboFilterFlatpak">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>150</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>200</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="toolTip">
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Filter packages according to their status.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
+         <property name="currentText">
+          <string>All apps</string>
+         </property>
+         <item>
           <property name="text">
-           <string>Full Package Name</string>
+           <string>All apps</string>
           </property>
-         </column>
-         <column>
+         </item>
+         <item>
           <property name="text">
-           <string>Version</string>
+           <string>All runtimes</string>
           </property>
-         </column>
-         <column>
+         </item>
+         <item>
           <property name="text">
-           <string>Size</string>
+           <string>All available</string>
           </property>
-         </column>
-         <column>
+         </item>
+         <item>
           <property name="text">
-           <string notr="true">Status</string>
+           <string>Installed apps</string>
           </property>
-         </column>
-         <column>
+         </item>
+         <item>
           <property name="text">
-           <string notr="true">Duplication</string>
+           <string>Installed runtimes</string>
           </property>
-         </column>
-         <column>
+         </item>
+         <item>
           <property name="text">
-           <string notr="true">Full string</string>
+           <string>All installed</string>
           </property>
-         </column>
+         </item>
+         <item>
+          <property name="text">
+           <string>Not installed</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item row="1" column="3">
+        <widget class="QPushButton" name="pushForceUpdateFP">
+         <property name="text">
+          <string>Refresh list</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="3">
+        <widget class="QComboBox" name="comboRemote">
+         <property name="minimumSize">
+          <size>
+           <width>150</width>
+           <height>0</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="2">
+        <widget class="QLabel" name="labelRepo">
+         <property name="text">
+          <string>Remote (repo):</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+         </property>
         </widget>
        </item>
       </layout>

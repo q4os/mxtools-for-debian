@@ -268,7 +268,17 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="447"/>
+        <location filename="../mainwindow.cpp" line="445"/>
+        <source>Remove Manuals</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="445"/>
+        <source>No manuals to remove.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="452"/>
         <source>Removing packages, please wait</source>
         <translation type="unfinished"></translation>
     </message>

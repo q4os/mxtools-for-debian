@@ -22,7 +22,17 @@
 # **********************************************************************/
 
 QT       += core gui xml network widgets
-CONFIG   += c++17
+
+DEFINES  += QT_DEPRECATED_WARNINGS
+CONFIG   += debug_and_release warn_on strict_c++ c++17
+CONFIG(release, debug|release) {
+    DEFINES += NDEBUG
+    QMAKE_CXXFLAGS += -flto=auto
+    QMAKE_LFLAGS += -flto=auto
+}
+
+QMAKE_CXXFLAGS += -Wpedantic -pedantic -Werror
+
 
 TARGET = mx-packageinstaller
 TEMPLATE = app

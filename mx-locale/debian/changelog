@@ -1,3 +1,9 @@
+mx-locale (24.11.01) mx; urgency=medium
+
+  * adjust about.cpp to launch help when not running root
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 24 Nov 2024 09:36:23 -0500
+
 mx-locale (24.5.02) mx; urgency=medium
 
   * Add button to "Remove MX manuals for languages other than system default"
