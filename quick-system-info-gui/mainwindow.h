@@ -62,11 +62,22 @@ private slots:
     void on_listInfo_itemSelectionChanged() noexcept;
     void on_listInfo_itemChanged() noexcept;
 
+    void on_tabWidget_currentChanged(int index);
+
+    void on_comboBoxJournaldListBoots_activated(int index);
+
+    void on_comboBoxJournaldPriority_activated(int index);
+
+    void on_comboBoxJournaldSystemUser_activated(int index);
+
+    void on_toolButtonReloadSearch_clicked();
+
 private:
     Ui::MainWindow *ui;
     QStringList defaultMatches;
     QAction *actionSave = nullptr;
     QString searchText;
+    bool journald_setup_done = false;
     QTextDocument::FindFlags searchFlags;
     void lockGUI(bool lock) noexcept;
     void forumcopy() noexcept;
@@ -80,6 +91,9 @@ private:
     void findNext() noexcept;
     bool eventFilter(QObject *watched, QEvent *event) noexcept;
     void autoFitSplitter() noexcept;
+    void systemd_check();
+    void journald_setup();
+    void run_journalctl_report();
 };
 
 #endif // MAINWINDOW_H

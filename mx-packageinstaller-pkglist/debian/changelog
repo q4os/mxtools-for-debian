@@ -1,3 +1,43 @@
+mx-packageinstaller-pkglist (25.01.04mx23) mx; urgency=medium
+
+  * debian 6.12.8
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 04 Jan 2025 09:45:48 -0500
+
+mx-packageinstaller-pkglist (25.01.03mx23) mx; urgency=medium
+
+  * liquorix 6.12.8
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 03 Jan 2025 19:17:45 -0500
+
+mx-packageinstaller-pkglist (25.01.02mx23) mx; urgency=medium
+
+  * update nordvpn keyring download location
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 01 Jan 2025 15:15:25 -0500
+
+mx-packageinstaller-pkglist (25.01.01mx23) mx; urgency=medium
+
+  * add 6.12.7 liquorix kernel
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 01 Jan 2025 11:27:42 -0500
+
+mx-packageinstaller-pkglist (24.12.02mx23) mx; urgency=medium
+
+  * debian 6.12 kernel 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 25 Dec 2024 20:01:05 -0500
+
+mx-packageinstaller-pkglist (24.12.01mx23) mx; urgency=medium
+  
+  [GFNIAE]
+  * antiX 6.1 kernel
+  [dolphin oracle[
+  * debian (ahs) 6.12 kernel 
+  * liquorix 6.12 kernel
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 21 Dec 2024 14:37:45 -0500
+
 mx-packageinstaller-pkglist (24.11.08mx23) mx; urgency=medium
 
   * liquorix 6.11.10

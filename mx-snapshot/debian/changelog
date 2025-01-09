@@ -1,3 +1,16 @@
+mx-snapshot (24.12.01) mx; urgency=medium
+
+  * revert changes to copy-initrd helper programs
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 30 Dec 2024 19:01:15 -0500
+
+mx-snapshot (24.12) mx; urgency=medium
+
+  * Add /var/log/journal/* to exclusion list
+  * Update translations
+
+ -- Adrian <adrian@mxlinux.org>  Sun, 22 Dec 2024 01:46:35 -0500
+
 mx-snapshot (24.9.03) mx; urgency=medium
 
   * Fix string quoting for excludeFlatpak

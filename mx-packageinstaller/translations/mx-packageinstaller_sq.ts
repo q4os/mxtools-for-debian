@@ -855,7 +855,7 @@ Close the program, or wait until it is done processing and try again.</source>
 Mbylleni programin, ose prisni deri sa ky të mbarojë punën e vet dhe riprovoni.</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="78"/>
+        <location filename="../main.cpp" line="80"/>
         <source>MX Package Installer is a tool used for managing packages on MX Linux
     - installs popular programs from different sources
     - installs programs from the MX Test repo
@@ -868,23 +868,23 @@ Mbylleni programin, ose prisni deri sa ky të mbarojë punën e vet dhe riprovon
     - instalon flatpak-ë</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="86"/>
+        <location filename="../main.cpp" line="88"/>
         <source>Skip online check if it falsely reports lack of internet access.</source>
         <translation>Anashkaloje kontrollin në internet, nëse raporton në mënyrë të rreme mungesë hyrjeje në internet.</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="96"/>
-        <location filename="../main.cpp" line="104"/>
+        <location filename="../main.cpp" line="98"/>
+        <location filename="../main.cpp" line="106"/>
         <source>Error</source>
         <translation>Gabim</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="97"/>
+        <location filename="../main.cpp" line="99"/>
         <source>You seem to be logged in as root, please log out and log in as normal user to use this program.</source>
         <translation>Duket të keni hyrë si rrënjë, ju lutemi, që të përdorni këtë program, dilni dhe bëni hyrjen si përdorues normal.</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="105"/>
+        <location filename="../main.cpp" line="107"/>
         <source>You must run this program with admin access.</source>
         <translation>Këtë program duhet ta xhironi me leje përgjegjësi.</translation>
     </message>

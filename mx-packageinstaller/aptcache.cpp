@@ -18,15 +18,18 @@ void AptCache::loadCacheFiles()
     const QString arch = getArch();
 
     // Define include and exclude regex patterns
-    const QRegularExpression includeRegex(QString(R"(^.*binary-%1_Packages$)").arg(arch));
-    const QRegularExpression secondaryRegex(R"(^.*binary-.*_Packages$)");
+    const QRegularExpression allBinaryArchRegex(QString(R"(^.*binary-%1_Packages$)").arg(arch));
+    const QRegularExpression allBinaryAnyRegex(R"(^.*binary-[a-z0-9]+_Packages$)");
+    const QRegularExpression allRegex(R"(^.*_Packages$)");
+
     const QRegularExpression excludeRegex(
         R"((debian_.*-backports_.*_Packages)|(mx_testrepo.*_test_.*_Packages)|(mx_repo.*_temp_.*_Packages))");
 
     QDirIterator it(dir.path(), QDir::Files);
     while (it.hasNext()) {
         const QString fileName = it.next();
-        if ((includeRegex.match(fileName).hasMatch() || secondaryRegex.match(fileName).hasMatch())
+        if ((allBinaryArchRegex.match(fileName).hasMatch() ||
+            (!allBinaryAnyRegex.match(fileName).hasMatch() && allRegex.match(fileName).hasMatch()))
             && !excludeRegex.match(fileName).hasMatch()) {
             if (!readFile(fileName)) {
                 qWarning() << "Error reading cache file:" << fileName;

@@ -71,7 +71,7 @@ if dpkg-query -f '${db:Status-Abbrev}' -W nordvpn-sysvinit-compat  2>/dev/null 1
 apt-get -y remove --purge nordvpn-sysvinit-compat
 fi
 rm /tmp/nordvpn-release.deb 2>/dev/null
-wget https://repo.nordvpn.com/deb/nordvpn/debian/pool/main/nordvpn-release_1.0.0_all.deb -O /tmp/nordvpn-release.deb
+wget https://repo.nordvpn.com/deb/nordvpn/debian/pool/main/n/nordvpn-release/nordvpn-release_1.0.0_all.deb -O /tmp/nordvpn-release.deb
 dpkg -i /tmp/nordvpn-release.deb
 rm /tmp/nordvpn-release.deb
 apt-get update

@@ -852,7 +852,7 @@ Close the program, or wait until it is done processing and try again.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="78"/>
+        <location filename="../main.cpp" line="80"/>
         <source>MX Package Installer is a tool used for managing packages on MX Linux
     - installs popular programs from different sources
     - installs programs from the MX Test repo
@@ -861,23 +861,23 @@ Close the program, or wait until it is done processing and try again.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="86"/>
+        <location filename="../main.cpp" line="88"/>
         <source>Skip online check if it falsely reports lack of internet access.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="96"/>
-        <location filename="../main.cpp" line="104"/>
+        <location filename="../main.cpp" line="98"/>
+        <location filename="../main.cpp" line="106"/>
         <source>Error</source>
         <translation>에러</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="97"/>
+        <location filename="../main.cpp" line="99"/>
         <source>You seem to be logged in as root, please log out and log in as normal user to use this program.</source>
         <translation>루트 권한으로 로그인한 상태로 보입니다. 이 프로그램을 사용하시려면 로그아웃 후 일반 사용자로 로그인해 주세요.</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="105"/>
+        <location filename="../main.cpp" line="107"/>
         <source>You must run this program with admin access.</source>
         <translation>어드민 권한으로 이 프로그램을 실행해야 합니다.</translation>
     </message>

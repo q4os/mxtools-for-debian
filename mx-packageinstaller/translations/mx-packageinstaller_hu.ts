@@ -855,7 +855,7 @@ Close the program, or wait until it is done processing and try again.</source>
 Zárja be a programot vagy várja meg amíg befejezi a műveletet, majd próbálja meg újra.</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="78"/>
+        <location filename="../main.cpp" line="80"/>
         <source>MX Package Installer is a tool used for managing packages on MX Linux
     - installs popular programs from different sources
     - installs programs from the MX Test repo
@@ -868,23 +868,23 @@ Zárja be a programot vagy várja meg amíg befejezi a műveletet, majd próbál
    - flatpak csomagokat telepít</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="86"/>
+        <location filename="../main.cpp" line="88"/>
         <source>Skip online check if it falsely reports lack of internet access.</source>
         <translation>Az online ellenőrzés kihagyása, ha hibásan az internetelérés hiányát jelzi.</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="96"/>
-        <location filename="../main.cpp" line="104"/>
+        <location filename="../main.cpp" line="98"/>
+        <location filename="../main.cpp" line="106"/>
         <source>Error</source>
         <translation>Hiba</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="97"/>
+        <location filename="../main.cpp" line="99"/>
         <source>You seem to be logged in as root, please log out and log in as normal user to use this program.</source>
         <translation>Úgy tűnik, hogy root felhasználóként van bejelentkezve. Jelentkezzen ki és jelentkezzen be normál felhasználóként a program használatához.</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="105"/>
+        <location filename="../main.cpp" line="107"/>
         <source>You must run this program with admin access.</source>
         <translation>Ezt a programot adminisztrátorként kell futtatnia.</translation>
     </message>

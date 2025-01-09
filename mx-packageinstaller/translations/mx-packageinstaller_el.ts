@@ -855,7 +855,7 @@ Close the program, or wait until it is done processing and try again.</source>
 Κλείστε το πρόγραμμα ή περιμένετε να ολοκληρωθεί η διαδικασία και δοκιμάστε ξανά.</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="78"/>
+        <location filename="../main.cpp" line="80"/>
         <source>MX Package Installer is a tool used for managing packages on MX Linux
     - installs popular programs from different sources
     - installs programs from the MX Test repo
@@ -868,23 +868,23 @@ Close the program, or wait until it is done processing and try again.</source>
 - εγκαθιστά flatpaks</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="86"/>
+        <location filename="../main.cpp" line="88"/>
         <source>Skip online check if it falsely reports lack of internet access.</source>
         <translation>Παράλειψη διαδικτυακού ελέγχου εάν αναφέρεται ψευδώς έλλειψη πρόσβασης στο διαδίκτυο.</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="96"/>
-        <location filename="../main.cpp" line="104"/>
+        <location filename="../main.cpp" line="98"/>
+        <location filename="../main.cpp" line="106"/>
         <source>Error</source>
         <translation>Σφάλμα</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="97"/>
+        <location filename="../main.cpp" line="99"/>
         <source>You seem to be logged in as root, please log out and log in as normal user to use this program.</source>
         <translation>Φαίνεται ότι έχετε συνδεθεί ως διαχειριστής, αποσυνδεθείτε και συνδεθείτε ως απλός χρήστης για να χρησιμοποιήσετε αυτό το πρόγραμμα.</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="105"/>
+        <location filename="../main.cpp" line="107"/>
         <source>You must run this program with admin access.</source>
         <translation>Πρέπει να εκτελέσετε αυτό το πρόγραμμα με πρόσβαση διαχειριστή.</translation>
     </message>

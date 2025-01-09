@@ -6,4 +6,5 @@ mx-packageinstaller.desktop	usr/share/applications
 scripts/helper			usr/lib/mx-packageinstaller
 scripts/mxpi-lib                usr/lib/mx-packageinstaller
 scripts/*.policy		usr/share/polkit-1/actions
+bin/*	usr/bin
 translations/*.qm		usr/share/mx-packageinstaller/locale

@@ -47,6 +47,8 @@ if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-remov
     sed -i 's/MX-23.2_/MX-23.3_/' /etc/mx-version
     #handle mx23.3 to mx23.4
     sed -i 's/MX-23.3_/MX-23.4_/' /etc/mx-version
+    #handle mx23.34to mx23.5
+    #sed -i 's/MX-23.4_/MX-23.5_/' /etc/mx-version
     fi
 
     ##add vmd to /etc/initramfs-tools/modules if its not already there
@@ -78,7 +80,6 @@ if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-remov
         mkdir -p /usr/lib64/sane
         fi
     fi
-
 	#remove old keys
 
 	keys="1F5C2E815EC294453B15233CD3F985C51A77B3E9

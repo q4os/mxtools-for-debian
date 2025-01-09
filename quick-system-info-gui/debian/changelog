@@ -1,3 +1,54 @@
+quick-system-info-gui (24.12.09) mx; urgency=medium
+
+  * update translations
+  * remove bogus "lastlog"
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 20 Dec 2024 19:12:25 -0500
+
+quick-system-info-gui (24.12.08) mx; urgency=medium
+
+  * rebuild
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 19 Dec 2024 17:46:31 -0500
+
+quick-system-info-gui (24.12.07) mx; urgency=medium
+
+  * check /run/log/journal/$machine-id for system/user check
+
+ -- Dolphin Oracle <dolphin@mx>  Thu, 19 Dec 2024 14:53:17 -0500
+
+quick-system-info-gui (24.12.06) mx; urgency=medium
+
+  * modify system/user check
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 19 Dec 2024 08:20:46 -0500
+
+quick-system-info-gui (24.12.05) mx; urgency=medium
+
+  * run journalctl such that journal directory is not needed
+  * if initial population of boot choices fails, run again as admin
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 18 Dec 2024 16:39:48 -0500
+
+quick-system-info-gui (24.12.04) mx; urgency=medium
+
+  * if journal storage is missing, default to --system mode
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Tue, 17 Dec 2024 19:14:59 -0500
+
+quick-system-info-gui (24.12.02) mx; urgency=medium
+
+  * modify boot listings
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 16 Dec 2024 21:57:49 -0500
+
+quick-system-info-gui (24.12.01) mx; urgency=medium
+
+  * test build
+  * add journald viewer when users are running systemd as pid 1
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 16 Dec 2024 17:52:29 -0500
+
 quick-system-info-gui (24.04.01) mx; urgency=medium
 
   * remove redundant file check so that logs in elevated directories can be read

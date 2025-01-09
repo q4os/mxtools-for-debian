@@ -8,82 +8,129 @@
         <translation type="vanished">MX Velkommen</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="74"/>
+        <location filename="../mainwindow.ui" line="33"/>
         <source>&amp;Copy for forum</source>
         <translation>&amp;Kopier til forum</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="43"/>
+        <location filename="../mainwindow.ui" line="47"/>
         <source>Save the displayed system information to a text file.</source>
         <translation>Lagre den viste systeminformasjonen til en tekstfil.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="46"/>
-        <location filename="../mainwindow.cpp" line="91"/>
+        <location filename="../mainwindow.ui" line="50"/>
+        <location filename="../mainwindow.cpp" line="92"/>
         <source>Save text...</source>
         <translation>Lagre tekst …</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="71"/>
+        <location filename="../mainwindow.ui" line="30"/>
         <source>Copy the displayed system information to the clipboard, encased in [CODE][/CODE] tags ready to use in a forum post.</source>
         <translation>Kopier den viste informasjonen om systemet til utklippstavla omsluttet av [CODE][/CODE] -tagger klar til bruk i en forumpost.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="57"/>
+        <location filename="../mainwindow.ui" line="199"/>
         <source>Save the system information selected from the list to an archive file.</source>
         <translation>Lagre systeminformasjon valgt i lista til en arkivfil.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="60"/>
-        <location filename="../mainwindow.cpp" line="126"/>
+        <location filename="../mainwindow.ui" line="202"/>
+        <location filename="../mainwindow.cpp" line="137"/>
         <source>&amp;Save...</source>
         <translation>&amp;Lagre …</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="129"/>
+        <location filename="../mainwindow.ui" line="102"/>
         <source>Quit application</source>
         <translation>Avslutt programmet</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="132"/>
+        <location filename="../mainwindow.ui" line="105"/>
         <source>Close</source>
         <translation>Lukk</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="139"/>
+        <location filename="../mainwindow.ui" line="112"/>
         <source>Alt+N</source>
         <translation>Alt + N</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="181"/>
+        <location filename="../mainwindow.ui" line="154"/>
         <source>About this application</source>
         <translation>Om programmet</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="184"/>
+        <location filename="../mainwindow.ui" line="157"/>
         <source>About...</source>
         <translation>Om …</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="191"/>
+        <location filename="../mainwindow.ui" line="164"/>
         <source>Alt+B</source>
         <translation>Alt + B</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="115"/>
+        <location filename="../mainwindow.ui" line="254"/>
+        <source>Journald</source>
+        <extracomment>systemd journalctl tab</extracomment>
+        <translation>Journald</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="262"/>
+        <source>Log Type</source>
+        <extracomment>type of log, either user level or system</extracomment>
+        <translation>Loggtype</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="270"/>
+        <source>System</source>
+        <extracomment>system level log</extracomment>
+        <translation>System</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="275"/>
+        <source>User</source>
+        <extracomment>user level log</extracomment>
+        <translation>Bruker</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="283"/>
+        <source>Priority Level</source>
+        <extracomment>level of status message to view</extracomment>
+        <translation>Prioritetsnivå</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="334"/>
+        <source>Choose Boot Log</source>
+        <extracomment>choose a boot to view the log</extracomment>
+        <translation>Velg oppstartslogg</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="341"/>
+        <source>Service Search</source>
+        <extracomment>seek and ye shall find</extracomment>
+        <translation>Tjenestesøk</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="351"/>
+        <source>...</source>
+        <translation>…</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="88"/>
         <source>Help</source>
         <translation>Hjelp</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="187"/>
+        <location filename="../mainwindow.cpp" line="199"/>
         <source>Version: </source>
         <translation>Versjon:</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="14"/>
-        <location filename="../mainwindow.cpp" line="187"/>
-        <location filename="../mainwindow.cpp" line="325"/>
-        <location filename="../mainwindow.cpp" line="354"/>
+        <location filename="../mainwindow.cpp" line="199"/>
+        <location filename="../mainwindow.cpp" line="344"/>
+        <location filename="../mainwindow.cpp" line="374"/>
         <source>Quick System Info</source>
         <translation>Rask systeminfo</translation>
     </message>
@@ -93,38 +140,38 @@
         <translation>Laster …</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="191"/>
+        <location filename="../mainwindow.cpp" line="203"/>
         <source>Copyright (c) MX Linux</source>
         <translation>Opphavsrett (c) MX Linux</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="186"/>
+        <location filename="../mainwindow.cpp" line="198"/>
         <source>About Quick-System-Info-gui</source>
         <translation>Om Quick-System-Info-gui</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="95"/>
+        <location filename="../mainwindow.cpp" line="96"/>
         <source>&amp;Find...</source>
         <translation>&amp;Finn …</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="99"/>
-        <location filename="../mainwindow.cpp" line="481"/>
+        <location filename="../mainwindow.cpp" line="100"/>
+        <location filename="../mainwindow.cpp" line="510"/>
         <source>Find &amp;Next</source>
         <translation>Finn &amp;neste …</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="115"/>
+        <location filename="../mainwindow.cpp" line="126"/>
         <source>Select &amp;All</source>
         <translation>Velg &amp;alle</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="121"/>
+        <location filename="../mainwindow.cpp" line="132"/>
         <source>Revert Selection</source>
         <translation>Tilbakestill utvalg</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="188"/>
+        <location filename="../mainwindow.cpp" line="200"/>
         <source>Program for displaying a quick system info report</source>
         <translation>Program som viser en rask rapport med informasjon om systemet.</translation>
     </message>
@@ -133,71 +180,84 @@
         <translation type="vanished">Lisens</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="193"/>
+        <location filename="../mainwindow.cpp" line="205"/>
         <source>%1 License</source>
-        <translation type="unfinished"></translation>
+        <translation>Lisens for %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="280"/>
+        <location filename="../mainwindow.cpp" line="299"/>
         <source>Open folder</source>
         <translation>Åpne mappen</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="282"/>
+        <location filename="../mainwindow.cpp" line="301"/>
         <source>OK</source>
         <translation>OK</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="440"/>
+        <location filename="../mainwindow.cpp" line="468"/>
         <source>&amp;Save (×%1)...</source>
         <translation>&amp;Lagre (×%1) …</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="474"/>
+        <location filename="../mainwindow.cpp" line="503"/>
         <source>Find</source>
         <translation>Finn</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="477"/>
+        <location filename="../mainwindow.cpp" line="506"/>
         <source>&amp;Find what:</source>
         <translation>&amp;Finn dette:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="487"/>
+        <location filename="../mainwindow.cpp" line="516"/>
         <source>Match c&amp;ase</source>
         <translation>Treff store/sm&amp;å bokstaver</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="488"/>
+        <location filename="../mainwindow.cpp" line="517"/>
         <source>Match &amp;whole word only</source>
         <translation>&amp;Treff kun hele ord</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="491"/>
+        <location filename="../mainwindow.cpp" line="520"/>
         <source>Direction</source>
         <translation>Retning</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="493"/>
+        <location filename="../mainwindow.cpp" line="522"/>
         <source>&amp;Up</source>
         <translation>&amp;Opp</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="494"/>
+        <location filename="../mainwindow.cpp" line="523"/>
         <source>&amp;Down</source>
         <translation>&amp;Ned</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="536"/>
+        <location filename="../mainwindow.cpp" line="568"/>
+        <location filename="../mainwindow.cpp" line="573"/>
         <source>Cannot find &quot;%1&quot;</source>
         <translation>Fant ikke «%1»</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="719"/>
+        <source>No journal entries found at this admin and priority level</source>
+        <comment>no journal entries found at the options specified</comment>
+        <translation>Fant ingen journaloppføringer på dette admin- og prioritetsnivået</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="721"/>
+        <source>Error running journalctl command</source>
+        <comment>error report for journalctl command</comment>
+        <translation>Feil ved kjøring av kommandoen journalctl</translation>
     </message>
     <message>
         <source>Changelog</source>
         <translation type="vanished">Endringslogg</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="482"/>
+        <location filename="../mainwindow.cpp" line="511"/>
         <source>Cancel</source>
         <translation>Avbryt</translation>
     </message>
@@ -206,41 +266,37 @@
         <translation type="vanished">&amp;Lukk</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="223"/>
+        <location filename="../mainwindow.cpp" line="242"/>
         <source>Save System Information</source>
         <translation>Lagre systeminformasjon</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="279"/>
+        <location filename="../mainwindow.cpp" line="298"/>
         <source>System information saved.</source>
         <translation>Systeminformasjon lagret.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="287"/>
+        <location filename="../mainwindow.cpp" line="306"/>
         <source>Could not save system information.</source>
         <translation>Klarte ikke lagre systeminformasjon.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="332"/>
+        <location filename="../mainwindow.cpp" line="351"/>
         <source>history</source>
         <translation>historikk</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="354"/>
+        <location filename="../mainwindow.cpp" line="374"/>
         <source>%1 Help</source>
         <translation>Hjelpetekst for %1</translation>
     </message>
     <message>
-        <source>Quick System Info (gui)</source>
-        <translation type="vanished">Rask systeminfo (GUI)</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="81"/>
+        <location filename="../mainwindow.cpp" line="82"/>
         <source>Copy for forum</source>
         <translation>Kopier til forum</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="86"/>
+        <location filename="../mainwindow.cpp" line="87"/>
         <source>Plain text copy</source>
         <translation>Kopier som ren tekst</translation>
     </message>

@@ -14,7 +14,8 @@
 <body>
 <h1>HELP: Quick System Info (GUI)</h1>
 
-<img src="1.png" alt="Main display" />
+<img src="1.png" alt="QSI" /> <img src="2.png" alt="Journald" />
+
 
 <p>Displays a Quick System Info (QSI) report based on <code>inxi</code> and a few custom parameters for MX Linux.</p>
 <p>The Quick System Info GUI application can display any log or report shown in the list (left pane) by clicking on an item.</p>
@@ -22,6 +23,15 @@
  in a format suitable for directly pasting into a forum post, complete with code tags.<br/>If a portion of text is seleted, only that portion is copied and encapsulated in code tags.</p>
 <p>Use the "Save" button to save multiple selected reports into an archive file.</p>
 <p>Use the "Save text" button to save the text from the report display to a text file.</p>
+
+<p>If the user is running systemd as init (pid 1), then a Journald tab will be available.  There are selection tools for filtering the journal report displayed.</p>
+
+<ul>
+		<li>Log Type allows the user to choose user level logs or system level logs.  System level require root permissions.</li>
+		<li>Priority sets the verbosity or seriousness of messages displayed. Higher numbers show more messages.</li>
+		<li>Choose boot log allows choosing either the current boot log (default) or past boot logs.</li>
+		<li>Service search allows users to filter down to a particular service.  Only one service at a time may be filtered.  After changing search terms is a reload button that regenerates the report.</li>
+	</ul>
 
 <h2>Menus and Shortcut Keys</h2>
 <p>Right-clicking on a pane will trigger a pop-up menu, which can also be used to perform similar actions to the buttons.</p>

@@ -53,6 +53,8 @@ int main(int argc, char *argv[])
     }
     qputenv("TERM", "dumb");
 
+    QApplication::setApplicationName("mx-packageinstaller");
+
     QApplication::setWindowIcon(QIcon::fromTheme(QApplication::applicationName()));
     QApplication::setOrganizationName("MX-Linux");
     QApplication::setApplicationVersion(VERSION);

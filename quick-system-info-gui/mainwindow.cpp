@@ -62,6 +62,8 @@ MainWindow::MainWindow(const QCommandLineParser &arg_parser, QWidget *parent) no
     resize(QGuiApplication::primaryScreen()->availableGeometry().size() * 0.6);
     ui->listInfo->setContextMenuPolicy(Qt::ActionsContextMenu);
     defaultMatches = arg_parser.positionalArguments();
+    //don't show journald tab if not running systemd
+    systemd_check();
     // This fires the lengthy setup routine after the window is displayed.
     QTimer::singleShot(0, this, &MainWindow::setup);
 }
@@ -74,8 +76,7 @@ void MainWindow::setup() noexcept
     // Allow user-friendly match strings.
     for(QString &match : defaultMatches) {
         if (!match.contains('.')) match.append(".txt");
-    }
-
+    }  
     // Log text box shortcuts and context menu
     QAction *forumcopyaction = new QAction(QIcon::fromTheme(QStringLiteral("edit-copy-symbolic")),
         tr("Copy for forum"), this);
@@ -109,6 +110,16 @@ void MainWindow::setup() noexcept
     ui->textSysInfo->addAction(sep);
     ui->textSysInfo->addAction(find);
     ui->textSysInfo->addAction(findnext);
+
+    //add actions to journald if set up
+    if (journald_setup_done) {
+        ui->plainTextEditJournald->addAction(forumcopyaction);
+        ui->plainTextEditJournald->addAction(plaincopyaction);
+        ui->plainTextEditJournald->addAction(saveasfile);
+        ui->plainTextEditJournald->addAction(sep);
+        ui->plainTextEditJournald->addAction(find);
+        ui->plainTextEditJournald->addAction(findnext);
+    }
 
     // Info list shortcuts and context menu.
     QAction *selall = new QAction(QIcon::fromTheme(QStringLiteral("edit-select-all")),
@@ -149,6 +160,7 @@ void MainWindow::lockGUI(bool lock) noexcept
         ui->pushSave->setDisabled(lock);
         ui->pushSaveText->setDisabled(lock);
         ui->ButtonCopy->setDisabled(lock);
+        ui->tabWidget->setDisabled(lock);
         if (lock) QApplication::setOverrideCursor(Qt::WaitCursor);
         else {
             ui->listInfo->setFocus();
@@ -209,12 +221,19 @@ void MainWindow::on_pushSaveText_clicked() noexcept
     lockGUI(true);
     QString errmsg;
     QFile file(dialog.selectedFiles().at(0));
-    if (file.open(QFile::Truncate | QFile::WriteOnly)) {
-        const QByteArray &text = ui->textSysInfo->toPlainText().toUtf8();
-        if (file.write(text) != text.size()) errmsg = file.errorString();
-        file.close();
+    if (ui->tabWidget->currentIndex() == 0){
+        if (file.open(QFile::Truncate | QFile::WriteOnly)) {
+            const QByteArray &text = ui->textSysInfo->toPlainText().toUtf8();
+            if (file.write(text) != text.size()) errmsg = file.errorString();
+            file.close();
+        }
+    } else {
+        if (file.open(QFile::Truncate | QFile::WriteOnly)) {
+            const QByteArray &text = ui->plainTextEditJournald->toPlainText().toUtf8();
+            if (file.write(text) != text.size()) errmsg = file.errorString();
+            file.close();
+        }
     }
-
     lockGUI(false);
     showSavedMessage(file.fileName(), errmsg);
 }
@@ -326,7 +345,7 @@ void MainWindow::buildInfoList() noexcept
     QFont ifont = item->font();
     ifont.setBold(true);
     item->setFont(ifont);
-    item->setData(Qt::UserRole, "inxi.txt");
+    item->setData(Qt::UserRole, "quick-system-info.txt");
     ui->listInfo->insertItem(0, item);
     // Special apt history info
     item = new QListWidgetItem("apt " + tr("history"));
@@ -339,6 +358,7 @@ void MainWindow::buildInfoList() noexcept
     on_listInfo_itemChanged(); // Set up multi buttons.
     // Resize the splitter according to the new contents
     QApplication::processEvents(); // Allow the scroll bar to materialise
+    ui->tabWidget->setCurrentIndex(0);
     autoFitSplitter();
     // Stop the left pane from resizing with the window.
     ui->splitter->setStretchFactor(0, 0);
@@ -357,11 +377,19 @@ void MainWindow::on_ButtonHelp_clicked() noexcept
 void MainWindow::forumcopy() noexcept
 {
     QClipboard *clipboard = QApplication::clipboard();
-    QString text = ui->textSysInfo->textCursor().selectedText();
-    text.replace(QChar(0x2029), "\n");
-    if (text.isEmpty()) {
-        text = ui->textSysInfo->toPlainText();
+    QString text;
+    if (ui->tabWidget->currentIndex() == 0){
+        text = ui->textSysInfo->textCursor().selectedText();
+        if (text.isEmpty()) {
+            text = ui->textSysInfo->toPlainText();
+        }
+    } else {
+        text = ui->plainTextEditJournald->textCursor().selectedText();
+        if (text.isEmpty()) {
+            text = ui->plainTextEditJournald->toPlainText();
+        }
     }
+    text.replace(QChar(0x2029), "\n");
     clipboard->setText("[CODE]" + text + "[/CODE]");
 }
 
@@ -471,6 +499,7 @@ void MainWindow::listSelectDefault() noexcept
 void MainWindow::showFindDialog() noexcept
 {
     QDialog dialog(ui->textSysInfo);
+    if (ui->tabWidget->currentIndex() == 1 ) QDialog dialog(ui->plainTextEditJournald);
     dialog.setWindowTitle(tr("Find"));
 
     // Search text
@@ -531,9 +560,19 @@ void MainWindow::showFindDialog() noexcept
 }
 void MainWindow::findNext() noexcept
 {
-    if (searchText.isEmpty()) showFindDialog();
-    else if (!ui->textSysInfo->find(searchText, searchFlags)) {
-        QMessageBox::information(this, windowTitle(), tr("Cannot find \"%1\"").arg(searchText));
+    if (searchText.isEmpty()) {
+        showFindDialog();
+    } else {
+        if (ui->tabWidget->currentIndex() == 0){
+            if (!ui->textSysInfo->find(searchText, searchFlags)) {
+                QMessageBox::information(this, windowTitle(), tr("Cannot find \"%1\"").arg(searchText));
+            }
+        }
+        if (ui->tabWidget->currentIndex() == 1){
+            if (!ui->plainTextEditJournald->find(searchText, searchFlags)) {
+                QMessageBox::information(this, windowTitle(), tr("Cannot find \"%1\"").arg(searchText));
+            }
+        }
     }
 }
 
@@ -564,3 +603,175 @@ void MainWindow::autoFitSplitter() noexcept
         ui->splitter->setSizes(sizes);
     }
 }
+
+void MainWindow::systemd_check()
+{   QByteArray output;
+    int test = run("ps",{"-p","1","-o","comm="},&output);
+    QString systemd = "systemd";
+    if (test == 0){
+        if (QString(output) != systemd){
+            ui->tabWidget->removeTab(1);
+        }
+    }
+}
+
+void MainWindow::journald_setup()
+{   QByteArray output;
+    QStringList bootlist;
+    int test = 0;
+    //set some word wrap modes
+    ui->plainTextEditJournald->setWordWrapMode(QTextOption::NoWrap);
+    ui->plainTextEditJournald->setContextMenuPolicy(Qt::ActionsContextMenu);
+
+    //set default options
+    //priority levels 1-7.  4 is somewhat usefull for user level, 3 usually empty
+    ui->comboBoxJournaldPriority->setCurrentIndex(4);
+
+    //index 1 is user level, which requires no root permissions.  index 0 is system (root) level
+    //set system if /run/log/journal/$(machine-id) exists, as that indicates either /var/log/journal is missing or volatile storage in use
+    //either way user permissions won't be suffiencent to list boots properly, so elevate and and remove user item option.
+
+    //harvest machine-id
+    QString machine_id;
+    test = run("cat",{"/etc/machine-id"},&output);
+    if (test == 0){
+        machine_id = output;
+    }
+    qDebug() << "machine ID is" << machine_id;
+
+    if (QDir("/run/log/journal/" + machine_id).exists()) {
+        ui->comboBoxJournaldSystemUser->setCurrentIndex(0);
+        ui->comboBoxJournaldSystemUser->removeItem(1);
+        test = run("pkexec",{"/usr/lib/quick-system-info-gui/qsig-lib","journalctl_command","journalctl","--list-boots","--no-pager","-q","-r"},&output);
+    } else {
+        test = run("journalctl",{"--list-boots","--no-pager","-q","-r"},&output);
+        ui->comboBoxJournaldSystemUser->setCurrentIndex(1);
+
+    }
+
+    if (test == 0){
+        bootlist = QString(output).split("\n");
+        //bootlist.sort();
+        //trim strings because journalctl output has leading spaces
+        for(int i = 0; i < bootlist.size(); ++i) {
+            QString item = static_cast<QString>(bootlist[i]).trimmed();
+        }
+        ui->comboBoxJournaldListBoots->addItems(bootlist);
+    }
+    //flag that setup has been done, now changes in combo boxes will instantly change report
+    journald_setup_done = true;
+}
+
+void MainWindow::run_journalctl_report(){
+
+    QByteArray output;
+    QString text;
+
+    //searchoption is for the --unit=UNIT parameter, which works to filter by service
+    QString searchoption;
+    if (!ui->lineEditJournaldSearch->text().isEmpty()) {
+        searchoption="--unit=" + ui->lineEditJournaldSearch->text();
+    }
+    //bootoption works off UUID of selection in boot list combbox
+    QString bootoption = ui->comboBoxJournaldListBoots->currentText().section(" ",1,1);
+    if (ui->comboBoxJournaldListBoots->currentIndex() == 0){
+        bootoption = "--boot";
+    } else {
+        bootoption.prepend("--boot=");
+    }
+
+    //user or system, using indexes so translations can work
+    QString adminlevel;
+    if (ui->comboBoxJournaldSystemUser->currentIndex() == 1) {
+        adminlevel = "--user";
+    } else {
+        adminlevel = "--system";
+    }
+    //log level.  higher the number of priority level, the more information presented
+    QString priority = ui->comboBoxJournaldPriority->currentText().prepend("--priority=");
+
+    qDebug() << "bootoption is " << bootoption;
+    qDebug() << "adminLevel is " << adminlevel;
+    qDebug() << "priority is " << priority;
+
+    //no pkexec needed if user level, otherwise use pkexec to run a report with elevated rights
+    int test=0;
+    if (adminlevel == "--user"){
+        if (searchoption.isEmpty()){
+            test = run("journalctl",{bootoption,adminlevel,priority,"--no-pager","-q"},&output);
+        } else {
+            test = run("journalctl",{bootoption,adminlevel,priority,"--no-pager","-q",searchoption,"--case-sensitive=false"},&output);
+        }
+    } else {
+        if (searchoption.isEmpty()){
+            test = run("pkexec",{"/usr/lib/quick-system-info-gui/qsig-lib","journalctl_command","journalctl",bootoption,adminlevel,priority,"--no-pager","-q"},&output);
+        } else {
+            test = run("pkexec",{"/usr/lib/quick-system-info-gui/qsig-lib","journalctl_command","journalctl",bootoption,adminlevel,priority,"--no-pager","-q",searchoption,"--case-sensitive=false"},&output);
+        }
+    }
+    //qDebug() << "output is " << QString(output);
+    //qDebug() << "test is " << test;
+
+    //if command succesful, but not output to display, say so
+    //show error if non 0 exit
+    if (test == 0){
+        text = QString(output);
+        if (text.isEmpty()) text = tr("No journal entries found at this admin and priority level","no journal entries found at the options specified");
+    } else {
+        text = tr("Error running journalctl command","error report for journalctl command");
+    }
+    ui->plainTextEditJournald->setPlainText(text);
+}
+
+//actions when report is run
+//run journalctl reports when tab changes to journald tab
+//or when any option combo box is edited
+//or when search reload button is used
+//run journald setup if hasn't happened yet.
+
+void MainWindow::on_tabWidget_currentChanged(int index)
+{   //qDebug() << "current index is " << index;
+
+    if (index == 1) {
+        if (!journald_setup_done) {
+            journald_setup();
+        }
+        //hide save files button as it has no place on this tab
+        ui->pushSave->hide();
+        run_journalctl_report();
+    } else {
+        //show pushSave
+        ui->pushSave->show();
+    }
+}
+void MainWindow::on_comboBoxJournaldListBoots_activated(int index)
+{
+    if (journald_setup_done) {
+        run_journalctl_report();
+    }
+}
+
+
+void MainWindow::on_comboBoxJournaldPriority_activated(int index)
+{
+    if (journald_setup_done) {
+        run_journalctl_report();
+    }
+}
+
+
+void MainWindow::on_comboBoxJournaldSystemUser_activated(int index)
+{
+    if (journald_setup_done) {
+        run_journalctl_report();
+    }
+}
+
+
+void MainWindow::on_toolButtonReloadSearch_clicked()
+{
+    if (journald_setup_done) {
+        run_journalctl_report();
+    }
+}
+

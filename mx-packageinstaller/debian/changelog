@@ -1,3 +1,38 @@
+mx-packageinstaller (24.12.05) mx; urgency=medium
+
+  * Set version number during build from changelog within debian/rules
+
+ -- fehlix <fehlix@mxlinux.org>  Tue, 31 Dec 2024 15:11:46 -0500
+
+mx-packageinstaller (24.12.04) mx; urgency=medium
+
+  * Adjust regex to read binary-packages for current arch only and 
+    add all flat-repo Packages without binary-arch in filename
+
+ -- fehlix <fehlix@mxlinux.org>  Tue, 31 Dec 2024 11:12:36 -0500
+
+mx-packageinstaller (24.12.03) mx; urgency=medium
+
+  * adjust secondary regex to pick up more package lists
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Tue, 31 Dec 2024 10:38:09 -0500
+
+mx-packageinstaller (24.12.02) mx; urgency=medium
+
+  * Set the application name to fix the Qt translation domain and
+    window icon name based on the application name instead of the
+    executable file or symlink name
+  * Adjust regex for Packages filenames without binary-arch from flat-repo
+
+ -- fehlix <fehlix@mxlinux.org>  Tue, 31 Dec 2024 10:19:35 -0500
+
+mx-packageinstaller (24.12.01) mx; urgency=medium
+
+  * make mxpi-launcher a script rather than a symlink
+  * addresses launch issue from apt-notifier 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 30 Dec 2024 16:52:59 -0500
+
 mx-packageinstaller (24.12) mx; urgency=medium
 
   * Display snapshots from screenshot.debian.net when clicking info icon in

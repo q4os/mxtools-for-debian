@@ -9,10 +9,22 @@ zcat --force "$FILE"*
 
 }
 
+journalctl_command(){
+    "$@"
+}
+
 main()
 {
-ACTION="$1"
-FILE="$2"
+
+case $1 in
+    readadminfile)  ACTION="$1"
+                    FILE="$2"
+    ;;
+    journalctl_command) ACTION="$@"
+    ;;
+    *) exit 1
+    ;;
+esac
 
 $ACTION
 }

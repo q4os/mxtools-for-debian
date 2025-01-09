@@ -4,12 +4,25 @@ export QT_SELECT=5
 QMAKE_OPTS = DEFINES+=NO_DEBUG_ON_CONSOLE
 MAKE_OPTS  = QMAKE=qmake-qt5 LRELEASE=lrelease-qt5 QMAKE_OPTS="$(QMAKE_OPTS)"
 
+# Define version.h
+VERSION_H = version.h
+
+# Get version from debian/changelog
+VERSION := $(shell dpkg-parsechangelog --show-field Version)
+
 override_dh_auto_clean:
 	dh_auto_clean
 	rm -f translations/*.qm
 	rm -f src/translations/*.qm
 
 override_dh_auto_build:
+	# Rename existing version.h to version.h~
+	@echo "Renaming existing version.h to version.h~"
+	@mv -f $(VERSION_H) $(VERSION_H)~ || true
+	# Create new version.h with version from changelog
+	@echo "Creating new version.h with version $(VERSION)"
+	@echo "#define VERSION \"$(VERSION)\"" > $(VERSION_H)
+	# Build
 	lrelease translations/*.ts
 	dh_auto_build -- $(MAKE_OPTS)
 
@@ -19,9 +32,14 @@ override_dh_auto_install:
 override_dh_shlibdeps:
 	dh_shlibdeps -- -xvirtualbox-guest-x11 --ignore-missing-info
 
+# Restore original version.h after build
+override_dh_auto_clean:
+	@echo "Restoring original version.h from version.h~"
+	@mv -f $(VERSION_H)~ $(VERSION_H) || true
+	dh_auto_clean
+
 %:
-	dh $@ --no-automatic-dbgsym --parallel 
+	dh $@ --no-automatic-dbgsym --parallel
 
 override_dh_auto_install:
 	dh_auto_install
-	dh_link usr/bin/mx-packageinstaller usr/bin/mxpi-launcher

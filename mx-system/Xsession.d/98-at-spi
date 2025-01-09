@@ -1,0 +1,19 @@
+#!/bin/sh
+#
+# file: /etc/X11/Xsession.d/98-at-spi
+
+# Copy a11y bus address from the DBus session bus to the X11 root property.
+# This is useful when lightdm's bus address have been wrongly 
+# populated into the X11 properties
+
+# using a sub-shell to avoid parameter pollution
+(
+    ADDR=$(
+        dbus-send --print-reply --dest=org.a11y.Bus /org/a11y/bus org.a11y.Bus.GetAddress |
+        awk -F'"' '/string/ {print $2}'
+    )
+
+    if [ -n "$ADDR" ]; then
+        xprop -root -format AT_SPI_BUS 8s -set AT_SPI_BUS "$ADDR"
+    fi
+)

@@ -10,7 +10,7 @@ declare -A ALLOWED=(
 
 
 list(){
-find /var/log -type f -size +0c -name '*log'
+find /var/log -type f -size +0c ! -name lastlog -name '*log'
 }
 
 main()
