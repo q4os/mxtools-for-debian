@@ -1,0 +1,27 @@
+Package:  nvidia-persistenced*
+Pin:  release *
+Pin-Priority: -1
+
+Package:  *nvidia*
+Pin:  version VERSION
+Pin-Priority: 999
+
+Package:  *nvidia*:i386
+Pin:  version VERSION
+Pin-Priority: 999
+
+Package: lib*nv*:i386
+Pin:  version VERSION
+Pin-Priority: 999
+
+Package: lib*nv*
+Pin:  version VERSION
+Pin-Priority: 999
+
+Package: libcuda*:i386
+Pin:  version VERSION
+Pin-Priority: 999
+
+Package: libcuda*
+Pin:  version VERSION
+Pin-Priority: 999

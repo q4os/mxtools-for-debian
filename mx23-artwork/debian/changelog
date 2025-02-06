@@ -1,3 +1,10 @@
+mx23-artwork (25.01.01) mx; urgency=medium
+
+  * allow default23.png to be used defined
+  * only copy into directory if default23.png doens't already exist
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 18 Jan 2025 15:07:11 -0500
+
 mx23-artwork (24.01.01) mx; urgency=medium
 
   * add MX_Linux_Desert_Landscape.jpg

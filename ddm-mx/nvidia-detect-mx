@@ -38,7 +38,7 @@ shopt -s compat31 nocasematch 2>/dev/null || { echo "Error: this script only wor
 
 # last time the PCI IDs were updated
 
-LATEST="470.141.03"
+LATEST="535.216.03"
 NVIDIA_DETECT_PRESENT="/usr/bin/nvidia-detect"
 # -------------------------------------------------------------------------
 #get release info
@@ -167,6 +167,7 @@ if [[ ${#VERSIONS[*]} == 0 ]]; then
        	echo $(eval_gettext "Uh oh. Your card is not supported by any driver version up to $LATEST.") 
 	echo $(eval_gettext "A newer driver may add support for your card.") 
 	echo $(eval_gettext "Newer driver releases may be available in the MX testing repository or debian-backports.") 
+	echo $(eval_gettext "There may be options in the Nvidia Developer Repository")
 	exit 3
 fi
 

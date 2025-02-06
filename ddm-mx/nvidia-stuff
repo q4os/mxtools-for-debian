@@ -1,0 +1,23 @@
+555 and down
+
+VERSION=550.127.05-1; apt install nvidia-kernel-dkms=$VERSION nvidia-driver=$VERSION nvidia-driver-libs=$VERSION nvidia-driver-bin=$VERSION xserver-xorg-video-nvidia=$VERSION nvidia-vdpau-driver=$VERSION nvidia-alternative=$VERSION libgl1-nvidia-glvnd-glx=$VERSION nvidia-egl-icd=$VERSION nvidia-kernel-support=$VERSION libglx-nvidia0=$VERSION nvidia-egl-icd=$VERSION libegl-nvidia0=$VERSION libnvidia-glcore=$VERSION libnvidia-eglcore=$VERSION libnvidia-gpucomp1=$VERSION nvidia-legacy-check=$VERSION nvidia-egl-common=$VERSION libnvidia-ml1=$VERSION nvidia-modprobe=$VERSION nvidia-settings=$VERSION libxnvctrl0=$VERSION  libnvidia-cfg1=$VERSION nvidia-driver-libs-i386=$VERSION libgles-nvidia1=$VERSION libgles-nvidia2=$VERSION libnvidia-wayland-client=$VERSION nvidia-vulkan-icd=$VERSION nvidia-driver-libs:i386=$VERSION libgl1-nvidia-glvnd-glx:i386=$VERSION nvidia-egl-icd:i386=$VERSION libegl-nvidia0:i386=$VERSION  libnvidia-eglcore:i386=$VERSION libglx-nvidia0:i386=$VERSION libnvidia-glvkspirv=$VERSION libnvidia-glcore:i386=$VERSION libnvidia-gpucomp1:i386=$VERSION libgles-nvidia1:i386=$VERSION libgles-nvidia2:i386=$VERSION nvidia-vulkan-icd:i386=$VERSION libnvidia-glvkspirv:i386=$VERSION libnvidia-rtcore=$VERSION nvidia-vulkan-common=$VERSION -s --install-recommends | grep -v $VERSION
+
+560 and up
+
+VERSION=560.35.05-1; apt install nvidia-kernel-dkms=$VERSION nvidia-driver=$VERSION nvidia-driver-libs=$VERSION nvidia-driver-bin=$VERSION xserver-xorg-video-nvidia=$VERSION nvidia-vdpau-driver=$VERSION nvidia-alternative=$VERSION libgl1-nvidia-glvnd-glx=$VERSION nvidia-egl-icd=$VERSION nvidia-kernel-support=$VERSION libglx-nvidia0=$VERSION nvidia-egl-icd=$VERSION libegl-nvidia0=$VERSION libnvidia-glcore=$VERSION libnvidia-eglcore=$VERSION nvidia-egl-common=$VERSION libnvidia-ml1=$VERSION nvidia-modprobe=$VERSION nvidia-settings=$VERSION libxnvctrl0=$VERSION  libnvidia-cfg1=$VERSION libgles-nvidia1=$VERSION libgles-nvidia2=$VERSION nvidia-vulkan-icd=$VERSION nvidia-driver-libs:i386=$VERSION libgl1-nvidia-glvnd-glx:i386=$VERSION nvidia-egl-icd:i386=$VERSION libegl-nvidia0:i386=$VERSION  libnvidia-eglcore:i386=$VERSION libglx-nvidia0:i386=$VERSION libnvidia-glvkspirv=$VERSION libnvidia-glcore:i386=$VERSION libgles-nvidia1:i386=$VERSION libgles-nvidia2:i386=$VERSION nvidia-vulkan-icd:i386=$VERSION libnvidia-glvkspirv:i386=$VERSION libnvidia-rtcore=$VERSION nvidia-vulkan-common=$VERSION firmware-nvidia-gsp=$VERSION -s --install-recommends | grep -v $VERSION
+
+
+possible pin file
+
+*nvidia*
+*cuda*
+*nvcuvid
+
+get list of nvidia-driver versions
+
+apt-cache madison nvidia-driver |awk '{print $3}'
+
+
+check_cand needs modified for actual versions.
+
+perhaps allow driver choice at all times? simplify the selection process?

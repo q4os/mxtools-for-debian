@@ -23,7 +23,7 @@ source gettext.sh
 DEBIAN_VERSION_CODENAME=$(grep VERSION_CODENAME /etc/os-release|cut -d"=" -f2)
 DEBIAN_VERSION_NUMBER=$(cat /etc/debian_version  |cut -d"." -f1)
 
-VERSION="24.08.01"
+VERSION="25.01.03"
 ME=${0##*/}
 CLI_PROG="ddm-mx"
 LOCK_FILE="/run/lock/$CLI_PROG"
@@ -112,6 +112,7 @@ while getopts ":f:bNi:p:htd:c" opt; do
      N)
       #offer nvidia developer repo 
       NVIDIA_OVERRIDE=true
+      FORCEDRIVER=nvidia-driver
       ;;
     c) #force create of 20-nvidia.conf file
     	create_20_nvidiaconf
@@ -259,7 +260,10 @@ function usage() {
   echo $(gettext "The following options are allowed:")
   echo
   echo "-b            " $(gettext "Offer debian-backports alternative")
+  echo ""
   echo "-N            " $(gettext "Offer Nvidia developer repo alternative")
+  echo "              " $(gettext "Implies -f nvidia-driver")
+  echo ""
   echo "-c            " $(gettext "Create 20-nvidia.conf")
   echo
   echo "-i [driver]   " $(gettext "Install given driver.")
@@ -412,6 +416,12 @@ fi
   #the nvidia install command will be presented here for the log
   echo $(eval_gettext "Nvidia command ") "= apt-get install --install-recommends --reinstall -y $FORCE $SWITCH $BP $DRIVER" | tee -a $LOG
   apt-get install --reinstall -y linux-headers-$(uname -r) build-essential $TESTSWITCH 2>&1 | tee -a $LOG
+  
+  #install matching libxnvctrl0 for developer repo drivers
+  if [ "$NVIDIA_OVERRIDE" = "true" ]; then
+	ap-get install  libxnvctrl0=$CANDIDATE --allow-downgrades -y $TESTSWITCH
+  fi
+  
   apt-get install --reinstall $INSTALL_RECOMMENDS -y $SWITCH $BP $DRIVER $TESTSWITCH 2>&1 | tee -a $LOG
   if [ "$?" = "0" ]; then
   	POSTINSTALL=true;
@@ -434,7 +444,7 @@ fi
         sed -i 's/Exec=nvidia-settings/Exec=optirun -b none nvidia-settings -c :8/' /usr/lib/nvidia/current/nvidia-settings.desktop
       fi
       # purge nvidia-xconfig and move xorg.conf away
-      apt-get purge -y $FORCE nvidia-xconfig 2>&1 | tee -a $LOG
+      apt-get purge -y $FORCE nvidia-xconfig $TESTSWITCH 2>&1 | tee -a $LOG
       #mv -f /etc/X11/xorg.conf /etc/X11/xorg.conf.ddm 2>&1 | tee -a $LOG
     else
       echo $(eval_gettext "ERROR: Could not configure Bumblebee for user: ") $USER | tee -a $LOG
@@ -487,9 +497,11 @@ function purge_proprietary_drivers {
   rm /etc/X11/xorg.conf 2>/dev/null
   rm /etc/modprobe.d/nvidia* 2>/dev/null
   rm /etc/modprobe.d/blacklist-nouveau.conf 2>/dev/null
+  #reset libxnvctrl0 to debian version 
+  apt-get install libxnvctrl0=$(apt-cache madison libxnvctrl0 | awk '{print $3}') --allow-downgrades -y $TESTSWITCH
   remove_20_nvidiaconf
   # Leave nvidia-installer-cleanup
-  apt-get purge $FORCE $(apt-cache pkgnames | grep nvidia |grep -v firmware | grep -v cleanup | cut -d':' -f1) bumblebee* primus* primus*:i386 *nvidia*:i386 2>&1 | tee -a $LOG
+  apt-get purge $FORCE $(apt-cache pkgnames | grep nvidia |grep -v firmware | grep -v cleanup | cut -d':' -f1) bumblebee* primus* primus*:i386 *nvidia*:i386 $TESTSWITCH 2>&1 | tee -a $LOG
   # apt-get purge $FORCE bumblebee* primus* primus*:i386 2>&1 | tee -a $LOG
   # remove possible leftover symlinks
 	remove_modprobe_symlinks
@@ -510,7 +522,7 @@ function install_open {
   echo "Frontend: $(echo $DEBIAN_FRONTEND)" | tee -a $LOG
   #the command to restore open source drivers presented for the log
   echo $(eval_gettext "Open command ") "= apt-get install --reinstall -y $FORCE $DRIVER" | tee -a $LOG
-  apt-get install --reinstall $FORCE $DRIVER 2>&1 | tee -a $LOG
+  apt-get install --reinstall $FORCE $DRIVER $TESTSWITCH 2>&1 | tee -a $LOG
   
   if [ "$?" = "0" ]; then 
       #success at installing open source drivers
@@ -526,6 +538,10 @@ clean_up()
 unflock $LOCK_FILE
 echo "" | tee -a $LOG 
 echo "" | tee -a $LOG 
+
+if [ -f /etc/apt/preferences.d/ddm-version-temp ]; then
+	rm /etc/apt/preferences.d/ddm-version-temp
+fi
 if [ -f /etc/apt/sources.list.d/debian-backports-temp.list ]; then
   rm -f /etc/apt/sources.list.d/debian-backports-temp.list
   #return sources to a state before this application made any changes
@@ -937,28 +953,37 @@ check_source_install(){
     echo $(eval_gettext "Please remove with  <sudo nvidia-install --uninstall> and reboot if you wish to proceed") | tee -a $LOG
 	exit 10
   fi
+  # check possible generic install
+  if [ -e /usr/bin/nvidia-modprobe ]; then
+	#found installation from any source
+	echo "========================================"| tee -a $LOG
+	echo $(eval_gettext "Possible previous install detected.") | tee -a $LOG
+	echo "========================================"| tee -a $LOG
+	purge_message
+	exit 10
+  fi
+  
 }
 
 # Check for Optimus
 check_optimus(){
     local MIN_XORG_VERSION MIN_NVIDIA_VERSION MAJOR_NVIDIA_VERSION
     OPTIMUS=1
-    if [ -z "$FORCEDRIVER" ]; then
-		if lspci -vnn | grep Intel |grep -q 0300 ; then
-			if lspci -vnn | grep NVIDIA | grep -q 0302 ; then
-			    #possible hybrid graphics detected
-				echo $(eval_gettext "nvidia-optimus detected") | tee -a $LOG
+	if lspci -vnn | grep Intel |grep -q 0300 ; then
+		if lspci -vnn | grep NVIDIA | grep -q 0302 ; then
+		    #possible hybrid graphics detected
+			echo $(eval_gettext "nvidia-optimus detected") | tee -a $LOG
+			OPTIMUS=2
+		else
+		    #ask if this system has hybrid graphics
+			YES_no "$(eval_gettext "Is this a NVIDIA/INTEL Optimus system?")"
+			if [ "$?" = "0" ]; then
 				OPTIMUS=2
-			else
-			    #ask if this system has hybrid graphics
-				YES_no "$(eval_gettext "Is this a NVIDIA/INTEL Optimus system?")"
-				if [ "$?" = "0" ]; then
-					OPTIMUS=2
-				fi
-            
 			fi
+		
 		fi
-    fi
+	fi
+
 	
 	if [ -z $CANDIDATE ]; then
 		return
@@ -1148,7 +1173,7 @@ choose_cand(){
        echo $(eval_gettext "Nvidia developer repo candidate is:  ")  $CANDIDATE |tee -a $LOG
        echo $(eval_gettext "Installed is: ") $INSTALLED | tee -a $LOG
        echo ""
-       which_driver_nvidia
+       choose_version_nvidia
        echo ""
   fi 
 }
@@ -1202,7 +1227,7 @@ if [ "$ARCH" = "amd64" ]; then
 	if [ ! -x "/usr/bin/nvidia-detect" ]; then
 		echo $(eval_gettext "Installing latest nvidia-detect package")|tee -a $LOG
 		echo ""
-		apt-get install $SWITCH $BP nvidia-detect |tee -a $LOG  
+		apt-get install $SWITCH $BP nvidia-detect $TESTSWITCH |tee -a $LOG  
 		echo ""
     fi
 fi
@@ -1241,7 +1266,7 @@ create_20_nvidiaconf(){
 	if [ $TEST  ]; then
 		return
 	fi
-	sudo tee /etc/X11/xorg.conf.d/20-nvidia.conf <<!
+	tee /etc/X11/xorg.conf.d/20-nvidia.conf <<!
 Section "Device"
      Identifier "Nvidia Card"
      Driver "nvidia"
@@ -1279,6 +1304,90 @@ nvidia_driver_override(){
        *) echo $(eval_gettext "invalid option.")  $(eval_gettext "exiting")... | tee -a $LOG && exit 0;;
     esac
     echo ""
+}
+
+set_up_pin_file(){
+  cp /usr/share/ddm-mx/apt/ddm* /etc/apt/preferences.d
+  sed -i "s/VERSION/$1/" /etc/apt/preferences.d/ddm-version-temp
+}
+
+choose_version_nvidia(){
+
+declare -a list
+#Offer all versions of nvidia-driver available in repository
+echo $(eval_gettext "Available Nvidia Developer Repo Versions") | tee -a $LOG
+readarray -t list < <(apt-cache madison nvidia-driver |awk '{print $3}' |grep -v deb |grep -v mx)
+#Disable the Nvidia repo, menu options
+list[${#list[@]}]=$(eval_gettext "Disable Nvidia Developer Repo (default)")
+list[${#list[@]}]=$(eval_gettext "quit")
+
+#size of array
+#echo "size of array is " "${#list[@]}"
+
+for i in ${!list[@]}; do
+  echo "$i - ${list[$i]}" | tee -a $LOG
+done
+
+#user enters a number corresponding to the the driver version they want
+echo $(eval_gettext "Enter Number of selection") | tee -a $LOG
+
+read -e x
+
+#validate string
+
+case $x in
+   #check for not a number, or a null
+   #Option chosen is invalid
+  *[!0-9]*) echo $(eval_gettext "Invalid option") | tee -a $LOG
+  choose_version_nvidia  ;;
+esac
+  
+  if [ -z "$x" ]; then
+	disable_nvidia_developer_repo
+  fi
+  	   
+  if [[ $x -gt $((${#list[@]}-1)) ]]; then
+		  echo $(eval_gettext "Invalid option")
+		  choose_version_nvidia
+	      else
+		  CANDIDATE=${list[$x]}
+		  echo $(eval_gettext "Candidate is: ") $VERSION |tee -a $LOG
+  fi
+
+#disable Nvidia Repo is next to last
+  
+  if [[ $x = $((${#list[@]}-2)) ]]; then
+	disable_nvidia_developer_repo
+  fi
+
+#quit is always last
+if [[ $x = $((${#list[@]}-1)) ]]; then
+	clean_up
+fi
+ 
+set_up_pin_file $CANDIDATE
+
+unset NVIDIA_VERSION
+
+}
+
+disable_nvidia_developer_repo(){
+
+#action to disable the nvidia developer repository
+echo "Disable Nvidia Developer Repo" |tee -a $LOG
+echo $(eval_gettext "Ok")...| tee -a $LOG 
+           SWITCH=""
+           BP=""
+           NVIDIA_VERSION=$MAIN_NVIDIA
+           apt purge -y cuda-keyring
+           apt-get update
+           #replace nvidia-detect from main repo
+           #only install if nvidia-detect was present already (not present on 32 bit systems)
+           if [ "$ARCH" = "amd64" ]; then
+           	echo $(eval_gettext "Reset nvidia-detect") | tee -a $LOG
+          	apt-get remove nvidia-detect -y && apt-get install nvidia-detect -y
+           fi
+           install_nvidia
 }
 
 update_initramfs()

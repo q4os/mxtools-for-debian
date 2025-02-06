@@ -25,6 +25,7 @@
 #include <QMessageBox>
 #include <QProgressBar>
 #include <QTemporaryDir>
+#include <QTextEdit>
 #include <QTimer>
 
 #include <cmd.h>
@@ -87,20 +88,24 @@ private:
     bool messages_changed {};
     bool options_changed {};
     bool splash_changed {};
+    bool live = isLive();
 
+    const QString kernel_options {readKernelOpts()};
+    QString boot_location;
     QString chroot;
-    QString kernel_options;
     QString user;
     QStringList default_grub;
     QStringList grub_cfg;
     QTemporaryDir tmpdir;
 
+    QString readKernelOpts();
     QString selectPartiton(const QStringList &list);
     QStringList getLinuxPartitions();
     bool inVirtualMachine();
     bool installSplash();
     bool isInstalled(const QString &package);
     bool isInstalled(const QStringList &packages);
+    bool isLive();
     bool replaceGrubArg(const QString &key, const QString &item);
     static bool isUefi();
     static void removeUefiEntry(QListWidget *listEntries, QDialog *uefiDialog);
@@ -111,6 +116,7 @@ private:
     static void toggleUefiActive(QListWidget *listEntries);
     void addGrubLine(const QString &item);
     void addUefiEntry(QListWidget *listEntries, QDialog *dialogUefi);
+    void appendLogWithColors(QTextEdit *textEdit, const QString &logContent);
     void createChrootEnv(const QString &root);
     void disableGrubLine(const QString &item);
     void enableGrubLine(const QString &item);
@@ -119,7 +125,7 @@ private:
                          QStringList *bootorder);
     void readDefaultGrub();
     void readGrubCfg();
-    void readKernelOpts();
+    void replaceSyslinuxArg(const QString &args);
     void saveBootOrder(const QListWidget *list);
     void setGeneralConnections();
     void setup();

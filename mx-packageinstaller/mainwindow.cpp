@@ -1458,6 +1458,11 @@ bool MainWindow::installPopularApps()
         }
     }
     setCursor(QCursor(Qt::ArrowCursor));
+
+    ui->treePopularApps->clearSelection();
+    for (QTreeWidgetItemIterator it(ui->treePopularApps); (*it) != nullptr; ++it) {
+        (*it)->setCheckState(PopCol::Check, Qt::Unchecked);
+    }
     return result;
 }
 
@@ -2589,6 +2594,7 @@ void MainWindow::pushUninstall_clicked()
                 names += (*it)->data(PopCol::UninstallNames, Qt::UserRole).toString().replace('\n', ' ') + ' ';
                 postuninstall += (*it)->data(PopCol::PostUninstall, Qt::UserRole).toString() + '\n';
                 preuninstall += (*it)->data(PopCol::PreUninstall, Qt::UserRole).toString() + '\n';
+                (*it)->setCheckState(PopCol::Check, Qt::Unchecked);
             }
         }
     } else if (currentTree == ui->treeFlatpak) {
@@ -2658,9 +2664,10 @@ void MainWindow::tabWidget_currentChanged(int index)
     resetCheckboxes();
     QString search_str;
     saveSearchText(search_str, savedComboIndex);
-    setCurrentTree();
+    if (index != Tab::Output) {
+        setCurrentTree();
+    }
     currentTree->blockSignals(true);
-
     auto setTabsEnabled = [this](bool enable) {
         for (auto tab : {Tab::Popular, Tab::EnabledRepos, Tab::Test, Tab::Backports, Tab::Flatpak}) {
             if (tab != ui->tabWidget->currentIndex()) {
@@ -2668,13 +2675,11 @@ void MainWindow::tabWidget_currentChanged(int index)
             }
         }
     };
-
     setTabsEnabled(false);
     switch (index) {
-    case Tab::Popular: {
-        bool tempFlag = false;
-        handleTab(search_str, ui->searchPopular, "", tempFlag);
-    } break;
+    case Tab::Popular:
+        handleTab(search_str, ui->searchPopular, "", false);
+        break;
     case Tab::EnabledRepos:
         handleEnabledReposTab(search_str);
         break;
@@ -2698,10 +2703,15 @@ void MainWindow::tabWidget_currentChanged(int index)
 void MainWindow::resetCheckboxes()
 {
     currentTree->blockSignals(true);
+    // Popular apps are processed in a different way, tree is reset after install/removal
     if (currentTree != ui->treePopularApps) {
         currentTree->clearSelection();
         for (QTreeWidgetItemIterator it(currentTree); (*it) != nullptr; ++it) {
-            (*it)->setCheckState(0, Qt::Unchecked);
+            (*it)->setCheckState(TreeCol::Check, Qt::Unchecked);
+        }
+    } else if (ui->tabWidget->currentIndex() != Tab::Output) { // Don't clear selections on output tab for pop apps
+        for (QTreeWidgetItemIterator it(ui->treePopularApps); (*it) != nullptr; ++it) {
+            (*it)->setCheckState(PopCol::Check, Qt::Unchecked);
         }
     }
 }
@@ -2761,7 +2771,6 @@ void MainWindow::handleTab(const QString &search_str, QLineEdit *searchBox, cons
     if (searchBox) {
         searchBox->setText(search_str);
     }
-    setCurrentTree();
     if (!warningMessage.isEmpty()) {
         displayWarning(warningMessage);
     }
@@ -2780,9 +2789,7 @@ void MainWindow::handleTab(const QString &search_str, QLineEdit *searchBox, cons
         ui->comboFilterBP->setCurrentIndex(savedComboIndex);
         filterChanged(ui->comboFilterEnabled->currentText());
     }
-    if (!search_str.isEmpty()) {
-        currentTree == ui->treePopularApps ? findPopular() : findPackage();
-    }
+    currentTree == ui->treePopularApps ? findPopular() : findPackage();
     currentTree->blockSignals(false);
 }
 
@@ -2880,10 +2887,17 @@ void MainWindow::installFlatpak()
 
 void MainWindow::handleOutputTab()
 {
-    ui->searchPopular->clear();
-    ui->searchBoxEnabled->clear();
-    ui->searchBoxMX->clear();
-    ui->searchBoxBP->clear();
+    // Block signals and clear all search boxes
+    const QList<QLineEdit *> searchBoxes
+        = {ui->searchPopular, ui->searchBoxEnabled, ui->searchBoxMX, ui->searchBoxBP, ui->searchBoxFlatpak};
+
+    for (auto searchBox : searchBoxes) {
+        searchBox->blockSignals(true);
+        searchBox->clear();
+        searchBox->blockSignals(false);
+    }
+
+    // Disable install/uninstall buttons
     ui->pushInstall->setDisabled(true);
     ui->pushUninstall->setDisabled(true);
 }

@@ -180,248 +180,223 @@ system du vill modifiera (enbart Linux-partitioner visas)</translation>
         <translation>Använd</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="89"/>
+        <location filename="../mainwindow.cpp" line="85"/>
         <source>Still running</source>
         <translation>Kör fortfarande</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="90"/>
-        <source>Process still running. Are you sure you want to quit?</source>
-        <translation>Processen körs fortfarande. Är du säker på att du vill avsluta?</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="237"/>
+        <location filename="../mainwindow.cpp" line="240"/>
         <source>Set timeout</source>
         <translation>Ställ in timeout</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="237"/>
+        <location filename="../mainwindow.cpp" line="240"/>
         <source>Timeout in seconds:</source>
         <translation>Timeout i sekunder:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="242"/>
-        <location filename="../mainwindow.cpp" line="483"/>
-        <location filename="../mainwindow.cpp" line="1119"/>
+        <location filename="../mainwindow.cpp" line="244"/>
+        <location filename="../mainwindow.cpp" line="569"/>
+        <location filename="../mainwindow.cpp" line="1313"/>
         <source>Timeout: %1 seconds</source>
         <translation>Timeout: %1 sekunder</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="255"/>
-        <location filename="../mainwindow.cpp" line="485"/>
-        <location filename="../mainwindow.cpp" line="1118"/>
-        <location filename="../mainwindow.cpp" line="1134"/>
+        <location filename="../mainwindow.cpp" line="256"/>
+        <location filename="../mainwindow.cpp" line="571"/>
+        <location filename="../mainwindow.cpp" line="1312"/>
+        <location filename="../mainwindow.cpp" line="1320"/>
         <source>Boot Next: %1</source>
         <translation>Nästa Boot: %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="263"/>
+        <location filename="../mainwindow.cpp" line="270"/>
         <source>Removal confirmation</source>
         <translation>Konfirmering av borttagande</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="264"/>
+        <location filename="../mainwindow.cpp" line="271"/>
         <source>Are you sure you want to delete this boot entry?
 %1</source>
         <translation>Är det säkert att du vill ta bort  denna boot post?
 %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="348"/>
-        <location filename="../mainwindow.cpp" line="351"/>
+        <location filename="../mainwindow.cpp" line="361"/>
         <source>Select EFI file</source>
         <translation>Välj EFI fil</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="349"/>
-        <location filename="../mainwindow.cpp" line="352"/>
+        <location filename="../mainwindow.cpp" line="361"/>
         <source>EFI files (*.efi *.EFI)</source>
         <translation>EFI filer (*.efi *.EFI)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="362"/>
-        <location filename="../mainwindow.cpp" line="377"/>
-        <location filename="../mainwindow.cpp" line="408"/>
-        <location filename="../mainwindow.cpp" line="542"/>
-        <location filename="../mainwindow.cpp" line="613"/>
+        <location filename="../mainwindow.cpp" line="373"/>
+        <location filename="../mainwindow.cpp" line="388"/>
+        <location filename="../mainwindow.cpp" line="475"/>
+        <location filename="../mainwindow.cpp" line="483"/>
+        <location filename="../mainwindow.cpp" line="518"/>
+        <location filename="../mainwindow.cpp" line="633"/>
+        <location filename="../mainwindow.cpp" line="713"/>
         <source>Error</source>
         <translation>Fel</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="363"/>
+        <location filename="../mainwindow.cpp" line="373"/>
         <source>Could not find the source mountpoint for %1</source>
         <translation>Kunde inte hitta källa till monteringspunkt för %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="367"/>
+        <location filename="../mainwindow.cpp" line="378"/>
         <source>Set name</source>
         <translation>Ställ in namn</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="367"/>
+        <location filename="../mainwindow.cpp" line="378"/>
         <source>Enter the name for the UEFI menu item:</source>
         <translation>Skriv in namnet för UEFI-meny posten:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="377"/>
+        <location filename="../mainwindow.cpp" line="388"/>
         <source>Something went wrong, could not add entry.</source>
         <translation>Något blev fel, kunde inte lägga till posten.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="395"/>
+        <location filename="../mainwindow.cpp" line="464"/>
         <source>Installing bootsplash, please wait</source>
         <translation>Installerar bootsplash, var vänlig vänta</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="402"/>
+        <location filename="../mainwindow.cpp" line="471"/>
         <source>Updating sources</source>
         <translation>Uppdaterar källor</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="404"/>
-        <source>Installing</source>
-        <translation>Installerar</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="408"/>
+        <location filename="../mainwindow.cpp" line="483"/>
         <source>Could not install the bootsplash.</source>
         <translation>Kunde inte installera bootsplash.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="487"/>
+        <location filename="../mainwindow.cpp" line="573"/>
         <source>Boot Current: %1</source>
         <translation>Boot Nuvarande: %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="542"/>
+        <location filename="../mainwindow.cpp" line="633"/>
         <source>Could not create a temporary folder</source>
         <translation>Kunde inte skapa en temporär katalog.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="552"/>
+        <location filename="../mainwindow.cpp" line="655"/>
         <source>Cannot continue</source>
         <translation>Kan inte fortsätta</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="553"/>
+        <location filename="../mainwindow.cpp" line="656"/>
         <source>Cannot create chroot environment, cannot change boot options. Exiting...</source>
         <translation>Kan inte skapa chroot-miljö, kan inte ändra startalternativ. Avslutar...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="613"/>
+        <location filename="../mainwindow.cpp" line="713"/>
         <source>Something went wrong, could not save boot order.</source>
         <translation>Något blev fel, kunde inte spara boot-ordning.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="817"/>
-        <location filename="../mainwindow.cpp" line="1242"/>
+        <location filename="../mainwindow.cpp" line="959"/>
+        <location filename="../mainwindow.cpp" line="1431"/>
         <source>Updating configuration, please wait</source>
         <translation>Uppdaterar konfiguration, var vänlig vänta</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="873"/>
+        <location filename="../mainwindow.cpp" line="1029"/>
         <source>Updating initramfs...</source>
         <translation>Uppdaterar initramfs...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="885"/>
-        <location filename="../mainwindow.cpp" line="1255"/>
+        <location filename="../mainwindow.cpp" line="1043"/>
+        <location filename="../mainwindow.cpp" line="1446"/>
         <source>Updating grub...</source>
         <translation>Uppdaterar grub...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="889"/>
-        <source>Done</source>
-        <translation>Klar</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="889"/>
-        <source>Changes have been successfully applied.</source>
-        <translation>Ändringarna har genomförts framgångsrikt.</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="901"/>
+        <location filename="../mainwindow.cpp" line="1068"/>
         <source>About %1</source>
         <translation>Om %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="902"/>
+        <location filename="../mainwindow.cpp" line="1069"/>
         <source>Version: </source>
         <translation>Version:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="904"/>
+        <location filename="../mainwindow.cpp" line="1071"/>
         <source>Program for selecting common start-up choices</source>
         <translation>Program för att göra vanliga val vid start</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="906"/>
+        <location filename="../mainwindow.cpp" line="1073"/>
         <source>Copyright (c) MX Linux</source>
         <translation>Copyright (c) MX Linux</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="907"/>
+        <location filename="../mainwindow.cpp" line="1074"/>
         <source>%1 License</source>
         <translation>%1 Licens</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="928"/>
+        <location filename="../mainwindow.cpp" line="1095"/>
         <source>%1 Help</source>
         <translation>%1 Hjälp</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="937"/>
-        <location filename="../mainwindow.cpp" line="1220"/>
+        <location filename="../mainwindow.cpp" line="1105"/>
+        <location filename="../mainwindow.cpp" line="1408"/>
         <source>Running in a Virtual Machine</source>
         <translation>Kör i en Virtuell Maskin</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="938"/>
-        <location filename="../mainwindow.cpp" line="1221"/>
+        <location filename="../mainwindow.cpp" line="1106"/>
+        <location filename="../mainwindow.cpp" line="1409"/>
         <source>You current system is running in a Virtual Machine,
 Plymouth bootsplash will work in a limited way, you also won&apos;t be able to preview the theme</source>
         <translation>Ditt nuvarande system körs i en Virtuell Maskin,
 Plymouth bootsplash kommer att fungera på ett begränsatt sätt, du kommer inte heller kunna förhandsgranska temat</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="943"/>
+        <location filename="../mainwindow.cpp" line="1114"/>
         <source>Plymouth packages not installed</source>
         <translation>Plymouth-paket ej installerade</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="944"/>
+        <location filename="../mainwindow.cpp" line="1115"/>
         <source>Plymouth packages are not currently installed.
 OK to go ahead and install them?</source>
         <translation>Plymouth-paketen är för närvarande inte installerade.
 OK att fortsätta och installera dem?</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="968"/>
+        <location filename="../mainwindow.cpp" line="1141"/>
         <source>Images (*.png *.jpg *.jpeg *.tga)</source>
         <translation>Bilder (*.png *.jpg *.jpeg *.tga)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1079"/>
-        <source>Boot log</source>
-        <translation>Boot logg</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="1093"/>
+        <location filename="../mainwindow.cpp" line="1279"/>
         <source>Log not found</source>
         <translation>Logg ej hittad</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1093"/>
+        <location filename="../mainwindow.cpp" line="1279"/>
         <source>Could not find log at </source>
         <translation>Kunde inte hitta logg vid</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1100"/>
+        <location filename="../mainwindow.cpp" line="1286"/>
         <source>Edit UEFI Boot Entries</source>
         <translation>Redigera UEFI Boot Poster</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1103"/>
+        <location filename="../mainwindow.cpp" line="1289"/>
         <source>You can use the Up/Down buttons, or drag &amp; drop items to change boot order.
 - Items are listed in the boot order.
 - Grayed out lines are inactive.</source>
@@ -430,77 +405,157 @@ OK att fortsätta och installera dem?</translation>
 - Grå rader är inaktiva.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1107"/>
-        <location filename="../mainwindow.cpp" line="1161"/>
+        <location filename="../mainwindow.cpp" line="1300"/>
+        <location filename="../mainwindow.cpp" line="1347"/>
         <source>Set ac&amp;tive</source>
         <translation>Gör ak&amp;tiv</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1108"/>
+        <location filename="../mainwindow.cpp" line="1301"/>
         <source>&amp;Add entry</source>
         <translation>&amp;Lägg till post</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1109"/>
+        <location filename="../mainwindow.cpp" line="1302"/>
         <source>Boot &amp;next</source>
         <translation>&amp;Nästa Boot </translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1084"/>
-        <location filename="../mainwindow.cpp" line="1110"/>
+        <location filename="../mainwindow.cpp" line="1268"/>
+        <location filename="../mainwindow.cpp" line="1303"/>
         <source>&amp;Close</source>
         <translation>&amp;Stäng</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1111"/>
+        <location filename="../mainwindow.cpp" line="86"/>
+        <source>A process is still running. Do you really want to quit?</source>
+        <translation>En process körs fortfarande. Vill du verkligen avsluta?</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="124"/>
+        <source>Live System Detected</source>
+        <translation>Live-system Upptäckt</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="126"/>
+        <source>You are currently running a live system. Would you like to modify the boot options for the live system or for an installed system?</source>
+        <translation>Du kör nu ett live-system. Vill du modifiera boot alternativ för live-systemet eller för ett installerat system?</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="128"/>
+        <source>Live System</source>
+        <translation>Live-system</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="129"/>
+        <source>Installed System</source>
+        <translation>Installerat system</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="475"/>
+        <source>Failed to update package sources.</source>
+        <translation>Kunde inte uppdatera paketförråden.</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="479"/>
+        <source>Installing packages:</source>
+        <translation>Installerar paket:</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="489"/>
+        <source>Success</source>
+        <translation>Det lyckades</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="489"/>
+        <source>Bootsplash installed successfully.</source>
+        <translation>Bootsplash framgångsrikt installerad.</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="518"/>
+        <source>Failed to create temporary file.</source>
+        <translation>Kunde inte skapa temporär fil.</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="1051"/>
+        <source>You are currently running in live mode with the &apos;toram&apos; option. Please remember to save the persistence file or remaster, otherwise any changes made will be lost.</source>
+        <translation>Du kör nu live mode med &apos;toram&apos; alternativet. Var vänlig kom ihåg att spara persistensfilen eller remastra, annars kommer gjorda ändringar att förloras.</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="1053"/>
+        <source>Your changes have been successfully applied.</source>
+        <translation>Dina ändringar har framgångsrikt tillämpats</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="1054"/>
+        <source>Operation Complete</source>
+        <translation>Processen klar</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="1140"/>
+        <source>Select image to display in bootloader</source>
+        <translation>Välj bild att visa i bootloader</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="1260"/>
+        <source>Boot Log</source>
+        <translation>Bootlogg</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="1304"/>
         <source>Move &amp;down</source>
         <translation>Flytta ne&amp;r</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1112"/>
+        <location filename="../mainwindow.cpp" line="1305"/>
         <source>&amp;Remove entry</source>
         <translation>Ta &amp;bort post</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1113"/>
+        <location filename="../mainwindow.cpp" line="1306"/>
         <source>Re&amp;set next</source>
         <translation>&amp;Återställ nästa</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1114"/>
+        <location filename="../mainwindow.cpp" line="1307"/>
         <source>Change &amp;timeout</source>
         <translation>Ändra ti&amp;meout</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1115"/>
+        <location filename="../mainwindow.cpp" line="1308"/>
         <source>Move &amp;up</source>
         <translation>Flytta &amp;upp</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1118"/>
-        <location filename="../mainwindow.cpp" line="1134"/>
+        <location filename="../mainwindow.cpp" line="1312"/>
+        <location filename="../mainwindow.cpp" line="1320"/>
         <source>not set, will boot using list order</source>
         <translation>ej inställd, startar i listordning</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1158"/>
+        <location filename="../mainwindow.cpp" line="1344"/>
         <source>Set &amp;inactive</source>
         <translation>Gör &amp;inaktiv</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1211"/>
+        <location filename="../mainwindow.cpp" line="1397"/>
         <source>Needs reboot</source>
         <translation>Behöver omstart</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1212"/>
+        <location filename="../mainwindow.cpp" line="1398"/>
         <source>Plymouth was just installed, you might need to reboot before being able to display previews</source>
         <translation>Plymouth har just installerats, du kan behöva starta om innan du kan visa förhandsgranskningar</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1276"/>
+        <location filename="../mainwindow.cpp" line="1467"/>
         <source>Click to select theme</source>
         <translation>Klicka för att välja tema</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="1478"/>
+        <source>Select GRUB theme</source>
+        <translation>Välj GRUB-tema</translation>
     </message>
 </context>
 <context>
@@ -549,16 +604,6 @@ OK att fortsätta och installera dem?</translation>
         <location filename="../main.cpp" line="94"/>
         <source>You must run this program with admin access.</source>
         <translation>Du måste köra detta program med administratörsrättigheter.</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="966"/>
-        <source>Select image to display in bootloader</source>
-        <translation>Välj bild att visa i bootloader</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="1286"/>
-        <source>Select GRUB theme</source>
-        <translation>Välj GRUB-tema</translation>
     </message>
 </context>
 </TS>

@@ -1,3 +1,29 @@
+mx-boot-options (25.2) mx; urgency=medium
+
+  * Fix translations
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 05 Feb 2025 11:35:31 -0500
+
+mx-boot-options (25.1) mx; urgency=medium
+
+  * Colorize the log (translate terminal control codes to Qt colors)
+
+ -- Adrian <adrian@mxlinux.org>  Sat, 18 Jan 2025 22:25:29 -0500
+
+mx-boot-options (24.9+dev) mx; urgency=medium
+
+  * Fix: enable grub-timeout to be changed, even if GRUB_TIMEOUT does
+    not exist within /etc/default/grub
+
+ -- fehlix <fehlix@mxlinux.org>  Wed, 16 Oct 2024 17:17:50 -0400
+
+mx-boot-options (24.9) mx; urgency=medium
+
+  * When running Live prompt to change live boot options or chroot to an installed system
+  * Change syslinux.cfg and isolinux.cfg when running Live
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 02 Sep 2024 21:10:05 -0400
+
 mx-boot-options (24.6) mx; urgency=medium
 
   * Fix: setting GRUB background photo

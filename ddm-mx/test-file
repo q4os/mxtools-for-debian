@@ -1,0 +1,43 @@
+#!/bin/bash
+
+#test code
+#build list, with Quit at end
+
+declare -a list
+readarray -t list < <(apt-cache madison nvidia-driver |awk '{print $3}' |grep -v deb |grep -v mx)
+list[${#list[@]}]="Disable Nvidia Developer Repo (default)"
+list[${#list[@]}]="Quit"
+
+
+
+#size of array
+echo "size of array is " "${#list[@]}"
+
+for i in ${!list[@]}; do
+  echo "$i - ${list[$i]}"
+done
+
+#user enters a number of the driver they want
+echo "choose a version"
+
+read -e x
+
+#validate string
+
+
+case $x in
+  *[!0-9]*) echo "Invalid Choice, try again" 
+  #choose_version
+  ;;
+  *) if [ -z "$x" ]; then
+	   echo "Keep Existing Selection"
+     else if [ $x -gt $((${#list[@]}-1)) ]; then
+		echo "Invalid Choice, try again"
+	      else
+		  VERSION=${list[$x]}
+		  echo "version is " $VERSION
+	     fi
+    fi ;;
+esac
+
+
