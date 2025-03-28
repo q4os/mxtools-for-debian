@@ -1,6 +1,13 @@
+mx-comfort-themes (25.02.01) mx; urgency=medium
+
+  * remove gtk4 folder (nonworking)
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 26 Feb 2025 20:08:00 -0500
+
 mx-comfort-themes (23.12.02) mx; urgency=medium
 
   * change background in some popovers
+  * addresses unreadable backgrounds in foliate, among other apps
 
  -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 13 Jan 2024 20:03:43 -0500
 

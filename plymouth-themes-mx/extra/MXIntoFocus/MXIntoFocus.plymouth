@@ -1,0 +1,10 @@
+[Plymouth Theme]
+Name=MXIntoFocus
+Description=MXIntoFocus
+Comment=created By CharlesV
+ModuleName=script
+
+[script]
+ImageDir=/usr/share/plymouth/themes/MXIntoFocus
+ScriptFile=/usr/share/plymouth/themes/MXIntoFocus/MXIntoFocus.script
+

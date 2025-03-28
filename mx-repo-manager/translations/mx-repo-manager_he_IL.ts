@@ -5,13 +5,13 @@
     <name>MainWindow</name>
     <message>
         <location filename="../mainwindow.ui" line="17"/>
-        <location filename="../mainwindow.cpp" line="63"/>
+        <location filename="../mainwindow.cpp" line="62"/>
         <source>MX Repo Manager</source>
         <translation>מנהל מאגרים של MX</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="32"/>
-        <location filename="../mainwindow.cpp" line="642"/>
+        <location filename="../mainwindow.cpp" line="743"/>
         <source>Select the APT repository that you want to use:</source>
         <translation>נא לבחור את מאגר APT שברצונך להשתמש בו:</translation>
     </message>
@@ -101,155 +101,155 @@
         <translation>החלה</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="165"/>
-        <location filename="../mainwindow.cpp" line="495"/>
-        <location filename="../mainwindow.cpp" line="812"/>
+        <location filename="../mainwindow.cpp" line="166"/>
+        <location filename="../mainwindow.cpp" line="557"/>
+        <location filename="../mainwindow.cpp" line="925"/>
         <source>Success</source>
         <translation>הצלחה</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="166"/>
-        <location filename="../mainwindow.cpp" line="496"/>
-        <location filename="../mainwindow.cpp" line="816"/>
+        <location filename="../mainwindow.cpp" line="167"/>
+        <location filename="../mainwindow.cpp" line="558"/>
+        <location filename="../mainwindow.cpp" line="929"/>
         <source>Your new selection will take effect the next time sources are updated.</source>
         <translation>הבחירה שלך תיכנס לתוקף בפעם הבאה שהמקורות יתעדכנו.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="330"/>
+        <location filename="../mainwindow.cpp" line="348"/>
         <source>Lists</source>
         <translation>רשימות</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="330"/>
+        <location filename="../mainwindow.cpp" line="348"/>
         <source>Sources (checked sources are enabled)</source>
         <translation>מקורות (המקורות הנבחרים מאופשרים)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="498"/>
-        <location filename="../mainwindow.cpp" line="700"/>
-        <location filename="../mainwindow.cpp" line="710"/>
-        <location filename="../mainwindow.cpp" line="727"/>
-        <location filename="../mainwindow.cpp" line="740"/>
-        <location filename="../mainwindow.cpp" line="747"/>
-        <location filename="../mainwindow.cpp" line="763"/>
-        <location filename="../mainwindow.cpp" line="770"/>
-        <location filename="../mainwindow.cpp" line="891"/>
+        <location filename="../mainwindow.cpp" line="560"/>
+        <location filename="../mainwindow.cpp" line="801"/>
+        <location filename="../mainwindow.cpp" line="811"/>
+        <location filename="../mainwindow.cpp" line="829"/>
+        <location filename="../mainwindow.cpp" line="842"/>
+        <location filename="../mainwindow.cpp" line="849"/>
+        <location filename="../mainwindow.cpp" line="865"/>
+        <location filename="../mainwindow.cpp" line="872"/>
+        <location filename="../mainwindow.cpp" line="1004"/>
         <source>Error</source>
         <translation>שגיאה</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="498"/>
+        <location filename="../mainwindow.cpp" line="560"/>
         <source>Could not change the repo.</source>
         <translation>שינוי המאגר לא הצליח</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="523"/>
+        <location filename="../mainwindow.cpp" line="585"/>
         <source>Cancel</source>
         <translation>ביטול</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="529"/>
+        <location filename="../mainwindow.cpp" line="591"/>
         <source>Please wait...</source>
         <translation>נא להמתין…</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="580"/>
+        <location filename="../mainwindow.cpp" line="667"/>
         <source>About %1</source>
         <translation>על אודות %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="581"/>
+        <location filename="../mainwindow.cpp" line="668"/>
         <source>Version: </source>
         <translation>גירסה:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="583"/>
+        <location filename="../mainwindow.cpp" line="670"/>
         <source>Program for choosing the default APT repository</source>
         <translation>תכנית לבחירת מאגר APT ברירת המחדל</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="585"/>
+        <location filename="../mainwindow.cpp" line="672"/>
         <source>Copyright (c) MX Linux</source>
         <translation>זכויות היוצרים (c) שמורות ל־MX Linux</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="586"/>
+        <location filename="../mainwindow.cpp" line="673"/>
         <source>%1 License</source>
         <translation>רישיון של %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="600"/>
+        <location filename="../mainwindow.cpp" line="687"/>
         <source>%1 Help</source>
         <translation>עזרה עבור %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="617"/>
+        <location filename="../mainwindow.cpp" line="704"/>
         <source>Warning</source>
         <translation>אזהרה</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="618"/>
+        <location filename="../mainwindow.cpp" line="705"/>
         <source>You have selected MX Test Repo. It&apos;s not recommended to leave it enabled or to upgrade all the packages from it.</source>
         <translation>בחרת במאגר נסיוני MX Test Repo. לא מומלץ להשאיר אותו מאופשר או לעדכן את כל החבילות ממנו.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="621"/>
+        <location filename="../mainwindow.cpp" line="708"/>
         <source>A safer option is to install packages individually with MX Package Installer.</source>
         <translation>אפשרות בטוחה יותר היא התקנת חבילות בנפרד עם אשף התקנת החבילות של MX.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="644"/>
+        <location filename="../mainwindow.cpp" line="745"/>
         <source>Select the APT repository and sources that you want to use:</source>
         <translation>נא לבחור את מאגר APT והמקורות שברצונך להשתמש בהם:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="700"/>
+        <location filename="../mainwindow.cpp" line="801"/>
         <source>netselect-apt could not detect fastest repo.</source>
         <translation>netselect-apt לא הצליח למצוא את המאגר המהיר ביותר</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="710"/>
-        <location filename="../mainwindow.cpp" line="727"/>
+        <location filename="../mainwindow.cpp" line="811"/>
+        <location filename="../mainwindow.cpp" line="829"/>
         <source>Could not detect fastest repo.</source>
         <translation>המאגר המהיר ביותר לא זוהה</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="740"/>
+        <location filename="../mainwindow.cpp" line="842"/>
         <source>Can&apos;t figure out if this app is running on antiX or MX</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="748"/>
+        <location filename="../mainwindow.cpp" line="850"/>
         <source>MX version not detected or out of range: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="763"/>
+        <location filename="../mainwindow.cpp" line="865"/>
         <source>Could not download original APT files.</source>
         <translation>הורדה של קבצי APT מקוריים לא הצליחה</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="770"/>
+        <location filename="../mainwindow.cpp" line="872"/>
         <source>Could not unzip downloaded file.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="799"/>
+        <location filename="../mainwindow.cpp" line="913"/>
         <source>Enabling AHS</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="799"/>
+        <location filename="../mainwindow.cpp" line="913"/>
         <source>Do you use AHS (Advanced Hardware Stack) repo?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="813"/>
+        <location filename="../mainwindow.cpp" line="926"/>
         <source>Original APT sources have been restored to the release status. User added source files in /etc/apt/sources.list.d/ have not been touched.</source>
         <translation>מקורות APT מקוריים שוחזרו למצב שחרור. קבצי המקור ב/etc/apt/sources.list.d/ לא שונו</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="892"/>
+        <location filename="../mainwindow.cpp" line="1005"/>
         <source>There was an error writing file: %1. Please check if you have enough free space on your drive</source>
         <translation type="unfinished"></translation>
     </message>

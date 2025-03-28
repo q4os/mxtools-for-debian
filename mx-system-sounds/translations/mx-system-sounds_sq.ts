@@ -34,7 +34,7 @@
     <message>
         <location filename="../mainwindow.ui" line="80"/>
         <source>XFCE Input Feedback Sounds</source>
-        <translation type="unfinished"></translation>
+        <translation>Tinguj XFCE Reagimi Ndaj Input-esh</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="87"/>

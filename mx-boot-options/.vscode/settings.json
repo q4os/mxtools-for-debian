@@ -1,6 +1,8 @@
 {
     "C_Cpp.default.compilerPath": "/usr/bin/clang++-16",
     "files.associations": {
-        "qcombobox": "cpp"
+        "qcombobox": "cpp",
+        "qdebug": "cpp",
+        "qapplication": "cpp"
     }
 }

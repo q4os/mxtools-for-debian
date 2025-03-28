@@ -5,13 +5,13 @@
     <name>MainWindow</name>
     <message>
         <location filename="../mainwindow.ui" line="17"/>
-        <location filename="../mainwindow.cpp" line="63"/>
+        <location filename="../mainwindow.cpp" line="62"/>
         <source>MX Repo Manager</source>
         <translation>MX Pakketbronbeheer</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="32"/>
-        <location filename="../mainwindow.cpp" line="642"/>
+        <location filename="../mainwindow.cpp" line="743"/>
         <source>Select the APT repository that you want to use:</source>
         <translation>Selecteer de APT pakketbron die u wilt gebruiken:</translation>
     </message>
@@ -101,155 +101,155 @@
         <translation>Toepassen</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="165"/>
-        <location filename="../mainwindow.cpp" line="495"/>
-        <location filename="../mainwindow.cpp" line="812"/>
+        <location filename="../mainwindow.cpp" line="166"/>
+        <location filename="../mainwindow.cpp" line="557"/>
+        <location filename="../mainwindow.cpp" line="925"/>
         <source>Success</source>
         <translation>Gelukt</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="166"/>
-        <location filename="../mainwindow.cpp" line="496"/>
-        <location filename="../mainwindow.cpp" line="816"/>
+        <location filename="../mainwindow.cpp" line="167"/>
+        <location filename="../mainwindow.cpp" line="558"/>
+        <location filename="../mainwindow.cpp" line="929"/>
         <source>Your new selection will take effect the next time sources are updated.</source>
         <translation>Uw nieuwe selectie zal de volgende keer dat de bronnen geupdate worden effectief worden.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="330"/>
+        <location filename="../mainwindow.cpp" line="348"/>
         <source>Lists</source>
         <translation>Lijsten</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="330"/>
+        <location filename="../mainwindow.cpp" line="348"/>
         <source>Sources (checked sources are enabled)</source>
         <translation>Bronnen (aangevinkte bronnen zijn ingeschakeld)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="498"/>
-        <location filename="../mainwindow.cpp" line="700"/>
-        <location filename="../mainwindow.cpp" line="710"/>
-        <location filename="../mainwindow.cpp" line="727"/>
-        <location filename="../mainwindow.cpp" line="740"/>
-        <location filename="../mainwindow.cpp" line="747"/>
-        <location filename="../mainwindow.cpp" line="763"/>
-        <location filename="../mainwindow.cpp" line="770"/>
-        <location filename="../mainwindow.cpp" line="891"/>
+        <location filename="../mainwindow.cpp" line="560"/>
+        <location filename="../mainwindow.cpp" line="801"/>
+        <location filename="../mainwindow.cpp" line="811"/>
+        <location filename="../mainwindow.cpp" line="829"/>
+        <location filename="../mainwindow.cpp" line="842"/>
+        <location filename="../mainwindow.cpp" line="849"/>
+        <location filename="../mainwindow.cpp" line="865"/>
+        <location filename="../mainwindow.cpp" line="872"/>
+        <location filename="../mainwindow.cpp" line="1004"/>
         <source>Error</source>
         <translation>Fout</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="498"/>
+        <location filename="../mainwindow.cpp" line="560"/>
         <source>Could not change the repo.</source>
         <translation>Kon de pakketbron niet wijzigen.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="523"/>
+        <location filename="../mainwindow.cpp" line="585"/>
         <source>Cancel</source>
         <translation>Ongedaan maken</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="529"/>
+        <location filename="../mainwindow.cpp" line="591"/>
         <source>Please wait...</source>
         <translation>Even wachten aub...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="580"/>
+        <location filename="../mainwindow.cpp" line="667"/>
         <source>About %1</source>
         <translation>Over %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="581"/>
+        <location filename="../mainwindow.cpp" line="668"/>
         <source>Version: </source>
         <translation>Versie:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="583"/>
+        <location filename="../mainwindow.cpp" line="670"/>
         <source>Program for choosing the default APT repository</source>
         <translation>Programma om de standaard APT pakketbron te kiezen</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="585"/>
+        <location filename="../mainwindow.cpp" line="672"/>
         <source>Copyright (c) MX Linux</source>
         <translation>Copyright (c) MX Linux</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="586"/>
+        <location filename="../mainwindow.cpp" line="673"/>
         <source>%1 License</source>
         <translation>%1 Licentie</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="600"/>
+        <location filename="../mainwindow.cpp" line="687"/>
         <source>%1 Help</source>
         <translation>%1 Help</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="617"/>
+        <location filename="../mainwindow.cpp" line="704"/>
         <source>Warning</source>
         <translation>Waarschuwing</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="618"/>
+        <location filename="../mainwindow.cpp" line="705"/>
         <source>You have selected MX Test Repo. It&apos;s not recommended to leave it enabled or to upgrade all the packages from it.</source>
         <translation>Je hebt de MX Test Pakketbron geselecteerd. Het is niet aan te raden om deze ingeschakeld te laten of alle pakketten eruit te upgraden.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="621"/>
+        <location filename="../mainwindow.cpp" line="708"/>
         <source>A safer option is to install packages individually with MX Package Installer.</source>
         <translation>Een veiliger optie is om pakketten individueel te installeren met MX Pakket Installeerder.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="644"/>
+        <location filename="../mainwindow.cpp" line="745"/>
         <source>Select the APT repository and sources that you want to use:</source>
         <translation>Selecteer de APT pakketbron en bronnen die u wilt gebruiken:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="700"/>
+        <location filename="../mainwindow.cpp" line="801"/>
         <source>netselect-apt could not detect fastest repo.</source>
         <translation>netselect-apt kon de snelste pakketbron niet ontdekken.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="710"/>
-        <location filename="../mainwindow.cpp" line="727"/>
+        <location filename="../mainwindow.cpp" line="811"/>
+        <location filename="../mainwindow.cpp" line="829"/>
         <source>Could not detect fastest repo.</source>
         <translation>Kon de snelste pakketbron niet ontdekken.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="740"/>
+        <location filename="../mainwindow.cpp" line="842"/>
         <source>Can&apos;t figure out if this app is running on antiX or MX</source>
         <translation>Kan er niet achter komen of deze app op antiX of MX draait</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="748"/>
+        <location filename="../mainwindow.cpp" line="850"/>
         <source>MX version not detected or out of range: </source>
         <translation>MX-versie niet gedetecteerd of buiten bereik:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="763"/>
+        <location filename="../mainwindow.cpp" line="865"/>
         <source>Could not download original APT files.</source>
         <translation>Kon de originele APT bestanden niet downloaden.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="770"/>
+        <location filename="../mainwindow.cpp" line="872"/>
         <source>Could not unzip downloaded file.</source>
         <translation>Kan gedownload bestand niet uitpakken.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="799"/>
+        <location filename="../mainwindow.cpp" line="913"/>
         <source>Enabling AHS</source>
         <translation>AHS inschakelen</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="799"/>
+        <location filename="../mainwindow.cpp" line="913"/>
         <source>Do you use AHS (Advanced Hardware Stack) repo?</source>
         <translation>Gebruik je AHS (Advanced Hardware Stack) repo?</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="813"/>
+        <location filename="../mainwindow.cpp" line="926"/>
         <source>Original APT sources have been restored to the release status. User added source files in /etc/apt/sources.list.d/ have not been touched.</source>
         <translation>Originele APT bronnen zijn teruggezet naar de release status. Bronbestanden die door de gebruiker zijn toegevoegd in /etc/apt/sources.list.d/ zijn niet gewijzigd.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="892"/>
+        <location filename="../mainwindow.cpp" line="1005"/>
         <source>There was an error writing file: %1. Please check if you have enough free space on your drive</source>
         <translation>Er is een fout opgetreden bij het schrijven van bestand: %1. Controleer of u voldoende vrije ruimte op uw schijf heeft</translation>
     </message>

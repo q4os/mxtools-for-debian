@@ -1,0 +1,10 @@
+[Plymouth Theme]
+Name=MXCreative
+Description=MX Linux Creative
+Comment=created By CharlesV
+ModuleName=script
+
+[script]
+ImageDir=/usr/share/plymouth/themes/MXCreative
+ScriptFile=/usr/share/plymouth/themes/MXCreative/MXCreative.script
+

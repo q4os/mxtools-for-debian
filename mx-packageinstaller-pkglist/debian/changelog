@@ -1,3 +1,40 @@
+mx-packageinstaller-pkglist (25.03.02mx23) mx; urgency=medium
+
+  * add liquorix 6.13 kernel
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 14 Mar 2025 18:10:19 -0400
+
+mx-packageinstaller-pkglist (25.03.01mx23) mx; urgency=medium
+
+  * update 6.12 kernels to .17
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 03 Mar 2025 21:43:42 -0500
+
+mx-packageinstaller-pkglist (25.02.04mx23) mx; urgency=medium
+
+  * update liquorix 6.12.16 kernel
+  * remove budgie 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Tue, 25 Feb 2025 19:51:49 -0500
+
+mx-packageinstaller-pkglist (25.02.03mx23) mx; urgency=medium
+
+  * update debian 6.12.13 kernel
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 16 Feb 2025 17:22:33 -0500
+
+mx-packageinstaller-pkglist (25.02.02mx23) mx; urgency=medium
+
+  * update liquorix 6.12.13 kernel
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 14 Feb 2025 20:05:27 -0500
+
+mx-packageinstaller-pkglist (25.02.01mx23) mx; urgency=medium
+
+  * update 6.12 kernels to 6.12.12 (liquorix and debian)
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 08 Feb 2025 14:24:21 -0500
+
 mx-packageinstaller-pkglist (25.01.06mx23) mx; urgency=medium
 
   * update 6.12 kernels (liquorix and debian)

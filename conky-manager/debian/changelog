@@ -1,3 +1,9 @@
+conky-manager (2.7+dfsg1-6mx23+5) mx; urgency=medium
+
+  * modify depends
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 15 Feb 2025 16:09:49 -0500
+
 conky-manager (2.7+dfsg1-6mx19+4) mx; urgency=medium
 
   * Remove $HOME from autostart desktop entry

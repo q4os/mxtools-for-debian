@@ -1,0 +1,10 @@
+[Plymouth Theme]
+Name=MXIntoFocusColor
+Description=MXIntoFocusColor
+Comment=created By CharlesV
+ModuleName=script
+
+[script]
+ImageDir=/usr/share/plymouth/themes/MXIntoFocusColor
+ScriptFile=/usr/share/plymouth/themes/MXIntoFocusColor/MXIntoFocusColor.script
+

@@ -1,7 +1,7 @@
 /**********************************************************************
  *  mainwindow.h
  **********************************************************************
- * Copyright (C) 2015-2024 MX Authors
+ * Copyright (C) 2015-2025 MX Authors
  *
  * Authors: Adrian
  *          MX Linux <http://mxlinux.org>
@@ -50,7 +50,7 @@ public:
 
 private slots:
     void cancelOperation();
-    void closeEvent(QCloseEvent * /*unused*/) override;
+    void closeEvent([[maybe_unused]] QCloseEvent *event) override;
     void procDone();
     void procTime();
     void procStart();
@@ -78,7 +78,8 @@ private:
     QString listMXurls;
     QStringList repos;
     QTimer timer;
-    bool sources_changed {};
+    bool radioSelectionChanged {false};
+    bool sources_changed {false};
 
     QStringList readMXRepos();
     bool downloadFile(const QString &url, QFile *file, std::chrono::seconds timeout = 10s);
@@ -88,7 +89,7 @@ private:
     static QFileInfoList listAptFiles();
     static QIcon getFlag(QString country);
     static QString getDebianVerName(int ver);
-    static QStringList loadAptFile(const QString &file);
+    static QVector<QPair<QString, bool>> loadAptFile(const QString &file);
     static bool checkRepo(const QString &repo);
     static int getDebianVerNum();
     void centerWindow();

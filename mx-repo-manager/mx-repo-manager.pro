@@ -1,5 +1,5 @@
 # **********************************************************************
-# * Copyright (C) 2016 MX Authors
+# * Copyright (C) 2016-2025 MX Authors
 # *
 # * Authors: Adrian
 # *          MX Linux <http://mxlinux.org>
@@ -21,7 +21,17 @@
 # **********************************************************************/
 
 QT       += network widgets
-CONFIG   += c++17
+CONFIG   += debug_and_release warn_on strict_c++ c++17
+
+CONFIG(release, debug|release) {
+    DEFINES += NDEBUG
+    QMAKE_CXXFLAGS += -flto=auto
+    QMAKE_LFLAGS += -flto=auto
+    QMAKE_CXXFLAGS_RELEASE = -O3
+}
+
+QMAKE_CXXFLAGS += -Wpedantic -pedantic -Werror=return-type -Werror=switch
+QMAKE_CXXFLAGS += -Werror=uninitialized -Werror=return-local-addr -Werror
 
 TARGET = mx-repo-manager
 TEMPLATE = app

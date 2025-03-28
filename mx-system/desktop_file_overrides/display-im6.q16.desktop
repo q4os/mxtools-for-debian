@@ -4,6 +4,7 @@ Name=ImageMagick (color depth=q16)
 Comment=Display and edit image files
 Comment[fr]=Affiche et édite des fichiers images
 Comment[pt]=Exiba e edite arquivos de imagem
+TryExec=/usr/bin/display-im6.q16
 Exec=/usr/bin/display-im6.q16 -nostdin %F
 Terminal=false
 Icon=display-im6.q16

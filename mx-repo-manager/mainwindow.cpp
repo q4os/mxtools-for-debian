@@ -1,7 +1,7 @@
 /**********************************************************************
  *  mainwindow.cpp
  **********************************************************************
- * Copyright (C) 2015-2024 MX Authors
+ * Copyright (C) 2015-2025 MX Authors
  *
  * Authors: Adrian
  *          MX Linux <http://mxlinux.org>
@@ -35,7 +35,6 @@
 #include <QTemporaryDir>
 #include <QTemporaryFile>
 #include <QTextEdit>
-#include <QThread>
 
 #include "about.h"
 #include <chrono>
@@ -110,12 +109,14 @@ void MainWindow::refresh(bool force)
     ui->lineSearch->clear();
     ui->lineSearch->setFocus();
     ui->pushOk->setDisabled(true);
+    radioSelectionChanged = false;
 }
 
 void MainWindow::replaceDebianRepos(const QString &url)
 {
-    const QStringList files {"/etc/apt/sources.list.d/debian.list",
-                             "/etc/apt/sources.list.d/debian-stable-updates.list", "/etc/apt/sources.list"};
+    const QStringList files {"/etc/apt/sources.list.d/debian.list", "/etc/apt/sources.list.d/debian.sources",
+                             "/etc/apt/sources.list.d/debian-stable-updates.list",
+                             "/etc/apt/sources.list.d/debian-stable-updates.sources", "/etc/apt/sources.list"};
     const QDir backupDir("/etc/apt/sources.list.d/backups");
 
     if (!backupDir.exists() && !Cmd().runAsRoot("mkdir -p " + backupDir.path())) {
@@ -224,22 +225,36 @@ void MainWindow::getCurrentRepo(bool force)
 {
     QFile file("/etc/apt/sources.list.d/mx.list");
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
-        qWarning() << "Could not open file:" << file.fileName() << file.errorString();
-        return;
+        file.setFileName("/etc/apt/sources.list.d/mx.sources");
+        if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+            qWarning() << "Could not open either mx.list or mx.sources file:" << file.errorString();
+            return;
+        }
     }
 
     QTextStream in(&file);
+
     QRegularExpression repoRegex {R"(^#?\s?deb\s+.*/repo[/]?)"};
     QRegularExpression urlRegex {"//(.*?)/"};
+    QRegularExpression sourcesRegex {R"(URIs:\s*(.*?)(?:\s|$))"};
 
     QString line;
     while (in.readLineInto(&line)) {
         line = line.trimmed();
-        if (repoRegex.match(line).hasMatch()) {
-            QRegularExpressionMatch match = urlRegex.match(line);
+
+        if (file.fileName().endsWith("mx.sources")) {
+            QRegularExpressionMatch match = sourcesRegex.match(line);
             if (match.hasMatch()) {
-                current_repo = match.captured(1);
+                current_repo = urlRegex.match(match.captured(1)).captured(1);
                 break;
+            }
+        } else {
+            if (repoRegex.match(line).hasMatch()) {
+                QRegularExpressionMatch match = urlRegex.match(line);
+                if (match.hasMatch()) {
+                    current_repo = match.captured(1);
+                    break;
+                }
             }
         }
     }
@@ -317,7 +332,10 @@ void MainWindow::displayMXRepos(const QStringList &repos, const QString &filter)
             radio->setChecked(true);
             ui->listWidget->scrollToItem(item);
         }
-        connect(radio, &QRadioButton::clicked, ui->pushOk, &QPushButton::setEnabled);
+        connect(radio, &QRadioButton::clicked, this, [this]() {
+            radioSelectionChanged = true;
+            ui->pushOk->setEnabled(true);
+        });
     }
 }
 
@@ -332,11 +350,11 @@ void MainWindow::displayAllRepos(const QFileInfoList &apt_files)
     ui->treeWidget->setHeaderLabels(columnNames);
     ui->treeWidgetDeb->setHeaderLabels(columnNames);
 
-    auto processEntries = [](QTreeWidgetItem *parentItem, const QStringList &entries) {
-        for (const QString &item : entries) {
-            auto *childItem = new QTreeWidgetItem(parentItem, {QString(), item});
+    auto processEntries = [](QTreeWidgetItem *parentItem, const auto &entries) {
+        for (const auto &item : entries) {
+            auto *childItem = new QTreeWidgetItem(parentItem, {QString(), item.first});
             childItem->setFlags(childItem->flags() | Qt::ItemIsUserCheckable);
-            childItem->setCheckState(1, item.startsWith('#') ? Qt::Unchecked : Qt::Checked);
+            childItem->setCheckState(1, item.second ? Qt::Checked : Qt::Unchecked);
         }
     };
 
@@ -352,7 +370,7 @@ void MainWindow::displayAllRepos(const QFileInfoList &apt_files)
             topLevelItemDeb->setForeground(0, QBrush(Qt::darkGreen));
         }
 
-        const QStringList entries = loadAptFile(file);
+        auto entries = loadAptFile(file);
         processEntries(topLevelItem, entries);
         if (topLevelItemDeb) {
             processEntries(topLevelItemDeb, entries);
@@ -368,7 +386,7 @@ void MainWindow::displayAllRepos(const QFileInfoList &apt_files)
     }
 }
 
-QStringList MainWindow::loadAptFile(const QString &file)
+QVector<QPair<QString, bool>> MainWindow::loadAptFile(const QString &file)
 {
     QFile aptFile(file);
     if (!aptFile.open(QIODevice::ReadOnly | QIODevice::Text)) {
@@ -376,13 +394,38 @@ QStringList MainWindow::loadAptFile(const QString &file)
         return {};
     }
 
-    QStringList entries;
+    QVector<QPair<QString, bool>> entries;
     QTextStream in(&aptFile);
-    QRegularExpression re(R"(^\s*(?:#)?\s*deb\s+)");
-    while (!in.atEnd()) {
-        QString line = in.readLine().trimmed();
-        if (re.match(line).hasMatch()) {
-            entries.append(line);
+    bool isSources = QFileInfo(file).suffix() == "sources";
+    if (isSources) {
+        QString block;
+        QRegularExpression enabledRegex("Enabled:\\s*no", QRegularExpression::CaseInsensitiveOption);
+
+        auto processBlock = [&entries, &enabledRegex](const QString &block) {
+            if (!block.isEmpty()) {
+                bool blockEnabled = !block.contains(enabledRegex);
+                entries.append({block.trimmed(), blockEnabled});
+            }
+        };
+
+        while (!in.atEnd()) {
+            QString line = in.readLine();
+            if (line.trimmed().isEmpty()) {
+                processBlock(block);
+                block.clear();
+            } else {
+                block.append(line + "\n");
+            }
+        }
+        processBlock(block); // Process final block
+    } else {
+        QRegularExpression re(R"(^\s*(?:#)?\s*deb\s+)");
+        while (!in.atEnd()) {
+            QString line = in.readLine().trimmed();
+            if (re.match(line).hasMatch()) {
+                bool enabled = !line.startsWith('#');
+                entries.append({line, enabled});
+            }
         }
     }
 
@@ -410,7 +453,7 @@ void MainWindow::centerWindow()
     move(x, y);
 }
 
-void MainWindow::closeEvent(QCloseEvent * /*unused*/)
+void MainWindow::closeEvent([[maybe_unused]] QCloseEvent *event)
 {
     settings.setValue("geometry", saveGeometry());
 }
@@ -447,6 +490,9 @@ void MainWindow::extractUrls(const QStringList &repos)
 
 void MainWindow::setSelected()
 {
+    if (!radioSelectionChanged) {
+        return;
+    }
     for (int row = 0; row < ui->listWidget->count(); ++row) {
         auto *item = ui->listWidget->item(row);
         if (auto *radio = qobject_cast<QRadioButton *>(ui->listWidget->itemWidget(item)); radio && radio->isChecked()) {
@@ -480,14 +526,30 @@ void MainWindow::procDone()
 
 bool MainWindow::replaceRepos(const QString &url, bool quiet)
 {
-    const QString mx_file {"/etc/apt/sources.list.d/mx.list"};
-    //const QString cmd_mx
-        // = QString(R"(sed -i -E 's;(deb|deb-src)\s(\[.*\]\s)?.*(/mx/repo/|/mx/testrepo);\1 \2%1\3;' %2)")
-    const QString cmd_mx
-        = QString(R"(sed -i -E 's=(deb|deb-src)\s(\[.*\]\s)?.*(/mx/([.]?/)*repo/?|/mx/([.]?/)*testrepo/?)=\1 \2%1\3=; s/\s+/ /g; s/\s+$//' %2)")
-              .arg(url, mx_file);
+    const QString mx_list {"/etc/apt/sources.list.d/mx.list"};
+    const QString mx_sources {"/etc/apt/sources.list.d/mx.sources"};
+
+    // Try mx.list first
+    const QString cmd_mx_list
+        = QString(
+              R"(sed -i -E 's=(deb|deb-src)[[:space:]]+(\[.*\][[:space:]]+)?\S*(/mx/([.]?/)*repo/?|/mx/([.]?/)*testrepo/?)=\1 \2%1\3=g; s/[[:space:]]{2,}/ /g; s/[[:space:]]+$//g' %2)")
+              .arg(url, mx_list);
+
+    // Try mx.sources if mx.list doesn't exist or fails
+    const QString cmd_mx_sources
+        = QString(
+              R"(sed -i -E 's=URIs:[[:space:]]*\S*=URIs: %1=; s/[[:space:]]{2,}/ /g; s/[[:space:]]+$//' %2)")
+              .arg(url, mx_sources);
+
     sources_changed = true;
-    bool result = shell->runAsRoot(cmd_mx);
+    bool result = false;
+
+    if (QFile::exists(mx_list)) {
+        result = shell->runAsRoot(cmd_mx_list);
+    }
+    if (!result && QFile::exists(mx_sources)) {
+        result = shell->runAsRoot(cmd_mx_sources);
+    }
 
     if (quiet) {
         return result;
@@ -538,7 +600,7 @@ QFileInfoList MainWindow::listAptFiles()
 {
     QFileInfoList list;
     const QDir apt_dir("/etc/apt/sources.list.d");
-    list = apt_dir.entryInfoList(QStringList("*.list"), QDir::Files | QDir::Readable, QDir::Name);
+    list = apt_dir.entryInfoList(QStringList({"*.list", "*.sources"}), QDir::Files | QDir::Readable, QDir::Name);
 
     QFile file("/etc/apt/sources.list");
     if (file.exists() && file.size() > 0 && file.open(QIODevice::ReadOnly | QIODevice::Text)) {
@@ -561,11 +623,36 @@ void MainWindow::pushOk_clicked()
 {
     if (!queued_changes.isEmpty()) {
         for (const QStringList &changes : std::as_const(queued_changes)) {
-            const QString &text = QRegularExpression::escape(changes.at(0));
+            const QString &text = changes.at(0);
             const QString &new_text = changes.at(1);
             const QString &file_name = changes.at(2);
-            const QString cmd = QStringLiteral("sed -i 's;%1;%2;g' %3").arg(text, new_text, file_name);
-            shell->runAsRoot(cmd);
+
+            QFile file(file_name);
+            if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+                qWarning() << "Could not open file:" << file_name;
+                continue;
+            }
+
+            QString content;
+            QTextStream in(&file);
+            content = in.readAll();
+            file.close();
+
+            content.replace(text, new_text);
+
+            // Create temp file
+            QTemporaryFile tempFile;
+            if (!tempFile.open()) {
+                qWarning() << "Could not create temp file";
+                continue;
+            }
+
+            QTextStream out(&tempFile);
+            out << content;
+            out.flush();
+            tempFile.close();
+
+            shell->runAsRoot(QString("mv %1 %2").arg(tempFile.fileName(), file_name));
             sources_changed = true;
         }
         queued_changes.clear();
@@ -623,10 +710,24 @@ void MainWindow::treeWidget_itemChanged(QTreeWidgetItem *item, int column)
                                       "Installer."));
     }
 
-    if (item->checkState(column) == Qt::Checked) {
-        new_text.remove(QRegularExpression("#\\s*"));
+    if (file_name.endsWith(".sources")) {
+        if (item->checkState(column) == Qt::Checked) {
+            new_text.replace(QRegularExpression("Enabled:\\s*no", QRegularExpression::CaseInsensitiveOption),
+                             "Enabled: yes");
+        } else {
+            if (!new_text.contains(QRegularExpression("Enabled:", QRegularExpression::CaseInsensitiveOption))) {
+                new_text.append("\nEnabled: no");
+            } else {
+                new_text.replace(QRegularExpression("Enabled:\\s*yes", QRegularExpression::CaseInsensitiveOption),
+                                 "Enabled: no");
+            }
+        }
     } else {
-        new_text.prepend("# ");
+        if (item->checkState(column) == Qt::Checked) {
+            new_text.remove(QRegularExpression("#\\s*"));
+        } else {
+            new_text.prepend("# ");
+        }
     }
 
     item->setText(column, new_text);
@@ -716,7 +817,8 @@ void MainWindow::pushFastestDebian_clicked()
 void MainWindow::pushFastestMX_clicked()
 {
     progress->show();
-    bool success = shell->runAsRoot("netselect -D -I " + listMXurls + " |tr -s ' ' |sed 's/^ //' |cut -d' ' -f2");
+    QString command = QString("netselect -D -I %1 | tr -s ' ' | sed 's/^[[:space:]]//' | cut -d' ' -f2").arg(listMXurls);
+    bool success = shell->runAsRoot(command);
     qDebug() << listMXurls;
     QString out = shell->readAllStandardOutput().trimmed();
     qDebug() << "FASTEST " << success << out;
@@ -772,40 +874,51 @@ void MainWindow::pushRestoreSources_clicked()
         return;
     }
 
-	bool enable_ahs = false;
+    bool enable_ahs = false;
     // For newer versions and 64-bit OS check if AHS was enabled
     if (mx_version >= 19 && shell->getOut("uname -m", true).trimmed() == "x86_64") {
-        if (shell->run("apt-get update --print-uris | grep -q -E '/mx/([.]?/)*repo/.*/ahs/binary-amd64/Packages'", true)) {
+        if (shell->run("apt-get update --print-uris | grep -q -E '/mx/([.]?/)*repo/.*/ahs/binary-amd64/Packages'",
+                       true)) {
             enable_ahs = true;
             qDebug() << "AHS repo detected:" << enable_ahs;
         }
     }
-	
-	bool enable_mx = false;
-	if (shell->run("apt-get update --print-uris | grep -q -E '/mx/([.]?/)*repo/.*/main/binary-amd64/Packages'", true)) {
-		enable_mx = true;
-	}
 
-    QString mx_list = QString("%1/mx-sources-mx%2/mx.list")
-              .arg(tmpdir.path(), QString::number(mx_version));
+    bool enable_mx = false;
+    if (shell->run("apt-get update --print-uris | grep -q -E '/mx/([.]?/)*repo/.*/main/binary-amd64/Packages'", true)) {
+        enable_mx = true;
+    }
 
-	if (enable_ahs && QFile::exists(mx_list)) {
-		cmd = QString("sed -i -r 's/^[[:space:]]*#[[:space:]#]*(deb.*[[:space:]]ahs)[[:space:]]*/\\1/' %1")
-              .arg(mx_list);
-		shell->run(cmd);
-	}
+    QString mx_list = QString("%1/mx-sources-mx%2/mx.list").arg(tmpdir.path(), QString::number(mx_version));
+    QString mx_sources = QString("%1/mx-sources-mx%2/mx.sources").arg(tmpdir.path(), QString::number(mx_version));
 
-    if (mx_version >= 19 && shell->getOut("uname -m", true).trimmed() == "x86_64" && !enable_ahs && !enable_mx && QFile::exists(mx_list)) {
+    auto enableAHS = [&](const QString &file) {
+        if (QFile::exists(file)) {
+            if (file.endsWith(".list")) {
+                cmd = QString("sed -i -r 's/^[[:space:]]*#[[:space:]#]*(deb.*[[:space:]]ahs)[[:space:]]*/\\1/' %1")
+                          .arg(file);
+            } else {
+                cmd = QString("sed -i -r '/Components:.*ahs/!s/^[[:space:]]*Components:[[:space:]]*\\[([^]]*?)\\][[:space:]]*$/Components: [\\1 ahs]/' %1")
+                          .arg(file);
+            }
+            shell->run(cmd);
+        }
+    };
+
+    QString &file = QFile::exists(mx_list) ? mx_list : mx_sources;
+
+    if (enable_ahs) {
+        enableAHS(file);
+    } else if (mx_version >= 19 && shell->getOut("uname -m", true).trimmed() == "x86_64" && !enable_mx) {
         if (QMessageBox::Yes
             == QMessageBox::question(this, tr("Enabling AHS"), tr("Do you use AHS (Advanced Hardware Stack) repo?"))) {
-			cmd = QString("sed -i -r 's/^[[:space:]]*#[[:space:]#]*(deb.*[[:space:]]ahs)[[:space:]]*/\\1/' %1")
-				.arg(mx_list);
-			shell->run(cmd);
+            enableAHS(file);
         }
     }
 
     // Move the sources list files from the temporary directory to /etc/apt/sources.list.d/
-    cmd = QString("mv -b %1/mx-sources-mx%2/*.list /etc/apt/sources.list.d/ && chown 0:0 /etc/apt/sources.list.d/* && chmod 644 /etc/apt/sources.list.d/*")
+    cmd = QString("mv -b %1/mx-sources-mx%2/*.{list,sources} /etc/apt/sources.list.d/ && chown 0:0 /etc/apt/sources.list.d/* && "
+                  "chmod 644 /etc/apt/sources.list.d/*")
               .arg(tmpdir.path(), QString::number(mx_version));
     shell->runAsRoot(cmd);
 

@@ -1,3 +1,9 @@
+mx-system (25.02.01mx23) mx; urgency=medium
+
+  * add TryExec lines to desktop overrides
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 08 Feb 2025 17:25:16 -0500
+
 mx-system (25.01.03mx23) mx; urgency=medium
 
   * mx 23.5 strings

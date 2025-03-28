@@ -5,13 +5,13 @@
     <name>MainWindow</name>
     <message>
         <location filename="../mainwindow.ui" line="17"/>
-        <location filename="../mainwindow.cpp" line="63"/>
+        <location filename="../mainwindow.cpp" line="62"/>
         <source>MX Repo Manager</source>
         <translation>MX upravljalnik skladišč</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="32"/>
-        <location filename="../mainwindow.cpp" line="642"/>
+        <location filename="../mainwindow.cpp" line="743"/>
         <source>Select the APT repository that you want to use:</source>
         <translation>Izberite APT skladišče, ki ga želite uporabljati:</translation>
     </message>
@@ -101,155 +101,155 @@
         <translation>Uveljavi</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="165"/>
-        <location filename="../mainwindow.cpp" line="495"/>
-        <location filename="../mainwindow.cpp" line="812"/>
+        <location filename="../mainwindow.cpp" line="166"/>
+        <location filename="../mainwindow.cpp" line="557"/>
+        <location filename="../mainwindow.cpp" line="925"/>
         <source>Success</source>
         <translation>Operacija je uspela</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="166"/>
-        <location filename="../mainwindow.cpp" line="496"/>
-        <location filename="../mainwindow.cpp" line="816"/>
+        <location filename="../mainwindow.cpp" line="167"/>
+        <location filename="../mainwindow.cpp" line="558"/>
+        <location filename="../mainwindow.cpp" line="929"/>
         <source>Your new selection will take effect the next time sources are updated.</source>
         <translation>Vaša nova izbira bo postala aktivna, ko bodo viri naslednjič posodobljeni.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="330"/>
+        <location filename="../mainwindow.cpp" line="348"/>
         <source>Lists</source>
         <translation>Seznami</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="330"/>
+        <location filename="../mainwindow.cpp" line="348"/>
         <source>Sources (checked sources are enabled)</source>
         <translation>Viri (označeni viri so vklopljeni)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="498"/>
-        <location filename="../mainwindow.cpp" line="700"/>
-        <location filename="../mainwindow.cpp" line="710"/>
-        <location filename="../mainwindow.cpp" line="727"/>
-        <location filename="../mainwindow.cpp" line="740"/>
-        <location filename="../mainwindow.cpp" line="747"/>
-        <location filename="../mainwindow.cpp" line="763"/>
-        <location filename="../mainwindow.cpp" line="770"/>
-        <location filename="../mainwindow.cpp" line="891"/>
+        <location filename="../mainwindow.cpp" line="560"/>
+        <location filename="../mainwindow.cpp" line="801"/>
+        <location filename="../mainwindow.cpp" line="811"/>
+        <location filename="../mainwindow.cpp" line="829"/>
+        <location filename="../mainwindow.cpp" line="842"/>
+        <location filename="../mainwindow.cpp" line="849"/>
+        <location filename="../mainwindow.cpp" line="865"/>
+        <location filename="../mainwindow.cpp" line="872"/>
+        <location filename="../mainwindow.cpp" line="1004"/>
         <source>Error</source>
         <translation>Napaka</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="498"/>
+        <location filename="../mainwindow.cpp" line="560"/>
         <source>Could not change the repo.</source>
         <translation>Nisem mogel zamenjati skladišča.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="523"/>
+        <location filename="../mainwindow.cpp" line="585"/>
         <source>Cancel</source>
         <translation>Prekliči</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="529"/>
+        <location filename="../mainwindow.cpp" line="591"/>
         <source>Please wait...</source>
         <translation>Prosimo, počakajt...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="580"/>
+        <location filename="../mainwindow.cpp" line="667"/>
         <source>About %1</source>
         <translation>O %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="581"/>
+        <location filename="../mainwindow.cpp" line="668"/>
         <source>Version: </source>
         <translation>Različica:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="583"/>
+        <location filename="../mainwindow.cpp" line="670"/>
         <source>Program for choosing the default APT repository</source>
         <translation>Program za določitev privzetega APT skladišča</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="585"/>
+        <location filename="../mainwindow.cpp" line="672"/>
         <source>Copyright (c) MX Linux</source>
         <translation>Avtorska zaščita (c) MX Linux</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="586"/>
+        <location filename="../mainwindow.cpp" line="673"/>
         <source>%1 License</source>
         <translation>%1 licenca</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="600"/>
+        <location filename="../mainwindow.cpp" line="687"/>
         <source>%1 Help</source>
         <translation>%1 pomoč</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="617"/>
+        <location filename="../mainwindow.cpp" line="704"/>
         <source>Warning</source>
         <translation>Opozorilo</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="618"/>
+        <location filename="../mainwindow.cpp" line="705"/>
         <source>You have selected MX Test Repo. It&apos;s not recommended to leave it enabled or to upgrade all the packages from it.</source>
         <translation>Izbrali ste MX testno skladišče. Njegova uporaba ni priporočljiva za nameščanje ali nadradnje.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="621"/>
+        <location filename="../mainwindow.cpp" line="708"/>
         <source>A safer option is to install packages individually with MX Package Installer.</source>
         <translation>Bolj varna možnost je nameščanje paketov s pomočjo MX namestilnik paketov</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="644"/>
+        <location filename="../mainwindow.cpp" line="745"/>
         <source>Select the APT repository and sources that you want to use:</source>
         <translation>Izberite APT skladišče in vire, ki jih želite uporabljati:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="700"/>
+        <location filename="../mainwindow.cpp" line="801"/>
         <source>netselect-apt could not detect fastest repo.</source>
         <translation>netselect-apt ni mogel najti najhitrejšega skladišča.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="710"/>
-        <location filename="../mainwindow.cpp" line="727"/>
+        <location filename="../mainwindow.cpp" line="811"/>
+        <location filename="../mainwindow.cpp" line="829"/>
         <source>Could not detect fastest repo.</source>
         <translation>Najhitrejšega skladišča ni bilo mogoče odkriti</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="740"/>
+        <location filename="../mainwindow.cpp" line="842"/>
         <source>Can&apos;t figure out if this app is running on antiX or MX</source>
         <translation>Ni mogoče ugotoviti ali ta aplikacija teče na antiX ali MX</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="748"/>
+        <location filename="../mainwindow.cpp" line="850"/>
         <source>MX version not detected or out of range: </source>
         <translation>MX različica ni zaznana ali je izven obsega:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="763"/>
+        <location filename="../mainwindow.cpp" line="865"/>
         <source>Could not download original APT files.</source>
         <translation>Izvnirnih APT datotek ni bilo mogoče prenesti.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="770"/>
+        <location filename="../mainwindow.cpp" line="872"/>
         <source>Could not unzip downloaded file.</source>
         <translation>Prenešen datoteke ni bilo mogoče razširiti.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="799"/>
+        <location filename="../mainwindow.cpp" line="913"/>
         <source>Enabling AHS</source>
         <translation>Vklop AHS</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="799"/>
+        <location filename="../mainwindow.cpp" line="913"/>
         <source>Do you use AHS (Advanced Hardware Stack) repo?</source>
         <translation>Uporabljate AHS (Advanced Hardware Stack) skladišče?</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="813"/>
+        <location filename="../mainwindow.cpp" line="926"/>
         <source>Original APT sources have been restored to the release status. User added source files in /etc/apt/sources.list.d/ have not been touched.</source>
         <translation>Izvirni APT viri so bili obnovljeni na stanje ob izdaji. Izvorne datoteke, ki jih je uporabnik dodal v /etc/apt/sources.list.d/, niso bile spremenjene.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="892"/>
+        <location filename="../mainwindow.cpp" line="1005"/>
         <source>There was an error writing file: %1. Please check if you have enough free space on your drive</source>
         <translation>Pri zapisovanju datoteke %1 se je zgodila napaka. Preverite ali je na nosilcu dovolj prostora</translation>
     </message>

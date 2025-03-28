@@ -8,4 +8,9 @@ Standards-Version: 3.9.3
 Package: plymouth-themes-mx
 Architecture: all
 Depends: ${misc:Depends}, plymouth-themes
+Description: Plymouth themes packaged by MX team
+
+Package: plymouth-themes-mx-extra
+Architecture: all
+Depends: ${misc:Depends}, plymouth-themes
 Description: Extra plymouth themes packaged by MX team

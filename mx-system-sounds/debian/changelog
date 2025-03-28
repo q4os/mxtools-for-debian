@@ -1,3 +1,44 @@
+mx-system-sounds (25.3.02mx23) mx; urgency=medium
+
+  * additional adjustments to sound server check
+  * if no soundserver, or timeout, just try playing the sound anyway
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 24 Mar 2025 20:57:59 -0400
+
+mx-system-sounds (25.3.01mx23) mx; urgency=medium
+
+  * update checks
+  * old check can fail on systemd systems
+  * ensure login sound attempts playback on timeout
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 23 Mar 2025 12:36:43 -0400
+
+mx-system-sounds (25.2.04mx23) mx; urgency=medium
+
+  * one more bash syntax fix
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 16 Feb 2025 18:15:51 -0500
+
+mx-system-sounds (25.2.03mx23) mx; urgency=medium
+
+  * fix typo in startupsound-mx (thanks takobaba)
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 16 Feb 2025 16:14:13 -0500
+
+mx-system-sounds (25.2.02mx23) mx; urgency=medium
+
+  * improve soundserver checking
+  * wait for xfce4-session (possible dbus conflict)
+  * don't do anything if login sound not configured true
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 13 Feb 2025 18:41:51 -0500
+
+mx-system-sounds (25.2.01mx23) mx; urgency=medium
+
+  * wait for sound server before playing login
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 08 Feb 2025 21:27:16 -0500
+
 mx-system-sounds (24.3.01mx23) mx; urgency=medium
 
   * update translations

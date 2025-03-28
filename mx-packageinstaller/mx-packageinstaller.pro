@@ -22,9 +22,8 @@
 # **********************************************************************/
 
 QT       += core gui xml network widgets
-
-DEFINES  += QT_DEPRECATED_WARNINGS
 CONFIG   += debug_and_release warn_on strict_c++ c++17
+
 CONFIG(release, debug|release) {
     DEFINES += NDEBUG
     QMAKE_CXXFLAGS += -flto=auto

@@ -11,10 +11,12 @@
 #command to find desktop-login sound for a given theme
 #find  /usr/share/sounds/theme-name/ |grep desktop-login
 
-customsound=""
+main(){
+#get configuration
 
 configfile="$HOME/.config/MX-Linux/mx-system-sounds/startupsound.conf"
 conffile="$HOME/.config/MX-Linux/mx-system-sounds/mx-login-logout_sounds.conf"
+customsound=""
 
 if [ -e "$conffile" ]; then
 
@@ -23,18 +25,85 @@ if [ -e "$conffile" ]; then
 
 	startup_enabled=$(grep startup "$conffile" |cut -d '=' -f2)
 	#echo sound status is $startup_enabled
-
-	soundthemename=$(xfconf-query -c xsettings -p /Net/SoundThemeName)
-	#echo sound theme is $soundthemename
-
-	defaultsound=$(find  /usr/share/sounds/$soundthemename/ |grep desktop-login)
-	#echo default sound is $defaultsound
-
+    
+    #exit if doing nothing
+	if [ "$startup_enabled" != "true" ]; then
+		exit 0
+	fi
 fi
+
+#wait for sound server
+max_duration=10 # max duration to wait for wireplumber
+elapsed=0
+
+#check for sound server utility
+soundserver=""
+
+if [ -x /usr/bin/pulseaudio ]; then
+	soundserver="pulseaudio"
+fi
+if [ -x /usr/bin/wireplumber ]; then
+	soundserver="wireplumber"
+fi
+if [ -z "$soundserver" ]; then
+	#no soundserver, just use alsa?
+	soundserver="alsa"
+	#split difference on timeout
+	elapsed=5
+fi
+
+echo "soundserver is " $soundserver
+
+INITSKIP="false"
+#first init check for pure systemd, no shim
+INITCHECK=$(readlink /usr/sbin/init)
+if [[ "$INITCHECK" =~ "/lib/systemd/systemd" ]]; then
+        INITSKIP="true"
+fi
+
+#second init check for system-shim configuration
+#only if init skip is still false
+if [ "$INITSKIP" = "false" ]; then
+	INITCHECK=$(/usr/bin/ps -p 1 -o cmd -h)
+	if [[ "$INITCHECK" =~ "/lib/systemd/systemd" ]]; then 
+		INITSKIP="true"
+	fi
+fi
+
+echo "initskip is " $INITSKIP
+if [ "$INITSKIP" = "true" ]; then
+#wait for xfce4-session to start and wireplumber
+	until [ -n "$(pidof $soundserver)" ] && [ -n "$(pidof xfce4-session)" ]  ; do
+        echo $elapsed
+        sleep 1
+        elapsed=$((elapsed + 1))
+        if [ "$elapsed" -ge "$max_duration" ]; then
+               play_sound
+        fi
+	done
+	#slightly different under sysVinit.  Make sure wireplumber starts after xfce4-session
+else
+	until [[ $(pidof $soundserver) -gt $(pidof xfce4-session) ]]  ; do
+        sleep 1
+        echo $elapsed
+        elapsed=$((elapsed + 1))
+        if [ "$elapsed" -ge "$max_duration" ]; then
+                play_sound
+        fi
+	done	
+fi
+
+play_sound
+}
+
+play_sound(){
 
 if [ "$customsound" = "" ]; then
 	if [ "$startup_enabled" = "true" ]; then
-        sleep 5
+	    #echo sound theme is $soundthemename
+	    soundthemename=$(xfconf-query -c xsettings -p /Net/SoundThemeName)
+		#echo default sound is $defaultsound
+		defaultsound=$(find  /usr/share/sounds/$soundthemename/ |grep desktop-login)
 		play "$defaultsound" 
 		exit 0
 	else
@@ -42,7 +111,6 @@ if [ "$customsound" = "" ]; then
 	fi
 else
 	if [ "$startup_enabled" = "true" ]; then
-		sleep 5
 		play "$customsound" 
 		exit 0
 	else
@@ -51,3 +119,8 @@ else
 fi
 
 exit 0
+}
+
+main
+
+

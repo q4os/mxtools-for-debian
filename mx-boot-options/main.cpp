@@ -31,26 +31,23 @@
 #include "common.h"
 #include "mainwindow.h"
 #include "version.h"
+
 #include <unistd.h>
 
 int main(int argc, char *argv[])
 {
-    if (getuid() == 0) {
+    auto uid = getuid();
+    if (uid == 0) {
         qputenv("XDG_RUNTIME_DIR", "/run/user/0");
         qunsetenv("SESSION_MANAGER");
     }
     QApplication app(argc, argv);
-    if (getuid() == 0) {
+    if (uid == 0) {
         qputenv("HOME", "/root");
     }
 
     QApplication::setApplicationVersion(VERSION);
     QApplication::setWindowIcon(QIcon::fromTheme(QApplication::applicationName()));
-
-    QProcess proc;
-    proc.start("logname", {}, QIODevice::ReadOnly);
-    proc.waitForFinished();
-    auto const logname = QString::fromLatin1(proc.readAllStandardOutput().trimmed());
 
     QCommandLineParser parser;
     parser.setApplicationDescription(QApplication::tr("Program for selecting common start-up choices"));
@@ -84,27 +81,18 @@ int main(int argc, char *argv[])
                 nullptr, QObject::tr("Error"),
                 QObject::tr(
                     "You seem to be logged in as root, please log out and log in as normal user to use this program."));
-            exit(EXIT_FAILURE);
+            QCoreApplication::exit(EXIT_FAILURE);
         }
     }
 
-    if (getuid() != 0) {
+    if (uid != 0) {
         if (!QFile::exists("/usr/bin/pkexec") && !QFile::exists("/usr/bin/gksu")) {
             QMessageBox::critical(nullptr, QObject::tr("Error"),
                                   QObject::tr("You must run this program with admin access."));
-            exit(EXIT_FAILURE);
+            QCoreApplication::exit(EXIT_FAILURE);
         }
     }
-
-    MainWindow w;
-    w.show();
-    auto const exit_code = QApplication::exec();
-    proc.start("grep", {"^" + logname + ":", "/etc/passwd"});
-    proc.waitForFinished();
-    auto const home = QString::fromLatin1(proc.readAllStandardOutput().trimmed()).section(":", 5, 5);
-    auto const file_name = home + "/.config/" + QApplication::applicationName() + "rc";
-    if (QFile::exists(file_name)) {
-        Cmd().runAsRoot("chown " + logname + ": " + file_name);
-    }
-    return exit_code;
+    MainWindow mainWindow;
+    mainWindow.show();
+    return QApplication::exec();
 }

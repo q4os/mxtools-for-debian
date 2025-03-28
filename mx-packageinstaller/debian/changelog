@@ -1,3 +1,21 @@
+mx-packageinstaller (25.3) mx; urgency=medium
+
+  * Implements wildcard (*, ?) search
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 20 Mar 2025 09:19:36 -0400
+
+mx-packageinstaller (25.2.01) mx; urgency=medium
+
+  * Add CTRL-F to change focus to search field
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 13 Feb 2025 12:53:23 -0500
+
+mx-packageinstaller (25.2) mx; urgency=medium
+
+  * Minor change, check for mx.sources in addition to mx.list
+
+ -- Adrian <adrian@mxlinux.org>  Tue, 11 Feb 2025 00:14:29 -0500
+
 mx-packageinstaller (25.1) mx; urgency=medium
 
   * Fix crash when switching back to Popular tab after searching in another

@@ -7,7 +7,8 @@ Build-Depends: debhelper (>= 10),
                 valac (>= 0.26) | valac-0.26,
                 libgtk-3-dev,
                 libgee-0.8-dev,
-                libjson-glib-dev
+                libjson-glib-dev,
+                libgdk-pixbuf-2.0-dev
 Standards-Version: 3.9.3
 Homepage: http://teejeetech.blogspot.in/
 #Vcs-Git: git://git.debian.org/collab-maint/hello.git
@@ -20,7 +21,8 @@ Depends: ${shlibs:Depends}, ${misc:Depends},
  conky | conky-legacy | conky-all | conky-legacy-all,
  p7zip-full,
  rsync,
- imagemagick
+ imagemagick,
+ libgdk-pixbuf-2.0-0
 Breaks: conky-manager2
 Conflicts: conky-manager2
 Replaces: conky-manager2

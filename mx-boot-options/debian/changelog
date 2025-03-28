@@ -1,3 +1,10 @@
+mx-boot-options (25.2.06) mx; urgency=medium
+
+  * Add option to mount encrypted LUKS partition when running live and chroot to it
+  * Add option to change boot options for live environment (gfx-boot and grub)
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 13 Feb 2025 00:06:45 -0500
+
 mx-boot-options (25.2) mx; urgency=medium
 
   * Fix translations

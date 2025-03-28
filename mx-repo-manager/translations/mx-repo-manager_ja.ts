@@ -5,13 +5,13 @@
     <name>MainWindow</name>
     <message>
         <location filename="../mainwindow.ui" line="17"/>
-        <location filename="../mainwindow.cpp" line="63"/>
+        <location filename="../mainwindow.cpp" line="62"/>
         <source>MX Repo Manager</source>
         <translation>MX リボジトリマネージャ</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="32"/>
-        <location filename="../mainwindow.cpp" line="642"/>
+        <location filename="../mainwindow.cpp" line="743"/>
         <source>Select the APT repository that you want to use:</source>
         <translation>使用したい APT リポジトリを選択して下さい:</translation>
     </message>
@@ -101,155 +101,155 @@
         <translation>適用</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="165"/>
-        <location filename="../mainwindow.cpp" line="495"/>
-        <location filename="../mainwindow.cpp" line="812"/>
+        <location filename="../mainwindow.cpp" line="166"/>
+        <location filename="../mainwindow.cpp" line="557"/>
+        <location filename="../mainwindow.cpp" line="925"/>
         <source>Success</source>
         <translation>成功</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="166"/>
-        <location filename="../mainwindow.cpp" line="496"/>
-        <location filename="../mainwindow.cpp" line="816"/>
+        <location filename="../mainwindow.cpp" line="167"/>
+        <location filename="../mainwindow.cpp" line="558"/>
+        <location filename="../mainwindow.cpp" line="929"/>
         <source>Your new selection will take effect the next time sources are updated.</source>
         <translation>新しい選択は、ソースが更新された後で反映されます。</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="330"/>
+        <location filename="../mainwindow.cpp" line="348"/>
         <source>Lists</source>
         <translation>一覧</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="330"/>
+        <location filename="../mainwindow.cpp" line="348"/>
         <source>Sources (checked sources are enabled)</source>
         <translation>ソース (チェックが入ったソースが有効)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="498"/>
-        <location filename="../mainwindow.cpp" line="700"/>
-        <location filename="../mainwindow.cpp" line="710"/>
-        <location filename="../mainwindow.cpp" line="727"/>
-        <location filename="../mainwindow.cpp" line="740"/>
-        <location filename="../mainwindow.cpp" line="747"/>
-        <location filename="../mainwindow.cpp" line="763"/>
-        <location filename="../mainwindow.cpp" line="770"/>
-        <location filename="../mainwindow.cpp" line="891"/>
+        <location filename="../mainwindow.cpp" line="560"/>
+        <location filename="../mainwindow.cpp" line="801"/>
+        <location filename="../mainwindow.cpp" line="811"/>
+        <location filename="../mainwindow.cpp" line="829"/>
+        <location filename="../mainwindow.cpp" line="842"/>
+        <location filename="../mainwindow.cpp" line="849"/>
+        <location filename="../mainwindow.cpp" line="865"/>
+        <location filename="../mainwindow.cpp" line="872"/>
+        <location filename="../mainwindow.cpp" line="1004"/>
         <source>Error</source>
         <translation>エラー</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="498"/>
+        <location filename="../mainwindow.cpp" line="560"/>
         <source>Could not change the repo.</source>
         <translation>リボジトリを変更できませんでした。</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="523"/>
+        <location filename="../mainwindow.cpp" line="585"/>
         <source>Cancel</source>
         <translation>キャンセル</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="529"/>
+        <location filename="../mainwindow.cpp" line="591"/>
         <source>Please wait...</source>
         <translation>お待ち下さい...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="580"/>
+        <location filename="../mainwindow.cpp" line="667"/>
         <source>About %1</source>
         <translation> %1 について</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="581"/>
+        <location filename="../mainwindow.cpp" line="668"/>
         <source>Version: </source>
         <translation>バージョン: </translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="583"/>
+        <location filename="../mainwindow.cpp" line="670"/>
         <source>Program for choosing the default APT repository</source>
         <translation>既定の APT リポジトリを選択するためのプログラム</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="585"/>
+        <location filename="../mainwindow.cpp" line="672"/>
         <source>Copyright (c) MX Linux</source>
         <translation>Copyright (c) MX Linux</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="586"/>
+        <location filename="../mainwindow.cpp" line="673"/>
         <source>%1 License</source>
         <translation>%1 ライセンス</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="600"/>
+        <location filename="../mainwindow.cpp" line="687"/>
         <source>%1 Help</source>
         <translation>%1 のヘルプ</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="617"/>
+        <location filename="../mainwindow.cpp" line="704"/>
         <source>Warning</source>
         <translation>警告</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="618"/>
+        <location filename="../mainwindow.cpp" line="705"/>
         <source>You have selected MX Test Repo. It&apos;s not recommended to leave it enabled or to upgrade all the packages from it.</source>
         <translation>MX テスト版リポジトリが選択されています。これを有効にしたままにしたり、そこから全てのパッケージをアップグレードしたりすることはお勧めできません。</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="621"/>
+        <location filename="../mainwindow.cpp" line="708"/>
         <source>A safer option is to install packages individually with MX Package Installer.</source>
         <translation>より安全なオプションは、MX パッケージ インストーラを使い、パッケージを個別にインストールすることです。</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="644"/>
+        <location filename="../mainwindow.cpp" line="745"/>
         <source>Select the APT repository and sources that you want to use:</source>
         <translation>利用したい APTリポジトリとソースを選択して下さい:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="700"/>
+        <location filename="../mainwindow.cpp" line="801"/>
         <source>netselect-apt could not detect fastest repo.</source>
         <translation>netselect-apt は最速のレポを検出できませんでした。</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="710"/>
-        <location filename="../mainwindow.cpp" line="727"/>
+        <location filename="../mainwindow.cpp" line="811"/>
+        <location filename="../mainwindow.cpp" line="829"/>
         <source>Could not detect fastest repo.</source>
         <translation>最速のリポジトリを検出できませんでした。</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="740"/>
+        <location filename="../mainwindow.cpp" line="842"/>
         <source>Can&apos;t figure out if this app is running on antiX or MX</source>
         <translation>このアプリは antiX で動いているのか、MXで動いているのか分かりません</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="748"/>
+        <location filename="../mainwindow.cpp" line="850"/>
         <source>MX version not detected or out of range: </source>
         <translation>MX のバージョンが検出できないか、範囲外です。</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="763"/>
+        <location filename="../mainwindow.cpp" line="865"/>
         <source>Could not download original APT files.</source>
         <translation>元の APTファイルをダウンロードできませんでした。</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="770"/>
+        <location filename="../mainwindow.cpp" line="872"/>
         <source>Could not unzip downloaded file.</source>
         <translation>ダウンロードしたファイルを展開できません。</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="799"/>
+        <location filename="../mainwindow.cpp" line="913"/>
         <source>Enabling AHS</source>
         <translation>AHS を有効にしています</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="799"/>
+        <location filename="../mainwindow.cpp" line="913"/>
         <source>Do you use AHS (Advanced Hardware Stack) repo?</source>
         <translation>AHS (Advanced Hardware Stack) を利用しますか？</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="813"/>
+        <location filename="../mainwindow.cpp" line="926"/>
         <source>Original APT sources have been restored to the release status. User added source files in /etc/apt/sources.list.d/ have not been touched.</source>
         <translation>オリジナルの APTソースがリリース時の状態に復元されました。etc/apt/sources.list.d/ にある、ユーザが追加したソースファイルには触れていません。</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="892"/>
+        <location filename="../mainwindow.cpp" line="1005"/>
         <source>There was an error writing file: %1. Please check if you have enough free space on your drive</source>
         <translation>ファイル %1 の書き込み中にエラー発生。ドライブに十分な空き領域があるか確認してください。</translation>
     </message>

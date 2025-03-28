@@ -99,8 +99,8 @@ void MainWindow::setup()
         defualtlogoutsound = runCmd(home_path + "/.local/share/sounds" + soundtheme + "/ |grep desktop-logout").str;
     } else {
         // check system level location second
-        defualtloginsound = runCmd("find  /usr/share/sounds/" + soundtheme + "/ |grep desktop-login").str;
-        defualtlogoutsound = runCmd("find  /usr/share/sounds/" + soundtheme + "/ |grep desktop-logout").str;
+        defualtloginsound = runCmd("find /usr/share/sounds/" + soundtheme + "/ |grep desktop-login").str;
+        defualtlogoutsound = runCmd("find /usr/share/sounds/" + soundtheme + "/ |grep desktop-logout").str;
     }
 
     // Check for custom sounds
@@ -278,8 +278,8 @@ void MainWindow::on_buttonApply_clicked()
         // desktop-logout").str;
     } else {
         // If not present, check system location second
-        defualtloginsound = runCmd("find  /usr/share/sounds/" + soundtheme2 + "/ |grep desktop-login").str;
-        // defualtlogoutsound = runCmd("find  /usr/share/sounds/" + soundtheme2 + "/ |grep desktop-logout").str;
+        defualtloginsound = runCmd("find /usr/share/sounds/" + soundtheme2 + "/ |grep desktop-login").str;
+        // defualtlogoutsound = runCmd("find /usr/share/sounds/" + soundtheme2 + "/ |grep desktop-logout").str;
     }
     // Set login sound
     if (currentlogin != defualtloginsound) {
@@ -404,7 +404,7 @@ void MainWindow::on_button_reset_login_clicked()
     // Reset the login sound to the theme default.  if the theme doesn't have a desktop-login defined, set to "None"
 
     defualtloginsound
-        = runCmd("find  /usr/share/sounds/" + ui->comboBox_theme->currentText() + "/ |grep desktop-login").str;
+        = runCmd("find /usr/share/sounds/" + ui->comboBox_theme->currentText() + "/ |grep desktop-login").str;
     QFileInfo file_info(defualtloginsound);
     if (file_info.exists()) {
         ui->button_login_sound->setText(QStringLiteral("Default"));
@@ -427,7 +427,7 @@ void MainWindow::on_button_reset_logout_clicked()
     // Reset the logout sound to the theme default.  if the theme doesn't have a desktop-logout defined, set to "None"
 
     defualtlogoutsound
-        = runCmd("find  /usr/share/sounds/" + ui->comboBox_theme->currentText() + "/ |grep desktop-logout").str;
+        = runCmd("find /usr/share/sounds/" + ui->comboBox_theme->currentText() + "/ |grep desktop-logout").str;
     QFileInfo file_info(defualtlogoutsound);
     if (file_info.exists()) {
         ui->button_logout_sound->setText(QStringLiteral("Default"));
@@ -461,7 +461,7 @@ void MainWindow::on_comboBox_theme_activated(const QString &arg1)
             ui->button_login_sound->setText(file_info.baseName());
             ui->button_login_sound->setToolTip(file_info.filePath());
         } else {
-            defualtloginsound = runCmd("find  /usr/share/sounds/" + arg1 + "/ |grep desktop-login").str;
+            defualtloginsound = runCmd("find /usr/share/sounds/" + arg1 + "/ |grep desktop-login").str;
             QFileInfo file_info(defualtloginsound);
             if (file_info.exists()) {
                 ui->button_login_sound->setText(QStringLiteral("Default"));
@@ -485,7 +485,7 @@ void MainWindow::on_comboBox_theme_activated(const QString &arg1)
             ui->button_logout_sound->setText(file_info.baseName());
             ui->button_logout_sound->setToolTip(file_info.filePath());
         } else {
-            defualtlogoutsound = runCmd("find  /usr/share/sounds/" + arg1 + "/ |grep desktop-logout").str;
+            defualtlogoutsound = runCmd("find /usr/share/sounds/" + arg1 + "/ |grep desktop-logout").str;
             QFileInfo file_info(defualtlogoutsound);
             if (file_info.exists()) {
                 ui->button_logout_sound->setText(QStringLiteral("Default"));
