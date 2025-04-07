@@ -2,6 +2,7 @@
 
 #include <QDir>
 #include <QMap>
+#include <QString>
 
 // Pair of arch names returned by QSysInfo::currentCpuArchitecture() and corresponding DEB_BUILD_ARCH formats
 static const QMap<QString, QString> arch_names {
@@ -22,10 +23,13 @@ public:
 
 private:
     QMap<QString, PackageInfo> candidates;
-    QString files_content;
+    QString arch;
+    QString filesContent;
     const QDir dir {"/var/lib/apt/lists/"};
 
-    bool readFile(const QString &file_name);
+    bool isDirValid() const;
+    bool readFile(const QString &fileName);
     void loadCacheFiles();
     void parseContent();
+    void updateCandidate(const QString &package, const QString &version, const QString &description);
 };

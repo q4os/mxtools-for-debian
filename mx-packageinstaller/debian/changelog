@@ -1,3 +1,13 @@
+mx-packageinstaller (25.3.02) mx; urgency=medium
+
+  * Fix issue displaying an empty line in flatpak list
+  * Fix performance issue when switching tabs after deselecting hide libs
+    (still slower than normal, but it's functional now)
+  * Clear some escape characters from output
+  * Add busy cursor when loading the list 
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 28 Mar 2025 13:34:04 -0400
+
 mx-packageinstaller (25.3) mx; urgency=medium
 
   * Implements wildcard (*, ?) search

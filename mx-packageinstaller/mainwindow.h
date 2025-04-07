@@ -116,7 +116,7 @@ class MainWindow : public QDialog
     Q_OBJECT
 
 public:
-    explicit MainWindow(const QCommandLineParser &arg_parser, QWidget *parent = nullptr);
+    explicit MainWindow(const QCommandLineParser &argParser, QWidget *parent = nullptr);
     ~MainWindow() override;
 
 protected:
@@ -186,40 +186,40 @@ private:
     bool displayPackagesIsRunning {false};
     bool firstRunFP {true};
     bool hideLibsChecked {true};
-    bool test_initially_enabled {false};
-    bool updated_once {false};
-    bool warning_backports {false};
-    bool warning_flatpaks {false};
-    bool warning_test {false};
+    bool testInitiallyEnabled {false};
+    bool updatedOnce {false};
+    bool warningBackports {false};
+    bool warningFlatpaks {false};
+    bool warningTest {false};
     int savedComboIndex {0};
 
     Cmd cmd;
-    LockFile lock_file {"/var/lib/dpkg/lock"};
+    LockFile lockFile {"/var/lib/dpkg/lock"};
     QHash<QString, VersionNumber> listInstalledVersions();
-    QIcon qicon_installed;
-    QIcon qicon_upgradable;
-    QList<PopularInfo> popular_apps;
+    QIcon qiconInstalled;
+    QIcon qiconUpgradable;
+    QList<PopularInfo> popularApps;
     QLocale locale;
-    QMap<QString, PackageInfo> backports_list;
-    QMap<QString, PackageInfo> enabled_list;
-    QMap<QString, PackageInfo> installed_packages;
-    QMap<QString, PackageInfo> mx_list;
+    QMap<QString, PackageInfo> backportsList;
+    QMap<QString, PackageInfo> enabledList;
+    QMap<QString, PackageInfo> installedPackages;
+    QMap<QString, PackageInfo> mxList;
     QProgressBar *bar {};
     QProgressDialog *progress {};
     QPushButton *pushCancel {};
     QSettings dictionary;
     QSettings settings;
-    QString FPuser;
+    QString fpUser;
     QString arch;
-    QString temp_list {"/etc/apt/sources.list.d/mxpitemp.list"};
-    QString ver_name;
-    QStringList change_list;
+    QString tempList {"/etc/apt/sources.list.d/mxpitemp.list"};
+    QString verName;
+    QStringList changeList;
     QStringList flatpaks;
-    QStringList flatpaks_apps;
-    QStringList flatpaks_runtimes;
-    QStringList installed_apps_fp;
-    QStringList installed_runtimes_fp;
-    QTemporaryDir tmp_dir;
+    QStringList flatpaksApps;
+    QStringList flatpaksRuntimes;
+    QStringList installedAppsFP;
+    QStringList installedRuntimesFP;
+    QTemporaryDir tempDir;
     QTimer timer;
     QTreeWidget *currentTree {}; // current/calling tree
     QTreeWidgetItem *lastItemClicked {};
@@ -238,11 +238,11 @@ private:
     [[nodiscard]] QString mapArchToFormat(const QString &arch) const;
     [[nodiscard]] QStringList listFlatpaks(const QString &remote, const QString &type = QLatin1String("")) const;
     [[nodiscard]] QStringList listInstalledFlatpaks(const QString &type = QLatin1String(""));
-    [[nodiscard]] QTreeWidgetItem *createFlatpakItem(const QString &item, const QStringList &installed_all) const;
+    [[nodiscard]] QTreeWidgetItem *createFlatpakItem(const QString &item, const QStringList &installedAll) const;
     [[nodiscard]] QTreeWidgetItem *createTreeItem(const QString &name, const QString &version,
                                                   const QString &description) const;
     [[nodiscard]] bool checkInstalled(const QVariant &names) const;
-    [[nodiscard]] bool checkUpgradable(const QStringList &name_list) const;
+    [[nodiscard]] bool checkUpgradable(const QStringList &nameList) const;
     [[nodiscard]] bool isOnline();
     [[nodiscard]] bool isPackageInstallable(const QString &installable, const QString &modArch) const;
     [[nodiscard]] static QString getDebianVerName();
@@ -252,23 +252,23 @@ private:
     [[nodiscard]] QMap<QString, PackageInfo> *getCurrentList();
     [[nodiscard]] QTreeWidget *getCurrentTree();
 
-    bool buildPackageLists(bool force_download = false);
+    bool buildPackageLists(bool forceDownload = false);
     bool confirmActions(const QString &names, const QString &action);
 
     bool downloadAndUnzip(const QString &url, QFile &file);
-    bool downloadAndUnzip(const QString &url, const QString &repo_name, const QString &branch, const QString &format,
+    bool downloadAndUnzip(const QString &url, const QString &repoName, const QString &branch, const QString &format,
                           QFile &file);
     bool downloadFile(const QString &url, QFile &file);
-    bool downloadPackageList(bool force_download = false);
+    bool downloadPackageList(bool forceDownload = false);
     bool install(const QString &names);
-    bool installBatch(const QStringList &name_list);
+    bool installBatch(const QStringList &nameList);
     bool installPopularApp(const QString &name);
     bool installPopularApps();
     bool installSelected();
     bool markKeep();
-    bool readPackageList(bool force_download = false);
-    bool uninstall(const QString &names, const QString &preuninstall = QLatin1String(""),
-                   const QString &postuninstall = QLatin1String(""));
+    bool readPackageList(bool forceDownload = false);
+    bool uninstall(const QString &names, const QString &preUninstall = QLatin1String(""),
+                   const QString &postUninstall = QLatin1String(""));
     bool updateApt();
     static QString convert(quint64 bytes);
     static quint64 convert(const QString &size);
@@ -277,19 +277,19 @@ private:
     void cancelDownload();
     void centerWindow();
     void clearUi();
-    void displayAutoremovable(const QTreeWidget *newtree);
+    void displayAutoremovable(const QTreeWidget *newTree);
     void displayFilteredFP(QStringList list, bool raw = false);
-    void displayFlatpaks(bool force_update = false);
+    void displayFlatpaks(bool forceUpdate = false);
     void displayPackages();
     void displayPopularApps() const;
     void displayWarning(const QString &repo);
     void enableTabs(bool enable);
     void finalizeFlatpakDisplay();
     void formatFlatpakTree() const;
-    void handleEnabledReposTab(const QString &search_str);
-    void handleFlatpakTab(const QString &search_str);
+    void handleEnabledReposTab(const QString &searchStr);
+    void handleFlatpakTab(const QString &searchStr);
     void handleOutputTab();
-    void handleTab(const QString &search_str, QLineEdit *searchBox, const QString &warningMessage, bool dirtyFlag);
+    void handleTab(const QString &searchStr, QLineEdit *searchBox, const QString &warningMessage, bool dirtyFlag);
     void hideColumns() const;
     void hideLibs() const;
     void ifDownloadFailed() const;
@@ -303,7 +303,7 @@ private:
     void refreshPopularApps();
     void removeDuplicatesFP() const;
     void resetCheckboxes();
-    void saveSearchText(QString &search_str, int &filter_idx);
+    void saveSearchText(QString &searchStr, int &filterIdx);
     void setConnections() const;
     void setCurrentTree();
     void setDirty();
@@ -312,7 +312,7 @@ private:
     void setSearchFocus() const;
     void setup();
     void setupFlatpakDisplay();
-    void updateFlatpakCounts(uint total_count);
+    void updateFlatpakCounts(uint totalCount);
     void updateInterface() const;
     void updateTreeItems(QTreeWidget *tree);
 

@@ -1,3 +1,22 @@
+mx-packageinstaller-pkglist (25.04.01mx23) mx; urgency=medium
+
+  * fix non-working antiX 5 kernel entry 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 02 Apr 2025 06:59:33 -0400
+
+mx-packageinstaller-pkglist (25.03.04mx23) mx; urgency=medium
+
+  * debian 6.12.20 kernel
+  * liquorix 6.13.8
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 28 Mar 2025 20:05:47 -0400
+
+mx-packageinstaller-pkglist (25.03.03mx23) mx; urgency=medium
+
+  * kernel updates (liq. 6.13, antix 5.10)
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 21 Mar 2025 09:36:27 -0400
+
 mx-packageinstaller-pkglist (25.03.02mx23) mx; urgency=medium
 
   * add liquorix 6.13 kernel

@@ -74,8 +74,7 @@ gkrellm
 mxfb-docs  
 mx-fluxbox-data
 mxfb-accessories
-wmalauncher 
-lxappearance 
+wmalauncher  
 rofi-calc
 custom-toolbox
 roxterm
@@ -96,8 +95,7 @@ gkrellm
 mxfb-docs 
 mx-fluxbox-data 
 mxfb-accessories
-wmalauncher 
-lxappearance 
+wmalauncher  
 rofi-calc
 custom-toolbox
 roxterm
