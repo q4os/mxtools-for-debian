@@ -14,13 +14,14 @@ MX_BUILD_DIR="/tmp/.build-mxtools-for-debian"
 echo
 read -p "Prepare for build, press Enter to continue ..." XYZ
 rm -rf $MX_BUILD_DIR
-rsync -a --exclude '.git/' . $MX_BUILD_DIR/
-find $MX_BUILD_DIR/ -maxdepth 1 -type f -delete
+mv "$(pwd)" $MX_BUILD_DIR
+cd $MX_BUILD_DIR
+find . -maxdepth 1 -type f -delete
+mkdir -p .logs
+mkdir -p .builtout
 
 echo
 read -p "Build all packages, press Enter to continue ..." XYZ
-cd $MX_BUILD_DIR/
-mkdir -p $MX_BUILD_DIR/.logs/
 set -e
 for SRCDIR1 in * ; do
   echo
@@ -30,7 +31,6 @@ for SRCDIR1 in * ; do
 done
 set +e
 echo "Saving packages ..."
-mkdir -p $MX_BUILD_DIR/.builtout/
 mv $MX_BUILD_DIR/*.deb $MX_BUILD_DIR/.builtout/
 echo "Creating lists ..."
 mkdir -p $MX_BUILD_DIR/.lists/
