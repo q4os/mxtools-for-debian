@@ -35,7 +35,9 @@
 #include <QTimer>
 
 #include "about.h"
+
 #include <chrono>
+#include <unistd.h>
 
 using namespace std::chrono_literals;
 extern const QString starting_home;
@@ -62,7 +64,12 @@ void MainWindow::loadPlymouthThemes()
     ui->comboTheme->clear();
 
     const QString plymouthCmd = "/sbin/plymouth-set-default-theme";
-    QString output = cmd.getOutAsRoot(chroot + plymouthCmd + " -l");
+    QString output;
+    if (chroot.isEmpty()) {
+        output = cmd.getOut(plymouthCmd + " -l");
+    } else {
+        output = cmd.getOutAsRoot(chroot + plymouthCmd + " -l");
+    }
     if (cmd.exitCode() != 0) {
         qWarning() << "Failed to get Plymouth themes list.";
         return;
@@ -70,8 +77,8 @@ void MainWindow::loadPlymouthThemes()
     if (!output.isEmpty()) {
         const QStringList themes = output.split('\n', Qt::SkipEmptyParts);
         ui->comboTheme->addItems(themes);
-
-        const QString currentTheme = cmd.getOutAsRoot(chroot + plymouthCmd).trimmed();
+        const QString currentTheme
+            = chroot.isEmpty() ? cmd.getOut(plymouthCmd).trimmed() : cmd.getOutAsRoot(chroot + plymouthCmd).trimmed();
         if (cmd.exitCode() == 0 && !currentTheme.isEmpty()) {
             const int index = ui->comboTheme->findText(currentTheme);
             if (index != -1) {
@@ -110,8 +117,14 @@ void MainWindow::setup()
     bar = nullptr;
     optionsChanged = false;
     splashChanged = false;
-    user = cmd.getOut("logname", true);
-    if (cmd.exitCode() != 0 || user.isEmpty()) {
+    user = QString::fromUtf8(getlogin());
+    if (user.isEmpty()) {
+        QProcess proc;
+        proc.start("logname", {}, QIODevice::ReadOnly);
+        proc.waitForFinished();
+        user = QString::fromUtf8(proc.readAllStandardOutput().trimmed());
+    }
+    if (user.isEmpty()) {
         qWarning() << "Error: Failed to get the username.";
         user = "unknown";
     }
@@ -172,7 +185,8 @@ void MainWindow::handleLiveSystem()
 
 void MainWindow::setupGrubSettings()
 {
-    grubInstalled = cmd.run("dpkg -s grub-common | grep -q 'Status: install ok installed'", nullptr, nullptr, true);
+    grubInstalled
+        = cmd.run("dpkg -s grub-common | grep -q 'Status: install ok installed'", nullptr, nullptr, QuietMode::Yes);
     ui->groupBoxOptions->setHidden(!grubInstalled);
     ui->groupBoxBackground->setHidden(!grubInstalled);
 
@@ -217,30 +231,6 @@ void MainWindow::unmountAndClean(const QStringList &mountList)
     }
 }
 
-void MainWindow::sortUefiBootOrder(const QStringList &order, QListWidget *list)
-{
-    if (order.isEmpty() || !list) {
-        return;
-    }
-
-    int index = 0;
-    for (const auto &orderItem : order) {
-        auto items = list->findItems("Boot" + orderItem, Qt::MatchStartsWith);
-        if (items.isEmpty()) {
-            continue;
-        }
-
-        auto *item = items.constFirst();
-        list->takeItem(list->row(item));
-        list->insertItem(index, item);
-        ++index;
-    }
-
-    list->setCurrentRow(0);
-    list->currentItem()->setSelected(true);
-    emit list->itemSelectionChanged();
-}
-
 // Set mouse in the corner and move it to advance splash preview
 void MainWindow::sendMouseEvents()
 {
@@ -279,92 +269,11 @@ void MainWindow::setGeneralConnections()
     connect(ui->textKernel, &QLineEdit::textChanged, this, &MainWindow::lineEditKernelTextEdited);
 }
 
-void MainWindow::setUefiTimeout(QDialog *uefiDialog, QLabel *textTimeout)
-{
-    bool ok = false;
-    ushort initialTimeout = textTimeout->text().section(' ', 1, 1).toUInt();
-    ushort newTimeout = QInputDialog::getInt(uefiDialog, tr("Set timeout"), tr("Timeout in seconds:"), initialTimeout,
-                                             0, 65535, 1, &ok);
-
-    if (ok && Cmd().procAsRoot("efibootmgr", {"-t", QString::number(newTimeout)})) {
-        textTimeout->setText(tr("Timeout: %1 seconds").arg(newTimeout));
-    }
-}
-
-void MainWindow::setUefiBootNext(QListWidget *listEntries, QLabel *textBootNext)
-{
-    if (auto currentItem = listEntries->currentItem()) {
-        QString item = currentItem->text().section(' ', 0, 0);
-        item.remove(QRegularExpression("^Boot"));
-        item.remove(QRegularExpression(R"(\*$)"));
-
-        if (QRegularExpression("^[0-9A-Z]{4}$").match(item).hasMatch()
-            && Cmd().procAsRoot("efibootmgr", {"-n", item})) {
-            textBootNext->setText(tr("Boot Next: %1").arg(item));
-        }
-    }
-}
-
-void MainWindow::removeUefiEntry(QListWidget *listEntries, QDialog *uefiDialog)
-{
-    auto *currentItem = listEntries->currentItem();
-    if (!currentItem) {
-        return;
-    }
-
-    QString itemText = currentItem->text();
-    if (QMessageBox::Yes
-        != QMessageBox::question(uefiDialog, tr("Removal confirmation"),
-                                 tr("Are you sure you want to delete this boot entry?\n%1").arg(itemText))) {
-        return;
-    }
-
-    QString item = itemText.section(' ', 0, 0);
-    item.remove(QRegularExpression("^Boot"));
-    item.remove(QRegularExpression(R"(\*$)"));
-
-    if (!item.contains(QRegularExpression("^[0-9A-Z]{4}$"))) {
-        return;
-    }
-
-    if (Cmd().procAsRoot("efibootmgr", {"-B", "-b", item})) {
-        delete currentItem;
-    }
-    emit listEntries->itemSelectionChanged();
-}
-
-void MainWindow::toggleUefiActive(QListWidget *listEntries)
-{
-    auto currentItem = listEntries->currentItem();
-    if (!currentItem) {
-        return; // Early exit if no item is selected
-    }
-
-    QString item = currentItem->text().section(' ', 0, 0).remove(QRegularExpression("^Boot"));
-    QString rest = currentItem->text().section(' ', 1, -1);
-
-    if (!item.contains(QRegularExpression(R"(^[0-9A-Z]{4}\*?$)"))) {
-        return;
-    }
-
-    bool isActive = item.endsWith('*');
-    if (isActive) {
-        item.chop(1);
-    }
-
-    if (Cmd().procAsRoot("efibootmgr", {isActive ? "--inactive" : "--active", "-b", item})) {
-        listEntries->currentItem()->setText(QString("Boot%1%2 %3").arg(item).arg(isActive ? "" : "*").arg(rest));
-        listEntries->currentItem()->setBackground(isActive ? QBrush(Qt::gray) : QBrush());
-    }
-
-    emit listEntries->itemSelectionChanged();
-}
-
 bool MainWindow::isInstalled(const QString &package)
 {
     QString cmdStr = QString("dpkg -s %1 | grep -q 'Status: install ok installed'").arg(package);
-    return chroot.isEmpty() ? Cmd().run(cmdStr, nullptr, nullptr, true)
-                            : Cmd().runAsRoot(chroot + cmdStr, nullptr, nullptr, true);
+    return chroot.isEmpty() ? Cmd().run(cmdStr, nullptr, nullptr, QuietMode::Yes)
+                            : Cmd().runAsRoot(chroot + cmdStr, nullptr, nullptr, QuietMode::Yes);
 }
 
 // Checks if a list of packages is installed, return false if one of them is not
@@ -383,61 +292,6 @@ bool MainWindow::isUefi()
 {
     QDir dir("/sys/firmware/efi/efivars");
     return dir.exists() && !dir.entryList(QDir::NoDotAndDotDot | QDir::AllEntries).isEmpty();
-}
-
-void MainWindow::addUefiEntry(QListWidget *listEntries, QDialog *dialogUefi)
-{
-    // Mount all ESPs
-    QStringList mountList
-        = cmd.getOutAsRoot(
-                 "lsblk -no PATH,PARTTYPE | grep -iE 'c12a7328-f81f-11d2-ba4b-00a0c93ec93b|0xef' | cut -d' ' -f1")
-              .split('\n', Qt::SkipEmptyParts);
-
-    for (const auto &mountPoint : qAsConst(mountList)) {
-        if (QProcess::execute("findmnt", {"-n", mountPoint}) != 0) {
-            QString partName = mountPoint.section('/', 2, 2);
-            cmd.procAsRoot("mkdir", {"-p", "/boot/efi/" + partName});
-            cmd.procAsRoot("mount", {mountPoint, "/boot/efi/" + partName});
-        }
-    }
-
-    QString initialPath = QFile::exists("/boot/efi/EFI") ? "/boot/efi/EFI" : "/boot/efi/";
-    QString fileName
-        = QFileDialog::getOpenFileName(dialogUefi, tr("Select EFI file"), initialPath, tr("EFI files (*.efi *.EFI)"));
-
-    if (!QFile::exists(fileName)) {
-        unmountAndClean(mountList);
-        return;
-    }
-
-    QString partitionName = cmd.getOut("df " + fileName + " --output=source | sed 1d");
-    QString disk = "/dev/" + cmd.getOut("lsblk -no PKNAME " + partitionName);
-    QString partition = partitionName.mid(partitionName.lastIndexOf(QRegularExpression("[0-9]+$")));
-
-    if (cmd.exitCode() != 0) {
-        QMessageBox::critical(dialogUefi, tr("Error"), tr("Could not find the source mountpoint for %1").arg(fileName));
-        unmountAndClean(mountList);
-        return;
-    }
-
-    QString name = QInputDialog::getText(dialogUefi, tr("Set name"), tr("Enter the name for the UEFI menu item:"));
-    if (name.isEmpty()) {
-        name = "New entry";
-    }
-
-    fileName = "/EFI/" + fileName.section("/EFI/", 1);
-    QString command = QString("efibootmgr -cL \"%1\" -d %2 -p %3 -l %4").arg(name, disk, partition, fileName);
-    QString out = cmd.getOutAsRoot(command);
-
-    if (cmd.exitCode() != 0) {
-        QMessageBox::critical(dialogUefi, tr("Error"), tr("Something went wrong, could not add entry."));
-        unmountAndClean(mountList);
-        return;
-    }
-
-    QStringList outList = out.split('\n');
-    listEntries->insertItem(0, outList.constLast());
-    emit listEntries->itemSelectionChanged();
 }
 
 void MainWindow::appendLogWithColors(QTextEdit *textEdit, const QString &logContent)
@@ -538,7 +392,7 @@ bool MainWindow::inVirtualMachine()
 {
     // "lspci -d 15ad:" for VMWare detection
     // -- plymouth seems to work in VMWare, might work in VM depending on driver setup
-    QString out = cmd.getOut("lspci -d 80ee:beef;lspci -d 80ee:cafe", true);
+    QString out = cmd.getOut("lspci -d 80ee:beef;lspci -d 80ee:cafe", QuietMode::Yes);
     return (!out.isEmpty());
 }
 
@@ -553,8 +407,8 @@ void MainWindow::writeDefaultGrub()
     cmd.procAsRoot("cp", {backupFilePath, backupFilePath + ".0"});
     cmd.procAsRoot("rm", {backupFilePath});
     cmd.procAsRoot("cp", {grubFilePath, backupFilePath});
-    cmd.procAsRoot("chown", {"root:", backupFilePath}, nullptr, nullptr, true);
-    cmd.procAsRoot("chmod", {"644", backupFilePath}, nullptr, nullptr, true);
+    cmd.procAsRoot("chown", {"root:", backupFilePath}, nullptr, nullptr, QuietMode::Yes);
+    cmd.procAsRoot("chmod", {"644", backupFilePath}, nullptr, nullptr, QuietMode::Yes);
 
     QTemporaryFile tmpFile;
     if (!tmpFile.open()) {
@@ -570,8 +424,8 @@ void MainWindow::writeDefaultGrub()
     tmpFile.close();
 
     cmd.procAsRoot("mv", {tmpFile.fileName(), grubFilePath});
-    cmd.procAsRoot("chown", {"root:", grubFilePath}, nullptr, nullptr, true);
-    cmd.procAsRoot("chmod", {"644", grubFilePath}, nullptr, nullptr, true);
+    cmd.procAsRoot("chown", {"root:", grubFilePath}, nullptr, nullptr, QuietMode::Yes);
+    cmd.procAsRoot("chmod", {"644", grubFilePath}, nullptr, nullptr, QuietMode::Yes);
 }
 
 QStringList MainWindow::getLinuxPartitions()
@@ -584,7 +438,8 @@ QStringList MainWindow::getLinuxPartitions()
     validPartitions.reserve(partitions.size());
     for (const QString &part_info : partitions) {
         QString partName = part_info.section(' ', 0, 0);
-        QString partType = cmd.getOutAsRoot("lsblk -ln -o PARTTYPE /dev/" + partName, true).trimmed().toLower();
+        QString partType
+            = cmd.getOutAsRoot("lsblk -ln -o PARTTYPE /dev/" + partName, QuietMode::Yes).trimmed().toLower();
 
         if (partType.contains(QRegularExpression(
                 R"(0x83|0fc63daf-8483-4772-8e79-3d69d8477de4|44479540-f297-41b2-9af7-d131d5f0458a|4f68bce3-e8cd-4db1-96e7-fbcaf984b709|ca7d7ccb-63ed-4c53-861c-1742536059cc)"))) {
@@ -592,38 +447,6 @@ QStringList MainWindow::getLinuxPartitions()
         }
     }
     return validPartitions;
-}
-
-void MainWindow::readBootEntries(QListWidget *listEntries, QLabel *textTimeout, QLabel *textBootNext,
-                                 QLabel *textBootCurrent, QStringList *bootorder)
-{
-    QString output = cmd.getOutAsRoot("efibootmgr");
-    if (cmd.exitCode() != 0) {
-        qWarning() << "Failed to get UEFI boot entries.";
-        QMessageBox::critical(this, tr("Error"), tr("Failed to get UEFI boot entries."));
-        return;
-    }
-
-    const QStringList entries = output.split('\n', Qt::SkipEmptyParts);
-    const QRegularExpression bootEntryRegex(R"(^Boot[0-9A-F]{4}\*?\s+)");
-
-    for (const auto &item : qAsConst(entries)) {
-        if (bootEntryRegex.match(item).hasMatch()) {
-            auto *listItem = new QListWidgetItem(item);
-            if (!item.contains("*")) {
-                listItem->setBackground(QBrush(Qt::gray));
-            }
-            listEntries->addItem(listItem);
-        } else if (item.startsWith("Timeout:")) {
-            textTimeout->setText(tr("Timeout: %1 seconds").arg(item.section(' ', 1).trimmed()));
-        } else if (item.startsWith("BootNext:")) {
-            textBootNext->setText(tr("Boot Next: %1").arg(item.section(' ', 1).trimmed()));
-        } else if (item.startsWith("BootCurrent:")) {
-            textBootCurrent->setText(tr("Boot Current: %1").arg(item.section(' ', 1).trimmed()));
-        } else if (item.startsWith("BootOrder:")) {
-            *bootorder = item.section(' ', 1).split(',', Qt::SkipEmptyParts);
-        }
-    }
 }
 
 // Cleanup chroot environment and temporary directory
@@ -684,10 +507,10 @@ QString MainWindow::selectPartition(const QStringList &list)
 
     if (dialog->exec() == QDialog::Accepted) {
         QString selectedText = dialog->comboBox()->currentText().section(' ', 0, 0);
-        qDebug() << "exec true" << selectedText;
+        qDebug() << "Dialog accepted:" << selectedText;
         return selectedText;
     } else {
-        qDebug() << "exec false" << dialog->comboBox()->currentText().section(' ', 0, 0);
+        qDebug() << "Dialog rejected:" << dialog->comboBox()->currentText().section(' ', 0, 0);
         return {};
     }
 }
@@ -773,24 +596,6 @@ void MainWindow::disableGrubLine(const QString &item)
         new_list << (line.startsWith(item) ? "#" + line : line);
     }
     defaultGrub = new_list;
-}
-
-void MainWindow::saveBootOrder(const QListWidget *list)
-{
-    QStringList orderList;
-    for (int i = 0; i < list->count(); ++i) {
-        QString item = list->item(i)->text().section(' ', 0, 0);
-        item.remove(QRegularExpression("^Boot|\\*$"));
-        if (item.contains(QRegularExpression("^[0-9A-Z]{4}$"))) {
-            orderList.append(item);
-        }
-    }
-
-    QString order = orderList.join(",");
-    if (!cmd.procAsRoot("efibootmgr", {"-o", order})) {
-        qDebug() << "Order:" << order;
-        QMessageBox::critical(this, tr("Error"), tr("Something went wrong, could not save boot order."));
-    }
 }
 
 // Replace the argument in /etc/default/grub and return false if nothing was replaced
@@ -900,9 +705,8 @@ void MainWindow::replaceSyslinuxArgs(const QString &args)
 
 void MainWindow::readGrubCfg()
 {
-    QStringList content;
     QString grubFilePath = chroot.isEmpty() ? "/boot/grub/grub.cfg" : chroot.section(' ', 1, 1) + "/boot/grub/grub.cfg";
-    content = cmd.getOutAsRoot("cat " + grubFilePath, true).split('\n', Qt::SkipEmptyParts);
+    QStringList content = cmd.getOutAsRoot("cat " + grubFilePath, QuietMode::Yes).split('\n', Qt::SkipEmptyParts);
 
     if (content.isEmpty()) {
         qDebug() << "Could not read grub.cfg file";
@@ -1405,107 +1209,8 @@ void MainWindow::pushLogClicked()
 
 void MainWindow::pushUefiClicked()
 {
-    auto *uefiDialog = new QDialog;
-    uefiDialog->setWindowTitle(tr("Edit UEFI Boot Entries"));
-    auto *layout = new QGridLayout(uefiDialog);
-    auto *listEntries = new QListWidget(uefiDialog);
-    auto *textIntro = new QLabel(tr("You can use the Up/Down buttons, or drag & drop items to change boot order.\n"
-                                    "- Items are listed in the boot order.\n"
-                                    "- Grayed out lines are inactive."),
-                                 uefiDialog);
-
-    auto createButton = [&](const QString &text, const QString &iconName) {
-        auto *button = new QPushButton(text, uefiDialog);
-        button->setIcon(QIcon::fromTheme(iconName));
-        return button;
-    };
-
-    auto *pushActive = createButton(tr("Set ac&tive"), "star-on");
-    auto *pushAddEntry = createButton(tr("&Add entry"), "list-add");
-    auto *pushBootNext = createButton(tr("Boot &next"), "go-next");
-    auto *pushCancel = createButton(tr("&Close"), "window-close");
-    auto *pushDown = createButton(tr("Move &down"), "arrow-down");
-    auto *pushRemove = createButton(tr("&Remove entry"), "trash-empty");
-    auto *pushResetNext = createButton(tr("Re&set next"), "edit-undo");
-    auto *pushTimeout = createButton(tr("Change &timeout"), "timer-symbolic");
-    auto *pushUp = createButton(tr("Move &up"), "arrow-up");
-
-    auto *spacer = new QSpacerItem(0, 0, QSizePolicy::Fixed, QSizePolicy::Expanding);
-    auto *textBootCurrent = new QLabel(uefiDialog);
-    auto *textBootNext = new QLabel(tr("Boot Next: %1").arg(tr("not set, will boot using list order")), uefiDialog);
-    auto *textTimeout = new QLabel(tr("Timeout: %1 seconds").arg("0"), uefiDialog);
-    listEntries->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-
-    QStringList bootorder;
-    connect(pushCancel, &QPushButton::clicked, uefiDialog, &QDialog::close);
-    connect(pushResetNext, &QPushButton::clicked, uefiDialog, [textBootNext]() {
-        if (Cmd().procAsRoot("efibootmgr", {"-N"})) {
-            textBootNext->setText(tr("Boot Next: %1").arg(tr("not set, will boot using list order")));
-        }
-    });
-    connect(pushTimeout, &QPushButton::clicked, this,
-            [uefiDialog, textTimeout]() { setUefiTimeout(uefiDialog, textTimeout); });
-    connect(pushAddEntry, &QPushButton::clicked, this,
-            [this, uefiDialog, listEntries]() { addUefiEntry(listEntries, uefiDialog); });
-    connect(pushBootNext, &QPushButton::clicked, this,
-            [listEntries, textBootNext]() { setUefiBootNext(listEntries, textBootNext); });
-    connect(pushRemove, &QPushButton::clicked, this,
-            [uefiDialog, listEntries]() { removeUefiEntry(listEntries, uefiDialog); });
-    connect(pushActive, &QPushButton::clicked, uefiDialog, [listEntries]() { toggleUefiActive(listEntries); });
-    connect(pushUp, &QPushButton::clicked, uefiDialog, [listEntries]() {
-        listEntries->model()->moveRow(QModelIndex(), listEntries->currentRow(), QModelIndex(),
-                                      listEntries->currentRow() - 1);
-    });
-    connect(pushDown, &QPushButton::clicked, uefiDialog, [listEntries]() {
-        listEntries->model()->moveRow(QModelIndex(), listEntries->currentRow() + 1, QModelIndex(),
-                                      listEntries->currentRow()); // move next entry down
-    });
-    connect(listEntries, &QListWidget::itemSelectionChanged, uefiDialog, [listEntries, pushUp, pushDown, pushActive]() {
-        pushUp->setEnabled(listEntries->currentRow() != 0);
-        pushDown->setEnabled(listEntries->currentRow() != listEntries->count() - 1);
-        if (QListWidgetItem *currentItem = listEntries->currentItem()) {
-            if (currentItem && currentItem->text().section(' ', 0, 0).endsWith('*')) {
-                pushActive->setText(tr("Set &inactive"));
-                pushActive->setIcon(QIcon::fromTheme("star-off"));
-            } else {
-                pushActive->setText(tr("Set ac&tive"));
-                pushActive->setIcon(QIcon::fromTheme("star-on"));
-            }
-        }
-    });
-
-    readBootEntries(listEntries, textTimeout, textBootNext, textBootCurrent, &bootorder);
-    sortUefiBootOrder(bootorder, listEntries);
-
-    listEntries->setDragDropMode(QAbstractItemView::InternalMove);
-    connect(listEntries->model(), &QAbstractItemModel::rowsMoved, this, [this, listEntries]() {
-        saveBootOrder(listEntries);
-        emit listEntries->itemSelectionChanged();
-    });
-
-    int row = 0;
-    const int rowspan = 7;
-    layout->addWidget(textIntro, row++, 0, 1, 2);
-    layout->addWidget(listEntries, row, 0, rowspan, 1);
-    layout->addWidget(pushRemove, row++, 1);
-    layout->addWidget(pushAddEntry, row++, 1);
-    layout->addWidget(pushUp, row++, 1);
-    layout->addWidget(pushDown, row++, 1);
-    layout->addWidget(pushActive, row++, 1);
-    layout->addWidget(pushBootNext, row++, 1);
-    layout->addItem(spacer, row++, 1);
-    layout->addWidget(textBootCurrent, row++, 0);
-    layout->addWidget(textTimeout, row, 0);
-    layout->addWidget(pushTimeout, row++, 1);
-    layout->addWidget(textBootNext, row, 0);
-    layout->addWidget(pushResetNext, row++, 1);
-    layout->addWidget(pushCancel, row, 0, 1, 2);
-    uefiDialog->setLayout(layout);
-
     this->hide();
-    uefiDialog->resize(this->size());
-    uefiDialog->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
-    uefiDialog->exec();
+    QProcess::execute("uefi-manager", {});
     this->show();
 }
 

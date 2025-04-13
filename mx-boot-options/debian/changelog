@@ -1,3 +1,21 @@
+mx-boot-options (25.4.02) mx; urgency=medium
+
+  * Manage UEFI Boot Options starts a new uefi-manager app (new dependency)
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 11 Apr 2025 16:23:04 -0400
+
+mx-boot-options (25.4.01) mx; urgency=medium
+
+  * Add elevation fail check for more commands
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 09 Apr 2025 22:31:34 -0400
+
+mx-boot-options (25.4) mx; urgency=medium
+
+  * Don't allow user to skip elevation prompts
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 09 Apr 2025 13:03:38 -0400
+
 mx-boot-options (25.2.06) mx; urgency=medium
 
   * Add option to mount encrypted LUKS partition when running live and chroot to it

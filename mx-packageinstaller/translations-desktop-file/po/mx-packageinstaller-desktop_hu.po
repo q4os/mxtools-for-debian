@@ -4,7 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Pál András Ciocan (Andris) <csokan.andras87@protonmail.ch>, 2022
+# b3a601cea954ec302ff861c4e4267715_658d0ac <5d11351aabbb363b7934638cd728c892_933757>, 2022
 # Dolphin Oracle <dolphinoracle@gmail.com>, 2022
 # 
 #, fuzzy

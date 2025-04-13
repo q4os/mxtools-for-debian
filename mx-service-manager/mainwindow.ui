@@ -65,8 +65,7 @@
         <string>&amp;About...</string>
        </property>
        <property name="icon">
-        <iconset theme="help-about">
-         <normaloff>.</normaloff>.</iconset>
+        <iconset theme="help-about"/>
        </property>
        <property name="shortcut">
         <string>Alt+B</string>
@@ -129,8 +128,7 @@
         <string>&amp;Help</string>
        </property>
        <property name="icon">
-        <iconset theme="help-contents">
-         <normaloff>.</normaloff>.</iconset>
+        <iconset theme="help-contents"/>
        </property>
        <property name="shortcut">
         <string>Alt+H</string>
@@ -171,8 +169,7 @@
         <string>&amp;Close</string>
        </property>
        <property name="icon">
-        <iconset theme="window-close">
-         <normaloff>.</normaloff>.</iconset>
+        <iconset theme="window-close"/>
        </property>
        <property name="shortcut">
         <string>Alt+N</string>
@@ -181,6 +178,22 @@
         <bool>false</bool>
        </property>
       </widget>
+     </item>
+     <item row="0" column="6">
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Preferred</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>80</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
      </item>
     </layout>
    </item>

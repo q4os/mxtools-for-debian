@@ -2,6 +2,19 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="ru_RU">
 <context>
+    <name>Cmd</name>
+    <message>
+        <location filename="../cmd.cpp" line="141"/>
+        <source>Administrator Access Required</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../cmd.cpp" line="142"/>
+        <source>This operation requires administrator privileges. Please restart the application and enter your password when prompted.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>CustomDialog</name>
     <message>
         <location filename="../dialog.cpp" line="16"/>
@@ -180,415 +193,372 @@
         <translation>Применить</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="92"/>
+        <location filename="../mainwindow.cpp" line="99"/>
         <source>Still running</source>
         <translation>Все еще работает</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="286"/>
         <source>Set timeout</source>
-        <translation>Задать таймаут</translation>
+        <translation type="vanished">Задать таймаут</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="286"/>
         <source>Timeout in seconds:</source>
-        <translation>Таймаут в секундах:</translation>
+        <translation type="vanished">Таймаут в секундах:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="290"/>
-        <location filename="../mainwindow.cpp" line="618"/>
-        <location filename="../mainwindow.cpp" line="1436"/>
         <source>Timeout: %1 seconds</source>
-        <translation>Таймаут: %1 с</translation>
+        <translation type="vanished">Таймаут: %1 с</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="303"/>
-        <location filename="../mainwindow.cpp" line="620"/>
-        <location filename="../mainwindow.cpp" line="1435"/>
-        <location filename="../mainwindow.cpp" line="1443"/>
         <source>Boot Next: %1</source>
-        <translation>Следующая загрузка: %1</translation>
+        <translation type="vanished">Следующая загрузка: %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="317"/>
         <source>Removal confirmation</source>
-        <translation>Подтверждение удаления</translation>
+        <translation type="vanished">Подтверждение удаления</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="318"/>
         <source>Are you sure you want to delete this boot entry?
 %1</source>
-        <translation>Уверены, что хотите удалить эту загрузочную запись?
+        <translation type="vanished">Уверены, что хотите удалить эту загрузочную запись?
 %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="406"/>
         <source>Select EFI file</source>
-        <translation>Выберите файл EFI</translation>
+        <translation type="vanished">Выберите файл EFI</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="406"/>
         <source>EFI files (*.efi *.EFI)</source>
-        <translation>Файлы EFI (*.efi *.EFI)</translation>
+        <translation type="vanished">Файлы EFI (*.efi *.EFI)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="418"/>
-        <location filename="../mainwindow.cpp" line="433"/>
-        <location filename="../mainwindow.cpp" line="519"/>
-        <location filename="../mainwindow.cpp" line="527"/>
-        <location filename="../mainwindow.cpp" line="561"/>
-        <location filename="../mainwindow.cpp" line="603"/>
-        <location filename="../mainwindow.cpp" line="703"/>
-        <location filename="../mainwindow.cpp" line="792"/>
-        <location filename="../mainwindow.cpp" line="1636"/>
-        <location filename="../mainwindow.cpp" line="1649"/>
-        <location filename="../mainwindow.cpp" line="1655"/>
+        <location filename="../mainwindow.cpp" line="373"/>
+        <location filename="../mainwindow.cpp" line="381"/>
+        <location filename="../mainwindow.cpp" line="415"/>
+        <location filename="../mainwindow.cpp" line="526"/>
+        <location filename="../mainwindow.cpp" line="1341"/>
+        <location filename="../mainwindow.cpp" line="1354"/>
+        <location filename="../mainwindow.cpp" line="1360"/>
         <source>Error</source>
         <translation>Ошибка</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="418"/>
         <source>Could not find the source mountpoint for %1</source>
-        <translation>Не удалось найти исходную точку монтирования для %1</translation>
+        <translation type="vanished">Не удалось найти исходную точку монтирования для %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="423"/>
         <source>Set name</source>
-        <translation>Задать имя</translation>
+        <translation type="vanished">Задать имя</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="423"/>
         <source>Enter the name for the UEFI menu item:</source>
-        <translation>Введите имя для элемента меню UEFI:</translation>
+        <translation type="vanished">Введите имя для элемента меню UEFI:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="433"/>
         <source>Something went wrong, could not add entry.</source>
-        <translation>Что-то пошло не так, не удалось добавить запись.</translation>
+        <translation type="vanished">Что-то пошло не так, не удалось добавить запись.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="508"/>
+        <location filename="../mainwindow.cpp" line="362"/>
         <source>Installing bootsplash, please wait</source>
         <translation>Установка bootsplash, подождите</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="515"/>
+        <location filename="../mainwindow.cpp" line="369"/>
         <source>Updating sources</source>
         <translation>Обновление источников</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="527"/>
+        <location filename="../mainwindow.cpp" line="381"/>
         <source>Could not install the bootsplash.</source>
         <translation>Не удалось установить bootsplash</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="603"/>
-        <source>Failed to get UEFI boot entries.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="622"/>
         <source>Boot Current: %1</source>
-        <translation>Текущая загрузка: %1</translation>
+        <translation type="vanished">Текущая загрузка: %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="703"/>
+        <location filename="../mainwindow.cpp" line="526"/>
         <source>Could not create a temporary folder</source>
         <translation>Не удалось создать временную папку</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="712"/>
-        <location filename="../mainwindow.cpp" line="732"/>
+        <location filename="../mainwindow.cpp" line="535"/>
+        <location filename="../mainwindow.cpp" line="555"/>
         <source>Cannot continue</source>
         <translation>Невозможно продолжить</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="712"/>
+        <location filename="../mainwindow.cpp" line="535"/>
         <source>Cannot open LUKS device. Exiting...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="733"/>
+        <location filename="../mainwindow.cpp" line="556"/>
         <source>Cannot create chroot environment, cannot change boot options. Exiting...</source>
         <translation>Невозможно создать среду chroot, изменить параметры загрузки. Выход ...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="792"/>
         <source>Something went wrong, could not save boot order.</source>
-        <translation>Что-то пошло не так, не удалось сохранить порядок загрузки.</translation>
+        <translation type="vanished">Что-то пошло не так, не удалось сохранить порядок загрузки.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1078"/>
-        <location filename="../mainwindow.cpp" line="1556"/>
+        <location filename="../mainwindow.cpp" line="882"/>
+        <location filename="../mainwindow.cpp" line="1261"/>
         <source>Updating configuration, please wait</source>
         <translation>Обновление конфигурации, пожалуйста, подождите</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1149"/>
+        <location filename="../mainwindow.cpp" line="953"/>
         <source>Updating initramfs...</source>
         <translation>Обновление initramfs...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1163"/>
-        <location filename="../mainwindow.cpp" line="1571"/>
+        <location filename="../mainwindow.cpp" line="967"/>
+        <location filename="../mainwindow.cpp" line="1276"/>
         <source>Updating grub...</source>
         <translation>Обновление grub...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1188"/>
+        <location filename="../mainwindow.cpp" line="992"/>
         <source>About %1</source>
         <translation>О %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1189"/>
+        <location filename="../mainwindow.cpp" line="993"/>
         <source>Version: </source>
         <translation>Версия: </translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1191"/>
+        <location filename="../mainwindow.cpp" line="995"/>
         <source>Program for selecting common start-up choices</source>
         <translation>Программа для выбора общих вариантов запуска</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1193"/>
+        <location filename="../mainwindow.cpp" line="997"/>
         <source>Copyright (c) MX Linux</source>
         <translation>Copyright (c) MX Linux</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1194"/>
+        <location filename="../mainwindow.cpp" line="998"/>
         <source>%1 License</source>
         <translation>%1 Лицензия</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1215"/>
+        <location filename="../mainwindow.cpp" line="1019"/>
         <source>%1 Help</source>
         <translation>%1 Справка</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1225"/>
-        <location filename="../mainwindow.cpp" line="1533"/>
+        <location filename="../mainwindow.cpp" line="1029"/>
+        <location filename="../mainwindow.cpp" line="1238"/>
         <source>Running in a Virtual Machine</source>
         <translation>Запуск в виртуальной машине</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1226"/>
-        <location filename="../mainwindow.cpp" line="1534"/>
+        <location filename="../mainwindow.cpp" line="1030"/>
+        <location filename="../mainwindow.cpp" line="1239"/>
         <source>You current system is running in a Virtual Machine,
 Plymouth bootsplash will work in a limited way, you also won&apos;t be able to preview the theme</source>
         <translation>Текущая система работает на виртуальной машине,
 Plymouth bootsplash будет работать ограниченным образом, вы также не сможете просмотреть тему</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1233"/>
+        <location filename="../mainwindow.cpp" line="1037"/>
         <source>Plymouth packages not installed</source>
         <translation>Plymouth пакет не установлен</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1234"/>
+        <location filename="../mainwindow.cpp" line="1038"/>
         <source>Plymouth packages are not currently installed.
 OK to go ahead and install them?</source>
         <translation>Пакеты Plymouth в настоящее время не установлены.
 ОК, чтобы продолжить и установить их?</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1260"/>
+        <location filename="../mainwindow.cpp" line="1064"/>
         <source>Images (*.png *.jpg *.jpeg *.tga)</source>
         <translation>Изображения (*.png *.jpg *.jpeg *.tga)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1402"/>
+        <location filename="../mainwindow.cpp" line="1206"/>
         <source>Log not found</source>
         <translation>Журнал не найден</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1402"/>
+        <location filename="../mainwindow.cpp" line="1206"/>
         <source>Could not find log at </source>
         <translation>Не удалось найти журнал в</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1409"/>
         <source>Edit UEFI Boot Entries</source>
-        <translation>Правка загрузочных записей UEFI</translation>
+        <translation type="vanished">Правка загрузочных записей UEFI</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1412"/>
         <source>You can use the Up/Down buttons, or drag &amp; drop items to change boot order.
 - Items are listed in the boot order.
 - Grayed out lines are inactive.</source>
-        <translation>Вы можете использовать кнопки вверх/вниз или перетаскивание элементов, чтобы изменить порядок загрузки.
+        <translation type="vanished">Вы можете использовать кнопки вверх/вниз или перетаскивание элементов, чтобы изменить порядок загрузки.
 - Элементы перечислены в порядке загрузки.
 - Выделенные серым цветом строки неактивны.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1423"/>
-        <location filename="../mainwindow.cpp" line="1471"/>
         <source>Set ac&amp;tive</source>
-        <translation>Задать а&amp;ктивную</translation>
+        <translation type="vanished">Задать а&amp;ктивную</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1424"/>
         <source>&amp;Add entry</source>
-        <translation>&amp;Добавить запись</translation>
+        <translation type="vanished">&amp;Добавить запись</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1425"/>
         <source>Boot &amp;next</source>
-        <translation>Следующая заг&amp;рузка</translation>
+        <translation type="vanished">Следующая заг&amp;рузка</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1636"/>
+        <location filename="../mainwindow.cpp" line="1341"/>
         <source>Could not retrieve UUID for %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1644"/>
+        <location filename="../mainwindow.cpp" line="1349"/>
         <source>Enter password to unlock %1 encrypted partition:</source>
         <translation>Введите пароль для открытия зашифрованного раздела %1:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1649"/>
+        <location filename="../mainwindow.cpp" line="1354"/>
         <source>Password entry cancelled or empty for %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1655"/>
+        <location filename="../mainwindow.cpp" line="1360"/>
         <source>Could not open %1 LUKS container</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1391"/>
-        <location filename="../mainwindow.cpp" line="1426"/>
+        <location filename="../mainwindow.cpp" line="1195"/>
         <source>&amp;Close</source>
         <translation>&amp;Закрыть</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="93"/>
+        <location filename="../mainwindow.cpp" line="100"/>
         <source>A process is still running. Do you really want to quit?</source>
         <translation>Процесс все еще выполняется. Вы действительно хотите выйти?</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="154"/>
+        <location filename="../mainwindow.cpp" line="167"/>
         <source>Live System Detected</source>
         <translation>Обнаружена действующая система</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="156"/>
+        <location filename="../mainwindow.cpp" line="169"/>
         <source>You are currently running a live system. Would you like to modify the boot options for the live system or for an installed system?</source>
         <translation>В данный момент вы используете живую систему. Хотите изменить параметры загрузки для живой системы или для установленной системы?</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="158"/>
+        <location filename="../mainwindow.cpp" line="171"/>
         <source>Live System</source>
         <translation>Живая система</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="159"/>
+        <location filename="../mainwindow.cpp" line="172"/>
         <source>Installed System</source>
         <translation>Установленная система</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="519"/>
+        <location filename="../mainwindow.cpp" line="373"/>
         <source>Failed to update package sources.</source>
         <translation>Не удалось обновить источники пакетов.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="523"/>
+        <location filename="../mainwindow.cpp" line="377"/>
         <source>Installing packages:</source>
         <translation>Установка пакетов:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="533"/>
+        <location filename="../mainwindow.cpp" line="387"/>
         <source>Success</source>
         <translation>Успешно</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="533"/>
+        <location filename="../mainwindow.cpp" line="387"/>
         <source>Bootsplash installed successfully.</source>
         <translation>Bootsplash успешно установлен.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="561"/>
+        <location filename="../mainwindow.cpp" line="415"/>
         <source>Failed to create temporary file.</source>
         <translation>Не удалось создать временный файл.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1171"/>
+        <location filename="../mainwindow.cpp" line="975"/>
         <source>You are currently running in live mode with the &apos;toram&apos; option. Please remember to save the persistence file or remaster, otherwise any changes made will be lost.</source>
         <translation>В настоящее время вы работаете в режиме реального времени с опцией &apos;toram&apos;. Не забудьте сохранить файл персистентности или ремастер, иначе все внесенные изменения будут потеряны.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1173"/>
+        <location filename="../mainwindow.cpp" line="977"/>
         <source>Your changes have been successfully applied.</source>
         <translation>Ваши изменения были успешно применены.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1174"/>
+        <location filename="../mainwindow.cpp" line="978"/>
         <source>Operation Complete</source>
         <translation>Операция завершена</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1259"/>
+        <location filename="../mainwindow.cpp" line="1063"/>
         <source>Select image to display in bootloader</source>
         <translation>Выберите изображение для отображения в загрузчике</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1383"/>
+        <location filename="../mainwindow.cpp" line="1187"/>
         <source>Boot Log</source>
         <translation>Журнал загрузки</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1427"/>
         <source>Move &amp;down</source>
-        <translation>Сместить &amp;вниз</translation>
+        <translation type="vanished">Сместить &amp;вниз</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1428"/>
         <source>&amp;Remove entry</source>
-        <translation>&amp;Удалить запись</translation>
+        <translation type="vanished">&amp;Удалить запись</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1429"/>
         <source>Re&amp;set next</source>
-        <translation>Сброс следую&amp;щей</translation>
+        <translation type="vanished">Сброс следую&amp;щей</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1430"/>
         <source>Change &amp;timeout</source>
-        <translation>См&amp;енить таймаут</translation>
+        <translation type="vanished">См&amp;енить таймаут</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1431"/>
         <source>Move &amp;up</source>
-        <translation>Сместить ввер&amp;х</translation>
+        <translation type="vanished">Сместить ввер&amp;х</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1435"/>
-        <location filename="../mainwindow.cpp" line="1443"/>
         <source>not set, will boot using list order</source>
-        <translation>не установлено, будет загружаться в соответствии с порядком списка</translation>
+        <translation type="vanished">не установлено, будет загружаться в соответствии с порядком списка</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1468"/>
         <source>Set &amp;inactive</source>
-        <translation>С&amp;делать неактивной</translation>
+        <translation type="vanished">С&amp;делать неактивной</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1522"/>
+        <location filename="../mainwindow.cpp" line="1227"/>
         <source>Needs reboot</source>
         <translation>Требуется перезагрузка</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1523"/>
+        <location filename="../mainwindow.cpp" line="1228"/>
         <source>Plymouth was just installed, you might need to reboot before being able to display previews</source>
         <translation>Plymouth только что был установлен, вам может потребоваться перезагрузка, прежде чем вы сможете отображать превью</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1592"/>
+        <location filename="../mainwindow.cpp" line="1297"/>
         <source>Click to select theme</source>
         <translation>Нажмите, чтобы выбрать тему</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1603"/>
+        <location filename="../mainwindow.cpp" line="1308"/>
         <source>Select GRUB theme</source>
         <translation>Выберите тему GRUB</translation>
     </message>
@@ -596,7 +566,7 @@ OK to go ahead and install them?</source>
 <context>
     <name>QApplication</name>
     <message>
-        <location filename="../main.cpp" line="53"/>
+        <location filename="../main.cpp" line="54"/>
         <source>Program for selecting common start-up choices</source>
         <translation>Программа для выбора общих вариантов запуска</translation>
     </message>
@@ -625,20 +595,18 @@ OK to go ahead and install them?</source>
         <translation>&amp;Закрыть</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="81"/>
-        <location filename="../main.cpp" line="90"/>
+        <location filename="../main.cpp" line="82"/>
         <source>Error</source>
         <translation>Ошибка</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="82"/>
+        <location filename="../main.cpp" line="83"/>
         <source>You seem to be logged in as root, please log out and log in as normal user to use this program.</source>
         <translation>Программа запущена суперпользователем. Для использования программы войдите в систему как обычный пользователь.</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="91"/>
         <source>You must run this program with admin access.</source>
-        <translation>Вы должны запустить эту программу с правами администратора.</translation>
+        <translation type="vanished">Вы должны запустить эту программу с правами администратора.</translation>
     </message>
 </context>
 </TS>

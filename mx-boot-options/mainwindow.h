@@ -112,14 +112,8 @@ private:
     [[nodiscard]] bool openLuks(const QString &part, const QString &path);
     [[nodiscard]] static bool isUefi();
     bool replaceGrubArg(const QString &key, const QString &item);
-    static void removeUefiEntry(QListWidget *listEntries, QDialog *uefiDialog);
     static void sendMouseEvents();
-    static void setUefiBootNext(QListWidget *listEntries, QLabel *textBootNext);
-    static void setUefiTimeout(QDialog *uefiDialog, QLabel *textTimeout);
-    static void sortUefiBootOrder(const QStringList &order, QListWidget *list);
-    static void toggleUefiActive(QListWidget *listEntries);
     void addGrubLine(const QString &item);
-    void addUefiEntry(QListWidget *listEntries, QDialog *dialogUefi);
     void appendLogWithColors(QTextEdit *textEdit, const QString &logContent);
     void createChrootEnv(const QString &root);
     void disableGrubLine(const QString &item);
@@ -131,14 +125,11 @@ private:
     void processGrubDefault(const QString &line);
     void processGrubTheme(const QString &line);
     void processKernelCommandLine(QString line);
-    void readBootEntries(QListWidget *listEntries, QLabel *textTimeout, QLabel *textBootNext, QLabel *textBootCurrent,
-                         QStringList *bootorder);
     void readDefaultGrub();
     void readGrubCfg();
     void replaceSyslinuxArgs(const QString &args);
     void replaceLiveGrubArgs(const QString &args);
     void setupUiElements();
-    void saveBootOrder(const QListWidget *list);
     void setGeneralConnections();
     void setup();
     void setupGrubSettings();

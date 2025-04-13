@@ -31,9 +31,10 @@
 
 inline const QString initSystem {Service::getInit()};
 
-Service::Service(QString name, bool running)
+Service::Service(QString name, bool running, bool enabled)
     : name {std::move(name)},
-      running {running}
+      running {running},
+      enabled {enabled}
 {
 }
 
@@ -44,25 +45,28 @@ QString Service::getName() const
 
 QString Service::getInfo() const
 {
+    QString info;
     if (initSystem == "systemd") {
-        QString info = Cmd().getOutAsRoot("/sbin/service " + name + " status").trimmed();
+        info = Cmd().getOut("/sbin/service " + name + " status", true).trimmed();
         if (!isEnabled()) {
-            info.append("\nDescription:" + getDescription());
+            info.append("\nDescription: " + getDescription());
         }
-        return info;
     } else {
-        return getInfoFromFile(name);
+        info = getInfoFromFile(name);
     }
+    return info;
 }
 
 bool Service::isEnabled(const QString &name)
 {
-    if (initSystem == "systemd") {
-        return (QProcess::execute("systemctl", {"-q", "is-enabled", name}) == 0);
+    if (initSystem == QLatin1String("systemd")) {
+        return QProcess::execute(QLatin1String("systemctl"),
+                                 {QLatin1String("-q"), QLatin1String("is-enabled"), name + QLatin1String(".service")})
+               == 0;
     } else {
-        return (QProcess::execute("/bin/bash",
-                                  {"-c", R"([[ -e /etc/rc5.d/S*"$file_name" || -e /etc/rcS.d/S*"$file_name" ]])"})
-                == 0);
+        // Check both runlevel 5 (multi-user with GUI) and runlevel S (single-user/boot)
+        QString command = QString(QLatin1String("[[ -e /etc/rc5.d/S*%1 || -e /etc/rcS.d/S*%1 ]]")).arg(name);
+        return QProcess::execute(QLatin1String("/bin/bash"), {QLatin1String("-c"), command}) == 0;
     }
 }
 
@@ -94,18 +98,22 @@ QString Service::getDescription() const
         }
         return {};
     } else {
+        // Try to get description from systemctl list-units first
         QString out
             = Cmd()
-                  .getOut("systemctl list-units " + name + ".service -o json-pretty | grep description | cut -d: -f2",
-                          true, false, true)
+                  .getOut("systemctl list-units " + name + ".service -o json | jq -r '.[0].description // empty'", true,
+                          false, true)
                   .trimmed();
-        out = out.mid(1, out.length() - 2);
+
+        // If that fails, try systemctl status
         if (out.isEmpty()) {
             out = Cmd()
                       .getOut("systemctl status " + name + " | awk -F' - ' 'NR == 1 { print $2 } NR > 1 { exit }'",
                               true, false, true)
                       .trimmed();
         }
+
+        // If still empty, try to get from init file
         if (out.isEmpty()) {
             QRegularExpression regex("\nShort-Description:([^\n]*)");
             QRegularExpressionMatch match = regex.match(getInfoFromFile(name));
@@ -154,46 +162,68 @@ void Service::setRunning(bool running)
 
 QString Service::getInfoFromFile(const QString &name)
 {
-    QFileInfo fileInfo("/etc/init.d/" + name);
-    if (!fileInfo.isFile()) {
-        fileInfo.setFile("/etc/init.d/" + name + ".sh");
-        if (!fileInfo.isFile()) {
-            qDebug() << "Could not find unit file" << name;
-            return Cmd().getOut("/sbin/service " + name + " status", false, false, true);
+    // Check for the service file in standard locations
+    const QStringList possiblePaths = {"/etc/init.d/" + name, "/etc/init.d/" + name + ".sh"};
+
+    QString filePath;
+    for (const auto &path : possiblePaths) {
+        if (QFileInfo::exists(path)) {
+            filePath = path;
+            break;
         }
     }
-    QFile file {fileInfo.canonicalFilePath()};
-    if (!file.open(QIODevice::ReadOnly)) {
+
+    if (filePath.isEmpty()) {
+        qDebug() << "Could not find unit file for" << name;
         return Cmd().getOut("/sbin/service " + name + " status", false, false, true);
     }
+
+    QFile file(filePath);
+    if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+        qDebug() << "Could not open file" << filePath;
+        return Cmd().getOut("/sbin/service " + name + " status", false, false, true);
+    }
+
     QString info;
+    info.reserve(1024); // Pre-allocate memory to avoid reallocations
     bool info_header = false;
-    while (!file.atEnd()) {
-        QString line = file.readLine().trimmed();
-        if (line.startsWith("### END INIT INFO")) {
-            info_header = false;
-        }
-        if (info_header) {
-            line.remove(0, 2);
-            info.append(line + "\n");
-        }
+
+    QTextStream in(&file);
+    while (!in.atEnd()) {
+        QString line = in.readLine().trimmed();
+
         if (line.startsWith("### BEGIN INIT INFO")) {
             info_header = true;
+            continue;
+        }
+
+        if (line.startsWith("### END INIT INFO")) {
+            break; // No need to read the rest of the file
+        }
+
+        if (info_header) {
+            line.remove(0, 2);
+            info.append(line + '\n');
         }
     }
+
     return info;
 }
 
 bool Service::enable()
 {
     if (initSystem == "systemd") {
+        // First unmask the service if it's masked
         Cmd().runAsRoot("systemctl unmask " + name);
+
         if (Cmd().runAsRoot("systemctl enable " + name)) {
             setEnabled(true);
             return true;
         }
     } else {
+        // For SysV init, first set defaults then enable
         Cmd().runAsRoot("/sbin/update-rc.d " + name + " defaults");
+
         if (Cmd().runAsRoot("/sbin/update-rc.d " + name + " enable")) {
             setEnabled(true);
             return true;
@@ -206,6 +236,7 @@ bool Service::disable()
 {
     if (initSystem == "systemd") {
         if (Cmd().runAsRoot("systemctl disable " + name)) {
+            // Mask the service to prevent it from being started indirectly
             Cmd().runAsRoot("systemctl mask " + name);
             setEnabled(false);
             return true;

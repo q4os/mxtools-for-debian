@@ -68,4 +68,8 @@ private:
     static QString getHtmlColor(const QColor &color);
     void displayServices();
     void listServices();
+    void processNonSystemdServices();
+    void processSystemdActiveInactiveServices(QStringList &names);
+    void processSystemdMaskedServices(QStringList &names);
+    void processSystemdServices();
 };

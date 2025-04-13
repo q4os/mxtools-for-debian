@@ -19,15 +19,19 @@
 # **********************************************************************/
 
 QT       += core gui widgets
-CONFIG   += c++1z
+CONFIG   += debug_and_release warn_on strict_c++ c++17
 
+CONFIG(release, debug|release) {
+    DEFINES += NDEBUG
+    QMAKE_CXXFLAGS += -flto=auto
+    QMAKE_LFLAGS += -flto=auto
+}
+
+QMAKE_CXXFLAGS += -Wpedantic -pedantic -Werror=return-type -Werror=switch
+QMAKE_CXXFLAGS += -Werror=uninitialized -Werror=return-local-addr -Werror
 TARGET = mx-service-manager
 TEMPLATE = app
 
-# The following define makes your compiler warn you if you use any
-# feature of Qt which has been marked as deprecated (the exact warnings
-# depend on your compiler). Please consult the documentation of the
-# deprecated API in order to know how to port your code away from it.
 DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \

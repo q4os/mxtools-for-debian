@@ -22,6 +22,7 @@
 
 #include <QApplication>
 #include <QCommandLineParser>
+#include <QDebug>
 #include <QIcon>
 #include <QLibraryInfo>
 #include <QLocale>
@@ -85,13 +86,12 @@ int main(int argc, char *argv[])
         }
     }
 
-    if (uid != 0) {
-        if (!QFile::exists("/usr/bin/pkexec") && !QFile::exists("/usr/bin/gksu")) {
-            QMessageBox::critical(nullptr, QObject::tr("Error"),
-                                  QObject::tr("You must run this program with admin access."));
-            QCoreApplication::exit(EXIT_FAILURE);
-        }
+    // Early authentication test to fill the credential cache
+    if (!Cmd().procAsRoot("true", {}, nullptr, nullptr, QuietMode::Yes)) {
+        qDebug().noquote() << "Error executing command as another user: Request dismissed or not authorized";
+        exit(EXIT_FAILURE);
     }
+
     MainWindow mainWindow;
     mainWindow.show();
     return QApplication::exec();

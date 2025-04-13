@@ -2,6 +2,10 @@
 
 # Root level functions requiring password for mx-packageinstaller
 
+apt_update() {
+    apt-get update -o=Dpkg::Use-Pty=0 -o Acquire::http:Timeout=10 -o Acquire::https:Timeout=10 -o Acquire::ftp:Timeout=10
+}
+
 cleanup_temp() {
     rm /etc/apt/sources.list.d/mxpitemp.list
 }
@@ -12,12 +16,28 @@ copy_log() {
     mv /tmp/mxpi.log /var/log
 }
 
+flatpak_add_repos() {
+    flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+    flatpak remote-add --if-not-exists --subset=verified flathub-verified https://flathub.org/repo/flathub.flatpakrepo
+}
+
+flatpak_add_repos_user() {
+    flatpak --user remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+    flatpak --user remote-add --if-not-exists --subset=verified flathub-verified https://flathub.org/repo/flathub.flatpakrepo
+}
+
 main() {
 case "$1" in 
+    apt_update)
+        apt_update;;
     copy_log) 
         copy_log;;
     cleanup_temp)
         cleanup_temp;;
+    flatpak_add_repos)
+        flatpak_add_repos;;
+    flatpak_add_repos_user)
+        flatpak_add_repos_user;;
 esac
 }
 

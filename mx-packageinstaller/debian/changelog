@@ -1,3 +1,17 @@
+mx-packageinstaller (25.5.01) mx; urgency=medium
+
+  * Fix adding repo as user for flatpak
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 09 Apr 2025 21:04:51 -0400
+
+mx-packageinstaller (25.5) mx; urgency=medium
+
+  * Update policy actions to run some commands without popping up an
+    authentication dialog
+  * Update translations
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 07 Apr 2025 22:28:43 -0400
+
 mx-packageinstaller (25.3.02) mx; urgency=medium
 
   * Fix issue displaying an empty line in flatpak list

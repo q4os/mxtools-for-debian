@@ -209,9 +209,8 @@ private:
     QPushButton *pushCancel {};
     QSettings dictionary;
     QSettings settings;
-    QString fpUser;
     QString arch;
-    QString tempList {"/etc/apt/sources.list.d/mxpitemp.list"};
+    QString fpUser;
     QString verName;
     QStringList changeList;
     QStringList flatpaks;
@@ -225,6 +224,8 @@ private:
     QTreeWidgetItem *lastItemClicked {};
     QUrl getScreenshotUrl(const QString &name);
     const QCommandLineParser &args;
+    const QString elevate {QFile::exists("/usr/bin/pkexec") ? "/usr/bin/pkexec " : "/usr/bin/gksu "};
+    const QString tempList {"/etc/apt/sources.list.d/mxpitemp.list"};
 
     QNetworkAccessManager manager;
     QNetworkReply *reply;

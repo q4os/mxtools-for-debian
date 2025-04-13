@@ -10,6 +10,7 @@ Standards-Version: 3.9.8
 Package: mx-boot-options
 Architecture: any
 Depends: xdg-utils | mx-viewer,
+         uefi-manager,
          ${misc:Depends},
          ${shlibs:Depends}
 Recommends: efibootmgr, mx-launcher-l10n, gksu | pkexec

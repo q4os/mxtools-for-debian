@@ -30,7 +30,7 @@ class Service
 
 public:
     Service() = default;
-    explicit Service(QString name, bool running);
+    explicit Service(QString name, bool running = false, bool enabled = false);
     [[nodiscard]] QString getDescription() const;
     [[nodiscard]] QString getInfo() const;
     [[nodiscard]] QString getName() const;
@@ -47,8 +47,8 @@ public:
 
 private:
     QString name;
-    bool running {};
-    bool enabled {};
+    bool running = false;
+    bool enabled = false;
     static QString getInfoFromFile(const QString &name);
 };
 
