@@ -1,0 +1,55 @@
+uefi-manager (25.5.01) mx; urgency=medium
+
+  * Don't require elevation when starting the app
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 11 Apr 2025 16:16:58 -0400
+
+uefi-manager (25.4) mx; urgency=medium
+
+  * Update translations
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 11 Apr 2025 08:19:24 -0400
+
+uefi-manager (25.03.04) mx; urgency=medium
+
+  * Add option to rename the UEFI entry
+
+ -- Adrian <adrian@mxlinux.org>  Sat, 22 Mar 2025 19:36:44 -0400
+
+uefi-manager (25.03.03) mx; urgency=medium
+
+  * Fix reset boot next 
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 21 Mar 2025 21:50:48 -0400
+
+uefi-manager (25.03.02) mx; urgency=medium
+
+  * Fix getting partition number
+  * Fix typos
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 21 Mar 2025 15:42:49 -0400
+
+uefi-manager (25.03.01) mx; urgency=medium
+
+  * get boot partition from fstab entries like LABEL=, UUID=, PARTLABEL=,
+    PARTUUID= and /dev/disk/by... entries
+  * detect octal '\040'-space encoding in LABELs with spaces used in fstab and crypttab 
+  * adjust mountpoint detection for luks mounts and LABEL with spaces
+  * version sort listed kernel with highest version first
+  * list linux partitions with size >= 8GB and frugal partitions with size >= 1G
+  * list ESP partitions based on esp,boot flag and vfat filesystem
+  * set default entry for EFIstub to root drive and root partition
+  * get kernel boot parameter from grub.cfg
+  * use and clean temporary mountpoints below /mnt/uefi-manager
+  * authentication check at start to fill credential cache early
+  * add detected early microcode (amd-ucode.img and intel-ucode.img) to EFIstub loader
+  * use EFI subdir based on distro detection e.g. mx, antix, debian, ubuntu, manjaro...
+  * detect bootdir on luks encrypted and btrfs with subvolumes
+
+ -- fehlix <fehlix@mxlinux.org>  Fri, 21 Mar 2025 09:00:18 -0400
+
+uefi-manager (0.24.12) UNRELEASED; urgency=medium
+
+  * Initial release
+
+ -- Adrian <adrian@mxlinux.org>  Sun, 17 Nov 2024 20:47:33 -0500

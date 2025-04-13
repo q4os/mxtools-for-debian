@@ -1,0 +1,12 @@
+[Desktop Entry]
+Encoding=UTF-8
+# The desktop entry name will be displayed within the menu.
+Name=UEFI Manager
+# # The desktop entry comment will be shown within the menu.
+Comment=Manage UEFI boot options
+Exec=uefi-manager
+Terminal=false
+Type=Application
+Icon=uefi-manager
+Categories=System;MX-Software;
+NoDisplay=false

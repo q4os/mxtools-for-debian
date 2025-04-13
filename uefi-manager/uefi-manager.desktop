@@ -1,0 +1,19 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=UEFI Manager
+Name[ca]=UEFI Manager
+Name[de]=UEFI Manager
+Name[el]=UEFI Manager
+Name[es]=UEFI Manager
+Name[fr]=UEFI Manager
+Name[it]=UEFI Manager
+Name[ja]=UEFI Manager
+Name[nl]=UEFI Manager
+Name[sv]=UEFI Manager
+Comment=Manage UEFI boot options
+Exec=uefi-manager
+Terminal=false
+Type=Application
+Icon=uefi-manager
+Categories=System;MX-Software;
+NoDisplay=false

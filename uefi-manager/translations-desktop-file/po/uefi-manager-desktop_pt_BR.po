@@ -1,0 +1,37 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+# Translators:
+# marcelo cripe <marcelocripe@gmail.com>, 2025
+# 
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-03-22 20:11-0400\n"
+"PO-Revision-Date: 2025-03-23 00:11+0000\n"
+"Last-Translator: marcelo cripe <marcelocripe@gmail.com>, 2025\n"
+"Language-Team: Portuguese (Brazil) (https://app.transifex.com/anticapitalista/teams/10162/pt_BR/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: pt_BR\n"
+"Plural-Forms: nplurals=3; plural=(n == 0 || n == 1) ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
+
+#. The desktop entry name will be displayed within the menu.
+#: desktop-in/uefi-manager.desktop.in:5
+msgid "UEFI Manager"
+msgstr "Gerenciador do UEFI"
+
+#. # The desktop entry comment will be shown within the menu.
+#: desktop-in/uefi-manager.desktop.in:7
+msgid "Manage UEFI boot options"
+msgstr ""
+"O ‘UEFI Manager’ é uma ferramenta que permite adicionar, excluir ou renomear"
+" as entradas de inicialização do UEFI (Unified Extensible Firmware "
+"Interface) que é uma interface do programa que controla o processo de "
+"inicialização do computador, sendo o UEFI uma atualização do BIOS (Basic "
+"Input/Output System)"

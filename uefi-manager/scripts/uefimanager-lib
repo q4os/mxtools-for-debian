@@ -1,0 +1,26 @@
+#!/bin/bash
+
+# Root level functions requiring password for uefi-manager
+
+cleanup_temp() {
+}
+
+copy_log() {
+}
+
+write_checkfile() {
+    touch /etc/uefi-stub-installer.chk
+}
+
+main() {
+case "$1" in 
+    copy_log) 
+        copy_log;;
+    cleanup_temp)
+        cleanup_temp;;
+    write_chkfile)
+        write_chkfile;;
+esac
+}
+
+main "$@"
