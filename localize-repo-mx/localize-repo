@@ -262,7 +262,7 @@ main() {
               *=*)  val=${param#*=} ;;
                 *)  val="???"       ;;
         esac
-
+		
         case $param in
           -ignore|i) IGNORE=$val                       ;;
       -ignore=*|i=*) IGNORE=$val                       ;;
@@ -350,30 +350,56 @@ main() {
 
 
     # Only update if the mirror is different from the one we want
-    SED_EXPR="-e /ftp\.$deb_code\.debian\.org/!s=(http://ftp\.)[a-z][a-z](\.debian.org/debian/)=\1$deb_code\2="
+    SED_EXPR="-e /ftp\.$deb_code\.debian\.org/s~(http://ftp\.)[a-z]{2}(\.debian.org/debian/)~\1${deb_code}\2~"
     SED_EXPR_P="${SED_EXPR}p"
 
     assign_exprs $mx_code
+    #echo "source host is" $SOURCEHOST
+    #echo "$SED_EXPR_P"
 
     [ -d "$SDIR" ] || fatal "'$SDIR' is not a directory"
 
     local file fcnt=0
     for file in $(find $SDIR -maxdepth 1 -name "*.list"); do
-
         # Use diff to see if there would be any change to the file
-        local diff=$(sed -r $SED_EXPR $file | diff -q $file -)
+        local diff=$(sed -E $SED_EXPR $file | diff -q $file -)
+        
         [ "$diff" ] || continue
 
         fcnt=$((fnct + 1))
         if [ "$PRETEND" -o "$VERBOSE" ]; then
+        	echo ""
             echo "File: $(basename $file)"
-            sed -n -r $SED_EXPR_P $file
+            sed -n -E $SED_EXPR_P $file
         fi
 
         [ "$PRETEND" ] && continue
 
         [ -z "$VERBOSE" ] && qsay "File: $(basename $file)"
-        sed -i -r $SED_EXPR $file
+        sed -i -E $SED_EXPR $file
+    done
+
+    for file in $(find $SDIR -maxdepth 1 -name "*.sources"); do
+    	test1=$(sed -E "/^URIs: .*\/(mx|antix)/ s|^(URIs: )(https?://[^/]+)(/[^ ]+/)|\1$SOURCEHOST\3|" $file)
+        test2=$(sed -E "s|(URIs:[[:space:]]+http://ftp\.)[a-z]{2}(\.debian\.org/debian/)|\1$deb_code\2|" $file)
+        testfile=$(< $file)
+
+        #don't do anything if not different
+        if [ "$testfile" != "$test1" -o "$testfile" != "$test2" ]; then 
+    	
+        	if [ "$PRETEND" -o "$VERBOSE" ]; then
+        		echo ""
+        		echo "File: $(basename $file)"
+        		if [ "$testfile" != "$test1" ]; then echo "$test1"; fi
+        		if [ "$testfile" != "$test2" ]; then echo echo "$test2"; fi
+       		fi
+        
+        	[ "$PRETEND" ] && continue
+        
+        	[ -z "$VERBOSE" ] && qsay  "File:  $(basename $file)"
+        	sed -i -E "s|(URIs:[[:space:]]+http://ftp\.)[a-z]{2}(\.debian\.org/debian/)|\1$deb_code\2|" $file
+        	sed -i -E "/^URIs: .*\/(mx|antix)/ s|^(URIs: )(https?://[^/]+)(/[^ ]+/)|\1$SOURCEHOST\3|" $file
+        fi
     done
 }
 
@@ -393,8 +419,9 @@ assign_exprs() {
             ohost_list=$ohost_list${ohost_list:+|}$ohost
         done
         ohost_list=$(echo $ohost_list | sed 's/\./\\\./g')
-        local sed="s=($ohost_list)/=$host/="
+        local sed="s~($ohost_list)/~$host/~"
         #echo SED_$type=$sed
+        SOURCEHOST="$host"
         SED_EXPR="$SED_EXPR -e $sed"
         SED_EXPR_P="$SED_EXPR_P -e ${sed}p"
     done

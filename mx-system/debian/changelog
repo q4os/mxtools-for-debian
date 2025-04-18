@@ -1,3 +1,17 @@
+mx-system (25.04.02mx23) mx; urgency=medium
+
+  * don't run update-grub if grub.cfg doesn't exit
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 14 Apr 2025 20:49:52 -0400
+
+mx-system (25.04.01mx23) mx; urgency=medium
+
+  * add logic for running update-grub during update and string changes 
+  * add mx23.6 strings 
+  * don't run update-grub if update-grub doesn't exist (pi)
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 10 Apr 2025 22:01:39 -0400
+
 mx-system (25.02.01mx23) mx; urgency=medium
 
   * add TryExec lines to desktop overrides

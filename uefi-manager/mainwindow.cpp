@@ -1211,14 +1211,47 @@ void MainWindow::getKernelOptions(const QString &bootDir, const QString &rootDir
         }
     }
 
+    QString bootOptions;
     if (!QFile::exists(grubFile)) {
         qWarning() << "GRUB file not found:" << grubFile;
-        return;
-    }
-    QString grep = QString("grep -m1 -oiP '^[[:space:]]*linux[[:space:]]+(/@)?%1/%2[[:space:]]+\\K.*root=(%3).*' '%4'")
+
+        // Obtain root= from rootUUID
+        if (!rootUUID.isEmpty()) {
+            bootOptions = "root=UUID=" + rootUUID;
+        }
+
+        // Try to read options from /etc/default/grub if it exists
+        QString defaultGrubFile = rootDir.endsWith("/") ? rootDir + "etc/default/grub" : rootDir + "/etc/default/grub";
+        if (QFile::exists(defaultGrubFile)) {
+            // Get options from GRUB_CMDLINE_LINUX
+            QString grepCmdLinux = QString("grep -m1 -oP '^GRUB_CMDLINE_LINUX=\"\\K[^\"]+'") + " " + defaultGrubFile;
+            QString linuxOptions = cmd.getOutAsRoot(grepCmdLinux).trimmed();
+
+            // Get options from GRUB_CMDLINE_LINUX_DEFAULT
+            QString grepCmdLinuxDefault = QString("grep -m1 -oP '^GRUB_CMDLINE_LINUX_DEFAULT=\"\\K[^\"]+'") + " " + defaultGrubFile;
+            QString defaultOptions = cmd.getOutAsRoot(grepCmdLinuxDefault).trimmed();
+
+            // Combine both options
+            if (!linuxOptions.isEmpty()) {
+                bootOptions += " " + linuxOptions;
+                qDebug() << "Boot options from GRUB_CMDLINE_LINUX:" << linuxOptions;
+            }
+
+            if (!defaultOptions.isEmpty()) {
+                bootOptions += " " + defaultOptions;
+                qDebug() << "Boot options from GRUB_CMDLINE_LINUX_DEFAULT:" << defaultOptions;
+            }
+
+            if (!linuxOptions.isEmpty() || !defaultOptions.isEmpty()) {
+                qDebug() << "Combined boot options:" << bootOptions;
+            }
+        }
+    } else {
+        QString grep = QString("grep -m1 -oiP '^[[:space:]]*linux[[:space:]]+(/@)?%1/%2[[:space:]]+\\K.*root=(%3).*' '%4'")
                        .arg(kernelDir, vmlinuz, rootPatternList.join("|"), grubFile);
 
-    QString bootOptions = cmd.getOutAsRoot(grep).trimmed();
+        bootOptions = cmd.getOutAsRoot(grep).trimmed();
+    }
     const QString initSystemd = "init=/lib/systemd/systemd";
     if (!bootOptions.isEmpty()) {
         if (isSystemd() && !bootOptions.contains(initSystemd)) {

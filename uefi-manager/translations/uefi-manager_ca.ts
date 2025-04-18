@@ -166,7 +166,7 @@
     <message>
         <location filename="../mainwindow.ui" line="465"/>
         <location filename="../mainwindow.cpp" line="887"/>
-        <location filename="../mainwindow.cpp" line="1630"/>
+        <location filename="../mainwindow.cpp" line="1663"/>
         <source>Next</source>
         <translation>Següent</translation>
     </message>
@@ -178,8 +178,8 @@
     <message>
         <location filename="../mainwindow.cpp" line="711"/>
         <location filename="../mainwindow.cpp" line="910"/>
-        <location filename="../mainwindow.cpp" line="1454"/>
-        <location filename="../mainwindow.cpp" line="1464"/>
+        <location filename="../mainwindow.cpp" line="1487"/>
+        <location filename="../mainwindow.cpp" line="1497"/>
         <source>UEFI Installer</source>
         <translation>Instal·lador UEFI</translation>
     </message>
@@ -209,29 +209,29 @@
         <translation>No puc obrir el contenidor LUKS %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1455"/>
+        <location filename="../mainwindow.cpp" line="1488"/>
         <source>Are you sure this is the MX or antiX Frugal installation location?
 Missing mandatory files in directory: </source>
         <translation>Segur que aquesta és la ubicació d&apos;instal·lació d&apos;MX o antiX Frugal?
 Falten fitxers obligatoris al directori:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1528"/>
+        <location filename="../mainwindow.cpp" line="1561"/>
         <source>Not enough space on the EFI System Partition to copy the kernel and initrd files.</source>
         <translation>No hi ha prou espai a la partició EFI del sistema per copiar-hi els fitxers del nucli i d&apos;initrd.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1574"/>
+        <location filename="../mainwindow.cpp" line="1607"/>
         <source>All fields are required</source>
         <translation>Tots els camps són obligatoris.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1590"/>
+        <location filename="../mainwindow.cpp" line="1623"/>
         <source>Could not select ESP</source>
         <translation>No s&apos;ha pogut seleccionar l&apos;ESP.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1608"/>
+        <location filename="../mainwindow.cpp" line="1641"/>
         <source>About %1</source>
         <translation>Quant a %1</translation>
     </message>
@@ -251,15 +251,15 @@ Falten fitxers obligatoris al directori:</translation>
         <location filename="../mainwindow.cpp" line="958"/>
         <location filename="../mainwindow.cpp" line="970"/>
         <location filename="../mainwindow.cpp" line="976"/>
-        <location filename="../mainwindow.cpp" line="1650"/>
-        <location filename="../mainwindow.cpp" line="1766"/>
-        <location filename="../mainwindow.cpp" line="1818"/>
-        <location filename="../mainwindow.cpp" line="1829"/>
-        <location filename="../mainwindow.cpp" line="1836"/>
-        <location filename="../mainwindow.cpp" line="1847"/>
-        <location filename="../mainwindow.cpp" line="1857"/>
-        <location filename="../mainwindow.cpp" line="1872"/>
-        <location filename="../mainwindow.cpp" line="1877"/>
+        <location filename="../mainwindow.cpp" line="1683"/>
+        <location filename="../mainwindow.cpp" line="1799"/>
+        <location filename="../mainwindow.cpp" line="1851"/>
+        <location filename="../mainwindow.cpp" line="1862"/>
+        <location filename="../mainwindow.cpp" line="1869"/>
+        <location filename="../mainwindow.cpp" line="1880"/>
+        <location filename="../mainwindow.cpp" line="1890"/>
+        <location filename="../mainwindow.cpp" line="1905"/>
+        <location filename="../mainwindow.cpp" line="1910"/>
         <source>Error</source>
         <translation>Error</translation>
     </message>
@@ -286,7 +286,7 @@ Falten fitxers obligatoris al directori:</translation>
     <message>
         <location filename="../mainwindow.cpp" line="738"/>
         <location filename="../mainwindow.cpp" line="780"/>
-        <location filename="../mainwindow.cpp" line="1662"/>
+        <location filename="../mainwindow.cpp" line="1695"/>
         <source>Timeout: %1 seconds</source>
         <translation>Temps d&apos;espera %1 segons</translation>
     </message>
@@ -294,7 +294,7 @@ Falten fitxers obligatoris al directori:</translation>
         <location filename="../mainwindow.cpp" line="740"/>
         <location filename="../mainwindow.cpp" line="779"/>
         <location filename="../mainwindow.cpp" line="796"/>
-        <location filename="../mainwindow.cpp" line="1675"/>
+        <location filename="../mainwindow.cpp" line="1708"/>
         <source>Boot Next: %1</source>
         <translation>Propera arrencada %1</translation>
     </message>
@@ -382,156 +382,156 @@ Falten fitxers obligatoris al directori:</translation>
         <translation>Ha fallat obrir el fitxer grub.entry.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1611"/>
+        <location filename="../mainwindow.cpp" line="1644"/>
         <source>Tool for managing UEFI boot entries</source>
         <translation>Eina per gestionar les entrades d&apos;arrencada UEFI</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1766"/>
+        <location filename="../mainwindow.cpp" line="1799"/>
         <source>Both old and new EFI labels must be specified</source>
         <translation>Cal especificar les etiquetes EFI antigues i noves.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1819"/>
+        <location filename="../mainwindow.cpp" line="1852"/>
         <source>Multiple boot entries found for label &apos;%1&apos;: %2 and %3;</source>
         <translation>S&apos;han trobat diverses entrades d&apos;arrencada per a l&apos;etiqueta %1: %2 i %3;</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1829"/>
+        <location filename="../mainwindow.cpp" line="1862"/>
         <source>No EFI data found for label &apos;%1&apos;.</source>
         <translation>No s&apos;han trobat dades d&apos;EFI per a l&apos;etiqueta %1.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1837"/>
+        <location filename="../mainwindow.cpp" line="1870"/>
         <source>EFI label &apos;%1&apos; is linked to an unknown partition &apos;%2&apos;.</source>
         <translation>L&apos;etiqueta EFI %1&apos; està enllaçada amb una partició desconeguda: %2.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1848"/>
+        <location filename="../mainwindow.cpp" line="1881"/>
         <source>Unexpected device name format &apos;%1&apos; for partition related to the label.</source>
         <translation>Format de nom de dispositiu inesperat (%1) per a la partició relacionada amb l&apos;etiqueta.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1858"/>
+        <location filename="../mainwindow.cpp" line="1891"/>
         <source>Device partition number [%1] differs from EFI entry partition number [%2].</source>
         <translation>El número de partició del dispositiu [%1] és diferent del número de partició de l&apos;entrada EFI [%2].</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1872"/>
+        <location filename="../mainwindow.cpp" line="1905"/>
         <source>Failed to delete old boot entry</source>
         <translation>Ha fallat suprimir l&apos;entrada d&apos;arrencada antiga.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1877"/>
+        <location filename="../mainwindow.cpp" line="1910"/>
         <source>Failed to create new boot entry</source>
         <translation>Ha fallat crear una entrada d&apos;arrencada nova.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1464"/>
+        <location filename="../mainwindow.cpp" line="1497"/>
         <source>Failed to read grub.entry file.</source>
         <translation>Ha fallat llegir el fitxer grub.entry.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="895"/>
-        <location filename="../mainwindow.cpp" line="1477"/>
+        <location filename="../mainwindow.cpp" line="1510"/>
         <source>Install</source>
         <translation>Instal·la</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1483"/>
+        <location filename="../mainwindow.cpp" line="1516"/>
         <source>Select Frugal Directory</source>
         <translation>Seleccioneu el directori Frugal</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1490"/>
+        <location filename="../mainwindow.cpp" line="1523"/>
         <source>No EFI System Partitions found.</source>
         <translation>No s&apos;ha trobat cap partició EFI del sistema.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1496"/>
+        <location filename="../mainwindow.cpp" line="1529"/>
         <source>Select EFI System Partition</source>
         <translation>Seleccioneu la partició EFI del sistema</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1497"/>
+        <location filename="../mainwindow.cpp" line="1530"/>
         <source>EFI System Partitions:</source>
         <translation>Particions EFI del sistema:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1510"/>
+        <location filename="../mainwindow.cpp" line="1543"/>
         <source>No EFI System Partition selected</source>
         <translation>No s&apos;ha seleccionat cap partició EFI del sistema.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1517"/>
+        <location filename="../mainwindow.cpp" line="1550"/>
         <source>Could not mount selected EFI System Partition</source>
         <translation>No s&apos;ha pogut muntar la partició EFI del sistema seleccionada.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1544"/>
-        <location filename="../mainwindow.cpp" line="1581"/>
+        <location filename="../mainwindow.cpp" line="1577"/>
+        <location filename="../mainwindow.cpp" line="1614"/>
         <source>Could not mount partition. Please make sure you selected the correct partition.</source>
         <translation>No s&apos;ha pogut muntar la partició. Assegureu-vos que heu seleccionat la partició correcta.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1553"/>
+        <location filename="../mainwindow.cpp" line="1586"/>
         <source>No directory selected</source>
         <translation>No s&apos;ha seleccionat cap directori.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1566"/>
-        <location filename="../mainwindow.cpp" line="1596"/>
+        <location filename="../mainwindow.cpp" line="1599"/>
+        <location filename="../mainwindow.cpp" line="1629"/>
         <source>EFI stub installed successfully.</source>
         <translation>EFI stub s&apos;ha instal·lat correctament.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1568"/>
-        <location filename="../mainwindow.cpp" line="1598"/>
+        <location filename="../mainwindow.cpp" line="1601"/>
+        <location filename="../mainwindow.cpp" line="1631"/>
         <source>Failed to install EFI stub.</source>
         <translation>Ha fallat la instal·lació d&apos;EFI stub.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1609"/>
+        <location filename="../mainwindow.cpp" line="1642"/>
         <source>Version: </source>
         <translation>Versió: </translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1613"/>
+        <location filename="../mainwindow.cpp" line="1646"/>
         <source>Copyright (c) MX Linux</source>
         <translation>Copyright (c) MX Linux</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1614"/>
+        <location filename="../mainwindow.cpp" line="1647"/>
         <source>%1 License</source>
         <translation>Llicència de %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1622"/>
+        <location filename="../mainwindow.cpp" line="1655"/>
         <source>%1 Help</source>
         <translation>Ajuda de %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1650"/>
+        <location filename="../mainwindow.cpp" line="1683"/>
         <source>Something went wrong, could not save boot order.</source>
         <translation>Alguna cosa ha fallat, no puc desar l&apos;ordre d&apos;arrencada.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1658"/>
+        <location filename="../mainwindow.cpp" line="1691"/>
         <source>Set timeout</source>
         <translation>Defineix el temps d&apos;espera</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1658"/>
+        <location filename="../mainwindow.cpp" line="1691"/>
         <source>Timeout in seconds:</source>
         <translation>Temps d&apos;espera en segons</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1689"/>
+        <location filename="../mainwindow.cpp" line="1722"/>
         <source>Removal confirmation</source>
         <translation>Elimina la confirmació</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1690"/>
+        <location filename="../mainwindow.cpp" line="1723"/>
         <source>Are you sure you want to delete this boot entry?
 %1</source>
         <translation>Esteu segur d&apos;esborrar aquesta entrada de l&apos;arrencada?

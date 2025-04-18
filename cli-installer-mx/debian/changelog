@@ -1,3 +1,24 @@
+cli-installer-mx (25.4.01) mx; urgency=medium
+
+  * Prompt for custom EFI boot name
+  * Check if there is internet access (needed for installing packages)
+  * In internet connection is not available skip apt-get actions
+  * Check version against github version and advise user if newer version is
+    available
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 17 Apr 2025 10:41:39 -0400
+
+cli-installer-mx (25.4) mx; urgency=medium
+
+  * Script autoelevates if needed
+  * Install GRUB and efibootmgr when needed
+  * Provide an EFI stub installation option (no need for GRUB)
+  * Remove instructions about running the installer at the
+    end of installation from /etc/issue
+  * Remove reiserfs reiser4 format options
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 16 Apr 2025 20:39:08 -0400
+
 cli-installer-mx (5.3) mx; urgency=medium
 
   *  set bios_grub flag on legacy btfs

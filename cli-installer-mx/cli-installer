@@ -1,41 +1,41 @@
 #!/usr/bin/env bash
-# cli-installer for antiX
+# cli-installer for antiX and MX-Linux
 # written by Burt Holland
 # heavily edited by anticapitalista
+# heavily edited by MX-Linux
 
 export TEXTDOMAINDIR=/usr/share/locale
 export TEXTDOMAIN=cli-installer
 
-#Default
-DISTRO=MX-Linux
+# Default
 LIVEUSER=demo
+VERSION=2025.04.17
 
-##functions
-#title
-#header
-#help_text
-#gethome
-#getroot
-#repartition
-#setfs
-#setpw
-#yn(yes/no)
-#getfs
-#encrypt
+# Distro specific variables
+DISTRO=MX-Linux
+PACKAGE_NAME=cli-installer-mx
+CHANGELOG_URL=https://raw.githubusercontent.com/MX-Linux/cli-installer-mx/main/debian/changelog
+DOWNLOAD_URL=https://github.com/MX-Linux/cli-installer-mx
 
+reset_color() { echo -ne "\e[0m"; }
+set_blue_color() { echo -ne "\e[34m"; }
+set_cyan_color() { echo -ne "\e[36m"; }
+set_green_color() { echo -ne "\e[32m"; }
+set_red_color() { echo -ne "\e[31m"; }
+set_yellow_color() { echo -ne "\e[33m"; }
 
 title() {
-    echo -ne "\e[32m"
-    echo $"CL installer for $DISTRO"
-    echo $"Version 5.5 12/01/2021"
-    echo -ne "\e[0m"
+    set_green_color
+    echo $"CLI installer for $DISTRO"
+    echo $"Version $VERSION"
+    reset_color
     echo
 }
 
 header() {
-    #echo -ne "\e[36m"
+    #set_cyan_color
     #echo $"Requirements for minimum installation:"
-    #echo -ne "\e[0m"
+    #reset_color
     #echo
     #echo $"antiX-full: hard-disk 5.0GB  RAM 64MB"
     #echo
@@ -55,20 +55,22 @@ header() {
     echo
     echo $"If you want the above mentioned features, use our gui installer"
     echo
-    echo $"Ctrl c will abort this script"
+    echo $"Press Ctrl+C to abort this script"
     echo
+
 }
 
 help_text() {
+    title
     echo $"Usage: cli-installer [drive]"
     echo $"Where drive is the name of the drive $DISTRO is to be installed on."
     echo $"   For example: cli-installer sdb"
     echo $"The default is correct if the computer has only one drive."
     echo
-    # tips for this version
-    echo -ne "\e[36m"
+    # Tips for this version
+    set_blue_color
     echo $"Pre-installation tips:"
-    echo -ne "\e[0m"
+    reset_color
     echo
     echo $"Set language at the boot screen by pressing F2"
     echo $"or by adding the line lang=xx where xx is your language code."
@@ -77,110 +79,185 @@ help_text() {
     echo $"Set timezone at the boot screen by pressing F3"
     echo
     echo $"Use kbd=dvorak for dvorak keyboard before installing"
-    # end tips
+    # End tips
     echo
     echo $"Press F1 at the boot screen for Help and list of cheatcodes for live use."
 }
 
-driveCheck() {
-    #Check for valid known drive device name schema
+check_network_connection() {
+    NETWORK=true
+    if ! ping -n -w3 -c1 1.1.1.1 > /dev/null 2>&1; then
+        NETWORK=false
+        set_yellow_color
+        echo $"No internet connection. It's recommended to exit, setup a connection and run the script again."
+        yn $"Do you want to continue? (y/N)"
+        reset_color
+        echo
+        if [[ "$ans" -eq 1 ]]; then
+            echo $"Continuing..."
+            echo
+        else
+            echo $"Exiting..."
+            exit 1
+        fi
+    fi
+}
+
+check_version() {
+    if ! command -v curl >/dev/null; then
+        echo $"Installing curl..."
+        if ! ($NETWORK && apt-get update && apt-get -y install curl); then
+            set_yellow_color
+            echo $"Failed to install curl. Version checking will be skipped."
+            reset_color
+            echo
+            return
+        fi
+    fi
+    latest_version=$($NETWORK && curl -s --max-time 3 $CHANGELOG_URL | head -n 1 | awk '{print $2}' | tr -d '()')
+    if [[ -z "$latest_version" ]]; then
+        set_yellow_color
+        echo $"Failed to retrieve the latest version. Please check your internet connection."
+        reset_color
+        echo
+        return
+    fi
+
+    installed_version=$(dpkg-query -W -f='${Version}' $PACKAGE_NAME 2>/dev/null)
+
+    # Compare versions
+    if dpkg --compare-versions "$installed_version" lt "$latest_version"; then
+        echo $"A newer version of $PACKAGE_NAME is available: $latest_version"
+        echo $"You have version: $installed_version"
+        echo $"Please update to the latest version before proceeding."
+        echo
+        echo $"You can update to the latest version by running:"
+        echo $"sudo apt-get update && sudo apt-get install $PACKAGE_NAME"
+        echo $"Or, you can download the latest version from:" "$DOWNLOAD_URL"
+        echo
+        yn $"Do you want to continue with the current version anyway? (n/Y)"
+        if [[ "$ans" -eq 0 ]]; then
+            echo $"Installation aborted. Please update $PACKAGE_NAME first."
+            exit 1
+        else
+            set_yellow_color
+            echo $"Continuing with current version. Some features may not work correctly."
+            reset_color
+            echo
+        fi
+    fi
+}
+
+drive_check() {
+    # Check for valid known drive device name schema
     drive=$1
     case $drive in
     hd*|sd*|vd*)
-        rpre="${drive:0:2}"
+        root_prefix="${drive:0:2}"
         if [[ ${drive:2:1} =~ [a-z] ]]; then
-            gdrv="${drive:2:1}"
+            group_drv="${drive:2:1}"
             if [[ ${drive:3:2} =~ ([1-9]?[0-9]) ]]; then
-                gpart="${drive:3:2}"
+                group_part="${drive:3:2}"
             fi
         fi
     ;;
 
     mmcblk*)
-        rpre="${drive:0:6}"
+        root_prefix="${drive:0:6}"
         if [[ ${drive:6:1} =~ [0-9] ]]; then
-            gdrv="${drive:6:1}"
+            group_drv="${drive:6:1}"
             if [[ ${drive:7:3} =~ (p[1-9]?[0-9]) ]]; then
-                gpart="${drive:7:3}"
+                group_part="${drive:7:3}"
             fi
         fi
     ;;
 
     nvme*)
         if [[ ${drive:4:1} =~ [0-9] ]]; then
-            rpre="${drive:0:5}"
+            root_prefix="${drive:0:5}"
             if [[ ${drive:5:2} =~ n[1-9] ]]; then
-                gdrv="${drive:5:2}"
+                group_drv="${drive:5:2}"
                 if [[ ${drive:7:3} =~ (p[1-9]?[0-9]) ]]; then
-                    gpart="${drive:7:3}"
+                    group_part="${drive:7:3}"
                 fi
             fi
         fi
     ;;
 
     md*)
-        rpre="${drive:0:2}"
+        root_prefix="${drive:0:2}"
         if [[ ${drive:2:1} =~ [0-9] ]]; then
-            gpart="${drive:2:1}"
+            group_part="${drive:2:1}"
+        fi
+    ;;
+
+    xvd*) # Qubes drives
+        root_prefix="${drive:0:3}"
+        if [[ ${drive:3:1} =~ [a-z] ]]; then
+            group_drv="${drive:3:1}"
+            if [[ ${drive:4:2} =~ ([1-9]?[0-9]) ]]; then
+                group_part="${drive:4:2}"
+            fi
         fi
     ;;
 
     esac
-    dcResult="$rpre$gdrv$gpart"
+    drive_check_result="$root_prefix$group_drv$group_part"
 }
 
-gethome() {
+get_home_partition() {
     while true; do
-        read -p "/home partition (hda1, sda2, etc): " hdrv
+        read -rp "/home partition (hda1, sda2, etc): " home_drv
 
-        driveCheck $hdrv
+        drive_check "$home_drv"
 
-        if [[ ("$hdrv" == "$rdrv") || ("$hdrv" != "$dcResult") || !  -b "/dev/$hdrv" ]]; then
-            echo $"$hdrv invalid. Retry:"
+        if [[ ("$home_drv" == "$root_drv") || ("$home_drv" != "$drive_check_result") || ! -b "/dev/$home_drv" ]]; then
+            echo $"$home_drv invalid. Retry:"
             continue
         fi
-        echo $"Using $hdrv as the home partition"
-        unset dcResult
+        echo $"Using $home_drv as the home partition"
+        unset drive_check_result
         break
     done
 }
 
-getroot() {
+get_root_partition() {
     while true; do
-        read -p $"Root partition (hda1, sda2, etc): " rdrv
+        read -rp $"Root partition (hda1, sda2, etc): " root_drv
 
-        driveCheck $rdrv
+        drive_check "$root_drv"
 
-        if [[ ("$rdrv" != "$dcResult") || ! -b "/dev/$rdrv" ]]; then
-            echo $"$rdrv invalid. Retry"
+        if [[ ("$root_drv" != "$drive_check_result") || ! -b "/dev/$root_drv" ]]; then
+            echo $"$root_drv invalid. Retry"
             continue
         fi
-        echo $"Using $rdrv as the root partition"
-        unset dcResult
+        echo $"Using $root_drv as the root partition"
+        unset drive_check_result
         break
     done
 }
 
-getesp() {
+get_esp() {
     echo "Valid esp partitions"
 
-    disks=$(LANG=c lsblk -lo NAME,TYPE | grep disk | cut -d" " -f1)
+    # Get a list of all physical disk devices
+    disks=$(LANG=c lsblk -lo NAME,TYPE | grep "disk" | awk '{print $1}')
 
     for i in $disks; do
-        partition-info find-esps=$i
+        partition-info find-esps="$i"
     done
 
     ans=1
     while [[ "$ans" -ne 0 ]]; do
-        read -p $"ESP partition (hda1, sda2, etc): " espdrv
+        read -rp $"ESP partition (hda1, sda2, etc): " esp_drv
 
-        driveCheck $espdrv
+        drive_check "$esp_drv"
 
-        if [[ ("$espdrv" == "$rdrv") || ("$espdrv" == "$hdrv") || ("$espdrv" != "$dcResult") || ! ( -b "/dev/$espdrv" ) ]]; then
-            echo $"$espdrv invalid. Retry"
+        if [[ ("$esp_drv" == "$root_drv") || ("$esp_drv" == "$home_drv") || ("$esp_drv" != "$drive_check_result") || ! -b "/dev/$esp_drv" ]]; then
+            echo $"$esp_drv invalid. Retry"
         else
-            echo "Using $espdrv as the ESP partition"
-            unset dcResult
+            echo "Using $esp_drv as the ESP partition"
+            unset drive_check_result
             ans=0
         fi
     done
@@ -188,14 +265,14 @@ getesp() {
 
 repartition() {
     if [[ -n "$1" ]]; then
-        cfdisk /dev/$1
+        cfdisk /dev/"$1"
     else
         cfdisk
     fi
 }
 
-setfs() {
-    umount /dev/$1 > /dev/null 2>&1
+set_fs() {
+    umount /dev/"$1" > /dev/null 2>&1
     echo $"Available file systems for $1 are:"
     echo "
     1)ext2
@@ -203,13 +280,11 @@ setfs() {
     3)ext4
     4)jfs
     5)xfs
-    6)btrfs
-    7)reiserfs
-    8)reiser4 "
+    6)btrfs"
     echo
     ans=1
     while [[ $ans -ne 0 ]]; do
-        read -p $"Enter your choice 1-8: " fs
+        read -rp $"Enter your choice 1-8: " fs
         if [[ "$fs" == "" ]]; then
             fs=ext4
         fi
@@ -219,494 +294,737 @@ setfs() {
         echo $"Downloading necessary files for formatting partitions"
         echo
         case $fs in
-            1) mkfs.ext2 /dev/$1 > /dev/null 2>&1;;
-            2) mkfs.ext3 /dev/$1 > /dev/null 2>&1;;
-            3) mkfs.ext4 /dev/$1 > /dev/null 2>&1;;
-            4) command -v mkfs.jfs >/dev/null || (apt-get update && apt-get -y install jfsutils) && mkfs.jfs -q /dev/$1 > /dev/null 2>&1;;
-            5) command -v mkfs.xfs >/dev/null || (apt-get update && apt-get -y install xfsprogs) && mkfs.xfs -f /dev/$1 > /dev/null 2>&1;;
-            6) command -v mkfs.btrfs >/dev/null || (apt-get update && apt-get -y install btrfs-progs) && rootbtrfs=true; mkfs.btrfs -f /dev/$1 > /dev/null 2>&1;;
-            7) command -v mkreiserfs >/dev/null || (apt-get update && apt-get -y install reiserfsprogs) && mkreiserfs -q /dev/$1 > /dev/null 2>&1;;
-            8) command -v mkfs.resier4 >/dev/null || (apt-get update && apt-get -y install reiser4progs) && mkfs.reiser4 -f -y /dev/$1 > /dev/null 2>&1
-
-            echo $"Ignore any 'barrier' lines";;
+            1) mkfs.ext2 /dev/"$1" > /dev/null 2>&1;;
+            2) mkfs.ext3 /dev/"$1" > /dev/null 2>&1;;
+            3) mkfs.ext4 /dev/"$1" > /dev/null 2>&1;;
+            4) command -v mkfs.jfs >/dev/null || ($NETWORK && apt-get update && apt-get -y install jfsutils) && mkfs.jfs -q /dev/"$1" > /dev/null 2>&1;;
+            5) command -v mkfs.xfs >/dev/null || ($NETWORK && apt-get update && apt-get -y install xfsprogs) && mkfs.xfs -f /dev/"$1" > /dev/null 2>&1;;
+            6) command -v mkfs.btrfs >/dev/null || ($NETWORK && apt-get update && apt-get -y install btrfs-progs) && root_btrfs=true; mkfs.btrfs -f /dev/"$1" > /dev/null 2>&1;;
             *) echo $"$fs invalid. Retry:"; ans=1;;
         esac
     done
-    driveCheck
-    command -v parted >/dev/null || (apt-get update && apt-get -y install parted)
-    [[ $rootbtrfs != true ]] && parted --script /dev/$rpre$gdrv set $gpart bios_grub off
+    drive_check
+    command -v parted >/dev/null || ($NETWORK && apt-get update && apt-get -y install parted)
+    [[ $root_btrfs != true ]] && parted --script /dev/"$root_prefix$group_drv" set "$group_part" bios_grub off > /dev/null 2>&1
 }
 
-setpw() {
+set_password() {
     ans=1
     while [[ $ans -ne 0 ]]; do
-        if (chroot /media/$rdrv passwd $1); then
+        if (chroot /media/"$root_drv" passwd "$1"); then
             ans=0
         else
-            echo -ne "\e[31m"
+            set_red_color
             echo $"Passwords are not identical. Retry:"
-            echo -ne "\e[0m"
+            reset_color
         fi
     done
 }
 
 yn() {
-    x=1
+    local x=1
+    local prompt="$*"
+
     while [[ "$x" -eq 1 ]]; do
         x=0
-        read -p "$*? "
-        if [[ ("$REPLY" > "x~" && "$REPLY" < "z" ) || ("$REPLY" > "X~" && "$REPLY" < "Z") ]]; then
-            ans=1	# yes
-        elif [[ ("$REPLY" > "m~" && "$REPLY" < "o" ) || ( "$REPLY" > "M~" && "$REPLY" < "O") ]]; then
-            ans=0	# no
-        elif [[ -z "$REPLY" ]]; then
-            ans=-1	# default
-        else
-            x=1
-            echo $"Invalid; retry:"
-        fi
+        read -rp "$prompt? "
+        case "${REPLY,,}" in
+            y|yes)
+                ans=1    # yes
+                ;;
+            n|no)
+                ans=0    # no
+                ;;
+            "")
+                ans=-1   # default
+                ;;
+            *)
+                x=1
+                echo $"Invalid; retry:"
+                ;;
+        esac
     done
 }
 
-getfs() {
-    fs1=$(blkid /dev/$rdrv | sed 's/.*TYPE="\([^"]*\)".*/\1/')
-    fs2=$(blkid /dev/$hdrv | sed 's/.*TYPE="\([^"]*\)".*/\1/')
+get_fs() {
+    root_fs=$(blkid /dev/"$root_drv" | sed 's/.*TYPE="\([^"]*\)".*/\1/')
+    home_fs=$(blkid /dev/"$home_drv" | sed 's/.*TYPE="\([^"]*\)".*/\1/')
+}
+
+prepare_esp() {
+    mkdir -p /media/"$root_drv"/boot/efi
+    mkdir -p /media/"$root_drv"/boot/uefi-mt
+    get_esp
+    yn $"Format the ESP partition? (y/N)"
+    if [[ "$ans" -eq 1 ]]; then
+        command -v mkfs.fat >/dev/null || ($NETWORK && apt-get update && apt-get -y install dosfstools) && mkfs.fat /dev/"$esp_drv"
+    fi
+    mount /dev/"$esp_drv" /media/"$root_drv"/boot/efi
 }
 
 grub_install() {
-
     local XTRA_PARMS=""
 
-    #mount system directories to make chroot for grub
-    mount -o tmpfs --bind /dev/ /media/$rdrv/dev/
-    mount -o proc --bind /proc/ /media/$rdrv/proc/
-    mount -o sysfs --bind /sys/ /media/$rdrv/sys/
+    # Mount system directories to make chroot for grub
+    mount -o tmpfs --bind /dev/ /media/"$root_drv"/dev/
+    mount -o proc --bind /proc/ /media/"$root_drv"/proc/
+    mount -o sysfs --bind /sys/ /media/"$root_drv"/sys/
 
     # Copy over non-live boot parameters to the installed system (FIX ME)
     #cmdline=$(/live/bin/non-live-cmdline | sed -e 's/\\/\\\\/' -e 's/[|]/\\|/')
     #[ $(uname -m) = x86_64 ] && cmdline="$cmdline"
     #cmdline="quiet $cmdline"
-    #sed -r -i "s|^(GRUB_CMDLINE_LINUX_DEFAULT=).*|\1\$$cmdline|" /media/$rdrv/etc/default/grub
+    #sed -r -i "s|^(GRUB_CMDLINE_LINUX_DEFAULT=).*|\1\$$cmdline|" /media/$root_drv/etc/default/grub
 
-    #Install grub
-    #1=MBR, 2=Root Partion, 3=ESP
+    # Install grub
+    # 1=MBR, 2=Root Partion, 3=ESP, 4=EFI Stub
     echo
     if [ "$1" == 1 ]; then
         echo $"This may take some time. Please wait...."
-        [[ $rootbtrfs == true ]] && if parted --script /dev/$rpre$gdrv print | grep -q "Partition Table: gpt"; then
-            parted --script /dev/$rpre$gdrv set $gpart bios_grub on > /dev/null 2>&1
+        [[ $root_btrfs == true ]] && if parted --script /dev/"$root_prefix$group_drv" print | grep -q "Partition Table: gpt"; then
+            parted --script /dev/"$root_prefix$group_drv" set "$group_part" bios_grub on > /dev/null 2>&1
         fi
-        chroot /media/$rdrv grub-install --target=i386-pc --recheck --no-floppy --force /dev/$rpre$gdrv > /dev/null  2>&1
+        chroot /media/"$root_drv" grub-install --target=i386-pc --recheck --no-floppy --force /dev/"$root_prefix$group_drv" > /dev/null  2>&1
+        chroot /media/"$root_drv" update-grub > /dev/null  2>&1
+    elif [ "$1" == 2 ]; then
+        echo $"This may take some time. Please wait...."
+        chroot /media/"$root_drv" grub-install --target=i386-pc --recheck --no-floppy --force /dev/"$root_drv" > /dev/null  2>&1
+        chroot /media/"$root_drv" update-grub > /dev/null  2>&1
     elif [ "$1" == 3 ]; then
-        mkdir -p /media/$rdrv/boot/efi
-        mkdir -p /media/$rdrv/boot/uefi-mt
-        getesp
-        yn $"Format the ESP partition? (y/N)"
-        if [[ "$ans" -eq 1 ]]; then
-            command -v mkfs.fat >/dev/null || (sudo apt-get update && sudo apt-get -y install dosfstools) && mkfs.fat /dev/$espdrv
-        fi
-
-        mount /dev/$espdrv /media/$rdrv/boot/efi;
-        #check if the UEFI boot NVRAM should be updated
+        prepare_esp
+        # Check if the UEFI boot NVRAM should be updated
         yn $"Do you want the UEFI Boot NVRAM updated? (y/N)"
         if [[ "$ans" -eq 0 ]]; then
             XTRA_PARMS="--no-nvram"
         fi
 
-        #What os architecture are we running?
+        # What os architecture are we running?
         case $(cat /sys/firmware/efi/fw_platform_size) in
             32)
-                arch="i386";
-                cp /live/boot-dev/boot/uefi-mt/mtest-32.efi /media/$rdrv/boot/uefi-mt;
+                arch="i386"
+                cp /live/boot-dev/boot/uefi-mt/mtest-32.efi /media/"$root_drv"/boot/uefi-mt
                 ;;
             64)
-                arch="x86_64";
-                cp /live/boot-dev/boot/uefi-mt/mtest-64.efi /media/$rdrv/boot/uefi-mt;
+                arch="x86_64"
+                cp /live/boot-dev/boot/uefi-mt/mtest-64.efi /media/"$root_drv"/boot/uefi-mt
                 ;;
         esac
 
         echo
         echo $"This may take some time. Please wait...."
-        chroot /media/$rdrv grub-install $XTRA_PARMS --force-extra-removable --target=$arch-efi --efi-directory=/boot/efi --bootloader-id=$DISTRO --recheck
-    elif [ "$1" == 2 ]; then
-        echo $"This may take some time. Please wait...."
-        chroot /media/$rdrv grub-install --target=i386-pc --recheck --no-floppy --force /dev/$rdrv > /dev/null  2>&1
+        chroot /media/"$root_drv" grub-install $XTRA_PARMS --force-extra-removable --target="$arch-efi" --efi-directory=/boot/efi --bootloader-id="$DISTRO" --recheck
+        chroot /media/"$root_drv" update-grub > /dev/null  2>&1
+    elif [ "$1" == 4 ]; then
+        efi_stub_install
     fi
+    # Make fstab entries and convert from device names to uuid
+    #/sbin/make-fstab --install /media/$root_drv --mntpnt=/media > /dev/null  2>&1  ### THIS IS DONE EARLIER IN THE SCRIPT
+    chroot /media/"$root_drv" dev2uuid_fstab > /dev/null  2>&1
 
-    #Update grub after installation to generate menus
-    chroot /media/$rdrv update-grub > /dev/null  2>&1
+    # Update initramfs
+    chroot /media/"$root_drv" update-initramfs -u -t -k all > /dev/null  2>&1
 
-    #Make fstab entries and convert from device names to uuid
-    #/sbin/make-fstab --install /media/$rdrv --mntpnt=/media > /dev/null  2>&1  ### THIS IS DONE EARLIER IN THE SCRIPT
-    chroot /media/$rdrv dev2uuid_fstab > /dev/null  2>&1
-
-    #Update init
-    chroot /media/$rdrv update-initramfs -u -t -k all> /dev/null  2>&1
-
-    echo $"GRUB installed"
+    echo $"Bootloader installed"
 }
 
-##End of functions
+check_root_user() {
+    if [[ $UID -ne 0 ]]; then
+        set_yellow_color
+        echo $"This script requires root privileges. Attempting to elevate..."
+        reset_color
+        echo
+        # Try to elevate using sudo
+        # shellcheck disable=SC1093
+        exec sudo -S "$0"
+        # If exec fails, exit with error
+        set_red_color
+        echo $"Failed to elevate privileges. Please run this script as root."
+        reset_color
+        echo
+        exit 1
+    else
+        echo $"Elevated privileges successfully."
+        echo
+    fi
+}
 
-#Run Help
-if [[ "$1" == "-h" || "$1" == "--help" ]]; then
-    help_text
-    echo
-    read -p $"Press Enter to exit this script."
-    echo
-    exit
-fi
+setup_environment() {
+    # Make sure /live/aufs/dev, /live/aufs/sys, /live/aufs/proc exist when starting script
+    mkdir -p /live/aufs/dev /live/aufs/sys /live/aufs/proc
+    # Make sure fstab is ok and start swap - (needed for antixsnapshot)
+    make-fstab
+    swapon -a
+}
 
-# Run as root check
-if [[ $UID -ne 0 ]]; then
-    echo -ne "\e[31m"
-    echo $"Please run this script as root."
-    echo -ne "\e[0m"
-    echo
-    exit
-fi
+check_grub_install() {
+    if ! command -v grub-install >/dev/null; then
+        set_yellow_color
+        echo $"GRUB not found: grub-install command is missing"
+        reset_color
+        echo
+        yn $"Do you want to install GRUB now? (n/Y)"
+        if [[ "$ans" -eq 0 ]]; then
+            echo $"Continuing without GRUB. You will need to install a bootloader"
+            echo $"manually after installation or the system may not boot."
+        else
+            echo $"Installing GRUB packages..."
+            if $NETWORK && apt-get update && apt-get -y install grub2; then
+                echo $"GRUB installation completed successfully."
+            else
+                set_red_color
+                echo $"Error: Failed to install GRUB packages."
+                echo $"Please check your internet connection and repository settings."
+                reset_color
+                echo $"Installation can continue, but you will need to install GRUB later or configure a different boot manager."
+            fi
+        fi
+        echo
+    fi
+}
 
-# Make sure /live/aufs/dev, /live/aufs/sys, /live/aufs/proc exist when starting script
-mkdir -p /live/aufs/dev /live/aufs/sys /live/aufs/proc
-# Make sure fstab is ok and start swap - (needed for antixsnapshot)
-make-fstab
-swapon -a
-# Show requirements
-echo
-header
-echo
-echo $"====Disk and partition Information===="
-partition-info all
-echo
-echo
-# Repartition or not and set up file system via cfdisk
-yn $"Do you want to repartition the disk (y/N)"
-if [[ $ans -eq 1 ]]; then
-    repartition $1
-    echo '===='
+show_disk_info() {
     echo
-    getroot
+    header
     echo
-    setfs $rdrv
-else
+    echo $"====Disk and partition Information===="
+    partition-info all
     echo
-    getroot
     echo
-fi
-yn $"The installer will now destroy the data on $rdrv  Do you want to continue (No will abort the installation) (n/Y)"
-echo
-if [[ "$ans" -eq 0 ]]; then
-    exit 0
-fi
-echo
-echo $"Deleting the contents of the $rdrv partition."
-echo $"This may take some time. Please wait...."
-echo
-mkdir /media/$rdrv > /dev/null 2>&1
-mount /dev/$rdrv /media/$rdrv > /dev/null 2>&1
-rm -r /media/${rdrv:?}/* > /dev/null 2>&1
-echo
-echo "Done."
-echo
+}
 
-# Set up separate /home and mount on /media/$hdrv
-yn $"Do you want to use a separate '/home' partition (y/N)"
-echo
-if [[ "$ans" -eq 1 ]]; then
-    gethome
-    if [[ ! (-e /media/$hdrv) ]]; then
-        mkdir /media/$hdrv
+handle_partitioning() {
+    # Repartition or not and set up file system via cfdisk
+    yn $"Do you want to repartition the disk (y/N)"
+    if [[ "$ans" -eq 1 ]]; then
+        repartition "$1"
+        echo '===='
+        echo
+        get_root_partition
+        echo
+        set_fs "$root_drv"
+    else
+        echo
+        get_root_partition
+        echo
+    fi
+}
+
+prepare_root_partition() {
+    yn $"The installer will now destroy the data on $root_drv  Do you want to continue (No will abort the installation) (n/Y)"
+    echo
+    if [[ "$ans" -eq 0 ]]; then
+        exit 0
     fi
     echo
-    yn $"Is $hdrv a new '/home' partition (No will not destroy any data on $hdrv ) (y/N)"
+    echo $"Deleting the contents of the $root_drv partition."
+    echo $"This may take some time. Please wait...."
+    echo
+    mkdir /media/"$root_drv" > /dev/null 2>&1
+    mount /dev/"$root_drv" /media/"$root_drv" > /dev/null 2>&1
+    rm -r /media/"${root_drv:?}"/* > /dev/null 2>&1
+    echo
+    echo "Done."
+    echo
+}
+
+setup_home_partition() {
+    # Set up separate /home and mount on /media/$home_drv
+    yn $"Do you want to use a separate '/home' partition (y/N)"
     echo
     if [[ "$ans" -eq 1 ]]; then
-        hmtp=2
+        get_home_partition
+        if [[ ! (-e /media/"$home_drv") ]]; then
+            mkdir /media/"$home_drv"
+        fi
         echo
-        yn $"Set file system for $hdrv  (y/N)"
+        yn $"Is $home_drv a new '/home' partition (No will not destroy any data on $home_drv ) (y/N)"
         echo
         if [[ "$ans" -eq 1 ]]; then
-            setfs $hdrv
+            home_mount_type=2 # New /home partition, will be formatted
+            echo
+            yn $"Set file system for $home_drv  (y/N)"
+            echo
+            if [[ "$ans" -eq 1 ]]; then
+                set_fs "$home_drv"
+            fi
+            echo
+            yn $"The installer will now destroy the data on $home_drv  Do you want to continue (No will abort the install) (n/Y)"
+            echo
+            if [[ "$ans" -eq 0 ]]; then
+                exit 0
+            fi
+            echo
+            echo $"Deleting the contents of the $home_drv partition."
+            echo
+            mount /dev/"$home_drv" /media/"$home_drv" > /dev/null 2>&1
+            rm -r /media/"${home_drv:?}"/* > /dev/null 2>&1
+            echo
+            echo $"Done."
+            echo
+        else
+            home_mount_type=1 # Existing /home partition, no formatting needed
+            mount /dev/"$home_drv" /media/"$home_drv"
         fi
-        echo
-        yn $"The installer will now destroy the data on $hdrv  Do you want to continue (No will abort the install) (n/Y)"
-        echo
-        if [[ "$ans" -eq 0 ]]; then
-            exit 0
-        fi
-        echo
-        echo $"Deleting the contents of the $hdrv partition."
-        echo
-        mount /dev/$hdrv /media/$hdrv > /dev/null 2>&1
-        rm -r /media/${hdrv:?}/* > /dev/null 2>&1
-        echo
-        echo $"Done."
-        echo
     else
-        hmtp=1
-        mount /dev/$hdrv /media/$hdrv
+        home_mount_type=0 # No separate /home partition
     fi
-else
-    hmtp=0
-fi
-getfs
-#Install grub-pc and clean out downloaded debs
-#echo
-#yn $"Are you running antiX-net (y/N)"
-#echo
-#if [[ $ans -eq 1 ]]
-#  then
-#echo
-#echo $"Downloading grub-pc, locales, keyboard-configuration, console-setup, #console-data, lsb-release, sysv-rc-conf"
-#apt-get update && apt-get -y install grub-pc locales keyboard-configuration #console-setup console-data lsb-release sysv-rc-conf
-#apt-get -y clean
-#echo
-#yn $"Do you want to install elogind and dbus-x11. RECOMMENDED if installing a #desktop environment. (y/N)"
-#echo
-#if [[ $ans -eq 1 ]]
-#  then
-#echo
-#echo $"Downloading elogind, libpam-elogind, dbus-x11"
-#apt-get update && apt-get -y install elogind libpam-elogind dbus-x11 && apt-get -y autoremove
-#apt-get -y clean
-#echo
-#fi
-#fi
-#echo
-#yn $"Do you want to install some packages via cli-aptiX (y/N)"
-#echo
-#if [[ $ans -eq 1 ]]
-#  then
-#echo
-#echo $"Use cli-aptiX to install various applications and/or kernels"
-#echo
-#cli-aptiX
-#apt-get -y clean
-#echo
-#fi
-#We are now in $rdrv
-cd /media/$rdrv || exit
-echo
-echo $"$DISTRO will now be copied to $rdrv."
-echo
-yn $"Do you want to continue (No will abort the install) (n/Y)"
-echo
-if [[ "$ans" -eq 0 ]]; then
-    exit 0
-fi
-echo $"This may take some time. Please wait...."
-shopt -s extglob
-if command -v rsync >/dev/null; then
-    rsync -a --human-readable --no-inc-recursive --info=progress2 --exclude='/mnt/*' /live/aufs/ . || exit 1
-else
-    cp -a /live/aufs/!(mnt) . || exit 1
-    mkdir mnt
-fi
-shopt -u extglob
-echo
+    get_fs
+}
 
-#set up fstab
-echo '# Pluggable devices are handled by uDev, they are not in fstab' > etc/fstab.new
-echo "/dev/$rdrv / $fs1 defaults,relatime 0 1"  >>  etc/fstab.new
-grep swap etc/fstab >> etc/fstab.new
-if [[ "$hmtp" -gt 0 ]]; then
-    echo "/dev/$hdrv /home $fs2 defaults,relatime 0 2" >> etc/fstab.new
-#    arg1=$hdrv
-#else
-#    arg1='xxxx'
-fi
-#echo '# Dynamic entries below' >> etc/fstab.new
-#grep -v '#' etc/fstab|grep -v swap|grep -v proc|grep -v devpts|grep -v $rdrv|grep -v $arg1 >> etc/fstab.new
-rm etc/fstab
-mv etc/fstab.new etc/fstab
-cp etc/group etc/group.bak
-cp etc/gshadow etc/gshadow.bak
-echo $"File copy done"
-echo
-echo $"Where should grub be installed?"
-#echo $"ESP selection will fail if not booted in EFI mode"
-echo $"1) MBR (Legacy - Master Boot Record)"
-echo $"2) Root Partition"
-if [ -d /sys/firmware/efi/efivars ]; then
-    echo $"3) ESP (EFI install)"
-    while true; do
-        read -p "$*? "
-        case $REPLY in
-            1) echo $"Installing grub to the MBR" && grub_install 1;;
-            2) echo $"Installing grub to the Root Partition" && grub_install 2;;
-            3) echo $"Installing grub to the ESP" &&  grub_install 3;;
-            *) echo $"Invalid; retry:"; continue;;
-        esac
-        break
+copy_system_files() {
+    cd /media/"$root_drv" || exit
+    echo
+    echo $"$DISTRO will now be copied to $root_drv."
+    echo
+    yn $"Do you want to continue (No will abort the install) (n/Y)"
+    echo
+    if [[ "$ans" -eq 0 ]]; then
+        exit 0
+    fi
+    echo $"This may take some time. Please wait...."
+    if command -v rsync >/dev/null; then
+        rsync -a --human-readable --no-inc-recursive --info=progress2 --exclude='/mnt/*' /live/aufs/ . || exit 1
+    else
+        find /live/aufs -mindepth 1 -maxdepth 1 -not -name "mnt" -exec cp -a {} . \; || exit 1
+        mkdir mnt
+    fi
+    echo
+}
+
+setup_fstab() {
+    echo '# Pluggable devices are handled by uDev, they are not in fstab' > etc/fstab.new
+    echo "/dev/$root_drv / $root_fs defaults,relatime 0 1"  >>  etc/fstab.new
+    grep swap etc/fstab >> etc/fstab.new
+    if [[ "$home_mount_type" -gt 0 ]]; then
+        echo "/dev/$home_drv /home $home_fs defaults,relatime 0 2" >> etc/fstab.new
+    fi
+    rm etc/fstab
+    mv etc/fstab.new etc/fstab
+    cp etc/group etc/group.bak
+    cp etc/gshadow etc/gshadow.bak
+    echo $"File copy done"
+    echo
+}
+
+copy_kernel_files() {
+    local kernel_version source_dir target_path vmlinuz initrd initramfs amd_ucode intel_ucode files_to_copy target_files file target_file
+
+    kernel_version=$(uname -r)
+    source_dir="/boot"
+    target_path="/media/$root_drv/boot/efi/EFI/$DISTRO/stub"
+    mkdir -p "$target_path"
+
+    vmlinuz="$source_dir/vmlinuz-$kernel_version"
+    initrd="$source_dir/initrd.img-$kernel_version"
+    initramfs="$source_dir/initramfs-$kernel_version.img"
+    amd_ucode="$source_dir/amd-ucode.img"
+    intel_ucode="$source_dir/intel-ucode.img"
+
+    # Define arrays for files to copy
+    files_to_copy=("$vmlinuz" "$initrd" "$amd_ucode" "$intel_ucode")
+    target_files=("/vmlinuz" "/initrd.img" "/amducode.img" "/intucode.img")
+
+    # Copy each file
+    for i in {0..3}; do
+        file="${files_to_copy[$i]}"
+        target_file="$target_path${target_files[$i]}"
+
+        # Check if we need to use initramfs instead of initrd
+        if [[ "$target_file" == *"initrd.img" && ! -f "$initrd" && -f "$initramfs" ]]; then
+            file="$initramfs"
+        fi
+
+        # Skip microcode files if they don't exist
+        if [[ ! -f "$file" && "$file" == *"ucode.img" ]]; then
+            continue
+        fi
+
+        # Check if required files exist
+        if [[ ! -f "$file" && "$file" != *"ucode.img" ]]; then
+            echo "Source file does not exist: $file"
+            return 1
+        fi
+
+        # Copy the file
+        if ! cp "$file" "$target_file"; then
+            echo "Failed to copy file: $file to $target_file"
+            return 1
+        fi
     done
-else
+
+    echo "Kernel files copied successfully"
+    return 0
+}
+
+read_boot_options() {
+    local boot_options
+    boot_options=$(/live/bin/non-live-cmdline | sed -e 's/\\/\\\\/' -e 's/[|]/\\|/' | xargs)
+    echo "$boot_options"
+}
+
+efi_stub_install() {
+    prepare_esp
+    # Check if efibootmgr is installed
+    if ! command -v efibootmgr >/dev/null; then
+        set_yellow_color
+        echo $"efibootmgr not found: required for EFI stub installation"
+        reset_color
+        echo
+        yn $"Do you want to install efibootmgr now? (n/Y)"
+        if [[ "$ans" -eq 0 ]]; then
+            echo $"Skipping efibootmgr installation"
+            echo $"EFI stub installation cannot proceed without efibootmgr"
+            return 1
+        else
+            echo $"Installing efibootmgr..."
+            if ! ($NETWORK && apt-get update && apt-get install -y efibootmgr); then
+                set_red_color
+                echo $"Failed to install efibootmgr"
+                reset_color
+                echo $"EFI stub installation cannot proceed"
+                return 1
+            fi
+            echo $"efibootmgr installed successfully"
+        fi
+    fi
+
+    if ! copy_kernel_files; then
+        echo $"EFI stub installation failed"
+        return 1
+    fi
+    # Set directory name for EFI stub installation
+    local efi_dir entry_name
+    efi_dir="stub"
+    entry_name="${DISTRO} EFI stub"
+
+    # Prompt for EFI boot entry name
+    read -rp $"Enter a name for the EFI boot entry (default: $entry_name):" custom_entry_name
+    if [ -n "$custom_entry_name" ]; then
+        entry_name="$custom_entry_name"
+    fi
+
+    # Get ESP mount point
+    local esp_path
+    esp_path="/media/$root_drv/boot/efi/EFI/$DISTRO/$efi_dir"
+
+    # Get disk and partition from esp_drv
+    local disk_dev part_num
+    disk_dev=${esp_drv//[0-9]/}
+    part_num=${esp_drv##*[!0-9]}
+
+    # Define paths for EFI references
+    local initrd_efi amd_ucode_efi int_ucode_efi
+    initrd_efi="initrd=\\EFI\\$DISTRO\\$efi_dir\\initrd.img"
+    amd_ucode_efi="initrd=\\EFI\\$DISTRO\\$efi_dir\\amducode.img"
+    int_ucode_efi="initrd=\\EFI\\$DISTRO\\$efi_dir\\intucode.img"
+
+    # Check for microcode files
+    initrd=""
+    if [ -f "$esp_path/amducode.img" ]; then
+        initrd="$amd_ucode_efi"
+    fi
+
+    if [ -f "$esp_path/intucode.img" ]; then
+        if [ -z "$initrd" ]; then
+            initrd="$int_ucode_efi"
+        else
+            initrd="$initrd $int_ucode_efi"
+        fi
+    fi
+
+    # Always add the main initrd
+    if [ -z "$initrd" ]; then
+        initrd="$initrd_efi"
+    else
+        initrd="$initrd $initrd_efi"
+    fi
+
+    # Set boot options
+    local boot_options
+    boot_options="root=UUID=$(blkid -s UUID -o value /dev/"$root_drv") $(read_boot_options) $initrd"
+
+    # Create the EFI boot entry
+    echo $"Creating EFI boot entry..."
+    if ! efibootmgr --disk "/dev/$disk_dev" --part "$part_num" --create \
+        --label "$entry_name" --loader "\\EFI\\$DISTRO\\$efi_dir\\vmlinuz" \
+        --unicode "$boot_options"; then
+        echo $"Failed to create EFI boot entry"
+        return 1
+    fi
+
+    echo $"EFI stub installation completed successfully"
+}
+
+install_bootloader() {
+    # Check if system is EFI
+    local is_efi_system has_grub_install
+    is_efi_system=false
+    [ -d /sys/firmware/efi/efivars ] && is_efi_system=true
+
+    # Check if grub-install is available
+    has_grub_install=false
+    command -v grub-install >/dev/null && has_grub_install=true
+
+    # If neither EFI nor grub-install is available, skip bootloader installation
+    if ! $is_efi_system && ! $has_grub_install; then
+        set_yellow_color
+        echo $"Skipping bootloader installation: neither EFI nor grub-install is available"
+        reset_color
+        return
+    fi
+
+    # If EFI is available but grub-install is not, only do stub install
+    if $is_efi_system && ! $has_grub_install; then
+        echo $"No grub-install available, performing EFI stub installation only"
+        efi_stub_install
+        return
+    fi
+
+    # Normal installation with options
+    echo $"Where should grub be installed?"
+    echo $"1) MBR (Legacy - Master Boot Record)"
+    echo $"2) Root Partition"
+
+    local max_install_choice install_choice
+    max_install_choice=2
+    # Show EFI options if available
+    if $is_efi_system; then
+        echo $"3) ESP (EFI install)"
+        echo $"4) Do a EFI stub installation (no grub)?"
+        max_install_choice=4
+    fi
+
+    # Get user choice
     while true; do
-        read -p "$*? "
-        case $REPLY in
-            1) echo $"Installing grub to the MBR" && grub_install 1;;
-            2) echo $"Installing grub to the Root Partition" && grub_install 2;;
-            *) echo $"Invalid; retry:"; continue;;
-        esac
-        break
+        read -rp $"Enter your choice (1-$max_install_choice): " install_choice
+
+        if [[ "$install_choice" -ge 1 && "$install_choice" -le "$max_install_choice" ]]; then
+            case $install_choice in
+                1) echo $"Installing grub to the MBR";;
+                2) echo $"Installing grub to the Root Partition";;
+                3) echo $"Installing grub to the ESP";;
+                4) echo $"Performing EFI stub installation";;
+            esac
+            grub_install "$install_choice"
+            break
+        else
+            echo $"Invalid; retry:"
+        fi
     done
-fi
+}
 
-echo
-chroot /media/$rdrv userdel $LIVEUSER
-rm -r home/$LIVEUSER > /dev/null  2>&1
-read -p $"Computer name (default is 'mx1')? " cnam
-name=""
-if [[ -n "$cnam" ]]; then
-    echo "$cnam" > etc/hostname
-    sed -i s/mx1/$cnam/ etc/hosts
-fi
-echo -ne "\e[36m"
-echo $"Time to set up localisation"
-echo  -ne "\e[0m"
-echo $"System locale is set to ..."
-chroot /media/$rdrv cat /etc/default/locale
-echo
-yn $"Do you want to set up system localisation (y/N)"
-echo
-if [[ $ans -eq 1 ]]; then
-    chroot /media/$rdrv dpkg-reconfigure locales
-fi
-echo -ne "\e[36m"
-echo $"Time to set keyboard layout"
-echo -ne "\e[0m"
-echo $"System keyboard is set to ..."
-chroot /media/$rdrv cat /etc/default/keyboard
-echo
-yn $"Do you want to set up keyboard (y/N)"
-echo
-if [[ $ans -eq 1 ]]; then
-    chroot /media/$rdrv dpkg-reconfigure keyboard-configuration
-fi
-echo -ne "\e[36m"
-echo $"Time to set console layout"
-echo -ne "\e[0m"
-echo $"System console is set to ..."
-chroot /media/$rdrv cat /etc/default/console-setup
-echo
-yn $"Do you want to set up console layout (y/N)"
-echo
-if [[ $ans -eq 1 ]]; then
-    chroot /media/$rdrv dpkg-reconfigure console-setup
-fi
-echo -ne "\e[36m"
-echo $"Time to set timezone"
-echo -ne "\e[0m"
-echo $"System timezone is set to ..."
-chroot /media/$rdrv cat /etc/timezone
-echo
-yn $"Do you want to set up system timezone (y/N)"
-echo
-if [[ $ans -eq 1 ]]; then
-    chroot /media/$rdrv dpkg-reconfigure tzdata
-fi
-echo -ne "\e[36m"
-echo $"Choose which services to run"
-echo -ne "\e[0m"
+setup_hostname() {
+    echo
+    chroot /media/"$root_drv" userdel "$LIVEUSER"
+    rm -r /media/"$root_drv"/home/"$LIVEUSER" > /dev/null 2>&1
+    read -rp $"Computer name (default is 'mx1')? " computer_name
+    if [[ -n "$computer_name" ]]; then
+        echo "$computer_name" > /media/"$root_drv"/etc/hostname
+        sed -i "s/mx1/$computer_name/" /media/"$root_drv"/etc/hosts
+    fi
+}
 
-command -v sysv-rc-conf >/dev/null && (
-    yn $"Do you want to enable/disable startup services (y/N)"
+configure_localization() {
+    set_blue_color
+    echo $"Time to set up localisation"
+    reset_color
+    echo $"System locale is set to ..."
+    chroot /media/"$root_drv" cat /etc/default/locale
+    echo
+    yn $"Do you want to set up system localisation (y/N)"
     echo
     if [[ $ans -eq 1 ]]; then
-        chroot /media/$rdrv sysv-rc-conf
+        chroot /media/"$root_drv" dpkg-reconfigure locales
+    fi
+}
+
+configure_keyboard() {
+    set_blue_color
+    echo $"Time to set keyboard layout"
+    reset_color
+    echo $"System keyboard is set to ..."
+    chroot /media/"$root_drv" cat /etc/default/keyboard
+    echo
+    yn $"Do you want to set up keyboard (y/N)"
+    echo
+    if [[ "$ans" -eq 1 ]]; then
+        chroot /media/"$root_drv" dpkg-reconfigure keyboard-configuration
+    fi
+}
+
+configure_console() {
+    set_blue_color
+    echo $"Time to set console layout"
+    reset_color
+    echo $"System console is set to ..."
+    chroot /media/"$root_drv" cat /etc/default/console-setup
+    echo
+    yn $"Do you want to set up console layout (y/N)"
+    echo
+    if [[ "$ans" -eq 1 ]]; then
+        chroot /media/"$root_drv" dpkg-reconfigure console-setup
+    fi
+}
+
+configure_timezone() {
+    set_blue_color
+    echo $"Time to set timezone"
+    reset_color
+    echo $"System timezone is set to ..."
+    chroot /media/"$root_drv" cat /etc/timezone
+    echo
+    yn $"Do you want to set up system timezone (y/N)"
+    echo
+    if [[ "$ans" -eq 1 ]]; then
+        chroot /media/"$root_drv" dpkg-reconfigure tzdata
+    fi
+}
+
+configure_services() {
+    set_blue_color
+    echo $"Choose which services to run"
+    reset_color
+
+    command -v sysv-rc-conf >/dev/null && (
+        yn $"Do you want to enable/disable startup services (y/N)"
+        echo
+        if [[ "$ans" -eq 1 ]]; then
+            chroot /media/"$root_drv" sysv-rc-conf
+        fi
+        echo
+        sleep 1
+    )
+}
+
+handle_remastered_install() {
+    echo
+    yn $"Is this a remastered/snapshot install (y/N)"
+    echo
+    if [[ "$ans" -eq 1 ]]; then
+        # Write code to get buildfstab -r to start on first boot via rc.local (if user wants it?)
+        #mv etc/rc.local etc/rc.local2
+        mv etc/udev/rules.d/90-fstab-automount.rules etc/udev/rules.d/90-fstab-automount.rules.live
+        cp usr/share/antiX/rc.local.cli etc/rc.local
+        # (also)Remove live system if it exists
+        chroot /media/"$root_drv" dpkg -r live-init-antix 2>/dev/null
+        rm /media/"$home_drv"/"$LIVEUSER"
+        umount -l /media/"$root_drv"
+        umount -l /dev/"$home_drv"
+        echo $"Installation of $DISTRO finished!"
+        echo
+        echo $"Reboot computer without CD to boot into $DISTRO" "('sudo reboot')"
+        echo
+        exit
+    fi
+    sleep 1
+}
+
+setup_user_accounts() {
+    set_blue_color
+    echo $"Setting up user and root/admin accounts"
+    reset_color
+    name=''
+    while [[ -z "$name" ]]; do
+        read -rp $"Type in your default user name: " name
+    done
+    case $home_mount_type in
+        0)chroot /media/"$root_drv" adduser --force-badname "$name";;
+        1)echo;echo $"Note: $home_drv must contain a folder named '$name'."
+        chroot /media/"$root_drv" adduser --force-badname "$name";;
+        2)chroot /media/"$root_drv" adduser --force-badname "$name";;
+    esac
+    echo
+    yn $"Setup root account? (y/N)"
+    echo
+    if [[ "$ans" -eq 1 ]]; then
+        echo $"Type your Password for root: "
+        echo
+        set_password root
+    else
+        chroot /media/"$root_drv" passwd -l root
+    fi
+    sed -i "s/$LIVEUSER/$name/" etc/group
+    sed -i "s/$LIVEUSER/$name/" etc/gshadow
+    sed -i "s/$LIVEUSER/$name/" usr/share/slim/themes/antiX/slim-install.conf 2>/dev/null
+    echo
+}
+
+cleanup_and_finalize() {
+    # Copy live configurations to install. For all.
+    echo
+    echo $"Cleaning up"
+    echo
+    #/usr/sbin/live-to-installed /media/$root_drv
+    #mv etc/rc.local etc/rc.local2
+    mv etc/X11/xorg.conf etc/X11/xorg.conf.live 2>/dev/null
+    cp usr/share/antiX/rc.local.cli etc/rc.local
+    cp usr/share/slim/themes/antiX/slim-install.conf etc/slim.conf 2>/dev/null
+    chroot /media/"$root_drv" dpkg -r live-init-antix 2>/dev/null
+    cp -r etc/skel/.[a-zA-Z]* home/*/ 2>/dev/null
+    cp -r etc/skel/* home/*/ 2>/dev/null
+    rm -R etc/live/*
+    sed -i '2,$d' /media/"$root_drv"/etc/issue
+    if [[ "$home_mount_type" -gt 0 ]]; then
+        if [[ "$home_mount_type" -eq 2 ]]; then
+            mv home/* /media/"$home_drv"
+        fi
+        rm -r home
+        mkdir home
+        cp -r /media/"$root_drv"/etc/skel/.[a-zA-Z]* /media/"$home_drv"/*/ 2>/dev/null
+        cp -r /media/"$root_drv"/etc/skel/* /media/"$home_drv"/*/ 2>/dev/null
+        chown -R "$LIVEUSER".users /media/"$home_drv"/* 2>/dev/null
+    fi
+    chown -R "$LIVEUSER"."$LIVEUSER" home/* 2>/dev/null
+
+    rm -rf media/sd*
+    rm -rf media/hd*
+    rmdir live
+    umount -l /media/"$root_drv"/dev/
+    umount -l /media/"$root_drv"/proc/
+    umount -l /media/"$root_drv"/sys/
+    umount -l /media/"$root_drv"
+    if [[ "$home_mount_type" -ne 0 ]]; then
+        umount -l /dev/"$home_drv"
     fi
     echo
-    sleep 1
-)
-
-echo
-yn $"Is this a remastered/snapshot install (y/N)"
-echo
-if [[ $ans -eq 1 ]]; then
-    # Write code to get buildfstab -r to start on first boot via rc.local (if user wants it?)
-    #mv etc/rc.local etc/rc.local2
-    mv etc/udev/rules.d/90-fstab-automount.rules etc/udev/rules.d/90-fstab-automount.rules.live
-    cp usr/share/antiX/rc.local.cli etc/rc.local
-    # (also)Remove live system if it exists
-    chroot /media/$rdrv dpkg -r live-init-antix 2>/dev/null
-    rm /media/$hdrv/$LIVEUSER
-    umount -l /media/$rdrv
-    umount -l /dev/$hdrv
     echo $"Installation of $DISTRO finished!"
     echo
-    echo $"Reboot computer without CD to start program. ('reboot')"
-    echo
-    exit
-fi
-sleep 1
-echo -ne "\e[36m"
-echo $"Setting up user and root/admin accounts"
-echo -ne "\e[0m"
-name=''
-while [[ -z "$name" ]]; do
-    read -p $"Type in your default user name: " name
-done
-case $hmtp in
-    0)chroot /media/$rdrv adduser --force-badname $name;;
-    1)echo;echo $"Note: $hdrv must contain a folder named '$name'."
-    chroot /media/$rdrv adduser --force-badname $name;;
-    2)chroot /media/$rdrv adduser --force-badname $name;;
-esac
-echo
-yn $"Setup root account? (y/N)"
-echo
-if [[ $ans -eq 1 ]]; then
-    echo $"Type your Password for root: "
-    echo
-    setpw root
-else
-    chroot /media/$rdrv passwd -l root
-fi
-sed -i "s/$LIVEUSER/$name/" etc/group
-sed -i "s/$LIVEUSER/$name/" etc/gshadow
-sed -i "s/$LIVEUSER/$name/" usr/share/slim/themes/antiX/slim-install.conf 2>/dev/null
-echo
-#yn $"Set autologin for $name: (y/N)"
-#echo
-#if [[ $ans -eq 1 ]]; then
-#sed -i "s/#auto_login/auto_login/" usr/share/slim/themes/antiX/slim-install.conf 2>/dev/null
-#sed -i "s/#default_user/default_user/" usr/share/slim/themes/antiX/slim-install.conf 2>/dev/null
-#fi
-# Copy live configurations to install. For all.
-echo
-echo $"Cleaning up"
-echo
-#/usr/sbin/live-to-installed /media/$rdrv
-#mv etc/rc.local etc/rc.local2
-mv etc/X11/xorg.conf etc/X11/xorg.conf.live 2>/dev/null
-cp usr/share/antiX/rc.local.cli etc/rc.local
-cp usr/share/slim/themes/antiX/slim-install.conf etc/slim.conf 2>/dev/null
-chroot /media/$rdrv dpkg -r live-init-antix 2>/dev/null
-cp -r etc/skel/.[a-zA-Z]* home/*/ 2>/dev/null
-cp -r etc/skel/* home/*/ 2>/dev/null
-rm -R etc/live/*
-if [[ $hmtp -gt 0 ]]; then
-    if [[ $hmtp -eq 2 ]]; then
-        mv home/* /media/$hdrv
-    fi
-    rm -r home
-    mkdir home
-    cp -r /media/$rdrv/etc/skel/.[a-zA-Z]* /media/$hdrv/*/ 2>/dev/null
-    cp -r /media/$rdrv/etc/skel/* /media/$hdrv/*/ 2>/dev/null
-    chown -R $LIVEUSER.users /media/$hdrv/* 2>/dev/null
-fi
-chown -R $LIVEUSER.$LIVEUSER home/* 2>/dev/null
+    echo $"Reboot computer without CD to boot into $DISTRO" "('sudo reboot')"
+}
 
-rm -rf media/sd*
-rm -rf media/hd*
-rmdir live
-umount -l /media/$rdrv/dev/
-umount -l /media/$rdrv/proc/
-umount -l /media/$rdrv/sys/
-umount -l /media/$rdrv
-if [[ "$hmtp" -ne 0 ]]; then
-    umount -l /dev/$hdrv
-fi
-echo
-echo $"Installation of $DISTRO finished!"
-echo
-echo $"Reboot computer without CD to start program. ('reboot')"
+main() {
+    # Run Help
+    if [[ "$1" == "-h" || "$1" == "--help" ]]; then
+        help_text
+        echo
+        read -rp $"Press Enter to exit this script."
+        echo
+        exit
+    fi
+
+    check_root_user
+    title
+    check_network_connection
+    check_version
+    setup_environment
+    show_disk_info
+    handle_partitioning "$1"
+    prepare_root_partition
+    setup_home_partition
+    check_grub_install
+    copy_system_files
+    setup_fstab
+    install_bootloader
+    setup_hostname
+    configure_localization
+    configure_keyboard
+    configure_console
+    configure_timezone
+    configure_services
+    handle_remastered_install
+    setup_user_accounts
+    cleanup_and_finalize
+}
+
+# Execute main function with all arguments
+main "$@"

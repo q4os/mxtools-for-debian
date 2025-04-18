@@ -25,7 +25,6 @@
 
 #include <QMessageBox>
 #include <QTemporaryDir>
-#include <QTimer>
 
 namespace Ui
 {
@@ -47,7 +46,6 @@ public slots:
     void outputAvailable(const QString &output);
     void procDone();
     void procStart();
-    void progress();
 
 private slots:
     void buttonAbout_clicked();
@@ -59,21 +57,22 @@ private:
     Ui::MainWindow *ui;
     QStringList ListDisk;
     QStringList ListPart;
-    QTimer *timer;
     QTemporaryDir tmpdir;
 
     QString luksMapper(const QString &part);
-    bool openLuks(const QString &part, const QString &mapper);
     QString selectPart(const QString &path, const QString &mountpoint);
-    bool isMountedTo(const QString &volume, const QString &mount);
     bool checkAndMountPart(const QString &path, const QString &mountpoint);
+    bool isMountedTo(const QString &volume, const QString &mount);
     bool mountChrootEnv(const QString &path);
+    bool openLuks(const QString &part, const QString &mapper);
+    static bool isUefi();
     void addDevToList();
     void backupBR(const QString &filename);
     void cleanupMountPoints(const QString &path, const QString &luks);
     void guessPartition();
     void installGRUB();
     void installGRUB(const QString &location, const QString &path, const QString &luks);
+    void regenerateInitramfs();
     void refresh();
     void repairGRUB();
     void restoreBR(const QString &filename);

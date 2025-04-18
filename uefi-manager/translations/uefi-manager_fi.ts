@@ -166,7 +166,7 @@
     <message>
         <location filename="../mainwindow.ui" line="465"/>
         <location filename="../mainwindow.cpp" line="887"/>
-        <location filename="../mainwindow.cpp" line="1630"/>
+        <location filename="../mainwindow.cpp" line="1663"/>
         <source>Next</source>
         <translation>Seuraava</translation>
     </message>
@@ -178,8 +178,8 @@
     <message>
         <location filename="../mainwindow.cpp" line="711"/>
         <location filename="../mainwindow.cpp" line="910"/>
-        <location filename="../mainwindow.cpp" line="1454"/>
-        <location filename="../mainwindow.cpp" line="1464"/>
+        <location filename="../mainwindow.cpp" line="1487"/>
+        <location filename="../mainwindow.cpp" line="1497"/>
         <source>UEFI Installer</source>
         <translation>UEFI asentaja</translation>
     </message>
@@ -209,28 +209,28 @@
         <translation>Ei voi avata %1 LUKS-säilöstä</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1455"/>
+        <location filename="../mainwindow.cpp" line="1488"/>
         <source>Are you sure this is the MX or antiX Frugal installation location?
 Missing mandatory files in directory: </source>
         <translation>Oletko varma, että tämä on MX ​​tai antiX Frugal asennuskohde?Hakemistosta puuttuu pakollisia tiedostoja:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1528"/>
+        <location filename="../mainwindow.cpp" line="1561"/>
         <source>Not enough space on the EFI System Partition to copy the kernel and initrd files.</source>
         <translation>EFI-osiossa ei ole riittävästi tilaa kernelin ja initrd-tiedostojen kopioimiseen.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1574"/>
+        <location filename="../mainwindow.cpp" line="1607"/>
         <source>All fields are required</source>
         <translation>Kaikki kentät ovat pakollisia</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1590"/>
+        <location filename="../mainwindow.cpp" line="1623"/>
         <source>Could not select ESP</source>
         <translation>ESP:n valinta ei onnistunut</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1608"/>
+        <location filename="../mainwindow.cpp" line="1641"/>
         <source>About %1</source>
         <translation>%1 lisätietoja</translation>
     </message>
@@ -250,15 +250,15 @@ Missing mandatory files in directory: </source>
         <location filename="../mainwindow.cpp" line="958"/>
         <location filename="../mainwindow.cpp" line="970"/>
         <location filename="../mainwindow.cpp" line="976"/>
-        <location filename="../mainwindow.cpp" line="1650"/>
-        <location filename="../mainwindow.cpp" line="1766"/>
-        <location filename="../mainwindow.cpp" line="1818"/>
-        <location filename="../mainwindow.cpp" line="1829"/>
-        <location filename="../mainwindow.cpp" line="1836"/>
-        <location filename="../mainwindow.cpp" line="1847"/>
-        <location filename="../mainwindow.cpp" line="1857"/>
-        <location filename="../mainwindow.cpp" line="1872"/>
-        <location filename="../mainwindow.cpp" line="1877"/>
+        <location filename="../mainwindow.cpp" line="1683"/>
+        <location filename="../mainwindow.cpp" line="1799"/>
+        <location filename="../mainwindow.cpp" line="1851"/>
+        <location filename="../mainwindow.cpp" line="1862"/>
+        <location filename="../mainwindow.cpp" line="1869"/>
+        <location filename="../mainwindow.cpp" line="1880"/>
+        <location filename="../mainwindow.cpp" line="1890"/>
+        <location filename="../mainwindow.cpp" line="1905"/>
+        <location filename="../mainwindow.cpp" line="1910"/>
         <source>Error</source>
         <translation>Virhe</translation>
     </message>
@@ -285,7 +285,7 @@ Missing mandatory files in directory: </source>
     <message>
         <location filename="../mainwindow.cpp" line="738"/>
         <location filename="../mainwindow.cpp" line="780"/>
-        <location filename="../mainwindow.cpp" line="1662"/>
+        <location filename="../mainwindow.cpp" line="1695"/>
         <source>Timeout: %1 seconds</source>
         <translation>Aikakatkaisu: %1 sekuntia</translation>
     </message>
@@ -293,7 +293,7 @@ Missing mandatory files in directory: </source>
         <location filename="../mainwindow.cpp" line="740"/>
         <location filename="../mainwindow.cpp" line="779"/>
         <location filename="../mainwindow.cpp" line="796"/>
-        <location filename="../mainwindow.cpp" line="1675"/>
+        <location filename="../mainwindow.cpp" line="1708"/>
         <source>Boot Next: %1</source>
         <translation>Seuraava käynnistys: %1</translation>
     </message>
@@ -381,156 +381,156 @@ Missing mandatory files in directory: </source>
         <translation>Tiedoston grub.entry avaaminen epäonnistui.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1611"/>
+        <location filename="../mainwindow.cpp" line="1644"/>
         <source>Tool for managing UEFI boot entries</source>
         <translation>Työkalu UEFI-käynnistyskohteiden hallintaan</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1766"/>
+        <location filename="../mainwindow.cpp" line="1799"/>
         <source>Both old and new EFI labels must be specified</source>
         <translation>Sekä vanhat että uudet EFI-nimet on määritettävä</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1819"/>
+        <location filename="../mainwindow.cpp" line="1852"/>
         <source>Multiple boot entries found for label &apos;%1&apos;: %2 and %3;</source>
         <translation>Useita käynnistyskohteita nimelle &quot;%1&quot;: %2 ja %3;</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1829"/>
+        <location filename="../mainwindow.cpp" line="1862"/>
         <source>No EFI data found for label &apos;%1&apos;.</source>
         <translation>EFI-dataa ei löytynyt nimelle &quot;%1&quot;.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1837"/>
+        <location filename="../mainwindow.cpp" line="1870"/>
         <source>EFI label &apos;%1&apos; is linked to an unknown partition &apos;%2&apos;.</source>
         <translation>EFI-nimi &quot;%1&quot; on linkitetty tuntemattomaan osioon &quot;%2&quot;.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1848"/>
+        <location filename="../mainwindow.cpp" line="1881"/>
         <source>Unexpected device name format &apos;%1&apos; for partition related to the label.</source>
         <translation>Odottamaton laittenimi &quot;%1&quot; osiolle liittyvälle nimelle.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1858"/>
+        <location filename="../mainwindow.cpp" line="1891"/>
         <source>Device partition number [%1] differs from EFI entry partition number [%2].</source>
         <translation>Laiteosion numero [%1] eroaa EFI-kohteen osion numerosta [%2].</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1872"/>
+        <location filename="../mainwindow.cpp" line="1905"/>
         <source>Failed to delete old boot entry</source>
         <translation>Vanhan käynnistysmerkinnän poistaminen epäonnistui</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1877"/>
+        <location filename="../mainwindow.cpp" line="1910"/>
         <source>Failed to create new boot entry</source>
         <translation>Uuden käynnistysmerkinnän luominen epäonnistui</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1464"/>
+        <location filename="../mainwindow.cpp" line="1497"/>
         <source>Failed to read grub.entry file.</source>
         <translation>Tiedoston grub.entry lukeminen epäonnistui.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="895"/>
-        <location filename="../mainwindow.cpp" line="1477"/>
+        <location filename="../mainwindow.cpp" line="1510"/>
         <source>Install</source>
         <translation>Asenna</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1483"/>
+        <location filename="../mainwindow.cpp" line="1516"/>
         <source>Select Frugal Directory</source>
         <translation>Valitse Frugal hakemisto</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1490"/>
+        <location filename="../mainwindow.cpp" line="1523"/>
         <source>No EFI System Partitions found.</source>
         <translation>EFI-osioita ei löytynyt.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1496"/>
+        <location filename="../mainwindow.cpp" line="1529"/>
         <source>Select EFI System Partition</source>
         <translation>Valitse EFI-osio</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1497"/>
+        <location filename="../mainwindow.cpp" line="1530"/>
         <source>EFI System Partitions:</source>
         <translation>EFI-osiot:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1510"/>
+        <location filename="../mainwindow.cpp" line="1543"/>
         <source>No EFI System Partition selected</source>
         <translation>EFI-osioita ei valittuna.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1517"/>
+        <location filename="../mainwindow.cpp" line="1550"/>
         <source>Could not mount selected EFI System Partition</source>
         <translation>Valittua EFI-osiota ei voitu liittää</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1544"/>
-        <location filename="../mainwindow.cpp" line="1581"/>
+        <location filename="../mainwindow.cpp" line="1577"/>
+        <location filename="../mainwindow.cpp" line="1614"/>
         <source>Could not mount partition. Please make sure you selected the correct partition.</source>
         <translation>Osiota ei voitu liittää. Varmista, että valitsit oikean osion.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1553"/>
+        <location filename="../mainwindow.cpp" line="1586"/>
         <source>No directory selected</source>
         <translation>Hakemistoa ei ole valittuna</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1566"/>
-        <location filename="../mainwindow.cpp" line="1596"/>
+        <location filename="../mainwindow.cpp" line="1599"/>
+        <location filename="../mainwindow.cpp" line="1629"/>
         <source>EFI stub installed successfully.</source>
         <translation>EFI stub asennettu onnistuneesti.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1568"/>
-        <location filename="../mainwindow.cpp" line="1598"/>
+        <location filename="../mainwindow.cpp" line="1601"/>
+        <location filename="../mainwindow.cpp" line="1631"/>
         <source>Failed to install EFI stub.</source>
         <translation>EFI stub asentaminen epäonnistui.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1609"/>
+        <location filename="../mainwindow.cpp" line="1642"/>
         <source>Version: </source>
         <translation>Versio: </translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1613"/>
+        <location filename="../mainwindow.cpp" line="1646"/>
         <source>Copyright (c) MX Linux</source>
         <translation>Copyright (c) MX Linux</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1614"/>
+        <location filename="../mainwindow.cpp" line="1647"/>
         <source>%1 License</source>
         <translation>%1 lisenssi</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1622"/>
+        <location filename="../mainwindow.cpp" line="1655"/>
         <source>%1 Help</source>
         <translation>%1 ohje</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1650"/>
+        <location filename="../mainwindow.cpp" line="1683"/>
         <source>Something went wrong, could not save boot order.</source>
         <translation>Jotain meni väärin, käynnistysjärjestystä ei voitu tallentaa.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1658"/>
+        <location filename="../mainwindow.cpp" line="1691"/>
         <source>Set timeout</source>
         <translation>Aseta aikakatkaisu</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1658"/>
+        <location filename="../mainwindow.cpp" line="1691"/>
         <source>Timeout in seconds:</source>
         <translation>Aikakatkaisu sekunneissa:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1689"/>
+        <location filename="../mainwindow.cpp" line="1722"/>
         <source>Removal confirmation</source>
         <translation>Poiston vahvistus</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1690"/>
+        <location filename="../mainwindow.cpp" line="1723"/>
         <source>Are you sure you want to delete this boot entry?
 %1</source>
         <translation>Haluatko poistaa tämän käynnistyksen?

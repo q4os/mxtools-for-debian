@@ -1,3 +1,10 @@
+uefi-manager (25.5.02) mx; urgency=medium
+
+  * Handle the case when /boot/grub/grub.cfg is not present (if GRUB not fully
+    installed)
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 16 Apr 2025 21:33:18 -0400
+
 uefi-manager (25.5.01) mx; urgency=medium
 
   * Don't require elevation when starting the app

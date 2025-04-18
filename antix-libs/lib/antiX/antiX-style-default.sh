@@ -24,31 +24,47 @@ fi
 #--image=gtk-dialog-question
 #--image=gtk-dialog-info
 
+yad_version=$(yad --version |cut  -d"." -f1)
+#echo "yad_version is " $yad_version
+
+BUTTON_OK="gtk-ok"
+BUTTON_CANCEL="gtk-cancel"
+BUTTON_NO="gtk-no"
+BUTTON_YES="gtk-yes"
+
+if [ $(($yad_version)) -gt 1 ]; then
+	BUTTON_OK="yad-ok"
+	BUTTON_CANCEL="yad-cancel"
+	BUTTON_NO="yad-no"
+	BUTTON_YES="yad-yes"
+fi
+
 YAD_DEVICE_OPTS="
     --width=680 --height=400
-    --button=gtk-ok:0
-    --button=gtk-cancel:1"
+    --button=$BUTTON_OK:0
+    --button=$BUTTON_CANCEL:1"
 
 YAD_YES_NO_OPTS="
-    --button=gtk-yes:0
-    --button=gtk-no:1"
+    --button=$BUTTON_YES:0
+    --button=$BUTTON_NO:1"
 
 YAD_ERROR_OPTS="
     --image=gtk-dialog-error
-    --button=gtk-ok:0"
+    --button=$BUTTON_OK:0"
 
 YAD_EXIT_OPTS="
-    --button=gtk-ok:0"
+    --button=$BUTTON_OK:0"
 
 YAD_INFO_OPTS="
-    --button=gtk-ok:0"
+    --button=$BUTTON_OK:0"
 
 YAD_BG_INFO_OPTS="
-    --button=gtk-cancel"
+    --button=$BUTTON_CANCEL"
 
 YAD_MULTI_OPTS="
-    --button=gtk-ok:0
-    --button=gtk-cancel:1"
+    --button=$BUTTON_OK:0
+    --button=$BUTTON_CANCEL:1"
+    
 
 set_color() {
 

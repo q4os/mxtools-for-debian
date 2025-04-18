@@ -1,6 +1,12 @@
+mx-packageinstaller-pkglist (25.04.03mx23) mx; urgency=medium
+
+  * update kernels
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 13 Apr 2025 10:34:13 -0400
+
 mx-packageinstaller-pkglist (25.04.02mx23) mx; urgency=medium
 
-  * update liuqorix 6.13.8 kernel
+  * update liquorix 6.13.8 kernel
 
  -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 06 Apr 2025 12:42:52 -0400
 

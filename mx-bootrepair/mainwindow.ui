@@ -29,12 +29,18 @@
       </sizepolicy>
      </property>
      <property name="currentIndex">
-      <number>1</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="startPage">
       <layout class="QVBoxLayout" name="verticalLayout">
        <item>
         <widget class="QLabel" name="infoLabel">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
          <property name="text">
           <string>MX Boot Repair is a utility that can be used to reinstall GRUB bootloader on the ESP (EFI System Partition), MBR (Master Boot Record) or root partition. It provides the option to reconstruct the GRUB configuration file and to back up and restore MBR or PBR (root).</string>
          </property>
@@ -49,7 +55,7 @@
        <item>
         <widget class="QGroupBox" name="whatGroupBox">
          <property name="sizePolicy">
-          <sizepolicy hsizetype="MinimumExpanding" vsizetype="Minimum">
+          <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
@@ -57,31 +63,9 @@
          <property name="title">
           <string>What would you like to do?</string>
          </property>
-         <layout class="QGridLayout" name="_3">
-          <property name="leftMargin">
-           <number>9</number>
-          </property>
-          <property name="topMargin">
-           <number>9</number>
-          </property>
-          <property name="rightMargin">
-           <number>9</number>
-          </property>
-          <property name="bottomMargin">
-           <number>9</number>
-          </property>
-          <property name="spacing">
-           <number>6</number>
-          </property>
-          <item row="3" column="0">
-           <widget class="QRadioButton" name="bakRadioButton">
-            <property name="text">
-             <string>Backup MBR or PBR (legacy boot only)</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="0">
-           <widget class="QRadioButton" name="reinstallRadioButton">
+         <layout class="QVBoxLayout">
+          <item>
+           <widget class="QRadioButton" name="radioReinstall">
             <property name="text">
              <string>Reinstall GRUB bootloader on ESP, MBR or PBR (root)</string>
             </property>
@@ -90,15 +74,29 @@
             </property>
            </widget>
           </item>
-          <item row="2" column="0">
-           <widget class="QRadioButton" name="repairRadioButton">
+          <item>
+           <widget class="QRadioButton" name="raidoRepair">
             <property name="text">
              <string>Repair GRUB configuration file</string>
             </property>
            </widget>
           </item>
-          <item row="4" column="0">
-           <widget class="QRadioButton" name="restoreBakRadioButton">
+          <item>
+           <widget class="QRadioButton" name="radioRegenerateInitramfs">
+            <property name="text">
+             <string>Regenerate initramfs images</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QRadioButton" name="radioBak">
+            <property name="text">
+             <string>Backup MBR or PBR (legacy boot only)</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QRadioButton" name="radioRestoreBak">
             <property name="text">
              <string>Restore MBR or PBR from backup (legacy boot only)</string>
             </property>
@@ -108,7 +106,7 @@
         </widget>
        </item>
        <item>
-        <spacer name="verticalSpacer_2">
+        <spacer>
          <property name="orientation">
           <enum>Qt::Vertical</enum>
          </property>
@@ -123,7 +121,7 @@
       </layout>
      </widget>
      <widget class="QWidget" name="selectionPage">
-      <layout class="QVBoxLayout" name="verticalLayout_3">
+      <layout class="QVBoxLayout">
        <item>
         <widget class="QGroupBox" name="bootMethodGroup">
          <property name="sizePolicy">
@@ -136,10 +134,10 @@
           <string>Select Boot Method</string>
          </property>
          <layout class="QGridLayout" name="gridLayout_2">
-          <item row="0" column="3">
-           <widget class="QRadioButton" name="grubMbrButton">
+          <item row="0" column="2">
+           <widget class="QRadioButton" name="radioGrubMbr">
             <property name="sizePolicy">
-             <sizepolicy hsizetype="MinimumExpanding" vsizetype="Minimum">
+             <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
               <horstretch>0</horstretch>
               <verstretch>0</verstretch>
              </sizepolicy>
@@ -164,10 +162,70 @@
             </property>
            </widget>
           </item>
-          <item row="0" column="4">
-           <widget class="QRadioButton" name="grubRootButton">
+          <item row="2" column="2" colspan="3">
+           <widget class="QComboBox" name="comboRoot">
             <property name="sizePolicy">
-             <sizepolicy hsizetype="MinimumExpanding" vsizetype="Minimum">
+             <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>0</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QLabel" name="locationLabel">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="font">
+             <font/>
+            </property>
+            <property name="text">
+             <string>Location:</string>
+            </property>
+            <property name="wordWrap">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="4">
+           <widget class="QRadioButton" name="radioGrubEsp">
+            <property name="enabled">
+             <bool>true</bool>
+            </property>
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>80</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="toolTip">
+             <string>EFI System Partition</string>
+            </property>
+            <property name="text">
+             <string>ESP</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="3">
+           <widget class="QRadioButton" name="radioGrubRoot">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
               <horstretch>0</horstretch>
               <verstretch>0</verstretch>
              </sizepolicy>
@@ -189,8 +247,8 @@
             </property>
            </widget>
           </item>
-          <item row="3" column="3">
-           <spacer name="verticalSpacer">
+          <item row="3" column="2">
+           <spacer>
             <property name="orientation">
              <enum>Qt::Vertical</enum>
             </property>
@@ -202,67 +260,10 @@
             </property>
            </spacer>
           </item>
-          <item row="0" column="0" rowspan="4">
-           <spacer>
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
-            </property>
-            <property name="sizeType">
-             <enum>QSizePolicy::Fixed</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>16</width>
-              <height>71</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
-          <item row="0" column="1">
-           <widget class="QLabel" name="grubInsLabel">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="MinimumExpanding" vsizetype="Minimum">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="minimumSize">
-             <size>
-              <width>170</width>
-              <height>0</height>
-             </size>
-            </property>
-            <property name="text">
-             <string>Install on:</string>
-            </property>
-            <property name="wordWrap">
-             <bool>false</bool>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="1">
-           <widget class="QLabel" name="locationLabel">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="MinimumExpanding" vsizetype="Minimum">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="font">
-             <font/>
-            </property>
-            <property name="text">
-             <string>Location:</string>
-            </property>
-            <property name="wordWrap">
-             <bool>false</bool>
-            </property>
-           </widget>
-          </item>
           <item row="2" column="1">
            <widget class="QLabel" name="rootLabel">
             <property name="sizePolicy">
-             <sizepolicy hsizetype="MinimumExpanding" vsizetype="Minimum">
+             <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
               <horstretch>0</horstretch>
               <verstretch>0</verstretch>
              </sizepolicy>
@@ -281,39 +282,32 @@
             </property>
            </widget>
           </item>
-          <item row="0" column="5">
-           <widget class="QRadioButton" name="grubEspButton">
-            <property name="enabled">
-             <bool>true</bool>
-            </property>
-            <property name="toolTip">
-             <string>EFI System Partition</string>
-            </property>
-            <property name="text">
-             <string>ESP</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="3" colspan="3">
-           <widget class="QComboBox" name="locationCombo">
+          <item row="0" column="1">
+           <widget class="QLabel" name="grubInsLabel">
             <property name="sizePolicy">
-             <sizepolicy hsizetype="MinimumExpanding" vsizetype="Minimum">
+             <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
               <horstretch>0</horstretch>
               <verstretch>0</verstretch>
              </sizepolicy>
             </property>
             <property name="minimumSize">
              <size>
-              <width>0</width>
+              <width>170</width>
               <height>0</height>
              </size>
             </property>
+            <property name="text">
+             <string>Install on:</string>
+            </property>
+            <property name="wordWrap">
+             <bool>false</bool>
+            </property>
            </widget>
           </item>
-          <item row="2" column="3" colspan="3">
-           <widget class="QComboBox" name="rootCombo">
+          <item row="1" column="2" colspan="3">
+           <widget class="QComboBox" name="comboLocation">
             <property name="sizePolicy">
-             <sizepolicy hsizetype="MinimumExpanding" vsizetype="Minimum">
+             <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
               <horstretch>0</horstretch>
               <verstretch>0</verstretch>
              </sizepolicy>
@@ -346,44 +340,19 @@
          </property>
         </widget>
        </item>
+       <item>
+        <widget class="QProgressBar" name="progressBar">
+         <property name="textVisible">
+          <bool>false</bool>
+         </property>
+         <property name="textDirection">
+          <enum>QProgressBar::TopToBottom</enum>
+         </property>
+        </widget>
+       </item>
       </layout>
      </widget>
     </widget>
-   </item>
-   <item row="1" column="1">
-    <widget class="QProgressBar" name="progressBar">
-     <property name="enabled">
-      <bool>true</bool>
-     </property>
-     <property name="value">
-      <number>24</number>
-     </property>
-     <property name="textVisible">
-      <bool>false</bool>
-     </property>
-     <property name="invertedAppearance">
-      <bool>false</bool>
-     </property>
-     <property name="textDirection">
-      <enum>QProgressBar::TopToBottom</enum>
-     </property>
-    </widget>
-   </item>
-   <item row="1" column="2">
-    <spacer name="horizontalSpacer4">
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-     <property name="sizeType">
-      <enum>QSizePolicy::Fixed</enum>
-     </property>
-     <property name="sizeHint" stdset="0">
-      <size>
-       <width>5</width>
-       <height>20</height>
-      </size>
-     </property>
-    </spacer>
    </item>
    <item row="2" column="0" colspan="3">
     <layout class="QGridLayout" name="buttonBar" columnstretch="0,0,0,0,0,0,0,0">
@@ -423,8 +392,7 @@
         <string>About...</string>
        </property>
        <property name="icon">
-        <iconset theme="help-about">
-         <normaloff>.</normaloff>.</iconset>
+        <iconset theme="help-about"/>
        </property>
        <property name="shortcut">
         <string>Alt+B</string>
@@ -435,7 +403,7 @@
       </widget>
      </item>
      <item row="0" column="2">
-      <spacer name="horizontalSpacer1">
+      <spacer>
        <property name="orientation">
         <enum>Qt::Horizontal</enum>
        </property>
@@ -448,7 +416,7 @@
       </spacer>
      </item>
      <item row="0" column="5">
-      <spacer name="horizontalSpacer2">
+      <spacer>
        <property name="orientation">
         <enum>Qt::Horizontal</enum>
        </property>
@@ -475,8 +443,7 @@
         <string>Help</string>
        </property>
        <property name="icon">
-        <iconset theme="help-contents">
-         <normaloff>.</normaloff>.</iconset>
+        <iconset theme="help-contents"/>
        </property>
        <property name="shortcut">
         <string>Alt+H</string>
@@ -526,8 +493,7 @@
         <string>Cancel</string>
        </property>
        <property name="icon">
-        <iconset theme="window-close">
-         <normaloff>.</normaloff>.</iconset>
+        <iconset theme="window-close"/>
        </property>
        <property name="shortcut">
         <string>Alt+N</string>
@@ -552,11 +518,7 @@
         <string>Apply any changes</string>
        </property>
        <property name="text">
-        <string>Apply</string>
-       </property>
-       <property name="icon">
-        <iconset theme="dialog-ok">
-         <normaloff>.</normaloff>.</iconset>
+        <string>Next</string>
        </property>
        <property name="shortcut">
         <string/>
@@ -571,39 +533,24 @@
      </item>
     </layout>
    </item>
-   <item row="1" column="0">
-    <spacer name="horizontalSpacer3">
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-     <property name="sizeType">
-      <enum>QSizePolicy::Fixed</enum>
-     </property>
-     <property name="sizeHint" stdset="0">
-      <size>
-       <width>5</width>
-       <height>20</height>
-      </size>
-     </property>
-    </spacer>
-   </item>
   </layout>
  </widget>
  <tabstops>
-  <tabstop>reinstallRadioButton</tabstop>
-  <tabstop>repairRadioButton</tabstop>
-  <tabstop>bakRadioButton</tabstop>
-  <tabstop>restoreBakRadioButton</tabstop>
+  <tabstop>radioReinstall</tabstop>
+  <tabstop>raidoRepair</tabstop>
+  <tabstop>radioRegenerateInitramfs</tabstop>
+  <tabstop>radioBak</tabstop>
+  <tabstop>radioRestoreBak</tabstop>
   <tabstop>buttonAbout</tabstop>
   <tabstop>buttonHelp</tabstop>
   <tabstop>buttonApply</tabstop>
   <tabstop>buttonCancel</tabstop>
-  <tabstop>locationCombo</tabstop>
-  <tabstop>rootCombo</tabstop>
-  <tabstop>grubRootButton</tabstop>
+  <tabstop>comboLocation</tabstop>
+  <tabstop>comboRoot</tabstop>
+  <tabstop>radioGrubRoot</tabstop>
   <tabstop>outputBox</tabstop>
-  <tabstop>grubMbrButton</tabstop>
-  <tabstop>grubEspButton</tabstop>
+  <tabstop>radioGrubMbr</tabstop>
+  <tabstop>radioGrubEsp</tabstop>
  </tabstops>
  <resources>
   <include location="images.qrc"/>

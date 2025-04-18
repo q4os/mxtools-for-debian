@@ -1,3 +1,9 @@
+cli-shell-utils (0.4.2+4) mx; urgency=medium
+
+  * update copy-initrd-programs (compressed modules)
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 14 Apr 2025 20:18:24 -0400
+
 cli-shell-utils (0.4.2+3) mx; urgency=medium
 
   [fehlix]

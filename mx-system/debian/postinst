@@ -5,6 +5,9 @@ if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-remov
 
     #test for live system, exit if found  (check used below)
     LIVE_CHECK=$(df -T / |tail -n1 |awk '{print $2}')
+    
+    #first part for deciding whether to run update-grub or not
+    OLD_PRETTY_NAME="$(unset PRETTY_NAME; (. /etc/lsb-release; echo ${PRETTY_NAME:?}) 2>/dev/null || echo Debian)"
 
      #add a symlink to mx-version called antix-version, because some apps look for info from antix-version
     if [ -e /etc/mx-version ]; then
@@ -47,8 +50,10 @@ if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-remov
     sed -i 's/MX-23.2_/MX-23.3_/' /etc/mx-version
     #handle mx23.3 to mx23.4
     sed -i 's/MX-23.3_/MX-23.4_/' /etc/mx-version
-    #handle mx23.34to mx23.5
+    #handle mx23.4to mx23.5
     sed -i 's/MX-23.4_/MX-23.5_/' /etc/mx-version
+    #handle mx23.5to mx23.6
+    sed -i 's/MX-23.5_/MX-23.6_/' /etc/mx-version
     fi
 
     ##add vmd to /etc/initramfs-tools/modules if its not already there

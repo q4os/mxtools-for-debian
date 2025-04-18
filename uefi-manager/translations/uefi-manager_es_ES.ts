@@ -166,7 +166,7 @@
     <message>
         <location filename="../mainwindow.ui" line="465"/>
         <location filename="../mainwindow.cpp" line="887"/>
-        <location filename="../mainwindow.cpp" line="1630"/>
+        <location filename="../mainwindow.cpp" line="1663"/>
         <source>Next</source>
         <translation>Siguiente</translation>
     </message>
@@ -178,8 +178,8 @@
     <message>
         <location filename="../mainwindow.cpp" line="711"/>
         <location filename="../mainwindow.cpp" line="910"/>
-        <location filename="../mainwindow.cpp" line="1454"/>
-        <location filename="../mainwindow.cpp" line="1464"/>
+        <location filename="../mainwindow.cpp" line="1487"/>
+        <location filename="../mainwindow.cpp" line="1497"/>
         <source>UEFI Installer</source>
         <translation>Instalador UEFI</translation>
     </message>
@@ -209,28 +209,28 @@
         <translation>No se pudo abrir %1 contenedor LUKS</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1455"/>
+        <location filename="../mainwindow.cpp" line="1488"/>
         <source>Are you sure this is the MX or antiX Frugal installation location?
 Missing mandatory files in directory: </source>
         <translation>¿Está seguro que esta es la ubicación de la instalación frugal de MX o antiX?Faltan archivos obligatorios en el directorio: </translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1528"/>
+        <location filename="../mainwindow.cpp" line="1561"/>
         <source>Not enough space on the EFI System Partition to copy the kernel and initrd files.</source>
         <translation>No hay suficiente espacio en la Partición EFI del Sistema para copiar los archivos kernel e initrd.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1574"/>
+        <location filename="../mainwindow.cpp" line="1607"/>
         <source>All fields are required</source>
         <translation>Todos los campos son obligatorios</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1590"/>
+        <location filename="../mainwindow.cpp" line="1623"/>
         <source>Could not select ESP</source>
         <translation>No se pudo seleccionar ESP</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1608"/>
+        <location filename="../mainwindow.cpp" line="1641"/>
         <source>About %1</source>
         <translation>Acerca de %1</translation>
     </message>
@@ -250,15 +250,15 @@ Missing mandatory files in directory: </source>
         <location filename="../mainwindow.cpp" line="958"/>
         <location filename="../mainwindow.cpp" line="970"/>
         <location filename="../mainwindow.cpp" line="976"/>
-        <location filename="../mainwindow.cpp" line="1650"/>
-        <location filename="../mainwindow.cpp" line="1766"/>
-        <location filename="../mainwindow.cpp" line="1818"/>
-        <location filename="../mainwindow.cpp" line="1829"/>
-        <location filename="../mainwindow.cpp" line="1836"/>
-        <location filename="../mainwindow.cpp" line="1847"/>
-        <location filename="../mainwindow.cpp" line="1857"/>
-        <location filename="../mainwindow.cpp" line="1872"/>
-        <location filename="../mainwindow.cpp" line="1877"/>
+        <location filename="../mainwindow.cpp" line="1683"/>
+        <location filename="../mainwindow.cpp" line="1799"/>
+        <location filename="../mainwindow.cpp" line="1851"/>
+        <location filename="../mainwindow.cpp" line="1862"/>
+        <location filename="../mainwindow.cpp" line="1869"/>
+        <location filename="../mainwindow.cpp" line="1880"/>
+        <location filename="../mainwindow.cpp" line="1890"/>
+        <location filename="../mainwindow.cpp" line="1905"/>
+        <location filename="../mainwindow.cpp" line="1910"/>
         <source>Error</source>
         <translation>Error</translation>
     </message>
@@ -285,7 +285,7 @@ Missing mandatory files in directory: </source>
     <message>
         <location filename="../mainwindow.cpp" line="738"/>
         <location filename="../mainwindow.cpp" line="780"/>
-        <location filename="../mainwindow.cpp" line="1662"/>
+        <location filename="../mainwindow.cpp" line="1695"/>
         <source>Timeout: %1 seconds</source>
         <translation>Tiempo de espera: %1 segundos</translation>
     </message>
@@ -293,7 +293,7 @@ Missing mandatory files in directory: </source>
         <location filename="../mainwindow.cpp" line="740"/>
         <location filename="../mainwindow.cpp" line="779"/>
         <location filename="../mainwindow.cpp" line="796"/>
-        <location filename="../mainwindow.cpp" line="1675"/>
+        <location filename="../mainwindow.cpp" line="1708"/>
         <source>Boot Next: %1</source>
         <translation>Arrancar siguiente: %1</translation>
     </message>
@@ -379,156 +379,156 @@ Missing mandatory files in directory: </source>
         <translation>Error al abrir el archivo grub.entry</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1611"/>
+        <location filename="../mainwindow.cpp" line="1644"/>
         <source>Tool for managing UEFI boot entries</source>
         <translation>Herramienta para gestionar las entradas de arranque UEFI</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1766"/>
+        <location filename="../mainwindow.cpp" line="1799"/>
         <source>Both old and new EFI labels must be specified</source>
         <translation>Deben especificarse tanto las etiquetas EFI antiguas como las nuevas</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1819"/>
+        <location filename="../mainwindow.cpp" line="1852"/>
         <source>Multiple boot entries found for label &apos;%1&apos;: %2 and %3;</source>
         <translation>Se han encontrado varias entradas de arranque para la etiqueta &apos;%1&apos;: %2 y %3;</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1829"/>
+        <location filename="../mainwindow.cpp" line="1862"/>
         <source>No EFI data found for label &apos;%1&apos;.</source>
         <translation>No se encontraron datos EFI para la etiqueta &apos;%1&apos;.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1837"/>
+        <location filename="../mainwindow.cpp" line="1870"/>
         <source>EFI label &apos;%1&apos; is linked to an unknown partition &apos;%2&apos;.</source>
         <translation>La etiqueta EFI &apos;%1&apos; está vinculada a una partición desconocida &apos;%2&apos;.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1848"/>
+        <location filename="../mainwindow.cpp" line="1881"/>
         <source>Unexpected device name format &apos;%1&apos; for partition related to the label.</source>
         <translation>Formato de nombre de dispositivo inesperado &apos;%1&apos; para la partición relacionada con la etiqueta.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1858"/>
+        <location filename="../mainwindow.cpp" line="1891"/>
         <source>Device partition number [%1] differs from EFI entry partition number [%2].</source>
         <translation>El número de partición del dispositivo [%1] difiere del número de partición de entrada EFI [%2].</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1872"/>
+        <location filename="../mainwindow.cpp" line="1905"/>
         <source>Failed to delete old boot entry</source>
         <translation>Error al borrar la entrada de arranque antigua</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1877"/>
+        <location filename="../mainwindow.cpp" line="1910"/>
         <source>Failed to create new boot entry</source>
         <translation>Error al crear la nueva entrada de arranque</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1464"/>
+        <location filename="../mainwindow.cpp" line="1497"/>
         <source>Failed to read grub.entry file.</source>
         <translation>Error al leer el archivo grub.entry.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="895"/>
-        <location filename="../mainwindow.cpp" line="1477"/>
+        <location filename="../mainwindow.cpp" line="1510"/>
         <source>Install</source>
         <translation>Instalar</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1483"/>
+        <location filename="../mainwindow.cpp" line="1516"/>
         <source>Select Frugal Directory</source>
         <translation>Seleccionar directorio frugal</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1490"/>
+        <location filename="../mainwindow.cpp" line="1523"/>
         <source>No EFI System Partitions found.</source>
         <translation>No se encontró ninguna partición del sistema EFI.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1496"/>
+        <location filename="../mainwindow.cpp" line="1529"/>
         <source>Select EFI System Partition</source>
         <translation>Seleccionar la partición del sistema EFI</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1497"/>
+        <location filename="../mainwindow.cpp" line="1530"/>
         <source>EFI System Partitions:</source>
         <translation>Particiones del sistema EFI:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1510"/>
+        <location filename="../mainwindow.cpp" line="1543"/>
         <source>No EFI System Partition selected</source>
         <translation>No seleccionó la partición del sistema EFI</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1517"/>
+        <location filename="../mainwindow.cpp" line="1550"/>
         <source>Could not mount selected EFI System Partition</source>
         <translation>No se pudo montar la partición del sistema EFI seleccionada</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1544"/>
-        <location filename="../mainwindow.cpp" line="1581"/>
+        <location filename="../mainwindow.cpp" line="1577"/>
+        <location filename="../mainwindow.cpp" line="1614"/>
         <source>Could not mount partition. Please make sure you selected the correct partition.</source>
         <translation>No se pudo montar la partición. Asegúrese de haber seleccionado la partición correcta.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1553"/>
+        <location filename="../mainwindow.cpp" line="1586"/>
         <source>No directory selected</source>
         <translation>Ningún directorio seleccionado</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1566"/>
-        <location filename="../mainwindow.cpp" line="1596"/>
+        <location filename="../mainwindow.cpp" line="1599"/>
+        <location filename="../mainwindow.cpp" line="1629"/>
         <source>EFI stub installed successfully.</source>
         <translation>EFI stub se ha instalado correctamente.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1568"/>
-        <location filename="../mainwindow.cpp" line="1598"/>
+        <location filename="../mainwindow.cpp" line="1601"/>
+        <location filename="../mainwindow.cpp" line="1631"/>
         <source>Failed to install EFI stub.</source>
         <translation>Error al instalar EFI stub.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1609"/>
+        <location filename="../mainwindow.cpp" line="1642"/>
         <source>Version: </source>
         <translation>Versión: </translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1613"/>
+        <location filename="../mainwindow.cpp" line="1646"/>
         <source>Copyright (c) MX Linux</source>
         <translation>Derechos de Autor (c) MX Linux</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1614"/>
+        <location filename="../mainwindow.cpp" line="1647"/>
         <source>%1 License</source>
         <translation>%1 Licencia</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1622"/>
+        <location filename="../mainwindow.cpp" line="1655"/>
         <source>%1 Help</source>
         <translation>%1 Ayuda</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1650"/>
+        <location filename="../mainwindow.cpp" line="1683"/>
         <source>Something went wrong, could not save boot order.</source>
         <translation>Algo salió mal, no se pudo guardar el orden de arranque.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1658"/>
+        <location filename="../mainwindow.cpp" line="1691"/>
         <source>Set timeout</source>
         <translation>Establecer el tiempo de espera</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1658"/>
+        <location filename="../mainwindow.cpp" line="1691"/>
         <source>Timeout in seconds:</source>
         <translation>Tiempo de espera en segundos:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1689"/>
+        <location filename="../mainwindow.cpp" line="1722"/>
         <source>Removal confirmation</source>
         <translation>Confirmar la eliminación</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1690"/>
+        <location filename="../mainwindow.cpp" line="1723"/>
         <source>Are you sure you want to delete this boot entry?
 %1</source>
         <translation>¿Está seguro de que desea eliminar esta entrada de arranque?

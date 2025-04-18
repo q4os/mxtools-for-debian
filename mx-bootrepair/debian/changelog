@@ -1,3 +1,17 @@
+mx-bootrepair (25.4.01) mx; urgency=medium
+
+  * Remove need for elevation when clicking Next
+  * Remove need for elevation when closing app
+  * Rename "Apply" button to "Next" for clairity
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 14 Apr 2025 12:22:04 -0400
+
+mx-bootrepair (25.4) mx; urgency=medium
+
+  * Add regenerate initramfs option
+
+ -- Adrian <adrian@mxlinux.org>  Sun, 13 Apr 2025 22:19:28 -0400
+
 mx-bootrepair (24.4) mx; urgency=medium
 
   * Update translations
