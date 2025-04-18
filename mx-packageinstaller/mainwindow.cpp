@@ -104,13 +104,13 @@ void MainWindow::setup()
     qDebug() << "+++" << __PRETTY_FUNCTION__ << "+++";
 
     //hide mx test tab, if mxtools not installed
-    if(! pm_files.get_q4os_mxtools_installed())
+    if(! pm_files.get_debian_mxtools_installed())
       ui->tabWidget->setTabVisible(ui->tabWidget->indexOf(ui->tabMXtest), false);
     //hide mx test tab, if "mx/testrepo" repository doesn't exist in sources.list
     if(! pm_files.get_has_mx_repo())
       ui->tabWidget->setTabVisible(ui->tabWidget->indexOf(ui->tabMXtest), false);
     //hide debian backports tab if mxtools not installed and backports not activated
-    if((! pm_files.get_q4os_mxtools_installed()) and (! pm_files.get_has_debian_backports_repo()))
+    if((! pm_files.get_debian_mxtools_installed()) and (! pm_files.get_has_debian_backports_repo()))
       ui->tabWidget->setTabVisible(ui->tabWidget->indexOf(ui->tabBackports), false);
     //hide debian backports tab for ubuntu based systems
     if(pm_files.get_is_ubuntu_based())

@@ -340,8 +340,9 @@ do_start() {
     /usr/sbin/usermod -a -G adm $DEF_USER > /dev/null
     /usr/sbin/usermod -a -G sudo $DEF_USER > /dev/null
     if [ -f "/var/lib/mxdebian/.mxsnapshot_accounts_reset.stp" ] ; then
-      #if mx-snapshot has been commanded to reset users accounts within the live media..
       imsg "Snapshot app has been commanded to reset users accounts within the live media."
+      # echo "[I:] Enabling to run the first boot service, need to enable the service too..."
+      # rm -f /var/lib/q4os/first_boot_script_done.stp
       # echo "[I:] Make first user $DEF_USER passwordless..."
       imsg "Making first user %s passwordless ..." "$(iq $DEF_USER)"
       /usr/bin/passwd -d "$DEF_USER" > /dev/null

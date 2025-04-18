@@ -481,10 +481,10 @@ void Work::setupEnv()
         shell.runAsRoot("mkdir -p /var/lib/mxdebian/");
         shell.runAsRoot("touch /var/lib/mxdebian/.mxsnapshot_accounts_reset.stp");
         shell.runAsRoot("installed-to-live -b /.bind-root start " + bind_boot
-                        + "empty=/home general version-file tdmnoautologin sddmnoautologin grubdefault read-only");
+                        + "empty=/home general version-file read-only grubdefault resumedisable tdmnoautologin sddmnoautologin");
     } else {
         shell.runAsRoot("installed-to-live -b /.bind-root start bind=/home" + bind_boot_too
-                        + " live-files version-file adjtime grubdefault read-only");
+                        + " live-files version-file adjtime read-only grubdefault resumedisable");
     }
     //shell.runAsRoot("dash /usr/share/mx-snapshot/scripts/configure_debian_calamares.sh"); //configure calamares for use with mx snapshot
 }

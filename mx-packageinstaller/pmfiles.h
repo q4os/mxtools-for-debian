@@ -11,7 +11,7 @@ class PMFiles
 public:
     PMFiles();
     QString get_qdistro();
-    bool get_q4os_mxtools_installed();
+    bool get_debian_mxtools_installed();
     bool get_has_debian_backports_repo();
     bool get_has_mx_repo();
     bool get_is_ubuntu_based();
@@ -22,7 +22,7 @@ private:
 
     Cmd cmd;
 
-    bool q4os_mxtools_installed = false;
+    bool flag_debian_mxtools_installed = false;
     bool has_debian_backports_repo = false;
     bool has_mx_repo = false; //mx repository is present in the system
     bool is_ubuntu_based = false; //system based on ubuntu

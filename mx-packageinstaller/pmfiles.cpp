@@ -17,7 +17,7 @@ void PMFiles::setup()
   blacklist_file_exists = false;
   whitelist_file_exists = false;
   qdistro = "unknown";
-  q4os_mxtools_installed = false;
+  flag_debian_mxtools_installed = false;
   has_debian_backports_repo = false;
   has_mx_repo = false;
   is_ubuntu_based = false;
@@ -35,9 +35,9 @@ void PMFiles::setup()
 
   QString hstr1 = cmd.getOut("dpkg --get-selections q4os-mxtools-common 2>/dev/null");
   if(hstr1.length() > 10) {
-    q4os_mxtools_installed = true;
+    flag_debian_mxtools_installed = true;
   }
-  qDebug() << "q4os_mxtools_installed: " << q4os_mxtools_installed;
+  qDebug() << "flag_debian_mxtools_installed: " << flag_debian_mxtools_installed;
 
   hstr1 = cmd.getOut("grep '" + qdistro + "-backports ' /etc/apt/sources.list.d/*.list /etc/apt/sources.list | grep '.list:deb ' | grep 'debian'");
   if(hstr1.length() > 10) {
@@ -89,9 +89,9 @@ void PMFiles::setup()
   }
 }
 
-bool PMFiles::get_q4os_mxtools_installed()
+bool PMFiles::get_debian_mxtools_installed()
 {
-  return(q4os_mxtools_installed);
+  return(flag_debian_mxtools_installed);
 }
 
 bool PMFiles::get_has_debian_backports_repo()

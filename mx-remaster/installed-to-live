@@ -127,11 +127,15 @@ Commands:
 
     adjtime             Reset the adjtime file but leave the utc / local selection
 
-    tdmnoautologin     Disable automatic login for TDM
+    tdmnoautologin      Disable automatic login for TDM
 
-    sddmnoautologin    Disable automatic login for SDDM
+    sddmnoautologin     Disable automatic login for SDDM
 
-    grubdefault        Configure the /etc/default/grub
+    resumedisable       Disable resume file as not needed
+
+    debiantasks1        Various Debian tasks1
+
+    grubdefault         Configure the /etc/default/grub
 
     cleanup             Clean up all that we did
 
@@ -267,7 +271,9 @@ main() {
             adjtime) do_adjtime       $CONF_FILE $WORK_DIR             ;;
             tdmnoautologin) do_tdm_disable_autologin $CONF_FILE $WORK_DIR ;;
             sddmnoautologin) do_sddm_disable_autologin $CONF_FILE $WORK_DIR ;;
-            grubdefault) do_grubdefault  $CONF_FILE $WORK_DIR         ;;
+            resumedisable) do_resume_disable $CONF_FILE $WORK_DIR      ;;
+            debiantasks1) do_debian_tasks_1 $CONF_FILE $WORK_DIR       ;;
+            grubdefault) do_grubdefault  $CONF_FILE $WORK_DIR          ;;
           exclude=*) do_exclude       "$val" "$@" ; exit 0             ;;
             exclude) do_exclude       ""     "$@" ; exit 0             ;;
                repo) do_repo          $CONF_FILE $WORK_DIR "$DEF_REPO" ;;
@@ -585,6 +591,51 @@ do_sddm_disable_autologin() {
     cp $orig_file $targ_file
     /usr/bin/kwriteconfig5 --file "$targ_file" --group "Autologin" --key "User" ""
     /usr/bin/kwriteconfig5 --file "$targ_file" --group "Autologin" --key "Session" ""
+    bind_mount_template "$template_dir"  "$BIND_ROOT" "$REAL_ROOT"
+}
+
+#disable resume file as not needed
+#based on "do_adjtime", see above
+do_resume_disable() {
+    local conf_file=$1  work_dir=$2
+    read_conf_file $conf_file
+    local orig_file=/etc/initramfs-tools/conf.d/resume
+    test -f $orig_file || return 0
+
+    local template_dir=$work_dir/resumedisable
+    local targ_file=$template_dir/$orig_file
+    mkdir -p $(dirname $targ_file)
+    touch $targ_file
+
+    bind_mount_template "$template_dir"  "$BIND_ROOT" "$REAL_ROOT"
+}
+
+#various debian tasks 1, this function should be called by mx-snapshot only if it resets users accounts
+#todo: this routine is a stub, it doesn't work for /etc/q4oslivemedia and /etc/sudoers.d/90_sudo_tmp01 for some reason
+#this routine actually creates more live cd than a clone
+#based on "do_adjtime", see above
+do_debian_tasks_1() {
+    local conf_file=$1  work_dir=$2
+    read_conf_file $conf_file
+    local template_dir=$work_dir/debiantasks1
+
+    local orig_1_file=/etc/q4os/q4base.conf
+    if [ -r "$orig_1_file" ] && [ -x "/opt/trinity/bin/kwriteconfig" ] ; then
+      local targ_1_file=$template_dir$orig_1_file
+      mkdir -p $(dirname $targ_1_file)
+      cp $orig_1_file $targ_1_file
+      /opt/trinity/bin/kwriteconfig --file "$targ_1_file" --group "OnInstall" --key "install_type" "livemedia"
+      chmod a+r $targ_1_file
+    fi
+
+    local targ_2_file="$template_dir/etc/q4oslivemedia"
+    mkdir -p $(dirname $targ_2_file)
+    touch $targ_2_file
+
+    local targ_3_file="$template_dir/etc/sudoers.d/90_sudo_tmp01"
+    mkdir -p $(dirname $targ_3_file)
+    echo '%sudo    ALL = NOPASSWD: ALL' > $targ_3_file
+
     bind_mount_template "$template_dir"  "$BIND_ROOT" "$REAL_ROOT"
 }
 
