@@ -55,11 +55,11 @@ categorie = {
 } 
 
 
-class Config(configparser.SafeConfigParser) :
+class Config(configparser.ConfigParser) :
 
     def __init__(self) :
     
-        configparser.SafeConfigParser.__init__(self)
+        configparser.ConfigParser.__init__(self)
         try :
             self.read_config()
         except configparser.ParsingError :
@@ -74,14 +74,14 @@ class Config(configparser.SafeConfigParser) :
     
     def set(self, section, option, value) :
     
-        configparser.SafeConfigParser.set(self, section, option, str(value))
+        configparser.ConfigParser.set(self, section, option, str(value))
         self.apply_change()
         
     def set_default(self, section, option) :
     
-        configparser.SafeConfigParser.set(self, section, option, categorie[section][option])
+        configparser.ConfigParser.set(self, section, option, categorie[section][option])
         self.apply_change()
-        return configparser.SafeConfigParser.get(self, section, option)
+        return configparser.ConfigParser.get(self, section, option)
         
     def read_config(self) :
         ''' Ugly stuff. We actually store config file in the user home, to be able to

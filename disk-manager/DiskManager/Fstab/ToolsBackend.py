@@ -101,7 +101,7 @@ class ToolsBackend(DiskInfoBase) :
             for line in result :
                 logging.debug("(udevinfo output) " + line.strip().decode("utf-8", errors="ignore"))
                 try :
-                    device = "/dev/" + re.search("N: (\S+)", line.decode("utf-8", errors="ignore")).groups()[0]
+                    device = "/dev/" + re.search(r"N: (\S+)", line.decode("utf-8", errors="ignore")).groups()[0]
                     dev["DEVICE"] = device
                     logging.debug("-> Found DEVICE : " + device)
                 except AttributeError :
@@ -109,7 +109,7 @@ class ToolsBackend(DiskInfoBase) :
                 # Used for debugging blkid & vol_id :
                 # continue
                 try :
-                    (attr, value) = re.search("E: ID_(\S+)=(.+)", line.decode('utf-8', errors="ignore")).groups()
+                    (attr, value) = re.search(r"E: ID_(\S+)=(.+)", line.decode('utf-8', errors="ignore")).groups()
                     dev[attr] = value
                     logging.debug("-> Found " + attr + " : "+ value)
                 except AttributeError :

@@ -343,7 +343,7 @@ function install_nvidia {
     echo "test for $DRIVER"
   fi
   
-  if [ $nvidia_detect_exit_code = 3 ]; then
+  if [[ $nvidia_detect_exit_code -eq 3 ]]; then
   	nvidia_driver_override
   fi
   	
@@ -419,7 +419,7 @@ fi
   
   #install matching libxnvctrl0 for developer repo drivers
   if [ "$NVIDIA_OVERRIDE" = "true" ]; then
-	ap-get install  libxnvctrl0=$CANDIDATE --allow-downgrades -y $TESTSWITCH
+	apt-get install  libxnvctrl0=$CANDIDATE --allow-downgrades -y $TESTSWITCH
   fi
   
   apt-get install --reinstall $INSTALL_RECOMMENDS -y $SWITCH $BP $DRIVER $TESTSWITCH 2>&1 | tee -a $LOG
@@ -959,8 +959,8 @@ check_source_install(){
 	echo "========================================"| tee -a $LOG
 	echo $(eval_gettext "Possible previous install detected.") | tee -a $LOG
 	echo "========================================"| tee -a $LOG
-	purge_message
-	exit 10
+#	purge_message
+#	exit 10
   fi
   
 }

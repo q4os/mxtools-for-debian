@@ -1,3 +1,10 @@
+disk-manager (25.04.01) mx; urgency=medium
+
+  * fix regex in ToolsBackend
+  * replace SafeConfigParser with ConfigParser (python 3.13)
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 16 Apr 2025 18:45:06 -0400
+
 disk-manager (24.03.01) mx; urgency=medium
 
   * fix: show translatable strings from glade
