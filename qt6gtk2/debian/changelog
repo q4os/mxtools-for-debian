@@ -1,0 +1,17 @@
+qt6gtk2 (0.3-0.1~mx23+1) mx; urgency=medium
+
+  * New upstream release.
+
+ -- Steven Pusser <stevep@mxlinux.org>  Sun, 24 Nov 2024 14:59:42 -0800
+
+qt6gtk2 (0.2-0vanir1~bpo24.04) noble; urgency=medium
+
+  * No-change backport to noble.
+
+ -- Unit 193 <unit193@ubuntu.com>  Thu, 02 May 2024 03:29:32 -0400
+
+qt6gtk2 (0.2-0vanir1) unstable; urgency=medium
+
+  * Initial release.
+
+ -- Unit 193 <unit193@unit193.net>  Sat, 07 Jan 2023 19:31:11 -0500

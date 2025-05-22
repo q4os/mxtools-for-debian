@@ -1,0 +1,24 @@
+#!/usr/bin/make -f
+# -*- makefile -*-
+
+# Uncomment this to turn on verbose mode.
+# export DH_VERBOSE=1
+
+DPKG_EXPORT_BUILDFLAGS = 1
+include /usr/share/dpkg/default.mk
+export DEB_BUILD_MAINT_OPTIONS = hardening=+all
+
+%:
+	dh $@
+
+override_dh_auto_configure:
+	ln -s /usr/bin/qmake6 ./qmake
+	PATH=`pwd`:$(PATH) dh_auto_configure
+
+override_dh_clean:
+	dh_clean qmake
+
+# No dbgsym packages:
+override_dh_strip:
+	@echo "not building dbgsym packages for MX Linux"
+	dh_strip --no-automatic-dbgsym

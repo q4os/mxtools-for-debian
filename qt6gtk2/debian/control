@@ -1,0 +1,27 @@
+Source: qt6gtk2
+Section: x11
+Priority: optional
+Maintainer: Steven Pusser <stevep@mxlinux.org>
+XSBC-Original-Maintainer: Unit 193 <unit193@unit193.net>
+Build-Depends: debhelper-compat (= 13),
+               libgtk2.0-dev,
+               libx11-dev,
+               qt6-base-dev,
+               qt6-base-private-dev
+Rules-Requires-Root: no
+Standards-Version: 4.6.2
+Homepage: https://github.com/trialuser02/qt6gtk2/
+
+Package: qt6gtk2
+Architecture: any
+Multi-Arch: same
+Depends: ${misc:Depends}, ${shlibs:Depends}
+Description: GTK 2 integration plugins for Qt6
+ This package contains the GTK 2 style and platform theme, for proper usage
+ it requires that you have a functional GTK 2 theme selected.
+ .
+ To enable it for all Qt applications, export QT_QPA_PLATFORMTHEME=qt6gtk2
+ or 'gtk2', 'qt5gtk2' also work for compatibility reasons.
+ .
+ To avoid visual bugs, ensure that the environment variable QT_STYLE_OVERRIDE
+ is not set before usage.

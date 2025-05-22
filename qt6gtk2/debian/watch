@@ -1,0 +1,2 @@
+version=4
+https://github.com/trialuser02/qt6gtk2/tags .*/v?([\d\.]+)\.tar\.(?:bz2|gz|xz)
