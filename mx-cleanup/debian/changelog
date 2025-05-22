@@ -1,3 +1,25 @@
+mx-cleanup (25.5.01) mx; urgency=medium
+
+  * Add button to remove manuals in other languages
+
+ -- Adrian <adrian@mxlinux.org>  Sat, 10 May 2025 17:46:46 -0400
+
+mx-cleanup (25.5) mx; urgency=medium
+
+  * Use checkable group boxes instead of do-nothing radio buttons
+  * Don't reload when switching tabs
+  * Move tools to a second tab to make the window fit on smaller screens
+  * Failure to elevate pops up a message and returns
+
+ -- Adrian <adrian@mxlinux.org>  Sat, 03 May 2025 08:06:51 -0400
+
+mx-cleanup (25.4.01) mx; urgency=medium
+
+  * Update to Qt6
+  * Update translations
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 23 Apr 2025 22:29:29 -0400
+
 mx-cleanup (24.11.02) mx; urgency=medium
 
   * Translation update

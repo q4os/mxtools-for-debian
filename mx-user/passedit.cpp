@@ -86,7 +86,7 @@ void PassEdit::generate() noexcept
         if (words.isEmpty()) {
             return;
         }
-        for (int i = std::min(GEN_NUMBER_MAX, (words.count() / GEN_WORD_NUM_RATIO) - 1); i >= 0; --i) {
+        for (int i = std::min(static_cast<int>(GEN_NUMBER_MAX), static_cast<int>((words.count() / GEN_WORD_NUM_RATIO) - 1)); i >= 0; --i) {
             words.append(QString::number(i));
         }
         std::srand(static_cast<unsigned>(std::time(nullptr)));

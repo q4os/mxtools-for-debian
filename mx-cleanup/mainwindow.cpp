@@ -26,6 +26,7 @@
 #include <QDialogButtonBox>
 #include <QFileInfo>
 #include <QProcess>
+#include <QProgressDialog>
 #include <QStandardPaths>
 #include <QTemporaryFile>
 #include <QTextEdit>
@@ -50,6 +51,45 @@ MainWindow::MainWindow(QWidget *parent)
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+void MainWindow::removeManuals()
+{
+    QSettings defaultlocale("/etc/default/locale", QSettings::NativeFormat);
+    QString lang = defaultlocale.value("LANG", "C").toString().replace(".utf8", ".UTF-8");
+    if (lang.isEmpty()) {
+        return;
+    }
+
+    QString exclusionPattern
+        = QString("mx-(docs|faq)-(en|common%1)").arg(lang == "en" || lang == "C" ? "" : QString("|%1").arg(lang));
+    QString listCmd
+        = QString("dpkg-query -W --showformat=\"\\${Package}\\n\" -- 'mx-docs-*' 'mx-faq-*' | grep -vE '%1'")
+              .arg(exclusionPattern);
+
+    QStringList packageList = cmdOut(listCmd, true).split('\n', Qt::SkipEmptyParts);
+
+    if (packageList.isEmpty()) {
+        QMessageBox::information(this, tr("Remove Manuals"), tr("No manuals to remove."));
+        return;
+    }
+
+    QString purgeCmd = QString("apt-get purge -y %1").arg(packageList.join(' '));
+
+    ui->tabWidget->setDisabled(true);
+    QProgressDialog prog(tr("Removing packages, please wait"), nullptr, 0, packageList.count());
+
+    QProcess proc;
+    QEventLoop loop;
+    connect(&proc, QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished), &loop, &QEventLoop::quit);
+    connect(&proc, &QProcess::readyReadStandardOutput, this, [&prog]() { prog.setValue(prog.value() + 1); });
+    proc.setProcessChannelMode(QProcess::MergedChannels);
+    QString elevate {QFile::exists("/usr/bin/pkexec") ? "/usr/bin/pkexec" : "/usr/bin/gksu"};
+    QString helper {"/usr/lib/" + QApplication::applicationName() + "/helper"};
+    proc.start(elevate, {helper, purgeCmd});
+    prog.show();
+    loop.exec();
+    ui->tabWidget->setEnabled(true);
 }
 
 void MainWindow::addGroupCheckbox(QLayout *layout, const QStringList &packages, const QString &name, QStringList *list)
@@ -80,6 +120,7 @@ void MainWindow::addGroupCheckbox(QLayout *layout, const QStringList &packages, 
 void MainWindow::setup()
 {
     setWindowTitle(tr("MX Cleanup"));
+    ui->tabWidget->setCurrentIndex(0);
     adjustSize();
 
     current_user = cmdOut("logname", false, true);
@@ -131,7 +172,7 @@ void MainWindow::loadSettings()
     settings.endGroup();
 
     settings.beginGroup("Apt");
-    selectRadioButton(ui->buttonGroupApt, settings.value("AptSelection", -1).toInt());
+    selectRadioButton(ui->groupBoxApt, ui->buttonGroupApt, settings.value("AptSelection", -1).toInt());
     settings.endGroup();
 
     settings.beginGroup("Flatpak");
@@ -140,12 +181,12 @@ void MainWindow::loadSettings()
 
     settings.beginGroup("Logs");
     ui->spinBoxLogs->setValue(settings.value("LogsOlderThan", 7).toInt());
-    selectRadioButton(ui->buttonGroupLogs, settings.value("LogsSelection", -1).toInt());
+    selectRadioButton(ui->groupBoxLogs, ui->buttonGroupLogs, settings.value("LogsSelection", -1).toInt());
     settings.endGroup();
 
     settings.beginGroup("Trash");
     ui->spinBoxTrash->setValue(settings.value("TrashOlderThan", 30).toInt());
-    selectRadioButton(ui->buttonGroupTrash, settings.value("TrashSelection", -1).toInt());
+    selectRadioButton(ui->groupBoxTrash, ui->buttonGroupTrash, settings.value("TrashSelection", -1).toInt());
     settings.endGroup();
 }
 
@@ -175,7 +216,7 @@ void MainWindow::removeKernelPackages(const QStringList &list)
         rmOldVersions = rmOldVersions.trimmed().prepend("rm ").append(";");
     }
 
-    for (const auto &item : qAsConst(headers)) {
+    for (const auto &item : std::as_const(headers)) {
         if (system("dpkg -s " + item.toUtf8() + "| grep -q 'Status: install ok installed'") == 0) {
             headers_installed << item;
         }
@@ -185,7 +226,7 @@ void MainWindow::removeKernelPackages(const QStringList &list)
     QString headers_common;
     QString image_pattern;
 
-    for (const auto &item : qAsConst(headers_installed)) {
+    for (const auto &item : std::as_const(headers_installed)) {
         headers_common = cmdOut("env LC_ALL=C.UTF-8 apt-cache depends " + item.toUtf8()
                                 + "| grep 'Depends:' | grep -oE 'linux-headers-[0-9][^[:space:]]+' | sort -u");
         if (!headers_common.toUtf8().trimmed().isEmpty()) {
@@ -252,7 +293,7 @@ void MainWindow::loadOptions()
     } else if (system("grep -q 'apt-get clean' " + file_name.toUtf8()) == 0) { // detect clean
         ui->radioClean->setChecked(true);
     } else {
-        ui->radioNoCleanApt->setChecked(true);
+        ui->groupBoxApt->setChecked(false);
     }
 
     // Flatpak: remove unused runtimes
@@ -264,7 +305,7 @@ void MainWindow::loadOptions()
     } else if (system(R"(grep -q '\-type f \-delete' )" + file_name.toUtf8()) == 0) { // old logs
         ui->radioOldLogs->setChecked(true);
     } else {
-        ui->radioNoCleanLogs->setChecked(true);
+        ui->groupBoxLogs->setChecked(false);
     }
 
     // Logs older than...
@@ -278,7 +319,7 @@ void MainWindow::loadOptions()
     } else if (system("grep -q '/.local/share/Trash' " + file_name.toUtf8()) == 0) { // selected user trash
         ui->radioSelectedUser->setChecked(true);
     } else {
-        ui->radioNoCleanTrash->setChecked(true);
+        ui->groupBoxTrash->setChecked(false);
     }
 
     // Trash older than...
@@ -345,8 +386,11 @@ void MainWindow::saveSettings()
     settings.endGroup();
 }
 
-void MainWindow::selectRadioButton(const QButtonGroup *group, int id)
+void MainWindow::selectRadioButton(QGroupBox *groupbox, const QButtonGroup *group, int id)
 {
+    if (groupbox) {
+        groupbox->setChecked(id != -1);
+    }
     if (id != -1) {
         auto *selectedButton = group->button(id);
         if (selectedButton) {
@@ -362,10 +406,11 @@ void MainWindow::setConnections()
     connect(ui->pushCancel, &QPushButton::clicked, this, &MainWindow::close);
     connect(ui->pushHelp, &QPushButton::clicked, this, &MainWindow::pushHelp_clicked);
     connect(ui->pushKernel, &QPushButton::clicked, this, &MainWindow::pushKernel_clicked);
+    connect(ui->pushRemoveManuals, &QPushButton::clicked, this, &MainWindow::removeManuals);
     connect(ui->pushRTLremove, &QPushButton::clicked, this, &MainWindow::pushRTLremove_clicked);
     connect(ui->pushUsageAnalyzer, &QPushButton::clicked, this, &MainWindow::pushUsageAnalyzer_clicked);
-    connect(ui->radioNoCleanLogs, &QRadioButton::toggled, ui->spinBoxLogs, &QSpinBox::setDisabled);
-    connect(ui->radioNoCleanTrash, &QRadioButton::toggled, ui->spinBoxTrash, &QSpinBox::setDisabled);
+    connect(ui->tabWidget, &QTabWidget::currentChanged, this,
+            [this](int index) { ui->pushApply->setDisabled(index == 1); });
 
     for (auto *spinBox : {ui->spinCache, ui->spinBoxLogs, ui->spinBoxTrash}) {
         connect(spinBox, QOverload<int>::of(&QSpinBox::valueChanged), this,
@@ -376,6 +421,19 @@ void MainWindow::setConnections()
 void MainWindow::pushApply_clicked()
 {
     setCursor(QCursor(Qt::BusyCursor));
+
+    if (getuid() != 0) {
+        QString elevate {QFile::exists("/usr/bin/pkexec") ? "/usr/bin/pkexec" : "/usr/bin/gksu"};
+        QString helper {"/usr/lib/" + QApplication::applicationName() + "/helper"};
+        QProcess proc;
+        proc.start(elevate, {helper, "true"});
+        proc.waitForFinished();
+        if (proc.exitCode() != 0) {
+            QMessageBox::critical(this, tr("Error"), tr("Failed to elevate privileges"));
+            setCursor(QCursor(Qt::ArrowCursor));
+            return;
+        }
+    }
 
     quint64 total {};
     QString cache;
@@ -428,41 +486,45 @@ void MainWindow::pushApply_clicked()
     }
 
     QString apt;
-    if (ui->radioAutoClean->isChecked()) {
-        apt = "apt-get autoclean";
-    } else if (ui->radioClean->isChecked()) {
-        apt = "apt-get clean";
+    if (ui->groupBoxApt->isChecked()) {
+        if (ui->radioAutoClean->isChecked()) {
+            apt = "apt-get autoclean";
+        } else if (ui->radioClean->isChecked()) {
+            apt = "apt-get clean";
+        }
+
+        total += cmdOutAsRoot("du -s /var/cache/apt/archives/ | cut -f1").toULongLong();
+        if (!ui->radioReboot->isChecked()) {
+            cmdOutAsRoot(apt);
+        }
+        total -= cmdOutAsRoot("du -s /var/cache/apt/archives/ | cut -f1").toULongLong();
     }
 
-    total += cmdOutAsRoot("du -s /var/cache/apt/archives/ | cut -f1").toULongLong();
-    if (!ui->radioReboot->isChecked()) {
-        cmdOutAsRoot(apt);
-    }
-    total -= cmdOutAsRoot("du -s /var/cache/apt/archives/ | cut -f1").toULongLong();
-
-    QString time
-        = ui->spinBoxLogs->value() > 0 ? QString(" -ctime +%1 -atime +%1").arg(ui->spinBoxLogs->value()) : QString();
     QString logs;
-    if (ui->radioOldLogs->isChecked()) {
-        total
-            += cmdOutAsRoot(
-                   R"(find /var/log \( -name "*.gz" -o -name "*.old" -o -name "*.[0-9]" -o -name "*.[0-9].log" \) -type f)"
-                   + time + " -exec du -sc '{}' + | awk '{field = $1} END {print field}'")
-                   .toULongLong();
-        logs = R"(find /var/log \( -name "*.gz" -o -name "*.old" -o -name "*.[0-9]" -o -name "*.[0-9].log" \))" + time
-               + " -type f -delete 2>/dev/null";
-        cmdOutAsRoot(logs);
-    } else if (ui->radioAllLogs->isChecked()) {
-        total += cmdOutAsRoot(
-                     QString("find /var/log -type f%1 -exec du -sc '{}' + | awk '{field = $1} END {print field}'")
-                         .arg(time))
-                     .toULongLong();
-        logs = "find /var/log -type f" + time + R"( -exec sh -c "echo > '{}'" \;)"; // empty the logs
-        cmdOutAsRoot(logs);
+    if (ui->groupBoxLogs->isChecked()) {
+        QString time = ui->spinBoxLogs->value() > 0 ? QString(" -ctime +%1 -atime +%1").arg(ui->spinBoxLogs->value())
+                                                    : QString();
+        if (ui->radioOldLogs->isChecked()) {
+            total
+                += cmdOutAsRoot(
+                       R"(find /var/log \( -name "*.gz" -o -name "*.old" -o -name "*.[0-9]" -o -name "*.[0-9].log" \) -type f)"
+                       + time + " -exec du -sc '{}' + | awk '{field = $1} END {print field}'")
+                       .toULongLong();
+            logs = R"(find /var/log \( -name "*.gz" -o -name "*.old" -o -name "*.[0-9]" -o -name "*.[0-9].log" \))"
+                   + time + " -type f -delete 2>/dev/null";
+            cmdOutAsRoot(logs);
+        } else if (ui->radioAllLogs->isChecked()) {
+            total += cmdOutAsRoot(
+                         QString("find /var/log -type f%1 -exec du -sc '{}' + | awk '{field = $1} END {print field}'")
+                             .arg(time))
+                         .toULongLong();
+            logs = "find /var/log -type f" + time + R"( -exec sh -c "echo > '{}'" \;)"; // empty the logs
+            cmdOutAsRoot(logs);
+        }
     }
 
     QString trash;
-    if (ui->radioSelectedUser->isChecked() || ui->radioAllUsers->isChecked()) {
+    if (ui->groupBoxTrash->isChecked()) {
         QString user = ui->radioAllUsers->isChecked() ? "*" : ui->comboUserClean->currentText();
         QString timeTrash = ui->spinBoxTrash->value() > 0
                                 ? QString(" -ctime +%1 -atime +%1").arg(ui->spinBoxTrash->value())

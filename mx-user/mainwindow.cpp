@@ -240,7 +240,11 @@ void MainWindow::applyOptions()
                              + QString(R"('/^[[]Seat(Defaults|:[*])[]]/,/[[]/{/^[[:space:]]*autologin-user=/d;'})")
                              + " /etc/lightdm/lightdm.conf");
         }
-        if (QFile::exists("/etc/sddm.conf")) {
+
+        if (QFile::exists("/etc/sddm.conf.d/kde_settings.conf")) {
+            shell->runAsRoot("sed -i " + QString("s/^User=%1/User=/").arg(user)
+                             + " /etc/sddm.conf.d/kde_settings.conf");
+        } else if (QFile::exists("/etc/sddm.conf")) {
             shell->runAsRoot("sed -i " + QString("s/^User=%1/User=/").arg(user) + " /etc/sddm.conf");
         }
         QMessageBox::information(this, tr("Autologin options"),
@@ -252,7 +256,23 @@ void MainWindow::applyOptions()
                              + " -e " + QString(R"('/^[[]Seat(Defaults|:[*])[]]/aautologin-user=%1')").arg(user)
                              + " /etc/lightdm/lightdm.conf");
         }
-        if (QFile::exists("/etc/sddm.conf")) {
+        if (QFile::exists("/etc/sddm.conf.d/kde_settings.conf")) {
+            shell->runAsRoot("sed -i " + QString("s/^User=.*/User=%1/").arg(user)
+                             + " /etc/sddm.conf.d/kde_settings.conf");
+            if (qEnvironmentVariable("XDG_CURRENT_DESKTOP") == "KDE") {
+                QString sessionType;
+                if (qEnvironmentVariable("XDG_SESSION_TYPE") == "wayland") {
+                    sessionType = "plasma";
+                } else if (qEnvironmentVariable("XDG_SESSION_TYPE") == "x11") {
+                    sessionType = "plasmax11";
+                }
+
+                if (!sessionType.isEmpty()) {
+                    shell->runAsRoot(QString("sed -i 's/^Session=.*/Session=%1/' /etc/sddm.conf.d/kde_settings.conf")
+                                         .arg(sessionType));
+                }
+            }
+        } else if (QFile::exists("/etc/sddm.conf")) {
             shell->runAsRoot(QString("sed -i 's/^User=.*/User=%1/' /etc/sddm.conf").arg(user));
             if (qEnvironmentVariable("XDG_CURRENT_DESKTOP") == "KDE") {
                 shell->runAsRoot("sed -i 's/^Session=.*/Session=plasma.desktop/' /etc/sddm.conf");
@@ -352,7 +372,7 @@ void MainWindow::applyAdd()
         return;
     }
     // Check that user name is not already used
-    if (QProcess::execute("grep", {"-w", '^' + userNameEdit->text(), "/etc/passwd"}) == 0) {
+    if (QProcess::execute("grep", {"-E", "^" + userNameEdit->text() + ":", "/etc/passwd"}) == 0) {
         QMessageBox::critical(this, windowTitle(), tr("Sorry, this name is in use. Please enter a different name."));
         return;
     }
@@ -391,7 +411,8 @@ void MainWindow::applyAdd()
     QProcess proc;
     QString elevate {QFile::exists("/usr/bin/pkexec") ? "/usr/bin/pkexec" : "/usr/bin/gksu"};
     QString helper {"/usr/lib/" + QApplication::applicationName() + "/helper"};
-    proc.start(elevate, {helper, "passwd", userNameEdit->text()}, QIODevice::ReadWrite);
+    QString userNameArg = userNameEdit->text();
+    proc.start(elevate, {helper, "passwd", userNameArg}, QIODevice::ReadWrite);
     proc.waitForStarted();
     proc.write(userPasswordEdit->text().toUtf8() + '\n');
     proc.write(userPasswordEdit->text().toUtf8() + '\n');
@@ -399,7 +420,7 @@ void MainWindow::applyAdd()
 
     if (proc.exitCode() == 0) {
         if (!checkSudoGroup->isChecked()) {
-            shell->runAsRoot("delgroup " + userNameEdit->text() + " sudo");
+            shell->runAsRoot("delgroup " + userNameArg + " sudo");
         }
         QMessageBox::information(this, windowTitle(), tr("The user was added ok."));
         refresh();
@@ -577,14 +598,13 @@ void MainWindow::applyRename()
                               tr("The user name needs to be at least 2 characters long. Please select a longer "
                                  "name before proceeding."));
         return;
-    } else if (!new_name.contains(QRegularExpression("^[a-z_][a-z0-9_-]*[$]?$"))) {
+    } else if (!new_name.contains(QRegularExpression("^[A-Za-z_][A-Za-z0-9_-]*[$]?$"))) {
         QMessageBox::critical(this, windowTitle(),
-                              tr("The user name needs to be lower case and it\n"
-                                 "cannot contain special characters or spaces.\n"
+                              tr("The user name cannot contain special characters or spaces.\n"
                                  "Please choose another name before proceeding."));
         return;
     }
-    if (QProcess::execute("grep", {"-w", '^' + new_name, "/etc/passwd"}) == 0) {
+    if (QProcess::execute("grep", {"-E", "^" + new_name + ":", "/etc/passwd"}) == 0) {
         QMessageBox::critical(this, windowTitle(),
                               tr("Sorry, this name already exists on your system. Please enter a different name."));
         return;
@@ -601,22 +621,31 @@ void MainWindow::applyRename()
     }
 
     // Rename other instances of the old name, like "Finger" name if present
-    shell->runAsRoot("sed -i 's/\\b" + old_name + "\\b/" + new_name + "/g' /etc/passwd");
+    QString StartRex = "([^-_[:alnum:]])";
+    QString EndRex = "([^-_[:alnum:]$])";
+    QString escapedNew = QRegularExpression::escape(new_name);
+    QString escapedOld = QRegularExpression::escape(old_name);
+    shell->runAsRoot("sed -i  -r '/^" + escapedNew + ":/s/" + StartRex + escapedOld + EndRex + "/\\1" + escapedNew
+                     + "\\2/g' /etc/passwd");
 
     // Change group
     shell->runAsRoot("groupmod --new-name " + new_name + " " + old_name);
 
     // Fix "home/old_user" string in all ~/ files
-    shell->runAsRoot(
-        QString("grep -rl \"home/%1\" /home/%2 | xargs sed -i 's|home/%1|home/%2|g'").arg(old_name, new_name));
+    shell->runAsRoot(QString(R"(find /home/%1 -type f -exec sed -i 's|home/%1|home/%2|g' {} +)")
+                         .arg(QRegularExpression::escape(old_name), QRegularExpression::escape(new_name)));
 
     // Change autologin name (Xfce and KDE)
     if (QFile::exists("/etc/lightdm/lightdm.conf")) {
         shell->runAsRoot(QString("sed -i 's/autologin-user=%1/autologin-user=%2/g' /etc/lightdm/lightdm.conf")
-                             .arg(old_name, new_name));
+                             .arg(QRegularExpression::escape(old_name), QRegularExpression::escape(new_name)));
     }
-    if (QFile::exists("/etc/sddm.conf")) {
-        shell->runAsRoot(QString("sed -i 's/User=%1/User=%2/g' /etc/sddm.conf").arg(old_name, new_name));
+    if (QFile::exists("/etc/sddm.conf.d/kde_settings.conf")) {
+        shell->runAsRoot(QString("sed -i 's/^User=%1$/User=%2/g' /etc/sddm.conf.d/kde_settings.conf")
+                             .arg(QRegularExpression::escape(old_name), QRegularExpression::escape(new_name)));
+    } else if (QFile::exists("/etc/sddm.conf")) {
+        shell->runAsRoot(QString("sed -i 's/^User=%1$/User=%2/g' /etc/sddm.conf")
+                             .arg(QRegularExpression::escape(old_name), QRegularExpression::escape(new_name)));
     }
 
     QMessageBox::information(this, windowTitle(), tr("The user was renamed."));
@@ -848,7 +877,7 @@ void MainWindow::buildListGroupsToRemove()
     }
     QStringList groups = QString(file.readAll()).split('\n');
     groups.sort();
-    for (const auto &group : qAsConst(groups)) {
+    for (const auto &group : std::as_const(groups)) {
         if (!group.isEmpty()) {
             auto *item = new QListWidgetItem;
             item->setText(group.section(':', 0, 0));

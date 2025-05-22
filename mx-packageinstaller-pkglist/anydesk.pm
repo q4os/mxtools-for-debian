@@ -60,7 +60,7 @@ AnyDesk
 </description>
 
 <installable>
-32,64
+64
 </installable>
 
 <screenshot>none</screenshot>

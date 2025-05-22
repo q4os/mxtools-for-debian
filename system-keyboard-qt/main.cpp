@@ -1,5 +1,6 @@
 #include "window.h"
 #include <QApplication>
+#include <QScreen>
 #include <QTranslator>
 
 int main(int argc, char *argv[])
@@ -16,6 +17,8 @@ int main(int argc, char *argv[])
 
 
     Window w;
+    const QRect &geo = a.primaryScreen()->availableGeometry();
+    w.move((geo.width() - w.width()) / 2, (geo.height() - w.height()) / 2);
     w.show();
 
     return a.exec();

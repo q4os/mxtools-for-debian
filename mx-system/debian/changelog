@@ -1,3 +1,11 @@
+mx-system (25.04.03mx23) mx; urgency=medium
+
+  * add qt6gtk2 and libqt6svg6 to depends list
+  * to support upcoming qt6 updates to mx tools
+  * allows themeing to work on gtk and KDE desktops
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 23 Apr 2025 17:58:43 -0400
+
 mx-system (25.04.02mx23) mx; urgency=medium
 
   * don't run update-grub if grub.cfg doesn't exit

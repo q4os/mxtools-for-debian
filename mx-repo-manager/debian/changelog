@@ -1,3 +1,22 @@
+mx-repo-manager (25.5.01) mx; urgency=medium
+
+  * Cache elevation to avoid displaying the progress dialog before asking for password
+  * Remove pop-up with the error message
+
+ -- Adrian <adrian@mxlinux.org>  Sun, 04 May 2025 22:11:30 -0400
+
+mx-repo-manager (25.5) mx; urgency=medium
+
+  * Fix replacing repo in .sources (modernized files) 
+
+ -- Adrian <adrian@mxlinux.org>  Sat, 03 May 2025 19:03:55 -0400
+
+mx-repo-manager (25.4) mx; urgency=medium
+
+  * Update to Qt6
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 24 Apr 2025 14:27:33 -0400
+
 mx-repo-manager (25.2) mx; urgency=medium
 
   * Add support for .sources files (DEB822 format)

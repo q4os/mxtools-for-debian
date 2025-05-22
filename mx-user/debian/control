@@ -1,10 +1,18 @@
 Source: mx-user
-Section: system
+Section: admin
 Priority: optional
-Maintainer: adrian <adrian@mxlinux.org>
-Build-Depends: debhelper (>=10), qtbase5-dev, qttools5-dev-tools, libzxcvbn-dev
+Maintainer: Adrian <adrian@mxlinux.org>
+Build-Depends: debhelper-compat (= 13),
+               qt6-base-dev,
+               qt6-base-dev-tools,
+               qt6-tools-dev,
+               qt6-tools-dev-tools,
+               libzxcvbn-dev
 Standards-Version: 3.9.8
+Rules-Requires-Root: no
 Homepage: https://github.com/mx-linux/mx-user
+Vcs-Git: https://github.com/mx-linux/mx-user.git
+Vcs-Browser: https://github.com/mx-linux/mx-user
 
 Package: mx-user
 Architecture: any
@@ -14,5 +22,8 @@ Depends: adduser,
          rsync,
          ${misc:Depends},
          ${shlibs:Depends}
-Description: MX User manager
- The MX User Manager allows for easy administration of user accounts.
+Description: MX User Manager
+ A graphical tool for managing user accounts on MX Linux.
+ Features include creating, modifying, and deleting users and groups,
+ password management, and profile copying. Designed for ease of use
+ and integration with the MX Linux desktop environment.

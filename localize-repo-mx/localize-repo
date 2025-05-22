@@ -380,7 +380,7 @@ main() {
     done
 
     for file in $(find $SDIR -maxdepth 1 -name "*.sources"); do
-    	test1=$(sed -E "/^URIs: .*\/(mx|antix)/ s|^(URIs: )(https?://[^/]+)(/[^ ]+/)|\1$SOURCEHOST\3|" $file)
+    	test1=$(sed -E "s#^(URIs?: ).*/(mx|antix)/#\1${SOURCEHOST}/#" $file)
         test2=$(sed -E "s|(URIs:[[:space:]]+http://ftp\.)[a-z]{2}(\.debian\.org/debian/)|\1$deb_code\2|" $file)
         testfile=$(< $file)
 
@@ -398,7 +398,7 @@ main() {
         
         	[ -z "$VERBOSE" ] && qsay  "File:  $(basename $file)"
         	sed -i -E "s|(URIs:[[:space:]]+http://ftp\.)[a-z]{2}(\.debian\.org/debian/)|\1$deb_code\2|" $file
-        	sed -i -E "/^URIs: .*\/(mx|antix)/ s|^(URIs: )(https?://[^/]+)(/[^ ]+/)|\1$SOURCEHOST\3|" $file
+        	sed -i -E "s#^(URIs?: ).*/(mx|antix)/#\1${SOURCEHOST}/#" $file
         fi
     done
 }

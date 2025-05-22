@@ -1,3 +1,13 @@
+mx-repo-list (25.5) mx; urgency=medium
+
+  * Update Karlsruhe Germany
+  * Update Lenexa, VA
+  * Update UA mirror
+  * Remove: bg and pl repos that are not working
+  * Remove .ar out of date repo
+
+ -- Adrian <adrian@mxlinux.org>  Sun, 04 May 2025 23:21:11 -0400
+
 mx-repo-list (24.6) mx; urgency=medium
 
   * New repo: Bulgaria
