@@ -1,0 +1,31 @@
+Author: Ilya Kotov <iokotov@astralinux.ru>
+Date: Sun, 11 May 2025
+Subject: Fix placeholder text color
+
+--- a/src/qt6gtk2-style/qgtkstyle.cpp
++++ b/src/qt6gtk2-style/qgtkstyle.cpp
+@@ -327,7 +327,7 @@
+         GtkWidget *gtkButton = d->gtkWidget("GtkButton");
+         GtkWidget *gtkEntry = d->getTextColorWidget();
+         GdkColor gdkBg, gdkBase, gdkText, gdkForeground, gdkSbg, gdkSfg, gdkaSbg, gdkaSfg;
+-        QColor bg, base, text, fg, highlight, highlightText, inactiveHighlight, inactiveHighlightedTExt;
++        QColor bg, base, text, plText, fg, highlight, highlightText, inactiveHighlight, inactiveHighlightedTExt;
+         gdkBg = style->bg[GTK_STATE_NORMAL];
+         gdkForeground = gtk_widget_get_style(gtkButton)->fg[GTK_STATE_NORMAL];
+ 
+@@ -345,6 +345,7 @@
+ 
+         bg = QColor(gdkBg.red>>8, gdkBg.green>>8, gdkBg.blue>>8);
+         text = QColor(gdkText.red>>8, gdkText.green>>8, gdkText.blue>>8);
++        plText = QColor(gdkText.red>>8, gdkText.green>>8, gdkText.blue>>8, 128);
+         fg = QColor(gdkForeground.red>>8, gdkForeground.green>>8, gdkForeground.blue>>8);
+         base = QColor(gdkBase.red>>8, gdkBase.green>>8, gdkBase.blue>>8);
+         highlight = QColor(gdkSbg.red>>8, gdkSbg.green>>8, gdkSbg.blue>>8);
+@@ -362,6 +363,7 @@
+         palette.setColor(QPalette::WindowText, fg);
+         palette.setColor(QPalette::ButtonText, fg);
+         palette.setColor(QPalette::Base, base);
++        palette.setColor(QPalette::PlaceholderText, plText);
+ 
+         QColor alternateRowColor = palette.base().color().lighter(93); // ref gtkstyle.c draw_flat_box
+         GtkWidget *gtkTreeView = d->gtkWidget("GtkTreeView");

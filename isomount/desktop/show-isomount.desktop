@@ -1,8 +1,0 @@
-[Desktop Entry]
-Name=show-isomount
-Comment=Show isomount mountpoints
-Icon=preferences-desktop
-Exec=/usr/local/bin/show-isomount
-Type=Application
-Categories=System;
-NoDisplay=True

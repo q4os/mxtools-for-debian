@@ -74,6 +74,7 @@ rm -f /etc/apt/trusted.gpg.d/librewolf.gpg
 apt-get update
 apt-get install extrepo -y
 extrepo enable librewolf
+env LC_CTYPE=C.UTF-8 sed -i '/^URIs/I{/URIs/b;s/^uris/URIs/I} ' /etc/apt/sources.list.d/*.sources
 apt-get update
 
 </preinstall>

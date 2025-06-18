@@ -212,7 +212,7 @@ void MainWindow::handleSpecialFilesystems()
 
 void MainWindow::unmountAndClean(const QStringList &mountList)
 {
-    for (const auto &mountPoint : qAsConst(mountList)) {
+    for (const auto &mountPoint : std::as_const(mountList)) {
         // Skip if mount point is already mounted at /boot/efi
         if (QProcess::execute("findmnt", {"-n", mountPoint, "/boot/efi"}) != 0) {
             // Extract partition name from mount point path
@@ -569,7 +569,7 @@ void MainWindow::enableGrubLine(const QString &item)
     QStringList new_list;
     bool isItemFound = false;
 
-    for (const QString &line : qAsConst(defaultGrub)) {
+    for (const QString &line : std::as_const(defaultGrub)) {
         if (line == item || line.startsWith("#" + item)) {
             isItemFound = true;
             new_list << item; // Add the item as enabled
@@ -592,7 +592,7 @@ void MainWindow::disableGrubLine(const QString &item)
 {
     QStringList new_list;
     new_list.reserve(defaultGrub.size());
-    for (const QString &line : qAsConst(defaultGrub)) {
+    for (const QString &line : std::as_const(defaultGrub)) {
         new_list << (line.startsWith(item) ? "#" + line : line);
     }
     defaultGrub = new_list;
@@ -604,7 +604,7 @@ bool MainWindow::replaceGrubArg(const QString &key, const QString &item)
     QStringList new_list;
     bool replaced = false;
 
-    for (const QString &line : qAsConst(defaultGrub)) {
+    for (const QString &line : std::as_const(defaultGrub)) {
         if (line.startsWith(key + "=")) {
             new_list << key + "=" + item; // Replace the entire line with the new argument
             replaced = true;
@@ -619,7 +619,12 @@ bool MainWindow::replaceGrubArg(const QString &key, const QString &item)
 
 void MainWindow::replaceLiveGrubArgs(const QString &args)
 {
-    if (!cmd.procAsRoot("/usr/local/bin/live-grubsave", {"-r"})) {
+    QString liveGrubsavePath = "/usr/local/bin/live-grubsave";
+    if (!QFile::exists(liveGrubsavePath)) {
+        liveGrubsavePath = "/usr/bin/live-grubsave";
+    }
+
+    if (!cmd.procAsRoot(liveGrubsavePath, {"-r"})) {
         qWarning() << "Failed to reset live-grub settings";
         return;
     }
@@ -629,7 +634,7 @@ void MainWindow::replaceLiveGrubArgs(const QString &args)
     filteredArgs = filteredArgs.trimmed();
 
     if (!filteredArgs.isEmpty()) {
-        if (!cmd.procAsRoot("/usr/local/bin/live-grubsave", {filteredArgs})) {
+        if (!cmd.procAsRoot(liveGrubsavePath, {filteredArgs})) {
             qWarning() << "Failed to save new live-grub arguments:" << filteredArgs;
         }
     }
@@ -690,7 +695,7 @@ void MainWindow::replaceSyslinuxArgs(const QString &args)
         }
 
         QTextStream stream(&tempFile);
-        stream.setCodec("UTF-8");
+        stream.setEncoding(QStringConverter::Utf8);
         stream << new_list.join('\n') << '\n';
         tempFile.flush();
         tempFile.close();

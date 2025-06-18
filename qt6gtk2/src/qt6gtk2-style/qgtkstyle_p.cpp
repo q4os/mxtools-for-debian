@@ -1,6 +1,6 @@
 /***************************************************************************
  *   Copyright (C) 2015 The Qt Company Ltd.                                *
- *   Copyright (C) 2016-2024 Ilya Kotov, forkotov02@ya.ru                  *
+ *   Copyright (C) 2016-2025 Ilya Kotov, forkotov02@ya.ru                  *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -286,7 +286,7 @@ void QGtkStylePrivate::initGtkWidgets() const
     if (!gtkWidgetMap()->contains("GtkButton")) {
         GtkWidget *gtkButton = gtk_button_new();
         addWidget(gtkButton);
-        g_signal_connect(gtkButton, "style-set", G_CALLBACK(gtkStyleSetCallback), 0);
+        g_signal_connect(gtkButton, "style-set", G_CALLBACK(gtkStyleSetCallback), nullptr);
         addWidget((GtkWidget*)gtk_tool_button_new(nullptr, "Qt"));
         addWidget(gtk_arrow_new(GTK_ARROW_DOWN, GTK_SHADOW_NONE));
         addWidget(gtk_hbutton_box_new());

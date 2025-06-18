@@ -30,7 +30,7 @@ Liquorix 64 bit (ahs updates package)
 <he_IL>םייטמוטוא םינוכדע רובע ahs לש הלעפה תשרוד ,Liquorix ahs ינוכדע תליבח</he_IL>
 <hi>लिकॉरिक्स एएचएस अपडेट पैकेज, स्वचालित अपडेट के लिए एएचएस को सक्षम करना आवश्यक है</hi>
 <hr>Liquorix ahs paket ažuriranja, zahtijeva da ahs bude omogućen za automatska ažuriranja</hr>
-<hu>A Liquorix ahs frissítőcsomagja, az automatikus frissítésekhez engedélyezni kell az ah-t</hu>
+<hu>A Liquorix ahs frissítőcsomagja, az automatikus frissítésekhez engedélyezni kell az ahs-t</hu>
 <id>Paket pembaruan Liquorix ahs, mengharuskan ahs diaktifkan untuk pembaruan otomatis</id>
 <is>Liquorix ahs uppfærslupakki, krefst þess að ahs sé virkt fyrir sjálfvirkar uppfærslur</is>
 <it>Pacchetto aggiornamenti Liquorix ahs, richiede che ahs sia abilitato per gli aggiornamenti automatici</it>

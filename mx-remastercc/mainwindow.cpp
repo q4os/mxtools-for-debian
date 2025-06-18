@@ -34,8 +34,6 @@ MainWindow::MainWindow(QWidget *parent)
     : QDialog(parent),
       ui(new Ui::MainWindow)
 {
-    qDebug().noquote() << QCoreApplication::applicationName() << "version:" << VERSION;
-
     ui->setupUi(this);
     setConnections();
     setWindowFlags(Qt::Window); // For the close, min and max buttons
@@ -146,27 +144,35 @@ void MainWindow::pushHelp_clicked()
 void MainWindow::pushSetupPersistence_clicked()
 {
     hide();
-    QProcess::execute("pkexec", {"/usr/local/bin/persist-makefs"});
+    QString cmd = QFile::exists("/usr/local/bin/persist-makefs") ?
+                 "/usr/local/bin/persist-makefs" : "/usr/bin/persist-makefs";
+    QProcess::execute("pkexec", {cmd});
     show();
 }
 
 void MainWindow::pushConfigPersistence_clicked()
 {
     hide();
-    QProcess::execute("pkexec", {"/usr/local/bin/persist-config"});
+    QString cmd = QFile::exists("/usr/local/bin/persist-config") ?
+                 "/usr/local/bin/persist-config" : "/usr/bin/persist-config";
+    QProcess::execute("pkexec", {cmd});
     show();
 }
 
 void MainWindow::pushSaveRootPersist_clicked()
 {
     hide();
-    QProcess::execute("pkexec", {"/usr/local/bin/persist-save"});
+    QString cmd = QFile::exists("/usr/local/bin/persist-save") ?
+                 "/usr/local/bin/persist-save" : "/usr/bin/persist-save";
+    QProcess::execute("pkexec", {cmd});
     show();
 }
 
 void MainWindow::pushRemaster_clicked()
 {
     hide();
-    QProcess::execute("pkexec", {"/usr/local/bin/live-remaster"});
+    QString cmd = QFile::exists("/usr/local/bin/live-remaster") ?
+                 "/usr/local/bin/live-remaster" : "/usr/bin/live-remaster";
+    QProcess::execute("pkexec", {cmd});
     show();
 }

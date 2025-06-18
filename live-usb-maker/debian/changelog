@@ -1,3 +1,15 @@
+live-usb-maker (0.4.15) mx; urgency=medium
+
+  * fix syntax in lib check
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 07 Jun 2025 09:08:49 -0400
+
+live-usb-maker (0.4.14) mx; urgency=medium
+
+  * move away from usr/local
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 05 Jun 2025 16:21:02 -0400
+
 live-usb-maker (0.4.13) mx; urgency=medium
 
   * default to luks2, add force=luks1 parameter

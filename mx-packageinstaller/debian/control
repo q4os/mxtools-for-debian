@@ -2,9 +2,14 @@ Source: mx-packageinstaller
 Section: admin
 Priority: optional
 Maintainer: Adrian <adrian@mxlinux.org>
-Build-Depends: debhelper (>=10), qtbase5-dev, qttools5-dev-tools
+Build-Depends: debhelper-compat (= 13),
+               qt6-base-dev,
+               qt6-base-dev-tools,
+               qt6-tools-dev,
+               qt6-tools-dev-tools
 Standards-Version: 3.9.8
-Vcs-Git: git://github.com/AdrianTM/mx-packageinstaller
+Vcs-Git: git://github.com/MX-Linux/mx-packageinstaller
+Homepage: https://github.com/MX-Linux/mx-packageinstaller
 
 Package: mx-packageinstaller
 Architecture: any
@@ -25,9 +30,11 @@ Replaces: mx-debian-backports-installer,
           mx-test-repo-installer
 Provides: mx-debian-backports-installer, mx-test-repo-installer
 Conflicts: mx-debian-backports-installer, mx-test-repo-installer
-Description: Package Installer
- Package Installer is a tool used for managing packages on MX Linux
- - installs popular programs from different sources
- - installs programs from the MX Test repo
- - installs programs from Debian Backports repo
- - installs flatpaks
+Description: Package installation tool
+ Package Installer is a graphical utility that allows users to easily
+ install and manage software packages. It provides a user-friendly
+ interface for:
+  * Installing popular applications from various repositories
+  * Installing software from Debian Backports
+  * Installing and managing Flatpak applications
+  * Simplifying package management without requiring command line knowledge

@@ -1,3 +1,15 @@
+mx-boot-options (25.6) mx; urgency=medium
+
+  * Prepare to move stuff out of /usr/local/ read script from alternative location
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 06 Jun 2025 20:50:54 -0400
+
+mx-boot-options (25.4.04) mx; urgency=medium
+
+  * Update to Qt6
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 23 Apr 2025 21:53:42 -0400
+
 mx-boot-options (25.4.02) mx; urgency=medium
 
   * Manage UEFI Boot Options starts a new uefi-manager app (new dependency)

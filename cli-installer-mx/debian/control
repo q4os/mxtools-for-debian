@@ -2,14 +2,29 @@ Source: cli-installer-mx
 Section: system
 Priority: optional
 Maintainer: dolphinoracle <dolphinoracle@gmail.com>
-Build-Depends: debhelper (>= 9.20120115)
+Build-Depends: debhelper-compat (= 13)
 Standards-Version: 3.9.8
-Homepage: https://gitlab.com/antiX-Linux/cli-installer-antix
+Homepage: https://gitlab.com/MX-Linux/cli-installer-mx
+Vcs-Git: https://gitlab.com/MX-Linux/cli-installer-mx.git
+Vcs-Browser: https://gitlab.com/MX-Linux/cli-installer-mx
 
 Package: cli-installer-mx
-Architecture: all 
-Replaces: cli-installer-core-antix, cli-installer-base-antix, cli-installer-full-antix, cli-installer-antix
-Depends: bash, rsync, partition-info
-Description: Script to install mx to hard drive via cli.
+Architecture: all
+Replaces: cli-installer-core-antix,
+	cli-installer-base-antix,
+	cli-installer-full-antix,
+	cli-installer-antix
+Depends: ${misc:Depends},
+	bash (>= 4.0),
+	rsync,
+	partition-info,
+	util-linux,
+	coreutils,
+	grep
+Recommends: gparted
+Description: Command-line installer for MX Linux
+ A script-based utility to install MX Linux to hard drive via
+ the command line interface. Provides a text-based alternative
+ to the graphical installer.
 
 

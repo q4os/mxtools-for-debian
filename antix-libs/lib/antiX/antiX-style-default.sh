@@ -24,7 +24,7 @@ fi
 #--image=gtk-dialog-question
 #--image=gtk-dialog-info
 
-yad_version=$(yad --version |cut  -d"." -f1)
+yad_version=$(yad --version 2>/dev/null |  sed "s/[^0-9].*//")
 #echo "yad_version is " $yad_version
 
 BUTTON_OK="gtk-ok"

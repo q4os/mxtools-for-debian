@@ -1,6 +1,6 @@
 /***************************************************************************
  *   Copyright (C) 2015 The Qt Company Ltd.                                *
- *   Copyright (C) 2016-2024 Ilya Kotov, forkotov02@ya.ru                  *
+ *   Copyright (C) 2016-2025 Ilya Kotov, forkotov02@ya.ru                  *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -42,7 +42,7 @@ QStyle *Qt6Gtk2StylePlugin::create(const QString &key)
         return nullptr;
     }
 
-    if (key == "gtk2" || key == "qt6gtk2" || key == "qt5gtk2")
+    if (key == QLatin1String("gtk2") || key == QLatin1String("qt6gtk2") || key == QLatin1String("qt5gtk2"))
         return new QGtkStyle;
     return nullptr;
 }

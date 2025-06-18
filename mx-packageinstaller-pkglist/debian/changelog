@@ -1,3 +1,53 @@
+mx-packageinstaller-pkglist (25.06.06mx23) mx; urgency=medium
+
+  * further URIs capitalization fix for extrepo
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 15 Jun 2025 18:40:09 -0400
+
+mx-packageinstaller-pkglist (25.06.05mx23) mx; urgency=medium
+
+  * fix URIs capitalization for extrepo sources entry
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 15 Jun 2025 11:43:23 -0400
+
+mx-packageinstaller-pkglist (25.06.04mx23) mx; urgency=medium
+
+  * update debian 6.12 kernel
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 13 Jun 2025 21:13:56 -0400
+
+mx-packageinstaller-pkglist (25.06.03mx23) mx; urgency=medium
+
+  * add arch qualifier to vscodium
+  * update liquorix 6.14.10-2 kernel
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Tue, 10 Jun 2025 20:57:50 -0400
+
+mx-packageinstaller-pkglist (25.06.02mx23) mx; urgency=medium
+
+  * update liquorix 6.14.10
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 06 Jun 2025 21:45:11 -0400
+
+mx-packageinstaller-pkglist (25.06.01mx23) mx; urgency=medium
+
+  * update liquorix 6.14.9 kernel
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 06 Jun 2025 20:16:11 -0400
+
+mx-packageinstaller-pkglist (25.05.05mx23) mx; urgency=medium
+
+  * add slimjet 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 28 May 2025 21:03:17 -0400
+
+mx-packageinstaller-pkglist (25.05.04mx25) mx; urgency=medium
+
+  * liquorix 6.14.8
+  * debian 6.12.29
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Tue, 27 May 2025 20:05:54 -0400
+
 mx-packageinstaller-pkglist (25.05.03mx25) mx; urgency=medium
 
   * liquorix 6.14.6

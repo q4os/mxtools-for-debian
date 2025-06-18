@@ -1,1 +1,2 @@
-ln -fs /etc/iso-snapshot-cli-exclude.list /usr/local/share/excludes/iso-snapshot-cli-exclude.list
+mkdir -p /usr/share/excludes
+ln -fs /etc/iso-snapshot-cli-exclude.list /usr/share/excludes/iso-snapshot-cli-exclude.list

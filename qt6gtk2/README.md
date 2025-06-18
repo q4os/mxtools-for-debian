@@ -1,11 +1,11 @@
 Qt6Gtk2 - GTK+2.0 integration plugins for Qt6
 
-Official home page: https://github.com/trialuser02/qt6gtk2
+Official home page: https://www.opencode.net/trialuser/qt6gtk2
 
 Requirements:
 
 - GNU Linux or FreeBSD
-- qtbase >= 6.0.0 (with private headers)
+- qtbase >= 6.2.0 (with private headers)
 - GTK+ 2.0
 - libX11
 
@@ -16,7 +16,7 @@ Installation:
 
 - Source Code
 ```
-  qmake PREFIX=<your installation path>
+  qmake6 PREFIX=<your installation path>
   make
   sudo make install
 ```

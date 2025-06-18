@@ -1,6 +1,6 @@
 /***************************************************************************
  *   Copyright (C) 2015 The Qt Company Ltd.                                *
- *   Copyright (C) 2016-2024 Ilya Kotov, forkotov02@ya.ru                  *
+ *   Copyright (C) 2016-2025 Ilya Kotov, forkotov02@ya.ru                  *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -86,8 +86,7 @@ QVariant Qt6Gtk2Theme::themeHint(QPlatformTheme::ThemeHint hint) const
         return gtkSetting("gtk-fallback-icon-theme");
     case QPlatformTheme::StyleNames:
     {
-        QStringList styleNames;
-        styleNames << "qt6gtk2";
+        QStringList styleNames = { QStringLiteral("qt6gtk2") };
         //styleNames << QGnomeTheme::themeHint(hint).toStringList();
         return styleNames;
     }

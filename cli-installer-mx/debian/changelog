@@ -1,3 +1,9 @@
+cli-installer-mx (25.6.01) mx; urgency=medium
+
+  * move executable location
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 05 Jun 2025 16:05:19 -0400
+
 cli-installer-mx (25.4.01) mx; urgency=medium
 
   * Prompt for custom EFI boot name

@@ -1,6 +1,6 @@
 /***************************************************************************
  *   Copyright (C) 2015 The Qt Company Ltd.                                *
- *   Copyright (C) 2016-2024 Ilya Kotov, forkotov02@ya.ru                  *
+ *   Copyright (C) 2016-2025 Ilya Kotov, forkotov02@ya.ru                  *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -219,7 +219,12 @@ void drawDial(const QStyleOptionSlider *option, QPainter *painter)
     }
 
     // Cache dial background
+
+#if (QT_VERSION >= QT_VERSION_CHECK(6, 9, 0))
+    QCachedPainter p(painter, QLatin1StringView("qdial"), option);
+#else
     BEGIN_STYLE_PIXMAPCACHE(QString::fromLatin1("qdial"));
+#endif
     p->setRenderHint(QPainter::Antialiasing);
 
     const qreal d_ = r / 6;
@@ -279,7 +284,11 @@ void drawDial(const QStyleOptionSlider *option, QPainter *painter)
         p->drawEllipse(br.adjusted(-1, -1, 1, 1));
     }
 
+#if (QT_VERSION >= QT_VERSION_CHECK(6, 9, 0))
+    p.finish();
+#else
     END_STYLE_PIXMAPCACHE
+#endif
 
     QPointF dp = calcRadialPos(option, qreal(0.70));
     buttonColor = buttonColor.lighter(104);

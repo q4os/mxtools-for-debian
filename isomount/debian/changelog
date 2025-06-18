@@ -1,3 +1,9 @@
+isomount (0.1.5mx+2) mx; urgency=medium
+
+  * move to usr/bin rather than usr/local/bin
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 04 Jun 2025 22:48:31 -0400
+
 isomount (0.1.5mx19+1) mx; urgency=medium
 
   * replace gksu with su-to-root -X -c

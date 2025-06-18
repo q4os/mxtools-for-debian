@@ -70,8 +70,8 @@
     </message>
     <message>
         <location filename="../mainwindow.ui" line="253"/>
-        <location filename="../mainwindow.cpp" line="507"/>
-        <location filename="../mainwindow.cpp" line="530"/>
+        <location filename="../mainwindow.cpp" line="616"/>
+        <location filename="../mainwindow.cpp" line="639"/>
         <source>Select ISO</source>
         <translation>Përzgjidhni ISO</translation>
     </message>
@@ -163,7 +163,7 @@
     <message>
         <location filename="../mainwindow.ui" line="506"/>
         <source>Data partition format type</source>
-        <translation type="unfinished"></translation>
+        <translation>Lloj formati pjese për të dhëna</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="460"/>
@@ -192,7 +192,7 @@
     </message>
     <message>
         <location filename="../mainwindow.ui" line="529"/>
-        <location filename="../mainwindow.cpp" line="476"/>
+        <location filename="../mainwindow.cpp" line="585"/>
         <source>Show advanced options</source>
         <translation>Shfaq mundësi të mëtejshme</translation>
     </message>
@@ -272,29 +272,60 @@
         <translation>Klononi sistemin “live” që po xhiron</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="77"/>
         <source>Confirmation</source>
-        <translation>Ripohim</translation>
+        <translation type="vanished">Ripohim</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="78"/>
         <source>Target device %1 is larger than %2 GB. Do you wish to proceed?</source>
-        <translation>Pajisja %1 e synuar është më e madhe se %2 GB. Doni të vazhdohet?</translation>
+        <translation type="vanished">Pajisja %1 e synuar është më e madhe se %2 GB. Doni të vazhdohet?</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="330"/>
-        <location filename="../mainwindow.cpp" line="461"/>
-        <location filename="../mainwindow.cpp" line="629"/>
+        <location filename="../mainwindow.cpp" line="439"/>
+        <location filename="../mainwindow.cpp" line="570"/>
+        <location filename="../mainwindow.cpp" line="738"/>
         <source>Failure</source>
         <translation>Dështim</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="113"/>
+        <location filename="../mainwindow.cpp" line="222"/>
         <source>Source and destination are on the same device, please select again.</source>
         <translation>Burimi dhe vendmbërritja gjenden në të njëjtën pajisje, ju lutemi, ripërzgjidhni.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="139"/>
+        <location filename="../mainwindow.cpp" line="125"/>
+        <source>Source Error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="126"/>
+        <source>Could not find the source linuxfs file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="142"/>
+        <source>Warning: The target device (%1) is smaller than the source (%2). The data might not fit. Do you want to continue?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="145"/>
+        <source>Size Warning</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="151"/>
+        <source>The target device %1 is larger than %2 GB.
+
+This may indicate you have selected the wrong device.
+Are you sure you want to proceed?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="158"/>
+        <source>Large Target Device Warning</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="248"/>
         <source>Writing %1 using &apos;dd&apos; command to /dev/%2,
 
 Please wait until the process is completed</source>
@@ -303,37 +334,37 @@ Please wait until the process is completed</source>
 Ju lutemi, prisni deri sa procesi të jetë plotësuar</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="151"/>
+        <location filename="../mainwindow.cpp" line="260"/>
         <source>MX Live Usb Maker</source>
         <translation>MX Live Usb Maker</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="327"/>
+        <location filename="../mainwindow.cpp" line="436"/>
         <source>Success</source>
         <translation>Sukses</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="327"/>
+        <location filename="../mainwindow.cpp" line="436"/>
         <source>LiveUSB creation successful!</source>
         <translation>Krijim i suksesshëm LiveUSB-je!</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="330"/>
+        <location filename="../mainwindow.cpp" line="439"/>
         <source>Error encountered in the LiveUSB creation process</source>
         <translation>U has një gabim gjatë procesit të krijimit të LiveUSB-së</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="388"/>
+        <location filename="../mainwindow.cpp" line="497"/>
         <source>Error</source>
         <translation>Gabim</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="388"/>
+        <location filename="../mainwindow.cpp" line="497"/>
         <source>Please select a USB device to write to</source>
         <translation>Ju lutemi, përzgjidhni një pajisje USB ku të shkruhet</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="391"/>
+        <location filename="../mainwindow.cpp" line="500"/>
         <source>These actions will destroy all data on 
 
 </source>
@@ -342,85 +373,85 @@ Ju lutemi, prisni deri sa procesi të jetë plotësuar</translation>
 </translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="392"/>
+        <location filename="../mainwindow.cpp" line="501"/>
         <source>Do you wish to continue?</source>
         <translation>Doni të vazhdohet?</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="424"/>
+        <location filename="../mainwindow.cpp" line="533"/>
         <source>About %1</source>
         <translation>Mbi %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="425"/>
+        <location filename="../mainwindow.cpp" line="534"/>
         <source>Version: </source>
         <translation>Version: </translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="427"/>
+        <location filename="../mainwindow.cpp" line="536"/>
         <source>Program for creating a live-usb from an iso-file, another live-usb, a live-cd/dvd, or a running live system.</source>
         <translation>Program për krjimin e një “live-usb” prej një kartele ISO, një tjetri “live-usb”, pre një live-cd/dvd, ose një sistem “live” që është duke xhiruar.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="430"/>
+        <location filename="../mainwindow.cpp" line="539"/>
         <source>Copyright (c) MX Linux</source>
         <translation>Të drejta kopjimi (c) MX Linux</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="431"/>
+        <location filename="../mainwindow.cpp" line="540"/>
         <source>%1 License</source>
         <translation>Licencë %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="438"/>
+        <location filename="../mainwindow.cpp" line="547"/>
         <source>%1 Help</source>
         <translation>Ndihmë për %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="446"/>
+        <location filename="../mainwindow.cpp" line="555"/>
         <source>Select an ISO file to write to the USB drive</source>
         <translation>Përzgjidhni një kartelë ISO për ta shkruar te pajisja USB</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="447"/>
+        <location filename="../mainwindow.cpp" line="556"/>
         <source>ISO Files (*.iso);;All Files (*.*)</source>
         <translation>Kartela ISO (*.iso);;Krejt Kartelat (*.*)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="452"/>
-        <location filename="../mainwindow.cpp" line="502"/>
+        <location filename="../mainwindow.cpp" line="561"/>
+        <location filename="../mainwindow.cpp" line="611"/>
         <source>Select Source Directory</source>
         <translation>Përzgjidhni Drejtori Burim</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="461"/>
+        <location filename="../mainwindow.cpp" line="570"/>
         <source>Could not find linuxfs file</source>
-        <translation type="unfinished"></translation>
+        <translation>S’u gjet dot kartelë linuxfs</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="476"/>
+        <location filename="../mainwindow.cpp" line="585"/>
         <source>Hide advanced options</source>
         <translation>Fshihi mundësitë e mëtejshme</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="501"/>
-        <location filename="../mainwindow.cpp" line="520"/>
+        <location filename="../mainwindow.cpp" line="610"/>
+        <location filename="../mainwindow.cpp" line="629"/>
         <source>Select Source</source>
         <translation>Përzgjidhni Burim</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="506"/>
-        <location filename="../mainwindow.cpp" line="528"/>
+        <location filename="../mainwindow.cpp" line="615"/>
+        <location filename="../mainwindow.cpp" line="637"/>
         <source>Select ISO file</source>
         <translation>Përzgjidhni kartelë ISO</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="522"/>
+        <location filename="../mainwindow.cpp" line="631"/>
         <source>clone</source>
         <translation>klonoje</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="589"/>
+        <location filename="../mainwindow.cpp" line="698"/>
         <source>Could not find a log file at: </source>
         <translation>S’u gjet dot një kartelë regjistër te: </translation>
     </message>

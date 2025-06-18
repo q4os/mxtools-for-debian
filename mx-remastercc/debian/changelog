@@ -1,3 +1,22 @@
+mx-remastercc (25.6.01) mx; urgency=medium
+
+  * fix policy file so that /usr/local and /usr versions of persist scripts can access gui
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 08 Jun 2025 20:41:46 -0400
+
+mx-remastercc (25.6) mx; urgency=medium
+
+  * Prepare to move stuff out of /usr/local/ read script from alternative location
+  * Update translations
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 06 Jun 2025 20:30:19 -0400
+
+mx-remastercc (24.4.01) mx; urgency=medium
+
+  * Update to Qt6 
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 24 Apr 2025 10:42:35 -0400
+
 mx-remastercc (24.3) mx; urgency=medium
 
   * Update translations

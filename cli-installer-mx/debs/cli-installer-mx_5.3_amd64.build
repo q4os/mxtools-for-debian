@@ -1,0 +1,76 @@
+ dpkg-buildpackage -us -uc -ui
+dpkg-buildpackage: info: source package cli-installer-mx
+dpkg-buildpackage: info: source version 5.3
+dpkg-buildpackage: info: source distribution mx
+dpkg-buildpackage: info: source changed by Dolphin Oracle <dolphinoracle@gmail.com>
+ dpkg-source --before-build .
+dpkg-buildpackage: info: host architecture amd64
+ fakeroot debian/rules clean
+dh clean
+dh: warning: Compatibility levels before 10 are deprecated (level 9 in use)
+   dh_clean
+dh_clean: warning: Compatibility levels before 10 are deprecated (level 9 in use)
+ dpkg-source -b .
+dpkg-source: info: using source format '3.0 (native)'
+dpkg-source: info: building cli-installer-mx in cli-installer-mx_5.3.tar.xz
+dpkg-source: info: building cli-installer-mx in cli-installer-mx_5.3.dsc
+ debian/rules build
+dh build
+dh: warning: Compatibility levels before 10 are deprecated (level 9 in use)
+   dh_update_autotools_config
+ fakeroot debian/rules binary
+dh binary
+dh: warning: Compatibility levels before 10 are deprecated (level 9 in use)
+   dh_testroot
+   dh_prep
+   dh_auto_install --destdir=debian/cli-installer-mx/
+dh_auto_install: warning: Compatibility levels before 10 are deprecated (level 9 in use)
+   dh_install
+dh_install: warning: Compatibility levels before 10 are deprecated (level 9 in use)
+   dh_installdocs
+dh_installdocs: warning: Compatibility levels before 10 are deprecated (level 9 in use)
+   dh_installchangelogs
+   dh_perl
+   dh_link
+   dh_strip_nondeterminism
+	Normalized debian/cli-installer-mx/usr/share/locale/ca/LC_MESSAGES/cli-installer.mo
+	Normalized debian/cli-installer-mx/usr/share/locale/hr/LC_MESSAGES/cli-installer.mo
+	Normalized debian/cli-installer-mx/usr/share/locale/pl/LC_MESSAGES/cli-installer.mo
+	Normalized debian/cli-installer-mx/usr/share/locale/pt_BR/LC_MESSAGES/cli-installer.mo
+	Normalized debian/cli-installer-mx/usr/share/locale/de/LC_MESSAGES/cli-installer.mo
+	Normalized debian/cli-installer-mx/usr/share/locale/sv/LC_MESSAGES/cli-installer.mo
+	Normalized debian/cli-installer-mx/usr/share/locale/sl/LC_MESSAGES/cli-installer.mo
+	Normalized debian/cli-installer-mx/usr/share/locale/da/LC_MESSAGES/cli-installer.mo
+	Normalized debian/cli-installer-mx/usr/share/locale/ja/LC_MESSAGES/cli-installer.mo
+	Normalized debian/cli-installer-mx/usr/share/locale/cs/LC_MESSAGES/cli-installer.mo
+	Normalized debian/cli-installer-mx/usr/share/locale/fil_PH/LC_MESSAGES/cli-installer.mo
+	Normalized debian/cli-installer-mx/usr/share/locale/it/LC_MESSAGES/cli-installer.mo
+	Normalized debian/cli-installer-mx/usr/share/locale/nb/LC_MESSAGES/cli-installer.mo
+	Normalized debian/cli-installer-mx/usr/share/locale/es/LC_MESSAGES/cli-installer.mo
+	Normalized debian/cli-installer-mx/usr/share/locale/ru/LC_MESSAGES/cli-installer.mo
+	Normalized debian/cli-installer-mx/usr/share/locale/sk/LC_MESSAGES/cli-installer.mo
+	Normalized debian/cli-installer-mx/usr/share/locale/tr/LC_MESSAGES/cli-installer.mo
+	Normalized debian/cli-installer-mx/usr/share/locale/pt/LC_MESSAGES/cli-installer.mo
+	Normalized debian/cli-installer-mx/usr/share/locale/fi/LC_MESSAGES/cli-installer.mo
+	Normalized debian/cli-installer-mx/usr/share/locale/ro/LC_MESSAGES/cli-installer.mo
+	Normalized debian/cli-installer-mx/usr/share/locale/fr/LC_MESSAGES/cli-installer.mo
+	Normalized debian/cli-installer-mx/usr/share/locale/el/LC_MESSAGES/cli-installer.mo
+	Normalized debian/cli-installer-mx/usr/share/locale/gl_ES/LC_MESSAGES/cli-installer.mo
+	Normalized debian/cli-installer-mx/usr/share/locale/nl/LC_MESSAGES/cli-installer.mo
+	Normalized debian/cli-installer-mx/usr/share/locale/am/LC_MESSAGES/cli-installer.mo
+   dh_compress
+dh_compress: warning: Compatibility levels before 10 are deprecated (level 9 in use)
+   dh_fixperms
+   dh_missing
+dh_missing: warning: Compatibility levels before 10 are deprecated (level 9 in use)
+   dh_installdeb
+dh_installdeb: warning: Compatibility levels before 10 are deprecated (level 9 in use)
+   dh_gencontrol
+   dh_md5sums
+   dh_builddeb
+dpkg-deb: building package 'cli-installer-mx' in '../cli-installer-mx_5.3_all.deb'.
+ dpkg-genbuildinfo -O../cli-installer-mx_5.3_amd64.buildinfo
+ dpkg-genchanges -O../cli-installer-mx_5.3_amd64.changes
+dpkg-genchanges: info: including full source code in upload
+ dpkg-source --after-build .
+dpkg-buildpackage: info: full upload; Debian-native package (full source is included)

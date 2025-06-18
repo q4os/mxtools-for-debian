@@ -1,6 +1,6 @@
 /***************************************************************************
  *   Copyright (C) 2015 The Qt Company Ltd.                                *
- *   Copyright (C) 2016-2024 Ilya Kotov, forkotov02@ya.ru                  *
+ *   Copyright (C) 2016-2025 Ilya Kotov, forkotov02@ya.ru                  *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -327,7 +327,7 @@ QPalette QGtkStyle::standardPalette() const
         GtkWidget *gtkButton = d->gtkWidget("GtkButton");
         GtkWidget *gtkEntry = d->getTextColorWidget();
         GdkColor gdkBg, gdkBase, gdkText, gdkForeground, gdkSbg, gdkSfg, gdkaSbg, gdkaSfg;
-        QColor bg, base, text, fg, highlight, highlightText, inactiveHighlight, inactiveHighlightedTExt;
+        QColor bg, base, text, plText, fg, highlight, highlightText, inactiveHighlight, inactiveHighlightedTExt;
         gdkBg = style->bg[GTK_STATE_NORMAL];
         gdkForeground = gtk_widget_get_style(gtkButton)->fg[GTK_STATE_NORMAL];
 
@@ -345,6 +345,7 @@ QPalette QGtkStyle::standardPalette() const
 
         bg = QColor(gdkBg.red>>8, gdkBg.green>>8, gdkBg.blue>>8);
         text = QColor(gdkText.red>>8, gdkText.green>>8, gdkText.blue>>8);
+        plText = QColor(gdkText.red>>8, gdkText.green>>8, gdkText.blue>>8, 128);
         fg = QColor(gdkForeground.red>>8, gdkForeground.green>>8, gdkForeground.blue>>8);
         base = QColor(gdkBase.red>>8, gdkBase.green>>8, gdkBase.blue>>8);
         highlight = QColor(gdkSbg.red>>8, gdkSbg.green>>8, gdkSbg.blue>>8);
@@ -362,6 +363,7 @@ QPalette QGtkStyle::standardPalette() const
         palette.setColor(QPalette::WindowText, fg);
         palette.setColor(QPalette::ButtonText, fg);
         palette.setColor(QPalette::Base, base);
+        palette.setColor(QPalette::PlaceholderText, plText);
 
         QColor alternateRowColor = palette.base().color().lighter(93); // ref gtkstyle.c draw_flat_box
         GtkWidget *gtkTreeView = d->gtkWidget("GtkTreeView");
@@ -1806,8 +1808,14 @@ void QGtkStyle::drawComplexControl(ComplexControl control, const QStyleOptionCom
         // and http://live.gnome.org/GnomeArt/Tutorials/GtkThemes/GtkComboBoxEntry
         if (const QStyleOptionComboBox *comboBox = qstyleoption_cast<const QStyleOptionComboBox *>(option)) {
             bool sunken = comboBox->state & State_On; // play dead, if combobox has no items
+
+#if (QT_VERSION >= QT_VERSION_CHECK(6, 9, 0))
+            QCachedPainter p(painter, QStringLiteral("cb-%0-%1").arg(sunken).arg(comboBox->editable), option);
+            gtkPainter->reset(painter);
+#else
             BEGIN_STYLE_PIXMAPCACHE(QString::fromLatin1("cb-%0-%1").arg(sunken).arg(comboBox->editable));
             gtkPainter->reset(p);
+#endif
             gtkPainter->setUsePixmapCache(false); // cached externally
 
             bool isEnabled = (comboBox->state & State_Enabled);
@@ -2004,7 +2012,11 @@ void QGtkStyle::drawComplexControl(ComplexControl control, const QStyleOptionCom
                                            style, arrowPath.toString() + QString::number(option->direction));
                 }
             }
-            END_STYLE_PIXMAPCACHE;
+#if (QT_VERSION >= QT_VERSION_CHECK(6, 9, 0))
+            p.finish();
+#else
+            END_STYLE_PIXMAPCACHE
+#endif
         }
         break;
 #endif // QT_NO_COMBOBOX

@@ -41,7 +41,7 @@ void VersionNumber::setStrings(const QString &value)
     // Parse epoch and upstream_version
     int colonIndex = value.indexOf(':');
     if (colonIndex != -1) {
-        epoch = value.leftRef(colonIndex).toInt();
+        epoch = value.left(colonIndex).toInt();
         upstream_str = value.mid(colonIndex + 1);
     } else {
         epoch = 0;

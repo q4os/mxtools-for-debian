@@ -1,3 +1,29 @@
+mx-cleanup (25.6.03) mx; urgency=medium
+
+  * Fix saving/loading default values
+
+ -- Adrian <adrian@mxlinux.org>  Tue, 10 Jun 2025 16:02:13 -0400
+
+mx-cleanup (25.6.02) mx; urgency=medium
+
+  * Fix: run removal of config files independent of apt cleanup checkbox
+
+ -- Adrian <adrian@mxlinux.org>  Tue, 10 Jun 2025 08:33:41 -0400
+
+mx-cleanup (25.6.01) mx; urgency=medium
+
+  * Add option to remove remaining configuration files from removed packages
+  * Add --delete-data for flatpak removal of unused apps
+  * Disable interface while applying changes to avoid random button clicks
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 09 Jun 2025 18:21:17 -0400
+
+mx-cleanup (25.6) mx; urgency=medium
+
+  * Fix: processing local language when removing manuals
+
+ -- Adrian <adrian@mxlinux.org>  Sun, 08 Jun 2025 22:10:54 -0400
+
 mx-cleanup (25.5.01) mx; urgency=medium
 
   * Add button to remove manuals in other languages

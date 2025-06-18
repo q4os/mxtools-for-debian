@@ -16,7 +16,10 @@
         ME=${0##*/}
     MY_DIR=$(dirname "$(readlink -f $0)")
 MY_LIB_DIR=$(readlink -f "$MY_DIR/../cli-shell-utils")
-   LIB_DIR="/usr/local/lib/cli-shell-utils"
+   LIB_DIR="/usr/lib/cli-shell-utils"
+   if [ -d "/usr/local/lib/cli-shell-utils" ]; then
+       LIB_DIR="/usr/local/lib/cli-shell-utils"
+   fi
 
 export TEXTDOMAIN="cli-shell-utils"
 domain_dir="$MY_DIR/../cli-shell-utils/locale"
@@ -24,7 +27,12 @@ test -d "$domain_dir" && export TEXTDOMAINDIR=$domain_dir
 
 #== BEGIN_CONFIG
          MAX_FILES="20"
+         #boot mount point
            LIVE_MP="/live/boot-dev"
+         if [ -L "/live" ]; then
+         	LIVE_MP="/$(readlink /live)/boot-dev"
+         fi
+         echo "LIVE_MP is" $LIVE_MP
           LIVE_DIR="antiX"
           BOOT_DIR="boot"
 

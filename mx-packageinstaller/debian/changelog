@@ -1,3 +1,17 @@
+mx-packageinstaller (25.6) mx; urgency=medium
+
+  * Don't assume debian version if it cannot be determined, open a
+    dialog and ask user, if canceled, exit the app
+
+ -- Adrian <adrian@mxlinux.org>  Tue, 17 Jun 2025 17:51:48 -0400
+
+mx-packageinstaller (25.5.03) mx; urgency=medium
+
+  * Update to Qt6
+  * Update translations
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 23 Apr 2025 13:16:50 -0400
+
 mx-packageinstaller (25.5.01) mx; urgency=medium
 
   * Fix adding repo as user for flatpak

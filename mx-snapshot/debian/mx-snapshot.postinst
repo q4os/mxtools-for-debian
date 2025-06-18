@@ -1,1 +1,8 @@
-ln -fs /etc/mx-snapshot-exclude.list /usr/local/share/excludes/mx-snapshot-exclude.list
+mkdir -p /usr/share/excludes
+ln -fs /etc/mx-snapshot-exclude.list /usr/share/excludes/mx-snapshot-exclude.list
+
+#cleanup old links
+
+if [ -e /usr/share/local/excludes/mx-snapshot-exclude.list ]; then
+    rm -f /usr/share/local/excludes/mx-snapshot-exclude.list
+fi

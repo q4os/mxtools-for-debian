@@ -249,6 +249,7 @@ private:
     [[nodiscard]] static QString getDebianVerName();
     [[nodiscard]] static bool isFilteredName(const QString &name);
     [[nodiscard]] static uchar getDebianVerNum();
+    [[nodiscard]] static uchar showVersionDialog(const QString &message);
     [[nodiscard]] QList<QTreeWidgetItem *> createTreeItemsList(QMap<QString, PackageInfo> *list) const;
     [[nodiscard]] QMap<QString, PackageInfo> *getCurrentList();
     [[nodiscard]] QTreeWidget *getCurrentTree();

@@ -198,65 +198,15 @@ che si desidera modificare (vengono visualizzate solo le partizioni Linux)</tran
         <translation>in esecuzione</translation>
     </message>
     <message>
-        <source>Set timeout</source>
-        <translation type="vanished">Imposta timeout</translation>
-    </message>
-    <message>
-        <source>Timeout in seconds:</source>
-        <translation type="vanished">Timeout in secondi:</translation>
-    </message>
-    <message>
-        <source>Timeout: %1 seconds</source>
-        <translation type="vanished">Timeout: %1 secondi</translation>
-    </message>
-    <message>
-        <source>Boot Next: %1</source>
-        <translation type="vanished">Avvia il prossimo: %1</translation>
-    </message>
-    <message>
-        <source>Removal confirmation</source>
-        <translation type="vanished">Conferma rimozione</translation>
-    </message>
-    <message>
-        <source>Are you sure you want to delete this boot entry?
-%1</source>
-        <translation type="vanished">Sei sicuro di voler eliminare questa voce di avvio?
-%1</translation>
-    </message>
-    <message>
-        <source>Select EFI file</source>
-        <translation type="vanished">Seleziona file EFI</translation>
-    </message>
-    <message>
-        <source>EFI files (*.efi *.EFI)</source>
-        <translation type="vanished">File EFI (*.efi *.EFI)</translation>
-    </message>
-    <message>
         <location filename="../mainwindow.cpp" line="373"/>
         <location filename="../mainwindow.cpp" line="381"/>
         <location filename="../mainwindow.cpp" line="415"/>
         <location filename="../mainwindow.cpp" line="526"/>
-        <location filename="../mainwindow.cpp" line="1341"/>
-        <location filename="../mainwindow.cpp" line="1354"/>
-        <location filename="../mainwindow.cpp" line="1360"/>
+        <location filename="../mainwindow.cpp" line="1346"/>
+        <location filename="../mainwindow.cpp" line="1359"/>
+        <location filename="../mainwindow.cpp" line="1365"/>
         <source>Error</source>
         <translation>Errore</translation>
-    </message>
-    <message>
-        <source>Could not find the source mountpoint for %1</source>
-        <translation type="vanished">Non riesco a trovare la sorgente del punto di montaggio per %1</translation>
-    </message>
-    <message>
-        <source>Set name</source>
-        <translation type="vanished">Imposta nome</translation>
-    </message>
-    <message>
-        <source>Enter the name for the UEFI menu item:</source>
-        <translation type="vanished">Inserisci il nome per l&apos;elemento del menu UEFI:</translation>
-    </message>
-    <message>
-        <source>Something went wrong, could not add entry.</source>
-        <translation type="vanished">Qualcosa è andato storto, non posso aggiungere la voce.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="362"/>
@@ -272,10 +222,6 @@ che si desidera modificare (vengono visualizzate solo le partizioni Linux)</tran
         <location filename="../mainwindow.cpp" line="381"/>
         <source>Could not install the bootsplash.</source>
         <translation>Non si riesce ad installare il bootsplash.</translation>
-    </message>
-    <message>
-        <source>Boot Current: %1</source>
-        <translation type="vanished">Avvia corrente: %1</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="526"/>
@@ -299,143 +245,115 @@ che si desidera modificare (vengono visualizzate solo le partizioni Linux)</tran
         <translation>Impossibile creare l&apos;ambiente chroot, non è possibile modificare le opzioni di avvio. Chiusura in corso ...</translation>
     </message>
     <message>
-        <source>Something went wrong, could not save boot order.</source>
-        <translation type="vanished">Qualcosa è andato storto, non posso salvare l&apos;ordine di avvio.</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="882"/>
-        <location filename="../mainwindow.cpp" line="1261"/>
+        <location filename="../mainwindow.cpp" line="887"/>
+        <location filename="../mainwindow.cpp" line="1266"/>
         <source>Updating configuration, please wait</source>
         <translation>Aggiornamento della configurazione, attendere...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="953"/>
+        <location filename="../mainwindow.cpp" line="958"/>
         <source>Updating initramfs...</source>
         <translation> Aggiornamento di initramfs... </translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="967"/>
-        <location filename="../mainwindow.cpp" line="1276"/>
+        <location filename="../mainwindow.cpp" line="972"/>
+        <location filename="../mainwindow.cpp" line="1281"/>
         <source>Updating grub...</source>
         <translation>Aggiornamento di grub...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="992"/>
+        <location filename="../mainwindow.cpp" line="997"/>
         <source>About %1</source>
         <translation>Circa %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="993"/>
+        <location filename="../mainwindow.cpp" line="998"/>
         <source>Version: </source>
         <translation>Versione: </translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="995"/>
+        <location filename="../mainwindow.cpp" line="1000"/>
         <source>Program for selecting common start-up choices</source>
         <translation>Programma per selezionare le scelte di avvio</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="997"/>
+        <location filename="../mainwindow.cpp" line="1002"/>
         <source>Copyright (c) MX Linux</source>
         <translation>Copyright (c) MX Linux</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="998"/>
+        <location filename="../mainwindow.cpp" line="1003"/>
         <source>%1 License</source>
         <translation>%1 Licenza</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1019"/>
+        <location filename="../mainwindow.cpp" line="1024"/>
         <source>%1 Help</source>
         <translation>%1 Aiuto</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1029"/>
-        <location filename="../mainwindow.cpp" line="1238"/>
+        <location filename="../mainwindow.cpp" line="1034"/>
+        <location filename="../mainwindow.cpp" line="1243"/>
         <source>Running in a Virtual Machine</source>
         <translation>Esecuzione in una Macchina Virtuale</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1030"/>
-        <location filename="../mainwindow.cpp" line="1239"/>
+        <location filename="../mainwindow.cpp" line="1035"/>
+        <location filename="../mainwindow.cpp" line="1244"/>
         <source>You current system is running in a Virtual Machine,
 Plymouth bootsplash will work in a limited way, you also won&apos;t be able to preview the theme</source>
         <translation>Il tuo attuale sistema è in esecuzione su una Macchina Virtuale.
 Plymouth bootsplash funzionerà in modo limitato, inoltre non sarà possibile visualizzare l&apos;anteprima del tema</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1037"/>
+        <location filename="../mainwindow.cpp" line="1042"/>
         <source>Plymouth packages not installed</source>
         <translation>I pacchetti di Plymouth non sono installati</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1038"/>
+        <location filename="../mainwindow.cpp" line="1043"/>
         <source>Plymouth packages are not currently installed.
 OK to go ahead and install them?</source>
         <translation>I pacchetti di Plymouth attualmente non sono installati.
 OK per andare avanti ed installarli?</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1064"/>
+        <location filename="../mainwindow.cpp" line="1069"/>
         <source>Images (*.png *.jpg *.jpeg *.tga)</source>
         <translation>Immagini (*.png *.jpg *.jpeg *.tga)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1206"/>
+        <location filename="../mainwindow.cpp" line="1211"/>
         <source>Log not found</source>
         <translation>File log non trovato</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1206"/>
+        <location filename="../mainwindow.cpp" line="1211"/>
         <source>Could not find log at </source>
         <translation>Non si riesce a trovare un file log in </translation>
     </message>
     <message>
-        <source>Edit UEFI Boot Entries</source>
-        <translation type="vanished">Edita le voci di avvio UEFI</translation>
-    </message>
-    <message>
-        <source>You can use the Up/Down buttons, or drag &amp; drop items to change boot order.
-- Items are listed in the boot order.
-- Grayed out lines are inactive.</source>
-        <translation type="vanished">Puoi utilizzare i pulsanti Su/Giù o trascinare e rilasciare gli elementi per modificare l&apos;ordine di avvio.
-- Gli elementi sono elencati in ordine di avvio.
-- Le linee in grigio non sono attive.</translation>
-    </message>
-    <message>
-        <source>Set ac&amp;tive</source>
-        <translation type="vanished">Imposta at&amp;tivo</translation>
-    </message>
-    <message>
-        <source>&amp;Add entry</source>
-        <translation type="vanished">&amp;Aggiungi voce</translation>
-    </message>
-    <message>
-        <source>Boot &amp;next</source>
-        <translation type="vanished">Avvia &amp;prossimo</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="1341"/>
+        <location filename="../mainwindow.cpp" line="1346"/>
         <source>Could not retrieve UUID for %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1349"/>
+        <location filename="../mainwindow.cpp" line="1354"/>
         <source>Enter password to unlock %1 encrypted partition:</source>
         <translation>Digita la password per sbloccare la partizione criptata:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1354"/>
+        <location filename="../mainwindow.cpp" line="1359"/>
         <source>Password entry cancelled or empty for %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1360"/>
+        <location filename="../mainwindow.cpp" line="1365"/>
         <source>Could not open %1 LUKS container</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1195"/>
+        <location filename="../mainwindow.cpp" line="1200"/>
         <source>&amp;Close</source>
         <translation>C&amp;hiudi</translation>
     </message>
@@ -490,75 +408,47 @@ OK per andare avanti ed installarli?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="975"/>
+        <location filename="../mainwindow.cpp" line="980"/>
         <source>You are currently running in live mode with the &apos;toram&apos; option. Please remember to save the persistence file or remaster, otherwise any changes made will be lost.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="977"/>
+        <location filename="../mainwindow.cpp" line="982"/>
         <source>Your changes have been successfully applied.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="978"/>
+        <location filename="../mainwindow.cpp" line="983"/>
         <source>Operation Complete</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1063"/>
+        <location filename="../mainwindow.cpp" line="1068"/>
         <source>Select image to display in bootloader</source>
         <translation>Seleziona un&apos;immagine da visualizzare nel bootloader</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1187"/>
+        <location filename="../mainwindow.cpp" line="1192"/>
         <source>Boot Log</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Move &amp;down</source>
-        <translation type="vanished">Sposta %giù</translation>
-    </message>
-    <message>
-        <source>&amp;Remove entry</source>
-        <translation type="vanished">&amp;Rimuovi voce</translation>
-    </message>
-    <message>
-        <source>Re&amp;set next</source>
-        <translation type="vanished">Re%imposta prossimo</translation>
-    </message>
-    <message>
-        <source>Change &amp;timeout</source>
-        <translation type="vanished">Cambia &amp;timeout</translation>
-    </message>
-    <message>
-        <source>Move &amp;up</source>
-        <translation type="vanished">Sposta &amp;su</translation>
-    </message>
-    <message>
-        <source>not set, will boot using list order</source>
-        <translation type="vanished">non impostato, si avvierà usando l&apos;ordine dell&apos;elenco</translation>
-    </message>
-    <message>
-        <source>Set &amp;inactive</source>
-        <translation type="vanished">Imposta &amp;inattivo</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="1227"/>
+        <location filename="../mainwindow.cpp" line="1232"/>
         <source>Needs reboot</source>
         <translation>E&apos; necessario fare il re-boot</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1228"/>
+        <location filename="../mainwindow.cpp" line="1233"/>
         <source>Plymouth was just installed, you might need to reboot before being able to display previews</source>
         <translation>Plymouth è stato appena installato, potrebbe essere necessario riavviare il sistema prima di poter visualizzare le anteprime</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1297"/>
+        <location filename="../mainwindow.cpp" line="1302"/>
         <source>Click to select theme</source>
         <translation>Clicca per selezionare il tema</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1308"/>
+        <location filename="../mainwindow.cpp" line="1313"/>
         <source>Select GRUB theme</source>
         <translation>Seleziona il tema di GRUB</translation>
     </message>
@@ -603,10 +493,6 @@ OK per andare avanti ed installarli?</translation>
         <location filename="../main.cpp" line="83"/>
         <source>You seem to be logged in as root, please log out and log in as normal user to use this program.</source>
         <translation>Sembra che tu sia loggato come root, fai il log out e poi il log in come utente normale per usare questo programma.</translation>
-    </message>
-    <message>
-        <source>You must run this program with admin access.</source>
-        <translation type="vanished">Devi eseguire questo programma come amministratore.</translation>
     </message>
 </context>
 </TS>

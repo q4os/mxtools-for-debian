@@ -1,3 +1,18 @@
+mx-live-usb-maker (25.6) mx; urgency=medium
+
+  * Add warning if target size is too small
+  * Prepare to move stuff out of /usr/local/ read script from alternative location
+  * Update translations
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 06 Jun 2025 09:51:08 -0400
+
+mx-live-usb-maker (25.4) mx; urgency=medium
+
+  * Update to Qt6
+  * Update translations
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 24 Apr 2025 10:36:26 -0400
+
 mx-live-usb-maker (24.10.01) mx; urgency=medium
 
   * Fix window resizing when showing/hiding advanced options

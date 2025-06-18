@@ -14,8 +14,7 @@
    <string>MX Remastercc</string>
   </property>
   <property name="windowIcon">
-   <iconset theme="preferences-desktop">
-    <normaloff>.</normaloff>.</iconset>
+   <iconset theme="preferences-desktop"/>
   </property>
   <layout class="QGridLayout" name="gridLayout_2">
    <item row="0" column="0">
@@ -64,8 +63,7 @@
         <string>Persistence</string>
        </property>
        <property name="icon">
-        <iconset theme="applications-development">
-         <normaloff>.</normaloff>.</iconset>
+        <iconset theme="applications-development"/>
        </property>
        <property name="autoDefault">
         <bool>true</bool>
@@ -136,8 +134,7 @@
           <string>Help</string>
          </property>
          <property name="icon">
-          <iconset theme="help-contents">
-           <normaloff>.</normaloff>.</iconset>
+          <iconset theme="help-contents"/>
          </property>
          <property name="shortcut">
           <string>Alt+H</string>
@@ -178,8 +175,7 @@
           <string>About...</string>
          </property>
          <property name="icon">
-          <iconset theme="help-about">
-           <normaloff>.</normaloff>.</iconset>
+          <iconset theme="help-about"/>
          </property>
          <property name="shortcut">
           <string>Alt+B</string>
@@ -220,8 +216,7 @@
           <string>Close</string>
          </property>
          <property name="icon">
-          <iconset theme="window-close">
-           <normaloff>.</normaloff>.</iconset>
+          <iconset theme="window-close"/>
          </property>
          <property name="shortcut">
           <string>Alt+N</string>
@@ -256,6 +251,22 @@
          </property>
         </widget>
        </item>
+       <item row="1" column="6">
+        <spacer name="horizontalSpacer_4">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeType">
+          <enum>QSizePolicy::Preferred</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>80</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
       </layout>
      </item>
      <item row="4" column="2">
@@ -274,8 +285,7 @@
         <string>Remaster</string>
        </property>
        <property name="icon">
-        <iconset theme="gtk-cdrom">
-         <normaloff>.</normaloff>.</iconset>
+        <iconset theme="gtk-cdrom"/>
        </property>
        <property name="autoDefault">
         <bool>true</bool>
@@ -301,8 +311,7 @@
         <string>Save root persistence</string>
        </property>
        <property name="icon">
-        <iconset theme="filesave">
-         <normaloff>.</normaloff>.</iconset>
+        <iconset theme="filesave"/>
        </property>
        <property name="autoDefault">
         <bool>true</bool>
@@ -325,8 +334,7 @@
         <string>Configure live persistence</string>
        </property>
        <property name="icon">
-        <iconset theme="applications-system">
-         <normaloff>.</normaloff>.</iconset>
+        <iconset theme="applications-system"/>
        </property>
        <property name="autoDefault">
         <bool>true</bool>

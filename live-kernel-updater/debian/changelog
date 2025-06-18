@@ -1,3 +1,21 @@
+live-kernel-updater (0.2.30+5) mx; urgency=medium
+
+  * fix syntax error in lib source
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 07 Jun 2025 09:18:00 -0400
+
+live-kernel-updater (0.2.30+4) mx; urgency=medium
+
+  * change cli-shell-utils location
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 05 Jun 2025 16:17:51 -0400
+
+live-kernel-updater (0.2.30+3) mx; urgency=medium
+
+  * boot mount point for mx25
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 24 Mar 2025 21:21:09 -0400
+
 live-kernel-updater (0.2.30+1) mx; urgency=medium
 
   [fehlix]

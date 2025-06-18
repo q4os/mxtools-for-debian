@@ -2,8 +2,14 @@ Source: mx-live-usb-maker
 Section: admin
 Priority: optional
 Maintainer: Adrian <adrian@mxlinux.org>
-Build-Depends: debhelper (>=10), qtbase5-dev, qttools5-dev-tools
+Build-Depends: debhelper-compat (= 13),
+               qt6-base-dev,
+               qt6-base-dev-tools,
+               qt6-tools-dev,
+               qt6-tools-dev-tools
 Standards-Version: 3.9.8
+Vcs-Git: git://github.com/MX-Linux/mx-live-usb-maker
+Homepage: https://github.com/MX-Linux/mx-live-usb-maker
 
 Package: mx-live-usb-maker
 Architecture: any
@@ -14,5 +20,8 @@ Depends: cli-shell-utils,
          ${misc:Depends},
          ${shlibs:Depends}
 Recommends: mx-launcher-l10n, gksu | pkexec
-Description: mx-live-usb-maker
- mx-live-usb-maker
+Description: MX Live USB Maker
+ MX Live USB Maker is a graphical utility that allows users to easily
+ create bootable USB drives for MX Linux. It provides a user-friendly
+ interface for selecting the MX Linux ISO, configuring USB drive settings,
+ and creating the bootable USB drive.

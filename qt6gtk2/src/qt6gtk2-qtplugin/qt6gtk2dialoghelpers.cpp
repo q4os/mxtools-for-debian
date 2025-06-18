@@ -1,6 +1,6 @@
 /***************************************************************************
  *   Copyright (C) 2015 The Qt Company Ltd.                                *
- *   Copyright (C) 2016-2024 Ilya Kotov, forkotov02@ya.ru                  *
+ *   Copyright (C) 2016-2025 Ilya Kotov, forkotov02@ya.ru                  *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -99,8 +99,8 @@ void QGtk2Dialog::exec()
     } else {
         // block input to the window, allow input to other GTK dialogs
         QEventLoop loop;
-        connect(this, SIGNAL(accept()), &loop, SLOT(quit()));
-        connect(this, SIGNAL(reject()), &loop, SLOT(quit()));
+        connect(this, &QGtk2Dialog::accept, &loop, &QEventLoop::quit);
+        connect(this, &QGtk2Dialog::reject, &loop, &QEventLoop::quit);
         loop.exec();
     }
 }
@@ -154,8 +154,8 @@ void QGtk2Dialog::onParentWindowDestroyed()
 Qt6Gtk2ColorDialogHelper::Qt6Gtk2ColorDialogHelper()
 {
     d.reset(new QGtk2Dialog(gtk_color_selection_dialog_new("")));
-    connect(d.data(), SIGNAL(accept()), this, SLOT(onAccepted()));
-    connect(d.data(), SIGNAL(reject()), this, SIGNAL(reject()));
+    connect(d.data(), &QGtk2Dialog::accept, this, &Qt6Gtk2ColorDialogHelper::onAccepted);
+    connect(d.data(), &QGtk2Dialog::reject, this, &Qt6Gtk2ColorDialogHelper::reject);
 
     GtkWidget *gtkColorSelection = gtk_color_selection_dialog_get_color_selection(GTK_COLOR_SELECTION_DIALOG(d->gtkDialog()));
     g_signal_connect_swapped(gtkColorSelection, "color-changed", G_CALLBACK(onColorChanged), this);
@@ -243,8 +243,8 @@ Qt6Gtk2FileDialogHelper::Qt6Gtk2FileDialogHelper()
                                                         GTK_FILE_CHOOSER_ACTION_OPEN,
                                                         GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
                                                         GTK_STOCK_OK, GTK_RESPONSE_OK, nullptr)));
-    connect(d.data(), SIGNAL(accept()), this, SLOT(onAccepted()));
-    connect(d.data(), SIGNAL(reject()), this, SIGNAL(reject()));
+    connect(d.data(), &QGtk2Dialog::accept, this, &Qt6Gtk2FileDialogHelper::onAccepted);
+    connect(d.data(), &QGtk2Dialog::reject, this, &Qt6Gtk2FileDialogHelper::reject);
 
     g_signal_connect(GTK_FILE_CHOOSER(d->gtkDialog()), "selection-changed", G_CALLBACK(onSelectionChanged), this);
     g_signal_connect_swapped(GTK_FILE_CHOOSER(d->gtkDialog()), "current-folder-changed", G_CALLBACK(onCurrentFolderChanged), this);
@@ -400,7 +400,7 @@ void Qt6Gtk2FileDialogHelper::onUpdatePreview(GtkDialog *gtkDialog, Qt6Gtk2FileD
 
     // Don't attempt to open anything which isn't a regular file. If a named pipe,
     // this may hang.
-    QFileInfo fileinfo(filename);
+    QFileInfo fileinfo(QString::fromLocal8Bit(filename));
     if (!fileinfo.exists() || !fileinfo.isFile()) {
         g_free(filename);
         gtk_file_chooser_set_preview_widget_active(GTK_FILE_CHOOSER(gtkDialog), false);
@@ -408,7 +408,7 @@ void Qt6Gtk2FileDialogHelper::onUpdatePreview(GtkDialog *gtkDialog, Qt6Gtk2FileD
     }
 
     // This will preserve the image's aspect ratio.
-    GdkPixbuf *pixbuf = gdk_pixbuf_new_from_file_at_size(filename, PREVIEW_WIDTH, PREVIEW_HEIGHT, 0);
+    GdkPixbuf *pixbuf = gdk_pixbuf_new_from_file_at_size(filename, PREVIEW_WIDTH, PREVIEW_HEIGHT, nullptr);
     g_free(filename);
     if (pixbuf) {
         gtk_image_set_from_pixbuf(GTK_IMAGE(helper->previewWidget), pixbuf);
@@ -518,8 +518,8 @@ void Qt6Gtk2FileDialogHelper::setNameFilters(const QStringList &filters)
 Qt6Gtk2FontDialogHelper::Qt6Gtk2FontDialogHelper()
 {
     d.reset(new QGtk2Dialog(gtk_font_selection_dialog_new("")));
-    connect(d.data(), SIGNAL(accept()), this, SLOT(onAccepted()));
-    connect(d.data(), SIGNAL(reject()), this, SIGNAL(reject()));
+    connect(d.data(), &QGtk2Dialog::accept, this, &Qt6Gtk2FontDialogHelper::onAccepted);
+    connect(d.data(), &QGtk2Dialog::reject, this, &Qt6Gtk2FontDialogHelper::reject);
 }
 
 Qt6Gtk2FontDialogHelper::~Qt6Gtk2FontDialogHelper()

@@ -18,12 +18,17 @@
 ##
 
 #add BitJam's soure cli-shell-utils
-source /usr/local/lib/cli-shell-utils/cli-shell-utils.bash
+if [ -e "/usr/local/lib/cli-shell-utils/cli-shell-utils.bash" ]; then
+	source /usr/local/lib/cli-shell-utils/cli-shell-utils.bash
+else
+	source /usr/lib/cli-shell-utils/cli-shell-utils.bash
+fi
+
 source gettext.sh
 DEBIAN_VERSION_CODENAME=$(grep VERSION_CODENAME /etc/os-release|cut -d"=" -f2)
 DEBIAN_VERSION_NUMBER=$(cat /etc/debian_version  |cut -d"." -f1)
 
-VERSION="25.01.03"
+VERSION="25.06.01"
 ME=${0##*/}
 CLI_PROG="ddm-mx"
 LOCK_FILE="/run/lock/$CLI_PROG"

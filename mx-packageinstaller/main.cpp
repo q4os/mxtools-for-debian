@@ -60,12 +60,12 @@ int main(int argc, char *argv[])
     QApplication::setApplicationVersion(VERSION);
 
     QTranslator qtTran;
-    if (qtTran.load("qt_" + QLocale().name(), QLibraryInfo::location(QLibraryInfo::TranslationsPath))) {
+    if (qtTran.load("qt_" + QLocale().name(), QLibraryInfo::path(QLibraryInfo::TranslationsPath))) {
         QApplication::installTranslator(&qtTran);
     }
 
     QTranslator qtBaseTran;
-    if (qtBaseTran.load("qtbase_" + QLocale().name(), QLibraryInfo::location(QLibraryInfo::TranslationsPath))) {
+    if (qtBaseTran.load("qtbase_" + QLocale().name(), QLibraryInfo::path(QLibraryInfo::TranslationsPath))) {
         QApplication::installTranslator(&qtBaseTran);
     }
 

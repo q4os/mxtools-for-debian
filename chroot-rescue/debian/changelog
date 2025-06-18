@@ -1,3 +1,9 @@
+chroot-rescue (0.2.6+2) mx; urgency=medium
+
+  * move away from /usr/local
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 05 Jun 2025 16:14:04 -0400
+
 chroot-rescue (0.2.6+1) mx; urgency=medium
 
   [fehlix]

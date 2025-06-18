@@ -6,3 +6,4 @@ file_filter = po/mx-remastercc-desktop_<lang>.po
 source_file = mx-remastercc-desktop.pot
 source_lang = en
 type = po
+minimum_perc = 25

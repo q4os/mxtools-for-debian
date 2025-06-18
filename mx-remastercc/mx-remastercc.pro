@@ -21,7 +21,7 @@
 # **********************************************************************/
 
 QT       += widgets
-CONFIG   += c++1z
+CONFIG   += c++17
 
 TARGET = mx-remastercc
 TEMPLATE = app

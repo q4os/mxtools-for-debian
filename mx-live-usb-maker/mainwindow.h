@@ -21,6 +21,7 @@
  **********************************************************************/
 #pragma once
 
+#include <QFile>
 #include <QMessageBox>
 #include <QProcess>
 #include <QSettings>
@@ -50,7 +51,7 @@ private slots:
     void cleanup();
     void cmdDone();
     void setConnections();
-    void setDefaultMode(const QString &iso_name);
+    void setDefaultMode(const QString &isoName);
     void updateBar();
     void updateOutput();
 
@@ -74,16 +75,18 @@ private slots:
 private:
     Ui::MainWindow *ui;
     Cmd cmd;
-    QFile *stat_file {};
+    QFile *statFile {};
     QString LUM;
     QString device;
     QString elevate;
     QTimer timer;
     bool advancedOptions {};
-    const QString cli_utils {". /usr/local/lib/cli-shell-utils/cli-shell-utils.bash;"};
+    const QString cliUtils = QString(". ") + (QFile::exists("/usr/local/lib/cli-shell-utils/cli-shell-utils.bash") ?
+        QString("/usr/local/lib/cli-shell-utils/cli-shell-utils.bash;") :
+        QString("/usr/lib/cli-shell-utils/cli-shell-utils.bash;"));
     int height {};
     int defaultHeight {};
-    uint size_check;
+    uint sizeCheck;
 
     [[nodiscard]] QString buildOptionList();
     [[nodiscard]] QStringList buildUsbList();

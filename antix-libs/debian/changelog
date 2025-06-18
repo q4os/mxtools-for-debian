@@ -1,3 +1,9 @@
+antix-libs (0.8.14+8) mx; urgency=medium
+
+  * better yad version check (fehlix) 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 01 Jun 2025 20:41:43 -0400
+
 antix-libs (0.8.14+7) mx; urgency=medium
 
   * yad 0.40 vs yad 14 check in antiX-style.sh

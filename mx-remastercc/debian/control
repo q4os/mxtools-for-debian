@@ -2,12 +2,22 @@ Source: mx-remastercc
 Section: admin
 Priority: optional
 Maintainer: Adrian <adrian@mxlinux.org>
-Build-Depends: debhelper (>=10), qtbase5-dev, qttools5-dev-tools
+Build-Depends: debhelper-compat (= 13),
+               qt6-base-dev,
+               qt6-base-dev-tools,
+               qt6-tools-dev,
+               qt6-tools-dev-tools
 Standards-Version: 3.9.8
-Vcs-Git: git://github.com/AdrianTM/mx-remastercc
+Vcs-Git: git://github.com/MX-Linux/mx-remastercc
+Homepage: https://github.com/MX-Linux/mx-remastercc
 
 Package: mx-remastercc
 Architecture: any
-Depends: mx-remaster, mx-viewer | xdg-utils, ${misc:Depends}, ${shlibs:Depends}
-Description: MX Remastercc
- MX Remastercc provides access to different remaster and persistence tools in MX Linux
+Depends: mx-remaster,
+         mx-viewer | xdg-utils,
+         ${misc:Depends},
+         ${shlibs:Depends}
+Description: Remaster Control Center for MX Linux
+ MX Remaster Control Center is a graphical utility that provides
+ centralized access to various remastering and persistence tools
+ in MX Linux.

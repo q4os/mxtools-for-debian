@@ -71,7 +71,7 @@ MainWindow::MainWindow(const QCommandLineParser &argParser, QWidget *parent)
     setup();
 
     // Run package display in a separate thread
-    QtConcurrent::run([this] {
+    auto packageFuture [[maybe_unused]] = QtConcurrent::run([this] {
         AptCache cache;
         enabledList = cache.getCandidates();
         QMetaObject::invokeMethod(
@@ -86,7 +86,7 @@ MainWindow::MainWindow(const QCommandLineParser &argParser, QWidget *parent)
 
     // Run flatpak setup and display in a separate thread
     if (arch != "i386" && checkInstalled("flatpak")) {
-        QtConcurrent::run([this] {
+        auto flatpakFuture [[maybe_unused]] = QtConcurrent::run([this] {
             Cmd().run(elevate + "/usr/lib/mx-packageinstaller/mxpi-lib flatpak_add_repos", true);
             QMetaObject::invokeMethod(
                 this, [this] { displayFlatpaks(); }, Qt::QueuedConnection);
@@ -374,8 +374,8 @@ uchar MainWindow::getDebianVerNum()
 {
     QFile file {"/etc/debian_version"};
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
-        qCritical() << "Could not open /etc/debian_version:" << file.errorString() << "Assumes Bullseye";
-        return Release::Bullseye;
+        qCritical() << "Could not open /etc/debian_version:" << file.errorString();
+        return showVersionDialog(tr("Could not determine Debian version. Please select your version:"));
     }
 
     QTextStream in(&file);
@@ -397,9 +397,30 @@ uchar MainWindow::getDebianVerNum()
     if (codename == "bookworm") {
         return Release::Bookworm;
     }
+    if (codename == "trixie") {
+        return Release::Trixie;
+    }
 
-    qCritical() << "Unknown Debian version:" << version << "Assumes Bullseye";
-    return Release::Bullseye;
+    qCritical() << "Unknown Debian version:" << version;
+    return showVersionDialog(tr("Could not determine Debian version. Please select your version:"));
+}
+
+uchar MainWindow::showVersionDialog(const QString &message)
+{
+    QMessageBox msgBox;
+    msgBox.setWindowTitle(tr("Debian Version"));
+    msgBox.setText(message);
+    msgBox.addButton("Bullseye", QMessageBox::AcceptRole);
+    msgBox.addButton("Trixie", QMessageBox::AcceptRole);
+    msgBox.addButton(QMessageBox::Cancel);
+    msgBox.show();
+
+    int ret = msgBox.exec();
+
+    if (ret == QMessageBox::Cancel) {
+        exit(EXIT_FAILURE);
+    }
+    return ret == 0 ? Release::Bullseye : Release::Trixie;
 }
 
 QString MainWindow::getDebianVerName()
@@ -1014,7 +1035,7 @@ void MainWindow::populateFlatpakTree()
     const QStringList installed_all = installedAppsFP + installedRuntimesFP;
     uint total_count = 0;
 
-    for (const QString &item : qAsConst(flatpaks)) {
+    for (const QString &item : std::as_const(flatpaks)) {
         if (createFlatpakItem(item, installed_all)) {
             ++total_count;
         }
@@ -1342,7 +1363,7 @@ bool MainWindow::installBatch(const QStringList &name_list)
     QString install_names;
 
     for (const QString &name : name_list) {
-        for (const auto &item : qAsConst(popularApps)) {
+        for (const auto &item : std::as_const(popularApps)) {
             if (item.name == name) {
                 postinstall += item.postInstall + '\n';
                 install_names += item.installNames + ' ';
@@ -1379,7 +1400,7 @@ bool MainWindow::installPopularApp(const QString &name)
     QString install_names;
 
     // Get all the app info
-    for (const auto &item : qAsConst(popularApps)) {
+    for (const auto &item : std::as_const(popularApps)) {
         if (item.name == name) {
             preinstall = item.preInstall;
             postinstall = item.postInstall;
@@ -1443,7 +1464,7 @@ bool MainWindow::installPopularApps()
     for (QTreeWidgetItemIterator it(ui->treePopularApps); (*it) != nullptr; ++it) {
         if ((*it)->checkState(PopCol::Check) == Qt::Checked) {
             QString name = (*it)->text(2);
-            for (const auto &item : qAsConst(popularApps)) {
+            for (const auto &item : std::as_const(popularApps)) {
                 if (item.name == name) {
                     const QString &preinstall = item.preInstall;
                     if (preinstall.isEmpty()) { // Add to batch processing if there is no preinstall command
@@ -2664,7 +2685,7 @@ void MainWindow::pushUninstall_clicked()
         }
 
         setCursor(QCursor(Qt::BusyCursor));
-        for (const QString &app : qAsConst(changeList)) {
+        for (const QString &app : std::as_const(changeList)) {
             enableOutput();
             if (!cmd.run("socat SYSTEM:'flatpak uninstall " + fpUser + "-y " + app
                          + "',stderr STDIO")) { // success if all processed successfuly,

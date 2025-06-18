@@ -1,8 +1,0 @@
-[Desktop Entry]
-Name=isoumount
-Comment=Unmount ISO files (and linuxfs file if it exists)
-Icon=preferences-desktop
-Exec=su-to-root -X -c /usr/local/bin/isoumount %f
-Type=Application
-Categories=System;
-NoDisplay=True

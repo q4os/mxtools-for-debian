@@ -22,9 +22,8 @@
  * along with this package. If not, see <http://www.gnu.org/licenses/>.
  **********************************************************************/
 
-
-#include "about.h"
 #include "mainwindow.h"
+#include "about.h"
 #include "ui_mainwindow.h"
 #include "version.h"
 
@@ -35,8 +34,8 @@
 #include <QDebug>
 #include <unistd.h>
 
-MainWindow::MainWindow()  :
-    ui(new Ui::MainWindow)
+MainWindow::MainWindow()
+    : ui(new Ui::MainWindow)
 {
     qDebug().noquote() << QCoreApplication::applicationName() << "version:" << VERSION;
     ui->setupUi(this);
@@ -53,26 +52,26 @@ MainWindow::~MainWindow()
 
 void MainWindow::makeUsb(const QString &options)
 {
-    //get a device value if action is on a partition
+    // get a device value if action is on a partition
     QString device_to_check = device;
     if (device.contains("nvme")) {
-        device_to_check = device.section("p",0,0);
+        device_to_check = device.section("p", 0, 0);
     }
     if (device.contains("mmc")) {
-        device_to_check = device.section("p",0,0);
+        device_to_check = device.section("p", 0, 0);
     }
 
     if (device.contains("sd")) {
         device_to_check = device.left(3);
     }
-    //clear partitions
-    //qDebug() << cmd->getCmdOut("live-usb-maker gui partition-clear --color=off -t " + device);
+    // clear partitions
+    // qDebug() << cmd->getCmdOut("live-usb-maker gui partition-clear --color=off -t " + device);
     QString cmdstr = options;
-    //QString cmdstr = "echo test options";
+    // QString cmdstr = "echo test options";
     setConnections();
     qDebug() << cmd->getCmdOut(cmdstr);
-    //label drive
-    //labeldrive();
+    // label drive
+    // labeldrive();
 }
 
 // setup versious items first time program runs
@@ -82,14 +81,14 @@ void MainWindow::setup()
     cmdprog = new Cmd(this);
     connect(qApp, &QApplication::aboutToQuit, this, &MainWindow::cleanup);
     this->setWindowTitle("Format USB");
-    ui->buttonBack->setHidden(true);;
+    ui->buttonBack->setHidden(true);
+    ;
     ui->stackedWidget->setCurrentIndex(0);
     ui->buttonCancel->setEnabled(true);
     ui->buttonNext->setEnabled(true);
     ui->outputBox->setCursorWidth(0);
     height = this->heightMM();
     ui->lineEditFSlabel->setText("USB-DATA");
-
 }
 
 // Build the option list to be passed to live-usb-maker
@@ -101,25 +100,28 @@ QString MainWindow::buildOptionList()
     QString options;
 
     QString format = ui->comboBoxDataFormat->currentText();
-    if (format.contains("fat32"))
+    if (format.contains("fat32")) {
         format = "vfat";
+    }
 
-    if (ui->comboBoxPartitionTableType->isEnabled())
+    if (ui->comboBoxPartitionTableType->isEnabled()) {
         partoption = ui->comboBoxPartitionTableType->currentText().toLower();
-    else
+    } else {
         partoption = "part";
+    }
 
     QString authentication = "pkexec";
 
-    if ( !QFile::exists("/usr/bin/pkexec") && QFile::exists("/usr/bin/gksu")){
-            authentication = "gksu";
-	}
-
-    if (getuid() == 0 ) {
-            authentication = "";
+    if (!QFile::exists("/usr/bin/pkexec") && QFile::exists("/usr/bin/gksu")) {
+        authentication = "gksu";
     }
 
-    options = QString(authentication + " /usr/lib/formatusb/formatusb_lib \"" + device + "\" " + format + " \"" + label + "\" " + partoption + "");
+    if (getuid() == 0) {
+        authentication = "";
+    }
+
+    options = QString(authentication + " /usr/lib/formatusb/formatusb_lib \"" + device + "\" " + format + " \"" + label
+                      + "\" " + partoption + "");
     options = options.trimmed();
     qDebug() << "partition is" << device << "label " << label;
     qDebug() << "Options: " << options;
@@ -135,7 +137,8 @@ void MainWindow::cleanup()
 
 // build the USB list
 QStringList MainWindow::buildUsbList()
-{   QString drives;
+{
+    QString drives;
     if (ui->checkBoxshowpartitions->isChecked()) {
         drives = cmd->getCmdOut("lsblk -nlo NAME,SIZE,LABEL,TYPE -I 3,8,22,179,259 |grep -v disk");
     } else {
@@ -153,7 +156,7 @@ QStringList MainWindow::removeUnsuitable(const QStringList &devices)
     bool showall = ui->checkBoxShowAll->isChecked();
     for (const QString &line : devices) {
         name = line.split(" ").at(0);
-        if (!showall){
+        if (!showall) {
             if (system(cli_utils.toUtf8() + "is_usb_or_removable " + name.toUtf8()) == 0) {
                 if (cmd->getCmdOut(cli_utils + "get_drive $(get_live_dev) ") != name) {
                     list << line;
@@ -171,10 +174,9 @@ QStringList MainWindow::removeUnsuitable(const QStringList &devices)
 
 void MainWindow::cmdStart()
 {
-    //setCursor(QCursor(Qt::BusyCursor));
-    //ui->lineEdit->setFocus();
+    // setCursor(QCursor(Qt::BusyCursor));
+    // ui->lineEdit->setFocus();
 }
-
 
 void MainWindow::cmdDone()
 {
@@ -199,7 +201,16 @@ void MainWindow::updateOutput()
 {
     // remove escape sequences that are not handled by code
     QString out = cmd->readAll();
-    out.remove("[0m").remove("]0;").remove("").remove("").remove("[1000D").remove("[74C|").remove("[?25l").remove("[?25h").remove("[0;36m").remove("[1;37m");
+    out.remove("[0m")
+        .remove("]0;")
+        .remove("")
+        .remove("")
+        .remove("[1000D")
+        .remove("[74C|")
+        .remove("[?25l")
+        .remove("[?25h")
+        .remove("[0;36m")
+        .remove("[1;37m");
     ui->outputBox->moveCursor(QTextCursor::End);
     ui->outputBox->insertPlainText(out);
     QScrollBar *sb = ui->outputBox->verticalScrollBar();
@@ -218,10 +229,12 @@ void MainWindow::on_buttonNext_clicked()
             return;
         }
 
-        //confirm action
-        QString msg = tr("These actions will destroy all data on \n\n") + ui->comboBoxUsbList->currentText().simplified() + "\n\n " + tr("Do you wish to continue?");
-        if (QMessageBox::Yes != QMessageBox::warning(this, windowTitle(), msg, QMessageBox::Yes, QMessageBox::No))
+        // confirm action
+        QString msg = tr("These actions will destroy all data on \n\n")
+                      + ui->comboBoxUsbList->currentText().simplified() + "\n\n " + tr("Do you wish to continue?");
+        if (QMessageBox::Yes != QMessageBox::warning(this, windowTitle(), msg, QMessageBox::Yes, QMessageBox::No)) {
             return;
+        }
         if (cmd->state() != QProcess::NotRunning) {
             ui->stackedWidget->setCurrentWidget(ui->outputPage);
             return;
@@ -233,11 +246,12 @@ void MainWindow::on_buttonNext_clicked()
 
         makeUsb(buildOptionList());
 
-    // on output page
+        // on output page
     } else if (ui->stackedWidget->currentWidget() == ui->outputPage) {
 
     } else {
-        return qApp->quit();
+        qApp->quit();
+        return;
     }
 }
 
@@ -250,16 +264,17 @@ void MainWindow::on_buttonBack_clicked()
     ui->outputBox->clear();
 }
 
-
 // About button clicked
 void MainWindow::on_buttonAbout_clicked()
 {
     this->hide();
-    displayAboutMsgBox(tr("About %1").arg(this->windowTitle()), "<p align=\"center\"><b><h2>" + this->windowTitle() +"</h2></b></p><p align=\"center\">" +
-                       tr("Version: ") + VERSION + "</p><p align=\"center\"><h3>" +
-                       tr("Program for formatting USB devices") +
-                       "</h3></p><p align=\"center\"><a href=\"http://mxlinux.org\">http://mxlinux.org</a><br /></p><p align=\"center\">" +
-                       tr("Copyright (c) MX Linux") + "<br /><br /></p>",
+    displayAboutMsgBox(tr("About %1").arg(this->windowTitle()),
+                       "<p align=\"center\"><b><h2>" + this->windowTitle() + "</h2></b></p><p align=\"center\">"
+                           + tr("Version: ") + VERSION + "</p><p align=\"center\"><h3>"
+                           + tr("Program for formatting USB devices")
+                           + "</h3></p><p align=\"center\"><a href=\"http://mxlinux.org\">http://mxlinux.org</a><br "
+                             "/></p><p align=\"center\">"
+                           + tr("Copyright (c) MX Linux") + "<br /><br /></p>",
                        "/usr/share/doc/formatusb/license.html", tr("%1 License").arg(this->windowTitle()), true);
     this->show();
 }
@@ -277,7 +292,6 @@ void MainWindow::on_buttonRefresh_clicked()
     ui->comboBoxUsbList->addItems(buildUsbList());
 }
 
-
 void MainWindow::on_checkBoxShowAll_clicked()
 {
     on_buttonRefresh_clicked();
@@ -285,32 +299,33 @@ void MainWindow::on_checkBoxShowAll_clicked()
 
 void MainWindow::on_checkBoxshowpartitions_clicked()
 {
-     on_buttonRefresh_clicked();
-     if ( ui->checkBoxshowpartitions->isChecked()) {
-         ui->comboBoxPartitionTableType->setEnabled(false);
-     }
-     if ( ! ui->checkBoxshowpartitions->isChecked()) {
-         ui->comboBoxPartitionTableType->setEnabled(true);
-     }
+    on_buttonRefresh_clicked();
+    if (ui->checkBoxshowpartitions->isChecked()) {
+        ui->comboBoxPartitionTableType->setEnabled(false);
+    }
+    if (!ui->checkBoxshowpartitions->isChecked()) {
+        ui->comboBoxPartitionTableType->setEnabled(true);
+    }
 }
 
-void MainWindow::validate_name(){
+void MainWindow::validate_name()
+{
     // see if name is reasonable
     QString test;
     test = ui->lineEditFSlabel->text();
 
-    if (test.isEmpty()){
+    if (test.isEmpty()) {
         return;
     }
     QString regexstring = "^[A-Za-z0-9_.-]{1,11}$";
-    if (ui->comboBoxDataFormat->currentText() == "ext4"){
+    if (ui->comboBoxDataFormat->currentText() == "ext4") {
         regexstring = "^[A-Za-z0-9_.-]{1,16}$";
     }
-    if (ui->comboBoxDataFormat->currentText() == "ntfs"){
+    if (ui->comboBoxDataFormat->currentText() == "ntfs") {
         regexstring = "^[A-Za-z0-9_.-]{1,32}$";
     }
 
-    if (!test.contains(QRegExp(regexstring))) {
+    if (!test.contains(QRegularExpression(regexstring))) {
         if (ui->buttonNext->isEnabled()) {
             QMessageBox::critical(this, tr("Failure"), tr("Invalid Name"));
             ui->buttonNext->setEnabled(false);
@@ -324,9 +339,7 @@ void MainWindow::on_lineEditFSlabel_textChanged(const QString &arg1)
     validate_name();
 }
 
-
 void MainWindow::on_comboBoxDataFormat_currentIndexChanged(int index)
 {
     validate_name();
 }
-

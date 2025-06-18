@@ -1,4 +1,4 @@
-bin/*                   	usr/local/bin
+bin/*                   	usr/bin
 chroot-rescue-scan.desktop usr/share/applications
 locale/* 			usr/share/locale
 rescuetime-mx.svg			usr/share/icons/hicolor/scalable/apps
