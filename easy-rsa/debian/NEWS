@@ -1,0 +1,37 @@
+easy-rsa (3.0.4-1) unstable; urgency=medium
+
+  The version 3 of easy-rsa is not backward compatible with the previous
+  version, regarding the syntax and commands. Essentially, all scripts has
+  been removed, and there is now only one script, named 'easyrsa', that acts
+  as a swissknife.
+
+  Apart from the scripts layout, there are some notable changes in the design
+  of the software:
+
+     * nsCertType extensions are no longer included by default. Use of such
+       "Netscape" attributes have been deprecated upstream and their use is
+       discouraged. Configure `EASYRSA_NS_SUPPORT` in vars if you want to enable
+       this legacy behavior.
+
+       Notably, this is important for OpenVPN deployments relying on the
+       `--ns-cert-type` directive. Either have OpenVPN use the preferred
+       `--remote-cert-tls` option, or enable legacy NS extensions.
+
+     * The default request Subject (or DN, Distinguished Name) includes just the
+       commonName. This is more suitable for VPNs and environments that don't wish
+       to include info about the Country/State/City/Org/OU in certs. Configure
+       `EASYRSA_DN` in vars if you want to enable the legacy behavior.
+
+     * The 3.0 release lacks PKCS#11 (smartcard/token) support. This is anticipated
+       to be supported in a future point-release to target each platform's need.
+
+     * The -utf8 option has been added for all supported commands.  This should be
+       backwards compatible with ASCII strings.
+
+     * The default private key encryption has been changed from 3des to aes256.
+
+  Please, read the documentation provided in /usr/share/doc/easy-rsa/doc, and
+  specifically, the EasyRSA-Upgrade-Notes.md, from where the notable changes
+  list upwards is extracted.
+
+ -- Pierre-Elliott Bécue <becue@crans.org>  Wed, 30 May 2018 11:52:20 +0200

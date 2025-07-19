@@ -1,0 +1,5 @@
+debian/make-cadir	 usr/bin/
+easyrsa                  usr/share/easy-rsa/
+openssl-easyrsa.cnf      usr/share/easy-rsa/
+vars.example             usr/share/easy-rsa/
+x509-types/              usr/share/easy-rsa/

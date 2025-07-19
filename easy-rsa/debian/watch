@@ -1,0 +1,6 @@
+version=4
+opts="\
+      downloadurlmangle=s#/tag/#/download/#;s#(v?@ANY_VERSION@)$#$1/EasyRSA-$2.tgz#, \
+      pgpsigurlmangle=s/(.*\/EasyRSA-?@ANY_VERSION@)\.tgz/$1\.tgz\.sig/, \
+      filenamemangle=s#v?@ANY_VERSION@#EasyRSA-$1.tgz#" \
+  https://github.com/OpenVPN/easy-rsa/tags .*/releases/tag/v?@ANY_VERSION@

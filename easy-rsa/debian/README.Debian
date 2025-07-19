@@ -1,0 +1,43 @@
+easy-rsa for Debian
+-------------------
+
+easyrsa is a script to easy the administration of a Certificate
+Authority. For example to manage openvpn scripts.
+
+The effortless way to use it is calling "make-cadir DIRECTORY", which will
+create a new directory with symlinks to the script and a copy of the
+configuration files so you can edit them to suit your needs.
+
+i.e.
+
+~$ make-cadir my_ca
+~$ cd my_ca
+~/my_ca$ vi vars
+
+ -- Alberto Gonzalez Iniesta <agi@inittab.org>  Mon, 12 Nov 2012 18:18:57 +0100
+ -- Pierre-Elliott Bécue <becue@crans.org>  Tue, 29 May 2018 15:19:10 +0200
+
+Improving security of created certificates
+------------------------------------------
+
+easy-rsa defaults use 2048 bits for keylength and 10 years (3650 days) as
+certificate lifetime.
+
+bettercrypto.org suggests increasing the keylength to 4096 bits and decreasing
+the certificate lifetime. You can change those values in the 'vars' file of your
+CA directory.
+
+ -- Alberto Gonzalez Iniesta <agi@inittab.org>  Tue, 07 Jan 2014 12:36:35 +0100
+
+
+Support for subjectAltName
+--------------------------
+
+# ./easyrsa init-pki
+# ./easyrsa build-ca nopass
+# ./easyrsa --subject-alt-name="DNS:www.example.net,DNS:secure.example.net" build-server-full alttest nopass
+
+https://github.com/OpenVPN/easy-rsa/issues/22#issuecomment-362899370
+
+ -- Pierre-Elliott Bécue <becue@crans.org> Tue, May 29 17:33:31 2018 +0200
+ -- Michele Orrù <michele.orru@ens.fr> Tue, Nov 13 17:40:10 2018 +0200

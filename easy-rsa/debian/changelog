@@ -1,0 +1,221 @@
+easy-rsa (3.2.2-1~mx23+1) mx; urgency=medium
+
+  * Rebuild for MX Linux.
+
+ -- Steven Pusser <stevep@mxlinux.org>  Thu, 26 Jun 2025 15:21:39 -0700
+
+easy-rsa (3.2.2-1) unstable; urgency=medium
+
+  * New upstream version
+  * Re-export upstream signing key without extra signatures.
+  * d/copyright: Update year to 2025.
+
+ -- Lance Lin <lq27267@gmail.com>  Tue, 04 Feb 2025 20:57:43 +0700
+
+easy-rsa (3.2.1-1) unstable; urgency=medium
+
+  * New upstream version
+
+ -- Lance Lin <lq27267@gmail.com>  Wed, 09 Oct 2024 20:06:57 +0700
+
+easy-rsa (3.2.0-1) unstable; urgency=medium
+
+  * New upstream version
+  * Standards-Version: 4.7.0 (routine-update)
+  * Remove trailing whitespace in debian/copyright (routine-update)
+
+ -- Lance Lin <lq27267@gmail.com>  Wed, 29 May 2024 19:04:39 +0700
+
+easy-rsa (3.1.7-2) unstable; urgency=medium
+
+  * d/tests/basic-usage: Pass -nameopt to openssl (Closes: #1062003).
+
+ -- Lance Lin <lq27267@gmail.com>  Mon, 05 Feb 2024 23:05:26 +0700
+
+easy-rsa (3.1.7-1) unstable; urgency=medium
+
+  * New upstream release.
+  * d/patches/disable_prefer_vars_in_pki_msg.patch: Removed, fixed upstream.
+  * d/gbp.conf: Add default config options for gbp.
+
+ -- Lance Lin <lq27267@gmail.com>  Mon, 23 Oct 2023 21:45:20 +0700
+
+easy-rsa (3.1.6-2) unstable; urgency=medium
+
+  * d/patches/disable_prefer_vars_in_pki_msg.patch: Fixes init-pki does not
+    respect vars.
+  * d/tests/basic-usage: Alter directory for vars.
+
+ -- Lance Lin <lq27267@gmail.com>  Thu, 31 Aug 2023 19:58:43 +0700
+
+easy-rsa (3.1.6-1) unstable; urgency=medium
+
+  * New upstream release.
+  * d/tests/basic-usage: Include extended autopkgtest from Dennis Camera
+    (Closes: #1036086).
+
+ -- Lance Lin <lq27267@gmail.com>  Tue, 22 Aug 2023 20:19:47 +0700
+
+easy-rsa (3.1.5-1) unstable; urgency=medium
+
+  * New upstream release.
+     - Fixes extra question asking for a pem phrase caused by interaction of
+     easy-rsa below 3.1.3 and opennssl 3 (Closes: #1039014).
+  * d/watch: Fix links to use tgz.sig and tgz.
+  * d/upstream/signing-key.asc: New signing key from upstream.
+  * d/patches: Remove both patches, fixed in upstream.
+
+ -- Lance Lin <lq27267@gmail.com>  Wed, 12 Jul 2023 22:48:59 +0700
+
+easy-rsa (3.1.0-2) experimental; urgency=medium
+
+  * QA upload.
+  * New maintainer (Closes: #1034306).
+  * d/copyright: Update debian copyright year.
+  * d/upstream/metadata: Add Archive field.
+
+  [ Debian Janitor ]
+  * Bump debhelper from old 11 to 13.
+  * Set debhelper-compat version in Build-Depends.
+  * Set upstream metadata fields: Bug-Database, Bug-Submit, Repository,
+    Repository-Browse.
+  * Update standards version to 4.6.2, no changes needed.
+
+ -- Lance Lin <lq27267@gmail.com>  Fri, 28 Apr 2023 22:02:12 +0700
+
+easy-rsa (3.1.0-1) unstable; urgency=medium
+
+  * QA upload.
+  * Salvage and orphan package (Closes: #1033314).
+  * tests: Use batch mode.
+
+ -- Bastian Germann <bage@debian.org>  Wed, 12 Apr 2023 20:09:54 +0200
+
+easy-rsa (3.1.0-0.3) unstable; urgency=medium
+
+  * Non-maintainer upload.
+  * Option --req-cn: Restore original behavior
+    (upstream patch, Closes: #1032270).
+
+ -- Bastian Germann <bage@debian.org>  Tue, 11 Apr 2023 13:03:18 +0200
+
+easy-rsa (3.1.0-0.2) unstable; urgency=medium
+
+  * Non-maintainer upload.
+  * Upstream patch: Fix make-cadir (Closes: #995156).
+
+ -- Bastian Germann <bage@debian.org>  Tue, 21 Mar 2023 19:46:48 +0100
+
+easy-rsa (3.1.0-0.1) unstable; urgency=medium
+
+  * Non-maintainer upload.
+  * New upstream version 3.1.0 (Closes: #1011439).
+  * autopkgtests: Remove conflicting vars file
+
+ -- Bastian Germann <bage@debian.org>  Tue, 31 May 2022 18:31:47 +0200
+
+easy-rsa (3.0.8-1) unstable; urgency=medium
+
+  * New upstream version 3.0.8.
+
+ -- Michele Orru <michele.orru@ens.psl.eu>  Sun, 28 Feb 2021 19:16:29 +0100
+
+easy-rsa (3.0.7-1) unstable; urgency=medium
+
+  * New upstream release.
+  * Fix .rnd file missing (Closes: #960070)
+
+ -- Michele Orrù <michele.orru@ens.psl.eu>  Sun, 10 May 2020 20:00:00 +0200
+
+easy-rsa (3.0.6-2) unstable; urgency=medium
+
+  * Fix program name in synopsis for "make-cadir" (Closes: #929634).
+
+ -- Michele Orrù <michele.orru@ens.fr>  Tue, 11 Jun 2019 08:16:38 +0200
+
+easy-rsa (3.0.6-1) unstable; urgency=medium
+
+  * New upstream release.
+
+ -- Michele Orrù <michele.orru@ens.fr>  Fri, 08 Feb 2019 16:05:07 +0100
+
+easy-rsa (3.0.5-1) unstable; urgency=medium
+
+  * Fix debian/watch with new url pattern.
+  * New upstream version 3.0.5
+  * New maintainer (Closes: #877913)
+    Praise the QA Team for their hard work.
+
+ -- Michele Orrù <michele.orru@ens.fr>  Tue, 13 Nov 2018 17:02:44 +0100
+
+easy-rsa (3.0.4-2) unstable; urgency=medium
+
+  * QA upload.
+  * Install the make-cadir helper script (and fix a typo inside the script).
+    Closes: #900610
+  * Add some basic usage tests with autopkgtest.
+  * Bump Standards-Version to 4.1.5.
+
+ -- Raphaël Hertzog <hertzog@debian.org>  Thu, 19 Jul 2018 16:03:36 +0200
+
+easy-rsa (3.0.4-1) unstable; urgency=medium
+
+  * QA upload
+  * New upstream release (Closes: #869193)
+    Bug-fixing changes:
+    - All scripts disappeared and grouped under one only script
+      (Closes: #851059, #872922)
+    - Support for subjectAltName (Closes: #886737, LP: #1346776)
+    - easyrsa has a gen-crl feature (Closes: #796185)
+    - easyrsa revoke command is less error-prone (LP: #1621112)
+    - Updated vars file (Closes: #817786)
+  * d/make-cadir updated accordingly
+  * d/easy-rsa.{install,docs} updated accordingly
+  * d/easy-rsa.dirs removed (not mandatory here)
+  * d/control:
+    - Set QA team as maintainer (See bug #877913)
+    - Bump debhelper build level dependency to 11~
+    - Bump standards version to 4.1.4
+    - Set priority from extra to optional
+    - Add Vcs- links
+    - Fix home page
+    - Mark easy-rsa as Multi-Arch: foreign
+    - Add Rules-Require-Root field, set to no
+  * d/compat:
+    - Bump level to 11
+  * d/copyright:
+    - Add myself + update + HTTPS
+  * d/watch:
+    - Updated to github, and tweaked a little
+  * d/upstream/signing-key.asc:
+    - Add OpenVPN's GPG key + Eric F Christ's one
+  * d/NEWS: breaking changes imply a NEWS file.
+
+ -- Pierre-Elliott Bécue <becue@crans.org>  Wed, 30 May 2018 13:01:34 +0200
+
+easy-rsa (2.2.2-2) unstable; urgency=medium
+
+  * Update subjectAltName to fix command arguments count.
+    (Closes: #773925) Thanks Michal Humpula for the patch.
+
+ -- Alberto Gonzalez Iniesta <agi@inittab.org>  Mon, 13 Jul 2015 19:23:18 +0200
+
+easy-rsa (2.2.2-1) unstable; urgency=low
+
+  * New upstream release. (Closes: #733905)
+  * Rework build system, remove Build-Deps on autotools-dev
+  * Add README.Debian with tips on using easy-rsa.
+  * Add patch to support specifying subjectAltName (for use in web server
+    certs).
+  * Add suggestions to improve defaults' security to README.Debian.
+  * Rescue upstream README file from older tarball.
+  * Bumped Standards-Version to 3.9.5
+
+ -- Alberto Gonzalez Iniesta <agi@inittab.org>  Tue, 07 Jan 2014 12:14:58 +0100
+
+easy-rsa (2.2.0-1) unstable; urgency=low
+
+  * Initial release (Closes: #693070)
+  * Create make-cadir, to simplify the use of easy-rsa in Debian.
+
+ -- Alberto Gonzalez Iniesta <agi@inittab.org>  Tue, 06 Nov 2012 13:43:50 +0100

@@ -1,0 +1,3 @@
+Tests: basic-usage
+Depends: haveged, @
+Restrictions: allow-stderr

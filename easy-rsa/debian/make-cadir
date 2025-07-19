@@ -1,0 +1,31 @@
+#!/bin/sh
+
+# This script creates a new directory in order to be used
+# with the tools from the easy-rsa project.
+#
+# Copyright (C) 2012 Alberto Gonzalez Iniesta
+#               2018 Pierre-Elliott Bécue
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
+
+set -e
+
+usage() {
+	echo "Usage: $0 DIRECTORY"
+	echo "Creates a *new* directory and prepares it to be used as a (CA) key management directory (to create and store keys and certificates)."
+	exit 1
+}
+
+[ "$#" -ne 1 ] && usage
+[ -e "$1" ] && { echo "$1 exists. Aborting." ; usage ; }
+
+mkdir -m 700 -p "$1"
+ln -s /usr/share/easy-rsa/easyrsa "$1"
+ln -s /usr/share/easy-rsa/x509-types "$1"
+cp /usr/share/easy-rsa/openssl-easyrsa.cnf "$1"
+cp /usr/share/easy-rsa/vars.example "$1/vars"
+
+
