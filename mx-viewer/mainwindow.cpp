@@ -34,12 +34,15 @@ MainWindow::MainWindow(const QCommandLineParser &arg_parser, QWidget *parent)
       timer {new QTimer(this)},
       toolBar {new QToolBar(this)},
       tabWidget {new TabWidget(this)},
-      args {arg_parser}
+      args {&arg_parser}
 {
     setAttribute(Qt::WA_DeleteOnClose);
     toolBar->toggleViewAction()->setVisible(false);
     connect(tabWidget, &TabWidget::currentChanged, this, [this] { tabChanged(); });
-    websettings = currentWebView()->settings();
+    auto *webView = currentWebView();
+    if (webView) {
+        websettings = webView->settings();
+    }
     loadSettings();
     addToolbar();
     addActions();
@@ -51,9 +54,9 @@ MainWindow::MainWindow(const QCommandLineParser &arg_parser, QWidget *parent)
     }
     QString url;
     QString title;
-    if (!args.positionalArguments().isEmpty()) {
-        url = args.positionalArguments().at(0);
-        title = (args.positionalArguments().size() > 1) ? args.positionalArguments().at(1) : url;
+    if (args && !args->positionalArguments().isEmpty()) {
+        url = args->positionalArguments().at(0);
+        title = (args->positionalArguments().size() > 1) ? args->positionalArguments().at(1) : url;
     }
     displaySite(url, title);
 }
@@ -66,12 +69,15 @@ MainWindow::MainWindow(const QUrl &url, QWidget *parent)
       timer {new QTimer(this)},
       toolBar {new QToolBar(this)},
       tabWidget {new TabWidget(this)},
-      args {}
+      args {nullptr}
 {
     setAttribute(Qt::WA_DeleteOnClose);
     toolBar->toggleViewAction()->setVisible(false);
     connect(tabWidget, &TabWidget::currentChanged, this, [this] { tabChanged(); });
-    websettings = currentWebView()->settings();
+    auto *webView = currentWebView();
+    if (webView) {
+        websettings = webView->settings();
+    }
     loadSettings();
     addToolbar();
     addActions();
@@ -199,7 +205,7 @@ void MainWindow::addToolbar()
     toolBar->addAction(home);
     back->setShortcut(QKeySequence::Back);
     forward->setShortcut(QKeySequence::Forward);
-    home->setShortcut(Qt::CTRL + Qt::Key_H);
+    home->setShortcut(Qt::CTRL | Qt::Key_H);
     reload->setShortcuts(QKeySequence::Refresh);
     stop->setShortcut(QKeySequence::Cancel);
     connect(stop, &QAction::triggered, this, &MainWindow::done);
@@ -227,9 +233,9 @@ void MainWindow::addToolbar()
     toolBar->addAction(menuButton
                        = new QAction(QIcon::fromTheme("open-menu", QIcon(":/icons/open-menu.png")), tr("Settings")));
     const auto step = 0.1;
-    zoomin->setShortcuts({QKeySequence::ZoomIn, Qt::CTRL + Qt::Key_Equal});
+    zoomin->setShortcuts({QKeySequence::ZoomIn, Qt::CTRL | Qt::Key_Equal});
     zoomout->setShortcut(QKeySequence::ZoomOut);
-    zoompercent->setShortcut(Qt::CTRL + Qt::Key_0);
+    zoompercent->setShortcut(Qt::CTRL | Qt::Key_0);
 
     connect(zoomout, &QAction::triggered, this, [this, step, zoompercent] {
         currentWebView()->setZoomFactor(currentWebView()->zoomFactor() - step);
@@ -321,9 +327,9 @@ void MainWindow::loadSettings()
     // Load first from system .conf file and then overwrite with CLI switches where available
     websettings->setAttribute(QWebEngineSettings::FullScreenSupportEnabled, true);
     websettings->setAttribute(QWebEngineSettings::DnsPrefetchEnabled, true);
-    QWebEngineProfile::defaultProfile()->setUseForGlobalCertificateVerification();
+    QWebEngineProfile::defaultProfile()->setHttpAcceptLanguage(QLocale::system().name());
 
-    homeAddress = settings.value("Home", "https://duckduckgo.com").toString();
+    homeAddress = settings.value("Home", "https://start.duckduckgo.com").toString();
     showProgress = settings.value("ShowProgressBar", false).toBool();
 
     websettings->setAttribute(QWebEngineSettings::SpatialNavigationEnabled,
@@ -331,19 +337,19 @@ void MainWindow::loadSettings()
     websettings->setAttribute(QWebEngineSettings::JavascriptEnabled, !settings.value("DisableJava", false).toBool());
     websettings->setAttribute(QWebEngineSettings::AutoLoadImages, settings.value("LoadImages", true).toBool());
 
-    if (args.isSet("enable-spatial-navigation")) {
+    if (args && args->isSet("enable-spatial-navigation")) {
         websettings->setAttribute(QWebEngineSettings::SpatialNavigationEnabled, true);
     }
-    if (args.isSet("disable-js")) {
+    if (args && args->isSet("disable-js")) {
         websettings->setAttribute(QWebEngineSettings::JavascriptEnabled, false);
     }
-    if (args.isSet("disable-images")) {
+    if (args && args->isSet("disable-images")) {
         websettings->setAttribute(QWebEngineSettings::AutoLoadImages, false);
     }
 
     QSize size {defaultWidth, defaultHeight};
     resize(size);
-    if (settings.contains("Geometry") && !args.isSet("full-screen")) {
+    if (settings.contains("Geometry") && (!args || !args->isSet("full-screen"))) {
         restoreGeometry(settings.value("Geometry").toByteArray());
         if (isMaximized()) { // add option to resize if maximized
             resize(size);
@@ -512,19 +518,19 @@ void MainWindow::buildMenu()
     menuButton->setMenu(menu);
 
     menu->addAction(newTab = new QAction(QIcon::fromTheme("tab-new"), tr("&New tab")));
-    newTab->setShortcut(Qt::CTRL + Qt::Key_T);
+    newTab->setShortcut(Qt::CTRL | Qt::Key_T);
     menu->addSeparator();
     menu->addAction(fullScreen = new QAction(QIcon::fromTheme("view-fullscreen"), tr("&Full screen")));
     menu->addSeparator();
     menu->addAction(historyAction = new QAction(QIcon::fromTheme("history"), tr("H&istory")));
     historyAction->setMenu(history);
     menu->addAction(downloadAction = new QAction(QIcon::fromTheme("folder-download"), tr("&Downloads")));
-    downloadAction->setShortcut(Qt::CTRL + Qt::Key_J);
+    downloadAction->setShortcut(Qt::CTRL | Qt::Key_J);
     menu->addAction(bookmarkAction = new QAction(QIcon::fromTheme("emblem-favorite"), tr("&Bookmarks")));
     bookmarkAction->setMenu(bookmarks);
     bookmarks->addAction(addBookmark);
     addBookmark->setText(tr("Bookmark current address"));
-    addBookmark->setShortcut(Qt::CTRL + Qt::Key_D);
+    addBookmark->setShortcut(Qt::CTRL | Qt::Key_D);
     bookmarks->addSeparator();
     menu->addSeparator();
     menu->addAction(help = new QAction(QIcon::fromTheme("help-contents"), tr("&Help")));
@@ -664,8 +670,8 @@ void MainWindow::loading()
     progressBar->move(geometry().width() / 2 - progressBar->width() / 2, geometry().height() - progBarVerticalAdj);
     progressBar->setFocus();
     progressBar->show();
-    timer->start(100ms);
     connect(timer, &QTimer::timeout, this, &MainWindow::procTime);
+    timer->start(100ms);
 }
 
 // done loading

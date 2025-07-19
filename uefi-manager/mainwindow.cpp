@@ -111,7 +111,7 @@ void MainWindow::addUefiEntry(QListWidget *listEntries, QWidget *dialogUefi)
                  "lsblk -no PATH,PARTTYPE | grep -iE 'c12a7328-f81f-11d2-ba4b-00a0c93ec93b|0xef' | cut -d' ' -f1")
               .split("\n", Qt::SkipEmptyParts);
 
-    for (const auto &device : qAsConst(partList)) {
+    for (const auto &device : std::as_const(partList)) {
         if (!cmd.procAsRoot("findmnt", {"-n", device})) {
             QString partName = device.section('/', -1);
             QString mountDir = "/boot/efi/" + partName;
@@ -174,7 +174,9 @@ void MainWindow::clearEntryWidget()
     if (ui->tabManageUefi->layout() != nullptr) {
         QLayoutItem *child;
         while ((child = ui->tabManageUefi->layout()->takeAt(0))) {
-            delete child->widget();
+            if (child->widget()) {
+                delete child->widget();
+            }
             delete child;
         }
     }
@@ -251,6 +253,10 @@ void MainWindow::setConnections()
 
 void MainWindow::toggleUefiActive(QListWidget *listEntries)
 {
+    if (!listEntries) {
+        return;
+    }
+
     auto currentItem = listEntries->currentItem();
     if (!currentItem) {
         return;
@@ -727,7 +733,7 @@ void MainWindow::readBootEntries(QListWidget *listEntries, QLabel *textTimeout, 
     QStringList entries = cmd.getOut("efibootmgr").split('\n', Qt::SkipEmptyParts);
     QRegularExpression bootEntryRegex(R"(^Boot[0-9A-F]{4}\*?\s+)");
 
-    for (const auto &item : qAsConst(entries)) {
+    for (const auto &item : std::as_const(entries)) {
         if (bootEntryRegex.match(item).hasMatch()) {
             auto *listItem = new QListWidgetItem(item);
             if (!item.contains("*")) {
@@ -831,9 +837,15 @@ void MainWindow::refreshEntries()
     });
     connect(listEntries, &QListWidget::itemSelectionChanged, ui->tabManageUefi,
             [listEntries, pushUp, pushDown, pushActive]() {
+                if (!listEntries || !pushUp || !pushDown || !pushActive) {
+                    return;
+                }
+
                 pushUp->setEnabled(listEntries->currentRow() != 0);
                 pushDown->setEnabled(listEntries->currentRow() != listEntries->count() - 1);
-                if (listEntries->currentItem()->text().section(' ', 0, 0).endsWith('*')) {
+
+                auto currentItem = listEntries->currentItem();
+                if (currentItem && currentItem->text().section(' ', 0, 0).endsWith('*')) {
                     pushActive->setText(tr("Set &inactive"));
                     pushActive->setIcon(QIcon::fromTheme("star-off"));
                 } else {
@@ -1228,7 +1240,8 @@ void MainWindow::getKernelOptions(const QString &bootDir, const QString &rootDir
             QString linuxOptions = cmd.getOutAsRoot(grepCmdLinux).trimmed();
 
             // Get options from GRUB_CMDLINE_LINUX_DEFAULT
-            QString grepCmdLinuxDefault = QString("grep -m1 -oP '^GRUB_CMDLINE_LINUX_DEFAULT=\"\\K[^\"]+'") + " " + defaultGrubFile;
+            QString grepCmdLinuxDefault
+                = QString("grep -m1 -oP '^GRUB_CMDLINE_LINUX_DEFAULT=\"\\K[^\"]+'") + " " + defaultGrubFile;
             QString defaultOptions = cmd.getOutAsRoot(grepCmdLinuxDefault).trimmed();
 
             // Combine both options
@@ -1247,8 +1260,9 @@ void MainWindow::getKernelOptions(const QString &bootDir, const QString &rootDir
             }
         }
     } else {
-        QString grep = QString("grep -m1 -oiP '^[[:space:]]*linux[[:space:]]+(/@)?%1/%2[[:space:]]+\\K.*root=(%3).*' '%4'")
-                       .arg(kernelDir, vmlinuz, rootPatternList.join("|"), grubFile);
+        QString grep
+            = QString("grep -m1 -oiP '^[[:space:]]*linux[[:space:]]+(/@)?%1/%2[[:space:]]+\\K.*root=(%3).*' '%4'")
+                  .arg(kernelDir, vmlinuz, rootPatternList.join("|"), grubFile);
 
         bootOptions = cmd.getOutAsRoot(grep).trimmed();
     }
@@ -1651,7 +1665,7 @@ void MainWindow::pushAbout_clicked()
 
 void MainWindow::pushHelp_clicked()
 {
-    const QString url = "https://forum.mxlinux.org";
+    const QString url = "https://mxlinux.org/wiki/uefi-manager/";
     displayDoc(url, tr("%1 Help").arg(this->windowTitle()));
 }
 
@@ -1698,6 +1712,10 @@ void MainWindow::setUefiTimeout(QWidget *uefiDialog, QLabel *textTimeout)
 
 void MainWindow::setUefiBootNext(QListWidget *listEntries, QLabel *textBootNext)
 {
+    if (!listEntries || !textBootNext) {
+        return;
+    }
+
     if (auto currentItem = listEntries->currentItem()) {
         QString item = currentItem->text().section(' ', 0, 0);
         item.remove(QRegularExpression("^Boot"));
@@ -1712,6 +1730,10 @@ void MainWindow::setUefiBootNext(QListWidget *listEntries, QLabel *textBootNext)
 
 void MainWindow::removeUefiEntry(QListWidget *listEntries, QWidget *uefiDialog)
 {
+    if (!listEntries || !uefiDialog) {
+        return;
+    }
+
     auto *currentItem = listEntries->currentItem();
     if (!currentItem) {
         return;

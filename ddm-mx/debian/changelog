@@ -1,3 +1,17 @@
+ddm-mx (25.07.02) mx; urgency=medium
+
+  * add tesla 535 support
+  * update backup PCIIDs (not used on 64 bit systems)
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 02 Jul 2025 21:22:08 -0400
+
+ddm-mx (25.07.01) mx; urgency=medium
+
+  * remove bogus apt update message
+  * update translations
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Tue, 01 Jul 2025 20:40:00 -0400
+
 ddm-mx (25.06.01) mx; urgency=medium
 
   * update cli-shell-utils library location

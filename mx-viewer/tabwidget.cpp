@@ -51,14 +51,22 @@ void TabWidget::mousePressEvent(QMouseEvent *event)
 
 void TabWidget::handleCurrentChanged(int index)
 {
-    setTabText(index, currentWebView()->title());
+    auto *webView = currentWebView();
+    if (webView) {
+        setTabText(index, webView->title());
+    }
 }
 
 void TabWidget::removeTab(int index)
 {
+    if (index < 0 || index >= count()) {
+        return;
+    }
     auto *w = widget(index);
-    QTabWidget::removeTab(index);
-    w->deleteLater();
+    if (w) {
+        QTabWidget::removeTab(index);
+        w->deleteLater();
+    }
 }
 
 void TabWidget::createTab()

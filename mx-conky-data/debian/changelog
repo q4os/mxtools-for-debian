@@ -1,3 +1,11 @@
+mx-conky-data (20250701) mx; urgency=medium
+
+  [Jerry3904]
+  * Added extra lua line to multiple configs
+  * Changed music app to strawberry
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 17 Jul 2025 19:00:32 -0400
+
 mx-conky-data (20250524) mx; urgency=medium
 
   * lastest changes

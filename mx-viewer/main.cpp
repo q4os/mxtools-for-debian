@@ -56,10 +56,10 @@ bool dropElevatedPrivileges(bool force_nobody)
         id = gid = nobody;
     }
 
-    if (setgid(id) != 0) {
+    if (setgid(gid) != 0) {
         return false;
     }
-    if (setuid(gid) != 0) {
+    if (setuid(id) != 0) {
         return false;
     }
 
@@ -79,8 +79,8 @@ bool dropElevatedPrivileges(bool force_nobody)
 
 int main(int argc, char *argv[])
 {
-    QApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
-    QApplication::setAttribute(Qt::AA_UseHighDpiPixmaps);
+    QApplication::setHighDpiScaleFactorRoundingPolicy(Qt::HighDpiScaleFactorRoundingPolicy::PassThrough);
+    QGuiApplication::setQuitOnLastWindowClosed(true);
     QApplication app(argc, argv);
     QApplication::setWindowIcon(QIcon::fromTheme(QApplication::applicationName()));
     QApplication::setApplicationVersion(VERSION);
@@ -116,12 +116,12 @@ int main(int argc, char *argv[])
     }
 
     QTranslator qtTran;
-    if (qtTran.load(QLocale::system(), "qt", "_", QLibraryInfo::location(QLibraryInfo::TranslationsPath))) {
+    if (qtTran.load(QLocale::system(), "qt", "_", QLibraryInfo::path(QLibraryInfo::TranslationsPath))) {
         QApplication::installTranslator(&qtTran);
     }
 
     QTranslator qtBaseTran;
-    if (qtBaseTran.load("qtbase_" + QLocale::system().name(), QLibraryInfo::location(QLibraryInfo::TranslationsPath))) {
+    if (qtBaseTran.load("qtbase_" + QLocale::system().name(), QLibraryInfo::path(QLibraryInfo::TranslationsPath))) {
         QApplication::installTranslator(&qtBaseTran);
     }
 
@@ -133,6 +133,13 @@ int main(int argc, char *argv[])
 
     auto *window = new MainWindow(parser);
     window->show();
+
+    // Ensure proper cleanup on application exit
+    QObject::connect(&app, &QApplication::aboutToQuit, [window]() {
+        if (window && !window->isHidden()) {
+            window->close();
+        }
+    });
 
     return QApplication::exec();
 }

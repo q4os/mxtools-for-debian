@@ -38,8 +38,8 @@ public:
 
     inline static QString withUnit(qreal bytes);
     inline static QString timeUnit(int seconds);
-    void downloadRequested(QWebEngineDownloadItem* download);
-    static void updateDownload(QWebEngineDownloadItem* download, QPushButton* pushButton, QProgressBar* progressBar);
+    void downloadRequested(QWebEngineDownloadRequest* download);
+    static void updateDownload(QWebEngineDownloadRequest* download, QPushButton* pushButton, QProgressBar* progressBar);
 
 protected:
     inline static QElapsedTimer timerDownload;

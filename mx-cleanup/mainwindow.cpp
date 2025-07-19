@@ -61,11 +61,11 @@ void MainWindow::removeManuals()
         return;
     }
 
-    QString exclusionPattern
-        = QString("mx-(docs|faq)-(en|common%1)").arg(lang == "en" || lang == "C" ? "" : QString("|%1").arg(lang));
-    QString listCmd
-        = QString("dpkg-query -W --showformat=\"\\${Package}\\n\" -- 'mx-docs-*' 'mx-faq-*' | grep -vE '%1'")
-              .arg(exclusionPattern);
+    QString exclusionPattern = QString("(mx|mxfb)-(docs|faq)-(en|common%1)")
+                                   .arg(lang == "en" || lang == "C" ? "" : QString("|%1").arg(lang));
+    QString listCmd = QString("dpkg-query -W -f='${Package}\n' -- 'mx-docs-*' 'mxfb-docs-*' 'mx-faq-*' 'mxfb-faq-*' "
+                              "2>/dev/null | grep -vE '%1'")
+                          .arg(exclusionPattern);
 
     QStringList packageList = cmdOut(listCmd, true).split('\n', Qt::SkipEmptyParts);
 
@@ -814,8 +814,13 @@ void MainWindow::pushRTLremove_clicked()
             echo -n "${modname}-dkms "
         fi
     done
-    if ! lsmod | grep -q -w ^wl; then
-        echo -n broadcom-sta-dkms
+    if ! lsmod | grep -q -w ^wl
+        then
+            echo -n broadcom-sta-dkms
+        else
+            lspci -v  | grep -q "Kernel driver in use: wl"$ || \
+            lsusb -tv | grep -q "Driver=wl, "               || \
+            echo -n broadcom-sta-dkms
     fi)");
 
     QString helper {"/usr/lib/" + QApplication::applicationName() + "/helper-terminal"};

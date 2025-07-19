@@ -1,5 +1,5 @@
 QT       += widgets
-CONFIG   += c++17 release warn_on thread qt
+CONFIG   += c++20 release warn_on thread qt
 
 # The following define makes your compiler warn you if you use any
 # feature of Qt which has been marked as deprecated (the exact warnings

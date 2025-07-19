@@ -23,6 +23,7 @@
 #include "mainwindow.h"
 
 #include <QBuffer>
+#include <QPointer>
 #include <QWebEngineHistoryItem>
 
 WebView::WebView(QWidget *parent)
@@ -35,9 +36,14 @@ WebView::WebView(QWidget *parent)
 
 WebView *WebView::createWindow(QWebEnginePage::WebWindowType type)
 {
-    QPointer<WebView> newView = new WebView;
+    auto *newView = new WebView;
     if (type == QWebEnginePage::WebBrowserTab) {
-        connect(newView->page(), &QWebEnginePage::urlChanged, this, [this, newView] { emit newWebView(newView); });
+        QPointer<WebView> viewPtr(newView);
+        connect(newView->page(), &QWebEnginePage::urlChanged, this, [this, viewPtr] {
+            if (viewPtr) {
+                emit newWebView(viewPtr.data());
+            }
+        });
     } else if (type == QWebEnginePage::WebBrowserWindow) {
         connect(newView->page(), &QWebEnginePage::urlChanged, this, [](const QUrl &url) {
             auto *main = new MainWindow(url);
@@ -70,8 +76,9 @@ void WebView::handleIconChanged()
     QPixmap iconPixmap = icon().pixmap(QSize(22, 22));
     QByteArray iconByteArray;
     QBuffer buffer(&iconByteArray);
-    buffer.open(QIODevice::WriteOnly);
-    iconPixmap.save(&buffer, "PNG");
+    if (buffer.open(QIODevice::WriteOnly)) {
+        iconPixmap.save(&buffer, "PNG");
+    }
     historyLog.setValue("icon", iconByteArray);
     historyLog.endArray();
 }
@@ -80,13 +87,15 @@ void WebView::handleIconChanged()
 // loadFinished and iconChanged trigger independently, assumption is iconChange triggers after loadFinished
 void WebView::checkRecordComplete()
 {
-    if (index == 0) {
+    if (index <= 0) {
         return;
     }
     historyLog.beginReadArray("History");
-    historyLog.setArrayIndex(index - 1);
-    if (historyLog.allKeys().count() != 3) { // if not all 3 keys were written
-        --index;
+    if (index > 0) {
+        historyLog.setArrayIndex(index - 1);
+        if (historyLog.allKeys().count() != 3) { // if not all 3 keys were written
+            --index;
+        }
     }
     historyLog.endArray();
 }

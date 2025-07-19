@@ -56,12 +56,12 @@ int main(int argc, char *argv[])
     QApplication::setApplicationDisplayName(QObject::tr("UEFI Manager"));
 
     QTranslator qtTran;
-    if (qtTran.load("qt_" + QLocale::system().name(), QLibraryInfo::location(QLibraryInfo::TranslationsPath))) {
+    if (qtTran.load("qt_" + QLocale::system().name(), QLibraryInfo::path(QLibraryInfo::TranslationsPath))) {
         QApplication::installTranslator(&qtTran);
     }
 
     QTranslator qtBaseTran;
-    if (qtBaseTran.load("qtbase_" + QLocale::system().name(), QLibraryInfo::location(QLibraryInfo::TranslationsPath))) {
+    if (qtBaseTran.load("qtbase_" + QLocale::system().name(), QLibraryInfo::path(QLibraryInfo::TranslationsPath))) {
         QApplication::installTranslator(&qtBaseTran);
     }
 
@@ -91,7 +91,7 @@ int main(int argc, char *argv[])
     if (loginUidFile.open(QIODevice::ReadOnly)) {
         QString loginUid = QString(loginUidFile.readAll()).trimmed();
         loginUidFile.close();
-        if (loginUid == '0') {
+        if (loginUid == "0") {
             QMessageBox::critical(
                 nullptr, QObject::tr("Error"),
                 QObject::tr(

@@ -3,10 +3,10 @@ name: Continous Integration
 on:
   push:
     branches:
-      - 'main'
+      - 'master'
   pull_request:
     branches:
-    - 'main'
+    - 'master'
 
 defaults:
   run:
@@ -14,7 +14,7 @@ defaults:
 
 env:
   SOURCE_DIR:   ${{ github.workspace }}
-  QT_VERSION:   5.15.2
+  QT_VERSION:   6.5.2
 
 jobs:
   build:
@@ -40,5 +40,5 @@ jobs:
       - name: Build
         working-directory: ${{ env.SOURCE_DIR }}/build
         run:  |
-              qmake -r ${{ env.SOURCE_DIR }}/*.pro
+              qmake6 -r ${{ env.SOURCE_DIR }}/*.pro
               make             

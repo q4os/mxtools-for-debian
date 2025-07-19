@@ -467,8 +467,8 @@ void MainWindow::applyDelete()
     if (QMessageBox::Yes == QMessageBox::warning(this, windowTitle(), msg, QMessageBox::Yes, QMessageBox::No)) {
         QString cmd;
         if (deleteHomeCheckBox->isChecked()) {
-            shell->runAsRoot("timeout 5s killall -w -u " + comboDeleteUser->currentText()
-                             + "; timeout 5s killall -9 -w -u " + comboDeleteUser->currentText());
+            shell->runAsRoot("timeout 5s killall -w -u " + comboDeleteUser->currentText() + " >/dev/null 2>&1");
+            shell->runAsRoot("timeout 5s killall -9 -w -u " + comboDeleteUser->currentText() + " >/dev/null 2>&1");
             cmd = QString("deluser --remove-home %1").arg(comboDeleteUser->currentText());
         } else {
             cmd = QString("deluser %1").arg(comboDeleteUser->currentText());
@@ -609,6 +609,9 @@ void MainWindow::applyRename()
                               tr("Sorry, this name already exists on your system. Please enter a different name."));
         return;
     }
+
+    shell->runAsRoot("timeout 5s killall -w -u " + old_name + " >/dev/null 2>&1");
+    shell->runAsRoot("timeout 5s killall -9 -w -u " + old_name + " >/dev/null 2>&1");
 
     // Rename user
     bool success

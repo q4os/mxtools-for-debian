@@ -147,6 +147,12 @@ if [ "$ARCH" = "amd64" ]; then
 	VERSIONS[510]=510.47.03
 	fi
 	
+	if grep -q -i $NVGA $IDLISTDIR/nvidia-tesla-535.ids 2>/dev/null
+	then
+	VERSIONS[535]=535.216.01
+	fi
+
+	
 	if grep -q -i $NVGA $IDLISTDIR/nvidia.ids 2>/dev/null
 	then
 	# 999 means current
@@ -241,6 +247,15 @@ if [[ -n ${VERSIONS[510]} ]]; then
 	if [ -n "$(apt-cache madison $PACKAGECHECK 2>/dev/null |grep $PACKAGECHECK)" ]; then
 		PACKAGE=$PACKAGECHECK
 		printf "$(eval_gettext "Your card is supported by the nvidia %s drivers series. %s")" "tesla 510"  "$PACKAGE" 
+		echo "" 
+	fi
+fi
+
+if [[ -n ${VERSIONS[535]} ]]; then
+	PACKAGECHECK="nvidia-tesla-535-driver"
+	if [ -n "$(apt-cache madison $PACKAGECHECK 2>/dev/null |grep $PACKAGECHECK)" ]; then
+		PACKAGE=$PACKAGECHECK
+		printf "$(eval_gettext "Your card is supported by the nvidia %s drivers series. %s")" "tesla 535"  "$PACKAGE" 
 		echo "" 
 	fi
 fi

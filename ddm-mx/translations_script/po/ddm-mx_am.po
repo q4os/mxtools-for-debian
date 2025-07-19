@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-12-14 20:02-0500\n"
+"POT-Creation-Date: 2025-01-27 17:50-0500\n"
 "PO-Revision-Date: 2016-11-29 14:08+0000\n"
 "Last-Translator: Robin, 2023\n"
 "Language-Team: Amharic (https://app.transifex.com/anticapitalista/teams/10162/am/)\n"
@@ -70,381 +70,388 @@ msgstr "የባለቤትነት nvidia ሾፌርን ከ repo ጫን"
 #. Unknown error: start GUI
 #. launch_gui $@
 #. not a legal option
-#: ../ddm-mx:128 ../ddm-mx:139
+#. check for not a number, or a null
+#. Option chosen is invalid
+#: ../ddm-mx:129 ../ddm-mx:140 ../ddm-mx:1342 ../ddm-mx:1351
 #, sh-format
 msgid "Invalid option"
 msgstr "ዋጋ የሌለው ምርጫ "
 
 #. ##file locking
-#: ../ddm-mx:157
+#: ../ddm-mx:158
 #, sh-format
 msgid "creating lock ..."
 msgstr "መቆለፊያ በ መፍጠር ላይ ..."
 
 #. apt purge of drivers specified
-#: ../ddm-mx:198
+#: ../ddm-mx:199
 #, sh-format
 msgid "Purge drivers for: "
 msgstr "drivers ማስወገጃ ለ: "
 
 #. times stamp.  starting at this day and time
-#: ../ddm-mx:200 ../ddm-mx:222
+#: ../ddm-mx:201 ../ddm-mx:223
 #, sh-format
 msgid "Start at (m/d/y):"
 msgstr "መጀመሪያ በ (m/d/y):"
 
 #. unknown option
-#: ../ddm-mx:208
+#: ../ddm-mx:209
 #, sh-format
 msgid "ERROR: Unknown argument: $DRV"
 msgstr "ስህተት: ያልታወቀ ክርክር: $DRV"
 
-#: ../ddm-mx:241 ../ddm-mx:1106
+#: ../ddm-mx:242 ../ddm-mx:1141
 #, sh-format
 msgid "ERROR: Unknown argument: "
 msgstr "ስህተት: ያልታወቀ ክርክር:"
 
-#: ../ddm-mx:257
+#: ../ddm-mx:258
 #, sh-format
 msgid "Device Driver Manager Help:"
 msgstr "የ አካል Driver አስተዳዳሪ እርዳታ:"
 
-#: ../ddm-mx:259
+#: ../ddm-mx:260
 msgid "The following options are allowed:"
 msgstr "የሚቀጥሉትን ምርጫዎች አስችለዋል"
 
-#: ../ddm-mx:261
+#: ../ddm-mx:262
 msgid "Offer debian-backports alternative"
 msgstr ""
 
-#: ../ddm-mx:262
+#: ../ddm-mx:264
 msgid "Offer Nvidia developer repo alternative"
 msgstr ""
 
-#: ../ddm-mx:263
+#: ../ddm-mx:265
+msgid "Implies -f nvidia-driver"
+msgstr ""
+
+#: ../ddm-mx:267
 msgid "Create 20-nvidia.conf"
 msgstr ""
 
-#: ../ddm-mx:265
+#: ../ddm-mx:269
 msgid "Install given driver."
 msgstr ""
 
-#: ../ddm-mx:266
+#: ../ddm-mx:270
 msgid "drivers: nvidia, open, fixbumblebee"
 msgstr ""
 
-#: ../ddm-mx:268
+#: ../ddm-mx:272
 msgid "Purge given driver."
 msgstr ""
 
-#: ../ddm-mx:269
+#: ../ddm-mx:273
 msgid "driver: nvidia"
 msgstr ""
 
-#: ../ddm-mx:271
+#: ../ddm-mx:275
 msgid "force specific nvidia driver package."
 msgstr ""
 
-#: ../ddm-mx:276
+#: ../ddm-mx:280
 msgid "For development testing only!  simulate installs"
 msgstr ""
 
-#: ../ddm-mx:277
+#: ../ddm-mx:281
 msgid "This will install drivers for pre-defined hardware."
 msgstr ""
 
-#: ../ddm-mx:278
+#: ../ddm-mx:282
 msgid "Use with -i."
 msgstr ""
 
 #. error message about when bumblebee drivers can be used
-#: ../ddm-mx:348
+#: ../ddm-mx:355
 #, sh-format
 msgid ""
 "Unsupported configuration.  bumblebee only works with 390xx drivers and up."
 msgstr ""
 
 #. installed hardware requires this driver
-#: ../ddm-mx:379
+#: ../ddm-mx:386
 #, sh-format
 msgid "Need driver: "
 msgstr "driver ያስፈልጋል: "
 
 #. we are going to install this package
-#: ../ddm-mx:384
+#: ../ddm-mx:391
 #, sh-format
 msgid "NVIDIA packages to install are "
 msgstr ""
 
 #. keep going
-#: ../ddm-mx:387 ../ddm-mx:836
+#: ../ddm-mx:394 ../ddm-mx:855
 #, sh-format
 msgid "Continue?"
 msgstr "ልቀጥል?"
 
 #. the nvidia install command will be presented here for the log
-#: ../ddm-mx:410
+#: ../ddm-mx:417
 #, sh-format
 msgid "Nvidia command "
 msgstr "Nvidia command "
 
-#: ../ddm-mx:437
+#: ../ddm-mx:450
 #, sh-format
 msgid "ERROR: Could not configure Bumblebee for user: "
 msgstr "ስህተት: Bumblebee ለ ተጠቃሚ ማሰናዳት አልተቻለም: "
 
-#: ../ddm-mx:441
+#: ../ddm-mx:454
 #, sh-format
 msgid "test enabled, not creating xorg.conf file"
 msgstr "መሞከሪያ አስችለዋል: የ xorg.conf ፋይል በ መፍጠር ላይ"
 
-#: ../ddm-mx:445
+#: ../ddm-mx:458
 #, sh-format
 msgid "creating /etc/X11/xorg.conf file"
 msgstr "በ መፍጠር ላይ /etc/X11/xorg.conf file"
 
-#: ../ddm-mx:475
+#: ../ddm-mx:488
 #, sh-format
 msgid "Finished"
 msgstr "ጨርሷል"
 
 #. success in removing proprietary drivers and returning to open source
 #. drivers
-#: ../ddm-mx:495
+#: ../ddm-mx:510
 #, sh-format
 msgid "Proprietary drivers removed"
 msgstr "Proprietary drivers ተወግዷል"
 
 #. the command to restore open source drivers presented for the log
-#: ../ddm-mx:509
+#: ../ddm-mx:524
 #, sh-format
 msgid "Open command "
 msgstr "ትእዛዝ መክፈቻ"
 
 #. success at installing open source drivers
-#: ../ddm-mx:514
+#: ../ddm-mx:529
 #, sh-format
 msgid "Open drivers installed"
 msgstr "Open drivers ተገጥሟል"
 
 #. return sources to a state before this application made any changes
-#: ../ddm-mx:529 ../ddm-mx:535 ../ddm-mx:541 ../ddm-mx:548
+#: ../ddm-mx:548 ../ddm-mx:554 ../ddm-mx:560 ../ddm-mx:567
 #, sh-format
 msgid "Resetting sources"
 msgstr ""
 
-#: ../ddm-mx:562
+#: ../ddm-mx:581
 #, sh-format
 msgid "Press <Enter> to exit"
 msgstr "ይጫኑ <Enter> ለ መውጣት"
 
 #. enabling debian-backports
-#: ../ddm-mx:576
+#: ../ddm-mx:595
 #, sh-format
 msgid "Enabling backports repo"
 msgstr "የ backports repo ማስቻያ"
 
-#: ../ddm-mx:577 ../ddm-mx:594 ../ddm-mx:618
+#: ../ddm-mx:596 ../ddm-mx:613 ../ddm-mx:637
 #, sh-format
 msgid "Running apt-get update..."
 msgstr "በ apt-get update በ ማስኬድ ላይ"
 
 #. inform we are updating nvidia-detect package
-#: ../ddm-mx:583 ../ddm-mx:599 ../ddm-mx:1194
+#: ../ddm-mx:602 ../ddm-mx:618 ../ddm-mx:1229
 #, sh-format
 msgid "Installing latest nvidia-detect package"
 msgstr "ዘመናዊ የ nvidia-ጥቅል ተገኝቷል: በ መግጠም ላይ "
 
 #. enabling mx_test_repo
-#: ../ddm-mx:593
+#: ../ddm-mx:612
 #, sh-format
 msgid "Enabling MX Test repo"
 msgstr ""
 
 #. enabling nvidia-direct repo
-#: ../ddm-mx:609
+#: ../ddm-mx:628
 #, sh-format
 msgid "Enabling Nvidia developer repo"
 msgstr ""
 
 #. getting the nvidia gpg archive key
-#: ../ddm-mx:611
+#: ../ddm-mx:630
 #, sh-format
 msgid "Getting Nvidia repo signing key"
 msgstr ""
 
 #. problem downloading and installing the nvidia gpg key package
-#: ../ddm-mx:621
+#: ../ddm-mx:640
 #, sh-format
 msgid "Error downloading nvidia direct repo key"
 msgstr ""
 
-#: ../ddm-mx:639
+#: ../ddm-mx:658
 #, sh-format
 msgid "Would you like to check debian-backports for a later version?"
 msgstr "እርስዎ የ debian-backports ላለፈ እትም መመርመር ይፈልጋሉ?"
 
-#: ../ddm-mx:641
+#: ../ddm-mx:660
 #, sh-format
 msgid "Yes or No?"
 msgstr "አዎ ወይንም አይ?"
 
-#: ../ddm-mx:643 ../ddm-mx:1251
+#: ../ddm-mx:662 ../ddm-mx:1295
 #, sh-format
 msgid "Yes"
 msgstr "አዎ"
 
-#: ../ddm-mx:644 ../ddm-mx:1252
+#: ../ddm-mx:663 ../ddm-mx:1296
 #, sh-format
 msgid "No"
 msgstr "አይ"
 
-#: ../ddm-mx:646 ../ddm-mx:709 ../ddm-mx:748 ../ddm-mx:788 ../ddm-mx:1158
-#: ../ddm-mx:1254
+#. user enters a number corresponding to the the driver version they want
+#: ../ddm-mx:665 ../ddm-mx:728 ../ddm-mx:767 ../ddm-mx:807 ../ddm-mx:1193
+#: ../ddm-mx:1298 ../ddm-mx:1333
 #, sh-format
 msgid "Enter Number of selection"
 msgstr "የ ምርጫውን ቁጥር ያስገቡ"
 
-#: ../ddm-mx:650 ../ddm-mx:654 ../ddm-mx:667 ../ddm-mx:671 ../ddm-mx:684
-#: ../ddm-mx:688 ../ddm-mx:713 ../ddm-mx:727 ../ddm-mx:752 ../ddm-mx:765
-#: ../ddm-mx:792 ../ddm-mx:805
+#: ../ddm-mx:669 ../ddm-mx:673 ../ddm-mx:686 ../ddm-mx:690 ../ddm-mx:703
+#: ../ddm-mx:707 ../ddm-mx:732 ../ddm-mx:746 ../ddm-mx:771 ../ddm-mx:784
+#: ../ddm-mx:811 ../ddm-mx:824 ../ddm-mx:1374
 #, sh-format
 msgid "Ok"
 msgstr "እሺ"
 
-#: ../ddm-mx:657 ../ddm-mx:674 ../ddm-mx:691 ../ddm-mx:732 ../ddm-mx:772
-#: ../ddm-mx:810 ../ddm-mx:1164 ../ddm-mx:1261
+#: ../ddm-mx:676 ../ddm-mx:693 ../ddm-mx:710 ../ddm-mx:751 ../ddm-mx:791
+#: ../ddm-mx:829 ../ddm-mx:1199 ../ddm-mx:1305
 #, sh-format
 msgid "invalid option."
 msgstr "ዋጋ የሌለው ምርጫ "
 
 #. NVIDIA_XCONFIG=""
-#: ../ddm-mx:657 ../ddm-mx:674 ../ddm-mx:691 ../ddm-mx:730 ../ddm-mx:732
-#: ../ddm-mx:770 ../ddm-mx:772 ../ddm-mx:808 ../ddm-mx:810 ../ddm-mx:1163
-#: ../ddm-mx:1164 ../ddm-mx:1260 ../ddm-mx:1261
+#: ../ddm-mx:676 ../ddm-mx:693 ../ddm-mx:710 ../ddm-mx:749 ../ddm-mx:751
+#: ../ddm-mx:789 ../ddm-mx:791 ../ddm-mx:827 ../ddm-mx:829 ../ddm-mx:1198
+#: ../ddm-mx:1199 ../ddm-mx:1304 ../ddm-mx:1305
 #, sh-format
 msgid "exiting"
 msgstr "በ መውጣት ላይ"
 
-#: ../ddm-mx:663 ../ddm-mx:664
+#: ../ddm-mx:682 ../ddm-mx:683
 #, sh-format
 msgid "Would you like to check MX Test Repo for a later version?"
 msgstr ""
 
-#: ../ddm-mx:680 ../ddm-mx:681
+#: ../ddm-mx:699 ../ddm-mx:700
 #, sh-format
 msgid "Would you like to check the Nvidia developer repo for a later version?"
 msgstr ""
 
 #. a choice of driver versions is being offerred
-#: ../ddm-mx:699 ../ddm-mx:738 ../ddm-mx:778
+#: ../ddm-mx:718 ../ddm-mx:757 ../ddm-mx:797
 #, sh-format
 msgid "Which driver do you wish to install"
 msgstr "የትኛውን driver ነው መግጠም የሚፈልጉት"
 
-#: ../ddm-mx:701
+#: ../ddm-mx:720
 #, sh-format
 msgid "Main repos or debian-backports?"
 msgstr "ዋናው ማጠራቀሚያ ወይንም debian-backports?"
 
-#: ../ddm-mx:703 ../ddm-mx:742 ../ddm-mx:782
+#: ../ddm-mx:722 ../ddm-mx:761 ../ddm-mx:801
 #, sh-format
 msgid "Main"
 msgstr "ዋናው"
 
-#: ../ddm-mx:707 ../ddm-mx:746 ../ddm-mx:786
+#: ../ddm-mx:726 ../ddm-mx:765 ../ddm-mx:805
 #, sh-format
 msgid "Exit"
 msgstr "መውጫ"
 
 #. put nvidia-detect back to version in current enabled repos
-#: ../ddm-mx:723 ../ddm-mx:761 ../ddm-mx:801
+#: ../ddm-mx:742 ../ddm-mx:780 ../ddm-mx:820 ../ddm-mx:1383
 #, sh-format
 msgid "Reset nvidia-detect"
 msgstr ""
 
-#: ../ddm-mx:740
+#: ../ddm-mx:759
 #, sh-format
 msgid "Main repos or MX Test"
 msgstr ""
 
-#: ../ddm-mx:744
+#: ../ddm-mx:763
 #, sh-format
 msgid "MX Test"
 msgstr ""
 
-#: ../ddm-mx:780
+#: ../ddm-mx:799
 #, sh-format
 msgid "Main repos or Nvidia direct repo"
 msgstr ""
 
-#: ../ddm-mx:784
+#: ../ddm-mx:803
 #, sh-format
 msgid "Nvidia Direct"
 msgstr ""
 
-#: ../ddm-mx:826
+#: ../ddm-mx:845 ../ddm-mx:1355
 #, sh-format
 msgid "Candidate is: "
 msgstr "ይህ እጩ ነው:"
 
 #. installed version, if any
-#: ../ddm-mx:827 ../ddm-mx:1121 ../ddm-mx:1131 ../ddm-mx:1140
+#: ../ddm-mx:846 ../ddm-mx:1156 ../ddm-mx:1166 ../ddm-mx:1175
 #, sh-format
 msgid "Installed is: "
 msgstr "የ ተገጠመው በ:"
 
-#: ../ddm-mx:835
+#: ../ddm-mx:854
 #, sh-format
 msgid "Refreshing Sources with apt-get update"
 msgstr "በ apt-get update ምንጩን ማሻሻያ"
 
-#: ../ddm-mx:842
+#: ../ddm-mx:861
 #, sh-format
 msgid "There was a problem with the apt-get update.  See $LOG for details"
 msgstr "በ apt-get ማሻሻያ ውስጥ ችግር ተፈጥሯል:  ለ ዝርዝር $LOG ይህን ይመልከቱ"
 
 #. provide user with information on going back to open source drivers
-#: ../ddm-mx:853
+#: ../ddm-mx:872
 #, sh-format
 msgid "To restore open source drivers use:  "
 msgstr ""
 
-#: ../ddm-mx:870
+#: ../ddm-mx:889
 #, sh-format
 msgid "To restore open source drivers later use:  "
 msgstr ""
 
 #. provide user with information on where file with recovery command is stored
-#: ../ddm-mx:883
+#: ../ddm-mx:902
 #, sh-format
 msgid "For recovery help see "
 msgstr ""
 
 #. provide user with information on where file with recovery command is stored
-#: ../ddm-mx:887
+#: ../ddm-mx:906
 #, sh-format
 msgid "Information written to "
 msgstr ""
 
 #. found an installation from source
-#: ../ddm-mx:924
+#: ../ddm-mx:949
 #, sh-format
 msgid "Possible previous install from source or smxi/sgfxi detected."
 msgstr "ከ ምንጭ ውስጥ ወይንም smxi/sgfxi ከ ቀደም ብሎ የ ተገጠመ ተገኝቷል"
 
-#: ../ddm-mx:925
+#: ../ddm-mx:950
 #, sh-format
 msgid "Version detected: "
 msgstr "እትም ተገኝቷል: "
 
-#: ../ddm-mx:926
+#: ../ddm-mx:951
 #, sh-format
 msgid "Latest possible with this script : "
 msgstr "በዚህ ጽሁፍ የሚቻለው ዘመናዊ"
 
 #. please remove the source installation if you wish to use ddm-mx
-#: ../ddm-mx:928
+#: ../ddm-mx:953
 #, sh-format
 msgid ""
 "Please remove with  <sudo nvidia-install --uninstall> and reboot if you wish"
@@ -452,48 +459,53 @@ msgid ""
 msgstr ""
 "እባክዎን ያስወግዱ h <sudo nvidia-install --uninstall> እና እንደገና ያስነሱ መቀጠል ከ ፈለጉ"
 
+#: ../ddm-mx:960
+#, sh-format
+msgid "Possible previous install detected."
+msgstr ""
+
 #. possible hybrid graphics detected
-#: ../ddm-mx:941
+#: ../ddm-mx:976
 #, sh-format
 msgid "nvidia-optimus detected"
 msgstr "nvidia-optimus ተገኝቷል: "
 
 #. ask if this system has hybrid graphics
-#: ../ddm-mx:945
+#: ../ddm-mx:980
 #, sh-format
 msgid "Is this a NVIDIA/INTEL Optimus system?"
 msgstr ""
 
-#: ../ddm-mx:985
+#: ../ddm-mx:1020
 #, sh-format
 msgid "You can use the new PRIMUS driver built in to the nvidia drivers."
 msgstr ""
 
-#: ../ddm-mx:986
+#: ../ddm-mx:1021
 #, sh-format
 msgid ""
 "Use \"nvidia-run-mx\" followed by your application command to use the nvidia"
 " graphics"
 msgstr ""
 
-#: ../ddm-mx:988
+#: ../ddm-mx:1023
 #, sh-format
 msgid ""
 "If you want to force the older bumblebee optimus drivers,\\n quit and "
 "restart with sudo ddm-mx -i nvidia -f bumblebee-nvidia"
 msgstr ""
 
-#: ../ddm-mx:991 ../ddm-mx:997
+#: ../ddm-mx:1026 ../ddm-mx:1032
 #, sh-format
 msgid "You need to use the bumblebee-nvidia driver."
 msgstr ""
 
-#: ../ddm-mx:1010
+#: ../ddm-mx:1045
 #, sh-format
 msgid "nvidia driver not available, check your repo sources"
 msgstr "nvidia driver ዝግጁ አይደለም: የ እርስዎን ማጠራቀሚያ ምንጮች ይመርምሩ"
 
-#: ../ddm-mx:1015
+#: ../ddm-mx:1050
 #, sh-format
 msgid ""
 "Uh oh. Your card is only supported by older legacy drivers which are not in "
@@ -502,64 +514,76 @@ msgstr ""
 "የ እርስዎ ካርድ የ ተደገፈው በ አሮጌው legacy drivers  ነው: በ አሁኑ የ ዴቢያን ክፍል ውስጥ የለም"
 
 #. candidate from enabled repos
-#: ../ddm-mx:1117 ../ddm-mx:1128 ../ddm-mx:1137
+#: ../ddm-mx:1152 ../ddm-mx:1163 ../ddm-mx:1172
 #, sh-format
 msgid "Main repo candidate is:  "
 msgstr "ዋናው የrepo  እጩ ይህ ነው:"
 
 #. candidate from debian backports repo
-#: ../ddm-mx:1119
+#: ../ddm-mx:1154
 #, sh-format
 msgid "Debian backports candidate is:  "
 msgstr "ይህ የ Debian backports እጩ ነው:  "
 
 #. test repo candidate
-#: ../ddm-mx:1130
+#: ../ddm-mx:1165
 #, sh-format
 msgid "MX Test repo candidate is:  "
 msgstr ""
 
 #. Nvidia developer repo candidate here
-#: ../ddm-mx:1139
+#: ../ddm-mx:1174
 #, sh-format
 msgid "Nvidia developer repo candidate is:  "
 msgstr ""
 
-#: ../ddm-mx:1150
+#: ../ddm-mx:1185
 #, sh-format
 msgid "nvidia driver already installed"
 msgstr "የ nvidia driver ቀደም ብሎ ተገጥሟል"
 
-#: ../ddm-mx:1152
+#: ../ddm-mx:1187
 #, sh-format
 msgid "Reinstall or quit?"
 msgstr "እንደገና ልግጠመው ወይንም ላጥፋው?"
 
-#: ../ddm-mx:1155
+#: ../ddm-mx:1190
 #, sh-format
 msgid "Reinstall"
 msgstr "እንደገና መግጠሚያ"
 
-#: ../ddm-mx:1156
+#: ../ddm-mx:1191 ../ddm-mx:1323
 #, sh-format
 msgid "quit"
 msgstr "ማጥፊያ"
 
-#: ../ddm-mx:1162
+#: ../ddm-mx:1197
 #, sh-format
 msgid "reinstalling"
 msgstr "እንደገና በ መግጠም ላይ "
 
-#: ../ddm-mx:1185
+#: ../ddm-mx:1220
 #, sh-format
 msgid "No nvidia card found - exiting"
 msgstr "ምንም የ nvidia ካርድ አልተገኘም - በ መውጣት ላይ"
 
 #. # Ask to try installing the latest nvidia driver if graphics card is
 #. unknown
-#: ../ddm-mx:1249
+#: ../ddm-mx:1293
 #, sh-format
 msgid "Try latest nvidia-driver?"
+msgstr ""
+
+#. Offer all versions of nvidia-driver available in repository
+#: ../ddm-mx:1319
+#, sh-format
+msgid "Available Nvidia Developer Repo Versions"
+msgstr ""
+
+#. Disable the Nvidia repo, menu options
+#: ../ddm-mx:1322
+#, sh-format
+msgid "Disable Nvidia Developer Repo (default)"
 msgstr ""
 
 #: ../nvidia-detect-mx:33
@@ -584,34 +608,39 @@ msgid ""
 "debian-backports."
 msgstr ""
 
-#: ../nvidia-detect-mx:178 ../nvidia-detect-mx:186 ../nvidia-detect-mx:194
-#: ../nvidia-detect-mx:202 ../nvidia-detect-mx:210 ../nvidia-detect-mx:218
-#: ../nvidia-detect-mx:226 ../nvidia-detect-mx:234 ../nvidia-detect-mx:242
-#: ../nvidia-detect-mx:250
+#: ../nvidia-detect-mx:170
+#, sh-format
+msgid "There may be options in the Nvidia Developer Repository"
+msgstr ""
+
+#: ../nvidia-detect-mx:179 ../nvidia-detect-mx:187 ../nvidia-detect-mx:195
+#: ../nvidia-detect-mx:203 ../nvidia-detect-mx:211 ../nvidia-detect-mx:219
+#: ../nvidia-detect-mx:227 ../nvidia-detect-mx:235 ../nvidia-detect-mx:243
+#: ../nvidia-detect-mx:251
 #, sh-format
 msgid "Your card is supported by the nvidia %s drivers series. %s"
 msgstr ""
 
 #. . inform which driver series are totally unsupported
-#: ../nvidia-detect-mx:258 ../nvidia-detect-mx:261 ../nvidia-detect-mx:264
-#: ../nvidia-detect-mx:267
+#: ../nvidia-detect-mx:259 ../nvidia-detect-mx:262 ../nvidia-detect-mx:265
+#: ../nvidia-detect-mx:268
 #, sh-format
 msgid ""
 "Uh oh. Your card is only supported by the %s legacy drivers series, which is"
 " not in any current Debian suite."
 msgstr ""
 
-#: ../nvidia-detect-mx:270
+#: ../nvidia-detect-mx:271
 #, sh-format
 msgid "Oops. Supported driver not found"
 msgstr ""
 
-#: ../nvidia-detect-mx:278
+#: ../nvidia-detect-mx:279
 #, sh-format
 msgid "It is recommended to install the following:"
 msgstr ""
 
-#: ../nvidia-detect-mx:281
+#: ../nvidia-detect-mx:282
 #, sh-format
 msgid "To install alternate driver packages, use"
 msgstr ""

@@ -1,3 +1,21 @@
+uefi-manager (25.6.01) mx; urgency=medium
+
+  * Update manual address
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 27 Jun 2025 21:19:45 -0400
+
+uefi-manager (25.6) mx; urgency=medium
+
+  * Added Wiki manual entry
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 26 Jun 2025 20:50:12 -0400
+
+uefi-manager (25.5.03) mx; urgency=medium
+
+  * Update to Qt6
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 24 Apr 2025 20:54:48 -0400
+
 uefi-manager (25.5.02) mx; urgency=medium
 
   * Handle the case when /boot/grub/grub.cfg is not present (if GRUB not fully

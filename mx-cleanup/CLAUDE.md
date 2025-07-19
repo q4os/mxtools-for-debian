@@ -13,8 +13,10 @@ This project uses qmake (Qt's build system):
 - **Build command**: `qmake6 && make`
 - **Clean build**: `make clean && qmake6 && make`
 - **Translation compilation**: `/usr/lib/qt6/bin/lrelease translations/*.ts`
+- **Debug build**: Build creates both debug and release variants by default
+- **Desktop file translations**: Use `make` in `translations-desktop-file/` directory
 
-The project is configured for Qt6 and requires C++17 (`c++1z` config).
+The project is configured for Qt6 and requires C++20 (`c++20` config). Release builds use LTO optimization.
 
 ## Architecture Overview
 
@@ -38,4 +40,6 @@ The project is configured for Qt6 and requires C++17 (`c++1z` config).
 - Privileged operations are delegated to helper scripts via pkexec
 - UI layout and components defined in Qt Designer `.ui` file
 - Project uses Qt's resource system for images (`images.qrc`)
-- Translations managed through Qt's `.ts` system with extensive language support
+- Translations managed through Qt's `.ts` system with extensive language support (40+ languages)
+- Helper script (`scripts/helper`) is a simple bash wrapper that evaluates passed commands with root privileges
+- Desktop file has separate translation system in `translations-desktop-file/` directory

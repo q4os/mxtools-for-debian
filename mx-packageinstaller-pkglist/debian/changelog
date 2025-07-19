@@ -1,3 +1,27 @@
+mx-packageinstaller-pkglist (25.07.04mx23) mx; urgency=medium
+
+  * 6.12.38 kernel
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 17 Jul 2025 18:36:03 -0400
+
+mx-packageinstaller-pkglist (25.07.03mx23) mx; urgency=medium
+
+  * update 6.12.35 kernel
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 06 Jul 2025 22:43:12 -0400
+
+mx-packageinstaller-pkglist (25.07.02mx23) mx; urgency=medium
+
+  * correct package name on 6.12.33+1 kernel
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 03 Jul 2025 20:42:20 -0400
+
+mx-packageinstaller-pkglist (25.07.01mx23) mx; urgency=medium
+
+  * update ahs/debian 6.12 kernel (6.12.33)
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Tue, 01 Jul 2025 18:44:38 -0400
+
 mx-packageinstaller-pkglist (25.06.06mx23) mx; urgency=medium
 
   * further URIs capitalization fix for extrepo

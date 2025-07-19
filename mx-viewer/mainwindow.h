@@ -66,7 +66,7 @@ private:
     QWebEngineSettings *websettings {};
     TabWidget *tabWidget {};
     bool showProgress {};
-    const QCommandLineParser &args;
+    const QCommandLineParser *args;
     const int defaultHeight {600};
     const int defaultWidth {800};
     const int progBarVerticalAdj {40};

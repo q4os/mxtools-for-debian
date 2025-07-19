@@ -1,19 +1,28 @@
 Source: mx-viewer
-Section: system
+Section: web
 Priority: optional
 Maintainer: Adrian <adrian@mxlinux.org>
-Build-Depends: debhelper (>=10),
-               qtwebengine5-dev,
-               qtbase5-dev,
-               qttools5-dev-tools
+Build-Depends: debhelper-compat (= 13),
+               qt6-base-dev,
+               qt6-base-dev-tools,
+               qt6-tools-dev,
+               qt6-tools-dev-tools,
+               qt6-webengine-dev
 Standards-Version: 3.9.8
 Homepage: https://github.com/AdrianTM/mx-viewer
+Vcs-Git: https://github.com/AdrianTM/mx-viewer.git
+Vcs-Browser: https://github.com/AdrianTM/mx-viewer
+Rules-Requires-Root: no
 
 Package: mx-viewer
 Architecture: any
 Depends: ${misc:Depends}, ${shlibs:Depends}
 Provides: x-www-browser
-Description: Displays a URL in a window
- MX Viewer displays a URL in a new window. It's an utility program used for
- displaying help information by various MX Linux utilities. It can also be used
- as a very basic internet browser.
+Description: Lightweight web browser for MX Linux
+ MX Viewer is a lightweight browser that displays URLs in a clean window.
+ It serves as the default help viewer for MX Linux applications and
+ can also function as a basic web browser with minimal resource usage.
+ Features include:
+  * Fast page loading
+  * Simple, distraction-free interface
+  * Integration with MX Linux desktop environment
