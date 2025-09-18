@@ -1,0 +1,5 @@
+usr/include/kdsingleapplication-qt6/
+usr/lib/*/cmake
+usr/lib/*/libkdsingleapplication-qt6.so
+usr/lib/*/qt6
+usr/share/doc/KDSingleApplication-qt6/

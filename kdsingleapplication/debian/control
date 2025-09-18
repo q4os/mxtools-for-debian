@@ -1,0 +1,40 @@
+Source: kdsingleapplication
+Section: libs
+Priority: optional
+Maintainer: Steven Pusser <stevep@mxlinux.org>
+XSBC-Original-Maintainer: Pierre-Elliott Bécue <peb@debian.org>
+Uploaders: Peter Blackman <peter@pblackman.plus.com>, Hefee <hefee@debian.org>
+Build-Depends: cmake, debhelper-compat (= 13), qt6-base-dev
+Vcs-Git: https://salsa.debian.org/debian/kdsingleapplication.git
+Vcs-Browser: https://salsa.debian.org/debian/kdsingleapplication
+Standards-Version: 4.7.2
+Rules-Requires-Root: no
+Homepage: https://www.kdab.com/kdsingleapplication/
+
+Package: libkdsingleapplication-qt6-1.0
+Architecture: any
+Multi-Arch: same
+Breaks: libkdsingleapplication-qt6-dev (<< 1.1.0-1)
+Depends: ${misc:Depends}, ${shlibs:Depends}
+Description: KDAB's helper class for single-instance policy applications (lib)
+ KDSingleapplication provides a helper class to make sure that an
+ application is single-instance, that is, can't be started more than
+ once for an user.
+ .
+ This package provides the QT Helper class as a library.
+
+Package: libkdsingleapplication-qt6-dev
+Section: libdevel
+Architecture: any
+Multi-Arch: same
+Breaks: libkdsingleapplication-qt6-1.0 (<< 1.1.0-1)
+Replaces: libkdsingleapplication-qt6-1.0 (<< 1.1.0-1)
+Depends: libkdsingleapplication-qt6-1.0 (= ${binary:Version}),
+         ${misc:Depends},
+         ${shlibs:Depends}
+Description: KDAB's helper class for single-instance policy applications (dev)
+ KDSingleapplication provides a helper class to make sure that an
+ application is single-instance, that is, can't be started more than
+ once for an user.
+ .
+ This package provides the development files for KDSingleApplication

@@ -1,0 +1,4 @@
+# Symbol files are not recommended for C++ libraries
+# https://wiki.debian.org/UsingSymbolsFiles#C.2B-.2B-_libraries
+#
+libkdsingleapplication-qt6-1.0 binary: no-symbols-control-file
