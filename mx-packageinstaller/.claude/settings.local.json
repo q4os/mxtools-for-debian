@@ -1,0 +1,37 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cmake:*)",
+      "Bash(ls:*)",
+      "Bash(cat:*)",
+      "Bash(rm:*)",
+      "Bash(make:*)",
+      "Bash(./test_versionnumber)",
+      "Bash(./test_aptcache)",
+      "Bash(ctest:*)",
+      "Bash(CC=clang CXX=clang++ cmake -B build-clang -DCMAKE_BUILD_TYPE=Release)",
+      "Bash(chmod:*)",
+      "Bash(./profile_runner.sh:*)",
+      "Bash(../profile_runner.sh)",
+      "Bash(./mx-packageinstaller --help)",
+      "Bash(pkill:*)",
+      "Bash(timeout:*)",
+      "Bash(grep:*)",
+      "Bash(git stash:*)",
+      "Bash(sed:*)",
+      "Bash(jobs)",
+      "Bash(git rebase:*)",
+      "Bash(git reset:*)",
+      "Bash(flatpak remote-ls:*)",
+      "Bash(./tests/test_versionnumber)",
+      "Bash(./tests/test_aptcache)",
+      "Bash(mkdir:*)",
+      "Bash(mv:*)",
+      "Bash(true)",
+      "Bash(./Testing/test_versionnumber:*)",
+      "Bash(./Testing/test_aptcache)",
+      "Bash(qmake6:*)"
+    ],
+    "deny": []
+  }
+}

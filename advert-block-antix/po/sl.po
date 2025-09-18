@@ -1,0 +1,105 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# Arnold Marko <arnold.marko@gmail.com>, 2019,2022-2023
+msgid ""
+msgstr ""
+"Project-Id-Version: antix-development\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-11-28 18:29+0100\n"
+"PO-Revision-Date: 2011-10-27 11:10+0000\n"
+"Last-Translator: Arnold Marko <arnold.marko@gmail.com>, 2019,2022-2023\n"
+"Language-Team: Slovenian (http://app.transifex.com/anticapitalista/antix-development/language/sl/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: sl\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3);\n"
+
+#: block-advert.sh:32
+msgid "antiX Advert Blocker"
+msgstr "antiX blokada oglasov"
+
+#: block-advert.sh:42
+#, sh-format
+msgid ""
+"The <b>$title</b> tool adds stuff to your /etc/hosts file, so \\nthat many "
+"advertising servers and websites can't connect to this PC.\\nYou can choose "
+"to block ads, malware, pornography, gambling, fakenews and social "
+"media\\nBlocking ad servers protects your privacy, saves you bandwidth, "
+"greatly \\nimproves web-browsing speed and makes the internet much less "
+"annoying in general.\\n\\nDo you want to proceed?"
+msgstr "Orodje <b>$title</b> doda v vašo /etc/hosts datoteko elemente,\nki mnogim oglaševalskim strežnikom in spletnim stranem onemogočajo\npovezovanje s tem računalnikom.\n\nLahko izberete blokiranje oglasov, škodljive kode, pornografije, iger na srečo, lažnih novic in družabnih omrežji.\\nBlokiranje oglaševalskih strežnikov sčiti vašo zasebnost, manjša pretok podatkov,\nzelo poveča hitrost brskanja in naredi splet veliko manj zoprn.\n\nAli želite nadaljevati?"
+
+#: block-advert.sh:53
+msgid ""
+"<b> Failed </b> \\n\\n\tantiX advert blocker must be run as root or with "
+"sudo "
+msgstr "<b> Napaka </b> \\n\\n\tantiX blokada oglasov motra biti zagnana kot root ali preko sudo"
+
+#: block-advert.sh:139
+msgid "Restoring original /etc/hosts."
+msgstr "Obnova originalnega /etc/hosts."
+
+#: block-advert.sh:180
+#, sh-format
+msgid "Loading  blocklist from $domain"
+msgstr "Nalaganje seznama blokiranih z $domain"
+
+#: block-advert.sh:191
+msgid ""
+"\\n ERROR: \\n No /etc/hosts.ORIGINAL was found, so it can't be restored.\\n"
+" Probably you already UNBLOCKED EVERYTHING. \\n You will have to manually "
+"edit the file /etc/hosts to remove any unwanted content \\n"
+msgstr "\\n NAPAKA:\\n Ker /etc/hosts.ORIGINAL ni bil najden, ne more biti obnovljen.\\n Verjetno ste že ODBLOKIRALI VSE. \\n Za odstranitev neželene vsebine je potrebno ročno urediti /etc/hosts datoteko."
+
+#: block-advert.sh:213
+msgid ""
+"Success - your settings have been changed.\\n\\nYour hosts file has been "
+"updated.\\nRestart your browser to see the changes."
+msgstr "Sprememba nastavitev je uspela.\n\nVaše gostiteljska datoteka je bila posodobljena.\nPonovno zaženite spletni brskalnik, da bodo spremembe vidne."
+
+#: block-advert.sh:223
+msgid ""
+"\\n \\n (NOTE1: This application's main window always opens showing the "
+"default selection,\\n not what's currently selected. \\n  NOTE2: RESTART "
+"YOUR BROWSER TO SEE THE EFFECTS OF ANY CHANGE!)"
+msgstr "\\n \\n (OPOMBA: Glavno okno programa ob odprtju vedno prikaže privzeti izbor in ne,\\n kar je trenutno izbrano.\\n  OPOMBA2: ZA PRIKAZ SPREMEMB JE POTREBNO BRSKALNIK PONOVNO ZAGNATI!)"
+
+#: block-advert.sh:241
+msgid "Choose what to block"
+msgstr "Izberite kaj naj se blokira"
+
+#: block-advert.sh:242
+msgid "UNBLOCK EVERYTHING"
+msgstr "ODBLOKIRAJ VSE"
+
+#: block-advert.sh:243
+msgid "Cancel"
+msgstr "Prekliči"
+
+#: block-advert.sh:244
+msgid "Block Ad and Malware websites"
+msgstr "Blokiraj oglasne in škodljive spletne strani"
+
+#: block-advert.sh:245
+msgid "Block Pornographic websites"
+msgstr "Blokiraj pornografske spletne strani"
+
+#: block-advert.sh:246
+msgid "Block Fakenews websites"
+msgstr "Blokiraj spletne strani z lažnimi novicami"
+
+#: block-advert.sh:247
+msgid "Block Gambling websites"
+msgstr "Blokiraj spletne strani z igrami na srečo"
+
+#: block-advert.sh:248
+msgid "Block Social Media websites"
+msgstr "Blokiraj spletne strani družabnih omrežji"
+
+#: block-advert.sh:300
+msgid "No item selected"
+msgstr "Nič ni izbrano"

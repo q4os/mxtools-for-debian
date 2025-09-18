@@ -1,5 +1,5 @@
 Source: mx-conky-data
-Section: x11
+Section: admin
 Priority: optional
 Maintainer: Dolphin Oracle <dolphinoracle@gmail.com>
 Build-Depends: debhelper (>=9)
@@ -8,8 +8,18 @@ Homepage: https://github.com/MX-Linux/mx-conky-data
 
 Package: mx-conky-data
 Architecture: all
-Conflicts: mx-conky-data 
+Depends: mx-conky-data-themes, mx-conky-data-bin
+Description: meta package of conky themes for MX
+ this package is a metapackage and is removable without losing themes or function
+ this package brings in mx-conky-data-themes and mx-conky-data-bin
+ 
+Package: mx-conky-data-themes
+Architecture: all
 Replaces: mx-conky-data
-Provides: mx-conky-data 
 Description: conky themes for MX Conky
  Various attractive conky themes that have been customized for MX Linux.
+
+Package: mx-conky-data-bin
+Architecture: all
+Description: launcher script for default mx conky file
+ launcher script for default mx conky file

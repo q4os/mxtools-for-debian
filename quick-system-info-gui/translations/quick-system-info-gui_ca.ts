@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="ca">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="ca">
 <context>
     <name>MainWindow</name>
     <message>
@@ -241,13 +239,13 @@
         <translation>No trobo &quot;%1&quot;</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="719"/>
+        <location filename="../mainwindow.cpp" line="710"/>
         <source>No journal entries found at this admin and priority level</source>
         <comment>no journal entries found at the options specified</comment>
         <translation>No hi ha entrades de diari per aquest nivell d&apos;administrador i prioritat</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="721"/>
+        <location filename="../mainwindow.cpp" line="712"/>
         <source>Error running journalctl command</source>
         <comment>error report for journalctl command</comment>
         <translation>Error executant l&apos;ordre journalcd</translation>

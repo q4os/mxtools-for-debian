@@ -1,17 +1,15 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="sk">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="sk">
 <context>
     <name>Cmd</name>
     <message>
         <location filename="../cmd.cpp" line="141"/>
         <source>Administrator Access Required</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../cmd.cpp" line="142"/>
         <source>This operation requires administrator privileges. Please restart the application and enter your password when prompted.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -69,7 +67,7 @@ systému, ktorý chcete upraviť (zobrazené sú iba Linuxové oddiely)</transla
     <message>
         <location filename="../mainwindow.ui" line="104"/>
         <source>Kernel parameters</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="117"/>
@@ -89,7 +87,7 @@ systému, ktorý chcete upraviť (zobrazené sú iba Linuxové oddiely)</transla
     <message>
         <location filename="../mainwindow.ui" line="134"/>
         <source>Manage UEFI Boot Options</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="150"/>
@@ -99,13 +97,13 @@ systému, ktorý chcete upraviť (zobrazené sú iba Linuxové oddiely)</transla
     <message>
         <location filename="../mainwindow.ui" line="168"/>
         <source>Image</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="181"/>
         <location filename="../mainwindow.ui" line="283"/>
         <source>Enable theme</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="261"/>
@@ -226,7 +224,7 @@ systému, ktorý chcete upraviť (zobrazené sú iba Linuxové oddiely)</transla
     <message>
         <location filename="../mainwindow.cpp" line="526"/>
         <source>Could not create a temporary folder</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="535"/>
@@ -237,7 +235,7 @@ systému, ktorý chcete upraviť (zobrazené sú iba Linuxové oddiely)</transla
     <message>
         <location filename="../mainwindow.cpp" line="535"/>
         <source>Cannot open LUKS device. Exiting...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="556"/>
@@ -335,22 +333,22 @@ Prajete si ho nainštalovať?</translation>
     <message>
         <location filename="../mainwindow.cpp" line="1346"/>
         <source>Could not retrieve UUID for %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1354"/>
         <source>Enter password to unlock %1 encrypted partition:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1359"/>
         <source>Password entry cancelled or empty for %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1365"/>
         <source>Could not open %1 LUKS container</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1200"/>
@@ -360,37 +358,37 @@ Prajete si ho nainštalovať?</translation>
     <message>
         <location filename="../mainwindow.cpp" line="100"/>
         <source>A process is still running. Do you really want to quit?</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="167"/>
         <source>Live System Detected</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="169"/>
         <source>You are currently running a live system. Would you like to modify the boot options for the live system or for an installed system?</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="171"/>
         <source>Live System</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="172"/>
         <source>Installed System</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="373"/>
         <source>Failed to update package sources.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="377"/>
         <source>Installing packages:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="387"/>
@@ -400,27 +398,27 @@ Prajete si ho nainštalovať?</translation>
     <message>
         <location filename="../mainwindow.cpp" line="387"/>
         <source>Bootsplash installed successfully.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="415"/>
         <source>Failed to create temporary file.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="980"/>
         <source>You are currently running in live mode with the &apos;toram&apos; option. Please remember to save the persistence file or remaster, otherwise any changes made will be lost.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="982"/>
         <source>Your changes have been successfully applied.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="983"/>
         <source>Operation Complete</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1068"/>
@@ -430,7 +428,7 @@ Prajete si ho nainštalovať?</translation>
     <message>
         <location filename="../mainwindow.cpp" line="1192"/>
         <source>Boot Log</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1232"/>
@@ -445,12 +443,12 @@ Prajete si ho nainštalovať?</translation>
     <message>
         <location filename="../mainwindow.cpp" line="1302"/>
         <source>Click to select theme</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1313"/>
         <source>Select GRUB theme</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -492,7 +490,7 @@ Prajete si ho nainštalovať?</translation>
     <message>
         <location filename="../main.cpp" line="83"/>
         <source>You seem to be logged in as root, please log out and log in as normal user to use this program.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 </TS>

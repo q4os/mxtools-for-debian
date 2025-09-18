@@ -1,3 +1,9 @@
+mx-repo-manager (25.08) mx; urgency=medium
+
+  * Fix ownership and permission after editing file
+
+ -- Adrian <adrian@mxlinux.org>  Sat, 16 Aug 2025 19:25:01 -0400
+
 mx-repo-manager (25.5.01) mx; urgency=medium
 
   * Cache elevation to avoid displaying the progress dialog before asking for password
@@ -7,7 +13,7 @@ mx-repo-manager (25.5.01) mx; urgency=medium
 
 mx-repo-manager (25.5) mx; urgency=medium
 
-  * Fix replacing repo in .sources (modernized files) 
+  * Fix replacing repo in .sources (modernized files)
 
  -- Adrian <adrian@mxlinux.org>  Sat, 03 May 2025 19:03:55 -0400
 
@@ -72,7 +78,7 @@ mx-repo-manager (24.6) mx; urgency=medium
 
 mx-repo-manager (24.3) mx; urgency=medium
 
-  * Update translations 
+  * Update translations
 
  -- Adrian <adrian@mxlinux.org>  Sat, 23 Mar 2024 12:58:12 -0400
 
@@ -183,13 +189,13 @@ mx-repo-manager (22.8.01) mx; urgency=medium
 
 mx-repo-manager (22.8) mx; urgency=medium
 
-  * Fix: launching Firefox from Help 
+  * Fix: launching Firefox from Help
 
  -- Adrian <adrian@mxlinux.org>  Wed, 17 Aug 2022 22:00:15 -0400
 
 mx-repo-manager (22.7) mx; urgency=medium
 
-  * translation refresh 
+  * translation refresh
 
  -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 23 Jul 2022 11:33:46 -0400
 
@@ -222,21 +228,21 @@ mx-repo-manager (21.3.01) mx; urgency=medium
 
 mx-repo-manager (21.3) mx; urgency=medium
 
-  * change Debian version detection 
+  * change Debian version detection
 
  -- Adrian <adrian@mxlinux.org>  Sun, 14 Mar 2021 12:09:34 -0400
 
 mx-repo-manager (21.1) mx; urgency=medium
 
   * remove wget dependency, use Qt network tools
-  * fix: geometry save 
+  * fix: geometry save
 
  -- Adrian <adrian@mxlinux.org>  Mon, 04 Jan 2021 13:11:44 -0500
 
 mx-repo-manager (20.12.01) mx; urgency=medium
 
-  * geometry save and restore 
-  * additonal check of version 
+  * geometry save and restore
+  * additonal check of version
 
  -- Adrian <adrian@mxlinux.org>  Wed, 30 Dec 2020 13:34:20 -0500
 
@@ -346,7 +352,7 @@ mx-repo-manager (18.12.14) mx; urgency=medium
 
 mx-repo-manager (18.12.13) mx; urgency=medium
 
-  * added search field 
+  * added search field
 
  -- Adrian <adrian@mxlinux.org>  Thu, 13 Dec 2018 19:26:49 -0500
 
@@ -630,7 +636,7 @@ mx-repo-manager (17.1mx16+1) mx; urgency=medium
 
 mx-repo-manager (17.1mx16) mx; urgency=medium
 
-  * added fr and de repos 
+  * added fr and de repos
 
  -- Adrian <adrian@mxlinux.org>  Mon, 02 Jan 2017 20:33:56 -0500
 

@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="he_IL">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="he_IL">
 <context>
     <name>MainWindow</name>
     <message>
@@ -15,29 +13,29 @@
     <message>
         <location filename="../mainwindow.ui" line="47"/>
         <source>Save the displayed system information to a text file.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="50"/>
         <location filename="../mainwindow.cpp" line="92"/>
         <source>Save text...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="30"/>
         <source>Copy the displayed system information to the clipboard, encased in [CODE][/CODE] tags ready to use in a forum post.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="199"/>
         <source>Save the system information selected from the list to an archive file.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="202"/>
         <location filename="../mainwindow.cpp" line="137"/>
         <source>&amp;Save...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="102"/>
@@ -73,13 +71,13 @@
         <location filename="../mainwindow.ui" line="254"/>
         <source>Journald</source>
         <extracomment>systemd journalctl tab</extracomment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="262"/>
         <source>Log Type</source>
         <extracomment>type of log, either user level or system</extracomment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="270"/>
@@ -91,25 +89,25 @@
         <location filename="../mainwindow.ui" line="275"/>
         <source>User</source>
         <extracomment>user level log</extracomment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="283"/>
         <source>Priority Level</source>
         <extracomment>level of status message to view</extracomment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="334"/>
         <source>Choose Boot Log</source>
         <extracomment>choose a boot to view the log</extracomment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="341"/>
         <source>Service Search</source>
         <extracomment>seek and ye shall find</extracomment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="351"/>
@@ -152,23 +150,23 @@
     <message>
         <location filename="../mainwindow.cpp" line="96"/>
         <source>&amp;Find...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="100"/>
         <location filename="../mainwindow.cpp" line="510"/>
         <source>Find &amp;Next</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="126"/>
         <source>Select &amp;All</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="132"/>
         <source>Revert Selection</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="200"/>
@@ -187,7 +185,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="299"/>
         <source>Open folder</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="301"/>
@@ -197,7 +195,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="468"/>
         <source>&amp;Save (×%1)...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="503"/>
@@ -207,50 +205,50 @@
     <message>
         <location filename="../mainwindow.cpp" line="506"/>
         <source>&amp;Find what:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="516"/>
         <source>Match c&amp;ase</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="517"/>
         <source>Match &amp;whole word only</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="520"/>
         <source>Direction</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="522"/>
         <source>&amp;Up</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="523"/>
         <source>&amp;Down</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="568"/>
         <location filename="../mainwindow.cpp" line="573"/>
         <source>Cannot find &quot;%1&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="719"/>
+        <location filename="../mainwindow.cpp" line="710"/>
         <source>No journal entries found at this admin and priority level</source>
         <comment>no journal entries found at the options specified</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="721"/>
+        <location filename="../mainwindow.cpp" line="712"/>
         <source>Error running journalctl command</source>
         <comment>error report for journalctl command</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Changelog</source>
@@ -283,7 +281,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="351"/>
         <source>history</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="374"/>

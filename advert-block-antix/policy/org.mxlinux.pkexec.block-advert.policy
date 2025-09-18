@@ -20,3 +20,4 @@
     <annotate key="org.freedesktop.policykit.exec.allow_gui">true</annotate>
   </action>
 </policyconfig>
+

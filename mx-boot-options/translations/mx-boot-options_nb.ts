@@ -1,17 +1,15 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="nb">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="nb">
 <context>
     <name>Cmd</name>
     <message>
         <location filename="../cmd.cpp" line="141"/>
         <source>Administrator Access Required</source>
-        <translation type="unfinished"></translation>
+        <translation>Administratortilgang kreves</translation>
     </message>
     <message>
         <location filename="../cmd.cpp" line="142"/>
         <source>This operation requires administrator privileges. Please restart the application and enter your password when prompted.</source>
-        <translation type="unfinished"></translation>
+        <translation>Denne handlingen krever administratortilgang. Start programmet på nytt og skriv inn passordet når du får beskjed.</translation>
     </message>
 </context>
 <context>

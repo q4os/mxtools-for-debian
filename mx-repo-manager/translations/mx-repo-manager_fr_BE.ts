@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="fr_BE">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="fr_BE">
 <context>
     <name>MainWindow</name>
     <message>
@@ -73,7 +71,7 @@
     <message>
         <location filename="../mainwindow.ui" line="386"/>
         <source>About...</source>
-        <translation>À propos ...</translation>
+        <translation>À propos …</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="392"/>
@@ -151,7 +149,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="591"/>
         <source>Please wait...</source>
-        <translation>Veuillez patienter ...</translation>
+        <translation>Veuillez patienter …</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="667"/>
@@ -250,10 +248,6 @@
         <location filename="../mainwindow.cpp" line="938"/>
         <source>Original APT sources have been restored to the release status. User added source files in /etc/apt/sources.list.d/ have not been touched.</source>
         <translation>Les sources APT d’origine ont été restaurées à leurs paramètres initiaux. Les sources entre-temps ajoutées par l’utilisateur•rice dans /etc/apt/sources.list.d/ n’ont pas été modifiées.</translation>
-    </message>
-    <message>
-        <source>There was an error writing file: %1. Please check if you have enough free space on your drive</source>
-        <translation type="vanished">Il y a eu une erreur dans l’écriture du fichier: %1. Veuillez vérifier si vous avez suffisamment d’espace libre sur votre disque dur</translation>
     </message>
 </context>
 <context>

@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="ca">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="ca">
 <context>
     <name>MainWindow</name>
     <message>
@@ -250,10 +248,6 @@
         <location filename="../mainwindow.cpp" line="938"/>
         <source>Original APT sources have been restored to the release status. User added source files in /etc/apt/sources.list.d/ have not been touched.</source>
         <translation>S&apos;han restaurat les fonts originals d&apos;APT a l&apos;estat de la versió. No s&apos;han alterat els fitxers font afegits per l&apos;usuari a /etc/apt/sources.list.d/.</translation>
-    </message>
-    <message>
-        <source>There was an error writing file: %1. Please check if you have enough free space on your drive</source>
-        <translation type="vanished">Hi ha hagut un error escrivint al fitxer: %1. Si us plau, comproveu si hi ha prou espai a la unitat</translation>
     </message>
 </context>
 <context>

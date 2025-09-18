@@ -1,3 +1,10 @@
+mx-boot-options (25.8) mx; urgency=medium
+
+  * Disable Preview button if 'splash' is not in the booted kernel
+    options
+
+ -- Adrian <adrian@mxlinux.org>  Sat, 09 Aug 2025 00:29:54 -0400
+
 mx-boot-options (25.6) mx; urgency=medium
 
   * Prepare to move stuff out of /usr/local/ read script from alternative location
@@ -184,7 +191,7 @@ mx-boot-options (22.10.02) mx; urgency=medium
 
 mx-boot-options (22.10.01) mx; urgency=medium
 
-  * update translations 
+  * update translations
 
  -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 26 Oct 2022 19:56:18 -0400
 
@@ -260,7 +267,7 @@ mx-boot-options (21.1.02) mx; urgency=medium
 
 mx-boot-options (21.1.01) mx; urgency=medium
 
-  * bug fix: detection grub present 
+  * bug fix: detection grub present
 
  -- Adrian <adrian@mxlinux.org>  Sun, 10 Jan 2021 12:16:12 -0500
 

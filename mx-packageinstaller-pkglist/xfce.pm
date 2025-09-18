@@ -28,6 +28,7 @@ catfish
 desktop-defaults-mx-xfce-desktop
 desktop-defaults-mx-xfce-system
 mx23-artwork
+policykit-1-gnome
 xfce-superkey-mx
 xfce4-appfinder
 xfce4-battery-plugin

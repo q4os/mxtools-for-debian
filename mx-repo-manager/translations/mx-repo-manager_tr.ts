@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="tr">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="tr">
 <context>
     <name>MainWindow</name>
     <message>
@@ -250,10 +248,6 @@
         <location filename="../mainwindow.cpp" line="938"/>
         <source>Original APT sources have been restored to the release status. User added source files in /etc/apt/sources.list.d/ have not been touched.</source>
         <translation>Özgün APT kaynakları sürüm durumuna geri yüklendi. Kullanıcının eklediği /etc/apt/sources.list.d/ dosyalarına dokunulmadı.</translation>
-    </message>
-    <message>
-        <source>There was an error writing file: %1. Please check if you have enough free space on your drive</source>
-        <translation type="vanished">Dosya yazılırken bir hata oluştu: %1. Lütfen sürücünüzde yeterli boş alan olup olmadığını kontrol edin</translation>
     </message>
 </context>
 <context>

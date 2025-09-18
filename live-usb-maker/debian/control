@@ -8,5 +8,5 @@ Homepage: https://gitlab.com/antiX-Linux/live-usb-maker
 
 Package: live-usb-maker
 Architecture: all
-Depends: cli-shell-utils, extlinux, syslinux-common, parted, xorriso, wamerican, dict
+Depends: cli-shell-utils, extlinux, syslinux-common, parted, fdisk, xorriso, wamerican, dict
 Description: Create an antiX/MX LiveUSB.         

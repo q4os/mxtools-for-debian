@@ -111,6 +111,7 @@ private:
     [[nodiscard]] bool mountBoot(const QString &path);
     [[nodiscard]] bool openLuks(const QString &part, const QString &path);
     [[nodiscard]] static bool isUefi();
+    [[nodiscard]] static bool isSplashEnabled();
     bool replaceGrubArg(const QString &key, const QString &item);
     static void sendMouseEvents();
     void addGrubLine(const QString &item);

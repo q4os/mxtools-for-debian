@@ -54,24 +54,6 @@ public:
 
     void setup() noexcept;
 
-private slots:
-    void on_pushSave_clicked() noexcept;
-    void on_pushSaveText_clicked() noexcept;
-    void on_buttonAbout_clicked() noexcept;
-    void on_ButtonHelp_clicked() noexcept;
-    void on_listInfo_itemSelectionChanged() noexcept;
-    void on_listInfo_itemChanged() noexcept;
-
-    void on_tabWidget_currentChanged(int index);
-
-    void on_comboBoxJournaldListBoots_activated(int index);
-
-    void on_comboBoxJournaldPriority_activated(int index);
-
-    void on_comboBoxJournaldSystemUser_activated(int index);
-
-    void on_toolButtonReloadSearch_clicked();
-
 private:
     Ui::MainWindow *ui;
     QStringList defaultMatches;
@@ -94,6 +76,15 @@ private:
     void systemd_check();
     void journald_setup();
     void run_journalctl_report();
+
+    // Slots
+    void tabWidget_currentChanged(int index) noexcept;
+    void listInfo_itemSelectionChanged() noexcept;
+    void listInfo_itemChanged() noexcept;
+    void pushSave_clicked() noexcept;
+    void pushSaveText_clicked() noexcept;
+    void pushAbout_clicked() noexcept;
+    void pushHelp_clicked() noexcept;
 };
 
 #endif // MAINWINDOW_H

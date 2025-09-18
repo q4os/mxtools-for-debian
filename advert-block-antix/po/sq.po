@@ -1,54 +1,105 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-#
+# 
 # Translators:
+# Besnik Bleta <besnik@programeshqip.org>, 2023
 msgid ""
 msgstr ""
 "Project-Id-Version: antix-development\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-24 20:37+0300\n"
-"PO-Revision-Date: 2023-01-09 21:36+0200\n"
-"Last-Translator: \n"
-"Language-Team: Albanian (http://www.transifex.com/anticapitalista/antix-development/language/sq/)\n"
-"Language: sq\n"
+"POT-Creation-Date: 2023-11-28 18:29+0100\n"
+"PO-Revision-Date: 2011-10-27 11:10+0000\n"
+"Last-Translator: Besnik Bleta <besnik@programeshqip.org>, 2023\n"
+"Language-Team: Albanian (http://app.transifex.com/anticapitalista/antix-development/language/sq/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: sq\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.0.1\n"
+
+#: block-advert.sh:32
+msgid "antiX Advert Blocker"
+msgstr "Bllokues Reklamash antiX"
 
 #: block-advert.sh:42
 #, sh-format
-msgid "The <b>$title</b> tool adds stuff to your /etc/hosts file, so \\nthat many advertising servers and websites can't connect to this PC.\\nYou can choose to block ads, malware, pornography, gambling, fakenews and social media\\nBlocking ad servers protects your privacy, saves you bandwidth, greatly \\nimproves web-browsing speed and makes the internet much less annoying in general.\\n\\nDo you want to proceed?"
-msgstr ""
-"Mjeti <b>$title</b> shton gjëra te kartela juaj /etc/hosts, në mënyrë që\\n\n"
-"mjaft shërbyes dhe sajte reklamash të mos lidhen dot me këtë PC.\\n\n"
-"Mund të zgjidhni të bllokoni reklama, malware, pornografi, kumar, lajme të rreme dhe media shoqërore\\n\n"
-"Bllokimi i shërbyesve të reklamave mbron privatësinë tuaj, ju kursen sasi trafiku të dhënash, përmirëson shumë shpejtësinë e shfletimit\\n\n"
-"dhe, në përgjithësi, e bën internetin më pak të bezdisur.\\n\\nDoni të vazhdohet?"
+msgid ""
+"The <b>$title</b> tool adds stuff to your /etc/hosts file, so \\nthat many "
+"advertising servers and websites can't connect to this PC.\\nYou can choose "
+"to block ads, malware, pornography, gambling, fakenews and social "
+"media\\nBlocking ad servers protects your privacy, saves you bandwidth, "
+"greatly \\nimproves web-browsing speed and makes the internet much less "
+"annoying in general.\\n\\nDo you want to proceed?"
+msgstr "Mjeti <b>$title</b> shton gjëra te kartela juaj /etc/hosts, në mënyrë që\\n\nmjaft shërbyes dhe sajte reklamash të mos lidhen dot me këtë PC.\\n\nMund të zgjidhni të bllokoni reklama, malware, pornografi, kumar, lajme të rreme dhe media shoqërore\\n\nBllokimi i shërbyesve të reklamave mbron privatësinë tuaj, ju kursen sasi trafiku të dhënash, përmirëson shumë shpejtësinë e shfletimit\\n\ndhe, në përgjithësi, e bën internetin më pak të bezdisur.\\n\\nDoni të vazhdohet?"
 
 #: block-advert.sh:53
-msgid "<b> Failed </b> \\n\\n\tantiX advert blocker must be run as root or with sudo "
+msgid ""
+"<b> Failed </b> \\n\\n\tantiX advert blocker must be run as root or with "
+"sudo "
 msgstr "<b> U dështua </b> \\n\\n\tBllokuesi antiX i reklamave duhet xhiruar si rrënjë ose me sudo "
 
-#: block-advert.sh:140
+#: block-advert.sh:139
 msgid "Restoring original /etc/hosts."
 msgstr "Po rikthehen /etc/hosts origjinale."
 
-#: block-advert.sh:182
+#: block-advert.sh:180
 #, sh-format
 msgid "Loading  blocklist from $domain"
 msgstr "Po ngarkohet listë bllokimesh nga $domain"
 
-#: block-advert.sh:211
-msgid "Success - your settings have been changed.\\n\\nYour hosts file has been updated.\\nRestart your browser to see the changes."
+#: block-advert.sh:191
+msgid ""
+"\\n ERROR: \\n No /etc/hosts.ORIGINAL was found, so it can't be restored.\\n"
+" Probably you already UNBLOCKED EVERYTHING. \\n You will have to manually "
+"edit the file /etc/hosts to remove any unwanted content \\n"
+msgstr "\\n GABIM: \\n S’u gjet /etc/hosts.ORIGINAL, ndaj s’mund të rikthehet.\\n Mundet që të keni ZHBLLOKUAR tashmë GJITHÇK. \\n Do t’ju duhet të përpunoni dorazi kartelën /etc/hosts që të hiqni çfarëdo lënde të padëshiruar \\n"
+
+#: block-advert.sh:213
+msgid ""
+"Success - your settings have been changed.\\n\\nYour hosts file has been "
+"updated.\\nRestart your browser to see the changes."
 msgstr "Sukses - rregullimet tuaja u ndryshuan.\\n\\nKartela juaj “hosts” u përditësua.\\nQë të shihni ndryshimet, rinisni shfletuesin tuaj."
 
-#: block-advert.sh:232
+#: block-advert.sh:223
+msgid ""
+"\\n \\n (NOTE1: This application's main window always opens showing the "
+"default selection,\\n not what's currently selected. \\n  NOTE2: RESTART "
+"YOUR BROWSER TO SEE THE EFFECTS OF ANY CHANGE!)"
+msgstr "\\n \\n (SHËNIM 1: Dritarja kryesore e këtij aplikacioni hapet gjithnjë duke treguar përzgjedhje parazgjedhje,\\n jo ç’është përzgjedhur aktualisht. \\n  SHËNIM 2: QË TË SHIHNI EFEKTET E ÇFARËDO NDRYSHIMI, RINISNI SHFLETUESIN TUAJ!)"
+
+#: block-advert.sh:241
 msgid "Choose what to block"
 msgstr "Zgjidhni ç’të bllokohet"
 
-#: block-advert.sh:305
+#: block-advert.sh:242
+msgid "UNBLOCK EVERYTHING"
+msgstr "ZHBLLOKO GJITHÇKA"
+
+#: block-advert.sh:243
+msgid "Cancel"
+msgstr "Anuloje"
+
+#: block-advert.sh:244
+msgid "Block Ad and Malware websites"
+msgstr "Blloko sajte Reklamash dhe Malware-i"
+
+#: block-advert.sh:245
+msgid "Block Pornographic websites"
+msgstr "Blloko sajte Pornografikë"
+
+#: block-advert.sh:246
+msgid "Block Fakenews websites"
+msgstr "Blloko sajte Lajmesh të Rreme"
+
+#: block-advert.sh:247
+msgid "Block Gambling websites"
+msgstr "Blloko sajte Bixhozi"
+
+#: block-advert.sh:248
+msgid "Block Social Media websites"
+msgstr "Blloko sajte Mediash Shoqërore"
+
+#: block-advert.sh:300
 msgid "No item selected"
 msgstr "Pa objekt të përzgjedhur"

@@ -123,6 +123,13 @@ if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-remov
 		fi
 	fi
 
+	#fix permissions on sysctl.d .conf files provided by mx-system
+    if [ -x "/etc/sysctl.d/99-swappiness_mx.conf" ]; then
+    	chmod a-x /etc/sysctl.d/99-swappiness_mx.conf
+    fi
+    if [ -x "/etc/sysctl.d/99-vm-dirtybytes_mx.conf" ]; then
+        chmod a-x /etc/sysctl.d/99-vm-dirtybytes_mx.conf
+    fi
     set -e
 fi
 

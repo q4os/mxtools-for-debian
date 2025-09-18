@@ -5,7 +5,7 @@
 # 
 # Translators:
 # kilickerem066 ., 2023
-# Mehmet Akif 9oglu, 2023
+# Mehmet Akif Dokuzoğlu, 2023
 # 
 #, fuzzy
 msgid ""
@@ -14,7 +14,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-12-09 23:41-0500\n"
 "PO-Revision-Date: 2022-12-10 04:42+0000\n"
-"Last-Translator: Mehmet Akif 9oglu, 2023\n"
+"Last-Translator: Mehmet Akif Dokuzoğlu, 2023\n"
 "Language-Team: Turkish (https://app.transifex.com/anticapitalista/teams/10162/tr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"

@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="fr">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="fr">
 <context>
     <name>Cmd</name>
     <message>
@@ -164,7 +162,7 @@
     <message>
         <location filename="../mainwindow.ui" line="456"/>
         <source>About...</source>
-        <translation>À propos...</translation>
+        <translation>À propos…</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="463"/>
@@ -236,12 +234,12 @@
     <message>
         <location filename="../mainwindow.cpp" line="535"/>
         <source>Cannot open LUKS device. Exiting...</source>
-        <translation>Impossible d’ouvrir le périphérique LUKS. Sortie...</translation>
+        <translation>Impossible d’ouvrir le périphérique LUKS. Sortie…</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="556"/>
         <source>Cannot create chroot environment, cannot change boot options. Exiting...</source>
-        <translation>Impossible de créer environnement chroot, impossible de modifier les options de démarrage. Sortie...</translation>
+        <translation>Impossible de créer environnement chroot, impossible de modifier les options de démarrage. Sortie…</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="887"/>
@@ -252,13 +250,13 @@
     <message>
         <location filename="../mainwindow.cpp" line="958"/>
         <source>Updating initramfs...</source>
-        <translation>Mise à jour d’initramfs...</translation>
+        <translation>Mise à jour d’initramfs…</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="972"/>
         <location filename="../mainwindow.cpp" line="1281"/>
         <source>Updating grub...</source>
-        <translation>Mise à jour de grub...</translation>
+        <translation>Mise à jour de grub…</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="997"/>
@@ -268,7 +266,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="998"/>
         <source>Version: </source>
-        <translation>Version&#xa0;: </translation>
+        <translation>Version : </translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1000"/>
@@ -314,7 +312,7 @@ L’écran d’amorçage Plymouth fonctionnera de façon restreinte, vous ne pou
         <source>Plymouth packages are not currently installed.
 OK to go ahead and install them?</source>
         <translation>Les paquets Plymouth ne sont pas installés actuellement.
-Voulez-vous les installer&#xa0;?</translation>
+Voulez-vous les installer ?</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1069"/>
@@ -339,7 +337,7 @@ Voulez-vous les installer&#xa0;?</translation>
     <message>
         <location filename="../mainwindow.cpp" line="1354"/>
         <source>Enter password to unlock %1 encrypted partition:</source>
-        <translation>Entrer le mot de passe pour déverrouiller la partition chiffrée %1 &#xa0;:</translation>
+        <translation>Entrer le mot de passe pour déverrouiller la partition chiffrée %1  :</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1359"/>
@@ -359,7 +357,7 @@ Voulez-vous les installer&#xa0;?</translation>
     <message>
         <location filename="../mainwindow.cpp" line="100"/>
         <source>A process is still running. Do you really want to quit?</source>
-        <translation>Un processus est toujours en cours. Voulez-vous vraiment arrêter&#xa0;?</translation>
+        <translation>Un processus est toujours en cours. Voulez-vous vraiment arrêter ?</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="167"/>
@@ -369,7 +367,7 @@ Voulez-vous les installer&#xa0;?</translation>
     <message>
         <location filename="../mainwindow.cpp" line="169"/>
         <source>You are currently running a live system. Would you like to modify the boot options for the live system or for an installed system?</source>
-        <translation>Vous utilisez actuellement un système Live. Souhaitez-vous modifier les options de démarrage pour le système Live ou pour un système installé&#xa0;?</translation>
+        <translation>Vous utilisez actuellement un système Live. Souhaitez-vous modifier les options de démarrage pour le système Live ou pour un système installé ?</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="171"/>
@@ -389,7 +387,7 @@ Voulez-vous les installer&#xa0;?</translation>
     <message>
         <location filename="../mainwindow.cpp" line="377"/>
         <source>Installing packages:</source>
-        <translation>Installation des paquets&#xa0;:</translation>
+        <translation>Installation des paquets :</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="387"/>
@@ -409,7 +407,7 @@ Voulez-vous les installer&#xa0;?</translation>
     <message>
         <location filename="../mainwindow.cpp" line="980"/>
         <source>You are currently running in live mode with the &apos;toram&apos; option. Please remember to save the persistence file or remaster, otherwise any changes made will be lost.</source>
-        <translation>Vous êtes actuellement en mode Live avec l’option «&#xa0;toram&#xa0;». N’oubliez pas de sauvegarder le fichier de persistance ou de remasteriser, sinon toutes les modifications apportées seront perdues.</translation>
+        <translation>Vous êtes actuellement en mode Live avec l’option « toram ». N’oubliez pas de sauvegarder le fichier de persistance ou de remasteriser, sinon toutes les modifications apportées seront perdues.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="982"/>

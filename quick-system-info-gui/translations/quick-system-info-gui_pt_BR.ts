@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="pt_BR">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="pt_BR">
 <context>
     <name>MainWindow</name>
     <message>
@@ -241,13 +239,13 @@
         <translation>Não foi possível localizar ‘%1’</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="719"/>
+        <location filename="../mainwindow.cpp" line="710"/>
         <source>No journal entries found at this admin and priority level</source>
         <comment>no journal entries found at the options specified</comment>
         <translation>Nenhuma entrada do registro diário do SystemD (Journal) foi encontrada neste nível de prioridade e de administração do sistema operacional</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="721"/>
+        <location filename="../mainwindow.cpp" line="712"/>
         <source>Error running journalctl command</source>
         <comment>error report for journalctl command</comment>
         <translation>Ocorreu um erro ao executar o comando ‘journalctl’</translation>

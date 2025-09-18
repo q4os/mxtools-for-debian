@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="zh_CN">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="zh_CN">
 <context>
     <name>MainWindow</name>
     <message>
@@ -219,12 +217,12 @@
     <message>
         <location filename="../mainwindow.cpp" line="851"/>
         <source>Can&apos;t figure out if this app is running on antiX or MX</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="859"/>
         <source>MX version not detected or out of range: </source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="874"/>
@@ -234,26 +232,22 @@
     <message>
         <location filename="../mainwindow.cpp" line="881"/>
         <source>Could not unzip downloaded file.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="924"/>
         <source>Enabling AHS</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="924"/>
         <source>Do you use AHS (Advanced Hardware Stack) repo?</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="938"/>
         <source>Original APT sources have been restored to the release status. User added source files in /etc/apt/sources.list.d/ have not been touched.</source>
         <translation>原 APT 软件源已被恢复至 Release 状态。用户添加在 /etc/apt/sources.list.d/ 中的软件源文件不会被使用。</translation>
-    </message>
-    <message>
-        <source>There was an error writing file: %1. Please check if you have enough free space on your drive</source>
-        <translation type="vanished">写入文件时出错：%1。请检查您的驱动器上是否有足够的可用空间</translation>
     </message>
 </context>
 <context>

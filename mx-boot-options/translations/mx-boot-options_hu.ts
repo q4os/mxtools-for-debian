@@ -1,17 +1,15 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="hu">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="hu">
 <context>
     <name>Cmd</name>
     <message>
         <location filename="../cmd.cpp" line="141"/>
         <source>Administrator Access Required</source>
-        <translation type="unfinished"></translation>
+        <translation>Rendszergazdai jogosultság szükséges</translation>
     </message>
     <message>
         <location filename="../cmd.cpp" line="142"/>
         <source>This operation requires administrator privileges. Please restart the application and enter your password when prompted.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ehhez a művelethez rendszergazdai jogosultságok kellenek. Kérjük, indítsa újra az alkalmazást, és adja meg a jelszavát, amikor kéri.</translation>
     </message>
 </context>
 <context>
@@ -237,7 +235,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="535"/>
         <source>Cannot open LUKS device. Exiting...</source>
-        <translation type="unfinished"></translation>
+        <translation>Nem sikerült megnyitni a LUKS eszközt. Kilépés...</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="556"/>
@@ -345,7 +343,7 @@ Indulhat a telepítésük?</translation>
     <message>
         <location filename="../mainwindow.cpp" line="1359"/>
         <source>Password entry cancelled or empty for %1</source>
-        <translation type="unfinished"></translation>
+        <translation>A jelszó megadása megszakítva vagy üres a(z) %1 esetén</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1365"/>

@@ -25,10 +25,13 @@
 #include <QDateTime>
 #include <QDebug>
 #include <QIcon>
+#include <QLibraryInfo>
 #include <QLocale>
 #include <QTranslator>
 
+#include "common.h"
 #include "mainwindow.h"
+
 #include <unistd.h>
 #include <version.h>
 
@@ -46,12 +49,20 @@ int main(int argc, char *argv[])
     QApplication::setApplicationVersion(VERSION);
 
     QTranslator qtTran;
-    qtTran.load(QString("qt_") + QLocale::system().name());
-    a.installTranslator(&qtTran);
+    if (qtTran.load("qt_" + QLocale().name(), QLibraryInfo::path(QLibraryInfo::TranslationsPath))) {
+        QApplication::installTranslator(&qtTran);
+    }
+
+    QTranslator qtBaseTran;
+    if (qtBaseTran.load("qtbase_" + QLocale().name(), QLibraryInfo::path(QLibraryInfo::TranslationsPath))) {
+        QApplication::installTranslator(&qtBaseTran);
+    }
 
     QTranslator appTran;
-    appTran.load(QString("mx-locale_") + QLocale::system().name(), "/usr/share/mx-locale/locale");
-    a.installTranslator(&appTran);
+    if (appTran.load(QApplication::applicationName() + "_" + QLocale().name(),
+                     "/usr/share/" + QApplication::applicationName() + "/locale")) {
+        QApplication::installTranslator(&appTran);
+    }
 
     QCommandLineParser parser;
     parser.setApplicationDescription(QObject::tr("MX Locale is a tool used for managing locale settings in MX Linux"));

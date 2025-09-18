@@ -198,8 +198,8 @@ uy_AX_HOST=http://mirror.netlinux.cl/mxlinux/antix
 uy_MX_HOST=http://mirror.netlinux.cl/mxlinux/mx
 uy_LOCATION="Chile"
 
-vn_AX_HOST=https://mirror.kku.ac.th/mx-packages/antix
-vn_MX_HOST=https://mirror.kku.ac.th/mx-packages/mx
+vn_AX_HOST=https://mirror.meowsmp.net/mxlinux/packages/antix
+vn_MX_HOST=https://mirror.meowsmp.net/mxlinux/packages/mx
 vn_LOCATION="Vietnam"
 
 za_AX_HOST=https://ftp.saix.net/pub/linux/distributions/mxlinux/antix

@@ -67,8 +67,9 @@ TeamViewer
 
 <preinstall>
 
-( curl -RLJ https://download.teamviewer.com/download/linux/signature/TeamViewer2017.asc | apt-key add - ) 2>/dev/null 1>/dev/null
-echo "deb http://linux.teamviewer.com/deb stable main" > /etc/apt/sources.list.d/mxtemp.list
+( wget -q https://linux.teamviewer.com/pubkey/currentkey.asc -O- \
+| gpg --dearmor | sudo tee /usr/share/keyrings/teamviewer-keyring.gpg ) 2>/dev/null 1>/dev/null
+echo "deb [signed-by=/usr/share/keyrings/teamviewer-keyring.gpg] https://linux.teamviewer.com/deb stable main" > /etc/apt/sources.list.d/mxtemp.list
 apt-get update
 
 </preinstall>

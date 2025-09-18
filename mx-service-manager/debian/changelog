@@ -1,3 +1,35 @@
+mx-service-manager (25.08.06) mx; urgency=medium
+
+  * Fix helper file location
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 18 Aug 2025 12:37:09 -0400
+
+mx-service-manager (25.08.05) mx; urgency=medium
+
+  * Remove extra dependencies
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 18 Aug 2025 00:36:25 -0400
+
+mx-service-manager (25.08.04) mx; urgency=medium
+
+  * Add missing dependencies
+  * Remove potentially confusing debug message
+
+ -- Adrian <adrian@mxlinux.org>  Sun, 17 Aug 2025 18:04:29 -0400
+
+mx-service-manager (25.8) mx; urgency=medium
+
+  * Require elevation at the start of the app for more accurate listing
+  * Disable pushed button till the action is completed
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 13 Aug 2025 23:39:41 -0400
+
+mx-service-manager (25.4.01) mx; urgency=medium
+
+  * Update to Qt6
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 24 Apr 2025 18:32:31 -0400
+
 mx-service-manager (25.4) mx; urgency=medium
 
   * Performance fixes
@@ -14,7 +46,7 @@ mx-service-manager (24.3.02) mx; urgency=medium
 
 mx-service-manager (24.3) mx; urgency=medium
 
-  * Update translations 
+  * Update translations
 
  -- Adrian <adrian@mxlinux.org>  Sat, 23 Mar 2024 13:08:55 -0400
 

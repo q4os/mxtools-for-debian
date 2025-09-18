@@ -1,0 +1,108 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# Adrian, 2024
+# anticapitalista <anticapitalista@riseup.net>, 2022-2024
+# anticapitalista <anticapitalista@riseup.net>, 2013,2016-2017
+# anticapitalista <anticapitalista@riseup.net>, 2011
+msgid ""
+msgstr ""
+"Project-Id-Version: antix-development\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-11-28 18:29+0100\n"
+"PO-Revision-Date: 2011-10-27 11:10+0000\n"
+"Last-Translator: anticapitalista <anticapitalista@riseup.net>, 2022-2024\n"
+"Language-Team: Greek (http://app.transifex.com/anticapitalista/antix-development/language/el/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: el\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: block-advert.sh:32
+msgid "antiX Advert Blocker"
+msgstr "antiX Advert Blocker"
+
+#: block-advert.sh:42
+#, sh-format
+msgid ""
+"The <b>$title</b> tool adds stuff to your /etc/hosts file, so \\nthat many "
+"advertising servers and websites can't connect to this PC.\\nYou can choose "
+"to block ads, malware, pornography, gambling, fakenews and social "
+"media\\nBlocking ad servers protects your privacy, saves you bandwidth, "
+"greatly \\nimproves web-browsing speed and makes the internet much less "
+"annoying in general.\\n\\nDo you want to proceed?"
+msgstr "Το εργαλείο <b>$title</b> προσθέτει πράγματα στο αρχείο /etc/hosts file, \nέτσι ώστε πολλές διακομιστές διαφημίσεων και ιστοσελίδες δεν θα είναι σε θέση να συνδεθείτε με αυτόν τον υπολογιστή.\n\nΜπορείτε να επιλέξετε να αποκλείσετε διαφημίσεις, κακόβουλο λογισμικό, πορνογραφία, τζόγο, fakenews και μέσα κοινωνικής δικτύωσης.\nΕμποδίζοντας τις διακομιστές διαφημίσεων προστατεύει την ιδιωτικότητα σας, σας εξοικονομεί εύρος ζώνης, βελτιώνει σημαντικά η ταχύτητα και κάνει το Διαδίκτυο πολύ λιγότερο ενοχλητικό.\n\nΘέλετε να συνεχίσετε?"
+
+#: block-advert.sh:53
+msgid ""
+"<b> Failed </b> \\n\\n\tantiX advert blocker must be run as root or with "
+"sudo "
+msgstr "<b> Απέτυχε </b>  \\n\\n antiX advert blocker πρέπει να εκτελείται ως root ή με sudo"
+
+#: block-advert.sh:139
+msgid "Restoring original /etc/hosts."
+msgstr "Επαναφορά αρχικό /etc/hosts."
+
+#: block-advert.sh:180
+#, sh-format
+msgid "Loading  blocklist from $domain"
+msgstr "Φόρτωση blocklist από $domain"
+
+#: block-advert.sh:191
+msgid ""
+"\\n ERROR: \\n No /etc/hosts.ORIGINAL was found, so it can't be restored.\\n"
+" Probably you already UNBLOCKED EVERYTHING. \\n You will have to manually "
+"edit the file /etc/hosts to remove any unwanted content \\n"
+msgstr "\\n ΣΦΑΛΜΑ: \\n Δεν βρέθηκε το /etc/hosts.ORIGINAL, επομένως δεν είναι δυνατή η επαναφορά του.\\n Μάλλον έχετε ήδη ξεμπλοκάρει τα πάντα. \\n Θα πρέπει να επεξεργαστείτε μη αυτόματα το αρχείο /etc/host για να αφαιρέσετε τυχόν ανεπιθύμητο περιεχόμενο \\n"
+
+#: block-advert.sh:213
+msgid ""
+"Success - your settings have been changed.\\n\\nYour hosts file has been "
+"updated.\\nRestart your browser to see the changes."
+msgstr "Επιτυχία - Οι ρυθμίσεις σας έχουν αλλάξει\\n\\nΤο αρχείο hosts έχει ενημερωθεί.\\nΓια να δείτε τις αλλαγές, επανεκκινήστε περιήγησης "
+
+#: block-advert.sh:223
+msgid ""
+"\\n \\n (NOTE1: This application's main window always opens showing the "
+"default selection,\\n not what's currently selected. \\n  NOTE2: RESTART "
+"YOUR BROWSER TO SEE THE EFFECTS OF ANY CHANGE!)"
+msgstr "\\n \\n (ΣΗΜΕΙΩΣΗ1: Το κύριο παράθυρο αυτής της εφαρμογής ανοίγει πάντα, εμφανίζοντας την προεπιλεγμένη επιλογή,\\n όχι ό,τι είναι επιλεγμένο αυτήν τη στιγμή. \\n ΣΗΜΕΙΩΣΗ2: ΞΑΝΚΙΝΗΣΤΕ ΤΟ ΠΕΡΙΗΓΗΣΗ ΣΑΣ ΓΙΑ ΔΕΙΤΕ ΤΑ ΑΠΟΤΕΛΕΣΜΑΤΑ ΟΠΟΙΑΔΗΠΟΤΕ ΑΛΛΑΓΗΣ!)"
+
+#: block-advert.sh:241
+msgid "Choose what to block"
+msgstr "Επιλέξτε τι να αποκλείσετε"
+
+#: block-advert.sh:242
+msgid "UNBLOCK EVERYTHING"
+msgstr "Επίτρεψη Όλων"
+
+#: block-advert.sh:243
+msgid "Cancel"
+msgstr "Ακύρωση"
+
+#: block-advert.sh:244
+msgid "Block Ad and Malware websites"
+msgstr "Αποκλεισμός ιστότοπων διαφημίσεων και κακόβουλων προγραμμάτων"
+
+#: block-advert.sh:245
+msgid "Block Pornographic websites"
+msgstr "Αποκλεισμός πορνογραφικών ιστοσελίδων"
+
+#: block-advert.sh:246
+msgid "Block Fakenews websites"
+msgstr "Αποκλεισμός ιστότοπων Fakenews"
+
+#: block-advert.sh:247
+msgid "Block Gambling websites"
+msgstr "Αποκλεισμός ιστότοπων τζόγου"
+
+#: block-advert.sh:248
+msgid "Block Social Media websites"
+msgstr "Αποκλεισμός ιστότοπων κοινωνικών μέσων"
+
+#: block-advert.sh:300
+msgid "No item selected"
+msgstr "Δεν έχει επιλεγεί κανένα στοιχείο"

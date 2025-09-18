@@ -3,6 +3,8 @@ Section: admin
 Priority: optional
 Maintainer: Adrian <adrian@mxlinux.org>
 Build-Depends: debhelper-compat (= 13),
+               cmake (>= 3.16),
+               ninja-build,
                qt6-base-dev,
                qt6-base-dev-tools,
                qt6-tools-dev,
@@ -16,14 +18,15 @@ Architecture: any
 Depends: aptitude,
          mx-packageinstaller-pkglist (>= 17.4),
          xdg-utils | mx-viewer,
+         sudo | pkexec | gksu,
          socat,
          curl,
-         policykit-1,
+         polkitd, pkexec,
          ${misc:Depends},
          ${shlibs:Depends}
 Recommends: flatpak (<< 1.0) | xdg-desktop-portal-gtk,
          flatpak (>= 0.8.9) [amd64],
-         debconf-kde-helper
+         debconf-kde-helper, polkitd-pkla
 Replaces: mx-debian-backports-installer,
           mx-package-manager,
           mx-package-manager-pkglist,

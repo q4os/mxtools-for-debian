@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="fi">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="fi">
 <context>
     <name>MainWindow</name>
     <message>
@@ -31,7 +29,7 @@
     <message>
         <location filename="../mainwindow.ui" line="199"/>
         <source>Save the system information selected from the list to an archive file.</source>
-        <translation>Tallenna listalta valitut järjestelmätiedot arkistotiedostoon.</translation>
+        <translation>Tallenna listalta valitut järjestelmätiedot tiedostoon.</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="202"/>
@@ -73,13 +71,13 @@
         <location filename="../mainwindow.ui" line="254"/>
         <source>Journald</source>
         <extracomment>systemd journalctl tab</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Journald</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="262"/>
         <source>Log Type</source>
         <extracomment>type of log, either user level or system</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Lokin tyyppi</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="270"/>
@@ -97,19 +95,19 @@
         <location filename="../mainwindow.ui" line="283"/>
         <source>Priority Level</source>
         <extracomment>level of status message to view</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Prioriteetti</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="334"/>
         <source>Choose Boot Log</source>
         <extracomment>choose a boot to view the log</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Valitse käynnistysloki</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="341"/>
         <source>Service Search</source>
         <extracomment>seek and ye shall find</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Palveluhaku</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="351"/>
@@ -173,7 +171,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="200"/>
         <source>Program for displaying a quick system info report</source>
-        <translation>Ohjelma järjestelmätietoraportin näyttämiseen</translation>
+        <translation>Ohjelma järjestelmätietojen raportin näyttämiseen</translation>
     </message>
     <message>
         <source>License</source>
@@ -241,16 +239,16 @@
         <translation>Ei löytynyt &quot;%1&quot;</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="719"/>
+        <location filename="../mainwindow.cpp" line="710"/>
         <source>No journal entries found at this admin and priority level</source>
         <comment>no journal entries found at the options specified</comment>
-        <translation type="unfinished"></translation>
+        <translation>Ei löytynyt järjestelmänvalvojan prioriteettitasolla journal merkintöjä</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="721"/>
+        <location filename="../mainwindow.cpp" line="712"/>
         <source>Error running journalctl command</source>
         <comment>error report for journalctl command</comment>
-        <translation type="unfinished"></translation>
+        <translation>Virhe ajattaessa journalctl-komentoa</translation>
     </message>
     <message>
         <source>Changelog</source>
@@ -306,7 +304,7 @@
     <message>
         <location filename="../main.cpp" line="66"/>
         <source>You must run this program as normal user.</source>
-        <translation>Sinun täytyy suorittaa tämä ohjelma tavallisena käyttäjänä.</translation>
+        <translation>Suorita tämä ohjelma tavallisena käyttäjänä.</translation>
     </message>
 </context>
 <context>
@@ -314,7 +312,7 @@
     <message>
         <location filename="../main.cpp" line="43"/>
         <source>This tool displays a the quick system info report in a gui.</source>
-        <translation>Työkalu näyttää järjestelmän tietoraportin ikkunassa.</translation>
+        <translation>Työkalu näyttää järjestelmäraportin ikkunassa.</translation>
     </message>
     <message>
         <location filename="../main.cpp" line="66"/>

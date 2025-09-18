@@ -7,5 +7,5 @@ Standards-Version: 3.9.5
 
 Package: conky-toggle-mx
 Architecture: all
-Depends:
+Depends: mx-conky-data-bin
 Description: simple toggle switch for conky-manager

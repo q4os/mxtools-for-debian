@@ -1,0 +1,35 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cp:*)",
+      "Bash(make:*)",
+      "Bash(qmake:*)",
+      "Bash(ls:*)",
+      "Bash(grep:*)",
+      "Bash(find:*)",
+      "Bash(DEBUG=1 ./mx-conky)",
+      "Bash(timeout:*)",
+      "Bash(rm:*)",
+      "Bash(g++:*)",
+      "Bash(./test_transparency)",
+      "Bash(./test_height_padding)",
+      "Bash(sed:*)",
+      "Bash(./mx-conky:*)",
+      "Bash(shellcheck:*)",
+      "Bash(mkdir:*)",
+      "Bash(cmake:*)",
+      "Bash(dpkg-buildpackage:*)",
+      "Bash(DEB_BUILD_OPTIONS=noopt dpkg-buildpackage -uc -us --build=binary)",
+      "Bash(chmod:*)",
+      "Bash(mv:*)",
+      "Bash(./benchmark_binary)",
+      "Bash(./conky-file-parser.sh:*)",
+      "Bash(bash:*)",
+      "Bash(./test_detection.sh:*)",
+      "Bash(./benchmark_simple)",
+      "Bash(./benchmark_large)",
+      "Bash(./benchmark_conky_validation)"
+    ],
+    "deny": []
+  }
+}

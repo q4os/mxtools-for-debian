@@ -1,17 +1,15 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="el">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="el">
 <context>
     <name>Cmd</name>
     <message>
         <location filename="../cmd.cpp" line="141"/>
         <source>Administrator Access Required</source>
-        <translation type="unfinished"></translation>
+        <translation>Απαιτείται πρόσβαση διαχειριστή</translation>
     </message>
     <message>
         <location filename="../cmd.cpp" line="142"/>
         <source>This operation requires administrator privileges. Please restart the application and enter your password when prompted.</source>
-        <translation type="unfinished"></translation>
+        <translation>Αυτή η λειτουργία απαιτεί δικαιώματα διαχειριστή. Παρακαλώ επανεκκινήστε την εφαρμογή και πληκτρολογήστε τον κωδικό πρόσβασης σας όταν σας ζητηθεί.</translation>
     </message>
 </context>
 <context>
@@ -237,7 +235,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="535"/>
         <source>Cannot open LUKS device. Exiting...</source>
-        <translation type="unfinished"></translation>
+        <translation>Δεν μπορεί να ανοίξει η συσκευή LUKS. Έξοδος...</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="556"/>
@@ -274,7 +272,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="1000"/>
         <source>Program for selecting common start-up choices</source>
-        <translation>Πρόγραμμα για τις επιλογές εκκίνησης</translation>
+        <translation>Πρόγραμμα για τις συνήθεις επιλογές εκκίνησης</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1002"/>
@@ -335,7 +333,7 @@ OK to go ahead and install them?</source>
     <message>
         <location filename="../mainwindow.cpp" line="1346"/>
         <source>Could not retrieve UUID for %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Δεν μπόρεσε να ανακτηθεί το UUID για %1</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1354"/>
@@ -345,12 +343,12 @@ OK to go ahead and install them?</source>
     <message>
         <location filename="../mainwindow.cpp" line="1359"/>
         <source>Password entry cancelled or empty for %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Η εισαγωγή κωδικού πρόσβασης ακυρώθηκε ή παραμένει κενή για %1</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1365"/>
         <source>Could not open %1 LUKS container</source>
-        <translation type="unfinished"></translation>
+        <translation>Δεν μπόρεσε να ανοίξει το LUKS %1</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1200"/>
@@ -365,12 +363,12 @@ OK to go ahead and install them?</source>
     <message>
         <location filename="../mainwindow.cpp" line="167"/>
         <source>Live System Detected</source>
-        <translation>Ανιχνεύθηκε σύστημα.live</translation>
+        <translation>Ανιχνεύθηκε σύστημα live</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="169"/>
         <source>You are currently running a live system. Would you like to modify the boot options for the live system or for an installed system?</source>
-        <translation>Αυτή τη στιγμή χρησιμοποιείτε σύστημα live. Θέλετε να τροποποιήσετε τις επιλογές εκκίνησης για το σύστημα live.ή για ένα εγκατεστημένο σύστημα;</translation>
+        <translation>Αυτή τη στιγμή χρησιμοποιείτε σύστημα live. Θέλετε να τροποποιήσετε τις επιλογές εκκίνησης για το σύστημα live ή για ένα εγκατεστημένο σύστημα;</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="171"/>

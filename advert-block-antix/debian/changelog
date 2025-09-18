@@ -1,22 +1,51 @@
-advert-block-antix (0.3.1+4) mx; urgency=medium
+advert-block-antix (0.3.7+3) mx; urgency=medium
 
-  * mod policy file
-  * add mx-launcher-l10n as recommend
+  * restore policykit support
 
- -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 12 May 2023 21:49:10 -0400
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 11 Aug 2025 22:55:20 -0400
 
-advert-block-antix (0.3.1+2) mx; urgency=medium
+advert-block-antix (0.3.7+1) mx; urgency=medium
 
-  * fix exec line in desktop file
+  * bump for yad 14 buttons
 
- -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 13 Apr 2023 06:57:39 -0400
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Tue, 05 Aug 2025 19:55:34 -0400
 
-advert-block-antix (0.3.1+1) mx; urgency=medium
+advert-block-antix (0.3.7) unstable; urgency=medium
 
-  * modifications for mx
-  * policy kit authentication
+  * Inserted “sleep” commands for fast machines - thanks PPC 
 
- -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 12 Apr 2023 19:39:45 -0400
+ -- anticapitalista <antix@operamail.com>  Sat, 12 Oct 2024 18:00:11 +0300
+
+advert-block-antix (0.3.6) unstable; urgency=medium
+
+  * update el, pt_BR
+
+ -- anticapitalista <antix@operamail.com>  Fri, 09 Feb 2024 12:35:23 +0200
+
+advert-block-antix (0.3.5) unstable; urgency=medium
+
+  * translation update
+
+ -- anticapitalista <antix@operamail.com>  Sun, 28 Jan 2024 12:59:20 +0200
+
+advert-block-antix (0.3.4) unstable; urgency=medium
+
+  * tidied up script
+
+ -- anticapitalista <antix@operamail.com>  Tue, 28 Nov 2023 17:31:47 +0200
+
+advert-block-antix (0.3.3) unstable; urgency=medium
+
+  * desktop files to usr/share/applications
+
+ -- anticapitalista <antix@operamail.com>  Mon, 03 Jul 2023 20:30:13 +0300
+
+advert-block-antix (0.3.2) unstable; urgency=medium
+
+  * update translations
+  * update desktop file
+
+ -- anticapitalista <antix@operamail.com>  Fri, 07 Apr 2023 12:53:51 +0300
 
 advert-block-antix (0.3.1) unstable; urgency=medium
 

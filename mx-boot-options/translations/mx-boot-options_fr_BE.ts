@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="fr_BE">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="fr_BE">
 <context>
     <name>Cmd</name>
     <message>
@@ -164,7 +162,7 @@
     <message>
         <location filename="../mainwindow.ui" line="456"/>
         <source>About...</source>
-        <translation>À propos ...</translation>
+        <translation>À propos …</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="463"/>
@@ -236,12 +234,12 @@
     <message>
         <location filename="../mainwindow.cpp" line="535"/>
         <source>Cannot open LUKS device. Exiting...</source>
-        <translation>Impossible d’ouvrir le périphérique LUKS. Sortie ...</translation>
+        <translation>Impossible d’ouvrir le périphérique LUKS. Sortie …</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="556"/>
         <source>Cannot create chroot environment, cannot change boot options. Exiting...</source>
-        <translation>Impossible de créer environnement chroot, impossible de modifier les options de démarrage. Sortie ...</translation>
+        <translation>Impossible de créer environnement chroot, impossible de modifier les options de démarrage. Sortie …</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="887"/>
@@ -252,13 +250,13 @@
     <message>
         <location filename="../mainwindow.cpp" line="958"/>
         <source>Updating initramfs...</source>
-        <translation>Mise à jour d’initramfs ...</translation>
+        <translation>Mise à jour d’initramfs …</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="972"/>
         <location filename="../mainwindow.cpp" line="1281"/>
         <source>Updating grub...</source>
-        <translation>Mise à jour de grub ...</translation>
+        <translation>Mise à jour de grub …</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="997"/>
@@ -409,7 +407,7 @@ Voulez-vous les installer?</translation>
     <message>
         <location filename="../mainwindow.cpp" line="980"/>
         <source>You are currently running in live mode with the &apos;toram&apos; option. Please remember to save the persistence file or remaster, otherwise any changes made will be lost.</source>
-        <translation>Vous êtes actuellement en mode Live avec l’option «&#xa0;toram&#xa0;». N’oubliez pas de sauvegarder le fichier de persistance ou de remasteriser, sinon toutes les modifications apportées seront perdues.</translation>
+        <translation>Vous êtes actuellement en mode Live avec l’option « toram ». N’oubliez pas de sauvegarder le fichier de persistance ou de remasteriser, sinon toutes les modifications apportées seront perdues.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="982"/>

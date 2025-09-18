@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="pt">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="pt">
 <context>
     <name>MainWindow</name>
     <message>
@@ -251,10 +249,6 @@
         <location filename="../mainwindow.cpp" line="938"/>
         <source>Original APT sources have been restored to the release status. User added source files in /etc/apt/sources.list.d/ have not been touched.</source>
         <translation>As origens APT originais foram restauradas para o estado de lançamento. Os ficheiros de origens adicionados pelo utilizador a /etc/apt/sources.list.d/ não foram alterados.</translation>
-    </message>
-    <message>
-        <source>There was an error writing file: %1. Please check if you have enough free space on your drive</source>
-        <translation type="vanished">Houve um erro ao gravar o ficheiro: %1. Verificar se há espaço livre suficiente na unidade</translation>
     </message>
 </context>
 <context>

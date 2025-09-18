@@ -5,7 +5,7 @@ Austria, Vienna - http://mirror.easyname.at/mxlinux-packages
 Belarus, Minsk - https://mirror.datacenter.by/pub/mirrors/mxlinux.org/packages
 Brazil, Manaus - http://mirror.ufam.edu.br/mx
 Brazil, Parana - https://mxlinux.c3sl.ufpr.br/mx-workspace
-Brazil, Sao Paolo - http://sft.if.usp.br/mx-workspace 
+Brazil, Sao Paolo - http://sft.if.usp.br/mx-workspace
 Bulgaria, Sofia - http://mirror.telepoint.bg/mxlinux-repo
 Bulgaria, Sofia - https://mxlinux.ipacct.com/MX-Packages
 Canada, Halifax - http://mirror.its.dal.ca/mxlinux
@@ -87,13 +87,15 @@ Ukraine, Vinnytsia - https://mx-packages.ip-connect.vn.ua
 United Kingdom, London - http://mxlinux.mirrors.uk2.net/packages
 United Kingdom, Manchester - https://mirrors.ukfast.co.uk/sites/MX_antiX_packages
 United States, Atlanta GA - http://www.gtlib.gatech.edu/pub/MX-Linux/workspace
-United States, Berkeley, CA - https://mirrors.ocf.berkeley.edu/mx-packages
-United States, Herndon, VA - http://mirror.cogentco.com/pub/linux/mxlinux
-United States, Lenexa KS - https://us.mirror.ionos.com/linux/distributions/mx/packages/
+United States, Berkeley CA - https://mirrors.ocf.berkeley.edu/mx-packages
+United States, Herndon VA - http://mirror.cogentco.com/pub/linux/mxlinux
+United States, Lenexa KS - https://us.mirror.ionos.com/linux/distributions/mx/packages
 United States, Los Angeles CA - http://la.mxrepo.com
 United States, Maryland MD - http://mirror.umd.edu/mxlinux
 United States, OR, IL, NY - http://ftp.osuosl.org/pub/mxlinux
 United States, Princeton NJ - http://mirror.math.princeton.edu/pub/mxlinux
 United States, Rochester NY - http://mirrors.rit.edu/mxlinux/mx-packages
 United States, Salt Lake City UT - https://mxrepo.com
+United States, West Lafayette IN - https://plug-mirror.rcac.purdue.edu/mx-linux/packages
 Uzbekistan, Tashkent - http://mirror.dc.uz/mxlinux
+Vietnam, Hanoi - https://mirror.meowsmp.net/mxlinux/packages

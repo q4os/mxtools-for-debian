@@ -33,9 +33,15 @@
 #include "mainwindow.h"
 #include <unistd.h>
 
+// VERSION should come from compilation options.
+#ifndef VERSION
+    #define VERSION "?.?.?.?"
+#endif
+
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
+    app.setApplicationVersion(QStringLiteral(VERSION));
     app.setWindowIcon(QIcon::fromTheme(app.applicationName()));
     app.setOrganizationName("MX-Linux");
 
@@ -46,11 +52,11 @@ int main(int argc, char *argv[])
     parser.process(app);
 
     QTranslator qtTran;
-    if (qtTran.load(QLocale::system(), "qt", "_", QLibraryInfo::location(QLibraryInfo::TranslationsPath)))
+    if (qtTran.load(QLocale::system(), "qt", "_", QLibraryInfo::path(QLibraryInfo::TranslationsPath)))
         app.installTranslator(&qtTran);
 
     QTranslator qtBaseTran;
-    if (qtBaseTran.load("qtbase_" + QLocale::system().name(), QLibraryInfo::location(QLibraryInfo::TranslationsPath)))
+    if (qtBaseTran.load("qtbase_" + QLocale::system().name(), QLibraryInfo::path(QLibraryInfo::TranslationsPath)))
         app.installTranslator(&qtBaseTran);
 
     QTranslator appTran;

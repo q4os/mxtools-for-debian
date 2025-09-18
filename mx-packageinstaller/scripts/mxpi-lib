@@ -27,10 +27,10 @@ flatpak_add_repos_user() {
 }
 
 main() {
-case "$1" in 
+case "$1" in
     apt_update)
         apt_update;;
-    copy_log) 
+    copy_log)
         copy_log;;
     cleanup_temp)
         cleanup_temp;;

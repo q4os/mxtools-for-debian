@@ -1,3 +1,11 @@
+flags-common (23.08.04mx23) mx; urgency=medium
+
+  * copy flags into gxkb folder
+  * also cleanup on remove
+  * prevents hangups during upgrade to trixie 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 06 Aug 2025 21:57:57 -0400
+
 flags-common (23.07.02) mx; urgency=medium
 
   * more flags

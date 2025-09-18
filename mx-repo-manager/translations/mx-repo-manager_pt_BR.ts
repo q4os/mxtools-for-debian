@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="pt_BR">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="pt_BR">
 <context>
     <name>MainWindow</name>
     <message>
@@ -13,7 +11,7 @@
         <location filename="../mainwindow.ui" line="32"/>
         <location filename="../mainwindow.cpp" line="743"/>
         <source>Select the APT repository that you want to use:</source>
-        <translation>Selecione o repositório do APT que você pretende utilizar:</translation>
+        <translation>Selecione o repositório do APT que você quer utilizar:</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="59"/>
@@ -112,7 +110,7 @@
         <location filename="../mainwindow.cpp" line="558"/>
         <location filename="../mainwindow.cpp" line="941"/>
         <source>Your new selection will take effect the next time sources are updated.</source>
-        <translation>A sua nova escolha terá efeito na próxima vez que as fontes forem atualizadas (sudo apt update).</translation>
+        <translation>A sua nova escolha terá efeito na próxima vez que as fontes ou as origens (sources) forem atualizadas. Por exemplo, executando o comando ‘sudo apt update’ ou ‘sudo apt-get update’ no Emulador de Terminal ou executando o programa ‘Atualizador do MX’.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="348"/>
@@ -156,7 +154,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="667"/>
         <source>About %1</source>
-        <translation>Sobre o %1</translation>
+        <translation>Sobre o ‘%1’</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="668"/>
@@ -166,7 +164,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="670"/>
         <source>Program for choosing the default APT repository</source>
-        <translation>Programa para escolher o repositório APT padrão</translation>
+        <translation>Programa para escolher o repositório padrão do APT</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="672"/>
@@ -176,12 +174,12 @@
     <message>
         <location filename="../mainwindow.cpp" line="673"/>
         <source>%1 License</source>
-        <translation>Licença do %1</translation>
+        <translation>Licença do ‘%1’</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="687"/>
         <source>%1 Help</source>
-        <translation>Ajuda do %1</translation>
+        <translation>Ajuda do ‘%1’</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="704"/>
@@ -191,7 +189,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="705"/>
         <source>You have selected MX Test Repo. It&apos;s not recommended to leave it enabled or to upgrade all the packages from it.</source>
-        <translation>Você selecionou o Repositório de Teste (Test Repo) do MX. Não é recomendado deixar este repositório ativado ou atualizar todos os pacotes (programas) atualizáveis a partir das versões disponíveis neste repositório.</translation>
+        <translation>Você selecionou o Repositório de Teste (Test Repo) do MX. Não é recomendado deixar este repositório ativado ou atualizar todos os pacotes (programas) atualizáveis a partir das versões que estão disponíveis neste repositório.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="708"/>
@@ -201,12 +199,12 @@
     <message>
         <location filename="../mainwindow.cpp" line="745"/>
         <source>Select the APT repository and sources that you want to use:</source>
-        <translation>Selecione o repositório APT e as fontes que você quer utilizar:</translation>
+        <translation>Selecione o repositório do APT e as fontes que você quer utilizar:</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="805"/>
         <source>netselect-apt could not detect fastest repo.</source>
-        <translation>O programa netselect-apt não conseguiu detectar qual é o repositório mais rápido.</translation>
+        <translation>O programa ‘netselect-apt’ não conseguiu detectar qual é o repositório mais rápido.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="784"/>
@@ -214,7 +212,7 @@
         <location filename="../mainwindow.cpp" line="823"/>
         <location filename="../mainwindow.cpp" line="838"/>
         <source>Could not detect fastest repo.</source>
-        <translation>O programa netselect-apt não conseguiu detectar qual é o repositório mais rápido.</translation>
+        <translation>Não foi possível detectar qual é o repositório mais rápido.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="851"/>
@@ -249,11 +247,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="938"/>
         <source>Original APT sources have been restored to the release status. User added source files in /etc/apt/sources.list.d/ have not been touched.</source>
-        <translation>As fontes originais do APT foram restauradas para o estado inicial de liberação. Os arquivos de origem adicionados pelo usuário em /etc/apt/sources.list.d/ não foram alterados.</translation>
-    </message>
-    <message>
-        <source>There was an error writing file: %1. Please check if you have enough free space on your drive</source>
-        <translation type="vanished">Ocorreu um erro ao gravar o arquivo %1. Por favor, verifique se você tem espaço livre suficiente no seu dispositivo de armazenamento</translation>
+        <translation>As fontes originais do APT foram restauradas para o estado inicial do lançamento do MX. Os arquivos de origem adicionados pelo usuário na pasta ‘/etc/apt/sources.list.d/’ não foram alterados.</translation>
     </message>
 </context>
 <context>
@@ -283,17 +277,17 @@
         <location filename="../main.cpp" line="73"/>
         <location filename="../main.cpp" line="82"/>
         <source>Error</source>
-        <translation>Erro</translation>
+        <translation>Ocorreu um erro</translation>
     </message>
     <message>
         <location filename="../main.cpp" line="74"/>
         <source>You seem to be logged in as root, please log out and log in as normal user to use this program.</source>
-        <translation>Ao que parece, você está acessando a sessão com o usuário root. Por favor, saia da sessão atual e entre novamente com o usuário normal para utilizar este programa.</translation>
+        <translation>Ao que parece, você está acessando a sessão com o usuário administrador (root). Por favor, saia da sessão atual e entre novamente com o usuário normal para utilizar este programa.</translation>
     </message>
     <message>
         <location filename="../main.cpp" line="83"/>
         <source>You must run this program with admin access.</source>
-        <translation>Você deve executar este programa com o usuário administrador.</translation>
+        <translation>Você tem que executar este programa com o usuário administrador.</translation>
     </message>
 </context>
 </TS>

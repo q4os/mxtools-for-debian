@@ -1,6 +1,5 @@
 <RCC>
     <qresource prefix="/">
-        <file>icons/AltKey.png</file>
         <file>icons/logo.svg</file>
     </qresource>
 </RCC>

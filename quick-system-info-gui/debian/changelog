@@ -1,3 +1,33 @@
+quick-system-info-gui (25.08.02) mx; urgency=medium
+
+  * update build system
+  * update translations
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 30 Aug 2025 21:48:43 -0400
+
+quick-system-info-gui (25.08.01) mx; urgency=medium
+  
+  [Ak-47]
+  * update build system
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 30 Aug 2025 13:04:55 -0400
+
+quick-system-info-gui (25.04.02mx25) mx; urgency=medium
+
+  [Ak-47]
+  * Link-time optimisation, release and debug config.
+  * clazy fixes.
+  * Optimised Qt layouts.
+  * Replace search button with QAction inside the search box.
+  
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 30 Apr 2025 20:20:32 -0400
+
+quick-system-info-gui (25.04.01mx25) mx; urgency=medium
+
+  * qt6
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 21 Apr 2025 21:19:15 -0400
+
 quick-system-info-gui (24.12.09) mx; urgency=medium
 
   * update translations

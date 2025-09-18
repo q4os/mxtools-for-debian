@@ -1,0 +1,109 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# 🎈 BALLOON | FU-SEN, 2014
+# 🎈 BALLOON | FU-SEN, 2017
+# Green <usergreen@users.osdn.me>, 2022
+# Green <usergreen@users.osdn.me>, 2023
+# Green <usergreen@users.osdn.me>, 2020
+msgid ""
+msgstr ""
+"Project-Id-Version: antix-development\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-11-28 18:29+0100\n"
+"PO-Revision-Date: 2011-10-27 11:10+0000\n"
+"Last-Translator: Green <usergreen@users.osdn.me>, 2023\n"
+"Language-Team: Japanese (http://app.transifex.com/anticapitalista/antix-development/language/ja/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: ja\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: block-advert.sh:32
+msgid "antiX Advert Blocker"
+msgstr "antiX 広告ブロッカー"
+
+#: block-advert.sh:42
+#, sh-format
+msgid ""
+"The <b>$title</b> tool adds stuff to your /etc/hosts file, so \\nthat many "
+"advertising servers and websites can't connect to this PC.\\nYou can choose "
+"to block ads, malware, pornography, gambling, fakenews and social "
+"media\\nBlocking ad servers protects your privacy, saves you bandwidth, "
+"greatly \\nimproves web-browsing speed and makes the internet much less "
+"annoying in general.\\n\\nDo you want to proceed?"
+msgstr "<b>$title</b>ツールは、/ etc / hosts にあるファイルに記述を追加して、多くの広告サーバーおよびウェブサイトがこのPCに接続できないようにします。広告規制を強化するために、1つのサービスを選択するか、複数のサービスを組み合わせることができます。 広告サーバーをブロックすることでプライバシーが保護され、帯域幅が節約されます。またウェブブラウザの閲覧速度が大幅に向上するので、総じてインターネットの煩わしさが軽減されます。作業を続行しますか？"
+
+#: block-advert.sh:53
+msgid ""
+"<b> Failed </b> \\n\\n\tantiX advert blocker must be run as root or with "
+"sudo "
+msgstr "<b> 失敗しました </b> \\n\\n\tantiX 広告ブロッカーは root または sudo で起動してください"
+
+#: block-advert.sh:139
+msgid "Restoring original /etc/hosts."
+msgstr "元の /etc/hosts ファイルを復元します。"
+
+#: block-advert.sh:180
+#, sh-format
+msgid "Loading  blocklist from $domain"
+msgstr "$domain よりブロックの一覧を読み込んでいます"
+
+#: block-advert.sh:191
+msgid ""
+"\\n ERROR: \\n No /etc/hosts.ORIGINAL was found, so it can't be restored.\\n"
+" Probably you already UNBLOCKED EVERYTHING. \\n You will have to manually "
+"edit the file /etc/hosts to remove any unwanted content \\n"
+msgstr "\\n エラー: \\n /etc/hosts が存在しません。オリジナルのファイルが見つからないので復元不可能です。\\n おそらくブロックがすべて解除されています。 \\n You will have to manually edit the file /etc/hosts ファイルを手動で編集し不要なコメントを削除してください。 \\n"
+
+#: block-advert.sh:213
+msgid ""
+"Success - your settings have been changed.\\n\\nYour hosts file has been "
+"updated.\\nRestart your browser to see the changes."
+msgstr "成功です、設定を変更しました。 hosts ファイルが更新されました。変更を確認するには、ブラウザを再起動してください。"
+
+#: block-advert.sh:223
+msgid ""
+"\\n \\n (NOTE1: This application's main window always opens showing the "
+"default selection,\\n not what's currently selected. \\n  NOTE2: RESTART "
+"YOUR BROWSER TO SEE THE EFFECTS OF ANY CHANGE!)"
+msgstr "\\n \\n (注記 1: このアプリケーションのメインウィンドウは、常に既定の選択範囲を表示します。したがって、現実に選択しているものではありません。 \\n  注記 2: ブラウザを再起動し、変更後の効果を確認してください！)"
+
+#: block-advert.sh:241
+msgid "Choose what to block"
+msgstr "ブロックする対象を選択"
+
+#: block-advert.sh:242
+msgid "UNBLOCK EVERYTHING"
+msgstr "ブロックの全解除"
+
+#: block-advert.sh:243
+msgid "Cancel"
+msgstr "キャンセル"
+
+#: block-advert.sh:244
+msgid "Block Ad and Malware websites"
+msgstr "広告・マルウェアのサイトをブロック"
+
+#: block-advert.sh:245
+msgid "Block Pornographic websites"
+msgstr "ポルノのサイトをブロック"
+
+#: block-advert.sh:246
+msgid "Block Fakenews websites"
+msgstr "フェークニュースのサイトをブロック"
+
+#: block-advert.sh:247
+msgid "Block Gambling websites"
+msgstr "ギャンブルのサイトをブロック"
+
+#: block-advert.sh:248
+msgid "Block Social Media websites"
+msgstr "ソーシャルメディアのサイトをブロック"
+
+#: block-advert.sh:300
+msgid "No item selected"
+msgstr "選択項目なし"

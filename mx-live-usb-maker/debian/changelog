@@ -1,3 +1,10 @@
+mx-live-usb-maker (25.09.1) mx; urgency=medium
+
+  * Perform cleanup that require elevation only when needed
+  * Update translations
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 12 Sep 2025 15:24:26 -0400
+
 mx-live-usb-maker (25.6) mx; urgency=medium
 
   * Add warning if target size is too small
@@ -123,7 +130,7 @@ mx-live-usb-maker (23.2.01) mx; urgency=medium
 mx-live-usb-maker (23.2) mx; urgency=medium
 
   * Add DISPLAY env variable to lum-launcher
-  * Update translations 
+  * Update translations
 
  -- Adrian <adrian@mxlinux.org>  Sat, 18 Feb 2023 13:39:00 -0500
 
@@ -135,7 +142,7 @@ mx-live-usb-maker (22.10) mx; urgency=medium
 
 mx-live-usb-maker (22.8.03) mx; urgency=medium
 
-  * Fix: launching documents from Help (fixes a problem in Plasma) 
+  * Fix: launching documents from Help (fixes a problem in Plasma)
 
  -- Adrian <adrian@mxlinux.org>  Mon, 22 Aug 2022 19:06:50 -0400
 
@@ -153,7 +160,7 @@ mx-live-usb-maker (22.8.01) mx; urgency=medium
 
 mx-live-usb-maker (22.7.01) mx; urgency=medium
 
-  * translation refresh 
+  * translation refresh
 
  -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 23 Jul 2022 11:27:43 -0400
 
@@ -315,7 +322,7 @@ mx-live-usb-maker (19.8.1) mx; urgency=medium
 
 mx-live-usb-maker (19.8) mx; urgency=medium
 
-  * add data-first 
+  * add data-first
 
  -- Adrian <adrian@mxlinux.org>  Sat, 03 Aug 2019 21:30:13 -0400
 
@@ -352,7 +359,7 @@ mx-live-usb-maker (19.5) mx; urgency=medium
 
 mx-live-usb-maker (19.4.6) mx; urgency=medium
 
-  * tweak iso selection button to start in user home directory instead of root 
+  * tweak iso selection button to start in user home directory instead of root
 
  -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 27 Apr 2019 19:46:28 -0400
 
@@ -454,7 +461,7 @@ mx-live-usb-maker (18.7) mx; urgency=medium
 
 mx-live-usb-maker (18.6.1) mx; urgency=medium
 
-  * added changelog button 
+  * added changelog button
   * fixed getVersion
 
 
@@ -474,7 +481,7 @@ mx-live-usb-maker (18.3+1) mx; urgency=medium
 
 mx-live-usb-maker (18.3) mx; urgency=medium
 
-  * Release with new translations 
+  * Release with new translations
 
  -- Adrian <adrian@mxlinux.org>  Fri, 02 Mar 2018 14:47:22 -0500
 

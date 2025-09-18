@@ -1,4 +1,25 @@
-mx-conky-data (20250701) mx; urgency=medium
+mx-conky-data (20250801) mx; urgency=medium
+
+  * only create font cache if extra folder present
+  * remove check on desktop autostart since deskto file launches script anyway
+  * update SideDiag config
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 25 Aug 2025 21:54:25 -0400
+
+mx-conky-data (20250704) mx; urgency=medium
+
+  * seperate executable package and theme package 
+  * new default wrapper script
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 23 Jul 2025 20:20:15 -0400
+
+mx-conky-data (20250703) mx; urgency=medium
+
+  * simplify folder structure, remove some unused files
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Tue, 22 Jul 2025 18:57:30 -0400
+
+mx-conky-data (20250702) mx; urgency=medium
 
   [Jerry3904]
   * Added extra lua line to multiple configs

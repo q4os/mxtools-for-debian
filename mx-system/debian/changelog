@@ -1,3 +1,9 @@
+mx-system (25.08.01mx23) mx; urgency=medium
+
+  * remove executable bit from some conf files
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 16 Aug 2025 14:46:04 -0400
+
 mx-system (25.04.03mx23) mx; urgency=medium
 
   * add qt6gtk2 and libqt6svg6 to depends list

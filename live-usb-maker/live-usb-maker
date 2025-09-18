@@ -8,8 +8,8 @@
 # License: GPLv3 or later
 #==============================================================================
 
-      VERSION="2.41.19-2302"
- VERSION_DATE="Sat, 25 Feb 2023 12:45:10 -0500"
+      VERSION="2.41.20"
+ VERSION_DATE="Tue, 12 Aug 2025"
 
         ME=${0##*/}
     MY_DIR=$(dirname "$(readlink -f $0)")
@@ -2085,6 +2085,7 @@ do_partition() {
 
     # Using <gpt|msdos> partitioning
     msg $"Using %s partitioning" $(pq $type)
+    local mark=""
     local err_msg=$"Partitioning failed at %s"
     local PREAMB="parted --script --align optimal $dev unit MiB"
     cmd $PREAMB mklabel $type || dmesg_fatal "$err_msg" making partition
@@ -2096,8 +2097,28 @@ do_partition() {
         local remaining=$((total_size - uefi_size - main_size - bios_size -1))
         local fs_type=${DATA_FIRST_FS:-fat32}
         _add_partition "$remaining" $fs_type data
-    fi
+        ##mark data partition
+        #if gpt partition, use GUID for part type
+        if [ $type = "gpt" ]; then
+	        mark="msftdata"
+	        echo $PREAMB set $PART_NUM $mark on
+        	cmd $PREAMB set $PART_NUM $mark on    
+        fi
+        #if msdos partition, use hexadecimal for part type, per format
+        if [ $type = "msdos" ]; then
+	        case $fs_type in 
+	        fat32 | vfat) mark="c"  ;;
+	        exfat | ntfs) mark="7"  ;;
+	        *)  ;; #don't mark
 
+	        esac
+	        if [ -n "$mark" ]; then
+        	    echo sfdisk $dev $PART_NUM --part-type $mark 
+        	    cmd sfdisk $dev $PART_NUM --part-type $mark 
+            fi
+	    fi     
+    fi
+    
     if [ $bios_size -gt 0 ]; then
         _add_partition $bios_size bios
         cmd $PREAMB set $PART_NUM $boot_flag on || dmesg_fatal "$err_msg" boot-flag-1

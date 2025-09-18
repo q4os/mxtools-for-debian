@@ -3,6 +3,7 @@
 #include <QApplication>
 #include <QDebug>
 #include <QEventLoop>
+#include <QFile>
 #include <QFileInfo>
 
 #include <unistd.h>

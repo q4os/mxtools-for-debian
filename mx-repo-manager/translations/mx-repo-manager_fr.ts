@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="fr">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="fr">
 <context>
     <name>MainWindow</name>
     <message>
@@ -13,7 +11,7 @@
         <location filename="../mainwindow.ui" line="32"/>
         <location filename="../mainwindow.cpp" line="743"/>
         <source>Select the APT repository that you want to use:</source>
-        <translation>Sélectionnez le dépôt APT que vous souhaitez utiliser&#xa0;:</translation>
+        <translation>Sélectionnez le dépôt APT que vous souhaitez utiliser :</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="59"/>
@@ -73,7 +71,7 @@
     <message>
         <location filename="../mainwindow.ui" line="386"/>
         <source>About...</source>
-        <translation>À propos...</translation>
+        <translation>À propos…</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="392"/>
@@ -151,7 +149,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="591"/>
         <source>Please wait...</source>
-        <translation>Veuillez patienter...</translation>
+        <translation>Veuillez patienter…</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="667"/>
@@ -161,7 +159,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="668"/>
         <source>Version: </source>
-        <translation>Version&#xa0;: </translation>
+        <translation>Version : </translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="670"/>
@@ -201,7 +199,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="745"/>
         <source>Select the APT repository and sources that you want to use:</source>
-        <translation>Sélectionnez le dépôt APT et les sources que vous souhaitez utiliser&#xa0;:</translation>
+        <translation>Sélectionnez le dépôt APT et les sources que vous souhaitez utiliser :</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="805"/>
@@ -224,7 +222,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="859"/>
         <source>MX version not detected or out of range: </source>
-        <translation>Version MX non détectée ou non disponible&#xa0;: </translation>
+        <translation>Version MX non détectée ou non disponible : </translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="874"/>
@@ -244,16 +242,12 @@
     <message>
         <location filename="../mainwindow.cpp" line="924"/>
         <source>Do you use AHS (Advanced Hardware Stack) repo?</source>
-        <translation>Utilisez-vous le dépôt AHS (Advanced Hardware Stack)&#xa0;?</translation>
+        <translation>Utilisez-vous le dépôt AHS (Advanced Hardware Stack) ?</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="938"/>
         <source>Original APT sources have been restored to the release status. User added source files in /etc/apt/sources.list.d/ have not been touched.</source>
         <translation>Les sources APT d’origine ont été restaurées à leurs paramètres initiaux. Les sources entre-temps ajoutées par l’utilisateur dans /etc/apt/sources.list.d/ n’ont pas été modifiées.</translation>
-    </message>
-    <message>
-        <source>There was an error writing file: %1. Please check if you have enough free space on your drive</source>
-        <translation type="vanished">Il y a eu une erreur dans l’écriture du fichier&#xa0;: %1. Veuillez vérifier si vous avez suffisamment d’espace libre sur votre disque dur</translation>
     </message>
 </context>
 <context>

@@ -30,6 +30,7 @@
 #include <QSettings>
 #include <QTimer>
 #include <QTreeWidget>
+#include <QUrl>
 
 #include "cmd.h"
 
@@ -91,6 +92,7 @@ private:
     static QString getDebianVerName(int ver);
     static QVector<QPair<QString, bool>> loadAptFile(const QString &file);
     static bool checkRepo(const QString &repo);
+    static bool isValidRepositoryUrl(const QString &url);
     static int getDebianVerNum();
     void centerWindow();
     void displayAllRepos(const QFileInfoList &apt_files);

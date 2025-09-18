@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(make:*)",
+      "Bash(./build.sh:*)",
+      "Bash(cmake:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

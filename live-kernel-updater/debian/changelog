@@ -1,3 +1,9 @@
+live-kernel-updater (0.2.30+6) mx; urgency=medium
+
+  * update desktop file
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 16 Aug 2025 14:34:56 -0400
+
 live-kernel-updater (0.2.30+5) mx; urgency=medium
 
   * fix syntax error in lib source

@@ -2,7 +2,11 @@
   "permissions": {
     "allow": [
       "Bash(rg:*)",
-      "Bash(find:*)"
+      "Bash(find:*)",
+      "Read(//etc/**)",
+      "Bash(debuild:*)",
+      "Read(//home/adrian/.config/**)",
+      "Bash(./get_translations)"
     ],
     "deny": []
   }

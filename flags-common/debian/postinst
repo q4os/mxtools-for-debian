@@ -1,0 +1,8 @@
+#!/bin/sh -e
+
+if [ "$1" = "configure" ] || [ "$1" = "install" ] ; then
+		mkdir -p /usr/share/gxkb/flags
+		cp -r --update /usr/share/flags-common/* /usr/share/gxkb/flags/
+fi
+
+#DEBHELPER#

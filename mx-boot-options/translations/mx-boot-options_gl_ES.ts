@@ -1,17 +1,15 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="gl_ES">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="gl_ES">
 <context>
     <name>Cmd</name>
     <message>
         <location filename="../cmd.cpp" line="141"/>
         <source>Administrator Access Required</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../cmd.cpp" line="142"/>
         <source>This operation requires administrator privileges. Please restart the application and enter your password when prompted.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -236,7 +234,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="535"/>
         <source>Cannot open LUKS device. Exiting...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="556"/>
@@ -334,7 +332,7 @@ Continuar e instalar estes paquetes?</translation>
     <message>
         <location filename="../mainwindow.cpp" line="1346"/>
         <source>Could not retrieve UUID for %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1354"/>
@@ -344,12 +342,12 @@ Continuar e instalar estes paquetes?</translation>
     <message>
         <location filename="../mainwindow.cpp" line="1359"/>
         <source>Password entry cancelled or empty for %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1365"/>
         <source>Could not open %1 LUKS container</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1200"/>

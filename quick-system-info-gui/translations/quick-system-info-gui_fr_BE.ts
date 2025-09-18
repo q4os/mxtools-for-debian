@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="fr_BE">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="fr_BE">
 <context>
     <name>MainWindow</name>
     <message>
@@ -21,7 +19,7 @@
         <location filename="../mainwindow.ui" line="50"/>
         <location filename="../mainwindow.cpp" line="92"/>
         <source>Save text...</source>
-        <translation>Sauvegarde du texte ...</translation>
+        <translation>Sauvegarde du texte …</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="30"/>
@@ -37,7 +35,7 @@
         <location filename="../mainwindow.ui" line="202"/>
         <location filename="../mainwindow.cpp" line="137"/>
         <source>&amp;Save...</source>
-        <translation>Enregi&amp;strer ...</translation>
+        <translation>Enregi&amp;strer …</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="102"/>
@@ -62,7 +60,7 @@
     <message>
         <location filename="../mainwindow.ui" line="157"/>
         <source>About...</source>
-        <translation>À propos ...</translation>
+        <translation>À propos …</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="164"/>
@@ -114,7 +112,7 @@
     <message>
         <location filename="../mainwindow.ui" line="351"/>
         <source>...</source>
-        <translation>...</translation>
+        <translation> …</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="88"/>
@@ -137,7 +135,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="61"/>
         <source>Loading...</source>
-        <translation>Chargement ...</translation>
+        <translation>Chargement …</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="203"/>
@@ -152,7 +150,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="96"/>
         <source>&amp;Find...</source>
-        <translation>C&amp;hercher ...</translation>
+        <translation>C&amp;hercher …</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="100"/>
@@ -197,7 +195,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="468"/>
         <source>&amp;Save (×%1)...</source>
-        <translation>Enregi&amp;strer (×%1) ...</translation>
+        <translation>Enregi&amp;strer (×%1) …</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="503"/>
@@ -241,13 +239,13 @@
         <translation>Impossible de trouver « %1 »</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="719"/>
+        <location filename="../mainwindow.cpp" line="710"/>
         <source>No journal entries found at this admin and priority level</source>
         <comment>no journal entries found at the options specified</comment>
         <translation>Aucune entrée de journal trouvée à ce niveau d’administration et de priorité</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="721"/>
+        <location filename="../mainwindow.cpp" line="712"/>
         <source>Error running journalctl command</source>
         <comment>error report for journalctl command</comment>
         <translation>Erreur lors de l’exécution de la commande journalctl</translation>

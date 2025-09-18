@@ -29,4 +29,4 @@ msgstr "MX Locale"
 #. Translator comment:  description comment of application in menu
 #: desktop-in/mx-locale.desktop.in:7
 msgid "Set language and locale categories"
-msgstr ""
+msgstr "Taal- en taalcategorieën instellen"

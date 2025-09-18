@@ -1,0 +1,61 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2011
+# joyinko <joyinko@azet.sk>, 2023
+# joyinko <joyinko@azet.sk>, 2017
+msgid ""
+msgstr ""
+"Project-Id-Version: antix-development\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-08-24 20:37+0300\n"
+"PO-Revision-Date: 2011-10-27 11:10+0000\n"
+"Last-Translator: joyinko <joyinko@azet.sk>, 2023\n"
+"Language-Team: Czech (http://www.transifex.com/anticapitalista/antix-development/language/cs/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: cs\n"
+"Plural-Forms: nplurals=4; plural=(n == 1 && n % 1 == 0) ? 0 : (n >= 2 && n <= 4 && n % 1 == 0) ? 1: (n % 1 != 0 ) ? 2 : 3;\n"
+
+#: block-advert.sh:42
+#, sh-format
+msgid ""
+"The <b>$title</b> tool adds stuff to your /etc/hosts file, so \\nthat many "
+"advertising servers and websites can't connect to this PC.\\nYou can choose "
+"to block ads, malware, pornography, gambling, fakenews and social "
+"media\\nBlocking ad servers protects your privacy, saves you bandwidth, "
+"greatly \\nimproves web-browsing speed and makes the internet much less "
+"annoying in general.\\n\\nDo you want to proceed?"
+msgstr "<b>$title</b> přidává dodatečná nastavení do souboru /etc/hosts, takže \\ntím reklamní servery a stránky nemohou do tohoto PC.\\nMůžete si vybrat zda blokovat reklamy, malware, porno, hry, fakenews a socialní média\\nBlokování reklamních serverů chrání Vaše soukromí, snižuje zatížení sítě, ohromně \\nvylepšuje rychlost prohlížení a celkově dělá internetování mnohem méně otravným.\\n\\nPřejete si pokračovat?"
+
+#: block-advert.sh:53
+msgid ""
+"<b> Failed </b> \\n\\n\tantiX advert blocker must be run as root or with "
+"sudo "
+msgstr "<b> Selhání </b> \\n\\n\tantiX advert blocker musí být spuštěn jako root nebo s sudo "
+
+#: block-advert.sh:140
+msgid "Restoring original /etc/hosts."
+msgstr "Obnovování původní konfigurace /etc/hosts."
+
+#: block-advert.sh:182
+#, sh-format
+msgid "Loading  blocklist from $domain"
+msgstr "Načítává se blocklist z $domain"
+
+#: block-advert.sh:211
+msgid ""
+"Success - your settings have been changed.\\n\\nYour hosts file has been "
+"updated.\\nRestart your browser to see the changes."
+msgstr "Vaše nastavení bylo úspěšně změněno.\\n\\nVáš seznam poskytovatelů byl aktualizován.\\nRestartuje Váš prohlížeč pro zavedení změn."
+
+#: block-advert.sh:232
+msgid "Choose what to block"
+msgstr "Vybrat co blokovat"
+
+#: block-advert.sh:305
+msgid "No item selected"
+msgstr "Není vybrána žádná položka"

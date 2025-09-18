@@ -53,7 +53,7 @@ void chooseDialog::buildLocaleList()
     }
     libFile.close();
 
-    for (const auto &locale : qAsConst(availableLocales)) {
+    for (const auto &locale : std::as_const(availableLocales)) {
         QString item = locale;
         item.remove(QRegularExpression("\\..*$"));
         QString line = locale.leftJustified(20, ' ');

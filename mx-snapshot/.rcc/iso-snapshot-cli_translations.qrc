@@ -1,0 +1,6 @@
+<RCC>
+  <qresource prefix="/i18n">
+    <file alias="mx-snapshot_en.qm">/home/adrian/Sync/programs/qt/mx-snapshot/mx-snapshot_en.qm</file>
+  </qresource>
+</RCC>
+

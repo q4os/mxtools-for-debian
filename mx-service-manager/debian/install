@@ -1,8 +1,8 @@
-mx-service-manager		usr/bin
+docs/*				usr/share/doc/mx-service-manager
 mx-service-manager.desktop	usr/share/applications
 mx-service-manager.png		usr/share/icons/hicolor/48x48/apps
 mx-service-manager.png		usr/share/pixmaps
-docs/*				usr/share/doc/mx-service-manager
-translations/*.qm		usr/share/mx-service-manager/locale
-scripts/helper			usr/lib/mx-service-manager
+obj-*/*.qm			usr/share/mx-service-manager/locale
+obj-*/mx-service-manager	usr/bin
 scripts/*.policy		usr/share/polkit-1/actions
+scripts/helper			usr/lib/mx-service-manager

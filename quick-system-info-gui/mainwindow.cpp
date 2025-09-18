@@ -24,6 +24,7 @@
 
 #include <cassert>
 #include <ctime>
+#include <QCoreApplication>
 #include <QAction>
 #include <QCheckBox>
 #include <QDebug>
@@ -41,21 +42,20 @@
 #include <QClipboard>
 #include <archive.h>
 #include <archive_entry.h>
+#include <QByteArray>
 
 #include "about.h"
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "version.h"
 
 MainWindow::MainWindow(const QCommandLineParser &arg_parser, QWidget *parent) noexcept
     : QDialog(parent)
     , ui(new Ui::MainWindow)
 {
-    qDebug().noquote() << QCoreApplication::applicationName() << "version:" << VERSION;
     ui->setupUi(this);
     lockGUI(true);
     setWindowFlags(Qt::Window); // for the close, min and max buttons
-    connect(ui->buttonCancel, &QPushButton::clicked, this, &MainWindow::close);
+    connect(ui->pushCancel, &QPushButton::clicked, this, &MainWindow::close);
     ui->textSysInfo->setWordWrapMode(QTextOption::NoWrap);
     ui->textSysInfo->setContextMenuPolicy(Qt::ActionsContextMenu);
     ui->textSysInfo->setPlainText(tr("Loading..."));
@@ -76,7 +76,17 @@ void MainWindow::setup() noexcept
     // Allow user-friendly match strings.
     for(QString &match : defaultMatches) {
         if (!match.contains('.')) match.append(".txt");
-    }  
+    }
+
+    // Basic control slots
+    connect(ui->tabWidget, &QTabWidget::currentChanged, this, &MainWindow::tabWidget_currentChanged);
+    connect(ui->listInfo, &QListWidget::itemSelectionChanged, this, &MainWindow::listInfo_itemSelectionChanged);
+    connect(ui->listInfo, &QListWidget::itemChanged, this, &MainWindow::listInfo_itemChanged);
+    connect(ui->pushSave, &QPushButton::clicked, this, &MainWindow::pushSave_clicked);
+    connect(ui->pushSaveText, &QPushButton::clicked, this, &MainWindow::pushSaveText_clicked);
+    connect(ui->pushAbout, &QPushButton::clicked, this, &MainWindow::pushAbout_clicked);
+    connect(ui->pushHelp, &QPushButton::clicked, this, &MainWindow::pushHelp_clicked);
+
     // Log text box shortcuts and context menu
     QAction *forumcopyaction = new QAction(QIcon::fromTheme(QStringLiteral("edit-copy-symbolic")),
         tr("Copy for forum"), this);
@@ -92,7 +102,7 @@ void MainWindow::setup() noexcept
         tr("Save text..."), this);
     saveasfile->setShortcutVisibleInContextMenu(true);
     saveasfile->setShortcut(Qt::CTRL | Qt::SHIFT | Qt::Key_S);
-    connect(saveasfile, &QAction::triggered, this, &MainWindow::on_pushSaveText_clicked);
+    connect(saveasfile, &QAction::triggered, this, &MainWindow::pushSaveText_clicked);
     QAction *find = new QAction(QIcon::fromTheme("search"), tr("&Find..."), this);
     find->setShortcutVisibleInContextMenu(true);
     find->setShortcut(Qt::CTRL | Qt::Key_F);
@@ -137,7 +147,7 @@ void MainWindow::setup() noexcept
         tr("&Save..."), this);
     actionSave->setShortcut(Qt::CTRL | Qt::Key_S);
     actionSave->setShortcutVisibleInContextMenu(true);
-    connect(actionSave, &QAction::triggered, this, &MainWindow::on_pushSave_clicked);
+    connect(actionSave, &QAction::triggered, this, &MainWindow::pushSave_clicked);
 
     ui->listInfo->addAction(selall);
     ui->listInfo->addAction(seldef);
@@ -147,8 +157,8 @@ void MainWindow::setup() noexcept
     buildInfoList();
     ui->listInfo->setCurrentRow(0);
 
-    connect(ui->ButtonCopy, &QPushButton::clicked, this, &MainWindow::forumcopy);
-    ui->ButtonCopy->setDefault(true);
+    connect(ui->pushForumCopy, &QPushButton::clicked, this, &MainWindow::forumcopy);
+    ui->pushForumCopy->setDefault(true);
     lockGUI(false);
 }
 
@@ -159,7 +169,7 @@ void MainWindow::lockGUI(bool lock) noexcept
         ui->textSysInfo->setDisabled(lock);
         ui->pushSave->setDisabled(lock);
         ui->pushSaveText->setDisabled(lock);
-        ui->ButtonCopy->setDisabled(lock);
+        ui->pushForumCopy->setDisabled(lock);
         ui->tabWidget->setDisabled(lock);
         if (lock) QApplication::setOverrideCursor(Qt::WaitCursor);
         else {
@@ -191,21 +201,7 @@ int MainWindow::run(const char *program, const QStringList &args,
     return ok ? proc.exitCode() : -127;
 }
 
-// About button clicked
-void MainWindow::on_buttonAbout_clicked() noexcept
-{
-    displayAboutMsgBox(
-        tr("About Quick-System-Info-gui"),
-        "<p align=\"center\"><b><h2>" + tr("Quick System Info") + "</h2></b></p><p align=\"center\">" + tr("Version: ")
-            + VERSION + "</p><p align=\"center\"><h3>" + tr("Program for displaying a quick system info report")
-            + "</h3></p><p align=\"center\"><a href=\"http://mxlinux.org\">http://mxlinux.org</a><br /></p>"
-              "<p align=\"center\">"
-            + tr("Copyright (c) MX Linux") + "<br /><br /></p>",
-        QStringLiteral("/usr/share/doc/quick-system-info-gui/license.html"),
-        tr("%1 License").arg(this->windowTitle()));
-}
-
-void MainWindow::on_pushSaveText_clicked() noexcept
+void MainWindow::pushSaveText_clicked() noexcept
 {
     QFileDialog dialog(this);
     dialog.setAcceptMode(QFileDialog::AcceptSave);
@@ -237,7 +233,7 @@ void MainWindow::on_pushSaveText_clicked() noexcept
     lockGUI(false);
     showSavedMessage(file.fileName(), errmsg);
 }
-void MainWindow::on_pushSave_clicked() noexcept
+void MainWindow::pushSave_clicked() noexcept
 {
     QFileDialog dialog(this, tr("Save System Information"));
     dialog.setAcceptMode(QFileDialog::AcceptSave);
@@ -355,7 +351,7 @@ void MainWindow::buildInfoList() noexcept
     }
     listSelectDefault();
     ui->listInfo->blockSignals(false);
-    on_listInfo_itemChanged(); // Set up multi buttons.
+    listInfo_itemChanged(); // Set up multi buttons.
     // Resize the splitter according to the new contents
     QApplication::processEvents(); // Allow the scroll bar to materialise
     ui->tabWidget->setCurrentIndex(0);
@@ -366,12 +362,6 @@ void MainWindow::buildInfoList() noexcept
 
     // Warn on failure to obtain the log file list earlier.
     if (logrc != 0) QMessageBox::warning(this, windowTitle(), loglistout);
-}
-
-void MainWindow::on_ButtonHelp_clicked() noexcept
-{
-    const QString &url = QStringLiteral("file:///usr/share/doc/quick-system-info-gui/quick-system-info-gui.html");
-    displayDoc(url, tr("%1 Help").arg(tr("Quick System Info")));
 }
 
 void MainWindow::forumcopy() noexcept
@@ -438,12 +428,15 @@ QByteArray MainWindow::readReport(int row)
             break;
         }
     }
-    if (execrc != 0) throw QString(output);
-    return output;
+    static const QRegularExpression ansiEscapeRegex("\x1B\\[[0-9;]*[mG]");
+
+    if (execrc != 0) throw (output);
+    return QString::fromUtf8(output).remove(ansiEscapeRegex).toUtf8();
+
 }
 
 // The currentRowchanged() signal occurs before the selection change is displayed.
-void MainWindow::on_listInfo_itemSelectionChanged() noexcept
+void MainWindow::listInfo_itemSelectionChanged() noexcept
 {
     lockGUI(true);
 
@@ -457,7 +450,7 @@ void MainWindow::on_listInfo_itemSelectionChanged() noexcept
     lockGUI(false);
 }
 
-void MainWindow::on_listInfo_itemChanged() noexcept
+void MainWindow::listInfo_itemChanged() noexcept
 {
     int nchecked = 0;
     for(int row = 0; row < ui->listInfo->count(); ++row) {
@@ -617,7 +610,6 @@ void MainWindow::systemd_check()
 
 void MainWindow::journald_setup()
 {   QByteArray output;
-    QStringList bootlist;
     int test = 0;
     //set some word wrap modes
     ui->plainTextEditJournald->setWordWrapMode(QTextOption::NoWrap);
@@ -650,19 +642,22 @@ void MainWindow::journald_setup()
     }
 
     if (test == 0){
-        bootlist = QString(output).split("\n");
+        const QStringList bootlist = QString(output).split("\n");
         //bootlist.sort();
         //trim strings because journalctl output has leading spaces
-        for(int i = 0; i < bootlist.size(); ++i) {
-            QString item = static_cast<QString>(bootlist[i]).trimmed();
+        for(const QString &item : bootlist) {
+            ui->comboBoxJournaldListBoots->addItem(item.trimmed());
         }
-        ui->comboBoxJournaldListBoots->addItems(bootlist);
     }
     //flag that setup has been done, now changes in combo boxes will instantly change report
     journald_setup_done = true;
 }
 
-void MainWindow::run_journalctl_report(){
+void MainWindow::run_journalctl_report()
+{
+    if (!journald_setup_done) {
+        return;
+    }
 
     QByteArray output;
     QString text;
@@ -729,12 +724,21 @@ void MainWindow::run_journalctl_report(){
 //or when search reload button is used
 //run journald setup if hasn't happened yet.
 
-void MainWindow::on_tabWidget_currentChanged(int index)
-{   //qDebug() << "current index is " << index;
-
+void MainWindow::tabWidget_currentChanged(int index) noexcept
+{
     if (index == 1) {
         if (!journald_setup_done) {
             journald_setup();
+
+            QAction *actionJournaldSearch = new QAction(QIcon::fromTheme(QStringLiteral("search")),
+                                                        tr("Search for this service"), ui->lineEditJournaldSearch);
+            ui->lineEditJournaldSearch->addAction(actionJournaldSearch, QLineEdit::TrailingPosition);
+            actionJournaldSearch->setShortcut(Qt::Key_Return);
+            actionJournaldSearch->setShortcutContext(Qt::WidgetShortcut);
+            connect(ui->comboBoxJournaldListBoots, &QComboBox::activated, this, &MainWindow::run_journalctl_report);
+            connect(ui->comboBoxJournaldPriority, &QComboBox::activated, this, &MainWindow::run_journalctl_report);
+            connect(ui->comboBoxJournaldSystemUser, &QComboBox::activated, this, &MainWindow::run_journalctl_report);
+            connect(actionJournaldSearch, &QAction::triggered, this, &MainWindow::run_journalctl_report);
         }
         //hide save files button as it has no place on this tab
         ui->pushSave->hide();
@@ -744,34 +748,23 @@ void MainWindow::on_tabWidget_currentChanged(int index)
         ui->pushSave->show();
     }
 }
-void MainWindow::on_comboBoxJournaldListBoots_activated(int index)
+
+// About button clicked
+void MainWindow::pushAbout_clicked() noexcept
 {
-    if (journald_setup_done) {
-        run_journalctl_report();
-    }
+    displayAboutMsgBox(
+        tr("About Quick-System-Info-gui"),
+        "<p align=\"center\"><b><h2>" + tr("Quick System Info") + "</h2></b></p><p align=\"center\">" + tr("Version: ")
+            + qApp->applicationVersion() + "</p><p align=\"center\"><h3>" + tr("Program for displaying a quick system info report")
+            + "</h3></p><p align=\"center\"><a href=\"http://mxlinux.org\">http://mxlinux.org</a><br /></p>"
+              "<p align=\"center\">"
+            + tr("Copyright (c) MX Linux") + "<br /><br /></p>",
+        QStringLiteral("/usr/share/doc/quick-system-info-gui/license.html"),
+        tr("%1 License").arg(this->windowTitle()));
 }
 
-
-void MainWindow::on_comboBoxJournaldPriority_activated(int index)
+void MainWindow::pushHelp_clicked() noexcept
 {
-    if (journald_setup_done) {
-        run_journalctl_report();
-    }
+    const QString &url = QStringLiteral("file:///usr/share/doc/quick-system-info-gui/quick-system-info-gui.html");
+    displayDoc(url, tr("%1 Help").arg(tr("Quick System Info")));
 }
-
-
-void MainWindow::on_comboBoxJournaldSystemUser_activated(int index)
-{
-    if (journald_setup_done) {
-        run_journalctl_report();
-    }
-}
-
-
-void MainWindow::on_toolButtonReloadSearch_clicked()
-{
-    if (journald_setup_done) {
-        run_journalctl_report();
-    }
-}
-

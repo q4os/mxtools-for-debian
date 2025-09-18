@@ -1,0 +1,106 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# heskjestad <cato@heskjestad.xyz>, 2022-2023
+# heskjestad <cato@heskjestad.xyz>, 2020
+msgid ""
+msgstr ""
+"Project-Id-Version: antix-development\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-11-28 18:29+0100\n"
+"PO-Revision-Date: 2011-10-27 11:10+0000\n"
+"Last-Translator: heskjestad <cato@heskjestad.xyz>, 2022-2023\n"
+"Language-Team: Norwegian Bokmål (http://app.transifex.com/anticapitalista/antix-development/language/nb/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: nb\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: block-advert.sh:32
+msgid "antiX Advert Blocker"
+msgstr "antiX Reklameblokkering"
+
+#: block-advert.sh:42
+#, sh-format
+msgid ""
+"The <b>$title</b> tool adds stuff to your /etc/hosts file, so \\nthat many "
+"advertising servers and websites can't connect to this PC.\\nYou can choose "
+"to block ads, malware, pornography, gambling, fakenews and social "
+"media\\nBlocking ad servers protects your privacy, saves you bandwidth, "
+"greatly \\nimproves web-browsing speed and makes the internet much less "
+"annoying in general.\\n\\nDo you want to proceed?"
+msgstr "Verktøyet <b>$title</b> legger til innhold i filen /etc/hosts\\nslik at mange reklametjenere og -nettsteder ikke kan koble seg\\ntil denne PC-en. Du kan velge å blokkere reklame, skadevare, pornografi, gambling, falske nyheter og sosiale media. \\nDette beskytter personvernet ditt\\n, begrenser bruken av båndbredde, øker nettlesingshastigheten\\nog gjør Internett mindre irriterende.\\n\\nVil du fortsette?"
+
+#: block-advert.sh:53
+msgid ""
+"<b> Failed </b> \\n\\n\tantiX advert blocker must be run as root or with "
+"sudo "
+msgstr "<b>Mislyktes</b>\\n\\n\tantiX reklameblokkering må kjøres som root eller med sudo"
+
+#: block-advert.sh:139
+msgid "Restoring original /etc/hosts."
+msgstr "Gjenoppretter original /etc/hosts."
+
+#: block-advert.sh:180
+#, sh-format
+msgid "Loading  blocklist from $domain"
+msgstr "Laster blokkeringsliste fra $domain"
+
+#: block-advert.sh:191
+msgid ""
+"\\n ERROR: \\n No /etc/hosts.ORIGINAL was found, so it can't be restored.\\n"
+" Probably you already UNBLOCKED EVERYTHING. \\n You will have to manually "
+"edit the file /etc/hosts to remove any unwanted content \\n"
+msgstr "\\n FEIL: \\n Fant ikke /etc/hosts.ORIGINAL og kan derfor ikke gjenopprette.\\n Du har sannsynligvis AVBLOKKERT ALT. \\n Du må redigere /etc/hosts manuelt for å fjerne eventuelt uønsket innhold \\n"
+
+#: block-advert.sh:213
+msgid ""
+"Success - your settings have been changed.\\n\\nYour hosts file has been "
+"updated.\\nRestart your browser to see the changes."
+msgstr "Fullført – innstillingene er endret.\\n\\nHosts-filen er oppdatert.\\nStart nettleseren din på nytt for å ta i bruk endringene."
+
+#: block-advert.sh:223
+msgid ""
+"\\n \\n (NOTE1: This application's main window always opens showing the "
+"default selection,\\n not what's currently selected. \\n  NOTE2: RESTART "
+"YOUR BROWSER TO SEE THE EFFECTS OF ANY CHANGE!)"
+msgstr "\\n \\n (NB 1: Dette programmets hovedvindu åpner alltid med standard utvalg,\\n ikke det som faktisk er valgt. \\n  NB 2: START NETTLESEREN PÅ NYTT FOR Å TA I BRUK ENDRINGER)"
+
+#: block-advert.sh:241
+msgid "Choose what to block"
+msgstr "Velg hva som skal blokkeres"
+
+#: block-advert.sh:242
+msgid "UNBLOCK EVERYTHING"
+msgstr "AVBLOKKER ALT"
+
+#: block-advert.sh:243
+msgid "Cancel"
+msgstr "Avbryt"
+
+#: block-advert.sh:244
+msgid "Block Ad and Malware websites"
+msgstr "Blokkér reklame og skadevare"
+
+#: block-advert.sh:245
+msgid "Block Pornographic websites"
+msgstr "Blokkér pornografiske nettsteder"
+
+#: block-advert.sh:246
+msgid "Block Fakenews websites"
+msgstr "Blokkér nettsteder med falske nyheter"
+
+#: block-advert.sh:247
+msgid "Block Gambling websites"
+msgstr "Blokkér nettsteder med pengespill"
+
+#: block-advert.sh:248
+msgid "Block Social Media websites"
+msgstr "Blokkér sosiale medier"
+
+#: block-advert.sh:300
+msgid "No item selected"
+msgstr "Ingenting er valgt"

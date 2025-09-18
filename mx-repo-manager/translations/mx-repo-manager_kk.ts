@@ -1,29 +1,27 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="kk">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="kk">
 <context>
     <name>MainWindow</name>
     <message>
         <location filename="../mainwindow.ui" line="17"/>
         <location filename="../mainwindow.cpp" line="62"/>
         <source>MX Repo Manager</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="32"/>
         <location filename="../mainwindow.cpp" line="743"/>
         <source>Select the APT repository that you want to use:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="59"/>
         <source>MX repos</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="84"/>
         <source>Select fastest MX repo for me</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="110"/>
@@ -33,22 +31,22 @@
     <message>
         <location filename="../mainwindow.ui" line="168"/>
         <source>Debian repos</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="180"/>
         <source>Select fastest Debian repo for me</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="229"/>
         <source>Individual sources</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="248"/>
         <source>Restore original APT sources</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="329"/>
@@ -105,24 +103,24 @@
         <location filename="../mainwindow.cpp" line="557"/>
         <location filename="../mainwindow.cpp" line="937"/>
         <source>Success</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="167"/>
         <location filename="../mainwindow.cpp" line="558"/>
         <location filename="../mainwindow.cpp" line="941"/>
         <source>Your new selection will take effect the next time sources are updated.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="348"/>
         <source>Lists</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="348"/>
         <source>Sources (checked sources are enabled)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="560"/>
@@ -141,7 +139,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="560"/>
         <source>Could not change the repo.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="585"/>
@@ -151,12 +149,12 @@
     <message>
         <location filename="../mainwindow.cpp" line="591"/>
         <source>Please wait...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="667"/>
         <source>About %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="668"/>
@@ -166,7 +164,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="670"/>
         <source>Program for choosing the default APT repository</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="672"/>
@@ -176,12 +174,12 @@
     <message>
         <location filename="../mainwindow.cpp" line="673"/>
         <source>%1 License</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="687"/>
         <source>%1 Help</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="704"/>
@@ -191,22 +189,22 @@
     <message>
         <location filename="../mainwindow.cpp" line="705"/>
         <source>You have selected MX Test Repo. It&apos;s not recommended to leave it enabled or to upgrade all the packages from it.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="708"/>
         <source>A safer option is to install packages individually with MX Package Installer.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="745"/>
         <source>Select the APT repository and sources that you want to use:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="805"/>
         <source>netselect-apt could not detect fastest repo.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="784"/>
@@ -214,42 +212,42 @@
         <location filename="../mainwindow.cpp" line="823"/>
         <location filename="../mainwindow.cpp" line="838"/>
         <source>Could not detect fastest repo.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="851"/>
         <source>Can&apos;t figure out if this app is running on antiX or MX</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="859"/>
         <source>MX version not detected or out of range: </source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="874"/>
         <source>Could not download original APT files.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="881"/>
         <source>Could not unzip downloaded file.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="924"/>
         <source>Enabling AHS</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="924"/>
         <source>Do you use AHS (Advanced Hardware Stack) repo?</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="938"/>
         <source>Original APT sources have been restored to the release status. User added source files in /etc/apt/sources.list.d/ have not been touched.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -263,7 +261,7 @@
         <location filename="../about.cpp" line="50"/>
         <location filename="../about.cpp" line="60"/>
         <source>Changelog</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../about.cpp" line="51"/>
@@ -273,7 +271,7 @@
     <message>
         <location filename="../about.cpp" line="73"/>
         <source>&amp;Close</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../main.cpp" line="73"/>
@@ -284,12 +282,12 @@
     <message>
         <location filename="../main.cpp" line="74"/>
         <source>You seem to be logged in as root, please log out and log in as normal user to use this program.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../main.cpp" line="83"/>
         <source>You must run this program with admin access.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 </TS>

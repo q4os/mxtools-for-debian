@@ -1,0 +1,107 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# Dede Carli <dede.carli.drums@gmail.com>, 2022-2023
+# Guybrush88 <erpizzo@alice.it>, 2014
+# Pierluigi Mario <pierluigimariomail@gmail.com>, 2014,2017
+msgid ""
+msgstr ""
+"Project-Id-Version: antix-development\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-11-28 18:29+0100\n"
+"PO-Revision-Date: 2011-10-27 11:10+0000\n"
+"Last-Translator: Dede Carli <dede.carli.drums@gmail.com>, 2022-2023\n"
+"Language-Team: Italian (http://app.transifex.com/anticapitalista/antix-development/language/it/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: it\n"
+"Plural-Forms: nplurals=3; plural=n == 1 ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
+
+#: block-advert.sh:32
+msgid "antiX Advert Blocker"
+msgstr "antiX Blocco pubblicità"
+
+#: block-advert.sh:42
+#, sh-format
+msgid ""
+"The <b>$title</b> tool adds stuff to your /etc/hosts file, so \\nthat many "
+"advertising servers and websites can't connect to this PC.\\nYou can choose "
+"to block ads, malware, pornography, gambling, fakenews and social "
+"media\\nBlocking ad servers protects your privacy, saves you bandwidth, "
+"greatly \\nimproves web-browsing speed and makes the internet much less "
+"annoying in general.\\n\\nDo you want to proceed?"
+msgstr "Lo strumento <b>$title</b> aggiunge voci al tuo file /etc/hosts, così \\nche molti servers e siti web pubblicitari non possono connettersi a questo PC.\\nPuoi scegliere di bloccare annunci, malware, pornografia, giochi d'azzardo fakenews e social media\\nBloccare gli annunci dei server protegge la tua privacy, consente di risparmiare sulla larghezza di banda, \\nincrementa notevolmente la velocità di navigazione e rende Internet in generale molto meno fastidioso.\\n\\nVuoi procedere?"
+
+#: block-advert.sh:53
+msgid ""
+"<b> Failed </b> \\n\\n\tantiX advert blocker must be run as root or with "
+"sudo "
+msgstr "<b> Fallito </b> \\n\\n\til blocca annunci di antiX dev'essere eseguito come root o con sudo "
+
+#: block-advert.sh:139
+msgid "Restoring original /etc/hosts."
+msgstr "Ripristino del file originale /etc/hosts."
+
+#: block-advert.sh:180
+#, sh-format
+msgid "Loading  blocklist from $domain"
+msgstr "Caricamento lista bloccati da $domain"
+
+#: block-advert.sh:191
+msgid ""
+"\\n ERROR: \\n No /etc/hosts.ORIGINAL was found, so it can't be restored.\\n"
+" Probably you already UNBLOCKED EVERYTHING. \\n You will have to manually "
+"edit the file /etc/hosts to remove any unwanted content \\n"
+msgstr "\\n ERRORE: \\n Non è stato trovato /etc/hosts.ORIGINAL, quindi non può essere ripristinato.\\n Probabilmente hai già SBLOCCATO TUTTO. \\n Dovrai modificare manualmente il file /etc/hosts per rimuovere qualsiasi contenuto indesiderato \\n"
+
+#: block-advert.sh:213
+msgid ""
+"Success - your settings have been changed.\\n\\nYour hosts file has been "
+"updated.\\nRestart your browser to see the changes."
+msgstr "Successo - le tue impostazioni sono state cambiate.\\n\\nIl tuo hosts file è stato aggiornato.\\nRiavvia il tuo browser per vedere i cambiamenti."
+
+#: block-advert.sh:223
+msgid ""
+"\\n \\n (NOTE1: This application's main window always opens showing the "
+"default selection,\\n not what's currently selected. \\n  NOTE2: RESTART "
+"YOUR BROWSER TO SEE THE EFFECTS OF ANY CHANGE!)"
+msgstr "\\n \\n (NOTA 1: la finestra principale di questa applicazione si apre sempre mostrando la selezione predefinita,\\n non quella attualmente selezionata. \\n NOTA2: RIAVVIA IL TUO BROWSER PER VEDERE GLI EFFETTI DI QUALSIASI CAMBIAMENTO!)"
+
+#: block-advert.sh:241
+msgid "Choose what to block"
+msgstr "Scegli cosa bloccare"
+
+#: block-advert.sh:242
+msgid "UNBLOCK EVERYTHING"
+msgstr "SBLOCCA TUTTO"
+
+#: block-advert.sh:243
+msgid "Cancel"
+msgstr "Annulla"
+
+#: block-advert.sh:244
+msgid "Block Ad and Malware websites"
+msgstr "Blocca siti web di annunci e di malware"
+
+#: block-advert.sh:245
+msgid "Block Pornographic websites"
+msgstr "Blocca siti web pornografici"
+
+#: block-advert.sh:246
+msgid "Block Fakenews websites"
+msgstr "Blocca siti web di notizie false"
+
+#: block-advert.sh:247
+msgid "Block Gambling websites"
+msgstr "Blocca siti web di gioco d'azzardo"
+
+#: block-advert.sh:248
+msgid "Block Social Media websites"
+msgstr "Blocca siti web di social media"
+
+#: block-advert.sh:300
+msgid "No item selected"
+msgstr "Nessun elemento selezionato"

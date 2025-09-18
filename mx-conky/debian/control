@@ -1,18 +1,23 @@
 Source: mx-conky
 Section: admin
 Priority: optional
-Maintainer: fehlix <fehlix@mxlinux.org>
-XSBC-Original-Maintainer: Adrian <adrian@mxlinux.org>
-Build-Depends: 	debhelper (>=10), 
-		qtbase5-dev, 
-		qttools5-dev-tools
+Maintainer: Adrian <adrian@mxlinux.org>
+Build-Depends: debhelper-compat (=12), cmake (>= 3.16), ninja-build, qt6-base-dev, qt6-base-dev-tools, qt6-tools-dev, qt6-tools-dev-tools
 Standards-Version: 3.9.8
 Vcs-Git: git://github.com/MX-Linux/mx-conky
+Homepage: https://github.com/MX-Linux/mx-conky
 
 Package: mx-conky
 Architecture: any
-Depends: mx-conky-data, 
-	${misc:Depends}, 
+Depends: mx-conky-data-bin,
+	conky-all | conky,
+	${misc:Depends},
 	${shlibs:Depends}
-Description: MX Conky
- MX Conky is a tool used for manipulating detailed attributes such as color or formats
+Recommends: mx-conky-data	 
+Description: Conky configuration tool for MX Linux
+ MX Conky is a graphical tool used for configuring and managing Conky
+ on MX Linux. It allows users to easily customize Conky displays by
+ manipulating detailed attributes such as colors, formats, transparency,
+ and positioning. The tool provides a user-friendly interface for both
+ beginners and advanced users to create and modify Conky configurations
+ without manual editing of configuration files.

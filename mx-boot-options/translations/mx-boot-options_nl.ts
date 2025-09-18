@@ -1,17 +1,15 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="nl">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="nl">
 <context>
     <name>Cmd</name>
     <message>
         <location filename="../cmd.cpp" line="141"/>
         <source>Administrator Access Required</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../cmd.cpp" line="142"/>
         <source>This operation requires administrator privileges. Please restart the application and enter your password when prompted.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -89,7 +87,7 @@ systeem dat u wilt wijzigen (alleen Linux partities worden weergegeven)</transla
     <message>
         <location filename="../mainwindow.ui" line="134"/>
         <source>Manage UEFI Boot Options</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="150"/>
@@ -237,7 +235,7 @@ systeem dat u wilt wijzigen (alleen Linux partities worden weergegeven)</transla
     <message>
         <location filename="../mainwindow.cpp" line="535"/>
         <source>Cannot open LUKS device. Exiting...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="556"/>
@@ -335,7 +333,7 @@ OK om door te gaan en te installeren?</translation>
     <message>
         <location filename="../mainwindow.cpp" line="1346"/>
         <source>Could not retrieve UUID for %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1354"/>
@@ -345,12 +343,12 @@ OK om door te gaan en te installeren?</translation>
     <message>
         <location filename="../mainwindow.cpp" line="1359"/>
         <source>Password entry cancelled or empty for %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1365"/>
         <source>Could not open %1 LUKS container</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1200"/>
@@ -360,37 +358,37 @@ OK om door te gaan en te installeren?</translation>
     <message>
         <location filename="../mainwindow.cpp" line="100"/>
         <source>A process is still running. Do you really want to quit?</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="167"/>
         <source>Live System Detected</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="169"/>
         <source>You are currently running a live system. Would you like to modify the boot options for the live system or for an installed system?</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="171"/>
         <source>Live System</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="172"/>
         <source>Installed System</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="373"/>
         <source>Failed to update package sources.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="377"/>
         <source>Installing packages:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="387"/>
@@ -400,27 +398,27 @@ OK om door te gaan en te installeren?</translation>
     <message>
         <location filename="../mainwindow.cpp" line="387"/>
         <source>Bootsplash installed successfully.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="415"/>
         <source>Failed to create temporary file.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="980"/>
         <source>You are currently running in live mode with the &apos;toram&apos; option. Please remember to save the persistence file or remaster, otherwise any changes made will be lost.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="982"/>
         <source>Your changes have been successfully applied.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="983"/>
         <source>Operation Complete</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1068"/>
@@ -430,7 +428,7 @@ OK om door te gaan en te installeren?</translation>
     <message>
         <location filename="../mainwindow.cpp" line="1192"/>
         <source>Boot Log</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1232"/>

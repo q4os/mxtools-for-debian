@@ -1,6 +1,5 @@
-block-advert.sh      /usr/bin 
+policy/*	usr/share/polkit-1/actions
+scripts/*	usr/bin
 advert-block.desktop /usr/share/applications
 locale/*	     /usr/share/locale
 advert-block.png     /usr/share/pixmaps
-policy/*	usr/share/polkit-1/actions
-script/*	usr/bin

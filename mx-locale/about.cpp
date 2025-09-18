@@ -1,64 +1,101 @@
+/**********************************************************************
+ *
+ **********************************************************************
+ * Copyright (C) 2024 MX Authors
+ *
+ * Authors: Adrian <adrian@mxlinux.org>
+ *          MX Linux <http://mxlinux.org>
+ *
+ * This is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this package. If not, see <http://www.gnu.org/licenses/>.
+ **********************************************************************/
 #include "about.h"
-#include "version.h"
 
 #include <QApplication>
 #include <QFileInfo>
 #include <QMessageBox>
+#include <QProcess>
 #include <QPushButton>
+#include <QStandardPaths>
 #include <QTextEdit>
 #include <QVBoxLayout>
+
+#include "common.h"
 #include <unistd.h>
 
 // Display doc as nomal user when run as root
-void displayDoc(const QString &url, const QString &title, bool runned_as_root)
+void displayDoc(const QString &url, const QString &title)
 {
-    if (system("command -v mx-viewer >/dev/null") == 0) {
-        system("mx-viewer " + url.toUtf8() + " \"" + title.toUtf8() + "\"&");
-        return;
+    bool started_as_root = false;
+    if (qEnvironmentVariable("HOME") == "root") {
+        started_as_root = true;
+        qputenv("HOME", starting_home.toUtf8()); // Use original home for theming purposes
     }
-
-    if (system("command -v antix-viewer >/dev/null") == 0) {
-        system("antix-viewer " + url.toUtf8() + " \"" + title.toUtf8() + "\"&");
-        return;
-    }
-
-    if (getuid() != 0) {
-        QString cmd = "xdg-open " + url;
-        system(cmd.toUtf8());
+    // Prefer mx-viewer otherwise use xdg-open (use runuser to run that as logname user)
+    QString executablePath = QStandardPaths::findExecutable("mx-viewer");
+    if (!executablePath.isEmpty()) {
+        QProcess::startDetached("mx-viewer", {url, title});
     } else {
-        system("su $(logname) -c \"env XDG_RUNTIME_DIR=/run/user/$(id -u $(logname)) xdg-open " + url.toUtf8() + "\"&");
+        if (getuid() != 0) {
+            QProcess::startDetached("xdg-open", {url});
+        } else {
+            QProcess proc;
+            proc.start("logname", {}, QIODevice::ReadOnly);
+            proc.waitForFinished();
+            QString user = QString::fromUtf8(proc.readAllStandardOutput()).trimmed();
+            QProcess::startDetached("runuser", {"-u", user, "--", "xdg-open", url});
+        }
+    }
+    if (started_as_root) {
+        qputenv("HOME", "/root");
     }
 }
 
 void displayAboutMsgBox(const QString &title, const QString &message, const QString &licence_url,
-                        const QString &license_title, bool runned_as_root)
+                        const QString &license_title)
 {
+    const auto width = 600;
+    const auto height = 500;
     QMessageBox msgBox(QMessageBox::NoIcon, title, message);
-    QPushButton *btnLicense = msgBox.addButton(QObject::tr("License"), QMessageBox::HelpRole);
-    QPushButton *btnChangelog = msgBox.addButton(QObject::tr("Changelog"), QMessageBox::HelpRole);
-    QPushButton *btnCancel = msgBox.addButton(QObject::tr("Cancel"), QMessageBox::NoRole);
+    auto *btnLicense = msgBox.addButton(QObject::tr("License"), QMessageBox::HelpRole);
+    auto *btnChangelog = msgBox.addButton(QObject::tr("Changelog"), QMessageBox::HelpRole);
+    auto *btnCancel = msgBox.addButton(QObject::tr("Cancel"), QMessageBox::NoRole);
     btnCancel->setIcon(QIcon::fromTheme("window-close"));
 
     msgBox.exec();
 
     if (msgBox.clickedButton() == btnLicense) {
-        displayDoc(licence_url, license_title, runned_as_root);
+        displayDoc(licence_url, license_title);
     } else if (msgBox.clickedButton() == btnChangelog) {
-        QDialog *changelog = new QDialog();
+        auto *changelog = new QDialog;
         changelog->setWindowTitle(QObject::tr("Changelog"));
-        changelog->resize(600, 500);
+        changelog->resize(width, height);
 
-        QTextEdit *text = new QTextEdit;
+        auto *text = new QTextEdit(changelog);
         text->setReadOnly(true);
-        Cmd cmd;
-        text->setText(cmd.getOut("zless /usr/share/doc/" + QFileInfo(QCoreApplication::applicationFilePath()).fileName()
-                                 + "/changelog.gz"));
+        QProcess proc;
+        proc.start(
+            "zless",
+            {"/usr/share/doc/" + QFileInfo(QCoreApplication::applicationFilePath()).fileName() + "/changelog.gz"},
+            QIODevice::ReadOnly);
+        proc.waitForFinished();
+        text->setText(proc.readAllStandardOutput());
 
-        QPushButton *btnClose = new QPushButton(QObject::tr("&Close"));
+        auto *btnClose = new QPushButton(QObject::tr("&Close"), changelog);
         btnClose->setIcon(QIcon::fromTheme("window-close"));
         QObject::connect(btnClose, &QPushButton::clicked, changelog, &QDialog::close);
 
-        QVBoxLayout *layout = new QVBoxLayout;
+        auto *layout = new QVBoxLayout(changelog);
         layout->addWidget(text);
         layout->addWidget(btnClose);
         changelog->setLayout(layout);

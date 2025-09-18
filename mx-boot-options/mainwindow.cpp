@@ -150,6 +150,15 @@ void MainWindow::setupUiElements()
     ui->checkEnableFlatmenus->setEnabled(true);
     ui->pushUefi->setVisible(isUefi() && isInstalled("efibootmgr"));
 
+    // Check if splash is enabled in kernel command line
+    if (!isSplashEnabled()) {
+        ui->pushPreview->setDisabled(true);
+        ui->pushPreview->setToolTip(tr("Preview is disabled because 'splash' parameter is not present in kernel command line. "
+                                       "To enable preview, add 'splash' to boot parameters and reboot."));
+    } else {
+        ui->pushPreview->setToolTip("");
+    }
+
     // Configure GRUB theme related UI elements
     const bool grubThemesExist = QFile::exists("/boot/grub/themes");
     ui->checkGrubTheme->setVisible(grubThemesExist);
@@ -1150,7 +1159,7 @@ void MainWindow::comboMenuEntryCurrentIndexChanged()
 void MainWindow::comboBootsplashToggled(bool checked)
 {
     ui->comboTheme->setEnabled(checked);
-    ui->pushPreview->setEnabled(checked);
+    ui->pushPreview->setEnabled(checked && isSplashEnabled());
 
     QString line = ui->textKernel->text();
     if (checked) {
@@ -1293,7 +1302,7 @@ void MainWindow::comboSaveDefaultClicked()
 
 void MainWindow::comboThemeCurrentIndexChanged(int index)
 {
-    ui->pushPreview->setDisabled(ui->comboTheme->itemText(index) == QLatin1String("details"));
+    ui->pushPreview->setDisabled(ui->comboTheme->itemText(index) == QLatin1String("details") || !isSplashEnabled());
 }
 
 void MainWindow::comboGrubThemeToggled(bool checked)
@@ -1416,4 +1425,20 @@ bool MainWindow::mountBoot(const QString &path)
         return false;
     }
     return true;
+}
+
+bool MainWindow::isSplashEnabled()
+{
+    QFile cmdlineFile("/proc/cmdline");
+    if (!cmdlineFile.open(QIODevice::ReadOnly | QIODevice::Text)) {
+        qWarning() << "Could not read /proc/cmdline";
+        return false;
+    }
+
+    QString cmdline = QString::fromUtf8(cmdlineFile.readAll()).trimmed();
+    cmdlineFile.close();
+
+    // Split by spaces and check for exact "splash" parameter
+    const QStringList params = cmdline.split(' ', Qt::SkipEmptyParts);
+    return params.contains("splash");
 }

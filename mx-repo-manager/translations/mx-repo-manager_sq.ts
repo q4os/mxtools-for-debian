@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="sq">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="sq">
 <context>
     <name>MainWindow</name>
     <message>
@@ -250,10 +248,6 @@
         <location filename="../mainwindow.cpp" line="938"/>
         <source>Original APT sources have been restored to the release status. User added source files in /etc/apt/sources.list.d/ have not been touched.</source>
         <translation>Burimet origjinale APT janë rikthyer në gjendjen e hedhjes në qarkullim. Kartela burim të shtuara nga përdoruesi te /etc/apt/sources.list.d/ nuk u prekën.</translation>
-    </message>
-    <message>
-        <source>There was an error writing file: %1. Please check if you have enough free space on your drive</source>
-        <translation type="vanished">Pati një gabim në shkrim kartele: %1. Ju lutemi, kontrolloni nëse keni hapësirë të lirë të mjaftueshme në diskun tuaj</translation>
     </message>
 </context>
 <context>

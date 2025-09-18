@@ -158,14 +158,14 @@ void MainWindow::aboutClicked()
                              "href=\"http://mxlinux.org\">http://mxlinux.org</a><br "
                              "/></p><p align=\"center\">"
                            + tr("Copyright (c) MX Linux") + "<br /><br /></p>",
-                       "/usr/share/doc/mx-locale/license.html", tr("%1 License").arg(this->windowTitle()), true);
+                       "/usr/share/doc/mx-locale/license.html", tr("%1 License").arg(this->windowTitle()));
     this->show();
 }
 
 void MainWindow::helpClicked()
 {
     QString url = "file:///usr/share/doc/mx-locale/help/mx-locale.html";
-    displayDoc(url, tr("%1 Help").arg(this->windowTitle()), true);
+    displayDoc(url, tr("%1 Help").arg(this->windowTitle()));
 }
 
 QString MainWindow::getCurrentLang() const

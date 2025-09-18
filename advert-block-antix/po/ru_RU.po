@@ -1,0 +1,105 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# Victor Red, 2024
+msgid ""
+msgstr ""
+"Project-Id-Version: antix-development\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-11-28 18:29+0100\n"
+"PO-Revision-Date: 2011-10-27 11:10+0000\n"
+"Last-Translator: Victor Red, 2024\n"
+"Language-Team: Russian (Russia) (http://app.transifex.com/anticapitalista/antix-development/language/ru_RU/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: ru_RU\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%100>=11 && n%100<=14)? 2 : 3);\n"
+
+#: block-advert.sh:32
+msgid "antiX Advert Blocker"
+msgstr "antiX Блокировщик рекламы"
+
+#: block-advert.sh:42
+#, sh-format
+msgid ""
+"The <b>$title</b> tool adds stuff to your /etc/hosts file, so \\nthat many "
+"advertising servers and websites can't connect to this PC.\\nYou can choose "
+"to block ads, malware, pornography, gambling, fakenews and social "
+"media\\nBlocking ad servers protects your privacy, saves you bandwidth, "
+"greatly \\nimproves web-browsing speed and makes the internet much less "
+"annoying in general.\\n\\nDo you want to proceed?"
+msgstr "Инструмент <b>$title</b> добавляет некоторый материал в файл /etc/hosts, благодаря чему \\nмногие рекламные серверы и веб-сайты не смогут подключиться \\nк этому компьютеру.\\n\\nВы можете заблокировать рекламу, вредоносные программы, порнографию, азартные игры, фальшивые новости и социальные сети.\\nБлокировка рекламных серверов защищает вашу конфиденциальность, позволяет сэкономить трафик, значительно \\nулучшает скорость открытия страниц и делает интернет менее раздражающим в целом.\\n\\nХотите продолжить?"
+
+#: block-advert.sh:53
+msgid ""
+"<b> Failed </b> \\n\\n\tantiX advert blocker must be run as root or with "
+"sudo "
+msgstr "<b> Не удалось </b> \\n\\n\tБлокировщик рекламы antiX должен быть запущен из под рута либо посредством sudo "
+
+#: block-advert.sh:139
+msgid "Restoring original /etc/hosts."
+msgstr "Восстановить исходный /etc/hosts."
+
+#: block-advert.sh:180
+#, sh-format
+msgid "Loading  blocklist from $domain"
+msgstr "Загрузка списка блокировки с $domain"
+
+#: block-advert.sh:191
+msgid ""
+"\\n ERROR: \\n No /etc/hosts.ORIGINAL was found, so it can't be restored.\\n"
+" Probably you already UNBLOCKED EVERYTHING. \\n You will have to manually "
+"edit the file /etc/hosts to remove any unwanted content \\n"
+msgstr "\\n ОШИБКА: \\n Файл /etc/hosts.ORIGINAL не найден, поэтому его нельзя восстановить.\\n Вероятно, вы уже РАЗБЛОКИРОВАЛИ ВСЕ. \\n Вам придется вручную отредактировать файл /etc/hosts, чтобы удалить нежелательное содержимое \\n"
+
+#: block-advert.sh:213
+msgid ""
+"Success - your settings have been changed.\\n\\nYour hosts file has been "
+"updated.\\nRestart your browser to see the changes."
+msgstr "Успешно - Ваши настройки были изменены.\\n\\nВаш файл hosts обновлен.\\nПерезапустите браузер, чтобы увидеть изменения."
+
+#: block-advert.sh:223
+msgid ""
+"\\n \\n (NOTE1: This application's main window always opens showing the "
+"default selection,\\n not what's currently selected. \\n  NOTE2: RESTART "
+"YOUR BROWSER TO SEE THE EFFECTS OF ANY CHANGE!)"
+msgstr "\\n \\n (NOTE1: Главное окно этого приложения всегда открывается, показывая выбор по умолчанию,\\n не то, что выбрано сейчас. \\n  NOTE2: ПЕРЕЗАПУСТИТЕ БРАУЗЕР, ЧТОБЫ УВИДЕТЬ ЭФФЕКТЫ ЛЮБЫХ ИЗМЕНЕНИЙ!)"
+
+#: block-advert.sh:241
+msgid "Choose what to block"
+msgstr "Выберите, что блокировать"
+
+#: block-advert.sh:242
+msgid "UNBLOCK EVERYTHING"
+msgstr "РАЗБЛОКИРОВАТЬ ВСЕ"
+
+#: block-advert.sh:243
+msgid "Cancel"
+msgstr "Отмена"
+
+#: block-advert.sh:244
+msgid "Block Ad and Malware websites"
+msgstr "Блокировать рекламные и вредоносные веб-сайты"
+
+#: block-advert.sh:245
+msgid "Block Pornographic websites"
+msgstr "Блокировать порнографические веб-сайты"
+
+#: block-advert.sh:246
+msgid "Block Fakenews websites"
+msgstr "Блокировать веб-сайты фейковых новостей"
+
+#: block-advert.sh:247
+msgid "Block Gambling websites"
+msgstr "Блокировать сайты азартных игр"
+
+#: block-advert.sh:248
+msgid "Block Social Media websites"
+msgstr "Блокировать веб-сайты социальных сетей"
+
+#: block-advert.sh:300
+msgid "No item selected"
+msgstr "Не выбран элемент"

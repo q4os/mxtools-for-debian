@@ -1,17 +1,15 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="tr">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="tr">
 <context>
     <name>Cmd</name>
     <message>
         <location filename="../cmd.cpp" line="141"/>
         <source>Administrator Access Required</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../cmd.cpp" line="142"/>
         <source>This operation requires administrator privileges. Please restart the application and enter your password when prompted.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -365,17 +363,17 @@ Onları kurmak için devam etmeye hazır mısın?</translation>
     <message>
         <location filename="../mainwindow.cpp" line="167"/>
         <source>Live System Detected</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="169"/>
         <source>You are currently running a live system. Would you like to modify the boot options for the live system or for an installed system?</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="171"/>
         <source>Live System</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="172"/>
@@ -385,7 +383,7 @@ Onları kurmak için devam etmeye hazır mısın?</translation>
     <message>
         <location filename="../mainwindow.cpp" line="373"/>
         <source>Failed to update package sources.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="377"/>
@@ -410,7 +408,7 @@ Onları kurmak için devam etmeye hazır mısın?</translation>
     <message>
         <location filename="../mainwindow.cpp" line="980"/>
         <source>You are currently running in live mode with the &apos;toram&apos; option. Please remember to save the persistence file or remaster, otherwise any changes made will be lost.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="982"/>

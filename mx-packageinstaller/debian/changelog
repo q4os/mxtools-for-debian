@@ -1,3 +1,40 @@
+mx-packageinstaller (25.09.1) mx; urgency=medium
+
+  * Performance fix: select all checkboxes in a batch manner
+  * Add sudo as backup to pkexec -- but it would only work if ran from
+    CLI
+  * Minor interface fix, display message first and then switch to
+    Popular tab
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 11 Sep 2025 15:29:22 -0400
+
+mx-packageinstaller (25.09) mx; urgency=medium
+
+  * Remember HideLibs selection
+  * Add a select all checkbox for 'Upgradable' and 'Autoremovable'
+    filters
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 05 Sep 2025 12:02:47 -0400
+
+mx-packageinstaller (25.08.2) mx; urgency=medium
+
+  * Fix VersionNumber comparison to match dpkg semantics
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 20 Aug 2025 16:51:35 -0400
+
+mx-packageinstaller (25.08.1) mx; urgency=medium
+
+  * Fix: adding flatpak repos for --user if not available
+  * Performance improvements
+
+ -- Adrian <adrian@mxlinux.org>  Sat, 02 Aug 2025 14:11:12 -0400
+
+mx-packageinstaller (25.08) mx; urgency=medium
+
+  * Fix: detection for multiple packages
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 01 Aug 2025 11:57:07 -0400
+
 mx-packageinstaller (25.7) mx; urgency=medium
 
   * Fix checkinstall function, selecting multiple installed packages
@@ -45,7 +82,7 @@ mx-packageinstaller (25.3.02) mx; urgency=medium
   * Fix performance issue when switching tabs after deselecting hide libs
     (still slower than normal, but it's functional now)
   * Clear some escape characters from output
-  * Add busy cursor when loading the list 
+  * Add busy cursor when loading the list
 
  -- Adrian <adrian@mxlinux.org>  Fri, 28 Mar 2025 13:34:04 -0400
 
@@ -84,7 +121,7 @@ mx-packageinstaller (24.12.05) mx; urgency=medium
 
 mx-packageinstaller (24.12.04) mx; urgency=medium
 
-  * Adjust regex to read binary-packages for current arch only and 
+  * Adjust regex to read binary-packages for current arch only and
     add all flat-repo Packages without binary-arch in filename
 
  -- fehlix <fehlix@mxlinux.org>  Tue, 31 Dec 2024 11:12:36 -0500
@@ -107,7 +144,7 @@ mx-packageinstaller (24.12.02) mx; urgency=medium
 mx-packageinstaller (24.12.01) mx; urgency=medium
 
   * make mxpi-launcher a script rather than a symlink
-  * addresses launch issue from apt-notifier 
+  * addresses launch issue from apt-notifier
 
  -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 30 Dec 2024 16:52:59 -0500
 
@@ -445,7 +482,7 @@ mx-packageinstaller (23.6) mx; urgency=medium
 
   * Fix progress bar for flatpak
   * Fix displaying space taken by flatpak packages
- 
+
  -- Adrian <adrian@mxlinux.org>  Thu, 08 Jun 2023 02:15:54 -0400
 
 mx-packageinstaller (23.5.03) mx; urgency=medium
@@ -464,7 +501,7 @@ mx-packageinstaller (23.5.02) mx; urgency=medium
 mx-packageinstaller (23.5.01) mx; urgency=medium
 
   * Update icon
-  * Refresh translations 
+  * Refresh translations
 
  -- Adrian <adrian@mxlinux.org>  Sun, 14 May 2023 22:16:55 -0400
 
@@ -551,7 +588,7 @@ mx-packageinstaller (22.8) mx; urgency=medium
 
 mx-packageinstaller (22.7.01) mx; urgency=medium
 
-  * translation refresh 
+  * translation refresh
 
  -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 23 Jul 2022 11:32:15 -0400
 
@@ -580,7 +617,7 @@ mx-packageinstaller (22.4.3) mx; urgency=medium
 
 mx-packageinstaller (22.4.2) mx; urgency=medium
 
-  * Reset filter when clearing the UI 
+  * Reset filter when clearing the UI
 
  -- Adrian <adrian@mxlinux.org>  Fri, 15 Apr 2022 03:09:30 -0400
 
@@ -592,7 +629,7 @@ mx-packageinstaller (22.4.1) mx; urgency=medium
 
 mx-packageinstaller (22.4) mx; urgency=medium
 
-  * Split long package info into details (which has a scroll bar) 
+  * Split long package info into details (which has a scroll bar)
 
  -- Adrian <adrian@mxlinux.org>  Fri, 01 Apr 2022 15:03:52 -0400
 
@@ -645,7 +682,7 @@ mx-packageinstaller (21.4) mx; urgency=medium
 
 mx-packageinstaller (21.3.02) mx; urgency=medium
 
-  * process multiple values in <installable> field in .pm files, e.g., "32,64,armhf" 
+  * process multiple values in <installable> field in .pm files, e.g., "32,64,armhf"
 
  -- Adrian <adrian@mxlinux.org>  Sun, 07 Mar 2021 12:07:06 -0500
 
@@ -725,7 +762,7 @@ mx-packageinstaller (20.12) mx; urgency=medium
 
 mx-packageinstaller (20.11.02) mx; urgency=medium
 
-  * adjust testrepo handling 
+  * adjust testrepo handling
   * adjust displayed version number for to be upgraded packages
 
  -- fehlix <fehlix@mxlinux.org>  Wed, 18 Nov 2020 17:56:17 -0400
@@ -751,7 +788,7 @@ mx-packageinstaller (20.9.1) mx; urgency=medium
 mx-packageinstaller (20.7.01) mx; urgency=medium
 
   [ fehlix ]
-  * adjusted setting of DEBIAN_FRONTEND 
+  * adjusted setting of DEBIAN_FRONTEND
 
  -- Adrian <adrian@mxlinux.org>  Wed, 15 Jul 2020 19:42:50 -0400
 
@@ -816,7 +853,7 @@ mx-packageinstaller (19.10) mx; urgency=medium
 
 mx-packageinstaller (19.9) mx; urgency=medium
 
-  * fix updating flatpaks 
+  * fix updating flatpaks
 
  -- Adrian <adrian@mxlinux.org>  Mon, 09 Sep 2019 19:51:44 -0400
 
@@ -1067,7 +1104,7 @@ mx-packageinstaller (17.12+5) mx; urgency=medium
 
 mx-packageinstaller (17.12+4) mx; urgency=medium
 
-  * additional language about log file 
+  * additional language about log file
 
  -- dolphin oracle <dolphin@littlebyte>  Sun, 17 Dec 2017 18:12:21 -0500
 
@@ -1079,7 +1116,7 @@ mx-packageinstaller (17.12+3) mx; urgency=medium
 
 mx-packageinstaller (17.12+2) mx; urgency=medium
 
-  * adding timeouts and additional wget/ apt-get logging 
+  * adding timeouts and additional wget/ apt-get logging
 
  -- dolphin oracle <dolphinoracle@gmail.com>  Sat, 16 Dec 2017 20:49:50 -0500
 
@@ -1129,7 +1166,7 @@ mx-packageinstaller (17.7) mx; urgency=medium
 
 mx-packageinstaller (17.6mx16+5) mx; urgency=medium
 
-  * removes deprecated packages 
+  * removes deprecated packages
 
  -- Adrian <adrian@mxlinux.org>  Wed, 28 Jun 2017 13:37:48 -0400
 
@@ -1171,7 +1208,7 @@ mx-packageinstaller (17.5mx16+3) mx; urgency=medium
 
 mx-packageinstaller (17.5mx16+2) mx; urgency=medium
 
-  * cancel active during apt-get update 
+  * cancel active during apt-get update
 
  -- Adrian <adrian@mxlinux.org>  Tue, 09 May 2017 21:01:42 -0400
 
@@ -1273,7 +1310,7 @@ mx-packageinstaller (15.11mx15) mx; urgency=medium
 
 mx-packageinstaller (15.10.9mx15) mx; urgency=medium
 
-  * fixed multiple installation bug 
+  * fixed multiple installation bug
 
  -- Adrian <adrian@mxlinux.org>  Fri, 30 Oct 2015 10:42:54 -0400
 
@@ -1429,7 +1466,7 @@ mx-packageinstaller (14.3) mx; urgency=medium
 
 mx-packageinstaller (14.2+1) mx; urgency=medium
 
-  * fixed dependency, changed version format 
+  * fixed dependency, changed version format
 
  -- Adrian <adrian@mxlinux.org>  Tue, 30 Sep 2014 19:12:05 -0400
 
@@ -1448,19 +1485,19 @@ mx-packageinstaller (0.14.2mx142+2) mx; urgency=medium
 mx-packageinstaller (0.14.1mx141+4) mx; urgency=low
 
   * Fixed Japanese output localization
-  * 
+  *
 
  -- Adrian <adrian@mxlinux.org>  Wed, 25 Jun 2014 01:09:52 -0400
 
 mx-packageinstaller (0.14.1mx141+2) mx; urgency=low
 
   * update languages
-  * 
+  *
 
  -- Adrin <adrian@mxlinux.org>  Tue, 17 Jun 2014 13:49:58 -0400
 
 mx-packageinstaller (0.1mx140+1) mx; urgency=low
 
-  * Initial release. 
+  * Initial release.
 
  -- Steven Pusser [stevep@mxlinux.org]  Sun, 20 Apr 2014 21:40:04 -0700

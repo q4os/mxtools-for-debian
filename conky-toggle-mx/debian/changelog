@@ -1,3 +1,18 @@
+conky-toggle-mx (25.7.02) mx; urgency=medium
+
+  * point desktop file at generic /usr/share/mx-conky-data/conky-startup.sh.
+  * migrate existing home folder desktop files
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 23 Jul 2025 20:10:11 -0400
+
+conky-toggle-mx (25.7.01) mx; urgency=medium
+
+  * add support for mx-conky version 25 and up
+  * prefer mx-conky 25+ over conky-manager2 if it exists
+  * update desktop file translations  
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Tue, 22 Jul 2025 19:15:39 -0400
+
 conky-toggle-mx (24.3.01) mx; urgency=medium
 
   * update desktop file translations

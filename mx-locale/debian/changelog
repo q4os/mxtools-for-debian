@@ -1,3 +1,22 @@
+mx-locale (25.08.1) mx; urgency=medium
+
+  * Remove 'Set same locale for all categories' button
+
+ -- Adrian <adrian@mxlinux.org>  Tue, 05 Aug 2025 18:55:45 -0400
+
+mx-locale (25.08) mx; urgency=medium
+
+  * Add 'Select sale locale for all categories' button
+
+ -- Adrian <adrian@mxlinux.org>  Sun, 03 Aug 2025 11:10:11 -0400
+
+mx-locale (25.4) mx; urgency=medium
+
+  * Update to Qt6
+  * Update translations
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 24 Apr 2025 10:40:50 -0400
+
 mx-locale (24.11.01) mx; urgency=medium
 
   * adjust about.cpp to launch help when not running root

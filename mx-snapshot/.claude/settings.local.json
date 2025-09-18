@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mkdir:*)",
+      "Bash(cmake:*)",
+      "Bash(grep:*)",
+      "Bash(rm:*)",
+      "Bash(ls:*)",
+      "Bash(./mx-snapshot:*)",
+      "Bash(./build/mx-snapshot:*)",
+      "Bash(find:*)",
+      "Bash(./build/iso-snapshot-cli:*)",
+      "Bash(make:*)"
+    ],
+    "deny": []
+  }
+}

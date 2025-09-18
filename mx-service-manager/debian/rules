@@ -1,18 +1,19 @@
 #!/usr/bin/make -f
-export QT_SELECT=5
+export QT_SELECT=6
+
+# Use standard CMake with Make generator for debian compatibility
+CMAKE_OPTS = -DCMAKE_BUILD_TYPE=Release
+
+override_dh_auto_configure:
+	dh_auto_configure -- $(CMAKE_OPTS)
 
 override_dh_auto_clean:
 	dh_auto_clean
-	rm -f src/translations/*.qm
+	rm -rf build/
+	rm -f src/version.h
 
-override_dh_auto_build:
-	lrelease translations/*.ts	
-	head -n1 debian/changelog | sed -e "s/.*(\([^(]*\)).*/const QString VERSION {\"\1\"};/" > version.h
-	dh_auto_build
-
-# Uncomment if building in Virtual Box
 override_dh_shlibdeps:
-	dh_shlibdeps -- -xvirtualbox-guest-x11 --ignore-missing-info
+	dh_shlibdeps --dpkg-shlibdeps-params=--ignore-missing-info
 
 %:
-	dh $@ --no-automatic-dbgsym --parallel 
+	dh $@ --buildsystem=cmake --no-automatic-dbgsym

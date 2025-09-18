@@ -2,12 +2,26 @@ Source: mx-service-manager
 Section: admin
 Priority: optional
 Maintainer: Adrian <adrian@mxlinux.org>
-Build-Depends: debhelper (>=10), qtbase5-dev, qttools5-dev-tools
+Build-Depends: debhelper-compat (= 13),
+               cmake (>= 3.16),
+               qt6-base-dev,
+               qt6-base-dev-tools,
+               qt6-tools-dev,
+               qt6-tools-dev-tools
 Standards-Version: 3.9.8
+Vcs-Git: git://github.com/MX-Linux/mx-service-manager
+Homepage: https://github.com/MX-Linux/mx-service-manager
 
 Package: mx-service-manager
 Architecture: any
-Depends: xdg-utils | mx-viewer, ${misc:Depends}, ${shlibs:Depends}
+Depends: xdg-utils | mx-viewer,
+         ${misc:Depends},
+         ${shlibs:Depends}
 Recommends: mx-launcher-l10n, gksu | pkexec
-Description: mx-service-manager
- mx-service-manager
+Description: Service management tool for MX Linux
+ MX Service Manager is a graphical utility that allows users to easily
+ manage system services on MX Linux. It provides a user-friendly interface
+ for:
+  * Starting, stopping, and restarting services
+  * Checking service status
+  * Viewing detailed service information

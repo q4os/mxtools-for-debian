@@ -1,0 +1,60 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# Andrei Stepanov, 2022
+# Вячеслав Волошин <vol_vel@mail.ru>, 2015,2017
+msgid ""
+msgstr ""
+"Project-Id-Version: antix-development\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-08-24 20:37+0300\n"
+"PO-Revision-Date: 2011-10-27 11:10+0000\n"
+"Last-Translator: Andrei Stepanov, 2022\n"
+"Language-Team: Russian (http://www.transifex.com/anticapitalista/antix-development/language/ru/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: ru\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%100>=11 && n%100<=14)? 2 : 3);\n"
+
+#: block-advert.sh:42
+#, sh-format
+msgid ""
+"The <b>$title</b> tool adds stuff to your /etc/hosts file, so \\nthat many "
+"advertising servers and websites can't connect to this PC.\\nYou can choose "
+"to block ads, malware, pornography, gambling, fakenews and social "
+"media\\nBlocking ad servers protects your privacy, saves you bandwidth, "
+"greatly \\nimproves web-browsing speed and makes the internet much less "
+"annoying in general.\\n\\nDo you want to proceed?"
+msgstr "Инструмент <b>$title</b> добавляет некоторые вещи в файл /etc/hosts, благодаря чему \\nмногие рекламные серверы и веб-сайты не смогут подключиться \\nк этому компьютеру.\\n\\nВы можете заблокировать рекламу, вредоносные программы, порнографию, азартные игры, фальшивые новости и социальные сети.\\nБлокировка рекламных серверов защищает вашу конфиденциальность, позволяет сэкономить трафик, значительно \\nулучшает скорость открытия страниц и делает интернет менее раздражающим в целом.\\n\\nХотите продолжить?"
+
+#: block-advert.sh:53
+msgid ""
+"<b> Failed </b> \\n\\n\tantiX advert blocker must be run as root or with "
+"sudo "
+msgstr "<b> Не удалось </b> \\n\\n\tБлокировщик рекламы antiX должен быть запущен из под рута либо посредством sudo "
+
+#: block-advert.sh:140
+msgid "Restoring original /etc/hosts."
+msgstr "Восстановить исходный /etc/hosts."
+
+#: block-advert.sh:182
+#, sh-format
+msgid "Loading  blocklist from $domain"
+msgstr "Загрузка списка блокировки с $domain"
+
+#: block-advert.sh:211
+msgid ""
+"Success - your settings have been changed.\\n\\nYour hosts file has been "
+"updated.\\nRestart your browser to see the changes."
+msgstr "Успешно - Ваши настройки были изменены.\\n\\nВаш файл hosts обновлен.\\nПерезапустите браузер, чтобы увидеть изменения."
+
+#: block-advert.sh:232
+msgid "Choose what to block"
+msgstr "Выберите, что блокировать"
+
+#: block-advert.sh:305
+msgid "No item selected"
+msgstr "Не выбран элемент"

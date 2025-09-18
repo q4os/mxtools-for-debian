@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="pt">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="pt">
 <context>
     <name>MainWindow</name>
     <message>
@@ -73,13 +71,13 @@
         <location filename="../mainwindow.ui" line="254"/>
         <source>Journald</source>
         <extracomment>systemd journalctl tab</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Journald</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="262"/>
         <source>Log Type</source>
         <extracomment>type of log, either user level or system</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Tipo do Registo</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="270"/>
@@ -97,19 +95,19 @@
         <location filename="../mainwindow.ui" line="283"/>
         <source>Priority Level</source>
         <extracomment>level of status message to view</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Nível de Prioridade</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="334"/>
         <source>Choose Boot Log</source>
         <extracomment>choose a boot to view the log</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Escolha o Registo de Inicialização</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="341"/>
         <source>Service Search</source>
         <extracomment>seek and ye shall find</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Pesquisar o Serviço</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="351"/>
@@ -241,16 +239,16 @@
         <translation>Não foi possível localizar &quot;%1&quot;</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="719"/>
+        <location filename="../mainwindow.cpp" line="710"/>
         <source>No journal entries found at this admin and priority level</source>
         <comment>no journal entries found at the options specified</comment>
-        <translation type="unfinished"></translation>
+        <translation>Nenhuma entrada do registo foi encontrada para este nível de prioridade e de administrador de sistema</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="721"/>
+        <location filename="../mainwindow.cpp" line="712"/>
         <source>Error running journalctl command</source>
         <comment>error report for journalctl command</comment>
-        <translation type="unfinished"></translation>
+        <translation>Ocorreu um erro ao executar o comando journalctl</translation>
     </message>
     <message>
         <source>Changelog</source>

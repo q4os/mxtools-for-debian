@@ -40,7 +40,6 @@ jobs:
         run:  mkdir ${{ env.SOURCE_DIR }}/build
 
       - name: Build
-        working-directory: ${{ env.SOURCE_DIR }}/build
+        working-directory: ${{ env.SOURCE_DIR }}
         run:  |
-              qmake6 -r ${{ env.SOURCE_DIR }}/*.pro
-              make             
+              ./build.sh --clean         

@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="ru_RU">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="ru_RU">
 <context>
     <name>MainWindow</name>
     <message>
@@ -73,7 +71,7 @@
         <location filename="../mainwindow.ui" line="254"/>
         <source>Journald</source>
         <extracomment>systemd journalctl tab</extracomment>
-        <translation>Служба журналов Journald</translation>
+        <translation>Journald</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="262"/>
@@ -241,13 +239,13 @@
         <translation>Не удаётся найти «%1»</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="719"/>
+        <location filename="../mainwindow.cpp" line="710"/>
         <source>No journal entries found at this admin and priority level</source>
         <comment>no journal entries found at the options specified</comment>
         <translation>На данном уровне администрирования и доступа не найдено записей в журнале</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="721"/>
+        <location filename="../mainwindow.cpp" line="712"/>
         <source>Error running journalctl command</source>
         <comment>error report for journalctl command</comment>
         <translation>Ошибка при выполнении команды journalctl</translation>

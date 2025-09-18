@@ -1,3 +1,50 @@
+mx-conky (25.09) mx; urgency=medium
+
+  * Change contrast for location path
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 05 Sep 2025 09:37:16 -0400
+
+mx-conky (25.08.2) mx; urgency=medium
+
+  * Move Customize button to the first position in the row of buttons
+
+ -- Adrian <adrian@mxlinux.org>  Tue, 19 Aug 2025 18:41:48 -0400
+
+mx-conky (25.08.1) mx; urgency=medium
+
+  * Improve conky detections for different encodings
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 01 Aug 2025 16:52:11 -0400
+
+mx-conky (25.08) mx; urgency=medium
+
+  * Redesign application with new features:
+    - List all conkys with filtering and search options
+    - Allow selecting and starting multiple conkys
+    - Add autostart checkbox to set conky to start automatically
+    - Settings can define multiple directories to scan for conkys
+    - Added options for size, location, and transparency
+    - Added preview functionality
+    - Implement elevation support for editing system conky files
+  * Search matches now on the directory name too
+  * Add delete conky option
+  * Don't copy anymore all the conkys to ~/.conky, copy only the directory
+    that is being edited from /usr/share/mx-conky-data/
+  * Add option to enable/disable conky auto-startup
+  * Add create previews option
+  * Add option to rename the file. Change filter to 'All' after an edit
+  * Implement wifi/lan change; fix some Ui resizing, remove drag info
+  * Add directory name before the name of the conky
+  * Add Enlightenment desktop environment autostart support
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 01 Aug 2025 00:40:03 -0400
+
+mx-conky (24.4) mx; urgency=medium
+
+  * Update to Qt6
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 23 Apr 2025 22:04:32 -0400
+
 mx-conky (24.3) mx; urgency=medium
 
   * Update translations
@@ -44,7 +91,7 @@ mx-conky (22.12.01) mx; urgency=medium
 
 mx-conky (22.10.01) mx; urgency=medium
 
-  * update translations 
+  * update translations
 
  -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 26 Oct 2022 19:58:28 -0400
 

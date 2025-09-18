@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="hi">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="hi">
 <context>
     <name>MainWindow</name>
     <message>
@@ -219,12 +217,12 @@
     <message>
         <location filename="../mainwindow.cpp" line="851"/>
         <source>Can&apos;t figure out if this app is running on antiX or MX</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="859"/>
         <source>MX version not detected or out of range: </source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="874"/>
@@ -234,17 +232,17 @@
     <message>
         <location filename="../mainwindow.cpp" line="881"/>
         <source>Could not unzip downloaded file.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="924"/>
         <source>Enabling AHS</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="924"/>
         <source>Do you use AHS (Advanced Hardware Stack) repo?</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="938"/>
@@ -289,7 +287,7 @@
     <message>
         <location filename="../main.cpp" line="83"/>
         <source>You must run this program with admin access.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 </TS>

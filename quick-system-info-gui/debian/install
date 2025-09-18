@@ -1,7 +1,7 @@
-quick-system-info-gui			usr/bin
-actions/*			usr/share/polkit-1/actions
-*.desktop		usr/share/applications
-lib/*	usr/lib/quick-system-info-gui/
-translations/*.qm		usr/share/quick-system-info-gui/locale
+_build_/Release/quick-system-info-gui	usr/bin
+actions/*				usr/share/polkit-1/actions
+*.desktop				usr/share/applications
+lib/*					usr/lib/quick-system-info-gui/
+_build_/*.qm				usr/share/quick-system-info-gui/locale
 icons/*					usr/share/icons/hicolor/48x48/apps
 help/*					usr/share/doc/quick-system-info-gui/

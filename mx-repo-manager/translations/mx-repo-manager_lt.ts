@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="lt">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="lt">
 <context>
     <name>MainWindow</name>
     <message>
@@ -191,7 +189,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="705"/>
         <source>You have selected MX Test Repo. It&apos;s not recommended to leave it enabled or to upgrade all the packages from it.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="708"/>
@@ -234,26 +232,22 @@
     <message>
         <location filename="../mainwindow.cpp" line="881"/>
         <source>Could not unzip downloaded file.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="924"/>
         <source>Enabling AHS</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="924"/>
         <source>Do you use AHS (Advanced Hardware Stack) repo?</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="938"/>
         <source>Original APT sources have been restored to the release status. User added source files in /etc/apt/sources.list.d/ have not been touched.</source>
         <translation>Pradiniai APT šaltiniai atkurti į laidos būseną. Naudotojo pridėti šaltinių failai, esantys /etc/apt/sources.list.d/ nebuvo paliesti.</translation>
-    </message>
-    <message>
-        <source>There was an error writing file: %1. Please check if you have enough free space on your drive</source>
-        <translation type="vanished">Rašant failą įvyko klaida: %1. Patikrinkite, ar turite pakankamai laisvos vietos diske</translation>
     </message>
 </context>
 <context>
@@ -288,12 +282,12 @@
     <message>
         <location filename="../main.cpp" line="74"/>
         <source>You seem to be logged in as root, please log out and log in as normal user to use this program.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../main.cpp" line="83"/>
         <source>You must run this program with admin access.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 </TS>
