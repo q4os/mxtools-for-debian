@@ -72,7 +72,7 @@ all
 <install_package_names>
 aspell-pt-br
 hunspell-pt-br
-manpages-pt
+manpages-pt-br
 </install_package_names>
 
 
@@ -84,6 +84,6 @@ manpages-pt
 <uninstall_package_names>
 aspell-pt-br
 hunspell-pt-br
-manpages-pt
+manpages-pt-br
 </uninstall_package_names>
 </app>

@@ -1,3 +1,9 @@
+antix-libs (0.8.14+10mx25) mx; urgency=medium
+
+  * move to /usr from /usr/local
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 04 Jun 2025 21:48:28 -0400
+
 antix-libs (0.8.14+8) mx; urgency=medium
 
   * better yad version check (fehlix) 

@@ -1,0 +1,16 @@
+Source: mx25-archive-keyring
+Section: misc
+Priority: important
+Maintainer: Timothy E. Harris <maintainer@mxrepo.com>
+Build-Depends: debhelper (>= 12), jetring, gnupg
+Standards-Version: 3.9.8
+
+Package: mx25-archive-keyring
+Architecture: all
+Multi-Arch: foreign
+Depends: gpgv, ${misc:Depends}
+Recommends: gnupg
+Breaks: apt (<< 0.7.25.1)
+Description: GnuPG archive keys of the MX-25 Linux archive
+ The MX Linux project digitally signs its repository Release files.
+ This package contains the archive keys used for that.

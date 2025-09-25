@@ -12,22 +12,14 @@
 
 %sudo ALL=(root) NOPASSWD: /usr/bin/ceni  
 
-%sudo ALL=(root) NOPASSWD: /usr/local/bin/persist-config
+%sudo ALL=(root) NOPASSWD: /usr/bin/persist-config
 
-%sudo ALL=(root) NOPASSWD: /usr/local/bin/persist-save 
+%sudo ALL=(root) NOPASSWD: /usr/bin/persist-save 
 
 %sudo ALL=(root) NOPASSWD: /usr/sbin/minstall 
 
-%sudo ALL=(root) NOPASSWD: /usr/local/bin/connectshares.sh
-
-%sudo ALL=(root) NOPASSWD: /usr/local/bin/disconnectshares.sh 
-
 %sudo ALL=(root) NOPASSWD: /bin/chvt 
-
-%sudo ALL=(root) NOPASSWD: /usr/local/bin/menu_manager.sh 
 
 %sudo ALL=(root) NOPASSWD: /usr/sbin/pm-hibernate
 
 %sudo ALL=(root) NOPASSWD: /usr/sbin/pm-suspend
-
-Defaults!/usr/local/bin/menu_manager.sh env_keep += "HOME"

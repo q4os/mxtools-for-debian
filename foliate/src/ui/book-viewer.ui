@@ -1,0 +1,662 @@
+<?xml version="1.0" encoding="UTF-8"?><interface>
+<menu id="book-menu">
+  <section>
+    <item>
+      <attribute name="label" translatable="yes">New Window</attribute>
+      <attribute name="action">win.new-window</attribute>
+    </item>
+  </section>
+  <section>
+    <item>
+      <attribute name="label" translatable="yes">Open a Copy</attribute>
+      <attribute name="action">win.open-copy</attribute>
+    </item>
+    <item>
+      <attribute name="label" translatable="yes">Reload</attribute>
+      <attribute name="action">view.reload</attribute>
+    </item>
+  </section>
+  <section>
+    <item>
+      <attribute name="label" translatable="yes">Import Annotations…</attribute>
+      <attribute name="action">viewer.import-annotations</attribute>
+    </item>
+    <item>
+      <attribute name="label" translatable="yes">Export Annotations…</attribute>
+      <attribute name="action">viewer.export-annotations</attribute>
+    </item>
+  </section>
+  <section>
+    <!--
+    <item>
+      <attribute name="label" translatable="yes">Keyboard Shortcuts</attribute>
+      <attribute name="action">win.help-overlay</attribute>
+    </item>
+    -->
+    <item>
+      <attribute name="label" translatable="yes">About Foliate</attribute>
+      <attribute name="action">app.about</attribute>
+    </item>
+  </section>
+</menu>
+<menu id="search-menu">
+  <section>
+    <item>
+      <attribute name="label" translatable="yes">All Sections</attribute>
+      <attribute name="action">search.scope</attribute>
+      <attribute name="target">book</attribute>
+    </item>
+    <item>
+      <attribute name="label" translatable="yes">Current Section</attribute>
+      <attribute name="action">search.scope</attribute>
+      <attribute name="target">section</attribute>
+    </item>
+  </section>
+  <section>
+    <item>
+      <attribute name="label" translatable="yes">Match Whole Words Only</attribute>
+      <attribute name="action">search.match-whole-words</attribute>
+    </item>
+    <item>
+      <attribute name="label" translatable="yes">Match Case</attribute>
+      <attribute name="action">search.match-case</attribute>
+    </item>
+    <item>
+      <attribute name="label" translatable="yes">Match Diacritics</attribute>
+      <attribute name="action">search.match-diacritics</attribute>
+    </item>
+  </section>
+</menu>
+<menu id="view-menu">
+  <section>
+    <item>
+      <attribute name="custom">theme</attribute>
+    </item>
+  </section>
+  <section>
+    <item>
+      <attribute name="custom">zoom</attribute>
+    </item>
+  </section>
+  <section>
+    <item>
+      <attribute name="label" translatable="yes">Font &amp; Layout Settings</attribute>
+      <attribute name="action">viewer.preferences</attribute>
+    </item>
+  </section>
+  <section>
+    <item>
+      <attribute name="label" translatable="yes">Scrolled Mode</attribute>
+      <attribute name="action">view.scrolled</attribute>
+    </item>
+    <item>
+      <attribute name="label" translatable="yes">Invert Colors in Dark Mode</attribute>
+      <attribute name="action">view.invert</attribute>
+    </item>
+    <item>
+      <attribute name="label" translatable="yes">Autohide Cursor</attribute>
+      <attribute name="action">view.autohide-cursor</attribute>
+    </item>
+  </section>
+  <section>
+    <item>
+      <attribute name="label" translatable="yes">Print…</attribute>
+      <attribute name="action">view.print</attribute>
+    </item>
+    <item>
+      <attribute name="label" translatable="yes">Inspector</attribute>
+      <attribute name="action">view.inspector</attribute>
+    </item>
+  </section>
+</menu>
+
+<template class="FoliateBookViewer" parent="GtkOverlay">
+  <child type="overlay">
+    <object class="AdwToolbarView" id="top-overlay-box">
+      <property name="vexpand">True</property>
+      <property name="hexpand">True</property>
+      <style><class name="background"/></style>
+      <child type="top">
+        <object class="GtkHeaderBar" id="top-overlay-headerbar">
+          <style><class name="flat"/></style>
+          <property name="title-widget">
+            <object class="GtkLabel"/>
+          </property>
+          <child>
+            <object class="GtkButton">
+              <property name="action-name">win.show-library</property>
+              <property name="halign">center</property>
+              <property name="icon-name">go-previous-symbolic</property>
+              <property name="tooltip-text" translatable="yes">Library</property>
+            </object>
+          </child>
+        </object>
+      </child>
+      <child>
+        <object class="GtkStack" id="top-overlay-stack">
+          <property name="vexpand">True</property>
+          <property name="hexpand">True</property>
+          <child>
+            <object class="GtkStackPage">
+              <property name="name">nothing</property>
+              <property name="child">
+                <object class="GtkBox"/>
+              </property>
+            </object>
+          </child>
+          <child>
+            <object class="GtkStackPage">
+              <property name="name">loading</property>
+              <property name="child">
+                <object class="AdwSpinner"/>
+              </property>
+            </object>
+          </child>
+          <child>
+            <object class="GtkStackPage">
+              <property name="name">error</property>
+              <property name="child">
+                <object class="AdwStatusPage" id="error-page">
+                  <property name="icon-name">face-uncertain-symbolic</property>
+                  <property name="title" translatable="yes">Book Cannot Be Opened</property>
+                  <child>
+                    <object class="GtkBox">
+                      <property name="orientation">vertical</property>
+                      <property name="spacing">18</property>
+                      <child>
+                        <object class="GtkExpander" id="error-page-expander">
+                          <property name="halign">center</property>
+                          <child type="label">
+                            <object class="GtkLabel">
+                              <property name="label" translatable="yes">Details</property>
+                            </object>
+                          </child>
+                          <child>
+                            <object class="GtkLabel" id="error-page-details">
+                              <property name="selectable">True</property>
+                              <property name="wrap">True</property>
+                              <style><class name="monospace"/></style>
+                            </object>
+                          </child>
+                        </object>
+                      </child>
+                      <child>
+                        <object class="GtkButton">
+                          <property name="action-name">win.open</property>
+                          <property name="halign">center</property>
+                          <property name="label" translatable="yes">Open Another File…</property>
+                          <style><class name="pill"/></style>
+                        </object>
+                      </child>
+                    </object>
+                  </child>
+                </object>
+              </property>
+            </object>
+          </child>
+        </object>
+      </child>
+    </object>
+  </child>
+  <child>
+    <object class="AdwBreakpointBin" id="breakpoint-bin">
+      <property name="height-request">300</property>
+      <property name="width-request">360</property>
+      <child>
+        <object class="AdwBreakpoint"/>
+      </child>
+      <property name="child">
+
+    <object class="AdwOverlaySplitView" id="flap">
+      <property name="enable-show-gesture">False</property>
+      <property name="sidebar-width-unit">px</property>
+      <child type="sidebar">
+        <object class="GtkOverlay" id="sidebar">
+          <child type="overlay">
+            <object class="GtkBox" id="resize-handle">
+              <property name="width-request">4</property>
+              <property name="halign">end</property>
+            </object>
+          </child>
+          <child>
+            <object class="AdwToolbarView">
+              <child type="top">
+                <object class="AdwHeaderBar">
+                  <property name="show-end-title-buttons">false</property>
+                  <property name="title-widget">
+                    <object class="GtkLabel"/>
+                  </property>
+                  <child type="start">
+                    <object class="GtkButton" id="library-button">
+                      <property name="action-name">win.show-library</property>
+                      <property name="icon-name">library-symbolic</property>
+                      <property name="tooltip-text" translatable="yes">Library</property>
+                    </object>
+                  </child>
+                  <child type="end">
+                    <object class="GtkToggleButton" id="pin-button">
+                      <property name="icon-name">pin-symbolic</property>
+                      <property name="tooltip-text" translatable="yes">Pin Sidebar</property>
+                      <property name="active" bind-source="FoliateBookViewer" bind-property="fold-sidebar" bind-flags="sync-create|bidirectional|invert-boolean"/>
+                      <style><class name="circular"/><class name="raised"/><class name="small-button"/></style>
+                    </object>
+                  </child>
+                  <child type="end">
+                    <object class="GtkMenuButton" id="book-menu-button">
+                      <property name="icon-name">open-menu-symbolic</property>
+                      <property name="tooltip-text" translatable="yes">Book Menu</property>
+                      <property name="menu-model">book-menu</property>
+                    </object>
+                  </child>
+                  <child type="end">
+                    <object class="GtkToggleButton">
+                      <property name="icon-name">edit-find-symbolic</property>
+                      <property name="tooltip-text" translatable="yes">Find</property>
+                      <property name="active" bind-source="search-bar" bind-property="search-mode-enabled" bind-flags="sync-create|bidirectional"/>
+                    </object>
+                  </child>
+                </object>
+              </child>
+              <child type="top">
+                <object class="GtkSearchBar" id="search-bar">
+                  <child>
+                    <object class="GtkBox">
+                      <style><class name="linked"/></style>
+                      <child>
+                        <object class="GtkEntry" id="search-entry">
+                          <property name="hexpand">True</property>
+                          <property name="primary-icon-name">edit-find-symbolic</property>
+                          <property name="secondary-icon-name"></property>
+                          <property name="placeholder-text" translatable="yes">Find in book…</property>
+                          <style><class name="search"/></style>
+                        </object>
+                      </child>
+                      <child>
+                        <object class="GtkMenuButton">
+                          <property name="icon-name">pan-down-symbolic</property>
+                          <property name="menu-model">search-menu</property>
+                        </object>
+                      </child>
+                    </object>
+                  </child>
+                </object>
+              </child>
+              <child type="bottom">
+                <object class="AdwInlineViewSwitcher" id="contents-stack-switcher">
+                  <property name="stack">contents-stack</property>
+                  <property name="display-mode">icons</property>
+                  <property name="margin-top">6</property>
+                  <property name="margin-bottom">6</property>
+                  <property name="margin-start">6</property>
+                  <property name="margin-end">6</property>
+                </object>
+              </child>
+              <child>
+                <object class="GtkStack" id="sidebar-stack">
+                  <child>
+                    <object class="GtkStackPage">
+                      <property name="name">main</property>
+                      <property name="child">
+                        <object class="GtkBox">
+                          <property name="orientation">vertical</property>
+                          <child>
+                            <object class="AdwViewStack" id="contents-stack">
+                              <property name="vexpand">True</property>
+                              <child>
+                                <object class="AdwViewStackPage">
+                                  <property name="name">toc</property>
+                                  <property name="title" translatable="yes">Contents</property>
+                                  <property name="icon-name">view-list-symbolic</property>
+                                  <property name="child">
+                                    <object class="GtkBox">
+                                      <property name="orientation">vertical</property>
+                                      <child>
+                                        <object class="GtkBox" id="book-info">
+                                          <property name="margin-start">12</property>
+                                          <property name="margin-bottom">12</property>
+                                          <property name="margin-top">3</property>
+                                          <property name="spacing">6</property>
+                                          <child>
+                                            <object class="GtkImage" id="book-cover">
+                                              <property name="pixel-size">72</property>
+                                            </object>
+                                          </child>
+                                          <child>
+                                            <object class="GtkBox">
+                                              <property name="orientation">vertical</property>
+                                              <property name="valign">center</property>
+                                              <property name="spacing">6</property>
+                                              <child>
+                                                <object class="GtkLabel" id="book-title">
+                                                  <property name="hexpand">True</property>
+                                                  <property name="xalign">0</property>
+                                                  <property name="wrap">True</property>
+                                                  <property name="ellipsize">end</property>
+                                                  <property name="lines">2</property>
+                                                  <property name="max-width-chars">1</property>
+                                                  <style><class name="heading"/></style>
+                                                </object>
+                                              </child>
+                                              <child>
+                                                <object class="GtkLabel" id="book-author">
+                                                  <property name="hexpand">True</property>
+                                                  <property name="xalign">0</property>
+                                                  <property name="ellipsize">end</property>
+                                                  <property name="lines">1</property>
+                                                  <property name="max-width-chars">1</property>
+                                                  <style><class name="caption"/></style>
+                                                </object>
+                                              </child>
+                                            </object>
+                                          </child>
+                                          <child>
+                                            <object class="GtkButton">
+                                              <property name="valign">center</property>
+                                              <property name="margin-end">6</property>
+                                              <property name="icon-name">help-about-symbolic</property>
+                                              <property name="action-name">viewer.show-info</property>
+                                              <property name="tooltip-text" translatable="yes">About This Book</property>
+                                              <style><class name="circular"/><class name="flat"/></style>
+                                            </object>
+                                          </child>
+                                        </object>
+                                      </child>
+                                      <child>
+                                        <object class="GtkScrolledWindow">
+                                          <property name="vexpand">True</property>
+                                          <child>
+                                            <object class="FoliateTOCView" id="toc-view">
+                                              <style><class name="navigation-sidebar"/></style>
+                                            </object>
+                                          </child>
+                                        </object>
+                                      </child>
+                                    </object>
+                                  </property>
+                                </object>
+                              </child>
+                              <child>
+                                <object class="AdwViewStackPage">
+                                  <property name="name">annotations</property>
+                                  <property name="title" translatable="yes">Annotations</property>
+                                  <property name="icon-name">document-edit-symbolic</property>
+                                  <property name="child">
+                                    <object class="GtkStack" id="annotation-stack">
+                                      <child>
+                                        <object class="GtkStackPage">
+                                          <property name="name">empty</property>
+                                          <property name="child">
+                                            <object class="AdwStatusPage">
+                                              <property name="vexpand">true</property>
+                                              <property name="icon-name">document-edit-symbolic</property>
+                                              <property name="title" translatable="yes">No Annotations</property>
+                                              <property name="description" translatable="yes">Select some text to add annotations</property>
+                                              <style><class name="compact"/></style>
+                                            </object>
+                                          </property>
+                                        </object>
+                                      </child>
+                                      <child>
+                                        <object class="GtkStackPage">
+                                          <property name="name">main</property>
+                                          <property name="child">
+                                            <object class="GtkBox">
+                                              <property name="orientation">vertical</property>
+                                              <child>
+                                                <object class="GtkScrolledWindow">
+                                                  <property name="vexpand">true</property>
+                                                  <child>
+                                                    <object class="FoliateAnnotationView" id="annotation-view">
+                                                      <property name="editable">True</property>
+                                                      <property name="single-click-activate">True</property>
+                                                      <style><class name="card-sidebar"/></style>
+                                                    </object>
+                                                  </child>
+                                                </object>
+                                              </child>
+                                              <child>
+                                                <object class="GtkSearchEntry" id="annotation-search-entry">
+                                                  <property name="margin-top">6</property>
+                                                  <property name="margin-bottom">6</property>
+                                                  <property name="margin-start">6</property>
+                                                  <property name="margin-end">6</property>
+                                                  <property name="placeholder-text" translatable="yes">Filter annotations…</property>
+                                                </object>
+                                              </child>
+                                            </object>
+                                          </property>
+                                        </object>
+                                      </child>
+                                    </object>
+                                  </property>
+                                </object>
+                              </child>
+                              <child>
+                                <object class="AdwViewStackPage">
+                                  <property name="name">bookmarks</property>
+                                  <property name="title" translatable="yes">Bookmarks</property>
+                                  <property name="icon-name">user-bookmarks-symbolic</property>
+                                  <property name="child">
+                                    <object class="GtkStack" id="bookmark-stack">
+                                      <child>
+                                        <object class="GtkStackPage">
+                                          <property name="name">empty</property>
+                                          <property name="child">
+                                            <object class="AdwStatusPage">
+                                              <property name="vexpand">true</property>
+                                              <property name="icon-name">user-bookmarks-symbolic</property>
+                                              <property name="title" translatable="yes">No Bookmarks</property>
+                                              <property name="description" translatable="yes">Add some bookmarks to see them here</property>
+                                              <style><class name="compact"/></style>
+                                            </object>
+                                          </property>
+                                        </object>
+                                      </child>
+                                      <child>
+                                        <object class="GtkStackPage">
+                                          <property name="name">main</property>
+                                          <property name="child">
+	                                          <object class="GtkScrolledWindow">
+	                                            <property name="vexpand">true</property>
+	                                            <child>
+	                                              <object class="FoliateBookmarkView" id="bookmark-view">
+	                                                <property name="single-click-activate">True</property>
+	                                                <style><class name="navigation-sidebar"/></style>
+	                                              </object>
+	                                            </child>
+	                                          </object>
+                                          </property>
+                                        </object>
+                                      </child>
+                                    </object>
+                                  </property>
+                                </object>
+                              </child>
+                            </object>
+                          </child>
+                        </object>
+                      </property>
+                    </object>
+                  </child>
+                  <child>
+                    <object class="GtkStackPage">
+                      <property name="name">search-empty</property>
+                      <property name="child">
+                        <object class="AdwStatusPage">
+                          <property name="vexpand">true</property>
+                          <property name="icon-name">edit-find-symbolic</property>
+                          <property name="title" translatable="yes">No Results Found</property>
+                          <property name="description" translatable="yes">Try a different search</property>
+                          <style><class name="compact"/></style>
+                        </object>
+                      </property>
+                    </object>
+                  </child>
+                  <child>
+                    <object class="GtkStackPage">
+                      <property name="name">search</property>
+                      <property name="child">
+                        <object class="GtkScrolledWindow">
+                          <child>
+                            <object class="FoliateSearchView" id="search-view">
+                              <property name="entry">search-entry</property>
+                              <style><class name="navigation-sidebar"/></style>
+                            </object>
+                          </child>
+                        </object>
+                      </property>
+                    </object>
+                  </child>
+                </object>
+              </child>
+            </object>
+          </child>
+        </object>
+      </child>
+      <child type="content">
+        <object class="FoliateBookView" id="view">
+          <property name="width-request">360</property>
+          <property name="hexpand">True</property>
+          <child type="overlay">
+            <object class="GtkWindowHandle">
+              <property name="valign">start</property>
+              <child>
+                <object class="GtkRevealer" id="headerbar-revealer">
+                  <property name="transition-type">crossfade</property>
+                  <child>
+                    <object class="AdwHeaderBar">
+                      <property name="valign">start</property>
+                      <child type="start">
+                        <object class="GtkToggleButton">
+                          <property name="icon-name">sidebar-show-symbolic</property>
+                          <property name="tooltip-text" translatable="yes">Sidebar</property>
+                          <property name="active" bind-source="flap" bind-property="show-sidebar" bind-flags="sync-create|bidirectional"/>
+                        </object>
+                      </child>
+                      <child type="start">
+                        <object class="GtkButton" id="bookmark-button">
+                          <property name="icon-name">user-bookmarks-symbolic</property>
+                          <property name="action-name">viewer.bookmark</property>
+                          <property name="visible">false</property>
+                        </object>
+                      </child>
+                      <child type="end">
+                        <object class="GtkMenuButton">
+                          <property name="icon-name">view-more-symbolic</property>
+                          <property name="tooltip-text" translatable="yes">View Menu</property>
+                          <property name="popover">
+                            <object class="GtkPopoverMenu" id="view-popover">
+                              <property name="menu-model">view-menu</property>
+                                <child type="zoom">
+                                  <object class="GtkBox">
+                                    <property name="spacing">12</property>
+                                    <property name="margin-start">12</property>
+                                    <property name="margin-end">12</property>
+                                    <child>
+                                      <object class="GtkButton">
+                                        <property name="icon-name">zoom-out-symbolic</property>
+                                        <property name="action-name">view.zoom-out</property>
+                                        <property name="tooltip-text" translatable="yes">Zoom Out</property>
+                                        <style><class name="circular"/><class name="flat"/></style>
+                                      </object>
+                                    </child>
+                                    <child>
+                                      <object class="GtkButton" id="zoom-button">
+                                        <property name="hexpand">True</property>
+                                        <property name="tooltip-text" translatable="yes">Reset Zoom</property>
+                                        <property name="action-name">view.zoom-restore</property>
+                                        <style><class name="flat"/></style>
+                                      </object>
+                                    </child>
+                                    <child>
+                                      <object class="GtkButton">
+                                        <property name="icon-name">zoom-in-symbolic</property>
+                                        <property name="action-name">view.zoom-in</property>
+                                        <property name="tooltip-text" translatable="yes">Zoom In</property>
+                                        <style><class name="circular"/><class name="flat"/></style>
+                                      </object>
+                                    </child>
+                                  </object>
+                                </child>
+                                <child type="theme">
+                                  <object class="GtkBox">
+                                    <property name="spacing">12</property>
+                                    <property name="margin-top">9</property>
+                                    <property name="margin-bottom">9</property>
+                                    <child>
+                                      <object class="GtkCheckButton">
+                                        <style><class name="theme-selector"/><class name="follow"/></style>
+                                        <property name="hexpand">true</property>
+                                        <property name="halign">center</property>
+                                        <property name="tooltip-text" translatable="yes">Follow System Style</property>
+                                        <property name="action-name">viewer.color-scheme</property>
+                                        <property name="action-target">'default'</property>
+                                      </object>
+                                    </child>
+                                    <child>
+                                      <object class="GtkCheckButton">
+                                        <style><class name="theme-selector"/><class name="light"/></style>
+                                        <property name="hexpand">true</property>
+                                        <property name="halign">center</property>
+                                        <property name="tooltip-text" translatable="yes">Light Style</property>
+                                        <property name="action-name">viewer.color-scheme</property>
+                                        <property name="action-target">'force-light'</property>
+                                      </object>
+                                    </child>
+                                    <child>
+                                      <object class="GtkCheckButton">
+                                        <style><class name="theme-selector"/><class name="dark"/></style>
+                                        <property name="hexpand">true</property>
+                                        <property name="halign">center</property>
+                                        <property name="tooltip-text" translatable="yes">Dark Style</property>
+                                        <property name="action-name">viewer.color-scheme</property>
+                                        <property name="action-target">'force-dark'</property>
+                                      </object>
+                                    </child>
+                                  </object>
+                                </child>
+                            </object>
+                          </property>
+                        </object>
+                      </child>
+                      <child type="end">
+                        <object class="GtkToggleButton">
+                          <property name="icon-name">view-fullscreen-symbolic</property>
+                          <property name="action-name">win.fullscreened</property>
+                          <property name="tooltip-text" translatable="yes">Fullscreen</property>
+                        </object>
+                      </child>
+                    </object>
+                  </child>
+                </object>
+              </child>
+            </object>
+          </child>
+          <child type="overlay">
+            <object class="GtkRevealer" id="navbar-revealer">
+              <property name="valign">end</property>
+              <property name="transition-type">crossfade</property>
+              <child>
+                <object class="GtkBox">
+                  <property name="valign">end</property>
+                  <property name="orientation">vertical</property>
+                  <style><class name="background"/></style>
+                  <child>
+                    <object class="GtkSeparator"/>
+                  </child>
+                  <child>
+                    <object class="FoliateNavBar" id="navbar"/>
+                  </child>
+                </object>
+              </child>
+            </object>
+          </child>
+        </object>
+      </child>
+    </object>
+  </property>
+
+    </object>
+  </child>
+</template>
+</interface>

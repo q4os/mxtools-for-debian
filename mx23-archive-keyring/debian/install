@@ -1,2 +1,0 @@
-mx23-archive-keyring/*.asc etc/apt/trusted.gpg.d
-mx23-archive-keyring/*.gpg usr/share/keyrings

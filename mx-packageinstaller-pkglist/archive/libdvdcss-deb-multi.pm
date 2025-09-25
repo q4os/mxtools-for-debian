@@ -10,7 +10,6 @@ libdvdcss
 </name>
 
 <description>
-<en>library to allow commercial dvd playback in common video players<en>
 <am>በጋራ የቪዲዮ ማጫወቻዎች ውስጥ የንግድ ዲቪዲ መልሶ ማጫወትን ለመፍቀድ ቤተ-መጽሐፍት</am>
 <ar>ﺔﻌﺋﺎﺸﻟﺍ ﻮﻳﺪﻴﻔﻟﺍ ﺕﻼ﻿ﻐﺸﻣ ﻲﻓ ﺔﻳﺭﺎﺠﺘﻟﺍ DVD ﺹﺍﺮﻗﺃ ﻞﻴﻐﺸﺘﺑ ﺡﺎﻤﺴﻠﻟ ﺔﺒﺘﻜﻣ</ar>
 <bg>библиотека, за да позволи възпроизвеждане на комерсиални DVD в обикновени видео плейъри</bg>

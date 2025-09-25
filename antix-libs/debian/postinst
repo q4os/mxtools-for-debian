@@ -1,0 +1,9 @@
+#! /bin/sh
+
+set -e
+
+if [ -e /usr/local/share/excludes/general-remaster-exclude.orig ]; then
+	rm /usr/local/share/excludes/*.orig
+fi
+
+exit 0

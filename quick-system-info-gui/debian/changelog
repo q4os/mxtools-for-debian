@@ -1,3 +1,14 @@
+quick-system-info-gui (25.09.01) mx; urgency=medium
+  
+  [ak-47]
+  * Fixed Ambiguous shortcut overload: Alt+C
+  *  Make Ctrl+C copy the verbatim plain text, like other apps.
+  *  Changed "Copy for forum" to Ctrl+Shift+C
+  [dolphin oracle]
+  * hide apt-history if dpkg.log is not present or empty
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 22 Sep 2025 21:30:20 -0400
+
 quick-system-info-gui (25.08.02) mx; urgency=medium
 
   * update build system

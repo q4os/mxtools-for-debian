@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="gl_ES">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="gl_ES">
 <context>
     <name>AliasTab</name>
     <message>
@@ -29,12 +27,12 @@
     <message>
         <location filename="../othertab.ui" line="63"/>
         <source>Infinite</source>
-        <translation type="unfinished"></translation>
+        <translation>Infinito</translation>
     </message>
     <message>
         <location filename="../othertab.ui" line="75"/>
         <source>Executable Paths</source>
-        <translation type="unfinished"></translation>
+        <translation>Rutas Executables</translation>
     </message>
     <message>
         <location filename="../othertab.ui" line="84"/>
@@ -57,82 +55,82 @@
     <message>
         <location filename="../prompttab_fix.ui" line="44"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Change what gives you your prompt.&lt;/p&gt;&lt;p&gt;Default - Use what prompt you had before.&lt;/p&gt;&lt;p&gt;Fancy Prompt - Uses the MX Fancy Prompt utility&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Cambie o que lle dá o seu prompt.&lt;/p&gt;&lt;p&gt;Por defecto - Use o prompt que tiña antes.&lt;/p&gt;&lt;p&gt;Prompt elegante - Usa a utilidade MX Fancy Prompt&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../prompttab_fix.ui" line="152"/>
         <source>Make The Larger Prompts Smaller</source>
-        <translation type="unfinished"></translation>
+        <translation>Fai que os prompts máis grandes sexan máis pequenos</translation>
     </message>
     <message>
         <location filename="../prompttab_fix.ui" line="159"/>
         <source>Muted Colors</source>
-        <translation type="unfinished"></translation>
+        <translation>Cores silenciadas</translation>
     </message>
     <message>
         <location filename="../prompttab_fix.ui" line="166"/>
         <source>Disable Unicode</source>
-        <translation type="unfinished"></translation>
+        <translation>Desactivar Unicode</translation>
     </message>
     <message>
         <location filename="../prompttab_fix.ui" line="173"/>
         <source>Use Double Lines</source>
-        <translation type="unfinished"></translation>
+        <translation>Usa liñas dobre</translation>
     </message>
     <message>
         <location filename="../prompttab_fix.ui" line="180"/>
         <source>Use Bold Lines</source>
-        <translation type="unfinished"></translation>
+        <translation>Use Liñas en Negrita</translation>
     </message>
     <message>
         <location filename="../prompttab_fix.ui" line="187"/>
         <source>No Colors(Overrides All Other Color Options)</source>
-        <translation type="unfinished"></translation>
+        <translation>Sen cores (anula todas as outras opcións de cor)</translation>
     </message>
     <message>
         <location filename="../prompttab_fix.ui" line="194"/>
         <source>Use Parentheses Instead Of Square Brackets</source>
-        <translation type="unfinished"></translation>
+        <translation>Usa parénteses en lugar de corchetes cuadrados.</translation>
     </message>
     <message>
         <location filename="../prompttab_fix.ui" line="201"/>
         <source>Make the Larger Prompts Smaller Elsewhere</source>
-        <translation type="unfinished"></translation>
+        <translation>Fai que as indicacións máis grandes sexan máis pequenas noutros lugares</translation>
     </message>
     <message>
         <location filename="../prompttab_fix.ui" line="225"/>
         <source>Time Format</source>
-        <translation type="unfinished"></translation>
+        <translation>Formato de tempo</translation>
     </message>
     <message>
         <location filename="../prompttab_fix.ui" line="267"/>
         <source>Date Format</source>
-        <translation type="unfinished"></translation>
+        <translation>Formato de data</translation>
     </message>
     <message>
         <location filename="../prompttab_fix.ui" line="315"/>
         <source>Right Margin</source>
-        <translation type="unfinished"></translation>
+        <translation>Márxen dereito</translation>
     </message>
     <message>
         <location filename="../prompttab_fix.ui" line="351"/>
         <source>Extra Newlines Before Prompt</source>
-        <translation type="unfinished"></translation>
+        <translation>Extra novas liñas antes do prompt</translation>
     </message>
     <message>
         <location filename="../prompttab_fix.ui" line="380"/>
         <source>Prompt Text</source>
-        <translation type="unfinished"></translation>
+        <translation>Texto de prompt</translation>
     </message>
     <message>
         <location filename="../prompttab_fix.ui" line="409"/>
         <source>Title Text</source>
-        <translation type="unfinished"></translation>
+        <translation>Texto do título</translation>
     </message>
     <message>
         <location filename="../prompttab_fix.ui" line="429"/>
         <source>Remove all newlines</source>
-        <translation type="unfinished"></translation>
+        <translation>Eliminar todas as liñas novas</translation>
     </message>
     <message>
         <location filename="../prompttab_fix.ui" line="456"/>
@@ -163,19 +161,19 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../prompttab.cpp" line="546"/>
+        <location filename="../prompttab.cpp" line="543"/>
         <source>Foreground Color</source>
-        <translation type="unfinished"></translation>
+        <translation>Cor da primeira plana</translation>
     </message>
     <message>
-        <location filename="../prompttab.cpp" line="547"/>
+        <location filename="../prompttab.cpp" line="544"/>
         <source>Background Color</source>
-        <translation type="unfinished"></translation>
+        <translation>Cor de fondo</translation>
     </message>
     <message>
-        <location filename="../prompttab.cpp" line="548"/>
+        <location filename="../prompttab.cpp" line="545"/>
         <source>Bold</source>
-        <translation type="unfinished"></translation>
+        <translation>Negro</translation>
     </message>
 </context>
 <context>
@@ -193,7 +191,7 @@
     <message>
         <location filename="../window_fix.ui" line="85"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Applies Changes.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Aplica cambios.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../window_fix.ui" line="88"/>
@@ -203,7 +201,7 @@
     <message>
         <location filename="../window_fix.ui" line="99"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Closes the application.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Escolle a aplicación.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../window_fix.ui" line="102"/>
@@ -213,14 +211,14 @@
     <message>
         <location filename="../window.cpp" line="48"/>
         <source>An easy way to configure your ~/.bashrc and bash prompt</source>
-        <translation type="unfinished"></translation>
+        <translation>Unha forma sinxela de configurar o teu ~/.bashrc e o indicador de bash</translation>
     </message>
     <message>
         <location filename="../window.cpp" line="260"/>
         <location filename="../window.cpp" line="264"/>
         <location filename="../window.cpp" line="268"/>
         <source>Bash Config</source>
-        <translation type="unfinished"></translation>
+        <translation>Configuración de Bash</translation>
     </message>
 </context>
 </TS>

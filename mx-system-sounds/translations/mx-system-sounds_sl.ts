@@ -203,12 +203,12 @@
         <translation>&amp;Zapri</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="48"/>
+        <location filename="../main.cpp" line="58"/>
         <source>MX System Sounds</source>
         <translation>MX zvoki sistema</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="48"/>
+        <location filename="../main.cpp" line="58"/>
         <source>This app is Xfce-only</source>
         <translation>Ta aplikacija je zgolj Xfce</translation>
     </message>

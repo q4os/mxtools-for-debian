@@ -22,7 +22,10 @@
 # **********************************************************************/
 
 QT       += core gui widgets
-CONFIG   += c++1z
+CONFIG   += warn_on strict_c++ c++17
+
+QMAKE_CXXFLAGS += -Wpedantic -pedantic -Werror=return-type -Werror=switch
+QMAKE_CXXFLAGS += -Werror=uninitialized -Werror=return-local-addr -Werror
 
 # The following define makes your compiler warn you if you use any
 # feature of Qt which has been marked as deprecated (the exact warnings

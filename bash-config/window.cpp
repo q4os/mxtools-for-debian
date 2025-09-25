@@ -112,7 +112,7 @@ BashrcSource Window::getSource()
 	return data;
 }
 
-void Window::setSource(const BashrcSource data)
+void Window::setSource(const BashrcSource& data)
 {
 	SCOPE_TRACKER;
 	QFile bashrc(USER_BASHRC);
@@ -188,7 +188,7 @@ Window::TabManager& Window::TabManager::addTab(Tab* tab)
 	return *this;
 }
 
-Window::TabManager& Window::TabManager::setup(const BashrcSource source)
+Window::TabManager& Window::TabManager::setup(const BashrcSource& source)
 {
 	SCOPE_TRACKER;
 	for (Tab* tab : m_tabs)
@@ -200,7 +200,7 @@ Window::TabManager& Window::TabManager::setup(const BashrcSource source)
 	return *this;
 }
 
-BashrcSource Window::TabManager::exec(const BashrcSource source)
+BashrcSource Window::TabManager::exec(const BashrcSource& source)
 {
 	SCOPE_TRACKER;
 	BashrcSource rtn = source;

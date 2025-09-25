@@ -91,7 +91,7 @@ void VariableView::scrollTo(const QModelIndex &idx, ScrollHint /*hint*/)
     if (rect.height() == 0) {
         return;
     }
-    double step = static_cast<double>(verticalStepsPerItem()) / rect.height();
+    double step = 1 / rect.height();
     if (rect.top() < 0) {
         verticalScrollBar()->setValue(verticalScrollBar()->value() + static_cast<int>(rect.top() * step));
     } else if (rect.bottom() > area.bottom()) {

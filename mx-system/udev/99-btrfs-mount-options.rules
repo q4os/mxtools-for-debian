@@ -1,0 +1,15 @@
+## /etc/udev/rules.d/99-btrfs-mount-options.rules
+## 
+# This file contains custom mount options for udisks 2.x
+#
+# mount btrfs at top 5 subvolume 
+# 
+
+SUBSYSTEM!="block", GOTO="udisks_mount_options_btrfs_end"
+ENV{DM_MULTIPATH_DEVICE_PATH}=="1", GOTO="udisks_mount_options_btrfs_end"
+ENV{DM_UDEV_DISABLE_OTHER_RULES_FLAG}=="?*", GOTO="udisks_mount_options_btrfs_end"
+
+ENV{ID_FS_TYPE}=="btrfs", ENV{UDISKS_MOUNT_OPTIONS_BTRFS_DEFAULTS}="subvol=/,subvolid=5"
+
+LABEL="udisks_mount_options_btrfs_end"
+

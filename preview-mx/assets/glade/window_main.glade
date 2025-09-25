@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Generated with glade 3.22.1 -->
+<interface>
+  <requires lib="gtk+" version="3.20"/>
+  <object class="GtkWindow" id="window_main">
+    <property name="name">window_main</property>
+    <property name="width_request">720</property>
+    <property name="height_request">435</property>
+    <property name="can_focus">False</property>
+    <signal name="destroy" handler="on_window_main_destroy" swapped="no"/>
+    <child type="titlebar">
+      <placeholder/>
+    </child>
+    <child>
+      <object class="GtkLayout" id="LAYOUT">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <child>
+          <object class="GtkButton" id="button_next">
+            <property name="label">gtk-media-next</property>
+            <property name="width_request">100</property>
+            <property name="height_request">80</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="has_focus">True</property>
+            <property name="can_default">True</property>
+            <property name="has_default">True</property>
+            <property name="receives_default">True</property>
+            <property name="use_stock">True</property>
+            <signal name="clicked" handler="on_button_next_clicked" swapped="no"/>
+          </object>
+          <packing>
+            <property name="x">600</property>
+            <property name="y">335</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkButton" id="button_back">
+            <property name="label">gtk-media-previous</property>
+            <property name="width_request">100</property>
+            <property name="height_request">80</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+            <property name="use_stock">True</property>
+            <signal name="clicked" handler="on_button_back_clicked" swapped="no"/>
+          </object>
+          <packing>
+            <property name="x">480</property>
+            <property name="y">335</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel" id="label_main_text">
+            <property name="width_request">400</property>
+            <property name="height_request">140</property>
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="label" translatable="yes">Welcome to Peppermint OS! 
+
+Peppermint has long term support and minimal preinstalled applications.  
+
+We give you the tools to put you in charge of your system!</property>
+            <property name="wrap">True</property>
+            <attributes>
+              <attribute name="weight" value="bold"/>
+              <attribute name="scale" value="1.1499999999999999"/>
+            </attributes>
+          </object>
+          <packing>
+            <property name="x">33</property>
+            <property name="y">137</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkButton" id="button_app_one">
+            <property name="label" translatable="yes">button</property>
+            <property name="width_request">100</property>
+            <property name="height_request">80</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+            <signal name="clicked" handler="on_button_app_one_clicked" swapped="no"/>
+          </object>
+          <packing>
+            <property name="x">10</property>
+            <property name="y">335</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkButton" id="button_app_two">
+            <property name="label" translatable="yes">button</property>
+            <property name="width_request">100</property>
+            <property name="height_request">80</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+            <signal name="clicked" handler="on_button_app_two_clicked" swapped="no"/>
+          </object>
+          <packing>
+            <property name="x">125</property>
+            <property name="y">335</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkButton" id="button_app_three">
+            <property name="label" translatable="yes">button</property>
+            <property name="width_request">100</property>
+            <property name="height_request">80</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+            <signal name="clicked" handler="on_button_app_three_clicked" swapped="no"/>
+          </object>
+          <packing>
+            <property name="x">240</property>
+            <property name="y">335</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkImage" id="image_title">
+            <property name="width_request">700</property>
+            <property name="height_request">80</property>
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="pixbuf">images/pep-welcome.png</property>
+          </object>
+          <packing>
+            <property name="x">10</property>
+            <property name="y">9</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkImage" id="image_screenshot">
+            <property name="width_request">230</property>
+            <property name="height_request">135</property>
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="pixbuf">images/Peppermint.png</property>
+          </object>
+          <packing>
+            <property name="x">480</property>
+            <property name="y">140</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkButton" id="button_close">
+            <property name="label">gtk-close</property>
+            <property name="width_request">100</property>
+            <property name="height_request">80</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+            <property name="use_stock">True</property>
+            <signal name="clicked" handler="on_button_close_clicked" swapped="no"/>
+          </object>
+          <packing>
+            <property name="x">600</property>
+            <property name="y">335</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkButton" id="button_app_four">
+            <property name="label" translatable="yes">button</property>
+            <property name="width_request">100</property>
+            <property name="height_request">80</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+            <signal name="clicked" handler="on_button_app_four_clicked" swapped="no"/>
+          </object>
+          <packing>
+            <property name="x">353</property>
+            <property name="y">335</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+  </object>
+</interface>

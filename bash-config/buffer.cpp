@@ -7,14 +7,14 @@ Buffer::Buffer()
 	SCOPE_TRACKER;
 }
 
-Buffer::Buffer(const QString source)
+Buffer::Buffer(const QString& source)
 	: QObject(nullptr)
 {
 	SCOPE_TRACKER;
 	setSource(source);
 }
 
-Buffer::Buffer(Buffer& copy)
+Buffer::Buffer(const Buffer& copy)
 	: QObject(copy.parent())
 {
 	SCOPE_TRACKER;
@@ -28,7 +28,7 @@ Buffer::Buffer(Buffer&& move)
 	*this = move;
 }
 
-Buffer& Buffer::operator=(Buffer& copy)
+Buffer& Buffer::operator=(const Buffer& copy)
 {
 	SCOPE_TRACKER;
 	if (this == &copy)
@@ -36,6 +36,22 @@ Buffer& Buffer::operator=(Buffer& copy)
 		return *this;
 	}
 	setSource(copy.source());
+
+	// Clear existing states
+	for (State* state : m_states) {
+		delete state;
+	}
+	m_states.clear();
+
+	// Deep copy states
+	for (const State* state : copy.m_states) {
+		if (state) {
+			m_states.push_back(new State(*state));
+		} else {
+			m_states.push_back(nullptr);
+		}
+	}
+
 	return *this;
 }
 
@@ -51,13 +67,13 @@ Buffer& Buffer::operator=(Buffer&& move)
 	return *this;
 }
 
-Buffer& Buffer::setSource(const QString source)
+Buffer& Buffer::setSource(const QString& source)
 {
 	m_source = source;
 	return *this;
 }
 
-QString Buffer::source()
+QString Buffer::source() const
 {
 	SCOPE_TRACKER;
 	return m_source;
@@ -70,7 +86,7 @@ Buffer& Buffer::addState(Buffer::State* state)
 	return *this;
 }
 
-Buffer& Buffer::addStates(QList<Buffer::State*> states)
+Buffer& Buffer::addStates(const QList<Buffer::State*>& states)
 {
 	SCOPE_TRACKER;
 	for (State* state : states)
@@ -125,14 +141,14 @@ Buffer::State::State()
 	SCOPE_TRACKER;
 }
 
-Buffer::State::State(const QString search, int state)
+Buffer::State::State(const QString& search, int state)
 {
 	SCOPE_TRACKER;
 	setSearchString(search);
 	setState(state);
 }
 
-Buffer::State::State(State& copy)
+Buffer::State::State(const State& copy)
 {
 	SCOPE_TRACKER;
 	*this = copy;
@@ -149,7 +165,7 @@ Buffer::State::~State()
 	SCOPE_TRACKER;
 }
 
-Buffer::State& Buffer::State::operator=(Buffer::State& copy)
+Buffer::State& Buffer::State::operator=(const Buffer::State& copy)
 {
 	SCOPE_TRACKER;
 	if (this == &copy)
@@ -175,20 +191,20 @@ Buffer::State& Buffer::State::operator=(Buffer::State&& move)
 	return *this;
 }
 
-QString Buffer::State::searchString()
+QString Buffer::State::searchString() const
 {
 	SCOPE_TRACKER;
 	return m_search;
 }
 
-Buffer::State& Buffer::State::setSearchString(const QString search)
+Buffer::State& Buffer::State::setSearchString(const QString& search)
 {
 	SCOPE_TRACKER;
 	m_search = search;
 	return *this;
 }
 
-int Buffer::State::state()
+int Buffer::State::state() const
 {
 	SCOPE_TRACKER;
 	return m_state;

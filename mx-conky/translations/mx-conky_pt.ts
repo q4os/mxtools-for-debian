@@ -469,42 +469,42 @@ da janela, senão esta configuração não terá efeito</translation>
 <context>
     <name>ConkyItemWidget</name>
     <message>
-        <location filename="../src/conkylistwidget.cpp" line="63"/>
+        <location filename="../src/conkylistwidget.cpp" line="64"/>
         <source>Running</source>
         <translation>Em execução</translation>
     </message>
     <message>
-        <location filename="../src/conkylistwidget.cpp" line="63"/>
+        <location filename="../src/conkylistwidget.cpp" line="64"/>
         <source>Stopped</source>
         <translation>Parado</translation>
     </message>
     <message>
-        <location filename="../src/conkylistwidget.cpp" line="118"/>
+        <location filename="../src/conkylistwidget.cpp" line="138"/>
         <source>Autostart</source>
         <translation>Iniciar automaticamente</translation>
     </message>
     <message>
-        <location filename="../src/conkylistwidget.cpp" line="120"/>
+        <location filename="../src/conkylistwidget.cpp" line="140"/>
         <source>Edit</source>
         <translation>Editar</translation>
     </message>
     <message>
-        <location filename="../src/conkylistwidget.cpp" line="123"/>
+        <location filename="../src/conkylistwidget.cpp" line="143"/>
         <source>Customize</source>
         <translation>Personalizar</translation>
     </message>
     <message>
-        <location filename="../src/conkylistwidget.cpp" line="128"/>
+        <location filename="../src/conkylistwidget.cpp" line="148"/>
         <source>Delete</source>
         <translation>Eliminar</translation>
     </message>
     <message>
-        <location filename="../src/conkylistwidget.cpp" line="157"/>
+        <location filename="../src/conkylistwidget.cpp" line="177"/>
         <source>Stop</source>
         <translation>Parar</translation>
     </message>
     <message>
-        <location filename="../src/conkylistwidget.cpp" line="160"/>
+        <location filename="../src/conkylistwidget.cpp" line="180"/>
         <source>Start</source>
         <translation>Iniciar</translation>
     </message>
@@ -512,17 +512,17 @@ da janela, senão esta configuração não terá efeito</translation>
 <context>
     <name>ConkyListWidget</name>
     <message>
-        <location filename="../src/conkylistwidget.cpp" line="319"/>
+        <location filename="../src/conkylistwidget.cpp" line="344"/>
         <source>Total: 0 conkies</source>
         <translation>Total: 0 conkies</translation>
     </message>
     <message>
-        <location filename="../src/conkylistwidget.cpp" line="551"/>
+        <location filename="../src/conkylistwidget.cpp" line="595"/>
         <source>Total: %1 conkies</source>
         <translation>Total: %1 conkies</translation>
     </message>
     <message>
-        <location filename="../src/conkylistwidget.cpp" line="554"/>
+        <location filename="../src/conkylistwidget.cpp" line="598"/>
         <source>Showing: %1 of %2 conkies</source>
         <translation>A exibir: %1 de %2 conkies</translation>
     </message>
@@ -530,22 +530,22 @@ da janela, senão esta configuração não terá efeito</translation>
 <context>
     <name>ConkyPreviewWidget</name>
     <message>
-        <location filename="../src/conkylistwidget.cpp" line="503"/>
+        <location filename="../src/conkylistwidget.cpp" line="547"/>
         <source>No Conky Selected</source>
         <translation>Nenhum Conky foi selecionado</translation>
     </message>
     <message>
-        <location filename="../src/conkylistwidget.cpp" line="505"/>
+        <location filename="../src/conkylistwidget.cpp" line="549"/>
         <source>Select a conky from the list to see its preview</source>
         <translation>Escolha um Conky na lista para o pré-visualizar</translation>
     </message>
     <message>
-        <location filename="../src/conkylistwidget.cpp" line="524"/>
+        <location filename="../src/conkylistwidget.cpp" line="568"/>
         <source>Preview image could not be loaded</source>
         <translation>A imagem da pré-visualização não pôde ser carregada</translation>
     </message>
     <message>
-        <location filename="../src/conkylistwidget.cpp" line="527"/>
+        <location filename="../src/conkylistwidget.cpp" line="571"/>
         <source>No preview image available</source>
         <translation>Não há imagem disponível para pré-visualização</translation>
     </message>
@@ -553,222 +553,222 @@ da janela, senão esta configuração não terá efeito</translation>
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../src/mainwindow.cpp" line="56"/>
-        <location filename="../src/mainwindow.cpp" line="814"/>
+        <location filename="../src/mainwindow.cpp" line="57"/>
+        <location filename="../src/mainwindow.cpp" line="829"/>
         <source>MX Conky</source>
         <translation>Conky do MX</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="234"/>
+        <location filename="../src/mainwindow.cpp" line="249"/>
         <source>About this application</source>
         <translation>Sobre esta aplicação</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="232"/>
+        <location filename="../src/mainwindow.cpp" line="247"/>
         <source>About...</source>
         <translation>Sobre...</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="239"/>
+        <location filename="../src/mainwindow.cpp" line="254"/>
         <source>Help</source>
         <translation>Ajuda</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="254"/>
+        <location filename="../src/mainwindow.cpp" line="269"/>
         <source>Quit application</source>
         <translation>Sair da aplicação</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="252"/>
+        <location filename="../src/mainwindow.cpp" line="267"/>
         <source>Close</source>
         <translation>Fechar</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="149"/>
+        <location filename="../src/mainwindow.cpp" line="157"/>
         <source>Loading Conky configurations...</source>
         <translation>A carregar configurações do Conky...</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="172"/>
+        <location filename="../src/mainwindow.cpp" line="187"/>
         <source>Settings</source>
         <translation>Definições</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="174"/>
+        <location filename="../src/mainwindow.cpp" line="189"/>
         <source>Configure conky search paths</source>
         <translation>Configurar os caminhos para procurar conkies</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="176"/>
+        <location filename="../src/mainwindow.cpp" line="191"/>
         <source>Refresh</source>
         <translation>Refrescar</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="178"/>
+        <location filename="../src/mainwindow.cpp" line="193"/>
         <source>Refresh conky list</source>
         <translation>Atualizar lista de Conkies</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="180"/>
+        <location filename="../src/mainwindow.cpp" line="195"/>
         <source>Start All</source>
         <translation>Iniciar Todos</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="182"/>
+        <location filename="../src/mainwindow.cpp" line="197"/>
         <source>Start all enabled conkies</source>
         <translation>Iniciar todos os Conkies que estão ativados</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="184"/>
+        <location filename="../src/mainwindow.cpp" line="199"/>
         <source>Stop All</source>
         <translation>Parar Todos</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="186"/>
+        <location filename="../src/mainwindow.cpp" line="201"/>
         <source>Stop all running conkies</source>
         <translation>Parar todos os Conkies que estão em execução</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="916"/>
-        <location filename="../src/mainwindow.cpp" line="953"/>
+        <location filename="../src/mainwindow.cpp" line="931"/>
+        <location filename="../src/mainwindow.cpp" line="968"/>
         <source>Running</source>
         <translation>Em execução</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="918"/>
-        <location filename="../src/mainwindow.cpp" line="954"/>
+        <location filename="../src/mainwindow.cpp" line="933"/>
+        <location filename="../src/mainwindow.cpp" line="969"/>
         <source>Stopped</source>
         <translation>Parado</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="194"/>
+        <location filename="../src/mainwindow.cpp" line="209"/>
         <source>Search conky by name...</source>
         <translation>Pesquisar conky pelo nome...</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="196"/>
+        <location filename="../src/mainwindow.cpp" line="211"/>
         <source>Search conkies by name (Ctrl+F)</source>
         <translation>Pesquisar pelo nome do Conky (Ctrl+F)</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="241"/>
+        <location filename="../src/mainwindow.cpp" line="256"/>
         <source>Display help</source>
         <translation>Mostrar a ajuda</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="417"/>
-        <location filename="../src/mainwindow.cpp" line="593"/>
+        <location filename="../src/mainwindow.cpp" line="432"/>
+        <location filename="../src/mainwindow.cpp" line="608"/>
         <source>Copy Conky</source>
         <translation>Copiar o Conky</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="463"/>
-        <location filename="../src/mainwindow.cpp" line="641"/>
+        <location filename="../src/mainwindow.cpp" line="478"/>
+        <location filename="../src/mainwindow.cpp" line="656"/>
         <source>Conky Copied</source>
         <translation>O Conky Foi Copiado</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="464"/>
+        <location filename="../src/mainwindow.cpp" line="479"/>
         <source>Conky has been copied to your personal folder for editing:
 %1</source>
         <translation>O Conky foi copiado para sua pasta pessoal para ser editado:
 %1</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="466"/>
-        <location filename="../src/mainwindow.cpp" line="644"/>
+        <location filename="../src/mainwindow.cpp" line="481"/>
+        <location filename="../src/mainwindow.cpp" line="659"/>
         <source>Copy Failed</source>
         <translation>Falha ao Copiar</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="466"/>
-        <location filename="../src/mainwindow.cpp" line="644"/>
+        <location filename="../src/mainwindow.cpp" line="481"/>
+        <location filename="../src/mainwindow.cpp" line="659"/>
         <source>Failed to copy conky to your personal folder.</source>
         <translation>Ocorreu uma falha ao copiar o Conky para sua pasta pessoal.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="528"/>
+        <location filename="../src/mainwindow.cpp" line="543"/>
         <source>Delete Conky</source>
         <translation>Apagar Conky</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="642"/>
+        <location filename="../src/mainwindow.cpp" line="657"/>
         <source>Conky has been copied to your personal folder for customization:
 %1</source>
         <translation>O Conky foi copiado para sua pasta pessoal para ser personalizado:
 %1</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="561"/>
+        <location filename="../src/mainwindow.cpp" line="576"/>
         <source>Delete Successful</source>
         <translation>Apagado com sucesso</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="168"/>
+        <location filename="../src/mainwindow.cpp" line="183"/>
         <source>Previews</source>
         <translation>Pré-Visualização</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="170"/>
+        <location filename="../src/mainwindow.cpp" line="185"/>
         <source>Generate preview images for conkies</source>
         <translation>Gerar imagens para a pré-visualização dos Conkies</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="190"/>
-        <location filename="../src/mainwindow.cpp" line="451"/>
-        <location filename="../src/mainwindow.cpp" line="629"/>
-        <location filename="../src/mainwindow.cpp" line="914"/>
-        <location filename="../src/mainwindow.cpp" line="952"/>
+        <location filename="../src/mainwindow.cpp" line="205"/>
+        <location filename="../src/mainwindow.cpp" line="466"/>
+        <location filename="../src/mainwindow.cpp" line="644"/>
+        <location filename="../src/mainwindow.cpp" line="929"/>
+        <location filename="../src/mainwindow.cpp" line="967"/>
         <source>All</source>
         <translation>Todos</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="191"/>
+        <location filename="../src/mainwindow.cpp" line="206"/>
         <source>Filter conkies by running status or location</source>
         <translation>Filtrar os Conkies por estado de execução ou por sua localização</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="413"/>
-        <location filename="../src/mainwindow.cpp" line="589"/>
+        <location filename="../src/mainwindow.cpp" line="428"/>
+        <location filename="../src/mainwindow.cpp" line="604"/>
         <source>Enter a name for the copy:</source>
         <translation>Escolha um nome para a cópia:</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="414"/>
-        <location filename="../src/mainwindow.cpp" line="590"/>
+        <location filename="../src/mainwindow.cpp" line="429"/>
+        <location filename="../src/mainwindow.cpp" line="605"/>
         <source>In order for you to edit and save a conky, it must first be copied to ~/.conky where you have permission.
 Enter a name for the copy.</source>
         <translation>Para editar e gravar um Conky, primeiro ele dever ser copiado para a pasta ~/.conky, onde tem permissões para fazer alterações.
 Insira um nome para fazer a cópia.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="431"/>
-        <location filename="../src/mainwindow.cpp" line="609"/>
+        <location filename="../src/mainwindow.cpp" line="446"/>
+        <location filename="../src/mainwindow.cpp" line="624"/>
         <source>Directory Exists</source>
         <translation>A pasta existe</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="432"/>
-        <location filename="../src/mainwindow.cpp" line="610"/>
+        <location filename="../src/mainwindow.cpp" line="447"/>
+        <location filename="../src/mainwindow.cpp" line="625"/>
         <source>A conky with the name &apos;%1&apos; already exists in your personal folder.
 Do you want to overwrite it?</source>
         <translation>Já existe um Conky com o nome ‘%1’ na sua pasta pessoal.
 Deseja substituí-lo?</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="499"/>
+        <location filename="../src/mainwindow.cpp" line="514"/>
         <source>Edit Conky</source>
         <translation>Editar o Conky</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="500"/>
+        <location filename="../src/mainwindow.cpp" line="515"/>
         <source>This conky file is read-only and requires administrator privileges to edit.
 Do you want to edit it with elevated privileges?</source>
         <translation>Este ficheiro do Conky é só para leitura e requer as permissões de administrador para ser editado.
 Deseja editá-lo com as permissões de administrador?</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="529"/>
+        <location filename="../src/mainwindow.cpp" line="544"/>
         <source>Are you sure you want to delete the conky file:
 %1
 
@@ -779,87 +779,87 @@ This action cannot be undone.</source>
 Esta ação não poderá ser desfeita.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="561"/>
+        <location filename="../src/mainwindow.cpp" line="576"/>
         <source>Conky file deleted successfully.</source>
         <translation>O ficheiro do Conky foi apagado com sucesso.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="563"/>
+        <location filename="../src/mainwindow.cpp" line="578"/>
         <source>Delete Failed</source>
         <translation>Falha ao apagar</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="563"/>
+        <location filename="../src/mainwindow.cpp" line="578"/>
         <source>Failed to delete conky file:
 %1</source>
         <translation>Erro ao apagar o ficheiro do Conky:
 %1</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="651"/>
+        <location filename="../src/mainwindow.cpp" line="666"/>
         <source>Customize Conky</source>
         <translation>Personalizar o Conky</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="652"/>
+        <location filename="../src/mainwindow.cpp" line="667"/>
         <source>This conky file is read-only and requires administrator privileges to customize.
 Do you want to customize it with elevated privileges?</source>
         <translation>Este ficheiro do Conky é só para leitura e requer permissões de administrador para ser personalizado.
 Deseja personalizá-lo com as permissões de administrador?</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="803"/>
+        <location filename="../src/mainwindow.cpp" line="818"/>
         <source>Editor Error</source>
         <translation>Erro no Editor</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="803"/>
+        <location filename="../src/mainwindow.cpp" line="818"/>
         <source>Cannot start editor for file: %1</source>
         <translation>Não foi possível iniciar o editor para o ficheiro: %1</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="813"/>
+        <location filename="../src/mainwindow.cpp" line="828"/>
         <source>About MX Conky</source>
         <translation>Sobre o Conky do MX</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="815"/>
+        <location filename="../src/mainwindow.cpp" line="830"/>
         <source>Version: </source>
         <translation>Versão: </translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="816"/>
+        <location filename="../src/mainwindow.cpp" line="831"/>
         <source>GUI program for configuring Conky in MX Linux</source>
         <translation>Interface de Utilizador para configurar o Conky no MX</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="819"/>
+        <location filename="../src/mainwindow.cpp" line="834"/>
         <source>Copyright (c) MX Linux</source>
         <translation>Direitos de Autor (c) MX Linux</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="820"/>
+        <location filename="../src/mainwindow.cpp" line="835"/>
         <source>License</source>
         <translation>Licença</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="821"/>
-        <location filename="../src/mainwindow.cpp" line="833"/>
+        <location filename="../src/mainwindow.cpp" line="836"/>
+        <location filename="../src/mainwindow.cpp" line="848"/>
         <source>Changelog</source>
         <translation>Registo de alterações</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="822"/>
+        <location filename="../src/mainwindow.cpp" line="837"/>
         <source>Cancel</source>
         <translation>Cancelar</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="844"/>
+        <location filename="../src/mainwindow.cpp" line="859"/>
         <source>&amp;Close</source>
         <translation>&amp;Fechar</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="875"/>
+        <location filename="../src/mainwindow.cpp" line="890"/>
         <source>MX Conky Help</source>
         <translation>Ajuda do Conky do MX</translation>
     </message>
@@ -970,7 +970,7 @@ Deseja personalizá-lo com as permissões de administrador?</translation>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../src/main.cpp" line="68"/>
+        <location filename="../src/main.cpp" line="67"/>
         <source>Select Conky Manager config file</source>
         <translation>Seleccionar o ficheiro .config do Gestor de Conky</translation>
     </message>

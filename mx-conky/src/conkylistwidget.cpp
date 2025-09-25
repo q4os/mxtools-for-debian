@@ -29,6 +29,7 @@
 #include <QHeaderView>
 #include <QPixmap>
 #include <QTimer>
+#include <algorithm>
 
 ConkyItemWidget::ConkyItemWidget(ConkyItem *item, QWidget *parent)
     : QWidget(parent),
@@ -98,7 +99,14 @@ void ConkyItemWidget::setupUI()
     auto *topLayout = new QHBoxLayout;
 
     m_nameLabel = new QLabel;
-    m_nameLabel->setStyleSheet("font-weight: bold; font-size: 14px;");
+    QFont nameFont = m_nameLabel->font();
+    if (nameFont.pointSizeF() > 0) {
+        nameFont.setPointSizeF(nameFont.pointSizeF() + 2.0);
+    } else {
+        nameFont.setPointSize(14);
+    }
+    nameFont.setBold(true);
+    m_nameLabel->setFont(nameFont);
 
     m_statusLabel = new QLabel;
     m_statusLabel->setAlignment(Qt::AlignRight);
@@ -111,7 +119,19 @@ void ConkyItemWidget::setupUI()
     QPalette palette = m_pathLabel->palette();
     QColor textColor = palette.color(QPalette::WindowText);
     textColor.setAlphaF(0.8); // 80% opacity for better contrast
-    m_pathLabel->setStyleSheet(QString("color: rgba(%1, %2, %3, %4); font-size: 10px;").arg(textColor.red()).arg(textColor.green()).arg(textColor.blue()).arg(textColor.alphaF()));
+
+    QFont pathFont = m_pathLabel->font();
+    if (pathFont.pointSizeF() > 0) {
+        pathFont.setPointSizeF(std::max(6.0, pathFont.pointSizeF() - 1.0));
+    } else {
+        pathFont.setPointSize(9);
+    }
+    m_pathLabel->setFont(pathFont);
+    m_pathLabel->setStyleSheet(QString("color: rgba(%1, %2, %3, %4);")
+                                   .arg(textColor.red())
+                                   .arg(textColor.green())
+                                   .arg(textColor.blue())
+                                   .arg(textColor.alphaF()));
 
     auto *controlsLayout = new QHBoxLayout;
 
@@ -315,7 +335,12 @@ void ConkyListWidget::setupUI()
     QPalette countPalette = m_countLabel->palette();
     QColor countTextColor = countPalette.color(QPalette::WindowText);
     countTextColor.setAlphaF(0.8); // 80% opacity for better contrast
-    m_countLabel->setStyleSheet(QString("font-size: 12px; color: rgba(%1, %2, %3, %4); padding: 5px;").arg(countTextColor.red()).arg(countTextColor.green()).arg(countTextColor.blue()).arg(countTextColor.alphaF()));
+    m_countLabel->setFont(font());
+    m_countLabel->setStyleSheet(QString("color: rgba(%1, %2, %3, %4); padding: 5px;")
+                                    .arg(countTextColor.red())
+                                    .arg(countTextColor.green())
+                                    .arg(countTextColor.blue())
+                                    .arg(countTextColor.alphaF()));
     m_countLabel->setText(tr("Total: 0 conkies"));
 
     layout->addWidget(m_treeWidget);
@@ -471,14 +496,33 @@ void ConkyPreviewWidget::setupUI()
     auto *layout = new QVBoxLayout(this);
 
     m_nameLabel = new QLabel;
-    m_nameLabel->setStyleSheet("font-weight: bold; font-size: 14px;");
+    QFont previewNameFont = m_nameLabel->font();
+    if (previewNameFont.pointSizeF() > 0) {
+        previewNameFont.setPointSizeF(previewNameFont.pointSizeF() + 2.0);
+    } else {
+        previewNameFont.setPointSize(14);
+    }
+    previewNameFont.setBold(true);
+    m_nameLabel->setFont(previewNameFont);
     m_nameLabel->setAlignment(Qt::AlignCenter);
 
     m_pathLabel = new QLabel;
     QPalette palette = m_pathLabel->palette();
     QColor textColor = palette.color(QPalette::WindowText);
     textColor.setAlphaF(0.8); // 80% opacity for better contrast
-    m_pathLabel->setStyleSheet(QString("color: rgba(%1, %2, %3, %4); font-size: 10px;").arg(textColor.red()).arg(textColor.green()).arg(textColor.blue()).arg(textColor.alphaF()));
+
+    QFont previewPathFont = m_pathLabel->font();
+    if (previewPathFont.pointSizeF() > 0) {
+        previewPathFont.setPointSizeF(std::max(6.0, previewPathFont.pointSizeF() - 1.0));
+    } else {
+        previewPathFont.setPointSize(9);
+    }
+    m_pathLabel->setFont(previewPathFont);
+    m_pathLabel->setStyleSheet(QString("color: rgba(%1, %2, %3, %4);")
+                                   .arg(textColor.red())
+                                   .arg(textColor.green())
+                                   .arg(textColor.blue())
+                                   .arg(textColor.alphaF()));
     m_pathLabel->setAlignment(Qt::AlignCenter);
     m_pathLabel->setWordWrap(true);
 

@@ -1,10 +1,7 @@
 {
-  "//": "This package.json is currently for information only.",
-  "//": "It's not actually used or usable for building or installing.",
-
   "name": "foliate",
-  "version": "2.1.1",
-  "description": "A simple and modern GTK eBook reader",
+  "version": "3.1.1",
+  "description": "Read e-books in style",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/johnfactotum/foliate.git"
@@ -15,10 +12,9 @@
     "url": "https://github.com/johnfactotum/foliate/issues"
   },
   "homepage": "https://johnfactotum.github.io/foliate/",
-  "dependencies": {
-    "epubjs": "^0.3.88",
-    "jszip": "^3.3.0",
-    "libarchive.js": "^1.3.0",
-    "crypto-js": "^4.0.0"
+  "type": "module",
+  "devDependencies": {
+    "@eslint/js": "^9.9.1",
+    "globals": "^15.9.0"
   }
 }

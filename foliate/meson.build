@@ -1,13 +1,25 @@
 project('com.github.johnfactotum.Foliate',
-          version: '2.6.4',
-    meson_version: '>= 0.40.0',
+    version: '3.3.0',
+    meson_version: '>= 0.59.0',
 )
 
+gnome = import('gnome')
 i18n = import('i18n')
 
+gjs = dependency('gjs-1.0', version: '>= 1.76')
+
+if get_option('check_runtime_deps')
+    dependency('gtk4', version: '>= 4.12')
+    dependency('libadwaita-1', version: '>= 1.7')
+    dependency('webkitgtk-6.0', version: '>= 2.40.1')
+endif
 
 subdir('data')
 subdir('src')
 subdir('po')
 
-meson.add_install_script('build-aux/meson/postinstall.py')
+gnome.post_install(
+    glib_compile_schemas: true,
+    gtk_update_icon_cache: true,
+    update_desktop_database: true,
+)

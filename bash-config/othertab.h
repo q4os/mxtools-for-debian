@@ -1,5 +1,4 @@
-#ifndef OTHERTAB_H
-#define OTHERTAB_H
+#pragma once
 
 namespace Ui
 {
@@ -15,8 +14,8 @@ void variableGroup(FuzzyBashStream* stream, QList<FuzzyBashStream::Token>& token
 class PathListItem : public QListWidgetItem
 {
   public:
-	PathListItem(QString path, bool inBashrc = false);
-	void setPath(QString path);
+	PathListItem(const QString& path, bool inBashrc = false);
+	void setPath(const QString& path);
 	QString path() const;
 	void setInBashrc(bool inBashrc);
 	bool inBashrc() const;
@@ -38,23 +37,21 @@ class OtherTab : public Tab
   public:
 	OtherTab();
 	~OtherTab() override;
-	void setup(const BashrcSource source) override;
-	BashrcSource exec(const BashrcSource source) override;
+	void setup(const BashrcSource& source) override;
+	BashrcSource exec(const BashrcSource& source) override;
 
   private:
-	QStringList findPathAdditions(QString source);
-	QStringList cleanPathAdditions(QStringList additions);
+	QStringList findPathAdditions(const QString& source);
+	QStringList cleanPathAdditions(const QStringList& additions);
 
 	QList<PathData> m_removedItems;
-	void removePath(QString& source, QString path);
+	void removePath(QString& source, const QString& path);
 
 	void updateHistoryLengthWidgets();
 
-	int findHistoryLength(QString source, bool* exists = nullptr);
+	int findHistoryLength(const QString& source, bool* exists = nullptr);
 
 	int uiHistoryLengthValue();
 
 	Ui::OtherTab* ui;
 };
-
-#endif // OTHERTAB_H

@@ -1,0 +1,17 @@
+{
+    "KPackageStructure": "Plasma/LookAndFeel",
+    "KPlugin": {
+        "Authors": [
+            {
+                "Email": "dolphinoracle@gmail.com",
+                "Name": "MX Linux"
+            }
+        ],
+        "Category": "",
+        "Description": "MX KDE Defaults look and feel theme",
+        "Id": "org.mxlinux.mx.desktop",
+        "License": "GPLv2+",
+        "Name": "MX Comfort",
+        "Website": "https://mxlinux.org"
+    }
+}

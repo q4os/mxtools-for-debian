@@ -1,3 +1,15 @@
+mx-conky (25.09.4) mx; urgency=medium
+
+  * Create links for the fonts in /usr/share/mx-conky-data/themes
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 24 Sep 2025 17:35:11 -0400
+
+mx-conky (25.09.2) mx; urgency=medium
+
+  * Set font sizes according to user preference
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 18 Sep 2025 08:41:24 -0400
+
 mx-conky (25.09) mx; urgency=medium
 
   * Change contrast for location path

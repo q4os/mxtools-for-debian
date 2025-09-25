@@ -110,6 +110,7 @@ private:
     void editConkyFile(const QString &filePath);
     void populateFilterComboBox();
     void setConnections();
+    void setupConkyFonts();
     void setupLoadingWidget();
     void setupMainWidget();
     void setupUI();

@@ -1,3 +1,9 @@
+cli-shell-utils (0.4.2+6mx25) mx; urgency=medium
+
+  * use /usr/ rather than /usr/local
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 04 Jun 2025 22:18:46 -0400
+
 cli-shell-utils (0.4.2+4) mx; urgency=medium
 
   * update copy-initrd-programs (compressed modules)

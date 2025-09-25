@@ -26,6 +26,7 @@
 #include <QApplication>
 #include <QDebug>
 #include <QDir>
+#include <QDirIterator>
 #include <QFile>
 #include <QFileInfo>
 #include <QInputDialog>
@@ -55,6 +56,7 @@ MainWindow::MainWindow(QWidget *parent)
     setWindowFlags(Qt::Window);
     setWindowTitle(tr("MX Conky"));
     setupUI();
+    setupConkyFonts();
 
     restoreGeometry(settings.value("geometry").toByteArray());
 
@@ -143,12 +145,25 @@ void MainWindow::setupLoadingWidget()
     } else {
         // Fallback: create a simple animated text
         m_loadingLabel->setText("⏳");
-        m_loadingLabel->setStyleSheet("font-size: 48px;");
+        QFont loadingFont = m_loadingLabel->font();
+        if (loadingFont.pointSizeF() > 0) {
+            loadingFont.setPointSizeF(loadingFont.pointSizeF() * 3.5);
+        } else {
+            loadingFont.setPointSize(36);
+        }
+        m_loadingLabel->setFont(loadingFont);
     }
 
     auto *textLabel = new QLabel(tr("Loading Conky configurations..."));
     textLabel->setAlignment(Qt::AlignCenter);
-    textLabel->setStyleSheet("font-size: 16px; margin: 20px;");
+    QFont textFont = textLabel->font();
+    if (textFont.pointSizeF() > 0) {
+        textFont.setPointSizeF(textFont.pointSizeF() + 2.0);
+    } else {
+        textFont.setPointSize(14);
+    }
+    textLabel->setFont(textFont);
+    textLabel->setStyleSheet("margin: 20px;");
 
     loadingLayout->addStretch();
     loadingLayout->addWidget(m_loadingLabel);
@@ -908,7 +923,7 @@ void MainWindow::onFilterChanged()
         return;
     }
     QString filter = m_filterComboBox->currentText();
-    
+
     // Convert translated text to internal key
     QString filterKey;
     if (filter == tr("All")) {
@@ -920,7 +935,7 @@ void MainWindow::onFilterChanged()
     } else {
         filterKey = filter; // For folder-based filters
     }
-    
+
     m_conkyListWidget->setStatusFilter(filterKey);
 }
 
@@ -977,6 +992,59 @@ void MainWindow::populateFilterComboBox()
         }
 
         m_filterComboBox->addItem(displayName);
+    }
+}
+
+void MainWindow::setupConkyFonts()
+{
+    QString themesPath = "/usr/share/mx-conky-data/themes/";
+    QString userFontsPath = QDir::homePath() + "/.fonts/conky/";
+
+    QDir themesDir(themesPath);
+    if (!themesDir.exists()) {
+        qDebug() << "Conky themes directory does not exist:" << themesPath;
+        return;
+    }
+
+    // Create user fonts directory if it doesn't exist
+    QDir userFontsDir(userFontsPath);
+    if (!userFontsDir.exists()) {
+        if (!userFontsDir.mkpath(".")) {
+            qDebug() << "Failed to create fonts directory:" << userFontsPath;
+            return;
+        }
+        qDebug() << "Created fonts directory:" << userFontsPath;
+    }
+
+    // Find all font files recursively
+    QStringList fontFiles;
+    QDirIterator it(themesPath, QStringList() << "*.ttf" << "*.otf" << "*.TTF" << "*.OTF",
+                    QDir::Files, QDirIterator::Subdirectories);
+
+    while (it.hasNext()) {
+        fontFiles << it.next();
+    }
+
+    // Create symlinks for each font file
+    for (const QString &fontFile : fontFiles) {
+        QFileInfo fontInfo(fontFile);
+        QString fontName = fontInfo.fileName();
+        QString linkPath = userFontsPath + fontName;
+
+        QFileInfo linkInfo(linkPath);
+        if (linkInfo.exists()) {
+            // Check if it's already the correct symlink
+            if (linkInfo.isSymLink() && linkInfo.symLinkTarget() == fontFile) {
+                continue; // Already correctly linked
+            }
+            // Remove existing file/link
+            QFile::remove(linkPath);
+        }
+
+        // Create symlink
+        if (!QFile::link(fontFile, linkPath)) {
+            qDebug() << "Failed to create symlink:" << linkPath << "->" << fontFile;
+        }
     }
 }
 

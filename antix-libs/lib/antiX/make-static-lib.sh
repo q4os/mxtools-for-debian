@@ -1,7 +1,7 @@
 #!/bin/bash
 
 files="antiX-style-default.sh antiX-gui-cli.sh antiX-common.sh"
-dir="/usr/local/lib/antiX"
+dir="/usr/lib/antiX"
 
 
 head_line="#######################################################################"

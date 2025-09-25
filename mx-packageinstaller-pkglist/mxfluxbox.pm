@@ -77,7 +77,6 @@ mxfb-accessories
 wmalauncher  
 rofi-calc
 custom-toolbox
-roxterm
 feh
 </install_package_names>
 
@@ -98,6 +97,5 @@ mxfb-accessories
 wmalauncher  
 rofi-calc
 custom-toolbox
-roxterm
 </uninstall_package_names>
 </app>

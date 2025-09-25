@@ -1,0 +1,21 @@
+{
+    "KPlugin": {
+        "Authors": [
+            {
+                "Email": "dolphinoracle@gmail.com",
+                "Name": "MX Linux"
+            }
+        ],
+        "Category": "",
+        "Description": "MX Comfort Breeze Dark",
+
+        "EnabledByDefault": true,
+        "Id": "mx-comfort-breeze-dark",
+        "License": "LGPL",
+        "Name": "mx-comfort-breeze-dark",
+
+        "Version": "6.10.0",
+        "Website": "https://mx-linux.org"
+    },
+    "X-Plasma-API": "5.0"
+}

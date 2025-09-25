@@ -203,12 +203,12 @@
         <translation>बंद करें (&amp;C)</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="48"/>
+        <location filename="../main.cpp" line="58"/>
         <source>MX System Sounds</source>
         <translation>एमएक्स सिस्टम ध्वनि</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="48"/>
+        <location filename="../main.cpp" line="58"/>
         <source>This app is Xfce-only</source>
         <translation type="unfinished"></translation>
     </message>

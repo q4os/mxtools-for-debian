@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="cs">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="cs">
 <context>
     <name>AliasTab</name>
     <message>
@@ -57,7 +55,7 @@
     <message>
         <location filename="../prompttab_fix.ui" line="44"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Change what gives you your prompt.&lt;/p&gt;&lt;p&gt;Default - Use what prompt you had before.&lt;/p&gt;&lt;p&gt;Fancy Prompt - Uses the MX Fancy Prompt utility&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../prompttab_fix.ui" line="152"/>
@@ -163,17 +161,17 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../prompttab.cpp" line="546"/>
+        <location filename="../prompttab.cpp" line="543"/>
         <source>Foreground Color</source>
         <translation>Barva popředí</translation>
     </message>
     <message>
-        <location filename="../prompttab.cpp" line="547"/>
+        <location filename="../prompttab.cpp" line="544"/>
         <source>Background Color</source>
         <translation>Barva pozadí</translation>
     </message>
     <message>
-        <location filename="../prompttab.cpp" line="548"/>
+        <location filename="../prompttab.cpp" line="545"/>
         <source>Bold</source>
         <translation>Tučný</translation>
     </message>

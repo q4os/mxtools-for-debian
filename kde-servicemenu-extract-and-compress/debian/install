@@ -1,4 +1,0 @@
-# src/*.desktop usr/share/kde4/services/ServiceMenus
-src/*.desktop usr/share/kservices5/ServiceMenus
-src/*.sh usr/bin
-src/dialogs/*.sh usr/bin

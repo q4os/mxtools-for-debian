@@ -1,0 +1,24 @@
+#mx-tweak theme file
+
+Name=MX Ease Dark
+
+#panel_settings
+
+background-color=none
+background-image=none
+background-style=0
+
+#xsettings
+xsettings_gtk_theme=mx-ease-Dark
+xsettings_icon_theme=Papirus-mxbluedark
+
+#xfwm4
+xfwm4_window_decorations=mx-ease-Dark
+
+#preview screenshot
+screenshot=mx-ease-dark.jpg
+
+
+
+
+

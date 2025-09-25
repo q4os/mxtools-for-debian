@@ -73,8 +73,6 @@ all
 kmail
 accountwizard 
 kdepim-themeeditors 
-libkf5mailimporterakonadi5
-mbox-importer
 pim-data-exporter 
 pim-sieve-editor
 </install_package_names>

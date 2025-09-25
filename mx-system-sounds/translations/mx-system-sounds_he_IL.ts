@@ -203,12 +203,12 @@
         <translation>&amp;סגירה</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="48"/>
+        <location filename="../main.cpp" line="58"/>
         <source>MX System Sounds</source>
         <translation>צלילי המערכת של MX</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="48"/>
+        <location filename="../main.cpp" line="58"/>
         <source>This app is Xfce-only</source>
         <translation>היישום הזה מיועד ל־Xfce בלבד</translation>
     </message>

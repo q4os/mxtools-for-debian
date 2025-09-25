@@ -1,3 +1,9 @@
+mx-network-assistant (24.4) mx; urgency=medium
+
+  * Update to Qt6
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 23 Apr 2025 22:07:28 -0400
+
 mx-network-assistant (24.3) mx; urgency=medium
 
   * Update translations 

@@ -70,7 +70,7 @@ all
 </preinstall>
 
 <install_package_names>
-gftp-gtk
+gftp
 gftp-text
 </install_package_names>
 
@@ -81,7 +81,7 @@ gftp-text
 
 
 <uninstall_package_names>
-gftp-gtk
+gftp
 gftp-text
 </uninstall_package_names>
 </app>

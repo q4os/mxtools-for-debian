@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?><interface>
+<template class="FoliateAnnotationRow" parent="GtkBox">
+    <property name="orientation">vertical</property>
+    <property name="valign">center</property>
+    <property name="spacing">9</property>
+    <child>
+      <object class="GtkLabel" id="heading">
+        <property name="xalign">0</property>
+        <property name="hexpand">true</property>
+        <property name="ellipsize">end</property>
+        <style><class name="caption"/></style>
+      </object>
+    </child>
+    <child>
+      <object class="GtkBox" id="box">
+        <property name="spacing">12</property>
+        <child>
+          <object class="FoliateAnnotationColorImage" id="color">
+            <property name="valign">center</property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkLabel" id="text">
+            <property name="hexpand">True</property>
+            <property name="xalign">0</property>
+            <property name="wrap">True</property>
+            <property name="ellipsize">middle</property>
+            <property name="lines">3</property>
+          </object>
+        </child>
+      </object>
+    </child>
+    <child>
+      <object class="GtkSeparator" id="sep">
+      </object>
+    </child>
+    <child>
+      <object class="GtkLabel" id="note">
+        <property name="hexpand">True</property>
+        <property name="xalign">0</property>
+        <property name="wrap">True</property>
+        <property name="ellipsize">end</property>
+        <property name="lines">3</property>
+        <style><class name="caption"/></style>
+      </object>
+    </child>
+    <child>
+      <object class="GtkBox" id="bar">
+        <property name="spacing">12</property>
+        <child>
+          <object class="GtkLabel" id="date">
+            <property name="hexpand">True</property>
+            <property name="xalign">0</property>
+            <property name="ellipsize">end</property>
+            <style><class name="caption"/><class name="dim-label"/></style>
+          </object>
+        </child>
+        <child>
+          <object class="GtkButton" id="button">
+            <property name="visible" bind-source="FoliateAnnotationRow" bind-property="editable"/>
+            <property name="valign">center</property>
+            <property name="icon-name">user-trash-symbolic</property>
+            <property name="tooltip-text" translatable="yes">Delete</property>
+            <style><class name="flat"/></style>
+          </object>
+        </child>
+      </object>
+    </child>
+</template>
+</interface>

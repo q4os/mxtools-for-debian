@@ -75,7 +75,6 @@ hpijs-ppds
 hplip-data
 hplip-gui
 cups
-cups-pdf
 cups-client
 magicfilter
 gv

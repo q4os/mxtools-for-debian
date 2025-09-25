@@ -1,30 +1,54 @@
-mx-system (25.08.01mx23) mx; urgency=medium
+mx-system (25.08.01mx25) mx; urgency=medium
 
-  * remove executable bit from some conf files
+  * remove executable bit on some conf files
 
- -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 16 Aug 2025 14:46:04 -0400
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 16 Aug 2025 14:44:19 -0400
 
-mx-system (25.04.03mx23) mx; urgency=medium
+mx-system (25.07.02mx25) mx; urgency=medium
 
-  * add qt6gtk2 and libqt6svg6 to depends list
-  * to support upcoming qt6 updates to mx tools
-  * allows themeing to work on gtk and KDE desktops
+  * add btrfs mount options udev rule (fehlix)
+  * add BOOTX64.CSV with MX description (fehlix)
 
- -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 23 Apr 2025 17:58:43 -0400
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 25 Jul 2025 21:48:58 -0400
 
-mx-system (25.04.02mx23) mx; urgency=medium
+mx-system (25.07.01mx25) mx; urgency=medium
 
-  * don't run update-grub if grub.cfg doesn't exit
+  * modifiy imagemagick divert (TheBSODFan)
+  * remove old divert on old imagemagick file
 
- -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 14 Apr 2025 20:49:52 -0400
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 20 Jul 2025 16:02:19 -0400
 
-mx-system (25.04.01mx23) mx; urgency=medium
+mx-system (25.06.04mx25) mx; urgency=medium
+
+  * add Infinity to strings
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 26 Jun 2025 19:37:08 -0400
+
+mx-system (25.06.03mx25) mx; urgency=medium
+
+  * disable modernize sources message
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 23 Apr 2025 18:53:53 -0400
+
+mx-system (25.06.02mx25) mx; urgency=medium
+
+  * don't update-grub if grub.cfg doesn't exist
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 14 Apr 2025 20:53:25 -0400
+
+mx-system (25.06.01mx25) mx; urgency=medium
+
+  * dkms update latest trixie
+  * strings for mx25
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 09 Apr 2025 19:13:19 -0400
+
+mx-system (25.02.02mx23) mx; urgency=medium
 
   * add logic for running update-grub during update and string changes 
   * add mx23.6 strings 
-  * don't run update-grub if update-grub doesn't exist (pi)
 
- -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 10 Apr 2025 22:01:39 -0400
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 16 Feb 2025 16:35:40 -0500
 
 mx-system (25.02.01mx23) mx; urgency=medium
 

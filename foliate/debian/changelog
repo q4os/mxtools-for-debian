@@ -1,3 +1,80 @@
+foliate (4.~really3.3.0-1) unstable; urgency=medium
+
+  * New upstream release
+  * Update standards version to 4.7.2
+
+ -- Jonathan Carter <jcc@debian.org>  Fri, 04 Apr 2025 17:05:09 +0200
+
+foliate (4.~really3.2.1-1) unstable; urgency=medium
+
+  * New upstream release
+
+ -- Jonathan Carter <jcc@debian.org>  Sun, 29 Dec 2024 21:12:33 +0200
+
+foliate (4.~really3.2.0-1) unstable; urgency=medium
+
+  * New upstream release 
+
+ -- Jonathan Carter <jcc@debian.org>  Tue, 03 Dec 2024 15:36:07 +0200
+
+foliate (4.~really3.1.1-1) unstable; urgency=medium
+
+  * New upstream release
+
+ -- Jonathan Carter <jcc@debian.org>  Tue, 23 Apr 2024 14:38:48 +0200
+
+foliate (4.~really3.1.0-0.1) unstable; urgency=medium
+
+  * Non-maintainer upload
+  * New upstream release
+  * Update debian/watch to fix wrong parsing of upstream version numbers
+    and add the ~really workaround until upstream versioning catches up
+    (Closes: #1059159)
+  * debian/control: Add Build-Depends: appstream for build tests
+  * debian/control: Set Rules-Requires-Root: no
+  * Run wrap-and-sort
+  * Drop obsolete clean rule
+  * Drop obsolete README.Debian
+  * Update debian/copyright
+  * Update standards version to 4.6.2, no changes needed
+
+ -- Jeremy Bícha <jbicha@ubuntu.com>  Wed, 24 Jan 2024 10:18:35 -0500
+
+foliate (4-1) unstable; urgency=medium
+
+  * New upstream release
+  * Add missing dependencies (Closes: #1058725)
+    - gir1.2-gtk-4.0
+    - gir1.2-adw-1
+    - gir1.2-webkit-6.0
+
+ -- Jonathan Carter <jcc@debian.org>  Tue, 19 Dec 2023 19:30:38 +0200
+
+foliate (3.0.1-1) unstable; urgency=medium
+
+  * New upstream release (Closes: #1039050)
+  * Remove README.debian and reference to src/assets/jslib.min.js
+    (no longer exists)
+  * New build-dep: libgjs-dev, libgtk-4-dev, libadwaita-1-dev,
+                   libwebkitgtk-6.0-dev, desktop-file-utils,
+                   libglib2.0-dev-bin
+  * Remove stale debian/patches directory
+  * Remove debian/links (no longer needed)
+
+ -- Jonathan Carter <jcc@debian.org>  Thu, 14 Dec 2023 14:59:12 +0200
+
+foliate (2.6.4-1+dfsg5) unstable; urgency=medium
+
+  * Upload to unstable (Closes: #1053410)
+
+ -- Jonathan Carter <jcc@debian.org>  Thu, 02 Nov 2023 09:41:12 +0200
+
+foliate (2.6.4-1+dfsg5~exp1) experimental; urgency=medium
+
+  * No change upload to experimental
+
+ -- Jonathan Carter <jcc@debian.org>  Tue, 31 Oct 2023 16:35:12 +0200
+
 foliate (2.6.4-1+dfsg3) unstable; urgency=medium
 
   * Merge MR!3, adds recommends for gnome-epub-thumbnailer

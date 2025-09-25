@@ -86,8 +86,7 @@
         <string>About...</string>
        </property>
        <property name="icon">
-        <iconset theme="help-about">
-         <normaloff>.</normaloff>.</iconset>
+        <iconset theme="help-about"/>
        </property>
        <property name="shortcut">
         <string/>
@@ -109,8 +108,7 @@
         <string>Help</string>
        </property>
        <property name="icon">
-        <iconset theme="help-contents">
-         <normaloff>.</normaloff>.</iconset>
+        <iconset theme="help-contents"/>
        </property>
       </widget>
      </item>
@@ -166,6 +164,22 @@
       </spacer>
      </item>
      <item>
+      <spacer name="horizontalSpacer_4">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Preferred</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>80</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
       <widget class="QPushButton" name="buttonCancel">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
@@ -177,8 +191,7 @@
         <string>&amp;Close</string>
        </property>
        <property name="icon">
-        <iconset theme="window-close">
-         <normaloff>.</normaloff>.</iconset>
+        <iconset theme="window-close"/>
        </property>
        <property name="shortcut">
         <string>Alt+C</string>
@@ -212,8 +225,7 @@
      </property>
      <widget class="QWidget" name="statusTab">
       <attribute name="icon">
-       <iconset theme="emblem-documents">
-        <normaloff>.</normaloff>.</iconset>
+       <iconset theme="emblem-documents"/>
       </attribute>
       <attribute name="title">
        <string>Status</string>
@@ -303,8 +315,7 @@
              <string>Re-scan</string>
             </property>
             <property name="icon">
-             <iconset theme="view-refresh">
-              <normaloff>.</normaloff>.</iconset>
+             <iconset theme="view-refresh"/>
             </property>
            </widget>
           </item>
@@ -460,8 +471,7 @@
              <string>Unblock WiFi Devices</string>
             </property>
             <property name="icon">
-             <iconset theme="network-wireless">
-              <normaloff>.</normaloff>.</iconset>
+             <iconset theme="network-wireless"/>
             </property>
            </widget>
           </item>
@@ -593,8 +603,7 @@
              <string>Re-scan</string>
             </property>
             <property name="icon">
-             <iconset theme="view-refresh">
-              <normaloff>.</normaloff>.</iconset>
+             <iconset theme="view-refresh"/>
             </property>
            </widget>
           </item>
@@ -613,8 +622,7 @@
              <string>Block Driver</string>
             </property>
             <property name="icon">
-             <iconset theme="object-locked">
-              <normaloff>.</normaloff>.</iconset>
+             <iconset theme="object-locked"/>
             </property>
            </widget>
           </item>
@@ -672,8 +680,7 @@
              <string>Remove Driver</string>
             </property>
             <property name="icon">
-             <iconset theme="list-remove">
-              <normaloff>.</normaloff>.</iconset>
+             <iconset theme="list-remove"/>
             </property>
            </widget>
           </item>
@@ -683,8 +690,7 @@
              <string>Add Driver</string>
             </property>
             <property name="icon">
-             <iconset theme="list-add">
-              <normaloff>.</normaloff>.</iconset>
+             <iconset theme="list-add"/>
             </property>
            </widget>
           </item>
@@ -706,8 +712,7 @@
              <string>Re-scan</string>
             </property>
             <property name="icon">
-             <iconset theme="view-refresh">
-              <normaloff>.</normaloff>.</iconset>
+             <iconset theme="view-refresh"/>
             </property>
            </widget>
           </item>
@@ -736,8 +741,7 @@
              <string>Install NDISwrapper</string>
             </property>
             <property name="icon">
-             <iconset theme="list-add">
-              <normaloff>.</normaloff>.</iconset>
+             <iconset theme="list-add"/>
             </property>
            </widget>
           </item>
@@ -763,8 +767,7 @@
              <string>Uninstall NDISwrapper</string>
             </property>
             <property name="icon">
-             <iconset theme="list-remove">
-              <normaloff>.</normaloff>.</iconset>
+             <iconset theme="list-remove"/>
             </property>
            </widget>
           </item>
@@ -868,8 +871,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
                <string>Start</string>
               </property>
               <property name="icon">
-               <iconset theme="system-search">
-                <normaloff>.</normaloff>.</iconset>
+               <iconset theme="system-search"/>
               </property>
               <property name="default">
                <bool>false</bool>
@@ -885,8 +887,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
                <string>Clear</string>
               </property>
               <property name="icon">
-               <iconset theme="user-trash">
-                <normaloff>.</normaloff>.</iconset>
+               <iconset theme="user-trash"/>
               </property>
              </widget>
             </item>
@@ -899,8 +900,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
                <string>Cancel</string>
               </property>
               <property name="icon">
-               <iconset theme="cancel">
-                <normaloff>.</normaloff>.</iconset>
+               <iconset theme="cancel"/>
               </property>
              </widget>
             </item>
@@ -991,8 +991,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
                <string>Start</string>
               </property>
               <property name="icon">
-               <iconset theme="system-search">
-                <normaloff>.</normaloff>.</iconset>
+               <iconset theme="system-search"/>
               </property>
               <property name="default">
                <bool>false</bool>
@@ -1008,8 +1007,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
                <string>Clear</string>
               </property>
               <property name="icon">
-               <iconset theme="user-trash">
-                <normaloff>.</normaloff>.</iconset>
+               <iconset theme="user-trash"/>
               </property>
              </widget>
             </item>
@@ -1022,8 +1020,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
                <string>Cancel</string>
               </property>
               <property name="icon">
-               <iconset theme="cancel">
-                <normaloff>.</normaloff>.</iconset>
+               <iconset theme="cancel"/>
               </property>
              </widget>
             </item>

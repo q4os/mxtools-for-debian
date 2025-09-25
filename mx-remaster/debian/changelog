@@ -1,3 +1,15 @@
+mx-remaster (25.06.02mx25) mx; urgency=medium
+
+  * cp anything in /etc/apt/sources.list.d, not just list files
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 20 Jun 2025 20:49:43 -0400
+
+mx-remaster (24.06.01mx25) mx; urgency=medium
+
+  * /usr/local to /usr
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 04 Jun 2025 22:25:17 -0400
+
 mx-remaster (24.05.01mx23) mx; urgency=medium
 
   * add zstd (adrian) to live-remaster

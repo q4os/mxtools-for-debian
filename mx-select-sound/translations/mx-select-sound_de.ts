@@ -36,7 +36,7 @@
     <message>
         <location filename="../mainwindow.ui" line="103"/>
         <source>About this application</source>
-        <translation type="unfinished">Infos zu diesem Programm</translation>
+        <translation type="unfinished">Über diese Anwendung</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="106"/>
@@ -178,7 +178,7 @@
     </message>
     <message>
         <source>About this application</source>
-        <translation type="vanished">Infos zu diesem Programm</translation>
+        <translation type="vanished">Über diese Anwendung</translation>
     </message>
     <message>
         <source>About...</source>

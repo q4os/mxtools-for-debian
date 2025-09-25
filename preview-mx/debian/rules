@@ -1,0 +1,15 @@
+#!/usr/bin/make -f
+
+override_dh_auto_clean:
+	dh_auto_clean
+	
+override_dh_usrlocal:
+
+override_dh_auto_build:
+	make all
+
+override_dh_builddeb:
+	dh_builddeb -- -Z xz
+
+%:
+	dh $@ --no-automatic-dbgsym --parallel

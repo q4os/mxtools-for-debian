@@ -1,3 +1,10 @@
+job-scheduler (24.4) mx; urgency=medium
+
+  * Update to Qt6
+  * Update translations
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 23 Apr 2025 21:45:12 -0400
+
 job-scheduler (24.3) mx; urgency=medium
 
   * Update translations

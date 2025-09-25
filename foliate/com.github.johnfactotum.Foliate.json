@@ -1,27 +1,26 @@
 {
-    "app-id": "com.github.johnfactotum.Foliate",
-    "runtime": "org.gnome.Platform",
-    "runtime-version": "40",
-    "sdk": "org.gnome.Sdk",
-    "command": "com.github.johnfactotum.Foliate",
-    "finish-args": [
+    "app-id" : "com.github.johnfactotum.Foliate",
+    "runtime" : "org.gnome.Sdk",
+    "runtime-version" : "48",
+    "sdk" : "org.gnome.Sdk",
+    "command" : "foliate",
+    "finish-args" : [
         "--share=network",
         "--share=ipc",
-        "--socket=x11",
         "--socket=fallback-x11",
-        "--socket=wayland",
-        "--socket=pulseaudio",
         "--device=dri",
-        "--metadata=X-DConf=migrate-path=/com/github/johnfactotum/Foliate/",
-        "--talk-name=org.freedesktop.Flatpak"
+        "--socket=wayland",
+        "--filesystem=xdg-run/speech-dispatcher:ro",
+        "--add-policy=Tracker3.dbus:org.freedesktop.Tracker3.Miner.Files=tracker:Documents"
     ],
-    "modules": [
+    "modules" : [
         {
-            "name": "foliate",
-            "buildsystem": "meson",
-            "sources": [
+            "name" : "foliate",
+            "buildsystem" : "meson",
+            "sources" : [
                 {
-                    "type": "git",
+                    "type" : "git",
+                    "branch": "gtk4",
                     "url": "https://github.com/johnfactotum/foliate.git"
                 }
             ]

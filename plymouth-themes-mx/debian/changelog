@@ -1,3 +1,9 @@
+plymouth-themes-mx (25.08.01) mx; urgency=medium
+
+  * recombine into one package
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 16 Aug 2025 16:35:58 -0400
+
 plymouth-themes-mx (25.02.01) mx; urgency=medium
 
   * New themes

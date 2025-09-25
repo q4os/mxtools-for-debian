@@ -73,11 +73,6 @@ all
 gimp
 gimp-data
 gimp-data-extras
-gimp-cbmplugs
-gimp-gluas
-gimp-gmic
-gimp-lensfun
-gimp-plugin-registry
 gimp-texturize
 </install_package_names>
 
@@ -91,11 +86,6 @@ gimp-texturize
 gimp
 gimp-data
 gimp-data-extras
-gimp-cbmplugs
-gimp-gluas
-gimp-gmic
-gimp-lensfun
-gimp-plugin-registry
 gimp-texturize
 </uninstall_package_names>
 </app>

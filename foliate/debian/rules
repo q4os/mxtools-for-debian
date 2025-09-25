@@ -1,5 +1,4 @@
 #!/usr/bin/make -f
-export DH_VERBOSE = 1
 
 %:
 	dh $@
@@ -7,7 +6,3 @@ export DH_VERBOSE = 1
 # https://gitlab.gnome.org/GNOME/gjs/issues/214
 override_dh_auto_configure:
 	dh_auto_configure -- --libdir=/usr/lib
-
-override_dh_auto_clean:
-	rm -rf src/assets/libarchivejs
-	dh_auto_clean

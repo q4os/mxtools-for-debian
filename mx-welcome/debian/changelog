@@ -1,8 +1,14 @@
-mx-welcome (24.12.04) mx; urgency=medium
+mx-welcome (25.06.01mx25) mx; urgency=medium
 
-  * update translations 
+  * make desktop grab more resilient
 
- -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 23 Mar 2024 13:44:12 -0400
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 09 Jul 2025 21:02:39 -0400
+
+mx-welcome (25.04.01mx25) mx; urgency=medium
+
+  * qt6
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 21 Apr 2025 20:10:37 -0400
 
 mx-welcome (24.12.03) mx; urgency=medium
 

@@ -150,7 +150,7 @@ QString Crontab::cronText()
         ret += "# " + s.replace('\n', QLatin1String("\n# ")) + "\n\n";
     }
 
-    for (Variable *v : qAsConst(variables)) {
+    for (Variable *v : std::as_const(variables)) {
         if (!v->comment.isEmpty()) {
             ret += "# " + v->comment.replace('\n', QLatin1String("\n# ")) + '\n';
         }
@@ -159,7 +159,7 @@ QString Crontab::cronText()
     }
 
     ret += QLatin1String("\n");
-    for (TCommand *c : qAsConst(tCommands)) {
+    for (TCommand *c : std::as_const(tCommands)) {
         if (!c->comment.isEmpty()) {
             ret += "# " + c->comment.replace('\n', QLatin1String("\n# ")) + '\n';
         }

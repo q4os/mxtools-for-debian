@@ -1,7 +1,7 @@
-mx-tweak	 		 usr/bin
+_build_/Release/mx-tweak	 		 usr/bin
 mx-tweak.desktop	 usr/share/applications
 mx-tweak-systray.desktop    usr/share/applications
-translations/*.qm 	 usr/share/mx-tweak/locale
+_build_/*.qm 	 usr/share/mx-tweak/locale
 icons/*                 usr/share/mx-tweak/icons
 license.html            usr/share/doc/mx-tweak
 help/*					usr/share/doc/mx-tweak
@@ -14,7 +14,7 @@ mx.tweak.template usr/share/mx-tweak-data
 share/*			usr/share/mx-tweak
 lib/*   usr/lib/mx-tweak
 actions/* usr/share/polkit-1/actions
-compton-launch.sh usr/local/bin
+picom-launch.sh usr/bin
 bin/* usr/bin
 zrestore-software-brightness.desktop etc/xdg/autostart
 mx-tweak-tray-app-autostart.desktop etc/xdg/autostart

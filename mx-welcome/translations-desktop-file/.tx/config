@@ -1,8 +1,0 @@
-[main]
-host = https://www.transifex.com
-
-[o:anticapitalista:p:antix-development:r:mx-welcome-desktop]
-file_filter = po/mx-welcome-desktop_<lang>.po
-source_file = mx-welcome-desktop.pot
-source_lang = en
-type = po

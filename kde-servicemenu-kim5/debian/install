@@ -1,5 +1,0 @@
-kim/src/bin/kim_*  usr/bin
-kim/src/kim_*.desktop usr/share/kservices5/ServiceMenus
-kim/src/slideshow/* usr/share/kim/slideshow
-kim/src/kim_translation usr/share/kim
-kim/src/gallery/* usr/share/kim/gallery

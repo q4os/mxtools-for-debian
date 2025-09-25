@@ -1,5 +1,4 @@
-#ifndef ALIASSTREAM_H
-#define ALIASSTREAM_H
+#pragma once
 
 #include "fuzzybashstream.h"
 #include <QString>
@@ -89,5 +88,3 @@ class AliasStream
 	QString* m_source;
 	bool m_isOfBashrc;
 };
-
-#endif // ALIASSTREAM_H

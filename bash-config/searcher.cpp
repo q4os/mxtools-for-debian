@@ -1,6 +1,5 @@
 #include "searcher.h"
 
-#include <QRegExp>
 #include <QRegularExpression>
 
 #include "buffer.h"
@@ -20,7 +19,7 @@ Searcher::Searcher(const QString* source, const int states)
 	DEBUG_EXIT(Searcher::Searcher);
 }
 
-Searcher::Searcher(Searcher& copy)
+Searcher::Searcher(const Searcher& copy)
 	: QObject(copy.parent())
 {
 	DEBUG_ENTER(Searcher::Searcher);
@@ -42,7 +41,7 @@ Searcher::~Searcher()
 	DEBUG_EXIT(Searcher::~Searcher);
 }
 
-Searcher& Searcher::operator=(Searcher& copy)
+Searcher& Searcher::operator=(const Searcher& copy)
 {
 	DEBUG_ENTER(Searcher::operator=);
 	setSource(new QString(copy.source()));
@@ -59,28 +58,21 @@ Searcher& Searcher::operator=(Searcher&& move)
 	return *this;
 }
 
-int Searcher::search(const QRegExp search, int from)
+int Searcher::search(const QRegularExpression& search, int from)
 {
 	DEBUG_ENTER(Searcher::search);
 	DEBUG_EXIT(Searcher::search);
 	return templateSearch(search, from);
 }
 
-int Searcher::search(const QRegularExpression search, int from)
+int Searcher::search(const QChar& search, int from)
 {
 	DEBUG_ENTER(Searcher::search);
 	DEBUG_EXIT(Searcher::search);
 	return templateSearch(search, from);
 }
 
-int Searcher::search(const QChar search, int from)
-{
-	DEBUG_ENTER(Searcher::search);
-	DEBUG_EXIT(Searcher::search);
-	return templateSearch(search, from);
-}
-
-int Searcher::search(const QString search, int from)
+int Searcher::search(const QString& search, int from)
 {
 	DEBUG_ENTER(Searcher::search);
 	DEBUG_EXIT(Searcher::search);
@@ -94,7 +86,7 @@ Searcher& Searcher::setSource(const QString* source)
 	return *this;
 }
 
-QString Searcher::source()
+QString Searcher::source() const
 {
 	DEBUG_ENTER(Searcher::source);
 	DEBUG_EXIT(Searcher::source);
@@ -109,14 +101,14 @@ Searcher& Searcher::setStates(const int states)
 	return *this;
 }
 
-Searcher::SearchStates Searcher::states()
+Searcher::SearchStates Searcher::states() const
 {
 	DEBUG_ENTER(Searcher::states);
 	DEBUG_EXIT(Searcher::states);
 	return m_states;
 }
 template <class Type>
-int Searcher::templateSearch(Type search, int from)
+int Searcher::templateSearch(const Type& search, int from)
 {
 	DEBUG_ENTER(Searcher::templateSearch);
 	if (!source().contains(search))

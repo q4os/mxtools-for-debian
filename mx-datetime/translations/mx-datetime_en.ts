@@ -5,7 +5,7 @@
     <name>MXDateTime</name>
     <message>
         <location filename="../datetime.ui" line="20"/>
-        <location filename="../datetime.cpp" line="754"/>
+        <location filename="../datetime.cpp" line="766"/>
         <source>MX Date &amp; Time</source>
         <translation type="unfinished"></translation>
     </message>
@@ -41,8 +41,8 @@
     </message>
     <message>
         <location filename="../datetime.ui" line="261"/>
-        <location filename="../datetime.cpp" line="365"/>
-        <location filename="../datetime.cpp" line="372"/>
+        <location filename="../datetime.cpp" line="379"/>
+        <location filename="../datetime.cpp" line="386"/>
         <source>Hardware Clock</source>
         <translation type="unfinished"></translation>
     </message>
@@ -192,68 +192,68 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../datetime.cpp" line="334"/>
+        <location filename="../datetime.cpp" line="348"/>
         <source>Reading...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../datetime.cpp" line="351"/>
+        <location filename="../datetime.cpp" line="365"/>
         <source>Adjusting...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../datetime.cpp" line="365"/>
-        <location filename="../datetime.cpp" line="372"/>
+        <location filename="../datetime.cpp" line="379"/>
+        <location filename="../datetime.cpp" line="386"/>
         <source>System Clock</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../datetime.cpp" line="378"/>
+        <location filename="../datetime.cpp" line="392"/>
         <source>The %1 time was transferred to the %2.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../datetime.cpp" line="381"/>
+        <location filename="../datetime.cpp" line="395"/>
         <source>The %1 time could not be transferred to the %2.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../datetime.cpp" line="435"/>
+        <location filename="../datetime.cpp" line="449"/>
         <source>The system clock was updated successfully.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../datetime.cpp" line="438"/>
+        <location filename="../datetime.cpp" line="452"/>
         <source>The system clock could not be updated.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../datetime.cpp" line="753"/>
+        <location filename="../datetime.cpp" line="765"/>
         <source>About MX Date &amp; Time</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../datetime.cpp" line="755"/>
+        <location filename="../datetime.cpp" line="767"/>
         <source>Version: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../datetime.cpp" line="756"/>
+        <location filename="../datetime.cpp" line="768"/>
         <source>GUI program for setting the time and date in MX Linux</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../datetime.cpp" line="759"/>
+        <location filename="../datetime.cpp" line="771"/>
         <source>Copyright (c) MX Linux</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../datetime.cpp" line="760"/>
+        <location filename="../datetime.cpp" line="772"/>
         <source>%1 License</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../datetime.cpp" line="764"/>
+        <location filename="../datetime.cpp" line="776"/>
         <source>MX Date &amp; Time Help</source>
         <translation type="unfinished"></translation>
     </message>

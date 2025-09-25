@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="de">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="de">
 <context>
     <name>AliasTab</name>
     <message>
@@ -163,17 +161,17 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../prompttab.cpp" line="546"/>
+        <location filename="../prompttab.cpp" line="543"/>
         <source>Foreground Color</source>
         <translation>Vordergrundfarbe</translation>
     </message>
     <message>
-        <location filename="../prompttab.cpp" line="547"/>
+        <location filename="../prompttab.cpp" line="544"/>
         <source>Background Color</source>
         <translation>Hintergrundfarbe</translation>
     </message>
     <message>
-        <location filename="../prompttab.cpp" line="548"/>
+        <location filename="../prompttab.cpp" line="545"/>
         <source>Bold</source>
         <translation>Fett</translation>
     </message>

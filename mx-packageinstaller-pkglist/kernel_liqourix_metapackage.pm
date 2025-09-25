@@ -64,13 +64,17 @@ Liquorix 64 bit (ahs updates package)
 <screenshot>none</screenshot>
 
 <preinstall>
-if [ $(apt-get update --print-uris | grep -c -m1 -E "/mx/repo/dists/bookworm/ahs/") = 0 ]; then
-MXREPO=$(apt-get update --print-uris | grep -oE "https?://.*/mx/repo/dists/bookworm/main" | tail -1 | sed "s:^:deb :; s:/repo/dists/:/repo/ :; s:/main: ahs:")
-: ${MXREPO:=deb http://mxrepo.com/mx/repo/ bookworm ahs}
+if [ $(apt-get update --print-uris | grep -c -m1 -E "/mx/repo/dists/trixie/ahs/") = 0 ]; then
+MXREPO=$(apt-get update --print-uris | grep -oE "https?://.*/mx/repo/dists/ahs/main" | tail -1 | sed "s:^:deb :; s:/repo/dists/:/repo/ :; s:/main: ahs:")
+: ${MXREPO:=deb http://mxrepo.com/mx/repo/ trixie ahs}
 echo "$MXREPO" > /etc/apt/sources.list.d/mxpitemp.list
 apt-get update 
 fi
+RTL_PKGS=($(dpkg-query -f '${db:Status-Abbrev}\t${Package}\n' -W  -- 'rtl*-dkms' | grep ^i | grep -- '-dkms$' | cut -d$'\t' -f2))
+echo "realtek rtl package to remove are " ${RTL_PKGS[*]}
+apt-get purge ${RTL_PKGS[*]}
 DKMS_PKGS=($(dpkg-query -f '${db:Status-Abbrev}\t${Package}\n' -W  -- '*-dkms' | grep ^i | grep -- '-dkms$' | cut -d$'\t' -f2))
+apt-get purge rtl*-dkms
 apt-get install linux-image-liquorix-amd64 linux-headers-liquorix-amd64 ${DKMS_PKGS[*]}
 </preinstall>
 

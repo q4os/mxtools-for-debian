@@ -1,5 +1,4 @@
-#ifndef ALIASTAB_H
-#define ALIASTAB_H
+#pragma once
 
 #include "aliasstream.h"
 #include "tab.h"
@@ -21,9 +20,9 @@ class AliasTabTableWidgetItem : public QObject, public QTableWidgetItem
 	Q_OBJECT
   public:
 	AliasTabTableWidgetItem() = default;
-	AliasTabTableWidgetItem(QString text, QVariant info = QVariant());
+	AliasTabTableWidgetItem(const QString& text, const QVariant& info = QVariant());
 	~AliasTabTableWidgetItem();
-	AliasTabTableWidgetItem& setInfo(QVariant info);
+	AliasTabTableWidgetItem& setInfo(const QVariant& info);
     QVariant info();
 
   protected:
@@ -37,13 +36,11 @@ class AliasTab : public Tab
 	AliasTab();
 	virtual ~AliasTab();
 
-	void setup(const BashrcSource data);
-	BashrcSource exec(const BashrcSource data);
+	void setup(const BashrcSource& data) override;
+	BashrcSource exec(const BashrcSource& data) override;
 
   protected:
 	Ui::AliasTab* ui;
 	QList<Alias> m_deletedAliases;
 	QMap<QCheckBox*, Alias> m_aliasWithCheckboxes;
 };
-
-#endif // ALIASTAB_H

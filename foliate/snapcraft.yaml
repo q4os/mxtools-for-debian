@@ -1,0 +1,69 @@
+name: foliate
+grade: stable
+adopt-info: foliate
+license: GPL-3.0+
+base: core24
+confinement: strict
+compression: lzo
+platforms:
+  amd64:
+  arm64:
+  armhf:
+layout:
+  /usr/lib/$CRAFT_ARCH_TRIPLET/webkitgtk-6.0:
+    bind: $SNAP/webkitgtk-platform/usr/lib/$CRAFT_ARCH_TRIPLET/webkitgtk-6.0
+slots:
+  foliate:
+    interface: dbus
+    bus: session
+    name: com.github.johnfactotum.Foliate
+plugs:
+  webkitgtk-6-gnome-2404:
+    interface: content
+    target: $SNAP/webkitgtk-platform
+    default-provider: webkitgtk-6-gnome-2404
+apps:
+  foliate:
+    command: usr/bin/foliate
+    extensions:
+      - gnome
+    plugs:
+      - home
+      - removable-media
+      - network
+      - network-status
+      - unity7
+      - audio-playback
+    desktop: usr/share/applications/com.github.johnfactotum.Foliate.desktop
+    common-id: com.github.johnfactotum.Foliate
+    environment:
+      SPEECHD_ADDRESS: "unix_socket:/run/user/$SNAP_UID/speech-dispatcher/speechd.sock"
+      LD_LIBRARY_PATH: $SNAP/webkitgtk-platform/usr/lib:$SNAP/webkitgtk-platform/usr/lib/$CRAFT_ARCH_TRIPLET:$LD_LIBRARY_PATH
+      GI_TYPELIB_PATH: $SNAP/gnome-platform/usr/lib/$CRAFT_ARCH_TRIPLET/girepository-1.0:$SNAP/gnome-platform/usr/lib/$CRAFT_ARCH_TRIPLET/gjs/girepository-1.0:$SNAP/webkitgtk-platform/usr/lib/$CRAFT_ARCH_TRIPLET/girepository-1.0
+parts:
+  foliate:
+    plugin: meson
+    source: https://github.com/johnfactotum/foliate.git
+    source-tag: '3.2.1'
+    build-environment:
+      - PKG_CONFIG_PATH: /snap/webkitgtk-6-gnome-2404-sdk/current/usr/lib/$CRAFT_ARCH_TRIPLET/pkgconfig:$PKG_CONFIG_PATH
+    meson-parameters:
+      - --prefix=/snap/foliate/current/usr
+    override-pull: |
+      craftctl default
+      sed -i '1c#!/snap/foliate/current/gnome-platform/usr/bin/gjs -m' src/main.js
+    build-packages:
+      - xmlstarlet
+    build-snaps:
+      - webkitgtk-6-gnome-2404-sdk/latest/stable
+    parse-info:
+      - usr/share/metainfo/com.github.johnfactotum.Foliate.metainfo.xml
+    organize:
+      snap/foliate/current/usr: usr
+  deps:
+    plugin: nil
+    stage-packages:
+      - libspeechd2 # probably necessary, need testing
+    prime:
+      - usr/lib/*/libspeechd.so.*
+

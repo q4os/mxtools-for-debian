@@ -1,27 +1,22 @@
 #!/usr/bin/make -f
 
-QMAKE_OPTS = DEFINES+=NO_DEBUG_ON_CONSOLE
-MAKE_OPTS  = QMAKE=qmake-qt5 LRELEASE=lrelease-qt5 QMAKE_OPTS="$(QMAKE_OPTS)"
+override_dh_auto_configure:
+	cmake --preset default
 
 override_dh_auto_clean:
 	dh_auto_clean
-	rm -f src/translations/*.qm
 
 override_dh_auto_build:
-	lrelease -removeidentical -nounfinished translations/*.ts
-	head -n1 debian/changelog | sed -e "s/.*(\([^(]*\)).*/#define VERSION \"\1\"/" > version.h
-	dh_auto_build -- $(MAKE_OPTS)
+	cmake --build --preset default
+
+override_dh_auto_test:
+	# Skip tests as no test targets are defined
 
 override_dh_auto_install:
-	dh_auto_install -- $(MAKE_OPTS)
-
-override_dh_builddeb:
-	dh_builddeb -- -Z xz
+	DESTDIR=$(CURDIR)/debian/mx-tweak ninja -C _build_ install
 
 override_dh_shlibdeps:
 	dh_shlibdeps --dpkg-shlibdeps-params=--ignore-missing-info
 
-override_dh_usrlocal:
-
 %:
-	dh $@ --no-automatic-dbgsym --parallel
+	dh $@ --buildsystem=cmake+ninja --no-automatic-dbgsym

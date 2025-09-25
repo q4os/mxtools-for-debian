@@ -1,6 +1,6 @@
 #include "tab.h"
 
-Tab::Tab(const QString name, const QIcon icon, QObject* parent)
+Tab::Tab(const QString& name, const QIcon& icon, QObject* parent)
 	: QObject(parent), m_widget(nullptr)
 {
 	SCOPE_TRACKER;
@@ -8,7 +8,7 @@ Tab::Tab(const QString name, const QIcon icon, QObject* parent)
 	setIcon(icon);
 }
 
-Tab::Tab(Tab& copy)
+Tab::Tab(const Tab& copy)
 	: QObject(copy.parent())
 {
 	SCOPE_TRACKER;
@@ -22,7 +22,7 @@ Tab::Tab(Tab&& move)
 	*this = move;
 }
 
-Tab& Tab::operator=(Tab& copy)
+Tab& Tab::operator=(const Tab& copy)
 {
 	SCOPE_TRACKER;
 	setName(copy.name());
@@ -45,13 +45,13 @@ Tab::~Tab()
 	SCOPE_TRACKER;
 }
 
-QString Tab::name()
+QString Tab::name() const
 {
 	SCOPE_TRACKER;
 	return m_name;
 }
 
-QIcon Tab::icon()
+QIcon Tab::icon() const
 {
 	SCOPE_TRACKER;
 	return m_icon;
@@ -64,21 +64,21 @@ Tab& Tab::setWidget(QWidget* widget)
 	return *this;
 }
 
-QWidget* Tab::widget()
+QWidget* Tab::widget() const
 {
 	SCOPE_TRACKER;
 	Q_ASSUME(m_widget != nullptr);
 	return m_widget;
 }
 
-Tab& Tab::setIcon(const QIcon icon)
+Tab& Tab::setIcon(const QIcon& icon)
 {
 	SCOPE_TRACKER;
 	m_icon = icon;
 	return *this;
 }
 
-Tab& Tab::setName(const QString name)
+Tab& Tab::setName(const QString& name)
 {
 	SCOPE_TRACKER;
 	m_name = name;

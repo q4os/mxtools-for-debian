@@ -117,7 +117,7 @@ ifup_hotplug () {
     done
 
     [ -z "$children" ] && return
-    local reaper=/usr/local/bin/process-reaper
+    local reaper=/usr/bin/process-reaper
     if test -x $reaper; then
     $reaper $children &
     else

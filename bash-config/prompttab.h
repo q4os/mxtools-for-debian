@@ -1,5 +1,4 @@
-#ifndef PROMPTTAB_H
-#define PROMPTTAB_H
+#pragma once
 
 #include "tab.h"
 #include "ui_prompttab_fix.h"
@@ -89,7 +88,7 @@ class CustomPromptProperty : public QObject
 {
 	Q_OBJECT
   public:
-	CustomPromptProperty(QString name, QObject* parent = nullptr);
+	CustomPromptProperty(const QString& name, QObject* parent = nullptr);
 	virtual ~CustomPromptProperty();
 	QWidget* widget() { return m_widget; }
 	void setWidget(QWidget* widget) { m_widget = widget; }
@@ -133,7 +132,7 @@ class ColorProperty : public CustomPromptProperty
 {
 	Q_OBJECT
   public:
-	ColorProperty(QString name, QObject* parent = nullptr);
+	ColorProperty(const QString& name, QObject* parent = nullptr);
 	bool good() override;
 	void setColor(QColor color)
 	{
@@ -148,7 +147,7 @@ class ColorProperty : public CustomPromptProperty
 		updateBtn();
 	}
 	// TODO move out of the ColorProperty class
-	QString stringify(QColor color) const;
+	QString stringify(const QColor& color) const;
 	CustomPromptPropertyType type() const override { return CustomPromptPropertyType::Color; }
   private slots:
 	void onBtnPress();
@@ -165,7 +164,7 @@ class CheckboxProperty : public CustomPromptProperty
 {
 	Q_OBJECT
   public:
-	CheckboxProperty(QString name, QObject* parent = nullptr);
+	CheckboxProperty(const QString& name, QObject* parent = nullptr);
 	bool good() override;
 	void setChecked(bool checked) { m_checkbox->setChecked(checked); }
 	bool checked() { return m_checkbox->isChecked(); }
@@ -179,7 +178,7 @@ class TextProperty : public CustomPromptProperty
 {
 	Q_OBJECT
   public:
-	TextProperty(QString name, QObject* parent = nullptr);
+	TextProperty(const QString& name, QObject* parent = nullptr);
 	bool good() override;
 	void setText(QString text) { m_editor->setText(text); }
 	QString text() { return m_editor->text(); }
@@ -192,9 +191,9 @@ class TextProperty : public CustomPromptProperty
 class CustomPromptItem : public QListWidgetItem
 {
   public:
-	CustomPromptItem(QString name);
+	CustomPromptItem(const QString& name);
 	QVector<CustomPromptProperty*> properties() const { return m_properties; }
-	CustomPromptProperty* propertyByName(QString name) const;
+	CustomPromptProperty* propertyByName(const QString& name) const;
 	virtual void updateMembers() {}
 	virtual void updateProperties() {}
 	virtual CustomPromptItemType type() const { return CustomPromptItemType::Base; }
@@ -207,18 +206,18 @@ class CustomPromptItem : public QListWidgetItem
 class SimpleTextItem : public CustomPromptItem
 {
   public:
-	SimpleTextItem(QString name);
+	SimpleTextItem(const QString& name);
 	void updateMembers() override;
 	void updateProperties() override;
 	CustomPromptItemType type() const override { return CustomPromptItemType::SimpleText; }
 	QColor propertyForeground() const { return m_foreground; }
-	void setPropertyForeground(QColor color)
+	void setPropertyForeground(const QColor& color)
 	{
 		m_foreground = color;
 		updateProperties();
 	}
 	QColor propertyBackground() const { return m_background; }
-	void setPropertyBackground(QColor color)
+	void setPropertyBackground(const QColor& color)
 	{
 		m_background = color;
 		updateProperties();
@@ -251,12 +250,12 @@ class SimpleTextItem : public CustomPromptItem
 class TextItem : public SimpleTextItem
 {
   public:
-	TextItem(QString name, QString text);
+	TextItem(const QString& name, const QString& text);
 	void updateMembers() override;
 	void updateProperties() override;
 	CustomPromptItemType type() const override { return CustomPromptItemType::Text; }
 	QString propertyText() const { return m_text; }
-	void setPropertyText(QString text)
+	void setPropertyText(const QString& text)
 	{
 		m_text = text;
 		updateProperties();
@@ -278,7 +277,7 @@ class SpecialItem : public SimpleTextItem
 		WorkingShort,
 	};
 	static QString typeToBashString(Type t);
-	SpecialItem(QString name, Type type);
+	SpecialItem(const QString& name, Type type);
 	void updateMembers() override;
 	void updateProperties() override;
 	Type itemType() const { return m_type; }
@@ -310,7 +309,7 @@ class XmlConverter
 {
   public:
 	static QString convert(CustomPromptItem* item);
-	static CustomPromptItem* convert(QString source);
+	static CustomPromptItem* convert(const QString& source);
 };
 
 class PromptTab : public Tab
@@ -318,8 +317,8 @@ class PromptTab : public Tab
   public:
 	PromptTab();
 	~PromptTab();
-	void setup(const BashrcSource data);
-	BashrcSource exec(const BashrcSource data);
+	void setup(const BashrcSource& data) override;
+	BashrcSource exec(const BashrcSource& data) override;
 
   protected:
 	Ui::PromptTab* ui;
@@ -327,6 +326,4 @@ class PromptTab : public Tab
 };
 
 QString itemToXml(CustomPromptItem* item);
-CustomPromptItem* xmlToItem(QString xml);
-
-#endif // PROMPTTAB_H
+CustomPromptItem* xmlToItem(const QString& xml);

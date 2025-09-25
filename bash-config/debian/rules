@@ -1,22 +1,22 @@
 #!/usr/bin/make -f
+export QT_SELECT=6
 
 QMAKE_OPTS = DEFINES+=NO_DEBUG_ON_CONSOLE
-MAKE_OPTS  = QMAKE=qmake-qt5 LRELEASE=lrelease-qt5 QMAKE_OPTS="$(QMAKE_OPTS)"
+MAKE_OPTS  = QMAKE=qmake6 QMAKE_OPTS="$(QMAKE_OPTS)"
+
+override_dh_auto_configure:
+	qmake6
 
 override_dh_auto_clean:
 	dh_auto_clean
 	rm -f src/translations/*.qm
-	rm -f translations/*.qm
 
 override_dh_auto_build:
-	lrelease translations/*.ts
+	/usr/lib/qt6/bin/lrelease translations/*.ts
 	dh_auto_build -- $(MAKE_OPTS)
 
 override_dh_auto_install:
 	dh_auto_install -- $(MAKE_OPTS)
-
-override_dh_builddeb:
-	dh_builddeb -- -Z xz
 
 override_dh_shlibdeps:
 	dh_shlibdeps --dpkg-shlibdeps-params=--ignore-missing-info
@@ -24,4 +24,4 @@ override_dh_shlibdeps:
 override_dh_usrlocal:
 
 %:
-	dh $@ --no-automatic-dbgsym --parallel
+	dh $@ --no-automatic-dbgsym

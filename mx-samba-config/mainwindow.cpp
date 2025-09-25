@@ -42,12 +42,12 @@ MainWindow::MainWindow(QWidget *parent)
       ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    setWindowFlags(Qt::Window); // For the close, min and max buttons
+    setWindowFlags(Qt::Window); // Enable close, minimize, and maximize buttons
     setConnections();
 
     const QSize &size = this->size();
-    if (settings.contains(QStringLiteral("geometry"))) {
-        restoreGeometry(settings.value(QStringLiteral("geometry")).toByteArray());
+    if (settings.contains("geometry")) {
+        restoreGeometry(settings.value("geometry").toByteArray());
         if (isMaximized()) { // Add option to resize if maximized
             resize(size);
             centerWindow();
@@ -61,143 +61,131 @@ MainWindow::MainWindow(QWidget *parent)
 
 MainWindow::~MainWindow()
 {
-    settings.setValue(QStringLiteral("geometry"), saveGeometry());
+    settings.setValue("geometry", saveGeometry());
     delete ui;
 }
 
 void MainWindow::centerWindow()
 {
-    QRect screenGeometry = QApplication::primaryScreen()->geometry();
-    int x = (screenGeometry.width() - width()) / 2;
-    int y = (screenGeometry.height() - height()) / 2;
-    move(x, y);
+    const QRect screenGeometry = QApplication::primaryScreen()->geometry();
+    move((screenGeometry.width() - width()) / 2, (screenGeometry.height() - height()) / 2);
 }
 
 void MainWindow::setConnections()
 {
-    connect(ui->pushAbout, &QPushButton::clicked, this, &MainWindow::pushAbout_clicked);
-    connect(ui->pushAddShare, &QPushButton::clicked, this, &MainWindow::pushAddShare_clicked);
-    connect(ui->pushAddUser, &QPushButton::clicked, this, &MainWindow::pushAddUser_clicked);
-    connect(ui->pushEditShare, &QPushButton::clicked, this, &MainWindow::pushEditShare_clicked);
-    connect(ui->pushEnableDisableSamba, &QPushButton::clicked, this, &MainWindow::pushEnableDisableSamba_clicked);
-    connect(ui->pushHelp, &QPushButton::clicked, this, &MainWindow::pushHelp_clicked);
-    connect(ui->pushRemoveShare, &QPushButton::clicked, this, &MainWindow::pushRemoveShare_clicked);
-    connect(ui->pushRemoveUser, &QPushButton::clicked, this, &MainWindow::pushRemoveUser_clicked);
-    connect(ui->pushStartStopSamba, &QPushButton::clicked, this, &MainWindow::pushStartStopSamba_clicked);
-    connect(ui->pushUserPassword, &QPushButton::clicked, this, &MainWindow::pushUserPassword_clicked);
+    const auto connectButton = [this](QPushButton* button, void (MainWindow::*slot)()) {
+        connect(button, &QPushButton::clicked, this, slot);
+    };
+
+    connectButton(ui->pushAbout, &MainWindow::pushAbout_clicked);
+    connectButton(ui->pushAddShare, &MainWindow::pushAddShare_clicked);
+    connectButton(ui->pushAddUser, &MainWindow::pushAddUser_clicked);
+    connectButton(ui->pushEditShare, &MainWindow::pushEditShare_clicked);
+    connectButton(ui->pushEnableDisableSamba, &MainWindow::pushEnableDisableSamba_clicked);
+    connectButton(ui->pushHelp, &MainWindow::pushHelp_clicked);
+    connectButton(ui->pushRemoveShare, &MainWindow::pushRemoveShare_clicked);
+    connectButton(ui->pushRemoveUser, &MainWindow::pushRemoveUser_clicked);
+    connectButton(ui->pushStartStopSamba, &MainWindow::pushStartStopSamba_clicked);
+    connectButton(ui->pushUserPassword, &MainWindow::pushUserPassword_clicked);
 }
 
 void MainWindow::addEditShares(EditShare *editshare)
 {
-    if (editshare->exec() == QDialog::Accepted) {
-        if (editshare->ui->textShareName->text().isEmpty()) {
-            QMessageBox::critical(this, tr("Error"), tr("Error, could not add share. Empty share name"));
-            return;
-        }
-        if (!QFileInfo::exists(editshare->ui->textSharePath->text())) {
-            QMessageBox::critical(this, tr("Error"),
-                                  tr("Path: %1 doesn't exist.").arg(editshare->ui->textSharePath->text()));
-            return;
-        }
-        QStringList list {":Everyone"}; // add Everyone with a column in front to follow general format of getent
-        run(QStringLiteral("getent"), QStringList {"group", "users"});
-        list << QString(proc.readAllStandardOutput()).trimmed().split(QStringLiteral(","));
-        QString permissions;
-        for (const QString &item : qAsConst(list)) {
-            QString user = item.section(QStringLiteral(":"), -1);
-            if (!permissions.isEmpty()) {
-                permissions += QLatin1String(",");
-            }
-            if (editshare->findChild<QRadioButton *>("*Deny*" + user)->isChecked()) {
-                permissions += user + ":d";
-            } else if (editshare->findChild<QRadioButton *>("*ReadOnly*" + user)->isChecked()) {
-                permissions += user + ":r";
-            } else if (editshare->findChild<QRadioButton *>("*FullAccess*" + user)->isChecked()) {
-                permissions += user + ":f";
-            }
-            permissions.remove(QRegularExpression(QStringLiteral(",$")));
-        }
-        const QStringList &args {"usershare",
-                                 "add",
-                                 editshare->ui->textShareName->text(),
-                                 editshare->ui->textSharePath->text(),
-                                 editshare->ui->textComment->text().isEmpty() ? "" : editshare->ui->textComment->text(),
-                                 permissions,
-                                 editshare->ui->comboGuestOK->currentText() == tr("Yes") ? "guest_ok=y" : "guest_ok=n"};
-        if (run(QStringLiteral("net"), args) != 0) {
-            QMessageBox::critical(
-                this, tr("Error"),
-                tr("Could not add share. Error message:\n\n%1").arg(QString(proc.readAllStandardError())));
-            return;
-        }
-        refreshShareList();
+    if (editshare->exec() != QDialog::Accepted) {
+        return;
     }
+
+    const QString shareName = editshare->ui->textShareName->text();
+    const QString sharePath = editshare->ui->textSharePath->text();
+    const QString comment = editshare->ui->textComment->text();
+    const QString guestOK = editshare->ui->comboGuestOK->currentText() == tr("Yes") ? "guest_ok=y" : "guest_ok=n";
+
+    if (shareName.isEmpty()) {
+        QMessageBox::critical(this, tr("Error"), tr("Error, could not add share. Empty share name"));
+        return;
+    }
+
+    if (!QFileInfo::exists(sharePath)) {
+        QMessageBox::critical(this, tr("Error"), tr("Path: %1 does not exist.").arg(sharePath));
+        return;
+    }
+
+    QStringList userList {":Everyone"};
+    run("getent", {"group", "users"});
+    userList << QString(proc.readAllStandardOutput()).trimmed().split(',');
+
+    QString permissions;
+    for (const QString &user : userList) {
+        QString userName = user.section(':', -1);
+        if (!permissions.isEmpty()) {
+            permissions.append(',');
+        }
+        if (editshare->findChild<QRadioButton *>("*Deny*" + userName)->isChecked()) {
+            permissions += userName + ":d";
+        } else if (editshare->findChild<QRadioButton *>("*ReadOnly*" + userName)->isChecked()) {
+            permissions += userName + ":r";
+        } else if (editshare->findChild<QRadioButton *>("*FullAccess*" + userName)->isChecked()) {
+            permissions += userName + ":f";
+        }
+    }
+
+    const QStringList args {"usershare", "add", shareName, sharePath, comment.isEmpty() ? "" : comment, permissions, guestOK};
+
+    if (run("net", args) != 0) {
+        QMessageBox::critical(
+            this, tr("Error"),
+            tr("Could not add share. Error message:\n\n%1").arg(QString(proc.readAllStandardError())));
+        return;
+    }
+
+    refreshShareList();
 }
 
 QStringList MainWindow::listUsers()
 {
-    run(QStringLiteral("pkexec"), QStringList {"/usr/lib/mx-samba-config/mx-samba-config-list-users"});
-    if (proc.exitCode() != 0) {
+    if (run("pkexec", {"/usr/lib/mx-samba-config/mx-samba-config-list-users"}) != 0) {
         QMessageBox::critical(this, tr("Error"), tr("Error listing users"));
         return {};
     }
-    const QStringList output = QString(proc.readAllStandardOutput().trimmed()).split(QStringLiteral("\n"));
-    QStringList list;
-    list.reserve(output.size());
+
+    const QStringList output = QString(proc.readAllStandardOutput().trimmed()).split('\n');
     if (output.isEmpty()) {
         return {};
     }
+
+    QStringList userList;
+    userList.reserve(output.size());
     for (const QString &item : output) {
-        list << item.section(QStringLiteral(":"), 0, 0);
+        userList << item.section(':', 0, 0);
     }
-    list.sort();
-    return list;
+    userList.sort();
+    return userList;
 }
 
 void MainWindow::buildUserList(EditShare *editshare)
 {
     auto *layout = editshare->ui->frameUsers->layout();
-    QStringList list {":Everyone"}; // add Everyone with a column in front to follow general format of getent
-    run(QStringLiteral("getent"), QStringList {"group", "users"});
-    list << QString(proc.readAllStandardOutput()).trimmed().split(QStringLiteral(","));
-    for (const QString &item : qAsConst(list)) {
-        QString user = item.section(QStringLiteral(":"), -1);
-        auto *groupBox = new QGroupBox(user);
-        groupBox->setObjectName(user);
+    QStringList userList {":Everyone"}; // Add Everyone with a column in front to follow general format of getent
+    run("getent", {"group", "users"});
+    userList << QString(proc.readAllStandardOutput()).trimmed().split(',');
+
+    for (const QString &user : userList) {
+        QString userName = user.section(':', -1);
+        auto *groupBox = new QGroupBox(userName);
+        groupBox->setObjectName(userName);
         auto *hbox = new QHBoxLayout;
 
-        auto *radio = new QRadioButton(tr("&Deny"));
-        radio->setObjectName("*Deny*" + user);
-        hbox->addWidget(radio);
-        connect(radio, &QRadioButton::pressed, radio, [radio]() {
-            if (radio->isChecked()) {
-                radio->setAutoExclusive(false);
-            } else {
-                radio->setAutoExclusive(true);
-            }
-        });
+        auto createRadioButton = [&](const QString &text, const QString &objectName) {
+            auto *radio = new QRadioButton(text);
+            radio->setObjectName(objectName);
+            hbox->addWidget(radio);
+            connect(radio, &QRadioButton::pressed, radio, [radio]() { radio->setAutoExclusive(!radio->isChecked()); });
+            return radio;
+        };
 
-        radio = new QRadioButton(tr("&Read Only"));
-        radio->setObjectName("*ReadOnly*" + user);
-        hbox->addWidget(radio);
-        connect(radio, &QRadioButton::pressed, radio, [radio]() {
-            if (radio->isChecked()) {
-                radio->setAutoExclusive(false);
-            } else {
-                radio->setAutoExclusive(true);
-            }
-        });
-
-        radio = new QRadioButton(tr("&Full Access"));
-        radio->setObjectName("*FullAccess*" + user);
-        hbox->addWidget(radio);
-        connect(radio, &QRadioButton::pressed, radio, [radio]() {
-            if (radio->isChecked()) {
-                radio->setAutoExclusive(false);
-            } else {
-                radio->setAutoExclusive(true);
-            }
-        });
+        createRadioButton(tr("&Deny"), "*Deny*" + userName);
+        createRadioButton(tr("&Read Only"), "*ReadOnly*" + userName);
+        createRadioButton(tr("&Full Access"), "*FullAccess*" + userName);
 
         hbox->addStretch(1);
         groupBox->setLayout(hbox);
@@ -211,62 +199,63 @@ void MainWindow::refreshShareList()
     ui->treeWidgetShares->clear();
     ui->labelSambaSharesFound->hide();
 
-    run(QStringLiteral("net"), QStringList {"usershare", "info"});
-    if (proc.exitCode() != 0) {
+    if (run("net", {"usershare", "info"}) != 0) {
         QMessageBox::critical(this, tr("Error"), tr("Error listing shares"));
         return;
     }
-    const QString &output = proc.readAllStandardOutput().trimmed();
+
+    const QString output = proc.readAllStandardOutput().trimmed();
     if (output.isEmpty()) {
         ui->labelSambaSharesFound->show();
         return;
     }
-    const QStringList &listShares {output.split("\n\n")};
+
+    const QStringList listShares = output.split("\n\n");
     qDebug() << listShares;
+
     for (const QString &share : listShares) {
-        QStringList list = share.split(QStringLiteral("\n"));
-        if (list.isEmpty()) {
+        QStringList shareDetails = share.split('\n');
+        if (shareDetails.isEmpty()) {
             continue;
         }
-        list.first()
-            .remove(QRegularExpression(QStringLiteral("^\\[")))
-            .remove(QRegularExpression(QStringLiteral("]$")));
-        if (!list.at(1).isEmpty()) {
-            list[1].remove(QRegularExpression(QStringLiteral("^path=")));
-        }
-        if (!list.at(2).isEmpty()) {
-            list[2].remove(QRegularExpression(QStringLiteral("^comment=")));
-        }
-        if (!list.at(3).isEmpty()) {
-            list[3].remove(QRegularExpression(QStringLiteral("^usershare_acl=")));
-            list[3].remove(QRegularExpression(QStringLiteral(",$")));
-        }
-        if (!list.at(4).isEmpty()) {
-            list[4].remove(QRegularExpression(QStringLiteral("^guest_ok=")));
-        }
-        ui->treeWidgetShares->insertTopLevelItem(0, new QTreeWidgetItem(list));
+
+        auto removePattern = [](QString &str, const QString &pattern) {
+            if (!str.isEmpty()) {
+                str.remove(QRegularExpression(pattern));
+            }
+        };
+
+        shareDetails.first().remove(QRegularExpression("^\\[")).remove(QRegularExpression("]$"));
+        removePattern(shareDetails[1], "^path=");
+        removePattern(shareDetails[2], "^comment=");
+        removePattern(shareDetails[3], "^usershare_acl=");
+        shareDetails[3].remove(QRegularExpression(",$"));
+        removePattern(shareDetails[4], "^guest_ok=");
+
+        ui->treeWidgetShares->insertTopLevelItem(0, new QTreeWidgetItem(shareDetails));
     }
-    for (auto i = 0; i < ui->treeWidgetShares->columnCount(); ++i) {
+
+    for (int i = 0; i < ui->treeWidgetShares->columnCount(); ++i) {
         ui->treeWidgetShares->resizeColumnToContents(i);
     }
-    connect(ui->treeWidgetShares, &QTreeWidget::itemDoubleClicked, this, &MainWindow::pushEditShare_clicked,
-            Qt::UniqueConnection);
+
+    connect(ui->treeWidgetShares, &QTreeWidget::itemDoubleClicked, this, &MainWindow::pushEditShare_clicked, Qt::UniqueConnection);
 }
 
 void MainWindow::refreshUserList()
 {
     ui->listWidgetUsers->clear();
     ui->labelUserNotFound->hide();
+
     const QStringList &users = listUsers();
-    if (!users.isEmpty()) {
-        ui->listWidgetUsers->addItems(users);
-    }
     if (users.isEmpty()) {
         ui->labelUserNotFound->show();
+    } else {
+        ui->listWidgetUsers->addItems(users);
     }
 }
 
-/* Convenience function for running an external command that take a considerable amount of time
+/* Convenience function for running an external command that takes a considerable amount of time
  *  -- returns when the process ends, but doesn't freeze the GUI (can update progress bars, etc)
  * For quick commands system() calls are probably more efficient, GUI freezes
  * For non-blocking commands proc.start() */
@@ -283,7 +272,7 @@ int MainWindow::run(const QString &cmd, const QStringList &args)
 
 void MainWindow::checkSambashareGroup()
 {
-    if (QProcess::execute(QStringLiteral("/bin/bash"), {"-c", "groups | grep -q sambashare"}) != 0) {
+    if (run("/bin/bash", {"-c", "groups | grep -q sambashare"}) != 0) {
         QMessageBox::critical(this, tr("Error"),
                               tr("Your user doesn't belong to 'sambashare' group  "
                                  "if you just installed the app you might need to restart the system first."));
@@ -293,58 +282,54 @@ void MainWindow::checkSambashareGroup()
 
 void MainWindow::checksamba()
 {
-    if (QFileInfo::exists(QStringLiteral("/usr/sbin/smbd"))) {
-        if (QProcess::execute(QStringLiteral("pgrep"), {"smbd"}) == 0) {
-            ui->pushStartStopSamba->setText(tr("Sto&p Samba"));
-            ui->textSambaStatus->setText(tr("Samba is running"));
-        } else {
-            ui->pushStartStopSamba->setText(tr("Star&t Samba"));
-            ui->textSambaStatus->setText(tr("Samba is not running"));
-        }
-    } else {
-        QMessageBox::critical(this, tr("Error"), tr("Samba not installed"));
+    const QString sambaPath = "/usr/sbin/smbd";
+    if (!QFileInfo::exists(sambaPath)) {
+        QMessageBox::critical(this, tr("Error"), tr("Samba is not installed"));
         return;
     }
+
+    auto updateUI = [this](bool isRunning, bool enabled) {
+        ui->pushStartStopSamba->setText(isRunning ? tr("Sto&p Samba") : tr("Star&t Samba"));
+        ui->textSambaStatus->setText(isRunning ? tr("Samba is running") : tr("Samba is not running"));
+        ui->textServiceStatus->setText(enabled ? tr("Samba autostart is enabled") : tr("Samba autostart is disabled"));
+        ui->pushEnableDisableSamba->setText(enabled ? tr("&Disable Automatic Samba Startup")
+                                                    : tr("E&nable Automatic Samba Startup"));
+    };
+
+    bool isRunning = (run("pgrep", {"smbd"}) == 0);
+
     bool enabled = false;
-
-    if (QProcess::execute(QStringLiteral("/bin/bash"), {"-c", "pgrep --oldest systemd | grep -qw 1"}) == 0) {
-        if (QProcess::execute(QStringLiteral("/bin/bash"), {"-c", "LANG=C systemctl is-enabled smbd | grep enabled"})
-            == 0) {
+    if (run("grep", {"-q", "systemd", "/proc/1/comm"}) == 0) {
+        if (run("/bin/bash", {"-c", "LANG=C systemctl is-enabled smbd | grep enabled"}) == 0) {
             enabled = true;
         }
     } else {
-        if (QProcess::execute(QStringLiteral("grep"), {"-q", "smbd", "/etc/init.d/.depend.start"}) == 0) {
+        if (run("grep", {"-q", "smbd", "/etc/init.d/.depend.start"}) == 0) {
             enabled = true;
         }
     }
 
-    if (enabled) {
-        ui->textServiceStatus->setText(QStringLiteral("Samba autostart is enabled"));
-        ui->pushEnableDisableSamba->setText(tr("&Disable Automatic Samba Startup"));
-    } else {
-        ui->textServiceStatus->setText(QStringLiteral("Samba autostart is disabled"));
-        ui->pushEnableDisableSamba->setText(tr("E&nable Automatic Samba Startup"));
-    }
+    updateUI(isRunning, enabled);
 }
 
 void MainWindow::disablesamba()
 {
-    run(QStringLiteral("pkexec"), QStringList {"/usr/lib/mx-samba-config/mx-samba-config-lib", "disablesamba"});
+    run("pkexec", {"/usr/lib/mx-samba-config/mx-samba-config-lib", "disablesamba"});
 }
 
 void MainWindow::enablesamba()
 {
-    run(QStringLiteral("pkexec"), QStringList {"/usr/lib/mx-samba-config/mx-samba-config-lib", "enablesamba"});
+    run("pkexec", {"/usr/lib/mx-samba-config/mx-samba-config-lib", "enablesamba"});
 }
 
 void MainWindow::startsamba()
 {
-    run(QStringLiteral("pkexec"), QStringList {"/usr/lib/mx-samba-config/mx-samba-config-lib", "startsamba"});
+    run("pkexec", {"/usr/lib/mx-samba-config/mx-samba-config-lib", "startsamba"});
 }
 
 void MainWindow::stopsamba()
 {
-    run(QStringLiteral("pkexec"), QStringList {"/usr/lib/mx-samba-config/mx-samba-config-lib", "stopsamba"});
+    run("pkexec", {"/usr/lib/mx-samba-config/mx-samba-config-lib", "stopsamba"});
 }
 
 void MainWindow::pushEnableDisableSamba_clicked()
@@ -380,13 +365,13 @@ void MainWindow::pushAbout_clicked()
             + tr("Program for configuring Samba shares and users.")
             + R"(</h3></p><p align="center"><a href="http://mxlinux.org">http://mxlinux.org</a><br /></p><p align="center">)"
             + tr("Copyright (c) MX Linux") + "<br /><br /></p>",
-        QStringLiteral("/usr/share/doc/mx-samba-config/license.html"), tr("%1 License").arg(windowTitle()));
+        "/usr/share/doc/mx-samba-config/license.html", tr("%1 License").arg(windowTitle()));
     show();
 }
 
 void MainWindow::pushHelp_clicked()
 {
-    const QString &url = QStringLiteral("https://mxlinux.org/wiki/help-files/help-mx-samba-config/");
+    const QString &url = "https://mxlinux.org/wiki/help-files/help-mx-samba-config/";
     displayDoc(url, tr("%1 Help").arg(windowTitle()));
 }
 
@@ -397,9 +382,7 @@ void MainWindow::pushRemoveUser_clicked()
     }
     const QString &user = ui->listWidgetUsers->currentItem()->text();
 
-    if (run(QStringLiteral("pkexec"),
-            QStringList {"/usr/lib/mx-samba-config/mx-samba-config-lib", "removesambauser", user})
-        != 0) {
+    if (run("pkexec", {"/usr/lib/mx-samba-config/mx-samba-config-lib", "removesambauser", user}) != 0) {
         QMessageBox::critical(this, tr("Error"), tr("Cannot delete user: ") + user);
     }
     refreshUserList();
@@ -427,23 +410,26 @@ void MainWindow::pushAddUser_clicked()
     connect(&buttonBox, &QDialogButtonBox::rejected, &dialog, &QDialog::reject);
 
     if (dialog.exec() == QDialog::Accepted) {
-        if (username->text().isEmpty()) {
+        const QString userText = username->text();
+        const QString passText = password->text();
+        const QString passText2 = password2->text();
+
+        if (userText.isEmpty()) {
             QMessageBox::critical(this, tr("Error"), tr("Empty username, please enter a name."));
             return;
         }
-        if (QProcess::execute(QStringLiteral("grep"), {"^" + username->text() + ":", "/etc/passwd"}) != 0) {
+        if (run("grep", {"^" + userText + ":", "/etc/passwd"}) != 0) {
             QMessageBox::critical(this, tr("Error"),
                                   tr("Matching linux user not found on system, "
                                      "make sure you enter a valid username."));
             return;
         }
-        if (password->text() != password2->text()) {
+        if (passText != passText2) {
             QMessageBox::critical(this, tr("Error"), tr("Passwords don't match, please enter again."));
             return;
         }
-        QStringList args {"/usr/lib/mx-samba-config/mx-samba-config-lib", "addsambauser", password->text(),
-                          username->text()};
-        if (run(QStringLiteral("pkexec"), args) != 0) {
+        QStringList args {"/usr/lib/mx-samba-config/mx-samba-config-lib", "addsambauser", passText, userText};
+        if (run("pkexec", args) != 0) {
             QMessageBox::critical(this, tr("Error"), tr("Could not add user."));
             return;
         }
@@ -453,19 +439,23 @@ void MainWindow::pushAddUser_clicked()
 
 void MainWindow::pushUserPassword_clicked()
 {
-    if (ui->listWidgetUsers->currentItem() == nullptr) {
+    auto *currentItem = ui->listWidgetUsers->currentItem();
+    if (!currentItem) {
+        QMessageBox::warning(this, tr("Warning"), tr("No user selected."));
         return;
     }
+
+    const QString currentUser = currentItem->text();
     QDialog dialog(this);
     QFormLayout form(&dialog);
-    form.addRow(new QLabel(tr("Change the password for \'%1\'").arg(ui->listWidgetUsers->currentItem()->text())));
+    form.addRow(new QLabel(tr("Change the password for '%1'").arg(currentUser)));
 
     auto *password = new QLineEdit(&dialog);
-    auto *password2 = new QLineEdit(&dialog);
+    auto *passwordConfirm = new QLineEdit(&dialog);
     password->setEchoMode(QLineEdit::Password);
-    password2->setEchoMode(QLineEdit::Password);
+    passwordConfirm->setEchoMode(QLineEdit::Password);
     form.addRow(tr("Password:"), password);
-    form.addRow(tr("Confirm password:"), password2);
+    form.addRow(tr("Confirm password:"), passwordConfirm);
 
     QDialogButtonBox buttonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel, Qt::Horizontal, &dialog);
     form.addRow(&buttonBox);
@@ -474,13 +464,21 @@ void MainWindow::pushUserPassword_clicked()
     connect(&buttonBox, &QDialogButtonBox::rejected, &dialog, &QDialog::reject);
 
     if (dialog.exec() == QDialog::Accepted) {
-        if (password->text() != password2->text()) {
+        const QString passwordText = password->text();
+        const QString passwordConfirmText = passwordConfirm->text();
+
+        if (passwordText.isEmpty() || passwordConfirmText.isEmpty()) {
+            QMessageBox::critical(this, tr("Error"), tr("Password fields cannot be empty."));
+            return;
+        }
+
+        if (passwordText != passwordConfirmText) {
             QMessageBox::critical(this, tr("Error"), tr("Passwords don't match, please enter again."));
             return;
         }
-        const QStringList &args {"/usr/lib/mx-samba-config/mx-samba-config-lib", "changesambapasswd", password->text(),
-                                 ui->listWidgetUsers->currentItem()->text()};
-        if (run(QStringLiteral("pkexec"), args) != 0) {
+
+        const QStringList args {"/usr/lib/mx-samba-config/mx-samba-config-lib", "changesambapasswd", passwordText, currentUser};
+        if (run("pkexec", args) != 0) {
             QMessageBox::critical(this, tr("Error"), tr("Could not change password."));
             return;
         }
@@ -489,26 +487,36 @@ void MainWindow::pushUserPassword_clicked()
 
 void MainWindow::pushRemoveShare_clicked()
 {
-    if (ui->treeWidgetShares->currentItem() == nullptr) {
+    auto *currentItem = ui->treeWidgetShares->currentItem();
+    if (!currentItem) {
+        QMessageBox::warning(this, tr("Warning"), tr("No share selected."));
         return;
     }
-    const QString &share = ui->treeWidgetShares->selectedItems().at(0)->text(0);
+
+    const QString share = currentItem->text(0);
     if (share.isEmpty()) {
+        QMessageBox::warning(this, tr("Warning"), tr("Selected share is empty."));
         return;
     }
-    if (QProcess::execute(QStringLiteral("net"), {"usershare", "delete", share}) != 0) {
+
+    if (run("net", {"usershare", "delete", share}) != 0) {
         QMessageBox::critical(this, tr("Error"), tr("Cannot delete share: ") + share);
+        return;
     }
+
     refreshShareList();
+    QMessageBox::information(this, tr("Success"), tr("Share deleted successfully: ") + share);
 }
 
 void MainWindow::pushEditShare_clicked()
 {
-    if (ui->treeWidgetShares->currentItem() == nullptr) {
+    auto *currentItem = ui->treeWidgetShares->currentItem();
+    if (!currentItem) {
+        QMessageBox::warning(this, tr("Warning"), tr("No share selected."));
         return;
     }
 
-    if (QProcess::execute(QStringLiteral("pgrep"), {"smbd"}) != 0) {
+    if (run("pgrep", {"smbd"}) != 0) {
         QMessageBox::critical(this, tr("Error"),
                               tr("Samba service is not running. Please start Samba before adding or editing shares"));
         return;
@@ -516,55 +524,48 @@ void MainWindow::pushEditShare_clicked()
 
     auto *editshare = new EditShare;
     buildUserList(editshare);
-    editshare->ui->textShareName->setText(ui->treeWidgetShares->selectedItems().at(0)->text(0));
-    editshare->ui->textSharePath->setText(ui->treeWidgetShares->selectedItems().at(0)->text(1));
-    editshare->ui->textComment->setText(ui->treeWidgetShares->selectedItems().at(0)->text(2));
-    editshare->ui->comboGuestOK->setCurrentIndex(
-        ui->treeWidgetShares->selectedItems().at(0)->text(4) == QLatin1String("y") ? 0 : 1);
-    QString permissions = ui->treeWidgetShares->selectedItems().at(0)->text(3);
-    QStringList permission_list;
-    if (!permissions.isEmpty()) {
-        permission_list = permissions.split(QStringLiteral(","));
-    }
 
-    for (const QString &item : qAsConst(permission_list)) {
-        if (item.isEmpty()) {
-            continue;
-        }
+    auto selectedItem = ui->treeWidgetShares->selectedItems().at(0);
+    editshare->ui->textShareName->setText(selectedItem->text(0));
+    editshare->ui->textSharePath->setText(selectedItem->text(1));
+    editshare->ui->textComment->setText(selectedItem->text(2));
+    editshare->ui->comboGuestOK->setCurrentIndex(selectedItem->text(4) == "y" ? 0 : 1);
 
+    QStringList permissionList = selectedItem->text(3).split(',', Qt::SkipEmptyParts);
+
+    for (const QString &item : permissionList) {
         const QStringList parts = item.split(':');
         if (parts.size() != 2) {
-            QMessageBox::critical(this, tr("Error"), tr("Error: trying to process permissions: ") + item);
+            QMessageBox::critical(this, tr("Error"), tr("Error processing permissions: ") + item);
             return;
         }
 
-        QString user = parts.at(0);
-        if (user.contains('\\')) {
-            user = user.section('\\', 1);
-        }
-
+        QString user = parts.at(0).section('\\', -1);
         const QString permission = parts.at(1).toLower();
         QRadioButton *button = nullptr;
-        if (permission == QLatin1String("d")) {
+
+        if (permission == "d") {
             button = editshare->findChild<QRadioButton *>("*Deny*" + user);
-        } else if (permission == QLatin1String("r")) {
+        } else if (permission == "r") {
             button = editshare->findChild<QRadioButton *>("*ReadOnly*" + user);
-        } else if (permission == QLatin1String("f")) {
+        } else if (permission == "f") {
             button = editshare->findChild<QRadioButton *>("*FullAccess*" + user);
         } else {
-            QMessageBox::critical(this, tr("Error"), tr("Error: trying to process permissions: ") + item);
+            QMessageBox::critical(this, tr("Error"), tr("Error processing permissions: ") + item);
             return;
         }
-        if (button != nullptr) {
+
+        if (button) {
             button->setChecked(true);
         }
     }
+
     addEditShares(editshare);
 }
 
 void MainWindow::pushAddShare_clicked()
 {
-    if (QProcess::execute(QStringLiteral("pgrep"), {"smbd"}) != 0) {
+    if (run("pgrep", {"smbd"}) != 0) {
         QMessageBox::critical(this, tr("Error"),
                               tr("Samba service is not running. Please start Samba before adding or editing shares"));
         return;

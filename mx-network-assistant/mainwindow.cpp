@@ -468,9 +468,9 @@ void MainWindow::on_linuxDrvDiagnosePushButton_clicked()
             new QListWidgetItem("---------" + tr("Blocked Drivers") + " --------", linuxDrvList);
         }
         s = inputBlockList.readLine();
-        QRegExp expr("^\\s*blacklist\\s*.*");
-        if (expr.exactMatch(s)) {
-            QString captured = expr.cap(0);
+        QRegularExpression expr("^\\s*blacklist\\s*.*");
+        if (expr.match(s).hasMatch()) {
+            QString captured = expr.match(s).captured(0);
             captured.remove("blacklist");
             driver = captured.trimmed();
             auto *blocklisted = new QListWidgetItem(driver, linuxDrvList);
@@ -488,9 +488,9 @@ void MainWindow::on_linuxDrvDiagnosePushButton_clicked()
             new QListWidgetItem("---------" + tr("Blocked Broadcom Drivers") + "--------", linuxDrvList);
         }
         s = inputBroadcomBlocklist.readLine();
-        QRegExp expr("^\\s*blacklist\\s*.*");
-        if (expr.exactMatch(s)) {
-            QString captured = expr.cap(0);
+        QRegularExpression expr("^\\s*blacklist\\s*.*");
+        if (expr.match(s).hasMatch()) {
+            QString captured = expr.match(s).captured(0);
             captured.remove("blacklist");
             driver = captured.trimmed();
             auto *bloclisted = new QListWidgetItem(driver, linuxDrvList);
@@ -525,12 +525,12 @@ void MainWindow::on_windowsDrvDiagnosePushButton_clicked()
         if ((i + 1) < queryResult.size()) {
             if (!queryResult.at(i + 1).contains(": driver installed")) {
                 const QString &installInfo = queryResult.at(i + 1);
-                int infoPos = installInfo.indexOf(QRegExp(
-                    R"([\d|A|B|C|D|E|F][\d|A|B|C|D|E|F][\d|A|B|C|D|E|F][\d|A|B|C|D|E|F]:[\d|A|B|C|D|E|F][\d|A|B|C|D|E|F][\d|A|B|C|D|E|F][\d|A|B|C|D|E|F])"));
+                int infoPos = installInfo.indexOf(QRegularExpression(
+                    R"([\dA-F][\dA-F][\dA-F][\dA-F]:[\dA-F][\dA-F][\dA-F][\dA-F])"));
                 // device (14E4:4320) present (alternate driver: bcm43xx)
                 if (infoPos != -1) {
                     label.append(tr(" and in use by "));
-                    label.append(installInfo.midRef(infoPos, 9));
+                    label.append(installInfo.mid(infoPos, 9));
                 }
                 if (installInfo.contains(QLatin1String("alternate driver"))) {
                     infoPos = installInfo.lastIndexOf(QLatin1String(": "));
@@ -593,7 +593,7 @@ void MainWindow::on_linuxDrvBlockPushButton_clicked()
             while (!inputBlockList.atEnd()) {
                 QString s = inputBlockList.readLine();
                 QString expr = QStringLiteral("^\\s*(blacklist)\\s*(%1)\\s*").arg(driver);
-                if (!s.contains(QRegExp(expr))) {
+                if (!s.contains(QRegularExpression(expr))) {
                     outputString += s;
                 }
             }

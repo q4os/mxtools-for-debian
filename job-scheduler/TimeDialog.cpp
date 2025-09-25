@@ -219,7 +219,7 @@ void TimeDialog::initButtons(const QString &time)
 
     btn = hourBGroup->buttons();
     if (CronTime::isFill(ctime.hour)) {
-        for (auto *i : qAsConst(btn)) {
+        for (auto *i : std::as_const(btn)) {
             i->setChecked(false);
         }
     } else {
@@ -230,7 +230,7 @@ void TimeDialog::initButtons(const QString &time)
 
     btn = dayBGroup->buttons();
     if (CronTime::isFill(ctime.day)) {
-        for (auto *i : qAsConst(btn)) {
+        for (auto *i : std::as_const(btn)) {
             i->setChecked(false);
         }
     } else {
@@ -241,7 +241,7 @@ void TimeDialog::initButtons(const QString &time)
 
     btn = monthBGroup->buttons();
     if (CronTime::isFill(ctime.month)) {
-        for (auto *i : qAsConst(btn)) {
+        for (auto *i : std::as_const(btn)) {
             i->setChecked(false);
         }
     } else {
@@ -252,7 +252,7 @@ void TimeDialog::initButtons(const QString &time)
 
     btn = weekBGroup->buttons();
     if (CronTime::isFill(ctime.week)) {
-        for (auto *i : qAsConst(btn)) {
+        for (auto *i : std::as_const(btn)) {
             i->setChecked(false);
         }
     } else {
@@ -281,7 +281,7 @@ void TimeDialog::minuteButtonClicked(QAbstractButton * /*unused*/)
     }
 
     btn = simpleBGroup->buttons();
-    for (auto *i : qAsConst(btn)) {
+    for (auto *i : std::as_const(btn)) {
         i->setChecked(false);
     }
 
@@ -307,7 +307,7 @@ void TimeDialog::hourButtonClicked(QAbstractButton * /*unused*/)
     }
 
     btn = simpleBGroup->buttons();
-    for (auto *i : qAsConst(btn)) {
+    for (auto *i : std::as_const(btn)) {
         if (i->isChecked()) {
             i->setChecked(false);
         }
@@ -335,7 +335,7 @@ void TimeDialog::dayButtonClicked(QAbstractButton * /*unused*/)
     }
 
     btn = simpleBGroup->buttons();
-    for (auto *i : qAsConst(btn)) {
+    for (auto *i : std::as_const(btn)) {
         if (i->isChecked()) {
             i->setChecked(false);
         }
@@ -363,7 +363,7 @@ void TimeDialog::monthButtonClicked(QAbstractButton * /*unused*/)
     }
 
     btn = simpleBGroup->buttons();
-    for (auto *i : qAsConst(btn)) {
+    for (auto *i : std::as_const(btn)) {
         if (i->isChecked()) {
             i->setChecked(false);
         }
@@ -395,7 +395,7 @@ void TimeDialog::weekButtonClicked(QAbstractButton * /*unused*/)
     }
 
     btn = simpleBGroup->buttons();
-    for (auto *i : qAsConst(btn)) {
+    for (auto *i : std::as_const(btn)) {
         if (i->isChecked()) {
             i->setChecked(false);
         }

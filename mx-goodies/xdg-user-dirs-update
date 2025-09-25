@@ -33,7 +33,7 @@ if false ; then
 	#special case, check for installer link for idesktop
 	if [ -d "$HOME/.idesktop" ]; then
 		if [ ! -e "$HOME/.idesktop/gazelle.lnk" ]; then
-			cp /usr/local/share/live-files/files/etc/skel/.idesktop/gazelle.lnk "$HOME/.idesktop" 
+			cp /usr/share/live-files/files/etc/skel/.idesktop/gazelle.lnk "$HOME/.idesktop" 
 		fi
 	fi
 fi

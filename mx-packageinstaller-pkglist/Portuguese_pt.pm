@@ -51,7 +51,7 @@ Portuguese(PT)
    <sl>Portugalski (PT) jezikovni meta-paket</sl>
    <sq>Meta-Paketë gjuhësore në portugalishte (PT)</sq>
    <sr>Portuguese(PT) Language Meta-Package</sr>
-   <sv>Portugisiskt(PT) Språk Meta-Paket </sv>
+   <sv>Portugisiskt(PT) Språk Meta-Paket </sv>
    <tr>Portekizca(PT) Dili Üst-Paketi</tr>
    <uk>Portuguese(PT) Language Meta-Package</uk>
    <vi>Portuguese(PT) Language Meta-Package</vi>
@@ -72,7 +72,6 @@ all
 <install_package_names>
 aspell-pt-pt
 hunspell-pt-pt
-manpages-pt
 </install_package_names>
 
 
@@ -84,6 +83,5 @@ manpages-pt
 <uninstall_package_names>
 aspell-pt-pt
 hunspell-pt-pt
-manpages-pt
 </uninstall_package_names>
 </app>

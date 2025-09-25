@@ -1,6 +1,6 @@
 #include "bashcommandparser.h"
 
-BashCommandParser::BashCommandParser(QString command)
+BashCommandParser::BashCommandParser(const QString& command)
 {
 	FuzzyBashStream stream{command};
     auto tokens = stream.tokens();
@@ -11,12 +11,12 @@ BashCommandParser::BashCommandParser(QString command)
     }
 }
 
-bool BashCommandParser::hasOption(QString option)
+bool BashCommandParser::hasOption(const QString& option)
 {
     return m_args.contains(option);
 }
 
-QString BashCommandParser::optionValue(QString option)
+QString BashCommandParser::optionValue(const QString& option)
 {
     if(!hasOption(option)) return {};
     auto pos = option.indexOf(option);

@@ -76,7 +76,7 @@ OtherTab::~OtherTab()
 	delete ui;
 }
 
-void OtherTab::setup(const BashrcSource source)
+void OtherTab::setup(const BashrcSource& source)
 {
 	SCOPE_TRACKER;
 	QStringList bashrcList = findPathAdditions(source.bashrc);
@@ -127,7 +127,7 @@ void OtherTab::setup(const BashrcSource source)
 	updateHistoryLengthWidgets();
 }
 
-BashrcSource OtherTab::exec(const BashrcSource source)
+BashrcSource OtherTab::exec(const BashrcSource& source)
 {
 	SCOPE_TRACKER;
 	BashrcSource result = source;
@@ -161,7 +161,7 @@ BashrcSource OtherTab::exec(const BashrcSource source)
 	return result;
 }
 
-QStringList OtherTab::findPathAdditions(QString source)
+QStringList OtherTab::findPathAdditions(const QString& source)
 {
 	SCOPE_TRACKER;
 	QRegularExpression regex{"(export\\s|)\\s{0,}PATH=\"(((\\$\\{{0,1}PATH\\}{0,1}:|)([\\w\\s\\d]+))|(([\\w\\d\\s]+)(:\\$\\{{0,1}PATH\\}{0,1}|)))\""};
@@ -186,7 +186,7 @@ QStringList OtherTab::findPathAdditions(QString source)
 	return list;
 }
 
-QStringList OtherTab::cleanPathAdditions(QStringList additions)
+QStringList OtherTab::cleanPathAdditions(const QStringList& additions)
 {
 	SCOPE_TRACKER;
 	QRegularExpression pathRegex{"\\$\\{*PATH\\}*"};
@@ -209,7 +209,7 @@ QStringList OtherTab::cleanPathAdditions(QStringList additions)
 	return result;
 }
 
-void OtherTab::removePath(QString& source, QString path)
+void OtherTab::removePath(QString& source, const QString& path)
 {
 	SCOPE_TRACKER;
 	QRegularExpression regex{"(export|)[\\s]+PATH=(\"|)([0-9a-z/:\\$]+)\\2"};
@@ -254,7 +254,7 @@ void OtherTab::updateHistoryLengthWidgets()
 	}
 }
 
-int OtherTab::findHistoryLength(QString source, bool* exists)
+int OtherTab::findHistoryLength(const QString& source, bool* exists)
 {
 	SCOPE_TRACKER;
 	QRegularExpression regex{"(export\\s|)\\s*HISTSIZE=([\\d-]+)"};
@@ -280,14 +280,14 @@ int OtherTab::uiHistoryLengthValue()
 	return ui->spinBox_HistoryLength->value();
 }
 
-PathListItem::PathListItem(QString path, bool inBashrc)
+PathListItem::PathListItem(const QString& path, bool inBashrc)
 {
 	SCOPE_TRACKER;
 	setPath(path);
 	setInBashrc(inBashrc);
 }
 
-void PathListItem::setPath(QString path)
+void PathListItem::setPath(const QString& path)
 {
 	SCOPE_TRACKER;
 	m_path = path;

@@ -1,5 +1,4 @@
-#ifndef BUFFER_H
-#define BUFFER_H
+#pragma once
 
 #include <QList>
 #include <QObject>
@@ -13,15 +12,15 @@ class Buffer : public QObject
 	{
 	  public:
 		State();
-		State(const QString search, int state = 1);
-		State(State& copy);
+		State(const QString& search, int state = 1);
+		State(const State& copy);
 		State(State&& move);
 		virtual ~State();
-		State& operator=(State& copy);
+		State& operator=(const State& copy);
 		State& operator=(State&& move);
-		QString searchString();
-		State& setSearchString(const QString search);
-		int state();
+		QString searchString() const;
+		State& setSearchString(const QString& search);
+		int state() const;
 		State& setState(int state);
 
 	  protected:
@@ -29,16 +28,16 @@ class Buffer : public QObject
 		int m_state;
 	};
 	Buffer();
-	Buffer(const QString source);
-	Buffer(Buffer& copy);
+	Buffer(const QString& source);
+	Buffer(const Buffer& copy);
 	Buffer(Buffer&& move);
 	virtual ~Buffer() {}
-	Buffer& operator=(Buffer& copy);
+	Buffer& operator=(const Buffer& copy);
 	Buffer& operator=(Buffer&& move);
-	Buffer& setSource(const QString source);
-	QString source();
+	Buffer& setSource(const QString& source);
+	QString source() const;
 	Buffer& addState(State* state);
-	Buffer& addStates(QList<State*> states);
+	Buffer& addStates(const QList<State*>& states);
 	Buffer& move(int times);
 	QString buffer();
 
@@ -47,5 +46,3 @@ class Buffer : public QObject
 	QString::iterator m_sourceiter;
 	QVector<State*> m_states;
 };
-
-#endif // BUFFER_H

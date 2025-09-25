@@ -1,3 +1,10 @@
+mx-select-sound (25.4) mx; urgency=medium
+
+  * Update to Qt6
+  * Update translations
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 24 Apr 2025 18:27:56 -0400
+
 mx-select-sound (24.3) mx; urgency=medium
 
   * Update translations 

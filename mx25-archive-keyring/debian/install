@@ -1,0 +1,2 @@
+mx25-archive-keyring/*.asc etc/apt/trusted.gpg.d
+mx25-archive-keyring/*.gpg usr/share/keyrings

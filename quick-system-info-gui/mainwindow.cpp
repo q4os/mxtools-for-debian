@@ -89,14 +89,14 @@ void MainWindow::setup() noexcept
 
     // Log text box shortcuts and context menu
     QAction *forumcopyaction = new QAction(QIcon::fromTheme(QStringLiteral("edit-copy-symbolic")),
-        tr("Copy for forum"), this);
+        tr("&Copy for forum"), this);
     forumcopyaction->setShortcutVisibleInContextMenu(true);
-    forumcopyaction->setShortcut(Qt::CTRL | Qt::Key_C);
+    forumcopyaction->setShortcut(Qt::CTRL | Qt::SHIFT | Qt::Key_C);
     connect(forumcopyaction, &QAction::triggered, this, &MainWindow::forumcopy);
     QAction *plaincopyaction = new QAction(QIcon::fromTheme(QStringLiteral("edit-copy-symbolic")),
         tr("Plain text copy"), this);
     plaincopyaction->setShortcutVisibleInContextMenu(true);
-    plaincopyaction->setShortcut(Qt::ALT | Qt::Key_C);
+    plaincopyaction->setShortcut(Qt::CTRL | Qt::Key_C);
     connect(plaincopyaction, &QAction::triggered, this, &MainWindow::plaincopy);
     QAction *saveasfile = new QAction(QIcon::fromTheme(QStringLiteral("document-save")),
         tr("Save text..."), this);
@@ -346,7 +346,8 @@ void MainWindow::buildInfoList() noexcept
     // Special apt history info
     item = new QListWidgetItem("apt " + tr("history"));
     item->setData(Qt::UserRole, "apthistory.txt");
-    if (QFile::exists("/var/log/dpkg.log")){
+    QFileInfo dpkg_log("/var/log/dpkg.log");
+    if (dpkg_log.exists() && dpkg_log.size() > 0 ){
         ui->listInfo->insertItem(1, item);
     }
     listSelectDefault();

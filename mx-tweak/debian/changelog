@@ -1,21 +1,91 @@
-mx-tweak (25.04.05mx23) mx; urgency=medium
+mx-tweak (25.09.03mx25) mx; urgency=medium
 
-  * fix permissions and compton-launch.sh
+  * only setup display tab on Xfce where its shown
+  * only display compositor on Xfce
 
- -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 09 Jun 2025 18:31:24 -0400
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Tue, 23 Sep 2025 20:12:10 -0400
 
-mx-tweak (25.04.04mx23) mx; urgency=medium
+mx-tweak (25.09.02mx25) mx; urgency=medium
 
-  * filter out attributions from fluxbox style list
-
- -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 28 Apr 2025 19:13:02 -0400
-
-mx-tweak (25.04.03mx23) mx; urgency=medium
-
-  * allow for future custom mx-fluxbox styles 
+  * restart conky after changing cursor size on fluxbox
   * update translations
 
- -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 25 Apr 2025 21:00:19 -0400
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 22 Sep 2025 21:36:07 -0400
+
+mx-tweak (25.09.01mx25) mx; urgency=medium
+
+  * update lightdm reset function path
+  * update translations
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Tue, 09 Sep 2025 20:04:06 -0400
+
+mx-tweak (25.08.03mx25) mx; urgency=medium
+
+  [AK-47]
+  * build system updates
+  * generalize translations
+  [Dolphin Oracle]
+  * update translations
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 30 Aug 2025 21:46:40 -0400
+
+mx-tweak (25.08.02mx25) mx; urgency=medium
+  
+  [AK-47]
+  * interface updates
+  * modularize code
+  * CMake support
+  * optimazations
+  [Dolphin Oracle]
+  * add explicit dark mode switch
+  * translation updates
+  [Adrian]
+  * build system updates
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 29 Aug 2025 19:53:28 -0400
+
+mx-tweak (25.08.01mx25) mx; urgency=medium
+
+  * revise ligthdm reset for trixie
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 11 Aug 2025 17:21:56 -0400
+
+mx-tweak (25.07.01mx25) mx; urgency=medium
+
+  * filter out README files from fluxbox style areas
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Tue, 29 Jul 2025 21:56:09 -0400
+
+mx-tweak (25.04.04mx25) mx; urgency=medium
+
+  * filter out attribution file from fluxbox style choosing 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 28 Apr 2025 19:10:54 -0400
+
+mx-tweak (25.04.03mx25) mx; urgency=medium
+
+  * adjust location of fluxbox styles searches
+  * remember state of legacy checkbox
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 25 Apr 2025 21:17:16 -0400
+
+mx-tweak (25.04.02mx25) mx; urgency=medium
+
+  * add legacy style checkbox to fluxbox theme tab
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 24 Apr 2025 20:50:21 -0400
+
+mx-tweak (25.04.01mx25) mx; urgency=medium
+
+  * fix combo box index change signals
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 06 Apr 2025 17:11:28 -0400
+
+mx-tweak (25.03.01mx25) mx; urgency=medium
+
+  * qt6 build
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 22 Mar 2025 21:00:18 -0400
 
 mx-tweak (25.02.01mx23) mx; urgency=medium
 

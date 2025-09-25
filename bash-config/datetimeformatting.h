@@ -1,5 +1,4 @@
-#ifndef DATETIMEFORMATTING_H
-#define DATETIMEFORMATTING_H
+#pragma once
 
 #include <QList>
 #include <QString>
@@ -52,5 +51,3 @@ static QStringList DateTimeFormatWords = {
 	"%:::z",
 	"%Z",
 };
-
-#endif // DATETIMEFORMATTING_H

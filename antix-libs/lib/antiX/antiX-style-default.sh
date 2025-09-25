@@ -12,7 +12,7 @@ LOADED_STYLE="true"
        SIZE_FMT='%22s: [n]%8s[/]'
         ANY_FMT='%22s: [n]%8s[/]'
 
-    ANTIX_IMAGE="/usr/local/lib/antiX/antiX-logo.png"
+    ANTIX_IMAGE="/usr/lib/antiX/antiX-logo.png"
 
 if [ "$Static_antiX_Libs" ]; then
     YAD_STD_OPTS="--center --on-top --width=680 --fixed"

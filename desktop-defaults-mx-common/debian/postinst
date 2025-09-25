@@ -13,4 +13,8 @@ if [ -e  /etc/polkit-1/localauthority.conf.d/52-force-root-for-admin-auth.conf ]
 	rm /etc/polkit-1/localauthority.conf.d/52-force-root-for-admin-auth.conf
 fi
 
+if [ -e /etc/lightdm/lightdm.conf ]; then
+	sed -i "s,usr/local/bin/early-bg,usr/bin/early-bg," /etc/lightdm/lightdm.conf	
+fi
+
 exit 0

@@ -8,9 +8,10 @@ ExecuteResult runCmd(QString cmd, bool interactive, bool onlyStdout)
 	SCOPE_TRACKER;
 	QEventLoop loop;
 	QProcess proc;
-	if (!onlyStdout)
-		proc.setReadChannelMode(QProcess::MergedChannels);
-	QObject::connect(&proc, QOverload<int>::of(&QProcess::finished), &loop, &QEventLoop::quit);
+	if (!onlyStdout) {
+		proc.setProcessChannelMode(QProcess::MergedChannels);
+	}
+	QObject::connect(&proc, &QProcess::finished, &loop, &QEventLoop::quit);
 	DEBUG << "Execute Statment: command: "
 		  << "/bin/bash";
 	DEBUG << "Execute Statment: args: " << (QStringList() << ((interactive) ? "-ic" : "-c") << cmd);
@@ -24,7 +25,7 @@ ExecuteResult runCmd(QString cmd, bool interactive, bool onlyStdout)
 	return result;
 };
 
-QString randomString(int length, QString possible)
+QString randomString(int length, const QString& possible)
 {
 	QString result;
 	while (length > 0)
@@ -35,7 +36,7 @@ QString randomString(int length, QString possible)
 	return result;
 }
 
-QString bashInteractiveVariable(QString name)
+QString bashInteractiveVariable(const QString& name)
 {
 	QProcess proc;
 	QString uniqueString = randomString(64);

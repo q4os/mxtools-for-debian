@@ -14,7 +14,7 @@
 #                    only the ASCII symbols are supported.
 ### END INIT INFO
 
-live_files_dir="/usr/local/share/live-files/general-files"
+live_files_dir="/usr/share/live-files/general-files"
 def_files="keyboard"
 
 # return true if the files are the same

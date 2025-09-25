@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8"?><interface>
+<template class="FoliateViewPreferencesWindow" parent="AdwPreferencesDialog">
+  <child>
+    <object class="AdwPreferencesPage">
+      <property name="title" translatable="yes">Font</property>
+      <property name="icon-name">font-select-symbolic</property>
+      <child>
+        <object class="AdwPreferencesGroup">
+          <property name="title" translatable="yes">Font Size</property>
+          <child>
+            <object class="AdwSpinRow" id="default-font-size">
+              <property name="title" translatable="yes">Default Font Size</property>
+              <property name="adjustment">
+                <object class="GtkAdjustment">
+                  <property name="lower">1</property>
+                  <property name="upper">72</property>
+                  <property name="step-increment">1</property>
+                  <property name="page-increment">1</property>
+                </object>
+              </property>
+            </object>
+          </child>
+          <child>
+            <object class="AdwSpinRow" id="minimum-font-size">
+              <property name="title" translatable="yes">Minimum Font Size</property>
+              <property name="adjustment">
+                <object class="GtkAdjustment">
+                  <property name="lower">1</property>
+                  <property name="upper">72</property>
+                  <property name="step-increment">1</property>
+                  <property name="page-increment">1</property>
+                </object>
+              </property>
+            </object>
+          </child>
+        </object>
+      </child>
+      <child>
+        <object class="AdwPreferencesGroup">
+          <property name="title" translatable="yes">Font Family</property>
+          <child>
+            <object class="AdwComboRow" id="default-font">
+              <property name="title" translatable="yes">Default Font</property>
+              <property name="model">
+                <object class="GtkStringList">
+                  <items>
+                    <item translatable="yes">Serif</item>
+                    <item translatable="yes">Sans-serif</item>
+                  </items>
+                </object>
+              </property>
+            </object>
+          </child>
+          <child>
+            <object class="AdwActionRow">
+              <property name="title" translatable="yes">Override Publisher Font</property>
+              <property name="activatable-widget">override-font</property>
+              <child>
+                <object class="GtkSwitch" id="override-font">
+                  <property name="valign">center</property>
+                </object>
+              </child>
+            </object>
+          </child>
+        </object>
+      </child>
+      <child>
+        <object class="AdwPreferencesGroup">
+          <child>
+            <object class="AdwActionRow">
+              <property name="title" translatable="yes">Serif Font</property>
+              <property name="activatable-widget">serif-font</property>
+              <child>
+                <object class="GtkFontButton" id="serif-font">
+                  <property name="level">family</property>
+                  <property name="use-font">true</property>
+                  <property name="valign">center</property>
+                </object>
+              </child>
+            </object>
+          </child>
+          <child>
+            <object class="AdwActionRow">
+              <property name="title" translatable="yes">Sans-Serif Font</property>
+              <property name="activatable-widget">sans-serif-font</property>
+              <child>
+                <object class="GtkFontButton" id="sans-serif-font">
+                  <property name="level">family</property>
+                  <property name="use-font">true</property>
+                  <property name="valign">center</property>
+                </object>
+              </child>
+            </object>
+          </child>
+          <child>
+            <object class="AdwActionRow">
+              <property name="title" translatable="yes">Monospace Font</property>
+              <property name="activatable-widget">monospace-font</property>
+              <child>
+                <object class="GtkFontButton" id="monospace-font">
+                  <property name="level">family</property>
+                  <property name="use-font">true</property>
+                  <property name="valign">center</property>
+                </object>
+              </child>
+            </object>
+          </child>
+        </object>
+      </child>
+    </object>
+  </child>
+  <child>
+    <object class="AdwPreferencesPage">
+      <property name="title" translatable="yes">Layout</property>
+      <property name="icon-name">document-page-setup-symbolic</property>
+      <child>
+        <object class="AdwPreferencesGroup">
+          <property name="title" translatable="yes">Paragraph</property>
+          <child>
+            <object class="AdwSpinRow" id="line-height">
+              <property name="title" translatable="yes">Line Height</property>
+              <property name="digits">2</property>
+              <property name="adjustment">
+                <object class="GtkAdjustment">
+                  <property name="lower">1</property>
+                  <property name="upper">3</property>
+                  <property name="step-increment">0.05</property>
+                  <property name="page-increment">0.1</property>
+                </object>
+              </property>
+            </object>
+          </child>
+          <child>
+            <object class="AdwActionRow">
+              <property name="title" translatable="yes">Full Justification</property>
+              <property name="activatable-widget">justify</property>
+              <child>
+                <object class="GtkSwitch" id="justify">
+                  <property name="valign">center</property>
+                </object>
+              </child>
+            </object>
+          </child>
+          <child>
+            <object class="AdwActionRow">
+              <property name="title" translatable="yes">Hyphenation</property>
+              <property name="activatable-widget">hyphenate</property>
+              <child>
+                <object class="GtkSwitch" id="hyphenate">
+                  <property name="valign">center</property>
+                </object>
+              </child>
+            </object>
+          </child>"
+        </object>
+      </child>
+      <child>
+        <object class="AdwPreferencesGroup">
+          <property name="title" translatable="yes">Page</property>
+          <child>
+            <object class="AdwSpinRow" id="gap">
+              <property name="title" translatable="yes">Margins</property>
+              <property name="digits">2</property>
+              <property name="adjustment">
+                <object class="GtkAdjustment">
+                  <property name="lower">0</property>
+                  <property name="upper">0.5</property>
+                  <property name="step-increment">0.01</property>
+                  <property name="page-increment">0.01</property>
+                </object>
+              </property>
+            </object>
+          </child>
+          <child>
+            <object class="AdwSpinRow" id="max-column-count">
+              <property name="title" translatable="yes">Maximum Number of Columns</property>
+              <property name="adjustment">
+                <object class="GtkAdjustment">
+                  <property name="lower">1</property>
+                  <property name="upper">10</property>
+                  <property name="step-increment">1</property>
+                  <property name="page-increment">1</property>
+                </object>
+              </property>
+            </object>
+          </child>
+          <child>
+            <object class="AdwSpinRow" id="max-inline-size">
+              <property name="title" translatable="yes">Maximum Inline Size</property>
+              <property name="subtitle" translatable="yes">Maximum column width (horizontal writing) or height (vertical writing)</property>
+              <property name="adjustment">
+                <object class="GtkAdjustment">
+                  <property name="lower">100</property>
+                  <property name="upper">5000</property>
+                  <property name="step-increment">60</property>
+                  <property name="page-increment">60</property>
+                </object>
+              </property>
+            </object>
+          </child>
+          <child>
+            <object class="AdwSpinRow" id="max-block-size">
+              <property name="title" translatable="yes">Maximum Block Size</property>
+              <property name="subtitle" translatable="yes">Maximum height (horizontal writing) or width (vertical writing)</property>
+              <property name="adjustment">
+                <object class="GtkAdjustment">
+                  <property name="lower">100</property>
+                  <property name="upper">5000</property>
+                  <property name="step-increment">60</property>
+                  <property name="page-increment">60</property>
+                </object>
+              </property>
+            </object>
+          </child>
+        </object>
+      </child>
+    </object>
+  </child>
+  <child>
+    <object class="AdwPreferencesPage">
+      <property name="title" translatable="yes">Color</property>
+      <property name="icon-name">applications-graphics-symbolic</property>
+      <child>
+        <object class="AdwPreferencesGroup">
+          <child>
+            <object class="GtkFlowBox" id="theme-flow-box">
+              <property name="selection-mode">none</property>
+              <property name="homogeneous">True</property>
+              <property name="row-spacing">12</property>
+              <property name="column-spacing">12</property>
+              <style><class name="theme-container"/></style>
+            </object>
+          </child>
+        </object>
+      </child>
+    </object>
+  </child>
+  <child>
+    <object class="AdwPreferencesPage">
+      <property name="title" translatable="yes">Behavior</property>
+      <property name="icon-name">input-mouse-symbolic</property>
+      <child>
+        <object class="AdwPreferencesGroup">
+          <child>
+            <object class="AdwActionRow">
+              <property name="title" translatable="yes">Reduce Animation</property>
+              <property name="activatable-widget">reduce-animation</property>
+              <child>
+                <object class="GtkSwitch" id="reduce-animation">
+                  <property name="valign">center</property>
+                </object>
+              </child>
+            </object>
+          </child>
+        </object>
+      </child>
+    </object>
+  </child>
+</template>
+</interface>

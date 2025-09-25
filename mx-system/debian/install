@@ -12,3 +12,4 @@ Xsession.d/98-at-spi etc/X11/Xsession.d
 os-prober/40grub2 usr/lib/linux-boot-probes/mounted
 xorg.conf.d/* 	usr/share/X11/xorg.conf.d
 sbin/*	usr/sbin
+shim/* usr/lib/shim

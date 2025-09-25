@@ -196,7 +196,7 @@ void MainWindow::displayHelp()
 
 void MainWindow::initCron()
 {
-    for (auto *d : qAsConst(crontabs)) {
+    for (auto *d : std::as_const(crontabs)) {
         delete d;
     }
     crontabs.clear();
@@ -253,7 +253,7 @@ void MainWindow::saveCron()
     bool saved = false;
     bool notSaved = false;
 
-    for (auto *cron : qAsConst(crontabs)) {
+    for (auto *cron : std::as_const(crontabs)) {
         if (cron->changed) {
             SaveDialog dialog(cron->cronOwner, cron->cronText());
             if (dialog.exec() == QDialog::Accepted) {
@@ -321,7 +321,7 @@ void MainWindow::closeEvent(QCloseEvent *event)
 {
 
     bool changed = false;
-    for (const auto &cron : qAsConst(crontabs)) {
+    for (const auto &cron : std::as_const(crontabs)) {
         if (cron->changed) {
             changed = true;
             break;

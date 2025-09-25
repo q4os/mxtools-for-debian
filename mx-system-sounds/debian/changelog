@@ -1,3 +1,9 @@
+mx-system-sounds (25.4mx23) mx; urgency=medium
+
+  * Update to Qt6
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 24 Apr 2025 18:34:34 -0400
+
 mx-system-sounds (25.3.02mx23) mx; urgency=medium
 
   * additional adjustments to sound server check

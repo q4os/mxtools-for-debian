@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="sl">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="sl">
 <context>
     <name>AliasTab</name>
     <message>
@@ -163,17 +161,17 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../prompttab.cpp" line="546"/>
+        <location filename="../prompttab.cpp" line="543"/>
         <source>Foreground Color</source>
         <translation>Barva ospredja</translation>
     </message>
     <message>
-        <location filename="../prompttab.cpp" line="547"/>
+        <location filename="../prompttab.cpp" line="544"/>
         <source>Background Color</source>
         <translation>Barva ozadja</translation>
     </message>
     <message>
-        <location filename="../prompttab.cpp" line="548"/>
+        <location filename="../prompttab.cpp" line="545"/>
         <source>Bold</source>
         <translation>Poudarjeno</translation>
     </message>
@@ -198,7 +196,7 @@
     <message>
         <location filename="../window_fix.ui" line="88"/>
         <source>Apply</source>
-        <translation>Potrdi</translation>
+        <translation>Uveljavi</translation>
     </message>
     <message>
         <location filename="../window_fix.ui" line="99"/>

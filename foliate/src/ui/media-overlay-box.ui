@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+<template class="FoliateMediaOverlayBox" parent="GtkBox">
+  <property name="orientation">vertical</property>
+  <property name="spacing">9</property>
+  <child>
+    <object class="GtkBox">
+      <property name="spacing">6</property>
+      <property name="margin-start">6</property>
+      <child>
+        <object class="GtkImage">
+          <property name="tooltip-text" translatable="yes">Volume</property>
+          <property name="icon-name">audio-volume-high-symbolic</property>
+        </object>
+      </child>
+      <child>
+        <object class="GtkScale" id="volume-scale">
+          <property name="draw-value">False</property>
+          <property name="hexpand">True</property>
+          <property name="adjustment">
+            <object class="GtkAdjustment">
+              <property name="lower">0</property>
+              <property name="upper">1</property>
+              <property name="step-increment">0.05</property>
+              <property name="page-increment">0.25</property>
+              <property name="value">1</property>
+            </object>
+          </property>
+        </object>
+      </child>
+    </object>
+  </child>
+  <child>
+    <object class="GtkSeparator"/>
+  </child>
+  <child>
+    <object class="GtkBox">
+      <property name="spacing">6</property>
+      <property name="margin-start">6</property>
+      <child>
+        <object class="GtkImage">
+          <property name="tooltip-text" translatable="yes">Speed</property>
+          <property name="icon-name">speedometer-symbolic</property>
+        </object>
+      </child>
+      <child>
+        <object class="GtkBox">
+          <property name="spacing">3</property>
+          <style><class name="chips"/></style>
+          <child>
+            <object class="GtkToggleButton">
+              <property name="label" translatable="yes">0.75</property>
+              <property name="action-name">media-overlay.rate</property>
+              <property name="action-target">0.75</property>
+              <style><class name="flat"/></style>
+            </object>
+          </child>
+          <child>
+            <object class="GtkToggleButton">
+              <property name="label" translatable="yes">1</property>
+              <property name="action-name">media-overlay.rate</property>
+              <property name="action-target">1.0</property>
+              <style><class name="flat"/></style>
+            </object>
+          </child>
+          <child>
+            <object class="GtkToggleButton">
+              <property name="label" translatable="yes">1.25</property>
+              <property name="action-name">media-overlay.rate</property>
+              <property name="action-target">1.25</property>
+              <style><class name="flat"/></style>
+            </object>
+          </child>
+          <child>
+            <object class="GtkToggleButton">
+              <property name="label" translatable="yes">1.5</property>
+              <property name="action-name">media-overlay.rate</property>
+              <property name="action-target">1.5</property>
+              <style><class name="flat"/></style>
+            </object>
+          </child>
+          <child>
+            <object class="GtkToggleButton">
+              <property name="label" translatable="yes">2</property>
+              <property name="action-name">media-overlay.rate</property>
+              <property name="action-target">2.0</property>
+              <style><class name="flat"/></style>
+            </object>
+          </child>
+        </object>
+      </child>
+    </object>
+  </child>
+  <child>
+    <object class="GtkSeparator"/>
+  </child>
+  <child>
+    <object class="GtkBox" id="media-buttons">
+      <property name="halign">center</property>
+      <property name="spacing">12</property>
+      <property name="margin-top">6</property>
+      <property name="margin-bottom">6</property>
+      <property name="margin-start">6</property>
+      <property name="margin-end">6</property>
+      <child>
+        <object class="GtkButton">
+          <property name="valign">center</property>
+          <property name="action-name">media-overlay.backward</property>
+          <property name="tooltip-text" translatable="yes">Previous</property>
+          <property name="icon-name">media-seek-backward-symbolic</property>
+          <style><class name="circular"/><class name="flat"/></style>
+        </object>
+      </child>
+      <child>
+        <object class="GtkToggleButton" id="play-button">
+          <property name="action-name">media-overlay.play</property>
+          <property name="tooltip-text" translatable="yes">Play/Pause</property>
+          <property name="icon-name">media-playback-start-symbolic</property>
+          <style><class name="circular"/><class name="large-button"/><class name="suggested-action"/></style>
+        </object>
+      </child>
+      <child>
+        <object class="GtkButton">
+          <property name="valign">center</property>
+          <property name="action-name">media-overlay.forward</property>
+          <property name="tooltip-text" translatable="yes">Next</property>
+          <property name="icon-name">media-seek-forward-symbolic</property>
+          <style><class name="circular"/><class name="flat"/></style>
+        </object>
+      </child>
+      <child>
+        <object class="GtkButton">
+          <property name="valign">center</property>
+          <property name="action-name">media-overlay.stop</property>
+          <property name="tooltip-text" translatable="yes">Stop</property>
+          <property name="icon-name">media-playback-stop-symbolic</property>
+          <style><class name="circular"/><class name="flat"/></style>
+        </object>
+      </child>
+    </object>
+  </child>
+</template>
+</interface>

@@ -25,10 +25,11 @@ Xfce (MX Linux)
 
 <install_package_names>
 catfish
+desktop-defaults-mx-xfce
 desktop-defaults-mx-xfce-desktop
 desktop-defaults-mx-xfce-system
-mx23-artwork
 policykit-1-gnome
+mx25-artwork
 xfce-superkey-mx
 xfce4-appfinder
 xfce4-battery-plugin
@@ -76,7 +77,7 @@ thunar-data
 thunar-gtkhash
 thunar-volman
 thunar-custom-actions-mx
-mx-comfort-themes
+mx-matcha-themes
 
 </install_package_names>
 
@@ -86,6 +87,7 @@ mx-comfort-themes
 
 <uninstall_package_names>
 catfish
+desktop-defaults-mx-xfce
 desktop-defaults-mx-xfce-desktop
 desktop-defaults-mx-xfce-system
 xfce-superkey-mx

@@ -28,7 +28,10 @@
       "Bash(./test_detection.sh:*)",
       "Bash(./benchmark_simple)",
       "Bash(./benchmark_large)",
-      "Bash(./benchmark_conky_validation)"
+      "Bash(./benchmark_conky_validation)",
+      "Read(//usr/share/mx-conky-data/themes/**)",
+      "Read(//home/adrian/Sync/.fonts/**)",
+      "Read(//home/adrian/.fonts/**)"
     ],
     "deny": []
   }

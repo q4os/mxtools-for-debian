@@ -46,7 +46,7 @@ AliasTab::~AliasTab()
 	m_aliasWithCheckboxes.clear();
 }
 
-void AliasTab::setup(const BashrcSource data)
+void AliasTab::setup(const BashrcSource& data)
 {
 	SCOPE_TRACKER;
 	bool doSuggestions = true;
@@ -107,7 +107,7 @@ void AliasTab::setup(const BashrcSource data)
 	}
 }
 
-BashrcSource AliasTab::exec(const BashrcSource data)
+BashrcSource AliasTab::exec(const BashrcSource& data)
 {
 	SCOPE_TRACKER;
 
@@ -170,8 +170,12 @@ BashrcSource AliasTab::exec(const BashrcSource data)
 	allAliases.append(bashrcAliasesAliasStream.get());
 	allAliases.append(programAliasStream.get());
 
-	allAliases.erase(std::remove_if(allAliases.begin(), allAliases.end(), [addedAliases](Alias alias) {
-		return addedAliases.contains(alias);
+	allAliases.erase(std::remove_if(allAliases.begin(), allAliases.end(), [&addedAliases](const Alias& alias) {
+		for (int i = 0; i < addedAliases.size(); ++i) {
+			if (addedAliases[i] == alias)
+				return true;
+		}
+		return false;
 	}),
 		allAliases.end());
 
@@ -182,7 +186,7 @@ BashrcSource AliasTab::exec(const BashrcSource data)
 	return rtn;
 }
 
-AliasTabTableWidgetItem::AliasTabTableWidgetItem(QString text, QVariant info)
+AliasTabTableWidgetItem::AliasTabTableWidgetItem(const QString& text, const QVariant& info)
 {
 	SCOPE_TRACKER;
 	setText(text);
@@ -195,7 +199,7 @@ AliasTabTableWidgetItem::~AliasTabTableWidgetItem()
 	//None
 }
 
-AliasTabTableWidgetItem& AliasTabTableWidgetItem::setInfo(QVariant info)
+AliasTabTableWidgetItem& AliasTabTableWidgetItem::setInfo(const QVariant& info)
 {
 	SCOPE_TRACKER;
 	m_info = info;

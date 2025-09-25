@@ -12,7 +12,7 @@ QString DateFormatPreview::dateFormat() const
     return m_dateFormat;
 }
 
-void DateFormatPreview::setDateFormat(QString dateString)
+void DateFormatPreview::setDateFormat(const QString& dateString)
 {
     m_dateFormat = dateString;
     updateDisplayText();

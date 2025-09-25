@@ -45,8 +45,8 @@ case "$1" in
                                --add                                                 \
                                --package mx-system              \
                                --rename                                              \
-                               --divert /usr/share/applications/display-im6.q16.desktop.dpkg-dist \
-                               /usr/share/applications/display-im6.q16.desktop || :
+                               --divert /usr/share/applications/display-im7.q16.desktop.dpkg-dist \
+                               /usr/share/applications/display-im7.q16.desktop || :
                                
 				   dpkg-divert --quiet                                               \
                                --add                                                 \
@@ -63,6 +63,13 @@ case "$1" in
                    dpkg-divert --quiet --package mx-system --rename \
                       --divert /usr/sbin/dkms.dpkg-dist \
                       --add    /usr/sbin/dkms || :
+#MX descriptor for BOOTX64.CSV                     
+                   dpkg-divert --quiet                                               \
+                               --add                                                 \
+                               --package mx-system              \
+                               --rename                                              \
+                               --divert /usr/lib/shim/BOOTX64.CSV.dpkg-dist \
+                               /usr/lib/shim/BOOTX64.CSV || :
 
                    ;;
                    

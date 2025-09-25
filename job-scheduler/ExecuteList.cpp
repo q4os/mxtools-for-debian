@@ -77,14 +77,14 @@ void ExecuteList::dataChanged()
     QDateTime stopTime = QDateTime::currentDateTime().addDays(maxDate);
 
     executeView->clearSelection();
-    for (auto *e : qAsConst(executes)) {
+    for (auto *e : std::as_const(executes)) {
         delete e;
     }
     executes.clear();
     QList<TCommand *> cmnd;
     QList<QDateTime> date;
-    for (const auto &cron : qAsConst(*crontabs)) {
-        for (const auto &cc : qAsConst(cron->tCommands)) {
+    for (const auto &cron : std::as_const(*crontabs)) {
+        for (const auto &cc : std::as_const(cron->tCommands)) {
             CronTime ct(cc->time);
             if (ct.isValid()) {
                 cmnd << cc;

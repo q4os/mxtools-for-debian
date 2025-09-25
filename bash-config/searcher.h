@@ -1,10 +1,9 @@
-#ifndef SEARCHER_H
-#define SEARCHER_H
+#pragma once
 
 #include <QObject>
+#include <QString>
 
 class QRegularExpression;
-class QRegExp;
 
 class Searcher : public QObject
 {
@@ -26,25 +25,22 @@ class Searcher : public QObject
   public:
 	Searcher();
 	Searcher(const QString* source, const int states = SearchStates::StateNone);
-	Searcher(Searcher& copy);
+	Searcher(const Searcher& copy);
 	Searcher(Searcher&& move);
 	~Searcher();
-	Searcher& operator=(Searcher& copy);
+	Searcher& operator=(const Searcher& copy);
 	Searcher& operator=(Searcher&& move);
-	int search(const QString search, int from = 0);
-	int search(const QRegExp search, int from = 0);
-	int search(const QRegularExpression search, int from = 0);
-	int search(const QChar search, int from = 0);
+	int search(const QString& search, int from = 0);
+	int search(const QRegularExpression& search, int from = 0);
+	int search(const QChar& search, int from = 0);
 	Searcher& setSource(const QString* source);
-	QString source();
+	QString source() const;
 	Searcher& setStates(const int states);
-	SearchStates states();
+	SearchStates states() const;
 
   protected:
 	template <class Type>
-	int templateSearch(Type search, int from = 0);
+	int templateSearch(const Type& search, int from = 0);
 	QString* m_source;
 	SearchStates m_states;
 };
-
-#endif // SEARCHER_H

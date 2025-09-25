@@ -20,8 +20,7 @@
    <string notr="true">Window</string>
   </property>
   <property name="windowIcon">
-   <iconset theme="preferences-system">
-    <normaloff>.</normaloff>.</iconset>
+   <iconset theme="preferences-system"/>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
@@ -35,8 +34,7 @@
         <string>About</string>
        </property>
        <property name="icon">
-        <iconset theme="help-about">
-         <normaloff>.</normaloff>.</iconset>
+        <iconset theme="help-about"/>
        </property>
       </widget>
      </item>
@@ -46,10 +44,22 @@
         <string>Help</string>
        </property>
        <property name="icon">
-        <iconset theme="help">
-         <normaloff>.</normaloff>.</iconset>
+        <iconset theme="help"/>
        </property>
       </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer_2">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
      </item>
      <item>
       <widget class="QLabel" name="label">
@@ -80,6 +90,19 @@
       </widget>
      </item>
      <item>
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
       <widget class="QPushButton" name="pushButton_Apply">
        <property name="toolTip">
         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Applies Changes.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
@@ -88,8 +111,7 @@
         <string>Apply</string>
        </property>
        <property name="icon">
-        <iconset theme="document-save">
-         <normaloff>.</normaloff>.</iconset>
+        <iconset theme="document-save"/>
        </property>
       </widget>
      </item>
@@ -102,8 +124,7 @@
         <string>Close</string>
        </property>
        <property name="icon">
-        <iconset theme="window-close">
-         <normaloff>.</normaloff>.</iconset>
+        <iconset theme="window-close"/>
        </property>
       </widget>
      </item>

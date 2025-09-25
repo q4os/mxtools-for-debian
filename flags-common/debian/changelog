@@ -1,3 +1,9 @@
+flags-common (25.08.05mx25) mx; urgency=medium
+
+  * update for trixie, remove conflicts and conflicting flags
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 06 Aug 2025 22:14:34 -0400
+
 flags-common (23.08.04mx23) mx; urgency=medium
 
   * copy flags into gxkb folder
@@ -6,9 +12,35 @@ flags-common (23.08.04mx23) mx; urgency=medium
 
  -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 06 Aug 2025 21:57:57 -0400
 
+flags-common (25.08.03) mx; urgency=medium
+
+  * correct postinstall cp 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 06 Aug 2025 18:11:46 -0400
+
+flags-common (25.08.02mx25) mx; urgency=medium
+
+  * eliminate conflicting file issues
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 06 Aug 2025 18:07:23 -0400
+
+flags-common (25.08.01mx25) mx; urgency=medium
+
+  * update control file
+  * add Conflicts with gxkb  
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Tue, 05 Aug 2025 17:43:52 -0400
+ 
+
+flags-common (25.02.01mx25) mx; urgency=medium
+
+  * remove conflicting flags for gxkb
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Tue, 04 Feb 2025 21:35:29 -0500
+
 flags-common (23.07.02) mx; urgency=medium
 
-  * more flags
+  * more flags for gxkb
 
  -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 08 Jul 2023 00:52:29 -0400
 

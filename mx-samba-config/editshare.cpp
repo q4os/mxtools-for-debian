@@ -43,12 +43,12 @@ EditShare::~EditShare()
 
 void EditShare::pushChooseDirectory_clicked()
 {
-    QFileDialog dialog;
     QString path = ui->textSharePath->text();
     if (path.isEmpty() || !QFileInfo::exists(path)) {
         path = QDir::homePath();
     }
-    const QString &selected
+
+    QString selected
         = QFileDialog::getExistingDirectory(this, tr("Select directory to share"), path, QFileDialog::ShowDirsOnly);
     if (!selected.isEmpty()) {
         ui->textSharePath->setText(selected);

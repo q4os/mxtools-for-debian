@@ -50,22 +50,6 @@ class MXDateTime : public QDialog, private Ui::MXDateTime
 public:
     explicit MXDateTime(QWidget *parent = nullptr);
 
-private slots:
-    void on_comboTimeArea_currentIndexChanged(int index);
-    void on_comboTimeZone_currentIndexChanged(int index);
-    void on_calendar_selectionChanged();
-    void on_timeEdit_dateTimeChanged(const QDateTime &dateTime);
-    void on_pushHardwareAdjust_clicked();
-    void on_pushSystemToHardware_clicked();
-    void on_pushHardwareToSystem_clicked();
-    void on_pushSyncNow_clicked();
-    void on_tableServers_itemSelectionChanged();
-    void on_pushServerAdd_clicked();
-    void on_pushServerRemove_clicked();
-    void on_pushApply_clicked();
-    void on_pushAbout_clicked();
-    static void on_pushHelp_clicked();
-
 private:
     QTimer updater;
     bool clockLock = false;
@@ -104,7 +88,25 @@ private:
     bool clearSources(const QString &filename);
 
     // Slots
+
+    void timeAreaIndexChanged(int index);
+    void timeZoneIndexChanged(int index);
+    void calendarSelectionChanged();
+    void timeEditDateTimeChanged(const QDateTime &dateTime);
+
+    void hardwareAdjustClicked();
+    void systemToHardwareClicked();
+    void hardwareToSystemClicked();
+
+    void syncNowClicked();
+    void serversItemSelectionChanged();
+    void serverAddClicked();
+    void serverRemoveClicked();
     void serverRowChanged();
+
+    void aboutClicked();
+    static void helpClicked();
+    void applyClicked();
 };
 
 #endif // DATETIME_H

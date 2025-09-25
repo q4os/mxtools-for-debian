@@ -1,3 +1,35 @@
+papirus-mxblue (25.06.02mx25) mx; urgency=medium
+
+  * latest adjustments (asqwerth, melber)
+  * trash icon improvements (dolphin)
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 12 Jun 2025 21:08:05 -0400
+
+papirus-mxblue (25.06.01mx25) mx; urgency=medium
+
+  * icon adjustments, devices
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 01 Jun 2025 13:28:43 -0400
+
+papirus-mxblue (25.05.03mx25) mx; urgency=medium
+
+  * keep folders and computer, get rid of everything else
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 24 May 2025 11:40:03 -0400
+
+papirus-mxblue (25.05.02mx25) mx; urgency=medium
+
+  * add "follow color scheme" to icon themes"
+  * keep some themes for backward compatibility
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 18 May 2025 17:32:03 -0400
+
+papirus-mxblue (25.05.01mx25) mx; urgency=medium
+
+  * adapt to ePapirus deprecation
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 14 May 2025 18:25:09 -0400
+
 papirus-mxblue (24.01.01) mx; urgency=medium
 
   * revised "logout" and "switchuser" icons

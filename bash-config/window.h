@@ -1,5 +1,4 @@
-#ifndef WINDOW_H
-#define WINDOW_H
+#pragma once
 
 #include <QWidget>
 /*
@@ -11,8 +10,8 @@
 class Tab;
 struct BashrcSource;
 
-template <class Type>
-class QVector;
+// template <class Type>
+// class QVector;
 
 template <class Type>
 class QList;
@@ -30,7 +29,7 @@ class Window : public QWidget
 	explicit Window(QWidget* parent = nullptr);
 	~Window();
 	BashrcSource getSource();
-	void setSource(const BashrcSource data);
+	void setSource(const BashrcSource& data);
 	void closeEvent(QCloseEvent* event);
 	void writePositionSettings();
 	void readPositionSettings();
@@ -47,8 +46,8 @@ class Window : public QWidget
 		TabManager(Ui::Window* ui);
 		TabManager& addTabs(QList<Tab*> tabs);
 		TabManager& addTab(Tab* tab);
-		TabManager& setup(const BashrcSource source);
-		BashrcSource exec(const BashrcSource source);
+		TabManager& setup(const BashrcSource& source);
+		BashrcSource exec(const BashrcSource& source);
 
 	  protected:
 		QVector<Tab*> m_tabs;
@@ -59,5 +58,3 @@ class Window : public QWidget
 	Ui::Window* ui;
 	TabManager m_manager;
 };
-
-#endif // WINDOW_H

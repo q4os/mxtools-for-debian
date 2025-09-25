@@ -38,8 +38,7 @@ Depends:
  mx-cleanup,
  papirus-folder-colors,
  quick-system-info-gui,
- system-keyboard-qt,
- mx-system-kde
+ system-keyboard-qt
 Breaks: docs-mx,
  install-meta-mx,
  installer-mx,

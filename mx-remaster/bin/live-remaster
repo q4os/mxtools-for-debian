@@ -26,9 +26,17 @@ OTHER_OPTS="-b 262144"
 DEF_TZ="America/New_York"
 
 # Only needed for the location of the protect files
-source /usr/local/lib/antiX/antiX-get-param.sh
+if [ -e "/usr/local/lib/antiX/antiX-get-param.sh" ]; then
+    source /usr/local/lib/antiX/antiX-get-param.sh
+else 
+	source /usr/lib/antiX/antiX-get-param.sh
+fi 
 
-source /usr/local/lib/antiX/antiX-common.sh  "$@"
+if [ -e "/usr/local/lib/antiX/antiX-common.sh" ]; then
+    source /usr/local/lib/antiX/antiX-common.sh "$@"
+else 
+	source /usr/lib/antiX/antiX-common.sh  "$@"
+fi 
 
 TITLE="antiX Live Remaster"
 BLURB="$(gt "Create a new compressed file system saving all of the changes you have made to the system.")"
@@ -340,7 +348,7 @@ main() {
             esac
         fi
     elif [ $boot_avail -ge $safe_estimate_xz ]; then
-        info_box -c "Must use %s compression due to size constraints" "[b]xz[/b]"
+        info_box -c "$(pfgt "Must use %s compression due to size constraints" "[b]xz[/b]")"
         COMP_TYPE="xz"
     else
         error_box_pf "There is not enough space to do a live-remaster"
@@ -416,7 +424,10 @@ Version_Info_End
     #--- create the tmp/new squashfs file
     MKSQ_OPTS="$MKSQ_OPTS $FROM $tmp_file $OTHER_OPTS -wildcards -ef $exclude_file"
     #MKSQ_OPTS="$FROM $tmp_file"
-    MKSQ_COMMAND="/usr/local/bin/run-mksquashfs $ret_file $MKSQ_OPTS"
+    MKSQ_COMMAND="/usr/bin/run-mksquashfs $ret_file $MKSQ_OPTS"
+    if [ -x "/usr/local/bin/run-mksquashfs" ]; then
+    	MKSQ_COMMAND="/usr/local/bin/run-mksquashfs $ret_file $MKSQ_OPTS"
+    fi
 
     vmsg "mksquashfs $MKSQ_OPTS"
 

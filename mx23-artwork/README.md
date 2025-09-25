@@ -1,1 +1,0 @@
-# mx23-artwork

@@ -1,0 +1,22 @@
+#mx-tweak theme file
+
+Name=MX Matcha Light
+
+#panel_settings
+
+background-color=none
+background-image=none
+background-style=0
+
+#xsettings
+xsettings_gtk_theme=mx-matcha
+xsettings_icon_theme=Papirus-mxblue
+
+#xfwm4
+xfwm4_window_decorations=mx-matcha
+
+#preview screenshot
+screenshot=mx-matcha-light.jpg
+
+
+

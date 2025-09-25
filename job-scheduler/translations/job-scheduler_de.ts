@@ -2,17 +2,17 @@
 <context>
     <name>CronModel</name>
     <message>
-        <location filename="../CronModel.cpp" line="112"/>
+        <location filename="../CronModel.cpp" line="122"/>
         <source>Time</source>
         <translation>Zeit</translation>
     </message>
     <message>
-        <location filename="../CronModel.cpp" line="114"/>
+        <location filename="../CronModel.cpp" line="124"/>
         <source>User</source>
         <translation>Benutzer</translation>
     </message>
     <message>
-        <location filename="../CronModel.cpp" line="116"/>
+        <location filename="../CronModel.cpp" line="126"/>
         <source>Command</source>
         <translation>Befehl</translation>
     </message>
@@ -20,22 +20,22 @@
 <context>
     <name>ExecuteList</name>
     <message>
-        <location filename="../ExecuteList.cpp" line="39"/>
+        <location filename="../ExecuteList.cpp" line="40"/>
         <source>Max Item</source>
         <translation>Max. Eintrag</translation>
     </message>
     <message>
-        <location filename="../ExecuteList.cpp" line="41"/>
+        <location filename="../ExecuteList.cpp" line="42"/>
         <source>Max Date</source>
         <translation>Max. Datum</translation>
     </message>
     <message>
-        <location filename="../ExecuteList.cpp" line="43"/>
+        <location filename="../ExecuteList.cpp" line="44"/>
         <source>Select</source>
         <translation>Auswählen</translation>
     </message>
     <message>
-        <location filename="../ExecuteList.cpp" line="48"/>
+        <location filename="../ExecuteList.cpp" line="49"/>
         <source>&amp;Update</source>
         <translation>&amp;Update</translation>
     </message>
@@ -43,22 +43,22 @@
 <context>
     <name>ExecuteModel</name>
     <message>
-        <location filename="../ExecuteModel.cpp" line="62"/>
+        <location filename="../ExecuteModel.cpp" line="63"/>
         <source>Execute Time</source>
         <translation>Ausführungszeitpunkt</translation>
     </message>
     <message>
-        <location filename="../ExecuteModel.cpp" line="64"/>
+        <location filename="../ExecuteModel.cpp" line="65"/>
         <source>Time</source>
         <translation>Zeit</translation>
     </message>
     <message>
-        <location filename="../ExecuteModel.cpp" line="66"/>
+        <location filename="../ExecuteModel.cpp" line="67"/>
         <source>User</source>
         <translation>Benutzer</translation>
     </message>
     <message>
-        <location filename="../ExecuteModel.cpp" line="68"/>
+        <location filename="../ExecuteModel.cpp" line="69"/>
         <source>Command</source>
         <translation>Befehl</translation>
     </message>
@@ -66,201 +66,201 @@
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../MainWindow.cpp" line="51"/>
+        <location filename="../MainWindow.cpp" line="52"/>
         <source>&amp;Command</source>
         <translation>&amp;Befehl</translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="54"/>
+        <location filename="../MainWindow.cpp" line="55"/>
         <source>&amp;Variables</source>
         <translation>&amp;Variablen</translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="57"/>
+        <location filename="../MainWindow.cpp" line="58"/>
         <source>&amp;Job List</source>
         <translation>&amp;Aufgabenübersicht</translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="99"/>
-        <location filename="../MainWindow.cpp" line="191"/>
-        <location filename="../MainWindow.cpp" line="236"/>
-        <location filename="../MainWindow.cpp" line="256"/>
-        <location filename="../MainWindow.cpp" line="325"/>
+        <location filename="../MainWindow.cpp" line="101"/>
+        <location filename="../MainWindow.cpp" line="194"/>
+        <location filename="../MainWindow.cpp" line="242"/>
+        <location filename="../MainWindow.cpp" line="262"/>
+        <location filename="../MainWindow.cpp" line="331"/>
         <source>Job Scheduler</source>
         <translation>Aufgabenplaner</translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="124"/>
+        <location filename="../MainWindow.cpp" line="126"/>
         <source>&amp;File</source>
         <translation>&amp;Datei</translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="125"/>
+        <location filename="../MainWindow.cpp" line="127"/>
         <source>File</source>
         <translation>Datei</translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="128"/>
+        <location filename="../MainWindow.cpp" line="130"/>
         <source>&amp;New Item</source>
         <translation>&amp;Neuer Eintrag</translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="129"/>
+        <location filename="../MainWindow.cpp" line="131"/>
         <source>Ctrl+N</source>
         <translation>Strg+N</translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="132"/>
+        <location filename="../MainWindow.cpp" line="134"/>
         <source>&amp;Reload</source>
         <translation>&amp;Neu laden</translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="133"/>
+        <location filename="../MainWindow.cpp" line="135"/>
         <source>Ctrl+R</source>
         <translation>Strg+R</translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="135"/>
+        <location filename="../MainWindow.cpp" line="137"/>
         <source>&amp;Save</source>
         <translation>&amp;Speichern</translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="136"/>
+        <location filename="../MainWindow.cpp" line="138"/>
         <source>Ctrl+S</source>
         <translation>Strg+S </translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="139"/>
+        <location filename="../MainWindow.cpp" line="141"/>
         <source>Start as &amp;Root</source>
         <translation>Als &amp;Administrator ausführen</translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="141"/>
+        <location filename="../MainWindow.cpp" line="143"/>
         <source>Start as &amp;Regular user</source>
         <translation>Als normaler &amp;Benutzer ausführen</translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="142"/>
+        <location filename="../MainWindow.cpp" line="145"/>
         <source>Ctrl+U</source>
         <translation>Strg+U </translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="145"/>
+        <location filename="../MainWindow.cpp" line="148"/>
         <source>E&amp;xit</source>
         <translation>&amp;Verlassen</translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="146"/>
+        <location filename="../MainWindow.cpp" line="149"/>
         <source>Ctrl+Q</source>
         <translation>Strg+Q</translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="153"/>
+        <location filename="../MainWindow.cpp" line="156"/>
         <source>&amp;Edit</source>
         <translation>&amp;Bearbeiten</translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="154"/>
+        <location filename="../MainWindow.cpp" line="157"/>
         <source>Edit</source>
         <translation>Bearbeiten</translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="156"/>
+        <location filename="../MainWindow.cpp" line="159"/>
         <source>Cu&amp;t</source>
         <translation>&amp;Ausschneiden</translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="157"/>
+        <location filename="../MainWindow.cpp" line="160"/>
         <source>Ctrl+X</source>
         <translation>Strg+X</translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="159"/>
+        <location filename="../MainWindow.cpp" line="162"/>
         <source>&amp;Copy</source>
         <translation>&amp;Kopieren</translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="160"/>
+        <location filename="../MainWindow.cpp" line="163"/>
         <source>Ctrl+C</source>
         <translation>Strg+C</translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="162"/>
+        <location filename="../MainWindow.cpp" line="165"/>
         <source>&amp;Paste</source>
         <translation>&amp;Einfügen</translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="163"/>
+        <location filename="../MainWindow.cpp" line="166"/>
         <source>Ctrl+V</source>
         <translation>Strg+V</translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="166"/>
+        <location filename="../MainWindow.cpp" line="169"/>
         <source>&amp;Delete</source>
         <translation>&amp;Löschen</translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="167"/>
+        <location filename="../MainWindow.cpp" line="170"/>
         <source>Del</source>
         <translation>Entf</translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="178"/>
-        <location filename="../MainWindow.cpp" line="180"/>
+        <location filename="../MainWindow.cpp" line="181"/>
+        <location filename="../MainWindow.cpp" line="183"/>
         <source>&amp;Help</source>
         <translation>&amp;Hilfe</translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="179"/>
+        <location filename="../MainWindow.cpp" line="182"/>
         <source>&amp;About</source>
         <translation>&amp;Über</translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="237"/>
+        <location filename="../MainWindow.cpp" line="243"/>
         <source>Not saved since last change.
 Are you OK to reload?</source>
         <translation>Nicht gespeichert seit der letzten Änderung.
 Sind Sie bereit, neu zu laden?</translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="325"/>
+        <location filename="../MainWindow.cpp" line="331"/>
         <source>Not saved since last change.
 Are you OK to exit?</source>
         <translation>Nicht gespeichert seit der letzten Änderung.
 Sind Sie bereit zum Verlassen?</translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="338"/>
+        <location filename="../MainWindow.cpp" line="344"/>
         <source>About Job Scheduler</source>
         <translation>Über Job Scheduler</translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="339"/>
+        <location filename="../MainWindow.cpp" line="345"/>
         <source>&lt;b&gt;Job Scheduler&lt;/b&gt;</source>
         <translation>&lt;b&gt;Job Scheduler&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="339"/>
+        <location filename="../MainWindow.cpp" line="345"/>
         <source>Version: %1</source>
         <translation>Version: %1</translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="340"/>
+        <location filename="../MainWindow.cpp" line="346"/>
         <source>Job Scheduler is based upon qroneko 0.5.4, released in 2005 by korewaisai (&lt;a href=&quot;mailto:korewaisai@yahoo.co.jp&quot;&gt;korewaisai@yahoo.co.jp&lt;/a&gt;)</source>
         <translation>Der Job Scheduler basiert auf qroneko 0.5.4, veröffentlicht 2005 von korewaisai (&lt;a href=&quot;mailto:korewaisai@yahoo.co.jp&quot;&gt;korewaisai@yahoo.co.jp&lt;/a&gt;)</translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="343"/>
+        <location filename="../MainWindow.cpp" line="349"/>
         <source>Original project page: %1</source>
         <translation>Original-Projektseite: %1</translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="347"/>
+        <location filename="../MainWindow.cpp" line="353"/>
         <source>MX project page: %1</source>
         <translation>MX Projektseite: %1</translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="352"/>
+        <location filename="../MainWindow.cpp" line="358"/>
         <source>%1 License</source>
         <translation>%1 Lizenz</translation>
     </message>
@@ -292,22 +292,22 @@ Sind Sie bereit zum Verlassen?</translation>
 <context>
     <name>SaveDialog</name>
     <message>
-        <location filename="../SaveDialog.cpp" line="19"/>
+        <location filename="../SaveDialog.cpp" line="20"/>
         <source>Save New Schedule</source>
         <translation>Neuen Plan Speichern</translation>
     </message>
     <message>
-        <location filename="../SaveDialog.cpp" line="32"/>
+        <location filename="../SaveDialog.cpp" line="33"/>
         <source>User:</source>
         <translation>Benutzer</translation>
     </message>
     <message>
-        <location filename="../SaveDialog.cpp" line="40"/>
+        <location filename="../SaveDialog.cpp" line="41"/>
         <source>&amp;OK</source>
         <translation>&amp;OK</translation>
     </message>
     <message>
-        <location filename="../SaveDialog.cpp" line="41"/>
+        <location filename="../SaveDialog.cpp" line="42"/>
         <source>&amp;Cancel</source>
         <translation>&amp;Abbrechen</translation>
     </message>
@@ -350,12 +350,12 @@ Sind Sie bereit zum Verlassen?</translation>
         <translation>Fehler des Zeitformates</translation>
     </message>
     <message>
-        <location filename="../TCommandEdit.cpp" line="146"/>
+        <location filename="../TCommandEdit.cpp" line="147"/>
         <source>Today</source>
         <translation>Heute</translation>
     </message>
     <message>
-        <location filename="../TCommandEdit.cpp" line="148"/>
+        <location filename="../TCommandEdit.cpp" line="149"/>
         <source>Tomorrow</source>
         <translation>Morgen</translation>
     </message>

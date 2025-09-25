@@ -29,7 +29,6 @@
 #include <QIcon>
 #include <QLibraryInfo>
 #include <QLocale>
-#include <QSettings>
 #include <QTranslator>
 
 #include "cmd.h"
@@ -37,7 +36,7 @@
 #include <unistd.h>
 
 #ifndef VERSION
-    #define VERSION "?.?.?.?"
+#define VERSION "?.?.?.?"
 #endif
 
 // Return the config file used for the newest conky process
@@ -83,6 +82,7 @@ int main(int argc, char *argv[])
 
     QApplication app(argc, argv);
 
+    QApplication::setApplicationName("mx-conky");
     QApplication::setWindowIcon(QIcon::fromTheme(QApplication::applicationName()));
     QApplication::setOrganizationName("MX-Linux");
     QApplication::setApplicationVersion(VERSION);

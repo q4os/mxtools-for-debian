@@ -1,3 +1,9 @@
+mx-goodies (24.01.03mx25) mx; urgency=medium
+
+  * /usr/local cleanup
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 04 Jun 2025 22:02:54 -0400
+
 mx-goodies (24.01.02) mx; urgency=medium
 
   * hide system-locales-mx from menu

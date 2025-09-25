@@ -1,0 +1,1274 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the com.github.johnfactotum.Foliate package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Yosef Or Boczko <yoseforb@gmail.com>, 2024.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: com.github.johnfactotum.Foliate\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-11-28 11:04+0800\n"
+"PO-Revision-Date: 2024-01-11 17:43+0200\n"
+"Last-Translator: Yosef Or Boczko <yoseforb@gmail.com>\n"
+"Language-Team: Hebrew\n"
+"Language: he\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n==1 ? 0 : n==2 ? 1 : n>10 && n%10==0 ? "
+"2 : 3)\n"
+"X-Generator: Gtranslator 45.3\n"
+
+#: src/annotations.js:137 src/annotations.js:172
+msgid "Bookmark deleted"
+msgstr "נמחקה סימנייה"
+
+#: src/annotations.js:138 src/annotations.js:173 src/book-viewer.js:805
+#: src/library.js:865
+msgid "Undo"
+msgstr "ביטול"
+
+#: src/annotations.js:437
+msgid "Underline"
+msgstr "קו תחתי"
+
+#: src/annotations.js:438
+msgid "Squiggly"
+msgstr "קו תחתי משורבט"
+
+#: src/annotations.js:439
+msgid "Strikethrough"
+msgstr "קו חוצה"
+
+#: src/annotations.js:440
+msgid "Yellow"
+msgstr "צהוב"
+
+#: src/annotations.js:441
+msgid "Orange"
+msgstr "כתום"
+
+#: src/annotations.js:442
+msgid "Red"
+msgstr "אדום"
+
+#: src/annotations.js:443
+msgid "Magenta"
+msgstr "מגנטה"
+
+#: src/annotations.js:444
+msgid "Aqua"
+msgstr "מים"
+
+#: src/annotations.js:445
+msgid "Lime"
+msgstr "ליים"
+
+#: src/annotations.js:446
+msgid "Custom Color…"
+msgstr "בחירת צבע משלך…"
+
+#: src/annotations.js:498
+msgid "Custom"
+msgstr "התאמה אישית"
+
+#: src/annotations.js:592
+msgid "JSON Files"
+msgstr "קובצי JSON"
+
+#: src/annotations.js:597 src/app.js:149
+msgid "All Files"
+msgstr "כל הקבצים"
+
+#: src/annotations.js:606 src/annotations.js:634 src/ui/book-viewer.ui:402
+msgid "No Annotations"
+msgstr "אין הסברים"
+
+#: src/annotations.js:607
+msgid "The imported file has no annotations"
+msgstr "אין הסברים בקובץ המיובא"
+
+#: src/annotations.js:625
+msgid "Cannot Import Annotations"
+msgstr "לא ניתן לייבא הסברים"
+
+#: src/annotations.js:626 src/book-viewer.js:716 src/library.js:644
+msgid "An error occurred"
+msgstr "אירעה שגיאה"
+
+#: src/annotations.js:635
+msgid "You don’t have any annotations for this book"
+msgstr "אין הסברים כלל בספר זה"
+
+#: src/annotations.js:648
+#, javascript-format
+msgid "Annotations for “%s”"
+msgstr "הסברים עבור „%s”"
+
+#: src/annotations.js:649
+#, javascript-format
+msgid "%d Annotation"
+msgid_plural "%d Annotations"
+msgstr[0] "הסבר אחד"
+msgstr[1] "שני הסברים"
+msgstr[2] "%d הסברים"
+msgstr[3] "%d הסברים"
+
+#: src/app.js:95 src/book-viewer.js:30
+msgid "Close"
+msgstr "סגירה"
+
+#: src/app.js:112 src/library.js:50 src/ui/export-dialog.ui:11
+#: src/ui/import-dialog.ui:15
+msgid "Cancel"
+msgstr "ביטול"
+
+#: src/app.js:136
+msgid "E-Book Files"
+msgstr "קובצי ספרים אלקטרוניים"
+
+#: src/app.js:399 data/com.github.johnfactotum.Foliate.desktop.in:6
+#: data/com.github.johnfactotum.Foliate.metainfo.xml.in:7
+msgid "Read e-books in style"
+msgstr "לקרוא ספרים אלקטרוניים בסטייל"
+
+#. Translators: put your names here, one name per line
+#. they will be shown in the "About" dialog
+#: src/app.js:405
+msgid "translator-credits"
+msgstr ""
+"ירון שהרבני <sh.yaron@gmail.com>\n"
+"יוסף אור בוצ׳קו <yoseforb@gmail.com>"
+
+#: src/app.js:414
+msgid "Source Code"
+msgstr "קוד מקור"
+
+#: src/book-info.js:133 src/library.js:75
+msgid "Publisher"
+msgstr "הוצאה לאור"
+
+#. Translators: this is the heading for the publication date
+#: src/book-info.js:135 src/library.js:76
+msgid "Published"
+msgstr "פורסם"
+
+#. Translators: this is the heading for the modified date
+#: src/book-info.js:137
+msgid "Updated"
+msgstr "עודכן"
+
+#: src/book-info.js:138 src/library.js:77
+msgid "Language"
+msgstr "שפה"
+
+#: src/book-info.js:139
+msgid "Translated by"
+msgstr "תורגם על ידי"
+
+#: src/book-info.js:140
+msgid "Edited by"
+msgstr "נערך על ידי"
+
+#: src/book-info.js:141
+msgid "Narrated by"
+msgstr "קריינות על ידי"
+
+#: src/book-info.js:142
+msgid "Illustrated by"
+msgstr "איור על ידי"
+
+#: src/book-info.js:143
+msgid "Produced by"
+msgstr "הופק על ידי"
+
+#: src/book-info.js:144
+msgid "Artwork by"
+msgstr "אומנות על ידי"
+
+#: src/book-info.js:145
+msgid "Color by"
+msgstr "צבע על ידי"
+
+#: src/book-info.js:146
+msgid "Contributors"
+msgstr "תורמים"
+
+#: src/book-info.js:147 src/library.js:78 src/ui/navbar.ui:283
+msgid "Identifier"
+msgstr "מזהה"
+
+#: src/book-info.js:179 src/ui/book-item.ui:15 src/ui/book-row.ui:15
+#: src/ui/book-viewer.ui:368
+msgid "About This Book"
+msgstr "על הספר הזה"
+
+#: src/book-viewer.js:27
+#, javascript-format
+msgid "Loc. %s of %s"
+msgstr "מיקום %s מתוך %s"
+
+#: src/book-viewer.js:28
+#, javascript-format
+msgid "Page %s of %s"
+msgstr "עמוד %s מתוך %s"
+
+#: src/book-viewer.js:29
+#, javascript-format
+msgid "Page %s"
+msgstr "עמוד %s"
+
+#: src/book-viewer.js:32
+msgid "Footnote"
+msgstr "הערת שוליים"
+
+#: src/book-viewer.js:33
+msgid "Go to Footnote"
+msgstr "מעבר להערת שוליים"
+
+#: src/book-viewer.js:34
+msgid "Endnote"
+msgstr "הערם סיום"
+
+#: src/book-viewer.js:35
+msgid "Go to Endnote"
+msgstr "מעבר להערת סיום"
+
+#: src/book-viewer.js:36
+msgid "Note"
+msgstr "הערה"
+
+#: src/book-viewer.js:37
+msgid "Go to Note"
+msgstr "מעבר להערה"
+
+#: src/book-viewer.js:38
+msgid "Definition"
+msgstr "הגדרה"
+
+#: src/book-viewer.js:39
+msgid "Go to Definition"
+msgstr "מעבר להגדרה"
+
+#: src/book-viewer.js:40
+msgid "Bibliography"
+msgstr "ביבליוגרפיה"
+
+#: src/book-viewer.js:41
+msgid "Go to Bibliography"
+msgstr "מעבר לביבליוגרפיה"
+
+#: src/book-viewer.js:622
+msgid "Remove bookmark"
+msgstr "הסרת סימנייה"
+
+#: src/book-viewer.js:623
+msgid "Add bookmark"
+msgstr "הוספת סימניה"
+
+#: src/book-viewer.js:714
+msgid "File not found"
+msgstr "הקובץ לא נמצא"
+
+#: src/book-viewer.js:715
+msgid "File type not supported"
+msgstr "סוג הקובץ אינו נתמך"
+
+#: src/book-viewer.js:804
+msgid "Annotation deleted"
+msgstr "נמחק הסבר"
+
+#: src/book-viewer.js:877
+#, javascript-format
+msgid ""
+"‘%s’\n"
+"—%s, “%s”, p. %s"
+msgstr ""
+
+#: src/book-viewer.js:879
+#, javascript-format
+msgid ""
+"‘%s’\n"
+"—“%s”, p. %s"
+msgstr ""
+
+#: src/book-viewer.js:880
+#, javascript-format
+msgid "‘%s’ (p. %s)"
+msgstr ""
+
+#: src/book-viewer.js:883
+#, javascript-format
+msgid ""
+"‘%s’\n"
+"—%s, “%s”"
+msgstr ""
+
+#: src/book-viewer.js:885
+#, javascript-format
+msgid ""
+"‘%s’\n"
+"—“%s”"
+msgstr ""
+
+#: src/book-viewer.js:886
+#, javascript-format
+msgid "‘%s’"
+msgstr ""
+
+#: src/book-viewer.js:904
+#, javascript-format
+msgid "Image from “%s”"
+msgstr "תמונה מאת „%s”"
+
+#: src/book-viewer.js:904
+msgid "Image"
+msgstr "תמונה"
+
+#: src/format.js:127
+#, javascript-format
+msgid "of %d"
+msgstr "מתוך %d"
+
+#: src/library.js:47
+msgid "Loading"
+msgstr "בטעינה"
+
+#: src/library.js:48
+msgid "Failed to Load"
+msgstr "ארע כשל בטעינה"
+
+#: src/library.js:49 src/ui/book-viewer.ui:15
+msgid "Reload"
+msgstr "רענון"
+
+#: src/library.js:51
+msgid "See All"
+msgstr "לראות הכל"
+
+#: src/library.js:52 src/ui/library.ui:124 src/ui/library.ui:182
+msgid "Search"
+msgstr "חיפוש"
+
+#: src/library.js:53
+msgid "Filter"
+msgstr "מסנן"
+
+#: src/library.js:55 src/library.js:57
+msgid "Download"
+msgstr "הורדה"
+
+#: src/library.js:56
+msgid "Buy"
+msgstr "קנייה"
+
+#: src/library.js:58
+msgid "Preview"
+msgstr "תצוגה מקדימה"
+
+#: src/library.js:59
+msgid "Sample"
+msgstr "דוגמה"
+
+#: src/library.js:60
+msgid "Borrow"
+msgstr "שאילה"
+
+#: src/library.js:61
+msgid "Subscribe"
+msgstr "הרשמה"
+
+#: src/library.js:63
+msgid "Free"
+msgstr "חינם"
+
+#: src/library.js:65
+msgid "First"
+msgstr "ראשון"
+
+#: src/library.js:66 src/ui/navbar.ui:8 src/ui/tts-box.ui:115
+msgid "Previous"
+msgstr "הקודם"
+
+#: src/library.js:67 src/ui/navbar.ui:124 src/ui/tts-box.ui:132
+msgid "Next"
+msgstr "הבא"
+
+#: src/library.js:68
+msgid "Last"
+msgstr "אחרון"
+
+#: src/library.js:70
+msgid "Search Terms"
+msgstr "חיפוש מונחים"
+
+#: src/library.js:72
+msgid "Title"
+msgstr "כותרת"
+
+#: src/library.js:73
+msgid "Author"
+msgstr "מחבר"
+
+#: src/library.js:74
+msgid "Contributor"
+msgstr "תורם"
+
+#: src/library.js:438
+msgid "Remove Book?"
+msgstr "להסיר את הספר?"
+
+#: src/library.js:439
+msgid "Reading progress, annotations, and bookmarks will be permanently lost"
+msgstr "שלב הקריאה, הסברים וסימניות יאבדו לצמיתות"
+
+#: src/library.js:441
+msgid "_Cancel"
+msgstr "_ביטול"
+
+#: src/library.js:442
+msgid "_Remove"
+msgstr "_הסרה"
+
+#: src/library.js:472
+#, fuzzy
+msgid "Failed to Open"
+msgstr "ארע כשל בטעינה"
+
+#: src/library.js:473
+msgid "Could not open the file with the selected application"
+msgstr ""
+
+#: src/library.js:644
+msgid "Download Failed"
+msgstr "אירע כשל בהורדה"
+
+#: src/library.js:698
+msgid "Rename…"
+msgstr "שינוי שם…"
+
+#: src/library.js:699 src/ui/book-item.ui:25 src/ui/book-row.ui:25
+msgid "Remove"
+msgstr "הסרה"
+
+#: src/library.js:719 src/library.js:720
+msgid "Rename"
+msgstr "שינוי שם"
+
+#: src/library.js:725
+msgid "Name"
+msgstr "שם"
+
+#: src/library.js:740
+msgid "All Books"
+msgstr "כל הספרים"
+
+#: src/library.js:746
+msgid "Add Catalog…"
+msgstr "הוספת קטלוג…"
+
+#: src/library.js:813 src/ui/book-viewer.ui:130 src/ui/book-viewer.ui:239
+#: src/ui/library.ui:93
+msgid "Library"
+msgstr "ספרייה"
+
+#: src/library.js:821
+msgid "Catalogs"
+msgstr "קטלוגים"
+
+#: src/library.js:864
+msgid "Catalog removed"
+msgstr "הסרת קטלוג"
+
+#: src/library.js:951 src/library.js:956
+msgid "Add Catalog"
+msgstr "הוספת קטלוג"
+
+#: src/library.js:952
+msgid "Add"
+msgstr "הוספה"
+
+#: src/library.js:957
+msgid ""
+"You can browse and download books from OPDS catalogs. <a href=\"https://opds."
+"io\">Learn More…</a>"
+msgstr ""
+"באפשרותך לסייר ולהוריד ספרים מקטלוגי OPDS. ‏<a href=\"https://opds.io\">ללמוד "
+"עוד…</a>"
+
+#: src/library.js:961
+msgid "URL"
+msgstr "כתובת"
+
+#. Translators: Do NOT translate! The is the application name!
+#: src/main.js:28 data/com.github.johnfactotum.Foliate.desktop.in:4
+msgid "Foliate"
+msgstr "Foliate"
+
+#: src/selection-tools.js:33
+msgid "Dictionary"
+msgstr "מילון"
+
+#: src/selection-tools.js:37
+msgid ""
+"From <a id=\"link\">Wiktionary</a>, released under the <a href=\"https://"
+"creativecommons.org/licenses/by-sa/4.0/\">CC BY-SA License</a>."
+msgstr ""
+"מ<a id=\"link\">ויקימילון</a>, משוחרר תחת <a href=\"https://creativecommons."
+"org/licenses/by-sa/4.0/\">הרישיון CC BY-SA‏, Creative Commons ייחוס-שיתוף זהה "
+"4.0</a>."
+
+#: src/selection-tools.js:38 src/selection-tools.js:51
+msgid "No Definitions Found"
+msgstr "לא נמצאו הגדרות"
+
+#: src/selection-tools.js:39
+msgid "Search on Wiktionary"
+msgstr "חיפוש בויקימילון"
+
+#: src/selection-tools.js:46
+msgid "Wikipedia"
+msgstr "ויקיפדיה"
+
+#: src/selection-tools.js:50
+msgid ""
+"From <a id=\"link\">Wikipedia</a>, released under the <a href=\"https://en."
+"wikipedia.org/wiki/Wikipedia:Text_of_the_Creative_Commons_Attribution-"
+"ShareAlike_4.0_International_License\">CC BY-SA License</a>."
+msgstr ""
+"מ<a id=\"link\">ויקיפדיה</a>, משוחרר תחת <a href=\"https://en.wikipedia.org/"
+"wiki/Wikipedia:Text_of_the_Creative_Commons_Attribution-"
+"ShareAlike_4.0_International_License\">הרישיון CC BY-SA‏, Creative Commons "
+"ייחוס-שיתוף זהה 4.0</a>."
+
+#: src/selection-tools.js:52
+msgid "Search on Wikipedia"
+msgstr "חיפוש בויקיפדיה"
+
+#: src/selection-tools.js:59
+msgid "Translate"
+msgstr "תרגום"
+
+#: src/selection-tools.js:65
+msgid "Translation by Google Translate"
+msgstr "‏מתורגם על ידי תרגום Google"
+
+#: src/selection-tools.js:66
+msgid "Cannot retrieve translation"
+msgstr "לא ניתן לקבל תרגום"
+
+#: src/selection-tools.js:67
+#, fuzzy
+msgid "Search…"
+msgstr "חיפוש"
+
+#: src/themes.js:8
+msgid "Default"
+msgstr "ברירת מחדל"
+
+#: src/themes.js:13
+msgid "Gray"
+msgstr "אפור"
+
+#: src/themes.js:18
+msgid "Sepia"
+msgstr "חום מיושן"
+
+#: src/themes.js:23
+msgid "Grass"
+msgstr "דשא"
+
+#: src/themes.js:28
+msgid "Cherry"
+msgstr "דובדבן"
+
+#: src/themes.js:33
+msgid "Sky"
+msgstr "שמים"
+
+#: src/themes.js:38
+msgid "Solarized"
+msgstr "Solarized"
+
+#: src/themes.js:43
+msgid "Gruvbox"
+msgstr "Gruvbox"
+
+#: src/themes.js:48
+msgid "Nord"
+msgstr "Nord"
+
+#: src/tts.js:117
+msgid "Text-to-Speech Error"
+msgstr "שגיאה בהקראת טקסט"
+
+#: src/tts.js:118
+msgid "Make sure Speech Dispatcher is installed and working on your system"
+msgstr "יש לוודא שמקריא קול מותקן ועובד במערכת שלך"
+
+#: src/utils.js:168
+msgid "Copied to clipboard"
+msgstr "הועתק ללוח הגזירים"
+
+#: src/ui/annotation-popover.ui:13
+msgid "Highlight Style"
+msgstr "סגנון הדגשה"
+
+#: src/ui/annotation-popover.ui:20 src/ui/annotation-row.ui:63
+#: src/ui/bookmark-row.ui:33
+msgid "Delete"
+msgstr "מחיקה"
+
+#: src/ui/annotation-popover.ui:28 src/ui/book-item.ui:65 src/ui/book-row.ui:79
+#: src/ui/image-viewer.ui:62
+msgid "Menu"
+msgstr "תפריט"
+
+#: src/ui/annotation-popover.ui:47
+msgid "Add Note…"
+msgstr "הוספת הערה…"
+
+#: src/ui/book-item.ui:5 src/ui/book-row.ui:5
+msgid "Open in New Window"
+msgstr "פתיחה בחלון חדש"
+
+#: src/ui/book-item.ui:9 src/ui/book-row.ui:9
+msgid "Open with External App"
+msgstr ""
+
+#: src/ui/book-item.ui:19 src/ui/book-row.ui:19 src/ui/book-viewer.ui:25
+msgid "Export Annotations…"
+msgstr "ייצוא הסברים…"
+
+#: src/ui/book-viewer.ui:5
+msgid "New Window"
+msgstr "חלון חדש"
+
+#: src/ui/book-viewer.ui:11
+msgid "Open a Copy"
+msgstr "פתיחת עותק"
+
+#: src/ui/book-viewer.ui:21
+msgid "Import Annotations…"
+msgstr "ייבוא הסברים…"
+
+#: src/ui/book-viewer.ui:37 src/ui/library.ui:42
+msgid "About Foliate"
+msgstr "על Foliate"
+
+#: src/ui/book-viewer.ui:45
+msgid "All Sections"
+msgstr "כל הבחירה"
+
+#: src/ui/book-viewer.ui:50
+msgid "Current Section"
+msgstr "הבחירה הנוכחית"
+
+#: src/ui/book-viewer.ui:57
+msgid "Match Whole Words Only"
+msgstr "התאמת מילים שלמות בלבד"
+
+#: src/ui/book-viewer.ui:61
+msgid "Match Case"
+msgstr "התאמת רישיות"
+
+#: src/ui/book-viewer.ui:65
+msgid "Match Diacritics"
+msgstr "התאמה הֶבְחֵנִית (דיאקרטית)"
+
+#: src/ui/book-viewer.ui:83
+msgid "Font & Layout Settings"
+msgstr "הגדרות גופן ופריסה"
+
+#: src/ui/book-viewer.ui:89
+msgid "Scrolled Mode"
+msgstr "מצב גלילה"
+
+#: src/ui/book-viewer.ui:93
+msgid "Invert Colors in Dark Mode"
+msgstr "היפוך צבעים במצב כהה"
+
+#: src/ui/book-viewer.ui:97
+msgid "Autohide Cursor"
+msgstr "הסתרת סמן אוטומטית"
+
+#: src/ui/book-viewer.ui:103
+msgid "Print…"
+msgstr "הדפסה…"
+
+#: src/ui/book-viewer.ui:107
+msgid "Inspector"
+msgstr "מפקח"
+
+#: src/ui/book-viewer.ui:167
+msgid "Book Cannot Be Opened"
+msgstr "לא ניתן לפתוח את הספר"
+
+#: src/ui/book-viewer.ui:177
+msgid "Details"
+msgstr "פרטים"
+
+#: src/ui/book-viewer.ui:193
+msgid "Open Another File…"
+msgstr "פתיחת קובץ אחר…"
+
+#: src/ui/book-viewer.ui:245
+msgid "Pin Sidebar"
+msgstr "קיבוע סרגל הצד"
+
+#: src/ui/book-viewer.ui:253
+msgid "Book Menu"
+msgstr "תפריט ספר"
+
+#: src/ui/book-viewer.ui:260 src/ui/selection-popover.ui:17
+msgid "Find"
+msgstr "איתור"
+
+#: src/ui/book-viewer.ui:276
+msgid "Find in book…"
+msgstr "איתור בספר…"
+
+#: src/ui/book-viewer.ui:313
+msgid "Contents"
+msgstr "תוכן"
+
+#: src/ui/book-viewer.ui:391
+msgid "Annotations"
+msgstr "הסברים"
+
+#: src/ui/book-viewer.ui:403
+msgid "Select some text to add annotations"
+msgstr "יש לבחור טקסט כלשהו על מנת להוסיף הסברים"
+
+#: src/ui/book-viewer.ui:433
+msgid "Filter annotations…"
+msgstr "סינון הסברים…"
+
+#: src/ui/book-viewer.ui:447
+msgid "Bookmarks"
+msgstr "סימניות"
+
+#: src/ui/book-viewer.ui:458
+msgid "No Bookmarks"
+msgstr "אין סימניות"
+
+#: src/ui/book-viewer.ui:459
+msgid "Add some bookmarks to see them here"
+msgstr "יש להוסיף סימניות על מנת לראות אותם כאן"
+
+#: src/ui/book-viewer.ui:498 src/ui/library-view.ui:42
+msgid "No Results Found"
+msgstr "לא נמצאו תוצאות"
+
+#: src/ui/book-viewer.ui:499 src/ui/library-view.ui:43
+msgid "Try a different search"
+msgstr "יש לנסות חיפוש שונה"
+
+#: src/ui/book-viewer.ui:542 src/ui/library.ui:102 src/ui/library.ui:160
+msgid "Sidebar"
+msgstr "סרגל צד"
+
+#: src/ui/book-viewer.ui:556
+msgid "View Menu"
+msgstr "תפריט תצוגה"
+
+#: src/ui/book-viewer.ui:569 src/ui/image-viewer.ui:41
+msgid "Zoom Out"
+msgstr "התרחקות"
+
+#: src/ui/book-viewer.ui:576 src/ui/image-viewer.ui:48
+msgid "Reset Zoom"
+msgstr "איפוס התקריב"
+
+#: src/ui/book-viewer.ui:585 src/ui/image-viewer.ui:55
+msgid "Zoom In"
+msgstr "התקרבות"
+
+#: src/ui/book-viewer.ui:601
+msgid "Follow System Style"
+msgstr "שימוש בסגנון מערכת"
+
+#: src/ui/book-viewer.ui:611
+msgid "Light Style"
+msgstr "סגנון בהיר"
+
+#: src/ui/book-viewer.ui:621
+msgid "Dark Style"
+msgstr "סגנון כהה"
+
+#: src/ui/book-viewer.ui:636 src/ui/library.ui:26
+msgid "Fullscreen"
+msgstr "מסך מלא"
+
+#: src/ui/export-dialog.ui:5
+msgid "Export Annotations"
+msgstr "ייצוא הסברים"
+
+#: src/ui/export-dialog.ui:16
+msgid "Export"
+msgstr "ייצוא"
+
+#: src/ui/export-dialog.ui:28
+msgid "Format"
+msgstr "תבנית"
+
+#: src/ui/export-dialog.ui:29
+msgid "Choose “JSON” if you plan on importing annotations back to Foliate"
+msgstr "יש לבחור ב־„JSON” אם בכוונתך לייבא את ההסברים חזרה ל־Foliate"
+
+#: src/ui/export-dialog.ui:33
+msgid "JSON"
+msgstr "JSON"
+
+#: src/ui/export-dialog.ui:34
+msgid "HTML"
+msgstr "HTML"
+
+#: src/ui/export-dialog.ui:35
+msgid "Markdown"
+msgstr "‫Markdown"
+
+#: src/ui/export-dialog.ui:36
+msgid "Org Mode"
+msgstr "מצב Org"
+
+#: src/ui/image-viewer.ui:6 src/ui/navbar.ui:302 src/ui/selection-popover.ui:7
+msgid "Copy"
+msgstr "העתקה"
+
+#: src/ui/image-viewer.ui:10
+msgid "Save As…"
+msgstr "שמירה בשם..."
+
+#: src/ui/image-viewer.ui:25
+msgid "Rotate 90° Counter-Clockwise"
+msgstr "הטייה ב־90° נגד כיוון השעון"
+
+#: src/ui/image-viewer.ui:32
+msgid "Rotate 90° Clockwise"
+msgstr "הטייה ב־90° עם כיוון השעון"
+
+#: src/ui/import-dialog.ui:7
+msgid "Import Annotations"
+msgstr "ייבוא הסברים"
+
+#: src/ui/import-dialog.ui:21
+msgid "Import"
+msgstr "ייבוא"
+
+#: src/ui/import-dialog.ui:33
+msgid ""
+"The identifier doesn’t match. These annotations may not be for this book."
+msgstr "המזהה לא מתאים. יתכן והסברים אלה לא מתאים לספר זה."
+
+#: src/ui/import-dialog.ui:34
+msgid "Import Anyway"
+msgstr "ייבוא בכל מקרה"
+
+#: src/ui/library.ui:6
+msgid "List View"
+msgstr "תצוגת רשימה"
+
+#: src/ui/library.ui:11
+msgid "Grid View"
+msgstr "תצוגת רשת"
+
+#: src/ui/library.ui:20 src/ui/library-view.ui:27
+msgid "Open…"
+msgstr "פתיחה…"
+
+#: src/ui/library.ui:67
+msgid "Main Menu"
+msgstr "תפריט ראשי"
+
+#: src/ui/library.ui:110
+msgid "Open"
+msgstr "פתיחה"
+
+#: src/ui/library.ui:117
+msgid "Library Menu"
+msgstr "תפריט ספרייה"
+
+#: src/ui/library.ui:134
+msgid "Search library…"
+msgstr "חיפוש בספרייה…"
+
+#: src/ui/library.ui:168 src/ui/navbar.ui:22
+msgid "Back"
+msgstr "אחורה"
+
+#: src/ui/library.ui:175 src/ui/navbar.ui:36
+msgid "Forward"
+msgstr "קדימה"
+
+#: src/ui/library-view.ui:21
+msgid "No Books Yet"
+msgstr "עדיין אין ספרים"
+
+#: src/ui/library-view.ui:22
+msgid "Open a book to start reading"
+msgstr "יש לפתוח ספר כדי להתחיל לקרוא"
+
+#: src/ui/navbar.ui:62 src/ui/navbar.ui:253
+msgid "Location"
+msgstr "מיקום"
+
+#: src/ui/navbar.ui:91
+msgid "Narration"
+msgstr "קריינות"
+
+#: src/ui/navbar.ui:162
+msgid "Time Left in Section"
+msgstr "הזמן שנשאר בפרק"
+
+#: src/ui/navbar.ui:192
+msgid "Time Left in Book"
+msgstr "הזמן שנשאר בספר"
+
+#: src/ui/navbar.ui:226 src/ui/view-preferences-window.ui:159
+msgid "Page"
+msgstr "עמוד"
+
+#: src/ui/navbar.ui:309
+msgid "Paste and Go"
+msgstr "להדביק ולעבור"
+
+#: src/ui/navbar.ui:322
+msgid "Section"
+msgstr "פרק"
+
+#: src/ui/navbar.ui:388
+msgid "First Section"
+msgstr "פרק ראשון"
+
+#: src/ui/navbar.ui:397
+msgid "Previous Section"
+msgstr "פרק קודם"
+
+#: src/ui/navbar.ui:405
+msgid "Jump To…"
+msgstr "דילוג אל…"
+
+#: src/ui/navbar.ui:414
+msgid "Next Section"
+msgstr "פרק הבא"
+
+#: src/ui/navbar.ui:423
+msgid "Last Section"
+msgstr "פרק אחרון"
+
+#: src/ui/selection-popover.ui:12
+msgid "Highlight"
+msgstr "הדגשה"
+
+#: src/ui/selection-popover.ui:30
+msgid "Speak from Here"
+msgstr "להקריא מכאן ואילך"
+
+#: src/ui/selection-popover.ui:36
+msgid "Copy with Citation"
+msgstr "העתקה עם ציטוט"
+
+#: src/ui/selection-popover.ui:40
+msgid "Copy Identifier"
+msgstr "העתקת מזהה"
+
+#: src/ui/selection-popover.ui:44
+msgid "Print Selection…"
+msgstr "הדפסת הבחיר"
+
+#: src/ui/tts-box.ui:34
+msgid "Speed"
+msgstr "מהירות"
+
+#: src/ui/tts-box.ui:67
+msgid "Pitch"
+msgstr "גובה צליל"
+
+#: src/ui/tts-box.ui:123
+msgid "Play/Pause"
+msgstr "נגינה/השהיה"
+
+#: src/ui/tts-box.ui:141
+msgid "Stop"
+msgstr "עצירה"
+
+#: src/ui/view-preferences-window.ui:5
+msgid "Font"
+msgstr "גופן"
+
+#: src/ui/view-preferences-window.ui:9
+msgid "Font Size"
+msgstr "גודלן גופן"
+
+#: src/ui/view-preferences-window.ui:12
+msgid "Default Font Size"
+msgstr "גודל גופן ברירת מחדל"
+
+#: src/ui/view-preferences-window.ui:25
+msgid "Minimum Font Size"
+msgstr "גודלן גופן מזערי"
+
+#: src/ui/view-preferences-window.ui:40
+msgid "Font Family"
+msgstr "משפחת הגופנים"
+
+#: src/ui/view-preferences-window.ui:43
+msgid "Default Font"
+msgstr "גופן ברירת מחדל"
+
+#: src/ui/view-preferences-window.ui:47
+msgid "Serif"
+msgstr "מעוטר"
+
+#: src/ui/view-preferences-window.ui:48
+msgid "Sans-serif"
+msgstr "ללא עיטורים"
+
+#: src/ui/view-preferences-window.ui:56
+msgid "Override Publisher Font"
+msgstr "דריסת גופן ההוצאה לאור"
+
+#: src/ui/view-preferences-window.ui:71
+msgid "Serif Font"
+msgstr "גופן מעוטר"
+
+#: src/ui/view-preferences-window.ui:84
+msgid "Sans-Serif Font"
+msgstr "גופן ללא עיטורים"
+
+#: src/ui/view-preferences-window.ui:97
+msgid "Monospace Font"
+msgstr "גופן ברוחב קבוע"
+
+#: src/ui/view-preferences-window.ui:114
+msgid "Layout"
+msgstr "פריסה"
+
+#: src/ui/view-preferences-window.ui:118
+msgid "Paragraph"
+msgstr "פסקה"
+
+#: src/ui/view-preferences-window.ui:121
+msgid "Line Height"
+msgstr "גובה שורה"
+
+#: src/ui/view-preferences-window.ui:135
+msgid "Full Justification"
+msgstr "יישור מלא"
+
+#: src/ui/view-preferences-window.ui:146
+msgid "Hyphenation"
+msgstr "מיקוף"
+
+#: src/ui/view-preferences-window.ui:162
+msgid "Margins"
+msgstr "שוליים"
+
+#: src/ui/view-preferences-window.ui:176
+msgid "Maximum Number of Columns"
+msgstr "מספר עמודות מרבי"
+
+#: src/ui/view-preferences-window.ui:189
+msgid "Maximum Inline Size"
+msgstr "אורך שורה מרבי"
+
+#: src/ui/view-preferences-window.ui:190
+msgid "Maximum column width (horizontal writing) or height (vertical writing)"
+msgstr "רוחב עמודות מרבי (כתיבה אופקית) או גובה (כתיבה אנכית)"
+
+#: src/ui/view-preferences-window.ui:203
+msgid "Maximum Block Size"
+msgstr "גודל בלוק מרבי"
+
+#: src/ui/view-preferences-window.ui:204
+msgid "Maximum height (horizontal writing) or width (vertical writing)"
+msgstr "גובה מרבי (כתיבה אופקית) או רוחב (כתיבה אנכית)"
+
+#: src/ui/view-preferences-window.ui:221
+msgid "Color"
+msgstr "צבע"
+
+#: src/ui/view-preferences-window.ui:240
+msgid "Behavior"
+msgstr "התנהגות"
+
+#: src/ui/view-preferences-window.ui:246
+msgid "Reduce Animation"
+msgstr "הפחתת הנפשות"
+
+#: data/com.github.johnfactotum.Foliate.desktop.in:5
+msgid "E-Book Viewer"
+msgstr "מציג ספרים אלקטרוניים"
+
+#. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
+#: data/com.github.johnfactotum.Foliate.desktop.in:14
+msgid "Ebook;Book;EPUB;Viewer;Reader;"
+msgstr "ספר אלקטרוני;ספר;איבוק;איספר;איפאב;מציג;מקריא;קורא;ספרים אלקטרוניים;"
+
+#: data/com.github.johnfactotum.Foliate.metainfo.xml.in:10
+msgid ""
+"Discover a new chapter in reading with Foliate, the modern e-book reader "
+"tailored for GNOME. Immerse yourself in a distraction-free interface, with "
+"customization features designed to match your unique preferences."
+msgstr ""
+"לגלות פרק חדש בקריאה עם Foliate, קורא הספרים האלקטרוני המודרני המותאם "
+"ל־GNOME. מאפשר לך לשקוע בממשק נטול הסחות דעת, מעוצב עם תכונות להתאמה אישית "
+"כך שתתאפשר לך התאמה להעדפות הייחודיות שלך."
+
+#: data/com.github.johnfactotum.Foliate.metainfo.xml.in:11
+msgid "Features include:"
+msgstr "התכונות כוללות:"
+
+#: data/com.github.johnfactotum.Foliate.metainfo.xml.in:13
+msgid "Open EPUB, Mobipocket, Kindle, FB2, CBZ, and PDF files"
+msgstr "פתיחת קובצי EPUB, Mobipocket, Kindle, FB2, CBZ ו־PDF."
+
+#: data/com.github.johnfactotum.Foliate.metainfo.xml.in:14
+msgid "Paginated mode and scrolled mode"
+msgstr "מצב ניווט לפי עמוד ומצב גלילה"
+
+#: data/com.github.johnfactotum.Foliate.metainfo.xml.in:15
+msgid "Customize font and line-spacing"
+msgstr "התאמה אישית של הגופן וריווח השורות"
+
+#: data/com.github.johnfactotum.Foliate.metainfo.xml.in:16
+msgid "Light, sepia, dark, and invert mode"
+msgstr "בהיר, חום מיושן, כהה ומצב היפוך"
+
+#: data/com.github.johnfactotum.Foliate.metainfo.xml.in:17
+msgid "Reading progress slider with chapter marks"
+msgstr "מחוון התקדמות בקריאה עם סימוני פרקים"
+
+#: data/com.github.johnfactotum.Foliate.metainfo.xml.in:18
+msgid "Bookmarks and annotations"
+msgstr "סימניות והסברים"
+
+#: data/com.github.johnfactotum.Foliate.metainfo.xml.in:19
+msgid "Find in book"
+msgstr "איתור בספר"
+
+#: data/com.github.johnfactotum.Foliate.metainfo.xml.in:20
+msgid "Quick dictionary lookup"
+msgstr "שליפה מהירה מהמילון"
+
+#: data/com.github.johnfactotum.Foliate.metainfo.xml.in:55
+msgid "Fixed end of chapter cut off when chapter starts with page break"
+msgstr ""
+
+#: data/com.github.johnfactotum.Foliate.metainfo.xml.in:56
+msgid "Fixed incorrect text wrapping in tables"
+msgstr ""
+
+#: data/com.github.johnfactotum.Foliate.metainfo.xml.in:57
+msgid "Fixed a performance issue with OPDS catalogs"
+msgstr ""
+
+#: data/com.github.johnfactotum.Foliate.metainfo.xml.in:64
+msgid "Added support for OPDS catalogs, now with support for OPDS 2.0"
+msgstr ""
+
+#: data/com.github.johnfactotum.Foliate.metainfo.xml.in:65
+#, fuzzy
+msgid "Added option to override publisher font"
+msgstr "דריסת גופן ההוצאה לאור"
+
+#: data/com.github.johnfactotum.Foliate.metainfo.xml.in:66
+msgid "Added option to reduce animation"
+msgstr ""
+
+#: data/com.github.johnfactotum.Foliate.metainfo.xml.in:67
+msgid "Added support for JPEG XL in CBZ"
+msgstr ""
+
+#: data/com.github.johnfactotum.Foliate.metainfo.xml.in:68
+msgid "Fixed getting file from Tracker in Flatpak"
+msgstr ""
+
+#: data/com.github.johnfactotum.Foliate.metainfo.xml.in:69
+msgid "Fixed parsing of non-year-only first-century and BCE dates"
+msgstr ""
+
+#: data/com.github.johnfactotum.Foliate.metainfo.xml.in:76
+msgid ""
+"Foliate has been rewritten from scratch with a new e-book rendering library "
+"and the latest platform libraries, GTK 4 and Libadwaita, with refreshed UI "
+"and improved performance."
+msgstr ""
+"‏Foliate נכתב מחדש מאפס עם ספריית עיבוד ספרים אלקטרוניים וספריות הפלטפורמה "
+"האחרונות, GTK 4 ו־Libadwaita, עם ממשק משתמש מעודכן וביצועים משופרים."
+
+#~ msgid "Book"
+#~ msgstr "ספר"
+
+#~ msgid "EPUB"
+#~ msgstr "EPUB"
+
+#~ msgid "Ebook"
+#~ msgstr "Ebook"
+
+#~ msgid "Reader"
+#~ msgstr "קורא"
+
+#~ msgid "Viewer"
+#~ msgstr "מציג"
+
+#~ msgid "John Factotum"
+#~ msgstr "ג׳ון פקטוטום"
+
+#, fuzzy
+#~ msgid "Reference"
+#~ msgstr "העדפות"
+
+#, fuzzy
+#~ msgid "Go to Reference"
+#~ msgstr "העדפות"
+
+#~ msgid "Keyboard Shortcuts"
+#~ msgstr "קיצורי מקלדת"
+
+#~ msgid "Preferences"
+#~ msgstr "העדפות"
+
+#~ msgid "Speak"
+#~ msgstr "הקראה"
+
+#, fuzzy
+#~ msgid "Fold Sidebar"
+#~ msgstr "הצגת סרגל צד"
+
+#~ msgid "Save File"
+#~ msgstr "שמירת קובץ"
+
+#, fuzzy
+#~ msgid "Choose highlight style"
+#~ msgstr "החלפת צבע ההדגשה"
+
+#~ msgid "More"
+#~ msgstr "עוד"
+
+#, fuzzy
+#~ msgid "About this book"
+#~ msgstr "על הספר הזה"
+
+#, fuzzy
+#~ msgid "Toggle sidebar"
+#~ msgstr "להשתמש בסרגל צד"
+
+#~ msgid "Restore zoom"
+#~ msgstr "שחזור תקריב"
+
+#~ msgid "Go to previous page"
+#~ msgstr "חזרה לעמוד הקודם"
+
+#~ msgid "Go back to previous location"
+#~ msgstr "חזרה למיקום הקודם"
+
+#, fuzzy
+#~ msgid "Go to next section"
+#~ msgstr "התקדמות לעמוד הבא"
+
+#, fuzzy
+#~ msgid "Go to last section"
+#~ msgstr "מעבר למיקום"

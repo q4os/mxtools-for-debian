@@ -10,9 +10,9 @@ LIVE_DIR=/live
 test -e /etc/live/config/initrd.out && LIVE_DIR=/etc/live
 
 RESTORE_LIVE_DIRS="usr/share/antiX-install"
-EXCLUDES_DIR=/usr/local/share/excludes
+EXCLUDES_DIR=/usr/share/excludes
 INITRD_CONF=$LIVE_DIR/config/initrd.out
-antiX_lib=/usr/local/lib/antiX
+antiX_lib=/usr/lib/antiX
 
 [ "$Static_antiX_libs" ] || source $antiX_lib/antiX-gui-cli.sh
 

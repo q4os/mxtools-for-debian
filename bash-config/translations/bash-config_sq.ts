@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="sq">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="sq">
 <context>
     <name>AliasTab</name>
     <message>
@@ -62,12 +60,12 @@
     <message>
         <location filename="../prompttab_fix.ui" line="152"/>
         <source>Make The Larger Prompts Smaller</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../prompttab_fix.ui" line="159"/>
         <source>Muted Colors</source>
-        <translation type="unfinished"></translation>
+        <translation>Ngjyra të Zbehta</translation>
     </message>
     <message>
         <location filename="../prompttab_fix.ui" line="166"/>
@@ -92,12 +90,12 @@
     <message>
         <location filename="../prompttab_fix.ui" line="194"/>
         <source>Use Parentheses Instead Of Square Brackets</source>
-        <translation type="unfinished"></translation>
+        <translation>Përdor Thonjëza, Në Vend se Kllapa Katrore</translation>
     </message>
     <message>
         <location filename="../prompttab_fix.ui" line="201"/>
         <source>Make the Larger Prompts Smaller Elsewhere</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../prompttab_fix.ui" line="225"/>
@@ -117,12 +115,12 @@
     <message>
         <location filename="../prompttab_fix.ui" line="351"/>
         <source>Extra Newlines Before Prompt</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../prompttab_fix.ui" line="380"/>
         <source>Prompt Text</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../prompttab_fix.ui" line="409"/>
@@ -163,17 +161,17 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../prompttab.cpp" line="546"/>
+        <location filename="../prompttab.cpp" line="543"/>
         <source>Foreground Color</source>
         <translation>Ngjyrë e Përparme</translation>
     </message>
     <message>
-        <location filename="../prompttab.cpp" line="547"/>
+        <location filename="../prompttab.cpp" line="544"/>
         <source>Background Color</source>
         <translation>Ngjyrë Sfondi</translation>
     </message>
     <message>
-        <location filename="../prompttab.cpp" line="548"/>
+        <location filename="../prompttab.cpp" line="545"/>
         <source>Bold</source>
         <translation>Të trasha</translation>
     </message>

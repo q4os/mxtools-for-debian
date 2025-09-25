@@ -28,6 +28,8 @@
 #include <QDir>
 #include <QFileInfo>
 #include <QTextEdit>
+#include <QRegularExpression>
+#include <QRegularExpressionMatch>
 
 #include "about.h"
 #include "flatbutton.h"
@@ -213,7 +215,17 @@ void MainWindow::setup()
 
     ui->labelSupportUntil->setText(SUPPORTED);
 
-    QString DESKTOP = runCmd("LANG=C inxi -c 0 -S | grep Desktop | cut -d':' -f5-6").remove(" Distro");
+    QString DESKTOPSTRING = runCmd("LANG=C.UTF-8 inxi -c 0 -S | grep Desktop");
+    QRegularExpression re(R"(Desktop:\s*(\S+)\s+v:\s*([\d\.]+))");
+    QRegularExpressionMatch match = re.match(DESKTOPSTRING);
+
+    QString DESKTOP, ver;
+    if (match.hasMatch()) {
+        DESKTOP = match.captured(1);
+        ver = match.captured(2);
+        DESKTOP = match.captured(1) + " " + ver;
+    }
+
     qDebug() << "desktop is " << DESKTOP;
     if (DESKTOP.contains("Fluxbox")) {
         isfluxbox = true;

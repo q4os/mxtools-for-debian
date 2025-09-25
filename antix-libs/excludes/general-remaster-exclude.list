@@ -4,7 +4,7 @@
 # Additional files to be excluded when a general-purpose remaster
 # is created.
 #
-# The original list is available in general-remaster-exclude.orig.
+# The original list is available in general-remaster-exclude.list.original
 #--------------------------------------------------------------------
 
 etc/NetworkManager/system-connections/*

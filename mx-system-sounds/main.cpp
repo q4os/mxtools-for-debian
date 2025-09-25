@@ -25,9 +25,11 @@
 #include "mainwindow.h"
 #include <QApplication>
 #include <QIcon>
+#include <QLibraryInfo>
 #include <QLocale>
 #include <QMessageBox>
 #include <QTranslator>
+
 #include <unistd.h>
 
 int main(int argc, char *argv[])
@@ -36,13 +38,21 @@ int main(int argc, char *argv[])
     QApplication::setWindowIcon(QIcon("/usr/share/pixmaps/mx-system-sounds.png"));
 
     QTranslator qtTran;
-    qtTran.load(QStringLiteral("qt_") + QLocale::system().name());
-    QApplication::installTranslator(&qtTran);
+    if (qtTran.load(QLocale::system(), QStringLiteral("qt"), QStringLiteral("_"),
+                    QLibraryInfo::path(QLibraryInfo::TranslationsPath))) {
+        QApplication::installTranslator(&qtTran);
+    }
+
+    QTranslator qtBaseTran;
+    if (qtBaseTran.load("qtbase_" + QLocale::system().name(), QLibraryInfo::path(QLibraryInfo::TranslationsPath))) {
+        QApplication::installTranslator(&qtBaseTran);
+    }
 
     QTranslator appTran;
-    appTran.load(QStringLiteral("mx-system-sounds_") + QLocale::system().name(),
-                 QStringLiteral("/usr/share/mx-system-sounds/locale"));
-    QApplication::installTranslator(&appTran);
+    if (appTran.load(QApplication::applicationName() + "_" + QLocale::system().name(),
+                     "/usr/share/" + QApplication::applicationName() + "/locale")) {
+        QApplication::installTranslator(&appTran);
+    }
 
     if (qgetenv("XDG_CURRENT_DESKTOP") != "xfce" && qgetenv("XDG_CURRENT_DESKTOP") != "XFCE") {
         QMessageBox::information(nullptr, QObject::tr("MX System Sounds"), QObject::tr("This app is Xfce-only"));

@@ -19,8 +19,9 @@ case "$1" in
         /usr/lib/linux-boot-probes/mounted/40grub2 \
         /usr/share/applications/alsamixer.desktop \
         /usr/share/applications/nano.desktop \
-        /usr/share/applications/display-im6.q16.desktop \
-        /usr/sbin/dkms
+        /usr/share/applications/display-im7.q16.desktop \
+        /usr/sbin/dkms \
+        /usr/lib/shim/BOOTX64.CSV
     do
         dpkg-divert --quiet --package mx-system --rename \
                     --divert $F.dpkg-dist --remove $F || :

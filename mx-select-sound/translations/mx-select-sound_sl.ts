@@ -146,7 +146,7 @@
     <message>
         <location filename="../about.cpp" line="42"/>
         <source>Cancel</source>
-        <translation type="unfinished">Prekini</translation>
+        <translation type="unfinished">Prekliči</translation>
     </message>
     <message>
         <location filename="../about.cpp" line="64"/>
@@ -250,7 +250,7 @@
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="vanished">Prekini</translation>
+        <translation type="vanished">Prekliči</translation>
     </message>
     <message>
         <source>&amp;Close</source>

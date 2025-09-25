@@ -1,4 +1,4 @@
-bin/* 			usr/local/bin 
+bin/* 			usr/bin 
 init.d/*		etc/init.d
 fstrim-mx       	etc/cron.weekly      
 Jar-Loader.desktop	usr/share/applications
@@ -8,12 +8,11 @@ quick-system-info/quick-system-info-mx usr/bin
 #quick-system-info/mx-qsi.png /usr/share/pixmaps
 xfce4-notifyd-start usr/bin
 xfce4-notifyd-start.desktop etc/xdg/autostart
-system-locales-mx	usr/bin
+#system-locales-mx	usr/bin
 xdg-user-dirs-update	usr/bin
 xdg-user-dirs-gtk-update	usr/bin
 debconf-kde-helper	usr/bin
 policy/* usr/share/polkit-1/actions
-script/* usr/bin
 system-keyboard-mx.svg usr/share/icons/hicolor/scalable/apps
 #system-locales-mx.desktop usr/share/applications
 translations_script/mo/* /

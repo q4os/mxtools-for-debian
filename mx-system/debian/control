@@ -7,9 +7,8 @@ Standards-Version: 3.9.8
 
 Package: mx-system
 Architecture: all
-Depends: localize-repo-mx, gcc, mx-debian-firmware | linux-firmware, qt6gtk2, libqt6svg6
+Depends: gcc, mx-debian-firmware | linux-firmware
 Conflicts:  mx-buildiso-dkms
-Recommends: gtk2-engines
 Description: metapackage for packages needed for system functions
  This metapackage depends on packages needed for certain systems to work with
  full functionality. Unlike Debian, MX Linux does not install recommended

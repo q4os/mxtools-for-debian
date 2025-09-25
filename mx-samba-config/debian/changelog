@@ -1,3 +1,9 @@
+mx-samba-config (24.4) mx; urgency=medium
+
+  * Update to Qt6
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 24 Apr 2025 14:31:08 -0400
+
 mx-samba-config (24.3) mx; urgency=medium
 
   * Update translations 

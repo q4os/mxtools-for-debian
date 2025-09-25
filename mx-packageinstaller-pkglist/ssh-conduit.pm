@@ -66,9 +66,6 @@ ssh Conduit
 <screenshot>none</screenshot>
 
 <preinstall>
-apt-get install antix-archive-keyring
-echo "deb http://la.mxrepo.com/antix/bullseye bullseye main">/etc/apt/sources.list.d/mxpitemp.list
-apt-get update
 </preinstall>
 
 <install_package_names>
@@ -77,8 +74,6 @@ ssh-conduit-antix
 
 
 <postinstall>
-rm /etc/apt/sources.list.d/mxpitemp.list
-apt-get update
 </postinstall>
 
 

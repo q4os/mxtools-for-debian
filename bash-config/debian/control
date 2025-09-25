@@ -2,12 +2,26 @@ Source: bash-config
 Section: admin
 Priority: optional
 Maintainer: dolphin oracle <dolphinoracle@gmail.com>
-Build-Depends:  debhelper (>=10), qtbase5-dev, qttools5-dev-tools
-Standards-Version: 3.9.5
-Vcs-Git: git://github.com/mxlinux/mx-bashrc-config.git
+Build-Depends: debhelper-compat (= 13),
+               qt6-base-dev,
+               qt6-base-dev-tools,
+               qt6-tools-dev,
+               qt6-tools-dev-tools
+Standards-Version: 3.9.8
+Homepage: https://github.com/mxlinux/mx-bashrc-config
+Vcs-Git: https://github.com/mxlinux/mx-bashrc-config.git
+Vcs-Browser: https://github.com/mxlinux/mx-bashrc-config
 
 Package: bash-config
 Architecture: any
-Depends: ${misc:Depends}, ${shlibs:Depends}
-Description: Bash Config
- Provides a gui for configuring bash aliases and prompt theming
+Depends: ${misc:Depends},
+         ${shlibs:Depends},
+         bash
+Recommends: mx-viewer | x-www-browser
+Description: GUI for configuring bash aliases and prompt themes
+ A user-friendly graphical interface that allows users to:
+  * Create and manage bash aliases
+  * Customize bash prompt appearance
+  * Apply and preview different prompt themes
+ .
+ Designed for MX Linux but compatible with any Debian-based distribution.

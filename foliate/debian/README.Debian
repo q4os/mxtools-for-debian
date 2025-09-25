@@ -1,6 +1,0 @@
-The upstream tarball has been repacked to avoid src/assets/jslib.min.js,
-since it is only available in minified form in the upstream tarball.
-
-Unfortunately, this currently breaks .mobi files which are zip compressed.
-
-When this is fixed, this package will be uploaded to unstable.

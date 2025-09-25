@@ -94,7 +94,7 @@ void MXDateTime::startup()
     zones = zoneOut.trimmed().split('\n');
     comboTimeZone->blockSignals(true); // Keep blocked until loadSysTimeConfig().
     comboTimeArea->clear();
-    for (const QByteArray &zone : qAsConst(zones)) {
+    for (const QByteArray &zone : std::as_const(zones)) {
         const QString &area = QString(zone).section('/', 0, 0);
         if (comboTimeArea->findData(area) < 0) {
             QString text(area);
@@ -108,6 +108,9 @@ void MXDateTime::startup()
     comboTimeArea->model()->sort(0);
 
     // Prepare the GUI.
+    connect(pushAbout, &QPushButton::clicked, this, &MXDateTime::aboutClicked);
+    connect(pushHelp, &QPushButton::clicked, this, &MXDateTime::helpClicked);
+    connect(pushApply, &QPushButton::clicked, this, &MXDateTime::applyClicked);
     setClockLock(false);
     // Setup the display update timer.
     connect(&updater, &QTimer::timeout, this, QOverload<>::of(&MXDateTime::update));
@@ -188,12 +191,26 @@ void MXDateTime::loadTab(int index)
         setClockLock(true);
         switch (index) {
         case 0:
+            connect(comboTimeArea, QOverload<int>::of(&QComboBox::currentIndexChanged),
+                this, &MXDateTime::timeAreaIndexChanged);
+            connect(comboTimeZone, QOverload<int>::of(&QComboBox::currentIndexChanged),
+                this, &MXDateTime::timeZoneIndexChanged);
+            connect(calendar, &QCalendarWidget::selectionChanged, this, &MXDateTime::calendarSelectionChanged);
+            connect(timeEdit, &MTimeEdit::dateTimeChanged, this, &MXDateTime::timeEditDateTimeChanged);
             loadDateTime();
             break; // Date & Time.
         case 1:
+            connect(pushHardwareAdjust, &QPushButton::clicked, this, &MXDateTime::hardwareAdjustClicked);
+            connect(pushSystemToHardware, &QPushButton::clicked, this, &MXDateTime::systemToHardwareClicked);
+            connect(pushHardwareToSystem, &QPushButton::clicked, this, &MXDateTime::hardwareToSystemClicked);
             readHardwareClock();
             break; // Hardware Clock.
         case 2:
+            connect(pushSyncNow, &QPushButton::clicked, this, &MXDateTime::syncNowClicked);
+            connect(tableServers, &QTableWidget::itemSelectionChanged,
+                this, &MXDateTime::serversItemSelectionChanged);
+            connect(pushServerAdd, &QPushButton::clicked, this, &MXDateTime::serverAddClicked);
+            connect(pushServerRemove, &QPushButton::clicked, this, &MXDateTime::serverRemoveClicked);
             loadNetworkTime();
             break; // Network Time.
         }
@@ -203,14 +220,14 @@ void MXDateTime::loadTab(int index)
 
 // DATE & TIME
 
-void MXDateTime::on_comboTimeArea_currentIndexChanged(int index)
+void MXDateTime::timeAreaIndexChanged(int index)
 {
     if (index < 0 || index >= comboTimeArea->count()) {
         return;
     }
     const QByteArray &area = comboTimeArea->itemData(index).toByteArray();
     comboTimeZone->clear();
-    for (const QByteArray &zone : qAsConst(zones)) {
+    for (const QByteArray &zone : std::as_const(zones)) {
         if (zone.startsWith(area)) {
             QString text(QString(zone).section('/', 1));
             text.replace('_', ' ');
@@ -219,7 +236,7 @@ void MXDateTime::on_comboTimeArea_currentIndexChanged(int index)
     }
     comboTimeZone->model()->sort(0);
 }
-void MXDateTime::on_comboTimeZone_currentIndexChanged(int index)
+void MXDateTime::timeZoneIndexChanged(int index)
 {
     if (index < 0 || index >= comboTimeZone->count()) {
         return;
@@ -231,18 +248,15 @@ void MXDateTime::on_comboTimeZone_currentIndexChanged(int index)
     // Check IANA-zone id differ
     const QByteArray &currentTimeZone = QTimeZone::systemTimeZoneId();
     const QByteArray &selectedTimeZone = QTimeZone(comboTimeZone->itemData(index).toByteArray()).id();
-    if (QLatin1String(currentTimeZone) != QLatin1String(selectedTimeZone)) {
-        zoneIdChanged = true;
-    } else {
-        zoneIdChanged = false;
-    }
-    update();                                                         // Make the change immediately visible
+    zoneIdChanged = (currentTimeZone != selectedTimeZone);
+    // Make the change immediately visible
+    update();
 }
-void MXDateTime::on_calendar_selectionChanged()
+void MXDateTime::calendarSelectionChanged()
 {
     dateDelta = static_cast<int>(timeEdit->date().daysTo(calendar->selectedDate()));
 }
-void MXDateTime::on_timeEdit_dateTimeChanged(const QDateTime &dateTime)
+void MXDateTime::timeEditDateTimeChanged(const QDateTime &dateTime)
 {
     clock->setTime(dateTime.time());
     if (!updating) {
@@ -344,7 +358,7 @@ void MXDateTime::readHardwareClock()
     pushReadHardware->setText(btext);
     setClockLock(false);
 }
-void MXDateTime::on_pushHardwareAdjust_clicked()
+void MXDateTime::hardwareAdjustClicked()
 {
     setClockLock(true);
     const QString btext = pushHardwareAdjust->text();
@@ -355,7 +369,7 @@ void MXDateTime::on_pushHardwareAdjust_clicked()
     pushHardwareAdjust->setText(btext);
     setClockLock(false);
 }
-void MXDateTime::on_pushSystemToHardware_clicked()
+void MXDateTime::systemToHardwareClicked()
 {
     setClockLock(true);
     QStringList params("--systohc");
@@ -366,7 +380,7 @@ void MXDateTime::on_pushSystemToHardware_clicked()
     checkDriftUpdate->setCheckState(Qt::Unchecked);
     setClockLock(false);
 }
-void MXDateTime::on_pushHardwareToSystem_clicked()
+void MXDateTime::hardwareToSystemClicked()
 {
     setClockLock(true);
     transferTime({"--hctosys"}, tr("Hardware Clock"), tr("System Clock"));
@@ -401,7 +415,7 @@ void MXDateTime::saveHardwareClock()
 
 // NETWORK TIME
 
-void MXDateTime::on_pushSyncNow_clicked()
+void MXDateTime::syncNowClicked()
 {
     if (!validateServerList()) {
         return;
@@ -440,7 +454,7 @@ void MXDateTime::on_pushSyncNow_clicked()
     msgbox.setDetailedText(output.trimmed());
     msgbox.exec();
 }
-void MXDateTime::on_tableServers_itemSelectionChanged()
+void MXDateTime::serversItemSelectionChanged()
 {
     const QList<QTableWidgetSelectionRange> &ranges = tableServers->selectedRanges();
     bool remove = false;
@@ -460,13 +474,13 @@ void MXDateTime::on_tableServers_itemSelectionChanged()
     pushServerMoveUp->setEnabled(up);
     pushServerMoveDown->setEnabled(down);
 }
-void MXDateTime::on_pushServerAdd_clicked()
+void MXDateTime::serverAddClicked()
 {
     QTableWidgetItem *item = addServerRow(true, "server", QString(), QString());
     tableServers->setCurrentItem(item);
     tableServers->editItem(item);
 }
-void MXDateTime::on_pushServerRemove_clicked()
+void MXDateTime::serverRemoveClicked()
 {
     const QList<QTableWidgetSelectionRange> &ranges = tableServers->selectedRanges();
     for (int ixi = ranges.count() - 1; ixi >= 0; --ixi) {
@@ -712,9 +726,14 @@ bool MXDateTime::clearSources(const QString &filename)
     return changed;
 }
 
+void MXDateTime::serverRowChanged()
+{
+    changedServers = true;
+}
+
 // ACTION BUTTONS
 
-void MXDateTime::on_pushApply_clicked()
+void MXDateTime::applyClicked()
 {
     // Compensation for the execution time of this section.
     QDateTime driftStart = QDateTime::currentDateTimeUtc();
@@ -740,15 +759,8 @@ void MXDateTime::on_pushApply_clicked()
     setClockLock(false);
 }
 
-// Slots
-
-void MXDateTime::serverRowChanged()
-{
-    changedServers = true;
-}
-
 // MX Standard User Interface
-void MXDateTime::on_pushAbout_clicked()
+void MXDateTime::aboutClicked()
 {
     displayAboutMsgBox(tr("About MX Date & Time"),
                        "<p align=\"center\"><b><h2>" + tr("MX Date & Time") + "</h2></b></p><p align=\"center\">"
@@ -759,9 +771,9 @@ void MXDateTime::on_pushAbout_clicked()
                            + tr("Copyright (c) MX Linux") + "<br /><br /></p>",
                        "/usr/share/doc/mx-datetime/license.html", tr("%1 License").arg(this->windowTitle()));
 }
-void MXDateTime::on_pushHelp_clicked()
+void MXDateTime::helpClicked()
 {
-    displayDoc("/usr/share/doc/mx-datetime/mx-datetime.html", tr("MX Date & Time Help").toUtf8());
+    displayDoc("/usr/share/doc/mx-datetime/mx-datetime.html", tr("MX Date & Time Help"));
 }
 
 // SUBCLASSING FOR QTimeEdit THAT FIXES CURSOR AND SELECTION JUMPING EVERY SECOND

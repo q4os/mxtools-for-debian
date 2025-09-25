@@ -14,204 +14,204 @@
         <translation>O Programe</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="109"/>
+        <location filename="../mainwindow.ui" line="108"/>
         <source>Help</source>
         <translation>Pomoc</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="177"/>
+        <location filename="../mainwindow.ui" line="191"/>
         <source>&amp;Close</source>
         <translation>&amp;Zatvoriť</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="184"/>
+        <location filename="../mainwindow.ui" line="197"/>
         <source>Alt+C</source>
         <translation>Alt+C</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="219"/>
+        <location filename="../mainwindow.ui" line="231"/>
         <source>Status</source>
         <translation>Stav</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="225"/>
+        <location filename="../mainwindow.ui" line="237"/>
         <source>IP address</source>
         <translation>IP adresa</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="261"/>
+        <location filename="../mainwindow.ui" line="273"/>
         <source>Hardware detected</source>
         <translation>Nájdený Hardvér&#xa0;</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="280"/>
+        <location filename="../mainwindow.ui" line="292"/>
         <source>Enable</source>
         <translation>Zapnuť</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="303"/>
-        <location filename="../mainwindow.ui" line="593"/>
-        <location filename="../mainwindow.ui" line="706"/>
+        <location filename="../mainwindow.ui" line="315"/>
+        <location filename="../mainwindow.ui" line="603"/>
+        <location filename="../mainwindow.ui" line="712"/>
         <source>Re-scan</source>
         <translation>Vzhľadať znova</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="372"/>
+        <location filename="../mainwindow.ui" line="383"/>
         <source>Enabled</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="377"/>
+        <location filename="../mainwindow.ui" line="388"/>
         <source>Interface</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="382"/>
+        <location filename="../mainwindow.ui" line="393"/>
         <source>Driver</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="387"/>
+        <location filename="../mainwindow.ui" line="398"/>
         <source>Description</source>
         <translation>Popis</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="392"/>
+        <location filename="../mainwindow.ui" line="403"/>
         <source>Vendor</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="397"/>
+        <location filename="../mainwindow.ui" line="408"/>
         <source>Product</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="405"/>
+        <location filename="../mainwindow.ui" line="416"/>
         <source>Disable</source>
         <translation>Vypnúť</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="419"/>
+        <location filename="../mainwindow.ui" line="430"/>
         <source>Active interface</source>
         <translation>Aktívny interface</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="435"/>
+        <location filename="../mainwindow.ui" line="446"/>
         <source>WiFi status</source>
         <translation>Stav Wifi siete</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="457"/>
+        <location filename="../mainwindow.ui" line="468"/>
         <source>Unblocks all soft/hard blocked wireless devices</source>
         <translation>Odblokuje všetky blokované bezdrátové zariadenia</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="460"/>
+        <location filename="../mainwindow.ui" line="471"/>
         <source>Unblock WiFi Devices</source>
         <translation>Odblokovať WiFi zariadenia</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="492"/>
+        <location filename="../mainwindow.ui" line="502"/>
         <source>Linux drivers</source>
         <translation>Ovládače Linux</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="504"/>
+        <location filename="../mainwindow.ui" line="514"/>
         <source>Associated Linux drivers</source>
         <translation>Priradené Linuxové ovládače </translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="513"/>
+        <location filename="../mainwindow.ui" line="523"/>
         <source>Load Driver</source>
         <translation>Načítať ovládač</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="576"/>
+        <location filename="../mainwindow.ui" line="586"/>
         <source>Unload Driver</source>
         <translation>Uvoľniť ovládač</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="613"/>
+        <location filename="../mainwindow.ui" line="622"/>
         <location filename="../mainwindow.cpp" line="833"/>
         <source>Block Driver</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="632"/>
+        <location filename="../mainwindow.ui" line="640"/>
         <source>Windows drivers</source>
         <translation>Ovládače Windows</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="638"/>
+        <location filename="../mainwindow.ui" line="646"/>
         <source>Available Windows drivers</source>
         <translation>Dostupné ovládače Windows</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="672"/>
+        <location filename="../mainwindow.ui" line="680"/>
         <source>Remove Driver</source>
         <translation>Vymazať ovládač</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="683"/>
+        <location filename="../mainwindow.ui" line="690"/>
         <source>Add Driver</source>
         <translation>Pridať ovládač</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="724"/>
+        <location filename="../mainwindow.ui" line="729"/>
         <source>About NDISwrapper</source>
         <translation>O programe NDISwrapper</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="736"/>
+        <location filename="../mainwindow.ui" line="741"/>
         <source>Install NDISwrapper</source>
         <translation>Inštalovať NDISwrapper</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="747"/>
+        <location filename="../mainwindow.ui" line="751"/>
         <source>In order to use Windows drivers you need first to install NDISwrapper</source>
         <translation>Ak chcete použiť ovládače Windows, musíte najskôr nainštalovať NDISwrapper.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="763"/>
+        <location filename="../mainwindow.ui" line="767"/>
         <source>Uninstall NDISwrapper</source>
         <translation>Odinštalovať NDISwrapper</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="795"/>
+        <location filename="../mainwindow.ui" line="798"/>
         <source>Net diagnostics</source>
         <translation>Diagnostika siete</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="807"/>
+        <location filename="../mainwindow.ui" line="810"/>
         <source>Ping</source>
         <translation>Ping</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="813"/>
+        <location filename="../mainwindow.ui" line="816"/>
         <location filename="../mainwindow.ui" line="933"/>
         <source>Target URL:</source>
         <translation>Cieľová URL:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="823"/>
+        <location filename="../mainwindow.ui" line="826"/>
         <source>Packets</source>
         <translation>Pakety</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="868"/>
+        <location filename="../mainwindow.ui" line="871"/>
         <location filename="../mainwindow.ui" line="991"/>
         <source>Start</source>
         <translation>Štart</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="885"/>
-        <location filename="../mainwindow.ui" line="1008"/>
+        <location filename="../mainwindow.ui" line="887"/>
+        <location filename="../mainwindow.ui" line="1007"/>
         <source>Clear</source>
         <translation>Vyčistiť</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="899"/>
-        <location filename="../mainwindow.ui" line="1022"/>
+        <location filename="../mainwindow.ui" line="900"/>
+        <location filename="../mainwindow.ui" line="1020"/>
         <source>Cancel</source>
         <translation>Zrušiť</translation>
     </message>

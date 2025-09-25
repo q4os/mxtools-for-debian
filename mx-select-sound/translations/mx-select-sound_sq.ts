@@ -51,7 +51,7 @@
     <message>
         <location filename="../mainwindow.ui" line="145"/>
         <source>Quit application</source>
-        <translation type="unfinished">Dil nga aplikacioni</translation>
+        <translation type="unfinished">Mbylle aplikacionin</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="148"/>
@@ -190,7 +190,7 @@
     </message>
     <message>
         <source>Quit application</source>
-        <translation type="vanished">Dil nga aplikacioni</translation>
+        <translation type="vanished">Mbylle aplikacionin</translation>
     </message>
     <message>
         <source>Close</source>

@@ -1,3 +1,20 @@
+uefi-manager (25.09.1) mx; urgency=medium
+
+  * Update translations
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 19 Sep 2025 09:53:31 -0400
+
+uefi-manager (25.09) mx; urgency=medium
+
+  * Disable 'cancel' and 'install' buttons while the stub is being
+    installed
+  * Fix 'Admin Access Required' message not showing up when canceling the
+    elvation prompt
+  * Escape special characters in kernel that break grep (fix for kernels names
+    that contain '+' signs)
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 17 Sep 2025 22:46:17 -0400
+
 uefi-manager (25.6.01) mx; urgency=medium
 
   * Update manual address
@@ -43,7 +60,7 @@ uefi-manager (25.03.04) mx; urgency=medium
 
 uefi-manager (25.03.03) mx; urgency=medium
 
-  * Fix reset boot next 
+  * Fix reset boot next
 
  -- Adrian <adrian@mxlinux.org>  Fri, 21 Mar 2025 21:50:48 -0400
 
@@ -58,7 +75,7 @@ uefi-manager (25.03.01) mx; urgency=medium
 
   * get boot partition from fstab entries like LABEL=, UUID=, PARTLABEL=,
     PARTUUID= and /dev/disk/by... entries
-  * detect octal '\040'-space encoding in LABELs with spaces used in fstab and crypttab 
+  * detect octal '\040'-space encoding in LABELs with spaces used in fstab and crypttab
   * adjust mountpoint detection for luks mounts and LABEL with spaces
   * version sort listed kernel with highest version first
   * list linux partitions with size >= 8GB and frugal partitions with size >= 1G

@@ -1,3 +1,17 @@
+mx-debian-firmware (25.7.01mx25) mx; urgency=medium
+
+  * add firmware-b43-installer
+  * http link in upstream debian has been revised
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Tue, 22 Jul 2025 13:31:14 -0400
+  
+mx-debian-firmware (25.7mx25) mx; urgency=medium
+
+  * remove firmware-b43-installer
+  * bad http link in upstream debian
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 13 Jul 2025 10:30:36 -0400
+
 mx-debian-firmware (24.08.10mx23) mx; urgency=medium
 
   * Drop Intel WiMax package (unsupported since 5.10+)

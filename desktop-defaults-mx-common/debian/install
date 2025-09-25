@@ -1,4 +1,4 @@
-icons/*                    	usr/local/share/icons
+icons/*                    	usr/share/icons
 X11/*                      	etc/X11
 azerty/*                   	usr/share/keymaps/i386/azerty
 qwerty/*                   	usr/share/keymaps/i386/qwerty
@@ -6,14 +6,14 @@ qwertz/*                   	usr/share/keymaps/i386/qwertz
 hang-on-shutdown.conf 		etc/modprobe.d
 i915-power-saving.conf 		etc/modprobe.d
 fbdev-blacklist-nvidia.conf etc/modprobe.d
-synaptic.conf 			root/.synaptic 
+#synaptic.conf 			root/.config/synaptic/
 rules.d/*               etc/udev/rules.d
 20-thinkpad.conf 	usr/share/X11/xorg.conf.d
 umountnfs-alternative.sh       etc/init.d
 kfd.conf                etc/modprobe.d
-early-bg                   	usr/local/bin
+early-bg                   	usr/bin
 mx-tools.directory      usr/share/desktop-directories
 xdg/*					etc/xdg
 #00-enable-autospawn.conf      etc/pulse/client.conf.d
 snaps/*		usr/share/applications
-clock12or24                	usr/local/bin 
+clock12or24                	usr/bin 

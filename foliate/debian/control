@@ -3,24 +3,29 @@ Section: gnome
 Priority: optional
 Maintainer: Jonathan Carter <jcc@debian.org>
 Uploaders: Federico Ceratto <federico@debian.org>
-Build-Depends: debhelper-compat (= 13),
-               gettext,
-               meson,
-               pkg-config,
-               libglib2.0-dev,
-               gjs
-Standards-Version: 4.6.1
-Homepage: https://github.com/johnfactotum/foliate
+Build-Depends: appstream <!nocheck>,
+               debhelper-compat (= 13),
+               desktop-file-utils,
+               gjs,
+               libadwaita-1-dev (>= 1.4),
+               libgjs-dev,
+               libgtk-4-dev (>= 4.12),
+               libwebkitgtk-6.0-dev,
+               meson
+Standards-Version: 4.7.2
+Rules-Requires-Root: no
+Homepage: https://johnfactotum.github.io/foliate/
 Vcs-Browser: https://salsa.debian.org/debian/foliate
 Vcs-Git: https://salsa.debian.org/debian/foliate.git
 
 Package: foliate
 Architecture: all
-Depends: ${shlibs:Depends},
-         ${misc:Depends},
+Depends: gir1.2-adw-1 (>= 1.4),
+         gir1.2-gtk-4.0 (>= 4.12),
+         gir1.2-webkit-6.0,
          gjs,
-         gir1.2-webkit2-4.0,
-         python3
+         python3,
+         ${misc:Depends}
 Recommends: gnome-epub-thumbnailer
 Description: simple and modern ebook viewer
  Foliate is an ebook reader with many features:

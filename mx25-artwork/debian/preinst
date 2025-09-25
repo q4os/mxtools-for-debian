@@ -1,0 +1,8 @@
+#!/bin/sh -e
+
+    #remove alpha wallpaper if present
+	if [ -e "/usr/share/backgrounds/MXALPHAWALL.png" ]; then
+		touch /usr/share/backgrounds/remove_alpha
+	fi
+
+#DEBHELPER#

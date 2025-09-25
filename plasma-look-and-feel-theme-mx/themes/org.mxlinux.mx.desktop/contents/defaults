@@ -8,7 +8,7 @@ ColorScheme=MXcomfortbreeze
 widgetStyle=breeze
 
 [kdeglobals][Icons]
-Theme=Papirus-mxblue-darkpanes
+Theme=Papirus-mxblue
 
 [kwinrc][DesktopSwitcher]
 LayoutName=org.kde.breeze.desktop

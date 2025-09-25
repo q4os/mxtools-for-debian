@@ -6,7 +6,11 @@
 # GETTEXT_KEYWORD="fmt_size"
 # GETTEXT_KEYWORD="error_box_pf"
 
-source /usr/local/lib/antiX/antiX-common.sh  "$@"
+if [ -e "/usr/local/lib/antiX/antiX-common.sh" ]; then
+	source /usr/local/lib/antiX/antiX-common.sh  "$@"
+else
+	source /usr/lib/antiX/antiX-common.sh  "$@"
+fi
 
 SAFETY_MARGIN=10
 

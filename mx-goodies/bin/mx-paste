@@ -10,7 +10,7 @@ export INFO_ARGS="-v "
 export DEFAULT_NICK="MX user"
 export DEFAULT_SERVICE="dpaste"
 
-/usr/local/bin/wgetpaste "$@"
+/usr/bin/wgetpaste "$@"
 
 
 

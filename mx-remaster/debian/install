@@ -1,7 +1,7 @@
 locale/*             usr/share/locale
-bin/*                usr/local/bin
+bin/*                usr/bin
 icons/*              usr/share/mx-remaster/icons
 installed-to-live    /usr/sbin
-live-files/*         /usr/local/share/live-files
+live-files/*         /usr/share/live-files
 #disables/* etc/systemd/system
 service/* lib/systemd/system

@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Generated with glade 3.40.0 -->
+<interface>
+  <requires lib="gtk+" version="3.20"/>
+  <object class="GtkWindow" id="window_main">
+    <property name="name">window_main</property>
+    <property name="width-request">720</property>
+    <property name="height-request">435</property>
+    <property name="can-focus">False</property>
+    <property name="title" translatable="yes">Preview-mx</property>
+    <property name="icon-name">mx-tweak</property>
+    <signal name="destroy" handler="on_window_main_destroy" swapped="no"/>
+    <signal name="focus-out-event" handler="on_focus_out" swapped="no"/>
+    <signal name="key-press-event" handler="on_key_press_event" swapped="no"/>
+    <child>
+      <object class="GtkLayout" id="LAYOUT">
+        <property name="visible">True</property>
+        <property name="can-focus">False</property>
+        <child>
+          <object class="GtkImage" id="image2">
+            <property name="width-request">100</property>
+            <property name="height-request">80</property>
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+            <property name="icon-name">user-trash</property>
+            <property name="icon_size">6</property>
+          </object>
+          <packing>
+            <property name="x">152</property>
+            <property name="y">227</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkImage" id="image3">
+            <property name="width-request">100</property>
+            <property name="height-request">80</property>
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+            <property name="icon-name">preferences-desktop</property>
+            <property name="icon_size">6</property>
+          </object>
+          <packing>
+            <property name="x">282</property>
+            <property name="y">228</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkComboBox" id="combobox1">
+            <property name="width-request">200</property>
+            <property name="height-request">40</property>
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+          </object>
+          <packing>
+            <property name="x">63</property>
+            <property name="y">117</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkCheckButton" id="checkbox1">
+            <property name="label" translatable="yes">Checkbox</property>
+            <property name="width-request">134</property>
+            <property name="height-request">80</property>
+            <property name="visible">True</property>
+            <property name="can-focus">True</property>
+            <property name="receives-default">False</property>
+            <property name="draw-indicator">True</property>
+          </object>
+          <packing>
+            <property name="x">60</property>
+            <property name="y">158</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkSpinButton" id="spinbox1">
+            <property name="width-request">200</property>
+            <property name="height-request">40</property>
+            <property name="visible">True</property>
+            <property name="can-focus">True</property>
+            <property name="climb-rate">1</property>
+            <property name="value">32</property>
+          </object>
+          <packing>
+            <property name="x">339</property>
+            <property name="y">115</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkImage" id="image4">
+            <property name="width-request">100</property>
+            <property name="height-request">80</property>
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+            <property name="icon-name">user-home</property>
+            <property name="icon_size">6</property>
+          </object>
+          <packing>
+            <property name="x">419</property>
+            <property name="y">226</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkEntry" id="textbox1">
+            <property name="width-request">200</property>
+            <property name="height-request">40</property>
+            <property name="visible">True</property>
+            <property name="can-focus">True</property>
+            <property name="text" translatable="yes">Text Box</property>
+          </object>
+          <packing>
+            <property name="x">64</property>
+            <property name="y">66</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkImage" id="image1">
+            <property name="width-request">100</property>
+            <property name="height-request">80</property>
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+            <property name="icon-name">folder</property>
+            <property name="icon_size">6</property>
+          </object>
+          <packing>
+            <property name="x">28</property>
+            <property name="y">226</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkButton" id="button_close">
+            <property name="label">gtk-close</property>
+            <property name="width-request">100</property>
+            <property name="height-request">80</property>
+            <property name="visible">True</property>
+            <property name="can-focus">True</property>
+            <property name="receives-default">True</property>
+            <property name="use-stock">True</property>
+            <signal name="clicked" handler="on_button_close_clicked" swapped="no"/>
+          </object>
+          <packing>
+            <property name="x">600</property>
+            <property name="y">335</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+  </object>
+</interface>

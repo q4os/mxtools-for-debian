@@ -1,0 +1,14 @@
+/home/dolphin/development/mx-tweak/build/GCC_configuration_CMake_preset_b550a9-Debug/CMakeFiles/mx-tweak.dir
+/home/dolphin/development/mx-tweak/build/GCC_configuration_CMake_preset_b550a9-Debug/CMakeFiles/mx-tweak_ui_property_check.dir
+/home/dolphin/development/mx-tweak/build/GCC_configuration_CMake_preset_b550a9-Debug/CMakeFiles/mx-tweak_lupdate.dir
+/home/dolphin/development/mx-tweak/build/GCC_configuration_CMake_preset_b550a9-Debug/CMakeFiles/update_translations.dir
+/home/dolphin/development/mx-tweak/build/GCC_configuration_CMake_preset_b550a9-Debug/CMakeFiles/mx-tweak_lrelease.dir
+/home/dolphin/development/mx-tweak/build/GCC_configuration_CMake_preset_b550a9-Debug/CMakeFiles/release_translations.dir
+/home/dolphin/development/mx-tweak/build/GCC_configuration_CMake_preset_b550a9-Debug/CMakeFiles/edit_cache.dir
+/home/dolphin/development/mx-tweak/build/GCC_configuration_CMake_preset_b550a9-Debug/CMakeFiles/rebuild_cache.dir
+/home/dolphin/development/mx-tweak/build/GCC_configuration_CMake_preset_b550a9-Debug/CMakeFiles/list_install_components.dir
+/home/dolphin/development/mx-tweak/build/GCC_configuration_CMake_preset_b550a9-Debug/CMakeFiles/install.dir
+/home/dolphin/development/mx-tweak/build/GCC_configuration_CMake_preset_b550a9-Debug/CMakeFiles/install/local.dir
+/home/dolphin/development/mx-tweak/build/GCC_configuration_CMake_preset_b550a9-Debug/CMakeFiles/install/strip.dir
+/home/dolphin/development/mx-tweak/build/GCC_configuration_CMake_preset_b550a9-Debug/CMakeFiles/mx-tweak_autogen_timestamp_deps.dir
+/home/dolphin/development/mx-tweak/build/GCC_configuration_CMake_preset_b550a9-Debug/CMakeFiles/mx-tweak_autogen.dir

@@ -1,0 +1,11 @@
+Source: preview-mx
+Section: admin
+Priority: optional
+Maintainer: dolphinoracle <dolphinoracle@gmail.com>
+Build-Depends:  debhelper (>=7.0.50~), libgtk-3-dev
+Standards-Version: 3.9.5
+
+Package: preview-mx
+Architecture: any
+Depends: ${misc:Depends}, ${shlibs:Depends}
+Description: helper app to preview gtk themes

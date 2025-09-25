@@ -74,8 +74,6 @@ krita
 krita-gmic 
 krita-data 
 krita-l10n 
-python3-sip
-python3-pyqt5
 qml-module-qtmultimedia
 </install_package_names>
 <postinstall>

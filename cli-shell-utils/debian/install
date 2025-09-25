@@ -1,4 +1,4 @@
-bin/*                   	usr/local/lib/cli-shell-utils/bin
-text-menus/* 		usr/local/lib/cli-shell-utils/text-menus
-cli-shell-utils.bash 	usr/local/lib/cli-shell-utils/
+bin/*                   	usr/lib/cli-shell-utils/bin
+text-menus/* 		usr/lib/cli-shell-utils/text-menus
+cli-shell-utils.bash 	usr/lib/cli-shell-utils/
 locale/* 			usr/share/locale

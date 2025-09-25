@@ -1,3 +1,10 @@
+mx-datetime (25.4mx23) mx; urgency=medium
+
+  * Update to Qt6
+  * Update translations
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 23 Apr 2025 22:39:38 -0400
+
 mx-datetime (24.4mx23) mx; urgency=medium
 
   * Fix: Allow timezone selection within same localtime

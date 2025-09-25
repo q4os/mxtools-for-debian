@@ -1,3 +1,9 @@
+mx-apps-kde (25.05.01) mx; urgency=medium
+
+  * remove mx-system-kde 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 04 May 2025 11:09:18 -0400
+
 mx-apps-kde (24.05.01) mx; urgency=medium
 
   * remove depend on mx-docs (now a new metapackage)

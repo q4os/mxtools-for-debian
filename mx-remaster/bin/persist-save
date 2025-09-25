@@ -5,7 +5,10 @@
 # GETTEXT_KEYWORD="vexit"
 # GETTEXT_KEYWORD="error_box_pf"
 
-antiX_lib=/usr/local/lib/antiX
+antiX_lib=/usr/lib/antiX
+if [ -d "/usr/local/lib/antiX" ]; then
+	antiX_lib=/usr/local/lib/antiX
+fi
 
 #source $antiX_lib/antiX-get-param.sh
 source $antiX_lib/antiX-common.sh     "$@"
