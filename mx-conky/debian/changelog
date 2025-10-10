@@ -1,3 +1,10 @@
+mx-conky (25.10) mx; urgency=medium
+
+  * Get autostart items from the startup script
+  * Add 'autostart' filter
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 01 Oct 2025 14:36:23 -0400
+
 mx-conky (25.09.4) mx; urgency=medium
 
   * Create links for the fonts in /usr/share/mx-conky-data/themes

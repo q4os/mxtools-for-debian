@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="fr">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="fr">
 <context>
     <name>MainWindow</name>
     <message>
@@ -177,13 +175,13 @@
         <location filename="../src/mainwindow.ui" line="398"/>
         <location filename="../src/ui_mainwindow.h" line="620"/>
         <source>Size of ESP (uefi) partition:</source>
-        <translation>Taille de la partition ESP (uefi)&#xa0;:</translation>
+        <translation>Taille de la partition ESP (uefi) :</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="421"/>
         <location filename="../src/ui_mainwindow.h" line="621"/>
         <source>Verbosity (less to more):</source>
-        <translation>Verbosité (du moins au plus)&#xa0;:</translation>
+        <translation>Verbosité (du moins au plus) :</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="465"/>
@@ -274,13 +272,13 @@
         <location filename="../src/mainwindow.ui" line="675"/>
         <location filename="../src/ui_mainwindow.h" line="639"/>
         <source>Percent of USB-device to use:</source>
-        <translation>Pourcentage du périphérique USB à utiliser&#xa0;:</translation>
+        <translation>Pourcentage du périphérique USB à utiliser :</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="682"/>
         <location filename="../src/ui_mainwindow.h" line="640"/>
         <source>Label ext partition:</source>
-        <translation>Étiquette de la partition&#xa0;:</translation>
+        <translation>Étiquette de la partition :</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="730"/>
@@ -349,12 +347,12 @@
     <message>
         <location filename="../src/mainwindow.cpp" line="772"/>
         <source>Warning: The target device (%1) is smaller than the source (%2). The data might not fit. Do you want to continue?</source>
-        <translation>Avertissement: Le périphérique cible (%1) est plus petit que la source (%2). Les données risquent de ne pas tenir. Voulez-vous continuer&#xa0;?</translation>
+        <translation>Avertissement: Le périphérique cible (%1) est plus petit que la source (%2). Les données risquent de ne pas tenir. Voulez-vous continuer ?</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="775"/>
         <source>Size Warning</source>
-        <translation>Avertissement&#xa0;: Taille insuffisante</translation>
+        <translation>Avertissement : Taille insuffisante</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="783"/>
@@ -365,19 +363,19 @@ Are you sure you want to proceed?</source>
         <translation>Le périphérique cible %1 est plus grand que %2 Go.
 
 Cela peut indiquer que vous avez sélectionné le mauvais périphérique.
-Êtes-vous sûr de vouloir continuer&#xa0;?</translation>
+Êtes-vous sûr de vouloir continuer ?</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="790"/>
         <source>Large Target Device Warning</source>
-        <translation>Avertissement&#xa0;: Le périphérique cible est de trop grande taille</translation>
+        <translation>Avertissement : Le périphérique cible est de trop grande taille</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="194"/>
-        <source>Writing %1 using &apos;dd&apos; command to /dev/%2,
+        <source>Writing %1 using 'dd' command to /dev/%2,
 
 Please wait until the process is completed</source>
-        <translation>Écriture de %1 à l’aide de la commande «&#xa0;dd&#xa0;» sur /dev/%2.
+        <translation>Écriture de %1 à l’aide de la commande « dd » sur /dev/%2.
 
 Veuillez patienter jusqu’à la fin de la procédure.</translation>
     </message>
@@ -394,7 +392,7 @@ Veuillez patienter jusqu’à la fin de la procédure.</translation>
     <message>
         <location filename="../src/mainwindow.cpp" line="395"/>
         <source>LiveUSB creation successful!</source>
-        <translation>Création du Live USB accomplie&#xa0;!</translation>
+        <translation>Création du Live USB accomplie !</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="398"/>
@@ -423,7 +421,7 @@ Veuillez patienter jusqu’à la fin de la procédure.</translation>
     <message>
         <location filename="../src/mainwindow.cpp" line="468"/>
         <source>Do you wish to continue?</source>
-        <translation>Souhaitez-vous continuer&#xa0;?</translation>
+        <translation>Souhaitez-vous continuer ?</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="500"/>
@@ -433,7 +431,7 @@ Veuillez patienter jusqu’à la fin de la procédure.</translation>
     <message>
         <location filename="../src/mainwindow.cpp" line="501"/>
         <source>Version: </source>
-        <translation>Version&#xa0;: </translation>
+        <translation>Version : </translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="503"/>
@@ -501,7 +499,7 @@ Veuillez patienter jusqu’à la fin de la procédure.</translation>
     <message>
         <location filename="../src/mainwindow.cpp" line="665"/>
         <source>Could not find a log file at: </source>
-        <translation>Impossible de trouver un fichier journal dans&#xa0;: </translation>
+        <translation>Impossible de trouver un fichier journal dans : </translation>
     </message>
 </context>
 <context>
@@ -566,7 +564,7 @@ Veuillez patienter jusqu’à la fin de la procédure.</translation>
     <message>
         <location filename="../src/main.cpp" line="117"/>
         <source>version:</source>
-        <translation>version&#xa0;:</translation>
+        <translation>version :</translation>
     </message>
 </context>
 </TS>

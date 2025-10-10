@@ -1,0 +1,197 @@
+2.7.1 GHNS bugfix & translation release
+- GHNS: Create servicemenu directory (if it doesn't exist) with the install script
+- Added Slovene translation 
+
+2.7 (Stable)
+- Improve filemanager and texteditor fallbacks if xdg-mime fails to detect default applications
+- Changes from 2.6:
+  1. Compress action (using ark)
+  2. GHNS installation in KDE4 dolphin
+- GHNS installation is still a recent addition, so there may be issues with it, but it should be safe to try (the worst thing that should happen is that the installation fails).
+- 2.7 is likely the last version that supports KDE3. I can't test the menu on KDE3 anymore, and dropping KDE3 workarounds would allow me to clean up the code. I'd still include 2.7 for KDE3 but no new features.
+
+2.6.99 (2.7 RC2)
+- Try removing version number from the tarball to see if it fixes a few issues with GHNS
+- Edit GHNS scripts accordingly
+
+2.6.98 (2.7 RC)
+- Fix install/uninstall scripts when using kdesu or xdg-su
+
+2.6.96 (2.7 beta4)
+- Fix install/uninstall dialogs in older versions of KDE (pre 4.6)
+- Uninstallation dialog made a bit more informative
+- Small fixes in the install/uninstall scripts
+- Test removing the extract-directory in $KDEHOME/share/apps/servicemenu-download/ when uninstalling, dolphin's servicemenu uninstallation doesn't seem to do that for some reason. 
+- No changes to the servicemenu itself.
+
+2.6.94 (2.7 beta3)
+- EXPERIMENTAL: Added install/uninstall scripts for GHNS in dolphin (for testing only)
+- No changes to the servicemenu itself.
+
+2.6.92 (2.7 beta2)
+- Bytesize bugfix to fix an issue with kdesu on KDE SC 4.6
+
+2.6.90 (2.7 beta1)
+- Added "Compress" menu option, brings up ark compression dialog (as root) to choose filename, format etc.
+- NEW DEPENDENCY: ark 
+- Consider compress option a beta feature...all testing feedback welcome.
+
+2.6 "Stable"
+- Fixed bug with default application detection on desktop files with kde4-prefix
+
+2.5.92 (2.6_beta2) (hopefully just) temporary bugfix
+- removed "--overwrite" option from normal copy and move operations (fix error in older versions of KDE). The "advanced" noninteractive mode still uses the option (So it'll work on KDE SC 4.5 only).
+
+2.5.90 (2.6_beta1) kde-cp and kde-mv
+- Use kde-cp and kde-mv (if available) instead of cp and mv (This should prevent accidental overwrites by bringing up KDE's overwrite dialog). If you prefer the old "noninteractive" behavior, change $CPDIALOGS to "false" in the rootactions-servicemenu.pl script (recommended for "advanced" users only)
+- Some optimizations on the default application checks (removing redundancies)
+- Refreshed requirements. xdg-utils is an optional requirement (default application checks need it, but the menu will work without it) 
+
+2.5.0 (Default applications, TESTING)
+- KDE4 desktop files should now use your chosen default applications for "File Manager" and "Text Editor" actions.
+- As I cannot test the changes in KDE3, KDE3 desktop files still use hardcoded applications (which you can change by editing the desktop files)
+- As this also includes some changes in the code, it may contain bugs (please report if you run into any). It should work, but consider this a testing release (there is only so much I can test myself).
+
+2.4.11 (Bugfix)
+- Changed "terminal" icon to "utilities-terminal" in KDE4 desktop files (and krusader xml)...fixes missing icon in "open terminal here" action for KDE SC 4.5
+- Also made KDE3 desktop files consistent in using konsole icon
+
+2.4.10 Translation release
+- Added Galician translation
+
+2.4.9 Translation release
+- Added Greek translation
+(2.4.9.1 fix a bug with the greek translation)
+
+2.4.8 Translation release
+- Added Catalan translation
+- Small XDG fixes on the .desktop files
+
+2.4.7 Improved actions
+- Added "open in filemanager" and "open in terminal" to the menu also when right-clicking on files, which will open the apps in the parent folder.
+  (This should save a mouse-click when you would otherwise have to go up a directory to right-click on the folder)
+(2.4.7.1) Fixed KDE3-Konqueror version to open in konqueror instead of dolphin...my bad.
+
+2.4.6 Xdg-su
+- Added support for xdg-su (should fix remaining issues with Pardus that seems to prefer xdg-su)
+
+2.4.5 Bugfix
+- Bugfix for bin path check (Bug reported by Cihat Imamoglu on Pardus)
+- Some code clean-up 
+
+2.4.4 Translation and Krusader release
+- Added requirements to README
+- Included an importable user action file for krusader (KDE4, english only)
+- Added Turkish translation
+
+2.4.3 Translation release
+- Added Russian translation
+- Fixed a typo in Lithuanian translation in the .desktop files
+- Minor changes in French translation
+
+2.4.2 Translation release
+- Added Serbian (latin & cyrillic) translations
+
+2.4.1 Translation release
+- Added Lithuanian translation
+
+2.4 Small improvements and translations
+- Run kwrite as the editor if kate is not installed
+- Hopefully fixed issue with KDE3/KDE4 dual installations (kde3 versions of programs run on kde4) 
+- Fixed icon names for the KDE4 menus (thanks to Andrzej Szelachowski)
+- Added Czech translation
+- Updated Dutch translation
+
+2.3 Bugfixes and translations
+- Bugfix: switched to only two desktop files in dolphin versions, one for folders and one for files (now dolphin does not show two separate menus)
+- Feature improvement: Use LANG environment variable if kdelanguage is not found (thanks to Andreas Nordal)
+- Translation string change: Change 'All:' to 'Others:' in the permission change dialog, as it is in konqueror's native permission dialog (as suggested by Andreas Nordal)
+- Added Norwegian translations (bokmål and nynorsk)
+- Changed package structure (See Readme for details) 
+
+2.2.1 Translation release
+- Added Hungarian and Polish translations
+
+2.2.0 Bugfixes, translation update, minor improvements
+- Fixed a bug with current version of kdesudo
+- Corrected Italian translations for 'delete'
+- Added a more descriptive error message if the script is run directly (without arguments)
+- If kdesudo is installed, use it instead of kdesu to allow more options to clean the password dialog (hide ignore button)
+- improved language detection
+
+2.1.2 Translation, Bugfix
+- Updated French translation
+- Bugfix: Changed language detection routine to be more distribution independent and to improve support for long language format (should fix Mandriva 2008 issues)
+
+2.1.1 Translations, Bugfix and d3lphin friendly version
+- Added Portuguese translation, updated Italian and Finnish translations
+- Bugfix: When changing permissions, a warning dialog was displayed if the action was cancelled.
+- Included a d3lphin (dolphin for KDE3) friendly .desktop file. Last I checked, the normal version works in KDE4 dolphin.
+- Added inode/directory-locked servicetype to rootactionsfolders.desktop file (folder menu choices are now available for locked directories as well) 
+
+2.1: Feature upgrades
+- Added Action: Copy (useful for quickly backing up a file/folder)
+- Feature addition: Root reminder ("<APPNAME> OPENED AS ROOT" shown in the title of applications started 'as root') - Suggested by Felice Murolo
+- Feature upgrade: Recursive changes (if only one folder is selected, changes to permissions/ownership can now be applied recursively.) - Suggested by Guillaume Rozan (thanks for the code snippets, I edited the code and behaviour a bit, but your code was an excellent starting point)
+NOTE: if changing permissions recursively, files are only set executable if they already are executable (Otherwise all files in a directory would be set executable if the parent folder is set executable, which is necessary for the folder to be accessible)
+- Action renamed: 'Rename' action renamed to 'Move/Rename' (as it can be used to move files as well, like the 'mv' command)
+NEW TRANSLATION STRINGS:
+in 12-rootactionsall.desktop:
+  - 'Copy' action
+  - 'Move/Rename' action
+in rootactions-servicemenu.pl:
+  - 'copy_dialog_msgs'
+  - 'rename_dialog_msgs' (add 'move')
+  - 'recursion_dialog_msgs'
+  - 'root_reminder_msgs'
+(I'll be adding translations and translation updates when I've gotten a few of them, I don't wish to 'flood upload' after each translation)
+- Bug reports gladly accepted (email addresses in the README file)
+
+2.0.1: Translation
+- Added French translation to 2.x 
+
+2.0: 'Stable'
+- As this seems to run as it should (and I haven't gotten any 'show stopper' bug reports), I feel courageous enough to remove the BETA status.
+- Removed 'Preferred Applications' section from the perl script. To change the default applications used by the menu, edit the desktop files instead. (This allows for different application preferences for different users and easy creation of custom 'Open with [application]' entries to the menu.) See the README for customization howto.
+- Fixed a bug with 'Rename' when multiple items were chosen but the batch renamer application didn't start (the simple rename dialog was started instead).
+- Added Dutch translation
+
+1.96_Beta: Translations
+- A few minor code fixes
+- Added Italian and Spanish translations
+
+1.95_Beta: Feature improvement & translation updates
+- Improved Change permissions dialog, current permission of chosen item are now enabled by default. If multiple items are selected, permissions common to all are enabled.
+- Updated German and Finnish translations
+
+1.94_Beta: Feature addition
+- Added menuitem/dialog to change permissions. (Not planning to add any more features to 2.0, so translatable strings should be set for now ;) )
+
+1.93_Beta: Bugfixes & Translations
+- Improved grep expression for kde language detection to ensure it gets the right string
+- Fixed handling of language codes that are longer than 2 characters (like "pt_BR")
+- Added German (by Stefan Majewsky), Finnish and (partial) Brazilian Portuguese (by Viruscg) translations
+
+1.92_Beta: Bugfixes
+- Removed absolute paths to preferred applications to improve compatibility with different distributions.
+- Improved translation support for dialog boxes, makes adding translations possible (see README for how to edit)
+
+1.91_Beta: Bugfixes
+-Improved support for spaces in paths
+-use explicit path when calling the perl script with kdesu
+
+1.90_Beta: Rewrite with added features
+- Most of the strings are changed so translations are dropped, I'll probably add translations later on
+- Still beta so use at your own risk ;). I'd appreciate any bug reports feedback
+
+1.1.3 Translation release, Dutch
+
+1.1.2 Translation release, Spanish
+
+1.1.1 Translation release, Finnish and Brazilian Portuguese
+
+1.1: Translation release, German, French and Italian translations
+
+1.0: changed 'Change owner to user' to use the current users user:group numbers instead of the static 1000:1000 (uses the 'id' command to get the users user:group), this should improve compatibility and allow the menu to be used on multiple user accounts)
+
+0.9: initial beta release

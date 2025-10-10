@@ -3,7 +3,7 @@ autostart/mx-welcome.desktop	usr/share/mx-welcome
 icons/mx-welcome.png		usr/share/icons/hicolor/48x48/apps
 icons/mx-welcome.svg		usr/share/icons/hicolor/scalable/apps
 help/*				usr/share/doc/mx-welcome
-mx-welcome			usr/bin
+obj-*/mx-welcome		usr/bin
 mx-welcome.desktop		usr/share/applications
-about-mx-linux.desktop  usr/share/applications
-translations/*.qm		usr/share/mx-welcome/locale
+about-mx-linux.desktop		usr/share/applications
+obj-*/*.qm			usr/share/mx-welcome/locale

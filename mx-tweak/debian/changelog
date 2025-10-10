@@ -1,3 +1,21 @@
+mx-tweak (25.10.02mx25) mx; urgency=medium
+
+  * add NotShownIn=KDE  to brightness systray desktop file
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Tue, 07 Oct 2025 22:58:27 -0400
+
+mx-tweak (25.10.01mx25) mx; urgency=medium
+
+  * fix bluetooth enable-disable function
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 04 Oct 2025 21:49:51 -0400
+
+mx-tweak (25.09.04mx25) mx; urgency=medium
+
+  * restore brightness control in tray mode
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 26 Sep 2025 19:57:43 -0400
+
 mx-tweak (25.09.03mx25) mx; urgency=medium
 
   * only setup display tab on Xfce where its shown

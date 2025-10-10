@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="nb">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="nb">
 <context>
     <name>MainWindow</name>
     <message>
@@ -374,7 +372,7 @@ Vil du fortsette?</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="194"/>
-        <source>Writing %1 using &apos;dd&apos; command to /dev/%2,
+        <source>Writing %1 using 'dd' command to /dev/%2,
 
 Please wait until the process is completed</source>
         <translation>Skriver %1 med «dd»-kommandoen til /dev/%2,

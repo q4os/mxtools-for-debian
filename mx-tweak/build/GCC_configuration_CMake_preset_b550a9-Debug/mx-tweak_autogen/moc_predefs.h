@@ -462,7 +462,7 @@
 #define __DEC128_MANT_DIG__ 34
 #define __LDBL_MIN_10_EXP__ (-4931)
 #define __cpp_generic_lambdas 201707L
-#define VERSION "25.09.02mx25"
+#define VERSION "25.09.04mx25"
 #define __SSE_MATH__ 1
 #define __SIZEOF_LONG_LONG__ 8
 #define __cpp_user_defined_literals 200809L

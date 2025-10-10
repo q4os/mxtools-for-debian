@@ -1,0 +1,63 @@
+[Desktop Entry]
+Type=Service
+Actions=extract_here;extract_to_folder;extract_to;
+Encoding=UTF-8
+Version=1.4
+ServiceTypes=KonqPopupMenu/Plugin,KonqPopupMenu/Plugin,application/zip
+X-KDE-Priority=TopLevel
+X-KDE-Submenu=KEC: Extract
+X-KDE-Submenu[de]=KEC: Entpacken
+X-KDE-Submenu[es]=KEC: Extraer
+X-KDE-Submenu[it]=KEC: Estrazione
+X-KDE-Submenu[fr]=KEC: Extraire
+X-KDE-Submenu[zh_CN]=KEC: 解压缩
+X-KDE-Submenu[pl]=KEC: Rozpakuj
+X-KDE-Submenu[pt_BR]=KEC: Extrair
+X-KDE-Submenu[cs]=KEC: Rozbalit
+X-KDE-Submenu[tr]=KEC: Aç
+X-KDE-Submenu[da]=KEC: Pak ud
+
+[Desktop Action extract_here]
+Exec=extract_ZIP.sh %F
+Icon=application-x-archive
+Name=KEC: Extract here
+Name[de]=KEC: Hier entpacken
+Name[es]=KEC: Extraer aquí
+Name[it]=KEC: Estrai qui
+Name[fr]=KEC: Extraire ici
+Name[zh_CN]=KEC: 在此解压缩
+Name[pl]=KEC: Rozpakuj tutaj
+Name[pt_BR]=KEC: Extrair aqui
+Name[cs]=KEC: Rozbalit sem
+Name[tr]=KEC: Buraya Aç
+Name[da]=KEC: Pak ud her
+
+[Desktop Action extract_to_folder]
+Exec=extract_ZIP_to_folder.sh %F
+Icon=application-x-archive
+Name=KEC: Extract to subfolder
+Name[de]=KEC: Entpacken in Unterordner
+Name[es]=KEC: Extraer en subcarpeta
+Name[it]=KEC: Estrai nella sottocartella
+Name[fr]=KEC: Extraire dans un sous-répertoire
+Name[zh_CN]=KEC: 解压缩到子文件夹
+Name[pl]=KEC: Rozpakuj do podfolderu
+Name[pt_BR]=KEC: Extrair na subpasta
+Name[cs]=KEC: Rozbalit do adresáře
+Name[tr]=KEC: Alt Dizine Aç
+Name[da]=KEC: Pak ud til undermappe
+
+[Desktop Action extract_to]
+Exec=extract_ZIP_to.sh %F
+Icon=application-x-archive
+Name=KEC: Extract to...
+Name[de]=KEC: Entpacken nach...
+Name[es]=KEC: Extraer en...
+Name[it]=KEC: Estrai in...
+Name[fr]=KEC: Extraire dans...
+Name[zh_CN]=KEC: 解压缩到...
+Name[pl]=KEC: Rozpakuj do...
+Name[pt_BR]=KEC: Extrair em...
+Name[cs]=KEC: Rozbalit do...
+Name[tr]=KEC: Farklı Bir Konuma Aç...
+Name[da]=KEC: Pak ud til...

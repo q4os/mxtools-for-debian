@@ -116,7 +116,7 @@ bool Settings::checkSnapshotDir() const
 {
     qDebug() << "+++" << __PRETTY_FUNCTION__ << "+++";
     if (!Cmd().runAsRoot("mkdir -p \"" + snapshot_dir + '"', Cmd::QuietMode::No)) {
-        qDebug() << QObject::tr("Could not create working directory. ") + snapshot_dir;
+        qDebug() << QObject::tr("Could not create work directory. ") + snapshot_dir;
         return false;
     }
     Cmd().runAsRoot("chown $(logname): \"" + snapshot_dir + '"');
@@ -851,21 +851,21 @@ void Settings::loadConfig()
     }
 
     session_excludes.clear();
-    snapshot_dir = settingsUser.value("snapshot_dir", "/home/snapshot").toString();
+    snapshot_dir = trimQuotes(settingsUser.value("snapshot_dir", "/home/snapshot").toString());
     if (!snapshot_dir.endsWith("/snapshot")) {
         snapshot_dir = QDir::cleanPath(snapshot_dir + "/snapshot");
     }
     QString localPath = QDir::cleanPath("/usr/local/share/excludes/" + qApp->applicationName() + "-exclude.list");
     QString usrPath = QDir::cleanPath("/usr/share/excludes/" + qApp->applicationName() + "-exclude.list");
     snapshot_excludes.setFileName(
-        settingsUser.value("snapshot_excludes", QFileInfo::exists(localPath) ? localPath : usrPath).toString());
+        trimQuotes(settingsUser.value("snapshot_excludes", QFileInfo::exists(localPath) ? localPath : usrPath).toString()));
     // snapshot_basename, make_isohybrid, gui_editor, stamp, force_installer are now const members
     make_md5sum = settingsUser.value("make_md5sum", "no").toString() != "no";
     make_sha512sum = settingsUser.value("make_sha512sum", "no").toString() != "no";
-    compression = settingsUser.value("compression", "zstd").toString();
-    mksq_opt = settingsUser.value("mksq_opt").toString();
+    compression = trimQuotes(settingsUser.value("compression", "zstd").toString());
+    mksq_opt = trimQuotes(settingsUser.value("mksq_opt").toString());
     // edit_boot_menu is now const, initialized in constructor
-    tempdir_parent = settingsUser.value("workdir").toString();
+    tempdir_parent = trimQuotes(settingsUser.value("workdir").toString());
     cores = settingsUser.value("cores", max_cores).toUInt();
     throttle = settingsUser.value("throttle", 0).toUInt();
     reset_accounts = false;
@@ -1082,6 +1082,26 @@ bool Settings::getEditBootMenuSetting()
     return settingsUser.value("edit_boot_menu", "no").toString() != "no";
 }
 
+QString Settings::trimQuotes(const QString &value) const
+{
+    QString trimmed = value;
+
+    // Remove leading and trailing whitespace first
+    trimmed = trimmed.trimmed();
+
+    // Remove single quotes if they surround the entire value
+    if (trimmed.startsWith('\'') && trimmed.endsWith('\'') && trimmed.length() > 1) {
+        trimmed = trimmed.mid(1, trimmed.length() - 2);
+    }
+
+    // Remove double quotes if they surround the entire value
+    if (trimmed.startsWith('"') && trimmed.endsWith('"') && trimmed.length() > 1) {
+        trimmed = trimmed.mid(1, trimmed.length() - 2);
+    }
+
+    return trimmed;
+}
+
 Settings::InitialSettings Settings::getInitialSettings() const
 {
     QSettings settingsSystem("/etc/" + qApp->applicationName() + ".conf", QSettings::IniFormat);
@@ -1103,9 +1123,9 @@ Settings::InitialSettings Settings::getInitialSettings() const
         .live = SystemInfo::isLive(),
         .force_installer = settingsUser.value("force_installer", true).toBool(),
         .make_isohybrid = settingsUser.value("make_isohybrid", "yes").toString() == "yes",
-        .gui_editor = settingsUser.value("gui_editor").toString(),
-        .snapshot_basename = settingsUser.value("snapshot_basename", "snapshot").toString(),
-        .stamp = settingsUser.value("stamp").toString(),
+        .gui_editor = trimQuotes(settingsUser.value("gui_editor").toString()),
+        .snapshot_basename = trimQuotes(settingsUser.value("snapshot_basename", "snapshot").toString()),
+        .stamp = trimQuotes(settingsUser.value("stamp").toString()),
         .users = SystemInfo::listUsers()
     };
 }

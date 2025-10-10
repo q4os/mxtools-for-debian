@@ -1,7 +1,7 @@
 /**********************************************************************
  *  main.cpp
  **********************************************************************
- * Copyright (C) 2018 MX Authors
+ * Copyright (C) 2018-2025 MX Authors
  *
  * Authors: Adrian
  *          MX Linux <http://mxlinux.org>
@@ -32,7 +32,10 @@
 
 #include "common.h"
 #include <unistd.h>
-#include <version.h>
+
+#ifndef VERSION
+    #define VERSION "?.?.?.?"
+#endif
 
 int main(int argc, char *argv[])
 {
@@ -41,6 +44,13 @@ int main(int argc, char *argv[])
         qunsetenv("SESSION_MANAGER");
         qunsetenv("DBUS_SESSION_BUS_ADDRESS");
     }
+    // Set Qt platform to XCB (X11) if not already set and we're in X11 environment
+    if (qEnvironmentVariableIsEmpty("QT_QPA_PLATFORM")) {
+        if (!qEnvironmentVariableIsEmpty("DISPLAY") && qEnvironmentVariableIsEmpty("WAYLAND_DISPLAY")) {
+            qputenv("QT_QPA_PLATFORM", "xcb");
+        }
+    }
+
     QApplication app(argc, argv);
     if (getuid() == 0) {
         qputenv("HOME", "/root");

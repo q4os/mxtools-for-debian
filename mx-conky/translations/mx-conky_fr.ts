@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="fr">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="fr">
 <context>
     <name>ConkyCustomizeDialog</name>
     <message>
@@ -110,7 +108,7 @@
         <location filename="../src/conkycustomizedialog.cpp" line="791"/>
         <source>Cannot write to file: %1
 Insufficient permissions.</source>
-        <translation>Impossible d’écrire dans le fichier&#xa0;: %1
+        <translation>Impossible d’écrire dans le fichier : %1
 Autorisations insuffisantes.</translation>
     </message>
     <message>
@@ -121,7 +119,7 @@ Autorisations insuffisantes.</translation>
     <message>
         <location filename="../src/conkycustomizedialog.cpp" line="801"/>
         <source>Cannot write to file: %1</source>
-        <translation>Impossible d’écrire dans le fichier&#xa0;: %1</translation>
+        <translation>Impossible d’écrire dans le fichier : %1</translation>
     </message>
     <message>
         <location filename="../src/conkycustomizedialog.cpp" line="874"/>
@@ -131,7 +129,7 @@ Autorisations insuffisantes.</translation>
     <message>
         <location filename="../src/conkycustomizedialog.cpp" line="874"/>
         <source>Do you want to preserve the original file?</source>
-        <translation>Voulez-vous conserver le fichier d’origine&#xa0;?</translation>
+        <translation>Voulez-vous conserver le fichier d’origine ?</translation>
     </message>
     <message>
         <location filename="../src/conkycustomizedialog.cpp" line="897"/>
@@ -355,12 +353,12 @@ sinon ce paramètre n’aura aucun effet.</translation>
     <message>
         <location filename="../src/conkycustomizedialog.cpp" line="1524"/>
         <source>Setting Type to &quot;Transparent&quot; will make the whole window transparent (including any images). Use &quot;Pseudo-Transparent&quot; if you want the images to be opaque.</source>
-        <translation>Si vous réglez le type sur «&#xa0;Transparent&#xa0;», toute la fenêtre deviendra transparente (y compris les images). Utilisez «&#xa0;Pseudo-transparent&#xa0;» si vous souhaitez que les images restent opaques.</translation>
+        <translation>Si vous réglez le type sur « Transparent », toute la fenêtre deviendra transparente (y compris les images). Utilisez « Pseudo-transparent » si vous souhaitez que les images restent opaques.</translation>
     </message>
     <message>
         <location filename="../src/conkycustomizedialog.cpp" line="1534"/>
         <source>Setting Type to &quot;Pseudo-Transparent&quot; will make the window transparent but the window will have a shadow. The shadow can be disabled by configuring your window manager.</source>
-        <translation>Si vous réglez le type sur «&#xa0;pseudo-transparent&#xa0;», la fenêtre deviendra transparente, mais elle aura une ombre. Vous pouvez désactiver l’ombre en configurant votre gestionnaire de fenêtres.</translation>
+        <translation>Si vous réglez le type sur « pseudo-transparent », la fenêtre deviendra transparente, mais elle aura une ombre. Vous pouvez désactiver l’ombre en configurant votre gestionnaire de fenêtres.</translation>
     </message>
     <message>
         <location filename="../src/conkycustomizedialog.cpp" line="1545"/>
@@ -513,17 +511,17 @@ sinon ce paramètre n’aura aucun effet.</translation>
     <message>
         <location filename="../src/conkylistwidget.cpp" line="344"/>
         <source>Total: 0 conkies</source>
-        <translation>Total&#xa0;: 0 conkies</translation>
+        <translation>Total : 0 conkies</translation>
     </message>
     <message>
         <location filename="../src/conkylistwidget.cpp" line="595"/>
         <source>Total: %1 conkies</source>
-        <translation>Total&#xa0;: %1 conkies</translation>
+        <translation>Total : %1 conkies</translation>
     </message>
     <message>
         <location filename="../src/conkylistwidget.cpp" line="598"/>
         <source>Showing: %1 of %2 conkies</source>
-        <translation>Affichage&#xa0;: %1 sur %2 conkies</translation>
+        <translation>Affichage : %1 sur %2 conkies</translation>
     </message>
 </context>
 <context>
@@ -670,7 +668,7 @@ sinon ce paramètre n’aura aucun effet.</translation>
         <location filename="../src/mainwindow.cpp" line="479"/>
         <source>Conky has been copied to your personal folder for editing:
 %1</source>
-        <translation>Conky a été copié dans votre répertoire personnel pour être modifié&#xa0;:
+        <translation>Conky a été copié dans votre répertoire personnel pour être modifié :
 %1</translation>
     </message>
     <message>
@@ -694,7 +692,7 @@ sinon ce paramètre n’aura aucun effet.</translation>
         <location filename="../src/mainwindow.cpp" line="657"/>
         <source>Conky has been copied to your personal folder for customization:
 %1</source>
-        <translation>Conky a été copié dans votre dossier personnel pour que vous puissiez le personnaliser&#xa0;:
+        <translation>Conky a été copié dans votre dossier personnel pour que vous puissiez le personnaliser :
 %1</translation>
     </message>
     <message>
@@ -730,7 +728,7 @@ sinon ce paramètre n’aura aucun effet.</translation>
         <location filename="../src/mainwindow.cpp" line="428"/>
         <location filename="../src/mainwindow.cpp" line="604"/>
         <source>Enter a name for the copy:</source>
-        <translation>Entrez un nom pour la copie&#xa0;:</translation>
+        <translation>Entrez un nom pour la copie :</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="429"/>
@@ -749,10 +747,10 @@ Entrez un nom pour la copie.</translation>
     <message>
         <location filename="../src/mainwindow.cpp" line="447"/>
         <location filename="../src/mainwindow.cpp" line="625"/>
-        <source>A conky with the name &apos;%1&apos; already exists in your personal folder.
+        <source>A conky with the name '%1' already exists in your personal folder.
 Do you want to overwrite it?</source>
-        <translation>Un conky nommé «&#xa0;%1&#xa0;» existe déjà dans votre dossier personnel.
-Voulez-vous le remplacer&#xa0;?</translation>
+        <translation>Un conky nommé « %1 » existe déjà dans votre dossier personnel.
+Voulez-vous le remplacer ?</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="514"/>
@@ -764,7 +762,7 @@ Voulez-vous le remplacer&#xa0;?</translation>
         <source>This conky file is read-only and requires administrator privileges to edit.
 Do you want to edit it with elevated privileges?</source>
         <translation>Ce fichier conky est en lecture seule et nécessite des privilèges d’administrateur pour être modifié.
-Voulez-vous le modifier avec des privilèges élevés&#xa0;?</translation>
+Voulez-vous le modifier avec des privilèges élevés ?</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="544"/>
@@ -772,7 +770,7 @@ Voulez-vous le modifier avec des privilèges élevés&#xa0;?</translation>
 %1
 
 This action cannot be undone.</source>
-        <translation>Êtes-vous sûr de vouloir supprimer le fichier conky&#xa0;:
+        <translation>Êtes-vous sûr de vouloir supprimer le fichier conky :
 %1
 
 Cette action ne peut pas être annulée.</translation>
@@ -791,7 +789,7 @@ Cette action ne peut pas être annulée.</translation>
         <location filename="../src/mainwindow.cpp" line="578"/>
         <source>Failed to delete conky file:
 %1</source>
-        <translation>Impossible de supprimer le fichier conky&#xa0;:
+        <translation>Impossible de supprimer le fichier conky :
 %1</translation>
     </message>
     <message>
@@ -804,7 +802,7 @@ Cette action ne peut pas être annulée.</translation>
         <source>This conky file is read-only and requires administrator privileges to customize.
 Do you want to customize it with elevated privileges?</source>
         <translation>Ce fichier conky est en lecture seule et nécessite des privilèges d’administrateur pour être personnalisé.
-Souhaitez-vous le personnaliser avec des privilèges élevés&#xa0;?</translation>
+Souhaitez-vous le personnaliser avec des privilèges élevés ?</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="818"/>
@@ -814,7 +812,7 @@ Souhaitez-vous le personnaliser avec des privilèges élevés&#xa0;?</translatio
     <message>
         <location filename="../src/mainwindow.cpp" line="818"/>
         <source>Cannot start editor for file: %1</source>
-        <translation>Impossible de démarrer l’éditeur pour le fichier&#xa0;: %1</translation>
+        <translation>Impossible de démarrer l’éditeur pour le fichier : %1</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="828"/>
@@ -824,7 +822,7 @@ Souhaitez-vous le personnaliser avec des privilèges élevés&#xa0;?</translatio
     <message>
         <location filename="../src/mainwindow.cpp" line="830"/>
         <source>Version: </source>
-        <translation>Version&#xa0;: </translation>
+        <translation>Version : </translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="831"/>
@@ -943,12 +941,12 @@ Souhaitez-vous le personnaliser avec des privilèges élevés&#xa0;?</translatio
     <message>
         <location filename="../src/previewdialog.cpp" line="198"/>
         <source>Generating preview for: %1</source>
-        <translation>Génération de l’aperçu pour&#xa0;: %1</translation>
+        <translation>Génération de l’aperçu pour : %1</translation>
     </message>
     <message>
         <location filename="../src/previewdialog.cpp" line="419"/>
         <source>Preview generation complete! Generated %1 previews.</source>
-        <translation>Génération de l’aperçu terminée&#xa0;! %1 aperçus générés.</translation>
+        <translation>Génération de l’aperçu terminée ! %1 aperçus générés.</translation>
     </message>
     <message>
         <location filename="../src/previewdialog.cpp" line="423"/>
@@ -1040,7 +1038,7 @@ Souhaitez-vous le personnaliser avec des privilèges élevés&#xa0;?</translatio
     <message>
         <location filename="../src/settingsdialog.cpp" line="212"/>
         <source>Startup delay (seconds):</source>
-        <translation>Délai de démarrage (en secondes)&#xa0;:</translation>
+        <translation>Délai de démarrage (en secondes) :</translation>
     </message>
     <message>
         <location filename="../src/settingsdialog.cpp" line="95"/>

@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="hr">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="hr">
 <context>
     <name>MainWindow</name>
     <message>
@@ -53,37 +51,37 @@
         <location filename="../mainwindow.ui" line="603"/>
         <location filename="../mainwindow.ui" line="712"/>
         <source>Re-scan</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="383"/>
         <source>Enabled</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="388"/>
         <source>Interface</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="393"/>
         <source>Driver</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="398"/>
         <source>Description</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="403"/>
         <source>Vendor</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="408"/>
         <source>Product</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="416"/>
@@ -93,7 +91,7 @@
     <message>
         <location filename="../mainwindow.ui" line="430"/>
         <source>Active interface</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="446"/>
@@ -103,12 +101,12 @@
     <message>
         <location filename="../mainwindow.ui" line="468"/>
         <source>Unblocks all soft/hard blocked wireless devices</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="471"/>
         <source>Unblock WiFi Devices</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="502"/>
@@ -118,7 +116,7 @@
     <message>
         <location filename="../mainwindow.ui" line="514"/>
         <source>Associated Linux drivers</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="523"/>
@@ -128,13 +126,13 @@
     <message>
         <location filename="../mainwindow.ui" line="586"/>
         <source>Unload Driver</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="622"/>
         <location filename="../mainwindow.cpp" line="833"/>
         <source>Block Driver</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="640"/>
@@ -159,7 +157,7 @@
     <message>
         <location filename="../mainwindow.ui" line="729"/>
         <source>About NDISwrapper</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="741"/>
@@ -169,12 +167,12 @@
     <message>
         <location filename="../mainwindow.ui" line="751"/>
         <source>In order to use Windows drivers you need first to install NDISwrapper</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="767"/>
         <source>Uninstall NDISwrapper</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="798"/>
@@ -190,7 +188,7 @@
         <location filename="../mainwindow.ui" line="816"/>
         <location filename="../mainwindow.ui" line="933"/>
         <source>Target URL:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="826"/>
@@ -223,12 +221,12 @@
     <message>
         <location filename="../mainwindow.ui" line="943"/>
         <source>Hops</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="86"/>
         <source>IP address from router:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="87"/>
@@ -239,37 +237,37 @@
         <location filename="../mainwindow.cpp" line="124"/>
         <location filename="../mainwindow.cpp" line="137"/>
         <source>Interface: %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="124"/>
         <location filename="../mainwindow.cpp" line="138"/>
         <source>Driver: %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="125"/>
         <location filename="../mainwindow.cpp" line="139"/>
         <source>Description: %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="126"/>
         <location filename="../mainwindow.cpp" line="140"/>
         <source>Product: %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="126"/>
         <location filename="../mainwindow.cpp" line="141"/>
         <source>Vendor: %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="127"/>
         <location filename="../mainwindow.cpp" line="142"/>
         <source>Enabled: %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="195"/>
@@ -313,7 +311,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="267"/>
         <source>Traceroute hasn&apos;t been installed</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="268"/>
@@ -329,13 +327,13 @@
         <location filename="../mainwindow.cpp" line="285"/>
         <location filename="../mainwindow.cpp" line="330"/>
         <source>No destination host</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="285"/>
         <location filename="../mainwindow.cpp" line="330"/>
         <source>Please fill in the destination host field</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="445"/>
@@ -350,17 +348,17 @@
     <message>
         <location filename="../mainwindow.cpp" line="468"/>
         <source>Blocked Drivers</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="488"/>
         <source>Blocked Broadcom Drivers</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="510"/>
         <source>Ndiswrapper is not installed</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="523"/>
@@ -375,22 +373,22 @@
     <message>
         <location filename="../mainwindow.cpp" line="539"/>
         <source>. Alternate driver: </source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="603"/>
         <source>Driver removed from blocklist</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="603"/>
         <source>Driver removed from blocklist.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="609"/>
         <source>Module blocked</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="763"/>
@@ -400,22 +398,22 @@
     <message>
         <location filename="../mainwindow.cpp" line="765"/>
         <source>Error detected, could not compile ndiswrapper driver.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="768"/>
         <source>Error detected, could not install ndiswrapper.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="780"/>
         <source>Error encountered while removing Ndiswrapper</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="830"/>
         <source>Unblock Driver</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="862"/>
@@ -430,7 +428,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="868"/>
         <source>WiFi hardware switch is off</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="875"/>
@@ -440,7 +438,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="876"/>
         <source>Windows installation information file (*.inf)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="907"/>
@@ -450,22 +448,22 @@
     <message>
         <location filename="../mainwindow.cpp" line="908"/>
         <source>The *.sys files must be in the same location as the *.inf file. %1 cannot be found</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="919"/>
         <source>sys file reference not found</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="920"/>
         <source>The sys file for the given driver cannot be determined after parsing the inf file</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="937"/>
         <source>Ndiswrapper driver removed.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="945"/>
@@ -476,7 +474,7 @@
         <location filename="../mainwindow.cpp" line="957"/>
         <source>Could not unlock devices.
 WiFi device(s) might already be unlocked.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="959"/>
@@ -496,7 +494,7 @@ WiFi device(s) might already be unlocked.</source>
     <message>
         <location filename="../mainwindow.cpp" line="976"/>
         <source>Program for troubleshooting and configuring network for MX Linux</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="978"/>
@@ -516,7 +514,7 @@ WiFi device(s) might already be unlocked.</source>
     <message>
         <location filename="../mainwindow.cpp" line="1020"/>
         <source>Driver unloaded successfully</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -530,7 +528,7 @@ WiFi device(s) might already be unlocked.</source>
         <location filename="../about.cpp" line="53"/>
         <location filename="../about.cpp" line="63"/>
         <source>Changelog</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../about.cpp" line="54"/>
@@ -551,22 +549,22 @@ WiFi device(s) might already be unlocked.</source>
     <message>
         <location filename="../main.cpp" line="71"/>
         <source>You seem to be logged in as root, please log out and log in as normal user to use this program.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../main.cpp" line="79"/>
         <source>You must run this program with admin access.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="624"/>
         <source>Could not load </source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="649"/>
         <source>Could not unload </source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 </TS>

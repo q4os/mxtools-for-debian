@@ -32,7 +32,7 @@ brightness_small::brightness_small(QWidget *parent, const QStringList &args) noe
     QIcon icon;
     icon = QIcon::fromTheme(u"brightness-systray"_s);
     setWindowIcon(icon);
-    setWindowTitle(tr("MX-Tweak"));
+    setWindowTitle(tr("Brightness"));
     expand = false;
     QString home_path = QDir::homePath();
     QString config_file_path = home_path + "/.config/MX-Linux/MX-Tweak/expand"_L1;
@@ -193,7 +193,7 @@ void brightness_small::setBrightness() noexcept
     qDebug() << "changed brightness is :" << brightness;
     runProc(u"xrandr"_s, {u"--output"_s, ui->comboDisplay->currentText(),
         u"--brightness"_s, brightness,
-        u"--gamma"_s + g1+':'+g2+':'+g3});
+        u"--gamma"_s, g1+':'+g2+':'+g3});
 }
 
 void brightness_small::pushSave_clicked() noexcept

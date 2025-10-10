@@ -1,3 +1,10 @@
+mx-boot-options (25.10) mx; urgency=medium
+
+  * Disable preview button when selected theme is 'text' or 'tribar'
+    since those are known to crash X
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 02 Oct 2025 15:30:27 -0400
+
 mx-boot-options (25.8) mx; urgency=medium
 
   * Disable Preview button if 'splash' is not in the booted kernel

@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="nb">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="nb">
 <context>
     <name>ConkyCustomizeDialog</name>
     <message>
@@ -749,7 +747,7 @@ Angi et navn for kopien.</translation>
     <message>
         <location filename="../src/mainwindow.cpp" line="447"/>
         <location filename="../src/mainwindow.cpp" line="625"/>
-        <source>A conky with the name &apos;%1&apos; already exists in your personal folder.
+        <source>A conky with the name '%1' already exists in your personal folder.
 Do you want to overwrite it?</source>
         <translation>En conky som heter «%1» finnes allerede i hjemmemappa di.
 Vil du overskrive den?</translation>

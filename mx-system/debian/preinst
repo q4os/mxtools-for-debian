@@ -59,10 +59,26 @@ case "$1" in
                       --divert /usr/lib/linux-boot-probes/mounted/40grub2.dpkg-dist \
                       --add    /usr/lib/linux-boot-probes/mounted/40grub2 || :
 
-#divert dkms to a fixed version
+#remove old dkms.mx divert, if it exists
+					if [ -x /usr/sbin/dkms.mx ]; then
+					#remove mx-system version file because both can't exist
+						rm -f /usr/sbin/dkms
+						# remove divert, /usr/sbin/dkms should be debian's version
+        				dpkg-divert --package mx-system --rename \
+                   		--divert /usr/sbin/dkms.dpkg-dist --remove /usr/sbin/dkms || :
+					fi
+
+#divert dkms to a so a wrapper can be used
                    dpkg-divert --quiet --package mx-system --rename \
-                      --divert /usr/sbin/dkms.dpkg-dist \
+                      --divert /usr/sbin/dkms.real \
                       --add    /usr/sbin/dkms || :
+                    if [ ! -x /usr/sbin/dkms.real ]; then
+                    #copy new file, because the divert below doesn't quite do it 
+                    #without reinstalling dkms.
+                   		cp -a /usr/sbin/dkms /usr/sbin/dkms.real
+                   	fi
+                    
+                      
 #MX descriptor for BOOTX64.CSV                     
                    dpkg-divert --quiet                                               \
                                --add                                                 \

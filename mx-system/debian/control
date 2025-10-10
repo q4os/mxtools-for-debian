@@ -8,7 +8,7 @@ Standards-Version: 3.9.8
 Package: mx-system
 Architecture: all
 Depends: gcc, mx-debian-firmware | linux-firmware
-Conflicts:  mx-buildiso-dkms
+Conflicts:  mx-buildiso-dkms, mx-system (<=25.10)
 Description: metapackage for packages needed for system functions
  This metapackage depends on packages needed for certain systems to work with
  full functionality. Unlike Debian, MX Linux does not install recommended

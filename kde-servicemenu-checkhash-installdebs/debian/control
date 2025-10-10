@@ -1,0 +1,15 @@
+Source: kde-servicemenu-checkhash-installdebs
+Section: kde
+Priority: optional
+Maintainer: Steven Pusser <stevep@mxlinux.org>
+Build-Depends: debhelper (>=9)
+Standards-Version: 3.9.8
+
+Package: kde-servicemenu-checkhash-installdebs
+Architecture: all
+Depends: dolphin | konqueror, konsole
+Description: KDEservice menus to install debs and check file hashes
+ One service menu will allow you to quickly check file's md5, sha1, or
+ sha256 hash sums. The other uses apt's new ability to install local
+ deb files and pull in dependencies.  It also permits downgrades and
+ installing multiple debs at once, which is an advantage over gdebi.

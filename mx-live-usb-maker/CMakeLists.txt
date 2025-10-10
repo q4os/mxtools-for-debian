@@ -113,6 +113,7 @@ add_executable(mx-live-usb-maker
     ${HEADERS}
     ${UI_FILES}
     ${RESOURCE_FILES}
+    ./images.qrc
 )
 
 # Link Qt6 libraries

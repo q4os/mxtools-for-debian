@@ -21,7 +21,8 @@ Depends: mx-iso-template | iso-template (>= 16.1mx15),
          ${shlibs:Depends}
 Recommends: calamares-settings-debian,
          grub-efi-amd64-bin | grub-efi-ia32-bin,
-         grub-pc-bin
+         grub-pc-bin,
+         featherpad
 Description: System snapshot tool
  System Snapshot is a graphical utility that allows users to create a live-CD/USB
  image from their running Linux system. It provides a user-friendly interface

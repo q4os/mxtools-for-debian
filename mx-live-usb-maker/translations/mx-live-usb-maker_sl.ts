@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="sl">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="sl">
 <context>
     <name>MainWindow</name>
     <message>
@@ -374,7 +372,7 @@ Ali res želite nadaljevati?</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="194"/>
-        <source>Writing %1 using &apos;dd&apos; command to /dev/%2,
+        <source>Writing %1 using 'dd' command to /dev/%2,
 
 Please wait until the process is completed</source>
         <translation>Zapisovanje %1 z uporabo ukaza &apos;dd&apos; na /dev/%2,

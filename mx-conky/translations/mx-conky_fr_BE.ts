@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="fr_BE">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="fr_BE">
 <context>
     <name>ConkyCustomizeDialog</name>
     <message>
@@ -355,12 +353,12 @@ sinon ce paramètre n’aura aucun effet.</translation>
     <message>
         <location filename="../src/conkycustomizedialog.cpp" line="1524"/>
         <source>Setting Type to &quot;Transparent&quot; will make the whole window transparent (including any images). Use &quot;Pseudo-Transparent&quot; if you want the images to be opaque.</source>
-        <translation>Si vous réglez le type sur «&#xa0;Transparent&#xa0;», toute la fenêtre deviendra transparente (y compris les images). Utilisez «&#xa0;Pseudo-transparent&#xa0;» si vous souhaitez que les images restent opaques.</translation>
+        <translation>Si vous réglez le type sur « Transparent », toute la fenêtre deviendra transparente (y compris les images). Utilisez « Pseudo-transparent » si vous souhaitez que les images restent opaques.</translation>
     </message>
     <message>
         <location filename="../src/conkycustomizedialog.cpp" line="1534"/>
         <source>Setting Type to &quot;Pseudo-Transparent&quot; will make the window transparent but the window will have a shadow. The shadow can be disabled by configuring your window manager.</source>
-        <translation>Si vous réglez le type sur «&#xa0;pseudo-transparent&#xa0;», la fenêtre deviendra transparente, mais elle aura une ombre. Vous pouvez désactiver l’ombre en configurant votre gestionnaire de fenêtres.</translation>
+        <translation>Si vous réglez le type sur « pseudo-transparent », la fenêtre deviendra transparente, mais elle aura une ombre. Vous pouvez désactiver l’ombre en configurant votre gestionnaire de fenêtres.</translation>
     </message>
     <message>
         <location filename="../src/conkycustomizedialog.cpp" line="1545"/>
@@ -565,7 +563,7 @@ sinon ce paramètre n’aura aucun effet.</translation>
     <message>
         <location filename="../src/mainwindow.cpp" line="247"/>
         <source>About...</source>
-        <translation>À propos&#xa0;…</translation>
+        <translation>À propos …</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="254"/>
@@ -585,7 +583,7 @@ sinon ce paramètre n’aura aucun effet.</translation>
     <message>
         <location filename="../src/mainwindow.cpp" line="157"/>
         <source>Loading Conky configurations...</source>
-        <translation>Chargement des configurations Conky&#xa0;…</translation>
+        <translation>Chargement des configurations Conky …</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="187"/>
@@ -642,7 +640,7 @@ sinon ce paramètre n’aura aucun effet.</translation>
     <message>
         <location filename="../src/mainwindow.cpp" line="209"/>
         <source>Search conky by name...</source>
-        <translation>Rechercher Conky par le nom&#xa0;…</translation>
+        <translation>Rechercher Conky par le nom …</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="211"/>
@@ -749,9 +747,9 @@ Entrez un nom pour la copie.</translation>
     <message>
         <location filename="../src/mainwindow.cpp" line="447"/>
         <location filename="../src/mainwindow.cpp" line="625"/>
-        <source>A conky with the name &apos;%1&apos; already exists in your personal folder.
+        <source>A conky with the name '%1' already exists in your personal folder.
 Do you want to overwrite it?</source>
-        <translation>Un conky nommé «&#xa0;%1&#xa0;» existe déjà dans votre dossier personnel.
+        <translation>Un conky nommé « %1 » existe déjà dans votre dossier personnel.
 Voulez-vous le remplacer?</translation>
     </message>
     <message>
@@ -933,7 +931,7 @@ Souhaitez-vous le personnaliser avec des privilèges élevés?</translation>
     <message>
         <location filename="../src/previewdialog.cpp" line="155"/>
         <source>Starting preview generation...</source>
-        <translation>Lancement de la génération de l’aperçu&#xa0;…</translation>
+        <translation>Lancement de la génération de l’aperçu …</translation>
     </message>
     <message>
         <location filename="../src/previewdialog.cpp" line="159"/>

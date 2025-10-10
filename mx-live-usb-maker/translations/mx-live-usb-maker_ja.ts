@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="ja">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="ja">
 <context>
     <name>MainWindow</name>
     <message>
@@ -339,22 +337,22 @@
     <message>
         <location filename="../src/mainwindow.cpp" line="750"/>
         <source>Source Error</source>
-        <translation type="unfinished"></translation>
+        <translation>ソースのエラー</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="751"/>
         <source>Could not find the source linuxfs file.</source>
-        <translation type="unfinished"></translation>
+        <translation>ソースの linuxfs ファイルが見つかりません。</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="772"/>
         <source>Warning: The target device (%1) is smaller than the source (%2). The data might not fit. Do you want to continue?</source>
-        <translation type="unfinished"></translation>
+        <translation>警告: 対象のデバイス (%1) はソース (%2) より小さいです。データが収まらない可能性があります。作業を続行しますか？</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="775"/>
         <source>Size Warning</source>
-        <translation type="unfinished"></translation>
+        <translation>サイズに関する警告</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="783"/>
@@ -362,16 +360,19 @@
 
 This may indicate you have selected the wrong device.
 Are you sure you want to proceed?</source>
-        <translation type="unfinished"></translation>
+        <translation>対象のデバイス %1 は %2 GB を超えています。
+
+誤ったデバイスを選択した可能性があります。
+本当に作業を続行しますか？</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="790"/>
         <source>Large Target Device Warning</source>
-        <translation type="unfinished"></translation>
+        <translation>対象のデバイスが大きいことに対する警告</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="194"/>
-        <source>Writing %1 using &apos;dd&apos; command to /dev/%2,
+        <source>Writing %1 using 'dd' command to /dev/%2,
 
 Please wait until the process is completed</source>
         <translation>&apos;dd&apos; コマンドを使用して %1 を /dev/%2 に書き込んでいます

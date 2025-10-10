@@ -1,0 +1,101 @@
+Terms of Service
+
+Last updated: Aug 21, 2025 7:53 PM
+
+Please read this Terms of Service ("Terms," "Terms of Service") carefully before using the mxlinux.org website (the "Website") operated by MXLNX Inc, a(n) Limited Liability Company formed in New York, United States ("us," "we," "our") as this Terms of Service contains important information regarding limitations of our liability. Your access to and use of this Website is conditional upon your acceptance of and compliance with these Terms. These Terms apply to everyone, including but not limited to visitors, users and others, who wish to access and use the Website.
+
+By accessing or using the Website, you agree to be bound by these Terms. If you disagree with any part of the Terms, then you do not have our permission to access or use the Website.
+Refunds
+
+We do not offer refunds on any purchases made on this Website.
+Software in MX Linux
+
+We develop software that is covered by a free license that can be examined in the Wiki list. We also include software developed by others that is under a free license.
+At the same time, we distribute by default a certain amount of non-free software that we consider critical to a trouble-free experience for users. Some examples:.
+The “wl” driver (broadcom-sta) and non-free firmware with proprietary components .
+A dedicated tool for installing Nvidia graphic drivers.
+Adobe Flash Player (distributed by permission).
+Our rationale: it is much easier for advanced users to remove such software than it is for regular users to install them. And it’s particularly difficult to install a driver for a network card without internet access!
+Branding
+
+Trademark.
+The name “MX Linux” is covered by Linux Foundation Sublicense No. 20140605-0483. It is available for fair use in artistic, promotional and informational contexts. Linux® is the registered trademark of Linus Torvalds in the U.S. and other countries..
+.
+Restrictions.
+Anyone distributing a respin that we do not host ourselves must specify that it is a respin in the names of a website, ISO or download location. For example: mx-respin. Furthermore, it must be specified clearly somewhere that products are based on MX Linux but are not connected with it in any official way..
+The name “MX Linux” may not be used as part of a respin-project’s website title or in the project’s iso/media without making clear that the it is not an official part of MX Linux..
+.
+Logo and art work.
+As with the name, the logos and art work are also available for fair use, including artistic redesigns, except in a commercial context. They are subject to the same restrictions applicable to the trademark and the name.
+Prohibited uses
+
+You agree that you will use this Website in accordance with all applicable laws, rules, regulations and these Terms at all times. The following is a non-exhaustive list of prohibited uses of this Website. You agree that you will not perform any of the following prohibited uses:
+
+    Impersonating or attempting to impersonate MXLNX Inc or its employees, representatives, subsidiaries or divisions;
+    Misrepresenting your identity or affiliation with any person or entity;
+    Sending or attempting to send any advertising or promotional material, including but not limited to spam, junk mail, chain mail or any similar material;
+    Engaging in any conduct that restricts or inhibits any person’s use or enjoyment of the Website, or which, as determined in our sole discretion, may harm us or the users of this Website or expose us or other users to liability;
+    Using the Website in any manner that could disable, overburden, damage or impair the Website or interfere with another party’s use of the Website;
+    Using any robot, spider or other similar automatic technology, process or means to access or use the Website for any purpose, including monitoring or copying any of the material on this Website;
+    Using any manual process or means to monitor or copy any of the material on this Website or for any other unauthorized purpose;
+    Using any device, software, means or routine that interferes with the proper working of the Website, including but not limited to viruses, trojan horses, worms, logic bombs or other such materials;
+    Attempting to gain unauthorized access to, interfering with, damaging or disrupting any parts of the Website, the server(s) on which the Website is stored, or any server, computer or database connected to the Website;
+    Attempting to attack or attacking the Website via a denial-of-service attack or a distributed denial-of-service attack;
+    Otherwise attempting to interfere with the proper working of the Website;
+    Using the Website in any way that violates any applicable federal, state or local laws, rules or regulations.
+
+No warranty on Website
+
+This Website is provided “as is,” No warranty, express or implied (including any implied warranty of merchantability, of satisfactory quality or fitness for a particular purpose or use) shall apply to this Website, whether arising by law, course of dealing, course of performance, usage of trade or otherwise.
+Availability, errors and inaccuracies
+
+We assume no liability for the availability, errors or inaccuracies of the information, products or services provided on this Website. We may experience delays in updating information on this Website and in our advertising on other websites. The information, products and services found on the Website may contain errors or inaccuracies or may not be complete or current. Products or services may be incorrectly priced or unavailable. We expressly reserve the right to correct any pricing errors on our Website. The inclusion or offering of any product or service on this Website does not constitute an endorsement or recommendation of such product or service by us.
+Damages and limitation of liability
+
+In no event shall MXLNX Inc be liable for any direct, indirect, punitive, incidental, special or consequential damages arising out of, relating to or in any way connected with your access to, display of or use of this Website or with the delay or inability to access, display or use this Website, including but not limited to your reliance upon opinions or information appearing on this Website; any computer viruses, information, software, linked websites operated by third parties, products or services obtained through this Website, whether based on a theory of negligence, contract, tort, strict liability, consumer protection statutes or otherwise, even if MXLNX Inc has been advised of the possibility of such damages.
+Links to third party websites
+
+This Website may contain hyperlinks to websites operated by third parties and not by us. We provide such hyperlinks for your reference only. We do not control such websites and are not responsible for their contents or the privacy or other practices of such websites. Further, it is your responsibility to take precautions to ensure that whatever links you click on or software that you download, whether from this Website or other websites or applications, is free of such items as viruses, worms, trojan horses, defects and other items of a destructive nature. Our inclusion of hyperlinks to such websites does not imply any endorsement of the material on such websites or any association with their operators.
+Intellectual property and DMCA notice and procedure for intellectual property infringement claims
+
+All contents of this Website are ©2014 - 2025 MXLNX Inc or third parties. All rights reserved. Unless specified otherwise, this Website and all content and other materials on this Website including but not limited to all logos, designs, text, graphics, pictures, information, data, software, sound files and arrangement thereof (collectively, “Content”) are the proprietary property of MXLNX Inc and are either registered trademarks, trademarks or otherwise protected intellectual property of MXLNX Inc or third parties in the United States and/or other countries.
+
+If you are aware of a potential infringement of our intellectual property, please contact Jerry Bond at jerry@mxlinux.org.
+
+We respect the intellectual property rights of others. It is our policy to respond to any claim that Content posted on the Website infringes on the copyright, trademark or other intellectual property rights of any person or entity.
+
+If you believe in good faith that the Content infringes on your intellectual property rights, you or your agent may send us a written notice of such infringement titled “Infringement of Intellectual Property Rights - DMCA.” Your notice to us must include the following information:
+
+    An electronic or physical signature of the person authorized to act on behalf of the owner of the intellectual property right’s interest;
+    A description of the work that you claim has been infringed, including the URL (i.e., web page address) of the location where the work exists or a copy of the work;
+    Your name, email, address and telephone number; and
+    A statement by you that you have a good faith belief that the disputed use is not authorized by the owner of the work, its agent or the law.
+
+Please note that we will not process your complaint if it is not properly filled out or is incomplete. You may be held accountable for damages, including but not limited to costs and attorneys’ fees for any misrepresentation or bad faith claims regarding the infringement of your intellectual property rights by the Content on this Website.
+
+You may submit your claim to us by contacting us at:
+
+MXLNX Inc
+Jerry Bond
+jerry@mxlinux.org
+315-585-0145
+Jerry Bond
+MXLNX Inc.
+3904 Willowdale Lane
+Geneva NY 14456-9267
+United States
+Governing law, severability, dispute resolution and venue
+
+These Terms shall be governed and construed in accordance with the laws of the state of New York, United States, without regard to its conflict of laws provisions. These terms shall not be governed by the United Nations convention on contracts for the sale of international goods, the Uniform Commercial Code, nor Incoterms.
+
+Our failure to enforce any right or provision of these Terms will not be considered a waiver of that right or provision. If any provision of these Terms is held to be invalid or unenforceable by a court, the remaining provisions of these Terms will remain in effect. These Terms constitute the entire agreement between you and us regarding our Website, and supersede and replace any prior agreements we might have had with you regarding the Website.
+
+Any controversy or claim arising out of or relating to these Terms including but not limited to the interpretation or breach thereof shall be resolved in a court of competent jurisdiction in Seneca County, New York.
+
+You and MXLNX Inc agree that each may bring claims against the other only in your or its individual capacity and not as a plaintiff or class member in any class or representative action.
+Changes to Terms of Service
+
+We reserve the right to make changes to these Terms of Service at any time. We will not provide you with any notice when we make changes to this Terms of Service.
+Questions
+
+If you have any questions about our Terms of Service, please contact us at devs@mxlinux.org.

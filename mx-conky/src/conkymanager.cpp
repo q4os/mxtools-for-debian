@@ -25,13 +25,11 @@
 #include <QDebug>
 #include <QDir>
 #include <QFileInfo>
-#include <QPointer>
 #include <QProcess>
+#include <QProcessEnvironment>
 #include <QRegularExpression>
 #include <QSet>
-#include <QStandardPaths>
 #include <QTextStream>
-#include <QProcessEnvironment>
 
 #include "cmd.h"
 #include "conkymanager.h"
@@ -89,7 +87,6 @@ QStringList ConkyManager::searchPaths() const
 {
     return m_searchPaths;
 }
-
 
 void ConkyManager::scanForConkies()
 {
@@ -159,6 +156,8 @@ void ConkyManager::scanForConkies()
         return fileA < fileB;
     });
 
+    applyAutostartFromStartupScript();
+
     emit conkyItemsChanged();
 }
 
@@ -185,6 +184,8 @@ void ConkyManager::addConkyItemsFromDirectory(const QString &directoryPath)
         QString fileB = QFileInfo(b->filePath()).fileName().toLower();
         return fileA < fileB;
     });
+
+    applyAutostartFromStartupScript();
 
     emit conkyItemsChanged();
 }
@@ -286,19 +287,6 @@ void ConkyManager::saveSettings()
     m_settings.beginGroup("ConkyManager");
     m_settings.setValue("searchPaths", m_searchPaths);
     m_settings.setValue("startupDelay", m_startupDelay);
-
-    m_settings.beginWriteArray("conkyItems");
-    for (int i = 0; i < m_conkyItems.size(); ++i) {
-        m_settings.setArrayIndex(i);
-        QPointer<ConkyItem> item = m_conkyItems.at(i);
-        if (!item) {
-            continue;
-        }
-        m_settings.setValue("filePath", item->filePath());
-        m_settings.setValue("enabled", item->isEnabled());
-        m_settings.setValue("autostart", item->isAutostart());
-    }
-    m_settings.endArray();
     m_settings.endGroup();
 
     // Update startup script whenever settings are saved
@@ -309,39 +297,15 @@ void ConkyManager::loadSettings()
 {
     m_settings.beginGroup("ConkyManager");
 
-    m_searchPaths = m_settings
-                        .value("searchPaths", QStringList() << QDir::homePath() + "/.conky"
-                                                            << "/usr/share/mx-conky-data/themes")
-                        .toStringList();
+    m_searchPaths
+        = m_settings
+              .value("searchPaths", QStringList() << QDir::homePath() + "/.conky" << "/usr/share/mx-conky-data/themes")
+              .toStringList();
 
     m_startupDelay = m_settings.value("startupDelay", 5).toInt();
-
-    int size = m_settings.beginReadArray("conkyItems");
-    QHash<QString, ConkyItem *> settingsMap;
-
-    for (int i = 0; i < size; ++i) {
-        m_settings.setArrayIndex(i);
-        QString filePath = m_settings.value("filePath").toString();
-        if (!filePath.isEmpty() && QFile::exists(filePath)) {
-            auto *item = new ConkyItem(filePath, this);
-            item->setEnabled(m_settings.value("enabled", false).toBool());
-            item->setAutostart(m_settings.value("autostart", false).toBool());
-            settingsMap[filePath] = item;
-        }
-    }
-    m_settings.endArray();
     m_settings.endGroup();
 
     scanForConkies();
-
-    for (ConkyItem *item : m_conkyItems) {
-        if (settingsMap.contains(item->filePath())) {
-            ConkyItem *savedItem = settingsMap[item->filePath()];
-            item->setEnabled(savedItem->isEnabled());
-            item->setAutostart(savedItem->isAutostart());
-            delete savedItem;
-        }
-    }
 }
 
 void ConkyManager::updateRunningStatus()
@@ -566,6 +530,68 @@ void ConkyManager::scanConkyDirectory(const QString &path)
     }
 }
 
+void ConkyManager::applyAutostartFromStartupScript()
+{
+    QString home = QDir::homePath();
+    QString scriptPath = home + "/.conky/conky-startup.sh";
+    QFile scriptFile(scriptPath);
+
+    if (!scriptFile.exists()) {
+        scriptPath = "/usr/share/mx-conky-data/conky-startup.sh";
+        scriptFile.setFileName(scriptPath);
+    }
+
+    if (!scriptFile.exists() || !scriptFile.open(QIODevice::ReadOnly | QIODevice::Text)) {
+        return;
+    }
+
+    QSet<QString> autostartPaths;
+    QTextStream in(&scriptFile);
+    QRegularExpression pattern(QStringLiteral("^\\s*conky\\s+-c\\s+(?:\"([^\"]+)\"|(\\S+))"),
+                               QRegularExpression::CaseInsensitiveOption);
+
+    while (!in.atEnd()) {
+        QString line = in.readLine();
+        QRegularExpressionMatch match = pattern.match(line);
+        if (!match.hasMatch()) {
+            continue;
+        }
+
+        QString path = match.captured(1);
+        if (path.isEmpty()) {
+            path = match.captured(2);
+        }
+
+        path = path.trimmed();
+        if (path.endsWith('&')) {
+            path.chop(1);
+            path = path.trimmed();
+        }
+
+        path.replace(QStringLiteral("${HOME}"), home);
+        path.replace(QStringLiteral("$HOME"), home);
+        if (path.startsWith("~/")) {
+            path.replace(0, 1, home);
+        }
+
+        QFileInfo info(path);
+        QString absolutePath = info.absoluteFilePath();
+
+        if (!absolutePath.isEmpty()) {
+            autostartPaths.insert(QDir::cleanPath(absolutePath));
+        }
+    }
+
+    scriptFile.close();
+
+    for (ConkyItem *item : m_conkyItems) {
+        QString itemPath = QDir::cleanPath(QFileInfo(item->filePath()).absoluteFilePath());
+        bool enabled = autostartPaths.contains(itemPath);
+        item->setEnabled(enabled);
+        item->setAutostart(enabled);
+    }
+}
+
 void ConkyManager::updateStartupScript()
 {
     QString home = QDir::homePath();
@@ -617,7 +643,35 @@ void ConkyManager::setAutostart(bool enabled)
     QProcessEnvironment env = QProcessEnvironment::systemEnvironment();
     QString desktop = env.value("XDG_CURRENT_DESKTOP", "").toLower();
 
-    if (desktop.contains("enlightenment") || desktop.contains("e17") || desktop.contains("e18") || desktop.contains("e19") || desktop.contains("e20") || desktop.contains("e21") || desktop.contains("e22") || desktop.contains("e23") || desktop.contains("e24") || desktop.contains("e25") || desktop.contains("e26")) {
+    // Lambda to create desktop file content
+    auto createDesktopContent = []() {
+        QString startupScript = "/usr/share/mx-conky-data/conky-startup.sh";
+        QString content;
+        content += "[Desktop Entry]\n";
+        content += "Type=Application\n";
+        content += QString("Exec=sh \"%1\"\n").arg(startupScript);
+        content += "Hidden=false\n";
+        content += "NoDisplay=false\n";
+        content += "X-GNOME-Autostart-enabled=true\n";
+        content += "Name=Conky\n";
+        return content;
+    };
+
+    // Lambda to write content to a file
+    auto writeToFile = [](const QString &filePath, const QString &content) {
+        QFile file(filePath);
+        if (file.open(QIODevice::WriteOnly | QIODevice::Text)) {
+            QTextStream out(&file);
+            out << content;
+            file.close();
+            return true;
+        }
+        return false;
+    };
+
+    if (desktop.contains("enlightenment") || desktop.contains("e17") || desktop.contains("e18")
+        || desktop.contains("e19") || desktop.contains("e20") || desktop.contains("e21") || desktop.contains("e22")
+        || desktop.contains("e23") || desktop.contains("e24") || desktop.contains("e25") || desktop.contains("e26")) {
         // Enlightenment-specific handling
         QString applicationsDir = home + "/.local/share/applications";
         QString desktopFile = applicationsDir + "/conky.desktop";
@@ -635,23 +689,8 @@ void ConkyManager::setAutostart(bool enabled)
         }
 
         if (enabled) {
-            QString startupScript = "/usr/share/mx-conky-data/conky-startup.sh";
-
-            QString desktopContent;
-            desktopContent += "[Desktop Entry]\n";
-            desktopContent += "Type=Application\n";
-            desktopContent += QString("Exec=sh \"%1\"\n").arg(startupScript);
-            desktopContent += "Hidden=false\n";
-            desktopContent += "NoDisplay=false\n";
-            desktopContent += "X-GNOME-Autostart-enabled=true\n";
-            desktopContent += "Name=Conky\n";
-
-            QFile file(desktopFile);
-            if (file.open(QIODevice::WriteOnly | QIODevice::Text)) {
-                QTextStream out(&file);
-                out << desktopContent;
-                file.close();
-            }
+            // Create and write desktop file
+            writeToFile(desktopFile, createDesktopContent());
 
             // Update .order file with desktop filename only
             QStringList orderEntries;
@@ -717,23 +756,8 @@ void ConkyManager::setAutostart(bool enabled)
         }
 
         if (enabled) {
-            QString startupScript = "/usr/share/mx-conky-data/conky-startup.sh";
-
-            QString desktopContent;
-            desktopContent += "[Desktop Entry]\n";
-            desktopContent += "Type=Application\n";
-            desktopContent += QString("Exec=sh \"%1\"\n").arg(startupScript);
-            desktopContent += "Hidden=false\n";
-            desktopContent += "NoDisplay=false\n";
-            desktopContent += "X-GNOME-Autostart-enabled=true\n";
-            desktopContent += "Name=Conky\n";
-
-            QFile file(desktopFile);
-            if (file.open(QIODevice::WriteOnly | QIODevice::Text)) {
-                QTextStream out(&file);
-                out << desktopContent;
-                file.close();
-            }
+            // Create and write desktop file
+            writeToFile(desktopFile, createDesktopContent());
         } else {
             QFile::remove(desktopFile);
         }
@@ -748,7 +772,9 @@ bool ConkyManager::isAutostartEnabled() const
     QProcessEnvironment env = QProcessEnvironment::systemEnvironment();
     QString desktop = env.value("XDG_CURRENT_DESKTOP", "").toLower();
 
-    if (desktop.contains("enlightenment") || desktop.contains("e17") || desktop.contains("e18") || desktop.contains("e19") || desktop.contains("e20") || desktop.contains("e21") || desktop.contains("e22") || desktop.contains("e23") || desktop.contains("e24") || desktop.contains("e25") || desktop.contains("e26")) {
+    if (desktop.contains("enlightenment") || desktop.contains("e17") || desktop.contains("e18")
+        || desktop.contains("e19") || desktop.contains("e20") || desktop.contains("e21") || desktop.contains("e22")
+        || desktop.contains("e23") || desktop.contains("e24") || desktop.contains("e25") || desktop.contains("e26")) {
         // Check Enlightenment autostart
         QString applicationsDir = home + "/.local/share/applications";
         QString desktopFile = applicationsDir + "/conky.desktop";
@@ -930,7 +956,6 @@ bool ConkyManager::isBinaryFile(const QString &filePath) const
     // If more than 30% non-printable control characters, consider it binary
     return (nonPrintableCount * 100 / buffer.size()) > 30;
 }
-
 
 bool ConkyManager::isValidConkyFile(const QString &filePath) const
 {

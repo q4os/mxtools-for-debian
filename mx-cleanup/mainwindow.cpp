@@ -1,7 +1,7 @@
 /**********************************************************************
  *  mainwindow.cpp
  **********************************************************************
- * Copyright (C) 2018 MX Authors
+ * Copyright (C) 2018-2025 MX Authors
  *
  * Authors: Adrian
  *          MX Linux <http://mxlinux.org>
@@ -122,6 +122,19 @@ void MainWindow::setup()
     setWindowTitle(tr("MX Cleanup"));
     ui->tabWidget->setCurrentIndex(0);
     adjustSize();
+
+    // Hide disk usage analyzer group box if none of the tools are available
+    const QStringList diskUsageTools = {"baobab", "qdirstat", "filelight"};
+    bool hasAnyTool = false;
+    for (const auto &tool : diskUsageTools) {
+        if (!QStandardPaths::findExecutable(tool).isEmpty()) {
+            hasAnyTool = true;
+            break;
+        }
+    }
+    if (!hasAnyTool) {
+        ui->groupBoxUsage->hide();
+    }
 
     current_user = cmdOut("logname", false, true);
 

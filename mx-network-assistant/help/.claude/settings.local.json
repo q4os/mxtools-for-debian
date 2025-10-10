@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:mxlinux.org)",
+      "Bash(curl -s \"https://mxlinux.org/wiki/help-files/help-mx-network-assistant/\")",
+      "Bash(grep:*)",
+      "Bash(curl:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

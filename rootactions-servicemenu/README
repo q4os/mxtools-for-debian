@@ -1,0 +1,119 @@
+Author: Kubicle <mail.kubicle@gmail.com>
+	(My previous email account kubicle@gawab.com is no longer in use)
+
+Thanks to:
+Stefan Majewsky		- German translation (1.1.x and 2.x)
+Pierre Buard		- French translation (1.1.x)
+Guillaume Millet &
+Jean-Marc Detourmignies	- French translation (2.x)
+Alessio			- Italian translation (1.1.x)
+Massimo Pissarello 	- Italian translation (2.x)
+João Pedro Gomes	- Portuguese translation (2.x)
+Viruscg			- Brazilian Portuguese translation (1.1.x amd 2.x partial)
+Eduardo Grau		- Spanish translation (1.1.x and 2.x)
+Kenny Verstraete	- Dutch translation (1.1.x and 2.x)
+Paul Körössy		- Hungarian translation (2.x)
+nikt_taki		- Polish translation (2.x)
+Andreas Nordal		- Norwegian translation (2.x)
+Jakub Matas		- Czech translation (2.x)
+Donatas Glodenis	- Lithuanian translation (2.x)
+Mladen Pejaković	- Serbian translations (2.x)
+Netrebin Alexey		- Russian translation (2.x)
+Cihat Imamoglu		- Turkish translation (2.x)
+Manuel Tortosa Moreno	- Catalan translation (2.x)
+Neo Tet			- Greek translation (2.x)
+Adrián Chaves Fernández - Galician translation (2.x)
+Mihael Simonič		- Slovene translation (2.x)
+
+And all bug reporters.
+
+----Requirements:-----------------------------------------------------
+Essential: (these should already be installed on a standard KDE installation)
+perl                 -the script is written in perl
+kdesu | kdesudo      -to gain administrative privileges
+kdialog              -to show dialogs
+kreadconfig          -to read kde configuration
+dolphin | konqueror  -filemanager
+kwrite | kate        -editor
+ark                  -handles compression
+
+Optional:
+krename              -for multiple file (batch) renaming
+krusader	     -to use the included krusader actions
+xdg-utils            -for default application support (2.5.x-)
+
+----Installation:-----------------------------------------------------
+
+Some distributions have packages available in either their main repos or community repos. For easy installation and possible distro specific patches you can use them if available. Manual installation instructions below:
+
+Version 2.3 -> 
+	1. Uncompress the rootactions-servicemenu.pl script in Root_Actions_2.x to a directory in your $PATH. /usr/local/bin or /usr/bin are two valid options. Make the script executable (if it's not).
+
+	2a. (Konqueror for KDE3) Uncompress the three .desktop files in /konqueror-KDE3 to ~/.kde/share/apps/konqueror/servicemenus (This will enable the menu for individual users, if you wish to enable the menu for all users, copy the files to /usr/share/apps/konqueror/servicemenus instead).
+
+	2b. (Dolphin for KDE3) Uncompress the two .desktop files in /dolphin-KDE3 to ~/.kde/share/apps/d3lphin/servicemenus (This will enable the menu for individual users, if you wish to enable the menu for all users, copy the files to /usr/share/apps/d3lphin/servicemenus instead).
+
+	2c. (Dolphin and Konqueror for KDE4) Uncompress the two .desktop files in /dolphin-KDE4 to your kde4 servicemenu folder (possibly ~/.kde/share/kde4/services/ServiceMenus...although $KDEHOME [".kde"] can be something else in your distribution). If you wish to use konqueror instead of dolphin as your filemanager, edit 10-rootactionsfolders.desktop by changing 'dolphin' to 'konqueror'.
+
+	2d. (Krusader for KDE4) Import krusader_rootactions.xml file in /krusader-KDE4 with krusader's action manager.
+
+Version 2.7 ->
+	GHNS installation via dolphin's servicemenu manager supported
+
+----Available Actions----------------------------------------------------------------
+
+Version 2.x
+	- Open Terminal Here (folders) - open a root terminal session in chosen folder
+	- Open in File Manager (folders) - open chosen folder(s) in file manager
+	- Open as Text (files) - open chosen folder(s) in text editor
+	- Open With ... (both) - open chosen items in a program of your choice
+
+	- Copy (both) - copy a single file or folder (ADDED in 2.1)
+	- Move/Rename (both) - if multiple items selected and a batch renamer installed (default is krename) start renamer, otherwise use a simple move/rename dialog
+	- Compress (both) - Compress selected files/folders (ADDED in 2.7)
+	- Delete (both) - Completely removes chosen items (as this is potentially hazardous, there is an extra confirmation dialog), handy for removing back-up files etc.
+
+	- Ownership to Root (both) - change ownership of chosen items to root:root
+	- Ownership to Active User (both) - change ownership of chosen items to current user
+	- Ownership to ...  (both) - change ownership of chosen items to UID:GID of your choice
+
+	- Change Permissions (both) - change permissions of chosen items
+	If only a single folder is selected, permissions/ownership can be set recursively. If changing permissions recursively, files are only set executable if they already are executable (Otherwise all files in a directory would be set executable if the parent folder is set executable, which is necessary for the folder to be accessible)
+
+
+----Translating and customizing:-----------------------------------------------------
+
+Version 2.5.x
+	Edit .desktop files with a text editor to add your own language
+
+	Edit rootactions-servicemenu.pl, the strings used in dialogs are marked with:
+	"########### DIALOG MESSAGES, TRANSLATABLE STRINGS #############"
+	Edit lines:
+	"xx" => "Your string, xx is the country abbreviation"
+
+	Edit .desktop files to change default applications used:
+
+	In KDE4 and 2.5.x, the "Text editor" and "File Manager" actions should automatically use your default application for the task, you can still override using default applications by changing "defaultfm" and "defaultte" to your chosen applications in the .desktop files. 
+	In KDE3 or -2.4.x, you can edit the desktop files replacing the application names with your preferred applications.
+
+	You can also easily add your custom 'Open with [application]' entries by copying existing entries and modifying them to use your own applications.
+
+	For "advanced" users, available configuration options can be found in the perl script under:
+        "########### USER CONFIGURABLE VARIABLES #######################"
+
+----Disclaimer-------------------------------------------------------
+
+ This program is free software; you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation; either version 2, or (at your option)
+ any later version.
+
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+
+ You should have received a copy of the GNU General Public License
+ along with this program; if not, write to the Free Software
+ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+ 02110-1301, USA.

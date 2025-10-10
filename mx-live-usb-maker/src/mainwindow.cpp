@@ -551,7 +551,16 @@ void MainWindow::pushOptions_clicked()
     ui->groupAdvOptions->setVisible(advancedOptions);
     ui->pushOptions->setText(advancedOptions ? tr("Hide advanced options") : tr("Show advanced options"));
     ui->pushOptions->setIcon(QIcon::fromTheme(advancedOptions ? "go-up" : "go-down"));
-    setFixedHeight(advancedOptions ? defaultHeight : height);
+
+    if (advancedOptions) {
+        // Expand to show advanced options but keep window resizable
+        setMinimumHeight(defaultHeight);
+        resize(width(), defaultHeight);
+    } else {
+        // Collapse to hide advanced options
+        setMinimumHeight(height);
+        resize(width(), height);
+    }
 }
 
 void MainWindow::textLabel_textChanged(QString arg1)

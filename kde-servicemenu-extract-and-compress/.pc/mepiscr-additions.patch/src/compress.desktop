@@ -1,0 +1,139 @@
+[Desktop Entry]
+Type=Service
+Actions=compress_7ZIP;compress_RAR;compress_TAR;compress_TAR7ZIP;compress_TARBZIP;compress_TARGZ;compress_TGZ;compress_ZIP;
+Encoding=UTF-8
+Version=1.4
+ServiceTypes=KonqPopupMenu/Plugin,inode/directory,all/allfiles
+X-KDE-Priority=TopLevel
+X-KDE-Submenu=Compress
+X-KDE-Submenu[de]=Komprimieren
+X-KDE-Submenu[es]=Comprimir
+X-KDE-Submenu[it]=Compressione
+X-KDE-Submenu[fr]=Compresser
+X-KDE-Submenu[zh_CN]=压缩
+X-KDE-Submenu[pl]=Spakuj
+X-KDE-Submenu[pt_BR]=Comprimir
+X-KDE-Submenu[cs]=Komprimovat
+X-KDE-Submenu[tr]=Sıkıştır
+X-KDE-Submenu[da]=Komprimér
+
+[Desktop Action compress_RAR]
+Exec=compress_RAR.sh %U
+Icon=application-x-archive
+Name=Compress to rar
+Name[de]=Komprimieren in rar
+Name[es]=Comprimir como rar
+Name[it]=Comprimi in rar
+Name[fr]=Compresser en rar
+Name[zh_CN]=压缩为 rar
+Name[pl]=Spakuj jako rar
+Name[pt_BR]=Comprimir como rar
+Name[cs]=Komprimovat do rar
+Name[tr]=rar olarak sıkıştır
+Name[da]=Komprimér til rar
+
+[Desktop Action compress_TAR]
+Exec=compress_TAR.sh %U
+Icon=application-x-archive
+Name=Compress to tar
+Name[de]=Komprimieren in tar
+Name[es]=Comprimir como tar
+Name[it]=Comprimi in tar
+Name[fr]=Compresser en tar
+Name[zh_CN]=压缩为 tar
+Name[pl]=Spakuj jako tar
+Name[pt_BR]=Comprimir como tar
+Name[cs]=Komprimovat do tar
+Name[tr]=tar olarak sıkıştır
+Name[da]=Komprimér til tar
+
+[Desktop Action compress_TARGZ]
+Exec=compress_TARGZ.sh %U
+Icon=application-x-archive
+Name=Compress to tar.gz
+Name[de]=Komprimieren in tar.gz
+Name[es]=Comprimir como tar.gz
+Name[it]=Comprimi in tar.gz
+Name[fr]=Compresser en tar.gz
+Name[zh_CN]=压缩为 tar.gz
+Name[pl]=Spakuj jako tar.gz
+Name[pt_BR]=Comprimir como tar.gz
+Name[cs]=Komprimovat do tar.gz
+Name[tr]=tar.gz olarak sıkıştır
+Name[da]=Komprimér til tar.gz
+
+[Desktop Action compress_TGZ]
+Exec=compress_TGZ.sh %U
+Icon=application-x-archive
+Name=Compress to tgz
+Name[de]=Komprimieren in tgz
+Name[es]=Comprimir como tgz
+Name[it]=Comprimi in tgz
+Name[fr]=Compresser en tgz
+Name[zh_CN]=压缩为 tgz
+Name[pl]=Spakuj jako tgz
+Name[pt_BR]=Comprimir como tgz
+Name[cs]=Komprimovat do tgz
+Name[tr]=tgz olarak sıkıştır
+Name[da]=Komprimér til tar.gz
+
+[Desktop Action compress_ZIP]
+Exec=compress_ZIP.sh %U
+Icon=application-x-archive
+Name=Compress to zip
+Name[de]=Komprimieren in zip
+Name[es]=Comprimir como zip
+Name[it]=Comprimi in zip
+Name[fr]=Compresser en zip
+Name[zh_CN]=压缩为 zip
+Name[pl]=Spakuj jako zip
+Name[pt_BR]=Comprimir como zip
+Name[cs]=Komprimovat do zip
+Name[tr]=zip olarak sıkıştır
+Name[da]=Komprimér til zip
+
+
+[Desktop Action compress_7ZIP]
+Exec=compress_7ZIP.sh %U
+Icon=application-x-archive
+Name=Compress to 7z
+Name[de]=Komprimieren in 7z
+Name[es]=Comprimir como 7z
+Name[it]=Comprimi in 7z
+Name[fr]=Compresser en 7z
+Name[zh_CN]=压缩为 7z
+Name[pl]=Spakuj jako 7z
+Name[pt_BR]=Comprimir como 7z
+Name[cs]=Komprimovat do 7z
+Name[tr]=7z olarak sıkıştır
+Name[da]=Komprimér til 7z
+
+[Desktop Action compress_TAR7ZIP]
+Exec=compress_TAR7Z.sh %U
+Icon=application-x-archive
+Name=Compress to tar.7z
+Name[de]=Komprimieren in tar.7z
+Name[es]=Comprimir como tar.7z
+Name[it]=Comprimi in tar.7z
+Name[fr]=Compresser en tar.7z
+Name[zh_CN]=压缩为 tar.7z
+Name[pl]=Spakuj jako tar.7z
+Name[pt_BR]=Comprimir como tar.7z
+Name[cs]=Komprimovat do tar.7z
+Name[tr]=tar.7z olarak sıkıştır
+Name[da]=Komprimér til tar.7z
+
+[Desktop Action compress_TARBZIP]
+Exec=compress_TARBZ2.sh %U
+Icon=application-x-archive
+Name=Compress to tar.bz2
+Name[de]=Komprimieren in tar.bz2
+Name[es]=Comprimir como tar.bz2
+Name[it]=Comprimi in tar.bz2
+Name[fr]=Compresser en tar.bz2
+Name[zh_CN]=压缩为 tar.bz2
+Name[pl]=Spakuj jako tar.bz2
+Name[pt_BR]=Comprimir como tar.bz2
+Name[cs]=Komprimovat do tar.bz2
+Name[tr]=tar.bz2 olarak sıkıştır
+Name[da]=Komprimér til tar.bz2

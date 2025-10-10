@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="fr_BE">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="fr_BE">
 <context>
     <name>MainWindow</name>
     <message>
@@ -67,7 +65,7 @@
         <location filename="../src/mainwindow.ui" line="197"/>
         <location filename="../src/ui_mainwindow.h" line="593"/>
         <source>About...</source>
-        <translation>À propos&#xa0;…</translation>
+        <translation>À propos …</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="203"/>
@@ -374,10 +372,10 @@ Cela peut indiquer que vous avez sélectionné le mauvais périphérique.
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="194"/>
-        <source>Writing %1 using &apos;dd&apos; command to /dev/%2,
+        <source>Writing %1 using 'dd' command to /dev/%2,
 
 Please wait until the process is completed</source>
-        <translation>Écriture de %1 à l’aide de la commande «&#xa0;dd&#xa0;» sur /dev/%2.
+        <translation>Écriture de %1 à l’aide de la commande « dd » sur /dev/%2.
 
 Veuillez patienter jusqu’à la fin de la procédure.</translation>
     </message>

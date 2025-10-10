@@ -414,13 +414,16 @@ bool ConkyListWidget::itemMatchesFilters(ConkyItem *item) const
     if (m_statusFilter == "Stopped" && item->isRunning()) {
         return false;
     }
+    if (m_statusFilter == "Autostart" && !item->isAutostart()) {
+        return false;
+    }
 
     // Apply folder-based filters
-    QString userConkyPath = QDir::homePath() + "/.conky";
     QString folderName = QFileInfo(item->directory()).fileName();
 
     // Check if filter is a folder name from search paths
-    if (m_statusFilter != "All" && m_statusFilter != "Running" && m_statusFilter != "Stopped") {
+    if (m_statusFilter != "All" && m_statusFilter != "Running" && m_statusFilter != "Stopped"
+        && m_statusFilter != "Autostart") {
         // This is a folder-based filter
         QStringList searchPaths = m_manager->searchPaths();
         bool matchesFolder = false;

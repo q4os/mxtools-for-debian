@@ -1,0 +1,48 @@
+[Desktop Entry]
+Type=Service
+Actions=compress_BZIP;compress_GZIP;
+Encoding=UTF-8
+Version=1.4
+ServiceTypes=KonqPopupMenu/Plugin,all/allfiles
+X-KDE-Priority=TopLevel
+X-KDE-Submenu=Compress
+X-KDE-Submenu[de]=Komprimieren
+X-KDE-Submenu[es]=Comprimir
+X-KDE-Submenu[it]=Compressione
+X-KDE-Submenu[fr]=Compresser
+X-KDE-Submenu[zh_CN]=压缩
+X-KDE-Submenu[pl]=Spakuj
+X-KDE-Submenu[pt_BR]=Comprimir
+X-KDE-Submenu[cs]=Komprimovat
+X-KDE-Submenu[tr]=Sıkıştır
+X-KDE-Submenu[da]=Komprimér
+
+[Desktop Action compress_BZIP]
+Exec=compress_BZIP.sh %U
+Icon=application-x-archive
+Name=Compress to bz2
+Name[de]=Komprimieren in bz2
+Name[es]=Comprimir como bz2
+Name[it]=Comprimi in bz2
+Name[fr]=Compresser en bz2
+Name[zh_CN]=压缩为 bz2
+Name[pl]=Spakuj jako bz2
+Name[pt_BR]=Comprimir como bz2
+Name[cs]=Komprimovat do bz2
+Name[tr]= bz2 olarak sıkıştır
+Name[da]= Komprimér til bz2
+
+[Desktop Action compress_GZIP]
+Exec=compress_GZIP.sh %U
+Icon=application-x-archive
+Name=Compress to gz
+Name[de]=Komprimieren in gz
+Name[es]=Comprimir como gz
+Name[it]=Comprimi in gz
+Name[fr]=Compresser en gz
+Name[zh_CN]=压缩为 gz
+Name[pl]=Spakuj jako gz
+Name[pt_BR]=Comprimir como gz
+Name[cs]=Komprimovat do gz
+Name[tr]= gz olarak sıkıştır
+Name[da]= Komprimér til gz

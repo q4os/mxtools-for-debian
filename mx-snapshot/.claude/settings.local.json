@@ -10,7 +10,8 @@
       "Bash(./build/mx-snapshot:*)",
       "Bash(find:*)",
       "Bash(./build/iso-snapshot-cli:*)",
-      "Bash(make:*)"
+      "Bash(make:*)",
+      "Bash(ninja)"
     ],
     "deny": []
   }

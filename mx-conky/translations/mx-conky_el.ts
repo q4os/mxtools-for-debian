@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="el">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="el">
 <context>
     <name>ConkyCustomizeDialog</name>
     <message>
@@ -749,7 +747,7 @@ Enter a name for the copy.</source>
     <message>
         <location filename="../src/mainwindow.cpp" line="447"/>
         <location filename="../src/mainwindow.cpp" line="625"/>
-        <source>A conky with the name &apos;%1&apos; already exists in your personal folder.
+        <source>A conky with the name '%1' already exists in your personal folder.
 Do you want to overwrite it?</source>
         <translation>Υπάρχει ήδη conky με όνομα &apos;%1&apos; στο προσωπικό σας φάκελο.
 Θέλετε να το αντικαταστήσω;</translation>

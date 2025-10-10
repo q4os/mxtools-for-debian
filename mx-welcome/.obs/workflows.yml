@@ -1,0 +1,14 @@
+workflow:
+  steps:
+    - trigger_services:
+        project: home:mx-packaging
+        package: %{SCM_REPOSITORY_NAME}
+  filters:
+    event: tag_push
+    branches:
+        only:
+            - main
+            - master
+    paths:
+        only:
+            - debs/*.dsc

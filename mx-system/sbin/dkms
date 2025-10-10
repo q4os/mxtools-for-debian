@@ -34,11 +34,11 @@ case "$1" in
          ;;
 esac
 
-if [ -x /usr/sbin/dkms.mx ]; then
-   echo /usr/sbin/dkms.mx "$@" $dkms_kernel_option 1>&2
-   exec /usr/sbin/dkms.mx "$@" $dkms_kernel_option
+if [ -x /usr/sbin/dkms.real ]; then
+   echo /usr/sbin/dkms.real "$@" $dkms_kernel_option 1>&2
+   exec /usr/sbin/dkms.real "$@" $dkms_kernel_option
 else
-   echo "Error: /usr/sbin/dkms.mx not found!"
+   echo "Error: /usr/sbin/dkms.real not found!"
    exit 1
 fi
 exit 0

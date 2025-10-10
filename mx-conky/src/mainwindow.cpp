@@ -932,6 +932,8 @@ void MainWindow::onFilterChanged()
         filterKey = "Running";
     } else if (filter == tr("Stopped")) {
         filterKey = "Stopped";
+    } else if (filter == tr("Autostart")) {
+        filterKey = "Autostart";
     } else {
         filterKey = filter; // For folder-based filters
     }
@@ -967,6 +969,7 @@ void MainWindow::populateFilterComboBox()
     m_filterComboBox->addItem(tr("All"));
     m_filterComboBox->addItem(tr("Running"));
     m_filterComboBox->addItem(tr("Stopped"));
+    m_filterComboBox->addItem(tr("Autostart"));
 
     // Add folder-based filters from search paths
     QStringList searchPaths = m_conkyManager->searchPaths();

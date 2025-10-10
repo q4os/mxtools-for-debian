@@ -45,6 +45,9 @@ test -d "$domain_dir" && export TEXTDOMAINDIR=$domain_dir
         ESP_LABEL="LIVE-UEFI"
 
           LIVE_MP="/live/boot-dev"
+          if [ -L "/live" ]; then
+            LIVE_MP="/$(readlink /live)/boot-dev"
+          fi
      LINUXFS_NAME="linuxfs"
  MIN_LINUXFS_SIZE="120M"
      DEF_BOOT_DIR="antiX"

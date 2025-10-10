@@ -1,3 +1,9 @@
+live-usb-maker (0.4.21) mx; urgency=medium
+
+  * if /live is a symlink, readlink to get mountpoint
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 03 Oct 2025 22:05:47 -0400
+
 live-usb-maker (0.4.20) mx; urgency=medium
 
   * bump script version

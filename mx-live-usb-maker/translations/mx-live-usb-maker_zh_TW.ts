@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="zh_TW">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="zh_TW">
 <context>
     <name>MainWindow</name>
     <message>
@@ -79,7 +77,7 @@
         <location filename="../src/mainwindow.ui" line="219"/>
         <location filename="../src/ui_mainwindow.h" line="597"/>
         <source>View Log</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="253"/>
@@ -171,7 +169,7 @@
         <location filename="../src/mainwindow.ui" line="372"/>
         <location filename="../src/ui_mainwindow.h" line="619"/>
         <source>Don&apos;t use fuseiso to mount iso files</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="398"/>
@@ -195,7 +193,7 @@
         <location filename="../src/mainwindow.ui" line="506"/>
         <location filename="../src/ui_mainwindow.h" line="628"/>
         <source>Data partition format type</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="460"/>
@@ -219,7 +217,7 @@
         <location filename="../src/mainwindow.ui" line="499"/>
         <location filename="../src/ui_mainwindow.h" line="627"/>
         <source>Make separate data partition (percent)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="516"/>
@@ -238,13 +236,13 @@
         <location filename="../src/mainwindow.ui" line="548"/>
         <location filename="../src/ui_mainwindow.h" line="631"/>
         <source>Mode</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="563"/>
         <location filename="../src/ui_mainwindow.h" line="632"/>
         <source>Full-featured mode - writable Li&amp;veUSB</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="573"/>
@@ -256,13 +254,13 @@
         <location filename="../src/mainwindow.ui" line="576"/>
         <location filename="../src/ui_mainwindow.h" line="636"/>
         <source>Image &amp;mode - read-only LiveUSB (dd)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="589"/>
         <location filename="../src/ui_mainwindow.h" line="637"/>
         <source>For distros other than antiX/MX use image mode (dd).</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="637"/>
@@ -304,7 +302,7 @@
         <location filename="../src/mainwindow.ui" line="743"/>
         <location filename="../src/ui_mainwindow.h" line="648"/>
         <source>Clone a mounted live system</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="750"/>
@@ -339,22 +337,22 @@
     <message>
         <location filename="../src/mainwindow.cpp" line="750"/>
         <source>Source Error</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="751"/>
         <source>Could not find the source linuxfs file.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="772"/>
         <source>Warning: The target device (%1) is smaller than the source (%2). The data might not fit. Do you want to continue?</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="775"/>
         <source>Size Warning</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="783"/>
@@ -362,24 +360,24 @@
 
 This may indicate you have selected the wrong device.
 Are you sure you want to proceed?</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="790"/>
         <source>Large Target Device Warning</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="194"/>
-        <source>Writing %1 using &apos;dd&apos; command to /dev/%2,
+        <source>Writing %1 using 'dd' command to /dev/%2,
 
 Please wait until the process is completed</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="205"/>
         <source>MX Live Usb Maker</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="395"/>
@@ -411,12 +409,12 @@ Please wait until the process is completed</source>
         <source>These actions will destroy all data on 
 
 </source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="468"/>
         <source>Do you wish to continue?</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="500"/>
@@ -456,7 +454,7 @@ Please wait until the process is completed</source>
     <message>
         <location filename="../src/mainwindow.cpp" line="523"/>
         <source>ISO Files (*.iso);;All Files (*.*)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="528"/>
@@ -467,7 +465,7 @@ Please wait until the process is completed</source>
     <message>
         <location filename="../src/mainwindow.cpp" line="537"/>
         <source>Could not find linuxfs file</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="552"/>
@@ -494,7 +492,7 @@ Please wait until the process is completed</source>
     <message>
         <location filename="../src/mainwindow.cpp" line="665"/>
         <source>Could not find a log file at: </source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -528,17 +526,17 @@ Please wait until the process is completed</source>
     <message>
         <location filename="../src/main.cpp" line="64"/>
         <source>filename</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/main.cpp" line="64"/>
         <source>Name of .iso file to open</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/main.cpp" line="65"/>
         <source>[filename]</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/main.cpp" line="93"/>
@@ -559,7 +557,7 @@ Please wait until the process is completed</source>
     <message>
         <location filename="../src/main.cpp" line="117"/>
         <source>version:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 </TS>

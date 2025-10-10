@@ -1,3 +1,10 @@
+mx-network-assistant (25.09) mx; urgency=medium
+
+  * Update help file
+  * Update translations
+
+ -- Adrian <adrian@mxlinux.org>  Sun, 28 Sep 2025 00:18:53 -0400
+
 mx-network-assistant (24.4) mx; urgency=medium
 
   * Update to Qt6
@@ -6,7 +13,7 @@ mx-network-assistant (24.4) mx; urgency=medium
 
 mx-network-assistant (24.3) mx; urgency=medium
 
-  * Update translations 
+  * Update translations
 
  -- Adrian <adrian@mxlinux.org>  Sat, 23 Mar 2024 12:53:50 -0400
 
@@ -44,13 +51,13 @@ mx-network-assistant (23.5) mx; urgency=medium
 
 mx-network-assistant (22.10.03) mx; urgency=medium
 
-  * fix string sources 
+  * fix string sources
 
  -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 28 Oct 2022 18:42:35 -0400
 
 mx-network-assistant (22.10.01) mx; urgency=medium
 
-  * update translations 
+  * update translations
 
  -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 26 Oct 2022 20:03:41 -0400
 
@@ -62,13 +69,13 @@ mx-network-assistant (22.8.01) mx; urgency=medium
 
 mx-network-assistant (22.8) mx; urgency=medium
 
-  * Fix: launching Firefox from Help 
+  * Fix: launching Firefox from Help
 
  -- Adrian <adrian@mxlinux.org>  Wed, 17 Aug 2022 21:55:37 -0400
 
 mx-network-assistant (22.7) mx; urgency=medium
 
-  * translation refresh 
+  * translation refresh
 
  -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 23 Jul 2022 11:31:14 -0400
 

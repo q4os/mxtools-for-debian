@@ -1,3 +1,9 @@
+mx-welcome (25.09.02mx25) mx; urgency=medium
+
+  * add all text terms of use
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 26 Sep 2025 21:28:10 -0400
+
 mx-welcome (25.06.01mx25) mx; urgency=medium
 
   * make desktop grab more resilient
@@ -60,7 +66,7 @@ mx-welcome (23.03) mx; urgency=medium
 
 mx-welcome (22.10) mx; urgency=medium
 
-  * translations 
+  * translations
 
  -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 26 Oct 2022 20:11:16 -0400
 
@@ -73,7 +79,7 @@ mx-welcome (22.08.02) mx; urgency=medium
 
 mx-welcome (22.08.01) mx; urgency=medium
 
-  * call gui instead of qsi cli mode 
+  * call gui instead of qsi cli mode
 
  -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 21 Aug 2022 21:25:19 -0400
 
@@ -85,19 +91,19 @@ mx-welcome (22.08) mx; urgency=medium
 
 mx-welcome (22.07.01) mx; urgency=medium
 
-  * translation refresh 
+  * translation refresh
 
  -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 23 Jul 2022 12:35:45 -0400
 
 mx-welcome (22.02.02) mx; urgency=medium
 
-  * allow customization of live user login info text 
+  * allow customization of live user login info text
 
  -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 28 Feb 2022 19:18:48 -0500
 
 mx-welcome (22.02.01) mx; urgency=medium
 
-  * add more customization with /etc/mx-welcome/mx-welcome.conf 
+  * add more customization with /etc/mx-welcome/mx-welcome.conf
 
  -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 25 Feb 2022 20:36:21 -0500
 
@@ -109,7 +115,7 @@ mx-welcome (22.01.02) mx; urgency=medium
 
 mx-welcome (22.01.01) mx; urgency=medium
 
-  * use data from mx-welcome.conf if /etc/lsb-release is missing. 
+  * use data from mx-welcome.conf if /etc/lsb-release is missing.
 
  -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 10 Jan 2022 21:12:47 -0500
 
@@ -128,7 +134,7 @@ mx-welcome (21.10.04mx21) mx; urgency=medium
 
 mx-welcome (21.10.03mx21) mx; urgency=medium
 
-  * relocate installer and tour buttons (off center) 
+  * relocate installer and tour buttons (off center)
 
  -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 18 Oct 2021 06:53:28 -0400
 
@@ -140,7 +146,7 @@ mx-welcome (21.10.02mx21) mx; urgency=medium
 
 mx-welcome (21.10.01mx21) mx; urgency=medium
 
-  * adjust style sheet for inactive tab 
+  * adjust style sheet for inactive tab
 
  -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 08 Oct 2021 21:19:09 -0400
 
@@ -153,7 +159,7 @@ mx-welcome (21.09mx21) mx; urgency=medium
 
 mx-welcome (21.08.01mx21) mx; urgency=medium
 
-  * add switch for fluxbox detection 
+  * add switch for fluxbox detection
 
  -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 08 Aug 2021 16:06:53 -0400
 
@@ -171,20 +177,20 @@ mx-welcome (21.05.02mx21) mx; urgency=medium
 
 mx-welcome (21.05.01mx21) mx; urgency=medium
 
-  * add mx fluxbox info 
+  * add mx fluxbox info
 
  -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 07 May 2021 16:54:57 -0400
 
 mx-welcome (21.04.03mx21) mx; urgency=medium
 
-  * adjust tab color & sizes 
+  * adjust tab color & sizes
 
  -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 19 Apr 2021 21:12:21 -0400
 
 mx-welcome (21.04.02mx21) mx; urgency=medium
 
-  * revised about, 
-  * refresh short system report on tab switch 
+  * revised about,
+  * refresh short system report on tab switch
 
  -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 17 Apr 2021 08:20:17 -0400
 
@@ -196,19 +202,19 @@ mx-welcome (21.04.01mx21) mx; urgency=medium
 
 mx-welcome (21.03.01mx21) mx; urgency=medium
 
-  * installer button 
+  * installer button
 
  -- Dolphin Oracle <dolphinoracle@gmail.com>  Tue, 02 Mar 2021 19:54:10 -0500
 
 mx-welcome (20.07.01) mx; urgency=medium
 
-  * use xdg-open instead of exo-open 
+  * use xdg-open instead of exo-open
 
  -- Dolphin Oracle <dolphin@littlebyte>  Sun, 26 Jul 2020 09:01:04 -0400
 
 mx-welcome (19.10.01) mx; urgency=medium
 
-  * update FAQ button 
+  * update FAQ button
 
  -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 12 Oct 2019 10:05:06 -0400
 
@@ -221,19 +227,19 @@ mx-welcome (19.9.02) mx; urgency=medium
 
 mx-welcome (19.9.01) mx; urgency=medium
 
-  * translation refresh 
+  * translation refresh
 
  -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 28 Sep 2019 15:04:27 -0400
 
 mx-welcome (19.8.02) mx; urgency=medium
 
-  * translation refresh 
+  * translation refresh
 
  -- Dolphin Oracle <dolphinoracle@gmail.com>  Tue, 27 Aug 2019 21:33:24 -0400
 
 mx-welcome (19.8.01) mx; urgency=medium
 
-  * local FAQ launch 
+  * local FAQ launch
 
  -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 14 Aug 2019 22:01:20 -0400
 
@@ -252,7 +258,7 @@ mx-welcome (19.7) mx; urgency=medium
 mx-welcome (19.6) mx; urgency=medium
 
   * added mx-welcome-data-depend
-  * now reads icon and distro name/version from mx-welcome.conf data file 
+  * now reads icon and distro name/version from mx-welcome.conf data file
 
  -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 01 Jun 2019 14:25:04 -0400
 
@@ -276,13 +282,13 @@ mx-welcome (18.12.07) mx; urgency=medium
 
 mx-welcome (18.12.06) mx; urgency=medium
 
-  * updates to background launching of settings apps 
+  * updates to background launching of settings apps
 
  -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 07 Dec 2018 18:08:32 -0500
 
 mx-welcome (18.12.05) mx; urgency=medium
 
-  * mx 18 
+  * mx 18
 
  -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 03 Dec 2018 19:34:32 -0500
 
@@ -294,7 +300,7 @@ mx-welcome (18.11) mx; urgency=medium
 
 mx-welcome (18.11) mx; urgency=medium
 
-  * mx-18 
+  * mx-18
 
  -- dolphin <dolphin@littlebyte>  Sun, 18 Nov 2018 10:17:34 -0500
 
@@ -342,7 +348,7 @@ mx-welcome (17.12) mx; urgency=medium
 
 mx-welcome (17.11.03) mx; urgency=medium
 
-  * adjustments to default buttons 
+  * adjustments to default buttons
 
  -- Dolphin <dolphin@littlebyte>  Thu, 30 Nov 2017 19:46:11 -0500
 
@@ -357,7 +363,7 @@ mx-welcome (17.11.01) mx; urgency=medium
   * adjustment to "default buttons" (paul)
 
  -- Dolphin <dolphinoracle@gmail.com>  Mon, 20 Nov 2017 18:50:18 -0500
- 
+
 mx-welcome (17.11) mx; urgency=medium
 
   * icon change (paul)
@@ -369,7 +375,7 @@ mx-welcome (17.10.05) mx; urgency=medium
   * adjustments to login info box
 
  -- Dolphin <dolphinoracle@gmail.com>  Sat, 21 Oct 2017 15:23:49 -0500
- 
+
  mx-welcome (17.10.04) mx; urgency=medium
 
   * adjustments to for default button (paul)
@@ -415,7 +421,7 @@ mx-welcome (17.5mx16) mx; urgency=medium
 
 mx-welcome (17.4mx16) mx; urgency=medium
 
-  * new translations 
+  * new translations
 
  -- Adrian <adrian@mxlinux.org>  Sun, 02 Apr 2017 13:28:04 -0400
 
@@ -427,19 +433,19 @@ mx-welcome (16.11mx16+3) mx; urgency=medium
 
 mx-welcome (16.11mx16+2) mx; urgency=medium
 
-  * window icon for panel 
+  * window icon for panel
 
  -- Dolphin <dolphinoracle@gmail.com>  Sat, 19 Nov 2016 15:15:49 -0500
 
 mx-welcome (16.11mx16+1) mx; urgency=medium
 
-  * minor startup delay added to autostart  
+  * minor startup delay added to autostart
 
  -- Adrian <adrian@mxlinux.org>  Sat, 19 Nov 2016 10:20:49 -0500
 
 mx-welcome (16.11mx16) mx; urgency=medium
 
-  * new translations 
+  * new translations
 
  -- Adrian <adrian@mxlinux.org>  Wed, 16 Nov 2016 14:03:49 -0500
 
@@ -572,6 +578,6 @@ mx-welcome (0.15.10.1mx15) mx; urgency=medium
 
 mx-welcome (0.15.10mx15) mx; urgency=medium
 
-  * initial release 
+  * initial release
 
  -- Adrian <adrian@mxlinux.org>  Fri, 02 Oct 2015 10:00:04 -0400

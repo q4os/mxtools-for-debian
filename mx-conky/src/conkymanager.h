@@ -101,6 +101,7 @@ private:
     void clearConkyItems();
     void scanConkyDirectory(const QString &path);
     void scanDirectory(const QString &path);
+    void applyAutostartFromStartupScript();
     bool copyDirectoryRecursively(const QString &sourceDir, const QString &destDir);
     bool isBinaryFile(const QString &filePath) const;
     bool isValidConkyFile(const QString &filePath) const;

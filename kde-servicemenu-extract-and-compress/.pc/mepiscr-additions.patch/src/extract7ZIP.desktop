@@ -1,0 +1,108 @@
+[Desktop Entry]
+Type=Service
+Actions=extract_here;extract_to_folder;extract_to;extract_pw_here;extract_pw_to_folder;extract_pw_to;
+Encoding=UTF-8
+Version=1.4
+ServiceTypes=KonqPopupMenu/Plugin,KonqPopupMenu/Plugin,application/x-7z-compressed,application/x-lha,application/x-arj,application/x-cd-image,application/x-rpm,application/x-deb,application/x-cpio,application/x-cpio-compressed
+X-KDE-Priority=TopLevel
+X-KDE-Submenu=Extract
+X-KDE-Submenu[de]=Entpacken
+X-KDE-Submenu[es]=Extraer
+X-KDE-Submenu[it]=Estrazione
+X-KDE-Submenu[fr]=Extraire
+X-KDE-Submenu[zh_CN]=解压缩
+X-KDE-Submenu[pl]=Rozpakuj
+X-KDE-Submenu[pt_BR]=Extrair
+X-KDE-Submenu[cs]=Rozbalit
+X-KDE-Submenu[tr]=Aç
+X-KDE-Submenu[da]=Pak ud
+
+[Desktop Action extract_here]
+Exec=extract_7ZIP.sh %F
+Icon=application-x-archive
+Name=Extract here
+Name[de]=Hier entpacken
+Name[es]=Extraer aquí
+Name[it]=Estrai qui
+Name[fr]=Extraire ici
+Name[zh_CN]=在此解压缩
+Name[pl]=Rozpakuj tutaj
+Name[pt_BR]=Extrair aqui
+Name[cs]=Rozbalit sem
+Name[tr]=Buraya Aç
+Name[da]=Pak ud her
+
+[Desktop Action extract_to_folder]
+Exec=extract_7ZIP_to_folder.sh %F
+Icon=application-x-archive
+Name=Extract to subfolder
+Name[de]=Entpacken in Unterordner
+Name[es]=Extraer en subcarpeta
+Name[it]=Estrai nella sottocartella
+Name[fr]=Extraire dans un sous-répertoire
+Name[zh_CN]=解压缩到子文件夹
+Name[pl]=Rozpakuj do podfolderu
+Name[pt_BR]=Extrair na subpasta
+Name[cs]=Rozbalit do adresáře
+Name[tr]=Alt Dizine Aç
+Name[da]=Pak ud til undermappe
+
+[Desktop Action extract_to]
+Exec=extract_7ZIP_to.sh %F
+Icon=application-x-archive
+Name=Extract to...
+Name[de]=Entpacken nach...
+Name[es]=Extraer en...
+Name[it]=Estrai in...
+Name[fr]=Extraire dans...
+Name[zh_CN]=解压缩到...
+Name[pl]=Rozpakuj do...
+Name[pt_BR]=Extrair em...
+Name[cs]=Rozbalit do...
+Name[tr]=Farklı Bir Konuma Aç...
+Name[da]=Pak ud til...
+
+[Desktop Action extract_pw_here]
+Exec=extract_7ZIP_pw.sh %F
+Icon=application-x-archive
+Name=Extract here (Enter password)
+Name[de]=Hier entpacken (Passwort eingeben)
+Name[es]=Extraer aquí (Introducir contraseña)
+Name[it]=Estrai qui (Inserisci la parola chiave)
+Name[fr]=Extraire ici (Introduire un mot de passe)
+Name[zh_CN]=在此解压缩(输入密码)
+Name[pl]=Rozpakuj tutaj (Podaj hasło)
+Name[pt_BR]=Extrair aqui (Introduzir senha)
+Name[cs]=Rozbalit sem (Zadat heslo)
+Name[tr]=Buraya Aç (Parola Girin)
+Name[da]=Pak ud her (indtast kodeord)
+
+[Desktop Action extract_pw_to_folder]
+Exec=extract_7ZIP_pw_to_folder.sh %F
+Icon=application-x-archive
+Name=Extract to subfolder (Enter password)
+Name[de]=Entpacken in Unterordner (Passwort eingeben)
+Name[es]=Extraer en subcarpeta (Introducir contraseña)
+Name[it]=Estrai nella sottocartella (Inserisci la parola chiave)
+Name[fr]=Extraire dans un sous-répertoire (Introduire un mot de passe)
+Name[zh_CN]=解压缩到子文件夹(输入密码)
+Name[pl]=Rozpakuj do podfolderu (Podaj hasło)
+Name[pt_BR]=Extrair na subpasta (Introduzir senha)
+Name[cs]=Rozbalit do podlsložky (Zadat heslo)
+Name[tr]=Alt Dizine Aç (Parola Girin)
+Name[da]=Pak ud til undermappe (indtast kodeord)
+
+[Desktop Action extract_pw_to]
+Exec=extract_7ZIP_pw_to.sh %F
+Icon=application-x-archive
+Name=Extract to... (Enter password)
+Name[de]=Entpacken nach... (Passwort eingeben)
+Name[es]=Extraer en... (Introducir contraseña)
+Name[it]=Estrai in... (Inserisci la parola chiave)
+Name[fr]=Extraire dans ... (Introduire un mot de passe)
+Name[zh_CN]=解压缩到(输入密码)...
+Name[pl]=Rozpakuj do... (Podaj hasło)
+Name[pt_BR]=Extrair em... (Introduzir senha)
+Name[cs]=Rozbalit do... (Zadat heslo)
+Name[tr]=Farklı Bir Konuma Aç...(Parola Girin)
+Name[tr]=Pak ud til...(indtast kodeord)

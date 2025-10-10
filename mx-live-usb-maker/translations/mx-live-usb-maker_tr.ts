@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="tr">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="tr">
 <context>
     <name>MainWindow</name>
     <message>
@@ -118,7 +116,7 @@
         <location filename="../src/ui_mainwindow.h" line="603"/>
         <source>Save the original boot directory when updating a live-usb</source>
         <translation>Çalışan-USB’yi güncellerken orijinal önyükleme dizinini kaydedin
-&#xa0;</translation>
+ </translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="321"/>
@@ -196,7 +194,7 @@
         <location filename="../src/mainwindow.ui" line="506"/>
         <location filename="../src/ui_mainwindow.h" line="628"/>
         <source>Data partition format type</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="460"/>
@@ -305,7 +303,7 @@
         <location filename="../src/mainwindow.ui" line="743"/>
         <location filename="../src/ui_mainwindow.h" line="648"/>
         <source>Clone a mounted live system</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="750"/>
@@ -340,22 +338,22 @@
     <message>
         <location filename="../src/mainwindow.cpp" line="750"/>
         <source>Source Error</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="751"/>
         <source>Could not find the source linuxfs file.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="772"/>
         <source>Warning: The target device (%1) is smaller than the source (%2). The data might not fit. Do you want to continue?</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="775"/>
         <source>Size Warning</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="783"/>
@@ -363,16 +361,16 @@
 
 This may indicate you have selected the wrong device.
 Are you sure you want to proceed?</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="790"/>
         <source>Large Target Device Warning</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="194"/>
-        <source>Writing %1 using &apos;dd&apos; command to /dev/%2,
+        <source>Writing %1 using 'dd' command to /dev/%2,
 
 Please wait until the process is completed</source>
         <translation>%1 ‘dd’ komutuyla /dev/%2’ye yazılıyor,
@@ -382,7 +380,7 @@ Please wait until the process is completed</source>
     <message>
         <location filename="../src/mainwindow.cpp" line="205"/>
         <source>MX Live Usb Maker</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="395"/>
@@ -472,7 +470,7 @@ Please wait until the process is completed</source>
     <message>
         <location filename="../src/mainwindow.cpp" line="537"/>
         <source>Could not find linuxfs file</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="552"/>

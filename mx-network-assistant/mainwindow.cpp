@@ -30,7 +30,6 @@
 #include <QTemporaryFile>
 
 #include "about.h"
-#include "version.h"
 
 #include <unistd.h>
 
