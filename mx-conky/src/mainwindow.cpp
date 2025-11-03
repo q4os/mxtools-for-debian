@@ -36,6 +36,7 @@
 #include <QProcess>
 #include <QRegularExpression>
 #include <QShortcut>
+#include <QSignalBlocker>
 #include <QStackedWidget>
 #include <QStandardPaths>
 #include <QTextEdit>
@@ -91,6 +92,7 @@ void MainWindow::onConkyItemsLoaded()
 
     // Refresh filter options based on current search paths
     populateFilterComboBox();
+    updateControlStates();
 }
 
 MainWindow::~MainWindow()
@@ -326,6 +328,9 @@ void MainWindow::setConnections()
 
     // Connect to know when conkies are loaded
     connect(m_conkyManager, &ConkyManager::conkyItemsChanged, this, &MainWindow::onConkyItemsLoaded);
+    connect(m_conkyManager, &ConkyManager::conkyItemsChanged, this, &MainWindow::updateControlStates);
+    connect(m_conkyManager, &ConkyManager::conkyStarted, this, &MainWindow::updateControlStates);
+    connect(m_conkyManager, &ConkyManager::conkyStopped, this, &MainWindow::updateControlStates);
 }
 
 void MainWindow::onPreviewsClicked()
@@ -377,6 +382,8 @@ void MainWindow::onRefreshClicked()
     }
     m_conkyManager->scanForConkies();
     m_conkyListWidget->refreshList();
+    m_conkyListWidget->reapplyFilters();
+    updateControlStates();
 }
 
 void MainWindow::onStartAllClicked()
@@ -385,6 +392,10 @@ void MainWindow::onStartAllClicked()
         return;
     }
     m_conkyManager->startAutostart();
+    if (m_conkyListWidget) {
+        m_conkyListWidget->reapplyFilters();
+    }
+    updateControlStates();
 }
 
 void MainWindow::onStopAllClicked()
@@ -393,6 +404,10 @@ void MainWindow::onStopAllClicked()
         return;
     }
     m_conkyManager->stopAllRunning();
+    if (m_conkyListWidget) {
+        m_conkyListWidget->reapplyFilters();
+    }
+    updateControlStates();
 }
 
 void MainWindow::onItemSelectionChanged(ConkyItem *item)
@@ -564,7 +579,7 @@ void MainWindow::onDeleteRequested(ConkyItem *item)
 
     if (needsElevation) {
         QString command = elevate + " rm '" + filePath + "'";
-        success = QProcess::execute("sh", QStringList() << "-c" << command) == 0;
+        success = QProcess::execute("sh", { "-c", command }) == 0;
     } else {
         success = QFile::remove(filePath);
     }
@@ -572,8 +587,6 @@ void MainWindow::onDeleteRequested(ConkyItem *item)
     if (success) {
         // Remove from manager - this will emit conkyItemsChanged signal
         m_conkyManager->removeConkyItem(item);
-
-        QMessageBox::information(this, tr("Delete Successful"), tr("Conky file deleted successfully."));
     } else {
         QMessageBox::critical(this, tr("Delete Failed"), tr("Failed to delete conky file:\n%1").arg(filePath));
     }
@@ -677,7 +690,7 @@ void MainWindow::onCustomizeRequested(ConkyItem *item)
                     = QFile::exists("/usr/bin/pkexec") ? "pkexec" : (QFile::exists("/usr/bin/gksu") ? "gksu" : "sudo");
                 QString testCommand = QString("%1 touch '%2'").arg(elevationTool, filePath);
 
-                int exitCode = QProcess::execute("sh", QStringList() << "-c" << testCommand);
+                int exitCode = QProcess::execute("sh", { "-c", testCommand });
                 if (exitCode != 0) {
                     // User cancelled elevation or it failed
                     return;
@@ -687,7 +700,28 @@ void MainWindow::onCustomizeRequested(ConkyItem *item)
         }
     }
 
+    QString originalFilePath = filePath;
+
     ConkyCustomizeDialog dialog(filePath, this);
+    connect(&dialog, &ConkyCustomizeDialog::backupCreated, this, [this, originalFilePath](const QString &backupPath) {
+        if (!m_conkyManager) {
+            return;
+        }
+
+        QFileInfo backupInfo(backupPath);
+        const QString directoryPath = backupInfo.absolutePath();
+
+        m_conkyManager->addConkyItemsFromDirectory(directoryPath);
+
+        if (m_conkyListWidget) {
+            QTimer::singleShot(0, this, [this, originalFilePath]() {
+                if (m_conkyListWidget) {
+                    m_conkyListWidget->selectConkyItem(originalFilePath);
+                }
+            });
+        }
+    });
+
     dialog.exec();
 }
 
@@ -803,7 +837,7 @@ void MainWindow::editConkyFile(const QString &filePath)
         qDebug() << "Final command:" << command;
     }
 
-    bool started = QProcess::startDetached("sh", QStringList() << "-c" << command);
+    bool started = QProcess::startDetached("sh", { "-c", command });
 
     if (!started) {
         if (debug) {
@@ -812,7 +846,7 @@ void MainWindow::editConkyFile(const QString &filePath)
 
         // Fallback to simple featherpad launch
         QString fallbackCommand = needsElevation ? elevate + " featherpad " + filePath : "featherpad " + filePath;
-        started = QProcess::startDetached("sh", QStringList() << "-c" << fallbackCommand);
+        started = QProcess::startDetached("sh", { "-c", fallbackCommand });
 
         if (!started) {
             QMessageBox::warning(this, tr("Editor Error"), tr("Cannot start editor for file: %1").arg(filePath));
@@ -878,7 +912,7 @@ void MainWindow::pushHelp_clicked()
     QProcess checkProcess;
     qDebug() << "MainWindow::pushHelp_clicked: Creating which QProcess object";
     checkProcess.setProgram("which");
-    checkProcess.setArguments(QStringList() << "mx-viewer");
+    checkProcess.setArguments({ "mx-viewer" });
     checkProcess.start();
 
     bool started = false;
@@ -887,10 +921,10 @@ void MainWindow::pushHelp_clicked()
 
         if (checkProcess.exitCode() == 0) {
             qDebug() << "MainWindow: Using mx-viewer for help";
-            started = QProcess::startDetached("mx-viewer", QStringList() << url << tr("MX Conky Help"));
+            started = QProcess::startDetached("mx-viewer", { url, tr("MX Conky Help") });
         } else {
             qDebug() << "MainWindow: Using xdg-open for help";
-            started = QProcess::startDetached("xdg-open", QStringList() << url);
+            started = QProcess::startDetached("xdg-open", { url });
         }
 
         // Ensure process is fully finished and cleaned up
@@ -900,7 +934,7 @@ void MainWindow::pushHelp_clicked()
         qDebug() << "MainWindow: which command timed out, using xdg-open as fallback";
         checkProcess.kill();
         checkProcess.waitForFinished(1000);
-        started = QProcess::startDetached("xdg-open", QStringList() << url);
+        started = QProcess::startDetached("xdg-open", { url });
     }
     qDebug() << "MainWindow::pushHelp_clicked: Destroying which QProcess object";
 
@@ -958,43 +992,68 @@ void MainWindow::focusSearchField()
     }
 }
 
+void MainWindow::updateControlStates()
+{
+    if (m_stopAllButton) {
+        m_stopAllButton->setEnabled(m_conkyManager != nullptr);
+    }
+}
+
 void MainWindow::populateFilterComboBox()
 {
     if (!m_filterComboBox || !m_conkyManager) {
         return;
     }
 
-    // Clear existing items and add status-based filters
-    m_filterComboBox->clear();
-    m_filterComboBox->addItem(tr("All"));
-    m_filterComboBox->addItem(tr("Running"));
-    m_filterComboBox->addItem(tr("Stopped"));
-    m_filterComboBox->addItem(tr("Autostart"));
+    const QString previousFilter = m_filterComboBox->currentText();
 
-    // Add folder-based filters from search paths
-    QStringList searchPaths = m_conkyManager->searchPaths();
-    for (const QString &path : searchPaths) {
-        QFileInfo pathInfo(path);
-        QString folderName = pathInfo.fileName();
-        if (folderName.isEmpty()) {
-            folderName = pathInfo.absolutePath().split('/').last();
+    {
+        const QSignalBlocker blocker(m_filterComboBox);
+
+        // Clear existing items and add status-based filters
+        m_filterComboBox->clear();
+        m_filterComboBox->addItem(tr("All"));
+        m_filterComboBox->addItem(tr("Running"));
+        m_filterComboBox->addItem(tr("Stopped"));
+        m_filterComboBox->addItem(tr("Autostart"));
+
+        // Add folder-based filters from search paths
+        QStringList searchPaths = m_conkyManager->searchPaths();
+        for (const QString &path : searchPaths) {
+            QFileInfo pathInfo(path);
+            QString folderName = pathInfo.fileName();
+            if (folderName.isEmpty()) {
+                folderName = pathInfo.absolutePath().split('/').last();
+            }
+
+            // Include parent directory for better clarity (e.g., "mx-conky-data/themes", "~/.conky")
+            QFileInfo parentInfo(pathInfo.absolutePath());
+            QString parentFolderName = parentInfo.fileName();
+            QString displayName;
+
+            if (path.startsWith(QDir::homePath())) {
+                // Replace home path with ~ for readability
+                displayName = QString("~") + path.mid(QDir::homePath().length());
+            } else if (!parentFolderName.isEmpty() && parentFolderName != folderName) {
+                displayName = QString("%1/%2").arg(parentFolderName, folderName);
+            } else {
+                displayName = folderName;
+            }
+
+            m_filterComboBox->addItem(displayName);
         }
 
-        // Include parent directory for better clarity (e.g., "mx-conky-data/themes", "~/.conky")
-        QFileInfo parentInfo(pathInfo.absolutePath());
-        QString parentFolderName = parentInfo.fileName();
-        QString displayName;
-
-        if (path.startsWith(QDir::homePath())) {
-            // Replace home path with ~ for readability
-            displayName = QString("~") + path.mid(QDir::homePath().length());
-        } else if (!parentFolderName.isEmpty() && parentFolderName != folderName) {
-            displayName = QString("%1/%2").arg(parentFolderName, folderName);
-        } else {
-            displayName = folderName;
+        if (m_filterComboBox->count() > 0) {
+            int indexToSelect = m_filterComboBox->findText(previousFilter);
+            if (indexToSelect < 0) {
+                indexToSelect = 0;
+            }
+            m_filterComboBox->setCurrentIndex(indexToSelect);
         }
+    }
 
-        m_filterComboBox->addItem(displayName);
+    if (m_filterComboBox->count() > 0) {
+        onFilterChanged();
     }
 }
 

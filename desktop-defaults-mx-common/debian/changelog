@@ -1,4 +1,10 @@
-desktop-defaults-mx-common (25.06.03mx26) mx; urgency=medium
+desktop-defaults-mx-common (25.10.01mx25) mx; urgency=medium
+
+  * update translations on pt_BR
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 16 Oct 2025 17:54:46 -0400
+
+desktop-defaults-mx-common (25.06.03mx25) mx; urgency=medium
 
   * remove synaptic config
   * prevents a conflict in synaptic postinstall  migration from earlier versions

@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-27 17:50-0500\n"
+"POT-Creation-Date: 2025-09-25 23:10-0400\n"
 "PO-Revision-Date: 2016-11-29 14:08+0000\n"
 "Last-Translator: Marek Adamski, 2025\n"
 "Language-Team: Polish (https://app.transifex.com/anticapitalista/teams/10162/pl/)\n"
@@ -27,45 +27,45 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n==1 ? 0 : (n%10>=2 && n%10<=4) && (n%100<12 || n%100>14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && n%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
 
 #. blanket error message
-#: ../ddm-mx:43
+#: ../ddm-mx:52
 #, sh-format
 msgid "Unknown error"
 msgstr "Nieznany błąd"
 
 #. error for options
-#: ../ddm-mx:45
+#: ../ddm-mx:54
 #, sh-format
 msgid "Option-"
 msgstr "Opcja-"
 
 #. tell that option needs an arguement
-#: ../ddm-mx:47
+#: ../ddm-mx:56
 #, sh-format
 msgid "requires an argument."
 msgstr "wymaga argumentu."
 
 #. must run as root or elevated
-#: ../ddm-mx:49
+#: ../ddm-mx:58
 #, sh-format
 msgid "Run as root"
 msgstr "Uruchom jako root"
 
 #. say what we are installing drivers for
-#: ../ddm-mx:51
+#: ../ddm-mx:60
 #, sh-format
 msgid "Install drivers for: "
 msgstr "Zainstaluj sterowniki dla:"
 
 #. desktop name
 #. The desktop entry name will be displayed within the menu.
-#: ../ddm-mx:58 ../xdg/ddm-nvidia.desktop.in:4
+#: ../ddm-mx:67 ../xdg/ddm-nvidia.desktop.in:3
 msgid "Nvidia driver installer"
 msgstr "Instalator sterowników Nvidia"
 
 #. desktop comment
 #. TRANSLATORS:
 #. The desktop entry comment will be shown within the menu.
-#: ../ddm-mx:60 ../xdg/ddm-nvidia.desktop.in:7
+#: ../ddm-mx:69 ../xdg/ddm-nvidia.desktop.in:6
 msgid "Install proprietary nvidia driver from repo"
 msgstr "Zainstaluj zastrzeżony sterownik nvidia z repozytorium"
 
@@ -76,100 +76,100 @@ msgstr "Zainstaluj zastrzeżony sterownik nvidia z repozytorium"
 #. not a legal option
 #. check for not a number, or a null
 #. Option chosen is invalid
-#: ../ddm-mx:129 ../ddm-mx:140 ../ddm-mx:1342 ../ddm-mx:1351
+#: ../ddm-mx:138 ../ddm-mx:149 ../ddm-mx:1366 ../ddm-mx:1375
 #, sh-format
 msgid "Invalid option"
 msgstr "Nieprawidłowa opcja"
 
 #. ##file locking
-#: ../ddm-mx:158
+#: ../ddm-mx:167
 #, sh-format
 msgid "creating lock ..."
 msgstr "tworzenie blokady ..."
 
 #. apt purge of drivers specified
-#: ../ddm-mx:199
+#: ../ddm-mx:208
 #, sh-format
 msgid "Purge drivers for: "
 msgstr "Usuń sterowniki dla:"
 
 #. times stamp.  starting at this day and time
-#: ../ddm-mx:201 ../ddm-mx:223
+#: ../ddm-mx:210 ../ddm-mx:232
 #, sh-format
 msgid "Start at (m/d/y):"
 msgstr "Zacznij od (m/d/r):"
 
 #. unknown option
-#: ../ddm-mx:209
+#: ../ddm-mx:218
 #, sh-format
 msgid "ERROR: Unknown argument: $DRV"
 msgstr "BŁĄD: Nieznany argument: $DRV"
 
-#: ../ddm-mx:242 ../ddm-mx:1141
+#: ../ddm-mx:251 ../ddm-mx:1165
 #, sh-format
 msgid "ERROR: Unknown argument: "
 msgstr "BŁĄD: Nieznany argument:"
 
-#: ../ddm-mx:258
+#: ../ddm-mx:267
 #, sh-format
 msgid "Device Driver Manager Help:"
 msgstr "Pomoc Menedżera Sterowników Urządzeń:"
 
-#: ../ddm-mx:260
+#: ../ddm-mx:269
 msgid "The following options are allowed:"
 msgstr "Następujące opcje są dozwolone:"
 
-#: ../ddm-mx:262
+#: ../ddm-mx:271
 msgid "Offer debian-backports alternative"
 msgstr "Zaproponuj alternatywę dla debian-backports"
 
-#: ../ddm-mx:264
+#: ../ddm-mx:273
 msgid "Offer Nvidia developer repo alternative"
 msgstr "Zaoferuj alternatywę dla repozytorium deweloperskiego Nvidia"
 
-#: ../ddm-mx:265
+#: ../ddm-mx:274
 msgid "Implies -f nvidia-driver"
 msgstr "Oznacza -f nvidia-driver"
 
-#: ../ddm-mx:267
+#: ../ddm-mx:276
 msgid "Create 20-nvidia.conf"
 msgstr "Utwórz 20-nvidia.conf"
 
-#: ../ddm-mx:269
+#: ../ddm-mx:278
 msgid "Install given driver."
 msgstr "Zainstaluj dany sterownik."
 
-#: ../ddm-mx:270
+#: ../ddm-mx:279
 msgid "drivers: nvidia, open, fixbumblebee"
 msgstr "sterowniki: nvidia, open, fixbumblebee"
 
-#: ../ddm-mx:272
+#: ../ddm-mx:281
 msgid "Purge given driver."
 msgstr "Usuń dany sterownik."
 
-#: ../ddm-mx:273
+#: ../ddm-mx:282
 msgid "driver: nvidia"
 msgstr "sterownik: nvidia"
 
-#: ../ddm-mx:275
+#: ../ddm-mx:284
 msgid "force specific nvidia driver package."
 msgstr "wymuś określony pakiet sterownika nvidia"
 
-#: ../ddm-mx:280
+#: ../ddm-mx:289
 msgid "For development testing only!  simulate installs"
 msgstr "Tylko do testów deweloperskich! symuluj instalacje"
 
-#: ../ddm-mx:281
+#: ../ddm-mx:290
 msgid "This will install drivers for pre-defined hardware."
 msgstr ""
 "Spowoduje to zainstalowanie sterowników dla wstępnie zdefiniowanego sprzętu."
 
-#: ../ddm-mx:282
+#: ../ddm-mx:291
 msgid "Use with -i."
 msgstr "Użyj z -i."
 
 #. error message about when bumblebee drivers can be used
-#: ../ddm-mx:355
+#: ../ddm-mx:364
 #, sh-format
 msgid ""
 "Unsupported configuration.  bumblebee only works with 390xx drivers and up."
@@ -178,175 +178,175 @@ msgstr ""
 "wyższymi."
 
 #. installed hardware requires this driver
-#: ../ddm-mx:386
+#: ../ddm-mx:395
 #, sh-format
 msgid "Need driver: "
 msgstr "Potrzebujesz sterownika:"
 
 #. we are going to install this package
-#: ../ddm-mx:391
+#: ../ddm-mx:400
 #, sh-format
 msgid "NVIDIA packages to install are "
 msgstr "Pakiety NVIDIA do zainstalowania to"
 
 #. keep going
-#: ../ddm-mx:394 ../ddm-mx:855
+#: ../ddm-mx:403 ../ddm-mx:870
 #, sh-format
 msgid "Continue?"
 msgstr "Kontynuować?"
 
 #. the nvidia install command will be presented here for the log
-#: ../ddm-mx:417
+#: ../ddm-mx:426
 #, sh-format
 msgid "Nvidia command "
 msgstr "Polecenie Nvidia"
 
-#: ../ddm-mx:450
+#: ../ddm-mx:459
 #, sh-format
 msgid "ERROR: Could not configure Bumblebee for user: "
 msgstr "BŁĄD: Nie można skonfigurować Bumblebee dla użytkownika:"
 
-#: ../ddm-mx:454
+#: ../ddm-mx:463
 #, sh-format
 msgid "test enabled, not creating xorg.conf file"
 msgstr "test włączony, nie tworzę pliku xorg.conf"
 
-#: ../ddm-mx:458
+#: ../ddm-mx:467
 #, sh-format
 msgid "creating /etc/X11/xorg.conf file"
 msgstr "tworzenie pliku /etc/X11/xorg.conf"
 
-#: ../ddm-mx:488
+#: ../ddm-mx:500
 #, sh-format
 msgid "Finished"
 msgstr "Gotowe"
 
 #. success in removing proprietary drivers and returning to open source
 #. drivers
-#: ../ddm-mx:510
+#: ../ddm-mx:525
 #, sh-format
 msgid "Proprietary drivers removed"
 msgstr "Usunięto sterowniki firmowe"
 
 #. the command to restore open source drivers presented for the log
-#: ../ddm-mx:524
+#: ../ddm-mx:539
 #, sh-format
 msgid "Open command "
 msgstr "Polecenie zainstalowania otwartych sterowników"
 
 #. success at installing open source drivers
-#: ../ddm-mx:529
+#: ../ddm-mx:544
 #, sh-format
 msgid "Open drivers installed"
 msgstr "Zainstalowano otwarte sterowniki"
 
 #. return sources to a state before this application made any changes
-#: ../ddm-mx:548 ../ddm-mx:554 ../ddm-mx:560 ../ddm-mx:567
+#: ../ddm-mx:563 ../ddm-mx:569 ../ddm-mx:575 ../ddm-mx:582
 #, sh-format
 msgid "Resetting sources"
 msgstr "Resetowanie źródeł"
 
-#: ../ddm-mx:581
+#: ../ddm-mx:596
 #, sh-format
 msgid "Press <Enter> to exit"
 msgstr "Naciśnij <Enter> aby wyjść"
 
 #. enabling debian-backports
-#: ../ddm-mx:595
+#: ../ddm-mx:610
 #, sh-format
 msgid "Enabling backports repo"
 msgstr "Włączanie repozytorium backportów"
 
-#: ../ddm-mx:596 ../ddm-mx:613 ../ddm-mx:637
+#: ../ddm-mx:611 ../ddm-mx:628
 #, sh-format
 msgid "Running apt-get update..."
 msgstr "Uruchamianie apt-get update..."
 
 #. inform we are updating nvidia-detect package
-#: ../ddm-mx:602 ../ddm-mx:618 ../ddm-mx:1229
+#: ../ddm-mx:617 ../ddm-mx:633 ../ddm-mx:1253
 #, sh-format
 msgid "Installing latest nvidia-detect package"
 msgstr "Instalowanie najnowszego pakietu nvidia-detect"
 
 #. enabling mx_test_repo
-#: ../ddm-mx:612
+#: ../ddm-mx:627
 #, sh-format
 msgid "Enabling MX Test repo"
 msgstr "Włączanie repozytorium MX Test"
 
 #. enabling nvidia-direct repo
-#: ../ddm-mx:628
+#: ../ddm-mx:643
 #, sh-format
 msgid "Enabling Nvidia developer repo"
 msgstr "Włączanie repozytorium deweloperskiego Nvidia"
 
 #. getting the nvidia gpg archive key
-#: ../ddm-mx:630
+#: ../ddm-mx:645
 #, sh-format
 msgid "Getting Nvidia repo signing key"
 msgstr "Uzyskanie klucza podpisu repozytorium Nvidia"
 
 #. problem downloading and installing the nvidia gpg key package
-#: ../ddm-mx:640
+#: ../ddm-mx:655
 #, sh-format
 msgid "Error downloading nvidia direct repo key"
 msgstr "Błąd podczas pobierania klucza repozytorium Nvidia Direct"
 
-#: ../ddm-mx:658
+#: ../ddm-mx:673
 #, sh-format
 msgid "Would you like to check debian-backports for a later version?"
 msgstr "Czy chcesz sprawdzić debian-backports dla nowszej wersji?"
 
-#: ../ddm-mx:660
+#: ../ddm-mx:675
 #, sh-format
 msgid "Yes or No?"
 msgstr "Tak czy Nie?"
 
-#: ../ddm-mx:662 ../ddm-mx:1295
+#: ../ddm-mx:677 ../ddm-mx:1319
 #, sh-format
 msgid "Yes"
 msgstr "Tak"
 
-#: ../ddm-mx:663 ../ddm-mx:1296
+#: ../ddm-mx:678 ../ddm-mx:1320
 #, sh-format
 msgid "No"
 msgstr "Nie"
 
 #. user enters a number corresponding to the the driver version they want
-#: ../ddm-mx:665 ../ddm-mx:728 ../ddm-mx:767 ../ddm-mx:807 ../ddm-mx:1193
-#: ../ddm-mx:1298 ../ddm-mx:1333
+#: ../ddm-mx:680 ../ddm-mx:743 ../ddm-mx:782 ../ddm-mx:822 ../ddm-mx:1217
+#: ../ddm-mx:1322 ../ddm-mx:1357
 #, sh-format
 msgid "Enter Number of selection"
 msgstr "Wpisz numer wyboru"
 
-#: ../ddm-mx:669 ../ddm-mx:673 ../ddm-mx:686 ../ddm-mx:690 ../ddm-mx:703
-#: ../ddm-mx:707 ../ddm-mx:732 ../ddm-mx:746 ../ddm-mx:771 ../ddm-mx:784
-#: ../ddm-mx:811 ../ddm-mx:824 ../ddm-mx:1374
+#: ../ddm-mx:684 ../ddm-mx:688 ../ddm-mx:701 ../ddm-mx:705 ../ddm-mx:718
+#: ../ddm-mx:722 ../ddm-mx:747 ../ddm-mx:761 ../ddm-mx:786 ../ddm-mx:799
+#: ../ddm-mx:826 ../ddm-mx:839 ../ddm-mx:1403
 #, sh-format
 msgid "Ok"
 msgstr "Ok"
 
-#: ../ddm-mx:676 ../ddm-mx:693 ../ddm-mx:710 ../ddm-mx:751 ../ddm-mx:791
-#: ../ddm-mx:829 ../ddm-mx:1199 ../ddm-mx:1305
+#: ../ddm-mx:691 ../ddm-mx:708 ../ddm-mx:725 ../ddm-mx:766 ../ddm-mx:806
+#: ../ddm-mx:844 ../ddm-mx:1223 ../ddm-mx:1329
 #, sh-format
 msgid "invalid option."
 msgstr "nieprawidłowa opcja."
 
 #. NVIDIA_XCONFIG=""
-#: ../ddm-mx:676 ../ddm-mx:693 ../ddm-mx:710 ../ddm-mx:749 ../ddm-mx:751
-#: ../ddm-mx:789 ../ddm-mx:791 ../ddm-mx:827 ../ddm-mx:829 ../ddm-mx:1198
-#: ../ddm-mx:1199 ../ddm-mx:1304 ../ddm-mx:1305
+#: ../ddm-mx:691 ../ddm-mx:708 ../ddm-mx:725 ../ddm-mx:764 ../ddm-mx:766
+#: ../ddm-mx:804 ../ddm-mx:806 ../ddm-mx:842 ../ddm-mx:844 ../ddm-mx:1222
+#: ../ddm-mx:1223 ../ddm-mx:1328 ../ddm-mx:1329
 #, sh-format
 msgid "exiting"
 msgstr "wychodzenie"
 
-#: ../ddm-mx:682 ../ddm-mx:683
+#: ../ddm-mx:697 ../ddm-mx:698
 #, sh-format
 msgid "Would you like to check MX Test Repo for a later version?"
 msgstr ""
 "Czy chcesz sprawdzić repozytorium MX Test w poszukiwaniu nowszej wersji?"
 
-#: ../ddm-mx:699 ../ddm-mx:700
+#: ../ddm-mx:714 ../ddm-mx:715
 #, sh-format
 msgid "Would you like to check the Nvidia developer repo for a later version?"
 msgstr ""
@@ -354,69 +354,69 @@ msgstr ""
 "nowsza wersja?"
 
 #. a choice of driver versions is being offerred
-#: ../ddm-mx:718 ../ddm-mx:757 ../ddm-mx:797
+#: ../ddm-mx:733 ../ddm-mx:772 ../ddm-mx:812
 #, sh-format
 msgid "Which driver do you wish to install"
 msgstr "Który sterownik chcesz zainstalować?"
 
-#: ../ddm-mx:720
+#: ../ddm-mx:735
 #, sh-format
 msgid "Main repos or debian-backports?"
 msgstr "Główne repozytorium czy debian-backports?"
 
-#: ../ddm-mx:722 ../ddm-mx:761 ../ddm-mx:801
+#: ../ddm-mx:737 ../ddm-mx:776 ../ddm-mx:816
 #, sh-format
 msgid "Main"
 msgstr "Główne"
 
-#: ../ddm-mx:726 ../ddm-mx:765 ../ddm-mx:805
+#: ../ddm-mx:741 ../ddm-mx:780 ../ddm-mx:820
 #, sh-format
 msgid "Exit"
 msgstr "Wyjście"
 
 #. put nvidia-detect back to version in current enabled repos
-#: ../ddm-mx:742 ../ddm-mx:780 ../ddm-mx:820 ../ddm-mx:1383
+#: ../ddm-mx:757 ../ddm-mx:795 ../ddm-mx:835 ../ddm-mx:1412
 #, sh-format
 msgid "Reset nvidia-detect"
 msgstr "Zresetuj nvidia-detect"
 
-#: ../ddm-mx:759
+#: ../ddm-mx:774
 #, sh-format
 msgid "Main repos or MX Test"
 msgstr "Główneg repozytoria lub MX Test"
 
-#: ../ddm-mx:763
+#: ../ddm-mx:778
 #, sh-format
 msgid "MX Test"
 msgstr "MX Test"
 
-#: ../ddm-mx:799
+#: ../ddm-mx:814
 #, sh-format
 msgid "Main repos or Nvidia direct repo"
 msgstr "Główne repozytoria lub repozytorium Nvidia Direct"
 
-#: ../ddm-mx:803
+#: ../ddm-mx:818
 #, sh-format
 msgid "Nvidia Direct"
 msgstr "Nvidia Direct"
 
-#: ../ddm-mx:845 ../ddm-mx:1355
+#: ../ddm-mx:860 ../ddm-mx:1379
 #, sh-format
 msgid "Candidate is: "
 msgstr "Kandydat to:"
 
 #. installed version, if any
-#: ../ddm-mx:846 ../ddm-mx:1156 ../ddm-mx:1166 ../ddm-mx:1175
+#: ../ddm-mx:861 ../ddm-mx:1180 ../ddm-mx:1190 ../ddm-mx:1199
 #, sh-format
 msgid "Installed is: "
 msgstr "Zainstalowany to:"
 
-#: ../ddm-mx:854
+#: ../ddm-mx:869
 #, sh-format
 msgid "Refreshing Sources with apt-get update"
 msgstr "Odświeżanie Źródeł z apt-get update"
 
-#: ../ddm-mx:861
+#: ../ddm-mx:876
 #, sh-format
 msgid "There was a problem with the apt-get update.  See $LOG for details"
 msgstr ""
@@ -424,46 +424,46 @@ msgstr ""
 "szczegóły"
 
 #. provide user with information on going back to open source drivers
-#: ../ddm-mx:872
+#: ../ddm-mx:887
 #, sh-format
 msgid "To restore open source drivers use:  "
 msgstr "Aby przywrócić sterowniki typu open source, użyj:"
 
-#: ../ddm-mx:889
+#: ../ddm-mx:904
 #, sh-format
 msgid "To restore open source drivers later use:  "
 msgstr "Aby później przywrócić sterowniki open source, użyj:"
 
 #. provide user with information on where file with recovery command is stored
-#: ../ddm-mx:902
+#: ../ddm-mx:917
 #, sh-format
 msgid "For recovery help see "
 msgstr "Aby uzyskać pomoc w odzyskiwaniu, zobacz"
 
 #. provide user with information on where file with recovery command is stored
-#: ../ddm-mx:906
+#: ../ddm-mx:921
 #, sh-format
 msgid "Information written to "
 msgstr "Informacje napisane do"
 
 #. found an installation from source
-#: ../ddm-mx:949
+#: ../ddm-mx:964
 #, sh-format
 msgid "Possible previous install from source or smxi/sgfxi detected."
 msgstr "Możliwa poprzednia instalacja ze źródła lub wykryto smxi/sgfxi."
 
-#: ../ddm-mx:950
+#: ../ddm-mx:965
 #, sh-format
 msgid "Version detected: "
 msgstr "Wykryto wersję:"
 
-#: ../ddm-mx:951
+#: ../ddm-mx:966
 #, sh-format
 msgid "Latest possible with this script : "
 msgstr "Najnowsze możliwe z tym skryptem:"
 
 #. please remove the source installation if you wish to use ddm-mx
-#: ../ddm-mx:953
+#: ../ddm-mx:968
 #, sh-format
 msgid ""
 "Please remove with  <sudo nvidia-install --uninstall> and reboot if you wish"
@@ -472,29 +472,38 @@ msgstr ""
 "Usuń używając <sudo nvidia-install --uninstall> i uruchom ponownie, jeśli "
 "chcesz kontynuować"
 
-#: ../ddm-mx:960
+#: ../ddm-mx:975
 #, sh-format
 msgid "Possible previous install detected."
 msgstr "Wykryto prawdopodobną poprzednią instalację."
 
 #. possible hybrid graphics detected
-#: ../ddm-mx:976
+#: ../ddm-mx:991
 #, sh-format
 msgid "nvidia-optimus detected"
 msgstr "wykryto nvidia-optimus"
 
 #. ask if this system has hybrid graphics
-#: ../ddm-mx:980
+#: ../ddm-mx:995
+#, sh-format
+msgid ""
+"Answer the next question NO if you are using your Optimus Nvidia card in "
+"discrete mode"
+msgstr ""
+"Odpowiedz NIE na następne pytanie, jeśli używasz karty Optimus Nvidia w "
+"trybie dyskretnym"
+
+#: ../ddm-mx:996
 #, sh-format
 msgid "Is this a NVIDIA/INTEL Optimus system?"
 msgstr "Czy to jest system NVIDIA/INTEL Optimus?"
 
-#: ../ddm-mx:1020
+#: ../ddm-mx:1036
 #, sh-format
 msgid "You can use the new PRIMUS driver built in to the nvidia drivers."
 msgstr "Możesz użyć nowego sterownika PRIMUS wbudowanego w sterowniki nvidia."
 
-#: ../ddm-mx:1021
+#: ../ddm-mx:1037
 #, sh-format
 msgid ""
 "Use \"nvidia-run-mx\" followed by your application command to use the nvidia"
@@ -503,7 +512,7 @@ msgstr ""
 "Użyj „nvidia-run-mx”, a następnie polecenia aplikacji, aby użyć karty "
 "graficznej nvidia"
 
-#: ../ddm-mx:1023
+#: ../ddm-mx:1039
 #, sh-format
 msgid ""
 "If you want to force the older bumblebee optimus drivers,\\n quit and "
@@ -512,18 +521,18 @@ msgstr ""
 "Jeśli chcesz wymusić starsze sterowniki bumblebee optimus,\\n zamknij i "
 "uruchom ponownie za pomocą sudo ddm-mx -i nvidia -f bumblebee-nvidia"
 
-#: ../ddm-mx:1026 ../ddm-mx:1032
+#: ../ddm-mx:1042 ../ddm-mx:1048
 #, sh-format
 msgid "You need to use the bumblebee-nvidia driver."
 msgstr "Musisz użyć sterownika bumblebee-nvidia."
 
-#: ../ddm-mx:1045
+#: ../ddm-mx:1061
 #, sh-format
 msgid "nvidia driver not available, check your repo sources"
 msgstr ""
 "sterownik nvidia jest niedostępny, sprawdź źródła swojego repozytorium"
 
-#: ../ddm-mx:1050
+#: ../ddm-mx:1066
 #, sh-format
 msgid ""
 "Uh oh. Your card is only supported by older legacy drivers which are not in "
@@ -533,77 +542,89 @@ msgstr ""
 "występują w żadnym obecnym pakiecie Debiana."
 
 #. candidate from enabled repos
-#: ../ddm-mx:1152 ../ddm-mx:1163 ../ddm-mx:1172
+#: ../ddm-mx:1176 ../ddm-mx:1187 ../ddm-mx:1196
 #, sh-format
 msgid "Main repo candidate is:  "
 msgstr "Kandydat głównego repozytorium to:"
 
 #. candidate from debian backports repo
-#: ../ddm-mx:1154
+#: ../ddm-mx:1178
 #, sh-format
 msgid "Debian backports candidate is:  "
 msgstr "Kandydat Debian backports to:"
 
 #. test repo candidate
-#: ../ddm-mx:1165
+#: ../ddm-mx:1189
 #, sh-format
 msgid "MX Test repo candidate is:  "
 msgstr "Kandydat repozytorium MX Test to:"
 
 #. Nvidia developer repo candidate here
-#: ../ddm-mx:1174
+#: ../ddm-mx:1198
 #, sh-format
 msgid "Nvidia developer repo candidate is:  "
 msgstr "Kandydatem na repozytorium deweloperskiego Nvidia jest:"
 
-#: ../ddm-mx:1185
+#: ../ddm-mx:1209
 #, sh-format
 msgid "nvidia driver already installed"
 msgstr "sterownik nvidia jest już zainstalowany"
 
-#: ../ddm-mx:1187
+#: ../ddm-mx:1211
 #, sh-format
 msgid "Reinstall or quit?"
 msgstr "Zainstalować ponownie czy zakończyć?"
 
-#: ../ddm-mx:1190
+#: ../ddm-mx:1214
 #, sh-format
 msgid "Reinstall"
 msgstr "Zainstaluj ponownie"
 
-#: ../ddm-mx:1191 ../ddm-mx:1323
+#: ../ddm-mx:1215 ../ddm-mx:1347
 #, sh-format
 msgid "quit"
 msgstr "zakończ"
 
-#: ../ddm-mx:1197
+#: ../ddm-mx:1221
 #, sh-format
 msgid "reinstalling"
 msgstr "ponowna instalacja"
 
-#: ../ddm-mx:1220
+#: ../ddm-mx:1244
 #, sh-format
 msgid "No nvidia card found - exiting"
 msgstr "Nie znaleziono karty Nvidia - wychodzenie"
 
 #. # Ask to try installing the latest nvidia driver if graphics card is
 #. unknown
-#: ../ddm-mx:1293
+#: ../ddm-mx:1317
 #, sh-format
 msgid "Try latest nvidia-driver?"
 msgstr "Wypróbować najnowszy sterownik nvidia?"
 
 #. Offer all versions of nvidia-driver available in repository
-#: ../ddm-mx:1319
+#: ../ddm-mx:1343
 #, sh-format
 msgid "Available Nvidia Developer Repo Versions"
 msgstr "Dostępne wersje repozytorium deweloperskiego Nvidia"
 
 #. Disable the Nvidia repo, menu options
-#: ../ddm-mx:1322
+#: ../ddm-mx:1346
 #, sh-format
 msgid "Disable Nvidia Developer Repo (default)"
 msgstr "Wyłącz repozytorium deweloperskiego Nvidia (domyślne)"
+
+#. set up nvidia kernel modules options and grub boot loader options
+#: ../ddm-mx:1432
+#, sh-format
+msgid "adding module options and grub config"
+msgstr "dodawanie opcji modułu i konfiguracji GRUB"
+
+#. #remove nvidia kernel modules options and grub boot loader options
+#: ../ddm-mx:1448
+#, sh-format
+msgid "removing module options and grub config"
+msgstr "usuwanie opcji modułu i konfiguracji GRUB"
 
 #: ../nvidia-detect-mx:33
 msgid ""
@@ -617,12 +638,12 @@ msgstr ""
 msgid "Latest"
 msgstr "Najnowszy"
 
-#: ../nvidia-detect-mx:168
+#: ../nvidia-detect-mx:174
 #, sh-format
 msgid "A newer driver may add support for your card."
 msgstr "Obsługa twojej karty może zostać dodana w nowszym sterowniku."
 
-#: ../nvidia-detect-mx:169
+#: ../nvidia-detect-mx:175
 #, sh-format
 msgid ""
 "Newer driver releases may be available in the MX testing repository or "
@@ -631,22 +652,22 @@ msgstr ""
 "Nowsze wersje sterowników mogą być dostępne w repozytorium testowym MX lub w"
 " debian-backports."
 
-#: ../nvidia-detect-mx:170
+#: ../nvidia-detect-mx:176
 #, sh-format
 msgid "There may be options in the Nvidia Developer Repository"
 msgstr "Mogą istnieć opcje w repozytorium deweloperskim Nvidia"
 
-#: ../nvidia-detect-mx:179 ../nvidia-detect-mx:187 ../nvidia-detect-mx:195
-#: ../nvidia-detect-mx:203 ../nvidia-detect-mx:211 ../nvidia-detect-mx:219
-#: ../nvidia-detect-mx:227 ../nvidia-detect-mx:235 ../nvidia-detect-mx:243
-#: ../nvidia-detect-mx:251
+#: ../nvidia-detect-mx:185 ../nvidia-detect-mx:193 ../nvidia-detect-mx:201
+#: ../nvidia-detect-mx:209 ../nvidia-detect-mx:217 ../nvidia-detect-mx:225
+#: ../nvidia-detect-mx:233 ../nvidia-detect-mx:241 ../nvidia-detect-mx:249
+#: ../nvidia-detect-mx:258 ../nvidia-detect-mx:266
 #, sh-format
 msgid "Your card is supported by the nvidia %s drivers series. %s"
 msgstr "Twoja karta jest obsługiwana przez serię %s sterowników nvidia. %s"
 
 #. . inform which driver series are totally unsupported
-#: ../nvidia-detect-mx:259 ../nvidia-detect-mx:262 ../nvidia-detect-mx:265
-#: ../nvidia-detect-mx:268
+#: ../nvidia-detect-mx:274 ../nvidia-detect-mx:277 ../nvidia-detect-mx:280
+#: ../nvidia-detect-mx:283
 #, sh-format
 msgid ""
 "Uh oh. Your card is only supported by the %s legacy drivers series, which is"
@@ -655,17 +676,17 @@ msgstr ""
 "Uh oh. Twoja karta jest obsługiwana tylko przez starsze serie sterowników "
 "%s, których nie ma w żadnym obecnym pakiecie Debiana."
 
-#: ../nvidia-detect-mx:271
+#: ../nvidia-detect-mx:286
 #, sh-format
 msgid "Oops. Supported driver not found"
 msgstr "Ups. Nie znaleziono obsługiwanego sterownika"
 
-#: ../nvidia-detect-mx:279
+#: ../nvidia-detect-mx:294
 #, sh-format
 msgid "It is recommended to install the following:"
 msgstr "Zaleca się zainstalowanie następujących elementów:"
 
-#: ../nvidia-detect-mx:282
+#: ../nvidia-detect-mx:297
 #, sh-format
 msgid "To install alternate driver packages, use"
 msgstr "Aby zainstalować alternatywne pakiety sterowników, użyj"

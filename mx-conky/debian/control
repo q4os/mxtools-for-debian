@@ -13,7 +13,8 @@ Depends: mx-conky-data-bin,
 	conky-all | conky,
 	${misc:Depends},
 	${shlibs:Depends}
-Recommends: mx-conky-data	 
+Recommends: mx-conky-data,
+	graphicsmagick-imagemagick-compat
 Description: Conky configuration tool for MX Linux
  MX Conky is a graphical tool used for configuring and managing Conky
  on MX Linux. It allows users to easily customize Conky displays by

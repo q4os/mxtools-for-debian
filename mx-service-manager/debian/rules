@@ -1,19 +1,26 @@
 #!/usr/bin/make -f
 export QT_SELECT=6
 
-# Use standard CMake with Make generator for debian compatibility
-CMAKE_OPTS = -DCMAKE_BUILD_TYPE=Release
-
 override_dh_auto_configure:
-	dh_auto_configure -- $(CMAKE_OPTS)
+	dh_auto_configure -- \
+		-G Ninja \
+		-DCMAKE_BUILD_TYPE=Release \
+		-DCMAKE_EXPORT_COMPILE_COMMANDS=ON
 
 override_dh_auto_clean:
 	dh_auto_clean
 	rm -rf build/
-	rm -f src/version.h
+	rm -f translations/*.qm
 
 override_dh_shlibdeps:
 	dh_shlibdeps --dpkg-shlibdeps-params=--ignore-missing-info
 
+override_dh_auto_test:
+	# Skip tests as no test targets are defined
+
+override_dh_auto_install:
+	# Install is handled by debian/install file
+	dh_auto_install
+
 %:
-	dh $@ --buildsystem=cmake --no-automatic-dbgsym
+	dh $@ --buildsystem=cmake+ninja --no-automatic-dbgsym

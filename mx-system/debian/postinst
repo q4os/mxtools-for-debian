@@ -117,6 +117,17 @@ if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-remov
     if [ -x "/etc/sysctl.d/99-vm-dirtybytes_mx.conf" ]; then
     	chmod a-x /etc/sysctl.d/99-vm-dirtybytes_mx.conf
     fi
+    
+    #put mask on systemd-networkd-wait-online.service if it doesn't exists
+    if [ ! -L "/etc/systemd/system/systemd-networkd-wait-online.service" ]; then
+    	if [ -e "/etc/systemd/system/live-disables-readme" ]; then  	
+   			if [ -z "$(grep systemd-networkd-wait-online-service /etc/systemd/system/live-disables-readme)" ];  then
+    			echo "##systemd-networkd-wait-online-service hangs if systemd-networkd is not actually in use, so disable" >> /etc/systemd/system/live-disables-readme
+    			ln -s /dev/null /etc/systemd/system/systemd-networkd-wait-online.service
+    		fi
+    	fi
+    fi
+    	
     set -e
 fi
 

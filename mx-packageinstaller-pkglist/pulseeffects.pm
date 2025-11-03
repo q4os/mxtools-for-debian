@@ -10,7 +10,7 @@ PulseEffects
 </name>
 
 <description>
-   pulseaudio equalizer
+pulseaudio equalizer (removes pipewire)
 </description>
 
 <installable>

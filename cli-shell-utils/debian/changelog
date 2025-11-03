@@ -1,3 +1,9 @@
+cli-shell-utils (0.4.2+7mx25) mx; urgency=medium
+
+  * mod vmlinuz-version to filter memtest files
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 24 Oct 2025 17:33:58 -0400
+
 cli-shell-utils (0.4.2+6mx25) mx; urgency=medium
 
   * use /usr/ rather than /usr/local

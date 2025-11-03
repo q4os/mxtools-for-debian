@@ -95,244 +95,244 @@
         <translation>Parar</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="684"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="722"/>
         <source>Select Color</source>
         <translation>Escolher Cor</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="790"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="828"/>
         <source>Permission Denied</source>
         <translation>A Permissão Foi Negada</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="791"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="829"/>
         <source>Cannot write to file: %1
 Insufficient permissions.</source>
         <translation>Não foi possível gravar o ficheiro: %1
 Permissões insuficientes.</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="801"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="839"/>
         <source>Write Error</source>
         <translation>Erro de Gravação</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="801"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="839"/>
         <source>Cannot write to file: %1</source>
         <translation>Não é possível escrever no ficheiro %1</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="874"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="930"/>
         <source>Backup Config File</source>
         <translation>Fazer Cópia de Segurança das Configurações</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="874"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="930"/>
         <source>Do you want to preserve the original file?</source>
         <translation>Deseja preservar o ficheiro original?</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="897"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="954"/>
         <source>Backed Up Config File</source>
         <translation>Efetuada Cópia de Segurança das Configurações</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="898"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="955"/>
         <source>The original configuration was backed up to %1</source>
         <translation>Foi feita cópia de segurança das configurações originais para %1</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="900"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="957"/>
         <source>Backup Failed</source>
         <translation>Falha ao fazer Cópia de Segurança</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="900"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="957"/>
         <source>Failed to create a backup file.</source>
         <translation>Falha ao criar cópia de segurança.</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="973"/>
-        <location filename="../src/conkycustomizedialog.cpp" line="976"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1038"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1041"/>
         <source>Restore Failed</source>
         <translation>Falha ao restaurar</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="973"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1038"/>
         <source>Failed to restore from backup file.</source>
         <translation>Falha ao restaurar a partir da cópia de segurança.</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="976"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1041"/>
         <source>Backup file does not exist.</source>
         <translation>A cópia de segurança não existe.</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1328"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1393"/>
         <source>Position</source>
         <translation>Posição</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1335"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1400"/>
         <source>Alignment</source>
         <translation>Alinhamento</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1340"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1405"/>
         <source>Top Left</source>
         <translation>No canto superior esquerdo</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1341"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1406"/>
         <source>Top Right</source>
         <translation>No canto superior esquerdo direito</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1342"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1407"/>
         <source>Top Middle</source>
         <translation>Na parte superior, ao meio</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1343"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1408"/>
         <source>Bottom Left</source>
         <translation>No canto inferior esquerdo</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1344"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1409"/>
         <source>Bottom Right</source>
         <translation>No canto inferior direito</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1345"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1410"/>
         <source>Bottom Middle</source>
         <translation>No fundo, ao meio</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1346"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1411"/>
         <source>Middle Left</source>
         <translation>No meio, à esquerda</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1347"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1412"/>
         <source>Middle Right</source>
         <translation>No meio, à direita</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1348"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1413"/>
         <source>Middle Middle</source>
         <translation> No meio, ao centro</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1353"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1418"/>
         <source>Horizontal Gap</source>
         <translation>Distância Horizontal</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1354"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1419"/>
         <source>[GAP_X] Horizontal distance from window border (in pixels)</source>
         <translation> [GAP_X] é a distância horizontal da borda da janela (em pixels)</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1366"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1431"/>
         <source>Vertical Gap</source>
         <translation>Distância Vertical</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1367"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1432"/>
         <source>[GAP_Y] Vertical distance from window border (in pixels)</source>
         <translation>[GAP_Y] é distância vertical até a borda da janela (em pixels)</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1379"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1444"/>
         <source>Desktop</source>
         <translation>Ambiente Trab</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1382"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1447"/>
         <source>Desktop 1</source>
         <translation>Área de Trabalho 1</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1383"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1448"/>
         <source>All Desktops</source>
         <translation>Todas as Áreas de Trabalho</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1395"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1460"/>
         <source>Location</source>
         <translation>Localização</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1407"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1472"/>
         <source>Width should be larger than the size of window contents,
 otherwise this setting will not have any effect</source>
         <translation>A largura deve ser maior do que o tamanho do conteúdo
 da janela, senão, esta configuração não terá efeito</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1411"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1476"/>
         <source>Minimum Width</source>
         <translation>Largura Mínima</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1426"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1491"/>
         <source>Height should be larger than the size of window contents,
 otherwise this setting will not have any effect</source>
         <translation>A altura deve ser maior do que o tamanho do conteúdo
 da janela, senão esta configuração não terá efeito</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1428"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1493"/>
         <source>Minimum Height</source>
         <translation>Altura Mínima</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1442"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1507"/>
         <source>Increases the window height by adding empty lines at the end of the Conky config file</source>
         <translation>Aumentar a altura da janela, adicionando linhas em branco no final da configuração do Conky</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1443"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1508"/>
         <source>Height Padding</source>
         <translation>Altura do Preenchimento</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1458"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1523"/>
         <source>Size</source>
         <translation>Tamanho</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1471"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1536"/>
         <source>Transparency Type</source>
         <translation>Tipo da Transparência</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1476"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1541"/>
         <source>Opaque</source>
         <translation>Opaca</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1477"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1542"/>
         <source>Transparent</source>
         <translation>Transparente</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1478"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1543"/>
         <source>Pseudo-Transparent</source>
         <translation>Pseudo-Transparência</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1479"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1544"/>
         <source>Semi-Transparent</source>
         <translation>Semitransparente</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1484"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1549"/>
         <source>Opacity (%)</source>
         <translation>Opacidade (%)</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1485"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1550"/>
         <source>Window Opacity
 
 0 = Fully Transparent, 100 = Fully Opaque</source>
@@ -342,124 +342,131 @@ da janela, senão esta configuração não terá efeito</translation>
 100 = Totalmente Opaco</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1499"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1564"/>
         <source>Background Color</source>
         <translation>Cor de Fundo</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1504"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1569"/>
         <source>Choose Color</source>
         <translation>Escolher a Cor</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1524"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1589"/>
         <source>Setting Type to &quot;Transparent&quot; will make the whole window transparent (including any images). Use &quot;Pseudo-Transparent&quot; if you want the images to be opaque.</source>
         <translation>Configurar a janela como ‘Transparente’ tornará-a completamente transparente (incluindo quaisquer imagens). Use a opção ‘Pseudo-Transparente’ se quiser que as imagens sejam opacas.</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1534"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1599"/>
         <source>Setting Type to &quot;Pseudo-Transparent&quot; will make the window transparent but the window will have a shadow. The shadow can be disabled by configuring your window manager.</source>
         <translation>Configurar a janela como ‘Pseudo-Transparente’ tornará-a, mas ela terá uma sombra. A sombra pode ser desativada configurando o seu gestor de janelas.</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1545"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1610"/>
         <source>Transparency</source>
         <translation>Transparência</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1556"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1621"/>
         <source>Date Format</source>
         <translation>Formato da Data</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1559"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1624"/>
         <source>Day</source>
         <translation>Dia</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1561"/>
-        <location filename="../src/conkycustomizedialog.cpp" line="1572"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1626"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1637"/>
         <source>Long</source>
         <translation>Longo</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1562"/>
-        <location filename="../src/conkycustomizedialog.cpp" line="1573"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1627"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1638"/>
         <source>Short</source>
         <translation>Curto</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1563"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1628"/>
         <source>Abbreviated name, e.g. Tu</source>
         <translation>Nome abreviado (p. ex. Ter)</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1570"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1635"/>
         <source>Month</source>
         <translation>Mês</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1574"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1639"/>
         <source>Abbreviated name, e.g. Oct</source>
         <translation>Nome abreviado (p. ex. Out)</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1593"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1658"/>
         <source>Time Format</source>
         <translation>Formato da Hora</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1600"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1665"/>
         <source>Format</source>
         <translation>Formato</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1605"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1670"/>
         <source>12 Hour</source>
         <translation>12 horas</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1606"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1671"/>
         <source>24 Hour</source>
         <translation>24 horas</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1621"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="653"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="662"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="671"/>
+        <source>auto</source>
+        <translation>automática</translation>
+    </message>
+    <message>
+        <location filename="../src/conkycustomizedialog.cpp" line="1686"/>
         <source>Date &amp;&amp; Time</source>
         <translation>Data &amp;&amp; Hora</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1634"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1699"/>
         <source>Interface</source>
         <translation>Interface</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1642"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1707"/>
         <source>WiFi</source>
         <translation>WiFi</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1645"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1710"/>
         <source>WiFi Network</source>
         <translation>Rede Sem Fios</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1648"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1713"/>
         <source>LAN</source>
         <translation>LAN</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1651"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1716"/>
         <source>Wired LAN Network</source>
         <translation>Rede Local Com Fio</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1665"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1730"/>
         <source>Network</source>
         <translation>Rede</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1928"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="2045"/>
         <source>Select Background Color</source>
         <translation>Escolher a cor do fundo</translation>
     </message>
@@ -510,17 +517,17 @@ da janela, senão esta configuração não terá efeito</translation>
 <context>
     <name>ConkyListWidget</name>
     <message>
-        <location filename="../src/conkylistwidget.cpp" line="344"/>
+        <location filename="../src/conkylistwidget.cpp" line="345"/>
         <source>Total: 0 conkies</source>
         <translation>Total: 0 conkies</translation>
     </message>
     <message>
-        <location filename="../src/conkylistwidget.cpp" line="595"/>
+        <location filename="../src/conkylistwidget.cpp" line="599"/>
         <source>Total: %1 conkies</source>
         <translation>Total: %1 conkies</translation>
     </message>
     <message>
-        <location filename="../src/conkylistwidget.cpp" line="598"/>
+        <location filename="../src/conkylistwidget.cpp" line="602"/>
         <source>Showing: %1 of %2 conkies</source>
         <translation>A exibir: %1 de %2 conkies</translation>
     </message>
@@ -528,22 +535,22 @@ da janela, senão esta configuração não terá efeito</translation>
 <context>
     <name>ConkyPreviewWidget</name>
     <message>
-        <location filename="../src/conkylistwidget.cpp" line="547"/>
+        <location filename="../src/conkylistwidget.cpp" line="551"/>
         <source>No Conky Selected</source>
         <translation>Nenhum Conky foi selecionado</translation>
     </message>
     <message>
-        <location filename="../src/conkylistwidget.cpp" line="549"/>
+        <location filename="../src/conkylistwidget.cpp" line="553"/>
         <source>Select a conky from the list to see its preview</source>
         <translation>Escolha um Conky na lista para o pré-visualizar</translation>
     </message>
     <message>
-        <location filename="../src/conkylistwidget.cpp" line="568"/>
+        <location filename="../src/conkylistwidget.cpp" line="572"/>
         <source>Preview image could not be loaded</source>
         <translation>A imagem da pré-visualização não pôde ser carregada</translation>
     </message>
     <message>
-        <location filename="../src/conkylistwidget.cpp" line="571"/>
+        <location filename="../src/conkylistwidget.cpp" line="575"/>
         <source>No preview image available</source>
         <translation>Não há imagem disponível para pré-visualização</translation>
     </message>
@@ -551,222 +558,217 @@ da janela, senão esta configuração não terá efeito</translation>
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../src/mainwindow.cpp" line="57"/>
-        <location filename="../src/mainwindow.cpp" line="829"/>
+        <location filename="../src/mainwindow.cpp" line="58"/>
+        <location filename="../src/mainwindow.cpp" line="864"/>
         <source>MX Conky</source>
         <translation>Conky do MX</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="249"/>
+        <location filename="../src/mainwindow.cpp" line="252"/>
         <source>About this application</source>
         <translation>Sobre esta aplicação</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="247"/>
+        <location filename="../src/mainwindow.cpp" line="250"/>
         <source>About...</source>
         <translation>Sobre...</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="254"/>
+        <location filename="../src/mainwindow.cpp" line="257"/>
         <source>Help</source>
         <translation>Ajuda</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="269"/>
+        <location filename="../src/mainwindow.cpp" line="272"/>
         <source>Quit application</source>
         <translation>Sair da aplicação</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="267"/>
+        <location filename="../src/mainwindow.cpp" line="270"/>
         <source>Close</source>
         <translation>Fechar</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="157"/>
+        <location filename="../src/mainwindow.cpp" line="159"/>
         <source>Loading Conky configurations...</source>
         <translation>A carregar configurações do Conky...</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="187"/>
+        <location filename="../src/mainwindow.cpp" line="189"/>
         <source>Settings</source>
         <translation>Definições</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="189"/>
+        <location filename="../src/mainwindow.cpp" line="191"/>
         <source>Configure conky search paths</source>
         <translation>Configurar os caminhos para procurar conkies</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="191"/>
+        <location filename="../src/mainwindow.cpp" line="193"/>
         <source>Refresh</source>
         <translation>Refrescar</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="193"/>
+        <location filename="../src/mainwindow.cpp" line="195"/>
         <source>Refresh conky list</source>
         <translation>Atualizar lista de Conkies</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="195"/>
+        <location filename="../src/mainwindow.cpp" line="197"/>
         <source>Start All</source>
         <translation>Iniciar Todos</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="197"/>
+        <location filename="../src/mainwindow.cpp" line="199"/>
         <source>Start all enabled conkies</source>
         <translation>Iniciar todos os Conkies que estão ativados</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="199"/>
+        <location filename="../src/mainwindow.cpp" line="201"/>
         <source>Stop All</source>
         <translation>Parar Todos</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="201"/>
+        <location filename="../src/mainwindow.cpp" line="203"/>
         <source>Stop all running conkies</source>
         <translation>Parar todos os Conkies que estão em execução</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="931"/>
-        <location filename="../src/mainwindow.cpp" line="968"/>
+        <location filename="../src/mainwindow.cpp" line="966"/>
+        <location filename="../src/mainwindow.cpp" line="1018"/>
         <source>Running</source>
         <translation>Em execução</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="933"/>
-        <location filename="../src/mainwindow.cpp" line="969"/>
+        <location filename="../src/mainwindow.cpp" line="968"/>
+        <location filename="../src/mainwindow.cpp" line="1019"/>
         <source>Stopped</source>
         <translation>Parado</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="209"/>
+        <location filename="../src/mainwindow.cpp" line="212"/>
         <source>Search conky by name...</source>
         <translation>Pesquisar conky pelo nome...</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="211"/>
+        <location filename="../src/mainwindow.cpp" line="214"/>
         <source>Search conkies by name (Ctrl+F)</source>
         <translation>Pesquisar pelo nome do Conky (Ctrl+F)</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="256"/>
+        <location filename="../src/mainwindow.cpp" line="259"/>
         <source>Display help</source>
         <translation>Mostrar a ajuda</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="432"/>
-        <location filename="../src/mainwindow.cpp" line="608"/>
+        <location filename="../src/mainwindow.cpp" line="448"/>
+        <location filename="../src/mainwindow.cpp" line="622"/>
         <source>Copy Conky</source>
         <translation>Copiar o Conky</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="478"/>
-        <location filename="../src/mainwindow.cpp" line="656"/>
+        <location filename="../src/mainwindow.cpp" line="494"/>
+        <location filename="../src/mainwindow.cpp" line="670"/>
         <source>Conky Copied</source>
         <translation>O Conky Foi Copiado</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="479"/>
+        <location filename="../src/mainwindow.cpp" line="495"/>
         <source>Conky has been copied to your personal folder for editing:
 %1</source>
         <translation>O Conky foi copiado para sua pasta pessoal para ser editado:
 %1</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="481"/>
-        <location filename="../src/mainwindow.cpp" line="659"/>
+        <location filename="../src/mainwindow.cpp" line="497"/>
+        <location filename="../src/mainwindow.cpp" line="673"/>
         <source>Copy Failed</source>
         <translation>Falha ao Copiar</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="481"/>
-        <location filename="../src/mainwindow.cpp" line="659"/>
+        <location filename="../src/mainwindow.cpp" line="497"/>
+        <location filename="../src/mainwindow.cpp" line="673"/>
         <source>Failed to copy conky to your personal folder.</source>
         <translation>Ocorreu uma falha ao copiar o Conky para sua pasta pessoal.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="543"/>
+        <location filename="../src/mainwindow.cpp" line="559"/>
         <source>Delete Conky</source>
         <translation>Apagar Conky</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="657"/>
+        <location filename="../src/mainwindow.cpp" line="671"/>
         <source>Conky has been copied to your personal folder for customization:
 %1</source>
         <translation>O Conky foi copiado para sua pasta pessoal para ser personalizado:
 %1</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="576"/>
-        <source>Delete Successful</source>
-        <translation>Apagado com sucesso</translation>
-    </message>
-    <message>
-        <location filename="../src/mainwindow.cpp" line="183"/>
+        <location filename="../src/mainwindow.cpp" line="185"/>
         <source>Previews</source>
         <translation>Pré-Visualização</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="185"/>
+        <location filename="../src/mainwindow.cpp" line="187"/>
         <source>Generate preview images for conkies</source>
         <translation>Gerar imagens para a pré-visualização dos Conkies</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="205"/>
-        <location filename="../src/mainwindow.cpp" line="466"/>
-        <location filename="../src/mainwindow.cpp" line="644"/>
-        <location filename="../src/mainwindow.cpp" line="929"/>
-        <location filename="../src/mainwindow.cpp" line="967"/>
+        <location filename="../src/mainwindow.cpp" line="208"/>
+        <location filename="../src/mainwindow.cpp" line="482"/>
+        <location filename="../src/mainwindow.cpp" line="658"/>
+        <location filename="../src/mainwindow.cpp" line="964"/>
+        <location filename="../src/mainwindow.cpp" line="1017"/>
         <source>All</source>
         <translation>Todos</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="206"/>
+        <location filename="../src/mainwindow.cpp" line="209"/>
         <source>Filter conkies by running status or location</source>
         <translation>Filtrar os Conkies por estado de execução ou por sua localização</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="428"/>
-        <location filename="../src/mainwindow.cpp" line="604"/>
+        <location filename="../src/mainwindow.cpp" line="444"/>
+        <location filename="../src/mainwindow.cpp" line="618"/>
         <source>Enter a name for the copy:</source>
         <translation>Escolha um nome para a cópia:</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="429"/>
-        <location filename="../src/mainwindow.cpp" line="605"/>
+        <location filename="../src/mainwindow.cpp" line="445"/>
+        <location filename="../src/mainwindow.cpp" line="619"/>
         <source>In order for you to edit and save a conky, it must first be copied to ~/.conky where you have permission.
 Enter a name for the copy.</source>
         <translation>Para editar e gravar um Conky, primeiro ele dever ser copiado para a pasta ~/.conky, onde tem permissões para fazer alterações.
 Insira um nome para fazer a cópia.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="446"/>
-        <location filename="../src/mainwindow.cpp" line="624"/>
+        <location filename="../src/mainwindow.cpp" line="462"/>
+        <location filename="../src/mainwindow.cpp" line="638"/>
         <source>Directory Exists</source>
         <translation>A pasta existe</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="447"/>
-        <location filename="../src/mainwindow.cpp" line="625"/>
+        <location filename="../src/mainwindow.cpp" line="463"/>
+        <location filename="../src/mainwindow.cpp" line="639"/>
         <source>A conky with the name '%1' already exists in your personal folder.
 Do you want to overwrite it?</source>
         <translation>Já existe um Conky com o nome ‘%1’ na sua pasta pessoal.
 Deseja substituí-lo?</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="514"/>
+        <location filename="../src/mainwindow.cpp" line="530"/>
         <source>Edit Conky</source>
         <translation>Editar o Conky</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="515"/>
+        <location filename="../src/mainwindow.cpp" line="531"/>
         <source>This conky file is read-only and requires administrator privileges to edit.
 Do you want to edit it with elevated privileges?</source>
         <translation>Este ficheiro do Conky é só para leitura e requer as permissões de administrador para ser editado.
 Deseja editá-lo com as permissões de administrador?</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="544"/>
+        <location filename="../src/mainwindow.cpp" line="560"/>
         <source>Are you sure you want to delete the conky file:
 %1
 
@@ -777,89 +779,90 @@ This action cannot be undone.</source>
 Esta ação não poderá ser desfeita.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="576"/>
-        <source>Conky file deleted successfully.</source>
-        <translation>O ficheiro do Conky foi apagado com sucesso.</translation>
-    </message>
-    <message>
-        <location filename="../src/mainwindow.cpp" line="578"/>
+        <location filename="../src/mainwindow.cpp" line="592"/>
         <source>Delete Failed</source>
         <translation>Falha ao apagar</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="578"/>
+        <location filename="../src/mainwindow.cpp" line="592"/>
         <source>Failed to delete conky file:
 %1</source>
         <translation>Erro ao apagar o ficheiro do Conky:
 %1</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="666"/>
+        <location filename="../src/mainwindow.cpp" line="680"/>
         <source>Customize Conky</source>
         <translation>Personalizar o Conky</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="667"/>
+        <location filename="../src/mainwindow.cpp" line="681"/>
         <source>This conky file is read-only and requires administrator privileges to customize.
 Do you want to customize it with elevated privileges?</source>
         <translation>Este ficheiro do Conky é só para leitura e requer permissões de administrador para ser personalizado.
 Deseja personalizá-lo com as permissões de administrador?</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="818"/>
+        <location filename="../src/mainwindow.cpp" line="853"/>
         <source>Editor Error</source>
         <translation>Erro no Editor</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="818"/>
+        <location filename="../src/mainwindow.cpp" line="853"/>
         <source>Cannot start editor for file: %1</source>
         <translation>Não foi possível iniciar o editor para o ficheiro: %1</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="828"/>
+        <location filename="../src/mainwindow.cpp" line="863"/>
         <source>About MX Conky</source>
         <translation>Sobre o Conky do MX</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="830"/>
+        <location filename="../src/mainwindow.cpp" line="865"/>
         <source>Version: </source>
         <translation>Versão: </translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="831"/>
+        <location filename="../src/mainwindow.cpp" line="866"/>
         <source>GUI program for configuring Conky in MX Linux</source>
         <translation>Interface de Utilizador para configurar o Conky no MX</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="834"/>
+        <location filename="../src/mainwindow.cpp" line="869"/>
         <source>Copyright (c) MX Linux</source>
         <translation>Direitos de Autor (c) MX Linux</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="835"/>
+        <location filename="../src/mainwindow.cpp" line="870"/>
         <source>License</source>
         <translation>Licença</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="836"/>
-        <location filename="../src/mainwindow.cpp" line="848"/>
+        <location filename="../src/mainwindow.cpp" line="871"/>
+        <location filename="../src/mainwindow.cpp" line="883"/>
         <source>Changelog</source>
         <translation>Registo de alterações</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="837"/>
+        <location filename="../src/mainwindow.cpp" line="872"/>
         <source>Cancel</source>
         <translation>Cancelar</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="859"/>
+        <location filename="../src/mainwindow.cpp" line="894"/>
         <source>&amp;Close</source>
         <translation>&amp;Fechar</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="890"/>
+        <location filename="../src/mainwindow.cpp" line="925"/>
         <source>MX Conky Help</source>
         <translation>Ajuda do Conky do MX</translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="970"/>
+        <location filename="../src/mainwindow.cpp" line="1020"/>
+        <source>Autostart</source>
+        <translation>Iniciar automaticamente</translation>
     </message>
 </context>
 <context>
@@ -930,37 +933,48 @@ Deseja personalizá-lo com as permissões de administrador?</translation>
         <translation>Nem existem conkies a necessitar de pré-visualização.</translation>
     </message>
     <message>
-        <location filename="../src/previewdialog.cpp" line="155"/>
+        <location filename="../src/previewdialog.cpp" line="151"/>
+        <source>Missing Dependency</source>
+        <translation>Dependência em falta</translation>
+    </message>
+    <message>
+        <location filename="../src/previewdialog.cpp" line="152"/>
+        <source>Preview generation requires the GraphicsMagick compatibility tools.
+Please install the graphicsmagick-imagemagick-compat package to enable this feature.</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/previewdialog.cpp" line="163"/>
         <source>Starting preview generation...</source>
         <translation>A iniciar geração da pré-visualização...</translation>
     </message>
     <message>
-        <location filename="../src/previewdialog.cpp" line="159"/>
+        <location filename="../src/previewdialog.cpp" line="167"/>
         <source>Stop</source>
         <translation>Parar</translation>
     </message>
     <message>
-        <location filename="../src/previewdialog.cpp" line="198"/>
+        <location filename="../src/previewdialog.cpp" line="206"/>
         <source>Generating preview for: %1</source>
         <translation>A gerar pré-visualização para: %1</translation>
     </message>
     <message>
-        <location filename="../src/previewdialog.cpp" line="419"/>
+        <location filename="../src/previewdialog.cpp" line="427"/>
         <source>Preview generation complete! Generated %1 previews.</source>
         <translation>Sucesso ao gerar %1 pré-visualizações.</translation>
     </message>
     <message>
-        <location filename="../src/previewdialog.cpp" line="423"/>
+        <location filename="../src/previewdialog.cpp" line="431"/>
         <source>Close</source>
         <translation>Fechar</translation>
     </message>
     <message>
-        <location filename="../src/previewdialog.cpp" line="426"/>
+        <location filename="../src/previewdialog.cpp" line="434"/>
         <source>Preview Generation Complete</source>
         <translation>Geração da Pré-Visualização Completada</translation>
     </message>
     <message>
-        <location filename="../src/previewdialog.cpp" line="427"/>
+        <location filename="../src/previewdialog.cpp" line="435"/>
         <source>Successfully generated %1 preview images.</source>
         <translation>Pré-visualização(es) %1 gerada(s) com sucesso.</translation>
     </message>

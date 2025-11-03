@@ -1,3 +1,25 @@
+ddm-mx (25.10.03) mx; urgency=medium
+
+  * use debian 12 nvidia developer repo has fallback to missing debian 13 repo
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 19 Oct 2025 10:52:11 -0400
+
+ddm-mx (25.10.02) mx; urgency=medium
+
+  * version bump
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 09 Oct 2025 18:40:26 -0400
+
+ddm-mx (25.09.01) mx; urgency=medium
+
+  * add some grub and module options necessary for wayland
+  * seems to be fine with X11 stuff too
+  * enables drm modesetting on discrete graphics only
+  * update translations
+  * add commandline switches to add cmd line and module config
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 26 Sep 2025 20:10:30 -0400
+
 ddm-mx (25.07.02) mx; urgency=medium
 
   * add tesla 535 support

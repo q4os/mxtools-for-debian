@@ -30,7 +30,7 @@
 #include <QProcess>
 #include <QSettings>
 
-#include <cmd.h>
+#include "cmd.h"
 
 namespace Ui
 {

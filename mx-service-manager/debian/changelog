@@ -1,3 +1,11 @@
+mx-service-manager (25.10) mx; urgency=medium
+
+  * Add refresh button to repopulates service data keeping the prior
+    selection visible
+  * Focus search when pressing Ctrl+F
+
+ -- Adrian <adrian@mxlinux.org>  Tue, 21 Oct 2025 11:29:54 -0400
+
 mx-service-manager (25.08.06) mx; urgency=medium
 
   * Fix helper file location

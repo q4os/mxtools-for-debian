@@ -1,3 +1,19 @@
+mx-docs (202510011mx25) mx; urgency=medium
+
+  * replaced all beta translations with final version
+  * new languages added
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 11 Oct 2025 22:35:42 -0400
+
+mx-docs (25.09.1mx25) mx; urgency=medium
+
+  * Non-maintainer upload.
+  * added first 15 new FAQ translations and source
+  * archived 2023 source and translations
+  * slight reorganization for older files
+
+ -- Dolphin Oracle <delphinoracle@gmail.com>  Tue, 30 Sep 2025 20:16:23 -0400
+
 mx-docs (20240411+1) mx; urgency=medium
 
   * move docs to usr/share/mx-docs

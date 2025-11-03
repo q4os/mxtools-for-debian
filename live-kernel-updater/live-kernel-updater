@@ -467,6 +467,11 @@ main() {
     local live_all boot_all
     get_all_kernel live_all "$full_live_dir"                          # all in live dir
     get_all_kernel boot_all "$full_boot_dir"                          # all in boot dir
+
+    # Filter out Memtest-kernels
+    live_all=$(sed /memtest/Id <<<"$live_all")
+    boot_all=$(sed /memtest/Id <<<"$boot_all")
+
     #get_all_kernel boot_mod "$full_boot_dir" --mod-dir="$root_dir"   # boot dir with module dir
 
     # Filter out kernels that can't handle the squashfs compression
@@ -1078,7 +1083,7 @@ update_live() { [ "$DEVICE" = 'live' ] ; return $? ; }
 #------------------------------------------------------------------------------
 count_kernels() {
     local dir=$1
-    count_lines "$($VM_VERSION_PROG -nsr /boot)"
+    count_lines "$($VM_VERSION_PROG -nsr /boot |sed /Memtest/Id)"
 }
 
 

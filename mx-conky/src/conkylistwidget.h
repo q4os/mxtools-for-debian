@@ -87,6 +87,7 @@ public:
     void refreshList();
     ConkyItem *selectedConkyItem() const;
     void selectConkyItem(const QString &filePath);
+    void reapplyFilters();
 
     // Filter and search methods
     void setStatusFilter(const QString &filter); // "All", "Running", "Stopped"

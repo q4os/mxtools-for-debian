@@ -46,6 +46,7 @@ public:
     void scanForConkies();
     void addConkyItemsFromDirectory(const QString &directoryPath);
     QList<ConkyItem *> conkyItems() const;
+    bool hasRunningConkies() const;
 
     void startConky(ConkyItem *item);
     void stopConky(ConkyItem *item);

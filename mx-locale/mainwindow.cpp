@@ -23,7 +23,6 @@
 #include "mainwindow.h"
 #include "about.h"
 #include "ui_mainwindow.h"
-#include "version.h"
 
 #include <QDebug>
 #include <QDirIterator>
@@ -501,7 +500,15 @@ void MainWindow::readLocaleFile(QFile &file, const QStringList &enabledLocale)
 
 void MainWindow::removeManuals()
 {
-    QString lang = ui->buttonLang->text().section('.', 0, 0).section('_', 0, 0);
+    QString lang = ui->buttonLang->text().section('.', 0, 0);
+
+    // Fix for pt_BR, others use base language
+    if (lang == "pt_BR") {
+        lang = "pt-br";
+    } else {
+        lang = lang.section("_", 0, 0);
+    }
+
     if (lang.isEmpty()) {
         return;
     }

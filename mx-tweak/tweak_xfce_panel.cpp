@@ -726,9 +726,11 @@ void TweakXfcePanel::setPosition() noexcept
 
 void TweakXfcePanel::pushXfcePanelSettings_clicked() noexcept
 {
+    ui->groupXFCESettings->setEnabled(false);
     ui->tabWidget->setEnabled(false);
     runProc(u"xfce4-panel"_s, {u"--preferences"_s});
-    runProc(u"xprop"_s, {u"-spy"_s, u"-name"_s, u"Panel Preferences"_s});
+    // The above returns immediately, so block while that window is still active.
+    runProc(u"xprop"_s, {u"-spy"_s, u"-name"_s, tr("Panel Preferences")});
 
     //restart panel if background style of any panel is 1 - solid color, affects transparency
     const QStringList &properties = runCmd(u"xfconf-query -c xfce4-panel --list"_s
@@ -747,6 +749,7 @@ void TweakXfcePanel::pushXfcePanelSettings_clicked() noexcept
 
     setup();
     ui->tabWidget->setEnabled(true);
+    ui->groupXFCESettings->setEnabled(true);
 }
 
 void TweakXfcePanel::sleep(int msec) noexcept

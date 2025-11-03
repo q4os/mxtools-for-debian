@@ -189,12 +189,8 @@ ConkyListWidget::ConkyListWidget(ConkyManager *manager, QWidget *parent)
     setupUI();
 
     connect(m_manager, &ConkyManager::conkyItemsChanged, this, &ConkyListWidget::onConkyItemsChanged);
-    connect(m_manager, &ConkyManager::conkyStarted, this, [this](ConkyItem *) {
-        // Items will update themselves via dataChanged signal
-    });
-    connect(m_manager, &ConkyManager::conkyStopped, this, [this](ConkyItem *) {
-        // Items will update themselves via dataChanged signal
-    });
+    connect(m_manager, &ConkyManager::conkyStarted, this, [this](ConkyItem *) { reapplyFilters(); });
+    connect(m_manager, &ConkyManager::conkyStopped, this, [this](ConkyItem *) { reapplyFilters(); });
 
     refreshList();
 }
@@ -243,6 +239,11 @@ void ConkyListWidget::selectConkyItem(const QString &filePath)
             m_treeWidget->scrollToItem(treeItem);
         }
     }
+}
+
+void ConkyListWidget::reapplyFilters()
+{
+    applyFilters();
 }
 
 void ConkyListWidget::onConkyItemsChanged()

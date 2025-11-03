@@ -24,6 +24,7 @@
 #include "ui_mainwindow.h"
 
 #include <QDebug>
+#include <QGuiApplication>
 #include <QFileDialog>
 #include <QInputDialog>
 #include <QKeyEvent>
@@ -155,6 +156,10 @@ void MainWindow::setupUiElements()
         ui->pushPreview->setDisabled(true);
         ui->pushPreview->setToolTip(tr("Preview is disabled because 'splash' parameter is not present in kernel command line. "
                                        "To enable preview, add 'splash' to boot parameters and reboot."));
+    } else if (waylandSession) {
+        ui->pushPreview->setDisabled(true);
+        ui->pushPreview->setToolTip(tr("Preview is disabled while running under Wayland. Please start an X11 session "
+                                       "to preview Plymouth themes."));
     } else {
         ui->pushPreview->setToolTip("");
     }
@@ -301,6 +306,21 @@ bool MainWindow::isUefi()
 {
     QDir dir("/sys/firmware/efi/efivars");
     return dir.exists() && !dir.entryList(QDir::NoDotAndDotDot | QDir::AllEntries).isEmpty();
+}
+
+bool MainWindow::isWaylandSession()
+{
+    const QString platformName = QGuiApplication::platformName();
+    if (platformName.contains(QLatin1String("wayland"), Qt::CaseInsensitive)) {
+        return true;
+    }
+
+    const QString sessionType = QString::fromLocal8Bit(qgetenv("XDG_SESSION_TYPE"));
+    if (sessionType.compare(QLatin1String("wayland"), Qt::CaseInsensitive) == 0) {
+        return true;
+    }
+
+    return !qgetenv("WAYLAND_DISPLAY").isEmpty();
 }
 
 void MainWindow::appendLogWithColors(QTextEdit *textEdit, const QString &logContent)
@@ -834,8 +854,9 @@ void MainWindow::processKernelCommandLine(QString line)
 
     bool hasHush = cmdline.contains("hush");
     bool hasQuiet = cmdline.contains("quiet");
-    ui->radioLimitedMsg->setChecked(hasHush);
+
     ui->radioDetailedMsg->setChecked(hasQuiet);
+    ui->radioLimitedMsg->setChecked(hasHush);
     ui->radioVeryDetailedMsg->setChecked(!hasHush && !hasQuiet);
 
     ui->checkBootsplash->setChecked(cmdline.contains("splash") && isInstalled(requiredPackages));
@@ -1159,7 +1180,19 @@ void MainWindow::comboMenuEntryCurrentIndexChanged()
 void MainWindow::comboBootsplashToggled(bool checked)
 {
     ui->comboTheme->setEnabled(checked);
-    ui->pushPreview->setEnabled(checked && isSplashEnabled());
+    const bool splashEnabled = isSplashEnabled();
+    const bool previewAvailable = checked && splashEnabled && !waylandSession;
+    ui->pushPreview->setEnabled(previewAvailable);
+
+    if (!splashEnabled) {
+        ui->pushPreview->setToolTip(tr("Preview is disabled because 'splash' parameter is not present in kernel command line. "
+                                       "To enable preview, add 'splash' to boot parameters and reboot."));
+    } else if (waylandSession) {
+        ui->pushPreview->setToolTip(tr("Preview is disabled while running under Wayland. Please start an X11 session "
+                                       "to preview Plymouth themes."));
+    } else {
+        ui->pushPreview->setToolTip("");
+    }
 
     QString line = ui->textKernel->text();
     if (checked) {
@@ -1236,6 +1269,13 @@ void MainWindow::comboThemeActivated(int /*unused*/)
 
 void MainWindow::pushPreviewClicked()
 {
+    if (waylandSession) {
+        QMessageBox::warning(
+            this, tr("Preview Unavailable"),
+            tr("Preview is not available while running under Wayland. Please start an X11 session to preview Plymouth themes."));
+        return;
+    }
+
     if (justInstalled) {
         QMessageBox::warning(
             this, tr("Needs reboot"),
@@ -1306,7 +1346,7 @@ void MainWindow::comboThemeCurrentIndexChanged(int index)
     const bool isNonPreviewableTheme = (themeName == QLatin1String("details")
                                         || themeName == QLatin1String("text")
                                         || themeName == QLatin1String("tribar"));
-    ui->pushPreview->setDisabled(isNonPreviewableTheme || !isSplashEnabled());
+    ui->pushPreview->setDisabled(isNonPreviewableTheme || !isSplashEnabled() || waylandSession);
 }
 
 void MainWindow::comboGrubThemeToggled(bool checked)

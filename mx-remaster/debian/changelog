@@ -1,3 +1,21 @@
+mx-remaster (25.10.03mx25) mx; urgency=medium
+
+  * update grub files
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Tue, 28 Oct 2025 21:04:04 -0400
+
+mx-remaster (25.10.02mx25) mx; urgency=medium
+
+  * revert change to systemd-networkd-wait-online.service masking
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 20 Oct 2025 17:13:50 -0400
+
+mx-remaster (25.10.01mx25) mx; urgency=medium
+
+  * remove mask on systemd-networkd-wait-online.service from live-files 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 19 Oct 2025 18:20:35 -0400
+
 mx-remaster (25.06.02mx25) mx; urgency=medium
 
   * cp anything in /etc/apt/sources.list.d, not just list files

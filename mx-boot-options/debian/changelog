@@ -1,3 +1,16 @@
+mx-boot-options (25.10.2) mx; urgency=medium
+
+  * Added Wayland session detection so the preview button stays disabled
+    when Plymouth can’t render through X11.
+
+ -- Adrian <adrian@mxlinux.org>  Tue, 28 Oct 2025 12:05:18 -0400
+
+mx-boot-options (25.10.1) mx; urgency=medium
+
+  * Fix 'hush' option
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 16 Oct 2025 22:20:11 -0400
+
 mx-boot-options (25.10) mx; urgency=medium
 
   * Disable preview button when selected theme is 'text' or 'tribar'

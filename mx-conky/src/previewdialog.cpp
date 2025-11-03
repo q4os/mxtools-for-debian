@@ -146,6 +146,14 @@ void PreviewDialog::onAccepted()
         return;
     }
 
+    if (!QFileInfo::exists(QStringLiteral("/usr/bin/import"))) {
+        QMessageBox::warning(
+            this, tr("Missing Dependency"),
+            tr("Preview generation requires the GraphicsMagick compatibility tools.\n"
+               "Please install the graphicsmagick-imagemagick-compat package to enable this feature."));
+        return;
+    }
+
     // Show progress UI
     m_progressBar->setVisible(true);
     m_progressBar->setMaximum(m_itemsToProcess.size());
@@ -176,7 +184,7 @@ void PreviewDialog::generatePreviews()
         cleanupBeforeNextPreview();
     }
 
-    QString itemPath = m_itemsToProcess[m_currentIndex];
+    QString itemPath = m_itemsToProcess.at(m_currentIndex);
 
     // Find the ConkyItem for this path
     ConkyItem *item = nullptr;
@@ -225,7 +233,7 @@ void PreviewDialog::generatePreviewForItem(ConkyItem *item)
 QString PreviewDialog::generatePreviewImage(ConkyItem *item)
 {
     if (!item) {
-        return QString();
+        return {};
     }
 
     QString itemDir = item->directory();
@@ -253,7 +261,7 @@ QString PreviewDialog::generatePreviewImage(ConkyItem *item)
 
     if (!conkyProcess.waitForStarted(3000)) {
         qDebug() << "Failed to start conky for preview generation:" << configPath;
-        return QString();
+        return {};
     }
 
     // Wait a bit for conky to initialize and draw
@@ -261,20 +269,19 @@ QString PreviewDialog::generatePreviewImage(ConkyItem *item)
 
     // Step 2: Find conky window
     QProcess wmctrlProcess;
-    wmctrlProcess.start("wmctrl", QStringList() << "-l");
+    wmctrlProcess.start("wmctrl", {"-l"});
 
     if (!wmctrlProcess.waitForFinished(3000)) {
         conkyProcess.kill();
         conkyProcess.waitForFinished(1000);
         qDebug() << "Failed to run wmctrl to find conky window";
-        return QString();
+        return {};
     }
 
     QString wmctrlOutput = wmctrlProcess.readAllStandardOutput();
     QStringList lines = wmctrlOutput.split('\n', Qt::SkipEmptyParts);
 
     QString windowId;
-    QString conkyPattern = QString("conky (%1)").arg(configPath);
 
     for (const QString &line : lines) {
         if (line.contains("conky") && line.contains(folderName, Qt::CaseInsensitive)) {
@@ -303,18 +310,18 @@ QString PreviewDialog::generatePreviewImage(ConkyItem *item)
         conkyProcess.kill();
         conkyProcess.waitForFinished(1000);
         qDebug() << "Could not find conky window for screenshot";
-        return QString();
+        return {};
     }
 
     // Step 3: Get window geometry
     QProcess xwinfoProcess;
-    xwinfoProcess.start("xwininfo", QStringList() << "-id" << windowId);
+    xwinfoProcess.start("xwininfo", {"-id", windowId});
 
     if (!xwinfoProcess.waitForFinished(3000)) {
         conkyProcess.kill();
         conkyProcess.waitForFinished(1000);
         qDebug() << "Failed to get window info";
-        return QString();
+        return {};
     }
 
     QString xwinfoOutput = xwinfoProcess.readAllStandardOutput();
@@ -339,7 +346,7 @@ QString PreviewDialog::generatePreviewImage(ConkyItem *item)
         conkyProcess.kill();
         conkyProcess.waitForFinished(1000);
         qDebug() << "Invalid window geometry";
-        return QString();
+        return {};
     }
 
     // Step 4: Take screenshot with desktop background
@@ -350,7 +357,7 @@ QString PreviewDialog::generatePreviewImage(ConkyItem *item)
                    << "-crop" << QString("%1x%2+%3+%4").arg(width).arg(height).arg(x).arg(y) << outputPath;
     screenshotProcess.start("import", screenshotArgs);
     bool screenshotSuccess = screenshotProcess.waitForFinished(5000) && screenshotProcess.exitCode() == 0;
-    
+
     if (!screenshotSuccess) {
         qDebug() << "Screenshot process failed:" << screenshotProcess.readAllStandardError();
     }
@@ -361,7 +368,7 @@ QString PreviewDialog::generatePreviewImage(ConkyItem *item)
 
     // Additional cleanup - make sure conky is really dead
     QProcess killallProcess;
-    killallProcess.start("pkill", QStringList() << "-f" << configPath);
+    killallProcess.start("pkill", {"-f", configPath});
     killallProcess.waitForFinished(1000);
 
     if (screenshotSuccess && QFile::exists(outputPath)) {
@@ -369,7 +376,7 @@ QString PreviewDialog::generatePreviewImage(ConkyItem *item)
         return outputPath;
     } else {
         qDebug() << "Screenshot failed or file not created:" << outputPath;
-        return QString();
+        return {};
     }
 }
 
@@ -380,7 +387,7 @@ QStringList PreviewDialog::getItemsToProcess() const
     if (m_generateCurrentRadio->isChecked() && m_selectedItem) {
         items << m_selectedItem->filePath();
     } else if (m_generateMissingRadio->isChecked()) {
-        for (ConkyItem *item : m_manager->conkyItems()) {
+        for (const ConkyItem *item : m_manager->conkyItems()) {
             QString conkyBasename = QFileInfo(item->filePath()).baseName();
             QString previewPath = item->directory() + "/" + conkyBasename + ".png";
             QString previewPathJpg = item->directory() + "/" + conkyBasename + ".jpg";
@@ -390,7 +397,7 @@ QStringList PreviewDialog::getItemsToProcess() const
             }
         }
     } else if (m_generateAllRadio->isChecked()) {
-        for (ConkyItem *item : m_manager->conkyItems()) {
+        for (const ConkyItem *item : m_manager->conkyItems()) {
             items << item->filePath();
         }
     }
@@ -482,7 +489,7 @@ void PreviewDialog::cleanupBeforeNextPreview()
 {
     // Kill all running conky processes
     QProcess killProcess;
-    killProcess.start("killall", QStringList() << "conky");
+    killProcess.start("killall", {"conky"});
     killProcess.waitForFinished(3000);
 
     // Wait a bit for cleanup
@@ -491,19 +498,14 @@ void PreviewDialog::cleanupBeforeNextPreview()
     // Refresh desktop by triggering a small screen update
     // This helps clear any remaining conky artifacts
     QProcess refreshProcess;
-    refreshProcess.start("xrefresh", QStringList());
+    refreshProcess.start("xrefresh", {});
     refreshProcess.waitForFinished(1000);
 
     // Alternative fallback if xrefresh is not available
     if (refreshProcess.exitCode() != 0) {
         // Use xdotool to simulate a small window movement to trigger refresh
         QProcess dotoolProcess;
-        dotoolProcess.start("xdotool", QStringList() << "search"
-                                                     << "--name"
-                                                     << "Desktop"
-                                                     << "windowmove"
-                                                     << "0"
-                                                     << "0");
+        dotoolProcess.start("xdotool", {"search", "--name", "Desktop", "windowmove", "0", "0"});
         dotoolProcess.waitForFinished(1000);
     }
 }

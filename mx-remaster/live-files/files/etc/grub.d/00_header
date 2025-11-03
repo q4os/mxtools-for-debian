@@ -45,6 +45,7 @@ if [ "x${GRUB_DEFAULT_BUTTON}" = "xsaved" ] ; then GRUB_DEFAULT_BUTTON='${saved_
 if [ "x${GRUB_TIMEOUT_BUTTON}" = "x" ] ; then GRUB_TIMEOUT_BUTTON="$GRUB_TIMEOUT" ; fi
 
 cat << EOF
+echo " "
 if [ -s \$prefix/grubenv ]; then
   set have_grubenv=true
   load_env
@@ -239,7 +240,7 @@ EOF
 EOF
 
 # Gettext variables and module
-if [ "x${LANG}" != "xC" ] &&  [ "x${LANG}" != "x" ]; then
+if [ "x${grub_lang}" != "xC" ] && [ "x${LANG}" != "xPOSIX" ] && [ "x${LANG}" != "x" ]; then
   cat << EOF
   set locale_dir=\$prefix/locale
   set lang=${grub_lang}

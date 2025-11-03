@@ -554,8 +554,24 @@ void ConkyCustomizeDialog::parseContent()
         radioDesktop1->setChecked(true);
     }
 
-    // Parse transparency settings
+    // Parse transparency settings and opacity
     if (cmbTransparencyType && spinOpacity) {
+        // Block signals to prevent onTransparencyChanged from resetting opacity during parsing
+        QSignalBlocker blockerCombo(cmbTransparencyType);
+        QSignalBlocker blockerSpin(spinOpacity);
+
+        // Parse opacity value from own_window_argb_value using format-specific pattern
+        QString argbValuePattern
+            = is_lua_format ? "own_window_argb_value\\s*=\\s*(\\d+)\\s*,?" : "own_window_argb_value\\s+(\\d+)";
+        QRegularExpression argbValueRegex(argbValuePattern, QRegularExpression::CaseInsensitiveOption);
+        QRegularExpressionMatch match = argbValueRegex.match(file_content);
+        if (match.hasMatch()) {
+            double argbValue = match.captured(1).toInt();
+            int percentage = static_cast<int>(std::round((argbValue / 255.0) * 100));
+            spinOpacity->setValue(percentage);
+        } else {
+            spinOpacity->setValue(100); // Default to fully opaque
+        }
         // Create helper function to check boolean values in main conky config (not fluxbox overrides)
         auto checkBooleanValue = [&](const QString &key) -> bool {
             // Split content into main config and fluxbox sections
@@ -577,47 +593,37 @@ void ConkyCustomizeDialog::parseContent()
                      << "ownWindowTransparent=" << ownWindowTransparent << "ownWindowArgb=" << ownWindowArgb;
         }
 
-        // Check for opaque first: both own_window and own_window_transparent are false
-        if (!ownWindow && !ownWindowTransparent) {
-            cmbTransparencyType->setCurrentIndex(cmbTransparencyType->findData("opaque"));
-            if (debug) {
-                qDebug() << "Detected: opaque";
-            }
-        } else if (ownWindow && ownWindowTransparent && !ownWindowArgb) {
-            cmbTransparencyType->setCurrentIndex(cmbTransparencyType->findData("trans"));
-            if (debug) {
-                qDebug() << "Detected: trans";
-            }
-        } else if (ownWindow && !ownWindowTransparent && ownWindowArgb) {
-            cmbTransparencyType->setCurrentIndex(cmbTransparencyType->findData("semi"));
-            if (debug) {
-                qDebug() << "Detected: semi";
-            }
-        } else if (!ownWindow && ownWindowTransparent && !ownWindowArgb) {
-            cmbTransparencyType->setCurrentIndex(cmbTransparencyType->findData("pseudo"));
-            if (debug) {
-                qDebug() << "Detected: pseudo";
-            }
-        } else {
-            // Fallback case
-            cmbTransparencyType->setCurrentIndex(cmbTransparencyType->findData("opaque"));
-            if (debug) {
-                qDebug() << "Detected: fallback to opaque";
-            }
-        }
+        // Check for trams first: both own_window_argb_visual and own_window_transparent are true
 
-        // Parse opacity value from own_window_argb_value using format-specific pattern
-        QString argbValuePattern
-            = is_lua_format ? "own_window_argb_value\\s*=\\s*(\\d+)\\s*,?" : "own_window_argb_value\\s+(\\d+)";
-        QRegularExpression argbValueRegex(argbValuePattern, QRegularExpression::CaseInsensitiveOption);
-        QRegularExpressionMatch match = argbValueRegex.match(file_content);
-        if (match.hasMatch()) {
-            int argbValue = match.captured(1).toInt();
-            int percentage = static_cast<int>((argbValue / 255.0) * 100);
-            spinOpacity->setValue(percentage);
-        } else {
-            spinOpacity->setValue(100); // Default to fully opaque
-        }
+        if (ownWindowTransparent){
+			if(ownWindowArgb){
+				//own_window_argb_value wll be ignored even if present
+				cmbTransparencyType->setCurrentIndex(cmbTransparencyType->findData("trans"));
+			} else if (!ownWindowArgb){
+				cmbTransparencyType->setCurrentIndex(cmbTransparencyType->findData("pseudo"));
+			} else {
+				cmbTransparencyType->setCurrentIndex(cmbTransparencyType->findData("pseudo"));
+			}
+		} else if (!ownWindowTransparent) {
+			//could still be trans if values are correct and ownWindowArgb is true
+			if (ownWindowArgb){
+			    if (spinOpacity->value() == 0) {
+				    cmbTransparencyType->setCurrentIndex(cmbTransparencyType->findData("trans"));
+			    } else if (spinOpacity->value() == 100){
+				    cmbTransparencyType->setCurrentIndex(cmbTransparencyType->findData("opaque"));
+			    } else {
+				    cmbTransparencyType->setCurrentIndex(cmbTransparencyType->findData("semi"));
+			    }
+		    } else if (!ownWindowArgb){
+				//opaque if these values aren't are false or otherwise set incorrectly
+			    cmbTransparencyType->setCurrentIndex(cmbTransparencyType->findData("opaque"));
+		    } else {
+			    cmbTransparencyType->setCurrentIndex(cmbTransparencyType->findData("opaque"));
+		    }
+		    //master fallback to opaque
+		} else {
+			cmbTransparencyType->setCurrentIndex(cmbTransparencyType->findData("opaque"));
+		}
 
         // Parse background color from own_window_colour using format-specific pattern
         if (widgetBackgroundColor) {
@@ -636,14 +642,46 @@ void ConkyCustomizeDialog::parseContent()
         }
     }
 
-    // Parse time format (detect 12-hour vs 24-hour format)
+    // Parse time format (detect 12-hour vs 24-hour vs 'auto' format)
     if (cmbTimeFormat) {
-        if (file_content.contains("%I") || file_content.contains("%l") || file_content.contains("%p")) {
+        if (QRegularExpression(R"(^(?!\s*#|\s*--)(.*lua \s*(hours?|ampm|AMPM|am_pm|AM_PM)\s*}))",
+                QRegularExpression::MultilineOption).match(file_content).hasMatch()
+            || QRegularExpression(R"(^(?!\s*#|\s*--)(.*if_match \s*"pmfix\${time \s*%[pP]}"))",
+                QRegularExpression::MultilineOption).match(file_content).hasMatch()
+        ) {
+            if (cmbTimeFormat->findData("auto") == -1) {
+                cmbTimeFormat->addItem(tr("auto"), "auto");
+            }
+            cmbTimeFormat->setCurrentIndex(cmbTimeFormat->findData("auto"));
+        } else if (QRegularExpression(R"(^(?!\s*#|\s*--)(.*lua \s*(hours?|ampm|AMPM|am_pm|AM_PM) \s*12[^}]*}))",
+                    QRegularExpression::MultilineOption).match(file_content).hasMatch()
+                    || QRegularExpression(R"(^(?!\s*#|\s*--)(.*if_match \s*"pmfix\${time \s*12[^}]*}"))",
+                        QRegularExpression::MultilineOption).match(file_content).hasMatch()
+        ) {
+            if (cmbTimeFormat->findData("auto") == -1) {
+                cmbTimeFormat->addItem(tr("auto"), "auto");
+            }
             cmbTimeFormat->setCurrentIndex(cmbTimeFormat->findData("12"));
-        } else if (file_content.contains("%H") || file_content.contains("%k")) {
+        } else if (QRegularExpression(R"(^(?!\s*#|\s*--)(.*lua \s*(hours?|ampm|AMPM|am_pm|AM_PM) \s*24[^}]*}))",
+                    QRegularExpression::MultilineOption).match(file_content).hasMatch()
+                    || QRegularExpression(R"(^(?!\s*#|\s*--)(.*if_match \s*"pmfix\${time \s*24[^}]*}"))",
+                        QRegularExpression::MultilineOption).match(file_content).hasMatch()
+                ) {
+            if (cmbTimeFormat->findData("auto") == -1) {
+                cmbTimeFormat->addItem(tr("auto"), "auto");
+            }
+            cmbTimeFormat->setCurrentIndex(cmbTimeFormat->findData("24"));
+        } else if (file_content.contains("%I")
+            || file_content.contains("%l")
+            || file_content.contains("%p")
+        ) {
+            cmbTimeFormat->setCurrentIndex(cmbTimeFormat->findData("12"));
+        } else if (file_content.contains("%H")
+                    || file_content.contains("%k")
+                ) {
             cmbTimeFormat->setCurrentIndex(cmbTimeFormat->findData("24"));
         } else {
-            // Default to 24-hour if no time format detected
+            // Default to 24-hour
             cmbTimeFormat->setCurrentIndex(cmbTimeFormat->findData("24"));
         }
     }
@@ -865,6 +903,24 @@ bool ConkyCustomizeDialog::copyFileWithElevation(const QString &sourceFile, cons
     return success;
 }
 
+bool ConkyCustomizeDialog::removeFileWithElevation(const QString &fileName)
+{
+    QString elevationTool = QFile::exists("/usr/bin/pkexec") ? "pkexec" : (QFile::exists("/usr/bin/gksu") ? "gksu" : "sudo");
+    QString command = QString("%1 rm '%2'").arg(elevationTool, fileName);
+
+    QProcess process;
+    process.start("sh", QStringList() << "-c" << command);
+    process.waitForFinished();
+
+    bool success = (process.exitCode() == 0);
+
+    if (!success) {
+        qDebug() << "Failed to remove file with elevation:" << fileName;
+    }
+
+    return success;
+}
+
 void ConkyCustomizeDialog::saveBackup()
 {
     if (!modified) {
@@ -894,14 +950,23 @@ void ConkyCustomizeDialog::saveBackup()
         }
 
         if (copySuccess) {
+            emit backupCreated(new_name);
             QMessageBox::information(this, tr("Backed Up Config File"),
-                                     tr("The original configuration was backed up to %1").arg(new_name));
+                                         tr("The original configuration was backed up to %1").arg(new_name));
         } else {
             QMessageBox::warning(this, tr("Backup Failed"), tr("Failed to create a backup file."));
         }
     }
 
-    QFile::remove(file_name + ".bak");
+    QString temporaryBackupPath = file_name + ".bak";
+    if (!QFile::remove(temporaryBackupPath)) {
+        QFileInfo bakInfo(temporaryBackupPath);
+        QFileInfo dirInfo(bakInfo.absolutePath());
+
+        if (!dirInfo.isWritable()) {
+            removeFileWithElevation(temporaryBackupPath);
+        }
+    }
 }
 
 void ConkyCustomizeDialog::pushToggleOn_clicked()
@@ -1744,28 +1809,28 @@ void ConkyCustomizeDialog::applyTransparencyChanges()
 
     // Set own_window based on transparency type
     if (transparencyType == "opaque") {
-        writeConfigValue("own_window", "false");
+        //writeConfigValue("own_window", "false");
         writeConfigValue("own_window_transparent", "false");
         writeConfigValue("own_window_argb_visual", "false");
         // Remove argb_value for opaque
         // writeConfigValue("own_window_argb_value", ""); // Don't set for opaque
     } else if (transparencyType == "trans") {
-        writeConfigValue("own_window", "true");
+        //writeConfigValue("own_window", "true");
         writeConfigValue("own_window_transparent", "true");
-        writeConfigValue("own_window_argb_visual", "false");
+        writeConfigValue("own_window_argb_visual", "true");
         // For transparent, we still want to set opacity
         double opacityValue = opacity / 100.0;
         writeConfigValue("own_window_argb_value", QString::number(static_cast<int>(opacityValue * 255)));
     } else if (transparencyType == "pseudo") {
         // Pseudo-transparent: no own window, uses desktop background
-        writeConfigValue("own_window", "false");
-        writeConfigValue("own_window_transparent", "true");
-        writeConfigValue("own_window_argb_visual", "false");
+        //writeConfigValue("own_window", "true");
+        writeConfigValue("own_window_transparent", "false");
+        writeConfigValue("own_window_argb_visual", "true");
         // Set opacity for pseudo-transparency
         double opacityValue = opacity / 100.0;
         writeConfigValue("own_window_argb_value", QString::number(static_cast<int>(opacityValue * 255)));
     } else if (transparencyType == "semi") {
-        writeConfigValue("own_window", "true");
+        //writeConfigValue("own_window", "true");
         writeConfigValue("own_window_transparent", "false");
         writeConfigValue("own_window_argb_visual", "true");
         // Set opacity for semi-transparent
@@ -1791,21 +1856,73 @@ void ConkyCustomizeDialog::applyTimeFormatChanges()
 
     QString format = cmbTimeFormat->currentData().toString();
     if (format == "12") {
-        // Replace 24-hour format with 12-hour format
-        file_content.replace("%H", "%I");
-        file_content.replace("%k", "%l");
-        // Add AM/PM indicator if not present
-        if (!file_content.contains("%p")) {
-            file_content.replace("%M", "%M %p");
+        if (QRegularExpression(R"(^(?!\s*#|\s*--)(.*lua \s*(hours?|ampm|AMPM|am_pm|AM_PM)[^}]*}))",
+            QRegularExpression::MultilineOption).match(file_content).hasMatch()
+        ) {
+            file_content.replace(
+                QRegularExpression(R"(^(?!\s*#|\s*--)(.*)(lua \s*(hours?|ampm|AMPM|am_pm|AM_PM)[^}]*}))",
+                    QRegularExpression::MultilineOption), R"(\1lua \3 12H})");
+
+        } else if (QRegularExpression(R"(^(?!\s*#|\s*--)(.*if_match \s*"pmfix\${time[^}]*}"))",
+                        QRegularExpression::MultilineOption).match(file_content).hasMatch()
+        ) {
+            file_content.replace(
+                QRegularExpression(R"(^(?!\s*#|\s*--)(.*)(if_match "pmfix\${time[^}]*}"\s*==\s*"pmfix[^}]*}))",
+                    QRegularExpression::MultilineOption), R"(\1if_match "pmfix${time 12H}" == "pmfix"})");
+        } else {
+            // Replace 24-hour format with 12-hour format
+            file_content.replace("%H", "%I");
+            file_content.replace("%k", "%l");
+            // Add AM/PM indicator if not present
+            if (!file_content.contains("%p")) {
+                file_content.replace("%M", "%M %p");
+            }
         }
+
     } else if (format == "24") {
-        // Replace 12-hour format with 24-hour format
-        file_content.replace("%I", "%H");
-        file_content.replace("%l", "%k");
-        // Remove AM/PM indicator
-        file_content.replace(QRegularExpression("\\s*%p"), "");
+        if (QRegularExpression(R"(^(?!\s*#|\s*--)(.*lua \s*(hours?|ampm|AMPM|am_pm|AM_PM)[^}]*}))",
+            QRegularExpression::MultilineOption).match(file_content).hasMatch()
+        ) {
+            file_content.replace(
+                QRegularExpression(R"(^(?!\s*#|\s*--)(.*)(lua \s*(hours?|ampm|AMPM|am_pm|AM_PM)[^}]*}))",
+                    QRegularExpression::MultilineOption), R"(\1lua \3 24H})");
+
+        } else if (QRegularExpression(R"(^(?!\s*#|\s*--)(.*if_match \s*"pmfix\${time[^}]*}"))",
+                        QRegularExpression::MultilineOption).match(file_content).hasMatch()
+        ) {
+            file_content.replace(
+                QRegularExpression(R"(^(?!\s*#|\s*--)(.*)(if_match "pmfix\${time[^}]*}"\s*==\s*"pmfix[^}]*}))",
+                    QRegularExpression::MultilineOption), R"(\1if_match "pmfix${time 24H}" == "pmfix24H"})");
+        } else {
+
+            // Replace 12-hour format with 24-hour format
+            file_content.replace("%I", "%H");
+            file_content.replace("%l", "%k");
+            // Remove AM/PM indicator
+            file_content.replace(QRegularExpression("\\s*%p"), "");
+        }
+
+    } else if (format == "auto") {
+        // Replace back to autodetected format; remove 12H or 24h force-format strings
+
+        if (QRegularExpression(R"(^(?!\s*#|\s*--)(.*lua \s*(hours?|ampm|AMPM|am_pm|AM_PM)[^}]*}))",
+            QRegularExpression::MultilineOption).match(file_content).hasMatch()
+        ) {
+            file_content.replace(
+                QRegularExpression(R"(^(?!\s*#|\s*--)(.*)(lua \s*(hours?|ampm|AMPM|am_pm|AM_PM)[^}]*}))",
+                    QRegularExpression::MultilineOption), R"(\1lua \3})");
+
+        } else if (QRegularExpression(R"(^(?!\s*#|\s*--)(.*if_match \s*"pmfix\${time[^}]*}"))",
+                        QRegularExpression::MultilineOption).match(file_content).hasMatch()
+        ) {
+            file_content.replace(
+                QRegularExpression(R"(^(?!\s*#|\s*--)(.*)(if_match \s*"pmfix\${time[^}]*}"\s*==\s*"pmfix[^}]*}))",
+                    QRegularExpression::MultilineOption), R"(\1if_match "pmfix${time %p}" == "pmfix"})");
+
+        }
     }
-    writeFile(file_name, file_content);
+
+    writeFile(file_name, file_content.trimmed() + "\n");
 }
 
 void ConkyCustomizeDialog::onNetworkDeviceChanged()

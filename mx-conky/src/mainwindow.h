@@ -114,4 +114,5 @@ private:
     void setupLoadingWidget();
     void setupMainWidget();
     void setupUI();
+    void updateControlStates();
 };

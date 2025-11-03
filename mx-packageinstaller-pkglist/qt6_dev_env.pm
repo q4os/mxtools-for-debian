@@ -75,6 +75,10 @@ qt6-base-dev-tools
 qt6-tools-dev
 qt6-tools-dev-tools
 qt6-l10n-tools
+libzxcvbn-dev
+libarchive-dev
+cmake
+ninja-build
 </install_package_names>
 
 
@@ -89,5 +93,9 @@ qt6-base-dev
 qt6-base-dev-tools
 qt6-tools-dev-tools
 qt6-l10n-tools
+libzxcvbn-dev
+libarchive-dev
+cmake
+ninja-build
 </uninstall_package_names>
 </app>

@@ -89,7 +89,7 @@ main() {
 
     case $fcnt in
         0) fatal "Expected at least one filename" ;;
-        1) test -d "$last_file" && files=$(ls -dt "$last_file"/*) ;;
+        1) test -d "$last_file" && files=$(ls -dt "$last_file"/* |sed /memtest/Id) ;;
     esac
 
 

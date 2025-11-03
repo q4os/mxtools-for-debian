@@ -24,12 +24,14 @@
 
 #include <QDebug>
 #include <QDir>
+#include <QFile>
 #include <QFileInfo>
 #include <QProcess>
 #include <QProcessEnvironment>
 #include <QRegularExpression>
 #include <QSet>
 #include <QTextStream>
+#include <unistd.h>
 
 #include "cmd.h"
 #include "conkymanager.h"
@@ -44,7 +46,7 @@ ConkyManager::ConkyManager(QObject *parent)
       m_autostartTimer(new QTimer(this)),
       m_statusTimer(new QTimer(this)),
       m_statusCheckRunning(false),
-      m_startupDelay(5)
+      m_startupDelay(10)
 {
     m_statusTimer->setInterval(2s);
     connect(m_statusTimer, &QTimer::timeout, this, &ConkyManager::updateRunningStatus);
@@ -195,6 +197,13 @@ QList<ConkyItem *> ConkyManager::conkyItems() const
     return m_conkyItems;
 }
 
+bool ConkyManager::hasRunningConkies() const
+{
+    return std::any_of(m_conkyItems.cbegin(), m_conkyItems.cend(), [](const ConkyItem *item) {
+        return item && item->isRunning();
+    });
+}
+
 void ConkyManager::startConky(ConkyItem *item)
 {
     if (!item || item->isRunning()) {
@@ -275,9 +284,36 @@ void ConkyManager::startAutostart()
 
 void ConkyManager::stopAllRunning()
 {
+    QList<ConkyItem *> runningItems;
+    runningItems.reserve(m_conkyItems.size());
     for (ConkyItem *item : m_conkyItems) {
+        if (item && item->isRunning()) {
+            runningItems.append(item);
+        }
+    }
+
+    const QString userId = QString::number(getuid());
+    QProcess killProcess;
+    killProcess.start("pkill", { "-u", userId, "-x", "conky" });
+
+    if (!killProcess.waitForFinished(3000)) {
+        killProcess.kill();
+        killProcess.waitForFinished(1000);
+    }
+
+    if (killProcess.exitStatus() != QProcess::NormalExit
+        || (killProcess.exitCode() != 0 && killProcess.exitCode() != 1)) {
+        // pkill returns 1 when no matching processes are found; fallback only on other failures
+        QProcess::execute("killall", { "-e", "-u", userId, "conky" });
+    }
+
+    for (ConkyItem *item : runningItems) {
+        if (!item) {
+            continue;
+        }
         if (item->isRunning()) {
-            stopConky(item);
+            item->setRunning(false);
+            emit conkyStopped(item);
         }
     }
 }
@@ -302,7 +338,7 @@ void ConkyManager::loadSettings()
               .value("searchPaths", QStringList() << QDir::homePath() + "/.conky" << "/usr/share/mx-conky-data/themes")
               .toStringList();
 
-    m_startupDelay = m_settings.value("startupDelay", 5).toInt();
+    m_startupDelay = m_settings.value("startupDelay", 10).toInt();
     m_settings.endGroup();
 
     scanForConkies();
@@ -337,29 +373,81 @@ void ConkyManager::onStatusProcessFinished()
     // Build set of running config files by checking each PID
     QSet<QString> runningConfigs;
     for (const QString &pid : pids) {
-        // Get command line for this PID
-        QProcess cmdlineProcess;
-        cmdlineProcess.start("ps", QStringList() << "-p" << pid << "-o"
-                                                 << "command="
-                                                 << "--no-headers");
-        if (cmdlineProcess.waitForFinished(1000)) {
-            QString cmdline = cmdlineProcess.readAllStandardOutput().trimmed();
+        QFile cmdlineFile(QString("/proc/%1/cmdline").arg(pid));
+        if (!cmdlineFile.open(QFile::ReadOnly)) {
+            continue;
+        }
 
-            // Skip if this is not actually a conky process (could be grep, mx-conky, etc.)
-            // Look for conky executable (conky, /usr/bin/conky, etc.) but not mx-conky application itself
-            if (!cmdline.contains("conky") || cmdline.contains("./mx-conky") || cmdline.endsWith("mx-conky")) {
+        const QByteArray rawCmdline = cmdlineFile.readAll();
+        cmdlineFile.close();
+        if (rawCmdline.isEmpty()) {
+            continue;
+        }
+
+        const QList<QByteArray> parts = rawCmdline.split('\0');
+        QStringList arguments;
+        arguments.reserve(parts.size());
+        for (const QByteArray &part : parts) {
+            if (part.isEmpty()) {
                 continue;
             }
+            arguments.append(QString::fromLocal8Bit(part));
+        }
 
-            // Find -c flag position in the command line
-            int cFlagIndex = cmdline.indexOf(" -c ");
-            if (cFlagIndex != -1) {
-                // Extract everything after " -c " as the config path
-                QString configPath = cmdline.mid(cFlagIndex + 4); // +4 for " -c "
-                QString absolutePath = QFileInfo(configPath).absoluteFilePath();
-                runningConfigs.insert(absolutePath);
+        if (arguments.isEmpty()) {
+            continue;
+        }
+
+        const QString executableName = QFileInfo(arguments.constFirst()).fileName();
+        if (!executableName.contains("conky", Qt::CaseInsensitive)
+            || executableName.contains("mx-conky", Qt::CaseInsensitive)) {
+            continue;
+        }
+
+        QString configPath;
+        for (int index = 1; index < arguments.size(); ++index) {
+            const QString &argument = arguments.at(index);
+            if (argument == "-c" || argument == "--config") {
+                if (index + 1 < arguments.size()) {
+                    configPath = arguments.at(index + 1);
+                }
+                break;
+            }
+            if (argument.startsWith("--config=")) {
+                configPath = argument.mid(QStringLiteral("--config=").length());
+                break;
+            }
+            if (argument.startsWith("-c=")) {
+                configPath = argument.mid(3);
+                break;
+            }
+            if (argument.startsWith("-c") && argument.length() > 2) {
+                configPath = argument.mid(2);
+                break;
             }
         }
+
+        if (configPath.isEmpty()) {
+            continue;
+        }
+
+        if (configPath.startsWith('~')) {
+            configPath = QDir::homePath() + configPath.mid(1);
+        }
+
+        QFileInfo configInfo(configPath);
+        if (configInfo.isRelative()) {
+            QFileInfo cwdInfo(QString("/proc/%1/cwd").arg(pid));
+            const QString cwdPath = cwdInfo.symLinkTarget();
+            if (!cwdPath.isEmpty()) {
+                configInfo = QFileInfo(QDir(cwdPath).absoluteFilePath(configPath));
+            } else {
+                configInfo = QFileInfo(QDir::current().absoluteFilePath(configPath));
+            }
+        }
+
+        const QString absolutePath = QDir::cleanPath(configInfo.absoluteFilePath());
+        runningConfigs.insert(absolutePath);
     }
 
     // Check each item against the running configs
@@ -499,6 +587,10 @@ void ConkyManager::scanConkyDirectory(const QString &path)
             continue;
         }
 
+        if (fileName.endsWith(".bak", Qt::CaseInsensitive)) {
+            continue;
+        }
+
         // Skip known non-conky files
         bool skipFile = false;
         for (const QString &skipName : skipNames) {
@@ -607,7 +699,7 @@ void ConkyManager::updateStartupScript()
     QString scriptContent;
     scriptContent += "#!/bin/sh\n\n";
     scriptContent += QString("sleep %1s\n").arg(m_startupDelay);
-    scriptContent += "killall -u $(id -nu) conky 2>/dev/null\n";
+    scriptContent += "killall -e -u $(id -nu) conky 2>/dev/null\n";
 
     // Add conky start commands
     for (ConkyItem *item : m_conkyItems) {

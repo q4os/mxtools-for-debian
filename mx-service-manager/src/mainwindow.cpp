@@ -29,6 +29,7 @@
 #include <QJsonObject>
 #include <QScreen>
 #include <QScrollBar>
+#include <QShortcut>
 #include <QTextStream>
 #include <QTimer>
 
@@ -100,6 +101,12 @@ MainWindow::MainWindow(QWidget *parent)
                 item->setToolTip(description);
             }
         }
+    });
+
+    auto *findShortcut = new QShortcut(QKeySequence::Find, this);
+    connect(findShortcut, &QShortcut::activated, this, [this]() {
+        ui->lineSearch->setFocus(Qt::ShortcutFocusReason);
+        ui->lineSearch->selectAll();
     });
 }
 
@@ -175,6 +182,7 @@ void MainWindow::setGeneralConnections() noexcept
     connect(ui->pushCancel, &QPushButton::pressed, this, &MainWindow::close);
     connect(ui->pushHelp, &QPushButton::clicked, this, &MainWindow::pushHelp_clicked);
     connect(ui->pushEnableDisable, &QPushButton::clicked, this, &MainWindow::pushEnableDisable_clicked);
+    connect(ui->pushRefresh, &QPushButton::clicked, this, &MainWindow::pushRefresh_clicked);
     connect(ui->pushStartStop, &QPushButton::clicked, this, &MainWindow::pushStartStop_clicked);
 }
 
@@ -413,6 +421,31 @@ void MainWindow::pushHelp_clicked()
 {
     const QString url = "https://mxlinux.org/wiki/help-service-manager/";
     displayDoc(url, tr("%1 Help").arg(windowTitle()));
+}
+
+void MainWindow::pushRefresh_clicked()
+{
+    ui->pushRefresh->setEnabled(false);
+    const auto *currentItem = ui->listServices->currentItem();
+    const QString selectedService = currentItem ? currentItem->text() : QString();
+    savedRow = ui->listServices->currentRow();
+
+    ui->labelCount->setText(tr("Refreshing..."));
+    ui->labelEnabledAtBoot->clear();
+    ui->listServices->clear();
+    ui->listServices->addItem(tr("Refreshing..."));
+
+    QTimer::singleShot(0, this, [this, selectedService]() {
+        listServices();
+        displayServices();
+        if (!selectedService.isEmpty()) {
+            const auto matches = ui->listServices->findItems(selectedService, Qt::MatchExactly);
+            if (!matches.isEmpty()) {
+                ui->listServices->setCurrentItem(matches.first());
+            }
+        }
+        ui->pushRefresh->setEnabled(true);
+    });
 }
 
 void MainWindow::pushStartStop_clicked()

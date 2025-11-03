@@ -3,7 +3,7 @@
 #include <QDialog>
 #include <QHash>
 
-#include <cmd.h>
+#include "cmd.h"
 
 namespace Ui
 {

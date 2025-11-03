@@ -1,3 +1,65 @@
+mx-conky (25.10.9) mx; urgency=medium
+
+  * Additional conky detection fix
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 29 Oct 2025 13:38:48 -0400
+
+mx-conky (25.10.8) mx; urgency=medium
+
+  * Stop All now stays enabled and sends a pkill/killall sweep so every
+    conky owned by the user is terminated, even when detection misses
+    them.
+  * Improve running conkys detection/stopping
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 29 Oct 2025 12:18:14 -0400
+
+mx-conky (25.10.7) mx; urgency=medium
+
+  * Change default delay to 10 seconds.
+
+ -- Adrian <adrian@mxlinux.org>  Tue, 28 Oct 2025 22:29:15 -0400
+
+mx-conky (25.10.6) mx; urgency=medium
+
+  * Stop All now stays disabled when no conkys are running, and the
+    filtered list refreshes automatically after the global actions.
+
+ -- Adrian <adrian@mxlinux.org>  Tue, 28 Oct 2025 13:21:41 -0400
+
+mx-conky (25.10.5) mx; urgency=medium
+
+  * Allow 'auto' time display selection for conky's which are auto-capable
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 24 Oct 2025 09:23:50 -0400
+
+mx-conky (25.10.4) mx; urgency=medium
+
+  * Allow "auto" 12h/24h time display selection for conky's which are auto-capable
+
+ -- fehlix <fehlix@mxlinux.org>  Fri, 24 Oct 2025 06:13:00 -0400
+
+mx-conky (25.10.3) mx; urgency=medium
+
+  * Add 12h/24h auto time-format detection and toggle for template-pmfix
+  * Add 12h/24h auto time-format detection and toggle for lua hour and lua am_pm
+  * Fix to ignore comment lines when detecting and adjusting 12h/24h auto time-format
+
+ -- fehlix <fehlix@mxlinux.org>  Wed, 22 Oct 2025 19:38:40 -0400
+
+mx-conky (25.10.2) mx; urgency=medium
+
+  * Add graphicsmagick-imagemagick-compat as a recommend and popup a message that it's missing if the user tries to create a preview
+  * When backing up a conky refresh and add it to the list Don't show successful deletion dialog, it should be obvious since the entry disappears from list
+  * Preserve filter selection when editing a conky
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 20 Oct 2025 14:11:55 -0400
+
+mx-conky (25.10.1) mx; urgency=medium
+
+  * Change transparenty detection scheme
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 10 Oct 2025 23:31:10 -0400
+
 mx-conky (25.10) mx; urgency=medium
 
   * Get autostart items from the startup script

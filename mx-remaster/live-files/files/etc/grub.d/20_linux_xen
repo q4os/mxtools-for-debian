@@ -27,7 +27,22 @@ export TEXTDOMAIN=grub
 export TEXTDOMAINDIR="${datarootdir}/locale"
 
 CLASS="--class gnu-linux --class gnu --class os --class xen"
-SUPPORTED_INITS="sysvinit:/lib/sysvinit/init systemd:/lib/systemd/systemd upstart:/sbin/upstart"
+########################################################
+## Reinstating multi-init support removed from Trixie ##
+########################################################
+SUPPORTED_INITS="
+                 sysvinit:/lib/sysvinit/init \
+                 systemd:/lib/systemd/systemd \
+                 upstart:/sbin/upstart \
+                 s6-rc:/lib/s6-rc/s6-rc-init \
+                 s6-66:/lib/s6-66/s6-66-init \
+                 openrc:/lib/openrc/openrc-init \
+                 dinit:/lib/dinit/dinit \
+                 runit:/lib/runit/runit-init \
+                 shepherd:/lib/shepherd/shepherd \
+                 sinit:/lib/sinit/sinit
+                 "
+########################################################
 
 if [ "x${GRUB_DISTRIBUTOR}" = "x" ] ; then
   OS=GNU/Linux
@@ -49,9 +64,11 @@ case ${GRUB_DEVICE} in
   ;;
 esac
 
+: ${GRUB_CMDLINE_LINUX_RECOVERY:=single}
+
 # Default to disabling partition uuid support to maintian compatibility with
 # older kernels.
-GRUB_DISABLE_LINUX_PARTUUID=${GRUB_DISABLE_LINUX_PARTUUID-true}
+: ${GRUB_DISABLE_LINUX_PARTUUID=true}
 
 # btrfs may reside on multiple devices. We cannot pass them as value of root= parameter
 # and mounting btrfs requires user space scanning, so force UUID in this case.
@@ -95,25 +112,47 @@ title_correction_code=
 
 linux_entry ()
 {
+  linux_entry_xsm "$@" false
+  linux_entry_xsm "$@" true
+}
+linux_entry_xsm ()
+{
   os="$1"
   version="$2"
-  xen_version="$3"
+  entry_xen_version="$3"
   type="$4"
   args="$5"
   xen_args="$6"
+  xsm="$7"
+  # If user wants to enable XSM support, make sure there's
+  # corresponding policy file.
+  xenpolicy=
+  if ${xsm} ; then
+      xenpolicy="xenpolicy-$entry_xen_version"
+      if test ! -e "${xen_dirname}/${xenpolicy}" ; then
+	  return
+      fi
+      xen_args="$xen_args flask=enforcing"
+      entry_xen_version="$(gettext_printf "%s (XSM enabled)" "$entry_xen_version")"
+      # entry_xen_version is used for messages only; actual file is xen_basename
+  fi
   if [ -z "$boot_device_id" ]; then
       boot_device_id="$(grub_get_device_id "${GRUB_DEVICE}")"
   fi
   if [ x$type != xsimple ] ; then
       if [ x$type = xrecovery ] ; then
-	  title="$(gettext_printf "%s, with Xen %s and Linux %s (%s)" "${os}" "${xen_version}" "${version}" "$(gettext "${GRUB_RECOVERY_TITLE}")")"
-      elif [ "${type#init-}" != "$type" ] ; then
-	  title="$(gettext_printf "%s, with Xen %s and Linux %s (%s)" "${os}" "${xen_version}" "${version}" "${type#init-}")"
+	  title="$(gettext_printf "%s, with Xen %s and Linux %s (%s)" "${os}" "${entry_xen_version}" "${version}" "$(gettext "${GRUB_RECOVERY_TITLE}")")"
+###################################################################################################################################
+## Reinstating multi-init support removed from Trixie
+###################################################################################################################################
+	  elif [ x$type = xinit-* ] ; then
+	  title="$(gettext_printf "%s, with Xen %s and Linux %s (%s)" "${os}" "${entry_xen_version}" "${version}" "${type#init-}")" 
+###################################################################################################################################
       else
-	  title="$(gettext_printf "%s, with Xen %s and Linux %s" "${os}" "${xen_version}" "${version}")"
+	  title="$(gettext_printf "%s, with Xen %s and Linux %s" "${os}" "${entry_xen_version}" "${version}")"
       fi
       replacement_title="$(echo "Advanced options for ${OS}" | sed 's,>,>>,g')>$(echo "$title" | sed 's,>,>>,g')"
-      if [ x"Xen ${xen_version}>$title" = x"$GRUB_ACTUAL_DEFAULT" ]; then
+      if [ x"Xen ${entry_xen_version}>$title" = x"$GRUB_ACTUAL_DEFAULT" ]; then
          quoted="$(echo "$GRUB_ACTUAL_DEFAULT" | grub_quote)"
          title_correction_code="${title_correction_code}if [ \"x\$default\" = '$quoted' ]; then default='$(echo "$replacement_title" | grub_quote)'; fi;"
          grub_warn "$(gettext_printf "Please don't use old title \`%s' for GRUB_DEFAULT, use \`%s' (for versions before 2.00) or \`%s' (for 2.00 or later)" "$GRUB_ACTUAL_DEFAULT" "$replacement_title" "gnulinux-advanced-$boot_device_id>gnulinux-$version-$type-$boot_device_id")"
@@ -131,7 +170,7 @@ linux_entry ()
     prepare_boot_cache="$(prepare_grub_to_access_device ${GRUB_DEVICE_BOOT} | grub_add_tab)"
   fi
   printf '%s\n' "${prepare_boot_cache}" | sed "s/^/$submenu_indentation/"
-  xmessage="$(gettext_printf "Loading Xen %s ..." ${xen_version})"
+  xmessage="$(gettext_printf "Loading Xen %s ..." ${entry_xen_version})"
   lmessage="$(gettext_printf "Loading Linux %s ..." ${version})"
   sed "s/^/$submenu_indentation/" << EOF
 	echo	'$(echo "$xmessage" | grub_quote)'
@@ -149,11 +188,18 @@ EOF
     message="$(gettext_printf "Loading initial ramdisk ...")"
     initrd_path=
     for i in ${initrd}; do
-       initrd_path="${initrd_path} ${rel_dirname}/${i}"
-    done
-    sed "s/^/$submenu_indentation/" << EOF
+       initrd_path="${rel_dirname}/${i}"
+       sed "s/^/$submenu_indentation/" << EOF
 	echo	'$(echo "$message" | grub_quote)'
 	${module_loader}	--nounzip   $(echo $initrd_path)
+EOF
+    done
+  fi
+  if ${xsm} && test -n "${xenpolicy}" ; then
+    message="$(gettext_printf "Loading XSM policy ...")"
+    sed "s/^/$submenu_indentation/" << EOF
+	echo	'$(echo "$message" | grub_quote)'
+	${module_loader}     ${rel_dirname}/${xenpolicy}
 EOF
   fi
   sed "s/^/$submenu_indentation/" << EOF
@@ -181,9 +227,13 @@ if [ "x${linux_list}" = "x" ] ; then
     exit 0
 fi
 
-file_is_not_sym () {
+file_is_not_xen_garbage () {
     case "$1" in
 	*/xen-syms-*)
+	    return 1;;
+	*/xenpolicy-*)
+	    return 1;;
+	*/*.config)
 	    return 1;;
 	*)
 	    return 0;;
@@ -192,7 +242,7 @@ file_is_not_sym () {
 
 xen_list=
 for i in /boot/xen*; do
-    if grub_file_is_not_garbage "$i" && file_is_not_sym "$i" ; then xen_list="$xen_list $i" ; fi
+    if grub_file_is_not_garbage "$i" && file_is_not_xen_garbage "$i" ; then xen_list="$xen_list $i" ; fi
 done
 prepare_boot_cache=
 boot_device_id=
@@ -213,11 +263,24 @@ esac
 # yet, so it's empty. In a submenu it will be equal to '\t' (one tab).
 submenu_indentation=""
 
+# Perform a reverse version sort on the entire xen_list and linux_list.
+# Temporarily replace the '.old' suffix by ' 1' and append ' 2' for all
+# other files to order the '.old' files after their non-old counterpart
+# in reverse-sorted order.
+
+reverse_sorted_xen_list=$(echo ${xen_list} | tr ' ' '\n' | sed -e 's/\.old$/ 1/; / 1$/! s/$/ 2/' | version_sort -r | sed -e 's/ 1$/.old/; s/ 2$//')
+reverse_sorted_linux_list=$(echo ${linux_list} | tr ' ' '\n' | sed -e 's/\.old$/ 1/; / 1$/! s/$/ 2/' | version_sort -r | sed -e 's/ 1$/.old/; s/ 2$//')
+
+if [ "x$GRUB_TOP_LEVEL_XEN" != x ]; then
+  reverse_sorted_xen_list=$(grub_move_to_front "$GRUB_TOP_LEVEL_XEN" ${reverse_sorted_xen_list})
+fi
+if [ "x$GRUB_TOP_LEVEL" != x ]; then
+  reverse_sorted_linux_list=$(grub_move_to_front "$GRUB_TOP_LEVEL" ${reverse_sorted_linux_list})
+fi
+
 is_top_level=true
 
-while [ "x${xen_list}" != "x" ] ; do
-    list="${linux_list}"
-    current_xen=`version_find_latest $xen_list`
+for current_xen in ${reverse_sorted_xen_list}; do
     xen_basename=`basename ${current_xen}`
     xen_dirname=`dirname ${current_xen}`
     rel_xen_dirname=`make_system_path_relative_to_its_root $xen_dirname`
@@ -249,8 +312,7 @@ while [ "x${xen_list}" != "x" ] ; do
        fi
     done
 
-    while [ "x$list" != "x" ] ; do
-	linux=`version_find_latest $list`
+    for linux in ${reverse_sorted_linux_list}; do
 	gettext_printf "Found linux image: %s\n" "$linux" >&2
 	basename=`basename $linux`
 	dirname=`dirname $linux`
@@ -260,8 +322,10 @@ while [ "x${xen_list}" != "x" ] ; do
 	linux_root_device_thisversion="${LINUX_ROOT_DEVICE}"
 
 	initrd_real=
-	for i in "initrd.img-${version}" "initrd-${version}.img" "initrd-${version}.gz" \
-	   "initrd-${version}" "initramfs-${version}.img" \
+	for i in "initrd.img-${version}" "initrd-${version}.img" \
+	   "initrd-${alt_version}.img.old" "initrd-${version}.gz" \
+	   "initrd-${alt_version}.gz.old" "initrd-${version}" \
+	   "initramfs-${version}.img" "initramfs-${alt_version}.img.old" \
 	   "initrd.img-${alt_version}" "initrd-${alt_version}.img" \
 	   "initrd-${alt_version}" "initramfs-${alt_version}.img" \
 	   "initramfs-genkernel-${version}" \
@@ -276,7 +340,10 @@ while [ "x${xen_list}" != "x" ] ; do
 
 	initrd=
 	if test -n "${initrd_early}" || test -n "${initrd_real}"; then
-	    initrd="${initrd_early} ${initrd_real}"
+	    # Xen assumes the real initrd is the first module after the kernel.
+	    # Additional (later) initrds can also be used for microcode update,
+	    # with Xen option 'ucode=<scan|module number> (non-default anyway).
+	    initrd="${initrd_real} ${initrd_early}"
 
 	    initrd_display=
 	    for i in ${initrd}; do
@@ -296,7 +363,15 @@ while [ "x${xen_list}" != "x" ] ; do
 	    fi
 	fi
 
-	if [ "x$is_top_level" = xtrue ] && [ "x${GRUB_DISABLE_SUBMENU}" != xy ]; then
+	# The GRUB_DISABLE_SUBMENU option used to be different than others since it was
+	# mentioned in the documentation that has to be set to 'y' instead of 'true' to
+	# enable it. This caused a lot of confusion to users that set the option to 'y',
+	# 'yes' or 'true'. This was fixed but all of these values must be supported now.
+	if [ "x${GRUB_DISABLE_SUBMENU}" = xyes ] || [ "x${GRUB_DISABLE_SUBMENU}" = xy ]; then
+	    GRUB_DISABLE_SUBMENU="true"
+	fi
+
+	if [ "x$is_top_level" = xtrue ] && [ "x${GRUB_DISABLE_SUBMENU}" != xtrue ]; then
 	    linux_entry "${OS}" "${version}" "${xen_version}" simple \
 		"${GRUB_CMDLINE_LINUX} ${GRUB_CMDLINE_LINUX_DEFAULT}" "${GRUB_CMDLINE_XEN} ${GRUB_CMDLINE_XEN_DEFAULT}"
 
@@ -323,7 +398,7 @@ while [ "x${xen_list}" != "x" ] ; do
 	done
 	if [ "x${GRUB_DISABLE_RECOVERY}" != "xtrue" ]; then
 	    linux_entry "${OS}" "${version}" "${xen_version}" recovery \
-		"single ${GRUB_CMDLINE_LINUX}" "${GRUB_CMDLINE_XEN}"
+		"${GRUB_CMDLINE_LINUX_RECOVERY} ${GRUB_CMDLINE_LINUX}" "${GRUB_CMDLINE_XEN}"
 	fi
 
 	list=`echo $list | tr ' ' '\n' | fgrep -vx "$linux" | tr '\n' ' '`

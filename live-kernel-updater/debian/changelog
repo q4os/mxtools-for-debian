@@ -1,3 +1,16 @@
+live-kernel-updater (0.2.30+8) mx; urgency=medium
+
+  * fix kernel count function by filtering memtest entries
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 24 Oct 2025 17:37:24 -0400
+
+live-kernel-updater (0.2.30+7) mx; urgency=medium
+
+  [fehlix]
+  * filter out memtest from kernel options 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 23 Oct 2025 18:05:09 -0400
+
 live-kernel-updater (0.2.30+6) mx; urgency=medium
 
   * update desktop file

@@ -1,7 +1,7 @@
-mx-locale		usr/bin
+obj-*/mx-locale 	usr/bin
 *.desktop	        usr/share/applications
 help/*			usr/share/doc/mx-locale/help
 license.html		usr/share/doc/mx-locale
 lib/*			usr/lib/mx-locale
 polkit-actions/*	usr/share/polkit-1/actions
-translations/*.qm	usr/share/mx-locale/locale
+obj-*/*.qm	usr/share/mx-locale/locale

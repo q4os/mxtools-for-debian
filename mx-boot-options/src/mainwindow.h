@@ -87,6 +87,7 @@ private:
     bool justInstalled {};
     bool kernelOptionsChanged {};
     bool live = isLive();
+    const bool waylandSession {isWaylandSession()};
     bool messagesChanged {};
     bool optionsChanged {};
     bool splashChanged {};
@@ -112,6 +113,7 @@ private:
     [[nodiscard]] bool openLuks(const QString &part, const QString &path);
     [[nodiscard]] static bool isUefi();
     [[nodiscard]] static bool isSplashEnabled();
+    [[nodiscard]] static bool isWaylandSession();
     bool replaceGrubArg(const QString &key, const QString &item);
     static void sendMouseEvents();
     void addGrubLine(const QString &item);

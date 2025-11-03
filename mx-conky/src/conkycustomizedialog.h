@@ -62,6 +62,9 @@ public:
     explicit ConkyCustomizeDialog(const QString &filePath, QWidget *parent = nullptr);
     ~ConkyCustomizeDialog() override;
 
+signals:
+    void backupCreated(const QString &backupFilePath);
+
 private slots:
     void closeEvent(QCloseEvent *event) override;
     void pushColorButton_clicked(int colorIndex);
@@ -237,6 +240,7 @@ private:
     void writeFile(const QString &fileName, const QString &content);
     bool writeFileWithElevation(const QString &fileName, const QString &content);
     bool copyFileWithElevation(const QString &sourceFile, const QString &destFile);
+    bool removeFileWithElevation(const QString &fileName);
     void writeConfigValue(const QString &key, const QString &value, bool quoted = false);
     int countHeightPadding();
     void updateHeightPadding(int paddingLines);

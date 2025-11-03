@@ -1,3 +1,29 @@
+mx-tweak (25.11.01mx25) mx; urgency=medium
+
+  * update translations
+  * improve panel-preferences window detection
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 01 Nov 2025 10:53:39 -0400
+
+mx-tweak (25.10.05mx25) mx; urgency=medium
+
+  * refresh themes and panel if applets are used
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 31 Oct 2025 19:33:32 -0400
+
+mx-tweak (25.10.04mx25) mx; urgency=medium
+
+  * fix dark mode checkbox action
+  * update translations
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 27 Oct 2025 18:34:53 -0400
+
+mx-tweak (25.10.03mx25) mx; urgency=medium
+
+  * update xrandr scale set utility, xfce 4.20 uses a single value
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 16 Oct 2025 21:34:08 -0400
+
 mx-tweak (25.10.02mx25) mx; urgency=medium
 
   * add NotShownIn=KDE  to brightness systray desktop file

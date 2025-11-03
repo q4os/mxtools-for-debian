@@ -28,7 +28,7 @@ source gettext.sh
 DEBIAN_VERSION_CODENAME=$(grep VERSION_CODENAME /etc/os-release|cut -d"=" -f2)
 DEBIAN_VERSION_NUMBER=$(cat /etc/debian_version  |cut -d"." -f1)
 
-VERSION="25.07.02"
+VERSION="25.10.02"
 ME=${0##*/}
 CLI_PROG="ddm-mx"
 LOCK_FILE="/run/lock/$CLI_PROG"
@@ -90,7 +90,7 @@ PURGE=''
 INSTALL=''
 FORCEDRIVER=''
 TEST=false
-while getopts ":f:bNi:p:htd:c" opt; do
+while getopts ":f:bNi:p:htd:cgr" opt; do
   case $opt in
     h)
       usage HELP
@@ -131,6 +131,16 @@ while getopts ":f:bNi:p:htd:c" opt; do
       # Testing
       FORCEDRIVER="$FORCEDRIVER$OPTARG"
       echo "FORCE DRIVER is $FORCEDRIVER"
+      ;;
+    g)
+      # add nvidia grub and module configurations
+      add_nvidia_module_config
+      exit 0
+      ;;
+    r)
+      # remove nvidia grub and module configurations
+      remove_nvidia_module_config
+      exit 0
       ;;
     \?)
       # Invalid option: start GUI
@@ -274,7 +284,11 @@ function usage() {
   echo "              " $(gettext "Implies -f nvidia-driver")
   echo ""
   echo "-c            " $(gettext "Create 20-nvidia.conf")
-  echo
+  echo ""
+  echo "-g            " $(gettext "Add grub commandline and modules options to help with wayland")
+  echo ""
+  echo "-r            " $(gettext "Remove grub commandline and modules options related to wayland")
+  echo ""
   echo "-i [driver]   " $(gettext "Install given driver.")
   echo "              " $(gettext "drivers: nvidia, open, fixbumblebee")
   echo
@@ -479,10 +493,14 @@ fi
   	#add possible missing symlinks
   	echo "symlinks" | tee -a $LOG
   	create_modprobe_symlinks
+ 	
   	#create 20_nvidia.conf file for non-optimus parts
-  	if [ $OPTIMUS = 1 ]; then
+    # also create grub config changes
+  	if [ $OPTIMUS -eq 1 ]; then
     	echo "20_nvidia.conf" | tee -a $LOG
   		create_20_nvidiaconf
+        #add grub and module options
+  	    add_nvidia_module_config
   	fi
   	#backup any existing xorg.conf file
   	if [ -e /etc/X11/xorg.conf ]; then
@@ -491,8 +509,7 @@ fi
   		mv /etc/X11/xorg.conf $XORGBACKUP
   	fi
   	#update initramfs one more time
-  	
-  	update_initramfs
+  	  	update_initramfs
   fi
   echo $(eval_gettext "Finished") | tee -a $LOG
   echo ""
@@ -514,6 +531,9 @@ function purge_proprietary_drivers {
   # apt-get purge $FORCE bumblebee* primus* primus*:i386 2>&1 | tee -a $LOG
   # remove possible leftover symlinks
 	remove_modprobe_symlinks
+  # remove module options and grub config
+  remove_nvidia_module_config
+  
   if [ "$?" = "0" ]; then 
       #success in removing proprietary drivers and returning to open source drivers
       echo $(eval_gettext "Proprietary drivers removed") | tee -a $LOG
@@ -578,7 +598,16 @@ if [ "$NVIDIA_OVERRIDE" = "true" ]; then
     rm -f /etc/apt/sources.list.d/cuda-debian$DEBIAN_VERSION_NUMBER-x86_64.list
     apt-get update
     echo ""
-  fi
+  else
+   #check fallback location
+   if [ -f /etc/apt/sources.list.d/cuda-debian12-x86_64.list ]; then
+  	 echo $(eval_gettext "Resetting sources")
+   	 apt purge cuda-keyring -y
+   	 rm -f /etc/apt/sources.list.d/cuda-debian12-x86_64.list
+   	 apt-get update
+   	 echo ""
+   fi
+   fi
 fi
 
 ##re-enable nvidia-peristenced availability
@@ -640,6 +669,15 @@ enable_nvidia_repo()
   NVIDIA_KEY_ADDRESS="https://developer.download.nvidia.com/compute/cuda/repos/debian$DEBIAN_VERSION_NUMBER/x86_64/cuda-keyring_1.1-1_all.deb"
   echo $NVIDIA_KEY_ADDRESS
   wget $NVIDIA_KEY_ADDRESS -O /tmp/nvidia-keyring.deb
+  if [ $? -ne 0 ]; then
+  	#try debian 12 version as a fallback
+  	echo $(eval_gettext "Debain 13 repo not found, falling back to debian 12 repository") 	
+  	DEBIAN_VERSION_NUMBER="12"
+  	echo $(eval_gettext "Getting Nvidia repo signing key")
+  NVIDIA_KEY_ADDRESS="https://developer.download.nvidia.com/compute/cuda/repos/debian$DEBIAN_VERSION_NUMBER/x86_64/cuda-keyring_1.1-1_all.deb"
+  echo $NVIDIA_KEY_ADDRESS
+  wget $NVIDIA_KEY_ADDRESS -O /tmp/nvidia-keyring.deb
+  fi
   dpkg -i /tmp/nvidia-keyring.deb
   rm /tmp/nvidia-keyring.deb
   if [ $? = 0 ]; then
@@ -977,6 +1015,7 @@ check_source_install(){
 # Check for Optimus
 check_optimus(){
     local MIN_XORG_VERSION MIN_NVIDIA_VERSION MAJOR_NVIDIA_VERSION
+    local YELLOW="\033[1;33m" local NC="\033[0m" # No Color
     OPTIMUS=1
 	if lspci -vnn | grep Intel |grep -q 0300 ; then
 		if lspci -vnn | grep NVIDIA | grep -q 0302 ; then
@@ -985,6 +1024,7 @@ check_optimus(){
 			OPTIMUS=2
 		else
 		    #ask if this system has hybrid graphics
+            echo -e "${YELLOW}$(eval_gettext "Answer the next question NO if you are using your Optimus Nvidia card in discrete mode")${NC}"
 			YES_no "$(eval_gettext "Is this a NVIDIA/INTEL Optimus system?")"
 			if [ "$?" = "0" ]; then
 				OPTIMUS=2
@@ -998,7 +1038,7 @@ check_optimus(){
 		return
 	fi
 
-    if [ $OPTIMUS = 2 ]; then
+    if [ "$OPTIMUS" -eq 2 ]; then
         # Bumblebee used to be required, but now NVIDIA drivers support Optimus out of the box.
         # See https://wiki.debian.org/NVIDIA%20Optimus#Using_NVIDIA_PRIME_Render_Offload
         
@@ -1415,6 +1455,36 @@ fi
 	
 update-initramfs -u -k all | tee -a $LOG
 }
+
+#add grub config & module config
+add_nvidia_module_config()
+{
+	echo ""
+	#set up nvidia kernel modules options and grub boot loader options
+	echo $(eval_gettext "adding module options and grub config") |tee -a $LOG
+	#display and log
+	echo 'GRUB_CMDLINE_LINUX="$GRUB_CMDLINE_LINUX nvidia-drm.modeset=1 nvidia-drm.fbdev=1" > /etc/default/grub.d/nvidia-modeset.cfg' |tee -a $LOG
+	echo 'options nvidia NVreg_PreserveVideoMemoryAllocations=1 > /etc/modprobe.d/nvidia-power-management.conf' |tee -a $LOG
+	
+	echo 'GRUB_CMDLINE_LINUX="$GRUB_CMDLINE_LINUX nvidia-drm.modeset=1 nvidia-drm.fbdev=1"' > /etc/default/grub.d/nvidia-modeset.cfg
+	echo 'options nvidia NVreg_PreserveVideoMemoryAllocations=1' > /etc/modprobe.d/nvidia-power-management.conf
+	command -v update-grub && update-grub
+	
+}
+
+#reverse nvidia module changes
+remove_nvidia_module_config()
+{
+    echo ""
+    ##remove nvidia kernel modules options and grub boot loader options
+	echo $(eval_gettext "removing module options and grub config")
+	echo "rm /etc/default/grub.d/nvidia-modeset.cfg" |tee -a $LOG
+	echo "rm /etc/modprobe.d/nvidia-power-management.conf" |tee -a $LOG
+	rm -f /etc/default/grub.d/nvidia-modeset.cfg
+	rm -f /etc/modprobe.d/nvidia-power-management.conf
+	command -v update-grub && update-grub
+}
+
 
 main "$@"
 

@@ -72,6 +72,7 @@ VirtualBox
 
 <install_package_names>
 virtualbox
+virtualbox-qt
 virtualbox-ext-pack
 virtualbox-guest-additions-iso
 </install_package_names>
@@ -84,6 +85,7 @@ gpasswd -M $(getent group users | cut -d: -f4) vboxusers
 
 <uninstall_package_names>
 virtualbox
+virtualbox-qt
 virtualbox-ext-pack
 virtualbox-guest-additions-iso
 </uninstall_package_names>

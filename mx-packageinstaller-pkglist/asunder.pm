@@ -71,6 +71,11 @@ all
 
 <install_package_names>
 asunder
+lame
+flac
+wavpack
+vorbis-tools
+opus-tools
 </install_package_names>
 
 

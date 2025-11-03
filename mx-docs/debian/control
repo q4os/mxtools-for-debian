@@ -11,7 +11,7 @@ Section: doc
 Conflicts:  mx-docs (<20240410)
 Replaces:  mx-docs
 Architecture: all
-Depends: mx-docs-common, mx-docs-ar, mx-docs-de, mx-docs-el, mx-docs-en, mx-docs-es, mx-docs-fr, mx-docs-hu, mx-docs-id, mx-docs-it, mx-docs-ja, mx-docs-nb, mx-docs-nl, mx-docs-pl, mx-docs-pt, mx-docs-ru, mx-docs-tr, mx-docs-zh, mx-faq-common,mx-faq-ar, mx-faq-bg, mx-faq-ca, mx-faq-cs, mx-faq-da, mx-faq-de, mx-faq-el, mx-faq-en, mx-faq-es, mx-faq-fr, mx-faq-hu, mx-faq-id, mx-faq-it, mx-faq-ja, mx-faq-nb, mx-faq-nl, mx-faq-pl, mx-faq-pt, mx-faq-ru, mx-faq-sv, mx-faq-tr, mx-faq-zh
+Depends: mx-docs-common, mx-docs-ar, mx-docs-da, mx-docs-de, mx-docs-el, mx-docs-en, mx-docs-es, mx-docs-fr, mx-docs-hu, mx-docs-id, mx-docs-it, mx-docs-ja, mx-docs-nb, mx-docs-nl, mx-docs-pl, mx-docs-pt, mx-docs-pt-br, mx-docs-ro, mx-docs-ru, mx-docs-sv, mx-docs-tr, mx-docs-zh, mx-faq-common,mx-faq-ar, mx-faq-bg, mx-faq-ca, mx-faq-cs, mx-faq-da, mx-faq-de, mx-faq-el, mx-faq-en, mx-faq-es, mx-faq-fr, mx-faq-hu, mx-faq-id, mx-faq-it, mx-faq-ja, mx-faq-nb, mx-faq-nl, mx-faq-pl, mx-faq-pt, mx-faq-pt-br, mx-faq-ro, mx-faq-ru, mx-faq-sv, mx-faq-tr, mx-faq-zh
 Description: user manual for MX
 	this is a metapackage for MX Manual and FAQ that pulls in all available languages
  
@@ -50,15 +50,6 @@ Architecture: all
 Provides: mxumfaq
 Description: user FAQ for MX 
  MX FAQ in bulgarian
-
-Package: mx-faq-ca
-Section: doc
-Conflicts:  mx-docs (<20240410)
-Replaces:  mx-docs
-Architecture: all
-Provides: mxumfaq
-Description: user FAQ for MX 
- MX FAQ in catalan
 
 Package: mx-faq-cs
 Section: doc
@@ -195,6 +186,24 @@ Provides: mxumfaq
 Description: user FAQ for MX 
  MX FAQ in portugese
  
+Package: mx-faq-pt-br
+Section: doc
+Conflicts:  mx-docs (<20240410)
+Replaces:  mx-docs
+Architecture: all
+Provides: mxumfaq
+Description: user FAQ for MX 
+ MX FAQ in portugese (Brazil)
+ 
+Package: mx-faq-ro
+Section: doc
+Conflicts:  mx-docs (<20240410)
+Replaces:  mx-docs
+Architecture: all
+Provides: mxumfaq
+Description: user FAQ for MX 
+ MX FAQ in romanian
+ 
 Package: mx-faq-ru
 Section: doc
 Conflicts:  mx-docs (<20240410)
@@ -239,6 +248,24 @@ Architecture: all
 Provides: mxum
 Description: user manual for MX 
  MX Manual in arabic
+ 
+Package: mx-docs-bg
+Section: doc
+Conflicts:  mx-docs (<20240410)
+Replaces:  mx-docs
+Architecture: all
+Provides: mxum
+Description: user manual for MX 
+ MX Manual in bugarian
+ 
+Package: mx-docs-da
+Section: doc
+Conflicts:  mx-docs (<20240410)
+Replaces:  mx-docs
+Architecture: all
+Provides: mxum
+Description: user manual for MX 
+ MX Manual in Danish
  
 Package: mx-docs-de
 Section: doc
@@ -357,6 +384,24 @@ Provides: mxum
 Description: user manual for MX 
  MX Manual in portugese
  
+Package: mx-docs-pt-br
+Section: doc
+Conflicts:  mx-docs (<20240410)
+Replaces:  mx-docs
+Architecture: all
+Provides: mxum
+Description: user manual for MX 
+ MX Manual in portugese (Brazil)
+ 
+Package: mx-docs-ro
+Section: doc
+Conflicts:  mx-docs (<20240410)
+Replaces:  mx-docs
+Architecture: all
+Provides: mxum
+Description: user manual for MX 
+ MX Manual in romanian
+ 
 Package: mx-docs-ru
 Section: doc
 Conflicts:  mx-docs (<20240410)
@@ -365,6 +410,15 @@ Architecture: all
 Provides: mxum
 Description: user manual for MX 
  MX Manual in russian
+ 
+Package: mx-docs-sv
+Section: doc
+Conflicts:  mx-docs (<20240410)
+Replaces:  mx-docs
+Architecture: all
+Provides: mxum
+Description: user manual for MX 
+ MX Manual in swedish
  
 Package: mx-docs-tr
 Section: doc

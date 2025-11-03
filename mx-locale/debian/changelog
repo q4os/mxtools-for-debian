@@ -1,3 +1,9 @@
+mx-locale (25.10.1) mx; urgency=medium
+
+  * Fix: special case removal function for pt-br locale
+
+ -- Adrian <adrian@mxlinux.org>  Sat, 11 Oct 2025 22:50:46 -0400
+
 mx-locale (25.08.1) mx; urgency=medium
 
   * Remove 'Set same locale for all categories' button
@@ -45,7 +51,7 @@ mx-locale (24.1.15) mx; urgency=medium
 mx-locale (24.1.14) mx; urgency=medium
 
   * Fix crash when pressing OK without selecting any item
-  * Update translations 
+  * Update translations
 
  -- Adrian <adrian@mxlinux.org>  Wed, 24 Jan 2024 18:25:00 -0500
 
@@ -100,7 +106,7 @@ mx-locale (24.1.07) mx; urgency=medium
 
 mx-locale (24.1.06) mx; urgency=medium
 
-  * filter iso out of choose dialog 
+  * filter iso out of choose dialog
 
  -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 14 Jan 2024 22:56:48 -0500
 

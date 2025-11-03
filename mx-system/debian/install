@@ -13,3 +13,4 @@ os-prober/40grub2 usr/lib/linux-boot-probes/mounted
 xorg.conf.d/* 	usr/share/X11/xorg.conf.d
 sbin/*	usr/sbin
 shim/* usr/lib/shim
+systemd-networkd-wait-online.service.d/* /etc/systemd/system/systemd-networkd-wait-online.service.d/
