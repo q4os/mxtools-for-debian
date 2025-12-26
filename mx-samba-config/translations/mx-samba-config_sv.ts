@@ -1,253 +1,263 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="sv">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="sv">
 <context>
     <name>EditShare</name>
     <message>
-        <location filename="../editshare.ui" line="14"/>
+        <location filename="../src/editshare.ui" line="14"/>
         <source>Dialog</source>
         <translation>Dialog</translation>
     </message>
     <message>
-        <location filename="../editshare.ui" line="20"/>
+        <location filename="../src/editshare.ui" line="20"/>
         <source>&amp;Name</source>
         <translation>&amp;Namn</translation>
     </message>
     <message>
-        <location filename="../editshare.ui" line="30"/>
+        <location filename="../src/editshare.ui" line="30"/>
         <source>...</source>
         <translation>...</translation>
     </message>
     <message>
-        <location filename="../editshare.ui" line="37"/>
+        <location filename="../src/editshare.ui" line="37"/>
         <source>&amp;Path</source>
         <translation>&amp;Sökväg</translation>
     </message>
     <message>
-        <location filename="../editshare.ui" line="51"/>
+        <location filename="../src/editshare.ui" line="51"/>
         <source>Yes</source>
         <translation>Ja</translation>
     </message>
     <message>
-        <location filename="../editshare.ui" line="56"/>
+        <location filename="../src/editshare.ui" line="56"/>
         <source>No</source>
         <translation>Nej</translation>
     </message>
     <message>
-        <location filename="../editshare.ui" line="64"/>
+        <location filename="../src/editshare.ui" line="64"/>
         <source>&amp;Comment</source>
         <translation>&amp;Kommentar</translation>
     </message>
     <message>
-        <location filename="../editshare.ui" line="77"/>
+        <location filename="../src/editshare.ui" line="77"/>
         <source>&amp;Guest OK</source>
         <translation>&amp;Gäst OK</translation>
     </message>
     <message>
-        <location filename="../editshare.ui" line="111"/>
+        <location filename="../src/editshare.ui" line="111"/>
         <source>Access rights for valid users</source>
         <translation>Åtkomsträttigheter för giltiga användare</translation>
     </message>
     <message>
-        <location filename="../editshare.cpp" line="52"/>
+        <location filename="../src/editshare.cpp" line="55"/>
         <source>Select directory to share</source>
         <translation>Välj katalog att dela</translation>
+    </message>
+    <message>
+        <location filename="../src/editshare.cpp" line="81"/>
+        <source>Warning</source>
+        <translation>Varning</translation>
+    </message>
+    <message>
+        <location filename="../src/editshare.cpp" line="81"/>
+        <source>Select access for at least one user before continuing.</source>
+        <translation>Välj åtkomst för åtminstone en användare innan du fortsätter.</translation>
     </message>
 </context>
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../mainwindow.ui" line="24"/>
+        <location filename="../src/mainwindow.ui" line="24"/>
         <source>&amp;Shares</source>
         <translation>An&amp;delar</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="32"/>
+        <location filename="../src/mainwindow.ui" line="32"/>
         <source>Shares</source>
         <translation>Andelar</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="41"/>
+        <location filename="../src/mainwindow.ui" line="41"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;No samba user shares found&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Inga samba användarandelar hittade&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="50"/>
-        <location filename="../mainwindow.ui" line="157"/>
+        <location filename="../src/mainwindow.ui" line="50"/>
+        <location filename="../src/mainwindow.ui" line="157"/>
         <source>&amp;Remove</source>
         <translation>&amp;Ta bort</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="63"/>
-        <location filename="../mainwindow.ui" line="164"/>
+        <location filename="../src/mainwindow.ui" line="63"/>
+        <location filename="../src/mainwindow.ui" line="164"/>
         <source>&amp;Add</source>
         <translation>Lä&amp;gg till</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="70"/>
+        <location filename="../src/mainwindow.ui" line="70"/>
         <source>&amp;Edit</source>
         <translation>&amp;Redigera</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="80"/>
+        <location filename="../src/mainwindow.ui" line="80"/>
         <source>Name</source>
         <translation>Namn</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="85"/>
+        <location filename="../src/mainwindow.ui" line="85"/>
         <source>Path</source>
         <translation>Sökväg</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="90"/>
+        <location filename="../src/mainwindow.ui" line="90"/>
         <source>Comment</source>
         <translation>Kommentar</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="95"/>
+        <location filename="../src/mainwindow.ui" line="95"/>
         <source>Permissions</source>
         <translation>Rättigheter</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="100"/>
+        <location filename="../src/mainwindow.ui" line="100"/>
         <source>Guest OK</source>
         <translation>Gäst OK</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="142"/>
+        <location filename="../src/mainwindow.ui" line="142"/>
         <source>&amp;Users</source>
         <translation>&amp;Användare</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="150"/>
+        <location filename="../src/mainwindow.ui" line="150"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;No samba users found&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Inga samba-användare hittade&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="171"/>
+        <location filename="../src/mainwindow.ui" line="171"/>
         <source>&amp;Password</source>
         <translation>&amp;Lösenord</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="194"/>
+        <location filename="../src/mainwindow.ui" line="194"/>
         <source>Users</source>
         <translation>Användare</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="219"/>
-        <location filename="../mainwindow.cpp" line="296"/>
-        <location filename="../mainwindow.cpp" line="337"/>
+        <location filename="../src/mainwindow.ui" line="219"/>
+        <location filename="../src/mainwindow.cpp" line="320"/>
+        <location filename="../src/mainwindow.cpp" line="361"/>
         <source>E&amp;nable Automatic Samba Startup</source>
         <translation>&amp;Möjliggör Automatisk Samba-start</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="226"/>
-        <location filename="../mainwindow.cpp" line="292"/>
-        <location filename="../mainwindow.cpp" line="347"/>
+        <location filename="../src/mainwindow.ui" line="226"/>
+        <location filename="../src/mainwindow.cpp" line="316"/>
+        <location filename="../src/mainwindow.cpp" line="371"/>
         <source>Star&amp;t Samba</source>
         <translation>Star&amp;ta Samba</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="254"/>
+        <location filename="../src/mainwindow.ui" line="254"/>
         <source>Samba autostart service is disabled</source>
         <translation>Samba autostart service är avstängd</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="285"/>
-        <location filename="../mainwindow.cpp" line="293"/>
+        <location filename="../src/mainwindow.ui" line="285"/>
+        <location filename="../src/mainwindow.cpp" line="317"/>
         <source>Samba is running</source>
         <translation>Samba körs</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="324"/>
+        <location filename="../src/mainwindow.ui" line="324"/>
         <source>About this application</source>
         <translation>Om detta program</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="327"/>
+        <location filename="../src/mainwindow.ui" line="327"/>
         <source>A&amp;bout...</source>
         <translation>O&amp;m...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="333"/>
+        <location filename="../src/mainwindow.ui" line="333"/>
         <source>Alt+B</source>
         <translation>Alt+B</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="365"/>
+        <location filename="../src/mainwindow.ui" line="365"/>
         <source>Display help </source>
         <translation>Visa hjälp</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="368"/>
+        <location filename="../src/mainwindow.ui" line="368"/>
         <source>&amp;Help</source>
         <translation>&amp;Hjälp</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="374"/>
+        <location filename="../src/mainwindow.ui" line="374"/>
         <source>Alt+H</source>
         <translation>Alt+H</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="409"/>
+        <location filename="../src/mainwindow.ui" line="409"/>
         <source>Quit application</source>
         <translation>Avsluta programmet</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="412"/>
+        <location filename="../src/mainwindow.ui" line="412"/>
         <source>&amp;Close</source>
         <translation>&amp;Stäng</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="418"/>
+        <location filename="../src/mainwindow.ui" line="418"/>
         <source>Alt+N</source>
         <translation>Alt+N</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="104"/>
-        <location filename="../mainwindow.cpp" line="109"/>
-        <location filename="../mainwindow.cpp" line="136"/>
-        <location filename="../mainwindow.cpp" line="147"/>
-        <location filename="../mainwindow.cpp" line="203"/>
-        <location filename="../mainwindow.cpp" line="276"/>
-        <location filename="../mainwindow.cpp" line="287"/>
-        <location filename="../mainwindow.cpp" line="386"/>
-        <location filename="../mainwindow.cpp" line="418"/>
-        <location filename="../mainwindow.cpp" line="422"/>
-        <location filename="../mainwindow.cpp" line="428"/>
-        <location filename="../mainwindow.cpp" line="433"/>
-        <location filename="../mainwindow.cpp" line="471"/>
-        <location filename="../mainwindow.cpp" line="476"/>
-        <location filename="../mainwindow.cpp" line="482"/>
-        <location filename="../mainwindow.cpp" line="503"/>
-        <location filename="../mainwindow.cpp" line="520"/>
-        <location filename="../mainwindow.cpp" line="539"/>
-        <location filename="../mainwindow.cpp" line="554"/>
-        <location filename="../mainwindow.cpp" line="569"/>
+        <location filename="../src/mainwindow.cpp" line="104"/>
+        <location filename="../src/mainwindow.cpp" line="109"/>
+        <location filename="../src/mainwindow.cpp" line="137"/>
+        <location filename="../src/mainwindow.cpp" line="151"/>
+        <location filename="../src/mainwindow.cpp" line="162"/>
+        <location filename="../src/mainwindow.cpp" line="218"/>
+        <location filename="../src/mainwindow.cpp" line="300"/>
+        <location filename="../src/mainwindow.cpp" line="311"/>
+        <location filename="../src/mainwindow.cpp" line="410"/>
+        <location filename="../src/mainwindow.cpp" line="442"/>
+        <location filename="../src/mainwindow.cpp" line="446"/>
+        <location filename="../src/mainwindow.cpp" line="452"/>
+        <location filename="../src/mainwindow.cpp" line="459"/>
+        <location filename="../src/mainwindow.cpp" line="497"/>
+        <location filename="../src/mainwindow.cpp" line="502"/>
+        <location filename="../src/mainwindow.cpp" line="510"/>
+        <location filename="../src/mainwindow.cpp" line="531"/>
+        <location filename="../src/mainwindow.cpp" line="548"/>
+        <location filename="../src/mainwindow.cpp" line="567"/>
+        <location filename="../src/mainwindow.cpp" line="582"/>
+        <location filename="../src/mainwindow.cpp" line="597"/>
         <source>Error</source>
         <translation>Fel</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="104"/>
+        <location filename="../src/mainwindow.cpp" line="104"/>
         <source>Error, could not add share. Empty share name</source>
         <translation>Fel, kunde inte lägga till andel. Tomt andelsnamn</translation>
     </message>
     <message>
-        <source>Path: %1 doesn&apos;t exist.</source>
-        <translation type="vanished">Sökväg: %1 finns inte.</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="101"/>
+        <location filename="../src/mainwindow.cpp" line="101"/>
         <source>Yes</source>
         <translation>Ja</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="109"/>
+        <location filename="../src/mainwindow.cpp" line="109"/>
         <source>Path: %1 does not exist.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sökväg: %1 finns inte.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="137"/>
+        <location filename="../src/mainwindow.cpp" line="137"/>
+        <source>Please set access for at least one user.</source>
+        <translation>Var vänlig, ställ in åtkomst för åtminstone en användare.</translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="152"/>
         <source>Could not add share. Error message:
 
 %1</source>
@@ -256,248 +266,240 @@
 %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="147"/>
+        <location filename="../src/mainwindow.cpp" line="162"/>
         <source>Error listing users</source>
         <translation>Fel vid listning av användare</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="186"/>
+        <location filename="../src/mainwindow.cpp" line="201"/>
         <source>&amp;Deny</source>
         <translation>N&amp;eka</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="187"/>
+        <location filename="../src/mainwindow.cpp" line="202"/>
         <source>&amp;Read Only</source>
         <translation>Re&amp;ad Only</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="188"/>
+        <location filename="../src/mainwindow.cpp" line="203"/>
         <source>&amp;Full Access</source>
         <translation>&amp;Full Access</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="203"/>
+        <location filename="../src/mainwindow.cpp" line="218"/>
         <source>Error listing shares</source>
         <translation>Fel vid listning av andelar</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="277"/>
+        <location filename="../src/mainwindow.cpp" line="301"/>
         <source>Your user doesn&apos;t belong to &apos;sambashare&apos; group  if you just installed the app you might need to restart the system first.</source>
         <translation>Din användare hör inte till &apos;sambashare&apos; gruppen  Om du just har installerat appen kan du behöva starta om systemet först.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="287"/>
+        <location filename="../src/mainwindow.cpp" line="311"/>
         <source>Samba is not installed</source>
-        <translation type="unfinished"></translation>
+        <translation>Samba är inte installerat</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="292"/>
+        <location filename="../src/mainwindow.cpp" line="316"/>
         <source>Sto&amp;p Samba</source>
         <translation>Sto&amp;ppa Samba</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="293"/>
+        <location filename="../src/mainwindow.cpp" line="317"/>
         <source>Samba is not running</source>
         <translation>Samba körs inte</translation>
     </message>
     <message>
-        <source>Samba not installed</source>
-        <translation type="vanished">Samba är inte installerad</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="294"/>
+        <location filename="../src/mainwindow.cpp" line="318"/>
         <source>Samba autostart is enabled</source>
-        <translation type="unfinished"></translation>
+        <translation>Samba autostart är aktiverad</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="294"/>
+        <location filename="../src/mainwindow.cpp" line="318"/>
         <source>Samba autostart is disabled</source>
-        <translation type="unfinished"></translation>
+        <translation>Samba autostart är avaktiverad</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="295"/>
+        <location filename="../src/mainwindow.cpp" line="319"/>
         <source>&amp;Disable Automatic Samba Startup</source>
         <translation>Stä&amp;ng av Automatisk Samba-Start</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="362"/>
+        <location filename="../src/mainwindow.cpp" line="386"/>
         <source>About %1</source>
         <translation>Om %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="362"/>
+        <location filename="../src/mainwindow.cpp" line="386"/>
         <source>MX Samba Config</source>
         <translation>MX Samba Config</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="363"/>
+        <location filename="../src/mainwindow.cpp" line="387"/>
         <source>Version: </source>
         <translation>Version:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="365"/>
+        <location filename="../src/mainwindow.cpp" line="389"/>
         <source>Program for configuring Samba shares and users.</source>
         <translation>Program för att konfigurera Samba-andelar och användare.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="367"/>
+        <location filename="../src/mainwindow.cpp" line="391"/>
         <source>Copyright (c) MX Linux</source>
         <translation>Copyright (c) MX Linux</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="368"/>
+        <location filename="../src/mainwindow.cpp" line="392"/>
         <source>%1 License</source>
         <translation>%1 Licens</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="375"/>
+        <location filename="../src/mainwindow.cpp" line="399"/>
         <source>%1 Help</source>
         <translation>%1 Hjälp</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="386"/>
+        <location filename="../src/mainwindow.cpp" line="410"/>
         <source>Cannot delete user: </source>
         <translation>Kan inte ta bort användare</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="395"/>
+        <location filename="../src/mainwindow.cpp" line="419"/>
         <source>Enter the username and password:</source>
         <translation>Skriv in användarnamn och lösenord:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="402"/>
+        <location filename="../src/mainwindow.cpp" line="426"/>
         <source>Username:</source>
         <translation>Användarnamn:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="403"/>
-        <location filename="../mainwindow.cpp" line="457"/>
+        <location filename="../src/mainwindow.cpp" line="427"/>
+        <location filename="../src/mainwindow.cpp" line="483"/>
         <source>Password:</source>
         <translation>Lösenord:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="404"/>
-        <location filename="../mainwindow.cpp" line="458"/>
+        <location filename="../src/mainwindow.cpp" line="428"/>
+        <location filename="../src/mainwindow.cpp" line="484"/>
         <source>Confirm password:</source>
         <translation>Bekräfta lösenord: </translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="418"/>
+        <location filename="../src/mainwindow.cpp" line="442"/>
         <source>Empty username, please enter a name.</source>
         <translation>Tomt användarnamn, var vänlig lägg till ett namn.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="423"/>
+        <location filename="../src/mainwindow.cpp" line="447"/>
         <source>Matching linux user not found on system, make sure you enter a valid username.</source>
         <translation>Matchande linuxanvändare inte hittad i systemet, var säker på att lägga till ett giltigt användarnamn.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="428"/>
-        <location filename="../mainwindow.cpp" line="476"/>
+        <location filename="../src/mainwindow.cpp" line="452"/>
+        <location filename="../src/mainwindow.cpp" line="502"/>
         <source>Passwords don&apos;t match, please enter again.</source>
         <translation>Lösenorden stämmer inte överens, var vänlig skriv dom igen.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="433"/>
+        <location filename="../src/mainwindow.cpp" line="459"/>
         <source>Could not add user.</source>
         <translation>Kunde inte lägga till användare.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="444"/>
-        <location filename="../mainwindow.cpp" line="492"/>
-        <location filename="../mainwindow.cpp" line="498"/>
-        <location filename="../mainwindow.cpp" line="515"/>
+        <location filename="../src/mainwindow.cpp" line="470"/>
+        <location filename="../src/mainwindow.cpp" line="520"/>
+        <location filename="../src/mainwindow.cpp" line="526"/>
+        <location filename="../src/mainwindow.cpp" line="543"/>
         <source>Warning</source>
-        <translation type="unfinished"></translation>
+        <translation>Varning</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="444"/>
+        <location filename="../src/mainwindow.cpp" line="470"/>
         <source>No user selected.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ingen användare vald.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="451"/>
+        <location filename="../src/mainwindow.cpp" line="477"/>
         <source>Change the password for &apos;%1&apos;</source>
         <translation>Byta lösenord för &apos;%1&apos;</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="471"/>
+        <location filename="../src/mainwindow.cpp" line="497"/>
         <source>Password fields cannot be empty.</source>
-        <translation type="unfinished"></translation>
+        <translation>Lösenordsfält kan inte vara tomma.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="482"/>
+        <location filename="../src/mainwindow.cpp" line="510"/>
         <source>Could not change password.</source>
         <translation>Kunde inte byta lösenord.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="492"/>
-        <location filename="../mainwindow.cpp" line="515"/>
+        <location filename="../src/mainwindow.cpp" line="520"/>
+        <location filename="../src/mainwindow.cpp" line="543"/>
         <source>No share selected.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ingen andel vald.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="498"/>
+        <location filename="../src/mainwindow.cpp" line="526"/>
         <source>Selected share is empty.</source>
-        <translation type="unfinished"></translation>
+        <translation>Vald andel är tom.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="503"/>
+        <location filename="../src/mainwindow.cpp" line="531"/>
         <source>Cannot delete share: </source>
         <translation>Kan inte ta bort andel:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="508"/>
+        <location filename="../src/mainwindow.cpp" line="536"/>
         <source>Success</source>
-        <translation type="unfinished"></translation>
+        <translation>Det lyckades</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="508"/>
+        <location filename="../src/mainwindow.cpp" line="536"/>
         <source>Share deleted successfully: </source>
-        <translation type="unfinished"></translation>
+        <translation>Andel framgångsrikt borttagen.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="521"/>
-        <location filename="../mainwindow.cpp" line="570"/>
+        <location filename="../src/mainwindow.cpp" line="549"/>
+        <location filename="../src/mainwindow.cpp" line="598"/>
         <source>Samba service is not running. Please start Samba before adding or editing shares</source>
         <translation>Sambatjänsten körs inte. Var vänlig starta Samba innan du lägger till eller redigerar andelar</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="539"/>
-        <location filename="../mainwindow.cpp" line="554"/>
+        <location filename="../src/mainwindow.cpp" line="567"/>
+        <location filename="../src/mainwindow.cpp" line="582"/>
         <source>Error processing permissions: </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Error: trying to process permissions: </source>
-        <translation type="vanished">Fel: försöker behandla rättigheter:</translation>
+        <translation>Fel vid behandling av rättigheter:</translation>
     </message>
 </context>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../about.cpp" line="42"/>
+        <location filename="../src/about.cpp" line="41"/>
         <source>License</source>
         <translation>Licens</translation>
     </message>
     <message>
-        <location filename="../about.cpp" line="43"/>
-        <location filename="../about.cpp" line="52"/>
+        <location filename="../src/about.cpp" line="42"/>
+        <location filename="../src/about.cpp" line="51"/>
         <source>Changelog</source>
         <translation>Ändringslogg</translation>
     </message>
     <message>
-        <location filename="../about.cpp" line="44"/>
+        <location filename="../src/about.cpp" line="43"/>
         <source>Cancel</source>
         <translation>Avbryt</translation>
     </message>
     <message>
-        <location filename="../about.cpp" line="64"/>
+        <location filename="../src/about.cpp" line="63"/>
         <source>&amp;Close</source>
         <translation>&amp;Stäng</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="64"/>
+        <location filename="../src/main.cpp" line="76"/>
         <source>You must run this program as normal user.</source>
         <translation>Du måste köra det här programmet som vanlig användare.</translation>
     </message>

@@ -6,8 +6,8 @@
 # Translators:
 # Geoff Gigg <geoffgigg@hotmail.com>, 2022
 # José Vieira <jvieira33@sapo.pt>, 2022
-# Hugo Carvalho <hugokarvalho@hotmail.com>, 2022
 # marcelo cripe <marcelocripe@gmail.com>, 2022
+# Hugo Carvalho <hugokarvalho@hotmail.com>, 2024
 # 
 #, fuzzy
 msgid ""
@@ -16,7 +16,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-01-16 00:46+0100\n"
 "PO-Revision-Date: 2022-01-21 17:21+0000\n"
-"Last-Translator: marcelo cripe <marcelocripe@gmail.com>, 2022\n"
+"Last-Translator: Hugo Carvalho <hugokarvalho@hotmail.com>, 2024\n"
 "Language-Team: Portuguese (https://app.transifex.com/anticapitalista/teams/10162/pt/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -39,7 +39,7 @@ msgstr "<b>Controlador</b>"
 
 #: ../data/disk-manager.glade.h:2
 msgid "This driver seems to not be available for this type."
-msgstr "Parece que este controlador não estar disponível para este tipo."
+msgstr "Parece que este controlador não está disponível para este tipo."
 
 #: ../data/disk-manager.glade.h:3
 msgid "<b>Mount point</b>"
@@ -141,7 +141,7 @@ msgstr "Gestor de Discos"
 
 #: ../data/disk-manager.desktop.in.in.h:2
 msgid "Manage filesystem configuration"
-msgstr "Gerir a configuração do sistema de ficcheiros"
+msgstr "Gerir a configuração do sistema de ficheiros"
 
 #: ../DiskManager/Dialogs.py:127 ../DiskManager/Fstab/Mounter.py:206
 #, python-format
@@ -243,7 +243,9 @@ msgstr "Forma simples de gerir a configuração do sistema de ficheiros"
 
 #: ../DiskManager/Dialogs.py:510
 msgid "translator-credits"
-msgstr "Créditos de tradução"
+msgstr ""
+"Hugo Carvalho <hugokarvalho@htomail.com>\n"
+"José Vieira <jvieira33@sapo.pt>"
 
 #: ../DiskManager/DiskManager.py:132
 msgid "Enable"

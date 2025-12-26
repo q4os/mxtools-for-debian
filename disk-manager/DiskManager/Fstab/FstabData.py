@@ -25,25 +25,26 @@ from pwd import getpwnam
 uid = getpwnam(os.getlogin())[2]
 gid = grp.getgrnam('users')[2]
 
-gvfs = ""
-if os.path.exists("/etc/mx-version"):
-    gvfs = ",x-gvfs-show"
+gvfs = ",x-gvfs-show"
 
-# Default options for an fs
+# Default filesystem options
 defaults = { "btrfs"        :   ("defaults" + gvfs, "0", "2"),
-             "ext3"         :   ("defaults" + gvfs, "0", "2"),
-             "ext2"         :   ("defaults" + gvfs, "0", "2"),
+             "ext4"         :   ("defaults,noatime" + gvfs, "0", "2"),
+             "ext3"         :   ("defaults,noatime" + gvfs, "0", "2"),
+             "ext2"         :   ("defaults,noatime" + gvfs, "0", "2"),
              "exfat"        :   ("defaults" + ",uid=" + str(uid) + ",gid=" + str(gid) + ",dmask=0002,fmask=0113,utf8" + gvfs, "0", "2"),
              "exfat-fuse"   :   ("defaults" + ",uid=" + str(uid) + ",gid=" + str(gid) + ",dmask=0002,fmask=0113,iocharset=utf8,namecase=0,nonempty" + gvfs, "0", "2"),
              "vfat"         :   ("defaults" + ",uid=" + str(uid) + ",gid=" + str(gid) + ",dmask=0002,fmask=0113,utf8" + gvfs, "0", "2"),
-             "ntfs"         :   ("defaults,umask=0222" + gvfs, "0", "0"),
+             "ntfs"         :   ("defaults" + ",uid=" + str(uid) + ",gid=" + str(gid) + ",dmask=0002,fmask=0113,utf8" + gvfs, "0", "0"),
              "ntfs-3g"      :   ("defaults" + ",uid=" + str(uid) + ",gid=" + str(gid) + ",dmask=0002,fmask=0113,utf8" + gvfs, "0", "0"),
+             "ntfs3"        :   ("defaults" + ",uid=" + str(uid) + ",gid=" + str(gid) + ",dmask=0002,fmask=0113,iocharset=utf8" + gvfs, "0", "0"),
              "jfs"          :   ("defaults,iocharset=utf8" + gvfs, "0", "0"),
              "__default__"  :   ("defaults" + gvfs, "0", "0")}
 
 # Known special driver
 special_driver = { "ntfs-3g"    : "Read-write driver",
-                   "ntfs"       : "Read-only driver",
+                   "ntfs3"      : "Read-write kernel driver",
+                   "ntfs"       : "Read-write driver",
                    "ntfs-fuse"  : "Read-write driver",
                    "__unknow__" : "Unknow driver" }
 
@@ -70,7 +71,7 @@ virtual_dev = ("proc", "devpts", "tmpfs", "sysfs", "shmfs", "usbfs")
 # Common options. Keep them when we change fs
 common = ("atime","noatime","diratime","nodiratime","auto","noauto","dev","nodev","exec",\
           "noexec","mand","nomand","user","nouser","users","group","_netdev","owner","suid","nosuid",\
-          "ro","rw","sync","async","dirsync")
+          "ro","rw","sync","async","dirsync", "x-gvfs-show", "nofail")
 
 # List of options that don't require a remount
 dont_need_remount = ("auto", "noauto", "check=none", "nocheck", "errors=continue", "errors=remount-ro", "error=panic")

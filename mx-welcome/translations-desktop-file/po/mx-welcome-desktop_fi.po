@@ -4,8 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# En Kerro <inactive+ekeimaja@transifex.com>, 2022
-# Kimmo Kujansuu <mrkujansuu@gmail.com>, 2023
+# Kimmo Kujansuu <mrkujansuu@gmail.com>, 2025
 # 
 #, fuzzy
 msgid ""
@@ -14,7 +13,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-12-04 21:38-0500\n"
 "PO-Revision-Date: 2022-12-09 04:15+0000\n"
-"Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>, 2023\n"
+"Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>, 2025\n"
 "Language-Team: Finnish (https://app.transifex.com/anticapitalista/teams/10162/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -30,14 +29,14 @@ msgstr "Tietoja MX Linux"
 #. # The desktop entry comment will be shown within the menu.
 #: desktop-in/about-mx-linux.desktop.in:7
 msgid "View basic info about your MX install"
-msgstr "Katso MX tietoja sinun asennuksesta"
+msgstr "Katso perustietoa sinun MX-asennuksesta"
 
 #. The desktop entry name will be displayed within the menu.
 #: desktop-in/mx-welcome.desktop.in:5
 msgid "MX Welcome"
-msgstr "MX Tervetulo-ohjelma"
+msgstr "MX Tervetuloa"
 
 #. # The desktop entry comment will be shown within the menu.
 #: desktop-in/mx-welcome.desktop.in:7
 msgid "Display welcome message"
-msgstr "Näytä tervetuloa viesti"
+msgstr "Näyttää tiivistetyn ohjeen ja tiedot"

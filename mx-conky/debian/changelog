@@ -1,3 +1,10 @@
+mx-conky (25.11) mx; urgency=medium
+
+  * 1e23e48 Improve font linking/copying logic
+  * 5006aae Allow conkys defined in hidden files
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 14 Nov 2025 12:04:52 -0500
+
 mx-conky (25.10.9) mx; urgency=medium
 
   * Additional conky detection fix

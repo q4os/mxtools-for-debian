@@ -6,6 +6,7 @@
 # Translators:
 # anticapitalista <anticapitalista@riseup.net>, 2023
 # fehlix, 2023
+# Adrian, 2024
 # 
 #, fuzzy
 msgid ""
@@ -14,7 +15,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://forum.mxlinux.org/viewforum.php?f=96\n"
 "POT-Creation-Date: 2023-04-05 01:28+0200\n"
 "PO-Revision-Date: 2023-04-04 23:53+0000\n"
-"Last-Translator: fehlix, 2023\n"
+"Last-Translator: Adrian, 2024\n"
 "Language-Team: Greek (https://app.transifex.com/anticapitalista/teams/10162/el/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -50,10 +51,10 @@ msgstr "Καθαρισμός"
 #. The autostart desktop name will be shown within 'Session and Startup'
 #. (Autostart).
 msgid "Cleanup Notifier"
-msgstr ""
+msgstr "Ειδοποιητής Καθαρισμού"
 
 #. TRANSLATORS:
 #. The autostart desktop entry comment will be shown within 'Session and
 #. Startup' (Autostart).
 msgid "Check available space at /boot"
-msgstr ""
+msgstr "Έλεγχος διαθέσιμου χώρου στο /boot"

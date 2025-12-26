@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 17.0.0, 2025-09-11T16:19:35. -->
+<!-- Written by QtCreator 17.0.2, 2025-12-04T23:49:59. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -71,12 +71,7 @@
     <value type="bool" key="AutoTest.Framework.QtTest">true</value>
    </valuemap>
    <value type="bool" key="AutoTest.ApplyFilter">false</value>
-   <valuemap type="QVariantMap" key="AutoTest.CheckStates">
-    <value type="Qt::CheckState" key="1@/home/adrian/Sync/programs/qt/mx-packageinstaller/Testing/test_aptcache.cpp:cleanupTestCase">Unchecked</value>
-    <value type="Qt::CheckState" key="1@/home/adrian/Sync/programs/qt/mx-packageinstaller/Testing/test_aptcache.cpp:initTestCase">Unchecked</value>
-    <value type="Qt::CheckState" key="1@/home/adrian/Sync/programs/qt/mx-packageinstaller/Testing/test_versionnumber.cpp:cleanupTestCase">Unchecked</value>
-    <value type="Qt::CheckState" key="1@/home/adrian/Sync/programs/qt/mx-packageinstaller/Testing/test_versionnumber.cpp:initTestCase">Unchecked</value>
-   </valuemap>
+   <valuemap type="QVariantMap" key="AutoTest.CheckStates"/>
    <valuelist type="QVariantList" key="AutoTest.PathFilters"/>
    <value type="int" key="AutoTest.RunAfterBuild">0</value>
    <value type="bool" key="AutoTest.UseGlobal">true</value>
@@ -114,15 +109,15 @@
     <value type="int" key="CMake.Configure.BaseEnvironment">2</value>
     <value type="bool" key="CMake.Configure.ClearSystemEnvironment">false</value>
     <valuelist type="QVariantList" key="CMake.Configure.UserEnvironmentChanges"/>
-    <value type="QString" key="CMake.Initial.Parameters">-DCMAKE_COLOR_DIAGNOSTICS:BOOL=ON
--DCMAKE_CXX_FLAGS_INIT:STRING=%{Qt:QML_DEBUG_FLAG}
--DCMAKE_BUILD_TYPE:STRING=Release
+    <value type="QString" key="CMake.Initial.Parameters">-DCMAKE_BUILD_TYPE:STRING=Release
+-DCMAKE_C_COMPILER:STRING=%{Compiler:Executable:C}
 -DCMAKE_PROJECT_INCLUDE_BEFORE:FILEPATH=%{BuildConfig:BuildDirectory:NativeFilePath}/.qtc/package-manager/auto-setup.cmake
--DQT_QMAKE_EXECUTABLE:STRING=%{Qt:qmakeExecutable}
--DCMAKE_GENERATOR:STRING=Unix Makefiles
+-DCMAKE_COLOR_DIAGNOSTICS:BOOL=ON
 -DCMAKE_CXX_COMPILER:STRING=%{Compiler:Executable:Cxx}
--DCMAKE_PREFIX_PATH:STRING=%{Qt:QT_INSTALL_PREFIX}
--DCMAKE_C_COMPILER:STRING=%{Compiler:Executable:C}</value>
+-DQT_QMAKE_EXECUTABLE:STRING=%{Qt:qmakeExecutable}
+-DCMAKE_CXX_FLAGS_INIT:STRING=%{Qt:QML_DEBUG_FLAG}
+-DCMAKE_GENERATOR:STRING=Unix Makefiles
+-DCMAKE_PREFIX_PATH:STRING=%{Qt:QT_INSTALL_PREFIX}</value>
     <value type="QString" key="CMake.Source.Directory">/home/adrian/Sync/programs/qt/mx-packageinstaller</value>
     <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory">/home/adrian/Sync/programs/qt/mx-packageinstaller/build</value>
     <valuemap type="QVariantMap" key="ProjectExplorer.BuildConfiguration.BuildStepList.0">
@@ -235,47 +230,7 @@
      <value type="bool" key="RunConfiguration.UseQmlDebuggerAuto">true</value>
      <value type="QString" key="RunConfiguration.WorkingDirectory.default">/home/adrian/Sync/programs/qt/mx-packageinstaller/build</value>
     </valuemap>
-    <valuemap type="QVariantMap" key="ProjectExplorer.Target.RunConfiguration.1">
-     <value type="bool" key="Analyzer.Perf.Settings.UseGlobalSettings">true</value>
-     <value type="bool" key="Analyzer.QmlProfiler.Settings.UseGlobalSettings">true</value>
-     <value type="int" key="Analyzer.Valgrind.Callgrind.CostFormat">0</value>
-     <value type="bool" key="Analyzer.Valgrind.Settings.UseGlobalSettings">true</value>
-     <value type="QList&lt;int&gt;" key="Analyzer.Valgrind.VisibleErrorKinds"></value>
-     <valuelist type="QVariantList" key="CustomOutputParsers"/>
-     <value type="int" key="PE.EnvironmentAspect.Base">2</value>
-     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
-     <value type="bool" key="PE.EnvironmentAspect.PrintOnRun">false</value>
-     <value type="QString" key="PerfRecordArgsId">-e cpu-cycles --call-graph dwarf,4096 -F 250</value>
-     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">test_aptcache</value>
-     <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">CMakeProjectManager.CMakeRunConfiguration.</value>
-     <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">test_aptcache</value>
-     <value type="bool" key="ProjectExplorer.RunConfiguration.Customized">false</value>
-     <value type="bool" key="RunConfiguration.UseCppDebuggerAuto">true</value>
-     <value type="bool" key="RunConfiguration.UseLibrarySearchPath">true</value>
-     <value type="bool" key="RunConfiguration.UseQmlDebuggerAuto">true</value>
-     <value type="QString" key="RunConfiguration.WorkingDirectory.default">/home/adrian/Sync/programs/qt/mx-packageinstaller/build/Testing</value>
-    </valuemap>
-    <valuemap type="QVariantMap" key="ProjectExplorer.Target.RunConfiguration.2">
-     <value type="bool" key="Analyzer.Perf.Settings.UseGlobalSettings">true</value>
-     <value type="bool" key="Analyzer.QmlProfiler.Settings.UseGlobalSettings">true</value>
-     <value type="int" key="Analyzer.Valgrind.Callgrind.CostFormat">0</value>
-     <value type="bool" key="Analyzer.Valgrind.Settings.UseGlobalSettings">true</value>
-     <value type="QList&lt;int&gt;" key="Analyzer.Valgrind.VisibleErrorKinds"></value>
-     <valuelist type="QVariantList" key="CustomOutputParsers"/>
-     <value type="int" key="PE.EnvironmentAspect.Base">2</value>
-     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
-     <value type="bool" key="PE.EnvironmentAspect.PrintOnRun">false</value>
-     <value type="QString" key="PerfRecordArgsId">-e cpu-cycles --call-graph dwarf,4096 -F 250</value>
-     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">test_versionnumber</value>
-     <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">CMakeProjectManager.CMakeRunConfiguration.</value>
-     <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">test_versionnumber</value>
-     <value type="bool" key="ProjectExplorer.RunConfiguration.Customized">false</value>
-     <value type="bool" key="RunConfiguration.UseCppDebuggerAuto">true</value>
-     <value type="bool" key="RunConfiguration.UseLibrarySearchPath">true</value>
-     <value type="bool" key="RunConfiguration.UseQmlDebuggerAuto">true</value>
-     <value type="QString" key="RunConfiguration.WorkingDirectory.default">/home/adrian/Sync/programs/qt/mx-packageinstaller/build/Testing</value>
-    </valuemap>
-    <value type="qlonglong" key="ProjectExplorer.Target.RunConfigurationCount">3</value>
+    <value type="qlonglong" key="ProjectExplorer.Target.RunConfigurationCount">1</value>
    </valuemap>
    <value type="qlonglong" key="ProjectExplorer.Target.BuildConfigurationCount">1</value>
    <valuemap type="QVariantMap" key="ProjectExplorer.Target.DeployConfiguration.0">
@@ -345,47 +300,7 @@
     <value type="bool" key="RunConfiguration.UseQmlDebuggerAuto">true</value>
     <value type="QString" key="RunConfiguration.WorkingDirectory.default">/home/adrian/Sync/programs/qt/mx-packageinstaller/build</value>
    </valuemap>
-   <valuemap type="QVariantMap" key="ProjectExplorer.Target.RunConfiguration.1">
-    <value type="bool" key="Analyzer.Perf.Settings.UseGlobalSettings">true</value>
-    <value type="bool" key="Analyzer.QmlProfiler.Settings.UseGlobalSettings">true</value>
-    <value type="int" key="Analyzer.Valgrind.Callgrind.CostFormat">0</value>
-    <value type="bool" key="Analyzer.Valgrind.Settings.UseGlobalSettings">true</value>
-    <value type="QList&lt;int&gt;" key="Analyzer.Valgrind.VisibleErrorKinds"></value>
-    <valuelist type="QVariantList" key="CustomOutputParsers"/>
-    <value type="int" key="PE.EnvironmentAspect.Base">2</value>
-    <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
-    <value type="bool" key="PE.EnvironmentAspect.PrintOnRun">false</value>
-    <value type="QString" key="PerfRecordArgsId">-e cpu-cycles --call-graph dwarf,4096 -F 250</value>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">test_aptcache</value>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">CMakeProjectManager.CMakeRunConfiguration.</value>
-    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">test_aptcache</value>
-    <value type="bool" key="ProjectExplorer.RunConfiguration.Customized">false</value>
-    <value type="bool" key="RunConfiguration.UseCppDebuggerAuto">true</value>
-    <value type="bool" key="RunConfiguration.UseLibrarySearchPath">true</value>
-    <value type="bool" key="RunConfiguration.UseQmlDebuggerAuto">true</value>
-    <value type="QString" key="RunConfiguration.WorkingDirectory.default">/home/adrian/Sync/programs/qt/mx-packageinstaller/build/Testing</value>
-   </valuemap>
-   <valuemap type="QVariantMap" key="ProjectExplorer.Target.RunConfiguration.2">
-    <value type="bool" key="Analyzer.Perf.Settings.UseGlobalSettings">true</value>
-    <value type="bool" key="Analyzer.QmlProfiler.Settings.UseGlobalSettings">true</value>
-    <value type="int" key="Analyzer.Valgrind.Callgrind.CostFormat">0</value>
-    <value type="bool" key="Analyzer.Valgrind.Settings.UseGlobalSettings">true</value>
-    <value type="QList&lt;int&gt;" key="Analyzer.Valgrind.VisibleErrorKinds"></value>
-    <valuelist type="QVariantList" key="CustomOutputParsers"/>
-    <value type="int" key="PE.EnvironmentAspect.Base">2</value>
-    <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
-    <value type="bool" key="PE.EnvironmentAspect.PrintOnRun">false</value>
-    <value type="QString" key="PerfRecordArgsId">-e cpu-cycles --call-graph dwarf,4096 -F 250</value>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">test_versionnumber</value>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">CMakeProjectManager.CMakeRunConfiguration.</value>
-    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">test_versionnumber</value>
-    <value type="bool" key="ProjectExplorer.RunConfiguration.Customized">false</value>
-    <value type="bool" key="RunConfiguration.UseCppDebuggerAuto">true</value>
-    <value type="bool" key="RunConfiguration.UseLibrarySearchPath">true</value>
-    <value type="bool" key="RunConfiguration.UseQmlDebuggerAuto">true</value>
-    <value type="QString" key="RunConfiguration.WorkingDirectory.default">/home/adrian/Sync/programs/qt/mx-packageinstaller/build/Testing</value>
-   </valuemap>
-   <value type="qlonglong" key="ProjectExplorer.Target.RunConfigurationCount">3</value>
+   <value type="qlonglong" key="ProjectExplorer.Target.RunConfigurationCount">1</value>
   </valuemap>
  </data>
  <data>
@@ -404,15 +319,15 @@
     <value type="int" key="CMake.Configure.BaseEnvironment">2</value>
     <value type="bool" key="CMake.Configure.ClearSystemEnvironment">false</value>
     <valuelist type="QVariantList" key="CMake.Configure.UserEnvironmentChanges"/>
-    <value type="QString" key="CMake.Initial.Parameters">-DCMAKE_COLOR_DIAGNOSTICS:BOOL=ON
--DCMAKE_CXX_FLAGS_INIT:STRING=%{Qt:QML_DEBUG_FLAG}
--DCMAKE_BUILD_TYPE:STRING=Release
+    <value type="QString" key="CMake.Initial.Parameters">-DCMAKE_BUILD_TYPE:STRING=Release
+-DCMAKE_C_COMPILER:STRING=%{Compiler:Executable:C}
 -DCMAKE_PROJECT_INCLUDE_BEFORE:FILEPATH=%{BuildConfig:BuildDirectory:NativeFilePath}/.qtc/package-manager/auto-setup.cmake
--DQT_QMAKE_EXECUTABLE:STRING=%{Qt:qmakeExecutable}
--DCMAKE_GENERATOR:STRING=Unix Makefiles
+-DCMAKE_COLOR_DIAGNOSTICS:BOOL=ON
 -DCMAKE_CXX_COMPILER:STRING=%{Compiler:Executable:Cxx}
--DCMAKE_PREFIX_PATH:STRING=%{Qt:QT_INSTALL_PREFIX}
--DCMAKE_C_COMPILER:STRING=%{Compiler:Executable:C}</value>
+-DQT_QMAKE_EXECUTABLE:STRING=%{Qt:qmakeExecutable}
+-DCMAKE_CXX_FLAGS_INIT:STRING=%{Qt:QML_DEBUG_FLAG}
+-DCMAKE_GENERATOR:STRING=Unix Makefiles
+-DCMAKE_PREFIX_PATH:STRING=%{Qt:QT_INSTALL_PREFIX}</value>
     <value type="QString" key="CMake.Source.Directory">/home/adrian/Sync/programs/qt/mx-packageinstaller</value>
     <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory">/home/adrian/Sync/programs/qt/mx-packageinstaller/build</value>
     <valuemap type="QVariantMap" key="ProjectExplorer.BuildConfiguration.BuildStepList.0">

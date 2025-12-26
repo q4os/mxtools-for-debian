@@ -151,5 +151,4 @@ if [ -h /etc/systemd/system/initrd.target ]; then
 	fi
 fi
 
-
 exit 0

@@ -5,10 +5,10 @@ case "$1" in
       echo "Adding initrd_release ..."
       cat > "/etc/initrd_release" <<EOF
 NAME="MX"
-VERSION="12.x (Bookworm)"
+VERSION="13.x (Trixie)"
 ID="mx"
 VERSION_ID="12.x"
-PRETTY_NAME="Debian 12.x (Bookworm)"
+PRETTY_NAME="Debian 13.x (Trixie)"
 ANSI_COLOR="0;34"
 HOME_URL="https://debian.org"
 BUG_REPORT_URL="https://debian.org"

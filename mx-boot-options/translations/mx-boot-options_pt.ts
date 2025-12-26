@@ -191,267 +191,284 @@
         <translation>Aplicar</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="99"/>
+        <location filename="../src/mainwindow.cpp" line="110"/>
         <source>Still running</source>
         <translation>Ainda em execução</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="382"/>
-        <location filename="../src/mainwindow.cpp" line="390"/>
-        <location filename="../src/mainwindow.cpp" line="424"/>
-        <location filename="../src/mainwindow.cpp" line="535"/>
-        <location filename="../src/mainwindow.cpp" line="1360"/>
-        <location filename="../src/mainwindow.cpp" line="1373"/>
-        <location filename="../src/mainwindow.cpp" line="1379"/>
+        <location filename="../src/mainwindow.cpp" line="412"/>
+        <location filename="../src/mainwindow.cpp" line="420"/>
+        <location filename="../src/mainwindow.cpp" line="454"/>
+        <location filename="../src/mainwindow.cpp" line="565"/>
+        <location filename="../src/mainwindow.cpp" line="1415"/>
+        <location filename="../src/mainwindow.cpp" line="1428"/>
+        <location filename="../src/mainwindow.cpp" line="1434"/>
         <source>Error</source>
         <translation>Erro</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="371"/>
+        <location filename="../src/mainwindow.cpp" line="401"/>
         <source>Installing bootsplash, please wait</source>
         <translation>A instalar máscara. Aguardar. </translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="156"/>
+        <location filename="../src/mainwindow.cpp" line="167"/>
+        <location filename="../src/mainwindow.cpp" line="1201"/>
         <source>Preview is disabled because &apos;splash&apos; parameter is not present in kernel command line. To enable preview, add &apos;splash&apos; to boot parameters and reboot.</source>
         <translation>A pré-visualização está desativada porque o parâmetro &apos;splash&apos; não está presente na linha de comandos do kernel. Para ativar a pré-visualização, adicione &apos;splash&apos;  aos parâmetros de arranque e reinicie.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="378"/>
+        <location filename="../src/mainwindow.cpp" line="171"/>
+        <location filename="../src/mainwindow.cpp" line="1204"/>
+        <source>Preview is disabled while running under Wayland. Please start an X11 session to preview Plymouth themes.</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="408"/>
         <source>Updating sources</source>
         <translation>A actualizar as origens</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="390"/>
+        <location filename="../src/mainwindow.cpp" line="420"/>
         <source>Could not install the bootsplash.</source>
         <translation>A máscara não foi instalada.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="535"/>
+        <location filename="../src/mainwindow.cpp" line="565"/>
         <source>Could not create a temporary folder</source>
         <translation>Não foi possível criar uma pasta temporária</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="544"/>
-        <location filename="../src/mainwindow.cpp" line="564"/>
+        <location filename="../src/mainwindow.cpp" line="574"/>
+        <location filename="../src/mainwindow.cpp" line="594"/>
         <source>Cannot continue</source>
         <translation>Impossível continuar</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="544"/>
+        <location filename="../src/mainwindow.cpp" line="574"/>
         <source>Cannot open LUKS device. Exiting...</source>
         <translation>Não foi possível abrir o dispositivo com LUKS. A sair...</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="565"/>
+        <location filename="../src/mainwindow.cpp" line="595"/>
         <source>Cannot create chroot environment, cannot change boot options. Exiting...</source>
         <translation>Não é possível criar um ambiente chroot.  Não é possível alterar as opções de arranque. Saindo...</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="897"/>
-        <location filename="../src/mainwindow.cpp" line="1276"/>
+        <location filename="../src/mainwindow.cpp" line="929"/>
+        <location filename="../src/mainwindow.cpp" line="1331"/>
         <source>Updating configuration, please wait</source>
         <translation>A actualizar a configuração. Aguardar.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="968"/>
+        <location filename="../src/mainwindow.cpp" line="1000"/>
         <source>Updating initramfs...</source>
         <translation>A actualizar o initramfs...</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="982"/>
-        <location filename="../src/mainwindow.cpp" line="1291"/>
+        <location filename="../src/mainwindow.cpp" line="1014"/>
+        <location filename="../src/mainwindow.cpp" line="1346"/>
         <source>Updating grub...</source>
         <translation>A actualizar o GRUB...</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1007"/>
+        <location filename="../src/mainwindow.cpp" line="1039"/>
         <source>About %1</source>
         <translation>Sobre o %1</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1008"/>
+        <location filename="../src/mainwindow.cpp" line="1040"/>
         <source>Version: </source>
         <translation>Versão: </translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1010"/>
+        <location filename="../src/mainwindow.cpp" line="1042"/>
         <source>Program for selecting common start-up choices</source>
         <translation>Programa para seleccionar opções de iniciação comuns</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1012"/>
+        <location filename="../src/mainwindow.cpp" line="1044"/>
         <source>Copyright (c) MX Linux</source>
         <translation>Direitos de Autor (c) MX Linux</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1013"/>
+        <location filename="../src/mainwindow.cpp" line="1045"/>
         <source>%1 License</source>
         <translation>Licença do %1</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1034"/>
+        <location filename="../src/mainwindow.cpp" line="1066"/>
         <source>%1 Help</source>
         <translation>Ajuda do %1</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1044"/>
-        <location filename="../src/mainwindow.cpp" line="1253"/>
+        <location filename="../src/mainwindow.cpp" line="1076"/>
+        <location filename="../src/mainwindow.cpp" line="1308"/>
         <source>Running in a Virtual Machine</source>
         <translation>Em execução numa Máquina Virtual</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1045"/>
-        <location filename="../src/mainwindow.cpp" line="1254"/>
+        <location filename="../src/mainwindow.cpp" line="1077"/>
+        <location filename="../src/mainwindow.cpp" line="1309"/>
         <source>You current system is running in a Virtual Machine,
 Plymouth bootsplash will work in a limited way, you also won&apos;t be able to preview the theme</source>
         <translation>O sistema está a ser executado numa Máquina Virtual.
 A máscara do arranque Plymouth será executada com limitações. Também não será possível pré-visualizar o tema </translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1052"/>
+        <location filename="../src/mainwindow.cpp" line="1084"/>
         <source>Plymouth packages not installed</source>
         <translation>Pacotes do Plymouth não instalados</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1053"/>
+        <location filename="../src/mainwindow.cpp" line="1085"/>
         <source>Plymouth packages are not currently installed.
 OK to go ahead and install them?</source>
         <translation>Os pacotes do Plymouth não estão instalados.
 Continuar e instalar estes pacotes?</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1079"/>
+        <location filename="../src/mainwindow.cpp" line="1111"/>
         <source>Images (*.png *.jpg *.jpeg *.tga)</source>
         <translation>Imagens (*.png *.jpg *.jpeg *.tga)</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1221"/>
+        <location filename="../src/mainwindow.cpp" line="1269"/>
         <source>Log not found</source>
         <translation>Registo não encontrado</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1221"/>
+        <location filename="../src/mainwindow.cpp" line="1269"/>
         <source>Could not find log at </source>
         <translation>Não foi encontrado registo em</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1360"/>
+        <location filename="../src/mainwindow.cpp" line="1290"/>
+        <source>Preview Unavailable</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="1291"/>
+        <source>Preview is not available while running under Wayland. Please start an X11 session to preview Plymouth themes.</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="1415"/>
         <source>Could not retrieve UUID for %1</source>
         <translation>Não foi possível recuperar o UUID para o %1</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1368"/>
+        <location filename="../src/mainwindow.cpp" line="1423"/>
         <source>Enter password to unlock %1 encrypted partition:</source>
         <translation>Introduzir a senha para desbloquear a partição encriptada %1:</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1373"/>
+        <location filename="../src/mainwindow.cpp" line="1428"/>
         <source>Password entry cancelled or empty for %1</source>
         <translation>Entrada da palavra-passe cancelada ou vazia para o %1</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1379"/>
+        <location filename="../src/mainwindow.cpp" line="1434"/>
         <source>Could not open %1 LUKS container</source>
         <translation>Não foi possível abrir o contentor do LUKS %1</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1210"/>
+        <location filename="../src/mainwindow.cpp" line="1258"/>
         <source>&amp;Close</source>
         <translation>&amp;Fechar</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="100"/>
+        <location filename="../src/mainwindow.cpp" line="111"/>
         <source>A process is still running. Do you really want to quit?</source>
         <translation>Processo ainda em execução. De certeza que deseja sair?</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="176"/>
+        <location filename="../src/mainwindow.cpp" line="191"/>
         <source>Live System Detected</source>
         <translation>Sistema Live Detectado</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="178"/>
+        <location filename="../src/mainwindow.cpp" line="193"/>
         <source>You are currently running a live system. Would you like to modify the boot options for the live system or for an installed system?</source>
         <translation>Um sistema Live está a ser usado neste momento. Deseja modificar as opção de arranque para o sistema Live ou para o sistema Instalado?</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="180"/>
+        <location filename="../src/mainwindow.cpp" line="195"/>
         <source>Live System</source>
         <translation>Sistema Live</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="181"/>
+        <location filename="../src/mainwindow.cpp" line="196"/>
         <source>Installed System</source>
         <translation>Sistema Instalado</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="382"/>
+        <location filename="../src/mainwindow.cpp" line="412"/>
         <source>Failed to update package sources.</source>
         <translation>Falha na atualização das fontes de pacotes.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="386"/>
+        <location filename="../src/mainwindow.cpp" line="416"/>
         <source>Installing packages:</source>
         <translation>A instalar pacotes:</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="396"/>
+        <location filename="../src/mainwindow.cpp" line="426"/>
         <source>Success</source>
         <translation>Sucesso</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="396"/>
+        <location filename="../src/mainwindow.cpp" line="426"/>
         <source>Bootsplash installed successfully.</source>
         <translation>Bootsplash - ecrã de arranque- instalado com sucesso.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="424"/>
+        <location filename="../src/mainwindow.cpp" line="454"/>
         <source>Failed to create temporary file.</source>
         <translation>Falha ao criar ficheiro temporário.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="990"/>
+        <location filename="../src/mainwindow.cpp" line="1022"/>
         <source>You are currently running in live mode with the &apos;toram&apos; option. Please remember to save the persistence file or remaster, otherwise any changes made will be lost.</source>
         <translation>Está neste momento em modo Live e a usar a opção &apos;toram&apos;. Lembre-se de gravar para o ficheiro de persistência ou remasterizar, senão quaisquer alterações efetuadas serão perdidas.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="992"/>
+        <location filename="../src/mainwindow.cpp" line="1024"/>
         <source>Your changes have been successfully applied.</source>
         <translation>As suas alterações foram aplicadas com sucesso.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="993"/>
+        <location filename="../src/mainwindow.cpp" line="1025"/>
         <source>Operation Complete</source>
         <translation>Operação Concluida</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1078"/>
+        <location filename="../src/mainwindow.cpp" line="1110"/>
         <source>Select image to display in bootloader</source>
         <translation>Seleccionar a imagem de fundo do carregador do arranque</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1202"/>
+        <location filename="../src/mainwindow.cpp" line="1250"/>
         <source>Boot Log</source>
         <translation>Registo do Boot</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1242"/>
+        <location filename="../src/mainwindow.cpp" line="1297"/>
         <source>Needs reboot</source>
         <translation>É necessário reiniciar</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1243"/>
+        <location filename="../src/mainwindow.cpp" line="1298"/>
         <source>Plymouth was just installed, you might need to reboot before being able to display previews</source>
         <translation>O Plymouth acabou de ser instalado. Pode ser necessário reiniciar para exibir as pré-visualizações</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1316"/>
+        <location filename="../src/mainwindow.cpp" line="1371"/>
         <source>Click to select theme</source>
         <translation>Clicar para seleccionar o tema</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1327"/>
+        <location filename="../src/mainwindow.cpp" line="1382"/>
         <source>Select GRUB theme</source>
         <translation>Seleccionar o tema do GRUB</translation>
     </message>

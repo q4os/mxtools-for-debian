@@ -408,7 +408,7 @@ class MntFile(list) :
             elif not line.strip()[0] == "#" :
                 logging.debug("-> Matching %s on %s as other fs" % (entry[0], entry[1]))
                 self.other.append(EntryBase(entry))
-            elif re.search("^#\S", entry[0]) :
+            elif re.search(r"^#\S", entry[0]) :
                 self.comment.append(EntryBase(entry))
 
     def __getitem__(self, item) :

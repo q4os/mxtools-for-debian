@@ -22,6 +22,7 @@
 #
 
 import re
+
 import time
 from xml.sax.saxutils import escape as escape_mkup
 
@@ -67,9 +68,10 @@ class EditPartition(SimpleGladeApp) :
         # Gtk.Tooltips().set_tip(self.default_button, _("Return options to defaults"))
         # Gtk.Tooltips().set_tip(self.browser_button, _("Select a directory"))
          
+        # deduplicate mount options
+        self.entry["FSTAB_OPTION"] = ','.join(dict.fromkeys(self.entry["FSTAB_OPTION"].split(',')))
         self.path.set_text(self.entry["FSTAB_PATH"])
         self.options3.set_text(self.entry["FSTAB_OPTION"])
-        
         self.vbox_driver.hide()
         if "FS_DRIVERS" in self.entry :
             self.drivers = self.entry["FS_DRIVERS"]
@@ -80,6 +82,8 @@ class EditPartition(SimpleGladeApp) :
         if not driver in [ k[0] for k in drivers_list ] :
             if driver in self.drivers["all"] :
                 drivers_list.append(self.drivers["all"][driver])
+            elif driver == "ntfs3" :
+                drivers_list.append([driver, "Read-write kernel driver", 0])
             else :
                 drivers_list.append([driver, "Unknow driver", 0])
         if len(drivers_list) > 1 or not self.drivers["primary"] :
@@ -110,7 +114,8 @@ class EditPartition(SimpleGladeApp) :
         self.options3.set_text(self.entry.defaultopt())
 
     def set_driver(self) :
-        if self.entry["FS_TYPE"] in ('ntfs', 'exfat') :
+        fsk = 0
+        if self.entry["FS_TYPE"] in ('ntfs', 'ntfs3', 'exfat') :
             self.driver_warning_box.hide()
             self.driver_error_box.hide()
         if self.drivers["primary"] :
@@ -118,8 +123,9 @@ class EditPartition(SimpleGladeApp) :
                 self.driver_warning_box.hide()
                 fsk = self.drivers["all"][self.entry["FSTAB_TYPE"]][2]
             else :
-                self.driver_warning_box.show()
-                fsk = 0
+                if self.entry["FS_TYPE"] not in ('ntfs', 'ntfs3', 'exfat') :
+                    self.driver_warning_box.show()
+                    fsk = 0
         else :
             self.driver_box.set_sensitive(False)
             self.driver_error_box.show()
@@ -200,9 +206,12 @@ class EditPartition(SimpleGladeApp) :
         current = self.driver_box.get_active_text().split()[0]
         if self.entry["DEVICE"] and not self.entry["FSTAB_TYPE"] == current :
             self.disk.set(self.entry, type=current)
+            # deduplicate mount options
+            self.entry["FSTAB_OPTION"] = ','.join(dict.fromkeys(self.entry["FSTAB_OPTION"].split(',')))
+
             self.options3.set_text(self.entry["FSTAB_OPTION"])
             self.set_driver()
-        
+
     def on_apply(self, widget) :
     
         if not self.check_new_options() and not self.check_new_path() :

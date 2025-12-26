@@ -4,7 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Besnik Bleta <besnik@programeshqip.org>, 2022
+# Besnik Bleta <besnik@programeshqip.org>, 2025
 # 
 #, fuzzy
 msgid ""
@@ -13,7 +13,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-01-16 00:46+0100\n"
 "PO-Revision-Date: 2022-01-21 17:21+0000\n"
-"Last-Translator: Besnik Bleta <besnik@programeshqip.org>, 2022\n"
+"Last-Translator: Besnik Bleta <besnik@programeshqip.org>, 2025\n"
 "Language-Team: Albanian (https://app.transifex.com/anticapitalista/teams/10162/sq/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -27,7 +27,7 @@ msgstr "Të drejta të pamjaftueshme"
 
 #: ../disk-manager.in:67
 msgid "You need administrative rights to start this application."
-msgstr "Lypset të keni të drejta administratori, që të nisni këtë aplikacion."
+msgstr "Që të nisni këtë aplikacion, lypset të keni të drejta administratori."
 
 #: ../data/disk-manager.glade.h:1
 msgid "<b>Driver</b>"
@@ -237,7 +237,7 @@ msgstr "Administroni me lehtësi formësimin e sistemit tuaj të kartelave"
 
 #: ../DiskManager/Dialogs.py:510
 msgid "translator-credits"
-msgstr ""
+msgstr "Besnik Bleta"
 
 #: ../DiskManager/DiskManager.py:132
 msgid "Enable"
@@ -265,7 +265,7 @@ msgstr "Të lira"
 
 #: ../DiskManager/DiskManager.py:179
 msgid "Used"
-msgstr "Të përdorur"
+msgstr "Të përdorura"
 
 #: ../DiskManager/DiskManager.py:292
 msgid "Editing system partition?"
@@ -279,8 +279,8 @@ msgid ""
 "serious problems. Do you want to continue?"
 msgstr ""
 "%s është një pjesë e rëndësishme e sistemit.\n"
-"Jini vërtet shumë të kujdesshëm kur e përpunoni, ndryshe\n"
-"do të keni probleme serioze. Doni të vazhdohet?"
+"Jini vërtet shumë të kujdesshëm kur e përpunoni,\n"
+"ndryshe do të keni probleme serioze. Doni të vazhdohet?"
 
 #: ../DiskManager/DiskManager.py:399
 msgid "Unmount"
@@ -332,7 +332,7 @@ msgstr "Doni të çmontohen?"
 
 #: ../DiskManager/Fstab/FstabHandler.py:438
 msgid "Unmount selected"
-msgstr "Çmonto të përzgjedhurin"
+msgstr "Çmonto të përzgjedhurat"
 
 #: ../DiskManager/Fstab/FstabHandler.py:447
 msgid "Reboot required"
@@ -382,8 +382,8 @@ msgstr "Çmontimi i <i>%s</i> dështoi, për shkak të gabimit vijues:"
 #: ../DiskManager/Fstab/Mounter.py:122
 msgid "You can also use the 'lazy' options to detach the filesystem now."
 msgstr ""
-"Mundeni të përdorni gjithashtu mundësitë “lazy” për ta shkëputur sistemin e "
-"kartelave tani."
+"Mundeni të përdorni gjithashtu mundësitë “lazy”, për ta shkëputur sistemin e"
+" kartelave tani."
 
 #: ../DiskManager/Fstab/Mounter.py:127
 #, python-format
@@ -449,7 +449,7 @@ msgstr "Ktheji mundësitë te parazgjedhjet"
 #: ../DiskManager/Fstab/Mounter.py:197
 #, python-format
 msgid "Don't use the '%s' option"
-msgstr "Mos përdor mundësinë “%s”"
+msgstr "Mos e përdor mundësinë “%s”"
 
 #: ../DiskManager/Fstab/Mounter.py:199
 #, python-format

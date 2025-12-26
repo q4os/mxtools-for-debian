@@ -80,6 +80,7 @@ class FuzzyBashStream
         Token& offset(int offset);
         int start() const { return m_token.start; }
         int end() const { return m_token.end; }
+        bool isValid() const { return m_token.isValid(); }
         void setData(QVariant data) { m_data = data; }
         QVariant data() const { return m_data; }
         TokenRef upgrade(FuzzyBashStream* stream) const;

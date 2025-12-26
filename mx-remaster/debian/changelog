@@ -1,3 +1,15 @@
+mx-remaster (25.12.02mx25) mx; urgency=medium
+
+  * add blank /var/lib/sddm/state.conf file to general-files
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Tue, 23 Dec 2025 20:35:23 -0500
+
+mx-remaster (25.12.01mx25) mx; urgency=medium
+
+  * update installed-to-live to work with new snapshot overlay layering
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 21 Dec 2025 17:16:11 -0500
+
 mx-remaster (25.10.03mx25) mx; urgency=medium
 
   * update grub files

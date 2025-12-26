@@ -1285,16 +1285,21 @@
           </property>
          </column>
          <column>
-          <property name="text">
-           <string>Version</string>
-          </property>
-         </column>
-         <column>
-          <property name="text">
-           <string>Size</string>
-          </property>
-         </column>
-         <column>
+         <property name="text">
+          <string>Version</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Branch</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Size</string>
+         </property>
+        </column>
+        <column>
           <property name="text">
            <string notr="true">Status</string>
           </property>

@@ -566,7 +566,7 @@ void ConkyManager::scanConkyDirectory(const QString &path)
         return;
     }
 
-    dir.setFilter(QDir::Files | QDir::Readable);
+    dir.setFilter(QDir::Files | QDir::Readable | QDir::Hidden);
     QFileInfoList allFiles = dir.entryInfoList();
 
     // Build a set of existing file paths for fast lookup
@@ -578,10 +578,6 @@ void ConkyManager::scanConkyDirectory(const QString &path)
     for (const QFileInfo &fileInfo : allFiles) {
         const QString &fileName = fileInfo.fileName();
         const QString &filePath = fileInfo.absoluteFilePath();
-
-        if (fileName.startsWith('.')) {
-            continue;
-        }
 
         if (fileInfo.isDir()) {
             continue;

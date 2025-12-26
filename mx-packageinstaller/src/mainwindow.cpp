@@ -1,7 +1,7 @@
 /**********************************************************************
  *  MainWindow.cpp
  **********************************************************************
- * Copyright (C) 2017-2023 MX Authors
+ * Copyright (C) 2017-2025 MX Authors
  *
  * Authors: Adrian
  *          Dolphin_Oracle
@@ -35,6 +35,7 @@
 #include <QNetworkReply>
 #include <QProgressBar>
 #include <QScreen>
+#include <QScopedValueRollback>
 #include <QScrollBar>
 #include <QShortcut>
 #include <QTextStream>
@@ -65,8 +66,10 @@ MainWindow::MainWindow(const QCommandLineParser &argParser, QWidget *parent)
     connect(&timer, &QTimer::timeout, this, &MainWindow::updateBar);
     connect(&cmd, &Cmd::started, this, &MainWindow::cmdStart);
     connect(&cmd, &Cmd::done, this, &MainWindow::cmdDone);
-    connect(&cmd, &Cmd::outputAvailable, [](const QString &out) { qDebug() << out.trimmed(); });
-    connect(&cmd, &Cmd::errorAvailable, [](const QString &out) { qWarning() << out.trimmed(); });
+    connect(&cmd, &Cmd::outputAvailable, this,
+            [this](const QString &out) { if (!suppressCmdOutput) qDebug() << out.trimmed(); });
+    connect(&cmd, &Cmd::errorAvailable, this,
+            [this](const QString &out) { if (!suppressCmdOutput) qWarning() << out.trimmed(); });
     setWindowFlags(Qt::Window); // For the close, min and max buttons
 
     setup();
@@ -89,8 +92,7 @@ MainWindow::MainWindow(const QCommandLineParser &argParser, QWidget *parent)
     if (arch != "i386" && checkInstalled("flatpak")) {
         auto flatpakFuture [[maybe_unused]] = QtConcurrent::run([this] {
             Cmd().run(elevate + "/usr/lib/mx-packageinstaller/mxpi-lib flatpak_add_repos", Cmd::QuietMode::Yes);
-            QMetaObject::invokeMethod(
-                this, [this] { displayFlatpaks(); }, Qt::QueuedConnection);
+            QMetaObject::invokeMethod(this, [this] { displayFlatpaks(); }, Qt::QueuedConnection);
         });
     }
 }
@@ -138,7 +140,8 @@ void MainWindow::setup()
     ui->comboUser->blockSignals(false);
 
     arch = AptCache::getArch();
-    verName = getDebianVerName();
+    debianVersion = getDebianVerNum();
+    verName = getDebianVerName(debianVersion);
 
     ui->tabWidget->setTabVisible(Tab::Flatpak, arch != "i386");
     ui->tabWidget->setTabVisible(Tab::Test, QFile::exists("/etc/apt/sources.list.d/mx.list")
@@ -333,25 +336,30 @@ void MainWindow::listSizeInstalledFP()
 {
     qDebug() << "+++" << __PRETTY_FUNCTION__ << "+++";
 
-    QStringList list = cmd.getOut("flatpak list " + fpUser + "--columns app,size").split('\n', Qt::SkipEmptyParts);
-    auto total = std::accumulate(list.cbegin(), list.cend(), quint64(0),
-                                 [](quint64 acc, const QString &item) { return acc + convert(item.section('\t', 1)); });
+    auto sumSizes = [](const QList<QString> &sizes) {
+        return std::accumulate(sizes.cbegin(), sizes.cend(), quint64(0),
+                               [](quint64 acc, const QString &item) { return acc + convert(item); });
+    };
+
+    quint64 total = 0;
+    if (cachedInstalledScope == fpUser && cachedInstalledFetched) {
+        total = sumSizes(cachedInstalledSizeMap.values());
+    } else {
+        const QString command = "flatpak list " + fpUser + "--columns app,size";
+        QScopedValueRollback<bool> guard(suppressCmdOutput, true);
+        QStringList list = cmd.getOut(command, Cmd::QuietMode::No).split('\n', Qt::SkipEmptyParts);
+        total = std::accumulate(list.cbegin(), list.cend(), quint64(0),
+                                [](quint64 acc, const QString &item) { return acc + convert(item.section('\t', 1)); });
+    }
     ui->labelNumSize->setText(convert(total));
 }
 
-// Block interface while updating Flatpak list
-void MainWindow::blockInterfaceFP(bool block)
+// Keep Flatpak UI enabled; rely on modal progress dialog to block interaction
+void MainWindow::blockInterfaceFP(bool)
 {
-    ui->tabWidget->widget(Tab::Flatpak)->setEnabled(!block);
-    ui->comboRemote->setDisabled(block);
-    ui->comboFilterFlatpak->setDisabled(block);
-    ui->comboUser->setDisabled(block);
-    ui->searchBoxFlatpak->setDisabled(block);
-    ui->treeFlatpak->setDisabled(block);
-    ui->frameFP->setDisabled(block);
-    ui->iconInstalledPackages_4->setDisabled(block);
-    ui->labelRepo->setDisabled(block);
-    block ? setCursor(QCursor(Qt::BusyCursor)) : setCursor(QCursor(Qt::ArrowCursor));
+    // Maintain cursor feedback without toggling widget enabled state
+    const bool isBusy = displayFlatpaksIsRunning;
+    setCursor(isBusy ? QCursor(Qt::BusyCursor) : QCursor(Qt::ArrowCursor));
 }
 
 // Update interface when changing Tab::Enabled, MX, Backports
@@ -449,7 +457,7 @@ uchar MainWindow::showVersionDialog(const QString &message)
     QMessageBox msgBox;
     msgBox.setWindowTitle(tr("Debian Version"));
     msgBox.setText(message);
-    msgBox.addButton("Bullseye", QMessageBox::AcceptRole);
+    msgBox.addButton("Bookworm", QMessageBox::AcceptRole);
     msgBox.addButton("Trixie", QMessageBox::AcceptRole);
     msgBox.addButton(QMessageBox::Cancel);
     msgBox.show();
@@ -459,12 +467,14 @@ uchar MainWindow::showVersionDialog(const QString &message)
     if (ret == QMessageBox::Cancel) {
         exit(EXIT_FAILURE);
     }
-    return ret == 0 ? Release::Bullseye : Release::Trixie;
+    return ret == 0 ? Release::Bookworm : Release::Trixie;
 }
 
-QString MainWindow::getDebianVerName()
+QString MainWindow::getDebianVerName(uchar version)
 {
-    const auto version = getDebianVerNum();
+    if (version == 0) {
+        version = getDebianVerNum();
+    }
     static const std::map<uchar, QString> versionMap
         = {{Release::Jessie, QStringLiteral("jessie")},     {Release::Stretch, QStringLiteral("stretch")},
            {Release::Buster, QStringLiteral("buster")},     {Release::Bullseye, QStringLiteral("bullseye")},
@@ -474,8 +484,8 @@ QString MainWindow::getDebianVerName()
         return it->second;
     }
 
-    qWarning() << "Error: Invalid Debian version, assumes Bullseye";
-    return QStringLiteral("bullseye");
+    qWarning() << "Error: Invalid Debian version, assumes bookworm";
+    return QStringLiteral("bookworm");
 }
 
 QString MainWindow::getLocalizedName(const QDomElement &element) const
@@ -686,6 +696,126 @@ bool MainWindow::isPackageInstallable(const QString &installable, const QString 
     return installable.split(',').contains(modArch) || installable == "all";
 }
 
+namespace
+{
+struct ParsedFlatpakRef {
+    QString ref;
+    bool isRuntime {false};
+};
+
+QString canonicalFlatpakRef(const QString &ref)
+{
+    QString cleaned = ref.trimmed();
+    if (cleaned.startsWith("app/") || cleaned.startsWith("runtime/")) {
+        cleaned = cleaned.section('/', 1);
+    }
+    return cleaned;
+}
+
+bool isRuntimeToken(const QString &token)
+{
+    return token.startsWith("runtime/") || token.contains(".runtime/") || token.contains(".Platform");
+}
+
+ParsedFlatpakRef parseInstalledFlatpakLine(const QString &line)
+{
+    static const QRegularExpression refRegex(R"((app|runtime)/\S+)");
+
+    const QRegularExpressionMatch match = refRegex.match(line);
+    if (match.hasMatch()) {
+        const QString refWithType = match.captured(0);
+        return {refWithType.section('/', 1), refWithType.startsWith("runtime/")};
+    }
+
+    const QStringList tokens = line.split(QRegularExpression("\\s+"), Qt::SkipEmptyParts);
+    for (const QString &token : tokens) {
+        if (token.contains('/')) {
+            const bool isRuntime = isRuntimeToken(token);
+            // If the token already lacks the app/runtime prefix, keep it intact
+            const bool hasTypePrefix = token.startsWith("app/") || token.startsWith("runtime/");
+            QString ref = hasTypePrefix ? token.section('/', 1) : token;
+            return {ref.trimmed(), isRuntime};
+        }
+    }
+
+    // Fallback: return the line as-is if it looks like a ref without type prefix
+    const QString fallbackRef = line.contains('/') ? line.trimmed() : QString();
+    const bool isRuntime = isRuntimeToken(fallbackRef);
+    return {fallbackRef, isRuntime};
+}
+
+struct RemoteLsEntry {
+    QString version;
+    QString branch;
+    QString ref;
+    QString size;
+};
+
+RemoteLsEntry parseRemoteLsLine(const QString &line)
+{
+    RemoteLsEntry entry;
+
+    const QStringList tabPartsRaw = line.split('\t', Qt::KeepEmptyParts);
+    QStringList tabParts;
+    tabParts.reserve(tabPartsRaw.size());
+    for (const QString &part : tabPartsRaw) {
+        tabParts.append(part.trimmed());
+    }
+
+    auto finalizeEntry = [&entry]() {
+        if (entry.branch.isEmpty() && !entry.ref.isEmpty()) {
+            entry.branch = entry.ref.section('/', -1);
+        }
+        if ((entry.version.isEmpty() || entry.version.contains('/')) && !entry.ref.isEmpty()) {
+            entry.version = entry.ref.section('/', -1);
+        }
+        return entry;
+    };
+
+    if (tabParts.size() >= 4) {
+        entry.version = tabParts.at(0);
+        entry.branch = tabParts.at(1);
+        entry.ref = tabParts.at(2);
+        entry.size = tabParts.at(3);
+        return finalizeEntry();
+    }
+    if (tabParts.size() == 3) {
+        entry.version = tabParts.at(0);
+        const QString possibleBranchOrRef = tabParts.at(1);
+        if (possibleBranchOrRef.count('/') >= 2) {
+            entry.ref = possibleBranchOrRef;
+            entry.size = tabParts.at(2);
+        } else {
+            entry.branch = possibleBranchOrRef;
+            entry.ref = tabParts.at(2);
+        }
+        return finalizeEntry();
+    }
+
+    QStringList tokens = line.split(QRegularExpression("\\s+"), Qt::SkipEmptyParts);
+    int refIndex = -1;
+    for (int i = 0; i < tokens.size(); ++i) {
+        if (tokens.at(i).count('/') >= 2) { // Looks like a Flatpak ref
+            entry.ref = tokens.at(i);
+            refIndex = i;
+            break;
+        }
+    }
+
+    if (!entry.ref.isEmpty()) {
+        entry.version = tokens.value(0);
+        entry.branch = tokens.value(1);
+        if (refIndex >= 0 && refIndex + 1 < tokens.size()) {
+            entry.size = tokens.mid(refIndex + 1).join(' ');
+        }
+        return finalizeEntry();
+    }
+
+    entry.ref = line.trimmed();
+    return finalizeEntry();
+}
+} // namespace
+
 void MainWindow::refreshPopularApps()
 {
     qDebug() << "+++" << __PRETTY_FUNCTION__ << "+++";
@@ -790,8 +920,7 @@ void MainWindow::setProgressDialog()
     pushCancel = new QPushButton(tr("Cancel"));
     connect(pushCancel, &QPushButton::clicked, this, &MainWindow::cancelDownload);
     progress->setWindowModality(Qt::WindowModal);
-    progress->setWindowFlags(Qt::Dialog | Qt::CustomizeWindowHint | Qt::WindowTitleHint | Qt::WindowSystemMenuHint
-                             | Qt::WindowStaysOnTopHint);
+    progress->setWindowFlags(Qt::Dialog | Qt::CustomizeWindowHint | Qt::WindowTitleHint | Qt::WindowStaysOnTopHint);
     progress->setCancelButton(pushCancel);
     pushCancel->setDisabled(true);
     progress->setLabelText(tr("Please wait..."));
@@ -893,15 +1022,35 @@ void MainWindow::displayFilteredFP(QStringList list, bool raw)
     ui->treeFlatpak->blockSignals(true);
     ui->treeFlatpak->setUpdatesEnabled(false);
 
+    auto normalizeRef = [](const QString &line) {
+        const RemoteLsEntry entry = parseRemoteLsLine(line);
+        QString ref = entry.ref.trimmed();
+        if (ref.startsWith("app/") || ref.startsWith("runtime/")) {
+            ref = ref.section('/', 1); // Strip leading type segment (app/runtime)
+        }
+        return ref;
+    };
+
     QMutableStringListIterator i(list);
     if (raw) { // Raw format that needs to be edited
         while (i.hasNext()) {
-            i.setValue(i.next().section('\t', 1, 1).section('/', 1)); // Remove version and size
+            i.setValue(normalizeRef(i.next()));
         }
     }
+
+    auto normalizeForMatch = [](const QString &ref) { return canonicalFlatpakRef(ref); };
+
+    QSet<QString> refSet;
+    for (const QString &ref : std::as_const(list)) {
+        refSet.insert(normalizeForMatch(ref));
+    }
+
     uint total = 0;
     for (QTreeWidgetItemIterator it(currentTree); (*it) != nullptr; ++it) {
-        if (list.contains((*it)->data(FlatCol::FullName, Qt::UserRole).toString())) {
+        const QString storedCanonical = (*it)->data(FlatCol::FullName, Qt::UserRole + 1).toString();
+        const QString itemRef = normalizeForMatch(
+            !storedCanonical.isEmpty() ? storedCanonical : (*it)->data(FlatCol::FullName, Qt::UserRole).toString());
+        if (refSet.contains(itemRef)) {
             ++total;
             (*it)->setHidden(false);
             (*it)->setData(0, Qt::UserRole, true); // Displayed flag
@@ -933,6 +1082,11 @@ void MainWindow::displayFilteredFP(QStringList list, bool raw)
     ui->treeFlatpak->blockSignals(false);
     blockInterfaceFP(false);
     ui->treeFlatpak->setUpdatesEnabled(true);
+
+    // Auto-adjust column widths after filter changes for Flatpak tab
+    for (int i = 0; i < ui->treeFlatpak->columnCount(); ++i) {
+        ui->treeFlatpak->resizeColumnToContents(i);
+    }
 }
 
 void MainWindow::displayPackages()
@@ -960,8 +1114,7 @@ void MainWindow::displayPackages()
     newTree->sortItems(TreeCol::Name, Qt::AscendingOrder);
 
     updateTreeItems(newTree);
-    QMetaObject::invokeMethod(
-        this, [this, newTree] { displayAutoremovable(newTree); }, Qt::QueuedConnection);
+    QMetaObject::invokeMethod(this, [this, newTree] { displayAutoremovable(newTree); }, Qt::QueuedConnection);
 
     newTree->blockSignals(false);
     newTree->setUpdatesEnabled(true);
@@ -1118,6 +1271,11 @@ void MainWindow::setupFlatpakDisplay()
     const bool isCurrentTabFlatpak = ui->tabWidget->currentIndex() == Tab::Flatpak;
     if (isCurrentTabFlatpak) {
         setCursor(QCursor(Qt::BusyCursor));
+        if (!flatpakCancelHidden && pushCancel) {
+            pushCancel->setEnabled(false);
+            pushCancel->hide();
+            flatpakCancelHidden = true;
+        }
         progress->show();
         if (!timer.isActive()) {
             timer.start(100ms);
@@ -1136,10 +1294,19 @@ void MainWindow::loadFlatpakData()
     flatpaks = listFlatpaks(ui->comboRemote->currentText());
     flatpaksApps.clear();
     flatpaksRuntimes.clear();
+    QSet<QString> installedCanonical;
+    cachedInstalledFlatpaks.clear();
+    cachedInstalledSizeMap.clear();
+    cachedInstalledScope.clear();
+    cachedInstalledFetched = false;
 
-    // Optimize: Get all installed packages with one command, then split by type
-    QString allInstalledCommand = "flatpak list " + fpUser + "2>/dev/null --columns=ref";
-    QStringList allInstalled = cmd.getOut(allInstalledCommand).split('\n', Qt::SkipEmptyParts);
+    // Optimize: Get all installed packages with one command (ref + size), then split by type
+    const QString allInstalledCommand = "flatpak list " + fpUser + "2>/dev/null --columns=ref,size";
+    QScopedValueRollback<bool> guard(suppressCmdOutput, true);
+    const QStringList allInstalled = cmd.getOut(allInstalledCommand, Cmd::QuietMode::No).split('\n', Qt::SkipEmptyParts);
+    cachedInstalledFlatpaks = allInstalled;
+    cachedInstalledScope = fpUser;
+    cachedInstalledFetched = true;
 
     // Clear and reserve space for better performance
     installedAppsFP.clear();
@@ -1148,13 +1315,64 @@ void MainWindow::loadFlatpakData()
     installedRuntimesFP.reserve(allInstalled.size() / 2);
 
     // Split by type based on flatpak naming convention
-    for (const QString &item : allInstalled) {
-        if (item.contains(".runtime/")) {
-            installedRuntimesFP.append(item);
-        } else {
-            // Assume anything that's not explicitly a runtime is an app
-            installedAppsFP.append(item);
+    for (const QString &itemRaw : allInstalled) {
+        if (itemRaw.startsWith("Ref")) { // header row on some versions
+            continue;
         }
+
+        const ParsedFlatpakRef parsed = parseInstalledFlatpakLine(itemRaw.section('\t', 0, 0));
+        if (parsed.ref.isEmpty()) {
+            continue;
+        }
+
+        const QString canonicalRef = canonicalFlatpakRef(parsed.ref);
+        if (canonicalRef.isEmpty()) {
+            continue;
+        }
+        installedCanonical.insert(canonicalRef);
+
+        const QString sizeStr = itemRaw.section('\t', 1);
+        if (!sizeStr.isEmpty()) {
+            cachedInstalledSizeMap.insert(canonicalRef, sizeStr);
+        }
+
+        if (parsed.isRuntime) {
+            installedRuntimesFP.append(canonicalRef);
+        } else {
+            installedAppsFP.append(canonicalRef);
+        }
+    }
+
+    // Ensure installed refs are present in the display even if missing from remote listings
+    QSet<QString> listedCanonicalRefs;
+    for (const QString &entry : std::as_const(flatpaks)) {
+        const RemoteLsEntry parsed = parseRemoteLsLine(entry);
+        const QString canonical = canonicalFlatpakRef(parsed.ref);
+        if (!canonical.isEmpty()) {
+            listedCanonicalRefs.insert(canonical);
+        }
+    }
+
+    const auto buildEntry = [](const QString &ref) {
+        const QString branch = ref.section('/', -1);
+        const QString version = branch;
+        return version + '\t' + branch + '\t' + ref + '\t';
+    };
+
+    for (const QString &ref : std::as_const(installedCanonical)) {
+        if (!listedCanonicalRefs.contains(ref)) {
+            flatpaks.append(buildEntry(ref));
+        }
+    }
+
+    // Build cached app/runtime lists from the already-fetched remote data to avoid re-querying
+    flatpaksApps.clear();
+    flatpaksRuntimes.clear();
+    for (const QString &entry : std::as_const(flatpaks)) {
+        const RemoteLsEntry parsed = parseRemoteLsLine(entry);
+        const QString refForType = !parsed.ref.isEmpty() ? parsed.ref : canonicalFlatpakRef(parsed.ref);
+        const bool isRuntime = isRuntimeToken(refForType) || isRuntimeToken(canonicalFlatpakRef(refForType));
+        (isRuntime ? flatpaksRuntimes : flatpaksApps).append(entry);
     }
 }
 
@@ -1175,18 +1393,23 @@ void MainWindow::populateFlatpakTree()
 
 QTreeWidgetItem *MainWindow::createFlatpakItem(const QString &item, const QStringList &installed_all) const
 {
-    QStringList parts = item.split('\t');
+    const RemoteLsEntry entry = parseRemoteLsLine(item);
 
-    // Remove empty parts that might occur if item starts with \t
-    if (!parts.isEmpty() && parts.at(0).isEmpty()) {
-        parts.removeAt(0);
+    const QString originalRef = entry.ref.trimmed();
+    QString ref = originalRef;
+    const QString branch = entry.branch.isEmpty() ? ref.section('/', -1) : entry.branch;
+    QString version = entry.version;
+    if (version.isEmpty() || version.contains('/')) {
+        version = branch;
     }
-
-    const QString name = (parts.size() == 3) ? parts.at(1).section('/', 1) : parts.at(0).section('/', 1);
-    const QString version = (parts.size() == 3) ? parts.at(0) : name.section('/', -1);
-    const QString size = parts.last();
-    const QString long_name = name.section('/', 0, 0);
+    const QString size = entry.size;
+    const QString canonicalRef = canonicalFlatpakRef(ref);
+    if (canonicalRef.isEmpty()) {
+        return nullptr;
+    }
+    const QString long_name = canonicalRef.section('/', 0, 0);
     const QString short_name = long_name.section('.', -1);
+    const QString name = canonicalRef;
 
     // Skip unwanted packages
     static const QSet<QString> unwantedPackages
@@ -1200,8 +1423,10 @@ QTreeWidgetItem *MainWindow::createFlatpakItem(const QString &item, const QStrin
     widget_item->setText(FlatCol::Name, short_name);
     widget_item->setText(FlatCol::LongName, long_name);
     widget_item->setText(FlatCol::Version, version);
+    widget_item->setText(FlatCol::Branch, branch);
     widget_item->setText(FlatCol::Size, size);
-    widget_item->setData(FlatCol::FullName, Qt::UserRole, name);
+    widget_item->setData(FlatCol::FullName, Qt::UserRole, originalRef.isEmpty() ? name : originalRef);
+    widget_item->setData(FlatCol::FullName, Qt::UserRole + 1, name); // canonical for matching
     widget_item->setData(0, Qt::UserRole, true);
 
     if (installed_all.contains(name)) {
@@ -1247,6 +1472,15 @@ void MainWindow::finalizeFlatpakDisplay()
     displayFlatpaksIsRunning = false;
     firstRunFP = false;
     blockInterfaceFP(false);
+    if (holdProgressForFlatpakRefresh) {
+        holdProgressForFlatpakRefresh = false;
+        progress->hide();
+    }
+    if (flatpakCancelHidden && pushCancel) {
+        pushCancel->show();
+        pushCancel->setEnabled(true);
+        flatpakCancelHidden = false;
+    }
     ui->treeFlatpak->setUpdatesEnabled(true);
 }
 
@@ -1302,41 +1536,80 @@ void MainWindow::ifDownloadFailed() const
     progress->hide();
 }
 
+void MainWindow::invalidateFlatpakRemoteCache()
+{
+    cachedFlatpakRemotes.clear();
+    cachedFlatpakRemotesScope.clear();
+    cachedFlatpakRemotesFetched = false;
+}
+
 void MainWindow::listFlatpakRemotes() const
 {
     qDebug() << "+++" << __PRETTY_FUNCTION__ << "+++";
     QString currentRemote = ui->comboRemote->currentText();
     ui->comboRemote->blockSignals(true);
     ui->comboRemote->clear();
-    Cmd shell;
-    QStringList list
-        = shell.getOut("flatpak remote-list " + fpUser + "| cut -f1").remove(' ').split('\n', Qt::SkipEmptyParts);
-    if (shell.exitCode() != 0) {
+    const bool isUserScope = fpUser.startsWith("--user");
+
+    auto applyRemotes = [&](const QStringList &list) {
+        ui->comboRemote->addItems(list);
+        QString savedRemote = firstRunFP ? settings.value("FlatpakRemote", "flathub").toString() : currentRemote;
+        ui->comboRemote->setCurrentText(savedRemote.isEmpty() ? "flathub" : savedRemote);
         ui->comboRemote->blockSignals(false);
+    };
+
+    if (cachedFlatpakRemotesFetched && cachedFlatpakRemotesScope == fpUser) {
+        applyRemotes(cachedFlatpakRemotes);
         return;
     }
 
+    auto fetchRemotes = [this](QStringList &outList) {
+        Cmd shell;
+        outList
+            = shell.getOut("flatpak remote-list " + fpUser + "| cut -f1").remove(' ').split('\n', Qt::SkipEmptyParts);
+        return shell.exitCode() == 0;
+    };
+
+    auto addUserRemotes = []() {
+        Cmd addRemotes;
+        return addRemotes.run("/usr/lib/mx-packageinstaller/mxpi-lib flatpak_add_repos_user", Cmd::QuietMode::Yes);
+    };
+
+    QStringList list;
+    bool listOk = fetchRemotes(list);
+
+    // If user scope listing failed (common when user has never set up flatpak), attempt to set up defaults
+    if (!listOk && isUserScope) {
+        qDebug() << "User remote-list failed; attempting to set up user remotes";
+        if (addUserRemotes()) {
+            listOk = fetchRemotes(list);
+        }
+    }
+
     // If no user remotes exist, set up the default ones
-    if (list.isEmpty()) {
+    if (list.isEmpty() && isUserScope) {
         qDebug() << "No flatpak remotes found for user, setting up default remotes";
 
-        Cmd addRemotes;
-        if (addRemotes.run("/usr/lib/mx-packageinstaller/mxpi-lib flatpak_add_repos_user", Cmd::QuietMode::Yes)) {
+        if (addUserRemotes()) {
             qDebug() << "Successfully set up flatpak remotes for user";
 
             // Re-fetch the remote list after setup
-            list = shell.getOut("flatpak remote-list " + fpUser + "| cut -f1")
-                       .remove(' ')
-                       .split('\n', Qt::SkipEmptyParts);
+            listOk = fetchRemotes(list);
         } else {
             qDebug() << "Failed to set up flatpak remotes for user";
         }
     }
 
-    ui->comboRemote->addItems(list);
-    QString savedRemote = firstRunFP ? settings.value("FlatpakRemote", "flathub").toString() : currentRemote;
-    ui->comboRemote->setCurrentText(savedRemote.isEmpty() ? "flathub" : savedRemote);
-    ui->comboRemote->blockSignals(false);
+    if (!listOk) {
+        ui->comboRemote->blockSignals(false);
+        return;
+    }
+
+    cachedFlatpakRemotes = list;
+    cachedFlatpakRemotesScope = fpUser;
+    cachedFlatpakRemotesFetched = true;
+
+    applyRemotes(list);
 }
 
 bool MainWindow::confirmActions(const QString &names, const QString &action)
@@ -1846,9 +2119,15 @@ bool MainWindow::downloadPackageList(bool forceDownload)
     progress->setLabelText(tr("Downloading package info..."));
     pushCancel->setEnabled(true);
 
+    auto runUpdateApt = [this, forceDownload]() {
+        QScopedValueRollback<bool> holdGuard(holdProgressForAptRefresh, holdProgressForAptRefresh || forceDownload);
+        const bool ok = updateApt();
+        return ok;
+    };
+
     // Handle enabled list download/update
     if (enabledList.isEmpty() || forceDownload) {
-        if (forceDownload && !updateApt()) {
+        if (forceDownload && !runUpdateApt()) {
             return false;
         }
         progress->show();
@@ -1858,7 +2137,7 @@ bool MainWindow::downloadPackageList(bool forceDownload)
         AptCache cache;
         enabledList = cache.getCandidates();
         if (enabledList.isEmpty()) {
-            updateApt();
+            runUpdateApt();
             enabledList = AptCache().getCandidates();
         }
     }
@@ -1952,6 +2231,8 @@ void MainWindow::enableTabs(bool enable)
 void MainWindow::hideColumns() const
 {
     ui->tabWidget->setCurrentIndex(Tab::Popular);
+    const bool showFlatpakBranch = debianVersion < Release::Trixie;
+    ui->treeFlatpak->setColumnHidden(FlatCol::Branch, !showFlatpakBranch);
     ui->treeEnabled->hideColumn(TreeCol::Status); // Status of the package: installed, upgradable, etc
     ui->treeMXtest->hideColumn(TreeCol::Status);
     ui->treeBackports->hideColumn(TreeCol::Status);
@@ -2033,6 +2314,8 @@ bool MainWindow::readPackageList(bool forceDownload)
 void MainWindow::cancelDownload()
 {
     qDebug() << "+++" << __PRETTY_FUNCTION__ << "+++";
+    holdProgressForAptRefresh = false;
+    holdProgressForFlatpakRefresh = false;
     cmd.terminate();
 }
 
@@ -2212,23 +2495,34 @@ QStringList MainWindow::listFlatpaks(const QString &remote, const QString &type)
         return {};
     }
 
-    // Construct the base command for listing flatpaks
-    QString baseCommand = "flatpak remote-ls " + fpUser + remote + ' ' + arch_fp + "--columns=ver,ref,installed-size ";
+    const bool isUserScope = fpUser.startsWith("--user");
 
-    // Append the type to the base command if specified
+    auto buildRemoteLsCommand = [&](const QString &scope) {
+        return "flatpak remote-ls " + scope + remote + ' ' + arch_fp + "--columns=ver,branch,ref,installed-size ";
+    };
+
+    QString typeFlag;
     if (type == QLatin1String("--app")) {
-        baseCommand.append("--app ");
+        typeFlag = "--app ";
     } else if (type == QLatin1String("--runtime")) {
-        baseCommand.append("--runtime ");
+        typeFlag = "--runtime ";
     }
-    baseCommand.append("2>/dev/null");
+    const QString commandSuffix = typeFlag + "2>/dev/null";
 
-    QStringList list;
+    // Construct the base command for listing flatpaks
+    QString baseCommand = buildRemoteLsCommand(fpUser) + commandSuffix;
+
+    auto runRemoteLs = [](const QString &command) {
+        Cmd shell;
+        QStringList output;
+        if (shell.run(command)) {
+            output = shell.readAllOutput().split('\n', Qt::SkipEmptyParts);
+        }
+        return output;
+    };
+
     // Execute the command and process the output
-    Cmd shell;
-    if (shell.run(baseCommand)) {
-        list = shell.readAllOutput().split('\n', Qt::SkipEmptyParts);
-    }
+    QStringList list = runRemoteLs(baseCommand);
 
     if (list.isEmpty()) {
         qDebug() << QString("Could not list packages from %1 remote, attempting to update remote").arg(remote);
@@ -2242,18 +2536,22 @@ QStringList MainWindow::listFlatpaks(const QString &remote, const QString &type)
             qDebug() << "Remote update completed, retrying package list";
 
             // Retry the original command after update
-            Cmd retryShell;
-            if (retryShell.run(baseCommand)) {
-                list = retryShell.readAllOutput().split('\n', Qt::SkipEmptyParts);
-                if (!list.isEmpty()) {
-                    qDebug() << QString("Successfully retrieved %1 packages after remote update").arg(list.size());
-                } else {
-                    qDebug() << QString("Remote %1 still empty after update").arg(remote);
-                }
+            list = runRemoteLs(baseCommand);
+            if (!list.isEmpty()) {
+                qDebug() << QString("Successfully retrieved %1 packages after remote update").arg(list.size());
+            } else {
+                qDebug() << QString("Remote %1 still empty after update").arg(remote);
             }
         } else {
             qDebug() << "Failed to update remote" << remote;
         }
+    }
+
+    // If user scope returned nothing (e.g. only system remotes exist), fall back to system remotes for listing
+    if (list.isEmpty() && isUserScope) {
+        const QString systemCommand = buildRemoteLsCommand(QStringLiteral("--system ")) + commandSuffix;
+        qDebug() << "User remotes empty; retrying flatpak listing using system remotes:" << systemCommand;
+        list = runRemoteLs(systemCommand);
     }
 
     return list;
@@ -2262,8 +2560,43 @@ QStringList MainWindow::listFlatpaks(const QString &remote, const QString &type)
 // List installed flatpaks by type: apps, runtimes, or all (if no type is provided)
 QStringList MainWindow::listInstalledFlatpaks(const QString &type)
 {
-    QString command = "flatpak list " + fpUser + "2>/dev/null " + type + " --columns=ref";
-    return cmd.getOut(command).split('\n', Qt::SkipEmptyParts);
+    QStringList lines;
+    if (cachedInstalledScope == fpUser && cachedInstalledFetched) {
+        lines = cachedInstalledFlatpaks;
+    } else {
+        const QString command = "flatpak list " + fpUser + "2>/dev/null " + type + " --columns=ref";
+        QScopedValueRollback<bool> guard(suppressCmdOutput, true);
+        lines = cmd.getOut(command, Cmd::QuietMode::No).split('\n', Qt::SkipEmptyParts);
+
+        if (type.isEmpty()) {
+            cachedInstalledFlatpaks = lines;
+            cachedInstalledScope = fpUser;
+            cachedInstalledFetched = true;
+        }
+    }
+
+    QStringList refs;
+    for (const QString &lineRaw : lines) {
+        if (lineRaw.startsWith("Ref")) { // skip header if present
+            continue;
+        }
+        const QString line = lineRaw.section('\t', 0, 0);
+
+        const ParsedFlatpakRef parsed = parseInstalledFlatpakLine(line);
+        if (parsed.ref.isEmpty()) {
+            continue;
+        }
+
+        if (type == QLatin1String("--app") && parsed.isRuntime) {
+            continue;
+        }
+        if (type == QLatin1String("--runtime") && !parsed.isRuntime) {
+            continue;
+        }
+
+        refs.append(parsed.ref);
+    }
+    return refs;
 }
 
 QTreeWidgetItem *MainWindow::createTreeItem(const QString &name, const QString &version,
@@ -2407,7 +2740,9 @@ void MainWindow::cmdDone()
     timer.stop();
     setCursor(QCursor(Qt::ArrowCursor));
     disableOutput();
-    progress->hide();
+    if (!holdProgressForFlatpakRefresh && !holdProgressForAptRefresh) {
+        progress->hide();
+    }
 }
 
 void MainWindow::enableOutput()
@@ -3039,8 +3374,7 @@ void MainWindow::handleEnabledReposTab(const QString &search_str)
         filterChanged(ui->comboFilterEnabled->currentText());
     }
     if (!ui->searchBoxEnabled->text().isEmpty()) {
-        QMetaObject::invokeMethod(
-            this, [this] { findPackage(); }, Qt::QueuedConnection);
+        QMetaObject::invokeMethod(this, [this] { findPackage(); }, Qt::QueuedConnection);
     }
     if (!displayPackagesIsRunning) {
         currentTree->blockSignals(false);
@@ -3085,8 +3419,7 @@ void MainWindow::handleFlatpakTab(const QString &search_str)
     if (!firstRunFP && checkInstalled("flatpak")) {
         ui->searchBoxBP->setText(search_str);
         if (!search_str.isEmpty()) {
-            QMetaObject::invokeMethod(
-                this, [this] { findPackage(); }, Qt::QueuedConnection);
+            QMetaObject::invokeMethod(this, [this] { findPackage(); }, Qt::QueuedConnection);
         }
         if (!displayFlatpaksIsRunning) {
             filterChanged(ui->comboFilterFlatpak->currentText());
@@ -3113,6 +3446,11 @@ void MainWindow::handleFlatpakTab(const QString &search_str)
             listFlatpakRemotes();
         }
         if (displayFlatpaksIsRunning) {
+            if (!flatpakCancelHidden && pushCancel) {
+                pushCancel->setEnabled(false);
+                pushCancel->hide();
+                flatpakCancelHidden = true;
+            }
             progress->show();
             if (!timer.isActive()) {
                 timer.start(100ms);
@@ -3121,8 +3459,7 @@ void MainWindow::handleFlatpakTab(const QString &search_str)
         }
         ui->searchBoxBP->setText(search_str);
         if (!search_str.isEmpty()) {
-            QMetaObject::invokeMethod(
-                this, [this] { findPackage(); }, Qt::QueuedConnection);
+            QMetaObject::invokeMethod(this, [this] { findPackage(); }, Qt::QueuedConnection);
         }
     }
 }
@@ -3148,6 +3485,7 @@ void MainWindow::installFlatpak()
     }
     Cmd().run(elevate + "/usr/lib/mx-packageinstaller/mxpi-lib flatpak_add_repos", Cmd::QuietMode::Yes);
     enableOutput();
+    invalidateFlatpakRemoteCache();
     listFlatpakRemotes();
     if (displayFlatpaksIsRunning) {
         progress->show();
@@ -3201,8 +3539,7 @@ void MainWindow::filterChanged(const QString &arg1)
         }
         currentTree->setUpdatesEnabled(true);
 
-        QMetaObject::invokeMethod(
-            this, [this] { findPackage(); }, Qt::QueuedConnection);
+        QMetaObject::invokeMethod(this, [this] { findPackage(); }, Qt::QueuedConnection);
         setSearchFocus();
         ui->pushInstall->setEnabled(false);
         ui->pushUninstall->setEnabled(false);
@@ -3236,6 +3573,17 @@ void MainWindow::filterChanged(const QString &arg1)
         ui->checkHideLibs->blockSignals(block);
         ui->checkHideLibsBP->blockSignals(block);
         ui->checkHideLibsMX->blockSignals(block);
+    };
+
+    auto resizeCurrentRepoTree = [this]() {
+        if (currentTree == ui->treeFlatpak || currentTree == ui->treePopularApps) {
+            return;
+        }
+        for (int i = 0; i < currentTree->columnCount(); ++i) {
+            if (!currentTree->isColumnHidden(i)) {
+                currentTree->resizeColumnToContents(i);
+            }
+        }
     };
 
     // Hide and reset all header checkboxes by default
@@ -3293,8 +3641,7 @@ void MainWindow::filterChanged(const QString &arg1)
             }
             ui->pushUninstall->setEnabled(false);
         }
-        QMetaObject::invokeMethod(
-            this, [this] { findPackage(); }, Qt::QueuedConnection);
+        QMetaObject::invokeMethod(this, [this] { findPackage(); }, Qt::QueuedConnection);
         setSearchFocus();
     } else if (arg1 == tr("All packages")) {
         savedComboIndex = 0;
@@ -3324,38 +3671,48 @@ void MainWindow::filterChanged(const QString &arg1)
         auto itStatus = statusMap.find(arg1);
         if (itStatus != statusMap.end()) {
             savedComboIndex = itStatus.value();
+            bool hasVisibleMatches = false;
             for (QTreeWidgetItemIterator it(currentTree); (*it) != nullptr; ++it) {
                 int itemStatus = (*it)->data(TreeCol::Status, Qt::UserRole).toInt();
                 bool shouldShow = (itStatus.value() == Status::Installed && itemStatus == Status::Upgradable)
                                   || (itemStatus == itStatus.value());
                 (*it)->setHidden(!shouldShow);
                 (*it)->setData(0, Qt::UserRole, shouldShow);
+                hasVisibleMatches = hasVisibleMatches || shouldShow;
             }
             // Show the header checkbox when filtering Upgradable or Autoremovable
             if (itStatus.value() == Status::Upgradable || itStatus.value() == Status::Autoremovable) {
                 const QString tip = (itStatus.value() == Status::Upgradable) ? tr("Select/deselect all upgradable")
                                                                              : tr("Select/deselect all autoremovable");
+                const bool allowAutoremovableCheckbox = itStatus.value() != Status::Autoremovable || hasVisibleMatches;
+
                 if (currentTree == ui->treeEnabled && headerEnabled) {
-                    headerEnabled->setCheckboxVisible(true);
-                    headerEnabled->setToolTip(tip);
-                    headerEnabled->resizeSection(TreeCol::Check, qMax(headerEnabled->sectionSize(0), 22));
+                    headerEnabled->setCheckboxVisible(allowAutoremovableCheckbox);
+                    if (allowAutoremovableCheckbox) {
+                        headerEnabled->setToolTip(tip);
+                        headerEnabled->resizeSection(TreeCol::Check, qMax(headerEnabled->sectionSize(0), 22));
+                    }
                 } else if (currentTree == ui->treeMXtest && headerMX) {
-                    headerMX->setCheckboxVisible(true);
-                    headerMX->setToolTip(tip);
-                    headerMX->resizeSection(TreeCol::Check, qMax(headerMX->sectionSize(0), 22));
+                    headerMX->setCheckboxVisible(allowAutoremovableCheckbox);
+                    if (allowAutoremovableCheckbox) {
+                        headerMX->setToolTip(tip);
+                        headerMX->resizeSection(TreeCol::Check, qMax(headerMX->sectionSize(0), 22));
+                    }
                 } else if (currentTree == ui->treeBackports && headerBP) {
-                    headerBP->setCheckboxVisible(true);
-                    headerBP->setToolTip(tip);
-                    headerBP->resizeSection(TreeCol::Check, qMax(headerBP->sectionSize(0), 22));
+                    headerBP->setCheckboxVisible(allowAutoremovableCheckbox);
+                    if (allowAutoremovableCheckbox) {
+                        headerBP->setToolTip(tip);
+                        headerBP->resizeSection(TreeCol::Check, qMax(headerBP->sectionSize(0), 22));
+                    }
                 }
             }
         }
         uncheckAllItems();
-        QMetaObject::invokeMethod(
-            this, [this] { findPackage(); }, Qt::QueuedConnection);
+        QMetaObject::invokeMethod(this, [this] { findPackage(); }, Qt::QueuedConnection);
         setSearchFocus();
         clearChangeListAndButtons();
     }
+    resizeCurrentRepoTree();
     currentTree->setUpdatesEnabled(true);
     currentTree->blockSignals(false);
 }
@@ -3545,6 +3902,12 @@ void MainWindow::pushForceUpdateMX_clicked()
 void MainWindow::pushForceUpdateFP_clicked()
 {
     ui->searchBoxFlatpak->clear();
+    if (!flatpakCancelHidden && pushCancel) {
+        pushCancel->setEnabled(false);
+        pushCancel->hide();
+        flatpakCancelHidden = true;
+    }
+    holdProgressForFlatpakRefresh = true;
     progress->show();
     cmd.run("flatpak update --appstream");
     displayFlatpaks(true);
@@ -3689,6 +4052,7 @@ void MainWindow::pushRemotes_clicked()
     auto *dialog = new ManageRemotes(this, fpUser);
     dialog->exec();
     if (dialog->isChanged()) {
+        invalidateFlatpakRemoteCache();
         listFlatpakRemotes();
         displayFlatpaks(true);
     }
@@ -3698,6 +4062,7 @@ void MainWindow::pushRemotes_clicked()
         enableOutput();
         if (cmd.run("socat SYSTEM:'flatpak install -y " + dialog->getUser() + "--from "
                     + dialog->getInstallRef().replace(':', "\\:") + "',stderr STDIO\"")) {
+            invalidateFlatpakRemoteCache();
             listFlatpakRemotes();
             displayFlatpaks(true);
             setCursor(QCursor(Qt::ArrowCursor));
@@ -3731,6 +4096,7 @@ void MainWindow::comboUser_currentIndexChanged(int index)
         }
     }
     lastItemClicked = nullptr;
+    invalidateFlatpakRemoteCache();
     listFlatpakRemotes();
     displayFlatpaks(true);
 }

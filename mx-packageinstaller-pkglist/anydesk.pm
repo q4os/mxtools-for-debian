@@ -66,31 +66,63 @@ AnyDesk
 <screenshot>none</screenshot>
 
 <preinstall>
-rm /tmp/anydesk.deb 2>/dev/null
-curl -RL  -o /tmp/anydesk.deb $(curl -s https://anydesk.com/en/downloads/linux \
-| grep -m1 -Eo https://[^[:space:]]*$(dpkg --print-architecture).deb)
-# fehlix: fix anydesk deb package
-# apt-get install /tmp/anydesk.deb
-dpkg --unpack /tmp/anydesk.deb
-chmod 755 /var/lib/dpkg/info/anydesk.postinst 2>/dev/null
-chmod 755 /var/lib/dpkg/info/anydesk.postrm   2>/dev/null
-chmod 755 /var/lib/dpkg/info/anydesk.preinst  2>/dev/null
-chmod 755 /var/lib/dpkg/info/anydesk.prerm    2>/dev/null
-chmod -R 755 /usr/share/anydesk               2>/dev/null
-dpkg --configure anydesk
-apt-get install -f
-rm /tmp/anydesk.deb 2>/dev/null
+
+<![CDATA[
+# remove existing repo and keyring for anydesk
+rm -f /etc/apt/keyrings/*anydesk*               2>/dev/null
+rm -f /etc/apt/trusted.gpg.d/*anydesk*          2>/dev/null
+rm -f /etc/apt/sources.list.d/*anydesk*.list    2>/dev/null
+rm -f /etc/apt/sources.list.d/*anydesk*.sources 2>/dev/null
+apt-get update
+apt-get install extrepo --yes
+# add "contrib" and "non-free" in extrepo's config
+[ -f /etc/extrepo/config.yaml ] && sed  -i -r -e '$a- contrib' -e '$a- non-free' -e '/- (contrib|non-free)/d;'  /etc/extrepo/config.yaml
+
+extrepo enable anydesk
+# Fixing the LC_TYPE error in apt for certain locales such as tr_TR.UTF-8
+for SRC in $(grep -sHi ^uris /etc/apt/sources.list.d/*.sources | grep -v ':URIs' | sed 's/:URIs.*//I' | sort -u); do
+env LC_CTYPE=C.UTF-8 sed -i 's/^uris/URIs/I' "$SRC"
+done
+# removing not needed architectures
+case "$(dpkg --print-architecture)" in
+  amd64)
+  [ -f /etc/apt/sources.list.d/extrepo_anydesk.sources ] && sed -i '/Architectures:/cArchitectures: amd64' /etc/apt/sources.list.d/extrepo_anydesk.sources
+  ;;
+esac
+apt-get update
+]]>
+
 </preinstall>
 
 <install_package_names>
-
+anydesk
 </install_package_names>
 
 <postinstall>
-
+<![CDATA[
+echo "--------------------------------"
+echo "...$(gettext -d apt -s ' Done')!"
+echo "--------------------------------"
+]]>
 </postinstall>
 
 <uninstall_package_names>
 anydesk
 </uninstall_package_names>
+
+<postuninstall>
+<![CDATA[
+# remove any existing repo and keyring for anydesk
+rm -f /etc/apt/keyrings/*anydesk*               2>/dev/null
+rm -f /etc/apt/trusted.gpg.d/*anydesk*          2>/dev/null
+rm -f /etc/apt/sources.list.d/*anydesk*.list    2>/dev/null
+rm -f /etc/apt/sources.list.d/*anydesk*.sources 2>/dev/null
+
+apt-get update
+echo "--------------------------------"
+echo "...$(gettext -d apt -s ' Done')!"
+echo "--------------------------------"
+]]>
+</postuninstall>
+
 </app>

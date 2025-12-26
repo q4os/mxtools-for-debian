@@ -34,9 +34,21 @@ if [ -x /usr/bin/systemctl ]; then
 fi
 }
 
+read_password()
+{
+if [ -n "$pass" ]; then
+    return
+fi
+if ! IFS= read -r pass; then
+    pass=""
+fi
+pass="${pass%$'\r'}"
+}
+
 addsambauser()
 {
-echo -ne "$pass\n$pass" | smbpasswd -as "$user"
+read_password
+printf '%s\n%s\n' "$pass" "$pass" | smbpasswd -as "$user"
 exit $?
 }
 
@@ -48,7 +60,8 @@ exit $?
 
 changesambapasswd()
 {
-echo -ne "$pass\n$pass" | smbpasswd -U "$user"
+read_password
+printf '%s\n%s\n' "$pass" "$pass" | smbpasswd -U "$user"
 exit $?
 }
 
@@ -101,16 +114,24 @@ case $1 in
                  ;;
     disablesamba)  disablesamba
                  ;;
-    addsambauser)  user="$3"
-                   pass="$2"
+    addsambauser)  if [ -n "$3" ]; then
+                       pass="$2"
+                       user="$3"
+                   else
+                       user="$2"
+                   fi
                    addsambauser
                    ;;
     removesambauser)  user="$2"
                       removesambauser
                    ;;
-    changesambapasswd)  user="$3"
-                   pass="$2"
-                   changesambapasswd
+    changesambapasswd)  if [ -n "$3" ]; then
+                            pass="$2"
+                            user="$3"
+                        else
+                            user="$2"
+                        fi
+                        changesambapasswd
                    ;;
 esac
 }

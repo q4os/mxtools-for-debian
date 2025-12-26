@@ -5,7 +5,7 @@
         <location filename="../mainwindow.ui" line="17"/>
         <location filename="../mainwindow.cpp" line="62"/>
         <source>MX Repo Manager</source>
-        <translation type="unfinished"/>
+        <translation>مدير مستودعات لام اكس</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="32"/>

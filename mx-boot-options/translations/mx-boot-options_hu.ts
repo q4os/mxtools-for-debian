@@ -191,267 +191,284 @@
         <translation>Alkalmazás</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="99"/>
+        <location filename="../src/mainwindow.cpp" line="110"/>
         <source>Still running</source>
         <translation>Még fut</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="382"/>
-        <location filename="../src/mainwindow.cpp" line="390"/>
-        <location filename="../src/mainwindow.cpp" line="424"/>
-        <location filename="../src/mainwindow.cpp" line="535"/>
-        <location filename="../src/mainwindow.cpp" line="1360"/>
-        <location filename="../src/mainwindow.cpp" line="1373"/>
-        <location filename="../src/mainwindow.cpp" line="1379"/>
+        <location filename="../src/mainwindow.cpp" line="412"/>
+        <location filename="../src/mainwindow.cpp" line="420"/>
+        <location filename="../src/mainwindow.cpp" line="454"/>
+        <location filename="../src/mainwindow.cpp" line="565"/>
+        <location filename="../src/mainwindow.cpp" line="1415"/>
+        <location filename="../src/mainwindow.cpp" line="1428"/>
+        <location filename="../src/mainwindow.cpp" line="1434"/>
         <source>Error</source>
         <translation>Hiba</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="371"/>
+        <location filename="../src/mainwindow.cpp" line="401"/>
         <source>Installing bootsplash, please wait</source>
         <translation>Indítókép telepítése, kérjük várjon</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="156"/>
+        <location filename="../src/mainwindow.cpp" line="167"/>
+        <location filename="../src/mainwindow.cpp" line="1201"/>
         <source>Preview is disabled because &apos;splash&apos; parameter is not present in kernel command line. To enable preview, add &apos;splash&apos; to boot parameters and reboot.</source>
         <translation>Az előnézet le van tiltva, mert a &apos;splash&apos; paraméter nem szerepel a kernel parancssorában. Az előnézet engedélyezéséhez adja hozzá a &apos;splash&apos; paramétert a rendszerindítási paraméterekhez, majd indítsa újra a rendszert.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="378"/>
+        <location filename="../src/mainwindow.cpp" line="171"/>
+        <location filename="../src/mainwindow.cpp" line="1204"/>
+        <source>Preview is disabled while running under Wayland. Please start an X11 session to preview Plymouth themes.</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="408"/>
         <source>Updating sources</source>
         <translation>Források frissítése</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="390"/>
+        <location filename="../src/mainwindow.cpp" line="420"/>
         <source>Could not install the bootsplash.</source>
         <translation>Nem sikerült az indítókép telepítése.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="535"/>
+        <location filename="../src/mainwindow.cpp" line="565"/>
         <source>Could not create a temporary folder</source>
         <translation>Ideiglenes mappa létrehozása nem sikerült</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="544"/>
-        <location filename="../src/mainwindow.cpp" line="564"/>
+        <location filename="../src/mainwindow.cpp" line="574"/>
+        <location filename="../src/mainwindow.cpp" line="594"/>
         <source>Cannot continue</source>
         <translation>Nem folytatható</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="544"/>
+        <location filename="../src/mainwindow.cpp" line="574"/>
         <source>Cannot open LUKS device. Exiting...</source>
         <translation>Nem sikerült megnyitni a LUKS eszközt. Kilépés...</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="565"/>
+        <location filename="../src/mainwindow.cpp" line="595"/>
         <source>Cannot create chroot environment, cannot change boot options. Exiting...</source>
         <translation>Nem sikerült a chroot környezet létrehozása, nem változathatók meg az indítási opciók. Kilépés...</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="897"/>
-        <location filename="../src/mainwindow.cpp" line="1276"/>
+        <location filename="../src/mainwindow.cpp" line="929"/>
+        <location filename="../src/mainwindow.cpp" line="1331"/>
         <source>Updating configuration, please wait</source>
         <translation>Beállítások frissítése, kérjük várjon</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="968"/>
+        <location filename="../src/mainwindow.cpp" line="1000"/>
         <source>Updating initramfs...</source>
         <translation>Az initramfs frissítése...</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="982"/>
-        <location filename="../src/mainwindow.cpp" line="1291"/>
+        <location filename="../src/mainwindow.cpp" line="1014"/>
+        <location filename="../src/mainwindow.cpp" line="1346"/>
         <source>Updating grub...</source>
         <translation>A GRUB frissítése...</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1007"/>
+        <location filename="../src/mainwindow.cpp" line="1039"/>
         <source>About %1</source>
         <translation>%1 névjegye</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1008"/>
+        <location filename="../src/mainwindow.cpp" line="1040"/>
         <source>Version: </source>
         <translation>Verzió:</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1010"/>
+        <location filename="../src/mainwindow.cpp" line="1042"/>
         <source>Program for selecting common start-up choices</source>
         <translation>Egy program az általános indítási opciók kiválasztásához</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1012"/>
+        <location filename="../src/mainwindow.cpp" line="1044"/>
         <source>Copyright (c) MX Linux</source>
         <translation>Copyright (c) MX Linux</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1013"/>
+        <location filename="../src/mainwindow.cpp" line="1045"/>
         <source>%1 License</source>
         <translation>%1 Licenc</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1034"/>
+        <location filename="../src/mainwindow.cpp" line="1066"/>
         <source>%1 Help</source>
         <translation>%1 súgó</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1044"/>
-        <location filename="../src/mainwindow.cpp" line="1253"/>
+        <location filename="../src/mainwindow.cpp" line="1076"/>
+        <location filename="../src/mainwindow.cpp" line="1308"/>
         <source>Running in a Virtual Machine</source>
         <translation>Egy virtuális gépben fut</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1045"/>
-        <location filename="../src/mainwindow.cpp" line="1254"/>
+        <location filename="../src/mainwindow.cpp" line="1077"/>
+        <location filename="../src/mainwindow.cpp" line="1309"/>
         <source>You current system is running in a Virtual Machine,
 Plymouth bootsplash will work in a limited way, you also won&apos;t be able to preview the theme</source>
         <translation>A jelenlegi rendszer egy virtuális gépben fut,
 a Pymouth indítókép korlátozott módon fog működni és nem lehetséges a téma előnézetét megjeleníteni</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1052"/>
+        <location filename="../src/mainwindow.cpp" line="1084"/>
         <source>Plymouth packages not installed</source>
         <translation>A Pymouth csomag nincs telepítve</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1053"/>
+        <location filename="../src/mainwindow.cpp" line="1085"/>
         <source>Plymouth packages are not currently installed.
 OK to go ahead and install them?</source>
         <translation>A Pymouth csomagok jelenleg nincsenek telepítve.
 Indulhat a telepítésük?</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1079"/>
+        <location filename="../src/mainwindow.cpp" line="1111"/>
         <source>Images (*.png *.jpg *.jpeg *.tga)</source>
         <translation>Képek (*.png *.jpg *.jpeg *.tga)</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1221"/>
+        <location filename="../src/mainwindow.cpp" line="1269"/>
         <source>Log not found</source>
         <translation>Napló nem található</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1221"/>
+        <location filename="../src/mainwindow.cpp" line="1269"/>
         <source>Could not find log at </source>
         <translation>Nem található a napló:</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1360"/>
+        <location filename="../src/mainwindow.cpp" line="1290"/>
+        <source>Preview Unavailable</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="1291"/>
+        <source>Preview is not available while running under Wayland. Please start an X11 session to preview Plymouth themes.</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="1415"/>
         <source>Could not retrieve UUID for %1</source>
         <translation>UUID beszerzése nem sikerült: %1</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1368"/>
+        <location filename="../src/mainwindow.cpp" line="1423"/>
         <source>Enter password to unlock %1 encrypted partition:</source>
         <translation>Adja meg a jelszót a %1 titkosított partíció feloldásához:</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1373"/>
+        <location filename="../src/mainwindow.cpp" line="1428"/>
         <source>Password entry cancelled or empty for %1</source>
         <translation>A jelszó megadása megszakítva vagy üres a(z) %1 esetén</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1379"/>
+        <location filename="../src/mainwindow.cpp" line="1434"/>
         <source>Could not open %1 LUKS container</source>
         <translation>Nem sikerült a %1 LUKS konténer megnyitása</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1210"/>
+        <location filename="../src/mainwindow.cpp" line="1258"/>
         <source>&amp;Close</source>
         <translation>Bezárás</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="100"/>
+        <location filename="../src/mainwindow.cpp" line="111"/>
         <source>A process is still running. Do you really want to quit?</source>
         <translation>Még fut egy folyamat. Biztos, hogy kilép?</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="176"/>
+        <location filename="../src/mainwindow.cpp" line="191"/>
         <source>Live System Detected</source>
         <translation>Live rendszer érzékelve</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="178"/>
+        <location filename="../src/mainwindow.cpp" line="193"/>
         <source>You are currently running a live system. Would you like to modify the boot options for the live system or for an installed system?</source>
         <translation>Jelenleg Live módban futtatja a rendszert. Az indítási paramétereket a Live rendszeren, vagy egy telepített rendszeren kívánja módosítani?</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="180"/>
+        <location filename="../src/mainwindow.cpp" line="195"/>
         <source>Live System</source>
         <translation>Live rendszer</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="181"/>
+        <location filename="../src/mainwindow.cpp" line="196"/>
         <source>Installed System</source>
         <translation>Telepített rendszer</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="382"/>
+        <location filename="../src/mainwindow.cpp" line="412"/>
         <source>Failed to update package sources.</source>
         <translation>A csomagforrások frissítése nem sikerült.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="386"/>
+        <location filename="../src/mainwindow.cpp" line="416"/>
         <source>Installing packages:</source>
         <translation>Csomagok telepítése:</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="396"/>
+        <location filename="../src/mainwindow.cpp" line="426"/>
         <source>Success</source>
         <translation>Sikeres</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="396"/>
+        <location filename="../src/mainwindow.cpp" line="426"/>
         <source>Bootsplash installed successfully.</source>
         <translation>Indítókép sikeresen telepítve.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="424"/>
+        <location filename="../src/mainwindow.cpp" line="454"/>
         <source>Failed to create temporary file.</source>
         <translation>Átmeneti fájl létrehozása nem sikerült.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="990"/>
+        <location filename="../src/mainwindow.cpp" line="1022"/>
         <source>You are currently running in live mode with the &apos;toram&apos; option. Please remember to save the persistence file or remaster, otherwise any changes made will be lost.</source>
         <translation>Jelenleg a Live rendszert &apos;toram&apos; (memóriában) módban futtatja. Ne felejtse el az adatmegőrzés mentésének futtatását vagy a lemezképbe rögzítést elvégezni., különben a változtatások elvesznek.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="992"/>
+        <location filename="../src/mainwindow.cpp" line="1024"/>
         <source>Your changes have been successfully applied.</source>
         <translation>A változtatások sikeresen alkalmazva.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="993"/>
+        <location filename="../src/mainwindow.cpp" line="1025"/>
         <source>Operation Complete</source>
         <translation>Művelet befejeződött</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1078"/>
+        <location filename="../src/mainwindow.cpp" line="1110"/>
         <source>Select image to display in bootloader</source>
         <translation>Válassza ki a rendszerindításkor megjelenő képet</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1202"/>
+        <location filename="../src/mainwindow.cpp" line="1250"/>
         <source>Boot Log</source>
         <translation>Rendszerindítási napló</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1242"/>
+        <location filename="../src/mainwindow.cpp" line="1297"/>
         <source>Needs reboot</source>
         <translation>Újraindítás szükséges</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1243"/>
+        <location filename="../src/mainwindow.cpp" line="1298"/>
         <source>Plymouth was just installed, you might need to reboot before being able to display previews</source>
         <translation>A Plymouth most került telepítésre. Újraindításra lehet szükség, hogy az előnézeti kép megjeleníthető legyen</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1316"/>
+        <location filename="../src/mainwindow.cpp" line="1371"/>
         <source>Click to select theme</source>
         <translation>Kattintson a téma kiválasztásához</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1327"/>
+        <location filename="../src/mainwindow.cpp" line="1382"/>
         <source>Select GRUB theme</source>
         <translation>GRUB téma kiválasztása</translation>
     </message>

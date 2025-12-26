@@ -1,3 +1,38 @@
+mx-samba-config (25.12.3) mx; urgency=medium
+
+  * Require Samba user before adding share
+
+ -- Adrian <adrian@mxlinux.org>  Sun, 07 Dec 2025 23:43:46 -0500
+
+mx-samba-config (25.12.1) mx; urgency=medium
+
+  * Updated share permissions handling: the dialog now only requires at
+    least one selected access across all users (Everyone can stay
+    unset).
+  * Permission strings are built with a joined list to avoid
+    malformed ACLs when only specific entries are chosen.
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 03 Dec 2025 14:18:20 -0500
+
+mx-samba-config (25.12) mx; urgency=medium
+
+  * Validate share permission selection before saving
+
+ -- Adrian <adrian@mxlinux.org>  Tue, 02 Dec 2025 11:48:47 -0500
+
+mx-samba-config (25.11.1) mx; urgency=medium
+
+  * Fix displaying version in About menu
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 07 Nov 2025 21:01:26 -0500
+
+mx-samba-config (25.11) mx; urgency=medium
+
+  * Various fixes
+  * Update translations
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 05 Nov 2025 23:48:57 -0500
+
 mx-samba-config (24.4) mx; urgency=medium
 
   * Update to Qt6
@@ -6,7 +41,7 @@ mx-samba-config (24.4) mx; urgency=medium
 
 mx-samba-config (24.3) mx; urgency=medium
 
-  * Update translations 
+  * Update translations
 
  -- Adrian <adrian@mxlinux.org>  Sat, 23 Mar 2024 12:59:21 -0400
 
@@ -60,7 +95,7 @@ mx-samba-config (22.8) mx; urgency=medium
 
 mx-samba-config (22.7) mx; urgency=medium
 
-  * translation refresh 
+  * translation refresh
 
  -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 23 Jul 2022 12:29:43 -0400
 
@@ -72,7 +107,7 @@ mx-samba-config (22.4) mx; urgency=medium
 
 mx-samba-config (22.3) mx; urgency=medium
 
-  * adjust postinstall 
+  * adjust postinstall
 
  -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 27 Mar 2022 14:36:23 -0400
 

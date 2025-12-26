@@ -1,7 +1,7 @@
 /**********************************************************************
  *  lockfile.cpp
  **********************************************************************
- * Copyright (C) 2014 MX Authors
+ * Copyright (C) 2014-2025 MX Authors
  *
  * Authors: Adrian
  *          MX Linux <http://mxlinux.org>

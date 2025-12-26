@@ -218,7 +218,7 @@
         <location filename="../window.cpp" line="264"/>
         <location filename="../window.cpp" line="268"/>
         <source>Bash Config</source>
-        <translation>Bash Config</translation>
+        <translation>Bash Aliakset</translation>
     </message>
 </context>
 </TS>

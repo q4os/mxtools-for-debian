@@ -8,8 +8,8 @@
 # License: GPLv3 or later
 #==============================================================================
 
-      VERSION="2.41.20"
- VERSION_DATE="Tue, 12 Aug 2025"
+      VERSION="2.41.22"
+ VERSION_DATE="Wed, 03 Dec 2025"
 
         ME=${0##*/}
     MY_DIR=$(dirname "$(readlink -f $0)")
@@ -2262,7 +2262,7 @@ do_copy_main() {
 #------------------------------------------------------------------------------
 have_usb_md5() {
     local dir=$1
-    [ -n "$(find $dir -maxdepth 4 -name "*.md5" -printf ".")" ]
+    [ -n "$(find "$dir" -maxdepth 4 \( -name "linuxfs*.md5" -o -name "initrd*.md5" -o -name "vmlinuz*.md5" \) -printf ".")" ]
     return $?
 }
 

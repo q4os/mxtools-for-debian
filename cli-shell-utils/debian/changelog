@@ -1,3 +1,15 @@
+cli-shell-utils (0.4.2+9mx25) mx; urgency=medium
+
+  * simplify "default" translations to match rest of lib
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 26 Nov 2025 13:58:20 -0500
+
+cli-shell-utils (0.4.2+8mx25) mx; urgency=medium
+
+  * translation "default"
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Tue, 25 Nov 2025 20:23:33 -0500
+
 cli-shell-utils (0.4.2+7mx25) mx; urgency=medium
 
   * mod vmlinuz-version to filter memtest files

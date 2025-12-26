@@ -1,51 +1,53 @@
 # Transifex resource cleanup-notifier-mx 
 # with minimum completion percent 30%
-# generated at Sun, 23 Apr 2023 07:08:43 -0500
+# generated at Thu, 06 Nov 2025 18:32:14 -0500
    Nr.		Cnt.	 Compl.		Code		Language
    ---		----	 ------		----		--------
      1		   6	   100%    	ca      	ca	Catalan; Valencian
-     2		   6	   100%    	de      	de	German
-     3		   6	   100%    	es      	es	Spanish; Castilian
-     4		   6	   100%    	es_ES   	es	Spanish; Castilian @ Spain
-     5		   6	   100%    	fi      	fi	Finnish
-     6		   6	   100%    	fr      	fr	French
-     7		   6	   100%    	fr_BE   	fr	French @ Belgium
-     8		   6	   100%    	he_IL   	he	Hebrew @ Israel
-     9		   6	   100%    	it      	it	Italian
-    10		   6	   100%    	ja      	ja	Japanese
-    11		   6	   100%    	nb      	nb	Bokmål, Norwegian; Norwegian Bokmål
-    12		   6	   100%    	nl      	nl	Dutch; Flemish
-    13		   6	   100%    	pl      	pl	Polish
-    14		   6	   100%    	pt      	pt	Portuguese
-    15		   6	   100%    	pt_BR   	pt	Portuguese @ Brazil
-    16		   6	   100%    	sl      	sl	Slovenian
-    17		   6	   100%    	sq      	sq	Albanian
-    18		   6	   100%    	sv      	sv	Swedish
-    19		   5	    83%    	ru      	ru	Russian
-    20		   4	    66%    	cs      	cs	Czech
-    21		   4	    66%    	da      	da	Danish
-    22		   4	    66%    	el      	el	Greek, Modern (1453-)
-    23		   4	    66%    	hi      	hi	Hindi
-    24		   4	    66%    	hu      	hu	Hungarian
-    25		   4	    66%    	lt      	lt	Lithuanian
-    26		   4	    66%    	sk      	sk	Slovak
-    27		   4	    66%    	tr      	tr	Turkish
-    28		   4	    66%    	uk      	uk	Ukrainian
-    29		   3	    50%    	ar      	ar	Arabic
-    30		   3	    50%    	bg      	bg	Bulgarian
-    31		   3	    50%    	eu      	eu	Basque
-    32		   3	    50%    	fa      	fa	Persian
-    33		   3	    50%    	hr      	hr	Croatian
-    34		   3	    50%    	id      	id	Indonesian
-    35		   3	    50%    	is      	is	Icelandic
-    36		   3	    50%    	kk      	kk	Kazakh
-    37		   3	    50%    	ko      	ko	Korean
-    38		   3	    50%    	ro      	ro	Romanian; Moldavian; Moldovan
-    39		   3	    50%    	sr      	sr	Serbian
-    40		   3	    50%    	zh_CN   	zh	Chinese @ China
-    41		   3	    50%    	zh_TW   	zh	Chinese @ Taiwan, Province of China
-    42		   2	    33%    	am      	am	Amharic
-    43		   2	    33%    	et      	et	Estonian
-    44		   2	    33%    	fil_PH  		Filipino @ Philippines
-    45		   2	    33%    	gl_ES   	gl	Galician @ Spain
-    46		   2	    33%    	mr      	mr	Marathi
+     2		   6	   100%    	cs      	cs	Czech
+     3		   6	   100%    	de      	de	German
+     4		   6	   100%    	el      	el	Greek, Modern (1453-)
+     5		   6	   100%    	es      	es	Spanish; Castilian
+     6		   6	   100%    	es_ES   	es	Spanish; Castilian @ Spain
+     7		   6	   100%    	fi      	fi	Finnish
+     8		   6	   100%    	fr      	fr	French
+     9		   6	   100%    	fr_BE   	fr	French @ Belgium
+    10		   6	   100%    	gl_ES   	gl	Galician @ Spain
+    11		   6	   100%    	he_IL   	he	Hebrew @ Israel
+    12		   6	   100%    	hu      	hu	Hungarian
+    13		   6	   100%    	it      	it	Italian
+    14		   6	   100%    	ja      	ja	Japanese
+    15		   6	   100%    	nb      	nb	Bokmål, Norwegian; Norwegian Bokmål
+    16		   6	   100%    	nl      	nl	Dutch; Flemish
+    17		   6	   100%    	pl      	pl	Polish
+    18		   6	   100%    	pt      	pt	Portuguese
+    19		   6	   100%    	pt_BR   	pt	Portuguese @ Brazil
+    20		   6	   100%    	ru      	ru	Russian
+    21		   6	   100%    	ru_RU   	ru	Russian @ Russian Federation
+    22		   6	   100%    	sl      	sl	Slovenian
+    23		   6	   100%    	sq      	sq	Albanian
+    24		   6	   100%    	sv      	sv	Swedish
+    25		   6	   100%    	tr      	tr	Turkish
+    26		   4	    66%    	da      	da	Danish
+    27		   4	    66%    	hi      	hi	Hindi
+    28		   4	    66%    	lt      	lt	Lithuanian
+    29		   4	    66%    	sk      	sk	Slovak
+    30		   4	    66%    	uk      	uk	Ukrainian
+    31		   3	    50%    	ar      	ar	Arabic
+    32		   3	    50%    	bg      	bg	Bulgarian
+    33		   3	    50%    	eu      	eu	Basque
+    34		   3	    50%    	fa      	fa	Persian
+    35		   3	    50%    	hr      	hr	Croatian
+    36		   3	    50%    	id      	id	Indonesian
+    37		   3	    50%    	is      	is	Icelandic
+    38		   3	    50%    	kk      	kk	Kazakh
+    39		   3	    50%    	ko      	ko	Korean
+    40		   3	    50%    	ro      	ro	Romanian; Moldavian; Moldovan
+    41		   3	    50%    	sr      	sr	Serbian
+    42		   3	    50%    	zh_CN   	zh	Chinese @ China
+    43		   3	    50%    	zh_TW   	zh	Chinese @ Taiwan, Province of China
+    44		   2	    33%    	am      	am	Amharic
+    45		   2	    33%    	et      	et	Estonian
+    46		   2	    33%    	fil_PH  		Filipino @ Philippines
+    47		   2	    33%    	ka      	ka	Georgian
+    48		   2	    33%    	mr      	mr	Marathi

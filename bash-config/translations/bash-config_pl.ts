@@ -150,12 +150,12 @@
     <message>
         <location filename="../prompttab_fix.ui" line="518"/>
         <source>Up</source>
-        <translation type="unfinished"/>
+        <translation>W górę</translation>
     </message>
     <message>
         <location filename="../prompttab_fix.ui" line="535"/>
         <source>Down</source>
-        <translation type="unfinished"/>
+        <translation>W dół</translation>
     </message>
 </context>
 <context>

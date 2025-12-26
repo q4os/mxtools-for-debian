@@ -404,9 +404,10 @@ QString FuzzyBashStream::unquote(const Token& t)
 
 void FuzzyBashStream::commitTokenRef(const FuzzyBashStream::TokenRef& tr)
 {
-	int offset = (tr.m_token.end - tr.m_token.start) - tr.m_token.content.length();
-	m_source.replace(tr.m_token.start + m_offset, (tr.m_token.end + m_offset) + (tr.m_token.start + m_offset), tr.m_token.content);
-	m_offset += offset;
+    int originalLength = tr.m_token.end - tr.m_token.start;
+    int delta = tr.m_token.content.length() - originalLength;
+    m_source.replace(tr.m_token.start + m_offset, originalLength, tr.m_token.content);
+    m_offset += delta;
 }
 
 QDebug operator<<(QDebug debug, const FuzzyBashStream::TokenRef& tr)

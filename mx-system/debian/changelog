@@ -1,3 +1,9 @@
+mx-system (25.11.01mx25) mx; urgency=medium
+
+  * remove RC1 and beta1 strings IDs
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 02 Nov 2025 18:42:38 -0500
+
 mx-system (25.10.03mx25) mx; urgency=medium
 
   * add mask to systemd-networkd-wait-online.service if conditions are met

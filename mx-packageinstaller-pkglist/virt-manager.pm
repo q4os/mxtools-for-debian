@@ -79,6 +79,7 @@ qemu-utils
 virt-viewer 
 qemu-system-x86
 libvirt-daemon-system
+libvirt-daemon-system-systemd
 </install_package_names>
 
 
@@ -91,6 +92,7 @@ libvirt-daemon-system
 virt-manager
 virt-viewer
 libvirt-daemon-system
+libvirt-daemon-system-systemd
 </uninstall_package_names>
 
 </app>

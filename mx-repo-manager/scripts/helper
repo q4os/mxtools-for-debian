@@ -1,2 +1,3 @@
 #!/bin/bash
-eval "${*}"
+set -euo pipefail
+exec /bin/bash -lc "$1"

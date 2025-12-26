@@ -60,7 +60,7 @@ Firefox
 </description>
 
 <installable>
-32,64
+64
 </installable>
 
 <screenshot>https://screenshots.debian.net/screenshots/000/014/721/large.png</screenshot>

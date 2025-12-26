@@ -5,6 +5,11 @@ main(){
 
 /usr/bin/xdg-user-dirs-update.real "$@"
 
+#fix .bashrc misconfiguration if it exists
+if [ -e "$HOME/.bashrc" ]; then
+	sed -i 's/^\[ -z \$LESS \]/[ -z "\$LESS" ]/' "$HOME/.bashrc"
+fi
+
 sleep 0.5
 
 ##populate Desktop Folder if it exist
@@ -15,7 +20,7 @@ xdg_checkfile="xdg_check"
 liveapplist="minstall.desktop"
 rpi_list="FAQ.desktop rpi-tips.desktop rpi-video.desktop"
 
-applist="FAQ.desktop Help.desktop"
+applist="FAQ.desktop Help.desktop Quick_System_Info.desktop"
 
 #check to see if we need to do anything else
 

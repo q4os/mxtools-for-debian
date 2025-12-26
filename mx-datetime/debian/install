@@ -1,8 +1,8 @@
 help/*				usr/share/doc/mx-datetime
 images/mx-datetime.png		usr/share/pixmaps
 images/mx-datetime.svg		usr/share/icons/hicolor/scalable/apps
-mx-datetime			usr/bin
 mx-datetime.desktop		usr/share/applications
 scripts/*.policy		usr/share/polkit-1/actions
 scripts/helper			usr/lib/mx-datetime
-translations/*.qm		usr/share/mx-datetime/locale
+_build_/*.qm 			usr/share/mx-datetime/locale
+_build_/Release/mx-datetime 	usr/bin

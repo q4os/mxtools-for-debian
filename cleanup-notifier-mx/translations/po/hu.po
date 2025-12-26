@@ -4,9 +4,9 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Kempelen, 2023
 # Tamás Szekeres <szekeres.tamas@icloud.com>, 2023
 # fehlix, 2023
+# Kempelen <antixhu@netengine.hu>, 2023
 # 
 #, fuzzy
 msgid ""
@@ -15,7 +15,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://forum.mxlinux.org/viewforum.php?f=96\n"
 "POT-Creation-Date: 2023-04-05 01:28+0200\n"
 "PO-Revision-Date: 2023-04-04 23:53+0000\n"
-"Last-Translator: fehlix, 2023\n"
+"Last-Translator: Kempelen <antixhu@netengine.hu>, 2023\n"
 "Language-Team: Hungarian (https://app.transifex.com/anticapitalista/teams/10162/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -51,10 +51,10 @@ msgstr "Az adatok törlése"
 #. The autostart desktop name will be shown within 'Session and Startup'
 #. (Autostart).
 msgid "Cleanup Notifier"
-msgstr ""
+msgstr "Takarítási értesítő"
 
 #. TRANSLATORS:
 #. The autostart desktop entry comment will be shown within 'Session and
 #. Startup' (Autostart).
 msgid "Check available space at /boot"
-msgstr ""
+msgstr "Az elérhető hely ellenőrzése a /boot alatt"

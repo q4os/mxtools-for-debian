@@ -49,6 +49,8 @@ AliasTab::~AliasTab()
 void AliasTab::setup(const BashrcSource& data)
 {
 	SCOPE_TRACKER;
+    m_bashrcAliasNames.clear();
+    m_bashrcAliasesNames.clear();
 	bool doSuggestions = true;
 	QFile suggestionAliases(SUGGEST_ALIASES);
 	QList<Alias> suggestionAliasesList;
@@ -82,9 +84,17 @@ void AliasTab::setup(const BashrcSource& data)
 	AliasStream bashrcAliasesAliasStream(new QString(data.bashrcAliases));
 
 	QList<Alias> aliases;
-	aliases.append(bashrcAliasStream.get());
-	aliases.append(bashrcAliasesAliasStream.get());
-	aliases.append(programAliasStream.get());
+    auto bashrcAliases = bashrcAliasStream.get();
+    for(const auto& a : bashrcAliases)
+        m_bashrcAliasNames.insert(a.name());
+    aliases.append(bashrcAliases);
+
+    auto bashrcAliasesFile = bashrcAliasesAliasStream.get();
+    for(const auto& a : bashrcAliasesFile)
+        m_bashrcAliasesNames.insert(a.name());
+    aliases.append(bashrcAliasesFile);
+
+    aliases.append(programAliasStream.get());
 
 	for (auto alias : aliases)
 	{
@@ -143,7 +153,17 @@ BashrcSource AliasTab::exec(const BashrcSource& data)
 			continue;
 		Alias alias(ui->tableWidget_Aliases->item(row, 0)->text(),
 			ui->tableWidget_Aliases->item(row, 1)->text());
-        if (bashrcAliasStream.containsNamed(alias.name()))
+        if (m_bashrcAliasNames.contains(alias.name()))
+        {
+            addedAliases << alias;
+            bashrcAliasStream.set(alias);
+        }
+        else if (m_bashrcAliasesNames.contains(alias.name()))
+        {
+            addedAliases << alias;
+            bashrcAliasesAliasStream.set(alias);
+        }
+        else if (bashrcAliasStream.containsNamed(alias.name()))
 		{
             DEBUG << "Alias: " << alias.name() << " : " << alias.command() << " has been detected as a bashrc alias";
 			addedAliases << alias;

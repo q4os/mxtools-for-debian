@@ -558,32 +558,32 @@ sicer nastavitev nima učinka</translation>
     <name>MainWindow</name>
     <message>
         <location filename="../src/mainwindow.cpp" line="58"/>
-        <location filename="../src/mainwindow.cpp" line="864"/>
+        <location filename="../src/mainwindow.cpp" line="863"/>
         <source>MX Conky</source>
         <translation>MX Conky</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="252"/>
+        <location filename="../src/mainwindow.cpp" line="251"/>
         <source>About this application</source>
         <translation>O tem programu</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="250"/>
+        <location filename="../src/mainwindow.cpp" line="249"/>
         <source>About...</source>
         <translation>O programu...</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="257"/>
+        <location filename="../src/mainwindow.cpp" line="256"/>
         <source>Help</source>
         <translation>Pomoč</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="272"/>
+        <location filename="../src/mainwindow.cpp" line="271"/>
         <source>Quit application</source>
         <translation>Zapri aplikacijo</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="270"/>
+        <location filename="../src/mainwindow.cpp" line="269"/>
         <source>Close</source>
         <translation>Zapri</translation>
     </message>
@@ -633,70 +633,70 @@ sicer nastavitev nima učinka</translation>
         <translation>zaustavi vse zagnane conkije</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="966"/>
-        <location filename="../src/mainwindow.cpp" line="1018"/>
+        <location filename="../src/mainwindow.cpp" line="965"/>
+        <location filename="../src/mainwindow.cpp" line="1016"/>
         <source>Running</source>
         <translation>Se izvaja</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="968"/>
-        <location filename="../src/mainwindow.cpp" line="1019"/>
+        <location filename="../src/mainwindow.cpp" line="967"/>
+        <location filename="../src/mainwindow.cpp" line="1017"/>
         <source>Stopped</source>
         <translation>Zaustavljeno</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="212"/>
+        <location filename="../src/mainwindow.cpp" line="211"/>
         <source>Search conky by name...</source>
         <translation>Iskanje conkija po imenu...</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="214"/>
+        <location filename="../src/mainwindow.cpp" line="213"/>
         <source>Search conkies by name (Ctrl+F)</source>
         <translation>Pošči Conky po imenu (Crtl+F)</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="259"/>
+        <location filename="../src/mainwindow.cpp" line="258"/>
         <source>Display help</source>
         <translation>Prikaži pomoč</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="448"/>
-        <location filename="../src/mainwindow.cpp" line="622"/>
+        <location filename="../src/mainwindow.cpp" line="447"/>
+        <location filename="../src/mainwindow.cpp" line="621"/>
         <source>Copy Conky</source>
         <translation>Kopiraj Conky</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="494"/>
-        <location filename="../src/mainwindow.cpp" line="670"/>
+        <location filename="../src/mainwindow.cpp" line="493"/>
+        <location filename="../src/mainwindow.cpp" line="669"/>
         <source>Conky Copied</source>
         <translation>Conky je skopiran</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="495"/>
+        <location filename="../src/mainwindow.cpp" line="494"/>
         <source>Conky has been copied to your personal folder for editing:
 %1</source>
         <translation>Conky je bil prekopiran v osebno mapo za urejanje:
 %1</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="497"/>
-        <location filename="../src/mainwindow.cpp" line="673"/>
+        <location filename="../src/mainwindow.cpp" line="496"/>
+        <location filename="../src/mainwindow.cpp" line="672"/>
         <source>Copy Failed</source>
         <translation>Kopiranje ni uspelo</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="497"/>
-        <location filename="../src/mainwindow.cpp" line="673"/>
+        <location filename="../src/mainwindow.cpp" line="496"/>
+        <location filename="../src/mainwindow.cpp" line="672"/>
         <source>Failed to copy conky to your personal folder.</source>
         <translation>Conkija ni bilo mogoče kopirati v osebno mapo.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="559"/>
+        <location filename="../src/mainwindow.cpp" line="558"/>
         <source>Delete Conky</source>
         <translation>Izbriši Conky</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="671"/>
+        <location filename="../src/mainwindow.cpp" line="670"/>
         <source>Conky has been copied to your personal folder for customization:
 %1</source>
         <translation>Conky je bil prekopiran v osebno mapo za prilagajnje:
@@ -713,61 +713,61 @@ sicer nastavitev nima učinka</translation>
         <translation>Ustvari slike za predogled conkijev</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="208"/>
-        <location filename="../src/mainwindow.cpp" line="482"/>
-        <location filename="../src/mainwindow.cpp" line="658"/>
-        <location filename="../src/mainwindow.cpp" line="964"/>
-        <location filename="../src/mainwindow.cpp" line="1017"/>
+        <location filename="../src/mainwindow.cpp" line="207"/>
+        <location filename="../src/mainwindow.cpp" line="481"/>
+        <location filename="../src/mainwindow.cpp" line="657"/>
+        <location filename="../src/mainwindow.cpp" line="963"/>
+        <location filename="../src/mainwindow.cpp" line="1015"/>
         <source>All</source>
         <translation>Vse</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="209"/>
+        <location filename="../src/mainwindow.cpp" line="208"/>
         <source>Filter conkies by running status or location</source>
         <translation>Filtriraj conkije glede na stanje zagona ali lokacijo</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="444"/>
-        <location filename="../src/mainwindow.cpp" line="618"/>
+        <location filename="../src/mainwindow.cpp" line="443"/>
+        <location filename="../src/mainwindow.cpp" line="617"/>
         <source>Enter a name for the copy:</source>
         <translation>Vnesite ime za kopijo:</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="445"/>
-        <location filename="../src/mainwindow.cpp" line="619"/>
+        <location filename="../src/mainwindow.cpp" line="444"/>
+        <location filename="../src/mainwindow.cpp" line="618"/>
         <source>In order for you to edit and save a conky, it must first be copied to ~/.conky where you have permission.
 Enter a name for the copy.</source>
         <translation>Za urejanje in shranjevanje conkijev jih je potrebno najprej prekopirati v  ~/.conky, kjer morate imeti pravice.
 Vnesite ime kopiije.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="462"/>
-        <location filename="../src/mainwindow.cpp" line="638"/>
+        <location filename="../src/mainwindow.cpp" line="461"/>
+        <location filename="../src/mainwindow.cpp" line="637"/>
         <source>Directory Exists</source>
         <translation>Mapa obstaja</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="463"/>
-        <location filename="../src/mainwindow.cpp" line="639"/>
+        <location filename="../src/mainwindow.cpp" line="462"/>
+        <location filename="../src/mainwindow.cpp" line="638"/>
         <source>A conky with the name '%1' already exists in your personal folder.
 Do you want to overwrite it?</source>
         <translation>Conky z imenom &quot;%1&quot; že obstaja v osebni mapi.
 Ga želite prepisati?</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="530"/>
+        <location filename="../src/mainwindow.cpp" line="529"/>
         <source>Edit Conky</source>
         <translation>Uredi Conky</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="531"/>
+        <location filename="../src/mainwindow.cpp" line="530"/>
         <source>This conky file is read-only and requires administrator privileges to edit.
 Do you want to edit it with elevated privileges?</source>
         <translation>Ta conky je zgolj za branje in za urejanje potrebuje skrbniške pravice.
 Ali želite urejanje s povečanimi pravicami?</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="560"/>
+        <location filename="../src/mainwindow.cpp" line="559"/>
         <source>Are you sure you want to delete the conky file:
 %1
 
@@ -778,12 +778,12 @@ This action cannot be undone.</source>
 Tega dejanja ni mogoče razveljaviti.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="592"/>
+        <location filename="../src/mainwindow.cpp" line="591"/>
         <source>Delete Failed</source>
         <translation>Brisanje ni uspelo</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="592"/>
+        <location filename="../src/mainwindow.cpp" line="591"/>
         <source>Failed to delete conky file:
 %1</source>
         <translation>Conky datoteke
@@ -791,76 +791,76 @@ Tega dejanja ni mogoče razveljaviti.</translation>
 ni bilo mogoče izbrisati</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="680"/>
+        <location filename="../src/mainwindow.cpp" line="679"/>
         <source>Customize Conky</source>
         <translation>Prilagodi Conky</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="681"/>
+        <location filename="../src/mainwindow.cpp" line="680"/>
         <source>This conky file is read-only and requires administrator privileges to customize.
 Do you want to customize it with elevated privileges?</source>
         <translation>Ta conky je zgolj za branje in za prilagajnje potrebuje skrbniške pravice.
 Ali ga želite prilagajati s povečanimi pravicami?</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="853"/>
+        <location filename="../src/mainwindow.cpp" line="852"/>
         <source>Editor Error</source>
         <translation>Napaka urejevalnika</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="853"/>
+        <location filename="../src/mainwindow.cpp" line="852"/>
         <source>Cannot start editor for file: %1</source>
         <translation>Ne morem zagnati urejevalnnika za datoteko: %1</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="863"/>
+        <location filename="../src/mainwindow.cpp" line="862"/>
         <source>About MX Conky</source>
         <translation>O MX Conky</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="865"/>
+        <location filename="../src/mainwindow.cpp" line="864"/>
         <source>Version: </source>
         <translation>Različica:</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="866"/>
+        <location filename="../src/mainwindow.cpp" line="865"/>
         <source>GUI program for configuring Conky in MX Linux</source>
         <translation>Grafični vmesnik za konfiguriranje Conkyja v MX Linuxu</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="869"/>
+        <location filename="../src/mainwindow.cpp" line="868"/>
         <source>Copyright (c) MX Linux</source>
         <translation>Avtorska zaščita (c) MX Linux</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="870"/>
+        <location filename="../src/mainwindow.cpp" line="869"/>
         <source>License</source>
         <translation>Licenca</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="871"/>
-        <location filename="../src/mainwindow.cpp" line="883"/>
+        <location filename="../src/mainwindow.cpp" line="870"/>
+        <location filename="../src/mainwindow.cpp" line="882"/>
         <source>Changelog</source>
         <translation>Dnevnik sprememb</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="872"/>
+        <location filename="../src/mainwindow.cpp" line="871"/>
         <source>Cancel</source>
         <translation>Prekliči</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="894"/>
+        <location filename="../src/mainwindow.cpp" line="893"/>
         <source>&amp;Close</source>
         <translation>&amp;Zapri</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="925"/>
+        <location filename="../src/mainwindow.cpp" line="924"/>
         <source>MX Conky Help</source>
         <translation>Pomoč za MX Conky</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="970"/>
-        <location filename="../src/mainwindow.cpp" line="1020"/>
+        <location filename="../src/mainwindow.cpp" line="969"/>
+        <location filename="../src/mainwindow.cpp" line="1018"/>
         <source>Autostart</source>
         <translation>Samodejni zagon</translation>
     </message>
@@ -960,22 +960,22 @@ Namestite paket graphicsmagick-imagemagick-compat, da ji omogočite.</translatio
         <translation>Ustvarjanje predogleda za: %1</translation>
     </message>
     <message>
-        <location filename="../src/previewdialog.cpp" line="427"/>
+        <location filename="../src/previewdialog.cpp" line="426"/>
         <source>Preview generation complete! Generated %1 previews.</source>
         <translation>Ustvarjanje predogledov je bilo zaključeno! Število ustvarjenih predogledov je %1.</translation>
     </message>
     <message>
-        <location filename="../src/previewdialog.cpp" line="431"/>
+        <location filename="../src/previewdialog.cpp" line="430"/>
         <source>Close</source>
         <translation>Zapri</translation>
     </message>
     <message>
-        <location filename="../src/previewdialog.cpp" line="434"/>
+        <location filename="../src/previewdialog.cpp" line="433"/>
         <source>Preview Generation Complete</source>
         <translation>Ustvarjanje predogledov je končano</translation>
     </message>
     <message>
-        <location filename="../src/previewdialog.cpp" line="435"/>
+        <location filename="../src/previewdialog.cpp" line="434"/>
         <source>Successfully generated %1 preview images.</source>
         <translation>Uspešno število ustvarjenih slik za predogled je %1</translation>
     </message>

@@ -41,6 +41,7 @@ if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-remov
     sed -i s/_beta.*_/_/ /etc/mx-version
     sed -i s/_RC.*_/_/ /etc/mx-version
     sed -i s/_rc.*_/_/ /etc/mx-version
+       
     fi
 
     ##add vmd to /etc/initramfs-tools/modules if its not already there

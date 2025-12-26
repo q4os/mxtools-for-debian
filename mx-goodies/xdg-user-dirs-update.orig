@@ -1,0 +1,93 @@
+#!/bin/bash
+
+main(){
+#first pass the real xdg-user-dirs-update command
+
+/usr/bin/xdg-user-dirs-update.real "$@"
+
+#fix .bashrc misconfiguration if it exists
+if [ -e "$HOME/.bashrc" ]; then
+	sed -i 's/^\[ -z \$LESS \]/[ -z "\$LESS" ]/' "$HOME/.bashrc"
+fi
+
+sleep 0.5
+
+##populate Desktop Folder if it exist
+
+configfolder="$HOME/.config/MX-Linux"
+targetfolder="$(xdg-user-dir DESKTOP)"
+xdg_checkfile="xdg_check"
+liveapplist="minstall.desktop"
+rpi_list="FAQ.desktop rpi-tips.desktop rpi-video.desktop"
+
+applist="FAQ.desktop Help.desktop Quick_System_Info.desktop"
+
+#check to see if we need to do anything else
+
+if [ -e "$configfolder/$xdg_checkfile" ]; then
+	exit 0
+fi
+
+#check for live
+
+if [ -e "/live/linux" ]; then
+	#special case, check for Installer.desktop
+	if [ ! -e "$HOME/$targetfolder/Installer.desktop" ]; then 
+		copystuff "$liveapplist"
+	fi
+	#special case, check for installer link for idesktop
+	if [ -d "$HOME/.idesktop" ]; then
+		if [ ! -e "$HOME/.idesktop/gazelle.lnk" ]; then
+			cp /usr/share/live-files/files/etc/skel/.idesktop/gazelle.lnk "$HOME/.idesktop" 
+		fi
+	fi
+fi
+
+#copy files for rpi_respin
+if [ -n "$(grep rpi.*arm64 /etc/mx-version)" ]; then
+	copystuff "$rpi_list"
+else
+        #copy everything else
+        copystuff "$applist"
+fi
+
+
+
+#mark so we don't do it again
+
+if [ ! -d "$configfolder" ]; then
+	mkdir -p "$configfolder"
+fi
+
+touch "$configfolder/$xdg_checkfile"
+}
+
+copystuff(){
+if [ -d "$targetfolder" ]; then
+	for i in $1; do
+		if [ ! -e "$targetfolder/$i" ]; then
+			if [ -e "/usr/share/applications/$i" ]; then
+				cp "/usr/share/applications/$i" "$targetfolder" 
+				chmod a+x "$targetfolder/$i"
+				#special case; make sure NoDisplay is not in minstall.desktop file
+				if [ "$i" = "minstall.desktop" ]; then
+					sed -i '/NoDisplay*/d' "$targetfolder/minstall.desktop"
+				fi
+				#special case; make sure NoDisplay is not in rpi-video.desktop file
+				if [ "$i" = "rpi-video.desktop" ]; then
+					sed -i '/NoDisplay*/d' "$targetfolder/rpi-video.desktop"
+				fi
+				#make executable from Xfce desktop. safe as long as gio exists on system
+				if [ -x /usr/bin/gio ]; then
+    				cd "$targetfolder"
+    				gio set -t string $i metadata::xfce-exe-checksum "$(sha256sum $i | awk '{print $1}')"
+				fi
+				
+			fi
+		fi
+	done
+fi
+}
+
+main "$@"
+exit 0

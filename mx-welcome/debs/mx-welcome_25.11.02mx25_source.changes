@@ -1,0 +1,25 @@
+Format: 1.8
+Date: Tue, 18 Nov 2025 20:00:55 -0500
+Source: mx-welcome
+Architecture: source
+Version: 25.11.02mx25
+Distribution: mx
+Urgency: medium
+Maintainer: Adrian <adrian@mxlinux.org>
+Changed-By: Dolphin Oracle <dolphinoracle@gmail.com>
+Changes:
+ mx-welcome (25.11.02mx25) mx; urgency=medium
+ .
+   * make sure 8command (TOOLSCMD) runs with arguements
+Checksums-Sha1:
+ b6a1939fa92d0968497a9ee955faab2ad219ad32 749 mx-welcome_25.11.02mx25.dsc
+ daeb5710a4aa3897a509065c8b6a961360d33874 239128 mx-welcome_25.11.02mx25.tar.xz
+ 686097b4bd71e626bcb53a610ba03ca4bff0904c 10609 mx-welcome_25.11.02mx25_source.buildinfo
+Checksums-Sha256:
+ 257fe0155e12cb758940b41e605d817eccb1556d67c66d6599189c4dd3ce6e88 749 mx-welcome_25.11.02mx25.dsc
+ 8e7b656fb31723d8f44a5e68386e02acfd69380b8f1fc09da861d8e07acbfd33 239128 mx-welcome_25.11.02mx25.tar.xz
+ 52ed22b358c892f475dea37727964042921443bb49d2283e74e90a0d1819b3eb 10609 mx-welcome_25.11.02mx25_source.buildinfo
+Files:
+ b2416b252e68a9c7e1621f647a6311da 749 admin optional mx-welcome_25.11.02mx25.dsc
+ 94e8ecd34b509098d94f61ce62147c8b 239128 admin optional mx-welcome_25.11.02mx25.tar.xz
+ 7e361e0f59b09932355be2d648fb7c80 10609 admin optional mx-welcome_25.11.02mx25_source.buildinfo

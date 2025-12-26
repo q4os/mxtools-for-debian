@@ -1,3 +1,18 @@
+mx-conky-data (20251102) mx; urgency=medium
+
+  * add missing image file
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 05 Nov 2025 18:08:31 -0500
+
+mx-conky-data (20251101) mx; urgency=medium
+
+  [ Melber ]
+  * MX-Elementary remove duplicate config, minor tweak
+  * MX-Audacious fix permission, add black variant
+  * MX-KoO theme font tweaks
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 03 Nov 2025 20:51:48 -0500
+
 mx-conky-data (20251003) mx; urgency=medium
 
   * MX-Audacious theme tweaks

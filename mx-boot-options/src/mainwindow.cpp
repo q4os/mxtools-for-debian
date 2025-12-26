@@ -24,12 +24,15 @@
 #include "ui_mainwindow.h"
 
 #include <QDebug>
+#include <QDir>
 #include <QGuiApplication>
 #include <QFileDialog>
+#include <QFileInfo>
 #include <QInputDialog>
 #include <QKeyEvent>
 #include <QListWidget>
 #include <QProgressDialog>
+#include <QRegularExpression>
 #include <QScreen>
 #include <QStandardPaths>
 #include <QTemporaryFile>
@@ -42,6 +45,15 @@
 
 using namespace std::chrono_literals;
 extern const QString starting_home;
+
+namespace
+{
+// Matches kernel command line tokens that are isolated or separated by whitespace
+const QRegularExpression hushTokenRx(QStringLiteral(R"((^|\s+)hush(\s+|$))"));
+const QRegularExpression quietTokenRx(QStringLiteral(R"((^|\s+)quiet(\s+|$))"));
+const QRegularExpression splashTokenRx(QStringLiteral(R"((^|\s+)splash(\s+|$))"));
+const QRegularExpression noSplashTokenRx(QStringLiteral(R"((^|\s+)nosplash(\s+|$))"));
+} // namespace
 
 MainWindow::MainWindow(QWidget *parent)
     : QDialog(parent),
@@ -321,6 +333,29 @@ bool MainWindow::isWaylandSession()
     }
 
     return !qgetenv("WAYLAND_DISPLAY").isEmpty();
+}
+
+bool MainWindow::isSystemdEnvironment() const
+{
+    if (chroot.isEmpty()) {
+        return QFile::exists(QStringLiteral("/run/systemd/system"));
+    }
+
+    const QString rootPath = tempDir.path();
+
+    const auto hasSystemdBinary = [&](const QString &relativePath) {
+        return QFile::exists(rootPath + relativePath);
+    };
+
+    QFileInfo initFile(rootPath + QStringLiteral("/sbin/init"));
+    if (initFile.exists()) {
+        const QString target = initFile.isSymLink() ? initFile.symLinkTarget() : initFile.canonicalFilePath();
+        if (target.contains(QLatin1String("systemd"), Qt::CaseInsensitive)) {
+            return true;
+        }
+    }
+
+    return false;
 }
 
 void MainWindow::appendLogWithColors(QTextEdit *textEdit, const QString &logContent)
@@ -850,16 +885,18 @@ void MainWindow::processGrubTheme(const QString &line)
 void MainWindow::processKernelCommandLine(QString line)
 {
     const QString cmdline = line.remove("GRUB_CMDLINE_LINUX_DEFAULT=").remove(QRegularExpression("[\"']"));
-    ui->textKernel->setText(live && !installedMode ? kernelOptions : cmdline);
+    const QString effectiveCmdline = live && !installedMode ? kernelOptions : cmdline;
+    ui->textKernel->setText(effectiveCmdline);
 
-    bool hasHush = cmdline.contains("hush");
-    bool hasQuiet = cmdline.contains("quiet");
+    bool hasHush = effectiveCmdline.contains(hushTokenRx);
+    bool hasQuiet = effectiveCmdline.contains(quietTokenRx);
+    bool hasSplash = effectiveCmdline.contains(splashTokenRx) && !effectiveCmdline.contains(noSplashTokenRx);
 
     ui->radioDetailedMsg->setChecked(hasQuiet);
     ui->radioLimitedMsg->setChecked(hasHush);
     ui->radioVeryDetailedMsg->setChecked(!hasHush && !hasQuiet);
 
-    ui->checkBootsplash->setChecked(cmdline.contains("splash") && isInstalled(requiredPackages));
+    ui->checkBootsplash->setChecked(hasSplash && isInstalled(requiredPackages));
 }
 
 // Read kernel line and options from /proc/cmdline
@@ -1116,11 +1153,11 @@ void MainWindow::radioDetailedMsgToggled(bool checked)
         ui->pushApply->setEnabled(true);
 
         QString line = ui->textKernel->text();
-        if (!line.contains(QLatin1String("quiet"))) {
+        if (!line.contains(quietTokenRx)) {
             line.append(line.isEmpty() ? "quiet" : " quiet");
         }
 
-        line.remove(QRegularExpression("\\s*hush"));
+        line.replace(hushTokenRx, " ");
         ui->textKernel->setText(line.trimmed());
     }
 }
@@ -1132,7 +1169,8 @@ void MainWindow::radioVeryDetailedMsgToggled(bool checked)
         ui->pushApply->setEnabled(true);
 
         QString line = ui->textKernel->text();
-        line.remove(QRegularExpression("\\s*quiet|\\s*hush"));
+        line.replace(hushTokenRx, " ");
+        line.replace(quietTokenRx, " ");
         ui->textKernel->setText(line.trimmed());
     }
 }
@@ -1146,10 +1184,10 @@ void MainWindow::radioLimitedMsgToggled(bool checked)
         QString line = ui->textKernel->text();
         QStringList options;
 
-        if (!line.contains(QLatin1String("quiet"))) {
+        if (!line.contains(quietTokenRx)) {
             options << "quiet";
         }
-        if (!line.contains(QLatin1String("hush"))) {
+        if (!line.contains(hushTokenRx)) {
             options << "hush";
         }
 
@@ -1197,13 +1235,14 @@ void MainWindow::comboBootsplashToggled(bool checked)
     QString line = ui->textKernel->text();
     if (checked) {
         loadPlymouthThemes();
-        if (!line.contains(QLatin1String("splash"))) {
+        line.replace(noSplashTokenRx, " ");
+        if (!line.contains(splashTokenRx)) {
             line.append(line.isEmpty() ? "splash" : " splash");
         }
     } else {
         ui->comboTheme->clear();
         ui->pushPreview->setDisabled(true);
-        line.remove(QRegularExpression("\\s*splash"));
+        line.replace(splashTokenRx, " ");
     }
 
     ui->textKernel->setText(line.trimmed());
@@ -1212,46 +1251,83 @@ void MainWindow::comboBootsplashToggled(bool checked)
 
 void MainWindow::pushLogClicked()
 {
-    // Determine base path based on chroot status
-    QString location = chroot.isEmpty() ? QString() : tempDir.path();
+    QString logContent;
+    QString fallbackLocation;
+    QString offlineJournalDir;
 
-    // Primary log location based on kernel options
-    location += kernelOptions.contains("hush") ? "/run/rc.log" : "/var/log/boot.log";
+    const bool systemdEnv = isSystemdEnvironment();
+    if (systemdEnv) {
+        QString journalctlCmd;
+        if (chroot.isEmpty()) {
+            journalctlCmd = QStringLiteral("journalctl -b --no-pager");
+        } else {
+            const QString rootPath = tempDir.path();
+            QString journalDir = rootPath + QStringLiteral("/var/log/journal");
+            if (!QDir(journalDir).exists()) {
+                journalDir = rootPath + QStringLiteral("/run/log/journal");
+            }
+            if (QDir(journalDir).exists()) {
+                offlineJournalDir = journalDir;
+                journalctlCmd = QStringLiteral("journalctl --directory=%1 -b --no-pager --root=%2")
+                                    .arg(journalDir, rootPath);
+            }
+        }
 
-    // Fallback to alternate log location if primary doesn't exist
-    if (!QFile::exists(location)) {
-        location = chroot.isEmpty() ? "/var/log/boot" : tempDir.path() + "/var/log/boot";
+        if (!journalctlCmd.isEmpty()) {
+            logContent = cmd.getOutAsRoot(journalctlCmd, QuietMode::Yes);
+        }
     }
 
-    if (QFile::exists(location)) {
-        // Prepare command to remove formatting escape characters
-        // QString sedCommand = R"(sed 's/\x1b\[?([0-9]{1,2}(;[0-9]{1,2})*)?m?//g; s/\r//;')";
+    if (logContent.isEmpty()) {
+        QString location = chroot.isEmpty() ? QString() : tempDir.path();
+        const bool hasHush = kernelOptions.contains(hushTokenRx);
+        location += hasHush ? "/run/rc.log" : "/var/log/boot.log";
 
-        QString logContent = cmd.getOutAsRoot("cat " + location);
+        if (!QFile::exists(location)) {
+            location = chroot.isEmpty() ? "/var/log/boot" : tempDir.path() + "/var/log/boot";
+        }
 
-        // Create and configure the dialog to display the log
-        QDialog logDialog;
-        logDialog.setWindowTitle(tr("Boot Log"));
+        fallbackLocation = location;
 
-        auto *textEdit = new QTextEdit(&logDialog);
-        textEdit->setReadOnly(true);
-        textEdit->setMinimumSize(600, 500);
-        appendLogWithColors(textEdit, logContent);
-        // textEdit->setPlainText(logContent);
-
-        auto *closeButton = new QPushButton(tr("&Close"), &logDialog);
-        connect(closeButton, &QPushButton::clicked, &logDialog, &QDialog::accept);
-
-        auto *layout = new QVBoxLayout(&logDialog);
-        layout->addWidget(textEdit);
-        layout->addWidget(closeButton);
-
-        logDialog.setModal(true);
-        logDialog.setSizeGripEnabled(true);
-        logDialog.exec();
-    } else {
-        QMessageBox::critical(this, tr("Log not found"), tr("Could not find log at ") + location);
+        if (QFile::exists(location)) {
+            logContent = cmd.getOutAsRoot("cat " + location);
+        }
     }
+
+    if (logContent.isEmpty()) {
+        QString message;
+        if (systemdEnv) {
+            message = fallbackLocation.isEmpty()
+                ? tr("Could not read the systemd boot logs.")
+                : tr("Could not read the systemd boot logs%1 or the fallback log at %2.")
+                      .arg(offlineJournalDir.isEmpty() ? QString() : tr(" from %1").arg(offlineJournalDir),
+                           fallbackLocation);
+        } else {
+            message = fallbackLocation.isEmpty() ? tr("Could not find any boot logs.")
+                                                 : tr("Could not find log at %1").arg(fallbackLocation);
+        }
+        QMessageBox::critical(this, tr("Log not found"), message);
+        return;
+    }
+
+    QDialog logDialog;
+    logDialog.setWindowTitle(tr("Boot Log"));
+
+    auto *textEdit = new QTextEdit(&logDialog);
+    textEdit->setReadOnly(true);
+    textEdit->setMinimumSize(600, 500);
+    appendLogWithColors(textEdit, logContent);
+
+    auto *closeButton = new QPushButton(tr("&Close"), &logDialog);
+    connect(closeButton, &QPushButton::clicked, &logDialog, &QDialog::accept);
+
+    auto *layout = new QVBoxLayout(&logDialog);
+    layout->addWidget(textEdit);
+    layout->addWidget(closeButton);
+
+    logDialog.setModal(true);
+    logDialog.setSizeGripEnabled(true);
+    logDialog.exec();
 }
 
 void MainWindow::pushUefiClicked()

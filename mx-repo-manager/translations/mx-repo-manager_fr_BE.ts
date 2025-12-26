@@ -194,7 +194,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="708"/>
         <source>A safer option is to install packages individually with MX Package Installer.</source>
-        <translation>Installer un à un les paquets depuis MX Installateur de Paquets est une solution plus sûre.</translation>
+        <translation>Une option plus sûre consiste à installer les paquets individuellement à l’aide de MX Package Installer « MX Installateur de paquets ».</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="745"/>

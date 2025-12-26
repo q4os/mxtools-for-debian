@@ -1,3 +1,11 @@
+mx-repo-manager (25.11) mx; urgency=medium
+
+  * Fix: URL replacement that contains ftp://
+  * Fix: Debian version detection
+  * Fix: MX fastest repo selection
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 05 Nov 2025 22:22:58 -0500
+
 mx-repo-manager (25.08) mx; urgency=medium
 
   * Fix ownership and permission after editing file

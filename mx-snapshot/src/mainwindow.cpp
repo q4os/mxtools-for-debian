@@ -26,10 +26,25 @@
 #include "ui_mainwindow.h"
 
 #include <QCalendarWidget>
+#include <QDateTime>
+#include <QDialog>
+#include <QDialogButtonBox>
 #include <QDebug>
+#include <QDir>
+#include <QFile>
+#include <QFileDevice>
 #include <QFileDialog>
+#include <QFileInfo>
+#include <QFileSystemWatcher>
 #include <QKeyEvent>
+#include <QPlainTextEdit>
+#include <QProcess>
+#include <QPushButton>
 #include <QScrollBar>
+#include <QTextBlock>
+#include <QTextCharFormat>
+#include <QTextCursor>
+#include <QVBoxLayout>
 #include <QTextStream>
 #include <QTime>
 
@@ -37,6 +52,7 @@
 #include "settings.h"
 #include "work.h"
 #include <chrono>
+#include <utime.h>
 
 using namespace std::chrono_literals;
 
@@ -59,6 +75,7 @@ MainWindow::MainWindow(Settings *settings, QWidget *parent)
     } else {
         listUsedSpace();
     }
+    watchExcludesFile();
 }
 
 MainWindow::~MainWindow() = default;
@@ -68,32 +85,265 @@ void MainWindow::loadSettings()
     qDebug() << "+++" << __PRETTY_FUNCTION__ << "+++";
     ui->labelTitleSummary->clear();
     ui->labelSummary->clear();
-    ui->labelSnapshotDir->setText(settings->snapshot_dir);
-    if (settings->snapshot_name.isEmpty()) {
+    ui->labelSnapshotDir->setText(settings->snapshotDir);
+    if (settings->snapshotName.isEmpty()) {
         ui->lineEditName->setText(settings->getFilename());
     } else {
-        ui->lineEditName->setText(settings->snapshot_name);
+        ui->lineEditName->setText(settings->snapshotName);
     }
     ui->textCodename->setText(settings->codename);
-    ui->textDistroVersion->setText(settings->distro_version);
-    ui->textProjectName->setText(settings->project_name);
-    ui->textOptions->setText(settings->boot_options);
-    ui->pushReleaseDate->setText(settings->release_date);
+    ui->textDistroVersion->setText(settings->distroVersion);
+    ui->textProjectName->setText(settings->projectName);
+    ui->textOptions->setText(settings->bootOptions);
+    ui->pushReleaseDate->setText(settings->releaseDate);
     QDir bootDir("/boot");
     QStringList kernelFiles = bootDir.entryList({"vmlinuz-*"}, QDir::Files | QDir::NoDotAndDotDot, QDir::Name);
     std::transform(kernelFiles.begin(), kernelFiles.end(), kernelFiles.begin(),
                    [](const QString &file) { return file.mid(QStringLiteral("vmlinuz-").length()); });
     ui->comboLiveKernel->addItems(kernelFiles);
     ui->comboLiveKernel->setCurrentText(settings->kernel);
+    updateCustomExcludesButton();
+    watchExcludesFile();
+}
+
+bool MainWindow::hasCustomExcludes() const
+{
+    const QString configuredPath = settings->snapshotExcludes.fileName();
+    const QString sourcePath = settings->getExcludesSourcePath();
+
+    if (sourcePath.isEmpty() || configuredPath.isEmpty()) {
+        return false;
+    }
+
+    if (!QFileInfo::exists(sourcePath)) {
+        return false;
+    }
+
+    if (!QFileInfo::exists(configuredPath)) {
+        return true;
+    }
+
+    const int diffResult = QProcess::execute("diff", {"--brief", configuredPath, sourcePath});
+    if (diffResult == 1) {
+        return true;
+    }
+    if (diffResult != 0) {
+        qWarning() << "Unable to compare excludes files with diff:" << configuredPath << sourcePath;
+    }
+    return false;
+}
+
+bool MainWindow::isSourceExcludesNewer(QString &diffOutput) const
+{
+    const QString configuredPath = settings->snapshotExcludes.fileName();
+    const QString sourcePath = settings->getExcludesSourcePath();
+
+    if (sourcePath.isEmpty() || configuredPath.isEmpty()) {
+        return false;
+    }
+
+    const QFileInfo configuredInfo(configuredPath);
+    const QFileInfo sourceInfo(sourcePath);
+
+    if (!configuredInfo.exists() || !sourceInfo.exists()) {
+        return false;
+    }
+
+    if (sourceInfo.lastModified() <= configuredInfo.lastModified()) {
+        return false;
+    }
+
+    QProcess diffProcess;
+    diffProcess.start("diff", {"--unified", configuredPath, sourcePath});
+    if (!diffProcess.waitForFinished()) {
+        qWarning() << "Unable to compare excludes files with diff:" << configuredPath << sourcePath;
+        return false;
+    }
+
+    const int diffResult = diffProcess.exitCode();
+    if (diffResult == 0) {
+        return false;
+    }
+    if (diffResult != 1) {
+        qWarning() << "Unable to compare excludes files with diff:" << configuredPath << sourcePath;
+        return false;
+    }
+
+    diffOutput = QString::fromUtf8(diffProcess.readAllStandardOutput());
+    if (diffOutput.isEmpty()) {
+        diffOutput = QString::fromUtf8(diffProcess.readAllStandardError());
+    }
+    if (diffOutput.isEmpty()) {
+        diffOutput = tr("No diff output available.");
+    }
+    return true;
+}
+
+void MainWindow::updateCustomExcludesButton()
+{
+    ui->btnRemoveCustomExclude->setVisible(hasCustomExcludes());
+}
+
+void MainWindow::watchExcludesFile()
+{
+    const QString path = settings->snapshotExcludes.fileName();
+    if (path.isEmpty()) {
+        return;
+    }
+
+    const QStringList watched = excludesWatcher.files();
+    for (const QString &existing : watched) {
+        if (existing != path) {
+            excludesWatcher.removePath(existing);
+        }
+    }
+
+    if (!excludesWatcher.files().contains(path) && QFileInfo::exists(path)) {
+        excludesWatcher.addPath(path);
+    }
+}
+
+MainWindow::ExcludesChoice MainWindow::showUpdatedExcludesPrompt(const QString &configuredPath,
+                                                                 const QString &sourcePath) const
+{
+    QMessageBox msgBox(const_cast<MainWindow *>(this));
+    msgBox.setWindowTitle(tr("Updated Exclusion List"));
+    msgBox.setIcon(QMessageBox::Information);
+    msgBox.setText(
+        tr("The exclusion file at %1 is newer than your configured file at %2.").arg(sourcePath, configuredPath));
+    msgBox.setInformativeText(
+        tr("Review the changes below. Keep your custom file or replace it with the updated default."));
+
+    ExcludesChoice choice = ExcludesChoice::None;
+
+    msgBox.addButton(QMessageBox::Close);
+
+    QPushButton *showDiffButton = msgBox.addButton(tr("Show Differences"), QMessageBox::ActionRole);
+    QObject::connect(showDiffButton, &QPushButton::clicked, &msgBox, [&choice, &msgBox] {
+        choice = ExcludesChoice::ShowDiff;
+        msgBox.accept();
+    });
+
+    QPushButton *keepCustomButton = msgBox.addButton(tr("Keep Custom"), QMessageBox::ActionRole);
+    QObject::connect(keepCustomButton, &QPushButton::clicked, &msgBox, [&choice, &msgBox] {
+        choice = ExcludesChoice::KeepCustom;
+        msgBox.accept();
+    });
+
+    QPushButton *useUpdatedDefaultButton = msgBox.addButton(tr("Use Updated Default"), QMessageBox::ActionRole);
+    QObject::connect(useUpdatedDefaultButton, &QPushButton::clicked, &msgBox, [&choice, &msgBox] {
+        choice = ExcludesChoice::UseUpdatedDefault;
+        msgBox.accept();
+    });
+
+    msgBox.exec();
+    return choice;
+}
+
+void MainWindow::showUpdatedExcludesDialog(const QString &diffOutput) const
+{
+    QDialog dialog(const_cast<MainWindow *>(this));
+    dialog.setWindowTitle(tr("Updated Exclusion List"));
+
+    auto *layout = new QVBoxLayout(&dialog);
+    auto *textEdit = new QPlainTextEdit(&dialog);
+    textEdit->setReadOnly(true);
+    textEdit->setPlainText(diffOutput);
+    QFont font(QStringLiteral("monospace"));
+    font.setStyleHint(QFont::Monospace);
+    textEdit->setFont(font);
+    layout->addWidget(textEdit);
+
+    auto *buttons = new QDialogButtonBox(QDialogButtonBox::Close, Qt::Horizontal, &dialog);
+    layout->addWidget(buttons);
+
+    // Highlight diff lines similar to standard diff coloring
+    QTextCharFormat addedFormat;
+    addedFormat.setForeground(Qt::darkGreen);
+    addedFormat.setFontWeight(QFont::Bold);
+
+    QTextCharFormat locationFormat;
+    locationFormat.setForeground(QColor(35, 140, 216));
+    locationFormat.setFontWeight(QFont::Bold);
+
+    QTextCharFormat removedFormat;
+    removedFormat.setForeground(QColor(187, 15, 30));
+    removedFormat.setFontWeight(QFont::Bold);
+
+    QTextCharFormat headerFormat;
+    headerFormat.setForeground(QColor(102, 102, 102));
+    headerFormat.setFontWeight(QFont::Bold);
+
+    QTextCursor cursor(textEdit->document());
+    cursor.setPosition(0);
+    while (!cursor.atEnd()) {
+        const QString lineText = cursor.block().text();
+        if (lineText.startsWith("@@")) {
+            cursor.movePosition(QTextCursor::EndOfLine, QTextCursor::KeepAnchor);
+            cursor.mergeCharFormat(locationFormat);
+        } else if (lineText.startsWith("+++ ") || lineText.startsWith("--- ")) {
+            cursor.movePosition(QTextCursor::EndOfLine, QTextCursor::KeepAnchor);
+            cursor.mergeCharFormat(headerFormat);
+        } else if (lineText.startsWith('+')) {
+            cursor.movePosition(QTextCursor::EndOfLine, QTextCursor::KeepAnchor);
+            cursor.mergeCharFormat(addedFormat);
+        } else if (lineText.startsWith('-')) {
+            cursor.movePosition(QTextCursor::EndOfLine, QTextCursor::KeepAnchor);
+            cursor.mergeCharFormat(removedFormat);
+        }
+        cursor.movePosition(QTextCursor::NextBlock, QTextCursor::MoveAnchor);
+    }
+    cursor.setPosition(0);
+
+    QObject::connect(buttons, &QDialogButtonBox::rejected, &dialog, &QDialog::reject);
+    dialog.resize(900, 700);
+    dialog.exec();
+}
+
+bool MainWindow::resetCustomExcludes()
+{
+    const QString configuredPath = settings->snapshotExcludes.fileName();
+    const QString sourcePath = settings->getExcludesSourcePath();
+
+    if (sourcePath.isEmpty() || configuredPath.isEmpty()) {
+        return false;
+    }
+
+    if (!QFileInfo::exists(sourcePath)) {
+        QMessageBox::warning(this, tr("Error"),
+                             tr("Default exclusion file not found at %1.").arg(sourcePath));
+        return false;
+    }
+
+    const QString targetDir = QFileInfo(configuredPath).absolutePath();
+    if (!targetDir.isEmpty()) {
+        QDir().mkpath(targetDir);
+    }
+
+    if (QFileInfo::exists(configuredPath) && !QFile::remove(configuredPath)) {
+        QMessageBox::warning(this, tr("Error"),
+                             tr("Could not remove existing exclusion file at %1.").arg(configuredPath));
+        return false;
+    }
+
+    if (!QFile::copy(sourcePath, configuredPath)) {
+        QMessageBox::warning(this, tr("Error"),
+                             tr("Could not copy default exclusion file from %1 to %2.")
+                                 .arg(sourcePath, configuredPath));
+        return false;
+    }
+
+    watchExcludesFile();
+    return true;
 }
 
 void MainWindow::setOtherOptions()
 {
     ui->cbCompression->setCurrentIndex(ui->cbCompression->findText(settings->compression, Qt::MatchStartsWith));
-    ui->checkMd5->setChecked(settings->make_md5sum);
-    ui->checkSha512->setChecked(settings->make_sha512sum);
-    ui->radioRespin->setChecked(settings->reset_accounts);
-    ui->spinCPU->setMaximum(static_cast<int>(settings->max_cores));
+    ui->checkMd5->setChecked(settings->makeMd5sum);
+    ui->checkSha512->setChecked(settings->makeSha512sum);
+    ui->radioRespin->setChecked(settings->resetAccounts);
+    ui->spinCPU->setMaximum(static_cast<int>(settings->maxCores));
     ui->spinCPU->setValue(static_cast<int>(settings->cores));
     ui->spinThrottle->setValue(static_cast<int>(settings->throttle));
 }
@@ -112,6 +362,7 @@ void MainWindow::setConnections()
     connect(ui->btnBack, &QPushButton::clicked, this, &MainWindow::btnBack_clicked);
     connect(ui->btnCancel, &QPushButton::clicked, this, &MainWindow::btnCancel_clicked);
     connect(ui->btnEditExclude, &QPushButton::clicked, this, &MainWindow::btnEditExclude_clicked);
+    connect(ui->btnRemoveCustomExclude, &QPushButton::clicked, this, &MainWindow::btnRemoveCustomExclude_clicked);
     connect(ui->btnHelp, &QPushButton::clicked, this, &MainWindow::btnHelp_clicked);
     connect(ui->btnNext, &QPushButton::clicked, this, &MainWindow::btnNext_clicked);
     connect(ui->btnSelectSnapshot, &QPushButton::clicked, this, &MainWindow::btnSelectSnapshot_clicked);
@@ -139,6 +390,12 @@ void MainWindow::setConnections()
     connect(ui->excludeSteam, &QCheckBox::toggled, this, &MainWindow::excludeSteam_toggled);
     connect(ui->excludeVideos, &QCheckBox::toggled, this, &MainWindow::excludeVideos_toggled);
     connect(ui->excludeVirtualBox, &QCheckBox::toggled, this, &MainWindow::excludeVirtualBox_toggled);
+    connect(&excludesWatcher, &QFileSystemWatcher::fileChanged, this, [this](const QString &path) {
+        Q_UNUSED(path);
+        updateCustomExcludesButton();
+        checkUpdatedDefaultExcludes();
+        watchExcludesFile(); // re-add in case the file was recreated
+    });
     connect(ui->pushReleaseDate, &QPushButton::clicked, this, [this] {
         QCalendarWidget *calendarWidget = new QCalendarWidget(this);
         calendarWidget->setWindowTitle(tr("Select Release Date"));
@@ -212,11 +469,11 @@ void MainWindow::listUsedSpace()
 void MainWindow::listFreeSpace()
 {
     qDebug() << "+++" << __PRETTY_FUNCTION__ << "+++";
-    QString path = settings->snapshot_dir;
+    QString path = settings->snapshotDir;
     path.remove(QRegularExpression("/snapshot$"));
-    QString free_space = settings->getFreeSpaceStrings(path);
+    const QString freeSpace = settings->getFreeSpaceStrings(path);
     ui->labelFreeSpace->clear();
-    ui->labelFreeSpace->setText("- " + tr("Free space on %1, where snapshot folder is placed: ").arg(path) + free_space
+    ui->labelFreeSpace->setText("- " + tr("Free space on %1, where snapshot folder is placed: ").arg(path) + freeSpace
                                 + "\n");
     ui->labelDiskSpaceHelp->setText(
         tr("The free space should be sufficient to hold the compressed data from / and /home\n\n"
@@ -329,8 +586,8 @@ void MainWindow::btnNext_clicked()
     QString file_name = ui->lineEditName->text();
     appendIsoExtension(file_name);
 
-    if (QFile::exists(settings->snapshot_dir + "/" + file_name)) {
-        showErrorMessageBox(settings->snapshot_dir + "/" + file_name);
+    if (QFile::exists(settings->snapshotDir + "/" + file_name)) {
+        showErrorMessageBox(settings->snapshotDir + "/" + file_name);
         return;
     }
 
@@ -367,16 +624,17 @@ void MainWindow::handleSelectionPage(const QString &file_name)
     settings->selectKernel();
     ui->labelTitleSummary->setText(tr("Snapshot will use the following settings:"));
 
-    ui->labelSummary->setText("\n" + tr("- Snapshot directory:") + " " + settings->snapshot_dir + "\n" + "- "
+    ui->labelSummary->setText("\n" + tr("- Snapshot directory:") + " " + settings->snapshotDir + "\n" + "- "
                               + tr("Snapshot name:") + " " + file_name + "\n" + tr("- Kernel to be used:") + " "
                               + settings->kernel + "\n");
     settings->codename = ui->textCodename->text();
-    settings->distro_version = ui->textDistroVersion->text();
-    settings->project_name = ui->textProjectName->text();
-    settings->full_distro_name = settings->project_name + "-" + settings->distro_version + "_" + QString(settings->x86 ? "386" : "x64");
-    settings->boot_options = ui->textOptions->text();
-    settings->release_date = ui->pushReleaseDate->text();
+    settings->distroVersion = ui->textDistroVersion->text();
+    settings->projectName = ui->textProjectName->text();
+    settings->fullDistroName = settings->projectName + "-" + settings->distroVersion + "_" + QString(settings->x86 ? "386" : "x64");
+    settings->bootOptions = ui->textOptions->text();
+    settings->releaseDate = ui->pushReleaseDate->text();
     checkNvidiaGraphicsCard();
+    checkUpdatedDefaultExcludes();
 }
 
 void MainWindow::checkNvidiaGraphicsCard()
@@ -405,6 +663,49 @@ void MainWindow::checkNvidiaGraphicsCard()
         }
     }
     hasRun = true;
+}
+
+void MainWindow::checkUpdatedDefaultExcludes()
+{
+    QString diffOutput;
+    if (!isSourceExcludesNewer(diffOutput)) {
+        return;
+    }
+
+    const QString configuredPath = settings->snapshotExcludes.fileName();
+    const QString sourcePath = settings->getExcludesSourcePath();
+    ExcludesChoice choice = ExcludesChoice::None;
+
+    while (true) {
+        choice = showUpdatedExcludesPrompt(configuredPath, sourcePath);
+        if (choice == ExcludesChoice::ShowDiff) {
+            showUpdatedExcludesDialog(diffOutput);
+            continue; // re-prompt after showing diff
+        }
+        if (choice == ExcludesChoice::None) {
+            return; // user closed the prompt; do nothing
+        }
+        break;
+    }
+
+    if (choice == ExcludesChoice::UseUpdatedDefault) {
+        if (resetCustomExcludes()) {
+            updateCustomExcludesButton();
+        } else {
+            QMessageBox::warning(this, tr("Error"),
+                                 tr("Could not replace the exclusion file with the updated default."));
+        }
+    } else if (choice == ExcludesChoice::KeepCustom) {
+        utimbuf times {};
+        times.actime = QFileInfo(configuredPath).lastRead().toSecsSinceEpoch();
+        times.modtime = QDateTime::currentSecsSinceEpoch();
+        const int utimeResult = utime(configuredPath.toLocal8Bit().constData(), &times);
+        if (utimeResult == 0) {
+            qDebug() << "Updated modification time for custom excludes file via utime" << configuredPath;
+        } else {
+            qWarning() << "Failed to update modification time for custom excludes file" << configuredPath;
+        }
+    }
 }
 
 void MainWindow::handleSettingsPage(const QString &file_name)
@@ -479,14 +780,14 @@ void MainWindow::prepareForOutput(const QString &file_name)
     setWindowTitle(tr("Output"));
     ui->outputBox->clear();
     work.setupEnv();
-    if (!settings->monthly && !settings->override_size) {
+    if (!settings->monthly && !settings->overrideSize) {
         work.checkEnoughSpace();
     }
     work.copyNewIso();
     ui->outputLabel->clear();
     work.savePackageList(file_name);
 
-    if (settings->edit_boot_menu) {
+    if (settings->editBootMenu) {
         editBootMenu();
     }
 
@@ -505,7 +806,9 @@ void MainWindow::editBootMenu()
                "snapshot."),
             QMessageBox::Yes | QMessageBox::No)) {
         hide();
-        QString cmd = settings->getEditor() + " \"" + settings->work_dir + "/iso-template/boot/isolinux/isolinux.cfg\"";
+        QString cmd = settings->getEditor() + " \"" + settings->workDir + "/iso-template/boot/grub/grub.cfg\" \""
+                      + settings->workDir + "/iso-template/boot/syslinux/syslinux.cfg\" \"" + settings->workDir
+                      + "/iso-template/boot/isolinux/isolinux.cfg\"";
         work.shell.run(cmd);
         show();
     }
@@ -523,8 +826,26 @@ void MainWindow::btnBack_clicked()
 void MainWindow::btnEditExclude_clicked()
 {
     hide();
-    work.shell.run(settings->getEditor() + " " + settings->snapshot_excludes.fileName());
+    Cmd editor(this);
+    editor.run(settings->getEditor() + " " + settings->snapshotExcludes.fileName());
+    updateCustomExcludesButton();
+    checkUpdatedDefaultExcludes();
     show();
+}
+
+void MainWindow::btnRemoveCustomExclude_clicked()
+{
+    const QMessageBox::StandardButton response = QMessageBox::question(
+        this, tr("Remove Custom Exclusion File"),
+        tr("Revert the exclusion list to the default file? This will overwrite your current exclusions."),
+        QMessageBox::Yes | QMessageBox::No);
+    if (response != QMessageBox::Yes) {
+        return;
+    }
+
+    if (resetCustomExcludes()) {
+        updateCustomExcludesButton();
+    }
 }
 
 void MainWindow::excludeDocuments_toggled(bool checked)
@@ -578,7 +899,7 @@ void MainWindow::excludeDesktop_toggled(bool checked)
 
 void MainWindow::radioRespin_toggled(bool checked)
 {
-    settings->reset_accounts = checked;
+    settings->resetAccounts = checked;
     if (checked && !ui->excludeAll->isChecked()) {
         ui->excludeAll->click();
     }
@@ -586,7 +907,7 @@ void MainWindow::radioRespin_toggled(bool checked)
 
 void MainWindow::radioPersonal_clicked(bool checked)
 {
-    settings->reset_accounts = !checked;
+    settings->resetAccounts = !checked;
     if (checked && ui->excludeAll->isChecked()) {
         ui->excludeAll->click();
     }
@@ -625,8 +946,8 @@ void MainWindow::btnSelectSnapshot_clicked()
     QString selected = QFileDialog::getExistingDirectory(this, tr("Select Snapshot Directory"), QString(),
                                                          QFileDialog::ShowDirsOnly);
     if (!selected.isEmpty()) {
-        settings->snapshot_dir = selected + "/snapshot";
-        ui->labelSnapshotDir->setText(settings->snapshot_dir);
+        settings->snapshotDir = selected + "/snapshot";
+        ui->labelSnapshotDir->setText(settings->snapshotDir);
         listFreeSpace();
     }
 }
@@ -673,13 +994,13 @@ void MainWindow::excludeNetworks_toggled(bool checked)
 void MainWindow::checkMd5_toggled(bool checked)
 {
     qt_settings.setValue("make_md5sum", checked ? "yes" : "no");
-    settings->make_md5sum = checked;
+    settings->makeMd5sum = checked;
 }
 
 void MainWindow::checkSha512_toggled(bool checked)
 {
     qt_settings.setValue("make_sha512sum", checked ? "yes" : "no");
-    settings->make_sha512sum = checked;
+    settings->makeSha512sum = checked;
 }
 
 void MainWindow::excludeSteam_toggled(bool checked)

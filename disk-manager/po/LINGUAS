@@ -1,5 +1,5 @@
 # languages codes with translation completness  >= 5%
-# generated with tx-complete.sh at Tue, 26 Mar 2024 19:03:03 +0000
+# generated with tx-complete.sh at Tue, 25 Nov 2025 00:56:34 +0000
 # 
 am
 bg
@@ -14,6 +14,7 @@ fi
 fil_PH
 fr
 fr_BE
+gl
 gl_ES
 he_IL
 hi
@@ -22,6 +23,7 @@ hu
 is
 it
 ja
+ka
 lt
 nb
 nl

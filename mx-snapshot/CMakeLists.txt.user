@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 17.0.0, 2025-09-10T00:51:43. -->
+<!-- Written by QtCreator 17.0.2, 2025-12-08T10:14:30. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -109,15 +109,15 @@
     <value type="int" key="CMake.Configure.BaseEnvironment">2</value>
     <value type="bool" key="CMake.Configure.ClearSystemEnvironment">false</value>
     <valuelist type="QVariantList" key="CMake.Configure.UserEnvironmentChanges"/>
-    <value type="QString" key="CMake.Initial.Parameters">-DCMAKE_PROJECT_INCLUDE_BEFORE:FILEPATH=%{BuildConfig:BuildDirectory:NativeFilePath}/.qtc/package-manager/auto-setup.cmake
--DCMAKE_GENERATOR:STRING=Unix Makefiles
--DCMAKE_COLOR_DIAGNOSTICS:BOOL=ON
--DCMAKE_PREFIX_PATH:STRING=%{Qt:QT_INSTALL_PREFIX}
--DCMAKE_CXX_COMPILER:STRING=%{Compiler:Executable:Cxx}
+    <value type="QString" key="CMake.Initial.Parameters">-DCMAKE_PREFIX_PATH:STRING=%{Qt:QT_INSTALL_PREFIX}
+-DCMAKE_C_COMPILER:STRING=%{Compiler:Executable:C}
 -DCMAKE_CXX_FLAGS_INIT:STRING=%{Qt:QML_DEBUG_FLAG}
--DQT_QMAKE_EXECUTABLE:STRING=%{Qt:qmakeExecutable}
 -DCMAKE_BUILD_TYPE:STRING=Debug
--DCMAKE_C_COMPILER:STRING=%{Compiler:Executable:C}</value>
+-DQT_QMAKE_EXECUTABLE:STRING=%{Qt:qmakeExecutable}
+-DCMAKE_GENERATOR:STRING=Unix Makefiles
+-DCMAKE_CXX_COMPILER:STRING=%{Compiler:Executable:Cxx}
+-DCMAKE_COLOR_DIAGNOSTICS:BOOL=ON
+-DCMAKE_PROJECT_INCLUDE_BEFORE:FILEPATH=%{BuildConfig:BuildDirectory:NativeFilePath}/.qtc/package-manager/auto-setup.cmake</value>
     <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory">/home/adrian/Sync/programs/qt/mx-snapshot/build</value>
     <valuemap type="QVariantMap" key="ProjectExplorer.BuildConfiguration.BuildStepList.0">
      <valuemap type="QVariantMap" key="ProjectExplorer.BuildStepList.Step.0">
@@ -254,15 +254,15 @@
     <value type="int" key="CMake.Configure.BaseEnvironment">2</value>
     <value type="bool" key="CMake.Configure.ClearSystemEnvironment">false</value>
     <valuelist type="QVariantList" key="CMake.Configure.UserEnvironmentChanges"/>
-    <value type="QString" key="CMake.Initial.Parameters">-DCMAKE_PROJECT_INCLUDE_BEFORE:FILEPATH=%{BuildConfig:BuildDirectory:NativeFilePath}/.qtc/package-manager/auto-setup.cmake
--DCMAKE_GENERATOR:STRING=Unix Makefiles
--DCMAKE_COLOR_DIAGNOSTICS:BOOL=ON
--DCMAKE_PREFIX_PATH:STRING=%{Qt:QT_INSTALL_PREFIX}
--DCMAKE_CXX_COMPILER:STRING=%{Compiler:Executable:Cxx}
+    <value type="QString" key="CMake.Initial.Parameters">-DCMAKE_PREFIX_PATH:STRING=%{Qt:QT_INSTALL_PREFIX}
+-DCMAKE_C_COMPILER:STRING=%{Compiler:Executable:C}
 -DCMAKE_CXX_FLAGS_INIT:STRING=%{Qt:QML_DEBUG_FLAG}
--DQT_QMAKE_EXECUTABLE:STRING=%{Qt:qmakeExecutable}
 -DCMAKE_BUILD_TYPE:STRING=Release
--DCMAKE_C_COMPILER:STRING=%{Compiler:Executable:C}</value>
+-DQT_QMAKE_EXECUTABLE:STRING=%{Qt:qmakeExecutable}
+-DCMAKE_GENERATOR:STRING=Unix Makefiles
+-DCMAKE_CXX_COMPILER:STRING=%{Compiler:Executable:Cxx}
+-DCMAKE_COLOR_DIAGNOSTICS:BOOL=ON
+-DCMAKE_PROJECT_INCLUDE_BEFORE:FILEPATH=%{BuildConfig:BuildDirectory:NativeFilePath}/.qtc/package-manager/auto-setup.cmake</value>
     <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory">/home/adrian/Sync/programs/qt/mx-snapshot/build</value>
     <valuemap type="QVariantMap" key="ProjectExplorer.BuildConfiguration.BuildStepList.0">
      <valuemap type="QVariantMap" key="ProjectExplorer.BuildStepList.Step.0">

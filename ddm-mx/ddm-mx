@@ -28,7 +28,7 @@ source gettext.sh
 DEBIAN_VERSION_CODENAME=$(grep VERSION_CODENAME /etc/os-release|cut -d"=" -f2)
 DEBIAN_VERSION_NUMBER=$(cat /etc/debian_version  |cut -d"." -f1)
 
-VERSION="25.10.02"
+VERSION="25.11.04"
 ME=${0##*/}
 CLI_PROG="ddm-mx"
 LOCK_FILE="/run/lock/$CLI_PROG"
@@ -319,9 +319,10 @@ function usage() {
 # nvidia -------------------------------------------------------------------------
 
 function preseed_nvidia {
-	if [ $TEST  ]; then
+	if $TEST  ; then
 		return
 	fi
+  echo "Preseed"
   CANDIDATE=$1
   echo 'nvidia-support nvidia-support/check-xorg-conf-on-removal boolean false' | debconf-set-selections
   echo 'nvidia-support nvidia-support/check-running-module-version boolean true' | debconf-set-selections
@@ -491,16 +492,20 @@ fi
   if [ $POSTINSTALL ]; then
     echo "POSTINSTALL" | tee -a $LOG
   	#add possible missing symlinks
-  	echo "symlinks" | tee -a $LOG
-  	create_modprobe_symlinks
+  	#commented out, doesn't seem to be necessary
+  	#create_modprobe_symlinks
  	
   	#create 20_nvidia.conf file for non-optimus parts
     # also create grub config changes
   	if [ $OPTIMUS -eq 1 ]; then
-    	echo "20_nvidia.conf" | tee -a $LOG
-  		create_20_nvidiaconf
+  	    #for 340xx legacy drivers, force creation of 20-nvidia.conf
+  	    if [ "$DRIVER_ORIGINAL" == "nvidia-legacy-340xx-driver" ]; then 
+  			create_20_nvidiaconf
+  		fi
         #add grub and module options
-  	    add_nvidia_module_config
+        if [ "$DRIVER_ORIGINAL" != "nvidia-legacy-340xx-driver" ]; then
+  	        add_nvidia_module_config
+  	    fi
   	fi
   	#backup any existing xorg.conf file
   	if [ -e /etc/X11/xorg.conf ]; then
@@ -533,7 +538,15 @@ function purge_proprietary_drivers {
 	remove_modprobe_symlinks
   # remove module options and grub config
   remove_nvidia_module_config
-  
+  # try to rebuild initramfs, which can lose nouveau modules in some cases
+  # modprobe nouveau
+  # depmod
+  # update-initramfs 
+  echo "nouveau module" | tee -a $LOG
+  modprobe nouveau
+  echo "depmod modules" | tee -a $LOG
+  depmod
+  update_initramfs 
   if [ "$?" = "0" ]; then 
       #success in removing proprietary drivers and returning to open source drivers
       echo $(eval_gettext "Proprietary drivers removed") | tee -a $LOG
@@ -671,7 +684,7 @@ enable_nvidia_repo()
   wget $NVIDIA_KEY_ADDRESS -O /tmp/nvidia-keyring.deb
   if [ $? -ne 0 ]; then
   	#try debian 12 version as a fallback
-  	echo $(eval_gettext "Debain 13 repo not found, falling back to debian 12 repository") 	
+  	echo $(eval_gettext "Debian 13 repo not found, falling back to Debian 12 repository") 	
   	DEBIAN_VERSION_NUMBER="12"
   	echo $(eval_gettext "Getting Nvidia repo signing key")
   NVIDIA_KEY_ADDRESS="https://developer.download.nvidia.com/compute/cuda/repos/debian$DEBIAN_VERSION_NUMBER/x86_64/cuda-keyring_1.1-1_all.deb"
@@ -957,7 +970,7 @@ chown $USER:$USER "$USER_HOME_PATH"
 
 nvidia-340-fix()
 {
-if [ $TEST  ]; then
+if $TEST  ; then
 	return
 fi
 # backup libglx.so
@@ -975,7 +988,7 @@ fi
 
 nvidia-340-reverse-fix()
 {
-if [ $TEST  ]; then
+if $TEST ; then
 	return
 fi
 	# if backup libglx.so exists, then revert it back.  this will take place just before reinstallation of the open drivers.
@@ -1295,9 +1308,10 @@ create_modprobe_symlinks(){
 	#/etc/modprobe.d/nvidia-blacklists-nouveau.conf
     #/etc/modprobe.d/nvidia-modprobe.conf
     #/etc/modprobe.d/nvidia-options.conf
-    if [ $TEST  ]; then
+    if $TEST; then
 		return
 	fi
+	echo "symlinks" | tee -a $LOG
     
     if [ ! -e /etc/modprobe.d/nvidia-blacklists-nouveau.conf ]; then
 		ln -s /etc/nvidia/current/nvidia-blacklists-nouveau.conf /etc/modprobe.d/nvidia-blacklists-nouveau.conf
@@ -1320,21 +1334,21 @@ remove_modprobe_symlinks(){
 }
 
 create_20_nvidiaconf(){
-	if [ $TEST  ]; then
+	if $TEST; then
 		return
 	fi
-	tee /etc/X11/xorg.conf.d/20-nvidia.conf <<!
-Section "Device"
-     Identifier "Nvidia Card"
-     Driver "nvidia"
-     VendorName "NVIDIA Corporation"
-     Option "RegistryDwords" "EnableBrightnessControl=1"
-EndSection
-!
+	echo "20_nvidia.conf" | tee -a $LOG
+	
+	 echo "Section \"Device\"" >/etc/X11/xorg.conf.d/20-nvidia.conf
+     echo "Identifier \"Nvidia Card\"" >>/etc/X11/xorg.conf.d/20-nvidia.conf
+     echo "Driver \"nvidia\"" >>/etc/X11/xorg.conf.d/20-nvidia.conf
+     echo "VendorName \"NVIDIA Corporation\"" >>/etc/X11/xorg.conf.d/20-nvidia.conf
+     echo "EndSection" >>/etc/X11/xorg.conf.d/20-nvidia.conf
+     #echo "Option \"RegistryDwords\" \"EnableBrightnessControl=1\"" >>/etc/X11/xorg.conf.d/20-nvidia.conf
 }
 
 remove_20_nvidiaconf(){
-	if [ $TEST  ]; then
+	if $TEST; then
 		return
 	fi
     echo "rm 20-nvidia.conf" | tee -a $LOG
@@ -1449,10 +1463,10 @@ echo $(eval_gettext "Ok")...| tee -a $LOG
 
 update_initramfs()
 {
-if [ $TEST  ]; then
+if $TEST ; then
 	return
 fi
-	
+echo "update-initramfs"
 update-initramfs -u -k all | tee -a $LOG
 }
 

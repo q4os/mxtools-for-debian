@@ -1,0 +1,25 @@
+Format: 1.8
+Date: Sat, 08 Nov 2025 14:56:41 -0500
+Source: mx-welcome
+Architecture: source
+Version: 25.11.01mx25
+Distribution: mx
+Urgency: medium
+Maintainer: Adrian <adrian@mxlinux.org>
+Changed-By: Dolphin Oracle <dolphinoracle@gmail.com>
+Changes:
+ mx-welcome (25.11.01mx25) mx; urgency=medium
+ .
+   * adjust regex on desktop check to deal with spaces in desktop name
+Checksums-Sha1:
+ b996a966cf857ae019ba6d40e07e04ee24214a2d 749 mx-welcome_25.11.01mx25.dsc
+ 6900a56bab8e5ac44b706344cbb599e59fcce70d 167416 mx-welcome_25.11.01mx25.tar.xz
+ 20b9ba5f596f505ff5ad78849625bf2fcbccbd1b 10435 mx-welcome_25.11.01mx25_source.buildinfo
+Checksums-Sha256:
+ b34f55db68753c01b0b5f3b4f61efbc67898c6878a3709d4f6784d9af350952c 749 mx-welcome_25.11.01mx25.dsc
+ 04dfab5040711bedacf72380d7b22f12a5a4b5c30419f88b23bb8c04b886a119 167416 mx-welcome_25.11.01mx25.tar.xz
+ 264a6866b4526c06e4b7264df725dc12f6fb886dd6ba8407ba0b365a4a232aca 10435 mx-welcome_25.11.01mx25_source.buildinfo
+Files:
+ 4c2f19fb8d2387683ca58ba8e4735cfe 749 admin optional mx-welcome_25.11.01mx25.dsc
+ cfae9eefd7983b61f8af5ec0a34f3712 167416 admin optional mx-welcome_25.11.01mx25.tar.xz
+ 986a1f692646730d36bfab0bde0b7a8e 10435 admin optional mx-welcome_25.11.01mx25_source.buildinfo

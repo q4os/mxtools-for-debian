@@ -429,19 +429,25 @@ void MainWindow::loadSettings()
     ui->radioSaferCache->setChecked(cacheSafer);
     ui->radioAllCache->setChecked(!cacheSafer);
 
-    ui->groupBoxApt->setChecked(value("Apt/AptCleanup", true).toBool());
-    selectRadioButton(ui->groupBoxApt, ui->buttonGroupApt, value("Apt/AptSelection", -1).toInt());
+    const bool aptCleanup = value("Apt/AptCleanup", true).toBool();
+    ui->groupBoxApt->setChecked(aptCleanup);
+    const int aptSelection = aptCleanup ? value("Apt/AptSelection", -1).toInt() : -1;
+    selectRadioButton(ui->groupBoxApt, ui->buttonGroupApt, aptSelection);
     ui->checkPurge->setChecked(value("Apt/AptPurge", false).toBool());
 
     ui->checkFlatpak->setChecked(value("Flatpak/UninstallUnusedRuntimes", false).toBool());
 
-    ui->groupBoxLogs->setChecked(value("Logs/LogsCleanup", true).toBool());
+    const bool logsCleanup = value("Logs/LogsCleanup", true).toBool();
+    ui->groupBoxLogs->setChecked(logsCleanup);
     ui->spinBoxLogs->setValue(value("Logs/LogsOlderThan", 7).toInt());
-    selectRadioButton(ui->groupBoxLogs, ui->buttonGroupLogs, value("Logs/LogsSelection", -1).toInt());
+    const int logsSelection = logsCleanup ? value("Logs/LogsSelection", -1).toInt() : -1;
+    selectRadioButton(ui->groupBoxLogs, ui->buttonGroupLogs, logsSelection);
 
-    ui->groupBoxTrash->setChecked(value("Trash/TrashCleanup", true).toBool());
+    const bool trashCleanup = value("Trash/TrashCleanup", true).toBool();
+    ui->groupBoxTrash->setChecked(trashCleanup);
     ui->spinBoxTrash->setValue(value("Trash/TrashOlderThan", 30).toInt());
-    selectRadioButton(ui->groupBoxTrash, ui->buttonGroupTrash, value("Trash/TrashSelection", -1).toInt());
+    const int trashSelection = trashCleanup ? value("Trash/TrashSelection", -1).toInt() : -1;
+    selectRadioButton(ui->groupBoxTrash, ui->buttonGroupTrash, trashSelection);
 }
 
 void MainWindow::removeKernelPackages(const QStringList &list)
@@ -723,16 +729,19 @@ void MainWindow::saveSettings()
         store.setValue("Folders/CacheOlderThan", ui->spinCache->value());
         store.setValue("Folders/CacheSafer", ui->radioSaferCache->isChecked());
 
-        store.setValue("Apt/AptCleanup", ui->groupBoxApt->isChecked());
-        store.setValue("Apt/AptSelection", ui->buttonGroupApt->checkedId());
+        const bool aptCleanup = ui->groupBoxApt->isChecked();
+        store.setValue("Apt/AptCleanup", aptCleanup);
+        store.setValue("Apt/AptSelection", aptCleanup ? ui->buttonGroupApt->checkedId() : -1);
         store.setValue("Apt/AptPurge", ui->checkPurge->isChecked());
 
-        store.setValue("Logs/LogsSelection", ui->buttonGroupLogs->checkedId());
+        const bool logsCleanup = ui->groupBoxLogs->isChecked();
+        store.setValue("Logs/LogsSelection", logsCleanup ? ui->buttonGroupLogs->checkedId() : -1);
         store.setValue("Logs/LogsOlderThan", ui->spinBoxLogs->value());
-        store.setValue("Logs/LogsCleanup", ui->groupBoxLogs->isChecked());
+        store.setValue("Logs/LogsCleanup", logsCleanup);
 
-        store.setValue("Trash/TrashCleanup", ui->groupBoxTrash->isChecked());
-        store.setValue("Trash/TrashSelection", ui->buttonGroupTrash->checkedId());
+        const bool trashCleanup = ui->groupBoxTrash->isChecked();
+        store.setValue("Trash/TrashCleanup", trashCleanup);
+        store.setValue("Trash/TrashSelection", trashCleanup ? ui->buttonGroupTrash->checkedId() : -1);
         store.setValue("Trash/TrashOlderThan", ui->spinBoxTrash->value());
 
         store.setValue("Flatpak/FlatpakCleanup", ui->groupBoxFlatpak->isChecked());
@@ -790,10 +799,10 @@ void MainWindow::saveSettings()
 
 void MainWindow::selectRadioButton(QGroupBox *groupbox, const QButtonGroup *group, int id)
 {
-    if (groupbox) {
-        groupbox->setChecked(id != -1);
-    }
     if (id != -1) {
+        if (groupbox) {
+            groupbox->setChecked(true);
+        }
         auto *selectedButton = group->button(id);
         if (selectedButton) {
             selectedButton->setChecked(true);
@@ -844,6 +853,7 @@ void MainWindow::pushApply_clicked()
         if (proc.exitCode() != 0) {
             QMessageBox::critical(this, tr("Error"), tr("Failed to elevate privileges"));
             setCursor(QCursor(Qt::ArrowCursor));
+            setEnabled(true);
             return;
         }
     }
@@ -906,63 +916,85 @@ void MainWindow::pushApply_clicked()
 
     QString flatpak;
     if (ui->checkFlatpak->isChecked()) {
-        flatpak = "pgrep -a flatpak | grep -v flatpak-s || flatpak uninstall --unused --delete-data --noninteractive";
+        const QString flatpakAction
+            = "pgrep -a flatpak | grep -v flatpak-s || flatpak uninstall --unused --delete-data --noninteractive";
+        auto scopedCommand = [&](const QString &command) -> QString {
+            if (!elevate || selectedUser.isEmpty()) {
+                return command;
+            }
+            return QString("runuser -u %1 -- /bin/bash -lc %2").arg(selectedUser, shellQuote(command));
+        };
+        auto execScoped = [&](const QString &command) -> QString {
+            const QString scoped = scopedCommand(command);
+            return elevate ? cmdOutAsRoot(scoped) : cmdOut(scoped);
+        };
+
         const QString userSizeCmd = QString("du -s /home/%1/.local/share/flatpak/ | cut -f1").arg(selectedUser);
-        QString system_size = "du -s /var/lib/flatpak/ | cut -f1";
-        quint64 userBefore = elevate ? cmdOutAsRoot(userSizeCmd).toULongLong() : cmdOut(userSizeCmd).toULongLong();
+        const QString systemSizeCmd = "du -s /var/lib/flatpak/ | cut -f1";
+        quint64 userBefore = execScoped(userSizeCmd).toULongLong();
         bool ok {false};
-        quint64 system_size_num = cmdOutAsRoot(system_size).toULongLong(&ok);
+        quint64 system_size_num = cmdOutAsRoot(systemSizeCmd).toULongLong(&ok);
         quint64 systemBefore = ok ? system_size_num : 0;
         if (!ui->radioReboot->isChecked()) {
-            cmdOut(flatpak);
+            execScoped(flatpakAction);
         }
-        quint64 userAfter = elevate ? cmdOutAsRoot(userSizeCmd).toULongLong() : cmdOut(userSizeCmd).toULongLong();
+        quint64 userAfter = execScoped(userSizeCmd).toULongLong();
         ok = false;
-        system_size_num = cmdOutAsRoot(system_size).toULongLong(&ok);
+        system_size_num = cmdOutAsRoot(systemSizeCmd).toULongLong(&ok);
         quint64 systemAfter = ok ? system_size_num : 0;
 
         quint64 userDelta = (userBefore > userAfter) ? userBefore - userAfter : 0;
         quint64 systemDelta = (systemBefore > systemAfter) ? systemBefore - systemAfter : 0;
         addToTotal("flatpak-user", userDelta);
         addToTotal("flatpak-system", systemDelta);
+
+        flatpak = scopedCommand(flatpakAction);
     }
 
     QString apt;
+    const auto addCommandToSchedule = [&](const QString &command) {
+        if (command.isEmpty()) {
+            return;
+        }
+        if (!apt.isEmpty()) {
+            apt += '\n';
+        }
+        apt += command;
+    };
     if (ui->groupBoxApt->isChecked()) {
+        QString cleanCmd;
         if (ui->radioAutoClean->isChecked()) {
-            apt = "apt-get autoclean";
+            cleanCmd = "apt-get autoclean";
         } else if (ui->radioClean->isChecked()) {
-            apt = "apt-get clean";
+            cleanCmd = "apt-get clean";
         }
 
-        if (!apt.isEmpty()) {
+        if (!cleanCmd.isEmpty()) {
             const QString size_cmd = "du -s /var/cache/apt/archives/ | cut -f1";
             quint64 before_size = cmdOutAsRoot(size_cmd).toULongLong();
 
             if (!ui->radioReboot->isChecked()) {
-                cmdOutAsRoot(apt);
+                cmdOutAsRoot(cleanCmd);
             }
 
             quint64 after_size = cmdOutAsRoot(size_cmd).toULongLong();
             addToTotal("apt-cache", before_size > after_size ? before_size - after_size : 0);
+            addCommandToSchedule(cleanCmd);
         }
     }
 
     if (ui->checkPurge->isChecked()) {
-        if (!apt.isEmpty()) {
-            apt += '\n';
-        }
-        apt += "dpkg -l | awk '/^rc/ { print $2 }' | xargs -r apt-get purge -y";
-
+        const QString purgeCmd = "dpkg -l | awk '/^rc/ { print $2 }' | xargs -r apt-get purge -y";
         const QString size_cmd = "du -s /var/lib/dpkg/info/ | cut -f1";
         quint64 before_size = cmdOutAsRoot(size_cmd).toULongLong();
 
         if (!ui->radioReboot->isChecked()) {
-            cmdOutAsRoot(apt);
+            cmdOutAsRoot(purgeCmd);
         }
 
         quint64 after_size = cmdOutAsRoot(size_cmd).toULongLong();
         addToTotal("apt-purge", before_size > after_size ? before_size - after_size : 0);
+        addCommandToSchedule(purgeCmd);
     }
 
     QString logs;
@@ -1016,21 +1048,44 @@ void MainWindow::pushApply_clicked()
         }
     }
 
-    // Cleanup schedule
-    const QString suffix = currentUserSuffix();
-    cmdOutAsRoot("rm " + cronEntryBase("daily"), true);
-    cmdOutAsRoot("rm " + cronEntryBase("weekly"), true);
-    cmdOutAsRoot("rm " + cronEntryBase("monthly"), true);
-    cmdOutAsRoot("rm " + cronEntryBase("@reboot"), true);
-    cmdOutAsRoot("rm " + scriptFileBase(), true);
+    // Cleanup schedule for the currently selected user only
+    auto removeScheduleFiles = [&](const QString &period) {
+        QStringList targets;
+        const QString writeTarget = cronEntryPath(period, true);
+        if (!writeTarget.isEmpty()) {
+            targets << writeTarget;
+        }
+        const QString existingTarget = cronEntryPath(period, false);
+        const QString baseTarget = cronEntryBase(period);
+        if (!existingTarget.isEmpty() && existingTarget == baseTarget && !targets.contains(baseTarget)) {
+            targets << baseTarget;
+        }
+        for (const auto &path : targets) {
+            cmdOutAsRoot("rm -f " + shellQuote(path), true);
+        }
+    };
 
-    if (!suffix.isEmpty()) {
-        cmdOutAsRoot("rm " + cronEntryBase("daily") + suffix, true);
-        cmdOutAsRoot("rm " + cronEntryBase("weekly") + suffix, true);
-        cmdOutAsRoot("rm " + cronEntryBase("monthly") + suffix, true);
-        cmdOutAsRoot("rm " + cronEntryBase("@reboot") + suffix, true);
-        cmdOutAsRoot("rm " + scriptFileBase() + suffix, true);
-    }
+    auto removeScriptFiles = [&]() {
+        QStringList targets;
+        const QString writeTarget = scriptFilePath(true);
+        if (!writeTarget.isEmpty()) {
+            targets << writeTarget;
+        }
+        const QString existingTarget = scriptFilePath(false);
+        const QString baseTarget = scriptFileBase();
+        if (!existingTarget.isEmpty() && existingTarget == baseTarget && !targets.contains(baseTarget)) {
+            targets << baseTarget;
+        }
+        for (const auto &path : targets) {
+            cmdOutAsRoot("rm -f " + shellQuote(path), true);
+        }
+    };
+
+    removeScheduleFiles("daily");
+    removeScheduleFiles("weekly");
+    removeScheduleFiles("monthly");
+    removeScheduleFiles("@reboot");
+    removeScriptFiles();
 
     // Add schedule file
     if (!ui->radioNone->isChecked()) {

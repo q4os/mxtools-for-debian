@@ -66,29 +66,39 @@ LibreWolf
 <screenshot></screenshot>
 
 <preinstall>
-rm -f /etc/apt/sources.list.d/librewolf.sources
-rm -f /etc/apt/keyrings/librewolf.gpg
-rm -f /etc/apt/preferences.d/librewolf.pref
-rm -f /etc/apt/sources.list.d/librewolf.list
-rm -f /etc/apt/trusted.gpg.d/librewolf.gpg
-apt-get update
-apt-get install extrepo -y
-extrepo enable librewolf
-env LC_CTYPE=C.UTF-8 sed -i '/^URIs/I{/URIs/b;s/^uris/URIs/I} ' /etc/apt/sources.list.d/*.sources
-apt-get update
+<![CDATA[
+# remove existing repo and keyring for librewolf
+rm -f /etc/apt/keyrings/*librewolf*               2>/dev/null
+rm -f /etc/apt/trusted.gpg.d/*librewolf*          2>/dev/null
+rm -f /etc/apt/sources.list.d/*librewolf*.list    2>/dev/null
+rm -f /etc/apt/sources.list.d/*librewolf*.sources 2>/dev/null
+rm -f /etc/apt/preferences.d/librewolf.pref       2>/dev/null
 
+apt-get update
+apt-get install extrepo --yes
+extrepo enable librewolf
+# Fixing the LC_TYPE error in apt for certain locales such as tr_TR.UTF-8
+for SRC in $(grep -sHi ^uris /etc/apt/sources.list.d/*.sources | grep -v ':URIs' | sed 's/:URIs.*//I' | sort -u); do
+env LC_CTYPE=C.UTF-8 sed -i 's/^uris/URIs/I' "$SRC"
+done
+# removing not needed architectures
+case "$(dpkg --print-architecture)" in
+  amd64)
+  [ -f /etc/apt/sources.list.d/extrepo_librewolf.sources ] && sed -i '/Architectures:/cArchitectures: amd64' /etc/apt/sources.list.d/extrepo_librewolf.sources
+  ;;
+esac
+apt-get update
+]]>
 </preinstall>
 
 <install_package_names>
 librewolf
 </install_package_names>
 
-
 <postinstall>
-if [ -d /usr/share/xfce4/helpers ]; then
-if ! [ -f /usr/share/xfce4/helpers/librewolf.desktop ]; then
-
-cat &lt;&lt;'EOF' &gt; /usr/share/xfce4/helpers/librewolf.desktop
+<![CDATA[
+if [ -d /usr/share/xfce4/helpers ] && [ ! -f /usr/share/xfce4/helpers/librewolf.desktop ]; then
+cat <<'EOF' > /usr/share/xfce4/helpers/librewolf.desktop
 [Desktop Entry]
 Version=1.0
 Encoding=UTF-8
@@ -105,7 +115,10 @@ X-XFCE-CommandsWithParameter=%B "%s";
 
 EOF
 fi
-fi
+echo "--------------------------------"
+echo "...$(gettext -d apt -s ' Done')!"
+echo "--------------------------------"
+]]>
 </postinstall>
 
 <uninstall_package_names>
@@ -113,10 +126,20 @@ librewolf
 </uninstall_package_names>
 
 <postuninstall>
-if [ -f /usr/share/xfce4/helpers/librewolf.desktop ]; then
-rm /usr/share/xfce4/helpers/librewolf.desktop
-fi
-extrepo disable librewolf
+<![CDATA[
+
+# remove existing repo and keyring for librewolf
+rm -f /etc/apt/keyrings/*librewolf*               2>/dev/null
+rm -f /etc/apt/trusted.gpg.d/*librewolf*          2>/dev/null
+rm -f /etc/apt/sources.list.d/*librewolf*.list    2>/dev/null
+rm -f /etc/apt/sources.list.d/*librewolf*.sources 2>/dev/null
+rm -f /etc/apt/preferences.d/librewolf.pref       2>/dev/null
+rm -f /usr/share/xfce4/helpers/librewolf.desktop  2>/dev/null
+
 apt-get update
+echo "--------------------------------"
+echo "...$(gettext -d apt -s ' Done')!"
+echo "--------------------------------"
+]]>
 </postuninstall>
 </app>

@@ -1,3 +1,9 @@
+live-usb-maker (2.41.22) mx; urgency=medium
+
+  * limit files that md5 check runs on
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 03 Dec 2025 18:38:51 -0500
+
 live-usb-maker (0.4.21) mx; urgency=medium
 
   * if /live is a symlink, readlink to get mountpoint

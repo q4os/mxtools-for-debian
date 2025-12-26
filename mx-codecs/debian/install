@@ -1,8 +1,0 @@
-help/*			usr/share/doc/mx-codecs
-mx-codecs		usr/bin
-mx-codecs.desktop	usr/share/applications
-icons/mx-codecs.svg	usr/share/icons/hicolor/scalable/apps
-icons/mx-codecs.png	usr/share/icons/hicolor/40x40/apps
-translations/*.qm	usr/share/mx-codecs/locale
-scripts/mx-codecs-launcher usr/bin
-scripts/org.mxlinux.pkexec.mx-codecs-launcher.policy	usr/share/polkit-1/actions

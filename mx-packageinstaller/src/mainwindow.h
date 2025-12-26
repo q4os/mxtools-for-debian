@@ -1,7 +1,7 @@
 /**********************************************************************
  *  mxpackageinstaller.h
  **********************************************************************
- * Copyright (C) 2017 MX Authors
+ * Copyright (C) 2017-2025 MX Authors
  *
  * Authors: Adrian
  *          Dolphin_Oracle
@@ -86,7 +86,7 @@ enum { Check, Name, RepoVersion, InstalledVersion, Description, Status };
 
 namespace FlatCol
 {
-enum { Check, Name, LongName, Version, Size, Status, Duplicate, FullName };
+enum { Check, Name, LongName, Version, Branch, Size, Status, Duplicate, FullName };
 }
 
 namespace Release
@@ -214,6 +214,7 @@ private:
     QSettings settings;
     QString arch;
     QString fpUser;
+    uchar debianVersion {Release::Bookworm};
     QString verName;
     QStringList changeList;
     QStringList flatpaks;
@@ -221,6 +222,18 @@ private:
     QStringList flatpaksRuntimes;
     QStringList installedAppsFP;
     QStringList installedRuntimesFP;
+    QStringList cachedInstalledFlatpaks; // Raw lines from flatpak list --columns=ref,size
+    QString cachedInstalledScope;
+    QHash<QString, QString> cachedInstalledSizeMap; // canonical ref -> size string
+    mutable QStringList cachedFlatpakRemotes;
+    mutable QString cachedFlatpakRemotesScope;
+    mutable bool cachedFlatpakRemotesFetched {false};
+    bool cachedInstalledFetched {false};
+    bool holdProgressForAptRefresh {false};
+    bool holdProgressForFlatpakRefresh {false};
+    bool flatpakCancelHidden {false};
+    bool flatpakUiBlocked {false};
+    bool suppressCmdOutput {false};
     QTemporaryDir tempDir;
     QTimer timer;
     QTreeWidget *currentTree {}; // current/calling tree
@@ -249,7 +262,7 @@ private:
     [[nodiscard]] bool checkUpgradable(const QStringList &nameList) const;
     [[nodiscard]] bool isOnline();
     [[nodiscard]] bool isPackageInstallable(const QString &installable, const QString &modArch) const;
-    [[nodiscard]] static QString getDebianVerName();
+    [[nodiscard]] static QString getDebianVerName(uchar version = 0);
     [[nodiscard]] static bool isFilteredName(const QString &name);
     [[nodiscard]] static uchar getDebianVerNum();
     [[nodiscard]] static uchar showVersionDialog(const QString &message);
@@ -299,6 +312,7 @@ private:
     void hideLibs() const;
     void ifDownloadFailed() const;
     void installFlatpak();
+    void invalidateFlatpakRemoteCache();
     void listFlatpakRemotes() const;
     void listSizeInstalledFP();
     void loadFlatpakData();

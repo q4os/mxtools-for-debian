@@ -1,3 +1,10 @@
+mx-datetime (25.11mx23) mx; urgency=medium
+
+  * Improve systemd detection
+  * Use timedatectl to detect and set UTC/localtime
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 03 Nov 2025 13:50:37 -0500
+
 mx-datetime (25.4mx23) mx; urgency=medium
 
   * Update to Qt6
@@ -35,7 +42,7 @@ mx-datetime (23.7.04mx23) mx; urgency=medium
   * Fixed: hardware clock time zone set twice on systemd.
   * Code optimisation
   * Packaging improvements
-  * Updated help. 
+  * Updated help.
 
  -- Adrian <adrian@mxlinux.org>  Sun, 30 Jul 2023 10:13:57 -0400
 
@@ -67,7 +74,7 @@ mx-datetime (23.7) mx; urgency=medium
 
   * Use standard icons for list buttons.
   * Fixed NTPsec service setup.
-  * Retire support for ntp. 
+  * Retire support for ntp.
 
  -- Adrian <adrian@mxlinux.org>  Thu, 13 Jul 2023 21:08:55 -0400
 
@@ -103,20 +110,20 @@ mx-datetime (23.4) mx; urgency=medium
 
 mx-datetime (23.2) mx; urgency=medium
 
-  * Oass DISPLAY variable in launcher script 
+  * Oass DISPLAY variable in launcher script
   * Update translations
 
  -- Adrian <adrian@mxlinux.org>  Sat, 18 Feb 2023 13:42:27 -0500
 
 mx-datetime (22.10.01) mx; urgency=medium
 
-  * update translations 
+  * update translations
 
  -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 26 Oct 2022 19:59:19 -0400
 
 mx-datetime (22.8.01) mx; urgency=medium
 
-  * Fix: launching documents from Help (fixes a problem in Plasma) 
+  * Fix: launching documents from Help (fixes a problem in Plasma)
 
  -- Adrian <adrian@mxlinux.org>  Mon, 22 Aug 2022 21:42:18 -0400
 
@@ -128,7 +135,7 @@ mx-datetime (22.8) mx; urgency=medium
 
 mx-datetime (22.7) mx; urgency=medium
 
-  * translation referesh 
+  * translation referesh
 
  -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 23 Jul 2022 11:24:38 -0400
 
@@ -190,7 +197,7 @@ mx-datetime (21.1) mx; urgency=medium
 
 mx-datetime (19.10.01) mx; urgency=medium
 
-  * new icon 
+  * new icon
 
  -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 12 Oct 2019 20:03:40 -0400
 
@@ -207,7 +214,7 @@ mx-datetime (19.9.2) mx; urgency=medium
  -- Adrian <adrian@mxlinux.org>  Tue, 24 Sep 2019 09:18:59 -0400
 
 mx-datetime (19.9.1) mx; urgency=medium
-  
+
   * Added Help file
   * No selecting buttons on the Hardware Clock and Network tabs by default.
   * Added Drift Update check box.
@@ -240,7 +247,7 @@ mx-datetime (0.19.9.06) mx; urgency=medium
 mx-datetime (0.19.9.05) mx; urgency=medium
 
   * Fixed resource leaks and improved drift calculation.
-  * Curtail the jump at the start. 
+  * Curtail the jump at the start.
   * Bypass execution of init system and NTP code on non-root startup.
 
  -- Adrian <adrian@mxlinux.org>  Fri, 06 Sep 2019 08:42:47 -0400
@@ -274,7 +281,7 @@ mx-datetime (0.19.9.02) mx; urgency=medium
 mx-datetime (0.19.9.01) mx; urgency=medium
 
   * Changed tab order.
-  * Fixed: half the world was seemingly missing from the time zone list. 
+  * Fixed: half the world was seemingly missing from the time zone list.
   * Also potentially improved GUI startup feedback.
   * Icon update.
   * Icon darker clock face.

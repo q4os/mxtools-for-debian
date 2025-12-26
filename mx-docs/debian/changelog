@@ -1,3 +1,9 @@
+mx-docs (202511009mx25) mx; urgency=medium
+
+  * update  FAQ language for mx25
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 12 Nov 2025 19:39:20 -0500
+
 mx-docs (202510011mx25) mx; urgency=medium
 
   * replaced all beta translations with final version

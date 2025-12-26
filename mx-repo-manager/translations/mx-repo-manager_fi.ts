@@ -5,23 +5,23 @@
         <location filename="../mainwindow.ui" line="17"/>
         <location filename="../mainwindow.cpp" line="62"/>
         <source>MX Repo Manager</source>
-        <translation>MX Pakettivarastojen hallinta</translation>
+        <translation>MX Pakettilähteet</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="32"/>
         <location filename="../mainwindow.cpp" line="743"/>
         <source>Select the APT repository that you want to use:</source>
-        <translation>Valitse APT-pakettivarasto jota haluat käyttää:</translation>
+        <translation>Valitse apt-arkistot ja pakettilähteet.</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="59"/>
         <source>MX repos</source>
-        <translation>MX pakettivarastot</translation>
+        <translation>MX-arkistot</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="84"/>
         <source>Select fastest MX repo for me</source>
-        <translation>Valitse minulle nopein MX pakettivarasto</translation>
+        <translation>Valitse minulle nopein MX-arkisto</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="110"/>
@@ -31,12 +31,12 @@
     <message>
         <location filename="../mainwindow.ui" line="168"/>
         <source>Debian repos</source>
-        <translation>Debian pakettihakemistot</translation>
+        <translation>Debian-arkistot</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="180"/>
         <source>Select fastest Debian repo for me</source>
-        <translation>Valitse minulle nopein Debian pakettivarasto</translation>
+        <translation>Valitse minulle nopein debian-arkisto</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="229"/>
@@ -46,7 +46,7 @@
     <message>
         <location filename="../mainwindow.ui" line="248"/>
         <source>Restore original APT sources</source>
-        <translation>Palauta alkuperäiset APT-lähteet</translation>
+        <translation>Palauta alkuperäiset lähteet</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="329"/>
@@ -66,7 +66,7 @@
     <message>
         <location filename="../mainwindow.ui" line="383"/>
         <source>About this application</source>
-        <translation>Tietoja tästä sovelluksesta</translation>
+        <translation>Tietoja sovelluksesta</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="386"/>
@@ -110,7 +110,7 @@
         <location filename="../mainwindow.cpp" line="558"/>
         <location filename="../mainwindow.cpp" line="941"/>
         <source>Your new selection will take effect the next time sources are updated.</source>
-        <translation>Uusi valintasi tulee käyttöön ensi kerralla lähteet päivitettäessä.</translation>
+        <translation>Valintasi tulee käyttöön ensi kerralla kun lähteet päivitetään.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="348"/>
@@ -120,7 +120,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="348"/>
         <source>Sources (checked sources are enabled)</source>
-        <translation>Lähteet (valitut lähteet ovat kytketyt päälle)</translation>
+        <translation>Lähteet (valitut ovat käytössä)</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="560"/>
@@ -139,7 +139,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="560"/>
         <source>Could not change the repo.</source>
-        <translation>Pakettivarastoa ei voitu muuttaa.</translation>
+        <translation>Arkiston vaihtaminen epäonnistui.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="585"/>
@@ -164,7 +164,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="670"/>
         <source>Program for choosing the default APT repository</source>
-        <translation>Ohjelma vakiollisen APT pakettivaraston valintaan</translation>
+        <translation>Ohjelma oletus apt-arkiston valintaan</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="672"/>
@@ -174,12 +174,12 @@
     <message>
         <location filename="../mainwindow.cpp" line="673"/>
         <source>%1 License</source>
-        <translation>%1 lupa</translation>
+        <translation>%1 lisenssi</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="687"/>
         <source>%1 Help</source>
-        <translation>%1 Apuopas</translation>
+        <translation>%1 ohje</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="704"/>
@@ -189,22 +189,22 @@
     <message>
         <location filename="../mainwindow.cpp" line="705"/>
         <source>You have selected MX Test Repo. It&apos;s not recommended to leave it enabled or to upgrade all the packages from it.</source>
-        <translation>Valitsit ohjelmavaraston MX Test Repo. Ei ole suositeltavaa jättää sitä päälle tai päivittää kaikkia paketteja jotka juontuvat sieltä. </translation>
+        <translation>Valitsit MX-testiarkiston. Pidempää käyttöä tai kaikkien pakettien päivittämistä siitä ei suositella.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="708"/>
         <source>A safer option is to install packages individually with MX Package Installer.</source>
-        <translation>Turvallisempi vaihtoehto on asentaa paketteja yksittäin MX paketinhallinnan kautta.</translation>
+        <translation>Turvallisempi tapa on asentaa paketit yksi kerrallaan MX Sovellukset asennus ohjelmalla.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="745"/>
         <source>Select the APT repository and sources that you want to use:</source>
-        <translation>Valitse APT pakettivarasto sekä lähteet jotka haluat käyttöön:</translation>
+        <translation>Valitse apt-arkistot ja pakettivarastot:</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="805"/>
         <source>netselect-apt could not detect fastest repo.</source>
-        <translation>netselect-apt ei kyennyt tunnistamaan nopeinta pakettivarastoa.</translation>
+        <translation>netselect-apt ei tunnistanut nopeinta arkistoa.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="784"/>
@@ -212,7 +212,7 @@
         <location filename="../mainwindow.cpp" line="823"/>
         <location filename="../mainwindow.cpp" line="838"/>
         <source>Could not detect fastest repo.</source>
-        <translation>Nopeinta pakettivarastoa ei kyetty tunnistamaan.</translation>
+        <translation>Nopeinta arkistoa ei tunnistettu.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="851"/>
@@ -242,7 +242,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="924"/>
         <source>Do you use AHS (Advanced Hardware Stack) repo?</source>
-        <translation>Käytätkö AHS (Advanced Hardware Stack) repoa?</translation>
+        <translation>Käytätkö AHS (Advanced Hardware Stack) arkistoa?</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="938"/>

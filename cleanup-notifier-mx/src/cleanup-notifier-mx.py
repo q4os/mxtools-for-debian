@@ -8,12 +8,12 @@
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation; either version 3 of the License, or
 # (at your option) any later version.
-# 
+#
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
-# 
+#
 # You should have received a copy of the GNU General Public License with
 # the Debian GNU/Linux distribution in file /usr/share/common-licenses/GPL;
 # if not, write to the Free Software Foundation, Inc., 51 Franklin St,
@@ -35,8 +35,8 @@ from subprocess import Popen, run
 # some globals
 #-----------------------------------------------------------------------
 NOTIFICATION_TIMEOUT   = 16       # notification timeout in seconds
-MINIMUM_SPACE_LEFT     = 160      # minimum space left in MiB on /boot 
-CLEANUP_CHECK_LAST_RUN = 180      # time in seconds we won't run to check
+MINIMUM_SPACE_LEFT     = 300      # minimum space left in MiB on /boot
+CLEANUP_CHECK_LAST_RUN = 600      # time in seconds we won't run to check
 
 #-----------------------------------------------------------------------
 NOTIFICATION_NAME    = "cleanup-notifier-mx"
@@ -46,7 +46,7 @@ NOTIFICATION_ICON_FALLBACK = "dialog-warning"
 
 CLEANUP_DISMISS = "cleanup-dismiss.chk"
 CLEANUP_TOOL = "mx-cleanup"
-CLEANUP_RUN  = "/usr/bin/mx-cleanup-launcher"
+CLEANUP_RUN  = "/usr/bin/mx-cleanup"
 CLEANUP_TIMESTAMP = "cleanup-notifier-timestamp"
 
 #-----------------------------------------------------------------------
@@ -88,7 +88,7 @@ def create_cleanup_dismiss_check():
     return
 
 def remove_cleanup_dismiss_check():
-    for chk in [ f"{HOME}/.config/MX-Linux/{CLEANUP_DISMISS}", 
+    for chk in [ f"{HOME}/.config/MX-Linux/{CLEANUP_DISMISS}",
                  f"{HOME}/.config/{CLEANUP_DISMISS}" ]:
         if os.path.exists(chk):
             os.remove(chk)
@@ -110,25 +110,25 @@ def live_boot():
         return False
 
 #-----------------------------------------------------------------------
-# life boot check 
+# life boot check
 #
 if live_boot():
     print(f"Cleanup-notifier: no check on live boot")
-    sys.exit(0)    
-    
+    sys.exit(0)
+
 #-----------------------------------------------------------------------
 # check available space or check dismissed by user
-# 
+#
 if available_space_at_boot() >= MINIMUM_SPACE_LEFT:
     remove_cleanup_dismiss_check()
-    sys.exit(0)    
+    sys.exit(0)
 elif os.path.exists(CLEANUP_DISMISS_CHECK):
     print(f"Cleanup-notifier: Cleanup dismiss check found. exit[0]")
-    sys.exit(0)    
+    sys.exit(0)
 
 #-----------------------------------------------------------------------
 # runtime check: don't if lastime run is less than 3 minutes
-try: 
+try:
     runtime_dir = os.environ['XDG_RUNTIME_DIR']
 except KeyError:
     runtime_dir = f"/run/user/{UID}"
@@ -137,7 +137,7 @@ if os.path.isdir(runtime_dir):
     RUNTIME_CHECK = f"{runtime_dir}/{CLEANUP_TIMESTAMP}.run"
 else:
     RUNTIME_CHECK = f"/tmp/{CLEANUP_TIMESTAMP}-{UNAME}.run"
-    
+
 if os.path.exists(RUNTIME_CHECK):
     with open(RUNTIME_CHECK, "r") as f:
         dba = f.read()
@@ -148,7 +148,7 @@ if os.path.exists(RUNTIME_CHECK):
                 print(f"Cleanup-notifier: Last run less then {CLEANUP_CHECK_LAST_RUN} seconds; exit(1)")
                 sys.exit(1)
 
-# set runtime check  
+# set runtime check
 with open(RUNTIME_CHECK, "w") as f:
     f.write(os.getenv("DBUS_SESSION_BUS_ADDRESS", "None"))
 
@@ -157,11 +157,11 @@ with open(RUNTIME_CHECK, "w") as f:
 def cleanup_tool_is_installed():
     cmd = "dpkg-query -f ${db:Status-Abbrev} -W " + f"{CLEANUP_TOOL}"
     x = run(cmd.split(), text=True, capture_output=True).stdout.strip()
-    if "ii" in x:
+    if "ii" in x or "hi" in x:
         return True
     else:
         return False
-   
+
 #-----------------------------------------------------------------------
 # notification handling
 notification = None
@@ -197,7 +197,7 @@ def notification_icon():
     else:
         icon = NOTIFICATION_ICON_FALLBACK
     return icon
-    
+
 #-----------------------------------------------------------------------
 # fix python3-notify2 KeyError on closed dbus-connections
 #
@@ -220,7 +220,7 @@ def terminate(sig, frame):
         strsig = f" '{signal.strsignal(sig)}' "
     except:
         strsig = " "
-    
+
     print (f"Cleanup-notifier: Received signal[{sig}]{strsig}- closing notification")
     global mainloop
     global notification
@@ -239,14 +239,14 @@ def main():
     notification = notify2.Notification(NOTIFICATION_TITLE, NOTIFICATION_TEXT, notification_icon())
     notification.connect('closed', closed_cb)
     notification.timeout = NOTIFICATION_TIMEOUT * 1000
-    
+
     if ('actions' in notify2.get_server_caps()):
         notification.add_action("Dismiss", ACTION_DISMISS_TEXT, dismiss_cb)
         if cleanup_tool_is_installed():
             notification.add_action("Cleanup", ACTION_CLEANUP_TEXT, cleanup_cb)
-    
+
     notification.show()
-    
+
     # try capture keyboard interupt
     try:
         mainloop.run()
@@ -257,7 +257,7 @@ def main():
     notify2.uninit()
 
 if __name__ == "__main__":
-    
+
     # capture some sinals and close notifications gracefully
     signal.signal(signal.SIGHUP, terminate)
     signal.signal(signal.SIGINT, terminate)
@@ -266,4 +266,4 @@ if __name__ == "__main__":
     signal.signal(signal.SIGTERM, terminate)
     signal.signal(signal.SIGUSR1, terminate)
     signal.signal(signal.SIGUSR2, terminate)
-    sys.exit(main())    
+    sys.exit(main())

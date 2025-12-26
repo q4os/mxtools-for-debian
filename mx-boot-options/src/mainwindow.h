@@ -114,6 +114,7 @@ private:
     [[nodiscard]] static bool isUefi();
     [[nodiscard]] static bool isSplashEnabled();
     [[nodiscard]] static bool isWaylandSession();
+    [[nodiscard]] bool isSystemdEnvironment() const;
     bool replaceGrubArg(const QString &key, const QString &item);
     static void sendMouseEvents();
     void addGrubLine(const QString &item);

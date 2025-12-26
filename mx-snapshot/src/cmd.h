@@ -30,7 +30,11 @@ signals:
     void outputAvailable(const QString &out);
 
 private:
-    QString elevate;
-    QString helper;
-    QString out_buffer;
+    const QString elevationToolPath;
+    const QString helperPath;
+    QString outBuffer;
+    static constexpr int EXIT_CODE_COMMAND_NOT_FOUND = 127;
+    static constexpr int EXIT_CODE_PERMISSION_DENIED = 126;
+
+    void handleElevationError();
 };

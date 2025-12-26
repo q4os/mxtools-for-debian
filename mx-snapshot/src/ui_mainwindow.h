@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'mainwindow.ui'
 **
-** Created by: Qt User Interface Compiler version 6.4.2
+** Created by: Qt User Interface Compiler version 6.8.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -18,6 +18,7 @@
 #include <QtWidgets/QFrame>
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QGroupBox>
+#include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QProgressBar>
@@ -99,7 +100,10 @@ public:
     QLabel *labelOptions_2;
     QSpacerItem *horizontalSpacer_2;
     QSpacerItem *horizontalSpacer_3;
+    QHBoxLayout *horizontalLayoutExcludeButtons;
     QPushButton *btnEditExclude;
+    QPushButton *btnRemoveCustomExclude;
+    QSpacerItem *horizontalSpacerRemoveExclude;
     QFrame *frame;
     QGridLayout *gridLayout;
     QCheckBox *excludeVirtualBox;
@@ -144,7 +148,7 @@ public:
         gridLayout_2->setObjectName("gridLayout_2");
         groupBox = new QGroupBox(selectionPage);
         groupBox->setObjectName("groupBox");
-        groupBox->setCursor(QCursor(Qt::ArrowCursor));
+        groupBox->setCursor(QCursor(Qt::CursorShape::ArrowCursor));
         groupBox->setCheckable(false);
         gridLayout_6 = new QGridLayout(groupBox);
         gridLayout_6->setObjectName("gridLayout_6");
@@ -154,7 +158,7 @@ public:
 
         gridLayout_6->addWidget(textCodename, 4, 1, 1, 1);
 
-        horizontalSpacer_4 = new QSpacerItem(213, 20, QSizePolicy::Policy::Minimum, QSizePolicy::Minimum);
+        horizontalSpacer_4 = new QSpacerItem(213, 20, QSizePolicy::Policy::Minimum, QSizePolicy::Policy::Minimum);
 
         gridLayout_6->addItem(horizontalSpacer_4, 7, 2, 1, 1);
 
@@ -225,13 +229,13 @@ public:
 
         gridLayout_2->addWidget(groupBox, 14, 0, 1, 2);
 
-        verticalSpacer = new QSpacerItem(20, 0, QSizePolicy::Expanding, QSizePolicy::Minimum);
+        verticalSpacer = new QSpacerItem(20, 0, QSizePolicy::Policy::Minimum, QSizePolicy::Policy::Expanding);
 
         gridLayout_2->addItem(verticalSpacer, 15, 0, 1, 2);
 
         labelIntro = new QLabel(selectionPage);
         labelIntro->setObjectName("labelIntro");
-        QSizePolicy sizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
+        QSizePolicy sizePolicy(QSizePolicy::Policy::Preferred, QSizePolicy::Policy::Preferred);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
         sizePolicy.setHeightForWidth(labelIntro->sizePolicy().hasHeightForWidth());
@@ -362,14 +366,14 @@ public:
 
         gridLayout_3->addWidget(radioRespin, 4, 1, 1, 1);
 
-        horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+        horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Policy::Expanding, QSizePolicy::Policy::Minimum);
 
         gridLayout_3->addItem(horizontalSpacer, 3, 2, 1, 1);
 
 
         gridLayout_4->addWidget(frame_3, 13, 0, 1, 4);
 
-        verticalSpacer_3 = new QSpacerItem(20, 10, QSizePolicy::Policy::Fixed, QSizePolicy::Minimum);
+        verticalSpacer_3 = new QSpacerItem(20, 10, QSizePolicy::Policy::Minimum, QSizePolicy::Policy::Fixed);
 
         gridLayout_4->addItem(verticalSpacer_3, 2, 0, 1, 1);
 
@@ -386,15 +390,15 @@ public:
 
         line_5 = new QFrame(settingsPage);
         line_5->setObjectName("line_5");
-        line_5->setFrameShape(QFrame::HLine);
-        line_5->setFrameShadow(QFrame::Sunken);
+        line_5->setFrameShape(QFrame::Shape::HLine);
+        line_5->setFrameShadow(QFrame::Shadow::Sunken);
 
         gridLayout_4->addWidget(line_5, 7, 0, 1, 4);
 
         line = new QFrame(settingsPage);
         line->setObjectName("line");
-        line->setFrameShape(QFrame::HLine);
-        line->setFrameShadow(QFrame::Sunken);
+        line->setFrameShape(QFrame::Shape::HLine);
+        line->setFrameShadow(QFrame::Shadow::Sunken);
 
         gridLayout_4->addWidget(line, 11, 0, 1, 4);
 
@@ -406,12 +410,12 @@ public:
 
         line_2 = new QFrame(settingsPage);
         line_2->setObjectName("line_2");
-        line_2->setFrameShape(QFrame::HLine);
-        line_2->setFrameShadow(QFrame::Sunken);
+        line_2->setFrameShape(QFrame::Shape::HLine);
+        line_2->setFrameShadow(QFrame::Shadow::Sunken);
 
         gridLayout_4->addWidget(line_2, 3, 0, 1, 4);
 
-        verticalSpacer_2 = new QSpacerItem(20, 0, QSizePolicy::Expanding, QSizePolicy::Minimum);
+        verticalSpacer_2 = new QSpacerItem(20, 0, QSizePolicy::Policy::Minimum, QSizePolicy::Policy::Expanding);
 
         gridLayout_4->addItem(verticalSpacer_2, 14, 0, 1, 4);
 
@@ -476,20 +480,22 @@ public:
 
         gridLayout_5->addWidget(labelOptions_2, 0, 0, 1, 1);
 
-        horizontalSpacer_2 = new QSpacerItem(30, 20, QSizePolicy::Policy::Minimum, QSizePolicy::Minimum);
+        horizontalSpacer_2 = new QSpacerItem(30, 20, QSizePolicy::Policy::Minimum, QSizePolicy::Policy::Minimum);
 
         gridLayout_5->addItem(horizontalSpacer_2, 1, 4, 1, 1);
 
-        horizontalSpacer_3 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+        horizontalSpacer_3 = new QSpacerItem(40, 20, QSizePolicy::Policy::Expanding, QSizePolicy::Policy::Minimum);
 
         gridLayout_5->addItem(horizontalSpacer_3, 1, 7, 1, 1);
 
 
         gridLayout_4->addWidget(frame_4, 8, 0, 1, 4);
 
+        horizontalLayoutExcludeButtons = new QHBoxLayout();
+        horizontalLayoutExcludeButtons->setObjectName("horizontalLayoutExcludeButtons");
         btnEditExclude = new QPushButton(settingsPage);
         btnEditExclude->setObjectName("btnEditExclude");
-        QSizePolicy sizePolicy1(QSizePolicy::Maximum, QSizePolicy::Fixed);
+        QSizePolicy sizePolicy1(QSizePolicy::Policy::Maximum, QSizePolicy::Policy::Fixed);
         sizePolicy1.setHorizontalStretch(0);
         sizePolicy1.setVerticalStretch(0);
         sizePolicy1.setHeightForWidth(btnEditExclude->sizePolicy().hasHeightForWidth());
@@ -497,7 +503,24 @@ public:
         QIcon icon1(QIcon::fromTheme(QString::fromUtf8("edit")));
         btnEditExclude->setIcon(icon1);
 
-        gridLayout_4->addWidget(btnEditExclude, 6, 0, 1, 1);
+        horizontalLayoutExcludeButtons->addWidget(btnEditExclude);
+
+        btnRemoveCustomExclude = new QPushButton(settingsPage);
+        btnRemoveCustomExclude->setObjectName("btnRemoveCustomExclude");
+        sizePolicy1.setHeightForWidth(btnRemoveCustomExclude->sizePolicy().hasHeightForWidth());
+        btnRemoveCustomExclude->setSizePolicy(sizePolicy1);
+        QIcon icon2(QIcon::fromTheme(QString::fromUtf8("list-remove")));
+        btnRemoveCustomExclude->setIcon(icon2);
+        btnRemoveCustomExclude->setVisible(false);
+
+        horizontalLayoutExcludeButtons->addWidget(btnRemoveCustomExclude);
+
+        horizontalSpacerRemoveExclude = new QSpacerItem(40, 20, QSizePolicy::Policy::Expanding, QSizePolicy::Policy::Minimum);
+
+        horizontalLayoutExcludeButtons->addItem(horizontalSpacerRemoveExclude);
+
+
+        gridLayout_4->addLayout(horizontalLayoutExcludeButtons, 6, 0, 1, 2);
 
         frame = new QFrame(settingsPage);
         frame->setObjectName("frame");
@@ -619,13 +642,13 @@ public:
         buttonBar->setContentsMargins(0, 0, 0, 0);
         btnAbout = new QPushButton(MainWindow);
         btnAbout->setObjectName("btnAbout");
-        QSizePolicy sizePolicy2(QSizePolicy::Minimum, QSizePolicy::Preferred);
+        QSizePolicy sizePolicy2(QSizePolicy::Policy::Minimum, QSizePolicy::Policy::Preferred);
         sizePolicy2.setHorizontalStretch(0);
         sizePolicy2.setVerticalStretch(0);
         sizePolicy2.setHeightForWidth(btnAbout->sizePolicy().hasHeightForWidth());
         btnAbout->setSizePolicy(sizePolicy2);
-        QIcon icon2(QIcon::fromTheme(QString::fromUtf8("help-about")));
-        btnAbout->setIcon(icon2);
+        QIcon icon3(QIcon::fromTheme(QString::fromUtf8("help-about")));
+        btnAbout->setIcon(icon3);
         btnAbout->setAutoDefault(true);
 
         buttonBar->addWidget(btnAbout, 0, 0, 1, 1);
@@ -634,8 +657,8 @@ public:
         btnNext->setObjectName("btnNext");
         sizePolicy2.setHeightForWidth(btnNext->sizePolicy().hasHeightForWidth());
         btnNext->setSizePolicy(sizePolicy2);
-        QIcon icon3(QIcon::fromTheme(QString::fromUtf8("go-next")));
-        btnNext->setIcon(icon3);
+        QIcon icon4(QIcon::fromTheme(QString::fromUtf8("go-next")));
+        btnNext->setIcon(icon4);
         btnNext->setAutoDefault(true);
 
         buttonBar->addWidget(btnNext, 0, 8, 1, 1);
@@ -644,8 +667,8 @@ public:
         btnHelp->setObjectName("btnHelp");
         sizePolicy2.setHeightForWidth(btnHelp->sizePolicy().hasHeightForWidth());
         btnHelp->setSizePolicy(sizePolicy2);
-        QIcon icon4(QIcon::fromTheme(QString::fromUtf8("help-contents")));
-        btnHelp->setIcon(icon4);
+        QIcon icon5(QIcon::fromTheme(QString::fromUtf8("help-contents")));
+        btnHelp->setIcon(icon5);
 
         buttonBar->addWidget(btnHelp, 0, 1, 1, 1);
 
@@ -653,13 +676,13 @@ public:
         btnCancel->setObjectName("btnCancel");
         sizePolicy2.setHeightForWidth(btnCancel->sizePolicy().hasHeightForWidth());
         btnCancel->setSizePolicy(sizePolicy2);
-        QIcon icon5(QIcon::fromTheme(QString::fromUtf8("window-close")));
-        btnCancel->setIcon(icon5);
+        QIcon icon6(QIcon::fromTheme(QString::fromUtf8("window-close")));
+        btnCancel->setIcon(icon6);
         btnCancel->setAutoDefault(true);
 
         buttonBar->addWidget(btnCancel, 0, 10, 1, 1);
 
-        horizontalSpacer2 = new QSpacerItem(100, 20, QSizePolicy::Policy::Expanding, QSizePolicy::Minimum);
+        horizontalSpacer2 = new QSpacerItem(100, 20, QSizePolicy::Policy::Expanding, QSizePolicy::Policy::Minimum);
 
         buttonBar->addItem(horizontalSpacer2, 0, 5, 1, 1);
 
@@ -676,12 +699,12 @@ public:
         btnBack->setObjectName("btnBack");
         sizePolicy2.setHeightForWidth(btnBack->sizePolicy().hasHeightForWidth());
         btnBack->setSizePolicy(sizePolicy2);
-        QIcon icon6(QIcon::fromTheme(QString::fromUtf8("go-previous")));
-        btnBack->setIcon(icon6);
+        QIcon icon7(QIcon::fromTheme(QString::fromUtf8("go-previous")));
+        btnBack->setIcon(icon7);
 
         buttonBar->addWidget(btnBack, 0, 7, 1, 1);
 
-        horizontalSpacer1 = new QSpacerItem(100, 20, QSizePolicy::Policy::Expanding, QSizePolicy::Minimum);
+        horizontalSpacer1 = new QSpacerItem(100, 20, QSizePolicy::Policy::Expanding, QSizePolicy::Policy::Minimum);
 
         buttonBar->addItem(horizontalSpacer1, 0, 2, 1, 1);
 
@@ -701,7 +724,8 @@ public:
         QWidget::setTabOrder(btnCancel, excludeDocuments);
         QWidget::setTabOrder(excludeDocuments, excludeDownloads);
         QWidget::setTabOrder(excludeDownloads, btnEditExclude);
-        QWidget::setTabOrder(btnEditExclude, cbCompression);
+        QWidget::setTabOrder(btnEditExclude, btnRemoveCustomExclude);
+        QWidget::setTabOrder(btnRemoveCustomExclude, cbCompression);
         QWidget::setTabOrder(cbCompression, checkMd5);
         QWidget::setTabOrder(checkMd5, radioPersonal);
         QWidget::setTabOrder(radioPersonal, radioRespin);
@@ -755,6 +779,7 @@ public:
         checkMd5->setText(QCoreApplication::translate("MainWindow", "md5", nullptr));
         labelOptions_2->setText(QCoreApplication::translate("MainWindow", "Options:", nullptr));
         btnEditExclude->setText(QCoreApplication::translate("MainWindow", "Edit Exclusion File", nullptr));
+        btnRemoveCustomExclude->setText(QCoreApplication::translate("MainWindow", "Remove Custom Exclusion File", nullptr));
         excludePictures->setText(QCoreApplication::translate("MainWindow", "Pictures", nullptr));
         excludeVideos->setText(QCoreApplication::translate("MainWindow", "Videos", nullptr));
         excludeAll->setText(QCoreApplication::translate("MainWindow", "All of the above", nullptr));

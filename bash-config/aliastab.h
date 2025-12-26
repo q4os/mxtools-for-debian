@@ -3,6 +3,7 @@
 #include "aliasstream.h"
 #include "tab.h"
 #include "ui_aliastab.h"
+#include <QSet>
 
 template <class, class>
 class QMap;
@@ -43,4 +44,6 @@ class AliasTab : public Tab
 	Ui::AliasTab* ui;
 	QList<Alias> m_deletedAliases;
 	QMap<QCheckBox*, Alias> m_aliasWithCheckboxes;
+    QSet<QString> m_bashrcAliasNames;
+    QSet<QString> m_bashrcAliasesNames;
 };

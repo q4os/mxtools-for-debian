@@ -1,0 +1,25 @@
+ dpkg-buildpackage -us -uc -ui -S
+dpkg-buildpackage: info: source package mx-welcome
+dpkg-buildpackage: info: source version 25.11.01mx25
+dpkg-buildpackage: info: source distribution mx
+dpkg-buildpackage: info: source changed by Dolphin Oracle <dolphinoracle@gmail.com>
+ dpkg-source --before-build .
+ debian/rules clean
+dh clean --buildsystem=cmake+ninja --no-automatic-dbgsym
+   debian/rules override_dh_auto_clean
+make[1]: Entering directory '/media/dataext/development/working/mx-welcome-25.11.01mx25/mx-welcome'
+dh_auto_clean
+rm -rf build/
+rm -f translations/*.qm
+make[1]: Leaving directory '/media/dataext/development/working/mx-welcome-25.11.01mx25/mx-welcome'
+   dh_autoreconf_clean -O--buildsystem=cmake\+ninja -O--no-automatic-dbgsym
+   dh_clean -O--buildsystem=cmake\+ninja -O--no-automatic-dbgsym
+ dpkg-source -b .
+dpkg-source: info: using source format '3.0 (native)'
+dpkg-source: info: building mx-welcome in mx-welcome_25.11.01mx25.tar.xz
+dpkg-source: info: building mx-welcome in mx-welcome_25.11.01mx25.dsc
+ dpkg-genbuildinfo --build=source -O../mx-welcome_25.11.01mx25_source.buildinfo
+ dpkg-genchanges --build=source -O../mx-welcome_25.11.01mx25_source.changes
+dpkg-genchanges: info: including full source code in upload
+ dpkg-source --after-build .
+dpkg-buildpackage: info: source-only upload: Debian-native package

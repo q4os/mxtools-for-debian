@@ -558,32 +558,32 @@ otherwise this setting will not have any effect</source>
     <name>MainWindow</name>
     <message>
         <location filename="../src/mainwindow.cpp" line="58"/>
-        <location filename="../src/mainwindow.cpp" line="864"/>
+        <location filename="../src/mainwindow.cpp" line="863"/>
         <source>MX Conky</source>
         <translation>MX Conky</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="252"/>
+        <location filename="../src/mainwindow.cpp" line="251"/>
         <source>About this application</source>
         <translation>Περί της εφαρμογής</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="250"/>
+        <location filename="../src/mainwindow.cpp" line="249"/>
         <source>About...</source>
         <translation>Περί...</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="257"/>
+        <location filename="../src/mainwindow.cpp" line="256"/>
         <source>Help</source>
         <translation>Βοήθεια</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="272"/>
+        <location filename="../src/mainwindow.cpp" line="271"/>
         <source>Quit application</source>
         <translation>Κλείσιμο εφαρμογής</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="270"/>
+        <location filename="../src/mainwindow.cpp" line="269"/>
         <source>Close</source>
         <translation>Κλείσιμο</translation>
     </message>
@@ -633,70 +633,70 @@ otherwise this setting will not have any effect</source>
         <translation>Διακοπή όλων των διεργασιών</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="966"/>
-        <location filename="../src/mainwindow.cpp" line="1018"/>
+        <location filename="../src/mainwindow.cpp" line="965"/>
+        <location filename="../src/mainwindow.cpp" line="1016"/>
         <source>Running</source>
         <translation>Σε εκκίνηση</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="968"/>
-        <location filename="../src/mainwindow.cpp" line="1019"/>
+        <location filename="../src/mainwindow.cpp" line="967"/>
+        <location filename="../src/mainwindow.cpp" line="1017"/>
         <source>Stopped</source>
         <translation>Σε διακοπή</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="212"/>
+        <location filename="../src/mainwindow.cpp" line="211"/>
         <source>Search conky by name...</source>
         <translation>Αναζήτηση με όνομα...</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="214"/>
+        <location filename="../src/mainwindow.cpp" line="213"/>
         <source>Search conkies by name (Ctrl+F)</source>
         <translation>Αναζήτηση conkies με όνομα (Ctrl+F)</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="259"/>
+        <location filename="../src/mainwindow.cpp" line="258"/>
         <source>Display help</source>
         <translation>Εμφάνιση βοήθειας</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="448"/>
-        <location filename="../src/mainwindow.cpp" line="622"/>
+        <location filename="../src/mainwindow.cpp" line="447"/>
+        <location filename="../src/mainwindow.cpp" line="621"/>
         <source>Copy Conky</source>
         <translation>Αντιγραφή</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="494"/>
-        <location filename="../src/mainwindow.cpp" line="670"/>
+        <location filename="../src/mainwindow.cpp" line="493"/>
+        <location filename="../src/mainwindow.cpp" line="669"/>
         <source>Conky Copied</source>
         <translation>Το conky αντιγράφηκε</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="495"/>
+        <location filename="../src/mainwindow.cpp" line="494"/>
         <source>Conky has been copied to your personal folder for editing:
 %1</source>
         <translation>Το conky αντιγράφηκε στο προσωπικό σας φάκελο για επεξεργασία:
 %1</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="497"/>
-        <location filename="../src/mainwindow.cpp" line="673"/>
+        <location filename="../src/mainwindow.cpp" line="496"/>
+        <location filename="../src/mainwindow.cpp" line="672"/>
         <source>Copy Failed</source>
         <translation>Η αντιγραφή απέτυχε</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="497"/>
-        <location filename="../src/mainwindow.cpp" line="673"/>
+        <location filename="../src/mainwindow.cpp" line="496"/>
+        <location filename="../src/mainwindow.cpp" line="672"/>
         <source>Failed to copy conky to your personal folder.</source>
         <translation>Απέτυχε η αντιγραφή του conky στο προσωπικό σας φάκελο.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="559"/>
+        <location filename="../src/mainwindow.cpp" line="558"/>
         <source>Delete Conky</source>
         <translation>Διαγραφή conky</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="671"/>
+        <location filename="../src/mainwindow.cpp" line="670"/>
         <source>Conky has been copied to your personal folder for customization:
 %1</source>
         <translation>Το conky αντιγράφηκε στο προσωπικό σας φάκελο για προσαρμογή:
@@ -713,61 +713,61 @@ otherwise this setting will not have any effect</source>
         <translation>Δημιουργία εικόνων προεπισκόπησης</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="208"/>
-        <location filename="../src/mainwindow.cpp" line="482"/>
-        <location filename="../src/mainwindow.cpp" line="658"/>
-        <location filename="../src/mainwindow.cpp" line="964"/>
-        <location filename="../src/mainwindow.cpp" line="1017"/>
+        <location filename="../src/mainwindow.cpp" line="207"/>
+        <location filename="../src/mainwindow.cpp" line="481"/>
+        <location filename="../src/mainwindow.cpp" line="657"/>
+        <location filename="../src/mainwindow.cpp" line="963"/>
+        <location filename="../src/mainwindow.cpp" line="1015"/>
         <source>All</source>
         <translation>Όλα</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="209"/>
+        <location filename="../src/mainwindow.cpp" line="208"/>
         <source>Filter conkies by running status or location</source>
         <translation>Εμφάνιση με βάση τη κατάσταση λειτουργίας ή τη τοποθεσία</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="444"/>
-        <location filename="../src/mainwindow.cpp" line="618"/>
+        <location filename="../src/mainwindow.cpp" line="443"/>
+        <location filename="../src/mainwindow.cpp" line="617"/>
         <source>Enter a name for the copy:</source>
         <translation>Εισαγωγή ονόματος για το αντίγραφο:</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="445"/>
-        <location filename="../src/mainwindow.cpp" line="619"/>
+        <location filename="../src/mainwindow.cpp" line="444"/>
+        <location filename="../src/mainwindow.cpp" line="618"/>
         <source>In order for you to edit and save a conky, it must first be copied to ~/.conky where you have permission.
 Enter a name for the copy.</source>
         <translation>Για να μπορέσετε να επεξεργαστείτε και να αποθηκεύσετε το conky, πρέπει πρώτα να το αντιγράψετε στο ~/.conky όπου έχετε τα δικαιώματα.
 Εισαγωγή ονόματος για το αντίγραφο.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="462"/>
-        <location filename="../src/mainwindow.cpp" line="638"/>
+        <location filename="../src/mainwindow.cpp" line="461"/>
+        <location filename="../src/mainwindow.cpp" line="637"/>
         <source>Directory Exists</source>
         <translation>Ο κατάλογος υπάρχει</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="463"/>
-        <location filename="../src/mainwindow.cpp" line="639"/>
+        <location filename="../src/mainwindow.cpp" line="462"/>
+        <location filename="../src/mainwindow.cpp" line="638"/>
         <source>A conky with the name '%1' already exists in your personal folder.
 Do you want to overwrite it?</source>
         <translation>Υπάρχει ήδη conky με όνομα &apos;%1&apos; στο προσωπικό σας φάκελο.
 Θέλετε να το αντικαταστήσω;</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="530"/>
+        <location filename="../src/mainwindow.cpp" line="529"/>
         <source>Edit Conky</source>
         <translation>Επεξεργασία conky</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="531"/>
+        <location filename="../src/mainwindow.cpp" line="530"/>
         <source>This conky file is read-only and requires administrator privileges to edit.
 Do you want to edit it with elevated privileges?</source>
         <translation>Αυτό το αρχείο conky είναι μόνο για ανάγνωση και απαιτεί δικαιώματα διαχειριστή για την επεξεργασία του.
 Θέλετε να το επεξεργαστείτε με αυξημένα δικαιώματα;</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="560"/>
+        <location filename="../src/mainwindow.cpp" line="559"/>
         <source>Are you sure you want to delete the conky file:
 %1
 
@@ -778,88 +778,88 @@ This action cannot be undone.</source>
 Αυτή ενέργεια δεν μπορεί να αναιρεθεί.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="592"/>
+        <location filename="../src/mainwindow.cpp" line="591"/>
         <source>Delete Failed</source>
         <translation>Η διαγραφή απέτυχε</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="592"/>
+        <location filename="../src/mainwindow.cpp" line="591"/>
         <source>Failed to delete conky file:
 %1</source>
         <translation>Απέτυχε η διαγραφή του αρχείου conky:
 %1</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="680"/>
+        <location filename="../src/mainwindow.cpp" line="679"/>
         <source>Customize Conky</source>
         <translation>Προσαρμογή conky</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="681"/>
+        <location filename="../src/mainwindow.cpp" line="680"/>
         <source>This conky file is read-only and requires administrator privileges to customize.
 Do you want to customize it with elevated privileges?</source>
         <translation>Αυτό το αρχείο conky είναι μόνο για ανάγνωση και απαιτεί δικαιώματα διαχειριστή για τη προσαρμογή του.
 Θέλετε να προχωρήσετε σε προσαρμογή με αυξημένα δικαιώματα;</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="853"/>
+        <location filename="../src/mainwindow.cpp" line="852"/>
         <source>Editor Error</source>
         <translation>Σφάλμα επεξεργασίας</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="853"/>
+        <location filename="../src/mainwindow.cpp" line="852"/>
         <source>Cannot start editor for file: %1</source>
         <translation>Δεν είναι δυνατή η εκκίνηση του επεξεργαστή για το αρχείο: %1</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="863"/>
+        <location filename="../src/mainwindow.cpp" line="862"/>
         <source>About MX Conky</source>
         <translation>Περί του MX Conky</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="865"/>
+        <location filename="../src/mainwindow.cpp" line="864"/>
         <source>Version: </source>
         <translation>Έκδοση: </translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="866"/>
+        <location filename="../src/mainwindow.cpp" line="865"/>
         <source>GUI program for configuring Conky in MX Linux</source>
         <translation>Γραφικό πρόγραμμα για τη διαμόρφωση του Conky στο MX Linux</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="869"/>
+        <location filename="../src/mainwindow.cpp" line="868"/>
         <source>Copyright (c) MX Linux</source>
         <translation>Πνευματικά δικαιώματα (c)  MX Linux</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="870"/>
+        <location filename="../src/mainwindow.cpp" line="869"/>
         <source>License</source>
         <translation>Άδεια</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="871"/>
-        <location filename="../src/mainwindow.cpp" line="883"/>
+        <location filename="../src/mainwindow.cpp" line="870"/>
+        <location filename="../src/mainwindow.cpp" line="882"/>
         <source>Changelog</source>
         <translation>Αρχείο αλλαγών</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="872"/>
+        <location filename="../src/mainwindow.cpp" line="871"/>
         <source>Cancel</source>
         <translation>Άκυρο</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="894"/>
+        <location filename="../src/mainwindow.cpp" line="893"/>
         <source>&amp;Close</source>
         <translation>&amp;Κλείσιμο</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="925"/>
+        <location filename="../src/mainwindow.cpp" line="924"/>
         <source>MX Conky Help</source>
         <translation>Βοήθεια του MX Conky</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="970"/>
-        <location filename="../src/mainwindow.cpp" line="1020"/>
+        <location filename="../src/mainwindow.cpp" line="969"/>
+        <location filename="../src/mainwindow.cpp" line="1018"/>
         <source>Autostart</source>
         <translation>Αυτόματη έναρξη</translation>
     </message>
@@ -959,22 +959,22 @@ Please install the graphicsmagick-imagemagick-compat package to enable this feat
         <translation>Δημιουργία προεπισκόπησης για: %1</translation>
     </message>
     <message>
-        <location filename="../src/previewdialog.cpp" line="427"/>
+        <location filename="../src/previewdialog.cpp" line="426"/>
         <source>Preview generation complete! Generated %1 previews.</source>
         <translation>Ολοκληρώθηκε η δημιουργία προεπισκόπησης. Δημιουργήθηκαν %1.</translation>
     </message>
     <message>
-        <location filename="../src/previewdialog.cpp" line="431"/>
+        <location filename="../src/previewdialog.cpp" line="430"/>
         <source>Close</source>
         <translation>Κλείσιμο</translation>
     </message>
     <message>
-        <location filename="../src/previewdialog.cpp" line="434"/>
+        <location filename="../src/previewdialog.cpp" line="433"/>
         <source>Preview Generation Complete</source>
         <translation>Ολοκληρώθηκε η δημιουργία προεπισκόπησης</translation>
     </message>
     <message>
-        <location filename="../src/previewdialog.cpp" line="435"/>
+        <location filename="../src/previewdialog.cpp" line="434"/>
         <source>Successfully generated %1 preview images.</source>
         <translation>Δημιουργήθηκαν %1 εικόνες προεπισκόπησης.</translation>
     </message>

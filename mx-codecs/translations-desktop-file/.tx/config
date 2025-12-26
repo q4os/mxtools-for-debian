@@ -1,8 +1,0 @@
-[main]
-host = https://www.transifex.com
-
-[antix-development.mx-codecs-desktop]
-file_filter = po/mx-codecs-desktop_<lang>.po
-source_file = mx-codecs-desktop.pot
-source_lang = en
-type = po

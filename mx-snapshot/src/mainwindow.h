@@ -26,7 +26,9 @@
 #include <QMessageBox>
 #include <QScopedPointer>
 #include <QSettings>
+#include <QFileSystemWatcher>
 #include <QTimer>
+#include <QDialog>
 
 #include "settings.h"
 #include "work.h"
@@ -64,6 +66,7 @@ private slots:
     void btnBack_clicked();
     void btnCancel_clicked();
     void btnEditExclude_clicked();
+    void btnRemoveCustomExclude_clicked();
     void btnHelp_clicked();
     void btnNext_clicked();
     void btnSelectSnapshot_clicked();
@@ -91,6 +94,7 @@ private:
     Settings *settings;
     Work work;
     QSettings qt_settings;
+    QFileSystemWatcher excludesWatcher;
 
     [[nodiscard]] bool confirmStart();
     [[noreturn]] void cleanUp();
@@ -99,6 +103,7 @@ private:
     void applyExclusions();
     void checkNvidiaGraphicsCard();
     void checkSaveWork();
+    void checkUpdatedDefaultExcludes();
     void closeApp();
     void editBootMenu();
     void handleSelectionPage(const QString &file_name);
@@ -107,9 +112,18 @@ private:
     void listUsedSpace();
     void loadSettings();
     void prepareForOutput(const QString &file_name);
+    bool hasCustomExcludes() const;
+    enum class ExcludesChoice { None, ShowDiff, KeepCustom, UseUpdatedDefault };
+    [[nodiscard]] bool isSourceExcludesNewer(QString &diffOutput) const;
+    [[nodiscard]] ExcludesChoice showUpdatedExcludesPrompt(const QString &configuredPath,
+                                                          const QString &sourcePath) const;
+    void showUpdatedExcludesDialog(const QString &diffOutput) const;
+    void updateCustomExcludesButton();
+    bool resetCustomExcludes();
     void setConnections();
     void setExclusions();
     void setOtherOptions();
     void setup();
     void showErrorMessageBox(const QString &file_path);
+    void watchExcludesFile();
 };

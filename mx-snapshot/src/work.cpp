@@ -24,11 +24,15 @@
 
 #include "work.h"
 
+#include <QCoreApplication>
 #include <QDate>
 #include <QDebug>
 #include <QDirIterator>
+#include <QFileInfo>
+#include <QProcess>
 #include <QRegularExpression>
 #include <QSettings>
+#include <QStandardPaths>
 #include <QStorageInfo>
 #include <QTextStream>
 
@@ -45,25 +49,25 @@ Work::Work(Settings *settings, QObject *parent)
         throw std::invalid_argument("Settings pointer cannot be null");
     }
 
-    qDebug() << "Work object initialized for settings:" << settings->snapshot_name;
+    qDebug() << "Work object initialized for settings:" << settings->snapshotName;
 }
 
 bool Work::isEnvironmentReady() const
 {
     // Check if work directory exists and is accessible
-    if (settings->work_dir.isEmpty() || !QDir(settings->work_dir).exists()) {
+    if (settings->workDir.isEmpty() || !QDir(settings->workDir).exists()) {
         return false;
     }
 
     // Check if snapshot directory is accessible
-    if (settings->snapshot_dir.isEmpty() || !QDir(settings->snapshot_dir).exists()) {
+    if (settings->snapshotDir.isEmpty() || !QDir(settings->snapshotDir).exists()) {
         return false;
     }
 
     // Check if required tools are available
-    QStringList requiredTools = {"mksquashfs", "xorriso"};
+    const QStringList requiredTools {"mksquashfs", "xorriso"};
     for (const QString &tool : requiredTools) {
-        if (!checkInstalled(tool)) {
+        if (QStandardPaths::findExecutable(tool).isEmpty()) {
             return false;
         }
     }
@@ -77,62 +81,88 @@ void Work::checkEnoughSpace()
 {
     quint64 required_space = getRequiredSpace();
     // Check foremost if enough space for ISO on snapshot_dir, print error and exit if not
-    checkNoSpaceAndExit(required_space, settings->free_space, settings->snapshot_dir);
+    checkNoSpaceAndExit(required_space, settings->freeSpace, settings->snapshotDir);
 
     /* If snapshot and workdir are on the same partition we need about double the size of required_space.
      * If both TMP work_dir and ISO don't fit on snapshot_dir, see if work_dir can be put on /home or /tmp
      * we already checked that ISO can fit on snapshot_dir so if TMP work fits on /home or /tmp move
      * the work_dir to the appropriate place and return */
-    if (QStorageInfo(settings->work_dir + "/").device() == QStorageInfo(settings->snapshot_dir + "/").device()) {
-        if (settings->free_space < required_space * 2) {
+    if (QStorageInfo(settings->workDir + "/").device() == QStorageInfo(settings->snapshotDir + "/").device()) {
+        if (settings->freeSpace < required_space * 2) {
             if (checkAndMoveWorkDir("/tmp", required_space)) {
                 return;
             }
             if (checkAndMoveWorkDir("/home", required_space)) {
                 return;
             }
-            checkNoSpaceAndExit(required_space * 2, settings->free_space,
-                                settings->snapshot_dir); // Print out error and exit
+            checkNoSpaceAndExit(required_space * 2, settings->freeSpace,
+                                settings->snapshotDir); // Print out error and exit
         }
     } else { // If not on the same partitions, check if work_dir has enough free space for temp files for required_space
-        checkNoSpaceAndExit(required_space, settings->free_space_work, settings->work_dir);
+        checkNoSpaceAndExit(required_space, settings->freeSpaceWork, settings->workDir);
     }
 }
 
 bool Work::checkInstalled(const QString &package)
 {
     qDebug() << "+++" << __PRETTY_FUNCTION__ << "+++";
-    return Cmd().run(QString("dpkg-query -W -f='${Status}' %1 | grep 'install ok installed'").arg(package));
+
+    // Validate package name contains only safe characters to prevent command injection
+    // Debian package names allow: lowercase letters, digits, plus, minus, dot.
+    // Also allow optional architecture qualifiers like ":amd64".
+    static const QRegularExpression validPackageName("^[a-z0-9+.:-]+$");
+    if (!validPackageName.match(package).hasMatch()) {
+        qWarning() << "Invalid package name:" << package;
+        return false;
+    }
+
+    QProcess dpkgQuery;
+    dpkgQuery.start("dpkg-query", {"-W", "-f=${Status}", "--", package});
+    if (!dpkgQuery.waitForFinished(5000)) {
+        dpkgQuery.kill();
+        dpkgQuery.waitForFinished(1000);
+        return false;
+    }
+    if (dpkgQuery.exitStatus() != QProcess::NormalExit || dpkgQuery.exitCode() != 0) {
+        return false;
+    }
+    const QByteArray status = dpkgQuery.readAllStandardOutput();
+    return status.contains("install ok installed");
 }
 
 void Work::cleanUp()
 {
-    Cmd().run(Cmd::elevationTool() + " /usr/lib/" + QCoreApplication::applicationName() + "/snapshot-lib chown_conf", Cmd::QuietMode::Yes);
+    const QString snapshotLib = "/usr/lib/" + QCoreApplication::applicationName() + "/snapshot-lib";
+    const QString elevateTool = Cmd::elevationTool();
+    Cmd().run(elevateTool + " " + snapshotLib + " chown_conf", Cmd::QuietMode::Yes);
     if (!started) {
         shell.close();
         initrd_dir.remove();
+        cleanupBindRootOverlay();
         exit(EXIT_SUCCESS);
     }
     emit message(tr("Cleaning..."));
     QTextStream out(stdout);
     out << "\033[?25h";
     out.flush();
-    Cmd().run(Cmd::elevationTool() + " /usr/lib/" + QCoreApplication::applicationName() + "/snapshot-lib kill_mksquashfs", Cmd::QuietMode::Yes);
+    Cmd().run(elevateTool + " " + snapshotLib + " kill_mksquashfs", Cmd::QuietMode::Yes);
     shell.close();
     QProcess::execute("sync", {});
     QDir::setCurrent("/");
     if (QFileInfo::exists("/tmp/installed-to-live/cleanup.conf")) {
-        Cmd().run(Cmd::elevationTool() + " /usr/lib/" + QCoreApplication::applicationName() + "/snapshot-lib cleanup");
+        const QString elevateTool = Cmd::elevationTool();
+        Cmd().run(elevateTool + " " + snapshotLib + " cleanup");
     }
+    cleanupBindRootOverlay();
     QFile::remove("/var/lib/mxdebian/.mxsnapshot_accounts_reset.stp");
     initrd_dir.remove();
     settings->tmpdir.reset();
     if (done) {
         emit message(tr("Done"));
-        Cmd().run(Cmd::elevationTool() + " /usr/lib/" + QCoreApplication::applicationName() + "/snapshot-lib copy_log", Cmd::QuietMode::Yes);
+        Cmd().run(elevateTool + " " + snapshotLib + " copy_log", Cmd::QuietMode::Yes);
         if (settings->shutdown) {
             QFile::copy("/tmp/" + QCoreApplication::applicationName() + ".log",
-                        settings->snapshot_dir + "/" + settings->snapshot_name + ".log");
+                        settings->snapshotDir + "/" + settings->snapshotName + ".log");
             QProcess::execute("sync", {});
             QProcess::execute("dbus-send",
                               {"--system", "--print-reply", "--dest=org.freedesktop.login1", "/org/freedesktop/login1",
@@ -141,7 +171,7 @@ void Work::cleanUp()
         exit(EXIT_SUCCESS);
     } else {
         emit message(tr("Interrupted or failed to complete"));
-        Cmd().run(Cmd::elevationTool() + " /usr/lib/" + QCoreApplication::applicationName() + "/snapshot-lib copy_log", Cmd::QuietMode::Yes);
+        Cmd().run(elevateTool + " " + snapshotLib + " copy_log", Cmd::QuietMode::Yes);
         exit(EXIT_FAILURE);
     }
 }
@@ -150,12 +180,14 @@ void Work::cleanUp()
 bool Work::checkAndMoveWorkDir(const QString &dir, quint64 req_size)
 {
     // See first if the dir is on different partition otherwise it's irrelevant
-    if (QStorageInfo(dir + "/").device() != QStorageInfo(settings->snapshot_dir + "/").device()
+    if (QStorageInfo(dir + "/").device() != QStorageInfo(settings->snapshotDir + "/").device()
         && FileSystemUtils::getFreeSpace(dir) > req_size) {
         if (QFileInfo::exists("/tmp/installed-to-live/cleanup.conf")) {
-            Cmd().run(Cmd::elevationTool() + " /usr/lib/" + QCoreApplication::applicationName() + "/snapshot-lib cleanup");
+            const QString snapshotLib = "/usr/lib/" + QCoreApplication::applicationName() + "/snapshot-lib";
+            const QString elevateTool = Cmd::elevationTool();
+            Cmd().run(elevateTool + " " + snapshotLib + " cleanup");
         }
-        settings->tempdir_parent = dir;
+        settings->tempDirParent = dir;
         if (!settings->checkTempDir()) {
             cleanUp();
         }
@@ -169,8 +201,9 @@ void Work::checkNoSpaceAndExit(quint64 needed_space, quint64 free_space, const Q
 {
     qDebug() << "+++" << __PRETTY_FUNCTION__ << "+++";
     constexpr float factor = 1024 * 1024;
-    qDebug() << "Needed space:" << needed_space;
-    qDebug() << "Free space  :" << free_space << "on" << dir;
+    constexpr double kibToMib = 1024.0;
+    qDebug().noquote() << "Needed space:" << QString::number(needed_space / kibToMib, 'f', 2) << "MiB";
+    qDebug().noquote() << "Free space  :" << QString::number(free_space / kibToMib, 'f', 2) << "MiB on" << dir;
     if (needed_space > free_space) {
         emit messageBox(
             BoxType::critical, tr("Error"),
@@ -185,12 +218,72 @@ void Work::checkNoSpaceAndExit(quint64 needed_space, quint64 free_space, const Q
     }
 }
 
+bool Work::setupBindRootOverlay()
+{
+    const QString appName = QCoreApplication::applicationName();
+    const QString overlayBase = "/run/" + appName + "/bind-root-overlay";
+    const QString lowerDir = overlayBase + "/lower";
+    const QString upperDir = overlayBase + "/upper";
+    const QString workDir = overlayBase + "/work";
+    const QString bindRoot = overlayBase + "/root";
+
+    const auto runRoot = [this](const QString &cmd) { return shell.runAsRoot(cmd, Cmd::QuietMode::Yes); };
+
+    bindRootOverlayActive = false;
+    bindRootOverlayBase.clear();
+    bindRootPath = "/.bind-root";
+
+    runRoot("mkdir -p \"" + overlayBase + "\" \"" + lowerDir + "\" \"" + upperDir + "\" \"" + workDir + "\" \""
+            + bindRoot + "\"");
+
+    if (runRoot("mountpoint -q \"" + bindRoot + "\"")) {
+        runRoot("umount --recursive \"" + bindRoot + "\"");
+    }
+    if (runRoot("mountpoint -q \"" + lowerDir + "\"")) {
+        runRoot("umount --recursive \"" + lowerDir + "\"");
+    }
+
+    if (!runRoot("mount --bind / \"" + lowerDir + "\"")) {
+        qWarning() << "Failed to bind mount / to" << lowerDir;
+        return false;
+    }
+
+    const QString cmd = "mount -t overlay overlay -o lowerdir=\"" + lowerDir + "\",upperdir=\"" + upperDir
+                        + "\",workdir=\"" + workDir + "\" \"" + bindRoot + "\"";
+    if (!runRoot(cmd)) {
+        qWarning() << "Failed to mount overlay at" << bindRoot;
+        runRoot("umount --recursive \"" + lowerDir + "\"");
+        return false;
+    }
+
+    bindRootPath = bindRoot;
+    bindRootOverlayBase = overlayBase;
+    bindRootOverlayActive = true;
+    return true;
+}
+
+void Work::cleanupBindRootOverlay()
+{
+    if (bindRootOverlayBase.isEmpty()) {
+        bindRootOverlayActive = false;
+        bindRootPath = "/.bind-root";
+        return;
+    }
+    const QString snapshotLib = "/usr/lib/" + QCoreApplication::applicationName() + "/snapshot-lib";
+    const QString elevateTool = Cmd::elevationTool();
+    Cmd().run(elevateTool + " " + snapshotLib + " cleanup_overlay " + QCoreApplication::applicationName(),
+              Cmd::QuietMode::Yes);
+    bindRootOverlayActive = false;
+    bindRootOverlayBase.clear();
+    bindRootPath = "/.bind-root";
+}
+
 void Work::closeInitrd(const QString &initrd_dir, const QString &file)
 {
     qDebug() << "+++" << __PRETTY_FUNCTION__ << "+++";
     QDir::setCurrent(initrd_dir);
     shell.run("(find . |cpio -o -H newc --owner root:root |gzip -9) >\"" + file + "\"");
-    makeChecksum(HashType::md5, settings->work_dir + "/iso-template/antiX", "initrd.gz");
+    makeChecksum(HashType::md5, settings->workDir + "/iso-template/antiX", "initrd.gz");
 }
 
 // copyModules(mod_dir/kernel kernel)
@@ -206,14 +299,14 @@ void Work::copyModules(const QString &to, const QString &kernel)
 void Work::copyNewIso()
 {
     emit message(tr("Copying the new-iso filesystem..."));
-    QDir::setCurrent(settings->work_dir);
+    QDir::setCurrent(settings->workDir);
 
     shell.run("tar xf /usr/lib/iso-template/iso-template.tar.gz");
     shell.run("cp /usr/lib/iso-template/template-initrd.gz iso-template/antiX/initrd.gz");
     shell.run("cp /boot/vmlinuz-" + settings->kernel + " iso-template/antiX/vmlinuz");
 
     replaceMenuStrings();
-    makeChecksum(HashType::md5, settings->work_dir + "/iso-template/antiX", "vmlinuz");
+    makeChecksum(HashType::md5, settings->workDir + "/iso-template/antiX", "vmlinuz");
 
     QString path = initrd_dir.path();
     if (!initrd_dir.isValid()) {
@@ -221,7 +314,7 @@ void Work::copyNewIso()
         cleanUp();
     }
 
-    openInitrd(settings->work_dir + "/iso-template/antiX/initrd.gz", path);
+    openInitrd(settings->workDir + "/iso-template/antiX/initrd.gz", path);
 
     // Strip modules; make sure initrd_dir is correct to avoid disaster
     if (path.startsWith("/tmp/")) {
@@ -251,7 +344,7 @@ void Work::copyNewIso()
 
     if (initrd_dir.isValid()) {
         copyModules(path, settings->kernel);
-        closeInitrd(path, settings->work_dir + "/iso-template/antiX/initrd.gz");
+        closeInitrd(path, settings->workDir + "/iso-template/antiX/initrd.gz");
         initrd_dir.remove();
     }
 }
@@ -265,11 +358,12 @@ bool Work::createIso(const QString &filename)
     using Release::Version;
     QString throttle
         = (Settings::getDebianVerNum() < Version::Bookworm) ? "" : " -throttle " + QString::number(settings->throttle);
-    QString cmd = unbuffer + "mksquashfs /.bind-root \"" + settings->work_dir + "/iso-template/antiX/linuxfs\" -comp "
+    QString cmd = unbuffer + "mksquashfs \"" + bindRootPath + "\" \"" + settings->workDir
+                  + "/iso-template/antiX/linuxfs\" -comp "
                   + settings->compression + " -processors " + QString::number(settings->cores) + throttle
-                  + (settings->mksq_opt.isEmpty() ? "" : " " + settings->mksq_opt) + " -wildcards -ef "
-                  + settings->snapshot_excludes.fileName()
-                  + (settings->session_excludes.isEmpty() ? "" : " -e " + settings->session_excludes);
+                  + (settings->mksqOpt.isEmpty() ? "" : " " + settings->mksqOpt) + " -wildcards -ef "
+                  + settings->snapshotExcludes.fileName()
+                  + (settings->sessionExcludes.isEmpty() ? "" : " -e " + settings->sessionExcludes);
     if (Cmd().getOut("umask", Cmd::QuietMode::Yes) != "0022") {
         cmd.prepend("umask 022; ");
     }
@@ -285,16 +379,18 @@ bool Work::createIso(const QString &filename)
     // Move linuxfs files to iso-2/antiX folder
     QDir().mkpath("iso-2/antiX");
     shell.run("mv iso-template/antiX/linuxfs* iso-2/antiX");
-    makeChecksum(HashType::md5, settings->work_dir + "/iso-2/antiX", "linuxfs");
+    makeChecksum(HashType::md5, settings->workDir + "/iso-2/antiX", "linuxfs");
 
-    Cmd().run(Cmd::elevationTool() + " /usr/lib/" + QCoreApplication::applicationName() + "/snapshot-lib cleanup");
+    const QString snapshotLib = "/usr/lib/" + QCoreApplication::applicationName() + "/snapshot-lib";
+    const QString elevateTool = Cmd::elevationTool();
+    Cmd().run(elevateTool + " " + snapshotLib + " cleanup");
 
     // Create the iso file
-    QDir::setCurrent(settings->work_dir + "/iso-template");
+    QDir::setCurrent(settings->workDir + "/iso-template");
     cmd = "xorriso -as mkisofs -l -V DEBIANLIVE -R -J -pad -iso-level 3 -no-emul-boot -boot-load-size 4 -boot-info-table "
           "-b boot/isolinux/isolinux.bin -eltorito-alt-boot -e boot/grub/efi.img -no-emul-boot -c "
           "boot/isolinux/isolinux.cat -o \""
-          + settings->snapshot_dir + "/" + filename + "\" . \"" + settings->work_dir + "/iso-2\"";
+          + settings->snapshotDir + "/" + filename + "\" . \"" + settings->workDir + "/iso-2\"";
     emit message(tr("Creating CD/DVD image file..."));
     if (!shell.run(cmd)) {
         emit messageBox(
@@ -304,17 +400,17 @@ bool Work::createIso(const QString &filename)
     }
 
     // Make it isohybrid
-    if (settings->make_isohybrid) {
+    if (settings->makeIsohybrid) {
         emit message(tr("Making hybrid iso"));
-        shell.run("isohybrid --uefi \"" + settings->snapshot_dir + "/" + filename + "\"");
+        shell.run("isohybrid --uefi \"" + settings->snapshotDir + "/" + filename + "\"");
     }
 
     // Make ISO checksums
-    if (settings->make_md5sum) {
-        makeChecksum(HashType::md5, settings->snapshot_dir, filename);
+    if (settings->makeMd5sum) {
+        makeChecksum(HashType::md5, settings->snapshotDir, filename);
     }
-    if (settings->make_sha512sum) {
-        makeChecksum(HashType::sha512, settings->snapshot_dir, filename);
+    if (settings->makeSha512sum) {
+        makeChecksum(HashType::sha512, settings->snapshotDir, filename);
     }
 
     auto elapsedTime = QTime(0, 0).addMSecs(e_timer.elapsed());
@@ -357,7 +453,7 @@ void Work::makeChecksum(Work::HashType hash_type, const QString &folder, const Q
     QString ce = QVariant::fromValue(hash_type).toString();
     QString cmd;
     QString checksum_cmd = QString("%1sum \"%2\">\"%3/%2.%1\"").arg(ce, file_name, folder);
-    QString temp_dir {"/tmp/snapsphot-checksum-temp"};
+    QString temp_dir {"/tmp/snapshot-checksum-temp"};
     QString checksum_tmp
         = QString(
               "TD=%1; KEEP=$TD/.keep; [ -d $TD ] || mkdir $TD ; FN=\"%2\"; CF=\"%3/${FN}.%4\"; cp $FN $TD/$FN; pushd "
@@ -378,12 +474,13 @@ void Work::makeChecksum(Work::HashType hash_type, const QString &folder, const Q
     } else {
         // Free pagecache
         shell.run("sync; sleep 1");
-        Cmd().run(Cmd::elevationTool() + " /usr/lib/" + QCoreApplication::applicationName() + "/snapshot-lib drop_caches");
+        const QString snapshotLib = "/usr/lib/" + QCoreApplication::applicationName() + "/snapshot-lib";
+        Cmd().runAsRoot(snapshotLib + " drop_caches");
         shell.run("sleep 1");
         cmd = checksum_tmp;
     }
     shell.run(cmd);
-    QDir::setCurrent(settings->work_dir);
+    QDir::setCurrent(settings->workDir);
 }
 
 void Work::openInitrd(const QString &file, const QString &initrd_dir)
@@ -399,44 +496,44 @@ void Work::openInitrd(const QString &file, const QString &initrd_dir)
 void Work::replaceMenuStrings()
 {
     qDebug() << "+++" << __PRETTY_FUNCTION__ << "+++";
-    QString full_distro_name_space = settings->full_distro_name;
-    full_distro_name_space.replace("_", " ");
+    QString fullDistroNameSpace = settings->fullDistroName;
+    fullDistroNameSpace.replace("_", " ");
 
     const QString grub_cfg {"/iso-template/boot/grub/grub.cfg"};
-    replaceStringInFile("%DISTRO%", settings->project_name + "-" + settings->distro_version,
-                        settings->work_dir + grub_cfg);
-    replaceStringInFile("%DISTRO_NAME%", settings->project_name, settings->work_dir + grub_cfg);
-    replaceStringInFile("%FULL_DISTRO_NAME%", settings->full_distro_name, settings->work_dir + grub_cfg);
-    replaceStringInFile("%FULL_DISTRO_NAME_SPACE%", full_distro_name_space, settings->work_dir + grub_cfg);
-    replaceStringInFile("%RELEASE_DATE%", settings->release_date, settings->work_dir + grub_cfg);
+    replaceStringInFile("%DISTRO%", settings->projectName + "-" + settings->distroVersion,
+                        settings->workDir + grub_cfg);
+    replaceStringInFile("%DISTRO_NAME%", settings->projectName, settings->workDir + grub_cfg);
+    replaceStringInFile("%FULL_DISTRO_NAME%", settings->fullDistroName, settings->workDir + grub_cfg);
+    replaceStringInFile("%FULL_DISTRO_NAME_SPACE%", fullDistroNameSpace, settings->workDir + grub_cfg);
+    replaceStringInFile("%RELEASE_DATE%", settings->releaseDate, settings->workDir + grub_cfg);
 
     const QString grubenv_cfg {"/iso-template/boot/grub/grubenv.cfg"};
     const QString boot_pararameter_regexp {"(lang|kbd|kbvar|kbopt|tz)=[^[:space:]]*"};
     shell.run(QString("printf '%s\\n' %1 | grep -E '^%2' >> '%3'")
-                  .arg(settings->boot_options, boot_pararameter_regexp, settings->work_dir + grubenv_cfg));
+                  .arg(settings->bootOptions, boot_pararameter_regexp, settings->workDir + grubenv_cfg));
     shell.run(
         QString(
             R"(sed -i "s|%OPTIONS%|$(sed -r 's/[[:space:]]%2/ /g; s/^[[:space:]]+//; s/[[:space:]]+/ /g'<<<' %1')|" '%3')")
-            .arg(settings->boot_options, boot_pararameter_regexp, settings->work_dir + grub_cfg));
+            .arg(settings->bootOptions, boot_pararameter_regexp, settings->workDir + grub_cfg));
     const QString syslinux_cfg {"/iso-template/boot/syslinux/syslinux.cfg"};
     const QString isolinux_cfg {"/iso-template/boot/isolinux/isolinux.cfg"};
     for (const QString &file : {syslinux_cfg, isolinux_cfg}) {
-        replaceStringInFile("%OPTIONS%", settings->boot_options, settings->work_dir + file);
-        replaceStringInFile("%CODE_NAME%", settings->codename, settings->work_dir + file);
+        replaceStringInFile("%OPTIONS%", settings->bootOptions, settings->workDir + file);
+        replaceStringInFile("%CODE_NAME%", settings->codename, settings->workDir + file);
     }
 
     const QString sys_readme = "/iso-template/boot/syslinux/readme.msg";
     const QString iso_readme = "/iso-template/boot/isolinux/readme.msg";
     const QStringList cfg_files {syslinux_cfg, isolinux_cfg, sys_readme, iso_readme};
     for (const QString &file : cfg_files) {
-        replaceStringInFile("%FULL_DISTRO_NAME%", settings->full_distro_name, settings->work_dir + file);
-        replaceStringInFile("%RELEASE_DATE%", settings->release_date, settings->work_dir + file);
+        replaceStringInFile("%FULL_DISTRO_NAME%", settings->fullDistroName, settings->workDir + file);
+        replaceStringInFile("%RELEASE_DATE%", settings->releaseDate, settings->workDir + file);
     }
 
-    QDir themeDir(settings->work_dir + "/iso-template/boot/grub/theme");
+    QDir themeDir(settings->workDir + "/iso-template/boot/grub/theme");
     for (const QFileInfo &themeFile : themeDir.entryInfoList({"*.txt"}, QDir::Files)) {
         replaceStringInFile("%ASCII_CODE_NAME%", settings->codename, themeFile.absoluteFilePath());
-        replaceStringInFile("%DISTRO%", settings->project_name + "-" + settings->distro_version,
+        replaceStringInFile("%DISTRO%", settings->projectName + "-" + settings->distroVersion,
                             themeFile.absoluteFilePath());
     }
 }
@@ -477,13 +574,13 @@ void Work::savePackageList(const QString &file_name)
 {
     qDebug() << "+++" << __PRETTY_FUNCTION__ << "+++";
     QFileInfo fi(file_name);
-    QDir dir(settings->work_dir + "/iso-template/" + fi.completeBaseName());
+    QDir dir(settings->workDir + "/iso-template/" + fi.completeBaseName());
     if (!dir.mkpath(dir.absolutePath())) {
         emit messageBox(BoxType::critical, tr("Error"),
                         tr("Could not create working directory. ") + dir.absolutePath());
     }
-    QString full_name = QString("%1/iso-template/%2/package_list").arg(settings->work_dir, fi.completeBaseName());
-    QString cmd = QString(R"(dpkg -l | awk '/^ii /{printf "%-41s %s\n", $2, $3}' > '%1')").arg(full_name);
+    const QString fullName = QString("%1/iso-template/%2/package_list").arg(settings->workDir, fi.completeBaseName());
+    const QString cmd = QString(R"(dpkg -l | awk '/^ii /{printf "%-41s %s\n", $2, $3}' > '%1')").arg(fullName);
     shell.run(cmd);
 }
 
@@ -492,7 +589,7 @@ void Work::setupEnv()
 {
     qDebug() << "+++" << __PRETTY_FUNCTION__ << "+++";
     // Checks if work_dir looks OK
-    if (!settings->work_dir.contains("/mx-snapshot")) {
+    if (!settings->workDir.contains("/mx-snapshot")) {
         cleanUp();
     }
 
@@ -504,7 +601,7 @@ void Work::setupEnv()
     }
 
     // Install installer if absent
-    if (settings->force_installer && !checkInstalled("calamares-settings-debian")) {
+    if (settings->forceInstaller && !checkInstalled("calamares-settings-debian")) {
         installPackage("calamares-settings-debian");
     }
 
@@ -512,16 +609,32 @@ void Work::setupEnv()
     writeVersionFile();
     writeLsbRelease();
 
+    if (!setupBindRootOverlay()) {
+        emit messageBox(BoxType::critical, tr("Error"),
+                        tr("Could not prepare a safe bind-root overlay. Snapshot cannot continue."));
+        cleanUp();
+    }
+
     // Setup environment if creating a respin (reset root/demo, remove personal accounts)
     QFile::remove("/var/lib/mxdebian/.mxsnapshot_accounts_reset.stp");
-    if (settings->reset_accounts) {
+    const QString baseCmd = "installed-to-live -F -b " + bindRootPath + " start ";
+    if (settings->resetAccounts) {
         shell.runAsRoot("mkdir -p /var/lib/mxdebian/");
         shell.runAsRoot("touch /var/lib/mxdebian/.mxsnapshot_accounts_reset.stp");
-        shell.runAsRoot("installed-to-live -b /.bind-root start " + bind_boot
-                        + "empty=/home general version-file read-only grubdefault resumedisable tdmnoautologin sddmnoautologin");
+        if (!shell.runAsRoot(baseCmd + bind_boot + "empty=/home general version-file grubdefault resumedisable tdmnoautologin sddmnoautologin")) {
+            emit messageBox(BoxType::critical, tr("Error"),
+                            tr("Could not prepare the snapshot bind-root environment."));
+            cleanUp();
+        }
     } else {
-        shell.runAsRoot("installed-to-live -b /.bind-root start bind=/home" + bind_boot_too
-                        + " live-files version-file adjtime read-only grubdefault resumedisable");
+        if (!shell.runAsRoot(baseCmd + "bind=/home" + bind_boot_too + " live-files version-file adjtime grubdefault resumedisable")) {
+            emit messageBox(BoxType::critical, tr("Error"),
+                            tr("Could not prepare the snapshot bind-root environment."));
+            cleanUp();
+        }
+    }
+    if (!bindRootOverlayActive) {
+        shell.runAsRoot("installed-to-live -b " + bindRootPath + " read-only", Cmd::QuietMode::Yes);
     }
     //shell.runAsRoot("dash /usr/share/mx-snapshot/scripts/configure_debian_calamares.sh"); //configure calamares for use with mx snapshot
 }
@@ -538,12 +651,12 @@ void Work::writeLsbRelease()
     }
 
     QTextStream stream(&file);
-    stream << "PRETTY_NAME=\"" << settings->project_name << " " << settings->distro_version << " " << settings->codename
+    stream << "PRETTY_NAME=\"" << settings->projectName << " " << settings->distroVersion << " " << settings->codename
            << "\"\n";
-    stream << "DISTRIB_ID=\"" << settings->project_name << "\"\n";
-    stream << "DISTRIB_RELEASE=" << settings->distro_version << "\n";
+    stream << "DISTRIB_ID=\"" << settings->projectName << "\"\n";
+    stream << "DISTRIB_RELEASE=" << settings->distroVersion << "\n";
     stream << "DISTRIB_CODENAME=\"" << settings->codename << "\"\n";
-    stream << "DISTRIB_DESCRIPTION=\"" << settings->project_name << " " << settings->distro_version << " "
+    stream << "DISTRIB_DESCRIPTION=\"" << settings->projectName << " " << settings->distroVersion << " "
            << settings->codename << "\"\n";
     file.close();
 }
@@ -551,7 +664,9 @@ void Work::writeLsbRelease()
 // Write date of the snapshot in a "snapshot_created" file
 void Work::writeSnapshotInfo()
 {
-    Cmd().run(Cmd::elevationTool() + " /usr/lib/" + QCoreApplication::applicationName() + "/snapshot-lib datetime_log", Cmd::QuietMode::Yes);
+    const QString snapshotLib = "/usr/lib/" + QCoreApplication::applicationName() + "/snapshot-lib";
+    const QString elevateTool = Cmd::elevationTool();
+    Cmd().run(elevateTool + " " + snapshotLib + " datetime_log", Cmd::QuietMode::Yes);
 }
 
 void Work::writeVersionFile()
@@ -566,13 +681,13 @@ void Work::writeVersionFile()
     }
 
     QTextStream stream(&file);
-    stream << settings->full_distro_name << " " << settings->codename << " " << settings->release_date << "\n";
+    stream << settings->fullDistroName << " " << settings->codename << " " << settings->releaseDate << "\n";
     file.close();
 }
 
 void Work::writeUnsquashfsSize(const QString &text)
 {
-    QSettings file(settings->work_dir + "/iso-template/antiX/linuxfs.info", QSettings::NativeFormat);
+    QSettings file(settings->workDir + "/iso-template/antiX/linuxfs.info", QSettings::NativeFormat);
     file.setValue("UncompressedSizeKB",
                   text.section(QRegularExpression(" uncompressed filesystem size \\("), 1, 1).section(" ", 0, 0));
 }
@@ -580,11 +695,11 @@ void Work::writeUnsquashfsSize(const QString &text)
 quint64 Work::getRequiredSpace()
 {
     QStringList excludes;
-    QFile *file = &settings->snapshot_excludes;
+    QFile *file = &settings->snapshotExcludes;
 
     // Open and read the excludes file
     if (!file->open(QIODevice::ReadOnly)) {
-        qDebug() << "Count not open file: " << file->fileName();
+        qDebug() << "Could not open file: " << file->fileName();
     }
     while (!file->atEnd()) {
         QString line = file->readLine().trimmed();
@@ -595,8 +710,8 @@ quint64 Work::getRequiredSpace()
     file->close();
 
     // Add session excludes
-    if (!settings->session_excludes.isEmpty()) {
-        QString sessionExcludes = settings->session_excludes;
+    if (!settings->sessionExcludes.isEmpty()) {
+        QString sessionExcludes = settings->sessionExcludes;
         QStringList excludeList = sessionExcludes.split("\" \"");
         excludes.reserve(excludeList.size());
         for (QString exclude : excludeList) {
@@ -604,7 +719,18 @@ quint64 Work::getRequiredSpace()
             excludes << exclude;
         }
     }
-    QString root_dev = Cmd().getOut("df /.bind-root --output=target |tail -1", Cmd::QuietMode::Yes);
+    QString sizeRoot = bindRootPath;
+    if (bindRootOverlayActive) {
+        const QString overlayLower = bindRootOverlayBase + "/lower";
+        if (QFileInfo::exists(overlayLower)) {
+            sizeRoot = overlayLower;
+        }
+    }
+    QString sizeRootPrefix = sizeRoot;
+    if (!sizeRootPrefix.endsWith('/')) {
+        sizeRootPrefix += "/";
+    }
+    QString root_dev = Cmd().getOut("df \"" + sizeRoot + "\" --output=target |tail -1", Cmd::QuietMode::Yes);
     QMutableStringListIterator it(excludes);
     while (it.hasNext()) {
         it.next();
@@ -615,10 +741,11 @@ quint64 Work::getRequiredSpace()
         it.value().replace('(', "\\(");
         it.value().replace(')', "\\)");
         it.value().replace('|', "\\|");
-        it.value().prepend("/.bind-root/"); // Check size occupied by excluded files on /.bind-root only
+        it.value().prepend(sizeRootPrefix); // Check size occupied by excluded files on bind-root only
         it.value().replace(QRegularExpression("/\\*$"), "/"); // Remove last *
         //  Remove from list if files not on the same volume
-        if (root_dev != Cmd().getOut("df " + it.value() + " --output=target 2>/dev/null |tail -1", Cmd::QuietMode::Yes)) {
+        if (root_dev != Cmd().getOut("df \"" + it.value() + "\" --output=target 2>/dev/null |tail -1",
+                                     Cmd::QuietMode::Yes)) {
             it.remove();
         }
     }
@@ -634,19 +761,21 @@ quint64 Work::getRequiredSpace()
     }
     emit message(tr("Calculating size of root..."));
     cmd = settings->live ? "du -s" : "du -sx";
-    quint64 root_size = shell.getOutAsRoot(cmd + " /.bind-root 2>/dev/null |tail -1 |cut -f1").toULongLong(&ok);
-    qDebug() << "SIZE" << root_size;
+    quint64 root_size = shell.getOutAsRoot(cmd + " \"" + sizeRoot + "\" 2>/dev/null |tail -1 |cut -f1").toULongLong(&ok);
+    constexpr double kibToMib = 1024.0;
+    qDebug().noquote() << "SIZE         " << QString::number(root_size / kibToMib, 'f', 2) << "MiB";
     if (!ok) {
-        qDebug() << "Error: calculating root size (/.bind-root)\n"
+        qDebug() << "Error: calculating root size (" << sizeRoot << ")\n"
                     "If you are sure you have enough free space rerun the program with -o/--override-size option";
         cleanUp();
     }
-    qDebug() << "SIZE ROOT    " << root_size;
-    qDebug() << "SIZE EXCLUDES" << excl_size;
-    uint c_factor = settings->compression_factor.value(settings->compression);
+    qDebug().noquote() << "SIZE ROOT    " << QString::number(root_size / kibToMib, 'f', 2) << "MiB";
+    qDebug().noquote() << "SIZE EXCLUDES" << QString::number(excl_size / kibToMib, 'f', 2) << "MiB";
+    const uint c_factor = settings->compressionFactor.value(settings->compression);
     qDebug() << "COMPRESSION  " << c_factor;
-    qDebug() << "SIZE NEEDED  " << (root_size - excl_size) * c_factor / 100;
-    qDebug() << "SIZE FREE    " << settings->free_space << '\n';
+    qDebug().noquote() << "SIZE NEEDED  "
+                       << QString::number(((root_size - excl_size) * c_factor / 100.0) / kibToMib, 'f', 2) << "MiB";
+    qDebug().noquote() << "SIZE FREE    " << QString::number(settings->freeSpace / kibToMib, 'f', 2) << "MiB" << '\n';
 
     if (excl_size > root_size) {
         qDebug() << "Error: calculating excluded file size.\n"

@@ -558,32 +558,32 @@ tartalmához szükséges. Különben nincs hatással.</translation>
     <name>MainWindow</name>
     <message>
         <location filename="../src/mainwindow.cpp" line="58"/>
-        <location filename="../src/mainwindow.cpp" line="864"/>
+        <location filename="../src/mainwindow.cpp" line="863"/>
         <source>MX Conky</source>
         <translation>MX Conky</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="252"/>
+        <location filename="../src/mainwindow.cpp" line="251"/>
         <source>About this application</source>
         <translation>Az alkalmazásról</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="250"/>
+        <location filename="../src/mainwindow.cpp" line="249"/>
         <source>About...</source>
         <translation>Névjegy...</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="257"/>
+        <location filename="../src/mainwindow.cpp" line="256"/>
         <source>Help</source>
         <translation>Súgó</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="272"/>
+        <location filename="../src/mainwindow.cpp" line="271"/>
         <source>Quit application</source>
         <translation>Kilépés az alkalmazásból</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="270"/>
+        <location filename="../src/mainwindow.cpp" line="269"/>
         <source>Close</source>
         <translation>Bezárás</translation>
     </message>
@@ -633,70 +633,70 @@ tartalmához szükséges. Különben nincs hatással.</translation>
         <translation>Az összes futó Conky leállítása</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="966"/>
-        <location filename="../src/mainwindow.cpp" line="1018"/>
+        <location filename="../src/mainwindow.cpp" line="965"/>
+        <location filename="../src/mainwindow.cpp" line="1016"/>
         <source>Running</source>
         <translation>Fut</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="968"/>
-        <location filename="../src/mainwindow.cpp" line="1019"/>
+        <location filename="../src/mainwindow.cpp" line="967"/>
+        <location filename="../src/mainwindow.cpp" line="1017"/>
         <source>Stopped</source>
         <translation>Leállítva</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="212"/>
+        <location filename="../src/mainwindow.cpp" line="211"/>
         <source>Search conky by name...</source>
         <translation>Conky keresése név alapján...</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="214"/>
+        <location filename="../src/mainwindow.cpp" line="213"/>
         <source>Search conkies by name (Ctrl+F)</source>
         <translation>Conky keresése név alapján (Ctrl+F)</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="259"/>
+        <location filename="../src/mainwindow.cpp" line="258"/>
         <source>Display help</source>
         <translation>Súgó megjelenítése</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="448"/>
-        <location filename="../src/mainwindow.cpp" line="622"/>
+        <location filename="../src/mainwindow.cpp" line="447"/>
+        <location filename="../src/mainwindow.cpp" line="621"/>
         <source>Copy Conky</source>
         <translation>Conky másolása</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="494"/>
-        <location filename="../src/mainwindow.cpp" line="670"/>
+        <location filename="../src/mainwindow.cpp" line="493"/>
+        <location filename="../src/mainwindow.cpp" line="669"/>
         <source>Conky Copied</source>
         <translation>Conky másolva</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="495"/>
+        <location filename="../src/mainwindow.cpp" line="494"/>
         <source>Conky has been copied to your personal folder for editing:
 %1</source>
         <translation>A Conky átmásolva a saját mappájába, további szerkesztéshez:
 %1</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="497"/>
-        <location filename="../src/mainwindow.cpp" line="673"/>
+        <location filename="../src/mainwindow.cpp" line="496"/>
+        <location filename="../src/mainwindow.cpp" line="672"/>
         <source>Copy Failed</source>
         <translation>Másolás nem sikerült</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="497"/>
-        <location filename="../src/mainwindow.cpp" line="673"/>
+        <location filename="../src/mainwindow.cpp" line="496"/>
+        <location filename="../src/mainwindow.cpp" line="672"/>
         <source>Failed to copy conky to your personal folder.</source>
         <translation>A Conky másolása a saját mappájába nem sikerült.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="559"/>
+        <location filename="../src/mainwindow.cpp" line="558"/>
         <source>Delete Conky</source>
         <translation>Conky törlése</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="671"/>
+        <location filename="../src/mainwindow.cpp" line="670"/>
         <source>Conky has been copied to your personal folder for customization:
 %1</source>
         <translation>A Conky átmásolva a saját mappájába, további testreszabáshoz:
@@ -713,61 +713,61 @@ tartalmához szükséges. Különben nincs hatással.</translation>
         <translation>Előnézetek létrehozása a Conkykhoz</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="208"/>
-        <location filename="../src/mainwindow.cpp" line="482"/>
-        <location filename="../src/mainwindow.cpp" line="658"/>
-        <location filename="../src/mainwindow.cpp" line="964"/>
-        <location filename="../src/mainwindow.cpp" line="1017"/>
+        <location filename="../src/mainwindow.cpp" line="207"/>
+        <location filename="../src/mainwindow.cpp" line="481"/>
+        <location filename="../src/mainwindow.cpp" line="657"/>
+        <location filename="../src/mainwindow.cpp" line="963"/>
+        <location filename="../src/mainwindow.cpp" line="1015"/>
         <source>All</source>
         <translation>Összes</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="209"/>
+        <location filename="../src/mainwindow.cpp" line="208"/>
         <source>Filter conkies by running status or location</source>
         <translation>Conkyk szűrése futási állapot vagy hely alapján</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="444"/>
-        <location filename="../src/mainwindow.cpp" line="618"/>
+        <location filename="../src/mainwindow.cpp" line="443"/>
+        <location filename="../src/mainwindow.cpp" line="617"/>
         <source>Enter a name for the copy:</source>
         <translation>Adja meg a másolat nevét:</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="445"/>
-        <location filename="../src/mainwindow.cpp" line="619"/>
+        <location filename="../src/mainwindow.cpp" line="444"/>
+        <location filename="../src/mainwindow.cpp" line="618"/>
         <source>In order for you to edit and save a conky, it must first be copied to ~/.conky where you have permission.
 Enter a name for the copy.</source>
         <translation>Egy Conky szerkesztéséhez és mentéséhez, azt először a ~/.conky könyvtárába kell másolni, a jogosultságok miatt.
 Adjon meg egy nevet a másolatnak.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="462"/>
-        <location filename="../src/mainwindow.cpp" line="638"/>
+        <location filename="../src/mainwindow.cpp" line="461"/>
+        <location filename="../src/mainwindow.cpp" line="637"/>
         <source>Directory Exists</source>
         <translation>A könyvtár létezik.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="463"/>
-        <location filename="../src/mainwindow.cpp" line="639"/>
+        <location filename="../src/mainwindow.cpp" line="462"/>
+        <location filename="../src/mainwindow.cpp" line="638"/>
         <source>A conky with the name '%1' already exists in your personal folder.
 Do you want to overwrite it?</source>
         <translation>Már létezik Conky &apos;%1&apos; néven a saját mappájában.
 Kívánja felülírni?</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="530"/>
+        <location filename="../src/mainwindow.cpp" line="529"/>
         <source>Edit Conky</source>
         <translation>Conky szerkesztése</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="531"/>
+        <location filename="../src/mainwindow.cpp" line="530"/>
         <source>This conky file is read-only and requires administrator privileges to edit.
 Do you want to edit it with elevated privileges?</source>
         <translation>Ez a Conky csak olvasható és a szerkesztéshez adminisztrátor jog szükséges.
 Kívánja megemelt jogosultságokkal szerkeszteni?</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="560"/>
+        <location filename="../src/mainwindow.cpp" line="559"/>
         <source>Are you sure you want to delete the conky file:
 %1
 
@@ -778,88 +778,88 @@ This action cannot be undone.</source>
 Ez nem vonható vissza.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="592"/>
+        <location filename="../src/mainwindow.cpp" line="591"/>
         <source>Delete Failed</source>
         <translation>Törlés nem sikerült</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="592"/>
+        <location filename="../src/mainwindow.cpp" line="591"/>
         <source>Failed to delete conky file:
 %1</source>
         <translation>A Conkyfájl törlése nem sikerült.
 %1</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="680"/>
+        <location filename="../src/mainwindow.cpp" line="679"/>
         <source>Customize Conky</source>
         <translation>Conky testreszabása</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="681"/>
+        <location filename="../src/mainwindow.cpp" line="680"/>
         <source>This conky file is read-only and requires administrator privileges to customize.
 Do you want to customize it with elevated privileges?</source>
         <translation>Ez a Conkyfájl csak olvasható és a testreszabáshoz adminisztrátor jog szükséges.
 Kívánja megemelt jogosultságokkal módosítani?</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="853"/>
+        <location filename="../src/mainwindow.cpp" line="852"/>
         <source>Editor Error</source>
         <translation>Szerkesztő hiba</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="853"/>
+        <location filename="../src/mainwindow.cpp" line="852"/>
         <source>Cannot start editor for file: %1</source>
         <translation>A szerkesztő elindítása nem sikerült a fájlhoz: %1</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="863"/>
+        <location filename="../src/mainwindow.cpp" line="862"/>
         <source>About MX Conky</source>
         <translation>Az MX Conkyról</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="865"/>
+        <location filename="../src/mainwindow.cpp" line="864"/>
         <source>Version: </source>
         <translation>Verzió:</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="866"/>
+        <location filename="../src/mainwindow.cpp" line="865"/>
         <source>GUI program for configuring Conky in MX Linux</source>
         <translation>Grafikus alkalmazás a Conky beállítására MX Linuxban</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="869"/>
+        <location filename="../src/mainwindow.cpp" line="868"/>
         <source>Copyright (c) MX Linux</source>
         <translation>Copyright (c) MX Linux</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="870"/>
+        <location filename="../src/mainwindow.cpp" line="869"/>
         <source>License</source>
         <translation>Licenc</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="871"/>
-        <location filename="../src/mainwindow.cpp" line="883"/>
+        <location filename="../src/mainwindow.cpp" line="870"/>
+        <location filename="../src/mainwindow.cpp" line="882"/>
         <source>Changelog</source>
         <translation>Változások listája</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="872"/>
+        <location filename="../src/mainwindow.cpp" line="871"/>
         <source>Cancel</source>
         <translation>Mégsem</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="894"/>
+        <location filename="../src/mainwindow.cpp" line="893"/>
         <source>&amp;Close</source>
         <translation>&amp;Bezárás</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="925"/>
+        <location filename="../src/mainwindow.cpp" line="924"/>
         <source>MX Conky Help</source>
         <translation>MX Conky súgó</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="970"/>
-        <location filename="../src/mainwindow.cpp" line="1020"/>
+        <location filename="../src/mainwindow.cpp" line="969"/>
+        <location filename="../src/mainwindow.cpp" line="1018"/>
         <source>Autostart</source>
         <translation>Automatikus indítás</translation>
     </message>
@@ -959,22 +959,22 @@ Telepítse a graphicsmagick-imagemagick-compat csomagot a funkció engedélyezé
         <translation>Előnézet létrehozása: %1</translation>
     </message>
     <message>
-        <location filename="../src/previewdialog.cpp" line="427"/>
+        <location filename="../src/previewdialog.cpp" line="426"/>
         <source>Preview generation complete! Generated %1 previews.</source>
         <translation>Előnézetek létrehozva. %1 előnézeti kép készült.</translation>
     </message>
     <message>
-        <location filename="../src/previewdialog.cpp" line="431"/>
+        <location filename="../src/previewdialog.cpp" line="430"/>
         <source>Close</source>
         <translation>Bezárás</translation>
     </message>
     <message>
-        <location filename="../src/previewdialog.cpp" line="434"/>
+        <location filename="../src/previewdialog.cpp" line="433"/>
         <source>Preview Generation Complete</source>
         <translation>Az előnézetek létrehozása kész</translation>
     </message>
     <message>
-        <location filename="../src/previewdialog.cpp" line="435"/>
+        <location filename="../src/previewdialog.cpp" line="434"/>
         <source>Successfully generated %1 preview images.</source>
         <translation>%1 előnézeti kép sikeresen létrehozva.</translation>
     </message>

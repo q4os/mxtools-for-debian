@@ -2,17 +2,21 @@ Source: mx-samba-config
 Section: admin
 Priority: optional
 Maintainer: Adrian <adrian@mxlinux.org>
-Build-Depends: debhelper (>=10), qt6-base-dev, qt6-base-dev-tools, qt6-tools-dev, qt6-tools-dev-tools
+Build-Depends: debhelper-compat (=12), cmake (>= 3.16), ninja-build, qt6-base-dev, qt6-base-dev-tools, qt6-tools-dev, qt6-tools-dev-tools
 Standards-Version: 3.9.8
+Vcs-Git: git://github.com/MX-Linux/mx-samba-config
+Homepage: https://github.com/MX-Linux/mx-samba-config
 
 Package: mx-samba-config
 Architecture: any
-Depends: xdg-utils | mx-viewer, 
+Depends: mx-viewer | xdg-utils,
          samba,
-         ${misc:Depends}, 
+         ${misc:Depends},
          ${shlibs:Depends}
-Description: GUI for managing Samba shares and users
- Samba configuration tool designed to work with the same samba “usershare” 
- system used by the thunar-shares-plugin and Dolphin file sharing capabilities. 
- It provides the ability for users to set up samba shares for folders they own, 
- as well as add and remove samba users. 
+Description: Samba configuration tool for MX Linux
+ MX Samba Config is a graphical utility that allows users to easily
+ manage Samba shares and users. It provides a user-friendly interface for:
+  * Setting up Samba shares for folders owned by the user
+  * Adding and removing Samba users
+  * Working with the same "usershare" system used by Thunar and Dolphin
+  * Configuring share permissions and visibility options

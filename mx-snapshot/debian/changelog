@@ -1,3 +1,57 @@
+mx-snapshot (25.12.6) mx; urgency=medium
+
+  * Remove exclusion /var/lib/sddm/ which will be handled by live-files
+    in mx-remaster
+
+ -- Adrian <adrian@mxlinux.org>  Tue, 23 Dec 2025 21:59:40 -0500
+
+mx-snapshot (25.12.5) mx; urgency=medium
+
+  * Improve cleanup safety and overlay handling
+  * Close app ifthe user doesn't elevate when requested
+  * Show debug sizes using 2-decimal MiB format
+
+ -- Adrian <adrian@mxlinux.org>  Sat, 20 Dec 2025 18:22:32 -0500
+
+mx-snapshot (25.12.2) mx; urgency=medium
+
+  * Add pop up to show that the maintainer excludes is newer than the
+    custom one. Add option for user to show diff, accept changes or
+    keep the custom list
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 08 Dec 2025 10:14:38 -0500
+
+mx-snapshot (25.12) mx; urgency=medium
+
+  * Copy the exclusion list to the ~/.config/MX-Linux/ to allow users to
+    set their own list that will not be overwritten on updates
+  * Improve launching of editor for the exclude list
+  * Add custom exclude reset button
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 08 Dec 2025 00:16:10 -0500
+
+mx-snapshot (25.11.2) mx; urgency=medium
+
+  * Added fallback path for the excludes file in case it's not found
+  * Changed allowed filesystems from allowed list to deny list, excluding file
+    systems known not to support POSIX permissions, this will allow some more
+    obscure Linux filesystem to be used
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 19 Nov 2025 09:37:30 -0500
+
+mx-snapshot (25.11.1) mx; urgency=medium
+
+  * Add f2fs to the list of supported partitions
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 17 Nov 2025 16:36:37 -0500
+
+mx-snapshot (25.11) mx; urgency=medium
+
+  * Updated config loading to sanitize the persisted cores value.
+  * Open grub.cfg and syslinux.cfg in addition to isolinux.cfg when edit_boot_menu = on
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 07 Nov 2025 15:12:20 -0500
+
 mx-snapshot (25.10.1) mx; urgency=medium
 
   * Fix: edit_boot_menu now honors the system setting by falling back to

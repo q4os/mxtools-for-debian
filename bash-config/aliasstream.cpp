@@ -2,6 +2,8 @@
 
 #include "global.h"
 #include <QRegularExpression>
+#include <QHash>
+#include <QPair>
 #include <algorithm>
 
 AliasStream::AliasStream(QString* str, bool isOfBashrc)
@@ -154,9 +156,60 @@ void AliasStream::remove(const Alias& alias)
     auto a = *iter;
     auto t = a.token();
     AliasTokenData data = t.data().value<AliasTokenData>();
-    if(data.standalone)
-        data.aliasCommandToken.setContent("");
-    *m_source = parser.source();
+    // Wipe the alias definition token so the entry disappears from the source.
+    t.setContent("");
+    if(data.spaceToken.isValid())
+        data.spaceToken.setContent("");
+    // If the alias statement no longer contains any definitions, drop the leading
+    // 'alias' token as well to avoid leaving an empty command.
+    if(data.aliasCommandToken.isValid())
+    {
+        *m_source = parser.source();
+    }
+    else
+    {
+        *m_source = parser.source();
+    }
+
+    // Final cleanup: remove alias commands (and their definitions) that no longer
+    // have any non-empty alias definitions. Walk tokens in order to avoid relying
+    // on preserved metadata.
+    FuzzyBashStream cleanup{*m_source, FuzzyBashStream::ParseNormal, {aliasGrouper}};
+    auto cleanupTokens = cleanup.tokenRefs();
+    for(int i = 0; i < cleanupTokens.size(); ++i)
+    {
+        auto token = cleanupTokens[i];
+        if(token.type() != TokenAliasCommand)
+            continue;
+
+        bool hasDefinition = false;
+        int j = i + 1;
+        for(; j < cleanupTokens.size(); ++j)
+        {
+            if(cleanupTokens[j].type() == TokenAliasCommand)
+                break; // next alias command, stop scanning
+            if(cleanupTokens[j].type() == TokenAliasDefinition && !cleanupTokens[j].content().isEmpty())
+            {
+                hasDefinition = true;
+                break;
+            }
+        }
+
+        if(hasDefinition)
+            continue;
+
+        // No definitions left for this alias command: remove it and any alias
+        // definitions that follow until the next alias command.
+        token.setContent("");
+        if(i + 1 < cleanupTokens.size() && cleanupTokens[i + 1].type() == FuzzyBashStream::TokenWhitespace)
+            cleanupTokens[i + 1].setContent("");
+        for(int k = i + 1; k < cleanupTokens.size() && cleanupTokens[k].type() != TokenAliasCommand; ++k)
+        {
+            if(cleanupTokens[k].type() == TokenAliasDefinition)
+                cleanupTokens[k].setContent("");
+        }
+    }
+    *m_source = cleanup.source();
 }
 
 void AliasStream::remove(const QList<Alias>& alias)
@@ -235,65 +288,109 @@ void aliasGrouper(FuzzyBashStream* stream, QList<FuzzyBashStream::Token> &tokens
     {
         FuzzyBashStream::Token token = tokens.first();
         tokens.pop_front();
-        if(token.type() == FuzzyBashStream::TokenCommand && token.content().indexOf("alias") == 0)
+        if(token.type() == FuzzyBashStream::TokenCommand)
         {
             auto split = FuzzyBashStream(token.content(), FuzzyBashStream::ParseDisableCommandGrouping, {}, token.start()).tokens();
-            if(split.isEmpty() || split.first().content() != "alias" || split.first().type() != FuzzyBashStream::TokenWord)
+            if(split.isEmpty())
             {
                 goto normal;
             }
-            auto aliasToken = FuzzyBashStream::Token::join({split.first()}, TokenAliasCommand); // Set type of token to TokenAliasCommand
-            result.append(aliasToken);
-            auto aliasTokenRef = aliasToken.upgrade(stream);
-            split.pop_front(); // remove 'alias'
-            int count = 0;
-            while(!split.isEmpty())
+
+            QList<FuzzyBashStream::Token> localTokens;
+            int idx = 0;
+
+            // Preserve leading whitespace so indented alias commands stay intact.
+            while(idx < split.size() && split[idx].type() == FuzzyBashStream::TokenWhitespace)
             {
-                if(split.isEmpty() || split.first().type() != FuzzyBashStream::TokenWhitespace)
+                localTokens.append(split[idx]);
+                idx++;
+            }
+
+            if(idx >= split.size() || split[idx].content() != "alias" || split[idx].type() != FuzzyBashStream::TokenWord)
+            {
+                goto normal;
+            }
+
+            auto aliasToken = FuzzyBashStream::Token::join({split[idx]}, TokenAliasCommand); // Set type of token to TokenAliasCommand
+            auto aliasTokenRef = aliasToken.upgrade(stream);
+            localTokens.append(aliasToken);
+            idx++; // consume 'alias'
+
+            int count = 0;
+            int lastAliasIndex = -1;
+
+            // Parse subsequent alias definitions, but keep the rest of the command intact.
+            while(idx < split.size())
+            {
+                if(split[idx].type() != FuzzyBashStream::TokenWhitespace)
                 {
-                    qDebug() << "Failed at finding whitespace: " << ((split.isEmpty()) ? "No Token Found" : split.first().content());
                     break;
                 }
-                auto spaceToken = split.first().upgrade(stream);
-                result.append(split.first());
-                split.pop_front(); // remove whitespace
-                if(split.isEmpty() || split.first().type() != FuzzyBashStream::TokenWord)
+                auto spaceToken = split[idx].upgrade(stream);
+                localTokens.append(split[idx]);
+                idx++; // whitespace
+
+                if(idx >= split.size() || split[idx].type() != FuzzyBashStream::TokenWord)
                 {
-                    qDebug() << "Failed at finding word: " << ((split.isEmpty()) ? "No Token Found" : split.first().content());
+                    qDebug() << "Failed at finding word: " << ((idx >= split.size()) ? "No Token Found" : split[idx].content());
                     break;
                 }
-                auto aliasNameToken = split.first();
-                split.pop_front();
-                if(split.isEmpty() || split.first().content() != "=")
+                auto aliasNameToken = split[idx];
+                idx++; // alias name
+
+                if(idx >= split.size() || split[idx].content() != "=")
                 {
-                    qDebug() << "Failed at finding equal sign: " << ((split.isEmpty()) ? "No Token Found" : split.first().content());
+                    qDebug() << "Failed at finding equal sign: " << ((idx >= split.size()) ? "No Token Found" : split[idx].content());
                     break;
                 }
-                auto aliasEqualToken = split.first();
-                split.pop_front();
-                if(split.isEmpty() || (split.first().type() != FuzzyBashStream::TokenWord && split.first().type() != FuzzyBashStream::TokenQuoted))
+                auto aliasEqualToken = split[idx];
+                idx++; // '='
+
+                if(idx >= split.size() || (split[idx].type() != FuzzyBashStream::TokenWord && split[idx].type() != FuzzyBashStream::TokenQuoted))
                 {
-                    qDebug() << "Failed at finding word or quoted: " << ((split.isEmpty()) ? "No Token Found" : split.first().content());
+                    qDebug() << "Failed at finding word or quoted: " << ((idx >= split.size()) ? "No Token Found" : split[idx].content());
                     break;
                 }
-                auto aliasCommandToken = split.first();
-                split.pop_front();
+                auto aliasCommandToken = split[idx];
+                idx++; // alias command
+
                 AliasTokenData data;
                 data.aliasCommandToken = aliasTokenRef;
                 data.spaceToken = spaceToken;
                 data.standalone = false;
+                QVariant dataVariant;
+                dataVariant.setValue(data);
                 auto aliasDefAllToken = FuzzyBashStream::Token::join({aliasNameToken, aliasEqualToken, aliasCommandToken}, TokenAliasDefinition);
-                result.append(aliasDefAllToken);
+                aliasDefAllToken.setData(dataVariant);
+                localTokens.append(aliasDefAllToken);
+                lastAliasIndex = localTokens.size() - 1;
                 count++;
             }
-            if(count == 1) // if there was only one alias set standalone to true
+
+            if(count == 0)
             {
-                AliasTokenData oldData = result.last().data().value<AliasTokenData>();
+                // No alias definitions parsed; still treat the command as an alias command
+                // so cleanup can drop orphaned 'alias' tokens if needed.
+            }
+
+            if(count == 1 && lastAliasIndex >= 0) // if there was only one alias set standalone to true
+            {
+                AliasTokenData oldData = localTokens[lastAliasIndex].data().value<AliasTokenData>();
                 oldData.standalone = true;
                 QVariant newData;
                 newData.setValue(oldData);
-                result.last().setData(newData);
+                localTokens[lastAliasIndex].setData(newData);
             }
+
+            // Append any leftover tokens (e.g. comments or other commands) untouched.
+            while(idx < split.size())
+            {
+                localTokens.append(split[idx]);
+                idx++;
+            }
+
+            result.append(localTokens);
+            continue;
         }
         else
         {

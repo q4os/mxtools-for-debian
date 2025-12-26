@@ -169,7 +169,7 @@ class Mounter(SimpleGladeApp) :
         err = ("unrecognized mount option", "unknown mount option")
         if err[0] in last_dmesg_log or err[1] in last_dmesg_log :
             try :
-                b = re.search("(%s|%s) (\S+)" % err, last_dmesg_log).groups()[1]
+                b = re.search(r"(%s|%s) (\S+)" % err, last_dmesg_log).groups()[1]
                 for opt in [b, b[:-1], b[1:-1], b[1:-2]] :
                     if entry.hasopt(opt) :
                         bad_opt = opt

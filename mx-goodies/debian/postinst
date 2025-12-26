@@ -1,8 +1,12 @@
 #!/bin/sh -e
 
 if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-remove" ] ; then
-    
-    #don't do anything if update-rc.d is not present
+    #fix misconfiguration in /etc/skel/.bashrc if it exists
+	if [ -e "/etc/skel/.bashrc" ]; then
+		sed -i 's/^\[ -z \$LESS \]/[ -z "\$LESS" ]/' /etc/skel/.bashrc
+	fi
+
+  #don't do anything if update-rc.d is not present
     if [ -x /usr/sbin/update-rc.d ]; then
        
 		# mount efivars if needed

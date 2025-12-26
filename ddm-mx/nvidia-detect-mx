@@ -64,77 +64,175 @@ NV_DETECT()
 {
 
 NVGA=$1
-IDLISTDIR=/usr/share/ddm-mx
+IDLISTDIRDDM=/usr/share/ddm-mx
 
-if [ -d "/usr/share/nvidia" ]; then
-    IDLISTDIR=/usr/share/nvidia
-fi
+IDLISTDIR=/usr/share/nvidia
+
 local VERSIONS
 
-if grep -q -i $NVGA $IDLISTDIR/nvidia-legacy-71xx.ids 2>/dev/null
+PCIIDFILE="nvidia-legacy-71xx.ids"
+if [ -e $IDLISTDIR/$PCIIDFILE ]; then
+	IDFILE=$IDLISTDIR/$PCIIDFILE
+else
+	IDFILE=$IDLISTDIRDDM/$PCIIDFILE
+fi
+
+if grep -q -i $NVGA $IDFILE 2>/dev/null
 then
 	VERSIONS[71]=71.86
 fi
 
-if grep -q -i $NVGA $IDLISTDIR/nvidia-legacy-96xx.ids 2>/dev/null
+PCIIDFILE="nvidia-legacy-96xx.ids"
+if [ -e $IDLISTDIR/$PCIIDFILE ]; then
+	IDFILE=$IDLISTDIR/$PCIIDFILE
+else
+	IDFILE=$IDLISTDIRDDM/$PCIIDFILE
+fi
+
+if grep -q -i $NVGA $IDFILE 2>/dev/null
 then
 	VERSIONS[96]=96.43
 fi
 
-if grep -q -i $NVGA $IDLISTDIR/nvidia-legacy-173xx.ids 2>/dev/null
+PCIIDFILE="nvidia-legacy-173xx.ids"
+if [ -e $IDLISTDIR/$PCIIDFILE ]; then
+	IDFILE=$IDLISTDIR/$PCIIDFILE
+else
+	IDFILE=$IDLISTDIRDDM/$PCIIDFILE
+fi
+
+if grep -q -i $NVGA $IDFILE 2>/dev/null
 then
 	VERSIONS[173]=173.14
 fi
 
-if grep -q -i $NVGA $IDLISTDIR/nvidia-legacy-304xx.ids 2>/dev/null
+
+PCIIDFILE="nvidia-legacy-304xx.ids"
+if [ -e $IDLISTDIR/$PCIIDFILE ]; then
+	IDFILE=$IDLISTDIR/$PCIIDFILE
+else
+	IDFILE=$IDLISTDIRDDM/$PCIIDFILE
+fi
+
+if grep -q -i $NVGA $IDFILE 2>/dev/null
 then
 	VERSIONS[304]=304.123
 fi
 
-if grep -q -i $NVGA $IDLISTDIR/nvidia-legacy-340xx.ids 2>/dev/null
+PCIIDFILE="nvidia-legacy-340xx.ids"
+if [ -e $IDLISTDIR/$PCIIDFILE ]; then
+	IDFILE=$IDLISTDIR/$PCIIDFILE
+else
+	IDFILE=$IDLISTDIRDDM/$PCIIDFILE
+fi
+
+if grep -q -i $NVGA $IDFILE 2>/dev/null
 then
 	VERSIONS[340]=340.76
 fi
 
-if grep -q -i $NVGA $IDLISTDIR/nvidia-legacy-390xx.ids 2>/dev/null
+PCIIDFILE="nvidia-legacy-390xx.ids"
+if [ -e $IDLISTDIR/$PCIIDFILE ]; then
+	IDFILE=$IDLISTDIR/$PCIIDFILE
+else
+	IDFILE=$IDLISTDIRDDM/$PCIIDFILE
+fi
+
+if grep -q -i $NVGA $IDFILE 2>/dev/null
 then
 	VERSIONS[390]=390.87
 fi
 
 if [ "$ARCH" = "amd64" ]; then
-    if grep -q -i $NVGA $IDLISTDIR/nvidia-legacy-390xx-amd64.ids 2>/dev/null
-    then
+    PCIIDFILE="nvidia-legacy-390xx-amd64.ids"
+	if [ -e $IDLISTDIR/$PCIIDFILE ]; then
+		IDFILE=$IDLISTDIR/$PCIIDFILE
+	else
+		IDFILE=$IDLISTDIRDDM/$PCIIDFILE
+	fi
+
+	if grep -q -i $NVGA $IDFILE 2>/dev/null
+	then
         VERSIONS[391]=390.87
     fi
     
-    if grep -q -i $NVGA $IDLISTDIR/nvidia-418.ids 2>/dev/null
+    PCIIDFILE="nvidia-418.ids"
+	if [ -e $IDLISTDIR/$PCIIDFILE ]; then
+		IDFILE=$IDLISTDIR/$PCIIDFILE
+	else
+		IDFILE=$IDLISTDIRDDM/$PCIIDFILE
+	fi
+
+	if grep -q -i $NVGA $IDFILE 2>/dev/null
 	then
 		VERSIONS[418]=418.74
 	fi
 	
-	if grep -q -i $NVGA $IDLISTDIR/nvidia-tesla-418.ids 2>/dev/null
+	PCIIDFILE="nvidia-tesla-418.ids"
+	if [ -e $IDLISTDIR/$PCIIDFILE ]; then
+		IDFILE=$IDLISTDIR/$PCIIDFILE
+	else
+		IDFILE=$IDLISTDIRDDM/$PCIIDFILE
+	fi
+
+	if grep -q -i $NVGA $IDFILE 2>/dev/null
 	then
 		VERSIONS[419]=418.87.01
 	fi
 
-	if grep -q -i $NVGA $IDLISTDIR/nvidia-tesla-440.ids 2>/dev/null
+	PCIIDFILE="nvidia-tesla-440.ids"
+	if [ -e $IDLISTDIR/$PCIIDFILE ]; then
+		IDFILE=$IDLISTDIR/$PCIIDFILE
+	else
+		IDFILE=$IDLISTDIRDDM/$PCIIDFILE
+	fi
+
+	if grep -q -i $NVGA $IDFILE 2>/dev/null
 	then
 		VERSIONS[441]=440.64.00
 	fi
+	
+	PCIIDFILE="nvidia-tesla-450.ids"
+	if [ -e $IDLISTDIR/$PCIIDFILE ]; then
+		IDFILE=$IDLISTDIR/$PCIIDFILE
+	else
+		IDFILE=$IDLISTDIRDDM/$PCIIDFILE
+	fi
 
-	if grep -q -i $NVGA $IDLISTDIR/nvidia-tesla-450.ids 2>/dev/null
+	if grep -q -i $NVGA $IDFILE 2>/dev/null
 	then
 		VERSIONS[451]=450.51.05
 	fi
+    
+    PCIIDFILE="nvidia-tesla-460.ids"
+	if [ -e $IDLISTDIR/$PCIIDFILE ]; then
+		IDFILE=$IDLISTDIR/$PCIIDFILE
+	else
+		IDFILE=$IDLISTDIRDDM/$PCIIDFILE
+	fi
 
-	if grep -q -i $NVGA $IDLISTDIR/nvidia-tesla-460.ids 2>/dev/null
+	if grep -q -i $NVGA $IDFILE 2>/dev/null
 	then
 		VERSIONS[461]=460.32.03
 	fi
 	
-	if grep -q -i $NVGA $IDLISTDIR/nvidia-470.ids 2>/dev/null
+	PCIIDFILE="nvidia-470.ids"
+	if [ -e $IDLISTDIR/$PCIIDFILE ]; then
+		IDFILE=$IDLISTDIR/$PCIIDFILE
+	else
+		IDFILE=$IDLISTDIRDDM/$PCIIDFILE
+	fi
+
+	if grep -q -i $NVGA $IDFILE 2>/dev/null
 	then
 	VERSIONS[470]=470.103.01
+	fi
+
+	PCIIDFILE="nvidia-tesla-470.ids"
+	if [ -e $IDLISTDIR/$PCIIDFILE ]; then
+		IDFILE=$IDLISTDIR/$PCIIDFILE
+	else
+		IDFILE=$IDLISTDIRDDM/$PCIIDFILE
 	fi
 
 	if grep -q -i $NVGA $IDLISTDIR/nvidia-tesla-470.ids 2>/dev/null
@@ -142,18 +240,38 @@ if [ "$ARCH" = "amd64" ]; then
 	VERSIONS[471]=470.57.02
 	fi
 	
-	if grep -q -i $NVGA $IDLISTDIR/nvidia-tesla.ids 2>/dev/null
+	PCIIDFILE="nvidia-tesla.ids"
+	if [ -e $IDLISTDIR/$PCIIDFILE ]; then
+		IDFILE=$IDLISTDIR/$PCIIDFILE
+	else
+		IDFILE=$IDLISTDIRDDM/$PCIIDFILE
+	fi
+
+	if grep -q -i $NVGA $IDFILE 2>/dev/null
 	then
 	VERSIONS[510]=510.47.03
 	fi
 	
-	if grep -q -i $NVGA $IDLISTDIR/nvidia-tesla-535.ids 2>/dev/null
+	PCIIDFILE="nvidia-tesla-535.ids"
+	if [ -e $IDLISTDIR/$PCIIDFILE ]; then
+		IDFILE=$IDLISTDIR/$PCIIDFILE
+	else
+		IDFILE=$IDLISTDIRDDM/$PCIIDFILE
+	fi
+
+	if grep -q -i $NVGA $IDFILE 2>/dev/null
 	then
 	VERSIONS[535]=535.216.01
 	fi
 
-	
-	if grep -q -i $NVGA $IDLISTDIR/nvidia.ids 2>/dev/null
+	PCIIDFILE="nvidia.ids"
+	if [ -e $IDLISTDIR/$PCIIDFILE ]; then
+		IDFILE=$IDLISTDIR/$PCIIDFILE
+	else
+		IDFILE=$IDLISTDIRDDM/$PCIIDFILE
+	fi
+
+	if grep -q -i $NVGA $IDFILE 2>/dev/null
 	then
 	# 999 means current
 		VERSIONS[999]=$LATEST

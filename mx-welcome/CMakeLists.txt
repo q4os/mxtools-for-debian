@@ -96,6 +96,9 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTORCC ON)
 
+# Set AUTOUIC search paths to find custom widget headers
+set(CMAKE_AUTOUIC_SEARCH_PATHS ${CMAKE_SOURCE_DIR}/src)
+
 # Define source files
 set(SOURCES
     src/main.cpp
@@ -199,7 +202,11 @@ set_target_properties(mx-welcome PROPERTIES
 )
 
 # Add build directory to include path for generated version.h
-target_include_directories(mx-welcome PRIVATE ${CMAKE_BINARY_DIR}/src)
+# Also add source directory for AUTOUIC-generated headers to find custom widget headers
+target_include_directories(mx-welcome PRIVATE
+    ${CMAKE_BINARY_DIR}/src
+    ${CMAKE_SOURCE_DIR}/src
+)
 
 # Install target (required by Debian build system)
 # Other files are handled by debian/install

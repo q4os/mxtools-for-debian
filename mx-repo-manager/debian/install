@@ -1,8 +1,8 @@
 help/*				usr/share/doc/mx-repo-manager
 icons/mx-repo-manager.png	usr/share/icons/hicolor/512x512/apps
 icons/mx-repo-manager.svg	usr/share/icons/hicolor/scalable/apps
-mx-repo-manager			usr/bin
 mx-repo-manager.desktop		usr/share/applications
-translations/*.qm		usr/share/mx-repo-manager/locale
+obj-*/*.qm 			usr/share/mx-repo-manager/locale
+obj-*/mx-repo-manager 		usr/bin
 scripts/helper			usr/lib/mx-repo-manager
 scripts/*.policy 		usr/share/polkit-1/actions

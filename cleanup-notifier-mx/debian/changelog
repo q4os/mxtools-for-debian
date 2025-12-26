@@ -1,3 +1,12 @@
+cleanup-notifier-mx (25.11.01) mx; urgency=medium
+
+  * Correct mx-cleanup path
+  * Adjust threshold for space left at /boot
+  * Change idle time to 10 minutes
+  * Translations refresh
+
+ -- fehlix <fehlix@mxlinux.org>  Thu, 06 Nov 2025 18:27:20 -0500
+
 cleanup-notifier-mx (23.04) mx; urgency=medium
 
   * Get translations from transifex
@@ -5,16 +14,16 @@ cleanup-notifier-mx (23.04) mx; urgency=medium
   * Adjust meson build setup
 
  -- fehlix <fehlix@mxlinux.org>  Sun, 23 Apr 2023 07:02:47 -0500
- 
+
 cleanup-notifier-mx (22.05.02mx) mx; urgency=medium
 
   * Adjust last runtime-check by dbus session-id
 
  -- fehlix <fehlix@mxlinux.org>  Thu, 05 May 2022 19:55:07 -0400
- 
+
 cleanup-notifier-mx (22.05.01mx) mx; urgency=medium
 
   * Initial build.
 
  -- fehlix <fehlix@mxlinux.org>  Sun, 01 May 2022 15:52:09 -0400
- 
+

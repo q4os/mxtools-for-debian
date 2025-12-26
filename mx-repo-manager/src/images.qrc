@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/">
+        <file>../icons/logo.svg</file>
+        <file>../icons/dialog-ok.svg</file>
+        <file>../icons/cursor-arrow.svg</file>
+    </qresource>
+</RCC>

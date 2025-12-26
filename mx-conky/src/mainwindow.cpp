@@ -1103,9 +1103,24 @@ void MainWindow::setupConkyFonts()
             QFile::remove(linkPath);
         }
 
-        // Create symlink
-        if (!QFile::link(fontFile, linkPath)) {
-            qDebug() << "Failed to create symlink:" << linkPath << "->" << fontFile;
+        QFile fontSource(fontFile);
+
+        // Create symlink, fall back to copying the font if linking isn't permitted
+        if (!fontSource.link(linkPath)) {
+            const QString linkError = fontSource.errorString();
+            qWarning() << "Failed to create symlink:" << linkPath << "->" << fontFile << "-" << linkError
+                       << "Falling back to copying the font file.";
+
+            QFile existingLink(linkPath);
+            if (existingLink.exists() && !existingLink.remove()) {
+                qWarning() << "Failed to remove existing font link before copy:" << linkPath << "-"
+                           << existingLink.errorString();
+                continue;
+            }
+
+            if (!fontSource.copy(linkPath)) {
+                qWarning() << "Failed to copy font file:" << fontFile << "to" << linkPath << "-" << fontSource.errorString();
+            }
         }
     }
 }

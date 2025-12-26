@@ -589,7 +589,7 @@ my_select_num() {
             label="$quit_co$label$nc_co"
         fi
 
-        [ $dcnt = "$default" ] && label=$(printf "%s (%s)" "$label" "$m_co$(cq 'default')")
+           [ $dcnt = "$default" ] && label=$(printf "%s (%s)" "$label" "$m_co$(cq $"default")")
 
         data="${data}$dcnt:$datum\n"
         menu="${menu}$(printf "$quest_co%3d$hi_co)$m_co %${width}s" $dcnt "$label")\n"
@@ -2781,7 +2781,8 @@ make_label() {
 get_drive() {
     local drive part=$1
     case $part in
-        *mmcblk*) echo ${part%p[0-9]}                       ;;
+        *mmcblk*) echo ${part%p[0-9]}                                 ;;
+            *nvme*) echo ${part%p[0-9]}                                 ;;
                *) drive=${part%[0-9]} ; echo ${drive%[0-9]} ;;
     esac
 }
@@ -2806,7 +2807,8 @@ get_partition() {
 
     case $dev in
        *mmcblk*) echo  ${dev}p$num  ;;
-              *) echo  ${dev}$num   ;;
+            *nvme*) echo  ${dev}p$num  ;;
+                          *) echo  ${dev}$num    ;;
     esac
 }
 

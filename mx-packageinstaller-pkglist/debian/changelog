@@ -1,3 +1,29 @@
+mx-packageinstaller-pkglist (25.12.01mx25) mx; urgency=medium
+
+  * update librewolf, anydesk with extrepo routines
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 01 Dec 2025 17:37:13 -0500
+
+mx-packageinstaller-pkglist (25.11.03mx25) mx; urgency=medium
+
+  * add virtiosfd to virtmanager routines
+  * remove firefox from 32 bit builds
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 16 Nov 2025 15:17:37 -0500
+
+mx-packageinstaller-pkglist (25.11.02mx25) mx; urgency=medium
+
+  * archive telegram-desktop since not currently available
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 12 Nov 2025 18:55:57 -0500
+
+mx-packageinstaller-pkglist (25.11.01mx25) mx; urgency=medium
+
+  * archive avidemux
+  * add liq. 6.15 and 6.16 kernels 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 06 Nov 2025 20:24:39 -0500
+
 mx-packageinstaller-pkglist (25.10.06mx25) mx; urgency=medium
 
   * add easyeffects

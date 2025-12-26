@@ -1,3 +1,9 @@
+mx-repo-list (25.12) mx; urgency=medium
+
+  * Fix Cape Town URL
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 08 Dec 2025 12:38:08 -0500
+
 mx-repo-list (25.8) mx; urgency=medium
 
   * Add: Vietnam mirror

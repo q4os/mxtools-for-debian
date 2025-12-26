@@ -24,7 +24,7 @@ import os
 import sys
 import glob
 import logging
-from subprocess import *
+import subprocess
 from subprocess import *
 
 from DiskManager.Fstab.Fstabconfig import *
@@ -211,14 +211,31 @@ class DiskInfoBase(list) :
     
         if type in self._driver_db and not reload :
             return self._driver_db["type"]
+
         self._driver_db["type"] = { "primary" : [], "secondary" : [], "all" : {} }
-        if type in open("/proc/filesystems").read() or self._check_module(type) :
-            self._driver_db["type"]["primary"].append([type, "Default driver"])
-        for special in glob.glob("/sbin/mount.%s*" % type) :
-            if os.path.isfile(special) :
-                special = special.split("mount.")[-1]
-                self._driver_db["type"]["primary"].append([special, \
-                    FstabData.special_driver.get(special, FstabData.special_driver["__unknow__"])])
+
+        # special ntfs handling
+        if type == "ntfs":
+            for special in glob.glob("/sbin/mount.%s*" % type) :
+                if os.path.isfile(special) :
+                    special = special.split("mount.")[-1]
+                    self._driver_db["type"]["primary"].append([special, \
+                        FstabData.special_driver.get(special, FstabData.special_driver["__unknow__"])])
+
+            if "ntfs3" in open("/proc/filesystems").read() or self._check_module("ntfs3") :
+                self._driver_db["type"]["primary"].append(
+                        ["ntfs3", FstabData.special_driver.get("ntfs3", FstabData.special_driver["__unknow__"])])
+
+        # non-ntfs driver detection
+        else:
+            if type in open("/proc/filesystems").read() or self._check_module(type) :
+                self._driver_db["type"]["primary"].append([type, "Default driver"])
+            for special in glob.glob("/sbin/mount.%s*" % type) :
+                if os.path.isfile(special) :
+                    special = special.split("mount.")[-1]
+                    self._driver_db["type"]["primary"].append([special, \
+                        FstabData.special_driver.get(special, FstabData.special_driver["__unknow__"])])
+
         if "__all__" in FstabData.secondary_driver :
             self._driver_db["type"]["secondary"].append([ \
                 FstabData.secondary_driver["__all__"], "Secondary Driver"])
@@ -231,12 +248,20 @@ class DiskInfoBase(list) :
         return self._driver_db["type"]
 
     def _check_module(self, module) :
-        try:
-            cmd = [MODPROBE, "-n", "-i", module]
-            run(cmd, check=True, stderr=DEVNULL, stdout=DEVNULL)
-            return True
-        except CalledProcessError:
-            return False
+        if module == "ntfs3":
+            try:
+                cmd = f"{MODPROBE} -b -i {module} 2>/dev/null 1>&2 && lsmod | grep -o {module} 2>/dev/null"
+                result = run(cmd, shell=True, capture_output=True, text=True)
+                return module in result.stdout
+            except CalledProcessError:
+                return False
+        else:
+            try:
+                cmd = [MODPROBE, "-n", "-i", module]
+                run(cmd, check=True, stderr=DEVNULL, stdout=DEVNULL)
+                return True
+            except CalledProcessError:
+                return False
 
     def __getitem__(self, item) :
         

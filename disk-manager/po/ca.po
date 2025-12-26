@@ -5,7 +5,8 @@
 # 
 # Translators:
 # anticapitalista <anticapitalista@riseup.net>, 2022
-# Eduard Selma <selma@tinet.cat>, 2022
+# Eduard Selma <eduard@selma.cat>, 2022
+# Davidmp <medipas@gmail.com>, 2025
 # 
 #, fuzzy
 msgid ""
@@ -14,7 +15,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-01-16 00:46+0100\n"
 "PO-Revision-Date: 2022-01-21 17:21+0000\n"
-"Last-Translator: Eduard Selma <selma@tinet.cat>, 2022\n"
+"Last-Translator: Davidmp <medipas@gmail.com>, 2025\n"
 "Language-Team: Catalan (https://app.transifex.com/anticapitalista/teams/10162/ca/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -159,7 +160,7 @@ msgid ""
 "<i>%s</i> is currently in use.\n"
 "You should try another one."
 msgstr ""
-"<i>%s</i> s'està usant ara.\n"
+"<i>%s</i> s'usa ara.\n"
 "Proveu-ne un altre."
 
 #: ../DiskManager/Dialogs.py:243

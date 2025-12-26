@@ -2,15 +2,27 @@ Source: mx-datetime
 Section: admin
 Priority: optional
 Maintainer: Adrian <adrian@mxlinux.org>
-Build-Depends: debhelper-compat (=12), qt6-base-dev, qt6-base-dev-tools, qt6-tools-dev, qt6-tools-dev-tools
+Build-Depends: debhelper-compat (= 13),
+               cmake (>= 3.25),
+               ninja-build (>= 1.10),
+               qt6-base-dev,
+               qt6-base-dev-tools,
+               qt6-tools-dev,
+               qt6-tools-dev-tools
 Standards-Version: 4.4.0
+Vcs-Git: git://github.com/MX-Linux/mx-datetime
+Homepage: https://github.com/MX-Linux/mx-datetime
 
 Package: mx-datetime
 Architecture: any
 Depends: chrony,
-	util-linux-extra,
-	xdg-utils | mx-viewer,
-        ${misc:Depends},
-        ${shlibs:Depends}
-Description: MX Date & Time
- Program for changing the date and time settings
+         util-linux-extra,
+         xdg-utils | mx-viewer,
+         ${misc:Depends},
+         ${shlibs:Depends}
+Description: Date and time configuration tool for MX Linux
+ MX Date & Time is a graphical utility that allows users to easily
+ configure system date, time, and timezone settings. It provides
+ a simple interface for synchronizing with time servers using chrony
+ and managing date/time preferences without requiring command line
+ knowledge.
