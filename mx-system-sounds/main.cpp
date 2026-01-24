@@ -1,7 +1,7 @@
 /**********************************************************************
  *  main.cpp
  **********************************************************************
- * Copyright (C) 2016 MX Authors
+ * Copyright (C) 2016-2025 MX Authors
  *
  * Authors: Adrian
  *          MX Linux <http://mxlinux.org>
@@ -34,6 +34,13 @@
 
 int main(int argc, char *argv[])
 {
+    // Set Qt platform to XCB (X11) if not already set and we're in X11 environment
+    if (qEnvironmentVariableIsEmpty("QT_QPA_PLATFORM")) {
+        if (!qEnvironmentVariableIsEmpty("DISPLAY") && qEnvironmentVariableIsEmpty("WAYLAND_DISPLAY")) {
+            qputenv("QT_QPA_PLATFORM", "xcb");
+        }
+    }
+
     QApplication a(argc, argv);
     QApplication::setWindowIcon(QIcon("/usr/share/pixmaps/mx-system-sounds.png"));
 

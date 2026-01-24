@@ -29,19 +29,27 @@
 #include <QFile>
 #include <QHash>
 #include <QMessageBox>
+#include <QModelIndex>
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
 #include <QProcess>
 #include <QProgressDialog>
 #include <QSettings>
+#include <QStandardItem>
 #include <QTemporaryDir>
 #include <QTimer>
-#include <QTreeWidgetItem>
+#include <QTreeView>
 
 #include "aptcache.h"
 #include "cmd.h"
 #include "checkableheaderview.h"
 #include "lockfile.h"
+#include "models/flatpakfilterproxy.h"
+#include "models/flatpakmodel.h"
+#include "models/packagefilterproxy.h"
+#include "models/packagemodel.h"
+#include "models/popularfilterproxy.h"
+#include "models/popularmodel.h"
 #include "remotes.h"
 #include "versionnumber.h"
 #include "pmfiles.h"
@@ -51,42 +59,9 @@ namespace Ui
 class MainWindow;
 }
 
-namespace Status
-{
-enum { Installed = 1, Upgradable, NotInstalled, Autoremovable }; // Also used for filter combo index
-}
-
 namespace Tab
 {
 enum { Popular, EnabledRepos, Test, Backports, Flatpak, Output };
-}
-
-namespace PopCol
-{
-enum {
-    Icon,
-    Check,
-    Name,
-    Info,
-    Description,
-    InstallNames,
-    UninstallNames,
-    Screenshot,
-    PostUninstall,
-    PreUninstall,
-    QDistro,
-    MAX
-};
-} // Namespace PopCol
-
-namespace TreeCol
-{
-enum { Check, Name, RepoVersion, InstalledVersion, Description, Status };
-}
-
-namespace FlatCol
-{
-enum { Check, Name, LongName, Version, Branch, Size, Status, Duplicate, FullName };
 }
 
 namespace Release
@@ -133,10 +108,10 @@ private slots:
     void cmdDone();
     void cmdStart();
     void disableOutput();
-    void displayInfoTestOrBackport(const QTreeWidget *tree, const QTreeWidgetItem *item);
-    void displayPackageInfo(const QTreeWidget *tree, QPoint pos);
-    void displayPackageInfo(const QTreeWidgetItem *item);
-    void displayPopularInfo(const QTreeWidgetItem *item, int column);
+    void displayInfoTestOrBackport(QTreeView *tree, const QModelIndex &index);
+    void displayPackageInfo(QTreeView *tree, QPoint pos);
+    void displayPackageInfo(const QModelIndex &index);
+    void displayPopularInfo(const QModelIndex &index);
     void enableOutput();
     void filterChanged(const QString &arg1);
     void findPackage();
@@ -168,15 +143,13 @@ private slots:
     void pushUpgradeAll_clicked();
     void pushUpgradeFP_clicked();
     void tabWidget_currentChanged(int index);
-    void treeBackports_itemChanged(QTreeWidgetItem *item);
-    void treeEnabled_itemChanged(QTreeWidgetItem *item);
-    void treeFlatpak_itemChanged(QTreeWidgetItem *item);
-    void treeMXtest_itemChanged(QTreeWidgetItem *item);
+    void onPackageCheckStateChanged(const QString &packageName, Qt::CheckState state);
+    void onFlatpakCheckStateChanged(const QString &fullName, Qt::CheckState state, int status);
+    void onPopularItemChanged(const QModelIndex &index);
     void treePopularApps_customContextMenuRequested(QPoint pos);
     void treePopularApps_expanded();
-    void treePopularApps_itemChanged(QTreeWidgetItem *item);
-    void treePopularApps_itemCollapsed(QTreeWidgetItem *item);
-    void treePopularApps_itemExpanded(QTreeWidgetItem *item);
+    void treePopularApps_itemCollapsed(const QModelIndex &index);
+    void treePopularApps_itemExpanded(const QModelIndex &index);
 
 private:
     Ui::MainWindow *ui;
@@ -236,12 +209,26 @@ private:
     bool suppressCmdOutput {false};
     QTemporaryDir tempDir;
     QTimer timer;
-    QTreeWidget *currentTree {}; // current/calling tree
-    QTreeWidgetItem *lastItemClicked {};
+    QTreeView *currentTree {}; // current/calling tree
+    QModelIndex lastIndexClicked {};
     QUrl getScreenshotUrl(const QString &name);
     const QCommandLineParser &args;
     const QString elevate {QFile::exists("/usr/bin/pkexec") ? "/usr/bin/pkexec " : "/usr/bin/gksu "};
     const QString tempList {"/etc/apt/sources.list.d/mxpitemp.list"};
+
+    // Models
+    PackageModel *enabledModel {nullptr};
+    PackageModel *mxtestModel {nullptr};
+    PackageModel *backportsModel {nullptr};
+    FlatpakModel *flatpakModel {nullptr};
+    PopularModel *popularModel {nullptr};
+
+    // Filter proxies
+    PackageFilterProxy *enabledProxy {nullptr};
+    PackageFilterProxy *mxtestProxy {nullptr};
+    PackageFilterProxy *backportsProxy {nullptr};
+    FlatpakFilterProxy *flatpakProxy {nullptr};
+    PopularFilterProxy *popularProxy {nullptr};
 
     QNetworkAccessManager manager;
     QNetworkReply *reply;
@@ -255,9 +242,9 @@ private:
     [[nodiscard]] QString mapArchToFormat(const QString &arch) const;
     [[nodiscard]] QStringList listFlatpaks(const QString &remote, const QString &type = QLatin1String("")) const;
     [[nodiscard]] QStringList listInstalledFlatpaks(const QString &type = QLatin1String(""));
-    [[nodiscard]] QTreeWidgetItem *createFlatpakItem(const QString &item, const QStringList &installedAll) const;
-    [[nodiscard]] QTreeWidgetItem *createTreeItem(const QString &name, const QString &version,
-                                                  const QString &description) const;
+    [[nodiscard]] FlatpakData createFlatpakData(const QString &item, const QStringList &installedAll) const;
+    [[nodiscard]] PackageData createPackageData(const QString &name, const QString &version,
+                                                const QString &description) const;
     [[nodiscard]] bool checkInstalled(const QVariant &names) const;
     [[nodiscard]] bool checkUpgradable(const QStringList &nameList) const;
     [[nodiscard]] bool isOnline();
@@ -266,9 +253,10 @@ private:
     [[nodiscard]] static bool isFilteredName(const QString &name);
     [[nodiscard]] static uchar getDebianVerNum();
     [[nodiscard]] static uchar showVersionDialog(const QString &message);
-    [[nodiscard]] QList<QTreeWidgetItem *> createTreeItemsList(QHash<QString, PackageInfo> *list) const;
+    [[nodiscard]] QVector<PackageData> createPackageDataList(QHash<QString, PackageInfo> *list) const;
     [[nodiscard]] QHash<QString, PackageInfo> *getCurrentList();
-    [[nodiscard]] QTreeWidget *getCurrentTree();
+    [[nodiscard]] PackageModel *getCurrentModel();
+    [[nodiscard]] PackageFilterProxy *getCurrentProxy();
 
     bool buildPackageLists(bool forceDownload = false);
     bool confirmActions(const QString &names, const QString &action);
@@ -291,25 +279,29 @@ private:
     [[nodiscard]] static QString convert(quint64 bytes);
     [[nodiscard]] static quint64 convert(const QString &size);
     void blockInterfaceFP(bool block);
-    void buildChangeList(QTreeWidgetItem *item);
+    void buildChangeList(const QString &packageName, Qt::CheckState state);
+    void buildFlatpakChangeList(const QString &fullName, Qt::CheckState state, int status);
     void cancelDownload();
     void centerWindow();
     void clearUi();
-    void displayAutoremovable(const QTreeWidget *newTree);
+    void displayAutoremovable();
     void displayFilteredFP(QStringList list, bool raw = false);
     void displayFlatpaks(bool forceUpdate = false);
     void displayPackages();
-    void displayPopularApps() const;
+    void displayPopularApps();
     void displayWarning(const QString &repo);
     void enableTabs(bool enable);
     void finalizeFlatpakDisplay();
-    void formatFlatpakTree() const;
+    void formatFlatpakTree();
+    void removeDuplicatesFP();
+    void applyPopularCategorySpanning();
     void handleEnabledReposTab(const QString &searchStr);
     void handleFlatpakTab(const QString &searchStr);
     void handleOutputTab();
     void handleTab(const QString &searchStr, QLineEdit *searchBox, const QString &warningMessage, bool dirtyFlag);
-    void hideColumns() const;
-    void hideLibs() const;
+    void resizeCurrentColumns();
+    [[nodiscard]] bool shouldRefreshFilters(const QString &searchStr);
+    void hideColumns();
     void ifDownloadFailed() const;
     void installFlatpak();
     void invalidateFlatpakRemoteCache();
@@ -320,20 +312,21 @@ private:
     void populateFlatpakTree();
     void processDoc(const QDomDocument &doc);
     void refreshPopularApps();
-    void removeDuplicatesFP() const;
     void resetCheckboxes();
     void saveSearchText(QString &searchStr, int &filterIdx);
-    void setConnections() const;
+    void setConnections();
     void setCurrentTree();
     void setDirty();
+    void rebuildPackageViews();
     void setIcons();
     void setProgressDialog();
     void setSearchFocus() const;
     void setup();
     void setupFlatpakDisplay();
+    void setupModels();
     void updateFlatpakCounts(uint totalCount);
-    void updateInterface() const;
-    void updateTreeItems(QTreeWidget *tree);
+    void updateInterface();
+    void updatePackageStatuses();
     // Header checkbox helpers
     CheckableHeaderView *headerEnabled {nullptr};
     CheckableHeaderView *headerMX {nullptr};

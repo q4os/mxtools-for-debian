@@ -1,3 +1,40 @@
+mx-packageinstaller-pkglist (26.01.05mx25) mx; urgency=medium
+
+  * fix 6.18 kernel entry
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 19 Jan 2026 09:59:18 -0500
+
+mx-packageinstaller-pkglist (26.01.04mx25) mx; urgency=medium
+
+  * update brave.pm
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 16 Jan 2026 20:18:17 -0500
+
+mx-packageinstaller-pkglist (26.01.03mx25) mx; urgency=medium
+
+  * archive expressvpn.pm (file link no longer exposed publicly)
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 14 Jan 2026 19:37:05 -0500
+
+mx-packageinstaller-pkglist (26.01.02mx25) mx; urgency=medium
+
+  * update liquorix 6.18 kernel
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 10 Jan 2026 12:49:01 -0500
+
+mx-packageinstaller-pkglist (26.01.01mx25) mx; urgency=medium
+
+  * update liquorix 6.17 kernel
+  * add 6.18 kernels (liquorix, debian)
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Tue, 06 Jan 2026 22:24:00 -0500
+
+mx-packageinstaller-pkglist (25.12.02mx25) mx; urgency=medium
+
+  * add 6.17 liquorix kernel
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 27 Dec 2025 10:39:13 -0500
+
 mx-packageinstaller-pkglist (25.12.01mx25) mx; urgency=medium
 
   * update librewolf, anydesk with extrepo routines

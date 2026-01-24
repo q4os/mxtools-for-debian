@@ -82,6 +82,9 @@ run_report(){
     inxi -Fxxxra $filters -c$inxi_color | \
     sed -r -e "/Kernel:/s/$UNAMER/$UNAMER${UNAMEV:+ \[$UNAMEV\]}/;
                /mapped:/s/luks-${uuid_filter}/luks-<filter>/"
+    if [[ -e /usr/lib/sysvinit/init && -e /usr/lib/systemd/systemd ]]; then
+    	echo "Dual Init Detected"
+    fi
     local BM=$(test -d /sys/firmware/efi && echo "UEFI" || echo "BIOS (legacy, CSM, MBR)")
     echo "Boot Mode: $BM"
     local SB=$((mokutil --sb-state || bootctl --no-variables status) 2>/dev/null | sed -nr 's/^\s*Secure\s?Boot:?/SecureBoot/p')

@@ -2,18 +2,24 @@ Source: mx-system-sounds
 Section: admin
 Priority: optional
 Maintainer: Adrian <adrian@mxlinux.org>
-Build-Depends: debhelper (>=10), qt6-base-dev, qt6-base-dev-tools, qt6-tools-dev, qt6-tools-dev-tools
+Build-Depends: debhelper-compat (=12), cmake (>= 3.16), ninja-build, qt6-base-dev, qt6-base-dev-tools, qt6-tools-dev, qt6-tools-dev-tools
 Standards-Version: 3.9.8
-Vcs-Git: git://github.com/mx-linux/mx-system-sounds
+Vcs-Git: git://github.com/MX-Linux/mx-system-sounds
+Homepage: https://github.com/MX-Linux/mx-system-sounds
 
 Package: mx-system-sounds
 Architecture: any
 Depends: libcanberra-gstreamer,
-         libcanberra-gtk-module,
+         libcanberra-gtk3-module,
          mx-sound-theme,
          mx-viewer | xdg-utils,
          ${misc:Depends},
          ${shlibs:Depends}
-Recommends: libcanberra-pulse
-Description: MX System Sounds
- MX System Sounds is a tool for selecting the system sounds in MX Linux
+Recommends: libcanberra-pulse, mx-launcher-l10n
+Description: System sound configuration tool for MX Linux
+ MX System Sounds is a graphical utility that allows users to easily
+ configure and customize system sound events in MX Linux. It provides
+ a user-friendly interface for:
+  * Enabling or disabling system sounds
+  * Selecting sound themes
+  * Customizing individual sound events

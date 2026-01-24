@@ -25,7 +25,7 @@
 #include <QMultiMap>
 #include <QSettings>
 
-#include <flatbutton.h>
+#include "flatbutton.h"
 
 namespace Ui
 {
@@ -67,8 +67,8 @@ private:
     enum Info { Name, Comment, IconName, Exec, Category, Terminal };
     int col_count = 0;
     int icon_size = 32;
-    int max_col = 0;
     int max_elements = 0;
+    int cached_max_button_width = 0;
 
     [[nodiscard]] FlatButton *createButton(const QStringList &fileInfo);
     [[nodiscard]] QString getTranslation(const QString &text, const QString &key, const QString &langRegion,

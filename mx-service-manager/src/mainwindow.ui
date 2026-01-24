@@ -224,28 +224,33 @@
     <widget class="QTextBrowser" name="textBrowser"/>
    </item>
    <item row="2" column="0">
-    <widget class="QComboBox" name="comboFilter">
-     <item>
-      <property name="text">
-       <string>All services</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Running services</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Services enabled at boot</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Services disabled at boot</string>
-      </property>
-     </item>
-    </widget>
+     <widget class="QComboBox" name="comboFilter">
+      <item>
+       <property name="text">
+        <string>System services</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>User services</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Running services</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Services enabled at boot</string>
+       </property>
+      </item>
+       <item>
+        <property name="text">
+         <string>Services disabled at boot</string>
+        </property>
+       </item>
+     </widget>
    </item>
    <item row="5" column="0">
     <widget class="QLabel" name="labelCount">

@@ -37,6 +37,9 @@ if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-remov
 
     sed -i 's/Libretto/Infinity/' /etc/mx-version
     sed -i "s/MX-23.*_/MX-25_/" /etc/mx-version
+    sed -i "s/MX-25.*_Xfce_/MX-25.1_Xfce_/" /etc/mx-version
+    sed -i "s/MX-25.*_KDE_/MX-25.1_KDE_/" /etc/mx-version
+    sed -i "s/MX-25.*_fluxbox_/MX-25.1_fluxbox_/" /etc/mx-version
     #handle update from beta and rc users
     sed -i s/_beta.*_/_/ /etc/mx-version
     sed -i s/_RC.*_/_/ /etc/mx-version
@@ -111,7 +114,7 @@ if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-remov
 		fi
 	fi
 
-    #fix permissions on sysctl.d .conf files provided by mx-system
+	#fix permissions on sysctl.d .conf files provided by mx-system
     if [ -x "/etc/sysctl.d/99-swappiness_mx.conf" ]; then
     	chmod a-x /etc/sysctl.d/99-swappiness_mx.conf
     fi

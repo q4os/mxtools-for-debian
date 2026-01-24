@@ -1,3 +1,49 @@
+mx-snapshot (26.01.3) mx; urgency=medium
+
+  * Fix exclude size calc on sparse files
+
+ -- Adrian <adrian@mxlinux.org>  Tue, 13 Jan 2026 19:01:56 -0500
+
+mx-snapshot (26.01.2) mx; urgency=medium
+
+  * GUI: keep boot options after NVIDIA prompt
+  * Save log for iso-snapshot-cli too
+
+ -- Adrian <adrian@mxlinux.org>  Sat, 10 Jan 2026 21:59:03 -0500
+
+mx-snapshot (26.01.1) mx; urgency=medium
+
+  * Fix syntax error in cleanup function
+
+ -- Adrian <adrian@mxlinux.org>  Sat, 10 Jan 2026 10:36:43 -0500
+
+mx-snapshot (26.01) mx; urgency=medium
+
+  * CLI/GUI: backup exclusion file on reset
+  * Work with more than one location for installed-to-live
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 05 Jan 2026 09:36:43 -0500
+
+mx-snapshot (25.12.12) mx; urgency=medium
+
+  * Fix exclude size double counting
+  * Avoid symlink glob dereference in excludes
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 31 Dec 2025 17:37:38 -0500
+
+mx-snapshot (25.12.9) mx; urgency=medium
+
+  * Improve calculation of space on root and /home
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 31 Dec 2025 01:02:25 -0500
+
+mx-snapshot (25.12.8) mx; urgency=medium
+
+  * Fix GUI/CLI space checks: check available space only after selecting
+    the snapshot directory in GUI
+
+ -- Adrian <adrian@mxlinux.org>  Sun, 28 Dec 2025 12:45:31 -0500
+
 mx-snapshot (25.12.6) mx; urgency=medium
 
   * Remove exclusion /var/lib/sddm/ which will be handled by live-files

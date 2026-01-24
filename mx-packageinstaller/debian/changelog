@@ -1,3 +1,38 @@
+mx-packageinstaller (26.01.5) mx; urgency=medium
+
+  * Make culumns in Popular tab resizable
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 23 Jan 2026 10:17:18 -0500
+
+mx-packageinstaller (26.01.4) mx; urgency=medium
+
+  * Performance fix: switching tabs should work better
+  * Fix hide/show libs for MX Test and Backports tabs
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 21 Jan 2026 11:35:24 -0500
+
+mx-packageinstaller (26.01.3) mx; urgency=medium
+
+  * Fix version comparison
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 19 Jan 2026 22:33:15 -0500
+
+mx-packageinstaller (26.01.2) mx; urgency=medium
+
+  * Refactored code: app should use about 50MB less and be more responsive
+  * Added check for elevation
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 19 Jan 2026 15:55:11 -0500
+
+mx-packageinstaller (26.01) mx; urgency=medium
+
+  * Make legend icons non-interactive
+  * Fix network check reply cleanup
+  * Filter ANSI cursor queries from output
+  * Collapse flatpak progress lines
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 05 Jan 2026 12:33:59 -0500
+
 mx-packageinstaller (25.12.4) mx; urgency=medium
 
   * Cache flatpak listings and normalize refs for user scope

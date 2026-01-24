@@ -1,3 +1,11 @@
+mx-service-manager (25.12) mx; urgency=medium
+
+  * Add support for user services
+  * Service search now matches substrings
+  * Improve tooltip loading
+
+ -- Adrian <adrian@mxlinux.org>  Sat, 27 Dec 2025 19:09:25 -0500
+
 mx-service-manager (25.10) mx; urgency=medium
 
   * Add refresh button to repopulates service data keeping the prior

@@ -27,105 +27,110 @@
         <translation>S’u gjet kartelë parazgjedhje përjashtimesh te %1.</translation>
     </message>
     <message>
-        <location filename="../src/batchprocessing.cpp" line="210"/>
+        <location filename="../src/batchprocessing.cpp" line="212"/>
+        <source>Could not backup existing exclusion file to %1.</source>
+        <translation>S’u kopjeruajt dot kartelë ekzistuese përjashtimesh te %1.</translation>
+    </message>
+    <message>
+        <location filename="../src/batchprocessing.cpp" line="215"/>
         <source>Could not remove existing exclusion file at %1.</source>
         <translation>S’u hoq dot kartelë ekzistuese përjashtimesh te %1.</translation>
     </message>
     <message>
-        <location filename="../src/batchprocessing.cpp" line="216"/>
+        <location filename="../src/batchprocessing.cpp" line="222"/>
         <source>Could not copy default exclusion file from %1 to %2.</source>
         <translation>S’u kopjua dot kartelë ekzistuese përjashtimesh nga %1 në %2.</translation>
     </message>
     <message>
-        <location filename="../src/batchprocessing.cpp" line="232"/>
+        <location filename="../src/batchprocessing.cpp" line="238"/>
         <source>Detected newer exclusion file at %1 compared to %2. Prompting for action.</source>
         <translation>Te %1 u pikas kartelë përjashtimesh më e re, krahasuar me %2. Po kërkohet për veprim.</translation>
     </message>
     <message>
-        <location filename="../src/batchprocessing.cpp" line="238"/>
+        <location filename="../src/batchprocessing.cpp" line="244"/>
         <source>s</source>
         <comment>CLI excludes prompt: single-letter shortcut for 'show diff'</comment>
-        <translation type="unfinished"/>
+        <translation>s</translation>
     </message>
     <message>
-        <location filename="../src/batchprocessing.cpp" line="239"/>
+        <location filename="../src/batchprocessing.cpp" line="245"/>
         <source>u</source>
         <comment>CLI excludes prompt: single-letter shortcut for 'use updated default'</comment>
-        <translation type="unfinished"/>
+        <translation>p</translation>
     </message>
     <message>
-        <location filename="../src/batchprocessing.cpp" line="240"/>
+        <location filename="../src/batchprocessing.cpp" line="246"/>
         <source>k</source>
         <comment>CLI excludes prompt: single-letter shortcut for 'keep custom (update timestamp)'</comment>
-        <translation type="unfinished"/>
+        <translation>m</translation>
     </message>
     <message>
-        <location filename="../src/batchprocessing.cpp" line="241"/>
+        <location filename="../src/batchprocessing.cpp" line="247"/>
         <source>q</source>
         <comment>CLI excludes prompt: single-letter shortcut for 'quit'</comment>
-        <translation type="unfinished"/>
+        <translation>d</translation>
     </message>
     <message>
-        <location filename="../src/batchprocessing.cpp" line="243"/>
+        <location filename="../src/batchprocessing.cpp" line="249"/>
         <source>show diff</source>
         <comment>CLI excludes prompt option label</comment>
         <translation>shfaqe diff-in</translation>
     </message>
     <message>
-        <location filename="../src/batchprocessing.cpp" line="244"/>
+        <location filename="../src/batchprocessing.cpp" line="250"/>
         <source>use updated default</source>
         <comment>CLI excludes prompt option label</comment>
         <translation>përdor parazgjedhje të përditësuar</translation>
     </message>
     <message>
-        <location filename="../src/batchprocessing.cpp" line="245"/>
+        <location filename="../src/batchprocessing.cpp" line="251"/>
         <source>keep custom (update timestamp)</source>
         <comment>CLI excludes prompt option label</comment>
         <translation>mbaj vetjaken (përditëso vulë kohore)</translation>
     </message>
     <message>
-        <location filename="../src/batchprocessing.cpp" line="246"/>
+        <location filename="../src/batchprocessing.cpp" line="252"/>
         <source>quit</source>
         <comment>CLI excludes prompt option label</comment>
         <translation>mbylle</translation>
     </message>
     <message>
-        <location filename="../src/batchprocessing.cpp" line="254"/>
+        <location filename="../src/batchprocessing.cpp" line="255"/>
         <source>[%1]%2  [%3]%4  [%5]%6  [%7]%8: </source>
         <translation>[%1]%2  [%3]%4  [%5]%6  [%7]%8: </translation>
     </message>
     <message>
-        <location filename="../src/batchprocessing.cpp" line="259"/>
+        <location filename="../src/batchprocessing.cpp" line="260"/>
         <source>The exclusion file at %1 is newer than your configured file at %2.</source>
         <translation>Kartela e përjashtimit te %1 është më e re se sa kartela juaj e formësuar te %2.</translation>
     </message>
     <message>
-        <location filename="../src/batchprocessing.cpp" line="273"/>
+        <location filename="../src/batchprocessing.cpp" line="276"/>
         <source>Reverted to updated default exclusion file.</source>
         <translation>U kthye te kartela parazgjedhje e përditësuar e përjashtimeve.</translation>
     </message>
     <message>
-        <location filename="../src/batchprocessing.cpp" line="292"/>
+        <location filename="../src/batchprocessing.cpp" line="297"/>
         <source>Leaving custom exclusion file unchanged.</source>
         <translation>Po lihet e pandryshuar kartela vetjake e përjashtimeve.</translation>
     </message>
     <message>
-        <location filename="../src/batchprocessing.cpp" line="303"/>
+        <location filename="../src/batchprocessing.cpp" line="308"/>
         <source>Invalid choice. Please select again.</source>
         <translation>Zgjidhje e pavlefshme. Ju lutemi, përzgjidhni sërish.</translation>
     </message>
     <message>
-        <location filename="../src/batchprocessing.cpp" line="310"/>
+        <location filename="../src/batchprocessing.cpp" line="315"/>
         <source>This computer uses an NVIDIA graphics card. Are you planning to use the resulting ISO on the same computer or another computer with an NVIDIA card?</source>
         <translation>Ky kompjuter përdor një kartë grafike NVIDIA. Keni në plan ta përdorni IOS-n e prodhuar keni në plan ta përdorni në të njëjtin kompjuter, apo në një tjetër kompjuter me një kartë NVIDIA?</translation>
     </message>
     <message>
-        <location filename="../src/batchprocessing.cpp" line="320"/>
+        <location filename="../src/batchprocessing.cpp" line="325"/>
         <source>Note: If you use the resulting ISO on a computer without an NVIDIA card, you will likely need to remove &apos;xorg=nvidia&apos; from the boot options.</source>
         <translation>Shënim: Nëse ISO-n e prodhuar e përdorni në një kompjuter pa një kartë NVIDIA, gjasat janë t’ju duhet të hiqni &apos;xorg=nvidia&apos; nga mundësitë e nisjes.</translation>
     </message>
     <message>
-        <location filename="../src/batchprocessing.cpp" line="323"/>
+        <location filename="../src/batchprocessing.cpp" line="328"/>
         <source>Note: If you use the resulting ISO on a computer with an NVIDIA card, you may need to add &apos;xorg=nvidia&apos; to the boot options.</source>
         <translation>Shënim: Nëse ISO-n e prodhuar e përdorni në një kompjuter me një kartë NVIDIA, mund t’ju duhet të shtoni &apos;xorg=nvidia&apos; te mundësitë e nisjes.</translation>
     </message>
@@ -152,8 +157,8 @@
     <name>MainWindow</name>
     <message>
         <location filename="../src/mainwindow.ui" line="14"/>
-        <location filename="../src/mainwindow.cpp" line="439"/>
-        <location filename="../src/mainwindow.cpp" line="819"/>
+        <location filename="../src/mainwindow.cpp" line="446"/>
+        <location filename="../src/mainwindow.cpp" line="833"/>
         <location filename="../src/ui_mainwindow.h" line="745"/>
         <source>MX Snapshot</source>
         <translation>Fotografim MX Sistemi</translation>
@@ -238,7 +243,7 @@
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="236"/>
-        <location filename="../src/mainwindow.cpp" line="628"/>
+        <location filename="../src/mainwindow.cpp" line="641"/>
         <location filename="../src/ui_mainwindow.h" line="760"/>
         <source>Snapshot name:</source>
         <translation>Emër fotografimi:</translation>
@@ -329,7 +334,7 @@
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="626"/>
-        <location filename="../src/mainwindow.cpp" line="839"/>
+        <location filename="../src/mainwindow.cpp" line="853"/>
         <location filename="../src/ui_mainwindow.h" line="782"/>
         <source>Remove Custom Exclusion File</source>
         <translation>Hiq Kartelë Vetjake Përjashtimesh</translation>
@@ -461,42 +466,42 @@
         <translation>Mbrapsht</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="401"/>
+        <location filename="../src/mainwindow.cpp" line="408"/>
         <source>Select Release Date</source>
         <translation>Përzgjidhni Datë Hedhjeje Në Qarkullim</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="445"/>
+        <location filename="../src/mainwindow.cpp" line="452"/>
         <source>fastest, worst compression</source>
         <translation>më e shpejta, ngjeshja më e dobët</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="445"/>
+        <location filename="../src/mainwindow.cpp" line="452"/>
         <source>fast, worse compression</source>
         <translation>e shpejtë, ngjeshje e dobët</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="446"/>
+        <location filename="../src/mainwindow.cpp" line="453"/>
         <source>slow, better compression</source>
         <translation>e ngadaltë, ngjeshje më e mirë</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="446"/>
+        <location filename="../src/mainwindow.cpp" line="453"/>
         <source>best compromise</source>
         <translation>kompromisi më i mirë</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="447"/>
+        <location filename="../src/mainwindow.cpp" line="454"/>
         <source>slowest, best compression</source>
         <translation>më e ngadalta, ngjeshja më e mirë</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="476"/>
+        <location filename="../src/mainwindow.cpp" line="483"/>
         <source>Free space on %1, where snapshot folder is placed: </source>
         <translation>Hapësirë e lirë në %1, ku vendoset dosja e fotografimeve: </translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="479"/>
+        <location filename="../src/mainwindow.cpp" line="486"/>
         <source>The free space should be sufficient to hold the compressed data from / and /home
 
       If necessary, you can create more available space by removing previous snapshots and saved copies: %1 snapshots are taking up %2 of disk space.</source>
@@ -505,28 +510,30 @@
       Në u dashtë, mund të krijoni më tepër hapësirë të lirë, duke hequr fotografime të mëparshme dhe kopje të ruajtura: %1 fotografime zënë aktualisht %2 të hapësirës së diskut.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="491"/>
-        <location filename="../src/mainwindow.cpp" line="492"/>
+        <location filename="../src/mainwindow.cpp" line="498"/>
+        <location filename="../src/mainwindow.cpp" line="499"/>
         <source>Installing </source>
         <translation>Po instalohet </translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="577"/>
+        <location filename="../src/mainwindow.cpp" line="584"/>
         <source>Please wait.</source>
         <translation>Ju lutemi, pritni.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="579"/>
+        <location filename="../src/mainwindow.cpp" line="586"/>
         <source>Please wait. Calculating used disk space...</source>
         <translation>Ju lutemi, pritni. Po llogaritet hapësira e përdorur në disk…</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="313"/>
-        <location filename="../src/mainwindow.cpp" line="324"/>
         <location filename="../src/mainwindow.cpp" line="330"/>
-        <location filename="../src/mainwindow.cpp" line="613"/>
-        <location filename="../src/mainwindow.cpp" line="695"/>
-        <location filename="../src/mainwindow.cpp" line="714"/>
+        <location filename="../src/mainwindow.cpp" line="337"/>
+        <location filename="../src/mainwindow.cpp" line="620"/>
+        <location filename="../src/mainwindow.cpp" line="627"/>
+        <location filename="../src/mainwindow.cpp" line="709"/>
+        <location filename="../src/mainwindow.cpp" line="728"/>
+        <location filename="../src/mainwindow.cpp" line="967"/>
         <source>Error</source>
         <translation>Gabim</translation>
     </message>
@@ -572,168 +579,188 @@
         <translation>S’u gjet kartelë parazgjedhje përjashtimesh te %1.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="325"/>
+        <location filename="../src/mainwindow.cpp" line="326"/>
+        <source>Warning</source>
+        <translation>Kujdes</translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="327"/>
+        <source>Could not backup existing exclusion file to %1.</source>
+        <translation>S’u kopjeruajt dot kartelë ekzistuese përjashtimesh te %1.</translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="331"/>
         <source>Could not remove existing exclusion file at %1.</source>
         <translation>S’u hoq dot kartelë ekzistuese përjashtimesh te %1.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="331"/>
+        <location filename="../src/mainwindow.cpp" line="338"/>
         <source>Could not copy default exclusion file from %1 to %2.</source>
         <translation>S’u kopjua dot kartelë ekzistuese përjashtimesh nga %1 në %2.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="614"/>
+        <location filename="../src/mainwindow.cpp" line="621"/>
         <source>Output file %1 already exists. Please use another file name, or delete the existent file.</source>
         <translation>Kartela përfundim %1 ekziston tashmë. Ju lutemi, përdorni një tjetër emër kartele, ose fshini kartelën ekzistuese.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="619"/>
+        <location filename="../src/mainwindow.cpp" line="628"/>
+        <source>Insufficient free space. Please select a different snapshot directory or free up space.</source>
+        <translation>Hapësirë e lirë e pamjaftueshme. Ju lutemi, përzgjidhni një tjetër drejtori fotografimesh sistemi, ose lironi ca hapësirë.</translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="632"/>
         <source>Settings</source>
         <translation>Rregullime</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="625"/>
+        <location filename="../src/mainwindow.cpp" line="638"/>
         <source>Snapshot will use the following settings:</source>
         <translation>Fotografimi do të përdorë rregullimet vijuese:</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="627"/>
+        <location filename="../src/mainwindow.cpp" line="640"/>
         <source>- Snapshot directory:</source>
         <translation>- Drejtorimi fotografimesh:</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="628"/>
+        <location filename="../src/mainwindow.cpp" line="641"/>
         <source>- Kernel to be used:</source>
         <translation>- Kernel për t’u përdorur:</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="651"/>
-        <location filename="../src/mainwindow.cpp" line="660"/>
+        <location filename="../src/mainwindow.cpp" line="665"/>
+        <location filename="../src/mainwindow.cpp" line="674"/>
         <source>NVIDIA Detected</source>
         <translation>U pikas NVIDIA</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="652"/>
+        <location filename="../src/mainwindow.cpp" line="666"/>
         <source>This computer uses an NVIDIA graphics card. Are you planning to use the resulting ISO on the same computer or another computer with an NVIDIA card?</source>
         <translation>Ky kompjuter përdor një kartë grafike NVIDIA. Keni në plan ta përdorni IOS-n e prodhuar keni në plan ta përdorni në të njëjtin kompjuter, apo në një tjetër kompjuter me një kartë NVIDIA?</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="656"/>
+        <location filename="../src/mainwindow.cpp" line="670"/>
         <source>NVIDIA Selected</source>
         <translation>U përzgjodh NVIDIA</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="657"/>
+        <location filename="../src/mainwindow.cpp" line="671"/>
         <source>Note: If you use the resulting ISO on a computer without an NVIDIA card, you will likely need to remove &apos;xorg=nvidia&apos; from the boot options.</source>
         <translation>Shënim: Nëse ISO-n e prodhuar e përdorni në një kompjuter pa një kartë NVIDIA, gjasat janë t’ju duhet të hiqni &apos;xorg=nvidia&apos; nga mundësitë e nisjes.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="661"/>
+        <location filename="../src/mainwindow.cpp" line="675"/>
         <source>Note: If you use the resulting ISO on a computer with an NVIDIA card, you may need to add &apos;xorg=nvidia&apos; to the boot options.</source>
         <translation>Shënim: Nëse ISO-n e prodhuar e përdorni në një kompjuter me një kartë NVIDIA, mund t’ju duhet të shtoni &apos;xorg=nvidia&apos; te mundësitë e nisjes.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="696"/>
+        <location filename="../src/mainwindow.cpp" line="710"/>
         <source>Could not replace the exclusion file with the updated default.</source>
         <translation>S’u zëvendësua kartela e përjashtimeve me parazgjedhjen e përditësuar.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="715"/>
+        <location filename="../src/mainwindow.cpp" line="729"/>
         <source>Current kernel doesn&apos;t support selected compression algorithm, please edit the configuration file and select a different algorithm.</source>
         <translation>Kerneli i tanishëm nuk mbulon algoritëm të përzgjedhur për ngjeshje, ju lutemi, përpunon kartelën e formësimit dhe përzgjidhni një tjetër logaritëm.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="738"/>
+        <location filename="../src/mainwindow.cpp" line="752"/>
         <source>Final chance</source>
         <translation>Shansi i fundit</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="740"/>
+        <location filename="../src/mainwindow.cpp" line="754"/>
         <source>Snapshot now has all the information it needs to create an ISO from your running system.</source>
         <translation>Fotografimi tani ka krejt informacionin që i duhet për të krijuar një ISO nga sistemi që xhironi.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="741"/>
+        <location filename="../src/mainwindow.cpp" line="755"/>
         <source>It will take some time to finish, depending on the size of the installed system and the capacity of your computer.</source>
         <translation>Do të duhet ca kohë për ta përfunduar, në varësi të madhësisë së sistemit të instaluar dhe kapaciteteve të kompjuterit tuaj.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="743"/>
+        <location filename="../src/mainwindow.cpp" line="757"/>
         <source>OK to start?</source>
         <translation>OK të fillohet?</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="747"/>
+        <location filename="../src/mainwindow.cpp" line="761"/>
         <source>Shutdown computer when done.</source>
         <translation>Fikni kompjuterin, kur të ketë mbaruar.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="780"/>
+        <location filename="../src/mainwindow.cpp" line="794"/>
         <source>Output</source>
         <translation>Përfundim</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="796"/>
+        <location filename="../src/mainwindow.cpp" line="810"/>
         <source>Close</source>
         <translation>Mbylle</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="803"/>
+        <location filename="../src/mainwindow.cpp" line="817"/>
         <source>Edit Boot Menu</source>
         <translation>Përpunoni Menu Nisjeje</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="804"/>
+        <location filename="../src/mainwindow.cpp" line="818"/>
         <source>The program will now pause to allow you to edit any files in the work directory. Select Yes to edit the boot menu or select No to bypass this step and continue creating the snapshot.</source>
         <translation>Programi tani do të ndalet, për t’ju lejuar të përpunoni çfarëdo kartelash te drejtoria e punës. Përzgjidhni Po që të përpunoni menunë e nisjeve, ose përzgjidhni Jo, për të anashkaluar këtë hap dhe të vazhdoni me krijimin e fotografimit.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="840"/>
+        <location filename="../src/mainwindow.cpp" line="854"/>
         <source>Revert the exclusion list to the default file? This will overwrite your current exclusions.</source>
         <translation>Të rikthehet lista e përjashtimeve te kartela parazgjedhje? Kjo do të mbishkruajë përjashtimet tuaja ekzistuese.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="920"/>
+        <location filename="../src/mainwindow.cpp" line="934"/>
         <source>About %1</source>
         <translation>Mbi %1</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="922"/>
+        <location filename="../src/mainwindow.cpp" line="936"/>
         <source>Version: </source>
         <translation>Version:</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="923"/>
+        <location filename="../src/mainwindow.cpp" line="937"/>
         <source>Program for creating a live-CD from the running system for MX Linux</source>
         <translation>Program për krijimin e një CD-je sistemi MX Linux “live” që nga sistemi që po xhironi</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="925"/>
+        <location filename="../src/mainwindow.cpp" line="939"/>
         <source>Copyright (c) MX Linux</source>
         <translation>Të drejta kopjimi (c) MX Linux</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="927"/>
+        <location filename="../src/mainwindow.cpp" line="941"/>
         <source>%1 License</source>
         <translation>Licencë %1</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="941"/>
+        <location filename="../src/mainwindow.cpp" line="955"/>
         <source>%1 Help</source>
         <translation>Ndihmë për %1</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="946"/>
+        <location filename="../src/mainwindow.cpp" line="960"/>
         <source>Select Snapshot Directory</source>
         <translation>Përzgjidhni Drejtori Fotografimi</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="967"/>
+        <location filename="../src/mainwindow.cpp" line="968"/>
+        <source>Insufficient free space in the selected directory. Please choose a different location.</source>
+        <translation>Hapësirë e lirë e pamjaftueshme në drejtorinë e përzgjedhur. Ju lutemi, përzgjidhni një tjetër vend.</translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="988"/>
         <source>Confirmation</source>
         <translation>Ripohim</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="967"/>
+        <location filename="../src/mainwindow.cpp" line="988"/>
         <source>Are you sure you want to quit the application?</source>
         <translation>Jeni i sigurt se doni të mbyllet aplikacioni?</translation>
     </message>
@@ -878,161 +905,161 @@
     <message>
         <location filename="../src/main.cpp" line="213"/>
         <location filename="../src/main.cpp" line="281"/>
-        <location filename="../src/settings.cpp" line="519"/>
         <location filename="../src/settings.cpp" line="527"/>
-        <location filename="../src/settings.cpp" line="1057"/>
-        <location filename="../src/settings.cpp" line="1151"/>
+        <location filename="../src/settings.cpp" line="535"/>
+        <location filename="../src/settings.cpp" line="1065"/>
+        <location filename="../src/settings.cpp" line="1159"/>
         <source>Error</source>
         <translation>Gabim</translation>
     </message>
     <message>
         <location filename="../src/main.cpp" line="280"/>
-        <location filename="../src/settings.cpp" line="526"/>
+        <location filename="../src/settings.cpp" line="534"/>
         <source>Current kernel doesn&apos;t support Squashfs, cannot continue.</source>
         <translation>Kerneli i tanishëm nuk mbulon Squashfs, s’vazhdohet dot.</translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="112"/>
+        <location filename="../src/settings.cpp" line="113"/>
         <source>Failed to initialize configuration</source>
         <translation>S’u arrit të bëhej gati formësimi</translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="146"/>
+        <location filename="../src/settings.cpp" line="147"/>
         <source>Configuration validation failed</source>
         <translation>Vlerësimi i formësimit dështoi</translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="151"/>
+        <location filename="../src/settings.cpp" line="152"/>
         <source>Exception during initialization: %1</source>
         <translation>Gabim gjatë gatitjeje: %1</translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="154"/>
+        <location filename="../src/settings.cpp" line="155"/>
         <source>Unknown exception during initialization</source>
         <translation>Gabim i panjohur gjatë gatitjeje</translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="185"/>
+        <location filename="../src/settings.cpp" line="186"/>
         <source>Could not create work directory. </source>
         <translation>S’u krijua dot drejtori pune.</translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="209"/>
+        <location filename="../src/settings.cpp" line="210"/>
         <source>Could not create temp directory:</source>
         <translation>S’u krijua dot drejtori e përkohshme:</translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="210"/>
+        <location filename="../src/settings.cpp" line="211"/>
         <source>Please check that the parent directory exists and is writable:</source>
         <translation>Ju lutemi, kontrolloni se drejtoria mëmë ekziston dhe është e shkrueshme:</translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="228"/>
+        <location filename="../src/settings.cpp" line="229"/>
         <source>Compression format &apos;%1&apos; is not supported by the current kernel</source>
         <translation>Formati &apos;%1&apos; i ngjeshjeve nuk mbulohet nga kerneli i tanishëm</translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="234"/>
+        <location filename="../src/settings.cpp" line="235"/>
         <source>Invalid cores setting: %1. Must be between 1 and %2</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="240"/>
+        <location filename="../src/settings.cpp" line="241"/>
         <source>Invalid throttle setting: %1. Must be between 0 and 20</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="246"/>
+        <location filename="../src/settings.cpp" line="247"/>
         <source>Snapshot directory cannot be empty</source>
         <translation>Drejtoria e fotografimeve të sistemit s’mund të jetë e zbrazët</translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="254"/>
+        <location filename="../src/settings.cpp" line="255"/>
         <source>Snapshot name cannot be empty</source>
         <translation>Emri i fotografimit të sistemit s’mund të jetë i zbrazët</translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="260"/>
+        <location filename="../src/settings.cpp" line="261"/>
         <source>Snapshot name contains invalid characters: %1</source>
         <translation>Emri i drejtorisë së fotografimeve të sistemit përmban një shenjë të pavlefshme: %1</translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="266"/>
+        <location filename="../src/settings.cpp" line="267"/>
         <source>Kernel version cannot be empty</source>
         <translation>Versioni i kernelit s’mund të jetë i zbrazët</translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="271"/>
+        <location filename="../src/settings.cpp" line="272"/>
         <source>Kernel file not found: /boot/vmlinuz-%1</source>
         <translation>S’u gjet kartelë kerneli: /boot/vmlinuz-%1</translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="277"/>
+        <location filename="../src/settings.cpp" line="278"/>
         <source>Kernel %1 doesn&apos;t support Squashfs</source>
         <translation>Kerneli %1 nuk mbulon Squashfs</translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="301"/>
+        <location filename="../src/settings.cpp" line="309"/>
         <source>Exclusion file does not exist: %1</source>
         <translation>Kartela e përjashtimeve s’ekziston: %1</translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="310"/>
+        <location filename="../src/settings.cpp" line="318"/>
         <source>Unbalanced quotes in exclusion list</source>
         <translation>Thonjëza të pambylluara te listë përjashtimesh</translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="335"/>
+        <location filename="../src/settings.cpp" line="343"/>
         <source>Insufficient free space: %1 KiB available, minimum %2 KiB required</source>
         <translation>Hapësirë e lirë e pamjaftueshme: %1 KiB të lirë, minimum %2 KiB i domosdoshëm</translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="342"/>
+        <location filename="../src/settings.cpp" line="350"/>
         <source>Insufficient free space in work directory: %1 KiB available, minimum %2 KiB required</source>
         <translation>Hapësirë e lirë e pamjaftueshme në drejtori pune: %1 KiB të lirë, minimum i domosdoshëm %2 KiB</translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="357"/>
+        <location filename="../src/settings.cpp" line="365"/>
         <source>Failed to determine number of CPU cores</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="363"/>
+        <location filename="../src/settings.cpp" line="371"/>
         <source>Configuration file does not exist: %1</source>
         <translation>Kartela e formësimit s’ekziston: %1</translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="364"/>
+        <location filename="../src/settings.cpp" line="372"/>
         <source>Using default settings</source>
         <translation>Po përdoren rregullimet parazgjedhje</translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="366"/>
+        <location filename="../src/settings.cpp" line="374"/>
         <source>Cannot read configuration file: %1</source>
         <translation>S’lexohet dot kartelë formësimi: %1</translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="367"/>
+        <location filename="../src/settings.cpp" line="375"/>
         <source>Error: %1</source>
         <translation>Gabim: %1</translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="377"/>
+        <location filename="../src/settings.cpp" line="385"/>
         <source>Required tool not found: %1</source>
         <translation>S’u gjet mjet i domosdoshëm: %1</translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="386"/>
+        <location filename="../src/settings.cpp" line="394"/>
         <source>Required directory not found: %1</source>
         <translation>S’u gjet drejtori e domosdoshme: %1</translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="405"/>
+        <location filename="../src/settings.cpp" line="413"/>
         <source>Initialization Error</source>
         <translation>Gabim Gatitjeje</translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="406"/>
+        <location filename="../src/settings.cpp" line="414"/>
         <source>Failed to initialize application settings:
 
 %1</source>
@@ -1041,47 +1068,47 @@
 %1</translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="517"/>
+        <location filename="../src/settings.cpp" line="525"/>
         <source>Could not find a usable kernel</source>
         <translation>S’u gjet dot një kernel i përdorshëm</translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="518"/>
+        <location filename="../src/settings.cpp" line="526"/>
         <source>Searched for kernel files in /boot/ but none were found or accessible.</source>
         <translation>U kërkua për kartela kerneli në /boot/, por s’u gjet ndonjë, apo e përdorshme.</translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="539"/>
+        <location filename="../src/settings.cpp" line="547"/>
         <source>No users found in the system</source>
         <translation>Te sistemi s’u gjetën përdorues</translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="542"/>
+        <location filename="../src/settings.cpp" line="550"/>
         <source>Failed to determine system information</source>
         <translation>S’u arrit të përcaktohet informacion sistemi</translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="636"/>
+        <location filename="../src/settings.cpp" line="644"/>
         <source>Used space on / (root): </source>
         <translation>Hapësirë e përdorur në / (rrënjë): </translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="639"/>
+        <location filename="../src/settings.cpp" line="647"/>
         <source>estimated</source>
         <translation>afërsisht</translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="648"/>
+        <location filename="../src/settings.cpp" line="656"/>
         <source>Used space on /home: </source>
         <translation>Hapësirë e përdorur në /home: </translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="704"/>
+        <location filename="../src/settings.cpp" line="712"/>
         <source>Free space on %1, where snapshot folder is placed: </source>
         <translation>Hapësirë e lirë në %1, ku vendoset dosja e fotografimeve: </translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="708"/>
+        <location filename="../src/settings.cpp" line="716"/>
         <source>The free space should be sufficient to hold the compressed data from / and /home
 
       If necessary, you can create more available space
@@ -1096,68 +1123,68 @@
 </translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="722"/>
+        <location filename="../src/settings.cpp" line="730"/>
         <source>Desktop</source>
         <translation>Desktop</translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="723"/>
+        <location filename="../src/settings.cpp" line="731"/>
         <source>Documents</source>
         <translation>Dokumente</translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="724"/>
+        <location filename="../src/settings.cpp" line="732"/>
         <source>Downloads</source>
         <translation>Shkarkime</translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="725"/>
+        <location filename="../src/settings.cpp" line="733"/>
         <source>Flatpaks</source>
         <translation>Paketime Flatpak</translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="726"/>
+        <location filename="../src/settings.cpp" line="734"/>
         <source>Music</source>
         <translation>Muzikë</translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="727"/>
+        <location filename="../src/settings.cpp" line="735"/>
         <source>Networks</source>
         <translation>Rrjete</translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="728"/>
+        <location filename="../src/settings.cpp" line="736"/>
         <source>Pictures</source>
         <translation>Foto</translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="730"/>
+        <location filename="../src/settings.cpp" line="738"/>
         <source>Videos</source>
         <translation>Video</translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="879"/>
+        <location filename="../src/settings.cpp" line="887"/>
         <source>Error reading system configuration file: %1</source>
         <translation>Gabim në lexim kartele formësimi: %1</translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="887"/>
+        <location filename="../src/settings.cpp" line="895"/>
         <source>Error accessing user configuration</source>
         <translation>Gabim në hyrje te formësim përdoruesi</translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="939"/>
+        <location filename="../src/settings.cpp" line="947"/>
         <source>Could not copy exclusion file from %1 to %2</source>
         <translation>S’u kopjua dot kartelë përjashtimesh nga %1 në %2</translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="964"/>
+        <location filename="../src/settings.cpp" line="972"/>
         <source>Invalid stored cores setting (%1). Using detected CPU count: %2</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="1055"/>
-        <location filename="../src/settings.cpp" line="1149"/>
+        <location filename="../src/settings.cpp" line="1063"/>
+        <location filename="../src/settings.cpp" line="1157"/>
         <source>Output file %1 already exists. Please use another file name, or delete the existent file.</source>
         <translation>Kartela përfundim %1 ekziston tashmë. Ju lutemi, përdorni një tjetër emër kartele, ose fshini kartelën ekzistuese.</translation>
     </message>
@@ -1186,146 +1213,146 @@
 <context>
     <name>Work</name>
     <message>
-        <location filename="../src/work.cpp" line="144"/>
+        <location filename="../src/work.cpp" line="147"/>
         <source>Cleaning...</source>
         <translation>Po pastrohet…</translation>
     </message>
     <message>
-        <location filename="../src/work.cpp" line="160"/>
-        <location filename="../src/work.cpp" line="416"/>
+        <location filename="../src/work.cpp" line="163"/>
+        <location filename="../src/work.cpp" line="420"/>
         <source>Done</source>
         <translation>U bë</translation>
     </message>
     <message>
-        <location filename="../src/work.cpp" line="172"/>
+        <location filename="../src/work.cpp" line="175"/>
         <source>Interrupted or failed to complete</source>
         <translation>U ndërpre, ose s’u arrit të plotësohej</translation>
     </message>
     <message>
-        <location filename="../src/work.cpp" line="208"/>
-        <location filename="../src/work.cpp" line="372"/>
-        <location filename="../src/work.cpp" line="396"/>
-        <location filename="../src/work.cpp" line="434"/>
-        <location filename="../src/work.cpp" line="573"/>
-        <location filename="../src/work.cpp" line="607"/>
-        <location filename="../src/work.cpp" line="616"/>
-        <location filename="../src/work.cpp" line="622"/>
+        <location filename="../src/work.cpp" line="211"/>
+        <location filename="../src/work.cpp" line="376"/>
+        <location filename="../src/work.cpp" line="400"/>
+        <location filename="../src/work.cpp" line="438"/>
+        <location filename="../src/work.cpp" line="578"/>
+        <location filename="../src/work.cpp" line="612"/>
+        <location filename="../src/work.cpp" line="621"/>
+        <location filename="../src/work.cpp" line="627"/>
         <source>Error</source>
         <translation>Gabim</translation>
     </message>
     <message>
-        <location filename="../src/work.cpp" line="209"/>
+        <location filename="../src/work.cpp" line="212"/>
         <source>There&apos;s not enough free space on your target disk, you need at least %1</source>
         <translation>S’ka hapësirë të mjaftë të lirë në diskun ku synoni, ju duhen të paktën %1</translation>
     </message>
     <message>
-        <location filename="../src/work.cpp" line="212"/>
+        <location filename="../src/work.cpp" line="215"/>
         <source>You have %1 free space on %2</source>
         <translation>Keni %1 hapësirë të lirë në %2</translation>
     </message>
     <message>
-        <location filename="../src/work.cpp" line="215"/>
+        <location filename="../src/work.cpp" line="218"/>
         <source>If you are sure you have enough free space rerun the program with -o/--override-size option</source>
         <translation>Nëse jeni i sigurt se keni hapësirë të mjaftueshme, rixhironi programin me mundësinë -o/--override-size</translation>
     </message>
     <message>
-        <location filename="../src/work.cpp" line="300"/>
+        <location filename="../src/work.cpp" line="304"/>
         <source>Copying the new-iso filesystem...</source>
         <translation>Po kopjohet sistemi i ri i kartelave ISO…</translation>
     </message>
     <message>
-        <location filename="../src/work.cpp" line="312"/>
+        <location filename="../src/work.cpp" line="316"/>
         <source>Could not create temp directory. </source>
         <translation>S’u krijua dot drejtori e përkohshme. </translation>
     </message>
     <message>
-        <location filename="../src/work.cpp" line="369"/>
+        <location filename="../src/work.cpp" line="373"/>
         <source>Squashing filesystem...</source>
         <translation>Po ngjishet sistemi i kartelave…</translation>
     </message>
     <message>
-        <location filename="../src/work.cpp" line="373"/>
+        <location filename="../src/work.cpp" line="377"/>
         <source>Could not create linuxfs file, please check /var/log/%1.log</source>
         <translation>S’u krijua dot kartelë linuxfs, ju lutemi, shihni te /var/log/%1.log</translation>
     </message>
     <message>
-        <location filename="../src/work.cpp" line="393"/>
+        <location filename="../src/work.cpp" line="397"/>
         <source>Creating CD/DVD image file...</source>
         <translation>Po krijohet kartelë pamje CD/DVD…</translation>
     </message>
     <message>
-        <location filename="../src/work.cpp" line="397"/>
+        <location filename="../src/work.cpp" line="401"/>
         <source>Could not create ISO file, please check whether you have enough space on the destination partition.</source>
         <translation>S’u krijua dot kartelë ISO, ju lutemi, kontrolloni nëse keni hapësirë të mjaftueshme te pjesa e synuar.</translation>
     </message>
     <message>
-        <location filename="../src/work.cpp" line="403"/>
+        <location filename="../src/work.cpp" line="407"/>
         <source>Making hybrid iso</source>
         <translation>Po krijohet ISO hibride</translation>
     </message>
     <message>
-        <location filename="../src/work.cpp" line="421"/>
+        <location filename="../src/work.cpp" line="425"/>
         <source>Success</source>
         <translation>Sukses</translation>
     </message>
     <message>
-        <location filename="../src/work.cpp" line="422"/>
+        <location filename="../src/work.cpp" line="426"/>
         <source>MX Snapshot completed successfully!</source>
         <translation>MX Snapshot u plotësua me sukses!</translation>
     </message>
     <message>
-        <location filename="../src/work.cpp" line="423"/>
+        <location filename="../src/work.cpp" line="427"/>
         <source>Snapshot took %1 to finish.</source>
         <translation>Fotografimit iu deshën %1 të plotësohet.</translation>
     </message>
     <message>
-        <location filename="../src/work.cpp" line="424"/>
+        <location filename="../src/work.cpp" line="428"/>
         <source>Thanks for using MX Snapshot, run MX Live USB Maker next!</source>
         <translation>Faleminderit që përdorni MX Snapshot, pas kësaj xhironi MX Live USB Maker!</translation>
     </message>
     <message>
-        <location filename="../src/work.cpp" line="431"/>
+        <location filename="../src/work.cpp" line="435"/>
         <source>Installing </source>
         <translation>Po instalohet </translation>
     </message>
     <message>
-        <location filename="../src/work.cpp" line="434"/>
+        <location filename="../src/work.cpp" line="438"/>
         <source>Could not install </source>
         <translation>S’u instalua dot </translation>
     </message>
     <message>
-        <location filename="../src/work.cpp" line="444"/>
+        <location filename="../src/work.cpp" line="448"/>
         <source>Calculating checksum...</source>
         <translation>Po llogaritet vlera e checksum-it…</translation>
     </message>
     <message>
-        <location filename="../src/work.cpp" line="483"/>
+        <location filename="../src/work.cpp" line="488"/>
         <source>Building new initrd...</source>
         <translation>Po ndërtohet initrd i ri…</translation>
     </message>
     <message>
-        <location filename="../src/work.cpp" line="574"/>
+        <location filename="../src/work.cpp" line="579"/>
         <source>Could not create working directory. </source>
         <translation>S’u krijua dot drejtori pune. </translation>
     </message>
     <message>
-        <location filename="../src/work.cpp" line="608"/>
+        <location filename="../src/work.cpp" line="613"/>
         <source>Could not prepare a safe bind-root overlay. Snapshot cannot continue.</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/work.cpp" line="617"/>
-        <location filename="../src/work.cpp" line="623"/>
+        <location filename="../src/work.cpp" line="622"/>
+        <location filename="../src/work.cpp" line="628"/>
         <source>Could not prepare the snapshot bind-root environment.</source>
-        <translation type="unfinished"/>
+        <translation>S’u përgatit dot mjedis bind-root fotografimi sistemi.</translation>
     </message>
     <message>
-        <location filename="../src/work.cpp" line="742"/>
+        <location filename="../src/work.cpp" line="931"/>
         <source>Calculating total size of excluded files...</source>
         <translation>Po njehsohet madhësia gjithsej e kartelave të përjashtuara…</translation>
     </message>
     <message>
-        <location filename="../src/work.cpp" line="752"/>
+        <location filename="../src/work.cpp" line="957"/>
         <source>Calculating size of root...</source>
         <translation>Po njehsohet madhësia e rrënjës…</translation>
     </message>

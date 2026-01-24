@@ -58,7 +58,7 @@
       </attribute>
       <layout class="QGridLayout" name="gridLayout">
        <item row="3" column="0" colspan="4">
-        <widget class="QTreeWidget" name="treePopularApps">
+        <widget class="QTreeView" name="treePopularApps">
          <property name="frameShadow">
           <enum>QFrame::Shadow::Raised</enum>
          </property>
@@ -68,31 +68,6 @@
          <property name="selectionMode">
           <enum>QAbstractItemView::SelectionMode::SingleSelection</enum>
          </property>
-         <column>
-          <property name="text">
-           <string>Category</string>
-          </property>
-         </column>
-         <column>
-          <property name="text">
-           <string/>
-          </property>
-         </column>
-         <column>
-          <property name="text">
-           <string>Package</string>
-          </property>
-         </column>
-         <column>
-          <property name="text">
-           <string>Info</string>
-          </property>
-         </column>
-         <column>
-          <property name="text">
-           <string>Description</string>
-          </property>
-         </column>
         </widget>
        </item>
        <item row="0" column="0" rowspan="2" colspan="2">
@@ -142,6 +117,18 @@
        </item>
        <item row="2" column="0" colspan="2">
         <widget class="QPushButton" name="iconInstalledPackages_5">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="focusPolicy">
+          <enum>Qt::FocusPolicy::NoFocus</enum>
+         </property>
          <property name="styleSheet">
           <string notr="true">text-align: left</string>
          </property>
@@ -196,6 +183,18 @@
        </item>
        <item row="2" column="0" colspan="2">
         <widget class="QPushButton" name="iconInstalledPackages">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="focusPolicy">
+          <enum>Qt::FocusPolicy::NoFocus</enum>
+         </property>
          <property name="styleSheet">
           <string notr="true">text-align: left</string>
          </property>
@@ -401,45 +400,10 @@
         </widget>
        </item>
        <item row="3" column="0" colspan="3">
-        <widget class="QTreeWidget" name="treeEnabled">
+        <widget class="QTreeView" name="treeEnabled">
          <property name="sortingEnabled">
-          <bool>false</bool>
+          <bool>true</bool>
          </property>
-         <column>
-          <property name="text">
-           <string notr="true"/>
-          </property>
-         </column>
-         <column>
-          <property name="text">
-           <string>Package Name</string>
-          </property>
-         </column>
-         <column>
-          <property name="text">
-           <string>Repo Version</string>
-          </property>
-         </column>
-         <column>
-          <property name="text">
-           <string>Installed Version</string>
-          </property>
-         </column>
-         <column>
-          <property name="text">
-           <string>Description</string>
-          </property>
-         </column>
-         <column>
-          <property name="text">
-           <string notr="true">Status</string>
-          </property>
-         </column>
-         <column>
-          <property name="text">
-           <string notr="true"/>
-          </property>
-         </column>
         </widget>
        </item>
        <item row="1" column="0" colspan="2">
@@ -452,6 +416,9 @@
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
+         </property>
+         <property name="focusPolicy">
+          <enum>Qt::FocusPolicy::NoFocus</enum>
          </property>
          <property name="styleSheet">
           <string notr="true">text-align: left</string>
@@ -712,6 +679,18 @@
        </item>
        <item row="1" column="0" colspan="4">
         <widget class="QPushButton" name="iconInstalledPackages_2">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="focusPolicy">
+          <enum>Qt::FocusPolicy::NoFocus</enum>
+         </property>
          <property name="styleSheet">
           <string notr="true">text-align: left</string>
          </property>
@@ -739,6 +718,9 @@
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
+         </property>
+         <property name="focusPolicy">
+          <enum>Qt::FocusPolicy::NoFocus</enum>
          </property>
          <property name="styleSheet">
           <string notr="true">text-align: left</string>
@@ -808,40 +790,10 @@
         </widget>
        </item>
        <item row="2" column="0" colspan="5">
-        <widget class="QTreeWidget" name="treeMXtest">
+        <widget class="QTreeView" name="treeMXtest">
          <property name="sortingEnabled">
-          <bool>false</bool>
+          <bool>true</bool>
          </property>
-         <column>
-          <property name="text">
-           <string notr="true"/>
-          </property>
-         </column>
-         <column>
-          <property name="text">
-           <string>Package Name</string>
-          </property>
-         </column>
-         <column>
-          <property name="text">
-           <string>Repo Version</string>
-          </property>
-         </column>
-         <column>
-          <property name="text">
-           <string>Installed Version</string>
-          </property>
-         </column>
-         <column>
-          <property name="text">
-           <string>Description</string>
-          </property>
-         </column>
-         <column>
-          <property name="text">
-           <string notr="true">Status</string>
-          </property>
-         </column>
         </widget>
        </item>
       </layout>
@@ -867,6 +819,9 @@
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
+         </property>
+         <property name="focusPolicy">
+          <enum>Qt::FocusPolicy::NoFocus</enum>
          </property>
          <property name="styleSheet">
           <string notr="true">text-align: left</string>
@@ -1078,37 +1033,10 @@
         </widget>
        </item>
        <item row="2" column="0" colspan="5">
-        <widget class="QTreeWidget" name="treeBackports">
-         <column>
-          <property name="text">
-           <string notr="true"/>
-          </property>
-         </column>
-         <column>
-          <property name="text">
-           <string>Package Name</string>
-          </property>
-         </column>
-         <column>
-          <property name="text">
-           <string>Repo Version</string>
-          </property>
-         </column>
-         <column>
-          <property name="text">
-           <string>Installed Version</string>
-          </property>
-         </column>
-         <column>
-          <property name="text">
-           <string>Description</string>
-          </property>
-         </column>
-         <column>
-          <property name="text">
-           <string notr="true">Status</string>
-          </property>
-         </column>
+        <widget class="QTreeView" name="treeBackports">
+         <property name="sortingEnabled">
+          <bool>true</bool>
+         </property>
         </widget>
        </item>
        <item row="1" column="4">
@@ -1190,6 +1118,18 @@
        </item>
        <item row="1" column="0" colspan="4">
         <widget class="QPushButton" name="iconInstalledPackages_3">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="focusPolicy">
+          <enum>Qt::FocusPolicy::NoFocus</enum>
+         </property>
          <property name="styleSheet">
           <string notr="true">text-align: left</string>
          </property>
@@ -1259,7 +1199,7 @@
         </spacer>
        </item>
        <item row="3" column="0" colspan="5">
-        <widget class="QTreeWidget" name="treeFlatpak">
+        <widget class="QTreeView" name="treeFlatpak">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
            <horstretch>0</horstretch>
@@ -1267,53 +1207,8 @@
           </sizepolicy>
          </property>
          <property name="sortingEnabled">
-          <bool>false</bool>
+          <bool>true</bool>
          </property>
-         <column>
-          <property name="text">
-           <string notr="true"/>
-          </property>
-         </column>
-         <column>
-          <property name="text">
-           <string>Short Name</string>
-          </property>
-         </column>
-         <column>
-          <property name="text">
-           <string>Full Package Name</string>
-          </property>
-         </column>
-         <column>
-         <property name="text">
-          <string>Version</string>
-         </property>
-        </column>
-        <column>
-         <property name="text">
-          <string>Branch</string>
-         </property>
-        </column>
-        <column>
-         <property name="text">
-          <string>Size</string>
-         </property>
-        </column>
-        <column>
-          <property name="text">
-           <string notr="true">Status</string>
-          </property>
-         </column>
-         <column>
-          <property name="text">
-           <string notr="true">Duplication</string>
-          </property>
-         </column>
-         <column>
-          <property name="text">
-           <string notr="true">Full string</string>
-          </property>
-         </column>
         </widget>
        </item>
        <item row="4" column="0" colspan="5">
@@ -1459,6 +1354,18 @@
        </item>
        <item row="1" column="0" colspan="3">
         <widget class="QPushButton" name="iconInstalledPackages_4">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="focusPolicy">
+          <enum>Qt::FocusPolicy::NoFocus</enum>
+         </property>
          <property name="styleSheet">
           <string notr="true">text-align: left</string>
          </property>

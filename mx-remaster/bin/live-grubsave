@@ -4,7 +4,7 @@
 [ -z "$BASH_VERSION" ] && exec "$0" "$@"
 
 ME="$0"
-VERSION="230518-01"
+VERSION="260116-01"
 
 # PATH sanity
 PATH=/usr/local/bin:/usr/bin:/usr/sbin
@@ -165,6 +165,7 @@ fill_tables() {
         bootsave
         checkmd5
         gfxsave grubsave
+        init
         menu menus
         noremaster
         nosplash

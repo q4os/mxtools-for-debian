@@ -19,6 +19,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this package. If not, see <http://www.gnu.org/licenses/>.
  **********************************************************************/
+#define QT_USE_QSTRINGBUILDER
 #include "about.h"
 
 #include <QApplication>
@@ -37,7 +38,7 @@
 void displayDoc(const QString &url, const QString &title)
 {
     bool started_as_root = false;
-    if (qEnvironmentVariable("HOME") == "root") {
+    if (qEnvironmentVariable("HOME") == QLatin1String("root")) {
         started_as_root = true;
         qputenv("HOME", starting_home.toUtf8()); // Use original home for theming purposes
     }
@@ -77,28 +78,28 @@ void displayAboutMsgBox(const QString &title, const QString &message, const QStr
     if (msgBox.clickedButton() == btnLicense) {
         displayDoc(licence_url, license_title);
     } else if (msgBox.clickedButton() == btnChangelog) {
-        auto *changelog = new QDialog;
-        changelog->setWindowTitle(QObject::tr("Changelog"));
-        changelog->resize(width, height);
+        QDialog changelog;
+        changelog.setWindowTitle(QObject::tr("Changelog"));
+        changelog.resize(width, height);
 
-        auto *text = new QTextEdit(changelog);
+        auto *text = new QTextEdit(&changelog);
         text->setReadOnly(true);
         QProcess proc;
         proc.start(
             "zless",
-            {"/usr/share/doc/" + QFileInfo(QCoreApplication::applicationFilePath()).fileName() + "/changelog.gz"},
+            {"/usr/share/doc/" % QFileInfo(QCoreApplication::applicationFilePath()).fileName() % "/changelog.gz"},
             QIODevice::ReadOnly);
         proc.waitForFinished();
         text->setText(proc.readAllStandardOutput());
 
-        auto *btnClose = new QPushButton(QObject::tr("&Close"), changelog);
+        auto *btnClose = new QPushButton(QObject::tr("&Close"), &changelog);
         btnClose->setIcon(QIcon::fromTheme("window-close"));
-        QObject::connect(btnClose, &QPushButton::clicked, changelog, &QDialog::close);
+        QObject::connect(btnClose, &QPushButton::clicked, &changelog, &QDialog::close);
 
-        auto *layout = new QVBoxLayout(changelog);
+        auto *layout = new QVBoxLayout(&changelog);
         layout->addWidget(text);
         layout->addWidget(btnClose);
-        changelog->setLayout(layout);
-        changelog->exec();
+        changelog.setLayout(layout);
+        changelog.exec();
     }
 }

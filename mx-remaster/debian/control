@@ -4,7 +4,7 @@ Priority: required
 Maintainer: Adrian <adrian@mxlinux.org>
 Build-Depends: debhelper (>= 9.20120115)
 Standards-Version: 3.9.4
-Homepage: http://mepis.org
+Homepage: http://mxlinux.org
 
 Package: mx-remaster
 Depends: antix-libs, whois, perl-base

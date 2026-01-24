@@ -30,14 +30,15 @@ class Service
 
 public:
     Service() = default;
-    explicit Service(QString name, bool running = false, bool enabled = false);
+    explicit Service(QString name, bool running = false, bool enabled = false, bool isUserService = false);
     [[nodiscard]] QString getDescription() const;
     [[nodiscard]] QString getInfo() const;
     [[nodiscard]] QString getName() const;
     [[nodiscard]] bool isEnabled() const noexcept;
     [[nodiscard]] bool isRunning() const;
+    [[nodiscard]] bool isUserService() const noexcept;
     [[nodiscard]] static QString getInit();
-    [[nodiscard]] static bool isEnabled(const QString &name);
+    [[nodiscard]] static bool isEnabled(const QString &name, bool isUserService = false);
     bool disable();
     bool enable();
     bool start();
@@ -49,6 +50,7 @@ private:
     QString name;
     bool running = false;
     bool enabled = false;
+    bool userService = false;
     static QString getInfoFromFile(const QString &name);
 };
 

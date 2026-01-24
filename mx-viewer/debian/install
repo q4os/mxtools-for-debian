@@ -1,5 +1,6 @@
-help/*			usr/share/doc/mx-viewer
-mx-viewer		usr/bin
-mx-viewer.desktop	usr/share/applications
-mx-viewer.png		usr/share/icons/hicolor/24x24/apps
-mx-viewer.png		usr/share/pixmaps
+help/*				usr/share/doc/mx-viewer
+mx-viewer.desktop		usr/share/applications
+mx-viewer.png			usr/share/icons/hicolor/24x24/apps
+mx-viewer.png			usr/share/pixmaps
+obj-*/*.qm			usr/share/mx-viewer/locale
+obj-*/mx-viewer			usr/bin

@@ -4,12 +4,12 @@
     <message>
         <location filename="../src/cmd.cpp" line="70"/>
         <source>Administrator Access Required</source>
-        <translation>Järjestelmänvalvojan oikeudet vaaditaan</translation>
+        <translation>Pääkäyttäjän oikeudet vaaditaan</translation>
     </message>
     <message>
         <location filename="../src/cmd.cpp" line="71"/>
         <source>This operation requires administrator privileges. Please restart the application and enter your password when prompted.</source>
-        <translation>Toiminto vaatii järjestelmänvalvojan oikeudet. Käynnistä sovellus uudelleen ja anna salasanasi pyydettäessä.</translation>
+        <translation>Toiminto vaatii pääkäyttäjän oikeudet. Käynnistä sovellus uudelleen ja anna salasanasi pyydettäessä.</translation>
     </message>
 </context>
 <context>
@@ -25,7 +25,7 @@
         <location filename="../src/mainwindow.cpp" line="167"/>
         <location filename="../src/mainwindow.cpp" line="402"/>
         <source>&amp;Enable at boot</source>
-        <translation>&amp;Ota käyttöön käynnistyksessä</translation>
+        <translation>&amp;Käynnistä käynnistyksessä</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="62"/>
@@ -94,18 +94,18 @@
         <location filename="../src/mainwindow.ui" line="240"/>
         <location filename="../src/mainwindow.cpp" line="332"/>
         <source>Services enabled at boot</source>
-        <translation>Palvelut käytössä käynnistyksen yhteydessä</translation>
+        <translation>Käynnistyksessä käynnistyvät palvelut</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="245"/>
         <location filename="../src/mainwindow.cpp" line="333"/>
         <source>Services disabled at boot</source>
-        <translation>Palvelut pois käytöstä käynnistyksen yhteydessä</translation>
+        <translation>Poistetut palvelut käynnistyksen aikana</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="288"/>
         <source>&amp;Refresh services</source>
-        <translation type="unfinished"/>
+        <translation>&amp;Virkistä palvelut</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="301"/>
@@ -123,7 +123,7 @@
     <message>
         <location filename="../src/mainwindow.ui" line="272"/>
         <source>This tool lists services and daemons (processes that run in the background) found on this system. Be careful to avoid stopping something that might disrupt a critical component; best to leave it alone if you don&apos;t know what it is.</source>
-        <translation>Työkalu listaa järjestelmästä löytyvät palvelut ja taustaprosessit (taustalla suoritettavat prosessit). Varo pysäyttämästä kriittisiä komponentteja. parempi jättää se sikseen, jos et tiedä mistä on kyse.</translation>
+        <translation>Työkalu listaa palvelut ja taustaprosessit (taustalla suoritettavat prosessit). Älä pysäytä kriittisiä komponentteja. parempi jättää tekemättä, jos et tiedä mistä on kyse.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="66"/>
@@ -148,7 +148,7 @@
     <message>
         <location filename="../src/mainwindow.cpp" line="160"/>
         <source>&amp;Disable at boot</source>
-        <translation>&amp;Poista käytöstä käynnistyksessä</translation>
+        <translation>&amp;Poista käynnistyksestä</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="366"/>
@@ -158,7 +158,7 @@
     <message>
         <location filename="../src/mainwindow.cpp" line="371"/>
         <source>%1 &lt;font color=&apos;%2&apos;&gt;enabled&lt;/font&gt; at boot, but not running</source>
-        <translation>%1 käynnistyksessä&lt;font color=&apos;%2&apos;&gt;käytössä&lt;/font&gt;, mutta ei käynnissä</translation>
+        <translation>%1 käynnistetään &lt;font color=&apos;%2&apos;&gt;käyttöön&lt;/font&gt;, mutta ovat valmiustilassa</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="386"/>
@@ -222,7 +222,7 @@
         <location filename="../src/mainwindow.cpp" line="433"/>
         <location filename="../src/mainwindow.cpp" line="436"/>
         <source>Refreshing...</source>
-        <translation type="unfinished"/>
+        <translation>Virkistetään...</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="459"/>

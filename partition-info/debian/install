@@ -1,2 +1,2 @@
-partition-info 	sbin
-efi-install 	sbin
+partition-info 	usr/bin
+efi-install 	usr/bin

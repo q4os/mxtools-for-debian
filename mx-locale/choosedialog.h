@@ -7,16 +7,16 @@
 
 namespace Ui
 {
-class chooseDialog;
+class ChooseDialog;
 }
 
-class chooseDialog : public QDialog
+class ChooseDialog : public QDialog
 {
     Q_OBJECT
 
 public:
-    explicit chooseDialog(QWidget *parent = nullptr);
-    ~chooseDialog();
+    explicit ChooseDialog(QWidget *parent = nullptr);
+    ~ChooseDialog();
 
     QString selection() const;
 
@@ -24,7 +24,7 @@ private slots:
     void textSearch_textChanged();
 
 private:
-    Ui::chooseDialog *ui;
+    Ui::ChooseDialog *ui;
     QHash<QString, QString> localeLib;
 
     void setup();

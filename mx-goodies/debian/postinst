@@ -4,6 +4,7 @@ if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-remov
     #fix misconfiguration in /etc/skel/.bashrc if it exists
 	if [ -e "/etc/skel/.bashrc" ]; then
 		sed -i 's/^\[ -z \$LESS \]/[ -z "\$LESS" ]/' /etc/skel/.bashrc
+		sed -i 's/\(\[ -z "$LESS" \] && \)\(LESS="-R -i"\)/\1export \2/' /etc/skel/.bashrc
 	fi
 
   #don't do anything if update-rc.d is not present

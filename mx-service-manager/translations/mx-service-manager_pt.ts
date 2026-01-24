@@ -105,7 +105,7 @@
     <message>
         <location filename="../src/mainwindow.ui" line="288"/>
         <source>&amp;Refresh services</source>
-        <translation type="unfinished"/>
+        <translation>&amp;Recarregar os serviços</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="301"/>
@@ -222,7 +222,7 @@
         <location filename="../src/mainwindow.cpp" line="433"/>
         <location filename="../src/mainwindow.cpp" line="436"/>
         <source>Refreshing...</source>
-        <translation type="unfinished"/>
+        <translation>A recarregar...</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="459"/>

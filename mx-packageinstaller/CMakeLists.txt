@@ -108,6 +108,12 @@ set(SOURCES
     src/remotes.cpp
     src/about.cpp
     src/cmd.cpp
+    src/models/packagemodel.cpp
+    src/models/packagefilterproxy.cpp
+    src/models/flatpakmodel.cpp
+    src/models/flatpakfilterproxy.cpp
+    src/models/popularmodel.cpp
+    src/models/popularfilterproxy.cpp
 )
 
 set(HEADERS
@@ -121,6 +127,12 @@ set(HEADERS
     src/remotes.h
     src/about.h
     src/cmd.h
+    src/models/packagemodel.h
+    src/models/packagefilterproxy.h
+    src/models/flatpakmodel.h
+    src/models/flatpakfilterproxy.h
+    src/models/popularmodel.h
+    src/models/popularfilterproxy.h
 )
 
 set(UI_FILES
@@ -220,5 +232,6 @@ install(TARGETS mx-packageinstaller
 # Add tests if requested
 if(BUILD_TESTS)
     message(STATUS "Building with tests enabled")
+    enable_testing()
     add_subdirectory(Testing)
 endif()

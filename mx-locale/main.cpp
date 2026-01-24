@@ -24,6 +24,7 @@
 #include <QCommandLineParser>
 #include <QDateTime>
 #include <QDebug>
+#include <QDir>
 #include <QIcon>
 #include <QLibraryInfo>
 #include <QLocale>
@@ -69,8 +70,8 @@ int main(int argc, char *argv[])
     }
 
     QTranslator appTran;
-    if (appTran.load(QApplication::applicationName() + "_" + QLocale().name(),
-                     "/usr/share/" + QApplication::applicationName() + "/locale")) {
+    const QString localePath = QDir(Paths::usrShare).filePath(QApplication::applicationName() + "/locale");
+    if (appTran.load(QApplication::applicationName() + "_" + QLocale().name(), localePath)) {
         QApplication::installTranslator(&appTran);
     }
 

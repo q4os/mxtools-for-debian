@@ -1,3 +1,12 @@
+mx-system-sounds (26.1mx25) mx; urgency=medium
+
+  [timkb4cq]
+  * use libcanberra-gtk3-module
+  [dolphin oracle]
+  * update translations 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 09 Jan 2026 20:39:34 -0500
+
 mx-system-sounds (25.4mx23) mx; urgency=medium
 
   * Update to Qt6

@@ -1,0 +1,45 @@
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA512
+
+Format: 1.8
+Date: Sat, 22 Jul 2023 16:17:15 -0400
+Source: mx-system-sounds
+Binary: mx-system-sounds
+Architecture: i386
+Version: 23.7.02
+Distribution: mx
+Urgency: medium
+Maintainer: Adrian <adrian@mxlinux.org>
+Changed-By: Dolphin Oracle <dolphinoracle@gmail.com>
+Description:
+ mx-system-sounds - MX System Sounds
+Changes:
+ mx-system-sounds (23.7.02) mx; urgency=medium
+ .
+   * update language processing
+Checksums-Sha1:
+ 741e642d0f2da079331b4af4adffa967461e8a9f 10232 mx-system-sounds_23.7.02_i386.buildinfo
+ b09f099b3b9150e6a8feb1a63c6e7c3b70cc8229 69904 mx-system-sounds_23.7.02_i386.deb
+Checksums-Sha256:
+ 1ca8787be9000d0a63c93e5201a7d4d0fd3c83c695a519ad8ada9217f5aa5ae3 10232 mx-system-sounds_23.7.02_i386.buildinfo
+ bdc062ce92648fca9fa4349fbadb23566c91feb87753cce8665a38411da635c4 69904 mx-system-sounds_23.7.02_i386.deb
+Files:
+ e55ba14785dffbc50f9998042a84e7a8 10232 admin optional mx-system-sounds_23.7.02_i386.buildinfo
+ 080df5642bbe325ccf223a87f3de0f6d 69904 admin optional mx-system-sounds_23.7.02_i386.deb
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCgAdFiEE9i7eqjrnCpyZ2sQYm2ih6Lm2N1wFAmS8PG0ACgkQm2ih6Lm2
+N1yAghAAox2VKy0uLn1VHRzjtTL3bUGYfsG+CnBktdKPZwMJn1BzyY4W6YIAwfdu
+H0zNKD98UgD1+Pqx//3Z1BKZ59bT+/4D+3VkEu4Fgni3ODdP2DdHQRxZ+0luZsTb
+ENq1Bj1vf0As2JnwaOC1SQiI3vgzfphA67MdMui5wxQE1wfivPLxxCdhbKNNMI8x
+m/7HT1tEjCeRNgQnqyuHm6CjhEf5g+AynEy62gUM6xV6qu1AoHoaoriHJIsndgkm
+wPS2Drt9i9oP4C+FkYmIddGZOGqszam6YXHF2Rmbkl+/vK2rhs/xkF1kTXZo9SLv
+VplJ+SPhLMtSFDFv++d4h4ElYDbGULL1M3mOYvo+MEYFfZaJe3V42AFy0bMpt+KW
+ccp8zzUUarhThlcVHWRS1Eg5FEZUrYxfKCyvIKAVyqCiDcSdelB78/m2BHfcdBts
+NCQkyHH6E6E62qp9AUpakV8Ex5vZ648eKzxutfGHDnbS4TxhhXPuJKdLTMDjRpH7
+WXv2CRrTnWwe9FgXROAB4XUvWuPGQUMYWgENhbr5RgHlj+QE6C1APbBICcNOGxxK
+yXL25C+QARjGcaYeIk4ph5ZP2C2w88C6iWVXfPEaUVGAlKXaHON9AbydiJPkJBDO
+8jMMMoJ4PZgVd5hDENHJpCQnuNS8bo800JBaR4nWM4VBxY6hrEM=
+=oQ6D
+-----END PGP SIGNATURE-----

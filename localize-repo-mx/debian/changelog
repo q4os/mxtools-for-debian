@@ -1,3 +1,10 @@
+localize-repo-mx (26.01.01) mx; urgency=medium
+
+  * move installed location to /usr/bin
+  * update repo information
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 01 Jan 2026 17:11:10 -0500
+
 localize-repo-mx (25.08.01) mx; urgency=medium
 
   * add vietnam mirror

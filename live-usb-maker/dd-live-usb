@@ -21,6 +21,7 @@ MY_LIB_DIR=$(readlink -f "$MY_DIR/../cli-shell-utils")
    if [ -d "/usr/local/lib/cli-shell-utils" ]; then
        LIB_DIR="/usr/local/lib/cli-shell-utils"
    fi
+LIB_PATH="$MY_LIB_DIR:$LIB_DIR"
    
 export TEXTDOMAIN="cli-shell-utils"
 domain_dir="$MY_DIR/../cli-shell-utils/locale"

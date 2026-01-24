@@ -105,7 +105,7 @@
     <message>
         <location filename="../src/mainwindow.ui" line="288"/>
         <source>&amp;Refresh services</source>
-        <translation type="unfinished"/>
+        <translation>&amp;Uppdatera tjänster</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="301"/>
@@ -123,7 +123,7 @@
     <message>
         <location filename="../src/mainwindow.ui" line="272"/>
         <source>This tool lists services and daemons (processes that run in the background) found on this system. Be careful to avoid stopping something that might disrupt a critical component; best to leave it alone if you don&apos;t know what it is.</source>
-        <translation>Detta verktyg listar tjänster och daemons (processer som körs i bakgrunden) funna i detta system. Var noggrann med att undvika att stoppa något som kanstöra en kritisk komponent; bäst att lämna det i fred om du inte vet vad det är.</translation>
+        <translation>Detta verktyg listar tjänster och daemons (processer som körs i bakgrunden) funna i detta system. Var noggrann med att undvika att stoppa något som kan störa en kritisk komponent; bäst att lämna det i fred om du inte vet vad det är.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="66"/>
@@ -222,7 +222,7 @@
         <location filename="../src/mainwindow.cpp" line="433"/>
         <location filename="../src/mainwindow.cpp" line="436"/>
         <source>Refreshing...</source>
-        <translation type="unfinished"/>
+        <translation>Uppdaterar...</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="459"/>

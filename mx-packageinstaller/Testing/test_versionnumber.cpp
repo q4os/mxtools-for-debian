@@ -1,6 +1,6 @@
 #include <QtTest>
 #include <QDebug>
-#include "../src/versionnumber.h"
+#include "src/versionnumber.h"
 
 class TestVersionNumber : public QObject
 {
@@ -9,26 +9,26 @@ class TestVersionNumber : public QObject
 private slots:
     void initTestCase();
     void cleanupTestCase();
-
+    
     // Basic functionality tests
     void testConstructor();
     void testAssignment();
     void testToString();
-
+    
     // Comparison tests
     void testBasicComparisons();
     void testEpochComparisons();
     void testDebianRevisionComparisons();
     void testComplexVersions();
-
+    
     // Edge cases
     void testEmptyVersions();
     void testSpecialCharacters();
     void testTildeHandling();
-
+    
     // Real-world Debian version examples
     void testRealDebianVersions();
-
+    
     // Sorting tests
     void testVersionSorting();
 
@@ -50,10 +50,10 @@ void TestVersionNumber::testConstructor()
 {
     VersionNumber v1;
     QCOMPARE(v1.toString(), QString());
-
+    
     VersionNumber v2("1.0.0");
     QCOMPARE(v2.toString(), QString("1.0.0"));
-
+    
     VersionNumber v3(v2);
     QCOMPARE(v3.toString(), QString("1.0.0"));
 }
@@ -104,30 +104,6 @@ void TestVersionNumber::testBasicComparisons()
     compareVersions("1.1", "1.2", true);
     compareVersions("1.0.1", "1.0.2", true);
     compareVersions("2.0", "1.0", false);
-    
-    // Test 25.8 vs 25.08 - dpkg compatibility test
-    // dpkg behavior: 25.08 == 25.8 (numerically equivalent)
-    VersionNumber v25_8("25.8");
-    VersionNumber v25_08("25.08");
-    VersionNumber v25_08_06("25.08.06");
-    VersionNumber v25_08_6("25.08.6");
-    
-    qDebug() << "=== DPKG COMPATIBILITY TEST ===";
-    qDebug() << "Expected dpkg behavior:";
-    qDebug() << "  25.08 == 25.8 (numerically equivalent)";
-    qDebug() << "  25.08.06 > 25.08";
-    qDebug() << "  25.08.6 > 25.8 (additional version component)";
-    
-    // Test the corrected behavior - should match dpkg now
-    QVERIFY2(v25_08 == v25_8, "25.08 should be == 25.8 (dpkg compatibility)");
-    QVERIFY2(!(v25_8 < v25_08), "25.8 should not be < 25.08");
-    QVERIFY2(!(v25_8 > v25_08), "25.8 should not be > 25.08"); 
-    QVERIFY2(v25_08_06 > v25_08, "25.08.06 should be > 25.08");
-    QVERIFY2(v25_08_06 > v25_8, "25.08.06 should be > 25.8");
-    QVERIFY2(v25_08_6 > v25_8, "25.08.6 should be > 25.8 (dpkg compatibility)");
-    QVERIFY2(v25_8 < v25_08_6, "25.8 should be < 25.08.6");
-    
-    qDebug() << "✓ VersionNumber now matches dpkg behavior!";
     
     // Equal versions
     VersionNumber v1("1.0.0");

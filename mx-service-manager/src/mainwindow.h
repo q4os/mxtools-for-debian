@@ -21,10 +21,15 @@
  **********************************************************************/
 #pragma once
 
+#include <QFutureWatcher>
 #include <QListWidgetItem>
 #include <QMessageBox>
+#include <QPersistentModelIndex>
 #include <QProcess>
 #include <QSettings>
+#include <QSet>
+
+#include <optional>
 
 #include "cmd.h"
 #include "service.h"
@@ -65,12 +70,28 @@ private:
     QColor enabledColor {Qt::darkYellow};
     QList<QSharedPointer<Service>> services;
     int savedRow = 0;
+    QTimer *searchTimer = nullptr;
 
-    static QString getHtmlColor(const QColor &color) noexcept;
+    // Tooltip management
+    QTimer *tooltipTimer = nullptr;
+    QFutureWatcher<QString> *tooltipWatcher = nullptr;
+    QPersistentModelIndex pendingTooltipIndex;
+    QPersistentModelIndex activeTooltipIndex;
+    Service *activeTooltipService = nullptr;
+    bool tooltipInProgress = false;
+
+    void cancelPendingTooltip();
+    void fetchTooltipDescription();
+    [[nodiscard]] std::optional<QString> sanitizeServiceName(const QString &rawName);
+    QSet<QString> loadSystemdEnabledServices(bool isUserService);
+    QString decodeEscapeSequences(const QString &input);
+    QString getHtmlColor(const QColor &color) noexcept;
     void displayServices() noexcept;
     void listServices();
     void processNonSystemdServices();
-    void processSystemdActiveInactiveServices(QStringList &names);
-    void processSystemdMaskedServices(QStringList &names);
+    void processSystemdActiveInactiveServices(QStringList &names,
+                                              const QSet<QString> &enabledServices,
+                                              bool isUserService = false);
+    void processSystemdMaskedServices(QStringList &names, bool isUserService = false);
     void processSystemdServices();
 };

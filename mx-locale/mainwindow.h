@@ -74,7 +74,7 @@ private slots:
     void helpClicked();
     void listItemChanged(QListWidgetItem *item);
     void onFilterChanged(const QString &text);
-    void onGroupButton(int button_id);
+    void onGroupButton(int buttonId);
     void resetSubvariables();
     void tabWidgetCurrentChanged();
     void textSearch_textChanged();

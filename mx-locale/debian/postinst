@@ -1,0 +1,10 @@
+#!/bin/sh -e
+
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-remove" ] ; then
+    #fix missing symlink on trixie systems
+    if [ -e /etc/locale.conf ]; then
+    	ln -rsf /etc/locale.conf /etc/default/locale
+    fi  	
+fi
+
+#DEBHELPER#

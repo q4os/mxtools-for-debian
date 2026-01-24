@@ -1,3 +1,16 @@
+live-usb-maker (2.41.23+1) mx; urgency=medium
+
+  * replace lib path line in dd-live-usb
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 01 Jan 2026 16:08:59 -0500
+
+live-usb-maker (2.41.23) mx; urgency=medium
+
+  * version bump
+  * no actual change, ensures a clean update from earlier versions of mx
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 01 Jan 2026 14:00:59 -0500
+
 live-usb-maker (2.41.22) mx; urgency=medium
 
   * limit files that md5 check runs on

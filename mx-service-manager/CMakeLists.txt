@@ -71,6 +71,7 @@ find_package(Qt6 REQUIRED COMPONENTS
     Gui
     Widgets
     LinguistTools
+    Concurrent
 )
 
 # Enable automatic MOC, UIC, and RCC processing
@@ -119,6 +120,7 @@ target_link_libraries(mx-service-manager
     Qt6::Core
     Qt6::Gui
     Qt6::Widgets
+    Qt6::Concurrent
 )
 
 # Set compiler flags

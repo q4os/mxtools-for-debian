@@ -105,7 +105,7 @@
     <message>
         <location filename="../src/mainwindow.ui" line="288"/>
         <source>&amp;Refresh services</source>
-        <translation type="unfinished"/>
+        <translation>Ac&amp;tualiser les services</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="301"/>
@@ -123,7 +123,7 @@
     <message>
         <location filename="../src/mainwindow.ui" line="272"/>
         <source>This tool lists services and daemons (processes that run in the background) found on this system. Be careful to avoid stopping something that might disrupt a critical component; best to leave it alone if you don&apos;t know what it is.</source>
-        <translation>Cet outil dresse la liste des services et des daemons (processus qui s’exécutent en arrière-plan) présents sur ce système. Veillez à ne pas arrêter un service qui pourrait perturber un composant critique ; il est préférable de ne pas intervenir si vous ne savez pas de quoi il s’agit.</translation>
+        <translation>Cet outil dresse la liste des services et des daemons (processus qui s’exécutent en arrière-plan) présents sur ce système. Veillez à ne pas arrêter un service qui pourrait perturber un composant critique. Il est préférable de ne pas intervenir si vous ne savez pas de quoi il s’agit.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="66"/>
@@ -153,12 +153,12 @@
     <message>
         <location filename="../src/mainwindow.cpp" line="366"/>
         <source>%1 total services, %2 currently &lt;font color=&apos;%3&apos;&gt;running&lt;/font&gt;</source>
-        <translation>%1 total des services, %2 actuellement &lt;font color=&apos;%3&apos;&gt;en cours d’exécution&lt;/font&gt;</translation>
+        <translation>Total des services %1 dont %2 actuellement &lt;font color=&apos;%3&apos;&gt;en cours d’exécution&lt;/font&gt;</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="371"/>
         <source>%1 &lt;font color=&apos;%2&apos;&gt;enabled&lt;/font&gt; at boot, but not running</source>
-        <translation>%1 &lt;font color=&apos;%2&apos;&gt;activé(s)&lt;/font&gt; au démarrage mais pas en cours d’exécution</translation>
+        <translation>%1 &lt;font color=&apos;%2&apos;&gt;activés&lt;/font&gt; au démarrage mais pas en cours d’exécution</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="386"/>
@@ -222,7 +222,7 @@
         <location filename="../src/mainwindow.cpp" line="433"/>
         <location filename="../src/mainwindow.cpp" line="436"/>
         <source>Refreshing...</source>
-        <translation type="unfinished"/>
+        <translation>Actualisation…</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="459"/>

@@ -22,17 +22,53 @@
 
 cmake_minimum_required(VERSION 3.16)
 
-# Get version from debian/changelog
-execute_process(
-    COMMAND dpkg-parsechangelog -SVersion
-    WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
-    OUTPUT_VARIABLE PROJECT_VERSION_FROM_CHANGELOG
-    OUTPUT_STRIP_TRAILING_WHITESPACE
-    RESULT_VARIABLE DPKG_RESULT
-)
+set(PROJECT_VERSION_FROM_CHANGELOG "")
+set(DPKG_RESULT 1)
 
-if(NOT DPKG_RESULT EQUAL 0)
-    message(FATAL_ERROR "Failed to get version from debian/changelog using dpkg-parsechangelog")
+if(DEFINED PROJECT_VERSION_OVERRIDE AND NOT "${PROJECT_VERSION_OVERRIDE}" STREQUAL "")
+    set(PROJECT_VERSION_FROM_CHANGELOG "${PROJECT_VERSION_OVERRIDE}")
+    message(STATUS "Using version override: ${PROJECT_VERSION_FROM_CHANGELOG}")
+else()
+    find_program(DPKG_PARSECHANGELOG dpkg-parsechangelog)
+    if(DPKG_PARSECHANGELOG)
+        execute_process(
+            COMMAND ${DPKG_PARSECHANGELOG} -SVersion
+            WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+            OUTPUT_VARIABLE PROJECT_VERSION_FROM_CHANGELOG
+            OUTPUT_STRIP_TRAILING_WHITESPACE
+            RESULT_VARIABLE DPKG_RESULT
+            ERROR_QUIET
+        )
+    endif()
+
+    if(DPKG_RESULT EQUAL 0 AND NOT "${PROJECT_VERSION_FROM_CHANGELOG}" STREQUAL "")
+        message(STATUS "Using version from debian/changelog: ${PROJECT_VERSION_FROM_CHANGELOG}")
+    elseif(EXISTS ${CMAKE_SOURCE_DIR}/debian/changelog)
+        file(READ ${CMAKE_SOURCE_DIR}/debian/changelog PROJECT_CHANGELOG_CONTENT)
+        string(REGEX MATCH "^[^\\(]*\\(([^)]+)\\)" _match "${PROJECT_CHANGELOG_CONTENT}")
+        if(NOT _match)
+            message(FATAL_ERROR "Could not parse version from debian/changelog")
+        endif()
+        set(PROJECT_VERSION_FROM_CHANGELOG "${CMAKE_MATCH_1}")
+        message(STATUS "Using version parsed from debian/changelog: ${PROJECT_VERSION_FROM_CHANGELOG}")
+    elseif(EXISTS ${CMAKE_SOURCE_DIR}/PKGBUILD)
+        file(READ ${CMAKE_SOURCE_DIR}/PKGBUILD PKGBUILD_CONTENT)
+        string(REGEX MATCH "\n?pkgver=([^\n\r]+)" _match "${PKGBUILD_CONTENT}")
+        if(NOT _match)
+            message(FATAL_ERROR "Could not parse version from PKGBUILD")
+        endif()
+        set(PROJECT_VERSION_FROM_CHANGELOG "${CMAKE_MATCH_1}")
+        string(STRIP "${PROJECT_VERSION_FROM_CHANGELOG}" PROJECT_VERSION_FROM_CHANGELOG)
+        string(REGEX REPLACE "^\"|\"$" "" PROJECT_VERSION_FROM_CHANGELOG "${PROJECT_VERSION_FROM_CHANGELOG}")
+        string(REGEX REPLACE "^'|'$" "" PROJECT_VERSION_FROM_CHANGELOG "${PROJECT_VERSION_FROM_CHANGELOG}")
+        string(REGEX MATCH "^\\$\\{PKGVER:-([^}]+)\\}$" _pkgver_match "${PROJECT_VERSION_FROM_CHANGELOG}")
+        if(_pkgver_match)
+            set(PROJECT_VERSION_FROM_CHANGELOG "${CMAKE_MATCH_1}")
+        endif()
+        message(STATUS "Using version parsed from PKGBUILD: ${PROJECT_VERSION_FROM_CHANGELOG}")
+    else()
+        message(FATAL_ERROR "Could not determine version: dpkg-parsechangelog not available and no debian/changelog or PKGBUILD")
+    endif()
 endif()
 
 project(mx-locale
@@ -40,6 +76,8 @@ project(mx-locale
     DESCRIPTION "MX Locale - Locale configuration tool for MX Linux"
     LANGUAGES CXX
 )
+
+option(ARCH_BUILD "Build with Arch-specific adjustments" OFF)
 
 # Set C++ standard
 set(CMAKE_CXX_STANDARD 20)
@@ -147,6 +185,10 @@ target_compile_definitions(mx-locale PRIVATE
     QT_DISABLE_DEPRECATED_BEFORE=0x060000
     VERSION="${PROJECT_VERSION}"
 )
+
+if(ARCH_BUILD)
+    target_compile_definitions(mx-locale PRIVATE MX_LOCALE_ARCH)
+endif()
 
 # Release-specific optimizations
 if(CMAKE_BUILD_TYPE STREQUAL "Release")

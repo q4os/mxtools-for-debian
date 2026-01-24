@@ -1,3 +1,9 @@
+antix-libs (0.8.14+11mx25) mx; urgency=medium
+
+  * move make-fstab and make-xorg-conf to usr/bin
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 01 Jan 2026 17:43:32 -0500
+
 antix-libs (0.8.14+10mx25) mx; urgency=medium
 
   * move to /usr from /usr/local

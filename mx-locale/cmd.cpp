@@ -2,27 +2,29 @@
 
 #include <QCoreApplication>
 #include <QDebug>
+#include <QDir>
 #include <QEventLoop>
 #include <QFileInfo>
 
+#include "common.h"
 #include <unistd.h>
 
 Cmd::Cmd(QObject *parent)
     : QProcess(parent),
       elevate {QFile::exists("/usr/bin/pkexec") ? "/usr/bin/pkexec" : "/usr/bin/gksu"},
-      helper {"/usr/lib/" + QCoreApplication::applicationName() + "/helper"}
+      helper {QDir(Paths::usrLib).filePath(QCoreApplication::applicationName() + "/helper")}
 {
     connect(this, &Cmd::readyReadStandardOutput, [this] { emit outputAvailable(readAllStandardOutput()); });
     connect(this, &Cmd::readyReadStandardError, [this] { emit errorAvailable(readAllStandardError()); });
-    connect(this, &Cmd::outputAvailable, [this](const QString &out) { out_buffer += out; });
-    connect(this, &Cmd::errorAvailable, [this](const QString &out) { out_buffer += out; });
+    connect(this, &Cmd::outputAvailable, [this](const QString &out) { outBuffer += out; });
+    connect(this, &Cmd::errorAvailable, [this](const QString &out) { outBuffer += out; });
 }
 
 QString Cmd::getOut(const QString &cmd, bool quiet, bool asRoot)
 {
-    out_buffer.clear();
+    outBuffer.clear();
     run(cmd, quiet, asRoot);
-    return out_buffer.trimmed();
+    return outBuffer.trimmed();
 }
 
 QString Cmd::getOutAsRoot(const QString &cmd, bool quiet)
@@ -32,7 +34,7 @@ QString Cmd::getOutAsRoot(const QString &cmd, bool quiet)
 
 bool Cmd::run(const QString &cmd, bool quiet, bool asRoot)
 {
-    out_buffer.clear();
+    outBuffer.clear();
     if (state() != QProcess::NotRunning) {
         qDebug() << "Process already running:" << program() << arguments();
         return false;
@@ -59,5 +61,5 @@ bool Cmd::runAsRoot(const QString &cmd, bool quiet)
 
 QString Cmd::readAllOutput()
 {
-    return out_buffer.trimmed();
+    return outBuffer.trimmed();
 }

@@ -82,7 +82,6 @@ brave-browser
 
 <uninstall_package_names>
 brave-browser
-brave-keyring
 </uninstall_package_names>
 
 <postuninstall>

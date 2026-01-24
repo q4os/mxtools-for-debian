@@ -5,7 +5,8 @@
       "Bash(qmake6:*)",
       "Bash(make:*)",
       "Bash(rg:*)",
-      "Bash(grep:*)"
+      "Bash(grep:*)",
+      "Bash(./build.sh)"
     ],
     "deny": []
   }

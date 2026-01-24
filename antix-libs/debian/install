@@ -1,11 +1,11 @@
 locale/* 		usr/share/locale
 lib/*                   usr/lib
-make-fstab              sbin
-autologin               sbin
-make-xorg-conf          sbin
+make-fstab              usr/bin
+autologin               usr/bin
+make-xorg-conf          usr/bin
 antixers                etc/sudoers.d	
 sudo_password_display   etc/sudoers.d
-sbin/*                  usr/sbin
+sbin/*                  usr/bin
 desktop_tool.py         usr/bin
 excludes/*         usr/share/excludes  
 boot-menus/*            usr/share/boot-menus             

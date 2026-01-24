@@ -1,3 +1,4 @@
+#define QT_USE_QSTRINGBUILDER
 #include "cmd.h"
 
 #include <QApplication>

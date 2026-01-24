@@ -20,6 +20,7 @@
  * along with this package. If not, see <http://www.gnu.org/licenses/>.
  **********************************************************************/
 
+#define QT_USE_QSTRINGBUILDER
 #include <QApplication>
 #include <QDebug>
 #include <QFile>
@@ -79,7 +80,7 @@ int main(int argc, char *argv[])
     if (loginUidFile.open(QIODevice::ReadOnly)) {
         QString loginUid = QString(loginUidFile.readAll()).trimmed();
         loginUidFile.close();
-        if (loginUid == "0") {
+        if (loginUid == QLatin1String("0")) {
             QMessageBox::critical(
                 nullptr, QObject::tr("Error"),
                 QObject::tr(

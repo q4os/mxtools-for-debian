@@ -30,6 +30,13 @@ _Semi_Automatic_="$(gt "Semi-Automatic")"
 [ -e $LIVE_DIR/config/persist-save.conf \
     -o -e $LIVE_DIR/config/save-persist ]  && SHOULD_RUN=true
 
+alttest="false"
+
+if [[ -e /live/config/systemd || ( -e "/usr/lib/systemd/systemd" && -e "/usr/lib/sysvinit/init" ) ]] ; then
+	alttest="true"
+fi
+#echo alttest is $alttest
+
 BLURB="
     $(gt "Configure root persistence saves to run either:")
 
@@ -37,7 +44,8 @@ BLURB="
     2) [b]$_Semi_Automatic_[/] ($(gt "ask at shutdown/reboot"))
     3) [b]$_Manual_[/] ($(gt "you snooze, you lose"))"
     
-if [ -e /live/config/systemd ]; then
+#check for systemd or multi-init.  neither provide an active console at shutdown for sem-auto to work with, so don't offer it.
+if [ "$alttest" = "true" ]; then
     BLURB="
     $(gt "Configure root persistence saves to run either:")
 
@@ -116,13 +124,12 @@ edit_config() {
     fi
 
     fmt="[fixed][b]%15s:[/][/] %s   "
-    if [ -e "/live/config/systemd" ]; then
+    if [ "$alttest" = "true" ]; then
     combo_box save-mode "1 $_Automatic_!3 $_Manual_!4 $_Quit_" -n \
         "$TITLE" ""                                                    \
         "$(gt "Please choose auto-save mode.")"                        \
         ""                                                             \
         "$mode_str"                                                    \
-        ""                                                             \
         "$(pf "$fmt" "$_Automatic_"      "`gt "save on shutdown/reboot automatically.  No asking."`")"   \
         "$(pf "$fmt" "$_Manual_"         "`gt "only save changes manually (you snooze, you lose)."`")"   \
         "$(pf "$fmt" "$_Quit_"           "`gt "use current default."`")"                                 \
@@ -202,12 +209,17 @@ elif [ "$SET_SHUT_DOWN" ]; then
     source $CONF_FILE
 
     [ "$AUTOSAVE_MODE" ] || exit_command
-
+    
     vmsg "AUTOSAVE_MODE=$AUTOSAVE_MODE"
     persist_opts=--quiet
     case "$AUTOSAVE_MODE" in
         1*) ;;
-        2*) persist_opts= ;;
+        2*) if [ "$alttest" = "false" ]; then
+              persist_opts=
+            else
+              echo "Current system does not support semi-automatic save.  Falling back to automatic"
+            fi
+            ;;
         3*) vmsg "Not auto-saving.  AUTOSAVE_MODE was set to $AUTOSAVE_MODE"
             exit_command ;;
         *)  okay_box "$TITLE" "" \

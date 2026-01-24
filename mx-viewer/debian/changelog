@@ -1,3 +1,40 @@
+mx-viewer (26.01.4) mx; urgency=medium
+
+  * Add button to clear cookies and cache
+  * Preserve cookies between sessions
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 16 Jan 2026 18:11:33 -0500
+
+mx-viewer (26.01.2) mx; urgency=medium
+
+  * Added Ctrl-R, Alt <- and Alt -> navigation keys
+  * Added a History page accessible with Ctrl-H
+  * Added a Settings page accessible with Ctrl-,
+  * Added address bar autocompletion from history
+  * Added default search when the address bar doesn't contain a valid domain
+  * Save/restore window geometry
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 14 Jan 2026 22:42:23 -0500
+
+mx-viewer (26.01.1) mx; urgency=medium
+
+  * Added cookies, 3rd party cookies, pop-up options in Settings
+  * Added + icon for opening new tab
+  * Added option to save tabs on closing and resume next time the app starts
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 14 Jan 2026 13:41:01 -0500
+
+mx-viewer (26.01) mx; urgency=medium
+
+  * Add close and reopen tab shortcuts
+  * Various UI improvements
+  * Added Settings page
+  * Added Bookmark editor
+  * Added F12 dev tools
+  * Ctrl-click and middle-click open tab in background
+
+ -- Adrian <adrian@mxlinux.org>  Tue, 13 Jan 2026 21:55:54 -0500
+
 mx-viewer (25.7) mx; urgency=medium
 
   * Change default home page to start.duckduckgo.com (might need to change
@@ -13,7 +50,7 @@ mx-viewer (24.4) mx; urgency=medium
 
 mx-viewer (24.3) mx; urgency=medium
 
-  * Update translations 
+  * Update translations
 
  -- Adrian <adrian@mxlinux.org>  Sat, 23 Mar 2024 13:19:44 -0400
 
@@ -74,7 +111,7 @@ mx-viewer (22.6) mx; urgency=medium
 
 mx-viewer (22.5.01) mx; urgency=medium
 
-  * Improve search behavior: 
+  * Improve search behavior:
   *     - focus search by default
   *     - Shift-F3 searches backwards
   *     - Esc clears the search field, second Esc focuses the document
@@ -91,7 +128,7 @@ mx-viewer (22.5) mx; urgency=medium
 
 mx-viewer (20.12.01) mx; urgency=medium
 
-  * add open/browse option, help dialog 
+  * add open/browse option, help dialog
 
  -- Adrian <adrian@mxlinux.org>  Mon, 28 Dec 2020 02:33:29 -0500
 
@@ -111,7 +148,7 @@ mx-viewer (19.10.01) mx; urgency=medium
 
 mx-viewer (19.10) mx; urgency=medium
 
-  * update color scheme handling 
+  * update color scheme handling
 
  -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 12 Oct 2019 13:16:47 -0400
 
@@ -171,7 +208,7 @@ mx-viewer (15.7.1mx15) mx; urgency=medium
 
 mx-viewer (15.7mx15) mx; urgency=medium
 
-  * update to qt5 
+  * update to qt5
 
  -- Adrian <adrian@mxlinux.org>  Tue, 30 Jun 2015 14:15:45 -0400
 

@@ -1,3 +1,22 @@
+mx-system (26.1.03mx25) mx; urgency=medium
+
+  * remove exec from update-grub line
+  * short-circuits postinstall script
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 23 Jan 2026 20:35:34 -0500
+
+mx-system (26.1.02mx25) mx; urgency=medium
+
+  * fix .bashrc issue with LESS
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 17 Jan 2026 16:56:17 -0500
+
+mx-system (26.1.01mx25) mx; urgency=medium
+
+  * mx 25.1 strings
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Tue, 06 Jan 2026 18:46:59 -0500
+
 mx-system (25.11.01mx25) mx; urgency=medium
 
   * remove RC1 and beta1 strings IDs
@@ -74,11 +93,34 @@ mx-system (25.06.01mx25) mx; urgency=medium
  -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 09 Apr 2025 19:13:19 -0400
 
 mx-system (25.02.02mx23) mx; urgency=medium
+=======
+mx-system (25.08.01mx23) mx; urgency=medium
+
+  * remove executable bit from some conf files
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 16 Aug 2025 14:46:04 -0400
+
+mx-system (25.04.03mx23) mx; urgency=medium
+
+  * add qt6gtk2 and libqt6svg6 to depends list
+  * to support upcoming qt6 updates to mx tools
+  * allows themeing to work on gtk and KDE desktops
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 23 Apr 2025 17:58:43 -0400
+
+mx-system (25.04.02mx23) mx; urgency=medium
+
+  * don't run update-grub if grub.cfg doesn't exit
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 14 Apr 2025 20:49:52 -0400
+
+mx-system (25.04.01mx23) mx; urgency=medium
 
   * add logic for running update-grub during update and string changes 
   * add mx23.6 strings 
+  * don't run update-grub if update-grub doesn't exist (pi)
 
- -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 16 Feb 2025 16:35:40 -0500
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 10 Apr 2025 22:01:39 -0400
 
 mx-system (25.02.01mx23) mx; urgency=medium
 

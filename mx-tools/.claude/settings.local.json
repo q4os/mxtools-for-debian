@@ -1,0 +1,20 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(qmake6:*)",
+      "Bash(make:*)",
+      "Bash(timeout:*)",
+      "Bash(true)",
+      "Bash(DISPLAY=:0.0 timeout 5s ./mx-tools)",
+      "Bash(g++:*)",
+      "Bash(./perf_test)",
+      "Bash(rm:*)",
+      "Bash(./regex_perf_test)",
+      "Bash(./icon_perf_test)",
+      "Bash(git rebase:*)",
+      "Bash(git reset:*)",
+      "Bash(./build.sh:*)"
+    ],
+    "deny": []
+  }
+}

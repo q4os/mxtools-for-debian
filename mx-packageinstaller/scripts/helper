@@ -1,2 +1,6 @@
 #!/bin/bash
+# Create marker file to signal helper started (used for auth dismissal detection).
+# If touch fails (e.g., temp dir unwritable), auth dismissal detection won't work,
+# but the command will still run.
+[[ -n "$MX_PKG_HELPER_MARKER" ]] && touch "$MX_PKG_HELPER_MARKER" 2>/dev/null || true
 eval "${*}"

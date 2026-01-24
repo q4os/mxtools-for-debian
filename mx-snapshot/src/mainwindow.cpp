@@ -320,10 +320,17 @@ bool MainWindow::resetCustomExcludes()
         QDir().mkpath(targetDir);
     }
 
-    if (QFileInfo::exists(configuredPath) && !QFile::remove(configuredPath)) {
-        QMessageBox::warning(this, tr("Error"),
-                             tr("Could not remove existing exclusion file at %1.").arg(configuredPath));
-        return false;
+    if (QFileInfo::exists(configuredPath)) {
+        const QString backupPath = configuredPath + "." + QDateTime::currentDateTime().toString("yyyyMMddhhmmss");
+        if (!QFile::copy(configuredPath, backupPath)) {
+            QMessageBox::warning(this, tr("Warning"),
+                                 tr("Could not backup existing exclusion file to %1.").arg(backupPath));
+        }
+        if (!QFile::remove(configuredPath)) {
+            QMessageBox::warning(this, tr("Error"),
+                                 tr("Could not remove existing exclusion file at %1.").arg(configuredPath));
+            return false;
+        }
     }
 
     if (!QFile::copy(sourcePath, configuredPath)) {
@@ -616,6 +623,12 @@ void MainWindow::showErrorMessageBox(const QString &file_path)
 
 void MainWindow::handleSelectionPage(const QString &file_name)
 {
+    if (!settings->validateSpaceRequirements()) {
+        processMsgBox(BoxType::critical, tr("Error"),
+                      tr("Insufficient free space. Please select a different snapshot directory or free up space."));
+        return;
+    }
+
     setWindowTitle(tr("Settings"));
     ui->stackedWidget->setCurrentWidget(ui->settingsPage);
     ui->btnBack->setHidden(false);
@@ -634,6 +647,7 @@ void MainWindow::handleSelectionPage(const QString &file_name)
     settings->bootOptions = ui->textOptions->text();
     settings->releaseDate = ui->pushReleaseDate->text();
     checkNvidiaGraphicsCard();
+    settings->bootOptions = ui->textOptions->text();
     checkUpdatedDefaultExcludes();
 }
 
@@ -946,7 +960,14 @@ void MainWindow::btnSelectSnapshot_clicked()
     QString selected = QFileDialog::getExistingDirectory(this, tr("Select Snapshot Directory"), QString(),
                                                          QFileDialog::ShowDirsOnly);
     if (!selected.isEmpty()) {
+        const QString previousSnapshotDir = settings->snapshotDir;
         settings->snapshotDir = selected + "/snapshot";
+        if (!settings->validateSpaceRequirements()) {
+            settings->snapshotDir = previousSnapshotDir;
+            QMessageBox::critical(this, tr("Error"),
+                                  tr("Insufficient free space in the selected directory. Please choose a different location."));
+            return;
+        }
         ui->labelSnapshotDir->setText(settings->snapshotDir);
         listFreeSpace();
     }

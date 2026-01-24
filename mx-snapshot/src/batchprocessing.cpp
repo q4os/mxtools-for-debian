@@ -206,9 +206,15 @@ bool Batchprocessing::resetCustomExcludesCli(const QString &configuredPath, cons
         QDir().mkpath(targetDir);
     }
 
-    if (QFileInfo::exists(configuredPath) && !QFile::remove(configuredPath)) {
-        qWarning().noquote() << tr("Could not remove existing exclusion file at %1.").arg(configuredPath);
-        return false;
+    if (QFileInfo::exists(configuredPath)) {
+        const QString backupPath = configuredPath + "." + QDateTime::currentDateTime().toString("yyyyMMddhhmmss");
+        if (!QFile::copy(configuredPath, backupPath)) {
+            qWarning().noquote() << tr("Could not backup existing exclusion file to %1.").arg(backupPath);
+        }
+        if (!QFile::remove(configuredPath)) {
+            qWarning().noquote() << tr("Could not remove existing exclusion file at %1.").arg(configuredPath);
+            return false;
+        }
     }
 
     if (!QFile::copy(sourcePath, configuredPath)) {
@@ -245,11 +251,6 @@ void Batchprocessing::checkUpdatedDefaultExcludesCli()
     const QString keepOptionText = tr("keep custom (update timestamp)", "CLI excludes prompt option label");
     const QString quitOptionText = tr("quit", "CLI excludes prompt option label");
 
-    const QStringList showResponses = {showOptionKey.toLower(), showOptionText.toLower(), "s", "show"};
-    const QStringList useResponses = {useOptionKey.toLower(), useOptionText.toLower(), "u", "use"};
-    const QStringList keepResponses = {keepOptionKey.toLower(), keepOptionText.toLower(), "k", "keep"};
-    const QStringList quitResponses = {quitOptionKey.toLower(), quitOptionText.toLower(), "q", "quit"};
-
     const QString optionPrompt =
         tr("[%1]%2  [%3]%4  [%5]%6  [%7]%8: ")
             .arg(showOptionKey, showOptionText, useOptionKey, useOptionText, keepOptionKey, keepOptionText, quitOptionKey,
@@ -261,21 +262,24 @@ void Batchprocessing::checkUpdatedDefaultExcludesCli()
             << '\n';
         out << optionPrompt << Qt::flush;
 
-        const QString response = in.readLine().trimmed().toLower();
+        const QString response = in.readLine().trimmed();
 
-        if (showResponses.contains(response)) {
+        if (response.compare(showOptionKey, Qt::CaseInsensitive) == 0
+            || response.compare(showOptionText, Qt::CaseInsensitive) == 0) {
             out << colorizeDiffAnsi(diffOutput) << Qt::flush;
             continue;
         }
 
-        if (useResponses.contains(response)) {
+        if (response.compare(useOptionKey, Qt::CaseInsensitive) == 0
+            || response.compare(useOptionText, Qt::CaseInsensitive) == 0) {
             if (resetCustomExcludesCli(configuredPath, sourcePath)) {
                 qDebug().noquote() << tr("Reverted to updated default exclusion file.");
             }
             return;
         }
 
-        if (keepResponses.contains(response)) {
+        if (response.compare(keepOptionKey, Qt::CaseInsensitive) == 0
+            || response.compare(keepOptionText, Qt::CaseInsensitive) == 0) {
             utimbuf times {};
             times.actime = QFileInfo(configuredPath).lastRead().toSecsSinceEpoch();
             times.modtime = QDateTime::currentSecsSinceEpoch();
@@ -288,7 +292,8 @@ void Batchprocessing::checkUpdatedDefaultExcludesCli()
             return;
         }
 
-        if (quitResponses.contains(response) || response.isEmpty()) {
+        if (response.compare(quitOptionKey, Qt::CaseInsensitive) == 0
+            || response.compare(quitOptionText, Qt::CaseInsensitive) == 0 || response.isEmpty()) {
             qDebug() << tr("Leaving custom exclusion file unchanged.");
             const bool debugStop = qEnvironmentVariableIsSet("MX_SNAPSHOT_EXCLUDES_DEBUG_STOP");
             if (debugStop) {

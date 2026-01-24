@@ -26,8 +26,8 @@ be_AX_HOST=http://ftp.halifax.rwth-aachen.de/mxlinux/packages/antix
 be_MX_HOST=http://ftp.halifax.rwth-aachen.de/mxlinux/packages/mx
 be_LOCATION="Brussels"
 
-bg_AX_HOST=https://mirrors.netix.net/mx/MX-Packages/antix
-bg_MX_HOST=https://mirrors.netix.net/mx/MX-Packages/mx
+bg_AX_HOST=https://mxlinux.ipacct.com/MX-Packages/antix
+bg_MX_HOST=https://mxlinux.ipacct.com/MX-Packages/mx
 bg_LOCATION="Sofia"
 
 br_AX_HOST=http://mirror.ufam.edu.br/mx/antix
@@ -86,8 +86,8 @@ hk_AX_HOST=https://mirror-hk.koddos.net/mxlinux/antix
 hk_MX_HOST=https://mirror-hk.koddos.net/mxlinux/mx
 hk_LOCATION="Hong Kong"
 
-hu_AX_HOST=https://quantum-mirror.hu/mirrors/pub/mx-linux/packages/antix
-hu_MX_HOST=https://quantum-mirror.hu/mirrors/pub/mx-linux/packages/mx
+hu_AX_HOST=http://tux.rainside.sk/mxlinux/antix
+hu_MX_HOST=http://tux.rainside.sk/mxlinux/mx
 hu_LOCATION="Hungary"
 
 id_AX_HOST=http://kartolo.sby.datautama.net.id/mx-packages/antix
@@ -186,8 +186,8 @@ tw_AX_HOST=https://mxlinux.cs.nycu.edu.tw/mx-workspace/antix
 tw_MX_HOST=https://mxlinux.cs.nycu.edu.tw/mx-workspace/mx
 tw_LOCATION="Taiwan"
 
-ua_AX_HOST=https://fastmirror.pp.ua/mxlinux/antix
-ua_MX_HOST=https://fastmirror.pp.ua/mxlinux/mx
+ua_AX_HOST=https://distrohub.kyiv.ua/mxlinux/antix
+ua_MX_HOST=https://distrohub.kyiv.ua/mxlinux/mx
 ua_LOCATION="Ukraine"
 
 ut_AX_HOST=http://la.mxrepo.com/antix

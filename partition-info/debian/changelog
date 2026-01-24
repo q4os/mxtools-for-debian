@@ -1,3 +1,9 @@
+partition-info (1.12mx25) mx; urgency=medium
+
+  * move out of sbin
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 01 Jan 2026 18:56:15 -0500
+
 partition-info (1.11mx19) mx; urgency=medium
 
   * Rebuild for MX-19

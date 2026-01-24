@@ -88,7 +88,7 @@
         <location filename="../src/mainwindow.ui" line="235"/>
         <location filename="../src/mainwindow.cpp" line="331"/>
         <source>Running services</source>
-        <translation>Servicios de ejecución</translation>
+        <translation>Servicios en ejecución</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="240"/>
@@ -105,7 +105,7 @@
     <message>
         <location filename="../src/mainwindow.ui" line="288"/>
         <source>&amp;Refresh services</source>
-        <translation type="unfinished"/>
+        <translation>Actualiza&amp;r servicios</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="301"/>
@@ -222,7 +222,7 @@
         <location filename="../src/mainwindow.cpp" line="433"/>
         <location filename="../src/mainwindow.cpp" line="436"/>
         <source>Refreshing...</source>
-        <translation type="unfinished"/>
+        <translation>Actualizando...</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="459"/>

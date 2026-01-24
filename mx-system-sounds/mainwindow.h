@@ -1,7 +1,7 @@
 /**********************************************************************
  *  mainwindow.h
  **********************************************************************
- * Copyright (C) 2016 MX Authors
+ * Copyright (C) 2016-2025 MX Authors
  *
  * Authors: Adrian
  *          MX Linux <http://mxlinux.org>

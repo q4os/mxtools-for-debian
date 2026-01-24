@@ -31,4 +31,8 @@ private:
     QString elevate;
     QString helper;
     QString out_buffer;
+    QString helperMarkerPath;
+
+    [[nodiscard]] bool isAuthenticationDismissed() const;
+    void handleElevationError();
 };

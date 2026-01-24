@@ -22,6 +22,7 @@
 #include "about.h"
 
 #include <QApplication>
+#include <QDir>
 #include <QFileInfo>
 #include <QMessageBox>
 #include <QProcess>
@@ -36,13 +37,13 @@
 // Display doc as nomal user when run as root
 void displayDoc(const QString &url, const QString &title)
 {
-    bool started_as_root = false;
+    bool startedAsRoot = false;
     if (qEnvironmentVariable("HOME") == "root") {
-        started_as_root = true;
-        qputenv("HOME", starting_home.toUtf8()); // Use original home for theming purposes
+        startedAsRoot = true;
+        qputenv("HOME", startingHome.toUtf8()); // Use original home for theming purposes
     }
     // Prefer mx-viewer otherwise use xdg-open (use runuser to run that as logname user)
-    QString executablePath = QStandardPaths::findExecutable("mx-viewer");
+    const QString executablePath = QStandardPaths::findExecutable("mx-viewer");
     if (!executablePath.isEmpty()) {
         QProcess::startDetached("mx-viewer", {url, title});
     } else {
@@ -52,17 +53,17 @@ void displayDoc(const QString &url, const QString &title)
             QProcess proc;
             proc.start("logname", {}, QIODevice::ReadOnly);
             proc.waitForFinished();
-            QString user = QString::fromUtf8(proc.readAllStandardOutput()).trimmed();
+            const QString user = QString::fromUtf8(proc.readAllStandardOutput()).trimmed();
             QProcess::startDetached("runuser", {"-u", user, "--", "xdg-open", url});
         }
     }
-    if (started_as_root) {
+    if (startedAsRoot) {
         qputenv("HOME", "/root");
     }
 }
 
-void displayAboutMsgBox(const QString &title, const QString &message, const QString &licence_url,
-                        const QString &license_title)
+void displayAboutMsgBox(const QString &title, const QString &message, const QString &licenceUrl,
+                        const QString &licenseTitle)
 {
     const auto width = 600;
     const auto height = 500;
@@ -75,7 +76,7 @@ void displayAboutMsgBox(const QString &title, const QString &message, const QStr
     msgBox.exec();
 
     if (msgBox.clickedButton() == btnLicense) {
-        displayDoc(licence_url, license_title);
+        displayDoc(licenceUrl, licenseTitle);
     } else if (msgBox.clickedButton() == btnChangelog) {
         auto *changelog = new QDialog;
         changelog->setWindowTitle(QObject::tr("Changelog"));
@@ -84,10 +85,9 @@ void displayAboutMsgBox(const QString &title, const QString &message, const QStr
         auto *text = new QTextEdit(changelog);
         text->setReadOnly(true);
         QProcess proc;
-        proc.start(
-            "zless",
-            {"/usr/share/doc/" + QFileInfo(QCoreApplication::applicationFilePath()).fileName() + "/changelog.gz"},
-            QIODevice::ReadOnly);
+        const QString appName = QFileInfo(QCoreApplication::applicationFilePath()).fileName();
+        const QString changelogPath = QDir(Paths::usrShareDoc).filePath(appName + "/changelog.gz");
+        proc.start("zless", {changelogPath}, QIODevice::ReadOnly);
         proc.waitForFinished();
         text->setText(proc.readAllStandardOutput());
 
