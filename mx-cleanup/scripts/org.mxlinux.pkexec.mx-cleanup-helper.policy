@@ -17,7 +17,7 @@
     </defaults>
     <annotate key="org.freedesktop.policykit.exec.path">/usr/lib/mx-cleanup/helper</annotate>
   </action>
-  <action id="org.mxlinux.pkexec.mx-cleanup.helper-terminal">
+  <action id="org.mxlinux.pkexec.mx-cleanup.helper-terminal-keep-open">
   <message gettext-domain="mx-launcher-l10n">MX Cleanup</message>
     <description>Run MX Cleanup</description>
     <icon_name>mx-cleanup</icon_name>
@@ -26,9 +26,8 @@
       <allow_inactive>no</allow_inactive>
       <allow_active>auth_admin</allow_active>
     </defaults>
-    <annotate key="org.freedesktop.policykit.exec.path">/usr/lib/mx-cleanup/helper-terminal</annotate>
+    <annotate key="org.freedesktop.policykit.exec.path">/usr/lib/mx-cleanup/helper-terminal-keep-open</annotate>
   </action>
-
 
 
 

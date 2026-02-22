@@ -68,8 +68,8 @@
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="745"/>
-        <location filename="../src/mainwindow.cpp" line="592"/>
-        <location filename="../src/mainwindow.cpp" line="615"/>
+        <location filename="../src/mainwindow.cpp" line="600"/>
+        <location filename="../src/mainwindow.cpp" line="623"/>
         <source>Select ISO</source>
         <translation>Vybrat ISO soubor</translation>
     </message>
@@ -190,7 +190,7 @@
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="755"/>
-        <location filename="../src/mainwindow.cpp" line="552"/>
+        <location filename="../src/mainwindow.cpp" line="560"/>
         <source>Show advanced options</source>
         <translation>Zobrazit pokročilé možnosti</translation>
     </message>
@@ -271,8 +271,8 @@
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="398"/>
-        <location filename="../src/mainwindow.cpp" line="537"/>
-        <location filename="../src/mainwindow.cpp" line="714"/>
+        <location filename="../src/mainwindow.cpp" line="545"/>
+        <location filename="../src/mainwindow.cpp" line="722"/>
         <source>Failure</source>
         <translation>Selhání</translation>
     </message>
@@ -282,27 +282,27 @@
         <translation>Zdroj a cíl jsou na stejné jednotce, prosím proveďte vyběr znovu.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="759"/>
+        <location filename="../src/mainwindow.cpp" line="767"/>
         <source>Source Error</source>
         <translation>Chyba zdroje</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="760"/>
+        <location filename="../src/mainwindow.cpp" line="768"/>
         <source>Could not find the source linuxfs file.</source>
         <translation>Nelze najít zdrojový soubor linuxfs.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="781"/>
+        <location filename="../src/mainwindow.cpp" line="789"/>
         <source>Warning: The target device (%1) is smaller than the source (%2). The data might not fit. Do you want to continue?</source>
         <translation>Varování: Cílové zařízení (%1) je menší než zdrojové (%2). Data se nemusí na cíl vejít. Chcete pokračovat?</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="784"/>
+        <location filename="../src/mainwindow.cpp" line="792"/>
         <source>Size Warning</source>
         <translation>Upozornění na velikost</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="792"/>
+        <location filename="../src/mainwindow.cpp" line="800"/>
         <source>The target device %1 is larger than %2 GB.
 
 This may indicate you have selected the wrong device.
@@ -312,7 +312,7 @@ Are you sure you want to proceed?</source>
 To může znamenat, že jste vybrali nesprávné zařízení. Jste si jisti, že chcete pokračovat?</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="799"/>
+        <location filename="../src/mainwindow.cpp" line="807"/>
         <source>Large Target Device Warning</source>
         <translation>Upozornění na velké cílové zařízení</translation>
     </message>
@@ -356,7 +356,16 @@ Vyčkejte prosím na dokončení procesu</translation>
         <translation>Prosím vyberte USB jednotku k zápisu</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="467"/>
+        <location filename="../src/mainwindow.cpp" line="470"/>
+        <source>Update mode is selected. The live system on %1 will be updated with the new ISO without reformatting the device.
+
+Existing data and persistence should remain, but please back up anything important.
+
+Do you wish to continue?</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="475"/>
         <source>These actions will destroy all data on 
 
 </source>
@@ -365,85 +374,85 @@ Vyčkejte prosím na dokončení procesu</translation>
 </translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="468"/>
+        <location filename="../src/mainwindow.cpp" line="475"/>
         <source>Do you wish to continue?</source>
         <translation>Přejete si pokračovat?</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="500"/>
+        <location filename="../src/mainwindow.cpp" line="508"/>
         <source>About %1</source>
         <translation>O programu %1</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="501"/>
+        <location filename="../src/mainwindow.cpp" line="509"/>
         <source>Version: </source>
         <translation>Verze:</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="503"/>
+        <location filename="../src/mainwindow.cpp" line="511"/>
         <source>Program for creating a live-usb from an iso-file, another live-usb, a live-cd/dvd, or a running live system.</source>
         <translation>Program pro tvorbu Live-USB z ISO, jiného Live-USB, Live-CD/DVD, nebo spuštěného live systému.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="506"/>
+        <location filename="../src/mainwindow.cpp" line="514"/>
         <source>Copyright (c) MX Linux</source>
         <translation>Vlastnická práva (c) MX Linux</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="507"/>
+        <location filename="../src/mainwindow.cpp" line="515"/>
         <source>%1 License</source>
         <translation>Licence %1</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="514"/>
+        <location filename="../src/mainwindow.cpp" line="522"/>
         <source>%1 Help</source>
         <translation>Nápověda %1</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="522"/>
+        <location filename="../src/mainwindow.cpp" line="530"/>
         <source>Select an ISO file to write to the USB drive</source>
         <translation>Vyberte ISO soubor pro zápis na USB jednotku </translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="523"/>
+        <location filename="../src/mainwindow.cpp" line="531"/>
         <source>ISO Files (*.iso);;All Files (*.*)</source>
         <translation>ISO soubory (*.iso);;Všechny soubory (*.*)</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="528"/>
-        <location filename="../src/mainwindow.cpp" line="587"/>
+        <location filename="../src/mainwindow.cpp" line="536"/>
+        <location filename="../src/mainwindow.cpp" line="595"/>
         <source>Select Source Directory</source>
         <translation>Vyberte zdrojový aresář</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="537"/>
+        <location filename="../src/mainwindow.cpp" line="545"/>
         <source>Could not find linuxfs file</source>
         <translation>Nelze nalézt soubor linuxfs</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="552"/>
+        <location filename="../src/mainwindow.cpp" line="560"/>
         <source>Hide advanced options</source>
         <translation>Skrýt pokročilé možnosti</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="586"/>
-        <location filename="../src/mainwindow.cpp" line="605"/>
+        <location filename="../src/mainwindow.cpp" line="594"/>
+        <location filename="../src/mainwindow.cpp" line="613"/>
         <source>Select Source</source>
         <translation>Vyberte zdroj</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="591"/>
-        <location filename="../src/mainwindow.cpp" line="613"/>
+        <location filename="../src/mainwindow.cpp" line="599"/>
+        <location filename="../src/mainwindow.cpp" line="621"/>
         <source>Select ISO file</source>
         <translation>Vyberte ISO soubor</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="607"/>
+        <location filename="../src/mainwindow.cpp" line="615"/>
         <source>clone</source>
         <translation>klonovat</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="674"/>
+        <location filename="../src/mainwindow.cpp" line="682"/>
         <source>Could not find a log file at: </source>
         <translation>Log se nepodařilo najít:</translation>
     </message>

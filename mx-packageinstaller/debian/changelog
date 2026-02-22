@@ -1,6 +1,12 @@
+mx-packageinstaller (26.01.6) mx; urgency=medium
+
+  * Fix for XRDP sessions
+
+ -- Adrian <adrian@mxlinux.org>  Sat, 24 Jan 2026 08:06:01 -0500
+
 mx-packageinstaller (26.01.5) mx; urgency=medium
 
-  * Make culumns in Popular tab resizable
+  * Make columns in Popular tab resizable
 
  -- Adrian <adrian@mxlinux.org>  Fri, 23 Jan 2026 10:17:18 -0500
 

@@ -53,6 +53,7 @@ private:
     QString currentSettingsPath;
     QString shadowSettingsPath;
     QString currentUser;
+    bool isArchLinux {false};
     bool suppressUserSwitch {false};
     QString cmdOut(const QString &cmd, bool asRoot = false, bool quiet = false);
     QString cmdOutAsRoot(const QString &cmd, bool quiet = false);

@@ -3,7 +3,16 @@
     "allow": [
       "Bash(make:*)",
       "Bash(./build.sh:*)",
-      "Bash(cmake:*)"
+      "Bash(cmake:*)",
+      "Bash(lsblk:*)",
+      "Bash(cat:*)",
+      "Bash(sudo parted:*)",
+      "Bash(sudo dd:*)",
+      "Bash(test:*)",
+      "Bash(blkid:*)",
+      "Bash(udisksctl mount:*)",
+      "Bash(udisksctl unmount:*)",
+      "Bash(e2label:*)"
     ],
     "deny": [],
     "ask": []

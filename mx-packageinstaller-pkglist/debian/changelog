@@ -1,3 +1,21 @@
+mx-packageinstaller-pkglist (26.02.03mx25) mx; urgency=medium
+
+  * update liquorix and debian 6.18 kernels (6.18.12)
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 21 Feb 2026 09:55:23 -0500
+
+mx-packageinstaller-pkglist (26.02.02mx25) mx; urgency=medium
+
+  * update liquorix and debian 6.18 kernels (6.18.9)
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 14 Feb 2026 09:08:59 -0500
+
+mx-packageinstaller-pkglist (26.02.01mx25) mx; urgency=medium
+
+  * update liquorix and debian 6.18 kernels
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 01 Feb 2026 14:54:20 -0500
+
 mx-packageinstaller-pkglist (26.01.05mx25) mx; urgency=medium
 
   * fix 6.18 kernel entry

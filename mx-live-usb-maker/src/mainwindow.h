@@ -80,22 +80,26 @@ private:
     QString elevate;
     QTimer timer;
     bool advancedOptions {};
-    const QString cliUtils = QString(". ") + (QFile::exists("/usr/local/lib/cli-shell-utils/cli-shell-utils.bash") ?
-        QString("/usr/local/lib/cli-shell-utils/cli-shell-utils.bash;") :
-        QString("/usr/lib/cli-shell-utils/cli-shell-utils.bash;"));
-    int height {};
     int defaultHeight {};
+    int height {};
     uint sizeCheck;
 
     [[nodiscard]] QString buildOptionList();
     [[nodiscard]] QStringList buildUsbList();
     [[nodiscard]] QStringList removeUnsuitable(const QStringList &devices); // remove live or unremovable
     [[nodiscard]] bool checkDestSize();
-    [[nodiscard]] quint64 calculateSourceSize();
-    [[nodiscard]] bool validateSizeCompatibility(const quint64 sourceSize, const quint64 diskSize) const;
     [[nodiscard]] bool confirmLargeDeviceWarning(const quint64 diskSize) const;
+    [[nodiscard]] bool validateSizeCompatibility(const quint64 sourceSize, const quint64 diskSize) const;
+    [[nodiscard]] quint64 calculateSourceSize();
+    [[nodiscard]] static QString expandDevicePath(const QString &device);
+    [[nodiscard]] static QString getDriveName(const QString &device);
+    [[nodiscard]] static QString getDrivePath(const QString &device);
+    [[nodiscard]] static QString getLiveDeviceName();
+    [[nodiscard]] static QString readInitrdParam(const QString &name,
+                                                 const QString &filePath = "/live/config/initrd.out");
     [[nodiscard]] static bool isRunningLive();
     [[nodiscard]] static bool isToRam();
+    [[nodiscard]] static bool isUsbOrRemovable(const QString &device);
     void makeUsb(const QString &options);
     void progress();
     void setGeneralConnections();

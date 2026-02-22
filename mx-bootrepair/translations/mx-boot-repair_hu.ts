@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="hu">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="hu">
 <context>
     <name>MainWindow</name>
     <message>
@@ -45,7 +43,7 @@
     </message>
     <message>
         <location filename="../src/gui/mainwindow.ui" line="134"/>
-        <location filename="../src/gui/mainwindow.cpp" line="423"/>
+        <location filename="../src/gui/mainwindow.cpp" line="425"/>
         <source>Select Boot Method</source>
         <translation>Válassza ki az indítási módot</translation>
     </message>
@@ -67,7 +65,7 @@
     </message>
     <message>
         <location filename="../src/gui/mainwindow.ui" line="193"/>
-        <location filename="../src/gui/mainwindow.cpp" line="424"/>
+        <location filename="../src/gui/mainwindow.cpp" line="426"/>
         <source>Location:</source>
         <translation>Hely:</translation>
     </message>
@@ -88,19 +86,19 @@
     </message>
     <message>
         <location filename="../src/gui/mainwindow.ui" line="243"/>
-        <location filename="../src/gui/mainwindow.cpp" line="426"/>
+        <location filename="../src/gui/mainwindow.cpp" line="428"/>
         <source>root</source>
         <translation>root</translation>
     </message>
     <message>
         <location filename="../src/gui/mainwindow.ui" line="278"/>
-        <location filename="../src/gui/mainwindow.cpp" line="431"/>
+        <location filename="../src/gui/mainwindow.cpp" line="433"/>
         <source>Select root location:</source>
         <translation>Válassza ki a root partíciót:</translation>
     </message>
     <message>
         <location filename="../src/gui/mainwindow.ui" line="300"/>
-        <location filename="../src/gui/mainwindow.cpp" line="425"/>
+        <location filename="../src/gui/mainwindow.cpp" line="427"/>
         <source>Install on:</source>
         <translation>Telepítés ezen:</translation>
     </message>
@@ -156,7 +154,7 @@
         <translation>Következő</translation>
     </message>
     <message>
-        <location filename="../src/gui/mainwindow.cpp" line="459"/>
+        <location filename="../src/gui/mainwindow.cpp" line="461"/>
         <source>Apply</source>
         <translation>Alkalmazás</translation>
     </message>
@@ -166,49 +164,49 @@
         <translation>GRUB a %1 eszközre kerül.</translation>
     </message>
     <message>
-        <location filename="../src/gui/mainwindow.cpp" line="290"/>
-        <location filename="../src/gui/mainwindow.cpp" line="348"/>
-        <location filename="../src/gui/mainwindow.cpp" line="464"/>
-        <location filename="../src/gui/mainwindow.cpp" line="468"/>
-        <location filename="../src/gui/mainwindow.cpp" line="475"/>
-        <location filename="../src/gui/mainwindow.cpp" line="481"/>
-        <location filename="../src/gui/mainwindow.cpp" line="489"/>
-        <location filename="../src/gui/mainwindow.cpp" line="496"/>
+        <location filename="../src/gui/mainwindow.cpp" line="292"/>
+        <location filename="../src/gui/mainwindow.cpp" line="350"/>
+        <location filename="../src/gui/mainwindow.cpp" line="466"/>
+        <location filename="../src/gui/mainwindow.cpp" line="470"/>
+        <location filename="../src/gui/mainwindow.cpp" line="477"/>
+        <location filename="../src/gui/mainwindow.cpp" line="483"/>
+        <location filename="../src/gui/mainwindow.cpp" line="491"/>
+        <location filename="../src/gui/mainwindow.cpp" line="498"/>
         <source>Error</source>
         <translation>Hiba</translation>
     </message>
     <message>
-        <location filename="../src/gui/mainwindow.cpp" line="140"/>
+        <location filename="../src/gui/mainwindow.cpp" line="142"/>
         <source>The GRUB configuration file (grub.cfg) is being rebuilt.</source>
         <translation>A GRUB konfigurációs fájl (grub.cfg) rekonstruálása.</translation>
     </message>
     <message>
-        <location filename="../src/gui/mainwindow.cpp" line="174"/>
+        <location filename="../src/gui/mainwindow.cpp" line="176"/>
         <source>Generating initramfs images on: %1</source>
         <translation>Initramfs képfájlok generálása ezen: %1</translation>
     </message>
     <message>
-        <location filename="../src/gui/mainwindow.cpp" line="203"/>
+        <location filename="../src/gui/mainwindow.cpp" line="205"/>
         <source>Backing up MBR or PBR from %1 device.</source>
         <translation>MBR vagy PBR mentése a %1 eszközről.</translation>
     </message>
     <message>
-        <location filename="../src/gui/mainwindow.cpp" line="259"/>
+        <location filename="../src/gui/mainwindow.cpp" line="261"/>
         <source>Warning</source>
         <translation>Figyelmeztetés</translation>
     </message>
     <message>
-        <location filename="../src/gui/mainwindow.cpp" line="260"/>
+        <location filename="../src/gui/mainwindow.cpp" line="262"/>
         <source>You are going to write the content of </source>
         <translation>Ki fogja írni a tartalmát ennek:</translation>
     </message>
     <message>
-        <location filename="../src/gui/mainwindow.cpp" line="260"/>
+        <location filename="../src/gui/mainwindow.cpp" line="262"/>
         <source> to </source>
         <translation>ide:</translation>
     </message>
     <message>
-        <location filename="../src/gui/mainwindow.cpp" line="261"/>
+        <location filename="../src/gui/mainwindow.cpp" line="263"/>
         <source>
 
 Are you sure?</source>
@@ -217,122 +215,122 @@ Are you sure?</source>
 Biztos benne?</translation>
     </message>
     <message>
-        <location filename="../src/gui/mainwindow.cpp" line="267"/>
+        <location filename="../src/gui/mainwindow.cpp" line="269"/>
         <source>Restoring MBR/PBR from backup to %1 device.</source>
         <translation>MBR/PBR visszaállítása mentésből a %1 eszközre.</translation>
     </message>
     <message>
-        <location filename="../src/gui/mainwindow.cpp" line="291"/>
+        <location filename="../src/gui/mainwindow.cpp" line="293"/>
         <source>Could not find EFI system partition (ESP) on any system disks. Please create an ESP and try again.</source>
         <translation>Nem található EFI rendszer partíció (ESP) egyik rendszer lemezen sem. Hozzon létre egy ESP-t és próbálja újra.</translation>
     </message>
     <message>
-        <location filename="../src/gui/mainwindow.cpp" line="303"/>
+        <location filename="../src/gui/mainwindow.cpp" line="305"/>
         <source>Select %1 location:</source>
         <translation>%1 helyének kiválasztása:</translation>
     </message>
     <message>
-        <location filename="../src/gui/mainwindow.cpp" line="326"/>
+        <location filename="../src/gui/mainwindow.cpp" line="328"/>
         <source>Back</source>
         <translation>Vissza</translation>
     </message>
     <message>
-        <location filename="../src/gui/mainwindow.cpp" line="342"/>
+        <location filename="../src/gui/mainwindow.cpp" line="344"/>
         <source>Success</source>
         <translation>Sikeres</translation>
     </message>
     <message>
-        <location filename="../src/gui/mainwindow.cpp" line="342"/>
+        <location filename="../src/gui/mainwindow.cpp" line="344"/>
         <source>Process finished with success.&lt;p&gt;&lt;b&gt;Do you want to exit MX Boot Repair?&lt;/b&gt;</source>
         <translation>A feldolgozás sikeresen befejeződött.&lt;p&gt;&lt;b&gt;Kilép az MX rendszerbetöltő javítóból?&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="../src/gui/mainwindow.cpp" line="348"/>
+        <location filename="../src/gui/mainwindow.cpp" line="350"/>
         <source>Process finished. Errors have occurred.</source>
         <translation>A feldolgozás befejeződött. Hibák történtek.</translation>
     </message>
     <message>
         <location filename="../src/gui/mainwindow.cpp" line="109"/>
-        <location filename="../src/gui/mainwindow.cpp" line="148"/>
-        <location filename="../src/gui/mainwindow.cpp" line="180"/>
+        <location filename="../src/gui/mainwindow.cpp" line="150"/>
+        <location filename="../src/gui/mainwindow.cpp" line="182"/>
         <source>Enter password to unlock %1 encrypted partition:</source>
         <translation>Adja meg a jelszót a %1 titkosított partíció feloldásához:</translation>
     </message>
     <message>
-        <location filename="../src/gui/mainwindow.cpp" line="430"/>
+        <location filename="../src/gui/mainwindow.cpp" line="432"/>
         <source>Select GRUB location</source>
         <translation>Válassza ki a GRUB helyét</translation>
     </message>
     <message>
-        <location filename="../src/gui/mainwindow.cpp" line="439"/>
+        <location filename="../src/gui/mainwindow.cpp" line="441"/>
         <source>Select initramfs options</source>
         <translation>Initramfs beállítások kiválasztása</translation>
     </message>
     <message>
-        <location filename="../src/gui/mainwindow.cpp" line="449"/>
+        <location filename="../src/gui/mainwindow.cpp" line="451"/>
         <source>Select Item to Back Up</source>
         <translation>Válassza ki a menteni kívánt elemet</translation>
     </message>
     <message>
-        <location filename="../src/gui/mainwindow.cpp" line="454"/>
+        <location filename="../src/gui/mainwindow.cpp" line="456"/>
         <source>Select Item to Restore</source>
         <translation>Válassza ki a visszaállítani kívánt elemet</translation>
     </message>
     <message>
-        <location filename="../src/gui/mainwindow.cpp" line="464"/>
-        <location filename="../src/gui/mainwindow.cpp" line="475"/>
+        <location filename="../src/gui/mainwindow.cpp" line="466"/>
+        <location filename="../src/gui/mainwindow.cpp" line="477"/>
         <source>No location was selected.</source>
         <translation>Nincs hely kiválasztva.</translation>
     </message>
     <message>
-        <location filename="../src/gui/mainwindow.cpp" line="469"/>
-        <location filename="../src/gui/mainwindow.cpp" line="482"/>
+        <location filename="../src/gui/mainwindow.cpp" line="471"/>
+        <location filename="../src/gui/mainwindow.cpp" line="484"/>
         <source>Please select the root partition of the system you want to fix.</source>
         <translation>Válassza ki a javítani kívánt rendszer gyökérpartícióját.</translation>
     </message>
     <message>
-        <location filename="../src/gui/mainwindow.cpp" line="487"/>
+        <location filename="../src/gui/mainwindow.cpp" line="489"/>
         <source>Select backup file name</source>
         <translation>Adja meg a mentés fájlnevét</translation>
     </message>
     <message>
-        <location filename="../src/gui/mainwindow.cpp" line="489"/>
-        <location filename="../src/gui/mainwindow.cpp" line="496"/>
+        <location filename="../src/gui/mainwindow.cpp" line="491"/>
+        <location filename="../src/gui/mainwindow.cpp" line="498"/>
         <source>No file was selected.</source>
         <translation>Nincs fájl kiválasztva.</translation>
     </message>
     <message>
-        <location filename="../src/gui/mainwindow.cpp" line="494"/>
+        <location filename="../src/gui/mainwindow.cpp" line="496"/>
         <source>Select MBR or PBR backup file</source>
         <translation>Válasszon ki egy MBR vagy PBR mentés fájlt</translation>
     </message>
     <message>
-        <location filename="../src/gui/mainwindow.cpp" line="512"/>
+        <location filename="../src/gui/mainwindow.cpp" line="514"/>
         <source>About %1</source>
         <translation>%1 névjegye</translation>
     </message>
     <message>
-        <location filename="../src/gui/mainwindow.cpp" line="514"/>
+        <location filename="../src/gui/mainwindow.cpp" line="516"/>
         <source>Version: </source>
         <translation>Verzió:</translation>
     </message>
     <message>
-        <location filename="../src/gui/mainwindow.cpp" line="515"/>
+        <location filename="../src/gui/mainwindow.cpp" line="517"/>
         <source>Simple boot repair program for MX Linux</source>
         <translation>Egyszerű rendszerbetöltő javító MX Linuxhoz</translation>
     </message>
     <message>
-        <location filename="../src/gui/mainwindow.cpp" line="517"/>
+        <location filename="../src/gui/mainwindow.cpp" line="519"/>
         <source>Copyright (c) MX Linux</source>
         <translation>Copyright (c) MX Linux</translation>
     </message>
     <message>
-        <location filename="../src/gui/mainwindow.cpp" line="518"/>
+        <location filename="../src/gui/mainwindow.cpp" line="520"/>
         <source>%1 License</source>
         <translation>%1 licenc</translation>
     </message>
     <message>
-        <location filename="../src/gui/mainwindow.cpp" line="531"/>
+        <location filename="../src/gui/mainwindow.cpp" line="533"/>
         <source>%1 Help</source>
         <translation>%1 Súgó</translation>
     </message>
@@ -368,78 +366,79 @@ Biztos benne?</translation>
     <message>
         <location filename="../src/gui/main.cpp" line="94"/>
         <source>MX Boot Repair - GUI and CLI tool for repairing GRUB bootloader</source>
-        <translation type="unfinished"></translation>
+        <translation>MX rendszerbetöltő javító - Grafikus felület és parancssor a GRUB indító rendberakásához</translation>
     </message>
     <message>
         <location filename="../src/gui/main.cpp" line="99"/>
         <source>Force CLI mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Parancssoros mód kényszerítése</translation>
     </message>
     <message>
         <location filename="../src/gui/main.cpp" line="100"/>
         <source>Print actions without executing</source>
-        <translation type="unfinished"></translation>
+        <translation>Műveletek kiírása, végrehajtás nélkül</translation>
     </message>
     <message>
         <location filename="../src/gui/main.cpp" line="101"/>
         <source>Do not prompt; require flags</source>
-        <translation type="unfinished"></translation>
+        <translation>Ne kérdezzen; kapcsolók megadása szükséges</translation>
     </message>
     <message>
         <location filename="../src/gui/main.cpp" line="102"/>
         <source>Action: install, repair, initramfs, backup, restore</source>
-        <translation type="unfinished"></translation>
+        <translation>Művelet: install, repair, initramfs, backup, restore</translation>
     </message>
     <message>
         <location filename="../src/gui/main.cpp" line="103"/>
         <source>Target for install: mbr, esp, root</source>
-        <translation type="unfinished"></translation>
+        <translation>Telepítési cél: mbr, esp, root</translation>
     </message>
     <message>
         <location filename="../src/gui/main.cpp" line="104"/>
         <source>Device for target (e.g., sda, sda1)</source>
-        <translation type="unfinished"></translation>
+        <translation>Céleszköz (pl.: sda, sda1)</translation>
     </message>
     <message>
         <location filename="../src/gui/main.cpp" line="105"/>
         <source>Root partition (e.g., /dev/sda2)</source>
-        <translation type="unfinished"></translation>
+        <translation>Gyökérpartíció (pl.: /dev/sda2)</translation>
     </message>
     <message>
         <location filename="../src/gui/main.cpp" line="106"/>
         <source>Partition to mount at /boot in chroot</source>
-        <translation type="unfinished"></translation>
+        <translation>A /boot alá csatolandó partíció a chroot alatt</translation>
     </message>
     <message>
         <location filename="../src/gui/main.cpp" line="107"/>
         <source>Partition to mount at /boot/efi in chroot</source>
-        <translation type="unfinished"></translation>
+        <translation>A /boot/efi alá csatolandó partíció a chroot alatt</translation>
     </message>
     <message>
         <location filename="../src/gui/main.cpp" line="108"/>
         <source>Path for backup/restore image</source>
-        <translation type="unfinished"></translation>
+        <translation>A mentési vagy visszaállítás képfájl útvonala</translation>
     </message>
     <message>
         <location filename="../src/gui/main.cpp" line="109"/>
         <source>Skip confirmations (for restore)</source>
-        <translation type="unfinished"></translation>
+        <translation>Jóváhagyás átugrása (visszaállításkor)</translation>
     </message>
     <message>
         <location filename="../src/gui/main.cpp" line="110"/>
         <source>Enable verbose output</source>
-        <translation type="unfinished"></translation>
+        <translation>Részletes kimenet engedélyezése</translation>
     </message>
     <message>
         <location filename="../src/gui/main.cpp" line="111"/>
         <source>Suppress non-error output</source>
-        <translation type="unfinished"></translation>
+        <translation>A nem hibaüzenetek elrejtése</translation>
     </message>
     <message>
         <location filename="../src/gui/main.cpp" line="121"/>
         <source>Error: --verbose and --quiet options are mutually exclusive
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Hiba: a --verbose és a --quiet kapcsolók nem használhatók együtt
+</translation>
     </message>
     <message>
         <location filename="../src/gui/main.cpp" line="127"/>
@@ -454,158 +453,158 @@ Biztos benne?</translation>
     <message>
         <location filename="../src/cli/controller.cpp" line="29"/>
         <source>Invalid index. Try again: </source>
-        <translation type="unfinished"></translation>
+        <translation>Érvénytelen index. Próbálja újra:</translation>
     </message>
     <message>
         <location filename="../src/cli/controller.cpp" line="48"/>
         <source>Invalid selection. Enter a number </source>
-        <translation type="unfinished"></translation>
+        <translation>Érvénytelen választás. Adjon meg egy számot</translation>
     </message>
     <message>
         <location filename="../src/cli/controller.cpp" line="234"/>
         <source>MX Boot Repair (CLI)</source>
-        <translation type="unfinished"></translation>
+        <translation>MX rendszerbetöltő javító (parancssor)</translation>
     </message>
     <message>
         <location filename="../src/cli/controller.cpp" line="235"/>
         <source>1) Install GRUB</source>
-        <translation type="unfinished"></translation>
+        <translation>1) GRUB telepítése</translation>
     </message>
     <message>
         <location filename="../src/cli/controller.cpp" line="236"/>
         <source>2) Repair GRUB (update-grub)</source>
-        <translation type="unfinished"></translation>
+        <translation>2) GRUB javítása (update-grub)</translation>
     </message>
     <message>
         <location filename="../src/cli/controller.cpp" line="237"/>
         <source>3) Regenerate initramfs</source>
-        <translation type="unfinished"></translation>
+        <translation>3) Az initramfs frissítése</translation>
     </message>
     <message>
         <location filename="../src/cli/controller.cpp" line="238"/>
         <source>4) Backup MBR/PBR</source>
-        <translation type="unfinished"></translation>
+        <translation>4) MBR/PBR biztonsági mentése</translation>
     </message>
     <message>
         <location filename="../src/cli/controller.cpp" line="239"/>
         <source>5) Restore MBR/PBR</source>
-        <translation type="unfinished"></translation>
+        <translation>5) MBR/PBR visszaállítása</translation>
     </message>
     <message>
         <location filename="../src/cli/controller.cpp" line="240"/>
         <source>q) Quit</source>
-        <translation type="unfinished"></translation>
+        <translation>q) Kilépés</translation>
     </message>
     <message>
         <location filename="../src/cli/controller.cpp" line="241"/>
         <source>Select action [1-5 or &apos;q&apos; to quit]: </source>
-        <translation type="unfinished"></translation>
+        <translation>Válasszon műveletet [1-5 vagy &apos;q&apos; a kilépéshez]: </translation>
     </message>
     <message>
         <location filename="../src/cli/controller.cpp" line="247"/>
         <source>Invalid selection. Enter 1-5 or &apos;q&apos; to quit.</source>
-        <translation type="unfinished"></translation>
+        <translation>Érvénytelen választás. Adjon meg értéket 1-5-ig vagy &apos;q&apos; a kilépéshez.</translation>
     </message>
     <message>
         <location filename="../src/cli/controller.cpp" line="252"/>
         <source>Target: 0) MBR  1) ESP  2) Root</source>
-        <translation type="unfinished"></translation>
+        <translation>Cél: 0) MBR  1) ESP  2) Gyökérkönyvtár</translation>
     </message>
     <message>
         <location filename="../src/cli/controller.cpp" line="253"/>
         <source>Select target</source>
-        <translation type="unfinished"></translation>
+        <translation>Válasszon célt</translation>
     </message>
     <message>
         <location filename="../src/cli/controller.cpp" line="259"/>
-        <location filename="../src/cli/controller.cpp" line="294"/>
-        <location filename="../src/cli/controller.cpp" line="307"/>
+        <location filename="../src/cli/controller.cpp" line="297"/>
+        <location filename="../src/cli/controller.cpp" line="310"/>
         <source>No partitions found. Returning to main menu.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nincs partíció. Visszatérés a főmenübe.</translation>
     </message>
     <message>
         <location filename="../src/cli/controller.cpp" line="263"/>
-        <location filename="../src/cli/controller.cpp" line="320"/>
-        <location filename="../src/cli/controller.cpp" line="338"/>
+        <location filename="../src/cli/controller.cpp" line="323"/>
+        <location filename="../src/cli/controller.cpp" line="341"/>
         <source>No disks found. Returning to main menu.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nincsenek lemezek. Visszatérés a főmenübe.</translation>
     </message>
     <message>
         <location filename="../src/cli/controller.cpp" line="268"/>
         <source>Select disk for MBR (e.g., sda)</source>
-        <translation type="unfinished"></translation>
+        <translation>Válasszon lemezt az MBR-hez (pl.: sda)</translation>
     </message>
     <message>
         <location filename="../src/cli/controller.cpp" line="272"/>
         <source>Select partition for GRUB (e.g., sda1)</source>
-        <translation type="unfinished"></translation>
+        <translation>Válasszon partíciót a GRUB-hoz (pl.: sda1)</translation>
     </message>
     <message>
         <location filename="../src/cli/controller.cpp" line="277"/>
         <source>Select root partition of installed system</source>
-        <translation type="unfinished"></translation>
+        <translation>Válassza ki a telepített rendszer gyökérpartícióját</translation>
     </message>
     <message>
-        <location filename="../src/cli/controller.cpp" line="295"/>
+        <location filename="../src/cli/controller.cpp" line="298"/>
         <source>Select root partition to repair</source>
-        <translation type="unfinished"></translation>
+        <translation>Válassza ki a javítandó gyökérpartíciót</translation>
     </message>
     <message>
-        <location filename="../src/cli/controller.cpp" line="308"/>
+        <location filename="../src/cli/controller.cpp" line="311"/>
         <source>Select root partition to regenerate initramfs</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/cli/controller.cpp" line="321"/>
-        <source>Select disk to back up MBR/PBR from</source>
-        <translation type="unfinished"></translation>
+        <translation>Válassza ki a gyökérpartíciót az initramfs frissítéséhez</translation>
     </message>
     <message>
         <location filename="../src/cli/controller.cpp" line="324"/>
-        <source>Output file path (or &apos;b&apos; to go back, &apos;q&apos; to quit): </source>
-        <translation type="unfinished"></translation>
+        <source>Select disk to back up MBR/PBR from</source>
+        <translation>Válassza ki a lemezt ahonnan az MBR/PBR-t menti</translation>
     </message>
     <message>
-        <location filename="../src/cli/controller.cpp" line="339"/>
-        <source>Select disk to restore MBR/PBR to</source>
-        <translation type="unfinished"></translation>
+        <location filename="../src/cli/controller.cpp" line="327"/>
+        <source>Output file path (or &apos;b&apos; to go back, &apos;q&apos; to quit): </source>
+        <translation>Kimeneti fájl útvonala (vagy &apos;b&apos; a visszalépés, &apos;q&apos; a kilépés): </translation>
     </message>
     <message>
         <location filename="../src/cli/controller.cpp" line="342"/>
+        <source>Select disk to restore MBR/PBR to</source>
+        <translation>Válassza ki a lemezt ahová az MBR/PBR-t visszaállítja</translation>
+    </message>
+    <message>
+        <location filename="../src/cli/controller.cpp" line="345"/>
         <source>Input backup file path (or &apos;b&apos; to go back, &apos;q&apos; to quit): </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/cli/controller.cpp" line="349"/>
-        <source>WARNING: This will overwrite the first 446 bytes of /dev/</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/cli/controller.cpp" line="349"/>
-        <source>. Continue? [y/N]: </source>
-        <translation type="unfinished"></translation>
+        <translation>Mentési fájl útvonala (vagy &apos;b&apos; a visszalépés, &apos;q&apos; a kilépés): </translation>
     </message>
     <message>
         <location filename="../src/cli/controller.cpp" line="352"/>
+        <source>WARNING: This will overwrite the first 446 bytes of /dev/</source>
+        <translation>FIGYELEM: Ez felülírja az első 446 bájtot itt: /dev/</translation>
+    </message>
+    <message>
+        <location filename="../src/cli/controller.cpp" line="352"/>
+        <source>. Continue? [y/N]: </source>
+        <translation>. Folytatja? [i/N]: </translation>
+    </message>
+    <message>
+        <location filename="../src/cli/controller.cpp" line="355"/>
         <source>yes</source>
         <comment>confirmation input: full word</comment>
         <translation>igen</translation>
     </message>
     <message>
-        <location filename="../src/cli/controller.cpp" line="353"/>
+        <location filename="../src/cli/controller.cpp" line="356"/>
         <source>y</source>
         <comment>confirmation input: single-letter yes</comment>
         <translation>i</translation>
     </message>
     <message>
-        <location filename="../src/cli/controller.cpp" line="357"/>
+        <location filename="../src/cli/controller.cpp" line="360"/>
         <source>Cancelled.</source>
-        <translation type="unfinished"></translation>
+        <translation>Megszakítva.</translation>
     </message>
     <message>
-        <location filename="../src/cli/controller.cpp" line="364"/>
+        <location filename="../src/cli/controller.cpp" line="367"/>
         <source>Unknown selection</source>
-        <translation type="unfinished"></translation>
+        <translation>Ismeretlen választás</translation>
     </message>
 </context>
 </TS>

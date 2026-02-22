@@ -1,0 +1,25 @@
+#!/bin/bash
+# Helper script for terminal operations that ensures terminal stays open
+# and user can see results before closing
+
+export DEBIAN_FRONTEND=dialog
+
+# Run all arguments as the command (pkexec splits them)
+bash -c "$*"
+EXIT_CODE=$?
+
+# Always show result and wait for user input
+echo ""
+echo "========================================"
+if [ $EXIT_CODE -eq 0 ]; then
+    echo "Operation completed successfully."
+else
+    echo "Operation completed with errors (exit code: $EXIT_CODE)."
+    echo "Please review the output above."
+fi
+echo "========================================"
+echo ""
+
+# Wait for user to acknowledge - this ensures terminal stays open
+read -n1 -srp "Press any key to close..."
+echo ""

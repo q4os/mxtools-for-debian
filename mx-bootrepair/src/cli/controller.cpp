@@ -284,6 +284,9 @@ int CliController::run()
         opt.location = location;
         opt.root = root;
         opt.dryRun = parser.isSet(dryRunOpt);
+        if (opt.target == GrubTarget::Esp) {
+            opt.espDevice = "/dev/" + location;
+        }
 
             const bool ok = engine.installGrub(opt);
             Q_UNUSED(ok);

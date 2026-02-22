@@ -25,9 +25,14 @@
 #include "ui_mainwindow.h"
 
 #include <QDebug>
+#include <QDir>
 #include <QFileDialog>
+#include <QFileInfo>
+#include <QRegularExpression>
 #include <QScrollBar>
 #include <QStorageInfo>
+#include <QTextStream>
+#include <sys/stat.h>
 
 #include "about.h"
 #include <chrono>
@@ -151,7 +156,7 @@ void MainWindow::makeUsb(const QString &options)
         sourceSize = cmd.getOut(QString("du -m --summarize %1 2>/dev/null | cut -f1").arg(source), Cmd::QuietMode::Yes);
         QString rootPartition = cmd.getOut(QString("df --output=source %1 | awk 'END{print $1}'").arg(source));
         source = "clone=" + source.remove('"');
-        if ("/dev/" + device == cmd.getOut(cliUtils + "get_drive " + rootPartition)) {
+        if ("/dev/" + device == getDrivePath(rootPartition)) {
             showErrorAndReset(tr("Source and destination are on the same device, please select again."));
             return;
         }
@@ -266,21 +271,27 @@ void MainWindow::setGeneralConnections()
 QString MainWindow::buildOptionList()
 {
     QStringList optionsList {"-N"};
+    const bool updateMode = ui->checkUpdate->isChecked();
 
     // Map the checkboxes to the corresponding options
+    // Note: partition/format options are skipped in update mode as a safeguard
     std::map<QCheckBox *, QString> checkboxOptions {
-        {ui->checkEncrypt, "-E"},
-        {ui->checkGpt, "-g"},
         {ui->checkKeep, "-k"},
         {ui->checkPretend, "-p"},
         {ui->checkSaveBoot, "-S"},
         {ui->checkUpdate, "-u"},
-        {ui->checkSetPmbrBoot, "--gpt-pmbr"},
         {ui->checkForceUsb, "--force=usb"},
         {ui->checkForceAutomount, "--force=automount"},
-        {ui->checkForceMakefs, "--force=makefs"},
         {ui->checkForceNofuse, "--force=nofuse"},
     };
+
+    // Partition/format options - only add if not in update mode
+    if (!updateMode) {
+        checkboxOptions[ui->checkEncrypt] = "-E";
+        checkboxOptions[ui->checkGpt] = "-g";
+        checkboxOptions[ui->checkSetPmbrBoot] = "--gpt-pmbr";
+        checkboxOptions[ui->checkForceMakefs] = "--force=makefs";
+    }
 
     // Add options for the checked checkboxes
     for (const auto &[checkBox, option] : checkboxOptions) {
@@ -289,19 +300,21 @@ QString MainWindow::buildOptionList()
         }
     }
 
-    // Add additional options
-    if (ui->spinBoxEsp->value() != 50) {
-        optionsList.append("--esp-size=" + ui->spinBoxEsp->cleanText());
-    }
-    if (ui->spinBoxSize->value() < ui->spinBoxSize->maximum()) {
-        optionsList.append("--size=" + ui->spinBoxSize->cleanText());
-    }
-    if (!ui->textLabel->text().isEmpty()) {
-        optionsList.append("--label=" + ui->textLabel->text());
-    }
-    if (ui->checkDataFirst->isChecked()) {
-        optionsList.append("--data-first=" + ui->spinBoxDataSize->cleanText() + ","
-                           + ui->comboBoxDataFormat->currentText());
+    // Add additional options (skip partition/format options in update mode)
+    if (!updateMode) {
+        if (ui->spinBoxEsp->value() != 50) {
+            optionsList.append("--esp-size=" + ui->spinBoxEsp->cleanText());
+        }
+        if (ui->spinBoxSize->value() < ui->spinBoxSize->maximum()) {
+            optionsList.append("--size=" + ui->spinBoxSize->cleanText());
+        }
+        if (!ui->textLabel->text().isEmpty()) {
+            optionsList.append("--label=" + ui->textLabel->text());
+        }
+        if (ui->checkDataFirst->isChecked()) {
+            optionsList.append("--data-first=" + ui->spinBoxDataSize->cleanText() + ","
+                               + ui->comboBoxDataFormat->currentText());
+        }
     }
 
     // Add the verbosity option
@@ -364,21 +377,186 @@ QStringList MainWindow::buildUsbList()
     return removeUnsuitable(drives.split('\n'));
 }
 
+QString MainWindow::expandDevicePath(const QString &device)
+{
+    QString dev = device.trimmed();
+    QString candidate;
+
+    if (dev.startsWith("/dev/")) {
+        candidate = dev;
+    } else if (dev.startsWith("dev/")) {
+        candidate = "/" + dev;
+    } else if (dev.startsWith('/')) {
+        candidate = "/dev" + dev;
+    } else {
+        candidate = "/dev/" + dev;
+    }
+
+    struct stat st {};
+    const QByteArray pathBytes = candidate.toLocal8Bit();
+    if (::stat(pathBytes.constData(), &st) != 0) {
+        return {};
+    }
+    if (!S_ISBLK(st.st_mode)) {
+        return {};
+    }
+    return candidate;
+}
+
+QString MainWindow::getDriveName(const QString &device)
+{
+    QString name = device.trimmed();
+    if (name.startsWith("/dev/")) {
+        name = name.mid(5);
+    } else if (name.startsWith("dev/")) {
+        name = name.mid(4);
+    } else if (name.startsWith('/')) {
+        name = name.mid(1);
+    }
+
+    if (name.contains("mmcblk") || name.contains("nvme")) {
+        const QRegularExpression pDigitRe("p\\d$");
+        if (pDigitRe.match(name).hasMatch()) {
+            name.chop(2);
+        }
+        return name;
+    }
+
+    const QRegularExpression digitRe("\\d$");
+    if (digitRe.match(name).hasMatch()) {
+        name.chop(1);
+    }
+    if (digitRe.match(name).hasMatch()) {
+        name.chop(1);
+    }
+    return name;
+}
+
+QString MainWindow::getDrivePath(const QString &device)
+{
+    const QString name = getDriveName(device);
+    if (name.isEmpty()) {
+        return {};
+    }
+    return "/dev/" + name;
+}
+
+bool MainWindow::isUsbOrRemovable(const QString &device)
+{
+    const QString devicePath = expandDevicePath(device);
+    if (devicePath.isEmpty()) {
+        return false;
+    }
+
+    const QString driveName = getDriveName(devicePath);
+    if (driveName.isEmpty()) {
+        return false;
+    }
+
+    const QString sysBlock = "/sys/block/" + driveName;
+    if (!QFileInfo::exists(sysBlock)) {
+        return false;
+    }
+
+    const QString devPath = QFileInfo(sysBlock + "/device").canonicalFilePath();
+    if (devPath.isEmpty()) {
+        return false;
+    }
+
+    if (devPath.contains("sdmmc")) {
+        return true;
+    }
+
+    QFile removableFile(sysBlock + "/removable");
+    if (removableFile.open(QIODevice::ReadOnly | QIODevice::Text)) {
+        const QString flag = QString::fromUtf8(removableFile.readAll()).trimmed();
+        if (flag == "1") {
+            return true;
+        }
+    }
+
+    if (QFileInfo(devPath).fileName().startsWith("usb")) {
+        return true;
+    }
+
+    return devPath.contains("/usb");
+}
+
+QString MainWindow::readInitrdParam(const QString &name, const QString &filePath)
+{
+    QFile file(filePath);
+    if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+        return {};
+    }
+
+    QTextStream in(&file);
+    const QRegularExpression re(QString("^\\s*%1=(.*)$").arg(QRegularExpression::escape(name)));
+    while (!in.atEnd()) {
+        const QString line = in.readLine();
+        const QRegularExpressionMatch match = re.match(line);
+        if (match.hasMatch()) {
+            QString value = match.captured(1).trimmed();
+            if ((value.startsWith('"') && value.endsWith('"')) || (value.startsWith('\'') && value.endsWith('\''))) {
+                value = value.mid(1, value.size() - 2);
+            }
+            return value;
+        }
+    }
+    return {};
+}
+
+QString MainWindow::getLiveDeviceName()
+{
+    const QString cryptUuid = readInitrdParam("CRYPT_UUID");
+    QString liveDevPath;
+
+    if (!cryptUuid.isEmpty()) {
+        QDir uuidDir("/dev/disk/by-uuid");
+        if (uuidDir.exists()) {
+            const QFileInfoList entries = uuidDir.entryInfoList(QDir::NoDotAndDotDot | QDir::System);
+            for (const QFileInfo &entry : entries) {
+                if (entry.fileName() == cryptUuid) {
+                    liveDevPath = entry.canonicalFilePath();
+                    break;
+                }
+            }
+        }
+    }
+
+    if (liveDevPath.isEmpty()) {
+        QFile mounts("/proc/mounts");
+        if (mounts.open(QIODevice::ReadOnly | QIODevice::Text)) {
+            QTextStream in(&mounts);
+            while (!in.atEnd()) {
+                const QString line = in.readLine();
+                const QStringList parts = line.split(' ', Qt::SkipEmptyParts);
+                if (parts.size() > 1 && parts.at(1) == "/live/boot-dev") {
+                    liveDevPath = parts.at(0);
+                    break;
+                }
+            }
+        }
+    }
+
+    if (liveDevPath.isEmpty()) {
+        return {};
+    }
+    return QFileInfo(liveDevPath).fileName();
+}
+
 // Remove unsuitable drives from the list (live and unremovable)
 QStringList MainWindow::removeUnsuitable(const QStringList &devices)
 {
     QStringList suitableDevices;
     suitableDevices.reserve(devices.size());
-    const QString liveDrive
-        = cmd.getOut(cliUtils + "get_drive $(get_live_dev)", Cmd::QuietMode::Yes).trimmed().remove(QRegularExpression("^/dev/"));
+    const QString liveDrive = getDriveName(getLiveDeviceName());
     const QString rootDrive
         = cmd.getOut("lsblk -nlso NAME,PKNAME,TYPE $(findmnt / -no SOURCE) | grep 'disk' | awk '{print $1}'", Cmd::QuietMode::Yes)
               .trimmed();
     for (const QString &deviceInfo : devices) {
         const QString deviceName = deviceInfo.split(' ').first();
-        const bool isUsbOrRemovable
-            = ui->checkForceUsb->isChecked() || cmd.run(cliUtils + "is_usb_or_removable " + deviceName.toUtf8(), Cmd::QuietMode::Yes);
-        if (isUsbOrRemovable && deviceName != liveDrive && deviceName != rootDrive) {
+        const bool deviceIsUsbOrRemovable = ui->checkForceUsb->isChecked() || isUsbOrRemovable(deviceName);
+        if (deviceIsUsbOrRemovable && deviceName != liveDrive && deviceName != rootDrive) {
             suitableDevices.append(deviceInfo);
         }
     }
@@ -583,6 +761,50 @@ void MainWindow::checkUpdate_clicked(bool checked)
     if (!checked) {
         ui->checkSaveBoot->setChecked(false);
     }
+
+    // Disable options that conflict with update mode (would force reformat)
+    const bool enabled = !checked;
+
+    // Size options
+    ui->spinBoxSize->setEnabled(enabled);
+    ui->label_percent->setEnabled(enabled);
+
+    // Label option
+    ui->textLabel->setEnabled(enabled);
+    ui->label_part_label->setEnabled(enabled);
+
+    // ESP size option
+    ui->spinBoxEsp->setEnabled(enabled);
+    ui->labelSizeEsp->setEnabled(enabled);
+
+    // Data partition option
+    ui->checkDataFirst->setEnabled(enabled);
+    ui->spinBoxDataSize->setEnabled(enabled);
+    ui->comboBoxDataFormat->setEnabled(enabled);
+    ui->labelFormat->setEnabled(enabled);
+
+    // Partition/format options
+    ui->checkEncrypt->setEnabled(enabled);
+    ui->checkGpt->setEnabled(enabled);
+    ui->checkSetPmbrBoot->setEnabled(enabled);
+    ui->checkForceMakefs->setEnabled(enabled);
+
+    // Reset to defaults when update mode is enabled
+    if (checked) {
+        // Block signals to prevent valueChanged from re-enabling controls
+        ui->spinBoxSize->blockSignals(true);
+        ui->spinBoxSize->setValue(ui->spinBoxSize->maximum());
+        ui->spinBoxSize->blockSignals(false);
+
+        ui->spinBoxEsp->setValue(50);
+        ui->textLabel->clear();
+        ui->checkDataFirst->setChecked(false);
+        ui->spinBoxDataSize->setValue(ui->spinBoxDataSize->minimum());
+        ui->checkEncrypt->setChecked(false);
+        ui->checkGpt->setChecked(false);
+        ui->checkSetPmbrBoot->setChecked(false);
+        ui->checkForceMakefs->setChecked(false);
+    }
 }
 
 void MainWindow::checkCloneMode_clicked(bool checked)
@@ -652,13 +874,16 @@ void MainWindow::radioNormal_clicked()
 {
     ui->checkCloneLive->setEnabled(isRunningLive());
     ui->checkCloneMode->setEnabled(true);
-    ui->checkEncrypt->setEnabled(true);
     ui->checkPretend->setEnabled(true);
     ui->pushOptions->setEnabled(true);
-    ui->label_percent->setEnabled(true);
-    ui->label_part_label->setEnabled(true);
-    ui->spinBoxSize->setEnabled(true);
-    ui->textLabel->setEnabled(true);
+
+    // Only re-enable these if update mode is not checked
+    const bool updateMode = ui->checkUpdate->isChecked();
+    ui->checkEncrypt->setEnabled(!updateMode);
+    ui->label_percent->setEnabled(!updateMode);
+    ui->label_part_label->setEnabled(!updateMode);
+    ui->spinBoxSize->setEnabled(!updateMode);
+    ui->textLabel->setEnabled(!updateMode);
 }
 
 bool MainWindow::isantiX_mx_family(const QString &selected)
@@ -691,6 +916,10 @@ void MainWindow::pushLumLogFile_clicked()
 
 void MainWindow::spinBoxSize_valueChanged(int arg1)
 {
+    // Don't re-enable controls if update mode is checked
+    if (ui->checkUpdate->isChecked()) {
+        return;
+    }
     const int max = ui->spinBoxSize->maximum();
     ui->checkDataFirst->setEnabled(arg1 == max);
     ui->spinBoxDataSize->setEnabled(arg1 == max);
