@@ -4,12 +4,12 @@
     <message>
         <location filename="../src/cmd.cpp" line="163"/>
         <source>Administrator Access Required</source>
-        <translation type="unfinished"/>
+        <translation>Beheerdersrechten Vereist</translation>
     </message>
     <message>
         <location filename="../src/cmd.cpp" line="164"/>
         <source>This operation requires administrator privileges. Please restart the application and enter your password when prompted.</source>
-        <translation type="unfinished"/>
+        <translation>Voor deze bewerking zijn beheerdersrechten vereist. Start de toepassing opnieuw op en voer uw wachtwoord in wanneer daarom wordt gevraagd.</translation>
     </message>
 </context>
 <context>

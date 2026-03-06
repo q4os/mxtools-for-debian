@@ -16,7 +16,7 @@ public:
     void listFlatpakRemotes() const;
     [[nodiscard]] QString getInstallRef() const
     {
-        return install_ref;
+        return installRef;
     }
     [[nodiscard]] QString getUser() const
     {
@@ -38,5 +38,5 @@ private:
     QLineEdit *editAddRemote;
     QLineEdit *editInstallFlatpakref;
     QString user;
-    QString install_ref;
+    QString installRef;
 };

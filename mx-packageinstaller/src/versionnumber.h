@@ -23,6 +23,8 @@
 #include <QMetaType>
 #include <QStringList>
 
+#include <compare>
+
 /** \brief A data type for version numbers.
  *
  * This class provides a data type for version numbers. Think of it
@@ -81,18 +83,14 @@ public:
     VersionNumber &operator=(const VersionNumber &value) = default;
     VersionNumber &operator=(const QString &value);
 
-    [[nodiscard]] bool operator<(const VersionNumber &value) const;
-    [[nodiscard]] bool operator<=(const VersionNumber &value) const;
-    [[nodiscard]] bool operator>(const VersionNumber &value) const;
-    [[nodiscard]] bool operator>=(const VersionNumber &value) const;
+    [[nodiscard]] std::strong_ordering operator<=>(const VersionNumber &value) const;
     [[nodiscard]] bool operator==(const VersionNumber &value) const;
-    [[nodiscard]] bool operator!=(const VersionNumber &value) const;
 
 private:
     QString str; // Full version string
     int epoch {};
-    QStringList upstream_version; // A string list of characters, numbers are grouped together
-    QStringList debian_revision;
+    QStringList upstreamVersion; // A string list of characters, numbers are grouped together
+    QStringList debianRevision;
 
     // Add characters to separate elements, groups digits together
     [[nodiscard]] static QStringList groupDigits(const QString &value);

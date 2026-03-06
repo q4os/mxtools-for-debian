@@ -19,8 +19,8 @@ Cmd::Cmd(QObject *parent)
 {
     connect(this, &Cmd::readyReadStandardOutput, [this] { emit outputAvailable(readAllStandardOutput()); });
     connect(this, &Cmd::readyReadStandardError, [this] { emit errorAvailable(readAllStandardError()); });
-    connect(this, &Cmd::outputAvailable, [this](const QString &out) { out_buffer += out; });
-    connect(this, &Cmd::errorAvailable, [this](const QString &err) { out_buffer += err; });
+    connect(this, &Cmd::outputAvailable, [this](const QString &out) { outBuffer += out; });
+    connect(this, &Cmd::errorAvailable, [this](const QString &err) { outBuffer += err; });
 }
 
 QString Cmd::elevationTool()
@@ -33,9 +33,9 @@ QString Cmd::elevationTool()
 
 QString Cmd::getOut(const QString &cmd, QuietMode quiet, Elevation elevation)
 {
-    out_buffer.clear();
+    outBuffer.clear();
     run(cmd, quiet, elevation);
-    return out_buffer.trimmed();
+    return outBuffer.trimmed();
 }
 
 QString Cmd::getOutAsRoot(const QString &cmd, QuietMode quiet)
@@ -45,7 +45,7 @@ QString Cmd::getOutAsRoot(const QString &cmd, QuietMode quiet)
 
 bool Cmd::run(const QString &cmd, QuietMode quiet, Elevation elevation)
 {
-    out_buffer.clear();
+    outBuffer.clear();
     helperMarkerPath.clear();
     if (state() != QProcess::NotRunning) {
         qDebug() << "Process already running:" << program() << arguments();
@@ -92,7 +92,7 @@ bool Cmd::terminateAndKill()
 {
     if (state() != QProcess::NotRunning) {
         terminate();
-        if (!waitForFinished(2000)) {
+        if (!waitForFinished(TerminateTimeoutMs)) {
             kill();
         }
     }
@@ -101,7 +101,7 @@ bool Cmd::terminateAndKill()
 
 QString Cmd::readAllOutput() const
 {
-    return out_buffer.trimmed();
+    return outBuffer.trimmed();
 }
 
 bool Cmd::isAuthenticationDismissed() const

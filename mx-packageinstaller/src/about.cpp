@@ -38,7 +38,7 @@ extern const QString starting_home;
 void displayDoc(const QString &url, const QString &title)
 {
     bool started_as_root = false;
-    if (qEnvironmentVariable("HOME") == "root") {
+    if (qEnvironmentVariable("HOME") == QLatin1String("root")) {
         started_as_root = true;
         qputenv("HOME", starting_home.toUtf8()); // Use original home for theming purposes
     }
@@ -65,8 +65,8 @@ void displayDoc(const QString &url, const QString &title)
 void displayAboutMsgBox(const QString &title, const QString &message, const QString &licence_url,
                         const QString &license_title)
 {
-    const auto width = 600;
-    const auto height = 500;
+    constexpr int DialogWidth = 600;
+    constexpr int DialogHeight = 500;
     QMessageBox msgBox(QMessageBox::NoIcon, title, message);
     auto *btnLicense = msgBox.addButton(QObject::tr("License"), QMessageBox::HelpRole);
     auto *btnChangelog = msgBox.addButton(QObject::tr("Changelog"), QMessageBox::HelpRole);
@@ -80,7 +80,7 @@ void displayAboutMsgBox(const QString &title, const QString &message, const QStr
     } else if (msgBox.clickedButton() == btnChangelog) {
         auto *changelog = new QDialog;
         changelog->setWindowTitle(QObject::tr("Changelog"));
-        changelog->resize(width, height);
+        changelog->resize(DialogWidth, DialogHeight);
 
         auto *text = new QTextEdit(changelog);
         text->setReadOnly(true);

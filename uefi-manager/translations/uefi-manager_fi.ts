@@ -4,7 +4,7 @@
     <message>
         <location filename="../src/cmd.cpp" line="163"/>
         <source>Administrator Access Required</source>
-        <translation>Järjestelmänvalvojan oikeudet vaaditaan</translation>
+        <translation>Pääkäyttäjän oikeudet vaaditaan</translation>
     </message>
     <message>
         <location filename="../src/cmd.cpp" line="164"/>
@@ -76,7 +76,7 @@
     <message>
         <location filename="../src/mainwindow.ui" line="393"/>
         <source>About this application</source>
-        <translation>Tietoja tästä sovelluksesta</translation>
+        <translation>Tietoja sovelluksesta</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="396"/>
@@ -341,7 +341,7 @@ Missing mandatory files in directory: </source>
     <message>
         <location filename="../src/mainwindow.cpp" line="1658"/>
         <source>Tool for managing UEFI boot entries</source>
-        <translation>Työkalu UEFI-käynnistyskohteiden hallintaan</translation>
+        <translation>Työkalu UEFI-käynnistyksen hallintaan</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="1821"/>
@@ -510,7 +510,7 @@ Missing mandatory files in directory: </source>
     <message>
         <location filename="../src/about.cpp" line="101"/>
         <source>Cancel</source>
-        <translation>Peruuta</translation>
+        <translation>Peru</translation>
     </message>
     <message>
         <location filename="../src/about.cpp" line="125"/>
@@ -530,7 +530,7 @@ Missing mandatory files in directory: </source>
     <message>
         <location filename="../src/main.cpp" line="85"/>
         <source>uefi-manager is a tool for managing UEFI boot entries</source>
-        <translation>Uefi-manager on UEFI-käynnistyskohteiden hallintatyökalu</translation>
+        <translation>uefi-manager on UEFI-käynnistyksen hallintatyökalu</translation>
     </message>
     <message>
         <location filename="../src/main.cpp" line="88"/>
@@ -541,17 +541,17 @@ Missing mandatory files in directory: </source>
         <location filename="../src/main.cpp" line="66"/>
         <location filename="../src/main.cpp" line="95"/>
         <source>UEFI Manager</source>
-        <translation>UEFI Manageri</translation>
+        <translation>UEFI Hallinta</translation>
     </message>
     <message>
         <location filename="../src/main.cpp" line="89"/>
         <source>Run in test mode (bypass UEFI detection for GUI testing).</source>
-        <translation>Suorita testitilassa (ohittaa UEFI-tunnistuksen graafisen käyttöliittymän testauksessa).</translation>
+        <translation>Suorita testitilassa (ohittaa UEFI-tunnistuksen graafisen käyttöliittymän).</translation>
     </message>
     <message>
         <location filename="../src/main.cpp" line="96"/>
         <source>This system doesn&apos;t seem to support UEFI, or was not booted in UEFI mode. Exiting.</source>
-        <translation>Tämä tietokone ei tue UEFI menetelmää tai sitä ei kytketty UEFI-tilaan. Poistutaan.</translation>
+        <translation>Tämä tietokone ei tue UEFI menetelmää tai se ei ole UEFI-tilassa. Poistutaan.</translation>
     </message>
     <message>
         <location filename="../src/main.cpp" line="107"/>
@@ -561,7 +561,7 @@ Missing mandatory files in directory: </source>
     <message>
         <location filename="../src/main.cpp" line="108"/>
         <source>You seem to be logged in as root, please log out and log in as normal user to use this program.</source>
-        <translation>Olet kirjautunut sisään pääkäyttäjänä. Kirjaudu sisään normaalina käyttäjänä käyttääksesi tätä ohjelmaa.</translation>
+        <translation>Olet kirjautunut pääkäyttäjänä. Kirjaudu sisään tavallisena käyttäjänä käyttääksesi tätä ohjelmaa.</translation>
     </message>
     <message>
         <location filename="../src/main.cpp" line="113"/>

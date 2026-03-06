@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(./build.sh --arch)",
+      "Bash(./build.sh:*)",
+      "Bash(ninja:*)",
+      "Bash(/home/adrian/Sync/programs/qt/mx-packageinstaller/build.sh:*)",
+      "Bash(tail:*)",
+      "Bash(ls:*)"
+    ]
+  },
+  "enableAllProjectMcpServers": true,
+  "enabledMcpjsonServers": [
+    "docker"
+  ]
+}

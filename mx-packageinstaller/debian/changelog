@@ -1,3 +1,10 @@
+mx-packageinstaller (26.02) mx; urgency=medium
+
+  * Warn before closing while process is running
+  * Keep package tabs disabled during active output operations
+
+ -- Adrian <adrian@mxlinux.org>  Tue, 24 Feb 2026 14:05:38 -0500
+
 mx-packageinstaller (26.01.6) mx; urgency=medium
 
   * Fix for XRDP sessions

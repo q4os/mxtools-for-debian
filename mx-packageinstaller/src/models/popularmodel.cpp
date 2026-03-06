@@ -50,14 +50,14 @@ void PopularModel::buildNodes()
     m_appNodes.resize(m_categories.size());
 
     for (int catIdx = 0; catIdx < m_categories.size(); ++catIdx) {
-        auto *categoryNode = new Node{catIdx, -1, true};
+        auto *categoryNode = new Node{.categoryIdx = catIdx, .rowInCategory = -1, .isCategory = true};
         m_nodes.append(categoryNode);
         m_categoryNodes[catIdx] = categoryNode;
 
         const auto &appIndices = m_categories[catIdx].appIndices;
         m_appNodes[catIdx].resize(appIndices.size());
         for (int row = 0; row < appIndices.size(); ++row) {
-            auto *appNode = new Node{catIdx, row, false};
+            auto *appNode = new Node{.categoryIdx = catIdx, .rowInCategory = row, .isCategory = false};
             m_nodes.append(appNode);
             m_appNodes[catIdx][row] = appNode;
         }

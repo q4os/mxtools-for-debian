@@ -25,10 +25,12 @@
 #include <QFile>
 #include <QString>
 
+#include "common.h"
+
 class Log
 {
 public:
-    explicit Log(const QString &fileName = "/tmp/uefi-manager.log");
+    explicit Log(const QString &fileName = LOG_FILE_PATH);
     static QString getLog();
     static void messageHandler(QtMsgType type, const QMessageLogContext &, const QString &msg);
 

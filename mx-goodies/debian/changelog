@@ -1,3 +1,9 @@
+mx-goodies (26.03.01mx25) mx; urgency=medium
+
+  * modifiy rpi respin files to match main line release
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 02 Mar 2026 20:17:06 -0500
+
 mx-goodies (26.01.03mx25) mx; urgency=medium
 
   * dual init detection (sysvinit and systemd)

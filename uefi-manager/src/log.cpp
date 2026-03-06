@@ -26,7 +26,7 @@
 Log::Log(const QString &fileName)
 {
     logFile.setFileName(fileName);
-    if (!logFile.open(QIODevice::ReadWrite)) {
+    if (!logFile.open(QIODevice::WriteOnly | QIODevice::Append)) {
         qDebug() << "Could not open log file:" << fileName;
         return;
     }

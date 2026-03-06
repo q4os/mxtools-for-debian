@@ -1,3 +1,20 @@
+uefi-manager (26.02) mx; urgency=medium
+
+  * Elevation failure no longer quits the app, shows error and lets user
+    continue.
+  * Fix efibootmgr argument construction for create/rename operations.
+  * Escape special characters in crypttab/GRUB root identifiers.
+  * Improve block device and ESP detection, including NVMe/virtio naming.
+  * Improve cleanup reliability by retrying failed unmounts and cleaning stale
+    artifacts on the ESP.
+  * ESP space check runs before file cleanup.
+  * Fix boot location lookup when root partition is on the same device.
+  * Fix ESP add-entry when mount directory already exists.
+  * Fallback distro name set to "Linux" when detection fails.
+  * Fix potential crash on null boot-entry selection.
+
+ -- Adrian <adrian@mxlinux.org>  Tue, 17 Feb 2026 00:18:28 -0500
+
 uefi-manager (25.09.1) mx; urgency=medium
 
   * Update translations

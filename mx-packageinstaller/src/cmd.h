@@ -4,6 +4,8 @@
 
 class QTextStream;
 
+constexpr int TerminateTimeoutMs = 2000;
+
 class Cmd : public QProcess
 {
     Q_OBJECT
@@ -30,7 +32,7 @@ signals:
 private:
     QString elevate;
     QString helper;
-    QString out_buffer;
+    QString outBuffer;
     QString helperMarkerPath;
 
     [[nodiscard]] bool isAuthenticationDismissed() const;

@@ -22,17 +22,45 @@
 
 cmake_minimum_required(VERSION 3.16)
 
-# Get version from debian/changelog
+# Check if building on Arch or with an explicit PKGBUILD environment flag.
 execute_process(
-    COMMAND dpkg-parsechangelog -SVersion
-    WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
-    OUTPUT_VARIABLE PROJECT_VERSION_FROM_CHANGELOG
-    OUTPUT_STRIP_TRAILING_WHITESPACE
-    RESULT_VARIABLE DPKG_RESULT
+    COMMAND sh -c "grep -q '^ID=arch' /etc/os-release"
+    RESULT_VARIABLE IS_ARCH_RESULT
 )
+if(IS_ARCH_RESULT EQUAL 0 OR DEFINED ENV{UEFI_MANAGER_ARCH_BUILD})
+    add_definitions(-DIS_ARCH_BUILD)
+    message(STATUS "Arch build detected - disabling Frugal tab")
+endif()
 
-if(NOT DPKG_RESULT EQUAL 0)
-    message(FATAL_ERROR "Failed to get version from debian/changelog using dpkg-parsechangelog")
+set(PROJECT_VERSION_FROM_CHANGELOG "")
+
+if(DEFINED PROJECT_VERSION_OVERRIDE AND NOT "${PROJECT_VERSION_OVERRIDE}" STREQUAL "")
+    set(PROJECT_VERSION_FROM_CHANGELOG "${PROJECT_VERSION_OVERRIDE}")
+    message(STATUS "Using version override: ${PROJECT_VERSION_FROM_CHANGELOG}")
+else()
+    # Try dpkg-parsechangelog first (Debian/Ubuntu)
+    execute_process(
+        COMMAND dpkg-parsechangelog -SVersion
+        WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+        OUTPUT_VARIABLE PROJECT_VERSION_FROM_CHANGELOG
+        OUTPUT_STRIP_TRAILING_WHITESPACE
+        RESULT_VARIABLE DPKG_RESULT
+        ERROR_QUIET
+    )
+
+    if(DPKG_RESULT EQUAL 0 AND NOT "${PROJECT_VERSION_FROM_CHANGELOG}" STREQUAL "")
+        message(STATUS "Using version from debian/changelog: ${PROJECT_VERSION_FROM_CHANGELOG}")
+    elseif(EXISTS ${CMAKE_SOURCE_DIR}/debian/changelog)
+        file(READ ${CMAKE_SOURCE_DIR}/debian/changelog PROJECT_CHANGELOG_CONTENT)
+        string(REGEX MATCH "^[^\\(]*\\(([^)]+)\\)" _match "${PROJECT_CHANGELOG_CONTENT}")
+        if(NOT _match)
+            message(FATAL_ERROR "Could not parse version from debian/changelog")
+        endif()
+        set(PROJECT_VERSION_FROM_CHANGELOG "${CMAKE_MATCH_1}")
+        message(STATUS "Using version parsed from debian/changelog: ${PROJECT_VERSION_FROM_CHANGELOG}")
+    else()
+        message(FATAL_ERROR "Could not determine version: dpkg-parsechangelog not available and debian/changelog missing")
+    endif()
 endif()
 
 project(uefi-manager
@@ -87,6 +115,7 @@ set(SOURCES
     src/about.cpp
     src/cmd.cpp
     src/log.cpp
+    src/utils.cpp
 )
 
 set(HEADERS
@@ -95,6 +124,7 @@ set(HEADERS
     src/cmd.h
     src/log.h
     src/common.h
+    src/utils.h
 )
 
 set(UI_FILES
@@ -180,3 +210,19 @@ set_target_properties(uefi-manager PROPERTIES
 install(TARGETS uefi-manager
     RUNTIME DESTINATION bin
 )
+
+# Unit tests
+find_package(Qt6 QUIET COMPONENTS Test)
+if(Qt6Test_FOUND)
+    enable_testing()
+
+    add_executable(test_utils
+        tests/test_utils.cpp
+        src/utils.cpp
+        src/utils.h
+    )
+    target_include_directories(test_utils PRIVATE src)
+    target_link_libraries(test_utils Qt6::Core Qt6::Test)
+    add_test(NAME test_utils COMMAND test_utils)
+    add_test(NAME test_helper COMMAND bash ${CMAKE_SOURCE_DIR}/tests/test_helper.sh)
+endif()

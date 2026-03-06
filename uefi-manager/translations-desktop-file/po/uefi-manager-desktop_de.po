@@ -3,6 +3,9 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
+# Translators:
+# delix02, 2026
+# 
 #, fuzzy
 msgid ""
 msgstr ""
@@ -10,6 +13,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-03-22 20:11-0400\n"
 "PO-Revision-Date: 2025-03-23 00:11+0000\n"
+"Last-Translator: delix02, 2026\n"
 "Language-Team: German (https://app.transifex.com/anticapitalista/teams/10162/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -20,9 +24,9 @@ msgstr ""
 #. The desktop entry name will be displayed within the menu.
 #: desktop-in/uefi-manager.desktop.in:5
 msgid "UEFI Manager"
-msgstr ""
+msgstr "UEFI Verwaltung"
 
 #. # The desktop entry comment will be shown within the menu.
 #: desktop-in/uefi-manager.desktop.in:7
 msgid "Manage UEFI boot options"
-msgstr ""
+msgstr "UEFI Boot-Optionen verwalten"

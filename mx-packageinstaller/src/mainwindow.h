@@ -24,6 +24,7 @@
  **********************************************************************/
 #pragma once
 
+#include <QCloseEvent>
 #include <QCommandLineParser>
 #include <QDomDocument>
 #include <QFile>
@@ -97,6 +98,7 @@ public:
     ~MainWindow() override;
 
 protected:
+    void closeEvent(QCloseEvent *event) override;
     void keyPressEvent(QKeyEvent *event) override;
 
 signals:
@@ -164,6 +166,7 @@ private:
     bool hideLibsChecked {true};
     bool testInitiallyEnabled {false};
     bool updatedOnce {false};
+    bool operationInProgress {false};
     bool warningBackports {false};
     bool warningFlatpaks {false};
     bool warningTest {false};
@@ -214,7 +217,7 @@ private:
     QUrl getScreenshotUrl(const QString &name);
     const QCommandLineParser &args;
     const QString elevate {QFile::exists("/usr/bin/pkexec") ? "/usr/bin/pkexec " : "/usr/bin/gksu "};
-    const QString tempList {"/etc/apt/sources.list.d/mxpitemp.list"};
+    const QString tempList {QStringLiteral("/etc/apt/sources.list.d/mxpitemp.list")};
 
     // Models
     PackageModel *enabledModel {nullptr};
@@ -240,8 +243,8 @@ private:
     [[nodiscard]] QString getLocalizedName(const QDomElement &element) const;
     [[nodiscard]] QString getVersion(const QString &name) const;
     [[nodiscard]] QString mapArchToFormat(const QString &arch) const;
-    [[nodiscard]] QStringList listFlatpaks(const QString &remote, const QString &type = QLatin1String("")) const;
-    [[nodiscard]] QStringList listInstalledFlatpaks(const QString &type = QLatin1String(""));
+    [[nodiscard]] QStringList listFlatpaks(const QString &remote, const QString &type = QString()) const;
+    [[nodiscard]] QStringList listInstalledFlatpaks(const QString &type = QString());
     [[nodiscard]] FlatpakData createFlatpakData(const QString &item, const QStringList &installedAll) const;
     [[nodiscard]] PackageData createPackageData(const QString &name, const QString &version,
                                                 const QString &description) const;
@@ -259,22 +262,22 @@ private:
     [[nodiscard]] PackageFilterProxy *getCurrentProxy();
 
     bool buildPackageLists(bool forceDownload = false);
-    bool confirmActions(const QString &names, const QString &action);
+    [[nodiscard]] bool confirmActions(const QString &names, const QString &action);
 
-    bool downloadAndUnzip(const QString &url, QFile &file);
-    bool downloadAndUnzip(const QString &url, const QString &repoName, const QString &branch, const QString &format,
-                          QFile &file);
-    bool downloadFile(const QString &url, QFile &file);
-    bool downloadPackageList(bool forceDownload = false);
+    [[nodiscard]] bool downloadAndUnzip(const QString &url, QFile &file);
+    [[nodiscard]] bool downloadAndUnzip(const QString &url, const QString &repoName, const QString &branch,
+                                        const QString &format, QFile &file);
+    [[nodiscard]] bool downloadFile(const QString &url, QFile &file);
+    [[nodiscard]] bool downloadPackageList(bool forceDownload = false);
     bool install(const QString &names);
-    bool installBatch(const QStringList &nameList);
-    bool installPopularApp(const QString &name);
-    bool installPopularApps();
-    bool installSelected();
-    bool markKeep();
-    bool readPackageList(bool forceDownload = false);
-    bool uninstall(const QString &names, const QString &preUninstall = QLatin1String(""),
-                   const QString &postUninstall = QLatin1String(""));
+    [[nodiscard]] bool installBatch(const QStringList &nameList);
+    [[nodiscard]] bool installPopularApp(const QString &name);
+    [[nodiscard]] bool installPopularApps();
+    [[nodiscard]] bool installSelected();
+    [[nodiscard]] bool markKeep();
+    [[nodiscard]] bool readPackageList(bool forceDownload = false);
+    [[nodiscard]] bool uninstall(const QString &names, const QString &preUninstall = QString(),
+                                 const QString &postUninstall = QString());
     bool updateApt();
     [[nodiscard]] static QString convert(quint64 bytes);
     [[nodiscard]] static quint64 convert(const QString &size);

@@ -1,11 +1,81 @@
 #!/bin/bash
 
+set -euo pipefail
+
 # Root level functions requiring password for uefi-manager
 
 cleanup_temp() {
+    local mount_base="/mnt/uefi-manager"
+    local allowed_mount_base="/boot/efi"
+    local mode=""
+    local mounts=()
+    local dirs=()
+    local luks_devices=()
+
+    while [[ $# -gt 0 ]]; do
+        case "$1" in
+            --mounts)   mode="mounts"; shift; continue;;
+            --dirs)     mode="dirs"; shift; continue;;
+            --luks)     mode="luks"; shift; continue;;
+            *)
+                case "$mode" in
+                    mounts) mounts+=("$1");;
+                    dirs)   dirs+=("$1");;
+                    luks)   luks_devices+=("$1");;
+                esac
+                shift; continue;;
+        esac
+    done
+
+    # Unmount tracked mounts (in reverse order)
+    for ((i=${#mounts[@]}-1; i>=0; i--)); do
+        local mp
+        mp="$(realpath -m "${mounts[i]}")"
+        if [[ "$mp" != "$mount_base"/* && "$mp" != "$allowed_mount_base"/* ]]; then
+            echo "Error: refusing to unmount path outside allowed directories: $mp" >&2
+            continue
+        fi
+        umount "$mp" 2>/dev/null || umount -l "$mp" 2>/dev/null || true
+    done
+
+    # Remove tracked directories
+    for dir in "${dirs[@]}"; do
+        local rdir
+        rdir="$(realpath -m "$dir")"
+        if [[ "$rdir" != "$mount_base"/* && "$rdir" != "$allowed_mount_base"/* ]]; then
+            echo "Error: refusing to remove directory outside allowed directories: $rdir" >&2
+            continue
+        fi
+        rmdir "$rdir" 2>/dev/null || true
+    done
+
+    # Clean up base mount directory
+    if [[ -d "$mount_base" ]]; then
+        for sub in "$mount_base"/*/; do
+            [[ -d "$sub" ]] || continue
+            umount "$sub" 2>/dev/null || umount -l "$sub" 2>/dev/null || true
+            rmdir "$sub" 2>/dev/null || true
+        done
+        rmdir "$mount_base" 2>/dev/null || true
+    fi
+
+    # Close LUKS devices — only allow names matching uefi-manager pattern
+    for dev in "${luks_devices[@]}"; do
+        if [[ "$dev" == */* || "$dev" != luks-* ]]; then
+            echo "Error: refusing to close unexpected LUKS device: $dev" >&2
+            continue
+        fi
+        cryptsetup close "$dev" 2>/dev/null || true
+    done
 }
 
 copy_log() {
+    local src="/tmp/uefi-manager.log"
+    local dest="/var/log/uefi-manager.log"
+    if [[ -f "$src" ]]; then
+        cp "$src" "$dest"
+        chmod 644 "$dest"
+    fi
 }
 
 write_checkfile() {
@@ -13,14 +83,22 @@ write_checkfile() {
 }
 
 main() {
-case "$1" in 
-    copy_log) 
-        copy_log;;
-    cleanup_temp)
-        cleanup_temp;;
-    write_chkfile)
-        write_chkfile;;
-esac
+    if [[ $# -lt 1 ]]; then
+        echo "Error: missing subcommand" >&2
+        return 1
+    fi
+
+    case "$1" in
+        copy_log)
+            copy_log;;
+        cleanup_temp)
+            cleanup_temp "${@:2}";;
+        write_checkfile)
+            write_checkfile;;
+        *)
+            echo "Error: unknown subcommand: $1" >&2
+            return 1;;
+    esac
 }
 
 main "$@"

@@ -78,6 +78,7 @@ gir1.2-spiceclientgtk-3.0
 qemu-utils 
 virt-viewer 
 qemu-system-x86
+qemu-system-modules-spice
 libvirt-daemon-system
 libvirt-daemon-system-systemd
 </install_package_names>

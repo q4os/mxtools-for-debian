@@ -37,13 +37,9 @@ public:
               const QByteArray *input = nullptr, QuietMode quiet = QuietMode::No, Elevation elevation = Elevation::No);
     bool procAsRoot(const QString &cmd, const QStringList &args = {}, QString *output = nullptr,
                     const QByteArray *input = nullptr, QuietMode quiet = QuietMode::No);
-    bool run(const QString &cmd, QString *output = nullptr, const QByteArray *input = nullptr,
-             QuietMode quiet = QuietMode::No, Elevation elevation = Elevation::No);
-    bool runAsRoot(const QString &cmd, QString *output = nullptr, const QByteArray *input = nullptr,
-                   QuietMode quiet = QuietMode::No);
-    [[nodiscard]] QString getOut(const QString &cmd, QuietMode quiet = QuietMode::No,
-                                 Elevation elevation = Elevation::No);
-    [[nodiscard]] QString getOutAsRoot(const QString &cmd, QuietMode quiet = QuietMode::No);
+    bool procElevated(const QString &cmd, const QStringList &args = {}, QString *output = nullptr,
+                      QuietMode quiet = QuietMode::No);
+    static void resetElevation() { elevationFailed = false; }
 
 signals:
     void done();
@@ -61,5 +57,6 @@ private:
     static constexpr int EXIT_CODE_COMMAND_NOT_FOUND = 127;
     static constexpr int EXIT_CODE_PERMISSION_DENIED = 126;
 
+    inline static bool elevationFailed = false;
     void handleElevationError();
 };

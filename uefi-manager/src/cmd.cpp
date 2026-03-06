@@ -27,7 +27,6 @@
 #include <QEventLoop>
 #include <QFile>
 #include <QMessageBox>
-#include <QTimer>
 #include <QWidget>
 
 #include <unistd.h>
@@ -36,7 +35,7 @@ Cmd::Cmd(QObject *parent)
     : QProcess(parent)
 {
     // Determine the appropriate elevation command
-    const QStringList elevationCommands = {"/usr/bin/pkexec", "/usr/bin/gksu"};
+    const QStringList elevationCommands = {"/usr/bin/pkexec", "/usr/bin/gksu", "/usr/bin/sudo"};
     for (const QString &command : elevationCommands) {
         if (QFile::exists(command)) {
             elevationCommand = command;
@@ -45,7 +44,7 @@ Cmd::Cmd(QObject *parent)
     }
 
     if (elevationCommand.isEmpty()) {
-        qWarning() << "No suitable elevation command found (pkexec or gksu)";
+        qWarning() << "No suitable elevation command found (pkexec, gksu, or sudo)";
     }
 
     helper = QString("/usr/lib/%1/helper").arg(QApplication::applicationName());
@@ -71,22 +70,15 @@ void Cmd::handleStandardError()
     emit errorAvailable(error);
 }
 
-QString Cmd::getOut(const QString &cmd, QuietMode quiet, Elevation elevation)
-{
-    QString output;
-    run(cmd, &output, nullptr, quiet, elevation);
-    return output;
-}
-
-QString Cmd::getOutAsRoot(const QString &cmd, QuietMode quiet)
-{
-    return getOut(cmd, quiet, Elevation::Yes);
-}
-
 bool Cmd::proc(const QString &cmd, const QStringList &args, QString *output, const QByteArray *input, QuietMode quiet,
                Elevation elevation)
 {
     outBuffer.clear();
+
+    // Skip if elevation has already failed in this action chain
+    if (elevationFailed && elevation == Elevation::Yes) {
+        return false;
+    }
 
     // Check if process is already running
     if (state() != QProcess::NotRunning) {
@@ -99,9 +91,21 @@ bool Cmd::proc(const QString &cmd, const QStringList &args, QString *output, con
         qDebug() << cmd << args;
     }
 
+    // Fail fast if elevation is needed but no elevation command is available
+    if (elevation == Elevation::Yes && getuid() != 0 && elevationCommand.isEmpty()) {
+        qWarning() << "Elevation required but no pkexec/gksu found";
+        handleElevationError();
+        return false;
+    }
+
     // Set up event loop for synchronous execution
     QEventLoop loop;
-    connect(this, &Cmd::done, &loop, &QEventLoop::quit);
+    bool processError = false;
+    auto doneConn = connect(this, &Cmd::done, &loop, &QEventLoop::quit);
+    auto errorConn = connect(this, &QProcess::errorOccurred, &loop, [&loop, &processError] {
+        processError = true;
+        loop.quit();
+    });
 
     // Start the process with appropriate elevation
     if (elevation == Elevation::Yes && getuid() != 0) {
@@ -113,16 +117,25 @@ bool Cmd::proc(const QString &cmd, const QStringList &args, QString *output, con
 
     // Handle input if provided
     if (input && !input->isEmpty()) {
+        waitForStarted();
         write(*input);
     }
     closeWriteChannel();
     loop.exec();
+    disconnect(doneConn);
+    disconnect(errorConn);
+
+    if (processError) {
+        qWarning() << "Process error:" << errorString();
+        return false;
+    }
 
     // Check for permission denied or command not found errors
     // These can occur when elevation fails (canceled dialog or incorrect password)
     if (elevation == Elevation::Yes
         && (exitCode() == EXIT_CODE_PERMISSION_DENIED || exitCode() == EXIT_CODE_COMMAND_NOT_FOUND)) {
         handleElevationError();
+        return false;
     }
 
     // Provide output if requested
@@ -139,30 +152,23 @@ bool Cmd::procAsRoot(const QString &cmd, const QStringList &args, QString *outpu
     return proc(cmd, args, output, input, quiet, Elevation::Yes);
 }
 
-bool Cmd::run(const QString &cmd, QString *output, const QByteArray *input, QuietMode quiet, Elevation elevation)
+bool Cmd::procElevated(const QString &cmd, const QStringList &args, QString *output, QuietMode quiet)
 {
-    if (elevation == Elevation::Yes && getuid() != 0) {
-        bool result = proc(elevationCommand, {helper, cmd}, output, input, quiet);
-        // Command-not-found is returned when password is entered incorrectly
-        if (exitCode() == EXIT_CODE_PERMISSION_DENIED || exitCode() == EXIT_CODE_COMMAND_NOT_FOUND) {
-            handleElevationError();
-        }
-        return result;
+    if (getuid() == 0) {
+        return proc(cmd, args, output, nullptr, quiet);
     }
-    return proc("/bin/bash", {"-c", cmd}, output, input, quiet);
-}
-
-bool Cmd::runAsRoot(const QString &cmd, QString *output, const QByteArray *input, QuietMode quiet)
-{
-    return run(cmd, output, input, quiet, Elevation::Yes);
+    if (elevationCommand.isEmpty()) {
+        qWarning() << "Elevation required but no pkexec/gksu found";
+        return false;
+    }
+    QStringList elevatedArgs = QStringList() << cmd << args;
+    return proc(elevationCommand, elevatedArgs, output, nullptr, quiet);
 }
 
 void Cmd::handleElevationError()
 {
+    elevationFailed = true;
     QWidget *parentWidget = qobject_cast<QWidget *>(qApp->activeWindow());
     QMessageBox::critical(parentWidget, tr("Administrator Access Required"),
-                          tr("This operation requires administrator privileges. Please restart the application "
-                             "and enter your password when prompted."));
-
-    QTimer::singleShot(0, qApp, &QApplication::quit);
+                          tr("This operation requires administrator privileges."));
 }

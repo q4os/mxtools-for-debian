@@ -76,7 +76,8 @@ virt-manager
 libvirt-daemon-system-sysv 
 gir1.2-spiceclientglib-2.0 
 gir1.2-spiceclientgtk-3.0 
-qemu-utils 
+qemu-utils
+qemu-system-modules-spice
 virt-viewer 
 qemu-system-x86
 libvirt-daemon-system

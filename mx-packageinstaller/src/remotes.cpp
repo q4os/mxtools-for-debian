@@ -22,7 +22,7 @@ ManageRemotes::ManageRemotes(QWidget *parent, const QString &user)
     comboUser = new QComboBox(this);
     comboUser->addItem(tr("For all users"));
     comboUser->addItem(tr("For current user"));
-    if (user == "--system ") {
+    if (user == QLatin1String("--system ")) {
         comboUser->setCurrentIndex(0);
     } else {
         comboUser->setCurrentIndex(1);
@@ -112,7 +112,7 @@ void ManageRemotes::addItem()
 
 void ManageRemotes::setInstall()
 {
-    install_ref = editInstallFlatpakref->text();
+    installRef = editInstallFlatpakref->text();
     close();
 }
 

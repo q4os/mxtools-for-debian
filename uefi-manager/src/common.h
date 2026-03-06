@@ -21,6 +21,20 @@
  **********************************************************************/
 #pragma once
 
+#include <QLatin1StringView>
 #include <QString>
 
 inline const QString STARTING_HOME = qEnvironmentVariable("HOME");
+
+// EFI System Partition GUID (GPT) and MBR type
+inline constexpr QLatin1StringView ESP_GUID_GPT("c12a7328-f81f-11d2-ba4b-00a0c93ec93b");
+inline constexpr QLatin1StringView ESP_TYPE_MBR("0xef");
+
+// Base directory for temporary mounts
+inline constexpr QLatin1StringView MOUNT_BASE("/mnt/uefi-manager");
+
+// Log file path
+inline constexpr QLatin1StringView LOG_FILE_PATH("/tmp/uefi-manager.log");
+
+// Byte pattern used to scrub sensitive data from memory
+inline constexpr char SCRUB_BYTE = static_cast<char>(0xA5);

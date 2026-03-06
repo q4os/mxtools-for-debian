@@ -18,24 +18,24 @@
         <location filename="../src/mainwindow.ui" line="57"/>
         <location filename="../src/mainwindow.ui" line="198"/>
         <source>Please select the location of your installation:</source>
-        <translation type="unfinished"/>
+        <translation>Ju lutemi, përzgjidhni vendndodhjen e instalimit tuaj:</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="71"/>
         <location filename="../src/mainwindow.ui" line="211"/>
         <source>Select drive:</source>
-        <translation type="unfinished"/>
+        <translation>Përzgjidhni disk:</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="78"/>
         <location filename="../src/mainwindow.ui" line="228"/>
         <source>Select partition:</source>
-        <translation type="unfinished"/>
+        <translation>Përzgjidhni pjesë:</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="249"/>
         <source>Frugal mode:</source>
-        <translation type="unfinished"/>
+        <translation>Mënyra e Përkorë:</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="296"/>
@@ -46,12 +46,12 @@
         <location filename="../src/mainwindow.ui" line="129"/>
         <location filename="../src/mainwindow.ui" line="313"/>
         <source>UEFI entry name:</source>
-        <translation type="unfinished"/>
+        <translation>Emër zëri UEFI:</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="20"/>
         <source>UEFI manager</source>
-        <translation type="unfinished"/>
+        <translation>Përgjegjës UEFI</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="41"/>
@@ -61,17 +61,17 @@
     <message>
         <location filename="../src/mainwindow.ui" line="47"/>
         <source>This options copies the kernel and initrd files to ESP (EFI System Partition) and creates an UEFI entry that allows to boot the installation directly, bypassing GRUB and other bootloaders. To boot using the created UEFI entry, access the UEFI boot selection menu at startup by pressing the appropriate key for your device (e.g., F12, F9, or Esc, depending on the manufacturer).</source>
-        <translation type="unfinished"/>
+        <translation>Kjo mundësi kopjon kartelat kernel dhe initrd te ESP (EFI System Partition) dhe krijon një zë UEFI që lejon të niset instalimi drejtpërdrejti, duke anashkaluar GRUB-in dhe të tjerë ngarkues nisjesh. Që ta nisni duke përdorur zërin UEFI të krijuar, kaloni gjatë fillimit te menuja e përzgjedhjes së nisjes UEFI, duke shtypur tastin e duhur për pajisjen tuaj (p.sh., F12, F9, ose Esc, varet nga prodhuesi).</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="115"/>
         <source>Kernel to boot:</source>
-        <translation type="unfinished"/>
+        <translation>Kernel për t’u nisur:</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="122"/>
         <source>Kernel options:</source>
-        <translation type="unfinished"/>
+        <translation>Mundësi kerneli:</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="393"/>
@@ -111,7 +111,7 @@
     <message>
         <location filename="../src/mainwindow.ui" line="36"/>
         <source>Manage UEFI entries</source>
-        <translation type="unfinished"/>
+        <translation>Administroni zëra UEFI</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="166"/>
@@ -121,7 +121,7 @@
     <message>
         <location filename="../src/mainwindow.ui" line="172"/>
         <source>This option is meant to create a bootable entry for MX and antiX frugal installation, it creates an EFI boot entry for launching the installation directly, bypassing GRUB and other bootloaders. To boot using the created UEFI entry, access the UEFI boot selection menu at startup by pressing the appropriate key for your device (e.g., F12, F9, or Esc, depending on the manufacturer).</source>
-        <translation type="unfinished"/>
+        <translation>Kjo mundësi është menduar për krijimin e një zëri të nisshëm për instalim të përkorë të MX-it dhe antiX-it, krijon një zë EFI nisjeje për nisje instalimi drejtpërdrejti, duke anashkaluar GRUB-in dhe të tjerë ngarkues nisjesh. Që ta nisni duke përdorur zërin UEFI të krijuar, kaloni gjatë fillimit te menuja e përzgjedhjes së nisjes UEFI, duke shtypur tastin e duhur për pajisjen tuaj (p.sh., F12, F9, ose Esc, varet nga prodhuesi).</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="446"/>
@@ -151,12 +151,12 @@
         <location filename="../src/mainwindow.cpp" line="1487"/>
         <location filename="../src/mainwindow.cpp" line="1497"/>
         <source>UEFI Installer</source>
-        <translation type="unfinished"/>
+        <translation>Instalues UEFI</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="719"/>
         <source>A recent frugal install has been detected. Do you wish to add a UEFI entry direct to your UEFI system menu?</source>
-        <translation type="unfinished"/>
+        <translation>Është pikuar një instalim i përkorë i freskët. Doni të shtohet një zë UEFI drejt e te menuja UEFI e sistemit tuaj?</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="956"/>
@@ -166,12 +166,12 @@
     <message>
         <location filename="../src/mainwindow.cpp" line="963"/>
         <source>Enter passphrase to unlock %1 encrypted partition:</source>
-        <translation type="unfinished"/>
+        <translation>Jepni frazëkalimin për të shkyçur pjesën e fshehtëzuar %1:</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="968"/>
         <source>Passphrase entry cancelled or empty for %1</source>
-        <translation type="unfinished"/>
+        <translation>Zë frazëkalimi i anuluar, ose i zbrazët për %1</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="974"/>
@@ -182,22 +182,23 @@
         <location filename="../src/mainwindow.cpp" line="1488"/>
         <source>Are you sure this is the MX or antiX Frugal installation location?
 Missing mandatory files in directory: </source>
-        <translation type="unfinished"/>
+        <translation>Jeni i sigurt se kjo është vendndodhja e instalimit të Përkorë MX ose antiX?
+Në drejtori mungojnë kartela të detyrueshme: </translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="1561"/>
         <source>Not enough space on the EFI System Partition to copy the kernel and initrd files.</source>
-        <translation type="unfinished"/>
+        <translation>Hapësirë e pamjaftueshme në Pjesë EFI Sistemi për kopjim të kartelave kernel dhe initrd.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="1614"/>
         <source>All fields are required</source>
-        <translation type="unfinished"/>
+        <translation>Janë të domosdoshme krejt fushat</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="1637"/>
         <source>Could not select ESP</source>
-        <translation type="unfinished"/>
+        <translation>S’u përzgjodh dot ESP</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="1655"/>
@@ -265,7 +266,7 @@ Missing mandatory files in directory: </source>
         <location filename="../src/mainwindow.cpp" line="803"/>
         <location filename="../src/mainwindow.cpp" line="1726"/>
         <source>Boot Next: %1</source>
-        <translation>Nisja Pasuese: %1</translation>
+        <translation>Nis Pasuesin: %1</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="749"/>
@@ -326,7 +327,7 @@ Missing mandatory files in directory: </source>
         <location filename="../src/mainwindow.cpp" line="786"/>
         <location filename="../src/mainwindow.cpp" line="803"/>
         <source>not set, will boot using list order</source>
-        <translation>e pacaktuar, do të bëhet nisje duke përdorur radhën në listë</translation>
+        <translation>e paujdisur, do të bëhet nisje duke përdorur radhën sipas listës</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="835"/>
@@ -336,57 +337,57 @@ Missing mandatory files in directory: </source>
     <message>
         <location filename="../src/mainwindow.cpp" line="908"/>
         <source>Failed to open grub.entry file.</source>
-        <translation type="unfinished"/>
+        <translation>S’u arrit të hapet kartela grub.entry.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="1658"/>
         <source>Tool for managing UEFI boot entries</source>
-        <translation type="unfinished"/>
+        <translation>Mjet për administrim zërash nisjeje UEFI</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="1821"/>
         <source>Both old and new EFI labels must be specified</source>
-        <translation type="unfinished"/>
+        <translation>Duhen treguar të dyja etiketa EFI, e vjetra dhe e reja</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="1874"/>
         <source>Multiple boot entries found for label &apos;%1&apos;: %2 and %3;</source>
-        <translation type="unfinished"/>
+        <translation>U gjetën zëra të shumtë për etiketën &apos;%1&apos;: %2 dhe %3;</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="1884"/>
         <source>No EFI data found for label &apos;%1&apos;.</source>
-        <translation type="unfinished"/>
+        <translation>S’u gjetën të dhëna EFI për etiketën &apos;%1&apos;.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="1892"/>
         <source>EFI label &apos;%1&apos; is linked to an unknown partition &apos;%2&apos;.</source>
-        <translation type="unfinished"/>
+        <translation>Etiketa EFI &apos;%1&apos; është e lidhur me një pjesë të panjohur &apos;%2&apos;.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="1903"/>
         <source>Unexpected device name format &apos;%1&apos; for partition related to the label.</source>
-        <translation type="unfinished"/>
+        <translation>Format i papritur emri pajisjeje &apos;%1&apos; për pjesën e lidhur me etiketën.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="1913"/>
         <source>Device partition number [%1] differs from EFI entry partition number [%2].</source>
-        <translation type="unfinished"/>
+        <translation>Numri i pjesës së diskut [%1] është i ndryshëm nga numri i pjesës zë EFI [%2].</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="1927"/>
         <source>Failed to delete old boot entry</source>
-        <translation type="unfinished"/>
+        <translation>S’u arrit të fshihet zë i vjetër nisjeje</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="1932"/>
         <source>Failed to create new boot entry</source>
-        <translation type="unfinished"/>
+        <translation>S’u arrit të krijohet zë i ri nisjeje</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="1497"/>
         <source>Failed to read grub.entry file.</source>
-        <translation type="unfinished"/>
+        <translation>S’u arrit të lexohet kartella grub.entry.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="893"/>
@@ -397,43 +398,43 @@ Missing mandatory files in directory: </source>
     <message>
         <location filename="../src/mainwindow.cpp" line="1516"/>
         <source>Select Frugal Directory</source>
-        <translation type="unfinished"/>
+        <translation>Përzgjidhni Drejtori Instalimi të Përkorë</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="1523"/>
         <source>No EFI System Partitions found.</source>
-        <translation type="unfinished"/>
+        <translation>S’u gjetën Pjesë EFI Sistemi.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="1529"/>
         <source>Select EFI System Partition</source>
-        <translation type="unfinished"/>
+        <translation>Përzgjidhni Pjesë EFI Sistemi</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="1530"/>
         <source>EFI System Partitions:</source>
-        <translation type="unfinished"/>
+        <translation>Pjesë EFI Sistemi:</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="1543"/>
         <source>No EFI System Partition selected</source>
-        <translation type="unfinished"/>
+        <translation>S’u përzgjodh Pjesë EFI Sistemi</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="1550"/>
         <source>Could not mount selected EFI System Partition</source>
-        <translation type="unfinished"/>
+        <translation>S’u montua dot Pjesë e përzgjedhur EFI Sistemi</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="1577"/>
         <location filename="../src/mainwindow.cpp" line="1621"/>
         <source>Could not mount partition. Please make sure you selected the correct partition.</source>
-        <translation type="unfinished"/>
+        <translation>S’u montua dot pjesë. Ju lutemi, sigurohuni se përzgjodhët pjesën e duhur.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="1586"/>
         <source>No directory selected</source>
-        <translation type="unfinished"/>
+        <translation>S’u përzgjodh drejtori</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="1606"/>
@@ -515,12 +516,12 @@ Missing mandatory files in directory: </source>
     <message>
         <location filename="../src/about.cpp" line="125"/>
         <source>Error: Changelog file is missing.</source>
-        <translation type="unfinished"/>
+        <translation>Gabim: Mungon kartelë regjistri ndryshimesh.</translation>
     </message>
     <message>
         <location filename="../src/about.cpp" line="127"/>
         <source>Error: Required utility &apos;zless&apos; is missing.</source>
-        <translation type="unfinished"/>
+        <translation>Gabim: Mungon mjet i domosdoshëm &apos;zless&apos;.</translation>
     </message>
     <message>
         <location filename="../src/about.cpp" line="134"/>
@@ -530,7 +531,7 @@ Missing mandatory files in directory: </source>
     <message>
         <location filename="../src/main.cpp" line="85"/>
         <source>uefi-manager is a tool for managing UEFI boot entries</source>
-        <translation type="unfinished"/>
+        <translation>uefi-manager është një mjet për administrim zërash nisjeje UEFI</translation>
     </message>
     <message>
         <location filename="../src/main.cpp" line="88"/>
@@ -546,12 +547,12 @@ Missing mandatory files in directory: </source>
     <message>
         <location filename="../src/main.cpp" line="89"/>
         <source>Run in test mode (bypass UEFI detection for GUI testing).</source>
-        <translation type="unfinished"/>
+        <translation>Xhiro nën mënyrën provë (anashkalo pikasje UEFI për testim GUI).</translation>
     </message>
     <message>
         <location filename="../src/main.cpp" line="96"/>
         <source>This system doesn&apos;t seem to support UEFI, or was not booted in UEFI mode. Exiting.</source>
-        <translation type="unfinished"/>
+        <translation>Ky sistem s’duket se mbulon UEFI, ose s’qe nisur nën mënyrën UEFI. Po dilet.</translation>
     </message>
     <message>
         <location filename="../src/main.cpp" line="107"/>

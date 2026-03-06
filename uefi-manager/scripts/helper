@@ -1,2 +1,51 @@
 #!/bin/bash
-eval "${*}"
+#
+# Helper script for uefi-manager privileged operations.
+# Executed via pkexec to run commands as root.
+#
+# Only commands in the whitelist are permitted.
+
+set -euo pipefail
+
+# Allowed command basenames
+ALLOWED_COMMANDS=(
+    blkid cp cryptsetup cut df efibootmgr findmnt grep lsblk
+    mkdir mount mountpoint rm rmdir sfdisk umount
+)
+
+# Allowed full-path commands
+ALLOWED_PATHS=(
+    /usr/lib/uefi-manager/uefimanager-lib
+)
+
+is_allowed() {
+    local cmd="$1"
+
+    # Check full-path allowlist first
+    for allowed in "${ALLOWED_PATHS[@]}"; do
+        [[ "$cmd" == "$allowed" ]] && return 0
+    done
+
+    # Basename commands must not contain a path separator
+    if [[ "$cmd" == */* ]]; then
+        return 1
+    fi
+
+    for allowed in "${ALLOWED_COMMANDS[@]}"; do
+        [[ "$cmd" == "$allowed" ]] && return 0
+    done
+    return 1
+}
+
+if [[ $# -eq 0 ]]; then
+    echo "Error: no command provided" >&2
+    exit 1
+fi
+
+cmd="$1"
+shift
+if ! is_allowed "$cmd"; then
+    echo "Error: command not permitted: $cmd" >&2
+    exit 1
+fi
+exec "$cmd" "$@"

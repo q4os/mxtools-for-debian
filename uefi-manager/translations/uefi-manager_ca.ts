@@ -166,7 +166,7 @@
     <message>
         <location filename="../src/mainwindow.cpp" line="963"/>
         <source>Enter passphrase to unlock %1 encrypted partition:</source>
-        <translation>Introduïu la contrasenya per desbloquejar la partició encriptada %1:</translation>
+        <translation>Introduïu la contrasenya per desblocar la partició encriptada %1:</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="968"/>

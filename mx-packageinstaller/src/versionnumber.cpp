@@ -55,8 +55,8 @@ void VersionNumber::setStrings(const QString &value)
         upstream_str = upstream_str.left(dashIndex);
     }
 
-    upstream_version = groupDigits(upstream_str);
-    debian_revision = groupDigits(debian_str);
+    upstreamVersion = groupDigits(upstream_str);
+    debianRevision = groupDigits(debian_str);
 }
 
 VersionNumber &VersionNumber::operator=(const QString &value)
@@ -65,34 +65,21 @@ VersionNumber &VersionNumber::operator=(const QString &value)
     return *this;
 }
 
-bool VersionNumber::operator<(const VersionNumber &value) const
+std::strong_ordering VersionNumber::operator<=>(const VersionNumber &value) const
 {
-    return compare(*this, value) == 1;
-}
-
-bool VersionNumber::operator<=(const VersionNumber &value) const
-{
-    return !(*this > value);
-}
-
-bool VersionNumber::operator>(const VersionNumber &value) const
-{
-    return compare(*this, value) == -1;
-}
-
-bool VersionNumber::operator>=(const VersionNumber &value) const
-{
-    return !(*this < value);
+    int result = compare(*this, value);
+    if (result > 0) {
+        return std::strong_ordering::less;
+    }
+    if (result < 0) {
+        return std::strong_ordering::greater;
+    }
+    return std::strong_ordering::equal;
 }
 
 bool VersionNumber::operator==(const VersionNumber &value) const
 {
     return compare(*this, value) == 0;
-}
-
-bool VersionNumber::operator!=(const VersionNumber &value) const
-{
-    return !(*this == value);
 }
 
 // Transform QString into QStringList with digits grouped together
@@ -130,12 +117,12 @@ int VersionNumber::compare(const VersionNumber &first, const VersionNumber &seco
     } else if (second.epoch < first.epoch) {
         return -1;
     }
-    int upstreamComparison = compare(first.upstream_version, second.upstream_version);
+    int upstreamComparison = compare(first.upstreamVersion, second.upstreamVersion);
     if (upstreamComparison != 0) {
         return upstreamComparison;
     }
-    if (!first.debian_revision.isEmpty() || !second.debian_revision.isEmpty()) {
-        return compare(first.debian_revision, second.debian_revision);
+    if (!first.debianRevision.isEmpty() || !second.debianRevision.isEmpty()) {
+        return compare(first.debianRevision, second.debianRevision);
     }
     return 0;
 }

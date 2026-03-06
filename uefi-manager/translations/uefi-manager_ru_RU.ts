@@ -46,32 +46,32 @@
         <location filename="../src/mainwindow.ui" line="129"/>
         <location filename="../src/mainwindow.ui" line="313"/>
         <source>UEFI entry name:</source>
-        <translation type="unfinished"/>
+        <translation>Имя записи UEFI:</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="20"/>
         <source>UEFI manager</source>
-        <translation type="unfinished"/>
+        <translation>Менеджер UEFI</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="41"/>
         <source>EFI stub installer</source>
-        <translation type="unfinished"/>
+        <translation>Установщик заглушки EFI</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="47"/>
         <source>This options copies the kernel and initrd files to ESP (EFI System Partition) and creates an UEFI entry that allows to boot the installation directly, bypassing GRUB and other bootloaders. To boot using the created UEFI entry, access the UEFI boot selection menu at startup by pressing the appropriate key for your device (e.g., F12, F9, or Esc, depending on the manufacturer).</source>
-        <translation type="unfinished"/>
+        <translation>Эта опция копирует файлы ядра и initrd в ESP (системный раздел EFI) и создаёт запись UEFI, позволяющую загружать систему напрямую, минуя GRUB и другие загрузчики. Чтобы загрузиться с помощью созданной записи UEFI, откройте меню выбора загрузки UEFI при запуске, нажав соответствующую клавишу для вашего устройства (напр., F12, F9 или Esc, в зависимости от производителя).</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="115"/>
         <source>Kernel to boot:</source>
-        <translation type="unfinished"/>
+        <translation>Ядро для загрузки:</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="122"/>
         <source>Kernel options:</source>
-        <translation type="unfinished"/>
+        <translation>Параметры ядра:</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="393"/>
@@ -111,17 +111,17 @@
     <message>
         <location filename="../src/mainwindow.ui" line="36"/>
         <source>Manage UEFI entries</source>
-        <translation type="unfinished"/>
+        <translation>Управление записями UEFI</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="166"/>
         <source>Frugal EFI stub installer</source>
-        <translation type="unfinished"/>
+        <translation>Низкоресурсный установщик EFI stub</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="172"/>
         <source>This option is meant to create a bootable entry for MX and antiX frugal installation, it creates an EFI boot entry for launching the installation directly, bypassing GRUB and other bootloaders. To boot using the created UEFI entry, access the UEFI boot selection menu at startup by pressing the appropriate key for your device (e.g., F12, F9, or Esc, depending on the manufacturer).</source>
-        <translation type="unfinished"/>
+        <translation>Эта опция предназначена для создания загрузочной записи для экономичной установки MX и antiX. Она создает загрузочную запись EFI для прямого запуска установки, минуя GRUB и другие загрузчики. Чтобы загрузиться с помощью созданной записи UEFI, откройте меню выбора загрузки UEFI при запуске, нажав соответствующую клавишу для вашего устройства (например, F12, F9 или Esc, в зависимости от производителя).</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="446"/>
@@ -151,12 +151,12 @@
         <location filename="../src/mainwindow.cpp" line="1487"/>
         <location filename="../src/mainwindow.cpp" line="1497"/>
         <source>UEFI Installer</source>
-        <translation type="unfinished"/>
+        <translation>Установщик UEFI</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="719"/>
         <source>A recent frugal install has been detected. Do you wish to add a UEFI entry direct to your UEFI system menu?</source>
-        <translation type="unfinished"/>
+        <translation>Обнаружена недавняя ограниченная установка. Хотите добавить запись UEFI непосредственно в системное меню UEFI?</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="956"/>
@@ -166,12 +166,12 @@
     <message>
         <location filename="../src/mainwindow.cpp" line="963"/>
         <source>Enter passphrase to unlock %1 encrypted partition:</source>
-        <translation type="unfinished"/>
+        <translation>Введите пароль для разблокировки зашифрованного раздела %1:</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="968"/>
         <source>Passphrase entry cancelled or empty for %1</source>
-        <translation type="unfinished"/>
+        <translation>Ввод парольной фразы отменен или пуст для %1</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="974"/>
@@ -182,22 +182,23 @@
         <location filename="../src/mainwindow.cpp" line="1488"/>
         <source>Are you sure this is the MX or antiX Frugal installation location?
 Missing mandatory files in directory: </source>
-        <translation type="unfinished"/>
+        <translation>Вы уверены, что это место установки MX или antiX Frugal?
+Отсутствуют обязательные файлы в каталоге:</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="1561"/>
         <source>Not enough space on the EFI System Partition to copy the kernel and initrd files.</source>
-        <translation type="unfinished"/>
+        <translation>Недостаточно места на системном разделе EFI для копирования файлов ядра и initrd.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="1614"/>
         <source>All fields are required</source>
-        <translation type="unfinished"/>
+        <translation>Все поля обязательны для заполнения</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="1637"/>
         <source>Could not select ESP</source>
-        <translation type="unfinished"/>
+        <translation>Не удалось выбрать ESP</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="1655"/>
@@ -336,57 +337,57 @@ Missing mandatory files in directory: </source>
     <message>
         <location filename="../src/mainwindow.cpp" line="908"/>
         <source>Failed to open grub.entry file.</source>
-        <translation type="unfinished"/>
+        <translation>Не удалось открыть файл grub.entry.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="1658"/>
         <source>Tool for managing UEFI boot entries</source>
-        <translation type="unfinished"/>
+        <translation>Инструмент для управления загрузочными записями UEFI</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="1821"/>
         <source>Both old and new EFI labels must be specified</source>
-        <translation type="unfinished"/>
+        <translation>Необходимо указать как старые, так и новые метки EFI</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="1874"/>
         <source>Multiple boot entries found for label &apos;%1&apos;: %2 and %3;</source>
-        <translation type="unfinished"/>
+        <translation>Обнаружено несколько записей загрузки для метки &apos;%1&apos;: %2 и %3;</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="1884"/>
         <source>No EFI data found for label &apos;%1&apos;.</source>
-        <translation type="unfinished"/>
+        <translation>Данные EFI для метки &apos;%1&apos; не найдены.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="1892"/>
         <source>EFI label &apos;%1&apos; is linked to an unknown partition &apos;%2&apos;.</source>
-        <translation type="unfinished"/>
+        <translation>Метка EFI &apos;%1&apos; связана с неизвестным разделом &apos;%2&apos;.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="1903"/>
         <source>Unexpected device name format &apos;%1&apos; for partition related to the label.</source>
-        <translation type="unfinished"/>
+        <translation>Неожиданный формат имени устройства &apos;%1&apos; для раздела, связанного с меткой.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="1913"/>
         <source>Device partition number [%1] differs from EFI entry partition number [%2].</source>
-        <translation type="unfinished"/>
+        <translation>Номер раздела устройства [%1] отличается от номера раздела записи EFI [%2].</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="1927"/>
         <source>Failed to delete old boot entry</source>
-        <translation type="unfinished"/>
+        <translation>Не удалось удалить старую загрузочную запись.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="1932"/>
         <source>Failed to create new boot entry</source>
-        <translation type="unfinished"/>
+        <translation>Не удалось создать новую загрузочную запись</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="1497"/>
         <source>Failed to read grub.entry file.</source>
-        <translation type="unfinished"/>
+        <translation>Не удалось прочитать файл grub.entry.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="893"/>
@@ -397,55 +398,55 @@ Missing mandatory files in directory: </source>
     <message>
         <location filename="../src/mainwindow.cpp" line="1516"/>
         <source>Select Frugal Directory</source>
-        <translation type="unfinished"/>
+        <translation>Выберите каталог экономичной установки</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="1523"/>
         <source>No EFI System Partitions found.</source>
-        <translation type="unfinished"/>
+        <translation>Разделы системы EFI не обнаружены.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="1529"/>
         <source>Select EFI System Partition</source>
-        <translation type="unfinished"/>
+        <translation>Выберите раздел системы EFI</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="1530"/>
         <source>EFI System Partitions:</source>
-        <translation type="unfinished"/>
+        <translation>Разделы системы EFI:</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="1543"/>
         <source>No EFI System Partition selected</source>
-        <translation type="unfinished"/>
+        <translation>Раздел системы EFI не выбран</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="1550"/>
         <source>Could not mount selected EFI System Partition</source>
-        <translation type="unfinished"/>
+        <translation>Не удалось смонтировать выбранный системный раздел EFI</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="1577"/>
         <location filename="../src/mainwindow.cpp" line="1621"/>
         <source>Could not mount partition. Please make sure you selected the correct partition.</source>
-        <translation type="unfinished"/>
+        <translation>Не удалось смонтировать раздел. Убедитесь, что вы выбрали правильный раздел.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="1586"/>
         <source>No directory selected</source>
-        <translation type="unfinished"/>
+        <translation>Каталог не выбран</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="1606"/>
         <location filename="../src/mainwindow.cpp" line="1643"/>
         <source>EFI stub installed successfully.</source>
-        <translation type="unfinished"/>
+        <translation>Модуль EFI успешно установлен.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="1608"/>
         <location filename="../src/mainwindow.cpp" line="1645"/>
         <source>Failed to install EFI stub.</source>
-        <translation type="unfinished"/>
+        <translation>Не удалось установить модуль EFI.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="1656"/>
@@ -515,12 +516,12 @@ Missing mandatory files in directory: </source>
     <message>
         <location filename="../src/about.cpp" line="125"/>
         <source>Error: Changelog file is missing.</source>
-        <translation type="unfinished"/>
+        <translation>Ошибка: Отсутствует файл журнала изменений.</translation>
     </message>
     <message>
         <location filename="../src/about.cpp" line="127"/>
         <source>Error: Required utility &apos;zless&apos; is missing.</source>
-        <translation type="unfinished"/>
+        <translation>Ошибка: Отсутствует необходимая утилита &apos;zless&apos;.</translation>
     </message>
     <message>
         <location filename="../src/about.cpp" line="134"/>
@@ -530,12 +531,12 @@ Missing mandatory files in directory: </source>
     <message>
         <location filename="../src/main.cpp" line="85"/>
         <source>uefi-manager is a tool for managing UEFI boot entries</source>
-        <translation type="unfinished"/>
+        <translation>uefi-manager — это инструмент для управления загрузочными записями UEFI</translation>
     </message>
     <message>
         <location filename="../src/main.cpp" line="88"/>
         <source>Perform EFI Stub installation for frugal installation.</source>
-        <translation type="unfinished"/>
+        <translation>Для экономичной установки выполните установку модуля EFI.</translation>
     </message>
     <message>
         <location filename="../src/main.cpp" line="66"/>
@@ -546,12 +547,12 @@ Missing mandatory files in directory: </source>
     <message>
         <location filename="../src/main.cpp" line="89"/>
         <source>Run in test mode (bypass UEFI detection for GUI testing).</source>
-        <translation type="unfinished"/>
+        <translation>Запустите в тестовом режиме (отключите определение UEFI для тестирования графического интерфейса).</translation>
     </message>
     <message>
         <location filename="../src/main.cpp" line="96"/>
         <source>This system doesn&apos;t seem to support UEFI, or was not booted in UEFI mode. Exiting.</source>
-        <translation type="unfinished"/>
+        <translation>Похоже, эта система не поддерживает UEFI или не была загружена в режиме UEFI. Выход.</translation>
     </message>
     <message>
         <location filename="../src/main.cpp" line="107"/>

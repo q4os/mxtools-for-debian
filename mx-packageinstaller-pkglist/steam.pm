@@ -66,7 +66,13 @@ Steam
 <screenshot>https://screenshots.debian.net/shrine/screenshot/14991/simage/large-fdb68e27705c0554fa7ffc10e4ba1dc0.png</screenshot>
 
 <preinstall>
-
+#preinstall libs with --install-recommends to pick up a bunch of 32 bit libraries
+apt-get update
+#remove old libs meta packages
+echo 'remove existing steam packages'
+apt-get remove steam-installer steam-libs steam-libs:i386 steam-libs-i386 steam-libs-i386:i386
+echo 'install new steam dependency packages'
+apt-get install steam-libs steam-libs-i386 --install-recommends
 </preinstall>
 
 <install_package_names>

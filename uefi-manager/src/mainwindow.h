@@ -120,7 +120,14 @@ private:
     void getGrubOptions(const QString &mountPoint = "/");
     void getKernelOptions(const QString &mountPoint);
     void getKernelOptions(const QString &mountPoint, const QString &rootDir, const QString &kernel);
+    QString determineKernelDir(const QString &bootDir, const QString &rootDir);
+    QPair<QStringList, QString> getRootIdentifiers(const QString &rootDir);
+    QString parseGrubOptions(const QString &grubFile, const QStringList &rootPatterns, const QString &kernelDir, const QString &vmlinuz);
+    QString getFallbackOptions(const QString &rootDir, const QString &rootUUID);
+    QString combineBootOptions(const QString &parsedOptions, const QString &rootDir);
     void guessPartition();
+    void detectRootDevice();
+    QStringList getEspDevicePaths();
     void listDevices();
     void loadStubOption();
     void promptFrugalStubInstall();
@@ -129,10 +136,9 @@ private:
     void refreshEntries();
     void refreshFrugal();
     void refreshStubInstall();
-    void saveBootOrder(const QListWidget *list);
+    bool saveBootOrder(const QListWidget *list);
     void selectKernel(const QString &mountPoint);
     void validateAndLoadOptions(const QString &frugalDir);
-    QStringList sortKernelVersions(const QStringList &kernelFiles, bool reverse = true) const;
     bool isSystemd() const;
     bool isShimSystemd(const QString &rootPath = "/") const;
 };

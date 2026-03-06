@@ -121,7 +121,7 @@
     <message>
         <location filename="../src/mainwindow.ui" line="172"/>
         <source>This option is meant to create a bootable entry for MX and antiX frugal installation, it creates an EFI boot entry for launching the installation directly, bypassing GRUB and other bootloaders. To boot using the created UEFI entry, access the UEFI boot selection menu at startup by pressing the appropriate key for your device (e.g., F12, F9, or Esc, depending on the manufacturer).</source>
-        <translation type="unfinished"/>
+        <translation>Ez az opció az MX és antiX lemezképként telepítéséhez egy indítási bejegyzés létrehozására szolgál, létrehoz egy EFI rendszerindító bejegyzést a telepítés közvetlen elindításához, megkerülve a GRUB és más rendszerbetöltők használatát. A létrehozott UEFI-bejegyzéssel történő indításhoz, a bekapcsolás után az eszköznek megfelelő billentyűvel (pl. F12, F9 vagy Esc, gyártótól függően) lépjen be az UEFI rendszerindítási választó menübe.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="446"/>
@@ -516,12 +516,12 @@ Szükséges fájlok hiányoznak a könyvtárban:</translation>
     <message>
         <location filename="../src/about.cpp" line="125"/>
         <source>Error: Changelog file is missing.</source>
-        <translation type="unfinished"/>
+        <translation>Hiba: változási napló nem található.</translation>
     </message>
     <message>
         <location filename="../src/about.cpp" line="127"/>
         <source>Error: Required utility &apos;zless&apos; is missing.</source>
-        <translation type="unfinished"/>
+        <translation>Hiba: a szükséges &apos;zless&apos; program nem található.</translation>
     </message>
     <message>
         <location filename="../src/about.cpp" line="134"/>
@@ -547,7 +547,7 @@ Szükséges fájlok hiányoznak a könyvtárban:</translation>
     <message>
         <location filename="../src/main.cpp" line="89"/>
         <source>Run in test mode (bypass UEFI detection for GUI testing).</source>
-        <translation type="unfinished"/>
+        <translation>Futtatás teszt módban (kihagyja az UEFI érzékelést, csak kipróbálás).</translation>
     </message>
     <message>
         <location filename="../src/main.cpp" line="96"/>

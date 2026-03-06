@@ -1,0 +1,45 @@
+.TH UEFI-MANAGER 1 "2025-01-02" "25.09.1" "User Commands"
+.SH NAME
+uefi-manager \- tool for managing UEFI boot entries
+.SH SYNOPSIS
+.B uefi-manager
+.RI [OPTIONS]
+.SH DESCRIPTION
+.B uefi-manager
+is a graphical user interface tool for managing UEFI (Unified Extensible Firmware Interface) boot entries. It allows users to view, add, modify, and delete UEFI boot entries using the efibootmgr utility. Additionally, it provides EFI stub installation capabilities to create direct UEFI boot entries for kernels and initramfs images, bypassing traditional bootloaders like GRUB.
+.PP
+The tool requires UEFI firmware support and will exit if the system does not appear to be booted in UEFI mode.
+.SH OPTIONS
+.TP
+.B -f, --frugal
+Perform EFI Stub installation for frugal installation (only for MX/antiX frugal installations).
+.TP
+.B -t, --test
+Run in test mode, bypassing UEFI detection for GUI testing purposes.
+.TP
+.B -h, --help
+Display help information and exit.
+.TP
+.B -v, --version
+Display version information and exit.
+.SH EXAMPLES
+.TP
+.B uefi-manager
+Launch the UEFI Manager graphical interface to manage boot entries.
+.TP
+.B uefi-manager --frugal
+Launch with frugal installation mode enabled.
+.SH ENVIRONMENT
+The tool sets appropriate Qt platform plugins and environment variables for proper GUI operation, including support for X11 and Wayland environments.
+.SH FILES
+.TP
+.I /sys/firmware/efi/efivars
+Directory checked for UEFI firmware presence.
+.SH SEE ALSO
+.BR efibootmgr (8)
+.SH AUTHOR
+MX Linux Developers, Adrian <adrian@mxlinux.org>
+.SH BUGS
+Report bugs at https://github.com/MX-Linux/uefi-manager/issues
+.SH LICENSE
+GNU General Public License version 3 or later.

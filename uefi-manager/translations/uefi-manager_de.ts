@@ -4,12 +4,12 @@
     <message>
         <location filename="../src/cmd.cpp" line="163"/>
         <source>Administrator Access Required</source>
-        <translation type="unfinished"/>
+        <translation>Rootrechte erforderlich</translation>
     </message>
     <message>
         <location filename="../src/cmd.cpp" line="164"/>
         <source>This operation requires administrator privileges. Please restart the application and enter your password when prompted.</source>
-        <translation type="unfinished"/>
+        <translation>Dieser Vorgang erfordert Rootrechte. Bitte starten Sie das Programm erneut und geben auf Anforderung Ihr Paßwort ein.</translation>
     </message>
 </context>
 <context>
@@ -18,24 +18,24 @@
         <location filename="../src/mainwindow.ui" line="57"/>
         <location filename="../src/mainwindow.ui" line="198"/>
         <source>Please select the location of your installation:</source>
-        <translation type="unfinished"/>
+        <translation>Bitte wählen Sie den Ort Ihrer Installation:</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="71"/>
         <location filename="../src/mainwindow.ui" line="211"/>
         <source>Select drive:</source>
-        <translation type="unfinished"/>
+        <translation>Laufwerk auswählen:</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="78"/>
         <location filename="../src/mainwindow.ui" line="228"/>
         <source>Select partition:</source>
-        <translation type="unfinished"/>
+        <translation>Partition auswählen:</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="249"/>
         <source>Frugal mode:</source>
-        <translation type="unfinished"/>
+        <translation>Genügsamer Modus:</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="296"/>
@@ -46,32 +46,32 @@
         <location filename="../src/mainwindow.ui" line="129"/>
         <location filename="../src/mainwindow.ui" line="313"/>
         <source>UEFI entry name:</source>
-        <translation type="unfinished"/>
+        <translation>UEFI Eintrag:</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="20"/>
         <source>UEFI manager</source>
-        <translation type="unfinished"/>
+        <translation>UEFI-Verwaltung</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="41"/>
         <source>EFI stub installer</source>
-        <translation type="unfinished"/>
+        <translation>EFI Rumpfinstallation</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="47"/>
         <source>This options copies the kernel and initrd files to ESP (EFI System Partition) and creates an UEFI entry that allows to boot the installation directly, bypassing GRUB and other bootloaders. To boot using the created UEFI entry, access the UEFI boot selection menu at startup by pressing the appropriate key for your device (e.g., F12, F9, or Esc, depending on the manufacturer).</source>
-        <translation type="unfinished"/>
+        <translation>Diese Option kopiert den Systemkern und die Initrd-Dateien in die EFI Systempartition (ESP) und erzeugt einen UEFI Eintrag in Ihrer UEFI-fähigen Hardware, der es gestattet, direkt in die antiX- oder MX-Installation zu booten, unter Umgehung von Bootloadern wie z.B. Grub. Um den Eintrag zu verwenden, gehen Sie beim Systemstart ins UEFI Boot-Auswahlmenü, das Ihre Hardware bereitstellt, indem sie zur richtigen Zeit die entsprechende Taste (z.B. F12, F9 oder ESC, je nach Hersteller) drücken, und wählen dort den hier erzeugten Eintrag.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="115"/>
         <source>Kernel to boot:</source>
-        <translation type="unfinished"/>
+        <translation>Systemkern (»kernel«), in den gebootet werden soll:</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="122"/>
         <source>Kernel options:</source>
-        <translation type="unfinished"/>
+        <translation>Kerneloptionen:</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="393"/>
@@ -111,17 +111,17 @@
     <message>
         <location filename="../src/mainwindow.ui" line="36"/>
         <source>Manage UEFI entries</source>
-        <translation type="unfinished"/>
+        <translation>UEFI Einträge verwalten</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="166"/>
         <source>Frugal EFI stub installer</source>
-        <translation type="unfinished"/>
+        <translation>Genügsame EFI Rumpfinstallation</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="172"/>
         <source>This option is meant to create a bootable entry for MX and antiX frugal installation, it creates an EFI boot entry for launching the installation directly, bypassing GRUB and other bootloaders. To boot using the created UEFI entry, access the UEFI boot selection menu at startup by pressing the appropriate key for your device (e.g., F12, F9, or Esc, depending on the manufacturer).</source>
-        <translation type="unfinished"/>
+        <translation>Diese Option dient dazu, einen Booteintrag für genügsame MX und antiX Installationen („frugal”) zu erzeugen. Sie erstellt einen EFI-Booteintrag, der die hinterlegte Installation direkt läd, unter Umgehung von Bootloadern wie z.B. Grub. Um den Eintrag zu verwenden, gehen Sie beim Systemstart ins UEFI Boot-Auswahlmenü, das Ihre Hardware bereitstellt, indem sie zur richtigen Zeit die entsprechende Taste (z.B. F12 oder ESC, je nach Hersteller) drücken, und wählen dort den hier erzeugten Eintrag.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="446"/>
@@ -151,53 +151,54 @@
         <location filename="../src/mainwindow.cpp" line="1487"/>
         <location filename="../src/mainwindow.cpp" line="1497"/>
         <source>UEFI Installer</source>
-        <translation type="unfinished"/>
+        <translation>UEFI-Installationsprogramm</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="719"/>
         <source>A recent frugal install has been detected. Do you wish to add a UEFI entry direct to your UEFI system menu?</source>
-        <translation type="unfinished"/>
+        <translation>Eine aktuelle genügsame Installation wurde erkannt. Möchten Sie einen UEFI Eintrag dafür zu Ihrem UEFI Systemmenü hinzufügen?</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="956"/>
         <source>Could not retrieve UUID for %1</source>
-        <translation type="unfinished"/>
+        <translation>Die UUID für %1 konnte nicht abgerufen werden.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="963"/>
         <source>Enter passphrase to unlock %1 encrypted partition:</source>
-        <translation type="unfinished"/>
+        <translation>Bitte geben Sie die Paßphrase zum aufsperren der verschlüsselten Partition %1 ein:</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="968"/>
         <source>Passphrase entry cancelled or empty for %1</source>
-        <translation type="unfinished"/>
+        <translation>Die Paßphrase für %1 wurde nicht angegeben oder Abbruch durch den Benutzer.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="974"/>
         <source>Could not open %1 LUKS container</source>
-        <translation type="unfinished"/>
+        <translation>Der LUKS-Container %1 konnte nicht geöffnet werden.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="1488"/>
         <source>Are you sure this is the MX or antiX Frugal installation location?
 Missing mandatory files in directory: </source>
-        <translation type="unfinished"/>
+        <translation>Sind Sie sicher, daß dies der korrekte Pfad zu Ihrer genügsamen MX- oder antiX-Installation ist?
+Es fehlen obligatorische Dateien im Verzeichnis: </translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="1561"/>
         <source>Not enough space on the EFI System Partition to copy the kernel and initrd files.</source>
-        <translation type="unfinished"/>
+        <translation>Nicht ausreichend Speicherplatz auf der EFI Systempartition um den Systemkern und die initrd-Dateien dorthin zu kopieren.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="1614"/>
         <source>All fields are required</source>
-        <translation type="unfinished"/>
+        <translation>Alle Felder erforderlich</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="1637"/>
         <source>Could not select ESP</source>
-        <translation type="unfinished"/>
+        <translation>ESP nicht wählbar</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="1655"/>
@@ -336,57 +337,57 @@ Missing mandatory files in directory: </source>
     <message>
         <location filename="../src/mainwindow.cpp" line="908"/>
         <source>Failed to open grub.entry file.</source>
-        <translation type="unfinished"/>
+        <translation>Die Datei grub.entry konnte nicht geöffnet werden.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="1658"/>
         <source>Tool for managing UEFI boot entries</source>
-        <translation type="unfinished"/>
+        <translation>Verwaltungswerkzeug für UEFI Booteinträge</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="1821"/>
         <source>Both old and new EFI labels must be specified</source>
-        <translation type="unfinished"/>
+        <translation>Sowohl alte als auch neue EFI Bezeichner müssen angegeben werden</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="1874"/>
         <source>Multiple boot entries found for label &apos;%1&apos;: %2 and %3;</source>
-        <translation type="unfinished"/>
+        <translation>Mehrfache Booteinträge für die Bezeichner &apos;%1&apos;: %2 und %3 vorhanden;</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="1884"/>
         <source>No EFI data found for label &apos;%1&apos;.</source>
-        <translation type="unfinished"/>
+        <translation>Keine EFI Daten für Bezeichner &apos;%1&apos; vorhanden.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="1892"/>
         <source>EFI label &apos;%1&apos; is linked to an unknown partition &apos;%2&apos;.</source>
-        <translation type="unfinished"/>
+        <translation>EFI Bezeichner &apos;%1&apos; ist mit einer unbekannten Partition &apos;%2&apos; verknüpft.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="1903"/>
         <source>Unexpected device name format &apos;%1&apos; for partition related to the label.</source>
-        <translation type="unfinished"/>
+        <translation>Unerwartetes Gerätenamensformat &apos;%1&apos; der Partition, auf die sich der Bezeichner bezieht.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="1913"/>
         <source>Device partition number [%1] differs from EFI entry partition number [%2].</source>
-        <translation type="unfinished"/>
+        <translation>Partitionsnummer [%1] des Gerätes weicht von der im EFI-Eintrag hinterlegten Partitionsnummer [%2] ab.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="1927"/>
         <source>Failed to delete old boot entry</source>
-        <translation type="unfinished"/>
+        <translation>Der alte Booteintrag konnte nicht entfernt werden.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="1932"/>
         <source>Failed to create new boot entry</source>
-        <translation type="unfinished"/>
+        <translation>Der neue Booteintrag konnte nicht erzeugt werden.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="1497"/>
         <source>Failed to read grub.entry file.</source>
-        <translation type="unfinished"/>
+        <translation>Die Datei grub.entry konnte nicht gelesen werden.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="893"/>
@@ -397,55 +398,55 @@ Missing mandatory files in directory: </source>
     <message>
         <location filename="../src/mainwindow.cpp" line="1516"/>
         <source>Select Frugal Directory</source>
-        <translation type="unfinished"/>
+        <translation>Wählen Sie das Verzeichnis der genügsamen Installation aus</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="1523"/>
         <source>No EFI System Partitions found.</source>
-        <translation type="unfinished"/>
+        <translation>Es konnte keine EFI Partition gefunden werden.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="1529"/>
         <source>Select EFI System Partition</source>
-        <translation type="unfinished"/>
+        <translation>Wählen Sie die EFI Systempartition</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="1530"/>
         <source>EFI System Partitions:</source>
-        <translation type="unfinished"/>
+        <translation>EFI Systempartitionen:</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="1543"/>
         <source>No EFI System Partition selected</source>
-        <translation type="unfinished"/>
+        <translation>Es wurde keine EFI Systempartition ausgewählt</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="1550"/>
         <source>Could not mount selected EFI System Partition</source>
-        <translation type="unfinished"/>
+        <translation>Die gewählte EFI Systempartition konnte nicht eingehängt werden.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="1577"/>
         <location filename="../src/mainwindow.cpp" line="1621"/>
         <source>Could not mount partition. Please make sure you selected the correct partition.</source>
-        <translation type="unfinished"/>
+        <translation>Die Partition konnte nicht eingehängt werden. Bitte prüfen Sie, ob Sie die korrekte Partition ausgewählt haben.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="1586"/>
         <source>No directory selected</source>
-        <translation type="unfinished"/>
+        <translation>Es wurde kein Verzeichnis ausgewählt.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="1606"/>
         <location filename="../src/mainwindow.cpp" line="1643"/>
         <source>EFI stub installed successfully.</source>
-        <translation type="unfinished"/>
+        <translation>Der EFI-Rumpf wurde erfolgreich installiert.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="1608"/>
         <location filename="../src/mainwindow.cpp" line="1645"/>
         <source>Failed to install EFI stub.</source>
-        <translation type="unfinished"/>
+        <translation>Die Installation des EFI-Rumpfes ist fehlgeschlagen.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="1656"/>
@@ -515,12 +516,12 @@ Missing mandatory files in directory: </source>
     <message>
         <location filename="../src/about.cpp" line="125"/>
         <source>Error: Changelog file is missing.</source>
-        <translation type="unfinished"/>
+        <translation>Fehler: Änderungsprotokolldatei fehlt.</translation>
     </message>
     <message>
         <location filename="../src/about.cpp" line="127"/>
         <source>Error: Required utility &apos;zless&apos; is missing.</source>
-        <translation type="unfinished"/>
+        <translation>Fehler: Das erforderliche Hilfsprogramm ‘zless’ ist nicht installiert.</translation>
     </message>
     <message>
         <location filename="../src/about.cpp" line="134"/>
@@ -530,28 +531,28 @@ Missing mandatory files in directory: </source>
     <message>
         <location filename="../src/main.cpp" line="85"/>
         <source>uefi-manager is a tool for managing UEFI boot entries</source>
-        <translation type="unfinished"/>
+        <translation>Die UEFI Verwaltung ist ein Werkzeug zum Bearbeiten von UEFI Booteinträgen in Ihrer UEFI-fähigen Hardware.</translation>
     </message>
     <message>
         <location filename="../src/main.cpp" line="88"/>
         <source>Perform EFI Stub installation for frugal installation.</source>
-        <translation type="unfinished"/>
+        <translation>Den UEFI-Rumpf für eine genügsame Installation installieren.</translation>
     </message>
     <message>
         <location filename="../src/main.cpp" line="66"/>
         <location filename="../src/main.cpp" line="95"/>
         <source>UEFI Manager</source>
-        <translation type="unfinished"/>
+        <translation>UEFI Verwaltung</translation>
     </message>
     <message>
         <location filename="../src/main.cpp" line="89"/>
         <source>Run in test mode (bypass UEFI detection for GUI testing).</source>
-        <translation type="unfinished"/>
+        <translation>Ausführung im Testmodus (Zum Test der GUI die UEFI-Erkennung übergehen)</translation>
     </message>
     <message>
         <location filename="../src/main.cpp" line="96"/>
         <source>This system doesn&apos;t seem to support UEFI, or was not booted in UEFI mode. Exiting.</source>
-        <translation type="unfinished"/>
+        <translation>Dieses System scheint nicht über UEFI zu verfügen, oder es wurde nicht im UEFI-Modus gebootet. Ausführung abgebrochen.</translation>
     </message>
     <message>
         <location filename="../src/main.cpp" line="107"/>
@@ -561,7 +562,7 @@ Missing mandatory files in directory: </source>
     <message>
         <location filename="../src/main.cpp" line="108"/>
         <source>You seem to be logged in as root, please log out and log in as normal user to use this program.</source>
-        <translation>Sie sind als Administrator am System angemeldet. Bitte melden Sie sich ab und dann als normaler Benutzer wieder an, um dieses Programm zu verwenden.</translation>
+        <translation>Sie sind als Root („Administrator”) am System angemeldet. Bitte melden Sie sich ab und als normaler Benutzer wieder an, um dieses Programm zu verwenden.</translation>
     </message>
     <message>
         <location filename="../src/main.cpp" line="113"/>

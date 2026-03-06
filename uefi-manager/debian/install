@@ -1,4 +1,5 @@
-docs/*				usr/share/doc/uefi-manager
+docs/license.html		usr/share/doc/uefi-manager
+docs/uefi-manager.1		usr/share/man/man1
 scripts/*.policy		usr/share/polkit-1/actions
 scripts/helper			usr/lib/uefi-manager
 scripts/uefimanager-lib		usr/lib/uefi-manager
