@@ -2,7 +2,7 @@
 
 mkdir -p "/etc/calamares/modules/"
 
-#configure squashfs file location for calamares
+#--- configure squashfs file location for calamares
 # sed -i 's:/run/live/medium/live/filesystem.squashfs:/live/boot-dev/antiX/linuxfs:' /etc/calamares/modules/unpackfs.conf
 rm -f /etc/calamares/modules/unpackfs.conf
 cat > "/etc/calamares/modules/unpackfs.conf" <<EOF
@@ -13,7 +13,7 @@ unpack:
         destination: ""
 EOF
 
-#configure packages removal, fix https://www.q4os.org/forum/viewtopic.php?pid=23193#p23193
+#--- configure packages removal, fix https://www.q4os.org/forum/viewtopic.php?pid=23193#p23193
 rm -f /etc/calamares/modules/packages.conf
 cat > "/etc/calamares/modules/packages.conf" <<EOF
 backend: apt
@@ -29,7 +29,7 @@ operations:
       - "^live-task-*"
 EOF
 
-#swap choices
+#--- swap choices
 rm -f /etc/calamares/modules/partition.conf
 cat > "/etc/calamares/modules/partition.conf" <<EOF
 userSwapChoices:
@@ -40,14 +40,66 @@ userSwapChoices:
 initialSwapChoice: file
 EOF
 
-#disable "sources-final" job from calamares configuration, as it duplicates debian repositories
-# /bin/echo -e '#!/bin/sh\nexit 0' > /usr/sbin/sources-final
-rm -f /usr/sbin/sources-final
-cat > "/usr/sbin/sources-final" <<EOF
+#--- users
+rm -f /etc/calamares/modules/users.conf
+cat > "/etc/calamares/modules/users.conf" <<EOF
+---
+userGroup:       users
+defaultGroups:
+    - name: cdrom
+      must_exist: false
+      system: true
+    - name: floppy
+      must_exist: false
+      system: true
+    - name: sudo
+      must_exist: false
+      system: true
+    - name: audio
+      must_exist: false
+      system: true
+    - name: dip
+      must_exist: false
+      system: true
+    - name: video
+      must_exist: false
+      system: true
+    - name: plugdev
+      must_exist: false
+      system: true
+    - name: netdev
+      must_exist: false
+      system: true
+    - name: lpadmin
+      must_exist: false
+      system: true
+    - name: scanner
+      must_exist: false
+      system: true
+    - name: bluetooth
+      must_exist: false
+      system: true
+autologinGroup:  autologin
+sudoersGroup:    sudo
+setRootPassword: true
+doReusePassword: true
+
+passwordRequirements:
+    nonempty: true
+    minLength: 1  # Password at least this many characters
+    maxLength: -1  # Password at most this many characters
+    #libpwquality:
+        #- minlen=0
+        #- minclass=0
+EOF
+
+#--- disable "sources-final" job from calamares configuration, as it duplicates debian repositories
+rm -f /usr/share/calamares/helpers/calamares-sources-final
+cat > "/usr/share/calamares/helpers/calamares-sources-final" <<EOF
 #!/bin/sh
 exit 0
 EOF
-chmod a+x /usr/sbin/sources-final
+chmod a+x /usr/share/calamares/helpers/calamares-sources-final
 
 if [ -f "/var/lib/mxdebian/.mxsnapshot_accounts_reset.stp" ] ; then
   #remove live user "demo"
