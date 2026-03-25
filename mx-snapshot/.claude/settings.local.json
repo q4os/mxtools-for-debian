@@ -11,8 +11,22 @@
       "Bash(find:*)",
       "Bash(./build/iso-snapshot-cli:*)",
       "Bash(make:*)",
-      "Bash(ninja)"
+      "Bash(ninja)",
+      "Bash(git checkout:*)",
+      "Bash(git revert:*)",
+      "Bash(git show:*)",
+      "Bash(/home/adrian/Sync/programs/qt/mx-snapshot/build/mx-snapshot:*)",
+      "Bash(pacman -Q:*)",
+      "Bash(/usr/bin/mx-snapshot:*)",
+      "Bash(git -C /home/adrian/mx-snapshot rev-parse:*)",
+      "Bash(git status:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)"
     ],
     "deny": []
-  }
+  },
+  "enabledMcpjsonServers": [
+    "docker"
+  ],
+  "enableAllProjectMcpServers": true
 }

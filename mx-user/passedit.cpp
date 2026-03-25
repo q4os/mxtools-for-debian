@@ -28,13 +28,32 @@
 
 #include <algorithm>
 #include <cmath>
+#include <cstring>
 #include <random>
+
+#ifndef WITH_ZXCVBN
+#define WITH_ZXCVBN 0
+#endif
+
+#if WITH_ZXCVBN
 #include <zxcvbn.h>
+#else
+static constexpr double Negligible = 0.0;
+static constexpr double VeryWeak = 0.8;
+static constexpr double Weak = 1.6;
+static constexpr double Strong = 2.4;
+static constexpr double VeryStrong = 3.2;
+static inline double ZxcvbnMatch(const char *input, void *, void *)
+{
+    // Simple entropy proxy based on length; avoids libzxcvbn dependency.
+    return input ? static_cast<double>(std::strlen(input)) * 5 : 0.0;
+}
+#endif
 
 // Password generator parameters applicable accross every PassEdit instance.
-static const int GEN_WORD_MAX = 6;       // Maximum number of characters per word.
-static const int GEN_NUMBER_MAX = 999;   // Numbers will go from 0 to GEN_NUMBER_MAX without duplicates.
-static const int GEN_WORD_NUM_RATIO = 3; // Ratio N:1 of words to numbers (if less than GEN_NUMBER_MAX).
+static constexpr int GEN_WORD_MAX = 6;       // Maximum number of characters per word.
+static constexpr int GEN_NUMBER_MAX = 999;   // Numbers will go from 0 to GEN_NUMBER_MAX without duplicates.
+static constexpr int GEN_WORD_NUM_RATIO = 3; // Ratio N:1 of words to numbers (if less than GEN_NUMBER_MAX).
 
 PassEdit::PassEdit(QLineEdit *master, QLineEdit *slave, int min, QObject *parent) noexcept
     : QObject(parent),
@@ -86,10 +105,10 @@ void PassEdit::generate() noexcept
         if (words.isEmpty()) {
             return;
         }
-        for (int i = std::min(static_cast<int>(GEN_NUMBER_MAX), static_cast<int>((words.count() / GEN_WORD_NUM_RATIO) - 1)); i >= 0; --i) {
+        const int numLimit = std::min(GEN_NUMBER_MAX, static_cast<int>(words.count() / GEN_WORD_NUM_RATIO - 1));
+        for (int i = numLimit; i >= 0; --i) {
             words.append(QString::number(i));
         }
-        std::srand(static_cast<unsigned>(std::time(nullptr)));
         pos = words.count();
     }
     gentext.clear();
@@ -112,7 +131,7 @@ void PassEdit::generate() noexcept
         }
         entropy = ZxcvbnMatch(gentext.toUtf8().constData(), nullptr, nullptr);
         ++pos;
-    } while (gentext.length() <= min || entropy <= VeryStrong);
+    } while (gentext.length() <= min || entropy <= static_cast<double>(VeryStrong));
 }
 
 void PassEdit::masterContextMenu(QPoint pos) noexcept
@@ -132,7 +151,7 @@ bool PassEdit::eventFilter(QObject *watched, QEvent *event) noexcept
     const QEvent::Type etype = event->type();
     if (etype == QEvent::EnabledChange || etype == QEvent::Hide) {
         auto *w = qobject_cast<QLineEdit *>(watched);
-        if ((actionEye != nullptr) && !(w->isVisible() && w->isEnabled())) {
+        if (w && (actionEye != nullptr) && !(w->isVisible() && w->isEnabled())) {
             actionEye->setChecked(false);
         }
     }

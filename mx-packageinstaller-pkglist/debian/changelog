@@ -1,3 +1,22 @@
+mx-packageinstaller-pkglist (26.03.3mx25) mx; urgency=medium
+
+  * update liquorix 6.18.16 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 12 Mar 2026 19:58:05 -0400
+
+mx-packageinstaller-pkglist (26.03.2mx25) mx; urgency=medium
+
+  * update debian 6.18.15 kernel
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Tue, 03 Mar 2026 20:25:58 -0500
+
+mx-packageinstaller-pkglist (26.03.1mx25) mx; urgency=medium
+
+  * update masterpdf-editor-4 entry
+  * update liquorix 6.18.15 kernel
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 02 Mar 2026 21:35:20 -0500
+
 mx-packageinstaller-pkglist (26.02.06mx25) mx; urgency=medium
 
   * add qemu-system-modules-spice to virt-manager setups

@@ -4,7 +4,7 @@
 #include <QApplication>
 #include <QDebug>
 #include <QEventLoop>
-#include <QFileInfo>
+#include <QFile>
 #include <QMessageBox>
 #include <QTimer>
 
@@ -17,18 +17,19 @@ Cmd::Cmd(QObject *parent)
 {
 }
 
-QString Cmd::getOut(const QString &cmd, bool quiet, bool asRoot, bool waitForFinish)
+QString Cmd::getOut(const QString &cmd, bool quiet, bool waitForFinish)
 {
-    run(cmd, quiet, asRoot, waitForFinish);
+    run(cmd, quiet, waitForFinish);
     return readAll();
 }
 
-QString Cmd::getOutAsRoot(const QString &cmd, bool quiet, bool waitForFinish)
+QString Cmd::getOutAsRoot(const QStringList &helperArgs, bool quiet, bool waitForFinish)
 {
-    return getOut(cmd, quiet, true, waitForFinish);
+    runAsRoot(helperArgs, quiet, waitForFinish);
+    return readAll();
 }
 
-bool Cmd::run(const QString &cmd, bool quiet, bool asRoot, bool waitForFinish)
+bool Cmd::run(const QString &cmd, bool quiet, bool waitForFinish)
 {
     if (state() != QProcess::NotRunning) {
         qDebug() << "Process already running:" << program() << arguments();
@@ -39,31 +40,49 @@ bool Cmd::run(const QString &cmd, bool quiet, bool asRoot, bool waitForFinish)
     }
     QEventLoop loop;
     connect(this, QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished), &loop, &QEventLoop::quit);
-    if (asRoot && getuid() != 0) {
-        start(elevate, {helper, cmd});
+    start(QStringLiteral("/bin/bash"), {QStringLiteral("-c"), cmd});
+    if (!waitForFinish) {
+        loop.exec();
     } else {
-        start("/bin/bash", {"-c", cmd});
+        waitForFinished();
+    }
+    emit done();
+    return (exitStatus() == QProcess::NormalExit && exitCode() == 0);
+}
+
+bool Cmd::runAsRoot(const QStringList &helperArgs, bool quiet, bool waitForFinish)
+{
+    if (state() != QProcess::NotRunning) {
+        qDebug() << "Process already running:" << program() << arguments();
+        return false;
+    }
+    if (!quiet) {
+        qDebug().noquote() << helperArgs.join(QLatin1Char(' '));
+    }
+    QEventLoop loop;
+    connect(this, QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished), &loop, &QEventLoop::quit);
+    if (getuid() != 0) {
+        start(elevate, QStringList{helper} + helperArgs);
+    } else {
+        start(helper, helperArgs);
     }
     if (!waitForFinish) {
         loop.exec();
     } else {
         waitForFinished();
     }
-
-    // Check for permission denied
-    if (asRoot && getuid() != 0) {
-        if (exitCode() == EXIT_CODE_PERMISSION_DENIED || exitCode() == EXIT_CODE_COMMAND_NOT_FOUND) {
-            handleElevationError();
-        }
+    if (getuid() != 0
+        && (exitCode() == EXIT_CODE_PERMISSION_DENIED || exitCode() == EXIT_CODE_COMMAND_NOT_FOUND)) {
+        const QByteArray errOut = readAllStandardError();
+        const QByteArray stdOut = readAllStandardOutput();
+        qWarning().noquote() << "Elevation failed for" << program() << arguments()
+                             << "exitCode:" << exitCode()
+                             << "stderr:" << QString::fromUtf8(errOut).trimmed()
+                             << "stdout:" << QString::fromUtf8(stdOut).trimmed();
+        handleElevationError();
     }
-
     emit done();
     return (exitStatus() == QProcess::NormalExit && exitCode() == 0);
-}
-
-bool Cmd::runAsRoot(const QString &cmd, bool quiet)
-{
-    return run(cmd, quiet, true);
 }
 
 void Cmd::handleElevationError()

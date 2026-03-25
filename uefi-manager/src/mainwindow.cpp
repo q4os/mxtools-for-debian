@@ -27,6 +27,7 @@
 
 #include <QDebug>
 #include <QFileDialog>
+#include <QFileInfo>
 #include <QInputDialog>
 #include <QListWidget>
 #include <QRegularExpression>
@@ -43,6 +44,7 @@
 #include "about.h"
 #include "cmd.h"
 #include "common.h"
+#include "log.h"
 
 // Trying to map all the persistence type to values that make sense
 // when passed to the kernel at boot time for frugal installation
@@ -82,21 +84,27 @@ MainWindow::MainWindow(const QCommandLineParser &argParser, QWidget *parent)
 MainWindow::~MainWindow()
 {
     settings.setValue("geometry", saveGeometry());
-    QStringList cleanupArgs = {"cleanup_temp"};
-    if (!newMounts.isEmpty()) {
-        cleanupArgs << "--mounts" << newMounts;
-    }
-    if (!newDirectories.isEmpty()) {
-        cleanupArgs << "--dirs" << newDirectories;
-    }
-    if (!newLuksDevices.isEmpty()) {
-        cleanupArgs << "--luks" << newLuksDevices;
-    }
-    if (!cmd.procElevated("/usr/lib/uefi-manager/uefimanager-lib", cleanupArgs)) {
-        qWarning() << "Cleanup failed";
+    const bool needsCleanup = !newMounts.isEmpty() || !newDirectories.isEmpty() || !newLuksDevices.isEmpty();
+    if (needsCleanup) {
+        QStringList cleanupArgs = {"cleanup_temp"};
+        if (!newMounts.isEmpty()) {
+            cleanupArgs << "--mounts" << newMounts;
+        }
+        if (!newDirectories.isEmpty()) {
+            cleanupArgs << "--dirs" << newDirectories;
+        }
+        if (!newLuksDevices.isEmpty()) {
+            cleanupArgs << "--luks" << newLuksDevices;
+        }
+        if (!cmd.procElevated("/usr/lib/uefi-manager/uefimanager-lib", cleanupArgs)) {
+            qWarning() << "Cleanup failed";
+        }
     }
 
-    cmd.procElevated("/usr/lib/uefi-manager/uefimanager-lib", {"copy_log"});
+    Log::flush();
+    if (Log::hasRelevantContent(7)) {
+        cmd.procElevated("/usr/lib/uefi-manager/uefimanager-lib", {"copy_log"});
+    }
 
     delete ui;
 }

@@ -233,6 +233,7 @@
         <location filename="../src/mainwindow.cpp" line="567"/>
         <location filename="../src/mainwindow.cpp" line="582"/>
         <location filename="../src/mainwindow.cpp" line="597"/>
+        <location filename="../src/mainwindow.cpp" line="603"/>
         <source>Error</source>
         <translation>Błąd</translation>
     </message>
@@ -473,6 +474,11 @@
         <location filename="../src/mainwindow.cpp" line="582"/>
         <source>Error processing permissions: </source>
         <translation>Błąd podczas przetwarzania uprawnień: </translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="603"/>
+        <source>Please add a Samba user before creating a share.</source>
+        <translation>Przed utworzeniem udziału dodaj użytkownika Samba.</translation>
     </message>
 </context>
 <context>

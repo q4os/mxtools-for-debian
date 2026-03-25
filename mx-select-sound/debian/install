@@ -1,6 +1,6 @@
 help/*				usr/share/doc/mx-select-sound
 icons/mx-select-sound.png	usr/share/icons/hicolor/64x64/apps
 icons/mx-select-sound.svg	usr/share/icons/hicolor/scalable/apps
-mx-select-sound			usr/bin
 mx-select-sound.desktop		usr/share/applications
-translations/*.qm		usr/share/mx-select-sound/locale
+obj-*/*.qm 			usr/share/mx-select-sound/locale
+obj-*/mx-select-sound 		usr/bin

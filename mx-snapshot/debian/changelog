@@ -1,3 +1,22 @@
+mx-snapshot (26.03.2) mx; urgency=medium
+
+  * Save/restore window geometry
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 16 Mar 2026 15:46:48 -0400
+
+mx-snapshot (26.03.1) mx; urgency=medium
+
+  * Add multi-init support
+
+ -- Adrian <adrian@mxlinux.org>  Sun, 15 Mar 2026 13:26:17 -0400
+
+mx-snapshot (26.03) mx; urgency=medium
+
+  * Replace shell-based helper with compiled C++ helper binary
+  * Show help and license in app window
+
+ -- Adrian <adrian@mxlinux.org>  Sun, 15 Mar 2026 00:18:42 -0400
+
 mx-snapshot (26.01.3) mx; urgency=medium
 
   * Fix exclude size calc on sparse files

@@ -1,7 +1,8 @@
 #pragma once
 
+class QWidget;
 class QString;
 
-void displayDoc(const QString &url, const QString &title);
-void displayAboutMsgBox(const QString &title, const QString &message, const QString &licence_url,
-                        const QString &license_title);
+void displayDoc(QWidget *parent, const QString &source, const QString &title, bool largeWindow = false);
+void displayAboutMsgBox(QWidget *parent, const QString &title, const QString &message, const QString &licenceSource,
+                        const QString &licenseTitle);

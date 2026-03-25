@@ -44,9 +44,9 @@ package() {
     install -dm755 "${pkgdir}/usr/share/uefi-manager/locale"
     install -Dm644 build/*.qm "${pkgdir}/usr/share/uefi-manager/locale/" 2>/dev/null || true
 
-    # Install helper scripts
+    # Install helper components
     install -dm755 "${pkgdir}/usr/lib/uefi-manager"
-    install -Dm755 scripts/helper "${pkgdir}/usr/lib/uefi-manager/helper"
+    install -Dm755 build/helper "${pkgdir}/usr/lib/uefi-manager/helper"
     install -Dm755 scripts/uefimanager-lib "${pkgdir}/usr/lib/uefi-manager/uefimanager-lib"
 
     # Install PolicyKit policy

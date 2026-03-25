@@ -87,7 +87,7 @@
     <message>
         <location filename="../mainwindow.ui" line="260"/>
         <source>About this application</source>
-        <translation type="unfinished"/>
+        <translation>ამ აპლიკაციის შესახებ</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="263"/>
@@ -102,7 +102,7 @@
     <message>
         <location filename="../mainwindow.ui" line="286"/>
         <source>Display help </source>
-        <translation type="unfinished"/>
+        <translation>დახმარების ჩვენება </translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="289"/>
@@ -122,7 +122,7 @@
     <message>
         <location filename="../mainwindow.ui" line="380"/>
         <source>Quit application</source>
-        <translation type="unfinished"/>
+        <translation>აპლიკაციიდან გასვლა</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="383"/>
@@ -152,17 +152,17 @@
     <message>
         <location filename="../mainwindow.cpp" line="259"/>
         <source>Copyright (c) MX Linux</source>
-        <translation type="unfinished"/>
+        <translation>(c) MX Linux საავტორო ფულებები დაცულია</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="260"/>
         <source>%1 License</source>
-        <translation type="unfinished"/>
+        <translation>ლიცენზია %1</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="274"/>
         <source>%1 Help</source>
-        <translation type="unfinished"/>
+        <translation>%1-ის დახმარება</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="289"/>

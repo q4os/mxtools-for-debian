@@ -22,34 +22,57 @@
 #include "about.h"
 
 #include <QApplication>
+#include <QDebug>
+#include <QDialog>
+#include <QFile>
 #include <QFileInfo>
 #include <QMessageBox>
 #include <QProcess>
 #include <QPushButton>
-#include <QStandardPaths>
+#include <QTextBrowser>
 #include <QTextEdit>
+#include <QUrl>
 #include <QVBoxLayout>
 
-#include <unistd.h>
+namespace
+{
+void setupDocDialog(QDialog &dialog, QTextBrowser *browser, const QString &title)
+{
+    dialog.setWindowTitle(title);
+    dialog.resize(700, 600);
 
-// Display doc as nomal user when run as root
+    browser->setOpenExternalLinks(true);
+
+    auto *btnClose = new QPushButton(QObject::tr("&Close"), &dialog);
+    btnClose->setIcon(QIcon::fromTheme(QStringLiteral("window-close")));
+    QObject::connect(btnClose, &QPushButton::clicked, &dialog, &QDialog::close);
+
+    auto *layout = new QVBoxLayout(&dialog);
+    layout->addWidget(browser);
+    layout->addWidget(btnClose);
+}
+
+void showHtmlDoc(const QString &url, const QString &title)
+{
+    QDialog dialog;
+    auto *browser = new QTextBrowser(&dialog);
+    setupDocDialog(dialog, browser, title);
+
+    const QUrl sourceUrl = QUrl::fromUserInput(url);
+    const QString localPath = sourceUrl.isLocalFile() ? sourceUrl.toLocalFile() : url;
+    if (QFileInfo::exists(localPath)) {
+        browser->setSource(sourceUrl.isLocalFile() ? sourceUrl : QUrl::fromLocalFile(url));
+    } else {
+        browser->setText(QObject::tr("Could not load %1").arg(url));
+        qDebug() << "Could not load HTML document" << url;
+    }
+    dialog.exec();
+}
+} // namespace
+
 void displayDoc(const QString &url, const QString &title)
 {
-    // Prefer mx-viewer otherwise use xdg-open (use runuser to run that as logname user)
-    QString executablePath = QStandardPaths::findExecutable("mx-viewer");
-    if (!executablePath.isEmpty()) {
-        QProcess::startDetached("mx-viewer", {url, title});
-    } else {
-        if (getuid() != 0) {
-            QProcess::startDetached("xdg-open", {url});
-        } else {
-            QProcess proc;
-            proc.start("logname", {}, QIODevice::ReadOnly);
-            proc.waitForFinished();
-            QString user = QString::fromUtf8(proc.readAllStandardOutput()).trimmed();
-            QProcess::startDetached("runuser", {"-u", user, "--", "xdg-open", url});
-        }
-    }
+    showHtmlDoc(url, title);
 }
 
 void displayAboutMsgBox(const QString &title, const QString &message, const QString &licence_url,
@@ -68,28 +91,30 @@ void displayAboutMsgBox(const QString &title, const QString &message, const QStr
     if (msgBox.clickedButton() == btnLicense) {
         displayDoc(licence_url, license_title);
     } else if (msgBox.clickedButton() == btnChangelog) {
-        auto *changelog = new QDialog;
-        changelog->setWindowTitle(QObject::tr("Changelog"));
-        changelog->resize(width, height);
+        QDialog changelog;
+        changelog.setWindowTitle(QObject::tr("Changelog"));
+        changelog.resize(width, height);
 
-        auto *text = new QTextEdit(changelog);
+        auto *text = new QTextEdit(&changelog);
         text->setReadOnly(true);
         QProcess proc;
-        proc.start(
-            "zless",
-            {"/usr/share/doc/" + QFileInfo(QCoreApplication::applicationFilePath()).fileName() + "/changelog.gz"},
-            QIODevice::ReadOnly);
-        proc.waitForFinished();
-        text->setText(proc.readAllStandardOutput());
+        const QString appName = QFileInfo(QCoreApplication::applicationFilePath()).fileName();
+        const QString changelogPath = QStringLiteral("/usr/share/doc/") + appName + QStringLiteral("/changelog.gz");
+        proc.start(QStringLiteral("zcat"), {changelogPath}, QIODevice::ReadOnly);
+        if (proc.waitForStarted(3000) && proc.waitForFinished(3000)) {
+            text->setText(proc.readAllStandardOutput());
+        } else {
+            text->setText(QObject::tr("Could not load changelog."));
+        }
 
-        auto *btnClose = new QPushButton(QObject::tr("&Close"), changelog);
-        btnClose->setIcon(QIcon::fromTheme("window-close"));
-        QObject::connect(btnClose, &QPushButton::clicked, changelog, &QDialog::close);
+        auto *btnClose = new QPushButton(QObject::tr("&Close"), &changelog);
+        btnClose->setIcon(QIcon::fromTheme(QStringLiteral("window-close")));
+        QObject::connect(btnClose, &QPushButton::clicked, &changelog, &QDialog::close);
 
-        auto *layout = new QVBoxLayout(changelog);
+        auto *layout = new QVBoxLayout(&changelog);
         layout->addWidget(text);
         layout->addWidget(btnClose);
-        changelog->setLayout(layout);
-        changelog->exec();
+        changelog.setLayout(layout);
+        changelog.exec();
     }
 }

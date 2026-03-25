@@ -34,8 +34,7 @@
 Cmd::Cmd(QObject *parent)
     : QProcess(parent)
 {
-    // Determine the appropriate elevation command
-    const QStringList elevationCommands = {"/usr/bin/pkexec", "/usr/bin/gksu", "/usr/bin/sudo"};
+    const QStringList elevationCommands = {"/usr/bin/pkexec", "/usr/bin/gksu"};
     for (const QString &command : elevationCommands) {
         if (QFile::exists(command)) {
             elevationCommand = command;
@@ -44,12 +43,12 @@ Cmd::Cmd(QObject *parent)
     }
 
     if (elevationCommand.isEmpty()) {
-        qWarning() << "No suitable elevation command found (pkexec, gksu, or sudo)";
+        qWarning() << "No suitable elevation command found (pkexec or gksu)";
     }
 
     helper = QString("/usr/lib/%1/helper").arg(QApplication::applicationName());
+    helperLibrary = QString("/usr/lib/%1/uefimanager-lib").arg(QApplication::applicationName());
 
-    // Connect signals for output handling
     connect(this, QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished), this, &Cmd::done,
             Qt::UniqueConnection);
     connect(this, &Cmd::readyReadStandardOutput, this, &Cmd::handleStandardOutput);
@@ -73,32 +72,23 @@ void Cmd::handleStandardError()
 bool Cmd::proc(const QString &cmd, const QStringList &args, QString *output, const QByteArray *input, QuietMode quiet,
                Elevation elevation)
 {
-    outBuffer.clear();
-
-    // Skip if elevation has already failed in this action chain
-    if (elevationFailed && elevation == Elevation::Yes) {
-        return false;
+    if (elevation == Elevation::Yes) {
+        QStringList helperArgs {"exec", cmd};
+        helperArgs += args;
+        return helperProc(helperArgs, output, input, quiet);
     }
 
-    // Check if process is already running
+    outBuffer.clear();
+
     if (state() != QProcess::NotRunning) {
         qDebug() << "Process already running:" << program() << arguments();
         return false;
     }
 
-    // Log command if not quiet
     if (quiet == QuietMode::No) {
         qDebug() << cmd << args;
     }
 
-    // Fail fast if elevation is needed but no elevation command is available
-    if (elevation == Elevation::Yes && getuid() != 0 && elevationCommand.isEmpty()) {
-        qWarning() << "Elevation required but no pkexec/gksu found";
-        handleElevationError();
-        return false;
-    }
-
-    // Set up event loop for synchronous execution
     QEventLoop loop;
     bool processError = false;
     auto doneConn = connect(this, &Cmd::done, &loop, &QEventLoop::quit);
@@ -107,15 +97,8 @@ bool Cmd::proc(const QString &cmd, const QStringList &args, QString *output, con
         loop.quit();
     });
 
-    // Start the process with appropriate elevation
-    if (elevation == Elevation::Yes && getuid() != 0) {
-        QStringList cmdAndArgs = QStringList() << helper << cmd << args;
-        start(elevationCommand, {cmdAndArgs});
-    } else {
-        start(cmd, args);
-    }
+    start(cmd, args);
 
-    // Handle input if provided
     if (input && !input->isEmpty()) {
         waitForStarted();
         write(*input);
@@ -130,15 +113,6 @@ bool Cmd::proc(const QString &cmd, const QStringList &args, QString *output, con
         return false;
     }
 
-    // Check for permission denied or command not found errors
-    // These can occur when elevation fails (canceled dialog or incorrect password)
-    if (elevation == Elevation::Yes
-        && (exitCode() == EXIT_CODE_PERMISSION_DENIED || exitCode() == EXIT_CODE_COMMAND_NOT_FOUND)) {
-        handleElevationError();
-        return false;
-    }
-
-    // Provide output if requested
     if (output) {
         *output = outBuffer.trimmed();
     }
@@ -152,17 +126,45 @@ bool Cmd::procAsRoot(const QString &cmd, const QStringList &args, QString *outpu
     return proc(cmd, args, output, input, quiet, Elevation::Yes);
 }
 
+bool Cmd::helperProc(const QStringList &helperArgs, QString *output, const QByteArray *input, QuietMode quiet)
+{
+    if (elevationFailed) {
+        return false;
+    }
+
+    if (getuid() != 0 && elevationCommand.isEmpty()) {
+        qWarning() << "No elevation helper available";
+        handleElevationError();
+        return false;
+    }
+
+    const QString program = (getuid() == 0) ? helper : elevationCommand;
+    QStringList programArgs = helperArgs;
+    if (getuid() != 0) {
+        programArgs.prepend(helper);
+    }
+
+    const bool result = proc(program, programArgs, output, input, quiet, Elevation::No);
+    if (exitCode() == EXIT_CODE_PERMISSION_DENIED || exitCode() == EXIT_CODE_COMMAND_NOT_FOUND) {
+        handleElevationError();
+    }
+    return result;
+}
+
 bool Cmd::procElevated(const QString &cmd, const QStringList &args, QString *output, QuietMode quiet)
 {
     if (getuid() == 0) {
         return proc(cmd, args, output, nullptr, quiet);
     }
-    if (elevationCommand.isEmpty()) {
-        qWarning() << "Elevation required but no pkexec/gksu found";
+
+    if (cmd != helperLibrary) {
+        qWarning() << "Refusing to elevate unexpected command directly:" << cmd;
         return false;
     }
-    QStringList elevatedArgs = QStringList() << cmd << args;
-    return proc(elevationCommand, elevatedArgs, output, nullptr, quiet);
+
+    QStringList helperArgs {"lib"};
+    helperArgs += args;
+    return helperProc(helperArgs, output, nullptr, quiet);
 }
 
 void Cmd::handleElevationError()

@@ -32,6 +32,8 @@ class Log
 public:
     explicit Log(const QString &fileName = LOG_FILE_PATH);
     static QString getLog();
+    static void flush();
+    [[nodiscard]] static bool hasRelevantContent(qsizetype minimumLineCount = 1);
     static void messageHandler(QtMsgType type, const QMessageLogContext &, const QString &msg);
 
 private:

@@ -947,13 +947,13 @@ pré-visualização do Conky.</translation>
     <message>
         <location filename="../src/previewdialog.cpp" line="151"/>
         <source>Missing Dependency</source>
-        <translation type="unfinished"/>
+        <translation>Um ou mais arquivos estão faltando.</translation>
     </message>
     <message>
         <location filename="../src/previewdialog.cpp" line="152"/>
         <source>Preview generation requires the GraphicsMagick compatibility tools.
 Please install the graphicsmagick-imagemagick-compat package to enable this feature.</source>
-        <translation type="unfinished"/>
+        <translation>A geração da prévia requer as ferramentas de compatibilidade ‘GraphicsMagick’. Para habilitar este recurso, favor instalar o pacote ‘graphicsmagick-imagemagick-compat’.</translation>
     </message>
     <message>
         <location filename="../src/previewdialog.cpp" line="163"/>
@@ -1026,7 +1026,7 @@ Foi gerado a imagem %1 para a pré-visualização.</translation>
     <message>
         <location filename="../src/settingsdialog.cpp" line="91"/>
         <source>Search Paths</source>
-        <translation type="unfinished"/>
+        <translation>Caminhos para a pesquisa</translation>
     </message>
     <message>
         <location filename="../src/settingsdialog.cpp" line="92"/>

@@ -190,284 +190,304 @@
         <translation>適用</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="110"/>
+        <location filename="../src/mainwindow.cpp" line="112"/>
         <source>Still running</source>
         <translation>まだ実行中です</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="412"/>
-        <location filename="../src/mainwindow.cpp" line="420"/>
-        <location filename="../src/mainwindow.cpp" line="454"/>
-        <location filename="../src/mainwindow.cpp" line="565"/>
-        <location filename="../src/mainwindow.cpp" line="1415"/>
-        <location filename="../src/mainwindow.cpp" line="1428"/>
-        <location filename="../src/mainwindow.cpp" line="1434"/>
+        <location filename="../src/mainwindow.cpp" line="437"/>
+        <location filename="../src/mainwindow.cpp" line="445"/>
+        <location filename="../src/mainwindow.cpp" line="479"/>
+        <location filename="../src/mainwindow.cpp" line="590"/>
+        <location filename="../src/mainwindow.cpp" line="1475"/>
+        <location filename="../src/mainwindow.cpp" line="1488"/>
+        <location filename="../src/mainwindow.cpp" line="1494"/>
         <source>Error</source>
         <translation>エラー</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="401"/>
+        <location filename="../src/mainwindow.cpp" line="426"/>
         <source>Installing bootsplash, please wait</source>
         <translation>bootsplash をインストールしています。お待ちください</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="167"/>
-        <location filename="../src/mainwindow.cpp" line="1201"/>
+        <location filename="../src/mainwindow.cpp" line="169"/>
+        <location filename="../src/mainwindow.cpp" line="1226"/>
         <source>Preview is disabled because &apos;splash&apos; parameter is not present in kernel command line. To enable preview, add &apos;splash&apos; to boot parameters and reboot.</source>
         <translation>カーネルコマンドラインに  &apos;splash&apos; パラメータが存在しないため、プレビューが無効です。プレビューを有効にするには、ブートパラメータに &apos;splash&apos; を追加し再起動してください。</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="171"/>
-        <location filename="../src/mainwindow.cpp" line="1204"/>
+        <location filename="../src/mainwindow.cpp" line="173"/>
+        <location filename="../src/mainwindow.cpp" line="1229"/>
         <source>Preview is disabled while running under Wayland. Please start an X11 session to preview Plymouth themes.</source>
-        <translation type="unfinished"/>
+        <translation>Wayland 環境ではプレビュー機能が無効です。Plymouth テーマをプレビューするには、X11 セッションを起動してください。</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="408"/>
+        <location filename="../src/mainwindow.cpp" line="433"/>
         <source>Updating sources</source>
         <translation>ソースのアップデート中</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="420"/>
+        <location filename="../src/mainwindow.cpp" line="445"/>
         <source>Could not install the bootsplash.</source>
         <translation>bootsplash をインストールできません。</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="565"/>
+        <location filename="../src/mainwindow.cpp" line="590"/>
         <source>Could not create a temporary folder</source>
         <translation>一時フォルダを作成できませんでした</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="574"/>
-        <location filename="../src/mainwindow.cpp" line="594"/>
+        <location filename="../src/mainwindow.cpp" line="599"/>
+        <location filename="../src/mainwindow.cpp" line="619"/>
         <source>Cannot continue</source>
         <translation>続行できません</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="574"/>
+        <location filename="../src/mainwindow.cpp" line="599"/>
         <source>Cannot open LUKS device. Exiting...</source>
         <translation>LUKS デバイスを開けません。終了します...</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="595"/>
+        <location filename="../src/mainwindow.cpp" line="620"/>
         <source>Cannot create chroot environment, cannot change boot options. Exiting...</source>
         <translation>chroot 環境を作成できず、起動オプションを変更できません。終了中...</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="929"/>
-        <location filename="../src/mainwindow.cpp" line="1331"/>
+        <location filename="../src/mainwindow.cpp" line="954"/>
+        <location filename="../src/mainwindow.cpp" line="1391"/>
         <source>Updating configuration, please wait</source>
         <translation>設定更新中なのでお待ちください</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1000"/>
+        <location filename="../src/mainwindow.cpp" line="1025"/>
         <source>Updating initramfs...</source>
         <translation>initramfs 更新中...</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1014"/>
-        <location filename="../src/mainwindow.cpp" line="1346"/>
+        <location filename="../src/mainwindow.cpp" line="1039"/>
+        <location filename="../src/mainwindow.cpp" line="1406"/>
         <source>Updating grub...</source>
         <translation>grub 更新中...</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1039"/>
+        <location filename="../src/mainwindow.cpp" line="1064"/>
         <source>About %1</source>
         <translation> %1 について</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1040"/>
+        <location filename="../src/mainwindow.cpp" line="1065"/>
         <source>Version: </source>
         <translation>バージョン: </translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1042"/>
+        <location filename="../src/mainwindow.cpp" line="1067"/>
         <source>Program for selecting common start-up choices</source>
         <translation>一般的なスタートアップを選択するためのプログラム</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1044"/>
+        <location filename="../src/mainwindow.cpp" line="1069"/>
         <source>Copyright (c) MX Linux</source>
         <translation>Copyright (c) MX Linux</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1045"/>
+        <location filename="../src/mainwindow.cpp" line="1070"/>
         <source>%1 License</source>
         <translation>%1 ライセンス</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1066"/>
+        <location filename="../src/mainwindow.cpp" line="1091"/>
         <source>%1 Help</source>
         <translation>%1 ヘルプ</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1076"/>
-        <location filename="../src/mainwindow.cpp" line="1308"/>
+        <location filename="../src/mainwindow.cpp" line="1101"/>
+        <location filename="../src/mainwindow.cpp" line="1368"/>
         <source>Running in a Virtual Machine</source>
         <translation>仮想マシンで実行中</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1077"/>
-        <location filename="../src/mainwindow.cpp" line="1309"/>
+        <location filename="../src/mainwindow.cpp" line="1102"/>
+        <location filename="../src/mainwindow.cpp" line="1369"/>
         <source>You current system is running in a Virtual Machine,
 Plymouth bootsplash will work in a limited way, you also won&apos;t be able to preview the theme</source>
         <translation>現在のシステムは仮想マシンで動作しています。
 Plymouth のブーツプラッシュは限られた方法でしか動作しませんし、テーマをプレビューすることもできません</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1084"/>
+        <location filename="../src/mainwindow.cpp" line="1109"/>
         <source>Plymouth packages not installed</source>
         <translation>Plymouth パッケージがインストールされていません</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1085"/>
+        <location filename="../src/mainwindow.cpp" line="1110"/>
         <source>Plymouth packages are not currently installed.
 OK to go ahead and install them?</source>
         <translation>Plymouth のパッケージは現在インストールされていません。
 このまま続行してインストールしますか？</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1111"/>
+        <location filename="../src/mainwindow.cpp" line="1136"/>
         <source>Images (*.png *.jpg *.jpeg *.tga)</source>
         <translation>画像 (*.png *.jpg *.jpeg *.tga)</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1269"/>
+        <location filename="../src/mainwindow.cpp" line="1301"/>
+        <source>Could not read the systemd boot logs.</source>
+        <translation>systemd の起動ログを読み込めませんでした。</translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="1302"/>
+        <source>Could not read the systemd boot logs%1 or the fallback log at %2.</source>
+        <translation>systemd の起動ログ %1 あるいはフォールバックログ %2 を読み込めません。</translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="1303"/>
+        <source> from %1</source>
+        <translation>%1 から</translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="1306"/>
+        <source>Could not find any boot logs.</source>
+        <translation>起動ログが見つかりません。</translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="1307"/>
+        <source>Could not find log at %1</source>
+        <translation>%1 にログが見つかりません</translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="1309"/>
         <source>Log not found</source>
         <translation>ログが見つかりません</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1269"/>
-        <source>Could not find log at </source>
-        <translation>ログが見つかりません</translation>
-    </message>
-    <message>
-        <location filename="../src/mainwindow.cpp" line="1290"/>
+        <location filename="../src/mainwindow.cpp" line="1350"/>
         <source>Preview Unavailable</source>
-        <translation type="unfinished"/>
+        <translation>プレビューは利用できません</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1291"/>
+        <location filename="../src/mainwindow.cpp" line="1351"/>
         <source>Preview is not available while running under Wayland. Please start an X11 session to preview Plymouth themes.</source>
-        <translation type="unfinished"/>
+        <translation>Wayland 環境ではプレビュー機能は利用できません。Plymouth テーマをプレビューするには X11 セッションを起動してください。</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1415"/>
+        <location filename="../src/mainwindow.cpp" line="1475"/>
         <source>Could not retrieve UUID for %1</source>
         <translation>%1 の UUID を取得できませんでした</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1423"/>
+        <location filename="../src/mainwindow.cpp" line="1483"/>
         <source>Enter password to unlock %1 encrypted partition:</source>
         <translation>パスワードを入力し、暗号化された %1 パーティションのロックを解除してください : </translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1428"/>
+        <location filename="../src/mainwindow.cpp" line="1488"/>
         <source>Password entry cancelled or empty for %1</source>
         <translation>パスワード入力のキャンセル、または %1 が空です</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1434"/>
+        <location filename="../src/mainwindow.cpp" line="1494"/>
         <source>Could not open %1 LUKS container</source>
         <translation>%1 LUKS コンテナを開けませんでした</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1258"/>
+        <location filename="../src/mainwindow.cpp" line="1321"/>
         <source>&amp;Close</source>
         <translation>閉じる(&amp;C)</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="111"/>
+        <location filename="../src/mainwindow.cpp" line="113"/>
         <source>A process is still running. Do you really want to quit?</source>
         <translation>現在、処理を行っています。本当にこれを中止しますか？</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="191"/>
+        <location filename="../src/mainwindow.cpp" line="193"/>
         <source>Live System Detected</source>
         <translation>ライブシステムを検出しました</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="193"/>
+        <location filename="../src/mainwindow.cpp" line="195"/>
         <source>You are currently running a live system. Would you like to modify the boot options for the live system or for an installed system?</source>
         <translation>現在、ライブシステムを実行しています。ライブシステムの起動オプションを変更しますか？それともインストールしたシステムの変更を行いますか？</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="195"/>
+        <location filename="../src/mainwindow.cpp" line="197"/>
         <source>Live System</source>
         <translation>ライブシステム</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="196"/>
+        <location filename="../src/mainwindow.cpp" line="198"/>
         <source>Installed System</source>
         <translation>インストールシステム</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="412"/>
+        <location filename="../src/mainwindow.cpp" line="437"/>
         <source>Failed to update package sources.</source>
         <translation>パッケージソースの更新に失敗しました。</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="416"/>
+        <location filename="../src/mainwindow.cpp" line="441"/>
         <source>Installing packages:</source>
         <translation>インストール中のパッケージ：</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="426"/>
+        <location filename="../src/mainwindow.cpp" line="451"/>
         <source>Success</source>
         <translation>成功</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="426"/>
+        <location filename="../src/mainwindow.cpp" line="451"/>
         <source>Bootsplash installed successfully.</source>
         <translation>ブートスプラッシュのインストールが成功しました。</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="454"/>
+        <location filename="../src/mainwindow.cpp" line="479"/>
         <source>Failed to create temporary file.</source>
         <translation>一時ファイルの生成に失敗しました。</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1022"/>
+        <location filename="../src/mainwindow.cpp" line="1047"/>
         <source>You are currently running in live mode with the &apos;toram&apos; option. Please remember to save the persistence file or remaster, otherwise any changes made will be lost.</source>
         <translation>現在、ライブモードの &apos;toram&apos; オプションで稼働しています。永続化ファイルへ保存するかリマスターを実行しないとこの変更は保存されません。</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1024"/>
+        <location filename="../src/mainwindow.cpp" line="1049"/>
         <source>Your changes have been successfully applied.</source>
         <translation>変更内容を正常に適用しました。</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1025"/>
+        <location filename="../src/mainwindow.cpp" line="1050"/>
         <source>Operation Complete</source>
         <translation>作業完了</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1110"/>
+        <location filename="../src/mainwindow.cpp" line="1135"/>
         <source>Select image to display in bootloader</source>
         <translation>ブートローダに表示するイメージを選択</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1250"/>
+        <location filename="../src/mainwindow.cpp" line="1314"/>
         <source>Boot Log</source>
         <translation>起動ログ</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1297"/>
+        <location filename="../src/mainwindow.cpp" line="1357"/>
         <source>Needs reboot</source>
         <translation>再起動が必要です</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1298"/>
+        <location filename="../src/mainwindow.cpp" line="1358"/>
         <source>Plymouth was just installed, you might need to reboot before being able to display previews</source>
         <translation>Plymouth のインストール直後なので、プレビューを表示するには再起動が必要かもしれません</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1371"/>
+        <location filename="../src/mainwindow.cpp" line="1431"/>
         <source>Click to select theme</source>
         <translation>クリックしてテーマを選択</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1382"/>
+        <location filename="../src/mainwindow.cpp" line="1442"/>
         <source>Select GRUB theme</source>
         <translation>GRUB のテーマ選択</translation>
     </message>

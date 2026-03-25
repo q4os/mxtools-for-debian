@@ -1,0 +1,56 @@
+[
+{
+  "directory": "/home/adrian/programs/qt/mx-locale/build-deb",
+  "command": "/usr/sbin/c++ -DQT_CORE_LIB -DQT_DEPRECATED_WARNINGS -DQT_DISABLE_DEPRECATED_BEFORE=0x060000 -DQT_GUI_LIB -DQT_WIDGETS_LIB -DVERSION=\\\"26.01.3\\\" -I/home/adrian/programs/qt/mx-locale/build-deb/mx-locale_autogen/include -isystem /usr/include/qt6/QtCore -isystem /usr/include/qt6 -isystem /usr/lib/qt6/mkspecs/linux-g++ -isystem /usr/include/qt6/QtGui -isystem /usr/include/qt6/QtWidgets -g -std=gnu++20 -fdiagnostics-color=always -Wpedantic -pedantic -Werror=return-type -Werror=switch -Werror=uninitialized -Werror -Werror=return-local-addr -mno-direct-extern-access -o CMakeFiles/mx-locale.dir/mx-locale_autogen/mocs_compilation.cpp.o -c /home/adrian/programs/qt/mx-locale/build-deb/mx-locale_autogen/mocs_compilation.cpp",
+  "file": "/home/adrian/programs/qt/mx-locale/build-deb/mx-locale_autogen/mocs_compilation.cpp",
+  "output": "/home/adrian/programs/qt/mx-locale/build-deb/CMakeFiles/mx-locale.dir/mx-locale_autogen/mocs_compilation.cpp.o"
+},
+{
+  "directory": "/home/adrian/programs/qt/mx-locale/build-deb",
+  "command": "/usr/sbin/c++ -DQT_CORE_LIB -DQT_DEPRECATED_WARNINGS -DQT_DISABLE_DEPRECATED_BEFORE=0x060000 -DQT_GUI_LIB -DQT_WIDGETS_LIB -DVERSION=\\\"26.01.3\\\" -I/home/adrian/programs/qt/mx-locale/build-deb/mx-locale_autogen/include -isystem /usr/include/qt6/QtCore -isystem /usr/include/qt6 -isystem /usr/lib/qt6/mkspecs/linux-g++ -isystem /usr/include/qt6/QtGui -isystem /usr/include/qt6/QtWidgets -g -std=gnu++20 -fdiagnostics-color=always -Wpedantic -pedantic -Werror=return-type -Werror=switch -Werror=uninitialized -Werror -Werror=return-local-addr -mno-direct-extern-access -o CMakeFiles/mx-locale.dir/main.cpp.o -c /home/adrian/programs/qt/mx-locale/main.cpp",
+  "file": "/home/adrian/programs/qt/mx-locale/main.cpp",
+  "output": "/home/adrian/programs/qt/mx-locale/build-deb/CMakeFiles/mx-locale.dir/main.cpp.o"
+},
+{
+  "directory": "/home/adrian/programs/qt/mx-locale/build-deb",
+  "command": "/usr/sbin/c++ -DQT_CORE_LIB -DQT_DEPRECATED_WARNINGS -DQT_DISABLE_DEPRECATED_BEFORE=0x060000 -DQT_GUI_LIB -DQT_WIDGETS_LIB -DVERSION=\\\"26.01.3\\\" -I/home/adrian/programs/qt/mx-locale/build-deb/mx-locale_autogen/include -isystem /usr/include/qt6/QtCore -isystem /usr/include/qt6 -isystem /usr/lib/qt6/mkspecs/linux-g++ -isystem /usr/include/qt6/QtGui -isystem /usr/include/qt6/QtWidgets -g -std=gnu++20 -fdiagnostics-color=always -Wpedantic -pedantic -Werror=return-type -Werror=switch -Werror=uninitialized -Werror -Werror=return-local-addr -mno-direct-extern-access -o CMakeFiles/mx-locale.dir/mainwindow.cpp.o -c /home/adrian/programs/qt/mx-locale/mainwindow.cpp",
+  "file": "/home/adrian/programs/qt/mx-locale/mainwindow.cpp",
+  "output": "/home/adrian/programs/qt/mx-locale/build-deb/CMakeFiles/mx-locale.dir/mainwindow.cpp.o"
+},
+{
+  "directory": "/home/adrian/programs/qt/mx-locale/build-deb",
+  "command": "/usr/sbin/c++ -DQT_CORE_LIB -DQT_DEPRECATED_WARNINGS -DQT_DISABLE_DEPRECATED_BEFORE=0x060000 -DQT_GUI_LIB -DQT_WIDGETS_LIB -DVERSION=\\\"26.01.3\\\" -I/home/adrian/programs/qt/mx-locale/build-deb/mx-locale_autogen/include -isystem /usr/include/qt6/QtCore -isystem /usr/include/qt6 -isystem /usr/lib/qt6/mkspecs/linux-g++ -isystem /usr/include/qt6/QtGui -isystem /usr/include/qt6/QtWidgets -g -std=gnu++20 -fdiagnostics-color=always -Wpedantic -pedantic -Werror=return-type -Werror=switch -Werror=uninitialized -Werror -Werror=return-local-addr -mno-direct-extern-access -o CMakeFiles/mx-locale.dir/choosedialog.cpp.o -c /home/adrian/programs/qt/mx-locale/choosedialog.cpp",
+  "file": "/home/adrian/programs/qt/mx-locale/choosedialog.cpp",
+  "output": "/home/adrian/programs/qt/mx-locale/build-deb/CMakeFiles/mx-locale.dir/choosedialog.cpp.o"
+},
+{
+  "directory": "/home/adrian/programs/qt/mx-locale/build-deb",
+  "command": "/usr/sbin/c++ -DQT_CORE_LIB -DQT_DEPRECATED_WARNINGS -DQT_DISABLE_DEPRECATED_BEFORE=0x060000 -DQT_GUI_LIB -DQT_WIDGETS_LIB -DVERSION=\\\"26.01.3\\\" -I/home/adrian/programs/qt/mx-locale/build-deb/mx-locale_autogen/include -isystem /usr/include/qt6/QtCore -isystem /usr/include/qt6 -isystem /usr/lib/qt6/mkspecs/linux-g++ -isystem /usr/include/qt6/QtGui -isystem /usr/include/qt6/QtWidgets -g -std=gnu++20 -fdiagnostics-color=always -Wpedantic -pedantic -Werror=return-type -Werror=switch -Werror=uninitialized -Werror -Werror=return-local-addr -mno-direct-extern-access -o CMakeFiles/mx-locale.dir/about.cpp.o -c /home/adrian/programs/qt/mx-locale/about.cpp",
+  "file": "/home/adrian/programs/qt/mx-locale/about.cpp",
+  "output": "/home/adrian/programs/qt/mx-locale/build-deb/CMakeFiles/mx-locale.dir/about.cpp.o"
+},
+{
+  "directory": "/home/adrian/programs/qt/mx-locale/build-deb",
+  "command": "/usr/sbin/c++ -DQT_CORE_LIB -DQT_DEPRECATED_WARNINGS -DQT_DISABLE_DEPRECATED_BEFORE=0x060000 -DQT_GUI_LIB -DQT_WIDGETS_LIB -DVERSION=\\\"26.01.3\\\" -I/home/adrian/programs/qt/mx-locale/build-deb/mx-locale_autogen/include -isystem /usr/include/qt6/QtCore -isystem /usr/include/qt6 -isystem /usr/lib/qt6/mkspecs/linux-g++ -isystem /usr/include/qt6/QtGui -isystem /usr/include/qt6/QtWidgets -g -std=gnu++20 -fdiagnostics-color=always -Wpedantic -pedantic -Werror=return-type -Werror=switch -Werror=uninitialized -Werror -Werror=return-local-addr -mno-direct-extern-access -o CMakeFiles/mx-locale.dir/cmd.cpp.o -c /home/adrian/programs/qt/mx-locale/cmd.cpp",
+  "file": "/home/adrian/programs/qt/mx-locale/cmd.cpp",
+  "output": "/home/adrian/programs/qt/mx-locale/build-deb/CMakeFiles/mx-locale.dir/cmd.cpp.o"
+},
+{
+  "directory": "/home/adrian/programs/qt/mx-locale/build-deb",
+  "command": "/usr/sbin/c++ -DQT_CORE_LIB -DQT_DEPRECATED_WARNINGS -DQT_DISABLE_DEPRECATED_BEFORE=0x060000 -DQT_GUI_LIB -DQT_WIDGETS_LIB -DVERSION=\\\"26.01.3\\\" -I/home/adrian/programs/qt/mx-locale/build-deb/mx-locale_autogen/include -isystem /usr/include/qt6/QtCore -isystem /usr/include/qt6 -isystem /usr/lib/qt6/mkspecs/linux-g++ -isystem /usr/include/qt6/QtGui -isystem /usr/include/qt6/QtWidgets -g -std=gnu++20 -fdiagnostics-color=always -Wpedantic -pedantic -Werror=return-type -Werror=switch -Werror=uninitialized -Werror -Werror=return-local-addr -mno-direct-extern-access -o CMakeFiles/mx-locale.dir/mx-locale_autogen/EWIEGA46WW/qrc_images.cpp.o -c /home/adrian/programs/qt/mx-locale/build-deb/mx-locale_autogen/EWIEGA46WW/qrc_images.cpp",
+  "file": "/home/adrian/programs/qt/mx-locale/build-deb/mx-locale_autogen/EWIEGA46WW/qrc_images.cpp",
+  "output": "/home/adrian/programs/qt/mx-locale/build-deb/CMakeFiles/mx-locale.dir/mx-locale_autogen/EWIEGA46WW/qrc_images.cpp.o"
+},
+{
+  "directory": "/home/adrian/programs/qt/mx-locale/build-deb",
+  "command": "/usr/sbin/c++ -DQT_CORE_LIB -DQT_DEPRECATED_WARNINGS -DQT_DISABLE_DEPRECATED_BEFORE=0x060000 -I/home/adrian/programs/qt/mx-locale/build-deb/helper_autogen/include -isystem /usr/include/qt6/QtCore -isystem /usr/include/qt6 -isystem /usr/lib/qt6/mkspecs/linux-g++ -g -std=gnu++20 -fdiagnostics-color=always -Wpedantic -pedantic -Werror=return-type -Werror=switch -Werror=uninitialized -Werror -Werror=return-local-addr -mno-direct-extern-access -o CMakeFiles/helper.dir/helper_autogen/mocs_compilation.cpp.o -c /home/adrian/programs/qt/mx-locale/build-deb/helper_autogen/mocs_compilation.cpp",
+  "file": "/home/adrian/programs/qt/mx-locale/build-deb/helper_autogen/mocs_compilation.cpp",
+  "output": "/home/adrian/programs/qt/mx-locale/build-deb/CMakeFiles/helper.dir/helper_autogen/mocs_compilation.cpp.o"
+},
+{
+  "directory": "/home/adrian/programs/qt/mx-locale/build-deb",
+  "command": "/usr/sbin/c++ -DQT_CORE_LIB -DQT_DEPRECATED_WARNINGS -DQT_DISABLE_DEPRECATED_BEFORE=0x060000 -I/home/adrian/programs/qt/mx-locale/build-deb/helper_autogen/include -isystem /usr/include/qt6/QtCore -isystem /usr/include/qt6 -isystem /usr/lib/qt6/mkspecs/linux-g++ -g -std=gnu++20 -fdiagnostics-color=always -Wpedantic -pedantic -Werror=return-type -Werror=switch -Werror=uninitialized -Werror -Werror=return-local-addr -mno-direct-extern-access -o CMakeFiles/helper.dir/helper.cpp.o -c /home/adrian/programs/qt/mx-locale/helper.cpp",
+  "file": "/home/adrian/programs/qt/mx-locale/helper.cpp",
+  "output": "/home/adrian/programs/qt/mx-locale/build-deb/CMakeFiles/helper.dir/helper.cpp.o"
+}
+]

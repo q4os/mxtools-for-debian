@@ -13,8 +13,13 @@
       "Bash(./icon_perf_test)",
       "Bash(git rebase:*)",
       "Bash(git reset:*)",
-      "Bash(./build.sh:*)"
+      "Bash(./build.sh:*)",
+      "Bash(ls:*)"
     ],
     "deny": []
-  }
+  },
+  "enableAllProjectMcpServers": true,
+  "enabledMcpjsonServers": [
+    "docker"
+  ]
 }

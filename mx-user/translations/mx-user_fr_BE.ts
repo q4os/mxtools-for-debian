@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="fr_BE">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="fr_BE">
 <context>
     <name>MEConfig</name>
     <message>
@@ -487,7 +485,7 @@
     <message>
         <location filename="../mainwindow.ui" line="1671"/>
         <source>About...</source>
-        <translation>À propos ...</translation>
+        <translation>À propos …</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1678"/>
@@ -518,7 +516,7 @@
         <location filename="../mainwindow.cpp" line="1007"/>
         <location filename="../mainwindow.cpp" line="1016"/>
         <source>browse...</source>
-        <translation>Navigation ...</translation>
+        <translation>Navigation …</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="208"/>
@@ -564,12 +562,12 @@
     <message>
         <location filename="../mainwindow.cpp" line="326"/>
         <source>Synchronizing desktop...</source>
-        <translation>Synchronisation des bureaux ...</translation>
+        <translation>Synchronisation des bureaux …</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="328"/>
         <source>Copying desktop...</source>
-        <translation>Copie des bureaux ...</translation>
+        <translation>Copie des bureaux …</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="365"/>
@@ -735,23 +733,23 @@ Veuillez choisir un autre nom avant de poursuivre.</translation>
         <location filename="../mainwindow.cpp" line="666"/>
         <location filename="../mainwindow.cpp" line="694"/>
         <source>Synchronizing desktop...ok</source>
-        <translation>Synchronisation des bureaux ... réussie</translation>
+        <translation>Synchronisation des bureaux … réussie</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="668"/>
         <location filename="../mainwindow.cpp" line="696"/>
         <source>Copying desktop...ok</source>
-        <translation>Copie des bureaux ... réussie</translation>
+        <translation>Copie des bureaux … réussie</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="700"/>
         <source>Synchronizing desktop...failed</source>
-        <translation>Synchronisation des bureaux ... impossible</translation>
+        <translation>Synchronisation des bureaux … impossible</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="702"/>
         <source>Copying desktop...failed</source>
-        <translation>Copie des bureaux ... impossible</translation>
+        <translation>Copie des bureaux … impossible</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="721"/>

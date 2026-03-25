@@ -53,12 +53,12 @@ void SettingsDialog::onRemovePath()
 
 void SettingsDialog::onEditPath()
 {
-    QListWidgetItem *currentItem = m_pathListWidget->currentItem();
+    auto *currentItem = m_pathListWidget->currentItem();
     if (!currentItem) {
         return;
     }
 
-    QString currentPath = currentItem->text();
+    auto currentPath = currentItem->text();
     QString path = QFileDialog::getExistingDirectory(this, tr("Select Conky Directory"), currentPath);
     if (!path.isEmpty()) {
         currentItem->setText(path);
@@ -113,7 +113,7 @@ void SettingsDialog::setupUI()
 void SettingsDialog::loadPaths()
 {
     m_pathListWidget->clear();
-    QStringList paths = m_manager->searchPaths();
+    auto paths = m_manager->searchPaths();
     for (const QString &path : paths) {
         m_pathListWidget->addItem(path);
     }
@@ -130,7 +130,7 @@ void SettingsDialog::savePaths()
         }
     }
 
-    QStringList oldPaths = m_manager->searchPaths();
+    auto oldPaths = m_manager->searchPaths();
 
     for (const QString &path : oldPaths) {
         if (!newPaths.contains(path)) {

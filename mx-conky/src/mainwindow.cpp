@@ -38,7 +38,7 @@
 #include <QShortcut>
 #include <QSignalBlocker>
 #include <QStackedWidget>
-#include <QStandardPaths>
+#include <QTextBrowser>
 #include <QTextEdit>
 #include <QTimer>
 #include <chrono>
@@ -105,6 +105,77 @@ MainWindow::~MainWindow()
     }
 }
 
+QString MainWindow::docPath(const QString &fileName) const
+{
+    const QString installedPath = QStringLiteral("/usr/share/doc/mx-conky/") + fileName;
+    const QString appDirPath = QCoreApplication::applicationDirPath();
+    const QStringList candidates {
+        QDir(appDirPath).filePath(QStringLiteral("../help/") + fileName),
+        QDir(appDirPath).filePath(QStringLiteral("../../help/") + fileName),
+        QDir::current().filePath(QStringLiteral("help/") + fileName),
+        installedPath,
+    };
+
+    for (const QString &candidate : candidates) {
+        const QString normalized = QFileInfo(candidate).canonicalFilePath();
+        if (!normalized.isEmpty() && QFileInfo::exists(normalized)) {
+            return normalized;
+        }
+        if (QFileInfo::exists(candidate)) {
+            return QFileInfo(candidate).absoluteFilePath();
+        }
+    }
+
+    return installedPath;
+}
+
+void MainWindow::showHtmlDocument(const QString &path, const QString &title, bool largeWindow)
+{
+    auto *dialog = new QDialog(this);
+    auto *browser = new QTextBrowser(dialog);
+    auto *btnClose = new QPushButton(tr("&Close"), dialog);
+    auto *layout = new QVBoxLayout(dialog);
+    const QFileInfo fileInfo(path);
+    const QUrl sourceUrl = QUrl::fromLocalFile(path);
+    const bool nonModal = largeWindow;
+
+    dialog->setWindowTitle(title);
+    if (largeWindow) {
+        dialog->setWindowFlags(Qt::Window);
+        dialog->resize(1000, 800);
+    } else {
+        dialog->resize(700, 600);
+    }
+
+    browser->setOpenExternalLinks(true);
+    browser->setSearchPaths({fileInfo.absolutePath()});
+
+    btnClose->setIcon(QIcon::fromTheme("window-close"));
+    connect(btnClose, &QPushButton::clicked, dialog, &QDialog::close);
+
+    layout->addWidget(browser);
+    layout->addWidget(btnClose);
+
+    auto loadDocument = [browser, path, sourceUrl]() {
+        if (QFileInfo::exists(path)) {
+            browser->setSource(sourceUrl);
+        } else {
+            browser->setText(QObject::tr("Could not load %1").arg(path));
+            qDebug() << "MainWindow: Could not load HTML document" << path;
+        }
+    };
+
+    if (nonModal) {
+        dialog->setAttribute(Qt::WA_DeleteOnClose);
+        dialog->show();
+        QTimer::singleShot(0, dialog, loadDocument);
+    } else {
+        QTimer::singleShot(0, dialog, loadDocument);
+        dialog->exec();
+        dialog->deleteLater();
+    }
+}
+
 void MainWindow::setupUI()
 {
     resize(1000, 700);
@@ -147,7 +218,7 @@ void MainWindow::setupLoadingWidget()
     } else {
         // Fallback: create a simple animated text
         m_loadingLabel->setText("⏳");
-        QFont loadingFont = m_loadingLabel->font();
+        auto loadingFont = m_loadingLabel->font();
         if (loadingFont.pointSizeF() > 0) {
             loadingFont.setPointSizeF(loadingFont.pointSizeF() * 3.5);
         } else {
@@ -158,7 +229,7 @@ void MainWindow::setupLoadingWidget()
 
     auto *textLabel = new QLabel(tr("Loading Conky configurations..."));
     textLabel->setAlignment(Qt::AlignCenter);
-    QFont textFont = textLabel->font();
+    auto textFont = textLabel->font();
     if (textFont.pointSizeF() > 0) {
         textFont.setPointSizeF(textFont.pointSizeF() + 2.0);
     } else {
@@ -231,7 +302,7 @@ void MainWindow::setupMainWidget()
     // Widgets will be added to splitter when they're created
 
     // Set default splitter geometry to equal panels when no saved state
-    QByteArray splitterState = settings.value("splitter").toByteArray();
+    auto splitterState = settings.value("splitter").toByteArray();
     if (splitterState.isEmpty()) {
         // Set equal split (50/50)
         QList<int> sizes;
@@ -283,7 +354,7 @@ void MainWindow::setupMainWidget()
     bottomLayout->addStretch();
 
     // Add a spacer to the right of the logo, same width as the close button
-    QSpacerItem *buttonSpacer
+    auto *buttonSpacer
         = new QSpacerItem(m_closeButton->sizeHint().width(), 0, QSizePolicy::Fixed, QSizePolicy::Minimum);
     bottomLayout->addItem(buttonSpacer);
 
@@ -501,9 +572,9 @@ void MainWindow::onEditRequested(ConkyItem *item)
             if (!fileInfo.isWritable()) {
                 // Check if the detected editor can handle elevation automatically
                 QString editor;
-                QString default_editor = Cmd().getCmdOut("xdg-mime query default text/plain");
-                QString desktop_file = QStandardPaths::locate(QStandardPaths::ApplicationsLocation, default_editor,
-                                                              QStandardPaths::LocateFile);
+                auto default_editor = Cmd().getCmdOut("xdg-mime query default text/plain");
+                auto desktop_file = QStandardPaths::locate(QStandardPaths::ApplicationsLocation, default_editor,
+                                                           QStandardPaths::LocateFile);
 
                 QFile file(desktop_file);
                 if (file.open(QIODevice::ReadOnly)) {
@@ -779,8 +850,8 @@ void MainWindow::editConkyFile(const QString &filePath)
     bool debug = !QProcessEnvironment::systemEnvironment().value("DEBUG").isEmpty();
 
     QString editor;
-    QString default_editor = Cmd().getCmdOut("xdg-mime query default text/plain");
-    QString desktop_file
+    auto default_editor = Cmd().getCmdOut("xdg-mime query default text/plain");
+    auto desktop_file
         = QStandardPaths::locate(QStandardPaths::ApplicationsLocation, default_editor, QStandardPaths::LocateFile);
 
     QFile file(desktop_file);
@@ -858,7 +929,7 @@ void MainWindow::editConkyFile(const QString &filePath)
 void MainWindow::pushAbout_clicked()
 {
     hide();
-    const QString url = "file:///usr/share/doc/mx-conky/license.html";
+    const QString licensePath = docPath(QStringLiteral("license.html"));
     QMessageBox msgBox(QMessageBox::NoIcon, tr("About MX Conky"),
                        "<p align=\"center\"><b><h2>" + tr("MX Conky") + "</h2></b></p><p align=\"center\">"
                            + tr("Version: ") + QCoreApplication::applicationVersion() + "</p><p align=\"center\"><h3>"
@@ -874,9 +945,7 @@ void MainWindow::pushAbout_clicked()
     msgBox.exec();
 
     if (msgBox.clickedButton() == btnLicense) {
-        const QString executablePath = QStandardPaths::findExecutable("mx-viewer");
-        const QString cmd_str = executablePath.isEmpty() ? "xdg-open" : "mx-viewer";
-        QProcess::startDetached(cmd_str, {url});
+        showHtmlDocument(licensePath, tr("MX Conky License"));
     } else if (msgBox.clickedButton() == btnChangelog) {
         auto *changelog = new QDialog(this);
         changelog->setWindowTitle(tr("Changelog"));
@@ -905,44 +974,9 @@ void MainWindow::pushAbout_clicked()
 
 void MainWindow::pushHelp_clicked()
 {
-    QString url = "/usr/share/doc/mx-conky/mx-conky.html";
-    qDebug() << "MainWindow: Opening help URL:" << url;
-
-    // Check if mx-viewer exists using synchronous approach
-    QProcess checkProcess;
-    qDebug() << "MainWindow::pushHelp_clicked: Creating which QProcess object";
-    checkProcess.setProgram("which");
-    checkProcess.setArguments({ "mx-viewer" });
-    checkProcess.start();
-
-    bool started = false;
-    if (checkProcess.waitForFinished(3000)) {
-        qDebug() << "MainWindow: which command finished with exit code:" << checkProcess.exitCode();
-
-        if (checkProcess.exitCode() == 0) {
-            qDebug() << "MainWindow: Using mx-viewer for help";
-            started = QProcess::startDetached("mx-viewer", { url, tr("MX Conky Help") });
-        } else {
-            qDebug() << "MainWindow: Using xdg-open for help";
-            started = QProcess::startDetached("xdg-open", { url });
-        }
-
-        // Ensure process is fully finished and cleaned up
-        checkProcess.kill();
-        checkProcess.waitForFinished(1000);
-    } else {
-        qDebug() << "MainWindow: which command timed out, using xdg-open as fallback";
-        checkProcess.kill();
-        checkProcess.waitForFinished(1000);
-        started = QProcess::startDetached("xdg-open", { url });
-    }
-    qDebug() << "MainWindow::pushHelp_clicked: Destroying which QProcess object";
-
-    if (started) {
-        qDebug() << "MainWindow: Help viewer started successfully";
-    } else {
-        qDebug() << "MainWindow: Failed to start help viewer";
-    }
+    const QString helpPath = docPath(QStringLiteral("mx-conky.html"));
+    qDebug() << "MainWindow: Opening help document:" << helpPath;
+    showHtmlDocument(helpPath, tr("MX Conky Help"), true);
 }
 
 void MainWindow::pushCM_clicked()
@@ -1018,17 +1052,17 @@ void MainWindow::populateFilterComboBox()
         m_filterComboBox->addItem(tr("Autostart"));
 
         // Add folder-based filters from search paths
-        QStringList searchPaths = m_conkyManager->searchPaths();
+        auto searchPaths = m_conkyManager->searchPaths();
         for (const QString &path : searchPaths) {
-            QFileInfo pathInfo(path);
-            QString folderName = pathInfo.fileName();
+            auto pathInfo = QFileInfo(path);
+            auto folderName = pathInfo.fileName();
             if (folderName.isEmpty()) {
                 folderName = pathInfo.absolutePath().split('/').last();
             }
 
             // Include parent directory for better clarity (e.g., "mx-conky-data/themes", "~/.conky")
-            QFileInfo parentInfo(pathInfo.absolutePath());
-            QString parentFolderName = parentInfo.fileName();
+            auto parentInfo = QFileInfo(pathInfo.absolutePath());
+            auto parentFolderName = parentInfo.fileName();
             QString displayName;
 
             if (path.startsWith(QDir::homePath())) {
@@ -1089,11 +1123,11 @@ void MainWindow::setupConkyFonts()
 
     // Create symlinks for each font file
     for (const QString &fontFile : fontFiles) {
-        QFileInfo fontInfo(fontFile);
-        QString fontName = fontInfo.fileName();
+        auto fontInfo = QFileInfo(fontFile);
+        auto fontName = fontInfo.fileName();
         QString linkPath = userFontsPath + fontName;
 
-        QFileInfo linkInfo(linkPath);
+        auto linkInfo = QFileInfo(linkPath);
         if (linkInfo.exists()) {
             // Check if it's already the correct symlink
             if (linkInfo.isSymLink() && linkInfo.symLinkTarget() == fontFile) {

@@ -1,6 +1,12 @@
+mx-welcome (26.03mx25) mx; urgency=medium
+
+  * show license inside app and remove mx-viewer/xdg-open dependency
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 19 Mar 2026 15:55:29 -0400
+
 mx-welcome (25.11.02mx25) mx; urgency=medium
 
-  * make sure 8command (TOOLSCMD) runs with arguements 
+  * make sure 8command (TOOLSCMD) runs with arguements
 
  -- Dolphin Oracle <dolphinoracle@gmail.com>  Tue, 18 Nov 2025 20:00:55 -0500
 

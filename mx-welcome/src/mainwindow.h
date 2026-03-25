@@ -29,7 +29,6 @@
 #include <QCommandLineParser>
 #include <QDialog>
 #include <QMessageBox>
-#include <QProcess>
 #include <QSettings>
 #include <QWidget>
 
@@ -46,8 +45,8 @@ public:
     explicit MainWindow(const QCommandLineParser &arg_parser, QWidget *parent = nullptr);
     ~MainWindow() override;
 
-    static QString runCmd(const QString &cmd);
-    static QString getVersion(const QString &name);
+    [[nodiscard]] static QString runCmd(const QString &cmd);
+    [[nodiscard]] static QString getVersion(const QString &name);
 
     void setup();
 
@@ -75,7 +74,6 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
-    QProcess *proc {};
     QSettings user_settings;
 
     QString CONTRIBUTECMD;
@@ -91,7 +89,6 @@ private:
     QString VIDEOCMD;
     QString WIKICMD;
     QString debian_version;
-    QString output;
     QString version;
     bool isfluxbox = false;
 };

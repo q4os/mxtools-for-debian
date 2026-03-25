@@ -24,7 +24,9 @@
 #include "ui_mainwindow.h"
 
 #include <QDebug>
+#include <QDir>
 #include <QFileDialog>
+#include <QFileInfo>
 #include <QJsonArray>
 #include <QJsonDocument>
 #include <QJsonObject>
@@ -57,7 +59,7 @@ MainWindow::MainWindow(QWidget *parent)
     setGeneralConnections();
 
     // Cache authentication for elevated commands
-    Cmd().runAsRoot("true", true);
+    Cmd().runAsRoot({"true"}, true);
 
     const auto size = this->size();
     if (settings.contains("geometry")) {
@@ -146,6 +148,30 @@ void MainWindow::centerWindow()
     const int x = (screenGeometry.width() - width()) / 2;
     const int y = (screenGeometry.height() - height()) / 2;
     move(x, y);
+}
+
+QString MainWindow::docPath(const QString &fileName) const
+{
+    const QString installedPath = QStringLiteral("/usr/share/doc/mx-service-manager/") + fileName;
+    const QString appDirPath = QCoreApplication::applicationDirPath();
+    const QStringList candidates {
+        QDir(appDirPath).filePath(QStringLiteral("../docs/") + fileName),
+        QDir(appDirPath).filePath(QStringLiteral("../../docs/") + fileName),
+        QDir::current().filePath(QStringLiteral("docs/") + fileName),
+        installedPath,
+    };
+
+    for (const QString &candidate : candidates) {
+        const QString normalized = QFileInfo(candidate).canonicalFilePath();
+        if (!normalized.isEmpty() && QFileInfo::exists(normalized)) {
+            return normalized;
+        }
+        if (QFileInfo::exists(candidate)) {
+            return QFileInfo(candidate).absoluteFilePath();
+        }
+    }
+
+    return installedPath;
 }
 
 void MainWindow::cmdStart()
@@ -392,7 +418,7 @@ void MainWindow::listServices()
 void MainWindow::processNonSystemdServices()
 {
     static const QRegularExpression dpkgRegex("dpkg-.*$");
-    const auto list = cmd.getOutAsRoot("/sbin/service --status-all", true).trimmed().split("\n");
+    const auto list = cmd.getOutAsRoot({"service", "--status-all"}, true).trimmed().split("\n");
     services.reserve(list.size());
 
     const QLatin1String sectionDelimiter("]  ");
@@ -604,12 +630,13 @@ void MainWindow::pushAbout_clicked()
 {
     hide();
     displayAboutMsgBox(
+        this,
         tr("About %1") % tr("MX Service Manager"),
         R"(<p align="center"><b><h2>MX Service Manager</h2></b></p><p align="center">)" % tr("Version: ")
             % QApplication::applicationVersion() % "</p><p align=\"center\"><h3>" % tr("Service and daemon manager")
             % R"(</h3></p><p align="center"><a href="http://mxlinux.org">http://mxlinux.org</a><br /></p><p align="center">)"
             % tr("Copyright (c) MX Linux") % "<br /><br /></p>",
-        "/usr/share/doc/mx-service-manager/license.html", tr("%1 License").arg(windowTitle()));
+        docPath(QStringLiteral("license.html")), tr("%1 License").arg(windowTitle()));
 
     show();
 }
@@ -640,8 +667,7 @@ void MainWindow::pushEnableDisable_clicked()
 
 void MainWindow::pushHelp_clicked()
 {
-    const QString url = "https://mxlinux.org/wiki/help-service-manager/";
-    displayDoc(url, tr("%1 Help").arg(windowTitle()));
+    displayDoc(this, docPath(QStringLiteral("mx-service-manager.html")), tr("%1 Help").arg(windowTitle()), true);
 }
 
 void MainWindow::pushRefresh_clicked()

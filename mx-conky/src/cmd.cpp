@@ -22,10 +22,10 @@
  * along with mx-conky.  If not, see <http://www.gnu.org/licenses/>.
  **********************************************************************/
 
+#include "cmd.h"
+
 #include <QDebug>
 #include <QEventLoop>
-
-#include "cmd.h"
 
 Cmd::Cmd(QObject *parent)
     : QProcess(parent)

@@ -59,7 +59,7 @@
     <message>
         <location filename="../src/editshare.cpp" line="81"/>
         <source>Select access for at least one user before continuing.</source>
-        <translation type="unfinished"/>
+        <translation>Предоставьте доступ хотя бы для одного пользователя перед продолжением.</translation>
     </message>
 </context>
 <context>
@@ -233,6 +233,7 @@
         <location filename="../src/mainwindow.cpp" line="567"/>
         <location filename="../src/mainwindow.cpp" line="582"/>
         <location filename="../src/mainwindow.cpp" line="597"/>
+        <location filename="../src/mainwindow.cpp" line="603"/>
         <source>Error</source>
         <translation>Ошибка</translation>
     </message>
@@ -254,7 +255,7 @@
     <message>
         <location filename="../src/mainwindow.cpp" line="137"/>
         <source>Please set access for at least one user.</source>
-        <translation type="unfinished"/>
+        <translation>Пожалуйста, предоставьте доступ хотя бы одному пользователю.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="152"/>
@@ -473,6 +474,11 @@
         <location filename="../src/mainwindow.cpp" line="582"/>
         <source>Error processing permissions: </source>
         <translation>Ошибка обработки разрешений:</translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="603"/>
+        <source>Please add a Samba user before creating a share.</source>
+        <translation>Пожалуйста, добавьте пользователя Samba перед созданием общего ресурса.</translation>
     </message>
 </context>
 <context>

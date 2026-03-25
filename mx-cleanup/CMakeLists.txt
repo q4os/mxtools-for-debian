@@ -123,6 +123,10 @@ set(SOURCES
     about.cpp
 )
 
+set(HELPER_SOURCES
+    helper.cpp
+)
+
 set(HEADERS
     mainwindow.h
     about.h
@@ -148,11 +152,19 @@ add_executable(mx-cleanup
     ${RESOURCE_FILES}
 )
 
+add_executable(helper
+    ${HELPER_SOURCES}
+)
+
 # Link Qt6 libraries
 target_link_libraries(mx-cleanup
     Qt6::Core
     Qt6::Gui
     Qt6::Widgets
+)
+
+target_link_libraries(helper
+    Qt6::Core
 )
 
 # Set compiler flags
@@ -165,15 +177,32 @@ target_compile_options(mx-cleanup PRIVATE
     -Werror
 )
 
+target_compile_options(helper PRIVATE
+    -Wpedantic
+    -pedantic
+    -Werror=return-type
+    -Werror=switch
+    -Werror=uninitialized
+    -Werror
+)
+
 # Add compiler-specific flags
 if(CMAKE_CXX_COMPILER_ID STREQUAL "Clang" OR USE_CLANG)
     target_compile_options(mx-cleanup PRIVATE -Werror=return-stack-address)
+    target_compile_options(helper PRIVATE -Werror=return-stack-address)
 else()
     target_compile_options(mx-cleanup PRIVATE -Werror=return-local-addr)
+    target_compile_options(helper PRIVATE -Werror=return-local-addr)
 endif()
 
 # Set compile definitions
 target_compile_definitions(mx-cleanup PRIVATE
+    QT_DEPRECATED_WARNINGS
+    QT_DISABLE_DEPRECATED_BEFORE=0x060000
+    VERSION="${PROJECT_VERSION}"
+)
+
+target_compile_definitions(helper PRIVATE
     QT_DEPRECATED_WARNINGS
     QT_DISABLE_DEPRECATED_BEFORE=0x060000
     VERSION="${PROJECT_VERSION}"
@@ -209,10 +238,19 @@ set_target_properties(mx-cleanup PROPERTIES
     RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}
 )
 
+set_target_properties(helper PROPERTIES
+    OUTPUT_NAME "helper"
+    RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}
+)
+
 
 
 # Install target (required by Debian build system)
 # Other files are handled by debian/install
 install(TARGETS mx-cleanup
     RUNTIME DESTINATION bin
+)
+
+install(TARGETS helper
+    RUNTIME DESTINATION lib/mx-cleanup
 )

@@ -63,3 +63,9 @@ sudo dpkg -i ../mx-conky_*.deb
 sudo apt install -f
 ```
 
+### Arch Packaging Note
+
+The Arch package uses an `.install` script to create a small wrapper at
+`/usr/share/mx-conky-data/conky-startup.sh` only if it does not already exist.
+This avoids a hard dependency on `mx-conky-data` and prevents file conflicts if
+`mx-conky-data` is installed later.

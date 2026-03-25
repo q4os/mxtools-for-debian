@@ -20,8 +20,8 @@ esac
 
 LOG="/tmp/formatter.log"
 
-echo device is $device format is $format 
-echo label is $label 
+echo device is $device format is $format
+echo label is $label
 
 clearpartions(){
 	live-usb-maker gui partition-clear --color=off -t "$device"
@@ -50,36 +50,36 @@ clear_partitions()
     local sneaky_offset=$((sneaky_bytes / block_size))
 
     local total_blocks=$((bytes / $block_size))
-    #echo -e "Total bytes: $bytes\nTotal blocks: $total_blocks" 
+    #echo -e "Total bytes: $bytes\nTotal blocks: $total_blocks"
 
     # Clear out previous primary partition table
-    dd if=/dev/zero of=$dev bs=$block_size count=$pt_cnt 
-    
+    dd if=/dev/zero of=$dev bs=$block_size count=$pt_cnt
+
     checkerrorcode "primary partition table clear"
-    
+
     sleep 1
 
     # Clear out sneaky iso-hybrid partition table
-    dd if=/dev/zero of=$dev bs=$block_size count=$pt_cnt seek=64 
-    
+    dd if=/dev/zero of=$dev bs=$block_size count=$pt_cnt seek=64
+
     checkerrorcode "iso-hybrid partition table clear"
 
 	sleep 1
-	
+
     [ -n "$bytes" ] || return
     local offset=$((total_blocks - $pt_cnt))
 
     # Clear out secondary gpt partition table
-    dd conv=notrunc if=/dev/zero of=$dev bs=$block_size count=$pt_cnt seek=$offset 
-    
-    
+    dd conv=notrunc if=/dev/zero of=$dev bs=$block_size count=$pt_cnt seek=$offset
+
+
     checkerrorcode "secondary partition table clear"
-    
+
     sleep 1
     # Tell kernel the partition table has changed
-    echo "refresh partitions info $dev" 
-    /sbin/partprobe -s $dev 
-    
+    echo "refresh partitions info $dev"
+    partprobe -s $dev
+
     checkerrorcode "refresh partitions info"
     sleep 1
 }
@@ -90,64 +90,64 @@ create_partition()
 	local option
 	unmount_partitions
 	sleep 1
-	
+
 	local bytes=$(lsblk --bytes --nodeps --noheadings --output SIZE $dev 2>/dev/null)
 	bytes=$((bytes / 1))
 	local mbrlimit=$((2000 * 1024 * 1024 * 1024)) # about 2TB - devices over this size are made to gpt
 	local parttabletype
 
     echo "bytes $bytes limit $mbrlimit"
-	
+
 	if [ "$part" = "defaults" ]; then
 		if (($bytes <= $mbrlimit)) ; then # the <= prevents a race condition
-			parttabletype="msdos" 
+			parttabletype="msdos"
 			option="primary"
 			echo "making new dos partition table"
 			sleep 1
 		fi
 
 		if (($bytes > $mbrlimit)) ; then
-			parttabletype="gpt" 
+			parttabletype="gpt"
 			echo "making new gpt partition table"
 			sleep 1
 		fi
 	fi
-	
+
 	if [ "$part" = "gpt" ]; then
-		parttabletype="gpt" 
+		parttabletype="gpt"
 		echo "making new gpt partition table"
 		sleep 1
 	fi
-	
+
 	if [ "$part" = "msdos" ]; then
-		parttabletype="msdos" 
+		parttabletype="msdos"
 		option="primary"
 		echo "making new msdos partition table"
 		sleep 1
 	fi
-	
+
 	#set default part name if file system label is empty
 	if [ "$parttabletype" = "gpt" ]; then
 		if [ -z "$label" ]; then
 			option="$label"
-		else 
+		else
 			option="primary"
 		fi
 	fi
-	
-	/sbin/parted -s $dev mklabel $parttabletype
-	
+
+	parted -s $dev mklabel $parttabletype
+
 	checkerrorcode "making new partition table"
 	sleep 1
-	/sbin/partprobe $dev 
+	partprobe $dev
 	checkerrorcode "refresh partitions info"
 	sleep 1
 	#create partition
-	/sbin/parted -s -a optimal $dev mkpart $option 1 100%
+	parted -s -a optimal $dev mkpart $option 1 100%
 	checkerrorcode "create new partition"
 	sleep 1
-	
-	/sbin/partprobe $dev
+
+	partprobe $dev
 	checkerrorcode "refresh partitions info"
 	sleep 1
 }
@@ -170,17 +170,17 @@ if [ -n "$(df |grep $device)" ]; then
 fi
 
 
-    
-case $format in 
+
+case $format in
 
 	vfat) fatlabel /dev/"$device$partnum" "$label"  ;;
-	
+
 	ext4)  e2label /dev/"$device$partnum" "$label"  ;;
-	
+
 	ntfs)  ntfslabel /dev/"$device$partnum" "$label"  ;;
-	
+
 	exfat) exfatlabel /dev/"$device$partnum" "$label"  ;;
-	
+
 	*)	echo "unknown format, exiting"  ;;
 
 esac
@@ -190,13 +190,13 @@ checkerrorcode "label partition"
 }
 
 partitionrefresh(){
-	
+
 	##need device not partition
 
 	local refreshdevice partition_to_mark filter partition_dev mark
 
 	partition_dev="$device$partnum"
-	
+
 
 	#if mmc device
 	if [[ "$device" == *"mmc"* ]]; then
@@ -213,14 +213,14 @@ partitionrefresh(){
 		filter+="p"
 		partition_to_mark=${partition_dev#$filter}
 	fi
-	#if device is sdXY, 
+	#if device is sdXY,
 	if [[ "$device" == *"sd"* ]]; then
 		refreshdevice=${device//[0-9]/}
 		partition_to_mark=${partition_dev#$refreshdevice}
 	fi
 
 echo "Device $device"
-echo "Refresh Partitions $refreshdevice"  
+echo "Refresh Partitions $refreshdevice"
 echo "partition to mark $partition_to_mark"
 
 #if gpt partition, use GUID for part type
@@ -232,35 +232,35 @@ fi
 #if msdos partition, use hexadecimal for part type, per format
 
 if [ -n "$(blkid /dev/$refreshdevice | grep PTTYPE=\"dos\")" ]; then
-	case $format in 
+	case $format in
 
 	      vfat) mark="c"  ;;
-	
+
 	exfat | ntfs) mark="7"  ;;
-	
+
 	         *)  ;; #don't mark
-	         
+
 	esac
 	echo "mark $mark"
 fi
 
 
 #mark partition based on format if formating ntfs(7), exfat(7), or fat32(b)
-case $format in 
+case $format in
 
 				vfat | exfat | ntfs) sfdisk /dev/$refreshdevice $partition_to_mark --part-type $mark
 									 sleep 1
-									 
+
 									 checkerrorcode "Setting Partition Type"	;;
-				
-					  
-	     	
+
+
+
 							  *)  ;; #don't mark
-	         
+
 esac
 
-/sbin/partprobe "/dev/$refreshdevice" 
- 
+partprobe "/dev/$refreshdevice"
+
 checkerrorcode "refresh partition info"
 
 }
@@ -272,7 +272,7 @@ cleanuplog(){
 	if [ -e "/tmp/formatusb.log" ]; then
 		cp /tmp/formatusb.log /var/log/formatusb.log
 	fi
-		
+
 }
 
 partnumber()
@@ -280,9 +280,9 @@ partnumber()
 	#ensure some partnums when working on devices
 
 if [ "$part" != "part" ]; then
-	
+
 	partnum="1"
-	
+
 	#if device is mmc, then partnum=p1
 
 	if [[ "$device" == *"mmc"* ]]; then
@@ -297,51 +297,51 @@ fi
 }
 
 format_partitions(){
-	
-	echo "formatting partitions $device$partnum"  
-		
+
+	echo "formatting partitions $device$partnum"
+
 	#ensure device is unmounted
 	unmount_partitions
 
-	case $format in 
+	case $format in
 
 	vfat) mkfs.fat -F 32 /dev/"$device$partnum"  ;;
-	
-	ext4)  mkfs.ext4 -F /dev/"$device$partnum"  
+
+	ext4)  mkfs.ext4 -F /dev/"$device$partnum"
 		   change_ownership;;
-	
+
 	ntfs)  mkfs.ntfs -Q /dev/"$device$partnum"  ;;
-	
+
 	exfat) mkfs.exfat /dev/"$device$partnum" ;;
-	
+
 	*)	echo "unknown format, exiting" ;;
-	
+
 
 
 esac
 
 checkerrorcode "format partition"
-	
+
 }
 
 disable_automount()
 {
-mkdir -p /run/udev/rules.d  
+mkdir -p /run/udev/rules.d
 
 checkerrorcode "hide disk from udev"
 echo 'SUBSYSTEM=="block", ENV{UDISKS_IGNORE}="1"' > /run/udev/rules.d/91-mx-udisks-inhibit.rules
-udevadm control --reload  
-udevadm trigger --subsystem-match=block  
+udevadm control --reload
+udevadm trigger --subsystem-match=block
 
 }
 
 enable_automount()
 {
-rm -f /run/udev/rules.d/91-mx-udisks-inhibit.rules 
- 
+rm -f /run/udev/rules.d/91-mx-udisks-inhibit.rules
+
 checkerrorcode "make disk visible to udev"
-udevadm control --reload   
-udevadm trigger --subsystem-match=block  
+udevadm control --reload
+udevadm trigger --subsystem-match=block
 }
 
 change_ownership()
@@ -349,17 +349,17 @@ change_ownership()
 	local USER=$(id -u $(/usr/bin/logname))
 	local GROUP=$(getent group users |awk -F: '{print $3}')
 	local USERNAME=$(/usr/bin/logname)
-	
-	mkdir -p /tmp/formatmountpoint 
-	mount -t ext4 /dev/"$device$partnum" /tmp/formatmountpoint    
+
+	mkdir -p /tmp/formatmountpoint
+	mount -t ext4 /dev/"$device$partnum" /tmp/formatmountpoint
 	chown $USERNAME:users /tmp/formatmountpoint
-	
-	checkerrorcode "Changing owner of partition to $USERNAME:users" 
-	chmod 775 -R /tmp/formatmountpoint  
-	
+
+	checkerrorcode "Changing owner of partition to $USERNAME:users"
+	chmod 775 -R /tmp/formatmountpoint
+
 	checkerrorcode "Changing permissions of partition to $USERNAME:users"
-	umount -q /tmp/formatmountpoint  
-	rmdir /tmp/formatmountpoint  
+	umount -q /tmp/formatmountpoint
+	rmdir /tmp/formatmountpoint
 }
 
 checkerrorcode()

@@ -47,6 +47,10 @@ qt_add_executable(mx-datetime
 	images.qrc
 )
 
+qt_add_executable(helper
+	helper.cpp
+)
+
 #target_sources(mx-tweak PRIVATE FILE_SET CXX_MODULES FILES
 #	TODO: add files that are C++20 modules.
 #)
@@ -57,15 +61,30 @@ target_link_libraries(mx-datetime PRIVATE
 	Qt::Widgets
 )
 
+target_link_libraries(helper PRIVATE
+	Qt::Core
+)
+
 build_compilation_setup(mx-datetime)
 build_version_definition(mx-datetime VERSION)
 build_translation_files(mx-datetime translations)
 
+build_compilation_setup(helper)
+build_version_definition(helper VERSION)
+
 target_compile_definitions(mx-datetime PRIVATE
+	QT_DISABLE_DEPRECATED_UP_TO=0x060400
+)
+
+target_compile_definitions(helper PRIVATE
 	QT_DISABLE_DEPRECATED_UP_TO=0x060400
 )
 
 include(GNUInstallDirs)
 install(TARGETS mx-datetime
 	RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+)
+
+install(TARGETS helper
+	RUNTIME DESTINATION ${CMAKE_INSTALL_LIBDIR}/mx-datetime
 )

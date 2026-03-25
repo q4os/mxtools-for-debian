@@ -65,7 +65,7 @@
         <location filename="../mainwindow.ui" line="181"/>
         <source>System Language</source>
         <extracomment> language selection, also default for locale subvariables if not otherwise defined</extracomment>
-        <translation>Järjestelmän kieli</translation>
+        <translation>Kieli</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="187"/>
@@ -76,7 +76,7 @@
         <location filename="../mainwindow.ui" line="229"/>
         <source>Locale Categories</source>
         <extracomment>defines individual subvariables for locale</extracomment>
-        <translation>Kieli-alueet</translation>
+        <translation>Kielikohtaiset</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="255"/>
@@ -158,7 +158,7 @@
         <location filename="../mainwindow.ui" line="445"/>
         <source>Disable all locales except the one in use</source>
         <extracomment>disables generation of any locale except on that is currently in use</extracomment>
-        <translation>Poista käytöstä kaikki maat paitsi käytössä oleva</translation>
+        <translation>Poista kaikki maat paitsi käytössä oleva</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="428"/>

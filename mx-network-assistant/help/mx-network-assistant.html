@@ -1,9 +1,24 @@
-<!DOCTYPE html>
-<html lang="en-US">
+<?xml version="1.0" encoding="UTF-8"?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>HELP: MX Network Assistant</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+img {
+  display: block;
+  margin: 0 0 1em 0;
+}
+
+.image-block {
+  margin: 0 0 1em 0;
+  text-align: left;
+}
+
+.image-block img {
+  margin: 0;
+}
+</style>
 </head>
 <body>
 <h1>HELP: MX Network Assistant</h1>
@@ -14,13 +29,13 @@
 
 <p>This tab shows the results of scanning the network hardware on your system. You will use that information to determine which driver(s) you need using the <a rel="noreferrer noopener" aria-label="Linux Wireless (opens in a new tab)" href="http://linuxwireless.org/" target="_blank">Linux Wireless</a> site.</p>
 
-<img src="10-1.jpg" alt="network assistant" />
+<div class="image-block"><img src="10-1.jpg" alt="network assistant" width="718" height="508" /></div>
 
 <h3>Linux drivers tab</h3>
 
 <p>Here you can see the linux drivers that are loaded, as well as the ones that are blacklisted.</p>
 
-<img src="11.jpg" alt="Linux drivers" />
+<div class="image-block"><img src="11.jpg" alt="Linux drivers" width="718" height="508" /></div>
 
 <ul>
 <li>Highlight a driver, and use the buttons to change its state as needed.</li>
@@ -33,7 +48,7 @@
 
 <p>On this final tab you can test the network, by using <a rel="noreferrer noopener" aria-label="Ping (opens in a new tab)" href="https://en.wikipedia.org/wiki/Ping_%28networking_utility%29" target="_blank">Ping</a> to determine connection speed to a specific target, and <a rel="noreferrer noopener" aria-label="Traceroute (opens in a new tab)" href="https://en.wikipedia.org/wiki/Traceroute" target="_blank">Traceroute</a> to examine where any problems might lie. To get an idea how it works, put any common URL (google.com, yahoo.com, etc.) in the Target URL box and click Start.</p>
 
-<img src="13.jpg" alt="net diagnostics" />
+<div class="image-block"><img src="13.jpg" alt="net diagnostics" width="718" height="508" /></div>
 
 <ul>
 <li>Ping is used to send small <a href="http://en.wikipedia.org/wiki/Internet_Control_Message_Protocol" target="_blank" rel="noreferrer noopener" aria-label="icmp (opens in a new tab)">icmp</a> packets to another network host by name or web address as a basic test for connectivity. If you can ping by IP but not hostname, it usually indicates a problem with your <a rel="noreferrer noopener" aria-label="name resolution (opens in a new tab)" href="https://en.wikipedia.org/wiki/Domain_Name_System" target="_blank">name resolution</a>. For details, consult the man page.</li>

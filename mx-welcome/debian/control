@@ -9,8 +9,7 @@ Homepage: https://github.com/AdrianTM/mx-welcome
 
 Package: mx-welcome
 Architecture: any
-Depends: mx-viewer | xdg-utils,
-         mx-welcome-data (>= 22.02.01),
+Depends: mx-welcome-data (>= 22.02.01),
          ${misc:Depends},
          ${shlibs:Depends}
 Recommends: mx-docs

@@ -87,7 +87,7 @@
         <location filename="../MainWindow.cpp" line="262"/>
         <location filename="../MainWindow.cpp" line="331"/>
         <source>Job Scheduler</source>
-        <translation>Työn vuorontaja</translation>
+        <translation>Ajastetut tehtävät</translation>
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="126"/>
@@ -232,12 +232,12 @@ Haluatko poistua?</translation>
     <message>
         <location filename="../MainWindow.cpp" line="344"/>
         <source>About Job Scheduler</source>
-        <translation>TIetoja työn vuorontajasta</translation>
+        <translation>TIetoja Ajastetut tehtävät</translation>
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="345"/>
         <source>&lt;b&gt;Job Scheduler&lt;/b&gt;</source>
-        <translation>&lt;b&gt;Työn vuorontaja&lt;/b&gt;</translation>
+        <translation>&lt;b&gt;Ajastetut tehtävät&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="345"/>
@@ -247,7 +247,7 @@ Haluatko poistua?</translation>
     <message>
         <location filename="../MainWindow.cpp" line="346"/>
         <source>Job Scheduler is based upon qroneko 0.5.4, released in 2005 by korewaisai (&lt;a href=&quot;mailto:korewaisai@yahoo.co.jp&quot;&gt;korewaisai@yahoo.co.jp&lt;/a&gt;)</source>
-        <translation>Job Scheduler pohjautuu qroneko 0.5.4, julkaistu vuonna 2005 tekijältä korewaisai (&lt;a href=&quot;mailto:korewaisai@yahoo.co.jp&quot;&gt;korewaisai@yahoo.co.jp&lt;/a&gt;)</translation>
+        <translation>Job Scheduler perustuu qroneko 0.5.4 ohjelmaan, jonka Korewaisai julkaisi vuonna 2005. (&lt;a href=&quot;mailto:korewaisai@yahoo.co.jp&quot;&gt;korewaisai@yahoo.co.jp&lt;/a&gt;)</translation>
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="349"/>
@@ -262,7 +262,7 @@ Haluatko poistua?</translation>
     <message>
         <location filename="../MainWindow.cpp" line="358"/>
         <source>%1 License</source>
-        <translation>%1 lupa</translation>
+        <translation>%1 lisenssi</translation>
     </message>
 </context>
 <context>
@@ -294,7 +294,7 @@ Haluatko poistua?</translation>
     <message>
         <location filename="../SaveDialog.cpp" line="20"/>
         <source>Save New Schedule</source>
-        <translation>Tallenna uusi vuoro</translation>
+        <translation>Tallenna uusi ajastus</translation>
     </message>
     <message>
         <location filename="../SaveDialog.cpp" line="33"/>
@@ -327,7 +327,7 @@ Haluatko poistua?</translation>
     <message>
         <location filename="../TCommandEdit.cpp" line="53"/>
         <source>Time String E&amp;ditor</source>
-        <translation>Ajan esitysmuodon m&amp;uokkain</translation>
+        <translation>M&amp;uokkaa aikaa</translation>
     </message>
     <message>
         <location filename="../TCommandEdit.cpp" line="57"/>
@@ -342,7 +342,7 @@ Haluatko poistua?</translation>
     <message>
         <location filename="../TCommandEdit.cpp" line="66"/>
         <source>Job Schedule:</source>
-        <translation>Työn vuoro:</translation>
+        <translation>Aikataulu:</translation>
     </message>
     <message>
         <location filename="../TCommandEdit.cpp" line="128"/>
@@ -365,7 +365,7 @@ Haluatko poistua?</translation>
     <message>
         <location filename="../TimeDialog.cpp" line="76"/>
         <source>time</source>
-        <translation>aika</translation>
+        <translation>Aika</translation>
     </message>
     <message>
         <location filename="../TimeDialog.cpp" line="81"/>
@@ -405,12 +405,12 @@ Haluatko poistua?</translation>
     <message>
         <location filename="../TimeDialog.cpp" line="153"/>
         <source>Simple</source>
-        <translation>Yksinkertainen</translation>
+        <translation>Vakio</translation>
     </message>
     <message>
         <location filename="../TimeDialog.cpp" line="167"/>
         <source>Enable Literal</source>
-        <translation>Ota käyttöön vakiomuotoilu</translation>
+        <translation>Käyta täsmällistä arvoa</translation>
     </message>
     <message>
         <location filename="../TimeDialog.cpp" line="169"/>

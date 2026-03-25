@@ -3,5 +3,6 @@ obj-*/mx-locale 	usr/bin
 help/*			usr/share/doc/mx-locale/help
 license.html		usr/share/doc/mx-locale
 lib/*			usr/lib/mx-locale
+obj-*/helper		usr/lib/mx-locale
 polkit-actions/*	usr/share/polkit-1/actions
 obj-*/*.qm	usr/share/mx-locale/locale

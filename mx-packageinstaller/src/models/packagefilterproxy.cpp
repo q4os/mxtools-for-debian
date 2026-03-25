@@ -51,6 +51,14 @@ void PackageFilterProxy::setHideLibraries(bool hide)
     }
 }
 
+void PackageFilterProxy::setRepoOnly(bool repoOnly)
+{
+    if (m_repoOnly != repoOnly) {
+        m_repoOnly = repoOnly;
+        invalidateFilter();
+    }
+}
+
 QVector<int> PackageFilterProxy::visibleSourceRows() const
 {
     QVector<int> rows;
@@ -72,6 +80,10 @@ bool PackageFilterProxy::filterAcceptsRow(int sourceRow, const QModelIndex &sour
 
     const PackageData *pkg = model->packageAt(sourceRow);
     if (!pkg) {
+        return false;
+    }
+
+    if (m_repoOnly && !pkg->fromRepo) {
         return false;
     }
 

@@ -168,7 +168,7 @@
     <message>
         <location filename="../mainwindow.ui" line="455"/>
         <source>Reset locale list to default</source>
-        <translation>Reinicia la llista de localitzacions als valors per omissió</translation>
+        <translation>Restableix la llista de lllengües als valors per omissió</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="221"/>

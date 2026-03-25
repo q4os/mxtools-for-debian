@@ -1,3 +1,22 @@
+mx-cleanup (26.03.1) mx; urgency=medium
+
+  * Show Help and License in an internal Qt window
+  * Replace the shell helper with a binary helper
+  * Improve manual removal progress
+  * Block closing during manual removal
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 11 Mar 2026 19:30:00 -0400
+
+mx-cleanup (26.03) mx; urgency=medium
+
+  * Fix log cleanup running immediately when scheduled for reboot
+  * Run scheduled Flatpak cleanup as the selected user
+  * Fix Help/About documents opening when launched with admin access
+  * Fix saving per-user settings on systems where the primary group name
+    differs from the username
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 06 Mar 2026 16:03:00 -0500
+
 mx-cleanup (26.01.5) mx; urgency=medium
 
   * Improve purge safety
@@ -484,4 +503,3 @@ mx-cleanup (0.18.06) mx; urgency=medium
   * initial release
 
  -- Adrian <adrian@mxlinux.org>  Mon, 04 Jun 2018 16:05:57 -0400
-

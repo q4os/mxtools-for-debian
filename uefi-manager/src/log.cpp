@@ -26,7 +26,7 @@
 Log::Log(const QString &fileName)
 {
     logFile.setFileName(fileName);
-    if (!logFile.open(QIODevice::WriteOnly | QIODevice::Append)) {
+    if (!logFile.open(QIODevice::WriteOnly | QIODevice::Truncate)) {
         qDebug() << "Could not open log file:" << fileName;
         return;
     }
@@ -67,4 +67,34 @@ void Log::messageHandler(QtMsgType type, const QMessageLogContext &, const QStri
 QString Log::getLog()
 {
     return logFile.fileName();
+}
+
+void Log::flush()
+{
+    if (logFile.isOpen()) {
+        logFile.flush();
+    }
+}
+
+bool Log::hasRelevantContent(qsizetype minimumLineCount)
+{
+    if (minimumLineCount <= 0) {
+        return true;
+    }
+
+    QFile file(getLog());
+    if (!file.exists() || !file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+        return false;
+    }
+
+    qsizetype lineCount = 0;
+    while (!file.atEnd()) {
+        file.readLine();
+        ++lineCount;
+        if (lineCount >= minimumLineCount) {
+            return true;
+        }
+    }
+
+    return false;
 }

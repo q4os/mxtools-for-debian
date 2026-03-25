@@ -233,6 +233,7 @@
         <location filename="../src/mainwindow.cpp" line="567"/>
         <location filename="../src/mainwindow.cpp" line="582"/>
         <location filename="../src/mainwindow.cpp" line="597"/>
+        <location filename="../src/mainwindow.cpp" line="603"/>
         <source>Error</source>
         <translation>Napaka</translation>
     </message>
@@ -473,6 +474,11 @@
         <location filename="../src/mainwindow.cpp" line="582"/>
         <source>Error processing permissions: </source>
         <translation>Napaka pri obdelavi dovolenj:</translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="603"/>
+        <source>Please add a Samba user before creating a share.</source>
+        <translation>Izberite Samba uporabnika preden ustvarite skupno rabo</translation>
     </message>
 </context>
 <context>

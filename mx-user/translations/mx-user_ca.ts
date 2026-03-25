@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="ca">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="ca">
 <context>
     <name>MEConfig</name>
     <message>
@@ -534,7 +532,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="235"/>
         <source>Mozilla settings were reset.</source>
-        <translation>S&apos;han reiniciat els paràmetres de Mozilla.</translation>
+        <translation>S&apos;han restablert els paràmetres de Mozilla.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="250"/>
@@ -762,7 +760,7 @@ Si us plau, trieu un altre nom abans de continuar.</translation>
     <message>
         <location filename="../mainwindow.cpp" line="722"/>
         <source>Process not done. Are you sure you want to quit the application?</source>
-        <translation>No s&apos;ha acabat el procés. Esteu segurs que voleu sortir de l&apos;aplicació?</translation>
+        <translation>No s&apos;ha acabat el procés. Segur que voleu sortir de l&apos;aplicació?</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="972"/>

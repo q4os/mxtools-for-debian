@@ -1,3 +1,12 @@
+mx-network-assistant (26.03) mx; urgency=medium
+
+  * Replace the shell helper with a compiled helper for privileged actions.
+  * Show Help and License inside the application window.
+  * Remove the mx-viewer / xdg-open dependency for Help.
+  * Improve help image layout in the built-in viewer.
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 12 Mar 2026 14:55:00 -0400
+
 mx-network-assistant (25.09) mx; urgency=medium
 
   * Update help file

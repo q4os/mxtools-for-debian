@@ -1,0 +1,158 @@
+[
+{
+  "directory": "/home/adrian/mx-snapshot/build-make",
+  "command": "/usr/bin/c++ -DDEBUG -DQT_CORE_LIB -DQT_DEPRECATED_WARNINGS -DQT_DISABLE_DEPRECATED_BEFORE=0x060000 -DQT_GUI_LIB -DQT_WIDGETS_LIB -DVERSION=\\\"26.01.3\\\" -I/home/adrian/mx-snapshot/build-make/mx-snapshot_autogen/include -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore -isystem /usr/include/x86_64-linux-gnu/qt6 -isystem /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -isystem /usr/include/x86_64-linux-gnu/qt6/QtGui -isystem /usr/include/x86_64-linux-gnu/qt6/QtWidgets -g -std=gnu++20 -Wpedantic -pedantic -Werror=return-type -Werror=switch -Werror=uninitialized -Werror -Werror=return-local-addr -g -O0 -o CMakeFiles/mx-snapshot.dir/mx-snapshot_autogen/mocs_compilation.cpp.o -c /home/adrian/mx-snapshot/build-make/mx-snapshot_autogen/mocs_compilation.cpp",
+  "file": "/home/adrian/mx-snapshot/build-make/mx-snapshot_autogen/mocs_compilation.cpp",
+  "output": "CMakeFiles/mx-snapshot.dir/mx-snapshot_autogen/mocs_compilation.cpp.o"
+},
+{
+  "directory": "/home/adrian/mx-snapshot/build-make",
+  "command": "/usr/bin/c++ -DDEBUG -DQT_CORE_LIB -DQT_DEPRECATED_WARNINGS -DQT_DISABLE_DEPRECATED_BEFORE=0x060000 -DQT_GUI_LIB -DQT_WIDGETS_LIB -DVERSION=\\\"26.01.3\\\" -I/home/adrian/mx-snapshot/build-make/mx-snapshot_autogen/include -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore -isystem /usr/include/x86_64-linux-gnu/qt6 -isystem /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -isystem /usr/include/x86_64-linux-gnu/qt6/QtGui -isystem /usr/include/x86_64-linux-gnu/qt6/QtWidgets -g -std=gnu++20 -Wpedantic -pedantic -Werror=return-type -Werror=switch -Werror=uninitialized -Werror -Werror=return-local-addr -g -O0 -o CMakeFiles/mx-snapshot.dir/src/log.cpp.o -c /home/adrian/mx-snapshot/src/log.cpp",
+  "file": "/home/adrian/mx-snapshot/src/log.cpp",
+  "output": "CMakeFiles/mx-snapshot.dir/src/log.cpp.o"
+},
+{
+  "directory": "/home/adrian/mx-snapshot/build-make",
+  "command": "/usr/bin/c++ -DDEBUG -DQT_CORE_LIB -DQT_DEPRECATED_WARNINGS -DQT_DISABLE_DEPRECATED_BEFORE=0x060000 -DQT_GUI_LIB -DQT_WIDGETS_LIB -DVERSION=\\\"26.01.3\\\" -I/home/adrian/mx-snapshot/build-make/mx-snapshot_autogen/include -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore -isystem /usr/include/x86_64-linux-gnu/qt6 -isystem /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -isystem /usr/include/x86_64-linux-gnu/qt6/QtGui -isystem /usr/include/x86_64-linux-gnu/qt6/QtWidgets -g -std=gnu++20 -Wpedantic -pedantic -Werror=return-type -Werror=switch -Werror=uninitialized -Werror -Werror=return-local-addr -g -O0 -o CMakeFiles/mx-snapshot.dir/src/main.cpp.o -c /home/adrian/mx-snapshot/src/main.cpp",
+  "file": "/home/adrian/mx-snapshot/src/main.cpp",
+  "output": "CMakeFiles/mx-snapshot.dir/src/main.cpp.o"
+},
+{
+  "directory": "/home/adrian/mx-snapshot/build-make",
+  "command": "/usr/bin/c++ -DDEBUG -DQT_CORE_LIB -DQT_DEPRECATED_WARNINGS -DQT_DISABLE_DEPRECATED_BEFORE=0x060000 -DQT_GUI_LIB -DQT_WIDGETS_LIB -DVERSION=\\\"26.01.3\\\" -I/home/adrian/mx-snapshot/build-make/mx-snapshot_autogen/include -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore -isystem /usr/include/x86_64-linux-gnu/qt6 -isystem /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -isystem /usr/include/x86_64-linux-gnu/qt6/QtGui -isystem /usr/include/x86_64-linux-gnu/qt6/QtWidgets -g -std=gnu++20 -Wpedantic -pedantic -Werror=return-type -Werror=switch -Werror=uninitialized -Werror -Werror=return-local-addr -g -O0 -o CMakeFiles/mx-snapshot.dir/src/cmd.cpp.o -c /home/adrian/mx-snapshot/src/cmd.cpp",
+  "file": "/home/adrian/mx-snapshot/src/cmd.cpp",
+  "output": "CMakeFiles/mx-snapshot.dir/src/cmd.cpp.o"
+},
+{
+  "directory": "/home/adrian/mx-snapshot/build-make",
+  "command": "/usr/bin/c++ -DDEBUG -DQT_CORE_LIB -DQT_DEPRECATED_WARNINGS -DQT_DISABLE_DEPRECATED_BEFORE=0x060000 -DQT_GUI_LIB -DQT_WIDGETS_LIB -DVERSION=\\\"26.01.3\\\" -I/home/adrian/mx-snapshot/build-make/mx-snapshot_autogen/include -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore -isystem /usr/include/x86_64-linux-gnu/qt6 -isystem /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -isystem /usr/include/x86_64-linux-gnu/qt6/QtGui -isystem /usr/include/x86_64-linux-gnu/qt6/QtWidgets -g -std=gnu++20 -Wpedantic -pedantic -Werror=return-type -Werror=switch -Werror=uninitialized -Werror -Werror=return-local-addr -g -O0 -o CMakeFiles/mx-snapshot.dir/src/settings.cpp.o -c /home/adrian/mx-snapshot/src/settings.cpp",
+  "file": "/home/adrian/mx-snapshot/src/settings.cpp",
+  "output": "CMakeFiles/mx-snapshot.dir/src/settings.cpp.o"
+},
+{
+  "directory": "/home/adrian/mx-snapshot/build-make",
+  "command": "/usr/bin/c++ -DDEBUG -DQT_CORE_LIB -DQT_DEPRECATED_WARNINGS -DQT_DISABLE_DEPRECATED_BEFORE=0x060000 -DQT_GUI_LIB -DQT_WIDGETS_LIB -DVERSION=\\\"26.01.3\\\" -I/home/adrian/mx-snapshot/build-make/mx-snapshot_autogen/include -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore -isystem /usr/include/x86_64-linux-gnu/qt6 -isystem /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -isystem /usr/include/x86_64-linux-gnu/qt6/QtGui -isystem /usr/include/x86_64-linux-gnu/qt6/QtWidgets -g -std=gnu++20 -Wpedantic -pedantic -Werror=return-type -Werror=switch -Werror=uninitialized -Werror -Werror=return-local-addr -g -O0 -o CMakeFiles/mx-snapshot.dir/src/batchprocessing.cpp.o -c /home/adrian/mx-snapshot/src/batchprocessing.cpp",
+  "file": "/home/adrian/mx-snapshot/src/batchprocessing.cpp",
+  "output": "CMakeFiles/mx-snapshot.dir/src/batchprocessing.cpp.o"
+},
+{
+  "directory": "/home/adrian/mx-snapshot/build-make",
+  "command": "/usr/bin/c++ -DDEBUG -DQT_CORE_LIB -DQT_DEPRECATED_WARNINGS -DQT_DISABLE_DEPRECATED_BEFORE=0x060000 -DQT_GUI_LIB -DQT_WIDGETS_LIB -DVERSION=\\\"26.01.3\\\" -I/home/adrian/mx-snapshot/build-make/mx-snapshot_autogen/include -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore -isystem /usr/include/x86_64-linux-gnu/qt6 -isystem /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -isystem /usr/include/x86_64-linux-gnu/qt6/QtGui -isystem /usr/include/x86_64-linux-gnu/qt6/QtWidgets -g -std=gnu++20 -Wpedantic -pedantic -Werror=return-type -Werror=switch -Werror=uninitialized -Werror -Werror=return-local-addr -g -O0 -o CMakeFiles/mx-snapshot.dir/src/work.cpp.o -c /home/adrian/mx-snapshot/src/work.cpp",
+  "file": "/home/adrian/mx-snapshot/src/work.cpp",
+  "output": "CMakeFiles/mx-snapshot.dir/src/work.cpp.o"
+},
+{
+  "directory": "/home/adrian/mx-snapshot/build-make",
+  "command": "/usr/bin/c++ -DDEBUG -DQT_CORE_LIB -DQT_DEPRECATED_WARNINGS -DQT_DISABLE_DEPRECATED_BEFORE=0x060000 -DQT_GUI_LIB -DQT_WIDGETS_LIB -DVERSION=\\\"26.01.3\\\" -I/home/adrian/mx-snapshot/build-make/mx-snapshot_autogen/include -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore -isystem /usr/include/x86_64-linux-gnu/qt6 -isystem /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -isystem /usr/include/x86_64-linux-gnu/qt6/QtGui -isystem /usr/include/x86_64-linux-gnu/qt6/QtWidgets -g -std=gnu++20 -Wpedantic -pedantic -Werror=return-type -Werror=switch -Werror=uninitialized -Werror -Werror=return-local-addr -g -O0 -o CMakeFiles/mx-snapshot.dir/src/filesystemutils.cpp.o -c /home/adrian/mx-snapshot/src/filesystemutils.cpp",
+  "file": "/home/adrian/mx-snapshot/src/filesystemutils.cpp",
+  "output": "CMakeFiles/mx-snapshot.dir/src/filesystemutils.cpp.o"
+},
+{
+  "directory": "/home/adrian/mx-snapshot/build-make",
+  "command": "/usr/bin/c++ -DDEBUG -DQT_CORE_LIB -DQT_DEPRECATED_WARNINGS -DQT_DISABLE_DEPRECATED_BEFORE=0x060000 -DQT_GUI_LIB -DQT_WIDGETS_LIB -DVERSION=\\\"26.01.3\\\" -I/home/adrian/mx-snapshot/build-make/mx-snapshot_autogen/include -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore -isystem /usr/include/x86_64-linux-gnu/qt6 -isystem /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -isystem /usr/include/x86_64-linux-gnu/qt6/QtGui -isystem /usr/include/x86_64-linux-gnu/qt6/QtWidgets -g -std=gnu++20 -Wpedantic -pedantic -Werror=return-type -Werror=switch -Werror=uninitialized -Werror -Werror=return-local-addr -g -O0 -o CMakeFiles/mx-snapshot.dir/src/systeminfo.cpp.o -c /home/adrian/mx-snapshot/src/systeminfo.cpp",
+  "file": "/home/adrian/mx-snapshot/src/systeminfo.cpp",
+  "output": "CMakeFiles/mx-snapshot.dir/src/systeminfo.cpp.o"
+},
+{
+  "directory": "/home/adrian/mx-snapshot/build-make",
+  "command": "/usr/bin/c++ -DDEBUG -DQT_CORE_LIB -DQT_DEPRECATED_WARNINGS -DQT_DISABLE_DEPRECATED_BEFORE=0x060000 -DQT_GUI_LIB -DQT_WIDGETS_LIB -DVERSION=\\\"26.01.3\\\" -I/home/adrian/mx-snapshot/build-make/mx-snapshot_autogen/include -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore -isystem /usr/include/x86_64-linux-gnu/qt6 -isystem /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -isystem /usr/include/x86_64-linux-gnu/qt6/QtGui -isystem /usr/include/x86_64-linux-gnu/qt6/QtWidgets -g -std=gnu++20 -Wpedantic -pedantic -Werror=return-type -Werror=switch -Werror=uninitialized -Werror -Werror=return-local-addr -g -O0 -o CMakeFiles/mx-snapshot.dir/src/messagehandler.cpp.o -c /home/adrian/mx-snapshot/src/messagehandler.cpp",
+  "file": "/home/adrian/mx-snapshot/src/messagehandler.cpp",
+  "output": "CMakeFiles/mx-snapshot.dir/src/messagehandler.cpp.o"
+},
+{
+  "directory": "/home/adrian/mx-snapshot/build-make",
+  "command": "/usr/bin/c++ -DDEBUG -DQT_CORE_LIB -DQT_DEPRECATED_WARNINGS -DQT_DISABLE_DEPRECATED_BEFORE=0x060000 -DQT_GUI_LIB -DQT_WIDGETS_LIB -DVERSION=\\\"26.01.3\\\" -I/home/adrian/mx-snapshot/build-make/mx-snapshot_autogen/include -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore -isystem /usr/include/x86_64-linux-gnu/qt6 -isystem /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -isystem /usr/include/x86_64-linux-gnu/qt6/QtGui -isystem /usr/include/x86_64-linux-gnu/qt6/QtWidgets -g -std=gnu++20 -Wpedantic -pedantic -Werror=return-type -Werror=switch -Werror=uninitialized -Werror -Werror=return-local-addr -g -O0 -o CMakeFiles/mx-snapshot.dir/src/mainwindow.cpp.o -c /home/adrian/mx-snapshot/src/mainwindow.cpp",
+  "file": "/home/adrian/mx-snapshot/src/mainwindow.cpp",
+  "output": "CMakeFiles/mx-snapshot.dir/src/mainwindow.cpp.o"
+},
+{
+  "directory": "/home/adrian/mx-snapshot/build-make",
+  "command": "/usr/bin/c++ -DDEBUG -DQT_CORE_LIB -DQT_DEPRECATED_WARNINGS -DQT_DISABLE_DEPRECATED_BEFORE=0x060000 -DQT_GUI_LIB -DQT_WIDGETS_LIB -DVERSION=\\\"26.01.3\\\" -I/home/adrian/mx-snapshot/build-make/mx-snapshot_autogen/include -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore -isystem /usr/include/x86_64-linux-gnu/qt6 -isystem /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -isystem /usr/include/x86_64-linux-gnu/qt6/QtGui -isystem /usr/include/x86_64-linux-gnu/qt6/QtWidgets -g -std=gnu++20 -Wpedantic -pedantic -Werror=return-type -Werror=switch -Werror=uninitialized -Werror -Werror=return-local-addr -g -O0 -o CMakeFiles/mx-snapshot.dir/src/about.cpp.o -c /home/adrian/mx-snapshot/src/about.cpp",
+  "file": "/home/adrian/mx-snapshot/src/about.cpp",
+  "output": "CMakeFiles/mx-snapshot.dir/src/about.cpp.o"
+},
+{
+  "directory": "/home/adrian/mx-snapshot/build-make",
+  "command": "/usr/bin/c++ -DDEBUG -DQT_CORE_LIB -DQT_DEPRECATED_WARNINGS -DQT_DISABLE_DEPRECATED_BEFORE=0x060000 -DQT_GUI_LIB -DQT_WIDGETS_LIB -DVERSION=\\\"26.01.3\\\" -I/home/adrian/mx-snapshot/build-make/mx-snapshot_autogen/include -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore -isystem /usr/include/x86_64-linux-gnu/qt6 -isystem /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -isystem /usr/include/x86_64-linux-gnu/qt6/QtGui -isystem /usr/include/x86_64-linux-gnu/qt6/QtWidgets -g -std=gnu++20 -Wpedantic -pedantic -Werror=return-type -Werror=switch -Werror=uninitialized -Werror -Werror=return-local-addr -g -O0 -o CMakeFiles/mx-snapshot.dir/mx-snapshot_autogen/EWIEGA46WW/qrc_images.cpp.o -c /home/adrian/mx-snapshot/build-make/mx-snapshot_autogen/EWIEGA46WW/qrc_images.cpp",
+  "file": "/home/adrian/mx-snapshot/build-make/mx-snapshot_autogen/EWIEGA46WW/qrc_images.cpp",
+  "output": "CMakeFiles/mx-snapshot.dir/mx-snapshot_autogen/EWIEGA46WW/qrc_images.cpp.o"
+},
+{
+  "directory": "/home/adrian/mx-snapshot/build-make",
+  "command": "/usr/bin/c++ -DDEBUG -DQT_CORE_LIB -DQT_DEPRECATED_WARNINGS -DQT_DISABLE_DEPRECATED_BEFORE=0x060000 -DVERSION=\\\"26.01.3\\\" -I/home/adrian/mx-snapshot/build-make/helper_autogen/include -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore -isystem /usr/include/x86_64-linux-gnu/qt6 -isystem /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -g -std=gnu++20 -Wpedantic -pedantic -Werror=return-type -Werror=switch -Werror=uninitialized -Werror -Werror=return-local-addr -g -O0 -o CMakeFiles/helper.dir/helper_autogen/mocs_compilation.cpp.o -c /home/adrian/mx-snapshot/build-make/helper_autogen/mocs_compilation.cpp",
+  "file": "/home/adrian/mx-snapshot/build-make/helper_autogen/mocs_compilation.cpp",
+  "output": "CMakeFiles/helper.dir/helper_autogen/mocs_compilation.cpp.o"
+},
+{
+  "directory": "/home/adrian/mx-snapshot/build-make",
+  "command": "/usr/bin/c++ -DDEBUG -DQT_CORE_LIB -DQT_DEPRECATED_WARNINGS -DQT_DISABLE_DEPRECATED_BEFORE=0x060000 -DVERSION=\\\"26.01.3\\\" -I/home/adrian/mx-snapshot/build-make/helper_autogen/include -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore -isystem /usr/include/x86_64-linux-gnu/qt6 -isystem /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -g -std=gnu++20 -Wpedantic -pedantic -Werror=return-type -Werror=switch -Werror=uninitialized -Werror -Werror=return-local-addr -g -O0 -o CMakeFiles/helper.dir/src/helper.cpp.o -c /home/adrian/mx-snapshot/src/helper.cpp",
+  "file": "/home/adrian/mx-snapshot/src/helper.cpp",
+  "output": "CMakeFiles/helper.dir/src/helper.cpp.o"
+},
+{
+  "directory": "/home/adrian/mx-snapshot/build-make",
+  "command": "/usr/bin/c++ -DCLI_BUILD=1 -DDEBUG -DQT_CORE_LIB -DQT_DEPRECATED_WARNINGS -DQT_DISABLE_DEPRECATED_BEFORE=0x060000 -DVERSION=\\\"26.01.3\\\" -I/home/adrian/mx-snapshot/build-make/iso-snapshot-cli_autogen/include -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore -isystem /usr/include/x86_64-linux-gnu/qt6 -isystem /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -g -std=gnu++20 -Wpedantic -pedantic -Werror=return-type -Werror=switch -Werror=uninitialized -Werror -Werror=return-local-addr -g -O0 -o CMakeFiles/iso-snapshot-cli.dir/iso-snapshot-cli_autogen/mocs_compilation.cpp.o -c /home/adrian/mx-snapshot/build-make/iso-snapshot-cli_autogen/mocs_compilation.cpp",
+  "file": "/home/adrian/mx-snapshot/build-make/iso-snapshot-cli_autogen/mocs_compilation.cpp",
+  "output": "CMakeFiles/iso-snapshot-cli.dir/iso-snapshot-cli_autogen/mocs_compilation.cpp.o"
+},
+{
+  "directory": "/home/adrian/mx-snapshot/build-make",
+  "command": "/usr/bin/c++ -DCLI_BUILD=1 -DDEBUG -DQT_CORE_LIB -DQT_DEPRECATED_WARNINGS -DQT_DISABLE_DEPRECATED_BEFORE=0x060000 -DVERSION=\\\"26.01.3\\\" -I/home/adrian/mx-snapshot/build-make/iso-snapshot-cli_autogen/include -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore -isystem /usr/include/x86_64-linux-gnu/qt6 -isystem /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -g -std=gnu++20 -Wpedantic -pedantic -Werror=return-type -Werror=switch -Werror=uninitialized -Werror -Werror=return-local-addr -g -O0 -o CMakeFiles/iso-snapshot-cli.dir/src/log.cpp.o -c /home/adrian/mx-snapshot/src/log.cpp",
+  "file": "/home/adrian/mx-snapshot/src/log.cpp",
+  "output": "CMakeFiles/iso-snapshot-cli.dir/src/log.cpp.o"
+},
+{
+  "directory": "/home/adrian/mx-snapshot/build-make",
+  "command": "/usr/bin/c++ -DCLI_BUILD=1 -DDEBUG -DQT_CORE_LIB -DQT_DEPRECATED_WARNINGS -DQT_DISABLE_DEPRECATED_BEFORE=0x060000 -DVERSION=\\\"26.01.3\\\" -I/home/adrian/mx-snapshot/build-make/iso-snapshot-cli_autogen/include -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore -isystem /usr/include/x86_64-linux-gnu/qt6 -isystem /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -g -std=gnu++20 -Wpedantic -pedantic -Werror=return-type -Werror=switch -Werror=uninitialized -Werror -Werror=return-local-addr -g -O0 -o CMakeFiles/iso-snapshot-cli.dir/src/main.cpp.o -c /home/adrian/mx-snapshot/src/main.cpp",
+  "file": "/home/adrian/mx-snapshot/src/main.cpp",
+  "output": "CMakeFiles/iso-snapshot-cli.dir/src/main.cpp.o"
+},
+{
+  "directory": "/home/adrian/mx-snapshot/build-make",
+  "command": "/usr/bin/c++ -DCLI_BUILD=1 -DDEBUG -DQT_CORE_LIB -DQT_DEPRECATED_WARNINGS -DQT_DISABLE_DEPRECATED_BEFORE=0x060000 -DVERSION=\\\"26.01.3\\\" -I/home/adrian/mx-snapshot/build-make/iso-snapshot-cli_autogen/include -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore -isystem /usr/include/x86_64-linux-gnu/qt6 -isystem /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -g -std=gnu++20 -Wpedantic -pedantic -Werror=return-type -Werror=switch -Werror=uninitialized -Werror -Werror=return-local-addr -g -O0 -o CMakeFiles/iso-snapshot-cli.dir/src/cmd.cpp.o -c /home/adrian/mx-snapshot/src/cmd.cpp",
+  "file": "/home/adrian/mx-snapshot/src/cmd.cpp",
+  "output": "CMakeFiles/iso-snapshot-cli.dir/src/cmd.cpp.o"
+},
+{
+  "directory": "/home/adrian/mx-snapshot/build-make",
+  "command": "/usr/bin/c++ -DCLI_BUILD=1 -DDEBUG -DQT_CORE_LIB -DQT_DEPRECATED_WARNINGS -DQT_DISABLE_DEPRECATED_BEFORE=0x060000 -DVERSION=\\\"26.01.3\\\" -I/home/adrian/mx-snapshot/build-make/iso-snapshot-cli_autogen/include -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore -isystem /usr/include/x86_64-linux-gnu/qt6 -isystem /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -g -std=gnu++20 -Wpedantic -pedantic -Werror=return-type -Werror=switch -Werror=uninitialized -Werror -Werror=return-local-addr -g -O0 -o CMakeFiles/iso-snapshot-cli.dir/src/settings.cpp.o -c /home/adrian/mx-snapshot/src/settings.cpp",
+  "file": "/home/adrian/mx-snapshot/src/settings.cpp",
+  "output": "CMakeFiles/iso-snapshot-cli.dir/src/settings.cpp.o"
+},
+{
+  "directory": "/home/adrian/mx-snapshot/build-make",
+  "command": "/usr/bin/c++ -DCLI_BUILD=1 -DDEBUG -DQT_CORE_LIB -DQT_DEPRECATED_WARNINGS -DQT_DISABLE_DEPRECATED_BEFORE=0x060000 -DVERSION=\\\"26.01.3\\\" -I/home/adrian/mx-snapshot/build-make/iso-snapshot-cli_autogen/include -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore -isystem /usr/include/x86_64-linux-gnu/qt6 -isystem /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -g -std=gnu++20 -Wpedantic -pedantic -Werror=return-type -Werror=switch -Werror=uninitialized -Werror -Werror=return-local-addr -g -O0 -o CMakeFiles/iso-snapshot-cli.dir/src/batchprocessing.cpp.o -c /home/adrian/mx-snapshot/src/batchprocessing.cpp",
+  "file": "/home/adrian/mx-snapshot/src/batchprocessing.cpp",
+  "output": "CMakeFiles/iso-snapshot-cli.dir/src/batchprocessing.cpp.o"
+},
+{
+  "directory": "/home/adrian/mx-snapshot/build-make",
+  "command": "/usr/bin/c++ -DCLI_BUILD=1 -DDEBUG -DQT_CORE_LIB -DQT_DEPRECATED_WARNINGS -DQT_DISABLE_DEPRECATED_BEFORE=0x060000 -DVERSION=\\\"26.01.3\\\" -I/home/adrian/mx-snapshot/build-make/iso-snapshot-cli_autogen/include -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore -isystem /usr/include/x86_64-linux-gnu/qt6 -isystem /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -g -std=gnu++20 -Wpedantic -pedantic -Werror=return-type -Werror=switch -Werror=uninitialized -Werror -Werror=return-local-addr -g -O0 -o CMakeFiles/iso-snapshot-cli.dir/src/work.cpp.o -c /home/adrian/mx-snapshot/src/work.cpp",
+  "file": "/home/adrian/mx-snapshot/src/work.cpp",
+  "output": "CMakeFiles/iso-snapshot-cli.dir/src/work.cpp.o"
+},
+{
+  "directory": "/home/adrian/mx-snapshot/build-make",
+  "command": "/usr/bin/c++ -DCLI_BUILD=1 -DDEBUG -DQT_CORE_LIB -DQT_DEPRECATED_WARNINGS -DQT_DISABLE_DEPRECATED_BEFORE=0x060000 -DVERSION=\\\"26.01.3\\\" -I/home/adrian/mx-snapshot/build-make/iso-snapshot-cli_autogen/include -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore -isystem /usr/include/x86_64-linux-gnu/qt6 -isystem /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -g -std=gnu++20 -Wpedantic -pedantic -Werror=return-type -Werror=switch -Werror=uninitialized -Werror -Werror=return-local-addr -g -O0 -o CMakeFiles/iso-snapshot-cli.dir/src/filesystemutils.cpp.o -c /home/adrian/mx-snapshot/src/filesystemutils.cpp",
+  "file": "/home/adrian/mx-snapshot/src/filesystemutils.cpp",
+  "output": "CMakeFiles/iso-snapshot-cli.dir/src/filesystemutils.cpp.o"
+},
+{
+  "directory": "/home/adrian/mx-snapshot/build-make",
+  "command": "/usr/bin/c++ -DCLI_BUILD=1 -DDEBUG -DQT_CORE_LIB -DQT_DEPRECATED_WARNINGS -DQT_DISABLE_DEPRECATED_BEFORE=0x060000 -DVERSION=\\\"26.01.3\\\" -I/home/adrian/mx-snapshot/build-make/iso-snapshot-cli_autogen/include -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore -isystem /usr/include/x86_64-linux-gnu/qt6 -isystem /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -g -std=gnu++20 -Wpedantic -pedantic -Werror=return-type -Werror=switch -Werror=uninitialized -Werror -Werror=return-local-addr -g -O0 -o CMakeFiles/iso-snapshot-cli.dir/src/systeminfo.cpp.o -c /home/adrian/mx-snapshot/src/systeminfo.cpp",
+  "file": "/home/adrian/mx-snapshot/src/systeminfo.cpp",
+  "output": "CMakeFiles/iso-snapshot-cli.dir/src/systeminfo.cpp.o"
+},
+{
+  "directory": "/home/adrian/mx-snapshot/build-make",
+  "command": "/usr/bin/c++ -DCLI_BUILD=1 -DDEBUG -DQT_CORE_LIB -DQT_DEPRECATED_WARNINGS -DQT_DISABLE_DEPRECATED_BEFORE=0x060000 -DVERSION=\\\"26.01.3\\\" -I/home/adrian/mx-snapshot/build-make/iso-snapshot-cli_autogen/include -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore -isystem /usr/include/x86_64-linux-gnu/qt6 -isystem /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -g -std=gnu++20 -Wpedantic -pedantic -Werror=return-type -Werror=switch -Werror=uninitialized -Werror -Werror=return-local-addr -g -O0 -o CMakeFiles/iso-snapshot-cli.dir/src/messagehandler.cpp.o -c /home/adrian/mx-snapshot/src/messagehandler.cpp",
+  "file": "/home/adrian/mx-snapshot/src/messagehandler.cpp",
+  "output": "CMakeFiles/iso-snapshot-cli.dir/src/messagehandler.cpp.o"
+},
+{
+  "directory": "/home/adrian/mx-snapshot/build-make",
+  "command": "/usr/bin/c++ -DCLI_BUILD=1 -DDEBUG -DQT_CORE_LIB -DQT_DEPRECATED_WARNINGS -DQT_DISABLE_DEPRECATED_BEFORE=0x060000 -DVERSION=\\\"26.01.3\\\" -I/home/adrian/mx-snapshot/build-make/iso-snapshot-cli_autogen/include -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore -isystem /usr/include/x86_64-linux-gnu/qt6 -isystem /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -g -std=gnu++20 -Wpedantic -pedantic -Werror=return-type -Werror=switch -Werror=uninitialized -Werror -Werror=return-local-addr -g -O0 -o CMakeFiles/iso-snapshot-cli.dir/iso-snapshot-cli_autogen/EWIEGA46WW/qrc_images.cpp.o -c /home/adrian/mx-snapshot/build-make/iso-snapshot-cli_autogen/EWIEGA46WW/qrc_images.cpp",
+  "file": "/home/adrian/mx-snapshot/build-make/iso-snapshot-cli_autogen/EWIEGA46WW/qrc_images.cpp",
+  "output": "CMakeFiles/iso-snapshot-cli.dir/iso-snapshot-cli_autogen/EWIEGA46WW/qrc_images.cpp.o"
+}
+]

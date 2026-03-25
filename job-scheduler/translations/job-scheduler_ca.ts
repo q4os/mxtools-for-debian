@@ -415,7 +415,7 @@ D&apos;acord en sortir?</translation>
     <message>
         <location filename="../TimeDialog.cpp" line="169"/>
         <source>&amp;Reset</source>
-        <translation>&amp;Reinicia</translation>
+        <translation>&amp;Restableix</translation>
     </message>
     <message>
         <location filename="../TimeDialog.cpp" line="170"/>

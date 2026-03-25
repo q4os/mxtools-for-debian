@@ -58,7 +58,7 @@ public:
     {
         return (master->text().length() >= min);
     }
-    inline int length()
+    [[nodiscard]] inline int length() const
     {
         return master->text().length();
     }

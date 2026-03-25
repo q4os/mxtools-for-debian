@@ -25,6 +25,8 @@
 #include "ui_mainwindow.h"
 
 #include <QDebug>
+#include <QCloseEvent>
+#include <QFile>
 #include <QDir>
 #include <QMetaEnum>
 #include <QNetworkProxyFactory>
@@ -71,10 +73,15 @@ MainWindow::MainWindow(QWidget *parent)
 
 MainWindow::~MainWindow()
 {
-    delete ui;
     if (sources_changed) {
-        Cmd().runAsRoot("nohup apt-get update >/dev/null 2>&1 &");
+        progress->setLabelText(tr("Updating package sources..."));
+        progress->show();
+        QApplication::processEvents();
+
+        shell->procAsRoot("apt-get", {"update"}, nullptr, nullptr, QuietMode::Yes);
     }
+
+    delete ui;
 }
 
 void MainWindow::initializeIcons()
@@ -126,8 +133,7 @@ void MainWindow::replaceDebianRepos(const QString &url)
                              "/etc/apt/sources.list.d/debian-stable-updates.sources", "/etc/apt/sources.list"};
     const QDir backupDir("/etc/apt/sources.list.d/backups");
 
-    if (!backupDir.exists()
-        && !Cmd().runAsRoot(QString("mkdir -p %1").arg(Cmd::shellQuote(backupDir.path())))) {
+    if (!backupDir.exists() && !Cmd().procAsRoot("mkdir", {"-p", backupDir.path()})) {
         qWarning() << "Failed to create backup directory:" << backupDir.path();
         return;
     }
@@ -174,8 +180,7 @@ void MainWindow::replaceDebianRepos(const QString &url)
         const QString backupFilePath = backupDir.absoluteFilePath(
             fileInfo.fileName() + "." + QDateTime::currentDateTime().toString("yyyyMMdd_HHmmss"));
 
-        if (!Cmd().runAsRoot(QString("cp %1 %2")
-                                 .arg(Cmd::shellQuote(filePath), Cmd::shellQuote(backupFilePath)))) {
+        if (!Cmd().procAsRoot("cp", {filePath, backupFilePath})) {
             qWarning() << "Failed to backup" << filePath;
             continue;
         }
@@ -210,11 +215,9 @@ bool MainWindow::writeUpdatedFile(const QString &filePath, const QString &conten
         out << content;
     } // Ensuring the QTextStream is flushed and closed before moving the file
 
-    const QString quotedTemp = Cmd::shellQuote(tmpFile.fileName());
-    const QString quotedTarget = Cmd::shellQuote(filePath);
-    QString cmd = QStringLiteral("mv -f %1 %2 && chown root: %2 && chmod 644 %2")
-                      .arg(quotedTemp, quotedTarget);
-    if (!Cmd().runAsRoot(cmd)) {
+    Cmd cmd;
+    if (!cmd.procAsRoot("mv", {"-f", tmpFile.fileName(), filePath}) || !cmd.procAsRoot("chown", {"root:", filePath})
+        || !cmd.procAsRoot("chmod", {"644", filePath})) {
         qWarning() << "Failed to replace the file and update permissions for" << filePath;
         return false;
     }
@@ -493,9 +496,9 @@ void MainWindow::cancelOperation()
     auto processId = shell->processId();
     if (processId != 0) {
         Cmd cmd;
-        cmd.runAsRoot(QString("kill %1").arg(processId));
+        cmd.procAsRoot("kill", {QString::number(processId)});
         if (!shell->waitForFinished(1000)) {
-            cmd.runAsRoot(QString("kill -9 %1").arg(processId));
+            cmd.procAsRoot("kill", {"-9", QString::number(processId)});
         }
     }
     procDone();
@@ -512,6 +515,7 @@ void MainWindow::centerWindow()
 void MainWindow::closeEvent([[maybe_unused]] QCloseEvent *event)
 {
     settings.setValue("geometry", saveGeometry());
+    event->accept();
 }
 
 void MainWindow::displaySelected(const QString &repo)
@@ -531,19 +535,18 @@ void MainWindow::displaySelected(const QString &repo)
 
 void MainWindow::extractUrls(const QStringList &repos)
 {
-    QStringList quotedUrls;
-    quotedUrls.reserve(repos.size());
+    listMXUrls.clear();
+    listMXUrls.reserve(repos.size());
     for (const QString &line : repos) {
         QStringList linelist = line.split('-');
         if (linelist.size() > 1) {
             linelist.pop_front();
             QString joinedLine = linelist.join('-').trimmed();
             if (!joinedLine.isEmpty()) {
-                quotedUrls.append(Cmd::shellQuote(joinedLine));
+                listMXUrls.append(joinedLine);
             }
         }
     }
-    listMXurls = quotedUrls.join(' ');
 }
 
 void MainWindow::setSelected()
@@ -763,9 +766,9 @@ void MainWindow::pushOk_clicked()
             out.flush();
             tempFile.close();
 
-            const QString quotedTemp = Cmd::shellQuote(tempFile.fileName());
-            const QString quotedTarget = Cmd::shellQuote(file_name);
-            if (shell->runAsRoot(QString("mv %1 %2 && chown root: %2 && chmod 644 %2").arg(quotedTemp, quotedTarget))) {
+            if (shell->procAsRoot("mv", {tempFile.fileName(), file_name})
+                && shell->procAsRoot("chown", {"root:", file_name})
+                && shell->procAsRoot("chmod", {"644", file_name})) {
                 appliedChanges = true;
             }
         }
@@ -802,7 +805,7 @@ void MainWindow::pushHelp_clicked()
         url = "https://mxlinux.org/wiki/help-files/help-mx-gestionnaire-de-d%C3%A9p%C3%B4ts";
     }
 
-    displayDoc(url, tr("%1 Help").arg(windowTitle()));
+    displayHelpDoc(url, tr("%1 Help").arg(windowTitle()));
 }
 
 void MainWindow::treeWidget_itemChanged(QTreeWidgetItem *item, int column)
@@ -898,7 +901,7 @@ QIcon MainWindow::getFlag(QString country)
 // Detect fastest Debian repo
 void MainWindow::pushFastestDebian_clicked()
 {
-    if (!shell->runAsRoot("true", true)) {
+    if (!shell->procAsRoot("true", {}, nullptr, nullptr, QuietMode::Yes)) {
         QMessageBox::critical(this, tr("Error"), tr("Could not detect fastest repo."));
         return;
     }
@@ -918,11 +921,13 @@ void MainWindow::pushFastestDebian_clicked()
 
     QStringList commandParts {"netselect-apt"};
     if (!ver_name.isEmpty()) {
-        commandParts << Cmd::shellQuote(ver_name);
+        commandParts << ver_name;
     }
-    commandParts << "-o" << Cmd::shellQuote(tmpfile.fileName());
+    commandParts << "-o" << tmpfile.fileName();
 
-    bool success = shell->runAsRoot(commandParts.join(' '), false);
+    QStringList args = commandParts;
+    args.removeFirst();
+    bool success = shell->procAsRoot("netselect-apt", args);
     progress->hide();
 
     if (!success) {
@@ -946,20 +951,26 @@ void MainWindow::pushFastestDebian_clicked()
 // Detect and select the fastest MX repo
 void MainWindow::pushFastestMX_clicked()
 {
-    if (!shell->runAsRoot("true", true)) {
+    if (!shell->procAsRoot("true", {}, nullptr, nullptr, QuietMode::Yes)) {
         QMessageBox::critical(this, tr("Error"), tr("Could not detect fastest repo."));
         return;
     }
     progress->show();
-    QString command
-        = QString("netselect -D -I %1 | tr -s ' ' | sed 's/^[[:space:]]//' | cut -d' ' -f2").arg(listMXurls);
-    bool success = shell->runAsRoot(command);
-    qDebug() << listMXurls;
-    QString out = shell->readAllStandardOutput().trimmed();
+    QString out;
+    bool success = shell->procAsRoot("netselect", QStringList {"-D", "-I"} + listMXUrls, &out);
+    out = out.trimmed();
+    QString selectedRepo;
+    const QStringList lines = out.split('\n', Qt::SkipEmptyParts);
+    if (!lines.isEmpty()) {
+        const QStringList fields = lines.constLast().simplified().split(' ');
+        if (fields.size() >= 2) {
+            selectedRepo = fields.at(1);
+        }
+    }
     qDebug() << "FASTEST " << success << out;
     progress->hide();
-    if (success && !out.isEmpty()) {
-        displaySelected(out);
+    if (success && !selectedRepo.isEmpty()) {
+        displaySelected(selectedRepo);
         pushOk_clicked();
     } else {
         QMessageBox::critical(this, tr("Error"), tr("Could not detect fastest repo."));
@@ -1010,16 +1021,17 @@ void MainWindow::pushRestoreSources_clicked()
 
     bool enable_ahs = false;
     // For newer versions and 64-bit OS check if AHS was enabled
-    if (mx_version >= 19 && shell->getOut("uname -m", true).trimmed() == "x86_64") {
+    if (mx_version >= 19 && shell->getOut("uname -m", QuietMode::Yes).trimmed() == "x86_64") {
         if (shell->run("apt-get update --print-uris | grep -q -E '/mx/([.]?/)*repo/.*/ahs/binary-amd64/Packages'",
-                       true)) {
+                       nullptr, nullptr, QuietMode::Yes)) {
             enable_ahs = true;
             qDebug() << "AHS repo detected:" << enable_ahs;
         }
     }
 
     bool enable_mx = false;
-    if (shell->run("apt-get update --print-uris | grep -q -E '/mx/([.]?/)*repo/.*/main/binary-amd64/Packages'", true)) {
+    if (shell->run("apt-get update --print-uris | grep -q -E '/mx/([.]?/)*repo/.*/main/binary-amd64/Packages'",
+                   nullptr, nullptr, QuietMode::Yes)) {
         enable_mx = true;
     }
 
@@ -1045,7 +1057,7 @@ void MainWindow::pushRestoreSources_clicked()
 
     if (enable_ahs) {
         enableAHS(file);
-    } else if (mx_version >= 19 && shell->getOut("uname -m", true).trimmed() == "x86_64" && !enable_mx) {
+    } else if (mx_version >= 19 && shell->getOut("uname -m", QuietMode::Yes).trimmed() == "x86_64" && !enable_mx) {
         if (QMessageBox::Yes
             == QMessageBox::question(this, tr("Enabling AHS"), tr("Do you use AHS (Advanced Hardware Stack) repo?"))) {
             enableAHS(file);
@@ -1053,11 +1065,21 @@ void MainWindow::pushRestoreSources_clicked()
     }
 
     // Move the sources list files from the temporary directory to /etc/apt/sources.list.d/
-    cmd = QString("mv -b %1/mx-sources-mx%2/*.{list,sources} /etc/apt/sources.list.d/ && chown 0:0 "
-                  "/etc/apt/sources.list.d/* && "
-                  "chmod 644 /etc/apt/sources.list.d/*")
-              .arg(Cmd::shellQuote(tmpdir.path()), QString::number(mx_version));
-    if (shell->runAsRoot(cmd)) {
+    const QDir restoredSourcesDir(QString("%1/mx-sources-mx%2").arg(tmpdir.path(), QString::number(mx_version)));
+    const QFileInfoList restoredFiles
+        = restoredSourcesDir.entryInfoList({"*.list", "*.sources"}, QDir::Files | QDir::Readable, QDir::Name);
+
+    bool restoreSuccess = !restoredFiles.isEmpty();
+    for (const QFileInfo &sourceInfo : restoredFiles) {
+        const QString targetPath = QString("/etc/apt/sources.list.d/%1").arg(sourceInfo.fileName());
+        restoreSuccess = shell->procAsRoot("mv", {"-b", sourceInfo.absoluteFilePath(), targetPath})
+            && shell->procAsRoot("chown", {"0:0", targetPath}) && shell->procAsRoot("chmod", {"644", targetPath});
+        if (!restoreSuccess) {
+            break;
+        }
+    }
+
+    if (restoreSuccess) {
         refresh(true);
         QMessageBox::information(this, tr("Success"),
                                  tr("Original APT sources have been restored to the release status. User added "

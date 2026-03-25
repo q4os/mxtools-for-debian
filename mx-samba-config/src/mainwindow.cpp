@@ -383,20 +383,20 @@ void MainWindow::pushAbout_clicked()
 {
     hide();
     displayAboutMsgBox(
+        this,
         tr("About %1").arg(tr("MX Samba Config")),
         R"(<p align="center"><b><h2>MX Samba Config</h2></b></p><p align="center">)" + tr("Version: ")
             + QApplication::applicationVersion() + "</p><p align=\"center\"><h3>"
             + tr("Program for configuring Samba shares and users.")
             + R"(</h3></p><p align="center"><a href="http://mxlinux.org">http://mxlinux.org</a><br /></p><p align="center">)"
             + tr("Copyright (c) MX Linux") + "<br /><br /></p>",
-        "/usr/share/doc/mx-samba-config/license.html", tr("%1 License").arg(windowTitle()));
+        docPath(QStringLiteral("license.html")), tr("%1 License").arg(windowTitle()));
     show();
 }
 
 void MainWindow::pushHelp_clicked()
 {
-    const QString &url = "https://mxlinux.org/wiki/help-files/help-mx-samba-config/";
-    displayDoc(url, tr("%1 Help").arg(windowTitle()));
+    displayDoc(this, docPath(QStringLiteral("mx-samba-config.html")), tr("%1 Help").arg(windowTitle()), true);
 }
 
 void MainWindow::pushRemoveUser_clicked()

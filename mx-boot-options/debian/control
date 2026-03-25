@@ -10,8 +10,7 @@ Vcs-Browser: https://github.com/mxlinux/mx-boot-options
 
 Package: mx-boot-options
 Architecture: any
-Depends: xdg-utils | mx-viewer,
-         uefi-manager,
+Depends: uefi-manager,
          ${misc:Depends},
          ${shlibs:Depends}
 Recommends: efibootmgr, mx-launcher-l10n, gksu | pkexec

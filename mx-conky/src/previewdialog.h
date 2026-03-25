@@ -24,6 +24,8 @@
 
 #pragma once
 
+#include "conkymanager.h"
+
 #include <QCheckBox>
 #include <QDialog>
 #include <QGroupBox>
@@ -34,8 +36,6 @@
 #include <QRadioButton>
 #include <QTimer>
 #include <QVBoxLayout>
-
-#include "conkymanager.h"
 
 class PreviewDialog : public QDialog
 {

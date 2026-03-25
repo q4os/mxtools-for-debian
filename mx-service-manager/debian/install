@@ -5,4 +5,4 @@ mx-service-manager.png		usr/share/pixmaps
 obj-*/*.qm			usr/share/mx-service-manager/locale
 obj-*/mx-service-manager	usr/bin
 scripts/*.policy		usr/share/polkit-1/actions
-scripts/helper			usr/lib/mx-service-manager
+obj-*/helper			usr/lib/mx-service-manager

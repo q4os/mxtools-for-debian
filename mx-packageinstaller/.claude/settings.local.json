@@ -6,7 +6,9 @@
       "Bash(ninja:*)",
       "Bash(/home/adrian/Sync/programs/qt/mx-packageinstaller/build.sh:*)",
       "Bash(tail:*)",
-      "Bash(ls:*)"
+      "Bash(ls:*)",
+      "Bash(git show:*)",
+      "Bash(cmake:*)"
     ]
   },
   "enableAllProjectMcpServers": true,

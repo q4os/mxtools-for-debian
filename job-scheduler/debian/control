@@ -2,12 +2,21 @@ Source: job-scheduler
 Section: admin
 Priority: optional
 Maintainer: Adrian <adrian@mxlinux.org>
-Build-Depends: debhelper (>=10), qt6-base-dev, qt6-base-dev-tools, qt6-tools-dev, qt6-tools-dev-tools
+Build-Depends: debhelper-compat (=12), cmake (>= 3.16), ninja-build, qt6-base-dev, qt6-base-dev-tools, qt6-tools-dev, qt6-tools-dev-tools
 Standards-Version: 3.9.8
+Rules-Requires-Root: no
+Homepage: https://github.com/adrianmxlinux/job-scheduler
+Vcs-Git: https://github.com/adrianmxlinux/job-scheduler.git
+Vcs-Browser: https://github.com/adrianmxlinux/job-scheduler
 
 Package: job-scheduler
 Architecture: any
 Depends: ${misc:Depends},
-         ${shlibs:Depends}
-Description: job-scheduler
- Job Scheduler is a scheduling utility which uses crontab as the backend 
+         ${shlibs:Depends},
+         cron | cronie
+Recommends: x-terminal-emulator
+Description: Graphical job scheduling utility for Linux
+ Job Scheduler is a user-friendly graphical utility for managing scheduled tasks
+ on Linux systems. It provides an intuitive interface to create, edit, and remove
+ cron jobs, leveraging crontab as the backend. Suitable for both novice and
+ advanced users, it simplifies task automation and scheduling.

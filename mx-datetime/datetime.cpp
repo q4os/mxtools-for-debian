@@ -20,7 +20,9 @@
 #include <QApplication>
 #include <QDateTime>
 #include <QDebug>
+#include <QDir>
 #include <QFile>
+#include <QFileInfo>
 #include <QLineEdit>
 #include <QMessageBox>
 #include <QProcess>
@@ -33,6 +35,38 @@
 #include <unistd.h>
 
 using namespace Qt::StringLiterals;
+
+namespace
+{
+const QString HelperPath = u"/usr/lib/mx-datetime/helper"_s;
+
+QString elevationProgram()
+{
+    if (QFile::exists(u"/usr/bin/pkexec"_s)) {
+        return u"/usr/bin/pkexec"_s;
+    }
+    if (QFile::exists(u"/usr/bin/gksu"_s)) {
+        return u"/usr/bin/gksu"_s;
+    }
+    return {};
+}
+
+bool hasEnabledSystemVChronyService()
+{
+    const QDir etcDir(u"/etc"_s);
+    const QStringList rcDirs = etcDir.entryList({u"rc*.d"_s}, QDir::Dirs | QDir::NoDotAndDotDot);
+    for (const QString &rcDirName : rcDirs) {
+        const QDir rcDir(etcDir.filePath(rcDirName));
+        const QStringList entries = rcDir.entryList({u"S*"_s}, QDir::Files | QDir::System | QDir::Hidden);
+        for (const QString &entry : entries) {
+            if (entry.contains(u"chrony"_s)) {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+} // namespace
 
 MXDateTime::MXDateTime(QWidget *parent)
     : QDialog(parent),
@@ -148,24 +182,13 @@ void MXDateTime::setClockLock(bool locked)
         }
     }
 }
-bool MXDateTime::shell(const QString &cmd, QByteArray *output, bool elevate)
-{
-    qDebug() << "Shell:" << cmd;
-    return execute(u"bash"_s, {u"-c"_s, cmd}, output, nullptr, elevate);
-}
-bool MXDateTime::execute(const QString &program, const QStringList &arguments, QByteArray *output, QByteArray *error,
-                         bool elevate)
+bool MXDateTime::execute(const QString &program, const QStringList &arguments, QByteArray *output, QByteArray *error)
 {
     qDebug() << "Exec:" << program << arguments;
     QProcess proc(this);
     QEventLoop eloop;
     connect(&proc, QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished), &eloop, &QEventLoop::quit);
-    if (elevate && getuid() != 0) {
-        QString runAsRoot = QFile::exists(u"/usr/bin/pkexec"_s) ? u"/usr/bin/pkexec"_s : u"/usr/bin/gksu"_s;
-        proc.start(runAsRoot, (QStringList() << u"/usr/lib/mx-datetime/helper"_s << program << arguments));
-    } else {
-        proc.start(program, arguments);
-    }
+    proc.start(program, arguments);
     if (!output) {
         proc.closeReadChannel(QProcess::StandardOutput);
     }
@@ -176,7 +199,7 @@ bool MXDateTime::execute(const QString &program, const QStringList &arguments, Q
     if (output) {
         output->append(sout);
     } else if (!sout.isEmpty()) {
-        qDebug() << "SOut:" << proc.readAllStandardOutput();
+        qDebug() << "SOut:" << sout;
     }
     const QByteArray &serr = proc.readAllStandardError();
     if (error) {
@@ -188,10 +211,48 @@ bool MXDateTime::execute(const QString &program, const QStringList &arguments, Q
     return (proc.exitStatus() == QProcess::NormalExit && proc.exitCode() == 0);
 }
 
+bool MXDateTime::runHelper(const QStringList &arguments, QByteArray *output, QByteArray *error)
+{
+    qDebug() << "Helper:" << arguments;
+    QString program = HelperPath;
+    QStringList programArgs = arguments;
+    if (getuid() != 0) {
+        program = elevationProgram();
+        if (program.isEmpty()) {
+            qWarning() << "No suitable elevation command found (pkexec or gksu)";
+            return false;
+        }
+        programArgs.prepend(HelperPath);
+    }
+    return execute(program, programArgs, output, error);
+}
+
 bool MXDateTime::executeAsRoot(const QString &program, const QStringList &arguments, QByteArray *output,
                                QByteArray *error)
 {
-    return execute(program, arguments, output, error, true);
+    QStringList helperArgs {u"exec"_s, program};
+    helperArgs += arguments;
+    return runHelper(helperArgs, output, error);
+}
+
+bool MXDateTime::installManagedFileAsRoot(const QString &sourcePath, const QString &destinationPath, QByteArray *error)
+{
+    return runHelper({u"install-managed-file"_s, sourcePath, destinationPath}, nullptr, error);
+}
+
+bool MXDateTime::setHwclockModeAsRoot(bool utc, QByteArray *error)
+{
+    return runHelper({u"set-hwclock-mode"_s, utc ? u"utc"_s : u"local"_s}, nullptr, error);
+}
+
+bool MXDateTime::setLocaltimeLinkAsRoot(const QString &timeZone, QByteArray *error)
+{
+    return runHelper({u"set-localtime-link"_s, timeZone}, nullptr, error);
+}
+
+bool MXDateTime::writeTimeZoneAsRoot(const QString &timeZone, QByteArray *error)
+{
+    return runHelper({u"write-timezone"_s, timeZone}, nullptr, error);
 }
 
 void MXDateTime::loadTab(int index)
@@ -316,9 +377,9 @@ void MXDateTime::saveDateTime(const QDateTime &driftStart)
         if (sysInit == SystemD) {
             executeAsRoot(u"timedatectl"_s, {u"set-timezone"_s, newzone});
         } else {
-            executeAsRoot(u"ln"_s, {u"-nfs"_s, "/usr/share/zoneinfo/"_L1 + newzone, u"/etc/localtime"_s});
+            setLocaltimeLinkAsRoot(newzone);
         }
-        shell("echo "_L1 + newzone + " >/etc/timezone"_L1, nullptr, true);
+        writeTimeZoneAsRoot(newzone);
         zoneDelta = 0;
         zoneIdChanged = false;
     }
@@ -431,9 +492,7 @@ void MXDateTime::saveHardwareClock()
             executeAsRoot(u"timedatectl"_s, {u"set-local-rtc"_s, rtcUTC ? u"0"_s : u"1"_s});
         } else {
             if (sysInit == OpenRC && QFile::exists(u"/etc/conf.d/hwclock"_s)) {
-                executeAsRoot(u"sed"_s, {u"-i"_s,
-                    rtcUTC ? u"(s/clock=.*/clock=\"UTC\"/)"_s : u"(s/clock=.*/clock=\"local\"/)"_s,
-                    u"/etc/conf.d/hwclock"_s});
+                setHwclockModeAsRoot(rtcUTC);
             }
             executeAsRoot(u"hwclock"_s, {u"--systohc"_s, rtcUTC ? u"--utc"_s : u"--localtime"_s});
         }
@@ -603,23 +662,89 @@ bool MXDateTime::validateServerList()
     return true;
 }
 
+QString MXDateTime::systemdChronyUnit()
+{
+    const QStringList candidates {u"chronyd.service"_s, u"chrony.service"_s};
+    for (const QString &unit : candidates) {
+        QByteArray output;
+        execute(u"systemctl"_s, {u"show"_s, u"-p"_s, u"LoadState"_s, u"--value"_s, unit}, &output, nullptr);
+        if (QString::fromUtf8(output).trimmed() == u"loaded"_s) {
+            return unit;
+        }
+    }
+    return {};
+}
+
+QString MXDateTime::chronyConfigFile()
+{
+    if (QFile::exists(u"/etc/chrony/chrony.conf"_s)) {
+        return u"/etc/chrony/chrony.conf"_s;
+    }
+    if (QFile::exists(u"/etc/chrony.conf"_s)) {
+        return u"/etc/chrony.conf"_s;
+    }
+    return u"/etc/chrony/chrony.conf"_s;
+}
+
+QString MXDateTime::chronySourcesFile()
+{
+    const QString configFile = chronyConfigFile();
+    QFile file(configFile);
+    QString persistentSourcesFile;
+    if (file.open(QFile::ReadOnly | QFile::Text)) {
+        while (!file.atEnd()) {
+            QString line = QString::fromUtf8(file.readLine()).trimmed();
+            line = line.section('#', 0, 0).trimmed();
+            if (line.startsWith(u"sourcedir "_s)) {
+                const QStringList parts = line.split(' ', Qt::SkipEmptyParts);
+                if (parts.size() >= 2) {
+                    const QString dirPath = parts.at(1);
+                    if (dirPath.startsWith(u"/etc/"_s)) {
+                        persistentSourcesFile = QDir(dirPath).filePath(u"mx-datetime.sources"_s);
+                        break;
+                    }
+                }
+            }
+        }
+    }
+    if (!persistentSourcesFile.isEmpty()) {
+        return persistentSourcesFile;
+    }
+    if (QFileInfo(u"/etc/chrony/sources.d"_s).isDir()) {
+        return u"/etc/chrony/sources.d/mx-datetime.sources"_s;
+    }
+    if (QFileInfo(u"/etc/chrony.d"_s).isDir()) {
+        return u"/etc/chrony.d/mx-datetime.sources"_s;
+    }
+    return u"/etc/chrony/sources.d/mx-datetime.sources"_s;
+}
+
 void MXDateTime::loadNetworkTime()
 {
     while (tableServers->rowCount() > 0) {
         tableServers->removeRow(0);
     }
-    loadSources(u"/etc/chrony/sources.d/mx-datetime.sources"_s);
-    const bool move = loadSources(u"/etc/chrony/chrony.conf"_s);
+    const QString sourcesFile = chronySourcesFile();
+    const QString configFile = chronyConfigFile();
+    loadSources(sourcesFile);
+    const bool move = loadSources(configFile);
 
     // Stray change signals may have caused changedServers to be set.
     QApplication::processEvents();
     changedServers = move;
 
     if (sysInit != SystemD) {
-        enabledNTP = shell(u"ls /etc/rc*.d | grep chrony | grep '^S'"_s);
+        enabledNTP = hasEnabledSystemVChronyService();
     } else {
-        enabledNTP = shell(u"LANG=C systemctl status chrony | grep Loaded"_s
-            u"| grep service |cut -d';' -f2 |grep -q enabled"_s);
+        const QString unit = systemdChronyUnit();
+        if (unit.isEmpty()) {
+            enabledNTP = false;
+        } else {
+            QByteArray output;
+            execute(u"systemctl"_s, {u"show"_s, u"-p"_s, u"UnitFileState"_s, u"--value"_s, unit}, &output, nullptr);
+            const QString state = QString::fromUtf8(output).trimmed();
+            enabledNTP = (state == u"enabled"_s || state == u"enabled-runtime"_s);
+        }
     }
     checkAutoSync->setChecked(enabledNTP);
 }
@@ -631,8 +756,11 @@ void MXDateTime::saveNetworkTime()
         const QString enable_disable(ntp ? u"enable"_s : u"disable"_s);
         const QString start_stop(ntp ? u"start"_s : u"stop"_s);
         if (sysInit == SystemD) {
-            executeAsRoot(u"systemctl"_s, {enable_disable, u"chrony"_s});
-            executeAsRoot(u"systemctl"_s, {start_stop, u"chrony"_s});
+            const QString unit = systemdChronyUnit();
+            if (!unit.isEmpty()) {
+                executeAsRoot(u"systemctl"_s, {enable_disable, unit});
+                executeAsRoot(u"systemctl"_s, {start_stop, unit});
+            }
         } else if (sysInit == OpenRC) {
             if (QFile::exists(u"/etc/init.d/chronyd"_s)) {
                 executeAsRoot(u"rc-update"_s, {ntp ? u"add"_s : u"del"_s, u"chronyd"_s});
@@ -646,6 +774,8 @@ void MXDateTime::saveNetworkTime()
 
     // Generate chrony sources file.
     if (changedServers) {
+        const QString sourcesFile = chronySourcesFile();
+        const QString configFile = chronyConfigFile();
         QTemporaryFile file;
         if (file.open()) {
             file.write("# Generated by MX Date & Time - ");
@@ -668,16 +798,17 @@ void MXDateTime::saveNetworkTime()
                 file.write("\n");
             }
             file.close();
-            executeAsRoot(u"mv"_s, {file.fileName(), u"/etc/chrony/sources.d/mx-datetime.sources"_s});
-            executeAsRoot(u"chown"_s, {u"root:"_s, u"/etc/chrony/sources.d/mx-datetime.sources"_s});
-            executeAsRoot(u"chmod"_s, {u"+r"_s, u"/etc/chrony/sources.d/mx-datetime.sources"_s});
+            installManagedFileAsRoot(file.fileName(), sourcesFile);
         }
         if (ntp) {
-            if (!clearSources(u"/etc/chrony/chrony.conf"_s)) {
+            if (!clearSources(configFile)) {
                 executeAsRoot(u"chronyc"_s, {u"reload"_s, u"sources"_s});
             } else {
                 if (sysInit == SystemD) {
-                    executeAsRoot(u"systemctl"_s, {u"restart"_s, u"chrony"_s});
+                    const QString unit = systemdChronyUnit();
+                    if (!unit.isEmpty()) {
+                        executeAsRoot(u"systemctl"_s, {u"restart"_s, unit});
+                    }
                 } else {
                     executeAsRoot(u"service"_s, {u"chrony"_s, u"restart"_s});
                 }
@@ -692,6 +823,22 @@ bool MXDateTime::loadSources(const QString &filename)
     if (!file.open(QFile::ReadOnly | QFile::Text)) {
         return false;
     }
+    const auto isDuplicate = [this](const QString &type, const QString &address, const QString &options) {
+        const int serverCount = tableServers->rowCount();
+        for (int ixi = 0; ixi < serverCount; ++ixi) {
+            auto *comboType = qobject_cast<QComboBox *>(tableServers->cellWidget(ixi, 0));
+            if (!comboType) {
+                continue;
+            }
+            const QString rowType = comboType->currentData().toString();
+            const QString rowAddress = tableServers->item(ixi, 1)->text().trimmed();
+            const QString rowOptions = tableServers->item(ixi, 2)->text().simplified();
+            if (rowType == type && rowAddress == address && rowOptions == options) {
+                return true;
+            }
+        }
+        return false;
+    };
     bool hassrc = false;
     while (!file.atEnd()) {
         const QByteArray &bline = file.readLine();
@@ -710,7 +857,11 @@ bool MXDateTime::loadSources(const QString &filename)
                 options.append(' ');
                 options.append(args.at(ixi));
             }
-            addServerRow(enabled, curarg, args.at(1), options.trimmed());
+            const QString address = args.at(1);
+            const QString trimmedOptions = options.trimmed();
+            if (!isDuplicate(curarg, address, trimmedOptions)) {
+                addServerRow(enabled, curarg, address, trimmedOptions);
+            }
             hassrc = true;
         }
     }
@@ -730,8 +881,8 @@ bool MXDateTime::clearSources(const QString &filename)
     }
     while (!file.atEnd()) {
         const QByteArray &bline = file.readLine();
-        static const QRegularExpression tregex(u"^\\s?(pool|server|peer)\\s"_s);
-        if (QString(bline).contains(tregex)) {
+        static const QRegularExpression tregex(u"^\\s*(pool|server|peer)\\s"_s);
+        if (QString::fromUtf8(bline).contains(tregex)) {
             confdata.append("##");
             changed = true;
         }
@@ -746,9 +897,7 @@ bool MXDateTime::clearSources(const QString &filename)
         }
         tmpFile.write(confdata);
         tmpFile.close();
-        executeAsRoot(u"mv"_s, {tmpFile.fileName(), file.fileName()});
-        executeAsRoot(u"chown"_s, {u"root:"_s, file.fileName()});
-        executeAsRoot(u"chmod"_s, {u"+r"_s, file.fileName()});
+        installManagedFileAsRoot(tmpFile.fileName(), file.fileName());
     }
     return changed;
 }
@@ -800,7 +949,7 @@ void MXDateTime::aboutClicked()
 }
 void MXDateTime::helpClicked()
 {
-    displayDoc(u"/usr/share/doc/mx-datetime/mx-datetime.html"_s, tr("MX Date & Time Help"));
+    displayHelpDoc(u"/usr/share/doc/mx-datetime/mx-datetime.html"_s, tr("MX Date & Time Help"));
 }
 
 // SUBCLASSING FOR QTimeEdit THAT FIXES CURSOR AND SELECTION JUMPING EVERY SECOND

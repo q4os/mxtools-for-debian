@@ -102,7 +102,7 @@
     <message>
         <location filename="mainwindow.ui" line="790"/>
         <source>About</source>
-        <translation type="unfinished"/>
+        <translation>Tentang</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="798"/>

@@ -1,3 +1,33 @@
+mx-tweak (26.03.04mx25) mx; urgency=medium
+
+  * add --close switch (requires --traydialog)
+  * update translations
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 19 Mar 2026 18:06:22 -0400
+
+mx-tweak (26.03.02mx25) mx; urgency=medium
+
+  * hide bluetooth check behind vebose switch
+  * add --traydialog switch (launches dialog on startup of tray brightness utility
+  * update strings
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 18 Mar 2026 20:53:11 -0400
+
+mx-tweak (26.03.01mx25) mx; urgency=medium
+  
+  [ Adrian ]
+
+  * fix xfce theme set icon lookup
+  * fix xfconf create arguements
+  * fix xfce panel background save
+  * fix window buttons restore setting
+  * fix --display option session check
+  [ Dolphin ]
+  * update translations 
+  * update help
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 15 Mar 2026 16:14:47 -0400
+
 mx-tweak (26.01.02mx25) MX; urgency=medium
 
   * chooser for sysvinit or systemd as "default" init system

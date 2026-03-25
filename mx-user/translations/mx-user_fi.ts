@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="fi">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="fi">
 <context>
     <name>MEConfig</name>
     <message>
@@ -199,7 +197,7 @@
     <message>
         <location filename="../mainwindow.ui" line="744"/>
         <source>Mozilla (Iceweasel or Firefox) configs</source>
-        <translation>Mozilla (Iceweasel:in tai Firefox:in) asetukset</translation>
+        <translation>Mozillan (iceweasel tai firefox) asetukset</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="747"/>
@@ -224,7 +222,7 @@
     <message>
         <location filename="../mainwindow.ui" line="773"/>
         <source>Change Autologin Settings</source>
-        <translation>Muuta automaattikirjautumisen asetuksia</translation>
+        <translation>Muuta automaattisen kirjautumisen asetuksia</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="779"/>
@@ -234,7 +232,7 @@
     <message>
         <location filename="../mainwindow.ui" line="786"/>
         <source>Require password to log in</source>
-        <translation>Vaadi salasanaa kirjautumiseen</translation>
+        <translation>Vaadi kirjautumiseen salasanaa</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="801"/>
@@ -286,12 +284,12 @@
     <message>
         <location filename="../mainwindow.ui" line="947"/>
         <source>Sync</source>
-        <translation>Synkkaus</translation>
+        <translation>Synkronoi</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="993"/>
         <source>Select to copy/sync Shared</source>
-        <translation>Valitse Jaot kopioitavaksi/synkattavaksi</translation>
+        <translation>Valitse Jaot kopioitavaksi/synkronoitavaksi</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="996"/>
@@ -301,7 +299,7 @@
     <message>
         <location filename="../mainwindow.ui" line="1009"/>
         <source>Select to copy/sync entire home</source>
-        <translation>Valitse koko kotikansio kopioitavaksi/synkattavaksi</translation>
+        <translation>Valitse koko kotikansio kopioitavaksi/synkronoitavaksi</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1012"/>
@@ -311,27 +309,27 @@
     <message>
         <location filename="../mainwindow.ui" line="1028"/>
         <source>Select to copy/sync the browser configuration</source>
-        <translation>Valitse selainasetukset kopioitavaksi/synkattavaksi</translation>
+        <translation>Valitse selainasetukset kopioitavaksi/synkronoitavaksi</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1031"/>
         <source>Mozilla (Firefox or Iceweasel) configs</source>
-        <translation>Mozilla (Firefox:in tai Iceweasel:in) asetukset</translation>
+        <translation>Mozillan (firefox tai iceweasel) asetukset</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1044"/>
         <source>Select to copy/sync Documents</source>
-        <translation>Valitse Asiakirjat kopioitavaksi/synkattavaksi</translation>
+        <translation>Valitse Asiakirjat kopioitavaksi/synkronoitavaksi</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1047"/>
         <source>Documents folder</source>
-        <translation>Tiedostot-kansio</translation>
+        <translation>Tiedostot kansio</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1054"/>
         <source>What to copy/sync:</source>
-        <translation>Mitä kopioidaan/synkataan:</translation>
+        <translation>Mitä kopioidaan/synkronoidaan:</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1070"/>
@@ -533,23 +531,23 @@
     <message>
         <location filename="../mainwindow.cpp" line="235"/>
         <source>Mozilla settings were reset.</source>
-        <translation>Mozilla-asetukset nollattiin.</translation>
+        <translation>Mozillan asetukset nollattiin.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="250"/>
         <location filename="../mainwindow.cpp" line="281"/>
         <source>Autologin options</source>
-        <translation>Automaattikirjautumisen asetukset</translation>
+        <translation>Automaattisen kirjautumisen lisäasetukset</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="251"/>
         <source>Autologin has been disabled for the &apos;%1&apos; account.</source>
-        <translation>Automaattikirjautuminen on poistettu käytöstä käyttäjältililtä &apos;%1&apos;.</translation>
+        <translation>Kirjautuminen automaattisesti on poistettu käytöstä tilillä &quot;%1&quot;.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="282"/>
         <source>Autologin has been enabled for the &apos;%1&apos; account.</source>
-        <translation>Automaattikirjautuminen on otettu käyttöön käyttäjältilille &apos;%1&apos;.</translation>
+        <translation>Kirjautuminen automaattisesti on otettu käyttöön tilille &quot;%1&quot;.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="294"/>
@@ -735,7 +733,7 @@ Valitse eri nimi ennen jatkamista.</translation>
         <location filename="../mainwindow.cpp" line="666"/>
         <location filename="../mainwindow.cpp" line="694"/>
         <source>Synchronizing desktop...ok</source>
-        <translation>Synkronoidaan työpöytää...ok</translation>
+        <translation>Työpöydän synkronointi...valmis</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="668"/>
@@ -746,7 +744,7 @@ Valitse eri nimi ennen jatkamista.</translation>
     <message>
         <location filename="../mainwindow.cpp" line="700"/>
         <source>Synchronizing desktop...failed</source>
-        <translation>Synkronoidaan työpöytää...epäonnistui</translation>
+        <translation>Työpöydän synkronointi...epäonnistui</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="702"/>

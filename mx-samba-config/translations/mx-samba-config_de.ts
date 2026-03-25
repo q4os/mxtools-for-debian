@@ -59,7 +59,7 @@
     <message>
         <location filename="../src/editshare.cpp" line="81"/>
         <source>Select access for at least one user before continuing.</source>
-        <translation type="unfinished"/>
+        <translation>Mindestens einen Benutzerzugang auswählen um weiter zu machen.</translation>
     </message>
 </context>
 <context>
@@ -233,6 +233,7 @@
         <location filename="../src/mainwindow.cpp" line="567"/>
         <location filename="../src/mainwindow.cpp" line="582"/>
         <location filename="../src/mainwindow.cpp" line="597"/>
+        <location filename="../src/mainwindow.cpp" line="603"/>
         <source>Error</source>
         <translation>Fehler</translation>
     </message>
@@ -249,12 +250,12 @@
     <message>
         <location filename="../src/mainwindow.cpp" line="109"/>
         <source>Path: %1 does not exist.</source>
-        <translation type="unfinished"/>
+        <translation>Pfad: %1 existiert nicht</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="137"/>
         <source>Please set access for at least one user.</source>
-        <translation type="unfinished"/>
+        <translation>Bitte einen Benutzerzugang auswählen.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="152"/>
@@ -298,7 +299,7 @@
     <message>
         <location filename="../src/mainwindow.cpp" line="311"/>
         <source>Samba is not installed</source>
-        <translation type="unfinished"/>
+        <translation>Samba nicht installiert</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="316"/>
@@ -313,12 +314,12 @@
     <message>
         <location filename="../src/mainwindow.cpp" line="318"/>
         <source>Samba autostart is enabled</source>
-        <translation type="unfinished"/>
+        <translation>Samba Autostart eingeschaltet</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="318"/>
         <source>Samba autostart is disabled</source>
-        <translation type="unfinished"/>
+        <translation>Samba Autostart abgeschaltet</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="319"/>
@@ -429,7 +430,7 @@
     <message>
         <location filename="../src/mainwindow.cpp" line="497"/>
         <source>Password fields cannot be empty.</source>
-        <translation type="unfinished"/>
+        <translation>Passworteingabefelder dürfen nicht leer sein.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="510"/>
@@ -440,12 +441,12 @@
         <location filename="../src/mainwindow.cpp" line="520"/>
         <location filename="../src/mainwindow.cpp" line="543"/>
         <source>No share selected.</source>
-        <translation type="unfinished"/>
+        <translation>Kein Share ausgewählt.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="526"/>
         <source>Selected share is empty.</source>
-        <translation type="unfinished"/>
+        <translation>Ausgewähltes Share ist leer.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="531"/>
@@ -460,7 +461,7 @@
     <message>
         <location filename="../src/mainwindow.cpp" line="536"/>
         <source>Share deleted successfully: </source>
-        <translation type="unfinished"/>
+        <translation>Share erfolgreich gelöscht.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="549"/>
@@ -472,7 +473,12 @@
         <location filename="../src/mainwindow.cpp" line="567"/>
         <location filename="../src/mainwindow.cpp" line="582"/>
         <source>Error processing permissions: </source>
-        <translation type="unfinished"/>
+        <translation>Fehler beim Verarbeiten der Berechtigungen:</translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="603"/>
+        <source>Please add a Samba user before creating a share.</source>
+        <translation>Bitte einen Samba-Benutzer hinzufügen vor dem Erzeugen eines Share.</translation>
     </message>
 </context>
 <context>

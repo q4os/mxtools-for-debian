@@ -12,7 +12,6 @@ Architecture: any
 Depends: apt-transport-https,
          flags-common,
          mx-repo-list,
-         mx-viewer | xdg-utils,
          netselect-apt,
          unzip,
          ${misc:Depends},

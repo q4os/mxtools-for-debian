@@ -34,9 +34,11 @@ public:
     void setSearchText(const QString &text);
     void setStatusFilter(int status);
     void setHideLibraries(bool hide);
+    void setRepoOnly(bool repoOnly);
 
     [[nodiscard]] int statusFilter() const { return m_statusFilter; }
     [[nodiscard]] bool hideLibraries() const { return m_hideLibraries; }
+    [[nodiscard]] bool repoOnly() const { return m_repoOnly; }
     [[nodiscard]] QString searchText() const { return m_searchText; }
 
     [[nodiscard]] QVector<int> visibleSourceRows() const;
@@ -53,4 +55,5 @@ private:
     QString m_searchText;
     int m_statusFilter = 0;
     bool m_hideLibraries = true;
+    bool m_repoOnly = false;
 };

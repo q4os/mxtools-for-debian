@@ -484,7 +484,7 @@ Are you OK to exit?</source>
     <message>
         <location filename="../VariableModel.cpp" line="37"/>
         <source>Name</source>
-        <translation type="unfinished"/>
+        <translation>名稱</translation>
     </message>
     <message>
         <location filename="../VariableModel.cpp" line="39"/>

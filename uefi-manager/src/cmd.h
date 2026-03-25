@@ -54,9 +54,12 @@ private:
     QString outBuffer;
     QString elevationCommand;
     QString helper;
+    QString helperLibrary;
     static constexpr int EXIT_CODE_COMMAND_NOT_FOUND = 127;
     static constexpr int EXIT_CODE_PERMISSION_DENIED = 126;
 
     inline static bool elevationFailed = false;
+    bool helperProc(const QStringList &helperArgs, QString *output = nullptr, const QByteArray *input = nullptr,
+                    QuietMode quiet = QuietMode::No);
     void handleElevationError();
 };

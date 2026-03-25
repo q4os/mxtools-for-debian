@@ -1,0 +1,32 @@
+{
+    "tasks": [
+        {
+            "label": "Run qmake",
+            "type": "shell",
+            "command": "qmake",
+            "problemMatcher": []
+        },
+        {
+            "label": "Make Distclean",
+            "type": "shell",
+            "command": "make distclean"
+        },
+        {
+            "label": "Make All",
+            "type": "shell",
+            "command": "make",
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "Run",
+            "type": "shell",
+            "command": "fish -c (basename $PWD)",
+            "problemMatcher": []
+        }
+    ],
+    "version": "2.0.0"
+}

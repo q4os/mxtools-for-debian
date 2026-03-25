@@ -1,7 +1,28 @@
 {
   "permissions": {
     "allow": [
-      "Bash(grep:*)"
+      "Bash(grep:*)",
+      "Bash(git checkout:*)",
+      "Bash(./build.sh:*)",
+      "Bash(tail:*)",
+      "Bash(which ninja:*)",
+      "Bash(git checkout main && git merge --no-commit --no-ff arch 2>&1)",
+      "Bash(echo aur is not a git repo:*)",
+      "Bash(git status && git fetch --all 2>&1)",
+      "Bash(cmake:*)",
+      "Bash(git show-ref:*)",
+      "Bash(git remote:*)",
+      "Bash(curl:*)",
+      "Bash(ls:*)",
+      "Bash(git -C /home/adrian/Sync/programs/qt/mx-conky log --oneline --all)",
+      "Bash(git:*)",
+      "Bash(find /home/adrian -maxdepth 5 -path */mx-boot-repair* -name helper -type d)",
+      "Bash(find /home/adrian/Sync/programs -maxdepth 5 -path *boot-repair*)",
+      "Bash(find /home/adrian/Sync/programs/qt/mx-bootrepair -name helper*)"
     ]
-  }
+  },
+  "enableAllProjectMcpServers": true,
+  "enabledMcpjsonServers": [
+    "docker"
+  ]
 }

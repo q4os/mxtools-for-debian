@@ -144,18 +144,18 @@ bool MainWindow::isToRam()
     return QFileInfo::exists("/live/config/did-toram");
 }
 
-void MainWindow::makeUsb(const QString &options)
+void MainWindow::makeUsb(const QStringList &options)
 {
     device = ui->comboUsb->currentText().split(' ').first();
-    QString source = '"' + ui->pushSelectSource->property("filename").toString() + '"';
+    QString source = ui->pushSelectSource->property("filename").toString();
     QString sourceSize;
 
     if (!ui->checkCloneLive->isChecked() && !ui->checkCloneMode->isChecked()) {
-        sourceSize = cmd.getOut(QString("du -m %1 2>/dev/null | cut -f1").arg(source), Cmd::QuietMode::Yes);
+        sourceSize = cmd.getOut(QString("du -m \"%1\" 2>/dev/null | cut -f1").arg(source), Cmd::QuietMode::Yes);
     } else if (ui->checkCloneMode->isChecked()) {
-        sourceSize = cmd.getOut(QString("du -m --summarize %1 2>/dev/null | cut -f1").arg(source), Cmd::QuietMode::Yes);
-        QString rootPartition = cmd.getOut(QString("df --output=source %1 | awk 'END{print $1}'").arg(source));
-        source = "clone=" + source.remove('"');
+        sourceSize = cmd.getOut(QString("du -m --summarize \"%1\" 2>/dev/null | cut -f1").arg(source), Cmd::QuietMode::Yes);
+        QString rootPartition = cmd.getOut(QString("df --output=source \"%1\" | awk 'END{print $1}'").arg(source));
+        source = "clone=" + source;
         if ("/dev/" + device == getDrivePath(rootPartition)) {
             showErrorAndReset(tr("Source and destination are on the same device, please select again."));
             return;
@@ -190,18 +190,23 @@ void MainWindow::makeUsb(const QString &options)
         ui->progBar->setMaximum(static_cast<int>(isoSectors + start_io));
     }
 
-    QString cmdstr = (LUM + " gui " + options + " -C off --from=%1 -t /dev/%2").arg(source, device);
+    QStringList liveUsbArgs {"gui"};
+    liveUsbArgs += options;
+    liveUsbArgs << "-C" << "off" << "--from=" + source << "-t" << "/dev/" + device;
     if (ui->radioDd->isChecked()) {
-        cmdstr = LUM + " gui partition-clear -NC off --target " + device;
+        const QStringList partitionClearArgs {"gui", "partition-clear", "-NC", "off", "--target", device};
         connect(&cmd, &Cmd::readyReadStandardOutput, this, &MainWindow::updateOutput);
-        qDebug() << cmd.getOutAsRoot(cmdstr, Cmd::QuietMode::Yes);
-        cmdstr = QString("dd bs=1M if=%1 of=/dev/%2").arg(source, device);
+        qDebug() << cmd.getOutAsRoot(LUM, partitionClearArgs, Cmd::QuietMode::Yes);
         ui->outputBox->insertPlainText(tr("Writing %1 using 'dd' command to /dev/%2,\n\n"
                                           "Please wait until the process is completed")
                                            .arg(source, device));
+        setConnections();
+        cmd.procAsRoot(QStringLiteral("dd"), {"bs=1M", "if=" + source, "of=/dev/" + device}, nullptr, nullptr,
+                       Cmd::QuietMode::Yes);
+        return;
     }
     setConnections();
-    cmd.runAsRoot(cmdstr);
+    cmd.procAsRoot(LUM, liveUsbArgs, nullptr, nullptr, Cmd::QuietMode::Yes);
 }
 
 void MainWindow::setup()
@@ -234,7 +239,8 @@ void MainWindow::setup()
     ui->checkCloneLive->setEnabled(isRunningLive() && !QFile::exists("/live/config/encrypted"));
 
     // Dynamically show or hide data format options based on availability
-    bool dataFirstAvailable = cmd.run(LUM + " --help | grep -q -- --data-first", Cmd::QuietMode::Yes);
+    const QString lumHelp = cmd.getOut(LUM + " --help 2>&1", Cmd::QuietMode::Yes);
+    const bool dataFirstAvailable = lumHelp.contains("--data-first");
     ui->checkDataFirst->setVisible(dataFirstAvailable);
     ui->comboBoxDataFormat->setVisible(dataFirstAvailable);
     ui->labelFormat->setVisible(dataFirstAvailable);
@@ -268,7 +274,7 @@ void MainWindow::setGeneralConnections()
 }
 
 // Build the option list to be passed to live-usb-maker
-QString MainWindow::buildOptionList()
+QStringList MainWindow::buildOptionList()
 {
     QStringList optionsList {"-N"};
     const bool updateMode = ui->checkUpdate->isChecked();
@@ -324,9 +330,8 @@ QString MainWindow::buildOptionList()
         optionsList.append("-VV");
     }
 
-    QString options = optionsList.join(' ');
-    qDebug() << "Options: " << options;
-    return options;
+    qDebug() << "Options:" << optionsList;
+    return optionsList;
 }
 
 void MainWindow::cleanup()
@@ -351,22 +356,25 @@ void MainWindow::cleanup()
         if (cmd.state() != QProcess::NotRunning) {
             QTimer::singleShot(10s, this, [this] {
                 if (cmd.state() != QProcess::NotRunning) {
-                    Cmd().runAsRoot("kill -9 -- -" + QString::number(cmd.processId()), Cmd::QuietMode::Yes);
+                    Cmd().procAsRoot(QStringLiteral("kill"), {"-9", "--", "-" + QString::number(cmd.processId())},
+                                     nullptr, nullptr, Cmd::QuietMode::Yes);
                 }
             });
-            Cmd().runAsRoot("kill -- -" + QString::number(cmd.processId()), Cmd::QuietMode::Yes);
+            Cmd().procAsRoot(QStringLiteral("kill"), {"--", "-" + QString::number(cmd.processId())}, nullptr, nullptr,
+                             Cmd::QuietMode::Yes);
         }
 
         if (Cmd().run("mountpoint -q " + mountPath, Cmd::QuietMode::Yes)) {
-            Cmd().runAsRoot("umount -Rl " + mountPath, Cmd::QuietMode::Yes);
+            Cmd().procAsRoot(QStringLiteral("umount"), {"-R", "-l", mountPath}, nullptr, nullptr, Cmd::QuietMode::Yes);
         }
         if (Cmd().run("mountpoint -q " + mountPath + "/main", Cmd::QuietMode::Yes)) {
-            Cmd().runAsRoot("umount -l " + mountPath + "/{main,uefi}", Cmd::QuietMode::Yes);
+            Cmd().procAsRoot(QStringLiteral("umount"), {"-l", mountPath + "/main", mountPath + "/uefi"}, nullptr,
+                             nullptr, Cmd::QuietMode::Yes);
         }
 
-        QString pid = QString::number(QApplication::applicationPid());
+        const QString pid = QString::number(QApplication::applicationPid());
         if (!Cmd().run("ps --ppid " + pid, Cmd::QuietMode::Yes)) {
-            Cmd().runAsRoot("kill -- -" + pid, Cmd::QuietMode::Yes);
+            Cmd().procAsRoot(QStringLiteral("kill"), {"--", "-" + pid}, nullptr, nullptr, Cmd::QuietMode::Yes);
         }
     }
 }
@@ -696,8 +704,8 @@ void MainWindow::pushAbout_clicked()
 
 void MainWindow::pushHelp_clicked()
 {
-    QString url = "/usr/share/doc/mx-live-usb-maker/mx-live-usb-maker.html";
-    displayDoc(url, tr("%1 Help").arg(windowTitle()));
+    const QString helpPath = "/usr/share/doc/mx-live-usb-maker/mx-live-usb-maker.html";
+    displayHelpDoc(helpPath, tr("%1 Help").arg(windowTitle()));
 }
 
 void MainWindow::pushSelectSource_clicked()

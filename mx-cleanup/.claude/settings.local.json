@@ -1,0 +1,11 @@
+{
+  "enableAllProjectMcpServers": true,
+  "enabledMcpjsonServers": [
+    "docker"
+  ],
+  "permissions": {
+    "allow": [
+      "Bash(git:*)"
+    ]
+  }
+}

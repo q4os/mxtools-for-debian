@@ -35,24 +35,27 @@ if(NOT DPKG_RESULT EQUAL 0)
     message(FATAL_ERROR "Failed to get version from debian/changelog using dpkg-parsechangelog")
 endif()
 
-# Extract numeric version for CMake (remove mx suffix)
-string(REGEX REPLACE "^([0-9]+\\.[0-9]+\\.[0-9]+).*" "\\1" CMAKE_COMPATIBLE_VERSION "${PROJECT_VERSION_FROM_CHANGELOG}")
+# Convert Debian package version into a valid CMake project version.
+# Accepts both YY.MMmxNN and YY.MM.PPmxNN and normalizes to YY.MM.PP.
+string(REGEX MATCH "^([0-9]+)\\.([0-9]+)(\\.([0-9]+))?" PROJECT_VERSION_MATCH "${PROJECT_VERSION_FROM_CHANGELOG}")
 
-project(mx-welcome
-    VERSION ${CMAKE_COMPATIBLE_VERSION}
-    DESCRIPTION "MX Welcome - Welcome application for MX Linux"
-    LANGUAGES CXX
-)
-
-if(NOT DPKG_RESULT EQUAL 0)
-    message(FATAL_ERROR "Failed to get version from debian/changelog using dpkg-parsechangelog")
+if(NOT PROJECT_VERSION_MATCH)
+    message(FATAL_ERROR "Unsupported version format from debian/changelog: ${PROJECT_VERSION_FROM_CHANGELOG}")
 endif()
 
-# Extract only the numeric part of the version (remove 'mx25' suffix)
-string(REGEX REPLACE "^([0-9]+\\.[0-9]+\\.[0-9]+).*" "\\1" PROJECT_VERSION_CLEAN "${PROJECT_VERSION_FROM_CHANGELOG}")
+set(PROJECT_VERSION_MAJOR "${CMAKE_MATCH_1}")
+set(PROJECT_VERSION_MINOR "${CMAKE_MATCH_2}")
+
+if(DEFINED CMAKE_MATCH_4 AND NOT CMAKE_MATCH_4 STREQUAL "")
+    set(PROJECT_VERSION_PATCH "${CMAKE_MATCH_4}")
+else()
+    set(PROJECT_VERSION_PATCH "0")
+endif()
+
+set(PROJECT_VERSION_CMAKE "${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}.${PROJECT_VERSION_PATCH}")
 
 project(mx-welcome
-    VERSION ${PROJECT_VERSION_CLEAN}
+    VERSION ${PROJECT_VERSION_CMAKE}
     DESCRIPTION "MX Welcome - Welcome application for MX Linux"
     LANGUAGES CXX
 )
@@ -72,15 +75,6 @@ if(CMAKE_GENERATOR STREQUAL "Ninja")
     elseif(CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
         add_compile_options(-fcolor-diagnostics)
     endif()
-endif()
-
-# Option to use clang for testing builds
-option(USE_CLANG "Use clang compiler" OFF)
-if(USE_CLANG)
-    set(CMAKE_C_COMPILER clang)
-    set(CMAKE_CXX_COMPILER clang++)
-    set(CMAKE_CXX_COMPILER_ID "Clang")
-    message(STATUS "Using clang compiler")
 endif()
 
 # Find Qt6 components
@@ -152,7 +146,7 @@ target_compile_options(mx-welcome PRIVATE
 )
 
 # Add compiler-specific flags
-if(CMAKE_CXX_COMPILER_ID STREQUAL "Clang" OR USE_CLANG)
+if(CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
     target_compile_options(mx-welcome PRIVATE -Werror=return-stack-address)
 else()
     target_compile_options(mx-welcome PRIVATE -Werror=return-local-addr)
@@ -170,7 +164,7 @@ if(CMAKE_BUILD_TYPE STREQUAL "Release")
     target_compile_options(mx-welcome PRIVATE -O3)
 
     # Add LTO - different flags for different compilers
-    if(CMAKE_CXX_COMPILER_ID STREQUAL "Clang" OR USE_CLANG)
+    if(CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
         target_compile_options(mx-welcome PRIVATE -flto=thin)
         target_link_options(mx-welcome PRIVATE -flto=thin)
     else()

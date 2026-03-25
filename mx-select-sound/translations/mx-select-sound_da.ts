@@ -1,264 +1,143 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="da">
-<context>
-    <name>MainWindow</name>
-    <message>
-        <location filename="../mainwindow.ui" line="14"/>
-        <location filename="../mainwindow.cpp" line="48"/>
-        <location filename="../mainwindow.cpp" line="79"/>
-        <location filename="../mainwindow.cpp" line="135"/>
-        <location filename="../mainwindow.cpp" line="155"/>
-        <location filename="../mainwindow.cpp" line="163"/>
-        <source>MX Select Sound</source>
-        <translation type="unfinished">MX Vælg lyd</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="28"/>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Your current default sound card is:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Dit nuværende standardlydkort er:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="64"/>
-        <source>Display help </source>
-        <translation type="unfinished">Vis hjælp</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="67"/>
-        <source>Help</source>
-        <translation type="unfinished">Hjælp</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="74"/>
-        <source>Alt+H</source>
-        <translation type="unfinished">Alt+H</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="103"/>
-        <source>About this application</source>
-        <translation type="unfinished">Om programmet</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="106"/>
-        <source>About...</source>
-        <translation type="unfinished">Om...</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="113"/>
-        <source>Alt+B</source>
-        <translation type="unfinished">Alt+B</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="145"/>
-        <source>Quit application</source>
-        <translation type="unfinished">Afslut programmet</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="148"/>
-        <source>Close</source>
-        <translation type="unfinished">Luk</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="155"/>
-        <source>Alt+N</source>
-        <translation type="unfinished">Alt+N</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="196"/>
-        <source>Apply</source>
-        <translation type="unfinished">Anvend</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="218"/>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Select another sound card if necessary:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Vælg et andet lydkort hvis det er nødvendigt:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="244"/>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If your computer has more than one sound card, you can use this application to select the one to be default. &lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Hvis din computer har mere end ét lydkort, så kan du bruge programmet til at vælge det der skal være standard. &lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="290"/>
-        <source>Test current sound card</source>
-        <translation type="unfinished">Test nuværende lydkort</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="79"/>
-        <source>No sound cards/devices were found.</source>
-        <translation type="unfinished">Fandt ingen lydkort/-enheder.</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="91"/>
-        <location filename="../mainwindow.cpp" line="104"/>
-        <source>none</source>
-        <translation type="unfinished">Intet</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="134"/>
-        <source>About MX Select Sound</source>
-        <translation type="unfinished">Om MX Vælg lyd</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="135"/>
-        <source>Version: </source>
-        <translation type="unfinished">Version: </translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="136"/>
-        <source>Program for selecting the default sound card in MX Linux</source>
-        <translation type="unfinished">Program til at vælge standardlydkortet i MX Linux</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="139"/>
-        <source>Copyright (c) MX Linux</source>
-        <translation type="unfinished">Ophavsret (c) MX Linux</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="140"/>
-        <source>%1 License</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="155"/>
-        <source>%1 Help</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="163"/>
-        <source>Could not play test sound.</source>
-        <translation type="unfinished">Kunne ikke afspille testlyd.</translation>
-    </message>
-</context>
-<context>
-    <name>QObject</name>
-    <message>
-        <location filename="../about.cpp" line="40"/>
-        <source>License</source>
-        <translation type="unfinished">Licens</translation>
-    </message>
-    <message>
-        <location filename="../about.cpp" line="41"/>
-        <location filename="../about.cpp" line="51"/>
-        <source>Changelog</source>
-        <translation type="unfinished">Ændringslog</translation>
-    </message>
-    <message>
-        <location filename="../about.cpp" line="42"/>
-        <source>Cancel</source>
-        <translation type="unfinished">Annuller</translation>
-    </message>
-    <message>
-        <location filename="../about.cpp" line="64"/>
-        <source>&amp;Close</source>
-        <translation type="unfinished">&amp;Luk</translation>
-    </message>
-</context>
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="da">
 <context>
     <name>mxselectsound</name>
     <message>
+        <location filename="mxselectsound.ui" line="14"/>
+        <location filename="mxselectsound.cpp" line="46"/>
+        <location filename="mxselectsound.cpp" line="82"/>
+        <location filename="mxselectsound.cpp" line="140"/>
+        <location filename="mxselectsound.cpp" line="152"/>
+        <location filename="mxselectsound.cpp" line="186"/>
+        <location filename="mxselectsound.cpp" line="195"/>
         <source>MX Select Sound</source>
-        <translation type="vanished">MX Vælg lyd</translation>
+        <translation>MX Vælg lyd</translation>
     </message>
     <message>
+        <location filename="mxselectsound.ui" line="28"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Your current default sound card is:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Dit nuværende standardlydkort er:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Dit nuværende standardlydkort er:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
+        <location filename="mxselectsound.ui" line="64"/>
         <source>Display help </source>
-        <translation type="vanished">Vis hjælp</translation>
+        <translation>Vis hjælp</translation>
     </message>
     <message>
+        <location filename="mxselectsound.ui" line="67"/>
         <source>Help</source>
-        <translation type="vanished">Hjælp</translation>
+        <translation>Hjælp</translation>
     </message>
     <message>
+        <location filename="mxselectsound.ui" line="75"/>
         <source>Alt+H</source>
-        <translation type="vanished">Alt+H</translation>
+        <translation>Alt+H</translation>
     </message>
     <message>
+        <location filename="mxselectsound.ui" line="104"/>
         <source>About this application</source>
-        <translation type="vanished">Om programmet</translation>
+        <translation>Om programmet</translation>
     </message>
     <message>
+        <location filename="mxselectsound.ui" line="107"/>
         <source>About...</source>
-        <translation type="vanished">Om...</translation>
+        <translation>Om...</translation>
     </message>
     <message>
+        <location filename="mxselectsound.ui" line="115"/>
         <source>Alt+B</source>
-        <translation type="vanished">Alt+B</translation>
+        <translation>Alt+B</translation>
     </message>
     <message>
+        <location filename="mxselectsound.ui" line="147"/>
         <source>Quit application</source>
-        <translation type="vanished">Afslut programmet</translation>
+        <translation>Afslut programmet</translation>
     </message>
     <message>
+        <location filename="mxselectsound.ui" line="150"/>
         <source>Close</source>
-        <translation type="vanished">Luk</translation>
+        <translation>Luk</translation>
     </message>
     <message>
+        <location filename="mxselectsound.ui" line="158"/>
         <source>Alt+N</source>
-        <translation type="vanished">Alt+N</translation>
+        <translation>Alt+N</translation>
     </message>
     <message>
+        <location filename="mxselectsound.ui" line="199"/>
         <source>Apply</source>
-        <translation type="vanished">Anvend</translation>
+        <translation>Anvend</translation>
     </message>
     <message>
+        <location filename="mxselectsound.ui" line="222"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Select another sound card if necessary:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Vælg et andet lydkort hvis det er nødvendigt:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Vælg et andet lydkort hvis det er nødvendigt:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
+        <location filename="mxselectsound.ui" line="248"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If your computer has more than one sound card, you can use this application to select the one to be default. &lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Hvis din computer har mere end ét lydkort, så kan du bruge programmet til at vælge det der skal være standard. &lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Hvis din computer har mere end ét lydkort, så kan du bruge programmet til at vælge det der skal være standard. &lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
+        <location filename="mxselectsound.ui" line="294"/>
         <source>Test current sound card</source>
-        <translation type="vanished">Test nuværende lydkort</translation>
+        <translation>Test nuværende lydkort</translation>
     </message>
     <message>
+        <location filename="mxselectsound.cpp" line="83"/>
         <source>No sound cards/devices were found.</source>
-        <translation type="vanished">Fandt ingen lydkort/-enheder.</translation>
+        <translation>Fandt ingen lydkort/-enheder.</translation>
     </message>
     <message>
+        <location filename="mxselectsound.cpp" line="95"/>
+        <location filename="mxselectsound.cpp" line="109"/>
         <source>none</source>
-        <translation type="vanished">Intet</translation>
+        <translation>Intet</translation>
     </message>
     <message>
+        <location filename="mxselectsound.cpp" line="139"/>
         <source>About MX Select Sound</source>
-        <translation type="vanished">Om MX Vælg lyd</translation>
+        <translation>Om MX Vælg lyd</translation>
     </message>
     <message>
+        <location filename="mxselectsound.cpp" line="140"/>
         <source>Version: </source>
-        <translation type="vanished">Version: </translation>
+        <translation>Version: </translation>
     </message>
     <message>
+        <location filename="mxselectsound.cpp" line="141"/>
         <source>Program for selecting the default sound card in MX Linux</source>
-        <translation type="vanished">Program til at vælge standardlydkortet i MX Linux</translation>
+        <translation>Program til at vælge standardlydkortet i MX Linux</translation>
     </message>
     <message>
+        <location filename="mxselectsound.cpp" line="143"/>
         <source>Copyright (c) MX Linux</source>
-        <translation type="vanished">Ophavsret (c) MX Linux</translation>
+        <translation>Ophavsret (c) MX Linux</translation>
     </message>
     <message>
+        <location filename="mxselectsound.cpp" line="144"/>
+        <location filename="mxselectsound.cpp" line="152"/>
         <source>License</source>
-        <translation type="vanished">Licens</translation>
+        <translation>Licens</translation>
     </message>
     <message>
+        <location filename="mxselectsound.cpp" line="145"/>
         <source>Changelog</source>
-        <translation type="vanished">Ændringslog</translation>
+        <translation>Ændringslog</translation>
     </message>
     <message>
+        <location filename="mxselectsound.cpp" line="146"/>
         <source>Cancel</source>
-        <translation type="vanished">Annuller</translation>
+        <translation>Annuller</translation>
     </message>
     <message>
+        <location filename="mxselectsound.cpp" line="161"/>
         <source>&amp;Close</source>
-        <translation type="vanished">&amp;Luk</translation>
+        <translation>&amp;Luk</translation>
     </message>
     <message>
+        <location filename="mxselectsound.cpp" line="196"/>
         <source>Could not play test sound.</source>
-        <translation type="vanished">Kunne ikke afspille testlyd.</translation>
+        <translation>Kunne ikke afspille testlyd.</translation>
     </message>
 </context>
 </TS>

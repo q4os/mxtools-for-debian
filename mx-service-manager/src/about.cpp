@@ -22,52 +22,73 @@
 #define QT_USE_QSTRINGBUILDER
 #include "about.h"
 
-#include <QApplication>
+#include <QCoreApplication>
+#include <QDialog>
 #include <QFileInfo>
 #include <QMessageBox>
 #include <QProcess>
 #include <QPushButton>
-#include <QStandardPaths>
+#include <QTextBrowser>
 #include <QTextEdit>
+#include <QTimer>
+#include <QUrl>
 #include <QVBoxLayout>
 
-#include "common.h"
-#include <unistd.h>
-
-// Display doc as nomal user when run as root
-void displayDoc(const QString &url, const QString &title)
+void displayDoc(QWidget *parent, const QString &path, const QString &title, bool largeWindow)
 {
-    bool started_as_root = false;
-    if (qEnvironmentVariable("HOME") == QLatin1String("root")) {
-        started_as_root = true;
-        qputenv("HOME", starting_home.toUtf8()); // Use original home for theming purposes
-    }
-    // Prefer mx-viewer otherwise use xdg-open (use runuser to run that as logname user)
-    QString executablePath = QStandardPaths::findExecutable("mx-viewer");
-    if (!executablePath.isEmpty()) {
-        QProcess::startDetached("mx-viewer", {url, title});
+    auto *dialog = new QDialog(parent);
+    auto *browser = new QTextBrowser(dialog);
+    auto *btnClose = new QPushButton(QObject::tr("&Close"), dialog);
+    auto *layout = new QVBoxLayout(dialog);
+    const QFileInfo fileInfo(path);
+    const QUrl sourceUrl = QUrl::fromLocalFile(path);
+    const bool nonModal = largeWindow;
+
+    dialog->setWindowTitle(title);
+    if (largeWindow) {
+        dialog->setWindowFlags(Qt::Window);
+        dialog->resize(1000, 800);
     } else {
-        if (getuid() != 0) {
-            QProcess::startDetached("xdg-open", {url});
-        } else {
-            QProcess proc;
-            proc.start("logname", {}, QIODevice::ReadOnly);
-            proc.waitForFinished();
-            QString user = QString::fromUtf8(proc.readAllStandardOutput()).trimmed();
-            QProcess::startDetached("runuser", {"-u", user, "--", "xdg-open", url});
-        }
+        dialog->resize(700, 600);
     }
-    if (started_as_root) {
-        qputenv("HOME", "/root");
+
+    browser->setOpenExternalLinks(true);
+    browser->setSearchPaths({fileInfo.absolutePath()});
+
+    btnClose->setIcon(QIcon::fromTheme("window-close"));
+    QObject::connect(btnClose, &QPushButton::clicked, dialog, &QDialog::close);
+
+    layout->addWidget(browser);
+    layout->addWidget(btnClose);
+
+    auto loadDocument = [browser, path, sourceUrl]() {
+        if (QFileInfo::exists(path)) {
+            browser->setSource(sourceUrl);
+        } else {
+            browser->setText(QObject::tr("Could not load %1").arg(path));
+        }
+    };
+
+    if (nonModal) {
+        dialog->setAttribute(Qt::WA_DeleteOnClose);
+        dialog->show();
+        QTimer::singleShot(0, dialog, loadDocument);
+    } else {
+        QTimer::singleShot(0, dialog, loadDocument);
+        dialog->exec();
+        dialog->deleteLater();
     }
 }
 
-void displayAboutMsgBox(const QString &title, const QString &message, const QString &licence_url,
-                        const QString &license_title)
+void displayAboutMsgBox(QWidget *parent, const QString &title, const QString &message, const QString &licenceSource,
+                        const QString &licenseTitle)
 {
     const auto width = 600;
     const auto height = 500;
-    QMessageBox msgBox(QMessageBox::NoIcon, title, message);
+    QMessageBox msgBox(parent);
+    msgBox.setIcon(QMessageBox::NoIcon);
+    msgBox.setWindowTitle(title);
+    msgBox.setText(message);
     auto *btnLicense = msgBox.addButton(QObject::tr("License"), QMessageBox::HelpRole);
     auto *btnChangelog = msgBox.addButton(QObject::tr("Changelog"), QMessageBox::HelpRole);
     auto *btnCancel = msgBox.addButton(QObject::tr("Cancel"), QMessageBox::NoRole);
@@ -76,13 +97,13 @@ void displayAboutMsgBox(const QString &title, const QString &message, const QStr
     msgBox.exec();
 
     if (msgBox.clickedButton() == btnLicense) {
-        displayDoc(licence_url, license_title);
+        displayDoc(parent, licenceSource, licenseTitle);
     } else if (msgBox.clickedButton() == btnChangelog) {
-        QDialog changelog;
-        changelog.setWindowTitle(QObject::tr("Changelog"));
-        changelog.resize(width, height);
+        auto *changelog = new QDialog(parent);
+        changelog->setWindowTitle(QObject::tr("Changelog"));
+        changelog->resize(width, height);
 
-        auto *text = new QTextEdit(&changelog);
+        auto *text = new QTextEdit(changelog);
         text->setReadOnly(true);
         QProcess proc;
         proc.start(
@@ -92,14 +113,15 @@ void displayAboutMsgBox(const QString &title, const QString &message, const QStr
         proc.waitForFinished();
         text->setText(proc.readAllStandardOutput());
 
-        auto *btnClose = new QPushButton(QObject::tr("&Close"), &changelog);
+        auto *btnClose = new QPushButton(QObject::tr("&Close"), changelog);
         btnClose->setIcon(QIcon::fromTheme("window-close"));
-        QObject::connect(btnClose, &QPushButton::clicked, &changelog, &QDialog::close);
+        QObject::connect(btnClose, &QPushButton::clicked, changelog, &QDialog::close);
 
-        auto *layout = new QVBoxLayout(&changelog);
+        auto *layout = new QVBoxLayout(changelog);
         layout->addWidget(text);
         layout->addWidget(btnClose);
-        changelog.setLayout(layout);
-        changelog.exec();
+        changelog->setLayout(layout);
+        changelog->exec();
+        changelog->deleteLater();
     }
 }

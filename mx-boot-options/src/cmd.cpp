@@ -5,6 +5,7 @@
 #include <QEventLoop>
 #include <QFile>
 #include <QMessageBox>
+#include <QStringList>
 #include <QTimer>
 
 #include "mainwindow.h"
@@ -48,21 +49,101 @@ void Cmd::handleStandardError()
     emit errorAvailable(error);
 }
 
-QString Cmd::getOut(const QString &cmd, QuietMode quiet, Elevation elevation)
+QStringList Cmd::helperRootArgs(const QString &rootPath)
+{
+    if (rootPath.isEmpty()) {
+        return {};
+    }
+    return {"--root", rootPath};
+}
+
+QStringList Cmd::helperExecArgs(const QString &cmd, const QStringList &args, const QString &rootPath) const
+{
+    QStringList helperArgs {"exec"};
+    helperArgs += helperRootArgs(rootPath);
+    helperArgs << cmd;
+    helperArgs += args;
+    return helperArgs;
+}
+
+QString Cmd::getOut(const QString &cmd, QuietMode quiet)
 {
     QString output;
-    run(cmd, &output, nullptr, quiet, elevation);
+    run(cmd, &output, nullptr, quiet);
     return output;
 }
 
-QString Cmd::getOutAsRoot(const QString &cmd, QuietMode quiet)
+QString Cmd::getOutAsRoot(const QString &cmd, const QStringList &args, QuietMode quiet)
 {
-    return getOut(cmd, quiet, Elevation::Yes);
+    QString output;
+    procAsRoot(cmd, args, &output, nullptr, quiet);
+    return output;
+}
+
+QString Cmd::getOutAsRootInTarget(const QString &rootPath, const QString &cmd, const QStringList &args, QuietMode quiet)
+{
+    QString output;
+    procAsRootInTarget(rootPath, cmd, args, &output, nullptr, quiet);
+    return output;
+}
+
+QString Cmd::readFileAsRoot(const QString &path, QuietMode quiet, const QString &rootPath)
+{
+    QString output;
+    QStringList helperArgs {"read-file"};
+    helperArgs += helperRootArgs(rootPath);
+    helperArgs << path;
+    helperProc(helperArgs, &output, nullptr, quiet);
+    return output;
+}
+
+bool Cmd::isPackageInstalledAsRoot(const QString &manager, const QString &package, const QString &rootPath, QuietMode quiet)
+{
+    QStringList helperArgs {"package-installed"};
+    helperArgs += helperRootArgs(rootPath);
+    helperArgs << manager << package;
+    return helperProc(helperArgs, nullptr, nullptr, quiet);
+}
+
+bool Cmd::appendToFileAsRootIfMissing(const QString &path, const QString &needle, const QString &content, QuietMode quiet,
+                                      const QString &rootPath)
+{
+    QStringList helperArgs {"append-if-missing"};
+    helperArgs += helperRootArgs(rootPath);
+    helperArgs << path << needle << content;
+    return helperProc(helperArgs, nullptr, nullptr, quiet);
+}
+
+bool Cmd::previewPlymouthAsRoot(QuietMode quiet)
+{
+    return helperProc({"preview-plymouth"}, nullptr, nullptr, quiet);
+}
+
+bool Cmd::helperProc(const QStringList &helperArgs, QString *output, const QByteArray *input, QuietMode quiet)
+{
+    if (getuid() != 0 && elevationCommand.isEmpty()) {
+        qWarning() << "No elevation helper available";
+        return false;
+    }
+    const QString program = (getuid() == 0) ? helper : elevationCommand;
+    QStringList programArgs = helperArgs;
+    if (getuid() != 0) {
+        programArgs.prepend(helper);
+    }
+    const bool result = proc(program, programArgs, output, input, quiet, Elevation::No);
+    if (exitCode() == EXIT_CODE_PERMISSION_DENIED || exitCode() == EXIT_CODE_COMMAND_NOT_FOUND) {
+        handleElevationError();
+    }
+    return result;
 }
 
 bool Cmd::proc(const QString &cmd, const QStringList &args, QString *output, const QByteArray *input, QuietMode quiet,
                Elevation elevation)
 {
+    if (elevation == Elevation::Yes) {
+        return helperProc(helperExecArgs(cmd, args), output, input, quiet);
+    }
+
     outBuffer.clear();
 
     // Check if process is already running
@@ -81,13 +162,7 @@ bool Cmd::proc(const QString &cmd, const QStringList &args, QString *output, con
     QEventLoop loop;
     connect(this, &Cmd::done, &loop, &QEventLoop::quit);
 
-    // Start the process with appropriate elevation
-    if (elevation == Elevation::Yes && getuid() != 0) {
-        QStringList cmdAndArgs = QStringList() << helper << cmd << args;
-        start(elevationCommand, {cmdAndArgs});
-    } else {
-        start(cmd, args);
-    }
+    start(cmd, args);
 
     // Handle input if provided
     if (input && !input->isEmpty()) {
@@ -98,11 +173,6 @@ bool Cmd::proc(const QString &cmd, const QStringList &args, QString *output, con
 
     // Check for permission denied or command not found errors
     // These can occur when elevation fails (canceled dialog or incorrect password)
-    if (elevation == Elevation::Yes
-        && (exitCode() == EXIT_CODE_PERMISSION_DENIED || exitCode() == EXIT_CODE_COMMAND_NOT_FOUND)) {
-        handleElevationError();
-    }
-
     // Provide output if requested
     if (output) {
         *output = outBuffer.trimmed();
@@ -117,22 +187,15 @@ bool Cmd::procAsRoot(const QString &cmd, const QStringList &args, QString *outpu
     return proc(cmd, args, output, input, quiet, Elevation::Yes);
 }
 
-bool Cmd::run(const QString &cmd, QString *output, const QByteArray *input, QuietMode quiet, Elevation elevation)
+bool Cmd::procAsRootInTarget(const QString &rootPath, const QString &cmd, const QStringList &args, QString *output,
+                             const QByteArray *input, QuietMode quiet)
 {
-    if (elevation == Elevation::Yes && getuid() != 0) {
-        bool result = proc(elevationCommand, {helper, cmd}, output, input, quiet);
-        // Command-not-found is returned when password is entered incorrectly
-        if (exitCode() == EXIT_CODE_PERMISSION_DENIED || exitCode() == EXIT_CODE_COMMAND_NOT_FOUND) {
-            handleElevationError();
-        }
-        return result;
-    }
-    return proc("/bin/bash", {"-c", cmd}, output, input, quiet);
+    return helperProc(helperExecArgs(cmd, args, rootPath), output, input, quiet);
 }
 
-bool Cmd::runAsRoot(const QString &cmd, QString *output, const QByteArray *input, QuietMode quiet)
+bool Cmd::run(const QString &cmd, QString *output, const QByteArray *input, QuietMode quiet)
 {
-    return run(cmd, output, input, quiet, Elevation::Yes);
+    return proc("/bin/bash", {"-c", cmd}, output, input, quiet);
 }
 
 void Cmd::handleElevationError()

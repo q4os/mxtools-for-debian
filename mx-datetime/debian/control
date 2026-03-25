@@ -17,7 +17,6 @@ Package: mx-datetime
 Architecture: any
 Depends: chrony,
          util-linux-extra,
-         xdg-utils | mx-viewer,
          ${misc:Depends},
          ${shlibs:Depends}
 Description: Date and time configuration tool for MX Linux

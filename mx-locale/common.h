@@ -23,8 +23,6 @@
 
 #include <QString>
 
-inline const QString startingHome {qEnvironmentVariable("HOME")};
-
 // System paths
 namespace Paths
 {

@@ -7,12 +7,12 @@
         <location filename="mainwindow.cpp" line="255"/>
         <location filename="mainwindow.cpp" line="264"/>
         <source>MX Welcome</source>
-        <translation type="unfinished"/>
+        <translation>MX Welcome</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="80"/>
         <source>Quit application</source>
-        <translation type="unfinished"/>
+        <translation>აპლიკაციიდან გასვლა</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="83"/>
@@ -27,7 +27,7 @@
     <message>
         <location filename="mainwindow.ui" line="112"/>
         <source>About this application</source>
-        <translation type="unfinished"/>
+        <translation>ამ აპლიკაციის შესახებ</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="115"/>
@@ -47,12 +47,12 @@
     <message>
         <location filename="mainwindow.ui" line="484"/>
         <source>Install MX Linux</source>
-        <translation type="unfinished"/>
+        <translation>MX Linux-ის დაყენება</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="510"/>
         <source>Tweak (Panel, etc...)</source>
-        <translation type="unfinished"/>
+        <translation>მორგება (პანელი და სხვ...)</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="536"/>
@@ -67,7 +67,7 @@
     <message>
         <location filename="mainwindow.ui" line="600"/>
         <source>Users Manual</source>
-        <translation type="unfinished"/>
+        <translation>მომხმარებლის სახელმძღვანელო</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="626"/>
@@ -82,7 +82,7 @@
     <message>
         <location filename="mainwindow.ui" line="674"/>
         <source>Popular Apps</source>
-        <translation type="unfinished"/>
+        <translation>პოპულარული პროგრამები</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="700"/>
@@ -107,7 +107,7 @@
     <message>
         <location filename="mainwindow.ui" line="798"/>
         <source>SHORT SYSTEM REPORT:</source>
-        <translation type="unfinished"/>
+        <translation>სისტემის მოკლე ანგარიში:</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="805"/>
@@ -117,47 +117,47 @@
     <message>
         <location filename="mainwindow.ui" line="819"/>
         <source>Quick-System-Info Full Report</source>
-        <translation type="unfinished"/>
+        <translation>სწრაფი-სისტემის-ინფორმაციის სრული ანგარიში</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="829"/>
         <source>Terms of Use</source>
-        <translation type="unfinished"/>
+        <translation>გამოყენების პირობები</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="846"/>
         <source>The name “MX Linux” is covered by Linux Foundation Sublicense No. 20140605-0483. We develop software that is covered by a free license that can be examined in the Wiki list. We also include software developed by others that is under a free license.</source>
-        <translation type="unfinished"/>
+        <translation>სახელი &quot;MX Linux&quot; დაცულია Linux Foundation-ის ქველიცენზიით No. 20140605-0483. ჩვენ ვწერთ პროგრამას, რომელიც დაცულია თავისუფალი ლიცენზიით, რომლის შემოწმებას ვიკის სიიდან შეგიძლიათ. ჩვენ ასევე გვაქვს პროგრამები, რომლებიც დაწერილია სხვების მიერ, მაგრამ ასევე ვრცელდება თავისუფალი ლიცენზიით.</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="856"/>
         <source>MX VERSION</source>
-        <translation type="unfinished"/>
+        <translation>MX-ის ვერსია</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="863"/>
         <source>DEBIAN VERSION:</source>
-        <translation type="unfinished"/>
+        <translation>DEBIAN-ის ვერსია:</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="870"/>
         <source>SUPPORTED UNTIL:</source>
-        <translation type="unfinished"/>
+        <translation>მხარდაჭერის დრო:</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="924"/>
         <source>Show this dialog at start up</source>
-        <translation type="unfinished"/>
+        <translation>ამ დიალოგის ჩვენება გაშვებისას</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="78"/>
         <source>User demo, password:</source>
-        <translation type="unfinished"/>
+        <translation>მომხმარებელი demo, პაროლი:</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="78"/>
         <source>Superuser root, password:</source>
-        <translation type="unfinished"/>
+        <translation>ზემომხმარებელი root, parole:</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="178"/>
@@ -168,22 +168,22 @@
     <message>
         <location filename="mainwindow.cpp" line="255"/>
         <source>About MX Welcome</source>
-        <translation type="unfinished"/>
+        <translation>MX Welcome-ის შესახებ</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="255"/>
         <source>Version: </source>
-        <translation>ვერსია:</translation>
+        <translation>ვერსია: </translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="255"/>
         <source>Program for displaying a welcome screen in MX Linux</source>
-        <translation type="unfinished"/>
+        <translation>პროგრამა მისალმების ეკრანის საჩვენებლად MX Linux-ში</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="255"/>
         <source>Copyright (c) MX Linux</source>
-        <translation type="unfinished"/>
+        <translation>(c) MX Linux საავტორო ფულებები დაცულია</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="256"/>
@@ -211,7 +211,7 @@
     <message>
         <location filename="main.cpp" line="71"/>
         <source>You must run this program as normal user.</source>
-        <translation type="unfinished"/>
+        <translation>ეს პროგრამა ნორმალური მომხმარებლით უნდა გაუშვათ.</translation>
     </message>
 </context>
 <context>
@@ -219,17 +219,17 @@
     <message>
         <location filename="main.cpp" line="44"/>
         <source>This tool displays a welcome screen with two tabs.</source>
-        <translation type="unfinished"/>
+        <translation>ეს პროგრამა აჩვენებს მისალმების ეკრანს ორი ჩანართით.</translation>
     </message>
     <message>
         <location filename="main.cpp" line="47"/>
         <source>Start with About tab selected. The About tab provides basic information about the current MX Linux version, the user&apos;s hardware, and access to a full system report.</source>
-        <translation type="unfinished"/>
+        <translation>გაშვება &apos;შესახებ&apos; ჩანართზე. ჩანართი &apos;შესახებ&apos; მოგაწვდით ძირითად ინფორმაციას მიმდინარე MX Linux-ის ვერსიის და მომხმარებლის აპარატურის შესახებ. ასევე წვდომას სრული სისტემის ანგარიშთან.</translation>
     </message>
     <message>
         <location filename="main.cpp" line="50"/>
         <source>Run a test mode.</source>
-        <translation type="unfinished"/>
+        <translation>შემოწმების რეჟიმის გაშვება.</translation>
     </message>
     <message>
         <location filename="main.cpp" line="71"/>

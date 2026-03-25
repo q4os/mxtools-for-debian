@@ -101,12 +101,12 @@
     <message>
         <location filename="../mainwindow.ui" line="468"/>
         <source>Unblocks all soft/hard blocked wireless devices</source>
-        <translation>Desbloqueja tots els dispositius sense fils </translation>
+        <translation>Desbloca tots els dispositius sense fil</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="471"/>
         <source>Unblock WiFi Devices</source>
-        <translation>Desbloqueja els dispositius WiFi </translation>
+        <translation>Desbloca els dispositius WiFi </translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="502"/>
@@ -474,13 +474,13 @@
         <location filename="../mainwindow.cpp" line="957"/>
         <source>Could not unlock devices.
 WiFi device(s) might already be unlocked.</source>
-        <translation>No es poden desbloquejar els dispositius.
-El(s) dispositiu(s) wifi potser ja estan desbloquejats. </translation>
+        <translation>No es poden desblocar els dispositius.
+Els dispositius de wifi potser ja estan desblocats. </translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="959"/>
         <source>WiFi devices unlocked.</source>
-        <translation>Dispositius wifi desbloquejats. </translation>
+        <translation>Dispositius de wifi desblocats. </translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="974"/>

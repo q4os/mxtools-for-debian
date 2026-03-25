@@ -45,7 +45,7 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow() override;
 
-    Output runCmd(const QString &cmd);
+    Output runCmd(const QString &program, const QStringList &args = {});
     void setup();
 
 private slots:

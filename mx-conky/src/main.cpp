@@ -22,6 +22,9 @@
  * along with mx-conky.  If not, see <http://www.gnu.org/licenses/>.
  **********************************************************************/
 
+#include "cmd.h"
+#include "mainwindow.h"
+
 #include <QApplication>
 #include <QDebug>
 #include <QDir>
@@ -31,8 +34,6 @@
 #include <QLocale>
 #include <QTranslator>
 
-#include "cmd.h"
-#include "mainwindow.h"
 #include <unistd.h>
 
 #ifndef VERSION

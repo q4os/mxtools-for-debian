@@ -5,12 +5,12 @@
         <location filename="../mainwindow.ui" line="14"/>
         <location filename="../mainwindow.cpp" line="478"/>
         <source>MX Tools</source>
-        <translation type="unfinished"/>
+        <translation>MX-ის ხელსაწყოები</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="53"/>
         <source>About this application</source>
-        <translation type="unfinished"/>
+        <translation>ამ აპლიკაციის შესახებ</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="56"/>
@@ -75,12 +75,12 @@
     <message>
         <location filename="../mainwindow.cpp" line="482"/>
         <source>Copyright (c) MX Linux</source>
-        <translation type="unfinished"/>
+        <translation>(c) MX Linux საავტორო ფულებები დაცულია</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="483"/>
         <source>%1 License</source>
-        <translation type="unfinished"/>
+        <translation>ლიცენზია %1</translation>
     </message>
 </context>
 <context>

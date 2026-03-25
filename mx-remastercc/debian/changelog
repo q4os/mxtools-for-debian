@@ -1,3 +1,10 @@
+mx-remastercc (26.03) mx; urgency=medium
+
+  * Display help and license internally
+  * Update translations
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 13 Mar 2026 23:52:57 -0400
+
 mx-remastercc (25.6.01) mx; urgency=medium
 
   * fix policy file so that /usr/local and /usr versions of persist scripts can access gui
@@ -13,7 +20,7 @@ mx-remastercc (25.6) mx; urgency=medium
 
 mx-remastercc (24.4.01) mx; urgency=medium
 
-  * Update to Qt6 
+  * Update to Qt6
 
  -- Adrian <adrian@mxlinux.org>  Thu, 24 Apr 2025 10:42:35 -0400
 
@@ -32,7 +39,7 @@ mx-remastercc (24.2) mx; urgency=medium
 
 mx-remastercc (23.7) mx; urgency=medium
 
-  * update translations 
+  * update translations
 
  -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 09 Dec 2023 14:58:25 -0500
 
@@ -56,7 +63,7 @@ mx-remastercc (23.1) mx; urgency=medium
 
 mx-remastercc (22.10.01) mx; urgency=medium
 
-  * fix source files 
+  * fix source files
 
  -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 28 Oct 2022 15:55:50 -0400
 
@@ -68,7 +75,7 @@ mx-remastercc (22.10) mx; urgency=medium
 
 mx-remastercc (22.7) mx; urgency=medium
 
-  * translation refresh 
+  * translation refresh
 
  -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 23 Jul 2022 11:33:03 -0400
 
@@ -146,13 +153,13 @@ mx-remastercc (18.6.2) mx; urgency=medium
 
 mx-remastercc (18.6.1) mx; urgency=medium
 
-  * new build 
+  * new build
 
  -- Adrian <adrian@mxlinux.org>  Tue, 12 Jun 2018 22:49:57 -0400
 
 mx-remastercc (18.6) mx; urgency=medium
 
-  * change remaster-live to live-remaster to fix localizations 
+  * change remaster-live to live-remaster to fix localizations
 
  -- Dolphin Oracle <dolphinoracle@gmail.com>  Tue, 12 Jun 2018 20:35:16 -0400
 

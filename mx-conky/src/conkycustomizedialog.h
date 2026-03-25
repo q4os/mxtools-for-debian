@@ -23,6 +23,8 @@
  **********************************************************************/
 #pragma once
 
+#include "cmd.h"
+
 #include <QButtonGroup>
 #include <QCheckBox>
 #include <QCloseEvent>
@@ -51,8 +53,6 @@
 #include <QToolButton>
 #include <QVBoxLayout>
 #include <QWidget>
-
-#include "cmd.h"
 
 class ConkyCustomizeDialog : public QDialog
 {

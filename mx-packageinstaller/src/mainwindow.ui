@@ -565,6 +565,13 @@
               </property>
              </widget>
             </item>
+            <item row="1" column="7" colspan="2">
+             <widget class="QCheckBox" name="checkRepoOnlyMX">
+              <property name="text">
+               <string>Only repo packages</string>
+              </property>
+             </widget>
+            </item>
             <item row="1" column="1">
              <widget class="QLabel" name="labelNumInstMX">
               <property name="text">
@@ -643,7 +650,7 @@
               </property>
              </spacer>
             </item>
-            <item row="1" column="7" colspan="2">
+            <item row="2" column="7" colspan="2">
              <widget class="QCheckBox" name="checkBoxInstallRecommendsMX">
               <property name="text">
                <string>Also Install &quot;Recommended&quot; Packages</string>
@@ -933,6 +940,13 @@
               </property>
              </widget>
             </item>
+            <item row="1" column="7" colspan="2">
+             <widget class="QCheckBox" name="checkRepoOnlyBP">
+              <property name="text">
+               <string>Only repo packages</string>
+              </property>
+             </widget>
+            </item>
             <item row="0" column="3">
              <widget class="QLabel" name="labelNumApps_3">
               <property name="text">
@@ -956,7 +970,7 @@
               </property>
              </spacer>
             </item>
-            <item row="1" column="7" colspan="2">
+            <item row="2" column="7" colspan="2">
              <widget class="QCheckBox" name="checkBoxInstallRecommendsBP">
               <property name="text">
                <string>Also Install &quot;Recommended&quot; Packages</string>

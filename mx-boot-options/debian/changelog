@@ -1,3 +1,12 @@
+mx-boot-options (26.03) mx; urgency=medium
+
+  * Replace the shell helper with a hardened binary helper and move
+    elevated operations to explicit argv-based execution.
+  * Show help and license inside the application and drop the
+    xdg-utils / mx-viewer dependency.
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 11 Mar 2026 14:09:35 -0400
+
 mx-boot-options (25.11.3) mx; urgency=medium
 
   * Detect systemd and use systemctl -b to display the boot log which is

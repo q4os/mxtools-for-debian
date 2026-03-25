@@ -12,7 +12,6 @@ Architecture: any
 Depends: libcanberra-gstreamer,
          libcanberra-gtk3-module,
          mx-sound-theme,
-         mx-viewer | xdg-utils,
          ${misc:Depends},
          ${shlibs:Depends}
 Recommends: libcanberra-pulse, mx-launcher-l10n

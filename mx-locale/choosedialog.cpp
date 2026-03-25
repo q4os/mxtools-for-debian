@@ -35,7 +35,13 @@ void ChooseDialog::setup()
 void ChooseDialog::buildLocaleList()
 {
     QFile libFile(QDir(Paths::mxLocaleLib).filePath("locale.lib"));
-    QString locales = Cmd().getOut(R"(locale --all-locales)");
+    Cmd cmd;
+    QString locales = cmd.getOut("locale", {"--all-locales"});
+    if (!cmd.succeeded()) {
+        QMessageBox::critical(this, tr("Error"), cmd.readAllOutput().isEmpty() ? tr("Could not list locales.")
+                                                                               : cmd.readAllOutput());
+        return;
+    }
     QStringList availableLocales = locales.split(QRegularExpression(R"((\r\n)|(\n\r)|\r|\n)"), Qt::SkipEmptyParts)
                                        .filter(QRegularExpression(R"(\.(utf8|UTF-8)$)"))
                                        .replaceInStrings(".utf8", ".UTF-8", Qt::CaseInsensitive);
@@ -50,9 +56,9 @@ void ChooseDialog::buildLocaleList()
     QTextStream in(&libFile);
     while (!in.atEnd()) {
         QString line = in.readLine().trimmed();
-        QStringList list = line.split('-', Qt::SkipEmptyParts);
-        if (list.size() == 2) {
-            localeLib.insert(list.at(0).trimmed(), list.at(1).trimmed());
+        const qsizetype separatorIndex = line.indexOf(" - ");
+        if (separatorIndex > 0) {
+            localeLib.insert(line.first(separatorIndex).trimmed(), line.sliced(separatorIndex + 3).trimmed());
         }
     }
     libFile.close();

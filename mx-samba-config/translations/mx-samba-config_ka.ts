@@ -39,17 +39,17 @@
     <message>
         <location filename="../src/editshare.ui" line="77"/>
         <source>&amp;Guest OK</source>
-        <translation type="unfinished"/>
+        <translation>სტუმრის &amp;შეშვება</translation>
     </message>
     <message>
         <location filename="../src/editshare.ui" line="111"/>
         <source>Access rights for valid users</source>
-        <translation type="unfinished"/>
+        <translation>წვდომის უფლებები სწორი მომხმარებლებისთვის</translation>
     </message>
     <message>
         <location filename="../src/editshare.cpp" line="55"/>
         <source>Select directory to share</source>
-        <translation type="unfinished"/>
+        <translation>აირჩიეთ გასაზიარებელი საქაღალდე</translation>
     </message>
     <message>
         <location filename="../src/editshare.cpp" line="81"/>
@@ -59,7 +59,7 @@
     <message>
         <location filename="../src/editshare.cpp" line="81"/>
         <source>Select access for at least one user before continuing.</source>
-        <translation type="unfinished"/>
+        <translation>გაგრძელებამდე აირჩიეთ წვდომები ერთი მომხმარებლისთვის მაინც.</translation>
     </message>
 </context>
 <context>
@@ -67,17 +67,17 @@
     <message>
         <location filename="../src/mainwindow.ui" line="24"/>
         <source>&amp;Shares</source>
-        <translation>&amp;ზიარები</translation>
+        <translation>&amp;გაზიარებები</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="32"/>
         <source>Shares</source>
-        <translation>ზიარები</translation>
+        <translation>გაზიარებები</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="41"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;No samba user shares found&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"/>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;samba-ის მომხმარებლის გაზიარებები აღმოჩენილი არაა&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="50"/>
@@ -119,7 +119,7 @@
     <message>
         <location filename="../src/mainwindow.ui" line="100"/>
         <source>Guest OK</source>
-        <translation type="unfinished"/>
+        <translation>სტუმრის შეშვება</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="142"/>
@@ -129,7 +129,7 @@
     <message>
         <location filename="../src/mainwindow.ui" line="150"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;No samba users found&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"/>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;samba-ის მომხმარებლები აღმოჩენილი არაა&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="171"/>
@@ -146,30 +146,30 @@
         <location filename="../src/mainwindow.cpp" line="320"/>
         <location filename="../src/mainwindow.cpp" line="361"/>
         <source>E&amp;nable Automatic Samba Startup</source>
-        <translation type="unfinished"/>
+        <translation>Samba-ის ავტომატური გაშვე&amp;ბა</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="226"/>
         <location filename="../src/mainwindow.cpp" line="316"/>
         <location filename="../src/mainwindow.cpp" line="371"/>
         <source>Star&amp;t Samba</source>
-        <translation type="unfinished"/>
+        <translation>Samba-ის გაშ&amp;ვება</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="254"/>
         <source>Samba autostart service is disabled</source>
-        <translation type="unfinished"/>
+        <translation>Samba-ის ავტოგაშვების სერვისი გამორთულია</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="285"/>
         <location filename="../src/mainwindow.cpp" line="317"/>
         <source>Samba is running</source>
-        <translation type="unfinished"/>
+        <translation>Samba გაშვებულია</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="324"/>
         <source>About this application</source>
-        <translation type="unfinished"/>
+        <translation>ამ აპლიკაციის შესახებ</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="327"/>
@@ -184,7 +184,7 @@
     <message>
         <location filename="../src/mainwindow.ui" line="365"/>
         <source>Display help </source>
-        <translation type="unfinished"/>
+        <translation>დახმარების ჩვენება </translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="368"/>
@@ -199,7 +199,7 @@
     <message>
         <location filename="../src/mainwindow.ui" line="409"/>
         <source>Quit application</source>
-        <translation type="unfinished"/>
+        <translation>აპლიკაციიდან გასვლა</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="412"/>
@@ -233,13 +233,14 @@
         <location filename="../src/mainwindow.cpp" line="567"/>
         <location filename="../src/mainwindow.cpp" line="582"/>
         <location filename="../src/mainwindow.cpp" line="597"/>
+        <location filename="../src/mainwindow.cpp" line="603"/>
         <source>Error</source>
         <translation>შეცდომა</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="104"/>
         <source>Error, could not add share. Empty share name</source>
-        <translation type="unfinished"/>
+        <translation>გაზიარების დამატება შეუძლებელია. მისი სახელი ცარიელია</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="101"/>
@@ -249,24 +250,26 @@
     <message>
         <location filename="../src/mainwindow.cpp" line="109"/>
         <source>Path: %1 does not exist.</source>
-        <translation type="unfinished"/>
+        <translation>ბილიკი: %1 არ არსებობს.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="137"/>
         <source>Please set access for at least one user.</source>
-        <translation type="unfinished"/>
+        <translation>დააყენეთ წვდომა, სულ ცოტა, ერთი მომხმარებლისთვის.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="152"/>
         <source>Could not add share. Error message:
 
 %1</source>
-        <translation type="unfinished"/>
+        <translation>გაზიარების დამატება შეუძლებელია. შეცდომის შეტყობინება:
+
+%1</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="162"/>
         <source>Error listing users</source>
-        <translation type="unfinished"/>
+        <translation>მომხმარებლის ჩამოთვლის შეცდომა</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="201"/>
@@ -276,17 +279,17 @@
     <message>
         <location filename="../src/mainwindow.cpp" line="202"/>
         <source>&amp;Read Only</source>
-        <translation type="unfinished"/>
+        <translation>&amp;მხოლოდ-კითხვადი</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="203"/>
         <source>&amp;Full Access</source>
-        <translation type="unfinished"/>
+        <translation>სრული &amp;წვდომა</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="218"/>
         <source>Error listing shares</source>
-        <translation type="unfinished"/>
+        <translation>გაზიარებულების ჩამოთვლის შეცდომა</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="301"/>
@@ -296,47 +299,47 @@
     <message>
         <location filename="../src/mainwindow.cpp" line="311"/>
         <source>Samba is not installed</source>
-        <translation type="unfinished"/>
+        <translation>Samba დაყენებული არაა</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="316"/>
         <source>Sto&amp;p Samba</source>
-        <translation type="unfinished"/>
+        <translation>Samba-ის &amp;გაჩერება</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="317"/>
         <source>Samba is not running</source>
-        <translation type="unfinished"/>
+        <translation>Samba გაშვებული არაა</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="318"/>
         <source>Samba autostart is enabled</source>
-        <translation type="unfinished"/>
+        <translation>Samba-ის ავტოგაშვება ჩართულია</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="318"/>
         <source>Samba autostart is disabled</source>
-        <translation type="unfinished"/>
+        <translation>Samba-ის ავტოგაშვება გამორთულია</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="319"/>
         <source>&amp;Disable Automatic Samba Startup</source>
-        <translation type="unfinished"/>
+        <translation>Samba-ის ავტომატური გაშვების გამო&amp;რთვა</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="386"/>
         <source>About %1</source>
-        <translation type="unfinished"/>
+        <translation>%1-ის შესახებ</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="386"/>
         <source>MX Samba Config</source>
-        <translation type="unfinished"/>
+        <translation>MX Samba Config</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="387"/>
         <source>Version: </source>
-        <translation>ვერსია:</translation>
+        <translation>ვერსია: </translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="389"/>
@@ -346,27 +349,27 @@
     <message>
         <location filename="../src/mainwindow.cpp" line="391"/>
         <source>Copyright (c) MX Linux</source>
-        <translation type="unfinished"/>
+        <translation>(c) MX Linux საავტორო ფულებები დაცულია</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="392"/>
         <source>%1 License</source>
-        <translation type="unfinished"/>
+        <translation>ლიცენზია %1</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="399"/>
         <source>%1 Help</source>
-        <translation type="unfinished"/>
+        <translation>%1-ის დახმარება</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="410"/>
         <source>Cannot delete user: </source>
-        <translation type="unfinished"/>
+        <translation>მომხმარებლის წაშლა შეუძლებელია: </translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="419"/>
         <source>Enter the username and password:</source>
-        <translation type="unfinished"/>
+        <translation>შეიყვანეთ მომხმარებლის სახელი და პაროლი:</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="426"/>
@@ -383,12 +386,12 @@
         <location filename="../src/mainwindow.cpp" line="428"/>
         <location filename="../src/mainwindow.cpp" line="484"/>
         <source>Confirm password:</source>
-        <translation type="unfinished"/>
+        <translation>პაროლის დადასტურება:</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="442"/>
         <source>Empty username, please enter a name.</source>
-        <translation type="unfinished"/>
+        <translation>მომხმარებლის სახელი ცარიელია. შეიყვანეთ სახელი.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="447"/>
@@ -399,12 +402,12 @@
         <location filename="../src/mainwindow.cpp" line="452"/>
         <location filename="../src/mainwindow.cpp" line="502"/>
         <source>Passwords don&apos;t match, please enter again.</source>
-        <translation type="unfinished"/>
+        <translation>პაროლები არ ემთხვევა. შეიყვანეთ პაროლი კიდევ ერთხელ.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="459"/>
         <source>Could not add user.</source>
-        <translation type="unfinished"/>
+        <translation>მომხმარებლის დამატების შეცდომა.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="470"/>
@@ -417,38 +420,38 @@
     <message>
         <location filename="../src/mainwindow.cpp" line="470"/>
         <source>No user selected.</source>
-        <translation type="unfinished"/>
+        <translation>მომხმარებელი მონიშნული არაა.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="477"/>
         <source>Change the password for &apos;%1&apos;</source>
-        <translation type="unfinished"/>
+        <translation>პაროლის შეცვლა &apos;%1&apos;-სთვის</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="497"/>
         <source>Password fields cannot be empty.</source>
-        <translation type="unfinished"/>
+        <translation>პაროლი ცარიელი ვერ იქნება.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="510"/>
         <source>Could not change password.</source>
-        <translation type="unfinished"/>
+        <translation>პაროლის შეცვლა შეუძლებელია.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="520"/>
         <location filename="../src/mainwindow.cpp" line="543"/>
         <source>No share selected.</source>
-        <translation type="unfinished"/>
+        <translation>გაზიარებული არჩეული არაა.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="526"/>
         <source>Selected share is empty.</source>
-        <translation type="unfinished"/>
+        <translation>არჩეული გაზიარებული ცარიელია.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="531"/>
         <source>Cannot delete share: </source>
-        <translation type="unfinished"/>
+        <translation>გაზიარებულის წაშლა შეუძლებელია: </translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="536"/>
@@ -458,7 +461,7 @@
     <message>
         <location filename="../src/mainwindow.cpp" line="536"/>
         <source>Share deleted successfully: </source>
-        <translation type="unfinished"/>
+        <translation>გაზიარებული წარმატებით წაიშალა: </translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="549"/>
@@ -470,6 +473,11 @@
         <location filename="../src/mainwindow.cpp" line="567"/>
         <location filename="../src/mainwindow.cpp" line="582"/>
         <source>Error processing permissions: </source>
+        <translation>წვდომების დამუშავების შეცდომა: </translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="603"/>
+        <source>Please add a Samba user before creating a share.</source>
         <translation type="unfinished"/>
     </message>
 </context>
@@ -499,7 +507,7 @@
     <message>
         <location filename="../src/main.cpp" line="76"/>
         <source>You must run this program as normal user.</source>
-        <translation type="unfinished"/>
+        <translation>ეს პროგრამა ნორმალური მომხმარებლით უნდა გაუშვათ.</translation>
     </message>
 </context>
 </TS>

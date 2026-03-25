@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(./build.sh)",
+      "Bash(cmake:*)",
+      "Bash(pkg-config:*)",
+      "Bash(echo $CMAKE_PREFIX_PATH)",
+      "Read(//usr/**)",
+      "Bash(./build.sh:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

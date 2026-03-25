@@ -1,3 +1,14 @@
+mx-system-sounds (26.03) mx; urgency=medium
+
+  * Show Help and License in an internal Qt window
+  * Remove mx-viewer and xdg-open runtime dependencies
+  * Restore and bundle the local French help page
+  * Use safer process and file handling in the sound settings flow
+  * Fix local theme lookup, stale custom login config cleanup,
+    and duplicate theme entries
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 19 Mar 2026 16:00:00 -0400
+
 mx-system-sounds (26.1mx25) mx; urgency=medium
 
   [timkb4cq]

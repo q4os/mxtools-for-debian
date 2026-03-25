@@ -3,6 +3,9 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
+# Translators:
+# Temuri Doghonadze <temuri.doghonadze@gmail.com>, 2026
+# 
 #, fuzzy
 msgid ""
 msgstr ""
@@ -10,6 +13,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-12-08 22:18-0500\n"
 "PO-Revision-Date: 2022-12-09 03:18+0000\n"
+"Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>, 2026\n"
 "Language-Team: Georgian (https://app.transifex.com/anticapitalista/teams/10162/ka/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -20,9 +24,9 @@ msgstr ""
 #. The desktop entry name will be displayed within the menu.
 #: desktop-in/mx-conky.desktop.in:5
 msgid "MX Conky"
-msgstr ""
+msgstr "MX Conky"
 
 #. # The desktop entry comment will be shown within the menu.
 #: desktop-in/mx-conky.desktop.in:7
 msgid "Change details of desktop system monitor"
-msgstr ""
+msgstr "შეცვალეთ სამუშაო მაგიდის მონიტორინგის დეტალები"

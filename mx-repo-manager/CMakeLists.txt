@@ -115,12 +115,20 @@ add_executable(mx-repo-manager
     ${RESOURCE_FILES}
 )
 
+add_executable(helper
+    src/helper.cpp
+)
+
 # Link Qt6 libraries
 target_link_libraries(mx-repo-manager
     Qt6::Core
     Qt6::Gui
     Qt6::Widgets
     Qt6::Network
+)
+
+target_link_libraries(helper
+    Qt6::Core
 )
 
 # Set compiler flags
@@ -133,11 +141,22 @@ target_compile_options(mx-repo-manager PRIVATE
     -Werror
 )
 
+target_compile_options(helper PRIVATE
+    -Wpedantic
+    -pedantic
+    -Werror=return-type
+    -Werror=switch
+    -Werror=uninitialized
+    -Werror
+)
+
 # Add compiler-specific flags
 if(CMAKE_CXX_COMPILER_ID STREQUAL "Clang" OR USE_CLANG)
     target_compile_options(mx-repo-manager PRIVATE -Werror=return-stack-address)
+    target_compile_options(helper PRIVATE -Werror=return-stack-address)
 else()
     target_compile_options(mx-repo-manager PRIVATE -Werror=return-local-addr)
+    target_compile_options(helper PRIVATE -Werror=return-local-addr)
 endif()
 
 # Set compile definitions
@@ -147,18 +166,29 @@ target_compile_definitions(mx-repo-manager PRIVATE
     VERSION="${PROJECT_VERSION}"
 )
 
+target_compile_definitions(helper PRIVATE
+    QT_DEPRECATED_WARNINGS
+    QT_DISABLE_DEPRECATED_BEFORE=0x060000
+)
+
 # Release-specific optimizations
 if(CMAKE_BUILD_TYPE STREQUAL "Release")
     target_compile_definitions(mx-repo-manager PRIVATE NDEBUG)
+    target_compile_definitions(helper PRIVATE NDEBUG)
     target_compile_options(mx-repo-manager PRIVATE -O3)
+    target_compile_options(helper PRIVATE -O3)
 
     # Add LTO - different flags for different compilers
     if(CMAKE_CXX_COMPILER_ID STREQUAL "Clang" OR USE_CLANG)
         target_compile_options(mx-repo-manager PRIVATE -flto=thin)
         target_link_options(mx-repo-manager PRIVATE -flto=thin)
+        target_compile_options(helper PRIVATE -flto=thin)
+        target_link_options(helper PRIVATE -flto=thin)
     else()
         target_compile_options(mx-repo-manager PRIVATE -flto=auto)
         target_link_options(mx-repo-manager PRIVATE -flto=auto)
+        target_compile_options(helper PRIVATE -flto=auto)
+        target_link_options(helper PRIVATE -flto=auto)
     endif()
 endif()
 
@@ -179,4 +209,8 @@ set_target_properties(mx-repo-manager PROPERTIES
 # Other files are handled by debian/install
 install(TARGETS mx-repo-manager
     RUNTIME DESTINATION bin
+)
+
+install(TARGETS helper
+    RUNTIME DESTINATION lib/mx-repo-manager
 )

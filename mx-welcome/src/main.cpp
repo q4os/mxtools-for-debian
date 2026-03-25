@@ -29,6 +29,7 @@
 #include <QIcon>
 #include <QLibraryInfo>
 #include <QLocale>
+#include <QMessageBox>
 #include <QTranslator>
 
 #include "mainwindow.h"

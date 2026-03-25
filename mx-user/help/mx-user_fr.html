@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>AIDE : Gestionnaire des utilisateurs MX</title>
+</head>
+<body>
+<h1>AIDE : Gestionnaire des utilisateurs MX</h1>
+<div style="text-align: left;">
+	<img src="usermanager.png" alt="Gestionnaire des utilisateurs" style="display: block; margin: 0;" />
+</div>
+
+<h2>Generalites</h2>
+
+<p>Cette application comporte 6 onglets.</p>
+
+<ul>
+    <li>Administration : se passe de commentaire.</li>
+    <li>Options : restaure les configurations par defaut de l'utilisateur choisi.</li>
+    <li>Copier/Synchroniser : copie ou cree un lien symbolique du dossier d'un utilisateur vers un autre. Si vous utilisez un navigateur autre qu'un navigateur Mozilla, vous devrez copier manuellement le dossier cache dans votre Home (par exemple, .opera).</li>
+    <li>Liberer de l'espace : propose plusieurs actions simples pour verifier et augmenter l'espace disque disponible.</li>
+    <li>Ajouter/Retirer des groupes : se passe de commentaire.</li>
+    <li>Appartenance a un groupe : permet a l'administrateur de modifier l'acces d'un utilisateur donne aux services et aux applications.</li>
+</ul>
+
+<h2>Notes</h2>
+
+<p>Onglet Options : Restaurer les valeurs par defaut : valeurs par defaut de Xfce<br />Lorsque l'utilisateur choisit de restaurer les parametres d'origine de Xfce dans MX Linux, le contenu de deux <a href="http://www.linfo.org/etc_skel.html" target="_blank" rel="noreferrer noopener">"fichiers squelettes"</a> est copie dans le dossier personnel de l'utilisateur :</p>
+
+<ul>
+    <li><em>/etc/skel/.config/</em>, vers <em>~/.config</em></li>
+    <li><em>/etc/skel/.gtk-2.0/</em>, vers <em>~/.gtk-2.0/</em></li>
+</ul>
+
+<p>Aucun autre fichier n'est remplace. Si l'utilisateur change plus tard d'avis, les fichiers remplaces se trouvent dans le dossier cache <em>~/.restore</em> de son dossier personnel. Il suffit alors de recopier ces dossiers archives dans Home et d'accepter l'ecrasement.</p>
+
+<p>Licence : <a href="https://mxlinux.org/wiki/licenses/license-mx-user-manager">ici</a>.</p>
+
+<p>Historique du developpement : Warren Woodford (Mepis), Adrian</p>
+
+<p>v. 20170507 (v. fr. 20170602)</p>
+</body>
+</html>

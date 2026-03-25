@@ -44,6 +44,9 @@ A GUI application for managing boot options and UEFI settings in MX Linux.
 
 # Build Debian package
 ./build.sh --debian
+
+# Build Arch Linux package
+./build.sh --arch
 ```
 
 ### Manual Build
@@ -84,6 +87,13 @@ Or build a Debian package:
 ```bash
 ./build.sh --debian
 sudo dpkg -i debs/*.deb
+```
+
+Or build an Arch Linux package:
+
+```bash
+./build.sh --arch
+sudo pacman -U build/*.pkg.tar.zst
 ```
 
 ## Development

@@ -2,12 +2,7 @@ Source: mx-user
 Section: admin
 Priority: optional
 Maintainer: Adrian <adrian@mxlinux.org>
-Build-Depends: debhelper-compat (= 13),
-               qt6-base-dev,
-               qt6-base-dev-tools,
-               qt6-tools-dev,
-               qt6-tools-dev-tools,
-               libzxcvbn-dev
+Build-Depends: debhelper-compat (= 12), cmake (>= 3.16), ninja-build, qt6-base-dev, qt6-base-dev-tools, qt6-tools-dev, qt6-tools-dev-tools, libzxcvbn-dev
 Standards-Version: 3.9.8
 Rules-Requires-Root: no
 Homepage: https://github.com/mx-linux/mx-user
@@ -18,7 +13,6 @@ Package: mx-user
 Architecture: any
 Depends: adduser,
          libzxcvbn0,
-         mx-viewer | xdg-utils,
          rsync,
          ${misc:Depends},
          ${shlibs:Depends}

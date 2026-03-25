@@ -919,7 +919,7 @@ Do you want to customize it with elevated privileges?</source>
     <message>
         <location filename="../src/previewdialog.cpp" line="151"/>
         <source>Missing Dependency</source>
-        <translation type="unfinished"/>
+        <translation>Brakujące Zależności</translation>
     </message>
     <message>
         <location filename="../src/previewdialog.cpp" line="152"/>

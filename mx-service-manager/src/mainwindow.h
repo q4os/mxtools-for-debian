@@ -81,6 +81,7 @@ private:
     bool tooltipInProgress = false;
 
     void cancelPendingTooltip();
+    [[nodiscard]] QString docPath(const QString &fileName) const;
     void fetchTooltipDescription();
     [[nodiscard]] std::optional<QString> sanitizeServiceName(const QString &rawName);
     QSet<QString> loadSystemdEnabledServices(bool isUserService);

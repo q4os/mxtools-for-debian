@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>HELP: MX Service Manager</title>
+    <style type="text/css">
+        p.help-image {
+            text-align: left;
+            margin: 0 0 6px 0;
+        }
+
+        p.help-image img {
+            display: block;
+            width: 680px;
+            max-width: 100%;
+            height: auto;
+            margin-left: 0;
+            margin-right: auto;
+        }
+
+        pre {
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+<div style="text-align: center"><h1>MX Service Manager Help</h1></div>
+
+<p><em>Adapted from the MX Linux help page dated August 31, 2023.</em></p>
+
+<p>MX Service Manager is a tool for managing services and daemons, allowing the user to control which are started at boot time.</p>
+
+<ul>
+    <li>A service is a program that responds to users, either through a graphical interface or on the command line, as well as to other programs.</li>
+    <li>A daemon is a utility program that runs in the background with a specific purpose, such as supervising part of the system or providing functionality to other processes.</li>
+</ul>
+
+<p><strong>Important:</strong> Read the introductory warning text in the application carefully before making changes. Disabling the wrong service can leave a system partially or completely inoperable.</p>
+
+<p class="help-image"><img src="service-manager-main-window.png" alt="MX Service Manager main window" /></p>
+
+<h2>Layout</h2>
+
+<p>The main screen is divided into two columns. The left side lists detected services and daemons. Items are distinguished by color to indicate services that are running and services that are enabled but not currently running.</p>
+
+<p>The top of the left column contains two controls:</p>
+
+<ul>
+    <li>A filter with four choices: <em>All services</em>, <em>Running services</em>, <em>Services enabled at boot</em>, and <em>Services disabled at boot</em>.</li>
+    <li>A search box for narrowing the list by service name.</li>
+</ul>
+
+<p>The search box only matches service names. For example, searching for Samba may not find the related service names <strong>smbd</strong> and <strong>nmbd</strong>.</p>
+
+<p>The right column displays information for the selected item. With SysV init this comes from the service script. With systemd it comes from the output of the <strong>systemctl status</strong> command. The amount and quality of that information varies between services.</p>
+
+<h2>Use</h2>
+
+<p>Below the information pane are two action buttons:</p>
+
+<ul>
+    <li>The left button changes the current running state. It reads <strong>Stop</strong> for a running service and <strong>Start</strong> for a stopped one.</li>
+    <li>The right button changes boot behavior. It toggles between enabling the service at boot and disabling it at boot.</li>
+</ul>
+
+<p>Select the service you want to change, then click the appropriate button. A confirmation message appears when the action succeeds.</p>
+
+<h2>Details</h2>
+
+<p>A useful overview of running processes can be obtained in a terminal with:</p>
+
+<pre>pstree</pre>
+
+<p>That command shows services in a tree structure so their relationship to running processes is easier to understand.</p>
+
+<p class="help-image"><img src="service-manager-pstree-example.png" alt="Example pstree output showing service relationships" /></p>
+
+<h2>More Information</h2>
+
+<p>The original online help page is available at <a href="https://mxlinux.org/wiki/help-service-manager/">mxlinux.org/wiki/help-service-manager/</a>.</p>
+</body>
+</html>

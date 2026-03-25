@@ -29,7 +29,7 @@
 #include <QHeaderView>
 #include <QPixmap>
 #include <QTimer>
-#include <algorithm>
+
 
 ConkyItemWidget::ConkyItemWidget(ConkyItem *item, QWidget *parent)
     : QWidget(parent),
@@ -99,7 +99,7 @@ void ConkyItemWidget::setupUI()
     auto *topLayout = new QHBoxLayout;
 
     m_nameLabel = new QLabel;
-    QFont nameFont = m_nameLabel->font();
+    auto nameFont = m_nameLabel->font();
     if (nameFont.pointSizeF() > 0) {
         nameFont.setPointSizeF(nameFont.pointSizeF() + 2.0);
     } else {
@@ -116,11 +116,11 @@ void ConkyItemWidget::setupUI()
     topLayout->addWidget(m_statusLabel);
 
     m_pathLabel = new QLabel;
-    QPalette palette = m_pathLabel->palette();
-    QColor textColor = palette.color(QPalette::WindowText);
+    auto palette = m_pathLabel->palette();
+    auto textColor = palette.color(QPalette::WindowText);
     textColor.setAlphaF(0.8); // 80% opacity for better contrast
 
-    QFont pathFont = m_pathLabel->font();
+    auto pathFont = m_pathLabel->font();
     if (pathFont.pointSizeF() > 0) {
         pathFont.setPointSizeF(std::max(6.0, pathFont.pointSizeF() - 1.0));
     } else {
@@ -202,14 +202,14 @@ void ConkyListWidget::refreshList()
 
 ConkyItem *ConkyListWidget::selectedConkyItem() const
 {
-    QTreeWidgetItem *currentItem = m_treeWidget->currentItem();
+    auto *currentItem = m_treeWidget->currentItem();
     if (!currentItem) {
         return nullptr;
     }
 
-    for (auto it = m_treeItems.begin(); it != m_treeItems.end(); ++it) {
-        if (it.value() == currentItem) {
-            return it.key();
+    for (auto &&[item, treeItem] : m_treeItems.asKeyValueRange()) {
+        if (treeItem == currentItem) {
+            return item;
         }
     }
 
@@ -233,7 +233,7 @@ void ConkyListWidget::selectConkyItem(const QString &filePath)
 
     // Find the corresponding tree widget item
     if (m_treeItems.contains(targetItem)) {
-        QTreeWidgetItem *treeItem = m_treeItems[targetItem];
+        auto *treeItem = m_treeItems[targetItem];
         if (treeItem) {
             m_treeWidget->setCurrentItem(treeItem);
             m_treeWidget->scrollToItem(treeItem);
@@ -252,7 +252,7 @@ void ConkyListWidget::onConkyItemsChanged()
     m_itemWidgets.clear();
     m_treeItems.clear();
 
-    QList<ConkyItem *> items = m_manager->conkyItems();
+    auto items = m_manager->conkyItems();
     for (ConkyItem *item : items) {
         addConkyItem(item);
     }
@@ -265,7 +265,7 @@ void ConkyListWidget::onConkyItemsChanged()
         // Find the first visible item after filtering
         QTreeWidgetItem *firstVisibleItem = nullptr;
         for (int i = 0; i < m_treeWidget->topLevelItemCount(); ++i) {
-            QTreeWidgetItem *item = m_treeWidget->topLevelItem(i);
+            auto *item = m_treeWidget->topLevelItem(i);
             if (!item->isHidden()) {
                 firstVisibleItem = item;
                 break;
@@ -333,8 +333,8 @@ void ConkyListWidget::setupUI()
 
     m_countLabel = new QLabel;
     m_countLabel->setAlignment(Qt::AlignLeft);
-    QPalette countPalette = m_countLabel->palette();
-    QColor countTextColor = countPalette.color(QPalette::WindowText);
+    auto countPalette = m_countLabel->palette();
+    auto countTextColor = countPalette.color(QPalette::WindowText);
     countTextColor.setAlphaF(0.8); // 80% opacity for better contrast
     m_countLabel->setFont(font());
     m_countLabel->setStyleSheet(QString("color: rgba(%1, %2, %3, %4); padding: 5px;")
@@ -392,10 +392,7 @@ void ConkyListWidget::setSearchText(const QString &searchText)
 
 void ConkyListWidget::applyFilters()
 {
-    for (auto it = m_treeItems.begin(); it != m_treeItems.end(); ++it) {
-        ConkyItem *item = it.key();
-        QTreeWidgetItem *treeItem = it.value();
-
+    for (auto &&[item, treeItem] : m_treeItems.asKeyValueRange()) {
         bool visible = itemMatchesFilters(item);
         treeItem->setHidden(!visible);
     }
@@ -420,25 +417,25 @@ bool ConkyListWidget::itemMatchesFilters(ConkyItem *item) const
     }
 
     // Apply folder-based filters
-    QString folderName = QFileInfo(item->directory()).fileName();
+    auto folderName = QFileInfo(item->directory()).fileName();
 
     // Check if filter is a folder name from search paths
     if (m_statusFilter != "All" && m_statusFilter != "Running" && m_statusFilter != "Stopped"
         && m_statusFilter != "Autostart") {
         // This is a folder-based filter
-        QStringList searchPaths = m_manager->searchPaths();
+        auto searchPaths = m_manager->searchPaths();
         bool matchesFolder = false;
 
         for (const QString &path : searchPaths) {
-            QFileInfo pathInfo(path);
-            QString pathFolderName = pathInfo.fileName();
+            auto pathInfo = QFileInfo(path);
+            auto pathFolderName = pathInfo.fileName();
             if (pathFolderName.isEmpty()) {
                 pathFolderName = pathInfo.absolutePath().split('/').last();
             }
 
             // Create display name to match the filter dropdown format
-            QFileInfo parentInfo(pathInfo.absolutePath());
-            QString parentFolderName = parentInfo.fileName();
+            auto parentInfo = QFileInfo(pathInfo.absolutePath());
+            auto parentFolderName = parentInfo.fileName();
             QString displayName;
 
             if (path.startsWith(QDir::homePath())) {
@@ -466,9 +463,9 @@ bool ConkyListWidget::itemMatchesFilters(ConkyItem *item) const
 
     // Apply search text filter
     if (!m_searchText.isEmpty()) {
-        QString itemName = item->name().toLower();
-        QString itemFolderName = folderName.toLower();
-        QString searchLower = m_searchText.toLower();
+        auto itemName = item->name().toLower();
+        auto itemFolderName = folderName.toLower();
+        auto searchLower = m_searchText.toLower();
         if (!itemName.contains(searchLower) && !itemFolderName.contains(searchLower)) {
             return false;
         }
@@ -500,7 +497,7 @@ void ConkyPreviewWidget::setupUI()
     auto *layout = new QVBoxLayout(this);
 
     m_nameLabel = new QLabel;
-    QFont previewNameFont = m_nameLabel->font();
+    auto previewNameFont = m_nameLabel->font();
     if (previewNameFont.pointSizeF() > 0) {
         previewNameFont.setPointSizeF(previewNameFont.pointSizeF() + 2.0);
     } else {
@@ -511,11 +508,11 @@ void ConkyPreviewWidget::setupUI()
     m_nameLabel->setAlignment(Qt::AlignCenter);
 
     m_pathLabel = new QLabel;
-    QPalette palette = m_pathLabel->palette();
-    QColor textColor = palette.color(QPalette::WindowText);
+    auto palette = m_pathLabel->palette();
+    auto textColor = palette.color(QPalette::WindowText);
     textColor.setAlphaF(0.8); // 80% opacity for better contrast
 
-    QFont previewPathFont = m_pathLabel->font();
+    auto previewPathFont = m_pathLabel->font();
     if (previewPathFont.pointSizeF() > 0) {
         previewPathFont.setPointSizeF(std::max(6.0, previewPathFont.pointSizeF() - 1.0));
     } else {
@@ -563,7 +560,7 @@ void ConkyPreviewWidget::updatePreview()
     if (!previewPath.isEmpty() && QFile::exists(previewPath)) {
         QPixmap pixmap(previewPath);
         if (!pixmap.isNull()) {
-            QPixmap scaledPixmap = pixmap.scaled(m_previewLabel->size(), Qt::KeepAspectRatio, Qt::SmoothTransformation);
+            auto scaledPixmap = pixmap.scaled(m_previewLabel->size(), Qt::KeepAspectRatio, Qt::SmoothTransformation);
             m_previewLabel->setPixmap(scaledPixmap);
 
             // Emit signal with original image size
@@ -585,9 +582,8 @@ void ConkyListWidget::updateCountLabel()
     int totalCount = 0;
     int visibleCount = 0;
 
-    for (auto it = m_treeItems.begin(); it != m_treeItems.end(); ++it) {
+    for (auto &&[item, treeItem] : m_treeItems.asKeyValueRange()) {
         totalCount++;
-        QTreeWidgetItem *treeItem = it.value();
         if (!treeItem->isHidden()) {
             visibleCount++;
         }

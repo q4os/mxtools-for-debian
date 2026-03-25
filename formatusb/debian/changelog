@@ -1,3 +1,9 @@
+formatusb (26.03.1) mx; urgency=medium
+
+  * Show help and license in-app
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 19 Mar 2026 15:15:33 -0400
+
 formatusb (25.06.01) mx; urgency=medium
 
   * remove qt6-style-plugin as depend
@@ -19,7 +25,7 @@ formatusb (25.03.01mx25) mx; urgency=medium
 formatusb (24.11.01) mx; urgency=medium
 
   * fix help display when not running root
-  * update translations 
+  * update translations
 
  -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 23 Nov 2024 09:42:27 -0500
 
@@ -37,7 +43,7 @@ formatusb (24.03.01) mx; urgency=medium
 
 formatusb (24.01.01) mx; urgency=medium
 
-  * update translations 
+  * update translations
 
  -- Dolphin Oracle <dolphinoracle@gmail.com>  Tue, 09 Jan 2024 23:09:11 -0500
 
@@ -50,7 +56,7 @@ formatusb (23.12.01) mx; urgency=medium
 
 formatusb (23.11.03) mx; urgency=medium
 
-  * update translations 
+  * update translations
 
  -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 09 Dec 2023 14:39:24 -0500
 
@@ -131,7 +137,7 @@ formatusb (22.07.01) mx; urgency=medium
 
 formatusb (22.06.01) mx; urgency=medium
 
-  * don't use su-to-root if pkexec exists 
+  * don't use su-to-root if pkexec exists
   * fix policy file
 
  -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 08 Jun 2022 21:25:33 -0400
@@ -152,7 +158,7 @@ formatusb (21.05.04) mx; urgency=medium
 
 formatusb (21.05.03) mx; urgency=medium
 
-  * allow choosing of mbr vs. gpt 
+  * allow choosing of mbr vs. gpt
 
  -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 28 May 2021 21:41:49 -0400
 
@@ -170,19 +176,19 @@ formatusb (21.05.01) mx; urgency=medium
 
 formatusb (21.04.04) mx; urgency=medium
 
-  * update translations 
+  * update translations
 
  -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 26 Apr 2021 21:28:47 -0400
 
 formatusb (21.04.03) mx; urgency=medium
 
-  * do more error checking 
+  * do more error checking
 
  -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 25 Apr 2021 11:57:55 -0400
 
 formatusb (21.04.02) mx; urgency=medium
 
-  * disable/enable automount to get correct live labels 
+  * disable/enable automount to get correct live labels
 
  -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 24 Apr 2021 23:38:56 -0400
 
@@ -195,7 +201,7 @@ formatusb (21.04.01) mx; urgency=medium
 
 formatusb (20.12.02) mx; urgency=medium
 
-  * add antix-viewer to source code 
+  * add antix-viewer to source code
 
  -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 13 Dec 2020 15:33:59 -0500
 
@@ -207,7 +213,7 @@ formatusb (20.12.01) mx; urgency=medium
 
 formatusb (20.06.01) mx; urgency=medium
 
-  * change icon 
+  * change icon
 
  -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 08 Jun 2020 19:59:00 -0400
 
@@ -219,25 +225,25 @@ formatusb (20.05.02) mx; urgency=medium
 
 formatusb (20.05.01) mx; urgency=medium
 
-  * partprobe after labeling device 
+  * partprobe after labeling device
 
  -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 11 May 2020 19:41:22 -0400
 
 formatusb (19.10.02) mx; urgency=medium
 
-  * fix lsblk command  
+  * fix lsblk command
 
  -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 26 Oct 2019 18:48:45 -0400
 
 formatusb (19.10.01) mx; urgency=medium
 
-  * revised label schema 
+  * revised label schema
 
  -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 07 Oct 2019 20:44:49 -0400
 
 formatusb (19.09.01) mx; urgency=medium
 
-  * translation refresh 
+  * translation refresh
 
  -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 28 Sep 2019 14:58:12 -0400
 
@@ -249,7 +255,7 @@ formatusb (19.08.04) mx; urgency=medium
 
 formatusb (19.08.03) mx; urgency=medium
 
-  * added help file 
+  * added help file
 
  -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 22 Aug 2019 21:56:59 -0400
 
@@ -261,6 +267,6 @@ formatusb (19.08.02) mx; urgency=medium
 
 formatusb (19.08.01) mx; urgency=medium
 
-  * Initial release. 
+  * Initial release.
 
  -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 05 Aug 2019 21:52:28 -0400

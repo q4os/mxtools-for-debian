@@ -1,3 +1,10 @@
+job-scheduler (26.03) mx; urgency=medium
+
+  * Show help and license in-app
+  * Update translations
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 18 Mar 2026 14:46:49 -0400
+
 job-scheduler (24.4) mx; urgency=medium
 
   * Update to Qt6
@@ -26,7 +33,7 @@ job-scheduler (0.23.03.01) mx; urgency=medium
 
 job-scheduler (0.22.10.01) mx; urgency=medium
 
-  * update translations 
+  * update translations
 
  -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 26 Oct 2022 19:55:12 -0400
 
@@ -50,7 +57,7 @@ job-scheduler (0.22.8) mx; urgency=medium
 
 job-scheduler (0.22.7) mx; urgency=medium
 
-  * translation refresh 
+  * translation refresh
 
  -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 23 Jul 2022 11:13:35 -0400
 
@@ -70,7 +77,7 @@ job-scheduler (0.21.7) mx; urgency=medium
 
 job-scheduler (0.21.4.01) mx; urgency=medium
 
-  * add QCloseEvent declaration (buster and up) 
+  * add QCloseEvent declaration (buster and up)
 
  -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 18 Apr 2021 19:43:12 -0400
 
@@ -91,6 +98,6 @@ job-scheduler (0.21.2.01) mx; urgency=medium
 
 job-scheduler (0.21.2) mx; urgency=medium
 
-  * Initial release 
+  * Initial release
 
  -- Adrian <adrian@mxlinux.org>  Tue, 02 Feb 2021 10:53:04 -0500

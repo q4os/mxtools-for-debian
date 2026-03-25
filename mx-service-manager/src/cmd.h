@@ -3,8 +3,7 @@
 #define CMD_H
 
 #include <QProcess>
-
-class QTextStream;
+#include <QStringList>
 
 class Cmd : public QProcess
 {
@@ -12,11 +11,11 @@ class Cmd : public QProcess
 public:
     explicit Cmd(QObject *parent = nullptr);
 
-    [[nodiscard]] QString getOut(const QString &cmd, bool quiet = false, bool asRoot = false,
-                                 bool waitForFinish = false);
-    [[nodiscard]] QString getOutAsRoot(const QString &cmd, bool quiet = false, bool waitForFinish = false);
-    bool run(const QString &cmd, bool quiet = false, bool asRoot = false, bool waitForFinish = false);
-    bool runAsRoot(const QString &cmd, bool quiet = false);
+    [[nodiscard]] QString getOut(const QString &cmd, bool quiet = false, bool waitForFinish = false);
+    [[nodiscard]] QString getOutAsRoot(const QStringList &helperArgs, bool quiet = false,
+                                       bool waitForFinish = false);
+    bool run(const QString &cmd, bool quiet = false, bool waitForFinish = false);
+    bool runAsRoot(const QStringList &helperArgs, bool quiet = false, bool waitForFinish = false);
 
 signals:
     void done();

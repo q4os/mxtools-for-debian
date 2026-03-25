@@ -84,7 +84,7 @@ private:
     int height {};
     uint sizeCheck;
 
-    [[nodiscard]] QString buildOptionList();
+    [[nodiscard]] QStringList buildOptionList();
     [[nodiscard]] QStringList buildUsbList();
     [[nodiscard]] QStringList removeUnsuitable(const QStringList &devices); // remove live or unremovable
     [[nodiscard]] bool checkDestSize();
@@ -100,7 +100,7 @@ private:
     [[nodiscard]] static bool isRunningLive();
     [[nodiscard]] static bool isToRam();
     [[nodiscard]] static bool isUsbOrRemovable(const QString &device);
-    void makeUsb(const QString &options);
+    void makeUsb(const QStringList &options);
     void progress();
     void setGeneralConnections();
     void setSourceFile(const QString &fileName);

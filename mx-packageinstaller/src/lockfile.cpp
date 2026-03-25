@@ -39,7 +39,7 @@ LockFile::LockFile(const QString &file_name)
 
 bool LockFile::isLocked()
 {
-    return Cmd().runAsRoot("fuser " + fileName());
+    return !getLockingProcess().isEmpty();
 }
 
 // Check if the file is locked and pop up a message
@@ -62,7 +62,10 @@ bool LockFile::lock()
     if (isLockedGUI()) {
         return false;
     }
-    Cmd().runAsRoot("chown $(logname): " + file.fileName(), Cmd::QuietMode::Yes); // take ownership
+    const QString owner = qEnvironmentVariable("LOGNAME", qEnvironmentVariable("USER"));
+    if (!owner.isEmpty()) {
+        Cmd().procAsRoot("chown", {owner + ':', file.fileName()}, nullptr, nullptr, Cmd::QuietMode::Yes);
+    }
     if (!file.open(QIODevice::WriteOnly)) {
         qWarning() << "Unable to open lock file" << file.fileName() << "for writing:" << file.errorString();
         return false;
@@ -82,8 +85,5 @@ QString LockFile::fileName() const
 
 QString LockFile::getLockingProcess() const
 {
-    return Cmd()
-        .getOutAsRoot("pid=$(fuser " + fileName()
-                      + " 2>/dev/null); [[ -n \"$pid\" ]] && ps --no-headers -o comm -p $pid")
-        .trimmed();
+    return Cmd().lockingProcessAsRoot(fileName(), Cmd::QuietMode::Yes);
 }

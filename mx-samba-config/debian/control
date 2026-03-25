@@ -9,8 +9,7 @@ Homepage: https://github.com/MX-Linux/mx-samba-config
 
 Package: mx-samba-config
 Architecture: any
-Depends: mx-viewer | xdg-utils,
-         samba,
+Depends: samba,
          ${misc:Depends},
          ${shlibs:Depends}
 Description: Samba configuration tool for MX Linux

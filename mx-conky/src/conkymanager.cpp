@@ -22,6 +22,9 @@
  * along with mx-conky.  If not, see <http://www.gnu.org/licenses/>.
  **********************************************************************/
 
+#include "cmd.h"
+#include "conkymanager.h"
+
 #include <QDebug>
 #include <QDir>
 #include <QFile>
@@ -31,12 +34,11 @@
 #include <QRegularExpression>
 #include <QSet>
 #include <QTextStream>
-#include <unistd.h>
 
-#include "cmd.h"
-#include "conkymanager.h"
 #include <algorithm>
 #include <chrono>
+#include <ranges>
+#include <unistd.h>
 
 using namespace std::chrono_literals;
 
@@ -95,7 +97,7 @@ void ConkyManager::scanForConkies()
     clearConkyItems();
 
     QMap<QString, QStringList> conkyFolders; // folderName -> list of fullPaths
-    QString userConkyPath = QDir::homePath() + "/.conky";
+    auto userConkyPath = QDir::homePath() + "/.conky";
 
     // First, collect all conky folders from all search paths
     for (const QString &path : m_searchPaths) {
@@ -104,9 +106,9 @@ void ConkyManager::scanForConkies()
             continue;
         }
 
-        QStringList subdirs = dir.entryList(QDir::Dirs | QDir::NoDotAndDotDot, QDir::NoSort);
+        auto subdirs = dir.entryList(QDir::Dirs | QDir::NoDotAndDotDot, QDir::NoSort);
         for (const QString &subdir : subdirs) {
-            QString fullPath = dir.absoluteFilePath(subdir);
+            auto fullPath = dir.absoluteFilePath(subdir);
 
             // Collect all paths for each folder name
             if (!conkyFolders.contains(subdir)) {
@@ -118,12 +120,10 @@ void ConkyManager::scanForConkies()
 
     // Now scan folders with priority logic for "All" view
     // but keep all versions for filtering
-    for (auto it = conkyFolders.begin(); it != conkyFolders.end(); ++it) {
-        const QStringList &paths = it.value();
-
+    for (auto &&[name, paths] : conkyFolders.asKeyValueRange()) {
         // Sort paths to prioritize ~/.conky first
-        QStringList sortedPaths = paths;
-        std::sort(sortedPaths.begin(), sortedPaths.end(), [&userConkyPath](const QString &a, const QString &b) {
+        auto sortedPaths = QStringList(paths);
+        std::ranges::sort(sortedPaths, [&userConkyPath](const QString &a, const QString &b) {
             bool aIsUser = a.startsWith(userConkyPath);
             bool bIsUser = b.startsWith(userConkyPath);
 
@@ -144,17 +144,17 @@ void ConkyManager::scanForConkies()
     }
 
     // Sort conky items by folder name, then by filename within each folder
-    std::sort(m_conkyItems.begin(), m_conkyItems.end(), [](const ConkyItem *a, const ConkyItem *b) {
-        QString folderA = QFileInfo(a->directory()).fileName().toLower();
-        QString folderB = QFileInfo(b->directory()).fileName().toLower();
+    std::ranges::sort(m_conkyItems, [](const ConkyItem *a, const ConkyItem *b) {
+        auto folderA = QFileInfo(a->directory()).fileName().toLower();
+        auto folderB = QFileInfo(b->directory()).fileName().toLower();
 
         if (folderA != folderB) {
             return folderA < folderB;
         }
 
         // Same folder, sort by filename
-        QString fileA = QFileInfo(a->filePath()).fileName().toLower();
-        QString fileB = QFileInfo(b->filePath()).fileName().toLower();
+        auto fileA = QFileInfo(a->filePath()).fileName().toLower();
+        auto fileB = QFileInfo(b->filePath()).fileName().toLower();
         return fileA < fileB;
     });
 
@@ -173,17 +173,17 @@ void ConkyManager::addConkyItemsFromDirectory(const QString &directoryPath)
     scanConkyDirectory(directoryPath);
 
     // Sort conky items by folder name, then by filename within each folder (maintain consistent ordering)
-    std::sort(m_conkyItems.begin(), m_conkyItems.end(), [](const ConkyItem *a, const ConkyItem *b) {
-        QString folderA = QFileInfo(a->directory()).fileName().toLower();
-        QString folderB = QFileInfo(b->directory()).fileName().toLower();
+    std::ranges::sort(m_conkyItems, [](const ConkyItem *a, const ConkyItem *b) {
+        auto folderA = QFileInfo(a->directory()).fileName().toLower();
+        auto folderB = QFileInfo(b->directory()).fileName().toLower();
 
         if (folderA != folderB) {
             return folderA < folderB;
         }
 
         // Same folder, sort by filename
-        QString fileA = QFileInfo(a->filePath()).fileName().toLower();
-        QString fileB = QFileInfo(b->filePath()).fileName().toLower();
+        auto fileA = QFileInfo(a->filePath()).fileName().toLower();
+        auto fileB = QFileInfo(b->filePath()).fileName().toLower();
         return fileA < fileB;
     });
 
@@ -199,7 +199,7 @@ QList<ConkyItem *> ConkyManager::conkyItems() const
 
 bool ConkyManager::hasRunningConkies() const
 {
-    return std::any_of(m_conkyItems.cbegin(), m_conkyItems.cend(), [](const ConkyItem *item) {
+    return std::ranges::any_of(m_conkyItems, [](const ConkyItem *item) {
         return item && item->isRunning();
     });
 }
@@ -292,7 +292,7 @@ void ConkyManager::stopAllRunning()
         }
     }
 
-    const QString userId = QString::number(getuid());
+    const auto userId = QString::number(getuid());
     QProcess killProcess;
     killProcess.start("pkill", { "-u", userId, "-x", "conky" });
 
@@ -367,8 +367,8 @@ void ConkyManager::onStatusProcessFinished()
         return;
     }
 
-    QString output = m_statusProcess->readAllStandardOutput();
-    QStringList pids = output.split('\n', Qt::SkipEmptyParts);
+    auto output = QString(m_statusProcess->readAllStandardOutput());
+    auto pids = output.split('\n', Qt::SkipEmptyParts);
 
     // Build set of running config files by checking each PID
     QSet<QString> runningConfigs;
@@ -378,13 +378,13 @@ void ConkyManager::onStatusProcessFinished()
             continue;
         }
 
-        const QByteArray rawCmdline = cmdlineFile.readAll();
+        const auto rawCmdline = cmdlineFile.readAll();
         cmdlineFile.close();
         if (rawCmdline.isEmpty()) {
             continue;
         }
 
-        const QList<QByteArray> parts = rawCmdline.split('\0');
+        const auto parts = rawCmdline.split('\0');
         QStringList arguments;
         arguments.reserve(parts.size());
         for (const QByteArray &part : parts) {
@@ -398,7 +398,7 @@ void ConkyManager::onStatusProcessFinished()
             continue;
         }
 
-        const QString executableName = QFileInfo(arguments.constFirst()).fileName();
+        const auto executableName = QFileInfo(arguments.constFirst()).fileName();
         if (!executableName.contains("conky", Qt::CaseInsensitive)
             || executableName.contains("mx-conky", Qt::CaseInsensitive)) {
             continue;
@@ -435,10 +435,10 @@ void ConkyManager::onStatusProcessFinished()
             configPath = QDir::homePath() + configPath.mid(1);
         }
 
-        QFileInfo configInfo(configPath);
+        auto configInfo = QFileInfo(configPath);
         if (configInfo.isRelative()) {
-            QFileInfo cwdInfo(QString("/proc/%1/cwd").arg(pid));
-            const QString cwdPath = cwdInfo.symLinkTarget();
+            auto cwdInfo = QFileInfo(QString("/proc/%1/cwd").arg(pid));
+            const auto cwdPath = cwdInfo.symLinkTarget();
             if (!cwdPath.isEmpty()) {
                 configInfo = QFileInfo(QDir(cwdPath).absoluteFilePath(configPath));
             } else {
@@ -446,14 +446,14 @@ void ConkyManager::onStatusProcessFinished()
             }
         }
 
-        const QString absolutePath = QDir::cleanPath(configInfo.absoluteFilePath());
+        const auto absolutePath = QDir::cleanPath(configInfo.absoluteFilePath());
         runningConfigs.insert(absolutePath);
     }
 
     // Check each item against the running configs
     for (ConkyItem *item : m_conkyItems) {
         bool wasRunning = item->isRunning();
-        QString configFilePath = QFileInfo(item->filePath()).absoluteFilePath();
+        auto configFilePath = QFileInfo(item->filePath()).absoluteFilePath();
         bool isRunning = runningConfigs.contains(configFilePath);
 
         if (wasRunning != isRunning) {
@@ -494,15 +494,15 @@ void ConkyManager::clearConkyItems()
 
 QString ConkyManager::getConkyProcess(const QString &configPath) const
 {
-    QString absolutePath = QFileInfo(configPath).absoluteFilePath();
+    auto absolutePath = QFileInfo(configPath).absoluteFilePath();
 
     // Get all conky PIDs using pattern matching (handles /usr/bin/conky, conky, etc.)
     QProcess pgrepProcess;
     pgrepProcess.start("pgrep", QStringList() << "conky");
     pgrepProcess.waitForFinished(3000);
 
-    QString pgrepOutput = pgrepProcess.readAllStandardOutput();
-    QStringList pids = pgrepOutput.split('\n', Qt::SkipEmptyParts);
+    auto pgrepOutput = QString(pgrepProcess.readAllStandardOutput());
+    auto pids = pgrepOutput.split('\n', Qt::SkipEmptyParts);
 
     // Check each PID to find the one with matching config path
     for (const QString &pid : pids) {
@@ -511,7 +511,7 @@ QString ConkyManager::getConkyProcess(const QString &configPath) const
                                                  << "command="
                                                  << "--no-headers");
         if (cmdlineProcess.waitForFinished(1000)) {
-            QString cmdline = cmdlineProcess.readAllStandardOutput().trimmed();
+            auto cmdline = cmdlineProcess.readAllStandardOutput().trimmed();
 
             // Skip if this is not actually a conky process (could be grep, mx-conky, etc.)
             // Look for conky executable (conky, /usr/bin/conky, etc.) but not mx-conky application itself
@@ -520,11 +520,11 @@ QString ConkyManager::getConkyProcess(const QString &configPath) const
             }
 
             // Find -c flag position in the command line
-            int cFlagIndex = cmdline.indexOf(" -c ");
+            auto cFlagIndex = cmdline.indexOf(" -c ");
             if (cFlagIndex != -1) {
                 // Extract everything after " -c " as the config path
-                QString configPath = cmdline.mid(cFlagIndex + 4); // +4 for " -c "
-                QString foundAbsolutePath = QFileInfo(configPath).absoluteFilePath();
+                auto configPath = cmdline.mid(cFlagIndex + 4); // +4 for " -c "
+                auto foundAbsolutePath = QFileInfo(configPath).absoluteFilePath();
 
                 // Check if this matches our target config path
                 if (foundAbsolutePath == absolutePath) {
@@ -550,7 +550,7 @@ void ConkyManager::scanDirectory(const QString &path)
     }
 
     // Only get first-level subdirectories (no recursion)
-    QStringList subdirs = dir.entryList(QDir::Dirs | QDir::NoDotAndDotDot, QDir::NoSort);
+    auto subdirs = dir.entryList(QDir::Dirs | QDir::NoDotAndDotDot, QDir::NoSort);
 
     for (const QString &subdir : subdirs) {
         scanConkyDirectory(dir.absoluteFilePath(subdir));
@@ -567,7 +567,7 @@ void ConkyManager::scanConkyDirectory(const QString &path)
     }
 
     dir.setFilter(QDir::Files | QDir::Readable | QDir::Hidden);
-    QFileInfoList allFiles = dir.entryInfoList();
+    auto allFiles = dir.entryInfoList();
 
     // Build a set of existing file paths for fast lookup
     QSet<QString> existingPaths;
@@ -620,8 +620,8 @@ void ConkyManager::scanConkyDirectory(const QString &path)
 
 void ConkyManager::applyAutostartFromStartupScript()
 {
-    QString home = QDir::homePath();
-    QString scriptPath = home + "/.conky/conky-startup.sh";
+    auto home = QDir::homePath();
+    auto scriptPath = home + "/.conky/conky-startup.sh";
     QFile scriptFile(scriptPath);
 
     if (!scriptFile.exists()) {
@@ -639,13 +639,13 @@ void ConkyManager::applyAutostartFromStartupScript()
                                QRegularExpression::CaseInsensitiveOption);
 
     while (!in.atEnd()) {
-        QString line = in.readLine();
-        QRegularExpressionMatch match = pattern.match(line);
+        auto line = in.readLine();
+        auto match = pattern.match(line);
         if (!match.hasMatch()) {
             continue;
         }
 
-        QString path = match.captured(1);
+        auto path = match.captured(1);
         if (path.isEmpty()) {
             path = match.captured(2);
         }
@@ -662,8 +662,8 @@ void ConkyManager::applyAutostartFromStartupScript()
             path.replace(0, 1, home);
         }
 
-        QFileInfo info(path);
-        QString absolutePath = info.absoluteFilePath();
+        auto info = QFileInfo(path);
+        auto absolutePath = info.absoluteFilePath();
 
         if (!absolutePath.isEmpty()) {
             autostartPaths.insert(QDir::cleanPath(absolutePath));
@@ -673,7 +673,7 @@ void ConkyManager::applyAutostartFromStartupScript()
     scriptFile.close();
 
     for (ConkyItem *item : m_conkyItems) {
-        QString itemPath = QDir::cleanPath(QFileInfo(item->filePath()).absoluteFilePath());
+        auto itemPath = QDir::cleanPath(QFileInfo(item->filePath()).absoluteFilePath());
         bool enabled = autostartPaths.contains(itemPath);
         item->setEnabled(enabled);
         item->setAutostart(enabled);
@@ -728,8 +728,8 @@ void ConkyManager::setAutostart(bool enabled)
     QString home = QDir::homePath();
 
     // Check desktop environment
-    QProcessEnvironment env = QProcessEnvironment::systemEnvironment();
-    QString desktop = env.value("XDG_CURRENT_DESKTOP", "").toLower();
+    auto env = QProcessEnvironment::systemEnvironment();
+    auto desktop = env.value("XDG_CURRENT_DESKTOP", "").toLower();
 
     // Lambda to create desktop file content
     auto createDesktopContent = []() {
@@ -857,8 +857,8 @@ bool ConkyManager::isAutostartEnabled() const
     QString home = QDir::homePath();
 
     // Check desktop environment
-    QProcessEnvironment env = QProcessEnvironment::systemEnvironment();
-    QString desktop = env.value("XDG_CURRENT_DESKTOP", "").toLower();
+    auto env = QProcessEnvironment::systemEnvironment();
+    auto desktop = env.value("XDG_CURRENT_DESKTOP", "").toLower();
 
     if (desktop.contains("enlightenment") || desktop.contains("e17") || desktop.contains("e18")
         || desktop.contains("e19") || desktop.contains("e20") || desktop.contains("e21") || desktop.contains("e22")
@@ -937,14 +937,14 @@ bool ConkyManager::isAutostartEnabled() const
 
 QString ConkyManager::copyFolderToUserConky(const QString &sourcePath)
 {
-    QFileInfo sourceInfo(sourcePath);
-    QString folderName = sourceInfo.fileName();
+    auto sourceInfo = QFileInfo(sourcePath);
+    auto folderName = sourceInfo.fileName();
     return copyFolderToUserConkyWithName(sourcePath, folderName);
 }
 
 QString ConkyManager::copyFolderToUserConkyWithName(const QString &sourcePath, const QString &newName)
 {
-    QFileInfo sourceInfo(sourcePath);
+    auto sourceInfo = QFileInfo(sourcePath);
     if (!sourceInfo.exists() || !sourceInfo.isDir()) {
         qDebug() << "ConkyManager: Source path does not exist or is not a directory:" << sourcePath;
         return QString();
@@ -984,7 +984,7 @@ bool ConkyManager::copyDirectoryRecursively(const QString &sourceDir, const QStr
     }
 
     // Copy all files
-    QFileInfoList fileInfoList = sourceDirectory.entryInfoList(QDir::Files);
+    auto fileInfoList = sourceDirectory.entryInfoList(QDir::Files);
     for (const QFileInfo &fileInfo : fileInfoList) {
         QString srcFilePath = fileInfo.absoluteFilePath();
         QString destFilePath = destDir + "/" + fileInfo.fileName();
@@ -996,7 +996,7 @@ bool ConkyManager::copyDirectoryRecursively(const QString &sourceDir, const QStr
     }
 
     // Copy all subdirectories recursively
-    QFileInfoList subdirInfoList = sourceDirectory.entryInfoList(QDir::Dirs | QDir::NoDotAndDotDot);
+    auto subdirInfoList = sourceDirectory.entryInfoList(QDir::Dirs | QDir::NoDotAndDotDot);
     for (const QFileInfo &subdirInfo : subdirInfoList) {
         QString srcSubdirPath = subdirInfo.absoluteFilePath();
         QString destSubdirPath = destDir + "/" + subdirInfo.fileName();
@@ -1018,7 +1018,7 @@ bool ConkyManager::isBinaryFile(const QString &filePath) const
 
     // Read first 8KB to check for binary content
     const int bufferSize = 8192;
-    QByteArray buffer = file.read(bufferSize);
+    auto buffer = file.read(bufferSize);
     file.close();
 
     if (buffer.isEmpty()) {

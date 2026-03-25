@@ -43,6 +43,7 @@ struct PackageData {
     QString description;
     Qt::CheckState checkState = Qt::Unchecked;
     int status = Status::NotInstalled;
+    bool fromRepo = false;
 };
 
 class PackageModel : public QAbstractTableModel

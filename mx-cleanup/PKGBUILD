@@ -6,7 +6,7 @@ pkgdesc="GUI for system cleanup and maintenance"
 arch=('x86_64' 'i686')
 url="https://github.com/mxlinux/mx-cleanup"
 license=('GPL3')
-depends=('xdg-utils' 'qt6-base' 'polkit')
+depends=('qt6-base' 'polkit')
 makedepends=('cmake' 'ninja' 'qt6-tools')
 source=()
 sha256sums=()
@@ -35,7 +35,7 @@ package() {
     install -Dm644 build/*.qm "${pkgdir}/usr/share/mx-cleanup/locale/" 2>/dev/null || true
 
     install -dm755 "${pkgdir}/usr/lib/mx-cleanup"
-    install -Dm755 scripts/helper "${pkgdir}/usr/lib/mx-cleanup/helper"
+    install -Dm755 build/helper "${pkgdir}/usr/lib/mx-cleanup/helper"
     install -Dm755 scripts/helper-terminal-keep-open "${pkgdir}/usr/lib/mx-cleanup/helper-terminal-keep-open"
 
     install -Dm644 scripts/org.mxlinux.pkexec.mx-cleanup-helper.policy \

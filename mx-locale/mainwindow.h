@@ -90,7 +90,7 @@ private:
     [[nodiscard]] QString getCurrentSessionLang() const;
     [[nodiscard]] QString replaceUnicodeSequences(const QString &title) const;
     [[nodiscard]] QStringList getLocaleFiles(const QStringList &directories) const;
-    [[nodiscard]] QStringList readEnabledLocales(const QString &filePath);
+    bool readEnabledLocales(const QString &filePath, QStringList &enabledLocales);
     [[nodiscard]] bool anyDifferentSubvars() const;
     void configureCategories(const QCommandLineParser &args);
     void configureTabs(const QCommandLineParser &args);

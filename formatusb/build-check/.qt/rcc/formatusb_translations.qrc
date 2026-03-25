@@ -1,0 +1,55 @@
+<RCC>
+  <qresource prefix="/i18n">
+    <file alias="formatusb_am.qm">/home/adrian/formatusb/build-check/formatusb_am.qm</file>
+    <file alias="formatusb_ar.qm">/home/adrian/formatusb/build-check/formatusb_ar.qm</file>
+    <file alias="formatusb_bg.qm">/home/adrian/formatusb/build-check/formatusb_bg.qm</file>
+    <file alias="formatusb_ca.qm">/home/adrian/formatusb/build-check/formatusb_ca.qm</file>
+    <file alias="formatusb_cs.qm">/home/adrian/formatusb/build-check/formatusb_cs.qm</file>
+    <file alias="formatusb_da.qm">/home/adrian/formatusb/build-check/formatusb_da.qm</file>
+    <file alias="formatusb_de.qm">/home/adrian/formatusb/build-check/formatusb_de.qm</file>
+    <file alias="formatusb_el.qm">/home/adrian/formatusb/build-check/formatusb_el.qm</file>
+    <file alias="formatusb_en.qm">/home/adrian/formatusb/build-check/formatusb_en.qm</file>
+    <file alias="formatusb_es.qm">/home/adrian/formatusb/build-check/formatusb_es.qm</file>
+    <file alias="formatusb_es_ES.qm">/home/adrian/formatusb/build-check/formatusb_es_ES.qm</file>
+    <file alias="formatusb_fa.qm">/home/adrian/formatusb/build-check/formatusb_fa.qm</file>
+    <file alias="formatusb_fi.qm">/home/adrian/formatusb/build-check/formatusb_fi.qm</file>
+    <file alias="formatusb_fil_PH.qm">/home/adrian/formatusb/build-check/formatusb_fil_PH.qm</file>
+    <file alias="formatusb_fr.qm">/home/adrian/formatusb/build-check/formatusb_fr.qm</file>
+    <file alias="formatusb_fr_BE.qm">/home/adrian/formatusb/build-check/formatusb_fr_BE.qm</file>
+    <file alias="formatusb_gl.qm">/home/adrian/formatusb/build-check/formatusb_gl.qm</file>
+    <file alias="formatusb_gl_ES.qm">/home/adrian/formatusb/build-check/formatusb_gl_ES.qm</file>
+    <file alias="formatusb_he_IL.qm">/home/adrian/formatusb/build-check/formatusb_he_IL.qm</file>
+    <file alias="formatusb_hi.qm">/home/adrian/formatusb/build-check/formatusb_hi.qm</file>
+    <file alias="formatusb_hr.qm">/home/adrian/formatusb/build-check/formatusb_hr.qm</file>
+    <file alias="formatusb_hu.qm">/home/adrian/formatusb/build-check/formatusb_hu.qm</file>
+    <file alias="formatusb_id.qm">/home/adrian/formatusb/build-check/formatusb_id.qm</file>
+    <file alias="formatusb_is.qm">/home/adrian/formatusb/build-check/formatusb_is.qm</file>
+    <file alias="formatusb_it.qm">/home/adrian/formatusb/build-check/formatusb_it.qm</file>
+    <file alias="formatusb_ja.qm">/home/adrian/formatusb/build-check/formatusb_ja.qm</file>
+    <file alias="formatusb_kk.qm">/home/adrian/formatusb/build-check/formatusb_kk.qm</file>
+    <file alias="formatusb_lt.qm">/home/adrian/formatusb/build-check/formatusb_lt.qm</file>
+    <file alias="formatusb_mr.qm">/home/adrian/formatusb/build-check/formatusb_mr.qm</file>
+    <file alias="formatusb_nb.qm">/home/adrian/formatusb/build-check/formatusb_nb.qm</file>
+    <file alias="formatusb_nb_NO.qm">/home/adrian/formatusb/build-check/formatusb_nb_NO.qm</file>
+    <file alias="formatusb_nl.qm">/home/adrian/formatusb/build-check/formatusb_nl.qm</file>
+    <file alias="formatusb_nl_BE.qm">/home/adrian/formatusb/build-check/formatusb_nl_BE.qm</file>
+    <file alias="formatusb_pl.qm">/home/adrian/formatusb/build-check/formatusb_pl.qm</file>
+    <file alias="formatusb_pt.qm">/home/adrian/formatusb/build-check/formatusb_pt.qm</file>
+    <file alias="formatusb_pt_BR.qm">/home/adrian/formatusb/build-check/formatusb_pt_BR.qm</file>
+    <file alias="formatusb_ro.qm">/home/adrian/formatusb/build-check/formatusb_ro.qm</file>
+    <file alias="formatusb_ru.qm">/home/adrian/formatusb/build-check/formatusb_ru.qm</file>
+    <file alias="formatusb_ru_RU.qm">/home/adrian/formatusb/build-check/formatusb_ru_RU.qm</file>
+    <file alias="formatusb_sk.qm">/home/adrian/formatusb/build-check/formatusb_sk.qm</file>
+    <file alias="formatusb_sl.qm">/home/adrian/formatusb/build-check/formatusb_sl.qm</file>
+    <file alias="formatusb_sq.qm">/home/adrian/formatusb/build-check/formatusb_sq.qm</file>
+    <file alias="formatusb_sv.qm">/home/adrian/formatusb/build-check/formatusb_sv.qm</file>
+    <file alias="formatusb_th.qm">/home/adrian/formatusb/build-check/formatusb_th.qm</file>
+    <file alias="formatusb_tr.qm">/home/adrian/formatusb/build-check/formatusb_tr.qm</file>
+    <file alias="formatusb_uk.qm">/home/adrian/formatusb/build-check/formatusb_uk.qm</file>
+    <file alias="formatusb_vi.qm">/home/adrian/formatusb/build-check/formatusb_vi.qm</file>
+    <file alias="formatusb_zh_CN.qm">/home/adrian/formatusb/build-check/formatusb_zh_CN.qm</file>
+    <file alias="formatusb_zh_HK.qm">/home/adrian/formatusb/build-check/formatusb_zh_HK.qm</file>
+    <file alias="formatusb_zh_TW.qm">/home/adrian/formatusb/build-check/formatusb_zh_TW.qm</file>
+  </qresource>
+</RCC>
+

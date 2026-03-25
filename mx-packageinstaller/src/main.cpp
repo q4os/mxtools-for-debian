@@ -36,13 +36,9 @@
 #include "log.h"
 #include "mainwindow.h"
 
-#include <unistd.h>
-
 #ifndef VERSION
     #define VERSION "?.?.?.?"
 #endif
-
-inline const QString starting_home = qEnvironmentVariable("HOME");
 
 int main(int argc, char *argv[])
 {

@@ -17,9 +17,7 @@ Package: mx-packageinstaller
 Architecture: any
 Depends: aptitude,
          mx-packageinstaller-pkglist (>= 17.4),
-         xdg-utils | mx-viewer,
          sudo | pkexec | gksu,
-         socat,
          curl,
          polkitd, pkexec,
          ${misc:Depends},

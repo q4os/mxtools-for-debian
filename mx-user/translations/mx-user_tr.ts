@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="tr">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="tr">
 <context>
     <name>MEConfig</name>
     <message>
@@ -640,7 +638,7 @@ Lütfen devam etmeden önce başka bir ad seçin.</translation>
     <message>
         <location filename="../mainwindow.cpp" line="500"/>
         <source>The group name needs to be at least 2 characters long. Please select a longer name before proceeding.</source>
-        <translation>Grup adı en az 2 karakter uzunluğunda olmalıdır.  Devam etmeden önce lütfen daha uzun bir ad seçin.&#xa0;</translation>
+        <translation>Grup adı en az 2 karakter uzunluğunda olmalıdır.  Devam etmeden önce lütfen daha uzun bir ad seçin. </translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="505"/>

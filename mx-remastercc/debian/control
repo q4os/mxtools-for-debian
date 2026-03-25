@@ -3,6 +3,8 @@ Section: admin
 Priority: optional
 Maintainer: Adrian <adrian@mxlinux.org>
 Build-Depends: debhelper-compat (= 13),
+               cmake (>= 3.16),
+               ninja-build,
                qt6-base-dev,
                qt6-base-dev-tools,
                qt6-tools-dev,
@@ -14,7 +16,6 @@ Homepage: https://github.com/MX-Linux/mx-remastercc
 Package: mx-remastercc
 Architecture: any
 Depends: mx-remaster,
-         mx-viewer | xdg-utils,
          ${misc:Depends},
          ${shlibs:Depends}
 Description: Remaster Control Center for MX Linux

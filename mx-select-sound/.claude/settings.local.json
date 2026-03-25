@@ -1,0 +1,6 @@
+{
+  "enabledMcpjsonServers": [
+    "docker"
+  ],
+  "enableAllProjectMcpServers": true
+}

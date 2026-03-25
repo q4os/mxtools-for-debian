@@ -29,13 +29,108 @@
 #include <QDir>
 #include <QDirIterator>
 #include <QFileDialog>
+#include <QFileInfo>
+#include <QSet>
+#include <QSaveFile>
 #include <QTextEdit>
+#include <QTextStream>
 
 #include "about.h"
 
 #ifndef VERSION
     #define VERSION "?.?.?.?"
 #endif
+
+namespace
+{
+QString findSoundEvent(const QString &baseDir, const QString &eventName)
+{
+    QDir dir(baseDir);
+    if (!dir.exists()) {
+        return {};
+    }
+
+    QDirIterator it(baseDir, QDir::Files, QDirIterator::Subdirectories);
+    while (it.hasNext()) {
+        const QString path = it.next();
+        if (QFileInfo(path).fileName().contains(eventName)) {
+            return path;
+        }
+    }
+
+    return {};
+}
+
+QString findThemeSoundEvent(const QString &homePath, const QString &themeName, const QString &eventName)
+{
+    const QString localThemeDir = homePath + "/.local/share/sounds/" + themeName;
+    if (QDir(localThemeDir).exists()) {
+        return findSoundEvent(localThemeDir, eventName);
+    }
+
+    return findSoundEvent(QStringLiteral("/usr/share/sounds/") + themeName, eventName);
+}
+
+void addThemeName(QStringList &themeList, QSet<QString> &seenThemes, const QString &themeName)
+{
+    if (!themeName.isEmpty() && !seenThemes.contains(themeName)) {
+        seenThemes.insert(themeName);
+        themeList << themeName;
+    }
+}
+
+QString readTextFile(const QString &path)
+{
+    QFile file(path);
+    if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+        return {};
+    }
+    return QString::fromUtf8(file.readAll()).trimmed();
+}
+
+bool writeTextFile(const QString &path, const QString &content)
+{
+    QSaveFile file(path);
+    if (!file.open(QIODevice::WriteOnly | QIODevice::Text)) {
+        return false;
+    }
+
+    QTextStream stream(&file);
+    stream << content;
+    return file.commit();
+}
+
+QString readConfigValue(const QString &path, const QString &key)
+{
+    const QStringList lines = readTextFile(path).split('\n', Qt::SkipEmptyParts);
+    for (const QString &line : lines) {
+        if (line.startsWith(key + '=')) {
+            return line.section('=', 1);
+        }
+    }
+    return {};
+}
+
+bool writeConfigValue(const QString &path, const QString &key, const QString &value)
+{
+    QStringList lines = readTextFile(path).split('\n', Qt::SkipEmptyParts);
+    bool found = false;
+
+    for (QString &line : lines) {
+        if (line.startsWith(key + '=')) {
+            line = key + '=' + value;
+            found = true;
+            break;
+        }
+    }
+
+    if (!found) {
+        lines << (key + '=' + value);
+    }
+
+    return writeTextFile(path, lines.join('\n') + '\n');
+}
+} // namespace
 
 MainWindow::MainWindow(QWidget *parent)
     : QDialog(parent),
@@ -56,17 +151,14 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-// Util function for getting bash command output and error code
-Output MainWindow::runCmd(const QString &cmd)
+// Util function for getting process output and error code
+Output MainWindow::runCmd(const QString &program, const QStringList &args)
 {
-    auto *proc = new QProcess(this);
-    QEventLoop loop;
-    proc->setProcessChannelMode(QProcess::MergedChannels);
-    proc->start(QStringLiteral("/bin/bash"), QStringList() << QStringLiteral("-c") << cmd);
-    proc->waitForFinished();
-    Output out = {proc->exitCode(), proc->readAll().trimmed()};
-    delete proc;
-    return out;
+    QProcess proc(this);
+    proc.setProcessChannelMode(QProcess::MergedChannels);
+    proc.start(program, args);
+    proc.waitForFinished();
+    return {proc.exitCode(), QString::fromUtf8(proc.readAll()).trimmed()};
 }
 
 // Setup versious items first time program runs
@@ -76,16 +168,17 @@ void MainWindow::setup()
     adjustSize();
 
     const QString home_path = QDir::homePath();
+    const QString configDir = home_path + "/.config/MX-Linux/mx-system-sounds";
+    const QString settingsPath = configDir + "/mx-login-logout_sounds.conf";
+    const QString startupSoundPath = configDir + "/startupsound.conf";
 
     // Setup mx-login-logout_sounds.conf if necessary
-    QFileInfo file_conf(home_path + "/.config/MX-Linux/mx-system-sounds/mx-login-logout_sounds.conf");
+    QFileInfo file_conf(settingsPath);
     if (file_conf.exists()) {
         qDebug() << "Found Config File";
     } else {
-        runCmd("mkdir " + home_path + "/.config/MX-Linux/mx-system-sounds/");
-        runCmd("echo '#true is enabled, false is disabled' >>" + home_path
-               + "/.config/MX-Linux/mx-system-sounds/mx-login-logout_sounds.conf");
-        runCmd("echo startup=false>>" + home_path + "/.config/MX-Linux/mx-system-sounds/mx-login-logout_sounds.conf");
+        QDir().mkpath(configDir);
+        writeTextFile(settingsPath, QStringLiteral("#true is enabled, false is disabled\nstartup=false\n"));
         // runCmd("echo logout=false>>" + home_path + "/.config/MX-Linux/mx-system-sounds/mx-login-logout_sounds.conf");
     }
 
@@ -94,23 +187,20 @@ void MainWindow::setup()
     theme_logout_flag = true;
     // Get sound theme. note there is no path associated with this
 
-    QString soundtheme = runCmd(QStringLiteral("xfconf-query -c xsettings -p /Net/SoundThemeName")).str;
+    QString soundtheme = runCmd(QStringLiteral("xfconf-query"),
+                                {QStringLiteral("-c"), QStringLiteral("xsettings"), QStringLiteral("-p"),
+                                 QStringLiteral("/Net/SoundThemeName")})
+                             .str;
 
     // Check home directory location first
-    if (QDir(home_path + "/.local/share/sounds" + soundtheme).exists()) {
-        defualtloginsound = runCmd(home_path + "/.local/share/sounds" + soundtheme + "/ |grep desktop-login").str;
-        defualtlogoutsound = runCmd(home_path + "/.local/share/sounds" + soundtheme + "/ |grep desktop-logout").str;
-    } else {
-        // check system level location second
-        defualtloginsound = runCmd("find /usr/share/sounds/" + soundtheme + "/ |grep desktop-login").str;
-        defualtlogoutsound = runCmd("find /usr/share/sounds/" + soundtheme + "/ |grep desktop-logout").str;
-    }
+    defualtloginsound = findThemeSoundEvent(home_path, soundtheme, QStringLiteral("desktop-login"));
+    defualtlogoutsound = findThemeSoundEvent(home_path, soundtheme, QStringLiteral("desktop-logout"));
 
     // Check for custom sounds
-    QFileInfo file_info(home_path + "/.config/MX-Linux/mx-system-sounds/startupsound.conf");
+    QFileInfo file_info(startupSoundPath);
     // startupsound.conf, if exists get filename and path of custom startup sound
     if (file_info.exists()) {
-        currentlogin = runCmd("cat " + home_path + "/.config/MX-Linux/mx-system-sounds/startupsound.conf").str;
+        currentlogin = readTextFile(startupSoundPath);
         QFileInfo file_info(currentlogin);
         ui->button_login_sound->setText(file_info.baseName());
         ui->button_login_sound->setToolTip(file_info.filePath());
@@ -169,14 +259,21 @@ void MainWindow::setup()
     ui->button_reset_logout->hide();
 
     // Initial event sound setting
-    if (runCmd(QStringLiteral("xfconf-query -c xsettings -p /Net/EnableEventSounds")).str == QLatin1String("false")) {
+    if (runCmd(QStringLiteral("xfconf-query"),
+               {QStringLiteral("-c"), QStringLiteral("xsettings"), QStringLiteral("-p"),
+                QStringLiteral("/Net/EnableEventSounds")})
+            .str
+        == QLatin1String("false")) {
         ui->checkbox_eventsounds->setChecked(false);
     } else {
         ui->checkbox_eventsounds->setChecked(true);
     }
 
     // Initial input feedback sound setting
-    if (runCmd(QStringLiteral("xfconf-query -c xsettings -p /Net/EnableInputFeedbackSounds")).str
+    if (runCmd(QStringLiteral("xfconf-query"),
+               {QStringLiteral("-c"), QStringLiteral("xsettings"), QStringLiteral("-p"),
+                QStringLiteral("/Net/EnableInputFeedbackSounds")})
+            .str
         == QLatin1String("false")) {
         ui->checkbox_inputsounds->setChecked(false);
     } else {
@@ -184,9 +281,7 @@ void MainWindow::setup()
     }
 
     // Initial login sound setting
-    if (system("grep startup=false " + home_path.toUtf8()
-               + "/.config/MX-Linux/mx-system-sounds/mx-login-logout_sounds.conf")
-        == 0) {
+    if (readConfigValue(settingsPath, QStringLiteral("startup")) == QLatin1String("false")) {
         ui->checkbox_login->setChecked(false);
     } else {
         ui->checkbox_login->setChecked(true);
@@ -203,18 +298,19 @@ void MainWindow::setup()
     // inital sound theme dialog setting
     ui->comboBox_theme->clear();
     QStringList theme_list;
+    QSet<QString> seenThemes;
     QStringList filter(QStringLiteral("index.theme"));
     QDirIterator it(QStringLiteral("/usr/share/sounds"), filter, QDir::Files, QDirIterator::Subdirectories);
     while (it.hasNext()) {
         QFileInfo file_info(it.next());
         QDir dir = file_info.absoluteDir();
-        theme_list << dir.dirName();
+        addThemeName(theme_list, seenThemes, dir.dirName());
     }
     QDirIterator it2(home_path + "/.local/share/sounds", filter, QDir::Files, QDirIterator::Subdirectories);
     while (it2.hasNext()) {
         QFileInfo file_info(it2.next());
         QDir dir = file_info.absoluteDir();
-        theme_list << dir.dirName();
+        addThemeName(theme_list, seenThemes, dir.dirName());
     }
     ui->comboBox_theme->addItems(theme_list);
     ui->comboBox_theme->setCurrentText(soundtheme);
@@ -226,34 +322,45 @@ void MainWindow::setup()
 void MainWindow::on_buttonApply_clicked()
 {
     QString home_path = QDir::homePath();
+    const QString configDir = home_path + "/.config/MX-Linux/mx-system-sounds";
+    const QString settingsPath = configDir + "/mx-login-logout_sounds.conf";
+    const QString startupSoundPath = configDir + "/startupsound.conf";
 
     // Event Sounds Enable or Disable
     if (ui->checkbox_eventsounds->isChecked()) {
-        [[maybe_unused]] int result = system("xfconf-query -c xsettings -p /Net/EnableEventSounds -s true");
+        runCmd(QStringLiteral("xfconf-query"),
+               {QStringLiteral("-c"), QStringLiteral("xsettings"), QStringLiteral("-p"),
+                QStringLiteral("/Net/EnableEventSounds"), QStringLiteral("-s"), QStringLiteral("true")});
     } else {
-        [[maybe_unused]] int result = system("xfconf-query -c xsettings -p /Net/EnableEventSounds -s false");
+        runCmd(QStringLiteral("xfconf-query"),
+               {QStringLiteral("-c"), QStringLiteral("xsettings"), QStringLiteral("-p"),
+                QStringLiteral("/Net/EnableEventSounds"), QStringLiteral("-s"), QStringLiteral("false")});
         ui->checkbox_inputsounds->setChecked(false);
     }
 
     // Input feedback Sounds Enable or Disable
     if (ui->checkbox_inputsounds->isChecked()) {
         if (ui->checkbox_eventsounds->isChecked()) {
-            [[maybe_unused]] int result = system("xfconf-query -c xsettings -p /Net/EnableInputFeedbackSounds -s true");
+            runCmd(QStringLiteral("xfconf-query"),
+                   {QStringLiteral("-c"), QStringLiteral("xsettings"), QStringLiteral("-p"),
+                    QStringLiteral("/Net/EnableInputFeedbackSounds"), QStringLiteral("-s"), QStringLiteral("true")});
         } else {
-            [[maybe_unused]] int result = system("xfconf-query -c xsettings -p /Net/EnableInputFeedbackSounds -s false");
+            runCmd(QStringLiteral("xfconf-query"),
+                   {QStringLiteral("-c"), QStringLiteral("xsettings"), QStringLiteral("-p"),
+                    QStringLiteral("/Net/EnableInputFeedbackSounds"), QStringLiteral("-s"), QStringLiteral("false")});
         }
     } else {
-        [[maybe_unused]] int result = system("xfconf-query -c xsettings -p /Net/EnableInputFeedbackSounds -s false");
+        runCmd(QStringLiteral("xfconf-query"),
+               {QStringLiteral("-c"), QStringLiteral("xsettings"), QStringLiteral("-p"),
+                QStringLiteral("/Net/EnableInputFeedbackSounds"), QStringLiteral("-s"), QStringLiteral("false")});
     }
 
     // Login Sound Enable/disable
 
     if (ui->checkbox_login->isChecked()) {
-        runCmd("sed -i -r s/startup=.*/startup=true/ " + home_path
-               + "/.config/MX-Linux/mx-system-sounds/mx-login-logout_sounds.conf");
+        writeConfigValue(settingsPath, QStringLiteral("startup"), QStringLiteral("true"));
     } else {
-        runCmd("sed -i -r s/startup=.*/startup=false/ " + home_path
-               + "/.config/MX-Linux/mx-system-sounds/mx-login-logout_sounds.conf");
+        writeConfigValue(settingsPath, QStringLiteral("startup"), QStringLiteral("false"));
     }
 
     //    // Logout Sound Enable/disable
@@ -267,7 +374,9 @@ void MainWindow::on_buttonApply_clicked()
 
     // Set Sound Theme
     QString soundtheme2 = ui->comboBox_theme->currentText();
-    runCmd("xfconf-query -c xsettings -p /Net/SoundThemeName -s " + soundtheme2);
+    runCmd(QStringLiteral("xfconf-query"),
+           {QStringLiteral("-c"), QStringLiteral("xsettings"), QStringLiteral("-p"),
+            QStringLiteral("/Net/SoundThemeName"), QStringLiteral("-s"), soundtheme2});
 
     // Set custom sounds
 
@@ -275,22 +384,16 @@ void MainWindow::on_buttonApply_clicked()
     qDebug() << currentlogin;
 
     // Check home directory location first for defaults first
-    if (QDir(home_path + "/.local/share/sounds" + soundtheme2).exists()) {
-        defualtloginsound = runCmd(home_path + "/.local/share/sounds" + soundtheme2 + "/ |grep desktop-login").str;
-        // defualtlogoutsound = runCmd(home_path + "/.local/share/sounds" + soundtheme2 + "/ |grep
-        // desktop-logout").str;
-    } else {
-        // If not present, check system location second
-        defualtloginsound = runCmd("find /usr/share/sounds/" + soundtheme2 + "/ |grep desktop-login").str;
-        // defualtlogoutsound = runCmd("find /usr/share/sounds/" + soundtheme2 + "/ |grep desktop-logout").str;
-    }
+    defualtloginsound = findThemeSoundEvent(home_path, soundtheme2, QStringLiteral("desktop-login"));
     // Set login sound
     if (currentlogin != defualtloginsound) {
         if (currentlogin != QLatin1String("None")) {
-            runCmd("echo " + currentlogin + ">" + home_path + "/.config/MX-Linux/mx-system-sounds/startupsound.conf");
+            writeTextFile(startupSoundPath, currentlogin + '\n');
+        } else {
+            QFile::remove(startupSoundPath);
         }
     } else {
-        runCmd("rm -f " + home_path + "/.config/MX-Linux/mx-system-sounds/startupsound.conf");
+        QFile::remove(startupSoundPath);
     }
     // Set logout sound
     //    if (currentlogout != defualtlogoutsound) {
@@ -325,12 +428,11 @@ void MainWindow::on_buttonHelp_clicked()
     const QString lang = locale.bcp47Name();
 
     QString url = QStringLiteral("/usr/share/doc/mx-system-sounds/mx-system-sounds.html");
-
     if (lang.startsWith(QLatin1String("fr"))) {
-        url = QStringLiteral("https://mxlinux.org/wiki/help-files/help-mx-sons-syst%C3%A8me");
+        url = QStringLiteral("/usr/share/doc/mx-system-sounds/mx-system-sounds_fr.html");
     }
 
-    displayDoc(url, tr("%1 Help").arg(tr("MX System Sounds")));
+    displayHelpDoc(url, tr("%1 Help").arg(tr("MX System Sounds")));
 }
 
 void MainWindow::on_button_login_sound_clicked()
@@ -387,9 +489,10 @@ void MainWindow::on_button_play_login_clicked()
     // Play the sound currently defined in the login selection box
     qDebug() << " current login is ";
     qDebug() << currentlogin;
-    runCmd(QStringLiteral("pkill play"));
-    QString cmd = "play \"" + currentlogin + "\" &";
-    [[maybe_unused]] int result = system(cmd.toUtf8());
+    runCmd(QStringLiteral("pkill"), {QStringLiteral("play")});
+    if (currentlogin != QLatin1String("None")) {
+        QProcess::startDetached(QStringLiteral("play"), {currentlogin});
+    }
 }
 
 void MainWindow::on_button_play_logout_clicked()
@@ -397,9 +500,10 @@ void MainWindow::on_button_play_logout_clicked()
     // Play the sound currently defined in the logout selection box
     qDebug() << " current logout is ";
     qDebug() << currentlogout;
-    runCmd(QStringLiteral("pkill play"));
-    QString cmd = "play \"" + currentlogout + "\" &";
-    [[maybe_unused]] int result = system(cmd.toUtf8());
+    runCmd(QStringLiteral("pkill"), {QStringLiteral("play")});
+    if (currentlogout != QLatin1String("None")) {
+        QProcess::startDetached(QStringLiteral("play"), {currentlogout});
+    }
 }
 
 void MainWindow::on_button_reset_login_clicked()
@@ -407,7 +511,7 @@ void MainWindow::on_button_reset_login_clicked()
     // Reset the login sound to the theme default.  if the theme doesn't have a desktop-login defined, set to "None"
 
     defualtloginsound
-        = runCmd("find /usr/share/sounds/" + ui->comboBox_theme->currentText() + "/ |grep desktop-login").str;
+        = findThemeSoundEvent(QDir::homePath(), ui->comboBox_theme->currentText(), QStringLiteral("desktop-login"));
     QFileInfo file_info(defualtloginsound);
     if (file_info.exists()) {
         ui->button_login_sound->setText(QStringLiteral("Default"));
@@ -430,7 +534,7 @@ void MainWindow::on_button_reset_logout_clicked()
     // Reset the logout sound to the theme default.  if the theme doesn't have a desktop-logout defined, set to "None"
 
     defualtlogoutsound
-        = runCmd("find /usr/share/sounds/" + ui->comboBox_theme->currentText() + "/ |grep desktop-logout").str;
+        = findThemeSoundEvent(QDir::homePath(), ui->comboBox_theme->currentText(), QStringLiteral("desktop-logout"));
     QFileInfo file_info(defualtlogoutsound);
     if (file_info.exists()) {
         ui->button_logout_sound->setText(QStringLiteral("Default"));
@@ -456,15 +560,17 @@ void MainWindow::on_comboBox_theme_activated(const QString &arg1)
     //     logoutsound.conf
 
     QString home_path = QDir::homePath();
+    const QString startupSoundPath = home_path + "/.config/MX-Linux/mx-system-sounds/startupsound.conf";
+    const QString logoutSoundPath = home_path + "/.config/MX-Linux/mx-system-sounds/logoutsound.conf";
     if (theme_login_flag) {
-        QFileInfo file_info(home_path + "/.config/MX-Linux/mx-system-sounds/startupsound.conf");
+        QFileInfo file_info(startupSoundPath);
         if (file_info.exists()) {
-            currentlogin = runCmd("cat " + home_path + "/.config/MX-Linux/mx-system-sounds/startupsound.conf").str;
+            currentlogin = readTextFile(startupSoundPath);
             QFileInfo file_info(currentlogin);
             ui->button_login_sound->setText(file_info.baseName());
             ui->button_login_sound->setToolTip(file_info.filePath());
         } else {
-            defualtloginsound = runCmd("find /usr/share/sounds/" + arg1 + "/ |grep desktop-login").str;
+            defualtloginsound = findThemeSoundEvent(home_path, arg1, QStringLiteral("desktop-login"));
             QFileInfo file_info(defualtloginsound);
             if (file_info.exists()) {
                 ui->button_login_sound->setText(QStringLiteral("Default"));
@@ -481,14 +587,14 @@ void MainWindow::on_comboBox_theme_activated(const QString &arg1)
     qDebug() << currentlogin;
 
     if (theme_logout_flag) {
-        QFileInfo file_info2(home_path + "/.config/MX-Linux/mx-system-sounds/logoutsound.conf");
+        QFileInfo file_info2(logoutSoundPath);
         if (file_info2.exists()) {
-            currentlogout = runCmd("cat " + home_path + "/.config/MX-Linux/mx-system-sounds/logoutsound.conf").str;
+            currentlogout = readTextFile(logoutSoundPath);
             QFileInfo file_info(currentlogout);
             ui->button_logout_sound->setText(file_info.baseName());
             ui->button_logout_sound->setToolTip(file_info.filePath());
         } else {
-            defualtlogoutsound = runCmd("find /usr/share/sounds/" + arg1 + "/ |grep desktop-logout").str;
+            defualtlogoutsound = findThemeSoundEvent(home_path, arg1, QStringLiteral("desktop-logout"));
             QFileInfo file_info(defualtlogoutsound);
             if (file_info.exists()) {
                 ui->button_logout_sound->setText(QStringLiteral("Default"));

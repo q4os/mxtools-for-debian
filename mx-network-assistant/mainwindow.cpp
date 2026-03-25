@@ -27,7 +27,7 @@
 #include <QJsonObject>
 #include <QMenu>
 #include <QScreen>
-#include <QTemporaryFile>
+#include <QSysInfo>
 
 #include "about.h"
 
@@ -260,7 +260,7 @@ void MainWindow::on_tracerouteButton_clicked()
                                                tr("Traceroute is not installed, do you want to install it now?"),
                                                QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);
             if (ret == QMessageBox::Yes) {
-                cmd.runAsRoot("apt-get install -qq traceroute");
+                cmd.runAsRoot("apt-get", {"install", "-qq", "traceroute"});
                 setCursor(QCursor(Qt::ArrowCursor));
                 if (!Cmd().run("dpkg -s traceroute | grep -q '^Status: install ok installed'")) {
                     QMessageBox::critical(this, tr("Traceroute hasn't been installed"),
@@ -423,8 +423,10 @@ void MainWindow::on_linuxDrvDiagnosePushButton_clicked()
     linuxDrvList->clear();
     loadedModules.clear();
     const QStringList loadedKernelModules = Cmd().getOut("lsmod").trimmed().split("\n");
-    QStringList completeKernelNetModules
-        = Cmd().getOutAsRoot("find /lib/modules/$(uname -r)/kernel/drivers/net -name *.ko").trimmed().split("\n");
+    const QString kernelModulesDir = QString("/lib/modules/%1/kernel/drivers/net").arg(QSysInfo::kernelVersion());
+    QStringList completeKernelNetModules = Cmd().getOutAsRoot("find", {kernelModulesDir, "-name", "*.ko"})
+                                               .trimmed()
+                                               .split("\n");
     completeKernelNetModules = completeKernelNetModules.replaceInStrings(".ko", "");
     completeKernelNetModules = completeKernelNetModules.replaceInStrings(QRegularExpression("[\\w|\\.|-]*/"), "");
     // Those three kernel modules are in the "misc" section we add them manually
@@ -509,7 +511,8 @@ void MainWindow::on_windowsDrvDiagnosePushButton_clicked()
         QMessageBox::warning(this, windowTitle(), tr("Ndiswrapper is not installed"));
         return;
     }
-    QStringList queryResult = Cmd().getOutAsRoot("ndiswrapper -l 2>/dev/null").split("\n");
+    QStringList queryResult
+        = Cmd().getOutAsRoot("ndiswrapper", {"-l"}, QuietMode::No, StderrMode::Suppress).split("\n");
 
     if (queryResult.size() == 1 && queryResult.at(0).isEmpty()) {
         return;
@@ -559,7 +562,7 @@ bool MainWindow::blockModule(const QString &module)
     } else {
         outputBlockList.setFileName("/etc/modprobe.d/broadcom-sta-dkms.conf");
     }
-    Cmd().runAsRoot("echo blacklist " + module + ">>" + outputBlockList.fileName());
+    Cmd().appendLineAsRoot(outputBlockList.fileName(), "blacklist " + module);
     if (removable(module)) {
         if (!removeModule(module)) {
             return false;
@@ -597,7 +600,11 @@ void MainWindow::on_linuxDrvBlockPushButton_clicked()
                 }
             }
             inputBlockList.close();
-            Cmd().runAsRoot("echo '" + outputString.trimmed() + "' > " + outputBlockList.fileName());
+            QByteArray updatedBlockList = outputString.trimmed().toUtf8();
+            if (!updatedBlockList.isEmpty()) {
+                updatedBlockList.append('\n');
+            }
+            Cmd().writeFileAsRoot(outputBlockList.fileName(), updatedBlockList);
 
             QMessageBox::information(this, tr("Driver removed from blocklist"), tr("Driver removed from blocklist."));
             loadModule(driver);
@@ -614,52 +621,50 @@ void MainWindow::on_linuxDrvBlockPushButton_clicked()
 
 bool MainWindow::loadModule(const QString &module)
 {
-    Cmd().runAsRoot("service network-manager stop");
-    Cmd().runAsRoot("modprobe cfg80211"); // this has to get loaded and some drivers don't put it back correctly
-    if (!Cmd().runAsRoot("modprobe " + module)) {
+    Cmd().runAsRoot("service", {"network-manager", "stop"});
+    Cmd().runAsRoot("modprobe", {"cfg80211"}); // this has to get loaded and some drivers don't put it back correctly
+    if (!Cmd().runAsRoot("modprobe", {module})) {
         // run depmod and try to load again
         Cmd().runAsRoot("depmod");
-        if (!Cmd().runAsRoot("modprobe " + module)) {
+        if (!Cmd().runAsRoot("modprobe", {module})) {
             QString msg = QObject::tr("Could not load ");
             msg += module;
             QMessageBox::information(this, windowTitle(), msg);
-            Cmd().runAsRoot("pkill wpa_supplicant");
-            Cmd().runAsRoot("service network-manager start");
+            Cmd().runAsRoot("pkill", {"wpa_supplicant"});
+            Cmd().runAsRoot("service", {"network-manager", "start"});
             return false;
         }
     }
     if (!loadedModules.contains(module)) {
         loadedModules.append(module);
     }
-    Cmd().runAsRoot("pkill wpa_supplicant");
-    Cmd().runAsRoot("service network-manager start");
+    Cmd().runAsRoot("pkill", {"wpa_supplicant"});
+    Cmd().runAsRoot("service", {"network-manager", "start"});
     return true;
 }
 
 bool MainWindow::removable(const QString &module)
 {
-    return (Cmd().runAsRoot("modprobe -rn " + module));
+    return Cmd().runAsRoot("modprobe", {"-rn", module});
 }
 
 bool MainWindow::removeModule(const QString &module)
 {
-    Cmd().runAsRoot("service network-manager stop");
-    if (!Cmd().runAsRoot("modprobe -r " + module)) {
+    Cmd().runAsRoot("service", {"network-manager", "stop"});
+    if (!Cmd().runAsRoot("modprobe", {"-r", module})) {
         QString msg = QObject::tr("Could not unload ");
         msg += module;
         QMessageBox::information(this, windowTitle(), msg);
-        Cmd().runAsRoot("service network-manager start");
+        Cmd().runAsRoot("service", {"network-manager", "start"});
         return false;
     }
-    Cmd().runAsRoot("service network-manager start");
+    Cmd().runAsRoot("service", {"network-manager", "start"});
     return true;
 }
 
 bool MainWindow::removeStart(const QString &module)
 {
     QFile modulesFile("/etc/modules");
-    QTemporaryFile tempFile;
-    tempFile.open();
     if (!modulesFile.open(QIODevice::ReadOnly | QIODevice::Text)) {
         return false;
     }
@@ -674,14 +679,8 @@ bool MainWindow::removeStart(const QString &module)
         }
     }
 
-    QTextStream out(&tempFile);
-    out << outputString;
     modulesFile.close();
-    tempFile.close();
-    Cmd().runAsRoot("mv " + tempFile.fileName() + " " + modulesFile.fileName());
-    Cmd().runAsRoot("chown root: " + modulesFile.fileName(), true);
-    Cmd().runAsRoot("chmod +r " + modulesFile.fileName(), true);
-    return true;
+    return Cmd().writeFileAsRoot(modulesFile.fileName(), outputString.toUtf8());
 }
 
 bool MainWindow::installModule(const QString &module)
@@ -689,15 +688,14 @@ bool MainWindow::installModule(const QString &module)
     if (!loadModule(module)) {
         return false;
     }
-    Cmd().runAsRoot("echo " + module + ">>/etc/modules");
-    return true;
+    return Cmd().appendLineAsRoot("/etc/modules", module);
 }
 
 // Run apt-get update and at the end start installNDIS
 void MainWindow::on_installNdiswrapper_clicked()
 {
     setCursor(QCursor(Qt::BusyCursor));
-    cmd.runAsRoot("apt-get update");
+    cmd.runAsRoot("apt-get", {"update"});
     installOutputEdit->clear();
     installOutputEdit->show();
     const int height = 600;
@@ -721,7 +719,7 @@ void MainWindow::on_uninstallNdiswrapper_clicked()
 {
     setCursor(QCursor(Qt::BusyCursor));
     removeModule("ndiswrapper");
-    cmd.runAsRoot("apt-get purge -y ndiswrapper-utils-1.9 ndiswrapper-dkms ndiswrapper-common");
+    cmd.runAsRoot("apt-get", {"purge", "-y", "ndiswrapper-utils-1.9", "ndiswrapper-dkms", "ndiswrapper-common"});
     installOutputEdit->clear();
     installOutputEdit->show();
     const int height = 600;
@@ -744,7 +742,7 @@ void MainWindow::on_uninstallNdiswrapper_clicked()
 
 void MainWindow::aptUpdateFinished()
 {
-    cmd.runAsRoot("apt-get install -y ndiswrapper-utils-1.9 ndiswrapper-dkms");
+    cmd.runAsRoot("apt-get", {"install", "-y", "ndiswrapper-utils-1.9", "ndiswrapper-dkms"});
     disconnect(&cmd, &QProcess::readyReadStandardOutput, nullptr, nullptr);
     connect(&cmd, &QProcess::readyReadStandardOutput, this, &MainWindow::writeInstallOutput);
     disconnect(&cmd, QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished), nullptr, nullptr);
@@ -907,10 +905,8 @@ void MainWindow::on_windowsDrvAddPushButton_clicked()
                     tr("The *.sys files must be in the same location as the *.inf file. %1 cannot be found")
                         .arg(foundSysFiles.join(", ")));
             } else {
-                QString cmd_str = QStringLiteral("ndiswrapper -i %1").arg(infFileName);
-                Cmd().runAsRoot(cmd_str);
-                cmd_str = "ndiswrapper -ma";
-                Cmd().runAsRoot(cmd_str);
+                Cmd().runAsRoot("ndiswrapper", {"-i", infFileName});
+                Cmd().runAsRoot("ndiswrapper", {"-ma"});
                 on_windowsDrvDiagnosePushButton_clicked();
             }
         } else {
@@ -931,8 +927,7 @@ void MainWindow::on_windowsDrvRemovePushButton_clicked()
     if (windowsDrvList->currentRow() != -1) {
         QListWidgetItem *currentDriver = windowsDrvList->currentItem();
         QString driver = currentDriver->text();
-        QString cmd_str = QStringLiteral("ndiswrapper -r %1").arg(driver.left(driver.indexOf(" ")));
-        Cmd().runAsRoot(cmd_str);
+        Cmd().runAsRoot("ndiswrapper", {"-r", driver.left(driver.indexOf(" "))});
         QMessageBox::information(this, windowTitle(), tr("Ndiswrapper driver removed."));
         on_windowsDrvDiagnosePushButton_clicked();
     }
@@ -941,7 +936,7 @@ void MainWindow::on_windowsDrvRemovePushButton_clicked()
 void MainWindow::on_generalHelpPushButton_clicked()
 {
     const QString url {"/usr/share/doc/mx-network-assistant/mx-network-assistant.html"};
-    displayDoc(url, tr("%1 Help").arg(windowTitle()));
+    displayHelpDoc(url, tr("%1 Help").arg(windowTitle()));
 }
 
 void MainWindow::on_tabWidget_currentChanged()
@@ -951,7 +946,7 @@ void MainWindow::on_tabWidget_currentChanged()
 
 void MainWindow::on_hwUnblock_clicked()
 {
-    if (!Cmd().runAsRoot("rfkill unblock wlan wifi")) {
+    if (!Cmd().runAsRoot("rfkill", {"unblock", "wlan", "wifi"})) {
         QMessageBox::warning(this, windowTitle(),
                              tr("Could not unlock devices.\nWiFi device(s) might already be unlocked."));
     } else {
@@ -1028,7 +1023,7 @@ void MainWindow::on_pushEnable_clicked()
     pushEnable->setEnabled(false);
     pushDisable->setEnabled(false);
     hwDiagnosePushButton->setEnabled(false);
-    Cmd().runAsRoot("ip link set " + hwList->currentItem()->text(Col::Interface) + " up");
+    Cmd().runAsRoot("ip", {"link", "set", hwList->currentItem()->text(Col::Interface), "up"});
     refresh();
 }
 
@@ -1037,6 +1032,6 @@ void MainWindow::on_pushDisable_clicked()
     pushEnable->setEnabled(false);
     pushDisable->setEnabled(false);
     hwDiagnosePushButton->setEnabled(false);
-    Cmd().runAsRoot("ip link set " + hwList->currentItem()->text(Col::Interface) + " down");
+    Cmd().runAsRoot("ip", {"link", "set", hwList->currentItem()->text(Col::Interface), "down"});
     refresh();
 }

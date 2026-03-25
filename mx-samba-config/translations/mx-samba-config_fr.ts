@@ -94,7 +94,7 @@
     <message>
         <location filename="../src/mainwindow.ui" line="70"/>
         <source>&amp;Edit</source>
-        <translation>&amp;Éditer</translation>
+        <translation>&amp;Editer</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="80"/>
@@ -233,6 +233,7 @@
         <location filename="../src/mainwindow.cpp" line="567"/>
         <location filename="../src/mainwindow.cpp" line="582"/>
         <location filename="../src/mainwindow.cpp" line="597"/>
+        <location filename="../src/mainwindow.cpp" line="603"/>
         <source>Error</source>
         <translation>Erreur</translation>
     </message>
@@ -473,6 +474,11 @@
         <location filename="../src/mainwindow.cpp" line="582"/>
         <source>Error processing permissions: </source>
         <translation>Erreur dans le traitement des autorisations : </translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="603"/>
+        <source>Please add a Samba user before creating a share.</source>
+        <translation>Veuillez ajouter un utilisateur Samba avant de créer un partage.</translation>
     </message>
 </context>
 <context>

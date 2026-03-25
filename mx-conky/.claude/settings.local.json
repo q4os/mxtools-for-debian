@@ -31,8 +31,14 @@
       "Bash(./benchmark_conky_validation)",
       "Read(//usr/share/mx-conky-data/themes/**)",
       "Read(//home/adrian/Sync/.fonts/**)",
-      "Read(//home/adrian/.fonts/**)"
+      "Read(//home/adrian/.fonts/**)",
+      "Read(//home/adrian/Sync/programs/qt/mx-snapshot/**)",
+      "Bash(/dev/null grep:*)"
     ],
     "deny": []
-  }
+  },
+  "enableAllProjectMcpServers": true,
+  "enabledMcpjsonServers": [
+    "docker"
+  ]
 }

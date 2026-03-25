@@ -30,23 +30,43 @@ if(USE_CLANG)
     message(STATUS "Using clang compiler")
 endif()
 
-# Get version from debian/changelog
-execute_process(
-    COMMAND dpkg-parsechangelog -SVersion
-    WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
-    OUTPUT_VARIABLE PROJECT_VERSION_FROM_CHANGELOG
-    OUTPUT_STRIP_TRAILING_WHITESPACE
-    RESULT_VARIABLE DPKG_RESULT
-)
+set(PROJECT_VERSION_FROM_CHANGELOG "")
 
-# Fallback to a safe default when changelog parsing is unavailable
-if(NOT DPKG_RESULT EQUAL 0 OR PROJECT_VERSION_FROM_CHANGELOG STREQUAL "")
-    message(WARNING "Falling back to version 0.0.0 (dpkg-parsechangelog not available or failed)")
-    set(PROJECT_VERSION_FROM_CHANGELOG "0.0.0")
+if(DEFINED PROJECT_VERSION_OVERRIDE AND NOT "${PROJECT_VERSION_OVERRIDE}" STREQUAL "")
+    set(PROJECT_VERSION_FROM_CHANGELOG "${PROJECT_VERSION_OVERRIDE}")
+    message(STATUS "Using version override: ${PROJECT_VERSION_FROM_CHANGELOG}")
+else()
+    # Try dpkg-parsechangelog first (Debian/Ubuntu)
+    execute_process(
+        COMMAND dpkg-parsechangelog -SVersion
+        WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+        OUTPUT_VARIABLE PROJECT_VERSION_FROM_CHANGELOG
+        OUTPUT_STRIP_TRAILING_WHITESPACE
+        RESULT_VARIABLE DPKG_RESULT
+        ERROR_QUIET
+    )
+
+    if(DPKG_RESULT EQUAL 0 AND NOT "${PROJECT_VERSION_FROM_CHANGELOG}" STREQUAL "")
+        message(STATUS "Using version from debian/changelog: ${PROJECT_VERSION_FROM_CHANGELOG}")
+    elseif(EXISTS ${CMAKE_SOURCE_DIR}/debian/changelog)
+        file(READ ${CMAKE_SOURCE_DIR}/debian/changelog PROJECT_CHANGELOG_CONTENT)
+        string(REGEX MATCH "^[^\\(]*\\(([^)]+)\\)" _match "${PROJECT_CHANGELOG_CONTENT}")
+        if(NOT _match)
+            message(FATAL_ERROR "Could not parse version from debian/changelog")
+        endif()
+        set(PROJECT_VERSION_FROM_CHANGELOG "${CMAKE_MATCH_1}")
+        message(STATUS "Using version parsed from debian/changelog: ${PROJECT_VERSION_FROM_CHANGELOG}")
+    else()
+        message(FATAL_ERROR "Could not determine version: dpkg-parsechangelog not available and debian/changelog missing")
+    endif()
 endif()
 
+# Store full version (e.g., "26.02arch") and strip non-numeric suffix for CMake
+set(PROJECT_VERSION_FULL "${PROJECT_VERSION_FROM_CHANGELOG}")
+string(REGEX REPLACE "[^0-9.].*$" "" PROJECT_VERSION_NUMERIC "${PROJECT_VERSION_FROM_CHANGELOG}")
+
 project(mx-samba-config
-    VERSION ${PROJECT_VERSION_FROM_CHANGELOG}
+    VERSION ${PROJECT_VERSION_NUMERIC}
     DESCRIPTION "Samba configuration tool for MX Linux"
     LANGUAGES CXX
 )
@@ -148,7 +168,7 @@ endif()
 target_compile_definitions(mx-samba-config PRIVATE
     QT_DEPRECATED_WARNINGS
     QT_DISABLE_DEPRECATED_BEFORE=0x060000
-    VERSION="${PROJECT_VERSION}"
+    VERSION="${PROJECT_VERSION_FULL}"
 )
 
 # Release-specific optimizations

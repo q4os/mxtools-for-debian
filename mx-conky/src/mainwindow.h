@@ -23,6 +23,13 @@
  **********************************************************************/
 #pragma once
 
+#include "cmd.h"
+#include "conkycustomizedialog.h"
+#include "conkylistwidget.h"
+#include "conkymanager.h"
+#include "previewdialog.h"
+#include "settingsdialog.h"
+
 #include <QAction>
 #include <QComboBox>
 #include <QDialog>
@@ -38,13 +45,6 @@
 #include <QSplitter>
 #include <QStackedWidget>
 #include <QVBoxLayout>
-
-#include "cmd.h"
-#include "conkycustomizedialog.h"
-#include "conkylistwidget.h"
-#include "conkymanager.h"
-#include "previewdialog.h"
-#include "settingsdialog.h"
 
 class MainWindow : public QDialog
 {
@@ -108,8 +108,10 @@ private:
     bool m_copyDialogShownThisSession;
 
     void editConkyFile(const QString &filePath);
+    [[nodiscard]] QString docPath(const QString &fileName) const;
     void populateFilterComboBox();
     void setConnections();
+    void showHtmlDocument(const QString &path, const QString &title, bool largeWindow = false);
     void setupConkyFonts();
     void setupLoadingWidget();
     void setupMainWidget();

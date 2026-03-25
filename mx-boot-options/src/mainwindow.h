@@ -77,6 +77,8 @@ protected:
     void keyPressEvent(QKeyEvent *event) override;
 
 private:
+    enum struct PackageManager { Apt, Pacman, Unknown };
+
     Ui::MainWindow *ui;
     Cmd cmd;
     QProgressBar *bar {};
@@ -99,9 +101,9 @@ private:
     QStringList grubCfg;
     QTemporaryDir tempDir;
     const QString kernelOptions {readKernelOpts()};
-    const QStringList requiredPackages {"plymouth", "plymouth-x11", "plymouth-themes", "plymouth-themes-mx"};
 
     [[nodiscard]] QString readKernelOpts();
+    [[nodiscard]] QString targetRootPath() const;
     [[nodiscard]] QString selectPartition(const QStringList &list);
     [[nodiscard]] QStringList getLinuxPartitions();
     [[nodiscard]] bool inVirtualMachine();
@@ -115,6 +117,13 @@ private:
     [[nodiscard]] static bool isSplashEnabled();
     [[nodiscard]] static bool isWaylandSession();
     [[nodiscard]] bool isSystemdEnvironment() const;
+    [[nodiscard]] PackageManager detectPackageManager() const;
+    [[nodiscard]] QString grubPackageName() const;
+    [[nodiscard]] QStringList requiredPlymouthPackages() const;
+    [[nodiscard]] bool runPackageUpdate();
+    [[nodiscard]] bool installPackages(const QStringList &packages);
+    [[nodiscard]] bool runUpdateGrub();
+    [[nodiscard]] bool runUpdateInitramfs();
     bool replaceGrubArg(const QString &key, const QString &item);
     static void sendMouseEvents();
     void addGrubLine(const QString &item);
@@ -137,6 +146,7 @@ private:
     void setGeneralConnections();
     void setup();
     void setupGrubSettings();
+    void toggleBootlogd(bool enable);
     void unmountAndClean(const QStringList &mountList);
     void writeDefaultGrub();
 };

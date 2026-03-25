@@ -88,6 +88,10 @@ set(SOURCES
     src/about.cpp
 )
 
+set(HELPER_SOURCES
+    src/helper.cpp
+)
+
 set(HEADERS
     src/mainwindow.h
     src/cmd.h
@@ -116,11 +120,19 @@ add_executable(mx-live-usb-maker
     ./images.qrc
 )
 
+add_executable(helper
+    ${HELPER_SOURCES}
+)
+
 # Link Qt6 libraries
 target_link_libraries(mx-live-usb-maker
     Qt6::Core
     Qt6::Gui
     Qt6::Widgets
+)
+
+target_link_libraries(helper
+    Qt6::Core
 )
 
 # Set compiler flags
@@ -133,15 +145,32 @@ target_compile_options(mx-live-usb-maker PRIVATE
     -Werror
 )
 
+target_compile_options(helper PRIVATE
+    -Wpedantic
+    -pedantic
+    -Werror=return-type
+    -Werror=switch
+    -Werror=uninitialized
+    -Werror
+)
+
 # Add compiler-specific flags
 if(CMAKE_CXX_COMPILER_ID STREQUAL "Clang" OR USE_CLANG)
     target_compile_options(mx-live-usb-maker PRIVATE -Werror=return-stack-address)
+    target_compile_options(helper PRIVATE -Werror=return-stack-address)
 else()
     target_compile_options(mx-live-usb-maker PRIVATE -Werror=return-local-addr)
+    target_compile_options(helper PRIVATE -Werror=return-local-addr)
 endif()
 
 # Set compile definitions
 target_compile_definitions(mx-live-usb-maker PRIVATE
+    QT_DEPRECATED_WARNINGS
+    QT_DISABLE_DEPRECATED_BEFORE=0x060000
+    VERSION="${PROJECT_VERSION}"
+)
+
+target_compile_definitions(helper PRIVATE
     QT_DEPRECATED_WARNINGS
     QT_DISABLE_DEPRECATED_BEFORE=0x060000
     VERSION="${PROJECT_VERSION}"
@@ -175,8 +204,17 @@ set_target_properties(mx-live-usb-maker PROPERTIES
     RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}
 )
 
+set_target_properties(helper PROPERTIES
+    OUTPUT_NAME "helper"
+    RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}
+)
+
 # Install target (required by Debian build system)
 # Other files are handled by debian/install
 install(TARGETS mx-live-usb-maker
     RUNTIME DESTINATION bin
+)
+
+install(TARGETS helper
+    RUNTIME DESTINATION lib/mx-live-usb-maker
 )

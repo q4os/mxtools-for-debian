@@ -10,7 +10,6 @@ Homepage: https://github.com/MX-Linux/mx-network-assistant
 Package: mx-network-assistant
 Architecture: any
 Depends: lshw,
-         mx-viewer | xdg-utils,
          rfkill,
          ${misc:Depends},
          ${shlibs:Depends}

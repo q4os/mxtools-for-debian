@@ -146,11 +146,19 @@ add_executable(uefi-manager
     ${RESOURCE_FILES}
 )
 
+add_executable(helper
+    helper.cpp
+)
+
 # Link Qt6 libraries
 target_link_libraries(uefi-manager
     Qt6::Core
     Qt6::Gui
     Qt6::Widgets
+)
+
+target_link_libraries(helper
+    Qt6::Core
 )
 
 # Set compiler flags
@@ -163,11 +171,22 @@ target_compile_options(uefi-manager PRIVATE
     -Werror
 )
 
+target_compile_options(helper PRIVATE
+    -Wpedantic
+    -pedantic
+    -Werror=return-type
+    -Werror=switch
+    -Werror=uninitialized
+    -Werror
+)
+
 # Add compiler-specific flags
 if(CMAKE_CXX_COMPILER_ID STREQUAL "Clang" OR USE_CLANG)
     target_compile_options(uefi-manager PRIVATE -Werror=return-stack-address)
+    target_compile_options(helper PRIVATE -Werror=return-stack-address)
 else()
     target_compile_options(uefi-manager PRIVATE -Werror=return-local-addr)
+    target_compile_options(helper PRIVATE -Werror=return-local-addr)
 endif()
 
 # Set compile definitions
@@ -181,14 +200,20 @@ target_compile_definitions(uefi-manager PRIVATE
 if(CMAKE_BUILD_TYPE STREQUAL "Release")
     target_compile_definitions(uefi-manager PRIVATE NDEBUG)
     target_compile_options(uefi-manager PRIVATE -O3)
+    target_compile_definitions(helper PRIVATE NDEBUG)
+    target_compile_options(helper PRIVATE -O3)
 
     # Add LTO - different flags for different compilers
     if(CMAKE_CXX_COMPILER_ID STREQUAL "Clang" OR USE_CLANG)
         target_compile_options(uefi-manager PRIVATE -flto=thin)
         target_link_options(uefi-manager PRIVATE -flto=thin)
+        target_compile_options(helper PRIVATE -flto=thin)
+        target_link_options(helper PRIVATE -flto=thin)
     else()
         target_compile_options(uefi-manager PRIVATE -flto=auto)
         target_link_options(uefi-manager PRIVATE -flto=auto)
+        target_compile_options(helper PRIVATE -flto=auto)
+        target_link_options(helper PRIVATE -flto=auto)
     endif()
 endif()
 
@@ -205,10 +230,19 @@ set_target_properties(uefi-manager PROPERTIES
     RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}
 )
 
+set_target_properties(helper PROPERTIES
+    OUTPUT_NAME "helper"
+    RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}
+)
+
 # Install target (required by Debian build system)
 # Other files are handled by debian/install
 install(TARGETS uefi-manager
     RUNTIME DESTINATION bin
+)
+
+install(TARGETS helper
+    RUNTIME DESTINATION lib/uefi-manager
 )
 
 # Unit tests
@@ -224,5 +258,5 @@ if(Qt6Test_FOUND)
     target_include_directories(test_utils PRIVATE src)
     target_link_libraries(test_utils Qt6::Core Qt6::Test)
     add_test(NAME test_utils COMMAND test_utils)
-    add_test(NAME test_helper COMMAND bash ${CMAKE_SOURCE_DIR}/tests/test_helper.sh)
+    add_test(NAME test_helper COMMAND bash ${CMAKE_SOURCE_DIR}/tests/test_helper.sh ${CMAKE_BINARY_DIR}/helper)
 endif()

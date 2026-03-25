@@ -51,10 +51,13 @@
 #include "versionnumber.h"
 #include <algorithm>
 #include <chrono>
+#include <unistd.h>
 
 using namespace std::chrono_literals;
 
 namespace {
+constexpr auto MxpiLibPath = "/usr/lib/mx-packageinstaller/mxpi-lib";
+
 QString sanitizeOutputForDisplay(const QString &output)
 {
     static const QRegularExpression ansiEscape {R"(\x1B\[[0-9;?]*[A-Za-z])"};
@@ -63,6 +66,93 @@ QString sanitizeOutputForDisplay(const QString &output)
     cleanOutput.remove(ansiEscape);
     cleanOutput.remove(ansiQuery);
     return cleanOutput;
+}
+
+QString debconfFrontend()
+{
+    return QFile::exists("/usr/share/doc/debconf-kde-helper") ? QStringLiteral("kde") : QStringLiteral("gnome");
+}
+
+QHash<QString, QString> debconfEnvironment()
+{
+    return {{QStringLiteral("DEBIAN_FRONTEND"), debconfFrontend()}};
+}
+
+QStringList packageArgs(const QString &names)
+{
+    return names.split(' ', Qt::SkipEmptyParts);
+}
+
+QString mxTestSourceLine(QString repoDistsUrl, const QString &suite, const QString &arch)
+{
+    if (repoDistsUrl.endsWith(QLatin1String("dists/"))) {
+        repoDistsUrl.chop(QStringLiteral("dists/").size());
+    }
+    if (repoDistsUrl.endsWith(QLatin1Char('/'))) {
+        repoDistsUrl.chop(1);
+    }
+    const QString prefix
+        = (arch == QLatin1String("amd64")) ? QStringLiteral("deb ") : QStringLiteral("deb [arch=%1] ").arg(arch);
+    return prefix + repoDistsUrl + ' ' + suite + QStringLiteral(" test\n");
+}
+
+QString backportsSourceLine(const QString &suite)
+{
+    return QStringLiteral("deb http://ftp.debian.org/debian %1-backports main contrib non-free\n").arg(suite);
+}
+
+bool runHooksAsRoot(Cmd &cmd, const QStringList &hooks, Cmd::QuietMode quiet = Cmd::QuietMode::No)
+{
+    for (const QString &hook : hooks) {
+        if (!hook.trimmed().isEmpty() && !cmd.runHookAsRoot(hook, quiet)) {
+            return false;
+        }
+    }
+    return true;
+}
+
+QString shellSingleQuote(QString text)
+{
+    text.replace(QLatin1Char('\''), QStringLiteral("'\"'\"'"));
+    return QStringLiteral("'") + text + QStringLiteral("'");
+}
+
+QString flatpakPtyCommand(const QString &command)
+{
+    return QStringLiteral("script -qefc %1 /dev/null").arg(shellSingleQuote(command));
+}
+
+void appendFlatpakStatusMessage(QPlainTextEdit *outputBox, const QString &message)
+{
+    if (!outputBox) {
+        return;
+    }
+
+    QTextCursor cursor = outputBox->textCursor();
+    cursor.movePosition(QTextCursor::End);
+    if (outputBox->document()->characterCount() > 1) {
+        const QString lastLine = outputBox->document()->lastBlock().text();
+        if (!lastLine.isEmpty()) {
+            cursor.insertText("\n");
+        }
+    }
+    cursor.insertText(message + "\n");
+    outputBox->setTextCursor(cursor);
+    outputBox->verticalScrollBar()->setValue(outputBox->verticalScrollBar()->maximum());
+}
+
+bool runMxpiLibAsRoot(Cmd &cmd, const QString &action, Cmd::QuietMode quiet = Cmd::QuietMode::Yes)
+{
+    const QString mxpiLibPath = QString::fromLatin1(MxpiLibPath);
+    if (getuid() == 0) {
+        return cmd.proc(mxpiLibPath, {action}, nullptr, nullptr, quiet);
+    }
+    return cmd.proc(Cmd::elevationTool(), {mxpiLibPath, action}, nullptr, nullptr, quiet);
+}
+
+bool runMxpiLib(Cmd &cmd, const QString &action, Cmd::QuietMode quiet = Cmd::QuietMode::Yes)
+{
+    return cmd.proc(QString::fromLatin1(MxpiLibPath), {action}, nullptr, nullptr, quiet);
 }
 } // namespace
 
@@ -82,13 +172,19 @@ MainWindow::MainWindow(const QCommandLineParser &argParser, QWidget *parent)
     connect(&cmd, &Cmd::done, this, &MainWindow::cmdDone);
     connect(&cmd, &Cmd::outputAvailable, this, [this](const QString &out) {
         if (!suppressCmdOutput) {
-            qDebug() << sanitizeOutputForDisplay(out).trimmed();
+            const QString clean = sanitizeOutputForDisplay(out).trimmed();
+            if (!clean.isEmpty()) {
+                qDebug() << clean;
+            }
         }
     });
     connect(&cmd, &Cmd::errorAvailable, this,
             [this](const QString &out) {
                 if (!suppressCmdOutput) {
-                    qWarning() << sanitizeOutputForDisplay(out).trimmed();
+                    const QString clean = sanitizeOutputForDisplay(out).trimmed();
+                    if (!clean.isEmpty()) {
+                        qWarning() << clean;
+                    }
                 }
             });
     setWindowFlags(Qt::Window); // For the close, min and max buttons
@@ -148,7 +244,8 @@ MainWindow::MainWindow(const QCommandLineParser &argParser, QWidget *parent)
     // Run flatpak setup and display in a separate thread
     if (arch != QLatin1String("i386") && checkInstalled(QStringLiteral("flatpak"))) {
         auto flatpakFuture [[maybe_unused]] = QtConcurrent::run([this] {
-            Cmd().run(elevate + "/usr/lib/mx-packageinstaller/mxpi-lib flatpak_add_repos", Cmd::QuietMode::Yes);
+            Cmd helperCmd;
+            runMxpiLibAsRoot(helperCmd, QStringLiteral("flatpak_add_repos"));
             QMetaObject::invokeMethod(this, [this] { displayFlatpaks(); }, Qt::QueuedConnection);
         });
     }
@@ -225,6 +322,11 @@ void MainWindow::setup()
     ui->checkHideLibs->setChecked(savedHideLibs);
     ui->checkHideLibsMX->setChecked(savedHideLibs);
     ui->checkHideLibsBP->setChecked(savedHideLibs);
+
+    // Load persisted setting for repo-only filter
+    const bool savedRepoOnly = settings.value("RepoOnly", false).toBool();
+    ui->checkRepoOnlyMX->setChecked(savedRepoOnly);
+    ui->checkRepoOnlyBP->setChecked(savedRepoOnly);
 
     // Ensure "Select all" checkboxes start hidden/unchecked
     // (Deprecated UI checkboxes remain hidden in UI; header checkboxes are used instead.)
@@ -330,10 +432,12 @@ void MainWindow::setupModels()
     mxtestProxy = new PackageFilterProxy(this);
     mxtestProxy->setSourceModel(mxtestModel);
     mxtestProxy->setHideLibraries(hideLibsChecked);
+    mxtestProxy->setRepoOnly(settings.value("RepoOnly", false).toBool());
 
     backportsProxy = new PackageFilterProxy(this);
     backportsProxy->setSourceModel(backportsModel);
     backportsProxy->setHideLibraries(hideLibsChecked);
+    backportsProxy->setRepoOnly(settings.value("RepoOnly", false).toBool());
 
     // Set models on tree views
     ui->treeEnabled->setModel(enabledProxy);
@@ -383,7 +487,7 @@ void MainWindow::setupModels()
     connect(popularModel, &PopularModel::checkStateChanged, this, &MainWindow::onPopularItemChanged);
 }
 
-bool MainWindow::uninstall(const QString &names, const QString &preuninstall, const QString &postuninstall)
+bool MainWindow::uninstall(const QString &names, const QStringList &preuninstall, const QStringList &postuninstall)
 {
     qDebug() << "+++" << __PRETTY_FUNCTION__ << "+++";
     ui->tabWidget->setCurrentWidget(ui->tabOutput);
@@ -405,7 +509,7 @@ bool MainWindow::uninstall(const QString &names, const QString &preuninstall, co
         if (lockFile.isLockedGUI()) {
             return false;
         }
-        success = cmd.runAsRoot(preuninstall);
+        success = runHooksAsRoot(cmd, preuninstall);
     }
 
     if (success) {
@@ -413,9 +517,9 @@ bool MainWindow::uninstall(const QString &names, const QString &preuninstall, co
         if (lockFile.isLockedGUI()) {
             return false;
         }
-        success = cmd.runAsRoot("DEBIAN_FRONTEND=$(dpkg -l debconf-kde-helper 2>/dev/null | grep -sq ^i "
-                                "&& echo kde || echo gnome) apt-get -o=Dpkg::Use-Pty=0 remove -y "
-                                + names); // use -y since there is a confirm dialog already
+        QStringList args {"-o=Dpkg::Use-Pty=0", "remove", "-y"};
+        args += packageArgs(names);
+        success = cmd.procAsRootWithEnv(debconfEnvironment(), "apt-get", args);
     }
 
     if (success && !postuninstall.isEmpty()) {
@@ -425,7 +529,7 @@ bool MainWindow::uninstall(const QString &names, const QString &preuninstall, co
         if (lockFile.isLockedGUI()) {
             return false;
         }
-        success = cmd.runAsRoot(postuninstall);
+        success = runHooksAsRoot(cmd, postuninstall);
     }
     return success;
 }
@@ -444,7 +548,7 @@ bool MainWindow::updateApt()
     }
 
     enableOutput();
-    if (cmd.run(elevate + "/usr/lib/mx-packageinstaller/mxpi-lib apt_update", Cmd::QuietMode::Yes)) {
+    if (runMxpiLibAsRoot(cmd, QStringLiteral("apt_update"))) {
         qDebug() << "sources updated OK";
         updatedOnce = true;
         return true;
@@ -533,9 +637,10 @@ void MainWindow::updateInterface()
         return;
     }
 
+    auto *proxy = getCurrentProxy();
     int upgradeCount = model->countByStatus(Status::Upgradable);
     int installCount = model->countByStatus(Status::Installed);
-    int totalCount = model->rowCount();
+    int totalCount = (proxy && proxy->repoOnly()) ? proxy->rowCount() : model->rowCount();
 
     auto updateLabelsAndFocus = [&](QLabel *labelNumApps, QLabel *labelNumUpgrade, QLabel *labelNumInstall,
                                     QPushButton *pushForceUpdate, QLineEdit *searchBox) {
@@ -738,7 +843,8 @@ void MainWindow::checkUncheckItem()
 
 void MainWindow::outputAvailable(const QString &output)
 {
-    static const QRegularExpression statusKey {R"(^\s*(Installing|Uninstalling)\s+\d+/\d+)"};
+    static const QRegularExpression statusKey {
+        R"(^\s*(Installing|Uninstalling|Updating)(?:\s+\d+/\d+(?:…|\.\.\.)?|(?:…|\.\.\.)))"};
 
     // Remove ANSI escape sequences
     QString cleanOutput = sanitizeOutputForDisplay(output);
@@ -752,7 +858,7 @@ void MainWindow::outputAvailable(const QString &output)
                 continue;
             }
             const QRegularExpressionMatch match = statusKey.match(text);
-            if (match.hasMatch() && match.captured(0) == key) {
+            if (match.hasMatch() && match.captured(1) == key) {
                 QTextCursor cursor(block);
                 cursor.select(QTextCursor::LineUnderCursor);
                 cursor.removeSelectedText();
@@ -764,10 +870,13 @@ void MainWindow::outputAvailable(const QString &output)
         return false;
     };
 
+    bool shouldScrollToBottom = false;
+
     auto insertLine = [&](const QString &line, bool addNewline, bool overwriteCurrentLine) {
         QTextCursor cursor = ui->outputBox->textCursor();
         cursor.movePosition(QTextCursor::End);
-        if (overwriteCurrentLine) {
+        const bool shouldOverwrite = overwriteCurrentLine && !line.isEmpty();
+        if (shouldOverwrite) {
             cursor.movePosition(QTextCursor::StartOfLine, QTextCursor::KeepAnchor);
             cursor.removeSelectedText();
         }
@@ -776,9 +885,13 @@ void MainWindow::outputAvailable(const QString &output)
             cursor.insertText("\n");
         }
         ui->outputBox->setTextCursor(cursor);
+        if (addNewline || !shouldOverwrite) {
+            shouldScrollToBottom = true;
+        }
     };
 
     bool overwriteCurrentLine = false;
+    bool skipNextLineFeed = false;
     QString buffer;
     auto flushBuffer = [&](bool addNewline) {
         if (buffer.isEmpty() && !addNewline) {
@@ -787,7 +900,7 @@ void MainWindow::outputAvailable(const QString &output)
         const QString line = buffer;
         buffer.clear();
         const QRegularExpressionMatch match = statusKey.match(line);
-        const QString key = match.hasMatch() ? match.captured(0) : QString();
+        const QString key = match.hasMatch() ? match.captured(1) : QString();
         const bool replaced = !key.isEmpty() && !overwriteCurrentLine && replaceLastStatusLine(key, line);
         if (!replaced) {
             insertLine(line, addNewline, overwriteCurrentLine);
@@ -796,18 +909,34 @@ void MainWindow::outputAvailable(const QString &output)
 
     for (const QChar ch : cleanOutput) {
         if (ch == QLatin1Char('\r')) {
-            flushBuffer(false);
-            overwriteCurrentLine = true;
+            if (buffer.isEmpty()) {
+                overwriteCurrentLine = true;
+                skipNextLineFeed = false;
+                continue;
+            }
+
+            const bool isProgressLine = statusKey.match(buffer).hasMatch();
+            flushBuffer(!isProgressLine);
+            overwriteCurrentLine = isProgressLine;
+            skipNextLineFeed = !isProgressLine;
         } else if (ch == QLatin1Char('\n')) {
+            if (skipNextLineFeed) {
+                skipNextLineFeed = false;
+                overwriteCurrentLine = false;
+                continue;
+            }
             flushBuffer(true);
             overwriteCurrentLine = false;
         } else {
+            skipNextLineFeed = false;
             buffer.append(ch);
         }
     }
     flushBuffer(false);
 
-    ui->outputBox->verticalScrollBar()->setValue(ui->outputBox->verticalScrollBar()->maximum());
+    if (shouldScrollToBottom) {
+        ui->outputBox->verticalScrollBar()->setValue(ui->outputBox->verticalScrollBar()->maximum());
+    }
 }
 
 void MainWindow::loadPmFiles()
@@ -1087,6 +1216,8 @@ void MainWindow::setConnections()
     connect(ui->checkHideLibs, &QCheckBox::toggled, this, &MainWindow::checkHideLibs_toggled);
     connect(ui->checkHideLibsBP, &QCheckBox::clicked, this, &MainWindow::checkHideLibsBP_clicked);
     connect(ui->checkHideLibsMX, &QCheckBox::clicked, this, &MainWindow::checkHideLibsMX_clicked);
+    connect(ui->checkRepoOnlyMX, &QCheckBox::clicked, this, &MainWindow::checkRepoOnlyMX_clicked);
+    connect(ui->checkRepoOnlyBP, &QCheckBox::clicked, this, &MainWindow::checkRepoOnlyBP_clicked);
     connect(ui->comboRemote, QOverload<int>::of(&QComboBox::activated), this, &MainWindow::comboRemote_activated);
     connect(ui->comboUser, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
             &MainWindow::comboUser_currentIndexChanged);
@@ -1246,7 +1377,8 @@ void MainWindow::displayFilteredFP(QStringList list, bool raw)
         refSet.insert(canonicalFlatpakRef(ref));
     }
 
-    // Set the filter on the proxy model
+    // Reset status filtering when showing explicit ref subsets.
+    flatpakProxy->setStatusFilter(0);
     flatpakProxy->setAllowedRefs(refSet);
 
     // Update buttons based on current selection
@@ -1383,7 +1515,9 @@ QVector<PackageData> MainWindow::createPackageDataList(QHash<QString, PackageInf
     packages.reserve(list->size() + installedPackages.size());
 
     for (auto it = list->constBegin(); it != list->constEnd(); ++it) {
-        packages.append(createPackageData(it.key(), it.value().version, it.value().description));
+        PackageData pkg = createPackageData(it.key(), it.value().version, it.value().description);
+        pkg.fromRepo = true;
+        packages.append(pkg);
     }
 
     for (auto it = installedPackages.constBegin(); it != installedPackages.constEnd(); ++it) {
@@ -1434,6 +1568,16 @@ void MainWindow::displayFlatpaks(bool force_update)
     loadFlatpakData();
     populateFlatpakTree();
     finalizeFlatpakDisplay();
+}
+
+void MainWindow::showFlatpakProgress(const QString &label)
+{
+    progress->setLabelText(label);
+    pushCancel->setEnabled(false);
+    progress->show();
+    if (!timer.isActive()) {
+        timer.start(100ms);
+    }
 }
 
 void MainWindow::setupFlatpakDisplay()
@@ -1755,7 +1899,7 @@ void MainWindow::listFlatpakRemotes() const
 
     auto addUserRemotes = []() {
         Cmd addRemotes;
-        return addRemotes.run("/usr/lib/mx-packageinstaller/mxpi-lib flatpak_add_repos_user", Cmd::QuietMode::Yes);
+        return runMxpiLib(addRemotes, QStringLiteral("flatpak_add_repos_user"));
     };
 
     QStringList list;
@@ -1809,8 +1953,7 @@ bool MainWindow::confirmActions(const QString &names, const QString &action)
     QString recommends_aptitude;
     QString aptitude_info;
 
-    const QString frontend {"DEBIAN_FRONTEND=$(dpkg -l debconf-kde-helper 2>/dev/null | grep -sq ^i && echo "
-                            "kde || echo gnome) LANG=C "};
+    const QString frontend {QStringLiteral("DEBIAN_FRONTEND=%1 LANG=C ").arg(debconfFrontend())};
     const QString aptget {QStringLiteral("apt-get -s -V -o=Dpkg::Use-Pty=0 ")};
     const QString aptitude {QStringLiteral("aptitude -sy -V -o=Dpkg::Use-Pty=0 ")};
     if (currentTree == ui->treeFlatpak && names != QLatin1String("flatpak")) {
@@ -1820,31 +1963,30 @@ bool MainWindow::confirmActions(const QString &names, const QString &action)
             = (ui->checkBoxInstallRecommendsBP->isChecked()) ? "--install-recommends " : "--no-install-recommends ";
         recommends_aptitude
             = (ui->checkBoxInstallRecommendsBP->isChecked()) ? "--with-recommends " : "--without-recommends ";
-        detailed_names = cmd.getOutAsRoot(
+        detailed_names = cmd.getOut(
             frontend + aptget + action + ' ' + recommends + "-t " + verName + "-backports --reinstall " + names
             + R"lit(|grep 'Inst\|Remv' | awk '{V=""; P="";}; $3 ~ /^\[/ { V=$3 }; $3 ~ /^\(/ { P=$3 ")"}; $4 ~ /^\(/ {P=" => " $4 ")"};  {print $2 ";" V  P ";" $1}')lit");
-        aptitude_info = cmd.getOutAsRoot(frontend + aptitude + action + ' ' + recommends_aptitude + "-t " + verName
-                                         + "-backports " + names + " |tail -2 |head -1");
+        aptitude_info = cmd.getOut(frontend + aptitude + action + ' ' + recommends_aptitude + "-t " + verName
+                                   + "-backports " + names + " |tail -2 |head -1");
     } else if (currentTree == ui->treeMXtest) {
         recommends
             = (ui->checkBoxInstallRecommendsMX->isChecked()) ? "--install-recommends " : "--no-install-recommends ";
         recommends_aptitude
             = (ui->checkBoxInstallRecommendsMX->isChecked()) ? "--with-recommends " : "--without-recommends ";
-        detailed_names = cmd.getOutAsRoot(
+        detailed_names = cmd.getOut(
             frontend + aptget + action + " -t mx " + recommends + "--reinstall " + names
             + R"lit(|grep 'Inst\|Remv' | awk '{V=""; P="";}; $3 ~ /^\[/ { V=$3 }; $3 ~ /^\(/ { P=$3 ")"}; $4 ~ /^\(/ {P=" => " $4 ")"};  {print $2 ";" V  P ";" $1}')lit");
-        aptitude_info = cmd.getOutAsRoot(frontend + aptitude + action + " -t mx " + recommends_aptitude + names
-                                         + " |tail -2 |head -1");
+        aptitude_info = cmd.getOut(frontend + aptitude + action + " -t mx " + recommends_aptitude + names
+                                   + " |tail -2 |head -1");
     } else {
         recommends
             = (ui->checkBoxInstallRecommends->isChecked()) ? "--install-recommends " : "--no-install-recommends ";
         recommends_aptitude
             = (ui->checkBoxInstallRecommends->isChecked()) ? "--with-recommends " : "--without-recommends ";
-        detailed_names = cmd.getOutAsRoot(
+        detailed_names = cmd.getOut(
             frontend + aptget + action + ' ' + recommends + "--reinstall " + names
             + R"lit(|grep 'Inst\|Remv'| awk '{V=""; P="";}; $3 ~ /^\[/ { V=$3 }; $3 ~ /^\(/ { P=$3 ")"}; $4 ~ /^\(/ {P=" => " $4 ")"};  {print $2 ";" V  P ";" $1}')lit");
-        aptitude_info
-            = cmd.getOutAsRoot(frontend + aptitude + action + ' ' + recommends_aptitude + names + " |tail -2 |head -1");
+        aptitude_info = cmd.getOut(frontend + aptitude + action + ' ' + recommends_aptitude + names + " |tail -2 |head -1");
     }
 
     if (currentTree != ui->treeFlatpak) {
@@ -1931,10 +2073,6 @@ bool MainWindow::install(const QString &names)
         return true;
     }
     enableOutput();
-    QString frontend {
-        "DEBIAN_FRONTEND=$(dpkg -l debconf-kde-helper 2>/dev/null | grep -sq ^i && echo kde || echo gnome) "};
-    QString aptget {QStringLiteral("apt-get -o=Dpkg::Use-Pty=0 install -y ")};
-
     if (lockFile.isLockedGUI()) {
         return false;
     }
@@ -1943,15 +2081,22 @@ bool MainWindow::install(const QString &names)
     if (currentTree == ui->treeBackports) {
         recommends
             = (ui->checkBoxInstallRecommendsBP->isChecked()) ? "--install-recommends " : "--no-install-recommends ";
-        success = cmd.runAsRoot(frontend + aptget + recommends + "-t " + verName + "-backports --reinstall " + names);
+        QStringList args {"-o=Dpkg::Use-Pty=0", "install", "-y", recommends.trimmed(), "-t", verName + "-backports",
+                          "--reinstall"};
+        args += packageArgs(names);
+        success = cmd.procAsRootWithEnv(debconfEnvironment(), "apt-get", args);
     } else if (currentTree == ui->treeMXtest) {
         recommends
             = (ui->checkBoxInstallRecommendsMX->isChecked()) ? "--install-recommends " : "--no-install-recommends ";
-        success = cmd.runAsRoot(frontend + aptget + recommends + " -t mx " + names);
+        QStringList args {"-o=Dpkg::Use-Pty=0", "install", "-y", recommends.trimmed(), "-t", "mx"};
+        args += packageArgs(names);
+        success = cmd.procAsRootWithEnv(debconfEnvironment(), "apt-get", args);
     } else {
         recommends
             = (ui->checkBoxInstallRecommends->isChecked()) ? "--install-recommends " : "--no-install-recommends ";
-        success = cmd.runAsRoot(frontend + aptget + recommends + "--reinstall " + names);
+        QStringList args {"-o=Dpkg::Use-Pty=0", "install", "-y", recommends.trimmed(), "--reinstall"};
+        args += packageArgs(names);
+        success = cmd.procAsRootWithEnv(debconfEnvironment(), "apt-get", args);
     }
     return success;
 }
@@ -1961,13 +2106,15 @@ bool MainWindow::installBatch(const QStringList &name_list)
 {
     qDebug() << "+++" << __PRETTY_FUNCTION__ << "+++";
     bool result = true;
-    QString postinstall;
+    QStringList postinstallHooks;
     QString install_names;
 
     for (const QString &name : name_list) {
         for (const auto &item : std::as_const(popularApps)) {
             if (item.name == name) {
-                postinstall += item.postInstall + '\n';
+                if (!item.postInstall.isEmpty()) {
+                    postinstallHooks << item.postInstall;
+                }
                 install_names += item.installNames + ' ';
             }
         }
@@ -1979,14 +2126,14 @@ bool MainWindow::installBatch(const QStringList &name_list)
         }
     }
 
-    if (postinstall != '\n') {
+    if (!postinstallHooks.isEmpty()) {
         qDebug() << "Post-install";
         ui->tabWidget->setTabText(Tab::Output, tr("Post-processing..."));
         if (lockFile.isLockedGUI()) {
             return false;
         }
         enableOutput();
-        if (!cmd.runAsRoot(postinstall)) {
+        if (!runHooksAsRoot(cmd, postinstallHooks)) {
             result = false;
         }
     }
@@ -2017,9 +2164,10 @@ bool MainWindow::installPopularApp(const QString &name)
         if (lockFile.isLockedGUI()) {
             return false;
         }
-        if (!cmd.runAsRoot(preinstall)) {
+        if (!cmd.runHookAsRoot(preinstall)) {
             if (QFile::exists(tempList)) {
-                Cmd().run(elevate + "/usr/lib/mx-packageinstaller/mxpi-lib cleanup_temp", Cmd::QuietMode::Yes);
+                Cmd helperCmd;
+                runMxpiLibAsRoot(helperCmd, QStringLiteral("cleanup_temp"));
                 updateApt();
             }
             return false;
@@ -2038,10 +2186,11 @@ bool MainWindow::installPopularApp(const QString &name)
         if (lockFile.isLockedGUI()) {
             return false;
         }
-        cmd.runAsRoot(postinstall);
+        cmd.runHookAsRoot(postinstall);
     }
     if (QFile::exists(tempList)) {
-        Cmd().run(elevate + "/usr/lib/mx-packageinstaller/mxpi-lib cleanup_temp", Cmd::QuietMode::Yes);
+        Cmd helperCmd;
+        runMxpiLibAsRoot(helperCmd, QStringLiteral("cleanup_temp"));
         updateApt();
     }
     return result;
@@ -2111,31 +2260,22 @@ bool MainWindow::installSelected()
     if (currentTree == ui->treeMXtest) {
         // Add testrepo unless already enabled
         if (!testInitiallyEnabled) {
-            QString suite = verName;
-            if (arch == QLatin1String("amd64")) {
-                cmd.runAsRoot("apt-get update --print-uris | tac | "
-                              "grep -m1 -oE 'https?://.*/mx/repo/dists/"
-                              + suite + "/main' | sed 's:^:deb :; s:/repo/dists/:/testrepo :; s:/main: test:' > "
-                              + tempList);
-            } else {
-                cmd.runAsRoot("apt-get update --print-uris | tac | "
-                              "grep -m1 -oE 'https?://.*/mx/repo/dists/"
-                              + suite
-                              + "/main' | sed 's:^:deb [arch='$(dpkg --print-architecture)'] :; "
-                                "s:/repo/dists/:/testrepo :; s:/main: test:' > "
-                              + tempList);
+            if (!cmd.writeFileAsRoot(tempList, mxTestSourceLine(getMXTestRepoUrl(), verName, arch), Cmd::QuietMode::Yes)) {
+                return false;
             }
         }
         updateApt();
     } else if (currentTree == ui->treeBackports) {
-        cmd.runAsRoot("echo deb http://ftp.debian.org/debian " + verName + "-backports main contrib non-free > "
-                      + tempList);
+        if (!cmd.writeFileAsRoot(tempList, backportsSourceLine(verName), Cmd::QuietMode::Yes)) {
+            return false;
+        }
         updateApt();
     }
     bool result = install(names);
     if (currentTree == ui->treeBackports || currentTree == ui->treeMXtest) {
         if (QFile::exists(tempList)) {
-            Cmd().run(elevate + "/usr/lib/mx-packageinstaller/mxpi-lib cleanup_temp", Cmd::QuietMode::Yes);
+            Cmd helperCmd;
+            runMxpiLibAsRoot(helperCmd, QStringLiteral("cleanup_temp"));
             updateApt();
         }
     }
@@ -2150,7 +2290,9 @@ bool MainWindow::markKeep()
     ui->tabWidget->setTabEnabled(Tab::Output, true);
     QString names = changeList.join(' ');
     enableOutput();
-    return cmd.runAsRoot("apt-mark manual " + names);
+    QStringList args {"manual"};
+    args += packageArgs(names);
+    return cmd.procAsRoot("apt-mark", args);
 }
 
 bool MainWindow::isFilteredName(const QString &name)
@@ -2568,10 +2710,12 @@ void MainWindow::cleanup()
         qDebug() << "Command" << cmd.program() << cmd.arguments() << "terminated" << cmd.terminateAndKill();
     }
     if (QFile::exists(tempList)) {
-        Cmd().run(elevate + "/usr/lib/mx-packageinstaller/mxpi-lib cleanup_temp", Cmd::QuietMode::Yes);
+        Cmd helperCmd;
+        runMxpiLibAsRoot(helperCmd, QStringLiteral("cleanup_temp"));
         updateApt();
     }
-    Cmd().run(elevate + "/usr/lib/mx-packageinstaller/mxpi-lib copy_log", Cmd::QuietMode::Yes);
+    Cmd helperCmd;
+    runMxpiLibAsRoot(helperCmd, QStringLiteral("copy_log"));
     settings.setValue("geometry", saveGeometry());
     settings.setValue("FlatpakRemote", ui->comboRemote->currentText());
     settings.setValue("FlatpakUser", ui->comboUser->currentText());
@@ -3340,8 +3484,9 @@ void MainWindow::pushInstall_clicked()
         }
         setCursor(QCursor(Qt::BusyCursor));
         enableOutput();
-        if (cmd.run("socat SYSTEM:'flatpak install -y " + fpUser + ui->comboRemote->currentText() + ' '
-                    + changeList.join(' ') + "',stderr STDIO")) {
+        if (cmd.run(flatpakPtyCommand(QStringLiteral("flatpak install -y ") + fpUser
+                                      + ui->comboRemote->currentText() + ' ' + changeList.join(' ')))) {
+            appendFlatpakStatusMessage(ui->outputBox, tr("Install complete."));
             displayFlatpaks(true);
             indexFilterFP.clear();
             ui->comboFilterFlatpak->setCurrentIndex(0);
@@ -3389,13 +3534,7 @@ void MainWindow::pushAbout_clicked()
 
 void MainWindow::pushHelp_clicked()
 {
-    QString lang = locale.bcp47Name();
-    QString url {QStringLiteral("/usr/share/doc/mx-packageinstaller/mx-package-installer.html")};
-
-    if (lang.startsWith(QLatin1String("fr"))) {
-        url = QStringLiteral("https://mxlinux.org/wiki/help-files/help-mx-installateur-de-paquets");
-    }
-    displayDoc(url, tr("%1 Help").arg(windowTitle()));
+    displayHelpDoc("/usr/share/doc/mx-packageinstaller/mx-package-installer.html", tr("%1 Help").arg(windowTitle()));
 }
 
 // Resize columns when expanding
@@ -3453,8 +3592,8 @@ void MainWindow::pushUninstall_clicked()
     showOutput();
 
     QString names;
-    QString preuninstall;
-    QString postuninstall;
+    QStringList preuninstall;
+    QStringList postuninstall;
     if (currentTree == ui->treePopularApps) {
         QModelIndexList checkedItems = popularModel->checkedItems();
         for (const QModelIndex &index : checkedItems) {
@@ -3465,10 +3604,10 @@ void MainWindow::pushUninstall_clicked()
 
             names += app->uninstallNames.trimmed().replace('\n', ' ') + ' ';
             if (!app->postUninstall.isEmpty()) {
-                postuninstall += app->postUninstall + '\n';
+                postuninstall << app->postUninstall;
             }
             if (!app->preUninstall.isEmpty()) {
-                preuninstall += app->preUninstall + '\n';
+                preuninstall << app->preUninstall;
             }
             popularModel->setData(index, Qt::Unchecked, Qt::CheckStateRole);
         }
@@ -3490,21 +3629,22 @@ void MainWindow::pushUninstall_clicked()
         }
 
         setCursor(QCursor(Qt::BusyCursor));
-        for (const QString &app : std::as_const(changeList)) {
-            enableOutput();
-            if (!cmd.run("socat SYSTEM:'flatpak uninstall " + fpUser + "-y " + app
-                         + "',stderr STDIO")) { // success if all processed successfuly,
-                                                // failure if one failed
-                success = false;
-            }
+        enableOutput();
+        showFlatpakProgress(tr("Uninstalling flatpaks..."));
+        if (!cmd.run(flatpakPtyCommand(QStringLiteral("flatpak uninstall ") + fpUser + QStringLiteral("-y ")
+                                       + changeList.join(' ')))) {
+            success = false;
         }
         if (success) { // Success if all processed successfuly, failure if one failed
+            appendFlatpakStatusMessage(ui->outputBox, tr("Uninstall complete."));
+            showFlatpakProgress(tr("Refreshing flatpaks..."));
             displayFlatpaks(true);
             indexFilterFP.clear();
             listFlatpakRemotes();
             ui->comboRemote->setCurrentIndex(0);
             comboRemote_activated();
             ui->comboFilterFlatpak->setCurrentIndex(0);
+            progress->hide();
             QMessageBox::information(this, tr("Done"), tr("Processing finished successfully."));
             ui->tabWidget->setCurrentWidget(ui->tabFlatpak);
         } else {
@@ -3564,6 +3704,7 @@ void MainWindow::tabWidget_currentChanged(int index)
         switch (index) {
         case Tab::Popular:
             handleTab(search_str, ui->searchPopular, "", false);
+            findPopular(); // ensure proxy filter matches search box (setText may not fire textChanged if text unchanged)
             break;
         case Tab::EnabledRepos:
             handleEnabledReposTab(search_str);
@@ -3827,7 +3968,8 @@ void MainWindow::installFlatpak()
         currentTree->blockSignals(false);
         return;
     }
-    Cmd().run(elevate + "/usr/lib/mx-packageinstaller/mxpi-lib flatpak_add_repos", Cmd::QuietMode::Yes);
+    Cmd helperCmd;
+    runMxpiLibAsRoot(helperCmd, QStringLiteral("flatpak_add_repos"));
     enableOutput();
     invalidateFlatpakRemoteCache();
     listFlatpakRemotes();
@@ -3876,14 +4018,25 @@ void MainWindow::filterChanged(const QString &arg1)
     auto resetTree = [this]() {
         // Optimization: Disable updates during bulk operations
         currentTree->setUpdatesEnabled(false);
-        auto *model = getCurrentModel();
-        auto *proxy = getCurrentProxy();
-        if (model) {
-            model->uncheckAll();
-        }
-        if (proxy) {
-            proxy->setSearchText(QString());
-            proxy->setStatusFilter(0); // Reset status filter to show all packages
+        if (currentTree == ui->treeFlatpak) {
+            if (flatpakModel) {
+                flatpakModel->setAllChecked(false);
+            }
+            if (flatpakProxy) {
+                flatpakProxy->setSearchText(QString());
+                flatpakProxy->setStatusFilter(0);
+                flatpakProxy->clearAllowedRefs();
+            }
+        } else {
+            auto *model = getCurrentModel();
+            auto *proxy = getCurrentProxy();
+            if (model) {
+                model->uncheckAll();
+            }
+            if (proxy) {
+                proxy->setSearchText(QString());
+                proxy->setStatusFilter(0); // Reset status filter to show all packages
+            }
         }
         currentTree->setUpdatesEnabled(true);
 
@@ -3896,9 +4049,15 @@ void MainWindow::filterChanged(const QString &arg1)
     auto uncheckAllItems = [this]() {
         // Optimization: Disable updates during bulk operations
         currentTree->setUpdatesEnabled(false);
-        auto *model = getCurrentModel();
-        if (model) {
-            model->uncheckAll();
+        if (currentTree == ui->treeFlatpak) {
+            if (flatpakModel) {
+                flatpakModel->setAllChecked(false);
+            }
+        } else {
+            auto *model = getCurrentModel();
+            if (model) {
+                model->uncheckAll();
+            }
         }
         currentTree->setUpdatesEnabled(true);
     };
@@ -3970,6 +4129,7 @@ void MainWindow::filterChanged(const QString &arg1)
         } else if (arg1 == tr("All installed")) {
             displayFilteredFP(installedAppsFP + installedRuntimesFP);
         } else if (arg1 == tr("Not installed")) {
+            flatpakProxy->clearAllowedRefs();
             flatpakProxy->setStatusFilter(Status::NotInstalled);
             ui->pushUninstall->setEnabled(false);
         }
@@ -4202,15 +4362,9 @@ void MainWindow::buildFlatpakChangeList(const QString &fullName, Qt::CheckState 
 
     ui->pushInstall->setText(tr("Install"));
     if (status == Status::Installed) {
-        if (state == Qt::Checked && ui->comboFilterFlatpak->currentText() != tr("All installed")) {
-            ui->comboFilterFlatpak->setCurrentText(tr("All installed"));
-        }
         ui->pushUninstall->setEnabled(true);
         ui->pushInstall->setEnabled(false);
     } else {
-        if (state == Qt::Checked && ui->comboFilterFlatpak->currentText() != tr("Not installed")) {
-            ui->comboFilterFlatpak->setCurrentText(tr("Not installed"));
-        }
         ui->pushUninstall->setEnabled(false);
         ui->pushInstall->setEnabled(true);
     }
@@ -4364,6 +4518,30 @@ void MainWindow::checkHideLibsBP_clicked(bool checked)
     ui->treeBackports->setUpdatesEnabled(true);
 }
 
+void MainWindow::checkRepoOnlyMX_clicked(bool checked)
+{
+    ui->treeMXtest->setUpdatesEnabled(false);
+    settings.setValue("RepoOnly", checked);
+    ui->checkRepoOnlyBP->setChecked(checked);
+    mxtestProxy->setRepoOnly(checked);
+    backportsProxy->setRepoOnly(checked);
+    filterChanged(ui->comboFilterMX->currentText());
+    ui->labelNumApps_2->setText(QString::number(mxtestProxy->rowCount()));
+    ui->treeMXtest->setUpdatesEnabled(true);
+}
+
+void MainWindow::checkRepoOnlyBP_clicked(bool checked)
+{
+    ui->treeBackports->setUpdatesEnabled(false);
+    settings.setValue("RepoOnly", checked);
+    ui->checkRepoOnlyMX->setChecked(checked);
+    mxtestProxy->setRepoOnly(checked);
+    backportsProxy->setRepoOnly(checked);
+    filterChanged(ui->comboFilterBP->currentText());
+    ui->labelNumApps_3->setText(QString::number(backportsProxy->rowCount()));
+    ui->treeBackports->setUpdatesEnabled(true);
+}
+
 // On change flatpak remote
 void MainWindow::comboRemote_activated(int /*index*/)
 {
@@ -4378,7 +4556,8 @@ void MainWindow::pushUpgradeFP_clicked()
     showOutput();
     setCursor(QCursor(Qt::BusyCursor));
     enableOutput();
-    if (cmd.run("socat SYSTEM:'flatpak update " + fpUser + "',pty STDIO")) {
+    if (cmd.run(flatpakPtyCommand(QStringLiteral("flatpak update ") + fpUser))) {
+        appendFlatpakStatusMessage(ui->outputBox, tr("Update complete."));
         displayFlatpaks(true);
         setCursor(QCursor(Qt::ArrowCursor));
         QMessageBox::information(this, tr("Done"), tr("Processing finished successfully."));
@@ -4405,8 +4584,9 @@ void MainWindow::pushRemotes_clicked()
         showOutput();
         setCursor(QCursor(Qt::BusyCursor));
         enableOutput();
-        if (cmd.run("socat SYSTEM:'flatpak install -y " + dialog->getUser() + "--from "
-                    + dialog->getInstallRef().replace(':', "\\:") + "',stderr STDIO\"")) {
+        if (cmd.run(flatpakPtyCommand(QStringLiteral("flatpak install -y ") + dialog->getUser()
+                                      + QStringLiteral("--from ") + dialog->getInstallRef()))) {
+            appendFlatpakStatusMessage(ui->outputBox, tr("Install complete."));
             invalidateFlatpakRemoteCache();
             listFlatpakRemotes();
             displayFlatpaks(true);
@@ -4435,7 +4615,8 @@ void MainWindow::comboUser_currentIndexChanged(int index)
         if (!updated) {
             setCursor(QCursor(Qt::BusyCursor));
             enableOutput();
-            Cmd().run("/usr/lib/mx-packageinstaller/mxpi-lib flatpak_add_repos_user", Cmd::QuietMode::Yes);
+            Cmd helperCmd;
+            runMxpiLib(helperCmd, QStringLiteral("flatpak_add_repos_user"));
             setCursor(QCursor(Qt::ArrowCursor));
             updated = true;
         }
@@ -4502,8 +4683,12 @@ void MainWindow::pushRemoveUnused_clicked()
     showOutput();
     setCursor(QCursor(Qt::BusyCursor));
     enableOutput();
-    if (cmd.run("socat SYSTEM:'flatpak uninstall --unused -y',pty STDIO")) {
+    showFlatpakProgress(tr("Uninstalling flatpaks..."));
+    if (cmd.run(flatpakPtyCommand(QStringLiteral("flatpak uninstall --unused -y")))) {
+        appendFlatpakStatusMessage(ui->outputBox, tr("Uninstall complete."));
+        showFlatpakProgress(tr("Refreshing flatpaks..."));
         displayFlatpaks(true);
+        progress->hide();
         setCursor(QCursor(Qt::ArrowCursor));
         QMessageBox::information(this, tr("Done"), tr("Processing finished successfully."));
         ui->tabWidget->setCurrentWidget(ui->tabFlatpak);
@@ -4536,7 +4721,7 @@ QString MainWindow::getMXTestRepoUrl()
 
 void MainWindow::pushRemoveAutoremovable_clicked()
 {
-    QString names = cmd.getOutAsRoot(R"(apt-get --dry-run autoremove |grep -Po '^Remv \K[^ ]+' |tr '\n' ' ')");
+    QString names = cmd.getOut(R"(apt-get --dry-run autoremove |grep -Po '^Remv \K[^ ]+' |tr '\n' ' ')");
     QMessageBox::warning(this, tr("Warning"),
                          tr("Potentially dangerous operation.\nPlease make sure you check "
                             "carefully the list of packages to be removed."));

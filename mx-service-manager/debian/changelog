@@ -1,3 +1,12 @@
+mx-service-manager (26.03) mx; urgency=medium
+
+  * Replace bash helper script with compiled C++ helper that only allows
+    whitelisted commands (systemctl, service, update-rc.d)
+  * Add internal Qt help viewer with HTML help file
+  * Drop xdg-utils and mx-viewer dependency for help display
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 19 Mar 2026 13:38:00 -0500
+
 mx-service-manager (25.12) mx; urgency=medium
 
   * Add support for user services

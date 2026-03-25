@@ -76,7 +76,7 @@ private:
     QPushButton *progCancel {};
     QSettings settings;
     QString current_repo;
-    QString listMXurls;
+    QStringList listMXUrls;
     QStringList repos;
     QTimer timer;
     bool radioSelectionChanged {false};

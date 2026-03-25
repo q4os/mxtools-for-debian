@@ -2,14 +2,14 @@
 <context>
     <name>Cmd</name>
     <message>
-        <location filename="../src/cmd.cpp" line="163"/>
+        <location filename="../src/cmd.cpp" line="172"/>
         <source>Administrator Access Required</source>
         <translation>Administratörbehörighet krävs</translation>
     </message>
     <message>
-        <location filename="../src/cmd.cpp" line="164"/>
-        <source>This operation requires administrator privileges. Please restart the application and enter your password when prompted.</source>
-        <translation>Denna operation kräver administratörprivilegier. Var vänlig starta om programmet  och skriv in ditt lösenord när det krävs.</translation>
+        <location filename="../src/cmd.cpp" line="173"/>
+        <source>This operation requires administrator privileges.</source>
+        <translation>Denna åtgärd kräver administratörbehörighet.</translation>
     </message>
 </context>
 <context>
@@ -57,11 +57,6 @@
         <location filename="../src/mainwindow.ui" line="41"/>
         <source>EFI stub installer</source>
         <translation>EFI stub installerare</translation>
-    </message>
-    <message>
-        <location filename="../src/mainwindow.ui" line="47"/>
-        <source>This options copies the kernel and initrd files to ESP (EFI System Partition) and creates an UEFI entry that allows to boot the installation directly, bypassing GRUB and other bootloaders. To boot using the created UEFI entry, access the UEFI boot selection menu at startup by pressing the appropriate key for your device (e.g., F12, F9, or Esc, depending on the manufacturer).</source>
-        <translation>Detta alternativ kopierar kärnan och initrd filer till ESP (EFI System Partition) och skapar en UEFI post som gör det möjligt att boota installationen direkt, gå förbi GRUB och andra bootloaders. För att boota med den skapade UEFI posten, gå till UEFI boot-valmenyn vid start genom att trycka på rätt tangent för din enhet (t.ex., F12, F9, eller Esc, beroende på fabrikat).</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="115"/>
@@ -114,6 +109,11 @@
         <translation>Hantera UEFI poster</translation>
     </message>
     <message>
+        <location filename="../src/mainwindow.ui" line="47"/>
+        <source>This option copies the kernel and initrd files to ESP (EFI System Partition) and creates an UEFI entry that allows to boot the installation directly, bypassing GRUB and other bootloaders. To boot using the created UEFI entry, access the UEFI boot selection menu at startup by pressing the appropriate key for your device (e.g., F12, F9, or Esc, depending on the manufacturer).</source>
+        <translation>Detta alternativ kopierar kärnan och initrd-filer till ESP (EFI System Partition) och skapar en UEFI post som gör det möjligt att boota installationen direkt, förbigå GRUB och andra bootloaders. För att boota med den skapade UEFI posten, gå till UEFI bootval-menyn vid start genom att trycka på korrekt tangent för din enhet (dvs, F12, F9, eller Esc, beroende på tillverkare).</translation>
+    </message>
+    <message>
         <location filename="../src/mainwindow.ui" line="166"/>
         <source>Frugal EFI stub installer</source>
         <translation>Frugal EFI stub installerare</translation>
@@ -135,8 +135,8 @@
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="465"/>
-        <location filename="../src/mainwindow.cpp" line="885"/>
-        <location filename="../src/mainwindow.cpp" line="1677"/>
+        <location filename="../src/mainwindow.cpp" line="946"/>
+        <location filename="../src/mainwindow.cpp" line="1769"/>
         <source>Next</source>
         <translation>Nästa</translation>
     </message>
@@ -146,135 +146,143 @@
         <translation>Bakåt</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="718"/>
-        <location filename="../src/mainwindow.cpp" line="908"/>
-        <location filename="../src/mainwindow.cpp" line="1487"/>
-        <location filename="../src/mainwindow.cpp" line="1497"/>
+        <location filename="../src/mainwindow.cpp" line="772"/>
+        <location filename="../src/mainwindow.cpp" line="970"/>
+        <location filename="../src/mainwindow.cpp" line="1575"/>
+        <location filename="../src/mainwindow.cpp" line="1585"/>
         <source>UEFI Installer</source>
         <translation>UEFI Installerare</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="719"/>
+        <location filename="../src/mainwindow.cpp" line="773"/>
         <source>A recent frugal install has been detected. Do you wish to add a UEFI entry direct to your UEFI system menu?</source>
         <translation>En färsk frugal installation har upptäckts. Vill du lägga till en UEFI post till din UEFI systemmeny?</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="956"/>
+        <location filename="../src/mainwindow.cpp" line="1018"/>
         <source>Could not retrieve UUID for %1</source>
         <translation>Kunde inte få UUID för %1</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="963"/>
+        <location filename="../src/mainwindow.cpp" line="1025"/>
         <source>Enter passphrase to unlock %1 encrypted partition:</source>
         <translation>Skriv in lösenord för att låsa upp %1 krypterad partition:</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="968"/>
+        <location filename="../src/mainwindow.cpp" line="1030"/>
         <source>Passphrase entry cancelled or empty for %1</source>
         <translation>Lösenordspost borttagen eller tom för %1</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="974"/>
+        <location filename="../src/mainwindow.cpp" line="1036"/>
         <source>Could not open %1 LUKS container</source>
         <translation>Kunde inte öppna %1 LUKS container</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1488"/>
+        <location filename="../src/mainwindow.cpp" line="1576"/>
         <source>Are you sure this is the MX or antiX Frugal installation location?
 Missing mandatory files in directory: </source>
         <translation>Är du säker på att detta är platsen för MX eller antiX Frugal installationen?
 Saknar nödvändiga filer i katalog: </translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1561"/>
+        <location filename="../src/mainwindow.cpp" line="1644"/>
         <source>Not enough space on the EFI System Partition to copy the kernel and initrd files.</source>
         <translation>Inte nog utrymme på EFI Systempartitionen för att kopiera kärnan och initrd filer.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1614"/>
+        <location filename="../src/mainwindow.cpp" line="1706"/>
         <source>All fields are required</source>
         <translation>Alla fält är nödvändiga</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1637"/>
+        <location filename="../src/mainwindow.cpp" line="1729"/>
         <source>Could not select ESP</source>
         <translation>Kunde inte välja ESP</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1655"/>
+        <location filename="../src/mainwindow.cpp" line="1747"/>
         <source>About %1</source>
         <translation>Om %1</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="130"/>
+        <location filename="../src/mainwindow.cpp" line="148"/>
         <source>Select EFI file</source>
         <translation>Välj EFI fil</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="130"/>
+        <location filename="../src/mainwindow.cpp" line="148"/>
         <source>EFI files (*.efi *.EFI)</source>
         <translation>EFI filer (*.efi *.EFI)</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="141"/>
-        <location filename="../src/mainwindow.cpp" line="155"/>
-        <location filename="../src/mainwindow.cpp" line="956"/>
-        <location filename="../src/mainwindow.cpp" line="968"/>
-        <location filename="../src/mainwindow.cpp" line="974"/>
-        <location filename="../src/mainwindow.cpp" line="1697"/>
-        <location filename="../src/mainwindow.cpp" line="1821"/>
-        <location filename="../src/mainwindow.cpp" line="1873"/>
-        <location filename="../src/mainwindow.cpp" line="1884"/>
-        <location filename="../src/mainwindow.cpp" line="1891"/>
-        <location filename="../src/mainwindow.cpp" line="1902"/>
-        <location filename="../src/mainwindow.cpp" line="1912"/>
-        <location filename="../src/mainwindow.cpp" line="1927"/>
-        <location filename="../src/mainwindow.cpp" line="1932"/>
+        <location filename="../src/mainwindow.cpp" line="160"/>
+        <location filename="../src/mainwindow.cpp" line="171"/>
+        <location filename="../src/mainwindow.cpp" line="182"/>
+        <location filename="../src/mainwindow.cpp" line="190"/>
+        <location filename="../src/mainwindow.cpp" line="1018"/>
+        <location filename="../src/mainwindow.cpp" line="1030"/>
+        <location filename="../src/mainwindow.cpp" line="1036"/>
+        <location filename="../src/mainwindow.cpp" line="1791"/>
+        <location filename="../src/mainwindow.cpp" line="1929"/>
+        <location filename="../src/mainwindow.cpp" line="2000"/>
+        <location filename="../src/mainwindow.cpp" line="2011"/>
+        <location filename="../src/mainwindow.cpp" line="2018"/>
+        <location filename="../src/mainwindow.cpp" line="2029"/>
+        <location filename="../src/mainwindow.cpp" line="2039"/>
+        <location filename="../src/mainwindow.cpp" line="2053"/>
+        <location filename="../src/mainwindow.cpp" line="2058"/>
         <source>Error</source>
         <translation>Fel</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="141"/>
+        <location filename="../src/mainwindow.cpp" line="160"/>
+        <location filename="../src/mainwindow.cpp" line="171"/>
         <source>Could not find the source mountpoint for %1</source>
         <translation>Kunde inte hitta källa till monteringspunkt för %1</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="145"/>
+        <location filename="../src/mainwindow.cpp" line="175"/>
         <source>Set name</source>
         <translation>Ställ in namn</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="145"/>
+        <location filename="../src/mainwindow.cpp" line="175"/>
         <source>Enter the name for the UEFI menu item:</source>
         <translation>Skriv in namnet för UEFI-meny posten:</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="155"/>
+        <location filename="../src/mainwindow.cpp" line="182"/>
+        <source>Selected file is not in an EFI directory</source>
+        <translation>Vald fil är inte i en EFI katalog</translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="190"/>
         <source>Something went wrong, could not add entry.</source>
         <translation>Något blev fel, kunde inte lägga till posten.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="745"/>
-        <location filename="../src/mainwindow.cpp" line="787"/>
-        <location filename="../src/mainwindow.cpp" line="1709"/>
+        <location filename="../src/mainwindow.cpp" line="802"/>
+        <location filename="../src/mainwindow.cpp" line="845"/>
+        <location filename="../src/mainwindow.cpp" line="1806"/>
         <source>Timeout: %1 seconds</source>
         <translation>Timeout: %1 sekunder</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="747"/>
-        <location filename="../src/mainwindow.cpp" line="786"/>
-        <location filename="../src/mainwindow.cpp" line="803"/>
-        <location filename="../src/mainwindow.cpp" line="1726"/>
+        <location filename="../src/mainwindow.cpp" line="804"/>
+        <location filename="../src/mainwindow.cpp" line="844"/>
+        <location filename="../src/mainwindow.cpp" line="851"/>
+        <location filename="../src/mainwindow.cpp" line="1823"/>
         <source>Boot Next: %1</source>
         <translation>Nästa Boot: %1</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="749"/>
+        <location filename="../src/mainwindow.cpp" line="806"/>
         <source>Boot Current: %1</source>
         <translation>Boot Nuvarande: %1</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="762"/>
+        <location filename="../src/mainwindow.cpp" line="820"/>
         <source>You can use the Up/Down buttons, or drag &amp; drop items to change boot order.
 - Items are listed in the boot order.
 - Grayed out lines are inactive.</source>
@@ -283,213 +291,213 @@ Saknar nödvändiga filer i katalog: </translation>
 - Grå rader är inaktiva.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="773"/>
-        <location filename="../src/mainwindow.cpp" line="838"/>
+        <location filename="../src/mainwindow.cpp" line="831"/>
+        <location filename="../src/mainwindow.cpp" line="894"/>
         <source>Set ac&amp;tive</source>
         <translation>Gör ak&amp;tiv</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="774"/>
+        <location filename="../src/mainwindow.cpp" line="832"/>
         <source>&amp;Add entry</source>
         <translation>&amp;Lägg till post</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="775"/>
+        <location filename="../src/mainwindow.cpp" line="833"/>
         <source>Boot &amp;next</source>
         <translation>&amp;Nästa Boot </translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="776"/>
+        <location filename="../src/mainwindow.cpp" line="834"/>
         <source>Move &amp;down</source>
         <translation>Flytta ne&amp;r</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="777"/>
+        <location filename="../src/mainwindow.cpp" line="835"/>
         <source>&amp;Remove entry</source>
         <translation>Ta &amp;bort post</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="779"/>
+        <location filename="../src/mainwindow.cpp" line="837"/>
         <source>Re&amp;set next</source>
         <translation>&amp;Återställ nästa</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="780"/>
+        <location filename="../src/mainwindow.cpp" line="838"/>
         <source>Change &amp;timeout</source>
         <translation>Ändra ti&amp;meout</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="781"/>
+        <location filename="../src/mainwindow.cpp" line="839"/>
         <source>Move &amp;up</source>
         <translation>Flytta &amp;upp</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="786"/>
-        <location filename="../src/mainwindow.cpp" line="803"/>
+        <location filename="../src/mainwindow.cpp" line="844"/>
+        <location filename="../src/mainwindow.cpp" line="851"/>
         <source>not set, will boot using list order</source>
         <translation>ej inställd, startar i listordning</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="835"/>
+        <location filename="../src/mainwindow.cpp" line="891"/>
         <source>Set &amp;inactive</source>
         <translation>Gör &amp;inaktiv</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="908"/>
+        <location filename="../src/mainwindow.cpp" line="970"/>
         <source>Failed to open grub.entry file.</source>
         <translation>Kunde inte öppna grub.entry filen.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1658"/>
+        <location filename="../src/mainwindow.cpp" line="1750"/>
         <source>Tool for managing UEFI boot entries</source>
         <translation>Verktyg för att hantera UEFI bootposter</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1821"/>
+        <location filename="../src/mainwindow.cpp" line="1929"/>
         <source>Both old and new EFI labels must be specified</source>
         <translation>Både gamla och nya EFI etiketter måste specifieras</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1874"/>
+        <location filename="../src/mainwindow.cpp" line="2001"/>
         <source>Multiple boot entries found for label &apos;%1&apos;: %2 and %3;</source>
         <translation>Flera bootposter hittade för etikett &apos;%1&apos;: %2 och %3;</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1884"/>
+        <location filename="../src/mainwindow.cpp" line="2011"/>
         <source>No EFI data found for label &apos;%1&apos;.</source>
         <translation>Inga EFI data hittade för etikett &apos;%1&apos;.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1892"/>
+        <location filename="../src/mainwindow.cpp" line="2019"/>
         <source>EFI label &apos;%1&apos; is linked to an unknown partition &apos;%2&apos;.</source>
         <translation>EFI etikett &apos;%1&apos; är länkad till en okänd partition &apos;%2&apos;.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1903"/>
+        <location filename="../src/mainwindow.cpp" line="2030"/>
         <source>Unexpected device name format &apos;%1&apos; for partition related to the label.</source>
         <translation>Oväntat namnformat enhet &apos;%1&apos; för partition relaterad till etiketten.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1913"/>
+        <location filename="../src/mainwindow.cpp" line="2040"/>
         <source>Device partition number [%1] differs from EFI entry partition number [%2].</source>
         <translation>Enhets partitionsnummer [%1] avviker från EFI posts partitionsnummer [%2].</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1927"/>
+        <location filename="../src/mainwindow.cpp" line="2053"/>
         <source>Failed to delete old boot entry</source>
         <translation>Kunde inte ta bort gammal bootpost</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1932"/>
+        <location filename="../src/mainwindow.cpp" line="2058"/>
         <source>Failed to create new boot entry</source>
         <translation>Kunde inte skapa ny boot post</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1497"/>
+        <location filename="../src/mainwindow.cpp" line="1585"/>
         <source>Failed to read grub.entry file.</source>
         <translation>Kunde inte läsa grub.entry filen.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="893"/>
-        <location filename="../src/mainwindow.cpp" line="1510"/>
+        <location filename="../src/mainwindow.cpp" line="955"/>
+        <location filename="../src/mainwindow.cpp" line="1598"/>
         <source>Install</source>
         <translation>Installera</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1516"/>
+        <location filename="../src/mainwindow.cpp" line="1604"/>
         <source>Select Frugal Directory</source>
         <translation>Välj Frugal Katalog</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1523"/>
+        <location filename="../src/mainwindow.cpp" line="1611"/>
         <source>No EFI System Partitions found.</source>
         <translation>Inga EFI Systempartitioner hittade.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1529"/>
+        <location filename="../src/mainwindow.cpp" line="1617"/>
         <source>Select EFI System Partition</source>
         <translation>Välj EFI Systempartition</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1530"/>
+        <location filename="../src/mainwindow.cpp" line="1618"/>
         <source>EFI System Partitions:</source>
         <translation>EFI Systempartitioner:</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1543"/>
+        <location filename="../src/mainwindow.cpp" line="1631"/>
         <source>No EFI System Partition selected</source>
         <translation>Ingen EFI Systempartition vald</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1550"/>
+        <location filename="../src/mainwindow.cpp" line="1638"/>
         <source>Could not mount selected EFI System Partition</source>
         <translation>Kunde inte montera vald EFI Systempartition</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1577"/>
-        <location filename="../src/mainwindow.cpp" line="1621"/>
+        <location filename="../src/mainwindow.cpp" line="1669"/>
+        <location filename="../src/mainwindow.cpp" line="1713"/>
         <source>Could not mount partition. Please make sure you selected the correct partition.</source>
         <translation>Kunde inte montera partition. Var vänlig kontrollera att du valt rätt partition.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1586"/>
+        <location filename="../src/mainwindow.cpp" line="1678"/>
         <source>No directory selected</source>
         <translation>Ingen katalog vald</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1606"/>
-        <location filename="../src/mainwindow.cpp" line="1643"/>
+        <location filename="../src/mainwindow.cpp" line="1698"/>
+        <location filename="../src/mainwindow.cpp" line="1735"/>
         <source>EFI stub installed successfully.</source>
         <translation>EFI stub installerades framgångsrikt.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1608"/>
-        <location filename="../src/mainwindow.cpp" line="1645"/>
+        <location filename="../src/mainwindow.cpp" line="1700"/>
+        <location filename="../src/mainwindow.cpp" line="1737"/>
         <source>Failed to install EFI stub.</source>
         <translation>Kunde inte installera EFI stub.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1656"/>
+        <location filename="../src/mainwindow.cpp" line="1748"/>
         <source>Version: </source>
         <translation>Version:</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1660"/>
+        <location filename="../src/mainwindow.cpp" line="1752"/>
         <source>Copyright (c) MX Linux</source>
         <translation>Copyright (c) MX Linux</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1661"/>
+        <location filename="../src/mainwindow.cpp" line="1753"/>
         <source>%1 License</source>
         <translation>%1 Licens</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1669"/>
+        <location filename="../src/mainwindow.cpp" line="1761"/>
         <source>%1 Help</source>
         <translation>%1 Hjälp</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1697"/>
+        <location filename="../src/mainwindow.cpp" line="1791"/>
         <source>Something went wrong, could not save boot order.</source>
         <translation>Något blev fel, kunde inte spara boot-ordning.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1705"/>
+        <location filename="../src/mainwindow.cpp" line="1802"/>
         <source>Set timeout</source>
         <translation>Ställ in timeout</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1705"/>
+        <location filename="../src/mainwindow.cpp" line="1802"/>
         <source>Timeout in seconds:</source>
         <translation>Timeout i sekunder:</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1744"/>
+        <location filename="../src/mainwindow.cpp" line="1841"/>
         <source>Removal confirmation</source>
         <translation>Konfirmering av borttagande</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1745"/>
+        <location filename="../src/mainwindow.cpp" line="1842"/>
         <source>Are you sure you want to delete this boot entry?
 %1</source>
         <translation>Är det säkert att du vill ta bort  denna boot post?

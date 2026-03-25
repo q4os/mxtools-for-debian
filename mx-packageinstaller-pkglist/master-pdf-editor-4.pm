@@ -88,7 +88,7 @@ tar -czf control.tar.gz *[!z]
 ar r $TMPDEB  control.tar.gz
 popd >/dev/null
 echo "Install $DEB"
-dpkg -i $TMPDEB
+dpkg -i $TMPDEB || :
 apt-get install -yf
 rm $TMPDEB
 rm -r $TMPDIR

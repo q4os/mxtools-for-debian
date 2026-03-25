@@ -63,11 +63,18 @@ brightness_small::brightness_small(QWidget *parent, const QStringList &args) noe
     connect(trayicon, &QSystemTrayIcon::activated, this, &brightness_small::iconActivated);
     trayicon->setContextMenu(menu);
 
+
     connect(ui->pushSave, &QPushButton::clicked, this, &brightness_small::pushSave_clicked);
     connect(ui->comboDisplay, &QComboBox::currentIndexChanged, this, &brightness_small::comboDisplay_currentIndexChanged);
     connect(ui->sliderBrightness, &QSlider::valueChanged, this, &brightness_small::sliderBrightness_valueChanged);
     connect(ui->sliderHardwareBacklight, &QSlider::actionTriggered, this, &brightness_small::setbacklight);
     connect(ui->pushExpandBacklight, &QToolButton::clicked, this, &brightness_small::pushExpandBacklight_clicked);
+    if (args.contains("--traydialog"_L1)){
+        iconActivated(QSystemTrayIcon::Trigger);
+        if (args.contains("--close"_L1)){
+            closetrayapp = true;  
+        }
+    }
 }
 
 void brightness_small::iconActivated(QSystemTrayIcon::ActivationReason reason) noexcept
@@ -241,6 +248,9 @@ void brightness_small::changeEvent(QEvent *event) noexcept
             qDebug() << "focusinEvent";
         } else {
             qDebug() << "focusOutEvent";
+            if (closetrayapp){
+                qApp->quit();
+            }
             this->hide();
         }
     }

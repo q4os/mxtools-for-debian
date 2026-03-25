@@ -127,6 +127,10 @@ set(SOURCES
     cmd.cpp
 )
 
+set(HELPER_SOURCES
+    helper.cpp
+)
+
 set(HEADERS
     mainwindow.h
     choosedialog.h
@@ -155,11 +159,20 @@ add_executable(mx-locale
     ${RESOURCE_FILES}
 )
 
+add_executable(helper
+    ${HELPER_SOURCES}
+    common.h
+)
+
 # Link Qt6 libraries
 target_link_libraries(mx-locale
     Qt6::Core
     Qt6::Gui
     Qt6::Widgets
+)
+
+target_link_libraries(helper
+    Qt6::Core
 )
 
 # Set compiler flags
@@ -172,11 +185,22 @@ target_compile_options(mx-locale PRIVATE
     -Werror
 )
 
+target_compile_options(helper PRIVATE
+    -Wpedantic
+    -pedantic
+    -Werror=return-type
+    -Werror=switch
+    -Werror=uninitialized
+    -Werror
+)
+
 # Add compiler-specific flags
 if(CMAKE_CXX_COMPILER_ID STREQUAL "Clang" OR USE_CLANG)
     target_compile_options(mx-locale PRIVATE -Werror=return-stack-address)
+    target_compile_options(helper PRIVATE -Werror=return-stack-address)
 else()
     target_compile_options(mx-locale PRIVATE -Werror=return-local-addr)
+    target_compile_options(helper PRIVATE -Werror=return-local-addr)
 endif()
 
 # Set compile definitions
@@ -186,22 +210,34 @@ target_compile_definitions(mx-locale PRIVATE
     VERSION="${PROJECT_VERSION}"
 )
 
+target_compile_definitions(helper PRIVATE
+    QT_DEPRECATED_WARNINGS
+    QT_DISABLE_DEPRECATED_BEFORE=0x060000
+)
+
 if(ARCH_BUILD)
     target_compile_definitions(mx-locale PRIVATE MX_LOCALE_ARCH)
+    target_compile_definitions(helper PRIVATE MX_LOCALE_ARCH)
 endif()
 
 # Release-specific optimizations
 if(CMAKE_BUILD_TYPE STREQUAL "Release")
     target_compile_definitions(mx-locale PRIVATE NDEBUG)
     target_compile_options(mx-locale PRIVATE -O3)
+    target_compile_definitions(helper PRIVATE NDEBUG)
+    target_compile_options(helper PRIVATE -O3)
 
     # Add LTO - different flags for different compilers
     if(CMAKE_CXX_COMPILER_ID STREQUAL "Clang" OR USE_CLANG)
         target_compile_options(mx-locale PRIVATE -flto=thin)
         target_link_options(mx-locale PRIVATE -flto=thin)
+        target_compile_options(helper PRIVATE -flto=thin)
+        target_link_options(helper PRIVATE -flto=thin)
     else()
         target_compile_options(mx-locale PRIVATE -flto=auto)
         target_link_options(mx-locale PRIVATE -flto=auto)
+        target_compile_options(helper PRIVATE -flto=auto)
+        target_link_options(helper PRIVATE -flto=auto)
     endif()
 endif()
 
@@ -220,10 +256,19 @@ set_target_properties(mx-locale PROPERTIES
     RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}
 )
 
+set_target_properties(helper PROPERTIES
+    OUTPUT_NAME "helper"
+    RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}
+)
+
 
 
 # Install target (required by Debian build system)
 # Other files are handled by debian/install
 install(TARGETS mx-locale
     RUNTIME DESTINATION bin
+)
+
+install(TARGETS helper
+    RUNTIME DESTINATION lib/mx-locale
 )

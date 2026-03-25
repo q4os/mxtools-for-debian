@@ -161,15 +161,15 @@ void ConkyItem::updateFromFile()
         return;
     }
 
-    QFileInfo fileInfo(m_filePath);
+    auto fileInfo = QFileInfo(m_filePath);
     if (!fileInfo.exists()) {
         return;
     }
 
     if (m_name.isEmpty()) {
         // Include parent directory name in the display name
-        QString parentDirName = fileInfo.absoluteDir().dirName();
-        QString fileName = fileInfo.completeBaseName();
+        auto parentDirName = fileInfo.absoluteDir().dirName();
+        auto fileName = fileInfo.completeBaseName();
         m_name = QString("%1: %2").arg(parentDirName, fileName);
     }
 
@@ -183,11 +183,11 @@ QString ConkyItem::findPreviewImage() const
         return {};
     }
 
-    QFileInfo fileInfo(m_filePath);
-    QDir dir = fileInfo.absoluteDir();
+    auto fileInfo = QFileInfo(m_filePath);
+    auto dir = fileInfo.absoluteDir();
 
     QStringList imageExtensions = {"png", "jpg", "jpeg", "gif", "bmp"};
-    QString baseName = fileInfo.completeBaseName();
+    auto baseName = fileInfo.completeBaseName();
 
     for (const QString &ext : imageExtensions) {
         QString imagePath = dir.absoluteFilePath(baseName + "." + ext);

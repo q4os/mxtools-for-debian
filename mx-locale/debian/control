@@ -11,7 +11,6 @@ Homepage: https://github.com/MX-Linux/mx-locale
 Package: mx-locale
 Architecture: any
 Depends: locales,
-         xdg-utils | mx-viewer,
          ${misc:Depends},
          ${shlibs:Depends}
 Description: Locale configuration tool for MX Linux

@@ -4,7 +4,7 @@
     <message>
         <location filename="../src/conkycustomizedialog.cpp" line="56"/>
         <source>Customize Conky - %1</source>
-        <translation type="unfinished"/>
+        <translation>Настройка Conky - %1</translation>
     </message>
     <message>
         <location filename="../src/conkycustomizedialog.cpp" line="77"/>
@@ -36,27 +36,27 @@
     <message>
         <location filename="../src/conkycustomizedialog.cpp" line="121"/>
         <source>Color0</source>
-        <translation type="unfinished"/>
+        <translation>Цвет0</translation>
     </message>
     <message>
         <location filename="../src/conkycustomizedialog.cpp" line="121"/>
         <source>Color1</source>
-        <translation type="unfinished"/>
+        <translation>Цвет1</translation>
     </message>
     <message>
         <location filename="../src/conkycustomizedialog.cpp" line="121"/>
         <source>Color2</source>
-        <translation type="unfinished"/>
+        <translation>Цвет2</translation>
     </message>
     <message>
         <location filename="../src/conkycustomizedialog.cpp" line="121"/>
         <source>Color3</source>
-        <translation type="unfinished"/>
+        <translation>Цвет3</translation>
     </message>
     <message>
         <location filename="../src/conkycustomizedialog.cpp" line="121"/>
         <source>Color4</source>
-        <translation type="unfinished"/>
+        <translation>Цвет4</translation>
     </message>
     <message>
         <location filename="../src/conkycustomizedialog.cpp" line="122"/>
@@ -97,74 +97,75 @@
     <message>
         <location filename="../src/conkycustomizedialog.cpp" line="722"/>
         <source>Select Color</source>
-        <translation type="unfinished"/>
+        <translation>Выберите цвет</translation>
     </message>
     <message>
         <location filename="../src/conkycustomizedialog.cpp" line="828"/>
         <source>Permission Denied</source>
-        <translation type="unfinished"/>
+        <translation>Доступ запрещен</translation>
     </message>
     <message>
         <location filename="../src/conkycustomizedialog.cpp" line="829"/>
         <source>Cannot write to file: %1
 Insufficient permissions.</source>
-        <translation type="unfinished"/>
+        <translation>Нельзя записать в файл: %1
+Недостаточно прав.</translation>
     </message>
     <message>
         <location filename="../src/conkycustomizedialog.cpp" line="839"/>
         <source>Write Error</source>
-        <translation type="unfinished"/>
+        <translation>Ошибка записи</translation>
     </message>
     <message>
         <location filename="../src/conkycustomizedialog.cpp" line="839"/>
         <source>Cannot write to file: %1</source>
-        <translation type="unfinished"/>
+        <translation>Нельзя записать в файл: %1</translation>
     </message>
     <message>
         <location filename="../src/conkycustomizedialog.cpp" line="930"/>
         <source>Backup Config File</source>
-        <translation type="unfinished"/>
+        <translation>Резервный конфигурационный файл</translation>
     </message>
     <message>
         <location filename="../src/conkycustomizedialog.cpp" line="930"/>
         <source>Do you want to preserve the original file?</source>
-        <translation type="unfinished"/>
+        <translation>Вы хотите сохранить исходный файл?</translation>
     </message>
     <message>
         <location filename="../src/conkycustomizedialog.cpp" line="954"/>
         <source>Backed Up Config File</source>
-        <translation type="unfinished"/>
+        <translation>Резервная копия файла конфигурации</translation>
     </message>
     <message>
         <location filename="../src/conkycustomizedialog.cpp" line="955"/>
         <source>The original configuration was backed up to %1</source>
-        <translation type="unfinished"/>
+        <translation>Исходная конфигурация была сохранена в %1</translation>
     </message>
     <message>
         <location filename="../src/conkycustomizedialog.cpp" line="957"/>
         <source>Backup Failed</source>
-        <translation type="unfinished"/>
+        <translation>Резервное копирование не удалось</translation>
     </message>
     <message>
         <location filename="../src/conkycustomizedialog.cpp" line="957"/>
         <source>Failed to create a backup file.</source>
-        <translation type="unfinished"/>
+        <translation>Не удалось создать файл резервной копии.</translation>
     </message>
     <message>
         <location filename="../src/conkycustomizedialog.cpp" line="1038"/>
         <location filename="../src/conkycustomizedialog.cpp" line="1041"/>
         <source>Restore Failed</source>
-        <translation type="unfinished"/>
+        <translation>Восстановление не удалось</translation>
     </message>
     <message>
         <location filename="../src/conkycustomizedialog.cpp" line="1038"/>
         <source>Failed to restore from backup file.</source>
-        <translation type="unfinished"/>
+        <translation>Не удалось восстановить данные из резервной копии.</translation>
     </message>
     <message>
         <location filename="../src/conkycustomizedialog.cpp" line="1041"/>
         <source>Backup file does not exist.</source>
-        <translation type="unfinished"/>
+        <translation>Резервная копия файла не существует.</translation>
     </message>
     <message>
         <location filename="../src/conkycustomizedialog.cpp" line="1393"/>
@@ -174,37 +175,37 @@ Insufficient permissions.</source>
     <message>
         <location filename="../src/conkycustomizedialog.cpp" line="1400"/>
         <source>Alignment</source>
-        <translation type="unfinished"/>
+        <translation>Выравнивание</translation>
     </message>
     <message>
         <location filename="../src/conkycustomizedialog.cpp" line="1405"/>
         <source>Top Left</source>
-        <translation type="unfinished"/>
+        <translation>Вверху слева</translation>
     </message>
     <message>
         <location filename="../src/conkycustomizedialog.cpp" line="1406"/>
         <source>Top Right</source>
-        <translation type="unfinished"/>
+        <translation>Вверху справа</translation>
     </message>
     <message>
         <location filename="../src/conkycustomizedialog.cpp" line="1407"/>
         <source>Top Middle</source>
-        <translation type="unfinished"/>
+        <translation>Вверху посередине</translation>
     </message>
     <message>
         <location filename="../src/conkycustomizedialog.cpp" line="1408"/>
         <source>Bottom Left</source>
-        <translation type="unfinished"/>
+        <translation>Внизу слева</translation>
     </message>
     <message>
         <location filename="../src/conkycustomizedialog.cpp" line="1409"/>
         <source>Bottom Right</source>
-        <translation type="unfinished"/>
+        <translation>Внизу справа</translation>
     </message>
     <message>
         <location filename="../src/conkycustomizedialog.cpp" line="1410"/>
         <source>Bottom Middle</source>
-        <translation type="unfinished"/>
+        <translation>Внизу посередине</translation>
     </message>
     <message>
         <location filename="../src/conkycustomizedialog.cpp" line="1411"/>
@@ -259,7 +260,7 @@ Insufficient permissions.</source>
     <message>
         <location filename="../src/conkycustomizedialog.cpp" line="1460"/>
         <source>Location</source>
-        <translation type="unfinished"/>
+        <translation>Расположение</translation>
     </message>
     <message>
         <location filename="../src/conkycustomizedialog.cpp" line="1472"/>
@@ -301,39 +302,41 @@ otherwise this setting will not have any effect</source>
     <message>
         <location filename="../src/conkycustomizedialog.cpp" line="1536"/>
         <source>Transparency Type</source>
-        <translation type="unfinished"/>
+        <translation>Тип прозрачности</translation>
     </message>
     <message>
         <location filename="../src/conkycustomizedialog.cpp" line="1541"/>
         <source>Opaque</source>
-        <translation type="unfinished"/>
+        <translation>Непрозрачный</translation>
     </message>
     <message>
         <location filename="../src/conkycustomizedialog.cpp" line="1542"/>
         <source>Transparent</source>
-        <translation type="unfinished"/>
+        <translation>Прозрачный</translation>
     </message>
     <message>
         <location filename="../src/conkycustomizedialog.cpp" line="1543"/>
         <source>Pseudo-Transparent</source>
-        <translation type="unfinished"/>
+        <translation>Псевдопрозрачный</translation>
     </message>
     <message>
         <location filename="../src/conkycustomizedialog.cpp" line="1544"/>
         <source>Semi-Transparent</source>
-        <translation type="unfinished"/>
+        <translation>Полупрозрачный</translation>
     </message>
     <message>
         <location filename="../src/conkycustomizedialog.cpp" line="1549"/>
         <source>Opacity (%)</source>
-        <translation type="unfinished"/>
+        <translation>Непрозрачность (%)</translation>
     </message>
     <message>
         <location filename="../src/conkycustomizedialog.cpp" line="1550"/>
         <source>Window Opacity
 
 0 = Fully Transparent, 100 = Fully Opaque</source>
-        <translation type="unfinished"/>
+        <translation>Прозрачность окна
+
+0 = Полностью прозрачный, 100 = Полностью непрозрачный</translation>
     </message>
     <message>
         <location filename="../src/conkycustomizedialog.cpp" line="1564"/>
@@ -343,7 +346,7 @@ otherwise this setting will not have any effect</source>
     <message>
         <location filename="../src/conkycustomizedialog.cpp" line="1569"/>
         <source>Choose Color</source>
-        <translation type="unfinished"/>
+        <translation>Выберите цвет</translation>
     </message>
     <message>
         <location filename="../src/conkycustomizedialog.cpp" line="1589"/>
@@ -358,7 +361,7 @@ otherwise this setting will not have any effect</source>
     <message>
         <location filename="../src/conkycustomizedialog.cpp" line="1610"/>
         <source>Transparency</source>
-        <translation type="unfinished"/>
+        <translation>Прозрачность</translation>
     </message>
     <message>
         <location filename="../src/conkycustomizedialog.cpp" line="1621"/>
@@ -374,13 +377,13 @@ otherwise this setting will not have any effect</source>
         <location filename="../src/conkycustomizedialog.cpp" line="1626"/>
         <location filename="../src/conkycustomizedialog.cpp" line="1637"/>
         <source>Long</source>
-        <translation>Длинное</translation>
+        <translation>Длинно</translation>
     </message>
     <message>
         <location filename="../src/conkycustomizedialog.cpp" line="1627"/>
         <location filename="../src/conkycustomizedialog.cpp" line="1638"/>
         <source>Short</source>
-        <translation>Короткое</translation>
+        <translation>Коротко</translation>
     </message>
     <message>
         <location filename="../src/conkycustomizedialog.cpp" line="1628"/>
@@ -410,12 +413,12 @@ otherwise this setting will not have any effect</source>
     <message>
         <location filename="../src/conkycustomizedialog.cpp" line="1670"/>
         <source>12 Hour</source>
-        <translation type="unfinished"/>
+        <translation>12-часовой</translation>
     </message>
     <message>
         <location filename="../src/conkycustomizedialog.cpp" line="1671"/>
         <source>24 Hour</source>
-        <translation type="unfinished"/>
+        <translation>24-часовой</translation>
     </message>
     <message>
         <location filename="../src/conkycustomizedialog.cpp" line="653"/>
@@ -437,22 +440,22 @@ otherwise this setting will not have any effect</source>
     <message>
         <location filename="../src/conkycustomizedialog.cpp" line="1707"/>
         <source>WiFi</source>
-        <translation type="unfinished"/>
+        <translation>WiFi</translation>
     </message>
     <message>
         <location filename="../src/conkycustomizedialog.cpp" line="1710"/>
         <source>WiFi Network</source>
-        <translation type="unfinished"/>
+        <translation>Сеть WiFi</translation>
     </message>
     <message>
         <location filename="../src/conkycustomizedialog.cpp" line="1713"/>
         <source>LAN</source>
-        <translation type="unfinished"/>
+        <translation>LAN</translation>
     </message>
     <message>
         <location filename="../src/conkycustomizedialog.cpp" line="1716"/>
         <source>Wired LAN Network</source>
-        <translation type="unfinished"/>
+        <translation>Проводная локальная сеть</translation>
     </message>
     <message>
         <location filename="../src/conkycustomizedialog.cpp" line="1730"/>
@@ -462,7 +465,7 @@ otherwise this setting will not have any effect</source>
     <message>
         <location filename="../src/conkycustomizedialog.cpp" line="2045"/>
         <source>Select Background Color</source>
-        <translation type="unfinished"/>
+        <translation>Выберите цвет фона</translation>
     </message>
 </context>
 <context>
@@ -470,12 +473,12 @@ otherwise this setting will not have any effect</source>
     <message>
         <location filename="../src/conkylistwidget.cpp" line="64"/>
         <source>Running</source>
-        <translation type="unfinished"/>
+        <translation>Выполняется</translation>
     </message>
     <message>
         <location filename="../src/conkylistwidget.cpp" line="64"/>
         <source>Stopped</source>
-        <translation type="unfinished"/>
+        <translation>Остановлен</translation>
     </message>
     <message>
         <location filename="../src/conkylistwidget.cpp" line="138"/>
@@ -490,7 +493,7 @@ otherwise this setting will not have any effect</source>
     <message>
         <location filename="../src/conkylistwidget.cpp" line="143"/>
         <source>Customize</source>
-        <translation type="unfinished"/>
+        <translation>Настроить</translation>
     </message>
     <message>
         <location filename="../src/conkylistwidget.cpp" line="148"/>
@@ -585,7 +588,7 @@ otherwise this setting will not have any effect</source>
     <message>
         <location filename="../src/mainwindow.cpp" line="159"/>
         <source>Loading Conky configurations...</source>
-        <translation type="unfinished"/>
+        <translation>Загрузка конфигураций Conky...</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="189"/>
@@ -595,7 +598,7 @@ otherwise this setting will not have any effect</source>
     <message>
         <location filename="../src/mainwindow.cpp" line="191"/>
         <source>Configure conky search paths</source>
-        <translation type="unfinished"/>
+        <translation>Настройте пути поиска конфигураций Conky</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="193"/>
@@ -605,39 +608,39 @@ otherwise this setting will not have any effect</source>
     <message>
         <location filename="../src/mainwindow.cpp" line="195"/>
         <source>Refresh conky list</source>
-        <translation type="unfinished"/>
+        <translation>Обновить список Conky</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="197"/>
         <source>Start All</source>
-        <translation type="unfinished"/>
+        <translation>Запустить все</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="199"/>
         <source>Start all enabled conkies</source>
-        <translation type="unfinished"/>
+        <translation>Запустить все включенные conky</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="201"/>
         <source>Stop All</source>
-        <translation type="unfinished"/>
+        <translation>Остановить все</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="203"/>
         <source>Stop all running conkies</source>
-        <translation type="unfinished"/>
+        <translation>Остановить все запущенные conky</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="965"/>
         <location filename="../src/mainwindow.cpp" line="1016"/>
         <source>Running</source>
-        <translation type="unfinished"/>
+        <translation>Запущен</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="967"/>
         <location filename="../src/mainwindow.cpp" line="1017"/>
         <source>Stopped</source>
-        <translation type="unfinished"/>
+        <translation>Остановлен</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="211"/>

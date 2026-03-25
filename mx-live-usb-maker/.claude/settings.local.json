@@ -12,9 +12,25 @@
       "Bash(blkid:*)",
       "Bash(udisksctl mount:*)",
       "Bash(udisksctl unmount:*)",
-      "Bash(e2label:*)"
+      "Bash(e2label:*)",
+      "Bash(git show:*)",
+      "Bash(git cherry-pick:*)",
+      "Bash(git add:*)",
+      "Bash(command -v:*)",
+      "Bash(g++:*)",
+      "Bash(# Extract the compressed part and verify zstd integrity dd if=/run/media/adrian/MXarch-Live/arch/boot/x86_64/archiso.img bs=1 skip=26142720)",
+      "Bash(zstd:*)",
+      "Bash(bsdcpio:*)",
+      "Bash(pkexec bash:*)",
+      "Bash(pkexec install:*)",
+      "Bash(build/mx-live-usb-maker:*)",
+      "Bash(ls:*)"
     ],
     "deny": [],
     "ask": []
-  }
+  },
+  "enableAllProjectMcpServers": true,
+  "enabledMcpjsonServers": [
+    "docker"
+  ]
 }

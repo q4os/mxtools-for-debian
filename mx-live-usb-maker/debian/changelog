@@ -1,6 +1,12 @@
+mx-live-usb-maker (26.03) mx; urgency=medium
+
+  * Show help documentation in the internal viewer
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 12 Mar 2026 13:05:23 -0400
+
 mx-live-usb-maker (26.01) mx; urgency=medium
 
-  * Harden update mode options (disable actions that trigger reformating)
+  * Harden update mode options (disable actions that trigger reformatting)
 
  -- Adrian <adrian@mxlinux.org>  Sat, 24 Jan 2026 08:58:20 -0500
 

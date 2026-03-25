@@ -1,3 +1,16 @@
+mx-datetime (26.03.1) mx; urgency=medium
+
+  * Fix chrony source path
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 12 Mar 2026 15:26:03 -0400
+
+mx-datetime (26.03) mx; urgency=medium
+
+  * Use internal help viewer
+  * Switch to binary helper
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 12 Mar 2026 00:00:00 -0400
+
 mx-datetime (25.11mx23) mx; urgency=medium
 
   * Improve systemd detection

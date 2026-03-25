@@ -22,6 +22,7 @@
 #pragma once
 
 #include <QButtonGroup>
+#include <QCloseEvent>
 #include <QMessageBox>
 #include <QSettings>
 #include <memory>
@@ -31,6 +32,12 @@ namespace Ui
 class MainWindow;
 }
 
+enum class QuietMode
+{
+    No,
+    Yes,
+};
+
 class MainWindow : public QDialog
 {
     Q_OBJECT
@@ -38,6 +45,9 @@ class MainWindow : public QDialog
 public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow() override;
+
+protected:
+    void closeEvent(QCloseEvent *event) override;
 
 private slots:
     void pushAbout_clicked();
@@ -54,9 +64,16 @@ private:
     QString shadowSettingsPath;
     QString currentUser;
     bool isArchLinux {false};
+    bool manualRemovalInProgress {false};
     bool suppressUserSwitch {false};
-    QString cmdOut(const QString &cmd, bool asRoot = false, bool quiet = false);
-    QString cmdOutAsRoot(const QString &cmd, bool quiet = false);
+    QString cmdOut(const QString &cmd, QuietMode quiet = QuietMode::No);
+    bool helperProc(const QStringList &helperArgs, QuietMode quiet = QuietMode::No, QString *output = nullptr);
+    bool helperExec(const QString &cmd, const QStringList &args = {}, QuietMode quiet = QuietMode::No,
+                    QString *output = nullptr);
+    QString helperOut(const QString &cmd, const QStringList &args = {}, QuietMode quiet = QuietMode::No);
+    bool helperFlatpakCleanup(const QString &user, QuietMode quiet = QuietMode::No);
+    quint64 helperDuSize(const QString &path, QuietMode quiet = QuietMode::No);
+    static quint64 sumKiB(const QString &output);
 
     static void addGroupCheckbox(QLayout *layout, const QStringList &package, const QString &name, QStringList *list);
     static void selectRadioButton(class QGroupBox *groupbox, const QButtonGroup *group, int id);
@@ -80,5 +97,5 @@ private:
     QString settingsDirForUser(const QString &user) const;
     QString settingsFileForUser(const QString &user) const;
     void initializeSettingsForUser(const QString &user);
-    void ensureSettingsOwnership(const QString &user);
+    void ensureSettingsOwnership(const QString &user, const QString &targetPath);
 };

@@ -29,6 +29,7 @@
 #include <QFileDialog>
 #include <QProgressDialog>
 #include <QScrollBar>
+#include <QSignalBlocker>
 #include <QTextStream>
 #include <QUrl>
 
@@ -38,13 +39,22 @@
 #include <unistd.h>
 
 namespace {
-QString buildLocaleUpdateCommand(const QString &key, const QString &value)
+bool isSafeLocaleToken(const QString &value)
 {
-#ifdef MX_LOCALE_ARCH
-    return QString("localectl set-locale %1=%2").arg(key, value);
-#else
-    return QString("update-locale %1='%2'").arg(key, value);
-#endif
+    static const QRegularExpression regex(R"(^[A-Za-z0-9_.@-]+$)");
+    return regex.match(value).hasMatch();
+}
+
+bool isSafeLocaleGenLine(const QString &value)
+{
+    static const QRegularExpression regex(R"(^[A-Za-z0-9_.@-]+(?:\s+[A-Za-z0-9_.@-]+)?$)");
+    return regex.match(value).hasMatch();
+}
+
+void showCommandError(QWidget *parent, Cmd &cmd, const QString &fallback = QObject::tr("Operation failed."))
+{
+    const QString details = cmd.readAllOutput();
+    QMessageBox::critical(parent, QObject::tr("Error"), details.isEmpty() ? fallback : details);
 }
 } // namespace
 
@@ -130,8 +140,11 @@ void MainWindow::onGroupButton(int buttonId)
     if (selection.isEmpty()) {
         return;
     }
+    if (!isSafeLocaleToken(selection)) {
+        QMessageBox::critical(this, tr("Error"), tr("Invalid locale value."));
+        return;
+    }
     auto *selectedButton = buttonGroup->button(buttonId);
-    selectedButton->setText(selection);
     static const QHash<int, QString> hashVarName {
         {ButtonID::Lang, "LANG"},
         {ButtonID::Address, "LC_ADDRESS"},
@@ -147,32 +160,30 @@ void MainWindow::onGroupButton(int buttonId)
         {ButtonID::Telephone, "LC_TELEPHONE"},
         {ButtonID::Time, "LC_TIME"},
     };
+    Cmd cmd;
+    if (!cmd.runAsRoot("set-locale", {hashVarName.value(buttonId), selection})) {
+        showCommandError(this, cmd);
+        return;
+    }
+    selectedButton->setText(selection);
     if (buttonId == ButtonID::Lang) {
         setSubvariables();
     }
-    const QString updateLocaleCommand = buildLocaleUpdateCommand(hashVarName.value(buttonId), selectedButton->text());
-    Cmd().runAsRoot(updateLocaleCommand);
     ui->pushResetSubvar->setVisible(anyDifferentSubvars());
 }
 
 void MainWindow::resetSubvariables()
 {
     const QString langValue = buttonGroup->button(ButtonID::Lang)->text();
-    Cmd cmd;
-#ifdef MX_LOCALE_ARCH
-    cmd.runAsRoot("localectl set-locale LANG=" + langValue);
-#else
-    cmd.runAsRoot("rm " + Paths::defaultLocale);
-    //debian moved locale configuration in trixie, not etc/default/locale is a symlink
-    //to /etc/locale.conf :rollseyes:
-    if (QFile("/etc/locale.conf").exists()){
-        //also remove this file
-        cmd.runAsRoot("rm " + Paths::defaultLocale);
-        cmd.runAsRoot("touch /etc/locale.conf");
-        cmd.runAsRoot("ln -srf /etc/locale.conf " + Paths::defaultLocale);
+    if (!isSafeLocaleToken(langValue)) {
+        QMessageBox::critical(this, tr("Error"), tr("Invalid locale value."));
+        return;
     }
-    cmd.runAsRoot("update-locale LANG=" + langValue);
-#endif
+    Cmd cmd;
+    if (!cmd.runAsRoot("reset-subvariables", {langValue})) {
+        showCommandError(this, cmd);
+        return;
+    }
     setSubvariables();
     ui->pushResetSubvar->setVisible(anyDifferentSubvars());
 }
@@ -195,8 +206,7 @@ void MainWindow::aboutClicked()
 void MainWindow::helpClicked()
 {
     const QString helpPath = QDir(Paths::mxLocaleDoc).filePath("help/mx-locale.html");
-    const QString url = QUrl::fromLocalFile(helpPath).toString();
-    displayDoc(url, tr("%1 Help").arg(this->windowTitle()));
+    displayHelpDoc(helpPath, tr("%1 Help").arg(this->windowTitle()));
 }
 
 QString MainWindow::getCurrentLang() const
@@ -207,22 +217,40 @@ QString MainWindow::getCurrentLang() const
 
 QString MainWindow::getCurrentSessionLang() const
 {
-    QString sessionLang = qgetenv("LANG").replace(".utf8", ".UTF-8");
+    QString sessionLang = qEnvironmentVariable("LANG").trimmed().replace(".utf8", ".UTF-8");
+    if (!isSafeLocaleToken(sessionLang)) {
+        qWarning() << "Ignoring unsafe session LANG value";
+        return {};
+    }
     qDebug() << "Session lang" << sessionLang;
     return sessionLang;
 }
 
 void MainWindow::disableAllButCurrent()
 {
-    Cmd().runAsRoot("sed -i \"/^" + ui->buttonLang->text() + "\\|" + getCurrentSessionLang()
-                    + "\\|^#/! s/#*/# /\" " + Paths::localeGen);
+    const QString currentLang = ui->buttonLang->text();
+    const QString sessionLang = getCurrentSessionLang();
+    if (!isSafeLocaleToken(currentLang)) {
+        QMessageBox::critical(this, tr("Error"), tr("Invalid locale value."));
+        return;
+    }
+
+    QStringList helperArguments {currentLang};
+    if (!sessionLang.isEmpty()) {
+        helperArguments.append(sessionLang);
+    }
+
+    Cmd cmd;
+    if (!cmd.runAsRoot("filter-locale-gen", helperArguments)) {
+        showCommandError(this, cmd);
+        return;
+    }
     displayLocalesGen();
     localeGenChanged = true;
 }
 
 void MainWindow::setSubvariables()
 {
-
     QSettings defaultlocale(Paths::defaultLocale, QSettings::NativeFormat);
 
     QString lang = ui->buttonLang->text();
@@ -346,6 +374,8 @@ void MainWindow::listItemChanged(QListWidgetItem *item)
     QString localeCode = item->text().section(' ', 0, 0);
     if (item->checkState() == Qt::Unchecked
         && (localeCode == getCurrentLang() || localeCode == getCurrentSessionLang())) {
+        const QSignalBlocker blocker(ui->listWidget);
+        item->setCheckState(Qt::Checked);
         QMessageBox::warning(this, tr("Error"),
                              tr("Can't disable locale in use", "message that the chosen locale cannot be "
                                                                "disabled because it is in active usage"));
@@ -353,30 +383,38 @@ void MainWindow::listItemChanged(QListWidgetItem *item)
         return;
     }
     ui->listWidget->disconnect();
-    localeGenChanged = true;
     QString text = item->text().section(QRegularExpression(R"(\s*\t)"), 0, 0);
+    if (!isSafeLocaleGenLine(text) || !isSafeLocaleToken(localeCode)) {
+        QMessageBox::critical(this, tr("Error"), tr("Invalid locale value."));
+        connect(ui->listWidget, &QListWidget::itemChanged, this, &MainWindow::listItemChanged);
+        onFilterChanged(ui->comboFilter->currentText());
+        return;
+    }
+    Cmd cmd;
+    bool success = false;
     if (item->checkState() == Qt::Checked) {
-        bool exists = Cmd().run("grep -qF '" + text + "' " + Paths::localeGen);
-        if (!exists) {
-            Cmd().runAsRoot("echo " + text + " >>" + Paths::localeGen);
+        success = cmd.runAsRoot("enable-locale", {text});
+        if (success) {
+            localeGenChanged = true;
+            ++countEnabled;
         } else {
-            Cmd().runAsRoot(QString("sed -i -e 's/^[[:space:]]*//; 0,/%1/{//s/.*/%1/};' -e "
-                                    "'/#.*%1/d' " + Paths::localeGen)
-                                .arg(text));
+            item->setCheckState(Qt::Unchecked);
         }
-        ++countEnabled;
     } else {
-        Cmd().runAsRoot(
-            QString("sed -i 's/^[[:space:]]*//; /^#.*%1/d; s/^%1/%2/;' " + Paths::localeGen).arg(text, "# " + text));
-        QString delStr = text.section(' ', 0, 0);
-        //sed will delete break a symlink when editing a file.
-        Cmd().runAsRoot("sed -i --follow-symlinks '/" + delStr + "/d' " + Paths::defaultLocale);
-        if (delStr.contains("@")) {
-            Cmd().runAsRoot("sed -i --follow-symlinks '/" + delStr.section('@', 0, 0) + ".UTF-8@" + delStr.section('@', 1)
-                            + "/d' " + Paths::defaultLocale);
+        success = cmd.runAsRoot("disable-locale", {text});
+        if (success) {
+            localeGenChanged = true;
+            setSubvariables();
+            --countEnabled;
+        } else {
+            item->setCheckState(Qt::Checked);
         }
-        setSubvariables();
-        --countEnabled;
+    }
+    if (!success) {
+        showCommandError(this, cmd);
+        connect(ui->listWidget, &QListWidget::itemChanged, this, &MainWindow::listItemChanged);
+        onFilterChanged(ui->comboFilter->currentText());
+        return;
     }
     ui->labelCountLocale->setText(
         tr("Locales enabled: %1", "label for a numerical count of enabled and available locales").arg(countEnabled));
@@ -391,11 +429,12 @@ void MainWindow::displayLocalesGen()
     countEnabled = 0;
     ui->listWidget->clear();
     QStringList supportedFiles = {Paths::i18nSupported, Paths::i18nSupportedLocal};
-    QStringList enabledLocales = readEnabledLocales(Paths::localeGen);
-    if (enabledLocales.isEmpty()) {
+    QStringList enabledLocales;
+    if (!readEnabledLocales(Paths::localeGen, enabledLocales)) {
         return;
     }
 
+    hashLocale.clear();
     processLocaleFiles(getLocaleFiles({Paths::i18nLocales, Paths::i18nLocalesLocal}));
 
     for (const QString &filePath : supportedFiles) {
@@ -413,14 +452,14 @@ void MainWindow::displayLocalesGen()
     updateLocaleListUI();
 }
 
-QStringList MainWindow::readEnabledLocales(const QString &filePath)
+bool MainWindow::readEnabledLocales(const QString &filePath, QStringList &enabledLocales)
 {
-    QStringList enabledLocales;
+    enabledLocales.clear();
     QFile localeFile(filePath);
 
     if (!localeFile.open(QIODevice::ReadOnly)) {
         QMessageBox::critical(this, tr("Error"), tr("Could not open %1").arg(localeFile.fileName()));
-        return enabledLocales;
+        return false;
     }
 
     QTextStream in(&localeFile);
@@ -433,7 +472,7 @@ QStringList MainWindow::readEnabledLocales(const QString &filePath)
         }
     }
     localeFile.close();
-    return enabledLocales;
+    return true;
 }
 
 QStringList MainWindow::getLocaleFiles(const QStringList &directories) const
@@ -450,7 +489,7 @@ QStringList MainWindow::getLocaleFiles(const QStringList &directories) const
 
 void MainWindow::processLocaleFiles(const QStringList &localeFiles)
 {
-    QRegularExpression titleRegex(R"(^title[[:space:]]+["](?<title>[^"]+))");
+    QRegularExpression titleRegex(R"(^title[[:space:]]+["](?<title>[^"]+))", QRegularExpression::MultilineOption);
 
     for (const QString &fileName : localeFiles) {
         QFile file(fileName);
@@ -507,8 +546,11 @@ void MainWindow::localeGen()
     });
 
     progressDialog.show();
-    cmd.runAsRoot("locale-gen");
-    localeGenChanged = false;
+    if (cmd.runAsRoot("run-locale-gen")) {
+        localeGenChanged = false;
+    } else {
+        showCommandError(this, cmd, tr("Could not update locales."));
+    }
     ui->tabWidget->setEnabled(true);
 }
 
@@ -548,31 +590,54 @@ void MainWindow::removeManuals()
 
     QString exclusionPattern
         = QString("mx-(docs|faq)-(en|common%1)").arg(lang == "en" || lang == "C" ? "" : QString("|%1").arg(lang));
-    QString listCmd
-        = QString("dpkg-query -W --showformat=\"\\${Package}\\n\" -- 'mx-docs-*' 'mx-faq-*' | grep -vE '%1'")
-              .arg(exclusionPattern);
 
-    Cmd cmd;
-    QStringList packageList = cmd.getOut(listCmd, true).split('\n', Qt::SkipEmptyParts);
+    Cmd queryCmd;
+    const QRegularExpression exclusionRegex(exclusionPattern);
+    QStringList packageList
+        = queryCmd.getOut("dpkg-query", {"-W", "--showformat=${Package}\n", "--", "mx-docs-*", "mx-faq-*"}, true)
+              .split('\n', Qt::SkipEmptyParts);
+    if (!queryCmd.succeeded()) {
+        showCommandError(this, queryCmd, tr("Could not query installed manuals."));
+        return;
+    }
+    for (qsizetype index = packageList.size() - 1; index >= 0; --index) {
+        if (exclusionRegex.match(packageList.at(index)).hasMatch()) {
+            packageList.removeAt(index);
+        }
+    }
 
     if (packageList.isEmpty()) {
         QMessageBox::information(this, tr("Remove Manuals"), tr("No manuals to remove."));
         return;
     }
 
-    QString purgeCmd = QString("apt-get purge -y %1").arg(packageList.join(' '));
-
     ui->tabWidget->setDisabled(true);
+    Cmd authCmd;
+    if (!authCmd.runAsRoot("noop", {}, true)) {
+        ui->tabWidget->setEnabled(true);
+        showCommandError(this, authCmd, tr("Authentication failed."));
+        return;
+    }
+
+    Cmd cmd;
     QProgressDialog prog(tr("Removing packages, please wait"), nullptr, 0, packageList.count());
-    connect(&cmd, &Cmd::outputAvailable, this, [&prog](const QString &) { prog.setValue(prog.value() + 1); });
+    connect(&cmd, &Cmd::outputAvailable, this, [&prog](const QString &) {
+        prog.setValue(prog.value() + 1);
+    });
     prog.show();
-    cmd.runAsRoot(purgeCmd, true);
+    if (!cmd.runAsRoot("purge-packages", packageList, true)) {
+        showCommandError(this, cmd, tr("Could not remove packages."));
+    }
     ui->tabWidget->setEnabled(true);
 }
 
 void MainWindow::resetLocaleGen()
 {
-    Cmd().runAsRoot("cp " + QDir(Paths::mxLocaleLib).filePath("locale.gen") + " /etc/");
+    Cmd cmd;
+    if (!cmd.runAsRoot("reset-locale-gen")) {
+        showCommandError(this, cmd);
+        return;
+    }
     displayLocalesGen();
     localeGenChanged = true;
 }

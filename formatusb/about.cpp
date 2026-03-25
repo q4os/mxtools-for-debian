@@ -1,67 +1,101 @@
 #include "about.h"
-#include "cmd.h"
-#include "version.h"
 
 #include <QApplication>
+#include <QDialog>
 #include <QFileInfo>
 #include <QMessageBox>
+#include <QProcess>
 #include <QPushButton>
+#include <QTextBrowser>
+#include <QTextDocument>
 #include <QTextEdit>
+#include <QUrl>
 #include <QVBoxLayout>
-#include <unistd.h>
 
-// display doc as nomal user when run as root
-void displayDoc(QString url, QString title, bool runned_as_root)
+namespace
 {
-    if (system("command -v mx-viewer >/dev/null") == 0) {
-        system("mx-viewer " + url.toUtf8() + " \"" + title.toUtf8() + "\"&");
-        return;
-    }
-
-    if (system("command -v antix-viewer >/dev/null") == 0) {
-        system("antix-viewer " + url.toUtf8() + " \"" + title.toUtf8() + "\"&");
-        return;
-    }
-
-    if (getuid() != 0) {
-        QString cmd = "xdg-open " + url;
-        system(cmd.toUtf8());
+void setupDocDialog(QDialog &dialog, QTextBrowser *browser, const QString &title, bool largeWindow)
+{
+    dialog.setWindowTitle(title);
+    if (largeWindow) {
+        dialog.setWindowFlags(Qt::Window);
+        dialog.resize(1000, 800);
     } else {
-        system("su $(logname) -c \"env XDG_RUNTIME_DIR=/run/user/$(id -u $(logname)) xdg-open " + url.toUtf8() + "\"&");
+        dialog.resize(700, 600);
     }
+
+    browser->setOpenExternalLinks(true);
+    browser->document()->setDefaultStyleSheet(
+        QStringLiteral("img { display: block; margin: 0; max-width: 100%; height: auto; }"));
+
+    auto *btnClose = new QPushButton(QObject::tr("&Close"), &dialog);
+    btnClose->setIcon(QIcon::fromTheme(QStringLiteral("window-close")));
+    QObject::connect(btnClose, &QPushButton::clicked, &dialog, &QDialog::close);
+
+    auto *layout = new QVBoxLayout(&dialog);
+    layout->addWidget(browser);
+    layout->addWidget(btnClose);
 }
 
-void displayAboutMsgBox(QString title, QString message, QString licence_url, QString license_title, bool runned_as_root)
+void showHtmlDoc(const QString &url, const QString &title, bool largeWindow)
+{
+    QDialog dialog;
+    auto *browser = new QTextBrowser(&dialog);
+    setupDocDialog(dialog, browser, title, largeWindow);
+
+    const QUrl sourceUrl = QUrl::fromUserInput(url);
+    const QString localPath = sourceUrl.isLocalFile() ? sourceUrl.toLocalFile() : url;
+    if (QFileInfo::exists(localPath)) {
+        browser->setSource(sourceUrl.isLocalFile() ? sourceUrl : QUrl::fromLocalFile(localPath));
+    } else {
+        browser->setText(QObject::tr("Could not load %1").arg(url));
+    }
+    dialog.exec();
+}
+} // namespace
+
+void displayDoc(const QString &url, const QString &title, bool largeWindow)
+{
+    showHtmlDoc(url, title, largeWindow);
+}
+
+void displayAboutMsgBox(const QString &title, const QString &message, const QString &licence_url,
+                        const QString &license_title, bool largeWindow)
 {
     QMessageBox msgBox(QMessageBox::NoIcon, title, message);
-    QPushButton *btnLicense = msgBox.addButton(QObject::tr("License"), QMessageBox::HelpRole);
-    QPushButton *btnChangelog = msgBox.addButton(QObject::tr("Changelog"), QMessageBox::HelpRole);
-    QPushButton *btnCancel = msgBox.addButton(QObject::tr("Cancel"), QMessageBox::NoRole);
+    auto *btnLicense = msgBox.addButton(QObject::tr("License"), QMessageBox::HelpRole);
+    auto *btnChangelog = msgBox.addButton(QObject::tr("Changelog"), QMessageBox::HelpRole);
+    auto *btnCancel = msgBox.addButton(QObject::tr("Cancel"), QMessageBox::NoRole);
     btnCancel->setIcon(QIcon::fromTheme("window-close"));
 
     msgBox.exec();
 
     if (msgBox.clickedButton() == btnLicense) {
-        displayDoc(licence_url, license_title, runned_as_root);
+        displayDoc(licence_url, license_title, largeWindow);
     } else if (msgBox.clickedButton() == btnChangelog) {
-        QDialog *changelog = new QDialog();
-        changelog->setWindowTitle(QObject::tr("Changelog"));
-        changelog->resize(600, 500);
+        QDialog changelog;
+        changelog.setWindowTitle(QObject::tr("Changelog"));
+        changelog.resize(600, 500);
 
-        QTextEdit *text = new QTextEdit;
+        auto *text = new QTextEdit(&changelog);
         text->setReadOnly(true);
-        Cmd cmd;
-        text->setText(cmd.getCmdOut("zless /usr/share/doc/" + QFileInfo(QCoreApplication::applicationFilePath()).fileName()  + "/changelog.gz"));
+        QProcess proc;
+        const QString appName = QFileInfo(QCoreApplication::applicationFilePath()).fileName();
+        const QString changelogPath = QStringLiteral("/usr/share/doc/") + appName + QStringLiteral("/changelog.gz");
+        proc.start(QStringLiteral("zcat"), {changelogPath}, QIODevice::ReadOnly);
+        if (proc.waitForStarted(3000) && proc.waitForFinished(3000)) {
+            text->setText(proc.readAllStandardOutput());
+        } else {
+            text->setText(QObject::tr("Could not load changelog."));
+        }
 
-        QPushButton *btnClose = new QPushButton(QObject::tr("&Close"));
-        btnClose->setIcon(QIcon::fromTheme("window-close"));
-        QObject::connect(btnClose, &QPushButton::clicked, changelog, &QDialog::close);
+        auto *btnClose = new QPushButton(QObject::tr("&Close"), &changelog);
+        btnClose->setIcon(QIcon::fromTheme(QStringLiteral("window-close")));
+        QObject::connect(btnClose, &QPushButton::clicked, &changelog, &QDialog::close);
 
-        QVBoxLayout *layout = new QVBoxLayout;
+        auto *layout = new QVBoxLayout(&changelog);
         layout->addWidget(text);
         layout->addWidget(btnClose);
-        changelog->setLayout(layout);
-        changelog->exec();
-        delete changelog;
+        changelog.exec();
     }
 }

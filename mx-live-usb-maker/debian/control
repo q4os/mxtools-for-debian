@@ -10,7 +10,6 @@ Homepage: https://github.com/MX-Linux/mx-live-usb-maker
 Package: mx-live-usb-maker
 Architecture: any
 Depends: live-usb-maker,
-         xdg-utils | mx-viewer,
          xorriso,
          ${misc:Depends},
          ${shlibs:Depends}

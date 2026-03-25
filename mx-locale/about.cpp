@@ -22,44 +22,149 @@
 #include "about.h"
 
 #include <QApplication>
+#include <QDebug>
 #include <QDir>
+#include <QFile>
 #include <QFileInfo>
+#include <QLabel>
 #include <QMessageBox>
 #include <QProcess>
 #include <QPushButton>
-#include <QStandardPaths>
+#include <QRegularExpression>
+#include <QScrollArea>
+#include <QTextBrowser>
 #include <QTextEdit>
+#include <QUrl>
 #include <QVBoxLayout>
 
 #include "common.h"
-#include <unistd.h>
 
-// Display doc as nomal user when run as root
-void displayDoc(const QString &url, const QString &title)
+namespace
 {
-    bool startedAsRoot = false;
-    if (qEnvironmentVariable("HOME") == "root") {
-        startedAsRoot = true;
-        qputenv("HOME", startingHome.toUtf8()); // Use original home for theming purposes
-    }
-    // Prefer mx-viewer otherwise use xdg-open (use runuser to run that as logname user)
-    const QString executablePath = QStandardPaths::findExecutable("mx-viewer");
-    if (!executablePath.isEmpty()) {
-        QProcess::startDetached("mx-viewer", {url, title});
+void showHtmlDoc(const QString &url, const QString &title, bool largeWindow)
+{
+    QDialog dialog;
+    dialog.setWindowTitle(title);
+    if (largeWindow) {
+        dialog.setWindowFlags(Qt::Window);
+        dialog.resize(1000, 800);
     } else {
-        if (getuid() != 0) {
-            QProcess::startDetached("xdg-open", {url});
-        } else {
-            QProcess proc;
-            proc.start("logname", {}, QIODevice::ReadOnly);
-            proc.waitForFinished();
-            const QString user = QString::fromUtf8(proc.readAllStandardOutput()).trimmed();
-            QProcess::startDetached("runuser", {"-u", user, "--", "xdg-open", url});
+        dialog.resize(700, 600);
+    }
+
+    auto *browser = new QTextBrowser(&dialog);
+    browser->setOpenExternalLinks(true);
+
+    const QUrl sourceUrl = QUrl::fromUserInput(url);
+    const QString localPath = sourceUrl.isLocalFile() ? sourceUrl.toLocalFile() : url;
+    if (sourceUrl.isLocalFile() ? QFileInfo::exists(localPath) : QFileInfo::exists(url)) {
+        browser->setSource(sourceUrl.isLocalFile() ? sourceUrl : QUrl::fromLocalFile(url));
+    } else {
+        browser->setText(QObject::tr("Could not load %1").arg(url));
+        qDebug() << "Could not load HTML document" << url;
+    }
+
+    auto *btnClose = new QPushButton(QObject::tr("&Close"), &dialog);
+    btnClose->setIcon(QIcon::fromTheme("window-close"));
+    QObject::connect(btnClose, &QPushButton::clicked, &dialog, &QDialog::close);
+
+    auto *layout = new QVBoxLayout(&dialog);
+    layout->addWidget(browser);
+    layout->addWidget(btnClose);
+    dialog.exec();
+}
+
+void addHelpHtmlBlock(QVBoxLayout *layout, const QString &html)
+{
+    auto *label = new QLabel;
+    QFont font = label->font();
+    font.setPointSize(font.pointSize() + 3);
+    label->setFont(font);
+    label->setTextFormat(Qt::RichText);
+    label->setText(html);
+    label->setWordWrap(true);
+    label->setOpenExternalLinks(true);
+    label->setTextInteractionFlags(Qt::TextBrowserInteraction);
+    label->setAlignment(Qt::AlignLeft | Qt::AlignTop);
+    layout->addWidget(label);
+}
+
+void addHelpImageBlock(QVBoxLayout *layout, const QString &imagePath)
+{
+    QPixmap pixmap(imagePath);
+    if (pixmap.isNull()) {
+        auto *label = new QLabel(QObject::tr("Could not load %1").arg(imagePath));
+        layout->addWidget(label);
+        qDebug() << "Could not load help image" << imagePath;
+        return;
+    }
+
+    auto *label = new QLabel;
+    label->setAlignment(Qt::AlignLeft | Qt::AlignTop);
+    label->setPixmap(pixmap);
+    layout->addWidget(label);
+}
+} // namespace
+
+void displayDoc(const QString &url, const QString &title, bool largeWindow)
+{
+    showHtmlDoc(url, title, largeWindow);
+}
+
+void displayHelpDoc(const QString &path, const QString &title)
+{
+    QFile file(path);
+    if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+        qDebug() << "Could not open help document" << path;
+        showHtmlDoc(path, title, true);
+        return;
+    }
+
+    const QString html = QString::fromUtf8(file.readAll());
+    const QString baseDir = QFileInfo(path).absolutePath();
+
+    QDialog dialog;
+    dialog.setWindowTitle(title);
+    dialog.setWindowFlags(Qt::Window);
+    dialog.resize(1000, 800);
+
+    auto *scrollArea = new QScrollArea(&dialog);
+    scrollArea->setWidgetResizable(true);
+
+    auto *content = new QWidget(scrollArea);
+    auto *contentLayout = new QVBoxLayout(content);
+    contentLayout->setContentsMargins(16, 16, 16, 16);
+    contentLayout->setSpacing(10);
+
+    const QRegularExpression blockRegex(R"(<(h1|p)\b[^>]*>.*?<\/\1>|<img\b[^>]*>)",
+                                        QRegularExpression::CaseInsensitiveOption
+                                            | QRegularExpression::DotMatchesEverythingOption);
+    auto matchIterator = blockRegex.globalMatch(html);
+    while (matchIterator.hasNext()) {
+        const QString block = matchIterator.next().captured(0).trimmed();
+        if (block.startsWith("<img", Qt::CaseInsensitive)) {
+            const QRegularExpression srcRegex(R"re(src\s*=\s*"([^"]+)")re",
+                                              QRegularExpression::CaseInsensitiveOption);
+            const auto srcMatch = srcRegex.match(block);
+            if (srcMatch.hasMatch()) {
+                addHelpImageBlock(contentLayout, QDir(baseDir).filePath(srcMatch.captured(1)));
+            }
+            continue;
         }
+        addHelpHtmlBlock(contentLayout, block);
     }
-    if (startedAsRoot) {
-        qputenv("HOME", "/root");
-    }
+    contentLayout->addStretch();
+
+    scrollArea->setWidget(content);
+
+    auto *btnClose = new QPushButton(QObject::tr("&Close"), &dialog);
+    btnClose->setIcon(QIcon::fromTheme("window-close"));
+    QObject::connect(btnClose, &QPushButton::clicked, &dialog, &QDialog::close);
+
+    auto *layout = new QVBoxLayout(&dialog);
+    layout->addWidget(scrollArea);
+    layout->addWidget(btnClose);
+    dialog.exec();
 }
 
 void displayAboutMsgBox(const QString &title, const QString &message, const QString &licenceUrl,
@@ -78,27 +183,29 @@ void displayAboutMsgBox(const QString &title, const QString &message, const QStr
     if (msgBox.clickedButton() == btnLicense) {
         displayDoc(licenceUrl, licenseTitle);
     } else if (msgBox.clickedButton() == btnChangelog) {
-        auto *changelog = new QDialog;
-        changelog->setWindowTitle(QObject::tr("Changelog"));
-        changelog->resize(width, height);
+        QDialog changelog;
+        changelog.setWindowTitle(QObject::tr("Changelog"));
+        changelog.resize(width, height);
 
-        auto *text = new QTextEdit(changelog);
+        auto *text = new QTextEdit(&changelog);
         text->setReadOnly(true);
         QProcess proc;
         const QString appName = QFileInfo(QCoreApplication::applicationFilePath()).fileName();
         const QString changelogPath = QDir(Paths::usrShareDoc).filePath(appName + "/changelog.gz");
-        proc.start("zless", {changelogPath}, QIODevice::ReadOnly);
-        proc.waitForFinished();
-        text->setText(proc.readAllStandardOutput());
+        proc.start("zcat", {changelogPath}, QIODevice::ReadOnly);
+        if (proc.waitForStarted(3000) && proc.waitForFinished(3000)) {
+            text->setText(proc.readAllStandardOutput());
+        } else {
+            text->setText(QObject::tr("Could not load changelog."));
+        }
 
-        auto *btnClose = new QPushButton(QObject::tr("&Close"), changelog);
+        auto *btnClose = new QPushButton(QObject::tr("&Close"), &changelog);
         btnClose->setIcon(QIcon::fromTheme("window-close"));
-        QObject::connect(btnClose, &QPushButton::clicked, changelog, &QDialog::close);
+        QObject::connect(btnClose, &QPushButton::clicked, &changelog, &QDialog::close);
 
-        auto *layout = new QVBoxLayout(changelog);
+        auto *layout = new QVBoxLayout(&changelog);
         layout->addWidget(text);
         layout->addWidget(btnClose);
-        changelog->setLayout(layout);
-        changelog->exec();
+        changelog.exec();
     }
 }

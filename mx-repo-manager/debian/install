@@ -4,5 +4,5 @@ icons/mx-repo-manager.svg	usr/share/icons/hicolor/scalable/apps
 mx-repo-manager.desktop		usr/share/applications
 obj-*/*.qm 			usr/share/mx-repo-manager/locale
 obj-*/mx-repo-manager 		usr/bin
-scripts/helper			usr/lib/mx-repo-manager
+obj-*/helper			usr/lib/mx-repo-manager
 scripts/*.policy 		usr/share/polkit-1/actions

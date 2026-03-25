@@ -5,58 +5,100 @@
 #include <QEventLoop>
 #include <QFile>
 #include <QFileInfo>
+#include <QStringList>
 
 #include <unistd.h>
 
 Cmd::Cmd(QObject *parent)
     : QProcess(parent),
-      elevate {elevationTool()},
-      helper {"/usr/lib/" + QApplication::applicationName() + "/helper"}
+      elevationCommand {elevationTool()},
+      helperPath {"/usr/lib/" + QApplication::applicationName() + "/helper"}
 {
 }
 
 QString Cmd::elevationTool()
 {
-    if (QFile::exists("/usr/bin/pkexec")) return QStringLiteral("/usr/bin/pkexec");
-    if (QFile::exists("/usr/bin/gksu")) return QStringLiteral("/usr/bin/gksu");
-    if (QFile::exists("/usr/bin/sudo")) return QStringLiteral("/usr/bin/sudo");
-    return QStringLiteral("/usr/bin/sudo"); // fallback
+    if (QFile::exists("/usr/bin/pkexec")) {
+        return QStringLiteral("/usr/bin/pkexec");
+    }
+    if (QFile::exists("/usr/bin/gksu")) {
+        return QStringLiteral("/usr/bin/gksu");
+    }
+    if (QFile::exists("/usr/bin/sudo")) {
+        return QStringLiteral("/usr/bin/sudo");
+    }
+    return {};
 }
 
-QString Cmd::getOut(const QString &cmd, QuietMode quiet, Elevation elevation)
+QString Cmd::getOut(const QString &cmd, QuietMode quiet)
 {
-    run(cmd, quiet, elevation);
-    return readAll();
+    run(cmd, quiet);
+    return QString::fromUtf8(readAllStandardOutput());
 }
 
-QString Cmd::getOutAsRoot(const QString &cmd, QuietMode quiet)
+QString Cmd::getOutAsRoot(const QString &programPath, const QStringList &args, QuietMode quiet)
 {
-    return getOut(cmd, quiet, Elevation::Yes);
+    QString output;
+    procAsRoot(programPath, args, &output, nullptr, quiet);
+    return output;
 }
 
-bool Cmd::run(const QString &cmd, QuietMode quiet, Elevation elevation)
+bool Cmd::proc(const QString &programPath, const QStringList &args, QString *output, const QByteArray *input,
+               QuietMode quiet)
 {
-    cmdStr = cmd;
     if (state() != QProcess::NotRunning) {
-        qDebug() << "Process already running:" << program() << arguments();
+        qDebug() << "Process already running:" << this->program() << arguments();
         return false;
     }
     if (quiet == QuietMode::No) {
-        qDebug().noquote() << cmd;
+        qDebug() << programPath << args;
     }
+
     QEventLoop loop;
     connect(this, QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished), &loop, &QEventLoop::quit);
-    if (elevation == Elevation::Yes && getuid() != 0) {
-        start(elevate, {helper, cmd});
-    } else {
-        start("/bin/bash", {"-c", cmd});
+
+    start(programPath, args);
+    if (input && !input->isEmpty()) {
+        write(*input);
     }
+    closeWriteChannel();
     loop.exec();
+
+    if (output) {
+        *output = QString::fromUtf8(readAllStandardOutput()) + QString::fromUtf8(readAllStandardError());
+    }
+
     emit done();
     return (exitStatus() == QProcess::NormalExit && exitCode() == 0);
 }
 
-bool Cmd::runAsRoot(const QString &cmd, QuietMode quiet)
+bool Cmd::helperProc(const QString &programPath, const QStringList &args, QString *output, const QByteArray *input,
+                     QuietMode quiet)
 {
-    return run(cmd, quiet, Elevation::Yes);
+    if (getuid() != 0 && elevationCommand.isEmpty()) {
+        qWarning() << "No elevation helper available";
+        return false;
+    }
+
+    QStringList helperArgs {"exec", QFileInfo(programPath).fileName()};
+    helperArgs += args;
+
+    if (getuid() == 0) {
+        return proc(helperPath, helperArgs, output, input, quiet);
+    }
+
+    QStringList elevatedArgs {helperPath};
+    elevatedArgs += helperArgs;
+    return proc(elevationCommand, elevatedArgs, output, input, quiet);
+}
+
+bool Cmd::procAsRoot(const QString &programPath, const QStringList &args, QString *output, const QByteArray *input,
+                     QuietMode quiet)
+{
+    return helperProc(programPath, args, output, input, quiet);
+}
+
+bool Cmd::run(const QString &cmd, QuietMode quiet)
+{
+    return proc(QStringLiteral("/bin/bash"), {"-c", cmd}, nullptr, nullptr, quiet);
 }

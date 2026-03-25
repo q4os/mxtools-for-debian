@@ -1,3 +1,9 @@
+mx-select-sound (26.03) mx; urgency=medium
+
+  * Use internal Qt help and license viewer
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 18 Mar 2026 22:07:23 -0400
+
 mx-select-sound (25.4) mx; urgency=medium
 
   * Update to Qt6
@@ -7,7 +13,7 @@ mx-select-sound (25.4) mx; urgency=medium
 
 mx-select-sound (24.3) mx; urgency=medium
 
-  * Update translations 
+  * Update translations
 
  -- Adrian <adrian@mxlinux.org>  Sat, 23 Mar 2024 13:00:17 -0400
 
@@ -119,7 +125,7 @@ mx-select-sound (17.12) mx; urgency=medium
 
 mx-select-sound (17.11+2) mx; urgency=medium
 
-  * fix LANG detection 
+  * fix LANG detection
 
  -- Adrian <adrian@mxlinux.org>  Sat, 11 Nov 2017 18:47:07 -0500
 
@@ -134,7 +140,7 @@ mx-select-sound (17.11mx17) mx; urgency=medium
   * pbuilder build
 
  -- dolphin <dolphinoracle@gmail.com>  Tue, 07 Nov 2017 5:12:12 -0400
- 
+
 mx-select-sound (17.10.01mx17) mx; urgency=medium
 
   * new icon
