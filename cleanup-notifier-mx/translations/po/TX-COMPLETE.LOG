@@ -1,6 +1,6 @@
 # Transifex resource cleanup-notifier-mx 
 # with minimum completion percent 30%
-# generated at Thu, 06 Nov 2025 18:32:14 -0500
+# generated at Tue, 19 May 2026 09:41:29 -0500
    Nr.		Cnt.	 Compl.		Code		Language
    ---		----	 ------		----		--------
      1		   6	   100%    	ca      	ca	Catalan; Valencian
@@ -17,37 +17,37 @@
     12		   6	   100%    	hu      	hu	Hungarian
     13		   6	   100%    	it      	it	Italian
     14		   6	   100%    	ja      	ja	Japanese
-    15		   6	   100%    	nb      	nb	Bokmål, Norwegian; Norwegian Bokmål
-    16		   6	   100%    	nl      	nl	Dutch; Flemish
-    17		   6	   100%    	pl      	pl	Polish
-    18		   6	   100%    	pt      	pt	Portuguese
-    19		   6	   100%    	pt_BR   	pt	Portuguese @ Brazil
-    20		   6	   100%    	ru      	ru	Russian
-    21		   6	   100%    	ru_RU   	ru	Russian @ Russian Federation
-    22		   6	   100%    	sl      	sl	Slovenian
-    23		   6	   100%    	sq      	sq	Albanian
-    24		   6	   100%    	sv      	sv	Swedish
-    25		   6	   100%    	tr      	tr	Turkish
-    26		   4	    66%    	da      	da	Danish
-    27		   4	    66%    	hi      	hi	Hindi
-    28		   4	    66%    	lt      	lt	Lithuanian
-    29		   4	    66%    	sk      	sk	Slovak
-    30		   4	    66%    	uk      	uk	Ukrainian
-    31		   3	    50%    	ar      	ar	Arabic
-    32		   3	    50%    	bg      	bg	Bulgarian
-    33		   3	    50%    	eu      	eu	Basque
-    34		   3	    50%    	fa      	fa	Persian
-    35		   3	    50%    	hr      	hr	Croatian
-    36		   3	    50%    	id      	id	Indonesian
-    37		   3	    50%    	is      	is	Icelandic
-    38		   3	    50%    	kk      	kk	Kazakh
-    39		   3	    50%    	ko      	ko	Korean
-    40		   3	    50%    	ro      	ro	Romanian; Moldavian; Moldovan
-    41		   3	    50%    	sr      	sr	Serbian
-    42		   3	    50%    	zh_CN   	zh	Chinese @ China
-    43		   3	    50%    	zh_TW   	zh	Chinese @ Taiwan, Province of China
-    44		   2	    33%    	am      	am	Amharic
-    45		   2	    33%    	et      	et	Estonian
-    46		   2	    33%    	fil_PH  		Filipino @ Philippines
-    47		   2	    33%    	ka      	ka	Georgian
+    15		   6	   100%    	ka      	ka	Georgian
+    16		   6	   100%    	ko      	ko	Korean
+    17		   6	   100%    	nb      	nb	Bokmål, Norwegian; Norwegian Bokmål
+    18		   6	   100%    	nl      	nl	Dutch; Flemish
+    19		   6	   100%    	pl      	pl	Polish
+    20		   6	   100%    	pt      	pt	Portuguese
+    21		   6	   100%    	pt_BR   	pt	Portuguese @ Brazil
+    22		   6	   100%    	ru      	ru	Russian
+    23		   6	   100%    	ru_RU   	ru	Russian @ Russian Federation
+    24		   6	   100%    	sl      	sl	Slovenian
+    25		   6	   100%    	sq      	sq	Albanian
+    26		   6	   100%    	sv      	sv	Swedish
+    27		   6	   100%    	tr      	tr	Turkish
+    28		   4	    66%    	da      	da	Danish
+    29		   4	    66%    	hi      	hi	Hindi
+    30		   4	    66%    	lt      	lt	Lithuanian
+    31		   4	    66%    	sk      	sk	Slovak
+    32		   4	    66%    	uk      	uk	Ukrainian
+    33		   3	    50%    	ar      	ar	Arabic
+    34		   3	    50%    	bg      	bg	Bulgarian
+    35		   3	    50%    	eu      	eu	Basque
+    36		   3	    50%    	fa      	fa	Persian
+    37		   3	    50%    	hr      	hr	Croatian
+    38		   3	    50%    	id      	id	Indonesian
+    39		   3	    50%    	is      	is	Icelandic
+    40		   3	    50%    	kk      	kk	Kazakh
+    41		   3	    50%    	ro      	ro	Romanian; Moldavian; Moldovan
+    42		   3	    50%    	sr      	sr	Serbian
+    43		   3	    50%    	zh_CN   	zh	Chinese @ China
+    44		   3	    50%    	zh_TW   	zh	Chinese @ Taiwan, Province of China
+    45		   2	    33%    	am      	am	Amharic
+    46		   2	    33%    	et      	et	Estonian
+    47		   2	    33%    	fil_PH  		Filipino @ Philippines
     48		   2	    33%    	mr      	mr	Marathi

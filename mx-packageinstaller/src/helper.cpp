@@ -88,7 +88,8 @@ void printError(const QString &message)
 }
 
 [[nodiscard]] ProcessResult runProcess(const QString &program, const QStringList &args,
-                                       const QHash<QString, QString> &environment = {})
+                                       const QHash<QString, QString> &environment = {}, bool relayStdout = true,
+                                       bool relayStderr = true)
 {
     ProcessResult result;
 
@@ -128,13 +129,17 @@ void printError(const QString &message)
         const QByteArray stdoutChunk = process.readAllStandardOutput();
         if (!stdoutChunk.isEmpty()) {
             result.standardOutput += stdoutChunk;
-            writeAndFlush(stdout, stdoutChunk);
+            if (relayStdout) {
+                writeAndFlush(stdout, stdoutChunk);
+            }
         }
 
         const QByteArray stderrChunk = process.readAllStandardError();
         if (!stderrChunk.isEmpty()) {
             result.standardError += stderrChunk;
-            writeAndFlush(stderr, stderrChunk);
+            if (relayStderr) {
+                writeAndFlush(stderr, stderrChunk);
+            }
         }
     }
 
@@ -225,8 +230,8 @@ void printError(const QString &message)
         return 127;
     }
 
-    const ProcessResult fuserResult = runProcess(fuserBinary, {path});
-    const QString fuserOutput = QString::fromUtf8(fuserResult.standardOutput + fuserResult.standardError);
+    const ProcessResult fuserResult = runProcess(fuserBinary, {path}, {}, false, false);
+    const QString fuserOutput = QString::fromUtf8(fuserResult.standardOutput);
     const QRegularExpression pidRegex(QStringLiteral(R"((\d+))"));
     const QRegularExpressionMatch match = pidRegex.match(fuserOutput);
     if (!match.hasMatch()) {
@@ -234,7 +239,7 @@ void printError(const QString &message)
     }
 
     const QString pid = match.captured(1);
-    const ProcessResult psResult = runProcess(psBinary, {"--no-headers", "-o", "comm=", "-p", pid});
+    const ProcessResult psResult = runProcess(psBinary, {"--no-headers", "-o", "comm=", "-p", pid}, {}, false, false);
     if (!psResult.started || psResult.exitStatus != QProcess::NormalExit) {
         return 1;
     }

@@ -18,7 +18,7 @@
 [ -f /etc/default/rcS ] && . /etc/default/rcS
 . /lib/lsb/init-functions
 
-PATH='/sbin:/bin'
+PATH='/usr/sbin:/usr/bin:/sbin:/bin'
 
 case "$1" in
   start)
@@ -48,7 +48,7 @@ load_module() {
 }
 
 modules_files() {
-  local modules_load_dirs='/etc/modules-load.d /run/modules-load.d /usr/local/lib/modules-load.d /usr/lib/modules-load.d /lib/modules-load.d'
+  local modules_load_dirs='/etc/modules-load.d /run/modules-load.d /usr/local/lib/modules-load.d /usr/lib/modules-load.d'
   local processed=' '
   local add_etc_modules=true
 

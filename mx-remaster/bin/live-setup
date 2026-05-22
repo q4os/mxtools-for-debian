@@ -1,0 +1,76 @@
+#!/bin/sh
+#
+# live-setup
+#
+# does some initial setup based on chose live environment
+
+#exit if not running live
+if [ ! -e /live/linux ]; then
+    echo "Not a live system, exiting"
+    exit 0
+fi
+# Make sure disabled live services are restored
+restore=/live/etc/init.d/live-restore-services
+
+[ -x $restore ] && $restore start
+
+# Restore files under /sys *after* udev has run, otherwise
+# the module we want to manipulate may not be loaded yet.
+usb_save=/live/etc/init.d/live-usb-save
+[ -x $usb_save ] && $usb_save sys
+
+#make /etc/machine-id from /var/lib/dbus/machine-id if not present
+    if [ ! -e /etc/machine-id ]; then
+    	if [ -e /var/lib/dbus/machine-id ]; then
+    		cp /var/lib/dbus/machine-id /etc/machine-id
+    	fi
+    fi
+
+#set /etc/papersize
+PAPERSIZE="a4"
+[ -r /etc/default/locale ] && . /etc/default/locale
+[ -z "$LC_PAPER" ] &&  LC_PAPER=$LANG
+
+case $LC_PAPER in
+    en_CA*)  PAPERSIZE="letter"       ;; # English locale for Canada
+    en_US*)  PAPERSIZE="letter"       ;; # English locale for the USA
+    es_BO*)  PAPERSIZE="letter"       ;; # Spanish locale for Bolivia
+    es_CO*)  PAPERSIZE="letter"       ;; # Spanish locale for Colombia
+    es_MX*)  PAPERSIZE="letter"       ;; # Spanish locale for Mexico
+    es_NI*)  PAPERSIZE="letter"       ;; # Spanish locale for Nicaragua
+    es_PA*)  PAPERSIZE="letter"       ;; # Spanish locale for Panama
+    es_US*)  PAPERSIZE="letter"       ;; # Spanish locale for the USA
+    es_VE*)  PAPERSIZE="letter"       ;; # Spanish locale for Venezuela
+    fr_CA*)  PAPERSIZE="letter"       ;; # French locale for Canada
+         *)  PAPERSIZE="a4"           ;;
+esac
+echo $PAPERSIZE > /etc/papersize
+
+#make sure an apt cache archive partial folder exists for apt-notifier
+ [ -d /var/cache/apt/archives/partial ] || mkdir -p /var/cache/apt/archives/partial 2>/dev/null &
+
+#exit if systemd
+if [ -d "/run/systemd/system" ]; then
+    exit 0
+fi
+
+# Detect and set up correct broadcom
+# [ -e /usr/bin/BroadcomStartup ] && /usr/bin/BroadcomStartup
+
+# Set up 12 hour clock format for some countries eg US
+# [ -e /usr/bin/clock12or24 ] && /usr/bin/clock12or24
+
+# Automatically switch to vt2 when not in runlevel 5
+case $(runlevel) in
+    *5) exit 0  ;;
+esac
+
+# Set the final tsplash dot here if not starting X
+tsplash="/live/bin/tell-tsplash"
+if [ -x "$tsplash" -a -d /live/config/tsplash ]; then
+    $tsplash prepare-consoles
+fi
+
+(sleep 1 && chvt 2)&
+
+exit 0

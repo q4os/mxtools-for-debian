@@ -1,3 +1,35 @@
+mx-bootrepair (26.03.2) mx; urgency=medium
+
+  * Fix changelog dialog lookup for installed package docs
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 26 Mar 2026 14:20:00 -0400
+
+mx-bootrepair (26.03.1) mx; urgency=medium
+
+  * Work around grub-install locale copy failures
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 26 Mar 2026 14:00:00 -0400
+
+mx-bootrepair (26.03) mx; urgency=medium
+
+  * Use a dedicated binary helper for privileged operations
+  * Display help and license in an internal Qt window
+  * Avoid elevation prompt on exit when the log is nearly empty
+  * Unlock LUKS partitions before starting repair operations
+  * Avoid auto-selecting exfat or "boot" partitions as root
+  * Return to the initial screen when elevation is canceled
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 11 Mar 2026 17:08:42 -0400
+
+mx-bootrepair (26.02.7) mx; urgency=medium
+
+  * Improve UEFI target defaults and ESP detection
+  * Avoid /boot prompt when /boot is on root
+  * Handle missing /sys, /proc, /run in chroot mount helpers
+  * Improve chroot tool detection and EFI install fallback
+
+ -- Adrian <adrian@mxlinux.org>  Sat, 07 Feb 2026 22:36:03 -0500
+
 mx-bootrepair (26.02.1) mx; urgency=medium
 
   * Fix ESP device handling and /boot/efi mount restore

@@ -70,9 +70,9 @@ Vivaldi
 REXP="^[[:space:]]*deb[[:space:]]+https?://repo.vivaldi.com/stable/deb/?[[:space:]]+stable[[:space:]]+main"
 if ! grep -sq -E "$REXP" /etc/apt/sources.list{,.d/*.list}; then
    echo "Add Vivaldi apt-source-list..."
-   echo "deb [arch=amd64]  http://repo.vivaldi.com/stable/deb/ stable main" > /etc/apt/sources.list.d/vivaldi.list  
-   echo /etc/apt/sources.list.d/vivaldi.list :
-   cat  /etc/apt/sources.list.d/vivaldi.list
+   echo "deb [arch=amd64]  http://repo.vivaldi.com/stable/deb/ stable main" > /etc/apt/sources.list.d/mxtemp.list  
+   echo /etc/apt/sources.list.d/mxtemp.list :
+   cat  /etc/apt/sources.list.d/mxtemp.list
    echo " "
 fi 
 
@@ -87,7 +87,8 @@ vivaldi-stable
 </install_package_names>
 
 <postinstall>
-
+rm /etc/apt/sources.list.d/mxtemp.list
+rm /etc/apt/trusted.gpg.d/vivaldi-archive-keyring.gpg
 echo ... $(gettext -d apt -s ' Done')'!'
 
 </postinstall>
@@ -103,9 +104,11 @@ echo "Purge vivaldi-stable ..."
 apt-get  -o=Dpkg::Use-Pty=0  --yes remove --purge  vivaldi-stable
 echo "Remove Vivaldi source.list ... "
 rm /etc/apt/sources.list.d/vivaldi.list 2>/dev/null
+echo "Remove Vivaldi source.sources ... "
+rm /etc/apt/sources.list.d/vivaldi.sources 2>/dev/null
 echo "Remove Vivaldi archive keyring ..."
-rm /etc/apt/trusted.gpg.d/vivladi-archive-keyring.gpg 2>/dev/null
-rm /etc/apt/trusted.gpg.d/vivaldi-archive-keyring.gpg 2>/dev/null
+rm -f /etc/apt/trusted.gpg.d/vivladi-archive-keyring.gpg 2>/dev/null
+rm -f /etc/apt/trusted.gpg.d/vivaldi-archive-keyring.gpg 2>/dev/null
 echo "Done!"
 
 </postuninstall>

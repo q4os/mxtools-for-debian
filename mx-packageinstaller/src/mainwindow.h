@@ -32,7 +32,6 @@
 #include <QMessageBox>
 #include <QModelIndex>
 #include <QNetworkAccessManager>
-#include <QNetworkReply>
 #include <QProcess>
 #include <QProgressDialog>
 #include <QSettings>
@@ -117,7 +116,7 @@ private slots:
     void enableOutput();
     void filterChanged(const QString &arg1);
     void findPackage();
-    void findPopular() const;
+    void findPopular();
     void outputAvailable(const QString &output);
     void showOutput();
     void updateBar();
@@ -235,7 +234,6 @@ private:
     PopularFilterProxy *popularProxy {nullptr};
 
     QNetworkAccessManager manager;
-    QNetworkReply *reply;
 
     [[nodiscard]] QHash<QString, PackageInfo> listInstalled();
     [[nodiscard]] QString categoryTranslation(const QString &item);
@@ -258,6 +256,14 @@ private:
     [[nodiscard]] static uchar getDebianVerNum();
     [[nodiscard]] static uchar showVersionDialog(const QString &message);
     [[nodiscard]] QVector<PackageData> createPackageDataList(QHash<QString, PackageInfo> *list) const;
+
+    // Per-APT-tab context to replace repetitive tree-identity switches
+    struct AptTabContext {
+        PackageModel *model = nullptr;
+        PackageFilterProxy *proxy = nullptr;
+        QHash<QString, PackageInfo> *list = nullptr;
+    };
+    [[nodiscard]] AptTabContext currentAptTab();
     [[nodiscard]] QHash<QString, PackageInfo> *getCurrentList();
     [[nodiscard]] PackageModel *getCurrentModel();
     [[nodiscard]] PackageFilterProxy *getCurrentProxy();
@@ -282,7 +288,7 @@ private:
     bool updateApt();
     [[nodiscard]] static QString convert(quint64 bytes);
     [[nodiscard]] static quint64 convert(const QString &size);
-    void blockInterfaceFP(bool block);
+    void blockInterfaceFP();
     void buildChangeList(const QString &packageName, Qt::CheckState state);
     void buildFlatpakChangeList(const QString &fullName, Qt::CheckState state, int status);
     void cancelDownload();
@@ -295,6 +301,9 @@ private:
     void displayPopularApps();
     void displayWarning(const QString &repo);
     void enableTabs(bool enable);
+    void forceUpdateAptTab(QLineEdit *searchBox, QComboBox *filterCombo);
+    void applyHideLibs(bool checked, QTreeView *tree, PackageFilterProxy *proxy, QComboBox *filterCombo,
+                       const QList<QCheckBox *> &peerCheckboxes);
     void finalizeFlatpakDisplay();
     void formatFlatpakTree();
     void removeDuplicatesFP();

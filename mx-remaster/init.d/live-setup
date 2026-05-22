@@ -1,0 +1,58 @@
+#! /bin/sh
+### BEGIN INIT INFO
+# Provides:          live-setup
+# Required-Start:    $all
+# Required-Stop:
+# Default-Start:     3 4 5
+# Default-Stop:      0 6
+# Short-Description: Run /usr/bin/live-setup if it exist
+### END INIT INFO
+
+PATH=/usr/sbin:/usr/bin:/sbin:/bin
+
+. /lib/init/vars.sh
+. /lib/lsb/init-functions
+
+#exit if not live
+if [ ! -e /live/linux ]; then
+    exit 0
+fi
+
+#exit if systemd
+if [ -e "/run/systemd/system" ]; then
+    exit 0
+fi
+
+#exit if rc.local still has live setup in it, check for usb_save function
+CHECK=$(grep usb_save /etc/rc.local)
+if [ -n "$CHECK" ]; then
+	exit 0
+fi
+
+
+LIVESETUP="/usr/bin/live-setup"
+
+do_start() {
+	if [ -x "$LIVESETUP" ]; then
+	        [ "$VERBOSE" != no ] && log_begin_msg "Running local boot scripts ($LIVESETUP)"
+		$LIVESETUP
+		ES=$?
+		[ "$VERBOSE" != no ] && log_end_msg $ES
+		return $ES
+	fi
+}
+
+case "$1" in
+    start)
+	do_start
+        ;;
+    status|restart|reload|force-reload)
+        echo "Error: argument '$1' not supported" >&2
+        exit 3
+        ;;
+    stop) exit 0;;
+    *)
+        echo "Usage: $0 start" >&2
+        exit 3
+        ;;
+esac

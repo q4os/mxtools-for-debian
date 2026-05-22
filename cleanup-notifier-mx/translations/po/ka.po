@@ -4,7 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Temuri Doghonadze <temuri.doghonadze@gmail.com>, 2025
+# Temuri Doghonadze <temuri.doghonadze@gmail.com>, 2026
 # 
 #, fuzzy
 msgid ""
@@ -13,7 +13,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://forum.mxlinux.org/viewforum.php?f=96\n"
 "POT-Creation-Date: 2023-04-05 01:28+0200\n"
 "PO-Revision-Date: 2023-04-04 23:53+0000\n"
-"Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>, 2025\n"
+"Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>, 2026\n"
 "Language-Team: Georgian (https://app.transifex.com/anticapitalista/teams/10162/ka/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -32,7 +32,7 @@ msgstr "გაფრთხილება"
 #. the boot partition.
 #, python-format
 msgid "Not enough space on %s partition"
-msgstr ""
+msgstr "დანაყოფზე %s ადგილი საკმარისი არაა"
 
 #. TRANSLATORS:
 #. The user can click the "Dismiss" button so that the warning will not be
@@ -43,16 +43,16 @@ msgstr "მოცილება"
 #. TRANSLATORS:
 #. The user can click the "Clean Up" button to start the cleanup program.
 msgid "Clean Up"
-msgstr ""
+msgstr "მოსუფთავება"
 
 #. TRANSLATORS:
 #. The autostart desktop name will be shown within 'Session and Startup'
 #. (Autostart).
 msgid "Cleanup Notifier"
-msgstr ""
+msgstr "გაფრთხილება მოსუფთავებაზე"
 
 #. TRANSLATORS:
 #. The autostart desktop entry comment will be shown within 'Session and
 #. Startup' (Autostart).
 msgid "Check available space at /boot"
-msgstr ""
+msgstr "ხელმისაწვდომი ადგილის შემოწმება /boot-ში"

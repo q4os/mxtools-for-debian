@@ -21,12 +21,15 @@
       "Bash(git -C /home/adrian/mx-snapshot rev-parse:*)",
       "Bash(git status:*)",
       "Bash(git add:*)",
-      "Bash(git commit:*)"
+      "Bash(git commit:*)",
+      "Bash(wc -l /home/adrian/Sync/programs/qt/mx-snapshot/src/*.cpp /home/adrian/Sync/programs/qt/mx-snapshot/src/*.h)",
+      "Bash(dpkg-parsechangelog -SVersion)",
+      "Bash(ninja clean:*)"
     ],
     "deny": []
   },
+  "enableAllProjectMcpServers": true,
   "enabledMcpjsonServers": [
     "docker"
-  ],
-  "enableAllProjectMcpServers": true
+  ]
 }

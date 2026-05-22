@@ -26,10 +26,7 @@
 #include <QIcon>
 #include <QVector>
 
-namespace Status
-{
-enum { Installed = 1, Upgradable, NotInstalled, Autoremovable };
-}
+#include "../packagestatus.h"
 
 namespace TreeCol
 {

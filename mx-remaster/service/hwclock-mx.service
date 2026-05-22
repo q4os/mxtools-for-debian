@@ -1,6 +1,7 @@
 [Unit]
 Description=save system clock if not running live
 Before=umount.target
+ConditionPathExists=/etc/init.d/hwclock.sh
 
 [Service]
 ExecStart=/etc/init.d/hwclock.sh start

@@ -31,9 +31,13 @@ public:
     static bool isUefi();
     bool isMounted(const QString& volume, const QString& mount) const; // public wrapper
     bool isLuks(const QString& device) const;                          // /dev/...
+    bool canUnlockLuks(const QString& device, const QByteArray& pass);
     bool isEspPartition(const QString& device) const;                  // sda1 or /dev/sda1
+    QString mountSource(const QString& mountpoint) const;              // findmnt SOURCE
     bool isLinuxPartitionType(const QString& device) const;            // sdaX or /dev/sdaX
     bool labelContains(const QString& device, const QString& needle) const; // sdaX or /dev/sdaX
+    QString filesystemType(const QString& device) const;               // sdaX or /dev/sdaX
+    QString partitionLabel(const QString& device) const;               // sdaX or /dev/sdaX
 
     // Operations (return true on success)
     bool installGrub(const BootRepairOptions& opt);
@@ -44,15 +48,16 @@ public:
 
     // Utilities
     QString resolveFstabDevice(const QString& root, const QString& mountpoint, const QByteArray& luksPass = {});
+    [[nodiscard]] bool lastFailureWasElevation() const;
 
 signals:
     void log(const QString& line);
     void finished(bool ok);
 
 private:
-    // dry-run aware execution helpers
-    bool execRunAsRoot(const QString& cmd, QString* output = nullptr, const QByteArray* input = nullptr, bool quiet = true);
     bool execProcAsRoot(const QString& cmd, const QStringList& args, QString* output = nullptr, const QByteArray* input = nullptr, bool quiet = true);
+    bool execProcAsRootInTarget(const QString& rootPath, const QString& cmd, const QStringList& args,
+                                QString* output = nullptr, const QByteArray* input = nullptr, bool quiet = true);
 
     // helpers
     bool isMountedTo(const QString& volume, const QString& mount) const;
@@ -61,6 +66,7 @@ private:
     bool mountChrootEnv(const QString& path);
     void cleanupMounts(const QString& path, const QString& luks);
     bool ensureMountFor(const QString& path, const QString& mountpoint, const QString& device);
+    bool copyGrubLocales(const QString& rootPath = {});
 
     Cmd* shell;
     QTemporaryDir tmpdir;

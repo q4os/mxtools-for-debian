@@ -1,8 +1,0 @@
-#!/usr/bin/make -f
-
-%:
-	dh $@
-
-# https://gitlab.gnome.org/GNOME/gjs/issues/214
-override_dh_auto_configure:
-	dh_auto_configure -- --libdir=/usr/lib

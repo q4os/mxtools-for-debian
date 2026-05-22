@@ -32,10 +32,18 @@ _Semi_Automatic_="$(gt "Semi-Automatic")"
 
 alttest="false"
 
+#check for systemd and older multi-init setup.  Does not provide an active console at shutdown for semi-auto to work with, so don't offer it.
 if [[ -e /live/config/systemd || ( -e "/usr/lib/systemd/systemd" && -e "/usr/lib/sysvinit/init" ) ]] ; then
 	alttest="true"
 fi
 #echo alttest is $alttest
+
+#check for multi-init fix when running sysvinit
+
+if [ ! -e /live/config/systemd ] &&  grep -q "sysvinit" /live/config/init-prog && \
+    grep -q '^\s*mkdir \s*/run/systemd/system' /usr/lib/init-diversity/shutdown.sh 2>/dev/null; then
+    alttest="false"
+fi
 
 BLURB="
     $(gt "Configure root persistence saves to run either:")
@@ -44,7 +52,7 @@ BLURB="
     2) [b]$_Semi_Automatic_[/] ($(gt "ask at shutdown/reboot"))
     3) [b]$_Manual_[/] ($(gt "you snooze, you lose"))"
     
-#check for systemd or multi-init.  neither provide an active console at shutdown for sem-auto to work with, so don't offer it.
+#do not offer semi-automatic if multi-init fix not present or systemd in use
 if [ "$alttest" = "true" ]; then
     BLURB="
     $(gt "Configure root persistence saves to run either:")
@@ -125,7 +133,7 @@ edit_config() {
 
     fmt="[fixed][b]%15s:[/][/] %s   "
     if [ "$alttest" = "true" ]; then
-    combo_box save-mode "1 $_Automatic_!3 $_Manual_!4 $_Quit_" -n \
+        combo_box save-mode "1 $_Automatic_!3 $_Manual_!4 $_Quit_" -n \
         "$TITLE" ""                                                    \
         "$(gt "Please choose auto-save mode.")"                        \
         ""                                                             \
@@ -157,7 +165,7 @@ edit_config() {
     echo "AUTOSAVE_MODE=\"$AUTOSAVE_MODE\"" > $CONF_FILE
 
     info_box -c "$TITLE" ""                                                                    \
-        "$(pfgt "Auto-save mode set to %s in %s." "[b]$AUTOSAVE_MODE[/]"  "[f]$CONF_FILE[/]")" \
+        "$(pfgt "Auto-save mode set to %s in %s." "[b]${AUTOSAVE_MODE#? }[/]"  "[f]$CONF_FILE[/]")" \
         ""
 }
 
@@ -230,7 +238,7 @@ elif [ "$SET_SHUT_DOWN" ]; then
 
     rm -f $last_ps_file
 
-    vmsg "running perist-save $persist_opts"
+    vmsg "running persist-save $persist_opts"
 
     persist-save $persist_opts 2>&1
     ret=$?

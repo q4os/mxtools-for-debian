@@ -358,12 +358,16 @@ make_filefs() {
 
     local text="$ptype\n\n$(gt "Please select size of the new file system")"
 
-    if ! initrd_size_menu "$text" "$file" "$FULL_PATH"; then
+    #if ! initrd_size_menu "$text" "$file" "$FULL_PATH"; then
     #if ! select_size -min "$min_size" -Max "$max_size" "" "$text"; then
+    initrd_size_menu "$text" "$file" "$FULL_PATH"
+    local ret=$?
+    [ "$UI_RESULT" = 'quit' -o -n "${UI_RESULT//[0-9]/}" ] && return 1
+
+    if (( ret != 0 )); then
         warn_box "$TITLE" "" "$(pfgt "Not enough space on device")" ""
         return
     fi
-    [ "$UI_RESULT" = 'quit' ] && return
     local size=$UI_RESULT
 
     #select_ftype
@@ -904,7 +908,7 @@ cli_size_menu() {
         scnt=$((scnt + 1))
 
         case $size in
-                quit) label=$(bq $(qt "quit"))  ;;
+                quit) label=$(bq $(gt "quit"))  ;;
             *[^0-9]*) label=$(bq "$size")       ;;
                    *) label=$(label_meg $size)  ;;
         esac

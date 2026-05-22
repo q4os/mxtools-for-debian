@@ -1,3 +1,9 @@
+cli-shell-utils (0.4.2+10mx25) mx; urgency=medium
+
+  * add virtual block device major number (252)
+
+ -- fehlix <fehlix@mxlinux.org>  Sat, 18 Apr 2026 17:01:41 -0400
+
 cli-shell-utils (0.4.2+9mx25) mx; urgency=medium
 
   * simplify "default" translations to match rest of lib

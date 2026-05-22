@@ -1,6 +1,7 @@
 [Desktop Entry]
 Type=Application
 Exec=x-terminal-emulator -e sudo chroot-rescue-scan --pause
+TryExec=chroot-rescue-scan
 Icon=rescuetime-mx
 Terminal=false
 Name=Chroot Rescue Scan

@@ -70,7 +70,13 @@ QString sanitizeOutputForDisplay(const QString &output)
 
 QString debconfFrontend()
 {
-    return QFile::exists("/usr/share/doc/debconf-kde-helper") ? QStringLiteral("kde") : QStringLiteral("gnome");
+    if (QFile::exists("/usr/share/doc/debconf-kde-helper")) {
+        return QStringLiteral("kde");
+    }
+    if (QFile::exists("/usr/share/doc/debconf-gnome")) {
+        return QStringLiteral("gnome");
+    }
+    return QStringLiteral("noninteractive");
 }
 
 QHash<QString, QString> debconfEnvironment()
@@ -117,6 +123,16 @@ QString shellSingleQuote(QString text)
     return QStringLiteral("'") + text + QStringLiteral("'");
 }
 
+QString shellCommandFromArgs(const QStringList &args)
+{
+    QStringList quoted;
+    quoted.reserve(args.size());
+    for (const QString &arg : args) {
+        quoted.append(shellSingleQuote(arg));
+    }
+    return quoted.join(QLatin1Char(' '));
+}
+
 QString flatpakPtyCommand(const QString &command)
 {
     return QStringLiteral("script -qefc %1 /dev/null").arg(shellSingleQuote(command));
@@ -160,8 +176,7 @@ MainWindow::MainWindow(const QCommandLineParser &argParser, QWidget *parent)
     : QDialog(parent),
       ui(new Ui::MainWindow),
       dictionary("/usr/share/mx-packageinstaller-pkglist/category.dict", QSettings::IniFormat),
-      args {argParser},
-      reply(nullptr)
+      args {argParser}
 {
     qDebug().noquote() << QCoreApplication::applicationName() << "version:" << QCoreApplication::applicationVersion();
     ui->setupUi(this);
@@ -195,12 +210,13 @@ MainWindow::MainWindow(const QCommandLineParser &argParser, QWidget *parent)
     // Run package preload in background
     [[maybe_unused]] auto future = QtConcurrent::run([this] {
         AptCache cache;
-        enabledList = cache.getCandidates();
+        auto loadedList = cache.getCandidates();
 
-        // Set the model on main thread after preload
+        // Set the model on main thread after preload — all member access happens on the GUI thread
         QMetaObject::invokeMethod(
             this,
-            [this] {
+            [this, loadedList = std::move(loadedList)]() mutable {
+                enabledList = std::move(loadedList);
                 if (enabledModel && !enabledList.isEmpty()) {
                     QVector<PackageData> packages;
                     packages.reserve(enabledList.size() + installedPackages.size());
@@ -611,7 +627,7 @@ void MainWindow::listSizeInstalledFP()
 }
 
 // Keep Flatpak UI enabled; rely on modal progress dialog to block interaction
-void MainWindow::blockInterfaceFP(bool)
+void MainWindow::blockInterfaceFP()
 {
     // Maintain cursor feedback without toggling widget enabled state
     const bool isBusy = displayFlatpaksIsRunning;
@@ -1393,7 +1409,7 @@ void MainWindow::displayFilteredFP(QStringList list, bool raw)
     }
 
     ui->labelNumAppFP->setText(QString::number(flatpakProxy->rowCount()));
-    blockInterfaceFP(false);
+    blockInterfaceFP();
 
     // Auto-adjust column widths after filter changes for Flatpak tab
     for (int i = 0; i < flatpakModel->columnCount(); ++i) {
@@ -1451,8 +1467,16 @@ void MainWindow::displayPackages()
 
 void MainWindow::displayAutoremovable()
 {
-    QStringList names
-        = cmd.getOut("LANG=C apt-get --dry-run autoremove | grep -Po '^Remv \\K[^ ]+'").split('\n', Qt::SkipEmptyParts);
+    const QString aptOut = cmd.getOut("LANG=C apt-get --dry-run autoremove");
+    QStringList names;
+    for (const QString &line : aptOut.split('\n', Qt::SkipEmptyParts)) {
+        if (line.startsWith("Remv ")) {
+            const QString pkg = line.section(' ', 1, 1, QString::SectionSkipEmpty);
+            if (!pkg.isEmpty()) {
+                names << pkg;
+            }
+        }
+    }
 
     ui->pushRemoveAutoremovable->setVisible(!names.isEmpty());
     if (names.isEmpty()) {
@@ -1466,47 +1490,34 @@ void MainWindow::displayAutoremovable()
     }
 }
 
+MainWindow::AptTabContext MainWindow::currentAptTab()
+{
+    if (currentTree == ui->treeMXtest) {
+        return {mxtestModel, mxtestProxy, &mxList};
+    }
+    if (currentTree == ui->treeBackports) {
+        return {backportsModel, backportsProxy, &backportsList};
+    }
+    if (currentTree == ui->treeEnabled) {
+        return {enabledModel, enabledProxy, &enabledList};
+    }
+    return {};
+}
+
 PackageModel *MainWindow::getCurrentModel()
 {
-    if (currentTree == ui->treePopularApps || currentTree == ui->treeFlatpak) {
-        return nullptr; // These tabs don't use PackageModel
-    }
-
-    if (currentTree == ui->treeMXtest) {
-        return mxtestModel;
-    } else if (currentTree == ui->treeBackports) {
-        return backportsModel;
-    } else if (currentTree == ui->treeEnabled) {
-        return enabledModel;
-    }
-    return nullptr;
+    return currentAptTab().model;
 }
 
 PackageFilterProxy *MainWindow::getCurrentProxy()
 {
-    if (currentTree == ui->treePopularApps || currentTree == ui->treeFlatpak) {
-        return nullptr; // These tabs don't use PackageFilterProxy
-    }
-
-    if (currentTree == ui->treeMXtest) {
-        return mxtestProxy;
-    } else if (currentTree == ui->treeBackports) {
-        return backportsProxy;
-    } else if (currentTree == ui->treeEnabled) {
-        return enabledProxy;
-    }
-    return nullptr;
+    return currentAptTab().proxy;
 }
 
 QHash<QString, PackageInfo> *MainWindow::getCurrentList()
 {
-    if (currentTree == ui->treeMXtest) {
-        return &mxList;
-    } else if (currentTree == ui->treeBackports) {
-        return &backportsList;
-    } else {
-        return &enabledList;
-    }
+    auto ctx = currentAptTab();
+    return ctx.list ? ctx.list : &enabledList;
 }
 
 QVector<PackageData> MainWindow::createPackageDataList(QHash<QString, PackageInfo> *list) const
@@ -1605,7 +1616,7 @@ void MainWindow::setupFlatpakDisplay()
         flatpakModel->clear();
     }
     changeList.clear();
-    blockInterfaceFP(true);
+    blockInterfaceFP();
 }
 
 void MainWindow::loadFlatpakData()
@@ -1798,7 +1809,7 @@ void MainWindow::finalizeFlatpakDisplay()
 
     displayFlatpaksIsRunning = false;
     firstRunFP = false;
-    blockInterfaceFP(false);
+    blockInterfaceFP();
     if (holdProgressForFlatpakRefresh) {
         holdProgressForFlatpakRefresh = false;
         progress->hide();
@@ -1892,8 +1903,11 @@ void MainWindow::listFlatpakRemotes() const
 
     auto fetchRemotes = [this](QStringList &outList) {
         Cmd shell;
-        outList
-            = shell.getOut("flatpak remote-list " + fpUser + "| cut -f1").remove(' ').split('\n', Qt::SkipEmptyParts);
+        outList = shell.getOut("flatpak remote-list --columns=name " + fpUser).split('\n', Qt::SkipEmptyParts);
+        for (QString &name : outList) {
+            name = name.trimmed();
+        }
+        outList.removeAll(QString());
         return shell.exitCode() == 0;
     };
 
@@ -1958,35 +1972,38 @@ bool MainWindow::confirmActions(const QString &names, const QString &action)
     const QString aptitude {QStringLiteral("aptitude -sy -V -o=Dpkg::Use-Pty=0 ")};
     if (currentTree == ui->treeFlatpak && names != QLatin1String("flatpak")) {
         detailed_installed_names = changeList;
-    } else if (currentTree == ui->treeBackports) {
-        recommends
-            = (ui->checkBoxInstallRecommendsBP->isChecked()) ? "--install-recommends " : "--no-install-recommends ";
-        recommends_aptitude
-            = (ui->checkBoxInstallRecommendsBP->isChecked()) ? "--with-recommends " : "--without-recommends ";
-        detailed_names = cmd.getOut(
-            frontend + aptget + action + ' ' + recommends + "-t " + verName + "-backports --reinstall " + names
-            + R"lit(|grep 'Inst\|Remv' | awk '{V=""; P="";}; $3 ~ /^\[/ { V=$3 }; $3 ~ /^\(/ { P=$3 ")"}; $4 ~ /^\(/ {P=" => " $4 ")"};  {print $2 ";" V  P ";" $1}')lit");
-        aptitude_info = cmd.getOut(frontend + aptitude + action + ' ' + recommends_aptitude + "-t " + verName
-                                   + "-backports " + names + " |tail -2 |head -1");
-    } else if (currentTree == ui->treeMXtest) {
-        recommends
-            = (ui->checkBoxInstallRecommendsMX->isChecked()) ? "--install-recommends " : "--no-install-recommends ";
-        recommends_aptitude
-            = (ui->checkBoxInstallRecommendsMX->isChecked()) ? "--with-recommends " : "--without-recommends ";
-        detailed_names = cmd.getOut(
-            frontend + aptget + action + " -t mx " + recommends + "--reinstall " + names
-            + R"lit(|grep 'Inst\|Remv' | awk '{V=""; P="";}; $3 ~ /^\[/ { V=$3 }; $3 ~ /^\(/ { P=$3 ")"}; $4 ~ /^\(/ {P=" => " $4 ")"};  {print $2 ";" V  P ";" $1}')lit");
-        aptitude_info = cmd.getOut(frontend + aptitude + action + " -t mx " + recommends_aptitude + names
-                                   + " |tail -2 |head -1");
     } else {
-        recommends
-            = (ui->checkBoxInstallRecommends->isChecked()) ? "--install-recommends " : "--no-install-recommends ";
-        recommends_aptitude
-            = (ui->checkBoxInstallRecommends->isChecked()) ? "--with-recommends " : "--without-recommends ";
+        // Determine recommends flags and target based on current tab
+        QCheckBox *recommendsCheck = ui->checkBoxInstallRecommends;
+        QString target;
+        QString reinstall = QStringLiteral("--reinstall ");
+        if (currentTree == ui->treeBackports) {
+            recommendsCheck = ui->checkBoxInstallRecommendsBP;
+            target = "-t " + verName + "-backports ";
+        } else if (currentTree == ui->treeMXtest) {
+            recommendsCheck = ui->checkBoxInstallRecommendsMX;
+            target = QStringLiteral("-t mx ");
+            reinstall.clear();
+        }
+        recommends = recommendsCheck->isChecked() ? "--install-recommends " : "--no-install-recommends ";
+        recommends_aptitude = recommendsCheck->isChecked() ? "--with-recommends " : "--without-recommends ";
+
+        const QString awkFilter =
+            R"lit(|grep 'Inst\|Remv' | awk '{V=""; P="";}; $3 ~ /^\[/ { V=$3 }; $3 ~ /^\(/ { P=$3 ")"}; $4 ~ /^\(/ {P=" => " $4 ")"};  {print $2 ";" V  P ";" $1}')lit";
         detailed_names = cmd.getOut(
-            frontend + aptget + action + ' ' + recommends + "--reinstall " + names
-            + R"lit(|grep 'Inst\|Remv'| awk '{V=""; P="";}; $3 ~ /^\[/ { V=$3 }; $3 ~ /^\(/ { P=$3 ")"}; $4 ~ /^\(/ {P=" => " $4 ")"};  {print $2 ";" V  P ";" $1}')lit");
-        aptitude_info = cmd.getOut(frontend + aptitude + action + ' ' + recommends_aptitude + names + " |tail -2 |head -1");
+            frontend + aptget + action + ' ' + recommends + target + reinstall + names + awkFilter);
+        {
+            const QStringList aptLines
+                = cmd.getOut(frontend + aptitude + action + ' ' + recommends_aptitude + target + names)
+                      .split('\n', Qt::KeepEmptyParts);
+            if (aptLines.isEmpty()) {
+                aptitude_info.clear();
+            } else if (aptLines.size() >= 2) {
+                aptitude_info = aptLines.at(aptLines.size() - 2);
+            } else {
+                aptitude_info = aptLines.constFirst();
+            }
+        }
     }
 
     if (currentTree != ui->treeFlatpak) {
@@ -2042,9 +2059,11 @@ bool MainWindow::confirmActions(const QString &names, const QString &action)
     constexpr int MinDetailHeight = 100;
     constexpr int MaxDetailHeight = 400;
     auto *const detailedInfo = msgBox.findChild<QTextEdit *>();
-    const auto recommended = qMax(msgBox.detailedText().length() / 2, MinDetailHeight);
-    const auto height = qMin(recommended, MaxDetailHeight);
-    detailedInfo->setFixedHeight(height);
+    if (detailedInfo) {
+        const auto recommended = qMax(msgBox.detailedText().length() / 2, MinDetailHeight);
+        const auto height = qMin(recommended, MaxDetailHeight);
+        detailedInfo->setFixedHeight(height);
+    }
 
     msgBox.addButton(QMessageBox::Ok);
     msgBox.addButton(QMessageBox::Cancel);
@@ -2052,7 +2071,9 @@ bool MainWindow::confirmActions(const QString &names, const QString &action)
     constexpr int DialogMinWidth = 600;
     auto *horizontalSpacer = new QSpacerItem(DialogMinWidth, 0, QSizePolicy::Minimum, QSizePolicy::Expanding);
     auto *layout = qobject_cast<QGridLayout *>(msgBox.layout());
-    layout->addItem(horizontalSpacer, 0, 1);
+    if (layout) {
+        layout->addItem(horizontalSpacer, 0, 1);
+    }
     return msgBox.exec() == QMessageBox::Ok;
 }
 
@@ -2076,29 +2097,25 @@ bool MainWindow::install(const QString &names)
     if (lockFile.isLockedGUI()) {
         return false;
     }
-    QString recommends;
-    bool success = false;
+
+    // Determine recommends flag and target based on current tab
+    QCheckBox *recommendsCheck = ui->checkBoxInstallRecommends;
+    QStringList extraArgs;
     if (currentTree == ui->treeBackports) {
-        recommends
-            = (ui->checkBoxInstallRecommendsBP->isChecked()) ? "--install-recommends " : "--no-install-recommends ";
-        QStringList args {"-o=Dpkg::Use-Pty=0", "install", "-y", recommends.trimmed(), "-t", verName + "-backports",
-                          "--reinstall"};
-        args += packageArgs(names);
-        success = cmd.procAsRootWithEnv(debconfEnvironment(), "apt-get", args);
+        recommendsCheck = ui->checkBoxInstallRecommendsBP;
+        extraArgs = {"-t", verName + "-backports", "--reinstall"};
     } else if (currentTree == ui->treeMXtest) {
-        recommends
-            = (ui->checkBoxInstallRecommendsMX->isChecked()) ? "--install-recommends " : "--no-install-recommends ";
-        QStringList args {"-o=Dpkg::Use-Pty=0", "install", "-y", recommends.trimmed(), "-t", "mx"};
-        args += packageArgs(names);
-        success = cmd.procAsRootWithEnv(debconfEnvironment(), "apt-get", args);
+        recommendsCheck = ui->checkBoxInstallRecommendsMX;
+        extraArgs = {"-t", "mx"};
     } else {
-        recommends
-            = (ui->checkBoxInstallRecommends->isChecked()) ? "--install-recommends " : "--no-install-recommends ";
-        QStringList args {"-o=Dpkg::Use-Pty=0", "install", "-y", recommends.trimmed(), "--reinstall"};
-        args += packageArgs(names);
-        success = cmd.procAsRootWithEnv(debconfEnvironment(), "apt-get", args);
+        extraArgs = {"--reinstall"};
     }
-    return success;
+
+    const QString recommends = recommendsCheck->isChecked() ? "--install-recommends" : "--no-install-recommends";
+    QStringList args {"-o=Dpkg::Use-Pty=0", "install", "-y", recommends};
+    args += extraArgs;
+    args += packageArgs(names);
+    return cmd.procAsRootWithEnv(debconfEnvironment(), "apt-get", args);
 }
 
 // Install a list of application and run postprocess for each of them.
@@ -2323,21 +2340,20 @@ bool MainWindow::isOnline()
             manager.setProxy(proxies.first());
         }
         request.setUrl(QUrl(address));
-        reply = manager.head(request);
+        QNetworkReply *onlineReply = manager.head(request);
         QEventLoop loop;
-        connect(reply, &QNetworkReply::finished, &loop, &QEventLoop::quit);
-        connect(reply, &QNetworkReply::errorOccurred, &loop, &QEventLoop::quit);
+        connect(onlineReply, &QNetworkReply::finished, &loop, &QEventLoop::quit);
+        connect(onlineReply, &QNetworkReply::errorOccurred, &loop, &QEventLoop::quit);
         auto timeout = settings.value("timeout", 7000).toUInt();
         manager.setTransferTimeout(timeout);
         loop.exec();
-        reply->disconnect();
-        if (reply->error() == QNetworkReply::NoError) {
-            reply->deleteLater();
+        onlineReply->disconnect();
+        if (onlineReply->error() == QNetworkReply::NoError) {
+            onlineReply->deleteLater();
             return true;
         }
         // Clean up failed reply before next iteration
-        reply->deleteLater();
-        reply = nullptr;
+        onlineReply->deleteLater();
     }
     qDebug() << "No network detected:" << error;
     return false;
@@ -2356,32 +2372,32 @@ bool MainWindow::downloadFile(const QString &url, QFile &file)
     request.setRawHeader("User-Agent", QApplication::applicationName().toUtf8() + '/'
                                            + QApplication::applicationVersion().toUtf8() + " (linux-gnu)");
 
-    reply = manager.get(request);
+    QNetworkReply *dlReply = manager.get(request);
     QEventLoop loop;
 
-    connect(reply, &QNetworkReply::readyRead, this, [&file, this]() {
-        if (file.write(reply->readAll()) == -1) {
+    connect(dlReply, &QNetworkReply::readyRead, this, [&file, dlReply]() {
+        if (file.write(dlReply->readAll()) == -1) {
             qDebug() << "Failed to write data to file:" << file.fileName();
-            reply->abort();
+            dlReply->abort();
             file.close();
             file.remove();
         }
     });
-    connect(reply, &QNetworkReply::finished, &loop, &QEventLoop::quit);
+    connect(dlReply, &QNetworkReply::finished, &loop, &QEventLoop::quit);
     loop.exec();
     file.close();
 
-    if (reply->error() != QNetworkReply::NoError) {
+    if (dlReply->error() != QNetworkReply::NoError) {
         QMessageBox::warning(this, tr("Error"),
                              tr("There was an error downloading or writing the file: %1. Please check your internet "
                                 "connection and free space on your drive")
                                  .arg(file.fileName()));
-        qDebug() << "There was an error downloading the file:" << url << "Error:" << reply->errorString();
+        qDebug() << "There was an error downloading the file:" << url << "Error:" << dlReply->errorString();
         file.remove();
-        reply->deleteLater();
+        dlReply->deleteLater();
         return false;
     }
-    reply->deleteLater();
+    dlReply->deleteLater();
     return true;
 }
 
@@ -2723,7 +2739,7 @@ void MainWindow::cleanup()
 
 QString MainWindow::getVersion(const QString &name) const
 {
-    return Cmd().getOut("LANG=Cdpkg-query -f '${Version}' -W " + name);
+    return Cmd().getOut("LANG=C dpkg-query -f '${Version}' -W " + name);
 }
 
 // Return true if all the packages listed are installed
@@ -3078,19 +3094,21 @@ QUrl MainWindow::getScreenshotUrl(const QString &name)
         manager.setProxy(proxies.first());
     }
 
-    reply = manager.get(QNetworkRequest(url));
+    QNetworkReply *screenshotReply = manager.get(QNetworkRequest(url));
 
     QEventLoop loop;
-    connect(reply, &QNetworkReply::finished, &loop, &QEventLoop::quit);
+    connect(screenshotReply, &QNetworkReply::finished, &loop, &QEventLoop::quit);
     QTimer::singleShot(5s, &loop, &QEventLoop::quit);
     loop.exec();
 
-    if (reply->error() != QNetworkReply::NoError) {
-        reply->deleteLater();
+    if (screenshotReply->error() != QNetworkReply::NoError) {
+        screenshotReply->deleteLater();
         return {};
     }
 
-    QByteArray response = reply->readAll();
+    QByteArray response = screenshotReply->readAll();
+    screenshotReply->deleteLater();
+
     QJsonDocument jsonDoc = QJsonDocument::fromJson(response);
     if (jsonDoc.isObject()) {
         QJsonObject jsonObj = jsonDoc.object();
@@ -3099,14 +3117,11 @@ QUrl MainWindow::getScreenshotUrl(const QString &name)
             if (!screenshotsArray.isEmpty()) {
                 QJsonObject firstScreenshot = screenshotsArray.first().toObject();
                 if (firstScreenshot.contains(QStringLiteral("small_image_url"))) {
-                    QUrl result = QUrl(firstScreenshot[QStringLiteral("small_image_url")].toString());
-                    reply->deleteLater();
-                    return result;
+                    return QUrl(firstScreenshot[QStringLiteral("small_image_url")].toString());
                 }
             }
         }
     }
-    reply->deleteLater();
     return {};
 }
 
@@ -3193,7 +3208,9 @@ void MainWindow::displayInfoTestOrBackport(QTreeView *tree, const QModelIndex &i
     // Make it wider
     auto *horizontalSpacer = new QSpacerItem(width(), 0, QSizePolicy::Minimum, QSizePolicy::Expanding);
     auto *layout = qobject_cast<QGridLayout *>(info.layout());
-    layout->addItem(horizontalSpacer, 0, 1);
+    if (layout) {
+        layout->addItem(horizontalSpacer, 0, 1);
+    }
     info.exec();
 }
 
@@ -3267,21 +3284,23 @@ void MainWindow::displayPopularInfo(const QModelIndex &index)
         if (!proxies.isEmpty()) {
             manager.setProxy(proxies.first());
         }
-        reply = manager.get(QNetworkRequest(url));
+        QNetworkReply *imgReply = manager.get(QNetworkRequest(url));
 
         QEventLoop loop;
-        connect(reply, &QNetworkReply::finished, &loop, &QEventLoop::quit);
+        connect(imgReply, &QNetworkReply::finished, &loop, &QEventLoop::quit);
         QTimer::singleShot(5s, &loop, &QEventLoop::quit);
         ui->treePopularApps->blockSignals(true);
         loop.exec();
         ui->treePopularApps->blockSignals(false);
 
-        if (reply->error() != QNetworkReply::NoError) {
-            qDebug() << "Download of " << url.url() << " failed: " << qPrintable(reply->errorString());
+        if (imgReply->error() != QNetworkReply::NoError) {
+            qDebug() << "Download of " << url.url() << " failed: " << qPrintable(imgReply->errorString());
+            imgReply->deleteLater();
+            imgReply = nullptr;
             url = getScreenshotUrl(install_names.split(' ').first());
             if (url.isValid() && !url.isEmpty() && url.url() != QLatin1String("none")) {
-                reply = manager.get(QNetworkRequest(url));
-                connect(reply, &QNetworkReply::finished, &loop, &QEventLoop::quit);
+                imgReply = manager.get(QNetworkRequest(url));
+                connect(imgReply, &QNetworkReply::finished, &loop, &QEventLoop::quit);
                 QTimer::singleShot(5s, &loop, &QEventLoop::quit);
                 ui->treePopularApps->blockSignals(true);
                 loop.exec();
@@ -3289,11 +3308,11 @@ void MainWindow::displayPopularInfo(const QModelIndex &index)
             }
         }
 
-        if (reply->error() == QNetworkReply::NoError) {
+        if (imgReply && imgReply->error() == QNetworkReply::NoError) {
             QImage image;
             QByteArray data;
             QBuffer buffer(&data);
-            QImageReader imageReader(reply);
+            QImageReader imageReader(imgReply);
             image = imageReader.read();
             if (imageReader.error() != 0) {
                 qDebug() << "loading screenshot: " << imageReader.errorString();
@@ -3303,9 +3322,9 @@ void MainWindow::displayPopularInfo(const QModelIndex &index)
                 msg += QString("<p><img src='data:image/png;base64, %0'>").arg(QString(data.toBase64()));
             }
         }
-    }
-    if (reply) {
-        reply->deleteLater();
+        if (imgReply) {
+            imgReply->deleteLater();
+        }
     }
     QMessageBox info(QMessageBox::NoIcon, tr("Package info"), msg, QMessageBox::Close);
     info.exec();
@@ -3320,10 +3339,13 @@ void MainWindow::displayPackageInfo(const QModelIndex &index)
     }
 
     QString msg = cmd.getOut("aptitude show " + packageName);
-    // Remove first 5 lines from aptitude output "Reading package..."
-    QString details = cmd.getOut("DEBIAN_FRONTEND=$(dpkg -l debconf-kde-helper 2>/dev/null "
-                                 "| grep -sq ^i && echo kde || echo gnome) aptitude -sy -V -o=Dpkg::Use-Pty=0 install "
-                                 + packageName + " |tail -5");
+    // Keep last 5 lines from aptitude output
+    const QString rawDetails = cmd.getOut("DEBIAN_FRONTEND=$(dpkg -l debconf-kde-helper 2>/dev/null | grep -sq ^i && echo kde "
+                                          "|| dpkg -l debconf-gnome 2>/dev/null | grep -sq ^i && echo gnome "
+                                          "|| echo noninteractive) aptitude -sy -V -o=Dpkg::Use-Pty=0 install "
+                                          + packageName);
+    const QStringList rawLines = rawDetails.split('\n');
+    QString details = rawLines.mid(qMax(0, rawLines.size() - 5)).join('\n');
 
     auto detail_list = details.split('\n');
     auto msg_list = msg.split('\n');
@@ -3334,7 +3356,9 @@ void MainWindow::displayPackageInfo(const QModelIndex &index)
         detail_list = msg_list.mid(max_no_lines, msg_list.length()) + QStringList {} + detail_list;
         details = detail_list.join('\n');
     }
-    msg += "\n\n" + detail_list.at(detail_list.size() - 2); // Add info about space needed/freed
+    if (detail_list.size() >= 2) {
+        msg += "\n\n" + detail_list.at(detail_list.size() - 2); // Add info about space needed/freed
+    }
 
     QMessageBox info(QMessageBox::NoIcon, tr("Package info"), msg.trimmed(), QMessageBox::Close);
     info.setDetailedText(details.trimmed());
@@ -3342,11 +3366,13 @@ void MainWindow::displayPackageInfo(const QModelIndex &index)
     // Make it wider
     auto *horizontalSpacer = new QSpacerItem(width(), 0, QSizePolicy::Minimum, QSizePolicy::Expanding);
     auto *layout = qobject_cast<QGridLayout *>(info.layout());
-    layout->addItem(horizontalSpacer, 0, 1);
+    if (layout) {
+        layout->addItem(horizontalSpacer, 0, 1);
+    }
     info.exec();
 }
 
-void MainWindow::findPopular() const
+void MainWindow::findPopular()
 {
     const QString word = ui->searchPopular->text();
     if (word.length() == 1) {
@@ -3365,7 +3391,7 @@ void MainWindow::findPopular() const
     }
 
     // Reapply category spanning AFTER collapse/expand
-    const_cast<MainWindow*>(this)->applyPopularCategorySpanning();
+    applyPopularCategorySpanning();
 
     // Resize columns except the first one
     if (popularModel) {
@@ -3484,12 +3510,16 @@ void MainWindow::pushInstall_clicked()
         }
         setCursor(QCursor(Qt::BusyCursor));
         enableOutput();
-        if (cmd.run(flatpakPtyCommand(QStringLiteral("flatpak install -y ") + fpUser
-                                      + ui->comboRemote->currentText() + ' ' + changeList.join(' ')))) {
+        QStringList args {"flatpak", "install", "-y"};
+        args << fpUser.trimmed();
+        args << ui->comboRemote->currentText();
+        args += changeList;
+        if (cmd.run(flatpakPtyCommand(shellCommandFromArgs(args)))) {
             appendFlatpakStatusMessage(ui->outputBox, tr("Install complete."));
             displayFlatpaks(true);
             indexFilterFP.clear();
             ui->comboFilterFlatpak->setCurrentIndex(0);
+            setCursor(QCursor(Qt::ArrowCursor));
             QMessageBox::information(this, tr("Done"), tr("Processing finished successfully."));
             ui->tabWidget->setCurrentWidget(ui->tabFlatpak);
         } else {
@@ -3631,8 +3661,11 @@ void MainWindow::pushUninstall_clicked()
         setCursor(QCursor(Qt::BusyCursor));
         enableOutput();
         showFlatpakProgress(tr("Uninstalling flatpaks..."));
-        if (!cmd.run(flatpakPtyCommand(QStringLiteral("flatpak uninstall ") + fpUser + QStringLiteral("-y ")
-                                       + changeList.join(' ')))) {
+        QStringList uninstallArgs {"flatpak", "uninstall"};
+        uninstallArgs << fpUser.trimmed();
+        uninstallArgs << "-y";
+        uninstallArgs += changeList;
+        if (!cmd.run(flatpakPtyCommand(shellCommandFromArgs(uninstallArgs)))) {
             success = false;
         }
         if (success) { // Success if all processed successfuly, failure if one failed
@@ -3645,9 +3678,11 @@ void MainWindow::pushUninstall_clicked()
             comboRemote_activated();
             ui->comboFilterFlatpak->setCurrentIndex(0);
             progress->hide();
+            setCursor(QCursor(Qt::ArrowCursor));
             QMessageBox::information(this, tr("Done"), tr("Processing finished successfully."));
             ui->tabWidget->setCurrentWidget(ui->tabFlatpak);
         } else {
+            setCursor(QCursor(Qt::ArrowCursor));
             QMessageBox::critical(this, tr("Error"), tr("We encountered a problem uninstalling, please check output"));
         }
         enableTabs(true);
@@ -3913,7 +3948,7 @@ void MainWindow::handleFlatpakTab(const QString &search_str)
         return;
     }
     firstRunFP = false;
-    blockInterfaceFP(true);
+    blockInterfaceFP();
     if (!checkInstalled("flatpak")) {
         int ans = QMessageBox::question(this, tr("Flatpak not installed"),
                                         tr("Flatpak is not currently installed.\nOK to go ahead and install it?"));
@@ -4378,21 +4413,23 @@ void MainWindow::buildFlatpakChangeList(const QString &fullName, Qt::CheckState 
     ui->treeFlatpak->setFocus();
 }
 
-// Force repo upgrade
-void MainWindow::pushForceUpdateEnabled_clicked()
+// Force repo upgrade — shared implementation for APT tabs
+void MainWindow::forceUpdateAptTab(QLineEdit *searchBox, QComboBox *filterCombo)
 {
-    ui->searchBoxEnabled->clear();
-    ui->comboFilterEnabled->setCurrentIndex(0);
+    searchBox->clear();
+    filterCombo->setCurrentIndex(0);
     buildPackageLists(true);
     updateInterface();
 }
 
+void MainWindow::pushForceUpdateEnabled_clicked()
+{
+    forceUpdateAptTab(ui->searchBoxEnabled, ui->comboFilterEnabled);
+}
+
 void MainWindow::pushForceUpdateMX_clicked()
 {
-    ui->searchBoxMX->clear();
-    ui->comboFilterMX->setCurrentIndex(0);
-    buildPackageLists(true);
-    updateInterface();
+    forceUpdateAptTab(ui->searchBoxMX, ui->comboFilterMX);
 }
 
 void MainWindow::pushForceUpdateFP_clicked()
@@ -4412,25 +4449,28 @@ void MainWindow::pushForceUpdateFP_clicked()
 
 void MainWindow::pushForceUpdateBP_clicked()
 {
-    ui->searchBoxBP->clear();
-    ui->comboFilterBP->setCurrentIndex(0);
-    buildPackageLists(true);
-    updateInterface();
+    forceUpdateAptTab(ui->searchBoxBP, ui->comboFilterBP);
 }
 
-// Hide/unhide lib/-dev packages
+// Hide/unhide lib/-dev packages — shared implementation
+void MainWindow::applyHideLibs(bool checked, QTreeView *tree, PackageFilterProxy *proxy, QComboBox *filterCombo,
+                                const QList<QCheckBox *> &peerCheckboxes)
+{
+    tree->setUpdatesEnabled(false);
+    hideLibsChecked = checked;
+    settings.setValue("HideLibs", checked);
+    for (auto *cb : peerCheckboxes) {
+        cb->setChecked(checked);
+    }
+    proxy->setHideLibraries(checked);
+    filterChanged(filterCombo->currentText());
+    tree->setUpdatesEnabled(true);
+}
+
 void MainWindow::checkHideLibs_toggled(bool checked)
 {
-    ui->treeEnabled->setUpdatesEnabled(false);
-    hideLibsChecked = checked;
-    // Persist user preference
-    settings.setValue("HideLibs", checked);
-    ui->checkHideLibsMX->setChecked(checked);
-    ui->checkHideLibsBP->setChecked(checked);
-
-    enabledProxy->setHideLibraries(checked);
-    filterChanged(ui->comboFilterEnabled->currentText());
-    ui->treeEnabled->setUpdatesEnabled(true);
+    applyHideLibs(checked, ui->treeEnabled, enabledProxy, ui->comboFilterEnabled,
+                  {ui->checkHideLibsMX, ui->checkHideLibsBP});
 }
 
 void MainWindow::pushUpgradeAll_clicked()
@@ -4494,28 +4534,14 @@ void MainWindow::pushCancel_clicked()
 
 void MainWindow::checkHideLibsMX_clicked(bool checked)
 {
-    ui->treeMXtest->setUpdatesEnabled(false);
-    hideLibsChecked = checked;
-    settings.setValue("HideLibs", checked);
-    ui->checkHideLibs->setChecked(checked);
-    ui->checkHideLibsBP->setChecked(checked);
-
-    mxtestProxy->setHideLibraries(checked);
-    filterChanged(ui->comboFilterMX->currentText());
-    ui->treeMXtest->setUpdatesEnabled(true);
+    applyHideLibs(checked, ui->treeMXtest, mxtestProxy, ui->comboFilterMX,
+                  {ui->checkHideLibs, ui->checkHideLibsBP});
 }
 
 void MainWindow::checkHideLibsBP_clicked(bool checked)
 {
-    ui->treeBackports->setUpdatesEnabled(false);
-    hideLibsChecked = checked;
-    settings.setValue("HideLibs", checked);
-    ui->checkHideLibs->setChecked(checked);
-    ui->checkHideLibsMX->setChecked(checked);
-
-    backportsProxy->setHideLibraries(checked);
-    filterChanged(ui->comboFilterBP->currentText());
-    ui->treeBackports->setUpdatesEnabled(true);
+    applyHideLibs(checked, ui->treeBackports, backportsProxy, ui->comboFilterBP,
+                  {ui->checkHideLibs, ui->checkHideLibsMX});
 }
 
 void MainWindow::checkRepoOnlyMX_clicked(bool checked)
@@ -4584,8 +4610,10 @@ void MainWindow::pushRemotes_clicked()
         showOutput();
         setCursor(QCursor(Qt::BusyCursor));
         enableOutput();
-        if (cmd.run(flatpakPtyCommand(QStringLiteral("flatpak install -y ") + dialog->getUser()
-                                      + QStringLiteral("--from ") + dialog->getInstallRef()))) {
+        QStringList args {"flatpak", "install", "-y"};
+        args << dialog->getUser().trimmed();
+        args << "--from" << dialog->getInstallRef();
+        if (cmd.run(flatpakPtyCommand(shellCommandFromArgs(args)))) {
             appendFlatpakStatusMessage(ui->outputBox, tr("Install complete."));
             invalidateFlatpakRemoteCache();
             listFlatpakRemotes();

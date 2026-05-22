@@ -82,6 +82,7 @@ qemu-system-gui
 qemu-utils 
 ovmf 
 ibverbs-providers
+qemu-system-modules-spice  
 </install_package_names>
 
 

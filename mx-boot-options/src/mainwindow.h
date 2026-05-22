@@ -140,6 +140,7 @@ private:
     void processKernelCommandLine(QString line);
     void readDefaultGrub();
     void readGrubCfg();
+    void reloadGrubSettings();
     void replaceSyslinuxArgs(const QString &args);
     void replaceLiveGrubArgs(const QString &args);
     void setupUiElements();

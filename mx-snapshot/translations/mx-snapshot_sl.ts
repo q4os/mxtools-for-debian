@@ -2,135 +2,110 @@
 <context>
     <name>Batchprocessing</name>
     <message>
-        <location filename="../src/batchprocessing.cpp" line="54"/>
+        <location filename="../src/batchprocessing.cpp" line="50"/>
         <source>Error</source>
         <translation>Napaka</translation>
     </message>
     <message>
-        <location filename="../src/batchprocessing.cpp" line="55"/>
+        <location filename="../src/batchprocessing.cpp" line="51"/>
         <source>Current kernel doesn&apos;t support selected compression algorithm, please edit the configuration file and select a different algorithm.</source>
         <translation>Trenutno jedro ne podpira izbranega algoritma za stiskanje podatkov. Prosimo, uredite konfiguracijsko datoteko in izberite drug algoritem.</translation>
     </message>
     <message>
-        <location filename="../src/batchprocessing.cpp" line="80"/>
+        <location filename="../src/batchprocessing.cpp" line="76"/>
         <source>The program will pause the build and open the boot menu in your text editor.</source>
         <translation>Program bo zadržal gradnjo in odprl zagonski meni v urejevalniku besedil.</translation>
     </message>
     <message>
-        <location filename="../src/batchprocessing.cpp" line="162"/>
-        <source>No diff output available.</source>
-        <translation>diff izpis je prazen</translation>
-    </message>
-    <message>
-        <location filename="../src/batchprocessing.cpp" line="200"/>
-        <source>Default exclusion file not found at %1.</source>
-        <translation>Privzeta izločitvena datoteka ni bila najdena</translation>
-    </message>
-    <message>
-        <location filename="../src/batchprocessing.cpp" line="212"/>
-        <source>Could not backup existing exclusion file to %1.</source>
-        <translation>Obstoječe izločitvene datoteke ni bilo mogoče varnostno kopirati v v %1</translation>
-    </message>
-    <message>
-        <location filename="../src/batchprocessing.cpp" line="215"/>
-        <source>Could not remove existing exclusion file at %1.</source>
-        <translation>Obstoječe izločitvene datoteke v %1 ni bilo mogoče odstraniti</translation>
-    </message>
-    <message>
-        <location filename="../src/batchprocessing.cpp" line="222"/>
-        <source>Could not copy default exclusion file from %1 to %2.</source>
-        <translation>Obstoječe izločitvene datoteke ni bilo mogoče kopirati iz %1 v %2</translation>
-    </message>
-    <message>
-        <location filename="../src/batchprocessing.cpp" line="238"/>
+        <location filename="../src/batchprocessing.cpp" line="157"/>
         <source>Detected newer exclusion file at %1 compared to %2. Prompting for action.</source>
         <translation>Zaznana je bila novejša izločitvena datoteka v %1, kot je %2. Čakam na navodilo.</translation>
     </message>
     <message>
-        <location filename="../src/batchprocessing.cpp" line="244"/>
+        <location filename="../src/batchprocessing.cpp" line="163"/>
         <source>s</source>
         <comment>CLI excludes prompt: single-letter shortcut for 'show diff'</comment>
         <translation>p</translation>
     </message>
     <message>
-        <location filename="../src/batchprocessing.cpp" line="245"/>
+        <location filename="../src/batchprocessing.cpp" line="164"/>
         <source>u</source>
         <comment>CLI excludes prompt: single-letter shortcut for 'use updated default'</comment>
         <translation>u</translation>
     </message>
     <message>
-        <location filename="../src/batchprocessing.cpp" line="246"/>
+        <location filename="../src/batchprocessing.cpp" line="165"/>
         <source>k</source>
         <comment>CLI excludes prompt: single-letter shortcut for 'keep custom (update timestamp)'</comment>
         <translation>o</translation>
     </message>
     <message>
-        <location filename="../src/batchprocessing.cpp" line="247"/>
+        <location filename="../src/batchprocessing.cpp" line="166"/>
         <source>q</source>
         <comment>CLI excludes prompt: single-letter shortcut for 'quit'</comment>
         <translation>k</translation>
     </message>
     <message>
-        <location filename="../src/batchprocessing.cpp" line="249"/>
+        <location filename="../src/batchprocessing.cpp" line="168"/>
         <source>show diff</source>
         <comment>CLI excludes prompt option label</comment>
         <translation>prikaži razliko</translation>
     </message>
     <message>
-        <location filename="../src/batchprocessing.cpp" line="250"/>
+        <location filename="../src/batchprocessing.cpp" line="169"/>
         <source>use updated default</source>
         <comment>CLI excludes prompt option label</comment>
         <translation>uporabi posodobljeno privzeto</translation>
     </message>
     <message>
-        <location filename="../src/batchprocessing.cpp" line="251"/>
+        <location filename="../src/batchprocessing.cpp" line="170"/>
         <source>keep custom (update timestamp)</source>
         <comment>CLI excludes prompt option label</comment>
         <translation>obdrži prirejeno (posodobi časovno oznako)</translation>
     </message>
     <message>
-        <location filename="../src/batchprocessing.cpp" line="252"/>
+        <location filename="../src/batchprocessing.cpp" line="171"/>
         <source>quit</source>
         <comment>CLI excludes prompt option label</comment>
         <translation>končaj</translation>
     </message>
     <message>
-        <location filename="../src/batchprocessing.cpp" line="255"/>
+        <location filename="../src/batchprocessing.cpp" line="174"/>
         <source>[%1]%2  [%3]%4  [%5]%6  [%7]%8: </source>
         <translation>[%1]%2  [%3]%4  [%5]%6  [%7]%8: </translation>
     </message>
     <message>
-        <location filename="../src/batchprocessing.cpp" line="260"/>
+        <location filename="../src/batchprocessing.cpp" line="179"/>
         <source>The exclusion file at %1 is newer than your configured file at %2.</source>
         <translation>Izločitvena datoteka v %1 je novejša od nastavljene datoteke v %2.</translation>
     </message>
     <message>
-        <location filename="../src/batchprocessing.cpp" line="276"/>
+        <location filename="../src/batchprocessing.cpp" line="195"/>
         <source>Reverted to updated default exclusion file.</source>
         <translation>Povratek na posodobljeno privzeto izločitveno datoteko.</translation>
     </message>
     <message>
-        <location filename="../src/batchprocessing.cpp" line="297"/>
+        <location filename="../src/batchprocessing.cpp" line="208"/>
         <source>Leaving custom exclusion file unchanged.</source>
         <translation>Prirejena izločitvena datoteka ostaja nespremenjena.</translation>
     </message>
     <message>
-        <location filename="../src/batchprocessing.cpp" line="308"/>
+        <location filename="../src/batchprocessing.cpp" line="219"/>
         <source>Invalid choice. Please select again.</source>
         <translation>Neveljavna izbira. Ponovno izberite.</translation>
     </message>
     <message>
-        <location filename="../src/batchprocessing.cpp" line="315"/>
+        <location filename="../src/batchprocessing.cpp" line="226"/>
         <source>This computer uses an NVIDIA graphics card. Are you planning to use the resulting ISO on the same computer or another computer with an NVIDIA card?</source>
         <translation>Ta računalnik uporablja Nvidia grafično kartico. Ali nameravate uporabiti ISO na istem ali drugem računalniku z Nvidia kartico?</translation>
     </message>
     <message>
-        <location filename="../src/batchprocessing.cpp" line="325"/>
+        <location filename="../src/batchprocessing.cpp" line="236"/>
         <source>Note: If you use the resulting ISO on a computer without an NVIDIA card, you will likely need to remove &apos;xorg=nvidia&apos; from the boot options.</source>
         <translation>Opomba: Če končni ISO uporabite na računalniku brez NVIDIA kartice, bo verjetno potrebno odstraniti &apos;xorg=nvidia&apos; iz možnosti zagona.</translation>
     </message>
     <message>
-        <location filename="../src/batchprocessing.cpp" line="328"/>
+        <location filename="../src/batchprocessing.cpp" line="239"/>
         <source>Note: If you use the resulting ISO on a computer with an NVIDIA card, you may need to add &apos;xorg=nvidia&apos; to the boot options.</source>
         <translation>Opomba: Če končni ISO uporabite na računalniku z NVIDIA kartice, bo verjetno potrebno dodati &apos;xorg=nvidia&apos; v možnosti zagona.</translation>
     </message>
@@ -143,12 +118,17 @@
         <translation>Ni orodja za dvig pravic (pkexec/gksu/sudo)</translation>
     </message>
     <message>
-        <location filename="../src/cmd.cpp" line="171"/>
+        <location filename="../src/cmd.cpp" line="145"/>
+        <source>Failed to start command: %1</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/cmd.cpp" line="187"/>
         <source>Administrator Access Required</source>
         <translation>Zahtevan je skrbniški dostop</translation>
     </message>
     <message>
-        <location filename="../src/cmd.cpp" line="172"/>
+        <location filename="../src/cmd.cpp" line="188"/>
         <source>This operation requires administrator privileges. Please restart the application and enter your password when prompted.</source>
         <translation>Za ta operacijo je potreben skrbniški dostop. Ponovno zaženite program in vnesite geslo, ko ga bo program zahteval.</translation>
     </message>
@@ -157,351 +137,300 @@
     <name>MainWindow</name>
     <message>
         <location filename="../src/mainwindow.ui" line="14"/>
-        <location filename="../src/mainwindow.cpp" line="446"/>
-        <location filename="../src/mainwindow.cpp" line="833"/>
-        <location filename="../src/ui_mainwindow.h" line="745"/>
+        <location filename="../src/mainwindow.cpp" line="382"/>
+        <location filename="../src/mainwindow.cpp" line="826"/>
         <source>MX Snapshot</source>
         <translation>MX posnetek</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="33"/>
-        <location filename="../src/ui_mainwindow.h" line="746"/>
         <source>Optional customization</source>
         <translation>Možnosti prilagajanja</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="65"/>
-        <location filename="../src/ui_mainwindow.h" line="747"/>
         <source>Release version:</source>
         <translation>Različica izdaje:</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="79"/>
-        <location filename="../src/ui_mainwindow.h" line="748"/>
         <source>Boot options:</source>
         <translation>Zagonske možnosti:</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="86"/>
-        <location filename="../src/ui_mainwindow.h" line="749"/>
         <source>Live kernel:</source>
         <translation>Zagonsko jedro:</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="93"/>
-        <location filename="../src/ui_mainwindow.h" line="750"/>
         <source>Project name:</source>
         <translation>Ime projekta:</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="100"/>
-        <location filename="../src/ui_mainwindow.h" line="751"/>
         <source>Release date:</source>
         <translation>Datum izdaje:</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="107"/>
-        <location filename="../src/ui_mainwindow.h" line="752"/>
         <source>Release codename:</source>
         <translation>Kodno ime raličice:</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="133"/>
-        <location filename="../src/ui_mainwindow.h" line="753"/>
         <source>Current date</source>
         <translation>Trenutni datum</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="172"/>
-        <location filename="../src/ui_mainwindow.h" line="754"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Snapshot is a utility that creates a bootable image (ISO) of your working system that you can use for storage or distribution. You can continue working with undemanding applications while it is running.&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Posnetek je orodje za ustvarjanje zagonskega posnetka (ISO) vašega sistema, ki ga lahko uporabljate za potrebe shranjevanja ali razmnoževanja.  Med njegovim delovanjem lahko nadaljujete uporabljati manj zahtevne programe.&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="182"/>
-        <location filename="../src/ui_mainwindow.h" line="755"/>
         <source>Used space on / (root) and /home partitions:</source>
         <translation>Uporabljen prostor na / (korenskem) in /home razdelku:</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="192"/>
-        <location filename="../src/ui_mainwindow.h" line="756"/>
         <source>Location and ISO name</source>
         <translation>Lokacija in ISO ime</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="219"/>
-        <location filename="../src/ui_mainwindow.h" line="758"/>
         <source>Snapshot location:</source>
         <translation>Lokacija posnetka:</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="226"/>
-        <location filename="../src/ui_mainwindow.h" line="759"/>
         <source>Select a different snapshot directory</source>
         <translation>Izberi drugo mapo</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="236"/>
-        <location filename="../src/mainwindow.cpp" line="641"/>
-        <location filename="../src/ui_mainwindow.h" line="760"/>
+        <location filename="../src/mainwindow.cpp" line="590"/>
         <source>Snapshot name:</source>
         <translation>Ime posnetka:</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="360"/>
-        <location filename="../src/ui_mainwindow.h" line="764"/>
         <source>Type of snapshot:</source>
         <translation>Vrsta posnetka:</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="367"/>
-        <location filename="../src/ui_mainwindow.h" line="765"/>
         <source>Preserving accounts (for personal backup)</source>
         <translation>Ohrani račune (primerno za osebne varnostne kopije)</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="377"/>
-        <location filename="../src/ui_mainwindow.h" line="767"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This option will reset &amp;quot;demo&amp;quot; and &amp;quot;root&amp;quot; passwords to the MX Linux defaults and will not copy any personal accounts created.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Ta opcija bo ponastavila &amp;quot;demo&amp;quot; in &amp;quot;korensko&amp;quot; geslo v privzetih nastavitvah MX Linuxa in ne bo kopirala ustvarjenih osebnih računov.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="380"/>
-        <location filename="../src/ui_mainwindow.h" line="769"/>
         <source>Resetting accounts (for distribution to others)</source>
         <translation>Ponastavi račune (primerno za redistribucijo)</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="451"/>
-        <location filename="../src/ui_mainwindow.h" line="770"/>
         <source>You can also exclude certain directories by ticking the common choices below, or by clicking on the button to directly edit /etc/mx-snapshot-exclude.list.</source>
         <translation>Lahko tudi izločite določene mape, tako da spodaj izberete le želeno ali da kliknete  na gumb, s katerim neposredno uredite izločitveni seznam /etc/mx-snapshot-exclude.list.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="496"/>
-        <location filename="../src/ui_mainwindow.h" line="771"/>
         <source>sha512</source>
         <translation>sha512</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="519"/>
-        <location filename="../src/ui_mainwindow.h" line="773"/>
         <source>Throttle the I/O input rate by the given percentage.</source>
         <translation>Uravnavanje vhodno-izhodno obremenitve glede na podani odstotek.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="525"/>
-        <location filename="../src/ui_mainwindow.h" line="775"/>
         <source>I/O throttle:</source>
         <translation>Uravnavanje vhoda-izhoda:</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="532"/>
-        <location filename="../src/ui_mainwindow.h" line="776"/>
         <source>Calculate checksums:</source>
         <translation>Izračunaj kontrolni seštevek:</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="539"/>
-        <location filename="../src/ui_mainwindow.h" line="777"/>
         <source>ISO compression scheme:</source>
         <translation>Shema za kompresiranje ISO:</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="546"/>
-        <location filename="../src/ui_mainwindow.h" line="778"/>
         <source>Number of CPU cores to use:</source>
         <translation>Število uporabljenih jeder:</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="553"/>
-        <location filename="../src/ui_mainwindow.h" line="779"/>
         <source>md5</source>
         <translation>md5</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="563"/>
-        <location filename="../src/ui_mainwindow.h" line="780"/>
         <source>Options:</source>
         <translation>Možnosti:</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="610"/>
-        <location filename="../src/ui_mainwindow.h" line="781"/>
         <source>Edit Exclusion File</source>
         <translation>Uredi izločitveno datoteko</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="626"/>
-        <location filename="../src/mainwindow.cpp" line="853"/>
-        <location filename="../src/ui_mainwindow.h" line="782"/>
+        <location filename="../src/mainwindow.cpp" line="846"/>
         <source>Remove Custom Exclusion File</source>
         <translation>Odstrani prirejeno izločitveno datoteko</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="679"/>
-        <location filename="../src/ui_mainwindow.h" line="783"/>
         <source>Pictures</source>
         <translation>Slike</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="686"/>
-        <location filename="../src/ui_mainwindow.h" line="784"/>
         <source>Videos</source>
         <translation>Video</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="693"/>
-        <location filename="../src/ui_mainwindow.h" line="785"/>
         <source>All of the above</source>
         <translation>Vse zgoraj našteto</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="700"/>
-        <location filename="../src/ui_mainwindow.h" line="787"/>
         <source>exclude network configurations</source>
         <translation>izločite omrežne nastavitve</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="703"/>
-        <location filename="../src/ui_mainwindow.h" line="789"/>
         <source>Networks</source>
         <translation>Omrežja</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="710"/>
-        <location filename="../src/ui_mainwindow.h" line="790"/>
         <source>Downloads</source>
         <translation>Prenosi</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="717"/>
-        <location filename="../src/ui_mainwindow.h" line="791"/>
         <source>Desktop</source>
         <translation>Namizje</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="724"/>
-        <location filename="../src/ui_mainwindow.h" line="792"/>
         <source>Documents</source>
         <translation>Dokumenti</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="731"/>
-        <location filename="../src/ui_mainwindow.h" line="793"/>
         <source>Flatpaks</source>
         <translation>Flatpaks</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="738"/>
-        <location filename="../src/ui_mainwindow.h" line="794"/>
         <source>Music</source>
         <translation>Glasba</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.ui" line="850"/>
-        <location filename="../src/ui_mainwindow.h" line="797"/>
+        <location filename="../src/mainwindow.ui" line="876"/>
         <source>About this application</source>
         <translation>O tem programu</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.ui" line="853"/>
-        <location filename="../src/ui_mainwindow.h" line="799"/>
+        <location filename="../src/mainwindow.ui" line="879"/>
         <source>About...</source>
         <translation>O programu...</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.ui" line="859"/>
-        <location filename="../src/ui_mainwindow.h" line="801"/>
+        <location filename="../src/mainwindow.ui" line="885"/>
         <source>Alt+B</source>
         <translation>Alt+B</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.ui" line="875"/>
-        <location filename="../src/ui_mainwindow.h" line="803"/>
+        <location filename="../src/mainwindow.ui" line="901"/>
         <source>Next</source>
         <translation>Naprej</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.ui" line="900"/>
-        <location filename="../src/ui_mainwindow.h" line="808"/>
+        <location filename="../src/mainwindow.ui" line="926"/>
         <source>Display help </source>
         <translation>Prikaži pomoč</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.ui" line="903"/>
-        <location filename="../src/ui_mainwindow.h" line="810"/>
+        <location filename="../src/mainwindow.ui" line="929"/>
         <source>Help</source>
         <translation>Pomoč</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.ui" line="909"/>
-        <location filename="../src/ui_mainwindow.h" line="812"/>
+        <location filename="../src/mainwindow.ui" line="935"/>
         <source>Alt+H</source>
         <translation>Alt+H</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.ui" line="922"/>
-        <location filename="../src/ui_mainwindow.h" line="815"/>
+        <location filename="../src/mainwindow.ui" line="948"/>
         <source>Quit application</source>
         <translation>Zapri aplikacijo</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.ui" line="925"/>
-        <location filename="../src/ui_mainwindow.h" line="817"/>
+        <location filename="../src/mainwindow.ui" line="951"/>
         <source>Cancel</source>
         <translation>Prekliči</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.ui" line="931"/>
-        <location filename="../src/ui_mainwindow.h" line="819"/>
+        <location filename="../src/mainwindow.ui" line="957"/>
         <source>Alt+N</source>
         <translation>Alt+N</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.ui" line="985"/>
-        <location filename="../src/ui_mainwindow.h" line="822"/>
+        <location filename="../src/mainwindow.ui" line="1011"/>
         <source>Back</source>
         <translation>Nazaj</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="408"/>
+        <location filename="../src/mainwindow.cpp" line="344"/>
         <source>Select Release Date</source>
         <translation>Izbira datuma izdaje</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="452"/>
+        <location filename="../src/mainwindow.cpp" line="388"/>
         <source>fastest, worst compression</source>
         <translation>najhitrejše, najmanj stisnjeno</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="452"/>
+        <location filename="../src/mainwindow.cpp" line="388"/>
         <source>fast, worse compression</source>
         <translation>hitro, malo stisnjeno</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="453"/>
+        <location filename="../src/mainwindow.cpp" line="389"/>
         <source>slow, better compression</source>
         <translation>počasi, bolj stisnjeno</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="453"/>
+        <location filename="../src/mainwindow.cpp" line="389"/>
         <source>best compromise</source>
         <translation>najboljše razmerje</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="454"/>
+        <location filename="../src/mainwindow.cpp" line="390"/>
         <source>slowest, best compression</source>
         <translation>najpočasneje, najbolj stisnjeno</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="483"/>
+        <location filename="../src/mainwindow.cpp" line="419"/>
         <source>Free space on %1, where snapshot folder is placed: </source>
         <translation>Sprosti prostor na %1, na katerem se bo nahajala mapa posnetka:</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="486"/>
+        <location filename="../src/mainwindow.cpp" line="422"/>
         <source>The free space should be sufficient to hold the compressed data from / and /home
 
       If necessary, you can create more available space by removing previous snapshots and saved copies: %1 snapshots are taking up %2 of disk space.</source>
@@ -511,257 +440,232 @@
 </translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="498"/>
-        <location filename="../src/mainwindow.cpp" line="499"/>
+        <location filename="../src/mainwindow.cpp" line="434"/>
+        <location filename="../src/mainwindow.cpp" line="435"/>
         <source>Installing </source>
         <translation>Nameščanje</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="584"/>
+        <location filename="../src/mainwindow.cpp" line="533"/>
         <source>Please wait.</source>
         <translation>Prosimo, počakajte.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="586"/>
+        <location filename="../src/mainwindow.cpp" line="535"/>
         <source>Please wait. Calculating used disk space...</source>
         <translation>Prosimo, počakajte. Računam porabo prostora na disku...</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="313"/>
-        <location filename="../src/mainwindow.cpp" line="330"/>
-        <location filename="../src/mainwindow.cpp" line="337"/>
-        <location filename="../src/mainwindow.cpp" line="620"/>
-        <location filename="../src/mainwindow.cpp" line="627"/>
-        <location filename="../src/mainwindow.cpp" line="709"/>
-        <location filename="../src/mainwindow.cpp" line="728"/>
-        <location filename="../src/mainwindow.cpp" line="966"/>
+        <location filename="../src/mainwindow.cpp" line="272"/>
+        <location filename="../src/mainwindow.cpp" line="569"/>
+        <location filename="../src/mainwindow.cpp" line="576"/>
+        <location filename="../src/mainwindow.cpp" line="658"/>
+        <location filename="../src/mainwindow.cpp" line="669"/>
+        <location filename="../src/mainwindow.cpp" line="911"/>
         <source>Error</source>
         <translation>Napaka</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="177"/>
-        <source>No diff output available.</source>
-        <translation>diff izpis je prazen</translation>
-    </message>
-    <message>
-        <location filename="../src/mainwindow.cpp" line="210"/>
-        <location filename="../src/mainwindow.cpp" line="246"/>
+        <location filename="../src/mainwindow.cpp" line="172"/>
+        <location filename="../src/mainwindow.cpp" line="208"/>
         <source>Updated Exclusion List</source>
         <translation>Posodobljen izločitveni seznam</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="213"/>
+        <location filename="../src/mainwindow.cpp" line="175"/>
         <source>The exclusion file at %1 is newer than your configured file at %2.</source>
         <translation>Izločitvena datoteka v %1 je novejša od nastavljene datoteke v %2.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="215"/>
+        <location filename="../src/mainwindow.cpp" line="177"/>
         <source>Review the changes below. Keep your custom file or replace it with the updated default.</source>
         <translation>Spodaj preverite spremembe. Obdržite prirejeno datoteko ali jo zamenjajte s posodobljeno privzeto.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="221"/>
+        <location filename="../src/mainwindow.cpp" line="183"/>
         <source>Show Differences</source>
         <translation>Prikaži razliko</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="227"/>
+        <location filename="../src/mainwindow.cpp" line="189"/>
         <source>Keep Custom</source>
         <translation>Obdrži prirejeno</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="233"/>
+        <location filename="../src/mainwindow.cpp" line="195"/>
         <source>Use Updated Default</source>
         <translation>Uporabi posodobljeno privzeto</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="314"/>
-        <source>Default exclusion file not found at %1.</source>
-        <translation>Privzeta izločitvena datoteka ni bila najdena</translation>
+        <location filename="../src/mainwindow.cpp" line="481"/>
+        <source>Done</source>
+        <translation>Zaključeno</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="326"/>
-        <source>Warning</source>
-        <translation>Opozorilo</translation>
-    </message>
-    <message>
-        <location filename="../src/mainwindow.cpp" line="327"/>
-        <source>Could not backup existing exclusion file to %1.</source>
-        <translation>Obstoječe izločitvene datoteke ni bilo mogoče varnostno kopirati v v %1</translation>
-    </message>
-    <message>
-        <location filename="../src/mainwindow.cpp" line="331"/>
-        <source>Could not remove existing exclusion file at %1.</source>
-        <translation>Obstoječe izločitvene datoteke v %1 ni bilo mogoče odstraniti</translation>
-    </message>
-    <message>
-        <location filename="../src/mainwindow.cpp" line="338"/>
-        <source>Could not copy default exclusion file from %1 to %2.</source>
-        <translation>Obstoječe izločitvene datoteke ni bilo mogoče kopirati iz %1 v %2</translation>
-    </message>
-    <message>
-        <location filename="../src/mainwindow.cpp" line="621"/>
+        <location filename="../src/mainwindow.cpp" line="570"/>
         <source>Output file %1 already exists. Please use another file name, or delete the existent file.</source>
         <translation>Izhodna datoteka %1 že obstaja. Uporabite drugo ime ali izbirišite obstoječo datoteko.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="628"/>
+        <location filename="../src/mainwindow.cpp" line="577"/>
         <source>Insufficient free space. Please select a different snapshot directory or free up space.</source>
         <translation>Premalo prostora. Izberite drugo mapo posnetka ali sprostite več prostora.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="632"/>
+        <location filename="../src/mainwindow.cpp" line="581"/>
         <source>Settings</source>
         <translation>Nastavitve</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="638"/>
+        <location filename="../src/mainwindow.cpp" line="587"/>
         <source>Snapshot will use the following settings:</source>
         <translation>Za posnetek bodo uporabljene naslednje nastavitve:</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="640"/>
+        <location filename="../src/mainwindow.cpp" line="589"/>
         <source>- Snapshot directory:</source>
         <translation>- Direktorij posnetka:</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="641"/>
+        <location filename="../src/mainwindow.cpp" line="590"/>
         <source>- Kernel to be used:</source>
         <translation>- Uporabljeno jedro:</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="665"/>
-        <location filename="../src/mainwindow.cpp" line="674"/>
+        <location filename="../src/mainwindow.cpp" line="614"/>
+        <location filename="../src/mainwindow.cpp" line="623"/>
         <source>NVIDIA Detected</source>
         <translation>NVIDIA je zaznana</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="666"/>
+        <location filename="../src/mainwindow.cpp" line="615"/>
         <source>This computer uses an NVIDIA graphics card. Are you planning to use the resulting ISO on the same computer or another computer with an NVIDIA card?</source>
         <translation>Ta računalnik uporablja Nvidia grafično kartico. Ali nameravate uporabiti ISO na istem ali drugem računalniku z Nvidia kartico?</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="670"/>
+        <location filename="../src/mainwindow.cpp" line="619"/>
         <source>NVIDIA Selected</source>
         <translation>NVIDIA je izbrana</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="671"/>
+        <location filename="../src/mainwindow.cpp" line="620"/>
         <source>Note: If you use the resulting ISO on a computer without an NVIDIA card, you will likely need to remove &apos;xorg=nvidia&apos; from the boot options.</source>
         <translation>Opomba: Če končni ISO uporabite na računalniku brez NVIDIA kartice, bo verjetno potrebno odstraniti &apos;xorg=nvidia&apos; iz možnosti zagona.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="675"/>
+        <location filename="../src/mainwindow.cpp" line="624"/>
         <source>Note: If you use the resulting ISO on a computer with an NVIDIA card, you may need to add &apos;xorg=nvidia&apos; to the boot options.</source>
         <translation>Opomba: Če končni ISO uporabite na računalniku z NVIDIA kartice, bo verjetno potrebno dodati &apos;xorg=nvidia&apos; v možnosti zagona.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="710"/>
+        <location filename="../src/mainwindow.cpp" line="273"/>
+        <location filename="../src/mainwindow.cpp" line="659"/>
         <source>Could not replace the exclusion file with the updated default.</source>
         <translation>Obstoječe izločitvene datoteke ni bilo mogoče nadomestiti s posodobljeno privzeto.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="729"/>
+        <location filename="../src/mainwindow.cpp" line="670"/>
         <source>Current kernel doesn&apos;t support selected compression algorithm, please edit the configuration file and select a different algorithm.</source>
         <translation>Trenutno jedro ne podpira izbranega algoritma za stiskanje podatkov. Prosimo, uredite konfiguracijsko datoteko in izberite drug algoritem.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="752"/>
+        <location filename="../src/mainwindow.cpp" line="693"/>
         <source>Final chance</source>
         <translation>Zadnja priložnost</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="754"/>
+        <location filename="../src/mainwindow.cpp" line="695"/>
         <source>Snapshot now has all the information it needs to create an ISO from your running system.</source>
         <translation>Posnetek ima sedaj vse potrebne informacije, da ustvari ISO vašega sistema.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="755"/>
+        <location filename="../src/mainwindow.cpp" line="696"/>
         <source>It will take some time to finish, depending on the size of the installed system and the capacity of your computer.</source>
         <translation>Opravilo potrebuje svoj čas, ta pa je odvisen od velikosti sistema in zmogljivosti računalnika.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="757"/>
+        <location filename="../src/mainwindow.cpp" line="698"/>
         <source>OK to start?</source>
         <translation>Lahko začnem?</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="761"/>
+        <location filename="../src/mainwindow.ui" line="824"/>
+        <location filename="../src/mainwindow.cpp" line="702"/>
         <source>Shutdown computer when done.</source>
         <translation>Po končanem opravilu ugasni računalnik.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="794"/>
+        <location filename="../src/mainwindow.cpp" line="736"/>
         <source>Output</source>
         <translation>Izhod</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="810"/>
+        <location filename="../src/mainwindow.cpp" line="756"/>
         <source>Close</source>
         <translation>Zapri</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="817"/>
+        <location filename="../src/mainwindow.cpp" line="810"/>
         <source>Edit Boot Menu</source>
         <translation>Uredi zagonski meni</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="818"/>
+        <location filename="../src/mainwindow.cpp" line="811"/>
         <source>The program will now pause to allow you to edit any files in the work directory. Select Yes to edit the boot menu or select No to bypass this step and continue creating the snapshot.</source>
         <translation>Program se bo sedaj zaustavil in omogočil urejanje datotek v delovnem direktoriju. Izberite Yes/ da za urejanje zagonskega menija ali No/ ne, če želite zaobiti ta korak in nadaljevati ustvarjanje posnetka.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="854"/>
+        <location filename="../src/mainwindow.cpp" line="847"/>
         <source>Revert the exclusion list to the default file? This will overwrite your current exclusions.</source>
         <translation>Ali naj povrnem izločitveni seznam na privzeto datoteko. To bo povozilo trenutni seznam izločanja.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="934"/>
+        <location filename="../src/mainwindow.cpp" line="879"/>
         <source>About %1</source>
         <translation>O %1</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="936"/>
+        <location filename="../src/mainwindow.cpp" line="881"/>
         <source>Version: </source>
         <translation>Različica:</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="937"/>
+        <location filename="../src/mainwindow.cpp" line="882"/>
         <source>Program for creating a live-CD from the running system for MX Linux</source>
         <translation>Program za ustvarjanje živega CDja iz zagnanega sistema za MX Linux</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="939"/>
+        <location filename="../src/mainwindow.cpp" line="884"/>
         <source>Copyright (c) MX Linux</source>
         <translation>Copyright (c) MX Linux</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="941"/>
+        <location filename="../src/mainwindow.cpp" line="886"/>
         <source>%1 License</source>
         <translation>%1 licenca</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="954"/>
+        <location filename="../src/mainwindow.cpp" line="899"/>
         <source>%1 Help</source>
         <translation>%1 pomoč</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="959"/>
+        <location filename="../src/mainwindow.cpp" line="904"/>
         <source>Select Snapshot Directory</source>
         <translation>Določite direktorij posnetka</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="967"/>
+        <location filename="../src/mainwindow.cpp" line="912"/>
         <source>Insufficient free space in the selected directory. Please choose a different location.</source>
         <translation>Premalo prostora v izbrani mapi. Izberite drugo lokacijo.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="987"/>
+        <location filename="../src/mainwindow.cpp" line="932"/>
         <source>Confirmation</source>
         <translation>Potrditev</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="987"/>
+        <location filename="../src/mainwindow.cpp" line="932"/>
         <source>Are you sure you want to quit the application?</source>
         <translation>Ali ste prepričani, da želite zapustiti aplikacijo?</translation>
     </message>
@@ -884,183 +788,188 @@
         <translation>Po končanem opravilu ugasni računalnik</translation>
     </message>
     <message>
-        <location filename="../src/main.cpp" line="213"/>
+        <location filename="../src/main.cpp" line="140"/>
+        <source>Use grub for legacy mbr iso boot instead of isolinux/syslinux.</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/main.cpp" line="214"/>
         <source>You seem to be logged in as root, please log out and log in as normal user to use this program.</source>
         <translation>Prijevljeni ste kot korenski uporabnik. Izpišite se in se ponovno prijavite kot običajen uporabnik, če želite uporabljati ta program.</translation>
     </message>
     <message>
-        <location filename="../src/main.cpp" line="231"/>
+        <location filename="../src/main.cpp" line="232"/>
         <source>version:</source>
         <translation>različica:</translation>
     </message>
     <message>
-        <location filename="../src/main.cpp" line="225"/>
+        <location filename="../src/main.cpp" line="226"/>
         <source>You must run this program with sudo or pkexec.</source>
         <translation>Ta program morate zagnati s sudo ali pkexec</translation>
     </message>
     <message>
-        <location filename="../src/main.cpp" line="208"/>
+        <location filename="../src/main.cpp" line="209"/>
         <source>MX Snapshot</source>
         <translation>MX posnetek</translation>
     </message>
     <message>
-        <location filename="../src/main.cpp" line="215"/>
-        <location filename="../src/main.cpp" line="283"/>
-        <location filename="../src/settings.cpp" line="524"/>
-        <location filename="../src/settings.cpp" line="532"/>
-        <location filename="../src/settings.cpp" line="1062"/>
-        <location filename="../src/settings.cpp" line="1156"/>
+        <location filename="../src/settings.cpp" line="526"/>
+        <location filename="../src/settings.cpp" line="534"/>
+        <location filename="../src/settings.cpp" line="1057"/>
+        <location filename="../src/settings.cpp" line="1153"/>
+        <location filename="../src/main.cpp" line="216"/>
+        <location filename="../src/main.cpp" line="284"/>
         <source>Error</source>
         <translation>Napaka</translation>
     </message>
     <message>
-        <location filename="../src/main.cpp" line="282"/>
-        <location filename="../src/settings.cpp" line="531"/>
+        <location filename="../src/settings.cpp" line="533"/>
+        <location filename="../src/main.cpp" line="283"/>
         <source>Current kernel doesn&apos;t support Squashfs, cannot continue.</source>
         <translation>Trenutno jedro ne podpira Squashfs. Ne morem nadaljevati.</translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="97"/>
+        <location filename="../src/settings.cpp" line="99"/>
         <source>Failed to initialize configuration</source>
         <translation>Napaka pri inicializaciji konfiguracije</translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="131"/>
+        <location filename="../src/settings.cpp" line="133"/>
         <source>Configuration validation failed</source>
         <translation>Preverjanje konfiguracije ni uspelo</translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="136"/>
+        <location filename="../src/settings.cpp" line="138"/>
         <source>Exception during initialization: %1</source>
         <translation>Napaka med inicializacijo: %1</translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="139"/>
+        <location filename="../src/settings.cpp" line="141"/>
         <source>Unknown exception during initialization</source>
         <translation>Neznana napak med inicializacijo</translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="170"/>
+        <location filename="../src/settings.cpp" line="172"/>
         <source>Could not create work directory. </source>
         <translation>Ni bilo mogoče ustvariti delovne mape</translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="197"/>
+        <location filename="../src/settings.cpp" line="199"/>
         <source>Could not create temp directory:</source>
         <translation>Ni bilo mogoče ustvariti začasne mape</translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="198"/>
+        <location filename="../src/settings.cpp" line="200"/>
         <source>Please check that the parent directory exists and is writable:</source>
         <translation>Preverite, da starševska mapa obstaja in da je zapisljiva:</translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="216"/>
+        <location filename="../src/settings.cpp" line="218"/>
         <source>Compression format &apos;%1&apos; is not supported by the current kernel</source>
         <translation>Format stiskanja &apos;%1&apos; ni podprt v trenutnem jedru</translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="222"/>
+        <location filename="../src/settings.cpp" line="224"/>
         <source>Invalid cores setting: %1. Must be between 1 and %2</source>
         <translation>Napačne nastavitve jedra: %1. Mora biti med %1 in %2</translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="228"/>
+        <location filename="../src/settings.cpp" line="230"/>
         <source>Invalid throttle setting: %1. Must be between 0 and 20</source>
         <translation>Napačne nastavitve pospeška: %1, Mora biti med 0 in 20</translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="234"/>
+        <location filename="../src/settings.cpp" line="236"/>
         <source>Snapshot directory cannot be empty</source>
         <translation>Mapa posnetka ne more biti prazna</translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="242"/>
+        <location filename="../src/settings.cpp" line="244"/>
         <source>Snapshot name cannot be empty</source>
         <translation>Ime posnetka ne more biti prazno</translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="248"/>
+        <location filename="../src/settings.cpp" line="250"/>
         <source>Snapshot name contains invalid characters: %1</source>
         <translation>Ime posnetka vsebuje napačne znake: %1</translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="254"/>
+        <location filename="../src/settings.cpp" line="256"/>
         <source>Kernel version cannot be empty</source>
         <translation>Različica jedra ne more biti prazna</translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="259"/>
+        <location filename="../src/settings.cpp" line="261"/>
         <source>Kernel file not found: /boot/vmlinuz-%1</source>
         <translation>Datoteka jedra ni bila najdena: /boot/vmlinuz-%1</translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="265"/>
+        <location filename="../src/settings.cpp" line="267"/>
         <source>Kernel %1 doesn&apos;t support Squashfs</source>
         <translation>Jedro %1 ne podpira Squashfs</translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="296"/>
+        <location filename="../src/settings.cpp" line="298"/>
         <source>Exclusion file does not exist: %1</source>
         <translation>Izločitvena datoteka ne obstaja: %1</translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="305"/>
+        <location filename="../src/settings.cpp" line="307"/>
         <source>Unbalanced quotes in exclusion list</source>
         <translation>Nesorazmerno število narekovajev v izločitvenem seznamu</translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="330"/>
+        <location filename="../src/settings.cpp" line="332"/>
         <source>Insufficient free space: %1 KiB available, minimum %2 KiB required</source>
         <translation>Premalo prostora: %1 KiB na voljo, potrebno je najmanj %2 KiB</translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="337"/>
+        <location filename="../src/settings.cpp" line="339"/>
         <source>Insufficient free space in work directory: %1 KiB available, minimum %2 KiB required</source>
         <translation>Premalo prostora v delovni mapi: %1 KiB na voljo, potrebno je najmanj %2 KiB</translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="352"/>
+        <location filename="../src/settings.cpp" line="354"/>
         <source>Failed to determine number of CPU cores</source>
         <translation>Ni mogoče določiti števila jeder procesorja</translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="358"/>
+        <location filename="../src/settings.cpp" line="360"/>
         <source>Configuration file does not exist: %1</source>
         <translation>Nastavitvena datoteka ne obstaja: %1</translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="359"/>
+        <location filename="../src/settings.cpp" line="361"/>
         <source>Using default settings</source>
         <translation>Uporaba privzetih vrednosti</translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="361"/>
+        <location filename="../src/settings.cpp" line="363"/>
         <source>Cannot read configuration file: %1</source>
         <translation>Ne morem prebrati nastavitvene datoteke: %1</translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="362"/>
+        <location filename="../src/settings.cpp" line="364"/>
         <source>Error: %1</source>
         <translation>Napaka: %1</translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="372"/>
+        <location filename="../src/settings.cpp" line="374"/>
         <source>Required tool not found: %1</source>
         <translation>Zahtevano orodje ni bilo najdeno: %1</translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="381"/>
+        <location filename="../src/settings.cpp" line="383"/>
         <source>Required directory not found: %1</source>
         <translation>Zahtevana mapa ni bila najdena: %1</translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="400"/>
+        <location filename="../src/settings.cpp" line="402"/>
         <source>Initialization Error</source>
         <translation>Napaka pri inicializaciji</translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="401"/>
+        <location filename="../src/settings.cpp" line="403"/>
         <source>Failed to initialize application settings:
 
 %1</source>
@@ -1069,47 +978,47 @@
 %1</translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="522"/>
+        <location filename="../src/settings.cpp" line="524"/>
         <source>Could not find a usable kernel</source>
         <translation>Ni bilo mogoče najti uporabnega jedra</translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="523"/>
+        <location filename="../src/settings.cpp" line="525"/>
         <source>Searched for kernel files in /boot/ but none were found or accessible.</source>
         <translation>Iskanje datotek jedra v /boot/ ni obrodilo sadov ali pa te niso dostopne.</translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="544"/>
+        <location filename="../src/settings.cpp" line="546"/>
         <source>No users found in the system</source>
         <translation>Noben uporabnik ni bil najden v sistemu</translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="547"/>
+        <location filename="../src/settings.cpp" line="549"/>
         <source>Failed to determine system information</source>
         <translation>Ni bilo mogče določiti podatkov o sistemu</translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="641"/>
+        <location filename="../src/settings.cpp" line="660"/>
         <source>Used space on / (root): </source>
         <translation>Porabljen prostor na / (koren):</translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="644"/>
+        <location filename="../src/settings.cpp" line="663"/>
         <source>estimated</source>
         <translation>ocena</translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="653"/>
+        <location filename="../src/settings.cpp" line="672"/>
         <source>Used space on /home: </source>
         <translation>Porabljen prostor na /home:</translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="709"/>
+        <location filename="../src/settings.cpp" line="728"/>
         <source>Free space on %1, where snapshot folder is placed: </source>
         <translation>Sprostite prostor na %1, na katerem se bo nahajala mapa posnetka:</translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="713"/>
+        <location filename="../src/settings.cpp" line="732"/>
         <source>The free space should be sufficient to hold the compressed data from / and /home
 
       If necessary, you can create more available space
@@ -1124,68 +1033,68 @@
 </translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="727"/>
+        <location filename="../src/settings.cpp" line="746"/>
         <source>Desktop</source>
         <translation>Namizje</translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="728"/>
+        <location filename="../src/settings.cpp" line="747"/>
         <source>Documents</source>
         <translation>Dokumenti</translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="729"/>
+        <location filename="../src/settings.cpp" line="748"/>
         <source>Downloads</source>
         <translation>Prenosi</translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="730"/>
+        <location filename="../src/settings.cpp" line="749"/>
         <source>Flatpaks</source>
         <translation>Flatpaks</translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="731"/>
+        <location filename="../src/settings.cpp" line="750"/>
         <source>Music</source>
         <translation>Glasba</translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="732"/>
+        <location filename="../src/settings.cpp" line="751"/>
         <source>Networks</source>
         <translation>Omrežja</translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="733"/>
+        <location filename="../src/settings.cpp" line="752"/>
         <source>Pictures</source>
         <translation>Slike</translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="735"/>
+        <location filename="../src/settings.cpp" line="754"/>
         <source>Videos</source>
         <translation>Video</translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="884"/>
+        <location filename="../src/settings.cpp" line="879"/>
         <source>Error reading system configuration file: %1</source>
         <translation>Napaka pri branju sistemske nastavitvene datoteke: %1</translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="892"/>
+        <location filename="../src/settings.cpp" line="887"/>
         <source>Error accessing user configuration</source>
         <translation>Napaka pri dostopu do nastavitev uporabnika</translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="944"/>
+        <location filename="../src/settings.cpp" line="939"/>
         <source>Could not copy exclusion file from %1 to %2</source>
         <translation>Izločitvene datoteke ni bilo mogoče kopirati iz %1 v %2</translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="969"/>
+        <location filename="../src/settings.cpp" line="964"/>
         <source>Invalid stored cores setting (%1). Using detected CPU count: %2</source>
         <translation>Napaćno shranjeno št. jeder (%1). Uporabljam zaznano število CPE: %2</translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="1060"/>
-        <location filename="../src/settings.cpp" line="1154"/>
+        <location filename="../src/settings.cpp" line="1055"/>
+        <location filename="../src/settings.cpp" line="1151"/>
         <source>Output file %1 already exists. Please use another file name, or delete the existent file.</source>
         <translation>Izhodna datoteka %1 že obstaja. Uporabite drugo ime ali izbirišite obstoječo datoteko.</translation>
     </message>
@@ -1221,150 +1130,181 @@
         <source>&amp;Close</source>
         <translation>&amp;Zapri</translation>
     </message>
+    <message>
+        <location filename="../src/excludesutils.cpp" line="77"/>
+        <source>No diff output available.</source>
+        <translation>diff izpis je prazen</translation>
+    </message>
+    <message>
+        <location filename="../src/excludesutils.cpp" line="89"/>
+        <source>Default exclusion file not found at %1.</source>
+        <translation>Privzeta izločitvena datoteka ni bila najdena</translation>
+    </message>
+    <message>
+        <location filename="../src/excludesutils.cpp" line="101"/>
+        <source>Could not backup existing exclusion file to %1.</source>
+        <translation>Obstoječe izločitvene datoteke ni bilo mogoče varnostno kopirati v v %1</translation>
+    </message>
+    <message>
+        <location filename="../src/excludesutils.cpp" line="105"/>
+        <source>Could not remove existing exclusion file at %1.</source>
+        <translation>Obstoječe izločitvene datoteke v %1 ni bilo mogoče odstraniti</translation>
+    </message>
+    <message>
+        <location filename="../src/excludesutils.cpp" line="112"/>
+        <source>Could not copy default exclusion file from %1 to %2.</source>
+        <translation>Obstoječe izločitvene datoteke ni bilo mogoče kopirati iz %1 v %2</translation>
+    </message>
 </context>
 <context>
     <name>Work</name>
     <message>
-        <location filename="../src/work.cpp" line="173"/>
+        <location filename="../src/work.cpp" line="192"/>
         <source>Cleaning...</source>
         <translation>Čistim...</translation>
     </message>
     <message>
-        <location filename="../src/work.cpp" line="189"/>
-        <location filename="../src/work.cpp" line="467"/>
+        <location filename="../src/work.cpp" line="208"/>
+        <location filename="../src/work.cpp" line="510"/>
         <source>Done</source>
         <translation>Zaključeno</translation>
     </message>
     <message>
-        <location filename="../src/work.cpp" line="201"/>
+        <location filename="../src/work.cpp" line="218"/>
         <source>Interrupted or failed to complete</source>
         <translation>Prekinjeno ali neuspelo pred zaključkom</translation>
     </message>
     <message>
-        <location filename="../src/work.cpp" line="237"/>
-        <location filename="../src/work.cpp" line="419"/>
-        <location filename="../src/work.cpp" line="447"/>
-        <location filename="../src/work.cpp" line="485"/>
-        <location filename="../src/work.cpp" line="626"/>
-        <location filename="../src/work.cpp" line="660"/>
-        <location filename="../src/work.cpp" line="673"/>
-        <location filename="../src/work.cpp" line="681"/>
+        <location filename="../src/work.cpp" line="254"/>
+        <location filename="../src/work.cpp" line="367"/>
+        <location filename="../src/work.cpp" line="452"/>
+        <location filename="../src/work.cpp" line="489"/>
+        <location filename="../src/work.cpp" line="526"/>
+        <location filename="../src/work.cpp" line="667"/>
+        <location filename="../src/work.cpp" line="701"/>
+        <location filename="../src/work.cpp" line="714"/>
+        <location filename="../src/work.cpp" line="722"/>
         <source>Error</source>
         <translation>Napaka</translation>
     </message>
     <message>
-        <location filename="../src/work.cpp" line="238"/>
+        <location filename="../src/work.cpp" line="255"/>
         <source>There&apos;s not enough free space on your target disk, you need at least %1</source>
         <translation>Na ciljnem disku ni dovolj prostora. Potrebujete vsaj %1</translation>
     </message>
     <message>
-        <location filename="../src/work.cpp" line="241"/>
+        <location filename="../src/work.cpp" line="258"/>
         <source>You have %1 free space on %2</source>
         <translation>Na %2 imate %1 prostora</translation>
     </message>
     <message>
-        <location filename="../src/work.cpp" line="244"/>
+        <location filename="../src/work.cpp" line="261"/>
         <source>If you are sure you have enough free space rerun the program with -o/--override-size option</source>
         <translation>Če ste prepričani, da imate dovolj praznega prostora, ponovno zaženite program z opcijo -o/--override-size</translation>
     </message>
     <message>
-        <location filename="../src/work.cpp" line="330"/>
+        <location filename="../src/work.cpp" line="347"/>
         <source>Copying the new-iso filesystem...</source>
         <translation>Kopiranje novega iso datotečnega sistema</translation>
     </message>
     <message>
-        <location filename="../src/work.cpp" line="348"/>
+        <location filename="../src/work.cpp" line="368"/>
+        <source>--grub-mbr option specified but boot/grub/i386-pc/eltorito.img is missing from iso-template</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/work.cpp" line="380"/>
         <source>Could not create temp directory. </source>
         <translation>Začasnega direktorija ni bilo mogoče ustvariti.</translation>
     </message>
     <message>
-        <location filename="../src/work.cpp" line="416"/>
+        <location filename="../src/work.cpp" line="449"/>
         <source>Squashing filesystem...</source>
         <translation>Stiskam datotečni sistem...</translation>
     </message>
     <message>
-        <location filename="../src/work.cpp" line="420"/>
+        <location filename="../src/work.cpp" line="453"/>
         <source>Could not create linuxfs file, please check /var/log/%1.log</source>
         <translation>Ni bilo mogoče ustvariti linuxfs datoteke. Preverite /var/log%1.log</translation>
     </message>
     <message>
-        <location filename="../src/work.cpp" line="444"/>
+        <location filename="../src/work.cpp" line="486"/>
         <source>Creating CD/DVD image file...</source>
         <translation>Ustvarjam posnetek CD/DVD nosilca...</translation>
     </message>
     <message>
-        <location filename="../src/work.cpp" line="448"/>
+        <location filename="../src/work.cpp" line="490"/>
         <source>Could not create ISO file, please check whether you have enough space on the destination partition.</source>
         <translation>Neuspelo ustvarjanje ISO datoteke. Preverite ali je na ciljnem razdelku dovolj prostora.</translation>
     </message>
     <message>
-        <location filename="../src/work.cpp" line="454"/>
+        <location filename="../src/work.cpp" line="496"/>
         <source>Making hybrid iso</source>
         <translation>Ustvarjam hibridni iso</translation>
     </message>
     <message>
-        <location filename="../src/work.cpp" line="472"/>
+        <location filename="../src/work.cpp" line="514"/>
         <source>Success</source>
         <translation>Uspešno</translation>
     </message>
     <message>
-        <location filename="../src/work.cpp" line="473"/>
+        <location filename="../src/work.cpp" line="515"/>
         <source>MX Snapshot completed successfully!</source>
         <translation>MX posnetek je uspešno zaključil delo!</translation>
     </message>
     <message>
-        <location filename="../src/work.cpp" line="474"/>
+        <location filename="../src/work.cpp" line="516"/>
         <source>Snapshot took %1 to finish.</source>
         <translation>Posnetek je potreboval %1 za dokončanje.</translation>
     </message>
     <message>
-        <location filename="../src/work.cpp" line="475"/>
+        <location filename="../src/work.cpp" line="517"/>
         <source>Thanks for using MX Snapshot, run MX Live USB Maker next!</source>
         <translation>Hvala, ker uporabljate MX posnetek. Zdaj zaženite MX ustvarjalec živih usb nosilcev</translation>
     </message>
     <message>
-        <location filename="../src/work.cpp" line="482"/>
+        <location filename="../src/work.cpp" line="523"/>
         <source>Installing </source>
         <translation>Nameščanje</translation>
     </message>
     <message>
-        <location filename="../src/work.cpp" line="485"/>
+        <location filename="../src/work.cpp" line="526"/>
         <source>Could not install </source>
         <translation>Namesitev ni uspela</translation>
     </message>
     <message>
-        <location filename="../src/work.cpp" line="495"/>
+        <location filename="../src/work.cpp" line="536"/>
         <source>Calculating checksum...</source>
         <translation>Računanje nadzorne vsote...</translation>
     </message>
     <message>
-        <location filename="../src/work.cpp" line="536"/>
+        <location filename="../src/work.cpp" line="577"/>
         <source>Building new initrd...</source>
         <translation>Ustvarjam nov initrd...</translation>
     </message>
     <message>
-        <location filename="../src/work.cpp" line="627"/>
+        <location filename="../src/work.cpp" line="668"/>
         <source>Could not create working directory. </source>
         <translation>Nisem mogel ustvariti delovne mape: </translation>
     </message>
     <message>
-        <location filename="../src/work.cpp" line="661"/>
+        <location filename="../src/work.cpp" line="702"/>
         <source>Could not prepare a safe bind-root overlay. Snapshot cannot continue.</source>
         <translation>Ni bilo mogoče ustvariti varnega prekrivnega sloja korena. Posnetek ne more nadaljevati.</translation>
     </message>
     <message>
-        <location filename="../src/work.cpp" line="674"/>
-        <location filename="../src/work.cpp" line="682"/>
+        <location filename="../src/work.cpp" line="715"/>
+        <location filename="../src/work.cpp" line="723"/>
         <source>Could not prepare the snapshot bind-root environment.</source>
         <translation>Ne morem ustvariti varnega prekrivnega sloja korena.</translation>
     </message>
     <message>
-        <location filename="../src/work.cpp" line="986"/>
+        <location filename="../src/work.cpp" line="1029"/>
         <source>Calculating total size of excluded files...</source>
         <translation>Računanje skupne velikosti izločenih datotek</translation>
     </message>
     <message>
-        <location filename="../src/work.cpp" line="1012"/>
+        <location filename="../src/work.cpp" line="1055"/>
         <source>Calculating size of root...</source>
         <translation>Računanje velikosti korena...</translation>
     </message>

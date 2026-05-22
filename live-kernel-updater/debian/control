@@ -8,7 +8,7 @@ Homepage: https://gitlab.com/antiX-Linux/live-kernel-updater
 
 Package: live-kernel-updater
 Architecture: all
-Depends: cli-shell-utils 
+Depends: cli-shell-utils, file, sbsigntool
 Description: This is a command line program that updates the kernel on a antiX or MX
  live-usb. It can update a running live-usb or a live-usb that is plugged
  into a host system.        

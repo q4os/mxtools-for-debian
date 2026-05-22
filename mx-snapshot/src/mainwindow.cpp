@@ -49,10 +49,10 @@
 #include <QTime>
 
 #include "about.h"
+#include "excludesutils.h"
 #include "settings.h"
 #include "work.h"
 #include <chrono>
-#include <utime.h>
 
 using namespace std::chrono_literals;
 
@@ -97,6 +97,7 @@ void MainWindow::loadSettings()
     ui->textProjectName->setText(settings->projectName);
     ui->textOptions->setText(settings->bootOptions);
     ui->pushReleaseDate->setText(settings->releaseDate);
+    ui->checkShutdownOutput->setChecked(settings->shutdown);
     QDir bootDir("/boot");
     QStringList kernelFiles = bootDir.entryList({"vmlinuz-*"}, QDir::Files | QDir::NoDotAndDotDot, QDir::Name);
     std::transform(kernelFiles.begin(), kernelFiles.end(), kernelFiles.begin(),
@@ -136,48 +137,8 @@ bool MainWindow::hasCustomExcludes() const
 
 bool MainWindow::isSourceExcludesNewer(QString &diffOutput) const
 {
-    const QString configuredPath = settings->snapshotExcludes.fileName();
-    const QString sourcePath = settings->getExcludesSourcePath();
-
-    if (sourcePath.isEmpty() || configuredPath.isEmpty()) {
-        return false;
-    }
-
-    const QFileInfo configuredInfo(configuredPath);
-    const QFileInfo sourceInfo(sourcePath);
-
-    if (!configuredInfo.exists() || !sourceInfo.exists()) {
-        return false;
-    }
-
-    if (sourceInfo.lastModified() <= configuredInfo.lastModified()) {
-        return false;
-    }
-
-    QProcess diffProcess;
-    diffProcess.start("diff", {"--unified", configuredPath, sourcePath});
-    if (!diffProcess.waitForFinished()) {
-        qWarning() << "Unable to compare excludes files with diff:" << configuredPath << sourcePath;
-        return false;
-    }
-
-    const int diffResult = diffProcess.exitCode();
-    if (diffResult == 0) {
-        return false;
-    }
-    if (diffResult != 1) {
-        qWarning() << "Unable to compare excludes files with diff:" << configuredPath << sourcePath;
-        return false;
-    }
-
-    diffOutput = QString::fromUtf8(diffProcess.readAllStandardOutput());
-    if (diffOutput.isEmpty()) {
-        diffOutput = QString::fromUtf8(diffProcess.readAllStandardError());
-    }
-    if (diffOutput.isEmpty()) {
-        diffOutput = tr("No diff output available.");
-    }
-    return true;
+    return ExcludesUtils::isSourceExcludesNewer(settings->snapshotExcludes.fileName(),
+                                                settings->getExcludesSourcePath(), diffOutput);
 }
 
 void MainWindow::updateCustomExcludesButton()
@@ -306,38 +267,11 @@ bool MainWindow::resetCustomExcludes()
     const QString configuredPath = settings->snapshotExcludes.fileName();
     const QString sourcePath = settings->getExcludesSourcePath();
 
-    if (sourcePath.isEmpty() || configuredPath.isEmpty()) {
-        return false;
-    }
-
-    if (!QFileInfo::exists(sourcePath)) {
-        QMessageBox::warning(this, tr("Error"),
-                             tr("Default exclusion file not found at %1.").arg(sourcePath));
-        return false;
-    }
-
-    const QString targetDir = QFileInfo(configuredPath).absolutePath();
-    if (!targetDir.isEmpty()) {
-        QDir().mkpath(targetDir);
-    }
-
-    if (QFileInfo::exists(configuredPath)) {
-        const QString backupPath = configuredPath + "." + QDateTime::currentDateTime().toString("yyyyMMddhhmmss");
-        if (!QFile::copy(configuredPath, backupPath)) {
-            QMessageBox::warning(this, tr("Warning"),
-                                 tr("Could not backup existing exclusion file to %1.").arg(backupPath));
-        }
-        if (!QFile::remove(configuredPath)) {
+    if (!ExcludesUtils::resetCustomExcludes(configuredPath, sourcePath)) {
+        if (!sourcePath.isEmpty() && !configuredPath.isEmpty()) {
             QMessageBox::warning(this, tr("Error"),
-                                 tr("Could not remove existing exclusion file at %1.").arg(configuredPath));
-            return false;
+                                 tr("Could not replace the exclusion file with the updated default."));
         }
-    }
-
-    if (!QFile::copy(sourcePath, configuredPath)) {
-        QMessageBox::warning(this, tr("Error"),
-                             tr("Could not copy default exclusion file from %1 to %2.")
-                                 .arg(sourcePath, configuredPath));
         return false;
     }
 
@@ -374,9 +308,10 @@ void MainWindow::setConnections()
     connect(ui->btnHelp, &QPushButton::clicked, this, &MainWindow::btnHelp_clicked);
     connect(ui->btnNext, &QPushButton::clicked, this, &MainWindow::btnNext_clicked);
     connect(ui->btnSelectSnapshot, &QPushButton::clicked, this, &MainWindow::btnSelectSnapshot_clicked);
-    connect(ui->cbCompression, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
+    connect(ui->cbCompression, &QComboBox::currentIndexChanged, this,
             &MainWindow::cbCompression_currentIndexChanged);
     connect(ui->checkMd5, &QCheckBox::toggled, this, &MainWindow::checkMd5_toggled);
+    connect(ui->checkShutdownOutput, &QCheckBox::toggled, this, [this](bool checked) { settings->shutdown = checked; });
     connect(ui->checkSha512, &QCheckBox::toggled, this, &MainWindow::checkSha512_toggled);
     connect(ui->excludeAll, &QCheckBox::clicked, ui->excludeDesktop, &QCheckBox::setChecked);
     connect(ui->excludeAll, &QCheckBox::clicked, ui->excludeDocuments, &QCheckBox::setChecked);
@@ -388,16 +323,16 @@ void MainWindow::setConnections()
     connect(ui->excludeAll, &QCheckBox::clicked, ui->excludeSteam, &QCheckBox::setChecked);
     connect(ui->excludeAll, &QCheckBox::clicked, ui->excludeVideos, &QCheckBox::setChecked);
     connect(ui->excludeAll, &QCheckBox::clicked, ui->excludeVirtualBox, &QCheckBox::setChecked);
-    connect(ui->excludeDesktop, &QCheckBox::toggled, this, &MainWindow::excludeDesktop_toggled);
-    connect(ui->excludeDocuments, &QCheckBox::toggled, this, &MainWindow::excludeDocuments_toggled);
-    connect(ui->excludeDownloads, &QCheckBox::toggled, this, &MainWindow::excludeDownloads_toggled);
-    connect(ui->excludeFlatpaks, &QCheckBox::toggled, this, &MainWindow::excludeFlatpaks_toggled);
-    connect(ui->excludeMusic, &QCheckBox::toggled, this, &MainWindow::excludeMusic_toggled);
-    connect(ui->excludeNetworks, &QCheckBox::toggled, this, &MainWindow::excludeNetworks_toggled);
-    connect(ui->excludePictures, &QCheckBox::toggled, this, &MainWindow::excludePictures_toggled);
-    connect(ui->excludeSteam, &QCheckBox::toggled, this, &MainWindow::excludeSteam_toggled);
-    connect(ui->excludeVideos, &QCheckBox::toggled, this, &MainWindow::excludeVideos_toggled);
-    connect(ui->excludeVirtualBox, &QCheckBox::toggled, this, &MainWindow::excludeVirtualBox_toggled);
+    for (QCheckBox *cb : {ui->excludeDesktop, ui->excludeDocuments, ui->excludeDownloads,
+                           ui->excludeFlatpaks, ui->excludeMusic, ui->excludeNetworks,
+                           ui->excludePictures, ui->excludeSteam, ui->excludeVideos,
+                           ui->excludeVirtualBox}) {
+        connect(cb, &QCheckBox::toggled, this, [this](bool checked) {
+            if (!checked) {
+                ui->excludeAll->setChecked(false);
+            }
+        });
+    }
     connect(&excludesWatcher, &QFileSystemWatcher::fileChanged, this, [this](const QString &path) {
         Q_UNUSED(path);
         updateCustomExcludesButton();
@@ -416,8 +351,8 @@ void MainWindow::setConnections()
     });
     connect(ui->radioPersonal, &QRadioButton::clicked, this, &MainWindow::radioPersonal_clicked);
     connect(ui->radioRespin, &QRadioButton::toggled, this, &MainWindow::radioRespin_toggled);
-    connect(ui->spinCPU, QOverload<int>::of(&QSpinBox::valueChanged), this, &MainWindow::spinCPU_valueChanged);
-    connect(ui->spinThrottle, QOverload<int>::of(&QSpinBox::valueChanged), this,
+    connect(ui->spinCPU, &QSpinBox::valueChanged, this, &MainWindow::spinCPU_valueChanged);
+    connect(ui->spinThrottle, &QSpinBox::valueChanged, this,
             &MainWindow::spinThrottle_valueChanged);
 }
 
@@ -543,10 +478,15 @@ void MainWindow::processMsg(const QString &msg)
 {
     qDebug().noquote() << msg;
     ui->outputLabel->setText(msg);
+    ui->checkShutdownOutput->setVisible(msg != tr("Done"));
 }
 
 void MainWindow::procDone()
 {
+    if (!pendingOutputBuffer.isEmpty()) {
+        appendOutputLine(pendingOutputBuffer);
+        pendingOutputBuffer.clear();
+    }
     timer.stop();
     ui->progressBar->setValue(ui->progressBar->maximum());
     setCursor(QCursor(Qt::ArrowCursor));
@@ -566,13 +506,21 @@ void MainWindow::disableOutput()
 
 void MainWindow::outputAvailable(const QString &out)
 {
-    ui->outputBox->moveCursor(QTextCursor::End);
-    if (out.startsWith("\r")) {
-        ui->outputBox->moveCursor(QTextCursor::Up, QTextCursor::KeepAnchor);
-        ui->outputBox->moveCursor(QTextCursor::EndOfLine, QTextCursor::KeepAnchor);
+    for (const QChar ch : out) {
+        if (ch == '\r') {
+            if (!pendingOutputBuffer.isEmpty()) {
+                handleOutputLine(pendingOutputBuffer, true);
+                pendingOutputBuffer.clear();
+            }
+            continue;
+        }
+        if (ch == '\n') {
+            handleOutputLine(pendingOutputBuffer, false);
+            pendingOutputBuffer.clear();
+            continue;
+        }
+        pendingOutputBuffer += ch;
     }
-    ui->outputBox->insertPlainText(out);
-    ui->outputBox->verticalScrollBar()->setValue(ui->outputBox->verticalScrollBar()->maximum());
 }
 
 void MainWindow::progress()
@@ -661,7 +609,7 @@ void MainWindow::checkNvidiaGraphicsCard()
         return;
     }
 
-    if (work.shell.run("glxinfo | grep -q NVIDIA")) {
+    if (ExcludesUtils::hasNvidiaGraphicsCard(work.shell)) {
         if (QMessageBox::Yes
             == QMessageBox::question(this, tr("NVIDIA Detected"),
                                      tr("This computer uses an NVIDIA graphics card. Are you planning to use the "
@@ -711,15 +659,7 @@ void MainWindow::checkUpdatedDefaultExcludes()
                                  tr("Could not replace the exclusion file with the updated default."));
         }
     } else if (choice == ExcludesChoice::KeepCustom) {
-        utimbuf times {};
-        times.actime = QFileInfo(configuredPath).lastRead().toSecsSinceEpoch();
-        times.modtime = QDateTime::currentSecsSinceEpoch();
-        const int utimeResult = utime(configuredPath.toLocal8Bit().constData(), &times);
-        if (utimeResult == 0) {
-            qDebug() << "Updated modification time for custom excludes file via utime" << configuredPath;
-        } else {
-            qWarning() << "Failed to update modification time for custom excludes file" << configuredPath;
-        }
+        [[maybe_unused]] const bool touched = ExcludesUtils::touchExcludesTimestamp(configuredPath);
     }
 }
 
@@ -769,6 +709,7 @@ bool MainWindow::confirmStart()
         return false;
     }
     settings->shutdown = checkShutdown->isChecked();
+    ui->checkShutdownOutput->setChecked(settings->shutdown);
     return true;
 }
 
@@ -793,7 +734,11 @@ void MainWindow::prepareForOutput(const QString &file_name)
     ui->btnBack->setEnabled(false);
     ui->stackedWidget->setCurrentWidget(ui->outputPage);
     setWindowTitle(tr("Output"));
+    ui->checkShutdownOutput->setChecked(settings->shutdown);
+    ui->checkShutdownOutput->setVisible(true);
     ui->outputBox->clear();
+    pendingOutputBuffer.clear();
+    transientOutputLineActive = false;
     work.setupEnv();
     if (!settings->monthly && !settings->overrideSize) {
         work.checkEnoughSpace();
@@ -809,6 +754,53 @@ void MainWindow::prepareForOutput(const QString &file_name)
     displayOutput();
     work.createIso(file_name);
     ui->btnCancel->setText(tr("Close"));
+}
+
+void MainWindow::appendOutputLine(const QString &line)
+{
+    ui->outputBox->moveCursor(QTextCursor::End);
+    ui->outputBox->insertPlainText(line + '\n');
+    ui->outputBox->verticalScrollBar()->setValue(ui->outputBox->verticalScrollBar()->maximum());
+    transientOutputLineActive = false;
+}
+
+void MainWindow::handleOutputLine(const QString &line, bool transientHint)
+{
+    if (line.startsWith("xorriso : UPDATE :") || transientHint) {
+        showTransientOutputLine(line);
+        return;
+    }
+    if (line.isEmpty() && transientOutputLineActive) {
+        return;
+    }
+    appendOutputLine(line);
+}
+
+void MainWindow::showTransientOutputLine(const QString &line)
+{
+    QTextDocument *document = ui->outputBox->document();
+    if (!transientOutputLineActive) {
+        ui->outputBox->moveCursor(QTextCursor::End);
+        ui->outputBox->insertPlainText(line + '\n');
+        ui->outputBox->verticalScrollBar()->setValue(ui->outputBox->verticalScrollBar()->maximum());
+        transientOutputLineActive = true;
+        return;
+    }
+
+    // The trailing newline keeps an empty last block in the document,
+    // so the displayed transient line is the second-to-last block.
+    QTextBlock block = document->findBlockByNumber(document->blockCount() - 2);
+    if (!block.isValid()) {
+        appendOutputLine(line);
+        transientOutputLineActive = true;
+        return;
+    }
+
+    QTextCursor cursor(block);
+    cursor.select(QTextCursor::LineUnderCursor);
+    cursor.removeSelectedText();
+    cursor.insertText(line);
+    ui->outputBox->verticalScrollBar()->setValue(ui->outputBox->verticalScrollBar()->maximum());
 }
 
 void MainWindow::editBootMenu()
@@ -863,54 +855,6 @@ void MainWindow::btnRemoveCustomExclude_clicked()
     }
 }
 
-void MainWindow::excludeDocuments_toggled(bool checked)
-{
-    if (!checked) {
-        ui->excludeAll->setChecked(false);
-    }
-}
-
-void MainWindow::excludeDownloads_toggled(bool checked)
-{
-    if (!checked) {
-        ui->excludeAll->setChecked(false);
-    }
-}
-
-void MainWindow::excludeFlatpaks_toggled(bool checked)
-{
-    if (!checked) {
-        ui->excludeAll->setChecked(false);
-    }
-}
-
-void MainWindow::excludePictures_toggled(bool checked)
-{
-    if (!checked) {
-        ui->excludeAll->setChecked(false);
-    }
-}
-
-void MainWindow::excludeMusic_toggled(bool checked)
-{
-    if (!checked) {
-        ui->excludeAll->setChecked(false);
-    }
-}
-
-void MainWindow::excludeVideos_toggled(bool checked)
-{
-    if (!checked) {
-        ui->excludeAll->setChecked(false);
-    }
-}
-
-void MainWindow::excludeDesktop_toggled(bool checked)
-{
-    if (!checked) {
-        ui->excludeAll->setChecked(false);
-    }
-}
 
 void MainWindow::radioRespin_toggled(bool checked)
 {
@@ -1006,12 +950,6 @@ void MainWindow::cbCompression_currentIndexChanged()
     settings->compression = comp;
 }
 
-void MainWindow::excludeNetworks_toggled(bool checked)
-{
-    if (!checked) {
-        ui->excludeAll->setChecked(false);
-    }
-}
 
 void MainWindow::checkMd5_toggled(bool checked)
 {
@@ -1025,19 +963,6 @@ void MainWindow::checkSha512_toggled(bool checked)
     settings->makeSha512sum = checked;
 }
 
-void MainWindow::excludeSteam_toggled(bool checked)
-{
-    if (!checked) {
-        ui->excludeAll->setChecked(false);
-    }
-}
-
-void MainWindow::excludeVirtualBox_toggled(bool checked)
-{
-    if (!checked) {
-        ui->excludeAll->setChecked(false);
-    }
-}
 
 void MainWindow::spinCPU_valueChanged(int arg1)
 {

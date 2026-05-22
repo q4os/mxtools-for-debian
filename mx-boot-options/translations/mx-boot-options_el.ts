@@ -2,12 +2,12 @@
 <context>
     <name>Cmd</name>
     <message>
-        <location filename="../src/cmd.cpp" line="141"/>
+        <location filename="../src/cmd.cpp" line="204"/>
         <source>Administrator Access Required</source>
         <translation>Απαιτείται πρόσβαση διαχειριστή</translation>
     </message>
     <message>
-        <location filename="../src/cmd.cpp" line="142"/>
+        <location filename="../src/cmd.cpp" line="205"/>
         <source>This operation requires administrator privileges. Please restart the application and enter your password when prompted.</source>
         <translation>Αυτή η λειτουργία απαιτεί δικαιώματα διαχειριστή. Παρακαλώ επανεκκινήστε την εφαρμογή και πληκτρολογήστε τον κωδικό πρόσβασης σας όταν σας ζητηθεί.</translation>
     </message>
@@ -57,7 +57,7 @@
     <message>
         <location filename="../src/mainwindow.ui" line="78"/>
         <source>Set to &apos;0&apos; to boot immediately without displaying the menu, or to &apos;-1&apos; to wait indefinitely</source>
-        <translation>Ρύθμιση στο &apos;0&apos; για άμεση εκκίνηση χωρίς να εμφανίζεται το μενού ή στο &apos;-1&apos; για επ &apos;αόριστον παραμονή στο μενού</translation>
+        <translation>Ρύθμιση &apos;0&apos; για άμεση εκκίνηση χωρίς να εμφανίζεται το μενού ή &apos;-1&apos; για επ &apos;αόριστον παραμονή στο μενού</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="81"/>
@@ -77,7 +77,7 @@
     <message>
         <location filename="../src/mainwindow.ui" line="124"/>
         <source>With this option enabled whatever entry you select from the grub boot menu will be saved as the new default for future boots</source>
-        <translation>Με ενεργοποιημένη αυτή την επιλογή, όποια καταχώρηση επιλέξετε από το μενού εκκίνησης του grub, θα αποθηκευτεί ως η νέα προεπιλογή εκκίνησης στο μέλλον</translation>
+        <translation>Ενεργοποιώντας αυτή την επιλογή, όποια καταχώρηση επιλέξετε από το μενού εκκίνησης του grub, θα αποθηκευτεί ως η νέα προεπιλογή εκκίνησης στο μέλλον</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="127"/>
@@ -196,204 +196,206 @@
         <translation>Ακόμα τρέχει</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="437"/>
-        <location filename="../src/mainwindow.cpp" line="445"/>
-        <location filename="../src/mainwindow.cpp" line="479"/>
-        <location filename="../src/mainwindow.cpp" line="590"/>
-        <location filename="../src/mainwindow.cpp" line="1475"/>
-        <location filename="../src/mainwindow.cpp" line="1488"/>
-        <location filename="../src/mainwindow.cpp" line="1494"/>
+        <location filename="../src/mainwindow.cpp" line="602"/>
+        <location filename="../src/mainwindow.cpp" line="611"/>
+        <location filename="../src/mainwindow.cpp" line="645"/>
+        <location filename="../src/mainwindow.cpp" line="769"/>
+        <location filename="../src/mainwindow.cpp" line="1687"/>
+        <location filename="../src/mainwindow.cpp" line="1700"/>
+        <location filename="../src/mainwindow.cpp" line="1706"/>
         <source>Error</source>
         <translation>Σφάλμα</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="426"/>
+        <location filename="../src/mainwindow.cpp" line="591"/>
         <source>Installing bootsplash, please wait</source>
         <translation>Εγκατάσταση αρχικής οθόνης εκκίνησης, παρακαλώ περιμένετε</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="169"/>
-        <location filename="../src/mainwindow.cpp" line="1226"/>
+        <location filename="../src/mainwindow.cpp" line="1427"/>
         <source>Preview is disabled because &apos;splash&apos; parameter is not present in kernel command line. To enable preview, add &apos;splash&apos; to boot parameters and reboot.</source>
         <translation>Η προεπισκόπηση είναι απενεργοποιημένη επειδή δεν υπάρχει η παράμετρος «splash» στη γραμμή εντολών του πυρήνα. Για να την ενεργοποιήσετε, προσθέστε «splash» στις παραμέτρους εκκίνησης και κάνετε επανεκκίνηση.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="173"/>
-        <location filename="../src/mainwindow.cpp" line="1229"/>
+        <location filename="../src/mainwindow.cpp" line="1430"/>
         <source>Preview is disabled while running under Wayland. Please start an X11 session to preview Plymouth themes.</source>
         <translation>Η προεπισκόπηση είναι απενεργοποιημένη σε Wayland. Παρακαλώ εκκινήστε συνεδρία X11 για τη προεπισκόπιση θεμάτων Plymouth.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="433"/>
+        <location filename="../src/mainwindow.cpp" line="598"/>
         <source>Updating sources</source>
         <translation>Ενημέρωση πηγών</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="445"/>
+        <location filename="../src/mainwindow.cpp" line="611"/>
         <source>Could not install the bootsplash.</source>
         <translation>Δεν ήταν δυνατή η εγκατάσταση της αρχικής οθόνης εκκίνησης.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="590"/>
+        <location filename="../src/mainwindow.cpp" line="769"/>
         <source>Could not create a temporary folder</source>
         <translation>Δεν κατέστη δυνατή η δημιουργία προσωρινού φακέλου</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="599"/>
-        <location filename="../src/mainwindow.cpp" line="619"/>
+        <location filename="../src/mainwindow.cpp" line="775"/>
+        <location filename="../src/mainwindow.cpp" line="780"/>
+        <location filename="../src/mainwindow.cpp" line="799"/>
         <source>Cannot continue</source>
         <translation>Δεν μπορεί να συνεχιστεί</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="599"/>
+        <location filename="../src/mainwindow.cpp" line="775"/>
         <source>Cannot open LUKS device. Exiting...</source>
         <translation>Δεν μπορεί να ανοίξει η συσκευή LUKS. Έξοδος...</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="620"/>
+        <location filename="../src/mainwindow.cpp" line="781"/>
+        <location filename="../src/mainwindow.cpp" line="800"/>
         <source>Cannot create chroot environment, cannot change boot options. Exiting...</source>
         <translation>Δεν μπορεί να δημιουργηθεί περιβάλλον chroot, δεν μπορεί να γίνει αλλαγή στις επιλογές εκκίνησης. Έξοδος...</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="954"/>
-        <location filename="../src/mainwindow.cpp" line="1391"/>
+        <location filename="../src/mainwindow.cpp" line="1142"/>
+        <location filename="../src/mainwindow.cpp" line="1601"/>
         <source>Updating configuration, please wait</source>
         <translation>Ενημέρωση ρυθμίσεων, παρακαλώ περιμένετε</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1025"/>
+        <location filename="../src/mainwindow.cpp" line="1226"/>
         <source>Updating initramfs...</source>
         <translation>Ενημέρωση initramfs...</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1039"/>
-        <location filename="../src/mainwindow.cpp" line="1406"/>
+        <location filename="../src/mainwindow.cpp" line="1247"/>
+        <location filename="../src/mainwindow.cpp" line="1616"/>
         <source>Updating grub...</source>
         <translation>Ενημέρωση του grub...</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1064"/>
+        <location filename="../src/mainwindow.cpp" line="1274"/>
         <source>About %1</source>
         <translation>Περί του %1</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1065"/>
+        <location filename="../src/mainwindow.cpp" line="1275"/>
         <source>Version: </source>
         <translation>Έκδοση: </translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1067"/>
+        <location filename="../src/mainwindow.cpp" line="1277"/>
         <source>Program for selecting common start-up choices</source>
         <translation>Πρόγραμμα για τις συνήθεις επιλογές εκκίνησης</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1069"/>
+        <location filename="../src/mainwindow.cpp" line="1279"/>
         <source>Copyright (c) MX Linux</source>
         <translation>Πνευματικά δικαιώματα (c) MX Linux</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1070"/>
+        <location filename="../src/mainwindow.cpp" line="1280"/>
         <source>%1 License</source>
         <translation>Άδεια %1</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1091"/>
+        <location filename="../src/mainwindow.cpp" line="1286"/>
         <source>%1 Help</source>
         <translation>Βοήθεια %1</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1101"/>
-        <location filename="../src/mainwindow.cpp" line="1368"/>
+        <location filename="../src/mainwindow.cpp" line="1296"/>
+        <location filename="../src/mainwindow.cpp" line="1571"/>
         <source>Running in a Virtual Machine</source>
         <translation>Εκτέλεση σε εικονική μηχανή</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1102"/>
-        <location filename="../src/mainwindow.cpp" line="1369"/>
+        <location filename="../src/mainwindow.cpp" line="1297"/>
+        <location filename="../src/mainwindow.cpp" line="1572"/>
         <source>You current system is running in a Virtual Machine,
 Plymouth bootsplash will work in a limited way, you also won&apos;t be able to preview the theme</source>
         <translation>Το τρέχον σύστημα εκτελείται σε εικονική μηχανή,
 Η αρχική οθόνη εκκίνησης του plymouth θα λειτουργήσει με περιορισμένο τρόπο, και δεν θα μπορείτε να κάνετε προεπισκόπηση  θέματος</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1109"/>
+        <location filename="../src/mainwindow.cpp" line="1304"/>
         <source>Plymouth packages not installed</source>
         <translation>Τα πακέτα του plymouth δεν έχουν εγκατασταθεί</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1110"/>
+        <location filename="../src/mainwindow.cpp" line="1305"/>
         <source>Plymouth packages are not currently installed.
 OK to go ahead and install them?</source>
         <translation>Τα πακέτα του plymouth δεν είναι εγκατεστημένα.
 Θέλετε να προχωρήσετε και να τα εγκαταστήσετε;</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1136"/>
+        <location filename="../src/mainwindow.cpp" line="1337"/>
         <source>Images (*.png *.jpg *.jpeg *.tga)</source>
         <translation>Εικόνες (*.png *.jpg *.jpeg *.tga)</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1301"/>
+        <location filename="../src/mainwindow.cpp" line="1502"/>
         <source>Could not read the systemd boot logs.</source>
         <translation>Δεν ήταν δυνατή η ανάγνωση των αρχείων καταγραφής εκκίνησης του systemd.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1302"/>
+        <location filename="../src/mainwindow.cpp" line="1503"/>
         <source>Could not read the systemd boot logs%1 or the fallback log at %2.</source>
         <translation>Δεν ήταν δυνατή η ανάγνωση των αρχείων καταγραφής εκκίνησης του systemd %1 στο %2.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1303"/>
+        <location filename="../src/mainwindow.cpp" line="1504"/>
         <source> from %1</source>
         <translation> από %1</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1306"/>
+        <location filename="../src/mainwindow.cpp" line="1507"/>
         <source>Could not find any boot logs.</source>
         <translation>Δεν βρέθηκαν αρχεία καταγραφών εκκίνησης.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1307"/>
+        <location filename="../src/mainwindow.cpp" line="1508"/>
         <source>Could not find log at %1</source>
         <translation>Δεν βρέθηκε αρχείο καταγραφής στο %1</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1309"/>
+        <location filename="../src/mainwindow.cpp" line="1510"/>
         <source>Log not found</source>
         <translation>Δεν βρέθηκε αρχείο αλλαγών</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1350"/>
+        <location filename="../src/mainwindow.cpp" line="1551"/>
         <source>Preview Unavailable</source>
         <translation>Μη διαθέσιμη προεπισκόπιση</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1351"/>
+        <location filename="../src/mainwindow.cpp" line="1552"/>
         <source>Preview is not available while running under Wayland. Please start an X11 session to preview Plymouth themes.</source>
         <translation>Η προεπισκόπηση δεν είναι διαθέσιμη σε Wayland. Παρακαλώ εκκινήστε συνεδρία X11 για τη προεπισκόπιση θεμάτων Plymouth.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1475"/>
+        <location filename="../src/mainwindow.cpp" line="1687"/>
         <source>Could not retrieve UUID for %1</source>
         <translation>Δεν μπόρεσε να ανακτηθεί το UUID για %1</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1483"/>
+        <location filename="../src/mainwindow.cpp" line="1695"/>
         <source>Enter password to unlock %1 encrypted partition:</source>
         <translation>Εισάγετε κωδικό πρόσβασης για να ξεκλειδώσετε τη κρυπτογραφημένη κατάτμηση %1:</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1488"/>
+        <location filename="../src/mainwindow.cpp" line="1700"/>
         <source>Password entry cancelled or empty for %1</source>
         <translation>Η εισαγωγή κωδικού πρόσβασης ακυρώθηκε ή παραμένει κενή για %1</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1494"/>
+        <location filename="../src/mainwindow.cpp" line="1706"/>
         <source>Could not open %1 LUKS container</source>
         <translation>Δεν μπόρεσε να ανοίξει το LUKS %1</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1321"/>
+        <location filename="../src/mainwindow.cpp" line="1522"/>
         <source>&amp;Close</source>
         <translation>&amp;Κλείσιμο</translation>
     </message>
@@ -423,72 +425,72 @@ OK to go ahead and install them?</source>
         <translation>Εγκατεστημένο σύστημα</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="437"/>
+        <location filename="../src/mainwindow.cpp" line="602"/>
         <source>Failed to update package sources.</source>
         <translation>Απέτυχε η ενημέρωση των πακέτων.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="441"/>
+        <location filename="../src/mainwindow.cpp" line="607"/>
         <source>Installing packages:</source>
         <translation>Εγκατάσταση πακέτων:</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="451"/>
+        <location filename="../src/mainwindow.cpp" line="617"/>
         <source>Success</source>
         <translation>Επιτυχία</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="451"/>
+        <location filename="../src/mainwindow.cpp" line="617"/>
         <source>Bootsplash installed successfully.</source>
         <translation>Η αρχική οθόνη εκκίνησης εγκαταστάθηκε με επιτυχία.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="479"/>
+        <location filename="../src/mainwindow.cpp" line="645"/>
         <source>Failed to create temporary file.</source>
         <translation>Απέτυχε η δημιουργία του προσωρινού αρχείου.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1047"/>
+        <location filename="../src/mainwindow.cpp" line="1257"/>
         <source>You are currently running in live mode with the &apos;toram&apos; option. Please remember to save the persistence file or remaster, otherwise any changes made will be lost.</source>
         <translation>Αυτή τη στιγμή βρίσκεστε σε λειτουργία live με την επιλογή &apos;toram&apos;. Παρακαλώ θυμηθείτε να αποθηκεύσετε το αρχείο persistence ή το remaster, διαφορετικά οι αλλαγές που θα γίνουν θα χαθούν.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1049"/>
+        <location filename="../src/mainwindow.cpp" line="1259"/>
         <source>Your changes have been successfully applied.</source>
         <translation>Οι αλλαγές σας εφαρμόστηκαν με επιτυχία.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1050"/>
+        <location filename="../src/mainwindow.cpp" line="1260"/>
         <source>Operation Complete</source>
         <translation>Η διαδικασία ολοκληρώθηκε</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1135"/>
+        <location filename="../src/mainwindow.cpp" line="1336"/>
         <source>Select image to display in bootloader</source>
         <translation>Επιλέξτε την εικόνα που θα εμφανίζει ο φορτωτής εκκίνησης</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1314"/>
+        <location filename="../src/mainwindow.cpp" line="1515"/>
         <source>Boot Log</source>
         <translation>Αρχείο εκκίνησης</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1357"/>
+        <location filename="../src/mainwindow.cpp" line="1558"/>
         <source>Needs reboot</source>
         <translation>Χρειάζεται επανεκκίνηση</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1358"/>
+        <location filename="../src/mainwindow.cpp" line="1559"/>
         <source>Plymouth was just installed, you might need to reboot before being able to display previews</source>
         <translation>Το plymouth μόλις εγκαταστάθηκε, ίσως χρειαστεί να επανεκκινήσετε για να έχετε τη δυνατότητα προεπισκοπήσεων</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1431"/>
+        <location filename="../src/mainwindow.cpp" line="1643"/>
         <source>Click to select theme</source>
         <translation>Κάντε κλικ για να επιλέξετε θέμα</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1442"/>
+        <location filename="../src/mainwindow.cpp" line="1654"/>
         <source>Select GRUB theme</source>
         <translation>Επιλέξτε θέμα του GRUB</translation>
     </message>
@@ -504,23 +506,34 @@ OK to go ahead and install them?</source>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../src/about.cpp" line="54"/>
+        <location filename="../src/about.cpp" line="71"/>
+        <source>Could not load %1</source>
+        <translation>Δεν ήταν δυνατή η φόρτωση του %1</translation>
+    </message>
+    <message>
+        <location filename="../src/about.cpp" line="95"/>
         <source>License</source>
         <translation>Άδεια</translation>
     </message>
     <message>
-        <location filename="../src/about.cpp" line="55"/>
-        <location filename="../src/about.cpp" line="64"/>
+        <location filename="../src/about.cpp" line="96"/>
+        <location filename="../src/about.cpp" line="105"/>
         <source>Changelog</source>
         <translation>Αρχείο αλλαγών</translation>
     </message>
     <message>
-        <location filename="../src/about.cpp" line="56"/>
+        <location filename="../src/about.cpp" line="97"/>
         <source>Cancel</source>
         <translation>Ακύρωση</translation>
     </message>
     <message>
-        <location filename="../src/about.cpp" line="75"/>
+        <location filename="../src/about.cpp" line="117"/>
+        <source>Could not load changelog.</source>
+        <translation>Δεν ήταν δυνατή η φόρτωση του αρχείου αλλαγών.</translation>
+    </message>
+    <message>
+        <location filename="../src/about.cpp" line="51"/>
+        <location filename="../src/about.cpp" line="120"/>
         <source>&amp;Close</source>
         <translation>&amp;Κλείσιμο</translation>
     </message>

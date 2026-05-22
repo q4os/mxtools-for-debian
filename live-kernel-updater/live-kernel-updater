@@ -10,10 +10,13 @@
 
 #     VERSION="2.30.04"
 #VERSION_DATE="Wed 23 Oct 2019 09:39:52 PM MDT"
-      VERSION="2.30.04-2302"
- VERSION_DATE="Sat, 25 Feb 2023 12:45:10 -0500"
+#      VERSION="2.30.04-2302"
+# VERSION_DATE="Sat, 25 Feb 2023 12:45:10 -0500"
 
-        ME=${0##*/}
+      VERSION="26.05.2"
+ VERSION_DATE="Thu, 21 May 2026 07:37:17 -0400"
+
+        ME="live-kernel-updater"
     MY_DIR=$(dirname "$(readlink -f $0)")
 MY_LIB_DIR=$(readlink -f "$MY_DIR/../cli-shell-utils")
    LIB_DIR="/usr/lib/cli-shell-utils"
@@ -32,7 +35,6 @@ test -d "$domain_dir" && export TEXTDOMAINDIR=$domain_dir
          if [ -L "/live" ]; then
          	LIVE_MP="/$(readlink /live)/boot-dev"
          fi
-         echo "LIVE_MP is" $LIVE_MP
           LIVE_DIR="antiX"
           BOOT_DIR="boot"
 
@@ -63,6 +65,44 @@ test -d "$domain_dir" && export TEXTDOMAINDIR=$domain_dir
 
       COLOR_SCHEME="high"
    GRAPHICAL_MENUS="true"
+
+# --------------------------------------------------------------------------
+# FUTURE: multi-kernel + initrd-mode support for antiX
+#
+# Two independent axes are planned:
+#
+# 1) Slot count
+#    Currently antiX is hard-limited to 2 kernel slots (vmlinuz + vmlinuz1).
+#    MX already supports up to 10 slots (vmlinuz...vmlinuz9).
+#    Lifting the antiX limit requires only removing the VMLINUZ_2_NAME guard
+#    and widening the both_vm regex -- the slot machinery is already in place.
+#
+# 2) Initrd sharing mode  (controlled by MULTI_KERNEL below)
+#
+#    MULTI_KERNEL=false -- shared initrd mode:
+#      vmlinuz and vmlinuz1 share one initrd.gz.  The initrd contains modules
+#      for both active slots (plus their .kold backups).  Low disk usage;
+#      simpler update path.
+#
+#    MULTI_KERNEL=true -- per-kernel initrd mode:
+#      Each slot gets its own initrd (vmlinuzN <-> initrdN.gz).  Each initrd
+#      carries only the modules for its own kernel.  Independent updates.
+#
+#    Migration path (shared -> per-kernel):
+#      During transition, the primary initrd.gz may still hold modules for
+#      multiple kernels while new slots already have their own initrdN.gz.
+#      The 'add' action handles this by unpacking initrd.gz as the source
+#      and installing a fresh per-slot initrd, so both models can coexist
+#      temporarily on the same live-usb.
+#
+#    MULTI_KERNEL (set here or via --multi-kernel / --shared-initrd on the command line):
+#      (empty)      auto-detect: per-kernel if /etc/mx-version exists, shared otherwise
+#      true         force per-kernel initrd mode  (--multi-kernel)
+#      false        force shared initrd mode      (--shared-initrd)
+#
+   MULTI_KERNEL=
+
+# --------------------------------------------------------------------------
 #== END_CONFIG
 
         WORK_DIR="/run/$ME"
@@ -80,6 +120,408 @@ test -d "$domain_dir" && export TEXTDOMAINDIR=$domain_dir
         LIB_PATH="$MY_LIB_DIR:$LIB_DIR"
             PATH="$MY_LIB_DIR/bin:$LIB_DIR/bin:$PATH"
 
+
+#------------------------------------------------------------------------------
+# True when using per-kernel initrd mode (each slot has its own initrd).
+# Overrideable via MULTI_KERNEL config var or --multi-kernel / --shared-initrd flags.
+#------------------------------------------------------------------------------
+multi_kernel() {
+    case $MULTI_KERNEL in
+        true)  return 0 ;;
+        false) return 1 ;;
+    esac
+    test -e /etc/mx-version
+}
+
+#------------------------------------------------------------------------------
+# Map vmlinuz slot name to its initrd name:
+#   vmlinuz  -> initrd.gz
+#   vmlinuzN -> initrdN.gz
+#------------------------------------------------------------------------------
+kernel_to_initrd() {
+    local suffix=${1#vmlinuz}
+    echo "initrd${suffix}.gz"
+}
+
+#------------------------------------------------------------------------------
+# Echo the first unoccupied vmlinuz slot name in $1 (live dir).
+# Returns 1 if all 10 slots (vmlinuz ... vmlinuz9) are occupied.
+#------------------------------------------------------------------------------
+find_next_free_slot() {
+    local dir=$1
+    test -e "$dir/vmlinuz" || { echo "vmlinuz" ; return 0 ; }
+    local n
+    for n in 1 2 3 4 5 6 7 8 9; do
+        test -e "$dir/vmlinuz$n" || { echo "vmlinuz$n" ; return 0 ; }
+    done
+    return 1
+}
+
+#------------------------------------------------------------------------------
+# Parse build date from the second field of "file -b" output (after the '#'
+# separator).  Handles three formats:
+#   DPA1  ISO YYYY-MM-DD (Debian/MX kernels)
+#   DPA2  verbose C-locale "Wed May 14 12:34:56 UTC 2026" (antiX self-built)
+#   DPA3  compact YYYYMMDD embedded in version tag (xanmod: ~20260511.)
+# Echoes YYYY-MM-DD, or nothing if no date is found.
+#------------------------------------------------------------------------------
+parse_kernel_build_date() {
+    local fver=$1
+    local DPA1='20[[:digit:]]{2}(-[[:digit:]]{2}){2}'
+    local DPA2='(Mon|Tue|Wed|Thu|Fri|Sat|Sun)[[:space:]]+(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[[:space:]]+[0-9]{1,2}[[:space:]][0-9]{2}:[0-9]{2}:[0-9]{2}[[:space:]][A-Z]{2,5}[[:space:]]+20[0-9]{2}'
+    local kdat
+    kdat=$(sed -n -r "s/.*($DPA1|$DPA2).*/\1/p" <<<"$fver")
+    if [ -z "$kdat" ]; then
+        # DPA3: compact YYYYMMDD with non-digit boundary on each side
+        kdat=$(grep -oE '(^|[^[:digit:]])20[2-9][0-9][01][0-9][0-3][0-9]([^[:digit:]]|$)' \
+            <<<"$fver" | grep -oE '20[2-9][0-9][01][0-9][0-3][0-9]' | head -1)
+    fi
+    [ -n "$kdat" ] && kdat=$(LC_ALL=C TZ=UTC date --date="$kdat" +'%Y-%m-%d' 2>/dev/null)
+    echo "$kdat"
+}
+
+#------------------------------------------------------------------------------
+# Extract build date from a kernel binary path via "file -b".
+# Echoes YYYY-MM-DD, or nothing if the file is not a Linux kernel or has no
+# recognisable date string.
+#------------------------------------------------------------------------------
+get_kernel_build_date() {
+    command -v file >/dev/null 2>&1 || return
+    local kernel_path=$1
+    local frel fver
+    IFS='#' read -r frel fver < <(file -b "$kernel_path" 2>/dev/null)
+    [ -n "$frel" ] && [ -z "${frel%%Linux kernel*}" ] || return
+    parse_kernel_build_date "$fver"
+}
+
+#------------------------------------------------------------------------------
+# Replace file-mtime dates in a kernel list with the build date embedded in
+# the kernel binary (from "file -b"), when available.  Falls back to the
+# original mtime date if "file" is absent or the kernel has no date string.
+#------------------------------------------------------------------------------
+fix_kernel_dates() {
+    local var=$1  dir=$2
+    command -v file >/dev/null 2>&1 || return
+    local list="${!var}"
+    local IFS=$K_IFS
+    local out="" version fname date file_date full_fname
+    while read -r version fname date; do
+        [ ${#version} -eq 0 ] && continue
+        full_fname=$fname
+        [ "${fname#/}" = "$fname" ] && full_fname="$dir/$fname"
+        file_date=$(get_kernel_build_date "$full_fname")
+        [ -n "$file_date" ] && date=$file_date
+        out="${out}${out:+
+}${version}${K_IFS}${fname}${K_IFS}${date}"
+    done <<List
+${list}
+List
+    printf -v "$var" '%s' "$out"
+}
+
+#------------------------------------------------------------------------------
+# Write vmlinuzX.ver sidecar file for GRUB menu display (MX mode only).
+# KERNEL_VERSION holds a human-readable version+date string; KERNEL_LABEL
+# is "signed" when sbverify detects a Secure Boot signature, else empty.
+#------------------------------------------------------------------------------
+write_vmlinuz_ver() {
+    local kernel_path=$1
+    [ -f "$kernel_path" ] || return
+
+    # Split file -b output on '#' to separate the release line from the build line.
+    local frel fver
+    IFS='#' read -r frel fver < <(file -b "$kernel_path" 2>/dev/null)
+    [ -n "$frel" ] && [ -z "${frel%%Linux kernel*}" ] || return   # not a Linux kernel binary
+
+    local KPAT='(([[:digit:]]+[.]){1,3}[[:digit:]]+[[:alnum:].~+-]+)'
+    local krel kdat
+    krel=$(sed -n -r "s/.*[[:space:]]($KPAT).*/\1/p" <<<"$frel")
+    krel=$(sed -r 's/-(amd64|i[36]86|686-pae|686|arm64|armhf|armel)$//' <<<"$krel")
+
+    kdat=$(parse_kernel_build_date "$fver")
+    [ -z "$kdat" ] && kdat=$(TZ=UTC date --date=@$(stat -L -c %Y "$kernel_path") +'%Y-%m-%d' 2>/dev/null)
+
+    # Build human-readable version string
+    local version="$krel"
+    [ -n "$kdat" ] && version+=" - $kdat"
+
+    # Secure Boot signature check
+    local label=""
+    if command -v sbverify >/dev/null 2>&1; then
+        local sbout
+        sbout=$(LC_ALL=C.UTF-8 sbverify --list "$kernel_path" 2>&1)
+        [ -z "${sbout%%No signature*}" ] || label="signed"
+    fi
+
+    printf 'KERNEL_VERSION="%s"\nKERNEL_LABEL="%s"\n' "$version" "$label" \
+        > "${kernel_path}.ver"
+}
+
+#------------------------------------------------------------------------------
+# (Re)write .ver sidecars for all slots in a live_vm list (MX mode only).
+#------------------------------------------------------------------------------
+sync_vmlinuz_ver() {
+    local dir=$1  list=$2
+    local IFS=$K_IFS
+    local version fname date
+    while read -r version fname date; do
+        [ -n "$fname" ] && write_vmlinuz_ver "$dir/$fname"
+    done <<List
+${list}
+List
+}
+
+#------------------------------------------------------------------------------
+# Remove all files belonging to a kernel slot (kernel, initrd, backups, md5).
+#------------------------------------------------------------------------------
+do_remove_slot() {
+    local dir=$1  vmlinuz=$2
+    local initrd=$(kernel_to_initrd "$vmlinuz")
+    local f ext
+    for f in "$vmlinuz" "$initrd"; do
+        test -e "$dir/$f" && cmd rm -f "$dir/$f"
+        for ext in "$KOLD_EXT" "$KBAD_EXT" "$MD5_EXT" "$IOLD_EXT"; do
+            test -e "$dir/$f$ext" && cmd rm -f "$dir/$f$ext"
+        done
+    done
+    cmd rm -f "$dir/$vmlinuz.ver"
+}
+
+#------------------------------------------------------------------------------
+# Return 0 if any syslinux *.cfg stanza that boots $1 (e.g. vmlinuz1)
+# references the shared initrd.gz rather than a per-slot initrdN.gz.
+# Reads $live_mp/boot/syslinux/*.cfg (dynamic scope).
+#------------------------------------------------------------------------------
+syslinux_uses_shared_for_slot() {
+    local slot=$1
+    local syslinux_dir="$live_mp/boot/syslinux"
+    local live_path="/${rel_live_dir#/}"
+    [ -d "$syslinux_dir" ] || return 1
+    local f
+    for f in "$syslinux_dir"/*.cfg; do
+        [ -f "$f" ] || continue
+        awk -v live="$live_path" -v slot="$slot" '
+            BEGIN { in_slot=0; found=0 }
+            /^[[:space:]]*(LABEL)[[:space:]]/ { in_slot=0 }
+            /^[[:space:]]*(KERNEL|LINUX)[[:space:]]/ {
+                line=$0; gsub(/,/, " ", line); n=split(line, a)
+                in_slot=0
+                for (i=2; i<=n; i++)
+                    if (a[i] == live "/" slot) { in_slot=1; break }
+            }
+            in_slot && /^[[:space:]]*INITRD[[:space:]]/ {
+                line=$0; gsub(/,/, " ", line); n=split(line, a)
+                for (i=2; i<=n; i++)
+                    if (a[i] ~ /\/initrd\.gz$/) { found=1; exit }
+                in_slot=0
+            }
+            END { exit (found ? 0 : 1) }
+        ' "$f" && return 0
+    done
+    return 1
+}
+
+#------------------------------------------------------------------------------
+# Print paths (relative to live_mp) of syslinux *.cfg files whose stanza for
+# slot $1 references the shared initrd.gz.  Emits one line per matching file.
+# Reads $live_mp/boot/syslinux/*.cfg (dynamic scope).
+#------------------------------------------------------------------------------
+syslinux_shared_cfg_files() {
+    local slot=$1
+    local syslinux_dir="$live_mp/boot/syslinux"
+    local live_path="/${rel_live_dir#/}"
+    [ -d "$syslinux_dir" ] || return
+    local f
+    for f in "$syslinux_dir"/*.cfg; do
+        [ -f "$f" ] || continue
+        awk -v live="$live_path" -v slot="$slot" '
+            BEGIN { in_slot=0; found=0 }
+            /^[[:space:]]*(LABEL)[[:space:]]/ { in_slot=0 }
+            /^[[:space:]]*(KERNEL|LINUX)[[:space:]]/ {
+                line=$0; gsub(/,/, " ", line); n=split(line, a)
+                in_slot=0
+                for (i=2; i<=n; i++)
+                    if (a[i] == live "/" slot) { in_slot=1; break }
+            }
+            in_slot && /^[[:space:]]*INITRD[[:space:]]/ {
+                line=$0; gsub(/,/, " ", line); n=split(line, a)
+                for (i=2; i<=n; i++)
+                    if (a[i] ~ /\/initrd\.gz$/) { found=1; exit }
+                in_slot=0
+            }
+            END { exit (found ? 0 : 1) }
+        ' "$f" && printf '%s\n' "${f#$live_mp}"
+    done
+}
+
+#------------------------------------------------------------------------------
+# Return 0 if any syslinux *.cfg stanza that boots $1 (e.g. vmlinuz1)
+# explicitly references the per-slot initrd (e.g. initrd1.gz).
+# Reads $live_mp/boot/syslinux/*.cfg (dynamic scope).
+#------------------------------------------------------------------------------
+syslinux_needs_slot_initrd() {
+    local slot=$1
+    local syslinux_dir="$live_mp/boot/syslinux"
+    local live_path="/${rel_live_dir#/}"
+    local slot_initrd
+    slot_initrd=$(kernel_to_initrd "$slot")
+    [ -d "$syslinux_dir" ] || return 1
+    local f
+    for f in "$syslinux_dir"/*.cfg; do
+        [ -f "$f" ] || continue
+        awk -v live="$live_path" -v slot="$slot" -v si="$slot_initrd" '
+            BEGIN { in_slot=0; found=0 }
+            /^[[:space:]]*(LABEL)[[:space:]]/ { in_slot=0 }
+            /^[[:space:]]*(KERNEL|LINUX)[[:space:]]/ {
+                line=$0; gsub(/,/, " ", line); n=split(line, a)
+                in_slot=0
+                for (i=2; i<=n; i++)
+                    if (a[i] == live "/" slot) { in_slot=1; break }
+            }
+            in_slot && /^[[:space:]]*INITRD[[:space:]]/ {
+                line=$0; gsub(/,/, " ", line); n=split(line, a)
+                for (i=2; i<=n; i++)
+                    if (a[i] ~ "/" si "$") { found=1; exit }
+                in_slot=0
+            }
+            END { exit (found ? 0 : 1) }
+        ' "$f" && return 0
+    done
+    return 1
+}
+
+#------------------------------------------------------------------------------
+# Shared-initrd mode: after initrd.gz is updated, handle any leftover
+# initrd1.gz from a previous multi-kernel setup.
+# - Copy initrd.gz -> initrd1.gz only when syslinux has a stanza for vmlinuz1
+#   that explicitly needs initrd1.gz.
+# - Otherwise remove initrd1.gz: GRUB falls back to initrd.gz automatically,
+#   and keeping a duplicate serves no purpose.
+# Accesses full_live_dir, INITRD_NAME, IOLD_EXT via dynamic scope.
+#------------------------------------------------------------------------------
+sync_slot_initrds_with_shared() {
+    local slot_initrd="$full_live_dir/initrd1.gz"
+    [ -f "$slot_initrd" ] || return 0
+    if syslinux_needs_slot_initrd "vmlinuz1"; then
+        msg $"Copying updated %s to %s (syslinux stanza requires it)" \
+            "$(pq "$INITRD_NAME")" "$(pq "initrd1.gz")"
+        do_install "$full_live_dir/$INITRD_NAME" "$slot_initrd" "$IOLD_EXT"
+    else
+        msg $"Removing redundant %s (modules are in shared %s; GRUB falls back)" \
+            "$(pq "initrd1.gz")" "$(pq "$INITRD_NAME")"
+        cmd rm -f "$slot_initrd" "$slot_initrd$IOLD_EXT" "$slot_initrd$MD5_EXT"
+    fi
+}
+
+#------------------------------------------------------------------------------
+# List kernel module version(s) packed inside an initrd image.
+# Kernel modules are always in the last compressed section.  Find the last
+# TRAILER!!! boundary via grep -boa and start reading from there; if none is
+# found (plain initrd, no microcode preamble) start from offset 0.
+# Compression type is detected from magic bytes; same source as the kernel's
+# lib/decompress.c and the format-specific lib/decompress_* files:
+#   https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/lib/
+# Magic hex produced by: dd ... | od -A n -t x1 | tr -d ' \n'
+# Warns if format is unknown or decompressor not installed.
+# Echoes one module version per line (sort -uV); nothing on failure.
+#------------------------------------------------------------------------------
+initrd_modules_ver() {
+    local ipath=$1
+    [ -f "$ipath" ] || return
+
+    local MOD_SED='s|lib/modules/\([^/]*\).*|\1|'
+
+    local last_trailer bnd=0
+    last_trailer=$(grep -boa 'TRAILER!!!' "$ipath" 2>/dev/null | tail -1 | cut -d: -f1)
+    [ -n "$last_trailer" ] && bnd=$(( (last_trailer + 121 + 511) / 512 * 512 ))
+
+    local magic
+    magic=$(dd if="$ipath" bs=1 skip="$bnd" count=4 status=none 2>/dev/null \
+            | od -A n -t x1 | tr -d ' \n')
+
+    # gzip=1f8b  xz=fd377a58  lz4=04224d18  zstd=28b52ffd  bzip2=425a68  lzma=5d00
+    local -a decomp_cmd
+    case "$magic" in
+        1f8b*)    decomp_cmd=(zcat)                       ;;
+        fd377a58) decomp_cmd=(xzcat)                      ;;
+        04224d18) decomp_cmd=(lz4cat)                     ;;
+        28b52ffd) decomp_cmd=(zstdcat)                    ;;
+        425a68*)  decomp_cmd=(bzcat)                      ;;
+        5d00*)    decomp_cmd=(xz -d -c --format=lzma)     ;;
+        *) warn $"initrd %s: unrecognised compression (magic: %s)" \
+                 "$(pq "$(basename "$ipath")")" "$(pq "$magic")"
+           return ;;
+    esac
+
+    if ! command -v "${decomp_cmd[0]}" >/dev/null 2>&1; then
+        warn $"initrd %s: decompressor %s is not installed" \
+             "$(pq "$(basename "$ipath")")" "$(pq "${decomp_cmd[0]}")"
+        return
+    fi
+
+    dd if="$ipath" bs=512 skip=$((bnd / 512)) status=none 2>/dev/null \
+        | "${decomp_cmd[@]}" 2>/dev/null \
+        | cpio -t 2>/dev/null \
+        | grep '^lib/modules/[^/]' \
+        | sed "$MOD_SED" \
+        | sort -uV
+}
+
+#------------------------------------------------------------------------------
+# -VV debug: print a per-slot state table showing kernel version, initrd
+# filename, size/mtime, and the module version(s) packed inside each initrd.
+# Args: $1=full_live_dir  $2=live_vm (active slot records)  $3=live_old (.kold)
+#------------------------------------------------------------------------------
+debug_slot_table() {
+    [ "$VERY_VERBOSE" ] || return 0
+    local dir=$1 live_list=$2 old_list=$3
+    local kfmt="  %-14s  %-42s  %s\n"
+    local ifmt="  %1s %-16s  %s\n"   # col1: '!' on module mismatch, else blank
+
+    msg $"Slot state:"
+    printf "$kfmt" "Slot" "Kernel version" "Built"
+
+    local ver fname kdate iname ipath isz idate iinfo mods mark
+    while IFS="$K_IFS" read -r ver fname kdate; do
+        [ -z "$fname" ] && continue
+        printf "$kfmt" "$fname" "$ver" "${kdate:--}"
+        iname=$(kernel_to_initrd "$fname")
+        ipath="$dir/$iname"
+        if [ -f "$ipath" ]; then
+            isz=$(du -h "$ipath" 2>/dev/null | cut -f1)
+            idate=$(TZ=UTC date --date=@$(stat -c %Y "$ipath") +'%Y-%m-%d' 2>/dev/null)
+            mods=$(initrd_modules_ver "$ipath" | tr '\n' ',' | sed 's/,$//' | sed 's/,/, /g')
+            iinfo="$isz  $idate${mods:+   modules: $mods}"
+            grep -qF "$ver" <<<"$mods" && mark="" || mark="!"
+        else
+            iinfo="(missing)"
+            mark=""
+        fi
+        printf "$ifmt" "$mark" "$iname" "$iinfo"
+    done <<< "$live_list"
+
+    if [ -n "$old_list" ]; then
+        while IFS="$K_IFS" read -r ver fname kdate; do
+            [ -z "$fname" ] && continue
+            printf "$kfmt" "$fname" "$ver" "${kdate:--}"
+            local base="${fname%$KOLD_EXT}"
+            # Rollback backup initrd uses KOLD_EXT (created by do_install default)
+            local iold_name="$(kernel_to_initrd "$base")$KOLD_EXT"
+            ipath="$dir/$iold_name"
+            if [ -f "$ipath" ]; then
+                isz=$(du -h "$ipath" 2>/dev/null | cut -f1)
+                idate=$(TZ=UTC date --date=@$(stat -c %Y "$ipath") +'%Y-%m-%d' 2>/dev/null)
+                mods=$(initrd_modules_ver "$ipath" | tr '\n' ',' | sed 's/,$//' | sed 's/,/, /g')
+                iinfo="$isz  $idate${mods:+   modules: $mods}"
+                grep -qF "$ver" <<<"$mods" && mark="" || mark="!"
+            else
+                iinfo="(missing)"
+                mark=""
+            fi
+            printf "$ifmt" "$mark" "$iold_name" "$iinfo"
+        done <<< "$old_list"
+    fi
+}
 
 #------------------------------------------------------------------------------
 # Show usage and exit
@@ -103,7 +545,6 @@ Commands:
    install     Copy new initrd and vmlinuz to the live boot directory
 
 Options:
-  -a --auto             Non-interactive.  Always assume the safe answer
   -C --color=<xxx>      Set color scheme to off|low|low1|bw|dark|high
   -d --device=<device>  live-usb device to update the kernel on
                         (use "live" to force updating a running live system)
@@ -124,14 +565,19 @@ Options:
   -K --keep-old         Keep the old module directory in the initrd
   -m --modules=<list>   Only add listed modules to the existing initrd
   -N --numeric-ui       Use the legacy numerical user interface
+     --live-dir=<dir>   Subdir holding live boot files (normally "antiX"); skips auto-detection
+     --multi-kernel     Force per-kernel initrd mode (one initrd per kernel slot)
+     --shared-initrd    Force shared initrd mode (one initrd shared by vmlinuz + vmlinuz1)
      --pause            Wait for user input before exiting
   -p --pretend          Don't actually install the new kernel or initrd.gz
   -q --quiet            Print less
-  -R --reset-config     Write fresh config file with default options
+  -R --reset-config     Write a config template (all entries commented out) and exit
+  -e --encrypt          Add cryptsetup to programs copied into initrd
+  -U --no-ucode         Skip microcode refresh in the repacked initrd
   -v --version          Show version information
   -V --verbose          Print more, show output of commands
   -VV --very-verbose    Also show the commands
-  -W --write-config     Write/update config file preserving current options
+  -W --write-config     Write a config template (all entries commented out) and exit
 
 Notes:
   - short options stack. Example: -pq instead of --pretend --quiet
@@ -150,7 +596,6 @@ Usage
 eval_argument() {
     local arg=$1 val=$2
     case $arg in
-              -auto|a)  AUTO_MODE=true                  ;;
              -color|C)  COLOR_SCHEME=$val               ;;
              -color=*)  COLOR_SCHEME=$val               ;;
             -device|d)  DEVICE=$val                     ;;
@@ -161,19 +606,25 @@ eval_argument() {
        --graphic-ui|G)  GRAPHICAL_MENUS=true            ;;
               -help|h)  usage                           ;;
             -initrd|i)  CMD_INITRD=$TEMPLATE_INITRD     ;;
-            -initrd=*)  CMD_INITRD=${arg#*=}            ;;
+            -initrd=*)  CMD_INITRD=${arg#*=}; CMD_INITRD_EXPLICIT=true ;;
             -kernel|k)  NEW_KERNEL=$val                 ;;
             -kernel=*)  NEW_KERNEL=$val                 ;;
           -keep-old|K)  KEEP_OLD=true                   ;;
            -modules|m)  MODS="$MODS${MODS:+,}$val"      ;;
            -modules=*)  MODS="$MODS${MODS:+,}$val"      ;;
        --numeric-ui|N)  GRAPHICAL_MENUS=                ;;
+           -encrypt|e)  CMD_ENCRYPT=true               ;;
+          -no-ucode|U)  NO_UCODE=true                  ;;
            -pretend|p)  PRETEND_MODE=true ;             ;;
                -pause)  PAUSE="$PAUSE${PAUSE:+,}exit"   ;;
              -pause=*)  PAUSE="$PAUSE${PAUSE:+,}$val"   ;;
              -quiet|q)  QUIET=true                      ;;
            -verbose|V)  VERBOSITY=$((VERBOSITY + 1))    ;;
         -very-verbose)  VERBOSITY=$((VERBOSITY + 2))    ;;
+
+    -multi-kernel)  MULTI_KERNEL=true                ;;   # force per-kernel initrd mode
+   -shared-initrd)  MULTI_KERNEL=false               ;;   # force shared initrd mode
+     -live-dir=*)  CMD_LIVE_DIR=$val               ;;   # specify live subdir non-interactively
 
        # These are read early.  They are not unknown
      -ignore-config|I)                                  ;;
@@ -225,12 +676,30 @@ takes_param() {
 # The main routine.  Called from the very bottom of this script.
 #------------------------------------------------------------------------------
 main() {
-    local SHIFT SHORT_STACK="aCdDFGhiIkKmNpqRvVW"
+    local SHIFT SHORT_STACK="CdDeFGhiIkKmNpqRUvVW"
     local BE_VERBOSE VERY_VERBOSE VERBOSITY=0
     local orig_args="$*"
 
     # Bashism: put the original arguments into an array to deal w/ spaces
     declare -a ORIG_ARGS=("$@")
+
+    # Expand stacked short opts into individual flags so that offer_restart()
+    # can strip -d/--device reliably even when packed (e.g. -VVd /path).
+    declare -a UNPACKED_ARGS=()
+    local _ua _uc
+    for _ua in "${ORIG_ARGS[@]}"; do
+        case "$_ua" in
+            -[$SHORT_STACK][$SHORT_STACK]*)
+                if printf '%s\n' "${_ua#-}" | grep -q "^[$SHORT_STACK]\+$"; then
+                    for _uc in $(printf '%s' "${_ua#-}" | sed 's/./& /g'); do
+                        UNPACKED_ARGS+=("-$_uc")
+                    done
+                else
+                    UNPACKED_ARGS+=("$_ua")
+                fi ;;
+            *) UNPACKED_ARGS+=("$_ua") ;;
+        esac
+    done
 
     # Let non-root users get usage.  Need to get --ignore-config early.
     read_early_params "$@"
@@ -259,8 +728,13 @@ main() {
 
     local new_initrd
     if [ ${#CMD_INITRD} -gt 0 ]; then
-        test -f "$CMD_INITRD" || fatal "The initrd file %s was not found" "$CMD_INITRD"
-        new_initrd=true
+        if multi_kernel && [ -z "$CMD_INITRD_EXPLICIT" ]; then
+            warn $"-i/--initrd option is not supported in multi-kernel mode, ignoring"
+            CMD_INITRD=""
+        else
+            test -f "$CMD_INITRD" || fatal "The initrd file %s was not found" "$CMD_INITRD"
+            multi_kernel || new_initrd=true
+        fi
     fi
 
     local template_initrd=${CMD_INITRD:=$TEMPLATE_INITRD}
@@ -276,7 +750,9 @@ main() {
     : ${CMDS:=all}
 
     # starting <program name>
-    shout_title $"Starting %s" "$ME"
+    shout_title $"Starting %s" "live-kernel-updater"
+    msg $"live-kernel-updater version: %s" "$(pq "$VERSION")"
+
     set_window_title "$ME"
 
     start_log "$THE_LOG_FILE" "$orig_args"
@@ -295,6 +771,29 @@ main() {
 
     mkdir -p $WORK_DIR || fatal 120 "Could not make a work directory under /run"
     mount -t tmpfs tmpfs $WORK_DIR || fatal 121 "Could not mount tmpfs at %s" $WORK_DIR
+
+    # toram: linuxfs copied to tmpfs, boot device unmounted -- remount it so
+    # its_alive_usb() can find it at LIVE_MP and live detection works normally
+    if its_alive && ! is_mountpoint "$LIVE_MP" \
+            && [ -f /run/initramfs/config/did-toram ]; then
+        local _toram_dev=$(cat /etc/live/config/boot-device 2>/dev/null)
+        if [ -b "$_toram_dev" ]; then
+            local _existing
+            _existing=$(findmnt -n -o TARGET --source "$_toram_dev" 2>/dev/null | head -1)
+            if [ -n "$_existing" ]; then
+                msg $"toram mode: boot device already mounted at %s" "$(pq $_existing)"
+                mount --bind "$_existing" "$LIVE_MP" && LKU_TORAM_MOUNT=true
+            else
+                msg $"toram mode: remounting boot device %s" "$(pq $_toram_dev)"
+                if mount "$_toram_dev" "$LIVE_MP"; then
+                    LKU_TORAM_MOUNT=true
+                else
+                    warn $"Could not remount boot device %s -- live detection may fail" \
+                         "$(pq $_toram_dev)"
+                fi
+            fi
+        fi
+    fi
 
     local we_are_live  live_dev  bios_uuid  bios_dev
     if its_alive_usb; then
@@ -324,6 +823,7 @@ main() {
         fatal_z "$we_are_live" $"This is not a live-usb system"
         live_mp=$LIVE_MP
         msg $"Will use running live system"
+        msg $"Live mount point: %s" "$(pq "$LIVE_MP")"
 
         IS_ENCRYPTED=$INITRD_ENCRYPTED
 
@@ -332,10 +832,13 @@ main() {
             shout "Encryption detected"
             msg "Made sure %s was mounted at %s" "$(pq $bios_dev)" "$(pq $BIOS_DIR)"
 
-            # Avoid updating the initrd.  Can fix later by borrowing code from lum to
-            # add crypt programs to the initrd ***** sigh *****
-            template_initrd=
+            # copy_programs passes --encrypt to copy-initrd-programs when IS_ENCRYPTED=true
         fi
+
+    #----- ALREADY-MOUNTED DIRECTORY ------------------------------------------
+    elif [ -d "$DEVICE" ]; then
+        live_mp=$DEVICE
+        msg $"Will use mounted directory %s" "$(pq $DEVICE)"
 
     #----- LIVE-USB -----------------------------------------------------------
     else
@@ -361,12 +864,22 @@ main() {
         fi
         [ "$dev_type" = "part" ] || fatal $"Device %s is not a disk partition" $usb_dev
 
-        local usb_drive=$(get_drive $usb_dev)
-        umount_all $usb_drive
-
-        my_mount $usb_dev $USB_DIR
+        # If device is already mounted (e.g. by GIO/Thunar), use that mount point
+        # directly -- do not unmount it, and do not unmount it on exit either
+        local existing_mp
+        existing_mp=$(findmnt -n -o TARGET --source "$usb_dev" 2>/dev/null | head -1)
+        if [ -n "$existing_mp" ]; then
+            live_mp=$existing_mp
+            LKU_DID_MOUNT=false
+            msg $"Will use already-mounted device %s at %s" "$(pq $usb_dev)" "$(pq $live_mp)"
+        else
+            local usb_drive=$(get_drive $usb_dev)
+            umount_all $usb_drive
+            my_mount $usb_dev $USB_DIR
+            LKU_DID_MOUNT=true
+            live_mp=$USB_DIR
+        fi
         msg $"Will use live-usb device %s" "$(pq $usb_dev)"
-        live_mp=$USB_DIR
 
         local crypt_file=$live_mp/$LIVE_DIR/$CRYPT_FNAME
         if test -e $crypt_file; then
@@ -392,7 +905,6 @@ main() {
             always_cmd mount $LUKS_DEV $live_mp || fatal "Was unable to mount the encrypted device"
 
             IS_ENCRYPTED=true
-            template_initrd=
         fi
 
     fi
@@ -404,8 +916,14 @@ main() {
     # local full_live_dir=$live_mp/${LIVE_DIR#/}
     local full_live_dir rel_live_dir
 
-    find_live_boot_dir rel_live_dir "$live_mp" "$LINUXFS_NAME" \
-        || fatal $"No %s file found in any directory in %s" "$LINUXFS_NAME" "$live_mp"
+    if [ -n "$CMD_LIVE_DIR" ]; then
+        rel_live_dir="${CMD_LIVE_DIR#/}"
+        [ -d "$live_mp/$rel_live_dir" ] \
+            || fatal $"Live directory %s not found under %s" "$CMD_LIVE_DIR" "$live_mp"
+    else
+        find_live_boot_dir rel_live_dir "$live_mp" "$LINUXFS_NAME" \
+            || fatal $"No %s file found in any directory in %s" "$LINUXFS_NAME" "$live_mp"
+    fi
 
     local full_live_dir=$live_mp/${rel_live_dir#/}
 
@@ -442,6 +960,45 @@ main() {
     my_mount "$linuxfs_name" "$root_dir" -t squashfs -o loop,ro
     local full_boot_dir="$root_dir/${BOOT_DIR#/}"
 
+    # When targeting an external USB, prefer the template from inside the squashfs:
+    # the host template may be from a different/older release.
+    # When live-booted and updating the running system, keep the host template --
+    # it may be newer than the squashfs if the package was updated in the live session.
+    # A user-supplied --initrd=file is never overridden.
+    if [ -z "$new_initrd" ] && [ -z "$CMD_INITRD_EXPLICIT" ] && ! update_live; then
+        local t
+        for t in "$TEMPLATE_INITRD_1" "$TEMPLATE_INITRD_2"; do
+            test -f "$root_dir$t" && template_initrd="$root_dir$t" && break
+        done
+    fi
+    # Fallback: host template not found (e.g. package not installed on live system)
+    # -- try inside the mounted squashfs regardless of update_live
+    if [ -z "$new_initrd" ] && [ -z "$CMD_INITRD_EXPLICIT" ] && ! test -f "$template_initrd"; then
+        local t
+        for t in "$TEMPLATE_INITRD_1" "$TEMPLATE_INITRD_2"; do
+            test -f "$root_dir$t" && template_initrd="$root_dir$t" && break
+        done
+    fi
+
+    # Resolve MULTI_KERNEL auto-detect from the TARGET, not the running system.
+    # When targeting an external USB from a host (e.g. MX host -> antiX USB),
+    # the running system's /etc/mx-version must not influence the mode.
+    # For live-boot updating its own system, running system IS the target.
+    if [ -z "$MULTI_KERNEL" ]; then
+        if update_live; then
+            test -e /etc/mx-version && MULTI_KERNEL=true || MULTI_KERNEL=false
+        else
+            test -e "$root_dir/etc/mx-version" && MULTI_KERNEL=true || MULTI_KERNEL=false
+        fi
+    fi
+
+    # Use firmware from the target squashfs for microcode injection when targeting
+    # an external USB; the host may be a different/older release with older microcode.
+    # For live-boot updating own system, host firmware may be newer (apt-updated).
+    local uc_firmware_arg=""
+    ! update_live && [ -d "$root_dir/lib/firmware" ] \
+        && uc_firmware_arg="-F $root_dir/lib/firmware"
+
     pause mount
 
     # NOTE: *after* mounting the linuxfs file we switch to the BIOS_DIR directory (sneaky)
@@ -460,9 +1017,13 @@ main() {
 
     test -e "$full_initrd" || fatal $"Could not find initrd file %s" "$full_initrd"
 
-    # default live kernels: vmlinuz and vmlinuz1
+    # default live kernels: vmlinuz and vmlinuz1 (antiX), or vmlinuz[1-9] (MX)
     local both_vm=$VMLINUZ_NAME
-    [ -n "$VMLINUZ_2_NAME" ] && both_vm="$both_vm|$VMLINUZ_2_NAME"
+    if multi_kernel; then
+        both_vm="${VMLINUZ_NAME}|${VMLINUZ_NAME}[1-9]"
+    elif [ -n "$VMLINUZ_2_NAME" ]; then
+        both_vm="$both_vm|$VMLINUZ_2_NAME"
+    fi
 
     local live_all boot_all
     get_all_kernel live_all "$full_live_dir"                          # all in live dir
@@ -472,18 +1033,33 @@ main() {
     live_all=$(sed /memtest/Id <<<"$live_all")
     boot_all=$(sed /memtest/Id <<<"$boot_all")
 
+    fix_kernel_dates live_all "$full_live_dir"
+    fix_kernel_dates boot_all "$full_boot_dir"
+
     #get_all_kernel boot_mod "$full_boot_dir" --mod-dir="$root_dir"   # boot dir with module dir
 
     # Filter out kernels that can't handle the squashfs compression
     filter_on_compression boot_all "$full_boot_dir" "$sq_compress"
 
+    # Sort by version descending (highest first); date descending as tiebreaker
+    boot_all=$(echo "$boot_all" | sort -t"$K_IFS" -k1,1Vr -k3,3r)
+
     local live_vm=$(find_kernel_fname "$both_vm" "$live_all")         # live with default vmlinuz names
     local vm_cnt=$(count_lines "$live_vm")
     local live_old=$(find_kernel_fname "($both_vm)$KOLD_EXT" "$live_all" )
 
-    # Exclude vmlinuz vmlinuz1, vmlinuz.kold, and vmlinuz1.kold from new kernel list
+    # Sort live kernels by slot order: vmlinuz, vmlinuz1, vmlinuz2, ...
+    live_vm=$(echo "$live_vm" | sort -t"$K_IFS" -k2,2)
+
+    # Keep .ver sidecars in sync with current live slot contents (MX only)
+    multi_kernel && sync_vmlinuz_ver "$full_live_dir" "$live_vm"
+
     local live_both=$(echo -e "$live_vm\n$live_old")
-    local live_versions=$(get_kernel_version "$live_both" | tr "\n" "|")
+    # In MX mode .kold is a safety backup only -- don't exclude its version from new-kernel list;
+    # in antiX shared mode .kold means "rolled back from this", so keep it excluded.
+    local _live_for_new; multi_kernel && _live_for_new="$live_vm" || _live_for_new="$live_both"
+    # Escape + (regex metachar) so version strings match literally in grep patterns
+    local live_versions=$(get_kernel_version "$_live_for_new" | tr "\n" "|" | sed 's/+/[+]/g')
     live_versions=${live_versions%|}
 
     local boot_new=$(find_kernel_version "$live_versions" "$boot_all" -v)
@@ -491,28 +1067,90 @@ main() {
     local live_old_cnt=$(count_lines "$live_old")
     local action_cnt=$((new_cnt + live_old_cnt))
 
+    # In live-boot mode, running /boot may have kernels installed on the overlay that
+    # are not yet in the squashfs.  They need a remaster before lku can use them.
+    # Skip when working with linuxfs.new: remaster already done, overlay check is irrelevant.
+    local overlay_new="" overlay_cnt=0
+    local real_boot_all=""
+    if update_live && [ -z "$live_remaster" ]; then
+        get_all_kernel real_boot_all "/boot"
+        real_boot_all=$(sed /memtest/Id <<<"$real_boot_all")
+        fix_kernel_dates real_boot_all "/boot"
+        real_boot_all=$(echo "$real_boot_all" | sort -t"$K_IFS" -k1,1Vr -k3,3r)
+        local sq_versions=$(get_kernel_version "$boot_all" | tr "\n" "|" | sed 's/+/[+]/g')
+        sq_versions=${sq_versions%|}
+        if [ -n "$sq_versions" ]; then
+            overlay_new=$(find_kernel_version "$sq_versions" "$real_boot_all" -v) || true
+        else
+            overlay_new="$real_boot_all"
+        fi
+        overlay_cnt=$(count_lines "$overlay_new")
+    fi
+
+    # Slots holding kernels no longer available in the (possibly remastered) squashfs
+    local stale_vm="" stale_cnt=0
+    if [ -n "$boot_all" ]; then
+        local boot_versions=$(get_kernel_version "$boot_all" | tr "\n" "|" | sed 's/+/[+]/g')
+        boot_versions=${boot_versions%|}
+        if [ -n "$boot_versions" ]; then
+            stale_vm=$(find_kernel_version "$boot_versions" "$live_vm" -v) || true
+        fi
+        stale_cnt=$(count_lines "$stale_vm")
+    fi
+
+    # Slots whose kernel exists in squashfs but was removed from the persistence overlay
+    # (in squashfs /boot but not in running /boot -- may fail to boot with persistence)
+    local persist_removed_vm="" persist_removed_cnt=0
+    if live_persist && [ -n "$real_boot_all" ]; then
+        local real_versions=$(get_kernel_version "$real_boot_all" | tr "\n" "|" | sed 's/+/[+]/g')
+        real_versions=${real_versions%|}
+        if [ -n "$real_versions" ]; then
+            persist_removed_vm=$(find_kernel_version "$real_versions" "$live_vm" -v) || true
+        else
+            persist_removed_vm="$live_vm"
+        fi
+        persist_removed_cnt=$(count_lines "$persist_removed_vm")
+    fi
+
     # [a table of what was found will follow]
     msg $"Found:"
-    # singular and plural: 1 total live kernel
-    msg_kernel "$live_all"  $"total live kernel"       $"total live kernels"
-    # singular and plural
-    msg_kernel "$live_vm"   $"default live kernel"     $"default live kernels"
-    # singular and plural
-    msg_kernel "$live_old"  $"old live kernel"         $"old live kernels"
-    msg
-    # singular and plural
-    msg_kernel "$boot_all"  $"total installed kernel"  $"total installed kernels"
-    # singular and plural
-    msg_kernel "$boot_new"  $"new installed kernel"    $"new installed kernels"
+    if multi_kernel; then
+        # MX: .kold backups have no rollback action; only active slots are relevant
+        msg_kernel "$live_vm"  $"default live kernel"  $"default live kernels"
+    else
+        msg_kernel "$live_all" $"total live kernel"    $"total live kernels"
+        msg_kernel "$live_vm"  $"default live kernel"  $"default live kernels"
+        msg_kernel "$live_old" $"old live kernel"      $"old live kernels"
+    fi
+    msg_kernel "$boot_all"  $"total installed kernel"   $"total installed kernels"
+    msg_kernel "$boot_new"  $"new available kernel"     $"new available kernels"
+    if [ $overlay_cnt -gt 0 ]; then
+        msg_kernel "$overlay_new" $"new installed kernel" $"new installed kernels"
+    fi
+    if [ $stale_cnt -gt 0 ]; then
+        local _stale_label
+        [ -n "$live_remaster" ] \
+            && _stale_label=$"not in remastered linuxfs" \
+            || _stale_label=$"not available in linuxfs"
+        local _stale_names=""
+        while IFS="$K_IFS" read -r _sver _sfname _sdate; do
+            [ -z "$_sfname" ] && continue
+            warn "%-9s %s -- %s" "$_sfname:" "$(vq "$_sver")" "$_stale_label"
+            _stale_names="${_stale_names:+$_stale_names, }$_sfname"
+        done <<<"$stale_vm"
+        warn $"Please update or remove: %s" "$_stale_names"
+    fi
 
     show_kernel_3 $"Live kernels:" "$live_all" | strip_color >> $LOG_FILE
     show_kernel_3 $"Boot kernels:" "$boot_all" | strip_color >> $LOG_FILE
 
     case $new_cnt in
         0) ;;
-        1) log_it show_kernel_2 $"Only one new installed kernel was found:" "$boot_new" ;;
-        *) log_it show_kernel_2 $"New installed kernels:" "$boot_new" ;;
+        1) log_it show_kernel_2 $"Only one new available kernel was found:" "$boot_new" ;;
+        *) log_it show_kernel_2 $"New available kernels:" "$boot_new" ;;
     esac
+    [ $overlay_cnt -gt 0 ] \
+        && log_it show_kernel_2 $"New installed kernels:" "$overlay_new"
 
     if [ $new_cnt -gt $MAX_FILES ]; then
         warn $"There are %s new kernels.  Only showing the most recent %s." "$new_cnt" "$MAX_FILES"
@@ -522,28 +1160,22 @@ main() {
     fatal_k0 "$boot_all" $"No kernels were found in the boot directory"
     fatal_k0 "$live_all" $"No kernels were found in the live boot directory"
 
-    # Let's see if they should do a remaster first
     local boot_all_cnt=$(count_lines "$boot_all")
-    local live_boot_cnt=0
-    # Only count /boot kernels if we are working on a live system
-    update_live && live_boot_cnt=$(count_kernels /boot)
 
-    # They should almost always remaster if they've installed a kernel
-    if [ $live_boot_cnt -gt $boot_all_cnt ]; then
+    # Offer remaster if overlay has kernels not yet baked into squashfs
+    if [ $overlay_cnt -gt 0 ]; then
         shout $"You should do a remaster before doing a kernel update"
         do_remaster "${ORIG_ARGS[@]}"
     fi
 
-    if [ $action_cnt -eq 0 -a ${#MODS} -eq 0 ]; then
+    # MX: add (free slot) or reassign (any slot) are available even when new_cnt=0
+    local mk_can_add=
+    multi_kernel && [ $boot_all_cnt -gt 0 ] && mk_can_add=true
 
-        # Maybe they just need to do a remaster first
-        local boot_all_cnt=$(count_lines "$boot_all")
-        local live_boot_cnt=0
-        # Only count /boot kernels if we are working on a live system
-        [ "$DEVICE" = "live" ] && live_boot_cnt=$(count_lines "$($VM_VERSION_PROG -nsr /boot)")
+    if [ $action_cnt -eq 0 -a ${#MODS} -eq 0 -a -z "$mk_can_add" ]; then
 
         # Aha, they just need to remaster first
-        if [ $live_boot_cnt -gt $boot_all_cnt ]; then
+        if [ $overlay_cnt -gt 0 ]; then
             shout_subtitle $"You MUST do a remaster before doing a kernel update"
             do_remaster "${ORIG_ARGS[@]}"
             exit
@@ -559,16 +1191,52 @@ main() {
         fi
     fi
 
+    debug_slot_table "$full_live_dir" "$live_vm" "$live_old"
+
+    # MX mode: warn if syslinux boots any slot via shared initrd.gz
+    if multi_kernel; then
+        local _sysl_shared="" _sysl_files="" _sv _sf _sd _flist
+        while IFS="$K_IFS" read -r _sv _sf _sd; do
+            [ -z "$_sf" ] && continue
+            [ "$_sf" = "$VMLINUZ_NAME" ] && continue  # primary slot always uses initrd.gz
+            # Only warn if per-slot initrd exists -- if missing, initrd.gz fallback is correct
+            test -f "$full_live_dir/$(kernel_to_initrd "$_sf")" || continue
+            _flist=$(syslinux_shared_cfg_files "$_sf")
+            if [ -n "$_flist" ]; then
+                _sysl_shared="${_sysl_shared:+$_sysl_shared }$_sf"
+                _sysl_files="${_sysl_files}${_flist}"$'\n'
+            fi
+        done <<< "$live_vm"
+        if [ -n "$_sysl_shared" ]; then
+            local _dflt=""
+            test -e "$root_dir/etc/mx-version" \
+                || _dflt=" ($"default mode for antiX")"
+            local _wfmt1=$"Syslinux uses shared %s for %s%s"
+            local _wfmt2=$"Run with %s and select %s to fix"
+            warn "${m_co}${_wfmt1}" "$(pq 'initrd.gz')" "$(pq "$_sysl_shared")" "$_dflt"
+            warn "${m_co}${_wfmt2}" "$(pq '--shared-initrd')" "$(pq $"Update initrd using file")"
+            local _f
+            while IFS= read -r _f; do
+                [ -n "$_f" ] || continue
+                msg "  %s" "$(pq "$_f")"
+            done <<< "$(printf '%s' "$_sysl_files" | sort -u)"
+        fi
+    fi
+
     #==============================================================================
     # The Second Menu (if needed, no --initrd  and no --modules)
     #==============================================================================
+    if multi_kernel && [ -n "$NEW_KERNEL" ]; then
+        warn $"-k/--kernel option is not supported in multi-kernel mode, ignoring"
+        NEW_KERNEL=""
+    fi
     local action_target
-    if [ ${#MODS} -gt 0 ]; then
+    if ! multi_kernel && [ ${#MODS} -gt 0 ]; then
         action_target="modules@$MODS"
     elif [ "$new_initrd" ];then
         action_target=initrd@$CMD_INITRD
     else
-        select_update_rollback_action action_target "$live_vm" "$live_old" "$new_cnt" "$template_initrd"
+        select_update_rollback_action action_target "$live_vm" "$live_old" "$new_cnt" "$template_initrd" "$full_live_dir" "$boot_all_cnt"
     fi
 
     local action=${action_target%@*}
@@ -589,7 +1257,11 @@ main() {
         #==========================================================================
         # The Third Menu (only if needed)
         #==========================================================================
-        select_new_kernel new_kernel "$NEW_KERNEL" "$boot_new"
+        # Shared mode: offer only kernels not already in an active slot (same
+        # kernel in both slots is pointless and makes rollback a no-op).
+        # Multi-kernel mode: offer all -- slots are independent.
+        local _update_pool; multi_kernel && _update_pool="$boot_all" || _update_pool="$boot_new"
+        select_new_kernel new_kernel "$NEW_KERNEL" "$_update_pool" "$target_version" $"kernel being replaced"
 
         new_fname=$(get_kernel_fname "$new_kernel")
         new_version=$(get_kernel_version "$new_kernel")
@@ -598,9 +1270,27 @@ main() {
             || fatal "Missing modules directory for kernel %s" "$new_version"
 
         # Current kernel and New/Old kernel specs
+        # Multi-kernel: no .kold backup (do_install_direct); shared: backup shown
+        local _kold_dest; multi_kernel || _kold_dest="$target_fname$KOLD_EXT"
         blurb=$(kernel_stats \
-            $"Current" "$target_version" "$target_date" "$target_fname" "$target_fname$KOLD_EXT" \
+            $"Current" "$target_version" "$target_date" "$target_fname" "$_kold_dest" \
             $"New"     "$new_version"    "$new_date"    $"(new)"        "$target_fname")
+        if multi_kernel && [ -n "$CMD_INITRD_EXPLICIT" ]; then
+            local _lbl_initrd=$"Using initrd template"
+            blurb="$blurb
+$(printf "${m_co}%s: %s${nc_co}" "$_lbl_initrd" "$(pq "$CMD_INITRD")")"
+            action_name=$"live kernel update with initrd template"
+        fi
+        if multi_kernel && [ -n "$MODS" ]; then
+            local _lbl_mods=$"Add modules"
+            blurb="$blurb
+$(printf "${m_co}%s: %s${nc_co}" "$_lbl_mods" "$(pq "$MODS")")"
+            if [ -n "$CMD_INITRD_EXPLICIT" ]; then
+                action_name=$"live kernel update with initrd template and modules"
+            else
+                action_name=$"live kernel update with modules"
+            fi
+        fi
 
     #---- Rollback Action ---------------------------------------------------------
     elif [ "$action" = "rollback" ]; then
@@ -637,8 +1327,82 @@ main() {
         # Update initrd using file <filename> [NOTE: no "%s" here!]
         blurb=$(printf "$blurb_fmt" $"Add initrd modules" "$(pq "$target_fname")")
 
+    elif [ "$action" = "update-initrd" ]; then
+        action_name=$"live initrd update"
+        initrd_only=true
+        target=$(find_kernel_fname "$target_fname" "$live_vm")
+        local target_version=$(get_kernel_version "$target")
+        local blurb_fmt="${m_co}%s: %s"
+        blurb=$(printf "$blurb_fmt" $"Update initrd for" "$(pq "$target_fname")")
+
+    elif [ "$action" = "reassign" ]; then
+        action_name=$"live kernel reassign"
+        target=$(find_kernel_fname "$target_fname" "$live_vm")
+        local target_version=$(get_kernel_version "$target")
+        local target_date=$(get_kernel_date "$target")
+        select_new_kernel new_kernel "$NEW_KERNEL" "$boot_all" "$target_version" $"kernel being replaced"
+        new_fname=$(get_kernel_fname "$new_kernel")
+        new_version=$(get_kernel_version "$new_kernel")
+        new_date=$(get_kernel_date "$new_kernel")
+        test -d $root_dir/lib/modules/$new_version \
+            || fatal "Missing modules directory for kernel %s" "$new_version"
+        local _kold_dest; multi_kernel || _kold_dest="$target_fname$KOLD_EXT"
+        blurb=$(kernel_stats \
+            $"Current" "$target_version" "$target_date" "$target_fname" "$_kold_dest" \
+            $"New"     "$new_version"    "$new_date"    $"(new)"        "$target_fname")
+        if multi_kernel && [ -n "$CMD_INITRD_EXPLICIT" ]; then
+            local _lbl_initrd=$"Using initrd template"
+            blurb="$blurb
+$(printf "${m_co}%s: %s${nc_co}" "$_lbl_initrd" "$(pq "$CMD_INITRD")")"
+            action_name=$"live kernel reassign with initrd template"
+        fi
+        if multi_kernel && [ -n "$MODS" ]; then
+            local _lbl_mods=$"Add modules"
+            blurb="$blurb
+$(printf "${m_co}%s: %s${nc_co}" "$_lbl_mods" "$(pq "$MODS")")"
+            if [ -n "$CMD_INITRD_EXPLICIT" ]; then
+                action_name=$"live kernel reassign with initrd template and modules"
+            else
+                action_name=$"live kernel reassign with modules"
+            fi
+        fi
+
+    elif [ "$action" = "add" ]; then
+        action_name=$"live kernel add"
+        local _add_mark=""
+        update_live && _add_mark=$(uname -r)
+        select_new_kernel new_kernel "$NEW_KERNEL" "$boot_all" "$_add_mark" $"running live kernel"
+        new_fname=$(get_kernel_fname "$new_kernel")
+        new_version=$(get_kernel_version "$new_kernel")
+        new_date=$(get_kernel_date "$new_kernel")
+        test -d $root_dir/lib/modules/$new_version \
+            || fatal "Missing modules directory for kernel %s" "$new_version"
+        blurb=$(printf "${m_co}%s %s: %s ($date_co%s$nc_co)" \
+            $"Add new kernel to" "$(pq "$target_fname")" "$(vq "$new_version")" "$new_date")
+        if [ -n "$CMD_INITRD_EXPLICIT" ]; then
+            local _lbl_initrd=$"Using initrd template"
+            blurb="$blurb
+$(printf "${m_co}%s: %s${nc_co}" "$_lbl_initrd" "$(pq "$CMD_INITRD")")"
+            action_name=$"live kernel add with initrd template"
+        fi
+        if [ -n "$MODS" ]; then
+            local _lbl_mods=$"Add modules"
+            blurb="$blurb
+$(printf "${m_co}%s: %s${nc_co}" "$_lbl_mods" "$(pq "$MODS")")"
+            if [ -n "$CMD_INITRD_EXPLICIT" ]; then
+                action_name=$"live kernel add with initrd template and modules"
+            else
+                action_name=$"live kernel add with modules"
+            fi
+        fi
+
+    elif [ "$action" = "remove" ]; then
+        action_name=$"live kernel remove"
+        local target_version=$(get_kernel_version "$(find_kernel_fname "$target_fname" "$live_vm")")
+        blurb=$(printf "${m_co}%s: %s" $"Remove kernel" "$(pq "$target_fname")")
+
     elif [ "$action" = 'quit' ]; then
-        exit
+        offer_restart
 
     else
         internal_error "update/rollback menu" "$action"
@@ -649,15 +1413,57 @@ main() {
     shout_subtitle $"Ready to make the following %s" "$action_name"
     log_it echo "$blurb"
 
-    YES_no_pretend || my_exit
+    if update_live && [ "$target_version" = "$(uname -r)" ]; then
+        local _running_ver="$target_version"
+        if [ "$action" = "remove" ] || [ "$action" = "update" ] || [ "$action" = "reassign" ]; then
+            local _safe="" _ver _fn _dt
+            while IFS="$K_IFS" read -r _ver _fn _dt; do
+                [ "$_fn" = "$target_fname" ] && continue
+                [ "$_ver" = "$_running_ver" ] && _safe=true && break
+            done <<< "$live_vm"
+            if [ -z "$_safe" ] && [ $(count_lines "$live_vm") -gt 1 ]; then
+                local _wfmt
+                [ "$action" = "remove" ] \
+                    && _wfmt=$"You are about to remove the currently running live kernel %s" \
+                    || _wfmt=$"You are about to replace the currently running live kernel %s"
+                warn "${m_co}${_wfmt}" "${warn_co}${_running_ver}${m_co}"
+            fi
+        fi
+    fi
+
+    YES_no_pretend || offer_restart
+
+    if [ "$action" = "remove" ]; then
+        do_remove_slot "$full_live_dir" "$target_fname"
+        my_done "$action_name"
+    fi
+
+    if multi_kernel && [ "$action" = "update"   -o "$action" = "rollback" \
+               -o "$action" = "add"      -o "$action" = "update-initrd" \
+               -o "$action" = "reassign" ]; then
+        local slot_initrd_name=$(kernel_to_initrd "$target_fname")
+        targ_initrd="$full_live_dir/$slot_initrd_name"
+        if [ "$action" = "add" ]; then
+            # Prefer template (guaranteed clean); fall back to primary initrd.gz
+            full_initrd=$template_initrd
+            test -e "$full_initrd" || full_initrd=$full_live_dir/$INITRD_NAME
+            test -e "$full_initrd" || fatal $"Could not find initrd file %s" "$full_initrd"
+        else
+            # update / update-initrd / reassign: always rebuild from template (clean per-slot initrd)
+            full_initrd=$template_initrd
+            test -e "$full_initrd" || fatal $"Could not find template initrd %s" "$full_initrd"
+        fi
+    fi
 
     if [ "$action" = "rollback" ]; then
-        do_rollback  "$full_live_dir" "$target_fname" "$INITRD_NAME"
+        local rollback_initrd=$INITRD_NAME
+        multi_kernel && rollback_initrd=$(kernel_to_initrd "$target_fname")
+        do_rollback "$full_live_dir" "$target_fname" "$rollback_initrd"
         my_done "$action_name"
     fi
 
     local initrd_dir=$WORK_DIR/initrd
-    local tmp_initrd_file="$WORK_DIR/$(basename $INITRD_NAME).tmp"
+    local tmp_initrd_file="$WORK_DIR/$(basename "$targ_initrd").tmp"
     local compression_file="$WORK_DIR/compression"
     local cpio_files="$WORK_DIR/cpio.{in,out}"
 
@@ -689,35 +1495,95 @@ main() {
     copy_initrd_release "$root_dir" "$initrd_dir" "$initrd_only"
 
     if need copy-modules; then
-        if [ ${#MODS} -gt 0 ]; then
+        if ! multi_kernel && [ ${#MODS} -gt 0 ]; then
             : # Don't delete any exiting modules
             local mod_file=$WORK_DIR/modules.list
             echo "$MODS" | sed -r "s/[ ,]+/\n/g" > $mod_file
             copy_modules "$root_dir" "$initrd_dir" "$current_versions" "$mod_file"
-
+            need copy-programs && copy_programs "$root_dir"  "$initrd_dir"
+        elif [ "$action" = "update-initrd" ]; then
+            delete_all_modules $initrd_dir
+            copy_modules "$root_dir" "$initrd_dir" "$target_version"
+            need copy-programs && copy_programs "$root_dir" "$initrd_dir"
         elif [ "$initrd_only" ]; then
             delete_all_modules $initrd_dir
-            copy_modules  "$root_dir"  "$initrd_dir"  "$current_versions"
+            copy_modules  "$root_dir"  "$initrd_dir"  "$(get_kernel_version "$live_vm")"
             need copy-programs && copy_programs "$root_dir"  "$initrd_dir"
-        else
-            [ "$KEEP_OLD" ] || remove_old_mods $initrd_dir $target_version
+        elif [ "$action" = "add" ]; then
+            delete_all_modules $initrd_dir
             copy_modules "$root_dir" "$initrd_dir" "$new_version"
+            if [ -n "$MODS" ]; then
+                local mod_file=$WORK_DIR/modules.list  no_banner=true
+                echo "$MODS" | sed -r "s/[ ,]+/\n/g" > $mod_file
+                copy_modules "$root_dir" "$initrd_dir" "$new_version" "$mod_file" $no_banner
+            fi
+            need copy-programs && copy_programs "$root_dir" "$initrd_dir"
+        else
+            if multi_kernel; then
+                delete_all_modules "$initrd_dir"
+            else
+                [ "$KEEP_OLD" ] || remove_old_mods $initrd_dir $target_version
+            fi
+            copy_modules "$root_dir" "$initrd_dir" "$new_version"
+            if multi_kernel && [ -n "$MODS" ]; then
+                local mod_file=$WORK_DIR/modules.list  no_banner=true
+                echo "$MODS" | sed -r "s/[ ,]+/\n/g" > $mod_file
+                copy_modules "$root_dir" "$initrd_dir" "$new_version" "$mod_file" $no_banner
+            fi
+            # Shared mode: also keep modules for every other active slot
+            if ! multi_kernel; then
+                local _shr_vers
+                _shr_vers=$(while IFS="$K_IFS" read -r _v _f _d; do
+                    [ "$_f" = "$target_fname" ] && continue
+                    echo "$_v"
+                done <<< "$live_vm" | grep -vxF "$new_version")
+                [ -n "$_shr_vers" ] && copy_modules "$root_dir" "$initrd_dir" "$_shr_vers"
+            fi
+            need copy-programs && copy_programs "$root_dir"  "$initrd_dir"
         fi
     fi
 
     pause copy
 
-    need repack && unpack-initrd --dir "$initrd_dir" --from "$tmp_initrd_file" --repack  --quiet
+    if need repack; then
+        unpack-initrd --dir "$initrd_dir" --from "$tmp_initrd_file" --repack --quiet
+        if [ -z "$NO_UCODE" ]; then
+            if command -v uc-tool >/dev/null 2>&1; then
+                local uc_vflag="-s"; [ "$BE_VERBOSE" ] && uc_vflag="-V"
+                msg "Adding microcode to initrd ..."
+                uc-tool $uc_vflag $uc_firmware_arg -u amd,intel -i "$tmp_initrd_file" \
+                    || warn "uc-tool failed -- initrd may lack current microcode"
+            else
+                warn "uc-tool not found -- skipping microcode refresh"
+            fi
+        fi
+    fi
     pause repack
 
     if need install; then
-        if [ "$initrd_only" ]; then
+        if multi_kernel; then
+            # MX mode: no backups -- each slot IS its own rollback; install directly
+            do_install_direct "$tmp_initrd_file" "$targ_initrd"
+            if [ -z "$initrd_only" ]; then
+                do_install_direct "$full_boot_dir/$new_fname" "$full_live_dir/$target_fname"
+                need defrag && do_defrag "$full_live_dir"
+            fi
+        elif [ "$action" = "add" ]; then
+            do_install "$tmp_initrd_file" "$targ_initrd" "$KOLD_EXT" no_warn
+            do_install "$full_boot_dir/$new_fname" "$full_live_dir/$target_fname" "$KOLD_EXT" no_warn
+            need defrag && do_defrag "$full_live_dir"
+        elif [ "$initrd_only" ]; then
             do_install "$tmp_initrd_file" "$targ_initrd"  "$IOLD_EXT"
         else
             do_install "$tmp_initrd_file" "$targ_initrd"
             do_install "$full_boot_dir/$new_fname" "$full_live_dir/$target_fname"
-
             need defrag && do_defrag "$full_live_dir"
+        fi
+        multi_kernel && [ -z "$initrd_only" ] \
+            && write_vmlinuz_ver "$full_live_dir/$target_fname"
+        # Feature 2: shared mode -- propagate updated initrd.gz to any stale per-slot initrdN.gz
+        if ! multi_kernel; then
+            sync_slot_initrds_with_shared
         fi
     fi
     pause install
@@ -764,44 +1630,107 @@ select_update_rollback_action() {
     local cnt=$(count_lines "$menu")
     [ $cnt -lt 1 ] && fatal $"No update or rollback actions are available"
 
+    if update_live; then
+        local _rv=$(uname -r)
+        local _lbl_run=$"running live kernel"
+        local _lbl_persist=$"kernel uninstalled under persistence - may not boot"
+        msg "${hi_co}*${nc_co} ${version_co}${_rv}${nc_co}  ${m_co}${_lbl_run}${nc_co}"
+        live_persist \
+            && msg "${warn_co}?${nc_co}  ${m_co}${_lbl_persist}${nc_co}"
+    fi
+    local BACK_TO_MAIN=$"quit"
     my_select $var $"Please select an action to perform" "$menu"
 }
 
 #------------------------------------------------------------------------------
 # Make the main menu for changing kernel or rolling back
 #------------------------------------------------------------------------------
+_slot_is_orphaned() {
+    local ver=$1 _sv _sf _sd
+    [ -n "$stale_vm" ] && while IFS="$K_IFS" read -r _sv _sf _sd; do
+        [ "$_sv" = "$ver" ] && return 0
+    done <<< "$stale_vm"
+    [ -n "$persist_removed_vm" ] && while IFS="$K_IFS" read -r _sv _sf _sd; do
+        [ "$_sv" = "$ver" ] && return 0
+    done <<< "$persist_removed_vm"
+    return 1
+}
+
 make_update_menu() {
-    local var=$1  live_vm=$2  old_vm=$3  new_cnt=$4  initrd=$5  orig_ifs=$IFS
+    local var=$1  live_vm=$2  old_vm=$3  new_cnt=$4  initrd=$5  live_dir=$6  boot_cnt=$7  orig_ifs=$IFS
 
     local IFS=$K_IFS
 
+    local running_ver=""
+    update_live && running_ver=$(uname -r)
+
     # FIXME: go through twice to get widths?
-    local fmt="%s$bold_co %s$m_co %s %s ($date_co%s$nc_co)"
+    local fmt="%s$bold_co %s$m_co %s %s ($date_co%s$nc_co)%s"
     local live_k  action  action_name
 
-    local version fname date
+    local version fname date run_mark stale_mark
     if [ $new_cnt -gt 0 ]; then
         action=update; action_name=$"Update"
         while read version fname date; do
             [ ${#version} -eq 0 ] && continue
-            menu_printf "$action@$fname" "$fmt" "$action_name" "$fname" $"from" "$(vq $version)" "$date"
+            [ -n "$running_ver" ] && [ "$version" = "$running_ver" ] \
+                && run_mark="${hi_co}*${nc_co}" || run_mark=""
+            _slot_is_orphaned "$version" \
+                && stale_mark="${warn_co}?${nc_co}" || stale_mark=""
+            menu_printf "$action@$fname" "$fmt" "$action_name" "$(printf '%-8s' "$fname")" $"from" "$(vq $version)" "$date" "${run_mark}${stale_mark}"
         done <<Live_VM
 $(echo "$live_vm")
 Live_VM
     fi
 
-    action="rollback" ; action_name=$"Rollback"
-    fmt="%s$bold_co %s$m_co %s %s ($date_co%s$nc_co)"
-    while read version fname date; do
-        [ ${#version} -eq 0 ] && continue
-        fname=${fname%$KOLD_EXT}
-        menu_printf "$action@$fname" "$fmt" "$action_name" "$fname" $"to" "$(vq $version)" "$date"
-    done <<Old_VM
+    if ! multi_kernel; then
+        action="rollback" ; action_name=$"Rollback"
+        fmt="%s$bold_co %s$m_co %s %s ($date_co%s$nc_co)"
+        while read version fname date; do
+            [ ${#version} -eq 0 ] && continue
+            fname=${fname%$KOLD_EXT}
+            menu_printf "$action@$fname" "$fmt" "$action_name" "$fname" $"to" "$(vq $version)" "$date"
+        done <<Old_VM
 $(echo "$old_vm")
 Old_VM
+    fi
 
-    [ ${#initrd} -gt 0 ] && test -f "$initrd" \
-        && menu_printf "initrd@$initrd" $"Update initrd using file %s" "$(pq "$initrd")"
+    if multi_kernel && [ -n "$live_dir" ]; then
+        local vmver vmslot vmdate
+        if [ ${boot_cnt:-0} -gt 0 -a $new_cnt -eq 0 ]; then
+            while read vmver vmslot vmdate; do
+                [ ${#vmslot} -eq 0 ] && continue
+                [ -n "$running_ver" ] && [ "$vmver" = "$running_ver" ] \
+                    && run_mark="${hi_co}*${nc_co}" || run_mark=""
+                _slot_is_orphaned "$vmver" \
+                    && stale_mark="${warn_co}?${nc_co}" || stale_mark=""
+                menu_printf "reassign@$vmslot" "$fmt" $"Update" "$(printf '%-8s' "$vmslot")" $"from" "$(vq $vmver)" "$vmdate" "${run_mark}${stale_mark}"
+            done <<Reassign_VMs
+$(echo "$live_vm")
+Reassign_VMs
+        fi
+        local next_slot
+        next_slot=$(find_next_free_slot "$live_dir") \
+            && [ ${boot_cnt:-0} -gt 0 ] \
+            && menu_printf "add@$next_slot" $"Add new kernel to %s" "$(pq "$next_slot")"
+        local slot_cnt=$(count_lines "$live_vm")
+        if [ $slot_cnt -gt 1 ]; then
+            while read vmver vmslot vmdate; do
+                [ ${#vmslot} -eq 0 ] && continue
+                [ "$vmslot" = "$VMLINUZ_NAME" ] && continue
+                [ -n "$running_ver" ] && [ "$vmver" = "$running_ver" ] \
+                    && run_mark="${hi_co}*${nc_co}" || run_mark=""
+                _slot_is_orphaned "$vmver" \
+                    && stale_mark="${warn_co}?${nc_co}" || stale_mark=""
+                menu_printf "remove@$vmslot" $"Remove kernel %s%s%s" "$(pq "$vmslot")" "$run_mark" "$stale_mark"
+            done <<Remove_VMs
+$(echo "$live_vm")
+Remove_VMs
+        fi
+    else
+        [ ${#initrd} -gt 0 ] && test -f "$initrd" \
+            && menu_printf "initrd@$initrd" $"Update initrd using file %s" "$(pq "$initrd")"
+    fi
 
     menu_printf 'quit' $"Quit"
     IFS=$orig_ifs
@@ -813,8 +1742,34 @@ Old_VM
 # be used when they do an update.  If there is only one new kernel then that
 # kernel is selected and there is no menu.
 #------------------------------------------------------------------------------
+
+#------------------------------------------------------------------------------
+# Clone of select_kernel_2 with a marker (*) on the currently installed kernel.
+# Payload returned on selection is always the clean version|fname|date record.
+#------------------------------------------------------------------------------
+select_kernel_2_marked() {
+    local title=$1 var=$2 list=$3 current_version=$4 orig_ifs=$IFS
+    IFS=$K_IFS
+    local f1 f2 f3  w1=5
+    while read f1 f2 f3; do
+        [ $w1 -lt ${#f1} ] && w1=${#f1}
+    done <<< "$list"
+    local fmt="$hi_co%s$version_co%-${w1}s $date_co%s$nc_co\n"
+    local hfmt="$head_co  %s %s$nc_co\n"
+    local data="$P_IFS$(printf "$hfmt" "$(rpad $w1 $"Version")" $"Date")\n"
+    local payload marker
+    while read f1 f2 f3; do
+        [ ${#f1} -gt 0 ] || continue
+        payload="$f1$IFS$f2$IFS$f3"
+        [ "$f1" = "$current_version" ] && marker="* " || marker="  "
+        data="$data$payload$P_IFS$(printf "$fmt" "$marker" "$f1" "$f3")\n"
+    done <<< "$list"
+    IFS=$orig_ifs
+    my_select $var "$title" "$data" ""
+}
+
 select_new_kernel() {
-    local var=$1  cmd_version=$2  list=$3  cnt=$(count_lines "$3")
+    local var=$1  cmd_version=$2  list=$3  current_version=$4  current_label=$5  cnt=$(count_lines "$3")
 
     fatal_0 $cnt $"Did not find any new kernels in the boot directory"
 
@@ -825,7 +1780,7 @@ select_new_kernel() {
             0) fatal "No new kernels match the requested version %s" "$cmd_version" ;;
 
             1) msg $"Found one kernel matching the requested version %s" "$(pq $cmd_version)"
-               eval "$var=\$list"
+               eval "$var=\$cmd_kernel"
                return ;;
 
             *) fatal "Found multiple kernels matching the requested version %s" "$cmd_version" ;;
@@ -833,12 +1788,24 @@ select_new_kernel() {
     fi
 
     case $cnt in
-        1)  msg $"Found one new kernel %s" "$(pq $(get_kernel_version $list))"
+        1)  local _auto_ver=$(get_kernel_version "$list")
+            if [ "$_auto_ver" = "$current_version" ]; then
+                msg $"Found one kernel %s" "$(pq $_auto_ver)"
+            else
+                msg $"Found one new kernel %s" "$(pq $_auto_ver)"
+            fi
             eval "$var=\$list"
             return ;;
     esac
 
-    select_kernel_2 $"Please select the new kernel from this list" $var "$list"
+    local BACK_TO_MAIN=$"quit"
+    if [ -n "$current_version" ]; then
+        msg "${hi_co}*${nc_co} ${version_co}${current_version}${nc_co}  ${m_co}${current_label}${nc_co}"
+        select_kernel_2_marked $"Please select a kernel from this list" $var "$list" "$current_version"
+    else
+        select_kernel_2 $"Please select a kernel from this list" $var "$list"
+    fi
+    [ "${!var}" = "quit" ] && offer_restart
 }
 
 #==============================================================================
@@ -888,14 +1855,14 @@ remove_old_mods() {
 # Copy in modules directory for the new kernel
 #------------------------------------------------------------------------------
 copy_modules() {
-    local from=$1  to=$2  versions=$3  mod_file=$4
+    local from=$1  to=$2  versions=$3  mod_file=$4  no_banner=$5
 
     local options="--count --quiet --from=$from --to=$to"
     [ ${#mod_file} -gt 0 ] && options="$options --verbose"
 
     local version success
     for version in $versions; do
-        msg "  -> %s %s" $"kernel" "$(pq $version)"
+        [ -z "$no_banner" ] && msg "  -> %s %s" $"kernel" "$(pq $version)"
         if always_cmd copy-initrd-modules $options --encrypt --kernel="$version" $mod_file; then
             success=true
             continue
@@ -913,9 +1880,13 @@ copy_modules() {
 #------------------------------------------------------------------------------
 copy_programs() {
     local from=$1  to=$2  prog=${3:-copy-initrd-programs}
+    local encrypt_option=""
+    if [ "$IS_ENCRYPTED" = true ] || [ "$CMD_ENCRYPT" = true ]; then
+        encrypt_option="--encrypt"
+    fi
     need_prog $prog
-    cmd $prog --from="$from" --to="$to" --encrypt --clean
-    cmd $prog --from="$from" --to="$to"
+    cmd $prog --from="$from" --to="$to" $encrypt_option --clean
+    cmd $prog --from="$from" --to="$to" $encrypt_option
 }
 
 #------------------------------------------------------------------------------
@@ -923,7 +1894,7 @@ copy_programs() {
 # also makes an md5sum of the new file.
 #------------------------------------------------------------------------------
 do_install() {
-    local from=$1  dest=$2 old_ext=${3:-$KOLD_EXT}
+    local from=$1  dest=$2  old_ext=${3:-$KOLD_EXT}  no_warn=$4
     test -f "$from" || fatal "Installation file %s does not exist" "$from"
 
     # install <filename>
@@ -939,13 +1910,27 @@ do_install() {
             warn $"Overwriting backup"
         fi
     else
-        warn $"Target file %s does not exist" "$dest"
+        [ "$no_warn" ] || warn $"Target file %s does not exist" "$dest"
     fi
 
     cmd cp "$from" "$dest"
 
     local md5_file=$dest$MD5_EXT
     #test -e $md5_file && cmd mv $md5_file $dest$old_ext$MD5_EXT
+    local md5_sum=$(cd $(dirname $dest) && md5sum $(basename $dest))
+    cmd write_file "$md5_file" "$md5_sum"
+}
+
+#------------------------------------------------------------------------------
+# Like do_install but overwrites directly without creating a backup.
+# Used in multi-kernel mode: each slot is independent, boot another to recover.
+#------------------------------------------------------------------------------
+do_install_direct() {
+    local from=$1  dest=$2
+    test -f "$from" || fatal "Installation file %s does not exist" "$from"
+    msg $"install %s" "$(pq $(basename $dest))"
+    cmd cp "$from" "$dest"
+    local md5_file=$dest$MD5_EXT
     local md5_sum=$(cd $(dirname $dest) && md5sum $(basename $dest))
     cmd write_file "$md5_file" "$md5_sum"
 }
@@ -1041,6 +2026,29 @@ my_done() {
     else
         Shout "%s %s %s." "$ME" "$(pqb $action)" $"done"
     fi
+    offer_restart
+}
+
+#------------------------------------------------------------------------------
+# Ask the user if they want to restart from the beginning; exit if not.
+# Used when the user quits the menu or cancels a pending action.
+#------------------------------------------------------------------------------
+offer_restart() {
+    if YES_no $"Perform another operation?"; then
+        clean_up
+        # Replay original args minus any --device/-d, then add confirmed device.
+        # This preserves --shared-initrd, --multi-kernel, -VV, etc. across restarts.
+        local args=() arg skip_next=false
+        for arg in "${UNPACKED_ARGS[@]}"; do
+            if $skip_next; then skip_next=false; continue; fi
+            case "$arg" in
+                --device=*|-d?*) continue ;;
+                -d) skip_next=true; continue ;;
+            esac
+            args+=("$arg")
+        done
+        exec "$0" "${args[@]}" --device="$DEVICE"
+    fi
     my_exit 0
 }
 
@@ -1077,6 +2085,7 @@ filter_on_compression() {
 # Convenience routine
 #------------------------------------------------------------------------------
 update_live() { [ "$DEVICE" = 'live' ] ; return $? ; }
+live_persist() { update_live && [ -f /etc/live/config/persist-root ]; }
 
 #------------------------------------------------------------------------------
 # Count the number of kernels in a directory
@@ -1116,8 +2125,16 @@ my_exit() {
 # the lock file.
 #------------------------------------------------------------------------------
 clean_up() {
+    sync
     lib_clean_up
-    mp_cleanup $SQFS_DIR $USB_DIR $BIOS_DIR $WORK_DIR
+    # Only unmount USB_DIR if we mounted it ourselves; leave GIO/external mounts alone
+    if [ "${LKU_DID_MOUNT:-true}" = true ]; then
+        mp_cleanup $SQFS_DIR $USB_DIR $BIOS_DIR $WORK_DIR
+    else
+        mp_cleanup $SQFS_DIR $BIOS_DIR $WORK_DIR
+    fi
+    # toram: unmount LIVE_MP if we remounted it -- restore pre-lku state
+    [ "$LKU_TORAM_MOUNT" = true ] && umount "$LIVE_MP" 2>/dev/null
     test -d $WORK_DIR && rmdir $WORK_DIR
     luks_close $LUKS_NAME
     unflock
@@ -1205,6 +2222,20 @@ load_lib() {
 
 #===== Start Here =============================================================
 load_lib "$SHELL_LIB" "$LIB_PATH"
+
+# Override lib do_defrag: defrag kernels and initrds only -- skip .md5/.ver files
+do_defrag() {
+    local iso_dir=$1  prog=e4defrag  opts="-v"
+    if ! which $prog &>/dev/null; then
+        warn $"Could not find program %s.  Not defragmenting." $prog
+        return
+    fi
+    local files
+    files=$(find "${iso_dir%/}" -maxdepth 1 \
+        \( -name "vmlinuz" -o -name "vmlinuz[0-9]" \
+        -o -name "initrd.gz" -o -name "initrd[0-9].gz" \) 2>/dev/null)
+    [ -n "$files" ] && cmd $prog $opts $files
+}
 
 set_colors
 

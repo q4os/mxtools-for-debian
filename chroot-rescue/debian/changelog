@@ -1,3 +1,29 @@
+chroot-rescue (0.2.6+5) mx; urgency=medium
+
+  * Add btrfs subvolume detection to chroot-rescue-select.
+  * Adjust help/usage and fix short option for --pause.
+  * Use default topdir under /tmp/chroot-rescue-scan-...
+
+ -- fehlix <fehlix@mxlinux.org>  Wed, 29 Apr 2026 06:48:45 -0400
+
+chroot-rescue (0.2.6+4) mx; urgency=medium
+
+  * Add btrfs subvolume detection with or without luks encryption.
+  * Expand detection for “/@” root subvolumes, as used by Ubuntu, Debian,
+  antiX, MX Linux, Arch and its derivatives, openSUSE, and Fedora/RHEL,
+  by custom patterns (@rootfs, root, rootfs, ROOT) as well as the top level.
+  * Warn when LUKS mapper name does not match crypttab, to prevent from becoming
+  unbootable after installing kernel, DKMS package, or updating initramfs.
+
+ -- fehlix <fehlix@mxlinux.org>  Fri, 24 Apr 2026 18:58:29 -0400
+
+chroot-rescue (0.2.6+3) mx; urgency=medium
+
+  * add virtual block device major number (252)
+  * add TryExec to desktop file
+
+ -- fehlix <fehlix@mxlinux.org>  Sat, 18 Apr 2026 17:01:41 -0400
+
 chroot-rescue (0.2.6+2) mx; urgency=medium
 
   * move away from /usr/local

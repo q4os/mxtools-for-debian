@@ -63,7 +63,6 @@ if [ "$READ_ENV" = "yes" ] ; then
     parse_environment
 fi
 
-
 case "$1" in
 start)	log_daemon_msg "Starting periodic command scheduler" "cron"
 

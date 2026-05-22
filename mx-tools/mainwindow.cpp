@@ -594,12 +594,15 @@ void MainWindow::btn_clicked()
     } else {
         int exitCode = QProcess::execute(command, cmdList);
         if (exitCode != 0) {
-            qWarning() << "Process failed with exit code:" << exitCode << "Command:" << command << cmdList;
-            // Show error message to user and ensure window is shown again
-            QMessageBox::critical(this, tr("Error"), 
-                tr("Failed to execute command") + "\n" + 
-                tr("Command: %1").arg(command + " " + cmdList.join(" ")) + "\n" +
-                tr("Exit code: %1").arg(exitCode));
+            qWarning() << "Process exited with code:" << exitCode << "Command:" << command << cmdList;
+        }
+        // Only -2 from QProcess::execute means the process could not be started.
+        // -1 (crash) and any positive exit code are the tool's own outcome and
+        // should not be reported as a launch failure.
+        if (exitCode == -2) {
+            QMessageBox::critical(this, tr("Error"),
+                tr("Failed to launch command") + "\n" +
+                tr("Command: %1").arg(command + " " + cmdList.join(" ")));
         }
     }
     show();
@@ -805,9 +808,7 @@ void MainWindow::clearGrid()
 
     QLayoutItem *child;
     while ((child = ui->gridLayout_btn->takeAt(0)) != nullptr) {
-        if (child->widget()) {
-            child->widget()->deleteLater();
-        }
+        delete child->widget();
         delete child;
     }
 }

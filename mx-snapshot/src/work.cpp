@@ -39,6 +39,7 @@
 #include <QTextStream>
 
 #include <algorithm>
+#include <cstdlib>
 #include <stdexcept>
 
 #include "filesystemutils.h"
@@ -67,7 +68,25 @@ quint64 parseDuKilobytes(const QString &output, bool *ok)
     const QString firstField = lines.constLast().section('\t', 0, 0).trimmed();
     return firstField.toULongLong(ok);
 }
+
+void requestPowerOff()
+{
+    const QString powerOffCommand =
+        "sleep 2; dbus-send --system --print-reply --dest=org.freedesktop.login1 "
+        "/org/freedesktop/login1 org.freedesktop.login1.Manager.PowerOff boolean:true";
+    if (!QProcess::startDetached("/bin/sh", {"-c", powerOffCommand})) {
+        qWarning() << "Failed to schedule delayed poweroff; trying immediate poweroff request.";
+        QProcess::execute("dbus-send",
+                          {"--system", "--print-reply", "--dest=org.freedesktop.login1", "/org/freedesktop/login1",
+                           "org.freedesktop.login1.Manager.PowerOff", "boolean:true"});
+    }
+}
 } // namespace
+
+QString Work::snapshotLibPath()
+{
+    return "/usr/lib/" + QCoreApplication::applicationName() + "/snapshot-lib";
+}
 
 Work::Work(Settings *settings, QObject *parent)
     : QObject(parent),
@@ -161,7 +180,7 @@ bool Work::checkInstalled(const QString &package)
 
 void Work::cleanUp()
 {
-    const QString snapshotLib = "/usr/lib/" + QCoreApplication::applicationName() + "/snapshot-lib";
+    const QString snapshotLib = snapshotLibPath();
     const QString elevateTool = Cmd::elevationTool();
     Cmd().run(elevateTool + " " + snapshotLib + " chown_conf", Cmd::QuietMode::Yes);
     if (!started) {
@@ -193,9 +212,7 @@ void Work::cleanUp()
             QFile::copy("/tmp/" + QCoreApplication::applicationName() + ".log",
                         settings->snapshotDir + "/" + settings->snapshotName + ".log");
             QProcess::execute("sync", {});
-            QProcess::execute("dbus-send",
-                              {"--system", "--print-reply", "--dest=org.freedesktop.login1", "/org/freedesktop/login1",
-                               "org.freedesktop.login1.Manager.PowerOff", "boolean:true"});
+            requestPowerOff();
         }
         exit(EXIT_SUCCESS);
     } else {
@@ -212,7 +229,7 @@ bool Work::checkAndMoveWorkDir(const QString &dir, quint64 req_size)
     if (QStorageInfo(dir + "/").device() != QStorageInfo(settings->snapshotDir + "/").device()
         && FileSystemUtils::getFreeSpace(dir) > req_size) {
         if (QFileInfo::exists("/tmp/installed-to-live/cleanup.conf")) {
-            const QString snapshotLib = "/usr/lib/" + QCoreApplication::applicationName() + "/snapshot-lib";
+            const QString snapshotLib = snapshotLibPath();
             const QString elevateTool = Cmd::elevationTool();
             Cmd().run(elevateTool + " " + snapshotLib + " cleanup");
         }
@@ -296,7 +313,7 @@ void Work::cleanupBindRootOverlay()
         bindRootPath = "/.bind-root";
         return;
     }
-    const QString snapshotLib = "/usr/lib/" + QCoreApplication::applicationName() + "/snapshot-lib";
+    const QString snapshotLib = snapshotLibPath();
     const QString elevateTool = Cmd::elevationTool();
     Cmd().run(elevateTool + " " + snapshotLib + " cleanup_overlay " + QCoreApplication::applicationName(),
               Cmd::QuietMode::Yes);
@@ -310,7 +327,6 @@ void Work::closeInitrd(const QString &initrd_dir, const QString &file)
     qDebug() << "+++" << __PRETTY_FUNCTION__ << "+++";
     QDir::setCurrent(initrd_dir);
     shell.run("(find . |cpio -o -H newc --owner root:root |gzip -9) >\"" + file + "\"");
-    makeChecksum(HashType::md5, settings->workDir + "/iso-template/antiX", "initrd.gz");
 }
 
 // copyModules(mod_dir/kernel kernel)
@@ -337,6 +353,21 @@ void Work::copyNewIso()
         shell.run("tar xf /usr/lib/iso-template/iso-template-multi.tar.gz");
     } else {
         shell.run("tar xf /usr/lib/iso-template/iso-template.tar.gz");
+    }
+
+    //check to make sure grub mbr is possible
+    if (settings->grubmbr) {
+        QString file = settings->workDir + "/iso-template/boot/grub/i386-pc/eltorito.img";
+        qDebug() << "file is " << file;
+        if (QFile::exists(settings->workDir + "/iso-template/boot/grub/i386-pc/eltorito.img")){
+            //comment out switch_to_syslinux menus as they don't work when grub is main boot
+            shell.run("sed -i '/^[^#]*switch_to_syslinux/s/^/#/' " + settings->workDir + "/iso-template/boot/grub/config/bootmenu.cfg");
+        } else {
+            emit messageBox(
+                BoxType::critical, tr("Error"),
+                tr("--grub-mbr option specified but boot/grub/i386-pc/eltorito.img is missing from iso-template"));
+            cleanUp();
+        }
     }
     shell.run("cp /usr/lib/iso-template/template-initrd.gz iso-template/antiX/initrd.gz");
     shell.run("cp /boot/vmlinuz-" + settings->kernel + " iso-template/antiX/vmlinuz");
@@ -381,6 +412,14 @@ void Work::copyNewIso()
     if (initrd_dir.isValid()) {
         copyModules(path, settings->kernel);
         closeInitrd(path, settings->workDir + "/iso-template/antiX/initrd.gz");
+        const QStringList ucToolDirs = {"/usr/bin", "/usr/local/bin"};
+        if (!QStandardPaths::findExecutable("uc-tool", ucToolDirs).isEmpty()) {
+            qDebug() << "uc-tool found, injecting ucode into initrd";
+            shell.run("uc-tool -q -i \"" + settings->workDir + "/iso-template/antiX/initrd.gz\"");
+        } else {
+            qDebug() << "uc-tool not found, skipping ucode injection";
+        }
+        makeChecksum(HashType::md5, settings->workDir + "/iso-template/antiX", "initrd.gz");
         initrd_dir.remove();
     }
 }
@@ -389,6 +428,7 @@ void Work::copyNewIso()
 bool Work::createIso(const QString &filename)
 {
     qDebug() << "+++" << __PRETTY_FUNCTION__ << "+++";
+
     // Squash the filesystem copy
     const bool useUnbuffer = checkInstalled("expect");
     using Release::Version;
@@ -428,7 +468,7 @@ bool Work::createIso(const QString &filename)
     shell.run("mv iso-template/antiX/linuxfs* iso-2/antiX");
     makeChecksum(HashType::md5, settings->workDir + "/iso-2/antiX", "linuxfs");
 
-    const QString snapshotLib = "/usr/lib/" + QCoreApplication::applicationName() + "/snapshot-lib";
+    const QString snapshotLib = snapshotLibPath();
     const QString elevateTool = Cmd::elevationTool();
     Cmd().run(elevateTool + " " + snapshotLib + " cleanup");
 
@@ -439,6 +479,15 @@ bool Work::createIso(const QString &filename)
           "-b boot/isolinux/isolinux.bin -eltorito-alt-boot -e boot/grub/efi.img -no-emul-boot -c "
           "boot/isolinux/isolinux.cat -o \""
           + settings->snapshotDir + "/" + filename + "\" . \"" + settings->workDir + "/iso-2\"";
+    
+    //grub for mbr boot instead of isolinux
+    if (settings->grubmbr) {
+        cmd
+            = "xorriso -as mkisofs -l -V MXLIVE -R -J -pad -iso-level 3 -no-emul-boot -boot-load-size 4 -boot-info-table --grub2-boot-info "
+              "-b boot/grub/i386-pc/eltorito.img -eltorito-alt-boot -e boot/grub/efi.img -no-emul-boot -isohybrid-apm-hfsplus -isohybrid-gpt-basdat -o \""
+              + settings->snapshotDir + "/" + filename + "\" . \"" + settings->workDir + "/iso-2\"";
+    }
+          
     if (Cmd().getOut("umask", Cmd::QuietMode::Yes) != "0022") {
         cmd.prepend("umask 022; ");
     }
@@ -465,16 +514,15 @@ bool Work::createIso(const QString &filename)
     }
 
     auto elapsedTime = QTime(0, 0).addMSecs(e_timer.elapsed());
+    done = true;
     emit message(tr("Done"));
     if (settings->shutdown) {
-        done = true;
         cleanUp();
     }
     emit messageBox(BoxType::information, tr("Success"),
                     tr("Debian Snapshot completed successfully!") + '\n'
                         + tr("Snapshot took %1 to finish.").arg(elapsedTime.toString("hh:mm:ss")) + "\n\n"
                         + tr("Thanks for using Debian Snapshot, run Live USB Maker next!"));
-    done = true;
     return true;
 }
 
@@ -527,7 +575,7 @@ void Work::makeChecksum(Work::HashType hash_type, const QString &folder, const Q
     } else {
         // Free pagecache
         shell.run("sync; sleep 1");
-        const QString snapshotLib = "/usr/lib/" + QCoreApplication::applicationName() + "/snapshot-lib";
+        const QString snapshotLib = snapshotLibPath();
         const QString elevateTool = Cmd::elevationTool();
         Cmd().run(elevateTool + " " + snapshotLib + " drop_caches");
         shell.run("sleep 1");
@@ -727,7 +775,7 @@ void Work::writeLsbRelease()
 // Write date of the snapshot in a "snapshot_created" file
 void Work::writeSnapshotInfo()
 {
-    const QString snapshotLib = "/usr/lib/" + QCoreApplication::applicationName() + "/snapshot-lib";
+    const QString snapshotLib = snapshotLibPath();
     const QString elevateTool = Cmd::elevationTool();
     Cmd().run(elevateTool + " " + snapshotLib + " datetime_log", Cmd::QuietMode::Yes);
 }
@@ -760,17 +808,19 @@ quint64 Work::getRequiredSpace()
     QStringList excludes;
     QFile *file = &settings->snapshotExcludes;
 
-    // Open and read the excludes file
-    if (!file->open(QIODevice::ReadOnly)) {
-        qDebug() << "Could not open file: " << file->fileName();
-    }
-    while (!file->atEnd()) {
-        QString line = file->readLine().trimmed();
-        if (!line.startsWith('#') && !line.isEmpty() && !line.startsWith(".bind-root")) {
-            excludes << line;
+    // Open and read the excludes file — on failure, excludes stays empty
+    // so the size estimate is conservative (no exclusions subtracted)
+    if (file->open(QIODevice::ReadOnly)) {
+        while (!file->atEnd()) {
+            QString line = file->readLine().trimmed();
+            if (!line.startsWith('#') && !line.isEmpty() && !line.startsWith(".bind-root")) {
+                excludes << line;
+            }
         }
+        file->close();
+    } else {
+        qWarning() << "Could not open excludes file, space estimate will be conservative:" << file->fileName();
     }
-    file->close();
 
     // Add session excludes
     if (!settings->sessionExcludes.isEmpty()) {

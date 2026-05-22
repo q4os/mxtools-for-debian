@@ -1,3 +1,36 @@
+mx-remaster (26.05.01mx25) mx; urgency=medium
+
+  * change source to . in live-setup papersize test 
+  * force live-setup to run later (addressing race condition in sddm)
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 10 May 2026 09:00:21 -0400
+
+mx-remaster (26.04.02mx25) mx; urgency=medium
+
+  [ fehlix ]
+  * add size validation fix to persist-makefs cli-mode to avoid loss of persistence file
+  * check for shutdown-fix for sysvinit when live boot with dual-init is detected
+  * renable semi-automatic save mode for live-boot with sysvinit
+  * fix persist-makefs cli-mode to avoid loss of persistence file
+
+  [ Dolphin Oracle ]
+  * adjust alttest to work with fresh live system
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 11 Apr 2026 16:51:09 -0400
+
+mx-remaster (26.03.07mx25) mx; urgency=medium
+
+  * remove rc.local functions to init setup scripts (sysv & systemd)
+  * adjust comments in live-setup service file
+  * adjust systemd and live system checks in live-setup
+  * update live init.d scripts
+  * update installed system init.d scripts
+  * remove debug signal files
+  * add protection for script availability to systemd service files
+  * adjust papersize locale detction (fehlix) 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Tue, 31 Mar 2026 20:41:11 -0400
+
 mx-remaster (26.01.02mx25) mx; urgency=medium
 
   [ fehlix ]

@@ -7,10 +7,13 @@
 # Thanks to fehlix for help, ideas, and testing!
 #==============================================================================
 
-     VERSION="1.07"
+#     VERSION="1.07"
 #VERSION_DATE="Wed Dec 23 01:19:04 PM MST 2020"
-     VERSION="1.07-2302"
- VERSION_DATE="Sat, 25 Feb 2023 12:45:10 -0500"
+#     VERSION="1.07-2302"
+#VERSION_DATE="Sat, 25 Feb 2023 12:45:10 -0500"
+
+     VERSION="1.07-260429"
+ VERSION_DATE="Wed, 29 Apr 2026 06:48:45 -0400"
 
           TOP_DIR="/media"
   GRAPHICAL_MENUS="true"
@@ -31,7 +34,7 @@ CHROOT_CMD="chroot-rescue"
 DEFAULT_DISTRO_NAME="Linux"
 MAX_DISTRO_WIDTH=40
 
-MAJOR_DEV_LIST="3,8,22,179,202,253,254,259"
+MAJOR_DEV_LIST="3,8,22,179,202,252,253,254,259"
 
 TO_RMDIR=
 TO_UMOUNT=
@@ -68,17 +71,17 @@ select_usage() {
 
 cat<<Usage
 Usage: $ME [<options>]
-Look for all Linux systems under the top directory ($TOP_DIR).
-Then provide a menu to chroot into any of the Liux systems.
+Look for Linux systems already mounted under the top directory ($TOP_DIR).
+Then provide a menu to chroot into any of the Linux systems found.
 
 Options:
   -C  --color=<xxx>       Set color scheme to off|low|low2|bw|dark|high
-  -d  --dir=<directory>   Directory to look for linux systems under
+  -d  --dir=<directory>   Directory to look for Linux systems under
                           Default: $TOP_DIR
   -h  --help              Show this usage
   -m  --menu              Output menu information then exit
   -M  --max-cols=<x>      Can be 3,4,5, or 6
-  -o  --pause             Pause before exiting if nothing is found
+  -p  --pause             Pause before exiting if nothing is found
   -s  --separator=<x>     Character to separate columns of data
                           Default: $K_IFS
   -V  --verbose           Print more, including many commands
@@ -95,14 +98,14 @@ scan_usage() {
 
 cat<<Usage
 Usage: $ME [<options>]
-SCAN ALL PARTITIONS for Linux systems.  Mount all that are found
-under the top directory ($TOP_DIR).  Then provide a menu to chroot
-into any Linux system system found under the top directory.
+SCAN ALL PARTITIONS for Linux systems. Mount all that are found under
+the directory (${TOP_DIR%-*}-...). Then provide a menu to chroot
+into any Linux system found.
 
 Options:
   -C  --color=<xxx>       Set color scheme to off|low|low2|bw|dark|high
-  -d  --dir=<directory>   Directory to look for linux systems under
-                          Default: $TOP_DIR
+  -d  --dir=<directory>   Mount found partitions under this directory
+                          Default: ${TOP_DIR%-*}-...
   -h  --help              Show this usage
   -m  --menu              Output menu information then exit
   -M  --max-cols=<x>      Can be 3,4,5, or 6
@@ -170,7 +173,8 @@ main() {
     unset DID_SCAN ONLY_32_BIT
 
     # Do this before reading command line args
-    scan_mode && TOP_DIR=/mnt/$ME
+    #scan_mode && TOP_DIR=/mnt/$ME
+    scan_mode && TOP_DIR=$(mktemp -u -p /tmp ${ME}-XXXXXXXX)
 
     set_colors
 
@@ -293,8 +297,9 @@ main() {
 
         echo
         msg $"Visiting distro %s" "$(pq "$distro")"
-        msg $"Directory: %s  Device: %s"  "$(pq "$dir")" "$(pq $(fs_dev "$dir"))"
-        # Use the "exit" command or "<ctrl>-d" to return to the main menu"
+        msg $"Directory: %s" "$(pq "$dir")"
+        msg $"Device:    %s" "$(pq $(fs_dev "$dir"))"
+        warn_luks_mapper_mismatch "$dir"
         msg $"Use the %s command or %s to return to main menu"  "$(cq exit)" "$(cq "<ctrl>-d")"
         local prompt="(\[$cyan\]$distro\[$nc_co\]) \[$green\]\d \t \[$magenta\]\w\[$nc_co\]"
         echo "$BAR_80"
@@ -340,19 +345,34 @@ main_data() {
     while read dir; do
         [ -z "$dir" ]        && continue
         is_mountpoint "$dir" || continue
+
+        # For btrfs mounted at top-level (subvolid=5), find the actual root
+        # subvolume as a plain subdirectory.  _btrfs_is_linux_root is stricter
+        # than is_linux -- it rejects top-levels where etc/usr are symlinks into
+        # a subvolume and requires a distro marker file.
+        # btrfs_mp holds the real mountpoint so device/label/dir-name stay correct.
+        local btrfs_mp=""
+        if [ "$(stat -f -c %T "$dir" 2>/dev/null)" = "btrfs" ] && \
+           ! _btrfs_is_linux_root "$dir"; then
+            local subdir
+            subdir=$(_btrfs_find_root_subdir "$dir") || continue
+            btrfs_mp="$dir"
+            dir="$dir/$subdir"
+        fi
+
         is_linux "$dir"      || continue
         #echo "$dir$K_IFS$(linux_entry "$dir")$K_IFS$(human_size "$dir")"
         local _arch=$(get_arch "$dir")
         local    _date=$(fs_date "$dir")
-        local    _sdir=$(basename "$dir")
+        local    _sdir=$(basename "${btrfs_mp:-$dir}")
         local  _distro=$(distro_name "$dir")
         local   distro="$K_IFS$_distro"
         local s_distro="$K_IFS$(clip_string "$_distro" 20)"
         local     date="$K_IFS$_date"
         local     sdir="$K_IFS$_sdir"
         local     arch="$K_IFS$_arch"
-        local      dev="$K_IFS$(fs_dev "$dir")"
-        local    label="$K_IFS$(get_label "$dir")"
+        local      dev="$K_IFS$(fs_dev "${btrfs_mp:-$dir}")"
+        local    label="$K_IFS$(get_label "${btrfs_mp:-$dir}")"
 
         if [ -n "$ONLY_32_BIT"  -a "$_arch" = '64-bit' ]; then
             warn "Skipping %s system %s" "$(pqw 64-bit)" "$(pqw $_distro)"
@@ -809,7 +829,43 @@ scan_devices() {
         local mntpnt=$(unique_mp "$NAME" "$LABEL")
 
         if [ -n "$MOUNTPOINT" ]; then
-            try_mount "$MOUNTPOINT" "$mntpnt" --bind || continue
+            # For btrfs: the existing mount may be at the top-level (subvolid=5)
+            # rather than at the root subvolume.  If so, bind-mounting it would
+            # give us a directory with no /etc /bin /lib -- skip bind and mount
+            # the device directly with the correct subvol= option instead.
+            if [ "$FSTYPE" = "btrfs" ] && ! _btrfs_is_linux_root "$MOUNTPOINT"; then
+                local btrfs_subvol btrfs_rc
+                # First: find root as a visible subdir of the existing mount.
+                # btrfs subvolumes appear as plain dirs under the top-level,
+                # so this works without re-mounting -- essential for LUKS/dm
+                # devices held open by udisks2.
+                btrfs_subvol=$(_btrfs_find_root_subdir "$MOUNTPOINT")
+                if [ $? -eq 0 ]; then
+                    try_mount "$MOUNTPOINT/$btrfs_subvol" "$mntpnt" --bind || continue
+                else
+                    # Fallback: re-mount device at subvolid=5 for full scan
+                    btrfs_subvol=$(detect_btrfs_root_subvolume "$dev")
+                    btrfs_rc=$?
+                    if [ $btrfs_rc -eq 0 ] && [ -n "$btrfs_subvol" ]; then
+                        try_mount "$dev" "$mntpnt" -t btrfs -o "subvol=$btrfs_subvol" || continue
+                    else
+                        try_mount "$MOUNTPOINT" "$mntpnt" --bind || continue
+                    fi
+                fi
+            else
+                try_mount "$MOUNTPOINT" "$mntpnt" --bind || continue
+            fi
+        elif [ "$FSTYPE" = "btrfs" ]; then
+            local btrfs_subvol btrfs_rc
+            btrfs_subvol=$(detect_btrfs_root_subvolume "$dev")
+            btrfs_rc=$?
+            if [ $btrfs_rc -eq 0 ] && [ -n "$btrfs_subvol" ]; then
+                # Root lives in a named subvolume -- mount it directly
+                try_mount "$dev" "$mntpnt" -t btrfs -o "subvol=$btrfs_subvol" || continue
+            else
+                # Top-level is the root, or detection failed -- plain mount
+                try_mount "$dev" "$mntpnt" || continue
+            fi
         else
             try_mount "$dev" "$mntpnt" || continue
         fi
@@ -869,6 +925,189 @@ try_mount() {
     fi
     cmd umount "$dir"
     cmd rmdir "$dir"
+}
+
+#------------------------------------------------------------------------------
+# Check whether the LUKS mapper name currently active on the host matches
+# the name recorded in the chroot's /etc/crypttab.  If they differ, running
+# update-initramfs or installing a kernel inside the chroot may produce an
+# initramfs that cannot unlock the LUKS device at boot.
+# Prints a warning and the corrective commands; silent when all is fine.
+#------------------------------------------------------------------------------
+warn_luks_mapper_mismatch() {
+    local dir="$1"
+
+    # Get the block device backing this mount; resolve symlinks so we get
+    # the real /dev/dm-N path that sysfs uses
+    local rawdev
+    rawdev=$(df "$dir" 2>/dev/null | awk 'END{print $1}')
+    [ -b "$rawdev" ] || return 0
+    rawdev=$(readlink -f "$rawdev")
+    [ -b "$rawdev" ] || return 0
+
+    # Must be a dm device with a sysfs dm/ directory
+    local dmbase="${rawdev##*/}"
+    [ -d "/sys/block/$dmbase/dm" ] || return 0
+
+    # Only relevant for dm-crypt -- sysfs uuid starts with "CRYPT-"
+    local dmuuid
+    dmuuid=$(cat "/sys/block/$dmbase/dm/uuid" 2>/dev/null)
+    case "$dmuuid" in CRYPT-*) ;; *) return 0 ;; esac
+
+    # Active mapper name straight from the kernel
+    local active
+    active=$(cat "/sys/block/$dmbase/dm/name" 2>/dev/null)
+    [ -n "$active" ] || return 0
+
+    # Compare against the chroot's /etc/crypttab
+    local crypttab="$dir/etc/crypttab"
+    [ -f "$crypttab" ] || return 0
+
+    # If active name appears as a target in crypttab -- all good
+    awk -v name="$active" '!/^[[:space:]]*#/ && $1==name {found=1}
+                            END {exit !found}' "$crypttab" && return 0
+
+    # Mismatch -- find the crypttab entry that belongs to THIS LUKS device.
+    # sysfs uuid format: "CRYPT-LUKS2-<32hexchars>-<mappername>"
+    # Strip the prefix and the trailing "-<name>" to isolate the 32-char hex,
+    # then reformat into standard 8-4-4-4-12 UUID for crypttab lookup.
+    local hexuuid luksid expected source
+    hexuuid="${dmuuid#CRYPT-LUKS*-}"   # -> 7d1dc238abeb496ca05a3235a81966f0-crypt
+    hexuuid="${hexuuid%-*}"            # -> 7d1dc238abeb496ca05a3235a81966f0
+    luksid=$(printf '%s-%s-%s-%s-%s' \
+        "${hexuuid:0:8}" "${hexuuid:8:4}" "${hexuuid:12:4}" \
+        "${hexuuid:16:4}" "${hexuuid:20:12}")
+
+    # Match crypttab second field: "UUID=<id>" or "/dev/disk/by-uuid/<id>"
+    expected=$(awk -v uuid="$luksid" \
+        '!/^[[:space:]]*#/ && (index($2,"UUID=" uuid) || index($2,"by-uuid/" uuid)) \
+         {print $1; exit}' "$crypttab")
+
+    source=$(ls "/sys/block/$dmbase/slaves/" 2>/dev/null | head -1)
+
+    # All target names (first column) from crypttab, non-comment lines
+    local ctnames
+    ctnames=$(awk '!/^[[:space:]]*#/ && NF {print "    " $1}' "$crypttab")
+
+    warn $"LUKS mapper name mismatch!"
+    warn $"  Active mapper : /dev/mapper/%s" "$active"
+    warn $"  /etc/crypttab names:"
+    # print each name via warn so it goes through the same output path
+    while IFS= read -r ctline; do
+        warn "%s" "$ctline"
+    done <<< "$ctnames"
+    warn $"Running update-initramfs or a kernel install inside this chroot"
+    warn $"may generate an initramfs that cannot unlock LUKS at boot."
+    warn $"Exit, close LUKS, and re-open with the correct name:"
+    warn $"  sudo cryptsetup luksClose %s" "$active"
+    if [ -n "$source" ] && [ -n "$expected" ]; then
+        warn $"  sudo cryptsetup luksOpen /dev/%s %s" "$source" "$expected"
+    elif [ -n "$source" ]; then
+        warn $"  sudo cryptsetup luksOpen /dev/%s <correct-name-from-crypttab>" "$source"
+    fi
+    # If crypttab uses the luks-<UUID> naming that udisks2/file managers apply
+    # automatically, re-opening via the file manager is a simpler alternative.
+    case "$expected" in
+        luks-*)
+            warn $"  (or just re-open the device via your file manager -- it uses"
+            warn $"   the 'luks-<UUID>' name automatically)" ;;
+    esac
+}
+
+#------------------------------------------------------------------------------
+# Find the btrfs root subvolume as a visible subdirectory of an already-
+# mounted top-level.  Prints the subvolume name and returns 0 on success.
+# Does NOT re-mount the device, so it works with LUKS/dm devices held
+# open by udisks2 where a second mount may fail.
+#------------------------------------------------------------------------------
+_btrfs_find_root_subdir() {
+    local mountpoint="$1"  candidate
+    for candidate in "@" "@root" "@rootfs" "root" "rootfs" "ROOT"; do
+        _btrfs_is_linux_root "$mountpoint/$candidate" && {
+            echo "$candidate"
+            return 0
+        }
+    done
+    return 1
+}
+
+#------------------------------------------------------------------------------
+# Return true when a directory looks like a real Linux root filesystem.
+# Checks that /etc and /usr are genuine directories (not symlinks pointing
+# into a subvolume) and that a distro marker file is present.
+# This guards against top-level btrfs layouts where someone placed symlinks
+# like /etc -> /@/etc that would otherwise fool a plain -d test.
+#------------------------------------------------------------------------------
+_btrfs_is_linux_root() {
+    local dir="$1"
+    [ -d "$dir/etc" ] && [ ! -L "$dir/etc" ] && \
+    [ -d "$dir/usr" ] && [ ! -L "$dir/usr" ] && \
+    { [ -f "$dir/etc/os-release" ] || [ -f "$dir/etc/fstab" ] || [ -f "$dir/etc/passwd" ]; }
+}
+
+#------------------------------------------------------------------------------
+# Detect the btrfs subvolume that contains the Linux root filesystem.
+# Prints the subvolume path (empty string = top-level/subvolid=5 is root).
+# Returns 1 when no root filesystem is found or the device is not btrfs.
+#
+# Usage: subvol=$(detect_btrfs_root_subvolume /dev/sdXY)
+#------------------------------------------------------------------------------
+detect_btrfs_root_subvolume() {
+    local device="$1"
+    local mountpoint
+    mountpoint=$(mktemp -d /tmp/btrfs_detect_XXXXXX) || return 1
+
+    # Mount at top-level (subvolid=5) so we can see every subvolume path
+    if ! mount -t btrfs -o subvolid=5 "$device" "$mountpoint" 2>/dev/null; then
+        rmdir "$mountpoint"
+        return 1
+    fi
+
+    # Collect all subvolume paths known to btrfs
+    local subvols
+    subvols=$(btrfs subvolume list "$mountpoint" 2>/dev/null | awk '{print $NF}')
+
+    # Priority candidates -- covers Ubuntu/antiX/MX (@), openSUSE/Arch (@root),
+    # some custom setups (@rootfs, root, rootfs, ROOT) and plain top-level ("")
+    local candidates=("@" "@root" "@rootfs" "root" "rootfs" "ROOT" "")
+    local found_root=""
+    local found=false
+
+    local candidate
+    for candidate in "${candidates[@]}"; do
+        if [ -z "$candidate" ]; then
+            # Empty candidate means: check the top-level itself
+            _btrfs_is_linux_root "$mountpoint" && {
+                found_root=""
+                found=true
+                break
+            }
+        else
+            _btrfs_is_linux_root "$mountpoint/$candidate" && {
+                found_root="$candidate"
+                found=true
+                break
+            }
+        fi
+    done
+
+    # Fallback: walk every btrfs subvolume
+    if ! $found; then
+        local subvol
+        for subvol in $subvols; do
+            _btrfs_is_linux_root "$mountpoint/$subvol" && {
+                found_root="$subvol"
+                found=true
+                break
+            }
+        done
+    fi
+
+    umount "$mountpoint" 2>/dev/null
+    rmdir  "$mountpoint"
+
+    $found || return 1
+    echo "$found_root"
 }
 
 #------------------------------------------------------------------------------

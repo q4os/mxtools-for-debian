@@ -8,8 +8,8 @@
 # License: GPLv3 or later
 #==============================================================================
 
-      VERSION="2.41.23"
- VERSION_DATE="Thu, 01 Jan 2026"
+      VERSION="2.41.27"
+ VERSION_DATE="Sat, 18 Apr 2026"
 
         ME=${0##*/}
     MY_DIR=$(dirname "$(readlink -f $0)")
@@ -18,7 +18,7 @@ MY_LIB_DIR=$(readlink -f "$MY_DIR/../cli-shell-utils")
    if [ -d "/usr/local/lib/cli-shell-utils" ]; then
        LIB_DIR="/usr/local/lib/cli-shell-utils"
    fi
-   
+
 export TEXTDOMAIN="cli-shell-utils"
 domain_dir="$MY_DIR/../cli-shell-utils/locale"
 test -d "$domain_dir" && export TEXTDOMAINDIR=$domain_dir
@@ -132,6 +132,9 @@ SYSLINUX_FILES="$SYSLINUX_FILES libmenu.c32 libutil.c32 linux.c32 menu.c32"
 
      LUKS_TYPE="luks2"
 
+    DO_EXTLINUX=true
+    GRUB_MBR="false"
+
 #------------------------------------------------------------------------------
 # Show usage and exit
 #------------------------------------------------------------------------------
@@ -210,6 +213,7 @@ Options:
   -g --gpt                    Use gpt partitioning instead of msdos
   -G --graphic-ui             Use the new graphics user interface (default)
      --gpt-pmbr               Set pmbr_boot disk flag (prevents booting via UEFI)
+     --grub-mbr               Use grub for default legacy boot
   -h --help                   Show this usage
   -i --initrd=<file>          Update the initrd from using a template-initrd.gz
   -i --initrd=<dir>           Use a directory tree as a template
@@ -221,6 +225,7 @@ Options:
      --no-clone-persist       Don't clone persistence files even if they exist
      --no-clone-persist=<p>   Or pass a parameter: h,home: don't clone home
                                                    r,root: don't clone root
+    --no-extlinux             Do not install syslinux/isolinux (imples --grub-mbr)
   -N --numeric-ui             Use the legacy numerical user interface
      --pause                  Wait for user input before exit
      --pause=initrd           Pause after unpacking the initrd.gz file
@@ -295,6 +300,7 @@ eval_argument() {
               -from|f)  FROM=$val                        ;;
               -from=*)  FROM=$val                        ;;
        --graphic-ui|G)  GRAPHICAL_MENUS=true             ;;
+            -grub-mbr)  GRUB_MBR=true                    ;;
                -gpt|g)  MSDOS_GPT="gpt"                  ;;
             -gpt-pmbr)  MSDOS_GPT="gpt" ; DO_PMBR=true   ;;
       -gui-progress|-)  END_CMDLINE=true                 ;;
@@ -304,6 +310,7 @@ eval_argument() {
              -label|L)  CMD_LABEL=$val                   ;;
              -label=*)  CMD_LABEL=$val                   ;;
              -msdos|m)  MSDOS_GPT="msdos"                ;;
+        -no-extlinux)   DO_EXTLINUX=false; GRUB_MBR=true ;;
        -no-prog-bar|n)  NO_PROGRESS_BAR=true             ;;
     -no-clone-persist)  NO_CLONE_PERSIST=home,root       ;;
   -no-clone-persist=*)  NO_CLONE_PERSIST=$val            ;;
@@ -467,7 +474,9 @@ main() {
     # Always write a new config file and then exit if requested
     [ "$WRITE_CONFIG" ] && write_config "$CONFIG_FILE" && exit 0
 
-    need_prog extlinux
+    if [ "$DO_EXTLINUX" = "true" ]; then
+        need_prog extlinux
+    fi
     q_mode gui && PROGRESS=true
     [ "$PROGRESS" ] && PROG_FILE=$THE_PROG_FILE
 
@@ -678,7 +687,7 @@ main() {
                 clone_directory "$from_value" "$bios_dir" "$ISO_DIR"  "$live_dev"
                 if [ "$CLONE_ENCRYPTED_LIVE" ]; then
                      cmd umount $BIOS_DIR
-		fi
+        fi
                 # What thing we are copying or cloning from: file, device or directory
                 from_thing=$"directory"
 
@@ -1003,7 +1012,7 @@ main() {
     [ ${#cheats} -gt 0 ] && need cheats-syslinux && do_cheats_syslinux $BIOS_DIR "$cheats"
     [ ${#cheats} -gt 0 ] && need cheats-grub     && do_cheats_grub     $UEFI_DIR "$cheats"
 
-    need install $"install" && do_install_bootloader $target_dev $BIOS_DIR $MSDOS_GPT
+    need install $"install" && do_install_bootloader $target_dev $BIOS_DEV $BIOS_DIR $MSDOS_GPT $ISO_DIR
 
     sync; sync
 
@@ -1599,11 +1608,27 @@ setup_devices() {
 
     if encrypt; then
         local bios_part=1  main_part=2  ;  UEFI_PART=3
-
+        # bios_grub partition
+        BGRP_PART=
+        if [ "$MSDOS_GPT" = "gpt" ] && [ "$GRUB_MBR" = "true" ]; then
+            BGRP_PART=1
+            bios_part=2
+            main_part=3
+            UEFI_PART=4
+            BGRP_DEV=$(get_partition $drive $BGRP_PART)
+        fi
         if data_first; then
             bios_part=2
             main_part=3
             UEFI_PART=4
+
+            if [ "$MSDOS_GPT" = "gpt" ] && [ "$GRUB_MBR" = "true" ]; then
+                BGRP_PART=2
+                bios_part=3
+                main_part=4
+                UEFI_PART=5
+                BGRP_DEV=$(get_partition $drive $BGRP_PART)
+            fi
             DATA_DEV=$(get_partition $drive 1)
         fi
 
@@ -1617,10 +1642,25 @@ setup_devices() {
 
     else
         local main_part=1 ; UEFI_PART=2
+        # bios_grub partition
+        BGRP_PART=
+        if [ "$MSDOS_GPT" = "gpt" ] && [ "$GRUB_MBR" = "true" ]; then
+            BGRP_PART=1
+            main_part=2
+            UEFI_PART=3
+            BGRP_DEV=$(get_partition $drive $BGRP_PART)
+        fi
 
         if data_first; then
             main_part=2
             UEFI_PART=3
+
+            if [ "$MSDOS_GPT" = "gpt" ] && [ "$GRUB_MBR" = "true" ]; then
+                BGRP_PART=2
+                main_part=3
+                UEFI_PART=4
+                BGRP_DEV=$(get_partition $drive $BGRP_PART)
+            fi
             DATA_DEV=$(get_partition $drive 1)
         fi
 
@@ -2093,7 +2133,9 @@ do_partition() {
     local PREAMB="parted --script --align optimal $dev unit MiB"
     cmd $PREAMB mklabel $type || dmesg_fatal "$err_msg" making partition
 
-    local START=1  PART_NUM=0  main_fs=ext4
+    local START=1  PART_NUM=0
+
+    local main_fs=ext4
 
     if data_first; then
         local total_size=$TOTAL_SIZE
@@ -2103,30 +2145,40 @@ do_partition() {
         ##mark data partition
         #if gpt partition, use GUID for part type
         if [ $type = "gpt" ]; then
-	        mark="msftdata"
-	        echo $PREAMB set $PART_NUM $mark on
-        	cmd $PREAMB set $PART_NUM $mark on    
+            mark="msftdata"
+            echo $PREAMB set $PART_NUM $mark on
+            cmd $PREAMB set $PART_NUM $mark on
         fi
         #if msdos partition, use hexadecimal for part type, per format
         if [ $type = "msdos" ]; then
-	        case $fs_type in 
-	        fat32 | vfat) mark="c"  ;;
-	        exfat | ntfs) mark="7"  ;;
-	        *)  ;; #don't mark
+            case $fs_type in
+            fat32 | vfat) mark="c"  ;;
+            exfat | ntfs) mark="7"  ;;
+            *)  ;; #don't mark
 
-	        esac
-	        if [ -n "$mark" ]; then
-        	    echo sfdisk $dev $PART_NUM --part-type $mark 
-        	    cmd sfdisk $dev $PART_NUM --part-type $mark 
+            esac
+            if [ -n "$mark" ]; then
+                echo sfdisk $dev $PART_NUM --part-type $mark
+                cmd sfdisk $dev $PART_NUM --part-type $mark
             fi
-	    fi     
+        fi
     fi
-    
+
+
+    if [ "$type" = "gpt" ] && [ "$GRUB_MBR" = "true" ]; then
+        # bios_grub
+        local bios_grub_size=2
+        _add_partition "$bios_grub_size" ""  "bios_grub"
+        mark="bios_grub"
+        cmd $PREAMB set $PART_NUM $mark on || dmesg_fatal "$err_msg" esp-flag
+    fi
+
     if [ $bios_size -gt 0 ]; then
         _add_partition $bios_size bios
         cmd $PREAMB set $PART_NUM $boot_flag on || dmesg_fatal "$err_msg" boot-flag-1
         main_fs=
     fi
+
     _add_partition "$main_size" $main_fs  main
     if ! encrypt; then
         cmd $PREAMB set $PART_NUM $boot_flag on || dmesg_fatal "$err_msg" boot-flag-2
@@ -2157,6 +2209,7 @@ _add_partition() {
         ext[234]) part_fstype=$fstype ;;
             vfat) part_fstype=fat32   ;;
             ntfs) part_fstype=NTFS    ;;
+            none) part_fstype=none    ;;
     esac
 
     clear_filesystem $dev $START
@@ -2489,7 +2542,7 @@ fix_uefi_memtest() {
         local flag
         [ "$PRETEND_MODE" ] && flag="--dry-run"
         local temp=$(mktemp -p $(dirname $dir) -d $flag)
-        cmd cp $dir/* $temp/
+        cmd cp $dir/* $temp
         cmd rm -r $dir
         cmd mv $temp $dir
     fi
@@ -2667,17 +2720,18 @@ random_string() {
 # This installs the legacy syslinux bootloader
 #------------------------------------------------------------------------------
 do_install_bootloader() {
-    local dev=$1  bios_dir=$2  type=$3
+    local dev=$1 bios_dev=$2  bios_dir=$3  type=$4 type iso_dir=$5
 
+if [ "$DO_EXTLINUX" = "true" ]; then
     msg "extlinux version %s" "$(pq $(get_extlinux_version))"
 
     local fname
     case $type in
-          gpt) fname=gptmbr.bin ;;
+        gpt) fname=gptmbr.bin ;;
         msdos) fname=mbr.bin
-               data_first && fname=altmbr.bin  ;;
+            data_first && fname=altmbr.bin  ;;
             *) fatal "Unknown partitioning scheme: %s.  Expected msdos or gpt" "$type"
-               ;;
+            ;;
     esac
 
     local dir file d
@@ -2692,7 +2746,7 @@ do_install_bootloader() {
         altmbr.bin) printf '\2' | cat "$file" - \
             | cmd_dd bs=440 count=1 iflag=fullblock conv=notrunc of=$dev ;;
 
-                 *) cmd_dd bs=440 conv=notrunc count=1 if=$file of=$dev  ;;
+                *) cmd_dd bs=440 conv=notrunc count=1 if=$file of=$dev  ;;
     esac
 
     local sdir idir syslinux_dir isolinux_dir
@@ -2722,10 +2776,95 @@ do_install_bootloader() {
 
     [ "$PRETEND_MODE" ] && return
 
-     # [don't translate syslinux or isolinux]
+    # [don't translate syslinux or isolinux]
     [ -z "$syslinux_dir" ] && fatal "Could not find a syslinux or isolinux directory"
 
-    cmd extlinux -i $syslinux_dir || fatal "%s command failed" extlinux
+    cmd extlinux -i --device="$bios_dev" $syslinux_dir || fatal "%s command failed" extlinux
+fi
+
+    if [ "$GRUB_MBR" = "true" ]; then
+        do_install_bootloader_grub "$dev" "$bios_dir" "$type" "$iso_dir"
+    fi
+
+}
+
+do_install_bootloader_grub() {
+    local dev=$1        # Target device (e.g., /dev/sda)
+    local bios_dir=$2   # Mount point of the boot partition
+    local type=$3       # Partition scheme (gpt or msdos)
+    local iso_dir=$4    # Mount point of the iso loop-device
+
+    local grub_dir
+    if [ -d "$iso_dir/boot/grub/i386-pc" ]; then
+        grub_dir="$iso_dir/boot/grub/i386-pc"
+    else
+        grub_dir="/usr/lib/grub/i386-pc"
+    fi
+
+    msg "Installing GRUB2 for %s partitioning on %s" "$type" "$dev"
+
+    # 1. Install GRUB2 to the MBR of the target device
+    # --target=i386-pc is the standard for legacy BIOS/MBR systems
+    # --boot-directory tells GRUB where /boot is
+    # not making a new grub.cfg file since its a live system
+    cmd grub-install --target=i386-pc --boot-directory="$bios_dir/boot" \
+        --fonts= \
+        --locales= \
+        --themes= \
+        --directory="$grub_dir" \
+        "$dev" \
+        || fatal "grub-install failed on %s" "$dev"
+
+    # remove empty locale-dir created by grub-install
+    if [ -d "$bios_dir/boot/grub/locale/" ]; then
+        cmd rm -r "$bios_dir/boot/grub/locale/"
+    fi
+    # restore unicode font from iso
+    if [ -f "$iso_dir/boot/grub/fonts/unicode.pf2" ]; then
+        cmd cp "$iso_dir/boot/grub/fonts/unicode.pf2" "$bios_dir/boot/grub/fonts/"
+    fi
+
+    # restore core.img and eltorito.img from iso
+    if [ -f "$iso_dir/boot/grub/i386-pc/core.img" ]; then
+        cmd cp "$iso_dir/boot/grub/i386-pc/core.img" "$bios_dir/boot/grub/i386-pc/"
+    fi
+    if [ -f "$iso_dir/boot/grub/i386-pc/eltorito.img" ]; then
+        cmd cp "$iso_dir/boot/grub/i386-pc/eltorito.img" "$bios_dir/boot/grub/i386-pc/"
+    fi
+
+    # restore lnxboot.img from iso or installed grub
+    if ! [ -f "$bios_dir/boot/grub/i386-pc/lnxboot.img" ]; then
+
+        if [ -f "$iso_dir/boot/grub/i386-pc/lnxboot.img" ]; then
+            cmd cp "$iso_dir/boot/grub/i386-pc/lnxboot.img" "$bios_dir/boot/grub/i386-pc/"
+
+        elif [ -f "/usr/lib/grub/i386-pc/lnxboot.img" ]; then
+            cmd cp "/usr/lib/grub/i386-pc/lnxboot.img" "$bios_dir/boot/grub/i386-pc/"
+        fi
+    fi
+
+    # restore syslinux.bin from iso
+    if [ ! -f "$bios_dir/boot/syslinux/syslinux.bin" ] && [ -d "$bios_dir/boot/syslinux/" ]; then
+        if [ -f "$iso_dir/boot/syslinux/syslinux.bin" ]; then
+            cmd cp "$iso_dir/boot/syslinux/syslinux.bin" "$bios_dir/boot/syslinux/"
+        elif [ -f "$iso_dir/boot/isolinux/isolinux.bin" ]; then
+            cmd cp "$iso_dir/boot/isolinux/isolinux.bin" "$bios_dir/boot/syslinux/syslinux.bin"
+        fi
+    fi
+
+    if [ "$DO_EXTLINUX" = "true" ]; then
+        if [ -f "$bios_dir/boot/grub/i386-pc/lnxboot.img" ]; then
+           # re-enable syslinux menus
+           sed -i -r 's/^([#[:space:]]+)(switch_to_syslinux)/\2/' "$bios_dir/boot/grub/config/bootmenu.cfg"
+        else
+            #comment out syslinux menus
+            sed -i '/^[^#]*switch_to_syslinux/s/^/#/' "$bios_dir/boot/grub/config/bootmenu.cfg"
+        fi
+    else
+       #comment out syslinux menus
+       sed -i '/^[^#]*switch_to_syslinux/s/^/#/' "$bios_dir/boot/grub/config/bootmenu.cfg"
+    fi
+    msg "GRUB2 installation complete."
 }
 
 update_syslinux() {
@@ -2988,7 +3127,7 @@ make_fs_dev() {
         || dmesg_fatal $"Could not make %s file system on %s" "$fstype" "$part"
 
     sync
-    cmd partprobe "$part"
+    cmd partprobe "$(get_drive $part)"
 
     case $fstype in
         vfat|ntfs|exfat) return ;;

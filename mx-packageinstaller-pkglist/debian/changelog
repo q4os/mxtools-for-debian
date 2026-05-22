@@ -1,3 +1,84 @@
+mx-packageinstaller-pkglist (26.05.5mx25) mxD; urgency=medium
+
+  * update vivaldi
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 21 May 2026 19:32:46 -0400
+
+mx-packageinstaller-pkglist (26.05.4mx25) mx; urgency=medium
+
+  * update liquorix kernel (7.0.9)
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 20 May 2026 20:25:43 -0400
+
+mx-packageinstaller-pkglist (26.05.3mx25) mx; urgency=medium
+
+  * add antiX 5.10 and 6.6 kernels (install only in popular apps)
+  * date liquorix kernel
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 18 May 2026 19:20:31 -0400
+
+mx-packageinstaller-pkglist (26.05.2mx25) mx; urgency=medium
+
+  * add liquorix 7.0
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 15 May 2026 18:15:38 -0400
+
+mx-packageinstaller-pkglist (26.05.1mx25) mx; urgency=medium
+
+  * update virtualbox install routine
+  * update liquorix 6.19 kenrel
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Tue, 05 May 2026 20:43:19 -0400
+
+mx-packageinstaller-pkglist (26.04.6mx25) mx; urgency=medium
+
+  * add qemu-system-modules-spice to gnome-boxes
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 26 Apr 2026 18:12:50 -0400
+
+mx-packageinstaller-pkglist (26.04.5mx25) mx; urgency=medium
+
+  * update 6.19 liq.kernel (6.19.14-1)
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 25 Apr 2026 07:35:54 -0400
+
+mx-packageinstaller-pkglist (26.04.4mx25) mx; urgency=medium
+
+  *  update 6.19 liq. kernel (6.19.12-1)
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 19 Apr 2026 13:39:10 -0400
+
+mx-packageinstaller-pkglist (26.04.3mx25) mx; urgency=medium
+
+  * update google-chrome uri information
+  * update 6.19 liquorix kernel (6.19.11-2)
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 10 Apr 2026 20:50:13 -0400
+
+mx-packageinstaller-pkglist (26.04.2mx25) mx; urgency=medium
+
+  * update 6.19 liquorix kernel entry 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 05 Apr 2026 21:46:46 -0400
+
+mx-packageinstaller-pkglist (26.04.1mx25) mx; urgency=medium
+
+  * update 6.19 liquorix kernel entry 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 03 Apr 2026 21:02:16 -0400
+
+mx-packageinstaller-pkglist (26.03.8mx25) mx; urgency=medium
+
+  *  update freeoffice entries
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 01 Apr 2026 18:20:29 -0400
+
+mx-packageinstaller-pkglist (26.03.4mx26) mx; urgency=medium
+
+  * add 6.19 liquorix kernel
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 28 Mar 2026 12:49:23 -0400
+
 mx-packageinstaller-pkglist (26.03.3mx25) mx; urgency=medium
 
   * update liquorix 6.18.16 

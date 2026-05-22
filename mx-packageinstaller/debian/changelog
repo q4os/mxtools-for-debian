@@ -1,3 +1,24 @@
+mx-packageinstaller (26.05) mx; urgency=medium
+
+  * Ignore fuser stderr when parsing lock owner
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 04 May 2026 11:32:55 -0400
+
+mx-packageinstaller (26.04) mx; urgency=medium
+
+  * Fix corrupted error message
+  * Quote Flatpak command arguments to handle special characters
+  * Protect scoped Flathub remotes from being modified
+  * Restore cursor after Flatpak actions
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 29 Apr 2026 12:00:00 -0400
+
+mx-packageinstaller (26.03.4) mx; urgency=medium
+
+  * Silence helper lock probe warnings
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 25 Mar 2026 13:00:00 -0400
+
 mx-packageinstaller (26.03.3) mx; urgency=medium
 
   * Fix Y/N prompts during package installation

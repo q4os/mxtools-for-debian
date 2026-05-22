@@ -1,0 +1,12 @@
+[Unit]
+Description=finish live setup
+After=local-fs.target
+ConditionPathExists=/live/linux
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/live-setup
+ExecStop=/bin/true
+
+[Install]
+WantedBy=multi-user.target

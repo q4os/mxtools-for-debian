@@ -249,7 +249,9 @@ int CliController::run()
         }
 
         if (action == 1) {
-            out << QObject::tr("Target: 0) MBR  1) ESP  2) Root") << '\n';
+            const bool uefi = BootRepairEngine::isUefi();
+            out << QObject::tr("Target: 0) MBR  1) ESP  2) Root")
+                << (uefi ? QObject::tr("  [detected: UEFI]") : QObject::tr("  [detected: Legacy BIOS]")) << '\n';
             const int target = askInt(0, 2, QObject::tr("Select target"), in, out, /*allowBack*/ true);
             if (target == std::numeric_limits<int>::min()) return 0; // 'q' to quit
             if (target < 0) continue; // 'b' to go back

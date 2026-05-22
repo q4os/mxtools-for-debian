@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?> 
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
@@ -20,8 +20,6 @@
 </head>
 <body>
 <h1>HELP: MX Package Installer</h1>
-<p>This help is for the MX15/16/17 version of MX Package Installer.  The MX14 version maintains a version of &#8220;Popular Applications&#8221; tab as a standalone app.</p>
-
 <p>It is listed in the Favorites of Whisker menu by default; but if that has been removed, click Start menu ≻ System ≻ MX Package installer and provide the root password.</p>
 
 <p class="help-image"><img src="1.jpg" alt="Manage popular packages" /></p>
@@ -73,12 +71,34 @@
 		<li> You can also install flatpaks via ref files via the Advanced dialog</li>
 	</ul>
 
+<h2>Q &amp; A</h2>
+
+	<ul>
+		<li>What effect does ticking &#8220;Hide library and developer packages&#8221; actually have? Does it just hide stuff as a de-clutter convenience, or could it possibly prevent essential libraries from being installed ?
+			<ul>
+				<li>it hides application libraries (lib* packages) from the listing. but nothing prevents them from being installed if they are needed by an application.</li>
+			</ul>
+		</li>
+		<li>What effect does unticking &#8220;Also Install Recommended Packages&#8221; actually have? Does it just prevent unsolicited clutter, or might it prevent required dependencies?
+			<ul>
+				<li>Debian has three levels of dependencies on packages: 1) depends, which are neccessary; 2) recommends, which can be nice and extend functionality, but are not strictly speaking required; and suggests, which are usually other applications that might compliment the package. By default, MX does not install the &#8220;recommends&#8221; by default. but checking the option means it will.</li>
+			</ul>
+		</li>
+		<li>If subsequently regretting installing a program plus its recommended packages? Is there any way to uninstall not just the originally selected program, but all of its recommended packages that came with it as well?
+			<ul>
+				<li>For the most part, when uninstalling a package, its dependent packages will be marked &#8220;autoremovable.&#8221; We do not remove those by default, but you can from the command line by entering the code below.</li>
+				<li>Look at the list carefully to make sure nothing you want or need is autoremovable. Usually things like libraries and &#8220;data&#8221; packages are small and ok to remove. things like Xorg/xserver, xfce, kde...big stuff like that should not be autoremoved.</li>
+			</ul>
+			<pre><code>sudo apt autoremove</code></pre>
+		</li>
+	</ul>
+
 <p class="help-image"><img src="4.jpg" alt="" /></p>
 
 <p>Development history: Dolphin_Oracle, Adrian</p>
 
 <p>License: <a href="https://mxlinux.org/wiki/licenses/license-mx-package-installer">here</a>.</p>
 
-<p>v. 20180913</p>
+<p>v. 20200714</p>
 </body>
 </html>

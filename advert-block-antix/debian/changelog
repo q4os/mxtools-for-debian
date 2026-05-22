@@ -1,3 +1,9 @@
+advert-block-antix (0.3.8) unstable; urgency=medium
+
+  * update translations
+
+ -- anticapitalista <antix@operamail.com>  Wed, 04 Feb 2026 13:08:35 +0200
+
 advert-block-antix (0.3.7+3) mx; urgency=medium
 
   * restore policykit support

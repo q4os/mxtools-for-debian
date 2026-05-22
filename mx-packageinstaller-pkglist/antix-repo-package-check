@@ -1,0 +1,119 @@
+#!/usr/bin/env bash
+
+# Find latest matching packages from antiX/MX repository
+#
+# Example:
+#   ./latest-package.sh linux-image-6.6 firmware-linux
+#   ./latest-package.sh nvidia-driver pipewire
+
+main(){
+set -euo pipefail
+
+PACKAGES_URL="http://la.mxrepo.com/antix/trixie/dists/trixie/main/binary-amd64/Packages"
+BASE_URL="http://la.mxrepo.com/antix/trixie"
+
+if [[ $# -lt 1 ]]; then
+    echo "Usage: $0 <package-prefix> [package-prefix ...]"
+    exit 1
+fi
+
+tmpfile="$(mktemp)"
+tmpdir="$(mktemp -d)"
+trap clean_up EXIT
+
+curl -fsSL "$PACKAGES_URL" -o "$tmpfile"
+
+declare -a download_urls
+declare -a package_files
+
+for SEARCH in "$@"; do
+
+    result="$(
+    awk -v search="$SEARCH" '
+    BEGIN {
+        RS=""
+        FS="\n"
+    }
+
+    {
+        package=""
+        version=""
+        filename=""
+
+        for (i=1; i<=NF; i++) {
+
+            if ($i ~ /^Package: /)
+                package=substr($i, 10)
+
+            else if ($i ~ /^Version: /)
+                version=substr($i, 10)
+
+            else if ($i ~ /^Filename: /)
+                filename=substr($i, 11)
+        }
+
+        if (index(package, search) == 1) {
+            print package "|" version "|" filename
+        }
+    }
+    ' "$tmpfile" |
+    sort -t'|' -k2,2V |
+    tail -n1
+    )"
+
+    if [[ -z "$result" ]]; then
+        echo "No matching package found for: $SEARCH"
+        continue
+    fi
+
+    IFS='|' read -r package version filename <<< "$result"
+
+    pkgfile="$(basename "$filename")"
+    download_url="$BASE_URL/$filename"
+
+    package_files+=("$pkgfile")
+    download_urls+=("$download_url")
+
+    echo "Package      : $package"
+    echo "Version      : $version"
+    echo "File         : $pkgfile"
+    echo "Download URL : $download_url"
+    echo
+
+done
+
+if [[ ${#download_urls[@]} -eq 0 ]]; then
+    echo "No packages found."
+    exit 1
+fi
+
+echo "Install the following Y/n"
+read -r reply
+
+# Default to Yes if Enter pressed
+reply="${reply:-Y}"
+
+if [[ "$reply" =~ ^[Yy]$ ]]; then
+
+    for url in "${download_urls[@]}"; do
+        echo "Downloading: $url"
+        wget "$url" -P $tmpdir
+    done
+
+    # Example install:
+    apt-get install $tmpdir/*.deb
+    exit $?
+
+else
+    echo "Installation cancelled."
+    exit 0
+fi
+}
+
+clean_up()
+{
+rm -f "$tmpfile" 
+rm -R "$tmpdir"
+}
+
+main "$@"

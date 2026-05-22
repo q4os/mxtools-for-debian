@@ -1,4 +1,5 @@
-live-kernel-updater 			usr/bin
-live-kernel-updater.1.gz 		usr/share/man/man1
-live-kernel-updater.desktop 	usr/share/applications/
-live-usb-kernel-updater.png 	usr/share/pixmaps
+live-kernel-updater                 usr/bin
+live-kernel-updater.1.gz            usr/share/man/man1
+live-kernel-updater.desktop         usr/share/applications/
+live-usb-kernel-updater.png         usr/share/pixmaps
+completions/live-kernel-updater     usr/share/bash-completion/completions

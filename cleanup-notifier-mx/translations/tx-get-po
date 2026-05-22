@@ -69,6 +69,7 @@ LINGUAS
 
 for po in ${PODIR}/*.po; do
     [ -e "$po" ] || continue
+    [ -z "${po##*en_US.po}" ] && rm "$po" && continue 
     lang=${po##*/}
     lang=${lang%.po}
     printf '%s ' "${lang}"

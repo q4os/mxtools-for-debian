@@ -1,3 +1,16 @@
+mx25-artwork (26.05.02) mx; urgency=medium
+
+  * attribution file fix on url
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 21 May 2026 19:51:43 -0400
+
+mx25-artwork (26.05.01) mx; urgency=medium
+
+  * update spelling on attribution files
+  * add Frozen MX, logo-lines
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Tue, 19 May 2026 19:12:29 -0400
+
 mx25-artwork (25.09.03) mx; urgency=medium
 
   * put links to wallpapers under backgrounds/xfce

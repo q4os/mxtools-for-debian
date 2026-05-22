@@ -1,3 +1,9 @@
+cleanup-notifier-mx (26.05.01) mx; urgency=medium
+
+  * Translations refresh
+
+ -- fehlix <fehlix@mxlinux.org>  Tue, 19 May 2026 11:25:35 -0400
+
 cleanup-notifier-mx (25.11.01) mx; urgency=medium
 
   * Correct mx-cleanup path

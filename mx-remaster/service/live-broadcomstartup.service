@@ -2,6 +2,8 @@
 Description=check broadcom parts and adjust
 After=local-fs.target
 ConditionPathExists=/live/linux
+ConditionPathExists=/usr/bin/BroadcomStartup
+ConditionPathExists=/var/lib/q4os/service_livebroadcomstartup_enable.stp
 
 [Service]
 Type=oneshot

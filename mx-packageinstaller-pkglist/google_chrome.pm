@@ -66,8 +66,15 @@ Google Chrome
 <screenshot>https://www.google.com/chrome/assets/common/images/marquee/chrome-new.jpg</screenshot>
 
 <preinstall>
+rm -f /etc/apt/sources.list.d/google-chrome.list
 wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | gpg --dearmor | tee /etc/apt/trusted.gpg.d/google-chrome.gpg >/dev/null
-echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main">/etc/apt/sources.list.d/mxpitemp.list
+echo "X-Repolib-Name: Google Chrome    
+Types: deb    
+URIs: https://dl.google.com/linux/chrome-stable/deb/    
+Suites: stable    
+Components: main    
+Architectures: amd64    
+Signed-By: /etc/apt/trusted.gpg.d/google-chrome.gpg" > /etc/apt/sources.list.d/mxpitemp.sources
 apt-get update
 </preinstall>
 
@@ -77,7 +84,7 @@ google-chrome-stable
 
 
 <postinstall>
-rm /etc/apt/sources.list.d/mxpitemp.list
+rm /etc/apt/sources.list.d/mxpitemp.sources
 </postinstall>
 
 

@@ -1,3 +1,114 @@
+live-kernel-updater (0.2.30+14) mx; urgency=medium
+
+  * Add -e/--encrypt flag to force cryptsetup into initrd regardless of
+    boot environment (useful for testing on non-encrypted live systems)
+  * Suppress running-kernel warning when only one vmlinuzN slot exists
+  * Fix "Found one new kernel" message shown incorrectly during reassign
+    with the same kernel; now says "Found one kernel" in that case
+  * Fix live detection with toram boot parameter: remount boot device at
+    LIVE_MP so LKU detects and offers "current live system" correctly;
+    unmount on exit to restore toram state; handle device already mounted
+    elsewhere via bind mount
+  * Fix already-mounted boot device unmounted by LKU: detect existing mount
+    with findmnt and use it directly; skip umount_all; preserve mount on exit
+    (affects GIO/Thunar, KDE Plasma, and any other automounter)
+  * Remove stale -a/--auto option: caused infinite loop via offer_restart()
+    (YES_no auto-answered "yes" to "Perform another operation?" forever) and
+    would start remaster immediately without user confirmation if suggested
+  * Add sync in clean_up() before any unmount to prevent filesystem
+    corruption on unclean unmount
+  * Fix defrag: include initrdN.gz files; exclude .md5, .ver, .kold and
+    other small/backup files (kernels and initrds only)
+  * Fix offer_restart() arg replay: expand stacked short opts (e.g. -VVd)
+    into UNPACKED_ARGS at startup so -d/--device stripping works correctly
+    regardless of how args were originally combined
+  * Review and adjust man page: replace -G/--graphic-ui description with
+    "interactive terminal menu with keyboard navigation"
+  * Update bash completion: add -e/--encrypt
+  * Rewrite initrd_modules_ver(): use last TRAILER!!! boundary directly
+    (grep -boa + tail -1) instead of looping all boundaries; detect
+    compression format from magic bytes (kernel lib/decompress.c source)
+    instead of trying all decompressors; add lzma support; emit explicit
+    warning on unknown format or missing decompressor instead of silent
+    failure
+
+ -- fehlix <fehlix@mxlinux.org>  Thu, 21 May 2026 07:37:17 -0400
+
+live-kernel-updater (0.2.30+13) mx; urgency=medium
+
+  * Allow -m/--modules in multi-kernel mode to also add extra modules
+    to the selected vmlinuzN (normal update menu runs first)
+  * Allow --initrd=file in multi-kernel mode as initrd template for
+    the selected vmlinuzN
+  * Rewrite man page
+  * Add bash completion for all options
+  * Version string: 26.05.1
+
+ -- fehlix <fehlix@mxlinux.org>  Mon, 18 May 2026 19:42:08 -0400
+
+live-kernel-updater (0.2.30+12) mx; urgency=medium
+
+  - Mark current kernel with * prefix in kernel selection list
+  - Mark running live kernel with * in action menu (update and remove entries)
+  - Warn before update or remove when the running live kernel would be removed
+  - Detect kernels uninstalled under root persistence and mark with ? in action menu
+  - Add legend explaining * (running kernel) and ? (uninstalled under persistence) markers
+
+ -- fehlix <fehlix@mxlinux.org>  Sun, 17 May 2026 19:28:45 -0400
+
+live-kernel-updater (0.2.30+11) mx; urgency=medium
+
+  [ MX multi-kernel mode ]
+  * Add per-kernel initrd support (MULTI_KERNEL): each vmlinuzN gets its
+    own initrdN.gz; auto-detected from /etc/mx-version presence.
+  * Add --multi-kernel / --shared-initrd CLI flags to override detection.
+  * Add kernel actions for each vmlinuzN: Add (to next free vmlinuzN),
+    Reassign to a different kernel, Remove.
+  * Write vmlinuzN.ver version files for GRUB after kernel updates.
+  * Warn when syslinux cfg still references shared initrd.gz in
+    multi-kernel mode; list affected cfg files.
+  * No .kold/.iold backups in MX mode; each vmlinuzN is its own rollback.
+  * antiX shared-initrd mode (single initrd.gz for vmlinuz + vmlinuz1)
+    unchanged; full backward compatibility maintained.
+
+  [ Early microcode ]
+  * Add early microcode update (uc-tool) applied after every initrd repack.
+  * Add --no-ucode / -U flag to skip microcode update.
+
+  [ Kernel and initrd handling ]
+  * Fix shared-initrd mode: initrd rebuild includes modules for all
+    active kernels.
+  * Fix initrd-only update incorrectly including .kold backup kernel modules.
+  * Fix LUKS encrypted USB: initrd update menu entry was suppressed by
+    an obsolete guard; crypto programs are now correctly added.
+  * Use squashfs template initrd when updating external USB, for correct
+    distro/version match.
+  * Support directory argument for --device (pre-mounted live USB).
+
+  [ User interface ]
+  * Add --live-dir option to specify live subdirectory non-interactively.
+  * Mark currently running kernel (*) in vmlinuzN action menu (live mode only).
+  * Mark currently installed vmlinuzN (*) in kernel picker list.
+  * Enhance kernel build date detection with multi-format parsing
+    and mtime fallback.
+  * Sort available kernel list by version descending, date descending.
+  * Offer restart after every operation instead of exiting to terminal.
+  * Fix quit/cancel from menus closing the terminal on desktop launch.
+
+ -- fehlix <fehlix@mxlinux.org>  Sat, 16 May 2026 17:46:59 -0400
+
+live-kernel-updater (0.2.30+10) mx; urgency=medium
+
+  * if encrypted live media found, also copy encryption programs to initrd
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 01 May 2026 20:47:07 -0400
+
+live-kernel-updater (0.2.30+9) mx; urgency=medium
+
+  * always copy programs when rebuilding initrd
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 18 Apr 2026 14:17:07 -0400
+
 live-kernel-updater (0.2.30+8) mx; urgency=medium
 
   * fix kernel count function by filtering memtest entries

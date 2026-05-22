@@ -8,7 +8,8 @@
       "Bash(tail:*)",
       "Bash(ls:*)",
       "Bash(git show:*)",
-      "Bash(cmake:*)"
+      "Bash(cmake:*)",
+      "Bash(find /home/adrian/Sync/programs/qt/mx-packageinstaller -type f -name *.sh -o -name *script*)"
     ]
   },
   "enableAllProjectMcpServers": true,

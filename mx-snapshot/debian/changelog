@@ -1,3 +1,47 @@
+mx-snapshot (26.05.1) mx; urgency=medium
+
+  * Add amd/intel-ucode injection into initrd if uc-tool is available
+
+ -- fehlix <fehlix@mxlinux.org>  Fri, 01 May 2026 17:50:31 -0400
+
+mx-snapshot (26.05) mx; urgency=medium
+
+  * Make shutdown poweroff non-blocking and harden Cmd::proc startup
+    - Cmd::proc(): check waitForStarted() and skip event loop if the
+    process already finished, avoiding a hang/race on early failures.
+    - Work::cleanUp(): delegate poweroff to a detached shell that sleeps
+    briefly before the dbus call, so the app can exit cleanly.
+    - Work::createIso(): set done=true before cleanUp() on the shutdown
+    path so completion state is correct.
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 01 May 2026 16:41:40 -0400
+
+mx-snapshot (26.04.2) mx; urgency=medium
+
+  * change way users are collected
+  * eliminates some non existing home folders when system users are
+    configured as user-level users.
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 19 Apr 2026 20:52:10 -0400
+
+mx-snapshot (26.04.1) mx; urgency=medium
+
+  * Update initrd helper scripts
+  * Add shutdown toggle to output page
+  * Clean up initrd module list
+  * Handle transient progress output cleanly
+
+ -- Adrian <adrian@mxlinux.org>  Sun, 12 Apr 2026 14:18:00 -0400
+
+mx-snapshot (26.04) mx; urgency=medium
+
+  * Update Realtek initrd modules script
+  * Add --grub-mbr option for grub-based ISO MBR boot
+  * Remove switch-to-syslinux boot menu option when using --grub-mbr
+  * Update man page
+
+ -- Adrian <adrian@mxlinux.org>  Sat, 11 Apr 2026 20:08:39 -0400
+
 mx-snapshot (26.03.2) mx; urgency=medium
 
   * Save/restore window geometry

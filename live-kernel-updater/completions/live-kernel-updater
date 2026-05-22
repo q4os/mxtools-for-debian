@@ -1,0 +1,79 @@
+# bash completion for live-kernel-updater
+
+_live_kernel_updater() {
+    local cur prev words cword
+    _init_completion || return
+
+    local short_opts="-C -d -e -F -G -h -i -I -k -K -m -N -p -q -R -U -v -V -W"
+    local long_opts="
+        --color=
+        --device=
+        --encrypt
+        --force=
+        --graphic-ui
+        --help
+        --ignore-config
+        --initrd
+        --initrd=
+        --keep-old
+        --kernel=
+        --live-dir=
+        --modules=
+        --multi-kernel
+        --no-ucode
+        --numeric-ui
+        --pretend
+        --quiet
+        --reset-config
+        --shared-initrd
+        --verbose
+        --version
+        --very-verbose
+        --write-config
+    "
+
+    case "$prev" in
+        --color|-C)
+            COMPREPLY=( $(compgen -W "off low low1 bw dark high" -- "$cur") )
+            return ;;
+        --device|-d)
+            # offer 'live' plus block devices
+            local devs=$(lsblk -rno NAME,TYPE 2>/dev/null \
+                | awk '$2=="part"{print "/dev/"$1}')
+            COMPREPLY=( $(compgen -W "live $devs" -- "$cur") )
+            return ;;
+        --force|-F)
+            COMPREPLY=( $(compgen -W "flock usb clear" -- "$cur") )
+            return ;;
+        --initrd=|--initrd|-i)
+            COMPREPLY=( $(compgen -f -X '!*.gz' -- "$cur") )
+            compopt -o filenames 2>/dev/null
+            return ;;
+        --kernel|-k)
+            # offer installed kernel versions
+            local vers=$(ls /lib/modules 2>/dev/null)
+            COMPREPLY=( $(compgen -W "$vers" -- "$cur") )
+            return ;;
+        --live-dir)
+            COMPREPLY=( $(compgen -W "antiX antiXFrugal" -- "$cur") )
+            return ;;
+        --modules|-m)
+            # no good static list; fall through to default
+            ;;
+    esac
+
+    case "$cur" in
+        --*=*)
+            # already past the = ; let readline handle the value
+            return ;;
+        --*)
+            COMPREPLY=( $(compgen -W "$long_opts" -- "$cur") )
+            return ;;
+        -*)
+            COMPREPLY=( $(compgen -W "$short_opts $long_opts" -- "$cur") )
+            return ;;
+    esac
+}
+
+complete -F _live_kernel_updater live-kernel-updater
+complete -F _live_kernel_updater lku

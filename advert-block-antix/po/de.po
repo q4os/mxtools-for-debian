@@ -35,7 +35,7 @@ msgid ""
 "media\\nBlocking ad servers protects your privacy, saves you bandwidth, "
 "greatly \\nimproves web-browsing speed and makes the internet much less "
 "annoying in general.\\n\\nDo you want to proceed?"
-msgstr "The <b>$title</b> Tool fügt Daten zu Ihrer /etc/hosts-Datei hinzu, so dass viele Werbeserver und Websites keine Verbindung zu diesem PC herstellen können.\\nSie können Werbung, Malware, Pornografie, Glücksspiel, Fakenews und soziale Medien blockieren.\\nDas Blockieren von Werbeservern schützt Ihre Privatsphäre, spart Ihnen Bandbreite, verbessert die Surfgeschwindigkeit und macht das Internet im Allgemeinen viel weniger lästig.\\n\\nWollen Sie fortfahren?"
+msgstr "Das <b>$title</b> Werkzeug fügt Daten zu Ihrer /etc/hosts-Datei hinzu, so dass viele Werbeserver und Websites keine Verbindung zu diesem Rechner herstellen können.\\nSie können Werbung, Malware, Pornografie, Glücksspiel, Desinformation und soziale Medien blockieren.\\nDas Blockieren von Werbeservern schützt Ihre Privatsphäre, spart Bandbreite und verbessert die Surfgeschwindigkeit.\\n\\nWollen Sie fortfahren?"
 
 #: block-advert.sh:53
 msgid ""
@@ -63,7 +63,7 @@ msgstr "\\n ERROR: \\n Es wurde keine /etc/hosts.ORIGINAL gefunden, so dass sie 
 msgid ""
 "Success - your settings have been changed.\\n\\nYour hosts file has been "
 "updated.\\nRestart your browser to see the changes."
-msgstr "Erfolg - Ihre Einstellungen wurden geändert.\\n\\nIhre Hosts-Datei wurde aktualisiert.\\nStarten Sie ihren Browser, um die Änderungen zu sehen."
+msgstr "Erfolg - Ihre Einstellungen wurden geändert.\\n\\nIhre Hosts-Datei wurde aktualisiert.\\nStarten Sie Ihren Browser neu, um die Änderungen zu sehen."
 
 #: block-advert.sh:223
 msgid ""

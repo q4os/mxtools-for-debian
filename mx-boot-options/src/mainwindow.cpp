@@ -223,9 +223,16 @@ void MainWindow::setupGrubSettings()
     ui->groupBoxBackground->setHidden(!grubInstalled);
 
     if (grubInstalled) {
-        readGrubCfg();
-        readDefaultGrub();
+        reloadGrubSettings();
     }
+}
+
+void MainWindow::reloadGrubSettings()
+{
+    defaultGrub.clear();
+    grubCfg.clear();
+    readGrubCfg();
+    readDefaultGrub();
 }
 
 void MainWindow::handleSpecialFilesystems()
@@ -877,7 +884,8 @@ void MainWindow::replaceLiveGrubArgs(const QString &args)
     filteredArgs = filteredArgs.trimmed();
 
     if (!filteredArgs.isEmpty()) {
-        if (!cmd.procAsRoot("live-grubsave", {filteredArgs})) {
+        const QStringList argList = filteredArgs.split(' ', Qt::SkipEmptyParts);
+        if (!cmd.procAsRoot("live-grubsave", argList)) {
             qWarning() << "Failed to save new live-grub arguments:" << filteredArgs;
         }
     }
@@ -1244,11 +1252,15 @@ void MainWindow::pushApplyClicked()
         if (grubInstalled) {
             writeDefaultGrub();
             progress->setLabelText(tr("Updating grub..."));
-            if (!runUpdateGrub()) {
+            const bool grubUpdated = runUpdateGrub();
+            if (!grubUpdated) {
                 qWarning() << "Failed to update GRUB configuration.";
             }
             if (live) {
                 cmd.procAsRoot("cp", {"/boot/grub/grub.cfg", bootLocation + "/boot/grub/grub.cfg"});
+            }
+            if (grubUpdated) {
+                reloadGrubSettings();
             }
         }
         progress->close();

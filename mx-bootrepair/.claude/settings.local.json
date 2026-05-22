@@ -35,5 +35,9 @@
       "Bash(else echo \"No lsb-release file\")"
     ],
     "deny": []
-  }
+  },
+  "enabledMcpjsonServers": [
+    "docker"
+  ],
+  "enableAllProjectMcpServers": true
 }

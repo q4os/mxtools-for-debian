@@ -5,3 +5,4 @@ installed-to-live    /usr/bin
 live-files/*         /usr/share/live-files
 #disables/* etc/systemd/system
 service/* lib/systemd/system
+init.d/* etc/init.d

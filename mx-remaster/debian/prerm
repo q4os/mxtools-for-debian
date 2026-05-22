@@ -9,5 +9,6 @@ if [ -d /run/systemd/system ] && [ "$1" = remove ]; then
 	deb-systemd-invoke stop 'live-static-shutdown.service' >/dev/null || true
 	deb-systemd-invoke stop 'persist-autosave.service' >/dev/null || true
 	deb-systemd-invoke stop 'hwclock-mx.service' >/dev/null || true
+	deb-systemd-invoke stop 'live-setup.service' >/dev/null || true
 fi
 # End automatically added section

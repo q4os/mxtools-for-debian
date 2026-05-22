@@ -2,8 +2,8 @@ Source: mx-remaster
 Section: system
 Priority: required
 Maintainer: Adrian <adrian@mxlinux.org>
-Build-Depends: debhelper (>= 9.20120115)
-Standards-Version: 3.9.4
+Build-Depends: debhelper-compat (= 12)
+Standards-Version: 4.5.1
 Homepage: http://mxlinux.org
 
 Package: mx-remaster

@@ -14,37 +14,10 @@
 #                    only the ASCII symbols are supported.
 ### END INIT INFO
 
-live_files_dir="/usr/share/live-files/general-files"
-def_files="keyboard"
-
-# return true if the files are the same
-no_diff() { diff -q "$@" >/dev/null 2>&1 ; return $? ;}
-
 case $1 in start)
-    if mountpoint -q /live/aufs; then
-
-        # First, fix the console font ASAP
-        prog=/live/bin/set-console-width
-        test -x $prog && $prog --auto keyboard-setup.sh
-
-        # Always run setupcon -k if the keyboard file is not the default
-        for file in $def_files; do
-            a=/etc/default/$file
-            b=$live_files_dir$a
-            [ -e $a -a -e $b ] || continue
-            #echo no_diff $a $b
-            no_diff $a $b && continue
-
-            . /lib/lsb/init-functions
-
-	        log_action_begin_msg "Setting up live keyboard layout"
-            /bin/setupcon -k
-	        log_action_end_msg $?
-
-            break
-        done
-        exit 0
-    fi
+    prog=/live/bin/set-console-width
+    test -x $prog && $prog --auto keyboard-setup.sh
+    test -x $prog && exit 0
 esac
 
 
@@ -77,7 +50,7 @@ if [ -f /bin/setupcon ]; then
 	    fi
 	    ;;
         *)
-            echo 'Usage: /etc/init.d/keyboard-setup {start|reload|restart|force-reload|stop|status}'
+            echo 'Usage: /etc/init.d/keyboard-setup.sh {start|reload|restart|force-reload|stop|status}'
             exit 3
             ;;
     esac

@@ -29,6 +29,7 @@
 #include <QDebug>
 #include <QDir>
 #include <QFileInfo>
+#include <QHash>
 #include <QProcess>
 #include <QRegularExpression>
 #include <QSettings>
@@ -84,6 +85,7 @@ Settings::Settings(const QCommandLineParser &argParser, bool isGuiApp)
       editBootMenu(getEditBootMenuSetting()),
       isGuiApp(isGuiApp),
       forceInstaller(getInitialSettings().forceInstaller),
+      grubmbr(argParser.isSet("grub-mbr")),
       live(getInitialSettings().live),
       makeIsohybrid(getInitialSettings().makeIsohybrid),
       configFile("/etc/" + qApp->applicationName() + ".conf"),
@@ -574,26 +576,43 @@ void Settings::setVariables()
         distroVersionFile = "/etc/antix-version";
     }
 
-    if (QFileInfo::exists("/etc/lsb-release")) {
-        projectName = Cmd().getOut("grep -oP '(?<=DISTRIB_ID=).*' /etc/lsb-release");
-    } else {
-        projectName = Cmd().getOut("lsb_release -i | cut -f2");
+    QHash<QString, QString> lsbRelease;
+    QFile lsbFile(QStringLiteral("/etc/lsb-release"));
+    if (lsbFile.open(QIODevice::ReadOnly | QIODevice::Text)) {
+        while (!lsbFile.atEnd()) {
+            const QString line = QString::fromUtf8(lsbFile.readLine()).trimmed();
+            const int eq = line.indexOf('=');
+            if (eq > 0) {
+                QString value = line.mid(eq + 1);
+                if (value.size() >= 2 && value.startsWith('"') && value.endsWith('"')) {
+                    value = value.mid(1, value.size() - 2);
+                }
+                lsbRelease.insert(line.left(eq), value);
+            }
+        }
+        lsbFile.close();
     }
-    projectName.replace('"', "");
+
+    projectName = lsbRelease.contains("DISTRIB_ID")
+                      ? lsbRelease.value("DISTRIB_ID")
+                      : Cmd().getOut("lsb_release -is");
+    projectName.remove('"');
     if (!distroVersionFile.isEmpty()) {
-        distroVersion = Cmd().getOut("cut -f1 -d'_' " + distroVersionFile);
-        distroVersion.remove(QRegularExpression("^" + projectName + "_|^" + projectName + "-"));
+        QFile versionFile(distroVersionFile);
+        if (versionFile.open(QIODevice::ReadOnly | QIODevice::Text)) {
+            distroVersion = QString::fromUtf8(versionFile.readLine()).section('_', 0, 0).trimmed();
+            versionFile.close();
+        }
+        distroVersion.remove(QRegularExpression("^" + projectName + "[_-]"));
     } else {
-        distroVersion = Cmd().getOut("lsb_release -r | cut -f2");
+        distroVersion = Cmd().getOut("lsb_release -rs");
     }
     fullDistroName = projectName + "-" + distroVersion + "_" + QString(x86 ? "386" : "x64");
     releaseDate = QDate::currentDate().toString("MMMM dd, yyyy");
-    if (QFileInfo::exists("/etc/lsb-release")) {
-        codename = Cmd().getOut("grep -oP '(?<=DISTRIB_CODENAME=).*' /etc/lsb-release");
-    } else {
-        codename = Cmd().getOut("lsb_release -c | cut -f2");
-    }
-    codename.replace('"', "");
+    codename = lsbRelease.contains("DISTRIB_CODENAME")
+                   ? lsbRelease.value("DISTRIB_CODENAME")
+                   : Cmd().getOut("lsb_release -cs");
+    codename.remove('"');
     bootOptions = monthly ? "quiet splasht nosplash" : SystemInfo::readKernelOpts();
 }
 
@@ -608,7 +627,7 @@ QString Settings::getFilename() const
         int n = 1;
         do {
             name = snapshotBasename + QString::number(n) + ".iso";
-            dir.setPath('"' + snapshotDir + '/' + name + '"');
+            dir.setPath(snapshotDir + '/' + name);
             n++;
         } while (QFileInfo::exists(dir.absolutePath()));
         return name;
@@ -760,6 +779,17 @@ void Settings::excludeItem(const QString &item)
     }
 }
 
+void Settings::excludeUserFolder(bool exclude, Exclude flag, const QString &folderName, const QString &xdgKey)
+{
+    qDebug() << "+++" << __PRETTY_FUNCTION__ << "+++";
+    if (exclude) {
+        exclusions.setFlag(flag);
+    }
+    const QString folder = "home/*/" + folderName + "/";
+    const QString exclusion = folder + "*\" \"" + folder + ".*" + getXdgUserDirs(xdgKey);
+    addRemoveExclusion(exclude, exclusion);
+}
+
 void Settings::excludeDesktop(bool exclude)
 {
     qDebug() << "+++" << __PRETTY_FUNCTION__ << "+++";
@@ -772,26 +802,12 @@ void Settings::excludeDesktop(bool exclude)
 
 void Settings::excludeDocuments(bool exclude)
 {
-    qDebug() << "+++" << __PRETTY_FUNCTION__ << "+++";
-    if (exclude) {
-        exclusions.setFlag(Exclude::Documents);
-    }
-    QString folder {"home/*/Documents/"};
-    QString xdg_name {"DOCUMENTS"};
-    QString exclusion = folder + "*\" \"" + folder + ".*" + getXdgUserDirs(xdg_name);
-    addRemoveExclusion(exclude, exclusion);
+    excludeUserFolder(exclude, Exclude::Documents, "Documents", "DOCUMENTS");
 }
 
 void Settings::excludeDownloads(bool exclude)
 {
-    qDebug() << "+++" << __PRETTY_FUNCTION__ << "+++";
-    if (exclude) {
-        exclusions.setFlag(Exclude::Downloads);
-    }
-    QString folder {"home/*/Downloads/"};
-    QString xdg_name {"DOWNLOAD"};
-    QString exclusion = folder + "*\" \"" + folder + ".*" + getXdgUserDirs(xdg_name);
-    addRemoveExclusion(exclude, exclusion);
+    excludeUserFolder(exclude, Exclude::Downloads, "Downloads", "DOWNLOAD");
 }
 
 void Settings::excludeFlatpaks(bool exclude)
@@ -808,14 +824,7 @@ void Settings::excludeFlatpaks(bool exclude)
 
 void Settings::excludeMusic(bool exclude)
 {
-    qDebug() << "+++" << __PRETTY_FUNCTION__ << "+++";
-    if (exclude) {
-        exclusions.setFlag(Exclude::Music);
-    }
-    QString folder {"home/*/Music/"};
-    QString xdg_name {"MUSIC"};
-    QString exclusion = folder + "*\" \"" + folder + ".*" + getXdgUserDirs(xdg_name);
-    addRemoveExclusion(exclude, exclusion);
+    excludeUserFolder(exclude, Exclude::Music, "Music", "MUSIC");
 }
 
 void Settings::excludeNetworks(bool exclude)
@@ -831,14 +840,7 @@ void Settings::excludeNetworks(bool exclude)
 
 void Settings::excludePictures(bool exclude)
 {
-    qDebug() << "+++" << __PRETTY_FUNCTION__ << "+++";
-    if (exclude) {
-        exclusions.setFlag(Exclude::Pictures);
-    }
-    QString folder {"home/*/Pictures/"};
-    QString xdg_name {"PICTURES"};
-    QString exclusion = folder + "*\" \"" + folder + ".*" + getXdgUserDirs(xdg_name);
-    addRemoveExclusion(exclude, exclusion);
+    excludeUserFolder(exclude, Exclude::Pictures, "Pictures", "PICTURES");
 }
 
 void Settings::excludeSteam(bool exclude)
@@ -874,14 +876,7 @@ void Settings::excludeSwapFile()
 
 void Settings::excludeVideos(bool exclude)
 {
-    qDebug() << "+++" << __PRETTY_FUNCTION__ << "+++";
-    if (exclude) {
-        exclusions.setFlag(Exclude::Videos);
-    }
-    QString folder {"home/*/Videos/"};
-    QString xdg_name {"VIDEOS"};
-    QString exclusion = folder + "*\" \"" + folder + ".*" + getXdgUserDirs(xdg_name);
-    addRemoveExclusion(exclude, exclusion);
+    excludeUserFolder(exclude, Exclude::Videos, "Videos", "VIDEOS");
 }
 
 void Settings::excludeVirtualBox(bool exclude)
@@ -920,7 +915,7 @@ void Settings::loadConfig()
     settingsSystem.endGroup();
 
     // Merge system settings into user settings
-    foreach (const QString &key, systemKeys) {
+    for (const QString &key : std::as_const(systemKeys)) {
         if (!settingsUser.contains(key)) {
             QVariant value = settingsSystem.value(key);
             settingsUser.setValue(key, value);
@@ -1243,7 +1238,7 @@ Settings::InitialSettings Settings::getInitialSettings() const
     QStringList systemKeys = settingsSystem.allKeys();
     settingsSystem.endGroup();
 
-    foreach (const QString &key, systemKeys) {
+    for (const QString &key : std::as_const(systemKeys)) {
         if (!settingsUser.contains(key)) {
             QVariant value = settingsSystem.value(key);
             settingsUser.setValue(key, value);

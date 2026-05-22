@@ -21,10 +21,7 @@
  **********************************************************************/
 #include "flatpakmodel.h"
 
-namespace Status
-{
-enum { Installed = 1, Upgradable, NotInstalled, Autoremovable };
-}
+#include "../packagestatus.h"
 
 FlatpakModel::FlatpakModel(QObject *parent)
     : QAbstractTableModel(parent)

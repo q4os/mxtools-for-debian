@@ -1,3 +1,32 @@
+live-usb-maker (2.41.27) mx; urgency=medium
+
+  * use partprobe on drive - not partition - for leading data partition
+  * tidy up whitespaces (fix mixed tabs/spaces, normalize line endings)
+
+ -- fehlix <fehlix@mxlinux.org>  Sat, 18 Apr 2026 20:43:06 -0400
+
+live-usb-maker (2.41.26) mx; urgency=medium
+
+  * keep syslinux if available
+  * grub install improvements
+  * gpt bios partition at front
+  * add --no-extlinux switch (development switch)
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 09 Apr 2026 21:58:58 -0400
+
+live-usb-maker (2.41.25) mx; urgency=medium
+
+  * disable switch to syslinux menu if --grub-mbr used
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 06 Apr 2026 18:48:08 -0400
+
+live-usb-maker (2.41.24) mx; urgency=medium
+
+  * add --grub-mbr switch to force grub2 usage for mbr/legacy boots
+  * replaces syslinux boot change 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 04 Apr 2026 22:15:25 -0400
+
 live-usb-maker (2.41.23+1) mx; urgency=medium
 
   * replace lib path line in dd-live-usb

@@ -22,11 +22,11 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. The desktop entry name will be displayed within the menu.
-#: desktop-in/mx-live-usb-maker.desktop.in:5
+#: desktop-in/CUSTOMPROGRAMNAME.desktop.in:5
 msgid "MX Live USB Maker"
 msgstr "MX Live USB Maker"
 
 #. # The desktop entry comment will be shown within the menu.
-#: desktop-in/mx-live-usb-maker.desktop.in:7
+#: desktop-in/CUSTOMPROGRAMNAME.desktop.in:7
 msgid "Create a full-featured live-usb"
 msgstr "Create a full-featured live-usb"

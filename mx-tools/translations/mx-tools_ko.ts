@@ -10,17 +10,17 @@
     <message>
         <location filename="../mainwindow.ui" line="53"/>
         <source>About this application</source>
-        <translation type="unfinished"/>
+        <translation>이 애플리케이션 정보</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="56"/>
         <source>About...</source>
-        <translation type="unfinished"/>
+        <translation>About...</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="63"/>
         <source>Alt+B</source>
-        <translation type="unfinished"/>
+        <translation>Alt+B</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="127"/>
@@ -65,7 +65,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="478"/>
         <source>Version: </source>
-        <translation type="unfinished"/>
+        <translation>버전:</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="479"/>
@@ -80,7 +80,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="483"/>
         <source>%1 License</source>
-        <translation type="unfinished"/>
+        <translation>%1 라이센스</translation>
     </message>
 </context>
 <context>
@@ -88,13 +88,13 @@
     <message>
         <location filename="../about.cpp" line="61"/>
         <source>License</source>
-        <translation type="unfinished"/>
+        <translation>라이센스</translation>
     </message>
     <message>
         <location filename="../about.cpp" line="62"/>
         <location filename="../about.cpp" line="72"/>
         <source>Changelog</source>
-        <translation type="unfinished"/>
+        <translation>변경 로그</translation>
     </message>
     <message>
         <location filename="../about.cpp" line="63"/>
@@ -104,7 +104,7 @@
     <message>
         <location filename="../about.cpp" line="85"/>
         <source>&amp;Close</source>
-        <translation type="unfinished"/>
+        <translation>닫기(&amp;C)</translation>
     </message>
 </context>
 </TS>

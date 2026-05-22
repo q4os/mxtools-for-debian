@@ -2,6 +2,8 @@
 Description=adjust Xfce clocks utilities
 After=local-fs.target
 ConditionPathExists=/live/linux
+ConditionPathExists=/usr/bin/clock12or24
+ConditionPathExists=/var/lib/q4os/service_liveclock12or24_enable.stp
 
 [Service]
 Type=oneshot

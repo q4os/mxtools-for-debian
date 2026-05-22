@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(bash -n /home/adrian/Sync/programs/qt/mx-snapshot/scripts/copy-initrd-modules)",
+      "Bash(bash -n /home/adrian/Sync/programs/qt/mx-snapshot/scripts/copy-initrd-programs)",
+      "Bash(bash -n /home/adrian/Sync/programs/qt/mx-snapshot/scripts/snapshot-bootparameter.sh)"
+    ]
+  },
+  "enableAllProjectMcpServers": true,
+  "enabledMcpjsonServers": [
+    "docker"
+  ]
+}
