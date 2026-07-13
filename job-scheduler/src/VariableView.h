@@ -9,10 +9,11 @@
 */
 #pragma once
 
+#include "Crontab.h"
+
 #include <QTreeView>
 
 class QModelIndex;
-class Variable;
 class VariableModel;
 
 class VariableView : public QTreeView

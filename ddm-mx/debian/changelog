@@ -1,3 +1,30 @@
+ddm-mx (26.06.04.1302) stable; urgency=medium
+
+  * Release
+
+ -- Devs <devteam@localdomain>  Mon, 13 Jul 2026 13:05:26 +0200
+
+ddm-mx (26.06.04) mx; urgency=medium
+
+  * remove need for nvidia-detect (will use ids files if present)
+  * add more information to nvidia-detect-mx
+  * nvidia-detect-mx will provide information on Open Module support for nvidia-driver
+  * update translations
+  * add legacy PCIID files for older versions of nvidia driver
+  * add support for installing open kernel modules when version match nvidia-driver version
+  * when available, default to open modules on 580 and up
+  * rotate log files when var/log/ddm.log is larger than 200kb
+  * keep 5 historical log files of form ddm.log.X
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 25 Jun 2026 20:08:02 -0400
+
+ddm-mx (26.06.01) mx; urgency=medium
+
+  * adjustments to get Press Exit routine to only show once.
+  * update translations
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 11 Jun 2026 20:54:23 -0400
+
 ddm-mx (25.11.04) mx; urgency=medium
 
   * rebuild initramfs with nouveau

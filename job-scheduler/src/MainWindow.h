@@ -9,14 +9,14 @@
 */
 #pragma once
 
+#include "Crontab.h"
+
 #include <memory>
 #include <vector>
 
 #include <QMainWindow>
 #include <QSettings>
 
-class TCommand;
-class Crontab;
 class CronView;
 class ExecuteList;
 class QModelIndex;

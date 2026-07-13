@@ -1,11 +1,13 @@
 #include "core/bootrepair_engine.h"
 
 #include <QCoreApplication>
+#include <QDebug>
 #include <QSignalBlocker>
 #include <QDir>
 #include <QFile>
 #include <QFileInfo>
 #include <QRandomGenerator>
+#include <QRegularExpression>
 #include <QSysInfo>
 
 namespace {
@@ -65,8 +67,9 @@ QString toRootRelativePath(const QString& path, const QString& rootPath)
 
 QString detectArch(Cmd* shell)
 {
-    const QString cmd = QStringLiteral("uname -m");
-    QString arch = shell->getCmdOut(cmd, QuietMode::Yes).trimmed();
+    QString arch;
+    shell->proc("uname", {"-m"}, &arch, nullptr, QuietMode::Yes);
+    arch = arch.trimmed();
     if (arch.contains("not found", Qt::CaseInsensitive)) {
         arch.clear();
     }
@@ -283,21 +286,40 @@ bool BootRepairEngine::execProcAsRootInTarget(const QString& rootPath, const QSt
 
 QStringList BootRepairEngine::listDisks() const
 {
-    const QString cmd = QStringLiteral(
-        "lsblk -ln -o NAME,SIZE,LABEL,MODEL -d -e 2,11 -x NAME | grep -E '^x?[h,s,v].[a-z]|^mmcblk|^nvme'");
-    emit const_cast<BootRepairEngine*>(this)->log(QStringLiteral("$ %1").arg(cmd));
-    const QSignalBlocker blocker(const_cast<BootRepairEngine*>(this)); // suppress engine::log emissions
-    return shell->getCmdOut(cmd, QuietMode::Yes).split('\n', Qt::SkipEmptyParts);
+    emit const_cast<BootRepairEngine*>(this)->log(
+        QStringLiteral("$ lsblk -ln -o NAME,SIZE,LABEL,MODEL -d -e 2,11 -x NAME"));
+    const QSignalBlocker blocker(const_cast<BootRepairEngine*>(this));
+    QString output;
+    shell->proc("lsblk", {"-ln", "-o", "NAME,SIZE,LABEL,MODEL", "-d", "-e", "2,11", "-x", "NAME"},
+                &output, nullptr, QuietMode::Yes);
+    static const QRegularExpression diskRx(
+        QStringLiteral(R"(^(x?[hsv]d[a-z]+|mmcblk[0-9]+|nvme[0-9]+n[0-9]+)\b)"));
+    QStringList result;
+    for (const auto &line : output.split('\n', Qt::SkipEmptyParts)) {
+        if (diskRx.match(line).hasMatch()) {
+            result << line;
+        }
+    }
+    return result;
 }
 
 QStringList BootRepairEngine::listPartitions() const
 {
-    const QString cmd = QStringLiteral(
-        "lsblk -ln -o NAME,SIZE,FSTYPE,MOUNTPOINT,LABEL -e 2,11 -x NAME | grep -E "
-        "'^x?[h,s,v].[a-z][0-9]|^mmcblk[0-9]+p|^nvme[0-9]+n[0-9]+p'");
-    emit const_cast<BootRepairEngine*>(this)->log(QStringLiteral("$ %1").arg(cmd));
-    const QSignalBlocker blocker(const_cast<BootRepairEngine*>(this)); // suppress engine::log emissions
-    return shell->getCmdOut(cmd, QuietMode::Yes).split('\n', Qt::SkipEmptyParts);
+    emit const_cast<BootRepairEngine*>(this)->log(
+        QStringLiteral("$ lsblk -ln -o NAME,SIZE,FSTYPE,MOUNTPOINT,LABEL -e 2,11 -x NAME"));
+    const QSignalBlocker blocker(const_cast<BootRepairEngine*>(this));
+    QString output;
+    shell->proc("lsblk", {"-ln", "-o", "NAME,SIZE,FSTYPE,MOUNTPOINT,LABEL", "-e", "2,11", "-x", "NAME"},
+                &output, nullptr, QuietMode::Yes);
+    static const QRegularExpression partRx(
+        QStringLiteral(R"(^(x?[hsv]d[a-z]+[0-9]+|mmcblk[0-9]+p[0-9]+|nvme[0-9]+n[0-9]+p[0-9]+)\b)"));
+    QStringList result;
+    for (const auto &line : output.split('\n', Qt::SkipEmptyParts)) {
+        if (partRx.match(line).hasMatch()) {
+            result << line;
+        }
+    }
+    return result;
 }
 
 bool BootRepairEngine::isUefi()
@@ -316,10 +338,15 @@ bool BootRepairEngine::isMountedTo(const QString& volume, const QString& mount) 
     const bool wasSuppressed = shell->outputSuppressed();
     shell->setOutputSuppressed(true);
     QString points;
-    if (!shell->proc("lsblk", {"-nro", "MOUNTPOINTS", volume}, &points, nullptr, QuietMode::Yes)) {
-        shell->proc("lsblk", {"-nro", "MOUNTPOINT", volume}, &points, nullptr, QuietMode::Yes);
+    bool queried = shell->proc("lsblk", {"-nro", "MOUNTPOINTS", volume}, &points, nullptr, QuietMode::Yes);
+    if (!queried) {
+        queried = shell->proc("lsblk", {"-nro", "MOUNTPOINT", volume}, &points, nullptr, QuietMode::Yes);
     }
     shell->setOutputSuppressed(wasSuppressed);
+    if (!queried) {
+        // Empty output is normal for an unmounted device; only warn when lsblk itself failed.
+        qWarning().noquote() << "isMountedTo: lsblk failed to query mount points for" << volume;
+    }
     return points.split('\n', Qt::SkipEmptyParts).contains(mount);
 }
 
@@ -373,27 +400,37 @@ QString BootRepairEngine::mountSource(const QString& mountpoint) const
 bool BootRepairEngine::isEspPartition(const QString& device) const
 {
     const QString dev = normalizeDev(device);
-    const QString cmd = QStringLiteral("lsblk -ln -o PARTTYPE %1 | grep -qiE 'c12a7328-f81f-11d2-ba4b-00a0c93ec93b|0xef'")
-                            .arg(dev);
-    emit const_cast<BootRepairEngine*>(this)->log(QStringLiteral("$ %1").arg(cmd));
-    return shell->run(cmd, nullptr, nullptr, QuietMode::Yes);
+    emit const_cast<BootRepairEngine*>(this)->log(
+        QStringLiteral("$ lsblk -ln -o PARTTYPE %1").arg(dev));
+    QString output;
+    shell->proc("lsblk", {"-ln", "-o", "PARTTYPE", dev}, &output, nullptr, QuietMode::Yes);
+    static const QRegularExpression rx(QStringLiteral("c12a7328-f81f-11d2-ba4b-00a0c93ec93b|0xef"),
+                                        QRegularExpression::CaseInsensitiveOption);
+    return rx.match(output).hasMatch();
 }
 
 bool BootRepairEngine::isLinuxPartitionType(const QString& device) const
 {
     const QString dev = normalizeDev(device);
-    const QString cmd = QStringLiteral("lsblk -ln -o PARTTYPE %1 | grep -qEi '0x83|0fc63daf-8483-4772-8e79-3d69d8477de4|44479540-F297-41B2-9AF7-D131D5F0458A|4F68BCE3-E8CD-4DB1-96E7-FBCAF984B709'")
-                            .arg(dev);
-    emit const_cast<BootRepairEngine*>(this)->log(QStringLiteral("$ %1").arg(cmd));
-    return shell->run(cmd, nullptr, nullptr, QuietMode::Yes);
+    emit const_cast<BootRepairEngine*>(this)->log(
+        QStringLiteral("$ lsblk -ln -o PARTTYPE %1").arg(dev));
+    QString output;
+    shell->proc("lsblk", {"-ln", "-o", "PARTTYPE", dev}, &output, nullptr, QuietMode::Yes);
+    static const QRegularExpression rx(
+        QStringLiteral("0x83|0fc63daf-8483-4772-8e79-3d69d8477de4|"
+                       "44479540-F297-41B2-9AF7-D131D5F0458A|4F68BCE3-E8CD-4DB1-96E7-FBCAF984B709"),
+        QRegularExpression::CaseInsensitiveOption);
+    return rx.match(output).hasMatch();
 }
 
 bool BootRepairEngine::labelContains(const QString& device, const QString& needle) const
 {
     const QString dev = normalizeDev(device);
-    const QString cmd = QStringLiteral("lsblk -ln -o LABEL %1 | grep -q %2").arg(dev, needle);
-    emit const_cast<BootRepairEngine*>(this)->log(QStringLiteral("$ %1").arg(cmd));
-    return shell->run(cmd, nullptr, nullptr, QuietMode::Yes);
+    emit const_cast<BootRepairEngine*>(this)->log(
+        QStringLiteral("$ lsblk -ln -o LABEL %1").arg(dev));
+    QString output;
+    shell->proc("lsblk", {"-ln", "-o", "LABEL", dev}, &output, nullptr, QuietMode::Yes);
+    return output.contains(needle);
 }
 
 QString BootRepairEngine::filesystemType(const QString& device) const
@@ -416,7 +453,7 @@ bool BootRepairEngine::openLuks(const QString& part, const QString& mapper, cons
         emit log(QStringLiteral("LUKS device requires a password for %1").arg(part));
         return false;
     }
-    return execProcAsRoot("cryptsetup", {"luksOpen", part, mapper, "-"}, nullptr, &const_cast<QByteArray&>(pass), true);
+    return execProcAsRoot("cryptsetup", {"luksOpen", part, mapper, "-"}, nullptr, &pass, true);
 }
 
 bool BootRepairEngine::mountChrootEnv(const QString& path)
@@ -500,14 +537,19 @@ bool BootRepairEngine::installGrub(const BootRepairOptions& opt)
     currentDryRun_ = opt.dryRun;
     // Handle LUKS if needed
     QString root = opt.root;
-    const QString mapper = luksMapper(root);
-    if (!mapper.isEmpty() && !root.startsWith("/dev/mapper/")) {
-        if (!openLuks(root, mapper, opt.luksPassword)) {
-            emit finished(false);
-            currentDryRun_ = false;
-            return false;
+    QString mapper;
+
+    // If already mounted, no need to unlock LUKS
+    if (!isMountedTo(root, "/")) {
+        mapper = luksMapper(root);
+        if (!mapper.isEmpty() && !root.startsWith("/dev/mapper/")) {
+            if (!openLuks(root, mapper, opt.luksPassword)) {
+                emit finished(false);
+                currentDryRun_ = false;
+                return false;
+            }
+            root = "/dev/mapper/" + mapper;
         }
-        root = "/dev/mapper/" + mapper;
     }
 
     // If installing on current root
@@ -548,7 +590,7 @@ bool BootRepairEngine::installGrub(const BootRepairOptions& opt)
                 if (grubSupportsForceExtraRemovable(shell)) {
                     args << QStringLiteral("--force-extra-removable");
                 }
-                args << QStringLiteral("--recheck") << QStringLiteral("--locales=");
+                args << QStringLiteral("--recheck") << QStringLiteral("--compress=gz") << QStringLiteral("--locales=");
                 ok = execProcAsRoot("grub-install", args, nullptr, nullptr, true);
                 if (ok) {
                     ok = copyGrubLocales();
@@ -578,7 +620,7 @@ bool BootRepairEngine::installGrub(const BootRepairOptions& opt)
             if (grubTool == "grub-install") {
                 ok = execProcAsRoot("grub-install",
                                     {QStringLiteral("--target=i386-pc"), QStringLiteral("--recheck"),
-                                     QStringLiteral("--force"), QStringLiteral("--locales="),
+                                     QStringLiteral("--force"), QStringLiteral("--compress=gz"), QStringLiteral("--locales="),
                                      QStringLiteral("/dev/%1").arg(opt.location)},
                                     nullptr, nullptr, true);
                 if (ok) {
@@ -649,7 +691,7 @@ bool BootRepairEngine::installGrub(const BootRepairOptions& opt)
             if (grubSupportsForceExtraRemovable(shell, tmpdir.path())) {
                 args << QStringLiteral("--force-extra-removable");
             }
-            args << QStringLiteral("--recheck") << QStringLiteral("--locales=");
+            args << QStringLiteral("--recheck") << QStringLiteral("--compress=gz") << QStringLiteral("--locales=");
             ok = execProcAsRootInTarget(tmpdir.path(), "grub-install", args, nullptr, nullptr, true);
             if (ok) {
                 ok = copyGrubLocales(tmpdir.path());
@@ -679,7 +721,7 @@ bool BootRepairEngine::installGrub(const BootRepairOptions& opt)
         if (grubTool == "grub-install") {
             ok = execProcAsRootInTarget(tmpdir.path(), "grub-install",
                                         {QStringLiteral("--target=i386-pc"), QStringLiteral("--recheck"),
-                                         QStringLiteral("--force"), QStringLiteral("--locales="),
+                                         QStringLiteral("--force"), QStringLiteral("--compress=gz"), QStringLiteral("--locales="),
                                          QStringLiteral("/dev/%1").arg(opt.location)},
                                         nullptr, nullptr, true);
             if (ok) {
@@ -704,14 +746,19 @@ bool BootRepairEngine::repairGrub(const BootRepairOptions& opt)
 {
     currentDryRun_ = opt.dryRun;
     QString root = opt.root;
-    const QString mapper = luksMapper(root);
-    if (!mapper.isEmpty() && !root.startsWith("/dev/mapper/")) {
-        if (!openLuks(root, mapper, opt.luksPassword)) {
-            emit finished(false);
-            currentDryRun_ = false;
-            return false;
+    QString mapper;
+
+    // If already mounted, no need to unlock LUKS
+    if (!isMountedTo(root, "/")) {
+        mapper = luksMapper(root);
+        if (!mapper.isEmpty() && !root.startsWith("/dev/mapper/")) {
+            if (!openLuks(root, mapper, opt.luksPassword)) {
+                emit finished(false);
+                currentDryRun_ = false;
+                return false;
+            }
+            root = "/dev/mapper/" + mapper;
         }
-        root = "/dev/mapper/" + mapper;
     }
 
     if (isMountedTo(root, "/")) {
@@ -770,14 +817,19 @@ bool BootRepairEngine::regenerateInitramfs(const BootRepairOptions& opt)
 {
     currentDryRun_ = opt.dryRun;
     QString root = opt.root;
-    const QString mapper = luksMapper(root);
-    if (!mapper.isEmpty() && !root.startsWith("/dev/mapper/")) {
-        if (!openLuks(root, mapper, opt.luksPassword)) {
-            emit finished(false);
-            currentDryRun_ = false;
-            return false;
+    QString mapper;
+
+    // If already mounted, no need to unlock LUKS
+    if (!isMountedTo(root, "/")) {
+        mapper = luksMapper(root);
+        if (!mapper.isEmpty() && !root.startsWith("/dev/mapper/")) {
+            if (!openLuks(root, mapper, opt.luksPassword)) {
+                emit finished(false);
+                currentDryRun_ = false;
+                return false;
+            }
+            root = "/dev/mapper/" + mapper;
         }
-        root = "/dev/mapper/" + mapper;
     }
 
     if (isMountedTo(root, "/")) {

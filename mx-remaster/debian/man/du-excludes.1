@@ -1,0 +1,43 @@
+.TH DU-EXCLUDES 1 "June 2026" "mx-remaster" "User Commands"
+.SH NAME
+du-excludes \- show disk usage for files listed in an exclude file
+.SH SYNOPSIS
+.B du-excludes
+.I exclude-file
+.I directory
+.SH DESCRIPTION
+.B du-excludes
+reads a list of file or directory names from an exclude file and runs
+.B du
+against the named paths after prepending the supplied directory.
+It is a convenience tool used by the remaster workflow to estimate how much
+space files will consume on a different filesystem or mount point.
+.SH OPTIONS
+.TP
+.BR -h , " --help"
+Show the help text and exit.
+.PP
+The script also accepts the legacy
+.B -help
+spelling.
+.SH ARGUMENTS
+.TP
+.I exclude-file
+File containing one path per line.
+.TP
+.I directory
+Directory prefix added to each entry before running
+.BR du .
+.SH EXAMPLES
+.TP
+.B du-excludes /live/config/remaster.exclude /mnt/target
+Estimate the space used by the files listed in
+.I /live/config/remaster.exclude
+relative to
+.IR /mnt/target .
+.SH SEE ALSO
+.BR du (1),
+.BR live-remaster (1),
+.BR installed-to-live (1)
+.SH AUTHOR
+mx-remaster maintainers

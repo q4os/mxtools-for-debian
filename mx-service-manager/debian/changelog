@@ -1,3 +1,9 @@
+mx-service-manager (26.03.1302) stable; urgency=medium
+
+  * Release
+
+ -- Devs <devteam@localdomain>  Mon, 13 Jul 2026 13:05:34 +0200
+
 mx-service-manager (26.03) mx; urgency=medium
 
   * Replace bash helper script with compiled C++ helper that only allows

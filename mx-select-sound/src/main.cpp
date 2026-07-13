@@ -29,8 +29,6 @@
 #include <QLocale>
 #include <QTranslator>
 
-#include <unistd.h>
-
 int main(int argc, char *argv[])
 {
     // Set Qt platform to XCB (X11) if not already set and we're in X11 environment
@@ -41,6 +39,7 @@ int main(int argc, char *argv[])
     }
 
     QApplication app(argc, argv);
+    QApplication::setApplicationName(QStringLiteral("mx-select-sound"));
     QApplication::setWindowIcon(QIcon::fromTheme(QApplication::applicationName()));
 
     QTranslator qtTran;
@@ -53,8 +52,11 @@ int main(int argc, char *argv[])
         QApplication::installTranslator(&qtBaseTran);
 
     QTranslator appTran;
-    if (appTran.load(QApplication::applicationName() + "_" + QLocale::system().name(),
-                     "/usr/share/" + QApplication::applicationName() + "/locale"))
+    const QString appName = QApplication::applicationName();
+    const QString localeName = QLocale::system().name();
+    if (appTran.load(appName + "_" + localeName, "/usr/share/" + appName + "/locale")
+        || appTran.load(appName + "_" + localeName,
+                        QCoreApplication::applicationDirPath() + "/../translations"))
         QApplication::installTranslator(&appTran);
 
     MainWindow w;

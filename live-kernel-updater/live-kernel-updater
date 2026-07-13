@@ -13,8 +13,8 @@
 #      VERSION="2.30.04-2302"
 # VERSION_DATE="Sat, 25 Feb 2023 12:45:10 -0500"
 
-      VERSION="26.05.2"
- VERSION_DATE="Thu, 21 May 2026 07:37:17 -0400"
+      VERSION="26.06.2"
+ VERSION_DATE="Mon, 08 Jun 2026 06:01:32 -0400"
 
         ME="live-kernel-updater"
     MY_DIR=$(dirname "$(readlink -f $0)")
@@ -112,6 +112,8 @@ test -d "$domain_dir" && export TEXTDOMAINDIR=$domain_dir
         LOG_FILE="/dev/null"
         ERR_FILE="/dev/null"
      CONFIG_FILE="/etc/$ME/$ME.conf"
+ UCODE_AMD_FLAG="/etc/$ME/no-ucode-amd"
+UCODE_INTEL_FLAG="/etc/$ME/no-ucode-intel"
 
         ALL_CMDS="rollback all unpack copy-modules copy-programs repack install defrag"
        ALL_FORCE="all,flock,clear,compress,usb,umount"
@@ -548,6 +550,7 @@ Options:
   -C --color=<xxx>      Set color scheme to off|low|low1|bw|dark|high
   -d --device=<device>  live-usb device to update the kernel on
                         (use "live" to force updating a running live system)
+  -e --encrypt          Add cryptsetup to programs copied into initrd
   -F --force=XXXX       Force the options specfied:
                              flock:  ignore missing flock program
                                usb:  Allow non-usb devices (dangerous!)
@@ -572,8 +575,7 @@ Options:
   -p --pretend          Don't actually install the new kernel or initrd.gz
   -q --quiet            Print less
   -R --reset-config     Write a config template (all entries commented out) and exit
-  -e --encrypt          Add cryptsetup to programs copied into initrd
-  -U --no-ucode         Skip microcode refresh in the repacked initrd
+  -U --no-ucode[=<list>] Skip microcode refresh; <list> is amd, intel, or amd,intel (default: both)
   -v --version          Show version information
   -V --verbose          Print more, show output of commands
   -VV --very-verbose    Also show the commands
@@ -614,7 +616,8 @@ eval_argument() {
            -modules=*)  MODS="$MODS${MODS:+,}$val"      ;;
        --numeric-ui|N)  GRAPHICAL_MENUS=                ;;
            -encrypt|e)  CMD_ENCRYPT=true               ;;
-          -no-ucode|U)  NO_UCODE=true                  ;;
+          -no-ucode|U)  NO_UCODE="${NO_UCODE:+$NO_UCODE,}amd,intel" ;;
+          -no-ucode=*)  NO_UCODE="${NO_UCODE:+$NO_UCODE,}$val"    ;;
            -pretend|p)  PRETEND_MODE=true ;             ;;
                -pause)  PAUSE="$PAUSE${PAUSE:+,}exit"   ;;
              -pause=*)  PAUSE="$PAUSE${PAUSE:+,}$val"   ;;
@@ -704,11 +707,18 @@ main() {
     # Let non-root users get usage.  Need to get --ignore-config early.
     read_early_params "$@"
 
-    need_root
+    if [ $(id -u) -ne 0 ]; then
+        exec sudo -k "$0" "$@"
+        need_root
+    fi
 
     EXIT_NUM=100
 
     read_reset_config_file "$CONFIG_FILE"
+    local _uc_dis=""
+    [ -f "$UCODE_AMD_FLAG" ]   && _uc_dis="amd"
+    [ -f "$UCODE_INTEL_FLAG" ] && _uc_dis="${_uc_dis:+$_uc_dis,}intel"
+    [ -n "$_uc_dis" ] && NO_UCODE=$_uc_dis
 
     # Needs to be before we read cmdline
     TEMPLATE_INITRD=$TEMPLATE_INITRD_1
@@ -832,7 +842,9 @@ main() {
             shout "Encryption detected"
             msg "Made sure %s was mounted at %s" "$(pq $bios_dev)" "$(pq $BIOS_DIR)"
 
-            # copy_programs passes --encrypt to copy-initrd-programs when IS_ENCRYPTED=true
+            # copy_programs passes --encrypt to copy-initrd-programs when IS_ENCRYPTED is set or CMD_ENCRYPT=true;
+            # etc/encrypt is written into the initrd only when encrypted() is true (IS_ENCRYPTED non-empty),
+            # not for CMD_ENCRYPT alone -- INITRD_ENCRYPTED may be "yes" or any non-empty string, not just "true"
         fi
 
     #----- ALREADY-MOUNTED DIRECTORY ------------------------------------------
@@ -852,15 +864,34 @@ main() {
 
         local dev_type=$(lsblk -no TYPE --nodeps $usb_dev)
 
-        # Allow user to specify disk device instead of partition
+        # Allow user to specify disk device instead of partition.
+        # Try each mountable partition in order; use the first that contains
+        # a live boot directory.  Skips BIOS-boot (no FSTYPE), ESP/vfat, and
+        # crypto_LUKS partitions.  Handles any partition layout -- leading data
+        # partitions, ESP at any position, etc.
         if [ "$dev_type" = "disk"  ]; then
-            local part_dev=$(get_partition $usb_dev 1)
-            dev_type=$(lsblk -no TYPE --nodeps $part_dev)
-            if [ "$dev_type" = "part" ]; then
-                usb_dev=$part_dev
-            else
-                fatal $"Can't find first partition on device %s" $usb_dev
-            fi
+            local part_dev _pname _ptype _pfstype _found_part
+            while read _pname _ptype _pfstype; do
+                [ "$_ptype"   = "part"        ] || continue
+                [ -n "$_pfstype"              ] || continue  # skip BIOS boot (no FSTYPE)
+                [ "$_pfstype" = "vfat"        ] && continue  # skip ESP
+                [ "$_pfstype" = "crypto_LUKS" ] && continue  # skip LUKS container
+                [ "$_pfstype" = "swap"        ] && continue
+                part_dev=/dev/$_pname
+                my_mount "$part_dev" "$USB_DIR" 2>/dev/null || continue
+                if find_live_boot_dir _found_part "$USB_DIR" "$LINUXFS_NAME" \
+                        2>/dev/null \
+                   || test -e "$USB_DIR/$LIVE_DIR/encrypted" \
+                   || test -e "$USB_DIR/$LIVE_DIR/$CRYPT_FNAME"; then
+                    umount "$USB_DIR" 2>/dev/null
+                    break
+                fi
+                umount "$USB_DIR" 2>/dev/null
+                part_dev=""
+            done < <(lsblk -nlo NAME,TYPE,FSTYPE "$usb_dev" 2>/dev/null)
+            fatal_z "$part_dev" $"Could not find a live boot partition on device %s" "$usb_dev"
+            dev_type="part"
+            usb_dev=$part_dev
         fi
         [ "$dev_type" = "part" ] || fatal $"Device %s is not a disk partition" $usb_dev
 
@@ -881,29 +912,68 @@ main() {
         fi
         msg $"Will use live-usb device %s" "$(pq $usb_dev)"
 
+        # Check for encrypted live-usb: "crypt" (old layout -- live files inside
+        # LUKS container) or "encrypted" (new layout -- live files on BIOS ext4
+        # partition, LUKS container holds persistence only).
         local crypt_file=$live_mp/$LIVE_DIR/$CRYPT_FNAME
-        if test -e $crypt_file; then
+        local encrypt_marker=$live_mp/$LIVE_DIR/encrypted
+        if test -e "$crypt_file" || test -e "$encrypt_marker"; then
+            local _marker_file
+            test -e "$crypt_file" && _marker_file=$crypt_file || _marker_file=$encrypt_marker
+
             shout "Encrypted live-usb detected"
-            local main_uuid=$(cat $crypt_file 2>/dev/null)
+            local main_uuid=$(cat "$_marker_file" 2>/dev/null)
 
             my_mkdir $BIOS_DIR
-            always_cmd mount --move $live_mp $BIOS_DIR || fatal "Could not move mount to %s" $(basename $BIOS_DIR)
+            if [ "$LKU_DID_MOUNT" = true ]; then
+                # We own the mount -- unmount from USB_DIR and remount to BIOS_DIR.
+                # mount --move fails on shared mounts (systemd default), so avoid it.
+                cmd umount "$live_mp"
+                always_cmd mount "$usb_dev" $BIOS_DIR \
+                    || fatal "Could not mount to %s" $(basename $BIOS_DIR)
+            else
+                # External mount (e.g. GIO/Thunar) -- bind-mount to BIOS_DIR so
+                # we do not disturb the automounter's mount point.
+                always_cmd mount --bind "$live_mp" $BIOS_DIR \
+                    || fatal "Could not bind-mount to %s" $(basename $BIOS_DIR)
+            fi
 
             fatal_z "$main_uuid" "Could not find uuid of encrypted partition"
 
             local main_dev=$(blkid -U "$main_uuid")
             echo "main uuid: $main_uuid  main dev: $main_dev" >> $LOG_FILE
 
-            fatal_z "$main_dev" "Could not find encrypted partition with uuid %s" "$boot_uuid"
+            fatal_z "$main_dev" "Could not find encrypted partition with uuid %s" "$main_uuid"
 
-            shout "When asked, please enter the password for this encrypted live-usb"
-            LUKS_DEV=/dev/mapper/$LUKS_NAME
+            # Reuse an already-opened LUKS mapper (e.g. opened by GIO/Thunar)
+            # rather than trying to open the same device again.
+            local existing_mapper
+            existing_mapper=$(lsblk -nlo NAME,TYPE "$main_dev" 2>/dev/null \
+                | awk '$2=="crypt" {print $1; exit}')
+            if [ -n "$existing_mapper" ]; then
+                LUKS_DEV=/dev/mapper/$existing_mapper
+                msg $"Using already-opened LUKS device %s" "$(pq $existing_mapper)"
+            else
+                shout "When asked, please enter the password for this encrypted live-usb"
+                LUKS_DEV=/dev/mapper/$LUKS_NAME
+                always_cmd cryptsetup open --type=luks $main_dev $LUKS_NAME \
+                    || fatal "Was unable to open the encrypted partition"
+            fi
 
-            always_cmd cryptsetup open --type=luks $main_dev $LUKS_NAME \
-                || fatal "Was unable to open the encrypted partition"
-
-            always_cmd mount $LUKS_DEV $live_mp || fatal "Was unable to mount the encrypted device"
-
+            # Reuse an already-mounted LUKS device (bind-mount to USB_DIR so
+            # cleanup is consistent); otherwise mount it fresh.
+            local luks_mp
+            luks_mp=$(findmnt -n -o TARGET --source "$LUKS_DEV" 2>/dev/null | head -1)
+            if [ -n "$luks_mp" ]; then
+                msg $"Using already-mounted LUKS device at %s" "$(pq $luks_mp)"
+                always_cmd mount --bind "$luks_mp" $USB_DIR \
+                    || fatal "Was unable to bind-mount LUKS device"
+            else
+                always_cmd mount $LUKS_DEV $USB_DIR \
+                    || fatal "Was unable to mount the encrypted device"
+            fi
+            live_mp=$USB_DIR
+            LKU_DID_MOUNT=true
             IS_ENCRYPTED=true
         fi
 
@@ -1067,11 +1137,25 @@ main() {
     local live_old_cnt=$(count_lines "$live_old")
     local action_cnt=$((new_cnt + live_old_cnt))
 
+    # Slots holding kernels no longer available in the (possibly remastered) squashfs.
+    # Must be computed from the unfiltered squashfs boot_all, before any session-based
+    # filtering is applied below.
+    local stale_vm="" stale_cnt=0
+    if [ -n "$boot_all" ]; then
+        local boot_versions=$(get_kernel_version "$boot_all" | tr "\n" "|" | sed 's/+/[+]/g')
+        boot_versions=${boot_versions%|}
+        if [ -n "$boot_versions" ]; then
+            stale_vm=$(find_kernel_version "$boot_versions" "$live_vm" -v) || true
+        fi
+        stale_cnt=$(count_lines "$stale_vm")
+    fi
+
     # In live-boot mode, running /boot may have kernels installed on the overlay that
     # are not yet in the squashfs.  They need a remaster before lku can use them.
     # Skip when working with linuxfs.new: remaster already done, overlay check is irrelevant.
     local overlay_new="" overlay_cnt=0
     local real_boot_all=""
+    local real_versions=""
     if update_live && [ -z "$live_remaster" ]; then
         get_all_kernel real_boot_all "/boot"
         real_boot_all=$(sed /memtest/Id <<<"$real_boot_all")
@@ -1085,25 +1169,29 @@ main() {
             overlay_new="$real_boot_all"
         fi
         overlay_cnt=$(count_lines "$overlay_new")
-    fi
 
-    # Slots holding kernels no longer available in the (possibly remastered) squashfs
-    local stale_vm="" stale_cnt=0
-    if [ -n "$boot_all" ]; then
-        local boot_versions=$(get_kernel_version "$boot_all" | tr "\n" "|" | sed 's/+/[+]/g')
-        boot_versions=${boot_versions%|}
-        if [ -n "$boot_versions" ]; then
-            stale_vm=$(find_kernel_version "$boot_versions" "$live_vm" -v) || true
+        # Filter kernels removed from running /boot out of the selectable pool.
+        # Applies on any live-boot run (with or without persistence): the user
+        # removed the kernel in this session so it should not appear as an option.
+        real_versions=$(get_kernel_version "$real_boot_all" | tr "\n" "|" | sed 's/+/[+]/g')
+        real_versions=${real_versions%|}
+        if [ -n "$real_versions" ]; then
+            local _prv=$(find_kernel_version "$real_versions" "$boot_all" -v \
+                | cut -d"$K_IFS" -f1 | tr "\n" "|" | sed 's/+/[+]/g')
+            _prv=${_prv%|}
+            if [ -n "$_prv" ]; then
+                boot_all=$(find_kernel_version "$_prv" "$boot_all" -v) || true
+                boot_new=$(find_kernel_version "$live_versions" "$boot_all" -v)
+                new_cnt=$(count_lines "$boot_new")
+                action_cnt=$((new_cnt + live_old_cnt))
+            fi
         fi
-        stale_cnt=$(count_lines "$stale_vm")
     fi
 
     # Slots whose kernel exists in squashfs but was removed from the persistence overlay
     # (in squashfs /boot but not in running /boot -- may fail to boot with persistence)
     local persist_removed_vm="" persist_removed_cnt=0
     if live_persist && [ -n "$real_boot_all" ]; then
-        local real_versions=$(get_kernel_version "$real_boot_all" | tr "\n" "|" | sed 's/+/[+]/g')
-        real_versions=${real_versions%|}
         if [ -n "$real_versions" ]; then
             persist_removed_vm=$(find_kernel_version "$real_versions" "$live_vm" -v) || true
         else
@@ -1402,6 +1490,25 @@ $(printf "${m_co}%s: %s${nc_co}" "$_lbl_mods" "$(pq "$MODS")")"
         blurb=$(printf "${m_co}%s: %s" $"Remove kernel" "$(pq "$target_fname")")
 
     elif [ "$action" = 'quit' ]; then
+        my_exit 0
+
+    elif [ "$action" = 'ucode-amd-toggle' ] || [ "$action" = 'ucode-intel-toggle' ]; then
+        local _flag _vendor_name
+        local _lbl_enabled=$"Microcode injection enabled"
+        local _lbl_disabled=$"Microcode injection disabled"
+        if [ "$action" = 'ucode-amd-toggle' ]; then
+            _flag="$UCODE_AMD_FLAG"; _vendor_name="AMD"
+        else
+            _flag="$UCODE_INTEL_FLAG"; _vendor_name="Intel"
+        fi
+        if [ -f "$_flag" ]; then
+            rm -f "$_flag"
+            msg "%s: %s" "$_lbl_enabled" "$_vendor_name"
+        else
+            mkdir -p "$(dirname "$_flag")"
+            touch "$_flag"
+            msg "%s: %s" "$_lbl_disabled" "$_vendor_name"
+        fi
         offer_restart
 
     else
@@ -1547,15 +1654,20 @@ $(printf "${m_co}%s: %s${nc_co}" "$_lbl_mods" "$(pq "$MODS")")"
 
     if need repack; then
         unpack-initrd --dir "$initrd_dir" --from "$tmp_initrd_file" --repack --quiet
-        if [ -z "$NO_UCODE" ]; then
-            if command -v uc-tool >/dev/null 2>&1; then
+        if command -v uc-tool >/dev/null 2>&1; then
+            local _uc_vendors="" _no_amd=false _no_intel=false
+            case "${NO_UCODE:-}" in *amd*)   _no_amd=true   ;; esac
+            case "${NO_UCODE:-}" in *intel*) _no_intel=true ;; esac
+            [ "$_no_amd"   = true ] || _uc_vendors="amd"
+            [ "$_no_intel" = true ] || _uc_vendors="${_uc_vendors:+$_uc_vendors,}intel"
+            if [ -n "$_uc_vendors" ]; then
                 local uc_vflag="-s"; [ "$BE_VERBOSE" ] && uc_vflag="-V"
-                msg "Adding microcode to initrd ..."
-                uc-tool $uc_vflag $uc_firmware_arg -u amd,intel -i "$tmp_initrd_file" \
-                    || warn "uc-tool failed -- initrd may lack current microcode"
-            else
-                warn "uc-tool not found -- skipping microcode refresh"
+                msg $"Adding %s microcode to initrd ..." "$_uc_vendors"
+                uc-tool $uc_vflag $uc_firmware_arg -u "$_uc_vendors" -i "$tmp_initrd_file" \
+                    || warn $"uc-tool failed -- initrd may lack current microcode"
             fi
+        else
+            [ -z "$NO_UCODE" ] && warn $"uc-tool not found -- skipping microcode refresh"
         fi
     fi
     pause repack
@@ -1632,11 +1744,25 @@ select_update_rollback_action() {
 
     if update_live; then
         local _rv=$(uname -r)
-        local _lbl_run=$"running live kernel"
-        local _lbl_persist=$"kernel uninstalled under persistence - may not boot"
-        msg "${hi_co}*${nc_co} ${version_co}${_rv}${nc_co}  ${m_co}${_lbl_run}${nc_co}"
-        live_persist \
-            && msg "${warn_co}?${nc_co}  ${m_co}${_lbl_persist}${nc_co}"
+        local _show_star="" _show_q=""
+        local _ver _fname _date
+        if [ "$(get_kernel_version "${2}" | sort -u | wc -l)" -gt 1 ]; then
+            while IFS="$K_IFS" read -r _ver _fname _date; do
+                [ "$_ver" = "$_rv" ] && { _show_star=1; break; }
+            done <<< "${2}"
+        fi
+        { [ "$stale_cnt" -gt 0 ] || [ "$persist_removed_cnt" -gt 0 ]; } && _show_q=1
+        if [ -n "$_show_star" ] || [ -n "$_show_q" ]; then
+            local _lbl_legend=$"Legend:"
+            local _lbl_run=$"running live kernel"
+            local _lbl_persist=$"kernel uninstalled under persistence - may not boot"
+            msg ""
+            msg "${m_co}${_lbl_legend}${nc_co}"
+            [ -n "$_show_star" ] \
+                && msg "${hi_co}*${nc_co} ${version_co}${_rv}${nc_co}  ${m_co}${_lbl_run}${nc_co}"
+            [ -n "$_show_q" ] \
+                && msg "${warn_co}? ${_lbl_persist}${nc_co}"
+        fi
     fi
     local BACK_TO_MAIN=$"quit"
     my_select $var $"Please select an action to perform" "$menu"
@@ -1662,7 +1788,8 @@ make_update_menu() {
     local IFS=$K_IFS
 
     local running_ver=""
-    update_live && running_ver=$(uname -r)
+    local _uniq_ver_cnt=$(get_kernel_version "$live_vm" | sort -u | wc -l)
+    update_live && [ "$_uniq_ver_cnt" -gt 1 ] && running_ver=$(uname -r)
 
     # FIXME: go through twice to get widths?
     local fmt="%s$bold_co %s$m_co %s %s ($date_co%s$nc_co)%s"
@@ -1732,6 +1859,30 @@ Remove_VMs
             && menu_printf "initrd@$initrd" $"Update initrd using file %s" "$(pq "$initrd")"
     fi
 
+    if command -v uc-tool >/dev/null 2>&1; then
+        local _lbl_amd _lbl_intel _cli_note
+        _cli_note=$"disabled by --no-ucode"
+        if [ -f "$UCODE_AMD_FLAG" ]; then
+            _lbl_amd=$"Enable AMD microcode"
+        else
+            local _base=$"Disable AMD microcode"
+            case "${NO_UCODE:-}" in
+                *amd*) _lbl_amd="$_base  ${warn_co}($_cli_note)${nc_co}" ;;
+                *)     _lbl_amd="$_base" ;;
+            esac
+        fi
+        if [ -f "$UCODE_INTEL_FLAG" ]; then
+            _lbl_intel=$"Enable Intel microcode"
+        else
+            local _base=$"Disable Intel microcode"
+            case "${NO_UCODE:-}" in
+                *intel*) _lbl_intel="$_base  ${warn_co}($_cli_note)${nc_co}" ;;
+                *)       _lbl_intel="$_base" ;;
+            esac
+        fi
+        menu_printf 'ucode-amd-toggle'   "$_lbl_amd"
+        menu_printf 'ucode-intel-toggle' "$_lbl_intel"
+    fi
     menu_printf 'quit' $"Quit"
     IFS=$orig_ifs
 }
@@ -1800,7 +1951,6 @@ select_new_kernel() {
 
     local BACK_TO_MAIN=$"quit"
     if [ -n "$current_version" ]; then
-        msg "${hi_co}*${nc_co} ${version_co}${current_version}${nc_co}  ${m_co}${current_label}${nc_co}"
         select_kernel_2_marked $"Please select a kernel from this list" $var "$list" "$current_version"
     else
         select_kernel_2 $"Please select a kernel from this list" $var "$list"
@@ -1887,6 +2037,14 @@ copy_programs() {
     need_prog $prog
     cmd $prog --from="$from" --to="$to" $encrypt_option --clean
     cmd $prog --from="$from" --to="$to" $encrypt_option
+    if encrypted && [ ! -e "$to/etc/encrypt" ]; then
+        mkdir -p "$to/etc"
+        printf 'enable\n' > "$to/etc/encrypt"
+        msg $"Added %s to initrd" "$(pq etc/encrypt)"
+    elif ! encrypted && [ -e "$to/etc/encrypt" ]; then
+        rm -f "$to/etc/encrypt"
+        msg $"Removed stray %s from initrd" "$(pq etc/encrypt)"
+    fi
 }
 
 #------------------------------------------------------------------------------
@@ -2232,8 +2390,8 @@ do_defrag() {
     fi
     local files
     files=$(find "${iso_dir%/}" -maxdepth 1 \
-        \( -name "vmlinuz" -o -name "vmlinuz[0-9]" \
-        -o -name "initrd.gz" -o -name "initrd[0-9].gz" \) 2>/dev/null)
+        \( -name "vmlinuz" -o -name "vmlinuz[1-9]" \
+        -o -name "initrd.gz" -o -name "initrd[1-9].gz" \) 2>/dev/null)
     [ -n "$files" ] && cmd $prog $opts $files
 }
 

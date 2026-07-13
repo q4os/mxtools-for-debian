@@ -1,0 +1,26 @@
+ dpkg-buildpackage -us -uc -ui -S
+dpkg-buildpackage: info: source package quick-system-info-gui
+dpkg-buildpackage: info: source version 25.09.02
+dpkg-buildpackage: info: source distribution mx
+dpkg-buildpackage: info: source changed by Dolphin Oracle <dolphinoracle@gmail.com>
+ dpkg-source --before-build .
+dpkg-source: info: using options from quick-system-info-gui/debian/source/options: --tar-ignore=.* --tar-ignore=*.autosave --tar-ignore=CMakeLists.txt.user --tar-ignore=CMakeUserPresets.json --tar-ignore=_build_
+ debian/rules clean
+dh clean --buildsystem=cmake+ninja --no-automatic-dbgsym
+   debian/rules override_dh_auto_clean
+make[1]: Entering directory '/media/dataext/development/working/quick-system-info-gui/quick-system-info-gui'
+dh_auto_clean
+make[1]: Leaving directory '/media/dataext/development/working/quick-system-info-gui/quick-system-info-gui'
+   dh_autoreconf_clean -O--buildsystem=cmake\+ninja -O--no-automatic-dbgsym
+   dh_clean -O--buildsystem=cmake\+ninja -O--no-automatic-dbgsym
+ dpkg-source -b .
+dpkg-source: info: using options from quick-system-info-gui/debian/source/options: --tar-ignore=.* --tar-ignore=*.autosave --tar-ignore=CMakeLists.txt.user --tar-ignore=CMakeUserPresets.json --tar-ignore=_build_
+dpkg-source: info: using source format '3.0 (native)'
+dpkg-source: info: building quick-system-info-gui in quick-system-info-gui_25.09.02.tar.xz
+dpkg-source: info: building quick-system-info-gui in quick-system-info-gui_25.09.02.dsc
+ dpkg-genbuildinfo --build=source -O../quick-system-info-gui_25.09.02_source.buildinfo
+ dpkg-genchanges --build=source -O../quick-system-info-gui_25.09.02_source.changes
+dpkg-genchanges: info: including full source code in upload
+ dpkg-source --after-build .
+dpkg-source: info: using options from quick-system-info-gui/debian/source/options: --tar-ignore=.* --tar-ignore=*.autosave --tar-ignore=CMakeLists.txt.user --tar-ignore=CMakeUserPresets.json --tar-ignore=_build_
+dpkg-buildpackage: info: source-only upload: Debian-native package

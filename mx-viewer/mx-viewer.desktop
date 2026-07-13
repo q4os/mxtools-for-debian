@@ -7,7 +7,7 @@ Name[es]=MX Visor
 Name[es_ES]=MX Visor
 Name[fi]=MX Viewer
 Name[fr]=MX Visionneuse - MX Viewer
-Name[fr_BE]=MX Visionneuse - MW Viewer
+Name[fr_BE]=MX Visionneuse - MX Viewer
 Name[gl_ES]=Visor MX
 Name[he_IL]=מציג MX
 Name[hu]=MX nézegető
@@ -56,6 +56,6 @@ Comment=Basic document viewer and browser
 Exec=mx-viewer %U
 Icon=mx-viewer
 NoDisplay=false
-Categories=Qt;Network;Utilities;
+Categories=Network;Utilities;
 Type=Application
 

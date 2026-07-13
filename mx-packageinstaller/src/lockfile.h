@@ -28,7 +28,7 @@
 class LockFile
 {
 public:
-    explicit LockFile(const QString &file_name);
+    explicit LockFile(const QString &fileName);
 
     [[nodiscard]] QString fileName() const;
     [[nodiscard]] QString getLockingProcess() const;

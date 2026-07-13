@@ -11,6 +11,28 @@
 
 #include <unistd.h>
 
+namespace
+{
+// Directory for the auth-success marker. Prefer the caller's private runtime
+// dir (/run/user/<uid>, mode 0700): the root helper can create the marker there
+// and this unprivileged process can still remove it afterwards. In the
+// world-writable /tmp fallback a root-owned marker cannot be unlinked from here,
+// so it may briefly linger, but that only affects the check's cleanup.
+QString markerDirectory()
+{
+    const QString runtimeDir = qEnvironmentVariable("XDG_RUNTIME_DIR");
+    if (!runtimeDir.isEmpty() && QDir(runtimeDir).exists()) {
+        return runtimeDir;
+    }
+    return QDir::tempPath();
+}
+
+// Set by handleElevationError() whenever an elevated call anywhere is dismissed
+// by the user, and cleared by resetElevationDismissed(). GUI is single-threaded,
+// so a plain static is enough to let unrelated Cmd instances share this state.
+bool elevationWasDismissed = false;
+} // namespace
+
 Cmd::Cmd(QObject *parent)
     : QProcess(parent),
       elevate {elevationTool()},
@@ -35,6 +57,13 @@ QString Cmd::getOut(const QString &cmd, QuietMode quiet)
     outBuffer.clear();
     run(cmd, quiet);
     return outBuffer.trimmed();
+}
+
+QString Cmd::getOut(const QString &cmd, const QStringList &args, QuietMode quiet)
+{
+    QString output;
+    proc(cmd, args, &output, nullptr, quiet);
+    return output;
 }
 
 QStringList Cmd::helperExecArgs(const QString &cmd, const QStringList &args, const QHash<QString, QString> &environment) const
@@ -80,6 +109,18 @@ bool Cmd::procAsRootWithEnv(const QHash<QString, QString> &environment, const QS
     return helperProc(helperExecArgs(cmd, args, environment), output, input, quiet);
 }
 
+bool Cmd::procScriptAsRoot(const QString &path, const QStringList &args, QString *output, const QByteArray *input,
+                           QuietMode quiet)
+{
+    if (getuid() == 0) {
+        return proc(path, args, output, input, quiet);
+    }
+
+    QStringList elevatedArgs {path};
+    elevatedArgs += args;
+    return startAndWait(elevationTool(), elevatedArgs, output, input, quiet, true);
+}
+
 bool Cmd::run(const QString &cmd, QuietMode quiet)
 {
     return startAndWait("/bin/bash", {"-c", cmd}, nullptr, nullptr, quiet, false);
@@ -93,7 +134,12 @@ bool Cmd::runHookAsRoot(const QString &script, QuietMode quiet)
 QString Cmd::lockingProcessAsRoot(const QString &path, QuietMode quiet)
 {
     QString output;
-    helperProc({"locking-process", path}, &output, nullptr, quiet);
+    if (!helperProc({"locking-process", path}, &output, nullptr, quiet)) {
+        if (Cmd::elevationDismissed()) {
+            return {};
+        }
+        return output.trimmed().isEmpty() ? QStringLiteral("unknown process") : output.trimmed();
+    }
     return output.trimmed();
 }
 
@@ -121,20 +167,23 @@ bool Cmd::startAndWait(const QString &program, const QStringList &arguments, QSt
     }
 
     setProcessEnvironment(QProcessEnvironment::systemEnvironment());
+    QStringList launchArgs = arguments;
     if (elevated) {
-        helperMarkerPath = QDir::tempPath() + QStringLiteral("/mx-pkg-helper-")
+        helperMarkerPath = markerDirectory() + QStringLiteral("/mx-pkg-helper-")
                            + QUuid::createUuid().toString(QUuid::Id128) + QStringLiteral(".marker");
-        auto env = QProcessEnvironment::systemEnvironment();
-        env.insert(QStringLiteral("MX_PKG_HELPER_MARKER"), helperMarkerPath);
-        setProcessEnvironment(env);
+        // pkexec sanitizes the environment, so hand the marker path to the target
+        // as explicit leading arguments.
+        if (!launchArgs.isEmpty()) {
+            launchArgs.insert(1, helperMarkerPath);
+            launchArgs.insert(1, QStringLiteral("--marker"));
+        }
     }
 
     QEventLoop loop;
     connect(this, QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished), &loop, &QEventLoop::quit);
-    start(program, arguments);
+    start(program, launchArgs);
     if (!waitForStarted()) {
         if (elevated) {
-            setProcessEnvironment(QProcessEnvironment::systemEnvironment());
             QFile::remove(helperMarkerPath);
             helperMarkerPath.clear();
         }
@@ -153,7 +202,6 @@ bool Cmd::startAndWait(const QString &program, const QStringList &arguments, QSt
     loop.exec();
 
     if (elevated) {
-        setProcessEnvironment(QProcessEnvironment::systemEnvironment());
         if (isAuthenticationDismissed()) {
             handleElevationError();
         }
@@ -203,8 +251,18 @@ bool Cmd::isAuthenticationDismissed() const
 
 void Cmd::handleElevationError()
 {
+    elevationWasDismissed = true;
     QMessageBox::critical(nullptr, tr("Administrator Access Required"),
-                          tr("This operation requires administrator privileges. Please restart the "
-                             "application and enter your password when prompted."));
-    QCoreApplication::exit(EXIT_FAILURE);
+                          tr("This operation requires administrator privileges. Try the action again and "
+                             "enter your password when prompted."));
+}
+
+bool Cmd::elevationDismissed()
+{
+    return elevationWasDismissed;
+}
+
+void Cmd::resetElevationDismissed()
+{
+    elevationWasDismissed = false;
 }

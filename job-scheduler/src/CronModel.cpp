@@ -13,8 +13,6 @@
 #include "CronModel.h"
 #include "Crontab.h"
 
-void dumpIndex(const QModelIndex &idx, QString h);
-
 QVariant CronModel::data(const QModelIndex &idx, int role) const
 {
     if (!idx.isValid() || role != Qt::DisplayRole) {
@@ -179,8 +177,6 @@ QModelIndex CronModel::insertTCommand(const QModelIndex &idx, TCommand *cmnd)
 
     // insert cron command at insert position(idx)
     // if insert position is crontab, cron command be added at the end.
-    //	dumpIndex(idx, "CronModel::insertTCommand");
-    //	qDebug() << "CronModel::insertTCommand time=" << cmnd->time;
 
     int cronPos = 0;
     int cmndPos = 0;
@@ -221,7 +217,7 @@ void CronModel::tCommandChanged(const QModelIndex &idx)
 {
 
     QModelIndex from = index(idx.row(), 0, idx.parent());
-    QModelIndex to = index(idx.row(), 3, idx.parent());
+    QModelIndex to = index(idx.row(), 2, idx.parent());
     emit dataChanged(from, to);
 }
 
@@ -286,31 +282,6 @@ QModelIndex CronModel::searchTCommand(TCommand *cmnd) const
 bool CronModel::dropMimeData(const QMimeData * /*data*/, Qt::DropAction /*action*/, int row, int /*column*/,
                              const QModelIndex &parent)
 {
-    //				   (0, --)
-    //	   ----------
-    //	   |        |  (-1, 0)
-    //	   ----------
-    //	               (1, --)
-    //
-    // ========================================
-    //
-    //				   (0, --)
-    //	   ----------
-    //	   |        |  (-1, 0)
-    //	   ----------
-    //	               (1, --)
-    //	       ----------
-    //	       |        |  (-1, 0, 0)
-    //	       ----------
-    //	               (1, 0)
-    //	       ----------
-    //	       |        |  (-1, 1, 0)
-    //	       ----------
-    //	               (1, --)
-    //
-
-    //	qDebug() << "CronModel::dropMimeData:row=" << row;
-    //	dumpIndex(parent, "CronModel::dropMimeData");
     if (isOneUser()) {
         if (row < 0 && !parent.isValid()) {
             return false;
@@ -334,7 +305,6 @@ bool CronModel::dropMimeData(const QMimeData * /*data*/, Qt::DropAction /*action
         ins = index(row - 1, 0, parent);
         next = index(row, 0, parent);
     }
-    //	dumpIndex(ins, "CronModel::dropMimeData insert : ");
 
     if (getTCommand(ins) == drag || getTCommand(next) == drag) {
         return false;
@@ -343,7 +313,7 @@ bool CronModel::dropMimeData(const QMimeData * /*data*/, Qt::DropAction /*action
     auto t = std::make_unique<TCommand>();
     *t = *drag;
     Crontab *c = getCrontab(ins);
-    if (c->cronOwner != QLatin1String("/etc/crontab")) {
+    if (!Crontab::isSystemCron(c->cronOwner)) {
         t->user = c->cronOwner;
     }
     t->parent = c;

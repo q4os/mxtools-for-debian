@@ -1,3 +1,9 @@
+grub-themes-mx (25.08.07mx25.1302) stable; urgency=medium
+
+  * Release
+
+ -- Devs <devteam@localdomain>  Mon, 13 Jul 2026 13:05:27 +0200
+
 grub-themes-mx (25.08.07mx25) mx; urgency=medium
 
   * remove mx-linux-classic

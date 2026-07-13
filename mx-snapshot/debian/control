@@ -18,7 +18,9 @@ Depends: mx-iso-template | iso-template (>= 16.1mx15),
          sudo | pkexec | gksu,
          ${misc:Depends},
          ${shlibs:Depends}
-Recommends: calamares-settings-debian,
+Recommends: mx-launcher-l10n,
+         uc-tool-mx,
+         calamares-settings-debian,
          grub-efi-amd64-bin | grub-efi-ia32-bin,
          grub-pc-bin,
          featherpad
@@ -33,7 +35,7 @@ Description: System snapshot tool
 Package: iso-snapshot-cli
 Architecture: any
 Depends: mx-iso-template | iso-template (>= 16.1mx15),
-         mx-remaster,
+         mx-remaster (>= 25.12.01),
          squashfs-tools,
          syslinux-utils,
          xdg-user-dirs,

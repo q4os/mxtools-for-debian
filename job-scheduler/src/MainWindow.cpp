@@ -11,6 +11,7 @@
 #include "MainWindow.h"
 
 #include <QApplication>
+#include <QDir>
 #include <QFileInfo>
 #include <QMenu>
 #include <QMenuBar>
@@ -209,6 +210,23 @@ void MainWindow::initCron()
     if (Clib::uId() == 0) {
         auto etcCron = std::make_unique<Crontab>(QStringLiteral("/etc/crontab"));
         crontabs.push_back(std::move(etcCron));
+
+        // Scan /etc/cron.d/ for system cron fragment files
+        QDir cronDdir(QStringLiteral("/etc/cron.d"));
+        const auto cronDFiles = cronDdir.entryList(QDir::Files | QDir::Readable);
+        for (const auto &cf : cronDFiles) {
+            if (cf.endsWith(QLatin1Char('~')) || cf.startsWith(QLatin1Char('.'))) {
+                continue;
+            }
+            auto cronFile = std::make_unique<Crontab>(QStringLiteral("/etc/cron.d/") + cf);
+            if (!cronFile->estr.isEmpty()) {
+                qWarning().noquote() << "Failed to load" << cronFile->cronOwner << ":" << cronFile->estr;
+            }
+            if (!cronFile->tCommands.empty() || !cronFile->variables.empty()) {
+                crontabs.push_back(std::move(cronFile));
+            }
+        }
+
         for (const auto &s : Clib::allUsers()) {
             if (s == user) {
                 continue;

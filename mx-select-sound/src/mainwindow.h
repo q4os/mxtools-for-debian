@@ -25,17 +25,12 @@
 
 #include <QDialog>
 #include <QMessageBox>
-#include <QProcess>
+#include <QString>
 
 namespace Ui
 {
 class MainWindow;
 }
-
-struct Result {
-    int exitCode;
-    QString output;
-};
 
 class MainWindow : public QDialog
 {
@@ -44,8 +39,6 @@ class MainWindow : public QDialog
 public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow() override;
-
-    Result runCmd(const QString &cmd);
 
     QString getDefault();
     QStringList listCards();
@@ -58,6 +51,9 @@ private slots:
     void pushTest_clicked();
 
 private:
+    void updateAudioSystemLabels();
+
     Ui::MainWindow *ui;
-    QString output;
+    bool m_pipewire{false};
+    QString m_currentPipewireSink;
 };

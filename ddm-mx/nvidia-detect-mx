@@ -38,8 +38,6 @@ shopt -s compat31 nocasematch 2>/dev/null || { echo "Error: this script only wor
 
 # last time the PCI IDs were updated
 
-LATEST="535.216.03"
-NVIDIA_DETECT_PRESENT="/usr/bin/nvidia-detect"
 # -------------------------------------------------------------------------
 #get release info
 source /etc/lsb-release
@@ -52,12 +50,14 @@ echo
 ARCH=$(dpkg --print-architecture)
 
 #check for existing nvidia-detect
-
-if [ -e "$NVIDIA_DETECT_PRESENT" ]; then
-    LATEST=$(cat /usr/bin/nvidia-detect|grep LATEST= |cut -d '"' -f2)
-fi
+LATEST="$(apt-cache madison nvidia-driver |grep -m 1 driver |cut -d"|" -f 2 | tr -d ' ')"
 
 echo $(gettext "Latest") " = $LATEST" 
+canonical_package=${LATEST%%.*}
+echo "$(gettext "Series is") : $canonical_package"
+nvidia_ids="nvidia-$canonical_package.ids"
+nvidia_open_ids="nvidia-open-$canonical_package.ids"
+OPEN_SUPPORT="NO"
 PACKAGE=
 
 NV_DETECT()
@@ -79,7 +79,7 @@ fi
 
 if grep -q -i $NVGA $IDFILE 2>/dev/null
 then
-	VERSIONS[71]=71.86
+	VERSIONS[71]=71.xx
 fi
 
 PCIIDFILE="nvidia-legacy-96xx.ids"
@@ -91,7 +91,7 @@ fi
 
 if grep -q -i $NVGA $IDFILE 2>/dev/null
 then
-	VERSIONS[96]=96.43
+	VERSIONS[96]=96.xx
 fi
 
 PCIIDFILE="nvidia-legacy-173xx.ids"
@@ -103,7 +103,7 @@ fi
 
 if grep -q -i $NVGA $IDFILE 2>/dev/null
 then
-	VERSIONS[173]=173.14
+	VERSIONS[173]=173.xx
 fi
 
 
@@ -116,7 +116,7 @@ fi
 
 if grep -q -i $NVGA $IDFILE 2>/dev/null
 then
-	VERSIONS[304]=304.123
+	VERSIONS[304]=304.xx
 fi
 
 PCIIDFILE="nvidia-legacy-340xx.ids"
@@ -128,7 +128,7 @@ fi
 
 if grep -q -i $NVGA $IDFILE 2>/dev/null
 then
-	VERSIONS[340]=340.76
+	VERSIONS[340]=340.xx
 fi
 
 PCIIDFILE="nvidia-legacy-390xx.ids"
@@ -140,7 +140,7 @@ fi
 
 if grep -q -i $NVGA $IDFILE 2>/dev/null
 then
-	VERSIONS[390]=390.87
+	VERSIONS[390]=390.xx
 fi
 
 if [ "$ARCH" = "amd64" ]; then
@@ -153,7 +153,7 @@ if [ "$ARCH" = "amd64" ]; then
 
 	if grep -q -i $NVGA $IDFILE 2>/dev/null
 	then
-        VERSIONS[391]=390.87
+        VERSIONS[391]=390.xx
     fi
     
     PCIIDFILE="nvidia-418.ids"
@@ -165,7 +165,7 @@ if [ "$ARCH" = "amd64" ]; then
 
 	if grep -q -i $NVGA $IDFILE 2>/dev/null
 	then
-		VERSIONS[418]=418.74
+		VERSIONS[418]=418.xx
 	fi
 	
 	PCIIDFILE="nvidia-tesla-418.ids"
@@ -177,7 +177,7 @@ if [ "$ARCH" = "amd64" ]; then
 
 	if grep -q -i $NVGA $IDFILE 2>/dev/null
 	then
-		VERSIONS[419]=418.87.01
+		VERSIONS[419]=418.xx
 	fi
 
 	PCIIDFILE="nvidia-tesla-440.ids"
@@ -189,7 +189,7 @@ if [ "$ARCH" = "amd64" ]; then
 
 	if grep -q -i $NVGA $IDFILE 2>/dev/null
 	then
-		VERSIONS[441]=440.64.00
+		VERSIONS[441]=440.xx
 	fi
 	
 	PCIIDFILE="nvidia-tesla-450.ids"
@@ -201,7 +201,7 @@ if [ "$ARCH" = "amd64" ]; then
 
 	if grep -q -i $NVGA $IDFILE 2>/dev/null
 	then
-		VERSIONS[451]=450.51.05
+		VERSIONS[451]=450.xx
 	fi
     
     PCIIDFILE="nvidia-tesla-460.ids"
@@ -213,7 +213,7 @@ if [ "$ARCH" = "amd64" ]; then
 
 	if grep -q -i $NVGA $IDFILE 2>/dev/null
 	then
-		VERSIONS[461]=460.32.03
+		VERSIONS[461]=460.xx
 	fi
 	
 	PCIIDFILE="nvidia-470.ids"
@@ -225,7 +225,7 @@ if [ "$ARCH" = "amd64" ]; then
 
 	if grep -q -i $NVGA $IDFILE 2>/dev/null
 	then
-	VERSIONS[470]=470.103.01
+	VERSIONS[470]=470.xx
 	fi
 
 	PCIIDFILE="nvidia-tesla-470.ids"
@@ -237,7 +237,7 @@ if [ "$ARCH" = "amd64" ]; then
 
 	if grep -q -i $NVGA $IDLISTDIR/nvidia-tesla-470.ids 2>/dev/null
 	then
-	VERSIONS[471]=470.57.02
+	VERSIONS[471]=470.xx
 	fi
 	
 	PCIIDFILE="nvidia-tesla.ids"
@@ -249,7 +249,7 @@ if [ "$ARCH" = "amd64" ]; then
 
 	if grep -q -i $NVGA $IDFILE 2>/dev/null
 	then
-	VERSIONS[510]=510.47.03
+	VERSIONS[510]=510.xx
 	fi
 	
 	PCIIDFILE="nvidia-tesla-535.ids"
@@ -261,10 +261,35 @@ if [ "$ARCH" = "amd64" ]; then
 
 	if grep -q -i $NVGA $IDFILE 2>/dev/null
 	then
-	VERSIONS[535]=535.216.01
+	VERSIONS[535]=535.xx
 	fi
 
-	PCIIDFILE="nvidia.ids"
+	PCIIDFILE="nvidia-tesla-580.ids"
+	if [ -e $IDLISTDIR/$PCIIDFILE ]; then
+		IDFILE=$IDLISTDIR/$PCIIDFILE
+	else
+		IDFILE=$IDLISTDIRDDM/$PCIIDFILE
+	fi
+
+	if grep -q -i $NVGA $IDFILE 2>/dev/null
+	then
+	VERSIONS[580]=580.xx
+	fi
+
+    PCIIDFILE="$nvidia_open_ids"
+	if [ -e $IDLISTDIR/$PCIIDFILE ]; then
+		IDFILE=$IDLISTDIR/$PCIIDFILE
+	else
+		IDFILE=$IDLISTDIRDDM/$PCIIDFILE
+	fi
+
+	if grep -q -i $NVGA $IDFILE 2>/dev/null
+	then
+	#open module support
+	OPEN_SUPPORT="YES"
+	fi
+
+	PCIIDFILE="$nvidia_ids"
 	if [ -e $IDLISTDIR/$PCIIDFILE ]; then
 		IDFILE=$IDLISTDIR/$PCIIDFILE
 	else
@@ -277,14 +302,6 @@ if [ "$ARCH" = "amd64" ]; then
 		VERSIONS[999]=$LATEST
 	fi
 	
-fi
-
-if [ "$ARCH" = "amd64" ]; then
-	if grep -q -i $NVGA $IDLISTDIR/nvidia.ids 2>/dev/null
-	then
-	# 999 means current
-	VERSIONS[999]=$LATEST
-	fi
 fi
 
 if [[ ${#VERSIONS[*]} == 0 ]]; then
@@ -377,6 +394,17 @@ if [[ -n ${VERSIONS[535]} ]]; then
 		echo "" 
 	fi
 fi
+
+if [[ -n ${VERSIONS[580]} ]]; then
+	PACKAGECHECK="nvidia-tesla-580-driver"
+	if [ -n "$(apt-cache madison $PACKAGECHECK 2>/dev/null |grep $PACKAGECHECK)" ]; then
+		PACKAGE=$PACKAGECHECK
+		printf "$(eval_gettext "Your card is supported by the nvidia %s drivers series. %s")" "tesla 580"  "$PACKAGE"
+		echo ""
+	fi
+fi
+
+
 if [[ -n ${VERSIONS[999]} ]]; then
 	PACKAGECHECK="nvidia-driver" #; changes for mx
 	if [ -n "$(apt-cache madison $PACKAGECHECK 2>/dev/null |grep $PACKAGECHECK)" ]; then
@@ -410,8 +438,9 @@ echo ""
 
 if [ -n "$PACKAGE" ]; then
 	echo $(eval_gettext "It is recommended to install the following:") 
-	echo "INSTALL: "    $PACKAGE  
+	echo "INSTALL: "     $PACKAGE
 	echo "" 
+	echo "OPEN MODULES SUPPORT: "$OPEN_SUPPORT
 	echo "$(eval_gettext "To install alternate driver packages, use") sudo ddm-mx -i nvidia -f [driver package name]" 
 	echo "" 
 fi

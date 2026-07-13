@@ -12,6 +12,8 @@
 #include <QDialog>
 #include <QPushButton>
 
+#include "CronTime.h"
+
 class QButtonGroup;
 class QLineEdit;
 class QCheckBox;
@@ -49,6 +51,7 @@ private slots:
     void resetClicked();
 
 private:
+    void handleButtonClicked(QButtonGroup *group, QBitArray (CronTime::*bitField));
     void initButtons(const QString &time);
 
     QString inTime;

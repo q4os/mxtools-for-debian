@@ -1,3 +1,9 @@
+mx-conky-data (20251102.1302) stable; urgency=medium
+
+  * Release
+
+ -- Devs <devteam@localdomain>  Mon, 13 Jul 2026 13:05:30 +0200
+
 mx-conky-data (20251102) mx; urgency=medium
 
   * add missing image file

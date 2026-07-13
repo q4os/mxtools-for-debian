@@ -1,0 +1,2 @@
+uc-tool                                    usr/bin
+completions/uc-tool                        usr/share/bash-completion/completions

@@ -26,6 +26,8 @@
 #include "ui_mainwindow.h"
 
 #include <QCalendarWidget>
+#include <QCloseEvent>
+#include <QCoreApplication>
 #include <QDateTime>
 #include <QDialog>
 #include <QDialogButtonBox>
@@ -51,6 +53,7 @@
 #include "about.h"
 #include "excludesutils.h"
 #include "settings.h"
+#include "squashfsutils.h"
 #include "work.h"
 #include <chrono>
 
@@ -299,7 +302,18 @@ void MainWindow::setConnections()
     connect(&work.shell, &Cmd::errorAvailable, this, [](const QString &out) { qWarning().noquote() << out; });
     connect(&work.shell, &Cmd::outputAvailable, this, [](const QString &out) { qDebug().noquote() << out; });
     connect(&work.shell, &Cmd::started, this, &MainWindow::procStart);
-    connect(QApplication::instance(), &QApplication::aboutToQuit, this, [this] { cleanUp(); });
+    connect(qApp, &QCoreApplication::aboutToQuit, this, [this] {
+        // Skip cleanup on aboutToQuit when there's nothing to tear down — the
+        // user closed the window before starting work, or cleanup already ran
+        // (e.g. the shutdown-when-done path, which calls it eagerly). Checking
+        // isDone() here instead of isCleaningUp() would skip teardown (bind-root
+        // overlay unmount, log copy, chown_conf) for every successful snapshot
+        // that doesn't request a shutdown.
+        if (!work.isStarted() || work.isCleaningUp()) {
+            return;
+        }
+        cleanUp();
+    });
     connect(ui->btnAbout, &QPushButton::clicked, this, &MainWindow::btnAbout_clicked);
     connect(ui->btnBack, &QPushButton::clicked, this, &MainWindow::btnBack_clicked);
     connect(ui->btnCancel, &QPushButton::clicked, this, &MainWindow::btnCancel_clicked);
@@ -403,10 +417,10 @@ void MainWindow::listUsedSpace()
     ui->btnNext->setDisabled(true);
     ui->btnCancel->setDisabled(true);
     ui->btnSelectSnapshot->setDisabled(true);
+    ui->labelUsedSpace->setText(settings->getUsedSpace());
     ui->btnNext->setEnabled(true);
     ui->btnCancel->setEnabled(true);
     ui->btnSelectSnapshot->setEnabled(true);
-    ui->labelUsedSpace->setText(settings->getUsedSpace());
 }
 
 void MainWindow::listFreeSpace()
@@ -448,12 +462,39 @@ bool MainWindow::installPackage(const QString &package)
 
 void MainWindow::cleanUp()
 {
+    // isCleaningUp(), not isDone(): a successful, non-shutdown snapshot is
+    // "done" but has not torn down the bind-root overlay yet — that still
+    // needs to happen once, whenever the app actually closes.
+    if (!work.isStarted() || work.isCleaningUp()) {
+        return;
+    }
+    if (cleanupInProgress) {
+        return;
+    }
+    cleanupInProgress = true;
+
     ui->stackedWidget->setCurrentWidget(ui->outputPage);
     work.cleanUp();
 }
 
+// Once the snapshot pipeline is underway a denied re-authentication (the polkit
+// grant is only kept for a few minutes) can leave root steps silently skipped,
+// so abort through the regular cleanup path instead of continuing with a
+// potentially corrupt ISO.
+void MainWindow::abortIfElevationDenied()
+{
+    if (!Cmd::elevationDenied()) {
+        return;
+    }
+    processMsgBox(BoxType::critical, tr("Error"),
+                  tr("Administrator access was not granted; the snapshot cannot continue."));
+    cleanUp();
+}
+
 void MainWindow::procStart()
 {
+    realProgressActive = false;
+    ui->progressBar->setTextVisible(false);
     timer.start(500ms);
     setCursor(QCursor(Qt::BusyCursor));
 }
@@ -484,7 +525,7 @@ void MainWindow::processMsg(const QString &msg)
 void MainWindow::procDone()
 {
     if (!pendingOutputBuffer.isEmpty()) {
-        appendOutputLine(pendingOutputBuffer);
+        handleOutputLine(pendingOutputBuffer, false);
         pendingOutputBuffer.clear();
     }
     timer.stop();
@@ -500,14 +541,19 @@ void MainWindow::displayOutput()
 
 void MainWindow::disableOutput()
 {
-    disconnect(&work.shell, &Cmd::outputAvailable, this, nullptr);
-    disconnect(&work.shell, &Cmd::errorAvailable, this, nullptr);
+    // Disconnect only the slot displayOutput() added. Passing nullptr for the
+    // slot would remove every connection from these signals to this object,
+    // including the persistent logging lambdas set up in setConnections().
+    disconnect(&work.shell, &Cmd::outputAvailable, this, &MainWindow::outputAvailable);
+    disconnect(&work.shell, &Cmd::errorAvailable, this, &MainWindow::outputAvailable);
 }
 
 void MainWindow::outputAvailable(const QString &out)
 {
+    bool sawCarriageReturn = false;
     for (const QChar ch : out) {
         if (ch == '\r') {
+            sawCarriageReturn = true;
             if (!pendingOutputBuffer.isEmpty()) {
                 handleOutputLine(pendingOutputBuffer, true);
                 pendingOutputBuffer.clear();
@@ -521,10 +567,18 @@ void MainWindow::outputAvailable(const QString &out)
         }
         pendingOutputBuffer += ch;
     }
+    if (sawCarriageReturn && !pendingOutputBuffer.isEmpty()) {
+        if (!updateSquashfsProgress(pendingOutputBuffer)) {
+            showTransientOutputLine(pendingOutputBuffer);
+        }
+    }
 }
 
 void MainWindow::progress()
 {
+    if (realProgressActive) {
+        return;
+    }
     ui->progressBar->setValue((ui->progressBar->value() + 1) % ui->progressBar->maximum() + 1);
 
     // In live environment and first page, blink text while calculating used disk space
@@ -676,13 +730,28 @@ void MainWindow::handleSettingsPage(const QString &file_name)
         return;
     }
 
-    work.startTimer();
-    if (!settings->checkSnapshotDir() || !settings->checkTempDir()) {
-        cleanUp();
+    // These are the first operations that ask for administrator access. If the
+    // user cancels the authentication dialog (or it fails otherwise), stay on
+    // the settings page so they can simply press Next again — don't kill the app.
+    Cmd::clearElevationDenied();
+    const bool dirsOk = settings->checkSnapshotDir() && settings->checkTempDir();
+    if (dirsOk) {
+        applyExclusions();
+    }
+    if (Cmd::elevationDenied() || !dirsOk) {
+        settings->tmpdir.reset(); // Drop any created work dir; a retry recreates it
+        if (Cmd::elevationDenied()) {
+            processMsgBox(BoxType::warning, tr("Cancelled"),
+                          tr("Administrator access is required to create a snapshot.") + '\n'
+                              + tr("The operation was cancelled. Select Next when you are ready to try again."));
+        } else {
+            processMsgBox(BoxType::critical, tr("Error"),
+                          tr("Could not create the snapshot or work directory."));
+        }
         return;
     }
 
-    applyExclusions();
+    work.startTimer();
     prepareForOutput(file_name);
 }
 
@@ -739,13 +808,37 @@ void MainWindow::prepareForOutput(const QString &file_name)
     ui->outputBox->clear();
     pendingOutputBuffer.clear();
     transientOutputLineActive = false;
+    // Each stage may trigger cleanUp() (which is no longer [[noreturn]] —
+    // see Step 4d). Bail out between stages when that happens, otherwise
+    // we run the rest of the pipeline against a torn-down bind-root.
     work.setupEnv();
+    abortIfElevationDenied();
+    if (work.isCleaningUp()) {
+        return;
+    }
     if (!settings->monthly && !settings->overrideSize) {
         work.checkEnoughSpace();
+        if (work.isCleaningUp()) {
+            return;
+        }
+    }
+    // checkEnoughSpace() can relocate the work dir onto another partition, which
+    // re-runs setupEnv() (and its own privileged steps) internally — check again
+    // here in case that nested run was the one that got denied.
+    abortIfElevationDenied();
+    if (work.isCleaningUp()) {
+        return;
     }
     work.copyNewIso();
+    abortIfElevationDenied();
+    if (work.isCleaningUp()) {
+        return;
+    }
     ui->outputLabel->clear();
     work.savePackageList(file_name);
+    if (work.isCleaningUp()) {
+        return;
+    }
 
     if (settings->editBootMenu) {
         editBootMenu();
@@ -766,6 +859,9 @@ void MainWindow::appendOutputLine(const QString &line)
 
 void MainWindow::handleOutputLine(const QString &line, bool transientHint)
 {
+    if (updateSquashfsProgress(line)) {
+        return;
+    }
     if (line.startsWith("xorriso : UPDATE :") || transientHint) {
         showTransientOutputLine(line);
         return;
@@ -774,6 +870,24 @@ void MainWindow::handleOutputLine(const QString &line, bool transientHint)
         return;
     }
     appendOutputLine(line);
+}
+
+bool MainWindow::updateSquashfsProgress(const QString &line)
+{
+    bool ok = false;
+    const int percentage = SquashfsUtils::parsePercentageLine(line, &ok);
+    if (!ok) {
+        return false;
+    }
+
+    realProgressActive = true;
+    timer.stop();
+    ui->progressBar->setRange(0, 100);
+    ui->progressBar->setTextVisible(true);
+    ui->progressBar->setFormat(QStringLiteral("%p%"));
+    ui->progressBar->setValue(percentage);
+    showTransientOutputLine(QStringLiteral(" %1%").arg(percentage));
+    return true;
 }
 
 void MainWindow::showTransientOutputLine(const QString &line)
@@ -813,10 +927,14 @@ void MainWindow::editBootMenu()
                "snapshot."),
             QMessageBox::Yes | QMessageBox::No)) {
         hide();
-        QString cmd = settings->getEditor() + " \"" + settings->workDir + "/iso-template/boot/grub/grub.cfg\" \""
-                      + settings->workDir + "/iso-template/boot/syslinux/syslinux.cfg\" \"" + settings->workDir
-                      + "/iso-template/boot/isolinux/isolinux.cfg\"";
-        work.shell.run(cmd);
+        // getEditor() intentionally contains shell constructs (e.g. $(logname), $DISPLAY)
+        // that must be evaluated by bash, so it stays in the script. The file paths embed
+        // workDir, so they are passed as positional parameters ($1..$3) that the shell
+        // never parses — preventing command injection through the work directory.
+        const QString bootDir = settings->workDir + "/iso-template/boot";
+        work.shell.proc("/bin/bash",
+                        {"-c", settings->getEditor() + R"( "$1" "$2" "$3")", "_", bootDir + "/grub/grub.cfg",
+                         bootDir + "/syslinux/syslinux.cfg", bootDir + "/isolinux/isolinux.cfg"});
         show();
     }
 }
@@ -834,7 +952,11 @@ void MainWindow::btnEditExclude_clicked()
 {
     hide();
     Cmd editor(this);
-    editor.run(settings->getEditor() + " " + settings->snapshotExcludes.fileName());
+    // getEditor() intentionally contains shell constructs (e.g. $(logname),
+    // $DISPLAY) that must be evaluated by bash, so it stays in the script. The
+    // excludes path is user-configurable, so it rides as a positional parameter
+    // ($1) the shell never parses — same pattern as editBootMenu().
+    editor.proc("/bin/bash", {"-c", settings->getEditor() + R"( "$1")", "_", settings->snapshotExcludes.fileName()});
     updateCustomExcludesButton();
     checkUpdatedDefaultExcludes();
     show();
@@ -924,18 +1046,58 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
     }
 }
 
-void MainWindow::closeApp()
+void MainWindow::closeEvent(QCloseEvent *event)
 {
+    // If cleanup is already running, don't second-guess it.
+    if (cleanupInProgress) {
+        event->accept();
+        return;
+    }
+    // Programmatic close (e.g. our own close() at the end of closeApp): just let it through.
+    if (!event->spontaneous()) {
+        event->accept();
+        return;
+    }
+    // Spontaneous close (X button, window manager): route through closeApp so
+    // we get the confirmation prompt and the right cleanup behavior.
+    if (!closeApp(true)) {
+        event->ignore();
+        return;
+    }
+    event->accept();
+}
+
+bool MainWindow::closeApp(bool fromCloseEvent)
+{
+    if (cleanupInProgress) {
+        return false;
+    }
     // Ask for confirmation when on outputPage and not done
     if (ui->stackedWidget->currentWidget() == ui->outputPage && !work.isDone()) {
         if (QMessageBox::Yes
             != QMessageBox::question(this, tr("Confirmation"), tr("Are you sure you want to quit the application?"),
                                      QMessageBox::Yes | QMessageBox::No)) {
-            return;
+            return false;
         }
     }
     qt_settings.setValue("geometry", saveGeometry());
-    cleanUp();
+
+    // If a snapshot is still in flight, or finished but its bind-root overlay
+    // teardown hasn't run yet (isCleaningUp(), not isDone() -- a successful
+    // non-shutdown snapshot is "done" without having torn anything down), kick
+    // off cleanup and keep the window open — the cleanup will close us via
+    // QCoreApplication::exit when done.
+    const bool needsCleanup = work.isStarted() && !work.isCleaningUp();
+    if (needsCleanup) {
+        cleanUp();
+        return false;
+    }
+    // Nothing left to tear down: close the window. closeEvent ignores
+    // programmatic closes so this won't recurse.
+    if (!fromCloseEvent) {
+        close();
+    }
+    return true;
 }
 
 void MainWindow::btnCancel_clicked()

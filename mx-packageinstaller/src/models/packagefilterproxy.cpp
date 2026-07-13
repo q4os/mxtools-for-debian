@@ -21,6 +21,10 @@
  **********************************************************************/
 #include "packagefilterproxy.h"
 
+#include <QRegularExpression>
+
+#include "../versionnumber.h"
+
 PackageFilterProxy::PackageFilterProxy(QObject *parent)
     : QSortFilterProxyModel(parent)
 {
@@ -104,6 +108,11 @@ bool PackageFilterProxy::filterAcceptsRow(int sourceRow, const QModelIndex &sour
 
 bool PackageFilterProxy::lessThan(const QModelIndex &left, const QModelIndex &right) const
 {
+    if (left.column() == TreeCol::RepoVersion || left.column() == TreeCol::InstalledVersion) {
+        const VersionNumber leftVersion(left.data(Qt::DisplayRole).toString());
+        const VersionNumber rightVersion(right.data(Qt::DisplayRole).toString());
+        return leftVersion < rightVersion;
+    }
     return QSortFilterProxyModel::lessThan(left, right);
 }
 
@@ -118,11 +127,20 @@ bool PackageFilterProxy::matchesStatus(int status) const
     if (m_statusFilter == 0) {
         return true;
     }
+    // "Installed" means installed-or-upgradable, matching the Installed count
+    // (installCount + upgradeCount) and PackageModel::checkByStatus().
+    if (m_statusFilter == Status::Installed) {
+        return status == Status::Installed || status == Status::Upgradable;
+    }
     return status == m_statusFilter;
 }
 
 bool PackageFilterProxy::isLibraryPackage(const QString &name)
 {
-    return name.startsWith(QLatin1String("lib")) || name.endsWith(QLatin1String("-dev"))
-           || name.endsWith(QLatin1String("-dbg")) || name.endsWith(QLatin1String("-dbgsym"));
+    // Hide lib*, -dev, -dbg, -dbgsym and -libs packages, but keep user-facing
+    // applications whose names merely start with "lib" (LibreOffice, Librewolf).
+    static const QRegularExpression libraryPattern(
+        QStringLiteral(R"((^lib(?!reoffice|rewolf))|(-dev$)|(-dbg$)|(-dbgsym$)|(-libs$))"),
+        QRegularExpression::CaseInsensitiveOption);
+    return libraryPattern.match(name).hasMatch();
 }

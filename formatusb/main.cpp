@@ -32,6 +32,7 @@
 
 #include "mainwindow.h"
 #include <version.h>
+#include <fcntl.h>
 #include <unistd.h>
 
 
@@ -60,11 +61,18 @@ int main(int argc, char *argv[])
     qtTran.load(QString("qt_") + QLocale::system().name());
     a.installTranslator(&qtTran);
 
-    QString log_name= "/tmp/formatusb.log";
+    QString log_name = sessionLogPath();
     // Set the logging files
     logFile.reset(new QFile(log_name));
-    // Open the file logging
-    logFile.data()->open(QFile::Append | QFile::Text);
+    // Open without following a symlink at the final component, so the
+    // world-writable /tmp fallback cannot be redirected at another file.
+    const int logFd = ::open(log_name.toLocal8Bit().constData(),
+                             O_WRONLY | O_CREAT | O_APPEND | O_NOFOLLOW | O_CLOEXEC, 0600);
+    if (logFd < 0 || !logFile.data()->open(logFd, QFile::Append | QFile::Text, QFileDevice::AutoCloseHandle)) {
+        if (logFd >= 0) {
+            ::close(logFd);
+        }
+    }
     // Set handler
     qInstallMessageHandler(messageHandler);
 

@@ -1,0 +1,66 @@
+.TH LIVE-GRUBSAVE 1 "June 2026" "mx-remaster" "User Commands"
+.SH NAME
+live-grubsave \- save live boot parameters into grubenv.cfg
+.SH SYNOPSIS
+.B live-grubsave
+.RI [ options ]
+.RI [ boot-parameters ... ]
+.SH DESCRIPTION
+.B live-grubsave
+reads the current live boot parameters and saves the relevant values into the
+GRUB environment file used by the live system.
+It is used to preserve boot-time choices such as language, keyboard layout,
+persistence device settings, toram, and related live boot parameters.
+
+The script parses the current kernel command line, filters out parameters that
+should not be persisted, and writes the remaining values into the grubenv data
+used by the live boot workflow.
+It is designed to be run on a live system and may prompt for root privileges.
+.SH OPTIONS
+.TP
+.BR -h , " --help"
+Show the help text.
+.TP
+.BR -l , " --list"
+Display the recognized parameter tables and exit.
+.TP
+.BR -m , " --mount"
+Keep the GRUB device mounted even if
+.B toram
+was used.
+.TP
+.BR -p , " --print"
+Print the current
+.I grubenv.cfg
+content.
+.TP
+.BR -r , " --reset"
+Remove the saved boot parameters.
+.TP
+.BR -s , " --simulate"
+Show what would be saved, but do not write anything.
+.TP
+.BR -v , " --version"
+Show the program version.
+.SH ARGUMENTS
+Any additional arguments are treated as extra boot parameters to consider for
+saving.
+.SH FILES
+.TP
+.I /live/config/initrd.out
+Live configuration file that marks the system as a live environment.
+.TP
+.I /live/config/remasterable
+Flag file indicating that the live system can be remastered.
+.TP
+.I /live/config/grubenv.cfg
+GRUB environment file updated by this tool.
+.TP
+.I /live/config/toram-eject
+Flag file used by the toram eject workflow.
+.SH SEE ALSO
+.BR grub-editenv (8),
+.BR live-setup (1),
+.BR toram-eject (1)
+.SH AUTHOR
+mx-remaster maintainers

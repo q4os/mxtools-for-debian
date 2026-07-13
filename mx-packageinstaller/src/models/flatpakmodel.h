@@ -24,6 +24,7 @@
 #include <QAbstractTableModel>
 #include <QHash>
 #include <QIcon>
+#include <QtGlobal>
 #include <QVector>
 
 namespace FlatCol
@@ -37,6 +38,7 @@ struct FlatpakData {
     QString version;
     QString branch;
     QString size;
+    quint64 sizeBytes = 0;
     QString fullName;
     QString canonicalRef;
     Qt::CheckState checkState = Qt::Unchecked;
@@ -69,12 +71,15 @@ public:
 
     [[nodiscard]] const FlatpakData *flatpakAt(int row) const;
     [[nodiscard]] int findFlatpakRow(const QString &canonicalRef) const;
+    [[nodiscard]] int findRowByFullName(const QString &fullName) const;
 
     void markDuplicates();
     void updateInstalledStatus(const QStringList &installedRefs);
     void setInstalledSizes(const QHash<QString, QString> &sizeMap);
 
     void setIcons(const QIcon &installed);
+
+    [[nodiscard]] static quint64 sizeStringToBytes(const QString &size);
 
 signals:
     void checkStateChanged(const QString &fullName, Qt::CheckState state, int status);

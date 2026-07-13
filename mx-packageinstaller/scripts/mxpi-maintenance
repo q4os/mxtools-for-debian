@@ -1,0 +1,77 @@
+#!/bin/bash
+
+# Passwordless, fixed-scope maintenance actions for mx-packageinstaller.
+
+if [[ $# -ge 2 && "$1" == "--marker" ]]; then
+    marker="$2"
+    if [[ "$marker" =~ ^/run/user/[0-9]+/mx-pkg-helper-[0-9A-Fa-f]+\.marker$ || "$marker" =~ ^/tmp/mx-pkg-helper-[0-9A-Fa-f]+\.marker$ ]]; then
+        : > "$marker"
+    fi
+    shift 2
+fi
+
+apt_update() {
+    apt-get update -o=Dpkg::Use-Pty=0 -o Acquire::http:Timeout=10 -o Acquire::https:Timeout=10 -o Acquire::ftp:Timeout=10
+}
+
+cleanup_temp() {
+    rm -f -- /etc/apt/sources.list.d/mxpitemp.list
+}
+
+copy_log() {
+    local src dest="/var/log/mxpi.log" old="/var/log/mxpi.log.old" uid dir
+    local -a logdirs=()
+    # Where the app wrote its log (see Log::defaultLogPath): a GUI run logs to
+    # the caller's private runtime dir (/run/user/<uid>); a root run logs to
+    # /run. Both are non-world-writable, unlike the legacy /tmp fallback.
+    # The caller's uid may come from pkexec, sudo/gksu, or the login session.
+    if [[ "$PKEXEC_UID" =~ ^[0-9]+$ ]]; then
+        uid="$PKEXEC_UID"
+    elif [[ "$SUDO_UID" =~ ^[0-9]+$ ]]; then
+        uid="$SUDO_UID"
+    else
+        uid=$(id -u "$(logname)" 2>/dev/null)
+    fi
+    [[ "$uid" =~ ^[0-9]+$ && "$uid" -ne 0 ]] && logdirs+=("/run/user/${uid}")
+    logdirs+=("/run" "/tmp")
+    for dir in "${logdirs[@]}"; do
+        [[ -d "$dir" ]] || continue
+        src="${dir}/mxpi.log"
+        # Only act on a real regular file, never a symlink, so an attacker
+        # cannot redirect this helper at a root-owned file.
+        [[ -f "$src" && ! -L "$src" ]] || continue
+        # Archive the previous session's log, but never follow a symlink that
+        # an earlier run might have left at the destination.
+        if [[ -f "$dest" && ! -L "$dest" ]]; then
+            printf -- '-----------------------------------------------------------\nMXPI SESSION\n-----------------------------------------------------------\n\n' >> "$old"
+            cat -- "$dest" >> "$old"
+        fi
+        # Drop any pre-existing destination (a regular file, or a symlink an
+        # earlier race may have planted here) so the copy below always creates
+        # a fresh regular file: cp -P guards the source but still follows a
+        # symlink at the destination, which would let it write through to an
+        # arbitrary root-owned target.
+        rm -f -- "$dest"
+        # Copy the content into a fresh regular file (-P: if the source is
+        # swapped for a symlink in a race, copy the link itself rather than its
+        # target), then remove the source.
+        cp -Pf -- "$src" "$dest" && rm -f -- "$src"
+        return 0
+    done
+}
+
+main() {
+case "$1" in
+    apt_update)
+        apt_update;;
+    copy_log)
+        copy_log;;
+    cleanup_temp)
+        cleanup_temp;;
+    *)
+        echo "mxpi-maintenance: unknown action '$1'" >&2
+        exit 1;;
+esac
+}
+
+main "$@"

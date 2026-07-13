@@ -1,0 +1,155 @@
+.TH INSTALLED-TO-LIVE 1 "June 2026" "mx-remaster" "User Commands"
+.SH NAME
+installed-to-live \- build or clean a live-system bind-root from the installed system
+.SH SYNOPSIS
+.B installed-to-live
+.RI [ options ]
+.RI [ commands ... ]
+.SH DESCRIPTION
+.B installed-to-live
+creates and manages the bind-mounted filesystem tree that mx-remaster uses
+when it copies an installed system into a live-style layout.
+It can mount selected files and directories from the real root into a working
+bind root, populate live-file templates, generate exclude lists, and clean up
+what it created when the remaster workflow is finished.
+
+The script is used heavily by the live remaster tools, but it can also be run
+manually when you want to inspect or reproduce the bind-root layout.
+It creates a cleanup file in
+.I /tmp/installed-to-live/cleanup.conf
+so the changes can be undone later.
+.SH COMMANDS
+.TP
+.B start
+Do the main bind-mount setup and create the cleanup configuration.
+.TP
+.B status
+Show status information, including the generated cleanup configuration.
+.TP
+.B live-files
+Bind-mount files from
+.I /usr/share/live-files/files
+into the working bind-root.
+.TP
+.B general-files
+Bind-mount files from
+.I /usr/share/live-files/general-files
+into the working bind-root.
+.TP
+.B read-only
+Remount the bind-root as read-only.
+.TP
+.B read-write
+Remount the bind-root as read-write.
+.TP
+.B passwd
+Create general-purpose passwd, shadow, group, and related account files.
+.TP
+.B add=DIR1,DIR2,...
+Add files from the named template directories.
+.TP
+.B bind=DIR1,DIR2,...
+Bind-mount each directory if it is already a mount point.
+.TP
+.B general
+Perform the normal general-purpose bind setup, including emptying selected
+configuration directories, copying live files, and resetting repo and timezone
+settings.
+.TP
+.B adjtime
+Reset the adjtime file while keeping the UTC/local clock choice.
+.TP
+.B cleanup
+Undo the bind-root setup and remove temporary files.
+.TP
+.B repo[=COUNTRY]
+Reset the APT repository configuration to the given country.
+The default country is
+.B us
+when no argument is supplied.
+.TP
+.B timezone[=ZONE]
+Reset the timezone configuration.
+If no zone is supplied, the default live timezone is used.
+.TP
+.B empty=DIR1,DIR2,...
+Bind-mount empty directories at the named paths.
+.TP
+.B exclude[=PREFIX] FILE1 FILE2 ...
+Generate an exclude list from the named files.
+If
+.B PREFIX
+is supplied, it is prepended to each generated entry.
+This is mainly a convenience helper for squashfs creation.
+.TP
+.B version-file[=TITLE]
+Create a standard
+.I linuxfs.ver
+file and bind-mount it at the expected live version-file location.
+.TP
+.B populate-live-files FROM_DIR [TO_DIR]
+Populate the live-files template tree from a mounted live filesystem.
+The optional
+.B TO_DIR
+controls the top-level directory under which the template tree is written.
+.SH OPTIONS
+.TP
+.BR -b " " \fIROOT\fR , " --bind-root="\fIROOT\fR
+Set the root of the new bind-mounted filesystem.
+The default is
+.IR /.bind-root .
+.TP
+.BR -e " " \fIDIR\fR , " --excludes-dir="\fIDIR\fR
+Set the directory used to store generated exclude files.
+The default is
+.IR /usr/share/excludes .
+.TP
+.BR -f " " \fIDIR\fR , " --from="\fIDIR\fR
+Set the source directory copied into the bind-root.
+The default is
+.IR / .
+.TP
+.BR -F , " --Force"
+Delete the working directory when starting.
+.TP
+.BR -h , " --help"
+Show help and exit.
+.TP
+.BR -o " " \fIFILE\fR , " --output="\fIFILE\fR
+Write exclude-command output to
+.I FILE
+instead of standard output.
+.TP
+.BR -P , " --pretend"
+Do not make changes; show what would be done.
+.TP
+.BR -r " " \fIUSER:PASS\fR , " --root="\fIUSER:PASS\fR
+Set the default root account name and optional password used for generated
+files.
+If the password is omitted, the username is used as the password.
+.TP
+.BR -t " " \fIDIR\fR , " --template="\fIDIR\fR
+Use an alternate template directory instead of
+.IR /usr/share/live-files .
+.TP
+.BR -u " " \fIUSER:PASS\fR , " --user="\fIUSER:PASS\fR
+Set the default non-root account name and optional password used for generated
+files.
+If the password is omitted, the username is used as the password.
+.TP
+.BR -w " " \fIDIR\fR , " --work="\fIDIR\fR
+Use an alternate temporary working directory.
+The default is
+.IR /tmp/installed-to-live .
+.TP
+.BR -v , " --verbose"
+Print additional progress information.
+.SH NOTES
+The command parser accepts multiple commands in sequence, which lets the script
+combine setup, template population, and cleanup tasks in one invocation.
+.SH SEE ALSO
+.BR live-remaster (1),
+.BR persist-makefs (1),
+.BR mksquashfs (1)
+.SH AUTHOR
+mx-remaster maintainers

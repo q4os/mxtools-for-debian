@@ -1,0 +1,46 @@
+.TH LIVE-SETUP 1 "June 2026" "mx-remaster" "User Commands"
+.SH NAME
+live-setup \- perform first-boot setup tasks in a live system
+.SH SYNOPSIS
+.B live-setup
+.SH DESCRIPTION
+.B live-setup
+is a small boot-time helper used by the live system.
+It performs the initial setup tasks that make a live session behave like a
+normal desktop while preserving the live environment.
+
+The script exits immediately if it is not running on a live system.
+When it does run, it restores disabled live services, performs USB-related live
+setup, copies a machine ID if needed, sets the paper size from the locale, makes
+sure the APT partial directory exists, and adjusts the console/session flow for
+non-systemd boots.
+
+This script is normally invoked automatically from the live setup integration,
+not started by hand.
+.SH OPTIONS
+.B live-setup
+accepts no script-specific options.
+.SH FILES
+.TP
+.I /live/etc/init.d/live-restore-services
+Helper used to restore live services.
+.TP
+.I /live/etc/init.d/live-usb-save
+Helper used for USB-specific live setup.
+.TP
+.I /etc/machine-id
+Created from the dbus machine-id when missing.
+.TP
+.I /etc/papersize
+Paper size written according to the current locale.
+.TP
+.I /etc/default/locale
+Locale source used to determine paper size.
+.TP
+.I /var/cache/apt/archives/partial
+APT partial directory created if missing.
+.SH SEE ALSO
+.BR live-grubsave (1),
+.BR live-remaster (1)
+.SH AUTHOR
+mx-remaster maintainers

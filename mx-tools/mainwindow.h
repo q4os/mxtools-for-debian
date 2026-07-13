@@ -27,8 +27,11 @@
 #include <QMap>
 #include <QResizeEvent>
 #include <QSettings>
+#include <QIcon>
 #include <QStringList>
 #include <QVector>
+
+#include <optional>
 
 #include "flatbutton.h"
 
@@ -54,6 +57,7 @@ private slots:
     void textSearch_textChanged(const QString &arg1);
 
 protected:
+    void changeEvent(QEvent *event) override;
     void closeEvent(QCloseEvent *event) override;
     void resizeEvent(QResizeEvent *event) override;
 
@@ -74,6 +78,7 @@ private:
     Ui::MainWindow *ui;
     CategoryToolsMap info_map;
     CategoryFileMap category_map;
+    CategoryFileMap menu_category_map;
     QSettings settings;
     QStringList live_list;
     QStringList maintenance_list;
@@ -85,6 +90,14 @@ private:
                                                    {"MX-Setup", &setup_list},
                                                    {"MX-Software", &software_list},
                                                    {"MX-Utilities", &utilities_list}};
+    // Alternative category tokens accepted in addition to the primary key, so desktop
+    // files can migrate to the freedesktop-standard X- prefix while the old token still
+    // works. Files matching an alias are grouped under the primary key's header.
+    const QMap<QString, QStringList> categoryAliases {{"MX-Live", {"X-MX-Live"}},
+                                                      {"MX-Maintenance", {"X-MX-Maintenance"}},
+                                                      {"MX-Setup", {"X-MX-Setup"}},
+                                                      {"MX-Software", {"X-MX-Software"}},
+                                                      {"MX-Utilities", {"X-MX-Utilities"}}};
     int colCount = 0;
     int iconSize = 32;
     int maxElements = 0;
@@ -110,8 +123,11 @@ private:
                                          const QString &lang);
     [[nodiscard]] QString getValueFromText(const QString &text, const QString &key);
     [[nodiscard]] QIcon findIcon(const QString &iconName);
-    [[nodiscard]] QStringList listDesktopFiles(const QString &searchString, const QString &location);
-    [[nodiscard]] int calculateMaxElements(const CategoryToolsMap &infoMap);
+    [[nodiscard]] static std::optional<QIcon> lookupIcon(const QString &iconName);
+    [[nodiscard]] static QIcon defaultIcon();
+    [[nodiscard]] QStringList listDesktopFiles(const QStringList &categoryTokens, const QString &location);
+    [[nodiscard]] int columnsForWidth() const;
+    void updateLayoutMetrics();
     static void fixExecItem(QString *item);
     static void hideShowIcon(const QString &fileName, bool hide);
     static void removeEnvExclusive(QStringList *list, bool live, const QStringList &desktops);
@@ -123,7 +139,7 @@ private:
     void filterDesktopEnvironmentItems();
     void filterLiveEnvironmentItems();
     void initializeCategoryLists();
-    void populateCategoryMap();
+    void populateCategoryMap(CategoryFileMap *categoryMap);
     void readInfo(const CategoryFileMap &categoryMap);
     void restoreWindowGeometry();
     void setConnections();

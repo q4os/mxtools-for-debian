@@ -9,13 +9,13 @@
 */
 #pragma once
 
+#include "Crontab.h"
+
 #include <memory>
 
 #include <QTreeView>
 
 class QPaintEvent;
-class TCommand;
-class Crontab;
 class CronModel;
 
 class CronView : public QTreeView

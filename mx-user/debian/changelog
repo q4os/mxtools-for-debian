@@ -1,3 +1,33 @@
+mx-user (26.07.1302) stable; urgency=medium
+
+  * Release
+
+ -- Devs <devteam@localdomain>  Mon, 13 Jul 2026 13:05:36 +0200
+
+mx-user (26.07) mx; urgency=medium
+
+  * Lock the main window to a fixed height so the layout stays consistent
+    between tabs instead of stretching unevenly.
+  * Fix the application freezing if command fails to start.
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 06 Jul 2026 23:00:52 -0400
+
+mx-user (26.06) mx; urgency=medium
+
+  * Prevent files such as databases, caches and browser data from being damaged
+    when renaming a user or copying a desktop profile
+  * When copying only part of a profile (Documents, Mozilla/Firefox or Shared),
+    leave the rest of the destination's home folder untouched
+  * Improve the security of operations that run with administrator rights
+  * Avoid accidental changes during a running task, and ask for confirmation
+    before closing the window while a task is still in progress
+  * Keep the window open when administrator authorization is cancelled or
+    denied, showing a message and undoing the attempted change instead of
+    closing the application
+  * Restore standard keyboard handling (for example, Enter activates the default button)
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 15 Jun 2026 09:02:01 -0400
+
 mx-user (26.03.5) mx; urgency=medium
 
   * Fix BUILD_FOR_ARCH check

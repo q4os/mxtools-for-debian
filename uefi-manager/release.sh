@@ -175,17 +175,30 @@ update_aur_package() {
     # Change to aur directory
     cd "$AUR_DIR"
 
-    # Update PKGBUILD pkgver to match tag and remove pkgver() if present
+    # Update PKGBUILD pkgver to match tag, keep only one pkgver= assignment,
+    # and remove pkgver() if present.
     if [ -f PKGBUILD ]; then
         print_step "Updating PKGBUILD pkgver to $version..."
-        if rg -q "^pkgver=" PKGBUILD; then
-            sed -i "s/^pkgver=.*/pkgver=${version}/" PKGBUILD
-        else
-            awk -v ver="$version" '
-                /^pkgname=/ { print; print "pkgver=" ver; next }
-                { print }
-            ' PKGBUILD > PKGBUILD.tmp && mv PKGBUILD.tmp PKGBUILD
-        fi
+        awk -v ver="$version" '
+            BEGIN { pkgver_seen = 0 }
+            /^pkgname=/ {
+                print
+                next
+            }
+            /^pkgver=/ {
+                if (!pkgver_seen) {
+                    print "pkgver=" ver
+                    pkgver_seen = 1
+                }
+                next
+            }
+            { print }
+            END {
+                if (!pkgver_seen) {
+                    print "pkgver=" ver
+                }
+            }
+        ' PKGBUILD > PKGBUILD.tmp && mv PKGBUILD.tmp PKGBUILD
 
         if rg -q "^pkgver\\(\\)" PKGBUILD; then
             awk '

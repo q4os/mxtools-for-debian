@@ -32,8 +32,8 @@
 
 #include <unistd.h>
 
-LockFile::LockFile(const QString &file_name)
-    : file(file_name)
+LockFile::LockFile(const QString &fileName)
+    : file(fileName)
 {
 }
 
@@ -45,7 +45,16 @@ bool LockFile::isLocked()
 // Check if the file is locked and pop up a message
 bool LockFile::isLockedGUI()
 {
+    if (Cmd::elevationDismissed()) {
+        return true;
+    }
     QString proc = getLockingProcess();
+    if (Cmd::elevationDismissed()) {
+        // The lock check itself required elevation and the user dismissed it.
+        // Cmd already showed the "Administrator Access Required" message; don't
+        // pile on a confusing, misleading "locked by another program" box on top.
+        return true;
+    }
     if (!proc.isEmpty()) {
         QMessageBox::warning(nullptr, QObject::tr("Warning"),
                              QObject::tr("Dpkg/apt database is locked by another program: %1"

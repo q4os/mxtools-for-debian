@@ -8,8 +8,8 @@
 # License: GPLv3 or later
 #==============================================================================
 
-      VERSION="2.41.27"
- VERSION_DATE="Sat, 18 Apr 2026"
+      VERSION="2.41.28"
+ VERSION_DATE="Tue, 9 Jun 2026"
 
         ME=${0##*/}
     MY_DIR=$(dirname "$(readlink -f $0)")
@@ -225,6 +225,11 @@ Options:
      --no-clone-persist       Don't clone persistence files even if they exist
      --no-clone-persist=<p>   Or pass a parameter: h,home: don't clone home
                                                    r,root: don't clone root
+     --no-ucode               Skip microcode (amd+intel) injection into initrd
+     --no-ucode=<vendors>     Skip specific vendors: amd, intel, amd,intel (or: both)
+                              auto    -- skip if microcode already present (default)
+                              refresh -- replace existing microcode from linuxfs
+                              remove  -- strip existing microcode from initrd
     --no-extlinux             Do not install syslinux/isolinux (imples --grub-mbr)
   -N --numeric-ui             Use the legacy numerical user interface
      --pause                  Wait for user input before exit
@@ -314,6 +319,8 @@ eval_argument() {
        -no-prog-bar|n)  NO_PROGRESS_BAR=true             ;;
     -no-clone-persist)  NO_CLONE_PERSIST=home,root       ;;
   -no-clone-persist=*)  NO_CLONE_PERSIST=$val            ;;
+           -no-ucode)   NO_UCODE="amd,intel"             ;;
+         -no-ucode=*)   NO_UCODE=$val                    ;;
                -pause)  PAUSE="$PAUSE${PAUSE:+,}exit"    ;;
         -numeric-ui|N)  GRAPHICAL_MENUS=                 ;;
              -pause=*)  PAUSE="$PAUSE${PAUSE:+,}$val"    ;;
@@ -387,6 +394,7 @@ main() {
     local FORMAT_USB USING_GRUB_CONFIG_2  CRYPT_PART
     local VERY_VERBOSE VERBOSITY=0
     local ISO_BOOT_DIR  START_T=0
+    local NO_UCODE="auto"
 
     set_colors
 
@@ -986,6 +994,54 @@ main() {
         if ! encrypt && [ -n "$CLONE_ENCRYPTED_LIVE" ]; then
             msg $"Disabling initrd encryption"
             disable_initrd_encryption $MAIN_DIR/$DEF_BOOT_DIR/initrd.gz $INITRD_DIR
+        fi
+    fi
+
+    # -- ucode injection/strip (after copy-main, before md5 check) -------
+    if need_q copy-main; then
+        local uc_linuxfs="$MAIN_DIR/$DEF_BOOT_DIR/linuxfs"
+        local uc_vendors="amd,intel"  uc_remove=""
+        case "$NO_UCODE" in
+            amd,intel|intel,amd|both) uc_vendors="" ;;
+            amd)                      uc_vendors="intel" ;;
+            intel)                    uc_vendors="amd" ;;
+            auto)                     ;; # checked per-initrd in the loop below
+            refresh)                  ;; # inject both, bypassing auto-skip
+            remove)
+                uc_vendors=""; uc_remove=true ;;
+        esac
+        local uc_vflag="-s"; [ "$BE_VERBOSE" ] && uc_vflag="-V"
+        if [ -n "$uc_vendors" ]; then
+            if command -v uc-tool >/dev/null 2>&1 && test -e "$uc_linuxfs"; then
+                local uc_initrd
+                for uc_initrd in "$BIOS_DIR/$DEF_BOOT_DIR"/initrd.gz "$BIOS_DIR/$DEF_BOOT_DIR"/initrd[0-9]*.gz; do
+                    [ -e "$uc_initrd" ] || continue
+                    # auto: skip this initrd if it already has ucode
+                    [ "$NO_UCODE" = "auto" ] \
+                        && uc-tool --has-ucode -i "$uc_initrd" >/dev/null 2>&1 \
+                        && continue
+                    msg $"Adding microcode to %s" "$(pq "$(basename "$uc_initrd")")"
+                    cmd uc-tool $uc_vflag -u "$uc_vendors" -F "$uc_linuxfs" -i "$uc_initrd" \
+                        || warn "ucode injection failed for %s -- may lack ucode" "$(basename "$uc_initrd")"
+                done
+            else
+                command -v uc-tool >/dev/null 2>&1 \
+                    || qsay "  uc-tool not found -- skipping ucode injection"
+                test -e "$uc_linuxfs" \
+                    || qsay "  linuxfs not found at %s -- skipping ucode injection" "$uc_linuxfs"
+            fi
+        elif [ "$uc_remove" ]; then
+            if command -v uc-tool >/dev/null 2>&1; then
+                local uc_initrd
+                for uc_initrd in "$BIOS_DIR/$DEF_BOOT_DIR"/initrd.gz "$BIOS_DIR/$DEF_BOOT_DIR"/initrd[0-9]*.gz; do
+                    [ -e "$uc_initrd" ] || continue
+                    msg $"Stripping microcode from %s" "$(pq "$(basename "$uc_initrd")")"
+                    cmd uc-tool $uc_vflag -S -i "$uc_initrd" \
+                        || warn "ucode strip failed for %s" "$(basename "$uc_initrd")"
+                done
+            else
+                qsay "  uc-tool not found -- skipping ucode strip"
+            fi
         fi
     fi
 
@@ -2996,6 +3052,45 @@ update_initrd() {
     pause initrd
 
     cmd unpack-initrd --from "$initrd_file" --dir "$initrd_dir" --repack || fatal $"Repack failed"
+
+    # -- ucode injection/strip ---------------------------------------------
+    local uc_vendors="amd,intel"  uc_remove=""
+    local fw_dir="$linux_dir/lib/firmware"
+    local uc_vflag="-s"; [ "$BE_VERBOSE" ] && uc_vflag="-V"
+    case "$NO_UCODE" in
+        amd,intel|intel,amd|both) uc_vendors="" ;;
+        amd)                      uc_vendors="intel" ;;
+        intel)                    uc_vendors="amd" ;;
+        auto)
+            command -v uc-tool >/dev/null 2>&1 \
+                && uc-tool --has-ucode -i "$initrd_file" >/dev/null 2>&1 \
+                && uc_vendors="" ;;
+        refresh)                  ;; # inject both, bypassing auto-skip
+        remove)
+            uc_vendors=""; uc_remove=true ;;
+    esac
+    if [ -n "$uc_vendors" ]; then
+        if command -v uc-tool >/dev/null 2>&1 && test -d "$fw_dir"; then
+            cmd uc-tool $uc_vflag -u "$uc_vendors" \
+                --amd-dir="$fw_dir/amd-ucode" \
+                --intel-dir="$fw_dir/intel-ucode" \
+                -i "$initrd_file" \
+                || warn "ucode injection failed -- initrd may lack ucode"
+        else
+            command -v uc-tool >/dev/null 2>&1 \
+                || qsay "  uc-tool not found -- skipping ucode injection"
+            test -d "$fw_dir" \
+                || qsay "  Firmware dir not found in linuxfs: %s" "$fw_dir"
+        fi
+    elif [ "$uc_remove" ]; then
+        if command -v uc-tool >/dev/null 2>&1; then
+            cmd uc-tool $uc_vflag -S -i "$initrd_file" \
+                || warn "ucode strip failed"
+        else
+            qsay "  uc-tool not found -- skipping ucode strip"
+        fi
+    fi
+
     local md5_sum=$(cd $(dirname $initrd_file) && md5sum $(basename $initrd_file))
     cmd write_file "$initrd_file".md5 "$md5_sum"
 }

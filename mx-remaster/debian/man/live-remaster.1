@@ -1,0 +1,88 @@
+.TH LIVE-REMASTER 1 "June 2026" "mx-remaster" "User Commands"
+.SH NAME
+live-remaster \- create a remastered live filesystem from the running live system
+.SH SYNOPSIS
+.B live-remaster
+.RI [ options ]
+.SH DESCRIPTION
+.B live-remaster
+creates a new compressed live filesystem from the currently running live system.
+It is the main remastering tool in mx-remaster and is intended to be run from a
+live session, usually as root.
+
+The script copies the live system into a new squashfs image, updates the live
+metadata, and can refresh microcode in the resulting initrd files when supported
+by the installed tooling. It preserves the existing live-system workflow and
+uses the shared antiX common library for its interface, dialogs, and general
+option handling.
+
+The remaster can be run in a general mode, where personal data is excluded, or
+in a personal mode, where user settings are kept.
+.PP
+On a successful remaster (except in
+.B --pretend
+mode) it runs
+.BR live-boot-refresh (1)
+to update the boot menu labels to the current release name.  This step is
+non-fatal: a failure is logged but does not fail the remaster.
+.SH OPTIONS
+.TP
+.BR -p , " --pretend"
+Build a smaller
+.B linuxfs.new
+image but do not delete it when the operation finishes.
+.TP
+.BR -t " "\fITITLE\fR , " --title="\fITITLE\fR
+Use
+.I TITLE
+instead of prompting for a title.
+.TP
+.BR --general
+Create a general-purpose remaster.
+This mode excludes personal settings and user data.
+.TP
+.BR --personal
+Create a personalized remaster.
+This mode keeps personal settings where possible.
+.TP
+.BR --no-ucode[=LIST]
+Skip microcode refresh when rebuilding initrd images.
+The optional
+.I LIST
+may be
+.BR amd ,
+.BR intel ,
+or
+.BR amd,intel .
+If no list is supplied, both vendors are skipped.
+.TP
+.BR --version
+Print the program version and exit.
+.PP
+The script also honors the shared antiX common options provided by the
+underlying library, including the normal GUI/CLI and verbosity controls used by
+MX live tools.
+.SH FILES
+.TP
+.I /etc/live/version/linuxfs.ver
+Version metadata written by the remaster workflow and used by boot/menu tools.
+.TP
+.I /etc/live-kernel-updater/no-ucode-amd
+Vendor flag file that disables AMD microcode refresh.
+.TP
+.I /etc/live-kernel-updater/no-ucode-intel
+Vendor flag file that disables Intel microcode refresh.
+.TP
+.I /live/config
+Live configuration and state directory.
+.TP
+.I /live/boot-dev
+Boot device mount used by the remaster workflow.
+.SH SEE ALSO
+.BR installed-to-live (1),
+.BR persist-makefs (1),
+.BR live-grubsave (1),
+.BR live-boot-refresh (1),
+.BR mksquashfs (1)
+.SH AUTHOR
+mx-remaster maintainers

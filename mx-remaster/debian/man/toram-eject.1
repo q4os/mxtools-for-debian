@@ -1,0 +1,31 @@
+.TH TORAM-EJECT 1 "June 2026" "mx-remaster" "User Commands"
+.SH NAME
+toram-eject \- eject the live boot media after a successful toram boot
+.SH SYNOPSIS
+.B toram-eject
+.SH DESCRIPTION
+.B toram-eject
+is a small helper for live systems booted with
+.BR toram .
+After the live system has been copied to RAM, the script checks that the boot
+media is removable and no longer mounted, then offers to eject and optionally
+close the optical drive.
+
+This tool is normally launched automatically by the live workflow when the
+.B toram
+boot path succeeds.
+.SH OPTIONS
+.B toram-eject
+does not define any tool-specific options.
+.SH FILES
+.TP
+.I /live/config/toram-eject
+Flag file that triggers the eject workflow.
+.TP
+.I /live/config
+Live configuration directory used to read the boot device.
+.SH SEE ALSO
+.BR live-grubsave (1),
+.BR eject (1)
+.SH AUTHOR
+mx-remaster maintainers

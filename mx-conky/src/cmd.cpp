@@ -34,6 +34,7 @@ Cmd::Cmd(QObject *parent)
     connect(this, &Cmd::readyReadStandardError, [this]() { emit errorAvailable(readAllStandardError()); });
     connect(this, &Cmd::outputAvailable, [this](const QString &out) { out_buffer += out; });
     connect(this, &Cmd::errorAvailable, [this](const QString &out) { out_buffer += out; });
+    connect(this, QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished), this, &Cmd::done);
 }
 
 Cmd::~Cmd()
@@ -49,65 +50,101 @@ Cmd::~Cmd()
     }
 }
 
-bool Cmd::run(const QString &cmd, bool quiet)
+bool Cmd::runImpl(const QString &prog, const QStringList &args, QString &output, bool trim, bool quiet)
 {
     out_buffer.clear();
+    if (state() != QProcess::NotRunning) {
+        qDebug() << "Process already running:" << program() << arguments();
+        return false;
+    }
+    if (!quiet) {
+        if (args.size() == 2 && prog == "/bin/bash" && args[0] == "-c") {
+            qDebug().noquote() << args[1]; // Show the actual command for shell calls
+        } else {
+            qDebug().noquote() << prog << args;
+        }
+    }
+    QEventLoop loop;
+    connect(this, &Cmd::done, &loop, &QEventLoop::quit);
+    QTimer timer;
+    timer.setSingleShot(true);
+    connect(&timer, &QTimer::timeout, &loop, &QEventLoop::quit);
+    timer.start(30000); // 30-second timeout to prevent UI freeze on hung processes
+    start(prog, args);
+    loop.exec();
+    const bool finishedInTime = timer.isActive(); // active => process finished before timeout
+    timer.stop();
+    if (!finishedInTime) {
+        qWarning() << "Cmd: command timed out after 30s, killing:" << prog << args;
+        kill();
+        waitForFinished(1000);
+        output = trim ? out_buffer.trimmed() : out_buffer;
+        return false;
+    }
+    output = trim ? out_buffer.trimmed() : out_buffer;
+    return (exitStatus() == QProcess::NormalExit && exitCode() == 0);
+}
+
+// --- Shell-string overloads (existing) ---
+
+bool Cmd::run(const QString &cmd, bool quiet)
+{
     QString output;
     return run(cmd, output, quiet);
 }
 
+bool Cmd::run(const QString &cmd, QString &output, bool quiet)
+{
+    return runImpl("/bin/bash", {QStringLiteral("-c"), cmd}, output, true, quiet);
+}
+
+bool Cmd::runUntrimmed(const QString &cmd, QString &output, bool quiet)
+{
+    return runImpl("/bin/bash", {QStringLiteral("-c"), cmd}, output, false, quiet);
+}
+
 QString Cmd::getCmdOut(const QString &cmd, bool quiet)
 {
-    out_buffer.clear();
     QString output;
     run(cmd, output, quiet);
     return output;
 }
 
-bool Cmd::run(const QString &cmd, QString &output, bool quiet)
-{
-    out_buffer.clear();
-    connect(this, QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished), this, &Cmd::done,
-            Qt::UniqueConnection);
-    if (state() != QProcess::NotRunning) {
-        qDebug() << "Process already running:" << program() << arguments();
-        return false;
-    }
-    if (!quiet) {
-        qDebug().noquote() << cmd;
-    }
-    QEventLoop loop;
-    connect(this, &Cmd::done, &loop, &QEventLoop::quit);
-    start(QStringLiteral("/bin/bash"), {QStringLiteral("-c"), cmd});
-    loop.exec();
-    output = out_buffer.trimmed();
-    return (exitStatus() == QProcess::NormalExit && exitCode() == 0);
-}
-
 QString Cmd::getCmdOutUntrimmed(const QString &cmd, bool quiet)
 {
-    out_buffer.clear();
     QString output;
     runUntrimmed(cmd, output, quiet);
     return output;
 }
 
-bool Cmd::runUntrimmed(const QString &cmd, QString &output, bool quiet)
+// --- Argument-array overloads (new) ---
+
+bool Cmd::run(const QString &program, const QStringList &args, bool quiet)
 {
-    out_buffer.clear();
-    connect(this, QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished), this, &Cmd::done,
-            Qt::UniqueConnection);
-    if (state() != QProcess::NotRunning) {
-        qDebug() << "Process already running:" << program() << arguments();
-        return false;
-    }
-    if (!quiet) {
-        qDebug().noquote() << cmd;
-    }
-    QEventLoop loop;
-    connect(this, &Cmd::done, &loop, &QEventLoop::quit);
-    start(QStringLiteral("/bin/bash"), {QStringLiteral("-c"), cmd});
-    loop.exec();
-    output = out_buffer;
-    return (exitStatus() == QProcess::NormalExit && exitCode() == 0);
+    QString output;
+    return run(program, args, output, quiet);
+}
+
+bool Cmd::run(const QString &program, const QStringList &args, QString &output, bool quiet)
+{
+    return runImpl(program, args, output, true, quiet);
+}
+
+bool Cmd::runUntrimmed(const QString &program, const QStringList &args, QString &output, bool quiet)
+{
+    return runImpl(program, args, output, false, quiet);
+}
+
+QString Cmd::getCmdOut(const QString &program, const QStringList &args, bool quiet)
+{
+    QString output;
+    run(program, args, output, quiet);
+    return output;
+}
+
+QString Cmd::getCmdOutUntrimmed(const QString &program, const QStringList &args, bool quiet)
+{
+    QString output;
+    runUntrimmed(program, args, output, quiet);
+    return output;
 }

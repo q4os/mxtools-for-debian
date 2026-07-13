@@ -99,6 +99,7 @@ bool resetCustomExcludes(const QString &configuredPath, const QString &sourcePat
         const QString backupPath = configuredPath + "." + QDateTime::currentDateTime().toString("yyyyMMddhhmmss");
         if (!QFile::copy(configuredPath, backupPath)) {
             qWarning().noquote() << QObject::tr("Could not backup existing exclusion file to %1.").arg(backupPath);
+            return false;
         }
         if (!QFile::remove(configuredPath)) {
             qWarning().noquote()
@@ -132,15 +133,12 @@ bool touchExcludesTimestamp(const QString &configuredPath)
 
 bool hasNvidiaGraphicsCard(Cmd &shell)
 {
-    Q_UNUSED(shell);
+    const bool wasSuppressed = shell.outputSuppressed();
+    shell.setOutputSuppressed(true);
+    const QString glxInfo = shell.getOut("glxinfo", Cmd::QuietMode::Yes);
+    shell.setOutputSuppressed(wasSuppressed);
 
-    QProcess glxinfo;
-    glxinfo.start("glxinfo");
-    if (!glxinfo.waitForFinished()) {
-        return false;
-    }
-
-    return QString::fromLocal8Bit(glxinfo.readAllStandardOutput()).contains(QStringLiteral("NVIDIA"));
+    return glxInfo.contains(QStringLiteral("NVIDIA"), Qt::CaseInsensitive);
 }
 
 } // namespace ExcludesUtils

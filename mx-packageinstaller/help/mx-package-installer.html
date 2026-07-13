@@ -29,12 +29,12 @@
 	<ul>
 		<li>Expand the categories with the little arrow to see the packages available; more information (including screenshots where possible) is available by clicking on the small information icon.</li>
 		<li> The Search box will parse application names and display matches in the tree.</li><li> Check those that you want, and click Install.</li>
-		<li> The terminal output will be displayed as first the repos are updated and then your packages are installed.</li>
+		<li> The Console Output tab will be displayed as first the repos are updated and then your packages are installed.</li>
 		<li> If a package is already installed, you will have the option to uninstall or reinstall.</li>
 		<li> If there are problems, there is a log at /var/log/mxpi.log and mxpi.log.old for you to post in the forum.</li>
 	</ul>
 
-<h2>Stable Repo</h2>
+<h2>Enabled Repos</h2>
 
 <p class="help-image"><img src="2.jpg" alt="stable repo" /></p>
 
@@ -42,13 +42,18 @@
 
 	<ul>
 		<li>Packages then can be manipulated in similar fashion to the Popular Applications Tab.</li>
+		<li> The &#8220;Installed&#8221; column shows a version number when it differs from the version in the selected repo.</li>
+		<li> Use the drop-down above the list to filter by status: All packages, Installed, Upgradable, Not installed, or Autoremovable. The filter works together with the search box next to it.</li>
+		<li> &#8220;Autoremove packages&#8221; and &#8220;Upgrade All&#8221; buttons appear when there are autoremovable or upgradable packages to act on.</li>
 	</ul>
 
 <h2>MX Test Repo</h2>
 
 	<ul>
-		<li>This tab allows the user to browse packages available in the MX Test repo without needing to change any apt sources manually.</li>
+		<li>The MX Test Repo is <strong>not</strong> the same thing as the Debian testing repo.</li>
+		<li> This tab allows the user to browse packages available in the MX Test repo without needing to change any apt sources manually.</li>
 		<li> If the user chooses to install a Test repo package via the MX PackageInstaller, the Test repo sources will be automatically added for the duration of the application install process.  The Test repo sources will be disabled after the installation is complete.</li>
+		<li> As with the Enabled Repos tab, a filter drop-down (All packages, Installed, Upgradable, Not installed, Autoremovable) and search box are available, along with an &#8220;Only repo packages&#8221; checkbox to limit the list to packages that come from the MX Test repo.</li>
 	</ul>
 
 <h2>Debian Backports</h2>
@@ -56,6 +61,7 @@
 	<ul>
 		<li>Similar to the MX Test Repo tab, this tab allows the user to browse packages available in the Debian Backports repository maintained by Debian, without needing to change any apt sources manually.</li>
 		<li> If the user chooses to install a Debian Backports package via the MX PackageInstaller, the Debian Backports repo sources will be automatically added for the duration of the application install process.  The Debian Backports repo sources will be disabled after the installation is complete.</li>
+		<li> The same filter drop-down (All packages, Installed, Upgradable, Not installed, Autoremovable), search box, and &#8220;Only repo packages&#8221; checkbox are available here too.</li>
 	</ul>
 
 <h2>Flatpaks</h2>
@@ -66,9 +72,23 @@
 
 	<ul>
 		<li>They are not perfect: some might not work well, might not follow your theme, etc.</li>
-		<li> The first flatpak that you install will probably pull a huge runtime, so it will take a long time to download and will take a lot of space on your harddrive (probably around 2GB), but the next flatpak will most likely be able to use that runtime, so it gets a bit better after you install a couple of flatpaks.</li>
+		<li> The first flatpak that you install will probably pull a huge runtime, so it will take a long time to download and will take a lot of space on your harddrive (probably around 2-3GB), but the next flatpak will most likely be able to use that runtime, so it gets a bit better after you install a couple of flatpaks.</li>
 		<li> By default, the &#8220;flathub&#8221; remote &#8220;repo&#8221; is used by default.  Others can be added via the Advanced dialog.</li>
 		<li> You can also install flatpaks via ref files via the Advanced dialog</li>
+	</ul>
+
+<h2>Snaps</h2>
+
+<p class="help-image"><img src="5.jpg" alt="snaps" /></p>
+
+<p>The Snaps tab lets you search, install, remove, and update <a href="https://snapcraft.io/" target="_blank" rel="noreferrer noopener" aria-label="Snap packages (opens in a new tab)">Snap</a> packages from inside MX Package Installer. This tab only appears if the system is booted with systemd, since the Snap service (snapd) requires it.</p>
+
+	<ul>
+		<li>If Snap support is not yet set up on the system, click &#8220;Set up Snap support&#8221; to install snapd and enable the Snap service.</li>
+		<li> Use the drop-down to switch between &#8220;Installed snaps&#8221; and &#8220;Search store&#8221;; type a term in the search box and press Enter to search the Snap store.</li>
+		<li> Check the packages you want and use the Install/Uninstall buttons as on the other tabs. Progress is shown live in the Console Output tab while Snaps download and install.</li>
+		<li> Click &#8220;Update All&#8221; to update every installed snap at once.</li>
+		<li> After installing a Snap app, log out and back in to see it appear in the Start menu and to use its commands from a terminal.</li>
 	</ul>
 
 <h2>Q &amp; A</h2>
@@ -99,6 +119,6 @@
 
 <p>License: <a href="https://mxlinux.org/wiki/licenses/license-mx-package-installer">here</a>.</p>
 
-<p>v. 20200714</p>
+<p>v. 20260630</p>
 </body>
 </html>

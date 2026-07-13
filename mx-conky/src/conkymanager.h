@@ -23,8 +23,8 @@
  **********************************************************************/
 #pragma once
 
-#include "cmd.h"
 #include "conkyitem.h"
+#include <QHash>
 #include <QObject>
 #include <QProcess>
 #include <QSettings>
@@ -41,12 +41,12 @@ public:
 
     void addSearchPath(const QString &path);
     void removeSearchPath(const QString &path);
-    QStringList searchPaths() const;
+    [[nodiscard]] QStringList searchPaths() const;
 
     void scanForConkies();
     void addConkyItemsFromDirectory(const QString &directoryPath);
-    QList<ConkyItem *> conkyItems() const;
-    bool hasRunningConkies() const;
+    [[nodiscard]] QList<ConkyItem *> conkyItems() const;
+    [[nodiscard]] bool hasRunningConkies() const;
 
     void startConky(ConkyItem *item);
     void stopConky(ConkyItem *item);
@@ -60,10 +60,10 @@ public:
     // Autostart management
     void updateStartupScript();
     void setAutostart(bool enabled);
-    bool isAutostartEnabled() const;
+    [[nodiscard]] bool isAutostartEnabled() const;
 
     // Global startup delay
-    int startupDelay() const
+    [[nodiscard]] int startupDelay() const
     {
         return m_startupDelay;
     }
@@ -95,15 +95,15 @@ private:
     QTimer *m_statusTimer;
     bool m_statusCheckRunning;
     int m_startupDelay;
-    mutable Cmd m_cmd; // Reusable Cmd object for process checking
+    QHash<ConkyItem *, qint64> m_pids; // Track PIDs for targeted kill
 
-    QString getConkyProcess(const QString &configPath) const;
-    bool isConkyRunning(const QString &configPath) const;
+    [[nodiscard]] QString getConkyProcess(const QString &configPath) const;
+    [[nodiscard]] bool isConkyRunning(const QString &configPath) const;
     void clearConkyItems();
     void scanConkyDirectory(const QString &path);
     void scanDirectory(const QString &path);
     void applyAutostartFromStartupScript();
     bool copyDirectoryRecursively(const QString &sourceDir, const QString &destDir);
-    bool isBinaryFile(const QString &filePath) const;
-    bool isValidConkyFile(const QString &filePath) const;
+    [[nodiscard]] bool isBinaryFile(const QString &filePath) const;
+    [[nodiscard]] bool isValidConkyFile(const QString &filePath) const;
 };

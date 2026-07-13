@@ -1,3 +1,22 @@
+mx-conky (26.06.1302) stable; urgency=medium
+
+  * Release
+
+ -- Devs <devteam@localdomain>  Mon, 13 Jul 2026 13:05:30 +0200
+
+mx-conky (26.06) mx; urgency=medium
+
+  * Show a clear message when generating previews on Wayland, where the
+    feature is not supported, instead of failing silently.
+  * Keep the window from freezing indefinitely when a background command
+    gets stuck; such commands now time out after 30 seconds.
+  * Check conky running status less frequently to reduce idle CPU usage.
+  * Preview from Customize dialog now auto-saves all changes to the
+    config file before launching
+  * Faster conky detection at startup
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 18 Jun 2026 23:00:37 -0400
+
 mx-conky (26.03) mx; urgency=medium
 
   * Use internal Qt help and license viewer

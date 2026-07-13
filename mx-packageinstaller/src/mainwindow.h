@@ -50,6 +50,9 @@
 #include "models/packagemodel.h"
 #include "models/popularfilterproxy.h"
 #include "models/popularmodel.h"
+#include "models/snapfilterproxy.h"
+#include "models/snapmodel.h"
+#include "outputrender.h"
 #include "remotes.h"
 #include "versionnumber.h"
 #include "pmfiles.h"
@@ -59,9 +62,11 @@ namespace Ui
 class MainWindow;
 }
 
+class QNetworkReply;
+
 namespace Tab
 {
-enum { Popular, EnabledRepos, Test, Backports, Flatpak, Output };
+enum { Popular, EnabledRepos, Test, Backports, Flatpak, Snap, Output };
 }
 
 namespace Release
@@ -145,9 +150,14 @@ private slots:
     void pushUninstall_clicked();
     void pushUpgradeAll_clicked();
     void pushUpgradeFP_clicked();
+    void pushRefreshSnap_clicked();
+    void pushUpgradeSnap_clicked();
+    void pushSetupSnapd_clicked();
+    void searchSnapStore();
     void tabWidget_currentChanged(int index);
     void onPackageCheckStateChanged(const QString &packageName, Qt::CheckState state);
     void onFlatpakCheckStateChanged(const QString &fullName, Qt::CheckState state, int status);
+    void onSnapCheckStateChanged(const QString &name, Qt::CheckState state, int status);
     void onPopularItemChanged(const QModelIndex &index);
     void treePopularApps_customContextMenuRequested(QPoint pos);
     void treePopularApps_expanded();
@@ -156,14 +166,19 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
+    OutputRender::OutputRenderer outputRenderer;
 
     QString indexFilterFP;
+    bool cleanupDone {false};
     bool dirtyBackports {true};
     bool dirtyEnabledRepos {true};
     bool dirtyTest {true};
     bool displayFlatpaksIsRunning {false};
     bool displayPackagesIsRunning {false};
     bool firstRunFP {true};
+    bool flatpakSetupChecked {false};
+    bool firstRunSnap {true};
+    bool snapStoreMode {false};
     bool hideLibsChecked {true};
     bool testInitiallyEnabled {false};
     bool updatedOnce {false};
@@ -208,6 +223,8 @@ private:
     bool cachedInstalledFetched {false};
     bool holdProgressForAptRefresh {false};
     bool holdProgressForFlatpakRefresh {false};
+    bool downloadCancelRequested {false};
+    bool operationCanceled {false};
     bool flatpakCancelHidden {false};
     bool flatpakUiBlocked {false};
     bool suppressCmdOutput {false};
@@ -224,6 +241,7 @@ private:
     PackageModel *mxtestModel {nullptr};
     PackageModel *backportsModel {nullptr};
     FlatpakModel *flatpakModel {nullptr};
+    SnapModel *snapModel {nullptr};
     PopularModel *popularModel {nullptr};
 
     // Filter proxies
@@ -231,9 +249,11 @@ private:
     PackageFilterProxy *mxtestProxy {nullptr};
     PackageFilterProxy *backportsProxy {nullptr};
     FlatpakFilterProxy *flatpakProxy {nullptr};
+    SnapFilterProxy *snapProxy {nullptr};
     PopularFilterProxy *popularProxy {nullptr};
 
     QNetworkAccessManager manager;
+    QNetworkReply *activeDownloadReply {nullptr};
 
     [[nodiscard]] QHash<QString, PackageInfo> listInstalled();
     [[nodiscard]] QString categoryTranslation(const QString &item);
@@ -252,7 +272,6 @@ private:
     [[nodiscard]] bool isOnline();
     [[nodiscard]] bool isPackageInstallable(const QString &installable, const QString &modArch) const;
     [[nodiscard]] static QString getDebianVerName(uchar version = 0);
-    [[nodiscard]] static bool isFilteredName(const QString &name);
     [[nodiscard]] static uchar getDebianVerNum();
     [[nodiscard]] static uchar showVersionDialog(const QString &message);
     [[nodiscard]] QVector<PackageData> createPackageDataList(QHash<QString, PackageInfo> *list) const;
@@ -263,6 +282,15 @@ private:
         PackageFilterProxy *proxy = nullptr;
         QHash<QString, PackageInfo> *list = nullptr;
     };
+    // True once either a confirmation dialog was canceled or an elevated call was
+    // dismissed anywhere during the current operation. Callers use this to abort
+    // and revert to the calling tab quietly instead of reporting a generic error.
+    [[nodiscard]] bool operationWasCanceled() const { return operationCanceled || Cmd::elevationDismissed(); }
+    void beginOperation()
+    {
+        operationCanceled = false;
+        Cmd::resetElevationDismissed();
+    }
     [[nodiscard]] AptTabContext currentAptTab();
     [[nodiscard]] QHash<QString, PackageInfo> *getCurrentList();
     [[nodiscard]] PackageModel *getCurrentModel();
@@ -310,6 +338,7 @@ private:
     void applyPopularCategorySpanning();
     void handleEnabledReposTab(const QString &searchStr);
     void handleFlatpakTab(const QString &searchStr);
+    void handleSnapTab(const QString &searchStr);
     void handleOutputTab();
     void handleTab(const QString &searchStr, QLineEdit *searchBox, const QString &warningMessage, bool dirtyFlag);
     void resizeCurrentColumns();
@@ -317,6 +346,17 @@ private:
     void hideColumns();
     void ifDownloadFailed() const;
     void installFlatpak();
+    void showError(const QString &message, const QString &details = {});
+    void displaySnaps(bool forceUpdate = false);
+    void loadSnapData();
+    void populateSnapTree();
+    void updateSnapCounts();
+    void setupSnapd();
+    void buildSnapChangeList(const QString &name, Qt::CheckState state, int status);
+    [[nodiscard]] QStringList listInstalledSnaps() const;
+    [[nodiscard]] QVector<SnapData> parseSnapList(const QString &output, bool installed) const;
+    [[nodiscard]] static bool isSystemdInit();
+    [[nodiscard]] bool isSnapdReady() const;
     void invalidateFlatpakRemoteCache();
     void listFlatpakRemotes() const;
     void listSizeInstalledFP();

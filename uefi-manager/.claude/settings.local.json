@@ -46,7 +46,10 @@
       "Bash(efibootmgr:*)",
       "WebSearch",
       "WebFetch(domain:github.com)",
-      "WebFetch(domain:raw.githubusercontent.com)"
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "Bash(git:*)",
+      "Bash(dpkg -L libqt6core6)",
+      "Bash(dpkg -l)"
     ],
     "deny": [],
     "ask": []

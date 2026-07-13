@@ -9,6 +9,8 @@
 */
 #pragma once
 
+#include "Crontab.h"
+
 #include <QTimer>
 #include <QWidget>
 
@@ -16,9 +18,6 @@ class QLineEdit;
 class QTextEdit;
 class QComboBox;
 class QLabel;
-
-class Crontab;
-class TCommand;
 
 class TCommandEdit : public QWidget
 {

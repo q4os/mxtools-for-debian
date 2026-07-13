@@ -91,7 +91,6 @@ TCommandEdit::TCommandEdit(QWidget *parent)
     connect(timeEdit, &QLineEdit::textEdited, this, &TCommandEdit::timeEdited);
     connect(commentEdit, &QTextEdit::textChanged, this, &TCommandEdit::commentEdited);
     connect(userCombo, qOverload<int>(&QComboBox::activated), this, &TCommandEdit::userChanged);
-    timer.start(1min);
     connect(&timer, &QTimer::timeout, this, &TCommandEdit::resetExeTime);
     connect(timeButton, &QPushButton::clicked, this, &TCommandEdit::doTimeDialog);
 }
@@ -102,8 +101,10 @@ void TCommandEdit::changeCurrent(Crontab *cron, TCommand *cmnd)
     tCommand = cmnd;
     if (cmnd == nullptr) {
         setEnabled(false);
+        timer.stop();
     } else {
         setEnabled(true);
+        timer.start(1min);
         timeEdit->setText(tCommand->time);
         timeEdit->setCursorPosition(0);
         if (cron->cronOwner == QLatin1String("/etc/crontab")) {
@@ -132,7 +133,7 @@ void TCommandEdit::setExecuteList(const QString &time)
         return;
     }
     QDate today = QDate::currentDate();
-    QDate tommorow = today.addDays(1);
+    QDate tomorrow = today.addDays(1);
     QDateTime cur(QDateTime::currentDateTime());
     QDateTime dt = cur;
     QString str;
@@ -152,7 +153,7 @@ void TCommandEdit::setExecuteList(const QString &time)
                    .arg((sec / 60) % 60, 2, 10, QChar('0'));
         if (dt.date() == today) {
             str += QStringLiteral(" - %1").arg(tr("Today"));
-        } else if (dt.date() == tommorow) {
+        } else if (dt.date() == tomorrow) {
             str += QStringLiteral(" - %1").arg(tr("Tomorrow"));
         }
     }

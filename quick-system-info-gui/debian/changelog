@@ -1,3 +1,21 @@
+quick-system-info-gui (26.06.02.1302) stable; urgency=medium
+
+  * Release
+
+ -- Devs <devteam@localdomain>  Mon, 13 Jul 2026 13:06:08 +0200
+
+quick-system-info-gui (26.06.02) mx; urgency=medium
+
+  * prefer quick-system-info-mx wrapper over straight inxi 
+
+ -- Dolphin Oracle <demo@mx1>  Mon, 22 Jun 2026 12:46:16 -0400
+
+quick-system-info-gui (26.06.01) mx; urgency=medium
+
+  * add timout to run command
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 20 Jun 2026 14:51:09 -0400
+
 quick-system-info-gui (25.09.02) mx; urgency=medium
 
   * update translations

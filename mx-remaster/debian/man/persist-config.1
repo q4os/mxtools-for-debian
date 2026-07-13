@@ -1,0 +1,71 @@
+.TH PERSIST-CONFIG 1 "June 2026" "mx-remaster" "User Commands"
+.SH NAME
+persist-config \- configure automatic root-persistence saves
+.SH SYNOPSIS
+.B persist-config
+.RI [ options ]
+.SH DESCRIPTION
+.B persist-config
+configures how root-persistence saves are triggered in a live system.
+It is intended for use by startup and shutdown integration, but it can also be
+run manually to change the save mode.
+
+The script writes its configuration to
+.I /etc/live/persist-config.conf
+and can be told to set up startup handling, shutdown handling, or a custom
+shutdown command.
+When a custom command is used, the script only accepts reboot and poweroff
+commands and treats the request as a shutdown action.
+.SH OPTIONS
+.TP
+.BR --startup
+Create
+.I persist-config.conf
+if it is missing.
+This is the mode used by startup scripts so the configuration exists before the
+user reaches shutdown.
+.TP
+.BR --shutdown
+Run
+.B persist-save
+according to the contents of
+.I persist-config.conf
+when the system is shutting down.
+.TP
+.BR --command " "\fICMD\fR
+Run
+.I CMD
+if
+.B persist-save
+succeeds.
+If
+.B persist-save
+fails, the user is prompted before
+.I CMD
+is executed.
+This option implies
+.B --shutdown.
+.PP
+The script also honors the shared antiX common options provided by the
+underlying library, including the normal GUI and verbosity controls.
+.SH FILES
+.TP
+.I /etc/live/persist-config.conf
+Configuration file written by this tool.
+.TP
+.I /live/config/persist-save.conf
+Flag file indicating that automatic saving is enabled.
+.TP
+.I /live/config/save-persist
+Legacy flag file used to decide whether the tool should run.
+.TP
+.I /live/config/last-auto-save
+Timestamp of the last automatic save.
+.TP
+.I /live/config/last-persist-save
+Timestamp of the last save operation.
+.SH SEE ALSO
+.BR persist-save (1),
+.BR live-remaster (1)
+.SH AUTHOR
+mx-remaster maintainers

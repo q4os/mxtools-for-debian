@@ -41,7 +41,7 @@ public:
     [[nodiscard]] int statusFilter() const { return m_statusFilter; }
     [[nodiscard]] bool hideDuplicates() const { return m_hideDuplicates; }
     [[nodiscard]] QString searchText() const { return m_searchText; }
-    [[nodiscard]] bool hasAllowedRefs() const { return !m_allowedRefs.isEmpty(); }
+    [[nodiscard]] bool hasAllowedRefs() const { return m_refFilterActive; }
 
     [[nodiscard]] QVector<int> visibleSourceRows() const;
 
@@ -56,5 +56,7 @@ private:
     QString m_searchText;
     int m_statusFilter = 0;
     bool m_hideDuplicates = true;
+    // Distinguishes "restrict to this set" (even if empty) from "no restriction".
+    bool m_refFilterActive = false;
     QSet<QString> m_allowedRefs;
 };

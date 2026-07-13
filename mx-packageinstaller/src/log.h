@@ -28,10 +28,16 @@
 class Log
 {
 public:
-    explicit Log(const QString &file_name = "/tmp/mxpi.log");
+    explicit Log(const QString &fileName = "/tmp/mxpi.log");
     [[nodiscard]] static QString getLog();
     static void messageHandler(QtMsgType type, const QMessageLogContext &, const QString &msg);
+    // Safe default log location, kept out of world-writable /tmp:
+    //   running as the user -> private per-user runtime dir ($XDG_RUNTIME_DIR)
+    //   running as root      -> /run (root-only)
+    static QString defaultLogPath();
 
 private:
     inline static QFile logFile;
+    // Open logFile (filename already set) read-write without following a symlink.
+    static bool openLogFile();
 };

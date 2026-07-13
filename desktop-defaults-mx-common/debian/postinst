@@ -17,4 +17,9 @@ if [ -e /etc/lightdm/lightdm.conf ]; then
 	sed -i "s,usr/local/bin/early-bg,usr/bin/early-bg," /etc/lightdm/lightdm.conf	
 fi
 
+#cleanup snap symlink
+if [ -L /usr/share/applications/snaps ]; then
+	unlink /usr/share/application/snaps
+fi
+
 exit 0

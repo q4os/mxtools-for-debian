@@ -75,7 +75,9 @@ case "$1" in
                     if [ ! -x /usr/sbin/dkms.real ]; then
                     #copy new file, because the divert below doesn't quite do it 
                     #without reinstalling dkms.
-                   		cp -a /usr/sbin/dkms /usr/sbin/dkms.real
+						if ( -e /usr/sbin/dkms ); then
+                   			cp -a /usr/sbin/dkms /usr/sbin/dkms.real
+                        fi
                    	fi
                     
                       

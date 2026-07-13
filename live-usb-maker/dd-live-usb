@@ -44,7 +44,7 @@ usage() {
 cat<<Usage
 Usage: $ME [<options>]
 
-A save and convenient way to make a "dd" live-usb from a .iso file.
+A fast, safe, convenient way to make a "dd" live-usb from a .iso file.
 Will prompt you for the file and for the device to write to if they
 are not given on the command line.
 
@@ -100,7 +100,7 @@ eval_argument() {
 takes_param() {
     case $1 in
           -color|C) return 0 ;;
-        -percent|P) return 0 ;;
+        -progress|P) return 0 ;;
            -from|f) return 0 ;;
              -to|t) return 0 ;;
     esac
@@ -155,7 +155,7 @@ main() {
         if [ -n "$live_dev" ]; then
             shout "Found live media device %s" "$(pqb /dev/$(get_drive $live_dev))"
         else
-            "$live_dev" "The live media is not mounted"
+            msg $"The live media is not mounted"
         fi
     fi
 
@@ -181,7 +181,7 @@ main() {
     force usb || is_usb_or_removable $target_dev || yes_NO_fatal "usb" \
         "Do you want to use it anyway (dangerous)?" \
         "Use %s to always ignore this warning"      \
-        "The device %s does not seem to be usb or removeable."  "$target_dev"
+        "The device %s does not seem to be usb or removable."  "$target_dev"
 
     # Make sure the target is not in use
     umount_all $TARGET

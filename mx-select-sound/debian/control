@@ -3,7 +3,7 @@ Section: admin
 Priority: optional
 Maintainer: Adrian <adrian@mxlinux.org>
 Build-Depends: debhelper-compat (=12), cmake (>= 3.16), ninja-build, qt6-base-dev, qt6-base-dev-tools, qt6-tools-dev, qt6-tools-dev-tools
-Standards-Version: 3.9.8
+Standards-Version: 4.5.1
 Vcs-Git: git://github.com/MX-Linux/mx-select-sound
 Homepage: https://github.com/MX-Linux/mx-select-sound
 
@@ -11,6 +11,7 @@ Package: mx-select-sound
 Architecture: any
 Depends: ${misc:Depends},
          ${shlibs:Depends}
+Recommends: alsa-utils
 Description: Sound card selection tool for MX Linux
  MX Select Sound is a graphical utility that allows users to easily
  select and configure the default sound card on their system.

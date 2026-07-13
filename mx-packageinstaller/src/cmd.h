@@ -24,13 +24,24 @@ public:
     bool procAsRootWithEnv(const QHash<QString, QString> &environment, const QString &cmd,
                            const QStringList &args = {}, QString *output = nullptr,
                            const QByteArray *input = nullptr, QuietMode quiet = QuietMode::No);
+    bool procScriptAsRoot(const QString &path, const QStringList &args = {}, QString *output = nullptr,
+                          const QByteArray *input = nullptr, QuietMode quiet = QuietMode::No);
     [[nodiscard]] QString getOut(const QString &cmd, QuietMode quiet = QuietMode::No);
+    [[nodiscard]] QString getOut(const QString &cmd, const QStringList &args, QuietMode quiet = QuietMode::No);
     [[nodiscard]] QString readAllOutput() const;
     bool run(const QString &cmd, QuietMode quiet = QuietMode::No);
     bool runHookAsRoot(const QString &script, QuietMode quiet = QuietMode::No);
     [[nodiscard]] QString lockingProcessAsRoot(const QString &path, QuietMode quiet = QuietMode::No);
     bool writeFileAsRoot(const QString &path, const QString &content, QuietMode quiet = QuietMode::No);
     [[nodiscard]] bool terminateAndKill();
+
+    // Whether any elevated call anywhere was dismissed by the user (as opposed to
+    // failing for a real reason) since the last reset. Callers use this to abort
+    // the whole operation and revert quietly instead of reporting a generic error.
+    // Deliberately sticky: a dismissal whose return value goes unchecked (e.g. a
+    // postinstall hook) is still caught by the next check in the same operation.
+    [[nodiscard]] static bool elevationDismissed();
+    static void resetElevationDismissed();
 
 signals:
     void done();

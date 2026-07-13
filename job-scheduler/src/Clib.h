@@ -9,6 +9,7 @@
 */
 #pragma once
 
+#include <QDir>
 #include <QStringList>
 
 #include <pwd.h>
@@ -23,15 +24,18 @@ public:
     }
     inline static QString uName()
     {
-        return getpwuid(uId())->pw_name;
+        struct passwd *pw = getpwuid(uId());
+        return pw ? QString(pw->pw_name) : QString::number(uId());
     }
     inline static QString uHome()
     {
-        return getpwuid(uId())->pw_dir;
+        struct passwd *pw = getpwuid(uId());
+        return pw ? QString(pw->pw_dir) : QDir::homePath();
     }
     inline static QString uShell()
     {
-        return getpwuid(uId())->pw_shell;
+        struct passwd *pw = getpwuid(uId());
+        return pw ? QString(pw->pw_shell) : QStringLiteral("/bin/sh");
     }
     inline static QString getEnv(const char *name)
     {

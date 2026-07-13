@@ -14,7 +14,6 @@ override_dh_auto_clean:
 	rm -f src/version.h
 
 override_dh_auto_build:
-	/usr/lib/qt6/bin/lrelease translations/*.ts
 	dh_auto_build
 
 override_dh_shlibdeps:

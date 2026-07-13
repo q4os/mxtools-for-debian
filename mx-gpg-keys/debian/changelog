@@ -1,3 +1,9 @@
+mx-gpg-keys (24.08.01.1302) stable; urgency=medium
+
+  * Release
+
+ -- Devs <devteam@localdomain>  Mon, 13 Jul 2026 13:05:31 +0200
+
 mx-gpg-keys (24.08.01) mx; urgency=medium
 
   * Update Adrian's key

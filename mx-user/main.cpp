@@ -44,6 +44,7 @@ int main(int argc, char *argv[])
         qputenv("HOME", "/root");
     }
 
+    QApplication::setApplicationName("mx-user");
     QApplication::setWindowIcon(QIcon::fromTheme(QApplication::applicationName()));
     QApplication::setOrganizationName("MX-Linux");
 

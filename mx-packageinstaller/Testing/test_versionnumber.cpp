@@ -28,6 +28,9 @@ private slots:
     
     // Real-world Debian version examples
     void testRealDebianVersions();
+
+    // Numeric components wider than INT_MAX must not overflow/compare equal
+    void testLargeNumericComponents();
     
     // Sorting tests
     void testVersionSorting();
@@ -180,6 +183,20 @@ void TestVersionNumber::testRealDebianVersions()
     compareVersions("1.2.3-4+deb10u1", "1.2.3-4+deb10u2", true);
     compareVersions("5.4.0-42.46", "5.4.0-42.46+1", true);
     compareVersions("2.0.0~git20200101.abcdef-1", "2.0.0-1", true);
+}
+
+void TestVersionNumber::testLargeNumericComponents()
+{
+    // Components exceeding INT_MAX previously collapsed to 0 via toInt() and
+    // compared equal, so a genuine upgrade looked "not newer".
+    compareVersions("2.0.0~git20240101120000-1", "2.0.0~git20240101120001-1", true);
+    compareVersions("0.0.99999999999", "0.0.100000000000", true);
+
+    // Numeric segments compare by value, not width; leading zeros are ignored.
+    compareVersions("1.9", "1.10", true);
+    VersionNumber padded("1.08");
+    VersionNumber plain("1.8");
+    QVERIFY(padded == plain);
 }
 
 void TestVersionNumber::testVersionSorting()

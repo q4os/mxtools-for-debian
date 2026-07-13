@@ -129,7 +129,6 @@ target_link_libraries(mx-viewer
 # Set compiler flags
 target_compile_options(mx-viewer PRIVATE
     -Wpedantic
-    -pedantic
     -Werror=return-type
     -Werror=switch
     -Werror=uninitialized

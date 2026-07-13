@@ -23,6 +23,29 @@
 
 #include "../packagestatus.h"
 
+#include <QRegularExpression>
+#include <QSet>
+
+namespace {
+QString normalizeNumber(QString number)
+{
+    const qsizetype lastComma = number.lastIndexOf(',');
+    const qsizetype lastDot = number.lastIndexOf('.');
+    const QChar decimalSeparator = lastComma > lastDot ? QChar(',') : QChar('.');
+
+    if (lastComma >= 0 && lastDot >= 0) {
+        const QChar thousandsSeparator = decimalSeparator == QChar(',') ? QChar('.') : QChar(',');
+        number.remove(thousandsSeparator);
+    }
+
+    if (decimalSeparator == QChar(',')) {
+        number.replace(',', '.');
+    }
+
+    return number;
+}
+} // namespace
+
 FlatpakModel::FlatpakModel(QObject *parent)
     : QAbstractTableModel(parent)
 {
@@ -83,6 +106,8 @@ QVariant FlatpakModel::data(const QModelIndex &index, int role) const
 
     case Qt::UserRole:
         switch (index.column()) {
+        case FlatCol::Size:
+            return fp.sizeBytes;
         case FlatCol::Status:
             return fp.status;
         case FlatCol::Duplicate:
@@ -176,6 +201,7 @@ void FlatpakModel::setFlatpakData(const QVector<FlatpakData> &flatpaks)
     m_refToRow.clear();
     m_refToRow.reserve(m_flatpaks.size());
     for (int i = 0; i < m_flatpaks.size(); ++i) {
+        m_flatpaks[i].sizeBytes = sizeStringToBytes(m_flatpaks.at(i).size);
         m_refToRow.insert(m_flatpaks.at(i).canonicalRef, i);
     }
     endResetModel();
@@ -184,9 +210,11 @@ void FlatpakModel::setFlatpakData(const QVector<FlatpakData> &flatpaks)
 void FlatpakModel::addFlatpak(const FlatpakData &flatpak)
 {
     int row = static_cast<int>(m_flatpaks.size());
+    FlatpakData data = flatpak;
+    data.sizeBytes = sizeStringToBytes(data.size);
     beginInsertRows(QModelIndex(), row, row);
-    m_flatpaks.append(flatpak);
-    m_refToRow.insert(flatpak.canonicalRef, row);
+    m_flatpaks.append(data);
+    m_refToRow.insert(data.canonicalRef, row);
     endInsertRows();
 }
 
@@ -252,18 +280,28 @@ int FlatpakModel::findFlatpakRow(const QString &canonicalRef) const
 
 void FlatpakModel::markDuplicates()
 {
-    QHash<QString, int> refCount;
-    for (const FlatpakData &fp : m_flatpaks) {
-        refCount[fp.canonicalRef]++;
-    }
-
+    // Keep the first occurrence of each canonical ref visible and mark only the
+    // later copies as duplicates, so the hide-duplicates filter collapses each
+    // ref to one installable row rather than hiding every copy.
+    QSet<QString> seen;
     for (int i = 0; i < m_flatpaks.size(); ++i) {
-        bool wasDuplicate = m_flatpaks[i].isDuplicate;
-        m_flatpaks[i].isDuplicate = refCount.value(m_flatpaks[i].canonicalRef, 0) > 1;
+        const bool wasDuplicate = m_flatpaks[i].isDuplicate;
+        m_flatpaks[i].isDuplicate = seen.contains(m_flatpaks[i].canonicalRef);
+        seen.insert(m_flatpaks[i].canonicalRef);
         if (wasDuplicate != m_flatpaks[i].isDuplicate) {
             emit dataChanged(index(i, FlatCol::Duplicate), index(i, FlatCol::Duplicate));
         }
     }
+}
+
+int FlatpakModel::findRowByFullName(const QString &fullName) const
+{
+    for (int i = 0; i < m_flatpaks.size(); ++i) {
+        if (m_flatpaks.at(i).fullName == fullName) {
+            return i;
+        }
+    }
+    return -1;
 }
 
 void FlatpakModel::updateInstalledStatus(const QStringList &installedRefs)
@@ -288,6 +326,7 @@ void FlatpakModel::setInstalledSizes(const QHash<QString, QString> &sizeMap)
         auto it = sizeMap.find(m_flatpaks[i].canonicalRef);
         if (it != sizeMap.end() && m_flatpaks[i].size != it.value()) {
             m_flatpaks[i].size = it.value();
+            m_flatpaks[i].sizeBytes = sizeStringToBytes(it.value());
             emit dataChanged(index(i, FlatCol::Size), index(i, FlatCol::Size));
         }
     }
@@ -296,4 +335,47 @@ void FlatpakModel::setInstalledSizes(const QHash<QString, QString> &sizeMap)
 void FlatpakModel::setIcons(const QIcon &installed)
 {
     m_iconInstalled = installed;
+}
+
+quint64 FlatpakModel::sizeStringToBytes(const QString &size)
+{
+    QString normalized = size.trimmed();
+    normalized.replace(QChar(0x00a0), QLatin1Char(' '));
+    normalized.replace(QChar(0x202f), QLatin1Char(' '));
+
+    static const QRegularExpression sizeRegex(
+        QStringLiteral(R"(^\s*([0-9][0-9.,]*)\s*([A-Za-z]+)?\s*$)"));
+    const QRegularExpressionMatch match = sizeRegex.match(normalized);
+    if (!match.hasMatch()) {
+        return 0;
+    }
+
+    bool ok = false;
+    const double value = normalizeNumber(match.captured(1)).toDouble(&ok);
+    if (!ok || value < 0.0) {
+        return 0;
+    }
+
+    // Flatpak formats sizes with SI decimal units (1 kB = 1000 bytes)
+    const QString unit = match.captured(2).toUpper();
+    quint64 multiplier = 1;
+    if (unit == QLatin1String("KB")) {
+        multiplier = 1000ULL;
+    } else if (unit == QLatin1String("KIB")) {
+        multiplier = 1024ULL;
+    } else if (unit == QLatin1String("MB")) {
+        multiplier = 1000ULL * 1000ULL;
+    } else if (unit == QLatin1String("MIB")) {
+        multiplier = 1024ULL * 1024ULL;
+    } else if (unit == QLatin1String("GB")) {
+        multiplier = 1000ULL * 1000ULL * 1000ULL;
+    } else if (unit == QLatin1String("GIB")) {
+        multiplier = 1024ULL * 1024ULL * 1024ULL;
+    } else if (unit == QLatin1String("TB")) {
+        multiplier = 1000ULL * 1000ULL * 1000ULL * 1000ULL;
+    } else if (unit == QLatin1String("TIB")) {
+        multiplier = 1024ULL * 1024ULL * 1024ULL * 1024ULL;
+    }
+
+    return static_cast<quint64>(value * static_cast<double>(multiplier));
 }

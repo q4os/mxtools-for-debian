@@ -82,7 +82,7 @@
     <message>
         <location filename="../mainwindow.ui" line="271"/>
         <source>Grant this user administrative rights to the system (sudo)</source>
-        <translation>Χορήγηση δικαιωμάτων διαχείρησης του συστήματος (sudo) στο νέο χρήστη</translation>
+        <translation>Χορήγηση δικαιωμάτων διαχείρισης του συστήματος (sudo) στο νέο χρήστη</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="290"/>

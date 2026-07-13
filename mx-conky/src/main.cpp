@@ -59,9 +59,9 @@ QString getRunningConky()
 
 QString openFile(const QDir &dir)
 {
-    const QString file_name = getRunningConky();
-    if (!file_name.isEmpty()) {
-        return file_name;
+    const QString fileName = getRunningConky();
+    if (!fileName.isEmpty()) {
+        return fileName;
     }
 
     const QString selected

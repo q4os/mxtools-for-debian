@@ -9,13 +9,12 @@
 */
 #pragma once
 
+#include "Crontab.h"
+
 #include <QAbstractItemModel>
 
 #include <memory>
 #include <vector>
-
-class Crontab;
-class TCommand;
 
 class CronModel : public QAbstractItemModel
 {
@@ -35,7 +34,7 @@ public:
     [[nodiscard]] int rowCount(const QModelIndex &parent) const override;
     [[nodiscard]] int columnCount(const QModelIndex & /*parent*/) const override
     {
-        return 4;
+        return 3;
     }
     [[nodiscard]] QVariant headerData(int section, Qt::Orientation orientation, int role) const override;
     [[nodiscard]] QVariant data(const QModelIndex &idx, int role) const override;

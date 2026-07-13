@@ -37,12 +37,59 @@
 #include <QStorageInfo>
 
 #include <exception>
+#include <stdexcept>
+
+#include <pwd.h>
+#include <sys/stat.h>
 #include <unistd.h>
 
 #include "messagehandler.h"
 
 namespace
 {
+QString trimQuotesValue(QString value)
+{
+    value = value.trimmed();
+    if (value.startsWith('\'') && value.endsWith('\'') && value.length() > 1) {
+        value = value.mid(1, value.length() - 2);
+    }
+    if (value.startsWith('"') && value.endsWith('"') && value.length() > 1) {
+        value = value.mid(1, value.length() - 2);
+    }
+    return value;
+}
+
+QString readOsReleaseValue(const QString &key)
+{
+    QFile file("/etc/os-release");
+    if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+        return {};
+    }
+
+    QTextStream in(&file);
+    const QString keyPrefix = key + "=";
+    while (!in.atEnd()) {
+        const QString line = in.readLine().trimmed();
+        if (line.isEmpty() || line.startsWith('#') || !line.startsWith(keyPrefix)) {
+            continue;
+        }
+        return trimQuotesValue(line.section('=', 1));
+    }
+    return {};
+}
+
+QString ensureCowSpacesize(QString options)
+{
+    static const QRegularExpression pattern(R"((^|\s)cow_spacesize=\S+)");
+    if (options.contains(pattern)) {
+        return options;
+    }
+    if (options.trimmed().isEmpty()) {
+        return "cow_spacesize=80%";
+    }
+    return options.trimmed() + " cow_spacesize=80%";
+}
+
 QString loggedInUserName()
 {
     return Cmd::loggedInUserName();
@@ -62,17 +109,43 @@ QString userConfigBaseDir()
     return QStandardPaths::writableLocation(QStandardPaths::ConfigLocation);
 }
 
+// Redirects QSettings' user-scope path to the invoking user's ~/.config before
+// any member initializer below reads a QSettings value. QSettings::setPath()
+// is a process-wide static, so this only needs to run once; it must happen
+// before Settings::editBootMenu's initializer (getEditBootMenuSetting()) runs,
+// which is why this is itself a member initializer ordered ahead of it in
+// settings.h rather than a call inside the constructor body (loadConfig(),
+// called from the body, already runs far too late for the ones in the
+// member-initializer list).
+bool redirectUserConfigPath()
+{
+    QSettings::setPath(QSettings::NativeFormat, QSettings::UserScope, userConfigBaseDir());
+    return true;
+}
+
 void chownFileToLoggedInUser(const QString &path)
 {
     const QString username = loggedInUserName();
     if (username.isEmpty() || path.isEmpty()) {
         return;
     }
-    const QFileInfo fileInfo(path);
-    if (!fileInfo.exists() || fileInfo.isWritable()) {
+    // Never chown through a symlink: run as root the chown would follow it and
+    // could hand ownership of an arbitrary target file to the user.
+    struct stat st;
+    const QByteArray pathBytes = path.toLocal8Bit();
+    if (lstat(pathBytes.constData(), &st) != 0 || S_ISLNK(st.st_mode)) {
         return;
     }
-    Cmd().procAsRoot("chown", {username + ":", path}, nullptr, nullptr, Cmd::QuietMode::Yes);
+    // Only chown when the file is not already owned by the target user. The
+    // previous isWritable() guard was wrong: a root process can write almost any
+    // file, so the chown was always skipped and root-created config/exclude files
+    // stayed root-owned, leaving the user unable to edit them.
+    const struct passwd *pw = getpwnam(username.toLocal8Bit().constData());
+    if (pw == nullptr || st.st_uid == pw->pw_uid) {
+        return;
+    }
+    // -h: operate on the path itself (defends against a TOCTOU symlink swap).
+    Cmd().procAsRoot("chown", {"-h", username + ":", path}, nullptr, nullptr, Cmd::QuietMode::Yes);
 }
 
 } // namespace
@@ -82,6 +155,7 @@ Settings::Settings(const QCommandLineParser &argParser, bool isGuiApp)
       maxCores(Cmd().getOut("nproc", Cmd::QuietMode::Yes).trimmed().toUInt()),
       monthly(argParser.isSet("month")),
       overrideSize(argParser.isSet("override-size")),
+      userConfigPathReady(redirectUserConfigPath()),
       editBootMenu(getEditBootMenuSetting()),
       isGuiApp(isGuiApp),
       forceInstaller(getInitialSettings().forceInstaller),
@@ -96,24 +170,46 @@ Settings::Settings(const QCommandLineParser &argParser, bool isGuiApp)
 {
     try {
         if (!initializeConfiguration()) {
-            handleInitializationError(QObject::tr("Failed to initialize configuration"));
-            exit(EXIT_FAILURE);
+            throw std::runtime_error("Failed to initialize configuration");
         }
 
+        // Clean up leftovers of a previous interrupted run. Only invoke the root
+        // helper when something is actually left behind: a normal startup then
+        // performs no elevated call at all (previously cleanup_overlay ran, and
+        // could prompt, on every launch even with nothing to clean).
         const QString appName = QCoreApplication::applicationName();
         const QString overlayBase = "/run/" + appName + "/bind-root-overlay";
-        bool cleanupRan = false;
-        bool cleanupOk = true;
-        const QString elevateTool = Cmd::elevationTool();
-        if (QFileInfo::exists("/tmp/installed-to-live/cleanup.conf") || QFileInfo::exists(overlayBase)) {
-            cleanupRan = true;
-            cleanupOk = Cmd().run(elevateTool + " /usr/lib/" + appName + "/snapshot-lib cleanup");
+        // Two possible bind-root setups left behind from a previous run:
+        // installed-to-live (Debian, marker at /tmp/installed-to-live/cleanup.conf)
+        // and installed-to-live-arch (Arch, state at /run/<app>/cleanup-arch.state
+        // or its /tmp/ fallback). Run whichever cleanup matches.
+        const bool archStatePresent = QFileInfo::exists("/run/" + appName + "/cleanup-arch.state")
+                                      || QFileInfo::exists("/tmp/" + appName + "/cleanup-arch.state");
+        bool archCleanupOk = true;
+        if (archStatePresent) {
+            const QString archScript
+                = "/usr/share/" + appName + "/scripts/installed-to-live-arch";
+            if (QFileInfo::exists(archScript)) {
+                archCleanupOk = Cmd().procAsRoot("installed-to-live-arch", {"cleanup"});
+            } else {
+                qCritical().noquote() << QObject::tr(
+                    "Pending Arch bind-root cleanup state but installed-to-live-arch is missing: %1")
+                                             .arg(archScript);
+                archCleanupOk = false;
+            }
         }
-        const QString overlayRoot = "/run/" + appName + "/bind-root-overlay/root";
+        const bool hasLiveCleanup = QFileInfo::exists("/tmp/installed-to-live/cleanup.conf");
+        const bool hasOverlayBase = QFileInfo::exists(overlayBase);
         const bool bindRootMounted = Cmd().run("mountpoint -q /.bind-root", Cmd::QuietMode::Yes)
-            || Cmd().run("mountpoint -q \"" + overlayRoot + "\"", Cmd::QuietMode::Yes);
-        if (!cleanupRan || cleanupOk || !bindRootMounted) {
-            Cmd().run(elevateTool + " /usr/lib/" + appName + "/snapshot-lib cleanup_overlay " + appName);
+            || (hasOverlayBase
+                && Cmd().run("mountpoint -q \"" + overlayBase + "/root\"", Cmd::QuietMode::Yes));
+        if (hasLiveCleanup || hasOverlayBase || bindRootMounted) {
+            const bool cleanupOk = Cmd().procAsRoot("snapshot-lib", {"cleanup"}) && archCleanupOk;
+            // Remove the overlay directories only when it is safe: either the
+            // cleanup above succeeded or nothing is mounted under them anymore.
+            if (hasOverlayBase && (cleanupOk || !bindRootMounted)) {
+                Cmd().procAsRoot("snapshot-lib", {"cleanup_overlay", appName});
+            }
         }
 
         loadConfig(); // Load settings from .conf file
@@ -126,32 +222,42 @@ Settings::Settings(const QCommandLineParser &argParser, bool isGuiApp)
             setMonthlySnapshot(argParser);
         }
 
+        // Append the NVIDIA boot option after bootOptions is finalized (set in
+        // setVariables(), or reset in setMonthlySnapshot() for monthly builds).
+        // This is the non-interactive CLI equivalent of the GUI's NVIDIA prompt.
+        if (argParser.isSet("nvidia") && !bootOptions.contains("xorg=nvidia")) {
+            bootOptions = bootOptions.isEmpty() ? QStringLiteral("xorg=nvidia") : bootOptions + " xorg=nvidia";
+        }
+
         processExclArgs(argParser);
 
         // Validate final configuration
         if (!checkConfiguration()) {
-            handleInitializationError(QObject::tr("Configuration validation failed"));
-            exit(EXIT_FAILURE);
+            throw std::runtime_error("Configuration validation failed");
         }
 
     } catch (const std::exception &e) {
         handleInitializationError(QObject::tr("Exception during initialization: %1").arg(e.what()));
-        exit(EXIT_FAILURE);
+        throw;
     } catch (...) {
         handleInitializationError(QObject::tr("Unknown exception during initialization"));
-        exit(EXIT_FAILURE);
+        throw std::runtime_error("Unknown exception during initialization");
     }
 }
 
 // Check if compression is available in the kernel (lz4, lzo, xz)
 bool Settings::checkCompression() const
 {
-    if (compression == "gzip"
-        || !QFileInfo::exists("/boot/config-"
-                              + kernel)) { // Don't check for gzip or if the kernel config file is missing
+    // Skip the check for gzip (always supported) or if the kernel config file
+    // is unavailable. On Arch, /boot/config-* is typically absent so the check
+    // passes by default; if the user has a kernel package that does ship the
+    // config (e.g. linux-lts), we'll actually validate it.
+    if (compression == "gzip" || !QFileInfo::exists("/boot/config-" + kernel)) {
         return true;
     }
-    return Cmd().run("grep ^CONFIG_SQUASHFS_" + compression.toUpper() + "=y /boot/config-" + kernel);
+    // Argument array: compression/kernel are user-supplied (config file or CLI)
+    // and must never be parsed by a shell.
+    return Cmd().proc("grep", {"-q", "^CONFIG_SQUASHFS_" + compression.toUpper() + "=y", "/boot/config-" + kernel});
 }
 
 // Adds or removes exclusion to the exclusion string
@@ -182,10 +288,30 @@ bool Settings::checkSnapshotDir() const
 bool Settings::checkTempDir()
 {
     qDebug() << "+++" << __PRETTY_FUNCTION__ << "+++";
-    // Set workdir location if not defined in .conf file, doesn't exist, or not supported partition
-    if (tempDirParent.isEmpty() || !QFile::exists(tempDirParent) || !FileSystemUtils::isOnSupportedPartition(tempDirParent)) {
-        tempDirParent = FileSystemUtils::isOnSupportedPartition(snapshotDir) ? FileSystemUtils::largerFreeSpace("/tmp", "/home", snapshotDir)
-                                                                             : FileSystemUtils::largerFreeSpace("/tmp", "/home");
+    // Set workdir location if not defined in .conf file, doesn't exist, or not supported partition.
+    // When picking a fallback, only consider candidates whose underlying filesystem can hold the
+    // intermediate snapshot artifacts (excludes vfat/ntfs, network mounts, fuse-backed shares, etc.).
+    if (tempDirParent.isEmpty() || !QFile::exists(tempDirParent)
+        || !FileSystemUtils::isOnSupportedPartition(tempDirParent)) {
+        QStringList candidates;
+        for (const QString &candidate : {QStringLiteral("/tmp"), QStringLiteral("/home"), snapshotDir}) {
+            if (candidate.isEmpty() || candidates.contains(candidate)) {
+                continue;
+            }
+            if (!QFile::exists(candidate) || !FileSystemUtils::isOnSupportedPartition(candidate)) {
+                continue;
+            }
+            candidates << candidate;
+        }
+        if (candidates.isEmpty()) {
+            qCritical() << QObject::tr(
+                "No supported filesystem found for the temp directory. Tried /tmp, /home, and the snapshot directory.");
+            return false;
+        }
+        tempDirParent = candidates.takeFirst();
+        for (const QString &candidate : std::as_const(candidates)) {
+            tempDirParent = FileSystemUtils::largerFreeSpace(tempDirParent, candidate);
+        }
     }
     if (tempDirParent == "/home") {
         QString userName = QString::fromUtf8(qgetenv("SUDO_USER")).trimmed();
@@ -225,9 +351,12 @@ bool Settings::checkConfiguration() const
         return false;
     }
 
-    // Check throttle setting
-    if (throttle > 20) {
-        qCritical() << QObject::tr("Invalid throttle setting: %1. Must be between 0 and 20").arg(throttle);
+    // Check throttle setting. 99 matches the range processArgs() already
+    // validates the --throttle CLI value against (and the GUI's spinThrottle,
+    // which relies on QSpinBox's default 0-99 range) -- mksquashfs's -throttle
+    // takes an I/O percentage with no lower cap of its own.
+    if (throttle > 99) {
+        qCritical() << QObject::tr("Invalid throttle setting: %1. Must be between 0 and 99").arg(throttle);
         return false;
     }
 
@@ -262,8 +391,9 @@ bool Settings::checkConfiguration() const
         return false;
     }
 
-    // Check if SQUASHFS is available in kernel
-    if (QProcess::execute("grep", {"-q", "^CONFIG_SQUASHFS=[ym]", "/boot/config-" + kernel}) != 0) {
+    // Check if SQUASHFS is available in kernel (skip on Arch where /boot/config-* is absent)
+    if (!isArch
+        && QProcess::execute("grep", {"-q", "^CONFIG_SQUASHFS=[ym]", "/boot/config-" + kernel}) != 0) {
         qCritical() << QObject::tr("Kernel %1 doesn't support Squashfs").arg(kernel);
         return false;
     }
@@ -431,21 +561,32 @@ QString Settings::getEditor() const
         = QRegularExpression(R"((kate|kwrite|featherpad|code|codium)$)").match(editor).hasMatch();
     const bool isCliEditor = QRegularExpression(R"(nano|vi|vim|nvim|micro|emacs)").match(editor).hasMatch();
 
-    QString elevate = Cmd::elevationTool();
     if (isEditorThatElevates && !isRoot) {
         return editor;
-    } else if (isRoot && isEditorThatElevates) {
-        // Adjust user switch flag based on tool
-        if (elevate.contains("sudo")) {
-            elevate += " -u $(logname)";
-        } else {
-            elevate += " --user $(logname)";
+    }
+
+    // Only elevate when the process itself is already root (CLI run via sudo),
+    // where the target files were created root-owned. In a normal unprivileged
+    // GUI session the files are already owned by the invoking user, so
+    // elevating here would just force an unnecessary pkexec/sudo prompt.
+    QString elevate;
+    if (isRoot) {
+        elevate = Cmd::elevationTool();
+        if (isEditorThatElevates) {
+            // Adjust user switch flag based on tool
+            if (elevate.contains("sudo")) {
+                elevate += " -u $(logname)";
+            } else {
+                elevate += " --user $(logname)";
+            }
         }
     }
+    const QString elevatePrefix = elevate.isEmpty() ? QString() : elevate + " ";
+
     if (isCliEditor) {
-        return "x-terminal-emulator -e " + elevate + " " + editor;
+        return "x-terminal-emulator -e " + elevatePrefix + editor;
     }
-    return elevate + " env DISPLAY=$DISPLAY XAUTHORITY=$XAUTHORITY " + editor;
+    return elevatePrefix + "env DISPLAY=$DISPLAY XAUTHORITY=$XAUTHORITY " + editor;
 }
 
 // Return the size of the snapshot folder in MiB
@@ -524,15 +665,16 @@ void Settings::selectKernel()
                 QString message = QObject::tr("Could not find a usable kernel");
                 QString details = QObject::tr("Searched for kernel files in /boot/ but none were found or accessible.");
                 MessageHandler::showMessage(MessageHandler::Critical, QObject::tr("Error"), message + "\n\n" + details);
-                exit(EXIT_FAILURE);
+                throw std::runtime_error("Could not find a usable kernel");
             }
         }
     }
-    // Check if SQUASHFS is available
-    if (QProcess::execute("grep", {"-q", "^CONFIG_SQUASHFS=[ym]", "/boot/config-" + kernel}) != 0) {
+    // Check if SQUASHFS is available (skip on Arch — kernel config not shipped)
+    if (!isArch
+        && QProcess::execute("grep", {"-q", "^CONFIG_SQUASHFS=[ym]", "/boot/config-" + kernel}) != 0) {
         QString message = QObject::tr("Current kernel doesn't support Squashfs, cannot continue.");
         MessageHandler::showMessage(MessageHandler::Critical, QObject::tr("Error"), message);
-        exit(EXIT_FAILURE);
+        throw std::runtime_error("Current kernel doesn't support Squashfs");
     }
 }
 
@@ -593,10 +735,24 @@ void Settings::setVariables()
         lsbFile.close();
     }
 
-    projectName = lsbRelease.contains("DISTRIB_ID")
-                      ? lsbRelease.value("DISTRIB_ID")
-                      : Cmd().getOut("lsb_release -is");
+    const QString osName = readOsReleaseValue("NAME");
+    const QString osVersionId = readOsReleaseValue("VERSION_ID");
+    const QString osVersionCodename = readOsReleaseValue("VERSION_CODENAME");
+#ifdef ARCH_BUILD
+    isArch = true;
+#else
+    isArch = osName.contains("Arch", Qt::CaseInsensitive);
+#endif
+
+    if (lsbRelease.contains("DISTRIB_ID")) {
+        projectName = lsbRelease.value("DISTRIB_ID");
+    } else if (!osName.isEmpty()) {
+        projectName = osName;
+    } else {
+        projectName = Cmd().getOut("lsb_release -is");
+    }
     projectName.remove('"');
+
     if (!distroVersionFile.isEmpty()) {
         QFile versionFile(distroVersionFile);
         if (versionFile.open(QIODevice::ReadOnly | QIODevice::Text)) {
@@ -604,16 +760,42 @@ void Settings::setVariables()
             versionFile.close();
         }
         distroVersion.remove(QRegularExpression("^" + projectName + "[_-]"));
+    } else if (!osVersionId.isEmpty()) {
+        distroVersion = osVersionId;
     } else {
         distroVersion = Cmd().getOut("lsb_release -rs");
     }
+
+    // MX-on-Arch hybrid: /etc/mx-version contains e.g. "Infinity_Arch"
+    if (distroVersion.contains("Arch")) {
+        const QString baseName = projectName; // "MX"
+        const QStringList parts = distroVersion.split('_');
+        if (parts.size() >= 2) {
+            projectName = baseName + parts[0];     // "MXInfinity" or similar
+            codename = parts[1] + " " + parts[0];  // "Arch Infinity"
+        }
+    }
+
     fullDistroName = projectName + "-" + distroVersion + "_" + QString(x86 ? "386" : "x64");
     releaseDate = QDate::currentDate().toString("MMMM dd, yyyy");
-    codename = lsbRelease.contains("DISTRIB_CODENAME")
-                   ? lsbRelease.value("DISTRIB_CODENAME")
-                   : Cmd().getOut("lsb_release -cs");
-    codename.remove('"');
+
+    if (codename.isEmpty()) {
+        if (lsbRelease.contains("DISTRIB_CODENAME")) {
+            codename = lsbRelease.value("DISTRIB_CODENAME");
+        } else if (!osVersionCodename.isEmpty()) {
+            codename = osVersionCodename;
+        } else if (isArch) {
+            codename = "rolling";
+        } else {
+            codename = Cmd().getOut("lsb_release -cs");
+        }
+        codename.remove('"');
+    }
+
     bootOptions = monthly ? "quiet splasht nosplash" : SystemInfo::readKernelOpts();
+    if (isArch) {
+        bootOptions = ensureCowSpacesize(bootOptions);
+    }
 }
 
 QString Settings::getFilename() const
@@ -639,6 +821,14 @@ quint64 Settings::getLiveRootSpace()
     // rootspaceneeded is the size of the linuxfs file * a compression factor + contents of the rootfs, conservative
     // but fast factors are same as used in live-remaster
 
+    // The MX live layout (/live/config/initrd.out, /live/boot-dev/antiX/linuxfs,
+    // /live/linux) doesn't exist on Arch live media, where SystemInfo::isLive()
+    // also returns true. Return 0 so the caller can fall back to a generic
+    // estimate instead of reading defaults that point at non-existent files.
+    if (!QFileInfo::exists("/live/config/initrd.out") && !QFileInfo::exists("/live/linux")) {
+        return 0;
+    }
+
     // Load some live variables
     QSettings livesettings("/live/config/initrd.out", QSettings::NativeFormat);
     QString sqfile_full = livesettings.value("SQFILE_FULL", "/live/boot-dev/antiX/linuxfs").toString();
@@ -649,9 +839,20 @@ quint64 Settings::getLiveRootSpace()
         sqfile_full = toram_mp + "/" + sqfile_path + "/" + sqfile_name;
     }
 
-    // Get compression factor by reading the linuxfs squasfs file, if available
-    QString linuxfs_compression_type
-        = Cmd().getOut("dd if=" + sqfile_full + " bs=1 skip=20 count=2 status=none 2>/dev/null |od -An -tdI");
+    // Get compression factor by reading the linuxfs squashfs file, if available:
+    // the superblock stores the compression id as a little-endian u16 at offset
+    // 20. Read it directly — sqfile_full comes from live-media config and must
+    // not be interpolated into a shell pipeline (the old dd|od approach).
+    QString linuxfs_compression_type;
+    QFile sqfile(sqfile_full);
+    if (sqfile.open(QIODevice::ReadOnly) && sqfile.seek(20)) {
+        const QByteArray bytes = sqfile.read(2);
+        if (bytes.size() == 2) {
+            const quint16 id = static_cast<quint8>(bytes.at(0))
+                               | (static_cast<quint16>(static_cast<quint8>(bytes.at(1))) << 8);
+            linuxfs_compression_type = QString::number(id);
+        }
+    }
     constexpr quint8 default_factor = 30;
     quint8 c_factor = default_factor;
     // gzip, xz, or lz4
@@ -677,16 +878,27 @@ QString Settings::getUsedSpace()
 {
     constexpr double factor = 1024 * 1024 * 1024;
     QString out = "\n- " + QObject::tr("Used space on / (root): ");
+    bool estimated = false;
     if (live) {
         rootSize = getLiveRootSpace();
-        out += QString::number(static_cast<double>(rootSize) / factor, 'f', 2) + "GiB -- " + QObject::tr("estimated");
-    } else {
+        estimated = true;
+    }
+    // Recalculate every time for installed systems (rootSize is a member that
+    // would otherwise hold stale data across calls); also fall back here when
+    // getLiveRootSpace returned 0 on non-MX live media (e.g. Arch live), still
+    // labeled "estimated" because live root sizing is fundamentally an estimate.
+    if (!live || rootSize == 0) {
         QStorageInfo rootInfo("/");
         rootSize = rootInfo.bytesTotal() - rootInfo.bytesFree();
-        out += QString::number(static_cast<double>(rootSize) / factor, 'f', 2) + "GiB";
     }
+    out += QString::number(static_cast<double>(rootSize) / factor, 'f', 2) + "GiB";
+    if (estimated) {
+        out += " -- " + QObject::tr("estimated");
+    }
+    // isRoot() is true exactly when /home shares the root filesystem — the
+    // separate-partition case (worth reporting) is !isRoot(), not isRoot().
     QStorageInfo homeInfo("/home/");
-    if (homeInfo.isValid() && homeInfo.isRoot()) {
+    if (homeInfo.isValid() && !homeInfo.isRoot()) {
         homeSize = homeInfo.bytesTotal() - homeInfo.bytesFree();
         out.append("\n- " + QObject::tr("Used space on /home: ")
                    + QString::number(static_cast<double>(homeSize) / factor, 'f', 2) + "GiB");
@@ -701,6 +913,11 @@ QString Settings::getUsedSpace()
 int Settings::getDebianVerNum()
 {
     QFile file("/etc/debian_version");
+    if (!file.exists()) {
+        // Non-Debian system (Arch, etc.); return a recent version so callers
+        // gating mksquashfs feature checks behave sensibly.
+        return Release::Bookworm;
+    }
     QStringList list;
     if (file.open(QIODevice::ReadOnly | QIODevice::Text)) {
         QTextStream in(&file);
@@ -708,8 +925,8 @@ int Settings::getDebianVerNum()
         list = line.split('.');
         file.close();
     } else {
-        qCritical() << "Could not open /etc/debian_version:" << file.errorString() << "Assumes Bullseye";
-        return Release::Bullseye;
+        qCritical() << "Could not open /etc/debian_version:" << file.errorString() << "Assumes Bookworm";
+        return Release::Bookworm;
     }
     bool ok = false;
     int ver = list.at(0).toInt(&ok);
@@ -898,9 +1115,10 @@ void Settings::loadConfig()
         qWarning() << QObject::tr("Error reading system configuration file: %1").arg(configFile.fileName());
     }
 
-    // Ensure we use the logged-in user's config location even when running under sudo/root
+    // QSettings' user-scope path was already redirected to the logged-in user's
+    // ~/.config by userConfigPathReady's initializer, before this constructor
+    // body even started running.
     const QString configDir = userConfigBaseDir();
-    QSettings::setPath(QSettings::NativeFormat, QSettings::UserScope, configDir);
     QSettings settingsUser;
     if (settingsUser.status() != QSettings::NoError) {
         qWarning() << QObject::tr("Error accessing user configuration");
@@ -973,6 +1191,14 @@ void Settings::loadConfig()
     makeMd5sum = settingsUser.value("make_md5sum", "no").toString() != "no";
     makeSha512sum = settingsUser.value("make_sha512sum", "no").toString() != "no";
     compression = trimQuotes(settingsUser.value("compression", "zstd").toString());
+    // The CLI path validates --compression in main.cpp; the config file value
+    // was taken on trust. Reject anything outside the supported set so a
+    // malformed value never reaches mksquashfs or the kernel-config probe.
+    static const QStringList allowedCompression {"lz4", "lzo", "gzip", "xz", "zstd"};
+    if (!allowedCompression.contains(compression)) {
+        qWarning().noquote() << QObject::tr("Unsupported compression '%1' in configuration, using zstd.").arg(compression);
+        compression = "zstd";
+    }
     mksqOpt = trimQuotes(settingsUser.value("mksq_opt").toString());
     // edit_boot_menu is now const, initialized in constructor
     tempDirParent = trimQuotes(settingsUser.value("workdir").toString());
@@ -987,7 +1213,14 @@ void Settings::loadConfig()
     }
     cores = storedCores;
 
-    throttle = settingsUser.value("throttle", 0).toUInt();
+    const QVariant throttleValue = settingsUser.value("throttle", 0);
+    uint storedThrottle = throttleValue.toUInt();
+    if (storedThrottle > 99) {
+        qWarning() << QObject::tr("Invalid stored throttle setting (%1). Using 0.").arg(throttleValue.toString());
+        storedThrottle = 0;
+        settingsUser.setValue("throttle", storedThrottle);
+    }
+    throttle = storedThrottle;
     resetAccounts = false;
 }
 
@@ -1015,17 +1248,20 @@ void Settings::otherExclusions()
 
     if (resetAccounts) {
         addRemoveExclusion(true, QStringLiteral("/etc/minstall.conf"));
-        // Exclude /etc/localtime if link and timezone not America/New_York
-        QFileInfo localtimeInfo("/etc/localtime");
-        QFile timezoneFile("/etc/timezone");
-        if (localtimeInfo.isSymLink()) {
-            if (timezoneFile.open(QIODevice::ReadOnly | QIODevice::Text)) {
-                QTextStream in(&timezoneFile);
-                QString timezone = in.readLine();
-                if (timezone != "America/New_York") {
-                    addRemoveExclusion(true, "/etc/localtime");
+        if (!isArch) {
+            // Exclude /etc/localtime if link and timezone not America/New_York.
+            // Skipped on Arch — /etc/timezone is absent and the heuristic doesn't apply.
+            QFileInfo localtimeInfo("/etc/localtime");
+            QFile timezoneFile("/etc/timezone");
+            if (localtimeInfo.isSymLink()) {
+                if (timezoneFile.open(QIODevice::ReadOnly | QIODevice::Text)) {
+                    QTextStream in(&timezoneFile);
+                    QString timezone = in.readLine();
+                    if (timezone != "America/New_York") {
+                        addRemoveExclusion(true, "/etc/localtime");
+                    }
+                    timezoneFile.close();
                 }
-                timezoneFile.close();
             }
         }
     }
@@ -1074,7 +1310,7 @@ void Settings::processArgs(const QCommandLineParser &argParser)
             = QObject::tr("Output file %1 already exists. Please use another file name, or delete the existent file.")
                   .arg(snapshotDir + '/' + snapshotName);
         MessageHandler::showMessage(MessageHandler::Critical, QObject::tr("Error"), message);
-        exit(EXIT_FAILURE);
+        throw std::runtime_error("Output file already exists");
     }
     resetAccounts = argParser.isSet("reset");
     if (resetAccounts) {
@@ -1162,13 +1398,13 @@ void Settings::setMonthlySnapshot(const QCommandLineParser &argParser)
             = QObject::tr("Output file %1 already exists. Please use another file name, or delete the existent file.")
                   .arg(snapshotDir + '/' + snapshotName);
         MessageHandler::showMessage(MessageHandler::Critical, QObject::tr("Error"), message);
-        exit(EXIT_FAILURE);
+        throw std::runtime_error("Output file already exists");
     }
     if (argParser.value("compression").isEmpty()) {
         compression = "zstd";
     }
     resetAccounts = true;
-    bootOptions = "quiet splasht nosplash";
+    bootOptions = isArch ? ensureCowSpacesize("quiet splasht nosplash") : "quiet splasht nosplash";
     excludeAll();
 }
 

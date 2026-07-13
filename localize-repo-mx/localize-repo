@@ -30,8 +30,8 @@ bg_AX_HOST=https://mxlinux.ipacct.com/MX-Packages/antix
 bg_MX_HOST=https://mxlinux.ipacct.com/MX-Packages/mx
 bg_LOCATION="Sofia"
 
-br_AX_HOST=http://mirror.ufam.edu.br/mx/antix
-br_MX_HOST=http://mirror.ufam.edu.br/mx/mx
+br_AX_HOST=http://sft.if.usp.br/mx-workspace/antix
+br_MX_HOST=http://sft.if.usp.br/mx-workspace/mx
 br_LOCATION="Manaus"
 
 ca_AX_HOST=http://mirror.its.dal.ca/mxlinux/antix

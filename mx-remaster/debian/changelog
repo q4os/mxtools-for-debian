@@ -1,3 +1,40 @@
+mx-remaster (26.06.03mx25.1302) stable; urgency=medium
+
+  * Release
+
+ -- Devs <devteam@localdomain>  Mon, 13 Jul 2026 13:05:32 +0200
+
+mx-remaster (26.06.03mx25) mx; urgency=medium
+
+  * when refreshing the boot menu on a mounted live USB, keep the release name
+    already on that USB instead of replacing it with the computer's release name
+
+ -- Adrian <adrian@mxlinux.org>  Sun, 21 Jun 2026 12:24:05 -0400
+
+mx-remaster (26.06.02mx25) mx; urgency=medium
+
+  * after a remaster, the live USB boot menus now show the new release
+    name automatically
+  * new "live-boot-refresh" tool to refresh the release name shown in
+    the live USB boot menus (GRUB, syslinux and isolinux) at any time
+  * add manual pages for the command-line tools
+
+ -- Adrian <adrian@mxlinux.org>  Sat, 13 Jun 2026 21:20:48 -0400
+
+mx-remaster (26.06.01mx25) mx; urgency=medium
+
+  [ live-remaster ]
+  * inject amd/intel microcode into live initrd(s) after remaster
+    if uc-tool (package uc-tool-mx) is available
+  * respect LKU per-vendor flag files to selectively skip vendors:
+    /etc/live-kernel-updater/no-ucode-amd
+    /etc/live-kernel-updater/no-ucode-intel
+  * add --no-ucode[=<list>] option to live-remaster to skip microcode refresh;
+    <list>: amd, intel, or amd,intel (default: both)
+  * add --version option to live-remaster
+
+ -- fehlix <fehlix@mxlinux.org>  Fri, 12 Jun 2026 04:50:00 -0400
+
 mx-remaster (26.05.01mx25) mx; urgency=medium
 
   * change source to . in live-setup papersize test 

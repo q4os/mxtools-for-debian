@@ -1,0 +1,31 @@
+Start testing: Jun 18 22:57 EDT
+----------------------------------------------------------
+1/1 Testing: mx-conky-tests
+1/1 Test: mx-conky-tests
+Command: "/home/adrian/Sync/programs/qt/mx-conky/build-tests/mx-conky-tests"
+Directory: /home/adrian/Sync/programs/qt/mx-conky/build-tests
+"mx-conky-tests" start time: Jun 18 22:57 EDT
+Output:
+----------------------------------------------------------
+mx-conky unit tests
+  Running: cmd_echo
+echo hello world
+  Running: cmd_exit_code
+true
+false
+  Running: cmd_multiline
+printf 'line1\nline2\n'
+  Running: cmd_untrimmed
+printf '  spaced  \n'
+  Running: cmd_trimmed
+printf '\n  trimmed  \n'
+All tests passed.
+<end of output>
+Test time =   0.02 sec
+----------------------------------------------------------
+Test Passed.
+"mx-conky-tests" end time: Jun 18 22:57 EDT
+"mx-conky-tests" time elapsed: 00:00:00
+----------------------------------------------------------
+
+End testing: Jun 18 22:57 EDT

@@ -125,6 +125,7 @@ set(HEADERS
     src/MainWindow.h
     src/about.h
     src/Clib.h
+    src/constants.h
     src/Crontab.h
     src/CronModel.h
     src/CronView.h

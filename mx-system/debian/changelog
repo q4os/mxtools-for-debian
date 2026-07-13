@@ -1,3 +1,22 @@
+mx-system (26.5.02mx25.1302) stable; urgency=medium
+
+  * Release
+
+ -- Devs <devteam@localdomain>  Mon, 13 Jul 2026 13:05:35 +0200
+
+mx-system (26.5.02mx25) mx; urgency=medium
+
+  * add mx25.1 missing string change
+  * adjust strings for updaters from mx23.x
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 25 May 2026 14:24:45 -0400
+
+mx-system (26.5.01mx25) mx; urgency=medium
+
+  * mx25.2 strings
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 10 May 2026 22:15:41 -0400
+
 mx-system (26.1.03mx25) mx; urgency=medium
 
   * remove exec from update-grub line

@@ -1,20 +1,14 @@
 #!/bin/bash
 
-# Root level functions requiring password for mx-packageinstaller
+# Root level functions requiring authentication for mx-packageinstaller
 
-apt_update() {
-    apt-get update -o=Dpkg::Use-Pty=0 -o Acquire::http:Timeout=10 -o Acquire::https:Timeout=10 -o Acquire::ftp:Timeout=10
-}
-
-cleanup_temp() {
-    rm /etc/apt/sources.list.d/mxpitemp.list
-}
-
-copy_log() {
-    echo -e "-----------------------------------------------------------\nMXPI SESSION\n-----------------------------------------------------------\n" >> /var/log/mxpi.log.old
-    cat /var/log/mxpi.log >> /var/log/mxpi.log.old
-    mv /tmp/mxpi.log /var/log
-}
+if [[ $# -ge 2 && "$1" == "--marker" ]]; then
+    marker="$2"
+    if [[ "$marker" =~ ^/run/user/[0-9]+/mx-pkg-helper-[0-9A-Fa-f]+\.marker$ || "$marker" =~ ^/tmp/mx-pkg-helper-[0-9A-Fa-f]+\.marker$ ]]; then
+        : > "$marker"
+    fi
+    shift 2
+fi
 
 flatpak_add_repos() {
     flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
@@ -26,18 +20,75 @@ flatpak_add_repos_user() {
     flatpak --user remote-add --if-not-exists --subset=verified flathub-verified https://flathub.org/repo/flathub.flatpakrepo
 }
 
+snapd_add_session_paths() {
+    local profile="/etc/profile.d/mx-packageinstaller-snap.sh"
+
+    echo "Configuring snap session paths..."
+    if ! install -d -m 755 /etc/profile.d; then
+        echo "warning: could not create /etc/profile.d"
+        return 0
+    fi
+
+    cat > "$profile" <<'EOF'
+# shellcheck shell=sh
+
+# Snap requires systemd (snapd runs as a systemd service). MX can boot the same
+# install with another init system (e.g. sysvinit), where snapd is not running and
+# snaps are not mounted. This file is sourced at every login regardless of init, so
+# only add the Snap paths when systemd is the running init -- otherwise we would just
+# pollute PATH with a dead /snap/bin and add a non-existent XDG data dir.
+if [ -d /run/systemd/system ]; then
+    # Add Snap application commands and desktop launchers for future login sessions.
+    snap_bin_path="/snap/bin"
+    if [ -z "${PATH:-}" ]; then
+        export PATH="${snap_bin_path}"
+    else
+        case ":${PATH}:" in
+            *:"${snap_bin_path}":*) ;;
+            *) export PATH="${PATH}:${snap_bin_path}" ;;
+        esac
+    fi
+
+    if [ -z "${XDG_DATA_DIRS:-}" ]; then
+        export XDG_DATA_DIRS="/usr/local/share:/usr/share"
+    fi
+
+    snap_xdg_path="/var/lib/snapd/desktop"
+    case ":${XDG_DATA_DIRS}:" in
+        *:"${snap_xdg_path}":*) ;;
+        *) export XDG_DATA_DIRS="${XDG_DATA_DIRS}:${snap_xdg_path}" ;;
+    esac
+fi
+EOF
+    chmod 644 "$profile" || echo "warning: could not set permissions on $profile"
+}
+
+snapd_setup() {
+    # Enable and start the snapd service (and its socket/apparmor units when present)
+    echo "Enabling snapd service..."
+    systemctl enable --now snapd.socket || echo "warning: could not enable snapd.socket"
+    systemctl enable --now snapd.apparmor 2>/dev/null
+    systemctl enable --now snapd || echo "warning: could not enable snapd.service"
+    # Classic snap support relies on /snap pointing at snapd's mount root
+    [ -e /snap ] || ln -s /var/lib/snapd/snap /snap 2>/dev/null
+    # The application waits for snapd to finish seeding (snap wait system seed.loaded)
+    # before it installs the core snap, so there is no need to also wait here.
+    snapd_add_session_paths
+}
+
 main() {
 case "$1" in
-    apt_update)
-        apt_update;;
-    copy_log)
-        copy_log;;
-    cleanup_temp)
-        cleanup_temp;;
     flatpak_add_repos)
         flatpak_add_repos;;
     flatpak_add_repos_user)
         flatpak_add_repos_user;;
+    snapd_setup)
+        snapd_setup;;
+    snapd_add_session_paths)
+        snapd_add_session_paths;;
+    *)
+        echo "mxpi-lib: unknown action '$1'" >&2
+        exit 1;;
 esac
 }
 

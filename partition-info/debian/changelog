@@ -1,3 +1,9 @@
+partition-info (1.12mx25.1302) stable; urgency=medium
+
+  * Release
+
+ -- Devs <devteam@localdomain>  Mon, 13 Jul 2026 13:05:37 +0200
+
 partition-info (1.12mx25) mx; urgency=medium
 
   * move out of sbin

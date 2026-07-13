@@ -1,0 +1,21 @@
+.TH ID_VERSION 1 "June 2026" "mx-remaster" "User Commands"
+.SH NAME
+id_version \- generate a simple version-style identifier string
+.SH SYNOPSIS
+.B id_version
+.SH DESCRIPTION
+.B id_version
+prints a randomly generated identifier in a version-like form.
+The output consists of the literal prefix
+.B ====
+followed by two random hexadecimal strings.
+It is a small helper used by the remaster and version-file workflows when a
+unique-looking identifier is needed.
+.SH OPTIONS
+.B id_version
+accepts no options.
+.SH SEE ALSO
+.BR live-remaster (1),
+.BR installed-to-live (1)
+.SH AUTHOR
+mx-remaster maintainers

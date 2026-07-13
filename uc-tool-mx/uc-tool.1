@@ -1,0 +1,152 @@
+.TH UC-TOOL 1 "@VERSION_DATE@" "Version @VERSION@" "antiX/MX Documentation"
+.SH NAME
+uc-tool \- generate CPU microcode CPIO images and manage initrd
+.SH SYNOPSIS
+.B uc-tool
+[\fI\,options\/\fR]
+.SH DESCRIPTION
+Generate microcode early CPIO images from system firmware into \fB\-d\fR <dir>.
+Optionally update an existing initrd in\-place with the new images (\fB\-i\fR).
+.SH OPTIONS
+.TP
+\fB\-u\fR  \fB\-\-ucode=\fR<list>
+Vendors to build: amd, intel, or amd,intel
+[default: amd,intel]
+.TP
+\fB\-d\fR  \fB\-\-directory=\fR<dir>
+Directory for .img files (generate/extract output)
+or sections to repack (repack input)
+.TP
+\fB\-D\fR  \fB\-\-default\fR
+Set directory and initrd from current boot mode:
+.RS
+.PD 0
+.TP 4
+live:
+.RS
+.TP 12
+\fIinitrd\fR
+/live/boot\-dev/antiX/initrd.gz
+.TP 12
+\fIdir\fR
+\&./initrd.gz.D
+.RE
+.TP 4
+installed:
+.RS
+.TP 12
+\fIinitrd\fR
+/boot/initrd.img\-<kver>
+.TP 12
+\fIdir\fR
+\&./initrd.img\-<kver>.D
+.RE
+.PD
+.RE
+Explicit \fB\-d\fR or \fB\-i\fR always overrides \fB\-D\fR.
+.TP
+\fB\-\-amd\-dir=\fR<dir>
+AMD firmware source  [default: /lib/firmware/amd\-ucode]
+.TP
+\fB\-\-intel\-dir=\fR<dir>
+Intel firmware source [default: /lib/firmware/intel\-ucode]
+.TP
+\fB\-F\fR  \fB\-\-firmware=\fR<path>
+Firmware base: directory (auto\-sets amd\-ucode/ and
+intel\-ucode/ sub\-dirs) or squashfs image (auto\-mounted)
+.TP
+\fB\-i\fR  \fB\-\-initrd=\fR<file>
+Update this initrd in\-place:
+strip old ucode CPIOs, prepend new ones,
+refresh <initrd>.md5 if present,
+run e4defrag if on ext4
+.TP
+\fB\-k\fR  \fB\-\-keep\fR
+Keep generated .img files when using a temp dir
+(only meaningful when \fB\-i\fR is given without \fB\-d\fR)
+.TP
+\fB\-S\fR  \fB\-\-strip\fR
+Strip ucode CPIOs from \fB\-i\fR <initrd> without adding new
+ones; other preamble sections are kept intact
+.TP
+\fB\-H\fR  \fB\-\-has\-ucode\fR
+Check if \fB\-i\fR <initrd> contains ucode CPIOs;
+exits 0=found, 1=none  (no writes)
+.TP
+\fB\-x\fR, \fB\-\-extract\fR[=\fIucode\fR|\fIall\fR|\fIunpack\fR]
+Extract initrd sections to \fB\-d\fR \fIdir\fR (must be empty or new).
+.RS
+.PD 0
+.TP 14
+\fBucode\fR
+ucode CPIOs only (default)
+.TP
+\fBall\fR
+all sections as raw files
+.TP
+\fBunpack\fR
+all sections + unpack each into \fIname\fB.D/\fR
+.PD
+.RE
+.TP
+\fB\-l\fR, \fB\-\-list\fR[=\fIucode\fR|\fIall\fR|\fIunpack\fR]
+List initrd sections (no files written).
+.RS
+.PD 0
+.TP 14
+\fBucode\fR
+ucode CPIOs only \(em vendor, size, files inside (default)
+.TP
+\fBall\fR
+all sections \(em name, size, compression type
+.TP
+\fBunpack\fR
+all sections + list files inside each
+.PD
+.RE
+.TP
+\fB\-\-repack\fR=\fIdir\fR
+Repack sections from \fIdir\fR back into \fB\-i\fR \fIinitrd\fR;
+uses \fIname\fB.D/\fR if it exists, else the raw file
+.TP
+\fB\-h\fR  \fB\-\-help\fR
+Show this usage
+.TP
+\fB\-n\fR  \fB\-\-no\-color\fR
+Suppress ANSI color codes in output (useful in scripts or log files)
+.TP
+\fB\-q\fR  \fB\-\-quiet\fR
+Suppress all progress output; only fatal errors are shown
+.TP
+\fB\-s\fR  \fB\-\-silent\fR
+Only show error messages
+.TP
+\fB\-V\fR  \fB\-\-verbose\fR
+Show commands as they run
+.TP
+\fB\-v\fR  \fB\-\-version\fR
+Show version and exit
+.SH EXAMPLES
+.TP
+\fBuc\-tool \-i /live/boot-dev/antiX/initrd.gz\fR
+Update the live USB initrd in\-place with AMD and Intel microcode
+from the running system's firmware.
+.TP
+\fBuc\-tool \-F /live/linux/lib/firmware \-i /live/boot\-dev/antiX/initrd.gz\fR
+Same, but take the firmware from the live squashfs image rather than
+the running system (useful when the squashfs carries a different
+firmware set).
+.TP
+\fBuc\-tool \-l all \-i /live/boot\-dev/antiX/initrd.gz\fR
+List all sections of the live USB initrd \(em names, sizes, and compression.
+No files are written.
+.TP
+\fBuc\-tool \-H \-i /live/boot\-dev/antiX/initrd.gz\fR
+Check whether the initrd already contains microcode CPIOs.
+Exits 0 if found, 1 if not.  No files are written.
+.TP
+\fBuc\-tool \-S \-i /live/boot\-dev/antiX/initrd.gz\fR
+Strip any existing microcode CPIOs from the initrd without
+adding new ones.
+.SH AUTHORS
+MX Linux development team

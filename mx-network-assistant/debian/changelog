@@ -1,3 +1,9 @@
+mx-network-assistant (26.03.1302) stable; urgency=medium
+
+  * Release
+
+ -- Devs <devteam@localdomain>  Mon, 13 Jul 2026 13:05:32 +0200
+
 mx-network-assistant (26.03) mx; urgency=medium
 
   * Replace the shell helper with a compiled helper for privileged actions.

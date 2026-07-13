@@ -1,0 +1,28 @@
+Source: uc-tool-mx
+Section: utils
+Priority: optional
+Maintainer: fehlix <fehlix@mxlinux.org>
+Build-Depends: debhelper-compat (= 13)
+Standards-Version: 4.6.2
+Homepage: http://mxlinux.org
+
+Package: uc-tool-mx
+Architecture: all
+Depends: ${misc:Depends},
+ cpio,
+ coreutils,
+ findutils,
+ mount,
+ iucode-tool
+Suggests: bash-completion
+Description: Generate and inject AMD/Intel microcode CPIO images into initrd
+ uc-tool builds early-boot CPU microcode CPIO images directly from
+ system firmware directories (or a squashfs firmware image) and optionally
+ updates an existing initrd in-place: strips any old leading microcode CPIOs,
+ prepends the newly built ones, refreshes the .md5 sidecar file if present,
+ and runs e4defrag on ext4 targets.
+ .
+ Supports AMD microcode (sorted concatenation of firmware blobs into
+ AuthenticAMD.bin) and Intel microcode (via iucode_tool). Additional
+ modes allow stripping microcode from an initrd without replacing it, and
+ probing whether microcode is already present (useful for scripted workflows).

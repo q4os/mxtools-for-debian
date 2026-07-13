@@ -2,8 +2,8 @@ Source: mx-packageinstaller-pkglist
 Section: admin
 Priority: optional
 Maintainer: Dolphin Oracle <dolphinoracle@gmail.com>
-Build-Depends: debhelper (>=12),
-Standards-Version: 3.9.5
+Build-Depends: debhelper-compat (= 12),
+Standards-Version: 4.5.1
 Vcs-Git: git://github.com/MX-Linux/mx-packageinstaller-pkglist
 
 Package: mx-packageinstaller-pkglist

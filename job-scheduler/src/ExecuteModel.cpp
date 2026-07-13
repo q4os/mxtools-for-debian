@@ -81,80 +81,37 @@ void ExecuteModel::sort(int column, Qt::SortOrder order)
     doSort();
 }
 
-bool ltExeTime(Execute *e1, Execute *e2)
-{
-    return e1->exeTime < e2->exeTime;
-}
-bool ltCronTime(Execute *e1, Execute *e2)
-{
-    return e1->tCommands->time < e2->tCommands->time;
-}
-bool ltUser(Execute *e1, Execute *e2)
-{
-    return e1->tCommands->user < e2->tCommands->user;
-}
-bool ltCommand(Execute *e1, Execute *e2)
-{
-    return e1->tCommands->command < e2->tCommands->command;
-}
-bool gtExeTime(Execute *e1, Execute *e2)
-{
-    return e1->exeTime > e2->exeTime;
-}
-bool gtCronTime(Execute *e1, Execute *e2)
-{
-    return e1->tCommands->time > e2->tCommands->time;
-}
-bool gtUser(Execute *e1, Execute *e2)
-{
-    return e1->tCommands->user > e2->tCommands->user;
-}
-bool gtCommand(Execute *e1, Execute *e2)
-{
-    return e1->tCommands->command > e2->tCommands->command;
-}
-
 void ExecuteModel::doSort()
 {
-    bool (*cmp)(Execute *e1, Execute *e2) {nullptr};
-    if (sortOrder == Qt::AscendingOrder) {
-        switch (sortColumn) {
-        case Col::ExeTime:
-            cmp = ltExeTime;
-            break;
-        case Col::CronTime:
-            cmp = ltCronTime;
-            break;
-        case Col::User:
-            cmp = ltUser;
-            break;
-        case Col::Command:
-            cmp = ltCommand;
-            break;
-        default:
-            return;
-        }
-    } else {
-        switch (sortColumn) {
-        case Col::ExeTime:
-            cmp = gtExeTime;
-            break;
-        case Col::CronTime:
-            cmp = gtCronTime;
-            break;
-        case Col::User:
-            cmp = gtUser;
-            break;
-        case Col::Command:
-            cmp = gtCommand;
-            break;
-        default:
-            return;
-        }
+    if (sortColumn < Col::ExeTime || sortColumn > Col::Command) {
+        return;
     }
+
     std::sort(executes->begin(), executes->end(),
-              [cmp](const std::unique_ptr<Execute> &lhs, const std::unique_ptr<Execute> &rhs) {
-                  return cmp(lhs.get(), rhs.get());
+              [this](const std::unique_ptr<Execute> &lhs, const std::unique_ptr<Execute> &rhs) {
+                  const QString *lhsVal;
+                  const QString *rhsVal;
+                  switch (sortColumn) {
+                  case Col::ExeTime:
+                      lhsVal = &lhs->exeTime;
+                      rhsVal = &rhs->exeTime;
+                      break;
+                  case Col::CronTime:
+                      lhsVal = &lhs->tCommands->time;
+                      rhsVal = &rhs->tCommands->time;
+                      break;
+                  case Col::User:
+                      lhsVal = &lhs->tCommands->user;
+                      rhsVal = &rhs->tCommands->user;
+                      break;
+                  case Col::Command:
+                      lhsVal = &lhs->tCommands->command;
+                      rhsVal = &rhs->tCommands->command;
+                      break;
+                  default:
+                      return false; // unreachable: sortColumn is range-checked above
+                  }
+                  return (sortOrder == Qt::AscendingOrder) ? (*lhsVal < *rhsVal) : (*lhsVal > *rhsVal);
               });
 
     emit layoutChanged();

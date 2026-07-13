@@ -1,0 +1,27 @@
+# shellcheck shell=sh
+
+#don't do anything unless running systemd
+# Add Snap application commands and desktop launchers for future login sessions.
+#check existing of snap command on system as well
+
+if [ -d /run/systemd/system ] && [ -x /usr/bin/snap ]; then
+	snap_bin_path="/snap/bin"
+	if [ -z "${PATH:-}" ]; then
+	    export PATH="${snap_bin_path}"
+	else
+	    case ":${PATH}:" in
+	        *:"${snap_bin_path}":*) ;;
+	        *) export PATH="${PATH}:${snap_bin_path}" ;;
+	    esac
+	fi
+
+	if [ -z "${XDG_DATA_DIRS:-}" ]; then
+	    export XDG_DATA_DIRS="/usr/local/share:/usr/share"
+	fi
+
+	snap_xdg_path="/var/lib/snapd/desktop"
+	case ":${XDG_DATA_DIRS}:" in
+	    *:"${snap_xdg_path}":*) ;;
+	    *) export XDG_DATA_DIRS="${XDG_DATA_DIRS}:${snap_xdg_path}" ;;
+	esac
+fi

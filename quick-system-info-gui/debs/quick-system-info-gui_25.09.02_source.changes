@@ -1,0 +1,45 @@
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA512
+
+Format: 1.8
+Date: Sun, 28 Sep 2025 10:25:31 -0400
+Source: quick-system-info-gui
+Architecture: source
+Version: 25.09.02
+Distribution: mx
+Urgency: medium
+Maintainer: dolphin oracle <dolphinoracle@gmail.com>
+Changed-By: Dolphin Oracle <dolphinoracle@gmail.com>
+Changes:
+ quick-system-info-gui (25.09.02) mx; urgency=medium
+ .
+   * update translations
+Checksums-Sha1:
+ 47eed23b87d194da8740ef517d44f1bed7ee962c 1626 quick-system-info-gui_25.09.02.dsc
+ 932fa8b74a3309ba262188ae3f1a14d6f08d33f0 291652 quick-system-info-gui_25.09.02.tar.xz
+ 300dbcce1d590b04fce170d38e44ab78c5a6103a 12038 quick-system-info-gui_25.09.02_source.buildinfo
+Checksums-Sha256:
+ 4d35246ef88c8e05d84fe89298c9e90c047bfd3d48b81da0a457ac4c0480544b 1626 quick-system-info-gui_25.09.02.dsc
+ 26feba7411de21ee03cb33a4b3a2176e1f390c7aba925ff3fba05f51955404c7 291652 quick-system-info-gui_25.09.02.tar.xz
+ 9de1af000ee2b4f922e7d5e5560c30fc19a96049ea0cab8108cdce0727b3ca7a 12038 quick-system-info-gui_25.09.02_source.buildinfo
+Files:
+ 67062d4f9cdf6d138b707871444a887d 1626 admin optional quick-system-info-gui_25.09.02.dsc
+ d5d47d19836c8cd5f4d0f74f3bafa22d 291652 admin optional quick-system-info-gui_25.09.02.tar.xz
+ 0c2c5ca9d74ebde25e9267857a9f4e5f 12038 admin optional quick-system-info-gui_25.09.02_source.buildinfo
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCgAdFiEE9i7eqjrnCpyZ2sQYm2ih6Lm2N1wFAmjZRbMACgkQm2ih6Lm2
+N1yf2g/8D6WyMzCi2LjHSehS1qOoX+GDm3WokcLCTQgrQUaq81iLAllnuGkDTQlv
+suX9tzklKAmCxDT7QG/V45moH5rLuQUMIXDYiG59YG6Top1ntCPRuNcHUgr2SZNv
+2AGHHP0KYYYraKhz5bMpW3Cogr7ev4PJqxsU5g2IFmBErBiaBfR886inDdm+YmNI
+K9ISMSUjF2z4jmeoHaXJfGnKiurhdeYPnyozr0gBssFdemixjXh90Iu5XsKtWfUF
+jAoukTv87fy/vWHzMcOSZQTmh2adraqJ+Q+RSH01ES6AW3d1rjP7FpEVapsqDACp
+/0sLnxEDsvGTCgANJHPqReCykd3XONgljsJtA/50seaEmCCd5c9uV5JqoITwqPaK
+rGbRS8/f7wmvsR3a6YY+86AEwApU+HQCfv6jos10r3jQuMa8Q/x2NV6OhUvBq8xh
+LuaSVMpHKRWt/cRIbTe5ShjL30FrcicHyLfUToORl32ScgR2SH3uVdjAACBwZAjX
+EAzOE0hqQY5+PSGqnCyyF7cPd3gKulROINmAlYtUZwUFqmunUzC9KjXHEVFwBop4
+JJaz+fBYf1UmJ8YHy/WxnzCamY2wEB9FUWK3quk53aWgpOUYe0BdIvB99iPebxCI
+X4wRwPZnrKAstaMkGGZKwvbNpzIgJyueVbAUFOL27UXJ/Z/x918=
+=uuyu
+-----END PGP SIGNATURE-----

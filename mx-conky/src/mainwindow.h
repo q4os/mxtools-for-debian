@@ -39,7 +39,6 @@
 #include <QLineEdit>
 #include <QMenu>
 #include <QMenuBar>
-#include <QMovie>
 #include <QPushButton>
 #include <QSettings>
 #include <QSplitter>
@@ -99,7 +98,6 @@ private:
 
     // Loading state widgets
     QLabel *m_loadingLabel;
-    QMovie *m_loadingMovie;
     QStackedWidget *m_stackedWidget;
     QWidget *m_loadingWidget;
     QWidget *m_mainWidget;
@@ -117,4 +115,8 @@ private:
     void setupMainWidget();
     void setupUI();
     void updateControlStates();
+
+    // Shared helpers (extracted from duplicate code)
+    static QString detectEditor();
+    QString copyConkyFromThemes(const QFileInfo &fileInfo, bool forCustomization);
 };

@@ -55,17 +55,22 @@ function(build_compilation_setup target)
 endfunction()
 
 function(build_version_definition target definition)
-	# Get version from debian/changelog
-	execute_process(
-		COMMAND dpkg-parsechangelog -SVersion
-		WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
-		OUTPUT_VARIABLE pkg_version
-		OUTPUT_STRIP_TRAILING_WHITESPACE
-		RESULT_VARIABLE dpkg_result
-	)
-	if((NOT dpkg_result EQUAL 0) OR (pkg_version STREQUAL ""))
-		message(WARNING "Failed to get version from debian/changelog using dpkg-parsechangelog")
-		set(pkg_version "${PROJECT_VERSION}")
+	# Allow version override (e.g. from Arch PKGBUILD)
+	if(DEFINED PROJECT_VERSION_OVERRIDE AND NOT "${PROJECT_VERSION_OVERRIDE}" STREQUAL "")
+		set(pkg_version "${PROJECT_VERSION_OVERRIDE}")
+	else()
+		# Get version from debian/changelog
+		execute_process(
+			COMMAND dpkg-parsechangelog -SVersion
+			WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+			OUTPUT_VARIABLE pkg_version
+			OUTPUT_STRIP_TRAILING_WHITESPACE
+			RESULT_VARIABLE dpkg_result
+		)
+		if((NOT dpkg_result EQUAL 0) OR (pkg_version STREQUAL ""))
+			message(WARNING "Failed to get version from debian/changelog using dpkg-parsechangelog")
+			set(pkg_version "${PROJECT_VERSION}")
+		endif()
 	endif()
 	if(pkg_version STREQUAL "")
 		message(FATAL_ERROR "Cannot add ${definition} compile definition: PROJECT_VERSION empty")

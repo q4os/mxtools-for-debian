@@ -146,7 +146,6 @@ target_link_libraries(mx-conky
 # Set compiler flags
 target_compile_options(mx-conky PRIVATE
     -Wpedantic
-    -pedantic
     -Werror=return-type
     -Werror=switch
     -Werror=uninitialized
@@ -187,6 +186,32 @@ qt6_add_translations(mx-conky
     TS_FILES ${TRANSLATION_FILES}
     LRELEASE_OPTIONS -compress -nounfinished -removeidentical -silent
     QM_FILES_OUTPUT_VARIABLE qm_files
+)
+
+option(BUILD_TESTS "Build unit tests" OFF)
+if(BUILD_TESTS)
+    enable_testing()
+    add_executable(mx-conky-tests
+        tests/test_main.cpp
+        src/cmd.cpp
+    )
+    target_link_libraries(mx-conky-tests
+        Qt6::Core
+    )
+    target_include_directories(mx-conky-tests PRIVATE src)
+    target_compile_options(mx-conky-tests PRIVATE
+        -Wpedantic
+        -Werror=return-type
+        -Werror=switch
+        -Werror=uninitialized
+        -Werror
+    )
+    add_test(NAME mx-conky-tests COMMAND mx-conky-tests)
+endif()
+
+# Install translation files via cmake (avoids obj-* glob in debian/install)
+install(FILES ${qm_files}
+    DESTINATION share/${PROJECT_NAME}/locale
 )
 
 

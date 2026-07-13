@@ -3,7 +3,7 @@ Section: admin
 Priority: optional
 Maintainer: Adrian <adrian@mxlinux.org>
 Build-Depends: debhelper-compat (= 13)
-Standards-Version: 3.9.8
+Standards-Version: 4.5.1
 Vcs-Git: git://github.com/MX-Linux/mx-repo-list
 
 Package: mx-repo-list

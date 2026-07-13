@@ -1,27 +1,37 @@
 #include "cmd.h"
 
+#include "elevationbroker.h"
+
 #include <QCoreApplication>
 #include <QDebug>
 #include <QEventLoop>
 #include <QFile>
+#include <QFileInfo>
 #include <QStringList>
-#include <QTimer>
 
+#include <cstdlib>
 #include <unistd.h>
-
-#include "messagehandler.h"
 
 Cmd::Cmd(QObject *parent)
     : QProcess(parent),
       elevationToolPath {Cmd::elevationTool()},
       helperPath {"/usr/lib/" + QCoreApplication::applicationName() + "/helper"}
 {
-    connect(this, &Cmd::readyReadStandardOutput,
-            [this] { emit outputAvailable(QString::fromLocal8Bit(readAllStandardOutput())); });
-    connect(this, &Cmd::readyReadStandardError,
-            [this] { emit errorAvailable(QString::fromLocal8Bit(readAllStandardError())); });
-    connect(this, &Cmd::outputAvailable, [this](const QString &out) { outBuffer += out; });
-    connect(this, &Cmd::errorAvailable, [this](const QString &out) { outBuffer += out; });
+    // Buffer everything; only emit the public signals when not suppressed.
+    connect(this, &Cmd::readyReadStandardOutput, [this] {
+        const QString out = QString::fromLocal8Bit(readAllStandardOutput());
+        outBuffer += out;
+        if (!suppressOutput) {
+            emit outputAvailable(out);
+        }
+    });
+    connect(this, &Cmd::readyReadStandardError, [this] {
+        const QString out = QString::fromLocal8Bit(readAllStandardError());
+        outBuffer += out;
+        if (!suppressOutput) {
+            emit errorAvailable(out);
+        }
+    });
 }
 
 QString Cmd::elevationTool()
@@ -44,10 +54,13 @@ bool Cmd::isCliMode()
 #ifdef CLI_BUILD
     return true;
 #else
+    if (QCoreApplication::instance() && !QCoreApplication::instance()->inherits("QApplication")) {
+        return true;
+    }
     const auto args = QCoreApplication::arguments();
     const bool forceCliMode = args.contains("--cli") || args.contains("-c") ||
                               args.contains("--help") || args.contains("-h") ||
-                              QCoreApplication::applicationFilePath().contains("cli") ||
+                              QFileInfo(QCoreApplication::applicationFilePath()).baseName().endsWith("cli") ||
                               !qgetenv("MX_SNAPSHOT_CLI").isEmpty();
     const bool noWindowSystem = qgetenv("DISPLAY").isEmpty() && qgetenv("WAYLAND_DISPLAY").isEmpty();
     const QString qpa = QString::fromLocal8Bit(qgetenv("QT_QPA_PLATFORM"));
@@ -95,6 +108,13 @@ QString Cmd::getOutAsRoot(const QString &cmd, const QStringList &args, QuietMode
     return output;
 }
 
+QString Cmd::getOutAsRoot(const QString &cmd, QuietMode quiet)
+{
+    QString output;
+    procAsRoot("bash", {"-c", cmd}, &output, nullptr, quiet);
+    return output;
+}
+
 bool Cmd::helperProc(const QStringList &helperArgs, QString *output, const QByteArray *input, QuietMode quiet)
 {
     if (getuid() != 0 && elevationToolPath.isEmpty()) {
@@ -103,6 +123,51 @@ bool Cmd::helperProc(const QStringList &helperArgs, QString *output, const QByte
         emit errorAvailable(message);
         emit done();
         return false;
+    }
+
+    // Unprivileged: go through the persistent broker so the user authenticates
+    // once — on the first elevated command — instead of once per ~5-minute
+    // auth_admin_keep window (a long mksquashfs always outlives the grant).
+    if (getuid() != 0) {
+        auto &broker = ElevationBroker::instance();
+        switch (broker.ensureStarted(helperPath, elevationToolPath)) {
+        case ElevationBroker::Launch::Denied:
+            handleElevationError();
+            emit done();
+            return false;
+        case ElevationBroker::Launch::Ready: {
+            if (quiet == QuietMode::No) {
+                qDebug() << "helper(serve)" << helperArgs;
+            }
+            outBuffer.clear();
+            const auto sink = [this](const QByteArray &chunk, bool isError) {
+                const QString text = QString::fromLocal8Bit(chunk);
+                outBuffer += text;
+                if (!suppressOutput) {
+                    if (isError) {
+                        emit errorAvailable(text);
+                    } else {
+                        emit outputAvailable(text);
+                    }
+                }
+            };
+            emit started();
+            const int code = broker.execute(
+                helperArgs, input != nullptr ? *input : QByteArray(),
+                [&sink](const QByteArray &chunk) { sink(chunk, false); },
+                [&sink](const QByteArray &chunk) { sink(chunk, true); });
+            if (output != nullptr) {
+                *output = outBuffer.trimmed();
+            }
+            emit done();
+            return code == 0;
+        }
+        case ElevationBroker::Launch::Failed:
+            // No broker (helper missing, exec failure, ...): fall back to the
+            // one-shot per-call elevation below.
+            qWarning() << "Elevation broker unavailable, using per-call elevation";
+            break;
+        }
     }
 
     const QString program = (getuid() == 0) ? helperPath : elevationToolPath;
@@ -136,7 +201,9 @@ bool Cmd::proc(const QString &cmd, const QStringList &args, QString *output, con
 
     QEventLoop loop;
     bool processFinished = false;
-    connect(this, &QProcess::finished, &loop, [&loop, &processFinished](int, QProcess::ExitStatus) {
+    // Track the connection so we can disconnect after this invocation; otherwise
+    // a later QProcess::finished can call into a stale local event loop.
+    const auto conn = connect(this, &QProcess::finished, &loop, [&loop, &processFinished](int, QProcess::ExitStatus) {
         processFinished = true;
         loop.quit();
     });
@@ -149,8 +216,10 @@ bool Cmd::proc(const QString &cmd, const QStringList &args, QString *output, con
             *output = outBuffer.trimmed();
         }
         emit done();
+        disconnect(conn);
         return false;
     }
+    emit started();
     if (input && !input->isEmpty()) {
         write(*input);
     }
@@ -158,6 +227,7 @@ bool Cmd::proc(const QString &cmd, const QStringList &args, QString *output, con
     if (!processFinished) {
         loop.exec();
     }
+    disconnect(conn);
 
     if (output) {
         *output = outBuffer.trimmed();
@@ -172,9 +242,21 @@ bool Cmd::procAsRoot(const QString &cmd, const QStringList &args, QString *outpu
     return proc(cmd, args, output, input, quiet, Elevation::Yes);
 }
 
+bool Cmd::runHelperAction(const QString &action, const QStringList &args, QString *output, QuietMode quiet)
+{
+    QStringList helperArgs {action};
+    helperArgs += args;
+    return helperProc(helperArgs, output, nullptr, quiet);
+}
+
 bool Cmd::run(const QString &cmd, QuietMode quiet)
 {
     return proc("/bin/bash", {"-c", cmd}, nullptr, nullptr, quiet);
+}
+
+bool Cmd::runAsRoot(const QString &cmd, QuietMode quiet)
+{
+    return procAsRoot("bash", {"-c", cmd}, nullptr, nullptr, quiet);
 }
 
 QString Cmd::readAllOutput()
@@ -182,11 +264,23 @@ QString Cmd::readAllOutput()
     return outBuffer.trimmed();
 }
 
+void Cmd::setOutputSuppressed(bool suppressed)
+{
+    suppressOutput = suppressed;
+}
+
+bool Cmd::outputSuppressed() const
+{
+    return suppressOutput;
+}
+
 void Cmd::handleElevationError()
 {
-    MessageHandler::showMessage(MessageHandler::Critical, tr("Administrator Access Required"),
-                                tr("This operation requires administrator privileges. Please restart the "
-                                   "application and enter your password when prompted."));
-    QTimer::singleShot(0, qApp, &QCoreApplication::quit);
-    exit(EXIT_FAILURE);
+    // Do not abort here: record the denial and let the caller decide. A user who
+    // cancels the authentication dialog should land back at the stage that asked
+    // for elevation, not have the application exit under them.
+    s_elevationDenied = true;
+    const QString message = tr("Administrator access was not granted (authentication cancelled or denied).");
+    qWarning().noquote() << message;
+    emit errorAvailable(message + '\n');
 }

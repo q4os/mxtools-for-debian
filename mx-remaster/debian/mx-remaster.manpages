@@ -1,0 +1,13 @@
+debian/man/live-remaster.1
+debian/man/live-setup.1
+debian/man/persist-config.1
+debian/man/persist-makefs.1
+debian/man/persist-save.1
+debian/man/toram-eject.1
+debian/man/live-grubsave.1
+debian/man/installed-to-live.1
+debian/man/run-mksquashfs.1
+debian/man/du-excludes.1
+debian/man/persist-enabled.1
+debian/man/id_version.1
+debian/man/live-boot-refresh.1

@@ -112,6 +112,8 @@ set(SOURCES
     src/models/packagefilterproxy.cpp
     src/models/flatpakmodel.cpp
     src/models/flatpakfilterproxy.cpp
+    src/models/snapmodel.cpp
+    src/models/snapfilterproxy.cpp
     src/models/popularmodel.cpp
     src/models/popularfilterproxy.cpp
 )
@@ -131,11 +133,14 @@ set(HEADERS
     src/remotes.h
     src/about.h
     src/cmd.h
+    src/outputrender.h
     src/packagestatus.h
     src/models/packagemodel.h
     src/models/packagefilterproxy.h
     src/models/flatpakmodel.h
     src/models/flatpakfilterproxy.h
+    src/models/snapmodel.h
+    src/models/snapfilterproxy.h
     src/models/popularmodel.h
     src/models/popularfilterproxy.h
 )
@@ -175,6 +180,7 @@ target_link_libraries(mx-packageinstaller
 target_link_libraries(helper
     Qt6::Core
     Qt6::Xml
+    util
 )
 
 # Set compiler flags

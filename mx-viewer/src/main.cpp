@@ -51,9 +51,17 @@ QPair<uint, uint> getUserIDs()
     }
     proc.start("id", {"-u", logname}, QIODevice::ReadOnly);
     proc.waitForFinished();
+    if (proc.exitCode() != 0) {
+        qDebug() << "Failed to get uid for" << logname << ", dropping privileges to nobody";
+        return {0, 0};
+    }
     id.first = proc.readAllStandardOutput().trimmed().toUInt();
     proc.start("id", {"-g", logname}, QIODevice::ReadOnly);
     proc.waitForFinished();
+    if (proc.exitCode() != 0) {
+        qDebug() << "Failed to get gid for" << logname << ", dropping privileges to nobody";
+        return {0, 0};
+    }
     id.second = proc.readAllStandardOutput().trimmed().toUInt();
     return id;
 }

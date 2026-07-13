@@ -95,7 +95,7 @@ void displayAboutMsgBox(const QString &title, const QString &message, const QStr
 {
     const auto width = 600;
     const auto height = 500;
-    QMessageBox msgBox(QMessageBox::NoIcon, title, message);
+    QMessageBox msgBox(QMessageBox::NoIcon, title, message, QMessageBox::NoButton, qApp->activeWindow());
     auto *btnLicense = msgBox.addButton(QObject::tr("License"), QMessageBox::HelpRole);
     auto *btnChangelog = msgBox.addButton(QObject::tr("Changelog"), QMessageBox::HelpRole);
     auto *btnCancel = msgBox.addButton(QObject::tr("Cancel"), QMessageBox::NoRole);
@@ -112,13 +112,26 @@ void displayAboutMsgBox(const QString &title, const QString &message, const QStr
 
         auto *text = new QTextEdit(changelog);
         text->setReadOnly(true);
-        QProcess proc;
-        proc.start(QStringLiteral("zcat"),
-                   {QStringLiteral("/usr/share/doc/") + QFileInfo(QCoreApplication::applicationFilePath()).fileName()
-                    + QStringLiteral("/changelog.gz")},
-                   QIODevice::ReadOnly);
-        proc.waitForFinished();
-        text->setText(proc.readAllStandardOutput());
+        const QString changelogPath = QStringLiteral("/usr/share/doc/")
+            + QFileInfo(QCoreApplication::applicationFilePath()).fileName()
+            + QStringLiteral("/changelog.gz");
+        if (QFileInfo::exists(changelogPath)) {
+            QProcess proc;
+            proc.start(QStringLiteral("zcat"), {changelogPath}, QIODevice::ReadOnly);
+            if (!proc.waitForFinished(5000)) {
+                proc.kill();
+                proc.waitForFinished(1000);
+                text->setText(QObject::tr("Could not load changelog."));
+            } else if (proc.exitStatus() != QProcess::NormalExit || proc.exitCode() != 0) {
+                const QString error = QString::fromUtf8(proc.readAllStandardError()).trimmed();
+                text->setText(error.isEmpty() ? QObject::tr("Could not load changelog.")
+                                              : QObject::tr("Could not load changelog:\n%1").arg(error));
+            } else {
+                text->setText(QString::fromUtf8(proc.readAllStandardOutput()));
+            }
+        } else {
+            text->setText(QObject::tr("Changelog not found."));
+        }
 
         auto *btnClose = new QPushButton(QObject::tr("&Close"), changelog);
         btnClose->setIcon(QIcon::fromTheme(QStringLiteral("window-close")));

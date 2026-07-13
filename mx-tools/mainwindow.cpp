@@ -20,6 +20,8 @@
  * along with MX Tools.  If not, see <http://www.gnu.org/licenses/>.
  **********************************************************************/
 
+#include <algorithm>
+
 #include <QDebug>
 #include <QDir>
 #include <QDirIterator>
@@ -61,6 +63,12 @@ QStringList currentDesktopNames()
 {
     QStringList desktops = QString::fromUtf8(qgetenv("XDG_CURRENT_DESKTOP")).split(QLatin1Char(':'),
                                                                                     Qt::SkipEmptyParts);
+    if (desktops.isEmpty()) {
+        const QString sessionDesktop = QString::fromUtf8(qgetenv("XDG_SESSION_DESKTOP")).trimmed();
+        if (!sessionDesktop.isEmpty()) {
+            desktops.append(sessionDesktop);
+        }
+    }
     for (QString &desktop : desktops) {
         desktop = desktop.trimmed().toUpper();
     }
@@ -123,11 +131,13 @@ MainWindow::MainWindow(QWidget *parent)
     setWindowFlags(Qt::Window); // Enables the close, min, and max buttons
     checkHideToolsInMenu();
     initializeCategoryLists();
+    populateCategoryMap(&menu_category_map);
     filterLiveEnvironmentItems();
     filterDesktopEnvironmentItems();
-    populateCategoryMap();
+    populateCategoryMap(&category_map);
     readInfo(category_map);
     iconSize = settings.value("icon_size", iconSize).toInt();
+    updateLayoutMetrics();
     addButtons(info_map);
     ui->textSearch->setFocus();
     restoreWindowGeometry();
@@ -168,7 +178,9 @@ void MainWindow::checkHideToolsInMenu()
 void MainWindow::initializeCategoryLists()
 {
     for (auto it = categories.cbegin(); it != categories.cend(); ++it) {
-        *(it.value()) = listDesktopFiles(it.key(), APPLICATIONS_PATH);
+        QStringList tokens {it.key()};
+        tokens += categoryAliases.value(it.key());
+        *(it.value()) = listDesktopFiles(tokens, APPLICATIONS_PATH);
     }
 }
 
@@ -194,10 +206,11 @@ void MainWindow::filterDesktopEnvironmentItems()
     }
 }
 
-void MainWindow::populateCategoryMap()
+void MainWindow::populateCategoryMap(CategoryFileMap *categoryMap)
 {
+    categoryMap->clear();
     for (auto it = categories.cbegin(); it != categories.cend(); ++it) {
-        category_map.insert(it.key(), *(it.value()));
+        categoryMap->insert(it.key(), *(it.value()));
     }
 }
 
@@ -212,8 +225,8 @@ void MainWindow::restoreWindowGeometry()
     }
 }
 
-// List .desktop files that contain a specific string
-QStringList MainWindow::listDesktopFiles(const QString &searchString, const QString &location)
+// List .desktop files whose Categories= line contains any of the given category tokens.
+QStringList MainWindow::listDesktopFiles(const QStringList &categoryTokens, const QString &location)
 {
     QDirIterator it(location, {"*.desktop"}, QDir::Files, QDirIterator::Subdirectories);
     QStringList matchingFiles;
@@ -227,41 +240,50 @@ QStringList MainWindow::listDesktopFiles(const QString &searchString, const QStr
 
         QTextStream stream(&file);
         while (!stream.atEnd()) {
-            if (stream.readLine().contains(searchString)) {
-                matchingFiles << filePath;
-                break;
+            const QString line = stream.readLine();
+            if (!line.startsWith(QLatin1String("Categories="))) {
+                continue;
             }
+            // Match each category as an exact ;-separated token, not a loose substring,
+            // so it can only come from Categories= and won't partial-match other tokens.
+            const QStringList categories =
+                line.mid(line.indexOf(QLatin1Char('=')) + 1).split(QLatin1Char(';'), Qt::SkipEmptyParts);
+            if (std::any_of(categoryTokens.cbegin(), categoryTokens.cend(),
+                            [&categories](const QString &token) { return categories.contains(token); })) {
+                matchingFiles << filePath;
+            }
+            break; // only one Categories line per desktop file
         }
     }
     return matchingFiles;
 }
 
-int MainWindow::calculateMaxElements(const CategoryToolsMap &infoMap)
+// Recompute layout metrics derived from the full info_map: the largest category size
+// (maxElements) and the widest button (cachedMaxButtonWidth). These only change when
+// info_map or the application font changes, so this is called at init and on font change
+// rather than on every relayout.
+void MainWindow::updateLayoutMetrics()
 {
+    constexpr int buttonPadding = 16;   // left/right padding inside button
+    constexpr int iconTextSpacing = 8;  // gap between icon and text
+
     maxElements = 0;
-    // Find maximum number of elements across all categories
-    for (const auto &categoryTools : infoMap) {
+    int widestText = 0;
+    const QFontMetrics fm(QApplication::font());
+    for (const auto &categoryTools : std::as_const(info_map)) {
         maxElements = std::max(maxElements, static_cast<int>(categoryTools.size()));
-    }
-
-    // Only recalculate button width if not cached (expensive operation)
-    if (cachedMaxButtonWidth == 0) {
-        const QFontMetrics fm(QApplication::font());
-        constexpr int buttonPadding = 16; // Left/right padding inside button
-
-        // Check ALL categories for the widest button text
-        for (const auto &categoryTools : infoMap) {
-            for (const auto &toolInfo : categoryTools) {
-                const int textWidth = fm.horizontalAdvance(toolInfo.name);
-                cachedMaxButtonWidth = std::max(cachedMaxButtonWidth, textWidth);
-            }
+        for (const auto &toolInfo : categoryTools) {
+            widestText = std::max(widestText, fm.horizontalAdvance(toolInfo.name));
         }
-        // Add icon size, spacing between icon and text, and button padding
-        cachedMaxButtonWidth += iconSize + 8 + buttonPadding;
     }
+    cachedMaxButtonWidth = widestText + iconSize + iconTextSpacing + buttonPadding;
+}
 
-    // Calculate maximum columns that fit in window width
-    return std::max(1, width() / cachedMaxButtonWidth);
+// Number of button columns that fit in the current window width.
+int MainWindow::columnsForWidth() const
+{
+    const int buttonWidth = cachedMaxButtonWidth > 0 ? cachedMaxButtonWidth : 200;
+    return std::max(1, width() / buttonWidth);
 }
 
 // Load info (name, comment, exec, iconName, category, terminal) to the info_map
@@ -297,10 +319,14 @@ void MainWindow::readInfo(const CategoryFileMap &categoryMap)
             QString name = lang != enLang ? getTranslation(text, nameKey, langRegion, lang) : QString();
             QString comment = lang != enLang ? getTranslation(text, commentKey, langRegion, lang) : QString();
 
-            name = name.isEmpty() ? getValueFromText(text, nameKey)
-                                        .remove(QRegularExpression(QStringLiteral("^MX ")))
-                                        .replace(QStringLiteral("&"), QStringLiteral("&&"))
-                                  : name;
+            if (name.isEmpty()) {
+                name = getValueFromText(text, nameKey);
+            }
+            // Apply display fixups to both translated and English names: drop the
+            // redundant "MX " prefix and escape "&" so it isn't treated as a button mnemonic.
+            static const QRegularExpression mxPrefixRegex(QStringLiteral("^MX "));
+            name = name.remove(mxPrefixRegex).replace(QStringLiteral("&"), QStringLiteral("&&"));
+
             comment = comment.isEmpty() ? getValueFromText(text, commentKey) : comment;
 
             QString exec = getValueFromText(text, execKey);
@@ -377,7 +403,7 @@ void MainWindow::addButtons(const CategoryToolsMap &infoMap)
 {
     clearGrid();
 
-    const int max_columns = calculateMaxElements(infoMap);
+    const int max_columns = columnsForWidth();
     int row = 0;
     int actualMaxCol = 0;
     bool addedWidgets = false;
@@ -460,68 +486,38 @@ FlatButton *MainWindow::createButton(const ToolInfo &toolInfo)
     return btn;
 }
 
-QIcon MainWindow::findIcon(const QString &iconName)
+// Locate an icon by name without any default fallback. Returns nullopt if nothing matched.
+std::optional<QIcon> MainWindow::lookupIcon(const QString &iconName)
 {
-    static QHash<QString, QIcon> iconCache;
-    static QIcon defaultIcon;
-    static bool defaultIconLoaded = false;
-    static bool resolvingDefault = false;
-
-    if (iconName.isEmpty()) {
-        if (!defaultIconLoaded) {
-            resolvingDefault = true;
-            defaultIcon = findIcon(DEFAULT_ICON_NAME);
-            defaultIconLoaded = true;
-            resolvingDefault = false;
-        }
-        return defaultIcon;
-    }
-
-    // Check cache first
-    auto cacheIt = iconCache.find(iconName);
-    if (cacheIt != iconCache.end()) {
-        return *cacheIt;
-    }
-
-    // Check if the icon name is an absolute path and exists
+    // Absolute path to an existing file.
     if (QFileInfo(iconName).isAbsolute() && QFile::exists(iconName)) {
-        QIcon icon(iconName);
-        iconCache.insert(iconName, icon);
-        return icon;
+        return QIcon(iconName);
     }
 
-    // Prepare regular expression to strip extension
-    static const QRegularExpression re(R"(\.(png|svg|xpm)$)");
+    static const QRegularExpression extRe(R"(\.(png|svg|xpm)$)");
     QString nameNoExt = iconName;
-    nameNoExt.remove(re);
+    nameNoExt.remove(extRe);
 
-    // Return the themed icon if available
+    // Themed icon.
     if (QIcon::hasThemeIcon(nameNoExt)) {
-        QIcon icon = QIcon::fromTheme(nameNoExt);
-        iconCache.insert(iconName, icon);
-        return icon;
+        return QIcon::fromTheme(nameNoExt);
     }
 
-    // Define common search paths for icons
-    QStringList searchPaths {QDir::homePath() + HOME_SHARE_ICONS_PATH,
-                             PIXMAPS_PATH,
-                             LOCAL_SHARE_ICONS_PATH,
-                             SHARE_ICONS_PATH,
-                             HICOLOR_SCALABLE_PATH,
-                             HICOLOR_48_PATH,
-                             ADWAITA_PATH};
+    const QStringList searchPaths {QDir::homePath() + HOME_SHARE_ICONS_PATH,
+                                   PIXMAPS_PATH,
+                                   LOCAL_SHARE_ICONS_PATH,
+                                   SHARE_ICONS_PATH,
+                                   HICOLOR_SCALABLE_PATH,
+                                   HICOLOR_48_PATH,
+                                   ADWAITA_PATH};
 
-    // Optimization: search first for the full iconName with the specified extension
-    auto it = std::ranges::find_if(searchPaths, [&](const QString &path) {
-        return QFile::exists(path + iconName);
-    });
+    // First try the full iconName (with its extension, if any) under each path.
+    auto it = std::ranges::find_if(searchPaths, [&](const QString &path) { return QFile::exists(path + iconName); });
     if (it != searchPaths.cend()) {
-        QIcon icon(*it + iconName);
-        iconCache.insert(iconName, icon);
-        return icon;
+        return QIcon(*it + iconName);
     }
 
-    // Search for the icon without extension in the specified paths
+    // Then try the extensionless name with each known extension.
     for (const QString &path : searchPaths) {
         if (!QFile::exists(path)) {
             continue;
@@ -529,38 +525,37 @@ QIcon MainWindow::findIcon(const QString &iconName)
         for (const auto &ext : {QStringLiteral(".png"), QStringLiteral(".svg"), QStringLiteral(".xpm")}) {
             const QString file = path + nameNoExt + ext;
             if (QFile::exists(file)) {
-                QIcon icon(file);
-                iconCache.insert(iconName, icon);
-                return icon;
+                return QIcon(file);
             }
         }
     }
 
-    // If the icon is "utilities-terminal" and not found, return the default icon if it's already loaded
-    if (iconName == DEFAULT_ICON_NAME) {
-        if (!defaultIconLoaded) {
-            defaultIcon = QIcon();
-            defaultIconLoaded = true;
-        }
-        iconCache.insert(iconName, defaultIcon);
-        return defaultIcon;
+    return std::nullopt;
+}
+
+// The shared fallback icon, resolved once. Empty QIcon if even the default cannot be found.
+QIcon MainWindow::defaultIcon()
+{
+    static const QIcon icon = lookupIcon(DEFAULT_ICON_NAME).value_or(QIcon());
+    return icon;
+}
+
+QIcon MainWindow::findIcon(const QString &iconName)
+{
+    static QHash<QString, QIcon> iconCache;
+
+    if (iconName.isEmpty()) {
+        return defaultIcon();
     }
 
-    // If the icon is not "utilities-terminal", try to load the default icon
-    if (!defaultIconLoaded) {
-        if (!resolvingDefault) {
-            resolvingDefault = true;
-            defaultIcon = findIcon(DEFAULT_ICON_NAME);
-            defaultIconLoaded = true;
-            resolvingDefault = false;
-        } else {
-            defaultIcon = QIcon();
-            defaultIconLoaded = true;
-        }
+    auto cacheIt = iconCache.find(iconName);
+    if (cacheIt != iconCache.end()) {
+        return *cacheIt;
     }
 
-    iconCache.insert(iconName, defaultIcon);
-    return defaultIcon;
+    const QIcon icon = lookupIcon(iconName).value_or(defaultIcon());
+    iconCache.insert(iconName, icon);
+    return icon;
 }
 
 void MainWindow::btn_clicked()
@@ -619,21 +614,15 @@ void MainWindow::resizeEvent(QResizeEvent *event)
         return;
     }
 
-    // Fast column calculation using cached button width (avoids full recalculation)
-    const int effectiveWidth = cachedMaxButtonWidth > 0 ? cachedMaxButtonWidth : 200;
-    const int newColCount = std::max(1, width() / effectiveWidth);
+    const int newColCount = columnsForWidth();
 
-    // Early exit: column count unchanged or already at max elements
-    if (newColCount == colCount || (newColCount >= maxElements && colCount == maxElements)) {
+    // Early exit: column count unchanged, or already wide enough to fit the largest
+    // category so extra width cannot add columns. maxElements always reflects the full
+    // info_map (set in updateLayoutMetrics), so this stays correct during an active search.
+    if (newColCount == colCount || (newColCount >= maxElements && colCount >= maxElements)) {
         return;
     }
-
-    // Full recalculation to get exact column count (updates maxElements too)
-    const int exactColCount = calculateMaxElements(info_map);
-    if (colCount == exactColCount) {
-        return;
-    }
-    colCount = exactColCount;
+    colCount = newColCount;
 
     if (ui->textSearch->text().isEmpty()) {
         addButtons(info_map);
@@ -642,14 +631,35 @@ void MainWindow::resizeEvent(QResizeEvent *event)
     }
 }
 
+void MainWindow::changeEvent(QEvent *event)
+{
+    // Button widths depend on the application font, so recompute metrics and relayout.
+    if (event->type() == QEvent::FontChange) {
+        updateLayoutMetrics();
+        colCount = 0; // force addButtons to relayout
+        const QString search = ui->textSearch->text();
+        if (search.isEmpty()) {
+            addButtons(info_map);
+        } else {
+            textSearch_textChanged(search);
+        }
+    }
+    QDialog::changeEvent(event);
+}
+
 // Hide icons in menu checkbox
 void MainWindow::checkHide_clicked(bool checked)
 {
-    for (const QStringList &list : std::as_const(category_map)) {
-        for (const QString &fileName : std::as_const(list)) {
-            hideShowIcon(fileName, checked);
-        }
+    QStringList menuFiles;
+    for (const QStringList &list : std::as_const(menu_category_map)) {
+        menuFiles.append(list);
     }
+    menuFiles.removeDuplicates();
+
+    for (const QString &fileName : std::as_const(menuFiles)) {
+        hideShowIcon(fileName, checked);
+    }
+
     QProcess process;
     process.start("pgrep", {"xfce4-panel"});
     process.waitForFinished();
@@ -672,8 +682,13 @@ void MainWindow::hideShowIcon(const QString &fileName, bool hide)
     if (!hide) {
         QFile::remove(fileNameLocal);
     } else {
-        QFile::copy(fileName, fileNameLocal);
-        
+        // QFile::copy won't overwrite an existing destination, so clear it first.
+        QFile::remove(fileNameLocal);
+        if (!QFile::copy(fileName, fileNameLocal)) {
+            qWarning() << "Failed to copy file:" << fileName << "to" << fileNameLocal;
+            return;
+        }
+
         // Read and modify the file content using Qt APIs
         QFile localFile(fileNameLocal);
         if (!localFile.open(QIODevice::ReadOnly | QIODevice::Text)) {
@@ -683,24 +698,32 @@ void MainWindow::hideShowIcon(const QString &fileName, bool hide)
 
         QTextStream in(&localFile);
         QStringList lines;
-        
+        bool noDisplayAdded = false;
+
         // Process each line
         while (!in.atEnd()) {
             QString line = in.readLine();
-            
+
             // Skip NoDisplay and Hidden lines
             if (line.startsWith(QLatin1String("NoDisplay=")) || line.startsWith(QLatin1String("Hidden="))) {
                 continue;
             }
-            
+
             lines << line;
 
-            // Add NoDisplay=true immediately after Exec line
-            if (line.startsWith(QLatin1String("Exec="))) {
+            // Add NoDisplay=true inside the main group, right after its header. This is more
+            // robust than keying off Exec= (which may be absent or appear in action groups).
+            if (!noDisplayAdded && line.startsWith(QLatin1String("[Desktop Entry]"))) {
                 lines << QLatin1String("NoDisplay=true");
+                noDisplayAdded = true;
             }
         }
         localFile.close();
+
+        // Fallback for files without a recognizable [Desktop Entry] header.
+        if (!noDisplayAdded) {
+            lines << QLatin1String("NoDisplay=true");
+        }
 
         // Write the modified content back
         if (!localFile.open(QIODevice::WriteOnly | QIODevice::Text | QIODevice::Truncate)) {

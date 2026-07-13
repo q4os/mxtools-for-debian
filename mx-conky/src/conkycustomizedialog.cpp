@@ -38,18 +38,7 @@
 
 ConkyCustomizeDialog::ConkyCustomizeDialog(const QString &filePath, QWidget *parent)
     : QDialog(parent),
-      file_name(filePath),
-      capture_lua_color(
-          R"(^(?<before>(.*\]\])?\s*(?<color_item>default_color|color\d)(?:\s*=\s*[\"\']))(?:#?)(?<color_value>[[:alnum:]]+)(?<after>(?:[\"\']).*))"),
-      capture_old_color(
-          R"(^(?<before>\s*(?<color_item>default_color|color\d)(?:\s+))(?:#?)(?<color_value>[[:alnum:]]+)(?<after>.*))"),
-      lua_comment_end(R"(^\s*\]\])"),
-      lua_comment_line(R"(^\s*--)"),
-      lua_comment_start(R"(^\s*--\[\[)"),
-      lua_config(R"(^\s*(conky.config\s*=\s*{))"),
-      lua_format(R"(^\s*(--|conky.config\s*=\s*{|conky.text\s*=\s*{))"),
-      old_comment_line(R"(^\s*#)"),
-      old_format(R"(^\s*#|^TEXT$)")
+      m_fileName(filePath)
 {
     debug = !QProcessEnvironment::systemEnvironment().value("DEBUG").isEmpty();
 
@@ -215,11 +204,11 @@ void ConkyCustomizeDialog::setConnections()
     connect(radioMonthShort, &QRadioButton::clicked, this, &ConkyCustomizeDialog::radioMonthShort_clicked);
     connect(pushDefaultColor, &QToolButton::clicked, this, &ConkyCustomizeDialog::pushDefaultColor_clicked);
 
+    // Connect color buttons using stored member pointers instead of findChild
+    QToolButton *colorBtns[10] = {pushColor0, pushColor1, pushColor2, pushColor3, pushColor4,
+                                   pushColor5, pushColor6, pushColor7, pushColor8, pushColor9};
     for (int i = 0; i < 10; ++i) {
-        auto *colorButton = groupBoxColors->findChild<QToolButton *>(QString("pushColor%1").arg(i));
-        if (colorButton) {
-            connect(colorButton, &QToolButton::clicked, this, [this, i]() { pushColorButton_clicked(i); });
-        }
+        connect(colorBtns[i], &QToolButton::clicked, this, [this, i]() { pushColorButton_clicked(i); });
     }
 
     // New tab connections
@@ -281,9 +270,9 @@ void ConkyCustomizeDialog::setConnections()
     }
 }
 
-bool ConkyCustomizeDialog::readFile(const QString &file_name)
+bool ConkyCustomizeDialog::readFile(const QString &fileName)
 {
-    QFile file(file_name);
+    QFile file(fileName);
     if (!file.open(QIODevice::ReadOnly)) {
         qDebug() << "Could not open file: " << file.fileName();
         return false;
@@ -307,24 +296,24 @@ void ConkyCustomizeDialog::refresh()
     checkConkyRunning();
 
     // Backup the current configuration file
-    QString bakFileName = file_name + ".bak";
+    QString bakFileName = m_fileName + ".bak";
     QFile::remove(bakFileName);
 
     // Try normal copy first, then elevation if needed
-    if (!QFile::copy(file_name, bakFileName)) {
-        QFileInfo fileInfo(file_name);
+    if (!QFile::copy(m_fileName, bakFileName)) {
+        QFileInfo fileInfo(m_fileName);
         QFileInfo dirInfo(fileInfo.absolutePath());
 
         // Check if we need elevation for backup directory
         if (!dirInfo.isWritable()) {
-            if (!copyFileWithElevation(file_name, bakFileName)) {
+            if (!copyFileWithElevation(m_fileName, bakFileName)) {
                 qDebug() << "Failed to create backup file with elevation:" << bakFileName;
             }
         }
     }
 
     // Read the configuration file and parse its content
-    if (readFile(file_name)) {
+    if (readFile(m_fileName)) {
         detectConkyFormat();
         parseContent();
     }
@@ -346,12 +335,12 @@ bool ConkyCustomizeDialog::checkConkyRunning()
 
 void ConkyCustomizeDialog::detectConkyFormat()
 {
-    QRegularExpression lua_format_regexp(lua_format);
-    QRegularExpression old_format_regexp(old_format);
+    static const QRegularExpression lua_format_regexp(lua_format);
+    static const QRegularExpression old_format_regexp(old_format);
     const QStringList list = file_content.split('\n');
 
     if (debug) {
-        qDebug() << "Detecting conky format: " << file_name;
+        qDebug() << "Detecting conky format: " << m_fileName;
     }
 
     conky_format_detected = false;
@@ -361,7 +350,7 @@ void ConkyCustomizeDialog::detectConkyFormat()
             is_lua_format = true;
             conky_format_detected = true;
             if (debug) {
-                qDebug() << "Conky format detected: 'lua-format' in " << file_name;
+                qDebug() << "Conky format detected: 'lua-format' in " << m_fileName;
             }
             return;
         }
@@ -369,7 +358,7 @@ void ConkyCustomizeDialog::detectConkyFormat()
             is_lua_format = false;
             conky_format_detected = true;
             if (debug) {
-                qDebug() << "Conky format detected: 'old-format' in " << file_name;
+                qDebug() << "Conky format detected: 'old-format' in " << m_fileName;
             }
             return;
         }
@@ -378,14 +367,15 @@ void ConkyCustomizeDialog::detectConkyFormat()
 
 void ConkyCustomizeDialog::parseContent()
 {
-    QRegularExpression regexp_color
-        = is_lua_format ? QRegularExpression(capture_lua_color) : QRegularExpression(capture_old_color);
-    QString comment_sep = is_lua_format ? "--" : "#";
+    static const QRegularExpression luaColorRe(capture_lua_color);
+    static const QRegularExpression oldColorRe(capture_old_color);
+    QRegularExpression regexp_color = is_lua_format ? luaColorRe : oldColorRe;
+    QString commentSep = is_lua_format ? "--" : "#";
     bool own_window_hints_found = false;
     const QStringList list = file_content.split('\n', Qt::SkipEmptyParts);
 
     if (debug) {
-        qDebug() << "Parsing content: " + file_name;
+        qDebug() << "Parsing content: " + m_fileName;
     }
 
     bool lua_block_comment = false;
@@ -434,13 +424,13 @@ void ConkyCustomizeDialog::parseContent()
         }
 
         // Comment line
-        if (trow.startsWith(comment_sep)) {
+        if (trow.startsWith(commentSep)) {
             continue;
         }
 
         // Remove inline comments
-        if (trow.contains(comment_sep)) {
-            trow = trow.split(comment_sep).first().trimmed();
+        if (trow.contains(commentSep)) {
+            trow = trow.split(commentSep).first().trimmed();
         }
 
         // Match color lines
@@ -729,9 +719,10 @@ void ConkyCustomizeDialog::pickColor(QWidget *widget)
 
 void ConkyCustomizeDialog::writeColor(QWidget *widget, const QColor &color)
 {
-    QRegularExpression regexp_color
-        = is_lua_format ? QRegularExpression(capture_lua_color) : QRegularExpression(capture_old_color);
-    QString comment_sep = is_lua_format ? "--" : "#";
+    static const QRegularExpression luaColorRe_w(capture_lua_color);
+    static const QRegularExpression oldColorRe_w(capture_old_color);
+    QRegularExpression regexp_color = is_lua_format ? luaColorRe_w : oldColorRe_w;
+    QString commentSep = is_lua_format ? "--" : "#";
 
     QString item_name
         = (widget->objectName() == "widgetDefaultColor")
@@ -793,7 +784,7 @@ void ConkyCustomizeDialog::writeColor(QWidget *widget, const QColor &color)
             }
         }
         // Comment line
-        if (trow.startsWith(comment_sep)) {
+        if (trow.startsWith(commentSep)) {
             new_list << row;
             continue;
         }
@@ -801,15 +792,15 @@ void ConkyCustomizeDialog::writeColor(QWidget *widget, const QColor &color)
         // Match and update color lines
         auto match_color = regexp_color.match(row);
         if (match_color.hasMatch() && match_color.captured("color_item") == item_name) {
-            QString color_name = is_lua_format ? color.name() : color.name().remove('#');
-            new_list << match_color.captured("before") + color_name + match_color.captured("after");
+            QString colorName = is_lua_format ? color.name() : color.name().remove('#');
+            new_list << match_color.captured("before") + colorName + match_color.captured("after");
         } else {
             new_list << row;
         }
     }
 
     file_content = new_list.join('\n') + '\n';
-    writeFile(QFile(file_name), file_content);
+    writeFile(QFile(m_fileName), file_content);
 }
 
 void ConkyCustomizeDialog::writeFile(const QFile &file, const QString &content)
@@ -864,8 +855,14 @@ bool ConkyCustomizeDialog::writeFileWithElevation(const QString &fileName, const
     out << content;
     tempFile.close();
 
-    // Use pkexec if available, otherwise fall back to gksu
-    QString elevationTool = QFile::exists("/usr/bin/pkexec") ? "pkexec" : (QFile::exists("/usr/bin/gksu") ? "gksu" : "sudo");
+    // Use pkexec if available, otherwise fall back to gksu/sudo
+    QString elevationTool = QStandardPaths::findExecutable("pkexec");
+    if (elevationTool.isEmpty()) {
+        elevationTool = QStandardPaths::findExecutable("gksu");
+    }
+    if (elevationTool.isEmpty()) {
+        elevationTool = QStringLiteral("sudo");
+    }
     QString command = QString("%1 cp '%2' '%3'").arg(elevationTool, tempFileName, fileName);
 
     QProcess process;
@@ -886,8 +883,14 @@ bool ConkyCustomizeDialog::writeFileWithElevation(const QString &fileName, const
 
 bool ConkyCustomizeDialog::copyFileWithElevation(const QString &sourceFile, const QString &destFile)
 {
-    // Use pkexec if available, otherwise fall back to gksu
-    QString elevationTool = QFile::exists("/usr/bin/pkexec") ? "pkexec" : (QFile::exists("/usr/bin/gksu") ? "gksu" : "sudo");
+    // Use pkexec if available, otherwise fall back to gksu/sudo
+    QString elevationTool = QStandardPaths::findExecutable("pkexec");
+    if (elevationTool.isEmpty()) {
+        elevationTool = QStandardPaths::findExecutable("gksu");
+    }
+    if (elevationTool.isEmpty()) {
+        elevationTool = QStringLiteral("sudo");
+    }
     QString command = QString("%1 cp '%2' '%3'").arg(elevationTool, sourceFile, destFile);
 
     QProcess process;
@@ -905,7 +908,14 @@ bool ConkyCustomizeDialog::copyFileWithElevation(const QString &sourceFile, cons
 
 bool ConkyCustomizeDialog::removeFileWithElevation(const QString &fileName)
 {
-    QString elevationTool = QFile::exists("/usr/bin/pkexec") ? "pkexec" : (QFile::exists("/usr/bin/gksu") ? "gksu" : "sudo");
+    // Use pkexec if available, otherwise fall back to gksu/sudo
+    QString elevationTool = QStandardPaths::findExecutable("pkexec");
+    if (elevationTool.isEmpty()) {
+        elevationTool = QStandardPaths::findExecutable("gksu");
+    }
+    if (elevationTool.isEmpty()) {
+        elevationTool = QStringLiteral("sudo");
+    }
     QString command = QString("%1 rm '%2'").arg(elevationTool, fileName);
 
     QProcess process;
@@ -929,36 +939,36 @@ void ConkyCustomizeDialog::saveBackup()
 
     int ans = QMessageBox::question(this, tr("Backup Config File"), tr("Do you want to preserve the original file?"));
     if (ans == QMessageBox::Yes) {
-        QString time_stamp = QDateTime::currentDateTime().toString("yyMMdd_HHmmss");
-        QFileInfo fi(file_name);
-        QString new_name = fi.canonicalPath() + '/' + fi.baseName() + '_' + time_stamp;
+        QString timeStamp = QDateTime::currentDateTime().toString("yyMMdd_HHmmss");
+        QFileInfo fi(m_fileName);
+        QString newName = fi.canonicalPath() + '/' + fi.baseName() + '_' + timeStamp;
 
         if (!fi.completeSuffix().isEmpty()) {
-            new_name += '.' + fi.completeSuffix();
+            newName += '.' + fi.completeSuffix();
         }
 
         // Try normal copy first, then elevation if needed
-        bool copySuccess = QFile::copy(file_name + ".bak", new_name);
+        bool copySuccess = QFile::copy(m_fileName + ".bak", newName);
         if (!copySuccess) {
-            QFileInfo newFileInfo(new_name);
+            QFileInfo newFileInfo(newName);
             QFileInfo newDirInfo(newFileInfo.absolutePath());
 
             // Check if we need elevation for destination directory
             if (!newDirInfo.isWritable()) {
-                copySuccess = copyFileWithElevation(file_name + ".bak", new_name);
+                copySuccess = copyFileWithElevation(m_fileName + ".bak", newName);
             }
         }
 
         if (copySuccess) {
-            emit backupCreated(new_name);
+            emit backupCreated(newName);
             QMessageBox::information(this, tr("Backed Up Config File"),
-                                         tr("The original configuration was backed up to %1").arg(new_name));
+                                         tr("The original configuration was backed up to %1").arg(newName));
         } else {
             QMessageBox::warning(this, tr("Backup Failed"), tr("Failed to create a backup file."));
         }
     }
 
-    QString temporaryBackupPath = file_name + ".bak";
+    QString temporaryBackupPath = m_fileName + ".bak";
     if (!QFile::remove(temporaryBackupPath)) {
         QFileInfo bakInfo(temporaryBackupPath);
         QFileInfo dirInfo(bakInfo.absolutePath());
@@ -993,12 +1003,12 @@ void ConkyCustomizeDialog::pushToggleOn_clicked()
         QTimer::singleShot(500, this, [this]() { checkConkyRunning(); });
     } else {
         // Start conky using startDetached
-        qDebug() << "ConkyCustomizeDialog: Starting conky:" << file_name;
-        QFileInfo fileInfo(file_name);
+        qDebug() << "ConkyCustomizeDialog: Starting conky:" << m_fileName;
+        QFileInfo fileInfo(m_fileName);
 
         QString program = "conky";
         QStringList arguments;
-        arguments << "-c" << file_name;
+        arguments << "-c" << m_fileName;
 
         bool started = QProcess::startDetached(program, arguments, fileInfo.absolutePath());
 
@@ -1015,19 +1025,19 @@ void ConkyCustomizeDialog::pushToggleOn_clicked()
 
 void ConkyCustomizeDialog::pushRestore_clicked()
 {
-    QString backupFileName = file_name + ".bak";
+    QString backupFileName = m_fileName + ".bak";
     if (QFile::exists(backupFileName)) {
-        QFile::remove(file_name);
+        QFile::remove(m_fileName);
 
         // Try normal copy first, then elevation if needed
-        bool restoreSuccess = QFile::copy(backupFileName, file_name);
+        bool restoreSuccess = QFile::copy(backupFileName, m_fileName);
         if (!restoreSuccess) {
-            QFileInfo fileInfo(file_name);
+            QFileInfo fileInfo(m_fileName);
             QFileInfo dirInfo(fileInfo.absolutePath());
 
             // Check if we need elevation for destination directory
             if (!dirInfo.isWritable()) {
-                restoreSuccess = copyFileWithElevation(backupFileName, file_name);
+                restoreSuccess = copyFileWithElevation(backupFileName, m_fileName);
             }
         }
 
@@ -1063,7 +1073,7 @@ void ConkyCustomizeDialog::radioDesktop1_clicked()
     QRegularExpression regexp_lua_owh(capture_lua_owh);
     QRegularExpression regexp_old_owh(capture_old_owh);
     QRegularExpression regexp_owh = is_lua_format ? regexp_lua_owh : regexp_old_owh;
-    QString comment_sep = is_lua_format ? "--" : "#";
+    QString commentSep = is_lua_format ? "--" : "#";
     QRegularExpressionMatch match_owh;
 
     bool lua_block_comment = false;
@@ -1119,7 +1129,7 @@ void ConkyCustomizeDialog::radioDesktop1_clicked()
             }
         }
         // Comment line
-        if (trow.startsWith(comment_sep)) {
+        if (trow.startsWith(commentSep)) {
             new_list << row;
             continue;
         }
@@ -1135,14 +1145,14 @@ void ConkyCustomizeDialog::radioDesktop1_clicked()
             }
             match_owh = regexp_owh.match(row);
             if (match_owh.hasMatch()) {
-                QString owh_value = match_owh.captured(2);
-                owh_value.replace(",sticky", "");
-                owh_value.replace("sticky", "");
-                QString new_row = match_owh.captured(1) + owh_value + match_owh.captured(3);
+                QString owhValue = match_owh.captured(2);
+                owhValue.replace(",sticky", "");
+                owhValue.replace("sticky", "");
+                QString newRow = match_owh.captured(1) + owhValue + match_owh.captured(3);
                 if (debug) {
-                    qDebug() << "Removed sticky: " << new_row;
+                    qDebug() << "Removed sticky: " << newRow;
                 }
-                new_list << new_row;
+                new_list << newRow;
             } else {
                 if (debug) {
                     qDebug() << "ERROR : " << row;
@@ -1163,12 +1173,12 @@ void ConkyCustomizeDialog::radioDesktop1_clicked()
     }
 
     file_content = new_list.join('\n').append('\n');
-    writeFile(file_name, file_content);
+    writeFile(m_fileName, file_content);
 }
 
 void ConkyCustomizeDialog::radioAllDesktops_clicked()
 {
-    QString comment_sep;
+    QString commentSep;
     QRegularExpression regexp_lua_owh(capture_lua_owh);
     QRegularExpression regexp_old_owh(capture_old_owh);
     QRegularExpression regexp_owh;
@@ -1182,13 +1192,13 @@ void ConkyCustomizeDialog::radioAllDesktops_clicked()
 
     if (is_lua_format) {
         regexp_owh = regexp_lua_owh;
-        comment_sep = "--";
+        commentSep = "--";
         conky_config = false;
         conky_config_end = conky_config_lua_end;
         conky_sticky = "\town_window_hints = 'sticky',";
     } else {
         regexp_owh = regexp_old_owh;
-        comment_sep = "#";
+        commentSep = "#";
         conky_config = true;
         conky_config_end = conky_config_old_end;
         conky_sticky = "own_window_hints sticky";
@@ -1245,7 +1255,7 @@ void ConkyCustomizeDialog::radioAllDesktops_clicked()
             }
         }
         // Comment line
-        if (trow.startsWith(comment_sep)) {
+        if (trow.startsWith(commentSep)) {
             new_list << row;
             continue;
         }
@@ -1274,18 +1284,18 @@ void ConkyCustomizeDialog::radioAllDesktops_clicked()
             }
             match_owh = regexp_owh.match(row);
             if (match_owh.hasMatch()) {
-                QString owh_value = match_owh.captured(2);
-                if (owh_value.length() == 0) {
-                    owh_value = "sticky";
+                QString owhValue = match_owh.captured(2);
+                if (owhValue.length() == 0) {
+                    owhValue = "sticky";
                 } else {
-                    owh_value.append(",sticky");
+                    owhValue.append(",sticky");
                 }
-                QString new_row = match_owh.captured(1) + owh_value + match_owh.captured(3);
+                QString newRow = match_owh.captured(1) + owhValue + match_owh.captured(3);
                 if (debug) {
-                    qDebug() << "Append sticky: " << new_row;
+                    qDebug() << "Append sticky: " << newRow;
                 }
 
-                new_list << match_owh.captured(1) + owh_value + match_owh.captured(3);
+                new_list << match_owh.captured(1) + owhValue + match_owh.captured(3);
                 found = true;
             } else {
                 if (debug) {
@@ -1307,31 +1317,31 @@ void ConkyCustomizeDialog::radioAllDesktops_clicked()
     }
 
     file_content = new_list.join('\n').append('\n');
-    writeFile(file_name, file_content);
+    writeFile(m_fileName, file_content);
 }
 
 void ConkyCustomizeDialog::radioDayLong_clicked()
 {
     file_content.replace("%a", "%A");
-    writeFile(file_name, file_content);
+    writeFile(m_fileName, file_content);
 }
 
 void ConkyCustomizeDialog::radioDayShort_clicked()
 {
     file_content.replace("%A", "%a");
-    writeFile(file_name, file_content);
+    writeFile(m_fileName, file_content);
 }
 
 void ConkyCustomizeDialog::radioMonthLong_clicked()
 {
     file_content.replace("%b", "%B");
-    writeFile(file_name, file_content);
+    writeFile(m_fileName, file_content);
 }
 
 void ConkyCustomizeDialog::radioMonthShort_clicked()
 {
     file_content.replace("%B", "%b");
-    writeFile(file_name, file_content);
+    writeFile(m_fileName, file_content);
 }
 
 void ConkyCustomizeDialog::closeEvent(QCloseEvent *event)
@@ -1738,6 +1748,7 @@ void ConkyCustomizeDialog::onAlignmentChanged()
     }
 
     changedFlags.alignment = true;
+    applyAlignmentChanges();
 }
 
 void ConkyCustomizeDialog::applyAlignmentChanges()
@@ -1753,6 +1764,7 @@ void ConkyCustomizeDialog::applyAlignmentChanges()
 void ConkyCustomizeDialog::onGapChanged()
 {
     changedFlags.gaps = true;
+    applyGapChanges();
 }
 
 void ConkyCustomizeDialog::applyGapChanges()
@@ -1768,6 +1780,7 @@ void ConkyCustomizeDialog::applyGapChanges()
 void ConkyCustomizeDialog::onSizeChanged()
 {
     changedFlags.size = true;
+    applySizeChanges();
 }
 
 void ConkyCustomizeDialog::applySizeChanges()
@@ -1796,6 +1809,7 @@ void ConkyCustomizeDialog::onTransparencyChanged()
     }
 
     changedFlags.transparency = true;
+    applyTransparencyChanges();
 }
 
 void ConkyCustomizeDialog::applyTransparencyChanges()
@@ -1846,6 +1860,7 @@ void ConkyCustomizeDialog::onTimeFormatChanged()
     }
 
     changedFlags.timeFormat = true;
+    applyTimeFormatChanges();
 }
 
 void ConkyCustomizeDialog::applyTimeFormatChanges()
@@ -1922,7 +1937,7 @@ void ConkyCustomizeDialog::applyTimeFormatChanges()
         }
     }
 
-    writeFile(file_name, file_content.trimmed() + "\n");
+    writeFile(m_fileName, file_content.trimmed() + "\n");
 }
 
 void ConkyCustomizeDialog::onNetworkDeviceChanged()
@@ -1932,6 +1947,7 @@ void ConkyCustomizeDialog::onNetworkDeviceChanged()
     }
 
     changedFlags.networkDevice = true;
+    applyNetworkDeviceChanges();
 }
 
 void ConkyCustomizeDialog::applyNetworkDeviceChanges()
@@ -2016,7 +2032,7 @@ void ConkyCustomizeDialog::applyNetworkDeviceChanges()
     }
 
     file_content = newLines.join('\n');
-    writeFile(file_name, file_content);
+    writeFile(m_fileName, file_content);
 }
 
 void ConkyCustomizeDialog::onWifiClicked()
@@ -2121,7 +2137,7 @@ void ConkyCustomizeDialog::writeConfigValue(const QString &key, const QString &v
     }
 
     file_content = newLines.join('\n');
-    writeFile(file_name, file_content);
+    writeFile(m_fileName, file_content);
 }
 int ConkyCustomizeDialog::countHeightPadding()
 {
@@ -2243,7 +2259,7 @@ void ConkyCustomizeDialog::updateHeightPadding(int paddingLines)
     }
 
     file_content = newText;
-    writeFile(file_name, file_content);
+    writeFile(m_fileName, file_content);
 }
 
 void ConkyCustomizeDialog::saveInitialValues()

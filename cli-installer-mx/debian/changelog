@@ -1,3 +1,9 @@
+cli-installer-mx (25.6.01.1302) stable; urgency=medium
+
+  * Release
+
+ -- Devs <devteam@localdomain>  Mon, 13 Jul 2026 13:05:25 +0200
+
 cli-installer-mx (25.6.01) mx; urgency=medium
 
   * move executable location

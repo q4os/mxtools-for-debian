@@ -1,3 +1,9 @@
+kde-servicemenu-extract-and-compress (1.4.4-3mx25.1302) stable; urgency=medium
+
+  * Release
+
+ -- Devs <devteam@localdomain>  Mon, 13 Jul 2026 13:05:28 +0200
+
 kde-servicemenu-extract-and-compress (1.4.4-3mx25) mx; urgency=medium
 
   * New install location for KDE 6.

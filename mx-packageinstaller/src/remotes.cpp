@@ -127,7 +127,8 @@ void ManageRemotes::userSelected(int index)
     } else {
         user = QStringLiteral("--user ");
         setCursor(QCursor(Qt::BusyCursor));
-        Cmd().run("flatpak --user remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo");
+        Cmd().proc("flatpak", {"--user", "remote-add", "--if-not-exists", "flathub",
+                               "https://flathub.org/repo/flathub.flatpakrepo"});
         setCursor(QCursor(Qt::ArrowCursor));
     }
     listFlatpakRemotes();
@@ -138,6 +139,6 @@ void ManageRemotes::listFlatpakRemotes() const
 {
     qDebug() << "+++" << __PRETTY_FUNCTION__ << "+++";
     comboRemote->clear();
-    QStringList list = Cmd().getOut("flatpak remote-list").replace('\t', " -- ").split('\n');
+    QStringList list = Cmd().getOut("flatpak", {"remote-list"}).replace('\t', " -- ").split('\n');
     comboRemote->addItems(list);
 }

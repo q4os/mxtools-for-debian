@@ -1,13 +1,12 @@
 [Desktop Entry]
-Encoding=UTF-8
 # The desktop entry name will be displayed within the menu.
 Name=MX Select Sound
 # # The desktop entry comment will be shown within the menu.
-Comment=Easily select a default sound card
+Comment=Easily select a default audio device
 Exec=mx-select-sound
 Terminal=false
 Type=Application
 Icon=mx-select-sound
-Categories=GNOME;GTK;System;MX-Setup
+Categories=GNOME;GTK;System;X-MX-Setup;
 NoDisplay=false
 

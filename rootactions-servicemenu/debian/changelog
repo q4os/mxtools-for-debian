@@ -1,3 +1,9 @@
+rootactions-servicemenu (2.7.3+p8+git20160617.0159-2mx25.1302) stable; urgency=medium
+
+  * Release
+
+ -- Devs <devteam@localdomain>  Mon, 13 Jul 2026 13:05:39 +0200
+
 rootactions-servicemenu (2.7.3+p8+git20160617.0159-2mx25) mx; urgency=medium
 
   * Add pkexec as alternative dependency.

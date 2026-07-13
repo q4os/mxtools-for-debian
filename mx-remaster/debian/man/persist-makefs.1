@@ -1,0 +1,67 @@
+.TH PERSIST-MAKEFS 1 "June 2026" "mx-remaster" "User Commands"
+.SH NAME
+persist-makefs \- create or resize persistence files
+.SH SYNOPSIS
+.B persist-makefs
+.RI [ options ]
+.SH DESCRIPTION
+.B persist-makefs
+creates or resizes the filesystem images used for persistence.
+It is the main tool for managing the persistence device and the files that live
+on it, including root persistence, home persistence, and the special
+.B rootfs.new
+image used for remastering.
+
+The script provides a device-selection workflow, file creation and resize menus,
+and file-system repair or cleanup paths when stale or broken files are found.
+It can run in a GUI or in a command-line mode, depending on the launch options
+and the shared antiX common library.
+.SH OPTIONS
+.TP
+.BR -d " "\fIDEVICE\fR , " --dev="\fIDEVICE\fR , " --device="\fIDEVICE\fR
+Use
+.I DEVICE
+as the persistence device.
+.TP
+.BR -e , " --explore"
+Go directly to the exploration menu.
+This opens the device/file browser without first showing the main action list.
+.TP
+.BR -r , " --rootfs"
+Go directly to creating or working with
+.B rootfs.new
+for remastering.
+.TP
+.BR -f , " --fast"
+Enable the fast path accepted by the option parser.
+The script currently keeps the normal validation and menu flow; this option is
+present for compatibility with the shared option handling.
+.TP
+.BR -p , " --pretend"
+Run in pretend mode.
+The tool reports what it would do without committing the change.
+.PP
+The script also honors the shared antiX common options provided by the
+underlying library, including the normal GUI/CLI controls.
+.SH FILES
+.TP
+.I /live/config/initrd.out
+Primary live configuration file used to locate persistence metadata.
+.TP
+.I /live/config/linuxrc.out
+Fallback configuration file used when initrd.out is unavailable.
+.TP
+.I rootfs
+Root-persistence image managed by this tool.
+.TP
+.I homefs
+Home-persistence image managed by this tool.
+.TP
+.I rootfs.new
+New root-persistence image created for remastering.
+.SH SEE ALSO
+.BR persist-config (1),
+.BR persist-save (1),
+.BR live-remaster (1)
+.SH AUTHOR
+mx-remaster maintainers

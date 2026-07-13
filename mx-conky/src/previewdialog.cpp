@@ -26,6 +26,7 @@
 #include <QApplication>
 #include <QDebug>
 #include <QDir>
+#include <QEventLoop>
 #include <QFileInfo>
 #include <QIcon>
 #include <QMessageBox>
@@ -236,6 +237,14 @@ QString PreviewDialog::generatePreviewImage(ConkyItem *item)
         return {};
     }
 
+    // Preview uses wmctrl, xwininfo, import (all X11-only)
+    if (qEnvironmentVariableIsEmpty("DISPLAY") || !qEnvironmentVariableIsEmpty("WAYLAND_DISPLAY")) {
+        qDebug() << "Preview generation requires X11 — not available on Wayland";
+        QMessageBox::warning(const_cast<PreviewDialog *>(this), tr("Unsupported Display Server"),
+                             tr("Preview generation requires X11 and is not supported on Wayland."));
+        return {};
+    }
+
     QString itemDir = item->directory();
     QString configPath = item->filePath();
     QString folderName = QFileInfo(itemDir).fileName();
@@ -264,8 +273,10 @@ QString PreviewDialog::generatePreviewImage(ConkyItem *item)
         return {};
     }
 
-    // Wait a bit for conky to initialize and draw
-    QThread::msleep(2000);
+    // Wait for conky to initialize and draw (processes UI events to avoid freezing)
+    QEventLoop waitLoop;
+    QTimer::singleShot(2000, &waitLoop, &QEventLoop::quit);
+    waitLoop.exec();
 
     // Step 2: Find conky window
     QProcess wmctrlProcess;

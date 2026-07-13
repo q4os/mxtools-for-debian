@@ -45,7 +45,7 @@ class ConkyItemWidget : public QWidget
 public:
     explicit ConkyItemWidget(ConkyItem *item, QWidget *parent = nullptr);
 
-    ConkyItem *conkyItem() const;
+    [[nodiscard]] ConkyItem *conkyItem() const;
     void updateFromItem();
 
 signals:
@@ -85,7 +85,7 @@ public:
     explicit ConkyListWidget(ConkyManager *manager, QWidget *parent = nullptr);
 
     void refreshList();
-    ConkyItem *selectedConkyItem() const;
+    [[nodiscard]] ConkyItem *selectedConkyItem() const;
     void selectConkyItem(const QString &filePath);
     void reapplyFilters();
 
@@ -124,7 +124,7 @@ private:
     void addConkyItem(ConkyItem *item);
     void removeConkyItem(ConkyItem *item);
     void applyFilters();
-    bool itemMatchesFilters(ConkyItem *item) const;
+    [[nodiscard]] bool itemMatchesFilters(ConkyItem *item) const;
     void updateCountLabel();
 };
 

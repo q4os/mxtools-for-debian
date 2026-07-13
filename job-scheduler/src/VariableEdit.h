@@ -9,6 +9,8 @@
 */
 #pragma once
 
+#include "Crontab.h"
+
 #include <memory>
 #include <vector>
 
@@ -20,9 +22,6 @@ class QRadioButton;
 class QComboBox;
 class QLineEdit;
 class VariableView;
-class Crontab;
-class TCommand;
-class Variable;
 class VariableModel;
 
 class VariableEdit : public QWidget

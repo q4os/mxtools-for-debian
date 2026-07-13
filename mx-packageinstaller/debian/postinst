@@ -1,0 +1,20 @@
+#!/bin/sh
+set -e
+
+case "$1" in
+    configure)
+        # Earlier versions wrote /etc/profile.d/mx-packageinstaller-snap.sh without an
+        # init check, so it added /snap/bin to PATH for every login -- including when the
+        # same MX install was booted with sysvinit, where snapd does not run. Regenerate
+        # any such legacy file (now guarded with a systemd check) from the single source
+        # in mxpi-lib. The regenerated file contains the guard, so this runs at most once.
+        legacy_snap_profile=/etc/profile.d/mx-packageinstaller-snap.sh
+        if [ -f "$legacy_snap_profile" ] && ! grep -q '/run/systemd/system' "$legacy_snap_profile"; then
+            /usr/lib/mx-packageinstaller/mxpi-lib snapd_add_session_paths >/dev/null 2>&1 || true
+        fi
+        ;;
+esac
+
+#DEBHELPER#
+
+exit 0

@@ -1,3 +1,50 @@
+live-usb-maker (2.41.28.1302) stable; urgency=medium
+
+  * Release
+
+ -- Devs <devteam@localdomain>  Mon, 13 Jul 2026 13:05:28 +0200
+
+live-usb-maker (2.41.28) mx; urgency=low
+
+  [ live-usb-maker early microcode support ]
+
+  * Add microcode (ucode) injection into initrd during LiveUSB creation
+    using uc-tool. Injection runs after copy-main in the ISO/clone copy
+    path and after initrd repack in update_initrd(). Works for both
+    encrypted and non-encrypted LiveUSB creation.
+
+  * New CLI option --no-ucode / --no-ucode=<value>:
+      auto          skip injection if ucode already present (default)
+      refresh       replace existing ucode from linuxfs (bypass auto-skip)
+      remove        strip existing ucode from initrd without re-injecting
+      amd           inject only Intel ucode (skip AMD)
+      intel         inject only AMD ucode (skip Intel)
+      amd,intel     skip both vendors (inject nothing)
+      both          alias for amd,intel
+
+  * Firmware source for injection:
+      - ISO/clone copy path: uses linuxfs squashfs file on target MAIN
+        partition via uc-tool -F flag (mounts squashfs internally)
+      - update_initrd() path: uses already-mounted squashfs at
+        $linux_dir/lib/firmware via --amd-dir / --intel-dir flags
+
+  * Graceful fallback with informational messages when uc-tool is not
+    found or firmware directories are absent -- non-fatal in all cases.
+
+  [ dd-live-usb bug fixes ]
+
+  * Fix wrong option name in takes_param(): -percent|P replaced with
+    -progress|P -- caused --progress flag to not be recognised as
+    value-taking option.
+
+  * Fix missing msg() call: line "The live media is not mounted" was
+    executing $live_dev as a command instead of passing it to msg().
+
+  * Fix typos: "save" -> "safe" in usage string,
+               "removeable" -> "removable" in warning message.
+
+ -- fehlix <fehlix@mxlinux.org>  Tue, 09 Jun 2026 17:31:59 -0400
+
 live-usb-maker (2.41.27) mx; urgency=medium
 
   * use partprobe on drive - not partition - for leading data partition

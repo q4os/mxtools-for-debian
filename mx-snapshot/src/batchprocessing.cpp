@@ -28,9 +28,12 @@
 #include <QRegularExpression>
 #include <QTextStream>
 #include <chrono>
+#include <cstdio>
 #include <cstdlib>
 
 #include "excludesutils.h"
+#include "log.h"
+#include "squashfsutils.h"
 #include "work.h"
 
 using namespace std::chrono_literals;
@@ -60,27 +63,64 @@ Batchprocessing::Batchprocessing(Settings *settings, QObject *parent)
     }
 
     work.startTimer();
+    Cmd::clearElevationDenied();
     if (!settings->checkSnapshotDir() || !settings->checkTempDir()) {
         work.cleanUp();
         return;
     }
     settings->otherExclusions();
     work.setupEnv();
+    abortIfElevationDenied();
+    if (work.isCleaningUp()) {
+        return;
+    }
     if (!settings->monthly && !settings->overrideSize) {
         work.checkEnoughSpace();
+        if (work.isCleaningUp()) {
+            return;
+        }
+    }
+    // checkEnoughSpace() can relocate the work dir onto another partition, which
+    // re-runs setupEnv() (and its own privileged steps) internally — check again
+    // here in case that nested run was the one that got denied.
+    abortIfElevationDenied();
+    if (work.isCleaningUp()) {
+        return;
     }
     work.copyNewIso();
+    abortIfElevationDenied();
+    if (work.isCleaningUp()) {
+        return;
+    }
     work.savePackageList(settings->snapshotName);
+    if (work.isCleaningUp()) {
+        return;
+    }
 
     if (settings->editBootMenu) {
         qDebug() << tr("The program will pause the build and open the boot menu in your text editor.");
-        QString cmd = settings->getEditor() + " \"" + settings->workDir + "/iso-template/boot/grub/grub.cfg\" \""
-                      + settings->workDir + "/iso-template/boot/syslinux/syslinux.cfg\" \"" + settings->workDir
-                      + "/iso-template/boot/isolinux/isolinux.cfg\"";
-        Cmd().run(cmd);
+        // getEditor() intentionally contains shell constructs (e.g. $(logname), $DISPLAY)
+        // that must be evaluated by bash, so it stays in the script. The file paths embed
+        // workDir, so they are passed as positional parameters ($1..$3) that the shell
+        // never parses — preventing command injection through the work directory.
+        const QString bootDir = settings->workDir + "/iso-template/boot";
+        Cmd().proc("/bin/bash", {"-c", settings->getEditor() + R"( "$1" "$2" "$3")", "_", bootDir + "/grub/grub.cfg",
+                                 bootDir + "/syslinux/syslinux.cfg", bootDir + "/isolinux/isolinux.cfg"});
     }
     disconnect(&timer, &QTimer::timeout, nullptr, nullptr);
     work.createIso(settings->snapshotName);
+}
+
+// A failed or refused root operation (the CLI normally runs as root, so this
+// means the privileged helper rejected a command) must abort the run through
+// the regular cleanup path rather than continue with skipped steps.
+void Batchprocessing::abortIfElevationDenied()
+{
+    if (!Cmd::elevationDenied()) {
+        return;
+    }
+    qCritical().noquote() << tr("Administrator access was not granted; the snapshot cannot continue.");
+    work.cleanUp();
 }
 
 void Batchprocessing::setConnections()
@@ -88,8 +128,10 @@ void Batchprocessing::setConnections()
     connect(&timer, &QTimer::timeout, this, &Batchprocessing::progress);
     connect(&work.shell, &Cmd::started, this, [this] { timer.start(500ms); });
     connect(&work.shell, &Cmd::done, this, [this] { timer.stop(); });
-    connect(&work.shell, &Cmd::outputAvailable, this, [](const QString &out) { qDebug().noquote() << out; });
-    connect(&work.shell, &Cmd::errorAvailable, this, [](const QString &out) { qWarning().noquote() << out; });
+    connect(&work.shell, &Cmd::outputAvailable, this,
+            [this](const QString &out) { handleStreamChunk(stdoutBuffer, out, true); });
+    connect(&work.shell, &Cmd::errorAvailable, this,
+            [this](const QString &out) { handleStreamChunk(stderrBuffer, out, false); });
     connect(&work, &Work::message, [](const QString &out) { qDebug().noquote() << out; });
     connect(&work, &Work::messageBox,
             [](BoxType /*unused*/, const QString &title, const QString &msg) { qDebug().noquote() << title << msg; });
@@ -98,8 +140,58 @@ void Batchprocessing::setConnections()
 void Batchprocessing::progress()
 {
     static bool toggle = false;
-    qDebug() << "\033[2KProcessing command" << (toggle ? "...\r" : "\r");
+    QTextStream stream(stderr);
+    stream << "\033[2KProcessing command" << (toggle ? "...\r" : "\r");
+    stream.flush();
     toggle = !toggle;
+}
+
+void Batchprocessing::handleStreamChunk(QString &buffer, const QString &chunk, bool toStdout)
+{
+    for (const QChar ch : chunk) {
+        if (ch == QLatin1Char('\n')) {
+            flushStreamLine(buffer, toStdout, false);
+            buffer.clear();
+            continue;
+        }
+        if (ch == QLatin1Char('\r')) {
+            flushStreamLine(buffer, toStdout, true);
+            buffer.clear();
+            continue;
+        }
+        buffer += ch;
+    }
+}
+
+void Batchprocessing::flushStreamLine(const QString &line, bool toStdout, bool isTransient)
+{
+    bool ok = false;
+    const int percentage = SquashfsUtils::parsePercentageLine(line, &ok);
+    QTextStream stderrStream(stderr);
+    if (ok) {
+        stderrStream << QStringLiteral("\r\033[K %1%").arg(percentage);
+        stderrStream.flush();
+        progressLineActive = true;
+        return;
+    }
+    if (line.isEmpty() && isTransient) {
+        return;
+    }
+    QTextStream stream(toStdout ? stdout : stderr);
+    if (progressLineActive) {
+        stream << QLatin1Char('\n');
+        progressLineActive = false;
+    }
+    if (isTransient) {
+        stream << QStringLiteral("\r\033[K") << line;
+    } else {
+        stream << line << QLatin1Char('\n');
+        // Mirror committed lines into the log file so /tmp/iso-snapshot-cli.log
+        // captures mksquashfs/xorriso output (transient \r progress lines and
+        // the percentage indicator are intentionally skipped to avoid spam).
+        Log::appendToFile(toStdout ? QtDebugMsg : QtWarningMsg, line);
+    }
+    stream.flush();
 }
 
 bool Batchprocessing::isSourceExcludesNewer(QString &diffOutput) const
@@ -205,39 +297,24 @@ void Batchprocessing::checkUpdatedDefaultExcludesCli()
 
         if (response.compare(quitOptionKey, Qt::CaseInsensitive) == 0
             || response.compare(quitOptionText, Qt::CaseInsensitive) == 0 || response.isEmpty()) {
-            qDebug() << tr("Leaving custom exclusion file unchanged.");
+            // A null (as opposed to merely empty) line means readLine() hit EOF —
+            // there was no terminal to prompt (e.g. a cron/piped run) rather than a
+            // deliberate choice.
+            if (response.isNull()) {
+                qCritical().noquote() << tr(
+                    "No input available to answer the exclusion file prompt; aborting without creating a snapshot.");
+            } else {
+                qDebug() << tr("Leaving custom exclusion file unchanged.");
+            }
             const bool debugStop = qEnvironmentVariableIsSet("MX_SNAPSHOT_EXCLUDES_DEBUG_STOP");
             if (debugStop) {
                 qDebug() << "Debug stop requested; exiting after excludes check.";
                 std::exit(0);
-            } else {
-                std::exit(EXIT_SUCCESS);
             }
-            return; // exit requested
+            // Either way no snapshot is produced here, so this must not report success.
+            std::exit(EXIT_FAILURE);
         }
 
         out << tr("Invalid choice. Please select again.") << '\n';
-    }
-}
-
-void Batchprocessing::checkNvidiaGraphicsCard()
-{
-    if (ExcludesUtils::hasNvidiaGraphicsCard(work.shell)) {
-        qDebug() << tr("This computer uses an NVIDIA graphics card. Are you planning to use the "
-                       "resulting ISO on the same computer or another computer with an NVIDIA card?")
-                + " yes/no";
-        QString response;
-        QTextStream stdinStream(stdin);
-        stdinStream >> response;
-
-        response = response.toLower();
-        if (response == "yes" || response == "y") {
-            settings->bootOptions += " xorg=nvidia";
-            qDebug() << tr("Note: If you use the resulting ISO on a computer without an NVIDIA card, "
-                           "you will likely need to remove 'xorg=nvidia' from the boot options.");
-        } else {
-            qDebug() << tr("Note: If you use the resulting ISO on a computer with an NVIDIA card, "
-                           "you may need to add 'xorg=nvidia' to the boot options.");
-        }
     }
 }

@@ -1,3 +1,77 @@
+mx-packageinstaller-pkglist (26.07.1mx25.1302) stable; urgency=medium
+
+  * Release
+
+ -- Devs <devteam@localdomain>  Mon, 13 Jul 2026 13:05:32 +0200
+
+mx-packageinstaller-pkglist (26.07.1mx25) mx; urgency=medium
+
+  * update liquorix kernel (7.0.14-2)
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 05 Jul 2026 18:58:23 -0400
+
+mx-packageinstaller-pkglist (26.06.7mx25) mx; urgency=medium
+
+  * update liquorix kernel (7.0.14-1)
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 02 Jul 2026 21:38:24 -0400
+
+mx-packageinstaller-pkglist (26.06.6mx25) mx; urgency=medium
+
+  * update liquorix kernel (7.0.13-3)
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 26 Jun 2026 18:53:18 -0400
+
+mx-packageinstaller-pkglist (26.06.5mx25) mx; urgency=medium
+
+  * update liquorix kernel (7.0.13-2)
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 25 Jun 2026 20:16:05 -0400
+
+mx-packageinstaller-pkglist (26.06.4mx25) mx; urgency=medium
+
+  * update spotify repo key
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 20 Jun 2026 08:09:30 -0400
+
+mx-packageinstaller-pkglist (26.06.3mx25) mx; urgency=medium
+
+  * update liquorix kernel (7.0.12)
+  * remove temp gpg key as well as temp sources in google-chrome routine
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 11 Jun 2026 20:59:28 -0400
+
+mx-packageinstaller-pkglist (26.06.2mx25) mx; urgency=medium
+
+  * update liquorix kernel
+  * remove opera 32 bit (hasn't worked for years)
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 05 Jun 2026 21:09:57 -0400
+
+mx-packageinstaller-pkglist (26.06.1mx25) mx; urgency=medium
+
+  * update veracrypt
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Tue, 02 Jun 2026 21:37:50 -0400
+
+mx-packageinstaller-pkglist (26.05.8mx25) mx; urgency=medium
+
+  * update liquorix 7.0.10-1
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Tue, 26 May 2026 21:02:28 -0400
+
+mx-packageinstaller-pkglist (26.05.7mx25) mx; urgency=medium
+
+  * update liquorix 7.0.9-2
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 23 May 2026 19:18:11 -0400
+
+mx-packageinstaller-pkglist (26.05.6mx25) mx; urgency=medium
+
+  * include missing antix-repo-package-check script
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 22 May 2026 23:10:53 -0400
+
 mx-packageinstaller-pkglist (26.05.5mx25) mxD; urgency=medium
 
   * update vivaldi

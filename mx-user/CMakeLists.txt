@@ -20,7 +20,7 @@
 # * along with mx-user.  If not, see <http://www.gnu.org/licenses/>.
 # **********************************************************************/
 
-cmake_minimum_required(VERSION 3.16)
+cmake_minimum_required(VERSION 3.16...3.31)
 
 set(PROJECT_VERSION_FROM_CHANGELOG "")
 
@@ -149,7 +149,8 @@ option(ENABLE_ZXCVBN "Use libzxcvbn for password strength checking" ON)
 if(ENABLE_ZXCVBN)
     find_library(ZXCVBN_LIB zxcvbn)
     if(NOT ZXCVBN_LIB)
-        message(FATAL_ERROR "libzxcvbn not found. Disable with -DENABLE_ZXCVBN=OFF to build without it.")
+        message(WARNING "libzxcvbn not found. Building without password strength checking.")
+        set(ENABLE_ZXCVBN OFF)
     endif()
 endif()
 

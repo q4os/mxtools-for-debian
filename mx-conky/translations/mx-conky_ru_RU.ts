@@ -4,7 +4,7 @@
     <message>
         <location filename="../src/conkycustomizedialog.cpp" line="56"/>
         <source>Customize Conky - %1</source>
-        <translation>Настройка Conky - %1</translation>
+        <translation>Настройка Conky — %1</translation>
     </message>
     <message>
         <location filename="../src/conkycustomizedialog.cpp" line="77"/>
@@ -20,7 +20,7 @@
     <message>
         <location filename="../src/conkycustomizedialog.cpp" line="83"/>
         <source>Undo</source>
-        <translation>Отмена</translation>
+        <translation>Вернуть</translation>
     </message>
     <message>
         <location filename="../src/conkycustomizedialog.cpp" line="106"/>
@@ -102,13 +102,13 @@
     <message>
         <location filename="../src/conkycustomizedialog.cpp" line="828"/>
         <source>Permission Denied</source>
-        <translation>Доступ запрещен</translation>
+        <translation>Доступ запрещён</translation>
     </message>
     <message>
         <location filename="../src/conkycustomizedialog.cpp" line="829"/>
         <source>Cannot write to file: %1
 Insufficient permissions.</source>
-        <translation>Нельзя записать в файл: %1
+        <translation>Невозможно записать в файл: %1
 Недостаточно прав.</translation>
     </message>
     <message>
@@ -119,17 +119,17 @@ Insufficient permissions.</source>
     <message>
         <location filename="../src/conkycustomizedialog.cpp" line="839"/>
         <source>Cannot write to file: %1</source>
-        <translation>Нельзя записать в файл: %1</translation>
+        <translation>Невозможно записать в файл: %1</translation>
     </message>
     <message>
         <location filename="../src/conkycustomizedialog.cpp" line="930"/>
         <source>Backup Config File</source>
-        <translation>Резервный конфигурационный файл</translation>
+        <translation>Резервный файл конфигурации</translation>
     </message>
     <message>
         <location filename="../src/conkycustomizedialog.cpp" line="930"/>
         <source>Do you want to preserve the original file?</source>
-        <translation>Вы хотите сохранить исходный файл?</translation>
+        <translation>Сохранить исходный файл?</translation>
     </message>
     <message>
         <location filename="../src/conkycustomizedialog.cpp" line="954"/>
@@ -139,33 +139,33 @@ Insufficient permissions.</source>
     <message>
         <location filename="../src/conkycustomizedialog.cpp" line="955"/>
         <source>The original configuration was backed up to %1</source>
-        <translation>Исходная конфигурация была сохранена в %1</translation>
+        <translation>Исходная конфигурация сохранена в %1</translation>
     </message>
     <message>
         <location filename="../src/conkycustomizedialog.cpp" line="957"/>
         <source>Backup Failed</source>
-        <translation>Резервное копирование не удалось</translation>
+        <translation>Не удалось создать резервную копию</translation>
     </message>
     <message>
         <location filename="../src/conkycustomizedialog.cpp" line="957"/>
         <source>Failed to create a backup file.</source>
-        <translation>Не удалось создать файл резервной копии.</translation>
+        <translation>Не удалось создать резервный файл.</translation>
     </message>
     <message>
         <location filename="../src/conkycustomizedialog.cpp" line="1038"/>
         <location filename="../src/conkycustomizedialog.cpp" line="1041"/>
         <source>Restore Failed</source>
-        <translation>Восстановление не удалось</translation>
+        <translation>Не удалось восстановить</translation>
     </message>
     <message>
         <location filename="../src/conkycustomizedialog.cpp" line="1038"/>
         <source>Failed to restore from backup file.</source>
-        <translation>Не удалось восстановить данные из резервной копии.</translation>
+        <translation>Не удалось восстановить из резервного файла.</translation>
     </message>
     <message>
         <location filename="../src/conkycustomizedialog.cpp" line="1041"/>
         <source>Backup file does not exist.</source>
-        <translation>Резервная копия файла не существует.</translation>
+        <translation>Резервный файл не существует.</translation>
     </message>
     <message>
         <location filename="../src/conkycustomizedialog.cpp" line="1393"/>
@@ -190,7 +190,7 @@ Insufficient permissions.</source>
     <message>
         <location filename="../src/conkycustomizedialog.cpp" line="1407"/>
         <source>Top Middle</source>
-        <translation>Вверху посередине</translation>
+        <translation>Вверху по центру</translation>
     </message>
     <message>
         <location filename="../src/conkycustomizedialog.cpp" line="1408"/>
@@ -205,42 +205,42 @@ Insufficient permissions.</source>
     <message>
         <location filename="../src/conkycustomizedialog.cpp" line="1410"/>
         <source>Bottom Middle</source>
-        <translation>Внизу посередине</translation>
+        <translation>Внизу по центру</translation>
     </message>
     <message>
         <location filename="../src/conkycustomizedialog.cpp" line="1411"/>
         <source>Middle Left</source>
-        <translation type="unfinished"/>
+        <translation>По центру слева</translation>
     </message>
     <message>
         <location filename="../src/conkycustomizedialog.cpp" line="1412"/>
         <source>Middle Right</source>
-        <translation type="unfinished"/>
+        <translation>По центру справа</translation>
     </message>
     <message>
         <location filename="../src/conkycustomizedialog.cpp" line="1413"/>
         <source>Middle Middle</source>
-        <translation type="unfinished"/>
+        <translation>По центру</translation>
     </message>
     <message>
         <location filename="../src/conkycustomizedialog.cpp" line="1418"/>
         <source>Horizontal Gap</source>
-        <translation type="unfinished"/>
+        <translation>Горизонтальный отступ</translation>
     </message>
     <message>
         <location filename="../src/conkycustomizedialog.cpp" line="1419"/>
         <source>[GAP_X] Horizontal distance from window border (in pixels)</source>
-        <translation type="unfinished"/>
+        <translation>[GAP_X] Горизонтальное расстояние от границы окна (в пикселях)</translation>
     </message>
     <message>
         <location filename="../src/conkycustomizedialog.cpp" line="1431"/>
         <source>Vertical Gap</source>
-        <translation type="unfinished"/>
+        <translation>Вертикальный отступ</translation>
     </message>
     <message>
         <location filename="../src/conkycustomizedialog.cpp" line="1432"/>
         <source>[GAP_Y] Vertical distance from window border (in pixels)</source>
-        <translation type="unfinished"/>
+        <translation>[GAP_Y] Вертикальное расстояние от границы окна (в пикселях)</translation>
     </message>
     <message>
         <location filename="../src/conkycustomizedialog.cpp" line="1444"/>
@@ -266,33 +266,35 @@ Insufficient permissions.</source>
         <location filename="../src/conkycustomizedialog.cpp" line="1472"/>
         <source>Width should be larger than the size of window contents,
 otherwise this setting will not have any effect</source>
-        <translation type="unfinished"/>
+        <translation>Ширина должна быть больше размера содержимого окна,
+иначе этот параметр не будет иметь эффекта</translation>
     </message>
     <message>
         <location filename="../src/conkycustomizedialog.cpp" line="1476"/>
         <source>Minimum Width</source>
-        <translation type="unfinished"/>
+        <translation>Минимальная ширина</translation>
     </message>
     <message>
         <location filename="../src/conkycustomizedialog.cpp" line="1491"/>
         <source>Height should be larger than the size of window contents,
 otherwise this setting will not have any effect</source>
-        <translation type="unfinished"/>
+        <translation>Высота должна быть больше размера содержимого окна,
+иначе этот параметр не будет иметь эффекта</translation>
     </message>
     <message>
         <location filename="../src/conkycustomizedialog.cpp" line="1493"/>
         <source>Minimum Height</source>
-        <translation type="unfinished"/>
+        <translation>Минимальная высота</translation>
     </message>
     <message>
         <location filename="../src/conkycustomizedialog.cpp" line="1507"/>
         <source>Increases the window height by adding empty lines at the end of the Conky config file</source>
-        <translation type="unfinished"/>
+        <translation>Увеличивает высоту окна, добавляя пустые строки в конец файла конфигурации Conky</translation>
     </message>
     <message>
         <location filename="../src/conkycustomizedialog.cpp" line="1508"/>
         <source>Height Padding</source>
-        <translation type="unfinished"/>
+        <translation>Заполнение по высоте</translation>
     </message>
     <message>
         <location filename="../src/conkycustomizedialog.cpp" line="1523"/>
@@ -334,7 +336,7 @@ otherwise this setting will not have any effect</source>
         <source>Window Opacity
 
 0 = Fully Transparent, 100 = Fully Opaque</source>
-        <translation>Прозрачность окна
+        <translation>Непрозрачность окна
 
 0 = Полностью прозрачный, 100 = Полностью непрозрачный</translation>
     </message>
@@ -351,12 +353,12 @@ otherwise this setting will not have any effect</source>
     <message>
         <location filename="../src/conkycustomizedialog.cpp" line="1589"/>
         <source>Setting Type to &quot;Transparent&quot; will make the whole window transparent (including any images). Use &quot;Pseudo-Transparent&quot; if you want the images to be opaque.</source>
-        <translation type="unfinished"/>
+        <translation>Выбор типа «Прозрачный» сделает всё окно прозрачным (включая любые изображения). Используйте «Псевдопрозрачный», если вы хотите, чтобы изображения были непрозрачными.</translation>
     </message>
     <message>
         <location filename="../src/conkycustomizedialog.cpp" line="1599"/>
         <source>Setting Type to &quot;Pseudo-Transparent&quot; will make the window transparent but the window will have a shadow. The shadow can be disabled by configuring your window manager.</source>
-        <translation type="unfinished"/>
+        <translation>Выбор типа «Псевдопрозрачный» сделает окно прозрачным, но у окна будет тень. Тень можно отключить в настройках вашего оконного менеджера.</translation>
     </message>
     <message>
         <location filename="../src/conkycustomizedialog.cpp" line="1610"/>
@@ -377,18 +379,18 @@ otherwise this setting will not have any effect</source>
         <location filename="../src/conkycustomizedialog.cpp" line="1626"/>
         <location filename="../src/conkycustomizedialog.cpp" line="1637"/>
         <source>Long</source>
-        <translation>Длинно</translation>
+        <translation>Длинный</translation>
     </message>
     <message>
         <location filename="../src/conkycustomizedialog.cpp" line="1627"/>
         <location filename="../src/conkycustomizedialog.cpp" line="1638"/>
         <source>Short</source>
-        <translation>Коротко</translation>
+        <translation>Короткий</translation>
     </message>
     <message>
         <location filename="../src/conkycustomizedialog.cpp" line="1628"/>
         <source>Abbreviated name, e.g. Tu</source>
-        <translation>Сокращенное имя, например Вт.</translation>
+        <translation>Сокращённое название, например, Вт</translation>
     </message>
     <message>
         <location filename="../src/conkycustomizedialog.cpp" line="1635"/>
@@ -398,7 +400,7 @@ otherwise this setting will not have any effect</source>
     <message>
         <location filename="../src/conkycustomizedialog.cpp" line="1639"/>
         <source>Abbreviated name, e.g. Oct</source>
-        <translation>Сокращенное имя, например Окт.</translation>
+        <translation>Сокращённое название, например, Окт</translation>
     </message>
     <message>
         <location filename="../src/conkycustomizedialog.cpp" line="1658"/>
@@ -425,7 +427,7 @@ otherwise this setting will not have any effect</source>
         <location filename="../src/conkycustomizedialog.cpp" line="662"/>
         <location filename="../src/conkycustomizedialog.cpp" line="671"/>
         <source>auto</source>
-        <translation>авторежим</translation>
+        <translation>авто</translation>
     </message>
     <message>
         <location filename="../src/conkycustomizedialog.cpp" line="1686"/>
@@ -450,7 +452,7 @@ otherwise this setting will not have any effect</source>
     <message>
         <location filename="../src/conkycustomizedialog.cpp" line="1713"/>
         <source>LAN</source>
-        <translation>LAN</translation>
+        <translation>ЛВС</translation>
     </message>
     <message>
         <location filename="../src/conkycustomizedialog.cpp" line="1716"/>
@@ -473,7 +475,7 @@ otherwise this setting will not have any effect</source>
     <message>
         <location filename="../src/conkylistwidget.cpp" line="64"/>
         <source>Running</source>
-        <translation>Выполняется</translation>
+        <translation>Запущен</translation>
     </message>
     <message>
         <location filename="../src/conkylistwidget.cpp" line="64"/>
@@ -516,338 +518,354 @@ otherwise this setting will not have any effect</source>
     <message>
         <location filename="../src/conkylistwidget.cpp" line="345"/>
         <source>Total: 0 conkies</source>
-        <translation type="unfinished"/>
+        <translation>Всего: 0 conky</translation>
     </message>
     <message>
-        <location filename="../src/conkylistwidget.cpp" line="599"/>
+        <location filename="../src/conkylistwidget.cpp" line="595"/>
         <source>Total: %1 conkies</source>
-        <translation type="unfinished"/>
+        <translation>Всего: %1 conky</translation>
     </message>
     <message>
-        <location filename="../src/conkylistwidget.cpp" line="602"/>
+        <location filename="../src/conkylistwidget.cpp" line="598"/>
         <source>Showing: %1 of %2 conkies</source>
-        <translation type="unfinished"/>
+        <translation>Показано: %1 из %2 conky</translation>
     </message>
 </context>
 <context>
     <name>ConkyPreviewWidget</name>
     <message>
-        <location filename="../src/conkylistwidget.cpp" line="551"/>
+        <location filename="../src/conkylistwidget.cpp" line="548"/>
         <source>No Conky Selected</source>
-        <translation type="unfinished"/>
+        <translation>Conky не выбран</translation>
     </message>
     <message>
-        <location filename="../src/conkylistwidget.cpp" line="553"/>
+        <location filename="../src/conkylistwidget.cpp" line="550"/>
         <source>Select a conky from the list to see its preview</source>
-        <translation type="unfinished"/>
+        <translation>Выберите conky из списка, чтобы увидеть его предпросмотр</translation>
+    </message>
+    <message>
+        <location filename="../src/conkylistwidget.cpp" line="569"/>
+        <source>Preview image could not be loaded</source>
+        <translation>Не удалось загрузить изображение предпросмотра</translation>
     </message>
     <message>
         <location filename="../src/conkylistwidget.cpp" line="572"/>
-        <source>Preview image could not be loaded</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <location filename="../src/conkylistwidget.cpp" line="575"/>
         <source>No preview image available</source>
-        <translation type="unfinished"/>
+        <translation>Изображение предпросмотра отсутствует</translation>
     </message>
 </context>
 <context>
     <name>MainWindow</name>
     <message>
         <location filename="../src/mainwindow.cpp" line="58"/>
-        <location filename="../src/mainwindow.cpp" line="863"/>
+        <location filename="../src/mainwindow.cpp" line="934"/>
         <source>MX Conky</source>
         <translation>MX Conky</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="251"/>
+        <location filename="../src/mainwindow.cpp" line="322"/>
         <source>About this application</source>
         <translation>Об этом приложении</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="249"/>
+        <location filename="../src/mainwindow.cpp" line="320"/>
         <source>About...</source>
         <translation>О программе...</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="256"/>
+        <location filename="../src/mainwindow.cpp" line="327"/>
         <source>Help</source>
-        <translation>Помощь</translation>
+        <translation>Справка</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="271"/>
+        <location filename="../src/mainwindow.cpp" line="342"/>
         <source>Quit application</source>
         <translation>Выйти из приложения</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="269"/>
+        <location filename="../src/mainwindow.cpp" line="340"/>
         <source>Close</source>
         <translation>Закрыть</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="159"/>
+        <location filename="../src/mainwindow.cpp" line="230"/>
         <source>Loading Conky configurations...</source>
         <translation>Загрузка конфигураций Conky...</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="189"/>
+        <location filename="../src/mainwindow.cpp" line="260"/>
         <source>Settings</source>
         <translation>Настройки</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="191"/>
+        <location filename="../src/mainwindow.cpp" line="262"/>
         <source>Configure conky search paths</source>
-        <translation>Настройте пути поиска конфигураций Conky</translation>
+        <translation>Настроить пути поиска Conky</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="193"/>
+        <location filename="../src/mainwindow.cpp" line="264"/>
         <source>Refresh</source>
         <translation>Обновить</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="195"/>
+        <location filename="../src/mainwindow.cpp" line="266"/>
         <source>Refresh conky list</source>
         <translation>Обновить список Conky</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="197"/>
+        <location filename="../src/mainwindow.cpp" line="268"/>
         <source>Start All</source>
         <translation>Запустить все</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="199"/>
+        <location filename="../src/mainwindow.cpp" line="270"/>
         <source>Start all enabled conkies</source>
-        <translation>Запустить все включенные conky</translation>
+        <translation>Запустить все включённые conky</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="201"/>
+        <location filename="../src/mainwindow.cpp" line="272"/>
         <source>Stop All</source>
         <translation>Остановить все</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="203"/>
+        <location filename="../src/mainwindow.cpp" line="274"/>
         <source>Stop all running conkies</source>
         <translation>Остановить все запущенные conky</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="965"/>
-        <location filename="../src/mainwindow.cpp" line="1016"/>
+        <location filename="../src/mainwindow.cpp" line="948"/>
+        <source>MX Conky License</source>
+        <translation>Лицензия MX Conky</translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="999"/>
+        <location filename="../src/mainwindow.cpp" line="1050"/>
         <source>Running</source>
         <translation>Запущен</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="967"/>
-        <location filename="../src/mainwindow.cpp" line="1017"/>
+        <location filename="../src/mainwindow.cpp" line="1001"/>
+        <location filename="../src/mainwindow.cpp" line="1051"/>
         <source>Stopped</source>
         <translation>Остановлен</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="211"/>
+        <location filename="../src/mainwindow.cpp" line="282"/>
         <source>Search conky by name...</source>
-        <translation type="unfinished"/>
+        <translation>Поиск conky по имени...</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="213"/>
+        <location filename="../src/mainwindow.cpp" line="284"/>
         <source>Search conkies by name (Ctrl+F)</source>
-        <translation type="unfinished"/>
+        <translation>Поиск conky по имени (Ctrl+F)</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="258"/>
+        <location filename="../src/mainwindow.cpp" line="329"/>
         <source>Display help</source>
         <translation>Показать справку</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="447"/>
-        <location filename="../src/mainwindow.cpp" line="621"/>
+        <location filename="../src/mainwindow.cpp" line="518"/>
+        <location filename="../src/mainwindow.cpp" line="692"/>
         <source>Copy Conky</source>
-        <translation type="unfinished"/>
+        <translation>Копировать Conky</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="493"/>
-        <location filename="../src/mainwindow.cpp" line="669"/>
+        <location filename="../src/mainwindow.cpp" line="564"/>
+        <location filename="../src/mainwindow.cpp" line="740"/>
         <source>Conky Copied</source>
-        <translation type="unfinished"/>
+        <translation>Conky скопирован</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="494"/>
+        <location filename="../src/mainwindow.cpp" line="565"/>
         <source>Conky has been copied to your personal folder for editing:
 %1</source>
-        <translation type="unfinished"/>
+        <translation>Conky скопирован в вашу личную папку для редактирования:
+%1</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="496"/>
-        <location filename="../src/mainwindow.cpp" line="672"/>
+        <location filename="../src/mainwindow.cpp" line="567"/>
+        <location filename="../src/mainwindow.cpp" line="743"/>
         <source>Copy Failed</source>
-        <translation type="unfinished"/>
+        <translation>Не удалось скопировать</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="496"/>
-        <location filename="../src/mainwindow.cpp" line="672"/>
+        <location filename="../src/mainwindow.cpp" line="567"/>
+        <location filename="../src/mainwindow.cpp" line="743"/>
         <source>Failed to copy conky to your personal folder.</source>
-        <translation type="unfinished"/>
+        <translation>Не удалось скопировать conky в вашу личную папку.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="558"/>
+        <location filename="../src/mainwindow.cpp" line="629"/>
         <source>Delete Conky</source>
-        <translation type="unfinished"/>
+        <translation>Удалить Conky</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="670"/>
+        <location filename="../src/mainwindow.cpp" line="741"/>
         <source>Conky has been copied to your personal folder for customization:
 %1</source>
-        <translation type="unfinished"/>
+        <translation>Conky скопирован в вашу личную папку для настройки:
+%1</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="185"/>
+        <location filename="../src/mainwindow.cpp" line="256"/>
         <source>Previews</source>
-        <translation type="unfinished"/>
+        <translation>Предпросмотр</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="187"/>
+        <location filename="../src/mainwindow.cpp" line="258"/>
         <source>Generate preview images for conkies</source>
-        <translation type="unfinished"/>
+        <translation>Создать изображения предпросмотра для conky</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="207"/>
-        <location filename="../src/mainwindow.cpp" line="481"/>
-        <location filename="../src/mainwindow.cpp" line="657"/>
-        <location filename="../src/mainwindow.cpp" line="963"/>
-        <location filename="../src/mainwindow.cpp" line="1015"/>
+        <location filename="../src/mainwindow.cpp" line="278"/>
+        <location filename="../src/mainwindow.cpp" line="552"/>
+        <location filename="../src/mainwindow.cpp" line="728"/>
+        <location filename="../src/mainwindow.cpp" line="997"/>
+        <location filename="../src/mainwindow.cpp" line="1049"/>
         <source>All</source>
-        <translation>Всех</translation>
+        <translation>Все</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="208"/>
+        <location filename="../src/mainwindow.cpp" line="279"/>
         <source>Filter conkies by running status or location</source>
-        <translation type="unfinished"/>
+        <translation>Фильтровать conky по статусу запуска или расположению</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="443"/>
-        <location filename="../src/mainwindow.cpp" line="617"/>
+        <location filename="../src/mainwindow.cpp" line="514"/>
+        <location filename="../src/mainwindow.cpp" line="688"/>
         <source>Enter a name for the copy:</source>
-        <translation type="unfinished"/>
+        <translation>Введите имя для копии:</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="444"/>
-        <location filename="../src/mainwindow.cpp" line="618"/>
+        <location filename="../src/mainwindow.cpp" line="515"/>
+        <location filename="../src/mainwindow.cpp" line="689"/>
         <source>In order for you to edit and save a conky, it must first be copied to ~/.conky where you have permission.
 Enter a name for the copy.</source>
-        <translation type="unfinished"/>
+        <translation>Чтобы редактировать и сохранять conky, его необходимо сначала скопировать в ~/.conky, где у вас есть разрешения.
+Введите имя для копии.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="461"/>
-        <location filename="../src/mainwindow.cpp" line="637"/>
+        <location filename="../src/mainwindow.cpp" line="532"/>
+        <location filename="../src/mainwindow.cpp" line="708"/>
         <source>Directory Exists</source>
-        <translation type="unfinished"/>
+        <translation>Папка существует</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="462"/>
-        <location filename="../src/mainwindow.cpp" line="638"/>
+        <location filename="../src/mainwindow.cpp" line="533"/>
+        <location filename="../src/mainwindow.cpp" line="709"/>
         <source>A conky with the name '%1' already exists in your personal folder.
 Do you want to overwrite it?</source>
-        <translation type="unfinished"/>
+        <translation>Conky с именем &apos;%1&apos; уже существует в вашей личной папке.
+Перезаписать его?</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="529"/>
+        <location filename="../src/mainwindow.cpp" line="600"/>
         <source>Edit Conky</source>
-        <translation type="unfinished"/>
+        <translation>Редактировать Conky</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="530"/>
+        <location filename="../src/mainwindow.cpp" line="601"/>
         <source>This conky file is read-only and requires administrator privileges to edit.
 Do you want to edit it with elevated privileges?</source>
-        <translation type="unfinished"/>
+        <translation>Этот файл conky доступен только для чтения и требует прав администратора для редактирования.
+Редактировать с повышенными привилегиями?</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="559"/>
+        <location filename="../src/mainwindow.cpp" line="630"/>
         <source>Are you sure you want to delete the conky file:
 %1
 
 This action cannot be undone.</source>
-        <translation type="unfinished"/>
+        <translation>Уверены, что хотите удалить файл conky:
+%1
+
+Это действие невозможно отменить.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="591"/>
+        <location filename="../src/mainwindow.cpp" line="662"/>
         <source>Delete Failed</source>
-        <translation type="unfinished"/>
+        <translation>Не удалось удалить</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="591"/>
+        <location filename="../src/mainwindow.cpp" line="662"/>
         <source>Failed to delete conky file:
 %1</source>
-        <translation type="unfinished"/>
+        <translation>Не удалось удалить файл conky:
+%1</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="679"/>
+        <location filename="../src/mainwindow.cpp" line="750"/>
         <source>Customize Conky</source>
-        <translation type="unfinished"/>
+        <translation>Настройка Conky</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="680"/>
+        <location filename="../src/mainwindow.cpp" line="751"/>
         <source>This conky file is read-only and requires administrator privileges to customize.
 Do you want to customize it with elevated privileges?</source>
-        <translation type="unfinished"/>
+        <translation>Этот файл conky доступен только для чтения и требует прав администратора для настройки.
+Настроить с повышенными привилегиями?</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="852"/>
+        <location filename="../src/mainwindow.cpp" line="923"/>
         <source>Editor Error</source>
-        <translation type="unfinished"/>
+        <translation>Ошибка редактора</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="852"/>
+        <location filename="../src/mainwindow.cpp" line="923"/>
         <source>Cannot start editor for file: %1</source>
-        <translation type="unfinished"/>
+        <translation>Не удалось запустить редактор для файла: %1</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="862"/>
+        <location filename="../src/mainwindow.cpp" line="933"/>
         <source>About MX Conky</source>
         <translation>О MX Conky</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="864"/>
+        <location filename="../src/mainwindow.cpp" line="935"/>
         <source>Version: </source>
         <translation>Версия: </translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="865"/>
+        <location filename="../src/mainwindow.cpp" line="936"/>
         <source>GUI program for configuring Conky in MX Linux</source>
-        <translation>Оконное приложение для конфигурации Conky в MX Linux</translation>
+        <translation>Графическая программа для настройки Conky в MX Linux</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="868"/>
+        <location filename="../src/mainwindow.cpp" line="939"/>
         <source>Copyright (c) MX Linux</source>
         <translation>Copyright (c) MX Linux</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="869"/>
+        <location filename="../src/mainwindow.cpp" line="940"/>
         <source>License</source>
         <translation>Лицензия</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="870"/>
-        <location filename="../src/mainwindow.cpp" line="882"/>
+        <location filename="../src/mainwindow.cpp" line="941"/>
+        <location filename="../src/mainwindow.cpp" line="951"/>
         <source>Changelog</source>
         <translation>Список изменений</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="871"/>
+        <location filename="../src/mainwindow.cpp" line="942"/>
         <source>Cancel</source>
         <translation>Отмена</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="893"/>
+        <location filename="../src/mainwindow.cpp" line="136"/>
+        <location filename="../src/mainwindow.cpp" line="962"/>
         <source>&amp;Close</source>
         <translation>&amp;Закрыть</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="924"/>
+        <location filename="../src/mainwindow.cpp" line="979"/>
         <source>MX Conky Help</source>
         <translation>Справка MX Conky</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="969"/>
-        <location filename="../src/mainwindow.cpp" line="1018"/>
+        <location filename="../src/mainwindow.cpp" line="1003"/>
+        <location filename="../src/mainwindow.cpp" line="1052"/>
         <source>Autostart</source>
         <translation>Автозапуск</translation>
     </message>
@@ -857,32 +875,32 @@ Do you want to customize it with elevated privileges?</source>
     <message>
         <location filename="../src/previewdialog.cpp" line="50"/>
         <source>Generate Preview</source>
-        <translation type="unfinished"/>
+        <translation>Создать предпросмотр</translation>
     </message>
     <message>
         <location filename="../src/previewdialog.cpp" line="75"/>
         <source>Generate preview images for</source>
-        <translation type="unfinished"/>
+        <translation>Создать изображения предпросмотра для</translation>
     </message>
     <message>
         <location filename="../src/previewdialog.cpp" line="78"/>
         <source>Selected Widget</source>
-        <translation type="unfinished"/>
+        <translation>Выбранного виджета</translation>
     </message>
     <message>
         <location filename="../src/previewdialog.cpp" line="79"/>
         <source>All Widgets with Missing Previews</source>
-        <translation type="unfinished"/>
+        <translation>Всех виджетов без предпросмотра</translation>
     </message>
     <message>
         <location filename="../src/previewdialog.cpp" line="80"/>
         <source>All Widgets (Overwrite Existing Images)</source>
-        <translation type="unfinished"/>
+        <translation>Всех виджетов (перезаписать существующие изображения)</translation>
     </message>
     <message>
         <location filename="../src/previewdialog.cpp" line="85"/>
         <source>No conky is currently selected</source>
-        <translation type="unfinished"/>
+        <translation>В данный момент conky не выбран</translation>
     </message>
     <message>
         <location filename="../src/previewdialog.cpp" line="93"/>
@@ -892,12 +910,12 @@ Do you want to customize it with elevated privileges?</source>
     <message>
         <location filename="../src/previewdialog.cpp" line="96"/>
         <source>High quality images (PNG)</source>
-        <translation type="unfinished"/>
+        <translation>Высокое качество изображений (PNG)</translation>
     </message>
     <message>
         <location filename="../src/previewdialog.cpp" line="97"/>
         <source>Generate preview images in PNG format instead of JPEG</source>
-        <translation type="unfinished"/>
+        <translation>Создавать изображения предпросмотра в формате PNG вместо JPEG</translation>
     </message>
     <message>
         <location filename="../src/previewdialog.cpp" line="114"/>
@@ -912,28 +930,29 @@ Do you want to customize it with elevated privileges?</source>
     <message>
         <location filename="../src/previewdialog.cpp" line="145"/>
         <source>No Items</source>
-        <translation type="unfinished"/>
+        <translation>Нет элементов</translation>
     </message>
     <message>
         <location filename="../src/previewdialog.cpp" line="145"/>
         <source>No conky widgets need preview generation.</source>
-        <translation type="unfinished"/>
+        <translation>Ни для одного виджета conky не требуется создание предпросмотра.</translation>
     </message>
     <message>
         <location filename="../src/previewdialog.cpp" line="151"/>
         <source>Missing Dependency</source>
-        <translation type="unfinished"/>
+        <translation>Отсутствует зависимость</translation>
     </message>
     <message>
         <location filename="../src/previewdialog.cpp" line="152"/>
         <source>Preview generation requires the GraphicsMagick compatibility tools.
 Please install the graphicsmagick-imagemagick-compat package to enable this feature.</source>
-        <translation type="unfinished"/>
+        <translation>Создание предпросмотра требует инструментов совместимости GraphicsMagick.
+Установите пакет graphicsmagick-imagemagick-compat, чтобы включить эту функцию.</translation>
     </message>
     <message>
         <location filename="../src/previewdialog.cpp" line="163"/>
         <source>Starting preview generation...</source>
-        <translation type="unfinished"/>
+        <translation>Запуск создания предпросмотра...</translation>
     </message>
     <message>
         <location filename="../src/previewdialog.cpp" line="167"/>
@@ -943,12 +962,12 @@ Please install the graphicsmagick-imagemagick-compat package to enable this feat
     <message>
         <location filename="../src/previewdialog.cpp" line="206"/>
         <source>Generating preview for: %1</source>
-        <translation type="unfinished"/>
+        <translation>Создание предпросмотра для: %1</translation>
     </message>
     <message>
         <location filename="../src/previewdialog.cpp" line="426"/>
         <source>Preview generation complete! Generated %1 previews.</source>
-        <translation type="unfinished"/>
+        <translation>Создание предпросмотра завершено! Создано %1 предпросмотров.</translation>
     </message>
     <message>
         <location filename="../src/previewdialog.cpp" line="430"/>
@@ -958,30 +977,35 @@ Please install the graphicsmagick-imagemagick-compat package to enable this feat
     <message>
         <location filename="../src/previewdialog.cpp" line="433"/>
         <source>Preview Generation Complete</source>
-        <translation type="unfinished"/>
+        <translation>Создание предпросмотра завершено</translation>
     </message>
     <message>
         <location filename="../src/previewdialog.cpp" line="434"/>
         <source>Successfully generated %1 preview images.</source>
-        <translation type="unfinished"/>
+        <translation>Успешно создано %1 изображений предпросмотра.</translation>
     </message>
 </context>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../src/main.cpp" line="67"/>
+        <location filename="../src/main.cpp" line="68"/>
         <source>Select Conky Manager config file</source>
-        <translation>Выбор конфигурационного файла Менеджера Conky</translation>
+        <translation>Выберите файл конфигурации Менеджера Conky</translation>
     </message>
     <message>
-        <location filename="../src/main.cpp" line="112"/>
+        <location filename="../src/main.cpp" line="113"/>
         <source>Error</source>
         <translation>Ошибка</translation>
     </message>
     <message>
-        <location filename="../src/main.cpp" line="112"/>
+        <location filename="../src/main.cpp" line="113"/>
         <source>You must run this program as normal user</source>
-        <translation>Вы должны запускать приложение под обычным пользователем</translation>
+        <translation>Вы должны запускать эту программу от обычного пользователя</translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="163"/>
+        <source>Could not load %1</source>
+        <translation>Не удалось загрузить %1</translation>
     </message>
 </context>
 <context>
@@ -990,17 +1014,17 @@ Please install the graphicsmagick-imagemagick-compat package to enable this feat
         <location filename="../src/settingsdialog.cpp" line="40"/>
         <location filename="../src/settingsdialog.cpp" line="62"/>
         <source>Select Conky Directory</source>
-        <translation type="unfinished"/>
+        <translation>Выберите папку Conky</translation>
     </message>
     <message>
         <location filename="../src/settingsdialog.cpp" line="83"/>
         <source>MX Conky Settings</source>
-        <translation type="unfinished"/>
+        <translation>Настройки MX Conky</translation>
     </message>
     <message>
         <location filename="../src/settingsdialog.cpp" line="91"/>
         <source>Search Paths</source>
-        <translation type="unfinished"/>
+        <translation>Пути поиска</translation>
     </message>
     <message>
         <location filename="../src/settingsdialog.cpp" line="92"/>
@@ -1010,22 +1034,22 @@ Please install the graphicsmagick-imagemagick-compat package to enable this feat
     <message>
         <location filename="../src/settingsdialog.cpp" line="167"/>
         <source>Conky Search Paths</source>
-        <translation type="unfinished"/>
+        <translation>Пути поиска Conky</translation>
     </message>
     <message>
         <location filename="../src/settingsdialog.cpp" line="173"/>
         <source>Add Path</source>
-        <translation type="unfinished"/>
+        <translation>Добавить путь</translation>
     </message>
     <message>
         <location filename="../src/settingsdialog.cpp" line="176"/>
         <source>Remove Path</source>
-        <translation type="unfinished"/>
+        <translation>Удалить путь</translation>
     </message>
     <message>
         <location filename="../src/settingsdialog.cpp" line="179"/>
         <source>Edit Path</source>
-        <translation type="unfinished"/>
+        <translation>Редактировать путь</translation>
     </message>
     <message>
         <location filename="../src/settingsdialog.cpp" line="206"/>
@@ -1035,12 +1059,12 @@ Please install the graphicsmagick-imagemagick-compat package to enable this feat
     <message>
         <location filename="../src/settingsdialog.cpp" line="209"/>
         <source>Start conky at system startup</source>
-        <translation type="unfinished"/>
+        <translation>Запускать conky при загрузке системы</translation>
     </message>
     <message>
         <location filename="../src/settingsdialog.cpp" line="212"/>
         <source>Startup delay (seconds):</source>
-        <translation type="unfinished"/>
+        <translation>Задержка запуска (секунд):</translation>
     </message>
     <message>
         <location filename="../src/settingsdialog.cpp" line="95"/>

@@ -1,3 +1,62 @@
+mx-packageinstaller (26.07.1302) stable; urgency=medium
+
+  * Release
+
+ -- Devs <devteam@localdomain>  Mon, 13 Jul 2026 13:05:32 +0200
+
+mx-packageinstaller (26.07) mx; urgency=medium
+
+  * Abort the current operation and return to where you were when
+    the authentication dialog is cancelled, instead of showing a
+    confusing message or appearing to succeed
+  * Allow cancelling package list downloads
+  * Apply a timeout to the online connection check so it does not
+    hang indefinitely
+  * Stop the installation when refreshing package sources fails
+  * Fix LibreOffice and LibreWolf no longer hidden from the APT
+    package lists
+  * Fix version column sorting in APT, Snap, and Flatpak lists so
+    numeric versions like 2.10 and 2.9 sort correctly
+  * Fix Flatpak duplicates from different remotes remaining
+    uninstallable after installation
+  * Fix showing a success pop-up when the install or uninstall
+    confirmation was cancelled
+  * Fix a duplicate right-click menu on the Popular tab that
+    could run the package info command twice
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 03 Jul 2026 20:31:08 -0400
+
+mx-packageinstaller (26.06.2) mx; urgency=medium
+
+  * Show live Snap progress in the Output tab while Snaps download and install,
+    instead of leaving it blank until the operation finishes
+  * Make first-time Snap setup more reliable by automatically retrying the
+    initial core component install when it is not ready on the first try
+  * No longer add Snap program locations to your PATH when the system is booted
+    without systemd (such as with SysVinit), where Snap is not available
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 04 Jun 2026 22:04:00 -0400
+
+mx-packageinstaller (26.06.1) mx; urgency=medium
+
+  * Add a new Snaps tab on systems that support Snap packages
+  * Search the Snap store and install, remove, or update Snap packages from
+    inside MX Package Installer
+  * Add guided Snap setup for systems that do not have Snap support ready yet
+  * Show clearer messages when Snap setup needs more attention
+  * Help newly installed Snap apps appear in menus and terminal commands after
+    logging out and back in
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 04 Jun 2026 00:00:00 -0400
+
+mx-packageinstaller (26.05.1) mx; urgency=medium
+
+  * Improve how the app handles its temporary log files for better
+    reliability and safety
+  * Minor under-the-hood improvements
+
+ -- Adrian <adrian@mxlinux.org>  Sat, 30 May 2026 11:20:57 -0400
+
 mx-packageinstaller (26.05) mx; urgency=medium
 
   * Ignore fuser stderr when parsing lock owner

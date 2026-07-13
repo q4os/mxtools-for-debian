@@ -1,0 +1,418 @@
+#!/usr/bin/bash
+
+# need bash
+[ -z "${BASH_VERSION:-}" ] && exec "$0" "$@"
+
+# GETTEXT_KEYWORD="gt"
+# GETTEXT_KEYWORD="pf"
+# GETTEXT_KEYWORD="pfgt"
+# GETTEXT_KEYWORD="error_box_pf"
+
+# The antiX helper library gives us INITRD_CONF, error_box and the gettext
+# wrappers.  It is sourced before "set -u" because it is not written for
+# nounset; library and live-device calls below are wrapped in "set +u".
+if [[ -e "/usr/local/lib/antiX/antiX-common.sh" ]]; then
+    # shellcheck disable=SC1091
+    source /usr/local/lib/antiX/antiX-common.sh "$@"
+else
+    # shellcheck disable=SC1091
+    source /usr/lib/antiX/antiX-common.sh "$@"
+fi
+
+set -u
+
+ME=${0##*/}
+PATH=/usr/local/bin:/usr/bin:/usr/sbin
+export PATH
+
+# Mountpoints we mounted ourselves (e.g. for toram); unmounted again on exit.
+MOUNTED_BY_US=""
+
+usage() {
+cat <<USAGE
+Usage: ${ME} [options] [mount-point]
+
+Update boot menu labels on a live USB tree.
+
+If <mount-point> is omitted the partition holding the boot menus is located
+automatically (the BIOS/EFI grub partition, then the boot partition) and
+mounted if needed -- including the 'toram' case, where the device is not
+mounted and boot-dev is empty.  It is unmounted again on exit unless --keep-
+mounted is given.
+
+The release name is taken from lsb-release (DISTRIB_DESCRIPTION) when present,
+otherwise from os-release (PRETTY_NAME).  When an explicit live USB boot tree
+is given and it has no /etc metadata, the existing dated boot labels in that
+tree are used instead.  It is written to:
+  - syslinux / isolinux "MENU TITLE" and grub theme "Welcome to ..." banners
+    (as "Welcome to <release>")
+  - the "live" boot entry label (syslinux/isolinux MENU LABEL and the grub
+    menuentry tagged --id=linux), as "<release> (<current date>)"
+Other entries (Custom Boot, Memory Test, ...) are left unchanged.
+
+Options:
+    -h|--help           Show this help
+    -n|--dry-run        Show what would be changed
+    -m|--keep-mounted   Do not unmount a device that we mounted
+
+USAGE
+exit "${1:-1}"
+}
+
+die() {
+    printf '%s: %s\n' "$ME" "$*" >&2
+    exit 1
+}
+
+log() {
+    printf '%s\n' "$*"
+}
+
+# Unmount anything we mounted (unless asked to keep it).  Runs from an EXIT trap.
+cleanup() {
+    [[ -n "${KEEP_MOUNTED:-}" ]] && return
+    [[ -n "$MOUNTED_BY_US" ]] || return
+    sync
+    local m
+    for m in $MOUNTED_BY_US; do
+        mountpoint -q "$m" 2>/dev/null && umount "$m" 2>/dev/null
+    done
+}
+
+# True if $1 looks like a live boot tree (carries boot menus).
+has_live_menus() {
+    local mp=$1
+    [[ -d "$mp/boot/grub/config"  ]] && return 0
+    [[ -d "$mp/boot/syslinux"     ]] && return 0
+    [[ -d "$mp/boot/isolinux"     ]] && return 0
+    [[ -r "$mp/boot/grub/grub.cfg" ]] && return 0
+    return 1
+}
+
+backup_once() {
+    local file=$1 bak=${1}.bak
+    [[ -e "$bak" ]] || cp -a -- "$file" "$bak"
+}
+
+# Locate the partition holding the boot menus, mirroring live-grubsave: prefer
+# the BIOS/EFI grub partition, then the boot partition.  Use it where it is
+# already mounted; otherwise mount it by UUID -- this is the toram case, where
+# the device is not mounted and boot-dev is empty.  Sets DETECTED_MP.
+detect_boot_mp() {
+    [[ $(id -u) -eq 0 ]] || die "auto-detecting the live device needs root; re-run with sudo or pass a mount-point"
+
+    # antiX-common.sh is not nounset-safe and the config vars below may be unset.
+    set +u
+
+    local config=${INITRD_CONF:-/live/config/initrd.out}
+    [[ -r "$config" ]] || error_box_pf "This script can only be run on a %s system." "live-usb/HD"
+
+    # Partitions recorded by the initrd: BIOS holds the bootloader/grub menus,
+    # BOOT holds the squashfs; on single-partition media they are the same.
+    # Declared local so the eval-grep below does not leak globals; they are set
+    # by that eval and read via the dynamic eval in the loop (hence SC2034).
+    # shellcheck disable=SC2034
+    local BIOS_DEV BIOS_FSTYPE BIOS_MP BIOS_UUID
+    # shellcheck disable=SC2034
+    local BOOT_DEV BOOT_FSTYPE BOOT_MP BOOT_UUID
+    eval "$(grep -E '^(BIOS|BOOT)_(DEV|FSTYPE|MP|UUID)=' "$config")"
+
+    local grub_mp="" tag dev mp uuid cur fstype
+    for tag in BIOS BOOT; do
+        eval "dev=\${${tag}_DEV:-} mp=\${${tag}_MP:-} uuid=\${${tag}_UUID:-}"
+        if [[ -z "$mp" ]]; then
+            [[ $tag = BIOS ]] && mp=/live/bios-dev || mp=/live/boot-dev
+        fi
+
+        # already mounted at its mountpoint?
+        if mountpoint -q "$mp" 2>/dev/null; then
+            has_live_menus "$mp" && { grub_mp=$mp; break; }
+            continue
+        fi
+
+        # resolve the device: config value, else by UUID
+        [[ -n "$dev" ]] || { [[ -n "$uuid" ]] && dev=$(readlink -e "/dev/disk/by-uuid/$uuid"); }
+        [[ -n "$dev" && -e "$dev" ]] || continue
+
+        # mounted somewhere else already?
+        cur=$(lsblk -no MOUNTPOINT "$dev" 2>/dev/null | grep -m1 .)
+        if [[ -n "$cur" ]]; then
+            has_live_menus "$cur" && { grub_mp=$cur; break; }
+            continue
+        fi
+
+        # not mounted (toram): mount it at its mountpoint
+        [[ -d "$mp" ]] || mkdir -p "$mp"
+        fstype=$(blkid -o value -s TYPE "$dev" 2>/dev/null)
+        if [[ -n "$fstype" ]]; then
+            mount -t "$fstype" "$dev" "$mp" 2>/dev/null
+        else
+            mount "$dev" "$mp" 2>/dev/null
+        fi
+        mountpoint -q "$mp" 2>/dev/null || continue
+        MOUNTED_BY_US="$mp${MOUNTED_BY_US:+ }$MOUNTED_BY_US"
+        has_live_menus "$mp" && { grub_mp=$mp; break; }
+    done
+
+    [[ -n "$grub_mp" ]] || error_box \
+        "$(gt "Could not find the live boot device")" \
+        "$(gt "Please plug in the live-usb device and try again")"
+
+    DETECTED_MP=$grub_mp
+    set -u
+}
+
+# Make sure we are pointed at a live boot tree and not some unrelated directory.
+validate_tree() {
+    local root=$1
+
+    [[ -d "$root" ]] || die "mount-point not found: $root"
+    has_live_menus "$root" \
+        || die "no live boot menus under $root (expected boot/grub/config, boot/syslinux or boot/isolinux)"
+}
+
+# Resolve the release name from a system tree.  Prefer the lsb-release
+# description (the distro branding, e.g. "MX 23.6 Libretto"), then fall back to
+# the os-release pretty name.  Looks only under the given tree; callers decide
+# whether falling back to the running system is correct for their use case.
+get_release_name() {
+    local root=$1 release='' f
+
+    f="$root/etc/lsb-release"
+    if [[ -r "$f" ]]; then
+        release=$(sed -n 's/^DISTRIB_DESCRIPTION=//p' "$f" | tail -n 1)
+    fi
+    if [[ -z "$release" ]]; then
+        f="$root/etc/os-release"
+        if [[ -r "$f" ]]; then
+            release=$(sed -n 's/^PRETTY_NAME=//p' "$f" | tail -n 1)
+        fi
+    fi
+
+    release=${release#\"}
+    release=${release%\"}
+    [[ -n "$release" ]] || return 1
+    printf '%s\n' "$release"
+}
+
+# Resolve the release name from existing dated live boot labels in a boot tree.
+# This is for an explicitly mounted USB boot partition, which normally has no
+# /etc metadata.  Strip the old build date and any sysvinit/systemd marker.
+get_menu_release_name() {
+    local root=$1 file release=''
+
+    for file in "$root"/boot/grub/grub.cfg "$root"/boot/grub/config/*.cfg \
+        "$root"/boot/isolinux/isolinux.cfg "$root"/boot/syslinux/syslinux.cfg \
+        "$root"/boot/isolinux/readme.msg "$root"/boot/syslinux/readme.msg; do
+        [[ -r "$file" ]] || continue
+        release=$(perl -ne '
+            next if /^\s*#/;
+            next unless /\([A-Z][a-z]+ \d{1,2}, \d{4}\)/;
+            my $s = "";
+            if (/^menuentry\s+"([^"]*)"/) {
+                $s = $1;
+            } elsif (/^\s*MENU\s+LABEL\s+(.*)$/i) {
+                $s = $1;
+            } elsif (/^\s+\S+\s+(.*)$/) {
+                $s = $1;
+            }
+            next unless length $s;
+            $s =~ s/\s*\([A-Z][a-z]+ \d{1,2}, \d{4}\)//;
+            $s =~ s/\s*\((?:sysvinit|systemd)\)\s*$//;
+            $s =~ s/^\s+|\s+$//g;
+            if (length $s) { print "$s\n"; exit 0; }
+        ' -- "$file")
+        [[ -n "$release" ]] && break
+    done
+
+    [[ -n "$release" ]] || return 1
+    printf '%s\n' "$release"
+}
+
+# Rewrite the "MENU TITLE [Welcome to] ..." banner in a syslinux/isolinux cfg,
+# keeping a "Welcome to " prefix when present.  No-op if there is no such line.
+update_menu_title() {
+    local file=$1 new=$2
+
+    [[ -r "$file" ]] || return 0
+    grep -qiE '^[[:space:]]*MENU[[:space:]]+TITLE[[:space:]]' "$file" || return 0
+
+    if [[ -n "${DRY_RUN:-}" ]]; then
+        log "would update menu title: $file"
+        return 0
+    fi
+
+    backup_once "$file"
+    NEW_TEXT=$new perl -i -pe 's/^(\s*MENU\s+TITLE\s+(?:Welcome to\s+)?).*$/$1$ENV{NEW_TEXT}/i' -- "$file"
+}
+
+# Rewrite the grub theme title banner: text = "Welcome to ...!" -- keeping the
+# "Welcome to " prefix, the trailing "!" and the closing quote (and anything
+# after it, e.g. a color attribute).  Anchored on the closing quote rather than
+# the end of line, and processed per line so adjacent lines are never merged.
+# No-op if there is no such line.
+update_theme_text() {
+    local file=$1 new=$2
+
+    [[ -r "$file" ]] || return 0
+    grep -q 'Welcome to' "$file" || return 0
+
+    if [[ -n "${DRY_RUN:-}" ]]; then
+        log "would update theme title: $file"
+        return 0
+    fi
+
+    backup_once "$file"
+    NEW_TEXT=$new perl -i -pe 's/(Welcome to\s+)[^"]*?(!?)"/$1$ENV{NEW_TEXT}$2"/' -- "$file"
+}
+
+# Rewrite the OS boot-entry MENU LABEL(s) in a syslinux/isolinux cfg.  The OS
+# entries are the ones carrying a build date like "(May 24, 2026)"; the function
+# entries (Memory_Test, ...) have none and are left alone.  The name and date
+# are replaced while a trailing init marker -- " (sysvinit)" / " (systemd)" -- is
+# kept, so the sysvinit and systemd entries stay distinct.  Handles any number.
+update_menu_label() {
+    local file=$1 text=$2
+
+    [[ -r "$file" ]] || return 0
+    grep -qE '\([A-Z][a-z]+ [0-9]{1,2}, [0-9]{4}\)' "$file" || return 0
+
+    if [[ -n "${DRY_RUN:-}" ]]; then
+        log "would update menu label: $file"
+        return 0
+    fi
+
+    # [ \t] (not \s) for trailing/optional space so the line's newline is kept.
+    backup_once "$file"
+    NEW_TEXT=$text perl -i -pe 's/^([ \t]*MENU[ \t]+LABEL[ \t]+).* \([A-Z][a-z]+ \d{1,2}, \d{4}\)([ \t]*\([^)]*\))?[ \t]*$/$1$ENV{NEW_TEXT}$2/i' -- "$file"
+}
+
+# Rewrite the OS grub menuentry title(s) -- again identified by the build date,
+# preserving the leading space, a trailing init marker, and everything after the
+# quoted title.  Skips commented (#menuentry) and non-OS entries.  Any number.
+update_grub_menuentry() {
+    local file=$1 text=$2
+
+    [[ -r "$file" ]] || return 0
+    grep -qE '^menuentry[[:space:]].*\([A-Z][a-z]+ [0-9]{1,2}, [0-9]{4}\)' "$file" || return 0
+
+    if [[ -n "${DRY_RUN:-}" ]]; then
+        log "would update grub menuentry: $file"
+        return 0
+    fi
+
+    backup_once "$file"
+    NEW_TEXT=$text perl -i -pe 's/^(menuentry\s+")[^"]* \([A-Z][a-z]+ \d{1,2}, \d{4}\)([ \t]*\([^)]*\))?(")/$1 $ENV{NEW_TEXT}$2$3/' -- "$file"
+}
+
+# Rewrite the dated OS lines in a gfxboot readme.msg -- the column-aligned text
+# gfxboot actually shows ("   live   <name> (<date>) (<init>)").  Keeps the
+# leading label column and any trailing init marker; non-dated lines are left
+# alone.  [ \t] (not \s) so the line's newline is preserved.
+update_readme_msg() {
+    local file=$1 text=$2
+
+    [[ -r "$file" ]] || return 0
+    grep -qE '\([A-Z][a-z]+ [0-9]{1,2}, [0-9]{4}\)' "$file" || return 0
+
+    if [[ -n "${DRY_RUN:-}" ]]; then
+        log "would update readme: $file"
+        return 0
+    fi
+
+    backup_once "$file"
+    NEW_TEXT=$text perl -i -pe 's/^([ \t]+\S+[ \t]+).* \([A-Z][a-z]+ \d{1,2}, \d{4}\)([ \t]*\([^)]*\))?[ \t]*$/$1$ENV{NEW_TEXT}$2/' -- "$file"
+}
+
+main() {
+    local root='' new_title='' file explicit_root=0
+
+    trap cleanup EXIT
+
+    while [[ $# -gt 0 ]]; do
+        case $1 in
+            -h|--help)
+                usage 0
+                ;;
+            -n|--dry-run)
+                DRY_RUN=1
+                ;;
+            -m|--keep-mounted)
+                KEEP_MOUNTED=1
+                ;;
+            -*)
+                die "unknown option: $1"
+                ;;
+            *)
+                [[ -z "$root" ]] || die "only one mount-point may be given"
+                root=$1
+                explicit_root=1
+                ;;
+        esac
+        shift
+    done
+
+    if [[ -z "$root" ]]; then
+        detect_boot_mp
+        root=$DETECTED_MP
+        log "using live boot device mounted at: $root"
+    fi
+
+    validate_tree "$root"
+
+    # Prefer release metadata from a full target tree.  For an explicitly mounted
+    # live USB boot tree (usually no /etc), reuse its existing dated boot labels
+    # instead of the host's /etc, so refreshing an older USB does not stamp it
+    # with the host release.  Auto-detected live media still falls back to the
+    # running live system's /etc so remaster labels use the remastered release.
+    if ! new_title=$(get_release_name "$root"); then
+        if [[ $explicit_root -eq 1 ]]; then
+            new_title=$(get_menu_release_name "$root") \
+                || die "could not determine the release name from target metadata or boot menus"
+        else
+            new_title=$(get_release_name "") \
+                || die "could not determine the release name from lsb-release or os-release"
+        fi
+    fi
+
+    # Per-entry OS label gets the release name plus the current date, matching
+    # the original "<name> (<date>)" style, e.g. "... (June 13, 2026)".
+    # Use bash's built-in printf time format (-1 = now) to avoid forking date.
+    local today label_text
+    printf -v today '%(%B %-d, %Y)T' -1
+    label_text="$new_title ($today)"
+
+    # Main menu title banner -> "Welcome to <release>" (no date):
+    #   - syslinux/isolinux "MENU TITLE [Welcome to] ..." lines
+    #   - grub theme "Welcome to ...!" banner text
+    for file in "$root"/boot/isolinux/isolinux.cfg "$root"/boot/syslinux/syslinux.cfg; do
+        [[ -f "$file" ]] && update_menu_title "$file" "$new_title"
+    done
+
+    for file in "$root"/boot/grub/theme/*.txt; do
+        [[ -f "$file" ]] && update_theme_text "$file" "$new_title"
+    done
+
+    # OS boot entry labels -> "<release> (<current date>)[ (<init marker>)]":
+    #   - syslinux/isolinux MENU LABEL lines that carry a build date
+    #   - grub menuentry titles that carry a build date
+    # (both the sysvinit and systemd variants, keeping their init markers)
+    for file in "$root"/boot/isolinux/isolinux.cfg "$root"/boot/syslinux/syslinux.cfg; do
+        [[ -f "$file" ]] && update_menu_label "$file" "$label_text"
+    done
+
+    for file in "$root"/boot/grub/grub.cfg "$root"/boot/grub/config/*.cfg; do
+        [[ -f "$file" ]] && update_grub_menuentry "$file" "$label_text"
+    done
+
+    # gfxboot shows readme.msg as the graphical syslinux/isolinux menu text.
+    for file in "$root"/boot/isolinux/readme.msg "$root"/boot/syslinux/readme.msg; do
+        [[ -f "$file" ]] && update_readme_msg "$file" "$label_text"
+    done
+
+    log "new release title: $new_title"
+    log "new boot label:    $label_text"
+    log "done"
+}
+
+main "$@"

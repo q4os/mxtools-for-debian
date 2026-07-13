@@ -52,7 +52,6 @@ ExecuteList::ExecuteList(int maxN, int maxD, std::vector<std::unique_ptr<Crontab
                                            tr("&Update"), this));
         }
     }
-    //	mainLayout->setMargin(0);
     setLayout(mainLayout);
 
     numSpinBox->setRange(JobScheduler::EXECUTE_LIST_MIN, JobScheduler::EXECUTE_LIST_MAX);

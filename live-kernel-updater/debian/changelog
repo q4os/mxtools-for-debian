@@ -1,3 +1,123 @@
+live-kernel-updater (26.06.2.1302) stable; urgency=medium
+
+  * Release
+
+ -- Devs <devteam@localdomain>  Mon, 13 Jul 2026 13:05:28 +0200
+
+live-kernel-updater (26.06.2) mx; urgency=medium
+
+  * Add per-vendor microcode injection toggle to TUI action menu: two entries
+    "Disable/Enable AMD microcode" and "Disable/Enable Intel microcode" appear
+    when uc-tool is installed; state is stored in persistent flag files
+    /etc/live-kernel-updater/no-ucode-amd and no-ucode-intel; selecting a
+    toggle flips the flag file and restarts
+  * Extend --no-ucode to accept an optional vendor list: --no-ucode=amd,
+    --no-ucode=intel, or --no-ucode=amd,intel (bare --no-ucode disables both,
+    preserving backward compatibility); CLI uses union semantics -- it adds to
+    whatever the flag files already disable rather than replacing them, so
+    --no-ucode=intel on a system with no-ucode-amd set disables both vendors
+    as expected
+  * Show effective vendor list in "Adding %s microcode to initrd" message so
+    the user sees which microcode is actually being injected
+  * When a vendor is disabled by --no-ucode for the current session but not by
+    its flag file, the TUI menu entry shows "(disabled by --no-ucode)" in the
+    label so the user can distinguish the persistent setting from the CLI
+    override
+  * Fix Quit in TUI action menu prompting "Perform another operation?": Quit
+    now exits immediately via my_exit; the offer_restart prompt is kept only
+    when the user cancels out of a sub-menu (kernel selection)
+  * Fix do_defrag() file patterns: use vmlinuz[1-9] and initrd[1-9].gz instead
+    of vmlinuz[0-9] and initrd[0-9].gz; slot 0 variants are never used
+    (numbered slots start at vmlinuz1/initrd1.gz)
+  * Set version string to 26.06.2
+
+ -- fehlix <fehlix@mxlinux.org>  Mon, 08 Jun 2026 06:01:32 -0400
+
+live-kernel-updater (26.06.1) mx; urgency=medium
+
+  * Fix copy_programs() writing etc/encrypt into the initrd when only
+    --encrypt was given but the system is not actually encrypted: etc/encrypt
+    is now written only when encrypted() is true (IS_ENCRYPTED non-empty),
+    not when CMD_ENCRYPT alone is set
+  * Fix copy_programs() leaving a stray etc/encrypt in the initrd when the
+    system is not encrypted: if copy-initrd-programs copies a wrongly-present
+    etc/encrypt from the initrd source (e.g. leftover from a previous
+    misconfiguration), the rebuilt initrd would trigger LUKS unlock at boot on
+    a non-LUKS system; add an elif branch to explicitly remove etc/encrypt from
+    the initrd work directory whenever encrypted() is false
+  * Man page: add note to -d/--device that the directory form cannot be used
+    with LUKS-encrypted live-USBs because a LUKS device requires two separate
+    mount points (unencrypted boot partition and LUKS container); use the
+    block device path instead
+  * Add TryExec= to desktop file
+  * Remove sudo from desktop file
+  * Bump standards version to 4.6.2 and debhelper-compat to 13
+  * Add uc-tool-mx to Depends in debian/control
+  * Set version string to 26.06.1
+
+ -- fehlix <fehlix@mxlinux.org>  Sun, 07 Jun 2026 11:11:12 -0400
+
+live-kernel-updater (0.2.30+16) mx; urgency=medium
+
+  * Fix stale-slot false positive when a kernel was purged in the current
+    live session: stale_vm is now computed from the unfiltered squashfs
+    boot_all before the session-filtering step; previously filtering removed
+    the purged version from boot_all first, causing stale_vm to wrongly mark
+    the corresponding live slot with '?' even without persistence
+  * Hide session-purged kernels from the add/update selection on any live-
+    boot run (with or without persistence): kernels removed from the running
+    /boot overlay in the current session are filtered out of the selectable
+    pool so they cannot be offered as add/update candidates
+  * Mark live slots as questionable ('?') when the slot's kernel was purged
+    under root persistence: persist_removed_vm detects slots whose kernel
+    exists in the squashfs but is absent from the running /boot overlay,
+    and adds the '?' warning to those slots in the action menu
+  * Replace fatal root-check error with sudo re-exec: instead of aborting
+    with "must be run as root", non-root invocations now re-execute the
+    script via 'sudo -k' (forcing a fresh password prompt, no cached
+    credentials reused)
+  * Add 'Legend:' header above the '*'/'?' marker lines in the action menu
+    so they are clearly identified as a key and not part of the kernel list;
+    reduce spacing after '?' from two spaces to one to align with '*' line;
+    remove redundant '*' marker line from kernel selection sub-screen (it was
+    shown without the Legend header and is already visible inline in the list);
+    suppress legend entirely when no markers are relevant: '*' only shown when
+    there are at least two distinct kernel versions across live slots (marking
+    identical versions in multiple slots adds no information), '?' only when
+    at least one slot is flagged; with a single kernel version the legend is
+    never shown
+  * Version string: 26.05.4
+
+ -- fehlix <fehlix@mxlinux.org>  Tue, 26 May 2026 12:03:43 -0400
+
+live-kernel-updater (0.2.30+15) mx; urgency=medium
+
+  * Fix LUKS live-usb detection
+  * Fix partition probe for LUKS live-usb when a disk device is given
+  * Fix mount --move failing on systemd hosts (all mounts are shared by
+    default, which prohibits moving them): replace with plain umount +
+    remount when LKU owns the mount, or bind-mount when the device is
+    already mounted by an automounter (GIO/Thunar/KDE Plasma)
+  * Reuse already-opened LUKS mapper on external LUKS USB: detect an
+    existing crypt-type child via lsblk and use /dev/mapper/NAME directly
+    instead of calling cryptsetup open (which would fail on an already-
+    opened device)
+  * Reuse already-mounted LUKS device on external LUKS USB: detect via
+    findmnt and bind-mount to USB_DIR; set LKU_DID_MOUNT=true in all LUKS
+    paths so mp_cleanup always tears down the mount on exit
+  * Fix initrd rebuild on LUKS live-usb: copy_programs() now writes
+    etc/encrypt into the initrd work directory when IS_ENCRYPTED=true
+    or --encrypt is given, so the rebuilt initrd activates LUKS at boot
+  * Fix disk-device partition probe: replace first-with-FSTYPE heuristic
+    with a mount-and-probe loop that skips BIOS-boot (no FSTYPE), ESP
+    (vfat), crypto_LUKS, and swap partitions, mounts each remaining
+    candidate, and verifies live content with find_live_boot_dir; handles
+    any partition layout including leading data partitions and ESP at any
+    position
+  * Version string: 26.05.3
+
+ -- fehlix <fehlix@mxlinux.org>  Thu, 21 May 2026 19:58:13 -0400
+
 live-kernel-updater (0.2.30+14) mx; urgency=medium
 
   * Add -e/--encrypt flag to force cryptsetup into initrd regardless of

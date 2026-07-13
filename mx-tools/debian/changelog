@@ -1,3 +1,27 @@
+mx-tools (26.06.1302) stable; urgency=medium
+
+  * Release
+
+ -- Devs <devteam@localdomain>  Mon, 13 Jul 2026 13:05:35 +0200
+
+mx-tools (26.06) mx; urgency=medium
+
+  * Fix missing tools on some desktop environments (Fluxbox)
+  * Accept X-MX-* category tokens for desktop file compatibility
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 19 Jun 2026 14:48:19 -0400
+
+mx-tools (26.05.4) mx; urgency=medium
+
+  * Fix display of translated tool names (MX prefix and & escaping)
+  * Fix hiding tools from the menu
+  * Include environment-filtered tools when hiding or unhiding menu entries
+  * Match desktop Categories exactly to avoid miscategorized tools
+  * Fix flat button hover underline
+  * Recompute layout on font change
+
+ -- Adrian <adrian@mxlinux.org>  Sat, 30 May 2026 19:33:55 -0400
+
 mx-tools (26.05.2) mx; urgency=medium
 
   * Delete removed grid widgets immediately: fix potential corruption

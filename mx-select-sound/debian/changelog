@@ -1,3 +1,27 @@
+mx-select-sound (26.06.4.1302) stable; urgency=medium
+
+  * Release
+
+ -- Devs <devteam@localdomain>  Mon, 13 Jul 2026 13:05:33 +0200
+
+mx-select-sound (26.06.4) mx; urgency=medium
+
+  * Add PipeWire support: when PipeWire is detected, list audio devices via
+    pactl and set the default with pactl set-default-sink (persistent via
+    WirePlumber); fall back to the existing ALSA configuration otherwise.
+  * Show the current default sound card as the selected card when the program
+    opens.
+  * Leave the sound configuration file unchanged when Apply is clicked without
+    changing the selected card.
+  * Keep the window responsive while playing the test sound, and prevent
+    starting another test until the current one finishes.
+  * Show a clear message when the test sound cannot play, including a hint to
+    install alsa-utils when speaker-test is missing.
+  * Show available sound cards and the current default even when command-line
+    sound helpers are unavailable.
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 26 Jun 2026 20:12:41 -0400
+
 mx-select-sound (26.03) mx; urgency=medium
 
   * Use internal Qt help and license viewer

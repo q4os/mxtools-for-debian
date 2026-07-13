@@ -87,6 +87,11 @@ public:
     static QString list2String(const QStringList &list);
     QString cronText();
 
+    static bool isSystemCron(const QString &owner)
+    {
+        return owner == QLatin1String("/etc/crontab") || owner.startsWith(QLatin1String("/etc/cron.d/"));
+    }
+
     QString estr{};
 
     // private:

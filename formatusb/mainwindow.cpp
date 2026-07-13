@@ -28,11 +28,25 @@
 #include "version.h"
 
 #include <QFileDialog>
+#include <QFileInfo>
 #include <QScrollBar>
 #include <QTextStream>
 
 #include <QDebug>
 #include <unistd.h>
+
+QString sessionLogPath()
+{
+    const QString name = QStringLiteral("formatusb.log");
+    if (::geteuid() == 0) {
+        return QStringLiteral("/run/") + name;
+    }
+    const QString runtimeDir = qEnvironmentVariable("XDG_RUNTIME_DIR");
+    if (!runtimeDir.isEmpty() && QFileInfo(runtimeDir).isDir()) {
+        return runtimeDir + QLatin1Char('/') + name;
+    }
+    return QStringLiteral("/tmp/") + name;
+}
 
 MainWindow::MainWindow()
     : ui(new Ui::MainWindow)
@@ -131,8 +145,7 @@ QString MainWindow::buildOptionList()
 // cleanup environment when window is closed
 void MainWindow::cleanup()
 {
-    QString log_name = "/tmp/formatusb.log";
-    system("[ -f " + log_name.toUtf8() + " ] && rm " + log_name.toUtf8());
+    QFile::remove(sessionLogPath());
 }
 
 // build the USB list

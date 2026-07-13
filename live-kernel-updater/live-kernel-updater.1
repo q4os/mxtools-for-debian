@@ -1,4 +1,4 @@
-.TH LIVE-KERNEL-UPDATER 1 "2026-05-21" "Version 26.05.2" "antiX/MX Documentation"
+.TH LIVE-KERNEL-UPDATER 1 "2026-06-08" "Version 26.06.2" "antiX/MX Documentation"
 .nh
 .ad l
 .SH NAME
@@ -90,6 +90,10 @@ The live\-usb device to update.  Use \fBlive\fR to explicitly target the running
 live system.  A block device path (e.g. \fI/dev/sdb1\fR) causes the tool to
 mount and update that device.  A directory path (e.g. \fI/mnt/usb\fR) is used
 directly as the live mount point without mounting.
+Do not use the directory form with LUKS\-encrypted live\-USBs: a LUKS device
+requires two separate mount points (unencrypted boot partition and LUKS
+container) which cannot be expressed as a single directory path.  Use the
+block device path instead and let the tool handle the LUKS setup.
 .TP
 \fB\-e\fR, \fB\-\-encrypt\fR
 Force \fBcryptsetup\fR to be copied into the initrd regardless of whether
@@ -161,9 +165,6 @@ Force multi\-kernel mode.  Auto\-detected as the default on MX Linux.
 \fB\-N\fR, \fB\-\-numeric\-ui\fR
 Use the legacy numbered\-list menu interface instead of the interactive one.
 .TP
-\fB\-U\fR, \fB\-\-no\-ucode\fR
-Skip microcode injection when repacking the initrd.
-.TP
 \fB\-p\fR, \fB\-\-pretend\fR
 Dry\-run mode.  Show what would be done without writing any files.
 .TP
@@ -177,6 +178,12 @@ Useful as a starting point for customisation.
 \fB\-\-shared\-initrd\fR
 Force shared\-initrd mode.  Used as the default when multi\-kernel mode
 is not auto\-detected.
+.TP
+\fB\-U\fR, \fB\-\-no\-ucode\fR[\fB=\fIlist\fR]
+Skip microcode refresh when repacking the initrd.
+\fIlist\fR is \fBamd\fR, \fBintel\fR, or \fBamd,intel\fR (default: both).
+CLI uses union semantics: it adds to whatever the flag files already disable
+rather than replacing them.
 .TP
 \fB\-v\fR, \fB\-\-version\fR
 Show version information and exit.

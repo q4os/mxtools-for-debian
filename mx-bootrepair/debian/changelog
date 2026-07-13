@@ -1,3 +1,22 @@
+mx-bootrepair (26.06.1.1302) stable; urgency=medium
+
+  * Release
+
+ -- Devs <devteam@localdomain>  Mon, 13 Jul 2026 13:05:29 +0200
+
+mx-bootrepair (26.06.1) mx; urgency=medium
+
+  * Clear encrypted (LUKS) partition passwords from memory after use.
+  * Improve detection of the tool used to request administrator rights.
+  * Fix GRUB installation on systems whose kernel does not have the XZ
+    module loaded — use gzip compression instead.
+  * Show the actual error message in the failure dialog instead of a
+    generic message.
+  * Avoid trying to unlock LUKS on a device that is already mounted and
+    decrypted — fixes GRUB reinstallation on LUKS-encrypted systems.
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 17 Jun 2026 23:30:00 -0400
+
 mx-bootrepair (26.03.2) mx; urgency=medium
 
   * Fix changelog dialog lookup for installed package docs

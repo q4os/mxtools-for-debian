@@ -21,6 +21,8 @@
  **********************************************************************/
 #include "flatpakfilterproxy.h"
 
+#include "../versionnumber.h"
+
 FlatpakFilterProxy::FlatpakFilterProxy(QObject *parent)
     : QSortFilterProxyModel(parent)
 {
@@ -54,12 +56,14 @@ void FlatpakFilterProxy::setHideDuplicates(bool hide)
 void FlatpakFilterProxy::setAllowedRefs(const QSet<QString> &refs)
 {
     m_allowedRefs = refs;
+    m_refFilterActive = true;
     invalidateFilter();
 }
 
 void FlatpakFilterProxy::clearAllowedRefs()
 {
     m_allowedRefs.clear();
+    m_refFilterActive = false;
     invalidateFilter();
 }
 
@@ -87,8 +91,9 @@ bool FlatpakFilterProxy::filterAcceptsRow(int sourceRow, const QModelIndex &sour
         return false;
     }
 
-    // If allowed refs are set, only show items in that set
-    if (!m_allowedRefs.isEmpty() && !m_allowedRefs.contains(fp->canonicalRef)) {
+    // When a ref filter is active, only show items in the set — an empty set
+    // legitimately means "show nothing" (e.g. no installed apps/runtimes).
+    if (m_refFilterActive && !m_allowedRefs.contains(fp->canonicalRef)) {
         return false;
     }
 
@@ -109,6 +114,24 @@ bool FlatpakFilterProxy::filterAcceptsRow(int sourceRow, const QModelIndex &sour
 
 bool FlatpakFilterProxy::lessThan(const QModelIndex &left, const QModelIndex &right) const
 {
+    if (left.column() == FlatCol::Size && right.column() == FlatCol::Size) {
+        const quint64 leftSize = left.data(Qt::UserRole).toULongLong();
+        const quint64 rightSize = right.data(Qt::UserRole).toULongLong();
+        if (leftSize != rightSize) {
+            return leftSize < rightSize;
+        }
+
+        const QString leftName = left.siblingAtColumn(FlatCol::Name).data(Qt::DisplayRole).toString();
+        const QString rightName = right.siblingAtColumn(FlatCol::Name).data(Qt::DisplayRole).toString();
+        return QString::localeAwareCompare(leftName, rightName) < 0;
+    }
+
+    if (left.column() == FlatCol::Version && right.column() == FlatCol::Version) {
+        const VersionNumber leftVersion(left.data(Qt::DisplayRole).toString());
+        const VersionNumber rightVersion(right.data(Qt::DisplayRole).toString());
+        return leftVersion < rightVersion;
+    }
+
     return QSortFilterProxyModel::lessThan(left, right);
 }
 

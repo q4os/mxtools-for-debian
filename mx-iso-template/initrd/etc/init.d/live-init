@@ -346,7 +346,7 @@ do_start() {
       # echo "[I:] Make first user $DEF_USER passwordless..."
       imsg "Making first user %s passwordless ..." "$(iq $DEF_USER)"
       /usr/bin/passwd -d "$DEF_USER" > /dev/null
-      if [ -f "/usr/bin/startplasma-x11" ] ; then
+      if [ -f "/usr/bin/startplasma-wayland" ] || [ -f "/usr/bin/startplasma-x11" ] ; then
         # echo "Enabling autologin into Plasma ..."
         imsg "Enabling %s user autologin into Plasma ..." "$(iq $DEF_USER)"
         /usr/bin/ctrl-autologin --enable "$DEF_USER" "" "plasma.desktop" > /dev/null

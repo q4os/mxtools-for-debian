@@ -2,6 +2,7 @@
 
 #include <QMouseEvent>
 #include <QPainter>
+#include <QSignalBlocker>
 #include <QStyle>
 #include <QStyleOptionButton>
 #include <QResizeEvent>
@@ -33,7 +34,10 @@ void CheckableHeaderView::setCheckboxVisible(bool visible) {
 void CheckableHeaderView::setChecked(bool checked) {
     if (m_checked == checked) return;
     m_checked = checked;
-    if (m_box) m_box->setChecked(checked);
+    if (m_box) {
+        const QSignalBlocker blocker(m_box);
+        m_box->setChecked(checked);
+    }
 }
 
 void CheckableHeaderView::paintSection(QPainter *painter, const QRect &rect, int logicalIndex) const {

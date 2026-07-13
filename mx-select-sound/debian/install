@@ -3,4 +3,3 @@ icons/mx-select-sound.png	usr/share/icons/hicolor/64x64/apps
 icons/mx-select-sound.svg	usr/share/icons/hicolor/scalable/apps
 mx-select-sound.desktop		usr/share/applications
 obj-*/*.qm 			usr/share/mx-select-sound/locale
-obj-*/mx-select-sound 		usr/bin

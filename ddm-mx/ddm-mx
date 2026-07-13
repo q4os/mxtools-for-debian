@@ -11,7 +11,7 @@
 
 ###original code from the solydXK project.
 ####MODIFICATIONS FOR MX by dolphin oracle
-##depends: nvidia-detect-mx, nvidia-detect and cli-shell-utils
+##depends: nvidia-detect-mx and cli-shell-utils
 ##modifications assume MX repos for the nvidia drivers
 ##legacy detection and substantial command assistance from kmathern & fehlix
 ##PRIMUS additions by farius and dolphin oracel
@@ -28,7 +28,7 @@ source gettext.sh
 DEBIAN_VERSION_CODENAME=$(grep VERSION_CODENAME /etc/os-release|cut -d"=" -f2)
 DEBIAN_VERSION_NUMBER=$(cat /etc/debian_version  |cut -d"." -f1)
 
-VERSION="25.11.04"
+VERSION="26.06.04"
 ME=${0##*/}
 CLI_PROG="ddm-mx"
 LOCK_FILE="/run/lock/$CLI_PROG"
@@ -38,8 +38,10 @@ BP_REPO="$DEBIAN_VERSION_CODENAME-backports"
 BP_REPO_ADDRESS="deb http://ftp.debian.org/debian"
 MX_TEST_REPO_ADDRESS="deb http://la.mxrepo.com/mx/testrepo/ $DEBIAN_VERSION_CODENAME test"
 NVIDIA_DIRECT_REPO_ADDRESS="deb [signed-by=/usr/share/keyrings/cuda-archive-keyring.gpg] https://developer.download.nvidia.com/compute/cuda/repos/debian$DEBIAN_VERSION_NUMBER/x86_64/ /"
+NVIDIA_KERNEL_DKMS="nvidia-kernel-dkms"
 BACKPORTS_OVERRIDE=false
 NVIDIA_OVERRIDE=false
+NVIDIA_ENABLED=false
 NVIDIA_DETECT_MX="/usr/bin/nvidia-detect-mx"
 if [ -x "./nvidia-detect-mx" ]; then
 	NVIDIA_DETECT_MX="./nvidia-detect-mx"
@@ -69,6 +71,8 @@ DESKTOPFILENAME=$(gettext "Nvidia driver installer")
 DESKTOPFILECOMMENT=$(gettext "Install proprietary nvidia driver from repo")
 
 main(){
+#rotate LOG
+rotate_log
 # -------------------------------------------------------------------------
 #get release info
 source /etc/lsb-release
@@ -336,13 +340,18 @@ function preseed_nvidia {
 
 function install_nvidia {
   update_sources
-  install_nvidia_detect
+  #install_nvidia_detect
   USER=$(logname)
   ARCHITECTURE=$(uname -m)
   if [ -z "$FORCEDRIVER" ]; then
-    $NVIDIA_DETECT_MX $PCIID
+    mkdir -p /run/ddm-mx
+    temp_detect=$(mktemp /run/ddm-mx/ddm-mx.temp.XXXX)
+    $NVIDIA_DETECT_MX $PCIID |tee -a $LOG $temp_detect
     nvidia_detect_exit_code=$?
-	DRIVER=$($NVIDIA_DETECT_MX $PCIID | tee -a $LOG |grep INSTALL: |tr -d ' ' |cut -d ':' -f2)
+	DRIVER=$(grep INSTALL: $temp_detect |tr -d ' ' |cut -d ':' -f2)
+	OPEN_SUPPORT=$(grep MODULES $temp_detect |tr -d ' ' |cut -d ':' -f2)
+	echo "OPEN_SUPPORT IS: "$OPEN_SUPPORT >>$LOG
+	rm -R $temp_detect
   fi
   
   UNSUPPORTED_LEGACY=""
@@ -401,7 +410,7 @@ fi
   choose_cand
   
   check_cand
-  
+
   confirm_reinstall
   
   check_legacy
@@ -417,7 +426,6 @@ fi
 #keep going
   YES_no $(eval_gettext "Continue?")
     if [ ! "$?" = "0" ]; then 
-		clean_up
         exit 0
     fi
  
@@ -648,13 +656,6 @@ enable_debian_backports()
   echo "$BP_REPO_ADDRESS $BP main contrib non-free">>/etc/apt/sources.list.d/debian-backports-temp.list
   update_sources
   echo ""
-  if [ "$ARCH" = "amd64" ]; then
-    #inform we are updating nvidia-detect package
-    echo $(eval_gettext "Installing latest nvidia-detect package")|tee -a $LOG
-    echo ""
-    apt-get install $SWITCH $BP nvidia-detect |tee -a $LOG  
-    echo ""
-  fi
 }
 
 enable_mx_test_repo()
@@ -665,16 +666,11 @@ enable_mx_test_repo()
   echo "$MX_TEST_REPO_ADDRESS">>/etc/apt/sources.list.d/mx-test-repo-temp.list
   update_sources
   echo ""
-  if [ "$ARCH" = "amd64" ]; then
-    echo $(eval_gettext "Installing latest nvidia-detect package")|tee -a $LOG
-    echo ""
-    apt-get install $SWITCH "$BP" nvidia-detect |tee -a $LOG  
-    echo ""
-  fi
 }
 
 enable_nvidia_repo()
 {
+
 #enabling nvidia-direct repo
   echo $(eval_gettext "Enabling Nvidia developer repo")
   #getting the nvidia gpg archive key
@@ -701,16 +697,10 @@ enable_nvidia_repo()
        return
   fi
 
+  NVIDIA_ENABLED=true
+
   update_sources
   echo ""
- #don't install nvidia-detect with nvidia developer repo...depends causes problems with existing nvidia packages
- #if [ "$ARCH" = "amd64" ]; then
- #  echo $(eval_gettext "Installing latest nvidia-detect package")|tee -a $LOG
- #  echo ""
- #  apt-get install $SWITCH "$BP" nvidia-detect |tee -a $LOG  
- #
- #  echo ""
- #fi
 }
 
 debian_backports_dialog()
@@ -794,14 +784,7 @@ echo $(eval_gettext "Which driver do you wish to install") | tee -a $LOG
               BP=""
               NVIDIA_VERSION=$MAIN_NVIDIA
               rm /etc/apt/sources.list.d/debian-backports-temp.list
-              apt-get update  
-              #replace nvidia-detect from main repo
-              #only install if nvidia-detect was present already (not present on 32 bit systems)
-              if [ "$ARCH" = "amd64" ]; then
-                #put nvidia-detect back to version in current enabled repos
-              	echo $(eval_gettext "Reset nvidia-detect") | tee -a $LOG
-              	apt-get remove nvidia-detect -y && apt-get install nvidia-detect -y                     
-              fi
+              apt-get update
 	      ;;
            2) echo $(eval_gettext "Ok")... | tee -a $LOG
                 #NVIDIA_XCONFIG=""
@@ -810,6 +793,8 @@ echo $(eval_gettext "Which driver do you wish to install") | tee -a $LOG
 
            *) echo $(eval_gettext "invalid option.")  $(eval_gettext "exiting")... | tee -a $LOG && exit 0;;
         esac
+
+
 }
 
 which_driver_mx()
@@ -834,12 +819,6 @@ echo $(eval_gettext "Which driver do you wish to install") | tee -a $LOG
                 NVIDIA_VERSION=$MAIN_NVIDIA
                 rm /etc/apt/sources.list.d/mx-test-repo-temp.list
                 apt-get update
-                #replace nvidia-detect from main repo
-                #only install if nvidia-detect was present already (not present on 32 bit systems)
-                if [ "$ARCH" = "amd64" ]; then
-                	echo $(eval_gettext "Reset nvidia-detect") | tee -a $LOG
-                	apt-get remove nvidia-detect -y && apt-get install nvidia-detect -y
-                fi
                 ;;
            2)   echo $(eval_gettext "Ok")... | tee -a $LOG
                 SWITCH="-t"
@@ -850,46 +829,8 @@ echo $(eval_gettext "Which driver do you wish to install") | tee -a $LOG
 
            *) echo $(eval_gettext "invalid option.")  $(eval_gettext "exiting")... | tee -a $LOG && exit 0;;
         esac
+
 }
-
-which_driver_nvidia()
-{
-echo $(eval_gettext "Which driver do you wish to install") | tee -a $LOG
-        echo "" | tee -a $LOG
-        echo $(eval_gettext "Main repos or Nvidia direct repo") | tee -a $LOG
-        echo "" | tee -a $LOG
-        echo 1: $(eval_gettext "Main") $DRIVER $MAIN_CAND $BUMBLEBEE_NVIDIA_VERSION $MAIN_NVIDIA| tee -a $LOG
-        echo "" | tee -a $LOG
-        echo 2: $(eval_gettext "Nvidia Direct") $DRIVER $CANDIDATE $BUMBLEBEE_NVIDIA_VERSION $NVIDIA_VERSION| tee -a $LOG
-        echo "" | tee -a $LOG
-	echo 3: $(eval_gettext "Exit") | tee -a $LOG
-        echo "" | tee -a $LOG
-        echo $(eval_gettext "Enter Number of selection") | tee -a $LOG
-        read -n 1 -e x
-
-        case $x in
-           1) echo $(eval_gettext "Ok")...| tee -a $LOG 
-                SWITCH=""
-                BP=""
-                NVIDIA_VERSION=$MAIN_NVIDIA
-                apt purge -y cuda-keyring
-                apt-get update
-                #replace nvidia-detect from main repo
-                #only install if nvidia-detect was present already (not present on 32 bit systems)
-                if [ "$ARCH" = "amd64" ]; then
-                	echo $(eval_gettext "Reset nvidia-detect") | tee -a $LOG
-                	apt-get remove nvidia-detect -y && apt-get install nvidia-detect -y
-                fi
-                ;;
-           2)   echo $(eval_gettext "Ok")... | tee -a $LOG
-                ;;
-                
-           3) echo $(eval_gettext "exiting") |tee -a $LOG && exit 0;;
-
-           *) echo $(eval_gettext "invalid option.")  $(eval_gettext "exiting")... | tee -a $LOG && exit 0;;
-        esac
-}
-
 
 check_cand()
 {
@@ -1122,10 +1063,10 @@ set_packages(){
   case $DRIVER in 
                      nvidia-driver)    if [ "$ARCHITECTURE" == "x86_64" ]; then
                                            NVIDIA_XCONFIG=""
-                                           DRIVER="$DRIVER nvidia-settings nvidia-kernel-dkms libnvidia-encode1" 
+                                           DRIVER="$DRIVER nvidia-settings $NVIDIA_KERNEL_DKMS libnvidia-encode1"
                                        else
 										   NVIDIA_XCONFIG=""
-                                           DRIVER="$DRIVER nvidia-kernel-dkms nvidia-settings libnvidia-encode1" 
+                                           DRIVER="$DRIVER $NVIDIA_KERNEL_DKMS nvidia-settings libnvidia-encode1"
                                        fi
                                        ;;
         nvidia-legacy-390xx-driver)    if [ "$ARCHITECTURE" == "x86_64" ]; then
@@ -1201,7 +1142,7 @@ set_packages(){
 												DRIVER="$DRIVER $BUMBLEBEE_NVIDIA_VERSION nvidia-settings-legacy-390xx nvidia-legacy-390xx-kernel-dkms $BUMBLEBEE_EXTRA_LIBS"
 											fi
 											if [ "$BUMBLEBEE_NVIDIA_VERSION" == "nvidia-driver" ]; then
-												DRIVER="$DRIVER $BUMBLEBEE_NVIDIA_VERSION nvidia-settings nvidia-kernel-dkms $BUMBLEBEE_EXTRA_LIBS"
+												DRIVER="$DRIVER $BUMBLEBEE_NVIDIA_VERSION nvidia-settings $NVIDIA_KERNEL_DKMS $BUMBLEBEE_EXTRA_LIBS"
 											fi
 											
                                        fi
@@ -1246,6 +1187,8 @@ choose_cand(){
        choose_version_nvidia
        echo ""
   fi 
+  check_open_kernel_modules
+
 }
 
 confirm_reinstall(){
@@ -1422,7 +1365,7 @@ esac
 		  choose_version_nvidia
 	      else
 		  CANDIDATE=${list[$x]}
-		  echo $(eval_gettext "Candidate is: ") $VERSION |tee -a $LOG
+		  echo $(eval_gettext "Candidate is: ") $CANDIDATE |tee -a $LOG
   fi
 
 #disable Nvidia Repo is next to last
@@ -1433,7 +1376,7 @@ esac
 
 #quit is always last
 if [[ $x = $((${#list[@]}-1)) ]]; then
-	clean_up
+	exit 0
 fi
  
 set_up_pin_file $CANDIDATE
@@ -1449,15 +1392,10 @@ echo "Disable Nvidia Developer Repo" |tee -a $LOG
 echo $(eval_gettext "Ok")...| tee -a $LOG 
            SWITCH=""
            BP=""
+           NVIDIA_ENABLED=false
            NVIDIA_VERSION=$MAIN_NVIDIA
            apt purge -y cuda-keyring
            apt-get update
-           #replace nvidia-detect from main repo
-           #only install if nvidia-detect was present already (not present on 32 bit systems)
-           if [ "$ARCH" = "amd64" ]; then
-           	echo $(eval_gettext "Reset nvidia-detect") | tee -a $LOG
-          	apt-get remove nvidia-detect -y && apt-get install nvidia-detect -y
-           fi
            install_nvidia
 }
 
@@ -1499,6 +1437,101 @@ remove_nvidia_module_config()
 	command -v update-grub && update-grub
 }
 
+#try nvidia-open-kernel-dkms rather than the proprietary modules package
+#only offer is pciid is in list of open supported drivers
+#at the moment, there is no support offerred for tesla package drivers or legacy drivers
+check_open_kernel_modules(){
+    if [ "$OPEN_SUPPORT" = "NO" ]; then
+      return
+    fi
+    local propriety_check="$(apt-cache madison nvidia-kernel-dkms |grep  nvidia-kernel-dkms | grep $CANDIDATE |cut -d"|" -f 2 | tr -d ' ')"
+    local open_check1="$(apt-cache madison nvidia-open-kernel-dkms |grep nvidia-open-kernel-dkms |grep $CANDIDATE |cut -d"|" -f 2 | tr -d ' ')"
+    local open_check2="$(apt-cache madison nvidia-kernel-open-dkms |grep nvidia-kernel-open-dkms | grep $CANDIDATE |cut -d"|" -f 2 | tr -d ' ')"
+    local open_modules=""
+    local canonical_package=${CANDIDATE%%.*}
+
+    echo "canonical_package is " $canonical_package >>$LOG
+    echo "prop. check is $propriety_check" >>$LOG
+    echo "open_check1 is  $open_check1" >>$LOG
+    echo "open check2 is  $open_check2" >>$LOG
+
+    if [ "$propriety_check" = "$open_check1" ]; then
+      open_modules="nvidia-open-kernel-dkms"
+    else
+      if [ "$propriety_check" = "$open_check2" ]; then
+        open_modules="nvidia-kernel-open-dkms"
+      fi
+    fi
+
+    echo "open_modules is  $open_modules" >>$LOG
+
+    if [ -n "$open_modules" ]; then
+      echo ""
+      #Kernel modules debian packages found
+      echo $(eval_gettext "Open Source Kernel Modules Found") | tee -a $LOG
+      echo ""
+      ## Ask to try installing the latest open nvidia kernel modules if present
+      echo $(eval_gettext "Try Open Source Kernel Modules?") | tee -a $LOG
+      echo $(eval_gettext "These replace the proprietary Nvidia kernel modules") | tee -a $LOG
+      echo $(eval_gettext "These Open Source Kernel Modules are developed and supplied by Nvidia.") | tee -a $LOG
+      echo "" | tee -a $LOG
+
+      if (( $canonical_package >= 580 )); then
+        echo 1: $(eval_gettext "Yes") $(eval_gettext "(default)") | tee -a $LOG
+        echo 2: $(eval_gettext "No") | tee -a $LOG
+        echo "" | tee -a $LOG
+        echo $(eval_gettext "Enter Number of selection") | tee -a $LOG
+        read -n 1 -e x
+        x=${x:-1}
+      else
+        echo 1: $(eval_gettext "Yes") | tee -a $LOG
+        echo 2: $(eval_gettext "No") $(eval_gettext "(default)") | tee -a $LOG
+        echo "" | tee -a $LOG
+        echo $(eval_gettext "Enter Number of selection") | tee -a $LOG
+        read -n 1 -e x
+        x=${x:-2}
+      fi
+
+      case $x in
+        1) echo "" | tee -a $LOG
+            NVIDIA_KERNEL_DKMS="$open_modules"
+            echo "" |tee -a $LOG
+            #message confirming choice of using open kernel modules
+            echo $(eval_gettext "Trying open kernel modules") | tee -a $LOG
+            echo "" | tee -a $LOG
+            ;;
+        2)  echo "" |tee -a $LOG
+            #message confirming choice of using nvidia's proprietary kernel modules
+            echo $(eval_gettext "Using proprietary kernel modules") | tee -a $LOG
+            echo "" | tee -a $LOG
+            return ;;
+        *) check_open_kernel_modules
+      esac
+      echo ""
+    else
+      return
+    fi
+
+}
+
+rotate_log(){
+
+local test=$(stat -c%s $LOG)
+
+if (( $test > 200000 )); then
+    #keep 5 logs
+    #remove next in sequence if previous log version exists
+    test -e $LOG.4 && rm -f $LOG.5 && mv $LOG.4 $LOG.5
+    test -e $LOG.3 && rm -f $LOG.4 && mv $LOG.3 $LOG.4
+    test -e $LOG.2 && rm -f $LOG.3 && mv $LOG.2 $LOG.3
+    test -e $LOG.1 && rm -f $LOG.2 && mv $LOG.1 $LOG.2
+    test -e $LOG && rm -f $LOG.1 && mv $LOG $LOG.1
+    #make sure log exists
+    touch $LOG
+fi
+
+
+}
 
 main "$@"
 

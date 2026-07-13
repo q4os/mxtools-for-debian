@@ -39,8 +39,6 @@ CronView::CronView(CronModel *model, QWidget *parent)
     setSelectionMode(QAbstractItemView::SingleSelection);
     setAcceptDrops(true);
 
-    //	setDropIndicatorShown(true);
-
     connect(selectionModel(), &QItemSelectionModel::currentChanged, this, &CronView::selectChanged);
     connect(cronModel, &CronModel::moveTCommand, this, &CronView::TCommandMoved);
 }
@@ -80,8 +78,6 @@ void CronView::selectChanged(const QModelIndex &cur, const QModelIndex & /*unuse
 void CronView::tCommandChanged()
 {
     cronModel->tCommandChanged(currentIndex());
-    //	for (int i = 0; i < cronModel->columnCount(QModelIndex()); ++i)
-    //		resizeColumnToContents(i);
 }
 
 void CronView::removeTCommand()
@@ -136,7 +132,7 @@ void CronView::newTCommand()
 {
     auto *cron = getCurrentCrontab();
     QString u;
-    if (cron->cronOwner == QLatin1String("/etc/crontab")) {
+    if (Crontab::isSystemCron(cron->cronOwner)) {
         u = QStringLiteral("root");
     } else {
         u = cron->cronOwner;
@@ -151,7 +147,7 @@ void CronView::pasteTCommand()
     auto *cron = getCurrentCrontab();
     auto cmnd = std::make_unique<TCommand>();
     *cmnd = *pasteData;
-    if (cron->cronOwner != QLatin1String("/etc/crontab")) {
+    if (!Crontab::isSystemCron(cron->cronOwner)) {
         cmnd->user = cron->cronOwner;
     }
 

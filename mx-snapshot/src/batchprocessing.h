@@ -36,6 +36,11 @@ public:
 
     void setConnections();
 
+    // True once the snapshot pipeline ran to completion (Work::createIso()
+    // finished); false for every early-abort path (space/config/elevation
+    // failures), so callers can derive a real process exit code.
+    [[nodiscard]] bool succeeded() const { return work.isDone(); }
+
 public slots:
     static void progress();
 
@@ -44,9 +49,16 @@ private:
     Work work;
     QTimer timer;
 
+    void abortIfElevationDenied();
     void checkUpdatedDefaultExcludesCli();
-    void checkNvidiaGraphicsCard();
     [[nodiscard]] QString colorizeDiffAnsi(const QString &diff) const;
     [[nodiscard]] bool isSourceExcludesNewer(QString &diffOutput) const;
     [[nodiscard]] bool resetCustomExcludesCli(const QString &configuredPath, const QString &sourcePath) const;
+
+    void handleStreamChunk(QString &buffer, const QString &chunk, bool toStdout);
+    void flushStreamLine(const QString &line, bool toStdout, bool isTransient);
+
+    QString stdoutBuffer;
+    QString stderrBuffer;
+    bool progressLineActive = false;
 };

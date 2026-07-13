@@ -66,7 +66,7 @@ Spotify
 <screenshot>none</screenshot>
 
 <preinstall>
-curl -sS curl -sS https://download.spotify.com/debian/pubkey_C85668DF69375001.gpg | gpg --dearmor --yes -o /etc/apt/trusted.gpg.d/spotify.gpg
+curl -sS https://download.spotify.com/debian/pubkey_5384CE82BA52C83A.asc | sudo gpg --dearmor --yes -o /etc/apt/trusted.gpg.d/spotify.gpg
 echo "deb http://repository.spotify.com stable non-free">/etc/apt/sources.list.d/spotify.list
 apt-get update
 </preinstall>
@@ -86,6 +86,8 @@ spotify-client
 </uninstall_package_names>
 
 <postuninstall>
-rm /etc/apt/trusted.gpg.d/repository-spotify-com-keyring.gpg
+rm -f /etc/apt/trusted.gpg.d/repository-spotify-com-keyring.gpg
+rm -f /etc/apt/trusted.gpg.d/spotify.gpg
+rm -f /etc/apt/sources.list.d/spotify.list
 </postuninstall>
 </app>

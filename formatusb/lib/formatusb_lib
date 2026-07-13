@@ -12,13 +12,68 @@ label="$3"
 part="$4"  #can be part, defaults, gpt, or msdos
 
 case "${part,,}" in
-     part) part=part     ;;
-     *gpt) part=gpt      ;;
-     *dos) part=msdos    ;;
-        *) part=defaults ;;
+     part)     part=part     ;;
+     gpt)      part=gpt      ;;
+     msdos)    part=msdos    ;;
+     defaults) part=defaults ;;
+     # Fail closed: an unrecognised mode must not silently fall through to
+     # "defaults" (whole-disk repartitioning) on a destructive privileged helper.
+        *) echo "Invalid partition mode: $part" >&2; exit 2 ;;
 esac
 
-LOG="/tmp/formatter.log"
+# SECURITY: $device is interpolated (often unquoted) into many root commands
+# below (df/dd/parted/blkid/sfdisk). This helper is directly pkexec-invocable,
+# so GUI-side checks are bypassable — validate the device name here. A real
+# block-device name (sdb1, mmcblk0p1, nvme0n1p1) is alphanumeric only; this
+# rejects any shell metacharacter / path separator.
+if [[ ! "$device" =~ ^[A-Za-z0-9]+$ ]]; then
+    echo "Invalid device name: $device" >&2
+    exit 2
+fi
+
+# Must be a real block device (the helper is directly pkexec-invocable, so this
+# is not guaranteed by the GUI device list).
+if [ ! -b "/dev/$device" ]; then
+    echo "Not a block device: /dev/$device" >&2
+    exit 2
+fi
+
+whole_disk_name()
+{
+    local node="${1#/dev/}" parent type
+    while [ -n "$node" ] && [ -b "/dev/$node" ]; do
+        type=$(lsblk -ndo TYPE "/dev/$node" 2>/dev/null | head -1)
+        [ "$type" = "disk" ] && { echo "$node"; return 0; }
+        parent=$(lsblk -ndo PKNAME "/dev/$node" 2>/dev/null | head -1)
+        [ -z "$parent" ] && break
+        node="$parent"
+    done
+    echo "$node"
+}
+
+# Refuse to operate on the disk backing the running system or live medium.
+# Compare whole-disk kernel names, following parent links so normal partitions
+# and common mapper/LVM/LUKS stacks resolve to the same backing disk.
+target_disk=$(whole_disk_name "/dev/$device")
+for _mnt in / /boot /boot/efi /live/boot-dev /live/to-ram /lib/live/mount/medium /run/live/medium; do
+    _src=$(findmnt -fn -o SOURCE "$_mnt" 2>/dev/null) || continue
+    _src=${_src%%[*}              # strip btrfs subvol suffix, e.g. /dev/sda2[/@]
+    [ -b "$_src" ] || continue
+    _pdisk=$(whole_disk_name "$_src")
+    if [ "$target_disk" = "$_pdisk" ]; then
+        echo "Refusing to format /dev/$device: it backs the running system or live medium" >&2
+        exit 3
+    fi
+done
+
+# Reject unknown filesystem types up front. Otherwise format_partitions()
+# treats an unknown format as a no-op "success" (its *) branch returns 0 and
+# checkerrorcode reports OK) -- but for a non-"part" mode the disk has already
+# been wiped/repartitioned by then, so fail closed before any disk writes.
+case "$format" in
+    vfat|ext4|ntfs|exfat) ;;
+    *) echo "Invalid format: $format" >&2; exit 2 ;;
+esac
 
 echo device is $device format is $format
 echo label is $label
@@ -42,12 +97,11 @@ unmount_partitions()
 clear_partitions()
 {
     local dev=/dev/$device
-    local bytes=$(parted --script $dev unit B print 2>/dev/null | sed -rn "s/^Disk.*: ([0-9]+)B$/\1/ip")
+    local bytes
+    bytes=$(parted --script $dev unit B print 2>/dev/null | sed -rn "s/^Disk.*: ([0-9]+)B$/\1/ip")
     local block_size=512
     local pt_size=$((17 * 1024))
     local pt_cnt=$((pt_size / block_size))
-    local sneaky_bytes=$((32 * 1024))
-    local sneaky_offset=$((sneaky_bytes / block_size))
 
     local total_blocks=$((bytes / $block_size))
     #echo -e "Total bytes: $bytes\nTotal blocks: $total_blocks"
@@ -91,7 +145,8 @@ create_partition()
 	unmount_partitions
 	sleep 1
 
-	local bytes=$(lsblk --bytes --nodeps --noheadings --output SIZE $dev 2>/dev/null)
+	local bytes
+	bytes=$(lsblk --bytes --nodeps --noheadings --output SIZE $dev 2>/dev/null)
 	bytes=$((bytes / 1))
 	local mbrlimit=$((2000 * 1024 * 1024 * 1024)) # about 2TB - devices over this size are made to gpt
 	local parttabletype
@@ -135,15 +190,21 @@ create_partition()
 		fi
 	fi
 
-	parted -s $dev mklabel $parttabletype
+	parted -s "$dev" mklabel "$parttabletype"
 
 	checkerrorcode "making new partition table"
 	sleep 1
-	partprobe $dev
+	partprobe "$dev"
 	checkerrorcode "refresh partitions info"
 	sleep 1
-	#create partition
-	parted -s -a optimal $dev mkpart $option 1 100%
+	#create partition. $option is "primary" (msdos) or empty (gpt, no name);
+	#quote it when present so it can't word-split, but keep the original
+	#argument vector when empty so parted's gpt "no name" case is unchanged.
+	if [ -n "$option" ]; then
+		parted -s -a optimal "$dev" mkpart "$option" 1 100%
+	else
+		parted -s -a optimal "$dev" mkpart 1 100%
+	fi
 	checkerrorcode "create new partition"
 	sleep 1
 
@@ -266,13 +327,39 @@ checkerrorcode "refresh partition info"
 }
 
 cleanuplog(){
-	if [ -e "/var/log/formatusb.log" ]; then
-		cp /var/log/formatusb.log /var/log/formatusb.log.old
+	local dest="/var/log/formatusb.log" old="/var/log/formatusb.log.old" uid dir src
+	# Where the GUI wrote its log: a user session logs to its private runtime
+	# dir (/run/user/<uid>); a root run logs to /run. Both are non-world-writable.
+	# World-writable /tmp is deliberately NOT searched as root: even with symlinks
+	# rejected, its content and size would be attacker-controllable. The caller's
+	# uid comes from pkexec/sudo/login.
+	if [[ "$PKEXEC_UID" =~ ^[0-9]+$ ]]; then
+		uid="$PKEXEC_UID"
+	elif [[ "$SUDO_UID" =~ ^[0-9]+$ ]]; then
+		uid="$SUDO_UID"
+	else
+		uid=$(id -u "$(logname)" 2>/dev/null)
 	fi
-	if [ -e "/tmp/formatusb.log" ]; then
-		cp /tmp/formatusb.log /var/log/formatusb.log
-	fi
-
+	local -a logdirs=()
+	[[ "$uid" =~ ^[0-9]+$ && "$uid" -ne 0 ]] && logdirs+=("/run/user/${uid}")
+	logdirs+=("/run")
+	for dir in "${logdirs[@]}"; do
+		[[ -d "$dir" ]] || continue
+		src="${dir}/formatusb.log"
+		# Only act on a real regular file, never a symlink, so the source
+		# cannot be redirected at a root-owned file.
+		[[ -f "$src" && ! -L "$src" ]] || continue
+		# Rotate the destination, never following a symlink left there.
+		if [[ -L "$dest" ]]; then
+			rm -f -- "$dest"
+		elif [[ -f "$dest" ]]; then
+			mv -- "$dest" "$old"
+		fi
+		# -P: if the source is swapped for a symlink in a race, copy the link
+		# itself rather than dereferencing it to another file.
+		cp -P -- "$src" "$dest"
+		return 0
+	done
 }
 
 partnumber()
@@ -330,6 +417,7 @@ mkdir -p /run/udev/rules.d
 
 checkerrorcode "hide disk from udev"
 echo 'SUBSYSTEM=="block", ENV{UDISKS_IGNORE}="1"' > /run/udev/rules.d/91-mx-udisks-inhibit.rules
+AUTOMOUNT_DISABLED=1   # tells the cleanup trap to re-enable automount on any exit
 udevadm control --reload
 udevadm trigger --subsystem-match=block
 
@@ -340,26 +428,48 @@ enable_automount()
 rm -f /run/udev/rules.d/91-mx-udisks-inhibit.rules
 
 checkerrorcode "make disk visible to udev"
+AUTOMOUNT_DISABLED=""   # disarm the cleanup trap's re-enable once done normally
 udevadm control --reload
 udevadm trigger --subsystem-match=block
 }
 
 change_ownership()
 {
-	local USER=$(id -u $(/usr/bin/logname))
-	local GROUP=$(getent group users |awk -F: '{print $3}')
-	local USERNAME=$(/usr/bin/logname)
+	local USERNAME mountpoint
+	# Resolve the calling user from the polkit-provided uid (fall back to
+	# logname) rather than trusting the controlling terminal alone.
+	if [[ "$PKEXEC_UID" =~ ^[0-9]+$ ]]; then
+		USERNAME=$(getent passwd "$PKEXEC_UID" | cut -d: -f1)
+	fi
+	[[ -z "$USERNAME" ]] && USERNAME=$(/usr/bin/logname)
+	[[ -z "$USERNAME" ]] && return
 
-	mkdir -p /tmp/formatmountpoint
-	mount -t ext4 /dev/"$device$partnum" /tmp/formatmountpoint
-	chown $USERNAME:users /tmp/formatmountpoint
+	# Use a fresh, root-owned, random mount point (mode 0700) instead of a
+	# predictable world-writable /tmp path an attacker could pre-create/symlink.
+	mountpoint=$(mktemp -d /run/formatusb-mnt.XXXXXX) || return
+	# Register the temp mount for the global cleanup trap so it is always torn
+	# down, even if a step below fails and exits (checkerrorcode exits on error).
+	TEMP_MOUNT="$mountpoint"
 
+	# Check the mount immediately: if it fails, chown/chmod would silently act
+	# on the empty temp dir and the new filesystem would never be owned by the
+	# user. checkerrorcode aborts here on failure (and the trap cleans up).
+	mount -t ext4 /dev/"$device$partnum" "$mountpoint"
+	checkerrorcode "Mounting new partition to set ownership"
+
+	chown "$USERNAME":users "$mountpoint"
 	checkerrorcode "Changing owner of partition to $USERNAME:users"
-	chmod 775 -R /tmp/formatmountpoint
 
+	chmod -R 775 "$mountpoint"
 	checkerrorcode "Changing permissions of partition to $USERNAME:users"
-	umount -q /tmp/formatmountpoint
-	rmdir /tmp/formatmountpoint
+
+	# Verify the unmount succeeded before reporting success, so a failed umount
+	# is not logged OK while leaving the filesystem mounted.
+	umount -q "$mountpoint"
+	checkerrorcode "Unmounting temporary mount point"
+	rmdir "$mountpoint"
+	checkerrorcode "Removing temporary mount point"
+	TEMP_MOUNT=""
 }
 
 checkerrorcode()
@@ -375,15 +485,28 @@ checkerrorcode()
 	fi
 }
 
-checkpartitiontype()
+# Always-run cleanup: re-enable automount and tear down the temp mount point on
+# ANY exit, including checkerrorcode's mid-run exit. Preserves the exit status.
+_cleanup()
 {
-	local dev=/dev/$device
-	if [ -n "$(blkid $dev | grep PTTYPE=\"gpt\")" ]; then
-		originalparttable="gpt"
+	local rc=$?
+	if [ -n "$TEMP_MOUNT" ]; then
+		umount -q "$TEMP_MOUNT" 2>/dev/null
+		rmdir "$TEMP_MOUNT" 2>/dev/null
+		TEMP_MOUNT=""
 	fi
+	if [ -n "$AUTOMOUNT_DISABLED" ]; then
+		rm -f /run/udev/rules.d/91-mx-udisks-inhibit.rules
+		udevadm control --reload 2>/dev/null
+		udevadm trigger --subsystem-match=block 2>/dev/null
+		AUTOMOUNT_DISABLED=""
+	fi
+	exit "$rc"
 }
 
 main(){
+
+trap _cleanup EXIT
 
 #echo main launched
 unmount_partitions

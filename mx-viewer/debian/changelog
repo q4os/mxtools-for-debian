@@ -1,3 +1,20 @@
+mx-viewer (26.06.1302) stable; urgency=medium
+
+  * Release
+
+ -- Devs <devteam@localdomain>  Mon, 13 Jul 2026 13:05:36 +0200
+
+mx-viewer (26.06) mx; urgency=medium
+
+  * Fix settings not saving — changes to home page, search engine, zoom,
+    and all checkboxes on the Settings page now take effect after clicking Save.
+  * Fix keyboard focus being stolen by the loading bar — typing in the address
+    bar now works correctly while a page is loading.
+  * Fix app name shown as "MW Viewer" instead of "MX Viewer" in the French
+    (Belgium) locale.
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 24 Jun 2026 08:52:15 -0400
+
 mx-viewer (26.01.4) mx; urgency=medium
 
   * Add button to clear cookies and cache

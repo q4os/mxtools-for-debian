@@ -4,9 +4,12 @@
 
 cleanup() {
     pkill mksquashfs
+    # installed-to-live is Debian/MX-only (mx-remaster); on Arch the bind-root
+    # is torn down by installed-to-live-arch instead, so a missing script is
+    # not an error here — succeed as a no-op rather than exiting 127.
     if [[ -x /usr/sbin/installed-to-live ]]; then
         /usr/sbin/installed-to-live cleanup
-    else
+    elif [[ -x /usr/bin/installed-to-live ]]; then
         /usr/bin/installed-to-live cleanup
     fi
 }
@@ -16,6 +19,8 @@ cleanup_overlay() {
     app_name=$1
     [[ -z "$app_name" ]] && exit 2
     [[ "$app_name" =~ ^[A-Za-z0-9._-]+$ ]] || exit 2
+    # Reject path-traversal: ".." would let overlay_base escape /run.
+    [[ "$app_name" == *..* || "$app_name" == .* ]] && exit 2
     overlay_base="/run/${app_name}/bind-root-overlay"
     lower_dir="${overlay_base}/lower"
     local overlay_root="${overlay_base}/root"
@@ -27,12 +32,44 @@ cleanup_overlay() {
 }
 
 copy_log() {
-    for app in iso-snapshot-cli mx-snapshot; do
-        if [[ -f /tmp/${app}.log ]]; then
-            [[ -f /var/log/${app}.log ]] && mv /var/log/${app}.log /var/log/${app}.log.old
-            cp /tmp/${app}.log /var/log
-            break
-        fi
+    local app src dest uid dir
+    local -a logdirs=()
+    # The caller passes its own application name so we archive the log of the
+    # run that just finished, not whichever app happens to have left a log
+    # lying around. Whitelist it: this value reaches us as a root-run argument
+    # and is interpolated into a path, so reject anything unexpected.
+    app="$1"
+    case "$app" in
+        iso-snapshot-cli|mx-snapshot) ;;
+        *) return 1;;
+    esac
+    # Where the app wrote its log (see Log::defaultLogPath): a GUI run logs to
+    # the caller's private runtime dir (/run/user/<uid>); a root CLI run logs to
+    # /run. Both are non-world-writable, unlike the legacy /tmp fallback.
+    if [[ "$PKEXEC_UID" =~ ^[0-9]+$ ]]; then
+        uid="$PKEXEC_UID"
+    elif [[ "$SUDO_UID" =~ ^[0-9]+$ ]]; then
+        uid="$SUDO_UID"
+    else
+        uid=$(id -u "$(logname)" 2>/dev/null)
+    fi
+    [[ "$uid" =~ ^[0-9]+$ && "$uid" -ne 0 ]] && logdirs+=("/run/user/${uid}")
+    logdirs+=("/run" "/tmp")
+    for dir in "${logdirs[@]}"; do
+        [[ -d "$dir" ]] || continue
+        src="${dir}/${app}.log"
+        # Only copy an actual regular file, never a symlink, so the source
+        # cannot be redirected at a root-owned file.
+        [[ -f "$src" && ! -L "$src" ]] || continue
+        dest="/var/log/${app}.log"
+        [[ ! -e "$dest" && ! -L "$dest" ]] || {
+            [[ -f "$dest" && ! -L "$dest" ]] || return 1
+            mv -- "$dest" "${dest}.old"
+        }
+        # -P (no-dereference): if the file is swapped for a symlink after
+        # the check (TOCTOU), copy the link itself, not its target.
+        cp -P -- "$src" "$dest"
+        return 0
     done
 }
 
@@ -49,9 +86,36 @@ drop_caches() {
 }
 
 chown_conf() {
+    local uid user home app file real
+
+    # Determine the calling (non-root) user reliably. pkexec exports
+    # PKEXEC_UID; fall back to logname for non-pkexec invocations.
+    if [[ -n "$PKEXEC_UID" ]]; then
+        uid="$PKEXEC_UID"
+    else
+        uid=$(id -u "$(logname)" 2>/dev/null)
+    fi
+    [[ "$uid" =~ ^[0-9]+$ ]] || exit 2
+    # Never operate on behalf of root.
+    [[ "$uid" -eq 0 ]] && exit 2
+
+    user=$(getent passwd "$uid" | cut -d: -f1)
+    home=$(getent passwd "$uid" | cut -d: -f6)
+    [[ -z "$user" || -z "$home" || ! -d "$home" ]] && exit 2
+    # Resolve the home path too, so the confinement check below still
+    # matches when /home (or a parent) is itself a symlink.
+    home=$(realpath -e "$home" 2>/dev/null) || exit 2
+
     for app in iso-snapshot-cli mx-snapshot; do
-        FILE_NAME="/home/$(logname)/.config/MX-Linux/${app}.conf"
-        [[ -f "$FILE_NAME" ]] && chown $(logname): "$FILE_NAME"
+        file="${home}/.config/MX-Linux/${app}.conf"
+        # Must be an existing regular file that is NOT itself a symlink.
+        [[ -f "$file" && ! -L "$file" ]] || continue
+        # Resolve symlinks in any path component and confine the result
+        # to the user's home, defeating symlink-redirection attacks.
+        real=$(realpath -e "$file" 2>/dev/null) || continue
+        [[ "$real" == "$home"/* ]] || continue
+        # -h: do not dereference, guarding against a TOCTOU symlink swap.
+        chown -h "${user}:" "$real"
     done
 }
 
@@ -64,7 +128,7 @@ case "$1" in
     cleanup_overlay)
         cleanup_overlay "$2";;
     copy_log)
-        copy_log;;
+        copy_log "$2";;
     datetime_log)
         datetime_log;;
     kill_mksquashfs)

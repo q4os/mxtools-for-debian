@@ -1,3 +1,17 @@
+uefi-manager (26.06.1302) stable; urgency=medium
+
+  * Release
+
+ -- Devs <devteam@localdomain>  Mon, 13 Jul 2026 13:05:39 +0200
+
+uefi-manager (26.06) mx; urgency=medium
+
+  * Fix add-entry loader path wrongly including the ESP mount directory
+    name (e.g. \EFI\nvme1n1p1\EFI\fedora\shimx64.efi instead of
+    \EFI\fedora\shimx64.efi).
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 15 Jun 2026 18:59:09 -0400
+
 uefi-manager (26.03) mx; urgency=medium
 
   * Replace the shell privilege helper with a compiled helper.

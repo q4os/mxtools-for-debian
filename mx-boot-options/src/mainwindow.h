@@ -21,6 +21,8 @@
  **********************************************************************/
 #pragma once
 
+#include <functional>
+
 #include <QListWidget>
 #include <QMessageBox>
 #include <QProgressBar>
@@ -120,6 +122,14 @@ private:
     [[nodiscard]] PackageManager detectPackageManager() const;
     [[nodiscard]] QString grubPackageName() const;
     [[nodiscard]] QStringList requiredPlymouthPackages() const;
+    [[nodiscard]] QString resolveLiveBootLocation();
+    [[nodiscard]] bool hasLiveGrubTree() const;
+    [[nodiscard]] bool liveGrubMode() const;
+    [[nodiscard]] bool refreshLiveGrubTheme();
+    bool writeFileLinesAsRoot(const QString &path, const QStringList &lines);
+    bool rewriteFileAsRoot(const QString &path, const std::function<bool(QString &)> &transform);
+    bool applyLiveGrubTimeout(int seconds);
+    bool applyLiveGrubBackground(const QString &imagePath);
     [[nodiscard]] bool runPackageUpdate();
     [[nodiscard]] bool installPackages(const QStringList &packages);
     [[nodiscard]] bool runUpdateGrub();

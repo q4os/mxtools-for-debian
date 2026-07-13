@@ -1,0 +1,31 @@
+.TH PERSIST-ENABLED 1 "June 2026" "mx-remaster" "User Commands"
+.SH NAME
+persist-enabled \- report whether root persistence is enabled
+.SH SYNOPSIS
+.B persist-enabled
+.SH DESCRIPTION
+.B persist-enabled
+is a tiny probe helper used by the live workflow to check whether the root
+persistence feature is enabled.
+If the expected persistence marker exists, it prints
+.B Persist Root Enabled
+and exits successfully.
+Otherwise it exits silently with a non-zero status.
+
+The script is primarily intended for menu logic, startup hooks, and other small
+checks where only the presence of root persistence matters.
+.SH OPTIONS
+.B persist-enabled
+accepts no options.
+.SH FILES
+.TP
+.I /etc/live/config/persist-root
+Configuration marker checked first.
+.TP
+.I /live/config/persist-root
+Fallback live configuration marker.
+.SH SEE ALSO
+.BR persist-config (1),
+.BR persist-save (1)
+.SH AUTHOR
+mx-remaster maintainers

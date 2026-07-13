@@ -1,0 +1,48 @@
+#!/usr/bin/bash
+
+
+latest(){
+jq -r '
+  .chips
+  | map(select(has("legacybranch") | not) | .devid)
+  | unique[]
+' $FILE |sed 's/0x/10DE/'
+}
+
+legacy580(){
+jq -r '
+  .chips
+  | map(select(.legacybranch? == "580.xx") | .devid)
+  | unique[]
+' $FILE |sed 's/0x/10DE/'
+}
+
+legacy470(){
+jq -r '
+  .chips
+  | map(select(.legacybranch? == "470.xx") | .devid)
+  | unique[] |sed 's/0x/10DE/'
+' $FILE
+}
+
+name(){
+jq -r '
+  .chips
+  | map(select(has("legacybranch") | not))
+  | unique_by(.devid)
+  | .[]
+  | "\(.devid)\t\(.name)"
+' $FILE |sed 's/0x/10DE/'
+}
+
+open_kernel(){
+  jq -r '
+    .chips[]
+    | select(.features | contains(["kernelopen"]))
+    | "10DE" + (.devid[2:] | ascii_upcase)
+  ' $FILE
+  }
+
+
+FILE=$2
+$1

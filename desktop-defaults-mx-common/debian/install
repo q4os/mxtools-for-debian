@@ -15,5 +15,4 @@ early-bg                   	usr/bin
 mx-tools.directory      usr/share/desktop-directories
 xdg/*					etc/xdg
 #00-enable-autospawn.conf      etc/pulse/client.conf.d
-snaps/*		usr/share/applications
 clock12or24                	usr/bin 

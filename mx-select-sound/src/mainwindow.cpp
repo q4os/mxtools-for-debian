@@ -27,9 +27,12 @@
 #include <QDebug>
 #include <QDir>
 #include <QFile>
-#include <QRadioButton>
+#include <QProcess>
+#include <QStandardPaths>
+#include <QTextStream>
 
 #include "about.h"
+#include "cardutils.h"
 
 #ifndef VERSION
     #define VERSION "?.?.?.?"
@@ -47,6 +50,9 @@ MainWindow::MainWindow(QWidget *parent)
         ui->pushApply->setIcon(QIcon(":/icons/dialog-ok.svg"));
     }
     setWindowTitle(tr("MX Select Sound"));
+
+    m_pipewire = CardUtils::isPipewireRunning();
+    updateAudioSystemLabels();
     adjustSize();
 }
 
@@ -55,29 +61,68 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-// Util function for getting bash command output and error code
-Result MainWindow::runCmd(const QString &cmd)
+void MainWindow::updateAudioSystemLabels()
 {
-    QEventLoop loop;
-    QProcess proc(this);
-    proc.setProcessChannelMode(QProcess::MergedChannels);
-    connect(&proc, QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished), &loop, &QEventLoop::quit);
-    proc.start(QStringLiteral("/bin/bash"), {"-c", cmd});
-    loop.exec();
-    Result result = {proc.exitCode(), proc.readAll().trimmed()};
-    return result;
+    if (m_pipewire) {
+        qDebug() << "Audio system: PipeWire";
+        ui->label->setText(tr("<html><head/><body><p>If your computer has more than one audio output, "
+                              "you can use this application to select the default. "
+                              "Audio system: <b>PipeWire</b><br/></p></body></html>"));
+        ui->label1->setText(tr("<html><head/><body><p>Your current default audio device is:</p></body></html>"));
+        ui->label_2->setText(tr("<html><head/><body><p>Select another audio device if necessary:</p></body></html>"));
+    } else {
+        qDebug() << "Audio system: ALSA";
+        ui->label->setText(tr("<html><head/><body><p>If your computer has more than one sound card, "
+                              "you can use this application to select the one to be default. "
+                              "<br/></p></body></html>"));
+        ui->label1->setText(tr("<html><head/><body><p>Your current default sound card is:</p></body></html>"));
+        ui->label_2->setText(tr("<html><head/><body><p>Select another sound card if necessary:</p></body></html>"));
+    }
 }
 
 // Get the list of sound cards
 QStringList MainWindow::listCards()
 {
+    if (m_pipewire) {
+        QProcess proc;
+        proc.start(QStringLiteral("pactl"), {QStringLiteral("list"), QStringLiteral("sinks")});
+        if (!proc.waitForFinished(5000) || proc.exitCode() != 0) {
+            qDebug() << "Could not query PipeWire audio devices; falling back to ALSA";
+            m_pipewire = false;
+            m_currentPipewireSink.clear();
+            updateAudioSystemLabels();
+        } else {
+            const auto sinks = CardUtils::parsePipewireSinks(QString::fromUtf8(proc.readAllStandardOutput()));
+            if (sinks.isEmpty()) {
+                QMessageBox::critical(this, tr("MX Select Sound"), tr("No audio devices were found."));
+                return {};
+            }
+            QStringList baseLabels;
+            for (const auto &sink : sinks) {
+                baseLabels << (sink.description.isEmpty() ? sink.name : sink.description);
+            }
+
+            QStringList descriptions;
+            for (int i = 0; i < sinks.size(); i++) {
+                QString label = baseLabels.at(i);
+                if (baseLabels.count(label) > 1)
+                    label = QStringLiteral("%1 (%2)").arg(label, sinks.at(i).name);
+                ui->comboBox->addItem(label, sinks.at(i).name);
+                descriptions << label;
+            }
+            return descriptions;
+        }
+    }
+
     QStringList card_list;
-    const QString cards
-        = runCmd(R"(cat /proc/asound/cards 2>/dev/null | sed -n -r 's/[0-9 ]+\[//p' |  sed 's/\s*\]:/:/')").output;
-    if (cards.size() == 0) {
+    QFile file(QStringLiteral("/proc/asound/cards"));
+    if (file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+        QTextStream stream(&file);
+        card_list = CardUtils::parseCards(stream.readAll());
+    }
+    if (card_list.isEmpty()) {
         QMessageBox::critical(this, tr("MX Select Sound"), tr("No sound cards/devices were found."));
     } else {
-        card_list = cards.split(QStringLiteral("\n"));
         ui->comboBox->addItems(card_list);
     }
     return card_list;
@@ -86,19 +131,45 @@ QStringList MainWindow::listCards()
 // Get default card
 QString MainWindow::getDefault()
 {
-    QString prev_card;
+    if (m_pipewire) {
+        QProcess proc;
+        proc.start(QStringLiteral("pactl"), {QStringLiteral("get-default-sink")});
+        if (proc.waitForFinished(2000) && proc.exitCode() == 0) {
+            const QString defaultName = QString::fromUtf8(proc.readAllStandardOutput()).trimmed();
+            for (int i = 0; i < ui->comboBox->count(); i++) {
+                if (ui->comboBox->itemData(i).toString() == defaultName) {
+                    ui->comboBox->setCurrentIndex(i);
+                    const QString desc = ui->comboBox->itemText(i);
+                    qDebug() << "Default audio device:" << desc;
+                    m_currentPipewireSink = defaultName;
+                    ui->pushTest->setEnabled(true);
+                    ui->labelCurrent->setText(desc);
+                    return desc;
+                }
+            }
+        }
+        qDebug() << "Default audio device: none";
+        m_currentPipewireSink.clear();
+        ui->pushTest->setEnabled(false);
+        ui->labelCurrent->setText(tr("none"));
+        return tr("none");
+    }
+
     QString default_card = tr("none");
 
-    Result cmd = runCmd(R"(set -o pipefail; sed -n -r 's/^\s*defaults.pcm.!card\s+(.*)/\1/p' ~/.asoundrc | head -n 1)");
-    if (cmd.exitCode == 0) {
-        prev_card = cmd.output.toUtf8();
-
+    QFile asoundrc(QDir::homePath() + QStringLiteral("/.asoundrc"));
+    if (asoundrc.open(QIODevice::ReadOnly | QIODevice::Text)) {
+        QTextStream stream(&asoundrc);
+        const QString prev_card = CardUtils::parseDefaultCard(stream.readAll());
         for (int i = 0; i < ui->comboBox->count(); i++) {
-            if (prev_card == ui->comboBox->itemText(i).section(QStringLiteral(":"), 0, 0).toUtf8()) {
+            if (prev_card == ui->comboBox->itemText(i).section(QStringLiteral(":"), 0, 0)) {
                 default_card = prev_card;
+                ui->comboBox->setCurrentIndex(i);
+                break;
             }
         }
     }
+
     qDebug() << "Default sound card:" << default_card;
     ui->pushTest->setDisabled(default_card == tr("none"));
     ui->labelCurrent->setText(default_card);
@@ -115,7 +186,38 @@ void MainWindow::setConnections()
 
 void MainWindow::pushApply_clicked()
 {
+    if (m_pipewire) {
+        const QString name = ui->comboBox->currentData().toString();
+        if (name == m_currentPipewireSink)
+            return;
+        QProcess proc;
+        proc.start(QStringLiteral("pactl"), {QStringLiteral("set-default-sink"), name});
+        const bool finished = proc.waitForFinished(2000);
+        if (!finished) {
+            proc.kill();
+            proc.waitForFinished(1000);
+        }
+        if (!finished || proc.exitStatus() != QProcess::NormalExit || proc.exitCode() != 0) {
+            const QString error = QString::fromUtf8(proc.readAllStandardError()).trimmed();
+            const QString message = !finished ? tr("Could not set default audio device: command timed out.")
+                : error.isEmpty() ? tr("Could not set default audio device.")
+                                  : tr("Could not set default audio device:\n%1").arg(error);
+            QMessageBox::critical(this, tr("MX Select Sound"), message);
+            return;
+        }
+        getDefault();
+        return;
+    }
+
     QString selected = ui->comboBox->currentText().section(QStringLiteral(":"), 0, 0);
+    if (selected == ui->labelCurrent->text()) {
+        QFile check(QDir::homePath() + QStringLiteral("/.asoundrc"));
+        if (check.open(QIODevice::ReadOnly | QIODevice::Text)) {
+            const QString expected = QStringLiteral("defaults.pcm.!card %1\ndefaults.ctl.!card %1").arg(selected);
+            if (QTextStream(&check).readAll().trimmed() == expected)
+                return;
+        }
+    }
     QFile asoundrc;
 
     asoundrc.setFileName(QDir::homePath() + "/.asoundrc");
@@ -128,7 +230,6 @@ void MainWindow::pushApply_clicked()
 
 void MainWindow::pushAbout_clicked()
 {
-    hide();
     displayAboutMsgBox(
         tr("About MX Select Sound"),
         "<p align=\"center\"><b><h2>" + tr("MX Select Sound") + "</h2></b></p><p align=\"center\">" + tr("Version: ")
@@ -137,7 +238,6 @@ void MainWindow::pushAbout_clicked()
               "<p align=\"center\">"
             + tr("Copyright (c) MX Linux") + "<br /><br /></p>",
         QStringLiteral("/usr/share/doc/mx-select-sound/license.html"), tr("%1 License").arg(windowTitle()));
-    show();
 }
 
 void MainWindow::pushHelp_clicked()
@@ -148,8 +248,33 @@ void MainWindow::pushHelp_clicked()
 // Test default sound card
 void MainWindow::pushTest_clicked()
 {
-    const int exitCode = runCmd(QStringLiteral("speaker-test -c 2 -t wav -l 2")).exitCode;
-    if (exitCode != 0) {
-        QMessageBox::critical(this, tr("MX Select Sound"), tr("Could not play test sound."));
+    if (QStandardPaths::findExecutable(QStringLiteral("speaker-test")).isEmpty()) {
+        QMessageBox::critical(this, tr("MX Select Sound"),
+                              tr("speaker-test not found. Please install the alsa-utils package."));
+        return;
     }
+    ui->pushTest->setEnabled(false);
+    auto *proc = new QProcess(this);
+    connect(proc, &QProcess::errorOccurred, this, [this, proc](QProcess::ProcessError error) {
+        if (error != QProcess::FailedToStart)
+            return;
+
+        QMessageBox::critical(this, tr("MX Select Sound"), tr("Could not play test sound."));
+        ui->pushTest->setEnabled(true);
+        proc->deleteLater();
+    });
+    connect(proc, &QProcess::finished, this, [this, proc](int exitCode) {
+        if (exitCode != 0) {
+            const QString err = proc->readAllStandardError().trimmed();
+            const QString msg = err.isEmpty() ? tr("Could not play test sound.")
+                                              : tr("Could not play test sound:\n%1").arg(err);
+            QMessageBox::critical(this, tr("MX Select Sound"), msg);
+        }
+        ui->pushTest->setEnabled(true);
+        proc->deleteLater();
+    });
+    proc->start(QStringLiteral("speaker-test"),
+                {QStringLiteral("-c"), QStringLiteral("2"),
+                 QStringLiteral("-t"), QStringLiteral("wav"),
+                 QStringLiteral("-l"), QStringLiteral("4")});
 }

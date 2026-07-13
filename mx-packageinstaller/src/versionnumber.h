@@ -100,6 +100,8 @@ private:
     [[nodiscard]] int compare(const VersionNumber &first, const VersionNumber &second) const;
     [[nodiscard]] static int compare(const QStringList &first, const QStringList &second);
     [[nodiscard]] static int compare(QChar first, QChar second);
+    // Compare two all-digit groups as arbitrary-precision integers
+    [[nodiscard]] static int compareNumeric(const QString &first, const QString &second);
 };
 
 Q_DECLARE_METATYPE(VersionNumber)

@@ -22,39 +22,26 @@
 
 #include "flatbutton.h"
 
+namespace
+{
+// Underline-on-hover handled declaratively via the :hover pseudo-state so it needs no
+// enter/leave event overrides. Qt Style Sheet rules are concatenated with whitespace.
+const QString buttonStyle = QStringLiteral("QPushButton { text-align: left; text-decoration: none; } "
+                                           "QPushButton:hover { text-decoration: underline; }");
+} // namespace
+
 FlatButton::FlatButton(QWidget *parent)
     : QPushButton(parent)
 {
     setFlat(true);
-    static const QString defaultStyle = QStringLiteral("text-align:left");
-    setStyleSheet(defaultStyle);
+    setStyleSheet(buttonStyle);
 }
 
 FlatButton::FlatButton(const QString &name, QWidget *parent)
     : QPushButton(name, parent)
 {
     setFlat(true);
-    static const QString namedStyle = QStringLiteral("text-align:left");
-    setStyleSheet(namedStyle);
-}
-
-void FlatButton::leaveEvent(QEvent *e)
-{
-    static const QString leaveStyle = QStringLiteral("text-align:left; text-decoration:none");
-    setStyleSheet(leaveStyle);
-    QPushButton::leaveEvent(e);
-}
-
-void FlatButton::enterEvent(QEnterEvent *e)
-{
-    static const QString enterStyle = QStringLiteral("QPushButton { text-align:left; text-decoration:underline}; QToolTip { text-decoration: none; }");
-    setStyleSheet(enterStyle);
-    QPushButton::enterEvent(e);
-}
-
-void FlatButton::setIconSize(int x, int y)
-{
-    QPushButton::setIconSize(QSize(x, y));
+    setStyleSheet(buttonStyle);
 }
 
 void FlatButton::setIconSize(QSize size)

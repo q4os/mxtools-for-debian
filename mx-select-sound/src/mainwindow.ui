@@ -290,8 +290,8 @@
           <string>Test current sound card</string>
          </property>
          <property name="icon">
-          <iconset>
-           <normaloff>../../../../../../../usr/share/pixmaps/mx/mx-select-sound.png</normaloff>../../../../../../../usr/share/pixmaps/mx/mx-select-sound.png</iconset>
+          <iconset theme="audio-volume-high">
+           <normaloff>.</normaloff>.</iconset>
          </property>
         </widget>
        </item>
@@ -347,7 +347,7 @@
  <connections>
   <connection>
    <sender>pushCancel</sender>
-   <signal>pressed()</signal>
+   <signal>clicked()</signal>
    <receiver>MainWindow</receiver>
    <slot>close()</slot>
    <hints>

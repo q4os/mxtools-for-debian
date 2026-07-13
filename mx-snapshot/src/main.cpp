@@ -30,8 +30,13 @@
 #include <QLocale>
 #include <QTranslator>
 
+#include <QSocketNotifier>
+
 #include <cstdio>
 #include <csignal>
+#include <cstring>
+#include <exception>
+#include <sys/socket.h>
 #include <unistd.h>
 
 #ifndef CLI_BUILD
@@ -52,6 +57,10 @@
 #endif
 
 static QTranslator qtTran, qtBaseTran, appTran;
+// Self-pipe pair for POSIX signal delivery: the raw handler writes the signal
+// number to signalFd[1]; a QSocketNotifier on signalFd[0] does the Qt work on
+// the event loop (qDebug/quit are not async-signal-safe).
+static int signalFd[2] = {-1, -1};
 QString currentKernel {};
 
 void checkSquashfs();
@@ -77,6 +86,11 @@ int main(int argc, char *argv[])
     const bool wantsHelp = arguments.contains(QLatin1String("--help")) || arguments.contains(QLatin1String("-h"));
     const bool wantsVersion = arguments.contains(QLatin1String("--version"));
 
+    // Non-blocking on both ends: the handler must never block, and the reader
+    // just drains whatever is queued.
+    if (::socketpair(AF_UNIX, SOCK_STREAM | SOCK_NONBLOCK, 0, signalFd) != 0) {
+        perror("socketpair");
+    }
     const std::array<int, 3> signalList {SIGINT, SIGTERM, SIGHUP}; // allow SIGQUIT CTRL-\?
     for (auto signalName : signalList) {
         signal(signalName, signalHandler);
@@ -137,7 +151,9 @@ int main(int argc, char *argv[])
              QObject::tr("Compression format, valid choices: ") + "lz4, lzo, gzip, xz, zstd",
              "format"},
             {"shutdown", QObject::tr("Shutdown computer when done.")},
-            {"grub-mbr", QObject::tr("Use grub for legacy mbr iso boot instead of isolinux/syslinux.")}};
+            {"grub-mbr", QObject::tr("Use grub for legacy mbr iso boot instead of isolinux/syslinux.")},
+            {"nvidia", QObject::tr("Add the 'xorg=nvidia' boot option to the ISO (for booting on a system with an "
+                                   "NVIDIA card).")}};
 
         for (const auto &option : options) {
             parser.addOption(option);
@@ -185,7 +201,7 @@ int main(int argc, char *argv[])
 #else
     // Determine if we should run in CLI mode based on multiple factors
     const bool forceCliMode = parser.isSet("cli") ||
-                              QString(argv[0]).contains("cli") ||
+                              QFileInfo(QString::fromLocal8Bit(argv[0])).baseName().endsWith("cli") ||
                               !qEnvironmentVariableIsEmpty("MX_SNAPSHOT_CLI");
     const bool noWindowSystem = qEnvironmentVariableIsEmpty("DISPLAY") &&
                                 qEnvironmentVariableIsEmpty("WAYLAND_DISPLAY");
@@ -210,46 +226,77 @@ int main(int argc, char *argv[])
     }
 #endif
 
+    // Deliver POSIX signals to the event loop: the raw handler only writes to
+    // the socketpair; all Qt calls happen here, where they are safe.
+    auto *sigNotifier = new QSocketNotifier(signalFd[0], QSocketNotifier::Read, app);
+    QObject::connect(sigNotifier, &QSocketNotifier::activated, app, [] {
+        char sig = 0;
+        if (::read(signalFd[0], &sig, 1) != 1) {
+            return;
+        }
+        const auto signame = strsignal(sig);
+        qDebug() << "\nReceived signal:" << (signame != nullptr ? signame : "Unknown signal");
+        QCoreApplication::quit();
+    });
+
+    int exitCode = EXIT_FAILURE;
+
     if (logname == "root") {
         const QString message = QObject::tr(
             "You seem to be logged in as root, please log out and log in as normal user to use this program.");
         MessageHandler::showMessage(MessageHandler::Critical, QObject::tr("Error"), message);
-        return EXIT_FAILURE;
-    }
+    } else {
+        setTranslation();
+        try {
+            checkSquashfs();
 
-    setTranslation();
-    checkSquashfs();
+            const bool isGuiApp = QCoreApplication::instance()->inherits("QApplication");
+            const bool hasAuthTools = !Cmd::elevationTool().isEmpty();
+            if (getuid() != 0 && (!isGuiApp || !hasAuthTools)) {
+                qDebug().noquote() << QObject::tr("You must run this program with sudo or pkexec.");
+            } else {
+                const Log setLog(Log::defaultLogPath(app->applicationName()));
+                qInstallMessageHandler(Log::messageHandler);
+                qDebug().noquote() << app->applicationName() << QObject::tr("version:") << app->applicationVersion();
+                if (argc > 1) {
+                    qDebug().noquote() << "Args:" << app->arguments();
+                }
 
-    const bool isGuiApp = QCoreApplication::instance()->inherits("QApplication");
-    const bool hasAuthTools = !Cmd::elevationTool().isEmpty();
-    if (getuid() != 0 && (!isGuiApp || !hasAuthTools)) {
-        qDebug().noquote() << QObject::tr("You must run this program with sudo or pkexec.");
-        return EXIT_FAILURE;
-    }
+                // Create settings instance for dependency injection
+                Settings settings(parser, isGuiApp);
 
-    const Log setLog("/tmp/" + app->applicationName() + ".log");
-    qInstallMessageHandler(Log::messageHandler);
-    qDebug().noquote() << app->applicationName() << QObject::tr("version:") << app->applicationVersion();
-    if (argc > 1) {
-        qDebug().noquote() << "Args:" << app->arguments();
-    }
-
-    // Create settings instance for dependency injection
-    Settings settings(parser, isGuiApp);
-
-    if (!isGuiApp) {
-        Batchprocessing batch(&settings);
-        QTimer::singleShot(0, app, &QCoreApplication::quit);
-        return app->exec();
-    }
+                if (!isGuiApp) {
+                    Batchprocessing batch(&settings);
+                    // The whole pipeline already ran synchronously inside the
+                    // constructor above (Cmd::proc uses its own nested QEventLoop
+                    // per call), so exec()'s return value here is meaningless:
+                    // QCoreApplication::exit() called before exec() starts has no
+                    // effect, and the queued quit() below always makes exec()
+                    // return 0 regardless of what Work::cleanUp() requested. Read
+                    // the real outcome from Batchprocessing instead.
+                    QTimer::singleShot(0, app, &QCoreApplication::quit);
+                    app->exec();
+                    exitCode = batch.succeeded() ? EXIT_SUCCESS : EXIT_FAILURE;
+                }
 #ifndef CLI_BUILD
-    else {
-        MainWindow w(&settings);
-        w.show();
-        return app->exec();
-    }
+                else {
+                    MainWindow w(&settings);
+                    w.show();
+                    exitCode = app->exec();
+                }
 #endif
-    return EXIT_SUCCESS;
+            }
+        } catch (const std::exception &e) {
+            qCritical().noquote() << QObject::tr("Fatal error:") << e.what();
+        } catch (...) {
+            qCritical().noquote() << QObject::tr("Fatal error: unknown exception");
+        }
+    }
+
+    qInstallMessageHandler(nullptr);
+    delete app;
+    app = nullptr;
+    return exitCode;
 }
 
 void setTranslation()
@@ -278,6 +325,8 @@ void checkSquashfs()
     proc.waitForFinished();
     currentKernel = proc.readAllStandardOutput().trimmed();
 
+    // Arch ships kernels without /boot/config-* by default and mksquashfs is userspace
+    // anyway, so the QFile::exists guard naturally skips the check on Arch.
     const QString configPath = "/boot/config-" + currentKernel;
     if (QFile::exists(configPath) && QProcess::execute("grep", {"-q", "^CONFIG_SQUASHFS=[ym]", configPath}) != 0) {
         const QString message = QObject::tr("Current kernel doesn't support Squashfs, cannot continue.");
@@ -288,7 +337,8 @@ void checkSquashfs()
 
 void signalHandler(int signal)
 {
-    const auto signame = strsignal(signal);
-    qDebug() << "\nReceived signal:" << (signame ? signame : "Unknown signal");
-    QCoreApplication::quit();
+    // Only async-signal-safe calls are allowed here; the QSocketNotifier hooked
+    // to the other end of the pair does the actual logging and quit.
+    const char byte = static_cast<char>(signal);
+    [[maybe_unused]] const ssize_t written = ::write(signalFd[1], &byte, 1);
 }

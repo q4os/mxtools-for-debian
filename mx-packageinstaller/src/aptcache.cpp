@@ -64,7 +64,7 @@ const QHash<QString, PackageInfo>& AptCache::getCandidates() const
 // Return DEB_BUILD_ARCH format which differs from what 'arch' or currentCpuArchitecture return
 QString AptCache::getArch()
 {
-    return arch_names.value(QSysInfo::currentCpuArchitecture(), QStringLiteral("unknown"));
+    return archNames.value(QSysInfo::currentCpuArchitecture(), QStringLiteral("unknown"));
 }
 
 bool AptCache::isDirValid() const

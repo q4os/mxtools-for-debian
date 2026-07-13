@@ -1,0 +1,127 @@
+.TH LIVE-BOOT-REFRESH 1 "June 2026" "mx-remaster" "User Commands"
+.SH NAME
+live-boot-refresh \- set the live USB boot menu title to the release name
+.SH SYNOPSIS
+.B live-boot-refresh
+.RI [ options "] [" mount-point ]
+.SH DESCRIPTION
+Set the live USB boot menus to the current release name.  This is useful after
+a remaster, when the running system reports a new release name but the boot
+menus still show the original one.
+.PP
+The release name is taken from
+.I /etc/lsb-release
+.RB ( DISTRIB_DESCRIPTION )
+when present, otherwise from
+.I /etc/os-release
+.RB ( PRETTY_NAME ).
+When an explicit live USB boot tree is given and it has no
+.I etc
+metadata, the existing dated boot labels in that tree are used instead.  This
+prevents an older mounted USB from being relabeled with the host system's
+release name.
+.PP
+It is written to:
+.RS
+.IP \(bu 2
+the title banner \(em the
+.B "MENU TITLE"
+line of the
+.B syslinux
+and
+.B isolinux
+configuration files and the
+.RB \(lq "Welcome to \&..." \(rq
+text of the
+.B GRUB
+theme files \(em as
+.RB \(lq "Welcome to " \c
+.IR release \(rq;
+and
+.IP \(bu 2
+the OS boot entry labels \(em every
+.B syslinux / isolinux
+.BR "MENU LABEL" ,
+.B GRUB
+.IR menuentry ,
+and gfxboot
+.I readme.msg
+line that carries a build date (the
+.B sysvinit
+and
+.B systemd
+variants) \(em as
+.RI \(lq release " (" "current date" )\(rq,
+keeping any trailing
+.RB \(lq (sysvinit) \(rq
+or
+.RB \(lq (systemd) \(rq
+marker.
+.RE
+.PP
+Entries without a build date (Custom Boot, Memory Test, integrity check, ...)
+are left unchanged, as are commented-out entries.
+.PP
+If
+.I mount-point
+is omitted, the partition holding the boot menus is located automatically \(em
+the BIOS/EFI
+.B GRUB
+partition, then the boot partition \(em and mounted if needed.  This includes
+the case where the device is not currently mounted, for example after booting
+.B toram
+when boot-dev is empty.  A device that this command mounts is unmounted again
+on exit unless
+.B --keep-mounted
+is given.  Auto-detection requires root and reads the live boot configuration,
+so it only works on a running live system; pass an explicit
+.I mount-point
+otherwise.
+.SH OPTIONS
+.TP
+.BR -h , " --help"
+Show help.
+.TP
+.BR -n , " --dry-run"
+Show what would be changed without modifying files.
+.TP
+.BR -m , " --keep-mounted"
+Do not unmount a device that this command mounted.
+.SH FILES
+.TP
+.IR /etc/lsb-release ", " /etc/os-release
+Source of the release name
+.RB ( DISTRIB_DESCRIPTION ", then " PRETTY_NAME ).
+The copies under
+.I <mount-point>/etc
+are preferred when an explicit system tree is given; otherwise an explicit boot
+tree falls back to its existing dated boot labels.
+.TP
+.I boot/isolinux/isolinux.cfg, boot/syslinux/syslinux.cfg
+Main menu configuration files whose
+.B "MENU TITLE"
+and dated
+.B "MENU LABEL"
+lines are updated in place.  Sub-menu configs (e.g.
+.IR checkmedia.cfg )
+are left alone.
+.TP
+.I boot/grub/grub.cfg, boot/grub/config/*.cfg
+GRUB menu files whose dated
+.I menuentry
+titles are updated in place.
+.TP
+.I boot/isolinux/readme.msg, boot/syslinux/readme.msg
+gfxboot menu text (what is drawn on screen) whose dated entry lines are
+updated in place.
+.TP
+.I boot/grub/theme/*.txt
+GRUB theme files whose
+.RB \(lq "Welcome to \&..." \(rq
+banner text is updated in place.
+.SH SEE ALSO
+.BR live-remaster (1),
+.BR live-grubsave (1),
+.BR live-setup (1)
+.SH AUTHOR
+mx-remaster maintainers

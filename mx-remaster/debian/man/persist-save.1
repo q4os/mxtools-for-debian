@@ -1,0 +1,38 @@
+.TH PERSIST-SAVE 1 "June 2026" "mx-remaster" "User Commands"
+.SH NAME
+persist-save \- save live-system changes into the persistence filesystem
+.SH SYNOPSIS
+.B persist-save
+.RI [ options ]
+.SH DESCRIPTION
+.B persist-save
+copies changes from the running live system into the persistence filesystem.
+It is the manual save command for live systems that use root persistence.
+The tool checks that dynamic persistence is enabled, ensures the persistence
+volume is available, and then synchronizes the live changes back into the
+persisted root filesystem.
+
+This command is generally used at shutdown or when the user wants to save
+changes immediately.
+It can also store volume settings when ALSA is available.
+.SH OPTIONS
+.B persist-save
+does not define any tool-specific options.
+It does honor the shared antiX common options such as quiet and GUI/CLI mode
+selection.
+.SH FILES
+.TP
+.I /live/config/initrd.out
+Live configuration used to verify that dynamic persistence is enabled.
+.TP
+.I /live/config/last-persist-save
+Timestamp written after a successful save.
+.TP
+.I /live/config/save-persist
+Legacy trigger file used by the surrounding live workflow.
+.SH SEE ALSO
+.BR persist-config (1),
+.BR persist-makefs (1),
+.BR rsync (1)
+.SH AUTHOR
+mx-remaster maintainers

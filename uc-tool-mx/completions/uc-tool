@@ -1,0 +1,61 @@
+# bash completion for uc-tool
+
+_uc_tool() {
+    local cur prev words cword
+    _init_completion -s || return
+
+    local short_opts="-D -d -F -h -H -i -k -l -n -q -s -S -u -V -v -x"
+    local long_opts="
+        --amd-dir=
+        --default
+        --directory=
+        --extract
+        --firmware=
+        --has-ucode
+        --help
+        --initrd=
+        --intel-dir=
+        --keep
+        --list
+        --no-color
+        --quiet
+        --repack=
+        --silent
+        --strip
+        --ucode=
+        --verbose
+        --version
+    "
+
+    case "$prev" in
+        -u|--ucode)
+            COMPREPLY=( $(compgen -W "amd intel amd,intel" -- "$cur") )
+            return ;;
+        -d|--directory)
+            _filedir -d
+            return ;;
+        -i|--initrd)
+            _filedir
+            return ;;
+        -F|--firmware)
+            _filedir
+            return ;;
+        --amd-dir|--intel-dir|--repack)
+            _filedir -d
+            return ;;
+        -x|--extract|-l|--list)
+            COMPREPLY=( $(compgen -W "all unpack" -- "$cur") )
+            return ;;
+    esac
+
+    case "$cur" in
+        --*)
+            COMPREPLY=( $(compgen -W "$long_opts" -- "$cur") )
+            return ;;
+        -*)
+            COMPREPLY=( $(compgen -W "$short_opts $long_opts" -- "$cur") )
+            return ;;
+    esac
+}
+
+complete -F _uc_tool uc-tool

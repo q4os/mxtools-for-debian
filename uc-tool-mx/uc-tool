@@ -1,0 +1,1664 @@
+#!/bin/bash
+#------------------------------------------------------------------------------
+# uc-tool
+#
+# Generate microcode early CPIO images directly from system firmware:
+#   amd-ucode.img   -- /lib/firmware/amd-ucode   (sorted concatenation)
+#   intel-ucode.img -- /lib/firmware/intel-ucode  (via iucode_tool)
+#
+# Optionally updates an existing initrd in-place (-i <initrd>):
+#   strips any old leading microcode CPIOs, prepends the newly built ones,
+#   refreshes <initrd>.md5 if present, and runs e4defrag on ext4.
+#
+# Copyright (C) 2026  fehlix <fehlix@mxlinux.org>
+#                     MX Linux Development Team <https://mxlinux.org>
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, version 3 of the License.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+#------------------------------------------------------------------------------
+# based on ideas and functions used in unpack-initrd (thanks BitJam)
+#------------------------------------------------------------------------------
+
+     VERSION="@VERSION@"
+VERSION_DATE="@VERSION_DATE@"
+
+ME=${0##*/}
+
+AMD_FW_DIR="/lib/firmware/amd-ucode"
+INTEL_FW_DIR="/lib/firmware/intel-ucode"
+UCODE_LIST="amd,intel"
+OUT_DIR=""
+INITRD_FILE=""
+FIRMWARE_BASE=""
+KEEP_UCODE=""
+STRIP_UCODE=""
+HAS_UCODE_CHECK=""
+EXTRACT_MODE=""
+LIST_MODE=""
+REPACK_DIR=""
+FW_MOUNT_POINT=""
+AMD_FW_EXPLICIT=""
+INTEL_FW_EXPLICIT=""
+USE_DEFAULTS=""
+
+# Cleanup tracking globals (used by _uc_cleanup EXIT trap)
+_AMD_BUILD_TMP=""
+_INITRD_SECT_TMP=""
+_INITRD_NEW_TMP=""
+_INITRD_MD5_UNEW=""
+_UC_TMPDIR=""
+
+# Compression-format magic bytes as hex strings produced by:
+#   dd ... | od -A n -t x1 | tr -d ' \n'
+# Kernel base URL (torvalds/linux.git):
+#   https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/lib/
+#   decompress.c          -- magic detection for all formats below
+#   decompress_unzstd.c   -- zstd
+#   decompress_inflate.c  -- gzip
+#   decompress_unxz.c     -- xz
+#   decompress_unlz4.c    -- lz4
+#   decompress_bunzip2.c  -- bzip2
+#   decompress_unlzo.c    -- lzop
+#   decompress_unlzma.c   -- lzma
+MAGIC_ZSTD="28b52ffd"  # 0xFD2FB528 LE -- Zstandard frame magic
+MAGIC_GZIP="1f8b"      # RFC 1952 sec.2.3 -- first 2 bytes of gzip header
+MAGIC_XZ="fd377a58"    # first 4 of 6-byte XZ stream magic: FD 37 7A 58 5A 00
+MAGIC_LZ4="04224d18"   # 0x184D2204 LE -- LZ4 frame magic
+MAGIC_BZIP2="425a68"   # "BZh" ASCII -- first 3 bytes of bzip2 header
+MAGIC_LZOP="894c5a4f"  # first 4 of 9-byte lzop magic header
+MAGIC_LZMA="5d00"      # LZMA props byte 0x5D + first dict-size byte 0x00
+
+# Squashfs superblock magic -- kernel ref:
+#   https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/fs/squashfs/squashfs_fs.h
+MAGIC_SQUASHFS_LE="68737173"  # SQUASHFS_MAGIC      0x73717368 stored LE
+MAGIC_SQUASHFS_BE="73717368"  # SQUASHFS_MAGIC_SWAP 0x73717368 stored BE
+
+usage() {
+    local ret=${1:-0}
+    local kver live_initrd inst_initrd
+    kver=$(uname -r)
+    live_initrd="/live/boot-dev/antiX/initrd.gz"
+    inst_initrd="/boot/initrd.img-${kver}"
+    cat <<Usage
+Usage:  $ME [options]
+
+Generate microcode early CPIO images from system firmware into -d <dir>.
+Optionally update an existing initrd in-place with the new images (-i).
+
+Options:
+  -u  --ucode=<list>       Vendors to build: amd, intel, or amd,intel
+                           [default: $UCODE_LIST]
+  -d  --directory=<dir>    Directory for .img files (generate/extract output)
+                           or sections to repack (repack input)
+  -D  --default            Set directory and initrd from current boot mode:
+                             live:
+                               initrd    $live_initrd
+                               directory ./${live_initrd##*/}.D
+                             installed:
+                               initrd    $inst_initrd
+                               directory ./${inst_initrd##*/}.D
+                           explicit -d or -i always overrides -D
+      --amd-dir=<dir>      AMD firmware source  [default: $AMD_FW_DIR]
+      --intel-dir=<dir>    Intel firmware source [default: $INTEL_FW_DIR]
+  -F  --firmware=<path>    Firmware base: directory (auto-sets amd-ucode/ and
+                           intel-ucode/ sub-dirs) or squashfs image (auto-mounted)
+  -i  --initrd=<file>      Update this initrd in-place:
+                             strip old ucode CPIOs, prepend new ones,
+                             refresh <initrd>.md5 if present,
+                             run e4defrag if on ext4
+  -k  --keep               Keep generated .img files when using a temp dir
+                           (only meaningful when -i is given without -d)
+  -S  --strip              Strip ucode CPIOs from -i <initrd> without adding new
+                           ones; other preamble sections are kept intact
+  -H  --has-ucode          Check if -i <initrd> contains ucode CPIOs;
+                           exits 0=found, 1=none  (no writes)
+  -x  --extract[=ucode|all|unpack]
+                           Extract initrd sections to -d <dir> (empty or new):
+                             ucode    ucode CPIOs only [default]
+                             all      all sections as raw files
+                             unpack   all sections + unpack each into <name>.D/
+  -l  --list[=ucode|all|unpack]
+                           List initrd sections (no files written):
+                             ucode    ucode CPIOs only -- vendor, size, files [default]
+                             all      all sections -- name, size, compression
+                             unpack   all sections + list files inside each
+      --repack=<dir>        Repack sections from <dir> back into -i <initrd>;
+                             uses <name>.D/ if it exists, else the raw file
+  -h  --help               Show this usage
+  -n  --no-color           Suppress color codes in output
+  -q  --quiet              Say very little
+  -s  --silent             Only show error messages
+  -V  --verbose            Show commands as they run
+  -v  --version            Show version and exit
+Usage
+    exit "$ret"
+}
+
+#------------------------------------------------------------------------------
+# Parameter handling (thanks BitJam)
+#------------------------------------------------------------------------------
+
+eval_argument() {
+    local arg=$1 val=$2
+    case $arg in
+           -ucode|u) UCODE_LIST=$val                           ;;
+           -ucode=*) UCODE_LIST=$val                           ;;
+      -directory|d) OUT_DIR=$val                              ;;
+      -directory=*) OUT_DIR=$val                              ;;
+         -default|D) USE_DEFAULTS=true                         ;;
+          -initrd|i) INITRD_FILE=$val                          ;;
+          -initrd=*) INITRD_FILE=$val                          ;;
+           -amd-dir) AMD_FW_DIR=$val; AMD_FW_EXPLICIT=true     ;;
+         -amd-dir=*) AMD_FW_DIR=$val; AMD_FW_EXPLICIT=true     ;;
+         -intel-dir) INTEL_FW_DIR=$val; INTEL_FW_EXPLICIT=true ;;
+       -intel-dir=*) INTEL_FW_DIR=$val; INTEL_FW_EXPLICIT=true ;;
+        -firmware|F) FIRMWARE_BASE=$val                        ;;
+        -firmware=*) FIRMWARE_BASE=$val                        ;;
+            -keep|k) KEEP_UCODE=true                           ;;
+           -strip|S) STRIP_UCODE=true                          ;;
+       -has-ucode|H) HAS_UCODE_CHECK=true                      ;;
+         -extract|x) [ "$val" = "???" ] && val="ucode"
+                    EXTRACT_MODE=$val                          ;;
+         -extract=*) EXTRACT_MODE=$val                         ;;
+            -list|l) [ "$val" = "???" ] && val="ucode"
+                    LIST_MODE=$val                             ;;
+            -list=*) LIST_MODE=$val                            ;;
+           -repack) REPACK_DIR=$val                            ;;
+         -repack=*) REPACK_DIR=$val                            ;;
+            -help|h) usage                                     ;;
+        -no-color|n) NO_COLOR=true                             ;;
+          -silent|s) SILENT=true                               ;;
+           -quiet|q) QUIET=true                                ;;
+         -verbose|V) VERBOSE=true                              ;;
+         -version|v) show_version                              ;;
+                  *) fatal "Unknown parameter: -%s" "$arg"     ;;
+    esac
+}
+
+#------------------------------------------------------------------------------
+# Main entry point
+#------------------------------------------------------------------------------
+main() {
+    local SHIFT
+    local QUIET SILENT VERBOSE NO_COLOR
+
+    read_params "$@"
+    shift $SHIFT
+    set_colors
+    [ $# -gt 0 ] && fatal "Unexpected arguments: %s" "$*"
+
+    [ "$USE_DEFAULTS" ] && resolve_defaults
+
+    if [ "$LIST_MODE" ]; then
+        case "$LIST_MODE" in
+            ucode|all|unpack) ;;
+            *) fatal "Unknown --list mode '%s' -- use: all, unpack (or omit for ucode default)" \
+                     "$LIST_MODE" ;;
+        esac
+        do_list
+    elif [ "$EXTRACT_MODE" ]; then
+        case "$EXTRACT_MODE" in
+            ucode|all|unpack) ;;
+            *) fatal "Unknown --extract mode '%s' -- use: all, unpack (or omit for ucode default)" \
+                     "$EXTRACT_MODE" ;;
+        esac
+        do_extract
+    elif [ "$REPACK_DIR" ]; then
+        do_repack
+    elif [ "$HAS_UCODE_CHECK" ]; then
+        do_check_ucode
+    elif [ "$STRIP_UCODE" ]; then
+        do_strip_ucode
+    else
+        do_generate
+    fi
+    exit 0
+}
+
+#------------------------------------------------------------------------------
+# Check whether INITRD_FILE contains any ucode CPIOs.
+# Exits 0 if ucode found, 1 if not.  No writes performed.
+#------------------------------------------------------------------------------
+do_check_ucode() {
+    [ -z "$INITRD_FILE" ] && fatal "Initrd file required for check mode -- use -i <file>"
+    test -e "$INITRD_FILE" || fatal "Initrd not found: %s"   "$INITRD_FILE"
+    test -r "$INITRD_FILE" || fatal "Cannot read initrd: %s" "$INITRD_FILE"
+
+    local bounds
+    bounds=$(cpio_boundaries "$INITRD_FILE")
+    set -- $bounds
+    [ $# -le 1 ] && exit 1
+
+    local b magic comp_off=""
+    for b in $bounds; do
+        magic=$(cmd_dd if="$INITRD_FILE" bs=1 skip="$b" count=4 2>/dev/null \
+                | od -A n -t x1 | tr -d ' \n')
+        case "$magic" in
+            "$MAGIC_ZSTD" | "${MAGIC_GZIP}"* | "$MAGIC_XZ"  | \
+            "$MAGIC_LZ4"  | "${MAGIC_BZIP2}"* | "$MAGIC_LZOP" | \
+            "${MAGIC_LZMA}"*)
+                comp_off=$b; break ;;
+        esac
+    done
+    [ -z "$comp_off" ] && { for b in $bounds; do comp_off=$b; done ; }
+
+    local early_bounds=""
+    for b in $bounds; do
+        [ "$b" -ge "$comp_off" ] && break
+        early_bounds="${early_bounds:+$early_bounds }$b"
+    done
+    early_bounds="$early_bounds $comp_off"
+
+    local tmp s e
+    tmp=$(mktemp)
+    set -- $early_bounds
+    while [ $# -gt 1 ]; do
+        s=$1 e=$2
+        cmd_dd if="$INITRD_FILE" bs=512 \
+            skip=$(( s/512 )) count=$(( (e-s)/512 )) of="$tmp" 2>/dev/null
+        if is_microcode_cpio "$tmp"; then
+            rm -f "$tmp"
+            exit 0
+        fi
+        shift
+    done
+    rm -f "$tmp"
+    exit 1
+}
+
+#------------------------------------------------------------------------------
+# Extract initrd sections to OUT_DIR (must not exist).
+#   EXTRACT_MODE=ucode   -- ucode CPIOs only
+#   EXTRACT_MODE=all     -- all sections as raw files
+#   EXTRACT_MODE=unpack  -- all sections + unpack each into <name>.D/
+# Named: early{N}.<vendor|cpio>  and  main{N}.<ext>
+#------------------------------------------------------------------------------
+do_extract() {
+    [ -z "$INITRD_FILE" ]  && fatal "Initrd file required -- use -i <file>"
+    [ -z "$OUT_DIR" ]      && fatal "Output directory required -- use -d <dir>"
+    test -e "$INITRD_FILE" || fatal "Initrd not found: %s"   "$INITRD_FILE"
+    test -r "$INITRD_FILE" || fatal "Cannot read initrd: %s" "$INITRD_FILE"
+    if [ -e "$OUT_DIR" ]; then
+        [ -d "$OUT_DIR" ] && [ -z "$(ls -A "$OUT_DIR")" ] \
+            || fatal "Directory exists and is not empty: %s" "$OUT_DIR"
+    fi
+    mkdir -p "$OUT_DIR" || fatal "Could not create: %s" "$OUT_DIR"
+    OUT_DIR=$(_realpath "$OUT_DIR")
+
+    ssay "Extract initrd: %s" "$(pq "$INITRD_FILE")"
+    ssay "  --> %s/" "$(dq "$OUT_DIR")"
+
+    local bounds
+    bounds=$(cpio_boundaries "$INITRD_FILE")
+
+    # Locate the first compressed (non-CPIO) section
+    local b magic comp_off="" has_comp_main=false
+    for b in $bounds; do
+        magic=$(cmd_dd if="$INITRD_FILE" bs=1 skip="$b" count=4 2>/dev/null \
+                | od -A n -t x1 | tr -d ' \n')
+        case "$magic" in
+            "$MAGIC_ZSTD" | "${MAGIC_GZIP}"* | "$MAGIC_XZ"  | \
+            "$MAGIC_LZ4"  | "${MAGIC_BZIP2}"* | "$MAGIC_LZOP" | \
+            "${MAGIC_LZMA}"*)
+                comp_off=$b; has_comp_main=true; break ;;
+        esac
+    done
+    [ -z "$comp_off" ] && { for b in $bounds; do comp_off=$b; done ; }
+
+    # Build list of early section boundaries [start end start end ...]
+    local early_bounds=""
+    for b in $bounds; do
+        [ "$b" -ge "$comp_off" ] && break
+        early_bounds="${early_bounds:+$early_bounds }$b"
+    done
+    early_bounds="${early_bounds:+$early_bounds }$comp_off"
+
+    local tmp s e sect_num=0
+    tmp=$(mktemp)
+
+    set -- $early_bounds
+    while [ $# -gt 1 ]; do
+        s=$1 e=$2
+        sect_num=$(( sect_num + 1 ))
+        cmd_dd if="$INITRD_FILE" bs=512 \
+            skip=$(( s/512 )) count=$(( (e-s)/512 )) of="$tmp"
+
+        local is_ucode=false
+        is_microcode_cpio "$tmp" && is_ucode=true
+
+        # In ucode mode stop at first non-ucode section (ucode is always leading)
+        if [ "$EXTRACT_MODE" = "ucode" ] && ! $is_ucode; then
+            break
+        fi
+
+        local label
+        $is_ucode \
+            && label="early${sect_num}.$(ucode_vendor "$tmp")" \
+            || label="early${sect_num}.cpio"
+
+        cp "$tmp" "$OUT_DIR/$label"
+        ssay "  %s  (%s bytes)" "$(pq "$label")" "$(nq "$(( e - s ))")"
+
+        if [ "$EXTRACT_MODE" = "unpack" ]; then
+            local ddir="$OUT_DIR/${label}.D"
+            mkdir -p "$ddir"
+            ( cd "$ddir" && cpio -id --no-absolute-filenames --quiet \
+                < "$OUT_DIR/$label" 2>/dev/null ) \
+                || warn "Failed to unpack %s" "$label"
+            ssay "    %s  (%s file(s))" "$(pq "${label}.D/")" \
+                 "$(nq "$(find "$ddir" -type f | wc -l)")"
+        fi
+
+        shift
+    done
+    rm -f "$tmp"
+
+    # Extract the main compressed section (all modes except ucode)
+    if [ "$EXTRACT_MODE" != "ucode" ] && [ "$has_comp_main" = "true" ]; then
+        local main_tmp="$OUT_DIR/.main_tmp"
+        cmd_dd if="$INITRD_FILE" bs=512 skip=$(( comp_off/512 )) of="$main_tmp"
+        local ext
+        ext=$(section_comp_name "$main_tmp")
+        local main_label="main1.${ext}"
+        mv "$main_tmp" "$OUT_DIR/$main_label"
+        ssay "  %s  (%s bytes)" "$(pq "$main_label")" \
+             "$(nq "$(stat -c%s "$OUT_DIR/$main_label")")"
+
+        if [ "$EXTRACT_MODE" = "unpack" ]; then
+            local ddir="$OUT_DIR/${main_label}.D"
+            mkdir -p "$ddir"
+            ( section_decompress "$OUT_DIR/$main_label" "$ext" \
+                | ( cd "$ddir" && cpio -id --no-absolute-filenames --quiet 2>/dev/null ) ) \
+                || warn "Failed to unpack %s" "$main_label"
+            ssay "    %s  (%s file(s))" "$(pq "${main_label}.D/")" \
+                 "$(nq "$(find "$ddir" -type f | wc -l)")"
+        fi
+    fi
+
+    ssay ""
+    ssay "Done."
+}
+
+#------------------------------------------------------------------------------
+# Main generation routine
+#------------------------------------------------------------------------------
+do_generate() {
+    trap '_uc_cleanup' EXIT
+
+    # squashfs mount always needs root -- check early before doing any work
+    [ -n "$FIRMWARE_BASE" ] && [ -f "$FIRMWARE_BASE" ] && need_root
+
+    # -- resolve output directory -----------------------------------------
+    if [ -z "$OUT_DIR" ]; then
+        [ -z "$INITRD_FILE" ] \
+            && fatal "Output directory is required -- use -d <dir> (or -i <initrd> for temp dir)"
+        if [ "$KEEP_UCODE" ]; then
+            OUT_DIR=$(dirname "$(_realpath "$INITRD_FILE")")
+        else
+            OUT_DIR=$(mktemp -d /tmp/uc-tool.XXXXXXXX)
+            _UC_TMPDIR="$OUT_DIR"
+        fi
+    else
+        cmd mkdir -p "$OUT_DIR" || fatal "Could not create output directory: %s" "$OUT_DIR"
+        OUT_DIR=$(_realpath "$OUT_DIR")
+    fi
+
+    # -- parse vendor list -------------------------------------------------
+    local do_amd=false do_intel=false v rest
+    rest="$UCODE_LIST,"
+    while [ -n "$rest" ]; do
+        v="${rest%%,*}"
+        rest="${rest#*,}"
+        v=$(echo "$v" | tr '[:upper:]' '[:lower:]')
+        case "$v" in
+            amd)   do_amd=true   ;;
+            intel) do_intel=true ;;
+            *)     fatal "Unknown vendor '%s' in --ucode -- use amd, intel, or amd,intel" "$v" ;;
+        esac
+    done
+    $do_amd || $do_intel \
+        || fatal "No vendors selected -- use -u amd, -u intel, or -u amd,intel"
+
+    # -- check prerequisites -----------------------------------------------
+    local _need_squashfs=false
+    [ -n "$FIRMWARE_BASE" ] && [ -f "$FIRMWARE_BASE" ] && _need_squashfs=true
+    check_prereqs "$do_intel" "$_need_squashfs"
+
+    # -- resolve firmware source from -F ----------------------------------
+    if [ -n "$FIRMWARE_BASE" ]; then
+        if [ -d "$FIRMWARE_BASE" ]; then
+            [ -z "$AMD_FW_EXPLICIT"   ] && AMD_FW_DIR="$FIRMWARE_BASE/amd-ucode"
+            [ -z "$INTEL_FW_EXPLICIT" ] && INTEL_FW_DIR="$FIRMWARE_BASE/intel-ucode"
+        elif [ -f "$FIRMWARE_BASE" ]; then
+            mount_squashfs_fw "$FIRMWARE_BASE"
+            [ -z "$AMD_FW_EXPLICIT"   ] \
+                && AMD_FW_DIR="$FW_MOUNT_POINT/lib/firmware/amd-ucode"
+            [ -z "$INTEL_FW_EXPLICIT" ] \
+                && INTEL_FW_DIR="$FW_MOUNT_POINT/lib/firmware/intel-ucode"
+        else
+            fatal "Firmware path not found: %s" "$FIRMWARE_BASE"
+        fi
+    fi
+
+    ssay "Generate ucode CPIOs  -->  %s/" "$(pq "$OUT_DIR")"
+
+    $do_amd   && make_amd_ucode
+    $do_intel && make_intel_ucode
+
+    if [ -n "$INITRD_FILE" ]; then
+        ssay ""
+        update_initrd
+    fi
+
+    ssay ""
+    ssay "Done."
+    if [ -z "$_UC_TMPDIR" ] || [ "$KEEP_UCODE" ]; then
+        [ "$SILENT" ] || ls -lh "$OUT_DIR"/*.img 2>/dev/null
+    fi
+}
+
+#------------------------------------------------------------------------------
+# List initrd sections (no files written).
+#   LIST_MODE=ucode   -- ucode CPIOs only: vendor, size, files inside
+#   LIST_MODE=all     -- all sections: name, size, [compression type]
+#   LIST_MODE=unpack  -- all sections + list files inside each
+#------------------------------------------------------------------------------
+do_list() {
+    [ -z "$INITRD_FILE" ]  && fatal "Initrd file required -- use -i <file>"
+    test -e "$INITRD_FILE" || fatal "Initrd not found: %s"   "$INITRD_FILE"
+    test -r "$INITRD_FILE" || fatal "Cannot read initrd: %s" "$INITRD_FILE"
+
+    printf "%s sections:\n" "$(pq "$(basename "$INITRD_FILE")")"
+
+    local bounds
+    bounds=$(cpio_boundaries "$INITRD_FILE")
+
+    local b magic comp_off="" has_comp_main=false
+    for b in $bounds; do
+        magic=$(cmd_dd if="$INITRD_FILE" bs=1 skip="$b" count=4 2>/dev/null \
+                | od -A n -t x1 | tr -d ' \n')
+        case "$magic" in
+            "$MAGIC_ZSTD" | "${MAGIC_GZIP}"* | "$MAGIC_XZ"  | \
+            "$MAGIC_LZ4"  | "${MAGIC_BZIP2}"* | "$MAGIC_LZOP" | \
+            "${MAGIC_LZMA}"*)
+                comp_off=$b; has_comp_main=true; break ;;
+        esac
+    done
+    [ -z "$comp_off" ] && { for b in $bounds; do comp_off=$b; done ; }
+
+    local early_bounds=""
+    for b in $bounds; do
+        [ "$b" -ge "$comp_off" ] && break
+        early_bounds="${early_bounds:+$early_bounds }$b"
+    done
+    early_bounds="${early_bounds:+$early_bounds }$comp_off"
+
+    _size_h() { awk -v b="$1" 'BEGIN{
+        if (b>=1048576) printf "%.1fM",b/1048576; else printf "%dK",int(b/1024) }'; }
+
+    local tmp s e sect_num=0 ucode_found=0
+    tmp=$(mktemp)
+
+    set -- $early_bounds
+    while [ $# -gt 1 ]; do
+        s=$1 e=$2
+        sect_num=$(( sect_num + 1 ))
+        cmd_dd if="$INITRD_FILE" bs=512 \
+            skip=$(( s/512 )) count=$(( (e-s)/512 )) of="$tmp"
+
+        local is_ucode=false
+        is_microcode_cpio "$tmp" && is_ucode=true
+
+        if [ "$LIST_MODE" = "ucode" ] && ! $is_ucode; then
+            break
+        fi
+
+        local label
+        $is_ucode \
+            && label="early${sect_num}.$(ucode_vendor "$tmp")" \
+            || label="early${sect_num}.cpio"
+
+        printf "  %s  %s\n" "$(pq "$label")" "$(nq "$(_size_h $((e-s)))")"
+        $is_ucode && ucode_found=$(( ucode_found + 1 ))
+
+        if [ "$LIST_MODE" != "all" ]; then
+            if [ "$VERBOSE" ]; then
+                cpio -tv --quiet < "$tmp" 2>/dev/null \
+                    | awk '{print "    " $0}'
+            elif $is_ucode; then
+                cpio -t --quiet < "$tmp" 2>/dev/null \
+                    | grep '^kernel/x86/microcode/' \
+                    | while IFS= read -r f; do printf "    %s\n" "$f"; done
+            else
+                cpio -t --quiet < "$tmp" 2>/dev/null \
+                    | grep -v '^\./*$' \
+                    | while IFS= read -r f; do printf "    %s\n" "$f"; done
+            fi
+        fi
+
+        shift
+    done
+    rm -f "$tmp"
+
+    [ "$LIST_MODE" = "ucode" ] && [ "$ucode_found" -eq 0 ] \
+        && printf "  (no microcode CPIOs)\n"
+
+    if [ "$LIST_MODE" != "ucode" ] && [ "$has_comp_main" = "true" ]; then
+        local main_tmp
+        main_tmp=$(mktemp)
+        cmd_dd if="$INITRD_FILE" bs=512 skip=$(( comp_off/512 )) of="$main_tmp"
+        local ext
+        ext=$(section_comp_name "$main_tmp")
+        local size_bytes
+        size_bytes=$(stat -c%s "$main_tmp")
+        printf "  %s  %s  [%s]\n" \
+            "$(pq "main1.${ext}")" "$(nq "$(_size_h "$size_bytes")")" "$(pq "$(section_comp_label "$ext")")"
+
+        if [ "$LIST_MODE" = "unpack" ]; then
+            if [ "$VERBOSE" ]; then
+                section_decompress "$main_tmp" "$ext" \
+                    | cpio -tv --quiet 2>/dev/null \
+                    | awk '{print "    " $0}'
+            else
+                section_decompress "$main_tmp" "$ext" \
+                    | cpio -t --quiet 2>/dev/null \
+                    | grep -v '^\./*$' \
+                    | while IFS= read -r f; do printf "    %s\n" "$f"; done
+            fi
+        fi
+        rm -f "$main_tmp"
+    fi
+
+    printf "\n"
+}
+
+#------------------------------------------------------------------------------
+# Repack sections from REPACK_DIR back into INITRD_FILE.
+# For each early*/main* file: if a <name>.D/ directory exists it is used
+# (early sections -> CPIO; main sections -> CPIO piped through section_compress);
+# otherwise the raw file is appended as-is.
+#------------------------------------------------------------------------------
+do_repack() {
+    trap '_uc_cleanup' EXIT
+
+    [ -z "$REPACK_DIR" ]  && fatal "Repack directory required -- use --repack=<dir>"
+    [ -z "$INITRD_FILE" ] && fatal "Output initrd required -- use -i <file>"
+    test -d "$REPACK_DIR" || fatal "Repack directory not found: %s" "$REPACK_DIR"
+
+    need_root
+
+    local initrd_dir
+    initrd_dir=$(dirname "$(_realpath -m "$INITRD_FILE")")
+    [ -d "$initrd_dir" ] || fatal "Output directory not found: %s" "$initrd_dir"
+    if [ -e "$INITRD_FILE" ]; then
+        test -w "$INITRD_FILE" \
+            || fatal "Cannot write initrd: %s  (run as root?)" "$INITRD_FILE"
+    fi
+    check_writable "$initrd_dir"
+
+    REPACK_DIR=$(_realpath "$REPACK_DIR")
+
+    ssay "Repack from: %s/" "$(dq "$REPACK_DIR")"
+    ssay "  --> %s" "$(pq "$INITRD_FILE")"
+
+    # Union of raw files and names implied by .D/ dirs -- so a .D/-only entry
+    # (raw deleted by user) is still included.  Sort gives stable pack order.
+    local sections
+    sections=$(
+        {
+            ls -1 "$REPACK_DIR" 2>/dev/null \
+                | grep -E '^(early|main)[0-9]+\.' \
+                | grep -v '\.D$'
+            ls -1 "$REPACK_DIR" 2>/dev/null \
+                | grep -E '^(early|main)[0-9]+\..*\.D$' \
+                | sed 's/\.D$//'
+        } | sort -u
+    )
+    [ -z "$sections" ] \
+        && fatal "No section files or .D/ dirs (early*/main*) found in: %s" "$REPACK_DIR"
+
+    # Build the repacked initrd into /tmp so no partial writes hit the target device
+    local new_initrd
+    new_initrd=$(mktemp /tmp/.uc-tool-repack.XXXXXXXX)
+    _INITRD_NEW_TMP="$new_initrd"
+
+    local cpio_q="--quiet"; [ "$VERBOSE" ] && cpio_q=""
+
+    local sect base ext ddir
+    for sect in $sections; do
+        base="${sect%%.*}"   # early1, main1, ...
+        ext="${sect#*.}"     # amd-ucode, cpio, gz, zst, ...
+        ddir="$REPACK_DIR/${sect}.D"
+
+        if [ -d "$ddir" ]; then
+            # .D/ takes precedence over raw file when both exist
+            case "$base" in
+                early*)
+                    ssay "  Pack         %s  (from .D/)" "$(pq "$sect")"
+                    ( cd "$ddir" && find . -mindepth 1 | sort \
+                        | cpio -o --reproducible -R 0:0 -H newc $cpio_q ) \
+                        >> "$new_initrd" \
+                        || fatal "cpio pack failed for %s" "$sect"
+                    ;;
+                main*)
+                    ssay "  Pack+compress %s  (from .D/  comp=%s)" \
+                         "$(pq "$sect")" "$(pq "$ext")"
+                    ( cd "$ddir" && find . -mindepth 1 | sort \
+                        | cpio -o -R 0:0 -H newc $cpio_q ) \
+                        | section_compress "$ext" >> "$new_initrd" \
+                        || fatal "pack+compress failed for %s" "$sect"
+                    ;;
+            esac
+        elif [ -f "$REPACK_DIR/$sect" ]; then
+            ssay "  Append        %s" "$(pq "$sect")"
+            cat "$REPACK_DIR/$sect" >> "$new_initrd" \
+                || fatal "Failed appending %s" "$sect"
+        fi
+        # if neither raw nor .D/ exists the section is simply left out
+    done
+
+    # Checksum of assembled content (from /tmp -- target not yet touched)
+    local new_md5
+    new_md5=$(md5sum "$new_initrd" | awk '{print $1}')
+
+    if [ -e "$INITRD_FILE" ]; then
+        local md5file="${INITRD_FILE}.md5"
+        local new_on_target="${INITRD_FILE}.unew"
+        local md5_unew="" md5_tmp="" md5backup=""
+
+        # Step 1: prepare .md5.unew in /tmp/ (if sidecar exists) before touching target
+        if [ -f "$md5file" ]; then
+            md5_tmp=$(mktemp /tmp/.uc-tool-md5.XXXXXXXX)
+            printf '%s  %s\n' "$new_md5" "$(basename "$INITRD_FILE")" > "$md5_tmp" \
+                || { rm -f "$new_initrd" "$md5_tmp"
+                     fatal "Failed writing md5 temp" ; }
+        fi
+
+        # Step 2: copy both /tmp/ files to target as .unew -- original untouched
+        chmod --reference="$INITRD_FILE" "$new_initrd" 2>/dev/null || true
+        cmd cp "$new_initrd" "$new_on_target" \
+            || { rm -f "$new_initrd" "$md5_tmp" "$new_on_target"
+                 fatal "Failed writing %s" "$new_on_target" ; }
+        rm -f "$new_initrd"; _INITRD_NEW_TMP="$new_on_target"
+
+        if [ -n "$md5_tmp" ]; then
+            md5_unew="${md5file}.unew"
+            _INITRD_MD5_UNEW="$md5_unew"
+            cmd cp "$md5_tmp" "$md5_unew" \
+                || { rm -f "$md5_tmp" "$new_on_target" "$md5_unew"
+                     _INITRD_NEW_TMP=""; _INITRD_MD5_UNEW=""
+                     fatal "Failed writing %s" "$md5_unew" ; }
+            rm -f "$md5_tmp"
+        fi
+
+        # Step 3: flush and verify both .unew files -- original still untouched
+        cmd sync
+        local check_md5
+        check_md5=$(md5sum "$new_on_target" | awk '{print $1}')
+        if [ "$check_md5" != "$new_md5" ]; then
+            rm -f "$new_on_target" "$md5_unew"
+            _INITRD_NEW_TMP=""; _INITRD_MD5_UNEW=""
+            fatal "Checksum mismatch on %s -- original untouched" "$(basename "$new_on_target")"
+        fi
+        if [ -n "$md5_unew" ]; then
+            local expect_line="$new_md5  $(basename "$INITRD_FILE")"
+            [ "$(cat "$md5_unew" 2>/dev/null)" = "$expect_line" ] \
+                || { rm -f "$new_on_target" "$md5_unew"
+                     _INITRD_NEW_TMP=""; _INITRD_MD5_UNEW=""
+                     fatal "Content mismatch on %s -- original untouched" "$(basename "$md5_unew")" ; }
+        fi
+
+        # Step 4: both .unew verified -- swap: originals to .backup, .unew to live names
+        local backup="${INITRD_FILE}.backup"
+        cmd mv "$INITRD_FILE" "$backup" \
+            || { rm -f "$new_on_target" "$md5_unew"
+                 _INITRD_NEW_TMP=""; _INITRD_MD5_UNEW=""
+                 fatal "Could not rename original to backup" ; }
+        ssay "  Backup   %s" "$(pq "$backup")"
+        if [ -n "$md5_unew" ]; then
+            md5backup="${md5file}.backup"
+            cmd mv "$md5file" "$md5backup" \
+                || { mv "$backup" "$INITRD_FILE"
+                     rm -f "$new_on_target" "$md5_unew"
+                     _INITRD_NEW_TMP=""; _INITRD_MD5_UNEW=""
+                     fatal "Could not rename md5 to backup -- original restored" ; }
+        fi
+        cmd mv "$new_on_target" "$INITRD_FILE" \
+            || { mv "$backup" "$INITRD_FILE"
+                 [ -n "$md5backup" ] && mv "$md5backup" "$md5file"
+                 rm -f "$md5_unew"; _INITRD_NEW_TMP=""; _INITRD_MD5_UNEW=""
+                 fatal "Could not rename .unew to %s -- original restored" "$INITRD_FILE" ; }
+        _INITRD_NEW_TMP=""
+        if [ -n "$md5_unew" ]; then
+            cmd mv "$md5_unew" "$md5file" \
+                || { mv "$backup" "$INITRD_FILE"; mv "$md5backup" "$md5file"
+                     _INITRD_MD5_UNEW=""
+                     fatal "Could not rename .md5.unew -- originals restored" ; }
+            _INITRD_MD5_UNEW=""
+        fi
+
+        # Step 5: sync after rename, then final verify before removing backups
+        cmd sync
+        check_md5=$(md5sum "$INITRD_FILE" | awk '{print $1}')
+        if [ "$check_md5" != "$new_md5" ]; then
+            mv "$backup" "$INITRD_FILE"
+            [ -n "$md5backup" ] && mv "$md5backup" "$md5file" || rm -f "$md5file"
+            fatal "Checksum mismatch after rename -- original restored from backup"
+        fi
+        if [ -n "$md5backup" ]; then
+            ( cd "$(dirname "$INITRD_FILE")" \
+                && md5sum --check "$(basename "$md5file")" >/dev/null 2>&1 ) \
+            || { mv "$backup" "$INITRD_FILE"; mv "$md5backup" "$md5file"
+                 fatal "md5sum --check failed -- originals restored from backup" ; }
+            ssay "  Refreshed %s" "$(pq "$md5file")"
+        fi
+
+        ssay "  Saved    %s  (%s)" \
+             "$(pq "$INITRD_FILE")" "$(ls -lh "$INITRD_FILE" | awk '{print $5}')"
+        rm -f "$backup"
+        [ -n "$md5backup" ] && rm -f "$md5backup"
+        ssay "  Verified OK -- backups removed"
+    else
+        cmd cp "$new_initrd" "$INITRD_FILE" \
+            || { rm -f "$new_initrd"
+                 fatal "Failed writing: %s" "$INITRD_FILE" ; }
+        rm -f "$new_initrd"; _INITRD_NEW_TMP=""
+        cmd sync
+        local check_md5
+        check_md5=$(md5sum "$INITRD_FILE" | awk '{print $1}')
+        [ "$check_md5" = "$new_md5" ] \
+            || { rm -f "$INITRD_FILE"
+                 fatal "Checksum mismatch after write -- file removed" ; }
+        ssay "  Saved    %s  (%s)" \
+             "$(pq "$INITRD_FILE")" "$(ls -lh "$INITRD_FILE" | awk '{print $5}')"
+    fi
+
+    ssay ""
+    ssay "Done."
+}
+
+#------------------------------------------------------------------------------
+# Strip ucode CPIOs from INITRD_FILE without adding new ones.
+# Leading ucode sections are removed; other preamble + main payload kept.
+#------------------------------------------------------------------------------
+do_strip_ucode() {
+    trap '_uc_cleanup' EXIT
+
+    [ -z "$INITRD_FILE" ] && fatal "Initrd file required for strip mode -- use -i <file>"
+    test -e "$INITRD_FILE" || fatal "Initrd not found: %s"   "$INITRD_FILE"
+    test -r "$INITRD_FILE" || fatal "Cannot read initrd: %s" "$INITRD_FILE"
+    test -w "$INITRD_FILE" || fatal "Cannot write initrd: %s  (are you root?)" "$INITRD_FILE"
+    check_writable "$INITRD_FILE"
+
+    ssay "Strip ucode from initrd: %s" "$(pq "$INITRD_FILE")"
+
+    # -- boundary detection ------------------------------------------------
+    local ucode_end=0 ucode_count=0
+
+    local bounds
+    bounds=$(cpio_boundaries "$INITRD_FILE")
+    set -- $bounds
+
+    if [ $# -le 1 ]; then
+        ssay "  No CPIO preamble -- nothing to strip"
+        return 0
+    fi
+
+    local b magic comp_off=""
+    for b in $bounds; do
+        magic=$(cmd_dd if="$INITRD_FILE" bs=1 skip="$b" count=4 2>/dev/null \
+                | od -A n -t x1 | tr -d ' \n')
+        case "$magic" in
+            "$MAGIC_ZSTD" | "${MAGIC_GZIP}"* | "$MAGIC_XZ"  | \
+            "$MAGIC_LZ4"  | "${MAGIC_BZIP2}"* | "$MAGIC_LZOP" | \
+            "${MAGIC_LZMA}"*)
+                comp_off=$b; break ;;
+        esac
+    done
+
+    # no compressed section found -- all-CPIO initrd; use last boundary as scope end
+    [ -z "$comp_off" ] && { for b in $bounds; do comp_off=$b; done
+        qsay "  No compressed section -- scanning all CPIOs for ucode" ; }
+
+    local early_bounds=""
+    for b in $bounds; do
+        [ "$b" -ge "$comp_off" ] && break
+        early_bounds="${early_bounds:+$early_bounds }$b"
+    done
+    early_bounds="$early_bounds $comp_off"
+
+    local tmp s e sect_num=0
+    tmp=$(mktemp)
+    _INITRD_SECT_TMP="$tmp"
+
+    set -- $early_bounds
+    local n_early=$(( $# - 1 ))
+    while [ $# -gt 1 ]; do
+        s=$1 e=$2
+        sect_num=$(( sect_num + 1 ))
+        cmd_dd if="$INITRD_FILE" bs=512 \
+            skip=$(( s/512 )) count=$(( (e-s)/512 )) of="$tmp"
+        if is_microcode_cpio "$tmp"; then
+            ucode_end=$e
+            ucode_count=$(( ucode_count + 1 ))
+            qsay "  Strip ucode %s/%s  [%s]  offset %s..%s" \
+                 "$(nq $sect_num)" "$(nq $n_early)" \
+                 "$(pq "$(ucode_vendor "$tmp")")" "$(nq $s)" "$(nq $e)"
+        else
+            qsay "  Keep section %s/%s at offset %s (non-ucode)" \
+                 "$(nq $sect_num)" "$(nq $n_early)" "$(nq $s)"
+            break
+        fi
+        shift
+    done
+
+    _INITRD_SECT_TMP=""
+    rm -f "$tmp"
+
+    if [ "$ucode_count" -eq 0 ]; then
+        ssay "  No ucode CPIOs found -- nothing to strip"
+        return 0
+    fi
+
+    ssay "  Stripping %s ucode section(s) (%s bytes removed from head)" \
+         "$(nq "$ucode_count")" "$(nq "$ucode_end")"
+
+    # -- write stripped initrd to temp file -------------------------------
+    local new_initrd
+    new_initrd=$(mktemp -p "$(dirname "$INITRD_FILE")" .uc-tool.XXXXXXXX)
+    _INITRD_NEW_TMP="$new_initrd"
+
+    cmd_dd if="$INITRD_FILE" bs=512 skip=$(( ucode_end / 512 )) \
+        > "$new_initrd" || fatal "Failed writing stripped initrd"
+
+    # -- backup + atomic replace + verify ---------------------------------
+    local backup="${INITRD_FILE}.backup"
+    local md5file="${INITRD_FILE}.md5"
+    local md5backup=""
+    cp -a "$INITRD_FILE" "$backup" \
+        || fatal "Could not create backup: %s" "$backup"
+    ssay "  Backup   %s" "$(pq "$backup")"
+    if [ -f "$md5file" ]; then
+        md5backup="${md5file}.backup"
+        cp -a "$md5file" "$md5backup" \
+            || fatal "Could not backup md5 file: %s" "$md5backup"
+    fi
+
+    local new_md5
+    new_md5=$(md5sum "$new_initrd" | awk '{print $1}')
+
+    chmod --reference="$INITRD_FILE" "$new_initrd" 2>/dev/null
+    mv "$new_initrd" "$INITRD_FILE" \
+        || { cp -a "$backup" "$INITRD_FILE" 2>/dev/null
+             fatal "Failed replacing %s -- restored from backup" "$INITRD_FILE" ; }
+    _INITRD_NEW_TMP=""
+
+    if [ -n "$md5backup" ]; then
+        ( cd "$(dirname "$INITRD_FILE")" \
+            && md5sum "$(basename "$INITRD_FILE")" > "$(basename "$md5file")" ) \
+        || { mv "$backup" "$INITRD_FILE"
+             mv "$md5backup" "$md5file"
+             fatal "Failed writing md5 file -- originals restored" ; }
+        ssay "  Refreshed %s" "$(pq "$md5file")"
+    fi
+
+    sync
+
+    local check_md5
+    check_md5=$(md5sum "$INITRD_FILE" | awk '{print $1}')
+    if [ "$check_md5" != "$new_md5" ]; then
+        mv "$backup" "$INITRD_FILE"
+        [ -n "$md5backup" ] && mv "$md5backup" "$md5file" || rm -f "$md5file"
+        fatal "Checksum mismatch after write -- original restored from %s" "$backup"
+    fi
+    if [ -n "$md5backup" ]; then
+        ( cd "$(dirname "$INITRD_FILE")" \
+            && md5sum --check "$(basename "$md5file")" >/dev/null 2>&1 ) \
+        || { mv "$backup" "$INITRD_FILE"
+             mv "$md5backup" "$md5file"
+             fatal "md5sum --check failed -- original restored from %s" "$backup" ; }
+    fi
+
+    ssay "  Saved    %s  (%s)" \
+         "$(pq "$INITRD_FILE")" "$(ls -lh "$INITRD_FILE" | awk '{print $5}')"
+    rm -f "$backup"
+    [ -n "$md5backup" ] && rm -f "$md5backup"
+    ssay "  Verified OK -- backups removed"
+}
+
+
+# realpath with readlink -f fallback; -m flag dropped for readlink (handles
+# non-existent last component already on GNU systems)
+_realpath() {
+    command -v realpath >/dev/null 2>&1 && { realpath "$@"; return; }
+    local a; local -a r
+    for a in "$@"; do [ "$a" = "-m" ] || r+=("$a"); done
+    readlink -f "${r[@]}"
+}
+
+#------------------------------------------------------------------------------
+# Print all CPIO section boundaries (byte offsets, one per line), always
+# starting with 0.  Primary: grep -boa (fast, single pass).  Fallback: cpio -t
+# block-count iteration for old grep that does not support -b.
+# Usage: bounds=$(cpio_boundaries "$file") ; for b in $bounds; do ...
+#------------------------------------------------------------------------------
+cpio_boundaries() {
+    local file="$1"
+    echo 0
+    local _gs=0
+    grep -b 'x' /dev/null >/dev/null 2>&1; _gs=$?
+    if [ "$_gs" -ne 2 ]; then
+        grep -boa 'TRAILER!!!' "$file" 2>/dev/null | cut -d: -f1 | \
+        while IFS= read -r t; do
+            echo $(( (t + 121 + 511) / 512 * 512 ))
+        done
+    else
+        local offset_blk=0 nblocks magic
+        while true; do
+            magic=$(dd status=none if="$file" bs=1 \
+                        skip=$(( offset_blk * 512 )) count=4 2>/dev/null \
+                        | od -A n -t x1 | tr -d ' \n')
+            case "$magic" in
+                "$MAGIC_ZSTD" | "${MAGIC_GZIP}"* | "$MAGIC_XZ"  | \
+                "$MAGIC_LZ4"  | "${MAGIC_BZIP2}"* | "$MAGIC_LZOP" | \
+                "${MAGIC_LZMA}"*)
+                    break ;;
+            esac
+            nblocks=$(get_cpio_blocks "$file" "$offset_blk")
+            [ -z "$nblocks" ] && break
+            [ "$nblocks" -eq 0 ] && break
+            offset_blk=$(( offset_blk + nblocks ))
+            echo $(( offset_blk * 512 ))
+        done
+    fi
+}
+
+#------------------------------------------------------------------------------
+# Ensure the script is running as root.
+#------------------------------------------------------------------------------
+need_root() {
+    [ "$(id -u)" -eq 0 ] || fatal "This script must be run as root"
+    HOME=/root
+}
+
+#------------------------------------------------------------------------------
+# Verify required tools are present.
+# $1: "true" if Intel ucode needed  $2: "true" if squashfs mount needed
+#------------------------------------------------------------------------------
+check_prereqs() {
+    local need_intel=${1:-false} need_squashfs=${2:-false}
+    local missing="" tool
+    for tool in cpio dd od md5sum awk find mktemp sort; do
+        command -v "$tool" >/dev/null 2>&1 || missing="${missing:+$missing }$tool"
+    done
+    if [ "$need_intel" = "true" ]; then
+        command -v iucode_tool >/dev/null 2>&1 \
+            || missing="${missing:+$missing }iucode_tool"
+    fi
+    if [ "$need_squashfs" = "true" ]; then
+        for tool in mount umount; do
+            command -v "$tool" >/dev/null 2>&1 || missing="${missing:+$missing }$tool"
+        done
+    fi
+    [ -n "$missing" ] && fatal "Missing required tools: %s" "$missing"
+}
+
+#------------------------------------------------------------------------------
+# Verify that the target path (file or its parent dir) is writable and not
+# on a read-only filesystem.
+#------------------------------------------------------------------------------
+check_writable() {
+    local target="$1"
+    local dir
+    [ -d "$target" ] && dir="$target" || dir="$(dirname "$target")"
+    local fstype
+    fstype=$(df -T "$dir" 2>/dev/null | awk 'NR==2{print $2}')
+    case "$fstype" in
+        squashfs|iso9660|romfs|cramfs)
+            fatal "Target filesystem is read-only (%s): %s" "$fstype" "$dir" ;;
+    esac
+    local probe
+    probe=$(mktemp "$dir/.uc-tool-probe.XXXXXX" 2>/dev/null) \
+        || fatal "Target directory is not writable: %s" "$dir"
+    rm -f "$probe"
+}
+
+#------------------------------------------------------------------------------
+# Read squashfs compression type from superblock (uint16 at byte offset 20).
+# $1: image path  $2: "true" for LE, anything else for BE
+#------------------------------------------------------------------------------
+squashfs_comp_name() {
+    local src="$1" is_le="$2"
+    local raw b0 b1 comp_id
+    raw=$(dd status=none if="$src" bs=1 skip=20 count=2 2>/dev/null \
+          | od -A n -t x1 | tr -d ' \n')
+    b0=$(printf '%d' "0x${raw%??}")
+    b1=$(printf '%d' "0x${raw#??}")
+    if [ "$is_le" = "true" ]; then
+        comp_id=$(( b0 + b1 * 256 ))
+    else
+        comp_id=$(( b0 * 256 + b1 ))
+    fi
+    case "$comp_id" in
+        1) echo "gzip" ;;
+        2) echo "lzma" ;;
+        3) echo "lzo"  ;;
+        4) echo "xz"   ;;
+        5) echo "lz4"  ;;
+        6) echo "zstd" ;;
+        *) echo "unknown($comp_id)" ;;
+    esac
+}
+
+#------------------------------------------------------------------------------
+# Check whether the running kernel supports the given squashfs compression.
+# Reads /proc/config.gz or /boot/config-$(uname -r).
+# Returns 0 if supported or unknown (config unreadable), 1 if explicitly absent.
+#------------------------------------------------------------------------------
+squashfs_kernel_supports() {
+    local comp="$1"
+    local cfg_key cfg_val
+
+    case "$comp" in
+        gzip) cfg_key="CONFIG_SQUASHFS_ZLIB" ;;
+        lzma) cfg_key="CONFIG_SQUASHFS_LZMA" ;;
+        lzo)  cfg_key="CONFIG_SQUASHFS_LZO"  ;;
+        xz)   cfg_key="CONFIG_SQUASHFS_XZ"   ;;
+        lz4)  cfg_key="CONFIG_SQUASHFS_LZ4"  ;;
+        zstd) cfg_key="CONFIG_SQUASHFS_ZSTD" ;;
+        *)    return 0 ;;
+    esac
+
+    if [ -r /proc/config.gz ]; then
+        cfg_val=$(zcat /proc/config.gz 2>/dev/null | grep "^${cfg_key}=" | cut -d= -f2)
+    else
+        local cfg_file="/boot/config-$(uname -r)"
+        [ -r "$cfg_file" ] \
+            && cfg_val=$(grep "^${cfg_key}=" "$cfg_file" 2>/dev/null | cut -d= -f2)
+    fi
+
+    [ -z "$cfg_val" ] && return 0  # config unreadable -- let mount decide
+
+    case "$cfg_val" in
+        y|m) return 0 ;;
+        *)   return 1 ;;
+    esac
+}
+
+#------------------------------------------------------------------------------
+# Detect squashfs magic and loop-mount firmware image.  Sets FW_MOUNT_POINT.
+#------------------------------------------------------------------------------
+mount_squashfs_fw() {
+    local src="$1"
+    local magic
+    magic=$(dd status=none if="$src" bs=1 count=4 2>/dev/null \
+            | od -A n -t x1 | tr -d ' \n')
+    case "$magic" in
+        "$MAGIC_SQUASHFS_LE"|"$MAGIC_SQUASHFS_BE") ;;
+        *) fatal "Firmware source is a file but not a squashfs image: %s (magic: %s)" \
+                 "$src" "$magic" ;;
+    esac
+
+    local is_le=false
+    [ "$magic" = "$MAGIC_SQUASHFS_LE" ] && is_le=true
+
+    local comp
+    comp=$(squashfs_comp_name "$src" "$is_le")
+    ssay "  Squashfs compression: %s" "$(pq "$comp")"
+    squashfs_kernel_supports "$comp" \
+        || warn "Squashfs %s compression may not be supported by this kernel" "$comp"
+
+    need_root
+    FW_MOUNT_POINT=$(mktemp -d /tmp/uc-fw-mnt.XXXXXXXX)
+    mount -o loop,ro "$src" "$FW_MOUNT_POINT" \
+        || { rmdir "$FW_MOUNT_POINT" 2>/dev/null; FW_MOUNT_POINT=""
+             fatal "Failed to mount squashfs: %s" "$src" ; }
+    ssay "  Mounted  %s  -->  %s" "$(pq "$src")" "$(pq "$FW_MOUNT_POINT")"
+}
+
+#------------------------------------------------------------------------------
+# Unmount squashfs firmware image and clear FW_MOUNT_POINT.
+#------------------------------------------------------------------------------
+umount_squashfs_fw() {
+    [ -z "$FW_MOUNT_POINT" ] && return 0
+    umount "$FW_MOUNT_POINT" 2>/dev/null
+    rmdir  "$FW_MOUNT_POINT" 2>/dev/null
+    FW_MOUNT_POINT=""
+}
+
+#------------------------------------------------------------------------------
+# Global EXIT trap: unmount squashfs and remove temp dirs.
+#------------------------------------------------------------------------------
+_uc_cleanup() {
+    [ -n "$_INITRD_NEW_TMP"  ] && rm -f  "$_INITRD_NEW_TMP"  2>/dev/null
+    _INITRD_NEW_TMP=""
+    [ -n "$_INITRD_MD5_UNEW" ] && rm -f  "$_INITRD_MD5_UNEW" 2>/dev/null
+    _INITRD_MD5_UNEW=""
+    [ -n "$_INITRD_SECT_TMP" ] && rm -f  "$_INITRD_SECT_TMP" 2>/dev/null
+    _INITRD_SECT_TMP=""
+    [ -n "$_AMD_BUILD_TMP"   ] && rm -rf "$_AMD_BUILD_TMP"   2>/dev/null
+    _AMD_BUILD_TMP=""
+    [ -n "$FW_MOUNT_POINT"   ] && umount_squashfs_fw
+    if [ -z "$KEEP_UCODE" ] && [ -n "$_UC_TMPDIR" ]; then
+        rm -rf "$_UC_TMPDIR" 2>/dev/null
+    fi
+    _UC_TMPDIR=""
+}
+
+#------------------------------------------------------------------------------
+# True when all CPIO content is kernel/x86/microcode/* (or ancestor dirs).
+#------------------------------------------------------------------------------
+is_microcode_cpio() {
+    local cpio="$1"
+    local nonucode
+    nonucode=$(cpio -t --quiet < "$cpio" 2>/dev/null \
+        | grep -v '^\./*$' \
+        | grep -v '^kernel/*$' \
+        | grep -v '^kernel/x86/*$' \
+        | grep -v '^kernel/x86/microcode')
+    [ -z "$nonucode" ]
+}
+
+#------------------------------------------------------------------------------
+# Return vendor label for a ucode CPIO: amd-ucode, intel-ucode, or ucode.
+#------------------------------------------------------------------------------
+ucode_vendor() {
+    case "$(cpio -t --quiet < "$1" 2>/dev/null | grep '^kernel/x86/microcode/')" in
+        *AuthenticAMD*) echo "amd-ucode"   ;;
+        *GenuineIntel*) echo "intel-ucode" ;;
+        *)              echo "ucode"       ;;
+    esac
+}
+
+#------------------------------------------------------------------------------
+# Map short compression extension to human-readable compression name.
+#------------------------------------------------------------------------------
+section_comp_label() {
+    case $1 in
+        gz)  echo "gzip"  ;;
+        zst) echo "zstd"  ;;
+        bz2) echo "bzip2" ;;
+        lzo) echo "lzop"  ;;
+        *)   echo "$1"    ;;
+    esac
+}
+
+#------------------------------------------------------------------------------
+# Return short compression extension for the bytes at the start of file $1.
+# Returns "cpio" when no compression magic is recognised (raw CPIO stream).
+#------------------------------------------------------------------------------
+section_comp_name() {
+    local src=$1
+    local magic
+    magic=$(dd status=none if="$src" bs=1 count=4 2>/dev/null \
+            | od -A n -t x1 | tr -d ' \n')
+    case "$magic" in
+        "$MAGIC_ZSTD")     echo "zst"  ;;
+        "${MAGIC_GZIP}"*)  echo "gz"   ;;
+        "$MAGIC_XZ")       echo "xz"   ;;
+        "$MAGIC_LZ4")      echo "lz4"  ;;
+        "${MAGIC_BZIP2}"*) echo "bz2"  ;;
+        "$MAGIC_LZOP")     echo "lzo"  ;;
+        "${MAGIC_LZMA}"*)  echo "lzma" ;;
+        *)                 echo "cpio" ;;
+    esac
+}
+
+#------------------------------------------------------------------------------
+# Decompress file $1 (compression type $2) to stdout.
+#------------------------------------------------------------------------------
+section_decompress() {
+    local src=$1 comp=$2
+    case "$comp" in
+        gz)   gzip  -d -c "$src" ;;
+        xz)   xz    -d -c "$src" ;;
+        zst)  zstd  -d -c "$src" ;;
+        lz4)  lz4   -d -c "$src" ;;
+        bz2)  bzip2 -d -c "$src" ;;
+        lzo)  lzop  -d -c "$src" ;;
+        lzma) xz    -d -c --format=lzma "$src" ;;
+        *)    cat "$src" ;;
+    esac
+}
+
+#------------------------------------------------------------------------------
+# Compress stdin to stdout using compression type $1.
+#------------------------------------------------------------------------------
+section_compress() {
+    local comp=$1
+    case "$comp" in
+        gz)   gzip  -c ;;
+        xz)   xz    -c ;;
+        zst)  zstd  -c ;;
+        lz4)  lz4   -c ;;
+        bz2)  bzip2 -c ;;
+        lzo)  lzop  -c ;;
+        lzma) xz    -c --format=lzma ;;
+        *)    cat   ;;
+    esac
+}
+
+#------------------------------------------------------------------------------
+# Build amd-ucode.img from AMD_FW_DIR.
+# Sorted concatenation of all firmware blobs -> AuthenticAMD.bin inside the CPIO.
+#------------------------------------------------------------------------------
+make_amd_ucode() {
+    local out="$OUT_DIR/amd-ucode.img"
+
+    qsay "--- AMD ucode  %s" "$(pq "$AMD_FW_DIR")"
+    test -d "$AMD_FW_DIR" || fatal "AMD firmware dir not found: %s" "$AMD_FW_DIR"
+
+    local count
+    count=$(find "$AMD_FW_DIR" -type f | wc -l)
+    [ "$count" -eq 0 ] && fatal "No firmware files in %s" "$AMD_FW_DIR"
+    qsay "    %s firmware file(s)" "$(nq "$count")"
+
+    local tmpdir
+    tmpdir=$(mktemp -d /tmp/uc-tool.XXXXXXXX)
+    _AMD_BUILD_TMP="$tmpdir"
+
+    mkdir -p "$tmpdir/kernel/x86/microcode"
+
+    find "$AMD_FW_DIR" -type f -print0 \
+        | LC_ALL=C sort -z \
+        | xargs -0 cat > "$tmpdir/kernel/x86/microcode/AuthenticAMD.bin"
+
+    local ref_file
+    ref_file=$(find "$AMD_FW_DIR" -type f -printf '%T@ %p\n' \
+               | sort -n | tail -1 | cut -d' ' -f2-)
+    [ -n "$ref_file" ] \
+        && touch -r "$ref_file" "$tmpdir/kernel/x86/microcode/AuthenticAMD.bin"
+
+    local blobsize
+    blobsize=$(stat -c%s "$tmpdir/kernel/x86/microcode/AuthenticAMD.bin")
+    qsay "    AuthenticAMD.bin: %s bytes" "$(nq "$blobsize")"
+
+    ( cd "$tmpdir" && find . -mindepth 1 \
+        | cpio -o --reproducible -R 0:0 -H newc --quiet ) > "$out"
+
+    _AMD_BUILD_TMP=""
+    rm -rf "$tmpdir"
+
+    ssay "  Created  %-20s  %s" "$(pq "amd-ucode.img")" "$(ls -lh "$out" | awk '{print $5}')"
+}
+
+#------------------------------------------------------------------------------
+# Build intel-ucode.img from INTEL_FW_DIR using iucode_tool.
+#------------------------------------------------------------------------------
+make_intel_ucode() {
+    local out="$OUT_DIR/intel-ucode.img"
+
+    qsay "--- Intel ucode  %s" "$(pq "$INTEL_FW_DIR")"
+    test -d "$INTEL_FW_DIR" || fatal "Intel firmware dir not found: %s" "$INTEL_FW_DIR"
+
+    command -v iucode_tool >/dev/null 2>&1 \
+        || fatal "iucode_tool not found -- install package: iucode-tool"
+
+    local count
+    count=$(find "$INTEL_FW_DIR" -type f | wc -l)
+    [ "$count" -eq 0 ] && fatal "No firmware files in %s" "$INTEL_FW_DIR"
+    qsay "    %s firmware file(s)" "$(nq "$count")"
+
+    if [ "$QUIET$SILENT" ]; then
+        cmd iucode_tool "$INTEL_FW_DIR" --write-earlyfw="$out" --overwrite >/dev/null 2>&1
+    else
+        cmd iucode_tool "$INTEL_FW_DIR" --write-earlyfw="$out" --overwrite
+    fi
+
+    ssay "  Created  %-20s  %s" "$(pq "intel-ucode.img")" "$(ls -lh "$out" | awk '{print $5}')"
+}
+
+#------------------------------------------------------------------------------
+# Update INITRD_FILE in-place:
+#   1. Strip leading ucode CPIOs (if any).
+#   2. Prepend the newly generated imgs.
+#   3. Refresh <initrd>.md5 if present.
+#   4. Run e4defrag if on ext4.
+#------------------------------------------------------------------------------
+update_initrd() {
+    test -e "$INITRD_FILE" || fatal "Initrd not found: %s"     "$INITRD_FILE"
+    test -r "$INITRD_FILE" || fatal "Cannot read initrd: %s"   "$INITRD_FILE"
+    test -w "$INITRD_FILE" || fatal "Cannot write initrd: %s  (are you root?)" "$INITRD_FILE"
+    check_writable "$INITRD_FILE"
+
+    ssay "Update initrd: %s" "$(pq "$INITRD_FILE")"
+
+    # -- find where old ucode ends -----------------------------------------
+    local ucode_end=0 ucode_count=0
+
+    local bounds
+    bounds=$(cpio_boundaries "$INITRD_FILE")
+    set -- $bounds
+
+    if [ $# -le 1 ]; then
+        qsay "  No CPIO preamble -- plain compressed initrd, prepending fresh"
+    else
+        local b magic comp_off=""
+        for b in $bounds; do
+            magic=$(cmd_dd if="$INITRD_FILE" bs=1 skip="$b" count=4 2>/dev/null \
+                    | od -A n -t x1 | tr -d ' \n')
+            case "$magic" in
+                "$MAGIC_ZSTD" | "${MAGIC_GZIP}"* | "$MAGIC_XZ"  | \
+                "$MAGIC_LZ4"  | "${MAGIC_BZIP2}"* | "$MAGIC_LZOP" | \
+                "${MAGIC_LZMA}"*)
+                    comp_off=$b; break ;;
+            esac
+        done
+        # no compressed section found -- all-CPIO initrd; use last boundary as scope end
+        [ -z "$comp_off" ] && { for b in $bounds; do comp_off=$b; done
+            qsay "  No compressed section -- treating all CPIOs as early preamble" ; }
+
+        if [ -n "$comp_off" ]; then
+            local early_bounds=""
+            for b in $bounds; do
+                [ "$b" -ge "$comp_off" ] && break
+                early_bounds="${early_bounds:+$early_bounds }$b"
+            done
+            early_bounds="$early_bounds $comp_off"
+
+            local tmp s e sect_num=0
+            tmp=$(mktemp)
+            _INITRD_SECT_TMP="$tmp"
+
+            set -- $early_bounds
+            local n_early=$(( $# - 1 ))
+            while [ $# -gt 1 ]; do
+                s=$1 e=$2
+                sect_num=$(( sect_num + 1 ))
+                cmd_dd if="$INITRD_FILE" bs=512 \
+                    skip=$(( s/512 )) count=$(( (e-s)/512 )) of="$tmp"
+                if is_microcode_cpio "$tmp"; then
+                    ucode_end=$e
+                    ucode_count=$(( ucode_count + 1 ))
+                    qsay "  Strip old ucode %s/%s  [%s]  offset %s..%s" \
+                         "$(nq $sect_num)" "$(nq $n_early)" \
+                         "$(pq "$(ucode_vendor "$tmp")")" "$(nq $s)" "$(nq $e)"
+                else
+                    qsay "  Keep section %s/%s at offset %s (non-ucode)" \
+                         "$(nq $sect_num)" "$(nq $n_early)" "$(nq $s)"
+                    break
+                fi
+                shift
+            done
+
+            _INITRD_SECT_TMP=""
+            rm -f "$tmp"
+        fi
+
+        [ "$ucode_count" -eq 0 ] \
+            && qsay "  No existing ucode -- prepending fresh"
+    fi
+
+    local img
+    for img in "$OUT_DIR/amd-ucode.img" "$OUT_DIR/intel-ucode.img" "$OUT_DIR"/ucode-*.img; do
+        [ -f "$img" ] || continue
+        ssay "  + %s  [%s]  (%s)" "$(pq "$(basename "$img")")" \
+             "$(pq "$(ucode_vendor "$img")")" \
+             "$(ls -lh "$img" | awk '{print $5}')"
+    done
+    [ "$ucode_count" -gt 0 ] \
+        && ssay "  Stripped %s old ucode section(s) (%s bytes)" \
+                "$(nq "$ucode_count")" "$(nq "$ucode_end")"
+
+    # -- write to temp file next to initrd, then atomically replace --------
+    local new_initrd
+    new_initrd=$(mktemp -p "$(dirname "$INITRD_FILE")" .uc-tool.XXXXXXXX)
+    _INITRD_NEW_TMP="$new_initrd"
+
+    { for img in "$OUT_DIR/amd-ucode.img" "$OUT_DIR/intel-ucode.img" "$OUT_DIR"/ucode-*.img; do
+          [ -f "$img" ] && cat "$img"
+      done
+      cmd_dd if="$INITRD_FILE" bs=512 skip=$(( ucode_end / 512 ))
+    } > "$new_initrd" || fatal "Failed writing new initrd"
+
+    # -- backup originals before overwriting ------------------------------
+    local backup="${INITRD_FILE}.backup"
+    local md5file="${INITRD_FILE}.md5"
+    local md5backup=""
+    cp -a "$INITRD_FILE" "$backup" \
+        || fatal "Could not create backup: %s" "$backup"
+    ssay "  Backup   %s" "$(pq "$backup")"
+    if [ -f "$md5file" ]; then
+        md5backup="${md5file}.backup"
+        cp -a "$md5file" "$md5backup" \
+            || fatal "Could not backup md5 file: %s" "$md5backup"
+    fi
+
+    # -- record checksum of new content before overwrite ------------------
+    local new_md5
+    new_md5=$(md5sum "$new_initrd" | awk '{print $1}')
+
+    # -- atomic replace ----------------------------------------------------
+    chmod --reference="$INITRD_FILE" "$new_initrd" 2>/dev/null
+    mv "$new_initrd" "$INITRD_FILE" \
+        || { cp -a "$backup" "$INITRD_FILE" 2>/dev/null
+             fatal "Failed replacing %s -- restored from backup" "$INITRD_FILE" ; }
+    _INITRD_NEW_TMP=""
+
+    # -- refresh md5 file -------------------------------------------------
+    if [ -n "$md5backup" ]; then
+        ( cd "$(dirname "$INITRD_FILE")" \
+            && md5sum "$(basename "$INITRD_FILE")" > "$(basename "$md5file")" ) \
+        || { mv "$backup" "$INITRD_FILE"
+             mv "$md5backup" "$md5file"
+             fatal "Failed writing md5 file -- originals restored" ; }
+        ssay "  Refreshed %s" "$(pq "$md5file")"
+    fi
+
+    sync
+
+    # -- verify write integrity --------------------------------------------
+    local check_md5
+    check_md5=$(md5sum "$INITRD_FILE" | awk '{print $1}')
+    if [ "$check_md5" != "$new_md5" ]; then
+        mv "$backup" "$INITRD_FILE"
+        [ -n "$md5backup" ] && mv "$md5backup" "$md5file" || rm -f "$md5file"
+        fatal "Checksum mismatch after write -- original restored from %s" "$backup"
+    fi
+    if [ -n "$md5backup" ]; then
+        ( cd "$(dirname "$INITRD_FILE")" \
+            && md5sum --check "$(basename "$md5file")" >/dev/null 2>&1 ) \
+        || { mv "$backup" "$INITRD_FILE"
+             mv "$md5backup" "$md5file"
+             fatal "md5sum --check failed -- original restored from %s" "$backup" ; }
+    fi
+
+    # -- all verified: report and clean up backups -------------------------
+    ssay "  Saved    %s  (%s)" \
+         "$(pq "$INITRD_FILE")" "$(ls -lh "$INITRD_FILE" | awk '{print $5}')"
+    rm -f "$backup"
+    [ -n "$md5backup" ] && rm -f "$md5backup"
+    ssay "  Verified OK -- backups removed"
+
+    # -- e4defrag ----------------------------------------------------------
+    local fstype
+    fstype=$(df -T "$INITRD_FILE" 2>/dev/null | awk 'NR==2{print $2}')
+    if [ "$fstype" = "ext4" ]; then
+        if command -v e4defrag >/dev/null 2>&1; then
+            qsay "  ext4 filesystem -- running e4defrag"
+            if [ "$QUIET$SILENT" ]; then
+                cmd e4defrag "$INITRD_FILE" > /dev/null 2>&1
+            else
+                cmd e4defrag "$INITRD_FILE"
+            fi
+        else
+            warn "ext4 filesystem detected but e4defrag not found (install e2fsprogs)"
+        fi
+    fi
+}
+
+#------------------------------------------------------------------------------
+# Apply -D defaults: set INITRD_FILE and OUT_DIR from boot mode if not already
+# set by explicit flags.  Detects live vs installed via /proc/cmdline.
+#------------------------------------------------------------------------------
+resolve_defaults() {
+    local kver initrd dir
+    kver=$(uname -r)
+    local live_initrd="/live/boot-dev/antiX/initrd.gz"
+
+    local on_overlay=false
+    case "$(df --output=fstype / 2>/dev/null | tail -1)" in
+        overlay|aufs) on_overlay=true ;;
+    esac
+
+    if $on_overlay; then
+        [ -e "$live_initrd" ] \
+            || fatal "-D: live initrd not found at %s -- use -i <file>" "$live_initrd"
+        initrd="$live_initrd"
+    else
+        initrd="/boot/initrd.img-${kver}"
+    fi
+    dir="${initrd##*/}.D"
+    [ -z "$INITRD_FILE" ] && INITRD_FILE="$initrd"
+    [ -z "$OUT_DIR" ]     && OUT_DIR="$dir"
+    ssay "Defaults: initrd=%s  directory=%s" "$(pq "$INITRD_FILE")" "$(pq "$OUT_DIR")"
+}
+
+#------------------------------------------------------------------------------
+# Parameter parsing, messaging helpers, command wrappers
+# Original design by BitJam - used with thanks
+#------------------------------------------------------------------------------
+
+takes_param() {
+    case $1 in
+         -ucode|u)    return 0 ;;
+     -directory|d)    return 0 ;;
+        -initrd|i)    return 0 ;;
+          -amd-dir)   return 0 ;;
+        -intel-dir)   return 0 ;;
+       -firmware|F)   return 0 ;;
+           -repack)   return 0 ;;
+    esac
+    return 1
+}
+
+read_params() {
+    SHIFT=0
+    local SHORT_STACK="DdFhHiklqSsuVvx"
+    local arg val
+
+    while [ $# -gt 0 ] && [ ${#1} -gt 0 ] && [ -z "${1##-*}" ]; do
+        arg=${1#-}
+        shift
+        SHIFT=$((SHIFT + 1))
+
+        case $arg in
+            [$SHORT_STACK][$SHORT_STACK]*)
+                if echo "$arg" | grep -q "^[$SHORT_STACK]\+$"; then
+                    local old_cnt=$#
+                    set -- $(echo "$arg" | sed -r 's/([a-zA-Z])/ -\1 /g') "$@"
+                    SHIFT=$((SHIFT - $# + old_cnt))
+                    continue
+                fi ;;
+        esac
+
+        if takes_param "$arg"; then
+            [ $# -lt 1 ] && fatal "Expected a parameter after: -%s" "$arg"
+            val=$1
+            [ -n "$val" ] && [ -z "${val##-*}" ] \
+                && fatal "Suspicious argument after -%s: %s" "$arg" "$val"
+            SHIFT=$((SHIFT + 1))
+            shift
+        else
+            case $arg in
+                *=*) val=${arg#*=} ;;
+                  *) val="???"     ;;
+            esac
+            # Optional param: --extract/-x and --list/-l can be followed by a bare mode word.
+            # Consume any word that isn't a flag (-), path (/), or filename (.) so that
+            # invalid modes still reach main() for a proper error rather than falling
+            # through as "Unexpected arguments".
+            case "$arg" in
+                -extract|x|-list|l)
+                    if [ $# -gt 0 ]; then
+                        case "$1" in
+                            -*|*/*|*.*)  ;;   # flag / path / filename -- leave alone
+                            ?*) val=$1; shift; SHIFT=$((SHIFT + 1)) ;;
+                        esac
+                    fi ;;
+            esac
+        fi
+
+        eval_argument "$arg" "$val"
+    done
+}
+
+ssay() {
+    [ "$QUIET$SILENT" ] && return
+    local fmt=$1; shift
+    printf "$m_co$fmt$nc_co\n" "$@"
+}
+
+qsay() {
+    [ "$QUIET$SILENT" ] && return
+    local fmt=$1; shift
+    printf "$m_co$fmt$nc_co\n" "$@"
+}
+
+fatal() {
+    local fmt=$1; shift
+    printf "${ME}${err_co} fatal error:${warn_co} $fmt${nc_co}\n" "$@" >&2
+    exit 2
+}
+
+warn() {
+    local fmt=$1; shift
+    printf "${ME}${warn_co} warning:${m_co} $fmt${nc_co}\n" "$@" >&2
+}
+
+pq()  { echo "$hi_co$*$m_co"  ;}
+nq()  { echo "$num_co$*$m_co" ;}
+# Display a path relative to $PWD when possible, absolute otherwise
+dq()  { local p="$1"; [ "${p#$PWD/}" != "$p" ] && p="./${p#$PWD/}"; echo "$hi_co$p$m_co" ;}
+
+cmd() {
+    # fd6 must point to the terminal (set via "main "$@" 6>&1" at startup).
+    # Writing verbose output to fd6 instead of fd1 ensures it reaches the
+    # terminal even when cmd() is called inside $(...) command substitutions,
+    # where fd1 is redirected to a pipe and would corrupt the captured result.
+    [ "$VERBOSE" ] && echo "$@" >&6
+    "$@"
+}
+
+cmd_dd() { cmd dd status=none "$@" ; }
+
+# Number of 512-byte blocks consumed by the CPIO starting at block offset $2 in file $1.
+get_cpio_blocks() {
+    local file=$1 offset_blk=${2:-0}
+    dd status=none if="$file" bs=512 skip="$offset_blk" 2>/dev/null \
+        | cpio -t 7>&1 1>/dev/null 2>&7 | grep -o "^[0-9]\+"
+}
+
+set_colors() {
+    [ "$NO_COLOR" ] && return
+    local e
+    e=$(printf "\e")
+          black="$e[0;30m" ;    blue="$e[0;34m" ;    green="$e[0;32m" ;    cyan="$e[0;36m"
+            red="$e[0;31m" ;  purple="$e[0;35m" ;    brown="$e[0;33m" ; lt_gray="$e[0;37m"
+        dk_gray="$e[1;30m" ; lt_blue="$e[1;34m" ; lt_green="$e[1;32m" ; lt_cyan="$e[1;36m"
+         lt_red="$e[1;31m" ; magenta="$e[1;35m" ;   yellow="$e[1;33m" ;   white="$e[1;37m"
+          nc_co="$e[0m"    ;   brown="$e[0;33m"
+
+          m_co=$cyan
+         hi_co=$white
+         err_co=$red
+        warn_co=$yellow
+         num_co=$magenta
+}
+
+show_version() {
+    printf "%s version %s (%s)\n" "$ME" "$VERSION" "$VERSION_DATE"
+    exit 0
+}
+
+#------------------------------------------------------------------------------
+main "$@" 6>&1

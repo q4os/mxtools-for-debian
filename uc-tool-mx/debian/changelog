@@ -1,0 +1,30 @@
+uc-tool-mx (26.06.1.1302) stable; urgency=medium
+
+  * Release
+
+ -- Devs <devteam@localdomain>  Mon, 13 Jul 2026 13:05:39 +0200
+
+uc-tool-mx (26.06.1) mx; urgency=medium
+
+  * Add bash-completion for uc-tool.
+  * Clarify --extract and --list help/man page: show valid modes in
+    syntax line, replace ambiguous "(bare)" with "ucode [default]".
+  * debian/rules: inject version and date from changelog into installed
+    script and man page.
+  * --list: show compression name in brackets (e.g. [gzip]) instead of
+    file extension ([gz]) for the main initrd section.
+
+ -- fehlix <fehlix@mxlinux.org>  Tue, 09 Jun 2026 13:28:40 -0400
+
+uc-tool-mx (26.05.2) mx; urgency=medium
+
+  * Fix verbose mode fd6 redirection in main.
+
+ -- fehlix <fehlix@mxlinux.org>  Sun, 03 May 2026 16:01:43 -0400
+
+uc-tool-mx (26.05.01) mx; urgency=medium
+
+  * uc-tool an initrd microcode management tool.
+  * Initial release.
+
+ -- fehlix <fehlix@mxlinux.org>  Fri, 01 May 2026 09:42:11 -0400

@@ -1,3 +1,32 @@
+job-scheduler (26.06.1.1302) stable; urgency=medium
+
+  * Release
+
+ -- Devs <devteam@localdomain>  Mon, 13 Jul 2026 13:05:27 +0200
+
+job-scheduler (26.06.1) mx; urgency=medium
+
+  * Add support for /etc/cron.d/ directory fragment files
+
+ -- Adrian <adrian@mxlinux.org>  Sun, 21 Jun 2026 01:19:43 -0400
+
+job-scheduler (26.06) mx; urgency=medium
+
+  * Jobs scheduled for both a day of the month and a weekday (for example
+    "the 15th or every Friday") now run on either day, matching how cron works
+  * Invalid time entries are no longer silently changed; the editor now flags
+    the problem and keeps your entry until it is valid
+  * The time picker now highlights selected boxes using your system theme, so
+    they stay readable in dark mode
+  * The list of upcoming run times now scrolls to the selected entry
+  * Impossible schedules such as "February 30th" are recognised right away
+    instead of briefly freezing the app
+  * Reading crontabs no longer shows a false error when the system prints
+    harmless warnings, and existing comments are kept more reliably
+  * Removed a stray empty column from the jobs list
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 17 Jun 2026 14:00:00 -0400
+
 job-scheduler (26.03) mx; urgency=medium
 
   * Show help and license in-app

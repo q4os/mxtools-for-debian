@@ -191,7 +191,15 @@ int MainWindow::run(const char *program, const QStringList &args,
     proc.start(program, args);
     if (input) proc.write(*input);
     proc.closeWriteChannel();
+    QTimer timeout;
+    timeout.setSingleShot(true);
+    connect(&timeout, &QTimer::timeout, [&]() {
+        proc.kill();
+        loop.quit();
+    });
+    timeout.start(30000);
     loop.exec();
+    timeout.stop();
 
     const bool ok = (proc.exitStatus()==QProcess::NormalExit && proc.error()==QProcess::UnknownError);
     if (output) {
@@ -278,6 +286,8 @@ void MainWindow::pushSave_clicked() noexcept
         else errmsg = archive_error_string(arc);
     } catch(const QString &msg) {
         errmsg = msg;
+    } catch(const QByteArray &msg) {
+        errmsg = QString::fromUtf8(msg);
     }
     if (arcentry) archive_entry_free(arcentry);
     if (arc) archive_write_free(arc);
@@ -343,11 +353,23 @@ void MainWindow::buildInfoList() noexcept
     item->setFont(ifont);
     item->setData(Qt::UserRole, "quick-system-info.txt");
     ui->listInfo->insertItem(0, item);
-    // Special apt history info
-    item = new QListWidgetItem("apt " + tr("history"));
-    item->setData(Qt::UserRole, "apthistory.txt");
+    // Special package manager history info
+    QString historyLabel;
+    bool hasHistoryLog = false;
     QFileInfo dpkg_log("/var/log/dpkg.log");
-    if (dpkg_log.exists() && dpkg_log.size() > 0 ){
+    QFileInfo pacman_log("/var/log/pacman.log");
+
+    if (dpkg_log.exists() && dpkg_log.size() > 0) {
+        historyLabel = "apt " + tr("history");
+        hasHistoryLog = true;
+    } else if (pacman_log.exists() && pacman_log.size() > 0) {
+        historyLabel = "pacman " + tr("history");
+        hasHistoryLog = true;
+    }
+
+    if (hasHistoryLog) {
+        item = new QListWidgetItem(historyLabel);
+        item->setData(Qt::UserRole, "pmhistory.txt");
         ui->listInfo->insertItem(1, item);
     }
     listSelectDefault();
@@ -401,16 +423,36 @@ QByteArray MainWindow::readReport(int row)
     int execrc = 0;
     switch(row) {
         case 0: { // Quick System Info
-            execrc = run("/usr/bin/quick-system-info-mx", {"-g"}, &output);
+            // Try different system info commands depending on what's available
+            if (QFile::exists("/usr/bin/quick-system-info-mx")) {
+                execrc = run("/usr/bin/quick-system-info-mx", {"-g"}, &output);
+            } else if (QFile::exists("/usr/bin/inxi")) {
+                    execrc = run("/usr/bin/inxi", {"--tty", "-c", "0", "-F"}, &output);
+            } else {
+                output = "System information tool not found. Please install 'inxi' package.";
+                execrc = 1;
+            }
             // Deal with bugs in inxi.
             output.replace("http: /", "http:/");
             output.replace("https: /", "https:/");
             break;
         }
-        case 1: { // apt history
-            execrc = shell(QStringLiteral("zgrep -EH ' install | upgrade | purge | remove ' /var/log/dpkg*"
-                " | cut -f2- -d: | sort -r | sed 's/ remove / remove  /;s/ purge / purge   /'"
-                " | grep \"^\""), &output);
+        case 1: { // package manager history
+            // Check if we're on a Debian-based system (dpkg) or Arch-based (pacman)
+            if (QFile::exists("/var/log/dpkg.log")) {
+                // Debian/Ubuntu style
+                execrc = shell(QStringLiteral("zgrep -EH ' install | upgrade | purge | remove ' /var/log/dpkg*"
+                    " | cut -f2- -d: | sort -r | sed 's/ remove / remove  /;s/ purge / purge   /'"
+                    " | grep \"^\""), &output);
+            } else if (QFile::exists("/var/log/pacman.log")) {
+                // Arch Linux style
+                execrc = shell(QStringLiteral("grep -E ' installed | upgraded | removed ' /var/log/pacman.log"
+                    " | sort -r | sed 's/\\[.*\\] \\[.*\\] //;s/ installed / installed  /;s/ upgraded / upgraded  /;s/ removed / removed   /'"
+                    " | grep \"^\""), &output);
+            } else {
+                output = "Package manager log not found.";
+                execrc = 1;
+            }
             break;
         }
         default: { // Other log files
@@ -445,6 +487,9 @@ void MainWindow::listInfo_itemSelectionChanged() noexcept
         ui->textSysInfo->setPlainText(readReport(ui->listInfo->currentRow()));
     } catch (const QString &msg) {
         QMessageBox::critical(this, windowTitle(), msg);
+        ui->textSysInfo->clear();
+    } catch (const QByteArray &msg) {
+        QMessageBox::critical(this, windowTitle(), QString::fromUtf8(msg));
         ui->textSysInfo->clear();
     }
 

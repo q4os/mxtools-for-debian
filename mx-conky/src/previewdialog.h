@@ -80,7 +80,7 @@ private:
     void setupUI();
     void generatePreviewForItem(ConkyItem *item);
     QString generatePreviewImage(ConkyItem *item);
-    QStringList getItemsToProcess() const;
+    [[nodiscard]] QStringList getItemsToProcess() const;
     ConkyItem *ensureConkyInUserDir(ConkyItem *item);
     void cleanupBeforeNextPreview();
 };

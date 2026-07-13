@@ -1025,9 +1025,10 @@ void MainWindow::saveMenuItems(const QMenu *menu, int offset)
             QPixmap iconPixmap = menu->actions().at(i)->icon().pixmap(QSize(16, 16));
             QByteArray iconByteArray;
             QBuffer buffer(&iconByteArray);
-            buffer.open(QIODevice::WriteOnly);
-            iconPixmap.save(&buffer, "PNG");
-            settings.setValue("icon", iconByteArray);
+            if (buffer.open(QIODevice::WriteOnly)) {
+                iconPixmap.save(&buffer, "PNG");
+                settings.setValue("icon", iconByteArray);
+            }
         }
     }
     settings.endArray();
@@ -1356,14 +1357,14 @@ QString MainWindow::buildSettingsPageHtml()
 </head>
 <body>
   <h1>%1</h1>
-  <form id="settings">
+  <form id="settings" action="mx-settings://save" method="get">
     <div class="row">
       <label for="home">%2</label>
-      <input id="home" class="input" type="text" value="%3">
+      <input id="home" name="home" class="input" type="text" value="%3">
     </div>
     <div class="row">
       <label for="search">%4</label>
-      <select id="search" class="input">
+      <select id="search" name="search" class="input">
         <option value="DuckDuckGo" %5>%6</option>
         <option value="Google" %7>%8</option>
         <option value="Bing" %9>%10</option>
@@ -1372,32 +1373,32 @@ QString MainWindow::buildSettingsPageHtml()
     </div>
     <div class="row">
       <label for="customSearch">%13</label>
-      <input id="customSearch" class="input" type="text" value="%14" placeholder="https://example.com/?q=%s">
+      <input id="customSearch" name="customSearch" class="input" type="text" value="%14" placeholder="https://example.com/?q=%s">
     </div>
     <div class="row">
       <label for="zoom">%15</label>
-      <input id="zoom" class="input" type="number" min="25" max="500" value="%16">
+      <input id="zoom" name="zoom" class="input" type="number" min="25" max="500" value="%16">
     </div>
-    <label class="check"><input id="openNewTab" type="checkbox" %17> %18</label>
-    <label class="check"><input id="showProgress" type="checkbox" %19> %20</label>
-    <label class="check"><input id="spatialNav" type="checkbox" %21> %22</label>
-    <label class="check"><input id="enableJs" type="checkbox" %23> %24</label>
-    <label class="check"><input id="loadImages" type="checkbox" %25> %26</label>
+    <label class="check"><input id="openNewTab" name="openNewTab" type="checkbox" value="1" %17> %18</label>
+    <label class="check"><input id="showProgress" name="showProgress" type="checkbox" value="1" %19> %20</label>
+    <label class="check"><input id="spatialNav" name="spatialNav" type="checkbox" value="1" %21> %22</label>
+    <label class="check"><input id="enableJs" name="enableJs" type="checkbox" value="1" %23> %24</label>
+    <label class="check"><input id="loadImages" name="loadImages" type="checkbox" value="1" %25> %26</label>
     <div class="check-row">
-      <label class="check"><input id="enableCookies" type="checkbox" %27> %28</label>
+      <label class="check"><input id="enableCookies" name="enableCookies" type="checkbox" value="1" %27> %28</label>
       <button class="btn btn-inline" id="clearCookies" type="button">%41</button>
     </div>
-    <label class="check"><input id="thirdPartyCookies" type="checkbox" %29 %30> %31</label>
-    <label class="check"><input id="clearCookiesAtExit" type="checkbox" %32> %33</label>
-    <label class="check"><input id="allowPopups" type="checkbox" %34> %35</label>
-    <label class="check"><input id="saveTabs" type="checkbox" %36> %37</label>
+    <label class="check"><input id="thirdPartyCookies" name="thirdPartyCookies" type="checkbox" value="1" %29 %30> %31</label>
+    <label class="check"><input id="clearCookiesAtExit" name="clearCookiesAtExit" type="checkbox" value="1" %32> %33</label>
+    <label class="check"><input id="allowPopups" name="allowPopups" type="checkbox" value="1" %34> %35</label>
+    <label class="check"><input id="saveTabs" name="saveTabs" type="checkbox" value="1" %36> %37</label>
     <div class="check-row">
       <div class="cache-label">%42</div>
       <button class="btn btn-inline" id="clearCache" type="button">%43</button>
     </div>
     <div class="actions">
-      <button class="btn" id="save">%38</button>
-      <button class="btn" id="reset" type="button">%39</button>
+      <button class="btn" id="save" type="submit">%38</button>
+      <button class="btn" id="reset" type="reset">%39</button>
     </div>
   </form>
   <script>
@@ -1443,10 +1444,11 @@ QString MainWindow::buildSettingsPageHtml()
     function syncCustom() {
       const isCustom = searchSelect.value === 'Custom';
       customSearch.disabled = !isCustom;
-      customSearch.parentElement.style.display = isCustom ? '' : 'none';
     }
-    saveBtn.addEventListener('click', event => {
-      event.preventDefault();
+    function saveSettings(event) {
+      if (event) {
+        event.preventDefault();
+      }
       if (saveBtn.disabled) {
         return;
       }
@@ -1473,7 +1475,8 @@ QString MainWindow::buildSettingsPageHtml()
       baseline = snapshot();
       updateDirtyState();
       location.href = 'mx-settings://save?' + params.toString();
-    });
+    }
+    form.addEventListener('submit', saveSettings);
     resetBtn.addEventListener('click', event => {
       event.preventDefault();
       location.href = 'mx-settings://list';
@@ -1627,6 +1630,13 @@ bool MainWindow::handleSettingsRequest(const QUrl &url)
         });
 #endif
         return true;
+    }
+    if (action == "list") {
+        renderSettingsPage(currentWebView());
+        return true;
+    }
+    if (action != "save") {
+        return false;
     }
     QUrlQuery query(url);
     const QString newHome = QUrl::fromPercentEncoding(query.queryItemValue("home").toUtf8()).trimmed();
@@ -2148,7 +2158,6 @@ void MainWindow::loading()
     progressBar->setFixedHeight(progBarWidth);
     progressBar->setTextVisible(false);
     progressBar->move(geometry().width() / 2 - progressBar->width() / 2, geometry().height() - progBarVerticalAdj);
-    progressBar->setFocus();
     progressBar->show();
     progressBar->setRange(0, 0);
 }

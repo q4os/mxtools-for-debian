@@ -24,6 +24,7 @@
 #include "ui_mainwindow.h"
 
 #include <QDebug>
+#include <QDate>
 #include <QDir>
 #include <QGuiApplication>
 #include <QFileDialog>
@@ -33,8 +34,10 @@
 #include <QListWidget>
 #include <QProgressDialog>
 #include <QRegularExpression>
+#include <QLocale>
 #include <QScreen>
 #include <QTemporaryFile>
+#include <QTextStream>
 #include <QTimer>
 
 #include "about.h"
@@ -47,11 +50,105 @@ extern const QString starting_home;
 
 namespace
 {
+
+// RAII wrapper that zeroes sensitive data on scope exit
+struct SecureBuffer
+{
+    QByteArray *data;
+
+    explicit SecureBuffer(QByteArray *d)
+        : data(d) {}
+
+    SecureBuffer(const SecureBuffer &) = delete;
+    SecureBuffer &operator=(const SecureBuffer &) = delete;
+
+    ~SecureBuffer()
+    {
+        if (data && !data->isEmpty()) {
+            data->fill(static_cast<char>(0));
+            data->clear();
+        }
+    }
+};
+
 // Matches kernel command line tokens that are isolated or separated by whitespace
 const QRegularExpression hushTokenRx(QStringLiteral(R"((^|\s+)hush(\s+|$))"));
 const QRegularExpression quietTokenRx(QStringLiteral(R"((^|\s+)quiet(\s+|$))"));
 const QRegularExpression splashTokenRx(QStringLiteral(R"((^|\s+)splash(\s+|$))"));
 const QRegularExpression noSplashTokenRx(QStringLiteral(R"((^|\s+)nosplash(\s+|$))"));
+
+[[nodiscard]] bool hasLiveGrubFiles(const QString &root)
+{
+    return QFile::exists(root + "/boot/grub/grub.cfg") || QFile::exists(root + "/boot/grub/config/theme.cfg")
+        || QFile::exists(root + "/boot/grub/theme/theme.txt");
+}
+
+[[nodiscard]] QString releaseNameFromSystem()
+{
+    for (const QString &filePath : {QStringLiteral("/etc/lsb-release"), QStringLiteral("/etc/os-release")}) {
+        QFile file(filePath);
+        if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+            continue;
+        }
+
+        while (!file.atEnd()) {
+            const QString line = QString::fromUtf8(file.readLine()).trimmed();
+            const int equalsPos = line.indexOf('=');
+            if (equalsPos <= 0) {
+                continue;
+            }
+
+            const QString key = line.left(equalsPos);
+            QString value = line.mid(equalsPos + 1).trimmed();
+            if (value.startsWith('"') && value.endsWith('"') && value.size() >= 2) {
+                value = value.mid(1, value.size() - 2);
+            }
+
+            if (key == QLatin1String("DISTRIB_DESCRIPTION") || key == QLatin1String("PRETTY_NAME")) {
+                return value;
+            }
+        }
+    }
+
+    return {};
+}
+
+[[nodiscard]] QString extractMenuEntryTitle(const QString &entryLine)
+{
+    // The title is the menuentry/submenu's first argument: a run of adjacent quoted fragments ("...", '...',
+    // or a gettext $"...") with no whitespace between them, concatenated. MX live entries such as
+    // `menuentry " "$"Check integrity..."` therefore need the fragments joined, not just the first one.
+    int i = entryLine.indexOf(' ');
+    if (i < 0) {
+        return {};
+    }
+    const int len = entryLine.size();
+    while (i < len && entryLine[i] == ' ') {
+        ++i;
+    }
+
+    QString title;
+    while (i < len) {
+        if (entryLine[i] == '$') {
+            ++i; // gettext prefix immediately before a quote
+        }
+        if (i >= len || (entryLine[i] != '"' && entryLine[i] != '\'')) {
+            break;
+        }
+        const QChar quote = entryLine[i];
+        const int close = entryLine.indexOf(quote, i + 1);
+        if (close < 0) {
+            break;
+        }
+        title += entryLine.mid(i + 1, close - i - 1);
+        i = close + 1;
+        // Continue only if another fragment follows with no separating whitespace.
+        if (i >= len || (entryLine[i] != '"' && entryLine[i] != '\'' && entryLine[i] != '$')) {
+            break;
+        }
+    }
+    return title;
+}
 } // namespace
 
 MainWindow::MainWindow(QWidget *parent)
@@ -143,8 +240,8 @@ void MainWindow::setup()
     }
     justInstalled = false;
     setWindowTitle("MX Boot Options");
-    setupUiElements();
     handleLiveSystem();
+    setupUiElements();
     setupGrubSettings();
     handleSpecialFilesystems();
 
@@ -177,10 +274,29 @@ void MainWindow::setupUiElements()
     }
 
     // Configure GRUB theme related UI elements
-    const bool grubThemesExist = QFile::exists("/boot/grub/themes");
+    const QString grubRoot = live && !installedMode ? bootLocation : targetRootPath();
+    const bool grubThemesExist
+        = QFile::exists(grubRoot + "/boot/grub/theme") || QFile::exists(grubRoot + "/boot/grub/themes");
     ui->checkGrubTheme->setVisible(grubThemesExist);
     ui->pushThemeFile->setVisible(grubThemesExist);
     ui->pushThemeFile->setDisabled(true);
+
+    if (liveGrubMode()) {
+        // Live media uses a platform-selected set of theme files (not a single pickable file), so the theme
+        // picker does not apply -- only the background image plus the timeout and default entry can be changed.
+        ui->checkGrubTheme->setVisible(false);
+        ui->pushThemeFile->setVisible(false);
+        ui->pushBgFile->setEnabled(true);
+        // save-default (grubenv) and flat-menus (an update-grub generation option) cannot apply to the
+        // pre-generated live grub.cfg, so disable them.
+        ui->checkSaveDefault->setEnabled(false);
+        ui->checkEnableFlatmenus->setEnabled(false);
+        // The live default entry is forced by MX's set_default_entry boot logic (sourced after grub.cfg's
+        // own `set default=`), so a static edit here would not take effect -- show it read-only.
+        ui->comboMenuEntry->setEnabled(false);
+        ui->comboMenuEntry->setToolTip(
+            tr("The live boot menu's default entry is controlled by the MX boot scripts and cannot be changed here."));
+    }
 }
 
 void MainWindow::handleLiveSystem()
@@ -205,12 +321,15 @@ void MainWindow::handleLiveSystem()
         }
     } else if (msgBox.clickedButton() == liveButton) {
         installedMode = false;
-        if (QFile::exists("/run/archiso/bootmnt")) {
-            bootLocation = "/run/archiso/bootmnt";
-        } else if (QFileInfo::exists("/live/config/did-toram")) {
-            bootLocation = "/live/to-ram";
-        } else {
-            bootLocation = "/live/boot-dev";
+        bootLocation = resolveLiveBootLocation();
+        if (bootLocation.isEmpty()) {
+            if (QFile::exists("/run/archiso/bootmnt")) {
+                bootLocation = "/run/archiso/bootmnt";
+            } else if (QFileInfo::exists("/live/config/did-toram")) {
+                bootLocation = "/live/to-ram";
+            } else {
+                bootLocation = "/live/boot-dev";
+            }
         }
     }
 }
@@ -218,7 +337,7 @@ void MainWindow::handleLiveSystem()
 void MainWindow::setupGrubSettings()
 {
     const QString grubPackage = grubPackageName();
-    grubInstalled = !grubPackage.isEmpty() && isInstalled(grubPackage);
+    grubInstalled = (!grubPackage.isEmpty() && isInstalled(grubPackage)) || liveGrubMode();
     ui->groupBoxOptions->setHidden(!grubInstalled);
     ui->groupBoxBackground->setHidden(!grubInstalled);
 
@@ -232,21 +351,493 @@ void MainWindow::reloadGrubSettings()
     defaultGrub.clear();
     grubCfg.clear();
     readGrubCfg();
-    readDefaultGrub();
+    if (liveGrubMode()) {
+        // The host /etc/default/grub does not describe the live media, so it is not read into defaultGrub.
+        // Still initialize the kernel-options UI (text field, splash, verbosity) from the running kernel
+        // command line -- processKernelCommandLine() substitutes kernelOptions when in live mode.
+        processKernelCommandLine({});
+    } else {
+        readDefaultGrub();
+    }
 }
 
 void MainWindow::handleSpecialFilesystems()
 {
-    const QString fstype
-        = cmd.getOut("df --output=fstype " + (chroot.isEmpty() ? "/boot" : tempDir.path()) + " | tail -n1");
-    if (cmd.exitCode() != 0 || fstype.isEmpty()) {
+    const QString dfOut = [&] {
+        QString out;
+        cmd.proc("df", {"--output=fstype", chroot.isEmpty() ? "/boot" : tempDir.path()}, &out);
+        return out;
+    }();
+    if (cmd.exitCode() != 0 || dfOut.isEmpty()) {
         qWarning() << "Failed to get filesystem type.";
         return;
     }
+    const QStringList dfLines = dfOut.split('\n', Qt::SkipEmptyParts);
+    const QString fstype = dfLines.isEmpty() ? QString() : dfLines.last().trimmed();
     if (fstype == "btrfs") {
         ui->checkSaveDefault->setChecked(false);
         ui->checkSaveDefault->setDisabled(true);
     }
+}
+
+bool MainWindow::hasLiveGrubTree() const
+{
+    // Require grub.cfg specifically: it is what readGrubCfg() reads and what the live-mode handling rewrites.
+    // Theme files alone (used as a looser signal when locating the boot media) do not make a usable tree.
+    return !bootLocation.isEmpty() && QFile::exists(bootLocation + "/boot/grub/grub.cfg");
+}
+
+bool MainWindow::liveGrubMode() const
+{
+    return live && !installedMode && hasLiveGrubTree();
+}
+
+QString MainWindow::resolveLiveBootLocation()
+{
+    const auto validateCandidate = [](const QString &root) { return QFileInfo(root).isDir() && hasLiveGrubFiles(root); };
+
+    for (const QString &candidate : {QStringLiteral("/run/archiso/bootmnt"), QStringLiteral("/live/boot-dev"),
+                                     QStringLiteral("/live/to-ram")}) {
+        if (validateCandidate(candidate)) {
+            return candidate;
+        }
+    }
+
+    QFile initrdFile(QStringLiteral("/live/config/initrd.out"));
+    if (!initrdFile.open(QIODevice::ReadOnly | QIODevice::Text)) {
+        return {};
+    }
+
+    QString biosDev;
+    QString biosMp;
+    QString biosUuid;
+    QString bootDev;
+    QString bootMp;
+    QString bootUuid;
+
+    while (!initrdFile.atEnd()) {
+        const QString line = QString::fromUtf8(initrdFile.readLine()).trimmed();
+        const int equalsPos = line.indexOf('=');
+        if (equalsPos <= 0) {
+            continue;
+        }
+
+        const QString key = line.left(equalsPos);
+        QString value = line.mid(equalsPos + 1).trimmed();
+        if (value.startsWith('"') && value.endsWith('"') && value.size() >= 2) {
+            value = value.mid(1, value.size() - 2);
+        }
+
+        if (key == QLatin1String("BIOS_DEV")) {
+            biosDev = value;
+        } else if (key == QLatin1String("BIOS_MP")) {
+            biosMp = value;
+        } else if (key == QLatin1String("BIOS_UUID")) {
+            biosUuid = value;
+        } else if (key == QLatin1String("BOOT_DEV")) {
+            bootDev = value;
+        } else if (key == QLatin1String("BOOT_MP")) {
+            bootMp = value;
+        } else if (key == QLatin1String("BOOT_UUID")) {
+            bootUuid = value;
+        }
+    }
+
+    const auto findMountPoint = [&](const QString &device) {
+        QString output;
+        if (!cmd.proc("lsblk", {"-no", "MOUNTPOINT", device}, &output, nullptr, QuietMode::Yes)) {
+            return QString();
+        }
+
+        const QStringList lines = output.split('\n', Qt::SkipEmptyParts);
+        return lines.isEmpty() ? QString() : lines.first().trimmed();
+    };
+
+    const auto mountDevice = [&](const QString &device, const QString &mountPoint) {
+        if (device.isEmpty() || mountPoint.isEmpty()) {
+            return false;
+        }
+
+        if (!QDir(mountPoint).exists()) {
+            cmd.procAsRoot("mkdir", {"-p", mountPoint}, nullptr, nullptr, QuietMode::Yes);
+        }
+
+        QString fstype;
+        cmd.proc("blkid", {"-o", "value", "-s", "TYPE", device}, &fstype, nullptr, QuietMode::Yes);
+        if (!fstype.trimmed().isEmpty()) {
+            if (cmd.procAsRoot("mount", {"-t", fstype.trimmed(), device, mountPoint}, nullptr, nullptr, QuietMode::Yes)) {
+                return true;
+            }
+        }
+        return cmd.procAsRoot("mount", {device, mountPoint}, nullptr, nullptr, QuietMode::Yes);
+    };
+
+    const auto deviceFromUuid = [&](const QString &uuid) {
+        if (uuid.isEmpty()) {
+            return QString();
+        }
+        const QString uuidPath = QStringLiteral("/dev/disk/by-uuid/") + uuid;
+        return QFileInfo::exists(uuidPath) ? QFileInfo(uuidPath).canonicalFilePath() : QString();
+    };
+
+    const auto tryCandidate = [&](const QString &deviceValue, const QString &mountPointValue, const QString &uuidValue,
+                                  const QString &fallbackMountPoint) {
+        QString mountPoint = mountPointValue.isEmpty() ? fallbackMountPoint : mountPointValue;
+        if (validateCandidate(mountPoint)) {
+            return mountPoint;
+        }
+
+        QString device = deviceValue;
+        if (device.isEmpty()) {
+            device = deviceFromUuid(uuidValue);
+        }
+        if (device.isEmpty()) {
+            return QString();
+        }
+
+        const QString currentMountPoint = findMountPoint(device);
+        if (!currentMountPoint.isEmpty() && validateCandidate(currentMountPoint)) {
+            return currentMountPoint;
+        }
+
+        if (mountDevice(device, mountPoint) && validateCandidate(mountPoint)) {
+            return mountPoint;
+        }
+
+        return QString();
+    };
+
+    if (const QString candidate = tryCandidate(biosDev, biosMp, biosUuid, QStringLiteral("/live/bios-dev"));
+        !candidate.isEmpty()) {
+        return candidate;
+    }
+    if (const QString candidate = tryCandidate(bootDev, bootMp, bootUuid, QStringLiteral("/live/boot-dev"));
+        !candidate.isEmpty()) {
+        return candidate;
+    }
+
+    return {};
+}
+
+bool MainWindow::refreshLiveGrubTheme()
+{
+    if (!hasLiveGrubTree()) {
+        return false;
+    }
+
+    const QString releaseName = releaseNameFromSystem();
+    if (releaseName.isEmpty()) {
+        qWarning() << "Could not determine the release name for live boot label refresh.";
+        return false;
+    }
+
+    const QString dateText = QLocale::system().toString(QDate::currentDate(), "MMMM d, yyyy");
+    const QString labelText = releaseName + " (" + dateText + ")";
+
+    const auto writeLinesAsRoot
+        = [this](const QString &path, const QStringList &lines) { return writeFileLinesAsRoot(path, lines); };
+
+    const auto updateMenuTitle = [&](const QString &path) {
+        QFile file(path);
+        if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+            return false;
+        }
+
+        QStringList lines;
+        bool changed = false;
+        while (!file.atEnd()) {
+            QString line = QString::fromUtf8(file.readLine());
+            if (line.endsWith('\n')) {
+                line.chop(1);
+            }
+            if (line.trimmed().startsWith("MENU TITLE", Qt::CaseInsensitive)) {
+                line = QStringLiteral("MENU TITLE Welcome to ") + releaseName;
+                changed = true;
+            }
+            lines << line;
+        }
+
+        return changed && writeLinesAsRoot(path, lines);
+    };
+
+    const auto updateThemeBanner = [&](const QString &path) {
+        QFile file(path);
+        if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+            return false;
+        }
+
+        QStringList lines;
+        lines.reserve(64);
+        bool changed = false;
+        while (!file.atEnd()) {
+            QString line = QString::fromUtf8(file.readLine());
+            if (line.endsWith('\n')) {
+                line.chop(1);
+            }
+            const int welcomePos = line.indexOf("Welcome to ");
+            const int bangPos = welcomePos >= 0 ? line.indexOf('!', welcomePos) : -1;
+            if (welcomePos >= 0 && bangPos > welcomePos) {
+                line = line.left(welcomePos) + "Welcome to " + releaseName + line.mid(bangPos);
+                changed = true;
+            }
+            lines << line;
+        }
+
+        return changed && writeLinesAsRoot(path, lines);
+    };
+
+    const auto updateMenuLabel = [&](const QString &path) {
+        QFile file(path);
+        if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+            return false;
+        }
+
+        const QRegularExpression labelRx(
+            QStringLiteral(R"(^([ \t]*MENU[ \t]+LABEL[ \t]+).* \([A-Z][a-z]+ \d{1,2}, \d{4}\)([ \t]*\([^)]*\))?[ \t]*$)"),
+            QRegularExpression::CaseInsensitiveOption);
+
+        QStringList lines;
+        lines.reserve(128);
+        bool changed = false;
+        while (!file.atEnd()) {
+            QString line = QString::fromUtf8(file.readLine());
+            if (line.endsWith('\n')) {
+                line.chop(1);
+            }
+            const QRegularExpressionMatch match = labelRx.match(line);
+            if (match.hasMatch()) {
+                line = match.captured(1) + labelText + match.captured(2);
+                changed = true;
+            }
+            lines << line;
+        }
+
+        return changed && writeLinesAsRoot(path, lines);
+    };
+
+    const auto updateReadmeMsg = [&](const QString &path) {
+        QFile file(path);
+        if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+            return false;
+        }
+
+        const QRegularExpression readmeRx(
+            QStringLiteral(R"(^([ \t]+\S+[ \t]+).* \([A-Z][a-z]+ \d{1,2}, \d{4}\)([ \t]*\([^)]*\))?[ \t]*$)"));
+
+        QStringList lines;
+        lines.reserve(128);
+        bool changed = false;
+        while (!file.atEnd()) {
+            QString line = QString::fromUtf8(file.readLine());
+            if (line.endsWith('\n')) {
+                line.chop(1);
+            }
+            const QRegularExpressionMatch match = readmeRx.match(line);
+            if (match.hasMatch()) {
+                line = match.captured(1) + labelText + match.captured(2);
+                changed = true;
+            }
+            lines << line;
+        }
+
+        return changed && writeLinesAsRoot(path, lines);
+    };
+
+    const auto updateMenuEntryFile = [&](const QString &path) {
+        QFile file(path);
+        if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+            return false;
+        }
+
+        const QRegularExpression entryRx(
+            QStringLiteral(R"(^(\s*menuentry\s+\")([^\"]*?)\s+\([A-Z][a-z]+ \d{1,2}, \d{4}\)(\s+\([^)]*\))?(\".*)$)"));
+
+        QStringList lines;
+        lines.reserve(128);
+        bool changed = false;
+        while (!file.atEnd()) {
+            QString line = QString::fromUtf8(file.readLine());
+            if (line.endsWith('\n')) {
+                line.chop(1);
+            }
+            const QRegularExpressionMatch match = entryRx.match(line);
+            if (match.hasMatch()) {
+                line = match.captured(1) + labelText + match.captured(3) + match.captured(4);
+                changed = true;
+            }
+            lines << line;
+        }
+
+        return changed && writeLinesAsRoot(path, lines);
+    };
+
+    bool updated = false;
+    for (const QString &file : {bootLocation + "/boot/isolinux/isolinux.cfg", bootLocation + "/boot/syslinux/syslinux.cfg"}) {
+        updated |= updateMenuTitle(file);
+        updated |= updateMenuLabel(file);
+    }
+
+    for (const QString &file : {bootLocation + "/boot/isolinux/readme.msg", bootLocation + "/boot/syslinux/readme.msg"}) {
+        updated |= updateReadmeMsg(file);
+    }
+
+    const QString themeDir = bootLocation + "/boot/grub/theme";
+    if (QDir(themeDir).exists()) {
+        const QStringList themeFiles = QDir(themeDir).entryList({QStringLiteral("*.txt")}, QDir::Files, QDir::Name);
+        for (const QString &themeFile : themeFiles) {
+            updated |= updateThemeBanner(themeDir + "/" + themeFile);
+        }
+    }
+
+    const QString grubCfgPath = bootLocation + "/boot/grub/grub.cfg";
+    updated |= updateMenuEntryFile(grubCfgPath);
+
+    const QString configDir = bootLocation + "/boot/grub/config";
+    if (QDir(configDir).exists()) {
+        const QStringList configFiles = QDir(configDir).entryList({QStringLiteral("*.cfg")}, QDir::Files, QDir::Name);
+        for (const QString &configFile : configFiles) {
+            updated |= updateMenuEntryFile(configDir + "/" + configFile);
+        }
+    }
+
+    return updated;
+}
+
+bool MainWindow::writeFileLinesAsRoot(const QString &path, const QStringList &lines)
+{
+    QTemporaryFile tmpFile;
+    if (!tmpFile.open()) {
+        qWarning() << "Failed to create temporary file for" << path;
+        return false;
+    }
+
+    QTextStream stream(&tmpFile);
+    for (const QString &line : lines) {
+        stream << line << '\n';
+    }
+    stream.flush();
+    tmpFile.flush();
+    tmpFile.close();
+
+    if (!cmd.procAsRoot("cp", {tmpFile.fileName(), path}, nullptr, nullptr, QuietMode::Yes)) {
+        qWarning() << "Failed to update" << path;
+        return false;
+    }
+    cmd.procAsRoot("chown", {"root:", path}, nullptr, nullptr, QuietMode::Yes);
+    cmd.procAsRoot("chmod", {"644", path}, nullptr, nullptr, QuietMode::Yes);
+    return true;
+}
+
+bool MainWindow::rewriteFileAsRoot(const QString &path, const std::function<bool(QString &)> &transform)
+{
+    QFile file(path);
+    if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+        return false;
+    }
+
+    QStringList lines;
+    bool changed = false;
+    while (!file.atEnd()) {
+        QString line = QString::fromUtf8(file.readLine());
+        if (line.endsWith('\n')) {
+            line.chop(1);
+        }
+        if (transform(line)) {
+            changed = true;
+        }
+        lines << line;
+    }
+    file.close();
+
+    return changed && writeFileLinesAsRoot(path, lines);
+}
+
+bool MainWindow::applyLiveGrubTimeout(int seconds)
+{
+    bool updated = false;
+
+    // GRUB: the top-level `set timeout=` line in grub.cfg.
+    const QRegularExpression grubTimeoutRx(QStringLiteral(R"(^(\s*set\s+timeout=).*$)"));
+    updated |= rewriteFileAsRoot(bootLocation + "/boot/grub/grub.cfg", [&](QString &line) {
+        const QRegularExpressionMatch match = grubTimeoutRx.match(line);
+        if (!match.hasMatch()) {
+            return false;
+        }
+        const QString replacement = match.captured(1) + QString::number(seconds);
+        if (replacement == line) {
+            return false;
+        }
+        line = replacement;
+        return true;
+    });
+
+    // syslinux/isolinux: the top-level `timeout` directive, expressed in tenths of a second.
+    const QRegularExpression syslinuxTimeoutRx(QStringLiteral(R"(^(\s*timeout\s+)\d+\s*$)"),
+                                               QRegularExpression::CaseInsensitiveOption);
+    const QString deciSeconds = QString::number(seconds * 10);
+    for (const QString &cfg :
+         {bootLocation + "/boot/syslinux/syslinux.cfg", bootLocation + "/boot/isolinux/isolinux.cfg"}) {
+        updated |= rewriteFileAsRoot(cfg, [&](QString &line) {
+            const QRegularExpressionMatch match = syslinuxTimeoutRx.match(line);
+            if (!match.hasMatch()) {
+                return false;
+            }
+            const QString replacement = match.captured(1) + deciSeconds;
+            if (replacement == line) {
+                return false;
+            }
+            line = replacement;
+            return true;
+        });
+    }
+    return updated;
+}
+
+bool MainWindow::applyLiveGrubBackground(const QString &imagePath)
+{
+    const QString themeDir = bootLocation + "/boot/grub/theme";
+    if (imagePath.isEmpty() || !QFile::exists(imagePath) || !QDir(themeDir).exists()) {
+        return false;
+    }
+
+    // GRUB picks the image decoder by file extension, so keep the original suffix when copying it in.
+    const QString suffix = QFileInfo(imagePath).suffix().toLower();
+    const QString destName = suffix.isEmpty() ? QStringLiteral("background") : "background." + suffix;
+    const QString destPath = themeDir + "/" + destName;
+
+    if (!cmd.procAsRoot("cp", {imagePath, destPath}, nullptr, nullptr, QuietMode::Yes)) {
+        qWarning() << "Failed to copy background image to" << destPath;
+        return false;
+    }
+    cmd.procAsRoot("chown", {"root:", destPath}, nullptr, nullptr, QuietMode::Yes);
+    cmd.procAsRoot("chmod", {"644", destPath}, nullptr, nullptr, QuietMode::Yes);
+
+    // Point the themed menu at the new image via the `desktop-image:` directive in each theme file, also
+    // uncommenting it if present as `#desktop-image:`. (The non-theme gfx_background fallback, only seen when
+    // the theme is disabled, keeps the original image.)
+    const QRegularExpression desktopImageRx(QStringLiteral(R"(^(\s*)#?\s*desktop-image:\s*.*$)"));
+    bool referenced = false;
+    const QStringList themeFiles = QDir(themeDir).entryList({QStringLiteral("*.txt")}, QDir::Files, QDir::Name);
+    for (const QString &themeFile : themeFiles) {
+        rewriteFileAsRoot(themeDir + "/" + themeFile, [&](QString &line) {
+            const QRegularExpressionMatch match = desktopImageRx.match(line);
+            if (!match.hasMatch()) {
+                return false;
+            }
+            referenced = true;
+            const QString replacement = match.captured(1) + "desktop-image: \"" + destName + '"';
+            if (replacement == line) {
+                return false;
+            }
+            line = replacement;
+            return true;
+        });
+    }
+    if (!referenced) {
+        qWarning() << "No desktop-image directive found in the live GRUB theme; background image was copied but"
+                   << "is not referenced.";
+    }
+    return referenced;
 }
 
 void MainWindow::unmountAndClean(const QStringList &mountList)
@@ -342,7 +933,7 @@ bool MainWindow::isInstalled(const QStringList &packages)
 // Check if running from a live environment
 bool MainWindow::isLive()
 {
-    return QProcess::execute("mountpoint", {"-q", "/live/aufs"}) == 0
+    return QDir("/live/aufs").exists()
            || QFile::exists("/run/archiso/bootmnt");
 }
 
@@ -436,7 +1027,9 @@ bool MainWindow::installPackages(const QStringList &packages)
         return rootPath.isEmpty() ? cmd.procAsRoot("pacman", packageArgs)
                                   : cmd.procAsRootInTarget(rootPath, "pacman", packageArgs);
     case PackageManager::Apt:
-        packageArgs = {"install", "-y"};
+        packageArgs = {"install", "-y",
+                       "-o", "Dpkg::Options::=--force-confdef",
+                       "-o", "Dpkg::Options::=--force-confold"};
         packageArgs += packages;
         return rootPath.isEmpty() ? cmd.procAsRoot("apt-get", packageArgs)
                                   : cmd.procAsRootInTarget(rootPath, "apt-get", packageArgs);
@@ -673,6 +1266,16 @@ QStringList MainWindow::getLinuxPartitions()
         = cmd.getOutAsRoot("lsblk", {"-ln", "-o", "NAME,SIZE,FSTYPE,MOUNTPOINT,LABEL", "-e", "2,11", "-x", "NAME"},
                            QuietMode::Yes)
               .split('\n', Qt::SkipEmptyParts);
+    // Get PARTTYPE for all candidate partitions in one call instead of N per-partition calls
+    const QStringList partTypeLines
+        = cmd.getOutAsRoot("lsblk", {"-ln", "-o", "NAME,PARTTYPE"}, QuietMode::Yes)
+              .split('\n', Qt::SkipEmptyParts);
+    QHash<QString, QString> partTypes;
+    partTypes.reserve(partTypeLines.size());
+    for (const QString &line : partTypeLines) {
+        partTypes[line.section(' ', 0, 0)] = line.section(' ', 1, 1).toLower();
+    }
+
     QStringList validPartitions;
     validPartitions.reserve(partitions.size());
     for (const QString &part_info : partitions) {
@@ -680,8 +1283,7 @@ QStringList MainWindow::getLinuxPartitions()
         if (!partitionNameRx.match(partName).hasMatch()) {
             continue;
         }
-        QString partType
-            = cmd.getOutAsRoot("lsblk", {"-ln", "-o", "PARTTYPE", "/dev/" + partName}, QuietMode::Yes).trimmed().toLower();
+        const QString partType = partTypes.value(partName);
 
         if (partType.contains(QRegularExpression(
                 R"(0x83|0fc63daf-8483-4772-8e79-3d69d8477de4|44479540-f297-41b2-9af7-d131d5f0458a|4f68bce3-e8cd-4db1-96e7-fbcaf984b709|ca7d7ccb-63ed-4c53-861c-1742536059cc)"))) {
@@ -736,7 +1338,11 @@ QString MainWindow::selectPartition(const QStringList &list)
     // Guess installed system by finding a partition with a known root label or /etc/os-release
     auto it = std::find_if(list.cbegin(), list.cend(), [&](const QString &part_info) {
         QString partName = part_info.section(' ', 0, 0);
-        const QString label = cmd.getOut(QString("lsblk -ln -o LABEL /dev/%1").arg(partName), QuietMode::Yes).trimmed();
+        const QString label = [&] {
+            QString out;
+            cmd.proc("lsblk", {"-ln", "-o", "LABEL", "/dev/" + partName}, &out, nullptr, QuietMode::Yes);
+            return out.trimmed();
+        }();
         // Check for MX Linux label
         if (label.contains(QLatin1String("rootMX"))) {
             return true;
@@ -969,7 +1575,7 @@ void MainWindow::replaceSyslinuxArgs(const QString &args)
 void MainWindow::readGrubCfg()
 {
     const QString rootPath = targetRootPath();
-    const QString grubFilePath = "/boot/grub/grub.cfg";
+    const QString grubFilePath = liveGrubMode() ? bootLocation + "/boot/grub/grub.cfg" : "/boot/grub/grub.cfg";
     QStringList content = cmd.readFileAsRoot(grubFilePath, QuietMode::Yes, rootPath).split('\n', Qt::SkipEmptyParts);
 
     if (content.isEmpty()) {
@@ -982,14 +1588,24 @@ void MainWindow::readGrubCfg()
     int menuCount = 0;
     int submenuCount = 0;
     QString menuId;
+    const bool liveMode = liveGrubMode();
 
     for (const auto &line : content) {
         QString trimmedLine = line.trimmed();
         grubCfg << trimmedLine;
 
+        // Live grub.cfg carries its own `set timeout=` (the host /etc/default/grub is not read), so initialize
+        // the timeout control from the media itself.
+        if (liveMode && trimmedLine.startsWith("set timeout=")) {
+            ui->spinBoxTimeout->setValue(trimmedLine.section('=', 1).remove(QRegularExpression("[\"']")).toInt());
+        }
+
         if (trimmedLine.startsWith("menuentry ") || trimmedLine.startsWith("submenu ")) {
             menuId = trimmedLine.section("$menuentry_id_option", 1, -1).section(' ', 1, 1);
-            QString item = trimmedLine.section(QRegularExpression("['\"]"), 1, 1);
+            QString item = extractMenuEntryTitle(trimmedLine);
+            if (item.trimmed().isEmpty()) {
+                item = menuId; // entries with only a translated/blank literal title
+            }
             QString info;
 
             if (menuLevel > 0) {
@@ -1154,6 +1770,7 @@ void MainWindow::pushApplyClicked()
 
     setConnections();
     const QString rootPath = targetRootPath();
+    const bool inLiveGrubMode = liveGrubMode();
 
     if (kernelOptionsChanged) {
         replaceGrubArg("GRUB_CMDLINE_LINUX_DEFAULT", "\"" + ui->textKernel->text() + "\"");
@@ -1163,7 +1780,17 @@ void MainWindow::pushApplyClicked()
         }
     }
 
-    if (optionsChanged) {
+    // On live media the timeout, default entry and theme background are written straight to the pre-generated
+    // grub.cfg / syslinux config and theme files. The remaining GRUB_* defaults only take effect through
+    // /etc/default/grub + update-grub, which do not apply to live media, so the installed-system branch below
+    // is skipped in live mode (and those controls are disabled/hidden in the UI).
+    if (optionsChanged && inLiveGrubMode) {
+        applyLiveGrubTimeout(ui->spinBoxTimeout->value());
+        const QString liveBgPath = ui->pushBgFile->property("file").toString();
+        if (ui->pushBgFile->isEnabled() && QFile::exists(liveBgPath)) {
+            applyLiveGrubBackground(liveBgPath);
+        }
+    } else if (optionsChanged) {
         cmd.procAsRoot("grub-editenv", {"/boot/grub/grubenv", "unset", "next_entry"});
 
         const QString bgFilePath = ui->pushBgFile->property("file").toString();
@@ -1250,16 +1877,30 @@ void MainWindow::pushApplyClicked()
 
     if (optionsChanged || splashChanged || messagesChanged) {
         if (grubInstalled) {
-            writeDefaultGrub();
-            progress->setLabelText(tr("Updating grub..."));
-            const bool grubUpdated = runUpdateGrub();
-            if (!grubUpdated) {
-                qWarning() << "Failed to update GRUB configuration.";
+            // In pure live mode the on-disk /etc/default/grub is not read into defaultGrub, so it must not be
+            // written back (that would truncate it) nor regenerated via update-grub. Live edits go straight to
+            // the media via replaceLiveGrubArgs/replaceSyslinuxArgs and refreshLiveGrubTheme instead.
+            bool grubUpdated = false;
+            if (!inLiveGrubMode) {
+                writeDefaultGrub();
+                progress->setLabelText(tr("Updating grub..."));
+                grubUpdated = runUpdateGrub();
+                if (!grubUpdated) {
+                    qWarning() << "Failed to update GRUB configuration.";
+                }
+                if (live && !bootLocation.isEmpty()) {
+                    cmd.procAsRoot("cp", {"/boot/grub/grub.cfg", bootLocation + "/boot/grub/grub.cfg"});
+                }
             }
-            if (live) {
-                cmd.procAsRoot("cp", {"/boot/grub/grub.cfg", bootLocation + "/boot/grub/grub.cfg"});
+            bool liveLabelsUpdated = false;
+            if (live && !installedMode) {
+                progress->setLabelText(tr("Refreshing live boot labels..."));
+                liveLabelsUpdated = refreshLiveGrubTheme();
+                if (!liveLabelsUpdated) {
+                    qWarning() << "Failed to refresh the live boot labels.";
+                }
             }
-            if (grubUpdated) {
+            if (grubUpdated || liveLabelsUpdated) {
                 reloadGrubSettings();
             }
         }
@@ -1305,7 +1946,7 @@ void MainWindow::comboBootsplashClicked(bool checked)
         if (inVirtualMachine()) {
             QMessageBox::information(
                 this, tr("Running in a Virtual Machine"),
-                tr("You current system is running in a Virtual Machine,\n"
+                tr("Your current system is running in a Virtual Machine,\n"
                    "Plymouth bootsplash will work in a limited way, you also won't be able to preview the theme"));
             // ui->pushPreview->setDisabled(true);
         }
@@ -1580,7 +2221,7 @@ void MainWindow::pushPreviewClicked()
     if (inVirtualMachine()) {
         QMessageBox::information(
             this, tr("Running in a Virtual Machine"),
-            tr("You current system is running in a Virtual Machine,\n"
+            tr("Your current system is running in a Virtual Machine,\n"
                "Plymouth bootsplash will work in a limited way, you also won't be able to preview the theme"));
     }
     if (rootPath.isEmpty()) {
@@ -1602,6 +2243,12 @@ void MainWindow::pushPreviewClicked()
 
 void MainWindow::comboEnableFlatmenusClicked(bool checked)
 {
+    // Flat-menu layout is a /etc/default/grub setting applied via update-grub; it does not apply to live media.
+    // Without this guard the click would write the (empty, unread) defaultGrub over the host /etc/default/grub.
+    if (liveGrubMode()) {
+        return;
+    }
+
     auto *progress = new QProgressDialog(this);
     bar = new QProgressBar(progress);
 
@@ -1661,7 +2308,8 @@ void MainWindow::comboGrubThemeToggled(bool checked)
 
 void MainWindow::btnThemeFileClicked()
 {
-    QString themeDirectory = chroot.section(' ', 1, 1) + "/boot/grub/themes";
+    QString themeDirectory = live && !installedMode && !bootLocation.isEmpty() ? bootLocation + "/boot/grub/theme"
+                                                                           : chroot.section(' ', 1, 1) + "/boot/grub/themes";
     QString selected = QFileDialog::getOpenFileName(this, tr("Select GRUB theme"), themeDirectory, "*.txt;; *.*");
 
     if (!selected.isEmpty()) {
@@ -1685,7 +2333,7 @@ void MainWindow::lineEditKernelTextEdited()
 bool MainWindow::isLuks(const QString &part)
 {
     if (!cmd.procAsRoot("cryptsetup", {"isLuks", part})) {
-        qDebug() << "Not a LUKS partion:" << part;
+        qDebug() << "Not a LUKS partition:" << part;
         return false;
     }
     return true;
@@ -1706,6 +2354,7 @@ bool MainWindow::openLuks(const QString &partition, const QString &path)
                                             tr("Enter password to unlock %1 encrypted partition:").arg(partition),
                                             QLineEdit::Password, QString(), &ok)
                           .toUtf8();
+    SecureBuffer _scrub(&pass); // zeroes pass on scope exit (all return paths)
 
     if (!ok || pass.isEmpty()) {
         QMessageBox::critical(this, tr("Error"), tr("Password entry cancelled or empty for %1").arg(partition));
@@ -1715,11 +2364,9 @@ bool MainWindow::openLuks(const QString &partition, const QString &path)
     // Try to open the LUKS container
     if (!cmd.procAsRoot("cryptsetup", {"open", "--allow-discards", partition, mapper, "-"}, nullptr, &pass)) {
         QMessageBox::critical(this, tr("Error"), tr("Could not open %1 LUKS container").arg(partition));
-        pass.fill(static_cast<char>(0xA5 & 0xFF));
         return false;
     }
     cmd.procAsRoot("mount", {"/dev/mapper/" + mapper, path});
-    pass.fill(static_cast<char>(0xA5 & 0xFF));
     if (!mountBoot(path)) {
         return false;
     }

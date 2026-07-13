@@ -1,0 +1,42 @@
+.TH RUN-MKSQUASHFS 1 "June 2026" "mx-remaster" "User Commands"
+.SH NAME
+run-mksquashfs \- wrap mksquashfs, capture its exit status, and record image size metadata
+.SH SYNOPSIS
+.B run-mksquashfs
+.I status-file
+.RI [ mksquashfs-options ... ]
+.SH DESCRIPTION
+.B run-mksquashfs
+is a small helper used by the remaster workflow when
+.B mksquashfs
+needs to run inside a terminal or GUI wrapper.
+It executes
+.B mksquashfs
+with the supplied arguments, writes the exit status to the file named by the
+first positional argument, and records the uncompressed filesystem size in the
+live configuration metadata.
+
+The helper also captures the command output in a temporary file so it can extract
+the reported uncompressed filesystem size and write it to
+.I /live/config/linuxfs.info
+via the configured squashfs directory.
+.SH ARGUMENTS
+.TP
+.I status-file
+Path to a file where the script will store the numeric exit code from
+.BR mksquashfs .
+.TP
+.I mksquashfs-options
+All remaining arguments are passed directly to
+.B mksquashfs
+without interpretation.
+.SH BEHAVIOR
+The script tees the mksquashfs output to a temporary file under
+.IR /tmp ,
+writes the command return code to the requested status file, and removes the
+temporary capture file when done.
+.SH SEE ALSO
+.BR mksquashfs (1),
+.BR live-remaster (1)
+.SH AUTHOR
+mx-remaster maintainers

@@ -44,12 +44,17 @@ BLURB="\n$(echo "$BLURB" | fold -s -w 74 | sed 's/^/    /')"
 
 SAFETY_MARGIN=20
 
+     VERSION="26.06.01"
+VERSION_DATE="Fri, 12 Jun 2026 04:50:00 -0400"
+
 EXTRA_USAGE="
 \n[b]$(gt "Extra options for"):[/] [p]$ME[/]
     -p|--pretend        $(gt "Make a smaller linuxfs.new.  NOT deleted when done.")
     -t|--title=<[p]title[/]>  $(pfgt "Use %s instead of prompting user for title." "<[p]title[/]>")
     --general           $(gt "Make a general-purpose remaster.")
     --personal          $(gt "Make a personalized remaster.")
+    --no-ucode[=<list>] $(gt "Skip microcode refresh; <list>: amd, intel, or amd,intel (default: both)")
+    --version           $(gt "Show version and exit.")
 "
 
 OPTIONS="
@@ -60,6 +65,18 @@ OPTIONS="
 "
 
 prep_main() {
+    local _pre_args=() _arg
+    for _arg in "$@"; do
+        case "$_arg" in
+            --version)       echo "$ME $VERSION"; exit 0 ;;
+            --no-ucode)      NO_UCODE_VENDORS="amd,intel" ;;
+            --no-ucode=both) NO_UCODE_VENDORS="amd,intel" ;;
+            --no-ucode=*)    NO_UCODE_VENDORS="${_arg#--no-ucode=}" ;;
+            *)               _pre_args+=("$_arg") ;;
+        esac
+    done
+    set -- "${_pre_args[@]}"
+
     add_options  "$OPTIONS"
     read_options "$@"
     extra_args    0
@@ -515,9 +532,28 @@ Version_Info_End
         finish_remaster
     fi
 
+    # Refresh the boot menu labels so they show the remastered release name.
+    # Non-fatal: the remaster has already succeeded by this point.  Use qmsg so
+    # the activity is shown on screen (and logged), unlike vmsg (verbose only).
+    local release_line=""
+    if [ -z "$SET_PRETEND" ] && which live-boot-refresh &>/dev/null; then
+        qmsg "$(gt "Refreshing boot menu labels")"
+        local lbr_out lbr_ret boot_release
+        lbr_out=$(live-boot-refresh 2>&1); lbr_ret=$?
+        [ -n "$lbr_out" ] && qmsg "$lbr_out"
+        [ "$lbr_ret" -eq 0 ] || qmsg "$(gt "(boot label refresh reported a problem; this is non-fatal)")"
+
+        # Surface the stamped release name in the success box below so it is
+        # visible even in GUI mode; read it back from live-boot-refresh's
+        # output so it matches exactly what was written to the menus.
+        boot_release=$(printf '%s\n' "$lbr_out" | sed -n 's/^new release title: //p' | tail -n 1)
+        [ -n "$boot_release" ] && release_line="$(pfgt "Remastered release: %s" "[b]$boot_release[/]")"
+    fi
+
     info_box -c                                             \
         "$(gt "Created new compressed filesystem file:")"   \
         "[f]$new_file[/]"                                   \
+        "$release_line"                                     \
         "[fixed]"                                           \
         "${main_text[@]}"                                   \
         "[/]"                                               \
@@ -627,6 +663,38 @@ finish_remaster() {
     local md5_file=$SQFILE_FULL.md5.new
     cat $new_file | md5sum > $md5_file
     sed -i "s/ .*/  $SQFILE_NAME/" $md5_file
+
+    # -- microcode refresh in all initrd*.gz --------------------------------
+    local _no_amd _no_intel _uc_vendors
+
+    [ -f "/etc/live-kernel-updater/no-ucode-amd" ]   && _no_amd=true
+    [ -f "/etc/live-kernel-updater/no-ucode-intel" ]  && _no_intel=true
+    case "${NO_UCODE_VENDORS:-}" in *amd*)   _no_amd=true   ;; esac
+    case "${NO_UCODE_VENDORS:-}" in *intel*) _no_intel=true ;; esac
+
+    [ -z "$_no_amd" ]   && _uc_vendors="amd"
+    [ -z "$_no_intel" ] && _uc_vendors="${_uc_vendors:+$_uc_vendors,}intel"
+
+    if [ -n "$_uc_vendors" ]; then
+        if command -v uc-tool >/dev/null 2>&1; then
+            local uc_vflag="-s"; [ "$SET_VERBOSE" ] && uc_vflag="-V"
+            local uc_initrd
+            local -a uc_initrds
+            shopt -s nullglob
+            uc_initrds=(/live/boot-dev/antiX/initrd.gz /live/boot-dev/antiX/initrd[1-9].gz)
+            shopt -u nullglob
+            for uc_initrd in "${uc_initrds[@]}"; do
+                [ -f "$uc_initrd" ] || continue
+                qmsg "Adding microcode ($_uc_vendors) to $(basename "$uc_initrd") ..."
+                uc-tool $uc_vflag -u "$_uc_vendors" -i "$uc_initrd" \
+                    || qmsg "WARNING: ucode injection failed for $(basename "$uc_initrd") -- may lack microcode"
+            done
+        else
+            qmsg "uc-tool not found -- skipping microcode refresh in initrd"
+        fi
+    else
+        qmsg "microcode refresh skipped (disabled via --no-ucode or flag file)"
+    fi
 
     local_clean_up && trap EXIT
 
