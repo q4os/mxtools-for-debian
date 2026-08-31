@@ -22,6 +22,15 @@
 
 cmake_minimum_required(VERSION 3.16)
 
+# Option to use clang for testing builds. Must be resolved before project()
+# since compiler selection is fixed at that point.
+option(USE_CLANG "Use clang compiler" OFF)
+if(USE_CLANG)
+    set(CMAKE_C_COMPILER clang)
+    set(CMAKE_CXX_COMPILER clang++)
+    message(STATUS "Using clang compiler")
+endif()
+
 set(PROJECT_VERSION_FROM_CHANGELOG "")
 
 if(DEFINED PROJECT_VERSION_OVERRIDE AND NOT "${PROJECT_VERSION_OVERRIDE}" STREQUAL "")
@@ -79,15 +88,6 @@ if(CMAKE_GENERATOR STREQUAL "Ninja")
     endif()
 endif()
 
-# Option to use clang for testing builds
-option(USE_CLANG "Use clang compiler" OFF)
-if(USE_CLANG)
-    set(CMAKE_C_COMPILER clang)
-    set(CMAKE_CXX_COMPILER clang++)
-    set(CMAKE_CXX_COMPILER_ID "Clang")
-    message(STATUS "Using clang compiler")
-endif()
-
 # Find Qt6 components
 find_package(Qt6 REQUIRED COMPONENTS
     Core
@@ -114,6 +114,7 @@ set(SOURCES
     src/ExecuteModel.cpp
     src/ExecuteView.cpp
     src/SaveDialog.cpp
+    src/ScrollableTreeView.cpp
     src/TCommandEdit.cpp
     src/TimeDialog.cpp
     src/VariableEdit.cpp
@@ -135,6 +136,7 @@ set(HEADERS
     src/ExecuteModel.h
     src/ExecuteView.h
     src/SaveDialog.h
+    src/ScrollableTreeView.h
     src/TCommandEdit.h
     src/TimeDialog.h
     src/VariableEdit.h
@@ -224,3 +226,10 @@ set_target_properties(job-scheduler PROPERTIES
 install(TARGETS job-scheduler
     RUNTIME DESTINATION bin
 )
+
+# Unit tests (CronTime parsing, CronModel operations)
+option(BUILD_TESTING "Build unit tests" ON)
+if(BUILD_TESTING)
+    enable_testing()
+    add_subdirectory(tests)
+endif()

@@ -62,5 +62,5 @@ Exec=mx-boot-options
 Terminal=false
 Type=Application
 Icon=mx-boot-options
-Categories=GNOME;GTK;System;MX-Maintenance
+Categories=GNOME;GTK;System;X-MX-Maintenance
 NoDisplay=false

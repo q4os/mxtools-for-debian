@@ -1,0 +1,390 @@
+#!/bin/bash
+
+### This app was developed by MX Devs 2023 and released under GPLv3
+### Name=Papirus-folder-themes
+### Version=24.01.04
+
+TEXTDOMAINDIR=/usr/share/locale 
+export TEXTDOMAIN="papirus-folder-colors"
+source gettext.sh
+
+### buttons
+
+#TRANSLATORS button label
+export BTN_CLOSE=$(gettext "Close")      ; BTN_CLOSE+='!window-close'
+#TRANSLATORS button label
+export BTN_OK=$(gettext "OK")            ; BTN_OK+='!object-select'
+#TRANSLATORS button label
+export BTN_CREATE=$(gettext "Create Theme")    ; BTN_CREATE+='!object-select'
+#TRANSLATORS button label
+export BTN_OVERWRITE=$(gettext "Overwrite")    ; BTN_OVERWRITE+='!document-save'
+#TRANSLATORS button label
+export BTN_SAVENEW=$(gettext "Create with new name")    ; BTN_SAVENEW+='!document-save-as'
+
+#TRANSLATORS app name for titlebar text
+TITLE="$(gettext 'Papirus Folder Themes')"
+CLASS="papirus-folder-colors"
+ICONPATH="/usr/share/pixmaps/papirus-folder-themes.svg"
+
+
+### make tempfiles
+TEMP_ICONTHEME="$(mktemp --tmpdir theme-icon-XXXXXX.txt)"
+TEMP_NAMETARGET="$(mktemp --tmpdir theme-name-XXXXXX.txt)"
+
+
+### assumed folder variations
+list_wanted=( yellow paleorange orange deeporange palebrown brown pink red magenta violet teal green cyan blue indigo bluegrey grey black white breeze )
+### removed yaru adwaita custom nordic
+
+### existing folder variations
+LIST_FOUND=$(ls /usr/share/icons/Papirus/48x48/places/folder-*-desktop.svg | sed -e "s/folder\-//g" | sed -e "s/\-desktop\.svg//g")
+LIST_FOUND=$(basename -a $LIST_FOUND)
+list_found=($LIST_FOUND)
+
+### create filtered list
+list_colors=()
+
+for i in "${!list_wanted[@]}"; do
+
+    for x in "${!list_found[@]}"; do
+
+        if test "${list_wanted[i]}" == "${list_found[x]}"; then
+            list_colors+=("${list_found[x]}")
+        fi
+
+    done
+
+done
+
+IMAGE_BLANK="/usr/share/pixmaps/blank-48x48.svg"
+IMAGE_PATH="/usr/share/icons/Papirus/48x48/places"
+
+for i in ${list_colors[@]}
+do
+
+    IMG_ADD="$IMAGE_BLANK $IMAGE_PATH/folder-$i.svg $IMAGE_PATH/user-$i-home.svg \
+    $IMAGE_PATH/folder-$i-pictures.svg $IMAGE_PATH/folder-$i-downloads.svg \
+    $IMAGE_PATH/user-$i-desktop.svg $IMAGE_BLANK $i"
+    IMAGES=$(echo -e "$IMAGES $IMG_ADD")
+
+done
+
+
+### trap_function
+trap_function () {
+
+trap "rm "$TEMP_ICONTHEME" "$TEMP_NAMETARGET"" EXIT
+
+}
+
+
+pft_select() {
+
+#TRANSLATORS window text
+TEXT1="$(gettext 'Select a folder theme')"
+
+yad --title="$TITLE" --class="$CLASS" --window-icon="$ICONPATH" \
+--borders=10 --center --width=400 --height=500 --separator=" " \
+--text="\n<b>$TEXT1</b>\n" --text-align=center \
+--buttons-layout=spread --button="${BTN_CLOSE}":2 --button="${BTN_CREATE}":4 \
+--list --print-column=8 --hide-column=8 --no-headers \
+--column=":IMG" \
+--column=":IMG" \
+--column=":IMG" \
+--column=":IMG" \
+--column=":IMG" \
+--column=":IMG" \
+--column=":IMG" \
+--column="TXT" \
+$IMAGES \
+> $TEMP_ICONTHEME
+
+ret=$?
+
+case $ret in
+    2 | 252 )
+        exit 0
+    ;;
+
+esac
+
+read -r -a TEMPNAME < $TEMP_ICONTHEME
+
+#TRANSLATORS Name and target text (line 1)
+TEXT2="$(gettext 'Name, location and type of new folder theme.')"
+#TRANSLATORS Name and target text (line 2)
+TEXT2A="$(gettext 'It may take a few seconds to generate the new theme.')"
+#TRANSLATORS Name and target text (line 3)
+TEXT2B="$(gettext 'Be patient and wait for the confirmation window.')"
+#TRANSLATORS label for textbox to enter name of new icon theme
+TEXT_TARGET1="$(gettext 'Save theme as')"
+TEXT_TARGET2="$TEMPNAME"
+#TRANSLATORS label for dropdown to select save location of new icon theme
+TEXT_TARGET3="$(gettext 'Save theme in')"
+
+if [ ! -d $HOME/.icons ]; then
+    TEXT_TARGET4="$HOME/.local/share/icons!/usr/share/icons"
+else
+    TEXT_TARGET4="$HOME/.local/share/icons!$HOME/.icons!/usr/share/icons"
+fi
+
+#TRANSLATORS label for dropdown to select symbol type of new icon theme
+TEXT_TARGET5="$(gettext 'Window theme symbols')"
+TEXT_TARGET6="light!dark"
+#TRANSLATORS Name and target text (line 4) - do not translate "light ="
+TEXT_TARGET7="$(gettext 'light = create symbols for light colored window themes')"
+#TRANSLATORS Name and target text (line 5) - do not translate "dark ="
+TEXT_TARGET8="$(gettext 'dark = create symbols for dark colored window themes')"
+#TRANSLATORS Name and target text (line 6) - do not translate "dark ="
+TEXT_TARGET9="$(gettext 'dark = appends "-dark" automatically to end of theme name')"
+
+yad --title="$TITLE" --class="$CLASS" --window-icon="$ICONPATH" \
+--borders=10 --center --width=400 --height=500 --separator="|" \
+--form --align=right --separator="|" \
+--text="<b>$TEXT2</b>\n\n$TEXT_TARGET5\n$TEXT_TARGET7\n$TEXT_TARGET8\n$TEXT_TARGET9\n\n<i>$TEXT2A\n$TEXT2B</i>" --text-align=center \
+--buttons-layout=spread --button="${BTN_CLOSE}":6 --button="${BTN_CREATE}":8 \
+--field=" ":LBL "_" \
+--field="$TEXT_TARGET1 <b>Papirus-</b>   " "$TEXT_TARGET2" \
+--field="$TEXT_TARGET3   ":CB "$TEXT_TARGET4" \
+--field="$TEXT_TARGET5   ":CB "$TEXT_TARGET6" \
+--field=" ":LBL "x" \
+> $TEMP_NAMETARGET
+
+ret=$?
+
+case $ret in
+    6 | 252 )
+        exit 0
+    ;;
+
+    8 )
+
+        read COMBIBOXES < $TEMP_NAMETARGET
+
+        echo $COMBIBOXES
+
+        COMBIBOXES=$(echo $COMBIBOXES | sed -e "s/||/|THEMEHASNONAME|/g")
+        COMBIBOXES=$(echo $COMBIBOXES | sed -e "s/ /_/g")
+        COMBIBOXES=$(echo $COMBIBOXES | sed -e "s/|/ /g")
+
+        combiboxes=($COMBIBOXES)
+        NAME_NEW="${combiboxes[0]}"
+        PFT_TARGET="${combiboxes[1]}"
+        PFT_DARK="${combiboxes[2]}"
+
+        PFT_NAME="Papirus-$NAME_NEW"
+
+
+### check new theme name
+        while [ "$PFT_NAME" = "Papirus-THEMEHASNONAME" ]; do
+
+#TRANSLATORS warning message if new theme is not given a name
+        TEXT_NEWNAME1="$(gettext 'New icon theme needs a name')"
+
+        NAME_NEW=$(yad --title="$TITLE" --class="$CLASS" --window-icon="$ICONPATH" \
+        --width=400 --height=200 --center --borders=10 --separator="" \
+        --buttons-layout=spread --button="$BTN_CLOSE":12 --button="$BTN_CREATE":14 \
+        --text="\n$TEXT_NEWNAME1\n\n" --text-align=center \
+        --form \
+        --field="Papirus-" "$NAME_NEW" )
+
+        GETOUT=$?
+
+        case $GETOUT in
+            12 | 252 )
+                exit
+            ;;
+            14 )
+                if [ "$NAME_NEW" = "" ]; then
+                    NAME_NEW=THEMEHASNONAME
+                fi
+
+                NAME_NEW=$(echo $NAME_NEW | sed -e "s/ /_/g")
+                PFT_NAME="Papirus-$NAME_NEW"
+            ;;
+        esac
+        done
+
+### check dark theme 
+        if [ "$PFT_DARK" = "dark" ]; then
+            PFT_DARK='--dark'
+            PFT_DARKNAME='-dark'
+            TYPE_SET="dark"
+        elif [ "$PFT_DARK" = "light" ]; then
+            PFT_DARK=''
+            PFT_DARKNAME=''
+            TYPE_SET="light"
+        fi
+
+
+### check if theme name exists, if yes ask if overwrite or different name
+
+        while [ -d "$PFT_TARGET"/"$PFT_NAME$PFT_DARKNAME" ]; do
+
+#TRANSLATORS warning message if icon theme name already exists (line 1) - text is preceded by theme name
+        TEXT_OVERWRITE_1="$(gettext 'already exists.')"
+#TRANSLATORS warning message if icon theme name already exists (line 2)
+        TEXT_OVERWRITE_2="$(gettext 'Do you want to overwrite the icon theme or save with a different name?')"
+
+        yad --title="$TITLE" --class="$CLASS" --window-icon="$ICONPATH" \
+        --width=400 --height=200 --text-align=center --center --borders=10 --separator="" \
+        --text="<b>$PFT_NAME$PFT_DARKNAME</b> $TEXT_OVERWRITE_1\n\n$TEXT_OVERWRITE_2" \
+        --buttons-layout=spread --button="$BTN_OVERWRITE":16 --button="$BTN_SAVENEW":18 
+
+        GETOUT2=$?
+
+        case $GETOUT2 in
+            252 )
+                exit
+            ;;
+            
+            16 )
+                if [ "$PFT_TARGET" = "$HOME/.local/share/icons" -o "$TARGET_NEW" = "$HOME/.icons" ]; then
+                    rm -r $PFT_TARGET/$PFT_NAME$DARKNAME
+                else
+                    PFT_NAME_USRSHARE=$PFT_NAME
+                    PFT_NAME=tempoverride
+                    USRSHARE_EXISTS=true
+                fi
+                ;;
+            
+            18 )
+#TRANSLATORS window text - asking for new icon theme name
+                TEXT_SAVEAS_1="$(gettext 'New name')"
+
+                NAME_NEW=$(echo $PFT_NAME | sed -e "s/Papirus-//")
+                NAME_EMPTYCHECK=$NAME_NEW
+
+                NAME_NEW=$(yad --title="$TITLE" --class="$CLASS" --window-icon="$ICONPATH" \
+                --width=400 --height=200 --text-align=center --center --borders=10 --separator="" \
+                --text-align=center --text="\n$TEXT_SAVEAS_1\n\n" \
+                --buttons-layout=spread --button="$BTN_CREATE":26 \
+                --form \
+                --field="Papirus-" "$NAME_NEW" )
+
+
+                case $? in
+                252 )
+                    exit 0
+                ;;
+
+                26 )
+                    if [ "$NAME_NEW" = "" ]; then
+                        NAME_NEW=$NAME_EMPTYCHECK
+                    fi
+
+                    NAME_NEW=$(echo $NAME_NEW | sed -e "s/ /_/g")
+                    PFT_NAME="Papirus-$NAME_NEW"
+                ;;
+                esac
+            ;;
+        esac
+        done
+        
+### revert usr/share override
+        if [ "$PFT_NAME" = "tempoverride" ]; then
+            PFT_NAME=$PFT_NAME_USRSHARE
+        fi
+
+
+        read PFT_COLOR < $TEMP_ICONTHEME
+        PFT_COLOR=$(echo $PFT_COLOR | sed -e 's/|//g')
+
+### progress yad
+{
+waittime=0
+echo $waittime
+echo "# $((waittime))%"
+      
+### create icon theme
+
+        if [ "$PFT_TARGET" = "$HOME/.local/share/icons" -o "$PFT_TARGET" = "$HOME/.icons" ]; then
+
+            if [ ! -d $PFT_TARGET ]; then
+                mkdir $PFT_TARGET
+            fi
+
+waittime=25
+echo $waittime
+echo "# $((waittime))%"
+
+            papirus-folder-color.sh --color $PFT_COLOR --name $PFT_NAME$PFT_DARKNAME --target_path $PFT_TARGET $PFT_DARK
+
+        elif [ "$PFT_TARGET" = '/usr/share/icons' ]; then
+
+            if [ "$USRSHARE_EXISTS" = "true" ]; then
+            pkexec bash -c "rm -r $PFT_TARGET/$PFT_NAME$PFT_DARKNAME &&
+            papirus-folder-color.sh --color $PFT_COLOR --name $PFT_NAME$PFT_DARKNAME --target_path $PFT_TARGET $PFT_DARK"
+            else
+            pkexec papirus-folder-color.sh --color $PFT_COLOR --name $PFT_NAME$PFT_DARKNAME --target_path $PFT_TARGET $PFT_DARK
+            fi
+        
+        fi
+
+waittime=75
+echo $waittime
+echo "# $((waittime))%"
+sleep 2
+waittime=100
+echo $waittime
+echo "# $((waittime))%"
+
+} | yad --progress --title="$TITLE" --class="$CLASS" \
+--borders=10 --center --width=400 --height=100 \
+--auto-close \
+--auto-kill
+
+### finished message
+
+        if [ -d $PFT_TARGET/$PFT_NAME$PFT_DARKNAME ]; then
+
+#TRANSLATORS completed window text 1- text is preceded by new icon theme name
+        TEXT3="$(gettext 'icon theme created in')"
+#TRANSLATORS completed window text 2
+        TEXT4="$(gettext 'Change icon theme with MX-Tweak')"
+#TRANSLATORS button label
+        TEXT5="$(gettext 'Open MX-Tweak')"
+
+            if [ x"${DESKTOP_SESSION##*/}" = x"plasma" ]; then
+
+            yad --title="$TITLE" --class="$CLASS" --window-icon="$ICONPATH" \
+            --borders=10 --center --width=400 --height=300 --text-align=center \
+            --text="\n<b>$PFT_NAME$PFT_DARKNAME</b>\n$TEXT3 $PFT_TARGET\n\n" \
+            --buttons-layout=spread --button="${BTN_CLOSE}"
+
+            else
+
+            yad --title="$TITLE" --class="$CLASS" --window-icon="$ICONPATH" \
+            --borders=10 --center --width=400 --height=300 --text-align=center \
+            --text="\n<b>$PFT_NAME$PFT_DARKNAME</b>\n$TEXT3 $PFT_TARGET\n\n<b>$TEXT4</b>" \
+            --buttons-layout=spread --button="$TEXT5":'mx-tweak --theme' --button="${BTN_CLOSE}"
+            
+            fi
+
+        else
+
+#TRANSLATORS completed window error message
+        TEXT6="$(gettext 'OOPS! Something went wrong with Papirus-folder-themes.')"
+
+        yad --title="$TITLE" --class="$CLASS" --window-icon="$ICONPATH" \
+        --borders=10 --center --width=400 --height=200 --text-align=center \
+        --text="\n<b>$TEXT6</b>" \
+        --button="${BTN_CLOSE}"
+       
+        fi
+    
+    ;;
+
+esac
+
+
+}
+
+export -f pft_select trap_function
+
+
+trap_function
+
+pft_select
+
+exit 0

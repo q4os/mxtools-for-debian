@@ -2,337 +2,337 @@
 <context>
     <name>ConkyCustomizeDialog</name>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="56"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="45"/>
         <source>Customize Conky - %1</source>
         <translation>Conky testreszabása - %1</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="77"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="66"/>
         <source>Launch</source>
         <translation>Indítás</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="81"/>
-        <location filename="../src/conkycustomizedialog.cpp" line="342"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="70"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="331"/>
         <source>Start</source>
         <translation>Indítás</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="83"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="72"/>
         <source>Undo</source>
         <translation>Visszavonás</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="106"/>
-        <location filename="../src/conkycustomizedialog.cpp" line="186"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="95"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="175"/>
         <source>Colors</source>
         <translation>Színek</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="121"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="110"/>
         <source>Default</source>
         <translation>Alapértelmezett</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="121"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="110"/>
         <source>Color0</source>
         <translation>0. szín</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="121"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="110"/>
         <source>Color1</source>
         <translation>1. szín</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="121"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="110"/>
         <source>Color2</source>
         <translation>2. szín</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="121"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="110"/>
         <source>Color3</source>
         <translation>3. szín</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="121"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="110"/>
         <source>Color4</source>
         <translation>4. szín</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="122"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="111"/>
         <source>Color5</source>
         <translation>5. szín</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="122"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="111"/>
         <source>Color6</source>
         <translation>6. szín</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="122"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="111"/>
         <source>Color7</source>
         <translation>7. szín</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="122"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="111"/>
         <source>Color8</source>
         <translation>8. szín</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="122"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="111"/>
         <source>Color9</source>
         <translation>9. szín</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="193"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="182"/>
         <source>Close</source>
         <translation>Bezárás</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="337"/>
-        <location filename="../src/conkycustomizedialog.cpp" line="342"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="326"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="331"/>
         <source>Stop</source>
         <translation>Leállítás</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="722"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="712"/>
         <source>Select Color</source>
         <translation>Szín választása</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="828"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="819"/>
         <source>Permission Denied</source>
         <translation>Nincs elegendő jogosultság</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="829"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="820"/>
         <source>Cannot write to file: %1
 Insufficient permissions.</source>
         <translation>A fájl írása nem sikerült: %1
 Nincs elegendő jogosultság.</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="839"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="830"/>
         <source>Write Error</source>
         <translation>Írási hiba</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="839"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="830"/>
         <source>Cannot write to file: %1</source>
         <translation>A fájl nem írható: %1</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="930"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="940"/>
         <source>Backup Config File</source>
         <translation>Beállításfájl mentése</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="930"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="940"/>
         <source>Do you want to preserve the original file?</source>
         <translation>Megtartja az eredeti fájlt?</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="954"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="964"/>
         <source>Backed Up Config File</source>
         <translation>Beállításfájl mentése</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="955"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="965"/>
         <source>The original configuration was backed up to %1</source>
         <translation>Az eredeti beállítások mentve: %1</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="957"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="967"/>
         <source>Backup Failed</source>
         <translation>Mentés nem sikerült</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="957"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="967"/>
         <source>Failed to create a backup file.</source>
         <translation>Nem sikerült a mentési fájl létrehozása.</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1038"/>
-        <location filename="../src/conkycustomizedialog.cpp" line="1041"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1048"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1051"/>
         <source>Restore Failed</source>
         <translation>Visszaállítás nem sikerült</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1038"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1048"/>
         <source>Failed to restore from backup file.</source>
         <translation>Nem sikerült a visszaállítás a mentési fájlból.</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1041"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1051"/>
         <source>Backup file does not exist.</source>
         <translation>A mentési fájl nem létezik.</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1393"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1403"/>
         <source>Position</source>
         <translation>Hely</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1400"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1410"/>
         <source>Alignment</source>
         <translation>Igazítás</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1405"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1415"/>
         <source>Top Left</source>
         <translation>Fent balra</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1406"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1416"/>
         <source>Top Right</source>
         <translation>Fent jobbra</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1407"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1417"/>
         <source>Top Middle</source>
         <translation>Fent középen</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1408"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1418"/>
         <source>Bottom Left</source>
         <translation>Lent balra</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1409"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1419"/>
         <source>Bottom Right</source>
         <translation>Lent jobbra</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1410"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1420"/>
         <source>Bottom Middle</source>
         <translation>Lent középen</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1411"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1421"/>
         <source>Middle Left</source>
         <translation>Középen balra</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1412"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1422"/>
         <source>Middle Right</source>
         <translation>Középen jobbra</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1413"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1423"/>
         <source>Middle Middle</source>
         <translation>Középen</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1418"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1428"/>
         <source>Horizontal Gap</source>
         <translation>Helyköz vízszintesen</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1419"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1429"/>
         <source>[GAP_X] Horizontal distance from window border (in pixels)</source>
         <translation>[GAP_X] vízszintes távolság az ablakkerettől (képpontban)</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1431"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1441"/>
         <source>Vertical Gap</source>
         <translation>Helyköz függőlegesen</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1432"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1442"/>
         <source>[GAP_Y] Vertical distance from window border (in pixels)</source>
         <translation>[GAP_Y] függőleges távolság az ablakkerettől (képpontban)</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1444"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1454"/>
         <source>Desktop</source>
         <translation>Asztal</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1447"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1457"/>
         <source>Desktop 1</source>
         <translation>1. asztal</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1448"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1458"/>
         <source>All Desktops</source>
         <translation>Minden asztal</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1460"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1470"/>
         <source>Location</source>
         <translation>Hely</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1472"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1482"/>
         <source>Width should be larger than the size of window contents,
 otherwise this setting will not have any effect</source>
         <translation>A szélességnek nagyobbnak kell lennie, mint ami az ablak
 tartalmához szükséges. Különben nincs hatással.</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1476"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1486"/>
         <source>Minimum Width</source>
         <translation>Minimális szélesség</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1491"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1501"/>
         <source>Height should be larger than the size of window contents,
 otherwise this setting will not have any effect</source>
         <translation>A magasságnak nagyobbnak kell lennie, mint ami az ablak
 tartalmához szükséges. Különben nincs hatással.</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1493"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1503"/>
         <source>Minimum Height</source>
         <translation>Minimális magasság</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1507"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1517"/>
         <source>Increases the window height by adding empty lines at the end of the Conky config file</source>
         <translation>Az ablak magasságát növeli a Conky beállításfájlhoz adott üres sorokkal</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1508"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1518"/>
         <source>Height Padding</source>
         <translation>Magasság helyköz</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1523"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1533"/>
         <source>Size</source>
         <translation>Méret</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1536"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1546"/>
         <source>Transparency Type</source>
         <translation>Áttetszőség típusa</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1541"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1551"/>
         <source>Opaque</source>
         <translation>Átlátszatlan</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1542"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1552"/>
         <source>Transparent</source>
         <translation>Átlátszó</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1543"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1553"/>
         <source>Pseudo-Transparent</source>
         <translation>Álátlátszó</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1544"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1554"/>
         <source>Semi-Transparent</source>
         <translation>Áttetsző</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1549"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1559"/>
         <source>Opacity (%)</source>
         <translation>Áttetszőség (%)</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1550"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1560"/>
         <source>Window Opacity
 
 0 = Fully Transparent, 100 = Fully Opaque</source>
@@ -341,131 +341,131 @@ tartalmához szükséges. Különben nincs hatással.</translation>
 0 = teljesen átlátszó, 100 = átlátszatlan</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1564"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1574"/>
         <source>Background Color</source>
         <translation>Háttér színe</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1569"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1579"/>
         <source>Choose Color</source>
         <translation>Szín választása</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1589"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1599"/>
         <source>Setting Type to &quot;Transparent&quot; will make the whole window transparent (including any images). Use &quot;Pseudo-Transparent&quot; if you want the images to be opaque.</source>
         <translation>Az &quot;Átlátszó&quot; lehetőség az egész ablakot átlátszóvá teszi, a képeket is. Használja az &quot;Álátlátszó&quot; lehetőséget, ha a képekre nem szeretné alkalmazni.</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1599"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1609"/>
         <source>Setting Type to &quot;Pseudo-Transparent&quot; will make the window transparent but the window will have a shadow. The shadow can be disabled by configuring your window manager.</source>
         <translation>Az &quot;Álátlátszó&quot; lehetőség esetén az ablak átlátszó lesz, de lesz árnyéka. Ha nem szeretne árnyékot, azt az ablakkezelő beállításánál kapcsolhatja ki.</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1610"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1620"/>
         <source>Transparency</source>
         <translation>Áttetszőség</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1621"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1631"/>
         <source>Date Format</source>
         <translation>Dátum formátum</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1624"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1634"/>
         <source>Day</source>
         <translation>Nap</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1626"/>
-        <location filename="../src/conkycustomizedialog.cpp" line="1637"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1636"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1647"/>
         <source>Long</source>
         <translation>Hosszú</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1627"/>
-        <location filename="../src/conkycustomizedialog.cpp" line="1638"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1637"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1648"/>
         <source>Short</source>
         <translation>Rövid</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1628"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1638"/>
         <source>Abbreviated name, e.g. Tu</source>
         <translation>Rövidített név, pl. Sze</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1635"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1645"/>
         <source>Month</source>
         <translation>Hónap</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1639"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1649"/>
         <source>Abbreviated name, e.g. Oct</source>
         <translation>Rövidített név, pl. Okt</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1658"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1668"/>
         <source>Time Format</source>
         <translation>Idő formátum</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1665"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1675"/>
         <source>Format</source>
         <translation>Formátum</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1670"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1680"/>
         <source>12 Hour</source>
         <translation>12 órás</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1671"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1681"/>
         <source>24 Hour</source>
         <translation>24 órás</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="653"/>
-        <location filename="../src/conkycustomizedialog.cpp" line="662"/>
-        <location filename="../src/conkycustomizedialog.cpp" line="671"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="643"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="652"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="661"/>
         <source>auto</source>
         <translation>automatikus</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1686"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1696"/>
         <source>Date &amp;&amp; Time</source>
         <translation>Dátum &amp;&amp; idő</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1699"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1709"/>
         <source>Interface</source>
         <translation>Interfész</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1707"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1717"/>
         <source>WiFi</source>
         <translation>WiFi</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1710"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1720"/>
         <source>WiFi Network</source>
         <translation>WiFi hálózat</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1713"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1723"/>
         <source>LAN</source>
         <translation>LAN</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1716"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1726"/>
         <source>Wired LAN Network</source>
         <translation>Vezetékes helyi hálózat</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1730"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1740"/>
         <source>Network</source>
         <translation>Hálózat</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="2045"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="2061"/>
         <source>Select Background Color</source>
         <translation>Háttérszín választás</translation>
     </message>
@@ -557,222 +557,213 @@ tartalmához szükséges. Különben nincs hatással.</translation>
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../src/mainwindow.cpp" line="58"/>
-        <location filename="../src/mainwindow.cpp" line="934"/>
+        <location filename="../src/mainwindow.cpp" line="57"/>
+        <location filename="../src/mainwindow.cpp" line="778"/>
         <source>MX Conky</source>
         <translation>MX Conky</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="322"/>
+        <location filename="../src/mainwindow.cpp" line="303"/>
         <source>About this application</source>
         <translation>Az alkalmazásról</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="320"/>
+        <location filename="../src/mainwindow.cpp" line="301"/>
         <source>About...</source>
         <translation>Névjegy...</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="327"/>
+        <location filename="../src/mainwindow.cpp" line="308"/>
         <source>Help</source>
         <translation>Súgó</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="342"/>
+        <location filename="../src/mainwindow.cpp" line="323"/>
         <source>Quit application</source>
         <translation>Kilépés az alkalmazásból</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="340"/>
+        <location filename="../src/mainwindow.cpp" line="321"/>
         <source>Close</source>
         <translation>Bezárás</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="230"/>
+        <location filename="../src/mainwindow.cpp" line="211"/>
         <source>Loading Conky configurations...</source>
         <translation>Conky beállítások betöltése...</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="260"/>
+        <location filename="../src/mainwindow.cpp" line="241"/>
         <source>Settings</source>
         <translation>Beállítások</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="262"/>
+        <location filename="../src/mainwindow.cpp" line="243"/>
         <source>Configure conky search paths</source>
         <translation>Conky keresési útvonalak beállítása</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="264"/>
+        <location filename="../src/mainwindow.cpp" line="245"/>
         <source>Refresh</source>
         <translation>Frissítés</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="266"/>
+        <location filename="../src/mainwindow.cpp" line="247"/>
         <source>Refresh conky list</source>
         <translation>Conky lista frissítése</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="268"/>
-        <source>Start All</source>
-        <translation>Összes elindítása</translation>
+        <location filename="../src/mainwindow.cpp" line="249"/>
+        <source>Start Selected</source>
+        <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="270"/>
-        <source>Start all enabled conkies</source>
-        <translation>Az összes bekapcsolt Conky elindítása</translation>
+        <location filename="../src/mainwindow.cpp" line="251"/>
+        <source>Start selected conkies</source>
+        <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="272"/>
+        <location filename="../src/mainwindow.cpp" line="253"/>
         <source>Stop All</source>
         <translation>Összes leállítása</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="274"/>
+        <location filename="../src/mainwindow.cpp" line="255"/>
         <source>Stop all running conkies</source>
         <translation>Az összes futó Conky leállítása</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="948"/>
+        <location filename="../src/mainwindow.cpp" line="792"/>
         <source>MX Conky License</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="999"/>
-        <location filename="../src/mainwindow.cpp" line="1050"/>
+        <location filename="../src/mainwindow.cpp" line="843"/>
+        <location filename="../src/mainwindow.cpp" line="894"/>
         <source>Running</source>
         <translation>Fut</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1001"/>
-        <location filename="../src/mainwindow.cpp" line="1051"/>
+        <location filename="../src/mainwindow.cpp" line="845"/>
+        <location filename="../src/mainwindow.cpp" line="895"/>
         <source>Stopped</source>
         <translation>Leállítva</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="282"/>
+        <location filename="../src/mainwindow.cpp" line="263"/>
         <source>Search conky by name...</source>
         <translation>Conky keresése név alapján...</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="284"/>
+        <location filename="../src/mainwindow.cpp" line="265"/>
         <source>Search conkies by name (Ctrl+F)</source>
         <translation>Conky keresése név alapján (Ctrl+F)</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="329"/>
+        <location filename="../src/mainwindow.cpp" line="310"/>
         <source>Display help</source>
         <translation>Súgó megjelenítése</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="518"/>
-        <location filename="../src/mainwindow.cpp" line="692"/>
+        <location filename="../src/mainwindow.cpp" line="1041"/>
         <source>Copy Conky</source>
         <translation>Conky másolása</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="564"/>
-        <location filename="../src/mainwindow.cpp" line="740"/>
+        <location filename="../src/mainwindow.cpp" line="1089"/>
         <source>Conky Copied</source>
         <translation>Conky másolva</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="565"/>
+        <location filename="../src/mainwindow.cpp" line="1088"/>
         <source>Conky has been copied to your personal folder for editing:
 %1</source>
         <translation>A Conky átmásolva a saját mappájába, további szerkesztéshez:
 %1</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="567"/>
-        <location filename="../src/mainwindow.cpp" line="743"/>
+        <location filename="../src/mainwindow.cpp" line="1065"/>
         <source>Copy Failed</source>
         <translation>Másolás nem sikerült</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="567"/>
-        <location filename="../src/mainwindow.cpp" line="743"/>
+        <location filename="../src/mainwindow.cpp" line="1065"/>
         <source>Failed to copy conky to your personal folder.</source>
         <translation>A Conky másolása a saját mappájába nem sikerült.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="629"/>
+        <location filename="../src/mainwindow.cpp" line="534"/>
         <source>Delete Conky</source>
         <translation>Conky törlése</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="741"/>
+        <location filename="../src/mainwindow.cpp" line="1087"/>
         <source>Conky has been copied to your personal folder for customization:
 %1</source>
         <translation>A Conky átmásolva a saját mappájába, további testreszabáshoz:
 %1</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="256"/>
+        <location filename="../src/mainwindow.cpp" line="237"/>
         <source>Previews</source>
         <translation>Előnézetek</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="258"/>
+        <location filename="../src/mainwindow.cpp" line="239"/>
         <source>Generate preview images for conkies</source>
         <translation>Előnézetek létrehozása a Conkykhoz</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="278"/>
-        <location filename="../src/mainwindow.cpp" line="552"/>
-        <location filename="../src/mainwindow.cpp" line="728"/>
-        <location filename="../src/mainwindow.cpp" line="997"/>
-        <location filename="../src/mainwindow.cpp" line="1049"/>
+        <location filename="../src/mainwindow.cpp" line="259"/>
+        <location filename="../src/mainwindow.cpp" line="841"/>
+        <location filename="../src/mainwindow.cpp" line="893"/>
+        <location filename="../src/mainwindow.cpp" line="1075"/>
         <source>All</source>
         <translation>Összes</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="279"/>
+        <location filename="../src/mainwindow.cpp" line="260"/>
         <source>Filter conkies by running status or location</source>
         <translation>Conkyk szűrése futási állapot vagy hely alapján</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="514"/>
-        <location filename="../src/mainwindow.cpp" line="688"/>
+        <location filename="../src/mainwindow.cpp" line="1037"/>
         <source>Enter a name for the copy:</source>
         <translation>Adja meg a másolat nevét:</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="515"/>
-        <location filename="../src/mainwindow.cpp" line="689"/>
+        <location filename="../src/mainwindow.cpp" line="1038"/>
         <source>In order for you to edit and save a conky, it must first be copied to ~/.conky where you have permission.
 Enter a name for the copy.</source>
         <translation>Egy Conky szerkesztéséhez és mentéséhez, azt először a ~/.conky könyvtárába kell másolni, a jogosultságok miatt.
 Adjon meg egy nevet a másolatnak.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="532"/>
-        <location filename="../src/mainwindow.cpp" line="708"/>
+        <location filename="../src/mainwindow.cpp" line="1053"/>
         <source>Directory Exists</source>
         <translation>A könyvtár létezik.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="533"/>
-        <location filename="../src/mainwindow.cpp" line="709"/>
+        <location filename="../src/mainwindow.cpp" line="1054"/>
         <source>A conky with the name '%1' already exists in your personal folder.
 Do you want to overwrite it?</source>
         <translation>Már létezik Conky &apos;%1&apos; néven a saját mappájában.
 Kívánja felülírni?</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="600"/>
+        <location filename="../src/mainwindow.cpp" line="505"/>
         <source>Edit Conky</source>
         <translation>Conky szerkesztése</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="601"/>
+        <location filename="../src/mainwindow.cpp" line="506"/>
         <source>This conky file is read-only and requires administrator privileges to edit.
 Do you want to edit it with elevated privileges?</source>
         <translation>Ez a Conky csak olvasható és a szerkesztéshez adminisztrátor jog szükséges.
 Kívánja megemelt jogosultságokkal szerkeszteni?</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="630"/>
+        <location filename="../src/mainwindow.cpp" line="535"/>
         <source>Are you sure you want to delete the conky file:
 %1
 
@@ -783,89 +774,89 @@ This action cannot be undone.</source>
 Ez nem vonható vissza.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="662"/>
+        <location filename="../src/mainwindow.cpp" line="573"/>
         <source>Delete Failed</source>
         <translation>Törlés nem sikerült</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="662"/>
+        <location filename="../src/mainwindow.cpp" line="573"/>
         <source>Failed to delete conky file:
 %1</source>
         <translation>A Conkyfájl törlése nem sikerült.
 %1</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="750"/>
+        <location filename="../src/mainwindow.cpp" line="602"/>
         <source>Customize Conky</source>
         <translation>Conky testreszabása</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="751"/>
+        <location filename="../src/mainwindow.cpp" line="603"/>
         <source>This conky file is read-only and requires administrator privileges to customize.
 Do you want to customize it with elevated privileges?</source>
         <translation>Ez a Conkyfájl csak olvasható és a testreszabáshoz adminisztrátor jog szükséges.
 Kívánja megemelt jogosultságokkal módosítani?</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="923"/>
+        <location filename="../src/mainwindow.cpp" line="767"/>
         <source>Editor Error</source>
         <translation>Szerkesztő hiba</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="923"/>
+        <location filename="../src/mainwindow.cpp" line="767"/>
         <source>Cannot start editor for file: %1</source>
         <translation>A szerkesztő elindítása nem sikerült a fájlhoz: %1</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="933"/>
+        <location filename="../src/mainwindow.cpp" line="777"/>
         <source>About MX Conky</source>
         <translation>Az MX Conkyról</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="935"/>
+        <location filename="../src/mainwindow.cpp" line="779"/>
         <source>Version: </source>
         <translation>Verzió:</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="936"/>
+        <location filename="../src/mainwindow.cpp" line="780"/>
         <source>GUI program for configuring Conky in MX Linux</source>
         <translation>Grafikus alkalmazás a Conky beállítására MX Linuxban</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="939"/>
+        <location filename="../src/mainwindow.cpp" line="783"/>
         <source>Copyright (c) MX Linux</source>
         <translation>Copyright (c) MX Linux</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="940"/>
+        <location filename="../src/mainwindow.cpp" line="784"/>
         <source>License</source>
         <translation>Licenc</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="941"/>
-        <location filename="../src/mainwindow.cpp" line="951"/>
+        <location filename="../src/mainwindow.cpp" line="785"/>
+        <location filename="../src/mainwindow.cpp" line="795"/>
         <source>Changelog</source>
         <translation>Változások listája</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="942"/>
+        <location filename="../src/mainwindow.cpp" line="786"/>
         <source>Cancel</source>
         <translation>Mégsem</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="136"/>
-        <location filename="../src/mainwindow.cpp" line="962"/>
+        <location filename="../src/mainwindow.cpp" line="129"/>
+        <location filename="../src/mainwindow.cpp" line="806"/>
         <source>&amp;Close</source>
         <translation>&amp;Bezárás</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="979"/>
+        <location filename="../src/mainwindow.cpp" line="823"/>
         <source>MX Conky Help</source>
         <translation>MX Conky súgó</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1003"/>
-        <location filename="../src/mainwindow.cpp" line="1052"/>
+        <location filename="../src/mainwindow.cpp" line="847"/>
+        <location filename="../src/mainwindow.cpp" line="896"/>
         <source>Autostart</source>
         <translation>Automatikus indítás</translation>
     </message>
@@ -873,114 +864,124 @@ Kívánja megemelt jogosultságokkal módosítani?</translation>
 <context>
     <name>PreviewDialog</name>
     <message>
-        <location filename="../src/previewdialog.cpp" line="50"/>
+        <location filename="../src/previewdialog.cpp" line="51"/>
         <source>Generate Preview</source>
         <translation>Előnézet létrehozása</translation>
     </message>
     <message>
-        <location filename="../src/previewdialog.cpp" line="75"/>
+        <location filename="../src/previewdialog.cpp" line="76"/>
         <source>Generate preview images for</source>
         <translation>Előnézet képek létrehozása:</translation>
     </message>
     <message>
-        <location filename="../src/previewdialog.cpp" line="78"/>
+        <location filename="../src/previewdialog.cpp" line="79"/>
         <source>Selected Widget</source>
         <translation>Kijelölt kisalkalmazás</translation>
     </message>
     <message>
-        <location filename="../src/previewdialog.cpp" line="79"/>
+        <location filename="../src/previewdialog.cpp" line="80"/>
         <source>All Widgets with Missing Previews</source>
         <translation>Minden kisalkalmazás aminek nincs előnézete</translation>
     </message>
     <message>
-        <location filename="../src/previewdialog.cpp" line="80"/>
+        <location filename="../src/previewdialog.cpp" line="81"/>
         <source>All Widgets (Overwrite Existing Images)</source>
         <translation>Minden kisalkalmazás (meglévő képek felülírása)</translation>
     </message>
     <message>
-        <location filename="../src/previewdialog.cpp" line="85"/>
+        <location filename="../src/previewdialog.cpp" line="86"/>
         <source>No conky is currently selected</source>
         <translation>Jelenleg nincs Conky kiválasztva</translation>
     </message>
     <message>
-        <location filename="../src/previewdialog.cpp" line="93"/>
+        <location filename="../src/previewdialog.cpp" line="94"/>
         <source>Options</source>
         <translation>Beállítások</translation>
     </message>
     <message>
-        <location filename="../src/previewdialog.cpp" line="96"/>
+        <location filename="../src/previewdialog.cpp" line="97"/>
         <source>High quality images (PNG)</source>
         <translation>Jó minőségű képek  (PNG)</translation>
     </message>
     <message>
-        <location filename="../src/previewdialog.cpp" line="97"/>
+        <location filename="../src/previewdialog.cpp" line="98"/>
         <source>Generate preview images in PNG format instead of JPEG</source>
         <translation>Előnézeti képek létrehozása PNG formátumban, JPG helyett.</translation>
     </message>
     <message>
-        <location filename="../src/previewdialog.cpp" line="114"/>
+        <location filename="../src/previewdialog.cpp" line="115"/>
         <source>OK</source>
         <translation>OK</translation>
     </message>
     <message>
-        <location filename="../src/previewdialog.cpp" line="118"/>
+        <location filename="../src/previewdialog.cpp" line="119"/>
         <source>Cancel</source>
         <translation>Kilépés</translation>
     </message>
     <message>
-        <location filename="../src/previewdialog.cpp" line="145"/>
+        <location filename="../src/previewdialog.cpp" line="146"/>
         <source>No Items</source>
         <translation>Nincsenek elemek</translation>
     </message>
     <message>
-        <location filename="../src/previewdialog.cpp" line="145"/>
+        <location filename="../src/previewdialog.cpp" line="146"/>
         <source>No conky widgets need preview generation.</source>
         <translation>Egyetlen Conky kisalkalmazáshoz szem szükséges létrehozni.</translation>
     </message>
     <message>
-        <location filename="../src/previewdialog.cpp" line="151"/>
+        <location filename="../src/previewdialog.cpp" line="152"/>
         <source>Missing Dependency</source>
         <translation>Hiányzó függőség</translation>
     </message>
     <message>
-        <location filename="../src/previewdialog.cpp" line="152"/>
+        <location filename="../src/previewdialog.cpp" line="153"/>
         <source>Preview generation requires the GraphicsMagick compatibility tools.
 Please install the graphicsmagick-imagemagick-compat package to enable this feature.</source>
         <translation>Az előnézet létrehozásához a GraphicsMagick kompatibilitási csomag szükséges.
 Telepítse a graphicsmagick-imagemagick-compat csomagot a funkció engedélyezéséhez.</translation>
     </message>
     <message>
-        <location filename="../src/previewdialog.cpp" line="163"/>
+        <location filename="../src/previewdialog.cpp" line="164"/>
         <source>Starting preview generation...</source>
         <translation>Előnézetek létrehozása...</translation>
     </message>
     <message>
-        <location filename="../src/previewdialog.cpp" line="167"/>
+        <location filename="../src/previewdialog.cpp" line="168"/>
         <source>Stop</source>
         <translation>Leállítás</translation>
     </message>
     <message>
-        <location filename="../src/previewdialog.cpp" line="206"/>
+        <location filename="../src/previewdialog.cpp" line="207"/>
         <source>Generating preview for: %1</source>
         <translation>Előnézet létrehozása: %1</translation>
     </message>
     <message>
-        <location filename="../src/previewdialog.cpp" line="426"/>
+        <location filename="../src/previewdialog.cpp" line="243"/>
+        <source>Unsupported Display Server</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/previewdialog.cpp" line="244"/>
+        <source>Preview generation requires X11 and is not supported on Wayland.</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/previewdialog.cpp" line="437"/>
         <source>Preview generation complete! Generated %1 previews.</source>
         <translation>Előnézetek létrehozva. %1 előnézeti kép készült.</translation>
     </message>
     <message>
-        <location filename="../src/previewdialog.cpp" line="430"/>
+        <location filename="../src/previewdialog.cpp" line="441"/>
         <source>Close</source>
         <translation>Bezárás</translation>
     </message>
     <message>
-        <location filename="../src/previewdialog.cpp" line="433"/>
+        <location filename="../src/previewdialog.cpp" line="444"/>
         <source>Preview Generation Complete</source>
         <translation>Az előnézetek létrehozása kész</translation>
     </message>
     <message>
-        <location filename="../src/previewdialog.cpp" line="434"/>
+        <location filename="../src/previewdialog.cpp" line="445"/>
         <source>Successfully generated %1 preview images.</source>
         <translation>%1 előnézeti kép sikeresen létrehozva.</translation>
     </message>
@@ -1003,7 +1004,7 @@ Telepítse a graphicsmagick-imagemagick-compat csomagot a funkció engedélyezé
         <translation>Egyszerű felhasználóként kell futtatnia ezt a programot</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="163"/>
+        <location filename="../src/mainwindow.cpp" line="156"/>
         <source>Could not load %1</source>
         <translation type="unfinished"/>
     </message>

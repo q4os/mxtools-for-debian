@@ -1,5 +1,5 @@
 /**********************************************************************
- * Copyright (C) 2017-2025 MX Authors
+ * Copyright (C) 2017-2026 MX Authors
  *
  * Authors: Adrian
  *          MX Linux <http://mxlinux.org>
@@ -190,13 +190,15 @@ QStringList SnapModel::checkedPackages() const
 
 void SnapModel::setAllChecked(bool checked)
 {
+    // Same beginResetModel()/endResetModel() treatment as PackageModel/FlatpakModel's
+    // setAllChecked() -- one dataChanged() over every row is measurably slower than a
+    // clean reset when a dynamicSortFilter proxy sits on top.
+    beginResetModel();
     Qt::CheckState state = checked ? Qt::Checked : Qt::Unchecked;
     for (int i = 0; i < m_snaps.size(); ++i) {
         m_snaps[i].checkState = state;
     }
-    if (!m_snaps.isEmpty()) {
-        emit dataChanged(index(0, SnapCol::Check), index(m_snaps.size() - 1, SnapCol::Check), {Qt::CheckStateRole});
-    }
+    endResetModel();
 }
 
 const SnapData *SnapModel::snapAt(int row) const

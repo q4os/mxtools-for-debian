@@ -1,0 +1,43 @@
+verify-iso-sig (2026.08.04.1302) stable; urgency=medium
+
+  * Release
+
+ -- Devs <devteam@localdomain>  Mon, 31 Aug 2026 17:00:21 +0200
+
+verify-iso-sig (2026.08.04) mx; urgency=medium
+
+  * Make GUI verification interruptible (AdrianTM).
+  * Fix progress bar not animating (AdrianTM).
+  * Infer checksum-listing hash algorithm from digest length (AdrianTM).
+  * Recognize more algorithms/tags/digest lengths.
+  * Accept an ISO plus its checksum/signature files as explicit
+    arguments (two or three files), from the command line, a file
+    manager's "Open With" right-click menu, or drag-and-drop.
+  * Manage Trusted Keys offers "Import from File" directly when no
+    keys are saved yet.
+
+ -- fehlix <fehlix@mxlinux.org>  Thu, 20 Aug 2026 12:08:38 -0400
+
+verify-iso-sig (2026.08.03) mx; urgency=medium
+
+  * Add help button.
+  * Use "X-MX-Live" category in .desktop file.
+  * Reorder buttons.
+  * Enable run-once.
+  * Disable running as root.
+
+ -- fehlix <fehlix@mxlinux.org>  Sat, 15 Aug 2026 17:47:51 -0400
+
+verify-iso-sig (2026.08.02) mx; urgency=medium
+
+  * Add "Nothing to verify" and "Key not trusted" results.
+  * Reword expired-key and unrecognized-key messages.
+  * Adjust picker intro text.
+
+ -- fehlix <fehlix@mxlinux.org>  Thu, 13 Aug 2026 20:10:31 -0400
+
+verify-iso-sig (2026.08.01) mx; urgency=medium
+
+  * Initial commit
+
+ -- fehlix <fehlix@mxlinux.org>  Tue, 11 Aug 2026 19:56:42 -0400

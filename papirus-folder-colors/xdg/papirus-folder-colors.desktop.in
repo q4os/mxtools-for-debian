@@ -1,0 +1,12 @@
+[Desktop Entry]
+Encoding=UTF-8
+# The desktop entry name will be shown within the menu
+Name=Papirus Folder Colors
+# The desktop entry comment will be shown within the menu
+Comment=Create a papirus icon theme with different colored folders
+Exec=papirus-folder-colors
+Terminal=false
+Type=Application
+Icon=papirus-folder-colors
+Categories=Settings;MX-Setup;
+NoDisplay=false

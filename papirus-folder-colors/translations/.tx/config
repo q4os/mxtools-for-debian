@@ -1,0 +1,9 @@
+[main]
+host = https://www.transifex.com
+
+[o:anticapitalista:p:antix-development:r:papirus-folder-colors]
+file_filter = po/papirus-folder-colors_<lang>.po
+source_file = papirus-folder-colors.pot
+source_lang = en
+type = po
+minimum_perc = 25

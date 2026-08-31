@@ -12,8 +12,13 @@ public:
     // Get formatted free space string for display
     [[nodiscard]] static QString getFreeSpaceString(const QString &path);
 
-    // Check if directory is on a supported partition type
+    // Check whether a directory can host the snapshot work dir. The filesystem
+    // must be valid, ready, writable, and pass a small POSIX capability probe.
     [[nodiscard]] static bool isOnSupportedPartition(const QString &dir);
+
+    // Filesystems with a known maximum file size incompatible with ISO and
+    // squashfs artifacts. Other filesystem types are assessed by the probe.
+    [[nodiscard]] static bool isKnownIncompatibleFilesystemType(const QString &type);
 
     // Return directory with larger free space between two options
     [[nodiscard]] static QString largerFreeSpace(const QString &dir1, const QString &dir2);
@@ -22,6 +27,7 @@ public:
     [[nodiscard]] static QString largerFreeSpace(const QString &dir1, const QString &dir2, const QString &dir3);
 
 private:
-    // Filesystems lacking POSIX permissions/ownership support
-    static const QSet<QString> unsupportedPartitions;
+    [[nodiscard]] static bool supportsWorkDirectory(const QString &dir);
+
+    static const QSet<QString> incompatiblePartitions;
 };

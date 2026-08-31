@@ -863,10 +863,8 @@ bool ConkyCustomizeDialog::writeFileWithElevation(const QString &fileName, const
     if (elevationTool.isEmpty()) {
         elevationTool = QStringLiteral("sudo");
     }
-    QString command = QString("%1 cp '%2' '%3'").arg(elevationTool, tempFileName, fileName);
-
     QProcess process;
-    process.start("sh", QStringList() << "-c" << command);
+    process.start(elevationTool, { "cp", tempFileName, fileName });
     process.waitForFinished();
 
     bool success = (process.exitCode() == 0);
@@ -891,10 +889,8 @@ bool ConkyCustomizeDialog::copyFileWithElevation(const QString &sourceFile, cons
     if (elevationTool.isEmpty()) {
         elevationTool = QStringLiteral("sudo");
     }
-    QString command = QString("%1 cp '%2' '%3'").arg(elevationTool, sourceFile, destFile);
-
     QProcess process;
-    process.start("sh", QStringList() << "-c" << command);
+    process.start(elevationTool, { "cp", sourceFile, destFile });
     process.waitForFinished();
 
     bool success = (process.exitCode() == 0);
@@ -916,10 +912,8 @@ bool ConkyCustomizeDialog::removeFileWithElevation(const QString &fileName)
     if (elevationTool.isEmpty()) {
         elevationTool = QStringLiteral("sudo");
     }
-    QString command = QString("%1 rm '%2'").arg(elevationTool, fileName);
-
     QProcess process;
-    process.start("sh", QStringList() << "-c" << command);
+    process.start(elevationTool, { "rm", fileName });
     process.waitForFinished();
 
     bool success = (process.exitCode() == 0);

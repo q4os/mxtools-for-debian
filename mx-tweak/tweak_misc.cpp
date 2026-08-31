@@ -36,6 +36,7 @@ TweakMisc::TweakMisc(Ui::Tweak *ui, bool verbose, QObject *parent) noexcept
     connect(ui->checkMiscInstallRecommends, &QCheckBox::clicked, this, &TweakMisc::checkMiscInstallRecommends_clicked);
     connect(ui->checkMiscLiqKernelUpdates, &QCheckBox::clicked, this, &TweakMisc::checkMiscLiqKernelUpdates_clicked);
     connect(ui->checkMiscDebianKernelUpdates, &QCheckBox::clicked, this, &TweakMisc::checkMiscDebianKernelUpdates_clicked);
+    connect(ui->checkMiscSiductionKernelUpdates, &QCheckBox::clicked, this, &TweakMisc::checkMiscSiductionKernelUpdates_clicked);
     connect(ui->checkMiscIntelDriver, &QCheckBox::clicked, this, &TweakMisc::checkMiscIntelDriver_clicked);
     connect(ui->checkMiscTearfreeAMD, &QCheckBox::clicked, this, &TweakMisc::checkMiscTearfreeAMD_clicked);
     connect(ui->checkMiscTearfreeRadeon, &QCheckBox::clicked, this, &TweakMisc::checkMiscTearfreeRadeon_clicked);
@@ -184,6 +185,7 @@ void TweakMisc::setup() noexcept
     }
 
     // setup kernel auto updates
+    //debian, liquorix, and siduction
 
     if (runCmd(u"LC_ALL=C dpkg --status linux-image-amd64 linux-image-686 linux-image-686-pae 2>/dev/null |grep 'ok installed'"_s).output.isEmpty()){
         ui->checkMiscDebianKernelUpdates->setChecked(false);
@@ -197,6 +199,12 @@ void TweakMisc::setup() noexcept
     } else {
         ui->checkMiscLiqKernelUpdates->setChecked(true);
     }
+    if (runCmd(u"LC_ALL=C dpkg --status linux-image-siduction-amd64 2>/dev/null |grep 'ok installed'"_s).output.isEmpty()){
+        ui->checkMiscSiductionKernelUpdates->setChecked(false);
+        ui->checkMiscSiductionKernelUpdates->hide();
+    } else {
+        ui->checkMiscSiductionKernelUpdates->setChecked(true);
+    }
     QString autoupdate = runCmd(u"apt-mark showhold"_s).output;
     if (autoupdate.contains("linux-image-686"_L1) || autoupdate.contains("linux-image-amd64"_L1)){
         ui->checkMiscDebianKernelUpdates->setChecked(false);
@@ -205,8 +213,12 @@ void TweakMisc::setup() noexcept
     if (autoupdate.contains("linux-image-liquorix-amd64"_L1)){
         ui->checkMiscLiqKernelUpdates->setChecked(false);
     }
+    if (autoupdate.contains("linux-image-siduction-amd64"_L1)){
+        ui->checkMiscSiductionKernelUpdates->setChecked(false);
+    }
     flags.updateKernelDebian = false;
     flags.updateKernelLiquorix = false;
+    flags.updateKernelSiduction = false;
 
     // hostname
     ui->checkMiscHostName->setChecked(false);
@@ -309,6 +321,7 @@ void TweakMisc::pushMiscApply_clicked() noexcept
     QString recommends_option;
     QString debian_kernel_updates_option;
     QString liq_kernel_updates_option;
+    QString siduction_kernel_updates_option;
     QString DESKTOP = runCmd(u"echo $XDG_SESSION_DESKTOP"_s).output;
     QString home_path = QDir::homePath();
     ui->pushMiscApply->setEnabled(false);
@@ -445,11 +458,14 @@ void TweakMisc::pushMiscApply_clicked() noexcept
     }
 
     // bluetooth battery info
+    QString bluetooth_battery_option;
+    QString bluetooth_battery_param;
     if (flags.bluetoothBattery){
+        bluetooth_battery_option = "bluetooth_battery";
         if (ui->checkMiscBluetoothBattery->isChecked()){
-            runCmd(u"pkexec /usr/lib/mx-tweak/mx-tweak-lib.sh bluetooth_battery true"_s);
+            bluetooth_battery_param = "true";
         } else {
-            runCmd(u"pkexec /usr/lib/mx-tweak/mx-tweak-lib.sh bluetooth_battery false"_s);
+            bluetooth_battery_param = "false";
         }
     }
 
@@ -504,43 +520,75 @@ void TweakMisc::pushMiscApply_clicked() noexcept
         }
     }
 
+    // siduction kernel updates
+    if (flags.updateKernelSiduction){
+        if (ui->checkMiscSiductionKernelUpdates->isChecked()){
+            siduction_kernel_updates_option = "unhold_siduction_kernel_updates"_L1;
+        } else {
+            siduction_kernel_updates_option = "hold_siduction_kernel_updates"_L1;
+        }
+    }
+
     // hostname setting
     // if name doesn't validate, don't make any changes to any options, and don't reset gui.
+    QString hostname_option;
+    QString hostname_param;
     if (ui->checkMiscHostName->isChecked()){
         if (validateHostName(ui->textMiscHostName->text())){
-            runProc(u"pkexec"_s, {u"/usr/lib/mx-tweak/mx-tweak-lib.sh"_s,
-                u"hostname"_s, ui->textMiscHostName->text()});
+            hostname_option = "hostname";
+            hostname_param = ui->textMiscHostName->text();
+            //runProc(u"pkexec"_s, {u"/usr/lib/mx-tweak/mx-tweak-lib.sh"_s,u"hostname"_s, ui->textMiscHostName->text()});
         } else {
             return;
         }
     }
     // display manager change
+    QString displaymanager_option;
+    QString displaymanager_param;
     if (ui->checkMiscDisplayManager->isChecked()){
         // don't do anything if selection is still default
         if (ui->comboBoxDisplayManager->currentText() != currentDisplayManager) {
-            runProc(u"pkexec"_s, {u"/usr/lib/mx-tweak/mx-tweak-lib.sh"_s,
-                u"displaymanager"_s, ui->comboBoxDisplayManager->currentText()});
+            //runProc(u"pkexec"_s, {u"/usr/lib/mx-tweak/mx-tweak-lib.sh"_s,
+            //    u"displaymanager"_s, ui->comboBoxDisplayManager->currentText()});
+            displaymanager_option = "displaymanager";
+            displaymanager_param = ui->comboBoxDisplayManager->currentText();
         }
         ui->checkMiscDisplayManager->setChecked(false);
     }
 
     // init system change
+    QString init_option;
+    QString init_param;
     if (ui->checkboxChangeInitSystem->isChecked()){
-        runProc(u"pkexec"_s, {u"/usr/lib/mx-tweak/mx-tweak-lib.sh"_s,u"initchange"_s,ui->comboxBoxInitSystems->currentText()});
+        //runProc(u"pkexec"_s, {u"/usr/lib/mx-tweak/mx-tweak-lib.sh"_s,u"initchange"_s,ui->comboxBoxInitSystems->currentText()});
+        init_option = "initchange";
+        init_param = ui->comboxBoxInitSystems->currentText();
         ui->checkboxChangeInitSystem->setChecked(false);
     }
 
     // kvm_early_switch
+    QString kvm_early_option;
+    QString kvm_param1;
+    QString kvm_param2;
     if (flags.kvm) {
-        runProc(u"pkexec"_s, {u"/usr/lib/mx-tweak/mx-tweak-lib.sh"_s, u"kvm_early_switch"_s,
-            (ui->checkMiscKVMVirtLoad->isChecked() ? u"on"_s : u"off"_s), kvmConfFile});
+        //runProc(u"pkexec"_s, {u"/usr/lib/mx-tweak/mx-tweak-lib.sh"_s, u"kvm_early_switch"_s,
+          //  (ui->checkMiscKVMVirtLoad->isChecked() ? u"on"_s : u"off"_s), kvmConfFile});
+        kvm_early_option = "kvm_early_switch";
+        kvm_param1 =(ui->checkMiscKVMVirtLoad->isChecked() ? u"on"_s : u"off"_s);
+        kvm_param2 =kvmConfFile;
     }
 
     // check options
-    qDebug() << "options list" << udisks_option << sudo_override_option << user_name_space_override_option << intel_option << lightdm_option << amd_option << radeon_option << bluetooth_option << recommends_option << debian_kernel_updates_option << liq_kernel_updates_option;
+    qDebug() << "options list" << udisks_option << sudo_override_option << user_name_space_override_option << intel_option << lightdm_option << amd_option << radeon_option << bluetooth_option << recommends_option << debian_kernel_updates_option << liq_kernel_updates_option << siduction_kernel_updates_option << hostname_option << hostname_param
+             << displaymanager_option << displaymanager_param << init_option << init_param << kvm_early_option << kvm_param1 << kvm_param2 << bluetooth_battery_option << bluetooth_battery_param;
     // checkbox options
-    if (! udisks_option.isEmpty() || ! sudo_override_option.isEmpty() || ! user_name_space_override_option.isEmpty() || ! intel_option.isEmpty() || ! lightdm_option.isEmpty() || ! amd_option.isEmpty() || ! radeon_option.isEmpty() || !bluetooth_option.isEmpty() || !recommends_option.isEmpty() || !debian_kernel_updates_option.isEmpty() || !liq_kernel_updates_option.isEmpty()){
-        runCmd("pkexec /usr/lib/mx-tweak/mx-tweak-lib.sh " + udisks_option + ' ' + sudo_override_option + ' ' + user_name_space_override_option + ' ' + intel_option + ' ' + amd_option + ' ' + radeon_option + ' ' + bluetooth_option + ' ' + recommends_option + ' ' + lightdm_option + ' ' + debian_kernel_updates_option + ' ' + liq_kernel_updates_option);
+    if (! udisks_option.isEmpty() || ! sudo_override_option.isEmpty() || ! user_name_space_override_option.isEmpty() || ! intel_option.isEmpty() || ! lightdm_option.isEmpty() || ! amd_option.isEmpty() || ! radeon_option.isEmpty() || !bluetooth_option.isEmpty() || !recommends_option.isEmpty() || !hostname_option.isEmpty()
+        || !debian_kernel_updates_option.isEmpty() || !liq_kernel_updates_option.isEmpty() || !siduction_kernel_updates_option.isEmpty() || !displaymanager_option.isEmpty() || !init_option.isEmpty() || !kvm_early_option.isEmpty() || !bluetooth_battery_option.isEmpty())
+    {
+        runCmd("pkexec /usr/lib/mx-tweak/mx-tweak-lib.sh " + udisks_option + ' ' + sudo_override_option + ' ' + user_name_space_override_option + ' ' + intel_option + ' ' + amd_option + ' ' + radeon_option + ' ' + bluetooth_option + ' ' + recommends_option + ' ' + lightdm_option + ' ' + debian_kernel_updates_option + ' ' + liq_kernel_updates_option + ' '
+               + siduction_kernel_updates_option + ' ' + hostname_option + ' ' + hostname_param
+               + ' ' + displaymanager_option + ' ' + displaymanager_param + ' ' + init_option + ' ' + init_param + ' ' + kvm_early_option + ' ' + kvm_param1 + ' ' + kvm_param2
+               + ' ' + bluetooth_battery_option + ' ' + bluetooth_battery_param);
     }
     // reset gui
     setup();
@@ -578,6 +626,12 @@ void TweakMisc::checkMiscInstallRecommends_clicked() noexcept
 void TweakMisc::checkMiscLiqKernelUpdates_clicked() noexcept
 {
     flags.updateKernelLiquorix = true;
+    ui->pushMiscApply->setEnabled(true);
+}
+
+void TweakMisc::checkMiscSiductionKernelUpdates_clicked() noexcept
+{
+    flags.updateKernelSiduction = true;
     ui->pushMiscApply->setEnabled(true);
 }
 void TweakMisc::checkMiscDebianKernelUpdates_clicked() noexcept

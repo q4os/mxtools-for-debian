@@ -15,7 +15,7 @@ Name[hu]=Feladat ütemező
 Name[it]=Pianificatore lavoro
 Name[ja]=スケジュール管理
 Name[nb]=Planlegging av jobber
-Name[nl]=Name=Takenschema Maker
+Name[nl]=Takenschema Maker
 Name[pl]=Harmonogram zadań
 Name[pt]=Agendador de Tarefas
 Name[pt_BR]=Agendador de Tarefas
@@ -53,5 +53,5 @@ Comment[tr]=Arka uç olarak crontab kullanan iş planlama yardımcı programı
 Comment=Job scheduling utility which uses crontab as the backend
 Exec=job-scheduler
 Icon=job-scheduler
-Categories=System;MX-Maintenance
+Categories=System;X-MX-Maintenance
 Type=Application

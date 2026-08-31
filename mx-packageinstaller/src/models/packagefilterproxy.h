@@ -1,5 +1,5 @@
 /**********************************************************************
- * Copyright (C) 2017-2025 MX Authors
+ * Copyright (C) 2017-2026 MX Authors
  *
  * Authors: Adrian
  *          MX Linux <http://mxlinux.org>
@@ -51,6 +51,7 @@ private:
     [[nodiscard]] bool matchesSearch(const QString &name, const QString &description) const;
     [[nodiscard]] bool matchesStatus(int status) const;
     [[nodiscard]] static bool isLibraryPackage(const QString &name);
+    void invalidateRowFilter();
 
     QString m_searchText;
     int m_statusFilter = 0;

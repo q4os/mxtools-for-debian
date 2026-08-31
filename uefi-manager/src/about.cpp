@@ -1,7 +1,7 @@
 /**********************************************************************
  *
  **********************************************************************
- * Copyright (C) 2024-2025 MX Authors
+ * Copyright (C) 2024-2026 MX Authors
  *
  * Authors: Adrian <adrian@mxlinux.org>
  *          MX Linux <http://mxlinux.org>
@@ -30,13 +30,14 @@
 #include <QTextEdit>
 #include <QVBoxLayout>
 
-#include "common.h"
 #include <pwd.h>
 #include <unistd.h>
 
 // Display doc as normal user when run as root
 void displayDoc(const QString &url, const QString &title)
 {
+    // Capture HOME before it is temporarily changed below for theming, so it can be restored afterwards.
+    const QByteArray savedHome = qgetenv("HOME");
     bool startedAsRoot = false;
     QString logName;
     if (getuid() == 0) {
@@ -87,7 +88,7 @@ void displayDoc(const QString &url, const QString &title)
         }
     }
     if (startedAsRoot) {
-        qputenv("HOME", STARTING_HOME.toUtf8());
+        qputenv("HOME", savedHome);
     }
 }
 

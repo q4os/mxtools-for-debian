@@ -266,17 +266,24 @@ void TestSnapModel::testSetAllCheckedSignal()
 
     QSignalSpy checkSpy(&model, &SnapModel::checkStateChanged);
     QSignalSpy dataSpy(&model, &QAbstractItemModel::dataChanged);
+    QSignalSpy resetSpy(&model, &QAbstractItemModel::modelReset);
     QVERIFY(checkSpy.isValid());
     QVERIFY(dataSpy.isValid());
+    QVERIFY(resetSpy.isValid());
 
     model.setAllChecked(true);
 
+    // setAllChecked() uses beginResetModel()/endResetModel() rather than a
+    // whole-range dataChanged(): a dynamicSortFilter proxy re-filters/re-sorts
+    // incrementally on a big dataChanged, which is measurably slower on large
+    // lists than one clean reset (see PackageModel::updateInstalledVersions()).
     QCOMPARE(checkSpy.count(), 0);
-    QCOMPARE(dataSpy.count(), 1);
-    const QList<QVariant> args = dataSpy.takeFirst();
-    QCOMPARE(args.at(0).toModelIndex(), model.index(0, SnapCol::Check));
-    QCOMPARE(args.at(1).toModelIndex(), model.index(model.rowCount() - 1, SnapCol::Check));
-    QCOMPARE(args.at(2).value<QList<int>>(), QList<int>({Qt::CheckStateRole}));
+    QCOMPARE(dataSpy.count(), 0);
+    QCOMPARE(resetSpy.count(), 1);
+    for (int i = 0; i < model.rowCount(); ++i) {
+        QCOMPARE(model.data(model.index(i, SnapCol::Check), Qt::CheckStateRole).toInt(),
+                 static_cast<int>(Qt::Checked));
+    }
 }
 
 void TestSnapModel::testCheckedPackages()

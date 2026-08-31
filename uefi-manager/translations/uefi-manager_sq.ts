@@ -2,12 +2,12 @@
 <context>
     <name>Cmd</name>
     <message>
-        <location filename="../src/cmd.cpp" line="174"/>
+        <location filename="../src/cmd.cpp" line="173"/>
         <source>Administrator Access Required</source>
         <translation>Lyp Hyrje Përgjegjësi</translation>
     </message>
     <message>
-        <location filename="../src/cmd.cpp" line="175"/>
+        <location filename="../src/cmd.cpp" line="174"/>
         <source>This operation requires administrator privileges.</source>
         <translation>Ky veprim lyp privilegje përgjegjësi</translation>
     </message>
@@ -136,7 +136,7 @@
     <message>
         <location filename="../src/mainwindow.ui" line="465"/>
         <location filename="../src/mainwindow.cpp" line="954"/>
-        <location filename="../src/mainwindow.cpp" line="1777"/>
+        <location filename="../src/mainwindow.cpp" line="1714"/>
         <source>Next</source>
         <translation>Pasuesi</translation>
     </message>
@@ -146,15 +146,15 @@
         <translation>Mbrapsht</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="780"/>
+        <location filename="../src/mainwindow.cpp" line="778"/>
         <location filename="../src/mainwindow.cpp" line="978"/>
-        <location filename="../src/mainwindow.cpp" line="1583"/>
-        <location filename="../src/mainwindow.cpp" line="1593"/>
+        <location filename="../src/mainwindow.cpp" line="1527"/>
+        <location filename="../src/mainwindow.cpp" line="1537"/>
         <source>UEFI Installer</source>
         <translation>Instalues UEFI</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="781"/>
+        <location filename="../src/mainwindow.cpp" line="779"/>
         <source>A recent frugal install has been detected. Do you wish to add a UEFI entry direct to your UEFI system menu?</source>
         <translation>Është pikuar një instalim i përkorë i freskët. Doni të shtohet një zë UEFI drejt e te menuja UEFI e sistemit tuaj?</translation>
     </message>
@@ -179,92 +179,84 @@
         <translation>S’u hap dot kontejner LUKS %1</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1584"/>
+        <location filename="../src/mainwindow.cpp" line="1528"/>
         <source>Are you sure this is the MX or antiX Frugal installation location?
 Missing mandatory files in directory: </source>
         <translation>Jeni i sigurt se kjo është vendndodhja e instalimit të Përkorë MX ose antiX?
 Në drejtori mungojnë kartela të detyrueshme: </translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1652"/>
+        <location filename="../src/mainwindow.cpp" line="1592"/>
         <source>Not enough space on the EFI System Partition to copy the kernel and initrd files.</source>
         <translation>Hapësirë e pamjaftueshme në Pjesë EFI Sistemi për kopjim të kartelave kernel dhe initrd.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1714"/>
+        <location filename="../src/mainwindow.cpp" line="1651"/>
         <source>All fields are required</source>
         <translation>Janë të domosdoshme krejt fushat</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1737"/>
+        <location filename="../src/mainwindow.cpp" line="1674"/>
         <source>Could not select ESP</source>
         <translation>S’u përzgjodh dot ESP</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1755"/>
+        <location filename="../src/mainwindow.cpp" line="1692"/>
         <source>About %1</source>
         <translation>Mbi %1</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="156"/>
+        <location filename="../src/mainwindow.cpp" line="162"/>
         <source>Select EFI file</source>
         <translation>Përzgjidhni kartelë EFI</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="156"/>
+        <location filename="../src/mainwindow.cpp" line="162"/>
         <source>EFI files (*.efi *.EFI)</source>
         <translation>Kartela EFI (*.efi *.EFI)</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="168"/>
-        <location filename="../src/mainwindow.cpp" line="179"/>
-        <location filename="../src/mainwindow.cpp" line="190"/>
-        <location filename="../src/mainwindow.cpp" line="198"/>
+        <location filename="../src/mainwindow.cpp" line="174"/>
+        <location filename="../src/mainwindow.cpp" line="185"/>
+        <location filename="../src/mainwindow.cpp" line="212"/>
+        <location filename="../src/mainwindow.cpp" line="219"/>
         <location filename="../src/mainwindow.cpp" line="1026"/>
         <location filename="../src/mainwindow.cpp" line="1038"/>
         <location filename="../src/mainwindow.cpp" line="1044"/>
-        <location filename="../src/mainwindow.cpp" line="1799"/>
-        <location filename="../src/mainwindow.cpp" line="1937"/>
-        <location filename="../src/mainwindow.cpp" line="2008"/>
-        <location filename="../src/mainwindow.cpp" line="2019"/>
-        <location filename="../src/mainwindow.cpp" line="2026"/>
-        <location filename="../src/mainwindow.cpp" line="2037"/>
-        <location filename="../src/mainwindow.cpp" line="2047"/>
-        <location filename="../src/mainwindow.cpp" line="2061"/>
-        <location filename="../src/mainwindow.cpp" line="2066"/>
+        <location filename="../src/mainwindow.cpp" line="1736"/>
         <source>Error</source>
         <translation>Gabim</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="168"/>
-        <location filename="../src/mainwindow.cpp" line="179"/>
+        <location filename="../src/mainwindow.cpp" line="174"/>
+        <location filename="../src/mainwindow.cpp" line="185"/>
         <source>Could not find the source mountpoint for %1</source>
         <translation>S’u gjet dot pikë montimi burimi për %1</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="183"/>
+        <location filename="../src/mainwindow.cpp" line="189"/>
         <source>Set name</source>
         <translation>I vini emër</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="183"/>
+        <location filename="../src/mainwindow.cpp" line="189"/>
         <source>Enter the name for the UEFI menu item:</source>
         <translation>Jepni emrin për zërin e menusë UEFI:</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="190"/>
+        <location filename="../src/mainwindow.cpp" line="212"/>
         <source>Selected file is not in an EFI directory</source>
         <translation>Kartela e përzgjedhur s’është një drejtori EFI</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="198"/>
+        <location filename="../src/mainwindow.cpp" line="219"/>
         <source>Something went wrong, could not add entry.</source>
         <translation>Diç shkoi ters, s’u shtua dot zëri.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="810"/>
         <location filename="../src/mainwindow.cpp" line="853"/>
-        <location filename="../src/mainwindow.cpp" line="1814"/>
+        <location filename="../src/mainwindow.cpp" line="1751"/>
         <source>Timeout: %1 seconds</source>
         <translation>Mbarim kohe: %1 sekonda</translation>
     </message>
@@ -272,7 +264,7 @@ Në drejtori mungojnë kartela të detyrueshme: </translation>
         <location filename="../src/mainwindow.cpp" line="812"/>
         <location filename="../src/mainwindow.cpp" line="852"/>
         <location filename="../src/mainwindow.cpp" line="859"/>
-        <location filename="../src/mainwindow.cpp" line="1831"/>
+        <location filename="../src/mainwindow.cpp" line="1767"/>
         <source>Boot Next: %1</source>
         <translation>Nis Pasuesin: %1</translation>
     </message>
@@ -348,156 +340,116 @@ Në drejtori mungojnë kartela të detyrueshme: </translation>
         <translation>S’u arrit të hapet kartela grub.entry.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1758"/>
+        <location filename="../src/mainwindow.cpp" line="1695"/>
         <source>Tool for managing UEFI boot entries</source>
         <translation>Mjet për administrim zërash nisjeje UEFI</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1937"/>
-        <source>Both old and new EFI labels must be specified</source>
-        <translation>Duhen treguar të dyja etiketa EFI, e vjetra dhe e reja</translation>
-    </message>
-    <message>
-        <location filename="../src/mainwindow.cpp" line="2009"/>
-        <source>Multiple boot entries found for label &apos;%1&apos;: %2 and %3;</source>
-        <translation>U gjetën zëra të shumtë për etiketën &apos;%1&apos;: %2 dhe %3;</translation>
-    </message>
-    <message>
-        <location filename="../src/mainwindow.cpp" line="2019"/>
-        <source>No EFI data found for label &apos;%1&apos;.</source>
-        <translation>S’u gjetën të dhëna EFI për etiketën &apos;%1&apos;.</translation>
-    </message>
-    <message>
-        <location filename="../src/mainwindow.cpp" line="2027"/>
-        <source>EFI label &apos;%1&apos; is linked to an unknown partition &apos;%2&apos;.</source>
-        <translation>Etiketa EFI &apos;%1&apos; është e lidhur me një pjesë të panjohur &apos;%2&apos;.</translation>
-    </message>
-    <message>
-        <location filename="../src/mainwindow.cpp" line="2038"/>
-        <source>Unexpected device name format &apos;%1&apos; for partition related to the label.</source>
-        <translation>Format i papritur emri pajisjeje &apos;%1&apos; për pjesën e lidhur me etiketën.</translation>
-    </message>
-    <message>
-        <location filename="../src/mainwindow.cpp" line="2048"/>
-        <source>Device partition number [%1] differs from EFI entry partition number [%2].</source>
-        <translation>Numri i pjesës së diskut [%1] është i ndryshëm nga numri i pjesës zë EFI [%2].</translation>
-    </message>
-    <message>
-        <location filename="../src/mainwindow.cpp" line="2061"/>
-        <source>Failed to delete old boot entry</source>
-        <translation>S’u arrit të fshihet zë i vjetër nisjeje</translation>
-    </message>
-    <message>
-        <location filename="../src/mainwindow.cpp" line="2066"/>
-        <source>Failed to create new boot entry</source>
-        <translation>S’u arrit të krijohet zë i ri nisjeje</translation>
-    </message>
-    <message>
-        <location filename="../src/mainwindow.cpp" line="1593"/>
+        <location filename="../src/mainwindow.cpp" line="1537"/>
         <source>Failed to read grub.entry file.</source>
         <translation>S’u arrit të lexohet kartella grub.entry.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="963"/>
-        <location filename="../src/mainwindow.cpp" line="1606"/>
+        <location filename="../src/mainwindow.cpp" line="1550"/>
         <source>Install</source>
         <translation>Instaloje</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1612"/>
+        <location filename="../src/mainwindow.cpp" line="1556"/>
         <source>Select Frugal Directory</source>
         <translation>Përzgjidhni Drejtori Instalimi të Përkorë</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1619"/>
+        <location filename="../src/mainwindow.cpp" line="1563"/>
         <source>No EFI System Partitions found.</source>
         <translation>S’u gjetën Pjesë EFI Sistemi.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1625"/>
+        <location filename="../src/mainwindow.cpp" line="1568"/>
         <source>Select EFI System Partition</source>
         <translation>Përzgjidhni Pjesë EFI Sistemi</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1626"/>
+        <location filename="../src/mainwindow.cpp" line="1569"/>
         <source>EFI System Partitions:</source>
         <translation>Pjesë EFI Sistemi:</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1639"/>
+        <location filename="../src/mainwindow.cpp" line="1579"/>
         <source>No EFI System Partition selected</source>
         <translation>S’u përzgjodh Pjesë EFI Sistemi</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1646"/>
+        <location filename="../src/mainwindow.cpp" line="1586"/>
         <source>Could not mount selected EFI System Partition</source>
         <translation>S’u montua dot Pjesë e përzgjedhur EFI Sistemi</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1677"/>
-        <location filename="../src/mainwindow.cpp" line="1721"/>
+        <location filename="../src/mainwindow.cpp" line="1614"/>
+        <location filename="../src/mainwindow.cpp" line="1658"/>
         <source>Could not mount partition. Please make sure you selected the correct partition.</source>
         <translation>S’u montua dot pjesë. Ju lutemi, sigurohuni se përzgjodhët pjesën e duhur.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1686"/>
+        <location filename="../src/mainwindow.cpp" line="1623"/>
         <source>No directory selected</source>
         <translation>S’u përzgjodh drejtori</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1706"/>
-        <location filename="../src/mainwindow.cpp" line="1743"/>
+        <location filename="../src/mainwindow.cpp" line="1643"/>
+        <location filename="../src/mainwindow.cpp" line="1680"/>
         <source>EFI stub installed successfully.</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1708"/>
-        <location filename="../src/mainwindow.cpp" line="1745"/>
+        <location filename="../src/mainwindow.cpp" line="1645"/>
+        <location filename="../src/mainwindow.cpp" line="1682"/>
         <source>Failed to install EFI stub.</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1756"/>
+        <location filename="../src/mainwindow.cpp" line="1693"/>
         <source>Version: </source>
         <translation>Version: </translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1760"/>
+        <location filename="../src/mainwindow.cpp" line="1697"/>
         <source>Copyright (c) MX Linux</source>
         <translation>Të drejta kopjimi (c) MX Linux</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1761"/>
+        <location filename="../src/mainwindow.cpp" line="1698"/>
         <source>%1 License</source>
         <translation>Licencë %1</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1769"/>
+        <location filename="../src/mainwindow.cpp" line="1706"/>
         <source>%1 Help</source>
         <translation>Ndihmë për %1</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1799"/>
+        <location filename="../src/mainwindow.cpp" line="1736"/>
         <source>Something went wrong, could not save boot order.</source>
         <translation>Diç shkoi ters, s’u ruajt dot rend nisjeje.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1810"/>
+        <location filename="../src/mainwindow.cpp" line="1746"/>
         <source>Set timeout</source>
         <translation>Ujdisni mbarim kohe</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1810"/>
+        <location filename="../src/mainwindow.cpp" line="1746"/>
         <source>Timeout in seconds:</source>
         <translation>Mbarim kohe, në sekonda:</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1849"/>
+        <location filename="../src/mainwindow.cpp" line="1785"/>
         <source>Removal confirmation</source>
         <translation>Ripohim heqjeje</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1850"/>
+        <location filename="../src/mainwindow.cpp" line="1786"/>
         <source>Are you sure you want to delete this boot entry?
 %1</source>
         <translation>Jeni i sigurt se doni të fshihet ky zë nisjeje?
@@ -507,32 +459,32 @@ Në drejtori mungojnë kartela të detyrueshme: </translation>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../src/about.cpp" line="99"/>
+        <location filename="../src/about.cpp" line="100"/>
         <source>License</source>
         <translation>Licencë</translation>
     </message>
     <message>
-        <location filename="../src/about.cpp" line="100"/>
+        <location filename="../src/about.cpp" line="101"/>
         <source>Changelog</source>
         <translation>Regjistër ndryshimesh</translation>
     </message>
     <message>
-        <location filename="../src/about.cpp" line="101"/>
+        <location filename="../src/about.cpp" line="102"/>
         <source>Cancel</source>
         <translation>Anuloje</translation>
     </message>
     <message>
-        <location filename="../src/about.cpp" line="125"/>
+        <location filename="../src/about.cpp" line="126"/>
         <source>Error: Changelog file is missing.</source>
         <translation>Gabim: Mungon kartelë regjistri ndryshimesh.</translation>
     </message>
     <message>
-        <location filename="../src/about.cpp" line="127"/>
+        <location filename="../src/about.cpp" line="128"/>
         <source>Error: Required utility &apos;zless&apos; is missing.</source>
         <translation>Gabim: Mungon mjet i domosdoshëm &apos;zless&apos;.</translation>
     </message>
     <message>
-        <location filename="../src/about.cpp" line="134"/>
+        <location filename="../src/about.cpp" line="135"/>
         <source>&amp;Close</source>
         <translation>&amp;Mbylle</translation>
     </message>

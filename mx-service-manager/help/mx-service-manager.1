@@ -1,0 +1,21 @@
+.TH MX-SERVICE-MANAGER 1 "2026-07-20" "MX Linux" "User Commands"
+.SH NAME
+mx-service-manager \- enable and disable system services
+.SH SYNOPSIS
+.B mx-service-manager
+.SH DESCRIPTION
+.B mx-service-manager
+is a graphical tool for managing services and daemons and controlling which services are started at boot time. Read the warning in the application before changing a service: disabling a required service can leave the system partially or completely inoperable.
+.PP
+The application displays the available services and their current state. Use it to enable or disable services manually and to inspect service descriptions before making changes.
+.SH OPTIONS
+This application has no documented command-line options. The graphical interface provides all operations.
+.SH FILES
+.TP
+.I /usr/share/doc/mx-service-manager
+Installed HTML help, images, license, and changelog documentation.
+.SH SEE ALSO
+.BR systemctl (1),
+.BR service (8)
+.SH AUTHOR
+MX Linux contributors.

@@ -1,7 +1,7 @@
 /**********************************************************************
  *
  **********************************************************************
- * Copyright (C) 2023 MX Authors
+ * Copyright (C) 2023-2026 MX Authors
  *
  * Authors: Adrian <adrian@mxlinux.org>
  *          MX Linux <http://mxlinux.org>
@@ -90,9 +90,17 @@ void displayAboutMsgBox(const QString &title, const QString &message, const QStr
 {
     constexpr int DialogWidth = 600;
     constexpr int DialogHeight = 500;
+    // Only Debian-style packaging ships a changelog.gz alongside the app; on distros
+    // that don't (e.g. an Arch/pacman install), the button simply doesn't appear,
+    // rather than gating this on a build-time backend check.
+    const QString appName = QFileInfo(QCoreApplication::applicationFilePath()).fileName();
+    const QString changelogPath = "/usr/share/doc/" + appName + "/changelog.gz";
+    const bool hasChangelog = QFileInfo::exists(changelogPath);
+
     QMessageBox msgBox(QMessageBox::NoIcon, title, message);
     auto *btnLicense = msgBox.addButton(QObject::tr("License"), QMessageBox::HelpRole);
-    auto *btnChangelog = msgBox.addButton(QObject::tr("Changelog"), QMessageBox::HelpRole);
+    QPushButton *btnChangelog
+        = hasChangelog ? msgBox.addButton(QObject::tr("Changelog"), QMessageBox::HelpRole) : nullptr;
     auto *btnCancel = msgBox.addButton(QObject::tr("Cancel"), QMessageBox::NoRole);
     btnCancel->setIcon(QIcon::fromTheme("window-close"));
 
@@ -100,7 +108,7 @@ void displayAboutMsgBox(const QString &title, const QString &message, const QStr
 
     if (msgBox.clickedButton() == btnLicense) {
         displayDoc(licenceUrl, licenseTitle);
-    } else if (msgBox.clickedButton() == btnChangelog) {
+    } else if (btnChangelog && msgBox.clickedButton() == btnChangelog) {
         QDialog changelog;
         changelog.setWindowTitle(QObject::tr("Changelog"));
         changelog.resize(DialogWidth, DialogHeight);
@@ -108,8 +116,6 @@ void displayAboutMsgBox(const QString &title, const QString &message, const QStr
         auto *text = new QTextEdit(&changelog);
         text->setReadOnly(true);
         QProcess proc;
-        const QString appName = QFileInfo(QCoreApplication::applicationFilePath()).fileName();
-        const QString changelogPath = "/usr/share/doc/" + appName + "/changelog.gz";
         proc.start("zcat", {changelogPath}, QIODevice::ReadOnly);
         if (proc.waitForStarted(3000) && proc.waitForFinished(3000)) {
             text->setText(proc.readAllStandardOutput());

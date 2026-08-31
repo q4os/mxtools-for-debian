@@ -451,7 +451,7 @@ void TweakTheme::setTheme(const QString &type, const QString &theme) const noexc
             if (runCmd(u"grep gtk-theme-name $HOME/.config/gtk-3.0/settings.ini"_s).exitCode == 0) {
                 cmd = "sed -i 's/gtk-theme-name=.*/gtk-theme-name="_L1 + theme + "/' $HOME/.config/gtk-3.0/settings.ini"_L1;
             } else {
-                cmd = "echo gtk-theme-name="_L1 + theme + "\" >> $HOME/.config/gtk-3.0/settings.ini"_L1;
+                cmd = "echo gtk-theme-name="_L1 + theme + " >> $HOME/.config/gtk-3.0/settings.ini"_L1;
             }
             runCmd(cmd);
 
@@ -495,7 +495,7 @@ void TweakTheme::setTheme(const QString &type, const QString &theme) const noexc
             if (runCmd(u"grep gtk-icon-theme-name $HOME/.config/gtk-3.0/settings.ini"_s).exitCode == 0) {
                 cmd = "sed -i 's/gtk-icon-theme-name=.*/gtk-icon-theme-name="_L1 + theme + "/' $HOME/.config/gtk-3.0/settings.ini"_L1;
             } else {
-                cmd = "echo gtk-icon-theme-name="_L1 + theme + "\" >> $HOME/.config/gtk-3.0/settings.ini"_L1;
+                cmd = "echo gtk-icon-theme-name="_L1 + theme + " >> $HOME/.config/gtk-3.0/settings.ini"_L1;
             }
             runCmd(cmd);
             if (runCmd(u"grep gtk-icon-theme-name $HOME/.gtkrc-2.0"_s).exitCode == 0) {
@@ -516,7 +516,7 @@ void TweakTheme::setTheme(const QString &type, const QString &theme) const noexc
             if (runCmd(u"grep gtk-cursor-theme-name $HOME/.config/gtk-3.0/settings.ini"_s).exitCode == 0) {
                 cmd = "sed -i 's/gtk-cursor-theme-name=.*/gtk-cursor-theme-name="_L1 + theme + "/' $HOME/.config/gtk-3.0/settings.ini"_L1;
             } else {
-                cmd = "echo gtk-cursor-theme-name="_L1 + theme + "\" >> $HOME/.config/gtk-3.0/settings.ini"_L1;
+                cmd = "echo gtk-cursor-theme-name="_L1 + theme + " >> $HOME/.config/gtk-3.0/settings.ini"_L1;
             }
             runCmd(cmd);
             if (runCmd(u"grep gtk-cursor-theme-name $HOME/.gtkrc-2.0"_s).exitCode == 0) {
@@ -538,7 +538,10 @@ void TweakTheme::setTheme(const QString &type, const QString &theme) const noexc
                 runCmd("echo Inherits="_L1 + theme + " >> $HOME/.icons/default/index.theme"_L1);
             }
             runCmd(u"fluxbox-remote restart"_s);
+            //also restart conky
+            runCmd(u"killall -SIGUSR1 conky"_s);
         }
+
     }
     if (!cmd1.isEmpty()){
         runCmd(cmd1);
@@ -715,7 +718,7 @@ void TweakTheme::pushThemeApply_clicked() noexcept
         //  use xfconf system to change values
 
         // set gtk theme
-        runCmd("xfconf-query -c xsettings -p /Net/ThemeName -s "_L1 + xsettings_gtk_theme);
+        runCmd("xfconf-query -c xsettings -p /Net/ThemeName -s \""_L1 + xsettings_gtk_theme + '"');
         runCmd(u"sleep .5"_s);
         runCmd("gsettings set org.gnome.desktop.interface gtk-theme \""_L1 + xsettings_gtk_theme + '"');
         if (xsettings_gtk_theme.contains("dark"_L1, Qt::CaseInsensitive)){
@@ -725,16 +728,16 @@ void TweakTheme::pushThemeApply_clicked() noexcept
         }
 
         // set window decorations theme
-        runCmd("xfconf-query -c xfwm4 -p /general/theme -s "_L1 + xfwm4_window_decorations);
+        runCmd("xfconf-query -c xfwm4 -p /general/theme -s \""_L1 + xfwm4_window_decorations + '"');
         runCmd(u"sleep .5"_s);
 
         // set icon theme
-        runCmd("xfconf-query -c xsettings -p /Net/IconThemeName -s "_L1 + xsettings_icon_theme);
+        runCmd("xfconf-query -c xsettings -p /Net/IconThemeName -s \""_L1 + xsettings_icon_theme + '"');
         runCmd(u"sleep .5"_s);
 
         // set cursor theme if exists
         if (! cursorthemename.isEmpty()){
-            runCmd("xfconf-query -c xsettings -p /Gtk/CursorThemeName -s "_L1 + cursorthemename);
+            runCmd("xfconf-query -c xsettings -p /Gtk/CursorThemeName -s \""_L1 + cursorthemename + '"');
         }
 
         // deal with panel customizations for each panel
@@ -753,7 +756,7 @@ void TweakTheme::pushThemeApply_clicked() noexcept
             // set panel background image
             QFileInfo image(background_image);
             if (image.exists()) {
-                runCmd("xfconf-query -c xfce4-panel -p /panels/panel-"_L1 + value + "/background-image -t string -s "_L1 + background_image + " --create"_L1);
+                runCmd("xfconf-query -c xfce4-panel -p /panels/panel-"_L1 + value + "/background-image -t string -s \""_L1 + background_image + "\" --create"_L1);
             } else {
                 runCmd("xfconf-query -c xfce4-panel -p /panels/panel-"_L1 + value + "/background-image --reset"_L1);
             }
@@ -874,25 +877,21 @@ void TweakTheme::spinThemeCursorSize_valueChanged(int value) noexcept
 
 void TweakTheme::checkThemeGTKDarkMode_checkStateChanged(Qt::CheckState state) const noexcept
 {
+    QString mode = "false";
     if (desktop == Xfce || desktop == Fluxbox) {
         const char *cmd = "gsettings set org.gnome.desktop.interface color-scheme default";
         if (state == Qt::Checked){
             cmd = "gsettings set org.gnome.desktop.interface color-scheme prefer-dark";
+            mode = "true";
         }
         runSystem(cmd);
-        qDebug() << "dark mode is " << cmd;
+        qDebug() << "dark mode is " << cmd << "mode is " << mode;
     }
     if (desktop == Fluxbox){
         if (runCmd(u"grep gtk-application-prefer-dark-theme $HOME/.config/gtk-3.0/settings.ini"_s).exitCode == 0) {
-            runCmd(u"sed -i 's/gtk-application-prefer-dark-theme=.*/gtk-application-prefer-dark-theme=true/' $HOME/.config/gtk-3.0/settings.ini"_s);
+            runCmd("sed -i 's/gtk-application-prefer-dark-theme=.*/gtk-application-prefer-dark-theme=" + mode +  "/' $HOME/.config/gtk-3.0/settings.ini");
         } else {
-            runCmd(u"echo gtk-application-prefer-dark-theme=true/' >> $HOME/.config/gtk-3.0/settings.ini"_s);
-        }
-    } else {
-        if (runCmd(u"grep gtk-application-prefer-dark-theme $HOME/.config/gtk-3.0/settings.ini"_s).exitCode == 0) {
-            runCmd(u"sed -i 's/gtk-application-prefer-dark-theme=.*/gtk-application-prefer-dark-theme=false/' $HOME/.config/gtk-3.0/settings.ini"_s);
-        } else {
-            runCmd(u"echo gtk-application-prefer-dark-theme=false/' >> $HOME/.config/gtk-3.0/settings.ini"_s);
+            runCmd("echo gtk-application-prefer-dark-theme=" + mode + ">> $HOME/.config/gtk-3.0/settings.ini");
         }
     }
 }

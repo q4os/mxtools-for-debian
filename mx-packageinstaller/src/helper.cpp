@@ -1,7 +1,7 @@
 /**********************************************************************
  *  helper.cpp
  **********************************************************************
- * Copyright (C) 2026 MX Authors
+ * Copyright (C) 2026-2026 MX Authors
  *
  * Authors: Adrian
  *          MX Linux <http://mxlinux.org>
@@ -21,51 +21,29 @@
  * along with this package. If not, see <http://www.gnu.org/licenses/>.
  **********************************************************************/
 
+#include "helperengine.h"
+
 #include <QCoreApplication>
 #include <QDir>
 #include <QFile>
 #include <QFileInfo>
 #include <QHash>
 #include <QProcess>
-#include <QProcessEnvironment>
-#include <QSocketNotifier>
 #include <QRegularExpression>
 #include <QSet>
 #include <QtXml/QDomDocument>
 
-#include <cerrno>
 #include <cstdio>
 #include <cstdlib>
-#include <vector>
 
-#include <pty.h>
-#include <sys/ioctl.h>
-#include <sys/select.h>
-#include <sys/wait.h>
-#include <termios.h>
-#include <unistd.h>
+using namespace HelperEngine;
 
 namespace
 {
-struct ProcessResult
-{
-    bool started = false;
-    int exitCode = 1;
-    QProcess::ExitStatus exitStatus = QProcess::NormalExit;
-    QByteArray standardOutput;
-    QByteArray standardError;
-};
-
+#ifndef PACKAGE_BACKEND_PACMAN
 constexpr auto TempSourceListPath = "/etc/apt/sources.list.d/mxpitemp.list";
+#endif
 constexpr auto PkgListDirPath = "/usr/share/mx-packageinstaller-pkglist";
-
-void writeAndFlush(FILE *stream, const QByteArray &data)
-{
-    if (!data.isEmpty()) {
-        std::fwrite(data.constData(), 1, static_cast<size_t>(data.size()), stream);
-        std::fflush(stream);
-    }
-}
 
 void printError(const QString &message)
 {
@@ -75,235 +53,20 @@ void printError(const QString &message)
 [[nodiscard]] const QHash<QString, QStringList> &allowedCommands()
 {
     static const QHash<QString, QStringList> commands {
-        {"apt-get", {"/usr/bin/apt-get"}},
-        {"apt-mark", {"/usr/bin/apt-mark"}},
-        {"aptitude", {"/usr/bin/aptitude"}},
         {"chown", {"/usr/bin/chown", "/bin/chown"}},
         {"fuser", {"/usr/bin/fuser", "/bin/fuser"}},
         {"ps", {"/usr/bin/ps", "/bin/ps"}},
         {"snap", {"/usr/bin/snap", "/snap/bin/snap"}},
+#ifdef PACKAGE_BACKEND_PACMAN
+        {"pacman", {"/usr/bin/pacman"}},
+#else
+        {"apt-get", {"/usr/bin/apt-get"}},
+        {"apt-mark", {"/usr/bin/apt-mark"}},
+        // "aptitude" intentionally omitted: mainwindow.cpp only ever runs it
+        // unprivileged (for the info/simulate dialogs), never through this helper.
+#endif
     };
     return commands;
-}
-
-[[nodiscard]] QString resolveBinary(const QStringList &candidates)
-{
-    for (const QString &candidate : candidates) {
-        const QFileInfo info(candidate);
-        if (info.exists() && info.isExecutable()) {
-            return candidate;
-        }
-    }
-    return {};
-}
-
-[[nodiscard]] ProcessResult runProcess(const QString &program, const QStringList &args,
-                                       const QHash<QString, QString> &environment = {}, bool relayStdout = true,
-                                       bool relayStderr = true)
-{
-    ProcessResult result;
-
-    QProcess process;
-    auto env = QProcessEnvironment::systemEnvironment();
-    for (auto it = environment.cbegin(); it != environment.cend(); ++it) {
-        env.insert(it.key(), it.value());
-    }
-    process.setProcessEnvironment(env);
-    process.start(program, args, QIODevice::ReadWrite);
-    if (!process.waitForStarted()) {
-        result.standardError = QString("Failed to start %1").arg(program).toUtf8();
-        result.exitCode = 127;
-        return result;
-    }
-
-    result.started = true;
-
-    QFile stdinFile;
-    stdinFile.open(stdin, QIODevice::ReadOnly | QIODevice::Unbuffered);
-
-    QSocketNotifier stdinNotifier(stdinFile.handle(), QSocketNotifier::Read);
-    QObject::connect(&stdinNotifier, &QSocketNotifier::activated, [&](QSocketDescriptor) {
-        const QByteArray data = stdinFile.read(4096);
-        if (data.isEmpty()) {
-            stdinNotifier.setEnabled(false);
-            process.closeWriteChannel();
-        } else {
-            process.write(data);
-        }
-    });
-
-    while (process.state() != QProcess::NotRunning) {
-        process.waitForFinished(50);
-        QCoreApplication::processEvents();
-
-        const QByteArray stdoutChunk = process.readAllStandardOutput();
-        if (!stdoutChunk.isEmpty()) {
-            result.standardOutput += stdoutChunk;
-            if (relayStdout) {
-                writeAndFlush(stdout, stdoutChunk);
-            }
-        }
-
-        const QByteArray stderrChunk = process.readAllStandardError();
-        if (!stderrChunk.isEmpty()) {
-            result.standardError += stderrChunk;
-            if (relayStderr) {
-                writeAndFlush(stderr, stderrChunk);
-            }
-        }
-    }
-
-    result.exitStatus = process.exitStatus();
-    result.exitCode = process.exitCode();
-    return result;
-}
-
-// Run a command attached to a pseudo-terminal so tools that gate their progress
-// output on isatty() (notably `snap`) emit their live progress instead of staying
-// silent until completion. Output is relayed to our stdout in real time and also
-// captured. stdin is forwarded so the child can still read input if it needs to.
-[[nodiscard]] ProcessResult runProcessOnPty(const QString &program, const QStringList &args,
-                                            const QHash<QString, QString> &environment)
-{
-    ProcessResult result;
-
-    // Materialize argv and the environment overrides before forking; the child must
-    // avoid heap allocation between fork() and exec().
-    const QByteArray programBytes = program.toLocal8Bit();
-    QList<QByteArray> argStorage;
-    argStorage.reserve(args.size());
-    for (const QString &arg : args) {
-        argStorage.append(arg.toLocal8Bit());
-    }
-    std::vector<char *> argv;
-    argv.reserve(static_cast<size_t>(args.size()) + 2);
-    argv.push_back(const_cast<char *>(programBytes.constData()));
-    for (QByteArray &arg : argStorage) {
-        argv.push_back(arg.data());
-    }
-    argv.push_back(nullptr);
-
-    QList<QPair<QByteArray, QByteArray>> envOverrides;
-    envOverrides.reserve(environment.size());
-    for (auto it = environment.cbegin(); it != environment.cend(); ++it) {
-        envOverrides.append({it.key().toLocal8Bit(), it.value().toLocal8Bit()});
-    }
-
-    // Hand the child a roomy terminal so progress bars are not truncated.
-    struct winsize ws {};
-    ws.ws_row = 24;
-    ws.ws_col = 120;
-
-    int masterFd = -1;
-    const pid_t pid = forkpty(&masterFd, nullptr, nullptr, &ws);
-    if (pid < 0) {
-        result.standardError = QByteArrayLiteral("Failed to allocate pseudo-terminal");
-        result.exitCode = 127;
-        return result;
-    }
-
-    if (pid == 0) {
-        // Child: the helper is single-threaded, so applying the environment with
-        // setenv() before exec() is safe here.
-        for (const auto &envVar : envOverrides) {
-            setenv(envVar.first.constData(), envVar.second.constData(), 1);
-        }
-        // forkpty leaves the pty master open in the child; close it (and any other
-        // inherited descriptors above stdio) so the privileged child only keeps the
-        // terminal it needs. Best effort: ignore failure on kernels without close_range.
-        close_range(STDERR_FILENO + 1, ~0U, 0);
-        execv(programBytes.constData(), argv.data());
-        _exit(127); // exec failed
-    }
-
-    result.started = true;
-
-    const int stdinFd = fileno(stdin);
-    bool stdinOpen = stdinFd >= 0;
-    char buffer[4096];
-
-    for (;;) {
-        fd_set readFds;
-        FD_ZERO(&readFds);
-        FD_SET(masterFd, &readFds);
-        int maxFd = masterFd;
-        if (stdinOpen) {
-            FD_SET(stdinFd, &readFds);
-            maxFd = std::max(maxFd, stdinFd);
-        }
-
-        if (select(maxFd + 1, &readFds, nullptr, nullptr, nullptr) < 0) {
-            if (errno == EINTR) {
-                continue;
-            }
-            break;
-        }
-
-        if (FD_ISSET(masterFd, &readFds)) {
-            const ssize_t count = read(masterFd, buffer, sizeof(buffer));
-            if (count > 0) {
-                const QByteArray chunk = QByteArray::fromRawData(buffer, static_cast<int>(count));
-                result.standardOutput += chunk;
-                writeAndFlush(stdout, chunk);
-            } else if (count == 0) {
-                break;
-            } else if (errno != EINTR && errno != EAGAIN) {
-                break; // EIO on Linux once the child has closed the slave side
-            }
-        }
-
-        if (stdinOpen && FD_ISSET(stdinFd, &readFds)) {
-            const ssize_t count = read(stdinFd, buffer, sizeof(buffer));
-            if (count > 0) {
-                ssize_t written = 0;
-                while (written < count) {
-                    const ssize_t bytes = write(masterFd, buffer + written, static_cast<size_t>(count - written));
-                    if (bytes <= 0) {
-                        break;
-                    }
-                    written += bytes;
-                }
-            } else if (count == 0) {
-                // Our stdin hit EOF. In canonical mode the child only sees EOF
-                // once we send the terminal's VEOF character; without this a
-                // child that reads stdin to EOF would hang waiting for input
-                // that never comes. (Skipped in raw mode, where VEOF would just
-                // be delivered as a stray data byte.)
-                struct termios tio {};
-                if (tcgetattr(masterFd, &tio) == 0 && (tio.c_lflag & ICANON) != 0) {
-                    const char eofByte = static_cast<char>(tio.c_cc[VEOF]);
-                    if (write(masterFd, &eofByte, 1) < 0) {
-                        // best effort: nothing useful to do if this fails
-                    }
-                }
-                stdinOpen = false;
-            } else if (errno != EINTR && errno != EAGAIN) {
-                stdinOpen = false; // read error; stop forwarding
-            }
-        }
-    }
-
-    int status = 0;
-    while (waitpid(pid, &status, 0) < 0 && errno == EINTR) {
-    }
-    close(masterFd);
-
-    if (WIFEXITED(status)) {
-        result.exitStatus = QProcess::NormalExit;
-        result.exitCode = WEXITSTATUS(status);
-    } else {
-        result.exitStatus = QProcess::CrashExit;
-        result.exitCode = 1;
-    }
-    return result;
-}
-
-[[nodiscard]] int relayResult(const ProcessResult &result)
-{
-    if (!result.started) {
-        return result.exitCode;
-    }
-    return result.exitStatus == QProcess::NormalExit ? result.exitCode : 1;
 }
 
 [[nodiscard]] bool isAllowedEnvironment(const QString &name)
@@ -313,7 +76,7 @@ void printError(const QString &message)
 }
 
 [[nodiscard]] int runAllowedCommand(const QString &command, const QStringList &commandArgs,
-                                    const QHash<QString, QString> &environment = {})
+                                    const QHash<QString, QString> &environment = {}, bool cancelOnStdinEof = false)
 {
     const auto commandIt = allowedCommands().constFind(command);
     if (commandIt == allowedCommands().constEnd()) {
@@ -341,16 +104,17 @@ void printError(const QString &message)
         commandEnvironment.insert(QStringLiteral("PATH"), path);
     }
 
-    if (command == QLatin1String("snap")) {
-        // snap stays silent unless it believes it is writing to a terminal, so run it
-        // under a pseudo-terminal to surface its live progress in the Output tab.
-        return relayResult(runProcessOnPty(resolvedCommand, commandArgs, commandEnvironment));
+    if (command == QLatin1String("snap") || command == QLatin1String("pacman")) {
+        // snap stays silent, and pacman drops its progress bars/coloring and
+        // confirmation-prompt formatting, unless each believes it is writing to a
+        // real terminal -- run both under a pseudo-terminal rather than plain pipes.
+        return relayResult(runProcessOnPty(resolvedCommand, commandArgs, commandEnvironment, cancelOnStdinEof));
     }
 
-    return relayResult(runProcess(resolvedCommand, commandArgs, commandEnvironment));
+    return relayResult(runProcess(resolvedCommand, commandArgs, commandEnvironment, true, true, cancelOnStdinEof));
 }
 
-[[nodiscard]] int handleExec(const QStringList &args)
+[[nodiscard]] int handleExec(const QStringList &args, bool cancelOnStdinEof)
 {
     QStringList remainingArgs = args;
     QHash<QString, QString> environment;
@@ -378,8 +142,17 @@ void printError(const QString &message)
         return 1;
     }
 
-    return runAllowedCommand(remainingArgs.constFirst(), remainingArgs.mid(1), environment);
+    return runAllowedCommand(remainingArgs.constFirst(), remainingArgs.mid(1), environment, cancelOnStdinEof);
 }
+
+// The only legitimate caller (LockFile::getLockingProcess()) always passes this
+// same literal for the compiled backend; reject anything else rather than trusting
+// an arbitrary caller-supplied path, even though the caller is already root-equivalent.
+#ifdef PACKAGE_BACKEND_PACMAN
+constexpr auto ExpectedLockPath = "/var/lib/pacman/db.lck";
+#else
+constexpr auto ExpectedLockPath = "/var/lib/dpkg/lock";
+#endif
 
 [[nodiscard]] int handleLockingProcess(const QStringList &args)
 {
@@ -389,6 +162,10 @@ void printError(const QString &message)
     }
 
     const QString path = args.constFirst();
+    if (path != QLatin1String(ExpectedLockPath)) {
+        printError(QString("locking-process path is not allowed: %1").arg(path));
+        return 1;
+    }
     if (!QFileInfo::exists(path)) {
         return 0;
     }
@@ -418,6 +195,9 @@ void printError(const QString &message)
     return 0;
 }
 
+#ifndef PACKAGE_BACKEND_PACMAN
+// Writing an arbitrary apt sources-list entry as root has no pacman equivalent
+// (no temporary-repo concept on that side today), so this whole action is apt-only.
 [[nodiscard]] int handleWriteFile(const QStringList &args)
 {
     if (args.size() != 2) {
@@ -441,6 +221,7 @@ void printError(const QString &message)
     file.close();
     return 0;
 }
+#endif
 
 [[nodiscard]] QSet<QString> loadKnownHooks()
 {
@@ -476,7 +257,7 @@ void printError(const QString &message)
     return hooks;
 }
 
-[[nodiscard]] int handleRunHook(const QStringList &args)
+[[nodiscard]] int handleRunHook(const QStringList &args, bool cancelOnStdinEof)
 {
     if (args.size() != 1) {
         printError(QStringLiteral("run-hook requires exactly one script"));
@@ -494,52 +275,34 @@ void printError(const QString &message)
         return 1;
     }
 
-    return relayResult(runProcess(QStringLiteral("/bin/bash"), {"-c", script}));
+    return relayResult(runProcess(QStringLiteral("/bin/bash"), {"-c", script}, {}, true, true, cancelOnStdinEof));
 }
 
-// The marker path comes from the (unprivileged) caller, and creating it truncates
-// that path as root. Constrain it the way handleWriteFile constrains its target:
-// it must be a "mx-pkg-helper-*.marker" file directly inside the caller's runtime
-// dir (/run/user/<PKEXEC_UID>) or the temp dir, so a hostile path cannot truncate
-// an arbitrary root-owned file.
-[[nodiscard]] bool isValidMarkerPath(const QString &path)
-{
-    const QFileInfo info(path);
-    const QString name = info.fileName();
-    if (!name.startsWith(QLatin1String("mx-pkg-helper-")) || !name.endsWith(QLatin1String(".marker"))) {
-        return false;
-    }
-    const QString dir = info.absolutePath();
-    const QString pkexecUid = qEnvironmentVariable("PKEXEC_UID");
-    static const QRegularExpression digits(QStringLiteral("^[0-9]+$"));
-    if (digits.match(pkexecUid).hasMatch() && dir == QStringLiteral("/run/user/") + pkexecUid) {
-        return true;
-    }
-    return dir == QDir::tempPath();
-}
 } // namespace
 
 int main(int argc, char *argv[])
 {
     QCoreApplication app(argc, argv);
+    installTerminationHandlers();
     QStringList arguments = app.arguments().mid(1);
+    bool cancelOnStdinEof = false;
 
     // The caller passes an auth-success marker path as a leading "--marker
-    // <path>" argument (not via the environment, which pkexec strips). Creating
-    // the file proves the helper actually ran, so the caller can tell a real
-    // 126/127 from a dismissed authentication dialog.
+    // <path>" argument (not via the environment, which pkexec strips). The
+    // atomically-created file proves the helper actually ran, so the caller can
+    // tell a real 126/127 from a dismissed authentication dialog.
     if (arguments.size() >= 2 && arguments.constFirst() == QLatin1String("--marker")) {
         const QString markerPath = arguments.at(1);
         arguments.removeFirst();
         arguments.removeFirst();
-        if (isValidMarkerPath(markerPath)) {
-            QFile markerFile(markerPath);
-            if (markerFile.open(QIODevice::WriteOnly | QIODevice::Truncate)) {
-                markerFile.close();
-            }
-        } else {
-            printError(QString("Ignoring invalid marker path: %1").arg(markerPath));
+        if (!createMarker(markerPath)) {
+            return 1;
         }
+    }
+
+    if (!arguments.isEmpty() && arguments.constFirst() == QLatin1String("--cancel-on-eof")) {
+        cancelOnStdinEof = true;
+        arguments.removeFirst();
     }
 
     if (arguments.isEmpty()) {
@@ -551,16 +314,25 @@ int main(int argc, char *argv[])
     const QString action = remainingArgs.takeFirst();
 
     if (action == QLatin1String("exec")) {
-        return handleExec(remainingArgs);
+        return handleExec(remainingArgs, cancelOnStdinEof);
     }
     if (action == QLatin1String("locking-process")) {
         return handleLockingProcess(remainingArgs);
     }
     if (action == QLatin1String("run-hook")) {
-        return handleRunHook(remainingArgs);
+        return handleRunHook(remainingArgs, cancelOnStdinEof);
     }
+#ifndef PACKAGE_BACKEND_PACMAN
     if (action == QLatin1String("write-file")) {
         return handleWriteFile(remainingArgs);
+    }
+#endif
+    if (action == QLatin1String("create-marker")) {
+        if (remainingArgs.size() != 1) {
+            printError(QStringLiteral("create-marker requires exactly one path"));
+            return 1;
+        }
+        return createMarker(remainingArgs.constFirst()) ? 0 : 1;
     }
 
     printError(QString("Unsupported helper action: %1").arg(action));

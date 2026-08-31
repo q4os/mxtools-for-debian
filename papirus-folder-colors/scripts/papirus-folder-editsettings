@@ -1,0 +1,289 @@
+#!/bin/bash
+
+### This app was developed by MX Devs 2023 and released under GPLv3
+### Papirus-folder-editsettings
+### Version=24.01.04
+
+#TRANSLATORS app name for titlebar text
+export TITLE="$(gettext 'Papirus Folder Settings')"
+export CLASS="papirus-folder-colors"
+export ICONPATH="/usr/share/pixmaps/papirus-folder-settings.svg"
+
+#TRANSLATORS button label
+export BTN_YES=$(gettext "Yes")      ; BTN_YES+='!ok'
+#TRANSLATORS button label
+export BTN_NO=$(gettext "No")      ; BTN_NO+='!window-close'
+#TRANSLATORS button label
+export BTN_OK=$(gettext "OK")      ; BTN_CLOSE+='!ok'
+#TRANSLATORS button label
+export BTN_CLOSE=$(gettext "Close")      ; BTN_CLOSE+='!window-close'
+
+case $1 in
+
+settings_move)
+
+FOLDER_SETTINGS=$(tail -n 1 /tmp/pfs-themename)
+
+if [ ! -d "$HOME/.icons" ]; then
+    LOCATIONS="/usr/share/icons!$HOME/.local/share/icons"
+else
+    LOCATIONS="/usr/share/icons!$HOME/.local/share/icons!$HOME/.icons"
+fi
+
+#TRANSLATORS window text - asking for new location to save theme
+TEXT_MOVE="$(gettext 'New location for icon theme')"
+NAME_MOVE=$(basename $FOLDER_SETTINGS)
+
+TARGET_MOVE=$(yad --title="$TITLE" --class="$CLASS" --window-icon="$ICONPATH" \
+--borders=10 --center --width=400 --height=200 --fixed  --separator="" \
+--text="\n\n$TEXT_MOVE\n" --text-align=center \
+--button="$BTN_CLOSE":10 --button="$BTN_OK":12 \
+--form \
+--field " ":CB "$LOCATIONS" \
+)
+
+    case $? in  
+    10 | 252 )
+        exit
+    ;;
+    
+    12 )
+        STARTPATH="$(echo ${FOLDER_SETTINGS%/*})"
+        
+        until [ "$STARTPATH" != "$TARGET_MOVE" ] && [ ! -d $TARGET_MOVE/$NAME_MOVE ]; do
+
+#TRANSLATORS error message - text is preceded by icon theme name and followed by path
+            TEXT_MOVEFAIL1="$(gettext 'already exists in')"
+#TRANSLATORS window text - asking for new location to save theme
+            TEXT_MOVEFAIL2="$(gettext 'Select a new location')"
+
+            TARGET_MOVE=$(yad --title="$TITLE" --class="$CLASS" --window-icon="$ICONPATH" \
+            --borders=10 --center --width=400 --height=200 --fixed  --separator="" \
+            --text="\n\n<b>$NAME_MOVE</b> $TEXT_MOVEFAIL1\n<b>$TARGET_MOVE</b>\n\n$TEXT_MOVEFAIL2\n" --text-align=center \
+            --button="$BTN_CLOSE":20 --button="$BTN_OK":32 \
+            --form \
+            --field " ":CB "$LOCATIONS" \
+            )
+        
+            case $? in  
+            20 | 252 )
+                exit
+            ;;
+            esac
+        done
+            
+        STARTPATH="$(echo ${FOLDER_SETTINGS%/*})"
+
+        FOLDER_SETTINGS_OLD=$(echo $FOLDER_SETTINGS | sed -e "s#\/#\\\/#g")
+        FOLDER_SETTINGS_NEW=$(echo $TARGET_MOVE/$NAME_MOVE | sed -e "s#\/#\\\/#g")
+
+        if [ "$STARTPATH" = "/usr/share/icons" ]; then
+            pkexec bash -c "mv $FOLDER_SETTINGS $TARGET_MOVE && chown $USER:$USER -R $TARGET_MOVE/$NAME_MOVE"
+            sed -i "s/$FOLDER_SETTINGS_OLD/$FOLDER_SETTINGS_NEW/" $TARGET_MOVE/$NAME_MOVE/papirus-folder-colors.conf
+        elif [ "$TARGET_MOVE" = "/usr/share/icons" ]; then
+            sed -i "s/$FOLDER_SETTINGS_OLD/$FOLDER_SETTINGS_NEW/" $FOLDER_SETTINGS/papirus-folder-colors.conf
+            pkexec bash -c "mv $FOLDER_SETTINGS $TARGET_MOVE && chown root:root -R $TARGET_MOVE/$NAME_MOVE"
+        else
+            sed -i "s/$FOLDER_SETTINGS_OLD/$FOLDER_SETTINGS_NEW/" $FOLDER_SETTINGS/papirus-folder-colors.conf
+            mv $FOLDER_SETTINGS $TARGET_MOVE
+        fi
+        
+    ;;
+
+    esac
+
+
+if [ -f "$TARGET_MOVE/$NAME_MOVE/papirus-folder-colors.conf" ]; then
+    SETTINGS_DONE=yessir
+else
+    SETTINGS_DONE=nomaam
+fi
+
+export $SETTINGS_DONE
+
+;;
+
+
+settings_delete)
+
+FOLDER_SETTINGS=$(tail -n 1 /tmp/pfs-themename)
+
+#TRANSLATORS window text - requesting confirmation that selected icon theme should be deleted
+TEXT_DELCON="$(gettext 'Do you really want to delete')"
+
+yad --title="$TITLE" --class="$CLASS" --window-icon="$ICONPATH" \
+--borders=10 --center --width=400 --height=200 --fixed  --separator="" \
+--button="$BTN_NO":14 --button="$BTN_YES":16 \
+--text="\n$TEXT_DELCON\n\n<b>$FOLDER_SETTINGS</b> ?\n\n" --text-align=center \
+
+    case $? in
+
+    14)
+        exit 0
+    ;;
+
+    16)
+        STARTPATH="$(echo ${FOLDER_SETTINGS%/*})"
+        
+        if [ "$STARTPATH" = "/usr/share/icons" ]; then
+            pkexec rm -r $FOLDER_SETTINGS
+        else
+            rm -r $FOLDER_SETTINGS
+        fi
+    ;;
+
+    esac
+
+if [ ! -d "$FOLDER_SETTINGS" ]; then
+    SETTINGS_DONE=yessir
+else
+    SETTINGS_DONE=nomaam
+fi
+
+export $SETTINGS_DONE
+
+;;
+
+
+settings_rename)
+
+FOLDER_SETTINGS=$(tail -n 1 /tmp/pfs-themename)
+
+#TRANSLATORS window text - asking for new name for icon theme
+TEXT_RN="$(gettext 'New name for icon theme')"
+NAME_OLD=$(basename $FOLDER_SETTINGS)
+NAME_OLD4YAD=$(echo $NAME_OLD | sed -e "s/Papirus-//")
+
+NAME_RENAME=$(yad --title="$TITLE" --class="$CLASS" --window-icon="$ICONPATH" \
+--borders=10 --center --width=400 --height=200 --fixed  --separator="" \
+--text="\n$TEXT_RN\n" --text-align=center \
+--button="$BTN_CLOSE":18 --button="$BTN_OK":20 \
+--form \
+--field "<b>Papirus-</b>" "$NAME_OLD4YAD" \
+)
+
+    case $? in  
+    18 | 252 )
+        exit
+    ;;
+    
+    20 )
+        NAME_RENAME=Papirus-$NAME_RENAME
+        NAME_RENAME=$(echo $NAME_RENAME | sed -e "s/ /_/g") ### replace empty spaces with underscore
+
+        if [ "$NAME_RENAME" = "Papirus-" ]; then
+            NAME_RENAME=$NAME_OLD
+        fi
+        
+        STARTPATH="$(echo ${FOLDER_SETTINGS%/*})"
+
+        until [ "$NAME_OLD" != "$NAME_RENAME" ] && [ ! -d $STARTPATH/$NAME_RENAME ]; do
+#TRANSLATORS error message - text is preceded by icon theme name
+            TEXT_RENAMEFAIL1="$(gettext 'already exists.')"
+#TRANSLATORS window text - asking for new name for icon theme
+            TEXT_RENAMEFAIL2="$(gettext 'Select a new name.')"
+
+            NAME_RENAME=$(yad --title="$TITLE" --class="$CLASS" --window-icon="$ICONPATH" \
+            --borders=10 --center --width=400 --height=200 --fixed  --separator="" \
+            --text="\n<b>$NAME_RENAME</b> $TEXT_RENAMEFAIL1\n\n$TEXT_RENAMEFAIL2\n" --text-align=center \
+            --button="$BTN_CLOSE":30 --button="$BTN_OK":32 \
+            --form \
+            --field "<b>Papirus-</b>" "$NAME_OLD4YAD" \
+            )
+
+            case $? in  
+            30 | 252 )
+                exit
+            ;;
+
+            32 )
+                NAME_RENAME=Papirus-$NAME_RENAME
+                
+                if [ "$NAME_RENAME" = "Papirus-" ]; then
+                    NAME_RENAME=$NAME_OLD
+                fi
+        
+                NAME_RENAME=$(echo $NAME_RENAME | sed -e "s/ /_/g")
+            ;;
+            esac
+
+        done
+
+        FOLDER_SETTINGS_NEW=$(echo $FOLDER_SETTINGS | sed -e "s/$NAME_OLD/$NAME_RENAME/")
+      
+        if [ "$STARTPATH" = "/usr/share/icons" ]; then
+
+            pkexec bash -c "mv -v $FOLDER_SETTINGS $FOLDER_SETTINGS_NEW && sed -i "s/$NAME_OLD/$NAME_RENAME/" $FOLDER_SETTINGS_NEW/papirus-folder-colors.conf && sed -i "s/$NAME_OLD/$NAME_RENAME/" $FOLDER_SETTINGS_NEW/index.theme"
+
+        else
+
+            mv -v $FOLDER_SETTINGS $FOLDER_SETTINGS_NEW
+            sed -i "s/$NAME_OLD/$NAME_RENAME/" $FOLDER_SETTINGS_NEW/papirus-folder-colors.conf
+            sed -i "s/$NAME_OLD/$NAME_RENAME/" $FOLDER_SETTINGS_NEW/index.theme
+        fi           
+    ;;
+    esac
+
+if [ -d "$FOLDER_SETTINGS_NEW" ]; then
+    SETTINGS_DONE=yessir
+else
+    SETTINGS_DONE=nomaam
+fi
+
+export $SETTINGS_DONE
+
+;;
+
+
+settings_edit)
+
+FOLDER_SETTINGS=$(tail -n 1 /tmp/pfs-themename)
+
+cp $FOLDER_SETTINGS/papirus-folder-colors.conf /tmp/pfs-settings.conf
+
+papirus-folder-recolor
+
+read SETTINGS_DONE < /tmp/pfr-completed
+export $SETTINGS_DONE
+rm /tmp/pfr-completed
+
+;;
+    
+esac
+
+### progress yad
+for ((i=0; i<=100; i=i+25)) {
+    echo $i
+    echo "# $((i))%"
+    sleep 0.25
+} | yad --progress --title="$TITLE" --class="$CLASS" \
+--borders=10 --center --width=400 --height=100 \
+--auto-close \
+--auto-kill
+
+
+if [ "$SETTINGS_DONE" = "yessir" ]; then
+
+#TRANSLATORS completed window text
+    PFS_FINISHEDTEXT1="$(gettext 'All done.')"
+#TRANSLATORS completed window information text - "Reload List" translation to match button label, leave <b> markup tags
+    PFS_FINISHEDTEXT2="$(gettext 'Use the <b> Reload List </b> button to update the folder list.')"
+
+    yad --title="$TITLE" --class="$CLASS" --window-icon="$ICONPATH" \
+    --borders=10 --center --width=400 --height=200 \
+    --text="\n$PFS_FINISHEDTEXT1\n\n$PFS_FINISHEDTEXT2\n" --text-align="center" \
+    --button="$BTN_CLOSE" --buttons-layout=spread \
+
+elif [ "$SETTINGS_DONE" = "nomaam" ]; then
+
+#TRANSLATORS completed window error message
+    PFS_FINISHEDTEXT3="$(gettext 'OOPS! Something went wrong with Papirus folder settings.')"
+
+    yad --title="$TITLE" --class="$CLASS" --window-icon="$ICONPATH" \
+    --borders=10 --center --width=400 --height=200 --text-align=center \
+    --text="\n<b>$PFS_FINISHEDTEXT3</b>" \
+    --button="$BTN_CLOSE" --buttons-layout=spread \
+
+fi
+
+exit

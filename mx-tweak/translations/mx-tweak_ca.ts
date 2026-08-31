@@ -50,21 +50,26 @@
     </message>
     <message>
         <location filename="../main.cpp" line="60"/>
+        <source>close application after action instead of minimize to tray.  Requires --traydialog</source>
+        <translation>tanca les aplicacions després de l&apos;acció en comptes de minimitzar-les a la safata. Cal --traydialog</translation>
+    </message>
+    <message>
+        <location filename="../main.cpp" line="61"/>
         <source>opens with display tab open.  Only valid with Xfce desktop running</source>
         <translation>obre amb la pestanya de visualització oberta. Vàlid només amb l&apos;escriptori Xfce</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="61"/>
+        <location filename="../main.cpp" line="62"/>
         <source>Opens theme tab directly.  Valid on Xfce &amp; Fluxbox desktops</source>
         <translation>Obre directament amb la pestanya de tema. Vàlid amb els escriptoris Xfce i Fluxbox </translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="62"/>
+        <location filename="../main.cpp" line="63"/>
         <source>Display additional debug output in console</source>
         <translation>Mostra la sortida addicional de depuració a la consola</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="63"/>
+        <location filename="../main.cpp" line="64"/>
         <source>Opens Other tab directly.  Valid on all desktops</source>
         <translation>Obre una altra pestanya directament. Vàlid en tots els escriptoris.</translation>
     </message>
@@ -74,8 +79,8 @@
     <message>
         <location filename="../tweak.ui" line="14"/>
         <location filename="../tweak.cpp" line="78"/>
-        <location filename="../tweak.cpp" line="244"/>
-        <location filename="../tweak.cpp" line="263"/>
+        <location filename="../tweak.cpp" line="243"/>
+        <location filename="../tweak.cpp" line="262"/>
         <source>MX Tweak</source>
         <translation>MX Tweak</translation>
     </message>
@@ -95,7 +100,7 @@
         <location filename="../tweak.ui" line="1265"/>
         <location filename="../tweak.ui" line="1394"/>
         <location filename="../tweak.ui" line="1441"/>
-        <location filename="../tweak.ui" line="1532"/>
+        <location filename="../tweak.ui" line="1542"/>
         <source>Apply</source>
         <extracomment>apply changes</extracomment>
         <translation>Aplica</translation>
@@ -213,7 +218,7 @@
     </message>
     <message>
         <location filename="../tweak.ui" line="311"/>
-        <location filename="../tweak.ui" line="1778"/>
+        <location filename="../tweak.ui" line="1785"/>
         <source>Window Manager</source>
         <extracomment>theme a window manager border will get</extracomment>
         <translation>Gestor de Finestres</translation>
@@ -669,206 +674,211 @@
         <translation>Diversos</translation>
     </message>
     <message>
-        <location filename="../tweak.ui" line="1471"/>
-        <source>NOTE: existing /etc/X11/xorg.conf.d/20-intel.conf will be backed up to home folder</source>
-        <translation>NOTA: es farà una còpia de seguretat del fitxer /etc/X11/xorg.conf.d/20-intel.conf existent a la carpeta d&apos;inici.</translation>
-    </message>
-    <message>
-        <location filename="../tweak.ui" line="1491"/>
-        <source>Early loading of KVM module is new to  kernel 6.12 and conflicts with some non-KVM virtual machine applications, including virtualbox</source>
-        <extracomment>early loading is new on 6.12 kernel and conflicts with virtualbox</extracomment>
-        <translation>La càrrega anticipada del mòdul KVM és una novetat del nucli 6.12 i entra en conflicte amb algunes aplicacions de màquina virtual que no són de KVM, inclosa Virtualbox.</translation>
-    </message>
-    <message>
-        <location filename="../tweak.ui" line="1494"/>
-        <source>Disable early KVM module load (must be disabled for Virtualbox operation on kernel 6.12 and up)</source>
-        <extracomment>disable early loading of KVM module.  necessary for virtualbox to function with kernels 6.12 and up.  actually default behavior on kernels 6.11 and earlier.</extracomment>
-        <translation>Desactiva la càrrega prèvia del mòdul KVM (cal desactivar-la pel funcionament de Virtualbox amb el kernel 6.12 o superior)</translation>
-    </message>
-    <message>
-        <location filename="../tweak.ui" line="1501"/>
-        <source>NOTE: existing /etc/X11/xorg.conf.d/20-radeon.conf will be backed up to home folder</source>
-        <translation>NOTA: es farà una còpia de seguretat del fitxer /etc/X11/xorg.conf.d/20-radeon.conf existent a la carpeta d&apos;inici.</translation>
-    </message>
-    <message>
-        <location filename="../tweak.ui" line="1508"/>
-        <source>put a hold or remove a hold on updates of Liquorix kernels</source>
-        <extracomment>toggle for apt hold action on update meta packages</extracomment>
-        <translation>posa o treu una retenció a les actualitzacions dels nuclis Liquorix</translation>
-    </message>
-    <message>
-        <location filename="../tweak.ui" line="1511"/>
-        <source>Enable Automatic Liquorix Kernel Updates (MX ahs repository)</source>
-        <extracomment>uses apt-mark to hold or unhold updates to kernel metapackages</extracomment>
-        <translation>Activa les actualitzacions automàtiques del nucli Liquorix (dipòsit MX ahs)</translation>
-    </message>
-    <message>
-        <location filename="../tweak.ui" line="1518"/>
-        <source>Reset Lightdm (login screen) to system default theme</source>
-        <translation>Restableix el Lightdm (pantalla d&apos;entrada) al tema per omissió</translation>
-    </message>
-    <message>
-        <location filename="../tweak.ui" line="1525"/>
-        <source>Use tearfree radeon driver option</source>
-        <translation>Usa l&apos;opció del controlador Radeon sense estrips</translation>
-    </message>
-    <message>
-        <location filename="../tweak.ui" line="1545"/>
-        <source>NOTE: existing /etc/X11/xorg.conf.d/20-amd.conf will be backed up to home folder</source>
-        <translation>NOTA: es farà una còpia de seguretat del fitxer /etc/X11/xorg.conf.d/20-amd.conf existent a la carpeta d&apos;inici.</translation>
-    </message>
-    <message>
-        <location filename="../tweak.ui" line="1552"/>
-        <source>Change Default Display Manager (login screen) (requires reboot)</source>
-        <extracomment>option to change display manager login screen.  present if more than one display manager is installed</extracomment>
-        <translation>Canvia el Gestor de Visualització (pantalla de registre) (cal reiniciar)</translation>
-    </message>
-    <message>
-        <location filename="../tweak.ui" line="1559"/>
-        <source>Change computer name (requires reboot)</source>
-        <extracomment>option to change the system hostname, requires a reboot to be 100% effective</extracomment>
-        <translation>Canvia el nom de l&apos;ordinador (cal reiniciar)</translation>
-    </message>
-    <message>
-        <location filename="../tweak.ui" line="1566"/>
+        <location filename="../tweak.ui" line="1487"/>
         <source>requires reboot</source>
         <translation>Cal reiniciar</translation>
     </message>
     <message>
-        <location filename="../tweak.ui" line="1569"/>
+        <location filename="../tweak.ui" line="1490"/>
         <source>Enable Bluetooth adapters on boot</source>
         <translation>Activa els adaptadors Bluetooth en arrencar</translation>
     </message>
     <message>
-        <location filename="../tweak.ui" line="1576"/>
-        <source>Generate fluxbox All Apps menu after package installation, removal, and updates</source>
-        <translation>Genera el menú de Totes les Aplicacions de fluxbox després de la instal·lació, eliminació o actualització de paquets.  </translation>
-    </message>
-    <message>
-        <location filename="../tweak.ui" line="1583"/>
-        <source>Use tearfree amdgpu option</source>
-        <translation>Usa l&apos;opció AMDGPU sense estrips</translation>
-    </message>
-    <message>
-        <location filename="../tweak.ui" line="1609"/>
-        <source>Use Client Side Decorations (CSD) on GTK3 applications that support them (requires session restart)</source>
-        <translation>Usa les Client Side Decorations (CSD) a les aplicacions GTK3 que hi siguin compatibles (cal reinici de sessió)</translation>
-    </message>
-    <message>
-        <location filename="../tweak.ui" line="1616"/>
-        <source>Enable kernel sandbox</source>
-        <translation>Activa l&apos;entorn de proves (sandbox)</translation>
-    </message>
-    <message>
-        <location filename="../tweak.ui" line="1623"/>
-        <source>Enable mounting of internal drives by non-root users</source>
-        <translation>Activa el muntatge de discos interns per qualsevol usuari</translation>
-    </message>
-    <message>
-        <location filename="../tweak.ui" line="1630"/>
-        <source>Apt installs additional &quot;recommends&quot; packages as dependencies</source>
-        <translation>Apt instal·la els paquets addicionals &quot;recomanats&quot; com a dependències</translation>
-    </message>
-    <message>
-        <location filename="../tweak.ui" line="1637"/>
-        <source>Use intel driver instead of default &quot;modesetting&quot; driver (requires restart)</source>
-        <translation>Usa el controlador intel en comptes del controlador &quot;modesetting&quot; (cal reiniciar)</translation>
-    </message>
-    <message>
-        <location filename="../tweak.ui" line="1647"/>
-        <source>Password for administrative tasks:</source>
-        <translation>Contrasenya d&apos;administrador: </translation>
-    </message>
-    <message>
-        <location filename="../tweak.ui" line="1654"/>
-        <source>&amp;User</source>
-        <translation>&amp;Usuari</translation>
-    </message>
-    <message>
-        <location filename="../tweak.ui" line="1661"/>
-        <source>Root</source>
-        <translation>Arrel</translation>
-    </message>
-    <message>
-        <location filename="../tweak.ui" line="1684"/>
+        <location filename="../tweak.ui" line="1497"/>
         <source>put a hold or remove a hold on updates of Debian  kernels</source>
         <extracomment>toggle for apt hold action on update meta packages</extracomment>
         <translation>posa o treu una retenció a les actualitzacions dels nuclis Debian</translation>
     </message>
     <message>
-        <location filename="../tweak.ui" line="1687"/>
+        <location filename="../tweak.ui" line="1500"/>
         <source>Enable Automatic Debian Kernel Updates</source>
         <extracomment>uses apt-mark to hold or unhold updates to kernel metapackages</extracomment>
         <translation>Activa les actualitzacions automàtiques del nucli Debian </translation>
     </message>
     <message>
-        <location filename="../tweak.ui" line="1694"/>
+        <location filename="../tweak.ui" line="1507"/>
+        <source>Enable kernel sandbox</source>
+        <translation>Activa l&apos;entorn de proves (sandbox)</translation>
+    </message>
+    <message>
+        <location filename="../tweak.ui" line="1514"/>
+        <source>Enable mounting of internal drives by non-root users</source>
+        <translation>Activa el muntatge de discos interns per qualsevol usuari</translation>
+    </message>
+    <message>
+        <location filename="../tweak.ui" line="1521"/>
+        <source>NOTE: existing /etc/X11/xorg.conf.d/20-radeon.conf will be backed up to home folder</source>
+        <translation>NOTA: es farà una còpia de seguretat del fitxer /etc/X11/xorg.conf.d/20-radeon.conf existent a la carpeta d&apos;inici.</translation>
+    </message>
+    <message>
+        <location filename="../tweak.ui" line="1528"/>
+        <source>Apt installs additional &quot;recommends&quot; packages as dependencies</source>
+        <translation>Apt instal·la els paquets addicionals &quot;recomanats&quot; com a dependències</translation>
+    </message>
+    <message>
+        <location filename="../tweak.ui" line="1535"/>
+        <source>Use Client Side Decorations (CSD) on GTK3 applications that support them (requires session restart)</source>
+        <translation>Usa les Client Side Decorations (CSD) a les aplicacions GTK3 que hi siguin compatibles (cal reinici de sessió)</translation>
+    </message>
+    <message>
+        <location filename="../tweak.ui" line="1552"/>
+        <source>Reset Lightdm (login screen) to system default theme</source>
+        <translation>Restableix el Lightdm (pantalla d&apos;entrada) al tema per omissió</translation>
+    </message>
+    <message>
+        <location filename="../tweak.ui" line="1559"/>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Init system that is used as the default on the main grub boot menu entry&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Sistema d&apos;inici que s&apos;usa per defecte a l&apos;entrada principal del menú d&apos;arrencada del grub&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <location filename="../tweak.ui" line="1562"/>
+        <source>Change Default Init System</source>
+        <translation>Canvia el sistema d&apos;inici per defecte</translation>
+    </message>
+    <message>
+        <location filename="../tweak.ui" line="1583"/>
+        <source>NOTE: existing /etc/X11/xorg.conf.d/20-amd.conf will be backed up to home folder</source>
+        <translation>NOTA: es farà una còpia de seguretat del fitxer /etc/X11/xorg.conf.d/20-amd.conf existent a la carpeta d&apos;inici.</translation>
+    </message>
+    <message>
+        <location filename="../tweak.ui" line="1603"/>
         <source>Enable Bluetooth battery info for connected devices (requires system restart)</source>
         <extracomment>expose battery info for connected bluetooth devices to the operating system via dbus</extracomment>
         <translation>Activa informació de bateria dels dispositius Bluetooth connectats (cal reiniciar el sistema)</translation>
     </message>
     <message>
-        <location filename="../tweak.ui" line="1701"/>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Init system that is used as the default on the main grub boot menu entry&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Sistema d&apos;inici que s&apos;usa per defecte a l&apos;entrada principal del menú d&apos;arrencada del grub&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <location filename="../tweak.ui" line="1610"/>
+        <source>Use tearfree amdgpu option</source>
+        <translation>Usa l&apos;opció AMDGPU sense estrips</translation>
     </message>
     <message>
-        <location filename="../tweak.ui" line="1704"/>
-        <source>Change Default Init System</source>
-        <translation>Canvia el sistema d&apos;inici per defecte</translation>
+        <location filename="../tweak.ui" line="1620"/>
+        <source>Generate fluxbox All Apps menu after package installation, removal, and updates</source>
+        <translation>Genera el menú de Totes les Aplicacions de fluxbox després de la instal·lació, eliminació o actualització de paquets.  </translation>
     </message>
     <message>
-        <location filename="../tweak.ui" line="1729"/>
+        <location filename="../tweak.ui" line="1627"/>
+        <source>Early loading of KVM module is new to  kernel 6.12 and conflicts with some non-KVM virtual machine applications, including virtualbox</source>
+        <extracomment>early loading is new on 6.12 kernel and conflicts with virtualbox</extracomment>
+        <translation>La càrrega anticipada del mòdul KVM és una novetat del nucli 6.12 i entra en conflicte amb algunes aplicacions de màquina virtual que no són de KVM, inclosa Virtualbox.</translation>
+    </message>
+    <message>
+        <location filename="../tweak.ui" line="1630"/>
+        <source>Disable early KVM module load (must be disabled for Virtualbox operation on kernel 6.12 and up)</source>
+        <extracomment>disable early loading of KVM module.  necessary for virtualbox to function with kernels 6.12 and up.  actually default behavior on kernels 6.11 and earlier.</extracomment>
+        <translation>Desactiva la càrrega prèvia del mòdul KVM (cal desactivar-la pel funcionament de Virtualbox amb el kernel 6.12 o superior)</translation>
+    </message>
+    <message>
+        <location filename="../tweak.ui" line="1637"/>
+        <source>Use tearfree radeon driver option</source>
+        <translation>Usa l&apos;opció del controlador Radeon sense estrips</translation>
+    </message>
+    <message>
+        <location filename="../tweak.ui" line="1644"/>
+        <source>put a hold or remove a hold on updates of Liquorix kernels</source>
+        <extracomment>toggle for apt hold action on update meta packages</extracomment>
+        <translation>posa o treu una retenció a les actualitzacions dels nuclis Liquorix</translation>
+    </message>
+    <message>
+        <location filename="../tweak.ui" line="1647"/>
+        <source>Enable Automatic Liquorix Kernel Updates (MX ahs repository)</source>
+        <extracomment>uses apt-mark to hold or unhold updates to kernel metapackages</extracomment>
+        <translation>Activa les actualitzacions automàtiques del nucli Liquorix (dipòsit MX ahs)</translation>
+    </message>
+    <message>
+        <location filename="../tweak.ui" line="1654"/>
+        <source>Change Default Display Manager (login screen) (requires reboot)</source>
+        <extracomment>option to change display manager login screen.  present if more than one display manager is installed</extracomment>
+        <translation>Canvia el Gestor de Visualització (pantalla de registre) (cal reiniciar)</translation>
+    </message>
+    <message>
+        <location filename="../tweak.ui" line="1661"/>
+        <source>Use intel driver instead of default &quot;modesetting&quot; driver (requires restart)</source>
+        <translation>Usa el controlador intel en comptes del controlador &quot;modesetting&quot; (cal reiniciar)</translation>
+    </message>
+    <message>
+        <location filename="../tweak.ui" line="1674"/>
+        <source>Password for administrative tasks:</source>
+        <translation>Contrasenya d&apos;administrador: </translation>
+    </message>
+    <message>
+        <location filename="../tweak.ui" line="1681"/>
+        <source>&amp;User</source>
+        <translation>&amp;Usuari</translation>
+    </message>
+    <message>
+        <location filename="../tweak.ui" line="1688"/>
+        <source>Root</source>
+        <translation>Arrel</translation>
+    </message>
+    <message>
+        <location filename="../tweak.ui" line="1711"/>
+        <source>Change computer name (requires reboot)</source>
+        <extracomment>option to change the system hostname, requires a reboot to be 100% effective</extracomment>
+        <translation>Canvia el nom de l&apos;ordinador (cal reiniciar)</translation>
+    </message>
+    <message>
+        <location filename="../tweak.ui" line="1718"/>
+        <source>NOTE: existing /etc/X11/xorg.conf.d/20-intel.conf will be backed up to home folder</source>
+        <translation>NOTA: es farà una còpia de seguretat del fitxer /etc/X11/xorg.conf.d/20-intel.conf existent a la carpeta d&apos;inici.</translation>
+    </message>
+    <message>
+        <location filename="../tweak.ui" line="1725"/>
+        <source>Enable Automatic Siduction Kernel Updates</source>
+        <translation>Activa l&apos;actualització automàtica del Kernel Siduction</translation>
+    </message>
+    <message>
+        <location filename="../tweak.ui" line="1736"/>
         <source>Xfce Settings</source>
         <translation>Paràmetres de Xfce</translation>
     </message>
     <message>
-        <location filename="../tweak.ui" line="1735"/>
+        <location filename="../tweak.ui" line="1742"/>
         <source>Customize the panel</source>
         <translation>Personalitzeu el plafó</translation>
     </message>
     <message>
-        <location filename="../tweak.ui" line="1745"/>
+        <location filename="../tweak.ui" line="1752"/>
         <source>Panel</source>
         <translation>Plafó </translation>
     </message>
     <message>
-        <location filename="../tweak.ui" line="1765"/>
+        <location filename="../tweak.ui" line="1772"/>
         <source>Configure window behavior and shortcuts</source>
         <translation>Configureu el comportament i les dreceres de la finestra</translation>
     </message>
     <message>
-        <location filename="../tweak.ui" line="1798"/>
+        <location filename="../tweak.ui" line="1805"/>
         <source>Customize the look of your desktop</source>
         <translation>Personalitzeu l&apos;aspecte de l&apos;escriptori</translation>
     </message>
     <message>
-        <location filename="../tweak.ui" line="1811"/>
+        <location filename="../tweak.ui" line="1818"/>
         <source>Appearance</source>
         <translation>Aspecte </translation>
     </message>
     <message>
-        <location filename="../tweak.ui" line="1823"/>
+        <location filename="../tweak.ui" line="1830"/>
         <source>About</source>
         <translation>Quant a </translation>
     </message>
     <message>
-        <location filename="../tweak.ui" line="1833"/>
+        <location filename="../tweak.ui" line="1840"/>
         <source>Help</source>
         <translation>Ajuda </translation>
     </message>
     <message>
-        <location filename="../tweak.ui" line="1891"/>
+        <location filename="../tweak.ui" line="1898"/>
         <source>Quit application</source>
         <translation>Surt de l&apos;aplicació</translation>
     </message>
     <message>
-        <location filename="../tweak.ui" line="1894"/>
+        <location filename="../tweak.ui" line="1901"/>
         <source>Close</source>
         <translation>Tanca</translation>
     </message>
     <message>
-        <location filename="../tweak.ui" line="1900"/>
+        <location filename="../tweak.ui" line="1907"/>
         <source>Alt+N</source>
         <translation>Alt+N</translation>
     </message>
@@ -878,32 +888,32 @@
         <translation>--commutador de pantalla vàlid només per Xfce</translation>
     </message>
     <message>
-        <location filename="../tweak.cpp" line="243"/>
+        <location filename="../tweak.cpp" line="242"/>
         <source>About MX Tweak</source>
         <translation>Quant a MX Tweak</translation>
     </message>
     <message>
-        <location filename="../tweak.cpp" line="245"/>
+        <location filename="../tweak.cpp" line="244"/>
         <source>Version: </source>
         <translation>Versió: </translation>
     </message>
     <message>
-        <location filename="../tweak.cpp" line="246"/>
+        <location filename="../tweak.cpp" line="245"/>
         <source>App for quick default ui theme changes and tweaks</source>
         <translation>Aplicació per al parametratge ràpid del tema IU per omissió</translation>
     </message>
     <message>
-        <location filename="../tweak.cpp" line="248"/>
+        <location filename="../tweak.cpp" line="247"/>
         <source>Copyright (c) MX Linux</source>
         <translation>Copyright (c) MX Linux</translation>
     </message>
     <message>
-        <location filename="../tweak.cpp" line="249"/>
+        <location filename="../tweak.cpp" line="248"/>
         <source>%1 License</source>
         <translation>Llicència de %1</translation>
     </message>
     <message>
-        <location filename="../tweak.cpp" line="263"/>
+        <location filename="../tweak.cpp" line="262"/>
         <source>%1 Help</source>
         <translation>Ajuda de %1</translation>
     </message>
@@ -911,17 +921,17 @@
 <context>
     <name>TweakCompositor</name>
     <message>
-        <location filename="../tweak_compositor.cpp" line="62"/>
+        <location filename="../tweak_compositor.cpp" line="68"/>
         <source>None</source>
         <translation>Cap</translation>
     </message>
     <message>
-        <location filename="../tweak_compositor.cpp" line="63"/>
+        <location filename="../tweak_compositor.cpp" line="69"/>
         <source>Xfwm (Xfce) Compositor</source>
         <translation>Compositor Xfwm (Xfce)</translation>
     </message>
     <message>
-        <location filename="../tweak_compositor.cpp" line="64"/>
+        <location filename="../tweak_compositor.cpp" line="70"/>
         <source>Picom</source>
         <translation>Picom</translation>
     </message>
@@ -929,13 +939,13 @@
 <context>
     <name>TweakMisc</name>
     <message>
-        <location filename="../tweak_misc.cpp" line="305"/>
+        <location filename="../tweak_misc.cpp" line="300"/>
         <source>Please enter a computer name.</source>
         <comment>question to enter a name for the computer hostname</comment>
         <translation>Si us plau, entreu un nom per a l&apos;ordinador.</translation>
     </message>
     <message>
-        <location filename="../tweak_misc.cpp" line="309"/>
+        <location filename="../tweak_misc.cpp" line="304"/>
         <source>Sorry, your computer name contains invalid characters.
 You'll have to select a different
 name before proceeding.</source>
@@ -957,27 +967,37 @@ abans de continuar.</translation>
 <context>
     <name>TweakTheme</name>
     <message>
-        <location filename="../tweak_theme.cpp" line="64"/>
+        <location filename="../tweak_theme.cpp" line="65"/>
         <source>Plasma Widget Themes</source>
         <comment>theme style of the kde plasma widgets</comment>
         <translation>Temes dels ginys del Plasma</translation>
     </message>
     <message>
-        <location filename="../tweak_theme.cpp" line="65"/>
+        <location filename="../tweak_theme.cpp" line="66"/>
         <source>Color Schemes</source>
         <comment>plasma widget color schemes</comment>
         <translation>Combinacions de color</translation>
     </message>
     <message>
-        <location filename="../tweak_theme.cpp" line="66"/>
+        <location filename="../tweak_theme.cpp" line="67"/>
         <source>Plasma Look &amp; Feel Global Themes</source>
         <comment>plasma global themes</comment>
         <translation>Aspecte i comportament del Plasma i Temes Globals</translation>
     </message>
     <message>
-        <location filename="../tweak_theme.cpp" line="139"/>
+        <location filename="../tweak_theme.cpp" line="140"/>
         <source>Choose a theme set</source>
         <translation>Trieu un conjunt de temes</translation>
+    </message>
+    <message>
+        <location filename="../tweak_theme.cpp" line="588"/>
+        <source>MX Tweak</source>
+        <translation>MX Tweak</translation>
+    </message>
+    <message>
+        <location filename="../tweak_theme.cpp" line="589"/>
+        <source>Could not determine the current Xfce panel configuration.</source>
+        <translation>No puc determinar la configuració actual del tauler Xfce.</translation>
     </message>
 </context>
 <context>
@@ -1013,40 +1033,40 @@ abans de continuar.</translation>
         <translation>Botons de les finestres</translation>
     </message>
     <message>
-        <location filename="../tweak_xfce_panel.cpp" line="273"/>
-        <location filename="../tweak_xfce_panel.cpp" line="280"/>
-        <location filename="../tweak_xfce_panel.cpp" line="297"/>
-        <location filename="../tweak_xfce_panel.cpp" line="301"/>
+        <location filename="../tweak_xfce_panel.cpp" line="276"/>
+        <location filename="../tweak_xfce_panel.cpp" line="283"/>
+        <location filename="../tweak_xfce_panel.cpp" line="300"/>
+        <location filename="../tweak_xfce_panel.cpp" line="304"/>
         <source>MX Tweak</source>
         <translation>MX Tweak</translation>
     </message>
     <message>
-        <location filename="../tweak_xfce_panel.cpp" line="274"/>
+        <location filename="../tweak_xfce_panel.cpp" line="277"/>
         <source>Plese remove special characters</source>
         <translation>Si us plau, eviteu els caràcters especials</translation>
     </message>
     <message>
-        <location filename="../tweak_xfce_panel.cpp" line="274"/>
+        <location filename="../tweak_xfce_panel.cpp" line="277"/>
         <source>from file name</source>
         <translation>del nom del fitxer</translation>
     </message>
     <message>
-        <location filename="../tweak_xfce_panel.cpp" line="280"/>
+        <location filename="../tweak_xfce_panel.cpp" line="283"/>
         <source>File name already exists.  Choose another name</source>
         <translation>El nom de fitxer ja hi és. Trieu-ne un altre.</translation>
     </message>
     <message>
-        <location filename="../tweak_xfce_panel.cpp" line="298"/>
+        <location filename="../tweak_xfce_panel.cpp" line="301"/>
         <source>File is not a valid tar.xz archive file</source>
         <translation>El fitxer no és un arxiu tar.xz vàlid</translation>
     </message>
     <message>
-        <location filename="../tweak_xfce_panel.cpp" line="302"/>
+        <location filename="../tweak_xfce_panel.cpp" line="305"/>
         <source>Archive does not contain a panel config</source>
         <translation>L&apos;arxiu no conté cap configuració de plafó</translation>
     </message>
     <message>
-        <location filename="../tweak_xfce_panel.cpp" line="733"/>
+        <location filename="../tweak_xfce_panel.cpp" line="736"/>
         <source>Panel Preferences</source>
         <translation>Preferències del plafó</translation>
     </message>

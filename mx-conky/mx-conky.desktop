@@ -71,5 +71,5 @@ Exec=mx-conky
 Terminal=false
 Type=Application
 Icon=mx-conky
-Categories=GNOME;GTK;System;MX-Setup
+Categories=GNOME;GTK;System;X-MX-Setup
 NoDisplay=false

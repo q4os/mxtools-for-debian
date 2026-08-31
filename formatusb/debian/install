@@ -1,7 +1,11 @@
 authors.txt		usr/share/doc/formatusb
 formatusb		usr/bin
 formatusb.desktop	usr/share/applications
-help/*			usr/share/doc/formatusb/help
+help/*.html			usr/share/doc/formatusb/help
+help/*.jpg			usr/share/doc/formatusb/help
+
+
+help/*.1			usr/share/man/man1
 license.html		usr/share/doc/formatusb
 lib/*				usr/lib/formatusb
 polkit-actions/*	usr/share/polkit-1/actions

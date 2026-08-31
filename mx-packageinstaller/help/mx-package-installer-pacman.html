@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>HELP: MX Package Installer</title>
+	<style type="text/css">
+		p.help-image {
+			text-align: left;
+			margin-left: 0;
+			margin-right: 0;
+		}
+
+		p.help-image img {
+			display: block;
+			margin-left: 0;
+			margin-right: auto;
+		}
+	</style>
+</head>
+<body>
+<h1>HELP: MX Package Installer</h1>
+<p>Launch it from your desktop's application menu, or run <code>mx-packageinstaller</code> from a terminal. You'll be prompted for your password whenever a privileged action &#8212; syncing repositories, installing or removing packages &#8212; needs it.</p>
+
+<h2>Enabled Repos</h2>
+
+<p class="help-image"><img src="pacman-1.png" alt="Enabled Repos" /></p>
+
+<p>This is the tab you land on, and gives you access to every package available in your system's enabled pacman repositories (core, extra, multilib, and any others you've configured). It has a limited feature set and is not a replacement for a full package manager like pacman itself or a front-end such as pamac; consider MX Package Installer supplementary to those.</p>
+
+	<ul>
+		<li>Search for a package or check the boxes directly, then click Install.</li>
+		<li> The &#8220;Installed&#8221; column shows a version number when it differs from the version in the repos.</li>
+		<li> Use the drop-down above the list to filter by status: All packages, Installed, Upgradable, Not installed, or Autoremovable. The filter works together with the search box next to it.</li>
+		<li> &#8220;Autoremove packages&#8221; and &#8220;Upgrade All&#8221; buttons appear when there are orphaned or upgradable packages to act on.</li>
+		<li> The Console Output tab is shown while repositories are synced and packages are installed or removed.</li>
+	</ul>
+
+<h2>AUR</h2>
+
+<p class="help-image"><img src="pacman-2.png" alt="AUR" /></p>
+
+<p>The <a href="https://aur.archlinux.org/" target="_blank" rel="noreferrer noopener" aria-label="Arch User Repository (opens in a new tab)">Arch User Repository</a> is a community-maintained collection of build scripts. Packages there are not vetted by Arch or MX, may be outdated, and could contain broken or malicious build scripts &#8212; use with care. A warning to this effect is shown the first time you open this tab; check &#8220;Do not show this message again&#8221; if you don't want to see it on future launches.</p>
+
+	<ul>
+		<li>This tab requires <a href="https://github.com/Morganamilo/paru" target="_blank" rel="noreferrer noopener" aria-label="paru (opens in a new tab)">paru</a> to be installed (<code>pacman -S paru</code>). Without it, searching or installing AUR packages will show an error.</li>
+		<li> With the search box empty, the tab shows packages you already have installed from the AUR. Type a term and press Enter to search the AUR live.</li>
+		<li> AUR packages are built unprivileged &#8212; paru refuses to run as root, the same as on the command line. If the build needs to install its result via pacman, you'll be prompted for your password inline in the Console Output tab; the input is masked while that prompt is active.</li>
+		<li> Click &#8220;Force update&#8221; to refresh the list of installed AUR packages, e.g. after installing or removing one outside of MX Package Installer.</li>
+	</ul>
+
+<h2>Flatpaks</h2>
+
+<p class="help-image"><img src="pacman-3.png" alt="Flatpaks" /></p>
+
+<p><a href="https://flatpak.org/" target="_blank" rel="noreferrer noopener" aria-label="Flatpaks (opens in a new tab)">Flatpaks</a> are a type of package that has all the dependencies included that&#8217;s supposed to work on multiple Linux distributions.</p>
+
+	<ul>
+		<li>They are not perfect: some might not work well, might not follow your theme, etc.</li>
+		<li> The first flatpak that you install will probably pull a huge runtime, so it will take a long time to download and will take a lot of space on your harddrive (probably around 2-3GB), but the next flatpak will most likely be able to use that runtime, so it gets a bit better after you install a couple of flatpaks.</li>
+		<li> By default, the &#8220;flathub&#8221; remote &#8220;repo&#8221; is used by default.  Others can be added via the Advanced dialog.</li>
+		<li> You can also install flatpaks via ref files via the Advanced dialog</li>
+	</ul>
+
+<h2>Snaps</h2>
+
+<p class="help-image"><img src="pacman-4.png" alt="Snaps" /></p>
+
+<p>The Snaps tab lets you search, install, remove, and update <a href="https://snapcraft.io/" target="_blank" rel="noreferrer noopener" aria-label="Snap packages (opens in a new tab)">Snap</a> packages from inside MX Package Installer. This tab only appears if the system is booted with systemd, since the Snap service (snapd) requires it. Note that snapd itself is not in the official Arch repositories &#8212; it's built from the AUR, so setting up Snap support here requires paru too.</p>
+
+	<ul>
+		<li>If Snap support is not yet set up on the system, click &#8220;Set up Snap support&#8221; to install snapd (via the AUR) and enable the Snap service.</li>
+		<li> Use the drop-down to switch between &#8220;Installed snaps&#8221; and &#8220;Search store&#8221;; type a term in the search box and press Enter to search the Snap store.</li>
+		<li> Check the packages you want and use the Install/Uninstall buttons as on the other tabs. Progress is shown live in the Console Output tab while Snaps download and install.</li>
+		<li> Click &#8220;Update All&#8221; to update every installed snap at once.</li>
+		<li> After installing a Snap app, log out and back in to see it appear in your application menu and to use its commands from a terminal.</li>
+	</ul>
+
+<h2>Q &amp; A</h2>
+
+	<ul>
+		<li>If I regret installing a program, is there a way to also remove whatever came along with it as a dependency?
+			<ul>
+				<li>When you uninstall a package, anything that was pulled in solely as its dependency and isn't needed by anything else gets marked &#8220;orphaned&#8221; (shown as &#8220;Autoremovable&#8221; in the status filter). We don't remove those automatically, but you can from the command line:</li>
+			</ul>
+			<pre><code>sudo pacman -R $(pacman -Qtdq)</code></pre>
+			<ul>
+				<li>Look at the list carefully first &#8212; run <code>pacman -Qtdq</code> on its own to see what would be removed &#8212; to make sure nothing you actually want is in there.</li>
+			</ul>
+		</li>
+		<li>Why does installing an AUR package sometimes ask for my password in the middle of the Console Output, instead of the usual authentication dialog?
+			<ul>
+				<li>paru (and the makepkg build it drives) refuses to run as root, so it can't go through the same privileged-helper path as repo installs. When the build needs to actually install the result, it elevates itself via a plain <code>sudo</code> call, which prompts right there in the console. MX Package Installer detects that prompt and masks what you type.</li>
+			</ul>
+		</li>
+	</ul>
+
+<p>Development history: Dolphin_Oracle, Adrian</p>
+
+<p>License: <a href="https://mxlinux.org/wiki/licenses/license-mx-package-installer">here</a>.</p>
+
+<p>v. 20260630</p>
+</body>
+</html>

@@ -81,8 +81,8 @@ void brightness_small::iconActivated(QSystemTrayIcon::ActivationReason reason) n
 {
     switch (reason) {
     case QSystemTrayIcon::Trigger:
-        setupBrightness();
         setupGamma();
+        setupBrightness();
         setupbacklight();
         adjustSize();
         setPosition();
@@ -97,16 +97,21 @@ void brightness_small::setPosition() noexcept
 {
     QPoint pos = QCursor::pos();
     QScreen *screen = QGuiApplication::screenAt(pos);
+    if (screen != nullptr ){
+        screen=QGuiApplication::primaryScreen();
+    }
     if (pos.y() + size().height() > screen->availableVirtualGeometry().height())
         pos.setY(screen->availableVirtualGeometry().height() - size().height());
     if (pos.x() + size().width() > screen->availableVirtualGeometry().width())
         pos.setX(screen->availableVirtualGeometry().width() - size().width());
     move(pos);
+
 }
 
 brightness_small::~brightness_small() noexcept
 {
     delete ui;
+    delete trayicon;
 }
 
 // following function is not actually used by the tray application

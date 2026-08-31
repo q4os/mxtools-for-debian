@@ -7,7 +7,7 @@
 # Change dir into this source directory and run this script:
 # $ sh build_all.sh
 #
-# Find generated .deb packages in the $MX_BUILD_DIR directory
+# Find generated .deb packages in the build directory
 
 MX_BUILD_DIR="/tmp/.build-mxtools-for-debian"
 

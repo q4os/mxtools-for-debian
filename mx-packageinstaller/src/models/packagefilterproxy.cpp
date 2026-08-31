@@ -1,5 +1,5 @@
 /**********************************************************************
- * Copyright (C) 2017-2025 MX Authors
+ * Copyright (C) 2017-2026 MX Authors
  *
  * Authors: Adrian
  *          MX Linux <http://mxlinux.org>
@@ -24,6 +24,9 @@
 #include <QRegularExpression>
 
 #include "../versionnumber.h"
+#ifdef PACKAGE_BACKEND_PACMAN
+#include "../packagebackend.h"
+#endif
 
 PackageFilterProxy::PackageFilterProxy(QObject *parent)
     : QSortFilterProxyModel(parent)
@@ -31,11 +34,23 @@ PackageFilterProxy::PackageFilterProxy(QObject *parent)
     setDynamicSortFilter(true);
 }
 
+void PackageFilterProxy::invalidateRowFilter()
+{
+    // beginFilterChange()/endFilterChange() replaced invalidateFilter() in Qt 6.10;
+    // invalidateFilter() is deprecated from 6.13 on. This proxy only filters rows.
+#if QT_VERSION >= QT_VERSION_CHECK(6, 10, 0)
+    beginFilterChange();
+    endFilterChange(QSortFilterProxyModel::Direction::Rows);
+#else
+    invalidateFilter();
+#endif
+}
+
 void PackageFilterProxy::setSearchText(const QString &text)
 {
     if (m_searchText != text) {
         m_searchText = text;
-        invalidateFilter();
+        invalidateRowFilter();
     }
 }
 
@@ -43,7 +58,7 @@ void PackageFilterProxy::setStatusFilter(int status)
 {
     if (m_statusFilter != status) {
         m_statusFilter = status;
-        invalidateFilter();
+        invalidateRowFilter();
     }
 }
 
@@ -51,7 +66,7 @@ void PackageFilterProxy::setHideLibraries(bool hide)
 {
     if (m_hideLibraries != hide) {
         m_hideLibraries = hide;
-        invalidateFilter();
+        invalidateRowFilter();
     }
 }
 
@@ -59,7 +74,7 @@ void PackageFilterProxy::setRepoOnly(bool repoOnly)
 {
     if (m_repoOnly != repoOnly) {
         m_repoOnly = repoOnly;
-        invalidateFilter();
+        invalidateRowFilter();
     }
 }
 
@@ -108,10 +123,32 @@ bool PackageFilterProxy::filterAcceptsRow(int sourceRow, const QModelIndex &sour
 
 bool PackageFilterProxy::lessThan(const QModelIndex &left, const QModelIndex &right) const
 {
+    if (left.column() == TreeCol::Check) {
+        // The Check column only exposes a checkbox state (Qt::CheckStateRole) and a
+        // status icon (Qt::DecorationRole), neither of which QSortFilterProxyModel's
+        // default Qt::DisplayRole-based lessThan() can compare -- so clicking this
+        // header would otherwise leave every row "equal" and never reorder. Sort by
+        // the underlying package status instead, matching what the icon represents.
+        auto *model = qobject_cast<PackageModel *>(sourceModel());
+        const PackageData *leftPkg = model ? model->packageAt(left.row()) : nullptr;
+        const PackageData *rightPkg = model ? model->packageAt(right.row()) : nullptr;
+        if (leftPkg && rightPkg) {
+            return leftPkg->status < rightPkg->status;
+        }
+        return false;
+    }
     if (left.column() == TreeCol::RepoVersion || left.column() == TreeCol::InstalledVersion) {
-        const VersionNumber leftVersion(left.data(Qt::DisplayRole).toString());
-        const VersionNumber rightVersion(right.data(Qt::DisplayRole).toString());
+        const QString leftStr = left.data(Qt::DisplayRole).toString();
+        const QString rightStr = right.data(Qt::DisplayRole).toString();
+#ifdef PACKAGE_BACKEND_PACMAN
+        // See PackageModel::updateInstalledVersions() -- same reasoning: pacman
+        // version strings must not be ordered with dpkg's VersionNumber rules.
+        return PackageBackend::compareVersions(leftStr, rightStr) < 0;
+#else
+        const VersionNumber leftVersion(leftStr);
+        const VersionNumber rightVersion(rightStr);
         return leftVersion < rightVersion;
+#endif
     }
     return QSortFilterProxyModel::lessThan(left, right);
 }
@@ -137,10 +174,18 @@ bool PackageFilterProxy::matchesStatus(int status) const
 
 bool PackageFilterProxy::isLibraryPackage(const QString &name)
 {
-    // Hide lib*, -dev, -dbg, -dbgsym and -libs packages, but keep user-facing
-    // applications whose names merely start with "lib" (LibreOffice, Librewolf).
+#ifdef PACKAGE_BACKEND_PACMAN
+    // Arch doesn't split packages into -dev/-dbg/-dbgsym/-libs the way Debian does,
+    // so there's no equivalent heuristic to apply here yet; "hide libraries" is a
+    // no-op until an Arch-appropriate pattern is authored.
+    Q_UNUSED(name);
+    return false;
+#else
+    // Hide lib*, -dev, -dbg, -dbgsym and -libs packages, but keep known user-facing
+    // applications whose names merely start with "lib".
     static const QRegularExpression libraryPattern(
-        QStringLiteral(R"((^lib(?!reoffice|rewolf))|(-dev$)|(-dbg$)|(-dbgsym$)|(-libs$))"),
+        QStringLiteral(R"((^lib(?!re(?:cad|office|pcb|wolf)))|(-dev$)|(-dbg$)|(-dbgsym$)|(-libs$))"),
         QRegularExpression::CaseInsensitiveOption);
     return libraryPattern.match(name).hasMatch();
+#endif
 }

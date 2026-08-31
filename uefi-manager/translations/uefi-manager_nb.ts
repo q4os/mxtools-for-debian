@@ -2,12 +2,12 @@
 <context>
     <name>Cmd</name>
     <message>
-        <location filename="../src/cmd.cpp" line="174"/>
+        <location filename="../src/cmd.cpp" line="173"/>
         <source>Administrator Access Required</source>
         <translation>Administratortilgang kreves</translation>
     </message>
     <message>
-        <location filename="../src/cmd.cpp" line="175"/>
+        <location filename="../src/cmd.cpp" line="174"/>
         <source>This operation requires administrator privileges.</source>
         <translation type="unfinished"/>
     </message>
@@ -136,7 +136,7 @@
     <message>
         <location filename="../src/mainwindow.ui" line="465"/>
         <location filename="../src/mainwindow.cpp" line="954"/>
-        <location filename="../src/mainwindow.cpp" line="1777"/>
+        <location filename="../src/mainwindow.cpp" line="1714"/>
         <source>Next</source>
         <translation>Neste</translation>
     </message>
@@ -146,15 +146,15 @@
         <translation>Tilbake</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="780"/>
+        <location filename="../src/mainwindow.cpp" line="778"/>
         <location filename="../src/mainwindow.cpp" line="978"/>
-        <location filename="../src/mainwindow.cpp" line="1583"/>
-        <location filename="../src/mainwindow.cpp" line="1593"/>
+        <location filename="../src/mainwindow.cpp" line="1527"/>
+        <location filename="../src/mainwindow.cpp" line="1537"/>
         <source>UEFI Installer</source>
         <translation>UEFI-installering</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="781"/>
+        <location filename="../src/mainwindow.cpp" line="779"/>
         <source>A recent frugal install has been detected. Do you wish to add a UEFI entry direct to your UEFI system menu?</source>
         <translation>Oppdaget en nylig nøysom installasjon. Vil du legge til en UEFI-oppføring i systemmenyen?</translation>
     </message>
@@ -179,92 +179,84 @@
         <translation>Klarte ikke åpne %1 LUKS-partisjon</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1584"/>
+        <location filename="../src/mainwindow.cpp" line="1528"/>
         <source>Are you sure this is the MX or antiX Frugal installation location?
 Missing mandatory files in directory: </source>
         <translation>Er du sikker på at dette er plasseringen til en nøysom MX- eller antiX-installasjon?
 Det mangler noen obligatoriske filer i mappa:</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1652"/>
+        <location filename="../src/mainwindow.cpp" line="1592"/>
         <source>Not enough space on the EFI System Partition to copy the kernel and initrd files.</source>
         <translation>Det er ikke nok diskplass på EFI systempartisjon til å kopiere kjernen og initrd-filene.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1714"/>
+        <location filename="../src/mainwindow.cpp" line="1651"/>
         <source>All fields are required</source>
         <translation>Alle feltene er påkrevd</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1737"/>
+        <location filename="../src/mainwindow.cpp" line="1674"/>
         <source>Could not select ESP</source>
         <translation>Klarte ikke velge ESP</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1755"/>
+        <location filename="../src/mainwindow.cpp" line="1692"/>
         <source>About %1</source>
         <translation>Om %1</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="156"/>
+        <location filename="../src/mainwindow.cpp" line="162"/>
         <source>Select EFI file</source>
         <translation>Velg EFI-fil</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="156"/>
+        <location filename="../src/mainwindow.cpp" line="162"/>
         <source>EFI files (*.efi *.EFI)</source>
         <translation>EFI-filer (*.efi *.EFI)</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="168"/>
-        <location filename="../src/mainwindow.cpp" line="179"/>
-        <location filename="../src/mainwindow.cpp" line="190"/>
-        <location filename="../src/mainwindow.cpp" line="198"/>
+        <location filename="../src/mainwindow.cpp" line="174"/>
+        <location filename="../src/mainwindow.cpp" line="185"/>
+        <location filename="../src/mainwindow.cpp" line="212"/>
+        <location filename="../src/mainwindow.cpp" line="219"/>
         <location filename="../src/mainwindow.cpp" line="1026"/>
         <location filename="../src/mainwindow.cpp" line="1038"/>
         <location filename="../src/mainwindow.cpp" line="1044"/>
-        <location filename="../src/mainwindow.cpp" line="1799"/>
-        <location filename="../src/mainwindow.cpp" line="1937"/>
-        <location filename="../src/mainwindow.cpp" line="2008"/>
-        <location filename="../src/mainwindow.cpp" line="2019"/>
-        <location filename="../src/mainwindow.cpp" line="2026"/>
-        <location filename="../src/mainwindow.cpp" line="2037"/>
-        <location filename="../src/mainwindow.cpp" line="2047"/>
-        <location filename="../src/mainwindow.cpp" line="2061"/>
-        <location filename="../src/mainwindow.cpp" line="2066"/>
+        <location filename="../src/mainwindow.cpp" line="1736"/>
         <source>Error</source>
         <translation>Feil</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="168"/>
-        <location filename="../src/mainwindow.cpp" line="179"/>
+        <location filename="../src/mainwindow.cpp" line="174"/>
+        <location filename="../src/mainwindow.cpp" line="185"/>
         <source>Could not find the source mountpoint for %1</source>
         <translation>Fant ikke monteringspunkt på kilden for %1</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="183"/>
+        <location filename="../src/mainwindow.cpp" line="189"/>
         <source>Set name</source>
         <translation>Velg navn</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="183"/>
+        <location filename="../src/mainwindow.cpp" line="189"/>
         <source>Enter the name for the UEFI menu item:</source>
         <translation>Velg navn for UEFI-element i menyen:</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="190"/>
+        <location filename="../src/mainwindow.cpp" line="212"/>
         <source>Selected file is not in an EFI directory</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="198"/>
+        <location filename="../src/mainwindow.cpp" line="219"/>
         <source>Something went wrong, could not add entry.</source>
         <translation>Noe gikk galt, klarte ikke legge til element.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="810"/>
         <location filename="../src/mainwindow.cpp" line="853"/>
-        <location filename="../src/mainwindow.cpp" line="1814"/>
+        <location filename="../src/mainwindow.cpp" line="1751"/>
         <source>Timeout: %1 seconds</source>
         <translation>Tidsavbrudd: %1 sekunder</translation>
     </message>
@@ -272,7 +264,7 @@ Det mangler noen obligatoriske filer i mappa:</translation>
         <location filename="../src/mainwindow.cpp" line="812"/>
         <location filename="../src/mainwindow.cpp" line="852"/>
         <location filename="../src/mainwindow.cpp" line="859"/>
-        <location filename="../src/mainwindow.cpp" line="1831"/>
+        <location filename="../src/mainwindow.cpp" line="1767"/>
         <source>Boot Next: %1</source>
         <translation>Neste oppstart: %1</translation>
     </message>
@@ -348,156 +340,116 @@ Det mangler noen obligatoriske filer i mappa:</translation>
         <translation>Klarte ikke åpne grub.entry-filen.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1758"/>
+        <location filename="../src/mainwindow.cpp" line="1695"/>
         <source>Tool for managing UEFI boot entries</source>
         <translation>Verktøy for behandling av oppstartsoppføringer i UEFI</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1937"/>
-        <source>Both old and new EFI labels must be specified</source>
-        <translation>Både gamle og nye EFI-disknavn må angis</translation>
-    </message>
-    <message>
-        <location filename="../src/mainwindow.cpp" line="2009"/>
-        <source>Multiple boot entries found for label &apos;%1&apos;: %2 and %3;</source>
-        <translation>Fant flere oppstartsoppføringer for disknavnet «%1»: %2 og %3;</translation>
-    </message>
-    <message>
-        <location filename="../src/mainwindow.cpp" line="2019"/>
-        <source>No EFI data found for label &apos;%1&apos;.</source>
-        <translation>Fant ingen EFI-data for disknavnet «%1».</translation>
-    </message>
-    <message>
-        <location filename="../src/mainwindow.cpp" line="2027"/>
-        <source>EFI label &apos;%1&apos; is linked to an unknown partition &apos;%2&apos;.</source>
-        <translation>EFI-disknavnet «%1» er koblet til en ukjent partisjon «%2».</translation>
-    </message>
-    <message>
-        <location filename="../src/mainwindow.cpp" line="2038"/>
-        <source>Unexpected device name format &apos;%1&apos; for partition related to the label.</source>
-        <translation>Uventet format på enhetsnavnet «%1» for partisjonen knyttet til disknavnet.</translation>
-    </message>
-    <message>
-        <location filename="../src/mainwindow.cpp" line="2048"/>
-        <source>Device partition number [%1] differs from EFI entry partition number [%2].</source>
-        <translation>Enhetens partisjonsnummer [%1] avviker fra EFI-oppføringens partisjonsnummer [%2].</translation>
-    </message>
-    <message>
-        <location filename="../src/mainwindow.cpp" line="2061"/>
-        <source>Failed to delete old boot entry</source>
-        <translation>Klarte ikke slette gammel oppstartsoppføring</translation>
-    </message>
-    <message>
-        <location filename="../src/mainwindow.cpp" line="2066"/>
-        <source>Failed to create new boot entry</source>
-        <translation>Klarte ikke opprette ny oppstartsoppføring</translation>
-    </message>
-    <message>
-        <location filename="../src/mainwindow.cpp" line="1593"/>
+        <location filename="../src/mainwindow.cpp" line="1537"/>
         <source>Failed to read grub.entry file.</source>
         <translation>Klarte ikke lese grub.entry-filen.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="963"/>
-        <location filename="../src/mainwindow.cpp" line="1606"/>
+        <location filename="../src/mainwindow.cpp" line="1550"/>
         <source>Install</source>
         <translation>Installer</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1612"/>
+        <location filename="../src/mainwindow.cpp" line="1556"/>
         <source>Select Frugal Directory</source>
         <translation>Velg nøysom-mappa</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1619"/>
+        <location filename="../src/mainwindow.cpp" line="1563"/>
         <source>No EFI System Partitions found.</source>
         <translation>Fant ikke EFI-systempartisjon</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1625"/>
+        <location filename="../src/mainwindow.cpp" line="1568"/>
         <source>Select EFI System Partition</source>
         <translation>Velg EFI-systempartisjon</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1626"/>
+        <location filename="../src/mainwindow.cpp" line="1569"/>
         <source>EFI System Partitions:</source>
         <translation>EFI-systempartisjoner:</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1639"/>
+        <location filename="../src/mainwindow.cpp" line="1579"/>
         <source>No EFI System Partition selected</source>
         <translation>Ingen EFI-systempartisjoner er valgt</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1646"/>
+        <location filename="../src/mainwindow.cpp" line="1586"/>
         <source>Could not mount selected EFI System Partition</source>
         <translation>Klarte ikke montere valgt EFI-systempartisjon</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1677"/>
-        <location filename="../src/mainwindow.cpp" line="1721"/>
+        <location filename="../src/mainwindow.cpp" line="1614"/>
+        <location filename="../src/mainwindow.cpp" line="1658"/>
         <source>Could not mount partition. Please make sure you selected the correct partition.</source>
         <translation>Klarte ikke montere partisjon. Sørg for at du har valgt riktig partisjon.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1686"/>
+        <location filename="../src/mainwindow.cpp" line="1623"/>
         <source>No directory selected</source>
         <translation>Ingen mappe er valgt</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1706"/>
-        <location filename="../src/mainwindow.cpp" line="1743"/>
+        <location filename="../src/mainwindow.cpp" line="1643"/>
+        <location filename="../src/mainwindow.cpp" line="1680"/>
         <source>EFI stub installed successfully.</source>
         <translation>EFI-stubben ble riktig installert.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1708"/>
-        <location filename="../src/mainwindow.cpp" line="1745"/>
+        <location filename="../src/mainwindow.cpp" line="1645"/>
+        <location filename="../src/mainwindow.cpp" line="1682"/>
         <source>Failed to install EFI stub.</source>
         <translation>Klarte ikke installere EFI-stubb.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1756"/>
+        <location filename="../src/mainwindow.cpp" line="1693"/>
         <source>Version: </source>
         <translation>Versjon:</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1760"/>
+        <location filename="../src/mainwindow.cpp" line="1697"/>
         <source>Copyright (c) MX Linux</source>
         <translation>Opphavsrett (c) MX Linux</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1761"/>
+        <location filename="../src/mainwindow.cpp" line="1698"/>
         <source>%1 License</source>
         <translation>Lisens for %1</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1769"/>
+        <location filename="../src/mainwindow.cpp" line="1706"/>
         <source>%1 Help</source>
         <translation>Hjelpetekst for %1</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1799"/>
+        <location filename="../src/mainwindow.cpp" line="1736"/>
         <source>Something went wrong, could not save boot order.</source>
         <translation>Noe gikk galt, klarte ikke lagre oppstartsrekkefølge.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1810"/>
+        <location filename="../src/mainwindow.cpp" line="1746"/>
         <source>Set timeout</source>
         <translation>Velg tidsavbrudd</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1810"/>
+        <location filename="../src/mainwindow.cpp" line="1746"/>
         <source>Timeout in seconds:</source>
         <translation>Tidsavbrudd i sekunder:</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1849"/>
+        <location filename="../src/mainwindow.cpp" line="1785"/>
         <source>Removal confirmation</source>
         <translation>Bekreft fjerning</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1850"/>
+        <location filename="../src/mainwindow.cpp" line="1786"/>
         <source>Are you sure you want to delete this boot entry?
 %1</source>
         <translation>Vil du virkelig slette denne oppføringen?
@@ -507,32 +459,32 @@ Det mangler noen obligatoriske filer i mappa:</translation>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../src/about.cpp" line="99"/>
+        <location filename="../src/about.cpp" line="100"/>
         <source>License</source>
         <translation>Lisens</translation>
     </message>
     <message>
-        <location filename="../src/about.cpp" line="100"/>
+        <location filename="../src/about.cpp" line="101"/>
         <source>Changelog</source>
         <translation>Endringslogg</translation>
     </message>
     <message>
-        <location filename="../src/about.cpp" line="101"/>
+        <location filename="../src/about.cpp" line="102"/>
         <source>Cancel</source>
         <translation>Avbryt</translation>
     </message>
     <message>
-        <location filename="../src/about.cpp" line="125"/>
+        <location filename="../src/about.cpp" line="126"/>
         <source>Error: Changelog file is missing.</source>
         <translation>Feil: Fil med endringslogg mangler.</translation>
     </message>
     <message>
-        <location filename="../src/about.cpp" line="127"/>
+        <location filename="../src/about.cpp" line="128"/>
         <source>Error: Required utility &apos;zless&apos; is missing.</source>
         <translation>Feil: Påkrevd verktøy &apos;zless&apos; mangler.</translation>
     </message>
     <message>
-        <location filename="../src/about.cpp" line="134"/>
+        <location filename="../src/about.cpp" line="135"/>
         <source>&amp;Close</source>
         <translation>&amp;Lukk</translation>
     </message>

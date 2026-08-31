@@ -1,0 +1,31 @@
+.TH MX-USER 1 "July 2026" "mx-user 26.07" "User Commands"
+.SH NAME
+mx-user \- manage users and groups on MX Linux
+.SH SYNOPSIS
+.B mx-user
+.SH DESCRIPTION
+.B mx-user
+is a graphical tool for managing local user accounts and groups.
+It can create, rename, modify, and delete user accounts; change passwords;
+manage group membership; configure automatic login; and copy desktop profiles
+between users.
+.PP
+Operations requiring administrative privileges are performed through a
+PolicyKit-protected helper.
+.SH FILES
+.TP
+.I /usr/libexec/mx-user/helper
+Privileged helper used for system account changes.
+.TP
+.I /usr/share/polkit-1/actions/org.mxlinux.pkexec.mx-user-helper.policy
+PolicyKit policy for the privileged helper.
+.SH SEE ALSO
+.BR useradd (8),
+.BR usermod (8),
+.BR userdel (8),
+.BR groupadd (8),
+.BR groupdel (8),
+.BR passwd (1)
+.SH AUTHORS
+.B mx-user
+is maintained by the MX Linux project.

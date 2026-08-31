@@ -1,5 +1,5 @@
 # **********************************************************************
-# * Copyright (C) 2015-2025 MX Authors
+# * Copyright (C) 2015-2026 MX Authors
 # *
 # * Authors: Adrian
 # *          MX Linux <http://mxlinux.org>
@@ -145,6 +145,7 @@ set(COMMON_SOURCES
     src/messagehandler.cpp
     src/excludesutils.cpp
     src/squashfsutils.cpp
+    src/checksumutils.cpp
 )
 
 set(COMMON_HEADERS
@@ -160,6 +161,7 @@ set(COMMON_HEADERS
     src/messagehandler.h
     src/excludesutils.h
     src/squashfsutils.h
+    src/checksumutils.h
 )
 
 set(HELPER_SOURCES
@@ -187,6 +189,7 @@ set(RESOURCE_FILES
 
 # Get all translation files
 file(GLOB TRANSLATION_FILES "translations/*.ts")
+list(FILTER TRANSLATION_FILES EXCLUDE REGEX "/mx-snapshot_en_US\\.ts$")
 
 # Create GUI executable
 if(BUILD_GUI)
@@ -327,6 +330,26 @@ if(BUILD_TESTS)
     target_include_directories(test-cmd PRIVATE src)
     set_common_properties(test-cmd)
     add_test(NAME cmd COMMAND test-cmd)
+
+    add_executable(test-filesystemutils
+        tests/test_filesystemutils.cpp
+        src/filesystemutils.cpp
+        src/filesystemutils.h
+    )
+    target_link_libraries(test-filesystemutils Qt6::Core Qt6::Test)
+    target_include_directories(test-filesystemutils PRIVATE src)
+    set_common_properties(test-filesystemutils)
+    add_test(NAME filesystemutils COMMAND test-filesystemutils)
+
+    add_executable(test-checksumutils
+        tests/test_checksumutils.cpp
+        src/checksumutils.cpp
+        src/checksumutils.h
+    )
+    target_link_libraries(test-checksumutils Qt6::Core Qt6::Test)
+    target_include_directories(test-checksumutils PRIVATE src)
+    set_common_properties(test-checksumutils)
+    add_test(NAME checksumutils COMMAND test-checksumutils)
 
     add_executable(test-elevationbroker
         tests/test_elevationbroker.cpp

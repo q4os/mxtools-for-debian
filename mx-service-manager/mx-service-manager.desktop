@@ -52,5 +52,5 @@ Exec=mx-service-manager
 Terminal=false
 Type=Application
 Icon=mx-service-manager
-Categories=GNOME;GTK;System;MX-Maintenance;
+Categories=GNOME;GTK;System;X-MX-Maintenance;
 NoDisplay=false

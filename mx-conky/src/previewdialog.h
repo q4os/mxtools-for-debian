@@ -77,10 +77,16 @@ private:
     bool m_isGenerating;
     QTimer *m_generationTimer;
 
+    // Conkies that were running before generation started and were paused so they
+    // wouldn't visually interfere with the preview screenshots; restored afterward.
+    QStringList m_conkiesStoppedForGeneration;
+
     void setupUI();
     void generatePreviewForItem(ConkyItem *item);
     QString generatePreviewImage(ConkyItem *item);
     [[nodiscard]] QStringList getItemsToProcess() const;
     ConkyItem *ensureConkyInUserDir(ConkyItem *item);
     void cleanupBeforeNextPreview();
+    void stopConkiesForPreviewGeneration();
+    void restoreConkiesAfterPreviewGeneration();
 };

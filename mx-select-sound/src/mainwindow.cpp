@@ -1,7 +1,7 @@
 /**********************************************************************
  *  mainwindow.cpp
  **********************************************************************
- * Copyright (C) 2015 MX Authors
+ * Copyright (C) 2015-2026 MX Authors
  *
  * Authors: Adrian
  *          MX Linux <http://mxlinux.org>
@@ -58,6 +58,13 @@ MainWindow::MainWindow(QWidget *parent)
 
 MainWindow::~MainWindow()
 {
+    if (m_testProc) {
+        m_testProc->disconnect();
+        if (m_testProc->state() != QProcess::NotRunning) {
+            m_testProc->kill();
+            m_testProc->waitForFinished();
+        }
+    }
     delete ui;
 }
 
@@ -225,6 +232,9 @@ void MainWindow::pushApply_clicked()
         asoundrc.write(QStringLiteral("defaults.pcm.!card %1\ndefaults.ctl.!card %1").arg(selected).toUtf8());
         asoundrc.close();
         getDefault();
+    } else {
+        QMessageBox::critical(this, tr("MX Select Sound"),
+                              tr("Could not set default sound card:\n%1").arg(asoundrc.errorString()));
     }
 }
 
@@ -237,7 +247,7 @@ void MainWindow::pushAbout_clicked()
             + "</h3></p><p align=\"center\"><a href=\"http://mxlinux.org\">http://mxlinux.org</a><br /></p>"
               "<p align=\"center\">"
             + tr("Copyright (c) MX Linux") + "<br /><br /></p>",
-        QStringLiteral("/usr/share/doc/mx-select-sound/license.html"), tr("%1 License").arg(windowTitle()));
+        QStringLiteral("license.html"), tr("%1 License").arg(windowTitle()));
 }
 
 void MainWindow::pushHelp_clicked()
@@ -255,6 +265,7 @@ void MainWindow::pushTest_clicked()
     }
     ui->pushTest->setEnabled(false);
     auto *proc = new QProcess(this);
+    m_testProc = proc;
     connect(proc, &QProcess::errorOccurred, this, [this, proc](QProcess::ProcessError error) {
         if (error != QProcess::FailedToStart)
             return;

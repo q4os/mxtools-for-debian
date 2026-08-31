@@ -103,6 +103,9 @@ if(USE_CLANG)
     message(STATUS "Using clang compiler")
 endif()
 
+# Option to build tests
+option(BUILD_TESTS "Build tests" OFF)
+
 # Find Qt6 components
 find_package(Qt6 REQUIRED COMPONENTS
     Core
@@ -116,21 +119,41 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTORCC ON)
 
+# Absolute directory where the privileged helper binaries are installed.
+set(HELPER_INSTALL_DIR "/usr/libexec/mx-cleanup" CACHE PATH
+    "Absolute install directory for the privileged helper binaries")
+if(NOT IS_ABSOLUTE "${HELPER_INSTALL_DIR}")
+    message(FATAL_ERROR "HELPER_INSTALL_DIR must be an absolute path, got: ${HELPER_INSTALL_DIR}")
+endif()
+set(HELPER_PATH "${HELPER_INSTALL_DIR}/helper")
+set(HELPER_TERMINAL_PATH "${HELPER_INSTALL_DIR}/helper-terminal-keep-open")
+configure_file(
+    scripts/org.mxlinux.pkexec.mx-cleanup-helper.policy.in
+    ${CMAKE_BINARY_DIR}/org.mxlinux.pkexec.mx-cleanup-helper.policy
+    @ONLY
+)
+
 # Define source files
 set(SOURCES
     main.cpp
     mainwindow.cpp
     about.cpp
+    packagemanager.cpp
 )
 
 set(HELPER_SOURCES
     helper.cpp
+    helperlib.cpp
+    packagemanager.cpp
 )
 
 set(HEADERS
     mainwindow.h
     about.h
     common.h
+    usernameutils.h
+    packagemanager.h
+    helperlib.h
 )
 
 set(UI_FILES
@@ -169,8 +192,9 @@ target_link_libraries(helper
 
 # Set compiler flags
 target_compile_options(mx-cleanup PRIVATE
+    -Wall
+    -Wextra
     -Wpedantic
-    -pedantic
     -Werror=return-type
     -Werror=switch
     -Werror=uninitialized
@@ -178,8 +202,9 @@ target_compile_options(mx-cleanup PRIVATE
 )
 
 target_compile_options(helper PRIVATE
+    -Wall
+    -Wextra
     -Wpedantic
-    -pedantic
     -Werror=return-type
     -Werror=switch
     -Werror=uninitialized
@@ -197,6 +222,8 @@ endif()
 
 # Set compile definitions
 target_compile_definitions(mx-cleanup PRIVATE
+    HELPER_PATH="${HELPER_PATH}"
+    HELPER_TERMINAL_PATH="${HELPER_TERMINAL_PATH}"
     QT_DEPRECATED_WARNINGS
     QT_DISABLE_DEPRECATED_BEFORE=0x060000
     VERSION="${PROJECT_VERSION}"
@@ -252,5 +279,34 @@ install(TARGETS mx-cleanup
 )
 
 install(TARGETS helper
-    RUNTIME DESTINATION lib/mx-cleanup
+    RUNTIME DESTINATION ${HELPER_INSTALL_DIR}
 )
+
+# Tests
+if(BUILD_TESTS)
+    enable_testing()
+
+    find_package(Qt6 REQUIRED COMPONENTS Test)
+
+    add_executable(test_mx-cleanup
+        tests/test_utils.cpp
+        mainwindow.cpp
+        about.cpp
+        packagemanager.cpp
+        helperlib.cpp
+    )
+
+    target_link_libraries(test_mx-cleanup
+        Qt6::Core
+        Qt6::Gui
+        Qt6::Widgets
+        Qt6::Test
+    )
+
+    target_compile_definitions(test_mx-cleanup PRIVATE
+        HELPER_PATH="${HELPER_PATH}"
+        HELPER_TERMINAL_PATH="${HELPER_TERMINAL_PATH}"
+    )
+
+    add_test(NAME test_utils COMMAND test_mx-cleanup)
+endif()

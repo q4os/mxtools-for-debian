@@ -53,6 +53,12 @@ void VersionNumber::setStrings(const QString &value)
     if (dashIndex != -1) {
         debianStr = upstreamStr.mid(dashIndex + 1);
         upstreamStr = upstreamStr.left(dashIndex);
+    } else {
+        // dpkg treats a missing debian_revision as equivalent to "0" (e.g.
+        // "1.0" == "1.0-0"): default it the same way epoch is defaulted above,
+        // so compare()'s debianRevision comparison doesn't treat "absent" as
+        // strictly shorter/older than an explicit "-0".
+        debianStr = QStringLiteral("0");
     }
 
     upstreamVersion = groupDigits(upstreamStr);
@@ -104,6 +110,9 @@ QStringList VersionNumber::groupDigits(const QString &value)
             }
             result.append(currentChar);
         }
+    }
+    if (!value.isEmpty() && !value.back().isDigit()) {
+        result.append(QStringLiteral("0"));
     }
 
     return result;

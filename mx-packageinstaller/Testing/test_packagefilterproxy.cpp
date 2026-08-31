@@ -11,6 +11,7 @@ private slots:
     void testStatusFilter();
     void testSearchText();
     void testVisibleSourceRows();
+    void testSortByCheckColumn();
 
 private:
     QVector<PackageData> createPackages() const;
@@ -44,6 +45,18 @@ QVector<PackageData> TestPackageFilterProxy::createPackages() const
     pkg4.status = Status::Installed;
     packages.append(pkg4);
 
+    PackageData pkg5;
+    pkg5.name = "librecad";
+    pkg5.description = "Computer-aided design application";
+    pkg5.status = Status::NotInstalled;
+    packages.append(pkg5);
+
+    PackageData pkg6;
+    pkg6.name = "librecad-dev";
+    pkg6.description = "LibreCAD development files";
+    pkg6.status = Status::NotInstalled;
+    packages.append(pkg6);
+
     return packages;
 }
 
@@ -56,9 +69,16 @@ void TestPackageFilterProxy::testHideLibraries()
     proxy.setSourceModel(&model);
     proxy.setHideLibraries(true);
 
-    QCOMPARE(proxy.rowCount(), 2);
+#ifdef PACKAGE_BACKEND_PACMAN
+    // isLibraryPackage() is a no-op on Arch (no lib*/-dev/-dbg*/-libs split-package
+    // convention to filter on yet), so "hide libraries" hides nothing.
+    QCOMPARE(proxy.rowCount(), 6);
+#else
+    QCOMPARE(proxy.rowCount(), 3);
     QCOMPARE(proxy.index(0, TreeCol::Name).data().toString(), QString("vim"));
     QCOMPARE(proxy.index(1, TreeCol::Name).data().toString(), QString("firefox"));
+    QCOMPARE(proxy.index(2, TreeCol::Name).data().toString(), QString("librecad"));
+#endif
 }
 
 void TestPackageFilterProxy::testStatusFilter()
@@ -103,9 +123,38 @@ void TestPackageFilterProxy::testVisibleSourceRows()
     proxy.setHideLibraries(true);
 
     QVector<int> rows = proxy.visibleSourceRows();
-    QCOMPARE(rows.size(), 2);
+#ifdef PACKAGE_BACKEND_PACMAN
+    // isLibraryPackage() is a no-op on Arch, so nothing gets hidden; see testHideLibraries().
+    QCOMPARE(rows.size(), 6);
+#else
+    QCOMPARE(rows.size(), 3);
     QCOMPARE(rows.at(0), 2);
     QCOMPARE(rows.at(1), 3);
+    QCOMPARE(rows.at(2), 4);
+#endif
+}
+
+void TestPackageFilterProxy::testSortByCheckColumn()
+{
+    PackageModel model;
+    model.setPackageData(createPackages());
+
+    PackageFilterProxy proxy;
+    proxy.setSourceModel(&model);
+    proxy.setHideLibraries(false);
+    proxy.sort(TreeCol::Check, Qt::AscendingOrder);
+
+    // Status enum order is Installed(1) < Upgradable(2) < NotInstalled(3) < Autoremovable(4);
+    // sorting the icon column should group rows by that status, not leave them unordered.
+    QCOMPARE(proxy.rowCount(), 6);
+    for (int i = 0; i < proxy.rowCount() - 1; ++i) {
+        const int leftStatus = model.packageAt(proxy.mapToSource(proxy.index(i, TreeCol::Check)).row())->status;
+        const int rightStatus = model.packageAt(proxy.mapToSource(proxy.index(i + 1, TreeCol::Check)).row())->status;
+        QVERIFY(leftStatus <= rightStatus);
+    }
+    QCOMPARE(proxy.index(0, TreeCol::Name).data().toString(), QString("libfoo"));
+    QCOMPARE(proxy.index(1, TreeCol::Name).data().toString(), QString("firefox"));
+    QCOMPARE(proxy.index(2, TreeCol::Name).data().toString(), QString("vim"));
 }
 
 QTEST_MAIN(TestPackageFilterProxy)

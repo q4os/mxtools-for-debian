@@ -1,0 +1,46 @@
+#!/usr/bin/bash
+# Builds this project's Debian package. Run from wherever this script
+# lives (the project's own root, once cloned) - no other setup needed
+# beyond the packages checked for below.
+#
+# Usage: ./build
+set -euo pipefail
+
+SCRIPT_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
+cd "$SCRIPT_DIR"
+
+# debuild (from devscripts) isn't itself listed in debian/control's own
+# Build-Depends - by convention, packaging tools are assumed already
+# present on a machine doing packaging work, not declared as a
+# dependency of the package being built - so check for it by hand.
+if ! command -v debuild >/dev/null 2>&1; then
+    echo "error: 'debuild' not found - install it with:" >&2
+    # apt update first - an out-of-sync package cache can make install
+    # wrongly report the package as unavailable.
+    echo "  sudo apt update" >&2
+    echo "  sudo apt install devscripts" >&2
+    exit 1
+fi
+
+# dpkg-checkbuilddeps (from dpkg-dev, needed for dpkg-buildpackage/
+# debuild themselves anyway) reads debian/control's own Build-Depends/
+# Build-Conflicts directly - the authoritative check, not a hand-rolled
+# list that could drift from what control actually says.
+if ! dpkg-checkbuilddeps; then
+    echo "Install the missing package(s) above, then try again - e.g.:" >&2
+    # apt update first - an out-of-sync package cache can make build-dep
+    # wrongly report a package as unavailable.
+    echo "  sudo apt update" >&2
+    echo "  sudo apt build-dep ." >&2
+    # If apt's own unrelated "N packages are no longer required" note
+    # gets in the way, add -o APT::Get::HideAutoRemove=1 before build-dep:
+    # echo "  sudo apt -o APT::Get::HideAutoRemove=1 build-dep ." >&2
+    exit 1
+fi
+
+echo "==> Building"
+debuild -us -uc -b
+
+# debuild/dpkg-buildpackage place their output one directory *above*
+# wherever debian/ lives, not next to it - standard Debian convention.
+echo "==> Done - the .deb and friends are in $(dirname "$SCRIPT_DIR")/"

@@ -1,7 +1,7 @@
 /**********************************************************************
  *
  **********************************************************************
- * Copyright (C) 2024-2025 MX Authors
+ * Copyright (C) 2024-2026 MX Authors
  *
  * Authors: Adrian <adrian@mxlinux.org>
  *          MX Linux <http://mxlinux.org>
@@ -23,8 +23,6 @@
 
 #include <QLatin1StringView>
 #include <QString>
-
-inline const QString STARTING_HOME = qEnvironmentVariable("HOME");
 
 // EFI System Partition GUID (GPT) and MBR type
 inline constexpr QLatin1StringView ESP_GUID_GPT("c12a7328-f81f-11d2-ba4b-00a0c93ec93b");

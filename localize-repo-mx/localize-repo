@@ -70,8 +70,8 @@ fr_AX_HOST=http://ftp.lip6.fr/pub/linux/distributions/mxlinux/packages/antix
 fr_MX_HOST=http://ftp.lip6.fr/pub/linux/distributions/mxlinux/packages/mx
 fr_LOCATION="France"
 
-gb_AX_HOST=http://mxlinux.mirrors.uk2.net/packages/antix
-gb_MX_HOST=http://mxlinux.mirrors.uk2.net/packages/mx
+gb_AX_HOST=https://gb.mirrors.cicku.me/mxlinux/packages/antix
+gb_MX_HOST=https://gb.mirrors.cicku.me/mxlinux/packages/mx
 gb_LOCATION="United Kingdom"
 
 ge_AX_HOST=https://mxlinux.grena.ge/mxlinux/antix

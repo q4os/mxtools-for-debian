@@ -681,13 +681,13 @@ msgstr "(padrão)"
 #: ../ddm-mx:1500
 #, sh-format
 msgid "Trying open kernel modules"
-msgstr ""
+msgstr "Testando os módulos de código aberto do kernel"
 
 #. message confirming choice of using nvidia's proprietary kernel modules
 #: ../ddm-mx:1505
 #, sh-format
 msgid "Using proprietary kernel modules"
-msgstr ""
+msgstr "Usando os módulos proprietários do kernel"
 
 #: ../nvidia-detect-mx:33
 msgid ""

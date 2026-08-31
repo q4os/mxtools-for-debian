@@ -1,0 +1,34 @@
+Source: verify-iso-sig
+Section: utils
+Priority: optional
+Maintainer: fehlix <fehlix@mxlinux.org>
+Build-Depends: debhelper-compat (= 13), bash-completion, gettext, pandoc
+Standards-Version: 4.6.2
+Rules-Requires-Root: no
+
+Package: verify-iso-sig
+Architecture: all
+Depends: ${misc:Depends},
+         bash,
+         file,
+         gnupg,
+         gpgv,
+         yad,
+         gettext-base,
+         librsvg2-common
+Recommends: wmctrl,
+            xdg-utils,
+            libnotify-bin
+Description: verify the GPG signature of a downloaded ISO image
+ A beginner-friendly tool to check whether a downloaded ISO image's GPG
+ signature is genuine, with built-in recognition of the documented
+ MX Linux/antiX signing keys. Works with any distro that signs its ISOs
+ directly, or signs a checksum listing instead (Debian, Ubuntu, Linux
+ Mint, and others).
+ .
+ Running `verify-iso-sig` with no arguments opens a window to pick an
+ ISO or its signature file (drag-and-drop, or right-click "Open With" on
+ the file itself); running it with any other flag or from a script uses
+ the plain command-line interface instead - see `verify-iso-sig --help`
+ or `verify-iso-sig --man` for the full command-line usage, and
+ `verify-iso-sig --manage-keys` for the trusted-keys manager.

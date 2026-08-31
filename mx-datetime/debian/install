@@ -1,8 +1,11 @@
-help/*				usr/share/doc/mx-datetime
+help/*.html			usr/share/doc/mx-datetime
+
+help/*.png			usr/share/doc/mx-datetime
+help/*.css			usr/share/doc/mx-datetime
+help/*.1			usr/share/man/man1
 images/mx-datetime.png		usr/share/pixmaps
 images/mx-datetime.svg		usr/share/icons/hicolor/scalable/apps
 mx-datetime.desktop		usr/share/applications
-scripts/*.policy		usr/share/polkit-1/actions
-_build_/Release/helper		usr/lib/mx-datetime
+_build_/org.mxlinux.pkexec.mx-datetime-helper.policy usr/share/polkit-1/actions
 _build_/*.qm 			usr/share/mx-datetime/locale
 _build_/Release/mx-datetime 	usr/bin

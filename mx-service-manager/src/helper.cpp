@@ -103,9 +103,20 @@ void printError(const QString &message)
         return result;
     }
 
+    constexpr int kTimeoutMs = 120000;
+
     result.started = true;
     process.closeWriteChannel();
-    process.waitForFinished(-1);
+    if (!process.waitForFinished(kTimeoutMs)) {
+        process.kill();
+        process.waitForFinished(5000);
+        result.standardError = QStringLiteral("Command timed out after %1ms: %2")
+                                   .arg(kTimeoutMs)
+                                   .arg(program)
+                                   .toUtf8();
+        result.exitCode = 124;
+        return result;
+    }
 
     result.exitStatus = process.exitStatus();
     result.exitCode = process.exitCode();

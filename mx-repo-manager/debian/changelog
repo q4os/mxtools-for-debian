@@ -1,8 +1,19 @@
-mx-repo-manager (26.03.1302) stable; urgency=medium
+mx-repo-manager (26.07.1302) stable; urgency=medium
 
   * Release
 
- -- Devs <devteam@localdomain>  Mon, 13 Jul 2026 13:05:33 +0200
+ -- Devs <devteam@localdomain>  Mon, 31 Aug 2026 17:00:19 +0200
+
+mx-repo-manager (26.07) mx; urgency=medium
+
+  * Fix fastest Debian and MX mirror selection when some mirrors are unavailable.
+  * Open remote help links correctly in the system web browser.
+  * Prevent stalled repository operations from hanging indefinitely.
+  * Roll back repository source changes when an update or restore fails partway through.
+  * Restrict privileged repository operations to the files and actions required by the application.
+  * Add a manual page and correct the application category and helper installation metadata.
+
+ -- Adrian <adrian@mxlinux.org>  Tue, 28 Jul 2026 01:12:53 -0400
 
 mx-repo-manager (26.03) mx; urgency=medium
 

@@ -50,21 +50,26 @@
     </message>
     <message>
         <location filename="../main.cpp" line="60"/>
+        <source>close application after action instead of minimize to tray.  Requires --traydialog</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../main.cpp" line="61"/>
         <source>opens with display tab open.  Only valid with Xfce desktop running</source>
         <translation>se odpre z odprtim zavihkom zaslona. Deluje le, če je zagnan Xfce namizje</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="61"/>
+        <location filename="../main.cpp" line="62"/>
         <source>Opens theme tab directly.  Valid on Xfce &amp; Fluxbox desktops</source>
         <translation>Neposredno odpri zavihek teme. Deluje le na Xfce in Fluxbox namizjih</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="62"/>
+        <location filename="../main.cpp" line="63"/>
         <source>Display additional debug output in console</source>
         <translation>V konzoli prikaži dodaten izpis za razhroščevanje</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="63"/>
+        <location filename="../main.cpp" line="64"/>
         <source>Opens Other tab directly.  Valid on all desktops</source>
         <translation>Zavihek neposredno odpre. Deluje na vseh namizjih</translation>
     </message>
@@ -74,8 +79,8 @@
     <message>
         <location filename="../tweak.ui" line="14"/>
         <location filename="../tweak.cpp" line="78"/>
-        <location filename="../tweak.cpp" line="244"/>
-        <location filename="../tweak.cpp" line="263"/>
+        <location filename="../tweak.cpp" line="243"/>
+        <location filename="../tweak.cpp" line="262"/>
         <source>MX Tweak</source>
         <translation>MX prilagoditve</translation>
     </message>
@@ -95,7 +100,7 @@
         <location filename="../tweak.ui" line="1265"/>
         <location filename="../tweak.ui" line="1394"/>
         <location filename="../tweak.ui" line="1441"/>
-        <location filename="../tweak.ui" line="1532"/>
+        <location filename="../tweak.ui" line="1542"/>
         <source>Apply</source>
         <extracomment>apply changes</extracomment>
         <translation>Uveljavi</translation>
@@ -213,7 +218,7 @@
     </message>
     <message>
         <location filename="../tweak.ui" line="311"/>
-        <location filename="../tweak.ui" line="1778"/>
+        <location filename="../tweak.ui" line="1785"/>
         <source>Window Manager</source>
         <extracomment>theme a window manager border will get</extracomment>
         <translation>Upravljalnik oken</translation>
@@ -669,206 +674,211 @@
         <translation>Razno</translation>
     </message>
     <message>
-        <location filename="../tweak.ui" line="1471"/>
-        <source>NOTE: existing /etc/X11/xorg.conf.d/20-intel.conf will be backed up to home folder</source>
-        <translation>POMNI: obstoječi /etc/X11/xorg.conf.d/20-intel.conf bo varnostno kopiran v domačo home mapo</translation>
-    </message>
-    <message>
-        <location filename="../tweak.ui" line="1491"/>
-        <source>Early loading of KVM module is new to  kernel 6.12 and conflicts with some non-KVM virtual machine applications, including virtualbox</source>
-        <extracomment>early loading is new on 6.12 kernel and conflicts with virtualbox</extracomment>
-        <translation>Zgodnje nalaganje KVM modula je novost v jedru 6.12 in ne deluje z nekaterimi ne-KVM programi za virtualizacijo, vključno s programom Virtualbox. </translation>
-    </message>
-    <message>
-        <location filename="../tweak.ui" line="1494"/>
-        <source>Disable early KVM module load (must be disabled for Virtualbox operation on kernel 6.12 and up)</source>
-        <extracomment>disable early loading of KVM module.  necessary for virtualbox to function with kernels 6.12 and up.  actually default behavior on kernels 6.11 and earlier.</extracomment>
-        <translation>Onemogoči zgodnje nalaganje KVM modula (mora biti onemogočen za delovanje Virtualbox-a od jedra 6.12 naprej)</translation>
-    </message>
-    <message>
-        <location filename="../tweak.ui" line="1501"/>
-        <source>NOTE: existing /etc/X11/xorg.conf.d/20-radeon.conf will be backed up to home folder</source>
-        <translation>POMNI: obstoječi /etc/X11/xorg.conf.d/20-radeon.conf bo varnostno kopiran v domačo home mapo</translation>
-    </message>
-    <message>
-        <location filename="../tweak.ui" line="1508"/>
-        <source>put a hold or remove a hold on updates of Liquorix kernels</source>
-        <extracomment>toggle for apt hold action on update meta packages</extracomment>
-        <translation>Opusti ali ponovno vzpostavi posadabljanje Liquorix jeder</translation>
-    </message>
-    <message>
-        <location filename="../tweak.ui" line="1511"/>
-        <source>Enable Automatic Liquorix Kernel Updates (MX ahs repository)</source>
-        <extracomment>uses apt-mark to hold or unhold updates to kernel metapackages</extracomment>
-        <translation>Vklopi samodejno posodabljanje jeder (MX ahs skladišče)</translation>
-    </message>
-    <message>
-        <location filename="../tweak.ui" line="1518"/>
-        <source>Reset Lightdm (login screen) to system default theme</source>
-        <translation>Ponastavi Lightdm (zaslon za prijavo) na privzeto temo sistema</translation>
-    </message>
-    <message>
-        <location filename="../tweak.ui" line="1525"/>
-        <source>Use tearfree radeon driver option</source>
-        <translation>Uporabi radeon opcijo za odpravljanje napak v prikazovanju </translation>
-    </message>
-    <message>
-        <location filename="../tweak.ui" line="1545"/>
-        <source>NOTE: existing /etc/X11/xorg.conf.d/20-amd.conf will be backed up to home folder</source>
-        <translation>POMNI: obstoječi /etc/X11/xorg.conf.d/20-amd.conf bo varnostno shranjen v domačo home mapo</translation>
-    </message>
-    <message>
-        <location filename="../tweak.ui" line="1552"/>
-        <source>Change Default Display Manager (login screen) (requires reboot)</source>
-        <extracomment>option to change display manager login screen.  present if more than one display manager is installed</extracomment>
-        <translation>Spremeni privzeti upravljalnik zaslona (ob prijavi) (zahteva ponovni zagon)</translation>
-    </message>
-    <message>
-        <location filename="../tweak.ui" line="1559"/>
-        <source>Change computer name (requires reboot)</source>
-        <extracomment>option to change the system hostname, requires a reboot to be 100% effective</extracomment>
-        <translation>Spremeni ime računalnika (zahteva ponovni zagon)</translation>
-    </message>
-    <message>
-        <location filename="../tweak.ui" line="1566"/>
+        <location filename="../tweak.ui" line="1487"/>
         <source>requires reboot</source>
         <translation>zahteva ponovni zagon</translation>
     </message>
     <message>
-        <location filename="../tweak.ui" line="1569"/>
+        <location filename="../tweak.ui" line="1490"/>
         <source>Enable Bluetooth adapters on boot</source>
         <translation>Ob zagonu vklopi Bluetooth vmesnike</translation>
     </message>
     <message>
-        <location filename="../tweak.ui" line="1576"/>
-        <source>Generate fluxbox All Apps menu after package installation, removal, and updates</source>
-        <translation>Generiranje menija za vse fluxbox aplikacije, po nameščanju, odstranjevanju ali posodabljanju.</translation>
-    </message>
-    <message>
-        <location filename="../tweak.ui" line="1583"/>
-        <source>Use tearfree amdgpu option</source>
-        <translation>Uporabi amdgpu opcijo za odpravljanje napak v prikazovanju </translation>
-    </message>
-    <message>
-        <location filename="../tweak.ui" line="1609"/>
-        <source>Use Client Side Decorations (CSD) on GTK3 applications that support them (requires session restart)</source>
-        <translation>Uporabi okraske Client Side Decorations (CSD) v aplikacijah GTK3, ki jih podpirajo (zahteva ponoven zagon seje) </translation>
-    </message>
-    <message>
-        <location filename="../tweak.ui" line="1616"/>
-        <source>Enable kernel sandbox</source>
-        <translation>Vklopi peskovnik za jedro</translation>
-    </message>
-    <message>
-        <location filename="../tweak.ui" line="1623"/>
-        <source>Enable mounting of internal drives by non-root users</source>
-        <translation>Omogoči priklop notranjih pogonov ne-korenskim uporabnikom</translation>
-    </message>
-    <message>
-        <location filename="../tweak.ui" line="1630"/>
-        <source>Apt installs additional &quot;recommends&quot; packages as dependencies</source>
-        <translation>Apt namesti dodatne &quot;priporočene&quot; pakete kot odvisnosti</translation>
-    </message>
-    <message>
-        <location filename="../tweak.ui" line="1637"/>
-        <source>Use intel driver instead of default &quot;modesetting&quot; driver (requires restart)</source>
-        <translation>Namesto privzetega &quot;modesetting&quot; gonilnika uporabite Intel gonilnik (zahteva ponovni zagon)</translation>
-    </message>
-    <message>
-        <location filename="../tweak.ui" line="1647"/>
-        <source>Password for administrative tasks:</source>
-        <translation>Geslo za adminstracijo:</translation>
-    </message>
-    <message>
-        <location filename="../tweak.ui" line="1654"/>
-        <source>&amp;User</source>
-        <translation>&amp;Uporabnik</translation>
-    </message>
-    <message>
-        <location filename="../tweak.ui" line="1661"/>
-        <source>Root</source>
-        <translation>Koren</translation>
-    </message>
-    <message>
-        <location filename="../tweak.ui" line="1684"/>
+        <location filename="../tweak.ui" line="1497"/>
         <source>put a hold or remove a hold on updates of Debian  kernels</source>
         <extracomment>toggle for apt hold action on update meta packages</extracomment>
         <translation>Opusti ali ponovno vzpostavi posodabljanje Debian jeder</translation>
     </message>
     <message>
-        <location filename="../tweak.ui" line="1687"/>
+        <location filename="../tweak.ui" line="1500"/>
         <source>Enable Automatic Debian Kernel Updates</source>
         <extracomment>uses apt-mark to hold or unhold updates to kernel metapackages</extracomment>
         <translation>Vklopi samodejno posodabljanje Debian jeder</translation>
     </message>
     <message>
-        <location filename="../tweak.ui" line="1694"/>
+        <location filename="../tweak.ui" line="1507"/>
+        <source>Enable kernel sandbox</source>
+        <translation>Vklopi peskovnik za jedro</translation>
+    </message>
+    <message>
+        <location filename="../tweak.ui" line="1514"/>
+        <source>Enable mounting of internal drives by non-root users</source>
+        <translation>Omogoči priklop notranjih pogonov ne-korenskim uporabnikom</translation>
+    </message>
+    <message>
+        <location filename="../tweak.ui" line="1521"/>
+        <source>NOTE: existing /etc/X11/xorg.conf.d/20-radeon.conf will be backed up to home folder</source>
+        <translation>POMNI: obstoječi /etc/X11/xorg.conf.d/20-radeon.conf bo varnostno kopiran v domačo home mapo</translation>
+    </message>
+    <message>
+        <location filename="../tweak.ui" line="1528"/>
+        <source>Apt installs additional &quot;recommends&quot; packages as dependencies</source>
+        <translation>Apt namesti dodatne &quot;priporočene&quot; pakete kot odvisnosti</translation>
+    </message>
+    <message>
+        <location filename="../tweak.ui" line="1535"/>
+        <source>Use Client Side Decorations (CSD) on GTK3 applications that support them (requires session restart)</source>
+        <translation>Uporabi okraske Client Side Decorations (CSD) v aplikacijah GTK3, ki jih podpirajo (zahteva ponoven zagon seje) </translation>
+    </message>
+    <message>
+        <location filename="../tweak.ui" line="1552"/>
+        <source>Reset Lightdm (login screen) to system default theme</source>
+        <translation>Ponastavi Lightdm (zaslon za prijavo) na privzeto temo sistema</translation>
+    </message>
+    <message>
+        <location filename="../tweak.ui" line="1559"/>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Init system that is used as the default on the main grub boot menu entry&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Inicializacija sistema, ki je privzet v glavnem zagonskem meniju grub vnosov&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <location filename="../tweak.ui" line="1562"/>
+        <source>Change Default Init System</source>
+        <translation>Spremeni privzeti inicializiran sistem</translation>
+    </message>
+    <message>
+        <location filename="../tweak.ui" line="1583"/>
+        <source>NOTE: existing /etc/X11/xorg.conf.d/20-amd.conf will be backed up to home folder</source>
+        <translation>POMNI: obstoječi /etc/X11/xorg.conf.d/20-amd.conf bo varnostno shranjen v domačo home mapo</translation>
+    </message>
+    <message>
+        <location filename="../tweak.ui" line="1603"/>
         <source>Enable Bluetooth battery info for connected devices (requires system restart)</source>
         <extracomment>expose battery info for connected bluetooth devices to the operating system via dbus</extracomment>
         <translation>Vklopi Bluetooth podatke o bateriji za povezane naprave (zahteva ponovni zagon)</translation>
     </message>
     <message>
-        <location filename="../tweak.ui" line="1701"/>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Init system that is used as the default on the main grub boot menu entry&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Inicializacija sistema, ki je privzet v glavnem zagonskem meniju grub vnosov&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <location filename="../tweak.ui" line="1610"/>
+        <source>Use tearfree amdgpu option</source>
+        <translation>Uporabi amdgpu opcijo za odpravljanje napak v prikazovanju </translation>
     </message>
     <message>
-        <location filename="../tweak.ui" line="1704"/>
-        <source>Change Default Init System</source>
-        <translation>Spremeni privzeti inicializiran sistem</translation>
+        <location filename="../tweak.ui" line="1620"/>
+        <source>Generate fluxbox All Apps menu after package installation, removal, and updates</source>
+        <translation>Generiranje menija za vse fluxbox aplikacije, po nameščanju, odstranjevanju ali posodabljanju.</translation>
     </message>
     <message>
-        <location filename="../tweak.ui" line="1729"/>
+        <location filename="../tweak.ui" line="1627"/>
+        <source>Early loading of KVM module is new to  kernel 6.12 and conflicts with some non-KVM virtual machine applications, including virtualbox</source>
+        <extracomment>early loading is new on 6.12 kernel and conflicts with virtualbox</extracomment>
+        <translation>Zgodnje nalaganje KVM modula je novost v jedru 6.12 in ne deluje z nekaterimi ne-KVM programi za virtualizacijo, vključno s programom Virtualbox. </translation>
+    </message>
+    <message>
+        <location filename="../tweak.ui" line="1630"/>
+        <source>Disable early KVM module load (must be disabled for Virtualbox operation on kernel 6.12 and up)</source>
+        <extracomment>disable early loading of KVM module.  necessary for virtualbox to function with kernels 6.12 and up.  actually default behavior on kernels 6.11 and earlier.</extracomment>
+        <translation>Onemogoči zgodnje nalaganje KVM modula (mora biti onemogočen za delovanje Virtualbox-a od jedra 6.12 naprej)</translation>
+    </message>
+    <message>
+        <location filename="../tweak.ui" line="1637"/>
+        <source>Use tearfree radeon driver option</source>
+        <translation>Uporabi radeon opcijo za odpravljanje napak v prikazovanju </translation>
+    </message>
+    <message>
+        <location filename="../tweak.ui" line="1644"/>
+        <source>put a hold or remove a hold on updates of Liquorix kernels</source>
+        <extracomment>toggle for apt hold action on update meta packages</extracomment>
+        <translation>Opusti ali ponovno vzpostavi posadabljanje Liquorix jeder</translation>
+    </message>
+    <message>
+        <location filename="../tweak.ui" line="1647"/>
+        <source>Enable Automatic Liquorix Kernel Updates (MX ahs repository)</source>
+        <extracomment>uses apt-mark to hold or unhold updates to kernel metapackages</extracomment>
+        <translation>Vklopi samodejno posodabljanje jeder (MX ahs skladišče)</translation>
+    </message>
+    <message>
+        <location filename="../tweak.ui" line="1654"/>
+        <source>Change Default Display Manager (login screen) (requires reboot)</source>
+        <extracomment>option to change display manager login screen.  present if more than one display manager is installed</extracomment>
+        <translation>Spremeni privzeti upravljalnik zaslona (ob prijavi) (zahteva ponovni zagon)</translation>
+    </message>
+    <message>
+        <location filename="../tweak.ui" line="1661"/>
+        <source>Use intel driver instead of default &quot;modesetting&quot; driver (requires restart)</source>
+        <translation>Namesto privzetega &quot;modesetting&quot; gonilnika uporabite Intel gonilnik (zahteva ponovni zagon)</translation>
+    </message>
+    <message>
+        <location filename="../tweak.ui" line="1674"/>
+        <source>Password for administrative tasks:</source>
+        <translation>Geslo za adminstracijo:</translation>
+    </message>
+    <message>
+        <location filename="../tweak.ui" line="1681"/>
+        <source>&amp;User</source>
+        <translation>&amp;Uporabnik</translation>
+    </message>
+    <message>
+        <location filename="../tweak.ui" line="1688"/>
+        <source>Root</source>
+        <translation>Koren</translation>
+    </message>
+    <message>
+        <location filename="../tweak.ui" line="1711"/>
+        <source>Change computer name (requires reboot)</source>
+        <extracomment>option to change the system hostname, requires a reboot to be 100% effective</extracomment>
+        <translation>Spremeni ime računalnika (zahteva ponovni zagon)</translation>
+    </message>
+    <message>
+        <location filename="../tweak.ui" line="1718"/>
+        <source>NOTE: existing /etc/X11/xorg.conf.d/20-intel.conf will be backed up to home folder</source>
+        <translation>POMNI: obstoječi /etc/X11/xorg.conf.d/20-intel.conf bo varnostno kopiran v domačo home mapo</translation>
+    </message>
+    <message>
+        <location filename="../tweak.ui" line="1725"/>
+        <source>Enable Automatic Siduction Kernel Updates</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../tweak.ui" line="1736"/>
         <source>Xfce Settings</source>
         <translation>Xfce nastavitve</translation>
     </message>
     <message>
-        <location filename="../tweak.ui" line="1735"/>
+        <location filename="../tweak.ui" line="1742"/>
         <source>Customize the panel</source>
         <translation>Prilagodi pano</translation>
     </message>
     <message>
-        <location filename="../tweak.ui" line="1745"/>
+        <location filename="../tweak.ui" line="1752"/>
         <source>Panel</source>
         <translation>Pano</translation>
     </message>
     <message>
-        <location filename="../tweak.ui" line="1765"/>
+        <location filename="../tweak.ui" line="1772"/>
         <source>Configure window behavior and shortcuts</source>
         <translation>Nastavi obnašanje oken in bližnjice</translation>
     </message>
     <message>
-        <location filename="../tweak.ui" line="1798"/>
+        <location filename="../tweak.ui" line="1805"/>
         <source>Customize the look of your desktop</source>
         <translation>Prilagodi videz namizja</translation>
     </message>
     <message>
-        <location filename="../tweak.ui" line="1811"/>
+        <location filename="../tweak.ui" line="1818"/>
         <source>Appearance</source>
         <translation>Videz</translation>
     </message>
     <message>
-        <location filename="../tweak.ui" line="1823"/>
+        <location filename="../tweak.ui" line="1830"/>
         <source>About</source>
         <translation>O programu</translation>
     </message>
     <message>
-        <location filename="../tweak.ui" line="1833"/>
+        <location filename="../tweak.ui" line="1840"/>
         <source>Help</source>
         <translation>Pomoč</translation>
     </message>
     <message>
-        <location filename="../tweak.ui" line="1891"/>
+        <location filename="../tweak.ui" line="1898"/>
         <source>Quit application</source>
         <translation>Zapri aplikacijo</translation>
     </message>
     <message>
-        <location filename="../tweak.ui" line="1894"/>
+        <location filename="../tweak.ui" line="1901"/>
         <source>Close</source>
         <translation>Zapri</translation>
     </message>
     <message>
-        <location filename="../tweak.ui" line="1900"/>
+        <location filename="../tweak.ui" line="1907"/>
         <source>Alt+N</source>
         <translation>Alt+N</translation>
     </message>
@@ -878,32 +888,32 @@
         <translation>--display stikalo ve veljavno le za Xfce</translation>
     </message>
     <message>
-        <location filename="../tweak.cpp" line="243"/>
+        <location filename="../tweak.cpp" line="242"/>
         <source>About MX Tweak</source>
         <translation>O programu MX prilagoditve</translation>
     </message>
     <message>
-        <location filename="../tweak.cpp" line="245"/>
+        <location filename="../tweak.cpp" line="244"/>
         <source>Version: </source>
         <translation>Različica:</translation>
     </message>
     <message>
-        <location filename="../tweak.cpp" line="246"/>
+        <location filename="../tweak.cpp" line="245"/>
         <source>App for quick default ui theme changes and tweaks</source>
         <translation>Aplikacija za hitro spreminjanje in prilagajanje privzete teme uporabniškega vmesnika</translation>
     </message>
     <message>
-        <location filename="../tweak.cpp" line="248"/>
+        <location filename="../tweak.cpp" line="247"/>
         <source>Copyright (c) MX Linux</source>
         <translation>Avtorska zaščita (c) MX Linux</translation>
     </message>
     <message>
-        <location filename="../tweak.cpp" line="249"/>
+        <location filename="../tweak.cpp" line="248"/>
         <source>%1 License</source>
         <translation>%1 licenca</translation>
     </message>
     <message>
-        <location filename="../tweak.cpp" line="263"/>
+        <location filename="../tweak.cpp" line="262"/>
         <source>%1 Help</source>
         <translation>%1 pomoč</translation>
     </message>
@@ -911,17 +921,17 @@
 <context>
     <name>TweakCompositor</name>
     <message>
-        <location filename="../tweak_compositor.cpp" line="62"/>
+        <location filename="../tweak_compositor.cpp" line="68"/>
         <source>None</source>
         <translation>brez</translation>
     </message>
     <message>
-        <location filename="../tweak_compositor.cpp" line="63"/>
+        <location filename="../tweak_compositor.cpp" line="69"/>
         <source>Xfwm (Xfce) Compositor</source>
         <translation>Xfwm (Xfce) sestavljalnik</translation>
     </message>
     <message>
-        <location filename="../tweak_compositor.cpp" line="64"/>
+        <location filename="../tweak_compositor.cpp" line="70"/>
         <source>Picom</source>
         <translation>Picom</translation>
     </message>
@@ -929,13 +939,13 @@
 <context>
     <name>TweakMisc</name>
     <message>
-        <location filename="../tweak_misc.cpp" line="305"/>
+        <location filename="../tweak_misc.cpp" line="300"/>
         <source>Please enter a computer name.</source>
         <comment>question to enter a name for the computer hostname</comment>
         <translation>Vnesite ime računalnika.</translation>
     </message>
     <message>
-        <location filename="../tweak_misc.cpp" line="309"/>
+        <location filename="../tweak_misc.cpp" line="304"/>
         <source>Sorry, your computer name contains invalid characters.
 You'll have to select a different
 name before proceeding.</source>
@@ -957,27 +967,37 @@ drugo ime, preden lahko nadaljujete.</translation>
 <context>
     <name>TweakTheme</name>
     <message>
-        <location filename="../tweak_theme.cpp" line="64"/>
+        <location filename="../tweak_theme.cpp" line="65"/>
         <source>Plasma Widget Themes</source>
         <comment>theme style of the kde plasma widgets</comment>
         <translation>Teme za plazma gradnike</translation>
     </message>
     <message>
-        <location filename="../tweak_theme.cpp" line="65"/>
+        <location filename="../tweak_theme.cpp" line="66"/>
         <source>Color Schemes</source>
         <comment>plasma widget color schemes</comment>
         <translation>Barvne sheme</translation>
     </message>
     <message>
-        <location filename="../tweak_theme.cpp" line="66"/>
+        <location filename="../tweak_theme.cpp" line="67"/>
         <source>Plasma Look &amp; Feel Global Themes</source>
         <comment>plasma global themes</comment>
         <translation>Plasma teme za videz in občutek</translation>
     </message>
     <message>
-        <location filename="../tweak_theme.cpp" line="139"/>
+        <location filename="../tweak_theme.cpp" line="140"/>
         <source>Choose a theme set</source>
         <translation>Izberite tematski set</translation>
+    </message>
+    <message>
+        <location filename="../tweak_theme.cpp" line="588"/>
+        <source>MX Tweak</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../tweak_theme.cpp" line="589"/>
+        <source>Could not determine the current Xfce panel configuration.</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -1013,40 +1033,40 @@ drugo ime, preden lahko nadaljujete.</translation>
         <translation>Gumbi oken</translation>
     </message>
     <message>
-        <location filename="../tweak_xfce_panel.cpp" line="273"/>
-        <location filename="../tweak_xfce_panel.cpp" line="280"/>
-        <location filename="../tweak_xfce_panel.cpp" line="297"/>
-        <location filename="../tweak_xfce_panel.cpp" line="301"/>
+        <location filename="../tweak_xfce_panel.cpp" line="276"/>
+        <location filename="../tweak_xfce_panel.cpp" line="283"/>
+        <location filename="../tweak_xfce_panel.cpp" line="300"/>
+        <location filename="../tweak_xfce_panel.cpp" line="304"/>
         <source>MX Tweak</source>
         <translation>MX prilagoditve</translation>
     </message>
     <message>
-        <location filename="../tweak_xfce_panel.cpp" line="274"/>
+        <location filename="../tweak_xfce_panel.cpp" line="277"/>
         <source>Plese remove special characters</source>
         <translation>Odstranite posebne znake</translation>
     </message>
     <message>
-        <location filename="../tweak_xfce_panel.cpp" line="274"/>
+        <location filename="../tweak_xfce_panel.cpp" line="277"/>
         <source>from file name</source>
         <translation>iz imena datoteke</translation>
     </message>
     <message>
-        <location filename="../tweak_xfce_panel.cpp" line="280"/>
+        <location filename="../tweak_xfce_panel.cpp" line="283"/>
         <source>File name already exists.  Choose another name</source>
         <translation>Ime datoteke že obstaja. Izberite drugo ime</translation>
     </message>
     <message>
-        <location filename="../tweak_xfce_panel.cpp" line="298"/>
+        <location filename="../tweak_xfce_panel.cpp" line="301"/>
         <source>File is not a valid tar.xz archive file</source>
         <translation>Datoteka ni ustrezna tar.xz arhivska datoteka</translation>
     </message>
     <message>
-        <location filename="../tweak_xfce_panel.cpp" line="302"/>
+        <location filename="../tweak_xfce_panel.cpp" line="305"/>
         <source>Archive does not contain a panel config</source>
         <translation>Arhiv ne vsebuje konfiguracije panojev</translation>
     </message>
     <message>
-        <location filename="../tweak_xfce_panel.cpp" line="733"/>
+        <location filename="../tweak_xfce_panel.cpp" line="736"/>
         <source>Panel Preferences</source>
         <translation>Nastavitve panoja</translation>
     </message>

@@ -10,14 +10,13 @@
 #include "ExecuteView.h"
 
 #include <QHeaderView>
-#include <QScrollBar>
 #include <ranges>
 
 #include "Execute.h"
 #include "ExecuteModel.h"
 
 ExecuteView::ExecuteView(ExecuteModel *model, QWidget *parent)
-    : QTreeView(parent),
+    : ScrollableTreeView(parent),
       executeModel(model)
 {
     setModel(executeModel);
@@ -42,21 +41,5 @@ void ExecuteView::selectChanged(const QModelIndex &idx, const QModelIndex & /*un
     if (idx.isValid()) {
         auto *e = ExecuteModel::getExecute(idx);
         emit viewSelected(e->tCommands);
-    }
-}
-
-void ExecuteView::scrollTo(const QModelIndex &idx, ScrollHint /*hint*/)
-{
-    QRect area = viewport()->rect();
-    QRect rect = visualRect(idx);
-    if (rect.height() == 0) {
-        return;
-    }
-    double step = 1.0 / rect.height();
-    if (rect.top() < 0) {
-        verticalScrollBar()->setValue(verticalScrollBar()->value() + static_cast<int>(rect.top() * step));
-    } else if (rect.bottom() > area.bottom()) {
-        verticalScrollBar()->setValue(verticalScrollBar()->value()
-                                      + static_cast<int>((rect.bottom() - area.bottom()) * step) + 5);
     }
 }

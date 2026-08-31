@@ -1,0 +1,26 @@
+.TH MX-REPO-MANAGER 1 "2026" "mx-repo-manager" "User Commands"
+.SH NAME
+mx-repo-manager \- manage APT repositories on MX Linux and Debian
+.SH SYNOPSIS
+.B mx-repo-manager
+.SH DESCRIPTION
+MX Repo Manager is a graphical utility that allows users to easily select,
+configure, and manage APT repositories for MX Linux. It provides a
+user-friendly interface for:
+.IP \(bu 2
+Choosing the fastest and most reliable repository mirrors
+.IP \(bu 2
+Managing repository sources
+.IP \(bu 2
+Enabling or disabling specific repositories
+.IP \(bu 2
+Testing connection speeds to available mirrors
+.PP
+The application requires administrative privileges for changes to APT
+configuration and uses pkexec (or gksu, if available) to elevate only the
+specific operations that need it.
+.SH SEE ALSO
+.BR apt (8),
+.BR sources.list (5)
+.SH AUTHOR
+MX Linux <http://mxlinux.org>

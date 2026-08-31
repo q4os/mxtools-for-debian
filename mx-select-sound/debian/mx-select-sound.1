@@ -1,0 +1,33 @@
+.TH MX-SELECT-SOUND 1 "July 2026" "mx-select-sound 26.06.4" "User Commands"
+.SH NAME
+mx-select-sound \- select the default audio device
+.SH SYNOPSIS
+.B mx-select-sound
+.SH DESCRIPTION
+.B mx-select-sound
+is a graphical utility for selecting and testing the default audio device.
+.PP
+When PipeWire is running, the program lists available sinks and uses
+.BR pactl (1)
+to select the default sink.
+Otherwise, it lists ALSA sound cards and records the selected default card
+in
+.IR ~/.asoundrc .
+.PP
+The
+.B Test
+button plays a short stereo test sound through the selected default device.
+.SH OPTIONS
+The program does not provide application-specific command-line options.
+.SH FILES
+.TP
+.I ~/.asoundrc
+ALSA configuration written when an ALSA sound card is selected.
+.SH SEE ALSO
+.BR pactl (1),
+.BR speaker-test (1)
+.SH AUTHOR
+Written by Adrian and the MX Linux contributors.
+.SH COPYRIGHT
+Copyright \(co 2014-2026 Adrian and MX Linux.
+License GPLv3+: GNU GPL version 3 or later.

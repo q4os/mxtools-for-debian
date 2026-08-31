@@ -1,0 +1,14 @@
+Source: papirus-folder-colors
+Section: x11
+Priority: optional
+Maintainer: Melber <melber.mx.linux@gmail.com>
+Rules-Requires-Root: no
+Build-Depends:
+ debhelper-compat (= 13),
+Standards-Version: 4.6.2
+Homepage: <https:/mxlinux.org>
+
+Package: papirus-folder-colors
+Architecture: all
+Depends: papirus-icon-theme
+Description: Create a papirus icon theme with different colored folders

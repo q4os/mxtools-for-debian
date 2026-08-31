@@ -1,7 +1,7 @@
 /**********************************************************************
  *  MX Date/Time helper.
  **********************************************************************
- *   Copyright (C) 2026 by MX Authors
+ *   Copyright (C) 2026-2026 by MX Authors
  *   Licensed under the Apache License, Version 2.0 (the "License");
  *   you may not use this file except in compliance with the License.
  *   You may obtain a copy of the License at
@@ -56,7 +56,13 @@ void printError(const QString &message)
 {
     static const QRegularExpression zoneRx(
         QRegularExpression::anchoredPattern(QStringLiteral(R"([A-Za-z0-9._+-]+(?:/[A-Za-z0-9._+-]+)*)")));
-    return zoneRx.match(zone.trimmed()).hasMatch();
+    const QString trimmedZone = zone.trimmed();
+    if (!zoneRx.match(trimmedZone).hasMatch()) {
+        return false;
+    }
+
+    const QStringList segments = trimmedZone.split('/');
+    return !segments.contains(QStringLiteral(".")) && !segments.contains(QStringLiteral(".."));
 }
 
 [[nodiscard]] bool isAllowedManagedDestination(const QString &path)
@@ -218,9 +224,13 @@ void printError(const QString &message)
         return 1;
     }
 
-    const QString targetPath = QStringLiteral("/usr/share/zoneinfo/") + zone;
+    const QFileInfo zoneInfoRoot(QStringLiteral("/usr/share/zoneinfo"));
+    const QString canonicalRoot = zoneInfoRoot.canonicalFilePath();
+    const QString targetPath = QDir(zoneInfoRoot.filePath()).filePath(zone);
     const QFileInfo targetInfo(targetPath);
-    if (!targetInfo.exists() || !targetInfo.isFile()) {
+    const QString canonicalTarget = targetInfo.canonicalFilePath();
+    if (canonicalRoot.isEmpty() || canonicalTarget.isEmpty()
+        || !canonicalTarget.startsWith(canonicalRoot + '/') || !targetInfo.isFile()) {
         printError(QString("Timezone data is not available: %1").arg(zone));
         return 1;
     }
@@ -283,35 +293,25 @@ void printError(const QString &message)
 
 [[nodiscard]] int handleInstallManagedFile(const QStringList &arguments)
 {
-    if (arguments.size() != 2) {
-        printError(QStringLiteral("install-managed-file requires source and destination"));
+    if (arguments.size() != 1) {
+        printError(QStringLiteral("install-managed-file requires exactly one destination"));
         return 1;
     }
 
-    const QString sourcePath = arguments.at(0);
-    const QString destinationPath = arguments.at(1);
-    if (!QDir::isAbsolutePath(sourcePath)) {
-        printError(QStringLiteral("install-managed-file source must be absolute"));
-        return 1;
-    }
+    const QString destinationPath = arguments.constFirst();
     if (!isAllowedManagedDestination(destinationPath)) {
         printError(QString("install-managed-file destination is not allowed: %1").arg(destinationPath));
         return 1;
     }
 
-    QFile sourceFile(sourcePath);
-    if (!sourceFile.open(QIODevice::ReadOnly)) {
-        printError(QString("Unable to read %1").arg(sourcePath));
+    QFile sourceFile;
+    if (!sourceFile.open(stdin, QIODevice::ReadOnly)) {
+        printError(QStringLiteral("Unable to read managed file content from standard input"));
         return 1;
     }
     const QByteArray content = sourceFile.readAll();
-    sourceFile.close();
 
-    const int result = writeManagedFile(destinationPath, content);
-    if (result == 0) {
-        QFile::remove(sourcePath);
-    }
-    return result;
+    return writeManagedFile(destinationPath, content);
 }
 } // namespace
 

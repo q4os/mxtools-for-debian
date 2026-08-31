@@ -1,8 +1,16 @@
-mx-select-sound (26.06.4.1302) stable; urgency=medium
+mx-select-sound (26.08.1302) stable; urgency=medium
 
   * Release
 
- -- Devs <devteam@localdomain>  Mon, 13 Jul 2026 13:05:33 +0200
+ -- Devs <devteam@localdomain>  Mon, 31 Aug 2026 17:00:19 +0200
+
+mx-select-sound (26.08) mx; urgency=medium
+
+  * Show an error message when the selected default sound card cannot be saved.
+  * Stop an active sound test cleanly when closing the program.
+  * Add a manual page describing how to select and test the default audio device.
+
+ -- Adrian <adrian@mxlinux.org>  Tue, 11 Aug 2026 08:07:04 -0400
 
 mx-select-sound (26.06.4) mx; urgency=medium
 

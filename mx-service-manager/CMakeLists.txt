@@ -1,5 +1,5 @@
 # **********************************************************************
-# * Copyright (C) 2023 MX Authors
+# * Copyright (C) 2023-2026 MX Authors
 # *
 # * Authors: Adrian <adrian@mxlinux.org>
 # *          MX Linux <http://mxlinux.org>
@@ -100,6 +100,20 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTORCC ON)
 
+# Absolute directory where the privileged helper binary is installed.
+set(HELPER_INSTALL_DIR "/usr/libexec/mx-service-manager" CACHE PATH
+    "Absolute install directory for the privileged helper binary")
+if(NOT IS_ABSOLUTE "${HELPER_INSTALL_DIR}")
+    message(FATAL_ERROR "HELPER_INSTALL_DIR must be an absolute path, got: ${HELPER_INSTALL_DIR}")
+endif()
+set(HELPER_PATH "${HELPER_INSTALL_DIR}/helper")
+
+configure_file(
+    scripts/org.mxlinux.pkexec.mxsm-helper.policy.in
+    ${CMAKE_BINARY_DIR}/org.mxlinux.pkexec.mxsm-helper.policy
+    @ONLY
+)
+
 # Define source files
 set(SOURCES
     src/main.cpp
@@ -127,6 +141,7 @@ set(RESOURCE_FILES
 
 # Get all translation files
 file(GLOB TRANSLATION_FILES "translations/*.ts")
+list(FILTER TRANSLATION_FILES EXCLUDE REGEX "/mx-service-manager_en_US\\.ts$")
 
 # Create the executable
 add_executable(mx-service-manager
@@ -146,7 +161,6 @@ target_link_libraries(mx-service-manager
 
 # Set compiler flags
 target_compile_options(mx-service-manager PRIVATE
-    -Wpedantic
     -pedantic
     -Werror=return-type
     -Werror=switch
@@ -162,6 +176,10 @@ else()
 endif()
 
 # Set compile definitions
+target_compile_definitions(mx-service-manager PRIVATE
+    HELPER_PATH="${HELPER_PATH}"
+)
+
 target_compile_definitions(mx-service-manager PRIVATE
     QT_DEPRECATED_WARNINGS
     QT_DISABLE_DEPRECATED_BEFORE=0x060000
@@ -181,6 +199,13 @@ if(CMAKE_BUILD_TYPE STREQUAL "Release")
         target_compile_options(mx-service-manager PRIVATE -flto=auto)
         target_link_options(mx-service-manager PRIVATE -flto=auto)
     endif()
+endif()
+
+# Test infrastructure
+option(BUILD_TESTS "Build tests" OFF)
+if(BUILD_TESTS)
+    enable_testing()
+    add_test(NAME helper_smoke COMMAND helper true)
 endif()
 
 # Handle translations
@@ -206,7 +231,6 @@ target_link_libraries(helper
 )
 
 target_compile_options(helper PRIVATE
-    -Wpedantic
     -pedantic
     -Werror=return-type
     -Werror=switch
@@ -244,5 +268,5 @@ install(TARGETS mx-service-manager
 )
 
 install(TARGETS helper
-    RUNTIME DESTINATION lib/mx-service-manager
+    RUNTIME DESTINATION ${HELPER_INSTALL_DIR}
 )

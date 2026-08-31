@@ -1,0 +1,29 @@
+.TH MX-CONKY 1 "2026-07-20" "MX Linux" "User Commands"
+.SH NAME
+mx-conky \- configure and manage Conky configurations
+.SH SYNOPSIS
+.B mx-conky
+.SH DESCRIPTION
+.B mx-conky
+is a graphical manager for Conky configurations tested and prepared for MX Linux. It provides a starting point for users who want to display system information on the desktop without manually maintaining Conky configuration files.
+.PP
+Use the main window to browse available configurations, preview them, start or stop a configuration, and manage the configurations available to the user. The application uses
+.I ~/.conky/
+for user configurations; do not place a configuration in the traditional
+.I ~/.conkyrc
+location when using MX Conky.
+.PP
+Conky configurations may use Lua and may display system monitoring, music, email, weather, or update information. Review a configuration before enabling it, especially when it runs external commands.
+.SH OPTIONS
+This application has no documented command-line options. The graphical interface provides all operations.
+.SH FILES
+.TP
+.I ~/.conky/
+Per-user Conky configurations.
+.TP
+.I /usr/share/doc/mx-conky
+Installed HTML help, images, license, and changelog documentation.
+.SH SEE ALSO
+.BR conky (1)
+.SH AUTHOR
+MX Linux contributors.

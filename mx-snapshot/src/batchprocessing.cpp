@@ -1,7 +1,7 @@
 /**********************************************************************
  *  batchprocessing.cpp
  **********************************************************************
- * Copyright (C) 2020-2025 MX Authors
+ * Copyright (C) 2020-2026 MX Authors
  *
  * Authors: Adrian
  *          MX Linux <http://mxlinux.org>
@@ -99,13 +99,22 @@ Batchprocessing::Batchprocessing(Settings *settings, QObject *parent)
 
     if (settings->editBootMenu) {
         qDebug() << tr("The program will pause the build and open the boot menu in your text editor.");
-        // getEditor() intentionally contains shell constructs (e.g. $(logname), $DISPLAY)
-        // that must be evaluated by bash, so it stays in the script. The file paths embed
-        // workDir, so they are passed as positional parameters ($1..$3) that the shell
-        // never parses — preventing command injection through the work directory.
+        // getEditorCommand() is a resolved argument list executed directly (no
+        // shell), so neither the configured editor nor the workDir-derived file
+        // paths can inject commands.
         const QString bootDir = settings->workDir + "/iso-template/boot";
-        Cmd().proc("/bin/bash", {"-c", settings->getEditor() + R"( "$1" "$2" "$3")", "_", bootDir + "/grub/grub.cfg",
-                                 bootDir + "/syslinux/syslinux.cfg", bootDir + "/isolinux/isolinux.cfg"});
+        QStringList editorCmd = settings->getEditorCommand();
+        const QString editorProgram = editorCmd.takeFirst();
+        const bool editorSucceeded
+            = Cmd().proc(editorProgram, editorCmd << bootDir + "/grub/grub.cfg"
+                                                  << bootDir + "/syslinux/syslinux.cfg"
+                                                  << bootDir + "/isolinux/isolinux.cfg");
+        if (!editorSucceeded) {
+            qCritical().noquote()
+                << tr("The boot-menu editor failed; the snapshot cannot continue with potentially unedited files.");
+            work.cleanUp();
+            return;
+        }
     }
     disconnect(&timer, &QTimer::timeout, nullptr, nullptr);
     work.createIso(settings->snapshotName);

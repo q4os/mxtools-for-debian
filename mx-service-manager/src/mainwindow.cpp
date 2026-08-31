@@ -1,7 +1,7 @@
 /**********************************************************************
  *  mainwindow.cpp
  **********************************************************************
- * Copyright (C) 2023-2025 MX Authors
+ * Copyright (C) 2023-2026 MX Authors
  *
  * Authors: Adrian <adrian@mxlinux.org>
  *          MX Linux <http://mxlinux.org>
@@ -25,8 +25,10 @@
 
 #include <QDebug>
 #include <QDir>
+#include <QFile>
 #include <QFileDialog>
 #include <QFileInfo>
+#include <QRegularExpression>
 #include <QJsonArray>
 #include <QJsonDocument>
 #include <QJsonObject>
@@ -38,10 +40,10 @@
 #include <QtConcurrent>
 
 #include "about.h"
+#include "cmd.h"
 #include "common.h"
 #include "service.h"
 
-#include <algorithm>
 #include <chrono>
 
 using namespace std::chrono_literals;
@@ -80,11 +82,21 @@ MainWindow::MainWindow(QWidget *parent)
     defaultForeground = palette.color(QPalette::Text);
     ui->listServices->addItem(tr("Loading..."));
 
-    dependTargets
-        = cmd.getOut("grep --no-filename \"TARGETS = \" /etc/init.d/.depend.start /etc/init.d/.depend.boot |  "
-                     "sed  -e ':a;N;$!ba;s/\\n/ /' -e 's/TARGETS = //g'",
-                     true)
-              .split(' ', Qt::SkipEmptyParts);
+    dependTargets.clear();
+    for (const QString &path : {QStringLiteral("/etc/init.d/.depend.start"), QStringLiteral("/etc/init.d/.depend.boot")}) {
+        QFile file(path);
+        if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+            continue;
+        }
+        while (!file.atEnd()) {
+            const QString line = QString::fromUtf8(file.readLine());
+            const int idx = line.indexOf(QLatin1String("TARGETS = "));
+            if (idx >= 0) {
+                dependTargets.append(
+                    line.mid(idx + 10).split(QRegularExpression("\\s+"), Qt::SkipEmptyParts));
+            }
+        }
+    }
 
     ui->labelCount->setText(tr("Loading..."));
     auto loadingTimer = new QTimer(this);
@@ -95,11 +107,17 @@ MainWindow::MainWindow(QWidget *parent)
     });
     loadingTimer->start(300);
 
-    // Load services asynchronously to keep UI responsive
-    QTimer::singleShot(0, this, [this, loadingTimer] {
-        listServices();
+    // Block Refresh until the initial load finishes: loadServicesAsync() ignores an
+    // overlapping request rather than queuing it, so a Refresh click during startup
+    // must not be allowed to fire (it would otherwise disable the button and never
+    // get a completion callback to re-enable it).
+    ui->pushRefresh->setEnabled(false);
+
+    // Load services on a background thread to keep the UI responsive
+    loadServicesAsync([this, loadingTimer] {
         loadingTimer->stop();
         loadingTimer->deleteLater();
+        ui->pushRefresh->setEnabled(true);
         displayServices();
         ui->listServices->setFocus();
     });
@@ -138,6 +156,13 @@ MainWindow::~MainWindow()
     if (tooltipWatcher) {
         tooltipWatcher->cancel();
         tooltipWatcher->waitForFinished();
+    }
+    if (selectionInfoWatcher) {
+        selectionInfoWatcher->cancel();
+        selectionInfoWatcher->waitForFinished();
+    }
+    if (servicesWatcher) {
+        servicesWatcher->waitForFinished();
     }
     delete ui;
 }
@@ -189,12 +214,31 @@ void MainWindow::itemUpdated()
 void MainWindow::onSelectionChanged(QListWidgetItem *current, QListWidgetItem *previous)
 {
     Q_UNUSED(previous);
+    cancelPendingSelectionInfo();
+
     if (!current) {
         return;
     }
-    ui->textBrowser->setText(current->data(Qt::UserRole).value<Service *>()->getInfo());
-    bool running = current->data(Qt::UserRole).value<Service *>()->isRunning();
-    bool enabled = current->data(Qt::UserRole).value<Service *>()->isEnabled();
+    const auto *service = current->data(Qt::UserRole).value<Service *>();
+    if (!service) {
+        return;
+    }
+
+    ui->textBrowser->setText(tr("Loading..."));
+    pendingSelectionIndex = ui->listServices->indexFromItem(current);
+    if (pendingSelectionIndex.isValid()) {
+        if (!selectionInfoTimer) {
+            selectionInfoTimer = new QTimer(this);
+            selectionInfoTimer->setSingleShot(true);
+            connect(selectionInfoTimer, &QTimer::timeout, this, &MainWindow::fetchSelectionInfo);
+        }
+        // Short debounce so holding an arrow key or dragging the scrollbar doesn't spawn
+        // a (possibly root-elevated) subprocess for every item passed through.
+        selectionInfoTimer->start(150);
+    }
+
+    bool running = service->isRunning();
+    bool enabled = service->isEnabled();
     if (running) {
         ui->pushStartStop->setText(tr("&Stop"));
         ui->pushStartStop->setIcon(QIcon::fromTheme("stop"));
@@ -244,6 +288,39 @@ void MainWindow::setGeneralConnections() noexcept
     connect(ui->pushStartStop, &QPushButton::clicked, this, &MainWindow::pushStartStop_clicked);
 }
 
+void MainWindow::loadServicesAsync(std::function<void()> onLoaded)
+{
+    if (servicesWatcher && servicesWatcher->isRunning()) {
+        // A load is already in flight (e.g. a stray Refresh click); ignore this request
+        // rather than orphaning the caller whose completion callback would otherwise be lost.
+        return;
+    }
+
+    onServicesLoaded = std::move(onLoaded);
+
+    if (!servicesWatcher) {
+        servicesWatcher = new QFutureWatcher<QList<QSharedPointer<Service>>>(this);
+        connect(servicesWatcher, &QFutureWatcher<QList<QSharedPointer<Service>>>::finished, this, [this]() {
+            services = servicesWatcher->result();
+            if (onServicesLoaded) {
+                onServicesLoaded();
+            }
+        });
+    }
+
+    servicesWatcher->setFuture(QtConcurrent::run(&MainWindow::buildServiceList, dependTargets));
+}
+
+QSharedPointer<Service> MainWindow::findServiceShared(Service *raw) const
+{
+    for (const auto &svc : services) {
+        if (svc.get() == raw) {
+            return svc;
+        }
+    }
+    return {};
+}
+
 void MainWindow::cancelPendingTooltip()
 {
     if (tooltipTimer) {
@@ -270,6 +347,15 @@ void MainWindow::fetchTooltipDescription()
         return;
     }
 
+    // Keep the Service alive for the duration of the background fetch: a refresh
+    // (listServices()) can clear the `services` list and drop the last QSharedPointer
+    // reference to this Service while the background thread is still using it.
+    const QSharedPointer<Service> serviceShared = findServiceShared(service);
+    if (!serviceShared) {
+        pendingTooltipIndex = QPersistentModelIndex();
+        return;
+    }
+
     tooltipInProgress = true;
     activeTooltipIndex = pendingTooltipIndex;
     pendingTooltipIndex = QPersistentModelIndex();
@@ -280,9 +366,7 @@ void MainWindow::fetchTooltipDescription()
         connect(tooltipWatcher, &QFutureWatcher<QString>::finished, this, [this]() {
             const QString description = tooltipWatcher->result();
             QListWidgetItem *activeItem = ui->listServices->itemFromIndex(activeTooltipIndex);
-            const bool serviceValid = activeTooltipService
-                && std::any_of(services.begin(), services.end(),
-                               [this](const auto &svc) { return svc.get() == activeTooltipService; });
+            const bool serviceValid = activeTooltipService && findServiceShared(activeTooltipService);
 
             if (activeItem && activeItem->listWidget() && activeTooltipIndex.isValid() && serviceValid) {
                 if (!description.isEmpty()) {
@@ -300,9 +384,72 @@ void MainWindow::fetchTooltipDescription()
         });
     }
 
-    tooltipWatcher->setFuture(QtConcurrent::run([service]() { return service->getDescription(); }));
+    tooltipWatcher->setFuture(QtConcurrent::run([serviceShared]() { return serviceShared->getDescription(); }));
 }
 
+void MainWindow::cancelPendingSelectionInfo()
+{
+    if (selectionInfoTimer) {
+        selectionInfoTimer->stop();
+    }
+    pendingSelectionIndex = QPersistentModelIndex();
+}
+
+void MainWindow::fetchSelectionInfo()
+{
+    if (!pendingSelectionIndex.isValid() || selectionInfoInProgress) {
+        return;
+    }
+
+    QListWidgetItem *item = ui->listServices->itemFromIndex(pendingSelectionIndex);
+    if (!item) {
+        pendingSelectionIndex = QPersistentModelIndex();
+        return;
+    }
+
+    auto *service = item->data(Qt::UserRole).value<Service *>();
+    if (!service) {
+        pendingSelectionIndex = QPersistentModelIndex();
+        return;
+    }
+
+    const QSharedPointer<Service> serviceShared = findServiceShared(service);
+    if (!serviceShared) {
+        pendingSelectionIndex = QPersistentModelIndex();
+        return;
+    }
+
+    selectionInfoInProgress = true;
+    activeSelectionIndex = pendingSelectionIndex;
+    pendingSelectionIndex = QPersistentModelIndex();
+    activeSelectionService = service;
+
+    if (!selectionInfoWatcher) {
+        selectionInfoWatcher = new QFutureWatcher<QString>(this);
+        connect(selectionInfoWatcher, &QFutureWatcher<QString>::finished, this, [this]() {
+            const QString info = selectionInfoWatcher->result();
+            QListWidgetItem *activeItem = ui->listServices->itemFromIndex(activeSelectionIndex);
+            const bool serviceValid = activeSelectionService && findServiceShared(activeSelectionService);
+            const bool stillSelected = activeItem && activeItem->listWidget()
+                && activeItem == ui->listServices->currentItem();
+
+            if (stillSelected && activeSelectionIndex.isValid() && serviceValid) {
+                ui->textBrowser->setText(info);
+            }
+
+            selectionInfoInProgress = false;
+            activeSelectionIndex = QPersistentModelIndex();
+            activeSelectionService = nullptr;
+            if (pendingSelectionIndex.isValid()) {
+                fetchSelectionInfo();
+            }
+        });
+    }
+
+    selectionInfoWatcher->setFuture(QtConcurrent::run([serviceShared]() { return serviceShared->getInfo(); }));
+}
+
+// static
 std::optional<QString> MainWindow::sanitizeServiceName(const QString &rawName)
 {
     const QLatin1String dotSeparator(".");
@@ -318,37 +465,54 @@ std::optional<QString> MainWindow::sanitizeServiceName(const QString &rawName)
     return name;
 }
 
-QSet<QString> MainWindow::loadSystemdEnabledServices(bool isUserService)
+QString MainWindow::systemctlCmd(const QString &baseCmd, bool isUserService)
 {
-    QString cmdStr = "systemctl list-unit-files --type=service --state=enabled -o json";
     if (isUserService) [[unlikely]] {
-        cmdStr = "systemctl --user list-unit-files --type=service --state=enabled -o json";
+        return QStringLiteral("systemctl --user ") % baseCmd;
     }
-    const auto enabled = cmd.getOut(cmdStr).trimmed();
-    auto doc = QJsonDocument::fromJson(enabled.toUtf8());
+    return QStringLiteral("systemctl ") % baseCmd;
+}
+
+// static
+void MainWindow::loadSystemdUnitFileStates(bool isUserService, QSet<QString> &enabledNames, QStringList &maskedNames)
+{
+    // A single call covering both states, instead of one "list-unit-files" call per state.
+    const auto out = Cmd().getOut(
+        systemctlCmd(QStringLiteral("list-unit-files --type=service --state=enabled,masked -o json"), isUserService)).trimmed();
+    auto doc = QJsonDocument::fromJson(out.toUtf8());
     if (!doc.isArray()) {
-        qDebug() << "JSON data is not an array for enabled services.";
-        return {};
+        qDebug() << "JSON data is not an array for enabled/masked services.";
+        return;
     }
 
-    QSet<QString> enabledNames;
     const auto jsonArray = doc.array();
-    enabledNames.reserve(jsonArray.size());
+    enabledNames.reserve(enabledNames.size() + jsonArray.size());
 
     const QLatin1String unitFileKey("unit_file");
+    const QLatin1String stateKey("state");
+    const QLatin1String enabledValue("enabled");
+    const QLatin1String maskedValue("masked");
+
     for (const auto &value : jsonArray) {
         if (!value.isObject()) [[unlikely]] {
             continue;
         }
         const auto obj = value.toObject();
-        if (const auto name = sanitizeServiceName(obj.value(unitFileKey).toString())) {
-            enabledNames.insert(*name);
+        const auto nameOpt = sanitizeServiceName(obj.value(unitFileKey).toString());
+        if (!nameOpt) [[unlikely]] {
+            continue;
+        }
+
+        const QString state = obj.value(stateKey).toString();
+        if (state == enabledValue) {
+            enabledNames.insert(*nameOpt);
+        } else if (state == maskedValue) {
+            maskedNames.append(*nameOpt);
         }
     }
-
-    return enabledNames;
 }
 
+// static
 QString MainWindow::decodeEscapeSequences(const QString &input)
 {
     static const QRegularExpression hexRegex("\\\\x([0-9a-fA-F]{2})");
@@ -405,20 +569,23 @@ QString MainWindow::getHtmlColor(const QColor &color) noexcept
         .arg(color.blue(), 2, 16, QChar('0'));
 }
 
-void MainWindow::listServices()
+// static
+QList<QSharedPointer<Service>> MainWindow::buildServiceList(const QStringList &dependTargets)
 {
-    services.clear();
+    QList<QSharedPointer<Service>> services;
     if (initSystem != QLatin1String("systemd")) {
-        processNonSystemdServices();
+        processNonSystemdServices(services, dependTargets);
     } else {
-        processSystemdServices();
+        processSystemdServices(services, dependTargets);
     }
+    return services;
 }
 
-void MainWindow::processNonSystemdServices()
+// static
+void MainWindow::processNonSystemdServices(QList<QSharedPointer<Service>> &services, const QStringList &dependTargets)
 {
     static const QRegularExpression dpkgRegex("dpkg-.*$");
-    const auto list = cmd.getOutAsRoot({"service", "--status-all"}, true).trimmed().split("\n");
+    const auto list = Cmd().getOutAsRoot({"service", "--status-all"}, true).trimmed().split("\n");
     services.reserve(list.size());
 
     const QLatin1String sectionDelimiter("]  ");
@@ -441,27 +608,34 @@ void MainWindow::processNonSystemdServices()
     }
 }
 
-void MainWindow::processSystemdServices()
+// static
+void MainWindow::processSystemdServices(QList<QSharedPointer<Service>> &services, const QStringList &dependTargets)
 {
     QStringList names;
-    const QSet<QString> enabledSystemServices = loadSystemdEnabledServices(false);
-    const QSet<QString> enabledUserServices = loadSystemdEnabledServices(true);
 
-    processSystemdActiveInactiveServices(names, enabledSystemServices, false); // System services
-    processSystemdMaskedServices(names, false); // System services
-    processSystemdActiveInactiveServices(names, enabledUserServices, true); // User services
-    processSystemdMaskedServices(names, true); // User services
+    QSet<QString> enabledSystemServices;
+    QStringList maskedSystemServices;
+    loadSystemdUnitFileStates(false, enabledSystemServices, maskedSystemServices);
+
+    QSet<QString> enabledUserServices;
+    QStringList maskedUserServices;
+    loadSystemdUnitFileStates(true, enabledUserServices, maskedUserServices);
+
+    processSystemdActiveInactiveServices(services, names, enabledSystemServices, dependTargets, false); // System services
+    appendMaskedServices(services, names, maskedSystemServices, false); // System services
+    processSystemdActiveInactiveServices(services, names, enabledUserServices, dependTargets, true); // User services
+    appendMaskedServices(services, names, maskedUserServices, true); // User services
 }
 
-void MainWindow::processSystemdActiveInactiveServices(QStringList &names,
+// static
+void MainWindow::processSystemdActiveInactiveServices(QList<QSharedPointer<Service>> &services,
+                                                      QStringList &names,
                                                       const QSet<QString> &enabledServices,
+                                                      const QStringList &dependTargets,
                                                       bool isUserService)
 {
-    QString cmdStr = "systemctl list-units --type=service --all -o json";
-    if (isUserService) [[unlikely]] {
-        cmdStr = "systemctl --user list-units --type=service --all -o json";
-    }
-    const auto list = cmd.getOut(cmdStr).trimmed();
+    const auto list = Cmd().getOut(
+        systemctlCmd(QStringLiteral("list-units --type=service --all -o json"), isUserService)).trimmed();
     auto doc = QJsonDocument::fromJson(list.toUtf8());
     if (!doc.isArray()) {
         qDebug() << "JSON data is not an array for service units.";
@@ -504,38 +678,18 @@ void MainWindow::processSystemdActiveInactiveServices(QStringList &names,
     names = QStringList(nameSet.begin(), nameSet.end());
 }
 
-void MainWindow::processSystemdMaskedServices(QStringList &names, bool isUserService)
+// static
+void MainWindow::appendMaskedServices(QList<QSharedPointer<Service>> &services, QStringList &names,
+                                     const QStringList &maskedNames, bool isUserService)
 {
-    QString cmdStr = "systemctl list-unit-files --type=service --state=masked -o json";
-    if (isUserService) [[unlikely]] {
-        cmdStr = "systemctl --user list-unit-files --type=service --state=masked -o json";
-    }
-    const auto masked = cmd.getOut(cmdStr).trimmed();
-    auto doc = QJsonDocument::fromJson(masked.toUtf8());
-    if (!doc.isArray()) {
-        qDebug() << "JSON data is not an array for masked services.";
-        return;
-    }
-
-    auto jsonArray = doc.array();
     QSet<QString> nameSet(names.begin(), names.end());
-    services.reserve(services.size() + jsonArray.size());
-    nameSet.reserve(nameSet.size() + jsonArray.size());
+    services.reserve(services.size() + maskedNames.size());
+    nameSet.reserve(nameSet.size() + maskedNames.size());
 
-    const QLatin1String unitFileKey("unit_file");
-
-    for (const auto &value : jsonArray) {
-        if (!value.isObject()) [[unlikely]] {
+    for (const auto &name : maskedNames) {
+        if (nameSet.contains(name)) [[unlikely]] {
             continue;
         }
-        const auto obj = value.toObject();
-        const auto nameOpt = sanitizeServiceName(obj.value(unitFileKey).toString());
-
-        if (!nameOpt || nameSet.contains(*nameOpt)) [[unlikely]] {
-            continue;
-        }
-
-        const QString &name = *nameOpt;
         nameSet.insert(name);
         services.append(QSharedPointer<Service>::create(name, false, false, isUserService));
     }
@@ -628,7 +782,6 @@ void MainWindow::displayServices() noexcept
 
 void MainWindow::pushAbout_clicked()
 {
-    hide();
     displayAboutMsgBox(
         this,
         tr("About %1") % tr("MX Service Manager"),
@@ -637,16 +790,23 @@ void MainWindow::pushAbout_clicked()
             % R"(</h3></p><p align="center"><a href="http://mxlinux.org">http://mxlinux.org</a><br /></p><p align="center">)"
             % tr("Copyright (c) MX Linux") % "<br /><br /></p>",
         docPath(QStringLiteral("license.html")), tr("%1 License").arg(windowTitle()));
-
-    show();
 }
 
 void MainWindow::pushEnableDisable_clicked()
 {
     ui->pushEnableDisable->setEnabled(false);
     savedRow = ui->listServices->currentRow();
-    auto service = ui->listServices->currentItem()->text();
-    auto *ptrService = ui->listServices->currentItem()->data(Qt::UserRole).value<Service *>();
+    const auto *currentItem = ui->listServices->currentItem();
+    if (currentItem == nullptr) {
+        ui->pushEnableDisable->setEnabled(true);
+        return;
+    }
+    auto *ptrService = currentItem->data(Qt::UserRole).value<Service *>();
+    if (ptrService == nullptr) {
+        ui->pushEnableDisable->setEnabled(true);
+        return;
+    }
+    auto service = currentItem->text();
     if (ui->pushEnableDisable->text() == tr("&Enable at boot")) {
         if (!ptrService->enable()) {
             QMessageBox::warning(this, tr("Error"), tr("Could not enable %1").arg(service));
@@ -682,8 +842,7 @@ void MainWindow::pushRefresh_clicked()
     ui->listServices->clear();
     ui->listServices->addItem(tr("Refreshing..."));
 
-    QTimer::singleShot(0, this, [this, selectedService]() {
-        listServices();
+    loadServicesAsync([this, selectedService]() {
         displayServices();
         if (!selectedService.isEmpty()) {
             const auto matches = ui->listServices->findItems(selectedService, Qt::MatchExactly);
@@ -699,8 +858,17 @@ void MainWindow::pushStartStop_clicked()
 {
     ui->pushStartStop->setEnabled(false);
     savedRow = ui->listServices->currentRow();
-    auto service = ui->listServices->currentItem()->text();
-    auto *ptrService = ui->listServices->currentItem()->data(Qt::UserRole).value<Service *>();
+    const auto *currentItem = ui->listServices->currentItem();
+    if (currentItem == nullptr) {
+        ui->pushStartStop->setEnabled(true);
+        return;
+    }
+    auto *ptrService = currentItem->data(Qt::UserRole).value<Service *>();
+    if (ptrService == nullptr) {
+        ui->pushStartStop->setEnabled(true);
+        return;
+    }
+    auto service = currentItem->text();
     if (ui->pushStartStop->text() == tr("S&tart")) {
         if (!ptrService->start()) {
             QMessageBox::warning(this, tr("Error"), tr("Could not start %1").arg(service));

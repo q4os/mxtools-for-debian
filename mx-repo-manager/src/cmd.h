@@ -19,9 +19,12 @@ public:
                     const QByteArray *input = nullptr, QuietMode quiet = QuietMode::No);
     bool startDetachedAsRoot(const QString &cmd, const QStringList &args = {}, QuietMode quiet = QuietMode::No,
                              const QString &logFilePath = {}, QString *errorMessage = nullptr);
+    bool installAsRoot(const QString &targetPath, const QByteArray &content, bool allowCreate = false,
+                       QuietMode quiet = QuietMode::No);
     bool run(const QString &cmd, QString *output = nullptr, const QByteArray *input = nullptr,
              QuietMode quiet = QuietMode::No);
     [[nodiscard]] QString getOut(const QString &cmd, QuietMode quiet = QuietMode::No);
+    [[nodiscard]] QString getOut(const QString &program, const QStringList &args, QuietMode quiet = QuietMode::No);
     [[nodiscard]] QString getOutAsRoot(const QString &cmd, const QStringList &args = {},
                                        QuietMode quiet = QuietMode::No);
     [[nodiscard]] QString readAllOutput() const;

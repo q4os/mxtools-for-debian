@@ -1,7 +1,7 @@
 /**********************************************************************
  *  mainwindow.cpp
  **********************************************************************
- * Copyright (C) 2015-2025 MX Authors
+ * Copyright (C) 2015-2026 MX Authors
  *
  * Authors: Adrian
  *          MX Linux <http://mxlinux.org>
@@ -35,7 +35,6 @@
 #include <QRadioButton>
 #include <QScreen>
 #include <QTemporaryDir>
-#include <QTemporaryFile>
 #include <QTextEdit>
 #include <QStringList>
 #include <QRegularExpression>
@@ -139,7 +138,10 @@ void MainWindow::replaceDebianRepos(const QString &url)
     }
 
     bool anyChange = false;
+    bool failed = false;
     const QString trimmedUrl = url.trimmed().remove(QRegularExpression("/$"));
+    QStringList changedFiles;
+    QStringList changedFilesBackups;
 
     for (const QString &filePath : files) {
         if (!QFile::exists(filePath)) {
@@ -182,14 +184,40 @@ void MainWindow::replaceDebianRepos(const QString &url)
 
         if (!Cmd().procAsRoot("cp", {filePath, backupFilePath})) {
             qWarning() << "Failed to backup" << filePath;
-            continue;
+            failed = true;
+            break;
         }
 
+        // Track for rollback as soon as the backup exists: writeUpdatedFile() can fail after its
+        // "mv" step already replaced the file's contents, so a false return doesn't mean filePath
+        // is untouched.
+        changedFiles << filePath;
+        changedFilesBackups << backupFilePath;
+
         if (!writeUpdatedFile(filePath, content)) {
-            continue;
+            failed = true;
+            break;
         }
 
         anyChange = true;
+    }
+
+    if (failed) {
+        qWarning() << "Rolling back" << changedFiles.size() << "file(s) after a failed repository update";
+        bool rollbackFailed = false;
+        for (int i = 0; i < changedFiles.size(); ++i) {
+            if (!Cmd().procAsRoot("cp", {changedFilesBackups.at(i), changedFiles.at(i)})) {
+                qWarning() << "Failed to roll back" << changedFiles.at(i) << "from" << changedFilesBackups.at(i);
+                rollbackFailed = true;
+            }
+        }
+        QMessageBox::critical(this, tr("Error"),
+                              rollbackFailed ? tr("Failed to update the repository sources, and some changes could "
+                                                  "not be automatically rolled back. Check %1 to restore manually.")
+                                                    .arg(backupDir.path())
+                                            : tr("Failed to update the repository sources. Any changes made have "
+                                                 "been rolled back."));
+        return;
     }
 
     if (anyChange) {
@@ -204,20 +232,8 @@ void MainWindow::replaceDebianRepos(const QString &url)
 
 bool MainWindow::writeUpdatedFile(const QString &filePath, const QString &content)
 {
-    QTemporaryFile tmpFile(QDir::tempPath() + "/XXXXXX.list");
-    if (!tmpFile.open()) {
-        qWarning() << "Could not open temporary file:" << tmpFile.fileName() << tmpFile.errorString();
-        return false;
-    }
-
-    {
-        QTextStream out(&tmpFile);
-        out << content;
-    } // Ensuring the QTextStream is flushed and closed before moving the file
-
     Cmd cmd;
-    if (!cmd.procAsRoot("mv", {"-f", tmpFile.fileName(), filePath}) || !cmd.procAsRoot("chown", {"root:", filePath})
-        || !cmd.procAsRoot("chmod", {"644", filePath})) {
+    if (!cmd.installAsRoot(filePath, content.toUtf8())) {
         qWarning() << "Failed to replace the file and update permissions for" << filePath;
         return false;
     }
@@ -496,9 +512,9 @@ void MainWindow::cancelOperation()
     auto processId = shell->processId();
     if (processId != 0) {
         Cmd cmd;
-        cmd.procAsRoot("kill", {QString::number(processId)});
+        cmd.procAsRoot("kill", {});
         if (!shell->waitForFinished(1000)) {
-            cmd.procAsRoot("kill", {"-9", QString::number(processId)});
+            cmd.procAsRoot("kill", {"-9"});
         }
     }
     procDone();
@@ -582,7 +598,7 @@ void MainWindow::procDone()
     bar->setValue(bar->maximum());
     timer.stop();
     timer.disconnect();
-    QApplication::setOverrideCursor(QCursor(Qt::ArrowCursor));
+    QApplication::restoreOverrideCursor();
 }
 
 bool MainWindow::replaceRepos(const QString &url, bool quiet)
@@ -596,80 +612,86 @@ bool MainWindow::replaceRepos(const QString &url, bool quiet)
     const QString mx_list {"/etc/apt/sources.list.d/mx.list"};
     const QString mx_sources {"/etc/apt/sources.list.d/mx.sources"};
 
-    auto updateListFile = [&](const QString &path) -> bool {
+    enum class UpdateOutcome { NotApplicable, NoChangeNeeded, Changed, Failed };
+
+    auto tryUpdate = [&](const QString &path, bool sourcesFormat) -> UpdateOutcome {
         QFile file(path);
         if (!file.exists()) {
-            return false;
+            return UpdateOutcome::NotApplicable;
         }
         if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
             qWarning() << "Could not open file:" << path << file.errorString();
-            return false;
+            return UpdateOutcome::Failed;
         }
         QTextStream in(&file);
         QString content = in.readAll();
         file.close();
 
         QString updated = content;
-        QRegularExpression repoPattern(
-            R"((deb(?:-src)?\s+(?:\[.*?\]\s+)?)(\S*)(/mx/(?:[.]?/)*repo/?|/mx/(?:[.]?/)*testrepo/?))",
-            QRegularExpression::CaseInsensitiveOption);
-        updated.replace(repoPattern, QStringLiteral("\\1%1\\3").arg(trimmedUrl));
+        if (sourcesFormat) {
+            static const QRegularExpression uriPattern(
+                R"((URIs:\s*)(\S*)(/mx/(?:[.]?/)*repo/?|/mx/(?:[.]?/)*testrepo/?))",
+                QRegularExpression::CaseInsensitiveOption);
+            updated.replace(uriPattern, QStringLiteral("\\1%1\\3").arg(trimmedUrl));
+        } else {
+            static const QRegularExpression repoPattern(
+                R"((deb(?:-src)?\s+(?:\[.*?\]\s+)?)(\S*)(/mx/(?:[.]?/)*repo/?|/mx/(?:[.]?/)*testrepo/?))",
+                QRegularExpression::CaseInsensitiveOption);
+            updated.replace(repoPattern, QStringLiteral("\\1%1\\3").arg(trimmedUrl));
+        }
         updated.replace(QRegularExpression(R"([\t ]{2,})"), " ");
         updated.replace(QRegularExpression(R"([\t ]+$)", QRegularExpression::MultilineOption), "");
 
         if (updated == content) {
-            return false;
+            return UpdateOutcome::NoChangeNeeded;
         }
-        return writeUpdatedFile(path, updated);
+        return writeUpdatedFile(path, updated) ? UpdateOutcome::Changed : UpdateOutcome::Failed;
     };
 
-    auto updateSourcesFile = [&](const QString &path) -> bool {
-        QFile file(path);
-        if (!file.exists()) {
-            return false;
-        }
-        if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
-            qWarning() << "Could not open file:" << path << file.errorString();
-            return false;
-        }
-        QTextStream in(&file);
-        QString content = in.readAll();
-        file.close();
+    // Both formats are examined independently and unconditionally -- nothing enforces that MX
+    // installs ship only one of these, so either file could be the genuinely active repo
+    // declaration, or both could be (e.g. around a format migration). Checking mx.sources only
+    // when mx.list didn't change would leave a real, independently-active mx.sources untouched
+    // whenever mx.list also happened to need (and successfully receive) an update.
+    const UpdateOutcome listOutcome = tryUpdate(mx_list, false);
+    const UpdateOutcome sourcesOutcome = tryUpdate(mx_sources, true);
 
-        QString updated = content;
-        QRegularExpression uriPattern(
-            R"((URIs:\s*)(\S*)(/mx/(?:[.]?/)*repo/?|/mx/(?:[.]?/)*testrepo/?))",
-            QRegularExpression::CaseInsensitiveOption);
-        updated.replace(uriPattern, QStringLiteral("\\1%1\\3").arg(trimmedUrl));
-        updated.replace(QRegularExpression(R"([\t ]{2,})"), " ");
-        updated.replace(QRegularExpression(R"([\t ]+$)", QRegularExpression::MultilineOption), "");
+    const bool anyChanged = listOutcome == UpdateOutcome::Changed || sourcesOutcome == UpdateOutcome::Changed;
+    const bool anyFailed = listOutcome == UpdateOutcome::Failed || sourcesOutcome == UpdateOutcome::Failed;
+    const bool anyExists = listOutcome != UpdateOutcome::NotApplicable
+        || sourcesOutcome != UpdateOutcome::NotApplicable;
 
-        if (updated == content) {
-            return false;
-        }
-        return writeUpdatedFile(path, updated);
-    };
-
-    bool result = updateListFile(mx_list);
-    if (!result) {
-        result = updateSourcesFile(mx_sources);
-    }
-
-    if (result) {
+    if (anyChanged) {
         sources_changed = true;
     }
 
-    if (quiet) {
-        return result;
-    } else {
-        if (result) {
-            QMessageBox::information(this, tr("Success"),
-                                     tr("Your new selection will take effect the next time sources are updated."));
-        } else {
+    // A failure on either file takes priority over the other succeeding: silently reporting
+    // "Success" would hide that one of two active repo declarations was left stale.
+    if (anyFailed) {
+        if (!quiet) {
             QMessageBox::critical(this, tr("Error"), tr("Could not change the repo."));
         }
-        return result;
+        return false;
     }
+    if (anyChanged) {
+        if (!quiet) {
+            QMessageBox::information(this, tr("Success"),
+                                     tr("Your new selection will take effect the next time sources are updated."));
+        }
+        return true;
+    }
+    if (anyExists) {
+        // Already pointing at this mirror -- not a failure, so don't show "Could not change".
+        if (!quiet) {
+            QMessageBox::information(this, tr("No Changes"),
+                                     tr("The selected repository is already configured."));
+        }
+        return true;
+    }
+    if (!quiet) {
+        QMessageBox::critical(this, tr("Error"), tr("Could not change the repo."));
+    }
+    return false;
 }
 
 void MainWindow::setConnections()
@@ -730,6 +752,7 @@ QFileInfoList MainWindow::listAptFiles()
 void MainWindow::pushOk_clicked()
 {
     bool appliedChanges = false;
+    bool anyFailures = false;
     if (!queued_changes.isEmpty()) {
         for (const QStringList &changes : std::as_const(queued_changes)) {
             const QString &text = changes.at(0);
@@ -739,6 +762,7 @@ void MainWindow::pushOk_clicked()
             QFile file(file_name);
             if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
                 qWarning() << "Could not open file:" << file_name;
+                anyFailures = true;
                 continue;
             }
 
@@ -754,22 +778,11 @@ void MainWindow::pushOk_clicked()
                 continue;
             }
 
-            // Create temp file
-            QTemporaryFile tempFile;
-            if (!tempFile.open()) {
-                qWarning() << "Could not create temp file";
-                continue;
-            }
-
-            QTextStream out(&tempFile);
-            out << updatedContent;
-            out.flush();
-            tempFile.close();
-
-            if (shell->procAsRoot("mv", {tempFile.fileName(), file_name})
-                && shell->procAsRoot("chown", {"root:", file_name})
-                && shell->procAsRoot("chmod", {"644", file_name})) {
+            if (shell->installAsRoot(file_name, updatedContent.toUtf8())) {
                 appliedChanges = true;
+            } else {
+                qWarning() << "Failed to apply change to" << file_name;
+                anyFailures = true;
             }
         }
         queued_changes.clear();
@@ -779,6 +792,11 @@ void MainWindow::pushOk_clicked()
     }
     setSelected();
     refresh();
+    if (anyFailures) {
+        QMessageBox::warning(this, tr("Some Changes Not Applied"),
+                             tr("One or more repository changes could not be applied. Please check "
+                                "the affected sources manually."));
+    }
 }
 
 void MainWindow::pushAbout_clicked()
@@ -906,12 +924,6 @@ void MainWindow::pushFastestDebian_clicked()
         return;
     }
     progress->show();
-    QTemporaryFile tmpfile;
-    if (!tmpfile.open()) {
-        qDebug() << "Could not create temp file";
-        progress->hide();
-        return;
-    }
 
     QString ver_name = getDebianVerName(getDebianVerNum());
     if (ver_name == "buster" || ver_name == "bullseye") {
@@ -919,27 +931,27 @@ void MainWindow::pushFastestDebian_clicked()
                           // maybe it expects "stable"
     }
 
-    QStringList commandParts {"netselect-apt"};
+    QStringList args;
     if (!ver_name.isEmpty()) {
-        commandParts << ver_name;
+        args << ver_name;
     }
-    commandParts << "-o" << tmpfile.fileName();
 
-    QStringList args = commandParts;
-    args.removeFirst();
-    bool success = shell->procAsRoot("netselect-apt", args);
+    QString output;
+    bool success = shell->procAsRoot("netselect-apt", args, &output);
     progress->hide();
 
     if (!success) {
         QMessageBox::critical(this, tr("Error"), tr("netselect-apt could not detect fastest repo."));
         return;
     }
-    QString repo = shell->getOut(
-                              QString("grep -m1 '^deb ' %1 | cut -d' ' -f2")
-                                  .arg(Cmd::shellQuote(tmpfile.fileName())))
-                      .trimmed();
-    blockSignals(false);
-
+    QString repo;
+    const QStringList lines = output.split('\n');
+    for (const QString &line : lines) {
+        if (line.startsWith("deb ")) {
+            repo = line.section(' ', 1, 1).trimmed();
+            break;
+        }
+    }
     if (checkRepo(repo)) {
         replaceDebianRepos(repo);
         refresh();
@@ -959,12 +971,17 @@ void MainWindow::pushFastestMX_clicked()
     QString out;
     bool success = shell->procAsRoot("netselect", QStringList {"-D", "-I"} + listMXUrls, &out);
     out = out.trimmed();
+    // netselect's result ("<score> <url>") and its "unknown host" diagnostics for unreachable
+    // mirrors both land in this same buffer (stdout and stderr merged), with no guaranteed
+    // ordering between the two, so the result line isn't reliably the last one. Identify it by
+    // shape instead of position, keeping the last match in case more than one line qualifies.
+    static const QRegularExpression resultLine(R"(^\d+\s+(\S+)$)");
     QString selectedRepo;
     const QStringList lines = out.split('\n', Qt::SkipEmptyParts);
-    if (!lines.isEmpty()) {
-        const QStringList fields = lines.constLast().simplified().split(' ');
-        if (fields.size() >= 2) {
-            selectedRepo = fields.at(1);
+    for (const QString &line : lines) {
+        const QRegularExpressionMatch match = resultLine.match(line.simplified());
+        if (match.hasMatch()) {
+            selectedRepo = match.captured(1);
         }
     }
     qDebug() << "FASTEST " << success << out;
@@ -1019,21 +1036,20 @@ void MainWindow::pushRestoreSources_clicked()
         return;
     }
 
+    const QString aptUrisOut = shell->getOut("apt-get", {"update", "--print-uris"}, QuietMode::Yes);
+    static const QRegularExpression ahsRx(QStringLiteral("/mx/([.]?/)*repo/.*/ahs/binary-amd64/Packages"));
+    static const QRegularExpression mxRx(QStringLiteral("/mx/([.]?/)*repo/.*/main/binary-amd64/Packages"));
+
     bool enable_ahs = false;
     // For newer versions and 64-bit OS check if AHS was enabled
-    if (mx_version >= 19 && shell->getOut("uname -m", QuietMode::Yes).trimmed() == "x86_64") {
-        if (shell->run("apt-get update --print-uris | grep -q -E '/mx/([.]?/)*repo/.*/ahs/binary-amd64/Packages'",
-                       nullptr, nullptr, QuietMode::Yes)) {
+    if (mx_version >= 19 && shell->getOut("uname", {"-m"}, QuietMode::Yes).trimmed() == "x86_64") {
+        if (ahsRx.match(aptUrisOut).hasMatch()) {
             enable_ahs = true;
             qDebug() << "AHS repo detected:" << enable_ahs;
         }
     }
 
-    bool enable_mx = false;
-    if (shell->run("apt-get update --print-uris | grep -q -E '/mx/([.]?/)*repo/.*/main/binary-amd64/Packages'",
-                   nullptr, nullptr, QuietMode::Yes)) {
-        enable_mx = true;
-    }
+    const bool enable_mx = mxRx.match(aptUrisOut).hasMatch();
 
     QString mx_list = QString("%1/mx-sources-mx%2/mx.list").arg(tmpdir.path(), QString::number(mx_version));
     QString mx_sources = QString("%1/mx-sources-mx%2/mx.sources").arg(tmpdir.path(), QString::number(mx_version));
@@ -1057,7 +1073,7 @@ void MainWindow::pushRestoreSources_clicked()
 
     if (enable_ahs) {
         enableAHS(file);
-    } else if (mx_version >= 19 && shell->getOut("uname -m", QuietMode::Yes).trimmed() == "x86_64" && !enable_mx) {
+    } else if (mx_version >= 19 && shell->getOut("uname", {"-m"}, QuietMode::Yes).trimmed() == "x86_64" && !enable_mx) {
         if (QMessageBox::Yes
             == QMessageBox::question(this, tr("Enabling AHS"), tr("Do you use AHS (Advanced Hardware Stack) repo?"))) {
             enableAHS(file);
@@ -1069,13 +1085,58 @@ void MainWindow::pushRestoreSources_clicked()
     const QFileInfoList restoredFiles
         = restoredSourcesDir.entryInfoList({"*.list", "*.sources"}, QDir::Files | QDir::Readable, QDir::Name);
 
+    const QDir backupDir("/etc/apt/sources.list.d/backups");
+    if (!backupDir.exists() && !Cmd().procAsRoot("mkdir", {"-p", backupDir.path()})) {
+        qWarning() << "Failed to create backup directory:" << backupDir.path();
+        QMessageBox::critical(this, tr("Error"), tr("Could not restore the original APT source files."));
+        return;
+    }
+
     bool restoreSuccess = !restoredFiles.isEmpty();
+    QStringList installedTargets;
+    QHash<QString, QString> targetBackups; // only present for targets that existed before this restore
+
     for (const QFileInfo &sourceInfo : restoredFiles) {
         const QString targetPath = QString("/etc/apt/sources.list.d/%1").arg(sourceInfo.fileName());
-        restoreSuccess = shell->procAsRoot("mv", {"-b", sourceInfo.absoluteFilePath(), targetPath})
-            && shell->procAsRoot("chown", {"0:0", targetPath}) && shell->procAsRoot("chmod", {"644", targetPath});
+
+        if (QFile::exists(targetPath)) {
+            const QString backupFilePath = backupDir.absoluteFilePath(
+                sourceInfo.fileName() + "." + QDateTime::currentDateTime().toString("yyyyMMdd_HHmmss"));
+            if (!Cmd().procAsRoot("cp", {targetPath, backupFilePath})) {
+                qWarning() << "Failed to backup" << targetPath;
+                restoreSuccess = false;
+                break;
+            }
+            targetBackups.insert(targetPath, backupFilePath);
+        }
+
+        QFile sourceFile(sourceInfo.absoluteFilePath());
+        if (!sourceFile.open(QIODevice::ReadOnly)) {
+            qWarning() << "Could not read restored file:" << sourceInfo.absoluteFilePath();
+            restoreSuccess = false;
+            break;
+        }
+        const QByteArray content = sourceFile.readAll();
+        sourceFile.close();
+
+        restoreSuccess = shell->installAsRoot(targetPath, content, true);
         if (!restoreSuccess) {
             break;
+        }
+        installedTargets << targetPath;
+    }
+
+    if (!restoreSuccess && !installedTargets.isEmpty()) {
+        qWarning() << "Rolling back" << installedTargets.size() << "restored file(s) after failure";
+        for (const QString &targetPath : std::as_const(installedTargets)) {
+            const auto backupIt = targetBackups.constFind(targetPath);
+            if (backupIt != targetBackups.constEnd()) {
+                if (!Cmd().procAsRoot("cp", {backupIt.value(), targetPath})) {
+                    qWarning() << "Failed to roll back" << targetPath;
+                }
+            } else if (!Cmd().procAsRoot("rm", {"-f", targetPath})) {
+                qWarning() << "Failed to remove newly-restored file during rollback:" << targetPath;
+            }
         }
     }
 
@@ -1117,6 +1178,15 @@ bool MainWindow::isValidRepositoryUrl(const QString &url)
     return true;
 }
 
+void MainWindow::setupNetworkProxy(QNetworkAccessManager &manager, const QUrl &url)
+{
+    QNetworkProxyQuery query {url};
+    QList<QNetworkProxy> proxies = QNetworkProxyFactory::systemProxyForQuery(query);
+    if (!proxies.isEmpty()) {
+        manager.setProxy(proxies.first());
+    }
+}
+
 bool MainWindow::checkRepo(const QString &repo)
 {
     QNetworkRequest request;
@@ -1125,12 +1195,8 @@ bool MainWindow::checkRepo(const QString &repo)
         "User-Agent",
         QString("%1/%2 (linux-gnu)").arg(QApplication::applicationName(), QApplication::applicationVersion()).toUtf8());
 
-    QNetworkProxyQuery query {QUrl(repo)};
-    QList<QNetworkProxy> proxies = QNetworkProxyFactory::systemProxyForQuery(query);
     QNetworkAccessManager manager;
-    if (!proxies.isEmpty()) {
-        manager.setProxy(proxies.first());
-    }
+    setupNetworkProxy(manager, QUrl(repo));
 
     request.setUrl(QUrl(repo));
     QNetworkReply *reply = manager.head(request);
@@ -1156,12 +1222,8 @@ bool MainWindow::downloadFile(const QString &url, QFile *file, std::chrono::seco
         return false;
     }
 
-    QNetworkProxyQuery query {QUrl(url)};
-    QList<QNetworkProxy> proxies = QNetworkProxyFactory::systemProxyForQuery(query);
     QNetworkAccessManager manager;
-    if (!proxies.isEmpty()) {
-        manager.setProxy(proxies.first());
-    }
+    setupNetworkProxy(manager, QUrl(url));
 
     QNetworkRequest request {QUrl(url)};
     request.setRawHeader(

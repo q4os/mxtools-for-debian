@@ -1,0 +1,174 @@
+#!/bin/bash
+
+### This app was developed by MX Devs 2023 and released under GPLv3
+### Name=Papirus-folder-settings
+### Version=24.01.01
+
+TEXTDOMAINDIR=/usr/share/locale 
+export TEXTDOMAIN="papirus-folder-colors"
+source gettext.sh
+
+SETTINGSKEY=$RANDOM
+
+#TRANSLATORS app name for titlebar text
+export TITLE="$(gettext 'Papirus Folder Settings')"
+export CLASS="papirus-folder-colors"
+export ICONPATH="/usr/share/pixmaps/papirus-folder-settings.svg"
+
+#TRANSLATORS button label
+export BTN_CLOSE=$(gettext "Close")      ; BTN_CLOSE+='!window-close'
+#TRANSLATORS button label
+export BTN_RELOAD=$(gettext "Reload list")      ; BTN_RELOAD+='!reload'
+#TRANSLATORS button label
+export BTN_MOVE=$(gettext "Move Folder Theme")      ; BTN_MOVE+='!sidebar-places'
+#TRANSLATORS button label
+export BTN_RENAME=$(gettext "Rename Folder Theme")      ; BTN_RENAME+='!edit'
+#TRANSLATORS button label
+export BTN_DELETE=$(gettext "Delete Folder Theme")      ; BTN_DELETE+='!delete'
+#TRANSLATORS button label
+export BTN_EDIT=$(gettext "Edit Folder Colors")      ; BTN_EDIT+='!color-select'
+
+fn_imagelist () {
+
+if [ ! -d $HOME/.icons/* ]; then
+    local THEME_LIST=$(find $HOME/.local/share/icons/* /usr/share/icons/* -name "papirus-folder-colors.conf")
+else
+    local THEME_LIST=$(find $HOME/.local/share/icons/* $HOME/.icons/* /usr/share/icons/* -name "papirus-folder-colors.conf")
+fi
+
+if [ -z "$THEME_LIST" ]; then
+
+#TRANSLATORS warning message if no themes are available
+    TEXT_NOLIST="$(gettext 'No themes have been created yet')"
+
+    yad --title="$TITLE" --class="$CLASS" --window-icon="$ICONPATH" \
+    --borders=10 --center --width=300 --height=200 --fixed  --separator="" \
+    --text="\n\n<b>$TEXT_NOLIST !</b>\n" --text-align=center \
+    --button="$BTN_CLOSE"
+
+    FINISHED=finished
+    exit 0
+fi
+
+
+THEME_LIST=$(dirname $THEME_LIST)
+local theme_list=($THEME_LIST)
+
+for i in ${theme_list[@]}
+do
+
+    local IMGLIST="$i/48x48/places/user-home.svg"
+    
+    if [ -f "$IMGLIST" ]; then
+        local IMGLIST_ADD="$i/48x48/places/user-home.svg $i "
+    else
+        local IMGLIST_ADD="$i/scalable/places/folder-home.svg $i "
+    fi
+  
+    local IMAGES_LIST=$(echo "$IMAGES_LIST$IMGLIST_ADD ")
+
+done
+
+echo $IMAGES_LIST >/tmp/pfs_images.txt
+
+}
+
+
+fn_dostuff () {
+
+FUNC_INPUT=$1
+
+FOLDER_NAME=$(tail -n 1 /tmp/pfs-themename)
+
+if [ -z "$FOLDER_NAME" ]; then
+
+#TRANSLATORS warning message if no item is selected in theme list
+    TEXT_WARN="$(gettext 'No theme selected')"
+
+
+    yad --title="$TITLE" --class="$CLASS" --window-icon="$ICONPATH" \
+    --borders=10 --center --width=300 --height=200 --fixed  --separator="" \
+    --text="\n\n<b>$TEXT_WARN !</b>\n" --text-align=center \
+    --button="$BTN_CLOSE"
+    
+    exit
+fi
+
+
+papirus-folder-editsettings $FUNC_INPUT
+
+unset $READLIST
+fn_imagelist
+
+}
+
+
+### settings window
+
+make_tempfile () {
+echo > /tmp/pfs-themename
+}
+
+export -f fn_imagelist fn_dostuff make_tempfile
+
+
+
+make_tempfile
+
+fn_imagelist
+
+### yad
+
+until [ "$FINISHED" = "finished" ]
+do
+
+read READLIST < /tmp/pfs_images.txt
+rm /tmp/pfs_images.txt
+
+    yad --plug=$SETTINGSKEY --tabnum=1 \
+    --list --no-headers --print-column=2 --separator="" \
+    --select-action="echo" > /tmp/pfs-themename \
+    --column=":IMG" \
+    --column="TXT" \
+    $READLIST &
+
+    yad --plug=$SETTINGSKEY --tabnum=2 \
+    --form --separator="" \
+    --field=" ":LBL " " \
+    --field="$BTN_EDIT":FBTN '@bash -c "fn_dostuff settings_edit"' \
+    --field="$BTN_RENAME":FBTN '@bash -c "fn_dostuff settings_rename"' \
+    --field="$BTN_MOVE":FBTN '@bash -c "fn_dostuff settings_move"' \
+    --field="$BTN_DELETE":FBTN '@bash -c "fn_dostuff settings_delete"' \
+    &
+
+#TRANSLATORS settings window instruction text
+    TEXT_SETTINGS1="$(gettext 'Select a folder theme')"
+
+    yad --paned --key=$SETTINGSKEY --orient=Vertical --splitter=175 \
+    --listen --cycle-read \
+    --title="$TITLE" --class="$CLASS" --window-icon="$ICONPATH" \
+    --borders=10 --center --width=450 --height=500 --separator="" \
+    --text="\n<b>$TEXT_SETTINGS1</b>" --text-align="center" \
+    --button="$BTN_RELOAD":24 --button="$BTN_CLOSE" --buttons-layout=spread \
+    >/dev/null
+
+    case $? in
+    
+    1 | 252 )
+        FINISHED=finished
+    ;;
+    
+    24 )
+        unset $READLIST
+        fn_imagelist
+    ;;
+
+    esac
+
+
+done
+
+rm /tmp/pfs-themename
+
+exit 0
+

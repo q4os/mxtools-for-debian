@@ -1,6 +1,5 @@
 
-#ifndef CMD_H
-#define CMD_H
+#pragma once
 
 #include <QProcess>
 #include <QStringList>
@@ -28,5 +27,3 @@ private:
 
     void handleElevationError();
 };
-
-#endif // CMD_H

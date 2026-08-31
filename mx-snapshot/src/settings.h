@@ -1,7 +1,7 @@
 /**********************************************************************
  *  settings.h
  **********************************************************************
- * Copyright (C) 2020-2025 MX Authors
+ * Copyright (C) 2020-2026 MX Authors
  *
  * Authors: Adrian
  *          MX Linux <http://mxlinux.org>
@@ -46,18 +46,24 @@ class Settings
 public:
     explicit Settings(const QCommandLineParser &argParser, bool isGuiApp);
 
-    [[nodiscard]] QString getEditor() const;
+    // Editor invocation as a resolved argument list (program + args); execute
+    // directly with QProcess — never through a shell.
+    [[nodiscard]] QStringList getEditorCommand() const;
     [[nodiscard]] QString getFilename() const;
     [[nodiscard]] QString getFreeSpaceStrings(const QString &path);
     [[nodiscard]] QString getSnapshotSize() const;
     [[nodiscard]] QString getUsedSpace();
     [[nodiscard]] QString getXdgUserDirs(const QString &folder);
+    [[nodiscard]] static QString resolveWorkDirParent(const QString &dir);
     [[nodiscard]] bool checkCompression() const;
     [[nodiscard]] bool checkConfiguration() const;
     [[nodiscard]] bool checkSnapshotDir() const;
     [[nodiscard]] QString getExcludesSourcePath() const { return excludesSourcePath; }
     [[nodiscard]] bool checkTempDir();
     [[nodiscard]] bool initializeConfiguration();
+    // A workflow caller must clear Cmd::elevationDenied() before its first
+    // invocation; a prior denial makes this return false without probing.
+    [[nodiscard]] bool supportsWorkDirectory(const QString &candidate) const;
     [[nodiscard]] bool validateExclusions() const;
     [[nodiscard]] bool validateSpaceRequirements() const;
     [[nodiscard]] int getSnapshotCount() const;

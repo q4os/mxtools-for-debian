@@ -4,8 +4,20 @@
 
 if [[ $# -ge 2 && "$1" == "--marker" ]]; then
     marker="$2"
-    if [[ "$marker" =~ ^/run/user/[0-9]+/mx-pkg-helper-[0-9A-Fa-f]+\.marker$ || "$marker" =~ ^/tmp/mx-pkg-helper-[0-9A-Fa-f]+\.marker$ ]]; then
-        : > "$marker"
+    # HELPER_INSTALL_DIR (and so the helper's install path) differs by packaging
+    # backend -- Debian/MX installs it to /usr/libexec, the Arch package/AUR PKGBUILD
+    # to /usr/lib -- so probe both rather than hardcoding one, which has broken this
+    # exact check twice before when the install location changed underneath it.
+    helper=""
+    for candidate in /usr/libexec/mx-packageinstaller/helper /usr/lib/mx-packageinstaller/helper; do
+        if [[ -x "$candidate" ]]; then
+            helper="$candidate"
+            break
+        fi
+    done
+    if [[ -z "$helper" ]] || ! "$helper" create-marker "$marker"; then
+        echo "mxpi-lib: could not create authentication marker" >&2
+        exit 1
     fi
     shift 2
 fi

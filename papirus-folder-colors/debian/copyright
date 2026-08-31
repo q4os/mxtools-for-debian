@@ -1,0 +1,37 @@
+This work was packaged for MX-Linux by: Melber <melber.mx.linux@gmail.com>
+
+Copyright: 2023 Melber <melber.mx.linux@gmail.com>
+
+Files:
+ papirus-folder-colors
+ papirus-folder-recolor
+ papirus-folder-editcolors
+ papirus-folder-themes
+ papirus-folder-settings
+ papirus-folder-editsettings
+
+ This tool utilises a modified version of papirus-folder-colors.sh
+ released under GPL3+ by John Crawley <john@bunsenlabs.org>
+ <https://github.com/BunsenLabs/bunsen-papirus-icon-theme/blob/beryllium/papirus-folder-color.sh>
+ 
+ This tool modifies folder icons contained in papirus-icon-theme
+ released under GPL3+ by Papirus Development Team
+ <https://github.com/PapirusDevelopmentTeam/papirus-icon-theme>
+
+License: GPL-3+
+ This package is free software; you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation; either version 3 of the License, or
+ (at your option) any later version.
+ .
+ This package is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+ .
+ You should have received a copy of the GNU General Public License
+ along with this program. If not, see <https://www.gnu.org/licenses/>
+
+Comment:
+ On Debian systems, the complete text of the GNU General
+ Public License version 3 can be found in "/usr/share/common-licenses/GPL-3".

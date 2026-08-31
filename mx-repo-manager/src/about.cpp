@@ -2,6 +2,7 @@
 
 #include <QApplication>
 #include <QDebug>
+#include <QDesktopServices>
 #include <QDialog>
 #include <QFile>
 #include <QFileInfo>
@@ -40,14 +41,19 @@ void setupDocDialog(QDialog &dialog, QTextBrowser *browser, const QString &title
 
 void showHtmlDoc(const QString &url, const QString &title, bool largeWindow)
 {
+    const QUrl sourceUrl = QUrl::fromUserInput(url);
+    if (!sourceUrl.isLocalFile()) {
+        QDesktopServices::openUrl(sourceUrl);
+        return;
+    }
+
     QDialog dialog;
     auto *browser = new QTextBrowser(&dialog);
     setupDocDialog(dialog, browser, title, largeWindow);
 
-    const QUrl sourceUrl = QUrl::fromUserInput(url);
-    const QString localPath = sourceUrl.isLocalFile() ? sourceUrl.toLocalFile() : url;
-    if (sourceUrl.isLocalFile() ? QFileInfo::exists(localPath) : QFileInfo::exists(url)) {
-        browser->setSource(sourceUrl.isLocalFile() ? sourceUrl : QUrl::fromLocalFile(url));
+    const QString localPath = sourceUrl.toLocalFile();
+    if (QFileInfo::exists(localPath)) {
+        browser->setSource(sourceUrl);
     } else {
         browser->setText(QObject::tr("Could not load %1").arg(url));
         qDebug() << "Could not load HTML document" << url;

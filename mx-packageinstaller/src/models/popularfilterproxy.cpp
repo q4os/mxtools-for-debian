@@ -1,5 +1,5 @@
 /**********************************************************************
- * Copyright (C) 2017-2025 MX Authors
+ * Copyright (C) 2017-2026 MX Authors
  *
  * Authors: Adrian
  *          MX Linux <http://mxlinux.org>
@@ -28,6 +28,18 @@ PopularFilterProxy::PopularFilterProxy(QObject *parent)
     setRecursiveFilteringEnabled(true);
 }
 
+void PopularFilterProxy::invalidateRowFilter()
+{
+    // beginFilterChange()/endFilterChange() replaced invalidateFilter() in Qt 6.10;
+    // invalidateFilter() is deprecated from 6.13 on. This proxy only filters rows.
+#if QT_VERSION >= QT_VERSION_CHECK(6, 10, 0)
+    beginFilterChange();
+    endFilterChange(QSortFilterProxyModel::Direction::Rows);
+#else
+    invalidateFilter();
+#endif
+}
+
 void PopularFilterProxy::sort(int column, Qt::SortOrder order)
 {
     // Keep categories sorted A-Z/ Z-A; child ordering is driven by source sortChildren.
@@ -45,7 +57,7 @@ void PopularFilterProxy::setSearchText(const QString &text)
 {
     if (m_searchText != text) {
         m_searchText = text;
-        invalidateFilter();
+        invalidateRowFilter();
     }
 }
 

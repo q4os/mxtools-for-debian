@@ -1,7 +1,7 @@
 /**********************************************************************
  *  mainwindow.h
  **********************************************************************
- * Copyright (C) 2023-2025 MX Authors
+ * Copyright (C) 2023-2026 MX Authors
  *
  * Authors: Adrian <adrian@mxlinux.org>
  *          MX Linux <http://mxlinux.org>
@@ -29,9 +29,9 @@
 #include <QSettings>
 #include <QSet>
 
+#include <functional>
 #include <optional>
 
-#include "cmd.h"
 #include "service.h"
 
 namespace Ui
@@ -63,7 +63,6 @@ private slots:
 private:
     Ui::MainWindow *ui;
     QSettings settings;
-    Cmd cmd;
     QStringList dependTargets {};
     QColor defaultForeground;
     QColor runningColor {Qt::darkGreen};
@@ -80,19 +79,39 @@ private:
     Service *activeTooltipService = nullptr;
     bool tooltipInProgress = false;
 
+    // Background service-list loading
+    QFutureWatcher<QList<QSharedPointer<Service>>> *servicesWatcher = nullptr;
+    std::function<void()> onServicesLoaded;
+
+    // Selected-service detail fetching (async, mirrors the tooltip mechanism)
+    QTimer *selectionInfoTimer = nullptr;
+    QFutureWatcher<QString> *selectionInfoWatcher = nullptr;
+    QPersistentModelIndex pendingSelectionIndex;
+    QPersistentModelIndex activeSelectionIndex;
+    Service *activeSelectionService = nullptr;
+    bool selectionInfoInProgress = false;
+
     void cancelPendingTooltip();
+    void cancelPendingSelectionInfo();
     [[nodiscard]] QString docPath(const QString &fileName) const;
+    [[nodiscard]] QSharedPointer<Service> findServiceShared(Service *raw) const;
     void fetchTooltipDescription();
-    [[nodiscard]] std::optional<QString> sanitizeServiceName(const QString &rawName);
-    QSet<QString> loadSystemdEnabledServices(bool isUserService);
-    QString decodeEscapeSequences(const QString &input);
+    void fetchSelectionInfo();
+    void loadServicesAsync(std::function<void()> onLoaded);
+    [[nodiscard]] static std::optional<QString> sanitizeServiceName(const QString &rawName);
+    [[nodiscard]] static QString systemctlCmd(const QString &baseCmd, bool isUserService);
+    static void loadSystemdUnitFileStates(bool isUserService, QSet<QString> &enabledNames, QStringList &maskedNames);
+    static QString decodeEscapeSequences(const QString &input);
     QString getHtmlColor(const QColor &color) noexcept;
     void displayServices() noexcept;
-    void listServices();
-    void processNonSystemdServices();
-    void processSystemdActiveInactiveServices(QStringList &names,
+    [[nodiscard]] static QList<QSharedPointer<Service>> buildServiceList(const QStringList &dependTargets);
+    static void processNonSystemdServices(QList<QSharedPointer<Service>> &services, const QStringList &dependTargets);
+    static void processSystemdActiveInactiveServices(QList<QSharedPointer<Service>> &services,
+                                              QStringList &names,
                                               const QSet<QString> &enabledServices,
+                                              const QStringList &dependTargets,
                                               bool isUserService = false);
-    void processSystemdMaskedServices(QStringList &names, bool isUserService = false);
-    void processSystemdServices();
+    static void appendMaskedServices(QList<QSharedPointer<Service>> &services, QStringList &names,
+                                    const QStringList &maskedNames, bool isUserService = false);
+    static void processSystemdServices(QList<QSharedPointer<Service>> &services, const QStringList &dependTargets);
 };

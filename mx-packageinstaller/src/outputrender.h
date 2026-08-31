@@ -1,7 +1,7 @@
 /**********************************************************************
  *  outputrender.h
  **********************************************************************
- * Copyright (C) 2026 MX Authors
+ * Copyright (C) 2026-2026 MX Authors
  *
  * Authors: Adrian
  *          MX Linux <http://mxlinux.org>
@@ -79,6 +79,7 @@ public:
     {
         currentLine.clear();
         cursorColumn = 0;
+        pendingEscape.clear();
     }
 
     void append(const QString &output)
@@ -98,11 +99,13 @@ public:
         }
 
         QStringList completedLines;
-        const int size = output.size();
+        const QString input = pendingEscape + output;
+        pendingEscape.clear();
+        const int size = input.size();
         for (int i = 0; i < size; ++i) {
-            const QChar ch = output.at(i);
+            const QChar ch = input.at(i);
             if (ch == QChar(0x1B)) { // ESC: consume an ANSI control sequence
-                i = consumeEscape(output, i);
+                i = consumeEscape(input, i);
                 continue;
             }
             if (ch == QLatin1Char('\n')) {
@@ -141,43 +144,89 @@ public:
 private:
     // Handle the ANSI escape sequence starting at escIndex (output[escIndex] == ESC).
     // Honors "erase in line" (CSI K), which tools use to clear a progress line before
-    // printing a shorter final line; everything else (colors, cursor show/hide, status
-    // reports) is skipped. Returns the index of the last consumed character.
+    // printing a shorter final line. Other CSI, OSC, and standard ESC sequences are
+    // discarded. Returns the index of the last consumed character.
     int consumeEscape(const QString &output, int escIndex)
     {
         const int size = output.size();
-        if (escIndex + 1 >= size || output.at(escIndex + 1) != QLatin1Char('[')) {
-            return escIndex; // lone ESC or non-CSI escape: drop just the ESC
+        if (escIndex + 1 >= size) {
+            pendingEscape = output.mid(escIndex);
+            return size;
         }
-        int j = escIndex + 2;
-        while (j < size) {
-            const QChar c = output.at(j);
-            if ((c >= QLatin1Char('0') && c <= QLatin1Char('9')) || c == QLatin1Char(';')
-                || c == QLatin1Char('?')) {
-                ++j;
-            } else {
-                break;
+
+        const QChar sequenceType = output.at(escIndex + 1);
+        if (sequenceType == QLatin1Char(']')) {
+            for (int j = escIndex + 2; j < size; ++j) {
+                if (output.at(j) == QChar(0x07)) {
+                    return j; // OSC terminated by BEL
+                }
+                if (output.at(j) == QChar(0x1B)) {
+                    if (j + 1 >= size) {
+                        pendingEscape = output.mid(escIndex);
+                        return size;
+                    }
+                    if (output.at(j + 1) == QLatin1Char('\\')) {
+                        return j + 1; // OSC terminated by ST (ESC \)
+                    }
+                }
             }
+            pendingEscape = output.mid(escIndex);
+            return size;
+        }
+
+        if (sequenceType == QLatin1Char('[')) {
+            int j = escIndex + 2;
+            while (j < size) {
+                const ushort code = output.at(j).unicode();
+                if (code >= 0x30 && code <= 0x3F) {
+                    ++j; // parameter bytes
+                } else {
+                    break;
+                }
+            }
+            while (j < size) {
+                const ushort code = output.at(j).unicode();
+                if (code >= 0x20 && code <= 0x2F) {
+                    ++j; // intermediate bytes
+                } else {
+                    break;
+                }
+            }
+            if (j >= size) {
+                pendingEscape = output.mid(escIndex);
+                return size;
+            }
+            const QChar finalByte = output.at(j);
+            const QString params = output.mid(escIndex + 2, j - (escIndex + 2));
+            if (finalByte == QLatin1Char('K')) {
+                if (params.isEmpty() || params == QLatin1String("0")) {
+                    currentLine.truncate(cursorColumn); // erase from cursor to end of line
+                } else if (params == QLatin1String("2")) {
+                    currentLine.clear(); // erase the whole line
+                    cursorColumn = 0;
+                }
+            }
+            return j;
+        }
+
+        // Standard ESC sequences consist of zero or more intermediate bytes
+        // (0x20-0x2f) followed by a final byte (0x30-0x7e), e.g. ESC ( B.
+        int j = escIndex + 1;
+        while (j < size && output.at(j).unicode() >= 0x20 && output.at(j).unicode() <= 0x2F) {
+            ++j;
         }
         if (j >= size) {
-            return size - 1; // sequence split across chunks: drop what we have
+            pendingEscape = output.mid(escIndex);
+            return size;
         }
-        const QChar finalByte = output.at(j);
-        const QString params = output.mid(escIndex + 2, j - (escIndex + 2));
-        if (finalByte == QLatin1Char('K')) {
-            if (params.isEmpty() || params == QLatin1String("0")) {
-                currentLine.truncate(cursorColumn); // erase from cursor to end of line
-            } else if (params == QLatin1String("2")) {
-                currentLine.clear(); // erase the whole line
-                cursorColumn = 0;
-            }
-        }
-        return j;
+        const ushort finalCode = output.at(j).unicode();
+        return (finalCode >= 0x30 && finalCode <= 0x7E) ? j : escIndex;
     }
 
     QPlainTextEdit *outputBox = nullptr;
     QString currentLine;
     int cursorColumn = 0;
+    QString pendingEscape;
 };
 
 } // namespace OutputRender

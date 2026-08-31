@@ -22,3 +22,10 @@
 #pragma once
 
 const QString starting_home {qEnvironmentVariable("HOME")};
+
+// Exit code the write-file helper action uses when the replacement file was already renamed into
+// place but the containing directory could not be fsynced afterward, so the rename's durability
+// across a crash is not guaranteed. Distinct from the generic failure code (which always means the
+// original file was left untouched) so callers can report accurately instead of claiming the
+// previous configuration is still in place.
+constexpr int EXIT_CODE_WRITE_FILE_DURABILITY_UNCERTAIN = 2;

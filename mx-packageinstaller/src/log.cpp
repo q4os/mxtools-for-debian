@@ -1,7 +1,7 @@
 /**********************************************************************
  *
  **********************************************************************
- * Copyright (C) 2023 MX Authors
+ * Copyright (C) 2023-2026 MX Authors
  *
  * Authors: Adrian <adrian@mxlinux.org>
  *          MX Linux <http://mxlinux.org>
@@ -62,7 +62,10 @@ bool Log::openLogFile()
     const QByteArray name = logFile.fileName().toLocal8Bit();
     // O_NOFOLLOW: never follow a symlink at the final path component, so even
     // the world-writable /tmp fallback cannot be redirected at another file.
-    const int fd = ::open(name.constData(), O_RDWR | O_CREAT | O_NOFOLLOW | O_CLOEXEC,
+    // O_TRUNC: start every run from an empty file -- without it, a shorter
+    // run leaves the previous run's (or, on the /tmp fallback, another
+    // user's pre-planted) tail bytes sitting after our own content.
+    const int fd = ::open(name.constData(), O_RDWR | O_CREAT | O_TRUNC | O_NOFOLLOW | O_CLOEXEC,
                           S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
     if (fd < 0) {
         return false;

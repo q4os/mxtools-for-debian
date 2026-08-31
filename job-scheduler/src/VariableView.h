@@ -10,13 +10,12 @@
 #pragma once
 
 #include "Crontab.h"
-
-#include <QTreeView>
+#include "ScrollableTreeView.h"
 
 class QModelIndex;
 class VariableModel;
 
-class VariableView : public QTreeView
+class VariableView : public ScrollableTreeView
 {
     Q_OBJECT
 public:
@@ -33,7 +32,4 @@ private slots:
 
 signals:
     void changeVar(Variable *var);
-
-private:
-    void scrollTo(const QModelIndex & /*index*/, ScrollHint /*hint*/) override;
 };

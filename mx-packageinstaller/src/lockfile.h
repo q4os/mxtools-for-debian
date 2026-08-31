@@ -1,7 +1,7 @@
 /**********************************************************************
  *  lockfile.h
  **********************************************************************
- * Copyright (C) 2014-2025 MX Authors
+ * Copyright (C) 2014-2026 MX Authors
  *
  * Authors: Adrian
  *          MX Linux <http://mxlinux.org>
@@ -23,21 +23,14 @@
  **********************************************************************/
 #pragma once
 
-#include <QFile>
+#include <QString>
 
 class LockFile
 {
 public:
-    explicit LockFile(const QString &fileName);
+    LockFile() = default;
 
-    [[nodiscard]] QString fileName() const;
     [[nodiscard]] QString getLockingProcess() const;
     [[nodiscard]] bool isLocked();
     [[nodiscard]] bool isLockedGUI();
-
-    [[nodiscard]] bool lock();
-    void unlock();
-
-private:
-    QFile file;
 };

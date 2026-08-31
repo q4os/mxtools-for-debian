@@ -25,11 +25,11 @@ QVariant ExecuteModel::data(const QModelIndex &index, int role) const
             case 0:
                 return e->exeTime;
             case 1:
-                return e->tCommands->time;
+                return e->tCommands->getTime();
             case 2:
-                return e->tCommands->user;
+                return e->tCommands->getUser();
             case 3:
-                return e->tCommands->command;
+                return e->tCommands->getCommand();
             }
         } else if (role == Qt::BackgroundRole) {
             auto *e = static_cast<Execute *>(index.internalPointer());
@@ -97,16 +97,16 @@ void ExecuteModel::doSort()
                       rhsVal = &rhs->exeTime;
                       break;
                   case Col::CronTime:
-                      lhsVal = &lhs->tCommands->time;
-                      rhsVal = &rhs->tCommands->time;
+                      lhsVal = &lhs->tCommands->getTime();
+                      rhsVal = &rhs->tCommands->getTime();
                       break;
                   case Col::User:
-                      lhsVal = &lhs->tCommands->user;
-                      rhsVal = &rhs->tCommands->user;
+                      lhsVal = &lhs->tCommands->getUser();
+                      rhsVal = &rhs->tCommands->getUser();
                       break;
                   case Col::Command:
-                      lhsVal = &lhs->tCommands->command;
-                      rhsVal = &rhs->tCommands->command;
+                      lhsVal = &lhs->tCommands->getCommand();
+                      rhsVal = &rhs->tCommands->getCommand();
                       break;
                   default:
                       return false; // unreachable: sortColumn is range-checked above

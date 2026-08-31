@@ -23,8 +23,10 @@
 #include "passedit.h"
 
 #include <QDebug>
+#include <QDir>
 #include <QFile>
 #include <QFileDialog>
+#include <QFileInfo>
 #include <QProcess>
 #include <QRegularExpression>
 #include <QScreen>
@@ -296,6 +298,12 @@ void MainWindow::applyDesktop()
         QMessageBox::information(
             this, windowTitle(),
             tr("You must specify a 'copy to' destination. You cannot copy to the desktop you are logged in to."));
+        return;
+    }
+    if (toUserComboBox->currentText().contains('/') && isExcludedCopyDestination(toUserComboBox->currentText())) {
+        QMessageBox::information(
+            this, windowTitle(),
+            tr("You cannot copy to the source desktop or the desktop you are logged in to."));
         return;
     }
     if (QMessageBox::Yes
@@ -960,6 +968,26 @@ QString MainWindow::currentLogname() const
     return logname;
 }
 
+bool MainWindow::isExcludedCopyDestination(const QString &path) const
+{
+    const QString destination = QFileInfo(path).canonicalFilePath();
+    if (destination.isEmpty()) {
+        return false;
+    }
+
+    const QStringList excludedUsers {currentLogname(), fromUserComboBox->currentText()};
+    for (const QString &user : excludedUsers) {
+        if (user.isEmpty()) {
+            continue;
+        }
+        const QString home = QFileInfo(QStringLiteral("/home/%1").arg(user)).canonicalFilePath();
+        if (!home.isEmpty() && (destination == home || destination.startsWith(home + '/'))) {
+            return true;
+        }
+    }
+    return false;
+}
+
 QString MainWindow::adminGroupName() const
 {
     const QStringList candidateGroups {"sudo", "wheel"};
@@ -1181,6 +1209,15 @@ void MainWindow::toUserComboBox_activated(const QString &arg1)
         QString dir = QFileDialog::getExistingDirectory(this, tr("Select folder to copy to"), "/",
                                                         QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks);
         if (!dir.isEmpty()) {
+            if (isExcludedCopyDestination(dir)) {
+                QMessageBox::information(
+                    this, windowTitle(),
+                    tr("You cannot copy to the source desktop or the desktop you are logged in to."));
+                toUserComboBox->setCurrentIndex(toUserComboBox->currentIndex() - 1);
+                buttonApply->setEnabled(!toUserComboBox->currentText().isEmpty());
+                syncProgressBar->setValue(0);
+                return;
+            }
             toUserComboBox->removeItem(toUserComboBox->currentIndex());
             if (toUserComboBox->findText(dir, Qt::MatchExactly | Qt::MatchCaseSensitive) == -1) {
                 toUserComboBox->addItem(dir);

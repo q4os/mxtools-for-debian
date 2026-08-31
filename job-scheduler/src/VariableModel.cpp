@@ -19,9 +19,9 @@ QVariant VariableModel::data(const QModelIndex &idx, int role) const
         auto *v = static_cast<Variable *>(idx.internalPointer());
         switch (idx.column()) {
         case 0:
-            return v->name;
+            return v->getName();
         case 1:
-            return v->value;
+            return v->getValue();
         }
     }
 

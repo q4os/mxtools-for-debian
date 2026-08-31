@@ -10,15 +10,14 @@
 #pragma once
 
 #include "Crontab.h"
+#include "ScrollableTreeView.h"
 
 #include <memory>
-
-#include <QTreeView>
 
 class QPaintEvent;
 class CronModel;
 
-class CronView : public QTreeView
+class CronView : public ScrollableTreeView
 {
     Q_OBJECT
 
@@ -31,8 +30,8 @@ public:
     {
         setColumnHidden(1, flag);
     }
-    Crontab *getCurrentCrontab();
-    TCommand *getCurrentTCommand();
+    Crontab *getCurrentCrontab() const;
+    TCommand *getCurrentTCommand() const;
 
 protected:
     void startDrag(Qt::DropActions supportedActions) override;
@@ -48,7 +47,7 @@ public slots:
 
 private slots:
     void insertTCommand(TCommand *cmnd);
-    void TCommandMoved(TCommand *cmnd);
+    void tCommandMoved(TCommand *cmnd);
     void selectChanged(const QModelIndex &cur, const QModelIndex &prev);
 
 signals:
@@ -57,8 +56,6 @@ signals:
     void dataChanged();
 
 private:
-    void scrollTo(const QModelIndex &idx, ScrollHint hint) override;
-
     std::unique_ptr<TCommand> pasteData;
     CronModel *cronModel;
 };

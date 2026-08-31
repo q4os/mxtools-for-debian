@@ -1,7 +1,7 @@
 /**********************************************************************
  *  main.cpp
  **********************************************************************
- * Copyright (C) 2019 MX Authors
+ * Copyright (C) 2019-2026 MX Authors
  *
  * Authors: Dolphin Oracle
  *          MX Linux <http://mxlinux.org>
@@ -31,7 +31,7 @@
 #include <QDebug>
 
 #include "mainwindow.h"
-#include <version.h>
+#include "version.h"
 #include <fcntl.h>
 #include <unistd.h>
 
@@ -51,22 +51,22 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
 
     if (a.arguments().contains("--version") || a.arguments().contains("-v") ) {
-       qDebug() << "Version:" << VERSION;
-       return EXIT_SUCCESS;
+        qDebug() << "Version:" << VERSION;
+        return EXIT_SUCCESS;
     }
 
     a.setWindowIcon(QIcon::fromTheme("media-removable"));
 
     QTranslator qtTran;
-    qtTran.load(QString("qt_") + QLocale::system().name());
+    qtTran.load(QStringLiteral("qt_") + QLocale::system().name());
     a.installTranslator(&qtTran);
 
-    QString log_name = sessionLogPath();
+    QString logName = sessionLogPath();
     // Set the logging files
-    logFile.reset(new QFile(log_name));
+    logFile.reset(new QFile(logName));
     // Open without following a symlink at the final component, so the
     // world-writable /tmp fallback cannot be redirected at another file.
-    const int logFd = ::open(log_name.toLocal8Bit().constData(),
+    const int logFd = ::open(logName.toLocal8Bit().constData(),
                              O_WRONLY | O_CREAT | O_APPEND | O_NOFOLLOW | O_CLOEXEC, 0600);
     if (logFd < 0 || !logFile.data()->open(logFd, QFile::Append | QFile::Text, QFileDevice::AutoCloseHandle)) {
         if (logFd >= 0) {
@@ -77,14 +77,14 @@ int main(int argc, char *argv[])
     qInstallMessageHandler(messageHandler);
 
     QTranslator appTran;
-    appTran.load(QString("formatusb_") + QLocale::system().name(), "/usr/share/formatusb/locale");
+    appTran.load(QStringLiteral("formatusb_") + QLocale::system().name(), "/usr/share/formatusb/locale");
     a.installTranslator(&appTran);
 
     qDebug() << "Program Version:" << VERSION;
 
-        MainWindow w;
-        w.show();
-        return a.exec();
+    MainWindow w;
+    w.show();
+    return a.exec();
 }
 
 

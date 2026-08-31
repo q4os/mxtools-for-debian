@@ -1,0 +1,215 @@
+#!/bin/bash
+
+### This app was developed by MX Devs 2023 and released under GPLv3
+### Name=Papirus-folder-colors
+VERSION=26.03.01
+
+TEXTDOMAINDIR=/usr/share/locale 
+export TEXTDOMAIN="papirus-folder-colors"
+source gettext.sh
+
+TITLE="$(gettext 'Papirus Folder Colors')"
+CLASS="papirus-folder-colors"
+ICONPATH="/usr/share/pixmaps/papirus-folder-colors.svg"
+BTN_CLOSE=$(gettext "Close"); BTN_CLOSE+='!window-close'
+
+#check for wayland
+if [ "$XDG_SESSION_TYPE" = "wayland" ]; then
+#TRANSLATORS warning message that tool doesn't work with wayland
+    wayland_text_1="$(gettext 'Sorry, this tool is not available when running a wayland session.')"
+
+    yad --title="$title" --class="$class" --window-icon="$iconpath" \
+    --borders=10 --center --width=300 --height=100 \
+    --text="\n$wayland_text_1\n" --text-align=center \
+    --button=yad-close \
+
+    exit
+fi
+
+### check papirus icons are installed
+if [ ! -d /usr/share/icons/Papirus ]; then
+#TRANSLATORS warning message if papirus icons are not installed line 1
+    TEXT_NOPAPIRUS_1="$(gettext 'Papirus icon themes not found!')"
+#TRANSLATORS warning message if papirus icons are not installed line 2 - text is followed by required path
+    TEXT_NOPAPIRUS_2="$(gettext 'This tool requires the Papirus and Papirus-mxblue icon themes to be installed in')"
+
+
+    yad --title="$TITLE" --class="$CLASS" --window-icon="$ICONPATH" \
+    --borders=10 --center --width=300 --height=200 \
+    --text="\n\n<b>$TEXT_NOPAPIRUS_1</b>\n" --text-align=center \
+    --button="${BTN_CLOSE}":6 \
+    
+    exit
+    
+fi
+
+### check if papirus-folder script has edited symlinks
+
+if [ -f /var/lib/papirus-folders/keep ]; then
+
+    TEXT_EDITEDSYMLINKS1="$(gettext 'Papirus icons seem to have been modified with the papirus-folder script.')"
+    TEXT_EDITEDSYMLINKS2="$(gettext 'Use the -D option to restore Papirus icons to their default state.')"
+
+    yad --title="$TITLE" --class="$CLASS" --window-icon="$ICONPATH" \
+    --borders=10 --center --width=300 --height=200 \
+    --text="\n\n$TEXT_EDITEDSYMLINKS1\n\n$TEXT_EDITEDSYMLINKS2" --text-align=center \
+    --button="${BTN_CLOSE}":6 \
+    
+    exit
+
+fi
+
+### define about function
+pfc_about () {
+
+### set some variables
+
+#TRANSLATORS titlebar text
+TITLE="$(gettext 'About Papirus Folder Colors')"
+CLASS="papirus-folder-colors"
+ICONPATH="/usr/share/pixmaps/papirus-folder-colors.svg"
+
+###buttons
+
+#TRANSLATORS button label
+BTN_LICENSE=$(gettext "License")
+#TRANSLATORS button label
+BTN_CHANGELOG=$(gettext "Changelog"); BTN_CHANGELOG+='!preferences-system-time-symbolic'
+#TRANSLATORS button label
+BTN_CLOSE=$(gettext "Close"); BTN_CLOSE+='!window-close'
+
+###about window
+
+#TRANSLATORS app name for titlebar text
+ABOUTTEXT_TOP="$(gettext 'Papirus Folder Colors')"
+#TRANSLATORS about window text
+ABOUTTEXT_1="$(gettext 'Version')"
+#TRANSLATORS about window text
+ABOUTTEXT_2="$(gettext 'Tool to change folder colors of the Papirus icon theme')"
+ABOUTTEXT_4="<b>mxlinux.org</b>"
+ABOUTTEXT_5="Copyright (c) Melber - MX Linux"
+
+until [ "$about_loop" = "closed" ]; do
+
+yad --title="$TITLE" --class="$CLASS" --window-icon="$ICONPATH" \
+--borders=10 --center --width=400 --height=500 --fixed \
+--image="/usr/share/pixmaps/papirus-folder-colors-96.svg" \
+--buttons-layout=spread --button="${BTN_LICENSE}":12 --button="${BTN_CHANGELOG}":10 --button="${BTN_CLOSE}":1 \
+--form --columns=1 --align=center \
+--field=" ":LBL " " \
+--field="<b><big>$ABOUTTEXT_TOP</big></b>":LBL " " \
+--field=" ":LBL " " \
+--field="$ABOUTTEXT_1 $VERSION":LBL " " \
+--field=" ":LBL " " \
+--field="<big>$ABOUTTEXT_2</big>":LBL " " \
+--field=" ":LBL " " \
+--field=" ":LBL " " \
+--field="$ABOUTTEXT_4":BTN 'sensible-browser https://mxlinux.org' \
+--field=" ":LBL " " \
+--field="$ABOUTTEXT_5":LBL " " \
+> /dev/null
+
+
+case $? in
+
+    1 | 252 )
+        about_loop=closed
+    ;;
+
+    10 )
+        printf "$(zcat /usr/share/doc/papirus-folder-colors/changelog.gz)" > /tmp/pfc-clog.txt
+        
+        yad --title="$TITLE" --class="$CLASS" --window-icon="$ICONPATH" \
+        --borders=10 --center --width=400 --height=500 --fixed \
+        --text-info < /tmp/pfc-clog.txt --wrap --show-uri \
+        --button="${BTN_CLOSE}":1 \
+        > /dev/null
+        
+        rm /tmp/pfc-clog.txt
+    ;;
+    
+    12 )             
+        yad --title="$TITLE" --class="$CLASS" --window-icon="$ICONPATH" \
+        --borders=10 --center --width=400 --height=500 --fixed \
+        --text-info < /usr/share/doc/papirus-folder-colors/copyright --wrap --show-uri \
+        --button="${BTN_CLOSE}":1 \
+        > /dev/null
+    ;;
+
+esac
+
+done
+
+TITLE="$(gettext 'Papirus Folder Colors')"
+
+}
+
+export -f pfc_about
+
+
+### buttons
+
+#TRANSLATORS button label
+export BTN_ABOUT=$(gettext "About")      ; BTN_ABOUT+='!help-about'
+#TRANSLATORS button label
+export BTN_CLOSE=$(gettext "Close")      ; BTN_CLOSE+='!window-close'
+#TRANSLATORS button to select function in main window
+export BTN_RECOLOR=$(gettext "Papirus Folder Recolor")    ; BTN_RECOLOR+='!/usr/share/pixmaps/papirus-folder-recolor.svg!'
+#TRANSLATORS button to select function in main window
+export BTN_THEMES=$(gettext "Papirus Folder Themes")    ; BTN_THEMES+='!/usr/share/pixmaps/papirus-folder-themes.svg!'
+#TRANSLATORS button to select function in main window
+export BTN_SETTINGS=$(gettext "Manage Folder Themes")    ; BTN_SETTINGS+='!/usr/share/pixmaps/papirus-folder-settings.svg!'
+
+### set some variables
+
+#TRANSLATORS app name for titlebar text
+TITLE="$(gettext 'Papirus Folder Colors')"
+CLASS="papirus-folder-colors"
+ICONPATH="/usr/share/pixmaps/papirus-folder-colors.svg"
+
+
+### main yad window
+
+#TRANSLATORS main window text line 1
+TEXT_TOP="$(gettext 'Create a new icon theme with different colors')"
+#TRANSLATORS main window text line 2
+TEXT_1="$(gettext 'Select element colors directly')"
+#TRANSLATORS main window text line 3
+TEXT_2="$(gettext 'Select from predefined themes')"
+#TRANSLATORS main window text line 4
+TEXT_3="$(gettext 'Manage themes created with this tool')"
+
+
+until [ "$LAST_STOP" = "allaboard" ]; do
+
+yad --title="$TITLE" --class="$CLASS" --window-icon="$ICONPATH" \
+--borders=10 --center --width=400 --height=500 --separator="_" \
+--text="\n<b>$TEXT_TOP</b>\n" --text-align=center \
+--buttons-layout=spread --button="${BTN_ABOUT}":24 --button="${BTN_CLOSE}":22 --keep-icon-size \
+--form --columns=1 --align=left \
+--field="$TEXT_1":LBL " " \
+--field="$BTN_RECOLOR":FBTN 'bash -c papirus-folder-recolor' \
+--field=" ":LBL " " \
+--field="$TEXT_2":LBL " " \
+--field="$BTN_THEMES":FBTN 'bash -c papirus-folder-themes' \
+--field=" ":LBL " " \
+--field="$TEXT_3":LBL " " \
+--field="$BTN_SETTINGS":FBTN 'bash -c papirus-folder-settings' \
+>/dev/null
+
+case $? in
+
+    22 | 252 )
+        LAST_STOP=allaboard
+    ;;
+
+    24 )
+        pfc_about
+    ;;
+
+esac
+
+done
+
+
+exit

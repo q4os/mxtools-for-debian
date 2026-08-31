@@ -44,7 +44,48 @@ public:
     }
     ~TCommand() = default;
 
-    // private:
+    [[nodiscard]] const QString &getTime() const
+    {
+        return time;
+    }
+    void setTime(QString v)
+    {
+        time = std::move(v);
+    }
+    [[nodiscard]] const QString &getUser() const
+    {
+        return user;
+    }
+    void setUser(QString v)
+    {
+        user = std::move(v);
+    }
+    [[nodiscard]] const QString &getCommand() const
+    {
+        return command;
+    }
+    void setCommand(QString v)
+    {
+        command = std::move(v);
+    }
+    [[nodiscard]] const QString &getComment() const
+    {
+        return comment;
+    }
+    void setComment(QString v)
+    {
+        comment = std::move(v);
+    }
+    [[nodiscard]] Crontab *getParent() const
+    {
+        return parent;
+    }
+    void setParent(Crontab *p)
+    {
+        parent = p;
+    }
+
+private:
     QString time;
     QString user;
     QString command;
@@ -63,6 +104,32 @@ public:
     }
     ~Variable() = default;
 
+    [[nodiscard]] const QString &getName() const
+    {
+        return name;
+    }
+    void setName(QString v)
+    {
+        name = std::move(v);
+    }
+    [[nodiscard]] const QString &getValue() const
+    {
+        return value;
+    }
+    void setValue(QString v)
+    {
+        value = std::move(v);
+    }
+    [[nodiscard]] const QString &getComment() const
+    {
+        return comment;
+    }
+    void setComment(QString v)
+    {
+        comment = std::move(v);
+    }
+
+private:
     QString name;
     QString value;
     QString comment;
@@ -85,7 +152,7 @@ public:
     void setup(const QString &str);
     QString writeTempFile(const QString &text, const QString &tmp);
     static QString list2String(const QStringList &list);
-    QString cronText();
+    QString cronText() const;
 
     static bool isSystemCron(const QString &owner)
     {
@@ -94,7 +161,44 @@ public:
 
     QString estr{};
 
-    // private:
+    [[nodiscard]] const QString &getCronOwner() const
+    {
+        return cronOwner;
+    }
+    [[nodiscard]] const QString &getComment() const
+    {
+        return comment;
+    }
+    void setComment(QString v)
+    {
+        comment = std::move(v);
+    }
+    [[nodiscard]] bool isChanged() const
+    {
+        return changed;
+    }
+    void setChanged(bool v)
+    {
+        changed = v;
+    }
+    [[nodiscard]] std::vector<std::unique_ptr<Variable>> &getVariables()
+    {
+        return variables;
+    }
+    [[nodiscard]] const std::vector<std::unique_ptr<Variable>> &getVariables() const
+    {
+        return variables;
+    }
+    [[nodiscard]] std::vector<std::unique_ptr<TCommand>> &getTCommands()
+    {
+        return tCommands;
+    }
+    [[nodiscard]] const std::vector<std::unique_ptr<TCommand>> &getTCommands() const
+    {
+        return tCommands;
+    }
+
+private:
     QString cronOwner{};
     QString comment{};
     bool changed = false;

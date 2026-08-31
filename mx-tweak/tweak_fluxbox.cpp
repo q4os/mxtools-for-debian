@@ -2,6 +2,7 @@
 #include "ui_tweak.h"
 #include "cmd.h"
 #include "tweak_fluxbox.h"
+#include <QFileInfo>
 
 using namespace Qt::Literals::StringLiterals;
 
@@ -301,6 +302,10 @@ void TweakFluxbox::pushFluxboxApply_clicked() noexcept
     ui->checkFluxboxResetEverything->setChecked(false);
     ui->checkFluxboxMenuMigrate->setChecked(false);
     runCmd(u"sleep 2; /usr/bin/fluxbox-remote restart"_s);
+    runCmd(u"fluxbox-remote restart"_s);
+    //also restart conky
+    runCmd(u"killall -SIGUSR1 conky"_s);
+
     setup();
 
     ui->tabFluxbox->setEnabled(true);

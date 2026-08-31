@@ -1,8 +1,53 @@
-mx-packageinstaller-pkglist (26.07.1mx25.1302) stable; urgency=medium
+mx-packageinstaller-pkglist (26.08.5mx25.1302) stable; urgency=medium
 
   * Release
 
- -- Devs <devteam@localdomain>  Mon, 13 Jul 2026 13:05:32 +0200
+ -- Devs <devteam@localdomain>  Mon, 31 Aug 2026 17:00:18 +0200
+
+mx-packageinstaller-pkglist (26.08.5mx25) mx; urgency=medium
+
+  *  update siduction kernel (7.1.9)
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 21 Aug 2026 19:27:28 -0400
+
+mx-packageinstaller-pkglist (26.08.4mx25) mx; urgency=medium
+
+  * update liquorix 7.1 kernel (7.1.9)
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 20 Aug 2026 21:16:55 -0400
+
+mx-packageinstaller-pkglist (26.08.3mx25) mx; urgency=medium
+
+  * update 7.1 kernels (7.1.8)
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 14 Aug 2026 21:16:12 -0400
+
+mx-packageinstaller-pkglist (26.08.2mx25) mx; urgency=medium
+
+  * update siducation 7.1.7 kernel 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 08 Aug 2026 20:54:56 -0400
+
+mx-packageinstaller-pkglist (26.08.1mx25) mx; urgency=medium
+
+  * update liquorix 7.1 kernel (7.1.6-3)
+  * remove odrive (no longer works on debian 13) 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 07 Aug 2026 18:06:20 -0400
+
+mx-packageinstaller-pkglist (26.07.3mx25) mx; urgency=medium
+
+  * update liquorix 7.1 kernel (7.1.5-2) 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 31 Jul 2026 20:23:23 -0400
+
+mx-packageinstaller-pkglist (26.07.2mx25) mx; urgency=medium
+
+  * add siduction 7.1 kernel
+  * add liquorix 7.1 kernel
+  * remove ttf-mscorefonts-installer from popualr apps (still in repo)
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 30 Jul 2026 18:03:01 -0400
 
 mx-packageinstaller-pkglist (26.07.1mx25) mx; urgency=medium
 

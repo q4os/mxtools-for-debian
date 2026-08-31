@@ -5,14 +5,11 @@
 #include <QMap>
 #include <QString>
 
+#include "packageinfo.h"
+
 // Pair of arch names returned by QSysInfo::currentCpuArchitecture() and corresponding DEB_BUILD_ARCH formats
 inline static const QMap<QString, QString> archNames {
     {"x86_64", "amd64"}, {"i386", "i386"}, {"arm", "armhf"}, {"arm64", "arm64"}};
-
-struct PackageInfo {
-    QString version;
-    QString description;
-};
 
 class AptCache
 {

@@ -25,6 +25,11 @@ void AptCache::loadCacheFiles()
 {
     // Regex expressions to match package files
     static const QRegularExpression allBinaryArchRegex(QString(R"(^.*binary-%1_Packages$)").arg(arch));
+    // Architecture-independent packages: some repos ship these in their own
+    // binary-all_Packages file rather than duplicating them into every
+    // per-arch file, so this must be included alongside the current arch,
+    // not treated as just another (excluded) "other arch" binary file.
+    static const QRegularExpression allBinaryAllRegex(R"(^.*binary-all_Packages$)");
     static const QRegularExpression allBinaryAnyRegex(R"(^.*binary-[a-z0-9]+_Packages$)");
     static const QRegularExpression allRegex(R"(^.*_Packages$)");
 
@@ -43,11 +48,12 @@ void AptCache::loadCacheFiles()
         }
 
         const bool isBinaryArchMatch = allBinaryArchRegex.match(fileName).hasMatch();
+        const bool isBinaryAllMatch = allBinaryAllRegex.match(fileName).hasMatch();
         const bool isBinaryAnyMismatch = !allBinaryAnyRegex.match(fileName).hasMatch();
         const bool isAllMatch = allRegex.match(fileName).hasMatch();
         const bool isExcluded = excludeRegex.match(fileName).hasMatch();
 
-        if ((isBinaryArchMatch || (isBinaryAnyMismatch && isAllMatch)) && !isExcluded) {
+        if ((isBinaryArchMatch || isBinaryAllMatch || (isBinaryAnyMismatch && isAllMatch)) && !isExcluded) {
             if (!readFile(fileName)) {
                 qWarning() << "Error reading cache file:" << fileName << "-"
                            << QFile(dir.absoluteFilePath(fileName)).errorString();

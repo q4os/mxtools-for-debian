@@ -20,7 +20,6 @@
 #include <QTextEdit>
 #include <QtGui>
 
-#include <algorithm>
 #include <memory>
 
 #include "Clib.h"
@@ -125,10 +124,10 @@ void VariableEdit::changeCurrent(Crontab *cron, TCommand * /*unused*/)
     viewChanging = true;
 
     crontab = cron;
-    commentEdit->setPlainText(cron->comment);
-    variableModel->resetData(&cron->variables);
+    commentEdit->setPlainText(cron->getComment());
+    variableModel->resetData(&cron->getVariables());
     variableView->resetView();
-    setMailCombo(cron->variables);
+    setMailCombo(cron->getVariables());
 
     viewChanging = false;
 }
@@ -146,37 +145,37 @@ void VariableEdit::varViewSelected(Variable *var)
     varCommentEdit->setEnabled(true);
     variable = var;
     varViewChanging = true;
-    nameEdit->setText(var->name);
-    valueEdit->setText(var->value);
+    nameEdit->setText(var->getName());
+    valueEdit->setText(var->getValue());
     nameEdit->setCursorPosition(0);
     valueEdit->setCursorPosition(0);
-    varCommentEdit->setPlainText(var->comment);
+    varCommentEdit->setPlainText(var->getComment());
     varViewChanging = false;
 }
 
 void VariableEdit::commentChanged()
 {
     if (!viewChanging) {
-        crontab->comment = commentEdit->toPlainText();
+        crontab->setComment(commentEdit->toPlainText());
         emit dataChanged();
     }
 }
 void VariableEdit::varEdited(const QString &str)
 {
-    variable->name = str;
+    variable->setName(str);
     variableView->varDataChanged();
     emit dataChanged();
 }
 void VariableEdit::valEdited(const QString &str)
 {
-    variable->value = str;
+    variable->setValue(str);
     variableView->varDataChanged();
     emit dataChanged();
 }
 void VariableEdit::varCommentChanged()
 {
     if (!varViewChanging) {
-        variable->comment = varCommentEdit->toPlainText();
+        variable->setComment(varCommentEdit->toPlainText());
         emit dataChanged();
     }
 }
@@ -184,7 +183,7 @@ void VariableEdit::deleteClicked()
 {
     varViewChanging = true;
     variableView->removeVariable();
-    setMailCombo(*(variableModel->variables));
+    setMailCombo(variableModel->getVariables());
     emit dataChanged();
     varViewChanging = false;
 }
@@ -224,10 +223,13 @@ void VariableEdit::setMailVar(int flag)
     // 0 = On, 1 = Off, 2 = To, -1 = User activated
     int curFlag = 0;
     Variable *v = nullptr;
-    for (const auto &var : crontab->variables) {
-        if (var->name == QLatin1String("MAILTO")) {
-            curFlag = (var->value == QLatin1String("\"\"")) ? 1 : 2;
-            v = var.get();
+    int row = -1;
+    const auto &vars = crontab->getVariables();
+    for (size_t i = 0; i < vars.size(); ++i) {
+        if (vars[i]->getName() == QLatin1String("MAILTO")) {
+            curFlag = (vars[i]->getValue() == QLatin1String("\"\"")) ? 1 : 2;
+            v = vars[i].get();
+            row = static_cast<int>(i);
             break;
         }
     }
@@ -241,34 +243,39 @@ void VariableEdit::setMailVar(int flag)
         }
         flag = 2;
     }
+    // Route inserts/removals and edits through VariableModel so its
+    // beginInsertRows()/beginRemoveRows()/dataChanged() notifications fire,
+    // since the model aliases this same Crontab::getVariables() vector.
     if (flag == 0) {
         if (curFlag == 1 || curFlag == 2) {
-            auto it = std::find_if(crontab->variables.begin(), crontab->variables.end(),
-                                   [v](const auto &item) { return item.get() == v; });
-            if (it != crontab->variables.end()) {
-                crontab->variables.erase(it);
-            }
+            variableModel->removeVariable(row);
         }
     } else if (flag == 1) {
         if (curFlag == 0) {
-            crontab->variables.push_back(std::make_unique<Variable>(QStringLiteral("MAILTO"), QStringLiteral("\"\""),
-                                               QStringLiteral("Don't send mail to anyone")));
+            variableModel->insertVariable(static_cast<int>(crontab->getVariables().size()),
+                                           std::make_unique<Variable>(QStringLiteral("MAILTO"),
+                                                                       QStringLiteral("\"\""),
+                                                                       QStringLiteral("Don't send mail to anyone")));
         } else if (curFlag == 2) {
-            v->value = QStringLiteral("\"\"");
-            v->comment = QStringLiteral("Don't send mail to anyone");
+            v->setValue(QStringLiteral("\"\""));
+            v->setComment(QStringLiteral("Don't send mail to anyone"));
+            variableModel->varDataChanged(variableModel->index(row, 0, QModelIndex()));
         }
     } else if (flag == 2) {
         QString u = userCombo->currentText();
         if (curFlag == 0) {
             QString c = "Send mail to \"" + u + "\"";
-            crontab->variables.push_back(std::make_unique<Variable>(QStringLiteral("MAILTO"), u, c));
+            variableModel->insertVariable(static_cast<int>(crontab->getVariables().size()),
+                                           std::make_unique<Variable>(QStringLiteral("MAILTO"), u, c));
         } else if (curFlag == 1) {
-            v->value = u;
-            v->comment = "Send mail to \"" + u + "\"";
+            v->setValue(u);
+            v->setComment("Send mail to \"" + u + "\"");
+            variableModel->varDataChanged(variableModel->index(row, 0, QModelIndex()));
         } else if (curFlag == 2) {
-            if (v->value != u) {
-                v->value = u;
-                v->comment = "Send mail to \"" + u + "\"";
+            if (v->getValue() != u) {
+                v->setValue(u);
+                v->setComment("Send mail to \"" + u + "\"");
+                variableModel->varDataChanged(variableModel->index(row, 0, QModelIndex()));
             } else {
                 return;
             }
@@ -282,20 +289,20 @@ void VariableEdit::setMailCombo(const std::vector<std::unique_ptr<Variable>> &va
 {
     bool mvar = false;
     for (const auto &v : var) {
-        if (v->name == QLatin1String("MAILTO")) {
+        if (v->getName() == QLatin1String("MAILTO")) {
             mvar = true;
-            if (v->value == QLatin1String("\"\"")) {
+            if (v->getValue() == QLatin1String("\"\"")) {
                 mailOffRadio->setChecked(true);
-                userCombo->setCurrentIndex(userCombo->findText(crontab->cronOwner));
+                userCombo->setCurrentIndex(userCombo->findText(crontab->getCronOwner()));
             } else {
                 mailToRadio->setChecked(true);
-                userCombo->setCurrentIndex(userCombo->findText(v->value));
+                userCombo->setCurrentIndex(userCombo->findText(v->getValue()));
             }
             break;
         }
     }
     if (!mvar) {
         mailOnRadio->setChecked(true);
-        userCombo->setCurrentIndex(userCombo->findText(crontab->cronOwner));
+        userCombo->setCurrentIndex(userCombo->findText(crontab->getCronOwner()));
     }
 }

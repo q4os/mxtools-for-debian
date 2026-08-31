@@ -1,7 +1,7 @@
 /**********************************************************************
  *  work.h
  **********************************************************************
- * Copyright (C) 2020-2025 MX Authors
+ * Copyright (C) 2020-2026 MX Authors
  *
  * Authors: Adrian
  *          MX Linux <http://mxlinux.org>
@@ -88,17 +88,18 @@ private:
     [[nodiscard]] bool setupBindRootOverlay();
     void cleanupBindRootOverlay();
     [[nodiscard]] bool ensureOverlayModuleLoaded();
+    void teardownOverlayBase(const QString &overlayBase);
 
     // File operations
     bool replaceStringInFile(const QString &old_text, const QString &new_text, const QString &file_path);
 
     // ISO creation helpers
-    void makeChecksum(Work::HashType hash_type, const QString &folder, const QString &file_name);
+    [[nodiscard]] bool makeChecksum(Work::HashType hash_type, const QString &folder, const QString &file_name);
 
     // Initrd operations
     void closeInitrd(const QString &initrd_dir, const QString &file);
     void openInitrd(const QString &file, const QString &initrd_dir);
-    void copyModules(const QString &to, const QString &kernel);
+    [[nodiscard]] bool copyModules(const QString &to, const QString &kernel);
 
     // Arch initramfs helpers
     [[nodiscard]] QString kernelImageVersion(const QString &kernelPath) const;

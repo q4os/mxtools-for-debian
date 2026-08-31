@@ -1,8 +1,17 @@
-mx-user (26.07.1302) stable; urgency=medium
+mx-user (26.07.1.1302) stable; urgency=medium
 
   * Release
 
- -- Devs <devteam@localdomain>  Mon, 13 Jul 2026 13:05:36 +0200
+ -- Devs <devteam@localdomain>  Mon, 31 Aug 2026 17:00:20 +0200
+
+mx-user (26.07.1) mx; urgency=medium
+
+  * Prevent copying a desktop profile into the source user or the user currently
+    logged in, and explain why the destination is not allowed.
+  * Place MX User Manager in the correct desktop menu category.
+  * Add a manual page describing the user and group management features.
+
+ -- Adrian <adrian@mxlinux.org>  Tue, 28 Jul 2026 13:15:46 -0400
 
 mx-user (26.07) mx; urgency=medium
 

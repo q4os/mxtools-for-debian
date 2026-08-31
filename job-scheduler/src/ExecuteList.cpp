@@ -85,18 +85,18 @@ void ExecuteList::dataChanged()
     QList<TCommand *> cmnd;
     QList<QDateTime> date;
     for (const auto &cron : std::as_const(*crontabs)) {
-        for (const auto &cc : std::as_const(cron->tCommands)) {
-            CronTime ct(cc->time);
+        for (const auto &cc : std::as_const(cron->getTCommands())) {
+            CronTime ct(cc->getTime());
             if (ct.isValid()) {
                 QDateTime next = ct.getNextTime(QDateTime::currentDateTime());
                 if (next.isValid()) {
                     cmnd << cc.get();
                     date << next;
                 } else {
-                    executes.push_back(std::make_unique<Execute>(cc.get(), QStringLiteral("No matching schedule"), -1));
+                    executes.push_back(std::make_unique<Execute>(cc.get(), tr("No matching schedule"), -1));
                 }
             } else {
-                executes.push_back(std::make_unique<Execute>(cc.get(), QStringLiteral("Time Format Error"), -1));
+                executes.push_back(std::make_unique<Execute>(cc.get(), tr("Time Format Error"), -1));
             }
         }
     }
@@ -116,7 +116,7 @@ void ExecuteList::dataChanged()
             }
             executes.push_back(std::make_unique<Execute>(cmnd.at(p), cur.toString(QStringLiteral("yyyy-MM-dd(ddd) hh:mm"))));
             itemCount++;
-            date[p] = CronTime(cmnd.at(p)->time).getNextTime(cur);
+            date[p] = CronTime(cmnd.at(p)->getTime()).getNextTime(cur);
         }
     }
 
@@ -141,7 +141,7 @@ void ExecuteList::changeCurrent(Crontab *cron, TCommand *cmnd)
     int sel = 0;
     if (crontabs->size() > 1 && cron != nullptr) {
         for (const auto &e : executes) {
-            if (e->tCommands->parent == cron) {
+            if (e->tCommands->getParent() == cron) {
                 e->sel = 1;
             }
         }

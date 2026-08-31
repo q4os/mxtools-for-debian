@@ -9,7 +9,6 @@
 */
 #include "CronView.h"
 
-#include <QScrollBar>
 #include <QtGui>
 #include <memory>
 #include <ranges>
@@ -29,7 +28,7 @@ void dumpIndex(const QModelIndex &idx, const QString &h)
 }
 
 CronView::CronView(CronModel *model, QWidget *parent)
-    : QTreeView(parent)
+    : ScrollableTreeView(parent)
 {
     cronModel = model;
     pasteData = nullptr;
@@ -40,7 +39,7 @@ CronView::CronView(CronModel *model, QWidget *parent)
     setAcceptDrops(true);
 
     connect(selectionModel(), &QItemSelectionModel::currentChanged, this, &CronView::selectChanged);
-    connect(cronModel, &CronModel::moveTCommand, this, &CronView::TCommandMoved);
+    connect(cronModel, &CronModel::moveTCommand, this, &CronView::tCommandMoved);
 }
 
 CronView::~CronView() = default;
@@ -132,10 +131,10 @@ void CronView::newTCommand()
 {
     auto *cron = getCurrentCrontab();
     QString u;
-    if (Crontab::isSystemCron(cron->cronOwner)) {
+    if (Crontab::isSystemCron(cron->getCronOwner())) {
         u = QStringLiteral("root");
     } else {
-        u = cron->cronOwner;
+        u = cron->getCronOwner();
     }
 
     auto cmnd = std::make_unique<TCommand>(QStringLiteral("0 * * * *"), u, QLatin1String(""), QLatin1String(""), cron);
@@ -147,11 +146,11 @@ void CronView::pasteTCommand()
     auto *cron = getCurrentCrontab();
     auto cmnd = std::make_unique<TCommand>();
     *cmnd = *pasteData;
-    if (!Crontab::isSystemCron(cron->cronOwner)) {
-        cmnd->user = cron->cronOwner;
+    if (!Crontab::isSystemCron(cron->getCronOwner())) {
+        cmnd->setUser(cron->getCronOwner());
     }
 
-    cmnd->parent = cron;
+    cmnd->setParent(cron);
     insertTCommand(cmnd.release());
 }
 
@@ -164,36 +163,20 @@ void CronView::changeCurrent(TCommand *cmnd)
         }
     }
 }
-void CronView::TCommandMoved(TCommand *cmnd)
+void CronView::tCommandMoved(TCommand *cmnd)
 {
     changeCurrent(cmnd);
     emit dataChanged();
 }
 
-Crontab *CronView::getCurrentCrontab()
+Crontab *CronView::getCurrentCrontab() const
 {
     return cronModel->getCrontab(currentIndex());
 }
 
-TCommand *CronView::getCurrentTCommand()
+TCommand *CronView::getCurrentTCommand() const
 {
     return cronModel->getTCommand(currentIndex());
-}
-
-void CronView::scrollTo(const QModelIndex &idx, ScrollHint /*hint*/)
-{
-    QRect rect = visualRect(idx);
-    if (rect.height() == 0) {
-        return;
-    }
-    QRect area = viewport()->rect();
-    double step = 1.0 / rect.height();
-    if (rect.top() < 0) {
-        verticalScrollBar()->setValue(verticalScrollBar()->value() + static_cast<int>(rect.top() * step));
-    } else if (rect.bottom() > area.bottom()) {
-        verticalScrollBar()->setValue(verticalScrollBar()->value()
-                                      + static_cast<int>((rect.bottom() - area.bottom()) * step) + 5);
-    }
 }
 
 void CronView::startDrag(Qt::DropActions supportedActions)

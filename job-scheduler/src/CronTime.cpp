@@ -45,7 +45,7 @@ CronTime::CronTime(const QString &tstr)
 {
     bValid = false;
     QString str = tstr.toLower();
-    if (str.at(0) == '@') {
+    if (!str.isEmpty() && str.at(0) == '@') {
         QString s = str.mid(1);
         if (s == QLatin1String("hourly")) {
             str = QStringLiteral("0 * * * *");
@@ -174,7 +174,7 @@ QBitArray CronTime::toBit(int start, int num, const QString &str)
             fp = s.toInt() - start;
             ep = fp;
         }
-        if (fp < 0) {
+        if (fp < 0 || fp >= num || ep < 0 || ep >= num) {
             return NG;
         }
         const int end = std::min(ep + 1, num);

@@ -75,6 +75,8 @@ public:
     void saveSettings();
     void loadSettings();
 
+    [[nodiscard]] QString getConkyProcess(const QString &configPath) const;
+
 signals:
     void conkyItemsChanged();
     void conkyStarted(ConkyItem *item);
@@ -97,7 +99,6 @@ private:
     int m_startupDelay;
     QHash<ConkyItem *, qint64> m_pids; // Track PIDs for targeted kill
 
-    [[nodiscard]] QString getConkyProcess(const QString &configPath) const;
     [[nodiscard]] bool isConkyRunning(const QString &configPath) const;
     void clearConkyItems();
     void scanConkyDirectory(const QString &path);

@@ -1,0 +1,7 @@
+# The helper only checks whether /var/lib/dpkg/lock is held and, if so,
+# shells out to fuser/ps to identify the owning process, so it can report
+# "locked by another program" instead of a generic failure. It never parses
+# dpkg's status/available database files. Probing this exact lock path is
+# the technique dpkg itself expects other tools to use to detect that it is
+# running; there is no dpkg-query equivalent for lock ownership.
+uses-dpkg-database-directly [usr/libexec/mx-packageinstaller/helper]

@@ -1,7 +1,7 @@
 /**********************************************************************
  *  settings.cpp
  **********************************************************************
- * Copyright (C) 2020-2025 MX Authors
+ * Copyright (C) 2020-2026 MX Authors
  *
  * Authors: Adrian
  *          MX Linux <http://mxlinux.org>
@@ -28,6 +28,7 @@
 #include <QDate>
 #include <QDebug>
 #include <QDir>
+#include <QDirIterator>
 #include <QFileInfo>
 #include <QHash>
 #include <QProcess>
@@ -47,6 +48,26 @@
 
 namespace
 {
+// Qt cannot enumerate system processes (QProcess only manages its own
+// children), so read /proc/<pid>/comm directly — the same source pgrep uses.
+// comm holds the process name truncated to 15 characters, so the name passed
+// in must fit within that limit.
+bool isProcessRunning(const QByteArray &name)
+{
+    QDirIterator it(QStringLiteral("/proc"), QDir::Dirs | QDir::NoDotAndDotDot);
+    while (it.hasNext()) {
+        it.next();
+        if (!it.fileName().at(0).isDigit()) {
+            continue; // not a PID entry
+        }
+        QFile comm(it.filePath() + "/comm");
+        if (comm.open(QIODevice::ReadOnly) && comm.readLine().trimmed() == name) {
+            return true;
+        }
+    }
+    return false;
+}
+
 QString trimQuotesValue(QString value)
 {
     value = value.trimmed();
@@ -285,40 +306,87 @@ bool Settings::checkSnapshotDir() const
     return true;
 }
 
+QString Settings::resolveWorkDirParent(const QString &dir)
+{
+    if (dir != "/home") {
+        return dir;
+    }
+    QString userName = QString::fromUtf8(qgetenv("SUDO_USER")).trimmed();
+    if (userName.isEmpty()) {
+        userName = QString::fromUtf8(qgetenv("LOGNAME")).trimmed();
+    }
+    return "/home/" + userName;
+}
+
+bool Settings::supportsWorkDirectory(const QString &candidate) const
+{
+    if (Cmd::elevationDenied()) {
+        return false;
+    }
+
+    const QString resolvedCandidate = resolveWorkDirParent(candidate);
+    if (!QFile::exists(resolvedCandidate) || !FileSystemUtils::isOnSupportedPartition(resolvedCandidate)) {
+        return false;
+    }
+
+    // The work directory is created by the user, but mksquashfs and other
+    // snapshot steps write into it through the elevated helper. A FUSE mount
+    // without allow_other/allow_root or an NFS root_squash export can pass the
+    // user-side filesystem probe yet reject those writes. Keep the probe
+    // directory user-private (like the real QTemporaryDir) and make one tiny
+    // root write inside it to verify the access that matters.
+    QTemporaryDir rootProbe(QDir(resolvedCandidate).filePath(".mx-snapshot-root-check-XXXXXX"));
+    if (!rootProbe.isValid()) {
+        qDebug() << "Rejecting" << resolvedCandidate << ": could not create elevated probe directory";
+        return false;
+    }
+    const QString rootProbeFile = rootProbe.filePath("root-write");
+    if (!Cmd().procAsRoot("touch", {rootProbeFile}, nullptr, nullptr, Cmd::QuietMode::Yes)) {
+        qDebug() << "Rejecting" << resolvedCandidate << ": elevated probe write failed";
+        return false;
+    }
+    return true;
+}
+
 bool Settings::checkTempDir()
 {
     qDebug() << "+++" << __PRETTY_FUNCTION__ << "+++";
-    // Set workdir location if not defined in .conf file, doesn't exist, or not supported partition.
-    // When picking a fallback, only consider candidates whose underlying filesystem can hold the
-    // intermediate snapshot artifacts (excludes vfat/ntfs, network mounts, fuse-backed shares, etc.).
-    if (tempDirParent.isEmpty() || !QFile::exists(tempDirParent)
-        || !FileSystemUtils::isOnSupportedPartition(tempDirParent)) {
+    // Resolve /home to the invoking user's home BEFORE any validation or
+    // free-space comparison: the home can be a separate mount (NFS automount,
+    // FUSE/ecryptfs, ...) even when /home itself sits on a supported local
+    // filesystem, so checks against /home would not cover the directory
+    // actually used for the work dir.
+    tempDirParent = resolveWorkDirParent(tempDirParent);
+    // Set workdir location if not defined in .conf file, doesn't exist, or cannot support
+    // the filesystem operations used by the intermediate artifacts as either
+    // the user or the elevated snapshot helper.
+    if (tempDirParent.isEmpty() || !supportsWorkDirectory(tempDirParent)) {
         QStringList candidates;
-        for (const QString &candidate : {QStringLiteral("/tmp"), QStringLiteral("/home"), snapshotDir}) {
+        // Resolve every candidate: snapshotDir can be configured as literally
+        // "/home" too, and must get the same per-user expansion and
+        // validation as the built-in fallback.
+        for (const QString &rawCandidate : {QStringLiteral("/tmp"), QStringLiteral("/home"), snapshotDir}) {
+            const QString candidate = resolveWorkDirParent(rawCandidate);
             if (candidate.isEmpty() || candidates.contains(candidate)) {
                 continue;
             }
-            if (!QFile::exists(candidate) || !FileSystemUtils::isOnSupportedPartition(candidate)) {
+            if (!supportsWorkDirectory(candidate)) {
                 continue;
             }
             candidates << candidate;
         }
+        if (Cmd::elevationDenied()) {
+            return false;
+        }
         if (candidates.isEmpty()) {
             qCritical() << QObject::tr(
-                "No supported filesystem found for the temp directory. Tried /tmp, /home, and the snapshot directory.");
+                "No suitable filesystem found for the temp directory. Tried /tmp, /home, and the snapshot directory.");
             return false;
         }
         tempDirParent = candidates.takeFirst();
         for (const QString &candidate : std::as_const(candidates)) {
             tempDirParent = FileSystemUtils::largerFreeSpace(tempDirParent, candidate);
         }
-    }
-    if (tempDirParent == "/home") {
-        QString userName = QString::fromUtf8(qgetenv("SUDO_USER")).trimmed();
-        if (userName.isEmpty()) {
-            userName = QString::fromUtf8(qgetenv("LOGNAME")).trimmed();
-        }
-        tempDirParent = "/home/" + userName;
     }
     tmpdir.reset(new QTemporaryDir(tempDirParent + "/mx-snapshot-XXXXXXXX"));
     if (!tmpdir->isValid()) {
@@ -533,33 +601,60 @@ void Settings::handleInitializationError(const QString &error) const
                                QObject::tr("Failed to initialize application settings:\n\n%1").arg(error));
 }
 
-QString Settings::getEditor() const
+QStringList Settings::getEditorCommand() const
 {
-    QString editor = guiEditor;
-    if (editor.isEmpty() || QStandardPaths::findExecutable(editor, {path}).isEmpty()) {
+    // Parse a configured or .desktop-provided editor command into an argument
+    // list. QProcess::splitCommand honours quotes but performs no shell
+    // evaluation, and the executable must resolve on PATH — so a crafted
+    // gui_editor value or Exec= line yields arguments, never shell syntax.
+    // Callers execute the returned list directly via QProcess (no bash -c),
+    // which is what makes running it from a root process safe against
+    // injection through the configuration.
+    const auto resolveCommand = [this](const QString &commandLine) -> QStringList {
+        QStringList args = QProcess::splitCommand(commandLine);
+        // Drop .desktop Exec field codes (%f, %U, ...) and the historical -b flag.
+        static const QRegularExpression fieldCode("^%[a-zA-Z]$");
+        args.removeIf([](const QString &arg) { return arg == "-b" || fieldCode.match(arg).hasMatch(); });
+        if (args.isEmpty()) {
+            return {};
+        }
+        const QString executable = QStandardPaths::findExecutable(args.constFirst(), path);
+        if (executable.isEmpty()) {
+            return {};
+        }
+        args[0] = executable;
+        return args;
+    };
+
+    QStringList editor = resolveCommand(guiEditor);
+    if (editor.isEmpty()) {
         const QString defaultEditor = Cmd().getOut("xdg-mime query default text/plain");
         const QString desktopFile
             = QStandardPaths::locate(QStandardPaths::ApplicationsLocation, defaultEditor, QStandardPaths::LocateFile);
         QFile file(desktopFile);
         if (file.open(QIODevice::ReadOnly)) {
             while (!file.atEnd()) {
-                QString line = file.readLine();
-                if (line.contains(QRegularExpression("^Exec="))) {
-                    editor = line.remove(QRegularExpression("^Exec=|%u|%U|%f|%F|%c|%C|-b")).trimmed();
+                const QString line = file.readLine();
+                if (line.startsWith("Exec=")) {
+                    editor = resolveCommand(line.mid(QStringLiteral("Exec=").size()).trimmed());
                     break;
                 }
             }
             file.close();
         }
-        if (editor.isEmpty()) { // Use nano as backup editor
-            editor = "nano";
+    }
+    if (editor.isEmpty()) { // Use nano as backup editor
+        editor = resolveCommand(QStringLiteral("nano"));
+        if (editor.isEmpty()) {
+            editor = QStringList {QStringLiteral("nano")};
         }
     }
 
+    const QString editorName = QFileInfo(editor.constFirst()).fileName();
     const bool isRoot = getuid() == 0;
     const bool isEditorThatElevates
-        = QRegularExpression(R"((kate|kwrite|featherpad|code|codium)$)").match(editor).hasMatch();
-    const bool isCliEditor = QRegularExpression(R"(nano|vi|vim|nvim|micro|emacs)").match(editor).hasMatch();
+        = QRegularExpression(R"((kate|kwrite|featherpad|code|codium)$)").match(editorName).hasMatch();
+    const bool isCliEditor = QRegularExpression(R"(nano|vi|vim|nvim|micro|emacs)").match(editorName).hasMatch();
 
     if (isEditorThatElevates && !isRoot) {
         return editor;
@@ -569,24 +664,32 @@ QString Settings::getEditor() const
     // where the target files were created root-owned. In a normal unprivileged
     // GUI session the files are already owned by the invoking user, so
     // elevating here would just force an unnecessary pkexec/sudo prompt.
-    QString elevate;
+    QStringList elevate;
     if (isRoot) {
-        elevate = Cmd::elevationTool();
-        if (isEditorThatElevates) {
-            // Adjust user switch flag based on tool
-            if (elevate.contains("sudo")) {
-                elevate += " -u $(logname)";
-            } else {
-                elevate += " --user $(logname)";
+        const QString elevationTool = Cmd::elevationTool();
+        if (!elevationTool.isEmpty()) {
+            elevate << elevationTool;
+            if (isEditorThatElevates) {
+                // Editors that elevate internally are dropped back to the
+                // logged-in user; adjust the user switch flag per tool.
+                const QString username = Cmd::loggedInUserName();
+                if (!username.isEmpty()) {
+                    elevate << (elevationTool.contains("sudo") ? QStringLiteral("-u") : QStringLiteral("--user"))
+                            << username;
+                }
             }
         }
     }
-    const QString elevatePrefix = elevate.isEmpty() ? QString() : elevate + " ";
 
     if (isCliEditor) {
-        return "x-terminal-emulator -e " + elevatePrefix + editor;
+        return QStringList {QStringLiteral("x-terminal-emulator"), QStringLiteral("-e")} + elevate + editor;
     }
-    return elevatePrefix + "env DISPLAY=$DISPLAY XAUTHORITY=$XAUTHORITY " + editor;
+    // GUI editors need the invoking session's display across the elevation
+    // boundary; forward the current values as literal env arguments.
+    return elevate
+           + QStringList {QStringLiteral("env"), "DISPLAY=" + qEnvironmentVariable("DISPLAY"),
+                          "XAUTHORITY=" + qEnvironmentVariable("XAUTHORITY")}
+           + editor;
 }
 
 // Return the size of the snapshot folder in MiB
@@ -979,16 +1082,16 @@ QString Settings::getFreeSpaceStrings(const QString &path)
 void Settings::excludeItem(const QString &item)
 {
     static const QMap<QString, void (Settings::*)(bool)> itemExclusions {
-        {QObject::tr("Desktop"), &Settings::excludeDesktop},
-        {QObject::tr("Documents"), &Settings::excludeDocuments},
-        {QObject::tr("Downloads"), &Settings::excludeDownloads},
-        {QObject::tr("Flatpaks"), &Settings::excludeFlatpaks},
-        {QObject::tr("Music"), &Settings::excludeMusic},
-        {QObject::tr("Networks"), &Settings::excludeNetworks},
-        {QObject::tr("Pictures"), &Settings::excludePictures},
-        {"Steam", &Settings::excludeSteam},
-        {QObject::tr("Videos"), &Settings::excludeVideos},
-        {"VirtualBox", &Settings::excludeVirtualBox}};
+        {QStringLiteral("Desktop"), &Settings::excludeDesktop},
+        {QStringLiteral("Documents"), &Settings::excludeDocuments},
+        {QStringLiteral("Downloads"), &Settings::excludeDownloads},
+        {QStringLiteral("Flatpaks"), &Settings::excludeFlatpaks},
+        {QStringLiteral("Music"), &Settings::excludeMusic},
+        {QStringLiteral("Networks"), &Settings::excludeNetworks},
+        {QStringLiteral("Pictures"), &Settings::excludePictures},
+        {QStringLiteral("Steam"), &Settings::excludeSteam},
+        {QStringLiteral("Videos"), &Settings::excludeVideos},
+        {QStringLiteral("VirtualBox"), &Settings::excludeVirtualBox}};
 
     auto it = itemExclusions.find(item);
     if (it != itemExclusions.end()) {
@@ -1384,11 +1487,25 @@ void Settings::setMonthlySnapshot(const QCommandLineParser &argParser)
     QString name = "Debian_" + QString(x86 ? "386" : "x64");
     if (argParser.value("file").isEmpty()) {
         auto month = QDate::currentDate().toString("MMMM");
-        if (!argParser.value("month").isEmpty()) {
-            month += "." + argParser.value("month");
+        const QString monthSuffix = argParser.positionalArguments().value(0);
+        if (!monthSuffix.isEmpty()) {
+            month += "." + monthSuffix;
         }
         auto suffix = name.section('_', 1, 1);
-        if (qgetenv("DESKTOP_SESSION") == "plasma") {
+        // XDG_CURRENT_DESKTOP is a colon-separated list (e.g. "KDE" or "ubuntu:GNOME");
+        // it is set to "KDE" on both X11 and Wayland Plasma sessions, while
+        // DESKTOP_SESSION varies by session file ("plasma", "plasmax11", ...).
+        const QStringList currentDesktop
+            = QString::fromLocal8Bit(qgetenv("XDG_CURRENT_DESKTOP")).split(':', Qt::SkipEmptyParts);
+        bool isPlasma = currentDesktop.contains(QLatin1String("KDE"), Qt::CaseInsensitive)
+                        || qgetenv("DESKTOP_SESSION") == "plasma";
+        // Plain sudo strips both variables; only when neither is set fall back to
+        // detecting a running Plasma shell (named plasmashell on Plasma 5 and 6).
+        // A present non-KDE value is authoritative, so don't second-guess it.
+        if (!isPlasma && currentDesktop.isEmpty() && qgetenv("DESKTOP_SESSION").isEmpty()) {
+            isPlasma = isProcessRunning("plasmashell");
+        }
+        if (isPlasma) {
             suffix = "KDE";
         }
         snapshotName = name.section('_', 0, 0) + '_' + month + '_' + suffix + ".iso";

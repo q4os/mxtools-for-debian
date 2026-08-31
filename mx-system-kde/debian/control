@@ -6,7 +6,7 @@ Build-Depends: debhelper (>=9)
 Standards-Version: 3.9.8
 
 Package: mx-system-kde
-Depends:  libkf5baloowidgets-bin
+Depends:  libbaloowidgets-bin
 Architecture: all
 Description: metapackage for packages needed for system functions on KDE-plasma
  This metapackage depends on packages needed for certain systems to work with

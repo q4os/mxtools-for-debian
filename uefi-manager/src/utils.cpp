@@ -1,10 +1,41 @@
 #include "utils.h"
 
+#include <QFile>
 #include <QRegularExpression>
 #include <algorithm>
 
 namespace utils
 {
+
+KernelFiles resolveKernelFiles(const QString &sourceDir, const QString &kernelVersion, bool isFrugal)
+{
+    KernelFiles result;
+
+    // vmlinuz: try versioned first, fall back to Arch-style vmlinuz-linux
+    result.vmlinuz = QString("%1/vmlinuz%2").arg(sourceDir, isFrugal ? "" : "-" + kernelVersion);
+    if (!QFile::exists(result.vmlinuz)) {
+        result.vmlinuz = QString("%1/vmlinuz-linux").arg(sourceDir);
+    }
+
+    // initrd: try initrd pattern first, then initramfs, then Arch fallback
+    const QString initrdPath = QString("%1/initrd%2").arg(sourceDir, isFrugal ? ".gz" : ".img-" + kernelVersion);
+    const QString initramfsPath = QString("%1/initramfs-%2").arg(sourceDir, isFrugal ? "" : kernelVersion + ".img");
+
+    if (QFile::exists(initrdPath)) {
+        result.initrd = initrdPath;
+    } else if (QFile::exists(initramfsPath)) {
+        result.initrd = initramfsPath;
+    } else {
+        const QString archFallback = QString("%1/initramfs-linux.img").arg(sourceDir);
+        result.initrd = QFile::exists(archFallback) ? archFallback : initramfsPath;
+    }
+
+    // microcode images (may not exist)
+    result.amdUcode = QString("%1/amd-ucode.img").arg(sourceDir);
+    result.intelUcode = QString("%1/intel-ucode.img").arg(sourceDir);
+
+    return result;
+}
 
 QStringList sortKernelVersions(const QStringList &kernelFiles, bool reverse)
 {

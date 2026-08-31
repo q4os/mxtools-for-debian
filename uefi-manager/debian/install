@@ -1,11 +1,11 @@
 docs/license.html		usr/share/doc/uefi-manager
 docs/uefi-manager.1		usr/share/man/man1
-scripts/*.policy		usr/share/polkit-1/actions
-obj-*/helper			usr/lib/uefi-manager
+obj-*/*.policy		usr/share/polkit-1/actions
+obj-*/helper			usr/libexec/uefi-manager
 scripts/uefimanager-lib		usr/lib/uefi-manager
 obj-*/*.qm 			usr/share/uefi-manager/locale
 obj-*/uefi-manager 		usr/bin
 uefi-manager.desktop		usr/share/applications
-uefi-manager.png		usr/share/icons/hicolor/48x48/apps
+uefi-manager.png		usr/share/icons/hicolor/64x64/apps
 uefi-manager.png		usr/share/pixmaps
 uefi-manager.svg		usr/share/icons/hicolor/scalable/apps

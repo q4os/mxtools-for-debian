@@ -1,0 +1,116 @@
+papirus-folder-colors (26.03.02.1302) stable; urgency=medium
+
+  * Release
+
+ -- Devs <devteam@localdomain>  Mon, 31 Aug 2026 17:00:20 +0200
+
+papirus-folder-colors (26.03.02) mx; urgency=medium
+
+  * use blank templates for classic icon
+  * use tokens rather than actual colors
+  * use correct folder name when using dark mode
+  * update translations
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 05 Aug 2026 19:27:58 -0400
+
+papirus-folder-colors (26.03.01) mx; urgency=medium
+
+  * check for wayland session 
+
+ -- Melber <melber.mx.linux@gmail.com>  Sun, 08 Mar 2026 17:15:01 +0100
+ 
+papirus-folder-colors (26.02.01) mx; urgency=medium
+
+  * create directory ~/.local/share/icons if necessary 
+
+ -- Melber <melber.mx.linux@gmail.com>  Tue, 03 Feb 2026 23:10:01 +0100
+ 
+papirus-folder-colors (25.09.01) mx; urgency=medium
+
+  * yad 14 icon fixes
+
+ -- Melber <melber.mx.linux@gmail.com>  Sun, 21 Sep 2025 22:01:01 +0100
+
+papirus-folder-colors (25.06.01) mx; urgency=medium
+
+  * add mxblue inherits
+  * add icon for recent
+  * fix recolor preview icons
+
+ -- Melber <melber.mx.linux@gmail.com>  Tue, 03 Jun 2025 23:55:01 +0100
+ 
+papirus-folder-colors (24.09.01) mx; urgency=medium
+
+  * update translations
+  * include icon in hicolor theme (xfce4-settings-manager display issue)
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 06 Sep 2024 18:27:02 -0400
+
+papirus-folder-colors (24.04.01) mx; urgency=medium
+
+  * update translations
+
+ -- Melber <melber.mx.linux@gmail.com>  Sun, 07 Apr 2024 18:55:01 +0100
+
+papirus-folder-colors (24.01.04) mx; urgency=medium
+
+  * fix for repeated entry of empty theme name
+  * hide mx-tweak in plasma desktop
+  * add progress dialog
+  * check for symlinks modified by 'papirus-folder' script
+  * update translations
+  * update main icon
+
+ -- Melber <melber.mx.linux@gmail.com>  Mon, 29 Jan 2024 22:36:01 +0100
+
+papirus-folder-colors (24.01.03) mx; urgency=medium
+
+  * show papirus-folder-color icon instead of gear icon in xfce-panel
+  * make debian/rules file executable
+  * remove debian/files build artefact
+
+ -- fehlix <fehlix@mxlinux.org>  Thu, 18 Jan 2024 14:16:47 -0500
+
+papirus-folder-colors (24.01.02) mx; urgency=medium
+
+  * updated translations (thank you to all our volunteer translators)
+
+ -- Melber <melber.mx.linux@gmail.com>  Tue, 16 Jan 2024 08:10:01 +0100
+
+papirus-folder-colors (24.01.01) mx; urgency=medium
+
+  * added translations
+  * added automatic substitution of space with underscore in new theme names
+  * updated pfr and pft icons
+  * added translator comments
+
+ -- Melber <melber.mx.linux@gmail.com>  Wed, 10 Jan 2024 23:13:01 +0100
+
+papirus-folder-colors (23.12.04) mx; urgency=medium
+
+  * added changelog and license buttons in about window
+  * fixed save theme to /usr/share/icons
+  * allow underscores in theme name
+  * append -dark to theme name if dark symbols selected
+
+ -- Melber <melber.mx.linux@gmail.com>  Fri, 29 Dec 2023 17:08:01 +0100
+
+papirus-folder-colors (23.12.03) mx; urgency=medium
+
+  * Public Test release
+  * Fixed email address
+
+ -- Melber <melber.mx.linux@gmail.com>  Sun, 17 Dec 2023 12:11:01 +0100
+
+papirus-folder-colors (23.12.02) mx; urgency=medium
+
+  * Test release
+  * Fixed usr/share management
+
+ -- Melber <melber-mx-linux@gmail.com>  Wed, 13 Dec 2023 23:05:56 +0100
+
+papirus-folder-colors (23.12.01) mx; urgency=medium
+
+  * Initial release.
+
+ -- Melber <melber-mx-linux@gmail.com>  Sun, 03 Dec 2023 14:48:54 +0100

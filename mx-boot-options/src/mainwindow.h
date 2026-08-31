@@ -55,6 +55,7 @@ private slots:
 
     void btnBgFileClicked();
     void btnThemeFileClicked();
+    void checkBackgroundToggled(bool checked);
     void comboBootsplashClicked(bool checked);
     void comboBootsplashToggled(bool checked);
     void comboEnableFlatmenusClicked(bool checked);
@@ -98,6 +99,7 @@ private:
 
     QString bootLocation;
     QString chroot;
+    QString luksMapper;
     QString user;
     QStringList defaultGrub;
     QStringList grubCfg;
@@ -127,7 +129,8 @@ private:
     [[nodiscard]] bool liveGrubMode() const;
     [[nodiscard]] bool refreshLiveGrubTheme();
     bool writeFileLinesAsRoot(const QString &path, const QStringList &lines);
-    bool rewriteFileAsRoot(const QString &path, const std::function<bool(QString &)> &transform);
+    bool rewriteFileAsRoot(const QString &path, const std::function<bool(QString &)> &transform,
+                           bool *writeFailed = nullptr);
     bool applyLiveGrubTimeout(int seconds);
     bool applyLiveGrubBackground(const QString &imagePath);
     [[nodiscard]] bool runPackageUpdate();
@@ -151,13 +154,13 @@ private:
     void readDefaultGrub();
     void readGrubCfg();
     void reloadGrubSettings();
-    void replaceSyslinuxArgs(const QString &args);
-    void replaceLiveGrubArgs(const QString &args);
+    [[nodiscard]] bool replaceSyslinuxArgs(const QString &args);
+    [[nodiscard]] bool replaceLiveGrubArgs(const QString &args);
     void setupUiElements();
     void setGeneralConnections();
     void setup();
     void setupGrubSettings();
-    void toggleBootlogd(bool enable);
+    [[nodiscard]] bool toggleBootlogd(bool enable);
     void unmountAndClean(const QStringList &mountList);
-    void writeDefaultGrub();
+    bool writeDefaultGrub();
 };

@@ -1,7 +1,7 @@
 /**********************************************************************
  *  main.cpp
  **********************************************************************
- * Copyright (C) 2017-2025 MX Authors
+ * Copyright (C) 2017-2026 MX Authors
  *
  * Authors: Adrian
  *          Dolphin_Oracle
@@ -22,8 +22,6 @@
  * You should have received a copy of the GNU General Public License
  * along with mx-packageinstaller.  If not, see <http://www.gnu.org/licenses/>.
  **********************************************************************/
-#include "lockfile.h"
-
 #include <QApplication>
 #include <QCommandLineParser>
 #include <QDate>
@@ -32,6 +30,8 @@
 #include <QLibraryInfo>
 #include <QLocale>
 #include <QTranslator>
+
+#include <unistd.h>
 
 #include "log.h"
 #include "mainwindow.h"

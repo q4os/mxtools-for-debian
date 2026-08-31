@@ -1,0 +1,40 @@
+#!/usr/bin/make -f
+
+%:
+	dh $@ --with bash-completion
+
+override_dh_auto_build:
+	dh_auto_build
+	for lang in $$(cat po/LINGUAS); do \
+		mkdir -p locale/$$lang/LC_MESSAGES; \
+		msgfmt --check-format -o locale/$$lang/LC_MESSAGES/verify-iso-sig.mo po/$$lang.po; \
+	done
+	msgfmt --desktop --template=verify-iso-sig.desktop.in -d po \
+		-o verify-iso-sig.desktop
+	pandoc -f markdown-smart -s -t man man-page.md \
+		-M footer="Version $$(dpkg-parsechangelog -S Version)" \
+		-M date="$$(date -d "$$(dpkg-parsechangelog -S Date)" +%Y-%m-%d)" \
+		-o verify-iso-sig.1
+	mkdir -p help
+	pandoc -f markdown-smart-fancy_lists -s -t html --toc --toc-depth=3 \
+		-M toc-title="Contents" -M pagetitle="ISO Signature Verifier - Help" \
+		-M lang=en -H help-header.html \
+		README.md -o help/help.html
+	# pandoc's --toc places the table of contents right after <body>,
+	# before the title/hero image - move it to just before the first
+	# <h2> instead, so the hero image is the first thing seen.
+	awk '/<nav id="TOC"/{toc=1} toc{tocblock=tocblock $$0 "\n"; if (/<\/nav>/){toc=0}; next} /<h2 /{printf "%s", tocblock; tocblock=""} {print}' \
+		help/help.html > help/help.html.tmp && mv help/help.html.tmp help/help.html
+	cp -a screenshots help/screenshots
+	cp LICENSE help/LICENSE
+
+override_dh_install:
+	dh_install
+	sed -i "s/^VERSION=.*/VERSION=\"$$(dpkg-parsechangelog -S Version)\"/" \
+		debian/verify-iso-sig/usr/bin/verify-iso-sig \
+		debian/verify-iso-sig/usr/lib/verify-iso-sig/verify-iso-sig-gui.sh
+
+override_dh_auto_clean:
+	dh_auto_clean
+	rm -rf locale/ help/
+	rm -f verify-iso-sig.1 verify-iso-sig.desktop

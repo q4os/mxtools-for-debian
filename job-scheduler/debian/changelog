@@ -1,8 +1,18 @@
-job-scheduler (26.06.1.1302) stable; urgency=medium
+job-scheduler (26.07.1302) stable; urgency=medium
 
   * Release
 
- -- Devs <devteam@localdomain>  Mon, 13 Jul 2026 13:05:27 +0200
+ -- Devs <devteam@localdomain>  Mon, 31 Aug 2026 17:00:16 +0200
+
+job-scheduler (26.07) mx; urgency=medium
+
+  * Warn when a task's command cannot be found, without preventing the task from
+    being saved
+  * Reject invalid cron values instead of silently changing them, and prevent
+    malformed entries from causing the application to stop responding
+  * Show previously untranslated schedule errors through the translation system
+
+ -- Adrian <adrian@mxlinux.org>  Sun, 26 Jul 2026 09:04:13 -0400
 
 job-scheduler (26.06.1) mx; urgency=medium
 

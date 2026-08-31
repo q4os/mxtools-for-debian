@@ -2,12 +2,12 @@
 <context>
     <name>Cmd</name>
     <message>
-        <location filename="../src/cmd.cpp" line="174"/>
+        <location filename="../src/cmd.cpp" line="173"/>
         <source>Administrator Access Required</source>
         <translation>Требуется доступ администратора</translation>
     </message>
     <message>
-        <location filename="../src/cmd.cpp" line="175"/>
+        <location filename="../src/cmd.cpp" line="174"/>
         <source>This operation requires administrator privileges.</source>
         <translation>Для этой операции требуются права администратора.</translation>
     </message>
@@ -136,7 +136,7 @@
     <message>
         <location filename="../src/mainwindow.ui" line="465"/>
         <location filename="../src/mainwindow.cpp" line="954"/>
-        <location filename="../src/mainwindow.cpp" line="1777"/>
+        <location filename="../src/mainwindow.cpp" line="1714"/>
         <source>Next</source>
         <translation>Далее</translation>
     </message>
@@ -146,15 +146,15 @@
         <translation>Назад</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="780"/>
+        <location filename="../src/mainwindow.cpp" line="778"/>
         <location filename="../src/mainwindow.cpp" line="978"/>
-        <location filename="../src/mainwindow.cpp" line="1583"/>
-        <location filename="../src/mainwindow.cpp" line="1593"/>
+        <location filename="../src/mainwindow.cpp" line="1527"/>
+        <location filename="../src/mainwindow.cpp" line="1537"/>
         <source>UEFI Installer</source>
         <translation>Установщик UEFI</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="781"/>
+        <location filename="../src/mainwindow.cpp" line="779"/>
         <source>A recent frugal install has been detected. Do you wish to add a UEFI entry direct to your UEFI system menu?</source>
         <translation>Обнаружена недавняя экономная установка. Желаете добавить запись UEFI непосредственно в меню вашей системы UEFI?</translation>
     </message>
@@ -179,92 +179,84 @@
         <translation>Не удалось открыть LUKS-контейнер %1</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1584"/>
+        <location filename="../src/mainwindow.cpp" line="1528"/>
         <source>Are you sure this is the MX or antiX Frugal installation location?
 Missing mandatory files in directory: </source>
         <translation>Уверены, что это расположение экономной установки MX или antiX?
 В каталоге отсутствуют обязательные файлы: </translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1652"/>
+        <location filename="../src/mainwindow.cpp" line="1592"/>
         <source>Not enough space on the EFI System Partition to copy the kernel and initrd files.</source>
         <translation>Недостаточно места на системном разделе EFI для копирования файлов ядра и initrd.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1714"/>
+        <location filename="../src/mainwindow.cpp" line="1651"/>
         <source>All fields are required</source>
         <translation>Все поля обязательны для заполнения</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1737"/>
+        <location filename="../src/mainwindow.cpp" line="1674"/>
         <source>Could not select ESP</source>
         <translation>Не удалось выбрать ESP</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1755"/>
+        <location filename="../src/mainwindow.cpp" line="1692"/>
         <source>About %1</source>
         <translation>О %1</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="156"/>
+        <location filename="../src/mainwindow.cpp" line="162"/>
         <source>Select EFI file</source>
         <translation>Выберите файл EFI</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="156"/>
+        <location filename="../src/mainwindow.cpp" line="162"/>
         <source>EFI files (*.efi *.EFI)</source>
         <translation>Файлы EFI (*.efi *.EFI)</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="168"/>
-        <location filename="../src/mainwindow.cpp" line="179"/>
-        <location filename="../src/mainwindow.cpp" line="190"/>
-        <location filename="../src/mainwindow.cpp" line="198"/>
+        <location filename="../src/mainwindow.cpp" line="174"/>
+        <location filename="../src/mainwindow.cpp" line="185"/>
+        <location filename="../src/mainwindow.cpp" line="212"/>
+        <location filename="../src/mainwindow.cpp" line="219"/>
         <location filename="../src/mainwindow.cpp" line="1026"/>
         <location filename="../src/mainwindow.cpp" line="1038"/>
         <location filename="../src/mainwindow.cpp" line="1044"/>
-        <location filename="../src/mainwindow.cpp" line="1799"/>
-        <location filename="../src/mainwindow.cpp" line="1937"/>
-        <location filename="../src/mainwindow.cpp" line="2008"/>
-        <location filename="../src/mainwindow.cpp" line="2019"/>
-        <location filename="../src/mainwindow.cpp" line="2026"/>
-        <location filename="../src/mainwindow.cpp" line="2037"/>
-        <location filename="../src/mainwindow.cpp" line="2047"/>
-        <location filename="../src/mainwindow.cpp" line="2061"/>
-        <location filename="../src/mainwindow.cpp" line="2066"/>
+        <location filename="../src/mainwindow.cpp" line="1736"/>
         <source>Error</source>
         <translation>Ошибка</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="168"/>
-        <location filename="../src/mainwindow.cpp" line="179"/>
+        <location filename="../src/mainwindow.cpp" line="174"/>
+        <location filename="../src/mainwindow.cpp" line="185"/>
         <source>Could not find the source mountpoint for %1</source>
         <translation>Не удалось найти исходную точку монтирования для %1</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="183"/>
+        <location filename="../src/mainwindow.cpp" line="189"/>
         <source>Set name</source>
         <translation>Задать имя</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="183"/>
+        <location filename="../src/mainwindow.cpp" line="189"/>
         <source>Enter the name for the UEFI menu item:</source>
         <translation>Введите имя для элемента меню UEFI:</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="190"/>
+        <location filename="../src/mainwindow.cpp" line="212"/>
         <source>Selected file is not in an EFI directory</source>
         <translation>Выбранный файл находится не в каталоге EFI</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="198"/>
+        <location filename="../src/mainwindow.cpp" line="219"/>
         <source>Something went wrong, could not add entry.</source>
         <translation>Что-то пошло не так, не удалось добавить запись.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="810"/>
         <location filename="../src/mainwindow.cpp" line="853"/>
-        <location filename="../src/mainwindow.cpp" line="1814"/>
+        <location filename="../src/mainwindow.cpp" line="1751"/>
         <source>Timeout: %1 seconds</source>
         <translation>Тайм-аут: %1 секунд</translation>
     </message>
@@ -272,7 +264,7 @@ Missing mandatory files in directory: </source>
         <location filename="../src/mainwindow.cpp" line="812"/>
         <location filename="../src/mainwindow.cpp" line="852"/>
         <location filename="../src/mainwindow.cpp" line="859"/>
-        <location filename="../src/mainwindow.cpp" line="1831"/>
+        <location filename="../src/mainwindow.cpp" line="1767"/>
         <source>Boot Next: %1</source>
         <translation>Следующая загрузка: %1</translation>
     </message>
@@ -348,156 +340,116 @@ Missing mandatory files in directory: </source>
         <translation>Не удалось открыть файл grub.entry.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1758"/>
+        <location filename="../src/mainwindow.cpp" line="1695"/>
         <source>Tool for managing UEFI boot entries</source>
         <translation>Инструмент для управления загрузочными записями UEFI</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1937"/>
-        <source>Both old and new EFI labels must be specified</source>
-        <translation>Необходимо указать как старую, так и новую метки EFI</translation>
-    </message>
-    <message>
-        <location filename="../src/mainwindow.cpp" line="2009"/>
-        <source>Multiple boot entries found for label &apos;%1&apos;: %2 and %3;</source>
-        <translation>Найдено несколько загрузочных записей для метки &apos;%1&apos;: %2 и %3;</translation>
-    </message>
-    <message>
-        <location filename="../src/mainwindow.cpp" line="2019"/>
-        <source>No EFI data found for label &apos;%1&apos;.</source>
-        <translation>Данные EFI для метки «%1» не найдены.</translation>
-    </message>
-    <message>
-        <location filename="../src/mainwindow.cpp" line="2027"/>
-        <source>EFI label &apos;%1&apos; is linked to an unknown partition &apos;%2&apos;.</source>
-        <translation>Метка EFI «%1» связана с неизвестным разделом «%2».</translation>
-    </message>
-    <message>
-        <location filename="../src/mainwindow.cpp" line="2038"/>
-        <source>Unexpected device name format &apos;%1&apos; for partition related to the label.</source>
-        <translation>Неожиданный формат имени устройства «%1» для раздела, связанного с меткой.</translation>
-    </message>
-    <message>
-        <location filename="../src/mainwindow.cpp" line="2048"/>
-        <source>Device partition number [%1] differs from EFI entry partition number [%2].</source>
-        <translation>Номер раздела устройства [%1] отличается от номера раздела в записи EFI [%2].</translation>
-    </message>
-    <message>
-        <location filename="../src/mainwindow.cpp" line="2061"/>
-        <source>Failed to delete old boot entry</source>
-        <translation>Не удалось удалить старую загрузочную запись</translation>
-    </message>
-    <message>
-        <location filename="../src/mainwindow.cpp" line="2066"/>
-        <source>Failed to create new boot entry</source>
-        <translation>Не удалось создать новую загрузочную запись</translation>
-    </message>
-    <message>
-        <location filename="../src/mainwindow.cpp" line="1593"/>
+        <location filename="../src/mainwindow.cpp" line="1537"/>
         <source>Failed to read grub.entry file.</source>
         <translation>Не удалось прочитать файл grub.entry.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="963"/>
-        <location filename="../src/mainwindow.cpp" line="1606"/>
+        <location filename="../src/mainwindow.cpp" line="1550"/>
         <source>Install</source>
         <translation>Установить</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1612"/>
+        <location filename="../src/mainwindow.cpp" line="1556"/>
         <source>Select Frugal Directory</source>
         <translation>Выберите каталог экономной установки</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1619"/>
+        <location filename="../src/mainwindow.cpp" line="1563"/>
         <source>No EFI System Partitions found.</source>
         <translation>Системные разделы EFI не найдены.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1625"/>
+        <location filename="../src/mainwindow.cpp" line="1568"/>
         <source>Select EFI System Partition</source>
         <translation>Выберите системный раздел EFI</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1626"/>
+        <location filename="../src/mainwindow.cpp" line="1569"/>
         <source>EFI System Partitions:</source>
         <translation>Системные разделы EFI:</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1639"/>
+        <location filename="../src/mainwindow.cpp" line="1579"/>
         <source>No EFI System Partition selected</source>
         <translation>Системный раздел EFI не выбран</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1646"/>
+        <location filename="../src/mainwindow.cpp" line="1586"/>
         <source>Could not mount selected EFI System Partition</source>
         <translation>Не удалось смонтировать выбранный системный раздел EFI</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1677"/>
-        <location filename="../src/mainwindow.cpp" line="1721"/>
+        <location filename="../src/mainwindow.cpp" line="1614"/>
+        <location filename="../src/mainwindow.cpp" line="1658"/>
         <source>Could not mount partition. Please make sure you selected the correct partition.</source>
         <translation>Не удалось смонтировать раздел. Пожалуйста, убедитесь, что вы выбрали правильный раздел.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1686"/>
+        <location filename="../src/mainwindow.cpp" line="1623"/>
         <source>No directory selected</source>
         <translation>Каталог не выбран</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1706"/>
-        <location filename="../src/mainwindow.cpp" line="1743"/>
+        <location filename="../src/mainwindow.cpp" line="1643"/>
+        <location filename="../src/mainwindow.cpp" line="1680"/>
         <source>EFI stub installed successfully.</source>
         <translation>EFI-заглушка успешно установлена.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1708"/>
-        <location filename="../src/mainwindow.cpp" line="1745"/>
+        <location filename="../src/mainwindow.cpp" line="1645"/>
+        <location filename="../src/mainwindow.cpp" line="1682"/>
         <source>Failed to install EFI stub.</source>
         <translation>Не удалось установить EFI-заглушку.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1756"/>
+        <location filename="../src/mainwindow.cpp" line="1693"/>
         <source>Version: </source>
         <translation>Версия: </translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1760"/>
+        <location filename="../src/mainwindow.cpp" line="1697"/>
         <source>Copyright (c) MX Linux</source>
         <translation>Авторское право (c) MX Linux</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1761"/>
+        <location filename="../src/mainwindow.cpp" line="1698"/>
         <source>%1 License</source>
         <translation>%1 Лицензия</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1769"/>
+        <location filename="../src/mainwindow.cpp" line="1706"/>
         <source>%1 Help</source>
         <translation>%1 Справка</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1799"/>
+        <location filename="../src/mainwindow.cpp" line="1736"/>
         <source>Something went wrong, could not save boot order.</source>
         <translation>Что-то пошло не так, не удалось сохранить порядок загрузки.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1810"/>
+        <location filename="../src/mainwindow.cpp" line="1746"/>
         <source>Set timeout</source>
         <translation>Задать тайм-аут</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1810"/>
+        <location filename="../src/mainwindow.cpp" line="1746"/>
         <source>Timeout in seconds:</source>
         <translation>Тайм-аут в секундах:</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1849"/>
+        <location filename="../src/mainwindow.cpp" line="1785"/>
         <source>Removal confirmation</source>
         <translation>Подтверждение удаления</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1850"/>
+        <location filename="../src/mainwindow.cpp" line="1786"/>
         <source>Are you sure you want to delete this boot entry?
 %1</source>
         <translation>Уверены, что хотите удалить эту загрузочную запись?
@@ -507,32 +459,32 @@ Missing mandatory files in directory: </source>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../src/about.cpp" line="99"/>
+        <location filename="../src/about.cpp" line="100"/>
         <source>License</source>
         <translation>Лицензия</translation>
     </message>
     <message>
-        <location filename="../src/about.cpp" line="100"/>
+        <location filename="../src/about.cpp" line="101"/>
         <source>Changelog</source>
         <translation>Список изменений</translation>
     </message>
     <message>
-        <location filename="../src/about.cpp" line="101"/>
+        <location filename="../src/about.cpp" line="102"/>
         <source>Cancel</source>
         <translation>Отмена</translation>
     </message>
     <message>
-        <location filename="../src/about.cpp" line="125"/>
+        <location filename="../src/about.cpp" line="126"/>
         <source>Error: Changelog file is missing.</source>
         <translation>Ошибка: файл списка изменений отсутствует.</translation>
     </message>
     <message>
-        <location filename="../src/about.cpp" line="127"/>
+        <location filename="../src/about.cpp" line="128"/>
         <source>Error: Required utility &apos;zless&apos; is missing.</source>
         <translation>Ошибка: отсутствует необходимая утилита «zless».</translation>
     </message>
     <message>
-        <location filename="../src/about.cpp" line="134"/>
+        <location filename="../src/about.cpp" line="135"/>
         <source>&amp;Close</source>
         <translation>&amp;Закрыть</translation>
     </message>

@@ -38,6 +38,15 @@ enum class QuietMode
     Yes,
 };
 
+// Timeout tiers for helperProc()/cmdOut(): quick metadata/settings operations
+// keep a short timeout, disk-scanning cleanup operations get a generous one
+// (slow disks, huge caches), and package-manager mutations get none at all --
+// killing apt-get/pacman/flatpak mid-operation can corrupt their state, so
+// those must be allowed to run to completion.
+constexpr int kQuickTimeoutMs = 30000;
+constexpr int kDiskScanTimeoutMs = 600000;
+constexpr int kNoTimeoutMs = 0;
+
 class MainWindow : public QDialog
 {
     Q_OBJECT
@@ -66,36 +75,70 @@ private:
     bool isArchLinux {false};
     bool manualRemovalInProgress {false};
     bool suppressUserSwitch {false};
-    QString cmdOut(const QString &cmd, QuietMode quiet = QuietMode::No);
-    bool helperProc(const QStringList &helperArgs, QuietMode quiet = QuietMode::No, QString *output = nullptr);
-    bool helperExec(const QString &cmd, const QStringList &args = {}, QuietMode quiet = QuietMode::No,
-                    QString *output = nullptr);
-    QString helperOut(const QString &cmd, const QStringList &args = {}, QuietMode quiet = QuietMode::No);
-    bool helperFlatpakCleanup(const QString &user, QuietMode quiet = QuietMode::No);
-    quint64 helperDuSize(const QString &path, QuietMode quiet = QuietMode::No);
-    static quint64 sumKiB(const QString &output);
+    QString cmdOut(const QString &cmd, QuietMode quiet = QuietMode::No, bool *ok = nullptr,
+                   int timeoutMs = kQuickTimeoutMs);
+    QString cmdOut(const QString &program, const QStringList &args, QuietMode quiet = QuietMode::No,
+                   bool *ok = nullptr, int timeoutMs = kQuickTimeoutMs);
+    bool helperProc(const QStringList &helperArgs, QuietMode quiet = QuietMode::No, QString *output = nullptr,
+                    const QByteArray &input = {}, QString *errorOutput = nullptr, bool *timedOut = nullptr,
+                    int timeoutMs = kQuickTimeoutMs);
+    QString helperOut(const QStringList &helperArgs, QuietMode quiet = QuietMode::No,
+                      int timeoutMs = kQuickTimeoutMs);
+    quint64 helperDuSize(const QString &sizeKey, const QString &user = {}, QuietMode quiet = QuietMode::No,
+                        int timeoutMs = kDiskScanTimeoutMs);
 
+public:
+    static quint64 sumKiB(const QString &output);
     static void addGroupCheckbox(QLayout *layout, const QStringList &package, const QString &name, QStringList *list);
     static void selectRadioButton(class QGroupBox *groupbox, const QButtonGroup *group, int id);
+
+    // Parsers for the schedule scripts the helper generates; they accept both
+    // the current shell-quoted paths and unquoted paths from older releases.
+    static bool scriptCleansThumbnails(const QString &content);
+    static bool scriptCleansCache(const QString &content);
+    static int scriptCacheAgeDays(const QString &content);  // -1 when no age filter
+    static int scriptTrashAgeDays(const QString &content);  // 0 when no age filter
+
+private:
     void loadOptions(bool settingsPreloaded = false);
     void loadSchedule(bool settingsPreloaded = false);
     void loadSettings();
+    // Populates groupBoxApt/checkPurge/groupBoxLogs and the "all users" side
+    // of groupBoxTrash from the shared system-wide script -- always, so a
+    // user with no per-user schedule of their own still sees the true shared
+    // state instead of falling back to their own unrelated saved preference
+    // (which could then overwrite the real shared script on their next
+    // Apply). When the shared script doesn't exist yet (upgrade from a
+    // pre-split release, where these commands lived inline in the user
+    // script), legacyFallbackContent is parsed instead, so the old global
+    // options show up checked and the next Apply migrates them into the
+    // shared script rather than silently dropping them. Returns whether
+    // "all users" trash is scheduled, so callers don't also apply a
+    // conflicting "selected user" state on top of it.
+    bool loadSystemScriptOptions(const QString &legacyFallbackContent = {});
     void removeKernelPackages(const QStringList &list);
     void removeManuals();
-    void saveSchedule(const QString &cmd_str, const QString &period);
-    void saveSettings();
+    [[nodiscard]] bool saveSchedule(const QStringList &scheduleOpts, const QString &period);
+    // Writes just the shared system-wide script (apt/purge/logs/trash-all)
+    // when this user has no cron schedule of their own to carry it via
+    // saveSchedule(), so those settings persist for the next launch instead
+    // of only reaching the (no longer authoritative) per-user QSettings file.
+    [[nodiscard]] bool saveSystemScript(const QStringList &systemScriptOpts);
+    [[nodiscard]] bool saveSettings();
     void setConnections();
     void setup();
     void startPreferredApp(const QStringList &apps);
-    QString homeDirForUser(const QString &user) const;
-    QString primaryGroupForUser(const QString &user) const;
-    QString cronEntryBase(const QString &period) const;
-    QString cronEntryPath(const QString &period, bool forWrite) const;
-    QString currentUserSuffix() const;
-    QString scriptFileBase() const;
-    QString scriptFilePath(bool forWrite) const;
-    QString settingsDirForUser(const QString &user) const;
-    QString settingsFileForUser(const QString &user) const;
+    [[nodiscard]] QString homeDirForUser(const QString &user) const;
+    [[nodiscard]] QString cronEntryBase(const QString &period) const;
+    [[nodiscard]] QString cronEntryPath(const QString &period, bool forWrite) const;
+    [[nodiscard]] QString currentUserSuffix() const;
+    [[nodiscard]] QString scriptFileBase() const;
+    [[nodiscard]] QString scriptFilePath(bool forWrite) const;
+    // Shared system-wide script (apt/purge/logs/trash-all); see helperlib.h's
+    // systemScriptPath() for why it has no cron entry of its own.
+    [[nodiscard]] QString systemScriptPath() const;
+    [[nodiscard]] QString settingsDirForUser(const QString &user) const;
+    [[nodiscard]] QString settingsFileForUser(const QString &user) const;
     void initializeSettingsForUser(const QString &user);
-    void ensureSettingsOwnership(const QString &user, const QString &targetPath);
+    void ensureSettingsOwnership(const QString &user);
 };

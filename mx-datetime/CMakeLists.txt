@@ -1,5 +1,5 @@
 # **********************************************************************
-# * Copyright (C) 2019-2025 MX Authors
+# * Copyright (C) 2019-2026 MX Authors
 # *
 # * Authors: AK-47, Adrian
 # *          MX Linux <http://mxlinux.org>
@@ -27,6 +27,18 @@ project(mx-datetime
 	VERSION 3.0
 	DESCRIPTION "MX Date & Time - Date and time configuration tool for MX Linux"
 	LANGUAGES CXX
+)
+
+set(HELPER_INSTALL_DIR "/usr/libexec/mx-datetime" CACHE PATH
+	"Absolute install directory for the privileged helper binary")
+if(NOT IS_ABSOLUTE "${HELPER_INSTALL_DIR}")
+	message(FATAL_ERROR "HELPER_INSTALL_DIR must be an absolute path, got: ${HELPER_INSTALL_DIR}")
+endif()
+set(HELPER_PATH "${HELPER_INSTALL_DIR}/helper")
+configure_file(
+	scripts/org.mxlinux.pkexec.mx-datetime-helper.policy.in
+	${CMAKE_BINARY_DIR}/org.mxlinux.pkexec.mx-datetime-helper.policy
+	@ONLY
 )
 
 find_package(Qt6 6.4 REQUIRED COMPONENTS Core Gui Widgets LinguistTools)
@@ -73,6 +85,7 @@ build_compilation_setup(helper)
 build_version_definition(helper VERSION)
 
 target_compile_definitions(mx-datetime PRIVATE
+	HELPER_PATH="${HELPER_PATH}"
 	QT_DISABLE_DEPRECATED_UP_TO=0x060400
 )
 
@@ -86,5 +99,5 @@ install(TARGETS mx-datetime
 )
 
 install(TARGETS helper
-	RUNTIME DESTINATION ${CMAKE_INSTALL_LIBDIR}/mx-datetime
+	RUNTIME DESTINATION ${HELPER_INSTALL_DIR}
 )

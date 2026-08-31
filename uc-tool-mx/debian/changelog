@@ -1,8 +1,17 @@
-uc-tool-mx (26.06.1.1302) stable; urgency=medium
+uc-tool-mx (26.07.1.1302) stable; urgency=medium
 
   * Release
 
- -- Devs <devteam@localdomain>  Mon, 13 Jul 2026 13:05:39 +0200
+ -- Devs <devteam@localdomain>  Mon, 31 Aug 2026 17:00:21 +0200
+
+uc-tool-mx (26.07.1) mx; urgency=medium
+
+  * Fix printf misparsing '--' formatted messages as options when
+    --no-color is used.
+  * iucode_tool: don't let its routine stderr output be mistaken for
+    an error; check exit status and report real failures via fatal().
+
+ -- fehlix <fehlix@mxlinux.org>  Thu, 23 Jul 2026 17:16:12 -0400
 
 uc-tool-mx (26.06.1) mx; urgency=medium
 

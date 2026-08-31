@@ -1,0 +1,392 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+# Translators:
+# mahmut özcan <mahmutozcan@protonmail.com>, 2024
+# Caner Başaran <basaran.caner@gmail.com>, 2024
+# Mehmet Akif Dokuzoğlu, 2024
+# 
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-01-12 18:16+0100\n"
+"PO-Revision-Date: 2024-01-05 04:02+0000\n"
+"Last-Translator: Mehmet Akif Dokuzoğlu, 2024\n"
+"Language-Team: Turkish (https://app.transifex.com/anticapitalista/teams/10162/tr/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: tr\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#. TRANSLATORS warning message if papirus icons are not installed line 1
+#: ../scripts/papirus-folder-colors:15
+msgid "Papirus icon themes not found!"
+msgstr "Papirus simge temaları bulunamadı!"
+
+#. TRANSLATORS warning message if papirus icons are not installed line 2 -
+#. text is followed by required path
+#: ../scripts/papirus-folder-colors:17
+msgid ""
+"This tool requires the Papirus and Papirus-mxblue icon themes to be "
+"installed in"
+msgstr ""
+"Bu araç için Papirus ve Papirus-mxblue simge temalarının yüklü olması "
+"gerekmektedir."
+
+#. TRANSLATORS app name for titlebar text
+#. The desktop entry name will be shown within the menu
+#: ../scripts/papirus-folder-colors:19 ../scripts/papirus-folder-colors:55
+#: ../scripts/papirus-folder-colors:113 ../scripts/papirus-folder-colors:136
+#: ../xdg/papirus-folder-colors.desktop.in:5
+msgid "Papirus Folder Colors"
+msgstr "Papirus Klasör Renkleri"
+
+#. TRANSLATORS button label
+#: ../scripts/papirus-folder-colors:22 ../scripts/papirus-folder-colors:50
+#: ../scripts/papirus-folder-colors:125
+#: ../scripts/papirus-folder-editsettings:19
+#: ../scripts/papirus-folder-recolor:16 ../scripts/papirus-folder-settings:19
+#: ../scripts/papirus-folder-themes:14
+msgid "Close"
+msgstr "Kapat"
+
+#. TRANSLATORS titlebar text
+#: ../scripts/papirus-folder-colors:39
+msgid "About Papirus Folder Colors"
+msgstr "Papirus Klasör Renkleri Hakkında"
+
+#. TRANSLATORS button label
+#: ../scripts/papirus-folder-colors:46
+msgid "License"
+msgstr "Lisans"
+
+#. TRANSLATORS button label
+#: ../scripts/papirus-folder-colors:48
+msgid "Changelog"
+msgstr "Değişim günlüğü"
+
+#. TRANSLATORS about window text
+#: ../scripts/papirus-folder-colors:57
+msgid "Version"
+msgstr "Sürüm"
+
+#. TRANSLATORS about window text
+#: ../scripts/papirus-folder-colors:59
+msgid "Tool to change folder colors of the Papirus icon theme"
+msgstr "Papirus simge temasının klasör renklerini değiştirmek için araç"
+
+#. TRANSLATORS button label
+#: ../scripts/papirus-folder-colors:123 ../scripts/papirus-folder-recolor:14
+msgid "About"
+msgstr "Hakkında"
+
+#. TRANSLATORS button to select function in main window
+#. TRANSLATORS app name for titlebar text
+#: ../scripts/papirus-folder-colors:127 ../scripts/papirus-folder-recolor:27
+#: ../scripts/papirus-folder-recolor:136 ../scripts/papirus-folder-recolor:180
+msgid "Papirus Folder Recolor"
+msgstr "Papirus Klasör Yeniden Renklendir"
+
+#. TRANSLATORS button to select function in main window
+#. TRANSLATORS app name for titlebar text
+#: ../scripts/papirus-folder-colors:129 ../scripts/papirus-folder-themes:25
+msgid "Papirus Folder Themes"
+msgstr "Papirus Klasör Temaları"
+
+#. TRANSLATORS button to select function in main window
+#: ../scripts/papirus-folder-colors:131
+msgid "Manage Folder Themes"
+msgstr "Klasör Temalarını Yönet"
+
+#. TRANSLATORS main window text line 1
+#: ../scripts/papirus-folder-colors:144
+msgid "Create a new icon theme with different colors"
+msgstr "Yeni renklere sahip bir simge teması oluşturun."
+
+#. TRANSLATORS main window text line 2
+#: ../scripts/papirus-folder-colors:146
+msgid "Select element colors directly"
+msgstr "Öğe renklerini doğrudan seç"
+
+#. TRANSLATORS main window text line 3
+#: ../scripts/papirus-folder-colors:148
+msgid "Select from predefined themes"
+msgstr "Önceden tanımlanmış temalardan seçin."
+
+#. TRANSLATORS main window text line 4
+#: ../scripts/papirus-folder-colors:150
+msgid "Manage themes created with this tool"
+msgstr "Bu aracı kullanarak oluşturulan temaları yönetin."
+
+#. TRANSLATORS app name for titlebar text
+#: ../scripts/papirus-folder-editsettings:8
+#: ../scripts/papirus-folder-settings:14
+msgid "Papirus Folder Settings"
+msgstr "Papirus Klasör Ayarları"
+
+#. TRANSLATORS button label
+#: ../scripts/papirus-folder-editsettings:13
+msgid "Yes"
+msgstr "Evet"
+
+#. TRANSLATORS button label
+#: ../scripts/papirus-folder-editsettings:15
+msgid "No"
+msgstr "Hayır"
+
+#. TRANSLATORS button label
+#: ../scripts/papirus-folder-editsettings:17
+#: ../scripts/papirus-folder-themes:16
+msgid "OK"
+msgstr "Tamam"
+
+#. TRANSLATORS window text - asking for new location to save theme
+#: ../scripts/papirus-folder-editsettings:34
+msgid "New location for icon theme"
+msgstr "Simge teması için yeni konum"
+
+#. TRANSLATORS error message - text is preceded by icon theme name and
+#. followed by path
+#: ../scripts/papirus-folder-editsettings:56
+msgid "already exists in"
+msgstr "zaten var"
+
+#. TRANSLATORS window text - asking for new location to save theme
+#: ../scripts/papirus-folder-editsettings:58
+msgid "Select a new location"
+msgstr "Yeni bir konum seçin"
+
+#. TRANSLATORS window text - requesting confirmation that selected icon theme
+#. should be deleted
+#: ../scripts/papirus-folder-editsettings:112
+msgid "Do you really want to delete"
+msgstr "Silmek istediğinizden emin misiniz"
+
+#. TRANSLATORS window text - asking for new name for icon theme
+#: ../scripts/papirus-folder-editsettings:153
+msgid "New name for icon theme"
+msgstr "Yeni simge teması adı"
+
+#. TRANSLATORS error message - text is preceded by icon theme name
+#. TRANSLATORS warning message if icon theme name already exists (line 1) -
+#. text is preceded by theme name
+#: ../scripts/papirus-folder-editsettings:176
+#: ../scripts/papirus-folder-recolor:454 ../scripts/papirus-folder-themes:220
+msgid "already exists."
+msgstr "zaten mevcut."
+
+#. TRANSLATORS window text - asking for new name for icon theme
+#: ../scripts/papirus-folder-editsettings:178
+msgid "Select a new name."
+msgstr "Yeni bir isim seçin."
+
+#. TRANSLATORS completed window text
+#: ../scripts/papirus-folder-editsettings:242
+msgid "All done."
+msgstr "Hepsi tamam."
+
+#. TRANSLATORS completed window information text - "Reload List" translation
+#. to match button label, leave <b> markup tags
+#: ../scripts/papirus-folder-editsettings:244
+msgid "Use the <b> Reload List </b> button to update the folder list."
+msgstr ""
+"Klasör listesini güncellemek için <b>Yeniden Yükle</b> düğmesini kullanın."
+
+#. TRANSLATORS completed window error message
+#: ../scripts/papirus-folder-editsettings:254
+msgid "OOPS! Something went wrong with Papirus folder settings."
+msgstr "OOPS! Papirus klasör ayarlarında bir sorun oluştu."
+
+#. TRANSLATORS button label
+#: ../scripts/papirus-folder-recolor:18 ../scripts/papirus-folder-themes:18
+msgid "Create Theme"
+msgstr "Tema Oluştur"
+
+#. TRANSLATORS button label
+#: ../scripts/papirus-folder-recolor:20 ../scripts/papirus-folder-themes:20
+msgid "Overwrite"
+msgstr "Üzerine yaz"
+
+#. TRANSLATORS button label
+#: ../scripts/papirus-folder-recolor:22 ../scripts/papirus-folder-themes:22
+msgid "Create with new name"
+msgstr "Yeni isimle oluştur"
+
+#. TRANSLATORS warning message if color is already used - line 1
+#: ../scripts/papirus-folder-recolor:184
+msgid "An icon element is already using this color."
+msgstr "Bir simge öğesi zaten bu rengi kullanıyor."
+
+#. TRANSLATORS warning message if color is already used - line 2
+#: ../scripts/papirus-folder-recolor:186
+msgid "Choose a different color."
+msgstr "Farklı bir renk seçin."
+
+#. TRANSLATORS Button text
+#: ../scripts/papirus-folder-recolor:239
+msgid "Toggle Icon Style"
+msgstr "İkon Stili Değiştir"
+
+#. TRANSLATORS Window text
+#: ../scripts/papirus-folder-recolor:241
+msgid "Apply color to"
+msgstr "Rengi uygula"
+
+#. TRANSLATORS Button text
+#: ../scripts/papirus-folder-recolor:243
+msgid "Main Folder Color"
+msgstr "Ana Klasör Rengi"
+
+#. TRANSLATORS Button text
+#: ../scripts/papirus-folder-recolor:245
+msgid "Folder Background"
+msgstr "Klasör Arka Planı"
+
+#. TRANSLATORS Button text
+#: ../scripts/papirus-folder-recolor:247
+msgid "Folder Symbol"
+msgstr "Klasör Simgesi"
+
+#. TRANSLATORS Window main text
+#: ../scripts/papirus-folder-recolor:284
+msgid "Select colors for new folder theme"
+msgstr "Yeni klasör teması için renkleri seçin."
+
+#. TRANSLATORS Name and target text (line 1)
+#: ../scripts/papirus-folder-recolor:325 ../scripts/papirus-folder-themes:114
+msgid "Name, location and type of new folder theme."
+msgstr "Yeni klasör temasının adı, konumu ve türü."
+
+#. TRANSLATORS Name and target text (line 2)
+#: ../scripts/papirus-folder-recolor:327 ../scripts/papirus-folder-themes:116
+msgid "It may take a few seconds to generate the new theme."
+msgstr "Yeni tema oluşturmak birkaç saniye sürebilir."
+
+#. TRANSLATORS Name and target text (line 3)
+#: ../scripts/papirus-folder-recolor:329 ../scripts/papirus-folder-themes:118
+msgid "Be patient and wait for the confirmation window."
+msgstr "Sabırlı olun ve onay penceresini bekleyin."
+
+#. TRANSLATORS label for dropdown to select symbol type of new icon theme
+#: ../scripts/papirus-folder-recolor:331 ../scripts/papirus-folder-themes:132
+msgid "Window theme symbols"
+msgstr "Pencere tema sembolleri"
+
+#. TRANSLATORS Name and target text (line 4) - do not translate "light ="
+#: ../scripts/papirus-folder-recolor:333 ../scripts/papirus-folder-themes:135
+msgid "light = create symbols for light colored window themes"
+msgstr "Işık = açık renkli pencere temaları için semboller oluşturun"
+
+#. TRANSLATORS Name and target text (line 5) - do not translate "dark ="
+#: ../scripts/papirus-folder-recolor:335 ../scripts/papirus-folder-themes:137
+msgid "dark = create symbols for dark colored window themes"
+msgstr "dark = karanlık renkli pencere temaları için semboller oluşturun"
+
+#. TRANSLATORS Name and target text (line 6) - do not translate "dark ="
+#: ../scripts/papirus-folder-recolor:337 ../scripts/papirus-folder-themes:139
+msgid "dark = appends \"-dark\" automatically to end of theme name"
+msgstr "dark = tema adının sonuna otomatik olarak \"-dark\" ekler"
+
+#. TRANSLATORS label for textbox to enter name of new icon theme
+#: ../scripts/papirus-folder-recolor:340 ../scripts/papirus-folder-themes:120
+msgid "Save theme as"
+msgstr "Tema olarak kaydet"
+
+#. TRANSLATORS label for dropdown to select save location of new icon theme
+#: ../scripts/papirus-folder-recolor:343 ../scripts/papirus-folder-themes:123
+msgid "Save theme in"
+msgstr "Tema kaydet"
+
+#. TRANSLATORS warning message if new theme is not given a name
+#: ../scripts/papirus-folder-recolor:405 ../scripts/papirus-folder-themes:182
+msgid "New icon theme needs a name"
+msgstr "Yeni simge temasına bir isim gerek"
+
+#. TRANSLATORS warning message if icon theme name already exists (line 2)
+#: ../scripts/papirus-folder-recolor:456 ../scripts/papirus-folder-themes:222
+msgid "Do you want to overwrite the icon theme or save with a different name?"
+msgstr ""
+"İkon temasını üzerine yazmak mı istiyorsunuz yoksa farklı bir isimle "
+"kaydetmek mi istiyorsunuz?"
+
+#. TRANSLATORS window text - asking for new icon theme name
+#: ../scripts/papirus-folder-recolor:483 ../scripts/papirus-folder-themes:248
+msgid "New name"
+msgstr "Yeni isim"
+
+#. TRANSLATORS completed window text 1- text is preceded by new icon theme
+#. name
+#: ../scripts/papirus-folder-recolor:595 ../scripts/papirus-folder-themes:307
+msgid "icon theme created in"
+msgstr "ikon teması oluşturuldu"
+
+#. TRANSLATORS completed window text 2
+#: ../scripts/papirus-folder-recolor:597 ../scripts/papirus-folder-themes:309
+msgid "Change icon theme with MX-Tweak"
+msgstr "MX-Tweak ile simge temasını değiştirin."
+
+#. TRANSLATORS button label
+#: ../scripts/papirus-folder-recolor:599 ../scripts/papirus-folder-themes:311
+msgid "Open MX-Tweak"
+msgstr "MX-Tweak'i Aç"
+
+#. TRANSLATORS completed window error message
+#: ../scripts/papirus-folder-recolor:613
+msgid "OOPS! Something went wrong with Papirus-folder-recolor."
+msgstr "AMAN! Papirus-folder-recolor ile bir şeyler yanlış gitti."
+
+#. TRANSLATORS button label
+#: ../scripts/papirus-folder-settings:21
+msgid "Reload list"
+msgstr "Listeyi yeniden yükle"
+
+#. TRANSLATORS button label
+#: ../scripts/papirus-folder-settings:23
+msgid "Move Folder Theme"
+msgstr "Klasör Temasını Taşı"
+
+#. TRANSLATORS button label
+#: ../scripts/papirus-folder-settings:25
+msgid "Rename Folder Theme"
+msgstr "Klasör Temasını Yeniden Adlandır"
+
+#. TRANSLATORS button label
+#: ../scripts/papirus-folder-settings:27
+msgid "Delete Folder Theme"
+msgstr "Klasör Temasını Sil"
+
+#. TRANSLATORS button label
+#: ../scripts/papirus-folder-settings:29
+msgid "Edit Folder Colors"
+msgstr "Düzenle Klasör Renkleri"
+
+#. TRANSLATORS warning message if no themes are available
+#: ../scripts/papirus-folder-settings:42
+msgid "No themes have been created yet"
+msgstr "Henüz hiç tema oluşturulmadı."
+
+#. TRANSLATORS warning message if no item is selected in theme list
+#: ../scripts/papirus-folder-settings:86
+msgid "No theme selected"
+msgstr "Seçili tema yok"
+
+#. TRANSLATORS settings window instruction text
+#. TRANSLATORS window text
+#: ../scripts/papirus-folder-settings:145 ../scripts/papirus-folder-themes:84
+msgid "Select a folder theme"
+msgstr "Bir klasör teması seçin."
+
+#. TRANSLATORS completed window error message
+#: ../scripts/papirus-folder-themes:321
+msgid "OOPS! Something went wrong with Papirus-folder-themes."
+msgstr "AMAN! Papirus-folder-themes ile ilgili bir sorun oluştu."
+
+#. The desktop entry comment will be shown within the menu
+#: ../xdg/papirus-folder-colors.desktop.in:7
+msgid "Create a papirus icon theme with different colored folders"
+msgstr "Farklı renkli klasörlerle bir papirus simge teması oluşturun."

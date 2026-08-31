@@ -1,8 +1,67 @@
-mx-snapshot (26.07.1.1302) stable; urgency=medium
+mx-snapshot (26.08.1302) stable; urgency=medium
 
   * Release
 
- -- Devs <devteam@localdomain>  Mon, 13 Jul 2026 13:05:34 +0200
+ -- Devs <devteam@localdomain>  Mon, 31 Aug 2026 17:00:19 +0200
+
+mx-snapshot (26.08) mx; urgency=medium
+
+  * Fix separate-home exclusion size estimates
+
+ -- Adrian <adrian@mxlinux.org>  Sat, 01 Aug 2026 23:53:46 -0400
+
+mx-snapshot (26.07.6) mx; urgency=medium
+
+  * Allow monthly snapshots to include an optional suffix in their ISO name.
+  * Detect KDE Plasma reliably when naming monthly snapshots, including when
+    the snapshot is started through sudo.
+  * Continue snapshot creation when optional initrd programs are unavailable.
+  * Stop a CLI snapshot if the boot-menu editor fails, instead of continuing
+    with potentially unedited boot files.
+  * Keep existing exclusion files intact when resetting them fails, and keep
+    command-line exclusion names working regardless of the system language.
+  * Protect generated snapshot release information from special characters
+    that could alter the generated files.
+
+ -- Adrian <adrian@mxlinux.org>  Tue, 28 Jul 2026 22:18:04 -0400
+
+mx-snapshot (26.07.5) mx; urgency=medium
+
+  * Prevent failed snapshot cleanup from deleting files through a mounted copy
+    of the system root, while safely removing temporary mounts when possible.
+
+ -- Adrian <adrian@mxlinux.org>  Sat, 11 Jul 2026 19:03:03 -0400
+
+mx-snapshot (26.07.4) mx; urgency=medium
+
+  * Allow snapshot creation with squashfs-tools versions that do not provide
+    optional throttling or percentage-progress controls.
+
+ -- Adrian <adrian@mxlinux.org>  Sat, 11 Jul 2026 17:41:10 -0400
+
+mx-snapshot (26.07.3) mx; urgency=medium
+
+  * Fix error dialog titles in English by removing a broken en_US translation
+    that replaced "Error" with an unrelated compression message.
+  * Allow snapshot work directories on compatible NTFS and exFAT mounts when
+    they support the file operations the snapshot actually uses.
+
+ -- Adrian <adrian@mxlinux.org>  Sat, 11 Jul 2026 11:09:57 -0400
+
+mx-snapshot (26.07.2) mx; urgency=medium
+
+  * Stop reporting a successful snapshot when required ISO steps fail;
+    checksum, boot, initrd, package-list, and template errors now stop the run.
+  * Clean up the snapshot work area immediately after failed ISO steps, instead
+    of leaving temporary mounts and files behind until the program exits.
+  * Run the configured text editor directly instead of through a shell, closing
+    a command-injection risk from editor settings and desktop-file entries.
+  * Make preempt checksum handling safer by using a private temporary directory
+    for each snapshot run.
+  * Probe snapshot work directories for the required file operations, allowing
+    compatible shared mounts while rejecting unsuitable locations early.
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 09 Jul 2026 23:03:14 -0400
 
 mx-snapshot (26.07.1) mx; urgency=medium
 
@@ -1046,7 +1105,7 @@ mx-snapshot (20.3) mx; urgency=medium
 
   * add /etc/snapshot_created with date of creation
 
- -- Adrian <adrian@mx>  Thu, 12 Mar 2020 01:09:26 -0400
+ -- Adrian <adrian@mxlinux.org>  Thu, 12 Mar 2020 01:09:26 -0400
 
 mx-snapshot (20.2) mx; urgency=medium
 

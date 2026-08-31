@@ -88,5 +88,5 @@ Comment=Simple Software Application Package Installer
 Exec=mx-packageinstaller
 Icon=mx-packageinstaller
 NoDisplay=false
-Categories=System;MX-Software;
+Categories=System;X-MX-Software;
 Type=Application

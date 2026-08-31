@@ -1,0 +1,26 @@
+.TH FORMATUSB 1 "2026-07-20" "MX Linux" "User Commands"
+.SH NAME
+formatusb \- format removable USB devices
+.SH SYNOPSIS
+.B formatusb
+.SH DESCRIPTION
+.B formatusb
+is a graphical utility for formatting removable USB devices. Select a target device, a filesystem type, and optionally a filesystem label. By default the complete device is repartitioned with one partition before it is formatted.
+.PP
+The supported filesystem choices include FAT32/VFAT, NTFS, ext4, and exFAT. The partition-table choice can be MBR/msdos, GPT, or automatic. Devices smaller than 2 TiB use MBR/msdos by default when automatic selection is used.
+.PP
+Enable
+.B Show Partitions
+when the operation should target an individual partition instead of repartitioning the complete device. Enable
+.B Show All Devices
+to remove the removable-device filter.
+.PP
+Formatting destroys data on the selected device or partition. Check the target carefully before confirming.
+.SH OPTIONS
+This application has no documented command-line options. The graphical interface provides all operations.
+.SH FILES
+.TP
+.I /usr/share/doc/formatusb
+Installed HTML help, license, and changelog documentation.
+.SH AUTHOR
+MX Linux contributors.

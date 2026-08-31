@@ -1,4 +1,5 @@
 help/*				usr/share/doc/mx-select-sound
+debian/mx-select-sound.1	usr/share/man/man1
 icons/mx-select-sound.png	usr/share/icons/hicolor/64x64/apps
 icons/mx-select-sound.svg	usr/share/icons/hicolor/scalable/apps
 mx-select-sound.desktop		usr/share/applications

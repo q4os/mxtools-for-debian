@@ -78,19 +78,32 @@ ManageRemotes::ManageRemotes(QWidget *parent, const QString &user)
 void ManageRemotes::removeItem()
 {
     const QString remote = comboRemote->currentText().section(" -- ", 0, 0);
+    if (remote.isEmpty()) {
+        return;
+    }
     if (remote == QLatin1String("flathub")) {
         QMessageBox::information(this, tr("Not removable"),
                                  tr("Flathub is the main Flatpak remote and won't be removed"));
         return;
     }
-    changed = true;
+
     const QString scope = comboRemote->currentText().section(" -- ", 1, 1);
     QStringList args {"remote-delete", remote};
     if (!scope.isEmpty()) {
         args << ("--" + scope);
     }
-    Cmd().proc("flatpak", args);
-    comboRemote->removeItem(comboRemote->currentIndex());
+
+    setCursor(QCursor(Qt::BusyCursor));
+    const bool removed = Cmd().proc("flatpak", args);
+    setCursor(QCursor(Qt::ArrowCursor));
+    if (!removed) {
+        QMessageBox::critical(this, tr("Error removing remote"),
+                              tr("Could not remove remote - command returned an error. Please try again."));
+        return;
+    }
+
+    changed = true;
+    listFlatpakRemotes();
 }
 
 void ManageRemotes::addItem()

@@ -85,7 +85,7 @@ void displayHelpDoc(const QString &path, const QString &title)
     showHtmlDoc(path, title, true);
 }
 
-void displayAboutMsgBox(const QString &title, const QString &message, const QString &licence_url,
+void displayAboutMsgBox(const QString &title, const QString &message, const QString &license_url,
                         const QString &license_title)
 {
     const auto width = 600;
@@ -99,7 +99,7 @@ void displayAboutMsgBox(const QString &title, const QString &message, const QStr
     msgBox.exec();
 
     if (msgBox.clickedButton() == btnLicense) {
-        displayDoc(licence_url, license_title);
+        displayDoc(license_url, license_title);
     } else if (msgBox.clickedButton() == btnChangelog) {
         QDialog changelog;
         changelog.setWindowTitle(QObject::tr("Changelog"));
@@ -111,7 +111,7 @@ void displayAboutMsgBox(const QString &title, const QString &message, const QStr
         const QString appName = QFileInfo(QCoreApplication::applicationFilePath()).fileName();
         const QString changelogPath = "/usr/share/doc/" + appName + "/changelog.gz";
         proc.start("zcat", {changelogPath}, QIODevice::ReadOnly);
-        if (proc.waitForStarted(3000) && proc.waitForFinished(3000)) {
+        if (proc.waitForStarted(3000) && proc.waitForFinished(30000)) {
             text->setText(proc.readAllStandardOutput());
         } else {
             text->setText(QObject::tr("Could not load changelog."));

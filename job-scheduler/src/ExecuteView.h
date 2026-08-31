@@ -9,13 +9,13 @@
 */
 #pragma once
 
-#include <QTreeView>
+#include "ScrollableTreeView.h"
 
 class QModelIndex;
 class ExecuteModel;
 class TCommand;
 
-class ExecuteView : public QTreeView
+class ExecuteView : public ScrollableTreeView
 {
     Q_OBJECT
 public:
@@ -33,7 +33,5 @@ signals:
     void viewSelected(TCommand *cmnd);
 
 private:
-    void scrollTo(const QModelIndex & /*index*/, ScrollHint /*hint*/) override;
-
     ExecuteModel *executeModel;
 };

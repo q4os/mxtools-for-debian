@@ -33,18 +33,18 @@ void remove_user_theme_set::setupThemeSelector() noexcept
     ui->comboBoxThemes->clear();
     QStringList theme_list;
     QStringList filter(u"*.tweak"_s);
-    bool xsettings_gtk_theme_present = false;
-    bool icontheme_present = false;
-    bool xfwm4_theme_present = false;
 
     // add user entries in ~/.local/share/mx-tweak-data
 
     QString home_path = QDir::homePath();
     QDirIterator it2(home_path + "/.local/share/mx-tweak-data"_L1, filter, QDir::Files, QDirIterator::Subdirectories);
     while (it2.hasNext()) {
+        bool xsettings_gtk_theme_present = false;
+        bool icontheme_present = false;
+        bool xfwm4_theme_present = false;
         QFileInfo file_info(it2.next());
         QString filename = file_info.absoluteFilePath();
-        QString name = runCmd("cat '"_L1 + filename + "'|grep Name="_L1).output.section('=',1,1);
+        QString name = runCmd("cat '"_L1 + filename + "'|grep ^Name="_L1).output.section('=',1,1);
 
         QString xsettings_gtk_theme = runCmd("cat '"_L1 + file_info.absoluteFilePath() + "' |grep xsettings_gtk_theme="_L1).output.section('=',1,1);
         qDebug() << "xsettings_gtk_theme = " << xsettings_gtk_theme;

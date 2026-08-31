@@ -68,11 +68,12 @@ private:
     void startup();
     void setClockLock(bool locked);
     bool execute(const QString &program, const QStringList &arguments = QStringList(), QByteArray *output = nullptr,
-                 QByteArray *error = nullptr);
-    bool runHelper(const QStringList &arguments, QByteArray *output = nullptr, QByteArray *error = nullptr);
+                 QByteArray *error = nullptr, const QByteArray &input = {});
+    bool runHelper(const QStringList &arguments, QByteArray *output = nullptr, QByteArray *error = nullptr,
+                   const QByteArray &input = {});
     bool executeAsRoot(const QString &program, const QStringList &arguments = QStringList(),
                        QByteArray *output = nullptr, QByteArray *error = nullptr);
-    bool installManagedFileAsRoot(const QString &sourcePath, const QString &destinationPath,
+    bool installManagedFileAsRoot(const QByteArray &content, const QString &destinationPath,
                                   QByteArray *error = nullptr);
     bool setHwclockModeAsRoot(bool utc, QByteArray *error = nullptr);
     bool setLocaltimeLinkAsRoot(const QString &timeZone, QByteArray *error = nullptr);

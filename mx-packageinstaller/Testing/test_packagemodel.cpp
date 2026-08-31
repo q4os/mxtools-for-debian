@@ -1,5 +1,6 @@
 #include <QtTest>
 #include <QSignalSpy>
+#include <QStandardPaths>
 #include "../src/models/packagemodel.h"
 
 class TestPackageModel : public QObject
@@ -346,6 +347,16 @@ void TestPackageModel::testSetAutoremovable()
 
 void TestPackageModel::testUpdateInstalledVersions()
 {
+#ifdef PACKAGE_BACKEND_PACMAN
+    // On this backend, updateInstalledVersions() -> PackageBackend::compareVersions()
+    // shells out to the real `vercmp` (see packagebackend_pacman.cpp); skip rather
+    // than fail if this environment doesn't have it (it ships with pacman itself,
+    // so a real Arch install always does).
+    if (QStandardPaths::findExecutable(QStringLiteral("vercmp")).isEmpty()) {
+        QSKIP("vercmp not found on PATH");
+    }
+#endif
+
     PackageModel model;
     QVector<PackageData> packages = createTestPackages();
 

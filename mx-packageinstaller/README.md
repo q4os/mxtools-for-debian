@@ -38,9 +38,9 @@ cmake -B build -DBUILD_TESTS=ON -DCMAKE_BUILD_TYPE=Release
 cmake --build build
 
 # Run tests
-cd build && ctest --verbose
-# or run individual tests
-cd build && ./test_versionnumber && ./test_aptcache
+cd build && ctest
+# or run an individual test binary directly (built under build/Testing/)
+cd build/Testing && ./test_versionnumber && ./test_aptcache
 
 # Continuous testing (requires inotify-tools)
 cd build && make watch_tests
@@ -62,7 +62,7 @@ cmake --build build --target clean
 The project includes comprehensive unit tests for critical components:
 
 - **test_versionnumber**: Tests Debian version comparison logic including epochs, revisions, tildes, and real-world scenarios (14 tests)
-- **test_aptcache**: Tests APT cache parsing, architecture filtering, version selection, and file processing (11 tests)
+- **test_aptcache**: Tests APT cache parsing, architecture filtering, version selection, and file processing (9 tests)
 
 All tests use QtTest framework and can be run individually or through CMake's test runner.
 

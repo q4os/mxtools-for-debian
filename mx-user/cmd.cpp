@@ -26,7 +26,7 @@ Cmd::Cmd(QObject *parent)
         qWarning() << "No suitable elevation command found (pkexec or gksu)";
     }
 
-    helper = QString("/usr/lib/%1/helper").arg(QApplication::applicationName());
+    helper = QStringLiteral(HELPER_PATH);
 
     connect(this, &Cmd::readyReadStandardOutput, this, &Cmd::handleStandardOutput);
     connect(this, &Cmd::readyReadStandardError, this, &Cmd::handleStandardError);

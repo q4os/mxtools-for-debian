@@ -1,7 +1,7 @@
 /**********************************************************************
  *  mainwindow.h
  **********************************************************************
- * Copyright (C) 2024-2025 MX Authors
+ * Copyright (C) 2024-2026 MX Authors
  *
  * Authors: Adrian <adrian@mxlinux.org>
  *          MX Linux <http://mxlinux.org>
@@ -101,7 +101,6 @@ private:
     [[nodiscard]] QString getBootLocation(const QString &mountPoint);
     [[nodiscard]] QString getDistroName(bool pretty = false, const QString &mountPoint = "/",
                                         const QString &releaseFile = "initrd_release") const;
-    [[nodiscard]] QString getLuksUUID(const QString &part);
     [[nodiscard]] QString getMountPoint(const QString &part);
     [[nodiscard]] QString mountPartition(QString part);
     [[nodiscard]] QString openLuks(const QString &part);
@@ -112,7 +111,6 @@ private:
     [[nodiscard]] bool installEfiStub(const QString &esp);
     [[nodiscard]] bool isLuks(const QString &part);
     [[nodiscard]] bool readGrubEntry();
-    bool renameUefiEntry(const QString &oldLabel, const QString &newLabel, const QString &oldBootNum = QString());
     static void removeUefiEntry(QListWidget *listEntries, QWidget *uefiDialog);
     static void setUefiBootNext(QListWidget *listEntries, QLabel *textBootNext);
     void setUefiTimeout(QWidget *uefiDialog, QLabel *textTimeout);
@@ -122,9 +120,8 @@ private:
     void addUefiEntry(QListWidget *listEntries, QWidget *dialogUefi);
     void checkDoneStub();
     void clearEntryWidget();
+    void cleanEspTarget(const QString &targetPath);
     void filterDrivePartitions();
-    void getGrubOptions(const QString &mountPoint = "/");
-    void getKernelOptions(const QString &mountPoint);
     void getKernelOptions(const QString &mountPoint, const QString &rootDir, const QString &kernel);
     QString determineKernelDir(const QString &bootDir, const QString &rootDir);
     QPair<QStringList, QString> getRootIdentifiers(const QString &rootDir);

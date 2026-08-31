@@ -35,7 +35,7 @@ class TimeDialog : public QDialog
     Q_OBJECT
 public:
     explicit TimeDialog(QString time, QWidget *parent = nullptr);
-    QString time()
+    QString time() const
     {
         return outTime;
     }

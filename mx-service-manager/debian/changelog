@@ -1,8 +1,18 @@
-mx-service-manager (26.03.1302) stable; urgency=medium
+mx-service-manager (26.08.1302) stable; urgency=medium
 
   * Release
 
- -- Devs <devteam@localdomain>  Mon, 13 Jul 2026 13:05:34 +0200
+ -- Devs <devteam@localdomain>  Mon, 31 Aug 2026 17:00:19 +0200
+
+mx-service-manager (26.08) mx; urgency=medium
+
+  * Keep the application responsive while loading or refreshing the service list and service details
+  * Prevent crashes when refreshing the service list or using service actions while it is still loading
+  * Correctly read service dependency targets on SysVinit systems
+  * Stop service commands that remain stuck for more than two minutes and report the timeout
+  * Install the mx-service-manager manual page with the package
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 26 Aug 2026 09:18:47 -0400
 
 mx-service-manager (26.03) mx; urgency=medium
 

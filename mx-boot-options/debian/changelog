@@ -1,8 +1,23 @@
-mx-boot-options (26.06.1.1302) stable; urgency=medium
+mx-boot-options (26.07.1.1302) stable; urgency=medium
 
   * Release
 
- -- Devs <devteam@localdomain>  Mon, 13 Jul 2026 13:05:29 +0200
+ -- Devs <devteam@localdomain>  Mon, 31 Aug 2026 17:00:17 +0200
+
+mx-boot-options (26.07.1) mx; urgency=medium
+
+  * Saving boot log settings no longer fails when bootlogd is not installed.
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 15 Jul 2026 11:17:35 -0400
+
+mx-boot-options (26.07) mx; urgency=medium
+
+  * Add an option to turn off the GRUB boot menu background image.
+  * Show which configuration changes could not be applied and keep them
+    pending so they can be retried; allow long operations to be cancelled
+    safely.
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 13 Jul 2026 01:58:52 -0400
 
 mx-boot-options (26.06.1) mx; urgency=medium
 

@@ -87,6 +87,6 @@ Exec=mx-repo-manager
 Terminal=false
 Type=Application
 Icon=mx-repo-manager
-Categories=GNOME;GTK;System;MX-Software;
+Categories=GNOME;GTK;System;X-MX-Software;
 NoDisplay=false
 

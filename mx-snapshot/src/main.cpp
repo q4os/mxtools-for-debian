@@ -1,7 +1,7 @@
 /**********************************************************************
  *  main.cpp
  **********************************************************************
- * Copyright (C) 2015-2025 MX Authors
+ * Copyright (C) 2015-2026 MX Authors
  *
  * Authors: Adrian
  *          MX Linux <http://mxlinux.org>
@@ -158,6 +158,10 @@ int main(int argc, char *argv[])
         for (const auto &option : options) {
             parser.addOption(option);
         }
+        parser.addPositionalArgument(
+            QStringLiteral("suffix"),
+            QObject::tr("Optional suffix for a monthly snapshot; only valid together with --month."),
+            QStringLiteral("[suffix]"));
     };
 
     if (wantsHelp || wantsVersion) {
@@ -184,6 +188,12 @@ int main(int argc, char *argv[])
 
     if (!parser.parse(arguments)) {
         fprintf(stderr, "%s\n", qPrintable(parser.errorText()));
+        return EXIT_FAILURE;
+    }
+    const QStringList positionalArgs = parser.positionalArguments();
+    if (!positionalArgs.isEmpty() && (!parser.isSet("month") || positionalArgs.size() != 1)) {
+        fprintf(stderr, "%s\n",
+                qPrintable(QObject::tr("A single suffix positional argument is only valid together with --month.")));
         return EXIT_FAILURE;
     }
     const QString compressionValue = parser.value("compression");

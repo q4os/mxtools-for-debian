@@ -28,7 +28,7 @@ source gettext.sh
 DEBIAN_VERSION_CODENAME=$(grep VERSION_CODENAME /etc/os-release|cut -d"=" -f2)
 DEBIAN_VERSION_NUMBER=$(cat /etc/debian_version  |cut -d"." -f1)
 
-VERSION="26.06.04"
+VERSION="26.07.02"
 ME=${0##*/}
 CLI_PROG="ddm-mx"
 LOCK_FILE="/run/lock/$CLI_PROG"
@@ -540,10 +540,10 @@ function purge_proprietary_drivers {
   apt-get install libxnvctrl0=$(apt-cache madison libxnvctrl0 | awk '{print $3}') --allow-downgrades -y $TESTSWITCH
   remove_20_nvidiaconf
   # Leave nvidia-installer-cleanup
-  apt-get purge $FORCE $(apt-cache pkgnames | grep nvidia |grep -v firmware | grep -v cleanup | cut -d':' -f1) bumblebee* primus* primus*:i386 *nvidia*:i386 $TESTSWITCH 2>&1 | tee -a $LOG
+  apt-get purge $FORCE $(apt-cache pkgnames | grep nvidia |grep -v firmware | grep -v cleanup | cut -d':' -f1) firmware-nvidia-*gsp bumblebee* primus* primus*:i386 *nvidia*:i386 $TESTSWITCH 2>&1 | tee -a $LOG
   # apt-get purge $FORCE bumblebee* primus* primus*:i386 2>&1 | tee -a $LOG
   # remove possible leftover symlinks
-	remove_modprobe_symlinks
+  remove_modprobe_symlinks
   # remove module options and grub config
   remove_nvidia_module_config
   # try to rebuild initramfs, which can lose nouveau modules in some cases
@@ -1061,11 +1061,11 @@ set_packages(){
   DRIVER_ORIGINAL=$DRIVER
 
   case $DRIVER in 
-                     nvidia-driver)    if [ "$ARCHITECTURE" == "x86_64" ]; then
+                     nvidia-driver|nvidia-driver-open)    if [ "$ARCHITECTURE" == "x86_64" ]; then
                                            NVIDIA_XCONFIG=""
                                            DRIVER="$DRIVER nvidia-settings $NVIDIA_KERNEL_DKMS libnvidia-encode1"
                                        else
-										   NVIDIA_XCONFIG=""
+                                           NVIDIA_XCONFIG=""
                                            DRIVER="$DRIVER $NVIDIA_KERNEL_DKMS nvidia-settings libnvidia-encode1"
                                        fi
                                        ;;
@@ -1444,16 +1444,21 @@ check_open_kernel_modules(){
     if [ "$OPEN_SUPPORT" = "NO" ]; then
       return
     fi
+
+    #package name checks for different names of open kernel drivers
     local propriety_check="$(apt-cache madison nvidia-kernel-dkms |grep  nvidia-kernel-dkms | grep $CANDIDATE |cut -d"|" -f 2 | tr -d ' ')"
     local open_check1="$(apt-cache madison nvidia-open-kernel-dkms |grep nvidia-open-kernel-dkms |grep $CANDIDATE |cut -d"|" -f 2 | tr -d ' ')"
     local open_check2="$(apt-cache madison nvidia-kernel-open-dkms |grep nvidia-kernel-open-dkms | grep $CANDIDATE |cut -d"|" -f 2 | tr -d ' ')"
+    local open_check3="$(apt-cache madison nvidia-driver-open |grep nvidia-driver-open | grep $CANDIDATE |cut -d"|" -f 2 | tr -d ' ')"
     local open_modules=""
+    local open_driver_package="nvidia-driver" #debian and nvidia have the same driver package for propreitary and open.  only difference is kernel modules
     local canonical_package=${CANDIDATE%%.*}
 
     echo "canonical_package is " $canonical_package >>$LOG
     echo "prop. check is $propriety_check" >>$LOG
     echo "open_check1 is  $open_check1" >>$LOG
     echo "open check2 is  $open_check2" >>$LOG
+    echo "open check3 is  $open_check3" >>$LOG
 
     if [ "$propriety_check" = "$open_check1" ]; then
       open_modules="nvidia-open-kernel-dkms"
@@ -1461,6 +1466,13 @@ check_open_kernel_modules(){
       if [ "$propriety_check" = "$open_check2" ]; then
         open_modules="nvidia-kernel-open-dkms"
       fi
+    fi
+
+    #check for nvidia-driver-open package, some distros have this rather than nvidia-driver (mx)
+    #this is not currently true for debian 12 or 13 repo, nor the nvidia-developer-repo.  they still use
+    #nvidia driver
+    if [ -n "$open_check3" ]; then
+      open_driver_package="nvidia-driver-open"
     fi
 
     echo "open_modules is  $open_modules" >>$LOG
@@ -1495,6 +1507,8 @@ check_open_kernel_modules(){
       case $x in
         1) echo "" | tee -a $LOG
             NVIDIA_KERNEL_DKMS="$open_modules"
+            #set driver package to theopen version if necessary, this may also be the classic nvidia-driver package
+            DRIVER="$open_driver_package"
             echo "" |tee -a $LOG
             #message confirming choice of using open kernel modules
             echo $(eval_gettext "Trying open kernel modules") | tee -a $LOG

@@ -1,7 +1,7 @@
 /**********************************************************************
  *  mxpackageinstaller.h
  **********************************************************************
- * Copyright (C) 2017-2025 MX Authors
+ * Copyright (C) 2017-2026 MX Authors
  *
  * Authors: Adrian
  *          Dolphin_Oracle
@@ -31,6 +31,7 @@
 #include <QHash>
 #include <QMessageBox>
 #include <QModelIndex>
+#include <QMutex>
 #include <QNetworkAccessManager>
 #include <QProcess>
 #include <QProgressDialog>
@@ -39,6 +40,9 @@
 #include <QTemporaryDir>
 #include <QTimer>
 #include <QTreeView>
+
+#include <functional>
+#include <memory>
 
 #include "aptcache.h"
 #include "cmd.h"
@@ -66,7 +70,10 @@ class QNetworkReply;
 
 namespace Tab
 {
-enum { Popular, EnabledRepos, Test, Backports, Flatpak, Snap, Output };
+// AUR sits between EnabledRepos and Test to match its position in the shared
+// mainwindow.ui (inserted there to mirror the arch branch's original tab order).
+// It's hidden via setTabVisible() for the apt backend, which has no AUR tab logic.
+enum { Popular, EnabledRepos, AUR, Test, Backports, Flatpak, Snap, Output };
 }
 
 namespace Release
@@ -97,8 +104,62 @@ class MainWindow : public QDialog
 {
     Q_OBJECT
 
+#ifdef MXPI_TESTING
+    // Test-only seam: Testing/test_mainwindow.cpp needs to inspect/drive otherwise-
+    // private async-orchestration state directly (flatpakRequestGeneration,
+    // enabledReposRenderedWithoutInstalled, currentTree, etc.) to exercise it
+    // deterministically instead of racing real background subprocess timing.
+    // MXPI_TESTING is only ever defined by that one test target, never in the
+    // production build, so this has no effect there.
+    friend class TestMainWindowAsync;
+#endif
+
 public:
+#ifdef MXPI_TESTING
+    // Test-only hooks for the constructor's first background preload worker
+    // (AptCache's, apt-only, or installedPackages', pacman-only), captured BY
+    // VALUE into the worker lambda itself -- same as guardMutex/destructingFlag
+    // already are -- so the worker never needs to read this via `this` (no new
+    // data race), and each hook stays valid for as long as the worker's own copy
+    // does regardless of what the test function that set it up does afterward.
+    //   beforeGuardCheck: called immediately after the worker's real (apt/pacman)
+    //     work finishes, immediately before it locks destructionGuardMutex/checks
+    //     destructing -- its one and only touch of `this`. Lets a test pause the
+    //     worker there, destroy the window while it's provably still in flight,
+    //     then resume it, instead of racing real subprocess/thread-pool timing.
+    //   afterGuardPassed: called only if the guard check let the worker through
+    //     (destructing was false) -- i.e., only on the branch that's about to
+    //     touch `this` via QMetaObject::invokeMethod(). In a correct test
+    //     scenario (window already destroyed, destructing == true) this must
+    //     never fire; a test asserting it stays unset is what actually proves
+    //     the guard suppressed the touch, rather than merely hoping a
+    //     use-after-free happens to crash or get caught by a sanitizer.
+    //   workerFinished: called unconditionally once the guarded section (lock,
+    //     check, and whichever of the two branches above applies) has fully run
+    //     -- via a scope guard, so it fires the same way regardless of which
+    //     branch was taken. Lets a test wait for a real completion signal before
+    //     asserting on afterGuardPassed, instead of assuming the worker resumed
+    //     and finished within some fixed time budget after being released.
+    struct BackgroundWorkerTestHooks
+    {
+        std::function<void()> beforeGuardCheck;
+        std::function<void()> afterGuardPassed;
+        std::function<void()> workerFinished;
+    };
+
+    // Test-only extra parameters, never present in a production build (the whole
+    // signature reverts to the plain one below when MXPI_TESTING isn't defined).
+    // testSkipFlatpakPreload prevents both the constructor's own Flatpak preload
+    // chain and, once set, any later displayFlatpaks() call from going on to
+    // touch real flatpak remotes -- one of that code's fallback paths ("flatpak
+    // update --appstream") can genuinely reach the network, which a test run
+    // must never do. Neither parameter is ever surfaced as a command-line
+    // option; a production build has no way to set either at all.
+    explicit MainWindow(const QCommandLineParser &argParser, QWidget *parent = nullptr,
+                        BackgroundWorkerTestHooks testHooks = {}, bool testSkipFlatpakPreload = false);
+#else
     explicit MainWindow(const QCommandLineParser &argParser, QWidget *parent = nullptr);
+#endif
     ~MainWindow() override;
 
 protected:
@@ -142,6 +203,9 @@ private slots:
     void pushForceUpdateEnabled_clicked();
     void pushForceUpdateMX_clicked();
     void pushForceUpdateFP_clicked();
+#ifdef PACKAGE_BACKEND_PACMAN
+    void pushForceUpdateAUR_clicked();
+#endif
     void pushHelp_clicked();
     void pushInstall_clicked();
     void pushRemotes_clicked();
@@ -186,10 +250,70 @@ private:
     bool warningBackports {false};
     bool warningFlatpaks {false};
     bool warningTest {false};
+#ifdef PACKAGE_BACKEND_PACMAN
+    bool warningAur {false};
+    // pacman -Qtdq is fast on its own, but running it automatically as part of
+    // the very first package-list display adds one more synchronous subprocess
+    // round-trip to boot. Skip just that first automatic check; later ones
+    // (after an install/uninstall or manual refresh) run normally.
+    bool skipInitialAutoremovableCheck {true};
+    // installedPackages ("pacman -Qi") and the Enabled Repos list ("pacman -Ss")
+    // are two independent background fetches kicked off from the constructor with
+    // no join between them (see MainWindow::MainWindow). If the Enabled Repos view
+    // renders (displayPackages()) before installedPackages is ready,
+    // createPackageDataList()'s merge of installed-but-not-in-repo packages
+    // silently finds nothing to add. Set when that happens; the installedPackages
+    // fetch's own completion checks this and re-triggers the view once the data
+    // it was missing has actually arrived.
+    bool enabledReposRenderedWithoutInstalled {false};
+    // Reacts to enabledReposRenderedWithoutInstalled once installedPackages actually
+    // arrives (see the constructor's installedPackages fetch completion, the only
+    // caller). Pulled out into its own method purely so the interaction with
+    // dirtyEnabledRepos/handleEnabledReposTab() is independently testable (see
+    // Testing/test_mainwindow.cpp) without waiting on a real "pacman -Qi" fetch.
+    void handleInstalledPackagesArrived();
+#endif
     int savedComboIndex {0};
+    // Bumped every time a new Flatpak load (the constructor's startup preload, or a
+    // synchronous displayFlatpaks(true) from comboRemote_activated()/
+    // comboUser_currentIndexChanged()/etc.) starts. Background completions capture
+    // the value current at their own start and compare it before publishing results,
+    // so a slow, now-superseded preload can't overwrite a newer selection's data
+    // (see setupFlatpakDisplay() and the constructor's Flatpak preload chain).
+    int flatpakRequestGeneration {0};
+    // True if a background Flatpak preload/fetch stage that captured `myGeneration`
+    // at its own start has since been superseded by a newer synchronous load. Pulled
+    // out of the constructor's completion lambdas into its own method purely so it's
+    // independently testable (see Testing/test_mainwindow.cpp) without needing to
+    // drive a real, timing-dependent background race.
+    [[nodiscard]] bool isFlatpakGenerationStale(int myGeneration) const
+    {
+        return myGeneration != flatpakRequestGeneration;
+    }
 
     Cmd cmd;
-    LockFile lockFile {"/var/lib/dpkg/lock"};
+    LockFile lockFile;
+    // Every QtConcurrent::run() worker the constructor and downloadPackageList() kick
+    // off (installedPackages, the Flatpak remote/catalog preload chain, the pacman -Ss
+    // repo fetch) captures its own copy of these two by value -- never `this->...` --
+    // specifically so it stays valid even if `this` doesn't. A worker locks the mutex
+    // and checks the flag immediately before its one and only touch of `this`
+    // (QMetaObject::invokeMethod(this, ..., Qt::QueuedConnection)); ~MainWindow() locks
+    // the same mutex and sets the flag first thing, before anything else runs. That
+    // ordering makes the two mutually exclusive: either the destructor's lock acquire
+    // happens first and every worker that checks afterward sees the flag set and skips
+    // touching `this` entirely, or a worker's lock acquire happens first, and the
+    // destructor can't proceed until that worker's (still-valid, since `this` can't
+    // have started destructing yet) invokeMethod call has already returned. Plain
+    // reliance on Qt's "queued calls to a destroyed receiver are dropped" guarantee
+    // isn't enough here, since that only covers a call *already delivered* to the
+    // queue before destruction -- not one still racing to be issued.
+    std::shared_ptr<QMutex> destructionGuardMutex {std::make_shared<QMutex>()};
+    std::shared_ptr<bool> destructing {std::make_shared<bool>(false)};
+#ifdef MXPI_TESTING
+    // See the MXPI_TESTING constructor overload's declaration.
+    bool testSkipFlatpakPreload {false};
+#endif
     QHash<QString, VersionNumber> listInstalledVersions();
     QIcon qiconInstalled;
     QIcon qiconUpgradable;
@@ -228,6 +352,21 @@ private:
     bool flatpakCancelHidden {false};
     bool flatpakUiBlocked {false};
     bool suppressCmdOutput {false};
+#ifdef PACKAGE_BACKEND_PACMAN
+    // AUR installs run paru unprivileged (see install()), which elevates the actual
+    // pacman step itself via sudo -- unlike apt-get/plain pacman, which always go
+    // through the privileged helper and pkexec's own native password dialog. That
+    // sudo prompt surfaces as plain text in this app's own Output tab, read back via
+    // ui->lineEdit, so it needs its own masking rather than relying on pkexec.
+    bool lineEditMasked {false};
+    QAction *lineEditToggleMaskAction {nullptr};
+    QAction *lineEditClearAction {nullptr};
+    void setLineEditMasked(bool masked);
+    // Bounded carry-over from the previous outputAvailable() chunk, so the sudo-prompt
+    // regex can match text straddling a readyReadStandardOutput chunk boundary instead
+    // of only ever seeing one chunk in isolation.
+    QString sudoPromptTail;
+#endif
     QTemporaryDir tempDir;
     QTimer timer;
     QTreeView *currentTree {}; // current/calling tree
@@ -243,6 +382,9 @@ private:
     FlatpakModel *flatpakModel {nullptr};
     SnapModel *snapModel {nullptr};
     PopularModel *popularModel {nullptr};
+#ifdef PACKAGE_BACKEND_PACMAN
+    PackageModel *aurModel {nullptr};
+#endif
 
     // Filter proxies
     PackageFilterProxy *enabledProxy {nullptr};
@@ -251,6 +393,18 @@ private:
     FlatpakFilterProxy *flatpakProxy {nullptr};
     SnapFilterProxy *snapProxy {nullptr};
     PopularFilterProxy *popularProxy {nullptr};
+#ifdef PACKAGE_BACKEND_PACMAN
+    PackageFilterProxy *aurProxy {nullptr};
+    CheckableHeaderView *headerAUR {nullptr};
+    QHash<QString, PackageInfo> aurList;
+    QString cachedParuPath;
+    bool cachedParuPathFetched {false};
+
+    [[nodiscard]] QString getParuPath();
+    [[nodiscard]] bool buildAurList(const QString &searchTerm);
+    void handleAurTab(const QString &searchStr);
+    void showAurPackageInfo(const QString &packageName);
+#endif
 
     QNetworkAccessManager manager;
     QNetworkReply *activeDownloadReply {nullptr};
@@ -262,7 +416,7 @@ private:
     [[nodiscard]] QString getLocalizedName(const QDomElement &element) const;
     [[nodiscard]] QString getVersion(const QString &name) const;
     [[nodiscard]] QString mapArchToFormat(const QString &arch) const;
-    [[nodiscard]] QStringList listFlatpaks(const QString &remote, const QString &type = QString()) const;
+    [[nodiscard]] QStringList listFlatpaks(const QString &remote, const QString &scope, const QString &type = QString()) const;
     [[nodiscard]] QStringList listInstalledFlatpaks(const QString &type = QString());
     [[nodiscard]] FlatpakData createFlatpakData(const QString &item, const QStringList &installedAll) const;
     [[nodiscard]] PackageData createPackageData(const QString &name, const QString &version,
@@ -315,7 +469,7 @@ private:
                                  const QStringList &postUninstall = {});
     bool updateApt();
     [[nodiscard]] static QString convert(quint64 bytes);
-    [[nodiscard]] static quint64 convert(const QString &size);
+    [[nodiscard]] static quint64 convert(const QString &size, bool *ok = nullptr);
     void blockInterfaceFP();
     void buildChangeList(const QString &packageName, Qt::CheckState state);
     void buildFlatpakChangeList(const QString &fullName, Qt::CheckState state, int status);
@@ -361,6 +515,7 @@ private:
     void listFlatpakRemotes() const;
     void listSizeInstalledFP();
     void loadFlatpakData();
+    void processFlatpakData(const QStringList &remoteEntries, const QStringList &allInstalled, const QString &scope);
     void loadPmFiles();
     void populateFlatpakTree();
     void processDoc(const QDomDocument &doc);

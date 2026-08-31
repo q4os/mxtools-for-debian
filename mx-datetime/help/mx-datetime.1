@@ -1,0 +1,84 @@
+.TH MX-DATETIME 1 "2026-07-20" "MX Linux" "User Commands"
+.SH NAME
+mx-datetime \- manage system time, the hardware clock, time zones, and network time
+.SH SYNOPSIS
+.B mx-datetime
+.SH DESCRIPTION
+.B mx-datetime
+provides a graphical interface for managing the system date, time, time zone, hardware clock, and network time synchronization. Changes are applied only when the corresponding action is confirmed.
+.PP
+The application normally requires administrator authentication to change the system clock, hardware clock, time zone, or network-time configuration. When run without root privileges, it uses Slender Mode: a calendar and clock are available for comparing time zones, but system changes are disabled.
+.SH SYSTEM AND HARDWARE CLOCKS
+The system clock is the clock maintained by the running operating system. It is used by applications and is normally kept accurate by a network-time service.
+.PP
+The hardware clock, also called the real-time clock (RTC), is maintained by the computer and continues to keep time while the system is powered off. At boot, the system clock is initialized from the hardware clock. The application can transfer the current system time to the hardware clock, transfer the hardware-clock time to the system clock, read detailed hardware-clock information, and apply a stored drift correction.
+.PP
+The hardware clock can store either UTC or local time. UTC is recommended for Linux systems because it avoids daylight-saving and time-zone changes affecting the hardware clock. Select local time only when another operating system on the same computer requires the hardware clock to use local time, such as some dual-boot installations. All operating systems sharing a computer must agree on this setting.
+.PP
+Changing the hardware-clock mode does not change the intended displayed local time, but it changes how the value is interpreted during boot and when the time zone changes. The hardware-clock controls also include an option to update the drift factor when writing the system time to the hardware clock.
+.SH NETWORK TIME
+Network Time Protocol (NTP) keeps the system clock synchronized with time servers on the network or on the Internet. This application uses
+.BR chrony (8)
+for NTP synchronization. It can edit the chrony source list, enable or disable the chrony service, start or stop it, and immediately synchronize the system clock.
+.PP
+The NTP page supports three chrony source types:
+.BR pool ,
+.BR server ,
+and
+.BR peer .
+A pool name normally resolves to several time servers and is usually the best choice for a public service. A server identifies one NTP server directly. A peer is used when two chrony-managed systems are intended to exchange time with each other.
+.PP
+Use several independent sources where possible. The source address may be a host name or an address accepted by chrony; optional text in the Options column is written to the chrony source configuration. Empty entries are rejected. Disabled entries remain in the list but are commented out and are not used for synchronization.
+.PP
+The
+.B Update now
+operation saves changed sources and requests an immediate synchronization. When the chrony service is enabled, it uses chrony to perform a burst measurement, waits for synchronization, and then makes a small correction if necessary. When the service is disabled, it performs a one-time chrony update instead of enabling a background service.
+.SH NTP SERVICES
+On systemd systems, the application recognizes either
+.BR chrony.service
+or
+.BR chronyd.service .
+On SysV systems it controls the
+.B chrony
+service, and on OpenRC systems it controls
+.BR chronyd .
+The exact service name depends on the distribution.
+.PP
+The application is designed for chrony. Other time daemons, including
+.BR ntpd (8),
+.BR ntpsec (8),
+.BR systemd-timesyncd (8),
+or a separately configured secure-NTP service, should not be enabled at the same time. Multiple time daemons can compete to adjust the system clock and produce unreliable results.
+.PP
+On MX Linux, the
+.B secure-ntp
+package or service may manage the system's secure NTP setup. If it is enabled, allow it to remain the sole manager of the NTP service, or disable it before managing chrony from MX Date & Time. Do not configure two services to control chrony or the same NTP sources simultaneously.
+.SH TIME ZONES
+The time zone controls select the zone used to display and set local time. Selecting a time zone changes the local-time representation; it does not change the UTC instant represented by the system clock. Time zones are read from the system time-zone database.
+.SH OPTIONS
+This application has no documented command-line options. The graphical interface provides all operations.
+.SH FILES
+.TP
+.I /etc/chrony/chrony.conf
+Primary chrony configuration file on systems using this layout.
+.TP
+.I /etc/chrony.conf
+Alternative chrony configuration file.
+.TP
+.I /etc/chrony/sources.d/mx-datetime.sources
+Source list written on systems using the chrony
+.B sourcedir
+layout.
+.TP
+.I /etc/chrony.d/mx-datetime.sources
+Source-list location used by some distributions.
+.TP
+.I /usr/share/zoneinfo
+System time-zone database.
+.TP
+.I /usr/share/doc/mx-datetime
+Installed HTML help, images, license, and changelog documentation.
+.SH AUTHOR
+AK-47 (main author).
+
+MX Linux contributors.

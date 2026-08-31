@@ -218,7 +218,7 @@
     <message>
         <location filename="../datetime.cpp" line="352"/>
         <source>Updating...</source>
-        <translation>Actualitzant...</translation>
+        <translation>S&apos;actualitza...</translation>
     </message>
     <message>
         <location filename="../datetime.cpp" line="365"/>

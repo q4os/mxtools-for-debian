@@ -6,6 +6,11 @@
               <Name>mx-tools</Name>
               <Directory>mx-tools.directory</Directory>
               <Include>
+              <Category>X-MX-Software</Category>
+		<Category>X-MX-Maintenance</Category>
+		<Category>X-MX-Setup</Category>
+		<Category>X-MX-Live</Category>
+		<Category>X-MX-Utilities</Category>
                 <Category>MX-Software</Category>
 		<Category>MX-Maintenance</Category>
 		<Category>MX-Setup</Category>

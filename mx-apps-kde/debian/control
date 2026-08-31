@@ -2,8 +2,8 @@ Source: mx-apps-kde
 Section: system
 Priority: optional
 Maintainer: Dolphin Oracle <dolphinoracle@gmail.com>
-Build-Depends: debhelper (>=10)
-Standards-Version: 3.9.8
+Build-Depends: debhelper-compat (= 12)
+Standards-Version: 4.5.1
 
 Package: mx-apps-kde
 Architecture: all
@@ -38,6 +38,7 @@ Depends:
  mx-cleanup,
  papirus-folder-colors,
  quick-system-info-gui,
+ verify-iso-sig,
  system-keyboard-qt
 Breaks: docs-mx,
  install-meta-mx,

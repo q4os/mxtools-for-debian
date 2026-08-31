@@ -1,5 +1,7 @@
 #include "cmd.h"
 
+#include "common.h"
+
 #include <QApplication>
 #include <QDebug>
 #include <QEventLoop>
@@ -110,12 +112,25 @@ bool Cmd::appendToFileAsRootIfMissing(const QString &path, const QString &needle
     return helperProc(helperArgs, nullptr, nullptr, quiet);
 }
 
+bool Cmd::writeFileAsRoot(const QString &path, const QByteArray &content, const QString &rootPath, QuietMode quiet,
+                          bool *durabilityUncertain)
+{
+    QStringList helperArgs {"write-file"};
+    helperArgs += helperRootArgs(rootPath);
+    helperArgs << path;
+    const bool result = helperProc(helperArgs, nullptr, &content, quiet);
+    if (durabilityUncertain) {
+        *durabilityUncertain = !result && exitCode() == EXIT_CODE_WRITE_FILE_DURABILITY_UNCERTAIN;
+    }
+    return result;
+}
+
 bool Cmd::previewPlymouthAsRoot(QuietMode quiet)
 {
     return helperProc({"preview-plymouth"}, nullptr, nullptr, quiet);
 }
 
-bool Cmd::helperProc(const QStringList &helperArgs, QString *output, const QByteArray *input, QuietMode quiet)
+bool Cmd::helperProc(const QStringList &helperArgs, QString *output, const QByteArray *input, QuietMode quiet, int timeoutMs)
 {
     if (getuid() != 0 && elevationCommand.isEmpty()) {
         qWarning() << "No elevation helper available";
@@ -126,7 +141,9 @@ bool Cmd::helperProc(const QStringList &helperArgs, QString *output, const QByte
     if (getuid() != 0) {
         programArgs.prepend(helper);
     }
-    const bool result = proc(program, programArgs, output, input, quiet, Elevation::No);
+    constexpr int helperShutdownGraceMs = 30000;
+    const int outerTimeoutMs = timeoutMs == NoTimeoutMs ? NoTimeoutMs : timeoutMs + helperShutdownGraceMs;
+    const bool result = proc(program, programArgs, output, input, quiet, Elevation::No, outerTimeoutMs);
     if (exitCode() == EXIT_CODE_PERMISSION_DENIED || exitCode() == EXIT_CODE_COMMAND_NOT_FOUND) {
         handleElevationError();
     }
@@ -134,10 +151,15 @@ bool Cmd::helperProc(const QStringList &helperArgs, QString *output, const QByte
 }
 
 bool Cmd::proc(const QString &cmd, const QStringList &args, QString *output, const QByteArray *input, QuietMode quiet,
-               Elevation elevation)
+               Elevation elevation, int timeoutMs)
 {
+    if (cancelRequested) {
+        qDebug() << "Skipping command after cancellation:" << cmd << args;
+        return false;
+    }
+
     if (elevation == Elevation::Yes) {
-        return helperProc(helperExecArgs(cmd, args), output, input, quiet);
+        return helperProc(helperExecArgs(cmd, args), output, input, quiet, timeoutMs);
     }
 
     outBuffer.clear();
@@ -159,8 +181,26 @@ bool Cmd::proc(const QString &cmd, const QStringList &args, QString *output, con
     // Set up event loop for synchronous execution
     QEventLoop loop;
     connect(this, &Cmd::done, &loop, &QEventLoop::quit);
+    bool processError = false;
+    connect(this, &QProcess::errorOccurred, &loop, [&, this](QProcess::ProcessError error) {
+        processError = true;
+        qWarning() << "Command error:" << error << program() << arguments();
+        loop.quit();
+    });
+
+    bool timedOut = false;
+    QTimer timeoutTimer;
+    timeoutTimer.setSingleShot(true);
+    connect(&timeoutTimer, &QTimer::timeout, &loop, [this, &timedOut] {
+        timedOut = true;
+        qWarning() << "Command timed out; terminating:" << program() << arguments();
+        terminateRunningProcess();
+    });
 
     start(cmd, args);
+    if (timeoutMs != NoTimeoutMs) {
+        timeoutTimer.start(timeoutMs);
+    }
 
     // Handle input if provided
     if (input && !input->isEmpty()) {
@@ -168,6 +208,7 @@ bool Cmd::proc(const QString &cmd, const QStringList &args, QString *output, con
     }
     closeWriteChannel();
     loop.exec();
+    timeoutTimer.stop();
 
     // Check for permission denied or command not found errors
     // These can occur when elevation fails (canceled dialog or incorrect password)
@@ -176,24 +217,55 @@ bool Cmd::proc(const QString &cmd, const QStringList &args, QString *output, con
         *output = outBuffer.trimmed();
     }
 
-    return (exitStatus() == QProcess::NormalExit && exitCode() == 0);
+    return !timedOut && !processError && exitStatus() == QProcess::NormalExit && exitCode() == 0;
 }
 
 bool Cmd::procAsRoot(const QString &cmd, const QStringList &args, QString *output, const QByteArray *input,
-                     QuietMode quiet)
+                     QuietMode quiet, int timeoutMs)
 {
-    return proc(cmd, args, output, input, quiet, Elevation::Yes);
+    return proc(cmd, args, output, input, quiet, Elevation::Yes, timeoutMs);
 }
 
 bool Cmd::procAsRootInTarget(const QString &rootPath, const QString &cmd, const QStringList &args, QString *output,
-                             const QByteArray *input, QuietMode quiet)
+                             const QByteArray *input, QuietMode quiet, int timeoutMs)
 {
-    return helperProc(helperExecArgs(cmd, args, rootPath), output, input, quiet);
+    return helperProc(helperExecArgs(cmd, args, rootPath), output, input, quiet, timeoutMs);
 }
 
-bool Cmd::run(const QString &cmd, QString *output, const QByteArray *input, QuietMode quiet)
+bool Cmd::run(const QString &cmd, QString *output, const QByteArray *input, QuietMode quiet, int timeoutMs)
 {
-    return proc("/bin/bash", {"-c", cmd}, output, input, quiet);
+    return proc("/bin/bash", {"-c", cmd}, output, input, quiet, Elevation::No, timeoutMs);
+}
+
+void Cmd::cancel()
+{
+    cancelRequested = true;
+    terminateRunningProcess();
+}
+
+void Cmd::terminateRunningProcess()
+{
+    if (state() == QProcess::NotRunning) {
+        return;
+    }
+    const qint64 runningPid = processId();
+    terminate();
+    QTimer::singleShot(5000, this, [this, runningPid] {
+        if (processId() == runningPid && state() != QProcess::NotRunning) {
+            qWarning() << "Command did not terminate; killing:" << program() << arguments();
+            kill();
+        }
+    });
+}
+
+void Cmd::clearCancelRequest()
+{
+    cancelRequested = false;
+}
+
+bool Cmd::isCancelRequested() const
+{
+    return cancelRequested;
 }
 
 void Cmd::handleElevationError()

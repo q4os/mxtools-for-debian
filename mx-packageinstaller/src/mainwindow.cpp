@@ -1,7 +1,7 @@
 /**********************************************************************
  *  MainWindow.cpp
  **********************************************************************
- * Copyright (C) 2017-2025 MX Authors
+ * Copyright (C) 2017-2026 MX Authors
  *
  * Authors: Adrian
  *          Dolphin_Oracle
@@ -24,9 +24,12 @@
  **********************************************************************/
 
 #include "mainwindow.h"
+#include "packagelistparser.h"
 #include "ui_mainwindow.h"
 
+#include <QCoreApplication>
 #include <QDebug>
+#include <QDir>
 #include <QFileInfo>
 #include <QImageReader>
 #include <QMenu>
@@ -40,6 +43,7 @@
 #include <QScopedValueRollback>
 #include <QScrollBar>
 #include <QShortcut>
+#include <QSignalBlocker>
 #include <QStandardPaths>
 #include <QTextBlock>
 #include <QTextStream>
@@ -51,12 +55,23 @@
 #include "aptcache.h"
 #include "checkableheaderview.h"
 #include "outputrender.h"
+#include "packagebackend.h"
 #include "versionnumber.h"
 #include <algorithm>
 #include <chrono>
+#include <pwd.h>
 #include <unistd.h>
 
 using namespace std::chrono_literals;
+
+#ifdef PACKAGE_BACKEND_PACMAN
+// Defined in packagebackend_pacman.cpp -- not part of the shared PackageBackend::
+// interface (apt has no equivalent shape for this), but relocated there so it
+// sits next to listInstalled() and can use its own local Cmd instance the same
+// way, safe to call from a background thread. Declared here at external linkage
+// (not inside the anonymous namespace below) to match its definition there.
+QHash<QString, PackageInfo> pacmanAvailablePackages(bool *ok = nullptr);
+#endif
 
 namespace {
 constexpr auto MxpiLibPath = "/usr/lib/mx-packageinstaller/mxpi-lib";
@@ -75,15 +90,92 @@ QString debconfFrontend()
     return QStringLiteral("noninteractive");
 }
 
-QHash<QString, QString> debconfEnvironment()
-{
-    return {{QStringLiteral("DEBIAN_FRONTEND"), debconfFrontend()}};
-}
-
 QStringList packageArgs(const QString &names)
 {
     return names.split(' ', Qt::SkipEmptyParts);
 }
+
+#ifdef PACKAGE_BACKEND_PACMAN
+[[nodiscard]] QString userNameForUid(uid_t uid)
+{
+    if (const struct passwd *pw = getpwuid(uid)) {
+        return QString::fromLocal8Bit(pw->pw_name);
+    }
+    return {};
+}
+
+[[nodiscard]] QString homeDirForUser(const QString &name)
+{
+    const QByteArray n = name.toLocal8Bit();
+    if (const struct passwd *pw = getpwnam(n.constData())) {
+        return QString::fromLocal8Bit(pw->pw_dir);
+    }
+    return {};
+}
+
+// When the app itself runs as root (e.g. WSL2 without a working pkexec), AUR helpers
+// refuse to build, so we need a normal user to build as. No single source is reliable
+// everywhere -- logname and SUDO_USER are often empty under WSL -- so try several in
+// order of confidence and fall back to scanning the user database.
+[[nodiscard]] QString loginUserForRoot()
+{
+    // 1. The user who elevated us, if recorded.
+    const QString sudoUser = qEnvironmentVariable("SUDO_USER");
+    if (!sudoUser.isEmpty() && sudoUser != QLatin1String("root")) {
+        return sudoUser;
+    }
+    bool ok = false;
+    const uint pkexecUid = qEnvironmentVariable("PKEXEC_UID").toUInt(&ok);
+    if (ok && pkexecUid != 0) {
+        const QString name = userNameForUid(static_cast<uid_t>(pkexecUid));
+        if (!name.isEmpty()) {
+            return name;
+        }
+    }
+
+    auto isRegularUid = [](uint uid) { return uid >= 1000 && uid < 65534; };
+
+    // 2. The owner of an active login session (systemd-logind runtime dir). Prefer the
+    //    lowest regular uid (conventionally 1000) when several sessions exist.
+    uid_t sessionUid = 0;
+    const QDir runUser(QStringLiteral("/run/user"));
+    const QStringList sessions = runUser.entryList(QDir::Dirs | QDir::NoDotAndDotDot);
+    for (const QString &entry : sessions) {
+        bool entryOk = false;
+        const uint uid = entry.toUInt(&entryOk);
+        if (entryOk && isRegularUid(uid) && (sessionUid == 0 || uid < sessionUid)) {
+            sessionUid = static_cast<uid_t>(uid);
+        }
+    }
+    if (sessionUid != 0) {
+        const QString name = userNameForUid(sessionUid);
+        if (!name.isEmpty()) {
+            return name;
+        }
+    }
+
+    // 3. Fall back to the lowest regular account in the user database that has a real
+    //    login shell (so daemon accounts that happen to sit at uid >= 1000 are skipped).
+    auto hasLoginShell = [](const char *shell) {
+        if (shell == nullptr || *shell == '\0') {
+            return false;
+        }
+        const QString s = QString::fromLocal8Bit(shell);
+        return !s.endsWith(QLatin1String("/nologin")) && !s.endsWith(QLatin1String("/false"));
+    };
+    QString best;
+    uid_t bestUid = 0;
+    setpwent();
+    while (const struct passwd *pw = getpwent()) {
+        if (isRegularUid(pw->pw_uid) && hasLoginShell(pw->pw_shell) && (best.isEmpty() || pw->pw_uid < bestUid)) {
+            best = QString::fromLocal8Bit(pw->pw_name);
+            bestUid = pw->pw_uid;
+        }
+    }
+    endpwent();
+    return best;
+}
+#endif
 
 QStringList flatpakArgsWithScope(const QString &scope, QStringList args)
 {
@@ -92,15 +184,6 @@ QStringList flatpakArgsWithScope(const QString &scope, QStringList args)
         args.insert(0, normalizedScope);
     }
     return args;
-}
-
-// Debian policy 5.6.1: lowercase alphanumerics plus '+', '-', '.', at least two
-// characters, starting with an alphanumeric. Names from downloaded package lists
-// are interpolated into shell commands and apt-get argv, so reject anything else.
-bool isValidPackageName(const QString &name)
-{
-    static const QRegularExpression validName(QStringLiteral("^[a-z0-9][a-z0-9+.-]+$"));
-    return validName.match(name).hasMatch();
 }
 
 QString mxTestSourceLine(QString repoDistsUrl, const QString &suite, const QString &arch)
@@ -145,11 +228,6 @@ QString shellCommandFromArgs(const QStringList &args)
         quoted.append(shellSingleQuote(arg));
     }
     return quoted.join(QLatin1Char(' '));
-}
-
-QString flatpakPtyCommand(const QString &command)
-{
-    return QStringLiteral("script -qefc %1 /dev/null").arg(shellSingleQuote(command));
 }
 
 void appendFlatpakStatusMessage(QPlainTextEdit *outputBox, const QString &message)
@@ -203,14 +281,177 @@ bool systemFlatpakDefaultsPresent()
     }
     return remotes.contains(QLatin1String("flathub")) && remotes.contains(QLatin1String("flathub-verified"));
 }
+
+// The subprocess-calling half of listFlatpakRemotes(), extracted so the startup
+// preload can run it on a background thread: every call here goes through a local
+// Cmd instance, so it's safe off the GUI thread, unlike listFlatpakRemotes() itself
+// (which also touches ui->comboRemote directly and isn't split out).
+QStringList fetchFlatpakRemotes(const QString &scope, bool *ok)
+{
+    const bool isUserScope = scope.startsWith(QLatin1String("--user"));
+
+    auto fetchRemotes = [&scope](QStringList &outList) {
+        Cmd shell;
+        outList = shell.getOut("flatpak", flatpakArgsWithScope(scope, {"remote-list", "--columns=name"}))
+                      .split('\n', Qt::SkipEmptyParts);
+        for (QString &name : outList) {
+            name = name.trimmed();
+        }
+        outList.removeAll(QString());
+        return shell.exitCode() == 0;
+    };
+
+    auto addUserRemotes = []() {
+        Cmd addRemotes;
+        return runMxpiLib(addRemotes, QStringLiteral("flatpak_add_repos_user"));
+    };
+
+    QStringList list;
+    bool listOk = fetchRemotes(list);
+
+    // If user scope listing failed (common when user has never set up flatpak), attempt to set up defaults
+    if (!listOk && isUserScope) {
+        qDebug() << "User remote-list failed; attempting to set up user remotes";
+        if (addUserRemotes()) {
+            listOk = fetchRemotes(list);
+        }
+    }
+
+    // If no user remotes exist, set up the default ones
+    if (list.isEmpty() && isUserScope) {
+        qDebug() << "No flatpak remotes found for user, setting up default remotes";
+
+        if (addUserRemotes()) {
+            qDebug() << "Successfully set up flatpak remotes for user";
+
+            // Re-fetch the remote list after setup
+            listOk = fetchRemotes(list);
+        } else {
+            qDebug() << "Failed to set up flatpak remotes for user";
+        }
+    }
+
+    if (ok) {
+        *ok = listOk;
+    }
+    return list;
+}
+
+// The actual implementation behind MainWindow::listFlatpaks(), extracted to a free
+// function taking the arch option explicitly (rather than calling getArchOption(),
+// which reads the this->arch member) so the constructor's Flatpak catalog preload can
+// call it directly from a QtConcurrent worker thread without touching `this` at all --
+// the caller computes archOption on the GUI thread beforehand and passes it in by
+// value. Every subprocess call here goes through a local Cmd instance, so it's safe to
+// run in the background the same way fetchFlatpakRemotes() above is.
+QStringList listFlatpaksImpl(const QString &remote, const QString &fpUserScope, const QString &archOption,
+                             const QString &type = QString())
+{
+    QString archFp = archOption;
+    if (archFp.isEmpty()) {
+        return {};
+    }
+
+    // Check if remote parameter is empty (which would happen if no remotes are configured)
+    if (remote.isEmpty()) {
+        qDebug() << "Remote parameter is empty - no flatpak remotes configured for user";
+        return {};
+    }
+
+    const bool isUserScope = fpUserScope.startsWith(QLatin1String("--user"));
+
+    auto buildRemoteLsArgs = [&](const QString &scope) {
+        QStringList args {"remote-ls"};
+        args += flatpakArgsWithScope(scope, {});
+        args << remote;
+        const QString archOptionTrimmed = archFp.trimmed();
+        if (!archOptionTrimmed.isEmpty()) {
+            args << archOptionTrimmed;
+        }
+        args << "--columns=ver,branch,ref,installed-size";
+        return args;
+    };
+
+    QString typeFlag;
+    if (type == QLatin1String("--app")) {
+        typeFlag = QStringLiteral("--app");
+    } else if (type == QLatin1String("--runtime")) {
+        typeFlag = QStringLiteral("--runtime");
+    }
+    auto runRemoteLs = [&typeFlag](QStringList args) {
+        if (!typeFlag.isEmpty()) {
+            args << typeFlag;
+        }
+        QString output;
+        Cmd command;
+        if (!command.proc("flatpak", args, &output, nullptr, Cmd::QuietMode::Yes)) {
+            return QStringList {};
+        }
+        QStringList rows;
+        for (const QString &line : output.split('\n', Qt::SkipEmptyParts)) {
+            if (line.contains('\t')) {
+                rows << line;
+            }
+        }
+        return rows;
+    };
+
+    // Execute the command and process the output
+    QStringList list = runRemoteLs(buildRemoteLsArgs(fpUserScope));
+
+    if (list.isEmpty()) {
+        qDebug() << QString("Could not list packages from %1 remote, attempting to update remote").arg(remote);
+
+        // Try to update the remote if it's empty
+        QStringList updateArgs {"update"};
+        updateArgs += flatpakArgsWithScope(fpUserScope, {});
+        updateArgs << "--appstream" << remote;
+        qDebug() << "Running remote update command:" << updateArgs;
+
+        Cmd updateCommand;
+        if (updateCommand.proc("flatpak", updateArgs, nullptr, nullptr, Cmd::QuietMode::Yes)) {
+            qDebug() << "Remote update completed, retrying package list";
+
+            // Retry the original command after update
+            list = runRemoteLs(buildRemoteLsArgs(fpUserScope));
+            if (!list.isEmpty()) {
+                qDebug() << QString("Successfully retrieved %1 packages after remote update").arg(list.size());
+            } else {
+                qDebug() << QString("Remote %1 still empty after update").arg(remote);
+            }
+        } else {
+            qDebug() << "Failed to update remote" << remote;
+        }
+    }
+
+    // If user scope returned nothing (e.g. only system remotes exist), fall back to system remotes for listing
+    if (list.isEmpty() && isUserScope) {
+        const QStringList systemArgs = buildRemoteLsArgs(QStringLiteral("--system "));
+        qDebug() << "User remotes empty; retrying flatpak listing using system remotes:" << systemArgs;
+        list = runRemoteLs(systemArgs);
+    }
+
+    return list;
+}
 } // namespace
 
+#ifdef MXPI_TESTING
+MainWindow::MainWindow(const QCommandLineParser &argParser, QWidget *parent,
+                       BackgroundWorkerTestHooks testHooks, bool testSkipFlatpakPreload)
+    : QDialog(parent),
+      ui(new Ui::MainWindow),
+      dictionary("/usr/share/mx-packageinstaller-pkglist/category.dict", QSettings::IniFormat),
+      args {argParser},
+      testSkipFlatpakPreload {testSkipFlatpakPreload}
+{
+#else
 MainWindow::MainWindow(const QCommandLineParser &argParser, QWidget *parent)
     : QDialog(parent),
       ui(new Ui::MainWindow),
       dictionary("/usr/share/mx-packageinstaller-pkglist/category.dict", QSettings::IniFormat),
       args {argParser}
 {
+#endif
     qDebug().noquote() << QCoreApplication::applicationName() << "version:" << QCoreApplication::applicationVersion();
     ui->setupUi(this);
     outputRenderer.setOutputBox(ui->outputBox);
@@ -250,10 +491,43 @@ MainWindow::MainWindow(const QCommandLineParser &argParser, QWidget *parent)
 
     // Run package display in a separate thread
     // Run package preload in background
-    [[maybe_unused]] auto future = QtConcurrent::run([this] {
+    // (apt-only: pacmanAvailablePackages() shells out via the shared Cmd member,
+    // which isn't safe to touch off the GUI thread the way AptCache's pure file-IO
+    // read is; pacman's Enabled tab just loads lazily on first visit instead.)
+#ifndef PACKAGE_BACKEND_PACMAN
+    [[maybe_unused]] auto future = QtConcurrent::run(
+        [this, guardMutex = destructionGuardMutex, destructingFlag = destructing
+#ifdef MXPI_TESTING
+        , testHooks
+#endif
+        ] {
         AptCache cache;
         auto loadedList = cache.getCandidates();
 
+#ifdef MXPI_TESTING
+        if (testHooks.beforeGuardCheck) {
+            testHooks.beforeGuardCheck();
+        }
+        // Fires on every exit from here on, regardless of which branch below is
+        // taken -- lets a test wait for a real "the guarded section is done"
+        // signal instead of assuming it completed within some time budget.
+        auto workerFinishedGuard = qScopeGuard([&testHooks] {
+            if (testHooks.workerFinished) {
+                testHooks.workerFinished();
+            }
+        });
+#endif
+        // See destructionGuardMutex's declaration: this must be the worker's one and
+        // only touch of `this`, immediately preceded by the check below.
+        QMutexLocker locker(guardMutex.get());
+        if (*destructingFlag) {
+            return;
+        }
+#ifdef MXPI_TESTING
+        if (testHooks.afterGuardPassed) {
+            testHooks.afterGuardPassed();
+        }
+#endif
         // Set the model on main thread after preload — all member access happens on the GUI thread
         QMetaObject::invokeMethod(
             this,
@@ -298,17 +572,180 @@ MainWindow::MainWindow(const QCommandLineParser &argParser, QWidget *parent)
             },
             Qt::QueuedConnection);
     });
+#endif
+
+#ifdef PACKAGE_BACKEND_PACMAN
+    // installedPackages ("pacman -Qi") is fetched in the background so it doesn't
+    // block startup -- PackageBackend::listInstalled() uses a local Cmd instance,
+    // safe to call off the GUI thread (matching how the arch branch originally
+    // loaded this via QtConcurrent, before the unification made it synchronous).
+    [[maybe_unused]] auto installedFuture = QtConcurrent::run(
+        [this, guardMutex = destructionGuardMutex, destructingFlag = destructing
+#ifdef MXPI_TESTING
+        , testHooks
+#endif
+        ] {
+        bool ok = false;
+        auto loaded = PackageBackend::listInstalled(&ok);
+#ifdef MXPI_TESTING
+        if (testHooks.beforeGuardCheck) {
+            testHooks.beforeGuardCheck();
+        }
+        // See the AptCache worker's matching comment above.
+        auto workerFinishedGuard = qScopeGuard([&testHooks] {
+            if (testHooks.workerFinished) {
+                testHooks.workerFinished();
+            }
+        });
+#endif
+        QMutexLocker locker(guardMutex.get());
+        if (*destructingFlag) {
+            return;
+        }
+#ifdef MXPI_TESTING
+        if (testHooks.afterGuardPassed) {
+            testHooks.afterGuardPassed();
+        }
+#endif
+        QMetaObject::invokeMethod(
+            this,
+            [this, ok, loaded = std::move(loaded)]() mutable {
+                if (!ok) {
+                    QMessageBox::critical(this, tr("Error"),
+                                          tr("The installed-package query returned an error. Please check the log "
+                                             "for details."));
+                    return;
+                }
+                installedPackages = std::move(loaded);
+                handleInstalledPackagesArrived();
+            },
+            Qt::QueuedConnection);
+    });
+#endif
 
     // Preload the flatpak list so the tab is populated on first visit. Listing
     // needs no elevation; system remote setup, if defaults are missing, happens
     // on the first visit to the Flatpak tab where an auth prompt has context.
-    if (arch != QLatin1String("i386") && checkInstalled(QStringLiteral("flatpak"))) {
-        QMetaObject::invokeMethod(this, [this] { displayFlatpaks(); }, Qt::QueuedConnection);
+    // Checked via the binary's presence, not checkInstalled()/installedPackages:
+    // on pacman, installedPackages is now filled in by a background QtConcurrent
+    // task kicked off just above, so it's still empty at this exact point --
+    // checkInstalled() would always say "not installed" and silently skip this.
+    // testSkipFlatpakPreload (test-only, see the MXPI_TESTING constructor overload)
+    // lets Testing/test_mainwindow.cpp construct a MainWindow without this preload
+    // chain reaching real flatpak remotes -- listFlatpaksImpl()'s "flatpak update
+    // --appstream <remote>" fallback can genuinely touch the network if a remote's
+    // local appstream cache is stale, which a test run must not do.
+    if (arch != QLatin1String("i386") && !QStandardPaths::findExecutable(QStringLiteral("flatpak")).isEmpty()
+#ifdef MXPI_TESTING
+        && !testSkipFlatpakPreload
+#endif
+        ) {
+        // Three subprocess calls happen before the Flatpak tab is ready: the remote
+        // list ("flatpak remote-list", ~30-150ms), then the remote catalog
+        // ("flatpak remote-ls", ~250-400ms) and installed-list ("flatpak list") for
+        // whichever remote that produces. All three go through a local Cmd instance
+        // (fetchFlatpakRemotes()/listFlatpaksImpl()/the shell below), never the shared
+        // cmd member, so all are safe to run in the background -- same treatment as
+        // installedPackages above, just chained in two stages since stage 2 needs to
+        // know which remote stage 1 selected. None of the three ever calls a
+        // MainWindow:: member function from the worker thread (listFlatpaksImpl() is a
+        // free function taking the arch option explicitly, rather than this->listFlatpaks()
+        // calling getArchOption() to read this->arch) -- so this stays safe even if the
+        // window is destroyed while a fetch is still running.
+        displayFlatpaksIsRunning = true;
+        const QString scope = fpUser;
+        // See flatpakRequestGeneration's declaration: bumped and captured now so this
+        // preload's eventual completions can tell whether a newer Flatpak load (e.g.
+        // the user switching remote/scope) has since superseded them.
+        const int myGeneration = ++flatpakRequestGeneration;
+        [[maybe_unused]] auto remotesFuture = QtConcurrent::run(
+            [this, scope, myGeneration, guardMutex = destructionGuardMutex, destructingFlag = destructing] {
+            bool remotesOk = false;
+            const QStringList remotes = fetchFlatpakRemotes(scope, &remotesOk);
+            QMutexLocker locker(guardMutex.get());
+            if (*destructingFlag) {
+                return;
+            }
+            QMetaObject::invokeMethod(
+                this,
+                [this, remotes, remotesOk, scope, myGeneration, guardMutex, destructingFlag] {
+                    if (isFlatpakGenerationStale(myGeneration)) {
+                        // Superseded by a newer Flatpak load that started (and, being
+                        // synchronous, already finished) while this fetch was in flight.
+                        // Its result is current; publishing this stale one would clobber
+                        // it. Only clear the busy flag if it's still plausibly ours --
+                        // a newer synchronous load always resets it back to false itself.
+                        displayFlatpaksIsRunning = false;
+                        return;
+                    }
+                    if (remotesOk) {
+                        // Warm the cache listFlatpakRemotes() checks first, so
+                        // setupFlatpakDisplay()'s call into it below is a fast,
+                        // synchronous cache hit instead of a second fetch.
+                        cachedFlatpakRemotes = remotes;
+                        cachedFlatpakRemotesScope = scope;
+                        cachedFlatpakRemotesFetched = true;
+                    }
+                    setupFlatpakDisplay();
+                    if (!remotesOk) {
+                        finalizeFlatpakDisplay();
+                        return;
+                    }
+                    const QString remote = ui->comboRemote->currentText();
+                    // Computed here on the GUI thread (reads this->arch) and passed by
+                    // value into the worker below, which must not touch `this` at all.
+                    const QString archOption = getArchOption();
+                    [[maybe_unused]] auto catalogFuture = QtConcurrent::run(
+                        [this, remote, scope, archOption, myGeneration, guardMutex, destructingFlag] {
+                        const QStringList remoteEntries = listFlatpaksImpl(remote, scope, archOption);
+                        Cmd shell;
+                        const QStringList allInstalled
+                            = shell.getOut("flatpak", flatpakArgsWithScope(scope, {"list", "--columns=ref,size"}),
+                                          Cmd::QuietMode::Yes, /*discardStderr=*/true)
+                                  .split('\n', Qt::SkipEmptyParts);
+                        QMutexLocker locker(guardMutex.get());
+                        if (*destructingFlag) {
+                            return;
+                        }
+                        QMetaObject::invokeMethod(
+                            this,
+                            [this, remoteEntries, allInstalled, scope, myGeneration] {
+                                if (isFlatpakGenerationStale(myGeneration)) {
+                                    // See the remotesFuture completion above -- a newer,
+                                    // synchronous load has already published its own
+                                    // (correct) data and reset the busy flag; don't stomp
+                                    // on either.
+                                    displayFlatpaksIsRunning = false;
+                                    return;
+                                }
+                                processFlatpakData(remoteEntries, allInstalled, scope);
+                                populateFlatpakTree();
+                                finalizeFlatpakDisplay();
+                            },
+                            Qt::QueuedConnection);
+                    });
+                },
+                Qt::QueuedConnection);
+        });
     }
 }
 
 MainWindow::~MainWindow()
 {
+    // See destructionGuardMutex's declaration: this must run before anything else so
+    // that any QtConcurrent::run() worker still in flight (installedPackages, the
+    // Flatpak preload chain, the pacman -Ss repo fetch) is guaranteed to either see
+    // *destructing == true and skip touching `this` entirely, or have already made its
+    // one and only touch of `this` (a QMetaObject::invokeMethod(this, ...,
+    // Qt::QueuedConnection) call, safe as long as `this` hasn't started destructing
+    // yet) before this can acquire the lock. No wait is needed: those workers don't
+    // need to finish before the window closes, they just need to never touch a `this`
+    // that might already be gone -- which this ordering, not a wait, is what
+    // guarantees.
+    {
+        QMutexLocker locker(destructionGuardMutex.get());
+        *destructing = true;
+    }
     delete ui;
 }
 
@@ -334,7 +771,13 @@ void MainWindow::setup()
     //ui->checkBoxInstallRecommendsMXBP->setChecked(true);
 
     ui->tabWidget->blockSignals(true);
+#ifdef PACKAGE_BACKEND_PACMAN
+    // Popular apps has no data on this backend (see the Tab::Popular visibility
+    // gating below), so land on Enabled Repos instead.
+    ui->tabWidget->setCurrentWidget(ui->tabEnabled);
+#else
     ui->tabWidget->setCurrentWidget(ui->tabPopular);
+#endif
     ui->tabWidget->setTabEnabled(Tab::Test, false);
     ui->tabWidget->setTabEnabled(Tab::Backports, false);
     ui->pushRemoveAutoremovable->setHidden(true);
@@ -351,18 +794,48 @@ void MainWindow::setup()
     ui->comboUser->setCurrentIndex(userScope ? 1 : 0);
     ui->comboUser->blockSignals(false);
 
+#ifdef PACKAGE_BACKEND_PACMAN
+    // No Debian-release concept on this backend; these two only ever gate apt-only
+    // code paths (Test/Backports, which are unreachable here since those tabs are
+    // hidden). Arch doesn't rename architectures the way Debian's DEB_BUILD_ARCH
+    // does, so the raw CPU architecture string is already the right value.
+    arch = QSysInfo::currentCpuArchitecture();
+    debianVersion = Release::Trixie;
+    verName.clear();
+#else
     arch = AptCache::getArch();
     debianVersion = getDebianVerNum();
     verName = getDebianVerName(debianVersion);
+#endif
 
     ui->tabWidget->setTabVisible(Tab::Flatpak, arch != QLatin1String("i386"));
     // Snap is only meaningful on systemd systems (snapd requires systemd)
     ui->tabWidget->setTabVisible(Tab::Snap, isSystemdInit());
+#ifdef PACKAGE_BACKEND_PACMAN
+    ui->tabWidget->setTabVisible(Tab::Test, false);
+    ui->tabWidget->setTabVisible(Tab::Backports, false);
+    ui->tabWidget->setTabVisible(Tab::AUR, true);
+    // Popular apps' package-list data (.pm files under
+    // /usr/share/mx-packageinstaller-pkglist) is Debian-package-name-keyed and
+    // shipped by a separate, apt-only packaging source; there's no Arch data for
+    // it, so the tab would just be empty. Hide it rather than show dead space.
+    ui->tabWidget->setTabVisible(Tab::Popular, false);
+    // "Install recommends" has no pacman equivalent (installPackages() ignores
+    // extraArgs on this backend) -- showing a checkbox with no effect would mislead.
+    ui->checkBoxInstallRecommends->setVisible(false);
+    // isLibraryPackage() is a no-op on this backend (no Debian-style lib*/-dev/
+    // -dbg*/-libs split-package convention to filter on yet) -- same reasoning.
+    ui->checkHideLibs->setVisible(false);
+#else
+    ui->tabWidget->setTabVisible(Tab::AUR, false);
     ui->tabWidget->setTabVisible(Tab::Test, QFile::exists("/etc/apt/sources.list.d/mx.list")
                                                 || QFile::exists("/etc/apt/sources.list.d/mx.sources"));
 
-    testInitiallyEnabled = cmd.run("apt-get update --print-uris | grep -m1 -qE "
-                                   + shellSingleQuote("/mx/testrepo/dists/" + verName + "/test/"));
+    testInitiallyEnabled = cmd.pipeline({
+        {"apt-get", {"update", "--print-uris"}},
+        {"grep", {"-m1", "-qE", "/mx/testrepo/dists/" + verName + "/test/"}},
+    });
+#endif
 
     setWindowTitle(tr("Debian Package Installer"));
 
@@ -373,8 +846,15 @@ void MainWindow::setup()
     setupModels();
 
     hideColumns();
+#ifdef PACKAGE_BACKEND_PACMAN
+    // Popular Apps has no data on this backend (tab hidden above) -- skip
+    // scanning for .pm files and building/sorting an always-empty tree.
+    // installedPackages is loaded in the background instead (see the
+    // constructor, right after setup() returns) rather than blocking here.
+#else
     loadPmFiles();
     refreshPopularApps();
+#endif
 
     // Load persisted setting for hiding libraries/developer packages
     const bool savedHideLibs = settings.value("HideLibs", true).toBool();
@@ -436,14 +916,38 @@ void MainWindow::setup()
     headerBP->setTargetColumn(TreeCol::Check);
     headerBP->setMinimumSectionSize(22);
     ui->treeBackports->setHeader(headerBP);
+
+#ifdef PACKAGE_BACKEND_PACMAN
+    headerAUR = new CheckableHeaderView(Qt::Horizontal, ui->treeAUR);
+    headerAUR->setTargetColumn(TreeCol::Check);
+    headerAUR->setMinimumSectionSize(22);
+    ui->treeAUR->setHeader(headerAUR);
+#endif
+
     setConnections();
 
+#ifdef PACKAGE_BACKEND_PACMAN
+    ui->searchBoxEnabled->setFocus();
+    currentTree = ui->treeEnabled;
+#else
     ui->searchPopular->setFocus();
     currentTree = ui->treePopularApps;
+#endif
 
     ui->tabWidget->setTabEnabled(Tab::Output, false);
     ui->tabWidget->blockSignals(false);
     ui->pushUpgradeAll->setVisible(false);
+
+#ifdef PACKAGE_BACKEND_PACMAN
+    // Landing on Enabled Repos happened above while tabWidget signals were still
+    // blocked, so tabWidget_currentChanged (which is what actually loads a tab's
+    // data everywhere else) never fired for it. Apt's equivalent initial load
+    // comes from the constructor's background AptCache preload, which pacman
+    // deliberately skips (see MainWindow::MainWindow) -- so without this, the tab
+    // stays empty until the user switches away and back, which does fire a real
+    // signal. Trigger the same load explicitly instead.
+    QMetaObject::invokeMethod(this, [this] { handleEnabledReposTab(QString()); }, Qt::QueuedConnection);
+#endif
 
     const auto size = this->size();
     if (settings.contains(QStringLiteral("geometry"))) {
@@ -453,11 +957,13 @@ void MainWindow::setup()
             centerWindow();
         }
     }
+#ifndef PACKAGE_BACKEND_PACMAN
     const QString aptConfigOutput
         = cmd.getOut(QStringLiteral("apt-config"), {"shell", "APTOPT", "APT::Install-Recommends/b"}).trimmed();
     ui->checkBoxInstallRecommends->setChecked(aptConfigOutput == QLatin1String("APTOPT='true'"));
     ui->checkBoxInstallRecommendsMX->setChecked(aptConfigOutput == QLatin1String("APTOPT='true'"));
     ui->checkBoxInstallRecommendsBP->setChecked(aptConfigOutput == QLatin1String("APTOPT='true'"));
+#endif
 
     // Check/uncheck tree items spacebar press or double-click
     auto *shortcutToggle = new QShortcut(Qt::Key_Space, this);
@@ -466,6 +972,9 @@ void MainWindow::setup()
     // Connect tree views for double-click toggle
     QList<QTreeView *> listTree {ui->treePopularApps, ui->treeEnabled, ui->treeMXtest, ui->treeBackports,
                                   ui->treeFlatpak, ui->treeSnap};
+#ifdef PACKAGE_BACKEND_PACMAN
+    listTree.append(ui->treeAUR);
+#endif
     for (auto *tree : listTree) {
         if (tree != ui->treeFlatpak && tree != ui->treeSnap) {
             tree->setContextMenuPolicy(Qt::CustomContextMenu);
@@ -541,6 +1050,17 @@ void MainWindow::setupModels()
     popularProxy = new PopularFilterProxy(this);
     popularProxy->setSourceModel(popularModel);
     ui->treePopularApps->setModel(popularProxy);
+
+#ifdef PACKAGE_BACKEND_PACMAN
+    // Create AUR model and proxy
+    aurModel = new PackageModel(this);
+    aurProxy = new PackageFilterProxy(this);
+    aurProxy->setSourceModel(aurModel);
+    ui->treeAUR->setModel(aurProxy);
+    ui->treeAUR->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    ui->treeAUR->setSortingEnabled(true);
+    ui->treeAUR->sortByColumn(1, Qt::AscendingOrder);
+#endif
     ui->treePopularApps->setEditTriggers(QAbstractItemView::NoEditTriggers);
 
     // Set icons for all models
@@ -550,11 +1070,17 @@ void MainWindow::setupModels()
     flatpakModel->setIcons(qiconInstalled);
     snapModel->setIcons(qiconInstalled);
     popularModel->setIcons(qiconInstalled, QIcon::fromTheme("folder"), QIcon::fromTheme("dialog-information"));
+#ifdef PACKAGE_BACKEND_PACMAN
+    aurModel->setIcons(qiconInstalled, qiconUpgradable);
+#endif
 
     // Connect model signals to slots
     connect(enabledModel, &PackageModel::checkStateChanged, this, &MainWindow::onPackageCheckStateChanged);
     connect(mxtestModel, &PackageModel::checkStateChanged, this, &MainWindow::onPackageCheckStateChanged);
     connect(backportsModel, &PackageModel::checkStateChanged, this, &MainWindow::onPackageCheckStateChanged);
+#ifdef PACKAGE_BACKEND_PACMAN
+    connect(aurModel, &PackageModel::checkStateChanged, this, &MainWindow::onPackageCheckStateChanged);
+#endif
     connect(flatpakModel, &FlatpakModel::checkStateChanged, this, &MainWindow::onFlatpakCheckStateChanged);
     connect(snapModel, &SnapModel::checkStateChanged, this, &MainWindow::onSnapCheckStateChanged);
     // Use QStandardItemModel's built-in itemChanged signal for PopularModel
@@ -592,9 +1118,7 @@ bool MainWindow::uninstall(const QString &names, const QStringList &preuninstall
         if (lockFile.isLockedGUI()) {
             return false;
         }
-        QStringList args {"-o=Dpkg::Use-Pty=0", "remove", "-y"};
-        args += packageArgs(names);
-        success = cmd.procAsRootWithEnv(debconfEnvironment(), "apt-get", args);
+        success = PackageBackend::removePackages(cmd, packageArgs(names));
     }
 
     if (success && !postuninstall.isEmpty()) {
@@ -623,7 +1147,7 @@ bool MainWindow::updateApt()
     }
 
     enableOutput();
-    if (runMxpiMaintenanceAsRoot(cmd, QStringLiteral("apt_update"))) {
+    if (PackageBackend::refreshRepositories(cmd)) {
         qDebug() << "sources updated OK";
         updatedOnce = true;
         return true;
@@ -637,9 +1161,9 @@ bool MainWindow::updateApt()
 }
 
 // Convert different size units to bytes
-quint64 MainWindow::convert(const QString &size)
+quint64 MainWindow::convert(const QString &size, bool *ok)
 {
-    return FlatpakModel::sizeStringToBytes(size);
+    return FlatpakModel::sizeStringToBytes(size, ok);
 }
 
 // Convert to string (#bytes, KiB, MiB, and GiB)
@@ -663,7 +1187,16 @@ void MainWindow::listSizeInstalledFP()
 
     auto sumSizes = [](const QList<QString> &sizes) {
         return std::accumulate(sizes.cbegin(), sizes.cend(), quint64(0),
-                               [](quint64 acc, const QString &item) { return acc + convert(item); });
+                               [](quint64 acc, const QString &item) {
+                                   bool ok = false;
+                                   const quint64 bytes = convert(item, &ok);
+                                   if (!ok && !item.isEmpty()) {
+                                       qWarning() << "MainWindow: could not parse installed Flatpak size" << item;
+                                   }
+                                   // Skip sizes that failed to parse rather than folding a bogus
+                                   // value (or a silently-wrong small one) into the running total.
+                                   return ok ? acc + bytes : acc;
+                               });
     };
 
     quint64 total = 0;
@@ -674,7 +1207,15 @@ void MainWindow::listSizeInstalledFP()
         QStringList list = cmd.getOut("flatpak", flatpakArgsWithScope(fpUser, {"list", "--columns", "app,size"}),
                                       Cmd::QuietMode::No).split('\n', Qt::SkipEmptyParts);
         total = std::accumulate(list.cbegin(), list.cend(), quint64(0),
-                                [](quint64 acc, const QString &item) { return acc + convert(item.section('\t', 1)); });
+                                [](quint64 acc, const QString &item) {
+                                    const QString sizeField = item.section('\t', 1);
+                                    bool ok = false;
+                                    const quint64 bytes = convert(sizeField, &ok);
+                                    if (!ok && !sizeField.isEmpty()) {
+                                        qWarning() << "MainWindow: could not parse installed Flatpak size" << sizeField;
+                                    }
+                                    return ok ? acc + bytes : acc;
+                                });
     }
     ui->labelNumSize->setText(convert(total));
 }
@@ -734,6 +1275,12 @@ void MainWindow::updateInterface()
         updateLabelsAndFocus(ui->labelNumApps_3, ui->labelNumUpgrBP, ui->labelNumInstBP, ui->pushForceUpdateBP,
                              ui->searchBoxBP);
         break;
+#ifdef PACKAGE_BACKEND_PACMAN
+    case Tab::AUR:
+        updateLabelsAndFocus(ui->labelNumAppsAUR, ui->labelNumUpgrAUR, ui->labelNumInstAUR, ui->pushForceUpdateAUR,
+                             ui->searchBoxAUR);
+        break;
+#endif
     }
 }
 
@@ -912,6 +1459,29 @@ void MainWindow::checkUncheckItem()
 
 void MainWindow::outputAvailable(const QString &output)
 {
+#ifdef PACKAGE_BACKEND_PACMAN
+    // AUR installs elevate via a raw `sudo` inside paru (see install()), so its
+    // password prompt shows up as plain text here rather than pkexec's own dialog.
+    // Mask ui->lineEdit before the user can type their password into it.
+    //
+    // readyReadStandardOutput chunk boundaries are arbitrary, so "sudo ... password"
+    // can straddle two calls to this function -- match against a small carry-over
+    // tail plus the new text rather than the new chunk alone, so a split prompt (or a
+    // wrong-password re-prompt arriving right after unmasking on Enter) still gets
+    // caught. The tail is bounded and doesn't include already-matched text, so it
+    // can't keep re-triggering on stale output once the buffer moves past a prompt.
+    static const QRegularExpression sudoPrompt {R"(sudo.*password)", QRegularExpression::CaseInsensitiveOption};
+    constexpr qsizetype maxSudoPromptTail = 64;
+    const QString combined = sudoPromptTail + output;
+    if (sudoPrompt.match(combined).hasMatch()) {
+        setLineEditMasked(true);
+        // Drop the tail so this same (now-handled) match can't keep re-triggering
+        // on later, unrelated output that happens to still carry it forward.
+        sudoPromptTail.clear();
+    } else {
+        sudoPromptTail = combined.right(qMin(combined.size(), maxSudoPromptTail));
+    }
+#endif
     outputRenderer.append(output);
 }
 
@@ -1185,12 +1755,27 @@ void MainWindow::setConnections()
     connect(ui->searchBoxFlatpak, &QLineEdit::textChanged, this, &MainWindow::findPackage);
     connect(ui->searchBoxSnap, &QLineEdit::textChanged, this, &MainWindow::findPackage);
     connect(ui->searchBoxSnap, &QLineEdit::returnPressed, this, &MainWindow::searchSnapStore);
+#ifdef PACKAGE_BACKEND_PACMAN
+    // Unlike the other search boxes (client-side filtering of an already-loaded
+    // list), AUR search re-queries paru, so it's Enter-triggered rather than
+    // live-as-you-type; textChanged only handles resetting to the installed list
+    // when the box is cleared.
+    connect(ui->searchBoxAUR, &QLineEdit::returnPressed, this, [this] { handleAurTab(ui->searchBoxAUR->text()); });
+    connect(ui->searchBoxAUR, &QLineEdit::textChanged, this, [this](const QString &text) {
+        if (text.trimmed().isEmpty() && currentTree == ui->treeAUR) {
+            handleAurTab(QString());
+        }
+    });
+#endif
     // Connect combo filters
     connect(ui->comboFilterEnabled, &QComboBox::currentTextChanged, this, &MainWindow::filterChanged);
     connect(ui->comboFilterMX, &QComboBox::currentTextChanged, this, &MainWindow::filterChanged);
     connect(ui->comboFilterBP, &QComboBox::currentTextChanged, this, &MainWindow::filterChanged);
     connect(ui->comboFilterFlatpak, &QComboBox::currentTextChanged, this, &MainWindow::filterChanged);
     connect(ui->comboFilterSnap, &QComboBox::currentTextChanged, this, &MainWindow::filterChanged);
+#ifdef PACKAGE_BACKEND_PACMAN
+    connect(ui->comboFilterAUR, &QComboBox::currentTextChanged, this, &MainWindow::filterChanged);
+#endif
 
     // Connect other UI elements to their respective slots
     connect(ui->checkHideLibs, &QCheckBox::toggled, this, &MainWindow::checkHideLibs_toggled);
@@ -1202,6 +1787,20 @@ void MainWindow::setConnections()
     connect(ui->comboUser, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
             &MainWindow::comboUser_currentIndexChanged);
     connect(ui->lineEdit, &QLineEdit::returnPressed, this, &MainWindow::lineEdit_returnPressed);
+#ifdef PACKAGE_BACKEND_PACMAN
+    if (!lineEditToggleMaskAction) {
+        const QIcon hiddenIcon = QIcon::fromTheme("view-hidden", QIcon::fromTheme("view-visible"));
+        lineEditToggleMaskAction = ui->lineEdit->addAction(hiddenIcon, QLineEdit::TrailingPosition);
+        lineEditToggleMaskAction->setCheckable(true);
+        lineEditToggleMaskAction->setToolTip(tr("Show/hide input"));
+        connect(lineEditToggleMaskAction, &QAction::toggled, this, [this](bool checked) { setLineEditMasked(checked); });
+
+        const QIcon clearIcon = QIcon::fromTheme("edit-clear");
+        lineEditClearAction = ui->lineEdit->addAction(clearIcon, QLineEdit::TrailingPosition);
+        lineEditClearAction->setToolTip(tr("Clear input"));
+        connect(lineEditClearAction, &QAction::triggered, ui->lineEdit, &QLineEdit::clear);
+    }
+#endif
     connect(ui->pushAbout, &QPushButton::clicked, this, &MainWindow::pushAbout_clicked);
     connect(ui->pushCancel, &QPushButton::clicked, this, &MainWindow::pushCancel_clicked);
     connect(ui->pushEnter, &QPushButton::clicked, this, &MainWindow::pushEnter_clicked);
@@ -1209,6 +1808,9 @@ void MainWindow::setConnections()
     connect(ui->pushForceUpdateEnabled, &QPushButton::clicked, this, &MainWindow::pushForceUpdateEnabled_clicked);
     connect(ui->pushForceUpdateMX, &QPushButton::clicked, this, &MainWindow::pushForceUpdateMX_clicked);
     connect(ui->pushForceUpdateFP, &QPushButton::clicked, this, &MainWindow::pushForceUpdateFP_clicked);
+#ifdef PACKAGE_BACKEND_PACMAN
+    connect(ui->pushForceUpdateAUR, &QPushButton::clicked, this, &MainWindow::pushForceUpdateAUR_clicked);
+#endif
     connect(ui->pushHelp, &QPushButton::clicked, this, &MainWindow::pushHelp_clicked);
     connect(ui->pushInstall, &QPushButton::clicked, this, &MainWindow::pushInstall_clicked);
     connect(ui->pushRemotes, &QPushButton::clicked, this, &MainWindow::pushRemotes_clicked);
@@ -1226,6 +1828,9 @@ void MainWindow::setConnections()
     connect(headerEnabled, &CheckableHeaderView::toggled, this, &MainWindow::selectAllUpgradable_toggled);
     connect(headerMX, &CheckableHeaderView::toggled, this, &MainWindow::selectAllUpgradable_toggled);
     connect(headerBP, &CheckableHeaderView::toggled, this, &MainWindow::selectAllUpgradable_toggled);
+#ifdef PACKAGE_BACKEND_PACMAN
+    connect(headerAUR, &CheckableHeaderView::toggled, this, &MainWindow::selectAllUpgradable_toggled);
+#endif
 
     // Connect popular apps tree view
     connect(ui->treePopularApps, &QTreeView::customContextMenuRequested, this,
@@ -1407,6 +2012,18 @@ void MainWindow::displayPackages()
         currentTree->setUpdatesEnabled(false);
     }
 
+#ifdef PACKAGE_BACKEND_PACMAN
+    if (currentTree == ui->treeEnabled && installedPackages.isEmpty()) {
+        // installedPackages ("pacman -Qi") may still be in flight from the startup
+        // preload (see the constructor) -- if so, createPackageDataList()'s merge of
+        // installed-but-not-in-repo packages below silently finds nothing to add.
+        // Remember that so the installedPackages fetch's own completion can redo this
+        // render once the data it was missing has actually arrived (see
+        // enabledReposRenderedWithoutInstalled's declaration).
+        enabledReposRenderedWithoutInstalled = true;
+    }
+#endif
+
     // Build package data list and set on model
     QVector<PackageData> packages = createPackageDataList(list);
     model->setPackageData(packages);
@@ -1433,18 +2050,38 @@ void MainWindow::displayPackages()
     emit displayPackagesFinished();
 }
 
+#ifdef PACKAGE_BACKEND_PACMAN
+// See enabledReposRenderedWithoutInstalled's declaration: called once installedPackages
+// ("pacman -Qi") actually lands, from the constructor's fetch completion.
+void MainWindow::handleInstalledPackagesArrived()
+{
+    if (!enabledReposRenderedWithoutInstalled) {
+        return;
+    }
+    // The Enabled Repos view already rendered once (see displayPackages()) while this
+    // fetch was still in flight, so createPackageDataList()'s merge of
+    // installed-but-not-in-repo packages silently found nothing to add. Force the next
+    // render of that tab to redo the merge now that the data is here -- dirtyEnabledRepos
+    // makes handleEnabledReposTab() go back through buildPackageLists()/displayPackages()
+    // instead of taking the "nothing changed" fast path, whether that happens right now
+    // (still on the tab) or on a later visit (dirtyEnabledRepos persists until then).
+    enabledReposRenderedWithoutInstalled = false;
+    dirtyEnabledRepos = true;
+    if (currentTree == ui->treeEnabled) {
+        handleEnabledReposTab(ui->searchBoxEnabled->text());
+    }
+}
+#endif
+
 void MainWindow::displayAutoremovable()
 {
-    const QString aptOut = cmd.getOut("LANG=C apt-get --dry-run autoremove");
-    QStringList names;
-    for (const QString &line : aptOut.split('\n', Qt::SkipEmptyParts)) {
-        if (line.startsWith("Remv ")) {
-            const QString pkg = line.section(' ', 1, 1, QString::SectionSkipEmpty);
-            if (!pkg.isEmpty()) {
-                names << pkg;
-            }
-        }
+#ifdef PACKAGE_BACKEND_PACMAN
+    if (skipInitialAutoremovableCheck) {
+        skipInitialAutoremovableCheck = false;
+        return;
     }
+#endif
+    const QStringList names = PackageBackend::autoremovableCandidates(cmd);
 
     ui->pushRemoveAutoremovable->setVisible(!names.isEmpty());
     if (names.isEmpty()) {
@@ -1469,6 +2106,11 @@ MainWindow::AptTabContext MainWindow::currentAptTab()
     if (currentTree == ui->treeEnabled) {
         return {enabledModel, enabledProxy, &enabledList};
     }
+#ifdef PACKAGE_BACKEND_PACMAN
+    if (currentTree == ui->treeAUR) {
+        return {aurModel, aurProxy, &aurList};
+    }
+#endif
     return {};
 }
 
@@ -1491,6 +2133,24 @@ QHash<QString, PackageInfo> *MainWindow::getCurrentList()
 QVector<PackageData> MainWindow::createPackageDataList(QHash<QString, PackageInfo> *list) const
 {
     QVector<PackageData> packages;
+
+#ifdef PACKAGE_BACKEND_PACMAN
+    // aurList is a small, deliberately curated view (either the installed-from-AUR
+    // set or live search results) -- not "every AUR package", unlike enabledList's
+    // repo-wide candidate set. Merging in every other installed package here (the
+    // way the repo tabs do, to surface installed packages missing from their repo
+    // candidate list) would flood the AUR tab with every native package instead.
+    if (currentTree == ui->treeAUR) {
+        packages.reserve(list->size());
+        for (const auto &[name, info] : std::as_const(*list).asKeyValueRange()) {
+            PackageData pkg = createPackageData(name, info.version, info.description);
+            pkg.fromRepo = true;
+            packages.append(pkg);
+        }
+        return packages;
+    }
+#endif
+
     packages.reserve(list->size() + installedPackages.size());
 
     for (const auto &[name, info] : std::as_const(*list).asKeyValueRange()) {
@@ -1543,6 +2203,25 @@ void MainWindow::displayFlatpaks(bool forceUpdate)
         return;
     }
 
+    // Every synchronous Flatpak (re)load -- comboRemote_activated(), comboUser_
+    // currentIndexChanged(), etc. -- goes through here, so bumping the generation
+    // here covers all of them uniformly. This runs to completion before returning
+    // control to the event loop, so no comparison against the old value is needed
+    // on this path; it just needs to invalidate any older async completion still in
+    // flight from the constructor's Flatpak startup preload (see there).
+    ++flatpakRequestGeneration;
+
+#ifdef MXPI_TESTING
+    // testSkipFlatpakPreload (see the MXPI_TESTING constructor overload):
+    // Testing/test_mainwindow.cpp needs to verify this function bumps the
+    // generation as its first action without going on to touch real flatpak
+    // remotes -- loadFlatpakData()'s "flatpak update --appstream" fallback can
+    // genuinely reach the network, which a test run must not do.
+    if (testSkipFlatpakPreload) {
+        return;
+    }
+#endif
+
     setupFlatpakDisplay();
     loadFlatpakData();
     populateFlatpakTree();
@@ -1589,7 +2268,27 @@ void MainWindow::setupFlatpakDisplay()
 
 void MainWindow::loadFlatpakData()
 {
-    flatpaks = listFlatpaks(ui->comboRemote->currentText());
+    const QStringList remoteEntries = listFlatpaks(ui->comboRemote->currentText(), fpUser);
+
+    // Optimize: Get all installed packages with one command (ref + size), then split by type
+    QScopedValueRollback<bool> guard(suppressCmdOutput, true);
+    const QStringList allInstalled
+        = cmd.getOut("flatpak", flatpakArgsWithScope(fpUser, {"list", "--columns=ref,size"}), Cmd::QuietMode::No,
+                     /*discardStderr=*/true)
+              .split('\n', Qt::SkipEmptyParts);
+
+    processFlatpakData(remoteEntries, allInstalled, fpUser);
+}
+
+// Turns already-fetched remote-ls/list output into the member state populateFlatpakTree()
+// renders. Split out from loadFlatpakData() so the startup preload can run the two
+// subprocess calls above on a background thread (via local Cmd instances) and hand the
+// raw results here to finish on the GUI thread -- this part is pure string processing,
+// safe either way, but the member writes need to happen on the GUI thread.
+void MainWindow::processFlatpakData(const QStringList &remoteEntries, const QStringList &allInstalled,
+                                    const QString &scope)
+{
+    flatpaks = remoteEntries;
     flatpaksApps.clear();
     flatpaksRuntimes.clear();
     QSet<QString> installedCanonical;
@@ -1598,12 +2297,8 @@ void MainWindow::loadFlatpakData()
     cachedInstalledScope.clear();
     cachedInstalledFetched = false;
 
-    // Optimize: Get all installed packages with one command (ref + size), then split by type
-    const QString allInstalledCommand = QStringLiteral("flatpak list ") + fpUser + QStringLiteral("2>/dev/null --columns=ref,size");
-    QScopedValueRollback<bool> guard(suppressCmdOutput, true);
-    const QStringList allInstalled = cmd.getOut(allInstalledCommand, Cmd::QuietMode::No).split('\n', Qt::SkipEmptyParts);
     cachedInstalledFlatpaks = allInstalled;
-    cachedInstalledScope = fpUser;
+    cachedInstalledScope = scope;
     cachedInstalledFetched = true;
 
     // Clear and reserve space for better performance
@@ -1815,6 +2510,14 @@ void MainWindow::displayWarning(const QString &repo)
         msg = tr("Debian includes this repository of flatpaks for the users' convenience only, and "
                  "is not responsible for the functionality of the individual flatpaks themselves. "
                  "For more, consult flatpaks in the Wiki.");
+#ifdef PACKAGE_BACKEND_PACMAN
+    } else if (repo == QLatin1String("aur")) {
+        displayed = &warningAur;
+        key = QStringLiteral("NoWarningAur");
+        msg = tr("You are about to use the AUR, which contains user-contributed packages. "
+                 "These packages are not vetted by the distribution, may be outdated, and could "
+                 "contain malicious or broken build scripts. Use with care.");
+#endif
     }
     if ((displayed == nullptr) || *displayed || settings.value(key, false).toBool()) {
         return;
@@ -1822,11 +2525,11 @@ void MainWindow::displayWarning(const QString &repo)
 
     QMessageBox msgBox(QMessageBox::Warning, tr("Warning"), msg);
     msgBox.addButton(QMessageBox::Close);
-    auto *cb = new QCheckBox();
+    auto *cb = new QCheckBox(tr("Do not show this message again"));
     msgBox.setCheckBox(cb);
-    cb->setText(tr("Do not show this message again"));
-    connect(cb, &QCheckBox::clicked, this, [this, key, cb] { settings.setValue(key, cb->isChecked()); });
     msgBox.exec();
+    settings.setValue(key, cb->isChecked());
+    settings.sync();
     *displayed = true;
 }
 
@@ -1849,7 +2552,6 @@ void MainWindow::listFlatpakRemotes() const
     QString currentRemote = ui->comboRemote->currentText();
     ui->comboRemote->blockSignals(true);
     ui->comboRemote->clear();
-    const bool isUserScope = fpUser.startsWith(QLatin1String("--user"));
 
     auto applyRemotes = [&](const QStringList &list) {
         ui->comboRemote->addItems(list);
@@ -1863,47 +2565,8 @@ void MainWindow::listFlatpakRemotes() const
         return;
     }
 
-    auto fetchRemotes = [this](QStringList &outList) {
-        Cmd shell;
-        outList = shell.getOut("flatpak", flatpakArgsWithScope(fpUser, {"remote-list", "--columns=name"}))
-                      .split('\n', Qt::SkipEmptyParts);
-        for (QString &name : outList) {
-            name = name.trimmed();
-        }
-        outList.removeAll(QString());
-        return shell.exitCode() == 0;
-    };
-
-    auto addUserRemotes = []() {
-        Cmd addRemotes;
-        return runMxpiLib(addRemotes, QStringLiteral("flatpak_add_repos_user"));
-    };
-
-    QStringList list;
-    bool listOk = fetchRemotes(list);
-
-    // If user scope listing failed (common when user has never set up flatpak), attempt to set up defaults
-    if (!listOk && isUserScope) {
-        qDebug() << "User remote-list failed; attempting to set up user remotes";
-        if (addUserRemotes()) {
-            listOk = fetchRemotes(list);
-        }
-    }
-
-    // If no user remotes exist, set up the default ones
-    if (list.isEmpty() && isUserScope) {
-        qDebug() << "No flatpak remotes found for user, setting up default remotes";
-
-        if (addUserRemotes()) {
-            qDebug() << "Successfully set up flatpak remotes for user";
-
-            // Re-fetch the remote list after setup
-            listOk = fetchRemotes(list);
-        } else {
-            qDebug() << "Failed to set up flatpak remotes for user";
-        }
-    }
-
+    bool listOk = false;
+    const QStringList list = fetchFlatpakRemotes(fpUser, &listOk);
     if (!listOk) {
         ui->comboRemote->blockSignals(false);
         return;
@@ -1920,45 +2583,86 @@ bool MainWindow::confirmActions(const QString &names, const QString &action)
 {
     qDebug() << "+++" << __PRETTY_FUNCTION__ << "+++";
     qDebug() << "names" << names << "and" << changeList;
+
+#ifdef PACKAGE_BACKEND_PACMAN
+    Q_UNUSED(action);
+    // No apt-get -s/aptitude dependency-simulation equivalent on this backend;
+    // pacman would need to actually resolve/download to preview what it'd do, so
+    // just confirm the explicit selection instead.
+    QMessageBox msgBox;
+    msgBox.setText("<b>" + tr("The following packages were selected. Click Show Details for list of changes.")
+                   + "</b>");
+    msgBox.setInformativeText('\n' + names);
+    msgBox.setDetailedText(changeList.join('\n'));
+    msgBox.addButton(QMessageBox::Ok);
+    msgBox.addButton(QMessageBox::Cancel);
+
+    constexpr int PacmanDialogMinWidth = 600;
+    auto *pacmanSpacer = new QSpacerItem(PacmanDialogMinWidth, 0, QSizePolicy::Minimum, QSizePolicy::Expanding);
+    if (auto *pacmanLayout = qobject_cast<QGridLayout *>(msgBox.layout())) {
+        pacmanLayout->addItem(pacmanSpacer, 0, 1);
+    }
+    return msgBox.exec() == QMessageBox::Ok;
+#else
     QString msg;
 
     QString detailedNames;
     QStringList detailedInstalledNames;
     QString detailedToInstall;
     QString detailedRemovedNames;
-    QString recommends;
-    QString recommendsAptitude;
     QString aptitudeInfo;
 
-    const QString frontend {QStringLiteral("DEBIAN_FRONTEND=%1 LANG=C ").arg(debconfFrontend())};
-    const QString aptget {QStringLiteral("apt-get -s -V -o=Dpkg::Use-Pty=0 ")};
-    const QString aptitude {QStringLiteral("aptitude -sy -V -o=Dpkg::Use-Pty=0 ")};
+    // DEBIAN_FRONTEND/LANG only matter to apt-get/aptitude themselves, so they're
+    // scoped to just those pipeline stages below, not the grep/awk stages.
+    const QHash<QString, QString> debconfAndLangEnv {{"DEBIAN_FRONTEND", debconfFrontend()}, {"LANG", "C"}};
     if (currentTree == ui->treeFlatpak && names != QLatin1String("flatpak")) {
         detailedInstalledNames = changeList;
     } else {
         // Determine recommends flags and target based on current tab
         QCheckBox *recommendsCheck = ui->checkBoxInstallRecommends;
-        QString target;
-        QString reinstall = QStringLiteral("--reinstall ");
+        QStringList target;
+        bool reinstall = true;
         if (currentTree == ui->treeBackports) {
             recommendsCheck = ui->checkBoxInstallRecommendsBP;
-            target = "-t " + verName + "-backports ";
+            target = {"-t", verName + "-backports"};
         } else if (currentTree == ui->treeMXtest) {
             recommendsCheck = ui->checkBoxInstallRecommendsMX;
-            target = QStringLiteral("-t mx ");
-            reinstall.clear();
+            target = {"-t", "mx"};
+            reinstall = false;
         }
-        recommends = recommendsCheck->isChecked() ? "--install-recommends " : "--no-install-recommends ";
-        recommendsAptitude = recommendsCheck->isChecked() ? "--with-recommends " : "--without-recommends ";
+        const QString recommends = recommendsCheck->isChecked() ? QStringLiteral("--install-recommends")
+                                                                 : QStringLiteral("--no-install-recommends");
+        const QString recommendsAptitude = recommendsCheck->isChecked() ? QStringLiteral("--with-recommends")
+                                                                         : QStringLiteral("--without-recommends");
+        const QStringList packageNames = names.split(QLatin1Char(' '), Qt::SkipEmptyParts);
 
-        const QString awkFilter =
-            R"lit(|grep 'Inst\|Remv' | awk '{V=""; P="";}; $3 ~ /^\[/ { V=$3 }; $3 ~ /^\(/ { P=$3 ")"}; $4 ~ /^\(/ {P=" => " $4 ")"};  {print $2 ";" V  P ";" $1}')lit";
-        detailedNames = cmd.getOut(
-            frontend + aptget + action + ' ' + recommends + target + reinstall + names + awkFilter);
+        // The AWK script below isolates the three fields the confirmation dialog
+        // needs (package name, version/parenthetical, install-or-remove marker)
+        // out of apt-get's -s simulation output; kept as a single literal argv
+        // element, exactly as it was a single shell-quoted argument before.
+        static const QString awkFilter =
+            QStringLiteral(R"awk({V=""; P="";}; $3 ~ /^\[/ { V=$3 }; $3 ~ /^\(/ { P=$3 ")"}; $4 ~ /^\(/ {P=" => " $4 ")"};  {print $2 ";" V  P ";" $1})awk");
+
+        QStringList aptArgs {"-s", "-V", "-o=Dpkg::Use-Pty=0", action, recommends};
+        aptArgs += target;
+        if (reinstall) {
+            aptArgs << QStringLiteral("--reinstall");
+        }
+        aptArgs += packageNames;
+
+        QString pipelineOutput;
+        cmd.pipeline({
+            {"apt-get", aptArgs, debconfAndLangEnv},
+            {"grep", {QStringLiteral("Inst\\|Remv")}},
+            {"awk", {awkFilter}},
+        }, &pipelineOutput);
+        detailedNames = pipelineOutput;
         {
-            const QStringList aptLines
-                = cmd.getOut(frontend + aptitude + action + ' ' + recommendsAptitude + target + names)
-                      .split('\n', Qt::KeepEmptyParts);
+            QStringList aptitudeArgs {"-sy", "-V", "-o=Dpkg::Use-Pty=0", action, recommendsAptitude};
+            aptitudeArgs += target;
+            aptitudeArgs += packageNames;
+            const QStringList aptLines = cmd.getOut(debconfAndLangEnv, QStringLiteral("aptitude"), aptitudeArgs)
+                                              .split('\n', Qt::KeepEmptyParts);
             if (aptLines.isEmpty()) {
                 aptitudeInfo.clear();
             } else if (aptLines.size() >= 2) {
@@ -2038,6 +2742,7 @@ bool MainWindow::confirmActions(const QString &names, const QString &action)
         layout->addItem(horizontalSpacer, 0, 1);
     }
     return msgBox.exec() == QMessageBox::Ok;
+#endif
 }
 
 bool MainWindow::install(const QString &names)
@@ -2058,6 +2763,75 @@ bool MainWindow::install(const QString &names)
         return true;
     }
     enableOutput();
+
+#ifdef PACKAGE_BACKEND_PACMAN
+    if (currentTree == ui->treeAUR) {
+        // AUR packages are built unprivileged (makepkg/paru refuse to run as root),
+        // so this never goes through the privileged Cmd::procAsRoot path at all --
+        // no lock check either, since paru/pacman manage their own locking.
+        const QString paruPath = getParuPath();
+        if (paruPath.isEmpty()) {
+            QMessageBox::critical(this, tr("Error"),
+                                  tr("paru is not installed.\n\n"
+                                     "To install AUR packages, please install paru first:\n"
+                                     "pacman -S paru\n\n"
+                                     "Then try installing the AUR package again."));
+            return false;
+        }
+
+        QStringList paruArgs {"-S", "--needed"};
+        paruArgs += packageArgs(names);
+        const bool hasScript = QFile::exists("/usr/bin/script");
+
+        if (getuid() == 0) {
+            // If the app itself runs as root (e.g. WSL2 without a working pkexec),
+            // drop to a normal user for the build via `runuser -u` (no login shell),
+            // forcing a POSIX shell and that user's HOME so it doesn't depend on
+            // their login shell understanding inline VAR=val syntax. paru still
+            // elevates its own pacman step via sudo, prompting in the output box.
+            const QString buildUser = loginUserForRoot();
+            if (buildUser.isEmpty()) {
+                QMessageBox::critical(this, tr("Error"),
+                                      tr("AUR packages cannot be built as root, and no regular user could be "
+                                         "found to build as.\n\n"
+                                         "Install the package as your normal user instead."));
+                return false;
+            }
+            const QString home = homeDirForUser(buildUser);
+            QStringList envArgs;
+            if (!home.isEmpty()) {
+                envArgs << ("HOME=" + home);
+            }
+            envArgs << QStringLiteral("SHELL=/bin/sh") << QStringLiteral("LANG=C") << QStringLiteral("PAGER=cat")
+                    << QStringLiteral("PARU_PAGER=cat");
+
+            // runuser/env are both plain argv-vector execs (no shell involved), so this
+            // whole chain needs no quoting of its own -- except the innermost `script
+            // -qefc` argument, which is unavoidably a single string (see procOnPty()'s
+            // doc comment in cmd.h for why `script` itself has no argv-vector mode).
+            QStringList runuserArgs {"-u", buildUser, "--", "env"};
+            runuserArgs += envArgs;
+            if (hasScript) {
+                QStringList paruInvocation {paruPath};
+                paruInvocation += paruArgs;
+                runuserArgs << QStringLiteral("/usr/bin/script") << QStringLiteral("-qefc")
+                            << shellCommandFromArgs(paruInvocation) << QStringLiteral("/dev/null");
+            } else {
+                runuserArgs << paruPath;
+                runuserArgs += paruArgs;
+            }
+            return cmd.proc(QStringLiteral("runuser"), runuserArgs);
+        }
+
+        if (hasScript) {
+            QStringList envArgs {"LANG=C", "PAGER=cat", "PARU_PAGER=cat", paruPath};
+            envArgs += paruArgs;
+            return cmd.procOnPty(QStringLiteral("env"), envArgs);
+        }
+        return cmd.procWithEnv({{"LANG", "C"}, {"PAGER", "cat"}, {"PARU_PAGER", "cat"}}, paruPath, paruArgs);
+    }
+#endif
+
     if (lockFile.isLockedGUI()) {
         return false;
     }
@@ -2076,10 +2850,9 @@ bool MainWindow::install(const QString &names)
     }
 
     const QString recommends = recommendsCheck->isChecked() ? "--install-recommends" : "--no-install-recommends";
-    QStringList args {"-o=Dpkg::Use-Pty=0", "install", "-y", recommends};
-    args += extraArgs;
-    args += packageArgs(names);
-    return cmd.procAsRootWithEnv(debconfEnvironment(), "apt-get", args);
+    QStringList backendArgs {recommends};
+    backendArgs += extraArgs;
+    return PackageBackend::installPackages(cmd, packageArgs(names), backendArgs);
 }
 
 // Install a list of application and run postprocess for each of them.
@@ -2173,7 +2946,9 @@ bool MainWindow::installPopularApp(const QString &name)
         if (lockFile.isLockedGUI()) {
             return false;
         }
-        cmd.runHookAsRoot(postinstall);
+        if (!cmd.runHookAsRoot(postinstall)) {
+            result = false;
+        }
     }
     if (QFile::exists(tempList)) {
         Cmd helperCmd;
@@ -2297,9 +3072,7 @@ bool MainWindow::markKeep()
     ui->tabWidget->setTabEnabled(Tab::Output, true);
     QString names = changeList.join(' ');
     enableOutput();
-    QStringList args {"manual"};
-    args += packageArgs(names);
-    return cmd.procAsRoot("apt-mark", args);
+    return PackageBackend::markManuallyInstalled(cmd, packageArgs(names));
 }
 
 bool MainWindow::isOnline()
@@ -2315,7 +3088,8 @@ bool MainWindow::isOnline()
     // Set the timeout on the request itself so it applies to the very first HEAD;
     // setting it on the manager only affects requests started afterwards, and would
     // also leak the timeout onto later downloads that share this manager.
-    request.setTransferTimeout(std::chrono::milliseconds {settings.value("timeout", 7000).toInt()});
+    // int overload (msec); the std::chrono overload needs Qt >= 6.7, Bookworm has 6.4
+    request.setTransferTimeout(settings.value("timeout", 7000).toInt());
 
     for (const QString address : {"https://mxrepo.com", "https://google.com"}) {
         QNetworkProxyQuery query {QUrl(address)};
@@ -2353,8 +3127,13 @@ bool MainWindow::downloadFile(const QString &url, QFile &file)
     request.setAttribute(QNetworkRequest::RedirectPolicyAttribute, QNetworkRequest::NoLessSafeRedirectPolicy);
     request.setRawHeader("User-Agent", QApplication::applicationName().toUtf8() + '/'
                                            + QApplication::applicationVersion().toUtf8() + " (linux-gnu)");
+    // Bound stalled package-list transfers; the same setting is used by the
+    // connectivity probe above, while keeping this request-local for screenshots
+    // and other network operations sharing the manager.
+    request.setTransferTimeout(settings.value("timeout", 7000).toInt());
 
     downloadCancelRequested = false;
+    bool writeFailed = false;
     QNetworkReply *dlReply = manager.get(request);
     activeDownloadReply = dlReply;
     auto clearActiveReply = qScopeGuard([this, dlReply] {
@@ -2365,8 +3144,9 @@ bool MainWindow::downloadFile(const QString &url, QFile &file)
     });
     QEventLoop loop;
 
-    connect(dlReply, &QNetworkReply::readyRead, this, [&file, dlReply]() {
+    connect(dlReply, &QNetworkReply::readyRead, this, [&file, dlReply, &writeFailed]() {
         if (file.write(dlReply->readAll()) == -1) {
+            writeFailed = true;
             qDebug() << "Failed to write data to file:" << file.fileName();
             dlReply->abort();
             file.close();
@@ -2378,11 +3158,15 @@ bool MainWindow::downloadFile(const QString &url, QFile &file)
     file.close();
 
     if (dlReply->error() != QNetworkReply::NoError) {
-        if (dlReply->error() != QNetworkReply::OperationCanceledError || !downloadCancelRequested) {
-            QMessageBox::warning(this, tr("Error"),
-                                 tr("There was an error downloading or writing the file: %1. Please check your internet "
-                                    "connection and free space on your drive")
-                                     .arg(file.fileName()));
+        const bool timedOut = dlReply->error() == QNetworkReply::TimeoutError
+            || (dlReply->error() == QNetworkReply::OperationCanceledError && !downloadCancelRequested && !writeFailed);
+        if (!downloadCancelRequested || writeFailed) {
+            const QString message = timedOut
+                ? tr("The download timed out. Please check your internet connection and try again.")
+                : tr("There was an error downloading or writing the file: %1. Please check your internet connection "
+                     "and free space on your drive")
+                      .arg(file.fileName());
+            QMessageBox::warning(this, tr("Error"), message);
         }
         qDebug() << "There was an error downloading the file:" << url << "Error:" << dlReply->errorString();
         file.remove();
@@ -2406,9 +3190,9 @@ bool MainWindow::downloadAndUnzip(const QString &url, QFile &file)
 
     // Determine and execute unzip command based on file extension
     const QString fileExt = QFileInfo(file).suffix();
-    const QString unzipCommand = (fileExt == QLatin1String("gz")) ? QStringLiteral("gunzip -f ") : QStringLiteral("unxz -f ");
+    const QString unzipProgram = (fileExt == QLatin1String("gz")) ? QStringLiteral("gunzip") : QStringLiteral("unxz");
 
-    if (!cmd.run(unzipCommand + shellSingleQuote(file.fileName()))) {
+    if (!cmd.proc(unzipProgram, {"-f", file.fileName()})) {
         qDebug() << "Could not unzip file:" << file.fileName();
         file.remove();
         return false;
@@ -2433,6 +3217,13 @@ bool MainWindow::buildPackageLists(bool forceDownload)
     if (!downloadPackageList(forceDownload)) {
         ifDownloadFailed();
         return false;
+    }
+    if (displayPackagesIsRunning) {
+        // pacman only: downloadPackageList() kicked off a background fetch instead
+        // of completing inline. Its own completion callback finishes the job
+        // (readPackageList()+displayPackages()+dirty-flag reset) once the data is
+        // ready; nothing left to do here.
+        return true;
     }
     if (!readPackageList(forceDownload)) {
         ifDownloadFailed();
@@ -2465,7 +3256,6 @@ bool MainWindow::downloadPackageList(bool forceDownload)
         qDebug() << "Can't create temp folder";
         return false;
     }
-    QDir::setCurrent(tempDir.path());
     progress->setLabelText(tr("Downloading package info..."));
     pushCancel->setEnabled(true);
 
@@ -2475,6 +3265,73 @@ bool MainWindow::downloadPackageList(bool forceDownload)
         return ok;
     };
 
+#ifdef PACKAGE_BACKEND_PACMAN
+    // pacman has no local archive files to download/parse -- just (re-)query the
+    // sync DBs directly. Test/MX/Backports don't exist on this backend (those tabs
+    // are hidden), so there's nothing else for this function to do.
+    if (displayPackagesIsRunning) {
+        // A fetch is already in flight (e.g. a rapid rebuildPackageViews() call
+        // racing the startup preload) -- don't kick off a second concurrent
+        // "pacman -Ss", the one already running will refresh the data shortly.
+        return true;
+    }
+    if (enabledList.isEmpty() || forceDownload) {
+        if (forceDownload && !runUpdateApt()) {
+            return false;
+        }
+        // "pacman -Ss" dumps every package in the sync DBs (tens of thousands of
+        // lines) -- measured ~600-900ms on a full repo, enough to notice at boot
+        // since pacman's landing tab is Enabled Repos. pacmanAvailablePackages()
+        // uses its own local Cmd instance (not the shared member), so it's safe to
+        // run on a background thread, same as listInstalled()'s startup preload.
+        // buildPackageLists() (the only caller) checks displayPackagesIsRunning
+        // and returns without touching readPackageList()/displayPackages() itself
+        // when it's set -- this completion callback does that part once the data
+        // is ready, via a temporary currentTree swap (same idiom rebuildPackageViews()
+        // uses) so it targets Enabled Repos regardless of which tab is current by
+        // the time the fetch finishes.
+        displayPackagesIsRunning = true;
+        [[maybe_unused]] auto future = QtConcurrent::run(
+            [this, forceDownload, guardMutex = destructionGuardMutex, destructingFlag = destructing] {
+            bool ok = false;
+            auto loaded = pacmanAvailablePackages(&ok);
+            QMutexLocker locker(guardMutex.get());
+            if (*destructingFlag) {
+                return;
+            }
+            QMetaObject::invokeMethod(
+                this,
+                [this, ok, forceDownload, loaded = std::move(loaded)]() mutable {
+                    if (!ok) {
+                        displayPackagesIsRunning = false;
+                        emit displayPackagesFinished();
+                        QMessageBox::critical(this, tr("Error"),
+                                              tr("Could not download the list of packages. Please check your "
+                                                 "APT sources."));
+                        return;
+                    }
+                    enabledList = std::move(loaded);
+                    QTreeView *savedTree = currentTree;
+                    currentTree = ui->treeEnabled;
+                    // Always true for currentTree == treeEnabled (see readPackageList()'s
+                    // own early return); nothing to branch on, just satisfying [[nodiscard]].
+                    static_cast<void>(readPackageList(forceDownload));
+                    displayPackages(); // resets displayPackagesIsRunning and emits displayPackagesFinished
+                    dirtyEnabledRepos = false;
+                    currentTree = savedTree;
+                    if (currentTree == ui->treeEnabled) {
+                        // Still on (or back to) this tab -- redo the same "data just
+                        // became available" UI touches a synchronous load would have,
+                        // guarded by data-readiness so it's a no-op if not applicable.
+                        handleEnabledReposTab(ui->searchBoxEnabled->text());
+                    }
+                },
+                Qt::QueuedConnection);
+        });
+        return true;
+    }
+    return true;
+#else
     // Handle enabled list download/update
     if (enabledList.isEmpty() || forceDownload) {
         if (forceDownload && !runUpdateApt()) {
@@ -2540,7 +3397,7 @@ bool MainWindow::downloadPackageList(bool forceDownload)
 
             // Combine all package files
             pushCancel->setDisabled(true);
-            QFile outputFile("allPackages");
+            QFile outputFile(tempDir.filePath("allPackages"));
             if (!outputFile.open(QIODevice::WriteOnly | QIODevice::Text)) {
                 qWarning() << "Could not open:" << outputFile.fileName();
                 return false;
@@ -2565,6 +3422,7 @@ bool MainWindow::downloadPackageList(bool forceDownload)
         }
     }
     return true;
+#endif
 }
 
 void MainWindow::enableTabs(bool enable)
@@ -2584,7 +3442,11 @@ void MainWindow::enableTabs(bool enable)
 
 void MainWindow::hideColumns()
 {
+#ifdef PACKAGE_BACKEND_PACMAN
+    ui->tabWidget->setCurrentIndex(Tab::EnabledRepos);
+#else
     ui->tabWidget->setCurrentIndex(Tab::Popular);
+#endif
 
     const bool showFlatpakBranch = debianVersion < Release::Trixie;
     ui->treeFlatpak->setColumnHidden(FlatCol::Branch, !showFlatpakBranch);
@@ -2596,6 +3458,9 @@ void MainWindow::hideColumns()
     ui->treeFlatpak->hideColumn(FlatCol::FullName);
     ui->treeSnap->hideColumn(SnapCol::Status);
     ui->treeSnap->hideColumn(SnapCol::Classic);
+#ifdef PACKAGE_BACKEND_PACMAN
+    ui->treeAUR->hideColumn(TreeCol::Status);
+#endif
 }
 
 // Process downloaded *Packages.gz files
@@ -2630,28 +3495,7 @@ bool MainWindow::readPackageList(bool forceDownload)
     auto &targetMap = (currentTree == ui->treeMXtest) ? mxList : backportsList;
     targetMap.clear();
 
-    // Parse package information from the file
-    QTextStream stream(&file);
-    QString line, package, version, description;
-    while (stream.readLineInto(&line)) {
-        if (line.startsWith(QLatin1String("Package: "))) {
-            package = line.section(' ', 1);
-            if (!isValidPackageName(package)) {
-                qWarning() << "Skipping invalid package name in downloaded list:" << package;
-                package.clear();
-            }
-        } else if (line.startsWith(QLatin1String("Version: "))) {
-            version = line.section(' ', 1);
-        } else if (line.startsWith(QLatin1String("Description: "))) {
-            description = line.section(' ', 1);
-            if (!package.isEmpty()) {
-                targetMap.insert(package, {version, description});
-                package.clear();
-                version.clear();
-                description.clear();
-            }
-        }
-    }
+    targetMap = PackageListParser::parse(file.readAll());
 
     file.close();
     return true;
@@ -2667,7 +3511,9 @@ void MainWindow::cancelDownload()
         downloadCancelRequested = true;
         activeDownloadReply->abort();
     }
-    cmd.terminate();
+    if (!cmd.terminateAndKill()) {
+        qWarning() << "Could not terminate the active command";
+    }
 }
 
 void MainWindow::centerWindow()
@@ -2750,7 +3596,7 @@ void MainWindow::cleanup()
 
 QString MainWindow::getVersion(const QString &name) const
 {
-    return Cmd().getOut("LANG=C dpkg-query -f '${Version}' -W " + shellSingleQuote(name));
+    return Cmd().getOut({{"LANG", "C"}}, "dpkg-query", {"-f", "${Version}", "-W", name});
 }
 
 // Return true if all the packages listed are installed
@@ -2830,116 +3676,26 @@ bool MainWindow::checkUpgradable(const QStringList &nameList) const
 QHash<QString, PackageInfo> MainWindow::listInstalled()
 {
     qDebug() << "+++" << __PRETTY_FUNCTION__ << "+++";
-    Cmd shell;
-    const QString list
-        = shell.getOut("LANG=C dpkg-query -W -f='${db:Status-Abbrev} ${Package} ${Version} ${binary:Synopsis}\\n'");
-
-    if (shell.exitStatus() != QProcess::NormalExit || shell.exitCode() != 0) {
+    bool ok = false;
+    QHash<QString, PackageInfo> installedPackagesMap = PackageBackend::listInstalled(&ok);
+    if (!ok) {
         QMessageBox::critical(this, tr("Error"),
-                              tr("dpkg-query command returned an error. Please run 'dpkg-query -W' in terminal "
-                                 "and check the output."));
-        exit(EXIT_FAILURE);
+                              tr("The installed-package query returned an error. Please check the log for details."));
     }
-
-    QHash<QString, PackageInfo> installedPackagesMap;
-    const QString statusPrefix = QStringLiteral("ii ");
-    const auto lines = list.split('\n', Qt::SkipEmptyParts);
-
-    for (const QString &line : lines) {
-        if (!line.startsWith(statusPrefix)) {
-            continue;
-        }
-
-        const QStringList parts = line.mid(statusPrefix.length()).split(' ', Qt::SkipEmptyParts);
-        if (parts.size() < 2) {
-            continue;
-        }
-
-        const QString packageName = parts.at(0);
-        const QString version = parts.at(1);
-        const QString description = parts.size() > 2 ? parts.mid(2).join(' ') : QString();
-
-        installedPackagesMap.insert(packageName, {version, description});
-    }
-
     return installedPackagesMap;
 }
 
-QStringList MainWindow::listFlatpaks(const QString &remote, const QString &type) const
+// scope is taken explicitly (not read from the fpUser member) so this can be called
+// safely from a background thread without racing a concurrent write to fpUser from the
+// GUI thread. The actual work lives in the free function listFlatpaksImpl() above --
+// this member function only exists to supply the arch option via getArchOption(),
+// which reads this->arch and so must run on the GUI thread; the constructor's Flatpak
+// catalog preload calls listFlatpaksImpl() directly from its worker thread instead,
+// with the arch option precomputed on the GUI thread and passed in by value.
+QStringList MainWindow::listFlatpaks(const QString &remote, const QString &fpUserScope, const QString &type) const
 {
     qDebug() << "+++" << __PRETTY_FUNCTION__ << "+++";
-
-    QString archFp = getArchOption();
-    if (archFp.isEmpty()) {
-        return {};
-    }
-
-    // Check if remote parameter is empty (which would happen if no remotes are configured)
-    if (remote.isEmpty()) {
-        qDebug() << "Remote parameter is empty - no flatpak remotes configured for user";
-        return {};
-    }
-
-    const bool isUserScope = fpUser.startsWith(QLatin1String("--user"));
-
-    auto buildRemoteLsCommand = [&](const QString &scope) {
-        return QStringLiteral("flatpak remote-ls ") + scope + remote + ' ' + archFp + QStringLiteral("--columns=ver,branch,ref,installed-size ");
-    };
-
-    QString typeFlag;
-    if (type == QLatin1String("--app")) {
-        typeFlag = QStringLiteral("--app ");
-    } else if (type == QLatin1String("--runtime")) {
-        typeFlag = QStringLiteral("--runtime ");
-    }
-    const QString commandSuffix = typeFlag + "2>/dev/null";
-
-    // Construct the base command for listing flatpaks
-    QString baseCommand = buildRemoteLsCommand(fpUser) + commandSuffix;
-
-    auto runRemoteLs = [](const QString &command) {
-        Cmd shell;
-        QStringList output;
-        if (shell.run(command)) {
-            output = shell.readAllOutput().split('\n', Qt::SkipEmptyParts);
-        }
-        return output;
-    };
-
-    // Execute the command and process the output
-    QStringList list = runRemoteLs(baseCommand);
-
-    if (list.isEmpty()) {
-        qDebug() << QString("Could not list packages from %1 remote, attempting to update remote").arg(remote);
-
-        // Try to update the remote if it's empty
-        QString updateCommand = QStringLiteral("flatpak update ") + fpUser + QStringLiteral("--appstream ") + remote + QStringLiteral(" 2>/dev/null");
-        qDebug() << "Running remote update command:" << updateCommand;
-
-        Cmd updateShell;
-        if (updateShell.run(updateCommand)) {
-            qDebug() << "Remote update completed, retrying package list";
-
-            // Retry the original command after update
-            list = runRemoteLs(baseCommand);
-            if (!list.isEmpty()) {
-                qDebug() << QString("Successfully retrieved %1 packages after remote update").arg(list.size());
-            } else {
-                qDebug() << QString("Remote %1 still empty after update").arg(remote);
-            }
-        } else {
-            qDebug() << "Failed to update remote" << remote;
-        }
-    }
-
-    // If user scope returned nothing (e.g. only system remotes exist), fall back to system remotes for listing
-    if (list.isEmpty() && isUserScope) {
-        const QString systemCommand = buildRemoteLsCommand(QStringLiteral("--system ")) + commandSuffix;
-        qDebug() << "User remotes empty; retrying flatpak listing using system remotes:" << systemCommand;
-        list = runRemoteLs(systemCommand);
-    }
-
-    return list;
+    return listFlatpaksImpl(remote, fpUserScope, getArchOption(), type);
 }
 
 // List installed flatpaks by type: apps, runtimes, or all (if no type is provided)
@@ -2949,9 +3705,13 @@ QStringList MainWindow::listInstalledFlatpaks(const QString &type)
     if (cachedInstalledScope == fpUser && cachedInstalledFetched) {
         lines = cachedInstalledFlatpaks;
     } else {
-        const QString command = QStringLiteral("flatpak list ") + fpUser + QStringLiteral("2>/dev/null ") + type + QStringLiteral(" --columns=ref");
+        QStringList args = flatpakArgsWithScope(fpUser, {"list"});
+        if (!type.isEmpty()) {
+            args << type;
+        }
+        args << QStringLiteral("--columns=ref");
         QScopedValueRollback<bool> guard(suppressCmdOutput, true);
-        lines = cmd.getOut(command, Cmd::QuietMode::No).split('\n', Qt::SkipEmptyParts);
+        lines = cmd.getOut("flatpak", args, Cmd::QuietMode::No, /*discardStderr=*/true).split('\n', Qt::SkipEmptyParts);
 
         if (type.isEmpty()) {
             cachedInstalledFlatpaks = lines;
@@ -2993,8 +3753,12 @@ PackageData MainWindow::createPackageData(const QString &name, const QString &ve
 void MainWindow::setCurrentTree()
 {
     qDebug() << "+++" << __PRETTY_FUNCTION__ << "+++";
-    const QList<QTreeView *> trees
-        = {ui->treePopularApps, ui->treeEnabled, ui->treeMXtest, ui->treeBackports, ui->treeFlatpak, ui->treeSnap};
+    const QList<QTreeView *> trees = {
+        ui->treePopularApps, ui->treeEnabled, ui->treeMXtest, ui->treeBackports, ui->treeFlatpak, ui->treeSnap,
+#ifdef PACKAGE_BACKEND_PACMAN
+        ui->treeAUR,
+#endif
+    };
 
     auto it = std::find_if(trees.cbegin(), trees.cend(), [](const QTreeView *tree) { return tree->isVisible(); });
 
@@ -3066,26 +3830,11 @@ void MainWindow::setIcons()
 QHash<QString, VersionNumber> MainWindow::listInstalledVersions()
 {
     qDebug() << "+++" << __PRETTY_FUNCTION__ << "+++";
-    QHash<QString, VersionNumber> installedVersions;
-    Cmd shell;
-    const QString command = QStringLiteral("LANG=C dpkg-query -W -f='${db:Status-Abbrev} ${Package} ${Version}\\n'");
-    const QStringList packageList = shell.getOut(command, Cmd::QuietMode::Yes).split('\n', Qt::SkipEmptyParts);
-
-    if (shell.exitStatus() != QProcess::NormalExit || shell.exitCode() != 0) {
-        QMessageBox::critical(
-            this, tr("Error"),
-            tr("dpkg-query command returned an error, please run 'dpkg-query -W' in terminal and check the output."));
-        return installedVersions;
-    }
-    for (const QString &line : packageList) {
-        const QString statusPrefix = QStringLiteral("ii ");
-        if (!line.startsWith(statusPrefix)) {
-            continue;
-        }
-        const QStringList packageInfo = line.mid(statusPrefix.length()).split(' ', Qt::SkipEmptyParts);
-        if (packageInfo.size() == 2) {
-            installedVersions.insert(packageInfo.at(0), VersionNumber(packageInfo.at(1)));
-        }
+    bool ok = false;
+    QHash<QString, VersionNumber> installedVersions = PackageBackend::listInstalledVersions(&ok);
+    if (!ok) {
+        QMessageBox::critical(this, tr("Error"),
+                              tr("The installed-package query returned an error. Please check the log for details."));
     }
     return installedVersions;
 }
@@ -3099,11 +3848,19 @@ QUrl MainWindow::getScreenshotUrl(const QString &name)
         manager.setProxy(proxies.first());
     }
 
-    QNetworkReply *screenshotReply = manager.get(QNetworkRequest(url));
+    QNetworkRequest request(url);
+    // Bounds the request (Qt aborts it and emits finished() with
+    // QNetworkReply::TimeoutError if it fires), so the error() check below
+    // correctly distinguishes a timeout from a genuine successful reply --
+    // unlike a bare QTimer::singleShot() that only quits the event loop
+    // without touching the still in-flight reply. Use the int-milliseconds
+    // overload: the std::chrono one needs Qt 6.7+, and this project doesn't
+    // pin a Qt minimum above 6.4.
+    request.setTransferTimeout(5000);
+    QNetworkReply *screenshotReply = manager.get(request);
 
     QEventLoop loop;
     connect(screenshotReply, &QNetworkReply::finished, &loop, &QEventLoop::quit);
-    QTimer::singleShot(5s, &loop, &QEventLoop::quit);
     loop.exec();
 
     if (screenshotReply->error() != QNetworkReply::NoError) {
@@ -3144,6 +3901,13 @@ void MainWindow::cmdDone()
     timer.stop();
     setCursor(QCursor(Qt::ArrowCursor));
     disableOutput();
+#ifdef PACKAGE_BACKEND_PACMAN
+    // Reset any pending partial-match carry-over so leftover text from this
+    // command's last chunk (e.g. an unmatched trailing "...sudo") can't combine
+    // with an unrelated later command's output and produce a false sudo-prompt
+    // match in outputAvailable().
+    sudoPromptTail.clear();
+#endif
     if (!holdProgressForFlatpakRefresh && !holdProgressForAptRefresh) {
         progress->hide();
     }
@@ -3240,8 +4004,11 @@ void MainWindow::displayPackageInfo(QTreeView *tree, QPoint pos)
 
     // treePopularApps is handled by treePopularApps_customContextMenuRequested; this
     // path only serves the APT trees (Enabled repos, MX Test, Backports).
-    auto *action = new QAction(QIcon::fromTheme("dialog-information"), tr("More &info..."), this);
     QMenu menu(this);
+    // Parented to &menu (not this) so it's destroyed along with the menu below --
+    // QMenu::addAction(QAction*) doesn't take ownership, so parenting to the
+    // long-lived MainWindow would leak one QAction per invocation.
+    auto *action = new QAction(QIcon::fromTheme("dialog-information"), tr("More &info..."), &menu);
     menu.addAction(action);
     if (tree == ui->treeEnabled) {
         connect(action, &QAction::triggered, this, [this, currentIdx] { displayPackageInfo(currentIdx); });
@@ -3282,11 +4049,17 @@ void MainWindow::displayPopularInfo(const QModelIndex &index)
         if (!proxies.isEmpty()) {
             manager.setProxy(proxies.first());
         }
-        QNetworkReply *imgReply = manager.get(QNetworkRequest(url));
+        QNetworkRequest imgRequest(url);
+        // See getScreenshotUrl(): setTransferTimeout() makes Qt abort the
+        // reply itself and surface QNetworkReply::TimeoutError if the timer
+        // fires, so the error() check below (and thus the retry path)
+        // correctly treats a timeout the same as any other failed fetch,
+        // instead of reading/decoding a reply that may still be in flight.
+        imgRequest.setTransferTimeout(5000);
+        QNetworkReply *imgReply = manager.get(imgRequest);
 
         QEventLoop loop;
         connect(imgReply, &QNetworkReply::finished, &loop, &QEventLoop::quit);
-        QTimer::singleShot(5s, &loop, &QEventLoop::quit);
         ui->treePopularApps->blockSignals(true);
         loop.exec();
         ui->treePopularApps->blockSignals(false);
@@ -3297,9 +4070,10 @@ void MainWindow::displayPopularInfo(const QModelIndex &index)
             imgReply = nullptr;
             url = getScreenshotUrl(installNames.split(' ').first());
             if (url.isValid() && !url.isEmpty() && url.url() != QLatin1String("none")) {
-                imgReply = manager.get(QNetworkRequest(url));
+                QNetworkRequest retryRequest(url);
+                retryRequest.setTransferTimeout(5000);
+                imgReply = manager.get(retryRequest);
                 connect(imgReply, &QNetworkReply::finished, &loop, &QEventLoop::quit);
-                QTimer::singleShot(5s, &loop, &QEventLoop::quit);
                 ui->treePopularApps->blockSignals(true);
                 loop.exec();
                 ui->treePopularApps->blockSignals(false);
@@ -3336,6 +4110,21 @@ void MainWindow::displayPackageInfo(const QModelIndex &index)
         return;
     }
 
+#ifdef PACKAGE_BACKEND_PACMAN
+    if (currentTree == ui->treeAUR) {
+        showAurPackageInfo(packageName);
+        return;
+    }
+    // No aptitude/dependency-simulation equivalent on this backend; pacman's own
+    // info covers the same purpose for the Enabled Repos tab.
+    Cmd shell;
+    QString info = shell.getOut({{"LANG", "C"}}, "pacman", {"-Si", "--color", "never", packageName});
+    if (shell.exitStatus() != QProcess::NormalExit || shell.exitCode() != 0 || info.trimmed().isEmpty()) {
+        info = shell.getOut({{"LANG", "C"}}, "pacman", {"-Qi", "--color", "never", packageName});
+    }
+    QMessageBox::information(this, tr("Package info"),
+                             info.trimmed().isEmpty() ? tr("No information available.") : info.trimmed());
+#else
     QString msg;
     QString rawDetails;
     {
@@ -3349,8 +4138,13 @@ void MainWindow::displayPackageInfo(const QModelIndex &index)
             QApplication::restoreOverrideCursor();
             setEnabled(true);
         });
-        msg = cmd.getOut("aptitude show " + shellSingleQuote(packageName));
-        // Keep last 5 lines from aptitude output
+        msg = cmd.getOut(QStringLiteral("aptitude"), {"show", packageName});
+        // Keep last 5 lines from aptitude output. DEBIAN_FRONTEND here is picked by a
+        // small conditional pipeline (dpkg -l | grep -sq, twice, with || fallback) that
+        // runs *inside* the target environment being queried -- faithfully replicating
+        // that command-substitution-plus-branching in C++ would mean reimplementing
+        // non-trivial shell semantics for no real benefit, so this one is deliberately
+        // left as a shell string rather than converted to argv-vector calls.
         rawDetails = cmd.getOut("DEBIAN_FRONTEND=$(dpkg -l debconf-kde-helper 2>/dev/null | grep -sq ^i && echo kde "
                                 "|| dpkg -l debconf-gnome 2>/dev/null | grep -sq ^i && echo gnome "
                                 "|| echo noninteractive) aptitude -sy -V -o=Dpkg::Use-Pty=0 install "
@@ -3382,6 +4176,7 @@ void MainWindow::displayPackageInfo(const QModelIndex &index)
         layout->addItem(horizontalSpacer, 0, 1);
     }
     info.exec();
+#endif
 }
 
 void MainWindow::findPopular()
@@ -3553,11 +4348,11 @@ void MainWindow::pushInstall_clicked()
         }
         setCursor(QCursor(Qt::BusyCursor));
         enableOutput();
-        QStringList args {"flatpak", "install", "-y"};
+        QStringList args {"install", "-y"};
         args << fpUser.trimmed();
         args << ui->comboRemote->currentText();
         args += changeList;
-        if (cmd.run(flatpakPtyCommand(shellCommandFromArgs(args)))) {
+        if (cmd.procOnPty(QStringLiteral("flatpak"), args)) {
             appendFlatpakStatusMessage(ui->outputBox, tr("Install complete."));
             displayFlatpaks(true);
             indexFilterFP.clear();
@@ -3670,7 +4465,12 @@ void MainWindow::pushAbout_clicked()
 
 void MainWindow::pushHelp_clicked()
 {
+#ifdef PACKAGE_BACKEND_PACMAN
+    displayHelpDoc("/usr/share/doc/mx-packageinstaller/mx-package-installer-pacman.html",
+                   tr("%1 Help").arg(windowTitle()));
+#else
     displayHelpDoc("/usr/share/doc/mx-packageinstaller/mx-package-installer.html", tr("%1 Help").arg(windowTitle()));
+#endif
 }
 
 // Resize columns when expanding
@@ -3784,11 +4584,11 @@ void MainWindow::pushUninstall_clicked()
         setCursor(QCursor(Qt::BusyCursor));
         enableOutput();
         showFlatpakProgress(tr("Uninstalling flatpaks..."));
-        QStringList uninstallArgs {"flatpak", "uninstall"};
+        QStringList uninstallArgs {"uninstall"};
         uninstallArgs << fpUser.trimmed();
         uninstallArgs << "-y";
         uninstallArgs += changeList;
-        if (!cmd.run(flatpakPtyCommand(shellCommandFromArgs(uninstallArgs)))) {
+        if (!cmd.procOnPty(QStringLiteral("flatpak"), uninstallArgs)) {
             success = false;
         }
         if (success) { // Success if all processed successfuly, failure if one failed
@@ -3906,7 +4706,11 @@ void MainWindow::tabWidget_currentChanged(int index)
         }
 
         auto setTabsEnabled = [this](bool enable) {
-            for (auto tab : {Tab::Popular, Tab::EnabledRepos, Tab::Test, Tab::Backports, Tab::Flatpak, Tab::Snap}) {
+            for (auto tab : {Tab::Popular, Tab::EnabledRepos,
+#ifdef PACKAGE_BACKEND_PACMAN
+                             Tab::AUR,
+#endif
+                             Tab::Test, Tab::Backports, Tab::Flatpak, Tab::Snap}) {
                 if (tab != ui->tabWidget->currentIndex()) {
                     ui->tabWidget->setTabEnabled(tab, enable);
                 }
@@ -3921,6 +4725,11 @@ void MainWindow::tabWidget_currentChanged(int index)
         case Tab::EnabledRepos:
             handleEnabledReposTab(searchStr);
             break;
+#ifdef PACKAGE_BACKEND_PACMAN
+        case Tab::AUR:
+            handleAurTab(searchStr);
+            break;
+#endif
         case Tab::Test:
             handleTab(searchStr, ui->searchBoxMX, "test", dirtyTest);
             break;
@@ -3993,6 +4802,11 @@ void MainWindow::saveSearchText(QString &searchStr, int &filterIdx)
     } else if (currentTree == ui->treeBackports) {
         searchStr = ui->searchBoxBP->text();
         filterIdx = ui->comboFilterBP->currentIndex();
+#ifdef PACKAGE_BACKEND_PACMAN
+    } else if (currentTree == ui->treeAUR) {
+        searchStr = ui->searchBoxAUR->text();
+        filterIdx = ui->comboFilterAUR->currentIndex();
+#endif
     } else if (currentTree == ui->treeFlatpak) {
         searchStr = ui->searchBoxFlatpak->text();
     } else if (currentTree == ui->treeSnap) {
@@ -4071,6 +4885,190 @@ void MainWindow::handleEnabledReposTab(const QString &searchStr)
     }
 }
 
+#ifdef PACKAGE_BACKEND_PACMAN
+QString MainWindow::getParuPath()
+{
+    if (cachedParuPathFetched) {
+        return cachedParuPath;
+    }
+    cachedParuPath = QStandardPaths::findExecutable("paru");
+    if (cachedParuPath.isEmpty()) {
+        const QStringList fallbackPaths = {"/usr/bin/paru", "/bin/paru", "/usr/local/bin/paru"};
+        for (const QString &path : fallbackPaths) {
+            if (QFile::exists(path)) {
+                cachedParuPath = path;
+                break;
+            }
+        }
+    }
+    cachedParuPathFetched = true;
+    return cachedParuPath;
+}
+
+// Populates aurList: with an empty search term, the AUR-origin ("foreign") installed
+// packages, showing an available-upgrade version where paru reports one; otherwise a
+// live AUR search via paru. No async caching (unlike the arch branch this was ported
+// from) -- this always re-queries, matching how every other list in this app already
+// works synchronously.
+bool MainWindow::buildAurList(const QString &searchTerm)
+{
+    aurList.clear();
+    const QString term = searchTerm.trimmed();
+    const QString paruPath = getParuPath();
+    if (paruPath.isEmpty()) {
+        return false;
+    }
+
+    Cmd shell;
+    QScopedValueRollback<bool> guard(suppressCmdOutput, true);
+    if (term.isEmpty()) {
+        const QStringList installed
+            = shell.getOut({{"LANG", "C"}}, "pacman", {"-Qm", "--color", "never"}).split('\n', Qt::SkipEmptyParts);
+        if (shell.exitStatus() != QProcess::NormalExit || shell.exitCode() != 0) {
+            return false;
+        }
+        if (installed.isEmpty()) {
+            return true;
+        }
+        if (installedPackages.isEmpty()) {
+            installedPackages = listInstalled();
+        }
+
+        QHash<QString, QString> aurUpdates;
+        const QStringList updates
+            = shell.getOut({{"LANG", "C"}}, paruPath, {"-Qua", "--color", "never"}).split('\n', Qt::SkipEmptyParts);
+        if (shell.exitStatus() == QProcess::NormalExit && shell.exitCode() == 0) {
+            for (const QString &line : updates) {
+                const QString name = line.section(' ', 0, 0).trimmed();
+                const QString newVersion = line.section("->", 1).trimmed();
+                if (!name.isEmpty() && !newVersion.isEmpty()) {
+                    aurUpdates.insert(name, newVersion);
+                }
+            }
+        }
+
+        for (const QString &line : installed) {
+            const QStringList parts = line.split(' ', Qt::SkipEmptyParts);
+            if (parts.size() < 2) {
+                continue;
+            }
+            const QString repoVersion = aurUpdates.value(parts.at(0), parts.at(1));
+            const QString description = installedPackages.value(parts.at(0)).description;
+            aurList.insert(parts.at(0), {repoVersion, description});
+        }
+        return true;
+    }
+
+    if (!isOnline()) {
+        return false;
+    }
+    QStringList results = shell.getOut({{"LANG", "C"}}, paruPath, {"-Ssq", "--color", "never", term})
+                              .split('\n', Qt::SkipEmptyParts);
+    if (shell.exitStatus() != QProcess::NormalExit || shell.exitCode() != 0) {
+        return false;
+    }
+    if (results.isEmpty()) {
+        return true;
+    }
+    constexpr int maxResults = 200;
+    if (results.size() > maxResults) {
+        results = results.mid(0, maxResults);
+    }
+
+    QStringList infoArgs {"-Si", "--color", "never"};
+    infoArgs += results;
+    const QString infoOutput = shell.getOut({{"LANG", "C"}}, paruPath, infoArgs);
+    if (shell.exitStatus() != QProcess::NormalExit || shell.exitCode() != 0 || infoOutput.trimmed().isEmpty()) {
+        for (const QString &name : std::as_const(results)) {
+            aurList.insert(name, {QString(), QString()});
+        }
+        return true;
+    }
+
+    QString packageName;
+    QString version;
+    QString description;
+    auto flushPackage = [&]() {
+        if (!packageName.isEmpty()) {
+            aurList.insert(packageName, {version, description});
+        }
+        packageName.clear();
+        version.clear();
+        description.clear();
+    };
+    for (const QString &line : infoOutput.split('\n')) {
+        if (line.startsWith("Name")) {
+            flushPackage();
+            packageName = line.section(':', 1).trimmed();
+        } else if (line.startsWith("Version")) {
+            version = line.section(':', 1).trimmed();
+        } else if (line.startsWith("Description")) {
+            description = line.section(':', 1).trimmed();
+        }
+    }
+    flushPackage();
+    return true;
+}
+
+void MainWindow::showAurPackageInfo(const QString &packageName)
+{
+    const QString paruPath = getParuPath();
+    if (paruPath.isEmpty()) {
+        QMessageBox::critical(this, tr("Error"),
+                              tr("paru is not installed.\n\nInstall it with: pacman -S paru"));
+        return;
+    }
+    Cmd shell;
+    QString info = shell.getOut({{"LANG", "C"}}, paruPath, {"-Si", "--color", "never", packageName});
+    if (shell.exitStatus() != QProcess::NormalExit || shell.exitCode() != 0 || info.trimmed().isEmpty()) {
+        info = shell.getOut({{"LANG", "C"}}, "pacman", {"-Qi", "--color", "never", packageName});
+    }
+    QMessageBox::information(this, packageName,
+                             info.trimmed().isEmpty() ? tr("No information available.") : info.trimmed());
+}
+
+// AUR's data isn't "downloaded once, rarely dirty" like the other apt tabs -- an
+// empty search means "installed AUR packages" and a non-empty one means "live AUR
+// search", so this always rebuilds rather than reusing buildPackageLists()'s
+// cache-until-dirty model.
+void MainWindow::handleAurTab(const QString &searchStr)
+{
+    ui->searchBoxAUR->setText(searchStr);
+    changeList.clear();
+    displayWarning("aur");
+    if (displayPackagesIsRunning) {
+        progress->show();
+        if (!timer.isActive()) {
+            timer.start(100ms);
+        }
+        connect(this, &MainWindow::displayPackagesFinished, this, &MainWindow::updateInterface,
+                Qt::SingleShotConnection);
+        return;
+    }
+    if (!buildAurList(searchStr)) {
+        QMessageBox::critical(this, tr("Error"),
+                              tr("Could not query AUR packages. Please check that paru is installed and you are "
+                                 "online."));
+        currentTree->blockSignals(false);
+        return;
+    }
+    displayPackages();
+    if (ui->comboFilterAUR->currentIndex() != savedComboIndex) {
+        ui->comboFilterAUR->setCurrentIndex(savedComboIndex);
+    }
+    filterChanged(ui->comboFilterAUR->currentText());
+    currentTree->blockSignals(false);
+}
+
+void MainWindow::pushForceUpdateAUR_clicked()
+{
+    beginOperation();
+    ui->searchBoxAUR->clear();
+    ui->comboFilterAUR->setCurrentIndex(0);
+    handleAurTab(QString());
+}
+#endif
+
 void MainWindow::handleTab(const QString &searchStr, QLineEdit *searchBox, const QString &warningMessage,
                            bool dirtyFlag)
 {
@@ -4129,7 +5127,9 @@ void MainWindow::handleFlatpakTab(const QString &searchStr)
     setCurrentTree();
     displayWarning("flatpaks");
     ui->searchBoxFlatpak->setFocus();
-    const bool flatpakInstalled = checkInstalled("flatpak");
+    // Binary presence, not checkInstalled()/installedPackages -- see the
+    // constructor's flatpak preload for why that cache can't be trusted yet.
+    const bool flatpakInstalled = !QStandardPaths::findExecutable(QStringLiteral("flatpak")).isEmpty();
     const bool isUserScope = fpUser.startsWith(QLatin1String("--user"));
     bool systemRemotesAdded = false;
     // Not gated on firstRunFP: the startup preload of displayFlatpaks() already
@@ -4175,7 +5175,11 @@ void MainWindow::handleFlatpakTab(const QString &searchStr)
         int ans = QMessageBox::question(this, tr("Flatpak not installed"),
                                         tr("Flatpak is not currently installed.\nOK to go ahead and install it?"));
         if (ans == QMessageBox::No) {
+#ifdef PACKAGE_BACKEND_PACMAN
+            ui->tabWidget->setCurrentIndex(Tab::EnabledRepos);
+#else
             ui->tabWidget->setCurrentIndex(Tab::Popular);
+#endif
             enableTabs(true);
             return;
         }
@@ -4227,7 +5231,11 @@ void MainWindow::installFlatpak()
     buildPackageLists();
     if (!checkInstalled("flatpak")) {
         QMessageBox::critical(this, tr("Flatpak not installed"), tr("Flatpak was not installed"));
+#ifdef PACKAGE_BACKEND_PACMAN
+        ui->tabWidget->setCurrentIndex(Tab::EnabledRepos);
+#else
         ui->tabWidget->setCurrentIndex(Tab::Popular);
+#endif
         setCursor(QCursor(Qt::ArrowCursor));
         enableTabs(true);
         currentTree->blockSignals(false);
@@ -4295,7 +5303,7 @@ bool MainWindow::isSnapdReady() const
 QStringList MainWindow::listInstalledSnaps() const
 {
     Cmd shell;
-    const QString out = shell.getOut(QStringLiteral("LANG=C snap list 2>/dev/null"), Cmd::QuietMode::Yes);
+    const QString out = shell.getOut({{"LANG", "C"}}, "snap", {"list"}, Cmd::QuietMode::Yes, /*discardStderr=*/true);
     QStringList names;
     static const QRegularExpression ws {QStringLiteral("\\s+")};
     const QStringList lines = out.split('\n', Qt::SkipEmptyParts);
@@ -4420,7 +5428,7 @@ void MainWindow::displaySnaps(bool /*forceUpdate*/)
 void MainWindow::loadSnapData()
 {
     Cmd shell;
-    const QString out = shell.getOut(QStringLiteral("LANG=C snap list 2>/dev/null"), Cmd::QuietMode::Yes);
+    const QString out = shell.getOut({{"LANG", "C"}}, "snap", {"list"}, Cmd::QuietMode::Yes, /*discardStderr=*/true);
     const QVector<SnapData> data = parseSnapList(out, true);
     snapModel->setSnapData(data);
     snapModel->updateInstalledStatus(listInstalledSnaps());
@@ -4477,8 +5485,7 @@ void MainWindow::searchSnapStore()
     setCursor(QCursor(Qt::BusyCursor));
     Cmd shell;
     const QString out
-        = shell.getOut(QStringLiteral("LANG=C snap find ") + shellSingleQuote(query) + QStringLiteral(" 2>/dev/null"),
-                       Cmd::QuietMode::Yes);
+        = shell.getOut({{"LANG", "C"}}, "snap", {"find", query}, Cmd::QuietMode::Yes, /*discardStderr=*/true);
     QVector<SnapData> data = parseSnapList(out, false);
     snapModel->setSnapData(data);
     snapModel->updateInstalledStatus(listInstalledSnaps());
@@ -4517,9 +5524,15 @@ void MainWindow::setupSnapd()
             enableTabs(true);
             return;
         }
-        // Reuse the standard APT install path (uses default repo flags).
         QTreeView *savedTree = currentTree;
+#ifdef PACKAGE_BACKEND_PACMAN
+        // snapd is not in the official Arch repos -- it's AUR-only, so route this
+        // through install()'s paru/AUR branch by pretending the AUR tree is current.
+        currentTree = ui->treeAUR;
+#else
+        // Reuse the standard APT install path (uses default repo flags).
         currentTree = ui->treeEnabled;
+#endif
         const bool ok = install(QStringLiteral("snapd"));
         const QString installOutput = cmd.readAllOutput();
         currentTree = savedTree;
@@ -4576,7 +5589,8 @@ void MainWindow::setupSnapd()
             // Bounded, read-only wait for seeding (needs no elevation). A stale helper
             // skips its own wait, hence doing it here too.
             Cmd waitCmd;
-            waitCmd.run(QStringLiteral("timeout 120 snap wait system seed.loaded"), Cmd::QuietMode::Yes);
+            waitCmd.proc(QStringLiteral("timeout"), {"120", "snap", "wait", "system", "seed.loaded"}, nullptr,
+                        nullptr, Cmd::QuietMode::Yes);
             if (attempt > 1) {
                 // Give snapd a moment to finish coming up before trying again,
                 // without blocking the event loop.
@@ -4886,13 +5900,13 @@ void MainWindow::filterChanged(const QString &arg1)
             clearChangeListAndButtons();
         } else if (arg1 == tr("All apps")) {
             if (flatpaksApps.isEmpty()) {
-                flatpaksApps = listFlatpaks(ui->comboRemote->currentText(), "--app");
+                flatpaksApps = listFlatpaks(ui->comboRemote->currentText(), fpUser, "--app");
             }
             handleFlatpakFilter(flatpaksApps);
             clearChangeListAndButtons();
         } else if (arg1 == tr("All runtimes")) {
             if (flatpaksRuntimes.isEmpty()) {
-                flatpaksRuntimes = listFlatpaks(ui->comboRemote->currentText(), "--runtime");
+                flatpaksRuntimes = listFlatpaks(ui->comboRemote->currentText(), fpUser, "--runtime");
             }
             handleFlatpakFilter(flatpaksRuntimes);
             clearChangeListAndButtons();
@@ -4999,6 +6013,11 @@ void MainWindow::selectAllUpgradable_toggled(bool checked)
     } else if (s == headerBP) {
         tree = ui->treeBackports;
         model = backportsModel;
+#ifdef PACKAGE_BACKEND_PACMAN
+    } else if (s == headerAUR) {
+        tree = ui->treeAUR;
+        model = aurModel;
+#endif
     } else {
         return;
     }
@@ -5165,7 +6184,15 @@ void MainWindow::forceUpdateAptTab(QLineEdit *searchBox, QComboBox *filterCombo)
     searchBox->clear();
     filterCombo->setCurrentIndex(0);
     buildPackageLists(true);
-    updateInterface();
+    if (displayPackagesIsRunning) {
+        // pacman only: the fetch this just kicked off hasn't completed yet --
+        // its own completion runs displayPackages(), which already emits
+        // displayPackagesFinished(); wait for that instead of acting on stale data.
+        connect(this, &MainWindow::displayPackagesFinished, this, &MainWindow::updateInterface,
+                Qt::SingleShotConnection);
+    } else {
+        updateInterface();
+    }
 }
 
 void MainWindow::pushForceUpdateEnabled_clicked()
@@ -5188,7 +6215,19 @@ void MainWindow::pushForceUpdateFP_clicked()
     }
     holdProgressForFlatpakRefresh = true;
     progress->show();
-    cmd.proc("flatpak", {"update", "--appstream"});
+    if (!cmd.proc("flatpak", {"update", "--appstream"})) {
+        holdProgressForFlatpakRefresh = false;
+        progress->hide();
+        if (flatpakCancelHidden && pushCancel) {
+            pushCancel->show();
+            pushCancel->setEnabled(true);
+            flatpakCancelHidden = false;
+        }
+        QMessageBox::critical(this, tr("Error"),
+                              tr("Problem detected during last operation, please inspect the console output."));
+        updateInterface();
+        return;
+    }
     displayFlatpaks(true);
     updateInterface();
 }
@@ -5259,11 +6298,42 @@ void MainWindow::pushEnter_clicked()
 void MainWindow::lineEdit_returnPressed()
 {
     qDebug() << "+++" << __PRETTY_FUNCTION__ << "+++";
-    cmd.write(ui->lineEdit->text().toUtf8() + '\n');
-    ui->outputBox->appendPlainText(ui->lineEdit->text() + '\n');
+    const QString input = ui->lineEdit->text();
+    cmd.write(input.toUtf8() + '\n');
+#ifdef PACKAGE_BACKEND_PACMAN
+    // Never echo back what was typed while masked (a sudo password, per
+    // outputAvailable()'s detection below) -- echoing the raw text here would leak
+    // it into the Output tab regardless of the QLineEdit's own echo mode.
+    if (!lineEditMasked) {
+        ui->outputBox->appendPlainText(input + '\n');
+    }
+    setLineEditMasked(false);
+#else
+    ui->outputBox->appendPlainText(input + '\n');
+#endif
     ui->lineEdit->clear();
     ui->lineEdit->setFocus();
 }
+
+#ifdef PACKAGE_BACKEND_PACMAN
+void MainWindow::setLineEditMasked(bool masked)
+{
+    if (!ui || !ui->lineEdit) {
+        return;
+    }
+    lineEditMasked = masked;
+    ui->lineEdit->setEchoMode(masked ? QLineEdit::Password : QLineEdit::Normal);
+    if (lineEditToggleMaskAction) {
+        const QSignalBlocker blocker(lineEditToggleMaskAction);
+        lineEditToggleMaskAction->setChecked(masked);
+        const QIcon icon = QIcon::fromTheme(masked ? "view-hidden" : "view-visible", QIcon::fromTheme("view-visible"));
+        if (!icon.isNull()) {
+            lineEditToggleMaskAction->setIcon(icon);
+        }
+        lineEditToggleMaskAction->setToolTip(masked ? tr("Show input") : tr("Hide input"));
+    }
+}
+#endif
 
 void MainWindow::pushCancel_clicked()
 {
@@ -5331,7 +6401,7 @@ void MainWindow::pushUpgradeFP_clicked()
     showOutput();
     setCursor(QCursor(Qt::BusyCursor));
     enableOutput();
-    if (cmd.run(flatpakPtyCommand(QStringLiteral("flatpak update ") + fpUser))) {
+    if (cmd.procOnPty(QStringLiteral("flatpak"), {"update", fpUser.trimmed()})) {
         appendFlatpakStatusMessage(ui->outputBox, tr("Update complete."));
         displayFlatpaks(true);
         setCursor(QCursor(Qt::ArrowCursor));
@@ -5348,21 +6418,21 @@ void MainWindow::pushUpgradeFP_clicked()
 void MainWindow::pushRemotes_clicked()
 {
     qDebug() << "+++" << __PRETTY_FUNCTION__ << "+++";
-    auto *dialog = new ManageRemotes(this, fpUser);
-    dialog->exec();
-    if (dialog->isChanged()) {
+    ManageRemotes dialog(this, fpUser);
+    dialog.exec();
+    if (dialog.isChanged()) {
         invalidateFlatpakRemoteCache();
         listFlatpakRemotes();
         displayFlatpaks(true);
     }
-    if (!dialog->getInstallRef().isEmpty()) {
+    if (!dialog.getInstallRef().isEmpty()) {
         showOutput();
         setCursor(QCursor(Qt::BusyCursor));
         enableOutput();
-        QStringList args {"flatpak", "install", "-y"};
-        args << dialog->getUser().trimmed();
-        args << "--from" << dialog->getInstallRef();
-        if (cmd.run(flatpakPtyCommand(shellCommandFromArgs(args)))) {
+        QStringList args {"install", "-y"};
+        args << dialog.getUser().trimmed();
+        args << "--from" << dialog.getInstallRef();
+        if (cmd.procOnPty(QStringLiteral("flatpak"), args)) {
             appendFlatpakStatusMessage(ui->outputBox, tr("Install complete."));
             invalidateFlatpakRemoteCache();
             listFlatpakRemotes();
@@ -5410,8 +6480,11 @@ void MainWindow::treePopularApps_customContextMenuRequested(QPoint pos)
     if (!index.isValid() || !index.parent().isValid()) { // skip invalid and categories
         return;
     }
-    auto *action = new QAction(QIcon::fromTheme("dialog-information"), tr("More &info..."), this);
     QMenu menu(this);
+    // Parented to &menu (not this) so it's destroyed along with the menu below --
+    // QMenu::addAction(QAction*) doesn't take ownership, so parenting to the
+    // long-lived MainWindow would leak one QAction per invocation.
+    auto *action = new QAction(QIcon::fromTheme("dialog-information"), tr("More &info..."), &menu);
     menu.addAction(action);
     connect(action, &QAction::triggered, this, [this, index] { displayPopularInfo(index); });
     menu.exec(ui->treePopularApps->mapToGlobal(pos));
@@ -5448,6 +6521,10 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
             ui->searchBoxMX->setFocus();
         } else if (ui->tabWidget->currentWidget() == ui->tabBackports) {
             ui->searchBoxBP->setFocus();
+#ifdef PACKAGE_BACKEND_PACMAN
+        } else if (ui->tabWidget->currentWidget() == ui->tabAUR) {
+            ui->searchBoxAUR->setFocus();
+#endif
         } else if (ui->tabWidget->currentWidget() == ui->tabFlatpak) {
             ui->searchBoxFlatpak->setFocus();
         } else if (ui->tabWidget->currentWidget() == ui->tabSnap) {
@@ -5463,7 +6540,7 @@ void MainWindow::pushRemoveUnused_clicked()
     setCursor(QCursor(Qt::BusyCursor));
     enableOutput();
     showFlatpakProgress(tr("Uninstalling flatpaks..."));
-    if (cmd.run(flatpakPtyCommand(QStringLiteral("flatpak uninstall --unused -y")))) {
+    if (cmd.procOnPty(QStringLiteral("flatpak"), {"uninstall", "--unused", "-y"})) {
         appendFlatpakStatusMessage(ui->outputBox, tr("Uninstall complete."));
         showFlatpakProgress(tr("Refreshing flatpaks..."));
         displayFlatpaks(true);
@@ -5482,17 +6559,26 @@ void MainWindow::pushRemoveUnused_clicked()
 QString MainWindow::getMXTestRepoUrl()
 {
     // Try to get test repo URL directly
-    if (cmd.run("apt-get update --print-uris | tac | grep -m1 -oP "
-                + shellSingleQuote("https?://.*/mx/testrepo/dists/(?=" + verName + "/test/)"))) {
-        return cmd.readAllOutput();
+    QString output;
+    if (cmd.pipeline({
+            {"apt-get", {"update", "--print-uris"}},
+            {"tac", {}},
+            {"grep", {"-m1", "-oP", "https?://.*/mx/testrepo/dists/(?=" + verName + "/test/)"}},
+        },
+        &output)) {
+        return output;
     }
 
     // Fall back to deriving from main repo URL
-    if (cmd.run("apt-get update --print-uris | tac | grep -m1 -oE "
-                + shellSingleQuote("https?://.*/mx/repo/dists/" + verName + "/main/") + " | sed -e "
-                + shellSingleQuote("s:/mx/repo/dists/" + verName + "/main/:/mx/testrepo/dists/:")
-                + " | grep -oE 'https?://.*/mx/testrepo/dists/'")) {
-        return cmd.readAllOutput();
+    if (cmd.pipeline({
+            {"apt-get", {"update", "--print-uris"}},
+            {"tac", {}},
+            {"grep", {"-m1", "-oE", "https?://.*/mx/repo/dists/" + verName + "/main/"}},
+            {"sed", {"-e", "s:/mx/repo/dists/" + verName + "/main/:/mx/testrepo/dists/:"}},
+            {"grep", {"-oE", "https?://.*/mx/testrepo/dists/"}},
+        },
+        &output)) {
+        return output;
     }
 
     // Return default URL if nothing else works
@@ -5502,7 +6588,7 @@ QString MainWindow::getMXTestRepoUrl()
 void MainWindow::pushRemoveAutoremovable_clicked()
 {
     beginOperation();
-    QString names = cmd.getOut(R"(apt-get --dry-run autoremove |grep -Po '^Remv \K[^ ]+' |tr '\n' ' ')");
+    QString names = PackageBackend::autoremovableCandidates(cmd).join(' ');
     QMessageBox::warning(this, tr("Warning"),
                          tr("Potentially dangerous operation.\nPlease make sure you check "
                             "carefully the list of packages to be removed."));

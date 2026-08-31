@@ -1,0 +1,74 @@
+# bash completion for verify-iso-sig - the packaged dispatcher, the
+# only one of this tool's scripts meant to be typed directly (see its
+# own header comment). Added because this tool now has ~25 real flags
+# spread across a short --help and the full --man reference, and no
+# one is expected to remember all of them exactly - completion covers
+# both tiers (the few --help shows and everything else that's only in
+# --man), since "I don't remember the exact flag" is exactly the
+# situation this exists for.
+#
+# Deliberately excludes every flag that isn't really useful for a user
+# to invoke directly from the command line, even though each one does
+# work correctly if typed by hand - completion is a *discovery*
+# mechanism (exactly what a user reaches for when they can't remember
+# whether something exists), so offering one of these would actively
+# advertise it as worth trying, which is the wrong nudge. Confirmed via
+# man-page.md's own wording for each (see its own comments there for
+# why): --verify-as-checksum-file (pure internal plumbing, not even
+# documented in --help/--man at all), --keep-key/--from-ring/
+# --export-key-to/--is-cached (documented, but explicitly "internal
+# plumbing for the main GUI's own trust flow, not really useful
+# standalone" - --export-key-to in particular doesn't even produce a
+# portable key export, just a raw keyring file meant for a --from-ring
+# round-trip). --keep (a plain modifier on a normal verify run - save a
+# fetched key locally for future runs) is a different, genuinely useful
+# flag from --keep-key (the separate internal mode) and stays.
+_verify_iso_sig() {
+    local cur prev words cword
+    _init_completion || return
+
+    # Flags that take a value where a real file path is the right
+    # completion.
+    case "$prev" in
+        --checksum-file|--export-trusted-keys|--inspect-key-file|--import-trusted-keys)
+            _filedir
+            return
+            ;;
+        --checksum-algo)
+            COMPREPLY=($(compgen -W 'sha256 sha512 sha1 md5' -- "$cur"))
+            return
+            ;;
+        # No useful completion for these (a keyserver URL, a status fd
+        # number, or a fingerprint - nothing this function can
+        # enumerate) - fall through to plain filename completion rather
+        # than offering nothing at all, in case the user is actually
+        # about to type a path-shaped argument next anyway.
+        --status-fd|--keyserver|--untrust-key)
+            _filedir
+            return
+            ;;
+    esac
+
+    if [[ "$cur" == -* ]]; then
+        COMPREPLY=($(compgen -W '
+            --gui --cli --manage-keys --drag-and-drop
+            -h --help -V --version --man --quiet --debug
+            --allow-unrecognized-key --trust-key
+            --list-known-keys --list-trusted-keys --list-keyservers
+            --status-fd --keyserver --keep
+            --no-checksum-fallback --checksum-file --checksum-algo
+            --untrust-key --export-trusted-keys --inspect-key-file
+            --import-trusted-keys
+        ' -- "$cur"))
+        return
+    fi
+
+    # Positional argument (the ISO/signature file itself, or the
+    # fingerprint after --untrust-key/--manage-keys mode switches
+    # consumed above already returned) - plain filename completion;
+    # deliberately not restricted to *.iso/*.sig/etc. since a checksum-
+    # listing file (SHA256SUMS, sha256sum.txt, ...) is just as valid a
+    # first argument and has no fixed extension.
+    _filedir
+}
+complete -F _verify_iso_sig verify-iso-sig

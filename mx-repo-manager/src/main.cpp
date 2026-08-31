@@ -1,7 +1,7 @@
 /**********************************************************************
  *  main.cpp
  **********************************************************************
- * Copyright (C) 2015-2025 MX Authors
+ * Copyright (C) 2015-2026 MX Authors
  *
  * Authors: Adrian
  *          MX Linux <http://mxlinux.org>
@@ -28,7 +28,6 @@
 #include <QLocale>
 #include <QTranslator>
 
-#include "common.h"
 #include "mainwindow.h"
 #include <unistd.h>
 

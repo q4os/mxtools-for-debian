@@ -1,5 +1,5 @@
 /**********************************************************************
- * Copyright (C) 2017-2025 MX Authors
+ * Copyright (C) 2017-2026 MX Authors
  *
  * Authors: Adrian
  *          MX Linux <http://mxlinux.org>
@@ -79,7 +79,7 @@ public:
 
     void setIcons(const QIcon &installed);
 
-    [[nodiscard]] static quint64 sizeStringToBytes(const QString &size);
+    [[nodiscard]] static quint64 sizeStringToBytes(const QString &size, bool *ok = nullptr);
 
 signals:
     void checkStateChanged(const QString &fullName, Qt::CheckState state, int status);

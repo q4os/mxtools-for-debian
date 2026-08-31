@@ -6,7 +6,6 @@
 #include <QFile>
 #include <QMessageBox>
 
-#include "mainwindow.h"
 #include <unistd.h>
 
 Cmd::Cmd(QObject *parent)
@@ -20,7 +19,7 @@ Cmd::Cmd(QObject *parent)
         }
     }
 
-    helper = QString("/usr/lib/%1/helper").arg(QApplication::applicationName());
+    helper = QStringLiteral(HELPER_PATH);
 
     connect(this, &Cmd::readyReadStandardOutput, this, &Cmd::handleStandardOutput);
     connect(this, &Cmd::readyReadStandardError, this, &Cmd::handleStandardError);
@@ -45,6 +44,13 @@ QString Cmd::getOut(const QString &cmd, QuietMode quiet)
 {
     QString output;
     run(cmd, &output, nullptr, quiet);
+    return output;
+}
+
+QString Cmd::getOut(const QString &program, const QStringList &args, QuietMode quiet)
+{
+    QString output;
+    proc(program, args, &output, nullptr, quiet);
     return output;
 }
 
@@ -117,6 +123,16 @@ bool Cmd::procAsRoot(const QString &cmd, const QStringList &args, QString *outpu
     return proc(cmd, args, output, input, quiet, Elevation::Yes);
 }
 
+bool Cmd::installAsRoot(const QString &targetPath, const QByteArray &content, bool allowCreate, QuietMode quiet)
+{
+    QStringList helperArgs {"install"};
+    if (allowCreate) {
+        helperArgs << "--allow-create";
+    }
+    helperArgs << targetPath;
+    return helperProc(helperArgs, nullptr, &content, quiet);
+}
+
 bool Cmd::startDetachedAsRoot(const QString &cmd, const QStringList &args, QuietMode quiet, const QString &logFilePath,
                               QString *errorMessage)
 {
@@ -163,15 +179,15 @@ bool Cmd::run(const QString &cmd, QString *output, const QByteArray *input, Quie
 
 void Cmd::handleElevationError(int helperExitCode)
 {
-    if (qobject_cast<MainWindow *>(qApp->activeWindow())) {
-        if (helperExitCode == EXIT_CODE_PERMISSION_DENIED) {
-            QMessageBox::warning(nullptr, tr("Authentication Canceled"),
-                                 tr("Authentication was canceled. No changes were applied."));
-        } else {
-            QMessageBox::critical(nullptr, tr("Administrator Access Required"),
-                                  tr("This operation requires administrator privileges, but the helper could not be "
-                                     "started correctly. No changes were applied."));
-        }
+    if (!qApp->activeWindow())
+        return;
+    if (helperExitCode == EXIT_CODE_PERMISSION_DENIED) {
+        QMessageBox::warning(nullptr, tr("Authentication Canceled"),
+                             tr("Authentication was canceled. No changes were applied."));
+    } else {
+        QMessageBox::critical(nullptr, tr("Administrator Access Required"),
+                              tr("This operation requires administrator privileges, but the helper could not be "
+                                 "started correctly. No changes were applied."));
     }
 }
 

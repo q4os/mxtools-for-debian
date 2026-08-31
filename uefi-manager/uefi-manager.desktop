@@ -15,5 +15,5 @@ Exec=uefi-manager
 Terminal=false
 Type=Application
 Icon=uefi-manager
-Categories=System;MX-Software;
+Categories=System;X-MX-Software;
 NoDisplay=false

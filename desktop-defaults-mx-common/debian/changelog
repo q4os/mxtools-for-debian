@@ -1,8 +1,14 @@
-desktop-defaults-mx-common (26.06.01mx25.1302) stable; urgency=medium
+desktop-defaults-mx-common (26.7.01mx25.1302) stable; urgency=medium
 
   * Release
 
- -- Devs <devteam@localdomain>  Mon, 13 Jul 2026 13:05:26 +0200
+ -- Devs <devteam@localdomain>  Mon, 31 Aug 2026 17:00:16 +0200
+
+desktop-defaults-mx-common (26.7.01mx25) mx; urgency=medium
+
+  * update MX Tools menu to handle X-XDG compliant categories 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 13 Jul 2026 12:58:25 -0400
 
 desktop-defaults-mx-common (26.06.01mx25) mx; urgency=medium
 

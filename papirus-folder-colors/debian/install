@@ -1,0 +1,6 @@
+scripts/* usr/bin
+alt_template/* usr/share/papirus-folder-colors
+pixmaps/* usr/share/pixmaps
+pixmaps/papirus-folder-colors.svg usr/share/icons/hicolor/scalable/apps
+*.desktop usr/share/applications
+translations/mo/* /

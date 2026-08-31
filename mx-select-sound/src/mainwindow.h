@@ -1,7 +1,7 @@
 /**********************************************************************
  *  mainwindow.h
  **********************************************************************
- * Copyright (C) 2015 MX Authors
+ * Copyright (C) 2015-2026 MX Authors
  *
  * Authors: Adrian
  *          MX Linux <http://mxlinux.org>
@@ -25,7 +25,10 @@
 
 #include <QDialog>
 #include <QMessageBox>
+#include <QPointer>
 #include <QString>
+
+class QProcess;
 
 namespace Ui
 {
@@ -56,4 +59,5 @@ private:
     Ui::MainWindow *ui;
     bool m_pipewire{false};
     QString m_currentPipewireSink;
+    QPointer<QProcess> m_testProc;
 };

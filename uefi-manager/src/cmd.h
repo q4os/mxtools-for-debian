@@ -1,7 +1,7 @@
 /**********************************************************************
  *  cmd.h
  **********************************************************************
- * Copyright (C) 2024-2025 MX Authors
+ * Copyright (C) 2024-2026 MX Authors
  *
  * Authors: Adrian <adrian@mxlinux.org>
  *          MX Linux <http://mxlinux.org>
@@ -39,6 +39,7 @@ public:
                     const QByteArray *input = nullptr, QuietMode quiet = QuietMode::No);
     bool procElevated(const QString &cmd, const QStringList &args = {}, QString *output = nullptr,
                       QuietMode quiet = QuietMode::No);
+    const QString &helperLibraryPath() const { return helperLibrary; }
     static void resetElevation() { elevationFailed = false; }
 
 signals:

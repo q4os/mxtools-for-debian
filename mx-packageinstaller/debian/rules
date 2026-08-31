@@ -5,7 +5,8 @@ override_dh_auto_configure:
 	dh_auto_configure -- \
 		-G Ninja \
 		-DCMAKE_BUILD_TYPE=Release \
-		-DCMAKE_EXPORT_COMPILE_COMMANDS=ON
+		-DCMAKE_EXPORT_COMPILE_COMMANDS=ON \
+		-DPACKAGE_BACKEND=apt
 
 override_dh_auto_clean:
 	dh_auto_clean
@@ -14,6 +15,10 @@ override_dh_auto_clean:
 
 override_dh_shlibdeps:
 	dh_shlibdeps --dpkg-shlibdeps-params=--ignore-missing-info
+
+# Do not create package-private .dwz debug data.
+override_dh_dwz:
+	@:
 
 override_dh_auto_test:
 	# Skip tests in Debian build - tests can be run manually with cmake --build build --target run_tests

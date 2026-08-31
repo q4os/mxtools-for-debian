@@ -1,5 +1,5 @@
 /**********************************************************************
- * Copyright (C) 2017-2025 MX Authors
+ * Copyright (C) 2017-2026 MX Authors
  *
  * Authors: Adrian
  *          MX Linux <http://mxlinux.org>
@@ -22,29 +22,10 @@
 #include "flatpakmodel.h"
 
 #include "../packagestatus.h"
+#include "../sizeutils.h"
 
-#include <QRegularExpression>
+#include <QDebug>
 #include <QSet>
-
-namespace {
-QString normalizeNumber(QString number)
-{
-    const qsizetype lastComma = number.lastIndexOf(',');
-    const qsizetype lastDot = number.lastIndexOf('.');
-    const QChar decimalSeparator = lastComma > lastDot ? QChar(',') : QChar('.');
-
-    if (lastComma >= 0 && lastDot >= 0) {
-        const QChar thousandsSeparator = decimalSeparator == QChar(',') ? QChar('.') : QChar(',');
-        number.remove(thousandsSeparator);
-    }
-
-    if (decimalSeparator == QChar(',')) {
-        number.replace(',', '.');
-    }
-
-    return number;
-}
-} // namespace
 
 FlatpakModel::FlatpakModel(QObject *parent)
     : QAbstractTableModel(parent)
@@ -201,7 +182,12 @@ void FlatpakModel::setFlatpakData(const QVector<FlatpakData> &flatpaks)
     m_refToRow.clear();
     m_refToRow.reserve(m_flatpaks.size());
     for (int i = 0; i < m_flatpaks.size(); ++i) {
-        m_flatpaks[i].sizeBytes = sizeStringToBytes(m_flatpaks.at(i).size);
+        bool ok = false;
+        m_flatpaks[i].sizeBytes = sizeStringToBytes(m_flatpaks.at(i).size, &ok);
+        if (!ok && !m_flatpaks.at(i).size.isEmpty()) {
+            qWarning() << "FlatpakModel: could not parse size" << m_flatpaks.at(i).size
+                       << "for" << m_flatpaks.at(i).canonicalRef;
+        }
         m_refToRow.insert(m_flatpaks.at(i).canonicalRef, i);
     }
     endResetModel();
@@ -211,7 +197,11 @@ void FlatpakModel::addFlatpak(const FlatpakData &flatpak)
 {
     int row = static_cast<int>(m_flatpaks.size());
     FlatpakData data = flatpak;
-    data.sizeBytes = sizeStringToBytes(data.size);
+    bool ok = false;
+    data.sizeBytes = sizeStringToBytes(data.size, &ok);
+    if (!ok && !data.size.isEmpty()) {
+        qWarning() << "FlatpakModel: could not parse size" << data.size << "for" << data.canonicalRef;
+    }
     beginInsertRows(QModelIndex(), row, row);
     m_flatpaks.append(data);
     m_refToRow.insert(data.canonicalRef, row);
@@ -239,16 +229,18 @@ QStringList FlatpakModel::checkedPackages() const
 
 void FlatpakModel::setAllChecked(bool checked)
 {
+    // beginResetModel()/endResetModel() instead of one dataChanged() over every row --
+    // measured ~349ms on a real machine with FlatpakFilterProxy's dynamicSortFilter
+    // incrementally re-filtering/re-sorting the whole range. Same fix as
+    // PackageModel::updateInstalledVersions().
+    beginResetModel();
     Qt::CheckState state = checked ? Qt::Checked : Qt::Unchecked;
     for (int i = 0; i < m_flatpaks.size(); ++i) {
         if (m_flatpaks[i].checkState != state) {
             m_flatpaks[i].checkState = state;
         }
     }
-    if (!m_flatpaks.isEmpty()) {
-        emit dataChanged(index(0, FlatCol::Check), index(m_flatpaks.size() - 1, FlatCol::Check),
-                         {Qt::CheckStateRole});
-    }
+    endResetModel();
 }
 
 void FlatpakModel::setCheckedForVisible(const QVector<int> &visibleRows, bool checked)
@@ -326,7 +318,12 @@ void FlatpakModel::setInstalledSizes(const QHash<QString, QString> &sizeMap)
         auto it = sizeMap.find(m_flatpaks[i].canonicalRef);
         if (it != sizeMap.end() && m_flatpaks[i].size != it.value()) {
             m_flatpaks[i].size = it.value();
-            m_flatpaks[i].sizeBytes = sizeStringToBytes(it.value());
+            bool ok = false;
+            m_flatpaks[i].sizeBytes = sizeStringToBytes(it.value(), &ok);
+            if (!ok && !it.value().isEmpty()) {
+                qWarning() << "FlatpakModel: could not parse size" << it.value() << "for"
+                           << m_flatpaks.at(i).canonicalRef;
+            }
             emit dataChanged(index(i, FlatCol::Size), index(i, FlatCol::Size));
         }
     }
@@ -337,45 +334,7 @@ void FlatpakModel::setIcons(const QIcon &installed)
     m_iconInstalled = installed;
 }
 
-quint64 FlatpakModel::sizeStringToBytes(const QString &size)
+quint64 FlatpakModel::sizeStringToBytes(const QString &size, bool *ok)
 {
-    QString normalized = size.trimmed();
-    normalized.replace(QChar(0x00a0), QLatin1Char(' '));
-    normalized.replace(QChar(0x202f), QLatin1Char(' '));
-
-    static const QRegularExpression sizeRegex(
-        QStringLiteral(R"(^\s*([0-9][0-9.,]*)\s*([A-Za-z]+)?\s*$)"));
-    const QRegularExpressionMatch match = sizeRegex.match(normalized);
-    if (!match.hasMatch()) {
-        return 0;
-    }
-
-    bool ok = false;
-    const double value = normalizeNumber(match.captured(1)).toDouble(&ok);
-    if (!ok || value < 0.0) {
-        return 0;
-    }
-
-    // Flatpak formats sizes with SI decimal units (1 kB = 1000 bytes)
-    const QString unit = match.captured(2).toUpper();
-    quint64 multiplier = 1;
-    if (unit == QLatin1String("KB")) {
-        multiplier = 1000ULL;
-    } else if (unit == QLatin1String("KIB")) {
-        multiplier = 1024ULL;
-    } else if (unit == QLatin1String("MB")) {
-        multiplier = 1000ULL * 1000ULL;
-    } else if (unit == QLatin1String("MIB")) {
-        multiplier = 1024ULL * 1024ULL;
-    } else if (unit == QLatin1String("GB")) {
-        multiplier = 1000ULL * 1000ULL * 1000ULL;
-    } else if (unit == QLatin1String("GIB")) {
-        multiplier = 1024ULL * 1024ULL * 1024ULL;
-    } else if (unit == QLatin1String("TB")) {
-        multiplier = 1000ULL * 1000ULL * 1000ULL * 1000ULL;
-    } else if (unit == QLatin1String("TIB")) {
-        multiplier = 1024ULL * 1024ULL * 1024ULL * 1024ULL;
-    }
-
-    return static_cast<quint64>(value * static_cast<double>(multiplier));
+    return SizeUtils::sizeStringToBytes(size, ok);
 }

@@ -19,4 +19,4 @@ sed -i '/^Comment\[/d' ${TARGET_FOLDER}*.desktop.in
 ##add translator comments
 
 sed -i '/^Name=.*/i \# The desktop entry name will be displayed within the menu.' ${TARGET_FOLDER}*.desktop.in
-sed -i '/^Comment=.*/i \# # The desktop entry comment will be shown within the menu.' ${TARGET_FOLDER}*.desktop.in
+sed -i '/^Comment=.*/i \# The desktop entry comment will be shown within the menu.' ${TARGET_FOLDER}*.desktop.in

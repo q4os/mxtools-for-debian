@@ -108,7 +108,7 @@ fi
 #the purpose is to enable/disable user mounting of internal devices
 enable_user_mount()
 {
-    if [ -d /etc/polkit-1/rules.d]; then
+    if [ -d /etc/polkit-1/rules.d ]; then
     echo "/etc/polkit-1/rules.d found"
     else
     mkdir -p /etc/polkit-1/rules.d
@@ -183,7 +183,7 @@ disable_sudo_override()
 enable_sandbox()
 {
 	if [ ! -d /etc/sysctl.d/ ]; then
-		mkdir -p /etc/systclt.d
+		mkdir -p /etc/sysctl.d
 	fi
 	sysctl kernel.unprivileged_userns_clone=1
 	#sysctl kernel.yama.ptrace_scope=1
@@ -236,11 +236,28 @@ if [ -n "$(LC_ALL=C dpkg --status linux-image-liquorix-amd64 2>/dev/null| grep '
 	apt-mark hold linux-image-liquorix-amd64 linux-headers-liquorix-amd64 2>/dev/null
 fi
 }
+
 unhold_liquorix_kernel_updates()
 {
 if [ -n "$(LC_ALL=C dpkg --status linux-image-liquorix-amd64 2>/dev/null| grep 'ok installed')" ]; then
 	echo "found linux-image-liquorix-amd64"
 	apt-mark unhold linux-image-liquorix-amd64 linux-headers-liquorix-amd64 2>/dev/null
+fi
+}
+
+hold_siduction_kernel_updates()
+{
+if [ -n "$(LC_ALL=C dpkg --status linux-image-siduction-amd64 2>/dev/null| grep 'ok installed')" ]; then
+	echo "found linux-image-siduction-amd64"
+	apt-mark hold linux-image-siduction-amd64 linux-headers-siduction-amd64 2>/dev/null
+fi
+}
+
+unhold_siduction_kernel_updates()
+{
+if [ -n "$(LC_ALL=C dpkg --status linux-image-siduction-amd64 2>/dev/null| grep 'ok installed')" ]; then
+	echo "found linux-image-siduction-amd64"
+	apt-mark unhold linux-image-siduction-amd64 linux-headers-siduction-amd64 2>/dev/null
 fi
 }
 
@@ -336,42 +353,67 @@ kvm_early_switch(){
 	fi
 }
 
-main()
-{
-$CMD1
-$CMD2
-$CMD3
-$CMD4
-$CMD5
-$CMD6
-$CMD7
-$CMD8
-$CMD9
+ntsync_load(){
+	#ensure directory exists
+	mkdir -p /etc/modules-load.d/
+	echo "ntsync" > /etc/modules-load.d/ntsync.conf
 }
 
-CMD1=$1
-CMD2=$2
-CMD3=$3
-CMD4=$4
-CMD5=$5
-CMD6=$6
-CMD7=$7
-CMD8=$8
-CMD9=$9
+ntsync_noload(){
+	rm -f /etc/modules-load.d/ntsync.conf
+}
 
-case "$CMD1" in
-	hostname) change_hostname "$CMD2"
-	;;
-	bluetooth_battery) bluetooth_battery "$CMD2"
-	;;
-	displaymanager) change_display_manager "$CMD2"
-	;;
-	kvm_early_switch) kvm_early_switch "$CMD2" "$CMD3"
-	;;
-	initchange) initchange "$CMD2"
-	;;
-	*) main
-	;;
-esac
+
+main()
+{
+#read in parameters
+j=0
+for i in $@; do
+	local CMD
+	CMD[$j]=$i
+	#echo "CMD$j" is ${CMD[$j]}
+	j=$((j+1))
+done
+
+#run commands from p=0 to j
+
+for ((p=0; p<=j; p++)); do
+
+	if [ -n "${CMD[$p]}" ]; then
+
+		case "${CMD[$p]}" in
+			hostname)  #next variable is the param
+			   p=$((p+1))
+		   	   #change_hostname ${CMD[$p]}
+		   	   echo "change_hostname  ${CMD[$p]}"
+			;;
+			bluetooth_battery) #next variable is the param
+		       p=$((p+1))
+		       bluetooth_battery ${CMD[$p]}
+			;;
+			displaymanager) #next variable is the param
+			   p=$((p+1))
+			   change_display_manager ${CMD[$p]}
+			;;
+			kvm_early_switch) #next 2 variables are parameters 
+			   #increment p first time
+			   p=$((p+1))
+			   x=$((p+1))
+			   kvm_early_switch ${CMD[$p]} ${CMD[$x]}
+			   #increment p again to go to next command
+			   p=$((p+1))
+			;;
+			initchange)  #next variable is the param
+			   p=$((p+1))
+			   initchange ${CMD[$p]}
+			;;
+			*) ${CMD[$p]} #no parameter function, value increments in the for loop
+			;;
+		esac
+	fi
+done
+}
+
+main "$@"
 
 exit 0

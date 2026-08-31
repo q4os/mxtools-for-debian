@@ -19,90 +19,95 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/batchprocessing.cpp" line="122"/>
+        <location filename="../src/batchprocessing.cpp" line="114"/>
+        <source>The boot-menu editor failed; the snapshot cannot continue with potentially unedited files.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/batchprocessing.cpp" line="131"/>
         <source>Administrator access was not granted; the snapshot cannot continue.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/batchprocessing.cpp" line="249"/>
+        <location filename="../src/batchprocessing.cpp" line="258"/>
         <source>Detected newer exclusion file at %1 compared to %2. Prompting for action.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/batchprocessing.cpp" line="255"/>
+        <location filename="../src/batchprocessing.cpp" line="264"/>
         <source>s</source>
         <comment>CLI excludes prompt: single-letter shortcut for &apos;show diff&apos;</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/batchprocessing.cpp" line="256"/>
+        <location filename="../src/batchprocessing.cpp" line="265"/>
         <source>u</source>
         <comment>CLI excludes prompt: single-letter shortcut for &apos;use updated default&apos;</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/batchprocessing.cpp" line="257"/>
+        <location filename="../src/batchprocessing.cpp" line="266"/>
         <source>k</source>
         <comment>CLI excludes prompt: single-letter shortcut for &apos;keep custom (update timestamp)&apos;</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/batchprocessing.cpp" line="258"/>
+        <location filename="../src/batchprocessing.cpp" line="267"/>
         <source>q</source>
         <comment>CLI excludes prompt: single-letter shortcut for &apos;quit&apos;</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/batchprocessing.cpp" line="260"/>
+        <location filename="../src/batchprocessing.cpp" line="269"/>
         <source>show diff</source>
         <comment>CLI excludes prompt option label</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/batchprocessing.cpp" line="261"/>
+        <location filename="../src/batchprocessing.cpp" line="270"/>
         <source>use updated default</source>
         <comment>CLI excludes prompt option label</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/batchprocessing.cpp" line="262"/>
+        <location filename="../src/batchprocessing.cpp" line="271"/>
         <source>keep custom (update timestamp)</source>
         <comment>CLI excludes prompt option label</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/batchprocessing.cpp" line="263"/>
+        <location filename="../src/batchprocessing.cpp" line="272"/>
         <source>quit</source>
         <comment>CLI excludes prompt option label</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/batchprocessing.cpp" line="266"/>
+        <location filename="../src/batchprocessing.cpp" line="275"/>
         <source>[%1]%2  [%3]%4  [%5]%6  [%7]%8: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/batchprocessing.cpp" line="271"/>
+        <location filename="../src/batchprocessing.cpp" line="280"/>
         <source>The exclusion file at %1 is newer than your configured file at %2.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/batchprocessing.cpp" line="287"/>
+        <location filename="../src/batchprocessing.cpp" line="296"/>
         <source>Reverted to updated default exclusion file.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/batchprocessing.cpp" line="304"/>
+        <location filename="../src/batchprocessing.cpp" line="313"/>
         <source>No input available to answer the exclusion file prompt; aborting without creating a snapshot.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/batchprocessing.cpp" line="307"/>
+        <location filename="../src/batchprocessing.cpp" line="316"/>
         <source>Leaving custom exclusion file unchanged.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/batchprocessing.cpp" line="318"/>
+        <location filename="../src/batchprocessing.cpp" line="327"/>
         <source>Invalid choice. Please select again.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -277,7 +282,7 @@
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="626"/>
-        <location filename="../src/mainwindow.cpp" line="968"/>
+        <location filename="../src/mainwindow.cpp" line="969"/>
         <source>Remove Custom Exclusion File</source>
         <translation type="unfinished"></translation>
     </message>
@@ -452,7 +457,7 @@
         <location filename="../src/mainwindow.cpp" line="712"/>
         <location filename="../src/mainwindow.cpp" line="723"/>
         <location filename="../src/mainwindow.cpp" line="748"/>
-        <location filename="../src/mainwindow.cpp" line="1033"/>
+        <location filename="../src/mainwindow.cpp" line="1034"/>
         <source>Error</source>
         <translation type="unfinished"></translation>
     </message>
@@ -631,57 +636,57 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="969"/>
+        <location filename="../src/mainwindow.cpp" line="970"/>
         <source>Revert the exclusion list to the default file? This will overwrite your current exclusions.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1001"/>
+        <location filename="../src/mainwindow.cpp" line="1002"/>
         <source>About %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1003"/>
+        <location filename="../src/mainwindow.cpp" line="1004"/>
         <source>Version: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1004"/>
+        <location filename="../src/mainwindow.cpp" line="1005"/>
         <source>Program for creating a live-CD from the running system for MX Linux</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1006"/>
+        <location filename="../src/mainwindow.cpp" line="1007"/>
         <source>Copyright (c) MX Linux</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1008"/>
+        <location filename="../src/mainwindow.cpp" line="1009"/>
         <source>%1 License</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1021"/>
+        <location filename="../src/mainwindow.cpp" line="1022"/>
         <source>%1 Help</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1026"/>
+        <location filename="../src/mainwindow.cpp" line="1027"/>
         <source>Select Snapshot Directory</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1034"/>
+        <location filename="../src/mainwindow.cpp" line="1035"/>
         <source>Insufficient free space in the selected directory. Please choose a different location.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1078"/>
+        <location filename="../src/mainwindow.cpp" line="1079"/>
         <source>Confirmation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1078"/>
+        <location filename="../src/mainwindow.cpp" line="1079"/>
         <source>Are you sure you want to quit the application?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -814,240 +819,250 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main.cpp" line="245"/>
+        <location filename="../src/main.cpp" line="163"/>
+        <source>Optional suffix for a monthly snapshot; only valid together with --month.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/main.cpp" line="196"/>
+        <source>A single suffix positional argument is only valid together with --month.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/main.cpp" line="255"/>
         <source>You seem to be logged in as root, please log out and log in as normal user to use this program.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main.cpp" line="260"/>
+        <location filename="../src/main.cpp" line="270"/>
         <source>version:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main.cpp" line="256"/>
+        <location filename="../src/main.cpp" line="266"/>
         <source>You must run this program with sudo or pkexec.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main.cpp" line="225"/>
+        <location filename="../src/main.cpp" line="235"/>
         <source>MX Snapshot</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="667"/>
-        <location filename="../src/settings.cpp" line="676"/>
-        <location filename="../src/settings.cpp" line="1293"/>
-        <location filename="../src/settings.cpp" line="1389"/>
-        <location filename="../src/main.cpp" line="247"/>
-        <location filename="../src/main.cpp" line="333"/>
+        <location filename="../src/main.cpp" line="257"/>
+        <location filename="../src/main.cpp" line="343"/>
+        <location filename="../src/settings.cpp" line="770"/>
+        <location filename="../src/settings.cpp" line="779"/>
+        <location filename="../src/settings.cpp" line="1396"/>
+        <location filename="../src/settings.cpp" line="1506"/>
         <source>Error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main.cpp" line="290"/>
+        <location filename="../src/main.cpp" line="300"/>
         <source>Fatal error:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main.cpp" line="292"/>
+        <location filename="../src/main.cpp" line="302"/>
         <source>Fatal error: unknown exception</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="675"/>
-        <location filename="../src/main.cpp" line="332"/>
+        <location filename="../src/main.cpp" line="342"/>
+        <location filename="../src/settings.cpp" line="778"/>
         <source>Current kernel doesn&apos;t support Squashfs, cannot continue.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="240"/>
+        <location filename="../src/settings.cpp" line="261"/>
         <source>Exception during initialization: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="195"/>
+        <location filename="../src/settings.cpp" line="216"/>
         <source>Pending Arch bind-root cleanup state but installed-to-live-arch is missing: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="243"/>
+        <location filename="../src/settings.cpp" line="264"/>
         <source>Unknown exception during initialization</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="278"/>
+        <location filename="../src/settings.cpp" line="299"/>
         <source>Could not create work directory. </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="307"/>
-        <source>No supported filesystem found for the temp directory. Tried /tmp, /home, and the snapshot directory.</source>
+        <location filename="../src/settings.cpp" line="382"/>
+        <source>No suitable filesystem found for the temp directory. Tried /tmp, /home, and the snapshot directory.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="325"/>
+        <location filename="../src/settings.cpp" line="393"/>
         <source>Could not create temp directory:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="326"/>
+        <location filename="../src/settings.cpp" line="394"/>
         <source>Please check that the parent directory exists and is writable:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="344"/>
+        <location filename="../src/settings.cpp" line="412"/>
         <source>Compression format &apos;%1&apos; is not supported by the current kernel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="350"/>
+        <location filename="../src/settings.cpp" line="418"/>
         <source>Invalid cores setting: %1. Must be between 1 and %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="359"/>
+        <location filename="../src/settings.cpp" line="427"/>
         <source>Invalid throttle setting: %1. Must be between 0 and 99</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="365"/>
+        <location filename="../src/settings.cpp" line="433"/>
         <source>Snapshot directory cannot be empty</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="373"/>
+        <location filename="../src/settings.cpp" line="441"/>
         <source>Snapshot name cannot be empty</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="379"/>
+        <location filename="../src/settings.cpp" line="447"/>
         <source>Snapshot name contains invalid characters: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="385"/>
+        <location filename="../src/settings.cpp" line="453"/>
         <source>Kernel version cannot be empty</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="390"/>
+        <location filename="../src/settings.cpp" line="458"/>
         <source>Kernel file not found: /boot/vmlinuz-%1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="397"/>
+        <location filename="../src/settings.cpp" line="465"/>
         <source>Kernel %1 doesn&apos;t support Squashfs</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="428"/>
+        <location filename="../src/settings.cpp" line="496"/>
         <source>Exclusion file does not exist: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="437"/>
+        <location filename="../src/settings.cpp" line="505"/>
         <source>Unbalanced quotes in exclusion list</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="462"/>
+        <location filename="../src/settings.cpp" line="530"/>
         <source>Insufficient free space: %1 KiB available, minimum %2 KiB required</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="469"/>
+        <location filename="../src/settings.cpp" line="537"/>
         <source>Insufficient free space in work directory: %1 KiB available, minimum %2 KiB required</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="484"/>
+        <location filename="../src/settings.cpp" line="552"/>
         <source>Failed to determine number of CPU cores</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="490"/>
+        <location filename="../src/settings.cpp" line="558"/>
         <source>Configuration file does not exist: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="491"/>
+        <location filename="../src/settings.cpp" line="559"/>
         <source>Using default settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="493"/>
+        <location filename="../src/settings.cpp" line="561"/>
         <source>Cannot read configuration file: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="494"/>
+        <location filename="../src/settings.cpp" line="562"/>
         <source>Error: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="504"/>
+        <location filename="../src/settings.cpp" line="572"/>
         <source>Required tool not found: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="513"/>
+        <location filename="../src/settings.cpp" line="581"/>
         <source>Required directory not found: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="532"/>
+        <location filename="../src/settings.cpp" line="600"/>
         <source>Initialization Error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="533"/>
+        <location filename="../src/settings.cpp" line="601"/>
         <source>Failed to initialize application settings:
 
 %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="665"/>
+        <location filename="../src/settings.cpp" line="768"/>
         <source>Could not find a usable kernel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="666"/>
+        <location filename="../src/settings.cpp" line="769"/>
         <source>Searched for kernel files in /boot/ but none were found or accessible.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="688"/>
+        <location filename="../src/settings.cpp" line="791"/>
         <source>No users found in the system</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="691"/>
+        <location filename="../src/settings.cpp" line="794"/>
         <source>Failed to determine system information</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="861"/>
+        <location filename="../src/settings.cpp" line="964"/>
         <source>Used space on / (root): </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="877"/>
+        <location filename="../src/settings.cpp" line="980"/>
         <source>estimated</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="884"/>
+        <location filename="../src/settings.cpp" line="987"/>
         <source>Used space on /home: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="945"/>
+        <location filename="../src/settings.cpp" line="1048"/>
         <source>Free space on %1, where snapshot folder is placed: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="949"/>
+        <location filename="../src/settings.cpp" line="1052"/>
         <source>The free space should be sufficient to hold the compressed data from / and /home
 
       If necessary, you can create more available space
@@ -1057,78 +1072,38 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="963"/>
-        <source>Desktop</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/settings.cpp" line="964"/>
-        <source>Documents</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/settings.cpp" line="965"/>
-        <source>Downloads</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/settings.cpp" line="966"/>
-        <source>Flatpaks</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/settings.cpp" line="967"/>
-        <source>Music</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/settings.cpp" line="968"/>
-        <source>Networks</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/settings.cpp" line="969"/>
-        <source>Pictures</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/settings.cpp" line="971"/>
-        <source>Videos</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/settings.cpp" line="1096"/>
+        <location filename="../src/settings.cpp" line="1199"/>
         <source>Error reading system configuration file: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="1105"/>
+        <location filename="../src/settings.cpp" line="1208"/>
         <source>Error accessing user configuration</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="1157"/>
+        <location filename="../src/settings.cpp" line="1260"/>
         <source>Could not copy exclusion file from %1 to %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="1180"/>
+        <location filename="../src/settings.cpp" line="1283"/>
         <source>Unsupported compression &apos;%1&apos; in configuration, using zstd.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="1190"/>
+        <location filename="../src/settings.cpp" line="1293"/>
         <source>Invalid stored cores setting (%1). Using detected CPU count: %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="1200"/>
+        <location filename="../src/settings.cpp" line="1303"/>
         <source>Invalid stored throttle setting (%1). Using 0.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings.cpp" line="1291"/>
-        <location filename="../src/settings.cpp" line="1387"/>
+        <location filename="../src/settings.cpp" line="1394"/>
+        <location filename="../src/settings.cpp" line="1504"/>
         <source>Output file %1 already exists. Please use another file name, or delete the existent file.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1165,27 +1140,42 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/excludesutils.cpp" line="77"/>
+        <location filename="../src/excludesutils.cpp" line="78"/>
         <source>No diff output available.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/excludesutils.cpp" line="89"/>
-        <source>Default exclusion file not found at %1.</source>
+        <location filename="../src/excludesutils.cpp" line="91"/>
+        <source>Could not open default exclusion file at %1.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/excludesutils.cpp" line="101"/>
-        <source>Could not backup existing exclusion file to %1.</source>
+        <location filename="../src/excludesutils.cpp" line="97"/>
+        <source>Could not create exclusion file directory at %1.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/excludesutils.cpp" line="106"/>
-        <source>Could not remove existing exclusion file at %1.</source>
+        <source>Could not prepare exclusion file at %1.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/excludesutils.cpp" line="123"/>
+        <source>Could not read default exclusion file at %1.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/excludesutils.cpp" line="131"/>
+        <source>Could not write exclusion file at %1.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/excludesutils.cpp" line="113"/>
+        <source>Could not backup existing exclusion file to %1.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/excludesutils.cpp" line="139"/>
         <source>Could not copy default exclusion file from %1 to %2.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1193,234 +1183,302 @@
 <context>
     <name>Work</name>
     <message>
-        <location filename="../src/work.cpp" line="233"/>
+        <location filename="../src/work.cpp" line="247"/>
         <source>Cleaning...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/work.cpp" line="264"/>
-        <location filename="../src/work.cpp" line="930"/>
+        <location filename="../src/work.cpp" line="278"/>
+        <location filename="../src/work.cpp" line="1060"/>
         <source>Done</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/work.cpp" line="278"/>
+        <location filename="../src/work.cpp" line="292"/>
         <source>Interrupted or failed to complete</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/work.cpp" line="289"/>
-        <location filename="../src/work.cpp" line="345"/>
-        <location filename="../src/work.cpp" line="515"/>
-        <location filename="../src/work.cpp" line="554"/>
-        <location filename="../src/work.cpp" line="597"/>
-        <location filename="../src/work.cpp" line="625"/>
-        <location filename="../src/work.cpp" line="649"/>
-        <location filename="../src/work.cpp" line="768"/>
-        <location filename="../src/work.cpp" line="902"/>
-        <location filename="../src/work.cpp" line="977"/>
-        <location filename="../src/work.cpp" line="1261"/>
-        <location filename="../src/work.cpp" line="1306"/>
-        <location filename="../src/work.cpp" line="1356"/>
-        <location filename="../src/work.cpp" line="1380"/>
+        <location filename="../src/work.cpp" line="303"/>
+        <location filename="../src/work.cpp" line="360"/>
+        <location filename="../src/work.cpp" line="564"/>
+        <location filename="../src/work.cpp" line="572"/>
+        <location filename="../src/work.cpp" line="607"/>
+        <location filename="../src/work.cpp" line="650"/>
+        <location filename="../src/work.cpp" line="678"/>
+        <location filename="../src/work.cpp" line="692"/>
+        <location filename="../src/work.cpp" line="706"/>
+        <location filename="../src/work.cpp" line="714"/>
+        <location filename="../src/work.cpp" line="720"/>
+        <location filename="../src/work.cpp" line="728"/>
+        <location filename="../src/work.cpp" line="777"/>
+        <location filename="../src/work.cpp" line="793"/>
+        <location filename="../src/work.cpp" line="854"/>
+        <location filename="../src/work.cpp" line="869"/>
+        <location filename="../src/work.cpp" line="877"/>
+        <location filename="../src/work.cpp" line="888"/>
+        <location filename="../src/work.cpp" line="896"/>
+        <location filename="../src/work.cpp" line="1013"/>
+        <location filename="../src/work.cpp" line="1030"/>
+        <location filename="../src/work.cpp" line="1043"/>
+        <location filename="../src/work.cpp" line="1051"/>
+        <location filename="../src/work.cpp" line="1107"/>
+        <location filename="../src/work.cpp" line="1398"/>
+        <location filename="../src/work.cpp" line="1406"/>
+        <location filename="../src/work.cpp" line="1420"/>
+        <location filename="../src/work.cpp" line="1459"/>
+        <location filename="../src/work.cpp" line="1509"/>
+        <location filename="../src/work.cpp" line="1533"/>
         <source>Error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/work.cpp" line="290"/>
+        <location filename="../src/work.cpp" line="304"/>
         <source>Administrator access was not granted; the snapshot cannot continue.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/work.cpp" line="346"/>
+        <location filename="../src/work.cpp" line="361"/>
         <source>There&apos;s not enough free space on your target disk, you need at least %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/work.cpp" line="349"/>
+        <location filename="../src/work.cpp" line="364"/>
         <source>You have %1 free space on %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/work.cpp" line="352"/>
+        <location filename="../src/work.cpp" line="367"/>
         <source>If you are sure you have enough free space rerun the program with -o/--override-size option</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/work.cpp" line="496"/>
+        <location filename="../src/work.cpp" line="545"/>
         <source>Copying the new-iso filesystem...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/work.cpp" line="515"/>
+        <location filename="../src/work.cpp" line="564"/>
         <source>ISO template not found: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/work.cpp" line="547"/>
+        <location filename="../src/work.cpp" line="572"/>
+        <location filename="../src/work.cpp" line="692"/>
+        <source>Could not extract the ISO template: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/work.cpp" line="600"/>
         <source>Arch ISO template is missing boot/ or efi/ directories.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/work.cpp" line="550"/>
+        <location filename="../src/work.cpp" line="603"/>
         <source>Detected boot/ or efi/ under the work directory root; the template may have been extracted to the wrong location.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/work.cpp" line="553"/>
+        <location filename="../src/work.cpp" line="606"/>
         <source>Template: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/work.cpp" line="589"/>
+        <location filename="../src/work.cpp" line="642"/>
         <source>Stale archiso initramfs detected, rebuilding...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/work.cpp" line="591"/>
+        <location filename="../src/work.cpp" line="644"/>
         <source>Found /boot/archiso.img built for kernel %1, but the selected kernel is %2.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/work.cpp" line="595"/>
+        <location filename="../src/work.cpp" line="648"/>
         <source>Rebuilding /boot/archiso.img failed. Please rebuild it manually or remove the stale file.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/work.cpp" line="607"/>
+        <location filename="../src/work.cpp" line="660"/>
         <source>No /boot/archiso.img found, attempting to create one...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/work.cpp" line="612"/>
-        <location filename="../src/work.cpp" line="967"/>
+        <location filename="../src/work.cpp" line="665"/>
+        <location filename="../src/work.cpp" line="1097"/>
         <source>Warning</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/work.cpp" line="613"/>
+        <location filename="../src/work.cpp" line="666"/>
         <source>Could not create /boot/archiso.img (is the &apos;archiso&apos; package installed?). Falling back to the regular initramfs — the resulting ISO will likely fail to boot (&quot;Failed to start Switch Root&quot;).</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/work.cpp" line="625"/>
+        <location filename="../src/work.cpp" line="678"/>
         <source>Could not find an initramfs image to use.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/work.cpp" line="650"/>
+        <location filename="../src/work.cpp" line="707"/>
         <source>--grub-mbr option specified but boot/grub/i386-pc/eltorito.img is missing from iso-template</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/work.cpp" line="663"/>
+        <location filename="../src/work.cpp" line="715"/>
+        <source>Could not copy the template initrd: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/work.cpp" line="721"/>
+        <source>Could not copy the kernel: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/work.cpp" line="729"/>
+        <location filename="../src/work.cpp" line="794"/>
+        <location filename="../src/work.cpp" line="878"/>
+        <location filename="../src/work.cpp" line="897"/>
+        <source>Could not create the checksum for %1.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/work.cpp" line="737"/>
         <source>Could not create temp directory. </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/work.cpp" line="758"/>
+        <location filename="../src/work.cpp" line="778"/>
+        <source>Could not copy the kernel modules or programs into the initrd.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/work.cpp" line="844"/>
         <source>Squashing filesystem...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/work.cpp" line="769"/>
+        <location filename="../src/work.cpp" line="855"/>
         <source>Could not create linuxfs file, please check /var/log/%1.log</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/work.cpp" line="893"/>
+        <location filename="../src/work.cpp" line="870"/>
+        <location filename="../src/work.cpp" line="889"/>
+        <source>Could not move %1 to the ISO directory.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/work.cpp" line="1004"/>
         <source>Creating CD/DVD image file...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/work.cpp" line="903"/>
+        <location filename="../src/work.cpp" line="1014"/>
         <source>Could not create ISO file, please check whether you have enough space on the destination partition.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/work.cpp" line="912"/>
+        <location filename="../src/work.cpp" line="1024"/>
         <source>Making hybrid iso</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/work.cpp" line="935"/>
+        <location filename="../src/work.cpp" line="1031"/>
+        <source>Could not make the ISO hybrid; it would not boot correctly from USB.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/work.cpp" line="1044"/>
+        <location filename="../src/work.cpp" line="1052"/>
+        <source>Could not create the %1 checksum for the ISO.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/work.cpp" line="1065"/>
         <source>Success</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/work.cpp" line="936"/>
+        <location filename="../src/work.cpp" line="1066"/>
         <source>MX Snapshot completed successfully!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/work.cpp" line="937"/>
+        <location filename="../src/work.cpp" line="1067"/>
         <source>Snapshot took %1 to finish.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/work.cpp" line="938"/>
+        <location filename="../src/work.cpp" line="1068"/>
         <source>Thanks for using MX Snapshot, run MX Live USB Maker next!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/work.cpp" line="953"/>
-        <location filename="../src/work.cpp" line="974"/>
+        <location filename="../src/work.cpp" line="1083"/>
+        <location filename="../src/work.cpp" line="1104"/>
         <source>Installing </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/work.cpp" line="964"/>
+        <location filename="../src/work.cpp" line="1094"/>
         <source>paru not found; cannot install %1 from the AUR.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/work.cpp" line="968"/>
+        <location filename="../src/work.cpp" line="1098"/>
         <source>Could not install %1; continuing without the installer.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/work.cpp" line="977"/>
+        <location filename="../src/work.cpp" line="1107"/>
         <source>Could not install </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/work.cpp" line="987"/>
+        <location filename="../src/work.cpp" line="1117"/>
         <source>Calculating checksum...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/work.cpp" line="1030"/>
+        <location filename="../src/work.cpp" line="1168"/>
         <source>Building new initrd...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/work.cpp" line="1133"/>
+        <location filename="../src/work.cpp" line="1271"/>
         <source>Rebuilding initramfs with: mkinitcpio %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/work.cpp" line="1262"/>
+        <location filename="../src/work.cpp" line="1398"/>
+        <location filename="../src/work.cpp" line="1420"/>
+        <source>Could not create the package list: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/work.cpp" line="1407"/>
         <source>Could not create working directory. </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/work.cpp" line="1307"/>
+        <location filename="../src/work.cpp" line="1460"/>
         <source>Could not prepare a safe bind-root overlay. Snapshot cannot continue.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/work.cpp" line="1357"/>
-        <location filename="../src/work.cpp" line="1381"/>
+        <location filename="../src/work.cpp" line="1510"/>
+        <location filename="../src/work.cpp" line="1534"/>
         <source>Could not prepare the snapshot bind-root environment.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/work.cpp" line="1697"/>
+        <location filename="../src/work.cpp" line="1870"/>
         <source>Calculating total size of excluded files...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/work.cpp" line="1724"/>
+        <location filename="../src/work.cpp" line="1897"/>
         <source>Calculating size of root...</source>
         <translation type="unfinished"></translation>
     </message>

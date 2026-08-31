@@ -126,5 +126,6 @@ private:
     [[nodiscard]] QString defaultShellPath() const;
     [[nodiscard]] QStringList defaultExtraGroups() const;
     [[nodiscard]] bool commandExists(const QString &command) const;
+    [[nodiscard]] bool isExcludedCopyDestination(const QString &path) const;
     [[nodiscard]] QString currentLogname() const;
 };

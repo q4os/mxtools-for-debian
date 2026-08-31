@@ -2,7 +2,7 @@ Source: uefi-manager
 Section: admin
 Priority: optional
 Maintainer: Adrian <adrian@mxlinux.org>
-Build-Depends: debhelper-compat (= 13), cmake (>= 3.16), ninja-build, qt6-base-dev, qt6-base-dev-tools, qt6-tools-dev, qt6-tools-dev-tools
+Build-Depends: debhelper-compat (= 13), cmake (>= 3.16), ninja-build, qt6-base-dev, qt6-base-dev-tools, qt6-tools-dev, qt6-tools-dev-tools, efibootmgr
 Standards-Version: 4.5.1
 Vcs-Git: https://github.com/mx-linux/uefi-manager
 Homepage: https://mxlinux.org
@@ -13,8 +13,7 @@ Depends: efibootmgr,
          xdg-utils | mx-viewer,
          ${misc:Depends},
          ${shlibs:Depends}
-Description: UEFI Manager
- A graphical tool for managing UEFI boot entries.
+Description: graphical tool for managing UEFI boot entries
  Allows users to view, add, modify, and delete UEFI boot entries
  in a user-friendly interface. Designed for MX Linux, but may
  work on other systems.

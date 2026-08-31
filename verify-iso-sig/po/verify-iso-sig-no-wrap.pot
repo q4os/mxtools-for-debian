@@ -1,0 +1,433 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-31 00:37+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: verify-iso-sig-gui.sh:100
+msgid "Verify ISO signature"
+msgstr ""
+
+#: verify-iso-sig-gui.sh:108
+msgid "Trust this key"
+msgstr ""
+
+#: verify-iso-sig-gui.sh:109
+msgid "Check Another File"
+msgstr ""
+
+#: verify-iso-sig-gui.sh:120 manage-trusted-keys-gui.sh:114
+msgid "error: yad is not installed"
+msgstr ""
+
+#. TRANSLATORS: ${VERIFY} will be replaced with a file path (this
+#. script's own installed location) - keep the placeholder, including
+#. the braces, exactly as-is.
+#: verify-iso-sig-gui.sh:124 manage-trusted-keys-gui.sh:115
+#, sh-format
+msgid "error: ${VERIFY} not found or not executable"
+msgstr ""
+
+#. TRANSLATORS: ${MANAGE_KEYS} will be replaced with a file path, same
+#. as ${VERIFY} above - keep the placeholder, including the braces,
+#. exactly as-is.
+#: verify-iso-sig-gui.sh:128
+#, sh-format
+msgid "error: ${MANAGE_KEYS} not found or not executable"
+msgstr ""
+
+#: verify-iso-sig-gui.sh:168 verify-iso-sig-gui.sh:967
+#: manage-trusted-keys-gui.sh:169 manage-trusted-keys-gui.sh:183
+msgid "OK"
+msgstr ""
+
+#: verify-iso-sig-gui.sh:277
+msgid "Pick the .iso file, or its .sig/.asc/.gpg/.sign signature file directly."
+msgstr ""
+
+#. TRANSLATORS: keep the <b>/</b> tags exactly as-is (they render as
+#. bold text, not literal characters).
+#: verify-iso-sig-gui.sh:280
+msgid "The other one is found automatically - <b>but only if it's in the same folder</b>."
+msgstr ""
+
+#: verify-iso-sig-gui.sh:342
+msgid "ISO or signature file"
+msgstr ""
+
+#: verify-iso-sig-gui.sh:364
+msgid "Or drag a .iso or signature file here"
+msgstr ""
+
+#: verify-iso-sig-gui.sh:394
+msgid "Pick Files"
+msgstr ""
+
+#: verify-iso-sig-gui.sh:395
+msgid "Drag a File"
+msgstr ""
+
+#: verify-iso-sig-gui.sh:427
+msgid "Verify"
+msgstr ""
+
+#: verify-iso-sig-gui.sh:428 verify-iso-sig-gui.sh:697
+#: manage-trusted-keys-gui.sh:297
+msgid "Cancel"
+msgstr ""
+
+#: verify-iso-sig-gui.sh:429 manage-trusted-keys-gui.sh:98
+#: verify-iso-sig.desktop.in:16
+msgid "Manage Trusted Keys"
+msgstr ""
+
+#: verify-iso-sig-gui.sh:496
+msgid "That's a folder, not a file - pick the .iso file itself (or its .sig/.asc/.gpg/.sign signature file) directly."
+msgstr ""
+
+#: verify-iso-sig-gui.sh:524
+msgid "No ISO or signature file was selected."
+msgstr ""
+
+#: verify-iso-sig-gui.sh:532
+msgid "Cannot read ISO file:"
+msgstr ""
+
+#: verify-iso-sig-gui.sh:537
+msgid "Cannot find the matching signature file:"
+msgstr ""
+
+#: verify-iso-sig-gui.sh:607
+msgid "Verifying signature - this can take a while for a large ISO..."
+msgstr ""
+
+#: verify-iso-sig-gui.sh:609
+msgid "Verifying signature - this can take a few seconds"
+msgstr ""
+
+#. TRANSLATORS: continues the previous line's sentence ("Verifying
+#. signature - this can take a few seconds") onto a second line -
+#. the two need to read as one continuous sentence together.
+#: verify-iso-sig-gui.sh:613
+msgid "if the signing key needs to be fetched from a keyserver..."
+msgstr ""
+
+#. TRANSLATORS: ${BTN_TRUST_THIS_KEY} will be replaced with the
+#. translated "Trust this key" button label - keep the placeholder,
+#. including the braces, exactly as-is. The straight quotes around
+#. it are just English's own convention - please use your
+#. language's own quotation marks instead (e.g. « », „", etc.) if
+#. that reads more naturally.
+#. Computed once here (identical in both branches below) rather than
+#. duplicated per branch.
+#: verify-iso-sig-gui.sh:765
+#, sh-format
+msgid "By clicking \"${BTN_TRUST_THIS_KEY}\" you confirm you've checked the Key ID or fingerprint yourself and want to trust and remember this key for future checks."
+msgstr ""
+
+#. TRANSLATORS: keep the <b>/</b> tags exactly as-is (they render
+#. as bold text, not literal characters).
+#: verify-iso-sig-gui.sh:772
+msgid "Signature check: <b>GOOD</b> - the ISO exactly matches this key."
+msgstr ""
+
+#. TRANSLATORS: keep the URL exactly as-is (unchanged, not
+#. translated).
+#: verify-iso-sig-gui.sh:775
+msgid "Note: that identity is self-declared by whoever created the key - it is NOT independently verified, unlike the Key ID or fingerprint. Only trust this key if you've confirmed the Key ID or fingerprint yourself (e.g. from the respin/distro's own official site). See https://mxlinux.org/wiki/system/signed-iso-files/ for the officially documented MX/antiX keys."
+msgstr ""
+
+#: verify-iso-sig-gui.sh:776
+msgid "This ISO's signing key is not one of the documented MX/antiX keys."
+msgstr ""
+
+#: verify-iso-sig-gui.sh:776 verify-iso-sig-gui.sh:782
+msgid "Key ID:"
+msgstr ""
+
+#: verify-iso-sig-gui.sh:776 verify-iso-sig-gui.sh:782
+msgid "Claimed identity:"
+msgstr ""
+
+#: verify-iso-sig-gui.sh:776 verify-iso-sig-gui.sh:782
+msgid "Fingerprint:"
+msgstr ""
+
+#. TRANSLATORS: keep the <b>/</b> tags exactly as-is (they render
+#. as bold text, not literal characters).
+#: verify-iso-sig-gui.sh:780
+msgid "Signature check: <b>GOOD</b> - the checksum listing exactly matches this key (the ISO's own hash is checked separately, next)."
+msgstr ""
+
+#: verify-iso-sig-gui.sh:781
+msgid "Note: that identity is self-declared by whoever created the key - it is NOT independently verified, unlike the Key ID or fingerprint. Only trust this key if you've confirmed it yourself (e.g. from the distro's own official website or keyserver listing)."
+msgstr ""
+
+#: verify-iso-sig-gui.sh:782
+msgid "This checksum-listing file's signing key isn't one this tool already recognizes."
+msgstr ""
+
+#: verify-iso-sig-gui.sh:799
+msgid "This signing key currently only lives in your personal keyring (pubring.kbx)."
+msgstr ""
+
+#: verify-iso-sig-gui.sh:799
+msgid "Copy it into ~/.gnupg/trustedkeys.gpg so future checks don't depend on it staying there?"
+msgstr ""
+
+#: verify-iso-sig-gui.sh:801
+msgid "This signing key was just fetched from a keyserver."
+msgstr ""
+
+#: verify-iso-sig-gui.sh:801
+msgid "Remember it locally, in ~/.gnupg/trustedkeys.gpg, so future checks don't need the network again?"
+msgstr ""
+
+#: verify-iso-sig-gui.sh:815
+msgid "Keep this key"
+msgstr ""
+
+#: verify-iso-sig-gui.sh:816
+msgid "No thanks"
+msgstr ""
+
+#: verify-iso-sig-gui.sh:828
+msgid "key saved locally - future checks won't need the network"
+msgstr ""
+
+#: verify-iso-sig-gui.sh:830
+msgid "used an already-cached key, no network needed"
+msgstr ""
+
+#: verify-iso-sig-gui.sh:832
+msgid "used a key from your personal keyring (pubring.kbx)"
+msgstr ""
+
+#: verify-iso-sig-gui.sh:834
+msgid "fetched the signing key from a keyserver"
+msgstr ""
+
+#: verify-iso-sig-gui.sh:860
+msgid "Verified OK"
+msgstr ""
+
+#: verify-iso-sig-gui.sh:862
+msgid "Verification FAILED"
+msgstr ""
+
+#: verify-iso-sig-gui.sh:873 verify-iso-sig-gui.sh:875
+msgid "ISO:"
+msgstr ""
+
+#: verify-iso-sig-gui.sh:873
+msgid "Checksum file:"
+msgstr ""
+
+#: verify-iso-sig-gui.sh:873
+msgid "Checksum signature:"
+msgstr ""
+
+#: verify-iso-sig-gui.sh:875
+msgid "SIG:"
+msgstr ""
+
+#. TRANSLATORS: ${BTN_CHECK_ANOTHER_FILE} and ${BTN_TRUST_THIS_KEY}
+#. will be replaced with the translated "Check Another File"/
+#. "Trust this key" button labels - keep both placeholders,
+#. including the braces, exactly as-is. The straight quotes
+#. around each are just English's own convention - please use
+#. your language's own quotation marks instead (e.g. « », „",
+#. etc.) if that reads more naturally.
+#: verify-iso-sig-gui.sh:908
+#, sh-format
+msgid "This only shows as FAILED because you didn't trust this signing key - the cryptographic check itself already came back GOOD (see the technical details below). If you're confident this is the genuine key (e.g. you've checked its fingerprint against the distro's own official site or keyserver listing), click \"${BTN_CHECK_ANOTHER_FILE}\" and choose \"${BTN_TRUST_THIS_KEY}\" this time."
+msgstr ""
+
+#: verify-iso-sig-gui.sh:910
+msgid "The cryptographic check itself already came back GOOD (see the technical details below) - this only shows as FAILED because the key couldn't be saved for future trust (see the technical details for why). Feel free to try again."
+msgstr ""
+
+#. TRANSLATORS: ${BTN_CHECK_ANOTHER_FILE} will be replaced with
+#. the translated "Check Another File" button label - keep the
+#. placeholder, including the braces, exactly as-is. The
+#. straight quotes around it are just English's own convention
+#. - please use your language's own quotation marks instead
+#. (e.g. « », „", etc.) if that reads more naturally.
+#: verify-iso-sig-gui.sh:918
+#, sh-format
+msgid "You pointed this tool at a checksum-listing file, not a single ISO - it can cover many ISOs at once, so there's no one file to check unless exactly one of the ones it mentions is actually present here (see the technical details below for which). Use \"${BTN_CHECK_ANOTHER_FILE}\" and point at the actual .iso file instead."
+msgstr ""
+
+#: verify-iso-sig-gui.sh:920
+msgid "The checksum file that lists this ISO's hash failed its own verification (bad/untrusted signature, or its key couldn't be confirmed) - nothing in it can be trusted. Re-download the checksum/signature files (and probably the ISO too), ideally from a different mirror."
+msgstr ""
+
+#. TRANSLATORS: ${CHECKSUM_INFO_SAFE} will be replaced with the
+#. checksum-listing file's name (e.g. "SHA256SUMS") - keep the
+#. placeholder, including the braces, exactly as-is.
+#: verify-iso-sig-gui.sh:926
+#, sh-format
+msgid "This ISO was checked against a signed checksum listing (${CHECKSUM_INFO_SAFE}) that IS validly signed - but the ISO's own hash doesn't match what's listed. The checksum list itself is trustworthy; this particular download is not. Re-download the ISO, ideally from a different mirror."
+msgstr ""
+
+#. TRANSLATORS: ${BTN_CHECK_ANOTHER_FILE} will be replaced with
+#. the translated "Check Another File" button label - keep the
+#. placeholder, including the braces, exactly as-is. The
+#. straight quotes around it are just English's own convention
+#. - please use your language's own quotation marks instead
+#. (e.g. « », „", etc.) if that reads more naturally.
+#: verify-iso-sig-gui.sh:934
+#, sh-format
+msgid "No direct signature file was found for this ISO, and none of the checksum-listing files found nearby mention this exact ISO filename either. If this distro uses a different naming convention, use \"${BTN_CHECK_ANOTHER_FILE}\" and point at the right file directly."
+msgstr ""
+
+#. TRANSLATORS: ${BTN_CHECK_ANOTHER_FILE} will be replaced with
+#. the translated "Check Another File" button label - keep the
+#. placeholder, including the braces, exactly as-is. The
+#. straight quotes around it are just English's own convention
+#. - please use your language's own quotation marks instead
+#. (e.g. « », „", etc.) if that reads more naturally.
+#: verify-iso-sig-gui.sh:942
+#, sh-format
+msgid "The file names don't match, so this signature file may simply not belong to this .iso. Use \"${BTN_CHECK_ANOTHER_FILE}\" and pick the signature file named exactly like the ISO plus .sig/.asc/.gpg."
+msgstr ""
+
+#: verify-iso-sig-gui.sh:944
+msgid "On top of the signature not matching, this signing key also isn't one of the officially documented MX/antiX keys - treat this file as untrustworthy and re-download from an official source."
+msgstr ""
+
+#: verify-iso-sig-gui.sh:946
+msgid "The ISO may be corrupted, or the download was incomplete or tampered with - try re-downloading it, ideally from a different mirror."
+msgstr ""
+
+#: manage-trusted-keys-gui.sh:104
+msgid "Forget Selected"
+msgstr ""
+
+#: manage-trusted-keys-gui.sh:191
+msgid "Could not read the list of trusted keys:"
+msgstr ""
+
+#: manage-trusted-keys-gui.sh:194
+msgid "No signing keys are currently saved in trustedkeys.gpg."
+msgstr ""
+
+#. TRANSLATORS: "Trust"/"Keep" here are informal short references to
+#. the main GUI's "Trust this key"/"Keep this key" button labels, not
+#. verbatim quotes - no need to match those translated labels exactly.
+#. The straight quotes around each word are just English's own
+#. convention - please use your language's own quotation marks
+#. instead (e.g. « », „", etc.) if that reads more naturally.
+#: manage-trusted-keys-gui.sh:201
+msgid "A key ends up there after you choose to \"Trust\"/\"Keep\" it while verifying an ISO."
+msgstr ""
+
+#: manage-trusted-keys-gui.sh:215
+msgid "Remove"
+msgstr ""
+
+#: manage-trusted-keys-gui.sh:216
+msgid "Fingerprint"
+msgstr ""
+
+#: manage-trusted-keys-gui.sh:217
+msgid "Key ID"
+msgstr ""
+
+#: manage-trusted-keys-gui.sh:218
+msgid "User ID"
+msgstr ""
+
+#: manage-trusted-keys-gui.sh:219
+msgid "Status"
+msgstr ""
+
+#: manage-trusted-keys-gui.sh:220
+msgid "Expiration Date"
+msgstr ""
+
+#. TRANSLATORS: ${BTN_FORGET_SELECTED} will be replaced with the
+#. translated "Forget Selected" button label - keep the
+#. placeholder, including the braces, exactly as-is. The
+#. straight quotes around it are just English's own convention
+#. - please use your language's own quotation marks instead
+#. (e.g. « », „", etc.) if that reads more naturally.
+#: manage-trusted-keys-gui.sh:234
+#, sh-format
+msgid "Keys saved in ~/.gnupg/trustedkeys.gpg - check any you want to forget, then click \"${BTN_FORGET_SELECTED}\"."
+msgstr ""
+
+#: manage-trusted-keys-gui.sh:236
+msgid "Close"
+msgstr ""
+
+#. TRANSLATORS: shown as-is in the list's "Status" column (a
+#. gpg key's trust validity), one word each.
+#: manage-trusted-keys-gui.sh:257
+msgid "valid"
+msgstr ""
+
+#. TRANSLATORS: same "Status" column as "valid" above.
+#: manage-trusted-keys-gui.sh:259
+msgid "expired"
+msgstr ""
+
+#. TRANSLATORS: same "Status" column as "valid" above.
+#: manage-trusted-keys-gui.sh:261
+msgid "revoked"
+msgstr ""
+
+#. TRANSLATORS: shown in the "Expires" column when the key has
+#. no expiration date set.
+#: manage-trusted-keys-gui.sh:269
+msgid "never"
+msgstr ""
+
+#: manage-trusted-keys-gui.sh:281
+msgid "No key was checked - nothing to forget."
+msgstr ""
+
+#. TRANSLATORS: ${COUNT} will be replaced with a number (how many
+#. keys are checked) - keep the placeholder, including the
+#. braces, exactly as-is.
+#: manage-trusted-keys-gui.sh:295
+#, sh-format
+msgid "Forget ${COUNT} selected key(s) from trustedkeys.gpg?"
+msgstr ""
+
+#: manage-trusted-keys-gui.sh:295
+msgid "If any of them is also on the documented MX/antiX key list, this tool will still recognize it automatically next time - this only removes the local cache entry, not that recognition."
+msgstr ""
+
+#: manage-trusted-keys-gui.sh:296
+msgid "Forget"
+msgstr ""
+
+#: manage-trusted-keys-gui.sh:312
+msgid "Some keys could not be removed:"
+msgstr ""
+
+#: verify-iso-sig.desktop.in:3
+msgid "Verify ISO Signature"
+msgstr ""
+
+#: verify-iso-sig.desktop.in:4
+msgid "Check the GPG signature of a downloaded ISO (built-in support for MX Linux/antiX signing keys)"
+msgstr ""
+
+#: verify-iso-sig.desktop.in:10
+msgid "iso;sig;gpg;"
+msgstr ""

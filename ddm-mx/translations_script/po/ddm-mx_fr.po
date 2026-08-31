@@ -122,7 +122,7 @@ msgstr "Les options suivantes sont autorisées :"
 
 #: ../ddm-mx:285
 msgid "Offer debian-backports alternative"
-msgstr "Proposer l’alternative Debian rétroportage - backports"
+msgstr "Proposer l’alternative Debian rétroportage « backports »"
 
 #: ../ddm-mx:287
 msgid "Offer Nvidia developer repo alternative"
@@ -262,13 +262,13 @@ msgstr "Réinitialisation des sources"
 #: ../ddm-mx:640
 #, sh-format
 msgid "Press <Enter> to exit"
-msgstr "Appuyez sur <Enter> pour quitter."
+msgstr "Appuyez sur <Entrée> pour quitter."
 
 #. enabling debian-backports
 #: ../ddm-mx:654
 #, sh-format
 msgid "Enabling backports repo"
-msgstr "Activation du dépôt de rétroportage - backports -"
+msgstr "Activation du dépôt de rétroportage « backports »"
 
 #: ../ddm-mx:655 ../ddm-mx:665
 #, sh-format
@@ -312,7 +312,7 @@ msgstr "Erreur lors du téléchargement de la clé de dépôt direct Nvidia"
 msgid "Would you like to check debian-backports for a later version?"
 msgstr ""
 "Voulez-vous vérifier si une version plus récente se trouve dans les dépôts "
-"de rétroportage - backports - Debian ?"
+"de rétroportage « backports » Debian ?"
 
 #: ../ddm-mx:710
 #, sh-format
@@ -334,7 +334,7 @@ msgstr "Non"
 #: ../ddm-mx:1346 ../ddm-mx:1483 ../ddm-mx:1490
 #, sh-format
 msgid "Enter Number of selection"
-msgstr "Entrer le numéro de sélection"
+msgstr "Entrez le numéro de sélection"
 
 #: ../ddm-mx:719 ../ddm-mx:723 ../ddm-mx:736 ../ddm-mx:740 ../ddm-mx:753
 #: ../ddm-mx:757 ../ddm-mx:782 ../ddm-mx:789 ../ddm-mx:816 ../ddm-mx:823
@@ -380,7 +380,7 @@ msgstr "Quel pilote souhaitez-vous installer ?"
 #: ../ddm-mx:770
 #, sh-format
 msgid "Main repos or debian-backports?"
-msgstr "Dépots principaux ou de rétroportages Debian ?"
+msgstr "Dépôts principaux ou de rétroportages « backports » Debian ?"
 
 #: ../ddm-mx:772 ../ddm-mx:806
 #, sh-format
@@ -472,7 +472,7 @@ msgid ""
 "Please remove with  <sudo nvidia-install --uninstall> and reboot if you wish"
 " to proceed"
 msgstr ""
-"Veuillez désinstaller à l’aide de « sudo nvidia-install --uninstall » puis "
+"Veuillez désinstaller à l’aide de « sudo nvidia-install --uninstall » puis "
 "redémarrer si vous souhaitez continuer"
 
 #: ../ddm-mx:961
@@ -513,7 +513,7 @@ msgid ""
 "Use \"nvidia-run-mx\" followed by your application command to use the nvidia"
 " graphics"
 msgstr ""
-"Utiliser « nvidia-run-mx » suivi de la commande de votre application pour "
+"Utiliser « nvidia-run-mx » suivi de la commande de votre application pour "
 "utiliser le système graphique Nvidia"
 
 #: ../ddm-mx:1025
@@ -541,8 +541,8 @@ msgid ""
 "Uh oh. Your card is only supported by older legacy drivers which are not in "
 "any current Debian suite."
 msgstr ""
-"Oh oh. Votre carte est seulement gérée par d’anciens pilotes hérités « "
-"legacy » qui ne sont pas dans la suite Debian actuelle."
+"Oh oh. Votre carte est seulement gérée par d’anciens pilotes hérités "
+"« legacy » qui ne sont pas dans la suite Debian actuelle."
 
 #. candidate from enabled repos
 #: ../ddm-mx:1162 ../ddm-mx:1173 ../ddm-mx:1182
@@ -554,7 +554,7 @@ msgstr "Version candidate du dépôt principal :  "
 #: ../ddm-mx:1164
 #, sh-format
 msgid "Debian backports candidate is:  "
-msgstr "Version candidate des rétroportages - backports - Debian :  "
+msgstr "Version candidate des rétroportages « backports » Debian :  "
 
 #. test repo candidate
 #: ../ddm-mx:1175
@@ -702,7 +702,7 @@ msgid ""
 "debian-backports."
 msgstr ""
 "Des versions plus récentes des pilotes peuvent être disponibles dans le "
-"dépôt test MX ou dans les rétroportages - backports- de Debian."
+"dépôt test MX ou dans les rétroportages « backports » de Debian."
 
 #: ../nvidia-detect-mx:311
 #, sh-format

@@ -1,0 +1,25 @@
+[Desktop Entry]
+Type=Application
+Name=ISO Signature Verifier
+Comment=Check the GPG signature of a downloaded ISO (built-in support for MX Linux/antiX signing keys)
+Exec=/usr/bin/verify-iso-sig %F
+TryExec=/usr/bin/verify-iso-sig
+Icon=verify-iso-sig
+StartupWMClass=verify-iso-sig
+Terminal=false
+Categories=GNOME;GTK;System;X-MX-Live;
+Keywords=iso;sig;gpg;
+MimeType=application/vnd.efi.iso;application/x-iso9660-image;application/x-cd-image;application/pgp-signature;
+NoDisplay=false
+StartupNotify=false
+Actions=ManageTrustedKeys;DragAndDrop;
+
+[Desktop Action ManageTrustedKeys]
+Name=Manage Trusted Keys
+Exec=/usr/bin/verify-iso-sig --manage-keys
+Icon=verify-iso-sig
+
+[Desktop Action DragAndDrop]
+Name=Verify with Drag & Drop
+Exec=/usr/bin/verify-iso-sig --drag-and-drop
+Icon=verify-iso-sig

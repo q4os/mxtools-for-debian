@@ -1,8 +1,19 @@
-uefi-manager (26.06.1302) stable; urgency=medium
+uefi-manager (26.07.1.1302) stable; urgency=medium
 
   * Release
 
- -- Devs <devteam@localdomain>  Mon, 13 Jul 2026 13:05:39 +0200
+ -- Devs <devteam@localdomain>  Mon, 31 Aug 2026 17:00:21 +0200
+
+uefi-manager (26.07.1) mx; urgency=medium
+
+  * Require administrator authentication for all privileged UEFI Manager
+    operations.
+  * Fix the Cancel button so an accidental mouse press does not
+    immediately close the window.
+  * Restore the user's home environment after opening documentation
+    from a root session.
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 27 Jul 2026 22:42:12 -0400
 
 uefi-manager (26.06) mx; urgency=medium
 

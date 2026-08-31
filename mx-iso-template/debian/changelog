@@ -1,8 +1,14 @@
-mx-iso-template (26.05.3mx25.1302) stable; urgency=medium
+mx-iso-template (26.08.1mx25.1302) stable; urgency=medium
 
   * Release
 
- -- Devs <devteam@localdomain>  Mon, 13 Jul 2026 13:05:31 +0200
+ -- Devs <devteam@localdomain>  Mon, 31 Aug 2026 17:00:18 +0200
+
+mx-iso-template (26.08.1mx25) mx; urgency=medium
+
+  * Restore invalid language diagnostics
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 05 Aug 2026 21:28:27 -0400
 
 mx-iso-template (26.05.3mx25) mx; urgency=medium
 

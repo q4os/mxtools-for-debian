@@ -1,10 +1,49 @@
-mx-packageinstaller (26.07.1302) stable; urgency=medium
+mx-packageinstaller (26.07.5.1302) stable; urgency=medium
 
   * Release
 
- -- Devs <devteam@localdomain>  Mon, 13 Jul 2026 13:05:32 +0200
+ -- Devs <devteam@localdomain>  Mon, 31 Aug 2026 17:00:18 +0200
 
-mx-packageinstaller (26.07) mx; urgency=medium
+mx-packageinstaller (26.07.5) mx; urgency=medium
+
+  * Various code improvements and fixes
+  * Use each package manager's version-ordering rules when deciding whether
+    packages can be upgraded, and sort package rows by their status icon
+  * Show architecture-independent APT packages and correctly handle package
+    versions whose Debian revision is explicitly zero
+  * Add backend-specific Help content and clearer package-management guidance
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 30 Jul 2026 13:16:41 -0400
+
+mx-packageinstaller (26.07.3) mx; urgency=medium
+
+  * Prevent package names from being interpreted as commands when showing
+    installation and removal previews
+  * Select the correct newest package version when a version ends with an
+    omitted zero
+  * Keep LibreCAD and LibrePCB visible when hiding library packages
+  * Show an error when refreshing Flatpak application data fails
+  * Remove terminal control sequences that would otherwise appear as garbage
+    in the operation output
+  * Detect package-manager conflicts while dpkg is installing or configuring
+    packages
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 29 Jul 2026 01:14:57 -0400
+
+mx-packageinstaller (26.07.2) mx; urgency=medium
+
+  * Stop the complete package operation, including child processes, when
+    cancelling an installation, removal, or package-list download
+  * Report package-list download timeouts instead of waiting indefinitely,
+    and safely skip malformed package entries
+  * Keep the remote list in sync after a Flatpak remote is removed, and show
+    an error when the removal fails
+  * Report when installing a popular application fails during its final setup
+  * Harden privileged marker creation
+
+ -- Adrian <adrian@mxlinux.org>  Sat, 11 Jul 2026 13:48:31 -0400
+
+mx-packageinstaller (26.07.1) mx; urgency=medium
 
   * Abort the current operation and return to where you were when
     the authentication dialog is cancelled, instead of showing a

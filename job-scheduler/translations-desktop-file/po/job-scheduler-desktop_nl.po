@@ -26,7 +26,7 @@ msgstr ""
 #. The desktop entry name will be displayed within the menu.
 #: desktop-in/job-scheduler.desktop.in:4
 msgid "Job Scheduler"
-msgstr "Name=Takenschema Maker"
+msgstr "Takenschema Maker"
 
 #. # The desktop entry comment will be shown within the menu.
 #: desktop-in/job-scheduler.desktop.in:6

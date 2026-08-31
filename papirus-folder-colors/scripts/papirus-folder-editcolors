@@ -1,0 +1,29 @@
+#!/bin/bash
+
+### This app was developed by MX Devs 2023 and released under GPLv3
+### Papirus-folder-editcolors
+### Version=24.01.01
+
+source /tmp/pfr-list.conf
+
+ICON_LIST=$(find $TARGET_NEW/$PFR_NAME/*/places/*.svg \! -type d,l)
+icon_list=($ICON_LIST)
+        
+for i in ${icon_list[@]}; do
+
+    sed -i "s/$COLOR_MAIN/$COLOR_MAIN_NEW/gi" $i
+    sed -i "s/$COLOR_TOP/$COLOR_TOP_NEW/gi" $i
+    sed -i "s/$COLOR_SYMBOL/$COLOR_SYMBOL_NEW/gi" $i
+        
+done
+
+printf "settings_path=$TARGET_NEW/$PFR_NAME
+temp1=$COLOR_MAIN_NEW
+temp2=$COLOR_TOP_NEW
+temp3=$COLOR_SYMBOL_NEW
+iconswitch=$ICONSWITCH
+settings_type=$TYPE_NEW" > $TARGET_NEW/$PFR_NAME/papirus-folder-colors.conf
+
+rm -f /tmp/pfr-list.conf
+
+exit

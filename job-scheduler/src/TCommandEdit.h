@@ -41,9 +41,13 @@ signals:
 
 private:
     void setExecuteList(const QString &time);
+    void updateCommandWarning(const QString &command);
+    static bool isCommandAvailable(const QString &exe);
+
     QLineEdit *timeEdit;
     QComboBox *userCombo;
     QLineEdit *commandEdit;
+    QLabel *commandWarningLabel;
     QTextEdit *commentEdit;
     QLabel *exeLabel;
     QLabel *userLabel;

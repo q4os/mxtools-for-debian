@@ -1,8 +1,18 @@
-mx-conky (26.06.1302) stable; urgency=medium
+mx-conky (26.07.1302) stable; urgency=medium
 
   * Release
 
- -- Devs <devteam@localdomain>  Mon, 13 Jul 2026 13:05:30 +0200
+ -- Devs <devteam@localdomain>  Mon, 31 Aug 2026 17:00:17 +0200
+
+mx-conky (26.07) mx; urgency=medium
+
+  * Keep conkies that were already running active after preview generation,
+    and prevent leftover preview processes from affecting other conkies.
+  * Handle conky files and editor commands correctly when their names or paths
+    contain spaces or special characters.
+  * Install a manual page with information about using mx-conky and its files.
+
+ -- Adrian <adrian@mxlinux.org>  Sun, 26 Jul 2026 20:10:35 -0400
 
 mx-conky (26.06) mx; urgency=medium
 

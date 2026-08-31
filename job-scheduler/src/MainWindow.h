@@ -39,7 +39,7 @@ private slots:
     void dataChanged();
     void changeCurrent(Crontab *cron, TCommand *cmnd);
 
-    void AboutJobScheduler();
+    void aboutJobScheduler();
 
 signals:
 

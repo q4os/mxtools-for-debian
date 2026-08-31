@@ -1,0 +1,7 @@
+verify-iso-sig usr/bin/
+verify-iso-sig-gui.sh usr/lib/verify-iso-sig/
+locale usr/lib/verify-iso-sig/
+help usr/lib/verify-iso-sig/
+verify-iso-sig.svg usr/lib/verify-iso-sig/
+verify-iso-sig.svg usr/share/icons/hicolor/scalable/apps/
+verify-iso-sig.desktop usr/share/applications/

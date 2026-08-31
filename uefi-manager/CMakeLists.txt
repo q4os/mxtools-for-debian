@@ -1,5 +1,5 @@
 # **********************************************************************
-# * Copyright (C) 2024-2025 MX Authors
+# * Copyright (C) 2024-2026 MX Authors
 # *
 # * Authors: Adrian <adrian@mxlinux.org>
 # *          MX Linux <http://mxlinux.org>
@@ -108,6 +108,19 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTORCC ON)
 
+# Absolute directory where the privileged helper binary is installed.
+set(HELPER_INSTALL_DIR "/usr/libexec/uefi-manager" CACHE PATH
+    "Absolute install directory for the privileged helper binary")
+if(NOT IS_ABSOLUTE "${HELPER_INSTALL_DIR}")
+    message(FATAL_ERROR "HELPER_INSTALL_DIR must be an absolute path, got: ${HELPER_INSTALL_DIR}")
+endif()
+set(HELPER_PATH "${HELPER_INSTALL_DIR}/helper")
+configure_file(
+    scripts/org.mxlinux.pkexec.mx-uefimanager-helper.policy.in
+    ${CMAKE_BINARY_DIR}/org.mxlinux.pkexec.mx-uefimanager-helper.policy
+    @ONLY
+)
+
 # Define source files
 set(SOURCES
     src/main.cpp
@@ -137,6 +150,7 @@ set(RESOURCE_FILES
 
 # Get all translation files
 file(GLOB TRANSLATION_FILES "translations/*.ts")
+list(FILTER TRANSLATION_FILES EXCLUDE REGEX "/uefi-manager_en_US\\.ts$")
 
 # Create the executable
 add_executable(uefi-manager
@@ -164,7 +178,6 @@ target_link_libraries(helper
 # Set compiler flags
 target_compile_options(uefi-manager PRIVATE
     -Wpedantic
-    -pedantic
     -Werror=return-type
     -Werror=switch
     -Werror=uninitialized
@@ -173,7 +186,6 @@ target_compile_options(uefi-manager PRIVATE
 
 target_compile_options(helper PRIVATE
     -Wpedantic
-    -pedantic
     -Werror=return-type
     -Werror=switch
     -Werror=uninitialized
@@ -191,6 +203,7 @@ endif()
 
 # Set compile definitions
 target_compile_definitions(uefi-manager PRIVATE
+    HELPER_PATH="${HELPER_PATH}"
     QT_DEPRECATED_WARNINGS
     QT_DISABLE_DEPRECATED_BEFORE=0x060000
     VERSION="${PROJECT_VERSION}"
@@ -242,7 +255,7 @@ install(TARGETS uefi-manager
 )
 
 install(TARGETS helper
-    RUNTIME DESTINATION lib/uefi-manager
+    RUNTIME DESTINATION ${HELPER_INSTALL_DIR}
 )
 
 # Unit tests

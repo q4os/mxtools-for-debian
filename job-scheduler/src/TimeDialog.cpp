@@ -185,7 +185,7 @@ TimeDialog::TimeDialog(QString time, QWidget *parent)
         QPalette errPal = timeEdit->palette();
         errPal.setColor(QPalette::Text, QColor(189, 55, 44));
         timeEdit->setPalette(errPal);
-        timeEdit->setText(QStringLiteral("Time format error"));
+        timeEdit->setText(tr("Time format error"));
         timeEdit->setToolTip(tr("The current time expression is invalid. Please fix it or cancel."));
     } else {
         timeEdit->setText(outTime);

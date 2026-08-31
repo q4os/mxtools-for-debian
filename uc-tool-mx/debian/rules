@@ -2,16 +2,12 @@
 
 override_dh_install:
 	dh_install
-	sed -i "s/@VERSION@/$$(dpkg-parsechangelog -SVersion)/g" \
-		debian/uc-tool-mx/usr/bin/uc-tool
-	sed -i "s/@VERSION_DATE@/$$(TZ=America/New_York date --date "$$(dpkg-parsechangelog -SDate)" '+%Y-%m-%d')/" \
-		debian/uc-tool-mx/usr/bin/uc-tool
+	sed -i "s/@VERSION@/$$(dpkg-parsechangelog -SVersion)/g" debian/uc-tool-mx/usr/bin/uc-tool
+	sed -i "s/@VERSION_DATE@/$$(TZ=America/New_York date --date "$$(dpkg-parsechangelog -SDate)" '+%Y-%m-%d')/" debian/uc-tool-mx/usr/bin/uc-tool
 override_dh_installman:
 	dh_installman
-	sed -i "s/@VERSION@/$$(dpkg-parsechangelog -SVersion)/g" \
-		debian/uc-tool-mx/usr/share/man/man1/uc-tool.1
-	sed -i "s/@VERSION_DATE@/$$(TZ=America/New_York date --date "$$(dpkg-parsechangelog -SDate)" '+%Y-%m-%d')/" \
-		debian/uc-tool-mx/usr/share/man/man1/uc-tool.1
+	sed -i "s/@VERSION@/$$(dpkg-parsechangelog -SVersion)/g" debian/uc-tool-mx/usr/share/man/man1/uc-tool.1
+	sed -i "s/@VERSION_DATE@/$$(TZ=America/New_York date --date "$$(dpkg-parsechangelog -SDate)" '+%Y-%m-%d')/" debian/uc-tool-mx/usr/share/man/man1/uc-tool.1
 %:
 	dh $@
 

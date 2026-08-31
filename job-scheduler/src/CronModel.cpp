@@ -23,15 +23,15 @@ QVariant CronModel::data(const QModelIndex &idx, int role) const
         auto *cmnd = getTCommand(idx);
         switch (idx.column()) {
         case Data::Time:
-            return cmnd->time;
+            return cmnd->getTime();
         case Data::User:
-            return cmnd->user;
+            return cmnd->getUser();
         case Data::Command:
-            return cmnd->command;
+            return cmnd->getCommand();
         }
     } else {
         if (idx.column() == 0) {
-            return getCrontab(idx)->cronOwner;
+            return getCrontab(idx)->getCronOwner();
         }
     }
 
@@ -48,7 +48,7 @@ QModelIndex CronModel::parent(const QModelIndex &index) const
         auto *t = static_cast<CronType *>(index.internalPointer());
         if (t->type == CronType::COMMAND) {
             auto *cmnd = static_cast<TCommand *>(t);
-            Crontab *cron = cmnd->parent;
+            Crontab *cron = cmnd->getParent();
             for (size_t i = 0; i < crontabs->size(); ++i) {
                 if ((*crontabs)[i].get() == cron) {
                     return createIndex(static_cast<int>(i), 0, cron);
@@ -66,8 +66,8 @@ QModelIndex CronModel::index(int row, int column, const QModelIndex &parent) con
 
     if (!parent.isValid()) {
         if (isOneUser()) {
-            if (row < static_cast<int>((*crontabs).at(0)->tCommands.size())) {
-                return createIndex(row, column, (*crontabs).at(0)->tCommands.at(row).get());
+            if (row >= 0 && row < static_cast<int>((*crontabs).at(0)->getTCommands().size())) {
+                return createIndex(row, column, (*crontabs).at(0)->getTCommands().at(row).get());
             }
         } else {
             if (row >= 0 && row < static_cast<int>(crontabs->size())) {
@@ -77,8 +77,8 @@ QModelIndex CronModel::index(int row, int column, const QModelIndex &parent) con
     } else {
         if (!isOneUser()) {
             auto *cron = getCrontab(parent);
-            if (row < static_cast<int>(cron->tCommands.size())) {
-                return createIndex(row, column, cron->tCommands.at(row).get());
+            if (row >= 0 && row < static_cast<int>(cron->getTCommands().size())) {
+                return createIndex(row, column, cron->getTCommands().at(row).get());
             }
         }
     }
@@ -105,12 +105,12 @@ int CronModel::rowCount(const QModelIndex &parent) const
     if (parent.isValid()) {
         if (!parent.parent().isValid()) {
             if (!isOneUser()) {
-                return static_cast<int>(getCrontab(parent)->tCommands.size());
+                return static_cast<int>(getCrontab(parent)->getTCommands().size());
             }
         }
     } else {
         if (isOneUser()) {
-            return static_cast<int>((*crontabs).at(0)->tCommands.size());
+            return static_cast<int>((*crontabs).at(0)->getTCommands().size());
         } else {
             return static_cast<int>(crontabs->size());
         }
@@ -158,7 +158,7 @@ QModelIndex CronModel::removeCommand(const QModelIndex &idx)
 
     beginRemoveRows(del, cmndPos, cmndPos);
 
-    auto &commands = (*crontabs)[cronPos]->tCommands;
+    auto &commands = (*crontabs)[cronPos]->getTCommands();
     commands.erase(commands.begin() + cmndPos);
 
     endRemoveRows();
@@ -205,7 +205,7 @@ QModelIndex CronModel::insertTCommand(const QModelIndex &idx, TCommand *cmnd)
 
     beginInsertRows(ins, cmndPos, cmndPos);
 
-    auto &commands = (*crontabs)[cronPos]->tCommands;
+    auto &commands = (*crontabs)[cronPos]->getTCommands();
     commands.insert(commands.begin() + cmndPos, std::unique_ptr<TCommand>(cmnd));
 
     endInsertRows();
@@ -313,10 +313,10 @@ bool CronModel::dropMimeData(const QMimeData * /*data*/, Qt::DropAction /*action
     auto t = std::make_unique<TCommand>();
     *t = *drag;
     Crontab *c = getCrontab(ins);
-    if (!Crontab::isSystemCron(c->cronOwner)) {
-        t->user = c->cronOwner;
+    if (!Crontab::isSystemCron(c->getCronOwner())) {
+        t->setUser(c->getCronOwner());
     }
-    t->parent = c;
+    t->setParent(c);
 
     TCommand *raw_ptr = t.release();
     insertTCommand(ins, raw_ptr);
@@ -328,7 +328,7 @@ bool CronModel::dropMimeData(const QMimeData * /*data*/, Qt::DropAction /*action
 
     emit moveTCommand(raw_ptr);
 
-    return false;
+    return true;
 }
 
 void CronModel::dragTCommand(const QModelIndex &idx)

@@ -21,8 +21,10 @@
  **********************************************************************/
 
 #include <QCoreApplication>
+#include <QElapsedTimer>
 #include <QString>
 #include <QStringList>
+#include <QTimer>
 #include <cstdio>
 #include <cstdlib>
 
@@ -153,6 +155,36 @@ TEST(cmd_args_false_returns_false)
     ASSERT_TRUE(!cmd.proc("false", {}, &out));
 }
 
+TEST(cmd_failed_start_after_success_returns_false)
+{
+    Cmd cmd;
+    ASSERT_TRUE(cmd.proc("true"));
+    ASSERT_FALSE(cmd.proc("/definitely/not/a/command"));
+}
+
+TEST(cmd_timeout_terminates_process)
+{
+    Cmd cmd;
+    QElapsedTimer elapsed;
+    elapsed.start();
+    ASSERT_FALSE(cmd.proc("sh", {"-c", "sleep 2"}, nullptr, nullptr, QuietMode::Yes, Elevation::No, 100));
+    ASSERT_TRUE(elapsed.elapsed() < 1500);
+    ASSERT_TRUE(cmd.proc("true"));
+}
+
+TEST(cmd_cancel_terminates_process)
+{
+    Cmd cmd;
+    QElapsedTimer elapsed;
+    elapsed.start();
+    QTimer::singleShot(100, &cmd, &Cmd::cancel);
+    ASSERT_FALSE(cmd.proc("sh", {"-c", "sleep 2"}, nullptr, nullptr, QuietMode::Yes));
+    ASSERT_TRUE(elapsed.elapsed() < 1500);
+    ASSERT_FALSE(cmd.proc("true"));
+    cmd.clearCancelRequest();
+    ASSERT_TRUE(cmd.proc("true"));
+}
+
 TEST(cmd_args_merged_channels)
 {
     Cmd cmd;
@@ -211,6 +243,9 @@ int main(int argc, char *argv[])
     RUN_TEST(cmd_shell_multiline);
     RUN_TEST(cmd_args_echo);
     RUN_TEST(cmd_args_false_returns_false);
+    RUN_TEST(cmd_failed_start_after_success_returns_false);
+    RUN_TEST(cmd_timeout_terminates_process);
+    RUN_TEST(cmd_cancel_terminates_process);
     RUN_TEST(cmd_args_merged_channels);
     RUN_TEST(cmd_reuse_repeated_calls);
     RUN_TEST(cmd_reuse_mixed_shell_and_args);

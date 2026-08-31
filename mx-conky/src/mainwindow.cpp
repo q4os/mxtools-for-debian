@@ -560,8 +560,7 @@ void MainWindow::onDeleteRequested(ConkyItem *item)
     }
 
     if (needsElevation) {
-        QString command = elevate + " rm '" + filePath + "'";
-        success = QProcess::execute("sh", { "-c", command }) == 0;
+        success = QProcess::execute(elevate, { "rm", filePath }) == 0;
     } else {
         success = QFile::remove(filePath);
     }
@@ -616,9 +615,7 @@ void MainWindow::onCustomizeRequested(ConkyItem *item)
                 if (elevationTool.isEmpty()) {
                     elevationTool = QStringLiteral("sudo");
                 }
-                QString testCommand = QString("%1 touch '%2'").arg(elevationTool, filePath);
-
-                int exitCode = QProcess::execute("sh", { "-c", testCommand });
+                int exitCode = QProcess::execute(elevationTool, { "touch", filePath });
                 if (exitCode != 0) {
                     // User cancelled elevation or it failed
                     return;
@@ -724,44 +721,79 @@ void MainWindow::editConkyFile(const QString &filePath)
     if (elevate.isEmpty()) {
         elevate = QStringLiteral("/usr/bin/gksu"); // well-known fallback
     }
-    QString command;
+
+    // Split the detected "Exec=" line into argv (it may itself carry flags, e.g. "code --new-window")
+    QStringList editorCommand = QProcess::splitCommand(editor);
+    if (editorCommand.isEmpty()) {
+        editorCommand << editor;
+    }
+
+    QString program;
+    QStringList arguments;
 
     if (needsElevation) {
         if (isEditorThatElevates && !isRoot) {
-            command = editor + " \"" + filePath + "\"";
+            program = editorCommand.takeFirst();
+            arguments = editorCommand;
+            arguments << filePath;
         } else if (isRoot && isEditorThatElevates) {
-            command = elevate + " --user $(logname) " + editor + " \"" + filePath + "\"";
+            const QString loginName = Cmd().getCmdOut("logname", QStringList(), true).trimmed();
+            program = elevate;
+            arguments = QStringList{ "--user", loginName };
+            arguments += editorCommand;
+            arguments << filePath;
         } else if (isCliEditor) {
-            command = "x-terminal-emulator -e " + elevate + " " + editor + " \"" + filePath + "\"";
+            program = QStringLiteral("x-terminal-emulator");
+            arguments = QStringList{ "-e", elevate };
+            arguments += editorCommand;
+            arguments << filePath;
         } else {
-            command = elevate + " env DISPLAY=$DISPLAY XAUTHORITY=$XAUTHORITY " + editor + " \"" + filePath + "\"";
+            const auto env = QProcessEnvironment::systemEnvironment();
+            program = elevate;
+            arguments = QStringList{ "env", "DISPLAY=" + env.value("DISPLAY"), "XAUTHORITY=" + env.value("XAUTHORITY") };
+            arguments += editorCommand;
+            arguments << filePath;
         }
     } else {
         if (isEditorThatElevates && !isRoot) {
-            command = editor + " \"" + filePath + "\"";
+            program = editorCommand.takeFirst();
+            arguments = editorCommand;
+            arguments << filePath;
         } else if (isRoot && isEditorThatElevates) {
-            command = elevate + " --user $(logname) " + editor + " \"" + filePath + "\"";
+            const QString loginName = Cmd().getCmdOut("logname", QStringList(), true).trimmed();
+            program = elevate;
+            arguments = QStringList{ "--user", loginName };
+            arguments += editorCommand;
+            arguments << filePath;
         } else if (isCliEditor) {
-            command = "x-terminal-emulator -e " + editor + " \"" + filePath + "\"";
+            program = QStringLiteral("x-terminal-emulator");
+            arguments = QStringList{ "-e" };
+            arguments += editorCommand;
+            arguments << filePath;
         } else {
-            command = editor + " \"" + filePath + "\"";
+            program = editorCommand.takeFirst();
+            arguments = editorCommand;
+            arguments << filePath;
         }
     }
 
     if (debug) {
-        qDebug() << "Final command:" << command;
+        qDebug() << "Final command:" << program << arguments;
     }
 
-    bool started = QProcess::startDetached("sh", { "-c", command });
+    bool started = QProcess::startDetached(program, arguments);
 
     if (!started) {
         if (debug) {
-            qDebug() << "MainWindow: Failed to start editor with command:" << command;
+            qDebug() << "MainWindow: Failed to start editor with command:" << program << arguments;
         }
 
         // Fallback to simple featherpad launch
-        QString fallbackCommand = needsElevation ? elevate + " featherpad " + filePath : "featherpad " + filePath;
-        started = QProcess::startDetached("sh", { "-c", fallbackCommand });
+        if (needsElevation) {
+            started = QProcess::startDetached(elevate, { "featherpad", filePath });
+        } else {
+            started = QProcess::startDetached("featherpad", { filePath });
+        }
 
         if (!started) {
             QMessageBox::warning(this, tr("Editor Error"), tr("Cannot start editor for file: %1").arg(filePath));

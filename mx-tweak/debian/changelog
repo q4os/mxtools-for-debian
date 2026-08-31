@@ -1,8 +1,38 @@
-mx-tweak (26.04.02mx25.1302) stable; urgency=medium
+mx-tweak (26.08.01mx25.1302) stable; urgency=medium
 
   * Release
 
- -- Devs <devteam@localdomain>  Mon, 13 Jul 2026 13:05:35 +0200
+ -- Devs <devteam@localdomain>  Mon, 31 Aug 2026 17:00:20 +0200
+
+mx-tweak (26.08.01mx25) mx; urgency=medium
+
+  * make help browser non-modal
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 15 Aug 2026 20:35:36 -0400
+
+mx-tweak (26.07.03mx25) mx; urgency=medium
+
+  * add siducation disable updates option
+  * retool library script to handle all Misc. options selections in one pass
+  * update translations
+  * xdg compliant menu category name
+  * misc bug fixes from code review process
+  * fix buggy dark-mode setting on fluxbox
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 29 Jul 2026 20:56:56 -0400
+
+mx-tweak (26.07.02mx25) mx; urgency=medium
+
+  * send a restart signal to conky and idesk when restarting fluxbox 
+  * themes and fluxbox tab 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Tue, 14 Jul 2026 21:38:37 -0400
+
+mx-tweak (26.07.01mx25) mx; urgency=medium
+
+  * throw away arguements passed to root check utilities
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 11 Jul 2026 08:09:10 -0400
 
 mx-tweak (26.04.02mx25) mx; urgency=medium
 

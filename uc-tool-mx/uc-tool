@@ -1309,9 +1309,12 @@ make_intel_ucode() {
     qsay "    %s firmware file(s)" "$(nq "$count")"
 
     if [ "$QUIET$SILENT" ]; then
-        cmd iucode_tool "$INTEL_FW_DIR" --write-earlyfw="$out" --overwrite >/dev/null 2>&1
+        local iuc_out
+        iuc_out=$(cmd iucode_tool "$INTEL_FW_DIR" --write-earlyfw="$out" --overwrite 2>&1) \
+            || fatal "iucode_tool failed to write %s\n%s" "$out" "$iuc_out"
     else
-        cmd iucode_tool "$INTEL_FW_DIR" --write-earlyfw="$out" --overwrite
+        cmd iucode_tool "$INTEL_FW_DIR" --write-earlyfw="$out" --overwrite 2>&1 \
+            || fatal "iucode_tool failed to write %s" "$out"
     fi
 
     ssay "  Created  %-20s  %s" "$(pq "intel-ucode.img")" "$(ls -lh "$out" | awk '{print $5}')"
@@ -1595,13 +1598,13 @@ read_params() {
 ssay() {
     [ "$QUIET$SILENT" ] && return
     local fmt=$1; shift
-    printf "$m_co$fmt$nc_co\n" "$@"
+    printf -- "$m_co$fmt$nc_co\n" "$@"
 }
 
 qsay() {
     [ "$QUIET$SILENT" ] && return
     local fmt=$1; shift
-    printf "$m_co$fmt$nc_co\n" "$@"
+    printf -- "$m_co$fmt$nc_co\n" "$@"
 }
 
 fatal() {

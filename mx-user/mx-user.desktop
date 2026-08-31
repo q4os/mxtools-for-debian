@@ -152,6 +152,6 @@ Comment=Simple user configuration
 Exec=mx-user
 Icon=mx-user
 NoDisplay=false
-Categories=System;MX-Maintenance;
+Categories=System;X-MX-Maintenance;
 Type=Application
 

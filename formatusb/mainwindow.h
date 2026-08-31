@@ -1,7 +1,7 @@
 /**********************************************************************
  *  mainwindow.h
  **********************************************************************
- * Copyright (C) 2019 MX Authors
+ * Copyright (C) 2019-2026 MX Authors
  *
  * Authors: Dolphin Oracle
  *          MX Linux <http://mxlinux.org>
@@ -64,11 +64,10 @@ public:
     removeUnsuitable(const QStringList &devices); // remove unsuitable disks from the list (live and unremovable)
 
 private slots:
-    void cleanup();
     void cmdDone();
     void cmdStart();
     void setConnections();
-    void updateOutput();
+    void updateOutput(const QString &output);
     void on_buttonAbout_clicked();
     void on_buttonBack_clicked();
     void on_buttonHelp_clicked();
@@ -84,8 +83,6 @@ private slots:
 private:
     Ui::MainWindow *ui;
     Cmd *cmd;
-    Cmd *cmdprog;
     QString device;
     QString label;
-    int height;
 };

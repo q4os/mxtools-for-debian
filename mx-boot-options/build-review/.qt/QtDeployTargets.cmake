@@ -1,0 +1,6 @@
+set(__QT_DEPLOY_TARGET_mx-boot-options_FILE /home/adrian/Sync/programs/qt/mx-boot-options/build-review/mx-boot-options)
+set(__QT_DEPLOY_TARGET_mx-boot-options_TYPE EXECUTABLE)
+set(__QT_DEPLOY_TARGET_helper_FILE /home/adrian/Sync/programs/qt/mx-boot-options/build-review/helper)
+set(__QT_DEPLOY_TARGET_helper_TYPE EXECUTABLE)
+set(__QT_DEPLOY_TARGET_mx-boot-options-tests_FILE /home/adrian/Sync/programs/qt/mx-boot-options/build-review/mx-boot-options-tests)
+set(__QT_DEPLOY_TARGET_mx-boot-options-tests_TYPE EXECUTABLE)

@@ -75,17 +75,35 @@ case "$format" in
     *) echo "Invalid format: $format" >&2; exit 2 ;;
 esac
 
+# Validate the filesystem label server-side. This helper is directly
+# pkexec-invocable, so the GUI's validate_name() check is bypassable and the
+# label (used below as a parted partition name and as the *label tool argument)
+# must be re-checked here. An empty label is allowed (means "no label");
+# otherwise enforce the same contract the GUI does -- the character set
+# [A-Za-z0-9_.-] plus the per-filesystem length limit -- so a label the GUI
+# would reject can't reach mkpart/*label. The set excludes every shell
+# metacharacter and path separator.
+if [ -n "$label" ]; then
+    case "$format" in
+        ext4) label_max=16 ;;
+        ntfs) label_max=32 ;;
+        *)    label_max=11 ;;   # vfat, exfat
+    esac
+    if [ "${#label}" -gt "$label_max" ] || [[ ! "$label" =~ ^[A-Za-z0-9_.-]+$ ]]; then
+        echo "Invalid label: $label" >&2
+        exit 2
+    fi
+fi
+
 echo device is $device format is $format
 echo label is $label
-
-clearpartions(){
-	live-usb-maker gui partition-clear --color=off -t "$device"
-}
 
 unmount_partitions()
 {
 	local umount_device=$device*
-	if [ -n "$(df |grep $device)" ]; then
+	# df /dev/$device returns 0 for any existing block device, mounted or not, so
+	# it can't gate this; check the actual mountpoints of the device + partitions.
+	if [ -n "$(lsblk -nro MOUNTPOINT "/dev/$device" 2>/dev/null)" ]; then
 	    umount -q /dev/$umount_device 2>/dev/null
 	    sleep 1
 	    checkerrorcode "unmount partitions"
@@ -181,13 +199,9 @@ create_partition()
 		sleep 1
 	fi
 
-	#set default part name if file system label is empty
+	# Use the filesystem label as the GPT partition name (if set)
 	if [ "$parttabletype" = "gpt" ]; then
-		if [ -z "$label" ]; then
-			option="$label"
-		else
-			option="primary"
-		fi
+		option="$label"
 	fi
 
 	parted -s "$dev" mklabel "$parttabletype"
@@ -197,9 +211,9 @@ create_partition()
 	partprobe "$dev"
 	checkerrorcode "refresh partitions info"
 	sleep 1
-	#create partition. $option is "primary" (msdos) or empty (gpt, no name);
-	#quote it when present so it can't word-split, but keep the original
-	#argument vector when empty so parted's gpt "no name" case is unchanged.
+	# Create partition. $option is "primary" (msdos), the label (gpt), or empty (gpt, no label).
+	# Quote it when present so it can't word-split, but keep the original
+	# argument vector when empty so parted's gpt "no name" case is unchanged.
 	if [ -n "$option" ]; then
 		parted -s -a optimal "$dev" mkpart "$option" 1 100%
 	else
@@ -224,8 +238,9 @@ if [ -z "$label" ]; then
 	return
 fi
 
-#ensure device is unmounted
-if [ -n "$(df |grep $device)" ]; then
+#ensure the partition is unmounted before labeling; skip when it isn't mounted
+#so a freshly-formatted (unmounted) partition doesn't trip checkerrorcode
+if findmnt -S "/dev/$device$partnum" &>/dev/null; then
     umount -q /dev/"$device$partnum" 2>/dev/null
     checkerrorcode "unmount partitions"
 fi
@@ -250,6 +265,22 @@ esac
 checkerrorcode "label partition"
 }
 
+# Strip the partition suffix from a composite device+partition string to obtain
+# the parent block device ("refreshdevice") and the bare partition number
+# ("partition_to_mark").  Handles the three device-naming conventions found in
+# the kernel: sdX (sdX1), mmcblkX (mmcblkXp1), nvmeXnY (nvmeXnYp1).
+resolve_partition_ref(){
+	local dev="$1"
+	if [[ "$dev" == *"mmc"* ]] || [[ "$dev" == *"nvme"* ]]; then
+		refreshdevice="${dev%p*}"
+		filter="${refreshdevice}p"
+		partition_to_mark="${partition_dev#$filter}"
+	elif [[ "$dev" == *"sd"* ]]; then
+		refreshdevice="${dev//[0-9]/}"
+		partition_to_mark="${partition_dev#$refreshdevice}"
+	fi
+}
+
 partitionrefresh(){
 
 	##need device not partition
@@ -258,27 +289,7 @@ partitionrefresh(){
 
 	partition_dev="$device$partnum"
 
-
-	#if mmc device
-	if [[ "$device" == *"mmc"* ]]; then
-		refreshdevice=${device%p*}
-		filter=$refreshdevice
-		filter+="p"
-		partition_to_mark=${partition_dev#$filter}
-	fi
-
-	#if device is nvme, then partnum=p1
-	if [[ "$device" == *"nvme"* ]]; then
-		refreshdevice=${device%p*}
-		filter=$refreshdevice
-		filter+="p"
-		partition_to_mark=${partition_dev#$filter}
-	fi
-	#if device is sdXY,
-	if [[ "$device" == *"sd"* ]]; then
-		refreshdevice=${device//[0-9]/}
-		partition_to_mark=${partition_dev#$refreshdevice}
-	fi
+	resolve_partition_ref "$device"
 
 echo "Device $device"
 echo "Refresh Partitions $refreshdevice"
@@ -478,7 +489,7 @@ checkerrorcode()
 	local msg="$1"
 	#echo "retval is $retval"
 	if [ ! $retval = 0 ]; then
-		echo "$msg" "ERRROR"
+		echo "$msg" "ERROR"
 		exit "$retval"
 	else
 		echo "$msg" "OK"

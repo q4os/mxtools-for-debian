@@ -1,5 +1,5 @@
 /**********************************************************************
- * Copyright (C) 2017-2025 MX Authors
+ * Copyright (C) 2017-2026 MX Authors
  *
  * Authors: Adrian
  *          MX Linux <http://mxlinux.org>
@@ -29,11 +29,23 @@ SnapFilterProxy::SnapFilterProxy(QObject *parent)
     setDynamicSortFilter(true);
 }
 
+void SnapFilterProxy::invalidateRowFilter()
+{
+    // beginFilterChange()/endFilterChange() replaced invalidateFilter() in Qt 6.10;
+    // invalidateFilter() is deprecated from 6.13 on. This proxy only filters rows.
+#if QT_VERSION >= QT_VERSION_CHECK(6, 10, 0)
+    beginFilterChange();
+    endFilterChange(QSortFilterProxyModel::Direction::Rows);
+#else
+    invalidateFilter();
+#endif
+}
+
 void SnapFilterProxy::setSearchText(const QString &text)
 {
     if (m_searchText != text) {
         m_searchText = text;
-        invalidateFilter();
+        invalidateRowFilter();
     }
 }
 
@@ -41,7 +53,7 @@ void SnapFilterProxy::setStatusFilter(int status)
 {
     if (m_statusFilter != status) {
         m_statusFilter = status;
-        invalidateFilter();
+        invalidateRowFilter();
     }
 }
 

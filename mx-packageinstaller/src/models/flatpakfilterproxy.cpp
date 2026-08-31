@@ -1,5 +1,5 @@
 /**********************************************************************
- * Copyright (C) 2017-2025 MX Authors
+ * Copyright (C) 2017-2026 MX Authors
  *
  * Authors: Adrian
  *          MX Linux <http://mxlinux.org>
@@ -29,11 +29,23 @@ FlatpakFilterProxy::FlatpakFilterProxy(QObject *parent)
     setDynamicSortFilter(true);
 }
 
+void FlatpakFilterProxy::invalidateRowFilter()
+{
+    // beginFilterChange()/endFilterChange() replaced invalidateFilter() in Qt 6.10;
+    // invalidateFilter() is deprecated from 6.13 on. This proxy only filters rows.
+#if QT_VERSION >= QT_VERSION_CHECK(6, 10, 0)
+    beginFilterChange();
+    endFilterChange(QSortFilterProxyModel::Direction::Rows);
+#else
+    invalidateFilter();
+#endif
+}
+
 void FlatpakFilterProxy::setSearchText(const QString &text)
 {
     if (m_searchText != text) {
         m_searchText = text;
-        invalidateFilter();
+        invalidateRowFilter();
     }
 }
 
@@ -41,7 +53,7 @@ void FlatpakFilterProxy::setStatusFilter(int status)
 {
     if (m_statusFilter != status) {
         m_statusFilter = status;
-        invalidateFilter();
+        invalidateRowFilter();
     }
 }
 
@@ -49,7 +61,7 @@ void FlatpakFilterProxy::setHideDuplicates(bool hide)
 {
     if (m_hideDuplicates != hide) {
         m_hideDuplicates = hide;
-        invalidateFilter();
+        invalidateRowFilter();
     }
 }
 
@@ -57,14 +69,14 @@ void FlatpakFilterProxy::setAllowedRefs(const QSet<QString> &refs)
 {
     m_allowedRefs = refs;
     m_refFilterActive = true;
-    invalidateFilter();
+    invalidateRowFilter();
 }
 
 void FlatpakFilterProxy::clearAllowedRefs()
 {
     m_allowedRefs.clear();
     m_refFilterActive = false;
-    invalidateFilter();
+    invalidateRowFilter();
 }
 
 QVector<int> FlatpakFilterProxy::visibleSourceRows() const

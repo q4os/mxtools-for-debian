@@ -1,5 +1,5 @@
 # **********************************************************************
-# * Copyright (C) 2016-2025 MX Authors
+# * Copyright (C) 2016-2026 MX Authors
 # *
 # * Authors: Adrian
 # *          MX Linux <http://mxlinux.org>
@@ -81,6 +81,20 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTORCC ON)
 
+# Absolute directory where the privileged helper binary is installed.
+set(HELPER_INSTALL_DIR "/usr/libexec/mx-repo-manager" CACHE PATH
+    "Absolute install directory for the privileged helper binary")
+if(NOT IS_ABSOLUTE "${HELPER_INSTALL_DIR}")
+    message(FATAL_ERROR "HELPER_INSTALL_DIR must be an absolute path, got: ${HELPER_INSTALL_DIR}")
+endif()
+set(HELPER_PATH "${HELPER_INSTALL_DIR}/helper")
+
+configure_file(
+    scripts/org.mxlinux.pkexec.mxrm-helper.policy.in
+    ${CMAKE_BINARY_DIR}/org.mxlinux.pkexec.mxrm-helper.policy
+    @ONLY
+)
+
 # Define source files
 set(SOURCES
     src/main.cpp
@@ -106,6 +120,8 @@ set(RESOURCE_FILES
 
 # Get all translation files
 file(GLOB TRANSLATION_FILES "translations/*.ts")
+# en_US duplicates the English source translation and must not be packaged.
+list(REMOVE_ITEM TRANSLATION_FILES "${CMAKE_SOURCE_DIR}/translations/${PROJECT_NAME}_en_US.ts")
 
 # Create the executable
 add_executable(mx-repo-manager
@@ -134,7 +150,6 @@ target_link_libraries(helper
 # Set compiler flags
 target_compile_options(mx-repo-manager PRIVATE
     -Wpedantic
-    -pedantic
     -Werror=return-type
     -Werror=switch
     -Werror=uninitialized
@@ -143,7 +158,6 @@ target_compile_options(mx-repo-manager PRIVATE
 
 target_compile_options(helper PRIVATE
     -Wpedantic
-    -pedantic
     -Werror=return-type
     -Werror=switch
     -Werror=uninitialized
@@ -160,6 +174,10 @@ else()
 endif()
 
 # Set compile definitions
+target_compile_definitions(mx-repo-manager PRIVATE
+    HELPER_PATH="${HELPER_PATH}"
+)
+
 target_compile_definitions(mx-repo-manager PRIVATE
     QT_DEPRECATED_WARNINGS
     QT_DISABLE_DEPRECATED_BEFORE=0x060000
@@ -212,5 +230,5 @@ install(TARGETS mx-repo-manager
 )
 
 install(TARGETS helper
-    RUNTIME DESTINATION lib/mx-repo-manager
+    RUNTIME DESTINATION ${HELPER_INSTALL_DIR}
 )

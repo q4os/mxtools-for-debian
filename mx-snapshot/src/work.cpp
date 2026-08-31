@@ -1,7 +1,7 @@
 /**********************************************************************
  *  work.cpp
  **********************************************************************
- * Copyright (C) 2020-2025 MX Authors
+ * Copyright (C) 2020-2026 MX Authors
  *
  * Authors: Adrian
  *          MX Linux <http://mxlinux.org>
@@ -36,13 +36,16 @@
 #include <QSettings>
 #include <QStandardPaths>
 #include <QStorageInfo>
+#include <QTemporaryDir>
 #include <QTemporaryFile>
 #include <QTextStream>
 
 #include <algorithm>
 #include <cstdlib>
+#include <optional>
 #include <stdexcept>
 
+#include "checksumutils.h"
 #include "elevationbroker.h"
 #include "filesystemutils.h"
 #include "log.h"
@@ -79,6 +82,17 @@ quint64 parseDuKilobytes(const QString &output, bool *ok)
     }
     const QString firstField = lines.constLast().section('\t', 0, 0).trimmed();
     return firstField.toULongLong(ok);
+}
+
+QString mksquashfsHelp()
+{
+    QProcess process;
+    process.start(QStringLiteral("mksquashfs"), {QStringLiteral("-help")});
+    if (!process.waitForStarted() || !process.waitForFinished(5000)) {
+        return {};
+    }
+    return QString::fromLocal8Bit(process.readAllStandardOutput())
+           + QString::fromLocal8Bit(process.readAllStandardError());
 }
 
 // Goes through the elevated helper (root), and uses the plain `poweroff`
@@ -295,15 +309,16 @@ void Work::abortIfElevationDenied()
 // Check if we can put work_dir on another partition with enough space, move work_dir there and setupEnv again
 bool Work::checkAndMoveWorkDir(const QString &dir, quint64 req_size)
 {
-    // Reject unsupported filesystems (vfat/ntfs, network mounts, fuse shares, etc.)
-    // up front — settings->checkTempDir() would later silently relocate to a
-    // different parent if we accepted one, breaking the "move to <dir>" contract.
-    if (!QFile::exists(dir) || !FileSystemUtils::isOnSupportedPartition(dir)) {
+    // Reject candidates that cannot be used by both the user and elevated
+    // helper up front — checkTempDir() would later silently relocate to a
+    // different parent if we accepted one, breaking this move-to-dir contract.
+    const QString candidate = Settings::resolveWorkDirParent(dir);
+    if (!settings->supportsWorkDirectory(candidate)) {
         return false;
     }
     // See first if the dir is on different partition otherwise it's irrelevant
-    if (QStorageInfo(dir + "/").device() != QStorageInfo(settings->snapshotDir + "/").device()
-        && FileSystemUtils::getFreeSpace(dir) > req_size) {
+    if (QStorageInfo(candidate + "/").device() != QStorageInfo(settings->snapshotDir + "/").device()
+        && FileSystemUtils::getFreeSpace(candidate) > req_size) {
         // See Work::cleanUp for the rationale on the dual cleanup paths
         // (installed-to-live for Debian, installed-to-live-arch for Arch).
         const QString appName = QCoreApplication::applicationName();
@@ -321,7 +336,7 @@ bool Work::checkAndMoveWorkDir(const QString &dir, quint64 req_size)
         // squashed (e.g. /tmp -> /home) makes mksquashfs squash its own output
         // directory while writing to it.
         const QString previousWorkDir = settings->workDir;
-        settings->tempDirParent = dir;
+        settings->tempDirParent = candidate;
         if (!settings->checkTempDir()) {
             cleanUp();
             return false;
@@ -398,14 +413,23 @@ bool Work::setupBindRootOverlay()
         qWarning() << "Failed to bind mount / to" << lowerDir;
         return false;
     }
+    // Sever mount propagation: / is normally a shared mount, so without this
+    // any mount made while the snapshot runs (ISOs, USB sticks, ...) would
+    // propagate into the bind, keep cleanup's umount from succeeding, and a
+    // recursive umount of the bind would propagate back and rip the user's
+    // mounts out from under them.
+    if (!shell.procAsRoot("mount", {"--make-private", lowerDir}, nullptr, nullptr, Cmd::QuietMode::Yes)) {
+        qWarning() << "Failed to make bind mount private at" << lowerDir;
+        teardownOverlayBase(overlayBase);
+        return false;
+    }
 
     const QString overlayOptions = "lowerdir=" + lowerDir + ",upperdir=" + upperDir + ",workdir=" + workDir;
     if (!shell.procAsRoot("mount", {"-t", "overlay", "overlay", "-o", overlayOptions, bindRoot}, nullptr, nullptr,
                           Cmd::QuietMode::Yes)) {
         // Overlay genuinely isn't available (kernel without CONFIG_OVERLAY_FS,
         // or a hardened/locked-down kernel that refuses overlay).
-        shell.procAsRoot("umount", {"--recursive", lowerDir}, nullptr, nullptr, Cmd::QuietMode::Yes);
-        shell.procAsRoot("rm", {"-rf", overlayBase}, nullptr, nullptr, Cmd::QuietMode::Yes);
+        teardownOverlayBase(overlayBase);
         if (!settings->isArch) {
             // Debian/MX kernels universally ship overlay; a failure here means
             // something is genuinely wrong. Match historical behavior and abort
@@ -432,6 +456,22 @@ bool Work::setupBindRootOverlay()
     bindRootOverlayBase = overlayBase;
     bindRootOverlayActive = true;
     return true;
+}
+
+// Undo a partially built overlay base. The lower dir is a bind mount of the
+// real /, so the directory must NEVER be rm -rf'd while anything under it is
+// still mounted — that would delete the running system through the bind.
+// Delegate to snapshot-lib cleanup_overlay, which derives the same
+// /run/<app>/bind-root-overlay path and holds the hardened teardown logic
+// (unmount retries, lazy-detach fallback, refusal to delete while any mount
+// remains anywhere below the base).
+void Work::teardownOverlayBase(const QString &overlayBase)
+{
+    if (!shell.procAsRoot("snapshot-lib", {"cleanup_overlay", QCoreApplication::applicationName()}, nullptr, nullptr,
+                          Cmd::QuietMode::Yes)) {
+        qWarning() << "cleanup_overlay could not fully tear down" << overlayBase
+                   << "— overlay state left under /run for inspection";
+    }
 }
 
 bool Work::ensureOverlayModuleLoaded()
@@ -465,8 +505,7 @@ void Work::cleanupBindRootOverlay()
         bindRootPath = "/.bind-root";
         return;
     }
-    Cmd().procAsRoot("snapshot-lib", {"cleanup_overlay", QCoreApplication::applicationName()}, nullptr, nullptr,
-                     Cmd::QuietMode::Yes);
+    teardownOverlayBase(bindRootOverlayBase);
     bindRootOverlayActive = false;
     bindRootOverlayBase.clear();
     bindRootPath = "/.bind-root";
@@ -480,15 +519,25 @@ void Work::closeInitrd(const QString &initrd_dir, const QString &file)
 }
 
 // copyModules(mod_dir/kernel kernel)
-void Work::copyModules(const QString &to, const QString &kernel)
+bool Work::copyModules(const QString &to, const QString &kernel)
 {
-    shell.run(QString(R"(/usr/share/%1/scripts/copy-initrd-modules -e -t="%2" -k="%3")")
-                  .arg(qApp->applicationName(), to, kernel));
-    shell.procAsRoot("copy-initrd-programs", {"-e", "--to=" + to}, nullptr, nullptr, Cmd::QuietMode::No);
+    if (!shell.run(QString(R"(/usr/share/%1/scripts/copy-initrd-modules -e -t="%2" -k="%3")")
+                       .arg(qApp->applicationName(), to, kernel))) {
+        return false;
+    }
+    // -F/--force: missing optional initrd programs (ntfs-3g, eject, cryptsetup, ...)
+    // become a warning instead of aborting the whole snapshot.
+    if (!shell.procAsRoot("copy-initrd-programs", {"-e", "-F", "--to=" + to}, nullptr, nullptr,
+                          Cmd::QuietMode::No)) {
+        return false;
+    }
+    // Ownership fixup is cosmetic (the initrd is repacked root:root anyway),
+    // so a chown failure doesn't fail the copy.
     const QString username = loggedInUserName();
     if (!username.isEmpty()) {
         shell.procAsRoot("chown", {"-R", username + ":", to}, nullptr, nullptr, Cmd::QuietMode::Yes);
     }
+    return true;
 }
 
 // Copying the iso-template filesystem
@@ -520,7 +569,11 @@ void Work::copyNewIso()
 
     if (settings->isArch) {
         QDir().mkpath("iso-template");
-        shell.run("tar xf \"" + templateTar + "\" -C iso-template");
+        if (!shell.run("tar xf \"" + templateTar + "\" -C iso-template")) {
+            emit messageBox(BoxType::critical, tr("Error"), tr("Could not extract the ISO template: ") + templateTar);
+            cleanUp();
+            return;
+        }
 
         const QString diskDirPath = settings->workDir + "/iso-template/.disk";
         QDir().mkpath(diskDirPath);
@@ -636,7 +689,11 @@ void Work::copyNewIso()
         }
         shell.run("chmod a+r \"" + archBootPath + "/archiso.img\"");
     } else {
-        shell.run("tar xf \"" + templateTar + "\"");
+        if (!shell.run("tar xf \"" + templateTar + "\"")) {
+            emit messageBox(BoxType::critical, tr("Error"), tr("Could not extract the ISO template: ") + templateTar);
+            cleanUp();
+            return;
+        }
 
         // check to make sure grub mbr is possible
         if (settings->grubmbr) {
@@ -654,10 +711,27 @@ void Work::copyNewIso()
                 return;
             }
         }
-        shell.run("cp /usr/lib/iso-template/template-initrd.gz iso-template/antiX/initrd.gz");
-        shell.proc("cp", {"/boot/vmlinuz-" + settings->kernel, "iso-template/antiX/vmlinuz"});
+        if (!shell.run("cp /usr/lib/iso-template/template-initrd.gz iso-template/antiX/initrd.gz")) {
+            emit messageBox(BoxType::critical, tr("Error"),
+                            tr("Could not copy the template initrd: ") + "/usr/lib/iso-template/template-initrd.gz");
+            cleanUp();
+            return;
+        }
+        if (!shell.proc("cp", {"/boot/vmlinuz-" + settings->kernel, "iso-template/antiX/vmlinuz"})) {
+            emit messageBox(BoxType::critical, tr("Error"),
+                            tr("Could not copy the kernel: ") + "/boot/vmlinuz-" + settings->kernel);
+            cleanUp();
+            return;
+        }
 
-        makeChecksum(HashType::md5, settings->workDir + "/iso-template/antiX", "vmlinuz");
+        if (!makeChecksum(HashType::md5, settings->workDir + "/iso-template/antiX", "vmlinuz")) {
+            if (!cleanupStarted) {
+                emit messageBox(BoxType::critical, tr("Error"),
+                                tr("Could not create the checksum for %1.").arg("vmlinuz"));
+                cleanUp();
+            }
+            return;
+        }
 
         QString path = initrd_dir.path();
         if (!initrd_dir.isValid()) {
@@ -699,7 +773,14 @@ void Work::copyNewIso()
         }
 
         if (initrd_dir.isValid()) {
-            copyModules(path, settings->kernel);
+            if (!copyModules(path, settings->kernel)) {
+                if (!cleanupStarted) {
+                    emit messageBox(BoxType::critical, tr("Error"),
+                                    tr("Could not copy the kernel modules or programs into the initrd."));
+                    cleanUp();
+                }
+                return;
+            }
             closeInitrd(path, settings->workDir + "/iso-template/antiX/initrd.gz");
             const QStringList ucToolDirs = {"/usr/bin", "/usr/local/bin"};
             if (!QStandardPaths::findExecutable("uc-tool", ucToolDirs).isEmpty()) {
@@ -708,7 +789,14 @@ void Work::copyNewIso()
             } else {
                 qDebug() << "uc-tool not found, skipping ucode injection";
             }
-            makeChecksum(HashType::md5, settings->workDir + "/iso-template/antiX", "initrd.gz");
+            if (!makeChecksum(HashType::md5, settings->workDir + "/iso-template/antiX", "initrd.gz")) {
+                if (!cleanupStarted) {
+                    emit messageBox(BoxType::critical, tr("Error"),
+                                    tr("Could not create the checksum for %1.").arg("initrd.gz"));
+                    cleanUp();
+                }
+                return;
+            }
             initrd_dir.remove();
         }
     }
@@ -733,14 +821,12 @@ bool Work::createIso(const QString &filename)
         QDir().mkpath(settings->workDir + "/iso-template/arch/" + archCpuDir);
     }
 
-    // squashfs-tools 4.5+ has the flags we care about (-throttle,
-    // -percentage). The earlier feature-probe via `mksquashfs -help`
-    // produced false-negatives on some distros where the help text was
-    // paged differently or `-help` didn't enumerate every option. Just
-    // pass the flags unconditionally — mksquashfs will error out
-    // clearly on a truly ancient version.
-    constexpr bool throttleSupported = true;
-    constexpr bool percentageSupported = true;
+    // -percentage only exists in squashfs-tools 4.6+ (and MX builds that
+    // backport it). Read the local tool's help directly instead of using a
+    // shell pipeline, then include only the options this build advertises.
+    const QString squashfsHelp = mksquashfsHelp();
+    const bool throttleSupported = SquashfsUtils::helpListsOption(squashfsHelp, QStringLiteral("-throttle"));
+    const bool percentageSupported = SquashfsUtils::helpListsOption(squashfsHelp, QStringLiteral("-percentage"));
 
     const SquashfsUtils::Command squashfsCommand = SquashfsUtils::buildCommand({
         .bindRootPath = bindRootPath,
@@ -768,6 +854,7 @@ bool Work::createIso(const QString &filename)
         emit messageBox(
             BoxType::critical, tr("Error"),
             tr("Could not create linuxfs file, please check /var/log/%1.log").arg(QCoreApplication::applicationName()));
+        cleanUp();
         return false;
     }
     if (cleanupStarted) {
@@ -779,16 +866,40 @@ bool Work::createIso(const QString &filename)
         const QString archIsoDir = "iso-2/arch/" + archCpuDir;
         QDir().mkpath(archIsoDir);
         if (!shell.run("mv iso-template/arch/" + archCpuDir + "/airootfs.sfs* " + archIsoDir) || cleanupStarted) {
+            if (!cleanupStarted) {
+                emit messageBox(BoxType::critical, tr("Error"),
+                                tr("Could not move %1 to the ISO directory.").arg("airootfs.sfs"));
+                cleanUp();
+            }
             return false;
         }
-        makeChecksum(HashType::sha512, settings->workDir + "/" + archIsoDir, "airootfs.sfs");
+        if (!makeChecksum(HashType::sha512, settings->workDir + "/" + archIsoDir, "airootfs.sfs")) {
+            if (!cleanupStarted) {
+                emit messageBox(BoxType::critical, tr("Error"),
+                                tr("Could not create the checksum for %1.").arg("airootfs.sfs"));
+                cleanUp();
+            }
+            return false;
+        }
     } else {
         // Move linuxfs files to iso-2/antiX folder
         QDir().mkpath("iso-2/antiX");
         if (!shell.run("mv iso-template/antiX/linuxfs* iso-2/antiX") || cleanupStarted) {
+            if (!cleanupStarted) {
+                emit messageBox(BoxType::critical, tr("Error"),
+                                tr("Could not move %1 to the ISO directory.").arg("linuxfs"));
+                cleanUp();
+            }
             return false;
         }
-        makeChecksum(HashType::md5, settings->workDir + "/iso-2/antiX", "linuxfs");
+        if (!makeChecksum(HashType::md5, settings->workDir + "/iso-2/antiX", "linuxfs")) {
+            if (!cleanupStarted) {
+                emit messageBox(BoxType::critical, tr("Error"),
+                                tr("Could not create the checksum for %1.").arg("linuxfs"));
+                cleanUp();
+            }
+            return false;
+        }
     }
     if (cleanupStarted) {
         return false;
@@ -902,6 +1013,7 @@ bool Work::createIso(const QString &filename)
         emit messageBox(
             BoxType::critical, tr("Error"),
             tr("Could not create ISO file, please check whether you have enough space on the destination partition."));
+        cleanUp();
         return false;
     }
     if (cleanupStarted) {
@@ -911,19 +1023,37 @@ bool Work::createIso(const QString &filename)
     // Make it isohybrid (Arch already folded the hybrid MBR into xorriso above)
     if (settings->makeIsohybrid && !settings->isArch) {
         emit message(tr("Making hybrid iso"));
-        shell.proc("isohybrid", {"--uefi", settings->snapshotDir + "/" + filename}, nullptr, nullptr,
-                   Cmd::QuietMode::No);
+        if (!shell.proc("isohybrid", {"--uefi", settings->snapshotDir + "/" + filename}, nullptr, nullptr,
+                        Cmd::QuietMode::No)) {
+            if (cleanupStarted) {
+                return false;
+            }
+            emit messageBox(BoxType::critical, tr("Error"),
+                            tr("Could not make the ISO hybrid; it would not boot correctly from USB."));
+            cleanUp();
+            return false;
+        }
     }
     if (cleanupStarted) {
         return false;
     }
 
     // Make ISO checksums
-    if (settings->makeMd5sum) {
-        makeChecksum(HashType::md5, settings->snapshotDir, filename);
+    if (settings->makeMd5sum && !makeChecksum(HashType::md5, settings->snapshotDir, filename)) {
+        if (!cleanupStarted) {
+            emit messageBox(BoxType::critical, tr("Error"),
+                            tr("Could not create the %1 checksum for the ISO.").arg("MD5"));
+            cleanUp();
+        }
+        return false;
     }
-    if (settings->makeSha512sum) {
-        makeChecksum(HashType::sha512, settings->snapshotDir, filename);
+    if (settings->makeSha512sum && !makeChecksum(HashType::sha512, settings->snapshotDir, filename)) {
+        if (!cleanupStarted) {
+            emit messageBox(BoxType::critical, tr("Error"),
+                            tr("Could not create the %1 checksum for the ISO.").arg("SHA512"));
+            cleanUp();
+        }
+        return false;
     }
 
     auto elapsedTime = QTime(0, 0).addMSecs(e_timer.elapsed());
@@ -988,28 +1118,17 @@ bool Work::installPackage(const QString &package)
 }
 
 // Create checksums for different files
-void Work::makeChecksum(Work::HashType hash_type, const QString &folder, const QString &file_name)
+bool Work::makeChecksum(Work::HashType hash_type, const QString &folder, const QString &file_name)
 {
     qDebug() << "+++" << __PRETTY_FUNCTION__ << "+++";
     emit message(tr("Calculating checksum..."));
     shell.run("sync");
     QDir::setCurrent(folder);
     const QString ce = QVariant::fromValue(hash_type).toString();
-    const QString temp_dir {"/tmp/snapshot-checksum-temp"};
-    // file_name -> $1 and folder -> $2 are passed to bash as positional parameters
-    // so the shell never parses them (no injection via a crafted file name or
-    // output folder); ce and temp_dir are trusted constants and are concatenated in.
-    const QString checksum_cmd = ce + "sum -- \"$1\" > \"$2/$1." + ce + "\"";
-    const QString checksum_tmp
-        = "TD='" + temp_dir + "'; KEEP=\"$TD/.keep\"; [ -d \"$TD\" ] || mkdir \"$TD\"; "
-          "FN=\"$1\"; CF=\"$2/$FN." + ce + "\"; cp -- \"$FN\" \"$TD/$FN\"; "
-          "pushd \"$TD\" >/dev/null; " + ce + "sum -- \"$FN\" > \"$FN." + ce + "\"; "
-          "cp -- \"$FN." + ce + "\" \"$CF\"; popd >/dev/null; [ -e \"$KEEP\" ] || rm -rf \"$TD\"";
     QString cmd;
 
     if (settings->preempt) {
         // Check free space available on /tmp
-        shell.proc("/bin/bash", {"-c", R"(TF="$1/$2"; [ -f "$TF" ] && rm -f "$TF")", "_", temp_dir, file_name});
         if (!shell.proc("/bin/bash",
                         {"-c",
                          R"(DUF=$(du -BM -- "$1" | grep -oE '^[[:digit:]]+'); )"
@@ -1018,17 +1137,36 @@ void Work::makeChecksum(Work::HashType hash_type, const QString &folder, const Q
             settings->preempt = false;
         }
     }
+    // Per-run private temp dir for the preempt copy (mkdtemp: 0700, owned by
+    // this process, unpredictable name) instead of a fixed world-guessable
+    // /tmp path a concurrent run or another local user could pre-create or
+    // tamper with. Removed automatically when this instance goes out of scope
+    // — never by the shell script, and never a directory this run didn't create.
+    std::optional<QTemporaryDir> checksumTempDir;
+    if (settings->preempt) {
+        checksumTempDir.emplace(QStringLiteral("/tmp/snapshot-checksum-XXXXXX"));
+        if (!checksumTempDir->isValid()) {
+            qWarning() << "Could not create private checksum temp dir, checksumming in place:"
+                       << checksumTempDir->errorString();
+            settings->preempt = false;
+        }
+    }
     if (!settings->preempt) {
-        cmd = checksum_cmd;
+        cmd = ChecksumUtils::directCommand(ce);
     } else {
         // Free pagecache
         shell.run("sync; sleep 1");
         Cmd().procAsRoot("snapshot-lib", {"drop_caches"});
         shell.run("sleep 1");
-        cmd = checksum_tmp;
+        cmd = ChecksumUtils::preemptCommand(ce, checksumTempDir->path());
     }
-    shell.proc("/bin/bash", {"-c", cmd, "_", file_name, folder});
+    // file_name -> $1 and folder -> $2 are passed to bash as positional parameters
+    // so the shell never parses them (no injection via a crafted file name or
+    // output folder); ce and the temp dir path are trusted values concatenated
+    // in by ChecksumUtils.
+    const bool commandOk = shell.proc("/bin/bash", {"-c", cmd, "_", file_name, folder});
     QDir::setCurrent(settings->workDir);
+    return commandOk && ChecksumUtils::verifyChecksumFile(folder, file_name, ce);
 }
 
 void Work::openInitrd(const QString &file, const QString &initrd_dir)
@@ -1258,8 +1396,15 @@ void Work::savePackageList(const QString &file_name)
         QDir().mkpath(archDir);
         const QString fullName = QString("%1/pkglist.%2.txt").arg(archDir, archCpuDir);
         // fullName rides as $1, a positional parameter the shell never parses,
-        // so it can't be used to break out of the redirect target.
-        shell.proc("/bin/bash", {"-c", R"(pacman -Q | awk '{print $1 " " $2}' > "$1")", "_", fullName});
+        // so it can't be used to break out of the redirect target. pipefail so a
+        // pacman failure isn't masked by awk succeeding on empty input.
+        const bool listOk
+            = shell.proc("/bin/bash", {"-c", R"(set -o pipefail; pacman -Q | awk '{print $1 " " $2}' > "$1")", "_",
+                                       fullName});
+        if (!listOk || QFileInfo(fullName).size() <= 0) {
+            emit messageBox(BoxType::critical, tr("Error"), tr("Could not create the package list: ") + fullName);
+            cleanUp();
+        }
         return;
     }
     QFileInfo fi(file_name);
@@ -1267,13 +1412,21 @@ void Work::savePackageList(const QString &file_name)
     if (!dir.mkpath(dir.absolutePath())) {
         emit messageBox(BoxType::critical, tr("Error"),
                         tr("Could not create working directory. ") + dir.absolutePath());
+        cleanUp();
+        return;
     }
     // file_name is user-controlled (CLI -f/--file or the GUI output filename), so
     // fullName rides as $1, a positional parameter the shell never parses, rather
-    // than being interpolated into the command string.
+    // than being interpolated into the command string. pipefail so a dpkg failure
+    // isn't masked by awk succeeding on empty input.
     const QString fullName = QString("%1/iso-template/%2/package_list").arg(settings->workDir, fi.completeBaseName());
-    shell.proc("/bin/bash",
-               {"-c", R"(dpkg -l | awk '/^ii /{printf "%-41s %s\n", $2, $3}' > "$1")", "_", fullName});
+    const bool listOk
+        = shell.proc("/bin/bash", {"-c", R"(set -o pipefail; dpkg -l | awk '/^ii /{printf "%-41s %s\n", $2, $3}' > "$1")",
+                                   "_", fullName});
+    if (!listOk || QFileInfo(fullName).size() <= 0) {
+        emit messageBox(BoxType::critical, tr("Error"), tr("Could not create the package list: ") + fullName);
+        cleanUp();
+    }
 }
 
 // Setup the environment before taking the snapshot
@@ -1581,17 +1734,30 @@ quint64 Work::getRequiredSpace()
         return probeDevice == rootDevice || (includeHomeDevice && probeDevice == homeDevice);
     };
     // Expand patterns without shell globbing or symlinked intermediate traversal.
-    const auto expandExcludePattern = [&](QString rawPattern) -> QStringList {
+    //
+    // The overlay lower directory is a non-recursive bind of /.  Consequently,
+    // when /home is a separate filesystem, lower/home is only the underlying
+    // (usually empty) mount point and cannot be used to expand home exclusions.
+    // Use the real root for those patterns; /home is also bound into the snapshot
+    // tree, so it names the same files while preserving the home device identity
+    // needed by isAllowedDevice().
+    const auto expandExcludePattern = [&](QString rawPattern, const QString &patternRoot) -> QStringList {
         const QString original = rawPattern;
         if (rawPattern.startsWith('/')) {
             rawPattern.remove(0, 1);
         }
         rawPattern.replace(QRegularExpression("/\\*$"), ""); // Remove trailing /*
-        QString fullPattern = QDir(sizeRootPrefix).filePath(rawPattern);
+        QString patternRootPrefix = patternRoot;
+        if (!patternRootPrefix.endsWith('/')) {
+            patternRootPrefix += '/';
+        }
+        const QString patternRootBase
+            = patternRootPrefix == QStringLiteral("/") ? patternRootPrefix : patternRootPrefix.chopped(1);
+        QString fullPattern = QDir(patternRootPrefix).filePath(rawPattern);
         fullPattern = QDir::cleanPath(fullPattern);
         QString relativePattern = fullPattern;
-        if (relativePattern.startsWith(sizeRootBase)) {
-            relativePattern.remove(0, sizeRootBase.size());
+        if (relativePattern.startsWith(patternRootBase)) {
+            relativePattern.remove(0, patternRootBase.size());
         }
         if (relativePattern.startsWith('/')) {
             relativePattern.remove(0, 1);
@@ -1607,7 +1773,7 @@ quint64 Work::getRequiredSpace()
             return {};
         }
         QStringList components = relativePattern.split('/', Qt::SkipEmptyParts);
-        QStringList current {sizeRootBase};
+        QStringList current {patternRootBase};
         for (int i = 0; i < components.size(); ++i) {
             const QString &component = components.at(i);
             const bool isLast = (i == components.size() - 1);
@@ -1673,7 +1839,14 @@ quint64 Work::getRequiredSpace()
         if (cleaned.isEmpty()) {
             continue;
         }
-        const QStringList matches = expandExcludePattern(cleaned);
+        QString relativeExclude = cleaned;
+        if (relativeExclude.startsWith('/')) {
+            relativeExclude.remove(0, 1);
+        }
+        const bool isHomeExclude = relativeExclude == QStringLiteral("home")
+                                   || relativeExclude.startsWith(QStringLiteral("home/"));
+        const QString patternRoot = includeHomeDevice && isHomeExclude ? QStringLiteral("/") : sizeRootBase;
+        const QStringList matches = expandExcludePattern(cleaned, patternRoot);
         for (const QString &match : matches) {
             if (!isAllowedDevice(match)) {
                 continue;

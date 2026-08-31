@@ -1,7 +1,7 @@
 /**********************************************************************
  *  tweak.cpp
  **********************************************************************
- * Copyright (C) 2015 MX Authors
+ * Copyright (C) 2015-2026 MX Authors
  *
  * Authors: Dolphin Oracle
  *         MX Linux <http://mxlinux.org>
@@ -214,7 +214,7 @@ void Tweak::setup() noexcept
     } else {
         ui->groupXFCESettings->hide();
         ui->tabWidget->setCurrentIndex(Tab::Others);
-        for (int i = 6; i >= 0; --i) {
+        for (int i = 7; i >= 0; --i) {
             ui->tabWidget->removeTab(i);
         }
     }
@@ -245,7 +245,7 @@ void Tweak::pushAbout_clicked() noexcept
                        tr("App for quick default ui theme changes and tweaks") +
                        "</h3></p><p align=\"center\"><a href=\"http://mxlinux.org\">http://mxlinux.org</a><br /></p>"_L1
                        "<p align=\"center\">"_L1 + tr("Copyright (c) MX Linux") + "<br /><br /></p>"_L1,
-                       u"/usr/share/doc/mx-tweak/license.html"_s, tr("%1 License").arg(windowTitle()));
+                       u"/usr/share/doc/mx-tweak/license.html"_s, tr("%1 License").arg(windowTitle()), this);
     show();
 }
 
@@ -257,9 +257,9 @@ void Tweak::pushHelp_clicked() noexcept
     QString url = u"file:///usr/share/doc/mx-tweak/mx-tweak.html"_s;
 
     if (lang.startsWith("fr"_L1)) {
-        url = u"https://mxlinux.org/wiki/help-files/help-tweak-ajustements"_s;
+        url = u"file:///usr/share/doc/mx-tweak/mx-tweak_fr.html"_s;
     }
-    displayDoc(url, tr("%1 Help").arg(tr("MX Tweak")));
+    displayDoc(url, tr("%1 Help").arg(tr("MX Tweak")), false, this);
 }
 
 void Tweak::tabWidget_currentChanged(int index) noexcept

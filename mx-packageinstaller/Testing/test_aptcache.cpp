@@ -198,12 +198,13 @@ void TestAptCache::testFileFiltering()
 {
     // Test the file filtering logic from AptCache::loadCacheFiles
     QString arch = AptCache::getArch();
+    const QString otherArch = (arch == QLatin1String("i386")) ? QStringLiteral("amd64") : QStringLiteral("i386");
     
     // Create test file names that should be included/excluded
     QStringList testFiles = {
         QString("debian.org_debian_dists_bullseye_main_binary-%1_Packages").arg(arch),
         "debian.org_debian_dists_bullseye_main_binary-all_Packages",
-        "debian.org_debian_dists_bullseye_main_binary-i386_Packages",
+        QString("debian.org_debian_dists_bullseye_main_binary-%1_Packages").arg(otherArch),
         "mx_repo_dists_bullseye_main_binary-amd64_Packages",
         "debian_dists_bullseye-backports_main_binary-amd64_Packages",
         "mx_testrepo_dists_test_main_binary-amd64_Packages",
@@ -211,32 +212,45 @@ void TestAptCache::testFileFiltering()
         "not_a_package_file.txt"
     };
     
-    // Test binary-arch pattern
+    // Test binary-arch pattern -- mirrors AptCache::loadCacheFiles() exactly,
+    // including the binary-all_Packages carve-out: "all" matches
+    // allBinaryAnyRegex just like any real arch name does, so without a
+    // dedicated allBinaryAllRegex check, architecture-independent packages
+    // shipped in their own binary-all_Packages file are silently dropped.
     QRegularExpression allBinaryArchRegex(QString(R"(^.*binary-%1_Packages$)").arg(arch));
+    QRegularExpression allBinaryAllRegex(R"(^.*binary-all_Packages$)");
     QRegularExpression allBinaryAnyRegex(R"(^.*binary-[a-z0-9]+_Packages$)");
     QRegularExpression allRegex(R"(^.*_Packages$)");
-    
+
     // Test exclusion patterns
     QStringList exclusionPatterns = {
         R"(debian_.*-backports_.*_Packages)",
-        R"(mx_testrepo.*_test_.*_Packages)", 
+        R"(mx_testrepo.*_test_.*_Packages)",
         R"(mx_repo.*_temp_.*_Packages)"
     };
     QRegularExpression excludeRegex(exclusionPatterns.join('|'));
-    
+
     for (const QString &fileName : testFiles) {
         bool isBinaryArchMatch = allBinaryArchRegex.match(fileName).hasMatch();
+        bool isBinaryAllMatch = allBinaryAllRegex.match(fileName).hasMatch();
         bool isBinaryAnyMismatch = !allBinaryAnyRegex.match(fileName).hasMatch();
         bool isAllMatch = allRegex.match(fileName).hasMatch();
         bool isExcluded = excludeRegex.match(fileName).hasMatch();
-        
-        bool shouldInclude = (isBinaryArchMatch || (isBinaryAnyMismatch && isAllMatch)) && !isExcluded;
-        
+
+        bool shouldInclude
+            = (isBinaryArchMatch || isBinaryAllMatch || (isBinaryAnyMismatch && isAllMatch)) && !isExcluded;
+
         qDebug() << fileName << "-> include:" << shouldInclude;
-        
+
         // Verify specific expected results
         if (fileName.contains(QString("binary-%1_Packages").arg(arch))) {
             QVERIFY2(!isExcluded || shouldInclude == false, qPrintable(fileName));
+        }
+        if (fileName == "debian.org_debian_dists_bullseye_main_binary-all_Packages") {
+            QVERIFY2(shouldInclude, qPrintable(fileName));
+        }
+        if (fileName == QString("debian.org_debian_dists_bullseye_main_binary-%1_Packages").arg(otherArch)) {
+            QVERIFY2(!shouldInclude, qPrintable(fileName));
         }
         if (fileName.contains("not_a_package_file.txt")) {
             QVERIFY2(!shouldInclude, qPrintable(fileName));

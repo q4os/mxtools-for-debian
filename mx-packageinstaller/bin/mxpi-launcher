@@ -1,5 +1,3 @@
 #!/bin/sh
 
-/usr/bin/mx-packageinstaller
-
-exit 0
+exec /usr/bin/mx-packageinstaller "$@"

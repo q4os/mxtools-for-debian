@@ -58,10 +58,15 @@ public:
     bool removeVariable(int row);
     bool insertVariable(int row, std::unique_ptr<Variable> var);
 
-    std::vector<std::unique_ptr<Variable>> *variables;
-    std::vector<std::unique_ptr<Variable>> dummy;
+    [[nodiscard]] const std::vector<std::unique_ptr<Variable>> &getVariables() const
+    {
+        return *variables;
+    }
 
 private:
     [[nodiscard]] QVariant headerData(int section, Qt::Orientation orientation, int role) const override;
     [[nodiscard]] QVariant data(const QModelIndex &idx, int role) const override;
+
+    std::vector<std::unique_ptr<Variable>> *variables;
+    std::vector<std::unique_ptr<Variable>> dummy;
 };

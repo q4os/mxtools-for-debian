@@ -1,4 +1,8 @@
-help/*				usr/share/doc/mx-conky
+help/*.html			usr/share/doc/mx-conky
+help/*.jpg			usr/share/doc/mx-conky
+help/*.png			usr/share/doc/mx-conky
+help/*.css			usr/share/doc/mx-conky
+help/*.1			usr/share/man/man1
 icons/mx-conky.png		usr/share/icons/hicolor/64x64/apps
 icons/mx-conky.svg		usr/share/icons/hicolor/scalable/apps
 mx-conky.desktop		usr/share/applications

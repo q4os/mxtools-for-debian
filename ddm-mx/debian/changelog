@@ -1,8 +1,22 @@
-ddm-mx (26.06.04.1302) stable; urgency=medium
+ddm-mx (26.07.02.1302) stable; urgency=medium
 
   * Release
 
- -- Devs <devteam@localdomain>  Mon, 13 Jul 2026 13:05:26 +0200
+ -- Devs <devteam@localdomain>  Mon, 31 Aug 2026 17:00:16 +0200
+
+ddm-mx (26.07.02) mx; urgency=medium
+
+  * during -p purge operation, also remove corresponding firmware-nvidia-gsp package
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 17 Jul 2026 19:48:20 -0400
+
+ddm-mx (26.07.01) mx; urgency=medium
+
+  * add support for differntly named nvidia-driver-open alternative
+  * use nvidia-driver-open if it exists and open source modules are to be used
+  * update translations
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 16 Jul 2026 20:28:47 -0400
 
 ddm-mx (26.06.04) mx; urgency=medium
 

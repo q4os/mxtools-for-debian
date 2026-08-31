@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" version="1.1">
+ <!-- plain rounded-square body (folded-page corner from application-x-iso.svg
+      removed per feedback - it made the disc look small/off-center) -->
+ <rect style="opacity:0.2" width="52" height="52" x="6" y="7" rx="4" ry="4"/>
+ <rect style="fill:#ce5068" width="52" height="52" x="6" y="6" rx="4" ry="4"/>
+ <path style="fill:#ffffff;opacity:0.1" d="M 10.8008 6 C 9.2496 6 8 7.2496 8 8.8008 L 8 9.8008 C 8 8.2496 9.2496 7 10.8008 7 L 53.199 7 C 54.75 7 56 8.2496 56 9.8008 L 56 8.8008 C 56 7.2496 54.75 6 53.199 6 L 10.8008 6 z"/>
+
+ <!-- CD/disc ring, from application-x-iso.svg, recentered from (32,41) to
+      the square's true center (32,32) and enlarged (1.35x) to fill the
+      extra space now that there's no document-page shape constraining it -->
+ <g transform="matrix(1.35,0,0,1.35,-11.2,-23.35)">
+  <path style="opacity:0.2" d="M 32,28 c -7.756,0 -14,6.244 -14,14 0,7.756 6.244,14 14,14 7.756,0 14,-6.244 14,-14 0,-7.756 -6.244,-14 -14,-14 z m 0,8 a 6,6 0 0 1 6,6 6,6 0 0 1 -6,6 6,6 0 0 1 -6,-6 6,6 0 0 1 6,-6 z"/>
+  <path style="fill:#ffffff" d="M 32 27 C 24.244 27 18 33.244 18 41 C 18 48.756 24.244 55 32 55 C 39.756 55 46 48.756 46 41 C 46 33.244 39.756 27 32 27 z M 32 35 A 6 6 0 0 1 38 41 A 6 6 0 0 1 32 47 A 6 6 0 0 1 26 41 A 6 6 0 0 1 32 35 z"/>
+  <path style="opacity:0.5;fill:#ffffff" d="M 32 34 A 7 7 0 0 0 25 41 A 7 7 0 0 0 32 48 A 7 7 0 0 0 39 41 A 7 7 0 0 0 32 34 z M 32 38 C 33.6569 38 35 39.3431 35 41 C 35 42.6569 33.6569 44 32 44 C 30.3431 44 29 42.6569 29 41 C 29 39.3431 30.3431 38 32 38 z"/>
+ </g>
+
+ <!-- green "verified" badge, bottom-right - same composition as checkaptgpg.svg / org.kde.isoimagewriter.svg -->
+ <circle style="opacity:0.2" cx="48" cy="47" r="16"/>
+ <circle style="fill:#129a4d" cx="48" cy="46" r="16"/>
+
+ <!-- key glyph inside the badge - simplified/bolder than the original
+      pgp-signature icon's key so it still reads at small sizes (24px) -->
+ <circle style="fill:#ffffff" cx="43" cy="44" r="6"/>
+ <circle style="fill:#129a4d" cx="43" cy="44" r="3"/>
+ <rect style="fill:#ffffff" x="49" y="42" width="10" height="4"/>
+ <rect style="fill:#ffffff" x="51" y="46" width="3" height="5"/>
+ <rect style="fill:#ffffff" x="55" y="46" width="3" height="6"/>
+</svg>

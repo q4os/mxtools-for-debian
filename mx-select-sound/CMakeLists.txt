@@ -1,5 +1,5 @@
 # **********************************************************************
-# * Copyright (C) 2017-2025 MX Authors
+# * Copyright (C) 2017-2026 MX Authors
 # *
 # * Authors: Adrian
 # *          MX Linux <http://mxlinux.org>
@@ -98,6 +98,7 @@ set(RESOURCE_FILES
 
 # Get all translation files
 file(GLOB TRANSLATION_FILES "translations/*.ts")
+list(FILTER TRANSLATION_FILES EXCLUDE REGEX "/mx-select-sound_en_US\\.ts$")
 
 # Create the executable
 add_executable(mx-select-sound
